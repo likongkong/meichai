@@ -1,0 +1,105 @@
+<loading hidden="{{headhidden}}">
+    加载中...
+</loading>
+
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class='dldlbox'>
+   <view class='dldlheadbox'>
+      <input class='dldlheadinp' type='text' bindinput="inputChange" value='{{inputdata}}' placeholder='输入标题'></input>
+   </view>
+   <view class='dldlcontent'>
+      <view class='dldlupiv'>
+          <view class='dldlupimg' catchtap='upserverimg'>
+             <image src='https://clw.51chaidan.com//images/goods/picture.png' class='dldlupcomimg'></image>
+             <view class='dldlupcomtxt'>+图片</view>
+          </view>
+          <view class='dldlupimg' style='margin-left:18rpx;' wx:if='{{videolist.length==0||!hiddenreturn}}' catchtap='chooseVideo'>
+             <view class='creatPrize'>有奖</view>
+             <image src='https://clw.51chaidan.com//images/goods/video.png' class='dldlupcomimg'></image>
+             <view class='dldlupcomtxt'>+视频</view>
+          </view>
+          <view class='dldlupimg' style='margin-left:18rpx;' wx:if='{{videolist.length==0||hiddenreturn}}' catchtap='hidechooseVideo'>
+             <view class='creatPrize'>隐藏返现</view>
+             <image src='https://clw.51chaidan.com//images/goods/video.png' class='dldlupcomimg'></image>
+             <view class='dldlupcomtxt'>+视频</view>
+          </view>
+
+      </view>
+      <!-- 图片视频展示 -->
+      <view style='width:100%;overflow:hidden;margin-bottom:24rpx;padding-top:15rpx;'>
+         <view class='dldlupimg' wx:for='{{videolist}}' wx:key='key' style='margin:0 20rpx 20rpx 0;border:0;position:relative;width:153rpx;height:153rpx;'>
+             <video class='dldlchockimg' src='{{item.video_path}}'></video>
+             <image src='https://clw.51chaidan.com//images/goods/fork.png' class='dldlchockx' catchtap='dldeletevideo' data-ind='{{index}}'></image>
+         </view>
+         <view class='dldlupimg' style='margin:0 20rpx 20rpx 0;border:0;position:relative;width:153rpx;height:153rpx;' wx:for='{{tempFilePaths}}' wx:key='key'>
+             <image class='dldlchockimg' src='{{item}}'></image>
+             <image src='https://clw.51chaidan.com//images/goods/fork.png' class='dldlchockx' catchtap='dldeleteimg' data-ind='{{index}}'></image>
+         </view>
+      </view>
+      <!-- 晒单介绍 -->
+      <view class='dldlcontxt' wx:if='{{!orderbombbox}}'>
+          <textarea class='dldlcontxtarea' value='{{textconcent}}' bindinput="bindinput" placeholder-style="font-size:24rpx;" placeholder='说点什么吧...'></textarea>
+      </view>
+   </view>
+   <!-- 订单商品 -->
+   <view class='orderlist' wx:for='{{myordata}}' wx:key='key' wx:if='{{item.iftr}}'>
+       <image class='orderlimg' src='{{item.gcover}}'></image>
+       <view class='orderright'>
+           <view class='orderrighttop multilineellipsis'>{{item.goods_name}}</view>
+           <view class='orderrprice'>￥{{item.goods_amount}}{{item.gsale_suit}}</view>
+           <image class='dldlchockx' data-ind='{{index}}' catchtap='iftrchockshop' style='top:-5rpx;' src='https://clw.51chaidan.com//images/goods/fork.png'></image>
+       </view>
+   </view>
+
+   <view class='dldlbottom' catchtap='orderdisplay'>
+       <view class='dldltottomleft'><image class='dldlbotimg' src='https://clw.51chaidan.com//images/goods/order.png'></image>关联订单</view>
+       <image class='dldlbottright' src='../../../../pages/images/icon_in.png'></image>
+   </view>
+   <view class='dldlbottom'>
+       <view class='dldlpoistioclick' wx:if='{{!hiddenreturn}}' catchtap='jumpselection'></view>
+       <view class='dldltottomleft'><image class='dldlbotimg' src='https://clw.51chaidan.com//images/goods/topic.png'></image>选择话题</view>
+       <view class='dldltottselect'>{{topic_name}}</view>
+       <image class='dldlbottright' src='../../../../pages/images/icon_in.png'></image>
+   </view>
+   <view class='dldlbottom' catchtap='jumplocation'>
+       <view class='dldltottomleft'><image class='dldlbotimg' src='https://clw.51chaidan.com//images/goods/location.png'></image>我现在的位置</view>
+       <view class='dldltottselect specialellipsis' style='width:380rpx;'>{{locationtitle!=0?locationtitle:'不显示位置'}}</view>
+       <image class='dldlbottright' src='../../../../pages/images/icon_in.png'></image>
+   </view>
+   <view class='dldlConfirmPublication' style='{{isIphoneX?"bottom:140rpx;":"bottom:120rpx;"}}' catchtap='dldlConfirmPublication'>确定发布</view>
+
+</view>
+
+<view style='{{isIphoneX?"height:230rpx;":"height:210rpx;"}}width:100%;'></view>
+
+<bnavigation isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' 
+dryinglistnum='{{dryinglistnum}}'></bnavigation>
+
+
+
+<!-- 订单弹框 -->
+<view class='orderbombbox' wx:if='{{orderbombbox}}'>
+    <view class='publicbg'></view>
+    <view class='ordercontent'>
+       <view class='orderconttop'>
+       </view>
+       <scroll-view scroll-y="true" style="height: 600rpx;background:#f0eff5;" bindscrolltolower="loadMore">
+            <view class='orderlist' wx:for='{{myordata}}' wx:key='key'>
+                <image class='orderlimg' src='{{item.gcover}}'></image>
+                <view class='orderright' data-ind='{{index}}' catchtap='iftrchockshop'>
+                    <view class='orderrighttop multilineellipsis'>{{item.goods_name}}</view>
+                    <view class='orderrprice'>￥{{item.goods_amount}}{{item.gsale_suit}}</view>
+                    <image class='iftrchock' wx:if='{{item.iftr}}' src='../../../../pages/images/icon_check.png'></image>
+                </view>
+            </view>
+       </scroll-view>
+       <view class='orderlistsure' catchtap='orderdisplaynon'>确定</view>
+    </view>
+</view>
+
+
+<view wx:if='{{masklayer}}' style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:999;'></view>
+
+

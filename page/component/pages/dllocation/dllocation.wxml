@@ -1,0 +1,35 @@
+
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class='dllocabox'>
+   <view class='dllockbox' style='border:0;' data-title='0' catchtap='jumpbackgcreat'>
+      <view class='dllocktxtl' style='color:#4e628a;font-weight: bold;'>
+         不显示位置
+      </view>
+      <image class='dllockimg' src='../../../../pages/images/icon_check.png'></image>
+   </view>
+   <view class='dllockbox' wx:for='{{listdata}}' wx:key='key' data-title='{{item.title}}' catchtap='jumpbackgcreat'>
+      <view class='dllocktxtt' style='color:#000;'>
+         <view class='specialellipsis' style='width:100%;height:50rpx;padding-top:20rpx;font-size:26rpx;color:#000;line-height:50rpx;font-weight: bold;'>{{item.title}}</view>
+         <view class='specialellipsis' style='width:100%;height:40rpx;font-size:20rpx;color:#7f7f7f;'>{{item.address}}</view>
+      </view>
+   </view>
+
+</view>
+
+<!-- 授权位置弹框 -->
+<view class='comtip' wx:if='{{location}}'>
+    <view class='comtipback'></view>
+    <view class='apptipbox'>
+        <view class='apptiphead'>提示</view>
+        <view class='apptipcont'><text>需要获取您的地理位置，请确认授权，否则无法获取您所需数据。</text></view>
+        <view class='apptipbut'>
+           <view class='apptipleft apptiolefrigcom' catchtap='apptipleftfun'>取消</view>
+           <view class='apptipright apptiolefrigcom' style='position:relative;'>
+              <button open-type="openSetting" bindopensetting='handler' style='position:absolute;left:0;top:0;width:100%;height:100%;opacity: 0;z-index:2;'></button>
+              确定
+           </view>
+        </view>
+    </view>   
+</view>

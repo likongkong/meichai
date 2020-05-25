@@ -1,0 +1,87 @@
+@import "../../../../pages/signin/signin.wxss";
+.rdendexbox{
+  width: 100%;
+}
+.rdendexboxhead{
+  width: 100%;
+  height: 400rpx;
+  background: #f2f2f2;
+}
+.rdendexboxheadibox{
+  width: 100%;
+  height: 200rpx;
+  position: relative;
+}
+.redheadbleftimg{
+  width: 90rpx;
+  height: 90rpx;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  border-radius: 10rpx;
+  border: 1rpx solid #f0ca97;
+}
+.rdendexboxheadtxt{
+  height: 60rpx;
+  line-height: 60rpx;
+  width: 100%;
+  font-size: 30rpx;
+  color: #333;
+  text-align: center;
+}
+.rdendexboxcon{
+  width: 100%;
+}
+.rdendexbcbox{
+  width: 100%;
+  height: 120rpx;
+}
+.rdendexbcboximg{
+  width: 90rpx;
+  height: 90rpx;
+  margin: 15rpx 15rpx 0 20rpx;
+  border-radius: 16rpx;
+  float: left;
+}
+.rdendexbcboxtxt{
+  width:600rpx;
+  height: 100%;
+  float: left;
+}
+.rdendexbcbtb{
+  width:100%;
+  height: 60rpx; 
+}
+.rdendexbcbtbtxt{
+  height: 60rpx;
+  color: #333;
+  font-size: 30rpx;
+  line-height: 60rpx;
+}
+.rdendexbcbtbcom{
+  font-size: 30rpx;
+  color: #9c9c9c;
+  line-height: 60rpx;
+}
+.rdendexboxconhead{
+  height: 60rpx;
+  line-height: 60rpx;
+  padding-left: 20rpx;
+  font-size: 30rpx;
+  color: #9c9c9c;
+}
+
+.ake{
+  width: 100%;
+  height: 160rpx;
+}
+
+
+
+
+
+
+
+

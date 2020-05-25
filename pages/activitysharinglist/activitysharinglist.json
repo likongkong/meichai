@@ -1,0 +1,10 @@
+{
+  "asdfasfdflePullDownRefresh": true,
+  "enablePullDownRefresh": true,  
+  "navigationBarTitleText": "拆免单",
+  "usingComponents": {
+    "t_f": "../topfunction/topfunction",
+    "bnavigation": "../bottomComponent/bottomComponent",
+    "tga_c": "../tgacomponent/tgacomponent"
+  }
+}

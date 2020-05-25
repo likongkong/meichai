@@ -1,0 +1,313 @@
+<hidewindow id='hide'>
+
+</hidewindow>
+
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view wx:if="{{headhidden}}" style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:999999;'></view>
+
+
+<view style='width:100%;padding-bottom:260rpx;' wx:if='{{shopdetail}}'>
+  <view style='width:100%;overflow:hidden;padding:50rpx 0;'>
+    <view style='width:300rpx;float:left;height:200rpx;position:relative;'>
+      <image style='width:{{shopimgtop}}rpx;height:200rpx;display:block;float:right;' bindload="imageLoadad" src='{{shopdetail.roleImg}}'></image>
+                  <!-- 碎片 -->
+      <view wx:if='{{shopdetail.channelId==3}}' class='fragment' style='width:{{shopimgtop}}rpx;right:0;bottom:0;'>
+         <view class='fragmentbg'></view>
+         <view class='fragmenttxt'><image class='fragmentimg' src='https://www.51chaidan.com/images/toyCabinet/toyFragment.png'></image><text class='fragmentfont'>碎片</text></view>
+      </view>
+    </view> 
+    <view style='width:400rpx;height:200rpx;float:left;margin-left:25rpx;'>
+      <view class="bctitle multilineellipsis" style='width:100%;font-size:24rpx;'>{{shopdetail.goods_name}}</view>
+      <view style='width:100%;height:60rpx;'>
+        <text style='height:60rpx;line-height:60rpx;font-size:24rpx;display:inline-block;'>{{shopdetail.role_name}}</text>
+        <text style='height:60rpx;line-height:60rpx;font-size:24rpx;display:inline-block;color:#ed7278;margin-left:20rpx;'>{{shopdetail.minPrice}}~{{shopdetail.maxPrice}}元</text>
+      </view> 
+    </view>
+  </view>
+  <block wx:if='{{shopdetaillist.length!=0}}'>
+  <view style='width:700rpx;margin:0 auto;' wx:for='{{shopdetaillist}}' wx:key='key'>
+    <view style='width:100%;height:120rpx;border-bottom:2rpx solid #e4e4e4;'>
+      <view style='position:relative;width:80rpx;height:100%;float:left;' catchtap='jumpmyo' data-ownerid='{{item.ownerId}}'>
+        <image style='width:80rpx;height:80rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;' src='{{item.user.headphoto}}'></image>
+      </view>
+      <view style='width:160rpx;height:100%;position:relative;float:left;margin-left:15rpx;'>
+        <view wx:if='{{item.toyType==1}}' style='width:100%;height:40rpx;font-size:24rpx;color:#fff;line-height:40rpx;text-align:center;background:#f18f00;border-radius:40rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;'>美拆抽盒机</view>
+      </view>
+      <view style='width:246rpx;float:left;margin-left:15rpx;height:100%;'>
+        <scroll-view scroll-x="true" class="disanum_tab_comtainer" style='width:600rpx;' style='width:100%;'>
+          <view wx:for='{{item.role}}' wx:key='key' wx:for-index='wn' wx:for-item='w' style='width:{{w.width||100}}rpx;height:120rpx;position:relative;margin-right:30rpx;display:inline-block;'>
+            <image bindload="imageLoad" data-eve='5' data-ind='{{index}}' data-num='{{wn}}' style='width:{{w.width||100}}rpx;height:100rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;' src='{{w.roleImg}}'></image>
+            <view wx:if='{{(wn+1)!=item.role.length}}' style='width:30rpx;height:120rpx;position:absolute;top:0;right:-30rpx;line-height:120rpx;color:#ef767c;text-align:center;'>+</view>
+                              <!-- 碎片 -->
+            <view wx:if='{{w.channelId==3}}' class='fragment' style='width:{{w.width||100}}rpx;left:0;bottom:10rpx;'>
+              <view class='fragmentbg'></view>
+              <view class='fragmenttxt'><image class='fragmentimg' src='https://www.51chaidan.com/images/toyCabinet/toyFragment.png'></image><text class='fragmentfont'>碎片</text></view>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+      <!--  -->
+      <view style='width:50rpx;float:right;margin-left:15rpx;height:100%;position:relative;' catchtap='addCartdata' data-groupid='{{item.groupId}}' data-toytype='{{item.toyType}}' data-price='{{item.price}}' data-ownerid='{{item.ownerId}}' data-toyids='{{item.toyIds}}'>
+        <image style='width:50rpx;height:50rpx;position:absolute;top:0;bottom:0;right:0;margin:auto 0;' src='../../../../pages/images/shoppingCarNotImage@2x.png'></image>
+      </view>
+      <view class='specialellipsis' style='width:100rpx;line-height:120rpx;float:right;height:100%;font-size:24rpx;color:#ef767c;text-align:center;'>
+        ￥{{item.price}}
+      </view>
+    </view>
+  </view>
+  </block>
+</view>
+
+
+<!-- 订单列表 -->
+<view wx:if='{{islistdata}}' style='width:100%;height:{{windowHeight-50}}px;position:fixed;left:0;top:{{statusBarHeightMc}}px;background:#fff;z-index:9;'>
+  <block wx:for='{{listdata}}' wx:key='key'>
+      <view style='width:700rpx;margin:0 auto;'>
+        <view style='width:100%;height:120rpx;border-bottom:2rpx solid #e4e4e4;'>
+          <block wx:if='{{item.group_id>0}}'>
+                <view style='width:460rpx;float:left;height:100%;'>
+                  <scroll-view scroll-x="true" class="disanum_tab_comtainer" style='width:600rpx;' style='width:100%;'>
+                    <view style='width:{{w.width||120}}rpx;height:120rpx;position:relative;margin-right:30rpx;display:inline-block;' wx:for='{{item.role}}' wx:key='key' wx:for-item='w' wx:for-index='wn'>
+                      <image style='width:{{w.width||120}}rpx;height:100rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;' src='{{w.roleImg}}' bindload="imageLoad" data-eve='2' data-ind='{{index}}' data-num='{{wn}}'></image>
+                      <view wx:if='{{(wn+1)!=item.role.length}}' style='width:30rpx;height:120rpx;position:absolute;top:0;right:-30rpx;line-height:120rpx;color:#ef767c;text-align:center;'>+</view>
+                       <!-- 碎片 -->
+                        <view wx:if='{{w.channelId==3}}' class='fragment' style='width:{{w.width||100}}rpx;left:0;bottom:10rpx;right:0;margin:0 auto;'>
+                          <view class='fragmentbg'></view>
+                          <view class='fragmenttxt'><image class='fragmentimg' src='https://www.51chaidan.com/images/toyCabinet/toyFragment.png'></image><text class='fragmentfont'>碎片</text></view>
+                        </view>
+                    </view>
+                  </scroll-view>
+                </view>              
+          </block>
+          <block wx:else>
+              <view style='position:relative;width:100rpx;height:100%;float:left;'>
+                <image style='width:{{item.role[0].width||120}}rpx;height:100rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;' src='{{item.role[0].roleImg}}'  bindload="imageLoad" data-eve='2' data-ind='{{index}}' data-num='0'></image>
+                <!-- 碎片 -->
+                <view wx:if='{{item.role[0].channelId==3}}' class='fragment' style='width:{{item.role[0].width||100}}rpx;left:0;bottom:10rpx;right:0;margin:0 auto;'>
+                  <view class='fragmentbg'></view>
+                  <view class='fragmenttxt'><image class='fragmentimg' src='https://www.51chaidan.com/images/toyCabinet/toyFragment.png'></image><text class='fragmentfont'>碎片</text></view>
+                </view>
+              </view>              
+              <view style='width:380rpx;height:120rpx;float:left;margin-left:20rpx;'>
+                <view class='specialellipsis' style='width:100%;height:40rpx;padding-top:24rpx;font-size:24rpx;'>{{item.role[0].goods_name}}</view>
+                <view style='width:100%;height:40rpx;font-size:24rpx;'>{{item.role[0].role_name}}</view>
+              </view>              
+          </block>
+          <view style='width:50rpx;float:right;margin-left:15rpx;height:100%;position:relative;' catchtap='deleteCartfun' data-cart_id='{{item.cart_id}}'>
+            <image style='padding:10rpx;width:30rpx;height:30rpx;position:absolute;top:0;bottom:0;right:0;margin:auto 0;' src='../../../../pages/images/forknumber.png'></image>
+          </view>
+          <view class='specialellipsis' style='width:100rpx;line-height:120rpx;float:right;height:100%;font-size:28rpx;color:#ef767c;text-align:center;'>
+            ￥{{item.price}}
+          </view>
+        </view>
+      </view>      
+  </block>
+
+
+</view>
+
+
+
+
+
+<view style='width:100%;position:fixed;left:0;background:#fff;bottom:110rpx;z-index:11;'>
+
+  <view style="width:100%;height:134rpx;background:#5C5B5B;border-radius:60rpx;color:#fff;" catchtap="showCart">
+
+    <scroll-view scroll-x="true" style='width:400rpx;float:left;white-space:nowrap;margin-left:55rpx;height:130rpx;padding-top:4rpx;' catchtap='listdatafun'>
+    <!-- <view style='width:400rpx;margin-left:60rpx;'> -->
+        <block wx:for='{{cartData}}' wx:key='key'>
+           <view style="height:130rpx;display:inline-block;position:relative;vertical-align: top;">
+              <block wx:for='{{item.role}}' wx:key='key' wx:for-item='w' wx:for-index='wn'>
+                  <view style='width:{{w.width>80?w.width:"80"}}rpx;height:130rpx;display:inline-block;margin-right:10rpx;vertical-align: top;'>
+                      <view style='width:{{w.width>80?w.width:"80"}}rpx;height:100rpx;position:relative;'>
+                          <image style="width:{{w.width||80}}rpx;height:100rpx;border-radius: 6rpx;display:block;margin:auto;" src="{{w.roleImg}}"  bindload="imageLoad" data-eve='1' data-ind='{{index}}' data-num='{{wn}}'></image>
+                          <view wx:if='{{w.group_id>0&&(wn+1)!=item.role.length}}' style='width:30rpx;height:30rpx;position:absolute;top:30rpx;right:-20rpx;z-index:1;font-size:24rpx;color:#ee676d;text-align:center;font-weight:blod;'>+</view>
+                          <!-- 碎片 -->
+                          <view wx:if='{{w.channelId==3}}' class='fragment' style='width:{{w.width}}rpx;left:0;bottom:0;right:0;margin:0 auto;'>
+                            <view class='fragmentbg'></view>
+                            <view class='fragmenttxt'><image class='fragmentimg' src='https://www.51chaidan.com/images/toyCabinet/toyFragment.png'></image><text class='fragmentfont'>碎片</text></view>
+                          </view>
+                      </view>
+                      <view wx:if='{{w.group_id==0}}' class='specialellipsis' style='width:100%;height:30rpx;text-align:center;line-height:30rpx;color:#fff;font-size:22rpx;'>￥{{item.price}}</view>
+                  </view>
+              </block>
+              <view wx:if='{{item.group_id>0}}' style='width:100%;text-align:center;line-height:30rpx;color:#ee676d;font-size:22rpx;position:absolute;left:0;bottom:0;'>￥{{item.price}}</view> 
+           </view>
+        </block>  
+
+    </scroll-view>
+
+    <view wx:if='{{cartData.length!=0}}' style="width:130rpx;height:100%;float:right;background:#E65163;border-radius:0 60rpx 60rpx 0;text-align:center;font-size:30rpx;line-height:120rpx;" catchtap="dsbbbutclickt">
+      去结算
+    </view>
+    <view wx:else style="width:130rpx;height:100%;float:right;background:#a8a8a8;border-radius:0 60rpx 60rpx 0;text-align:center;font-size:30rpx;line-height:120rpx;">
+      去结算
+    </view>
+
+    <view style="height:100%;float:right;font-size:25rpx;color:#fff;text-align:left;" catchtap='listdatafun'>
+      <view style="width:100%;line-height:60rpx;margin-top:10rpx;">总计{{cartInfo.count}}件</view>
+      <view style="width:100%;line-height:60rpx;">共￥{{cartInfo.totalAmount}}</view>
+    </view>
+
+    <view wx:if='{{cartInfo.count>5}}' style="height:130rpx;line-height:130rpx;float:left;text-align:right;font-size:24rpx;width:34rpx;overflow: hidden;">···</view>
+
+
+  </view>
+</view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<bnavigation isChar='{{true}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+
+
+
+
+
+
+<!--  授权弹框  -->
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight}}px;width: 100%;z-index: 30;' catchtap='pullupsignin'></view>
+
+
+
+
+
+
+
+
+<!--  二级背景  -->
+<view class='tipbacktwo' wx:if='{{tipbacktwo}}' catchtouchmove="preventD" bindtap='tipbacktwo'></view>
+
+<view class='buybombsimmediately' wx:if='{{buybombsimmediately}}'>
+  <view class='bbsheadcon'>
+    <view class='bbshccom' bindtap='tipbacktwo' style='position: relative;'>
+      <view class='bbshccomleft'>已选购数量</view>
+      <image class='bbshccomimg' src='/pages/images/icon_in.png'></image>
+      <!-- <view wx:if='{{!iswholePay}}' class='bbshccomright'>1</view> -->
+      <view class='bbshccomright'>{{cartInfo.count}}</view>
+    </view>
+    <view class='bbshccom' bindtap='seladdressfun' style='position: relative;' wx:if='{{!isaddress}}'>
+      <view class='bbshccomleft'>收货地址</view>
+      <image class='bbshccomimg' src='/pages/images/icon_in.png'></image>
+      <view class='bbshccomright '>
+        <view style="width:100%;line-height:57rpx;text-align:right;" class="specialellipsis">{{tipnamephone}}</view>
+        <view style="width:100%;line-height:57rpx;text-align:right;" class="specialellipsis">{{tipaddress}}</view>
+      </view>
+    </view>
+    <view class='bbshccombot'>
+      <view class='bbshcombotleft'>应付金额</view>
+      <view class='bbshcombotright'>
+        <view class='bbshcombotpr'>￥{{freightiftr>0?(payprice+freightiftr):payprice}}</view>
+        <view class='bbshcombotdet' bindtap='pricedetailc'>
+          <image class='bbshdetimg' src='/pages/images/tipdet.png'></image>点击查看价格明细</view>
+      </view>
+    </view>
+    <view class='pricedetail' wx:if='{{pricedetailc}}'>
+      <view class='pricedetailo'>
+        <view class='pricedetailoleft'>商品价格</view>
+        <view class='pricedetailoright'>￥{{payprice}}</view>
+      </view>
+      <view class='pricedetailo'>
+        <view class='pricedetailoleft'>运费<text style='padding-left:8rpx;color:#47981e;' wx:if='{{freightiftr>0}}'>(满￥{{defaultinformation.carriage.free}}包邮)</text></view>
+        <view class='pricedetailoright'>{{freight}}</view>
+      </view>
+    </view>
+
+    <view class='bbshccom'>
+      <view class='bbshccomleft'>买家留言</view>
+      <input class='buyermessage' type='text' bindinput="inputChange" value='{{desc}}' placeholder='选填备注,或添加微信好友({{wxnum}})'></input>
+    </view>
+  </view>
+  <view class='bbshbottom'>
+    <view class='bbshbottomhead'>
+    </view>
+    <view class='bbshbottombut' catchtap='diaplayaddressefm' style='position:relative;'>提交订单</view>
+  </view>
+
+</view>
+
+
+
+<!-- 地址确认提示 -->
+<view class='comtip' wx:if='{{addressefm}}'>
+  <view class='comtipback' catchtap='addresssefmcancel'></view>
+  <view class='apptipbox' style='height:300rpx;'>
+    <view class='apptipcont'>
+      <text>本单将以"{{tipaddress}}"地址发货</text>
+    </view>
+    <view class='apptipbut'>
+      <view class='apptipleft apptiolefrigcom' bindtap='seladdressfun'>更换地址</view>
+      <view class='apptipright apptiolefrigcom' style='position:relative;'  bindtap='placeorder'>确定下单</view>
+    </view>
+  </view>
+</view>
+
+
+<!--  收货地址  -->
+<view class='receivingaddress' wx:if='{{receivingaddress}}'>
+  <view class='recgadhead'>
+    收货地址
+    <image src='/pages/images/forknumber.png' class='recgadheadimg' bindtap='receivingaddressfun'></image>
+  </view>
+  <view class='recgadcon'>
+    <view class='recgaddata' wx:for='{{addressdata}}' wx:key='key'>
+      <view class='recgaddname' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}'  catchtap='revisethereceivingaddress'>
+        <view class='recgaddnameleft'>{{item.consignee}}</view>
+        <view class='recgaddnameleft'>{{item.phone}}</view>
+      </view>
+      <view class='recgadaddress' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}'  catchtap='revisethereceivingaddress'>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
+      <view class='recgadbottom'>
+        <view class='recgadbotleft'>
+          <image class='recgadbotleftimg' hidden='{{!item.checked}}' src='/pages/images/pressed_click.png'></image>
+          <image class='recgadbotleftimg' hidden='{{item.checked}}' src='/pages/images/normal_click.png'></image>
+          默认地址
+        </view>
+        <view class='recgadbotright' bindtap='deladdress' data-ind="{{item.aid}}">
+          <image src='/pages/images/icon_delete.png' class='recgadbotleftimg'></image>
+          删除
+        </view>
+        <view class='recgadbotright' style='margin-right:50rpx;' bindtap='jumpeditaddress' data-address='{{item.address}}' data-aid='{{item.aid}}' data-city='{{item.city}}' data-consignee='{{item.consignee}}' data-district='{{item.district}}' data-phone='{{item.phone}}'
+          data-province='{{item.province}}' data-idcard='{{item.idcard}}'>
+          <image src='/pages/images/icon_edit.png' class='recgadbotleftimg'></image>
+          编辑
+        </view>
+      </view>
+    </view>
+    <view class='recgadnodata' wx:if='{{addressdata.length==0}}'>
+      <image src='/pages/images/recaddnodata.png' class='recgadnodataimg'></image>
+    </view>
+  </view>
+  <view class='recgadbot' bindtap='jumpaddress'>
+    增加新地址
+  </view>
+
+</view>
+
+
+
+
+
+
+
+
+
+

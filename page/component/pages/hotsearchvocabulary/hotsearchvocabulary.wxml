@@ -1,0 +1,45 @@
+<hidewindow id='hide'></hidewindow>
+
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class='box'>
+    <view class='sousuo'>
+       <input class='indheadinp' type='text' bindinput="inputChange" value='{{inputdata}}' placeholder='{{inputtxt1}}' placeholder='{{inputtxt1}}' bindfocus='onFocus' bindblur='onBlur' bindconfirm="jumpsoousuo"></input>
+       <view class='clicksousuo' bindtap='jumpsoousuo'>
+          <view style='width:100%;height:60rpx;line-height:60rpx;font-size:26rpx;color:#333;'>搜索</view>
+       </view>
+    </view>
+    <view class='hotseavoc'>
+        <view class='hothead'>历史记录
+           <view class='icon_delete' bindtap='celdel'>
+               <image src='../../../../pages/images/icon_delete.png' style='display:block;width:36rpx;height:38rpx;'></image>
+           </view>
+        </view>
+        <view class='hotci'>
+            <view class='hotcon' wx:for='{{hotdatahis}}' wx:if='{{index<=12}}' data-hot='{{item}}' wx:key='key' bindtap='jump'>
+            <view style='font-size:30rpx;height:40rpx;line-height:40rpx;'>{{item}}</view>
+            </view>
+        </view>       
+        <view class='hothead'>热词搜索</view>
+        <view class='hotci'> 
+            <view class='hotcon' wx:for='{{hotdata}}' data-hot='{{item}}' wx:key='key' bindtap='jump'>
+              <view style='font-size:30rpx;height:40rpx;line-height:40rpx;'>{{item}}</view>
+            </view>
+        </view>
+    </view>
+</view>
+<official-account wx:if='{{canIUse}}' style='position:fixed;left:0;bottom:0;width:100%;'></official-account>
+
+
+
+<view class='searchtip' wx:if='{{iftrsearchtip}}'>
+    <view class='searchtipbg' catchtap='iftrsearchtipfun'></view>
+    <view class='searchtipcon'>
+       <text class='searchtipcontxt'>{{searchtip}}</text>
+    </view>
+</view>
+
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>

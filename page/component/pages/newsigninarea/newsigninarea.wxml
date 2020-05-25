@@ -1,0 +1,458 @@
+<loading hidden="{{headhidden}}" catchtouchmove="preventD">
+  加载中...
+</loading>
+
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+
+
+<view class='awabox {{ishowCart||bottomdetail?"tripList_rootawa":""}}'>
+  <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+  <view>
+
+    <view class='awabtab' wx:if='{{scrdata.length>1}}'>
+      <view id='the_id' class='Locationtab' wx:if='{{scrdata.length>1}}'>
+        <scroll-view scroll-x="true" class="today_disanum_tab_comtainer" scroll-with-animation="true" bindscroll='scrollleftf' scroll-left='{{scrollleft}}'>
+          <view class='tdscrchbut specialellipsis' wx:for='{{scrdata}}' id='q{{item.category_id}}' wx:key='key' data-category_id='{{item.category_id}}' catchtap='tabbotdata' style='{{category_id==item.category_id?"color:#fff;background:#e94f57;font-size:26rpx;":"font-size:24rpx;"}}'>
+            <view class='tdstabbotimg'>{{item.name}}</view>
+          </view>
+        </scroll-view>
+        <!-- tips 提示 -->
+        <view class='awatipsclasif' wx:if='{{SHOW_TOP_CLTIP}}'>
+          <view class='awaarrow'></view>
+          <view class='awatipstxtci'>更多分类商品可选</view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+  <!--  拆盒装数据  -->
+  <view class='dismtbcon' wx:if='{{listdata.length!=0&&category_id!=-1}}'>
+    <view class='dismtbcch' wx:for='{{listdata}}' wx:key='key'>
+      <view class='dismtbcchech' style='border:0;'>
+        <view class='dismtbccimgbox' data-gid='{{item.goods_id}}' data-limitnum='{{item.limitNum}}' catchtap='addressmanagement' data-iftrnum='1' data-indexpar='{{index}}' style='background:#f4f5f9;'>
+          <image src='{{item.goods_cover}}' mode='aspectFit' class='dismtbccimg'></image>
+        </view>
+        <view class='dismtbcctxtbox' data-limitnum='{{item.limitNum}}' data-gid='{{item.goods_id}}' data-stock='{{item.stock}}' catchtap='addtocart'>
+          <view class='dismtbcctxthead multilineellipsis' style='font-size:26rpx;position: relative;'>
+            <view wx:if='{{item.is_suit==1}}' style='display: inline-block;color:#ff2742;margin-right:12rpx;font-size:26rpx;'>{{item.pre_name}}</view>
+            <view wx:if='{{item.is_suit==1}}' style='display: inline-block;font-size:26rpx;'>{{item.ds}}</view>{{item.goods_name}}</view>
+          <view class='dismtbcctxtbott'>
+            <view class='dismtbcctxtbottleft specialellipsis'>￥{{item.goods_price}}{{item.gsale_unit}}</view>
+            <image src='../../../../pages/images/dismtb.png' class='addshopcar'></image>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--  -->
+  <view class='nodata' wx:if='{{listdata.length==0&&nodataiftr}}' style='height: 600rpx;width: 100%;position: relative;'>
+    <image src='../../../../pages/images/nodata.png' class='nodataimg' style='width: 280rpx;height: 300rpx;position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;'></image>
+  </view>
+  <view style='width:100%;text-align:center;line-height:60rpx;color:#666;font-size:30rpx;' wx:if='{{listdata.length>=10}}'>{{loadprompt}}</view>
+
+</view>
+
+
+
+<view style='width:100%;height:125rpx;'></view>
+
+
+
+
+
+<!-- 提交蒙层 -->
+<view class="tipbacktwo" style="z-index:10;" catchtouchmove="preventD" wx:if='{{ishowCart}}' catchtap="showCart"></view>
+
+<view style='width:100%;position:fixed;left:0;background:#fff;bottom:{{isIphoneX?"130rpx;":"110rpx;"}};z-index:11;'>
+
+  <view style="width:100%;height:50rpx;font-size:24rpx;line-height:45rpx;background:#fcefd7;" catchtap="showCart">
+
+    <view style='float:right;margin-right:30rpx;'>总计
+      <text style="font-size:32rpx;color:#ff6968;font-weight:bold;">{{mAmount}}</text>件：￥{{totalMoney}}
+    </view>
+
+  </view>
+
+  <view wx:if='{{ishowCart}}' style="width:100%;max-height:{{windowHeight-statusBarHeightMc-208}}px;padding-bottom:90rpx;overflow:scroll;">
+
+    <block wx:for='{{zunmdata}}' wx:key='key'>
+
+      <view style="width:100%;float:left;position:relative;border-bottom:1rpx solid #e3e3e3;">
+
+        <view style="width:100rpx;height:100rpx;float:left;position:relative;margin:30rpx 30rpx;">
+          <image class="cartImg" mode='aspectFit' src="{{item.goods_thumb}}"></image>
+        </view>
+
+        <view style="float:left;font-size:25rpx;width:580rpx;position:relative;">
+          <view class="cartGoodsname multilineellipsis">{{item.goods_name}}</view>
+
+          <view style="width:40rpx;line-height:40rpx;position:absolute;top:10rpx;right:0;font-size:25rpx;text-align:right;" data-index='{{index}}' data-cart_id='{{item.cart_id}}' data-store_id='{{item.store_id}}' bindtap="deleteData">×</view>
+
+          <view>
+            <view class="money ">￥{{item.gsale}}</view>
+
+
+            <view class="number-box">
+              <view class="number reduce" bindtap="reduceEvent" data-reduce="{{index}}" style="color:{{item.color}}">-</view>
+              <view class="number count">{{item.numberofdismantling}}</view>
+              <view class="number add" bindtap="addEvent" data-add="{{index}}" style="color:#000;">+</view>
+            </view>
+
+          </view>
+
+          <view wx:if="{{item.relGidTips}}" style='position:absolute;top:47rpx;right:0rpx;overflow:hidden;z-index:100rpx;' bindtap="addEvent" data-add="{{index}}">
+            <view style='line-height:40rpx;color:white;font-size:25rpx;text-align:center;border-radius:10rpx;background:#404040;position:relative;padding:0 10rpx;'>
+              <view style='text-align:left;'>
+                <text wx:if="{{item.relGidTips.discountType==1}}"> 第{{item.dipsCount}}件立减 </text>
+                <text wx:if="{{item.relGidTips.discountType==2}}"> 第{{item.dipsCount}}件再减 </text>
+                <text style='color:#ff6968;font-size:30rpx;font-weight:bold;'>{{item.relGidTips.discountPrice}}元</text>
+              </view>
+            </view>
+
+            <view style='width:100%;height:10rpx;position:relative;'>
+              <image style='width:20rpx;height:10rpx;position:absolute;top:0;right:20rpx;' src='https://clw.51chaidan.com/images/goods/black_arrow.png'></image>
+            </view>
+          </view>
+
+        </view>
+
+        <view class='addShopComb' wx:if='{{item.displayGroupId&&(item.groupData.goodsList!=0||item.groupData.presentList.length!=0||item.groupData.discount.cheaper!=0)&&(item.groupData.postion==-1||item.groupData.postion==item.position)}}'>
+          <view class='addShopCombLeft'>
+            <text class='asclTxt' wx:if='{{item.groupData.goodsList.length!=0}}'>优惠\n组合</text>
+            <text class='asclTxt' wx:elif='{{item.groupData.presentList.length!=0}}' style='line-height:70rpx;'>赠品</text>
+            <text class='asclTxt' wx:else>优惠\n组合</text>
+          </view>
+          <view class='addShopCombCenter'>
+            <view class='asccEveOne' wx:for='{{item.groupData.goodsList}}' wx:for-item='itone' wx:for-index='indnum' wx:key='key' data-gid='{{itone.goods_id}}' data-is_store='2' data-store_id='' bindtap='addressmanagement'>
+              <image src='{{itone.goods_thumb}}' mode='aspectFit' class='ascEImg'></image>
+              <view class='asccGive' style='color:#000;' wx:if='{{item.groupData.goodsList.length==1&&itone.num!=0}}'>x{{itone.num}}</view>
+              <view class='asccGive' style='color:#000;' wx:if='{{indnum+1!=item.groupData.goodsList.length}}'>+</view>
+            </view>
+            <view class='asccGive' wx:if='{{item.groupData.goodsList.length!=0&&item.groupData.presentList.length!=0}}' style='margin-right:13rpx;'>送</view>
+            <view class='asccEveOne' wx:for='{{item.groupData.presentList}}' wx:for-item='ittwo' wx:for-index='indnumt' wx:key='key' data-gid='{{ittwo.goods_id}}' data-is_store='2' data-store_id='' bindtap='addressmanagement'>
+              <image src='{{ittwo.goods_thumb}}' mode='aspectFit' class='ascEImg'></image>
+              <view class='asccGive' style='color:#000;' wx:if='{{ittwo.num>1}}'>x{{ittwo.num}}</view>
+              <view class='asccGive' style='color:#000;' wx:if='{{indnumt+1!=item.groupData.presentList.length}}'>+</view>
+
+            </view>
+            <view class='asccGive' wx:if='{{item.groupData.discount!=0&&item.groupData.discount.cheaper!=0}}' style='margin-right:13rpx;'>减</view>
+            <view class='asccEveOne' wx:if='{{item.groupData.discount!=0&&item.groupData.discount.cheaper!=0}}' style='line-height:90rpx;color:#121212;font-size:26rpx;'>￥{{item.groupData.discount.cheaper}}</view>
+
+          </view>
+          <view class='addShopCombRight'>
+            <view class='ascrAdd comPosCen' wx:if='{{item.groupData.goodsList.length!=0}}' data-addnum='{{index}}' catchtap='mulshopaddcar'>添加</view>
+            <view class='ascrFinsh comPosCen' wx:else>已满足条件</view>
+          </view>
+        </view>
+
+      </view>
+
+    </block>
+
+  </view>
+
+  <view style="width:100%;height:130rpx;background:#5C5B5B;border-radius:60rpx;color:#fff;" catchtap="showCart">
+
+
+    <scroll-view scroll-x="true" style='width:570rpx;margin-left:40rpx;float:left;white-space:nowrap;'>
+
+      <block wx:for='{{zunmdata}}' wx:key='key'>
+        <view style="width:120rpx;height:120rpx;display:inline-block;">
+          <view style="width:90rpx;height:90rpx;margin:6rpx 15rpx;position:relative;">
+            <image style="width:90rpx;height:90rpx;border-radius: 6rpx;" mode='aspectFit' src="{{item.goods_thumb}}"></image>
+            <view style="width:30rpx;height:30rpx;position:absolute;right:0;bottom:0;background:#E65163;text-align:center;font-size:20rpx;border-radius:6rpx;">×{{item.count}}</view>
+          </view>
+          <view style="width:120rpx;line-height:25rpx;font-size:25rpx;color:#fff;text-align:center;">￥{{item.gsale*item.count}}</view>
+        </view>
+      </block>
+
+    </scroll-view>
+
+    <view wx:if='{{zunmdata.length>0}}' style="width:130rpx;height:100%;float:right;background:#E65163;border-radius:0 60rpx 60rpx 0;text-align:center;font-size:30rpx;line-height:120rpx;" catchtap="dsbbbutclickt">
+      去结算
+    </view>
+
+    <view wx:else style="width:130rpx;height:100%;float:right;background:#a8a8a8;border-radius:0 60rpx 60rpx 0;text-align:center;font-size:30rpx;line-height:120rpx;" catchtap="">
+      去结算
+    </view>
+
+  </view>
+</view>
+
+<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+
+
+
+
+<!--  引用详情页代码  -->
+
+<!--  一级级背景  -->
+<view class='tipback' wx:if='{{tipback}}' catchtouchmove="preventD"></view>
+<!--  二级背景  -->
+<view class='tipbacktwo' wx:if='{{tipbacktwo}}' catchtouchmove="preventD" bindtap='tipbacktwo'></view>
+<!--  立即购买弹框  -->
+
+<view class='buybombsimmediately' wx:if='{{buybombsimmediately}}'>
+  <view class='bbsheadcon'>
+
+    <view class='bbshccom' bindtap='seladdressfun'>
+      <view class='bbshccomleft'>收货地址</view>
+      <image class='bbshccomimg' src='../../../../pages/images/icon_in.png'></image>
+      <view class='bbshccomright'>
+        <view style="width:100%;line-height:57rpx;text-align:right;" class="specialellipsis">{{tipnamephone}}</view>
+        <view style="width:100%;line-height:57rpx;text-align:right;" class="specialellipsis">{{tipaddress}}</view>
+      </view>
+    </view>
+    <view class='bbshccom' bindtap='couponprofun'>
+      <view class='bbshccomleft'>优惠券</view>
+      <image class='bbshccomimg' src='../../../../pages/images/icon_in.png'></image>
+      <text class='bbshccomright multilineellipsis' style='text-align: right;font-size:28rpx;'>{{tipcoupon}}</text>
+    </view>
+
+    <view class='bbshccombot'>
+      <view class='bbshcombotleft'>应付金额</view>
+      <view class='bbshcombotright'>
+        <view class='bbshcombotpr'>￥{{amountpayable}}</view>
+        <view class='bbshcombotdet' bindtap='pricedetailc'>
+          <image class='bbshdetimg' src='../../../../pages/images/tipdet.png'></image>点击查看价格明细</view>
+      </view>
+    </view>
+    <view class='pricedetail' wx:if='{{pricedetailc}}'>
+      <view class='pricedetailo'>
+        <view class='pricedetailoleft'>商品价格</view>
+        <view class='pricedetailoright'>￥{{commodityprice}}</view>
+      </view>
+      <view class='pricedetailo'>
+        <view class='pricedetailoleft'>税费</view>
+        <view class='pricedetailoright'>￥{{taxation}}</view>
+      </view>
+      <view class='pricedetailo'>
+        <view class='pricedetailoleft'>运费
+          <text style='padding-left:8rpx;color:#47981e;' wx:if='{{freightiftr>0}}'>(满￥{{defaultinformation.carriage.free}}包邮)</text>
+        </view>
+        <view class='pricedetailoright'>{{freight}}</view>
+      </view>
+      <view class='pricedetailo'>
+        <view class='pricedetailoleft' wx:if='{{coupon_type==2}}'>折扣券</view>
+        <view class='pricedetailoleft' wx:else>代金券</view>
+        <view class='pricedetailorightcol green' wx:if='{{coudata2mon>0&&coupon_type==2}}'>-￥{{coudata2mondiscount}}</view>
+        <view class='pricedetailorightcol green' wx:elif='{{coudata2mon>0}}'>-￥{{coudata2mon}}</view>
+        <view class='pricedetailorightcol' wx:elif='{{coudata2mon<=0}}'>￥{{coudata2mon}}</view>
+      </view>
+      <view class='pricedetailo'>
+        <view class='pricedetailoleft'>运费券</view>
+        <view class='pricedetailorightcol green' wx:if='{{coudata1mon>0}}'>-￥{{coudata1mon}}</view>
+        <view class='pricedetailorightcol' wx:if='{{coudata1mon<=0}}'>￥{{coudata1mon}}</view>
+      </view>
+    </view>
+    <view class='bbshccom'>
+      <view class='bbshccomleft'>买家留言</view>
+      <input class='buyermessage' type='text' bindinput="descinputChange" value='{{desc}}' placeholder='选填备注,或添加微信好友({{wxnum}})'></input>
+    </view>
+  </view>
+  <view class='bbshbottom'>
+    <view class='bbshbottomhead'>
+
+    </view>
+    <view class='bbshbottombut' bindtap='placeorder'>提交订单</view>
+  </view>
+
+</view>
+
+<!--  收货地址  -->
+<view class='receivingaddress' wx:if='{{receivingaddress}}'>
+  <view class='recgadhead'>
+    收货地址
+    <image src='../../../../pages/images/forknumber.png' class='recgadheadimg' bindtap='receivingaddressfun'></image>
+  </view>
+  <view class='recgadcon'>
+    <view class='recgaddata' wx:for='{{addressdata}}' wx:key='key'>
+      <view class='recgaddname' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='revisethereceivingaddress'>
+        <view class='recgaddnameleft'>{{item.consignee}}</view>
+        <view class='recgaddnameleft'>{{item.phone}}</view>
+      </view>
+      <view class='recgadaddress' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='revisethereceivingaddress'>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
+      <view class='recgadbottom'>
+        <view class='recgadbotleft'>
+          <image class='recgadbotleftimg' hidden='{{!item.checked}}' src='../../../../pages/images/pressed_click.png'></image>
+          <image class='recgadbotleftimg' hidden='{{item.checked}}' src='../../../../pages/images/normal_click.png'></image>
+          默认地址
+        </view>
+        <view class='recgadbotright' bindtap='deladdress' data-ind="{{item.aid}}">
+          <image src='../../../../pages/images/icon_delete.png' class='recgadbotleftimg'></image>
+          删除
+        </view>
+        <view class='recgadbotright' style='margin-right:50rpx;' bindtap='jumpeditaddress' data-address='{{item.address}}' data-aid='{{item.aid}}' data-city='{{item.city}}' data-consignee='{{item.consignee}}' data-district='{{item.district}}' data-phone='{{item.phone}}'
+          data-province='{{item.province}}' data-idcard='{{item.idcard}}'>
+          <image src='../../../../pages/images/icon_edit.png' class='recgadbotleftimg'></image>
+          编辑
+        </view>
+      </view>
+    </view>
+    <view class='recgadnodata' wx:if='{{addressdata.length==0}}'>
+      <image src='../../../../pages/images/recaddnodata.png' class='recgadnodataimg'></image>
+    </view>
+  </view>
+  <view class='recgadbot' bindtap='jumpaddress'>
+    增加新地址
+  </view>
+
+
+</view>
+
+
+<!--  优惠券弹框  -->
+<view class='couponprojectile' wx:if='{{couponprojectile}}'>
+  <!--  数据  -->
+  <view class='recgadhead'>
+    优惠券
+    <image src='../../../../pages/images/forknumber.png' class='recgadheadimg' bindtap='couponprojectilefun'></image>
+  </view>
+  <view class='couponsousuo'>
+    <input class='indheadinp' type='text' value='{{coupondata}}' bindinput='coupondatafun' placeholder='请输入兑换码'></input>
+    <view class='sousuoclik' catchtap='couclicksou'>兑换</view>
+  </view>
+  <view class='recgadcon'>
+    <!--   运费卷    -->
+    <view class='boxfirst' wx:for='{{coudata1}}' wx:key='key' data-cid='{{item.cid}}' data-index='{{index}}' catchtap='checkimg1'>
+      <!-- 背景 -->
+      <image wx:if='{{item.status!=0}}' class='boxfirstimg' src='../../../../pages/images/bg_ticket_grey2.png'></image>
+      <image wx:if='{{item.status==0}}' class='boxfirstimg' src='../../../../pages/images/bg_ticket_grey2.png'></image>
+      <!-- 已过期  -->
+      <image wx:if='{{item.status==2}}' class='yinzhengimg' src='../../../../pages/images/icon_expired.png'></image>
+      <!--  已使用  -->
+      <image wx:if='{{item.status==1}}' class='yinzhengimg' src='../../../../pages/images/icon_used.png'></image>
+      <view class='chebo' wx:if='{{item.imgcheck}}'>
+        <image class='chebochekcl' src='../../../../pages/images/icon_check.png'></image>
+      </view>
+      <view class='boxcon' bindtap=''>
+        <view class='boxconhead'>
+          <view class='bocohealef'>
+            <view class='bchll'>{{item.unit}}</view>
+            <view class='bchlr'>{{item.value}}</view>
+          </view>
+          <view class='bocohearig'>
+            <view class='bocohighe specialellipsis'>{{item.name}}</view>
+            <view class='bocohigcon specialellipsis'>{{item.detail}}</view>
+            <view wx:if='{{item.status!=1}}' class='bocohigcon specialellipsis'>{{item.overtime}}到期</view>
+            <view wx:if='{{item.status==1}}' class='bocohigcon specialellipsis'>{{item.overtime}}使用</view>
+          </view>
+        </view>
+        <view class='boxconcon'>{{item.desc}}</view>
+      </view>
+    </view>
+    <!--   代金券  -->
+    <view class='boxfirst' wx:for='{{coudata2}}' wx:key='key' data-cid='{{item.cid}}' catchtap='checkimg2'>
+      <!-- 背景 -->
+      <image wx:if='{{item.status!=0}}' class='boxfirstimg' src='../../../../pages/images/bg_ticket_grey2.png'></image>
+      <image wx:if='{{item.status==0}}' class='boxfirstimg' src='../images/bg_ticket_grey2.png'></image>
+      <!-- 已过期  -->
+      <image wx:if='{{item.status==2}}' class='yinzhengimg' src='../../../../pages/images/icon_expired.png'></image>
+      <!--  已使用  -->
+      <image wx:if='{{item.status==1}}' class='yinzhengimg' src='../../../../pages/images/icon_used.png'></image>
+      <view class='chebo' wx:if='{{item.imgcheck}}'>
+        <image class='chebochekcl' src='../../../../pages/images/icon_check.png'></image>
+      </view>
+      <view class='boxcon' bindtap=''>
+        <view class='boxconhead'>
+          <view class='bocohealef'>
+            <view class='bchll' wx:if='{{item.coupon_type!=2}}'>{{item.unit}}</view>
+            <view class='bchlr' style='{{item.coupon_type==2?"margin-left:6rpx;text-align:right;":""}}'>{{item.value}}</view>
+            <view class='bchll' wx:if='{{item.coupon_type==2}}' style='font-size:22rpx;width:24rpx;'>折</view>
+          </view>
+          <view class='bocohearig'>
+            <view class='bocohighe specialellipsis'>{{item.name}}</view>
+            <view class='bocohigcon specialellipsis'>{{item.detail}}</view>
+            <view wx:if='{{item.status!=1}}' class='bocohigcon specialellipsis'>{{item.overtime}}到期</view>
+            <view wx:if='{{item.status==1}}' class='bocohigcon specialellipsis'>{{item.overtime}}使用</view>
+          </view>
+        </view>
+        <view class='boxconcon'>{{item.desc}}</view>
+      </view>
+    </view>
+    <!--  不可用优惠券  -->
+    <view class='boxfirst' wx:for='{{unavailablearr}}' wx:key='key'>
+      <!-- 背景 -->
+      <view wx:if='{{item.status==0}}' style='position:absolute;right:40rpx;top:40rpx;font-size:26rpx;'>还差一点就能使用啦</view>
+      <image wx:if='{{item.status!=0}}' class='boxfirstimg' src='../../../../pages/images/bg_ticket_grey2.png'></image>
+      <image wx:if='{{item.status==0}}' class='boxfirstimg' src='../../../../pages/images/bg_ticket_grey2.png'></image>
+      <!-- 已过期  -->
+      <image wx:if='{{item.status==2}}' class='yinzhengimg' src='../../../../pages/images/icon_expired.png'></image>
+      <!--  已使用  -->
+      <image wx:if='{{item.status==1}}' class='yinzhengimg' src='../../../../pages/images/icon_used.png'></image>
+      <view class='chebo' wx:if='{{item.imgcheck}}'>
+        <image class='chebochekcl' src='../../../../pages/images/icon_check.png'></image>
+      </view>
+      <view class='boxcon' bindtap=''>
+        <view class='boxconhead'>
+          <view class='bocohealef'>
+            <view class='bchll' wx:if='{{item.coupon_type!=2}}'>{{item.unit}}</view>
+            <view class='bchlr' style='{{item.coupon_type==2?"margin-left:6rpx;text-align:right;":""}}'>{{item.value}}</view>
+            <view class='bchll' wx:if='{{item.coupon_type==2}}' style='font-size:22rpx;width:24rpx;'>折</view>
+          </view>
+          <view class='bocohearig'>
+            <view class='bocohighe specialellipsis'>{{item.name}}</view>
+            <view class='bocohigcon specialellipsis'>{{item.detail}}</view>
+            <view wx:if='{{item.status!=1}}' class='bocohigcon specialellipsis'>{{item.overtime}}到期</view>
+            <view wx:if='{{item.status==1}}' class='bocohigcon specialellipsis'>{{item.overtime}}使用</view>
+          </view>
+        </view>
+        <view class='boxconcon'>{{item.desc}}</view>
+      </view>
+    </view>
+    <!--  没数据图片  -->
+    <view class='recgadnodata' wx:if='{{coudata.length==0}}'>
+      <image src='../../../../pages/images/nocoupon.png' class='recgadnodataimg'></image>
+    </view>
+  </view>
+  <view class='couponprorecgadbot' catchtap='querencouponprojectilefun'>
+    确认
+  </view>
+</view>
+
+<!--  填写身份证号  -->
+<view class='idnumberboxw' wx:if='{{idnumberboxiftr}}'>
+  <view class='idnumberboxwback'></view>
+  <view class='idnumberbox'>
+    <view class='idnumberboxhead'>补充清关信息</view>
+    <view class='idnumberboxprompt'>海关政策需补充身份信息仅用于海关清关</view>
+    <input class='idnumberboxinp' type='text' value='{{inputnamedata}}' bindinput="inputnameChange" placeholder='真实姓名'></input>
+    <input class='idnumberboxinp' type='text' value='{{inputidnumberdata}}' bindinput="inputidChange" placeholder='身份证号' style='margin-top:20rpx;'></input>
+    <view class='idnumberboxbut'>
+      <view class='idnumbbcen idnumbbcombut' catchtap='idnumbbcenfun'>取消</view>
+      <view class='idnumbbsub idnumbbcombut' catchtap='idnumbbsubfun'>提交</view>
+    </view>
+  </view>
+</view>
+
+
+
+
+<!-- 提交蒙层 -->
+<view style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:99999;' wx:if='{{upMongolia}}'></view>
+
+<!--  授权弹框  -->
+<view class='tgaboxtwo' wx:if='{{tgabox}}' catchtap='clicktga'>
+  <view class='tgaboxtbg'></view>
+  <view class='tgaboxclick'>
+    <image mode='aspectFit' src='https://www.51chaidan.com/images/default/openscreen.jpg?log={{appNowTime}}' class='tgaboxclickbgImg'></image>
+    <image src='{{commoddata.cover}}' class='abcd'></image>
+
+  </view>
+  <button class='tgaboxtgawchbochlibutboxtwo' open-type="getUserInfo" type='primary' bindgetuserinfo="userInfoHandler"></button>
+
+</view>
+
+<!-- 商品详情 -->
+<import src="../../../../wxParse/wxParse.wxml" />
+<view class='wsh' wx:if='{{bottomdetail}}'>
+  <view class='tgimgboxgb' catchtap='bottomdetailnone'></view>
+  <view class='bottomdetail'>
+    <scroll-view style='width:100%;height:100%;' scroll-y="true" class='templateimg'>
+      <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+    </scroll-view>
+    <view class='crowrighgbottredshop' data-limitnum='{{bottomlimitNum}}' data-gid='{{bottomgoods_id}}' data-stock='{{bottomstock}}' catchtap='addtocart'>加入购物车</view>
+    <image src='https://www.51chaidan.com/images/spread/dial/fork.png' class='awabottomclose' catchtap='bottomdetailnone'></image>
+  </view>
+</view>

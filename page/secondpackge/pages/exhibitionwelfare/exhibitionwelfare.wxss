@@ -1,0 +1,181 @@
+/* page/secondpackge/pages/exhibitionwelfare/exhibitionwelfare.wxss */
+
+@import "../../common/mPublic.wxss";
+
+.countdown {
+  background: #000;
+  color: #fff;
+  text-align: center;
+  line-height: 60rpx;
+}
+
+.timetextstyle {
+  display: inline-block;
+  font-size: 25rpx;
+}
+
+.numstyle {
+  width: 50rpx;
+  line-height: 30rpx;
+  border-radius: 15rpx;
+  background: #000;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -15rpx;
+  margin: 0 auto;
+  opacity: 0.7;
+  text-align: center;
+  color: white;
+  font-size: 20rpx;
+}
+
+.sharenum {
+  color: #fff;
+  border-radius: 15rpx;
+  font-size: 20rpx;
+  position: absolute;
+  right: -13rpx;
+  top: -13rpx;
+  background:#ff2742;
+  height: 30rpx;
+  width: 30rpx;
+  border-radius: 50%;
+  z-index: 1;
+  text-align: center;
+  line-height: 30rpx;
+  background: #ff2742;
+  
+}
+
+.nsswiperdetail {
+  width: 710rpx;
+  height: 200rpx;
+  position: absolute;
+  top: 20rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  border-radius: 10rpx;
+}
+
+.exhibdetxt {
+  padding-top: 20rpx;
+  width: 570rpx;
+  height: 120rpx;
+  float: right;
+  font-size: 24rpx;
+}
+
+.exhibdxtxttitle {
+  height: 40rpx;
+  line-height: 40rpx;
+  width: 220rpx;
+  float: left;
+}
+
+.exhibdxtxtadd {
+  width: 150rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  border-radius: 15rpx;
+  font-size: 24rpx;
+  color: #fff;
+  float: right;
+  margin-right: 15rpx;
+}
+
+.dismtbcctxthead {
+  width: 100%;
+  line-height: 40rpx;
+}
+
+.arrow {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-top: 2px solid white;
+  border-right: 2px solid white;
+}
+
+.arrow-left {
+  transform: rotate(-135deg);
+}
+
+.arrow-right {
+  transform: rotate(45deg);
+}
+
+.btnstyle {
+  width: 300rpx;
+  line-height: 80rpx;
+  border-radius: 40rpx;
+  text-align: center;
+  color: white;
+}
+
+/*  新人优惠券  */
+.mewcoupon {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 199998;
+}
+
+.swfback {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.5;
+}
+
+.addfrindcommon {
+  width: 500rpx;
+  height: 700rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border-radius: 15rpx;
+}
+
+.addfrindcomimg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.addfrindcomsave {
+  width: 300rpx;
+  height: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+  background: #FB595F;
+  font-size: 26rpx;
+  color: #fff;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -120rpx;
+  margin: auto;
+  border-radius: 15rpx;
+}
+
+.getsuccesstyle {
+  width: 500rpx;
+  height: 720rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 9;
+  background: white;
+  border-radius: 10rpx;
+}

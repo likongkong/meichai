@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "优惠券",
+  "usingComponents": {
+    "hidewindow": "../../../../pages/hidewindow/hidewindow",
+    "t_f": "../topfunction/topfunction"
+  }
+}

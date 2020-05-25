@@ -1,0 +1,15 @@
+
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class='stpbox'>
+   <block wx:if='{{is_txt}}'>
+       <view class="savepictxtbox">
+           <text class="savepictxt">{{txt}}</text>
+       </view>
+   </block>
+   <block wx:else>
+       <image class='stpboximg' src='{{imgurl}}' data-index='0' bindtap='previewImg' bindload="imageLoad" style="width:100%; height:{{ ng_images[0].height }}px;"></image>  
+   </block>
+
+</view>

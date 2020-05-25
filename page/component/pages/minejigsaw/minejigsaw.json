@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "我的拼图",
+  "navigationBarBackgroundColor": "#ff6968",
+  "asdfasfdflePullDownRefresh": true,
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "hidewindow": "../../../../pages/hidewindow/hidewindow",
+    "t_f": "../../../../pages/topfunction/topfunction"
+  }
+}

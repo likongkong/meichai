@@ -1,0 +1,78 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'>
+</t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class='winningthepbox' wx:if='{{isAwardOrder}}' catchtap='jumporder'>
+  <view class='winningthepimgtxt'>
+    <image class='winningthepimgshop' src='{{awardOrder.Info.cover}}'></image>
+    <view class='winningtheptime specialellipsis'>{{winningovertime}}</view>
+  </view>
+  <image class='winningthepimg' src='http://www.51chaidan.com/images/FreeSheet/WinningThePrize.png'></image>
+</view>
+
+<view style='width:100%;height:128rpx;z-index:8;' wx:elif='{{spreadEntry}}' catchtap='jumpaction'>
+  <swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="5000" duration="450">
+    <swiper-item wx:for="{{spreadEntry}}" wx:key="key">
+      <image style='width:100%;height:128rpx;display:block;position: relative;' src='{{item.src}}' catchtap='jumpaction' data-path='{{item.path}}'></image>
+    </swiper-item>
+  </swiper>
+</view>
+
+<view style='width:100%;overflow:hidden;'>
+
+  <view style='width:50%;float:left;'>
+    <view wx:for='{{list}}' wx:key='key'>
+      <view wx:if='{{index%2==0}}' style='width:96%;position:relative;margin:10rpx 2%;background:#fff;border-radius:10rpx;' data-gid='{{item.goods_id}}' data-id='{{item.id}}' catchtap='jumpdetail'>
+        <image src='{{item.activityCover}}' style='width:100%;border-radius:10rpx;display:block;' mode="widthFix"></image>
+        <image src='{{item.promoter}}' style='width:50rpx;height:50rpx;border-radius:50%;position:absolute;top:10rpx;left:10rpx;z-index:1;'></image>
+        <view style='width:70%;height:25rpx;position:absolute;top:20rpx;left:50rpx;background:#999;opacity:0.8;border-radius:10rpx;'></view>
+        <view class='specialellipsis' style='width:65%;position:absolute;top:20rpx;left:60rpx;font-size:20rpx;line-height:25rpx;color:#fff;'>
+          发起了 {{item.name}}
+        </view>
+        <view style='width:100%;height:40rpx;position:absolute;bottom:0rpx;left:0;background:#999;opacity:0.8;border-radius:0 0 10rpx 10rpx;'></view>
+        <view style='width:100%;position:absolute;bottom:0rpx;left:0;font-size:25rpx;line-height:40rpx;color:#fff;'>
+          <text style='float:left;margin-left:20rpx;'>已拆 {{item.truth_users}}/{{item.limit_users}}</text>
+          <text style='float:right;margin-right:20rpx;'>{{item.stopdate}}结束</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view style='width:50%;float:left;'>
+    <view wx:for='{{list}}' wx:key='key'>
+      <view wx:if='{{index%2==1}}' style='width:96%;position:relative;margin:10rpx 2%;background:#fff;border-radius:10rpx;' data-gid='{{item.goods_id}}' data-id='{{item.id}}' catchtap='jumpdetail'>
+        <image src='{{item.activityCover}}' style='width:100%;border-radius:10rpx;display:block;' mode="widthFix"></image>
+        <image src='{{item.promoter}}' style='width:50rpx;height:50rpx;border-radius:50%;position:absolute;top:10rpx;left:10rpx;z-index:1;'></image>
+        <view style='width:70%;height:25rpx;position:absolute;top:20rpx;left:50rpx;background:#999;opacity:0.8;border-radius:10rpx;'></view>
+        <view class='specialellipsis' style='width:65%;position:absolute;top:20rpx;left:60rpx;font-size:20rpx;line-height:25rpx;color:#fff;'>
+          发起了 {{item.name}}
+        </view>
+        <view style='width:100%;height:40rpx;position:absolute;bottom:0rpx;left:0;background:#999;opacity:0.8;border-radius:0 0 10rpx 10rpx;'></view>
+        <view style='width:100%;position:absolute;bottom:0rpx;left:0;font-size:25rpx;line-height:40rpx;color:#fff;'>
+          <text style='float:left;margin-left:20rpx;'>已拆 {{item.truth_users}}/{{item.limit_users}}</text>
+          <text style='float:right;margin-right:20rpx;'>{{item.stopdate}}结束</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>
+
+<view style='width:100%;{{isIphoneX?"height:320rpx;":"height:300rpx;"}}'></view>
+
+<view style='width:100%; position:fixed; left:0; bottom:0; border-top:1px solid #e5e5e5;background: #fff;z-index: 5;'>
+
+<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+
+
+
+</view>
+
+<!-- 授权弹框 -->
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+
+
+<!-- 我要发起 发起拆明盒 -->
+<text catchtap='jumpinitiateopenboxes' style='width: 120rpx;height: 80rpx;padding: 20rpx 0;text-align: center;border-radius: 50%;position: fixed;left: 50rpx;bottom: 150rpx;z-index: 19;background: #ec5b63;color: #fff;font-size: 26rpx;line-height: 40rpx;'>我 要\n发 起</text>
+
+

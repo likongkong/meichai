@@ -1,0 +1,107 @@
+
+/*   单行  */
+.specialellipsis{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;  
+}
+.box{
+  background: #f4f5f9;
+  width: 100%;
+}
+.boxch{
+  padding: 0 20rpx;
+  background: #fff;
+}
+.allcom{
+  width: 100%;
+  border-bottom:1rpx solid #e5e5e5;
+}
+.allcomhead{
+  width: 100%;
+  height: 92rpx;
+  padding-top: 20rpx;
+}
+.allcomhleft{
+  float: left;
+  height: 70rpx;
+  width: 550rpx;
+}
+.allcomhright{
+  float: right;
+  height: 70rpx;
+  width: 150rpx;
+}
+.allcomripoi{
+  margin-top: 5rpx;
+  font-size: 24rpx;
+  height: 38rpx;
+  line-height: 44rpx;
+  text-align: right;
+  color: #999;
+  padding-right: 36rpx;
+  position: relative;
+}
+.achlimg{
+  float: left;
+  width:70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+}
+.allcomname{
+  float: left;
+  height: 70rpx;
+  width:333rpx;
+  margin-left: 20rpx;
+}
+.allcomnametit{
+  height: 38rpx;
+  font-size: 28rpx;
+  color: #333;
+  padding-right: 30rpx;
+  position: relative;
+  display: inline-block;
+}
+.allcmmtitn{
+  position: absolute;
+  right: 0;
+  top:50%;
+  margin-top: -15rpx;
+  height: 30rpx;
+  width: 18rpx;
+}
+.loutime{
+  height: 26rpx;
+  font-size: 20rpx;
+  color: #999;
+}
+.allrigimgz{
+  height: 30rpx;
+  width: 30rpx;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  margin-top:-15rpx; 
+}
+.allcompinglun{
+  min-height: 60rpx;
+  font-size: 28rpx;
+  color: #666666;
+  padding-left: 90rpx;
+  padding-bottom: 20rpx;
+
+}
+.huifu{
+  background: #f4f5f9;
+  border:1rpx solid #999;
+  padding: 10rpx 20rpx;
+}
+.pinglun{
+  margin-top: 10rpx;
+}
+
+
+
+
+
+

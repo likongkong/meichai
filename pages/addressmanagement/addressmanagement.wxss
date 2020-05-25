@@ -1,0 +1,118 @@
+.multilineellipsis{
+    display: -webkit-box;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp:2;   
+}
+.box{
+  background: #f4f5f9;
+  width: 100%;
+}
+.addmhead{
+  height: 265rpx;
+  padding:0 20rpx 0;
+  margin-top:12rpx;
+  background: #fff;
+}
+.addmheadcon{
+  width: 100%;
+  height: 265rpx;
+  overflow: hidden;
+  margin-bottom: 12rpx;
+}
+.addmheatit{
+  height: 50rpx;
+  padding-top: 30rpx;
+  font-size: 32rpx;
+  color: #333;
+  font-weight: bold;
+}
+.addmheadname{
+   float: left;
+   padding-right: 30rpx;
+   
+}
+.addmheadphone{
+   float: left;
+}
+.addaddman{
+  height: 90rpx;
+  font-size: 30rpx;
+  line-height: 44rpx;
+  color: #999;
+}
+.addedit{
+  margin-top: 12rpx;
+  border-top: 1rpx solid #e5e5e5;
+  height: 80rpx;
+}
+.addedtposi{
+  position: relative;
+  line-height: 80rpx;
+  font-size: 22rpx;
+  color: #999;
+}
+.addedleft{
+  width: 166rpx;
+  height: 80rpx;
+  float: left;
+  padding-left: 50rpx;
+}
+.addeditimg{
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  top:50%;
+  left: 0;
+  margin-top:-20rpx;
+}
+.addedrighto{
+  float: right;
+  padding:0 30rpx 0 50rpx;
+}
+.addedrightt{
+  float: right;
+  padding:0 0 0 50rpx;
+}
+.addeditimgclick{
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  top:50%;
+  left: 0;
+  margin-top:-20rpx;
+  z-index: 9;  
+}
+.radio-group{
+  display: block;
+  padding-bottom: 12rpx;
+  overflow: hidden;
+  background: #f4f5f9;
+}
+.radipoi{
+  position: absolute;
+  width:216rpx;
+  height:80rpx;
+  left:0rpx;
+  top: 0;
+  z-index: 99;
+  opacity:0;
+}
+
+.addaddressmen{
+  height: 80rpx;
+  color: #ff2742;
+  text-align: center;
+  line-height: 80rpx;
+  border: 1rpx solid #ff2742;
+  width: 90%;
+  margin: 100rpx auto 30rpx;
+  border-radius: 5rpx;
+  font-size: 30rpx;
+  position: relative;
+}
+
+
+

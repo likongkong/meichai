@@ -1,0 +1,419 @@
+@import "../../../../common/tabbar.wxss";
+@import "../../../../pages/signin/signin.wxss";
+@import "../../../../pages/dismantlingbox/dismantlingbox.wxss";
+@import "../../pages/hotsearchvocabulary/hotsearchvocabulary.wxss";
+@import "../../../../pages/shoppingCart/shoppingCart.wxss";
+
+page {
+  background: #f4f5f9;
+  
+}
+
+.awamsimg {
+  width: 24rpx;
+  display: inline-block;
+  height: 44rpx;
+  border-radius: 5rpx;
+  vertical-align: middle;
+}
+
+.mIndheadinp {
+  width: 77%;
+  padding-left: 3%;
+  height: 60rpx;
+  background: #fff;
+  border-radius: 10rpx;
+  float: left;
+  font-size: 26rpx;
+}
+
+.awabox {
+  width: 100%;
+  padding-bottom: 180rpx;
+}
+
+.awabhead {
+  width: 100%;
+  height: 100rpx;
+  background: #fcefd7;
+  line-height: 100rpx;
+  text-align: center;
+}
+
+.awabtab {
+  width: 100%;
+  height: 100rpx;
+}
+
+.awabhtxt {
+  display: inline-block;
+  width: 44rpx;
+  height: 44rpx;
+  line-height: 44rpx;
+  color: #fff;
+  font-size: 24rpx;
+  background: #3f3c36;
+  text-align: center;
+  border-radius: 5rpx;
+  vertical-align: middle;
+}
+
+.awabhtxtico {
+  display: inline-block;
+  height: 44rpx;
+  line-height: 44rpx;
+  color: #000;
+  font-size: 24rpx;
+  padding: 0 8rpx;
+  border-radius: 5rpx;
+  vertical-align: middle;
+}
+
+.awarpositxt {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: 22rpx;
+  color: #fff;
+  padding: 3rpx 6rpx;
+  background: #e43d40;
+  border-radius: 5rpx;
+}
+
+.awaarrow {
+  width: 0;
+  height: 0;
+  margin-right: 10rpx;
+  border-width: 15rpx;
+  border-style: solid;
+  border-color: transparent transparent #000 transparent;
+  position: absolute;
+  top: -24rpx;
+  left: 27rpx;
+}
+
+.awatipsclasif {
+  width: 230rpx;
+  height: 46rpx;
+  position: absolute;
+  top: 83rpx;
+  left: 136rpx;
+  z-index: 9;
+}
+
+.awatipstxtci {
+  width: 100%;
+  height: 46rpx;
+  line-height: 46rpx;
+  text-align: center;
+  background: #000;
+  font-size: 24rpx;
+  color: #fff;
+  border-radius: 10rpx;
+}
+
+.awaRecommend {
+  width: 100%;
+  height: 221rpx;
+  background: #fff;
+  margin-top: 10rpx;
+  padding: 16rpx 0 0;
+}
+
+.awaRecLeft {
+  width: 170rpx;
+  height: 100%;
+  float: left;
+}
+
+.awaRecConter {
+  width: 486rpx;
+  height: 100%;
+  float: left;
+}
+
+.awaRecRight {
+  width: 90rpx;
+  height: 100%;
+  position: relative;
+  float: right;
+}
+
+.awaRecImgBox {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  position: absolute;
+  top: 50rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  background: #f4e0bb;
+}
+
+.awaRecRImg {
+  width: 60rpx;
+  height: 60rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.awaRLUserb {
+  width: 100%;
+  height: 70rpx;
+  margin: 30rpx 0 10rpx;
+  position: relative;
+}
+
+.awaRlUImg {
+  width: 68rpx;
+  height: 68rpx;
+  position: absolute;
+  top: 0;
+  border-radius: 50%;
+}
+
+.awaRlNme {
+  width: 100%;
+}
+
+.awaLPrice {
+  width: 100%;
+  height: 40rpx;
+  margin-top: 13rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: #ff2742;
+}
+
+.awaScrshop {
+  height: 100%;
+  width: 140rpx;
+  margin-right: 30rpx;
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+}
+
+.awaScrShopBox {
+  width: 100%;
+  height: 140rpx;
+  position: relative;
+}
+
+.awaScrShopImg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 6rpx;
+}
+
+.awaRecAddr {
+  width: 30rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  font-size: 40rpx;
+  color: #ff2742;
+  position: absolute;
+  right: -30rpx;
+  top: 68rpx;
+  text-align: center;
+  font-weight: bold;
+}
+
+.awaScImgTxt {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: #ff2742;
+  color: #fff;
+  font-size: 24rpx;
+  padding: 5rpx 10rpx;
+  border-radius: 6rpx;
+}
+
+.cartImg {
+  width: 90rpx;
+  height: 90rpx;
+  background: #e3e3e3;
+}
+
+.waitforaward {
+  width: 90rpx;
+  height: 25rpx;
+  line-height: 25rpx;
+  background: #f19002;
+  opacity: 0.8;
+  color: #fff;
+  position: absolute;
+  bottom: 0rpx;
+  left: 0rpx;
+  font-size: 20rpx;
+  text-align: center;
+}
+
+.cartGoodsname {
+  padding-top: 20rpx;
+  width: 510rpx;
+  height: 80rpx;
+  line-height: 40rpx;
+}
+
+.money {
+  margin-top: 10rpx;
+  height: 30rpx;
+  color: #ee1951;
+  float: left;
+}
+
+.tripList_rootawa {
+  top: 0;
+  width: 100%;
+  height: 80%;
+  overflow: hidden;
+  position: fixed;
+  left: 0;
+  z-index: 0;
+}
+.bottomdetail{
+  width: 100%;
+  height: 70%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 16;
+  background: #fff;
+  overflow:scroll;
+}
+.crowrighgbottredshop{
+  width: 300rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  color: #fff;
+  font-size: 30rpx;
+  background: #fb595f;
+  border-radius: 6rpx;
+  position: absolute;
+  bottom: 30rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.templateimg image{display:block;width:100% !important;}
+.awabottomclose{
+  position: absolute;
+  right: 20rpx;
+  top: 20rpx;
+  z-index: 3;
+  width: 60rpx;
+  height: 60rpx;
+}
+.awatipbox{
+  width: 600rpx;
+  height: 290rpx;
+  background: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border-radius: 10rpx;
+}
+.awatiphead{
+  width: 100%;
+  padding: 30rpx 0 20rpx 0;
+  font-size: 32rpx;
+  text-align: center;
+}
+.awatiptext{
+  width: 100%;
+  text-align: center;
+  font-size: 28rpx;
+  color: #ff2742;
+  display: block;
+  line-height: 40rpx;
+}
+.awatipbottom{
+  width: 100%;
+  height: 80rpx;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  border-top: 2rpx solid #ccc;
+}
+.awatipboteve{
+  width: 100%;
+  height: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+  font-size: 30rpx;
+  color: #ff2742;
+}
+.awatipbotleft{
+  width: 49%;
+  float: left;
+  height: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+  font-size: 22rpx;
+  color: #bdbdbd; 
+  border-right: 2rpx solid #ccc; 
+}
+.awatipbotright{
+  width: 49%;
+  float: right;
+  height: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+  font-size: 30rpx;
+  color: #ff2742;
+}
+.awasustip{
+  width: 345rpx;
+  height:170rpx;
+  position: absolute;
+  top: -190rpx;
+  left: -80rpx; 
+}
+.awasustipbg{
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.5;
+  border-radius: 20rpx;
+  position: relative;
+}
+.awasustiptxt{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+
+.awasusawaarrow {
+  width: 0;
+  height: 0;
+  margin-right: 10rpx;
+  border-width: 15rpx;
+  border-style: solid;
+  border-color:#000 transparent transparent transparent;
+  position: absolute;
+  bottom: -26rpx;
+  left: 80rpx;
+}
+
+
+
+
+
+
+

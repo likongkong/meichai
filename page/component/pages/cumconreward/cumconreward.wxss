@@ -1,0 +1,96 @@
+@import "../../pages/dlfind/dlfind.wxss";
+@import "../../../../common/tabbar.wxss";
+@import "../../../../pages/signin/signin.wxss";
+@import "../../pages/awardwinningarea/awardwinningarea.wxss"; 
+@import "../../pages/rotaryrecord/rotaryrecord.wxss";
+
+
+page{
+  background: #ffffff;
+}
+
+.cumcontab{
+  width: 33%;
+  display:inline-block;
+  text-align:center;
+  line-height:90rpx;
+  position:relative;
+  font-size:30rpx;
+  color:#363536;
+  height: 90rpx;
+  
+}
+
+.cumconcontent{
+  overflow: hidden;
+  padding: 0 25rpx;
+}
+.cumconceve{
+  width:216rpx;
+  height: 340rpx;
+  float: left;
+  margin:0 20rpx 20rpx 0;
+  background: #fff;
+  border: 2rpx solid #a5a5a4; 
+  border-radius: 10rpx;
+}
+.cumcomcimg{
+  width:100%;
+  height: 220rpx;
+  position: relative;
+}
+.cumconci{
+  width: 180rpx;
+  height: 180rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+.cumcontxt{
+  width:90%;
+  height: 50rpx;
+  position: relative;
+  margin:0 auto;
+}
+.cumconprice{
+  height: 50rpx;
+  line-height: 50rpx;
+  color: #ff7b7c;
+  float: left;
+  font-size:24rpx; 
+}
+.cumconreceive{
+  border-radius: 20rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+  color: #fff;
+  font-size: 22rpx;
+  background: #ff9900;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 3rpx;
+  margin: auto 0;
+  padding: 0 12rpx; 
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*  提示框  */
+.comtip{width: 100%;height: 100%;position: fixed;top: 0;left: 0;z-index: 199999;}
+
+.comtipback{width: 100%;height: 100%;background: #000;opacity: 0.4;}
+

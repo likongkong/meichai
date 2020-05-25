@@ -1,0 +1,12 @@
+    <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+    <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class='tgaboxtwo' catchtap='clicktga'>
+    <view class='tgaboxtbg'></view>
+    <view class='tgaboxclick'>
+    <image mode='aspectFit' src='https://www.51chaidan.com/images/default/openscreen.jpg?log={{appNowTime}}' class='tgaboxclickbgImg'></image>
+          
+    </view>
+    <button class='tgaboxtgawchbochlibutboxtwo' open-type="getUserInfo" type='primary' bindgetuserinfo="userInfoHandler"></button>
+
+</view>

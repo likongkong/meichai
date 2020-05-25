@@ -1,0 +1,43 @@
+
+    <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+    <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class='box'>
+
+    <view class='boxch'>
+          <view class='allcom' wx:for='{{allcomlist}}' wx:key='key' data-cid='{{item.cid}}' data-uid='{{item.uid}}'>
+               <view class='allcomhead'>
+                     <view class='allcomhleft'>
+                          <image class='achlimg' src='{{item.headphoto}}'></image>
+                          <view class='allcomname'>
+                              <view class='allcomnametit specialellipsis'>
+                                 {{item.nick}}
+                                 <image wx:if='{{item.gender==0}}' class='allcmmtitn' src='../images/allcom_wman.png'></image>
+                                 <image wx:if='{{item.gender==1}}' class='allcmmtitn' src='../images/allcom_man.png'></image>
+                              </view>
+                              <view class='loutime'>{{item.rank}}楼  {{item.time}}</view>
+                          </view>
+                     </view>
+                     <view class='allcomhright'>
+                          <view class='allcomripoi'>
+                               {{item.praise}}
+                               <image wx:if='{{item.praised==0}}' class='allrigimgz' src='../images/zzzzz.png' bindtap='commentary' data-cid='{{item.cid}}' data-ind='{{index}}'></image> 
+                               <image wx:if='{{item.praised==1}}' class='allrigimgz' src='../images/pressed_good.png' bindtap='cancelcommentary' data-cid='{{item.cid}}' data-ind='{{index}}'></image>
+                          </view>
+                     </view>                     
+               </view>
+               <view class='allcompinglun'>
+                   <view class='huifu' wx:if='{{item.conhif==1}}'>
+                        {{item.conh}}
+                   </view>
+                   <view class='pinglun'>
+                         {{item.content}}           
+                   </view>
+               </view>
+          </view>
+    </view>
+
+
+
+
+</view>

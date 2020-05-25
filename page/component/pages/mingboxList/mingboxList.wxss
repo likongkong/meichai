@@ -1,0 +1,14 @@
+/* page/component/pages/mingboxList/mingboxList.wxss */
+@import "../../../../pages/signin/signin.wxss";
+@import "../../../../common/tabbar.wxss";
+
+page{
+  background:#f5f6fa;
+}
+
+/*   单行  */
+.specialellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

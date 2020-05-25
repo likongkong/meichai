@@ -1,0 +1,7 @@
+{
+  "asdfasfdflePullDownRefresh": true,
+  "navigationBarTitleText": "拆币记录",
+  "usingComponents": {
+    "t_f": "../../../../pages/topfunction/topfunction"
+  }
+}

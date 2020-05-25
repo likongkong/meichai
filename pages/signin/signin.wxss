@@ -1,0 +1,202 @@
+/*  授权  */
+.tgabox{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;  
+  background: #fff;
+  z-index: 9999999999999999999;
+}
+.tgaboxtgawchbochlibutbox{
+  width: 45%;
+  height: 100rpx;
+  position: absolute;
+  font-size: 36rpx;
+  left: 0;
+  right: 0;
+  line-height: 100rpx;
+  bottom: 300rpx;
+  margin: auto;
+}
+.tgaboxtgawchbochlibutboxtwo{
+  width: 100%;
+  height: 100%;
+  position: absolute; 
+  top: 0;
+  left: 0;
+  z-index: 19;
+  opacity: 0;
+}
+.tgaboximages2{
+  display: block;
+  width: 300rpx;
+  height: 300rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 200rpx;
+  margin: auto;
+}
+.tgaboxtwo{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;  
+  z-index: 9999999999999999999;  
+}
+.tgaboxtbg{
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity:0.7;
+}
+.tgaboxcon{
+  width: 600rpx;
+  height: 550rpx;
+  background: #fff;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border-radius: 16rpx;
+  border:1rpx solid #ccc;
+}
+.tgabthead{
+  width: 100%;
+  height: 90rpx;
+  line-height: 90rpx;
+  border-bottom: 1rpx solid #d4d2d5;
+  font-size: 33rpx;
+  color: #000;
+  font-weight: bold;
+  text-align: center;
+}
+.tgabtcimg{
+  display: block;
+  width: 80rpx;
+  height: 80rpx;
+  margin: 40rpx auto 10rpx;
+  border-radius: 50%;
+}
+.tgabttxth{
+  padding:0 50rpx;
+}
+.tgabttcont{
+  width: 100%;
+  height: 90rpx;
+  line-height: 90rpx;
+  color: #000;
+  font-size: 30rpx;
+  border-bottom: 1rpx solid #d4d2d5;
+  font-weight: bold;
+}
+.tgabttcontnt{
+  width: 100%;
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 28rpx;
+  color: #99979a;
+}
+.tgabtbout{
+  width: 100%;
+  height: 90rpx;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  border-top: 1rpx solid #d4d2d5;
+  text-align: center;
+  line-height: 90rpx;
+  color: #20b923;
+  font-size: 32rpx;
+}
+.tgabandhead{
+  padding: 60rpx 50rpx 20rpx;
+  font-size: 33rpx;
+  color: #000;
+  font-weight: bold;
+}
+.tgabandcon{
+  padding: 16rpx 50rpx 0;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 30rpx;
+  color: #000;  
+}
+.tgabandimg{
+  display: inline-block;
+  width: 80rpx;
+  height: 80rpx;
+  margin: 0 20rpx 0 0;
+  border-radius: 50%;
+  vertical-align: top;
+}
+.tgabandtbox{
+  padding: 40rpx 50rpx 0;   
+}
+.tgabandtxtn{
+  width: 100%;
+  border-top: 1rpx solid #d4d2d5;
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 28rpx;
+  color: #99979a;
+}
+.tgabtboutand{
+  /* width: 90%; */
+  height: 120rpx;
+  position: absolute;
+  right: 50rpx;
+  bottom: 0;
+  text-align: right;
+  line-height: 120rpx;
+  color: #20b923;
+  font-size: 32rpx;  
+}
+.tgaboxclick{
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width:560rpx;
+  height:898rpx;
+}
+.tgaboxclickbgImg{
+  display: block;
+  width: 560rpx;
+  height: 800rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.tgauthbutbox{
+  width:100%;
+  height: 70rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+  z-index: 1;
+}
+.tgauthbutboxleft{
+  height: 100%;
+  width: 190rpx;
+  float: left;
+}
+.tgauthbutboxright{
+  height: 100%;
+  width: 370rpx;
+  float: right;
+  position: relative;
+}
+
+
+
+
+

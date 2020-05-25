@@ -1,0 +1,8 @@
+{
+  "asdfasfdflePullDownRefresh": true,
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "所有评论",
+  "usingComponents": {
+    "t_f": "../topfunction/topfunction"
+  }
+}

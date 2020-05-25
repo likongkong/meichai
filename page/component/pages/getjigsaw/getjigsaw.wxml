@@ -1,0 +1,409 @@
+<!--pages/getjigsaw/getjigsaw.wxml-->
+<hidewindow id='hide'></hidewindow>
+
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view style='position:relative;padding-top:40rpx;'>
+  <image style='width:100rpx;height:100rpx;border-radius:50%;position:absolute;top:0;left:0;right:0;margin:0 auto;' src='{{jigsawinfo.litpic}}'></image>
+  <view style='width:94%;background:#fff;margin:0 3% 0 3%;border-radius:10rpx;padding-top:60rpx;'>
+
+    <view class='alignclass' style='margin-top:20rpx;color:#ff6968;'>{{jigsawinfo.nick}}</view>
+
+    <view class='multilineellipsis' style='margin:20rpx {{imageWidth*0.07}}px;font-size:30rpx;'>
+      <text wx:if='{{jigsawinfo.label!=""}}'>{{jigsawinfo.label}} | </text> {{jigsawinfo.goods_name}}
+    </view>
+
+    <view style='width:{{imageWidth*0.8}}px;position:relative;margin:0 {{imageWidth*0.07}}px;overflow:hidden;'>
+      <image wx:if='{{jigsawinfo.is_configure!=1}}' style='width:100%;height:{{imageWidth*0.8}}px;' src='{{jigsawinfo.goods_cover}}'></image>
+
+      <view wx:if='{{jigsawinfo.is_configure!=1}}' id='jigsaw' style='display:flex;flex-direction:row;flex-flow:row wrap;width:100%;height:{{imageWidth*0.8}}px;position:absolute;top:0;left:0;z-index:2;'>
+        <view wx:for='{{defaultList}}' wx:key='key' style='width:{{viewWidth}}px;height:{{viewWidth}}px;opacity:0.2;{{item==0?"":"background-color:#000;"}}border:1px solid #999999;box-sizing:border-box;{{index%row==0?"":"border-left:none;"}}{{index/row<1?"":"border-top:none;"}}'>
+          <view wx:if='{{item==2}}' style='width:100%;height:100%;background:#ff6968'></view>
+        </view>
+      </view>
+
+      <image wx:if='{{jigsawinfo.is_configure==1}}' style='width:100%;height:{{imageWidth*0.8/jigsawinfo.jigsaw_length * jigsawinfo.jigsaw_width}}px;' src='{{jigsawinfo.goods_cover}}'></image>
+
+      <view wx:if='{{jigsawinfo.is_configure==1}}' id='jigsaw' style='display:flex;flex-direction:row;flex-flow:row wrap;width:100%;height:{{imageWidth*0.8/jigsawinfo.jigsaw_length * jigsawinfo.jigsaw_width}}px;position:absolute;top:0;left:0;z-index:2;'>
+        <view wx:for='{{defaultList}}' wx:key='key' style='width:{{viewWidth}}px;height:{{viewWidth}}px;opacity:0.2;{{item==0?"":"background-color:#000;"}}border:1px solid #999999;box-sizing:border-box;{{index%row==0?"":"border-left:none;"}}{{index/row<1?"":"border-top:none;"}}'>
+          <view wx:if='{{item==2}}' style='width:100%;height:100%;background:#ff6968'></view>
+        </view>
+      </view>
+    </view>
+
+    <view style='margin:30rpx {{imageWidth*0.07}}px 0 {{imageWidth*0.07}}px;font-size:30rpx;overflow:hidden;'>
+      <view style='float:left;margin-left:10rpx;'>拼图进度：</view>
+      <view style='width:{{imageWidth*0.4}}px;height:20rpx;border:1px solid #ff6968;border-radius:10rpx;float:left;margin-top:10rpx;overflow:hidden;'>
+        <view wx:if='{{jigsawinfo.have>jigsawinfo.quick_num}}' style='width:{{imageWidth*0.4/jigsawinfo.quick_num*jigsawinfo.quick_num-2}}px;height:16rpx;margin:3rpx;background:linear-gradient(to right,#FEED8C,#FB9778,#F53D64);border-radius:8rpx;'>
+        </view>
+        <view wx:if='{{jigsawinfo.have<=jigsawinfo.quick_num}}' style='width:{{imageWidth*0.4/jigsawinfo.quick_num*(jigsawinfo.have<=2?jigsawinfo.have:jigsawinfo.have-2)}}px;height:16rpx;margin:3rpx;background:linear-gradient(to right,#FEED8C,#FB9778,#F53D64);border-radius:8rpx;'>
+        </view>
+      </view>
+      <view style='float:left;margin-left:10rpx;color:#ff6968;font-size:28rpx;'>{{jigsawinfo.have}}
+        <text style='color:#999999'>/{{jigsawinfo.quick_num}}</text>
+      </view>
+    </view>
+    <!-- wx:if='{{ishowclock}}' -->
+    <view wx:if='{{ishowclock}}' class='alignclass' style='margin-top:10rpx;color:#999;font-size:30rpx;'>距离结束：{{clock}}</view>
+
+    <view style='margin:20rpx {{imageWidth*0.07}}px;overflow:hidden;'>
+
+      <view style='width:60rpx;height:60rpx;margin-left:40rpx;float:left;position:relative;' catchtap='gojigsaw'>
+
+          <image style='width:60rpx;height:60rpx;float:left;position:relative;' src='../images/back_home.png'>
+           
+          </image>
+      </view>
+
+      <view style='margin-left:30rpx;float:left;position:relative'>
+        <image style='width:374rpx;height:60rpx;' src='../images/jigsaw_bg.png'></image>
+
+        <view wx:if='{{jigsawinfo.oneself==0&&jigsawinfo.status==-1}}' class='alignclass' style='width:374rpx;height:60rpx;color:white;font-size:30rpx;position:absolute;top:0;left:0;' catchtap='gojigsaw'>
+         
+            <view style='font-size:30rpx;color:white;'>我也要拼图</view>
+       
+        </view>
+
+        <view wx:if='{{jigsawinfo.oneself==0&&jigsawinfo.status==1}}' class='alignclass' style='width:374rpx;height:60rpx;color:white;font-size:30rpx;position:absolute;top:0;left:0;' catchtap='givejigsaw'>
+          
+            <view style='font-size:30rpx;color:white;'>赠送拼图碎片</view>
+        </view>
+
+        <view wx:if='{{jigsawinfo.oneself==0&&jigsawinfo.status==2}}' class='alignclass' style='width:374rpx;height:60rpx;color:white;font-size:30rpx;position:absolute;top:0;left:0;' catchtap='gojigsaw'>
+            <view style='font-size:30rpx;color:white;'>我也要拼图</view>
+        </view>
+
+        <view wx:if='{{jigsawinfo.oneself==1&&jigsawinfo.status==2}}' class='alignclass' style='width:374rpx;height:60rpx;color:white;font-size:30rpx;position:absolute;top:0;left:0;' data-order_sn='{{jigsawinfo.order_sn}}' catchtap='gojigsawDetail'>
+            <view style='font-size:30rpx;color:white;'>查看详情</view>
+        </view>
+
+        <view wx:if='{{jigsawinfo.status==3}}' class='alignclass' style='width:374rpx;height:60rpx;color:white;font-size:30rpx;position:absolute;top:0;left:0;' catchtap='gojigsaw'>
+            <view style='font-size:30rpx;color:white;'>我也要拼图</view>
+        </view>
+
+        <view wx:if='{{jigsawinfo.status==4}}' class='alignclass' style='width:374rpx;height:60rpx;color:white;font-size:30rpx;position:absolute;top:0;left:0;' catchtap='gojigsaw'>
+            <view style='font-size:30rpx;color:white;'>我也要拼图</view>
+        </view>
+
+        <view wx:if='{{jigsawinfo.status==5}}' class='alignclass' style='width:374rpx;height:60rpx;color:white;font-size:30rpx;position:absolute;top:0;left:0;' catchtap='gojigsaw'>
+            <view style='font-size:30rpx;color:white;'>我也要拼图</view>
+        </view>
+
+        <view wx:if='{{jigsawinfo.status==6}}' class='alignclass' style='width:374rpx;height:60rpx;color:white;font-size:30rpx;position:absolute;top:0;left:0;' catchtap='gojigsaw'>
+            <view style='font-size:30rpx;color:white;'>我也要拼图</view>
+        </view>
+
+        <view wx:if='{{jigsawinfo.oneself==1&&jigsawinfo.status==1}}' class='alignclass' style='width:374rpx;height:60rpx;color:white;font-size:30rpx;position:absolute;top:0;left:0;' catchtap='createImg'>
+            <view style='font-size:30rpx;color:white;'>邀请好友助力</view>
+        </view>
+
+      </view>
+    </view>
+
+    <view wx:if='{{jigsawinfo.oneself==0&&jigsawinfo.status==-1}}' class='alignclass' style='font-size:25rpx;margin-top:20rpx;color:#999;'>
+      <text wx:if='{{help_num==0}}'>拼图已助攻 </text>
+      <text wx:if='{{help_num>0}}'> 拼图已助攻{{help_num}}块</text>
+    </view>
+
+    <view wx:if='{{jigsawinfo.oneself==0&&jigsawinfo.status==1}}' class='alignclass' style='font-size:25rpx;margin-top:20rpx;color:#000;position:relative;' catchtap='gojigsaw'>
+        <view style='font-size:25rpx;color:#000;'>我也要拼图>></view>
+    </view>
+
+    <view wx:if='{{jigsawinfo.status==2}}' class='alignclass' style='font-size:25rpx;margin-top:20rpx;color:#999;'>拼图已完成</view>
+
+    <view wx:if='{{jigsawinfo.oneself==0&&jigsawinfo.status==3}}' class='alignclass' style='font-size:25rpx;margin-top:20rpx;color:#999;'>拼图已完成</view>
+    <view wx:if='{{jigsawinfo.oneself==1&&jigsawinfo.status==3}}' class='alignclass' style='font-size:25rpx;margin-top:20rpx;color:#999;'>拼图待发货</view>
+    <view wx:if='{{jigsawinfo.oneself==0&&jigsawinfo.status==4}}' class='alignclass' style='font-size:25rpx;margin-top:20rpx;color:#999;'>拼图已结束</view>
+    <view wx:if='{{jigsawinfo.oneself==1&&jigsawinfo.status==4}}' class='alignclass' style='font-size:25rpx;margin-top:20rpx;color:#999;'>拼图已过期</view>
+    <view wx:if='{{jigsawinfo.oneself==0&&jigsawinfo.status==5}}' class='alignclass' style='font-size:25rpx;margin-top:20rpx;color:#999;'>拼图已完成</view>
+    <view wx:if='{{jigsawinfo.oneself==1&&jigsawinfo.status==5}}' class='alignclass' style='font-size:25rpx;margin-top:20rpx;color:#999;'>拼图待收货</view>
+    <view wx:if='{{jigsawinfo.status==6}}' class='alignclass' style='font-size:25rpx;margin-top:20rpx;color:#999;'>拼图已完成</view>
+
+    <view style='height:20rpx;'>
+    </view>
+
+  </view>
+</view>
+
+<view wx:if='{{jigsawinfo.help_friends!=""}}' style='width:94%;background:#fff;margin:{{imageWidth*0.03}}px 3% 0 3%;border-radius:10rpx;font-size:30rpx;overflow:hidden;'>
+
+  <view style='margin:20rpx;overflow:hidden;'>
+    <view style='width:2rpx;height:30rpx;background:#ff6968;float:left;margin:8rpx;'></view>
+    <view style='float:left;margin:0 10rpx;'> 助力好友
+      <text style='color:#999;font-size:25rpx;'> (已有{{jigsawinfo.help_friends.length}}人助力)</text>
+    </view>
+  </view>
+
+  <view style='overflow:hidden;'>
+    <view wx:for='{{help_list}}' wx:key='key' style='width:55rpx;height:70rpx;float:left;margin:10rpx;position:relative;margin-left:20rpx;' data-list='{{item.gather}}' data-uid='{{item.uid}}' catchtap='helpheadclick'>
+      <image style='width:55rpx;height:55rpx;border-radius:50%;' src='{{item.litpic}}'></image>
+      <view class='alignclass' style='color:white;background:#ff6968;border-radius:10rpx;font-size:20rpx;position:absolute;top:40rpx;left:0;right:0;margin:0 auto;'>+{{item.number}}</view>
+    </view>
+  </view>
+
+</view>
+
+<view style='width:94%;background:#fff;margin:{{imageWidth*0.03}}px 3%;border-radius:10rpx;font-size:30rpx;overflow:hidden;'>
+  <view style='margin:20rpx;overflow:hidden;'>
+    <view style='width:2rpx;height:30rpx;background:#ff6968;float:left;margin:8rpx;'></view>
+    <view style='float:left;margin:0 10rpx;'> 为你推荐</view>
+  </view>
+
+  <view wx:if='{{recommend_list.length>0}}' style='width:100%;font-size:30rpx;'>
+    <block wx:for='{{recommend_list}}' wx:key='key'>
+      <view style='width:47%;margin:0.9%;float:left;border-radius:10rpx;position:relative;border:1px solid #ff6968;padding:2rpx;' data-id='{{item.goods_id}}' catchtap='jumpDetail' data-meichai_jigsaw='{{item.meichai_jigsaw}}'>
+
+          <view style='font-size:30rpx;line-height:40rpx;'>
+            <image style='width:100%;height:{{imageWidth*0.45}}px;border-radius:10rpx 10rpx 0 0;position:relative;' src='{{item.goods_cover}}'>
+              <view wx:if='{{item.meichai_jigsaw==0}}' style='width:100%;height:60rpx;position:absolute;bottom:0rpx;left:0;background:#434343;opacity:0.7;'>
+                <view style='width:220rpx;position:absolute;top:0;left:0;right:0;margin:0 auto;'>
+                  <image style='width:40rpx;height:40rpx;float:left;margin:10rpx;' src='../images/gift_logo.jpg'></image>
+                  <view style='line-height:27rpx;font-size:27rpx;color:white;float:left;margin-top:16rpx;'>拆礼物专属</view>
+                </view>
+              </view>
+            </image>
+
+            <view style='height:100rpx;'>
+              <view class='multilineellipsis' style='margin:10rpx;'>
+                <text wx:if='{{item.label!=""}}' style='color:#ff6968;'>{{item.label}}  | </text> {{item.goods_name}}
+              </view>
+            </view>
+            <view style='margin:10rpx;overflow:hidden;'>
+              <view style='background:#ff6968;float:left;border-radius:5rpx;'>
+                <image style='width:30rpx;height:30rpx;float:left;margin:7rpx 0rpx 0 10rpx;' src='../images/Jigsawtwo.png'></image>
+                <text style='color:#fff;font-size:20rpx;margin:11rpx;'>+{{item.quick_num}}</text>
+              </view>
+              <text wx:if='{{item.spelling_price!=0}}' style='color:#FF9900;float:left;margin:8rpx 0 0 10rpx;font-size:25rpx;'>+￥{{item.spelling_price}}<text wx:if='{{item.unit!=""}}'>/{{item.unit}}</text>
+              </text>
+              <text wx:if='{{item.spelling_price==0}}' style='color:#FF9900;float:left;margin:8rpx 0 0 10rpx;font-size:25rpx;'>免费</text>
+            </view>
+          </view>
+
+      </view>
+    </block>
+  </view>
+</view>
+
+<view wx:if='{{ishowcreate}}' style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:5;'>
+  <view class='bgstyle' bindtap='dialogClick' catchtouchmove="myCatchTouch"></view>
+
+  <view wx:if='{{jigsawinfo.is_configure!=1}}' style='width:{{imageWidth*0.8}}px;height:{{imageWidth*1.3}}px;opacity:1;position:absolute;top:0rpx;bottom:0;left:{{imageWidth*0.1}}px;margin:auto 0;' catchtouchmove="myCatchTouch">
+    <image style='width:{{imageWidth*0.8}}px;height:{{imageWidth*1.1}}px;' src='{{createimage}}'></image>
+    <view class='alignclass' style='width:{{imageWidth*0.5}}px;height:70rpx;background:#FD676A;color:#fff;border-radius:10rpx;float:left;margin:10rpx {{imageWidth*0.15}}px;font-size:30rpx;' catchtap='savefun'>保存图片</view>
+  </view>
+  <view wx:if='{{jigsawinfo.is_configure==1}}' style='width:{{imageWidth*0.8}}px;height:{{imageWidth*1}}px;opacity:1;position:absolute;top:0rpx;bottom:0;left:{{imageWidth*0.1}}px;margin:auto 0;' catchtouchmove="myCatchTouch">
+    <image style='width:{{imageWidth*0.8}}px;height:{{imageWidth*0.75}}px;' src='{{createimage}}'></image>
+    <view class='alignclass' style='width:{{imageWidth*0.5}}px;height:70rpx;background:#FD676A;color:#fff;border-radius:10rpx;float:left;margin:10rpx {{imageWidth*0.15}}px;font-size:30rpx;' catchtap='savefun'>保存图片</view>
+  </view>
+</view>
+
+<view wx:if='{{ishowsendtwo}}' style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:5;font-size:30rpx;'>
+  <view class='bgstyle' bindtap='dialogClick' catchtouchmove="myCatchTouch"></view>
+
+  <view wx:if='{{dialoginfo.is_configure == 1}}' style='width:{{imageWidth*0.8}}px;height:880rpx;opacity:1;position:absolute;top:0rpx;bottom:0;left:{{imageWidth*0.1}}px;margin:auto 0;'>
+    <image style='width:100rpx;height:100rpx;border-radius:50%;position:absolute;top:0;left:0;right:0;margin:0 auto;' src='{{dialoginfo.user_head}}'></image>
+
+    <view style='width:100%;height:730rpx;background:#F0EFF5;border-radius:10rpx;margin-top:50rpx;overflow:hidden;'>
+
+      <view wx:if='{{ishowsendone}}' style='width:100%;margin-top:60rpx;overflow:hidden;'>
+
+        <image style='width:15rpx;height:30rpx;float:left;margin:20rpx 0 0 30rpx;' src='../images/left_arrow.png'></image>
+
+        <view style='width:500rpx;height:70rpx;float:left;background:white;border-radius:10rpx;'>
+          <view wx:if='{{dialoginfo.is_buck!=1}}' style='margin:10rpx 0 0 20rpx;'>
+            谢谢您送我拼图{{dialoginfo.help_num}}片
+          </view>
+          <view wx:if='{{dialoginfo.is_buck==1}}' style='margin:10rpx 0 0 20rpx;'>
+            助攻的老朋友过多。您助攻了0片
+          </view>
+        </view>
+
+      </view>
+
+      <view wx:if='{{!ishowsendone}}' style='width:100%;height:80rpx;'></view>
+
+      <view style='width:100%;margin-top:20rpx;20rpx;overflow:hidden;'>
+
+        <image style='width:15rpx;height:30rpx;float:left;margin:20rpx 0 0 30rpx;' src='../images/left_arrow.png'></image>
+
+        <view style='width:500rpx;float:left;background:white;border-radius:10rpx;'>
+          <view wx:if='{{dialoginfo.is_jigsaw != 1}}' style='margin:10rpx 0 0 20rpx;'>
+            我也送你一份拼图，作为答谢吧！
+          </view>
+          <view wx:if='{{dialoginfo.is_jigsaw == 1}}' style='margin:10rpx 0 0 20rpx;'>
+            谢谢你为我助攻
+          </view>
+          <view class='multilineellipsis' style='height:80rpx;line-height:40rpx;margin:10rpx 0 0 20rpx;'>
+            {{dialoginfo.goods_name}}
+          </view>
+
+          <image style='width:460rpx;height:245rpx;margin:10rpx 20rpx;' src='{{dialoginfo.goods_cover}}'></image>
+
+          <view wx:if='{{dialoginfo.is_jigsaw != 1}}' class='disanum_sb_txt specialellipsis'>答谢：
+            <image src='https://www.51chaidan.com/images/default/spell.png' style='width:40rpx;height:40rpx;display:inline-block;vertical-align:top;position:relative;top:2rpx;'></image>×{{dialoginfo.acknowledge_num}}块
+          </view>
+          <view wx:if='{{dialoginfo.is_jigsaw == 1}}' class='disanum_sb_txt specialellipsis'>助攻：
+            <image src='https://www.51chaidan.com/images/default/spell.png' style='width:40rpx;height:40rpx;display:inline-block;vertical-align:top;position:relative;top:2rpx;'></image>×{{dialoginfo.help_num}}块
+          </view>
+
+        </view>
+
+      </view>
+
+      <view wx:if='{{dialoginfo.is_jigsaw == 0}}' style='width:300rpx;height:50rpx;text-align:center;line-height:50rpx;color:white;background:#ff6968;border-radius:10rpx;margin:20rpx 0 0 150rpx;position:relative;' catchtap='orderClick'>
+        
+          <view style='width:300rpx;height:50rpx;text-align:center;line-height:50rpx;color:white;'>
+            <image style='width:35rpx;height:35rpx;display:inline-block;vertical-align:top;position:relative;top:7rpx;' src='../../../../pages/images/cgoldcoin1.png'></image> ×{{dialoginfo.goldcoin}} 解锁拼图
+          </view>
+      </view>
+
+      <view wx:if='{{dialoginfo.is_jigsaw == 0}}' class='alignclass' style='color:#999;font-size:20rpx;margin-top:10rpx;'>可返回首页在“我的”，“我的拼图” 中查询</view>
+
+      <view wx:if='{{dialoginfo.is_jigsaw != 0}}' class='alignclass' style='width:300rpx;height:50rpx;color:white;background:#ff6968;border-radius:10rpx;margin:20rpx 0 0 150rpx;position:relative;' catchtap='golist'>
+        
+          <view style='font-size:30rpx;color:white;'>更多拼图</view>
+      </view>
+
+    </view>
+
+    <view style='width:50rpx;height:50rpx;margin-top:50rpx;position:absolute;bottom:0;left:0;right:0;margin:0 auto;' bindtap='dialogClick'>
+        <image style='width:50rpx;height:50rpx;display:block;'  src='../images/side_close.png'></image>
+    </view>
+
+  </view>
+
+  <view wx:if='{{dialoginfo.is_configure != 1}}' style='width:{{imageWidth*0.8}}px;height:1100rpx;opacity:1;position:absolute;top:0rpx;bottom:0;left:{{imageWidth*0.1}}px;margin:auto 0;'>
+
+    <image style='width:100rpx;height:100rpx;border-radius:50%;position:absolute;top:0;left:0;right:0;margin:0 auto;' src='{{dialoginfo.user_head}}'></image>
+
+    <view style='width:100%;height:950rpx;background:#F0EFF5;border-radius:10rpx;margin-top:50rpx;overflow:hidden;'>
+
+      <view wx:if='{{ishowsendone}}' style='width:100%;margin-top:60rpx;overflow:hidden;'>
+
+        <image style='width:15rpx;height:30rpx;float:left;margin:20rpx 0 0 30rpx;' src='../images/left_arrow.png'></image>
+
+        <view style='width:500rpx;height:70rpx;float:left;background:white;border-radius:10rpx;'>
+          <view wx:if='{{dialoginfo.is_buck!=1}}' style='margin:10rpx 0 0 20rpx;'>
+            谢谢您送我拼图{{dialoginfo.help_num}}片
+          </view>
+          <view wx:if='{{dialoginfo.is_buck==1}}' style='margin:10rpx 0 0 20rpx;'>
+            助攻的老朋友过多。您助攻了0片
+          </view>
+        </view>
+
+      </view>
+
+      <view wx:if='{{!ishowsendone}}' style='width:100%;height:80rpx;'></view>
+
+      <view style='width:100%;margin-top:20rpx;20rpx;overflow:hidden;'>
+
+        <image style='width:15rpx;height:30rpx;float:left;margin:20rpx 0 0 30rpx;' src='../images/left_arrow.png'></image>
+
+        <view style='width:500rpx;float:left;background:white;border-radius:10rpx;'>
+          <view wx:if='{{dialoginfo.is_jigsaw != 1}}' style='margin:10rpx 0 0 20rpx;'>
+            我也送你一份拼图，作为答谢吧！
+          </view>
+          <view wx:if='{{dialoginfo.is_jigsaw == 1}}' style='margin:10rpx 0 0 20rpx;'>
+            谢谢你为我助攻
+          </view>
+          <view class='multilineellipsis' style='height:80rpx;line-height:40rpx;margin:10rpx 0 0 20rpx;'>
+            {{dialoginfo.goods_name}}
+          </view>
+
+          <image style='width:460rpx;height:460rpx;margin:20rpx;' src='{{dialoginfo.goods_cover}}'></image>
+
+          <view wx:if='{{dialoginfo.is_jigsaw != 1}}' class='disanum_sb_txt specialellipsis'>答谢：
+            <image src='https://www.51chaidan.com/images/default/spell.png' style='width:40rpx;height:40rpx;display:inline-block;vertical-align:top;position:relative;top:2rpx;'></image>×{{dialoginfo.acknowledge_num}}块
+          </view>
+          <view wx:if='{{dialoginfo.is_jigsaw == 1}}' class='disanum_sb_txt specialellipsis'>助攻：
+            <image src='https://www.51chaidan.com/images/default/spell.png' style='width:40rpx;height:40rpx;display:inline-block;vertical-align:top;position:relative;top:2rpx;'></image>×{{dialoginfo.help_num}}块
+          </view>
+
+        </view>
+
+      </view>
+
+      <view wx:if='{{dialoginfo.is_jigsaw == 0}}' style='width:300rpx;height:50rpx;background:#ff6968;border-radius:10rpx;margin:20rpx 0 0 150rpx;position:relative;' catchtap='orderClick'>
+        
+          <view style='width:300rpx;height:50rpx;text-align:center;line-height:50rpx;color:white;'>
+            <image style='width:35rpx;height:35rpx;display:inline-block;vertical-align:top;position:relative;top:7rpx;' src='../../../../pages/images/cgoldcoin1.png'></image> ×{{dialoginfo.goldcoin}} 解锁拼图
+          </view>
+      </view>
+
+      <view wx:if='{{dialoginfo.is_jigsaw == 0}}' class='alignclass' style='color:#999;font-size:20rpx;margin-top:10rpx;'>可返回首页在“我的”，“我的拼图” 中查询</view>
+
+      <view wx:if='{{dialoginfo.is_jigsaw != 0}}' class='alignclass' style='width:300rpx;height:50rpx;color:white;background:#ff6968;border-radius:10rpx;margin:20rpx 0 0 150rpx;position:relative;' catchtap='golist'>
+       
+          <view style='font-size:30rpx;color:white;'>更多拼图</view> 
+      </view>
+
+    </view>
+
+        <view style='width:50rpx;height:50rpx;margin-top:50rpx;position:absolute;bottom:0;left:0;right:0;margin:0 auto;' bindtap='dialogClick'>
+        <image style='width:50rpx;height:50rpx;display:block;'  src='../images/side_close.png'></image>
+    </view>
+
+  </view>
+
+
+
+</view>
+
+<view wx:if='{{ishowhint}}' style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:5;'>
+  <view class='bgstyle' catchtouchmove="myCatchTouch"></view>
+
+  <view style='width:500rpx;height:400rpx;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;font-size:30rpx;'>
+    <view style='width:500rpx;height:300rpx;background:white;border-radius:10rpx;position:relative;'>
+      <view class='alignclass' style='width:100%;height:80rpx;'>温馨提示</view>
+      <view style='margin:10rpx;'> 领取该拼图后将扣除“{{dialoginfo.goldcoin}}拆币”，当前拆币不足。</view>
+      <view style='width:374rpx;position:absolute;left:0;right:0;bottom:20rpx;margin:0 auto;'>
+
+        <image style='width:374rpx;height:60rpx;' src='../images/jigsaw_bg.png'></image>
+
+        <view class='alignclass' style='width:374rpx;height:60rpx;color:#fff;font-size:30rpx;position:absolute;top:0;left:0;margin:0 auto;' catchtap='gosignin'>
+          
+            <view style='font-size:30rpx;color:white;'>获取拆币</view>
+        </view>
+      </view>
+
+    </view>
+    <image style='width:50rpx;height:50rpx;margin: 50rpx 0 0 225rpx;' src='../images/close.png' catchtap='dialogClick'> </image>
+  </view>
+</view>
+
+<!-- wx:if='{{ishowaffirm}}' -->
+<view wx:if='{{ishowaffirm}}' style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:5;'>
+  <view class='bgstyle' catchtap='dialogClick' catchtouchmove="myCatchTouch"></view>
+
+  <view style='height:270rpx;width:520rpx;background:#fff;position:absolute;left:0;top:0;right:0;bottom:0;margin:auto;border-radius:10rpx;'>
+    <view style='font-size:30rpx;margin:20rpx;line-height:60rpx;'>我在美拆参加拼图活动，快来帮我助力吧！</view>
+    <view style='width:100%;overflow:hidden;'>
+      <view style='width:200rpx;height:70rpx;background:#D9D9D9;border-radius:10rpx;font-size:30rpx;margin:0rpx 0 0 40rpx;float:left;' catchtap='refuse'>
+          <view class='alignclass' style='width:200rpx;height:70rpx;font-size:30rpx;color:#000;'>残忍拒绝</view>
+      </view>
+      <view style='width:200rpx;height:70rpx;background:#ff6968;border-radius:10rpx;font-size:30rpx;margin:0rpx 0 0 40rpx;float:left;' catchtap='help'>
+          <view class='alignclass' style='width:200rpx;height:70rpx;font-size:30rpx;color:#fff;position:relative;'>
+            <button style='width:200rpx;height:70rpx;position:absolute;top:0;right:0;opacity:0;'></button>
+            赠送拼图</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<loading hidden="{{headhidden}}" catchtouchmove="preventD">
+  加载中...
+</loading>
+
+<!--  授权弹框  -->
+<view class='tgaboxtwo' wx:if='{{tgabox}}' catchtap='clicktga'>
+    <view class='tgaboxtbg'></view>
+    <view class='tgaboxclick'>
+        <image mode='aspectFit' src='https://www.51chaidan.com/images/default/openscreen.jpg?log={{appNowTime}}' class='tgaboxclickbgImg'></image>
+        <image src='{{commoddata.cover}}' class='abcd'></image>
+       
+    </view>
+     <button class='tgaboxtgawchbochlibutboxtwo' open-type="getUserInfo" type='primary' bindgetuserinfo="userInfoHandler"></button>
+   
+</view>

@@ -1,0 +1,9 @@
+{
+  "asdfasfdflePullDownRefresh": true,
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "tga_c": "../../../../pages/tgacomponent/tgacomponent",
+    "bnavigation": "/pages/bottomComponent/bottomComponent",
+    "t_f": "../../../../pages/topfunction/topfunction"
+  }
+}

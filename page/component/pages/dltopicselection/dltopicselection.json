@@ -1,0 +1,7 @@
+{
+  "asdfasfdflePullDownRefresh": true,
+  "navigationBarTitleText": "选择话题",
+  "usingComponents": {
+    "t_f": "../../../../pages/topfunction/topfunction"
+  }
+}

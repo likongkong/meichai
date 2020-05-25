@@ -1,0 +1,7 @@
+{
+  "asdfasfdflePullDownRefresh": true,
+  "navigationBarTitleText": "所在位置",
+  "usingComponents": {
+    "t_f": "../../../../pages/topfunction/topfunction"
+  }
+}

@@ -1,0 +1,250 @@
+    <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}' is_share='{{is_share}}'></t_f> 
+    <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view hidden="{{bothidden}}" style='position: fixed;top: 0;left: 0;height: 100%;width: 100%;z-index: 30;' catchtouchmove="preventD"></view>
+<view class='box' style="{{tgabox||!bothidden?'position:fixed;top:0;left:0;right:0;bottom:0;':''}}{{isIphoneX?'padding-bottom:138rpx;':''}}">
+    <view class='wdhead'> 
+        <view class='personalhomepage' catchtap='personalhomepage'>个人主页</view>
+        <view class='wdhl'>
+          <view class='wdhlimg' bindtap="personaldata">
+              <image src='{{avatarUrl}}' class='wdhlimgimg' style='position: relative;'></image>
+              <image src='../images/icon_man2.png' hidden='{{icon_sex==2}}' class='icwoam'></image>
+              <image src='../images/icon_woman2.png' hidden='{{icon_sex==1}}' class='icwoam'></image>                        
+          </view>
+        </view>
+        <view class='wdhr'>
+            <view class='wdhrtit' hidden='{{istit}}'>
+                 <view class='wdhrtitdz' bindtap='wxjurisdiction'>登录</view> 
+            </view>
+            <view class='wdhrtitname specialellipsis' hidden='{{istitnex}}' style='margin-top:20rpx;'>{{nickName}}</view>
+            <!-- 幸运值 -->
+            <view catchtap="awasustipimages" style="width:100%;font-size:24rpx;color:#fff;height:40rpx;vertical-align: middle;" hidden='{{istitnex}}'>
+                幸运值:{{luckyValue}}.
+                <view style="width:30rpx;height:30rpx;display: inline-block;margin-left:6rpx;vertical-align:middle;position: relative;top:-2rpx;">
+                    <image src="/pages/images/explain.png" style="width:100%;height:100%;display:block;"></image>
+                    <view class="awasustip" wx:if='{{awasustipimages}}'>
+                        <view class="awasustipbg">
+                            <view class="awasusawaarrow"></view>
+                        </view>
+                        <view class="awasustiptxt">
+                            <text style="padding:20rpx;color:#fff;font-size:22rpx;text-align:left;display:block;">幸运值\n1.抽盒机抽盒后赠送获得\n2.送完可获得双倍幸运值\n3.100点幸运值可兑换透视卡x1</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{notice_title!=''}}" style='height:50rpx;line-height:50rpx;font-size:25rpx;background:#000;opacity:0.9;border-radius:10rpx;position:absolute;left:20rpx;bottom:15rpx;color:#fff;padding:0 20rpx;' catchtap='jumpnotice'>
+        <image style='width:35rpx;height:35rpx;margin:8rpx 10rpx 8px 0rpx;display:inline-block;vertical-align:top;position:relative;' src='https://www.51chaidan.com/images/default/notice.png'></image>
+        {{notice_title}}>
+        </view>
+
+    </view>  
+
+    <view class='winningthepbox' wx:if='{{isAwardOrder}}' catchtap='jumporder'>
+      <view class='winningthepimgtxt'>
+        <image class='winningthepimgshop' src='{{awardOrder.Info.cover}}'></image>
+        <view class='winningtheptime specialellipsis'>{{winningovertime}}</view>
+      </view>
+      <image class='winningthepimg' src='http://www.51chaidan.com/images/FreeSheet/WinningThePrize.png'></image>
+    </view>
+ 
+    <view class='whwdddw'>
+        <view class='whwddd' bindtap='myorderfun' data-tabnum='0' style='position:relative;'>
+            我的订单
+            <image class='whwddimg' src='../images/icon_in.png'></image>        
+        </view>
+    </view>
+    <view class='wdtabmenu'>
+           <view class='wdtabmunb'>
+               <view class='wdmbch' bindtap='myorderfun' data-tabnum='1' style='position:relative;'>
+                  <image class='wdmbchimg' src='../images/icon_wallet.png'>
+                     <view class='wdmbchinfnum specialellipsis'  wx:if='{{nonpayment!=0}}'>{{nonpayment}}</view>
+                  </image>
+                  <view class='wdmbchtit'>待付款</view>
+               </view>
+               <view class='wdmbch' bindtap='myorderfun' data-tabnum='2' style='position:relative;'>
+                  <image class='wdmbchimg' src='../images/icon_clock.png'>
+                      <view class='wdmbchinfnum specialellipsis'  wx:if='{{nonunpack!=0}}'>{{nonunpack}}</view>
+                  </image>
+                  <view class='wdmbchtit'>已付款</view>
+               </view>
+               <view class='wdmbch' bindtap='myorderfun' data-tabnum='3' style='position:relative;'>
+                   <image class='wdmbchimg' src='../images/icon_package.png'>
+                       <view class='wdmbchinfnum specialellipsis' wx:if='{{nonsend!=0}}'>{{nonsend}}</view>
+                   </image>
+                   <view class='wdmbchtit'>待发货</view>
+               </view>
+               <view class='wdmbch' bindtap='myorderfun' data-tabnum='4' style='position:relative;'>
+                   <image class='wdmbchimg' src='../images/icon_car2.png'>
+                       <view class='wdmbchinfnum specialellipsis' wx:if='{{nonreceive!=0}}'>{{nonreceive}}</view>
+                   </image>
+                   <view class='wdmbchtit'>待收货</view>
+               </view>
+           </view>
+    </view>
+    <view class='whwdddw' bindtap='jumpowntoy'>
+        <view class='whwddd'>
+            玩具柜
+            <view class='whbocndr'>
+               查看全部
+               <image class='whwddimgtit' src='../images/icon_in.png'></image>
+            </view>                   
+        </view>
+    </view>
+    <view class='whwdddw'>
+        <view class='whwddd' catchtap='putforward'>
+            我的小金库
+            <view class='whbocndr' style='height:80rpx;line-height:80rpx;color:#fbb11b;padding:0 30rpx 0 70rpx;font-size:28rpx;'>
+               <image class='whwddimgtit' src='../images/icon_in.png'></image>
+            </view>  
+        </view>
+        <view class='addputforward'>
+           <view class='apforleft' catchtap='putforward' style='position:relative;'>
+                <view class='apforlleft comapforlr specialellipsis'>{{putforwardmoney}}元</view>
+                <view class='apforlright comapforlr'>提现</view>
+           </view>
+           <view class='apforright' bindtap='mywallet' wx:if='{{B}}' style='position:relative;'>
+                 <view class='apforrleft comapforlr specialellipsis'>
+                    <image src='../images/cgoldcoin1.png' class='cgoldcoinonexin'></image>X{{point}}                     
+                 </view>
+                 <view class='apforlright comapforlr'>签到</view> 
+           </view>
+        </view>
+    </view> 
+      
+    <view class='whwdddw' bindtap='coupon' wx:if='{{B}}'>
+        <view class='whwddd'>
+            我的卡券
+            <view class='whbocndr'>
+               查看全部
+               <image class='whwddimgtit' src='../images/icon_in.png'></image>
+            </view>                   
+        </view>
+    </view>
+
+
+
+    <view class='whwdddw' bindtap="addressmanagement">
+        <view class='whwddd'>
+            收货地址
+            <view class='whbocndr'>
+               地址管理
+               <image class='whwddimgtit' src='../images/icon_in.png'></image>
+            </view>
+        </view>
+    </view>
+    <view class='whwdddw'>
+        <view class='whwddd'>
+            当前版本
+            <view class='whbocndr'>
+               {{versionnumber}}
+               <image class='whwddimgtit' src='../images/icon_in.png'></image>
+            </view>
+        </view>
+    </view>
+    
+    <view class='whwdddw' style="position:relative;">
+        <view catchtap='isweekendfun' wx:if='{{isweekend}}' style='width:100%;height:100%;position:absolute;top:0;left:0;opacity: 0;z-index:1;'></view>
+        <button wx:else open-type='contact' session-from='' style='width:100%;height:100%;position:absolute;top:0;left:0;opacity: 0;z-index:1;'></button>
+        <view class='whwddd'>
+            客服
+            <view class='whbocndr'>
+               工作日周一~周五 10:00-20:00
+               <image class='whwddimgtit' src='../images/icon_in.png'></image>
+            </view>
+        </view>
+    </view>
+    <view class='whwdddw'>
+        <view class='whwddd' catchtap="businesscooperationfun">
+            商务合作
+            <view class='whbocndr'>
+               <image class='whwddimgtit' src='../images/icon_in.png'></image>
+            </view>
+        </view>
+    </view>
+
+</view>
+
+<!-- 商务合作  -->  
+<view class='editorrecom' style='z-index:9999999;' wx:if='{{businesscooperation}}'>
+    <view class='ngbackground' catchtap='businesscooperationfun'></view>
+    <view class='picbox' style='height:280rpx;width:440rpx;'>
+        <view style='height:80rpx;text-align:center;line-height:90rpx;color:#333;font-size:28rpx;'>提示</view>
+            <text style='padding:0 20rpx 20rpx 20rpx;display:block;height:80rpx;text-align:center;line-height:40rpx;color:#333;font-size:26rpx;border-bottom:1rpx solid #e5e5e5'>商务合作发邮件至{{cliptxt}}</text>
+        <view class='picboxcon' style='line-height:100rpx;text-align:center;color:#0fbe0e;font-size:28rpx;position:relative;text-decoration:underline;' catchtap='businesscooperationfunfz'>
+            复制
+        </view>
+    </view>
+</view>
+
+<!-- 客服提示框  -->
+<view class='editorrecom' style='z-index:9999999;' wx:if='{{isweekendtip}}'>
+    <view class='ngbackground' catchtap='isweekendfun'></view>
+    <view class='picbox' style='height:280rpx;width:440rpx;'>
+        <view style='height:80rpx;text-align:center;line-height:90rpx;color:#333;font-size:28rpx;'>提示</view>
+            <text style='padding:0 20rpx 20rpx 20rpx;display:block;height:80rpx;text-align:center;line-height:40rpx;color:#333;font-size:26rpx;border-bottom:1rpx solid #e5e5e5'>非工作时间可以留言\n周一10:00后依次回复!</text>
+        <view class='picboxcon' style='line-height:100rpx;text-align:center;color:#0fbe0e;font-size:28rpx;position:relative;' catchtap='isweekendfun'>
+            确定
+            <button open-type='contact' session-from='' style='width:100%;height:100%;position:absolute;top:0;left:0;opacity: 0;z-index:1;'></button>
+        </view>
+    </view>
+</view>
+
+<bnavigation wmy='{{true}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' 
+dryinglistnum='{{dryinglistnum}}'></bnavigation>
+
+
+<!--  导航 C -->
+ <view class='navigation' wx:if='{{C}}' style='{{isIphoneX?"height:130rpx;":""}}'>
+     <view class='navigationleft' bindtap='wnews' style='width:33.3%;' wx:if='{{grocerystoreiftr=="off"}}'>
+         <view class='navigationltop'>
+             <image src='http://www.51chaidan.com/images/icon/iconLotto.png' class='navigationltopimg'></image>
+         </view> 
+         <view class='navigationlcon'>限定抽签</view>
+
+
+     </view>
+     <view class='navigationleft' style='position:relative;' wx:if='{{grocerystoreiftr=="on"}}'>
+         <!-- 跳转其他小程序 -->
+         <navigator target="miniProgram" open-type="navigate" app-id="wxfe253b7309e29868" path="pages/index/index?mc=mc" extra-data="" version="release" style='position: absolute;height:100%;width:100%;left:0;top:0;z-index:3;'></navigator>     
+         <view class='navigationltop'>
+             <image src='https://www.51chaidan.com/images/default/act.png' class='navigationltopimg'></image>
+         </view> 
+         <view class='navigationlcon'>拆礼物</view>    
+     </view>
+
+     <view class='navigationleft' bindtap='wshoppingCart' style='width:33.3%;' style='position:relative;'>
+         <view class='navigationltop'>
+             <image src='../images/shoppingCarNotImage@2x.png' class='navigationltopimg'></image>
+             <view class='tabshopimg specialellipsis' wx:if='{{shopnum!=0}}' style='left:138rpx;'>{{shopnum}}</view>
+         </view>     
+         <view class='navigationlcon'>购物车</view>
+     </view>
+     <view class='navigationleft' bindtap='wmy' style='width:33.3%;' style='position:relative;'>
+         <view class='navigationltop'>
+             <image src='../images/pressed_wode.png' class='navigationltopimg'></image>
+         </view>  
+         <view class='navigationlcon' style='color:#fd2844;'>我的</view> 
+     </view>
+</view> 
+
+<!-- 微信号复制  -->
+<view class='editorrecom' style='z-index:9999999;' wx:if='{{copyiftr}}'>
+    <view class='ngbackground' catchtap='copyfitrfun'></view>
+    <view class='picbox' style='height:300rpx;'>
+        <view style='height:100rpx;text-align:center;line-height:120rpx;color:#333;font-size:28rpx;'>联系客服</view>
+        <view class='picboxhead specialellipsis' style='padding:0 0 20rpx 0;'>请联系美拆微信:meichaimeichai</view>
+        <view class='picboxcon' style='line-height:100rpx;text-align:center;color:#0fbe0e;font-size:28rpx;' catchtap='sponsocopytwo'>
+             点击复制
+        </view>
+    </view>
+</view>
+
+
+
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+
+
+
+
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>

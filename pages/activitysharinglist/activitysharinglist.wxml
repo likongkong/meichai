@@ -1,0 +1,260 @@
+
+    <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+    <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+ 
+
+<view style='position:fixed;top:{{statusBarHeightMc}}px;left:0;z-index:8;width:100%;'>
+    <view class='winningthepbox' wx:if='{{isAwardOrder}}' catchtap='jumporder' style='background:#eef0f4;'>
+      <view class='winningthepimgtxt'>
+          <image class='winningthepimgshop' src='{{awardOrder.Info.cover}}'></image>
+          <view class='winningtheptime specialellipsis'>{{winningovertime}}</view>
+      </view>
+      <image class='winningthepimg' src='http://www.51chaidan.com/images/FreeSheet/WinningThePrize.png'></image>
+    </view>    
+    <view style='width:100%;height:128rpx;' wx:elif='{{spreadEntry}}'>
+        <swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="5000" duration="450">    
+            <swiper-item wx:for="{{spreadEntry}}" wx:key="key">
+                <image style='width:100%;height:128rpx;display:block;position: relative;' src='{{item.src}}' catchtap='jumpaction' data-path='{{item.path}}'></image>
+            </swiper-item>
+        </swiper>
+    </view>
+</view>
+
+
+<view style='width:100%;height:128rpx;' wx:if='{{spreadEntry}}'></view>
+
+<view class='aslbox'>
+
+  <view class='boxcontent'>
+    <!-- 未报名 -->
+    <view class='aslbcbox' wx:for='{{commoddata}}' wx:key='key' style='position: relative;'>
+
+      <view class='aslbcbleft' catchtap='activitydetailspage' data-id='{{item.id}}' data-type='{{item.type}}'>
+        <!-- 赞助商 -->
+        <view  wx:if='{{item.isSupport==1}}' class='sponsorbox'>
+            <image src='{{item.supportLogo}}' style='float:left;width:40rpx;height:40rpx;border-radius:50%;'></image>
+            <view style='float:left;height:40rpx;line-height:40rpx;font-size:24rpx;color:#fff;margin-left:10rpx;' class='specialellipsis'>{{item.supportName}}赞助</view>
+            <view class='sponsorboxbg'></view>
+        </view>
+        <image src='{{item.cover}}' class='bcimg'></image>
+        <view class='aslbcbleftposbootag' catchtap='activitydetailspage' data-id='{{item.id}}' data-type='{{item.type}}'>
+          <view class='actnewlabel_box specialellipsis'>Vol.{{item.id}}</view>
+          <view class='actnewlabel_box specialellipsis' wx:for='{{item.tag}}' wx:key='key'>{{item}}</view>
+        </view>
+      </view>
+
+      <view class='aslbcbright' catchtap='activitydetailspage' data-id='{{item.id}}' data-type='{{item.type}}'>
+        <view class='bctitle multilineellipsis' style='position:relative;'>
+          <!-- Vol.{{item.id}} -->奖品:
+          <view wx:if='{{item.is_suit==1&&(item.name==""||item.name==null)}}' style='display: inline-block;color:#ff2742;margin-right:12rpx;'>{{item.pre_name}}</view>
+          <view wx:if='{{item.is_suit==1&&(item.name==""||item.name==null)}}' style='display: inline-block;'>{{item.ds}}</view>
+          {{item.name==''||item.name==null?item.goods_name:item.name}}
+        </view>
+
+        <view class='aslbccoto' wx:if='{{item.status==1||item.status==0}}' style='position:relative;'>
+          报名时间 {{item.start_time}}
+        </view>
+        <view class='aslbccoto' wx:if='{{item.status==3}}'>已开奖</view>
+        <view class='aslbccoto' wx:elif='{{item.is_limit==1}}'>人满开奖 {{item.truth_users}}/{{item.limit_users}}</view>
+
+        <view class='aslbccoto' wx:elif='{{item.status==2}}'>{{item.stop_time}}  自动开奖</view>
+        <!-- 开奖时间  -->
+        <view style='width:100%;position:relative;height:70rpx;'>
+        <view class='aslbcnop' wx:if='{{item.status==2}}' style='position:relative;'>
+            <view wx:if='{{item.is_limit==1}}'>
+              <view wx:if='{{item.is_full==1}}'>开奖中</view>
+            </view>
+            <view wx:elif='{{item.is_limit==0||item.is_limit==3}}'>已报名 {{item.truth_users}}人</view>
+            <view wx:elif='{{item.is_full==1}}'>已满员 {{item.truth_users}}/{{item.limit_users}}</view>
+            <view wx:else>未满员 {{item.truth_users}}/{{item.limit_users}}</view>
+        </view>
+
+
+        <view class='aslbcbott'>
+
+          <view class='aslbcbotrightbox' wx:if='{{item.status==0}}'>
+            <view class='aslbcbotright' style='background:#299029;'>未开始</view>
+          </view>
+          <view class='aslbcbotrightbox' wx:elif='{{item.status==1}}'>
+            <view class='aslbcbotright' style='background:#999;'>即将开始</view>
+          </view>
+          <view class='aslbcbotrightbox' wx:elif='{{item.status==2}}'>
+
+
+            <view class='aslbcbotright' wx:if='{{item.is_join==1&&item.is_receive==1}}' style='background:#ff9800;position:relative;'>领取奖励</view>
+            <view class='aslbcbotright' wx:elif='{{item.is_join==1&&item.is_invite==1}}' style='background:#f93f45;position:relative;'>分享赢现金</view>
+            <view class='aslbcbotright' wx:elif='{{item.is_join==1&&item.is_receive==2}}' style='background:#42bd56;'>已领取</view>
+            <view class='aslbcbotright' wx:elif='{{item.is_join==1&&item.is_receive==3}}' style='background:#999;'>奖品已过期</view>
+
+            <view class='aslbcbotright' wx:elif='{{item.is_join==1&&item.is_receive==0}}' style='background:#42bd56;'>已报名</view>
+
+
+
+            <view class='aslbcbotright' wx:elif='{{item.is_full==1}}' style='background:#908e8e;'>已满员</view>
+<view class='aslbcbotright' wx:elif='{{item.need_times!=0}}' style='background:#1890FF;position:relative;'>我要免单</view>
+            <view class='aslbcbotright' wx:elif='{{item.need_times==0}}' style='background:#1890FF;position:relative;'>
+                {{item.sales==0?"我要免单":"￥0.01购买"}}</view>
+          </view>
+          <view class='aslbcbotrightbox' wx:elif='{{item.status==3}}'>
+            <view class='aslbcbotright' style='background:#db2e34;position:relative;'>
+              查看中奖</view>
+          </view>
+
+        </view>
+        </view>
+      </view>
+    </view>
+    <!-- 已报名 -->
+    <view class='aslbcbox' wx:if='{{signlist.length!=0}}'>
+        <view style='padding:5rpx 13rpx 20rpx;'>
+           <view style='width:100%;height:60rpx;line-height:60rpx;font-size:24rpx;'>已报名免单</view>
+           <view style='width:100%;height:140rpx;'>
+              <scroll-view scroll-x="true" style='width:100%;white-space:nowrap;height:100%;'>
+                  <view wx:for='{{signlist}}' wx:key='key' catchtap='activitydetailspage' data-id='{{item.id}}' style='vertical-align: top;position: relative;width:262rpx;height:100%;margin-right:20rpx;display:inline-block;'>
+                       <image style='display:block;width:100%;height:100%;border-radius:6rpx;' src='{{item.cover}}'></image>
+                  </view>
+              </scroll-view>            
+           </view>
+        </view>
+        
+    </view>
+    <!-- 已报名 -->
+    <view class='aslbcbox' wx:if='{{finishedlist.length!=0}}'>
+        <view style='padding:5rpx 13rpx 20rpx;'>
+           <view style='width:100%;height:60rpx;line-height:60rpx;font-size:24rpx;'>已完成免单</view>
+           <view style='width:100%;height:140rpx;'>
+              <scroll-view scroll-x="true" style='width:100%;white-space:nowrap;height:100%;'>
+                  <view wx:for='{{finishedlist}}' wx:key='key' catchtap='activitydetailspage' data-id='{{item.id}}' style='vertical-align: top;position: relative;width:262rpx;height:100%;margin-right:20rpx;display: inline-block;'>
+                       <image style='display:block;width:100%;height:100%;border-radius:6rpx;' src='{{item.cover}}'></image>                      
+                  </view>
+              </scroll-view>            
+           </view>
+        </view>
+        
+    </view>
+
+    <official-account wx:if='{{canIUse}}' style='width:100%;background:#fff;'></official-account>
+
+  </view>
+
+</view>
+<!--  暂无数据  -->
+<view class='nodata' wx:if='{{commoddata.length==0&&nodataiftr&&signlist.length==0&&finishedlist.length==0}}' style='height: 900rpx;width: 100%;position: relative;'>
+  <image src='../images/nodata.png' class='nodataimg' style='width: 280rpx;height: 300rpx;position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;'></image>
+</view>
+
+<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' 
+dryinglistnum='{{dryinglistnum}}'></bnavigation>
+
+<!--  活动提示 新人专享提示 ifcomtipiftr==1 机会不足提示 ifcomtipiftr==2-->
+<view class='comtip' wx:if='{{comtipiftr}}'>
+  <view class='comtipback' catchtap='hidcomtip'></view>
+  <view class='comtipcon'>
+    <view class='comtipchead' wx:if='{{ifcomtipiftr==1}}'>免单说明</view>
+    <view class='comtipchead' wx:if='{{ifcomtipiftr==2}}'>增加免单机会</view>
+    <!--  新人专享提示  -->
+    <view class='comtipccon' wx:if='{{ifcomtipiftr==1}}'>
+      <text>{{newtips}}</text>
+    </view>
+    <!--  机会不足提示  -->
+    <view class='comtipccon' wx:if='{{ifcomtipiftr==2}}'>
+      <text>{{tips}}</text>
+    </view>
+    <view class='comtipcbot'>
+      <view class='comtipcbri' catchtap='hidcomtip' wx:if='{{ifcomtipiftr==1}}' style='position:relative;'>快去报名</view>
+      <view class='comtipcbri' catchtap='hidcomtip' wx:if='{{ifcomtipiftr==2}}' style='position:relative;'>知道了</view>
+    </view>
+  </view>
+</view>
+
+
+
+
+
+<!--   领奖提示  -->
+<view class='wsh' wx:if='{{awardrresentiftr}}'>
+  <view class='tgimgboxgb' style='background:#ccc;' catchtap='awardrresentiftr'></view>
+  <view class='awardrresentation'>
+    <view class='adreshead'>领奖提示</view>
+    <view class='adrestxt'>
+      <text>{{rpinfotip}}</text>
+    </view>
+    <scroll-view class='adresscr' scroll-x="true" scroll-with-animation="true">
+      <view class='adresscrbox' wx:for='{{awardrresentation.Goods}}' wx:key='key' data-gid='{{item.goods_id}}' catchtap='addressmanagement'>
+        <image src='{{item.goods_thumb}}' class='adresbimg'></image>
+        <view class='disanum_sb_txtone multilineellipsis' style='color:#666;'>
+          {{item.pre_name}}{{item.ds}}{{item.goods_name}}
+        </view>
+        <view class='specialellipsis' style='width:100%;height:40rpx;line-height:40rpx;color:#f93f45;font-size:22rpx;text-align:center;vertical-align:top;position:relative;top:5rpx;'>
+          ￥{{item.goods_price}}
+        </view>
+      </view>
+    </scroll-view>
+    <view class='chaishopbutbox'>
+      <!-- <view class='chaishopbutleft' catchtap='payfreight'>支付运费领奖</view> -->
+      <view class='chaishopbut' data-href='{{awardrresentationjump.href}}' data-item_type='{{awardrresentationjump.item_type}}' catchtap='comindellistjump' style='position:absolute;left:0;right:0;bottom:0;top:0;margin:auto;'>挑选商品领奖</view>
+    </view>
+    <view class='chaidanboxbor'></view>
+    <view class='chaidanboxborbot'>购买商品领奖后可以报名付费专享活动哦~</view>
+    <scroll-view class='adresbotsrc' scroll-x="true" scroll-with-animation="true">
+      <view class='adresbotsrcbox' wx:for='{{awardrresentation.activity}}' wx:key='key' data-gid='{{item.id}}' catchtap='actexempfun'>
+        <image src='{{item.goods_thumb}}' class='adresbimgbot'></image>
+        <view class='adresbottxt'>
+          <image src='http://www.51chaidan.com/images/default/person1.png' class='adresbimguser'></image>
+          {{item.users}}
+        </view>
+      </view>
+    </scroll-view>
+    <view class='adresboxbottonbut' catchtap='acetlistfun'>更多付费专享活动</view>
+  </view>
+
+</view>
+
+
+<!--  优惠券 新人红包  -->
+<view class='newcoupon' wx:if='{{newcoupon}}'>
+  <view class='swfback' catchtouchmove="preventD" catchtap='newhbfun'></view>
+  <view class='newcoucon'>
+    <view class='newcouchead'>
+      <view class='newcouhhead centertxt'>{{newcoutitle}}</view>
+      <view class='newcouhocon'>
+        <view class='newcoucx' wx:for='{{newcoupondata}}' wx:key='key'>
+          <image class='newcoucximg' src='../images/botchofcou.png'></image>
+          <view class='newcoucxcon'>
+            <view class='newcoucxconleft'>
+              <view class='newcoucxconlefttop centertxt'>
+                <view style=' font-size:24rpx;display:inline-block;position: relative;top: 8rpx;'>{{item.unit}}</view>{{item.value}}</view>
+              <view class='newcoucxconleftbott specialellipsis'>{{item.desc}}</view>
+            </view>
+            <view class='newcoucxconright'>
+              <view class='newcoucxconrighttop'>
+                <view class='specialellipsis' style=' font-size:30rpx;padding-top:10rpx;height:36rpx;'>{{item.name}}</view>
+                <view style=' font-size:24rpx;'>{{item.overtime}}过期</view>
+              </view>
+              <view class='newcoucxconrightbott specialellipsis'>{{item.detail}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='newcouhbott'>
+        <view class='newcouhbotmimg centertxt' catchtap='swfcanimgcou'>一 键 领 取</view>
+        <image src='../images/cancelthefork.png' class='swfcanimgnewcou' catchtap='swfcanimgcou'></image>
+      </view>
+    </view>
+
+  </view>
+</view>
+
+
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight}}px;width: 100%;z-index: 130;'  catchtap='pullupsignin'></view>
+
+<!-- 透视卡 小悬浮 -->
+<view wx:if='{{perspcardiftrmin}}' catchtap='bblistfun' style='width:110rpx;height:170rpx;position:fixed;right:20rpx;bottom:260rpx;z-index:9;'>
+   <image src='http://www.51chaidan.com/images/icon/iconTempXRay.jpg' style='width:110rpx;height:110rpx;display:block;border-radius:50%;'></image>
+   <view style="width:110rpx;height:54rpx;font-size:22rpx;color:#ffffff;position:relative;">
+      <view style="width:110rpx;height:54rpx;background:#cb6a15;opacity:0.8;border-radius:10rpx;"></view>
+      <text style='display:block;text-align:center;width:110rpx;height:54rpx;line-height:27rpx;position:absolute;left:0;top:0rpx;'>点击使用\n{{percountdown}}</text>
+   </view>
+</view>

@@ -1,0 +1,108 @@
+<loading hidden="{{headhidden}}">
+  加载中...
+</loading>
+
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view hidden="{{headhidden}}" style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:999999;'></view>
+
+<view class='embox'>
+    <view class='emhead' style='border-bottom:1rpx solid #c7c7c8;'>
+        <view class='emheve' catchtap='emtab' data-emtabnum='1' style='{{emtabnum==1?"color:#ff140e;":""}}'>全部订单</view>
+        <view class='emheve' catchtap='emtab' data-emtabnum='2' style='border-left:1rpx solid #c7c7c8;border-right:1rpx solid #c7c7c8;{{emtabnum==2?"color:#ff140e;":""}}'>待发货<view class='emhevenum specialellipsis' wx:if='{{stayshipped>0&&emtabnum!=2}}'>{{stayshipped}}</view></view>
+        <view class='emheve' catchtap='emtab' data-emtabnum='3' style='{{emtabnum==3?"color:#ff140e;":""}}'>待收货</view>
+    </view>
+    <view class='emconbox'>
+        <view class='emconbeve' wx:for='{{listdata}}' wx:key='key'>
+            <view class='emconeveleft'>
+                <image class='emcelimg' src='{{item.goods_img}}'></image>
+                <view class='emconeltxt' style='background:#ff6968;' wx:if='{{item.is_seller==1}}'>卖</view>
+                <view class='emconeltxt' style='background:#67971a;' wx:if='{{item.is_seller==0}}'>买</view>
+            </view> 
+            <view class='emconeveright'>
+                  <view class='bctitle multilineellipsis' style='font-size:26rpx;'>
+                      {{item.goods_name}} 
+                  </view>    
+                  <view class='emconercon'>{{item.add_date}}</view>            
+                  <view class='emconerbot'>
+                      <image src='../../../../pages/images/cgoldcoin1.png' class='emconerbimg'></image>
+                      x{{item.currency_sum}}
+                      <view class='emconerbutbox'>
+
+  <view class='emconerbribut' style='background:#ff6968;' wx:if='{{item.logistics_status==1}}' data-order_id='{{item.order_id}}' catchtap='delivergoods'>发货</view>
+  <view class='emconerbribut' style='background:#67971a;width:110rpx;' wx:elif='{{item.logistics_status==2}}'  catchtap='viewlogistics' data-order_id='{{item.order_id}}'>查看物流</view> 
+  <view class='emconerbribut' style='background:#999999;' wx:elif='{{item.logistics_status==3}}'>已完成</view>
+  <view class='emconerbribut' style='background:#67971a;width:140rpx;' wx:elif='{{item.logistics_status==4}}'>订单已取消</view> 
+    <view class='emconerbribut' style='background:#999999;width:110rpx;' wx:elif='{{item.logistics_status==5}}'  catchtap='cancforder' data-order_id='{{item.order_id}}'>取消订单</view> 
+  <view class='emconerbribut' style='background:#67971a;' wx:elif='{{item.logistics_status==5}}'>待发货</view>
+  <block wx:elif='{{item.logistics_status==6}}'>
+    <view class='emconerbribut' style='background:#ff6968;width:110rpx;' catchtap='confirmreceipt' data-order_id='{{item.order_id}}'>确认收货</view> 
+    <view class='emconerbribut' style='background:#67971a;width:110rpx;'  catchtap='viewlogistics' data-order_id='{{item.order_id}}'>查看物流</view> 
+  </block>
+      
+                      </view>
+                  </view>
+            </view>
+        </view>
+        <!--  暂无数据  -->
+        <view wx:if='{{listdata.length==0&&nodataiftr}}'>
+          <view style='height:900rpx;width:100%;position:relative;'>
+            <image src='../../../../pages/images/nodata.png' style='width:280rpx;height:300rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;'></image>
+          </view>
+        </view>
+    </view>
+
+</view>
+
+<view style='width:100%;text-align:center;line-height:60rpx;color:#666;font-size:30rpx;' wx:if='{{listdata.length>=7}}'>{{loadprompt}}</view>
+
+<view class='emfixed' wx:if='{{emfixediftr}}'>
+     <view class='emfixbg' catchtap='emfixediftrbg'></view>
+     <view class='emfixcon'>
+         <view class='emfchead' catchtap='copyTBL'>收货信息(点击复制)</view>  
+         <view class='emfcheadbox' catchtap='copyTBL'>
+             <view class='emfchbxname comemfctxt'>{{userdata.consignee}}</view>
+             <view class='emfchbxname comemfctxt'>{{userdata.tel}}</view>  
+             <view class='bctitle multilineellipsis'>{{userdata.province}}{{userdata.city}}{{userdata.district}}{{userdata.address}}</view>
+         </view>
+         <view style='padding:0 30rpx;'>
+             <view class='emfchead' style='padding:0;'>快递公司</view>
+             <picker bindchange="bindPickerChange2" value="{{objectIndex}}" range="{{expressdata}}" range-key="name">
+                <view class='eminputsel'>{{expressdata[objectIndex].name}}</view>
+             </picker>
+             <view class='emfchead' style='padding:0;'>快递单号</view>
+             <view class='eminputsel'>
+                 <input style='display:block;width:100%;height:100%;' type='text' bindinput="inputChange" value='{{inputdata}}' placeholder='请输入快递单号'></input>
+             </view>             
+         </view> 
+         <view class='emfixbottombut' catchtap='confirmshipment'>确认发货</view> 
+     </view>
+</view>
+
+<view class='emfixbutbot' catchtap='exchangeanddifun'>我要兑换拆币</view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--  授权弹框  -->
+<view class='tgaboxtwo' wx:if='{{tgabox}}' catchtap='clicktga'>
+    <view class='tgaboxtbg'></view>
+    <view class='tgaboxclick'>
+        <image mode='aspectFit' src='https://www.51chaidan.com/images/default/openscreen.jpg?log={{appNowTime}}' class='tgaboxclickbgImg'></image>
+    </view>
+     <button class='tgaboxtgawchbochlibutboxtwo' open-type="getUserInfo" type='primary' bindgetuserinfo="userInfoHandler"></button>
+</view>

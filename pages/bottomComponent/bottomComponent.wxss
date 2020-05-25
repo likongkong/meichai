@@ -1,0 +1,2 @@
+/* pages/bottomComponent/bottomComponent.wxss */
+@import "../../common/tabbar.wxss";

@@ -1,0 +1,1321 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}' is_share='{{is_share}}'>
+</t_f>
+
+<!--  html页面转换  -->
+<import src="../../wxParse/wxParse.wxml" />
+
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<canvas canvas-id='snapshotshare' class='snapshotshareclass'></canvas>
+<canvas canvas-id='redpagshare' class='snapshotshareclass'></canvas>
+
+<!-- <view class="card-module" catchtap="clickCard">
+  <view class="card">
+    <view class="{{showClass ? 'frontm' : 'front'}} card-item">正面</view>
+    <view class="{{showClass ? 'backm' : 'back'}} card-item">反面</view>
+  </view>
+</view> -->
+
+<!-- 全局父view -->
+<view style='width:100%;min-height:100%;background:{{pageBg}};position:relative;{{iftrdetailpagetwo?"height:80%;position:fixed;top:0;left:0;right:0;bottom:0;overflow:hidden;":""}}'>
+
+	<view wx:if='{{!isallready}}' style="width:100%;height:100%;background:{{pageBg}};position:absolute;top:0;left:0;z-index;10;"></view>
+
+	<view style='width:{{750-(multipleHide.length*105)}}rpx;height:{{multipleHide.length>0?hideheight+80:""}}rpx;overflow:hidden;'>
+
+		<scroll-view wx:if='{{queueList.length>0}}' scroll-x="true" style='width:100%;white-space:nowrap;height:90rpx;' scroll-with-animation="true">
+			<view style='display:inline-block;' wx:for="{{queueList}}" wx:key="key">
+				<!-- <view wx:if='{{index == 0}}' style='width:65rpx;height:65rpx;border-radius:50%;border:5rpx solid #26AFFB;float:left;margin:10rpx;'>
+					<image style='width:65rpx;height:65rpx;border-radius:50%;' src='{{item.headphoto}}'></image>
+				</view> wx:if='{{index != 0}}'-->
+				<view style='width:60rpx;height:60rpx;border-radius:50%;float:left;margin:15rpx;'>
+					<image style='width:60rpx;height:60rpx;border-radius:50%;' src='{{item.headphoto}}'></image>
+				</view>
+			</view>
+		</scroll-view>
+
+		<view wx:else style='width:100%;white-space:nowrap;height:90rpx;'></view>
+
+		<view style='font-size:25rpx;line-height:25rpx;margin-left:10rpx;'>
+			<block wx:if='{{employList.length>0}}'>{{employList.length}}人正在选盒</block>
+			<block wx:if='{{activity.aheadUser>0}}'>您前面有{{activity.aheadUser}}人排队</block>
+		</view>
+
+		<view wx:if='{{multipleHide.length>0}}' style="position:absolute;top:0;right:0rpx;" catchtap='iftrdetailpagen'>
+			<view wx:for="{{multipleHide}}" wx:key='key' style="width:95rpx;float:right;position:relative;margin:10rpx 10rpx 0 0;">
+				<block>
+					<swiper autoplay="{{true}}" circular="true" interval="3000" style="width:{{hidewidth+10}}rpx;height:{{hideheight+10}}rpx;margin:0 auto;">
+						<block wx:for="{{item.infoHide}}" wx:key='key'>
+							<swiper-item>
+								<view style='width:{{hidewidth}}rpx;height:{{hideheight}}rpx;border:5rpx solid #e94f57;margin:0 auto;'>
+									<image style='width:{{hidewidth}}rpx;display:block;' bindload='imageLoadhide' mode="widthFix" src='{{zdyurl + item.img}}'></image>
+								</view>
+							</swiper-item>
+						</block>
+					</swiper>
+					<view style="width:95rpx;height:60rpx;background:#000;opacity:0.2;border-radius:5rpx;"></view>
+					<view style="width:95rpx;height:60rpx;position:absolute;bottom:0;left:0;color:#e94f57;text-align:center;font-size:20rpx;line-height:30rpx;font-weight:bold;">
+						<view>隐藏概率</view>
+						<view>{{item.infoHide.length}}/{{item.displayTotal}}</view>
+					</view>
+				</block>
+			</view>
+		</view>
+
+		<view wx:elif='{{goods_thumb}}' style="position:absolute;top:0;right:0rpx;" catchtap='iftrdetailpagen'>
+
+			<view style="width:95rpx;position:relative;margin:10rpx 10rpx 0 0;">
+				<view style='width:{{hidewidth}}rpx;height:{{hideheight}}rpx;border:5rpx solid #e94f57;margin:0 auto;'>
+					<image style='width:{{hidewidth}}rpx;display:block;' bindload='imageLoadhide' mode="widthFix" src='{{goods_thumb}}?imageMogr2/thumbnail/{{hidewidth*2}}x'></image>
+				</view>
+
+				<view style='width:{{hidewidth}}rpx;height:10rpx;'></view>
+
+				<view style="width:95rpx;height:30rpx;background:#000;opacity:0.2;border-radius:5rpx;"></view>
+				<view style="width:95rpx;height:30rpx;position:absolute;bottom:0;left:0;color:#e94f57;text-align:center;font-size:20rpx;line-height:30rpx;font-weight:bold;">
+					<view>商品详情</view>
+				</view>
+
+			</view>
+
+		</view>
+
+	</view>
+
+	<view wx:if='{{isOpenLine}}' style="width:95rpx;position:absolute;top:{{hideheight+100}}rpx;right:10rpx;z-index:1;" catchtap="{{isDirectOpenWholeBox ? 'wholebox' : 'collectchip'}}">
+		<image style="width:75rpx;width:75rpx;margin-left:10rpx;" mode="widthFix" src='{{wholeBoxImg}}'></image>
+		<view style="color:#FF9800;text-align:center;font-size:20rpx;font-weight:bold;">
+			<text wx:if='{{tipCheapForWholeBox>0}}'>端盒立减</text><text wx:else>抽整盒\n不排队\n</text></view>
+	</view>
+
+	<view wx:if='{{welfare.length > 0}}' catchtap='hidepackage' style='width:95rpx;position:absolute;right:5rpx;top:{{hideheight+240}}rpx;z-index:9;'>
+    <view class="tabshopimg specialellipsis" style="top:-8rpx;left:56rpx;" wx:if='{{welfare&&welfare.length!=0&&welfare.length!=1}}'>{{welfare.length}}</view>
+		<image src='http://www.51chaidan.com/images/blindBox/doublePackage.png' style='width:75rpx;height:75rpx;display:block;margin-left:10rpx;'></image>
+		<!-- <view style="color:red;text-align:center;font-size:20rpx;font-weight:bold;"><text>幸运值\n</text>{{welfare[0].currentAmount}}/{{welfare[0].limitAmount}}</view> -->
+    <view style="color:red;text-align:center;font-size:20rpx;font-weight:bold;"><text>幸运值\n</text>{{welfare[0].limitAmount-welfare[0].currentAmount}}点可领</view>
+	</view>
+
+	<view style='width:500rpx;text-align:center;padding:20rpx 125rpx;line-height:35rpx;font-size:30rpx;'>{{activity.name}}</view>
+
+	<view style='width:100%;position:relative;'>
+
+		<view wx:if='{{isallready && idlist.length>0}}' class='arrowParentStyle' style='left:23rpx;' catchtap='chancebox'>
+			<image wx:if='{{idlist.length>0}}' src='https://www.51chaidan.com/images/icon/iconLeftArrow.png' class='arrowImgStyle'></image>
+		</view>
+
+		<view wx:if='{{isallready && idlist.length>0}}' class='arrowParentStyle' style='right:23rpx;' catchtap='chancebox'>
+			<image wx:if='{{idlist.length>0}}' src='https://www.51chaidan.com/images/icon/iconRightArrow.png' class='arrowImgStyle'></image>
+		</view>
+
+		<view class='{{ischangebox?"changebox":""}}'>
+      <!-- margin:0 148rpx; -->
+			<image style='width:{{imgwidth+4}}rpx;display:block;margin:0 auto;' catchtap='iftrdetailpagen' mode="widthFix" src='{{activity.cover}}?imageMogr2/thumbnail/908x' bindload='imageLoadhead'></image>
+ 
+			<view id='boxindex' class='parentBoxStyle' style="position:relative;width:{{imgwidth}}rpx;">
+				<view wx:for='{{roleList}}' wx:key="key">
+					<view wx:if='{{!item.isSoldOut}}' data-n='{{activity.radioImgBox}}' style='width:{{boxwidth}}px;height:{{boxwidth * activity.radioImgBox}}px;border:2rpx solid #000;float:left;position:relative;' catchtap='{{activity.canOperate?"selectbox":""}}'>
+						<image style='width:100%;height:100%;' src='{{activity.imgTop}}?imageMogr2/thumbnail/{{boxwidth * 2}}x'></image>
+						<image wx:if='{{item.headphoto!=""}}' style="width:{{boxwidth * activity.radioImgBox * 0.5}}px;height:{{boxwidth * activity.radioImgBox * 0.5}}px;position:absolute;left:0;top:0;bottom:0;right:0;margin:auto;border-radius:50%;" src="{{item.headphoto}}"></image>
+
+						<view wx:if='{{!activity.isInQueue}}' style='width:100%;height:100%;position:absolute;top:0;left:0;z-index:1;' catchtap='lineup'></view>
+					</view>
+					<view wx:if='{{item.isSoldOut}}' style='width:{{boxwidth}}px;height:{{boxwidth * activity.radioImgBox}}px;border:2rpx solid #000;float:left;background:#E6E3E3;position:relative;' catchtap='{{activity.isOpenNewBox?"againOpenBox":""}}'>
+						<image style='width:60%;position:absolute;left:20%;top:0;bottom:0;margin:auto 0;' mode="widthFix" src='{{activity.imgSoldOut}}?imageMogr2/thumbnail/{{boxwidth*1.2}}x'></image>
+					</view>
+				</view>
+
+				<view wx:if='{{activity.isOpenNewBox}}' class="againOpenBox" catchtap="againOpenBox">
+					再开一盒
+				</view>
+			</view>
+
+		</view>
+
+	</view>
+
+	<view wx:if='{{isallready && ishowhalf}}' style='width:100%;font-size:30rpx;text-align:center;padding-top:20rpx;position:relative;overflow:hidden;'>
+		<!-- && activity.status == 2 -->
+
+		<view style='width:100%;height:80rpx;overflow:hidden;'>
+
+			<view style="width:50%;height:80rpx;line-height:80rpx;font-size:25rpx;z-index:2;float:left;position:relative;">
+				<view style="width:150rpx;overflow:hidden;position:absolute;left:0;right:0;top:0;margin:0 auto;" catchtap='iftrdetailpagen'>
+					<image style="width:40rpx;height:40rpx;margin-top:20rpx;display:inline-block;vertical-align:top;" src="https://www.51chaidan.com/images/turntable/Magnifier.png"></image>
+					<view style="display:inline-block;vertical-align:top;">商品预览</view>
+				</view>
+			</view>
+
+			<view wx:if='{{suplusTry>0}}' class='tryStyle'>
+				<view style="width:150rpx;position:absolute;left:0;right:0;top:0;margin:0 auto;" data-isretry='0' catchtap='havetry'>试一试({{suplusTry}}次)</view>
+			</view>
+
+		</view>
+
+		<view wx:if='{{activity.status == 1}}' style="width:100%;color:#4c9a23;text-align:center;font-size:30rpx;">
+			<!-- <view style="width:50%;height:80rpx;position:relative;float:left;">
+				<view class='queuebtnstyle2' style="background:#B0B0B0;color:white;float:left;">换一盒</view>
+			</view> -->
+			<view style="width:50%;height:80rpx;position:relative;margin:0 auto;">
+				<view class='queuebtnstyle2' catchtap="subscrfun" style="background:#eeae19;color:white;float:left;line-height:42rpx;height:80rpx;">
+					<view style="height:40rpx;line-height:50rpx;text-align:center;position:relative;">开售提醒<view class="coupposi" wx:if='{{isSubscribeCoupon}}'>订阅送优惠券</view></view>
+					<view style="text-align:center;">
+					   <block wx:if='{{newdataexh}}'>暂未开售</block>
+						 <block wx:else>{{activity.start_time}}</block>
+					</view>
+				</view>
+			</view>
+
+		</view>
+
+		<view wx:if='{{activity.status == 2}}' style='width:100%;height:80rpx;position:relative;margin-top:30rpx;'>
+
+			<view style="width:50%;height:80rpx;position:relative;float:left;">
+				<view wx:if='{{idlist.length>0}}' class='queuebtnstyle2' style="background:white;float:left;" catchtap='chancebox'>换一盒</view>
+				<view wx:else class='queuebtnstyle2' style="background:#B0B0B0;color:white;float:left;">换一盒</view>
+
+			</view>
+			<view style="width:50%;height:80rpx;position:relative;float:right;">
+
+				<view wx:if='{{activity.status==1}}' class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;" catchtap='lineup'>立即排队</view>
+
+				<view wx:if='{{activity.aheadUser== 0 && activity.isInQueue && activity.canOperate }}' class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;" catchtap='selectbox'>直接选盒</view>
+
+				<view wx:elif='{{activity.isInQueue}}' class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;">排队中</view>
+
+				<view wx:else class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;" catchtap='lineup'>立即排队</view>
+
+			</view>
+
+		</view>
+
+		<view style='width:100%;margin-top:40rpx;font-size:25rpx;'>本盒免费重抽次数：{{rollchance!=null?rollchance : 0}} （分享1位新朋友围观=重抽次数+1）</view>
+
+		<view style='width:100%;position:relative;'>
+			<view style='width:410rpx;position:absolute:top:0;left:0;right:0;margin:0 auto;overflow:hidden;'>
+				<view wx:for='{{inviteList}}' wx:key="key">
+					<view wx:if='{{item!=1}}' style='width:60rpx;height:60rpx;border-radius:50%;border:5rpx solid #26AFFB;float:left;'>
+						<image style='width:60rpx;height:60rpx;border-radius:50%;' src='{{item.headphoto}}'></image>
+					</view>
+
+					<view wx:if='{{item==1}}' style='width:62rpx;height:62rpx;border-radius:50%;border:1px solid #e3e3e3;position:relative;float:left;background:#fff;'>
+						<view style='position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;text-align:center;line-height:62rpx;'>＋</view>
+						<button style='width:62rpx;height:62rpx;position:absolute;top:0;right:0;opacity:0;' open-type='share'></button>
+					</view>
+
+				</view>
+
+			</view>
+
+			<view style='font-size:25rpx;position:absolute;top:20rpx;right:10rpx;' catchtap='showrule'>
+				<view style='color:#333;line-height:30rpx;float:right;'>活动规则</view>
+				<image style='width:30rpx;height:30rpx;float:right;margin-right:10rpx;' src='https://clw.51chaidan.com/images/bargain/Explain.png'></image>
+			</view>
+
+		</view>
+
+		<view style='font-size:25rpx;overflow:hidden;margin:0rpx auto;line-height:50rpx;text-align:center;'>
+
+			<view style='display:inline-block;'>分享新朋友满6人送透视卡</view>
+
+			<view style='width:50rpx;height:50rpx;display:inline-block;margin:0 10rpx;position:relative;top:10rpx;' catchtap='showxray' data-type='2'>
+				<image style='width:50rpx;height:50rpx;' src='https://www.51chaidan.com/images/icon/iconCardXRay.png'>
+				</image>
+			</view>
+
+		</view>
+
+		<view style='font-size:25rpx;margin:0rpx auto;'>{{activity.totalInvite}}/6人</view>
+
+		<somke wx:if='{{is_exhibition == 0}}' colortitle='#000'></somke>
+
+		<view wx:elif='{{is_exhibition==1}}' style='background:#f5f6fa;'>
+			<view style="width:100%;height:80rpx;">
+				<view style="width:50%;height:100%;{{exhibdetail?'font-size:26rpx;font-weight: bold;':'font-size:24rpx;'}}text-align:center;line-height:80rpx;float:left;position:relative;" data-ind='1' catchtap="exhibdetailfun">
+					品牌专区
+					<view wx:if='{{exhibdetail}}' style='width:100rpx;height:4rpx;background:#000;position:absolute;left:0;right:0;bottom:0;margin:auto;'></view>
+				</view>
+				<view style="width:50%;height:100%;{{!exhibdetail?'font-size:26rpx;font-weight: bold;':'font-size:24rpx;'}}text-align:center;line-height:80rpx;float:left;position:relative;" data-ind='2' catchtap="exhibdetailfun">
+					<view style='width:2rpx;height:50rpx;float:left;background:#BBB9B9;margin-top:15rpx;'></view>
+					商品详情
+					<view wx:if='{{!exhibdetail}}' style='width:100rpx;height:4rpx;background:#000;position:absolute;left:0;right:0;bottom:0;margin:auto;'></view>
+				</view>
+			</view>
+
+			<!-- 品牌专区 -->
+			<view id='exh1'>
+				<!-- 展会 -->
+				<view style='width:100%;overflow:hidden;'>
+					<view style="padding:20rpx;overflow:hidden;">
+						<image class="exhibdeimg" mode='aspectFit' src="{{userbranddata.logo}}" catchtap='gobrandDetails' data-mid='{{userbranddata.id}}'></image>
+						<view class="exhibdetxt">
+							<view class="exhibdxtxttitle specialellipsis" catchtap='gobrandDetails' data-mid='{{userbranddata.id}}'>{{userbranddata.brandName}}</view>
+							<view class="exhibdxtxtadd" style="background:#31b3fb;" catchtap="addfrindcommonifun" data-url='{{userbranddata.picPublic}}' data-name='{{userbranddata.brandName}}'>关注公众号</view>
+							<view class="exhibdxtxtadd" style="background:#6aca6b;margin-right:15rpx;" catchtap="addfrindcommonifun" data-url='{{userbranddata.picFriend}}' data-name='{{userbranddata.brandName}}'>添加好友</view>
+							<view style="font-size:26rpx;color:#333;padding:40rpx 0 0 0;text-align:left;line-height:30rpx;padding-top:40rpx;" wx:if='{{userbranddata.bradDesc}}' catchtap='gobrandDetails' data-mid='{{userbranddata.id}}'>简介：{{userbranddata.bradDesc}}</view>
+						</view>
+					</view>
+
+    <!-- 直播 -->
+  <block wx:if='{{livebroadcast&&livebroadcast.length!=0}}'>
+   
+			<swiper style="width:710rpx;margin:auto;height:170rpx;" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
+				<swiper-item  wx:for='{{livebroadcast}}' wx:key='key' wx:for-item='w'>
+						<view style="height:139rpx;background:#fff;position:relative;margin:15rpx 0;border-radius: 10rpx;">
+							<navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{w.room_id}}" style='position: absolute;height:100%;width:100%;left:0rpx;top:0;z-index:3;'></navigator>
+							<view style="overflow:hidden;border-radius:10rpx;">
+								<image style="height:139rpx;width:174rpx;float:left;border-radius:10rpx;"  mode='aspectFit' src="{{w.images}}"></image>
+								<view style="width:460rpx;height:119rpx;position:relative;float:left;margin:10rpx;">
+									<view style="font-size:30rpx;">{{w.name}}</view>
+									<view style="width:100%;position:absolute;bottom:0rpx;left:0;">
+										<view wx:if='{{w.status==102}}' style="font-size:25rpx;line-height:30rpx;;color:#fff;float:left;padding:5rpx 10rpx;border-radius:10rpx;background:#32ACFB;">{{w.start_time}}开播</view>
+										<view wx:elif='{{w.status==101}}' style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">直播中</view>
+										<view wx:elif='{{w.status==103}}' style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">已结束</view>
+										<view wx:else style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">尚未开播</view>
+									</view>
+								</view>
+							</view>
+							<!-- <view wx:if='{{w.status==102}}' style="width:240rpx;height:82rpx;position:absolute;right:10rpx;top:0;bottom:0;margin:auto 0;"><subscribe room-id="5"></subscribe></view> -->
+						</view>
+				</swiper-item>
+			</swiper>
+
+
+  </block>
+
+					<view class="exhibboxcon">
+						<!-- box-shadow: 2px 2px 5rpx #ccc; -->
+						<view style="float:left;margin-left:20rpx;">
+							<view class="mexhibboxconeve {{gid == 33115 ? 'cardmm' : ''}}" wx:for='{{exhdata}}' wx:key='key' wx:if='{{index%2==0}}' catchtap="jumpexhdetail" data-brandid='{{item.brandId}}' data-id='{{item.id}}' data-mtype="{{item.type}}" data-gid='{{item.goodsId}}'>
+								<block wx:if='{{item.type == 4 || item.type == 11|| item.type == 12 || item.type == 1 || item.type == 5|| item.type == 8|| item.type == 9}}'>
+									<image class="exhibboxeveimg" mode='widthFix' src="{{item.images}}"></image>
+									<view wx:if='{{item.type != 11 && item.type != 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.name}}</view>
+									<view wx:elif='{{item.type == 11 || item.type == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.goodsName}}</view>
+									<view wx:if='{{item.type == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:#666;">{{item.content}}</view>
+									<view style="width:100%;padding:10rpx 0;overflow:hidden;">
+										<view wx:if='{{item.shopPrice && item.shopPrice!="" && item.type != 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#ff2742;float:left;">￥{{item.shopPrice}}</view>
+										<view wx:elif='{{item.type == 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#ff2742;float:left;">免单活动</view>
+										<view wx:if='{{item.type == 4 || item.type == 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;">
+											<block wx:if='{{item.status==1}}'>{{item.start_time}}报名</block>
+											<view wx:elif='{{item.status==2&&item.isSign}}' style="color:#6aca6b;">已报名</view>
+											<block wx:elif='{{item.status==2}}'>{{item.stop_time}}开奖</block>
+											<block wx:elif='{{item.status==3}}'>已开奖</block>
+										</view>
+										<view wx:elif='{{item.type == 11 || item.type == 12}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;">
+											<view wx:if='{{item.status==1}}' style='color:#6aca6b;'>{{item.start_time}}开售</view>
+											<view wx:elif='{{item.status==2}}' style='color:#6aca6b;'>{{item.stop_time}}结束</view>
+											<view wx:elif='{{item.status==3}}' style='color:black;'>已结束</view>
+										</view>
+										<view wx:elif='{{item.type == 5 && item.tags.length>0}}'>
+											<view wx:for='{{item.tags}}' wx:if='{{index<1}}' wx:key='key' class="exhshoptiright specialellipsis">{{item}}</view>
+										</view>
+									</view>
+									<view style="width:100%;height:46rpx;">
+										<image class="exhshopimg" src="{{item.brandLogo}}"></image>
+										<view class="specialellipsis" style="width:160rpx;height:46rpx;line-height:46rpx;font-size:22rpx;float:left;margin-left:3rpx;">{{item.brandName}}</view>
+										<view wx:if='{{item.tags.length>0 && item.type != 5}}' class="exhshoptiright specialellipsis">{{item.tags[0]}}</view>
+									</view>
+								</block>
+
+								<block wx:else>
+									<image class="exhibboxeveimg" mode='widthFix' src="{{item.img_extend[0].img}}"></image>
+									<view class="exibactna specialellipsis" style="text-align:left;">{{item.title}}</view>
+									<view style="width:100%;height:46rpx;">
+										<image class="exhshopimg" src="{{item.logo}}"></image>
+										<view class="specialellipsis" style="width:160rpx;height:46rpx;line-height:46rpx;font-size:26rpx;float:left;margin-left:3rpx;">{{item.name}}</view>
+										<view style="float:right;width:70rpx;height:46rpx;" catchtap="ispraisefun" data-is_praise="{{item.is_praise}}" data-ind="{{index}}" data-lid="{{item.id}}" data-idx="{{idx}}">
+											<view style="height:46rpx;line-height:46rpx;font-size:26rpx;display:inline-block;vertical-align:top;float:right;{{item.is_praise == 1?'color:#f93f45;':'color:#BEBEBE;'}}">{{item.praise_sum}}</view>
+											<image style="width:30rpx;height:30rpx;margin:8rpx 0;display:inline-block;vertical-align:top;float:right;" src="{{item.is_praise == 0?'https://www.51chaidan.com/images/brand/black_heart.png':'https://www.51chaidan.com/images/brand/red_heart.png?'}}"></image>
+										</view>
+									</view>
+								</block>
+							</view>
+						</view>
+
+						<view style="float:left;margin-left:20rpx;">
+							<view class="mexhibboxconeve {{gid == 33115 ? 'cardmm' : ''}}" wx:for='{{exhdata}}' wx:key='key' wx:if='{{index%2==1}}' catchtap="jumpexhdetail" data-brandid='{{item.brandId}}' data-id='{{item.id}}' data-mtype="{{item.type}}" data-gid='{{item.goodsId}}'>
+								<block wx:if='{{item.type == 4 || item.type == 11|| item.type == 12 || item.type == 1 || item.type == 5|| item.type == 8|| item.type == 9}}'>
+									<image class="exhibboxeveimg" mode='widthFix' src="{{item.images}}"></image>
+									<view wx:if='{{item.type != 11 && item.type != 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.name}}</view>
+									<view wx:elif='{{item.type == 11 || item.type == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.goodsName}}</view>
+									<view wx:if='{{item.type == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:#666;">{{item.content}}</view>
+									<view style="width:100%;padding:10rpx 0;overflow:hidden;">
+										<view wx:if='{{item.shopPrice && item.shopPrice!="" && item.type != 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#ff2742;float:left;">￥{{item.shopPrice}}</view>
+										<view wx:elif='{{item.type == 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#ff2742;float:left;">免单活动</view>
+										<view wx:if='{{item.type == 4 || item.type == 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;">
+											<block wx:if='{{item.status==1}}'>{{item.start_time}}报名</block>
+											<view wx:elif='{{item.status==2&&item.isSign}}' style="color:#6aca6b;">已报名</view>
+											<block wx:elif='{{item.status==2}}'>{{item.stop_time}}开奖</block>
+											<block wx:elif='{{item.status==3}}'>已开奖</block>
+										</view>
+										<view wx:elif='{{item.type == 11 || item.type == 12}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;">
+											<view wx:if='{{item.status==1}}' style='color:#6aca6b;'>{{item.start_time}}开售</view>
+											<view wx:elif='{{item.status==2}}' style='color:#6aca6b;'>{{item.stop_time}}结束</view>
+											<view wx:elif='{{item.status==3}}' style='color:black;'>已结束</view>
+										</view>
+										<view wx:elif='{{item.type == 5 && item.tags.length>0}}'>
+											<view wx:for='{{item.tags}}' wx:if='{{index<1}}' wx:key='key' class="exhshoptiright specialellipsis">{{item}}</view>
+										</view>
+									</view>
+									<view style="width:100%;height:46rpx;">
+										<image class="exhshopimg" src="{{item.brandLogo}}"></image>
+										<view class="specialellipsis" style="width:160rpx;height:46rpx;line-height:46rpx;font-size:22rpx;float:left;margin-left:3rpx;">{{item.brandName}}</view>
+										<view wx:if='{{item.tags.length>0 && item.type != 5}}' class="exhshoptiright specialellipsis">{{item.tags[0]}}</view>
+									</view>
+								</block>
+
+								<block wx:else>
+									<image class="exhibboxeveimg" mode='widthFix' src="{{item.img_extend[0].img}}"></image>
+									<view class="exibactna specialellipsis" style="text-align:left;">{{item.title}}</view>
+									<view style="width:100%;height:46rpx;">
+										<image class="exhshopimg" src="{{item.logo}}"></image>
+										<view class="specialellipsis" style="width:160rpx;height:46rpx;line-height:46rpx;font-size:26rpx;float:left;margin-left:3rpx;">{{item.name}}</view>
+										<view style="float:right;width:70rpx;height:46rpx;" catchtap="ispraisefun" data-is_praise="{{item.is_praise}}" data-ind="{{index}}" data-lid="{{item.id}}" data-idx="{{idx}}">
+											<view style="height:46rpx;line-height:46rpx;font-size:26rpx;display:inline-block;vertical-align:top;float:right;{{item.is_praise == 1?'color:#f93f45;':'color:#BEBEBE;'}}">{{item.praise_sum}}</view>
+											<image style="width:30rpx;height:30rpx;margin:8rpx 0;display:inline-block;vertical-align:top;float:right;" src="{{item.is_praise == 0?'https://www.51chaidan.com/images/brand/black_heart.png':'https://www.51chaidan.com/images/brand/red_heart.png?'}}"></image>
+										</view>
+									</view>
+								</block>
+
+							</view>
+						</view>
+
+					</view>
+
+					<!-- 广告 -->
+					<view class="exhibboxconibox" wx:if='{{addsetData[0].length!=0}}' style="height:200rpx;">
+						<swiper class="swiper" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450" style="height:197rpx;">
+							<swiper-item wx:for="{{addsetData[0]}}" wx:key="key" wx:for-item='w'>
+								<image src="{{w.src}}?imageMogr2/thumbnail/x800" class="exhibboxconiboimg" catchtap="exhibitionpubjump" data-id='{{w.activity_id}}' data-type='{{w.href_type}}' style="border-radius:10rpx;"></image>
+							</swiper-item>
+						</swiper>
+					</view>
+
+				</view>
+
+
+			</view>
+			<view id='exh2'>
+				<!--  商品详情图片 转换HTML标签  -->
+				<view class='detailimg'>
+					<template is="wxParse" data="{{wxParseData:article.nodes}}" />
+				</view>
+			</view>
+
+		</view>
+
+		<view wx:if='{{is_exhibition == 0}}' style='width:100%;height:30rpx;'></view>
+
+	</view>
+
+
+	<view style='width:100%;{{isIphoneX?"height:130rpx;":"height:110rpx;"}}'></view>
+
+	<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+
+	<!--  授权弹框  -->
+	<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+
+	<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight}}px;width: 100%;z-index: 30;' catchtap='pullupsignin'></view>
+
+	<!--  二级背景  -->
+	<view class='tipbacktwo' wx:if='{{tipbacktwo}}' catchtouchmove="preventD" bindtap='tipbacktwo'></view>
+
+	<view class='buybombsimmediately' wx:if='{{buybombsimmediately}}'>
+		<view class='bbsheadcon'>
+			<view class='bbshccom' bindtap='tipbacktwo' style='position: relative;'>
+				<view class='bbshccomleft'>已选购数量</view>
+				<image class='bbshccomimg' src='/pages/images/icon_in.png'></image>
+				<view wx:if='{{!iswholePay}}' class='bbshccomright'>1</view>
+				<view wx:if='{{iswholePay}}' class='bbshccomright'>{{roleList.length}}</view>
+			</view>
+			<view class='bbshccom' bindtap='seladdressfun' style='position: relative;'>
+				<view class='bbshccomleft'>收货地址</view>
+				<image class='bbshccomimg' src='/pages/images/icon_in.png'></image>
+				<view class='bbshccomright '>
+					<view style="width:100%;line-height:57rpx;text-align:right;" class="specialellipsis">{{tipnamephone}}</view>
+					<view style="width:100%;line-height:57rpx;text-align:right;" class="specialellipsis">{{tipaddress}}</view>
+				</view>
+			</view>
+			<view class='bbshccombot'>
+				<view class='bbshcombotleft'>应付金额</view>
+				<view wx:if='{{isFirstOrder}}' style="float:left;font-size:20rpx;line-height:30rpx;border:3rpx solid #d64650;border-radius:7rpx;margin:28rpx 0 0 10rpx;color:#d64650;">首单立减{{firstOrderDiscount}}元</view>
+				<view class='bbshcombotright'>
+					<view class='bbshcombotpr'>￥{{isFirstOrder ? payprice - firstOrderDiscount : payprice}}</view>
+					<view class='bbshcombotdet' bindtap='pricedetailc'>
+						<image class='bbshdetimg' src='/pages/images/tipdet.png'></image>点击查看价格明细
+					</view>
+				</view>
+			</view>
+			<view class='pricedetail' wx:if='{{pricedetailc}}'>
+				<view class='pricedetailo'>
+					<view class='pricedetailoleft'>商品价格</view>
+					<view class='pricedetailoright'>￥{{payprice}}</view>
+				</view>
+			</view>
+			<view class='bbshccom'>
+				<view class='bbshccomleft'>买家留言</view>
+				<input class='buyermessage' type='text' bindinput="inputChange" value='{{desc}}' placeholder='选填备注,或添加微信好友({{wxnum}})'></input>
+			</view>
+		</view>
+		<view class='bbshbottom'>
+			<view class='bbshbottomhead'>
+			</view>
+			<view wx:if='{{!iswholePay}}' class='bbshbottombut' bindtap='updateadd' style='position:relative;'>提交订单（{{remaintime}}s）
+			</view>
+			<view wx:if='{{iswholePay}}' class='bbshbottombut' bindtap='wholebox' style='position:relative;'>提交订单
+			</view>
+		</view>
+
+	</view>
+
+	<!--  收货地址  -->
+	<view class='receivingaddress' wx:if='{{receivingaddress}}'>
+		<view class='recgadhead'>
+			收货地址
+			<image src='/pages/images/forknumber.png' class='recgadheadimg' bindtap='receivingaddressfun'></image>
+		</view>
+		<view class='recgadcon'>
+			<view class='recgaddata' wx:for='{{addressdata}}' wx:key='key'>
+				<view class='recgaddname' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='revisethereceivingaddress'>
+					<view class='recgaddnameleft'>{{item.consignee}}</view>
+					<view class='recgaddnameleft'>{{item.phone}}</view>
+				</view>
+				<view class='recgadaddress' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='revisethereceivingaddress'>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
+				<view class='recgadbottom'>
+					<view class='recgadbotleft'>
+						<image class='recgadbotleftimg' hidden='{{!item.checked}}' src='/pages/images/pressed_click.png'></image>
+						<image class='recgadbotleftimg' hidden='{{item.checked}}' src='/pages/images/normal_click.png'></image>
+						默认地址
+					</view>
+					<view class='recgadbotright' bindtap='deladdress' data-ind="{{item.aid}}">
+						<image src='/pages/images/icon_delete.png' class='recgadbotleftimg'></image>
+						删除
+					</view>
+					<view class='recgadbotright' style='margin-right:50rpx;' bindtap='jumpeditaddress' data-address='{{item.address}}' data-aid='{{item.aid}}' data-city='{{item.city}}' data-consignee='{{item.consignee}}' data-district='{{item.district}}' data-phone='{{item.phone}}' data-province='{{item.province}}' data-idcard='{{item.idcard}}'>
+						<image src='/pages/images/icon_edit.png' class='recgadbotleftimg'></image>
+						编辑
+					</view>
+				</view>
+			</view>
+			<view class='recgadnodata' wx:if='{{addressdata.length==0}}'>
+				<image src='/pages/images/recaddnodata.png' class='recgadnodataimg'></image>
+			</view>
+		</view>
+		<view class='recgadbot' bindtap='jumpaddress'>
+			增加新地址
+		</view>
+
+	</view>
+
+	<view wx:if='{{suboformola}}' style='width:100%;height:100%;background:#000;opacity:0;z-index:100;position:fixed;top:0;left:0;'></view>
+
+	<!-- ishowbox  -->
+	<view wx:if='{{ishowbox}}' style='width:100%;height:100%;position:fixed;top:0px;left:0;z-index:13;'>
+
+		<view class='bgstyle' style="background:#E8E8E9;opacity:1;top:{{statusBarHeightMc}}px" catchtouchmove="myCatchTouch" catchtap='closeselect'>
+			<view style="font-size:25rpx;color:#1989fa;margin:35rpx 35rpx;">返回抽盒机</view>
+		</view>
+
+		<view style='width:100%;height:{{iefheight+210}}rpx;position:absolute;top:0rpx;left:0;bottom:0;margin:auto 0;text-align:center;'>
+
+			<view style='width:{{iewidth}}rpx;height:{{iefheight}}rpx;margin:0 auto;'>
+				<image style='width:{{iewidth}}rpx;' mode="widthFix" src='{{activity.imgBox}}' class='{{ischange?"change":""}}' bindload='imageLoadad'></image>
+			</view>
+
+			<view style='width:70rpx;height:70rpx;position:absolute;top:0;right:10rpx;' catchtap='showhint' data-type='2'>
+				<image style='width:70rpx;height:70rpx;' src='https://www.51chaidan.com/images/icon/iconCardTip.png'></image>
+				<view wx:if='{{cardTip>0}}' class='tabshopimg specialellipsis {{isusertip?"graynumbg":"#rednumbg"}}'>{{cardTip}}</view>
+			</view>
+			<view style='position:absolute;top:70rpx;right:20rpx;font-size:25rpx;'>提示卡</view>
+
+			<view style='width:70rpx;height:70rpx;position:absolute;top:130rpx;right:10rpx;' catchtap='showxray' data-type='1'>
+				<image style='width:70rpx;height:70rpx;' src='https://www.51chaidan.com/images/icon/iconCardXRay.png'></image>
+				<view wx:if='{{cardXRay>0}}' class='tabshopimg specialellipsis {{isuserray?"graynumbg":"#rednumbg"}}'>{{cardXRay}}</view>
+				<view wx:elif='{{cardXRay==0}}' class='tabshopimg specialellipsis getnumbg'>领</view>
+			</view>
+			<view style='position:absolute;top:200rpx;right:20rpx;font-size:25rpx;text-align:center;'>透视卡
+				<text wx:if='{{perspcardiftrmin}}' style="color:#ff6968;font-size:18rpx;font-weight:bold;">\n{{percountdown}}</text>
+			</view>
+
+			<view style='width:100%;height:80rpx;position:relative;margin-top:40rpx;'>
+
+				<view style="width:50%;height:80rpx;position:relative;float:left;">
+					<view class='queuebtnstyle2' style="background:white;float:left;" catchtap='changeone'>换一个</view>
+				</view>
+
+				<view style="width:50%;height:80rpx;position:relative;float:right;">
+					<view class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;" catchtap='{{isusedWelfare ? "showsurebuy" : "updateadd"}}'>就买它</view>
+				</view>
+
+			</view>
+
+		</view>
+		<view style='width:100%;height:100rpx;position:absolute;bottom:100rpx;left:0;font-size:25rpx;z-index:13;text-align:center;color:gray;'>盲盒类商品拆盒后(含在线拆盒)不支持7天无理由退换
+		</view>
+
+	</view>
+
+	<!-- ishowaward -->
+	<view wx:if='{{ishowaward}}' style='width:100%;height:100%;position:fixed;top:0px;left:0;z-index:13;'>
+		<view class='bgstyle' style="background:#E8E8E9;opacity:1;top:{{statusBarHeightMc}}px" catchtouchmove="myCatchTouch" data-type='1' catchtap='closeaward'>
+			<view wx:if='{{isTry}}' style="font-size:25rpx;color:#1989fa;margin:35rpx 35rpx;">返回抽盒机</view>
+		</view>
+
+		<view style='width:100%;height:{{iefheight+320}}rpx;position:absolute;top:{{statusBarHeightMc + 40}}px;left:0;text-align:center;font-size:30rpx;'>
+
+			<view style='width:{{iewidth}}rpx;height:{{iefheight}}rpx;margin:0 auto;' class='{{ischangeagain?"changebox":""}} card-module'>
+
+				<swiper wx:if='{{false}}' style="width:{{iewidth}}rpx;height:{{iefheight}}rpx;" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
+					<swiper-item wx:for="{{awardimglist}}" wx:key="key">
+						<image style='width:{{iewidth}}rpx;' mode="widthFix" src='{{item}}' bindload='imageLoadad'></image>
+					</swiper-item>
+				</swiper>
+
+				<view style="width:{{iewidth}}rpx;height:{{iefheight}}rpx;position:relative;" catchtap="clickCard">
+					<view class="{{showClass ? 'frontm' : 'front'}} card-item">
+						<image style='width:{{iewidth}}rpx;' mode="widthFix" src='{{awardfront}}' bindload='imageLoadad'></image>
+					</view>
+					<view class="{{showClass ? 'backm' : 'back'}} card-item">
+						<image style='width:{{iewidth}}rpx;' mode="widthFix" src='{{awardback}}' bindload='imageLoadad'></image>
+					</view>
+				</view>
+
+			</view>
+
+			<view style='width:100%;line-height:30rpx;margin-top:40rpx;color:#ff9800;' data-type='1' catchtap='closeaward'>恭喜您获得{{awardname}}</view>
+			<view wx:if='{{!isTry}}' style='width:100%;line-height:30rpx;color:#4c9a23;margin-top:20rpx'>
+          <block wx:if='{{activity.isDirectShipping}}'>确认后将直接发货，此款商品不进入玩具柜</block>
+          <block wx:else>确认后将放入您的玩具柜（自由出售or直接发货）</block>
+      </view>
+
+			<view style='width:100%;height:80rpx;position:relative;margin-top:30rpx;'>
+
+				<view style="width:50%;height:80rpx;position:relative;float:left;">
+					<view wx:if='{{!isTry && boxnum > 0 && !isheavyroll}}' class='queuebtnstyle2' style="background:white;float:left;" catchtap='judgeAgainRoll'>免费重抽（{{remaintime}}秒）</view>
+					<view wx:if='{{!isTry && (boxnum <= 0 || isheavyroll)}}' class='queuebtnstyle2' style="background:#B0B0B0;color:white;float:left;">免费重抽</view>
+
+					<view wx:if='{{isTry && isReTry}}' class='queuebtnstyle2' style="background:white;float:left;" data-isretry='1' catchtap='havetry'>免费重抽</view>
+
+					<view wx:if='{{isTry && !isReTry}}' class='queuebtnstyle2' style="background:#B0B0B0;color:white;float:left;" data-isretry='1' catchtap=''>免费重抽</view>
+
+				</view>
+
+				<view style="width:50%;height:80rpx;position:relative;float:right;" data-type='1' catchtap='closeaward'>
+					<view wx:if='{{isTry}}' class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;" data-type='2' catchtap='closeaward'>再试一次</view>
+
+					<view wx:if='{{!isTry}}' class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;" data-type='2' catchtap='closeaward'>再买一个</view>
+				</view>
+
+			</view>
+
+			<view wx:if='{{isTry}}' style='width:100%;line-height:30rpx;color:#4c9a23;margin-top:20rpx'>欧气测试，仅供参考，付费抽盒后可以在玩具柜自由交易</view>
+
+		</view>
+
+		<view style="width:100%;position:absolute;bottom:30rpx;left:0;" data-type='1' catchtap='closeaward'>
+
+			<view style="width:80%;margin:0 10%;font-size:25rpx;" catchtap="mmm">
+				<view>免费重抽说明:</view>
+				<view>1.每次抽盒只能重抽一次，随机款式（与上次不同）</view>
+				<view>2.仅剩一盒时不支持重抽</view>
+				<view>3.重抽时间为60秒内，倒计时结束自动放入玩具柜</view>
+			</view>
+
+			<view style="width:100%;height:200rpx;position:relative;margin-top:20rpx;">
+				<view wx:if='{{isheavyroll}}' style="width:480rpx;height:200rpx;position:absolute;top:0;left:0;right:0;margin:0 auto;overflow:hidden;font-size:25rpx;" catchtap="mmm">
+					<view style="width:130rpx;line-height:150rpx;text-align:center;float:left;">重抽记录:</view>
+					<view style="width:150rpx;height:200rpx;float:left;">
+						<image style="width:150rpx;height:150rpx" src="{{rollbefore}}" mode="aspectFit"></image>
+						<view style="width:150rpx;text-align:center;color:#e94f57;">重抽前</view>
+					</view>
+					<view style="width:150rpx;height:200rpx;float:left;margin-left:30rpx;">
+						<image style="width:150rpx;height:150rpx" src="{{rollbelater}}" mode="aspectFit"></image>
+						<view style="width:150rpx;text-align:center;color:#e94f57;">重抽后</view>
+					</view>
+				</view>
+			</view>
+
+		</view>
+
+	</view>
+
+	<!-- ishowexit -->
+	<view wx:if='{{ishowexit}}' style='width: 100%;height: 100%;position: fixed;top: 0;left: 0;z-index: 99;'>
+		<view class='bgstyle' catchtouchmove="myCatchTouch" catchtap='closexit'></view>
+
+		<view style='height:190rpx;width:520rpx;background:#fff;position:absolute;left:0;top:0;right:0;bottom:0;margin:auto;border-radius:10rpx;'>
+
+			<view style='font-size:30rpx;margin:20rpx;line-height:60rpx;text-align:center;'>返回首页将以此款发货</view>
+
+			<view style='height:80rpx;font-size:30rpx;margin:20rpx;text-align:center;display:flex;'>
+
+				<view style='line-height:80rpx;color:#1989FA;float:left;z-index:1;flex: 1;position:relative;' catchtap='closexit'>
+					取消
+				</view>
+
+				<view style='line-height:80rpx;color:#1989FA;float:left;z-index:1;flex: 1;position:relative;' catchtap='affirmexit'>
+					确定
+				</view>
+			</view>
+		</view>
+
+	</view>
+
+	<!-- ishowagain -->
+	<view wx:if='{{ishowagain}}' style='width: 100%;height: 100%;position: fixed;top: 0;left: 0;z-index: 199;'>
+		<view class='bgstyle' catchtouchmove="myCatchTouch" catchtap='closeagain'></view>
+
+		<view style='height:190rpx;width:520rpx;background:#fff;position:absolute;left:0;top:0;right:0;bottom:0;margin:auto;border-radius:10rpx;'>
+
+			<view style='font-size:30rpx;margin:20rpx;line-height:60rpx;text-align:center;'>您还有{{rollchance}}次重抽机会,是否使用?</view>
+
+			<view style='height:80rpx;font-size:30rpx;margin:20rpx;text-align:center;display:flex;'>
+
+				<view style='line-height:80rpx;color:#1989FA;float:left;z-index:1;flex: 1;position:relative;' catchtap='againroll'>
+					重抽一次
+				</view>
+
+				<view style='line-height:80rpx;color:#1989FA;float:left;z-index:1;flex: 1;position:relative;' catchtap='affirmexit'>
+					不重抽
+				</view>
+			</view>
+		</view>
+
+	</view>
+
+	<view wx:if='{{isagainroll}}' style="width:100%;height:100%;position:fixed;top:0px;left:0;z-index:20;">
+
+		<view class='bgstyle' catchtouchmove="myCatchTouch" catchtap="closeJudgeAgainRoll"></view>
+
+		<view style="width:500rpx;height:250rpx;border-radius:10rpx;position:absolute;bottom:0;top:0;left:0;right:0;margin:auto;background:white;">
+			<view style="width:100%;line-height:50rpx;font-size:30rpx;color:black;text-align:center;margin-top:30rpx;">{{retry.title}}</view>
+			<view style="width:100%;font-size:25rpx;line-height:30rpx;color:#666;text-align:center;margin-top:20rpx;"><text>{{retry.description}}</text></view>
+
+			<view style="width:100%;height:50rpx;position:absolute;bottom:10rpx;text-align:center;">
+				<view style="width:50%;float:left;" catchtap='closeJudgeAgainRoll'>取消</view>
+				<view style="width:50%;float:left;color:#4c9a23;" catchtap='againroll'>重抽（{{remaintime}}秒）</view>
+			</view>
+		</view>
+
+	</view>
+
+	<!-- isagainroll -->
+	<view wx:if='{{false}}' style='width: 100%;height: 100%;position: fixed;top: 0;left: 0;z-index: 199;'>
+		<view class='bgstyle' catchtouchmove="myCatchTouch" catchtap='closeJudgeAgainRoll'></view>
+
+		<view style='height:190rpx;width:520rpx;background:#fff;position:absolute;left:0;top:0;right:0;bottom:0;margin:auto;border-radius:10rpx;'>
+
+			<view style='font-size:30rpx;margin:20rpx;line-height:60rpx;text-align:center;'>是否重抽?</view>
+
+			<view style='height:80rpx;font-size:30rpx;margin:20rpx;text-align:center;display:flex;'>
+
+				<view style='line-height:80rpx;color:#1989FA;float:left;z-index:1;flex: 1;position:relative;' catchtap='closeJudgeAgainRoll'>
+					取消
+				</view>
+
+				<view style='line-height:80rpx;color:#1989FA;float:left;z-index:1;flex: 1;position:relative;' catchtap='againroll'>
+					确认
+				</view>
+			</view>
+		</view>
+
+	</view>
+
+	<!-- ishowhint -->
+	<view wx:if='{{ishowhint}}' style='width: 100%;height: 100%;position: fixed;top: 0;left: 0;z-index: 99;'>
+
+		<view class='bgstyle' style="background:#E8E8E9;opacity:1;top:{{statusBarHeightMc}}px" catchtouchmove="myCatchTouch" catchtap='closehint'></view>
+
+		<view style='height:530rpx;width:520rpx;position:absolute;left:0;top:0;right:0;bottom:0;margin:auto;'>
+			<view style='height:430rpx;width:520rpx;background:#fff;border-radius:10rpx;'>
+
+				<view style='font-size:30rpx;padding:20rpx;line-height:60rpx;text-align:left;'>
+					<text>{{hintstr}}</text>
+					<text wx:if='{{ishareguessbox}}' style="color:#f42251;">发起猜盒后不可重抽</text>
+				</view>
+				<!-- ishareguessbox -->
+				<view wx:if='{{ishareguessbox}}' style='width:300rpx;line-height:80rpx;background:#FF9900;border-radius:10rpx;text-align:center;color:#fff;font-size:25rpx;position:absolute;bottom:130rpx;left:110rpx;' catchtap='jumpguessbos'>
+					邀请猜盒
+				</view>
+
+				<!-- iexpendtip -->
+				<view wx:if='{{iexpendtip}}' style='width:300rpx;line-height:80rpx;background:#FF9900;border-radius:10rpx;text-align:center;color:#fff;font-size:25rpx;position:absolute;bottom:130rpx;left:110rpx;' catchtap='usercard' data-type='tip'>
+					消耗一张提示卡
+				</view>
+
+				<!-- iexpendray -->
+				<view wx:if='{{iexpendray}}' style='width:300rpx;line-height:80rpx;background:#FF9900;border-radius:10rpx;text-align:center;color:#fff;font-size:25rpx;position:absolute;bottom:130rpx;left:110rpx;' catchtap='usercard' data-type='XRay'>
+					消耗一张透视卡
+				</view>
+
+			</view>
+
+			<image class='closestyle' src='https://www.51chaidan.com/images/spread/dial/fork.png' catchtap='closehint'>
+			</image>
+
+		</view>
+
+	</view>
+
+
+	<!-- ishowcard -->
+	<view wx:if='{{ishowcard}}' style='width: 100%;height: 100%;position: fixed;top: 0;left: 0;z-index:15;'>
+
+		<view class='bgstyle' catchtouchmove="myCatchTouch" catchtap='closecard'></view>
+
+
+		<view style='height:{{cardimgheight + 400}}rpx;width:520rpx;position:absolute;left:0;top:0;right:0;bottom:0;margin:auto;'>
+			<view style='height:{{cardimgheight + 300}}rpx;width:520rpx;background:#fff;border-radius:10rpx;position:relative;'>
+
+				<view style='font-size:30rpx;padding:20rpx;line-height:60rpx;text-align:center;'>
+					<text>盲盒中{{cardstr}}</text>
+				</view>
+
+				<image style='width:150rpx;margin-left:185rpx;' bindload="cardImgLoad" mode="widthFix" src='{{cardImg}}'> </image>
+
+				<!-- iexpendray   -->
+				<view wx:if='{{israysure}}' style='width:300rpx;line-height:80rpx;background:#FF9900;border-radius:10rpx;text-align:center;color:#fff;font-size:30rpx;position:absolute;bottom:70rpx;left:110rpx;' catchtap='{{isusedWelfare ? "showsurebuy" : "updateadd"}}'>
+					购买
+				</view>
+				<view wx:if='{{istipsure}}' style='width:300rpx;line-height:80rpx;background:#FF9900;border-radius:10rpx;text-align:center;color:#fff;font-size:30rpx;position:absolute;bottom:70rpx;left:110rpx;' catchtap='closecard'>
+					确定
+				</view>
+
+				<view style="width:100%;line-height:50rpx;text-align:center;font-size:25rpx;position:absolute;bottom:10rpx;">{{remaintime}}秒内可以支付购买此款</view>
+
+			</view>
+
+		</view>
+
+	</view>
+
+	<!-- ishowwholebox -->
+	<view wx:if='{{false}}' style="width:100%;height:100%;position: fixed;top: 0;left: 0;z-index: 199;">
+
+		<view class='bgstyle' style="opacity:0;" catchtouchmove="myCatchTouch" catchtap="closewhole"></view>
+
+		<view style="width:480rpx;height:300rpx;background:white;position:absolute;left:0;top:0;right:0;bottom:0;margin:auto;border-radius:10rpx;">
+
+			<view style="color:#e94f57;text-align:center;font-size:35rpx;margin-top:30rpx;">拆整盒</view>
+
+			<view style="text-align:center;margin-top:20rpx;">
+				<text style="font-size:27rpx;line-height:40rpx;">确认后您将直接端盒 \n不受当前剩余盒数影响</text>
+			</view>
+
+			<view style="display:flex;font-size:25rpx;text-align:center;margin-top:30rpx;">
+				<view style="flex:1;" catchtap="closewhole">
+					<view style="width:150rpx;line-height:50rpx;color:white;background:#575757;border-radius:25rpx;margin:0 auto;">取消</view>
+				</view>
+				<view style="flex:1;" catchtap="dsbbbutclickt">
+					<view style="width:150rpx;line-height:50rpx;color:white;background:#e94f57;border-radius:25rpx;margin:0 auto;">拆整盒</view>
+				</view>
+			</view>
+
+
+		</view>
+
+	</view>
+
+	<!-- ishowWholeBoxList -->
+	<view wx:if='{{ishowWholeBoxList}}' style="width:100%;height:100%;position:fixed;top: 0;left: 0;z-index: 99;">
+
+		<view class='bgstyle' style="background:#E8E8E9;opacity:1;top:{{statusBarHeightMc}}px" catchtouchmove="myCatchTouch" data-mtype="close" catchtap='closeWholePay'></view>
+
+		<view style="width:100%;margin-top:130rpx;position:absolute;top:0;left:0;font-size:30rpx;text-align:center;">
+
+			<view id='wholeboxid' style="width:100%;overflow:hidden;">
+				<view wx:for='{{wholeBoxList}}' wx:key='key'>
+					<view style="position:relative;margin:10rpx 15rpx;width:155rpx;height:{{item.isdebris?item.height:wholeimageheight}}rpx;float:left;">
+						<image style="width:{{item.width}}rpx;{{item.ishow?'':'visibility:hidden'}};margin:0 auto;" mode='widthFix' src="{{item.imgRole}}" bindload="imageloaddebrisitems" data-ind="{{index}}"></image>
+						<view wx:if='{{item.ishow && item.isdebris}}' class='fragment' style='width:155rpx;left:0;'>
+							<view class='fragmentbg'></view>
+							<view class='fragmenttxt'>
+								<image class='fragmentimg' src='https://www.51chaidan.com/images/toyCabinet/toyFragment.png'></image>
+								<text class='fragmentfont'>碎片</text>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+
+			<view style="width:100%;height:80rpx;position:relative;">
+				<view class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;" catchtap='closeWholePay' data-mtype="open">再抽一盒</view>
+			</view>
+
+			<view style='width:100%;line-height:30rpx;color:#4c9a23;margin-top:40rpx'><text>抽盒机抽整盒为拆盒确认款\n</text><block wx:if='{{activity.isDirectShipping}}'>确认后将直接发货，此款商品不进入玩具柜</block><block wx:else>确认后将放入您的玩具柜（自由出售or直接发货）</block></view>
+
+		</view>
+
+		<view wx:if='{{isAllshow}}' class='bgstyle' style="opacity:0;z-index:1;" catchtouchmove="myCatchTouch" catchtap='allShow'></view>
+
+	</view>
+
+	<!-- ishowxray -->
+	<view wx:if='{{ishowxray}}' style="width:100%;height:100%;position:fixed;top:0;left:0;z-index:99;">
+
+		<view class='bgstyle' style="background:#E8E8E9;opacity:1;top:{{statusBarHeightMc}}px;" catchtouchmove="myCatchTouch" catchtap="closexray"></view>
+
+		<view style="width:500rpx;height:500rpx;background:white;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;font-size:25rpx;padding:20rpx;border-radius:10rpx;">
+			<!-- （当前拥有{{cardXRay}}张） -->
+			<view style="color:#FF6968;font-size:30rpx;font-weight:bold;">透视卡</view>
+			<view style="line-height:40rpx;">使用后可直接显示盒内款式</view>
+			<view style="margin-top:30rpx;">获取方式:</view>
+			<view>分享抽盒机到2个非官方群（>=100人）并上传
+				<text style="color:#3f9313;">60分钟内</text>截图，审核成功后赠送透视卡×1</view>
+			<view style="color:#3f9313;">每天可重新上传1次，请按规范上传截图</view>
+			<view style="width:100%;height:30rpx;"></view>
+
+			<view wx:if='{{gainXRay>0}}' style="color:#FF9900;">今日已赠送{{gainXRay}}/{{maxXRay}}张，明日再来</view>
+
+			<view wx:if='{{!updateOne.isUploadEnbled || !updateTwo.isUploadEnbled}}' style="color:#FF6968;">未通过次数过多，明日再来</view>
+			<view wx:elif='{{updateOne.status == 3 || updateTwo.status == 3}}' style="color:#FF6968;">未通过请重新上传</view>
+
+			<view style="width:100%;overflow:hidden;margin-top:40rpx;">
+				<view wx:if='{{updateOne.isUploadEnbled && updateTwo.isUploadEnbled}}' style="line-height:40rpx;float:left;margin-left:50rpx;">
+					<image style="width:40rpx;height:40rpx;display:inline-block;vertical-align:top;" src="http://www.51chaidan.com/images/background/shangchuan.png"></image>
+					<text wx:if='{{updateOne.status==0 || updateOne.status==3}}' style="text-decoration:underline;" catchtap="upImgSernum" data-type="{{updateOne.status}}" data-no="0">上传截图1</text>
+					<text wx:elif='{{updateOne.status==1}}' style='color:#42bd56;'>审核中...</text>
+					<text wx:elif='{{updateOne.status==2}}' style='color:#42bd56;'>审核通过</text>
+					<text wx:elif='{{updateOne.status==1 && updateTwo.status!=1 && updateTwo.status!=2}}' style='color:#FF6968;'>还差一张</text>
+				</view>
+
+				<view wx:if='{{updateOne.isUploadEnbled && updateTwo.isUploadEnbled}}' style="line-height:40rpx;float:right;margin-right:50rpx;">
+					<image style="width:40rpx;height:40rpx;display:inline-block;vertical-align:top;" src="http://www.51chaidan.com/images/background/shangchuan.png"></image>
+					<text wx:if='{{updateTwo.status==0 || updateTwo.status==3}}' style="text-decoration:underline;" catchtap="upImgSernum" data-type="{{updateTwo.status}}" data-no="1">上传截图2</text>
+					<text wx:elif='{{updateTwo.status==1}}' style='color:#42bd56;'>审核中...</text>
+					<text wx:elif='{{updateTwo.status==2}}' style='color:#42bd56;'>审核通过</text>
+					<text wx:elif='{{updateTwo.status==1 && updateOne.status!=1 && updateOne.status!=2 }}' style='color:#FF6968;'>还差一张</text>
+				</view>
+
+			</view>
+
+			<!-- <view wx:if='{{updateOne.isUploadEnbled && updateTwo.isUploadEnbled}}' style="line-height:40rpx;">
+				<image style="width:40rpx;height:40rpx;display:inline-block;vertical-align:top;" src="http://www.51chaidan.com/images/background/shangchuan.png"></image>
+				<text wx:if='{{updateOne.status==0 || updateOne.status==3}}' style="text-decoration:underline;" catchtap="upImgSernum" data-type="{{updateOne.status}}" data-no="0">上传截图1</text>
+				<text wx:elif='{{updateOne.status==1}}' style='color:#42bd56;'>审核中...</text>
+				<text wx:elif='{{updateOne.status==2}}' style='color:#42bd56;'>审核通过</text>
+				<text wx:elif='{{updateOne.status==1 && updateTwo.status!=1 && updateTwo.status!=2}}' style='color:#FF6968;'>还差一张</text>
+			</view>
+
+			<view style="width:100%;height:20rpx;"></view>
+
+			<view wx:if='{{updateOne.isUploadEnbled && updateTwo.isUploadEnbled}}' style="line-height:40rpx;">
+				<image style="width:40rpx;height:40rpx;display:inline-block;vertical-align:top;" src="http://www.51chaidan.com/images/background/shangchuan.png"></image>
+				<text wx:if='{{updateTwo.status==0 || updateTwo.status==3}}' style="text-decoration:underline;" catchtap="upImgSernum" data-type="{{updateTwo.status}}" data-no="1">上传截图2</text>
+				<text wx:elif='{{updateTwo.status==1}}' style='color:#42bd56;'>审核中...</text>
+				<text wx:elif='{{updateTwo.status==2}}' style='color:#42bd56;'>审核通过</text>
+				<text wx:elif='{{updateTwo.status==1 && updateOne.status!=1 && updateOne.status!=2 }}' style='color:#FF6968;'>还差一张</text>
+			</view> -->
+
+			<view wx:if='{{ishowxraybtn}}' style="width:200rpx;background:#FF6968;line-height:60rpx;border-radius:30rpx;text-align:center;color:white;position:absolute;right:40rpx;bottom:20rpx;" catchtap='usercard' data-type='XRay'>使用透视卡
+				<view style="width:30rpx;height:30rpx;border-radius:17rpx;border:4rpx solid #ff6968;position:absolute;top:-18rpx;right:-18rpx;color:#ff6968;text-align:center;line-height:30rpx;font-size:18rpx;" class="specialellipsis">{{cardXRay}}</view>
+			</view>
+
+			<view style="width:200rpx;background:#FF9800;height:60rpx;border-radius:30rpx;text-align:center;color:white;position:absolute;left:{{ishowxraybtn? '40' : '150'}}rpx;bottom:20rpx;font-size:20rpx;" catchtap="exchange"><text>{{exchangeLuckyCondition}}点\n兑换透视卡</text>
+				<view style="width:200rpx;position:absolute;top:-40rpx;color:#FF9800;">当前幸运值：{{blindBoxLucky}}</view>
+			</view>
+
+
+			<view style="position:absolute;right:20rpx;top:10rpx;">
+				<button style='width:55rpx;height:55rpx;position:absolute;top:0;right:0;opacity:0;' open-type='share'></button>
+				<image style="width:55rpx;height:55rpx;" src="http://www.51chaidan.com/images/background/fenxiang.png"></image>
+			</view>
+
+			<view>
+
+			</view>
+
+		</view>
+
+	</view>
+
+	<!-- 全局父view -->
+</view>
+<!-- 商品详情 -->
+<view style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:199;' wx:if='{{iftrdetailpagetwo}}'>
+	<view class='bgstyle' catchtap='iftrdetailpageb'></view>
+
+	<view style="width:740rpx;position:absolute;left:0;top:{{statusBarHeightMc}}px;z-index:11;">
+		<somke colortitle='white'></somke>
+	</view>
+
+	<view style='width:100%;height:65%;position:absolute;left:0;bottom:0;background:#ccc;z-index:9;'>
+		<image src='https://www.51chaidan.com/images/spread/dial/fork.png' catchtap='iftrdetailpageb' style='width:50rpx;height:50rpx;padding:30rpx;border-radius:50%;display:block;position:absolute;top:0rpx;right:0;z-index:10;'>
+		</image>
+		<scroll-view scroll-y="true" style="width:100%;height:100%;background:#f0eff5;" class='detailsmokebox'>
+			<template wx:if='{{iftrdetailpagehtml}}' is="wxParse" data="{{wxParseData:article.nodes}}" />
+			<template wx:if='{{blindBoxdetailpagetwo}}' is="wxParse" data="{{wxParseData:blindBox.nodes}}" />
+			<template wx:if='{{hideBoxdetailpagetwo}}' is="wxParse" data="{{wxParseData:hideBox.nodes}}" />
+		</scroll-view>
+
+	</view>
+
+</view>
+
+
+<view style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:199999;' wx:if='{{ishowwholebox}}'>
+	<view class='bgstyle' style="opacity: 0.8;" catchtap='closewhole'></view>
+
+	<view style="height:100%;position:absolute;left:0rpx;top:170rpx;z-index:9;" catchtap='closewhole'>
+
+		<view style="width:250rpx;color:white;position:absolute;top:0rpx;left:0;right:0;margin:0 auto;font-size:35rpx;font-weight:bold;text-align:center;">端盒送隐藏</view>
+		<view style="color:#F6CB6A;margin-top:150rpx;margin-left:20rpx;font-size:25rpx;">隐藏预览</view>
+
+		<view style='width:730rpx;height:480rpx;position:relative;margin:30rpx 0 0 20rpx;' catchtap="myCatchTouch">
+
+			<swiper autoplay="{{false}}" circular="true" interval="3000" style="width:700rpx;height:480rpx;">
+				<block wx:for="{{swiperhide}}" wx:key='key'>
+					<swiper-item>
+						<block wx:for="{{item}}" wx:key='key'>
+							<view style='width:130rpx;height:130rpx;margin:30rpx 10rpx 0 0;float:left;'>
+								<image src="{{item.roleImg}}" style='height:130rpx;width:130rpx;display:inline-block;' mode="aspectFit"></image>
+							</view>
+						</block>
+					</swiper-item>
+				</block>
+			</swiper>
+
+			<view wx:if='{{ishowarrow}}' style="height:50rpx;font-size:50rpx;position:absolute;right:-20rpx;top:0;bottom:0;margin:auto;color:white;">》</view>
+
+
+		</view>
+
+		<view style="display:flex;font-size:25rpx;text-align:center;margin-top:80rpx;">
+			<view style="flex:1;margin-top:5rpx;" catchtap="closewhole">
+				<view style="width:200rpx;line-height:70rpx;color:white;background:#a8a8a8;border-radius:5rpx;margin:0 auto;">取消</view>
+			</view>
+			<view style="flex:1;" catchtap="showWhole">
+				<view style="width:210rpx;line-height:80rpx;color:white;background:#e94f57;border-radius:5rpx;margin:0 auto;">端整盒</view>
+			</view>
+		</view>
+
+	</view>
+
+	<view wx:if='{{false}}' style='width:100%;height:100rpx;position:absolute;bottom:50rpx;left:0;font-size:25rpx;z-index:13;text-align:center;color:#a4f24a;' catchtap='closewhole'>
+		<text>确认后直接端盒，不受当前盒数影响\n</text>
+		<text>随机额外赠送隐藏碎片×1\n</text>隐藏碎片直接进入玩具柜查看，凑齐同款{{patchNumber}}片自动合成
+	</view>
+
+</view>
+
+<!-- ishowcollectchip   chipItemHeight*chiprownum + nogetimagewidth + 320-->
+<view wx:if='{{ishowcollectchip}}' style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:99;'>
+	<view class='bgstyle' style="background:#E8E8E9;opacity:1;top:{{statusBarHeightMc}}px" catchtap='closecollectchip' catchtouchmove="myCatchTouch"></view>
+
+	<view style="width:700rpx;height:{{chipItemHeight*chiprownum + 340}}rpx;background:white;position:absolute;top:0;bottom:0;left:25rpx;margin:auto 0;border-radius:10rpx;visibility:{{chipItemHeight>0?'visible':'hidden'}};" catchtouchmove="myCatchTouch">
+
+		<image style="width:40rpx;height:40rpx;position:absolute;top:10rpx;right:10rpx;" src="../images/explain.png" catchtap="showchiprule"></image>
+
+		<view style="width:630rpx;">
+			<scroll-view scroll-x="true" style='width:100%;white-space:nowrap;height:100%;' scroll-with-animation="true" scroll-left='{{scrollleft}}'>
+				<view style='display:inline-block;height:100%;position:relative;' wx:for='{{tricklinelist}}' id='q{{index}}' wx:key='key' data-id='{{index}}' catchtap='tabClick'>
+					<view style='height:100%;margin:0 10rpx;padding:0 10rpx;float:left;font-size:26rpx;position:relative;display:block;' class='alignclass'>
+						<view wx:if='{{!item.isFinishedCollect}}' style='height:50rpx;{{iselected == index ? "color:#1890FF" : "color:#000"}};' class='alignclass'>
+							第{{index+1}}套{{tricklinelist[index].lightRole.length}}/{{chiplist.length}}
+						</view>
+						<view wx:if='{{item.isFinishedCollect}}' style='height:50rpx;{{iselected == index ? "color:#1890FF" : "color:#D4D4D4"}};' class='alignclass'>
+							已完成{{tricklinelist[index].lightRole.length}}/{{chiplist.length}}
+						</view>
+						<view wx:if='{{iselected == index}}' style='height:2rpx;background:#1890FF;'></view>
+					</view>
+				</view>
+			</scroll-view>
+		</view>
+
+		<view style="color:##101010;font-size:24rpx;text-align:center;margin:20rpx 0;">每次抽盒可点亮对应款式卡片，连线后可获得对应奖励</view>
+
+		<view style="margin-left:80rpx;">
+			<view id='chipcollectindex' style="width:420rpx;overflow:hidden;display:inline-block;vertical-align: top;">
+				<view wx:for='{{chiplist}}' wx:key='key' style="display:inline-block;vertical-align: top;">
+					<view style='width:{{chipItemWidth}}rpx;position:relative;margin:2rpx 2rpx 2rpx 2rpx;'>
+						<image style='width:100%;height:{{chipItemHeight}}rpx;{{item.islight ?"":"opacity:0.3"}};display:block;' bindload='imageLoadchip' mode="widthFix" src='{{item.img}}'></image>
+					</view>
+				</view>
+			</view>
+			<view style="display:inline-block;vertical-align:top;">
+				<view wx:for='{{rowData}}' wx:key='key'>
+					<view style="height:{{chipItemHeight}}rpx;margin:2rpx 0;">
+						<view style="color:#FE666B;display:inline-block;line-height:{{chipItemHeight}}rpx;margin:0 5rpx;font-size:25rpx;vertical-align: top;">
+							→
+						</view>
+						<view wx:if='{{!item.isFinished}}' style="width:{{nogetimagewidth}}rpx;height:{{chipItemHeight}}rpx;display:inline-block;position:relative;vertical-align:top;" catchtap="hideBoxdetailpagen" data-ind="{{index}}">
+							<view wx:if='{{index==goldtip}}' style='width:200rpx;height:50rpx;position:absolute;top:-20rpx;right:0;z-index:10;'>
+								<view style='position:absolute;bottom:0;right:0;overflow:hidden;'>
+									<view style='line-height:30rpx;color:white;font-size:20rpx;text-align:center;border-radius:10rpx;background:#404040;position:relative;padding:0 10rpx;'>
+										<view style='text-align:left;'>
+											{{hideBoxTip}}
+										</view>
+									</view>
+									<view style='width:100%;height:10rpx;position:relative;'>
+										<image style='width:20rpx;height:10rpx;position:absolute;top:0;right:30rpx;' src='https://clw.51chaidan.com/images/goods/black_arrow.png'></image>
+									</view>
+								</view>
+							</view>
+							<image style="width:{{nogetimagewidth}}rpx;height:{{nogetimagewidth}}rpx;margin:auto;position:absolute;left:0;top:0;bottom:0;right:0;opacity:0.3" mode="aspectFit" src="{{hideBoxImg}}"></image>
+						</view>
+						<view wx:if='{{item.isFinished}}' style="width:{{nogetimagewidth}}rpx;height:{{chipItemHeight}}rpx;display: inline-block;position:relative;overflow:hidden;vertical-align: top;">
+							<image style="width:{{nogetimagewidth}}rpx;height:{{nogetimagewidth}}rpx;" mode="aspectFit" src="{{item.img}}"></image>
+							<view class='fragment' style='width:{{nogetimagewidth}}rpx;left:0;'>
+								<view class='fragmentbg'></view>
+								<view class='fragmenttxt'>
+									<image class='fragmentimg' src='https://www.51chaidan.com/images/toyCabinet/toyFragment.png'></image>
+									<text class='fragmentfont'>碎片</text>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+
+
+
+		</view>
+
+		<view wx:if='{{false}}' style="margin:0 0 20rpx 80rpx;">
+			<view wx:for='{{columnData}}' wx:key='key' style="width:{{chipItemWidth}}rpx;display:inline-block;position:relative;margin:0 2rpx;">
+				<view style="color:#FE666B;text-align:center;font-size:25rpx;">
+					↓
+				</view>
+				<view wx:if='{{index==sivertip}}' style='width:200rpx;height:50rpx;position:absolute;top:-20rpx;right:0;z-index:10;'>
+					<view style='position:absolute;bottom:0;right:0;overflow:hidden;'>
+						<view style='line-height:30rpx;color:white;font-size:20rpx;text-align:center;border-radius:10rpx;background:#404040;position:relative;padding:0 10rpx;'>
+							<view style='text-align:left;'>
+								{{blindboxTip}}
+							</view>
+						</view>
+						<view style='width:100%;height:10rpx;position:relative;'>
+							<image style='width:20rpx;height:10rpx;position:absolute;top:0;right:30rpx;' src='https://clw.51chaidan.com/images/goods/black_arrow.png'></image>
+						</view>
+					</view>
+				</view>
+				<image style='width:{{nogetimagewidth}}rpx;height:{{nogetimagewidth}}rpx;margin:0 auto;display:block;{{item.isFinished?"":"opacity:0.3"}}' mode="aspectFit" src="{{blindBoxImg}}" catchtap="blindBoxdetailpagen" data-ind="{{index}}"></image>
+			</view>
+		</view>
+
+
+		<view style="width:100%;margin:20rpx 0;">
+
+			<view wx:if='{{false}}' class="chipcollectstyle" style="background:#e6f1fc;color:#1989fa;position:relative;" catchtap='selectbox'>
+				抽一个
+			</view>
+
+			<!-- catchtap='showWhole' -->
+			<view wx:if='{{isOpenWholeBox}}' class="chipcollectstyle" style="background:#FFD944;color:#D48004;position:relative;" catchtap='wholebox'>
+				<view wx:if='{{tipCheapForWholeBox>0}}' style="width:130rpx;line-height:30rpx;position:absolute;top:-15rpx;right:-30rpx;background:#FE666B;color:white;font-size:20rpx;border-radius:10rpx;text-align:center;">立减{{tipCheapForWholeBox}}元</view>
+				<view wx:else style="width:130rpx;line-height:30rpx;position:absolute;top:-15rpx;right:-30rpx;background:#FE666B;color:white;font-size:20rpx;border-radius:10rpx;text-align:center;">领取全部奖励</view>
+				端整盒
+			</view>
+
+			<view style="width:100%;font-size:22rpx;text-align:center;color:#4c9a23;position:absolute;bottom:30rpx;">抽盒机抽整盒为拆盒确认款,有几率获得隐藏款替换任意一款</view>
+
+		</view>
+
+	</view>
+</view>
+
+<view wx:if='{{ishowcollectrule}}' style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:1999999;'>
+	<view class='bgstyle' style="opacity:0.5;" catchtap='showchiprule'></view>
+
+	<view style="width:500rpx;height:450rpx;background:white;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;font-size:27rpx;padding:20rpx;border-radius:10rpx;">
+		<text>{{chiprule}}</text>
+		<view style="width:150rpx;line-height:60rpx;background:#FFD944;color:#D48004;position:absolute;left:0;right:0;bottom:50rpx;box-shadow: 3px 3px 6px 0px #999;text-align:center;margin:0 auto;" catchtap='showchiprule'>
+			确定
+		</view>
+	</view>
+
+</view>
+
+<view wx:if='{{!isBlindBoxDefaultAddress && ishowcover}}' style='width:100%;position:fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight}}px;z-index:12;' catchtap="showdealoradd"></view>
+
+<!-- ishowdealoradd -->
+<view wx:if='{{!isBlindBoxDefaultAddress && ishowdealoradd}}' style='width:100%;height:100%;position:fixed;top:0px;left:0;z-index:13;'>
+	<view class='bgstyle' catchtouchmove="myCatchTouch"></view>
+
+	<view style="width:650rpx;height:800rpx;position:absolute;top:0;bottom:0;left:50rpx;margin:auto 0;background:#f0f0f0;border-radius:20rpx;">
+		<view wx:if='{{ishowdeal}}' style="width:630rpx;height:670rpx;margin:10rpx;background:white;border-radius:20rpx;position:relative;">
+			<view style="width:100%;text-align:center;font-size:30rpx;line-height:80rpx;">抽盒机发货协议</view>
+			<image class="closestyle" src="https://www.51chaidan.com/images/driveCar/fanhui.png" catchtap='closedealoradd'></image>
+			<view style="width:570rpx;height:590rpx;font-size:28rpx;overflow:scroll;margin:0 30rpx;">
+				<text>抽盒机发货协议,\n一、关于完善小程序个人信息的说明\na)为完成您所达成的交易,自2019年12月11日起,您需要填写常用住所地地址作为默认收货地址。如无特殊情况(手动发货),我们将以该地址作为向您提供服务时所依凭据。\nb)自2019年12月11日起,若您未填写默认收货地址,您将无法使用抽盒机购买服务,其他服务正常使用。\n二、关于抽盒机发货规则修改的说明\na)自2019年12月11日起,抽盒机和玩具柜购买的商品次日发货(预售商品到货发出)，设置出售价格商品保留时间为21天(保留期),21天内未手动发货的,系统将在保留期届满时15天内(发货期),自动将到期商品发货到您的默认地址(预售商品到货发出)。因不可抗力、意外事件或市场物流高峰期发货期可能会有延误。\nb)请确保您的默认地址是真实有效的,如有变动请及时修改默认地址信息。因您地址错误或其他个人原因导致的任何损失由您自行承担。\nc)自动/手动发货的订单,自我方发货时起即完成了交付义务。无论您以任何理由拒收的,所造成的损失由您个人承担。\nd)本协议保留期与发货期时效的计算均以次日开始计算。即保留期为商品下单的次日。发货期则以保留期满的次日开始计算。\ne)本协议除特有说明外,天/日是指自然日而非工作日。 </text>
+			</view>
+		</view>
+		<view wx:if='{{ishowdeal}}' class="agreestyle" catchtap="agreeset">同意并设置默认收获地址</view>
+
+		<view wx:if='{{ishowadd}}' style="width:100%;height:100%;position:relative;">
+			<image class="closestyle" src="https://www.51chaidan.com/images/driveCar/fanhui.png" catchtap='closedealoradd'></image>
+			<view style="font-size:30rpx;line-height:50rpx;color:#ff2742;margin-left:10rpx;">必须选择一个默认收货地址</view>
+			<view style="width:630rpx;height:660rpx;margin:0 10rpx;overflow:scroll;">
+				<view wx:for='{{addressdata}}' wx:key='key' style="width:100%;height:150rpx;border-radius:10rpx;background:white;margin:5rpx 0;" catchtap="selectdefult" data-ind="{{index}}">
+					<view style="width:100rpx;height:100%;display:inline-block;vertical-align:top;">
+						<image class='recgadbotleftimg' hidden='{{!item.checked}}' src='/pages/images/pressed_click.png'></image>
+						<image class='recgadbotleftimg' hidden='{{item.checked}}' src='/pages/images/normal_click.png'></image>
+					</view>
+
+					<view style="width:500rpx;height:100%;display:inline-block;line-height:50rpx;vertical-align:top;">
+						<view style="width:100%;font-size:25rpx;margin-top:25rpx;">
+							<view style="display:inline-block;">{{item.consignee}}</view>
+							<view style="display:inline-block;margin-left:20rpx;">{{item.phone}}</view>
+						</view>
+
+						<view class='specialellipsis' style="font-size:25rpx;">{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
+					</view>
+				</view>
+
+				<view style="width:100%;height:150rpx;border-radius:10rpx;background:white;margin:5rpx 0;" catchtap="jumpaddress">
+					<view style="line-height:50rpx;text-align:center;padding-top:50rpx;">
+						<image style="width:50rpx;height:50rpx;display:inline-block;vertical-align:top;" src="https://www.51chaidan.com/images/driveCar/tianjia.png"></image>
+						<view style="display:inline-block;margin-left:20rpx;font-size:25rpx;vertical-align:top;"> 新建地址</view>
+					</view>
+				</view>
+			</view>
+			<view class="setcomplie" style="color:{{maddid!='' ? '#000': '#e0e0e0'}};" catchtap="{{maddid!='' ? 'setdefultadd': ''}}">设置完成</view>
+		</view>
+	</view>
+</view>
+
+<!-- ishowredpackage -->
+<view wx:if='{{ishowredpackage}}' style="width:100%;height:100%;position:fixed;top:0px;left:0;z-index:13;">
+	<view class='bgstyle' style="background:white" catchtouchmove="myCatchTouch" catchtap="hidepackage"></view>
+
+
+	<view style="width:600rpx;height:100%;position:absolute;top:0;right:0;left:0rpx;margin:0 auto;" catchtouchmove="{{redpagList.length>1 ? '' : 'myCatchTouch'}}">
+
+		<scroll-view scroll-y="true" style="width:100%;height:100%;" catchtap="hidepackage">
+			<view style="width:100%;height:{{framtop}}px;" catchtap="hidepackage"></view>
+
+			<view wx:for='{{redpagList}}' wx:key='key' class="redpackage" catchtap="mmm">
+				<view style="width:100%;height:100%;position:absolute;top:0;left:0;">
+
+					<view wx:if='{{isharepag && item.userId && item.userId!=uid}}' style="width:100%;text-align:center;padding-top:20rpx;">
+						<image class="headsty" src="{{item.headphoto}}"></image>
+						<view wx:if='{{item.welfareType == 1}}' class="imgtextstyle">{{item.nick}} 的隐藏红包</view>
+						<view wx:elif='{{item.welfareType == 2}}' class="imgtextstyle">{{item.nick}} 的幸运值红包</view>
+					</view>
+					<view wx:else class="readpagname">恭喜您抽到了 {{item.roleName}}</view>
+
+					<image style="width:200rpx;height:290rpx;margin:20rpx 200rpx;" mode="aspectFit" src="{{item.roleImg}}"></image>
+
+					<view style="width:200rpx;height:200rpx;margin:0 200rpx;" catchtap="openpackage" data-isget="{{item.isReceive}}" data-mid="{{item.welfareId}}" data-ind="{{index}}" data-samount="{{item.suplusAmount}}"></view>
+
+					<view wx:if='{{isharepag && item.userId && item.userId!=uid}}' class="redpagbtom">
+						<block wx:if='{{item.welfareType == 1}}'><text style='font-size:40rpx;'>{{item.limitAmount}}元</text>随机红包抽盒使用</block>
+						<block wx:elif='{{item.welfareType == 2}}'><text style='font-size:40rpx;'>{{item.limitAmount}}点</text>幸运值可用于兑换透视卡</block>
+					</view>
+
+					<view wx:else class="redpagbtom">
+						<block wx:if='{{item.welfareType == 1}}'><text style='font-size:40rpx;'>{{item.limitAmount}}元</text>随机红包可赠送娃友抽盒使用</block>
+						<block wx:elif='{{item.welfareType == 2}}'><text style='font-size:40rpx;'>{{item.limitAmount}}点</text>幸运值可赠送娃友兑换透视卡</block>
+					</view>
+
+
+				</view>
+
+				<image style="width:600rpx;height:800rpx;" src="http://www.51chaidan.com/images/blindBox/redpackage.jpg"></image>
+			</view>
+
+		</scroll-view>
+
+	</view>
+
+</view>
+
+<view wx:if='{{ishowpagInfo}}' style="width:100%;height:100%;position:fixed;top:0px;left:0;z-index:13;">
+	<view class='bgstyle' style="background:white" catchtouchmove="myCatchTouch" catchtap="closepagInfo"></view>
+	<view class="redbg">
+		<view style="width:100%;height:370rpx;background:#d14e46;border-radius:20rpx;">
+    <!-- wx:if='{{welfareInfo.userId == uid}}' -->
+			<image  class="pagshare" src="http://www.51chaidan.com/images/blindBox/redPackageShare.png"><button style='width:100%;height:100%;position:absolute;top:0;right:0;opacity:0;' open-type='share'></button></image>
+			<view style="width:100%;text-align:center;padding-top:20rpx;">
+				<image class="headsty" src="{{welfareInfo.headphoto}}"></image>
+				<view wx:if='{{welfareInfo.welfareType == 1}}' class="imgtextstyle">{{welfareInfo.nick}} 的隐藏红包</view>
+				<view wx:elif='{{welfareInfo.welfareType == 2}}' class="imgtextstyle">{{welfareInfo.nick}} 的幸运值红包</view>
+			</view>
+			<image style="width:120rpx;height:160rpx;margin:10rpx 240rpx;" mode="aspectFit" src="{{welfareInfo.roleImg}}"></image>
+
+			<view wx:if='{{welfareInfo.welfareType == 1}}' style="width:100%;text-align:center;font-size:28rpx;" catchtap="closepagInfo">￥<text style="font-size:50rpx;">{{welfareInfo.userAmount}}</text> 已放入抽盒机可以直接使用></view>
+			<view wx:elif='{{welfareInfo.welfareType == 2}}' style="width:100%;text-align:center;font-size:28rpx;" catchtap="closepagInfo"><text style="font-size:50rpx;">{{welfareInfo.userAmount}}</text> 点幸运值可用于兑换透视卡></view>
+		</view>
+
+		<view class="getpagbtm">
+			<view wx:if='{{welfareInfo.welfareType == 1}}' class="alreadyget">已领取{{welfareInfo.totalUser}}个,共{{welfareInfo.totalAmount}}/{{welfareInfo.limitAmount}}元</view>
+			<view wx:elif='{{welfareInfo.welfareType == 2}}' class="alreadyget">已领取{{welfareInfo.totalUser}}个,共{{welfareInfo.totalAmount}}/{{welfareInfo.limitAmount}}点</view>
+			
+			<view style="overflow:scroll;width:100%;height:460rpx;">
+				<view wx:for='{{welfareList}}' wx:key='key' style="width:100%;height:100rpx;">
+					<image style="margin:15rpx;width:70rpx;height:70rpx;display:inline-block;border-radius:5rpx;" src="{{item.headphoto}}"></image>
+					<view class="pagitem">
+						<view style="height:100%;float:left;color:#333;text-align:left;">
+							<view class="specialellipsis" style="margin-top:20rpx;width:230rpx;">{{item.nick}}</view>
+							<view>{{item.insert_time}}</view>
+						</view>
+						<view wx:if='{{welfareInfo.welfareType == 1}}' style="height:100%;float:right;text-align:right;color:#fb595f;margin-right:15rpx;">
+							<view style="margin-top:20rpx;">{{item.amount}}元</view>
+							<view>抽盒立减券(当日有效)</view>
+						</view>
+						<view  wx:elif='{{welfareInfo.welfareType == 2}}' style="height:100%;float:right;text-align:right;color:#fb595f;margin-right:15rpx;">
+							<!-- wx:if='{{item.userId == uid}}'-->
+							<view style="margin-top:20rpx;color:{{welfareInfo.userId == item.userId?'#FF9800':''}};">{{item.amount}}点幸运值</view>
+							<view wx:if='{{welfareInfo.userId == item.userId}}' style="color:#FF9800;">全部领光，奖励翻倍</view>
+							<view wx:elif='{{welfareInfo.userId != item.userId}}'>兑换抽盒机透视卡</view>
+						</view>
+					</view>
+				</view>
+			</view>
+      <!-- wx:if='{{welfareInfo.userId == uid}}' -->
+			<view class="sharebtn">全部领光奖励翻倍,快去分享!<button style='width:100%;height:100%;position:absolute;top:0;right:0;opacity:0;' open-type='share'></button></view>
+			<view class="stoptime">领取时间截止当日24:00</view>
+
+		</view>
+	</view>
+
+</view>
+
+<view wx:if='{{ishowsurebuy}}' style="width:100%;height:100%;position:fixed;top:0px;left:0;z-index:20;">
+
+	<view class='bgstyle' catchtouchmove="myCatchTouch" catchtap="showsurebuy"></view>
+
+	<view style="width:100%;height:400rpx;position:absolute;bottom:0;left:0;margin:0 auto;background:white;border-radius:15rpx 15rpx 0 0; ">
+		<view style="width:80%;margin:20rpx 10%;border-bottom: 2rpx solid #e3e3e3;font-size:30rpx;line-height:80rpx;overflow:hidden;">
+			<view style="float:left;">单价</view>
+			<view wx:if='{{isFirstOrder}}' style="float:right;">￥{{payprice- firstOrderDiscount}}</view>
+			<view wx:else style="float:right;">￥{{payprice}}</view>
+		</view>
+		<view style="width:80%;margin:0rpx 10%;font-size:30rpx;overflow:hidden;">
+			<view style="float:left;line-height:80rpx;">优惠券</view>
+			<view style="float:right;margin-top:20rpx;color:#fb595f;text-align:right;">
+				<view>-￥{{welfareAmount}}</view>
+				<view style="font-size:25rpx;">抽盒机立减券(当日有效)</view>
+			</view>
+		</view>
+
+		<view style="width:500rpx;line-height:80rpx;position:absolute;bottom:20rpx;left:0;right:0;margin:0 auto;background:#fb595f;color:white;text-align:center;border-radius:10rpx;" catchtap="updateadd">立即支付￥{{usedamount}}</view>
+
+	</view>
+
+
+</view>
+
+<!--  图片授权  -->
+<view wx:if='{{exhpicsave}}' style='z-index:9999999;width:100%;height:100%;position:fixed;top:0;left:0;'>
+	<view style='width:100%;height:100%;background:#000;opacity:.5;'></view>
+	<view style='width:500rpx;height:240rpx;background:#fff;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;border-radius:16rpx;'>
+		<view style='padding:30rpx 0;width:100%;height:80rpx;text-align:center;line-height:80rpx;color:#333;font-size:26rpx;border-bottom:1rpx solid #e5e5e5;'>授权之后才能保存图片</view>
+		<view style='height:100rpx;width:100%;'>
+			<view style='color:#333;width:50%;float:left;height:100rpx;line-height:100rpx;text-align:center;font-size:26rpx;' catchtap='imgCanelTgexh'>取消</view>
+			<view style='color:#4c9a23;position:relative;width:50%;float:left;height:100rpx;line-height:100rpx;text-align:center;font-size:26rpx;'>
+				<button open-type="openSetting" bindopensetting="exhsavehandleSetting" style='width:100%;height:100%;position:absolute;left:0;top:0;opacity:0;z-index:1;'></button>
+				确定
+			</view>
+		</view>
+	</view>
+</view>
+
+<!-- 添加好友 关注公众号 图片弹框 -->
+
+<view class='newcoupon' wx:if='{{addfrindcommoni}}'>
+	<view class='swfback' catchtouchmove="preventD" catchtap='closefrindcommoni'></view>
+	<view class="addfrindcommon">
+		<image class="addfrindcomimg" src="{{showimg}}" mode='aspectFit'></image>
+		<view class="addfrindcomsave" catchtap="sharesavethepicture">保存图片</view>
+	</view>
+</view>

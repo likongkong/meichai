@@ -1,0 +1,232 @@
+
+
+    <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+    <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+<view class='a'>
+    <image class='b' src='http://www.51chaidan.com/images/store/spf_sbg.png'></image>
+    <view class='c'>
+       <view class='d'>
+           <view class='e'>
+               <view class='f'>
+                  <view class='g' wx:if='{{numiftr}}'>{{comdata.user_money}}</view>
+                  <view class='g' wx:if='{{!numiftr}}'>******</view>
+                  <view style='width:60rpx;height:58rpx;float:left;' catchtap='numiftrfun' wx:if='{{numiftr}}'>
+                      <image class='h' src='http://www.51chaidan.com/images/store/spf_sbgs.png'></image>
+                  </view>
+                  <view style='width:60rpx;height:58rpx;float:left;' catchtap='numiftrfun' wx:if='{{!numiftr}}'>
+                      <image class='h' src='http://www.51chaidan.com/images/store/spf_sbgc.png'></image>
+                  </view>
+               </view>
+               <view class='iab'>可提现金额(元)</view>
+           </view>
+           <view class='j'>
+                <image class='canflowingwaterleftimg' style='float:right;' src='http://www.51chaidan.com/images/store/spf_sbgw.png' catchtap='tipputsm'></image> 
+                <view class='canflowingwaterleft' style='float:right;' wx:if='{{flowingwaterputforward}}' catchtap='fwpffun'>         查看流水 
+                </view>
+                <view class='canflowingwaterleft' style='float:right;' wx:if='{{!flowingwaterputforward}}' catchtap='fwpffun'>
+                立即提现
+                </view>
+              
+           </view>
+
+
+       </view> 
+
+       <view class='k'>
+           <view class='kl'>
+               <view style='color:#986618;font-size:32rpx;height:40rpx;padding-bottom:16rpx;' wx:if='{{numiftr}}'>{{comdata.frozen_money}}</view>
+               <view style='color:#986618;font-size:32rpx;height:40rpx;padding-bottom:16rpx;' wx:if='{{!numiftr}}'>******</view>
+               <view style='color:#986618;font-size:24rpx;'>待解锁金额(元)</view>
+           </view>
+           <view class='kr'>
+               <view style='color:#986618;font-size:32rpx;height:40rpx;padding-bottom:16rpx;text-align: right;' wx:if='{{numiftr}}'>{{comdata.total_money}}</view>
+               <view style='color:#986618;font-size:32rpx;height:40rpx;padding-bottom:16rpx;text-align: right;' wx:if='{{!numiftr}}'>******</view>
+               <view style='color:#986618;font-size:24rpx;text-align: right;'>累计赚取(元)</view>           
+           </view>
+           <view class='wline'></view>
+       </view>
+
+
+
+
+    </view>
+</view>
+
+
+<view class='putforwardbox'>
+
+    <view class='q'>
+       <view class='w'>
+          <view class='wt' wx:if='{{flowingwaterputforward}}'>提现</view>
+          <view class='wt' wx:if='{{!flowingwaterputforward}}'>小金库流水</view>
+          <view class='ww'></view>
+       </view>
+    </view>
+    
+    <!--    提现    -->
+    <view class='putforward' wx:if='{{flowingwaterputforward}}'>
+        <!--  提现方式  -->
+        <view class='putforwardmode' style='margin-top:30rpx;'>提现方式</view>
+        <view class='putforwardmodebox'>
+            <view class='putforwardmodebwx' style='border:1rpx solid #f72640;'>
+              <image class='putforwardmodebwximg' src='../images/icon_webchat.png'></image>
+              <view class='putforwardmodebwxtxt'>微信</view>
+            </view>
+        </view>
+        <!--  提现金额  -->
+        <view class='putforwardmode'>提现金额</view> 
+        <view class='putforwardmodebox'>
+            <view class='puformonnum' wx:for='{{putforwardnumdata}}' wx:key='key' wx:if='{{item.iftr}}'>
+                <view class='puformonnumeve {{putforwardnum==item.value?"puformonnumeveback":""}}' data-num='{{item.value}}' catchtap='getnm' data-ind='{{index}}' style='{{item.enable==0?"line-height:66rpx;":""}}'>{{item.value}}元
+          <image wx:if='{{item.enable==0}}' src='https://www.51chaidan.com/images/default/gearLock.png' class='icon_lock'></image>
+                </view>
+            </view>
+
+            
+
+        </view>  
+ 
+        <!--  提现说明  -->
+        <view class='putforwardmode' wx:if='{{comdata.explain}}'>提现说明</view> 
+        <view class='putforwardmodebox' wx:if='{{comdata.explain}}'>
+            <text class='tx'>{{comdata.explain}}</text>
+
+        </view>  
+    </view>
+    
+
+    <!--  流水  -->
+    <view class='flowingwater' wx:if='{{!flowingwaterputforward}}'>
+         <view class='ssheadpofixedputforward' style='border:0;'>
+              <view class='sshpofbox'>
+                <view class='ll' catchtap='sshpofboxtab' data-ind='0' >
+                   <view class='lll {{tabind==0?"llclass":""}}'>全部<view wx:if='{{tabind==0}}' style='height:8rpx;width:100%;background:#F1172D;position: absolute;left: 0;bottom: 0; '></view>                 
+                </view>
+                </view>
+                <view class='ll' catchtap='sshpofboxtab' data-ind='1' >
+                   <view class='lll {{tabind==1?"llclass":""}}'>解锁<view wx:if='{{tabind==1}}' style='height:8rpx;width:100%;background:#F1172D;position: absolute;left: 0;bottom: 0; '></view>
+                </view>
+                </view>
+                <view class='ll' catchtap='sshpofboxtab' data-ind='2' >
+                   <view class='lll {{tabind==2?"llclass":""}}'>提现<view wx:if='{{tabind==2}}' style='height:8rpx;width:100%;background:#F1172D;position: absolute;left: 0;bottom: 0; '></view>
+                </view>
+               </view>
+              </view>
+         </view> 
+         <view class='fwdetail'>
+              <view class='fwdetaileve' wx:for='{{listdata}}' wx:key='key' style='border-bottom:1rpx solid #E6E6E6;'>
+                  <view class='fwdetailevehead'>
+                      <view class='fwdetaileveheadleft fwdetaileveheadlrcom'>{{item.record_time}}</view>
+                      <view class='fwdetaileveheadright fwdetaileveheadlrcom' wx:if='{{item.money_type==1}}' style='color:#fbaa36;'>{{item.money_content}}</view>
+                      <view class='fwdetaileveheadright fwdetaileveheadlrcom' style='color:#30a030;' wx:if='{{item.money_type==2}}'>{{item.money_content}}</view>
+                  </view>
+                  <view class='fwdetailevecon'>
+                      <view class='fwdechead'>
+                         <image class='fwdecheadimg' src='{{item.user_headphoto}}'></image>
+                         <view class='fwdecheadtxt'>
+                             <text>{{item.record_content}}</text>
+                         </view>                         
+                      </view>
+                  </view>
+              </view>
+                <!--  暂无数据  -->
+              <view wx:if='{{nodataiftr&&listdata.length==0}}' style='height:300rpx;width: 100%;position: relative;padding-top:150rpx;'>
+                  <image src='../images/default_BG_Image@3x.png' style='width: 280rpx;height: 165rpx;margin:0 auto;display: block;'></image>
+                  <view style='width:100%;height:60rpx;text-align: center;line-height: 60rpx;color: #8c8c8c;font-size: 30rpx;'>这里什么都没有</view>
+                  <view style='width:100%;height:40rpx;text-align: center;line-height: 40rpx;color: #a0a0a0;font-size: 24rpx;'>快去看看别哒</view>
+              </view>                    
+         </view>   
+    </view>
+
+
+
+</view>
+
+<view class='putforwardbottom' style='background:{{comdata.limit_withdraw>0||iftrlock?"#F1172D":"#c6c5c5"}}' wx:if='{{B&&flowingwaterputforward}}'>
+   <view class='putforwardbottombut' wx:if='{{(comdata.limit_withdraw>0||iftrlock)&&flowingwaterputforward}}' style='background:{{C?"#F1172D":""}};width:100%;right:0;' catchtap='extractingmoney'>
+
+    <image src='../images/cgoldcoin1.png' class='cgoldcoinicon'></image>X{{trompt}}
+   </view>
+   <view class='putforwardbottombut' style='background:{{C?"#F1172D":"#c6c5c5"}};width:100%;right:0;'  wx:elif='{{comdata.limit_withdraw<=0&&flowingwaterputforward}}'>今日已提现，请明日再来</view>
+</view>
+
+
+
+
+
+ 
+<!-- c -->
+<view class='putforwardbottom' style='background:{{B?"#F1172D":""}}' wx:if='{{C}}'>
+   <view class='putforwardbottombut' wx:if='{{(comdata.limit_withdraw>0||iftrlock)&&flowingwaterputforward}}' style='background:#F1172D;width:100%;right:0;' catchtap='extractingmoney'>
+    <image src='../images/cgoldcoin1.png' class='cgoldcoinicon'></image>X{{trompt}}
+   </view>
+   <view class='putforwardbottombut' style='background:#c6c5c5;width:100%;right:0;'  wx:elif='{{comdata.limit_withdraw<=0&&flowingwaterputforward}}'>今日已提现，请明日再来</view>
+</view>
+
+
+
+<view class='comtip' wx:if='{{comtipiftr}}'>
+   <view class='comtipback' catchtap='hidcomtip'></view>
+   <view class='comtipcon'>
+       <view class='comtipchead' wx:if='{{ifcomtipiftr==1}}'>免单说明</view>
+       <view class='comtipchead' wx:if='{{ifcomtipiftr==2}}'>小金库说明</view>
+       <!--  新人专享提示  -->
+       <view class='comtipccon' wx:if='{{ifcomtipiftr==1}}'><text>{{newtips}}</text></view>       
+       <!--  机会不足提示  -->
+       <view class='comtipccon' wx:if='{{ifcomtipiftr==2}}'><text>{{tips}}</text></view>
+       <view class='comtipcbot'>
+           <view class='comtipcbri' catchtap='hidcomtip' wx:if='{{ifcomtipiftr==1}}'>快去报名</view>
+           <view class='comtipcbri' catchtap='hidcomtip' wx:if='{{ifcomtipiftr==2}}'>知道了</view>
+       </view>
+   </view>
+</view>
+
+
+
+<!-- 提示   -->
+
+<view class='comtip' wx:if='{{is_cbb}}'>
+    <view class='comtipback' catchtap='apphidcomtip'></view>
+    <view class='apptipbox'>
+        <view class='apptiphead' style='border:0;'>提示</view>
+        <view class='apptipcont' style='width:90%;margin:0 auto;'><text>当前拆币不足,去完成任务获取更多拆币吧。</text></view>
+        <view class='cbbut' catchtap='jumptask'>签到赢拆币</view>
+    </view>   
+</view>
+
+<!-- 手机号授权弹框 -->
+<view wx:if='{{ishowphone}}' class='dialogstyle' style='z-index:10000;'>
+  <view class='bgstyle' catchtap='dialogClick'></view>
+
+  <view class='redfloatbtnstylel' style='width:500rpx;height:500rpx;background:#fff;border-radius:10rpx;'>
+    <view class='alignclass' style='width:100%;height:80rpx;color:#000;font-size:35rpx;'>
+      微信授权
+    </view>
+    <view style='width:100%;height:2rpx;background:#e5e5e5;'></view>
+
+    <image style='width:80rpx;height:80rpx;margin:30rpx 210rpx;' src='../images/statemyorder1.png'></image>
+
+    <view class='alignclass' style='width:100%;font-size:30rpx;color:#000;'>微信授权成功</view>
+
+    <view style='width:300rpx;height:2rpx;background:#e5e5e5;margin:20rpx 100rpx;'></view>
+
+    <view class='alignclass' style='width:100%;font-size:25rpx;color:#999;'>授权绑定你的手机号码</view>
+
+    <view style='width:100%;height:82rpx;color:#000;font-size:30rpx;position:absolute;bottom:0px;'>
+      <view style='width:100%;height:2rpx;background:#e5e5e5;'></view>
+      <view style='width:100%;height:80rpx;'>
+        <view class='alignclass' style='width:500rpx;height:80rpx;float:left;color:#7ABF69;'>
+          <button style='width:500rpx;height:80rpx;opacity:0;position:absolute;' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+          </button>
+          允许
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+
+
+
+

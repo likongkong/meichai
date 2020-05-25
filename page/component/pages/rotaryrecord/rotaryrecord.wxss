@@ -1,0 +1,179 @@
+@import "../../../../pages/signin/signin.wxss";
+@import "../../../../pages/activitydetailspage/activitydetailspage.wxss";
+page{
+  background:#f5f6fa;
+}
+.rrhead{
+  width: 100%;
+  height: 70rpx;
+  background: #fee88b;
+}
+.rrheadleft{
+  float: left;
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 26rpx;
+  color: #000;
+  padding-left: 30rpx;
+}
+.rrheadright{
+  float: right;
+  padding:10rpx 30rpx 0 0;
+  height: 60rpx;
+}
+.rrheadrtxt{
+  display: inline-block;
+  width: 50rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  background: #cccccc;
+  font-size: 26rpx;
+  color: #000;
+  text-align: center;
+  vertical-align:top;
+}
+.rrheadrd{
+  display: inline-block;
+  height: 50rpx;
+  line-height: 50rpx;
+  padding: 0 10rpx;
+  font-size: 26rpx;
+  color: #000;
+  vertical-align:top;
+}
+.rrcontent{
+  width: 100%;
+  height: 180rpx;
+  background: #fff;
+  margin-bottom: 4rpx;
+}
+.rrconleft{
+  width: 180rpx;
+  height: 180rpx;
+  float: left;
+  margin:0 10rpx 0 10rpx;
+  position: relative;
+}
+.rrconlimg{
+  width: 120rpx;
+  height: 120rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+.rrconright{
+  padding-top: 13rpx;
+  width: 510rpx;
+  height: 160rpx;
+  float: left;
+}
+.bctitle{
+  width:100%;
+  max-height:76rpx;
+  font-size:26rpx;
+  color:#333;
+  line-height:36rpx;
+}
+.multilineellipsis {
+  display:-webkit-box;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  word-wrap:break-word;
+  white-space:normal !important;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+}
+.rrconrbott{
+  width: 100%;
+  height: 60rpx;
+  margin-top:8rpx;
+}
+.rrconrbleft{
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 24rpx;
+  color: #a6a5a8;
+  float: left;
+}
+.rrconrbright{
+  float: right;
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 24rpx;
+  padding: 0 40rpx;
+  border-radius: 6rpx;
+  position: relative;
+}
+
+.indheadinpw{
+  display: block;
+  width: 353rpx;
+  padding: 0 0 0 18rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 24rpx;
+  color: #000;
+  border: 2rpx solid #ccc;
+  margin: 0 auto;
+  text-align: left;
+  border-radius: 10rpx;
+}
+
+.rotaryawatxt{
+  display: block;
+  width: 100%;
+  height: 120rpx;
+  padding-top: 60rpx;
+  color: #000;
+  font-size: 28rpx;
+  text-align: center;
+  line-height: 50rpx;
+}
+.rotarybutbox{
+  width: 100%;
+  height: 60rpx;
+  padding-top: 20rpx;
+  text-align: center;
+}
+.rotarybutcom{
+  width: 190rpx;
+  height: 55rpx;
+  border-radius: 8rpx;
+  display: inline-block;
+  font-size: 28rpx;
+  text-align: center;
+  line-height: 55rpx;
+  position: relative;
+}
+.butgetnum{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

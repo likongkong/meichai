@@ -1,0 +1,10 @@
+{
+  "asdfasfdflePullDownRefresh": true,
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "原价拆明盒",
+  "usingComponents": {
+    "hidewindow": "../../../../pages/hidewindow/hidewindow",
+    "bnavigation": "/pages/bottomComponent/bottomComponent",
+    "t_f": "../../../../pages/topfunction/topfunction"
+  }
+}

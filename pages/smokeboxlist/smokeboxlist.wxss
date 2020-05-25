@@ -1,0 +1,240 @@
+/* /pages/smokeboxlist/smokeboxlist.wxss */
+@import "../../pages/signin/signin.wxss";
+@import "../../common/tabbar.wxss";
+
+page {
+  background: #f0f0f0;
+}
+
+.bgstyle {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #000;
+  opacity: 0.6;
+}
+
+.backgroimg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+
+.backgroimgimg {
+  width: 100%;
+  height: 100%;
+}
+
+.vm_top {
+  width: 100%;
+  height: 280rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 8;
+  background: white;
+}
+
+.vm_head {
+  background-image: url("http://www.51chaidan.com/images/background/bgBlindBoxTitleMC.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  -moz-background-size: 100% 100%;
+  width: 100%;
+  height: 200rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 8;
+}
+
+.vm_two {
+  /* background-image: url("https://www.51chaidan.com/images/store/vm_hbgimg_s1.png"); */
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  -moz-background-size: 100% 100%;
+  width: 100%;
+  height: 80rpx;
+  position: absolute;
+  top: 200rpx;
+  left: 0;
+  z-index: 8;
+}
+
+.vm_tbot {
+  width: 710rpx;
+  height: 80rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+}
+
+.vm_bottom {
+  width: 100%;
+  height: 120rpx;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 0;
+  /* background-image: url("https://www.51chaidan.com/images/store/vm_bottombg_s1.png"); */
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  -moz-background-size: 100% 100%;
+  overflow: hidden;
+}
+
+.storbox {
+  width: 100%;
+}
+
+.vm_list {
+  width: 100%;
+  height: 160rpx;
+  /* background-image: url("http://www.51chaidan.com/images/store/vm_listbg.png"); */
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  -moz-background-size: 100% 100%;
+  position: relative;
+}
+
+/*   单行  */
+
+.specialellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.labelstyle {
+  width: 100rpx;
+  line-height: 30rpx;
+  opacity: 0.9;
+  position: absolute;
+  top: 10rpx;
+  right: 20rpx;
+  color: #fff;
+  border-radius: 7rpx;
+  font-size: 25rpx;
+  text-align: center;
+}
+
+.swiper_container {
+  width: 100%;
+  height: 80rpx;
+}
+
+.swiperiteme {
+  width: 100%;
+  height: 80rpx;
+}
+
+.swiper_item_eve {
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 24rpx;
+  color: #000;
+}
+
+.posibuttoy {
+  width: 250rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  color: #fff;
+  font-size: 26rpx;
+  border-radius: 10rpx;
+  background: #1890ff;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 160rpx;
+  margin: 0 auto;
+  z-index: 8;
+}
+
+.nsswiperdetail {
+  width: 100%;
+  height: 200rpx;
+  background: #fff;
+}
+
+/*用来包裹所有的小圆点 */
+
+.dots {
+  height: 15rpx;
+  position: absolute;
+  left: 20rpx;
+  bottom: 15rpx;
+}
+
+/*未选中时的小圆点样式 */
+
+.dot {
+  width: 15rpx;
+  height: 15rpx;
+  border-radius: 50%;
+  margin-right: 10rpx;
+  background-color: white;
+  display: inline-block;
+  vertical-align: top;
+  opacity: 0.7;
+}
+
+/*选中以后的小圆点样式 */
+
+.activeindex {
+  width: 15rpx;
+  height: 15rpx;
+  background-color: #ff2742;
+  opacity: 0.7;
+}
+
+.agreestyle {
+  width: 630rpx;
+  line-height: 80rpx;
+  margin: 20rpx 10rpx;
+  text-align: center;
+  font-size: 25rpx;
+  background: white;
+  text-decoration: underline;
+  border-radius: 10rpx;
+}
+
+.setcomplie {
+  width: 500rpx;
+  line-height: 80rpx;
+  position: absolute;
+  left: 75rpx;
+  bottom: 10rpx;
+  background: white;
+  text-align: center;
+  border-radius: 10rpx;
+}
+
+.closestyle {
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 5rpx;
+  text-align: center;
+}
+
+.recgadbotleftimg {
+  width: 34rpx;
+  height: 34rpx;
+  display: inline-block;
+  position: relative;
+  top: 6rpx;
+  margin: 58rpx 0 0 33rpx;
+}

@@ -1,0 +1,193 @@
+<!--/pages/smokeboxlist/smokeboxlist.wxml-->
+
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'>
+</t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+
+<!-- <view class='backgroimg'>
+  <image class='backgroimgimg' src='https://www.51chaidan.com/images/store/vm_maxbg.png'></image>
+</view> -->
+
+<view class='vm_top' style='top:{{statusBarHeightMc}}px;'>
+
+	<view class='vm_head'>
+		<swiper class="nsswiperdetail" bindchange="swiperChange" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
+			<swiper-item wx:for="{{bannerList}}" wx:key="key">
+				<image src="{{item.src}}?imageMogr2/thumbnail/x400" style="width:100%;height:200rpx;" catchtap='topjumpdetail' data-gid="{{item.gid}}"></image>
+			</swiper-item>
+		</swiper>
+		<!--重置小圆点的样式 -->
+		<view class="dots">
+			<block wx:for="{{bannerList}}" wx:key='key'>
+				<view class="dot{{index == currentSwiper ? ' activeindex' : ''}}"></view>
+			</block>
+		</view>
+	</view>
+
+	<view class='vm_two'>
+		<view class='vm_tbot'>
+			<swiper class="swiper_container" vertical="true" autoplay="true" circular="true" interval="2500">
+				<block wx:for="{{boastlist}}" wx:key='key'>
+					<swiper-item class='swiperiteme'>
+						<image style='width:50rpx;height:50rpx;margin:15rpx;float:left;border-radius:50%;' src='{{item.headphoto}}'></image>
+						<view class="swiper_item_eve specialellipsis">{{item.content}}</view>
+					</swiper-item>
+				</block>
+			</swiper>
+
+			<view style='width:100%;height:100%;position:absolute;top:0;left:0;z-index:2;'></view>
+		</view>
+	</view>
+
+</view>
+
+<view class='storbox'>
+	<view style='width:100%;height:280rpx;'></view>
+	<view style='width:730rpx;margin:10rpx;overflow:hidden;padding-bottom:70rpx;'>
+		<view wx:if='{{false}}' style='width:44%;margin:10rpx 3%;float:left;' wx:for='{{list}}' wx:key='key'>
+			<view class='vm_list' style='font-size:25rpx;text-align:center;' catchtap='jumpdetail' data-id='{{item.id}}' data-gid="{{item.goods_id}}">
+				<view wx:if='{{item.status == 2 && item.tag!=""}}' class='labelstyle'>
+					<view wx:if='{{item.tag=="新品"}}' style='background:#FF9800;border-radius:7rpx;'>{{item.tag}}</view>
+					<view wx:if='{{item.tag=="预售"}}' style='background:#FB595F;border-radius:7rpx;'>{{item.tag}}</view>
+					<view wx:if='{{item.tag=="限量"}}' style='background:#31b3fb;border-radius:7rpx;'>{{item.tag}}</view>
+				</view>
+				<view wx:if='{{item.status == 1}}' class='labelstyle' style='background: #000;'>未开放</view>
+				<image style='width:92%;height:135rpx;margin:0 auto;display:block;border-radius:10rpx;border:2rpx solid #26affb;' src='{{item.cover}}?imageMogr2/thumbnail/x270'></image>
+			</view>
+			<view style='width:100%;height:35rpx;position:relative;' catchtap='jumpdetail' data-id='{{item.id}}'>
+				<view style='width:100%;height:35rpx;opacity:0.6;background:#333;border:1rpx solid #000;'></view>
+				<view class='specialellipsis' style='width:100%;line-height:35rpx;text-align:center;font-size:25rpx;color:#fff;position:absolute;top:0;left:0;'>{{item.name}}</view>
+			</view>
+		</view>
+
+		<view style="width:345rpx;height:280rpx;margin:10rpx;float:left;background:white;border-radius:10rpx;position:relative;" wx:for='{{list}}' wx:key='key' catchtap='jumpdetail' data-id='{{item.id}}' data-gid="{{item.goods_id}}" data-official="{{item.isBusinessActivity}}" data-appid="{{item.appId}}" data-isdirectshipping='{{item.isDirectShipping}}'>
+			<image style="width:100%;height:184rpx;border-radius:10rpx 10rpx 0 0" src='{{item.cover}}?imageMogr2/thumbnail/x270'></image>
+			<view wx:if='{{item.status == 2 && item.tag!=""}}' class='labelstyle'>
+				<view wx:if='{{item.tag=="新品"}}' style='background:#FF9800;border-radius:7rpx;'>{{item.tag}}</view>
+				<view wx:if='{{item.tag=="预售"}}' style='background:#FB595F;border-radius:7rpx;'>{{item.tag}}</view>
+				<view wx:if='{{item.tag=="限量"}}' style='background:#31b3fb;border-radius:7rpx;'>{{item.tag}}</view>
+			</view>
+			<view wx:if='{{item.status == 1}}' class='labelstyle' style='background: #000;'>未开放</view>
+
+			<view class='specialellipsis' style="width:94%;line-height:30rpx;text-align:left;font-size:26rpx;margin:0 3%;">{{item.title}}</view>
+
+			<view style="width:100%;height:40rpx;color:#d64650;">
+				<view style="float:left;font-size:35rpx;margin-left:10rpx;">
+					<text style="font-size:20rpx;">￥</text>{{item.price}}</view>
+				<view wx:if="{{item.tip!='' && !item.isBusinessActivity}}" style="float:right;font-size:20rpx;line-height:30rpx;border:3rpx solid #d64650;border-radius:7rpx;margin:10rpx 10rpx 0 0;">{{item.tip}}</view>
+				<view wx:if="{{item.tip!='' && item.isBusinessActivity}}" style="float:right;font-size:20rpx;line-height:30rpx;border:3rpx solid #4c9a23;border-radius:7rpx;margin:10rpx 10rpx 0 0;color:#4c9a23">{{item.tip}}</view>
+			</view>
+
+		</view>
+
+	</view>
+	<view style='width:100%;{{isIphoneX?"height:170rpx;":"height:150rpx;"}}'></view>
+</view>
+
+<view class='posibuttoy' catchtap='jumpowntoy'>我的玩具柜
+	<text wx:if='{{listbutnum!=0}}'>({{listbutnum}})</text>
+</view>
+
+
+<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+
+
+<view wx:if='{{!isBlindBoxDefaultAddress && ishowcover}}' style='width:100%;position:fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight}}px;z-index:12;' catchtap="showdealoradd"></view>
+
+<!-- ishowdealoradd -->
+<view wx:if='{{!isBlindBoxDefaultAddress && ishowdealoradd}}' style='width:100%;height:100%;position:fixed;top:0px;left:0;z-index:13;'>
+	<view class='bgstyle' catchtouchmove="myCatchTouch"></view>
+
+	<view style="width:650rpx;height:800rpx;position:absolute;top:0;bottom:0;left:50rpx;margin:auto 0;background:#f0f0f0;border-radius:20rpx;">
+		<view wx:if='{{ishowdeal}}' style="width:630rpx;height:670rpx;margin:10rpx;background:white;border-radius:20rpx;position:relative;">
+			<view style="width:100%;text-align:center;font-size:30rpx;line-height:80rpx;">抽盒机发货协议</view>
+			<image class="closestyle" src="https://www.51chaidan.com/images/driveCar/fanhui.png" catchtap='closedealoradd'></image>
+			<view style="width:570rpx;height:590rpx;font-size:28rpx;overflow:scroll;margin:0 30rpx;">
+				<text>抽盒机发货协议,\n一、关于完善小程序个人信息的说明\na)为完成您所达成的交易,自2019年12月11日起,您需要填写常用住所地地址作为默认收货地址。如无特殊情况(手动发货),我们将以该地址作为向您提供服务时所依凭据。\nb)自2019年12月11日起,若您未填写默认收货地址,您将无法使用抽盒机购买服务,其他服务正常使用。\n二、关于抽盒机发货规则修改的说明\na)自2019年12月11日起,抽盒机和玩具柜购买的商品次日发货(预售商品到货发出)，设置出售价格商品保留时间为21天(保留期),21天内未手动发货的,系统将在保留期届满时15天内(发货期),自动将到期商品发货到您的默认地址(预售商品到货发出)。因不可抗力、意外事件或市场物流高峰期发货期可能会有延误。\nb)请确保您的默认地址是真实有效的,如有变动请及时修改默认地址信息。因您地址错误或其他个人原因导致的任何损失由您自行承担。\nc)自动/手动发货的订单,自我方发货时起即完成了交付义务。无论您以任何理由拒收的,所造成的损失由您个人承担。\nd)本协议保留期与发货期时效的计算均以次日开始计算。即保留期为商品下单的次日。发货期则以保留期满的次日开始计算。\ne)本协议除特有说明外,天/日是指自然日而非工作日。 </text>
+			</view>
+		</view>
+		<view wx:if='{{ishowdeal}}' class="agreestyle" catchtap="agreeset">同意并设置默认收获地址</view>
+
+		<view wx:if='{{ishowadd}}' style="width:100%;height:100%;position:relative;">
+			<image class="closestyle" src="https://www.51chaidan.com/images/driveCar/fanhui.png" catchtap='closedealoradd'></image>
+			<view style="font-size:30rpx;line-height:50rpx;color:#ff2742;margin-left:10rpx;">必须选择一个默认收货地址</view>
+			<view style="width:630rpx;height:660rpx;margin:0 10rpx;overflow:scroll;">
+				<view wx:for='{{addressdata}}' wx:key='key' style="width:100%;height:150rpx;border-radius:10rpx;background:white;margin:5rpx 0;" catchtap="selectdefult" data-ind="{{index}}">
+					<view style="width:100rpx;height:100%;display:inline-block;vertical-align:top;">
+						<image class='recgadbotleftimg' hidden='{{!item.checked}}' src='/pages/images/pressed_click.png'></image>
+						<image class='recgadbotleftimg' hidden='{{item.checked}}' src='/pages/images/normal_click.png'></image>
+					</view>
+
+					<view style="width:500rpx;height:100%;display:inline-block;line-height:50rpx;vertical-align:top;">
+						<view style="width:100%;font-size:25rpx;margin-top:25rpx;">
+							<view style="display:inline-block;">{{item.consignee}}</view>
+							<view style="display:inline-block;margin-left:20rpx;">{{item.phone}}</view>
+						</view>
+
+						<view class='specialellipsis' style="font-size:25rpx;">{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
+					</view>
+				</view>
+
+				<view style="width:100%;height:150rpx;border-radius:10rpx;background:white;margin:5rpx 0;" catchtap="jumpaddress">
+					<view style="line-height:50rpx;text-align:center;padding-top:50rpx;">
+						<image style="width:50rpx;height:50rpx;display:inline-block;vertical-align:top;" src="https://www.51chaidan.com/images/driveCar/tianjia.png"></image>
+						<view style="display:inline-block;margin-left:20rpx;font-size:25rpx;vertical-align:top;"> 新建地址</view>
+					</view>
+				</view>
+			</view>
+			<view class="setcomplie" style="color:{{maddid!='' ? '#000': '#e0e0e0'}};" catchtap="{{maddid!='' ? 'setdefultadd': ''}}">设置完成</view>
+		</view>
+	</view>
+</view>
+
+<!--  授权弹框  -->
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+
+<!-- 双十一 入口 -->
+<view wx:if='{{automat.isOpen}}' catchtap='doubleEleven' style='width:95rpx;position:fixed;right:10rpx;top:{{statusBarHeightMc + 85}}px;z-index:9;'>
+	<image src='https://www.51chaidan.com/images/turntable/turntable_colour.png' style='width:75rpx;height:75rpx;display:block;margin-left:10rpx;'></image>
+	<view wx:if='{{automatTimes>0}}' class='tabshopimg specialellipsis' style='top:-10rpx;;left:50rpx;'>{{automatTimes}}</view>
+	<view style="width:95rpx;height:30rpx;position:relative;font-size:22rpx;">
+		<view style="width:95rpx;height:30rpx;background:#000;position:absolute;top:0;left:0;opacity:0.2;border-radius:5rpx;"></view>
+		<view style="width:95rpx;height:30rpx;position:absolute;top:0;left:0;color:#e94f57;text-align:center;font-weight:bold;">{{automattitle}}</view>
+	</view>
+</view>
+
+<!-- 透视卡 小悬浮 -->
+<view wx:elif='{{perspcardiftrmin}}' style='width:110rpx;height:170rpx;position:fixed;right:20rpx;bottom:260rpx;z-index:9;'>
+	<image src='http://www.51chaidan.com/images/icon/iconTempXRay.jpg' style='width:110rpx;height:110rpx;display:block;border-radius:50%;'></image>
+	<view style="width:110rpx;height:54rpx;font-size:22rpx;color:#ffffff;position:relative;">
+		<view style="width:110rpx;height:54rpx;background:#cb6a15;opacity:0.8;border-radius:10rpx;"></view>
+		<text style='display:block;text-align:center;width:110rpx;height:54rpx;line-height:27rpx;position:absolute;left:0;top:0rpx;'>点击使用\n{{percountdown}}</text>
+	</view>
+</view>
+
+<view wx:if='{{ishowofficial}}' style="width:100%;height:100%;position:fixed;top:0px;left:0;z-index:20;">
+
+	<view class='bgstyle' catchtouchmove="myCatchTouch" catchtap="closeofficial"></view>
+
+	<view style="width:80%;height:340rpx;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;background:white;border-radius:15rpx">
+		<view style="width:100%;color:black;font-size:35rpx;text-align:center;margin-top:20rpx;">{{alert.toB.title}}</view>
+
+		<view style="width:80%;margin:20rpx 10%;font-size:27rpx;color:gray;"><text>{{alert.toB.description}}</text></view>
+
+		<view style="width:100%;color:#4c9a23;font-size:35rpx;text-align:center;" catchtap="surejumpoutside">确定</view>
+	</view>
+
+</view>
+
+
+<view wx:if='{{brandprompts}}' style="width:100%;height:100%;position:fixed;top:0px;left:0;z-index:20;">
+
+	<view class='bgstyle' catchtouchmove="myCatchTouch" catchtap="closeoffbp"></view>
+
+	<view style="width:80%;height:310rpx;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;background:white;border-radius:15rpx">
+		<view style="width:100%;color:black;font-size:35rpx;text-align:center;margin-top:20rpx;">{{alert.directShipping.title}}</view>
+
+		<view style="width:80%;margin:20rpx 10%;font-size:27rpx;color:gray;"><text>{{alert.directShipping.description}}</text></view>
+
+		<view style="width:100%;color:#4c9a23;font-size:35rpx;text-align:center;" catchtap="brandpromptsjump">确定</view>
+	</view>
+
+</view>

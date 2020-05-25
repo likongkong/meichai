@@ -1,0 +1,130 @@
+/* page/component/pages/doubleEleven/doubleEleven.wxss */
+@import "../../../../common/tabbar.wxss";
+@import "/pages/detailspage/detailspage.wxss";
+
+page {
+  background: #565656;
+}
+
+.pagetitle {
+  width: 100%;
+  font-size: 60rpx;
+  color: #ffd944;
+  text-align: center;
+  line-height: 90rpx;
+}
+
+.robotbg {
+  background-image: url("https://www.51chaidan.com/images/activity/drawBack.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  -moz-background-size: 100% 100%;
+  width: 720rpx;
+  height: 972rpx;
+  margin: 15rpx 15rpx 0 15rpx;
+}
+
+.chipcollectstyle {
+  width: 250rpx;
+  line-height: 70rpx;
+  border-radius: 5rpx;
+  font-size: 28rpx;
+  text-align: center;
+  margin: 0 62rpx;
+  display:inline-block;
+  box-shadow: 3px 3px 6px 0px #999;
+}
+
+.againrollstyle {
+  width: 200rpx;
+  line-height: 70rpx;
+  border-radius: 5rpx;
+  font-size: 28rpx;
+  text-align: center;
+  margin: 0 25rpx;
+  float: left;
+  box-shadow: 3px 3px 6px 0px #999;
+}
+
+.hintstyle {
+  width: 580rpx;
+  line-height: 90rpx;
+  color: white;
+  position: absolute;
+  left: 75rpx;
+  bottom: 75rpx;
+  text-align: left;
+  font-weight: bold;
+  font-size: 27rpx;
+}
+
+.awardstyle {
+  width: 110rpx;
+  height: 110rpx;
+  position: absolute;
+  bottom: 5rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+.appear {
+  animation: changeanima 1s linear 1;
+}
+
+/* 50% {
+  transform: translate(0, 0) scale(1, 1);
+}
+
+65% {
+  transform: translate(-20px, 0) scale(1, 1);
+}
+
+80% {
+  transform: translate(20px, 0) scale(1, 1);
+} */
+
+@keyframes changeanima {
+  0% {
+    transform: translate(0, -30px) scale(0.5, 0.5);
+  }
+  100% {
+    transform: translate(0, 0) scale(1, 1);
+  }
+}
+
+.bgstyle {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #000;
+  opacity: 0.5;
+}
+.jumpapp{
+  width:100rpx;height:100rpx;background:#fff;border-radius: 50%;
+  position: fixed;
+  right: 20rpx;
+  bottom: 260rpx;
+  z-index: 99;
+}
+.jumpapptxt{
+  padding-top: 19rpx;
+  width: 100%;
+  text-align: center;
+  font-size: 24rpx;
+  display: block;
+  font-weight: bold;
+}
+.jumpappbut{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+}

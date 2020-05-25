@@ -1,0 +1,173 @@
+<!--  html页面转换  -->
+<import src="../../../../wxParse/wxParse.wxml"/>
+  <loading hidden="{{headhidden}}">
+      加载中...
+  </loading>
+
+  <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+  <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view style='width:0;height:0;overflow:hidden;position:absolute;top:-1000px;'>
+<!-- <view style='width:100%;height:240px;background:#888;display:flex; justify-content:center; align-items:center;'> -->
+  <canvas canvas-id='snapshot' style='width:300px; height:240px;'></canvas>
+</view>
+
+
+
+<view class='boxdetail {{tipback?"tripList_root":""}}' style="{{!headhidden?'position:fixed;top:0;left:0;right:0;bottom:0;':''}}">
+     <view class='dlhead'>
+        <swiper class="swiper" indicator-color="#fff" indicator-active-color="#ff2742" indicator-dots="true" circular="true" autoplay="true" interval="3000" duration="450">    
+          <block wx:for="{{movies}}" wx:key="key">    
+            <swiper-item>  
+                 <view class="slide-image" style="background:url({{item}});background-repeat: no-repeat;background-size:100% 100%;" data-index='{{index}}' bindtap='previewImg'></view>   
+            </swiper-item>    
+          </block>    
+        </swiper>            
+     </view> 
+     <view class='dltitle'>
+           <view wx:if='{{zunmdata.is_suit==1}}' style='display: inline-block;color:#ff2742;margin-right:12rpx;'>{{zunmdata.pre_name}}</view>
+           <view wx:if='{{zunmdata.is_suit==1}}' style='display: inline-block;'>{{zunmdata.ds}}</view>     
+           {{zunmdata.goods_name}}
+     </view>
+     <view class='dltityh'>
+         <view class='dlyhnnime' wx:for="{{zunmdata.tag}}" wx:key="key">{{item}}</view>
+     </view>
+     <view class='dltitlename'>
+         <view class='dltilat'>{{zunmdata.goods_source}}</view>
+         <view class='sharebutvie'>
+             <image src='../../../../pages/images/share.png' class='shareimg'></image>
+             <view class='sharetxt'>分享好友</view>
+             <button open-type="share" class='detailshare'></button>
+        </view>
+     </view>
+
+
+     <view class='dltittheme'>
+         <image class='dttemeimg' src='../../../../pages/images/rad_left.png'></image>
+         <view class='dlttemelef'>商品详情</view>
+     </view>
+    <!--  商品详情图片 转换HTML标签  -->
+    <view class='detailimg' wx:if='{{iftrdetail}}'>
+        <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+    </view>     
+    <view style='height:90rpx;width:100%;'></view>
+</view>
+
+
+<view class='imdetabot'  wx:if='{{zunmdata.stock<=0}}' style='background:#999;'>
+    暂无库存
+</view>
+<view class='imdetabot' catchtap='buybomb' wx:else>
+   <image src='../../../../pages/images/cgoldcoin1.png' class='imdicocgodd'></image> X {{zunmdata.price}} 兑换
+</view>
+
+<!--  背景颜色  -->
+<view class='tipback' wx:if='{{tipback}}' catchtouchmove="preventD"></view>
+
+
+
+
+
+
+
+
+
+
+
+<!--  二级背景  -->
+<view class='tipbacktwo' wx:if='{{tipbacktwo}}' catchtouchmove="preventD" bindtap='tipbacktwo'></view>
+<!--  立即购买弹框  -->
+ 
+<view class='buybombsimmediately' wx:if='{{buybombsimmediately}}'>
+    <view class='bbsheadcon'>
+        <view class='bbshccom' bindtap='seladdressfun'>
+           <view class='bbshccomleft'>收货地址</view>
+           <image class='bbshccomimg' src='../../../../pages/images/icon_in.png'></image>
+           <view class='bbshccomright '>
+              <view style="width:100%;line-height:57rpx;text-align:right;" class="specialellipsis">{{tipnamephone}}</view>
+              <view style="width:100%;line-height:57rpx;text-align:right;" class="specialellipsis">{{tipaddress}}</view>
+            </view>
+        </view>
+    </view>
+    <view class='bbshbottom'>
+         <view class='bbshbottomhead'>
+
+        </view> 
+        <view class='bbshbottombut' bindtap='placeorder'>提交订单</view>
+    </view>
+    
+</view>
+
+<!--  收货地址  -->
+<view class='receivingaddress' wx:if='{{receivingaddress}}'>
+     <view class='recgadhead'>
+         收货地址
+         <image src='../../../../pages/images/forknumber.png' class='recgadheadimg' bindtap='receivingaddressfun'></image>
+     </view>
+     <view class='recgadcon'>
+         <view class='recgaddata' wx:for='{{addressdata}}' wx:key='key'>
+             <view class='recgaddname' data-tipaid='{{item.aid}}' data-ind='{{index}}'  data-tipadd='{{item.address}}' catchtap='revisethereceivingaddress'>
+                 <view class='recgaddnameleft'>{{item.consignee}}</view>
+                 <view class='recgaddnameleft'>{{item.phone}}</view>
+             </view>
+             <view class='recgadaddress' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='revisethereceivingaddress'>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
+             <view class='recgadbottom'>
+                  <view class='recgadbotleft'>
+                      <!-- <image src='../images/normal_click.png' class='recgadbotleftimg'></image> -->
+                     <image class='recgadbotleftimg' hidden='{{!item.checked}}' src='../../../../pages/images/pressed_click.png'></image>
+                     <image class='recgadbotleftimg' hidden='{{item.checked}}' src='../../../../pages/images/normal_click.png'></image>                      
+                      默认地址
+                  </view>
+                  <view class='recgadbotright' bindtap='deladdress' data-ind="{{item.aid}}">
+                      <image src='../../../../pages/images/icon_delete.png' class='recgadbotleftimg'></image>
+                       删除
+                  </view>                  
+                  <view class='recgadbotright' style='margin-right:50rpx;' bindtap='jumpeditaddress' data-address='{{item.address}}' data-aid='{{item.aid}}' data-city='{{item.city}}'  data-consignee='{{item.consignee}}' data-district='{{item.district}}' data-phone='{{item.phone}}' data-province='{{item.province}}' data-idcard='{{item.idcard}}'>
+                     <image src='../../../../pages/images/icon_edit.png' class='recgadbotleftimg'></image>
+                      编辑
+                  </view>
+             </view>
+         </view>
+         <view class='recgadnodata' wx:if='{{addressdata.length==0}}'>
+             <image src='../../../../pages/images/recaddnodata.png' class='recgadnodataimg'></image>
+         </view>
+     </view>
+     <view class='recgadbot' bindtap='jumpaddress'>
+          增加新地址
+     </view>
+
+
+</view>
+
+
+
+<!--  授权弹框  -->
+
+<view class='tgaboxtwo' wx:if='{{tgabox}}' catchtap='clicktga'>
+    <view class='tgaboxtbg'></view>
+    <view class='tgaboxclick'>
+          <image mode='aspectFit' src='https://www.51chaidan.com/images/default/openscreen.jpg?log={{appNowTime}}' class='tgaboxclickbgImg'></image>
+          
+    </view>  
+<button class='tgaboxtgawchbochlibutboxtwo' open-type="getUserInfo" type='primary' bindgetuserinfo="userInfoHandler"></button>
+
+
+</view>
+
+<!--  首页按钮  -->
+<view class='frontpagebuttonact' catchtap='frontpagebutton' style='bottom:786rpx;'>
+    <view style='height:40rpx;text-align:center;line-height:50rpx;width:100%;padding-top:4rpx;'>返回</view>
+    <view style='height:40rpx;text-align:center;width:100%;'>首页</view>
+</view>
+<!-- 更多兑换 -->
+<view class='frontpagebuttonact' catchtap='jumpclassdh' style='bottom:656rpx;'>
+    <view style='height:40rpx;text-align:center;line-height:50rpx;width:100%;padding-top:4rpx;'>更多</view>
+    <view style='height:40rpx;text-align:center;width:100%;'>兑换</view>
+</view>
+
+<!--  提交订单弹框防止多次提交  -->
+<view wx:if='{{suboformola}}' style='width:100%;height:100%;background:#000;opacity: 0.4;z-index: 1999;position: fixed;top: 0;left: 0;'></view>
+<!--  loading 加载提示  -->
+<view hidden="{{headhidden}}" style='position: fixed;top: 0;left: 0;height: 100%;width: 100%;z-index: 30;' catchtouchmove="preventD"></view>
+
+

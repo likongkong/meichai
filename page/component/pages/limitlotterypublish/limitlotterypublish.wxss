@@ -1,0 +1,59 @@
+/* page/component/pages/limitlotterypublish/limitlotterypublish.wxss */
+
+page {
+  background: #f4f5f9;
+}
+
+.bgstyle {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #000;
+  opacity: 0.5;
+}
+
+.indheadinp {
+  width: 550rpx;
+  height: 110rpx;
+  line-height: 50rpx;
+  margin: 10rpx;
+  float: left;
+  background: #e8e8e9;
+  font-size: 25rpx;
+}
+
+.numstyle {
+  width: 200rpx;
+  height: 50rpx;
+  margin: 40rpx 10rpx;
+  float: left;
+  background: #e8e8e9;
+  font-size: 25rpx;
+}
+
+.commitbtn {
+  width: 350rpx;
+  background: #e94f57;
+  line-height: 70rpx;
+  text-align: center;
+  color: white;
+  border-radius: 5rpx;
+  margin: 30rpx 200rpx;
+  
+}
+
+/*  双行  */
+
+.multilineellipsis {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: normal !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}

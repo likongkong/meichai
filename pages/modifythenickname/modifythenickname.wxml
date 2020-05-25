@@ -1,0 +1,14 @@
+
+    <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+    <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class='box'>
+   <view class='boxhead'>
+       <image class='boxheadimg'  src='../images/icon_close3.png' bindtap='clearinp'></image>
+       <input class='bhinp' placeholder='请输入昵称' type='text' bindinput='changinp' maxlength="20" value="{{inpdata}}"></input>
+   </view>
+   <view class='tistit'>
+       最多20个字符,可由中英文、“_”、“-”组成
+   </view>
+   <view class='butadd' bindtap='addinp'>保存</view>
+</view>

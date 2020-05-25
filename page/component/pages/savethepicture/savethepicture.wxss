@@ -1,0 +1,14 @@
+.stpbox{
+  width: 100%;
+}
+.stpboximg{
+  display: block;
+  width: 100%;
+}
+.savepictxtbox{
+  padding: 20rpx;
+  background: #fff;
+}
+.savepictxt{
+  font-size: 24rpx;
+}

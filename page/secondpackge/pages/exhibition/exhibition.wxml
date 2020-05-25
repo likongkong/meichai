@@ -1,0 +1,443 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<!-- pagetype != 2 -->
+<view wx:if='{{pagetype == 4 || pagetype == 11|| pagetype == 12}}' class="exhibbox">
+	<view wx:if='{{pagetype != 12}}' class="exhibboxtop">
+		<scroll-view scroll-x="true" class="today_disanum_tab_comtainer" scroll-with-animation="true" bindscroll='scrollleftf' scroll-left='{{scrollleft}}'>
+			<view class='tdscrchbut specialellipsis' wx:for='{{timedata}}' id='q{{item.dateKey}}' wx:key='key' data-datekey='{{item.dateKey}}' catchtap='tabbotdata' style='{{dateKey==item.dateKey?"color:#000;font-size:26rpx;font-weight: bold;":"font-size:24rpx;color:#333;"}}width:27%;'>
+				<view class='tdstabbotimg' style='{{dateKey==item.dateKey?"border-bottom:4rpx solid #ff2742;":"border-bottom:0;"}}height:70rpx;'>
+					{{item.date}}
+				</view>
+			</view>
+		</scroll-view>
+	</view>
+
+    <!-- 直播 -->
+  <block wx:if='{{livebroadcast&&livebroadcast.length!=0}}'>
+   
+			<swiper style="width:710rpx;margin:auto;height:170rpx;" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
+				<swiper-item  wx:for='{{livebroadcast}}' wx:key='key' wx:for-item='w'>
+						<view style="height:139rpx;background:#fff;position:relative;margin:15rpx 0;border-radius: 10rpx;">
+							<navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{w.room_id}}" style='position: absolute;height:100%;width:100%;left:0rpx;top:0;z-index:3;'></navigator>
+							<view style="overflow:hidden;border-radius:10rpx;">
+								<image style="height:139rpx;width:174rpx;float:left;border-radius:10rpx;"  mode='aspectFit' src="{{w.images}}"></image>
+								<view style="width:460rpx;height:119rpx;position:relative;float:left;margin:10rpx;">
+									<view style="font-size:30rpx;">{{w.name}}</view>
+									<view style="width:100%;position:absolute;bottom:0rpx;left:0;">
+										<view wx:if='{{w.status==102}}' style="font-size:25rpx;line-height:30rpx;;color:#fff;float:left;padding:5rpx 10rpx;border-radius:10rpx;background:#32ACFB;">{{w.start_time}}开播</view>
+										<view wx:elif='{{w.status==101}}' style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">直播中</view>
+										<view wx:elif='{{w.status==103}}' style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">已结束</view>
+										<view wx:else style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">尚未开播</view>
+									</view>
+								</view>
+							</view>
+							<!-- <view wx:if='{{w.status==102}}' style="width:240rpx;height:82rpx;position:absolute;right:10rpx;top:0;bottom:0;margin:auto 0;"><subscribe room-id="5"></subscribe></view> -->
+						</view>
+				</swiper-item>
+			</swiper>
+
+
+  </block>
+
+	<view class="exhibboxcon">
+		<block wx:for='{{listdata}}' wx:key='key'>
+			<block wx:if='{{item.activityType!=0}}'>
+				<view class="exhibboxconeve" style="margin-left:20rpx;" catchtap="jumpexhdetail" data-brandid='{{item.brandId}}' data-id='{{item.id}}'>
+					<image class="exhibboxeveimg" mode='aspectFit' src="{{item.images}}"></image>
+					<view class="dismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.goodsName}}</view>
+					<view style="width:100%;height:40rpx;padding:10rpx 0;">
+						<view wx:if='{{item.shopPrice && item.shopPrice!=""}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#ff2742;float:left;">￥{{item.shopPrice}}</view>
+						<view wx:if='{{pagetype == 4}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;">
+							<block wx:if='{{item.status==1}}'>{{item.start}}报名</block>
+							<view wx:elif='{{item.status==2&&item.isSign}}' style="color:#6aca6b;">已报名</view>
+							<block wx:elif='{{item.status==2}}'>{{item.stop}}开奖</block>
+							<block wx:elif='{{item.status==3}}'>已开奖</block>
+						</view>
+						<view wx:elif='{{pagetype == 11 || pagetype == 12}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;">
+						  <block wx:if='{{item.saleButtonDisplay}}'>
+							    <view style='color:#6aca6b;'>{{item.saleButtonDisplay}}</view>
+							</block>
+							<block wx:else>
+								<view wx:if='{{item.status==1}}' style='color:#6aca6b;'>{{item.start}}开售</view>
+								<view wx:elif='{{item.status==2}}' style='color:#6aca6b;'>{{item.stop}}结束</view>
+								<view wx:elif='{{item.status==3}}' style='color:black;'>已结束</view>							
+							</block>
+						</view>
+					</view>
+					<view style="width:100%;height:46rpx;">
+						<image class="exhshopimg" src="{{item.brandLogo}}"></image>
+						<view class="specialellipsis" style="width:160rpx;height:46rpx;line-height:46rpx;font-size:22rpx;float:left;margin-left:10rpx;">{{item.brandName}}</view>
+						<view wx:if='{{item.tags.length>0}}' class="exhshoptiright specialellipsis">{{item.tags[0]}}</view>
+					</view>
+				</view>
+			</block>
+			<block wx:else>
+				<view class="exhibboxconibox">
+					<swiper class="swiper" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450" style="height:197rpx;">
+						<swiper-item wx:for="{{item.list}}" wx:key="key" wx:for-item='w'>
+							<image src="{{w.src}}?imageMogr2/thumbnail/x800" class="exhibboxconiboimg" mode='aspectFill' catchtap="exhibitionpubjump" data-id='{{item.list[index].activity_id}}' data-type='{{item.list[index].href_type}}'></image>
+						</swiper-item>
+					</swiper>
+				</view>
+			</block>
+		</block>
+
+
+
+	</view>
+
+</view>
+
+<!-- 品牌列表 -->
+<view wx:if='{{pagetype == 2}}' style="width:100%;height:100%;">
+
+	<view style="width:94%;height:80rpx;margin:20rpx 3%;border-radius:40rpx;background:white;">
+		<image style="width:40rpx;height:40rpx;margin:20rpx;float:left;" src="https://www.51chaidan.com/images/toyCabinet/search.png"></image>
+
+		<input bindinput="namefun" class="indheadinp" placeholder="请输入品牌名称搜索" type="text"></input>
+
+		<view style="background:#5daefd;color:white;width:100rpx;line-height:40rpx;border-radius:20rpx;float:right;text-align:center;margin:20rpx;font-size:25rpx;" catchtap="serchclick">搜索</view>
+	</view>
+
+    <!-- 直播 -->
+  <block wx:if='{{livebroadcast&&livebroadcast.length!=0}}'>
+   
+			<swiper style="width:710rpx;margin:auto;height:170rpx;" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
+				<swiper-item  wx:for='{{livebroadcast}}' wx:key='key' wx:for-item='w'>
+						<view style="height:139rpx;background:#fff;position:relative;margin:15rpx 0;border-radius: 10rpx;">
+							<navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{w.room_id}}" style='position: absolute;height:100%;width:100%;left:0rpx;top:0;z-index:3;'></navigator>
+							<view style="overflow:hidden;border-radius:10rpx;">
+								<image style="height:139rpx;width:174rpx;float:left;border-radius:10rpx;"  mode='aspectFit' src="{{w.images}}"></image>
+								<view style="width:460rpx;height:119rpx;position:relative;float:left;margin:10rpx;">
+									<view style="font-size:30rpx;">{{w.name}}</view>
+									<view style="width:100%;position:absolute;bottom:0rpx;left:0;">
+										<view wx:if='{{w.status==102}}' style="font-size:25rpx;line-height:30rpx;;color:#fff;float:left;padding:5rpx 10rpx;border-radius:10rpx;background:#32ACFB;">{{w.start_time}}开播</view>
+										<view wx:elif='{{w.status==101}}' style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">直播中</view>
+										<view wx:elif='{{w.status==103}}' style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">已结束</view>
+										<view wx:else style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">尚未开播</view>
+									</view>
+								</view>
+							</view>
+							<!-- <view wx:if='{{w.status==102}}' style="width:240rpx;height:82rpx;position:absolute;right:10rpx;top:0;bottom:0;margin:auto 0;"><subscribe room-id="5"></subscribe></view> -->
+						</view>
+				</swiper-item>
+			</swiper>
+
+  </block>
+
+	<view style="width:100%;overflow:hidden;">
+		<view wx:for='{{brandList}}' wx:key='key' style="width:22.5%;margin:0rpx 0 10rpx 2%;float:left;background:white;border-radius:10rpx;padding-bottom:8rpx;" data-mid="{{item.id}}" catchtap="gobrandDetails">
+			<image style="width:80%;height:135rpx;margin:10% 10% 5% 10%;border-radius:10rpx;display:block;" mode="aspectFit" src="{{item.brandLogo}}"></image>
+			<view class="multilineellipsis" style="width:90%;height:64rpx;line-height:30rpx;margin:0 5%;font-size:25rpx;text-align:center;">{{item.name}}</view>
+
+		</view>
+	</view>
+
+	<swiper bindanimationfinish="changeGoodsSwip" current="{{currentIndex}}" class="nsswiperdetail" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
+		<swiper-item wx:for="{{brandList}}" wx:key="key">
+			<image src="{{item.brandLogo}}" style="width:100%;height:200rpx;" catchtap='topjumpdetail'></image>
+		</swiper-item>
+	</swiper>
+
+</view>
+
+<!-- 设计师展示 -->
+<view wx:if='{{pagetype == 14}}' style="width:100%;height:100%;">
+	<view style="width:94%;height:80rpx;margin:20rpx 3%;border-radius:40rpx;background:white;">
+		<image style="width:40rpx;height:40rpx;margin:20rpx;float:left;" src="https://www.51chaidan.com/images/toyCabinet/search.png"></image>
+
+		<input bindinput="namefun" class="indheadinp" placeholder="请输入品牌名称搜索" type="text"></input>
+
+		<view style="background:#5daefd;color:white;width:100rpx;line-height:40rpx;border-radius:20rpx;float:right;text-align:center;margin:20rpx;font-size:25rpx;" catchtap="serchclick">搜索</view>
+	</view>
+
+    <!-- 直播 -->
+  <block wx:if='{{livebroadcast&&livebroadcast.length!=0}}'>
+			<swiper style="width:710rpx;margin:auto;height:170rpx;" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
+				<swiper-item  wx:for='{{livebroadcast}}' wx:key='key' wx:for-item='w'>
+						<view style="height:139rpx;background:#fff;position:relative;margin:15rpx 0;border-radius: 10rpx;">
+							<navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{w.room_id}}" style='position: absolute;height:100%;width:100%;left:0rpx;top:0;z-index:3;'></navigator>
+							<view style="overflow:hidden;border-radius:10rpx;">
+								<image style="height:139rpx;width:174rpx;float:left;border-radius:10rpx;"  mode='aspectFit' src="{{w.images}}"></image>
+								<view style="width:460rpx;height:119rpx;position:relative;float:left;margin:10rpx;">
+									<view style="font-size:30rpx;">{{w.name}}</view>
+									<view style="width:100%;position:absolute;bottom:0rpx;left:0;">
+										<view wx:if='{{w.status==102}}' style="font-size:25rpx;line-height:30rpx;;color:#fff;float:left;padding:5rpx 10rpx;border-radius:10rpx;background:#32ACFB;">{{w.start_time}}开播</view>
+										<view wx:elif='{{w.status==101}}' style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">直播中</view>
+										<view wx:elif='{{w.status==103}}' style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">已结束</view>
+										<view wx:else style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">尚未开播</view>
+									</view>
+								</view>
+							</view>
+							<!-- <view wx:if='{{w.status==102}}' style="width:240rpx;height:82rpx;position:absolute;right:10rpx;top:0;bottom:0;margin:auto 0;"><subscribe room-id="5"></subscribe></view> -->
+						</view>
+				</swiper-item>
+			</swiper>
+
+
+  </block>
+
+	<scroll-view scroll-x="true" style="width:710rpx;margin:20rpx 20rpx 0 20rpx;background:white;white-space:nowrap;" bindscroll='scrollleftf'>
+		<view wx:for='{{heatList}}' wx:key="key" style="margin:10rpx;display:inline-block;vertical-align:top;" catchtap="brandClick" data-bid="{{item.id}}">
+			<image style="width:70rpx;height:70rpx;" mode="widthFix" src="{{item.logo}}"></image>
+
+			<view style="font-size:20rpx;text-align:center;">
+				<image style="width:30rpx;height:30rpx;display:inline-block;vertical-align:top;" src="https://cdn.51chaidan.com/images/icon/icon_toyShow_hot.png"></image>
+				<view style="line-height:30rpx;display:inline-block;vertical-align:top;">{{item.heat_degree}}</view>
+			</view>
+		</view>
+	</scroll-view>
+
+	<view class="exhibboxcon">
+		<view style="float:left;margin-left:20rpx;">
+			<view wx:for='{{designerList}}' wx:key='key' wx:if='{{index%2==0}}' class="mexhibboxconeve" catchtap="jumpedryingdetail" data-gid='{{item.id}}'>
+				<image class="mexhibboxeveimg" mode='widthFix' src="{{item.video_img ? item.video_img : item.img_extend[0].img}}"></image>
+				<view class="exibactna specialellipsis" style="text-align:left;">{{item.title}}</view>
+				<view style="width:100%;height:46rpx;">
+					<image style="width:46rpx;height:46rpx;border-radius:50%;float:left;" src="{{item.logo}}"></image>
+					<view class="specialellipsis" style="width:160rpx;height:46rpx;line-height:46rpx;font-size:22rpx;float:left;margin-left:10rpx;">{{item.name}}</view>
+					<view style="float:right;height:46rpx;" catchtap="ispraisefun" data-is_praise="{{item.is_praise}}" data-ind="{{index}}" data-lid="{{item.id}}">
+						<image wx:if='{{item.is_praise == 0}}' style="width:30rpx;height:30rpx;margin:8rpx;display:inline-block;vertical-align:top;" src="https://www.51chaidan.com/images/brand/black_heart.png"></image>
+						<image wx:else style="width:30rpx;height:30rpx;margin:8rpx;display:inline-block;vertical-align:top;" src="https://www.51chaidan.com/images/brand/red_heart.png?"></image>
+						<view wx:if='{{item.is_praise == 0}}' style="line-height:46rpx;font-size:25rpx;display:inline-block;vertical-align:top;color:#BEBEBE;">{{item.praise_sum}}</view>
+						<view wx:if='{{item.is_praise == 1}}' style="line-height:46rpx;font-size:25rpx;display:inline-block;vertical-align:top;color:#f93f45;">{{item.praise_sum}}</view>
+					</view>
+				</view>
+			</view>
+
+		</view>
+
+		<view style="margin-right:20rpx;float:right;">
+			<view wx:for='{{designerList}}' wx:key='key' wx:if='{{index%2==1}}' class="mexhibboxconeve" catchtap="jumpexhdetail" data-gid='{{item.id}}' data-brandid='{{item.brandId}}'>
+				<image class="mexhibboxeveimg" mode='widthFix' src="{{video_img ? video_img : item.img_extend[0].img}}"></image>
+				<view class="exibactna specialellipsis" style="text-align:left;">{{item.title}}</view>
+				<view style="width:100%;height:46rpx;">
+					<image style="width:46rpx;height:46rpx;border-radius:50%;float:left;" src="{{item.logo}}"></image>
+					<view class="specialellipsis" style="height:46rpx;line-height:46rpx;font-size:22rpx;float:left;margin-left:10rpx;width:160rpx;">{{item.name}}</view>
+					<view style="float:right;height:46rpx;" catchtap="ispraisefun" data-is_praise="{{item.is_praise}}" data-ind="{{index}}" data-lid="{{item.id}}">
+						<image wx:if='{{item.is_praise == 0}}' style="width:30rpx;height:30rpx;margin:8rpx;display:inline-block;vertical-align:top;" src="https://www.51chaidan.com/images/brand/black_heart.png"></image>
+						<image wx:else style="width:30rpx;height:30rpx;margin:8rpx;display:inline-block;vertical-align:top;" src="https://www.51chaidan.com/images/brand/red_heart.png?"></image>
+						<view wx:if='{{item.is_praise == 0}}' style="line-height:46rpx;font-size:25rpx;display:inline-block;vertical-align:top;color:#BEBEBE;">{{item.praise_sum}}</view>
+						<view wx:if='{{item.is_praise == 1}}' style="line-height:46rpx;font-size:25rpx;display:inline-block;vertical-align:top;color:#f93f45;">{{item.praise_sum}}</view>
+					</view>
+				</view>
+			</view>
+		</view>
+
+	</view>
+</view>
+
+<!-- 抽盒机 -->
+<view wx:if='{{pagetype == 5}}' style="width:100%;height:100%;">
+	<view style="width:100%;background:#f5f6fa;" wx:if='{{brannerlist&&brannerlist.length!=0}}'>
+		<swiper bindanimationfinish="changeGoodsSwip" current="{{currentIndex}}" class="smokeswiperstyle" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
+			<swiper-item wx:for="{{brannerlist}}" wx:key="key">
+				<image src="{{item.src}}" style="width:100%;height:200rpx;border-radius: 10rpx;" catchtap="exhibitionpubjump" data-id='{{item.activity_id}}' data-type='{{item.href_type}}'></image>
+			</swiper-item>
+		</swiper>
+	</view>
+	<view style="width:94%;height:80rpx;margin:20rpx 3%;border-radius:40rpx;background:white;">
+		<image style="width:40rpx;height:40rpx;margin:20rpx;float:left;" src="https://www.51chaidan.com/images/toyCabinet/search.png"></image>
+
+		<input bindinput="namefun" class="indheadinp" placeholder="请输入品牌or系列名" type="text"></input>
+
+		<view style="background:#5daefd;color:white;width:100rpx;line-height:40rpx;border-radius:20rpx;float:right;text-align:center;margin:20rpx;font-size:25rpx;" catchtap="serchclick">搜索</view>
+	</view>
+
+    <!-- 直播 -->
+  <block wx:if='{{livebroadcast&&livebroadcast.length!=0}}'>
+			<swiper style="width:710rpx;margin:auto;height:170rpx;" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
+				<swiper-item  wx:for='{{livebroadcast}}' wx:key='key' wx:for-item='w'>
+						<view style="height:139rpx;background:#fff;position:relative;margin:15rpx 0;border-radius: 10rpx;">
+							<navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{w.room_id}}" style='position: absolute;height:100%;width:100%;left:0rpx;top:0;z-index:3;'></navigator>
+							<view style="overflow:hidden;border-radius:10rpx;">
+								<image style="height:139rpx;width:174rpx;float:left;border-radius:10rpx;"  mode='aspectFit' src="{{w.images}}"></image>
+								<view style="width:460rpx;height:119rpx;position:relative;float:left;margin:10rpx;">
+									<view style="font-size:30rpx;">{{w.name}}</view>
+									<view style="width:100%;position:absolute;bottom:0rpx;left:0;">
+										<view wx:if='{{w.status==102}}' style="font-size:25rpx;line-height:30rpx;;color:#fff;float:left;padding:5rpx 10rpx;border-radius:10rpx;background:#32ACFB;">{{w.start_time}}开播</view>
+										<view wx:elif='{{w.status==101}}' style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">直播中</view>
+										<view wx:elif='{{w.status==103}}' style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">已结束</view>
+										<view wx:else style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">尚未开播</view>
+									</view>
+								</view>
+							</view>
+							<!-- <view wx:if='{{w.status==102}}' style="width:240rpx;height:82rpx;position:absolute;right:10rpx;top:0;bottom:0;margin:auto 0;"><subscribe room-id="5"></subscribe></view> -->
+						</view>
+				</swiper-item>
+			</swiper>
+
+
+  </block>
+
+	<view style='width:730rpx;margin:10rpx;overflow:hidden;padding-bottom:70rpx;'>
+		<block wx:for='{{smokelist}}' wx:key='key'>
+			<block wx:if='{{item.activityType!=0}}'>
+				<view style="width:345rpx;height:280rpx;margin:10rpx;float:left;background:white;border-radius:10rpx;position:relative;" catchtap='jumpexhdetail' data-brandid='{{item.brandId}}' data-id='{{item.id}}' data-gid="{{item.goods_id}}">
+					<image style="width:100%;height:184rpx;border-radius:10rpx 10rpx 0 0" mode='aspectFit' src='{{item.images}}?imageMogr2/thumbnail/x270'></image>
+					<view style="position:absolute;top:20rpx;right:10rpx;">
+						<view wx:for='{{item.tags}}' wx:if='{{index<1}}' wx:key='key' class='labelstyle'>{{item}}</view>
+					</view>
+
+					<view class='specialellipsis' style="width:94%;line-height:30rpx;text-align:left;font-size:26rpx;margin:0 3%;">{{item.name}}</view>
+
+					<view style="height:46rpx;padding:0rpx 10rpx;margin-top:10rpx;">
+						<image class="exhshopimg" src="{{item.brandLogo}}"></image>
+						<view class="specialellipsis" style="width:160rpx;height:46rpx;line-height:46rpx;font-size:22rpx;float:left;margin-left:10rpx;">{{item.brandName}}</view>
+						<view style="float:right;line-height:46rpx;font-size:25rpx;margin-left:10rpx;color:#d64650;">
+							<text style="font-size:20rpx;">￥</text>{{item.shopPrice}}</view>
+					</view>
+
+				</view>
+			</block>
+			<block wx:else>
+				<view class="exhibboxconibox" style="margin:10rpx;">
+					<swiper class="swiper" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450" style="height:197rpx;">
+						<swiper-item wx:for="{{item.list}}" wx:key="key" wx:for-item='w'>
+							<image src="{{w.src}}?imageMogr2/thumbnail/x800" class="exhibboxconiboimg" mode='aspectFit' catchtap="exhibitionpubjump" data-id='{{item.activity_id}}' data-type='{{item.href_type}}'></image>
+						</swiper-item>
+					</swiper>
+				</view>
+
+			</block>
+		</block>
+
+	</view>
+
+</view>
+
+<!-- 免单 -->
+<view wx:if='{{pagetype == 1}}' style="">
+	<view class="exhibboxtop">
+		<scroll-view scroll-x="true" class="today_disanum_tab_comtainer" scroll-with-animation="true" bindscroll='scrollleftf' scroll-left='{{scrollleft}}'>
+			<view class='tdscrchbut specialellipsis' wx:for='{{timedata}}' id='q{{item.dateKey}}' wx:key='key' data-datekey='{{item.dateKey}}' catchtap='tabbotdata' style='{{dateKey==item.dateKey?"color:#000;font-size:26rpx;font-weight: bold;":"font-size:24rpx;color:#333;"}}width:27%;'>
+				<view class='tdstabbotimg' style='{{dateKey==item.dateKey?"border-bottom:4rpx solid #ff2742;":"border-bottom:0;"}}height:70rpx;'>
+					{{item.date}}
+				</view>
+			</view>
+		</scroll-view>
+	</view>
+
+    <!-- 直播 -->
+  <block wx:if='{{livebroadcast&&livebroadcast.length!=0}}'>
+   
+			<swiper style="width:710rpx;margin:auto;height:170rpx;" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
+				<swiper-item  wx:for='{{livebroadcast}}' wx:key='key' wx:for-item='w'>
+						<view style="height:139rpx;background:#fff;position:relative;margin:15rpx 0;border-radius: 10rpx;">
+							<navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{w.room_id}}" style='position: absolute;height:100%;width:100%;left:0rpx;top:0;z-index:3;'></navigator>
+							<view style="overflow:hidden;border-radius:10rpx;">
+								<image style="height:139rpx;width:174rpx;float:left;border-radius:10rpx;"  mode='aspectFit' src="{{w.images}}"></image>
+								<view style="width:460rpx;height:119rpx;position:relative;float:left;margin:10rpx;">
+									<view style="font-size:30rpx;">{{w.name}}</view>
+									<view style="width:100%;position:absolute;bottom:0rpx;left:0;">
+										<view wx:if='{{w.status==102}}' style="font-size:25rpx;line-height:30rpx;;color:#fff;float:left;padding:5rpx 10rpx;border-radius:10rpx;background:#32ACFB;">{{w.start_time}}开播</view>
+										<view wx:elif='{{w.status==101}}' style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">直播中</view>
+										<view wx:elif='{{w.status==103}}' style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">已结束</view>
+										<view wx:else style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">尚未开播</view>
+									</view>
+								</view>
+							</view>
+							<!-- <view wx:if='{{w.status==102}}' style="width:240rpx;height:82rpx;position:absolute;right:10rpx;top:0;bottom:0;margin:auto 0;"><subscribe room-id="5"></subscribe></view> -->
+						</view>
+				</swiper-item>
+			</swiper>
+
+
+  </block>
+
+	<view style='width:730rpx;margin:10rpx;overflow:hidden;padding-bottom:70rpx;'>
+		<view wx:for='{{freelist}}' wx:key='key' style="width:345rpx;height:280rpx;margin:10rpx;float:left;background:white;border-radius:10rpx;position:relative;" catchtap='jumpexhdetail' data-brandid='{{item.brandId}}' data-id='{{item.id}}' data-gid="{{item.goods_id}}">
+			<image style="width:100%;height:184rpx;border-radius:10rpx 10rpx 0 0" src='{{item.images}}?imageMogr2/thumbnail/x270'></image>
+			<view style="position:absolute;top:20rpx;right:10rpx;">
+				<view wx:for='{{item.tags}}' wx:if='{{index<1}}' wx:key='key' class='labelstyle'>{{item}}</view>
+			</view>
+
+			<view class='specialellipsis' style="width:94%;line-height:30rpx;text-align:left;font-size:26rpx;margin:0 3%;">{{item.name}}</view>
+
+			<view style="height:46rpx;padding:0rpx 10rpx;margin-top:10rpx;">
+				<image class="exhshopimg" src="{{item.brandLogo}}"></image>
+				<view class='specialellipsis' style="width:140rpx;height:46rpx;line-height:46rpx;font-size:22rpx;float:left;margin-left:10rpx;">{{item.brandName}}</view>
+				<view wx:if='{{item.status == 1}}' style="float:right;line-height:46rpx;font-size:25rpx;margin-left:10rpx;color:#d64650;">{{item.start}}开始</view>
+				<view wx:if='{{item.status == 2 && item.isSign}}' style="float:right;line-height:46rpx;font-size:25rpx;margin-left:10rpx;color:#31b3fb;">已报名</view>
+				<view wx:if='{{item.status == 2 && !item.isSign}}' style="float:right;line-height:46rpx;font-size:25rpx;margin-left:10rpx;color:#6aca6b;">{{item.stop}}开奖</view>
+				<view wx:if='{{item.status == 3}}' style="float:right;line-height:46rpx;font-size:25rpx;margin-left:10rpx;color:#666;">已开奖</view>
+			</view>
+
+		</view>
+	</view>
+
+</view>
+
+<!-- 直播列表 -->
+<view wx:if='{{pagetype == 15}}'>
+	<view style="width:100%;background:#f5f6fa;">
+		<swiper bindanimationfinish="changeGoodsSwip" current="{{currentIndex}}" class="smokeswiperstyle" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
+			<swiper-item wx:for="{{brannerlist}}" wx:key="key">
+				<image src="{{item.src}}" style="width:100%;height:200rpx;border-radius: 10rpx;" catchtap="exhibitionpubjump" data-id='{{item.activity_id}}' data-type='{{item.href_type}}'></image>
+			</swiper-item>
+		</swiper>
+	</view>
+
+  <!-- 直播 -->
+  <block wx:if='{{liveListData&&liveListData.length!=0}}'>
+   
+        <block wx:if='{{liveListData.length==1}}'>
+						<view wx:for='{{liveListData}}' wx:key='key' wx:for-item='w' style="height:139rpx;padding:10rpx;background:#fff;position:relative;margin:15rpx 0;">
+							<navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{w.room_id}}" style='position: absolute;height:100%;width:100%;{{w.status==102?"right:250":"left:0"}}rpx;top:0;z-index:3;'></navigator>
+							<view style="overflow:hidden;border-radius:10rpx;">
+								<image style="height:119rpx;width:222rpx;margin:10rpx;float:left;border-radius:10rpx;"  mode='aspectFit' src="{{w.images}}"></image>
+								<view style="width:460rpx;height:119rpx;position:relative;float:left;margin:10rpx;">
+									<view style="font-size:30rpx;">{{w.name}}</view>
+									<view style="width:100%;position:absolute;bottom:0rpx;left:0;">
+										<view wx:if='{{w.status==102}}' style="font-size:25rpx;line-height:30rpx;;color:#fff;float:left;padding:5rpx 10rpx;border-radius:10rpx;background:#32ACFB;">{{w.start_time}}开播</view>
+										<view wx:elif='{{w.status==101}}' style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">直播中</view>
+										<view wx:elif='{{w.status==103}}' style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">已结束</view>
+										<view wx:else style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">尚未开播</view>
+									</view>
+								</view>
+							</view>
+							<view wx:if='{{w.status==102}}' style="width:240rpx;height:82rpx;position:absolute;right:10rpx;top:0;bottom:0;margin:auto 0;"><subscribe room-id="5"></subscribe></view>
+						</view>				
+				</block>
+        <block wx:else>
+						<view style='width:730rpx;margin:10rpx;overflow:hidden;padding-bottom:70rpx;'>
+							<view wx:for='{{liveListData}}' wx:key='key' wx:for-item='w' style="width:345rpx;height:276rpx;margin:10rpx;float:left;background:white;border-radius:10rpx;position:relative;">
+									<image style="width:100%;height:100%;display:block;border-radius: 10rpx;" mode='aspectFit' src="{{w.images}}"></image>
+									<view style="position:absolute;right:10rpx;top:10rpx;">
+											<view wx:if='{{w.status==102}}' style="font-size:25rpx;line-height:30rpx;;color:#fff;padding:5rpx 10rpx;border-radius:10rpx;background:#32ACFB;">{{w.start_time}}开播</view>
+											<view wx:elif='{{w.status==101}}' style="font-size:25rpx;line-height:30rpx;background:#f93f45;color:white;padding:5rpx 10rpx;border-radius:10rpx;">•直播中</view>
+											<view wx:elif='{{w.status==103}}' style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;padding:5rpx 10rpx;border-radius:10rpx;">已结束</view>
+											<view wx:else style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;padding:5rpx 10rpx;border-radius:10rpx;">尚未开播</view>
+									</view>
+									<view class="lovetitle">
+										   <view class="lovetitlebg"></view>
+											 <view class="lovetittxt specialellipsis">{{w.name}}</view>
+									</view>
+									<navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{w.room_id}}" style='position: absolute;height:100%;width:100%;left:0rpx;top:0;z-index:3;'></navigator>
+							</view>
+						</view>
+				</block>
+
+
+  </block>	
+
+
+
+
+</view>
+
+<view wx:if='{{pagetype==1 || pagetype==2 || pagetype==14}}' style="width:100%;height:205rpx;"></view>
+
+<view wx:if='{{pagetype==1 || pagetype==2 || pagetype==14}}' style="width:100%;height:210rpx;position:fixed;left:0;bottom:0;background:#f5f6fa;border-radius:10rpx;">
+	<swiper bindanimationfinish="changeGoodsSwip" current="{{currentIndex}}" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450" style="width:100%;height:100%;">
+		<swiper-item wx:for="{{adList}}" wx:key="key">
+			<image src="{{item.src}}" style="width:100%;height:100%;border-radius:10rpx;display:block;" catchtap="exhibitionpubjump" data-id='{{item.activity_id}}' data-type='{{item.href_type}}'></image>
+		</swiper-item>
+	</swiper>
+</view>
+
+
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>
+

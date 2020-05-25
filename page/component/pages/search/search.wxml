@@ -1,0 +1,77 @@
+
+<loading hidden="{{headhidden}}">
+    加载中...
+</loading>
+
+<hidewindow id='hide'></hidewindow>
+
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+
+    <view class='sousuo'>
+       <input class='indheadinpw'  bindinput="inputChange" type='text' value='{{inputdata}}' placeholder='{{inputtxt1}}' placeholder='{{inputtxt1}}' bindfocus='onFocus' bindblur='onBlur' bindconfirm="jump"></input>
+       <view class='clicksousuo' bindtap='jump'>
+          <view style='width:100%;height:60rpx;line-height:60rpx;font-size:26rpx;color:#333;'>搜索</view>
+       </view>
+    </view>
+      <view class='box'>
+        <view class='nodata' wx:if='{{iftrimg}}'>
+              <image src='../../../../pages/images/suosounodata.png' class='suosuoimgno'></image>
+              <view class='nodatasuous'>没有找到"{{inputdatano}}"</view>
+              <view class='nodatasuous'>推荐以下商品</view>
+        </view> 
+        <view class='bchar' style='position:relative;' wx:for="{{commoddata}}" wx:key="key" data-gid="{{item.gid}}" bindtap='addressmanagement'>
+                    <view class='bcleft' style='position:relative;'>
+                        <image class="bcimg" src="{{item.gcover}}"></image>
+                        <image wx:if='{{item.stock<=0}}' class='iconSoldOut' src="http://www.51chaidan.com/images/icon/iconSoldOut.png"></image>
+                        <view class='bclefticon' wx:if='{{item.stock<=0}}'></view>
+                    </view>
+                    <view class='bcright'>
+                      
+                        <view class='bctitle multilineellipsis' style='font-size:26rpx;'>
+                            {{item.gname}}
+                        </view>
+                        <view class='bcLabel'>
+                            <view class='bclabeys specialellipsis' style='background:#FDF3D9;color:#FF7A00;border:0rpx;' wx:for="{{item.gtag}}" wx:key="key" wx:for-item="bcla" wx:if='{{index<=2}}'>{{bcla}}</view>
+                        </view>
+                        <view class='bcrilistbott'>
+                            <view class='bccompric' >
+                              <view wx:if='{{item.is_suit==1}}' class='bccompricleft'><text style='font-size:22rpx;'>{{item.pre_name}}:￥</text><text style='font-weight: bold;'>{{item.gsale}}</text></view>
+                              <view wx:if='{{item.is_suit!=1}}' class='bccompricleft'><text style='font-size:22rpx;'>拆单:￥</text><text style='font-weight: bold;'>{{item.gsale}}</text></view>
+                              <view wx:if='{{item.gsale != item.market_price}}' class='bccompricright'>{{item.gsource}}:￥{{item.market_price}}</view>
+                            </view>   
+
+                            <!-- <view style='position:absolute;right:0;bottom:-8rpx;z-index:10;' data-gid="{{item.gid}}" catchtap='recommend'>
+                                <view  style='font-size:22rpx;float:right;margin-top:14rpx;'>{{item.praise}}</view>
+
+                                <share-button style='float:right;'
+                                    product="{{item.product}}"
+                                    bind:error="on_error"
+                                    type="2"
+                                    size="30"
+                                  />
+
+                            </view>                  -->
+               
+                        </view>
+
+                    </view>
+        </view>
+
+ 
+
+
+
+      </view> 
+<loading hidden="{{bothidden}}">
+    加载中...
+</loading>     
+
+
+<view class='searchtip' wx:if='{{iftrsearchtip}}'>
+    <view class='searchtipbg' catchtap='iftrsearchtipfun'></view>
+    <view class='searchtipcon'>
+       <text class='searchtipcontxt'>{{searchtip}}</text>
+    </view>
+</view>

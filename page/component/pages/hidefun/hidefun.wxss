@@ -1,0 +1,220 @@
+/* page/component/pages/hidefun/hidefun.wxss */
+@import "../../common/mPublic.wxss";
+@import "../../../../pages/signin/signin.wxss";
+@import "../../../../common/tabbar.wxss";
+@import "../../../../common/newcoupon.wxss";
+@import "../../../../pages/activitydetailspage/activitydetailspage.wxss";
+
+page {
+  background: #fff;
+}
+
+.onestyle {
+  width: 250rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  background: #263238;
+  border: 10rpx solid #fbdc0d;
+  color: #fbdc0d;
+  font-size: 28rpx;
+  position: absolute;
+  top: 10rpx;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+}
+
+.payorfreetagstyle{
+  width: 40rpx;
+  padding-top:1rpx; 
+  position: absolute;
+  right: 40rpx;
+  top: 8rpx;
+  background: #f74646;
+  color: #fff;
+  line-height: 20rpx;
+  font-size: 18rpx;
+  text-align: center;
+}
+
+.twostyle {
+  width: 50rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  background: #000;
+  border-radius: 10rpx;
+  display: inline-block;
+}
+
+.threestyle {
+  height: 50rpx;
+  line-height: 50rpx;
+  display: inline-block;
+  color: #000;
+  margin: 0 10rpx;
+}
+
+.timestyle {
+  color: #fff;
+  font-size: 27rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.slide-image {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+view.active {
+  transform: none;
+  transition: all 0.2s ease-in 0s;
+}
+
+view.quiet {
+  transform: scale(0.8033333);
+  transition: all 0.2s ease-in 0s;
+}
+
+.mfrontpagebuttonact {
+  width: 60rpx;
+  height: 60rpx;
+  font-size: 20rpx;
+  color: #b4b5b4;
+  border-radius: 50%;
+  border: 1rpx solid #b4b5b4;
+}
+
+/* 领奖提示 */
+
+.awatip {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999999;
+}
+
+.awabg {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.5;
+}
+
+.awacontent {
+  width: 500rpx;
+  height: 300rpx;
+  border-radius: 10rpx;
+  border: 1rpx solid rgba(228, 231, 237, 1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background: #fff;
+}
+
+.awaconhead {
+  width: 100%;
+  height: 100rpx;
+  font-size: 30rpx;
+  text-align: center;
+  line-height: 120rpx;
+  font-weight: bold;
+}
+
+.awaconcon {
+  width: 100%;
+  height: 90rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: rgba(136, 136, 136, 1);
+  display: block;
+}
+
+.awaconbottom {
+  width: 112rpx;
+  height: 54rpx;
+  text-align: center;
+  line-height: 54rpx;
+  background: rgba(25, 137, 250, 1);
+  color: #fff;
+  font-size: 24rpx;
+  border-radius: 54rpx;
+  margin: 20rpx auto 0;
+}
+
+.zoom {
+  animation: zhuan 1s linear infinite;
+}
+
+@keyframes zhuan {
+  0% {
+    transform: scale(1, 1);
+  }
+
+  25% {
+    transform: scale(1.1, 1.1);
+  }
+
+  50% {
+    transform: scale(1, 1);
+  }
+
+  70% {
+    transform: scale(1.1, 1.1);
+  }
+
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+.disanumofgoods_box {
+  min-height: 80rpx;
+  width: 100%;
+  overflow: hidden;
+}
+
+.mdisanum_scr {
+  min-height: 80rpx;
+  padding: 20rpx;
+}
+
+.disanum_scr_box {
+  min-height: 80rpx;
+  width: 28%;
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+  margin-right: 20rpx;
+}
+
+.disanum_simgbox {
+  width: 100%;
+  height: 200rpx;
+  position: relative;
+}
+
+.disanum_simg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border-radius: 10rpx;
+}

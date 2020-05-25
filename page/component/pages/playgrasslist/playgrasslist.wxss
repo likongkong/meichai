@@ -1,0 +1,14 @@
+/* page/component/pages/playgrasslist/playgrasslist.wxss */
+@import "../../../../pages/activitysharinglist/activitysharinglist.wxss";
+@import "../../../../common/tabbar.wxss";
+
+page {
+  background: #f5f6fa;
+}
+.chbleft{
+  width:140rpx;
+  height: 78rpx;
+  margin:3rpx 5rpx 0 5rpx;
+  border-radius: 5rpx;
+  float: left;
+}

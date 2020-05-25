@@ -1,0 +1,811 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<add-tips duration="5" ftop='{{statusBarHeightMc-10}}' />
+<!-- 授权弹框 -->
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+
+<!-- 商品弹框 -->
+<view class='indexelafra' wx:if='{{indexelafra&&index_ela_fra}}'>
+	<view class='tgawback' style='position: relative;' catchtap='indexelafrafun'>
+	</view>
+	<view class='indexelafracon' style='height:800rpx;'>
+		<image src="{{elafradata.src}}" data-title='{{elafradata.title}}' data-item_type='{{elafradata.item}}' data-href='{{elafradata.href}}' catchtap='imgcomindellistjump' style='width:600rpx;height:720rpx;margin:auto;display:block;position: relative;border-radius:20rpx;' mode='aspectFit'>
+		</image>
+		<image class='indexelafracondisnone' catchtap='indexelafrafun' src='https://www.51chaidan.com/images/spread/dial/fork.png'>
+		</image>
+	</view>
+</view>
+
+<!-- 搜索 -->
+<view style='position:fixed;left:0;top:{{statusBarHeightMc}}px;z-index:16;width:100%;'>
+	<view class='headss'>
+		<view class='indheadinp' bindtap="namefocus">
+			<image class='indheadinpimg' src='../images/searchIcon.png'></image>{{topsousuo}}
+		</view>
+	</view>
+</view>
+<view class='{{newcoupon||index_ela_fra?"tripList_root":""}}'>
+
+	<view style='width:100%;height:{{statusBarHeightMc+44}}px;background:#fff;'></view>
+
+	<view style='width:100%;position:relative;' class='indexswiper'>
+		<view wx:if="{{notice_title!=''}}" style='height:50rpx;line-height:50rpx;font-size:25rpx;background:#000;opacity:0.9;border-radius:10rpx;position:absolute;left:20rpx;top:30rpx;color:#fff;z-index:1;padding:0 20rpx;' bindtap='jumpnotice'>
+			<image style='width:35rpx;height:35rpx;margin:8rpx 10rpx 8rpx 0;display:inline-block;vertical-align:top;position:relative;' src='https://www.51chaidan.com/images/default/notice.png'></image>
+			{{notice_title}}>
+		</view>
+
+		<swiper bindanimationfinish="changeGoodsSwip" current="{{goodsIndex}}" class="swiper" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450" wx:if='{{isProduce}}'>
+			<swiper-item wx:for="{{movies}}" wx:key="key">
+				<image src="{{item.image}}?imageMogr2/thumbnail/x800" class="slide-image" mode="aspectFill" data-item_type='{{item.item_type}}' data-href='{{item.href}}' bindtap='jumpbanner' data-imgurl='{{item.image}}' style='position:relative;'>
+				</image>
+			</swiper-item>
+		</swiper>
+
+		<!--重置小圆点的样式 -->
+		<view class="dots" wx:if='{{isProduce}}'>
+			<block wx:for="{{movies}}" wx:key='key'>
+				<view class="dot{{index == currentSwiper ? ' activeindex' : ''}}"></view>
+			</block>
+		</view>
+	</view>
+
+	<!--  分类  ||islive-->
+	<view class='recommendind' style='{{isAwardOrder||islive?"margin-bottom:0;":""}}' wx:if='{{isProduce}}'>
+		<view class='erverrecom' wx:for='{{classificationlist}}' wx:key='key' data-href='{{item.href}}' data-item_type='{{item.item_type}}' data-name='{{item.name}}' bindtap='jumprecom' style='position:relative;height:160rpx;'>
+
+			<!-- 跳转其他小程序 -->
+			<navigator wx:if='{{item.item_type==997}}' target="miniProgram" open-type="navigate" app-id="wxfe253b7309e29868" path="{{item.href}}" extra-data="" version="release" style='position: absolute;height:100%;width:100%;{{item.item_type==997}}left:0;top:0;z-index:3;'></navigator>
+			<image class='erverimg' style='margin:17rpx auto 2rpx;' mode='aspectFit' src='{{item.img}}?imageMogr2/thumbnail/x196'></image>
+			<view class='ervertext specialellipsis'>{{item.name}}
+				<view wx:if='{{!isTodaySign&&item.item_type==9}}' class='erversignintxt'>今日未签到</view>
+			</view>
+		</view>
+	</view>
+
+	<!-- 中奖悬浮框提示 -->
+	<view class='winningthepbox' wx:if='{{isAwardOrder}}' catchtap='jumporder' style='{{isAwardOrder?"margin-bottom:20rpx":""}};padding-bottom:20rpx;'>
+		<view class='winningthepimgtxt' style='height:124rpx;'>
+			<image class='winningthepimgshop' src='{{awardOrder.Info.cover}}'></image>
+			<view class='winningtheptime specialellipsis'>{{winningovertime}}</view>
+		</view>
+		<image class='winningthepimg' src='http://www.51chaidan.com/images/FreeSheet/WinningThePrize.png'></image>
+	</view>
+
+	<!--  测试  -->
+	<!-- <view style='height:220rpx;width:100%;text-align:center; display: table;' class='rotate' catchtap='jumpxinxi'>
+		<text style='display: table-cell;vertical-align:middle;text-align:center;'>转盘\n盘转</text>
+	</view> -->
+	<!--   数据  -->
+
+	<!--  信息流  -->
+	<view class='box' wx:if='{{commoddata.length!=0&&item_type!=4&&item_type!=5}}'>
+		<view wx:for="{{commoddata}}" wx:key="key">
+			<!--  每日免单  -->
+			<view class='disanumofgoods' wx:if='{{item.show_type==108}}' style='{{item.isHideBreakLine?"margin-bottom:0rpx;":""}}'>
+				<view style='width:100%;min-height:104rpx;padding-top:20rpx;' wx:if='{{item.banner.length!=0}}'>
+					<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450">
+						<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
+							<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
+							</image>
+						</swiper-item>
+					</swiper>
+				</view>
+				<!--  列表标题  -->
+				<view class='disantitle' wx:if='{{item.title}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump'>
+					{{item.title}}
+					<view class='disantitletitright' wx:if='{{item.item_type}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump' style='font-weight:normal;position:relative;color:#31b3fb;'>查看更多
+					</view>
+				</view>
+				<!--  列表  -->
+				<view class='disanumofgoods_box' wx:if='{{item.List.length!=0}}'>
+					<view class='disanum_scr'>
+						<scroll-view scroll-x="true" class="disanum_tab_comtainer">
+							<view class='disanum_scr_box' wx:for='{{item.List}}' wx:key='key' wx:for-item='w' style='height:119rpx;width:222rpx;'>
+								<view class='disanum_simgbox' catchtap='activitydetailspage' data-id='{{w.id}}' style='height:119rpx;width:222rpx;'>
+									<image class='disanum_simg' src='{{w.cover}}?imageMogr2/thumbnail/x238' style='height:119rpx;width:222rpx;'></image>
+								</view>
+							</view>
+							<view class='disanum_scr_box' style='height:118rpx;' wx:if='{{item.List.length>=4&&item.item_type}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}' catchtap='imgcomindellistjump'>
+									<view class='disanum_stxt' style='top:0;width:118rpx;height:118rpx;'>
+										<view class='disanum_stxtd' style='height:58rpx;line-height:58rpx;width:118rpx;'>查 看</view>
+										<view class='disanum_stxtd' style='height:58rpx;line-height:58rpx;width:118rpx;'>全 部</view>
+									</view>
+							</view>
+						</scroll-view>
+					</view>
+				</view>
+			</view>
+
+
+			<!-- 潮玩种草列表  -->
+			<view class='disanumofgoods' wx:elif='{{item.show_type==17}}' style='{{item.isHideBreakLine?"margin-bottom:0rpx;":""}}'>
+				<!--  列表标题  -->
+				<view class='disantitle' wx:if='{{item.title}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump'>
+					{{item.title}}
+					<view class='disantitletitright' wx:if='{{item.item_type}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump' style='font-weight:normal;position:relative;color:#31b3fb;'>查看更多
+					</view>
+				</view>
+
+				<view class='disanumofgoods_box' wx:if='{{item.List.length!=0}}'>
+					<view class='disanum_scr' style="padding:0;width:100%;"> 
+								<view wx:if='{{item.List.length>0}}' class='limlistbox' style='padding-top:15rpx;'>
+									<view wx:for='{{item.List}}' wx:key='key' style='position:relative;box-shadow: 2px 2px 5rpx #ccc;width: 714rpx;border-bottom: 1rpx solid #e5e5e5;background: #fff;margin: 0 auto 10rpx;border-radius: 10rpx;' catchtap='jumpdouble' data-id='{{item.id}}'>
+										<view style="width: 714rpx;position:relative;margin:0 auto;">
+											<image style='display:block;width:100%;border-radius:6rpx;' mode='widthFix' src='{{item.cover}}'></image>
+											<view wx:if='{{item.status == 3}}' class='actnewlabel_box specialellipsis' style="position:absolute;top:10rpx;right:10rpx;z-index:2;background:gray;font-size:24rpx;height:36rpx;line-height:36rpx; ">已结束</view>
+											<view wx:if='{{item.status == 2}}' class='actnewlabel_box specialellipsis' style="position:absolute;top:10rpx;right:10rpx;z-index:2;font-size:24rpx;height:36rpx;line-height:36rpx; ">剩余{{item.distanceEnd}}天</view>
+											<view wx:if='{{item.status == 1}}' class='actnewlabel_box specialellipsis' style="position:absolute;top:10rpx;right:10rpx;z-index:2;background:gray;font-size:24rpx;height:36rpx;line-height:36rpx;">未开始</view>
+										</view>
+										<view style="overflow:hidden;padding:16rpx 12rpx;width:690rpx;position:relative;">
+											<image style="width: 140rpx;height: 78rpx;margin: 3rpx 5rpx 0 5rpx;border-radius: 5rpx;float: left;" mode="aspectFit" data-indexnum='{{index}}' src="{{item.logBrand}} "></image>
+											<view style="width:500rpx;margin-left:10rpx;float:left;font-size:26rpx; ">
+												<view style="width:100%;color:#26AFFB " class='specialellipsis'>{{item.title}}</view>
+												<view style="width:100%;margin-top:10rpx;">{{item.name}}</view>
+												<!-- class='specialellipsis' -->
+											</view>
+										</view>
+										<view style="width:95%;height:10rpx;background:#e6e5e5;margin:auto;">
+											<view style="width:{{item.ratioTarget>100?100:item.ratioTarget}}%;height:10rpx;background:#ff2742; "></view>
+										</view>
+										<view style="width:100%;height:70rpx;display:flex;line-height:30rpx;text-align:center;font-size:26rpx;padding-top:13rpx; ">
+											<view style="flex:1;height:100%; ">
+												<view>种草金</view>
+												<view>￥{{item.amount}}</view>
+											</view>
+											<view style="flex:1;height:100%; ">
+												<view>已达成</view>
+												<view>{{item.ratioTarget}}%</view>
+											</view>
+											<view style="flex:1;height:100%; ">
+												<view>参与人数</view>
+												<view>{{item.count}}</view>
+											</view>
+										</view>
+									</view>
+								</view>
+					</view>
+				</view>
+
+			</view>
+
+      <!-- 直播 -->
+			<view class='disanumofgoods' wx:elif='{{item.show_type==117}}' style='{{item.isHideBreakLine?"margin-bottom:0rpx;":""}}'>
+					<!--  标题  -->
+					<view class='disantitle' wx:if='{{item.title}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump'>
+						{{item.title}}
+						<view class='disantitletitright' wx:if='{{item.item_type}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump' style='font-weight:normal;position:relative;color:#31b3fb;'>查看更多
+						</view>
+					</view>
+
+			    <block wx:if='{{item.List.length==1}}'>
+							<view wx:for='{{item.List}}' wx:for-item='w' wx:key='key' style="width:730rpx;height:139rpx;padding:10rpx;background:#fff;position:relative;margin-bottom:15rpx;">
+								<navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{w.room_id}}" style='position: absolute;height:100%;width:100%;{{w.status==102?"right:250":"left:0"}}rpx;top:0;z-index:3;'></navigator>
+								<view style="width:730rpx;background:#fff;overflow:hidden;border-radius:10rpx;">
+									<image style="height:119rpx;width:222rpx;margin:10rpx;float:left;border-radius:10rpx;" src="{{w.images}}"></image>
+									<view style="width:460rpx;height:119rpx;position:relative;float:left;margin:10rpx;">
+										<view style="font-size:30rpx;">{{w.name}}</view>
+										<view style="width:100%;position:absolute;bottom:0rpx;left:0;">
+											<view wx:if='{{w.status==102}}' style="font-size:25rpx;line-height:30rpx;;color:#fff;float:left;padding:5rpx 10rpx;border-radius:10rpx;background:#32ACFB;">{{w.start_time}}开播</view>
+											<view wx:elif='{{w.status==101}}' style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">直播中</view>
+											<view wx:elif='{{w.status==103}}' style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">已结束</view>
+											<view wx:else style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">尚未开播</view>
+										</view>
+									</view>
+
+								</view>
+								<view wx:if='{{w.status==102}}' style="width:240rpx;height:82rpx;position:absolute;right:10rpx;top:0;bottom:0;margin:auto 0;"><subscribe room-id="5"></subscribe></view>
+							</view> 					
+					</block>
+					<block wx:else>
+							<view class='disanumofgoods_box' wx:if='{{item.List.length!=0}}'>
+								<view class='disanum_scr'>
+									<scroll-view scroll-x="true" class="disanum_tab_comtainer">
+											<view style="width:320rpx;height:256rpx;position:relative;display:inline-block;margin:0 20rpx 10rpx 0;" wx:for='{{item.List}}' wx:key='key' wx:for-item='w'>
+													<image style="width:100%;height:100%;display:block;border-radius: 10rpx;" mode='aspectFit' src="{{w.images}}"></image>
+													<view style="position:absolute;right:10rpx;top:10rpx;">
+															<view wx:if='{{w.status==102}}' style="font-size:25rpx;line-height:30rpx;;color:#fff;padding:5rpx 10rpx;border-radius:10rpx;background:#32ACFB;">{{w.start_time}}开播</view>
+															<view wx:elif='{{w.status==101}}' style="font-size:25rpx;line-height:30rpx;background:#f93f45;color:white;padding:5rpx 10rpx;border-radius:10rpx;">•直播中</view>
+															<view wx:elif='{{w.status==103}}' style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;padding:5rpx 10rpx;border-radius:10rpx;">已结束</view>
+															<view wx:else style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;padding:5rpx 10rpx;border-radius:10rpx;">尚未开播</view>
+													</view>
+													<navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{w.room_id}}" style='position: absolute;height:100%;width:100%;left:0rpx;top:0;z-index:3;'></navigator>
+											</view>
+									</scroll-view>
+								</view>
+							</view>					
+					</block>
+     
+      </view>	
+
+
+			<!--  在线抽盒机  -->
+			<view class='disanumofgoods' wx:elif='{{item.show_type==113}}' style='{{item.isHideBreakLine?"margin-bottom:0rpx;":""}}'>
+				<view style='width:100%;min-height:104rpx;padding-top:20rpx;' wx:if='{{item.banner.length!=0}}'>
+					<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450">
+						<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
+							<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
+							</image>
+						</swiper-item>
+					</swiper>
+				</view>
+				<!--  列表标题   -->
+				<view class='disantitle' wx:if='{{item.title}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump'>
+					{{item.title}} <text style='display:inline-block;font-size:24rpx;border:2rpx solid #ff2742;color:#ff2742;border-radius:6rpx;height:32rpx;line-height:32rpx;padding:0 4rpx;margin-left:6rpx;' wx:if='{{item.tip}}'>{{item.tip}}</text>
+					<view class='disantitletitright' wx:if='{{item.item_type}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump' style='font-weight:normal;position:relative;color:#31b3fb;'>查看更多
+					</view>
+				</view>
+				<!--  列表  -->
+				<view class='disanumofgoods_box' wx:if='{{item.List.length!=0}}'>
+					<view class='disanum_scr'>
+						<scroll-view scroll-x="true" class="disanum_tab_comtainer">
+							<view class='disanum_scr_box' wx:for='{{item.List}}' wx:key='key' wx:for-item='w' style='height:211rpx;width:{{w.width||222}}rpx;' wx:for-index='num'>
+								<view class='disanum_simgbox' catchtap='bbevebox' data-gid='{{w.goodsId}}' style='height:177rpx;width:{{w.width||222}}rpx;'>
+									<image class='disanum_simg' src='{{w.cover}}' style='height:177rpx;width:{{w.width||222}}rpx;' bindload="imageLoadad" data-indexnum='7' data-num='{{num}}' data-ind='{{index}}'></image>
+								</view>
+								<view class='specialellipsis' style='font-size:24rpx;padding-top:4rpx;width:100%;height:32rpx;text-align:center;color:#333;'>{{w.name}}</view>
+							</view>
+							<view class='disanum_scr_box' style='height:160rpx;' wx:if='{{item.List.length>=4&&item.item_type}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}' catchtap='imgcomindellistjump'>
+									<view class='disanum_stxt' style='top:0;'>
+										<view class='disanum_stxtd' style='line-height:120rpx;'>查 看</view>
+										<view class='disanum_stxtd' style='line-height:40rpx;'>全 部</view>
+									</view>
+							</view>
+						</scroll-view>
+					</view>
+				</view>
+			</view>
+
+			<!--  车队  -->
+			<view class='disanumofgoods' wx:elif='{{item.show_type==115}}' style='{{item.isHideBreakLine?"margin-bottom:0rpx;":""}}'>
+				<view style='width:100%;min-height:104rpx;padding-top:20rpx;' wx:if='{{item.banner.length!=0}}'>
+					<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450">
+						<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
+							<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
+							</image>
+						</swiper-item>
+					</swiper>
+				</view>
+				<!--  列表标题  -->
+				<view class='disantitle' wx:if='{{item.title}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump'>
+					{{item.title}}
+					<view class='disantitletitright' wx:if='{{item.item_type}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump' style='font-weight:normal;position:relative;color:#31b3fb;'>查看更多
+					</view>
+				</view>
+				<!--  列表  -->
+				<view class='disanumofgoods_box' wx:if='{{item.List.length!=0}}'>
+					<view class='disanum_scr'>
+						<scroll-view scroll-x="true" class="disanum_tab_comtainer">
+							<view class='disanum_scr_box' wx:for='{{item.List}}' wx:key='key' wx:for-item='w' style='height:207rpx;width:{{w.width||222}}rpx;' wx:for-index='num'>
+								<view class='disanum_simgbox' catchtap='driveDetail' data-id='{{w.id}}' style='height:147rpx;width:{{w.width||222}}rpx;'>
+									<image class='disanum_simg' src='{{w.cover}}?imageMogr2/thumbnail/x294' style='height:147rpx;width:{{w.width||222}}rpx;' bindload="imageLoadad" data-indexnum='4' data-num='{{num}}' data-ind='{{index}}'></image>
+								</view>
+								<view class='dhhboclcen' style='overflow: hidden;'>
+									<!-- 未开启 -->
+									<block wx:if='{{w.status==1}}'>
+										<image src='https://www.51chaidan.com/images/driveCar/team_member.png' class='dhhboclcenman'></image>
+										<view class='dhhbclceleft'>{{w.truth_users}}/{{w.limit_users}}</view>
+										<view wx:if='{{w.status==1}}' class='dhhbclceright' style='color:#4c9a23;'>尚未开启</view>
+									</block>
+									<!-- 进行中 -->
+									<block wx:elif='{{w.status==2}}'>
+										<image src='https://www.51chaidan.com/images/driveCar/team_member.png' class='dhhboclcenman'></image>
+										<view class='dhhbclceleft'>{{w.truth_users}}/{{w.limit_users}}</view>
+										<view wx:if='{{w.status==2}}' class='dhhbclceright' style='color:#4c9a23;text-decoration:underline;'>点击上车</view>
+									</block>
+									<!-- 已结束 -->
+									<block wx:elif='{{w.status==3}}'>
+										<view style='padding-left:{{w.width||0}}rpx;' class='dhhbclceleft'>
+											<image src='{{w.awardImg}}' class='dhhtblimg' data-ind='{{index}}' data-iftr='3' bindload='imageLoad' style='width:{{w.width||0}}rpx;'></image>已开奖
+										</view>
+										<view class='dhhbclceright' style='color:#afafaf;'>查看></view>
+									</block>
+								</view>
+							</view>
+							<view class='disanum_scr_box' style='height:147rpx;' wx:if='{{item.List.length>=4&&item.item_type}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}' catchtap='imgcomindellistjump'>
+									<view class='disanum_stxt' style='top:0;height:147rpx;'>
+										<view class='disanum_stxtd' style='height:70rpx;line-height:110rpx;'>查 看</view>
+										<view class='disanum_stxtd' style='height:70rpx;line-height:40rpx;'>全 部</view>
+									</view>
+							</view>
+
+						</scroll-view>
+					</view>
+
+
+				</view>
+			</view>
+
+			<!--  原价拆明盒  -->
+			<view class='disanumofgoods' wx:elif='{{item.show_type==111}}' style='{{item.isHideBreakLine?"margin-bottom:0rpx;":""}}'>
+				<view style='width:100%;min-height:104rpx;padding-top:20rpx;' wx:if='{{item.banner.length!=0}}'>
+					<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450">
+						<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
+							<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
+							</image>
+						</swiper-item>
+					</swiper>
+				</view>
+				<!--  列表标题  -->
+				<view class='disantitle' wx:if='{{item.title}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump'>
+					{{item.title}}
+					<view class='disantitletitright' wx:if='{{item.item_type}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump' style='font-weight:normal;position:relative;color:#31b3fb;'>查看更多
+					</view>
+				</view>
+				<!--  列表  -->
+				<view class='disanumofgoods_box' wx:if='{{item.List.length!=0}}'>
+					<view class='disanum_scr'>
+						<scroll-view scroll-x="true" class="disanum_tab_comtainer">
+							<view class='disanum_scr_box' wx:for='{{item.List}}' wx:key='key' wx:for-item='w' style='height:274rpx;width:{{w.width||200}}rpx;' wx:for-index='num'>
+								<view class='disanum_simgbox' catchtap='jumpopenbox' data-gid='{{w.goodsId}}' style='height:240rpx;width:{{w.width||200}}rpx;'>
+									<image class='disanum_simg' src='{{w.cover}}?imageMogr2/thumbnail/x480' style='height:240rpx;width:{{w.width||200}}rpx;' bindload="imageLoadad" data-indexnum='2' data-num='{{num}}' data-ind='{{index}}'></image>
+								</view>
+								<view style='height:30rpx;padding-top:4rpx;text-align:center;font-size:24rpx;color:#ff2742;'>{{w.unpackRole }}/{{w.limitRole}}</view>
+							</view>
+							<view class='disanum_scr_box' style='height:270rpx;' wx:if='{{item.List.length>=4&&item.item_type}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}' catchtap='imgcomindellistjump'>
+									<view class='disanum_stxt' style='top:38rpx;'>
+										<view class='disanum_stxtd' style='line-height:120rpx;'>查 看</view>
+										<view class='disanum_stxtd' style='line-height:40rpx;'>全 部</view>
+									</view>
+							</view>
+						</scroll-view>
+					</view>
+				</view>
+			</view>
+
+			<!--  特殊商品  -->
+			<view class='disanumofgoods' wx:elif='{{item.show_type==116}}' style='{{item.isHideBreakLine?"margin-bottom:0rpx;":""}}'>
+				<view style='width:100%;min-height:104rpx;padding-top:20rpx;' wx:if='{{item.banner.length!=0}}'>
+					<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450">
+						<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
+							<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
+							</image>
+						</swiper-item>
+					</swiper>
+				</view>
+				<!--  列表标题  -->
+				<view class='disantitle' wx:if='{{item.title}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='newpsellwellfun'>
+					{{item.title}}
+					<view class='disantitletitright' wx:if='{{item.item_type}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='newpsellwellfun' style='font-weight:normal;position:relative;color:#31b3fb;'>查看更多
+					</view>
+				</view>
+				<!--  列表  -->
+				<view class='disanumofgoods_box' wx:if='{{item.List.length!=0}}'>
+					<view class='disanum_scr'>
+						<scroll-view scroll-x="true" class="disanum_tab_comtainer">
+							<view class='disanum_scr_box' wx:for='{{item.List}}' wx:for-item='ww' wx:key='key' data-gid="{{ww.goods_id}}" catchtap='addressmanagement' style='width:26%;'>
+								<view class='disanum_simgbox' style='width:100%;padding-top:100%;height:1rpx;'>
+									<image class='disanum_simg' mode='aspectFit' src='{{ww.cover}}' style='border-radius: 10rpx;'></image>
+									<view class='shopsellout' wx:if='{{ww.debuff==2}}' style='line-height:32rpx;'>售罄</view>
+								</view>
+								<view class='disanum_sb_txtone  multilineellipsis' style='color:#666;max-height:70rpx;'>{{ww.goods_name}}</view>
+								<view class='disanum_sb_txt specialellipsis'>￥{{ww.shop_price}}{{ww.gsale_unit}}</view>
+							</view>
+							<view class='disanum_scr_box' style='height:200rpx;' catchtap='newpsellwellfun' data-href='{{item.href}}' data-title='{{item.title}}'>
+									<view class='disanum_stxt'>
+										<view class='disanum_stxtd' style='line-height:120rpx;'>查 看</view>
+										<view class='disanum_stxtd' style='line-height:40rpx;'>全 部</view>
+									</view>
+							</view>
+						</scroll-view>
+					</view>
+				</view>
+			</view>
+
+
+			<!--  官方寄售  -->
+			<view class='disanumofgoods' wx:elif='{{item.show_type==114}}' style='{{item.isHideBreakLine?"margin-bottom:0rpx;":""}}'>
+				<view style='width:100%;min-height:104rpx;padding-top:20rpx;' wx:if='{{item.banner.length!=0}}'>
+					<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450">
+						<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
+							<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
+							</image>
+						</swiper-item>
+					</swiper>
+				</view>
+				<!--  列表标题  -->
+				<view class='disantitle' wx:if='{{item.title}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump'>
+					{{item.title}}
+					<view class='disantitletitright' wx:if='{{item.item_type}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump' style='font-weight:normal;position:relative;color:#31b3fb;'>查看更多
+					</view>
+				</view>
+				<!--  列表  -->
+				<view class='disanumofgoods_box' wx:if='{{item.List.length!=0}}'>
+					<view class='disanum_scr'>
+						<scroll-view scroll-x="true" class="disanum_tab_comtainer">
+							<view class='disanum_scr_box' wx:for='{{item.List}}' wx:key='key' wx:for-item='w' style='height:134rpx;width:{{w.width||160}}rpx;' wx:for-index='num'>
+								<view class='disanum_simgbox' catchtap='myordertoyind' data-gid='{{w.owner_id}}' style='height:100rpx;width:{{w.width||200}}rpx;'>
+									<image class='disanum_simg' src='{{w.cover}}?imageMogr2/thumbnail/x200' style='height:100rpx;width:{{w.width||200}}rpx;' bindload="imageLoadad" data-indexnum='3' data-num='{{num}}' data-ind='{{index}}'></image>
+								</view>
+								<view style='height:30rpx;padding-top:4rpx;text-align:center;font-size:24rpx;color:#ff2742;'>￥{{w.shop_price}}</view>
+							</view>
+							<view class='disanum_scr_box' style='height:134rpx;' wx:if='{{item.List.length>=4&&item.item_type}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}' catchtap='imgcomindellistjump'>
+									<view class='disanum_stxt' style='top:0rpx;height:130rpx;'>
+										<view class='disanum_stxtd' style='line-height:85rpx;height:65rpx;'>查 看</view>
+										<view class='disanum_stxtd' style='line-height:50rpx;height:65rpx;'>全 部</view>
+									</view>
+							</view>
+						</scroll-view>
+					</view>
+				</view>
+			</view>
+
+
+
+			<!--  限定抽签  -->
+			<view class='disanumofgoods' wx:elif='{{item.show_type==112}}' style='{{item.isHideBreakLine?"margin-bottom:0rpx;":""}}'>
+				<view style='width:100%;min-height:104rpx;padding-top:20rpx;' wx:if='{{item.banner.length!=0}}'>
+					<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450">
+						<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
+							<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
+							</image>
+						</swiper-item>
+					</swiper>
+				</view>
+				<!--  列表标题  -->
+				<view class='disantitle' wx:if='{{item.title}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump'>
+					{{item.title}}
+					<view class='disantitletitright' wx:if='{{item.item_type}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump' style='font-weight:normal;position:relative;color:#31b3fb;'>查看更多
+					</view>
+				</view>
+				<!--  列表  -->
+				<view class='disanumofgoods_box' wx:if='{{item.List.length!=0}}'>
+					<view class='disanum_scr'>
+						<scroll-view scroll-x="true" class="disanum_tab_comtainer">
+							<view class='disanum_scr_box' wx:for='{{item.List}}' wx:key='key' wx:for-item='w' style='height:119rpx;width:222rpx;'>
+								<view class='disanum_simgbox' catchtap='jumpdlflottery' data-id='{{w.id}}' style='height:119rpx;width:222rpx;'>
+									<image class='disanum_simg' src='{{w.cover}}?imageMogr2/thumbnail/x238' style='height:119rpx;width:222rpx;' mode='aspectFit'></image>
+
+									<view class='videomaskcom' wx:if='{{w.shop_price || w.stop_time}}' style='background:#000;opacity: 0.4;z-index:1;'></view>
+									<view class='videomaskcom specialellipsis' wx:if='{{w.shop_price || w.stop_time}}' style='z-index:2;'>
+										<text style='float:left;padding-left:4rpx;font-size:20rpx;' wx:if='{{w.shop_price}}'>￥{{w.shop_price}}</text>
+										<text style='float:right;padding-right:10rpx;'>{{w.stop_time}}</text>
+									</view>
+								</view>
+							</view>
+							<view class='disanum_scr_box' style='height:118rpx;' wx:if='{{item.List.length>=4&&item.item_type}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}' catchtap='imgcomindellistjump'>
+									<view class='disanum_stxt' style='top:0;width:118rpx;height:118rpx;'>
+										<view class='disanum_stxtd' style='height:58rpx;line-height:58rpx;width:118rpx;'>查 看</view>
+										<view class='disanum_stxtd' style='height:58rpx;line-height:58rpx;width:118rpx;'>全 部</view>
+									</view>
+							</view>
+
+
+						</scroll-view>
+					</view>
+				</view>
+			</view>
+
+			<!--  官方拆盒  -->
+			<view class='disanumofgoods' wx:elif='{{item.show_type==109}}' style='{{item.isHideBreakLine?"margin-bottom:0rpx;":""}}'>
+				<view style='width:100%;min-height:104rpx;padding-top:20rpx;' wx:if='{{item.banner.length!=0}}'>
+					<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450">
+						<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
+							<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
+							</image>
+						</swiper-item>
+					</swiper>
+				</view>
+				<!--  列表标题  -->
+				<view class='disantitle' wx:if='{{item.title}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump'>
+					{{item.title}}
+					<view class='disantitletitright' wx:if='{{item.item_type}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump' style='font-weight:normal;position:relative;color:#31b3fb;'>查看更多
+					</view>
+				</view>
+				<!--  列表  -->
+				<view class='disanumofgoods_box' wx:if='{{item.List.length!=0}}'>
+					<view class='disanum_scr'>
+						<scroll-view scroll-x="true" class="disanum_tab_comtainer">
+							<view class='disanum_scr_box' wx:for='{{item.List}}' wx:key='key' wx:for-item='w' style='height:160rpx;width:299rpx;'>
+								<view class='disanum_simgbox' catchtap='jumpdlfdetail' data-id='{{w.id}}' style='height:160rpx;width:299rpx;'>
+									<image class='disanum_simg' src='{{w.cover}}?imageMogr2/thumbnail/x320' style='height:160rpx;width:299rpx;'></image>
+									<image wx:if='{{w.video}}' src='https://www.51chaidan.com/images/icon/iconPlayVideo.png' style='width:30px;height:30px;position:absolute;bottom:0;left:0;right:0;top:0;margin:auto;'></image>
+									<view class='videomaskcom' wx:if='{{w.title}}' style='background:#000;opacity: 0.4;z-index:1;'></view>
+									<view class='videomaskcom specialellipsis' wx:if='{{w.title}}' style='z-index:2;'>{{w.title}}</view>
+								</view>
+							</view>
+							<view class='disanum_scr_box' style='height:160rpx;' wx:if='{{item.List.length>=4&&item.item_type}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}' catchtap='imgcomindellistjump'>
+									<view class='disanum_stxt' style='top:0;'>
+										<view class='disanum_stxtd' style='line-height:120rpx;'>查 看</view>
+										<view class='disanum_stxtd' style='line-height:40rpx;'>全 部</view>
+									</view>
+							</view>
+
+						</scroll-view>
+					</view>
+				</view>
+			</view>
+			<!-- 新品  热销  -->
+			<view style='background: #fff;margin-bottom:20rpx;' wx:elif='{{item.show_type==110}}'>
+				<view style='width:100%;min-height:104rpx;padding-top:20rpx;' wx:if='{{item.banner.length!=0}}'>
+					<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450">
+						<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
+							<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
+							</image>
+						</swiper-item>
+					</swiper>
+				</view>
+				<view class='indcomtabbox'>
+					<view class='indctabbtxt' style='{{npswtab==1?"color:#1989fa;":""}}' data-npswnum='1' catchtap='npswtabfun'>新 品
+						<view class='indctabbtxtbotline' wx:if='{{npswtab==1}}'></view>
+					</view>
+					<view class='indctabbtxt' style='{{npswtab==2?"color:#1989fa;":""}}' data-npswnum='2' catchtap='npswtabfun'>热 销
+						<view wx:if='{{npswtab==2}}' class='indctabbtxtbotline'></view>
+					</view>
+				</view>
+				<!--  新品  -->
+				<view class='disanumofgoods' wx:if='{{npswtab==1}}' wx:for='{{item.List.new.list}}' wx:for-item='w' wx:key='key' wx:for-index='ind' style='{{(ind+1)!=(item.List.new.list.length)?"border-bottom:2rpx dashed #e6e6e6;":""}}margin-bottom:0;'>
+					<!--  列表标题  -->
+					<view class='disantitle' catchtap='newpsellwellfun' data-title='{{w.title}}' data-href='{{w.href}}'>
+						{{w.title}}
+						<view class='disantitletitright' catchtap='newpsellwellfun' data-title='{{w.title}}' data-href='{{w.href}}' style='font-weight:normal;position:relative;color:#31b3fb;'>查看更多
+						</view>
+					</view>
+					<!--  列表  -->
+					<view class='disanumofgoods_box'>
+						<view class='disanum_scr'>
+							<block wx:if='{{w.title!="潮玩"&&w.title!="预售"}}'>
+								<scroll-view scroll-x="true" class="disanum_tab_comtainer">
+									<view class='disanum_scr_box' wx:for='{{w.goods}}' wx:for-item='ww' wx:for-index='num' wx:key='key' data-gid="{{ww.goods_id}}" catchtap='addressmanagement' style='width:26%;'>
+											<view class='disanum_simgbox' style='width:100%;padding-top:100%;height:1rpx;'>
+												<image class='disanum_simg' mode='aspectFit' src='{{ww.cover}}' style='border-radius: 10rpx;'></image>
+												<view class='shopsellout' wx:if='{{ww.debuff==2}}' style='line-height:32rpx;'>售罄</view>
+											</view>
+											<view class='disanum_sb_txtone  multilineellipsis' style='color:#666;max-height:70rpx;'>{{ww.goods_name}}</view>
+											<view class='disanum_sb_txt specialellipsis'>￥{{ww.shop_price}}{{ww.gsale_unit}}</view>
+									</view>
+									<view class='disanum_scr_box' style='height:200rpx;' catchtap='newpsellwellfun' data-href='{{w.href}}' data-title='{{w.title}}'>
+											<view class='disanum_stxt'>
+												<view class='disanum_stxtd' style='line-height:120rpx;'>查 看</view>
+												<view class='disanum_stxtd' style='line-height:40rpx;'>全 部</view>
+											</view>
+									</view>
+								</scroll-view>
+							</block>
+							<block wx:else>
+								<view style='width:100%;'>
+									<view class='disanum_scr_box' wx:for='{{w.goods}}' wx:for-item='ww' wx:for-index='wind' wx:key='key' data-gid="{{ww.goods_id}}" wx:if='{{wind<8}}' catchtap='addressmanagement' style='width:20%;{{wind%4!=3?"margin-right:6.6%;":"margin-right:0;"}}'>
+										<view class='disanum_simgbox' style='width:100%;margin:0 auto;height:1rpx;padding-top:100%;'>
+											<image class='disanum_simg' mode='aspectFit' src='{{ww.cover}}' style='border-radius: 10rpx;'></image>
+											<view class='shopsellout' wx:if='{{ww.debuff==2}}'>售罄</view>
+										</view>
+										<view class='disanum_sb_txtone  multilineellipsis' style='color:#666;max-height:70rpx;width:100%;margin:0 auto;'>{{ww.goods_name}}</view>
+										<view class='disanum_sb_txt specialellipsis' style='width:100%;margin:0 auto;'>￥{{ww.shop_price}}{{ww.gsale_unit}}</view>
+									</view>
+								</view>
+							</block>
+
+						</view>
+					</view>
+				</view>
+				<!--  热销  -->
+				<view class='disanumofgoods' wx:if='{{npswtab==2}}' wx:for='{{item.List.hot.list}}' wx:for-item='w' wx:key='key' style='{{(ind+1)!=(item.List.hot.list.length)?"border-bottom:2rpx dashed #e6e6e6;":""}}margin-bottom:0;'>
+					<!--  列表标题  -->
+					<view class='disantitle' catchtap='newpsellwellfun' data-title='{{w.title}}' data-href='{{w.href}}'>
+						{{w.title}}
+						<view class='disantitletitright' catchtap='newpsellwellfun' data-title='{{w.title}}' data-href='{{w.href}}' style='font-weight:normal;position:relative;color:#31b3fb;'>查看更多
+						</view>
+					</view>
+					<!--  列表  -->
+					<view class='disanumofgoods_box'>
+						<view class='disanum_scr'>
+							<block wx:if='{{w.title!="潮玩"&&w.title!="预售"}}'>
+								<scroll-view scroll-x="true" class="disanum_tab_comtainer">
+									<view class='disanum_scr_box' wx:for='{{w.goods}}' wx:for-item='ww' wx:key='key' data-gid="{{ww.goods_id}}" catchtap='addressmanagement' style='width:26%;'>
+										<view class='disanum_simgbox' style='width:100%;padding-top:100%;height:1rpx;'>
+											<image class='disanum_simg' mode='aspectFit' src='{{ww.cover}}' style='border-radius: 10rpx;'></image>
+											<view class='shopsellout' wx:if='{{ww.debuff==2}}' style='line-height:32rpx;'>售罄</view>
+										</view>
+										<view class='disanum_sb_txtone  multilineellipsis' style='color:#666;max-height:70rpx;'>{{ww.goods_name}}</view>
+										<view class='disanum_sb_txt specialellipsis'>￥{{ww.shop_price}}{{ww.gsale_unit}}</view>
+									</view>
+									<view class='disanum_scr_box' style='height:200rpx;' catchtap='newpsellwellfun' data-href='{{w.href}}' data-title='{{w.title}}'>
+											<view class='disanum_stxt'>
+												<view class='disanum_stxtd' style='line-height:120rpx;'>查 看</view>
+												<view class='disanum_stxtd' style='line-height:40rpx;'>全 部</view>
+											</view>
+									</view>
+								</scroll-view>
+							</block>
+							<block wx:else>
+								<view style='width:100%;'>
+									<view class='disanum_scr_box' wx:for='{{w.goods}}' wx:for-item='ww' wx:for-index='wind' wx:key='key' data-gid="{{ww.goods_id}}" wx:if='{{wind<8}}' catchtap='addressmanagement' style='width:20%;{{wind%4!=3?"margin-right:6.6%;":"margin-right:0;"}}'>
+										<view class='disanum_simgbox' style='width:100%;margin:0 auto;height:1rpx;padding-top:100%;'>
+											<image class='disanum_simg' mode='aspectFit' src='{{ww.cover}}' style='border-radius: 10rpx;'></image>
+											<view class='shopsellout' wx:if='{{ww.debuff==2}}'>售罄</view>
+										</view>
+										<view class='disanum_sb_txtone  multilineellipsis' style='color:#666;max-height:70rpx;width:100%;margin:0 auto;'>{{ww.goods_name}}</view>
+										<view class='disanum_sb_txt specialellipsis' style='width:100%;margin:0 auto;'>￥{{ww.shop_price}}{{ww.gsale_unit}}</view>
+									</view>
+								</view>
+							</block>
+
+						</view>
+					</view>
+				</view>
+
+			</view>
+			<!-- 大家都在拆 -->
+			<view style='background: #fff;margin-bottom:10rpx;' wx:elif='{{item.show_type==1}}'>
+				<!--  列表标题  -->
+				<view class='disantitle' wx:if='{{item.title}}'>
+					{{item.title}}
+				</view>
+				<view class='bchar imgiftr' data-imgiftr='{{index}}' data-gid="{{item.gid}}" catchtap='addressmanagement' style='position:relative;'>
+						<view class='bcleft'>
+							<image class="bcimg" src="{{item.showiftr?item.gcover:'../images/goods_Item_Default_Image.png'}}" style='width:{{item.width||200}}rpx;' bindload="imageLoadad" data-indexnum='5' data-ind='{{index}}'></image>
+						</view>
+					<view class='bcright'>
+						<view class='bctitle multilineellipsis' style='font-size:26rpx;'>
+							{{item.gname}}
+						</view>
+						<view class='bcLabel'>
+							<view class='bclabeys specialellipsis' style='background:#FDF3D9;color:#FF7A00;border:0rpx;' wx:for="{{item.gtag}}" wx:key="key" wx:for-item="bcla" wx:if='{{index<=2}}'>{{bcla}}</view>
+						</view>
+						<view class='bcrilistbott'>
+							<view class='bccompric'>
+								<view wx:if='{{item.is_suit==1}}' class='bccompricleft'>
+									<text style='font-size:22rpx;' wx:if='{{item.pre_name}}'>{{item.pre_name}}:</text>
+									<text style='font-weight: bold;'>￥{{item.gsale}}</text>
+								</view>
+								<view wx:if='{{item.is_suit!=1}}' class='bccompricleft'>
+									<text style='font-size:22rpx;'>拆单:￥</text>
+									<text style='font-weight: bold;'>{{item.gsale}}</text>
+								</view>
+								<view wx:if='{{item.gsale != item.market_price}}' class='bccompricright'>{{item.gsource}}:￥{{item.market_price}}</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+			<!--  大图  -->
+			<view class='indelistimgbox' wx:elif='{{item.show_type==2}}' data-title='{{item.title}}' data-detail='{{item.detail}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-islist='{{item.is_list}}' data-imgurl='{{item.img}}' style='margin-bottom:12rpx;position:relative;' catchtap='comindellistjump'>
+				<image class='indelistimg' src='{{item.img}}'></image>
+			</view>
+			<!--  大图加列表  -->
+			<view class='disanumofgoods' wx:elif='{{item.show_type==3||item.show_type==4}}'>
+				<!--  大图  -->
+				<view class='indelistimgbox' style='margin-bottom:14rpx;position:relative;' wx:if='{{item.show_type==3}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-imgurl='{{item.img}}' data-title='{{item.title}}' catchtap='imgcomindellistjump'>
+						<image class='indelistimg' src='{{item.img}}'></image>
+				</view>
+				<!--  列表标题  -->
+				<view class='disantitle' wx:if='{{item.show_type==4}}'>
+					{{item.title}}
+					<view class='disantitletitright' wx:if='{{item.item_type}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump' style='font-weight:normal;position:relative;'>查看更多
+					</view>
+				</view>
+				<!--  列表  -->
+				<view class='disanumofgoods_box' wx:if='{{item.List.length!=0}}'>
+					<view class='disanum_scr'>
+						<scroll-view scroll-x="true" class="disanum_tab_comtainer">
+							<view class='disanum_scr_box' wx:for='{{item.List}}' wx:key='key' data-item_type='{{item.item_type}}' data-gid='{{item.id}}' catchtap='imgcomindellistjumphuodong'>
+									<view class='disanum_simgbox'>
+										<image class='disanum_simg' src='{{item.img}}'></image>
+									</view>
+									<view class='disanum_sb_txtone  multilineellipsis' style='color:#666;max-height:70rpx;' wx:if='{{item.name}}'>{{item.name}}</view>
+									<view class='disanum_sb_txt specialellipsis' wx:if='{{item.desc!=""}}'>{{item.desc}}</view>
+							</view>
+							<view class='disanum_scr_box' style='height:210rpx;' wx:if='{{item.List.length>=4}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}' catchtap='imgcomindellistjump'>
+									<view class='disanum_stxt'>
+										<view class='disanum_stxtd' style='line-height:120rpx;'>查 看</view>
+										<view class='disanum_stxtd' style='line-height:40rpx;'>全 部</view>
+									</view>
+							</view>
+						</scroll-view>
+					</view>
+
+				</view>
+			</view>
+			<!-- 瀑布流 -->
+			<view wx:elif='{{item.show_type==121}}' style='background:#f4f5f9;'>
+				<!--  列表标题  -->
+				<view wx:if='{{item.title}}' style='padding:0 20rpx 0;font-size:28rpx;font-weight:bold;'>
+					{{item.title}}
+				</view>
+				<view style='overflow:hidden;background:#f4f5f9;padding-top:16rpx;'>
+
+					<view class='dismtbcchwatfa' wx:for='{{item.List}}' wx:key='key' wx:for-item='w' wx:for-index='num'>
+						<view class='dismtbcchecheve' style='{{num%2==0?"margin-left:18rpx;":"float:right;margin-right:18rpx;"}}'>
+							<view class='dismtbccimgboxwatfa' data-gid='{{w.gid}}' catchtap='addressmanagement'>
+								<image src='{{w.gcover}}?imageMogr2/thumbnail/x696' class='dismtbccimgwatfa' mode='aspectFit'></image>
+								<view class='shopsellout' wx:if='{{w.debuff==2}}'>售罄</view>
+							</view>
+							<view class='dismtbcctxtbox' data-gid='{{w.gid}}' catchtap='addtocart'>
+								<view class='dismtbcctxtheadwatfal multilineellipsis'>
+									<view wx:if='{{w.is_suit==1&&w.pre_name}}' style='display: inline-block;color:#ff2742;margin-right:12rpx;'>{{w.pre_name}}</view>
+									<view wx:if='{{w.is_suit==1&&w.ds}}' style='display: inline-block;'>{{w.ds}}</view>{{w.gname}}
+								</view>
+								<view class='dismtbcctxtbott'>
+									<view class='dismtbcctxtbottleft specialellipsis'>￥{{w.gsale}}{{w.gsale_suit}}</view>
+									<image src='../images/dismtb.png' class='addshopcar'></image>
+								</view>
+							</view>
+						</view>
+					</view>
+
+				</view>
+
+			</view>
+		</view>
+
+	</view>
+
+
+	<view style='{{isIphoneX?"height:90rpx;":"height:60rpx;"}}width:100%;text-align:center;line-height:60rpx;color:#666;font-size:30rpx;padding-bottom: 100rpx;' wx:if='{{commoddata.length>=5}}'>{{loadprompt}}</view>
+	<!--  暂无数据  -->
+	<view class='nodata' wx:if='{{commoddata.length==0&&nodataiftr}}' style='height: 600rpx;width: 100%;position: relative;'>
+		<image src='../images/nodata.png' class='nodataimg' style='width: 280rpx;height: 300rpx;position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;'></image>
+	</view>
+
+	<view>
+
+	</view>
+
+</view>
+
+
+<bnavigation bind:run='obtaintabfun' whomepage='{{true}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+
+
+<!--  优惠券 新人红包  -->
+<view class='newcoupon' wx:if='{{newcoupon}}'>
+	<view class='swfback' catchtouchmove="preventD" catchtap='newhbfun'></view>
+	<view class='newcoucon'>
+		<view class='newcouchead'>
+			<view class='newcouhhead centertxt'>{{newcoutitle}}</view>
+			<view class='newcouhocon'>
+				<view class='newcoucx' wx:for='{{newcoupondata}}' wx:key='key'>
+					<image class='newcoucximg' src='../images/botchofcou.png'></image>
+					<view class='newcoucxcon'>
+						<view class='newcoucxconleft'>
+							<view class='newcoucxconlefttop centertxt'>
+								<view style=' font-size:24rpx;display:inline-block;position: relative;top: 8rpx;'>{{item.unit}}</view>{{item.value}}
+							</view>
+							<view class='newcoucxconleftbott specialellipsis'>{{item.desc}}</view>
+						</view>
+						<view class='newcoucxconright'>
+							<view class='newcoucxconrighttop'>
+								<view class='specialellipsis' style=' font-size:30rpx;padding-top:10rpx;height:36rpx;'>{{item.name}}</view>
+								<view style=' font-size:24rpx;'>{{item.overtime}}过期</view>
+							</view>
+							<view class='newcoucxconrightbott specialellipsis'>{{item.detail}}</view>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view class='newcouhbott'>
+				<view class='newcouhbotmimg centertxt' catchtap='swfcanimgcou'>一 键 领 取</view>
+				<image src='../images/cancelthefork.png' class='swfcanimgnewcou' catchtap='swfcanimgcou'></image>
+			</view>
+		</view>
+
+	</view>
+</view>
+
+
+
+<!--  loading 加载提示  -->
+<view hidden="{{headhidden}}" style='position: fixed;top: 0;left: 0;height: 100%;width: 100%;z-index: 30;' catchtouchmove="preventD"></view>
+
+<view style='width:0;height:0;overflow:hidden;position:absolute;top:-1000px;' data-uid='{{uid}}' data-loginid='{{loginid}}' data-openid='{{openid}}' data-page='{{page}}'>
+	<canvas canvas-id='snapshot' style='width:300px; height:240px;'></canvas>
+</view>
+
+<view style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:99;' wx:if='{{jumpdevanningiftr}}'></view>
+
+<!-- 双十一 入口  automat.isOpen-->
+<view wx:if='{{false}}' catchtap='doubleEleven' style='width:95rpx;position:fixed;right:10rpx;bottom:260rpx;z-index:9;'>
+	<image src='https://www.51chaidan.com/images/turntable/turntable_colour.png' style='width:75rpx;height:75rpx;display:block;margin-left:10rpx;'></image>
+	<view wx:if='{{automatTimes>0}}' class='tabshopimg specialellipsis' style='top:-10rpx;;left:50rpx;'>{{automatTimes}}</view>
+	<view style="width:95rpx;height:30rpx;position:relative;font-size:22rpx;">
+		<view style="width:95rpx;height:30rpx;background:#000;position:absolute;top:0;left:0;opacity:0.4;border-radius:5rpx;"></view>
+		<view style="width:95rpx;height:30rpx;position:absolute;top:0;left:0;color:#e94f57;text-align:center;font-weight:bold;">{{automattitle}}</view>
+	</view>
+</view>
+
+<!-- 透视卡 小悬浮 -->
+<view wx:elif='{{perspcardiftrmin}}' catchtap='bblistfun' style='width:110rpx;height:170rpx;position:fixed;right:20rpx;bottom:260rpx;z-index:9;'>
+	<image src='http://www.51chaidan.com/images/icon/iconTempXRay.jpg' style='width:110rpx;height:110rpx;display:block;border-radius:50%;'></image>
+	<view style="width:110rpx;height:54rpx;font-size:22rpx;color:#ffffff;position:relative;">
+		<view style="width:110rpx;height:54rpx;background:#cb6a15;opacity:0.8;border-radius:10rpx;"></view>
+		<text style='display:block;text-align:center;width:110rpx;height:54rpx;line-height:27rpx;position:absolute;left:0;top:0rpx;'>点击使用\n{{percountdown}}</text>
+	</view>
+</view>

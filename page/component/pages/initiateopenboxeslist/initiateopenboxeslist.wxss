@@ -1,0 +1,98 @@
+@import "../../../../pages/activitysharinglist/activitysharinglist.wxss";
+@import "../../../../common/tabbar.wxss";
+page {
+  background: #e4e4e4;
+}
+.limlistbox{
+  width: 100%;
+}
+.limitlbut{
+  width: 100%;
+  overflow: hidden;
+  padding-bottom: 16rpx;
+  
+
+
+
+
+
+
+
+
+
+
+}
+.inopenboxus{
+  width:100%;
+  min-height: 80rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.inopenboxuserimg{
+  width: 80rpx;
+  height: 80rpx;
+  float: left;
+  border-radius: 50%;
+}
+.inopenboxtxt{
+  max-width: 600rpx;
+  min-height: 50rpx;
+  margin-top: 15rpx;
+  position: relative;
+  float: left;
+  margin-left: 10rpx;
+}
+.inopenboxtxtback{
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.5;
+  border-radius: 10rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+.inopenboxtxtword{
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  max-width: 580rpx;
+  height: 100%;
+  line-height: 50rpx;
+  font-size: 22rpx;
+  color: #fff;
+}
+.paycheadwconbott{width:100%;height: 100%;position:absolute;left: 0;top: 0;opacity: 0;z-index: 1;}
+
+.aslbcbotrightboxil{
+  position: absolute;
+  right: 0;
+  bottom: 12rpx;
+  font-size:28rpx;
+  color:#fff;
+  text-align:center;
+  line-height:44rpx;
+}
+
+.limitlbutli{
+  width:100%;
+  padding-bottom:16rpx;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

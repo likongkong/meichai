@@ -1,0 +1,183 @@
+
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view style='width:100%;min-height:{{windowHeight}}px;'>
+    <view style='width:100%;' wx:for='{{listdata}}' wx:key='key'>
+        <view class='rrhead'>
+            <view class='rrheadleft'>{{item.date}}</view> 
+            <view class='rrheadright' wx:if='{{index==0&&(comtopcounttime.day!=00||comtopcounttime.hour!=00||comtopcounttime.minute!=00||comtopcounttime.second!=00)}}'>
+              <text class='rrheadrtxt' wx:if='{{comtopcounttime.day!=00}}'>{{comtopcounttime.day}}</text>
+              <text class='rrheadrd' wx:if='{{comtopcounttime.day!=00}}'>天</text>    
+              <text class='rrheadrtxt'>{{comtopcounttime.hour}}</text>
+              <text class='rrheadrd'>:</text>
+              <text class='rrheadrtxt'>{{comtopcounttime.minute}}</text>
+              <text class='rrheadrd'>:</text>
+              <text class='rrheadrtxt'>{{comtopcounttime.second}}</text>
+              <text class='rrheadrd'>:</text>
+              <text class='rrheadrtxt'>{{comtopcounttime.ms}}</text>
+              <text class='rrheadrd'>后过期</text>
+            </view>
+        </view>
+        <view style='width:100%;' wx:for='{{item.list}}' wx:key='key' wx:for-item='w'>
+              <view class='rrcontent'>
+                <view class='rrconleft'>
+                    <image class='rrconlimg' src='{{w.goods_img}}'></image>
+                </view>
+                <view class='rrconright'>
+                    <view class='bctitle multilineellipsis' style='height:76rpx;'>
+                        {{w.goods_name}}
+                    </view>
+                    <view class='rrconrbott'>
+                        <view class='rrconrbleft'>{{w.time}}中奖</view>
+                        
+                        <view class='rrconrbright' catchtap='videoclickbut' data-tips='{{w.tips}}' data-drawid='{{w.draw_id}}' data-goodstype='{{w.goods_type}}' data-vident='{{w.VerifyIdentity}}' wx:if='{{w.watchVideos==1&&w.receivePrize==0}}' style='color:#fff;background:#ff9900;padding:0 15rpx;'>看视频,领双倍奖励</view>
+
+                        <view class='rrconrbright' catchtap='receiveawardsfun' data-drawid='{{w.draw_id}}' data-goodstype='{{w.goods_type}}' data-vident='{{w.VerifyIdentity}}' wx:elif='{{w.receive_end_status==0}}' style='color:#fff;background:#ff6968;'>领取</view>
+                        <view class='rrconrbright' wx:elif='{{w.receive_end_status==1}}' style='color:#7ea63c;'>已领取</view>
+                        <view class='rrconrbright' wx:elif='{{w.receive_end_status==2}}' style='color:#e34c46;'>已过期</view>
+                        
+                    </view>
+                </view>
+              </view>
+
+        </view>
+    </view>
+
+
+    
+</view>
+
+<view class='awatip' wx:if='{{awatip}}'>
+    <view class='awabg' catchtap='awatipdisnone'></view>
+    <view class='awacontent'>
+       <view class='awaconhead'>领奖提示</view>
+       <text class='awaconcon'>领奖专区内购买任意商品\n即可领奖成功</text>
+       <view class='awaconbottom' catchtap='awajump' style='position:relative;'>确定</view>
+    </view>
+</view>
+
+<!--   领奖提示  awardrresentiftr -->
+<view class='wsh' wx:if='{{awardrresentiftr}}'>
+    <view class='tgimgboxgb' style='background:#ccc;'  catchtap='awardrresentiftrfun'></view>
+    <view class='awardrresentation'>
+        <view class='adreshead'>领奖提示</view>
+        <view class='adrestxt'> 
+           <text>{{rpinfotip}}</text>
+        </view>
+        <scroll-view class='adresscr' scroll-x="true" scroll-with-animation="true">
+            <view class='adresscrbox' wx:for='{{awardrresentation.Goods}}' wx:key='key' data-goods_id='{{item.goods_id}}' catchtap='detailspage'>
+                <image src='{{item.goods_thumb}}' class='adresbimg'></image>
+                <view class='disanum_sb_txtone multilineellipsis' style='color:#666;'>
+                    {{item.pre_name}}{{item.ds}}{{item.goods_name}}
+                </view>
+                <view class='specialellipsis' style='width:100%;height:40rpx;line-height:40rpx;color:#f93f45;font-size:22rpx;text-align:center;vertical-align:top;position:relative;top:5rpx;'>
+                    ￥{{item.goods_price}}
+                </view>
+            </view>
+        </scroll-view>
+        <view class='chaishopbutbox'>
+           <!-- <view class='chaishopbutleft' catchtap='payfreight'>支付运费领奖</view> -->
+           <view class='chaishopbut' data-href='{{awardrresentationjump.href}}' data-item_type='{{awardrresentationjump.item_type}}' catchtap='comindellistjump' style='position:absolute;left:0;right:0;bottom:0;top:0;margin:auto;'>挑选商品领奖</view>
+           <view class='chaishopbut' data-href='{{awardrresentationjump.href}}' data-item_type='{{awardrresentationjump.item_type}}' catchtap='comindellistjump' style='position:absolute;left:0;right:0;bottom:0;top:0;margin:auto;'>挑选商品领奖</view>
+        </view>
+        
+        <view class='chaidanboxbor'></view>
+        <view class='chaidanboxborbot'>购买商品领奖后可以报名付费专享活动哦~</view>
+        <scroll-view class='adresbotsrc' scroll-x="true" scroll-with-animation="true">
+            <view class='adresbotsrcbox' wx:for='{{awardrresentation.activity}}' wx:key='key' data-gid='{{item.id}}' catchtap='actexempfun'>
+                <image src='{{item.goods_thumb}}' class='adresbimgbot'></image>
+                <view class='adresbottxt'>
+                    <image src='http://www.51chaidan.com/images/default/person1.png' class='adresbimguser'></image>
+                    {{item.users}}
+                </view>
+            </view>
+        </scroll-view>
+        <view class='adresboxbottonbut' catchtap='acetlistfun'>更多付费专享活动</view>
+    </view>
+
+</view>
+
+
+
+
+<!-- 获取手机号 -->
+<view class='awatip' wx:if='{{phoneiftr}}'>
+    <view class='awabg' catchtap='phoneiftrfun'></view>
+    <view class='awacontent'>
+        <text class='rotaryawatxt'>话费直充需获取手机号码\n是否获取？</text>
+        <view class='rotarybutbox'>
+            <view class='rotarybutcom' style='color:#000;background:#d9d9d9;position: relative;' catchtap='phoneiftrfun'>否</view>
+            <view class='rotarybutcom' style='color:#fff;background:#ff6869;margin-left:20rpx;'><button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" class='butgetnum'></button>是</view>
+        </view>
+    </view>
+</view>
+
+<!-- 获取手机号 -->
+<view class='awatip' wx:if='{{havephoneiftr}}'>
+    <view class='awabg' catchtap='havephoneiftrfun'></view>
+    <view class='awacontent'>
+        <text class='rotaryawatxt'>获取手机号成功:{{inputdata}}\n确认为该手机号充值？</text>
+        <view class='rotarybutbox'>
+            <view class='rotarybutcom' style='color:#000;background:#d9d9d9;position: relative;' catchtap='havephoneiftrfun'>取消</view>
+            <view class='rotarybutcom' style='color:#fff;background:#ff6869;margin-left:20rpx;position: relative;' catchtap='receiveawards'>确定</view>
+        </view>
+    </view>
+</view>
+
+
+
+<!--  填写身份证号  -->
+<view class='idnumberboxw' wx:if='{{idnumberboxiftr}}'>
+    <view class='idnumberboxwback'></view>
+    <view class='idnumberbox'>
+        <view class='idnumberboxhead'>补充清关信息</view>
+        <view class='idnumberboxprompt'>海关政策需补充身份信息仅用于海关清关</view>
+        <input class='idnumberboxinp' type='text' value='{{inputnamedata}}' bindinput="inputnameChange" placeholder='真实姓名'></input>
+        <input class='idnumberboxinp' type='text' value='{{inputidnumberdata}}' bindinput="inputidChange" placeholder='身份证号' style='margin-top:20rpx;'></input>
+        <view class='idnumberboxbut'>
+            <view class='idnumbbcen idnumbbcombut' catchtap='idnumbbcenfun'>取消</view>
+            <view class='idnumbbsub idnumbbcombut' catchtap='receiveawards'>提交</view>
+        </view>
+    </view>
+</view>
+
+
+
+
+
+<!-- 观看视频弹框 -->
+<view class='comtip' wx:if='{{videoAdtipfinshi}}'>
+    <view class='comtipback' catchtap='videoAdtipdisfun' style='position: relative;'></view>
+    <view class='apptipbox' wx:if='{{videoAdnum==1}}'>
+    <!-- 领取奖励成功\n -->
+        <view class='apptiphead' style='border:0;font-size:42rpx;color:#000;line-height:140rpx;'>观看成功</view>
+        <view class='apptipcont'><text style='text-align: left;'>{{videotips}}</text></view>
+        <view class='apptipbut' style='background:#ff9800;border-radius: 60rpx;' catchtap='videoAdtipdisfun'>确定</view>
+    </view> 
+    <view class='apptipbox' wx:if='{{videoAdnum==2}}'>
+        <view class='apptiphead' style='border:0;font-size:42rpx;color:#fe666b;line-height:140rpx;'>观看未完成</view>
+        <view class='apptipcont'><text>未能成功{{videotips}}\n可尝试完整观看后关闭即可领取</text></view>
+        <view class='apptipbut' style='background:#ff9800;border-radius: 60rpx;' catchtap='videoAdfun'>再看一次</view>
+    </view>    
+
+</view>
+
+
+
+
+
+
+
+
+
+
+
+<!--  授权弹框  -->
+<view class='tgaboxtwo' wx:if='{{tgabox}}' catchtap='clicktga'>
+    <view class='tgaboxtbg'></view>
+    <view class='tgaboxclick'>
+        <image mode='aspectFit' src='https://www.51chaidan.com/images/default/openscreen.jpg?log={{appNowTime}}' class='tgaboxclickbgImg'></image>
+    </view>
+     <button class='tgaboxtgawchbochlibutboxtwo' open-type="getUserInfo" type='primary' bindgetuserinfo="userInfoHandler"></button>
+</view>

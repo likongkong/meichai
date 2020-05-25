@@ -1,0 +1,8 @@
+{
+  "asdfasfdflePullDownRefresh": true,
+  "enablePullDownRefresh": true,  
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "t_f": "../../../../pages/topfunction/topfunction"
+  }
+}

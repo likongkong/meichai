@@ -1,0 +1,128 @@
+/* page/component//pages/mingbox/mingbox.wxss */
+@import "../../pages/turntable/turntable.wxss";
+@import "../../../../pages/signin/signin.wxss";
+@import "../../../../pages/activitydetailspage/activitydetailspage.wxss";
+@import "../../../../pages/detailspage/detailspage.wxss";
+
+
+.countdown {
+  background: #000;
+  color: #fff;
+  text-align: center;
+  line-height: 60rpx;
+  
+}
+
+.timetextstyle {
+  diaplay: inline-block;
+  font-size: 25rpx;
+}
+
+.swiper {
+  height: 400rpx;
+  width: 100%;
+}
+
+.slide-image {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.tag {
+  width: 100%;
+  line-height: 50rpx;
+  display: flex;
+  text-align: center;
+  font-size: 25rpx;
+  background: #e5e7ea;
+  color: #ff9800;
+}
+
+.singletag {
+  diaplay: inline-block;
+  flex: 1;
+}
+
+.dot {
+  color: #c0c4cc;
+  font-weight: bold;
+}
+
+.goodname {
+  font-size: 25rpx;
+  text-align: left;
+  line-height: 50rpx;
+  margin: 20rpx;
+}
+
+.alreadyfloat {
+  width: 100%;
+  background: #131212;
+  opacity: 0.4;
+  position: absolute;
+  top: 0rpx;
+  left: 0rpx;
+  z-index: 1;
+  border-radius: 10rpx;
+}
+
+.alreadytag {
+  width: 60%;
+  background: #fff7f8;
+  border-radius: 10rpx;
+  line-height: 30rpx;
+  font-size: 25rpx;
+  text-align: center;
+  margin-left:25%;
+}
+
+.alreadyimg {
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  bottom: 0;
+  left: 12%;
+  z-index: 2;
+  border-radius: 50rpx;
+}
+
+/*  双行  */
+
+.multilineellipsis {
+  /* display: -webkit-box; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: normal !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+
+
+.imgposiadd{
+  width: 30rpx;
+  height: 36rpx;
+  line-height: 30rpx;
+  text-align: center;
+  background: #fff;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -25rpx;
+  margin: auto 0;
+  color: #000;
+  font-size: 36rpx;
+  font-weight: bold;
+  z-index: 2;
+   
+}
+.butshare{
+  width: 100%;height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  opacity: 0;
+}

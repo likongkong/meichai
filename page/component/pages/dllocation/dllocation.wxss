@@ -1,0 +1,160 @@
+@import "../../../../pages/signin/signin.wxss";
+page{
+  background: #ededed;
+}
+.dllocabox{
+  width: 100%;
+}
+.dllockbox{
+  width: 100%;
+  height: 130rpx;
+  border-top: 1rpx solid #848484;
+  position: relative;
+}
+.dllocktxtl{
+  width: 660rpx;
+  height: 130rpx;
+  line-height: 130rpx;
+  padding-left: 30rpx;
+  font-size: 26rpx;
+}
+.dllocktxtt{
+  width: 660rpx;
+  height: 130rpx;
+  padding-left: 30rpx;
+  font-size: 26rpx;
+}
+.dllockimg{
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  right: 30rpx;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border-radius: 50%;
+  
+}
+
+.apptipbox{
+   height: 360rpx;
+   width: 500rpx;
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   margin: auto;
+   background: #fff;
+   border-radius:20rpx; 
+}
+.comtip{width: 100%;height: 100%;position: fixed;top: 0;left: 0;z-index: 1999;}
+.comtipback{width: 100%;height: 100%;background: #000;opacity: 0.4;}
+.comtipcon{width: 86%;height: 600rpx;background: #fff;position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;border-radius: 10rpx;}
+.comtipchead{width: 94%;height: 100rpx;line-height: 100rpx;font-size: 36rpx;color: #333;padding: 0 3%;}
+.comtipccon{width: 92%;height: 400rpx;font-size: 32rpx;color: #666;padding: 0 4%;overflow: scroll;}
+.comtipcbot{width: 94%;height: 100rpx;padding: 0 3%;}
+.comtipcbri{width: 40%;height: 100rpx;line-height: 100rpx;font-size: 30rpx;color: #42bd56;text-align: right;float: right;padding-right: 32rpx;}
+/*  app专享弹框提示  */
+.apptipbox{
+   height: 360rpx;
+   width: 500rpx;
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   margin: auto;
+   background: #fff;
+   border-radius:20rpx; 
+}
+.apptiphead{
+  height: 100rpx;
+  width: 100%;
+  text-align:center;
+  line-height: 100rpx;
+  font-size: 30rpx;
+  color: #666;
+  border-bottom: 1rpx solid #e5e5e5;
+}
+.apptipcont{
+  width: 94%;
+  margin: 0 auto;
+  padding: 30rpx 0;
+  font-size: 30rpx;
+  text-align: center;
+  color: #666;
+}
+.apptipbut{
+  height: 90rpx;
+  width: 100%;
+  border-top: 1rpx solid #e5e5e5;
+  font-size: 28rpx;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+.apptiolefrigcom{
+  height: 90rpx;
+  line-height: 90rpx;
+  text-align: center;
+}
+.apptipleft{
+  width:50%;
+  color: #474548;
+  float: left;
+  border-right: 1rpx solid #e5e5e5;
+}
+.apptipright{
+  width: 49%;
+  color: #36c225;
+  float: right;
+}
+
+/*  赞助商  */
+.sponsor{
+  width: 100%;
+  margin: 10rpx 0;
+  background: #fff; 
+}
+.sponsorone{
+  width: 100%;
+  height: 100rpx;
+}
+
+.sonsoimg{
+  width: 70rpx;
+  height: 70rpx;
+  margin:15rpx 0 0 25rpx;
+  border-radius: 50%;
+  float: left; 
+}
+.sonsotxt{
+  width: 300rpx;
+  height: 70rpx;
+  float: left;
+  margin: 15rpx 0 0 15rpx;
+  line-height: 70rpx;
+  color: #333;
+  font-size: 26rpx; 
+  text-align: left; 
+}
+.sonsoright{
+  height: 100rpx;
+  line-height: 100rpx;
+  color: #f93f45;
+  font-size: 24rpx;
+  text-decoration:underline; 
+  float: right;
+  margin-right: 25rpx;
+}
+/*   单行  */
+.specialellipsis{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;  
+}
+
+
+
+

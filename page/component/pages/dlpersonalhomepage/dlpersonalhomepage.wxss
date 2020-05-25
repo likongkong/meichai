@@ -1,0 +1,176 @@
+@import "../../pages/dlfind/dlfind.wxss";
+@import "../../../../common/tabbar.wxss";
+@import "../../../../pages/signin/signin.wxss";
+page{
+  background: #f4f5f9;
+}
+/*   单行  */
+.specialellipsis{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;  
+}
+.dltshpbox{
+  width: 100%;
+}
+.dltshbtop{
+  width: 100%;
+  background: #ff2742;
+}
+.dltshbtitbox{
+  width: 100%;
+  height: 200rpx;
+  position: relative;
+}
+.dltshbibimg{
+  width: 150rpx;
+  height: 150rpx;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  border-radius: 50%;
+  border:10rpx solid #ffbcac;
+}
+.dltshbttiptxt{
+  width: 100%;
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 26rpx;
+  color: #ffe9e9;
+}
+.dltshbtitbcon{
+  width: 100%;
+  height: 80rpx;
+  display: flex;
+  flex-direction: row;
+  padding: 15rpx 0;
+}
+.dltsbconeve{
+  height: 80rpx;
+  flex: 1;
+  position: relative;
+}
+.dltsboeven{
+  width: 100%;
+  height: 40rpx;
+  text-align: center;
+  color: #fff;
+  font-size: 26rpx;
+}
+.dltshbtimg{
+  display: inline-block;
+  width: 26rpx;
+  height: 34rpx;
+  position: relative;
+  top: 5rpx;
+  margin-right: 15rpx;
+}
+
+.dlfflbox{
+  width: 100%;
+  height: 150rpx;
+  border-bottom:1rpx solid #cbcbce;
+  position: relative;
+}
+.dlfflbleft{
+  width: 160rpx;
+  height: 150rpx;
+  position: relative;
+  float: left;
+}
+.dlfflblimg{
+  width: 110rpx;
+  height: 110rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border-radius: 50%;
+}
+
+.dlfflbright{
+  width: 540rpx;
+  height: 150rpx;
+  float: left;
+  position: relative;
+}
+.dlfflbrtoptxt{
+  width: 100%;
+  height: 50rpx;
+  line-height: 50rpx;
+  margin-top: 20rpx;
+  font-size: 26rpx;
+  color: #000;
+}
+
+.dlfflrigpostion{
+  height: 150rpx;
+  line-height: 150rpx;
+  color: #000;
+  font-size: 26rpx;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.dldlbottright{
+  width: 18rpx;
+  height: 30rpx;
+  position: absolute;
+  right: -30rpx;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+}
+
+.personalhomepage{
+  width: 180rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: #fff;
+  border-radius: 50rpx 0 0 50rpx;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto 0;
+  background: #699cfc;
+}
+.dltshbtiptinp{
+  width:420rpx;
+  height:50rpx; 
+  float: left; 
+}
+.dlpnocontent{
+  width: 100%;
+  height: 500rpx;
+  padding-top: 260rpx;
+}
+.dlpnocimg{
+  width: 100rpx;
+  height: 100rpx;
+  display: block;
+  margin: 0 auto 20rpx;
+}
+.dlpnonctxt{
+  height: 60rpx;
+  width: 100%;
+  text-align: center;
+  font-size: 34rpx;
+  color: #999999;
+  margin: 30rpx 0 20rpx 0;
+}
+.dlpnoncliji{
+  width: 100%;
+  height: 40rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: #699cfc;
+  position: relative;
+}

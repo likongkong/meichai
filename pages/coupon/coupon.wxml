@@ -1,0 +1,65 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<hidewindow id='hide'></hidewindow>
+<view class='box'>
+
+    <view class='couponsousuocou'>
+        <input class='indheadinpcoupon' type='text' value='{{coupondata}}' bindinput="inputChange" placeholder='请输入兑换码'  bindconfirm="couclicksou"></input>
+        <view class='sousuoclik' bindtap='couclicksou'>兑换</view>
+    </view>
+     <view class='boxfirst' wx:for='{{coudata}}' wx:key='key'>
+          <!-- 背景 -->
+          <image wx:if='{{item.status!=0}}' class='boxfirstimg' src='../images/bg_ticket_grey2.png'></image>
+          <image wx:if='{{item.status==0}}' class='boxfirstimg' src='../images/bg_ticket_grey2.png'></image>
+          <!-- 已过期  -->
+          <image wx:if='{{item.status==2}}' class='yinzhengimg' src='../images/icon_expired.png'></image>
+          <!--  已使用  -->
+          <image wx:if='{{item.status==1}}' class='yinzhengimg' src='../images/icon_used.png'></image>
+          <view class='boxcon' style='z-index:8;'>
+              <view class='boxconhead'>
+                   <view class='bocohealef' style='z-index:9;'>
+                       <view class='bchll' wx:if='{{item.coupon_type!=2}}'>{{item.unit}}</view>
+                       <view class='bchlr' style='{{item.coupon_type==2?"margin-left:6rpx;text-align:right;":""}}'>{{item.value}}</view>
+                       <view class='bchll' wx:if='{{item.coupon_type==2}}' style='font-size:22rpx;width:24rpx;'>折</view>
+                   </view>
+                   <view class='bocohearig'>
+                        <view class='bocohighe specialellipsis'>{{item.name}}</view>
+                        <view class='bocohigcon specialellipsis'>{{item.detail}}</view>
+                        <view wx:if='{{item.status!=1}}' class='bocohigcon specialellipsis'>{{item.overtime}}到期</view>
+                        <view wx:if='{{item.status==1}}' class='bocohigcon specialellipsis'>{{item.overtime}}使用</view>
+                   </view>                   
+              </view>
+              <view class='boxconcon'>{{item.desc}}</view>
+          </view>
+     </view>
+
+
+     <image wx:if='{{coudata.length==0&&iftrcoudata}}' class='nocouponimg' src='../images/nocouponimg.png'></image>
+
+
+</view>
+
+
+
+
+
+
+
+
+
+
+<!--  授权弹框  -->
+<view class='tgaboxtwo' wx:if='{{tgabox}}' catchtap='clicktga'>
+    <view class='tgaboxtbg'></view>
+    <view class='tgaboxclick'>
+         <image mode='aspectFit' src='https://www.51chaidan.com/images/default/openscreen.jpg?log={{appNowTime}}' class='tgaboxclickbgImg'></image>
+          
+    </view>  
+    <button class='tgaboxtgawchbochlibutboxtwo' open-type="getUserInfo" type='primary' bindgetuserinfo="userInfoHandler"></button>
+
+</view>
+
+
+
+

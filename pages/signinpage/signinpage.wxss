@@ -1,0 +1,281 @@
+@import "../dismantlingbox/dismantlingbox.wxss";
+.siginconbox{
+    padding:20rpx 0; 
+   background: #f4f5f9;
+}
+.sigintitle{
+  width: 100%;
+  height: 100rpx;
+  text-align: center;
+  line-height: 100rpx;
+  font-size: 30rpx;
+  color: #333;
+  background: #fff;
+  font-weight: bold;
+  border-radius: 20rpx 20rpx 0 0;
+}
+.sigindata{
+  width: 100%; 
+  height: 246rpx;
+  background: #fff;
+  display: flex;  
+  flex-direction: row;  
+}
+.sigindataeve{
+  height: 100%;
+  flex:1;
+}
+.sigindaevhead{
+  position: relative;
+  width: 100%;
+  height: 70rpx; 
+}
+.sigindaevheimg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 5;
+  height: 60rpx;
+  width: 60rpx;
+}
+.sigindataeveheadimgbox{
+  height: 66rpx;
+  width: 100%;
+  position: relative;
+}
+.sigindataeveheadimg{
+  height: 60rpx;
+  width: 60rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+}
+.sigindatabottom{
+   width: 100%;
+   height: 36rpx;
+   text-align: center;
+   line-height: 36rpx;
+   font-size: 30rpx;
+   color: #dbdbdb;
+}
+.sigincondata{
+  overflow: hidden;
+  background: #fff;
+  padding:0 15rpx 20rpx 15rpx;
+  border-radius: 0 0 20rpx 20rpx;
+}
+.sigincondatafirst{
+  height: 100rpx;
+  width: 100%;
+  position: relative;
+  margin-top: 20rpx;
+}
+.sigincondftitlefbox{
+  position: relative;
+  height: 100rpx;
+  float: left;
+  padding-right: 50rpx;
+}
+.sigincondftitlef{
+  height: 100rpx;
+  line-height: 100rpx;
+  color: #000;
+  max-width: 300rpx;
+  font-size: 26rpx;
+  margin-left: 30rpx;
+}
+.comtriangle{
+  width: 30rpx;
+  height: 18rpx;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto 0;
+  padding: 20rpx 12rpx 20rpx 0;
+}
+.sigincondbutright{
+  width: 140rpx;
+  height: 60rpx;
+  text-align: center;
+  line-height: 60rpx;
+  color: #fff;
+  font-size: 30rpx;
+  background: #ff2742;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 20rpx;
+  margin: auto 0;
+  border-radius: 10rpx;
+}
+.sigincondcon{
+  max-width: 94rpx;
+  padding:0 0 0 51rpx;
+  height: 100rpx;
+  position: relative;
+  font-size: 26rpx;
+  color: #fbb11b;
+  line-height: 104rpx;
+  float: right;
+  margin-right:166rpx; 
+  text-align: right;
+}
+.sigincondconimg{
+  height: 50rpx;
+  width: 50rpx;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+}
+.siginbutinbox{
+  background: #fff;
+  height: 130rpx;
+  width: 100%;
+  position: relative;
+}
+.siginbutinbut{
+ height:100rpx;
+ width: 100rpx;
+ position: absolute;
+ top: 0;
+ left: 0;
+ right: 0;
+ margin:0 auto;
+ border-radius:50%;
+}
+.siginbutinbuttxt{
+  height: 30rpx;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  font-size: 28rpx;
+  line-height: 30rpx;
+}
+.siginbullionleft{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto 0;
+  width: 50%;
+  height: 16rpx;
+  z-index: 1;
+}
+.siginbullionright{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto 0;
+  width: 50%;
+  height: 16rpx;  
+  z-index: 2;
+}
+.sigindatarinum{
+  width: 100%;
+  height: 40rpx;
+  color: #333;
+  font-size: 30rpx;
+  text-align: center;
+  line-height: 40rpx;
+  margin-top: 20rpx;
+}
+.signintaskborder{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.sigincontirbb{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 3;
+}
+
+
+
+
+
+
+
+
+
+/*  提示框  */
+.comtip{width: 100%;height: 100%;position: fixed;top: 0;left: 0;z-index: 199999;}
+.comtipback{width: 100%;height: 100%;background: #000;opacity: 0.4;}
+.comtipcon{width: 86%;height: 600rpx;background: #fff;position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;border-radius: 10rpx;}
+.comtipchead{width: 94%;height: 100rpx;line-height: 100rpx;font-size: 36rpx;color: #333;padding: 0 3%;}
+.comtipccon{width: 92%;height: 400rpx;font-size: 32rpx;color: #666;padding: 0 4%;overflow: scroll;}
+.comtipcbot{width: 94%;height: 100rpx;padding: 0 3%;}
+.comtipcbri{width: 40%;height: 100rpx;line-height: 100rpx;font-size: 30rpx;color: #42bd56;text-align: right;float: right;padding-right: 32rpx;}
+
+/*  app专享弹框提示  */
+.apptipbox{
+   height: 360rpx;
+   width: 500rpx;
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   margin: auto;
+   background: #fff;
+   border-radius:20rpx; 
+}
+.apptiphead{
+  height: 100rpx;
+  width: 100%;
+  text-align:center;
+  line-height: 100rpx;
+  font-size: 30rpx;
+  color: #666;
+  border-bottom: 1rpx solid #e5e5e5;
+}
+.apptipcont{
+  width: 94%;
+  margin: 0 auto;
+  padding: 30rpx 0;
+  font-size: 30rpx;
+  text-align: center;
+  color: #666;
+}
+.apptipbut{
+  height: 90rpx;
+  width: 100%;
+  border-top: 1rpx solid #e5e5e5;
+  font-size: 28rpx;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+.apptiolefrigcom{
+  height: 90rpx;
+  line-height: 90rpx;
+  text-align: center;
+}
+.apptipleft{
+  width:50%;
+  color: #474548;
+  float: left;
+  border-right: 1rpx solid #e5e5e5;
+}
+.apptipright{
+  width: 49%;
+  color: #36c225;
+  float: right;
+}
+

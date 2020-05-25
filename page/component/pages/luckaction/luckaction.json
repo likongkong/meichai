@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "美拆大咖",
+  "asdfasfdflePullDownRefresh": true,
+  "enablePullDownRefresh": true,
+
+  "usingComponents": {
+    "bnavigation": "/pages/bottomComponent/bottomComponent",
+    "t_f": "../../../../pages/topfunction/topfunction"
+  }
+}

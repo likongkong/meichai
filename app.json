@@ -1,0 +1,130 @@
+{
+  "pages": [
+    "pages/splashscreen/splashscreen",
+    "pages/index/index",
+    "pages/wode/wode",
+    "pages/shoppingCart/shoppingCart",
+    "pages/detailspage/detailspage",
+    "pages/activitydetailspage/activitydetailspage",
+    "pages/activitysharinglist/activitysharinglist",
+    "pages/storehomepage/storehomepage",
+    "pages/sputforward/sputforward",
+    "pages/signinpage/signinpage",
+    "pages/dismantlingbox/dismantlingbox",
+    "pages/coupon/coupon",
+    "pages/sbestpartner/sbestpartner",
+    "pages/signin/signin",
+    "pages/myorder/myorder",
+    "pages/allcomments/allcomments",
+    "pages/classificationpage/classificationpage",
+    "pages/personaldata/personaldata",
+    "pages/lookatthelogistics/lookatthelogistics",
+    "pages/shippingAddress/shippingAddress",
+    "pages/addressmanagement/addressmanagement",
+    "pages/newreceivingaddress/newreceivingaddress",
+    "pages/modifythenickname/modifythenickname",
+    "pages/smokebox/smokebox",
+    "pages/smokeboxlist/smokeboxlist",
+    "pages/topfunction/topfunction",
+    "pages/tgacomponent/tgacomponent",
+    "pages/hidewindow/hidewindow",
+    "pages/bottomComponent/bottomComponent",
+    "pages/smokeComponent/smokeComponent"
+  ],
+  "subPackages": [
+    {
+      "root": "page/component/",
+      "pages": [
+        "pages/getjigsaw/getjigsaw",
+        "pages/minejigsaw/minejigsaw",
+        "pages/bargainList/bargainList",
+        "pages/bargainDetail/bargainDetail",
+        "pages/dlfind/dlfind",
+        "pages/dldlcreate/dldlcreate",
+        "pages/dltopicselection/dltopicselection",
+        "pages/dllocation/dllocation",
+        "pages/dlpersonalhomepage/dlpersonalhomepage",
+        "pages/dlfinddetails/dlfinddetails",
+        "pages/dluserhomepage/dluserhomepage",
+        "pages/dlnotice/dlnotice",
+        "pages/hidefun/hidefun",
+        "pages/rofcoins/rofcoins",
+        "pages/webview/webview",
+        "pages/search/search",
+        "pages/savethepicture/savethepicture",
+        "pages/information/information",
+        "pages/hotsearchvocabulary/hotsearchvocabulary",
+        "pages/hdparticipateintheuser/hdparticipateintheuser",
+        "pages/orderdetails/orderdetails",
+        "pages/redenvelopesdetails/redenvelopesdetails",
+        "pages/imdetailspage/imdetailspage",
+        "pages/awardwinningarea/awardwinningarea",
+        "pages/earnmoney/earnmoney",
+        "pages/exchangeanddismantling/exchangeanddismantling",
+        "pages/viewlogistics/viewlogistics",
+        "pages/luckaction/luckaction",
+        "pages/newpsellwell/newpsellwell",
+        "pages/mingboxList/mingboxList",
+        "pages/mingbox/mingbox",
+        "pages/signinpage/signinpage",
+        "pages/turntable/turntable",
+        "pages/limitlottery/limitlottery",
+        "pages/limitlotterylist/limitlotterylist",
+        "pages/mytoydg/mytoydg",
+        "pages/myothertoydg/myothertoydg",
+        "pages/officialconsignment/officialconsignment",
+        "pages/cumconreward/cumconreward",
+        "pages/initiateopenboxeslist/initiateopenboxeslist",
+        "pages/initiateopenboxes/initiateopenboxes",
+        "pages/rotaryrecord/rotaryrecord",
+        "pages/informationdetail/informationdetail",
+        "pages/ocamendment/ocamendment",
+        "pages/drivetohidehome/drivetohidehome",
+        "pages/drivetohide/drivetohide",
+        "pages/doubleEleven/doubleEleven",
+        "pages/drivetohidelist/drivetohidelist",
+        "pages/newsignin/newsignin",
+        "pages/crowdfunding/crowdfunding",
+        "pages/playgrasslist/playgrasslist",
+        "pages/newsigninarea/newsigninarea",
+        "pages/limitlotterypublish/limitlotterypublish",
+        "pages/doubleElevenexh/doubleElevenexh",
+        "pages/ocamcart/ocamcart"
+      ]
+    },
+    {
+      "root": "page/secondpackge/",
+      "pages": [
+        "pages/exhibition/exhibition",
+        "pages/exhibitionlist/exhibitionlist",
+        "pages/brandDetails/brandDetails",
+        "pages/exhibitionwelfare/exhibitionwelfare"
+      ]
+    }
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#ff2742",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": false,
+    "navigationStyle": "custom"
+  },
+  "navigateToMiniProgramAppIdList": [
+    "wxfe253b7309e29868",
+    "wx56c8f077de74b07c",
+    "wx579364061bd5793b",
+    "wxcb90fd25d7b12d34"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "sitemapLocation": "sitemap71.json",
+  "plugins": {
+    "live-player-plugin": {
+      "version": "1.0.8",
+      "provider": "wx2b03c6e691cd7370"
+    }
+  }
+}

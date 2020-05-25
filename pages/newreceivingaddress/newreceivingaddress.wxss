@@ -1,0 +1,77 @@
+@import "../../common/citysel.wxss";
+page{
+  width:100%;
+  background:#f4f5f9;
+}
+.shippingAddress{
+  width:100%; 
+  background:#fff;
+  padding:10rpx 0 200rpx 0;
+}
+.addressPage{
+   width:94%;
+   height:90rpx;
+   background:#f2f2f2;
+   margin:30rpx auto;  
+   padding-left:10rpx;
+   border-radius: 10rpx;
+}
+.defaultAdd{
+  margin-left: 3%;
+}
+.defaultAdd{
+  font-size:28rpx;
+  position: relative;
+}
+.defaultAdd checkbox{
+  font-size:20rpx;
+}
+.saveData{
+  width:96%;
+  height:80rpx;
+  background:#ff2742;
+  margin:0 auto;
+  line-height:80rpx;
+  text-align:center;
+  color:#fff;
+  border-radius: 10rpx;
+  margin-top:40rpx;
+  position: relative;
+}
+.radselect{
+  width: 31rpx;
+  height: 31rpx;
+  display: inline-block;
+  position: relative;
+  top: 4rpx;
+  margin-right: 10rpx;
+}
+.indheadinp{
+  width: 100%;
+  height: 100%;
+  line-height:90rpx;
+  font-size:30rpx;   
+}
+.txt{
+  width: 94%;
+  padding: 2rpx 3% 140rpx;
+}
+.txtcon{
+  width: 100%;
+  color: #ff2742;
+  font-size: 28rpx;  
+  line-height:38rpx;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

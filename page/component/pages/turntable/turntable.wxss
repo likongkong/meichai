@@ -1,0 +1,616 @@
+@import "../../../../pages/signin/signin.wxss";
+@import "../../../../pages/activitydetailspage/activitydetailspage.wxss";
+page{
+  background:#5b94fd;
+}
+.ttbox{
+  width: 100%;
+  padding-bottom: 160rpx;
+}
+.ttbheadbox{
+  width: 700rpx;
+  height: 233rpx;
+  margin:0 auto;
+  position: relative;
+}
+.ttbheadimg{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.ttbheadtxt{
+  width: 150rpx;
+  height: 150rpx;
+  line-height: 150rpx;
+  text-align: center;
+  position: absolute;
+  right: 206rpx;
+  top: 35rpx;
+  z-index: 1;
+  color: #5b94ff;
+  font-size: 100rpx;
+}
+.ttbheadturnbox{
+  width: 710rpx;
+  height: 690rpx;
+  position: relative;
+  margin: 0 auto;
+}
+.ttbcontop{
+  width: 710rpx;
+  height: 690rpx;  
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.ttbconthead{
+  width: 100%;
+  height: 108rpx;
+  position: relative;
+}
+.ttbconthrji{
+  width: 50rpx;
+  height: 50rpx;
+  position: absolute;
+  right:20rpx;
+  top: 40rpx;
+}
+.ttbcontcont{
+  width: 530rpx;
+  height: 80rpx;
+  position: absolute;
+  bottom: 5rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.ttbcontcleft{
+  height: 40rpx;
+  width: 40rpx;
+  float: left;
+  margin: 20rpx 20rpx;
+}
+.ttbcontright{
+  width:430rpx;
+  height: 80rpx;
+  float: left; 
+}
+.ttbcontbottom{
+  width:640rpx;
+  height: 510rpx;
+  margin: 22rpx auto 0; 
+  position: relative;
+  padding-top: 6rpx;
+}
+.ttbcontbeve{
+  width: 110rpx;
+  height: 110rpx;
+  /* position: absolute; */
+  display: inline-block;
+  border: 7rpx solid #ffd751;
+  margin: 0 3rpx;
+  border-radius: 6rpx;
+  position: relative;
+}
+.ttbceveimg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 100rpx;
+  height: 100rpx;
+}
+image.ttbficimg{
+  width: 80rpx;
+  height: 80rpx;
+}
+.ttbcontboxtr{
+  width: 100%;
+  height: 124rpx;
+  text-align: center;
+  margin: 3rpx 0;
+}
+.ttbcontponsi{
+  width: 370rpx;
+  height: 245rpx;
+  position: absolute;
+  top:135rpx;
+  left: 132rpx;
+  z-index: 1;
+  background: #fff;
+}
+.turnnumcon{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left:0;
+  
+}
+.turnnumconccc{
+  width: 100%;
+  height: 60rpx;
+  text-align: center;
+  padding-top:170rpx;
+  font-size: 44rpx;
+  color: #5290ff;
+}
+.turnprizec{
+  width: 100%;
+  height: 245rpx;
+  padding-top: 20rpx;
+  text-align: center;
+  
+}
+.turnpeizeve{
+  width: 180rpx;
+  height: 250rpx;
+  display: inline-block;
+  margin: 0 4rpx;
+  vertical-align: top;
+}
+.turnpeinzeimg{
+  width: 150rpx;
+  height: 150rpx;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+}
+.turnpeizebot{
+  width: 100%;
+  height: 50rpx;
+  position: relative;
+}
+.turnpeizebotzeimg{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/*   单行  */
+.specialellipsis{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;  
+}
+.turnpeitxt{
+  position: absolute;
+  top: 3rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  height:33rpx;
+  line-height: 33rpx;
+  color: #000;
+  font-size: 20rpx;
+  border-radius: 5rpx;
+}
+.turntwinpe{
+  width: 100%;
+  height: 100rpx;
+  padding-top: 20rpx;
+  position: relative;
+}
+.turntwintxt{
+  width: 380rpx;
+  height: 100rpx;
+  line-height: 138rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  z-index: 1;
+  font-size: 26rpx;
+  color: #fff;
+  text-align: center;
+}
+.turnfixedbut{
+  width: 600rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 80rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #fffdfa;
+  background: #ff6968;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 30rpx;
+  margin: 0 auto;
+  z-index: 10;
+}
+.ttbcontpsiimg{
+  width: 370rpx;
+  height: 97rpx;
+  display: block;
+  margin: 0 auto;
+}
+.ttbcontpsitxt{
+  width: 320rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  font-size: 20rpx;
+  color: #000;
+  border-radius: 50rpx;
+  border: 2rpx solid #538ffd;
+  margin: 13rpx auto;
+  position: relative;
+}
+.ttbconsitxeimg{
+  position: absolute;
+  top: 0;
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 100%;
+}
+.ttbcontpsbot{
+  width: 100%;
+  height: 60rpx;
+  text-align: center;
+}
+.ttbcontbotimg{
+  display: inline-block;
+  width: 118rpx;
+  height: 56rpx;
+  position: relative;
+}
+
+.turnbox{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+}
+.turnboxbg{
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.8;
+}
+.turnboxcono{
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  z-index: 1;
+  width: 650rpx;
+  height: 850rpx;
+}
+
+.turnboxconimgo{
+  width: 100%;
+  height: 800rpx;
+  display: block;
+}
+.turnbccono{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.tbconohead{
+  width: 100%;
+  height: 58rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: #fff;
+  padding-top: 32rpx;  
+}
+.tbconocontento{
+  width: 100%;
+  height:530rpx;
+  position: relative;
+}
+.tbcontentos{
+  width: 320rpx;
+  height: 340rpx;
+  border: 6rpx solid #ffba0d;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 60rpx;
+  margin: 0 auto;
+}
+.tbcontentosimg{
+  display: block;
+  height: 290rpx;
+  width: 290rpx;
+  margin:0 auto;
+}
+.tbcontentostxt{
+  height: 50rpx;
+  line-height: 50rpx;
+  width: 246rpx;
+  padding-left: 40rpx;
+  position: absolute;
+  right: 0;
+  bottom: -6rpx;
+  z-index: 1;
+  font-size: 24rpx;
+  color: #000;
+  background: #ffbe18;
+}
+.tbcontentorewtxt{
+  width: 60rpx;
+  height: 60rpx;
+  position: absolute;
+  left: 0;
+  bottom: -6rpx;
+  background: #faf0d5;
+  text-align: center;
+  line-height: 60rpx;
+  font-size: 26rpx;
+  z-index: 2;
+}
+
+.tbconocontentbuto{
+  width: 100%;
+  height:100rpx;  
+}
+
+.tbconocancel{
+  width: 40rpx;
+  height: 40rpx;
+  text-align: center;
+  line-height:40rpx;
+  color: #000;
+  font-size: 26rpx;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  border-radius: 50%;
+}
+.turnviewrewards{
+  width: 260rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #fff9dd;
+  border-radius: 12rpx;
+  margin: 0 auto;
+  background: #ffb708;
+}
+
+.tbcontentts{
+  width: 160rpx;
+  height: 186rpx;
+  display: inline-block;
+  border:3rpx solid #ffba0d;
+  position: relative;
+  vertical-align: top;
+  margin:16rpx 6rpx 0;
+}
+
+.tbcontenttsimg{
+  display: block;
+  height: 140rpx;
+  width: 140rpx;
+  margin:0 auto;  
+}
+.tbcontenttstxt{
+  height: 40rpx;
+  line-height: 40rpx;
+  width: 108rpx;
+  padding-left: 20rpx;
+  position: absolute;
+  right: 0;
+  bottom: -3rpx;
+  z-index: 1;
+  font-size: 22rpx;
+  color: #000;
+  background: #ffbe18;
+}
+.tbcontenttrewtxt{
+  width: 50rpx;
+  height: 50rpx;
+  position: absolute;
+  left: 0;
+  bottom: -3rpx;
+  background: #faf0d5;
+  text-align: center;
+  line-height:50rpx;
+  font-size: 24rpx;
+  z-index: 2;
+}
+
+.turnboxcont{
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  z-index: 1;
+  width: 650rpx;
+  height: 1150rpx; 
+}
+.turnbccont{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.turnboxconimgt{
+  width: 100%;
+  height: 1110rpx;
+  display: block;  
+}
+.tbconocontentt{
+  width: 100%;
+  height:880rpx;
+  position: relative;
+}
+.turntip{
+  width: 530rpx;
+  height: 886rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 9;
+}
+.turntipconhead{
+  width: 100%;
+  height: 780rpx;
+  border-radius: 12rpx;
+  overflow: hidden;
+  position: relative;
+}
+.turntipchhhposi{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+.turntipconheadbgimg{
+  width: 520rpx;
+  height: 100%;
+  display: block;
+  margin: 0 auto;
+}
+.turntipchimg{
+  display: block;
+  width: 260rpx;
+  height: 260rpx;
+  margin:260rpx auto 106rpx;
+  position: relative;
+}
+.turntopimgb{
+  width: 260rpx;
+  height: 260rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+.trbctitle{
+  margin:0 auto;
+  width:460rpx;
+  height:74rpx;
+  font-size:28rpx;
+  color: #fff; 
+  line-height: 36rpx;
+  text-align: center;
+}
+/*  双行  */
+.multilineellipsis{
+  display: -webkit-box;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:2;   
+}
+.turntipbotbut{
+  width: 100%;
+  height: 60rpx;
+  padding-top: 30rpx;
+  text-align: center;
+}
+.turntipbotbuteve{
+  vertical-align: top;
+  width: 200rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #fff;
+  background: #ffb708;
+  border-radius: 8rpx;
+  display: inline-block;
+  position: relative;
+}
+
+
+.swiper_container{
+  width: 100%;
+  height: 80rpx;
+}
+.swiperiteme{
+  width: 100%;
+  height: 80rpx;
+}
+.swiper_item_eve{
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 24rpx;
+  color:#fff;
+}
+.tipshare{
+  width: 500rpx;
+  height: 60rpx;
+  border-radius: 10rpx;
+  text-align: center;
+  line-height: 60rpx;
+  background: #000;
+  opacity: 0.8;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  font-size: 24rpx;
+  z-index: 99;
+  color: #fff;
+}
+
+.rotaryawatxt{
+  display: block;
+  width: 100%;
+  height: 120rpx;
+  padding-top: 60rpx;
+  color: #000;
+  font-size: 28rpx;
+  text-align: center;
+  line-height: 50rpx;
+}
+.rotarybutbox{
+  width: 100%;
+  height: 60rpx;
+  padding-top: 20rpx;
+  text-align: center;
+}
+.rotarybutcom{
+  width: 190rpx;
+  height: 55rpx;
+  border-radius: 8rpx;
+  display: inline-block;
+  font-size: 28rpx;
+  text-align: center;
+  line-height: 55rpx;
+  position: relative;
+}
+.butgetnum{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+

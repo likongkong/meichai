@@ -1,0 +1,387 @@
+
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class='ttbox'  style="{{receawaiftr||commoddetip||awatip||awardrresentiftr||explainiftr?'position:fixed;top:0;left:0;right:0;bottom:0;':''}}">
+    <view class='ttbheadbox'>
+        <view class='ttbheadtxt' style='{{surplus_sum>100?"font-size:80rpx;":""}}'>{{surplus_sum}}</view>
+        <image class='ttbheadimg' src='https://www.51chaidan.com/images/spread/dial/Smoke_opportunity.png'></image> 
+    </view>
+    <view class='ttbheadturnbox'>
+        <image class='ttbheadimg' src='https://www.51chaidan.com/images/spread/dial/frame.png'></image>
+        <view class='ttbcontop'>
+            <view class='ttbconthead'>
+                <image class='ttbconthrji' catchtap='explainfun' src='https://www.51chaidan.com/images/spread/dial/instructions.png'></image>
+                <view class='ttbcontcont'>
+                    <image class='ttbcontcleft' src='https://www.51chaidan.com/images/spread/dial/broadcast.png'></image>
+                    <view class='ttbcontright'>
+                        
+                        <swiper class="swiper_container" vertical="true" autoplay="true" circular="true" interval="2500">
+                            <block wx:for="{{lkbdctlist}}" wx:key='key'>
+                              <swiper-item class='swiperiteme'>
+                                  <view class="swiper_item_eve specialellipsis">恭喜{{item.nick}}抽中了“{{item.content}}”</view>
+                              </swiper-item>
+                            </block>
+                        </swiper>
+
+                    </view>
+                </view>
+            </view>
+            <view class='ttbcontbottom'>
+               <view class='ttbcontponsi'>
+                  <image class='ttbcontpsiimg' src='https://www.51chaidan.com/images/spread/dial/title.png?t=1'></image>
+                  <view class='ttbcontpsitxt'>
+                     <image class='ttbconsitxeimg' style='left:0;' src='https://www.51chaidan.com/images/spread/dial/gold_coin.png'></image>
+                     "抽十次" 额外赠送一次
+                     <image class='ttbconsitxeimg' style='right:0;' src='https://www.51chaidan.com/images/spread/dial/gold_coin.png'></image>
+                  </view>
+                  <view class='ttbcontpsbot'>
+                      <image class='ttbcontbotimg' catchtap='receiveawardsack' data-receawa='1' src='https://www.51chaidan.com/images/spread/dial/Smoke1.png'></image>
+                      <image class='ttbcontbotimg' catchtap='receiveawardsack' data-receawa='5' src='https://www.51chaidan.com/images/spread/dial/Smoke5.png'></image>
+                      <image class='ttbcontbotimg' catchtap='receiveawardsack' data-receawa='10' src='https://www.51chaidan.com/images/spread/dial/Smoke10.png'></image>
+                  </view>
+               </view>
+               <view class='ttbcontboxtr'>
+                  <view class='ttbcontbeve'><image catchtap='commoddetail' data-comnum='0' data-ccc='1' class='ttbceveimg {{listdata[0].goodsId?"":"ttbficimg"}}' src='{{listdata[0].img}}'></image></view>
+                  <view class='ttbcontbeve'><image catchtap='commoddetail' data-comnum='1' data-ccc='1' class='ttbceveimg {{listdata[1].goodsId?"":"ttbficimg"}}' src='{{listdata[1].img}}'></image></view>
+                  <view class='ttbcontbeve'><image catchtap='commoddetail' data-comnum='2' data-ccc='1' class='ttbceveimg {{listdata[2].goodsId?"":"ttbficimg"}}' src='{{listdata[2].img}}'></image></view>
+                  <view class='ttbcontbeve'><image catchtap='commoddetail' data-comnum='3' data-ccc='1' class='ttbceveimg {{listdata[3].goodsId?"":"ttbficimg"}}' src='{{listdata[3].img}}'></image></view>
+                  <view class='ttbcontbeve'><image catchtap='commoddetail' data-comnum='4' data-ccc='1' class='ttbceveimg {{listdata[4].goodsId?"":"ttbficimg"}}' src='{{listdata[4].img}}'></image></view>               
+               </view>
+               <view class='ttbcontboxtr'>
+                  <view class='ttbcontbeve'><image catchtap='commoddetail' data-comnum='5' data-ccc='1' class='ttbceveimg {{listdata[5].goodsId?"":"ttbficimg"}}' src='{{listdata[5].img}}'></image></view>
+                  <view class='ttbcontbeve' style='border: 7rpx solid #fff;'></view>
+                  <view class='ttbcontbeve' style='border: 7rpx solid #fff;'></view>
+                  <view class='ttbcontbeve' style='border: 7rpx solid #fff;'></view>
+                  <view class='ttbcontbeve'><image catchtap='commoddetail' data-comnum='6' data-ccc='1' class='ttbceveimg {{listdata[6].goodsId?"":"ttbficimg"}}' src='{{listdata[6].img}}'></image></view>               
+               </view>
+               <view class='ttbcontboxtr'>
+                  <view class='ttbcontbeve'><image catchtap='commoddetail' data-comnum='7' data-ccc='1' class='ttbceveimg {{listdata[7].goodsId?"":"ttbficimg"}}' src='{{listdata[7].img}}'></image></view>
+                  <view class='ttbcontbeve' style='border: 7rpx solid #fff;'></view>
+                  <view class='ttbcontbeve' style='border: 7rpx solid #fff;'></view>
+                  <view class='ttbcontbeve' style='border: 7rpx solid #fff;'></view>
+                  <view class='ttbcontbeve'><image catchtap='commoddetail' data-comnum='8' data-ccc='1' class='ttbceveimg {{listdata[8].goodsId?"":"ttbficimg"}}' src='{{listdata[8].img}}'></image></view>               
+               </view>
+               <view class='ttbcontboxtr'>
+                  <view class='ttbcontbeve'><image catchtap='commoddetail' data-comnum='9' data-ccc='1' class='ttbceveimg {{listdata[9].goodsId?"":"ttbficimg"}}' src='{{listdata[9].img}}'></image></view>
+                  <view class='ttbcontbeve'><image catchtap='commoddetail' data-comnum='10' data-ccc='1' class='ttbceveimg {{listdata[10].goodsId?"":"ttbficimg"}}' src='{{listdata[10].img}}'></image></view>
+                  <view class='ttbcontbeve'><image catchtap='commoddetail' data-comnum='11' data-ccc='1' class='ttbceveimg {{listdata[11].goodsId?"":"ttbficimg"}}' src='{{listdata[11].img}}'></image></view>
+                  <view class='ttbcontbeve'><image catchtap='commoddetail' data-comnum='12' data-ccc='1' class='ttbceveimg {{listdata[12].goodsId?"":"ttbficimg"}}' src='{{listdata[12].img}}'></image></view>
+                  <view class='ttbcontbeve'><image catchtap='commoddetail' data-comnum='13' data-ccc='1' class='ttbceveimg {{listdata[13].goodsId?"":"ttbficimg"}}' src='{{listdata[13].img}}'></image></view>               
+               </view>
+
+
+            </view>
+
+        </view>
+    
+    </view>           
+
+    <view style='width:100%;height:710rpx;margin:0 auto;position: relative;'>
+        <image class='ttbheadimg' src='https://www.51chaidan.com/images/spread/dial/elastic_frame.png'></image>
+        <view class='turnnumcon'>
+           <view class='turnnumconccc'>已抽奖：<text style='color:#000;'>{{weekly_sum}}</text>次</view>
+           <view class='turnprizec'>
+               <view class='turnpeizeve' catchtap='jumpcumconrew' data-num='{{contrewone[0].value}}'>
+                  <view style='height:170rpx;background:#fff;border:2rpx solid #6c9de8;margin-bottom:10rpx;border-radius: 10rpx;'>
+                      <swiper style='width:100%;height:160rpx;margin-top:10rpx;' indicator-color="#fff" indicator-active-color="#ff2742" indicator-dots="{{true}}" circular="true" autoplay="true" interval="3000" duration="450">
+                          <swiper-item  wx:for='{{contrewtwo.lowPrice}}' wx:key='key' wx:for-item='w'>
+                              <image class='turnpeinzeimg' src='{{w.goods_thumb}}' ></image>
+                          </swiper-item>
+                      </swiper>                  
+                  </view>
+                  
+                  <view class='turnpeizebot'>
+
+                      <block wx:if='{{contrewone[0].receive_status==2}}'>
+                          <view class='turnpeitxt specialellipsis'>已领取</view>
+                      </block>
+                      <block wx:else>
+                          <block wx:if='{{contrewone[0].receive_status==1}}'>
+                               <view class='turnpeitxt specialellipsis' style='width:80rpx;background:#ffd600;text-align:center;'>领取</view>
+                          </block>
+                          <block wx:elif='{{contrewone[0].receive_status==3}}'>
+                               <view class='turnpeitxt specialellipsis'>已过期</view>
+                          </block>
+                          <block wx:else>
+                               <view class='turnpeitxt specialellipsis'>{{contrewone[0].display}}</view>
+                          </block>
+                      </block>
+                      <image class='turnpeizebotzeimg' src='https://www.51chaidan.com/images/spread/dial/scroll.png'></image>
+                  </view>
+               </view>
+               <view class='turnpeizeve' catchtap='jumpcumconrew' data-num='{{contrewone[1].value}}'>
+                  <view style='height:170rpx;background:#fff;border:2rpx solid #6c9de8;margin-bottom:10rpx;border-radius: 10rpx;'>
+                      <swiper style='width:100%;height:160rpx;margin-top:10rpx;' indicator-color="#fff" indicator-active-color="#ff2742" indicator-dots="{{true}}" circular="true" autoplay="true" interval="3000" duration="450">
+                          <swiper-item  wx:for='{{contrewtwo.mediumPrice}}' wx:key='key' wx:for-item='w'>
+                              <image class='turnpeinzeimg' src='{{w.goods_thumb}}'></image>
+                          </swiper-item>
+                      </swiper>                  
+                  </view>
+
+                  
+                  <view class='turnpeizebot'>
+                      <block wx:if='{{contrewone[1].receive_status==2}}'>
+                          <view class='turnpeitxt specialellipsis'>已领取</view>
+                      </block>
+                      <block wx:else>
+                          <block wx:if='{{contrewone[1].receive_status==1}}'>
+                               <view class='turnpeitxt specialellipsis' style='width:80rpx;background:#ffd600;text-align:center;'>领取</view>
+                          </block>
+                          <block wx:elif='{{contrewone[1].receive_status==3}}'>
+                               <view class='turnpeitxt specialellipsis'>已过期</view>
+                          </block>
+                          <block wx:else>
+                               <view class='turnpeitxt specialellipsis'>{{contrewone[1].display}}</view>
+                          </block>
+                      </block>
+                      <image class='turnpeizebotzeimg' src='https://www.51chaidan.com/images/spread/dial/scroll.png'></image>
+                  </view>
+               </view>
+               <view class='turnpeizeve' catchtap='jumpcumconrew' data-num='{{contrewone[2].value}}'>
+                  <view style='height:170rpx;background:#fff;border:2rpx solid #6c9de8;margin-bottom:10rpx;border-radius: 10rpx;'>
+                      <swiper style='width:100%;height:160rpx;margin-top:10rpx;' indicator-color="#fff" indicator-active-color="#ff2742" indicator-dots="{{true}}" circular="true" autoplay="true" interval="3000" duration="450">
+                          <swiper-item  wx:for='{{contrewtwo.highPrice}}' wx:key='key' wx:for-item='w'>
+                              <image class='turnpeinzeimg' src='{{w.goods_thumb}}'></image>
+                          </swiper-item>
+                      </swiper>                  
+                  </view>
+
+                  
+                  <view class='turnpeizebot'>
+                      <block wx:if='{{contrewone[2].receive_status==2}}'>
+                          <view class='turnpeitxt specialellipsis'>已领取</view>
+                      </block>
+                      <block wx:else>
+                          <block wx:if='{{contrewone[2].receive_status==1}}'>
+                               <view class='turnpeitxt specialellipsis' style='width:80rpx;background:#ffd600;text-align:center;'>领取</view>
+                          </block>
+                          <block wx:elif='{{contrewone[2].receive_status==3}}'>
+                               <view class='turnpeitxt specialellipsis'>已过期</view>
+                          </block>
+                          <block wx:else>
+                               <view class='turnpeitxt specialellipsis'>{{contrewone[2].display}}</view>
+                          </block>
+                      </block>
+                      <image class='turnpeizebotzeimg' src='https://www.51chaidan.com/images/spread/dial/scroll.png'></image>
+                  </view>
+               </view>
+           </view>
+           <view style='width:100%;height:50rpx;font-size:26rpx;text-align:center;color:#000;padding-top:40rpx;'>每周一重置抽奖次数与奖励</view>
+           <view style='width:100%;height:60rpx;font-size:26rpx;text-align:center;color:#000;'>额外赠送次数不计在累计抽奖次数内</view>
+        </view>
+        
+    </view>
+    <view class='turntwinpe' catchtap='rotaryrecordjump'>
+        <image style='width:380rpx;height:100rpx;margin:0 auto;display:block;' src='https://www.51chaidan.com/images/spread/dial/winning_record.png'></image>
+        <view class='turntwintxt'>中奖记录></view>
+    </view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</view>
+
+
+
+<view class='turnfixedbut'><button open-type="share" type="default" size="mini" style='opacity: 0;position:absolute;top:0;left:0;height:100%;width:100%;z-index:2;'></button>获取抽奖机会</view>
+
+
+
+
+
+
+<!-- 弹框 -->
+<view class='turnbox' wx:if='{{receawaiftr}}'>
+     <view class='turnboxbg' catchtap='receawaiftrfundis'></view>
+     <view class='turnboxcono' wx:if='{{receawanum==1||receawanum==5}}'>
+        <image class='turnboxconimgo' src='https://www.51chaidan.com/images/spread/dial/frame1.png'></image>
+        <view class='turnbccono'>
+            <view class='tbconohead'>恭喜您！抽中奖励！</view>
+            <view class='tbconocontento' wx:if='{{receawanum==1}}'>
+                <view class='tbcontentos'>
+                    <image class='tbcontentosimg' src='{{receawalist[0].img}}'></image>
+                    <view class='tbcontentostxt specialellipsis'>{{receawalist[0].name}}</view>
+                    <view class='tbcontentorewtxt'>奖</view>
+                </view>
+            </view>
+            <view class='tbconocontento' wx:if='{{receawanum==5}}'>
+                <view style='text-align:center;width:100%;padding-top:30rpx;'>
+                  <view class='tbcontentts' wx:for='{{receawalist}}' wx:key='key' wx:for-item='w'>
+                      <image class='tbcontenttsimg' src='{{w.img}}'></image>
+                      <view class='tbcontenttstxt specialellipsis'>{{w.name}}</view>
+                      <view class='tbcontenttrewtxt'>奖</view>
+                  </view>                
+                </view>
+            </view>            
+            <view class='tbconocontentbuto'>
+                <view class='turnviewrewards' catchtap='rotaryrecordjump'>查看奖励</view>
+            </view>
+            <image class='tbconocancel' catchtap='receawaiftrfundis' src='https://www.51chaidan.com/images/spread/dial/fork.png'></image>
+        </view>
+     </view>
+     <view class='turnboxcont' wx:if='{{receawanum==10}}'>
+        <image class='turnboxconimgt' src='https://www.51chaidan.com/images/spread/dial/frame2.png'></image>
+        <view class='turnbccont'>
+            <view class='tbconohead' style='padding-top:28rpx;'>恭喜您！抽中奖励！</view>
+            <view class='tbconocontentt'>
+                <view style='text-align:center;width:100%;padding-top:20rpx;'>
+                  <view class='tbcontentts' wx:for='{{receawalist}}' wx:key='key' wx:for-item='w'>
+                      <image class='tbcontenttsimg' src='{{w.img}}'></image>
+                      <view class='tbcontenttstxt specialellipsis'>{{w.name}}</view>
+                      <view class='tbcontenttrewtxt'>奖</view>
+                  </view>
+                  <view class='tbcontentts' catchtap='receawaiftrfundis'>
+                      <view style='width:100%;height:184rpx;color:#ffbb14;font-size:24rpx;text-align: center;line-height: 184rpx;'>继续抽奖</view>
+                  </view>                  
+                                  
+                </view>
+            </view>  
+
+            <view class='tbconocontentbuto'>
+                <view class='turnviewrewards' catchtap='rotaryrecordjump'>查看奖励</view>
+            </view>
+            <image class='tbconocancel' catchtap='receawaiftrfundis' src='https://www.51chaidan.com/images/spread/dial/fork.png'></image>            
+                  
+        </view>
+
+     </view>
+</view>
+
+<!--  -->
+<view  class='turnbox' wx:if='{{commoddetip}}'>
+    <view class='turnboxbg' catchtap='commoddetipfun'></view>
+    <view class='turntip'>
+        <view class='turntipconhead'>
+            <image class='turntipconheadbgimg'   src='https://www.51chaidan.com/images/spread/dial/red_elastic_frame.png'></image>
+            <view class='turntipchhhposi'>
+                <view class='turntipchimg'>
+                    <image class='turntopimgb' src='{{commoddetdata.img}}'></image>
+                </view>
+                <text class='trbctitle multilineellipsis' style='font-size:24rpx;'>{{commoddetdata.name}}</text>            
+            </view>
+        </view>
+        <view class='turntipbotbut'>
+            <view class='turntipbotbuteve' style='margin-right:20rpx;' wx:if='{{commoddetdata.goodsId}}' catchtap='addressmanagement' data-gid='{{commoddetdata.goodsId}}'>查看详情</view>        
+            <view class='turntipbotbuteve' catchtap='commoddetipfun'>继续抽奖</view>            
+        </view>
+    </view>
+
+</view>
+
+
+
+<view class='awatip' wx:if='{{awatip}}'>
+    <view class='awabg' catchtap='awatipdisnone'></view>
+    <view class='awacontent'>
+       <view class='awaconhead'>领奖提示</view>
+       <text class='awaconcon'>领奖专区内购买任意商品\n即可领奖成功</text>
+       <view class='awaconbottom' catchtap='awajump' style='position:relative;'>确定</view>
+    </view>
+</view>
+
+<!--   领奖提示  awardrresentiftr -->
+<view class='wsh' wx:if='{{awardrresentiftr}}'>
+    <view class='tgimgboxgb' style='background:#ccc;'  catchtap='awardrresentiftrfun'></view>
+    <view class='awardrresentation'>
+        <view class='adreshead'>领奖提示</view>
+        <view class='adrestxt'> 
+           <text>{{rpinfotip}}</text>
+        </view>
+        <scroll-view class='adresscr' scroll-x="true" scroll-with-animation="true">
+            <view class='adresscrbox' wx:for='{{awardrresentation.Goods}}' wx:key='key' data-goods_id='{{item.goods_id}}' catchtap='detailspage'>
+                <image src='{{item.goods_thumb}}' class='adresbimg'></image>
+                <view class='disanum_sb_txtone multilineellipsis' style='color:#666;'>
+                    {{item.pre_name}}{{item.ds}}{{item.goods_name}}
+                </view>
+                <view class='specialellipsis' style='width:100%;height:40rpx;line-height:40rpx;color:#f93f45;font-size:22rpx;text-align:center;vertical-align:top;position:relative;top:5rpx;'>
+                    ￥{{item.goods_price}}
+                </view>
+            </view>
+        </scroll-view>
+        <view class='chaishopbutbox'>
+           <!-- <view class='chaishopbutleft' catchtap='payfreight'>支付运费领奖</view> -->
+           <view class='chaishopbut' data-href='{{awardrresentationjump.href}}' data-item_type='{{awardrresentationjump.item_type}}' catchtap='comindellistjump' style='position:absolute;left:0;right:0;bottom:0;top:0;margin:auto;'>挑选商品领奖</view>
+           <view class='chaishopbut' data-href='{{awardrresentationjump.href}}' data-item_type='{{awardrresentationjump.item_type}}' catchtap='comindellistjump' style='position:absolute;left:0;right:0;bottom:0;top:0;margin:auto;'>挑选商品领奖</view>
+        </view>
+        
+        <view class='chaidanboxbor'></view>
+        <view class='chaidanboxborbot'>购买商品领奖后可以报名付费专享活动哦~</view>
+        <scroll-view class='adresbotsrc' scroll-x="true" scroll-with-animation="true">
+            <view class='adresbotsrcbox' wx:for='{{awardrresentation.activity}}' wx:key='key' data-gid='{{item.id}}' catchtap='actexempfun'>
+                <image src='{{item.goods_thumb}}' class='adresbimgbot'></image>
+                <view class='adresbottxt'>
+                    <image src='http://www.51chaidan.com/images/default/person1.png' class='adresbimguser'></image>
+                    {{item.users}}
+                </view>
+            </view>
+        </scroll-view>
+        <view class='adresboxbottonbut' catchtap='acetlistfun'>更多付费专享活动</view>
+    </view>
+
+</view>
+
+
+
+
+<!-- 说明 -->
+<view class='awatip' wx:if='{{explainiftr}}'>
+    <view class='awabg' catchtap='explainfun'></view>
+    <view class='awacontent' style='height:650rpx;'>
+       <view class='awaconhead'>抽奖说明</view>
+       <text class='awaconcon' style='height:440rpx;overflow: scroll;text-align:left;width:90%;margin:0 auto;'>{{explain}}</text>
+       <view class='awaconbottom' catchtap='explainfun' style='position:relative;'>确定</view>
+    </view>
+</view>
+
+
+
+<view class='tipshare' wx:if='{{tipshare}}'>邀请成功后，抽奖机会十分钟后增加。</view>
+
+
+
+
+
+<!-- 获取手机号 -->
+<view class='awatip' wx:if='{{havephoneiftr}}'>
+    <view class='awabg'></view>
+    <view class='awacontent'>
+        <text class='rotaryawatxt'>美拆申请获取您的手机号码</text>
+        <view class='rotarybutbox'>
+            <!-- <view class='rotarybutcom' style='color:#000;background:#d9d9d9;' catchtap='phoneiftrfun'>否</view> -->
+            <view class='rotarybutcom' style='color:#fff;background:#ff6869;'><button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" class='butgetnum'></button>同意</view>
+        </view>
+    </view>
+</view>
+
+
+
+
+
+
+<!--  授权弹框  -->
+<view class='tgaboxtwo' wx:if='{{tgabox}}' catchtap='clicktga'>
+    <view class='tgaboxtbg'></view>
+    <view class='tgaboxclick'>
+        <image mode='aspectFit' src='https://www.51chaidan.com/images/default/openscreen.jpg?log={{appNowTime}}' class='tgaboxclickbgImg'></image>
+    </view>
+     <button class='tgaboxtgawchbochlibutboxtwo' open-type="getUserInfo" type='primary' bindgetuserinfo="userInfoHandler"></button>
+</view>

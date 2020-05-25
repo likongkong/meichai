@@ -1,0 +1,8 @@
+{
+  "backgroundTextStyle": "light",
+  "navigationBarTitleText": "物流信息",
+  "usingComponents": {
+    "hidewindow": "../../../../pages/hidewindow/hidewindow",
+    "t_f": "../topfunction/topfunction"
+  }
+}

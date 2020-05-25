@@ -1,0 +1,37 @@
+
+
+<hidewindow id='hide'></hidewindow>
+
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+
+  <!--  暂无数据  -->
+  <view style='width:100%;padding-top:200rpx;' wx:if='{{listdata.length==0&&iftrnodata}}'>
+    <image src='../../../../pages/images/default_BG_Image@3x.png' style='width:414rpx;height:255rpx;display:block;margin:0 auto;'></image>
+  </view>
+
+<view class='dlnobox'>
+   <view class='dlnoeve' wx:for='{{listdata}}' wx:key='key' catchtap='jumpdldetail' data-dryingid='{{item.dryingId}}'>
+      <view class='dlnoeleft'>
+          <image class='dlnoelimg' src='{{item.headPhoto}}'></image>
+      </view>
+      <view class='dlnoeright'>
+          <view class='dlnoertop'>
+              <view class='specialellipsis' style='height:40rpx;float:left;font-size:26rpx;color:#ff9900;max-width:380rpx;'>{{item.userName}}</view>
+              <view style='height:40rpx;float:right;font-size:26rpx;color:#999999;'>{{item.monthDay}}</view>
+          </view>
+          <view class='dlnoerbottom'>
+              <view class='specialellipsis' style='height:40rpx;float:left;font-size:26rpx;color:#999;max-width:380rpx;'>{{item.floor}} {{item.content}}</view>
+              <view style='height:40rpx;float:right;font-size:26rpx;color:#000;'>回复({{item.replyNumber}})</view>          
+          </view>
+      </view>
+   </view>
+</view>
+
+ 
+
+
+
+
+

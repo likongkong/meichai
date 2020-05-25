@@ -1,0 +1,167 @@
+@import "../../common/awardwinningarea.wxss";
+
+page {
+  background: #f5f6fa;
+}
+
+.exhibbox {
+  width: 100%;
+}
+
+.exhibboxtop {
+  width: 100%;
+  height: 90rpx;
+  background: #fff;
+}
+
+.exhibboxcon {
+  margin: 20rpx 0;
+  overflow: hidden;
+}
+
+.exhibboxconeve {
+  width: 305rpx;
+  height: 480rpx;
+  background: #fff;
+  float: left;
+  border-radius: 10rpx;
+  margin-bottom: 20rpx;
+  padding: 20rpx;
+}
+
+.exhibboxeveimg {
+  width: 305rpx;
+  height: 305rpx;
+  display: block;
+  border-radius: 10rpx;
+}
+
+.exhibboxconibox {
+  width: 710rpx;
+  height: 189rpx;
+  float: left;
+  margin: 0 20rpx 20rpx 20rpx;
+}
+
+.exhibboxconiboimg {
+  width: 100%;
+  height: 189rpx;
+  display: block;
+  height: 100%;
+  border-radius: 10rpx;
+}
+
+.exhshopimg {
+  width: 46rpx;
+  height: 46rpx;
+  border-radius: 50%;
+  float: left;
+}
+
+.exhshoptiright {
+  background: #f08080;
+  font-size: 20rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  padding: 0 8rpx;
+  float: right;
+  border-radius: 5rpx;
+  color: #fff;
+  margin-top: 3rpx;
+  max-width: 60rpx;
+}
+
+.indheadinp {
+  width: 60%;
+  height: 60rpx;
+  margin: 10rpx 0rpx;
+  font-size: 25rpx;
+  float: left;
+  background: white;
+  text-align: left;
+  color: black;
+}
+
+.nsswiperdetail {
+  width: 710rpx;
+  height: 189rpx;
+  background: #fff;
+  position: fixed;
+  bottom: 20rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+.exibactna {
+  width: 100%;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  font-size: 22rpx;
+}
+
+.mexhibboxconeve {
+  width: 305rpx;
+  background: #fff;
+  border-radius: 10rpx;
+  margin-bottom: 20rpx;
+  padding: 20rpx;
+  box-shadow: 2px 2px 5rpx #ccc;
+}
+
+.mexhibboxeveimg {
+  width: 305rpx;
+  display: block;
+  border-radius: 10rpx;
+}
+
+.smokeswiperstyle {
+  width: 710rpx;
+  height: 200rpx;
+  margin: 20rpx 20rpx 0 20rpx;
+}
+
+.labelstyle {
+  width: 100rpx;
+  line-height: 30rpx;
+  opacity: 0.9;
+  float: left;
+  color: #fff;
+  border-radius: 7rpx;
+  font-size: 25rpx;
+  text-align: center;
+  background: #31b3fb;
+  border-radius: 7rpx;
+  margin-right: 5rpx;
+}
+.lovetitle{
+  width: 100%;
+  height: 44rpx;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+}
+.lovetitlebg{
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.4;
+  border-radius: 10rpx;
+}
+.lovetittxt{
+  width: 94%;
+  height: 44rpx;
+  line-height: 44rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: auto;
+  z-index: 1;
+  text-align: center;
+  font-size: 24rpx;
+  color: #fff;
+}

@@ -1,0 +1,165 @@
+/* page/component/pages/luckaction/luckaction.wxss */
+@import "../../../../pages/activitydetailspage/activitydetailspage.wxss";
+
+page {
+  background: #f5f6fa;
+}
+
+.swiper {
+  height: 400rpx;
+  width: 100%;
+}
+
+.slide-image {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.strategy {
+  background: #ff6968;
+  color: #fff;
+  position: absolute;
+  top: 20rpx;
+  right: 20rpx;
+  font-size: 25rpx;
+  padding: 5rpx 10rpx;
+  border-radius: 10rpx;
+}
+
+.logo {
+  background: #fff;
+  position: absolute;
+  top: 20rpx;
+  left: 20rpx;
+  border-radius: 10rpx;
+}
+
+.toptitle {
+  font-size: 50rpx;
+  text-align: center;
+  color: #ff6968;
+  font-weight: bold;
+  position: absolute;
+  top: 250rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 600rpx;
+  height:100rpx;
+}
+
+.secondview {
+  position: absolute;
+  top: 350rpx;
+  left: 0;
+  border-radius: 50rpx;
+  background: #fff;
+  width: 100%;
+  height: 850rpx;
+}
+
+.secondtitle {
+  color: #ff6968;
+  font-weight: bold;
+  font-size: 50rpx;
+  text-align: center;
+  width: 100%;
+}
+
+.thirdview {
+  margin-top: 30rpx;
+  height: 220rpx;
+  position: relative;
+}
+
+.thirdunderview {
+  width: 86%;
+  height: 160rpx;
+  position: absolute;
+  top: 30rpx;
+  left: 7%;
+  background: #e6e6e6;
+  border-radius: 10rpx;
+}
+
+.thirdfloatview {
+  width: 80%;
+  height: 220rpx;
+  position: absolute;
+  top: 0;
+  left: 10%;
+  background: #efefef;
+  border-radius: 10rpx;
+}
+
+.alreadytitle {
+  font-size: 35rpx;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 20rpx;
+}
+
+.needtitle {
+  font-size: 35rpx;
+  text-align: center;
+  font-weight: bold;
+}
+
+.schedule {
+  width: 438rpx;
+  height: 28rpx;
+  margin: 6rpx;
+  background: #e6e6e6;
+  border-radius: 15rpx;
+  float: right;
+  font-size: 25rpx;
+}
+
+.schedulemeet {
+  width: 279rpx;
+  line-height: 28rpx;
+  float: left;
+  text-align: center;
+  border-radius: 15rpx 0 0 15rpx;
+  color: #fff;
+}
+
+.schedulewin {
+  width: 100%;
+  border-radius: 10rpx;
+  line-height: 40rpx;
+  border: 1rpx solid #ff6968;
+  color: #ff6968;
+  font-size: 25rpx;
+  text-align: center;
+}
+
+.scheduledot {
+  width: 28rpx;
+  height: 28rpx;
+  margin: 6rpx;
+  border-radius: 15rpx;
+  float: left;
+}
+
+.btnstyle {
+  margin: 0 5%;
+  width: 40%;
+  line-height: 70rpx;
+  color: #fff;
+  font-size: 30rpx;
+  float: left;
+  text-align: center;
+  border-radius: 25rpx;
+  position: relative;
+}
+
+.myordercanimgser {
+  width: 319px;
+  height: 414px;
+  background: #ccc;
+  position: fixed;
+  left: 0;
+  top: -999999rpx;
+}

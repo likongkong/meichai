@@ -1,0 +1,2 @@
+/* page/component/pages/newsigninarea/newsigninarea.wxss */
+@import "../awardwinningarea/awardwinningarea.wxss";

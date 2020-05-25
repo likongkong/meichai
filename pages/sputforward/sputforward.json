@@ -1,0 +1,8 @@
+{
+  "asdfasfdflePullDownRefresh": true,
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "我的小金库",
+    "usingComponents": {
+      "t_f": "../topfunction/topfunction"
+    }
+} 

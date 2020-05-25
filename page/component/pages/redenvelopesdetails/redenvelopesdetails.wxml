@@ -1,0 +1,71 @@
+
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class='rdendexbox'>
+    <view class='rdendexboxhead'>
+       <view class='rdendexboxheadibox'>
+           <image src='../../../../pages/images/ake.png' class='ake'></image>
+           <image class='redheadbleftimg' src='{{litpic}}'></image>
+       </view>
+       <view class='rdendexboxheadtxt'>{{nick}}</view>
+       <view class='rdendexboxheadtxt' style='color:#a7a7a7;'>{{moneytxt}}</view>
+       <view class='rdendexboxheadtxt' style='color:#a7a7a7;'>领取红包可到(我的-小金库-提现)</view>
+    </view>
+    <view class='rdendexboxcon'>
+        <view class='rdendexboxconhead'>1个红包共{{moneynum}}元</view>
+        <view class='rdendexbcbox'>
+            <image class='rdendexbcboximg' src='{{avatarUrl}}'></image>
+            <view class='rdendexbcboxtxt'>
+                <view class='rdendexbcbtb'>
+                    <view class='rdendexbcbtbtxt' style='float: left;'>{{nickName}}</view>
+                    <view class='rdendexbcbtbtxt' style='float:right;'>{{moneynum}}元</view>
+                </view>
+                <view class='rdendexbcbtb rdendexbcbtbcom'>{{nowdate}}</view>
+            </view>
+        </view>
+    </view>
+</view>
+
+
+
+
+
+
+<!--  授权弹框  -->
+<!-- <view class='tgabox' wx:if='{{tgabox}}'>
+    <image src='../images/logo2.png' class='tgaboximages2'></image> 
+   <button class='tgaboxtgawchbochlibutbox' open-type="getUserInfo" type='primary' bindgetuserinfo="userInfoHandler">微信授权</button>   
+</view> -->
+
+<view class='tgaboxtwo' wx:if='{{tgabox}}' catchtap='clicktga'>
+    <view class='tgaboxtbg'></view>
+    <view class='tgaboxclick'>
+          <image mode='aspectFit' src='https://www.51chaidan.com/images/default/openscreen.jpg?log={{appNowTime}}' class='tgaboxclickbgImg'></image>
+          
+    </view> 
+    <button class='tgaboxtgawchbochlibutboxtwo' open-type="getUserInfo" type='primary' bindgetuserinfo="userInfoHandler"></button>
+
+    <!-- ios -->
+    <!-- <view class='tgaboxcon' wx:if='{{iftriosorand}}'>
+         <view class='tgabthead'>微信授权</view>
+         <image class='tgabtcimg' src='http://www.51chaidan.com/images/640.png'></image>
+         <view class='tgabttxth'>
+             <view class='tgabttcont'>美拆申请获得以下权限:</view>
+             <view class='tgabttcontnt'>• 获得你的公开信息（昵称、头像等）</view>
+         </view>
+         <view class='tgabtbout' catchtap='clicktga'>请点击"允许"进入美拆<button class='tgaboxtgawchbochlibutboxtwo' open-type="getUserInfo" type='primary' bindgetuserinfo="userInfoHandler"></button></view>
+    </view> -->
+    <!-- Android -->
+    <!-- <view class='tgaboxcon' style='height:480rpx;border-radius:6rpx;' wx:if='{{!iftriosorand}}'>
+        <view class='tgabandhead'>微信授权</view>
+        <view class='tgabandcon'>
+            <image class='tgabandimg' src='http://www.51chaidan.com/images/640.png'></image>
+            美拆申请获取以下权限:
+        </view>
+        <view class='tgabandtbox'>
+            <view class='tgabandtxtn'>• 获得你的公开信息（昵称、头像等）</view>
+        </view>
+        <view class='tgabtboutand' catchtap='clicktga'>请点击"允许"进入美拆<button class='tgaboxtgawchbochlibutboxtwo' open-type="getUserInfo" type='primary' bindgetuserinfo="userInfoHandler"></button></view>
+    </view> -->
+</view>

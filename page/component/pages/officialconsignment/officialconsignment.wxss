@@ -1,0 +1,75 @@
+@import "../../pages/dlfind/dlfind.wxss";
+@import "../../../../common/tabbar.wxss";
+@import "../../../../pages/signin/signin.wxss";
+@import "../../../../pages/detailspage/detailspage.wxss"; 
+@import "../../pages/awardwinningarea/awardwinningarea.wxss";
+page{
+  background: #fff;
+  width:100%;
+}
+.offsignbox{
+  width: 100%;
+  padding-bottom: 120rpx;
+  display: flex;
+}
+.offsigleft{
+  flex:1;
+}
+.offsigcenter{
+  flex:1;
+}
+.offsigright{
+  flex:1;
+}
+
+.offlistbox{
+  width:100%;
+  position: relative;
+  padding-bottom: 10rpx;
+  background: #fff;
+}
+.listgoodsimg{
+  width: 96%;
+  margin: auto;
+  display: block;
+}
+
+
+.offsigimgbox{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10rpx;
+  margin: 0 auto;
+  z-index: 2;
+  width: 85rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: #fff;
+  background: #fb595f;
+  border-radius: 5rpx;
+}
+
+.listuserimg{
+  width: 50rpx;
+  height: 50rpx;
+  position: absolute;
+  left: 2%;
+  bottom:10rpx;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+
+
+
+
+
+
+
+
+
+
+

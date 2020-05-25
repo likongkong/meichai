@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "美拆",
+  "usingComponents": {
+    "hidewindow": "../../../../pages/hidewindow/hidewindow",
+    "t_f": "../../../../pages/topfunction/topfunction"
+  }
+}

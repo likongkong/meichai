@@ -1,0 +1,9 @@
+{
+  "asdfasfdflePullDownRefresh": true,
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "限定抽签",
+  "usingComponents": {
+    "t_f": "../../../../pages/topfunction/topfunction",
+    "bnavigation": "/pages/bottomComponent/bottomComponent"
+  }
+}

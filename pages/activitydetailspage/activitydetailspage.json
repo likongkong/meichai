@@ -1,0 +1,11 @@
+{
+  "asdfasfdflePullDownRefresh": true,
+  "enablePullDownRefresh": true,  
+  "navigationBarTitleText": "活动详情",
+  "usingComponents": {
+    "bnavigation": "../bottomComponent/bottomComponent",
+    "hidewindow": "../../../../pages/hidewindow/hidewindow",
+    "t_f": "../topfunction/topfunction",
+    "somke": "/pages/smokeComponent/smokeComponent"
+  }
+}

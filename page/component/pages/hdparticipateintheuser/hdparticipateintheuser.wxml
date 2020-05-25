@@ -1,0 +1,28 @@
+<loading hidden="{{headhidden}}">
+    加载中...
+</loading>
+<hidewindow id='hide'></hidewindow>
+
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+     <view class='adspuserimg' wx:if='{{commoddata.length!=0}}' style='padding-top:80rpx;'>
+         <view class='adspuserimgleft' wx:for='{{commoddata}}' wx:key='key'>
+            <image src='{{item.headphoto||"../../../../pages/images/pic_headc.png"}}' class='adspuserimgleftimgage'  data-nick='{{item.nick}}' data-index="{{index}}" catchtap='adsclicksefun'>
+            </image>  
+            <view wx:if='{{item.iftr}}' class='imgadspuservie specialellipsis'>{{item.nick}}</view>
+            <image src='../../../../pages/images/wintheonejp.png' wx:if='{{item.level==1}}' class='exetrophy' data-nick='{{item.nick}}' data-index="{{index}}" catchtap='adsclicksefun'></image>
+
+            <image src='../../../../pages/images/winthetwojp.png' wx:if='{{item.level==2}}' class='exetrophy' data-nick='{{item.nick}}' data-index="{{index}}" catchtap='adsclicksefun'></image>
+
+            <image src='../../../../pages/images/winthethreejp.png' wx:if='{{item.level==3}}' class='exetrophy' data-nick='{{item.nick}}' data-index="{{index}}" catchtap='adsclicksefun'></image>
+
+            <image src='../../../../pages/images/winthecanjp.png' wx:if='{{item.level==99}}' class='exetrophy' data-nick='{{item.nick}}' data-index="{{index}}" catchtap='adsclicksefun'></image>
+         </view>
+     </view>
+      <view class='nodata' wx:if='{{commoddata.length==0&&iftrnodata}}'>
+          <image src='../../../../pages/images/nodata.png' class='nodataimg'></image>
+      </view> 
+<loading hidden="{{bothidden}}">
+    加载中...
+</loading>     

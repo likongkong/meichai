@@ -1,0 +1,117 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'>
+</t_f>
+
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view style="width:100%;height:100%;font-size:30rpx;">
+
+  <view style="width:100%;height:130rpx;border-bottom: 1rpx solid #e5e5e5;">
+    <view style="line-height:130rpx;float:left;margin:0 10rpx;">活动标题</view>
+    <input class='indheadinp multilineellipsis' maxlength='20' bindinput='namefun' type='text' value='{{name}}' placeholder='{{inputtxt1}}'></input>
+  </view>
+
+  <view style="width:100%;height:{{bannerList.length > 0  ? '230' : '130'}}rpx;border-bottom: 1rpx solid #e5e5e5;">
+    <view style="line-height:130rpx;float:left;margin:0 10rpx;">产品banner(720*384)</view>
+    <view style="height:130rpx;float:right;margin-right:20rpx;">
+      <image wx:if='{{bannerList.length == 0}}' style="width:50rpx;height:50rpx;margin-top:40rpx;" src="https://www.51chaidan.com/images/turntable/uploadImg.png" catchtap="upserviceimg" data-choose='1' data-type="banner"></image>
+      <view wx:if='{{bannerList.length != 0}}' style="color:#757575;line-height:130rpx;text-decoration:underline;" catchtap="upserviceimg" data-choose='1' data-type="banner">点击更换</view>
+    </view>
+    <view wx:if='{{bannerList.length > 0}}' style='width:100%;height:100rpx;'>
+      <scroll-view style="width:100%;height:80rpx;white-space:nowrap;" scroll-x="true">
+        <view wx:for="{{bannerlocalList}}" wx:key="key">
+          <image style="height:80rpx;width:{{item.vwidth||80}}rpx;margin:0 5rpx;" src="{{item.img}}" bindload="imageLoadad" data-type="banner" data-index='{{index}}'></image>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+
+  <view style="width:100%;height:{{goodsImgList.length > 0  ? '230' : '130'}}rpx;border-bottom: 1rpx solid #e5e5e5;">
+    <view style="line-height:130rpx;float:left;margin:0 10rpx;">产品详情图(700*1000，可多张)</view>
+    <view style="height:130rpx;float:right;margin-right:20rpx;">
+      <image wx:if='{{goodsImgList.length == 0}}' style="width:50rpx;height:50rpx;margin-top:40rpx;" src="https://www.51chaidan.com/images/turntable/uploadImg.png" catchtap="upserviceimg" data-choose='9' data-type="goodsImg"></image>
+      <view wx:if='{{goodsImgList.length != 0}}' style="color:#757575;line-height:130rpx;text-decoration:underline;" catchtap="upserviceimg" data-choose='9' data-type="goodsImg">点击更换</view>
+    </view>
+    <view wx:if='{{goodsImgList.length > 0}}' style='width:100%;height:100rpx;'>
+      <scroll-view style="width:100%;height:80rpx;white-space:nowrap;" scroll-x="true">
+        <view wx:for="{{goodsImglocalList}}" wx:key="key" style="float:left;">
+          <image style="height:80rpx;width:{{item.vwidth||80}}rpx;margin:0 5rpx;" src="{{item.img}}" bindload="imageLoadad" data-type="goodsImg" data-index='{{index}}'></image>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+
+  <view style="width:100%;height:{{logoList.length > 0  ? '230' : '130'}}rpx;border-bottom: 1rpx solid #e5e5e5;">
+    <view style="line-height:130rpx;float:left;margin:0 10rpx;">品牌logo(200*200以内)</view>
+    <view style="height:130rpx;float:right;margin-right:20rpx;">
+      <image wx:if='{{logoList.length == 0}}' style="width:50rpx;height:50rpx;margin-top:40rpx;" src="https://www.51chaidan.com/images/turntable/uploadImg.png" catchtap="upserviceimg" data-choose='1' data-type="logo"></image>
+      <view wx:if='{{logoList.length != 0}}' style="color:#757575;line-height:130rpx;text-decoration:underline;" catchtap="upserviceimg" data-choose='1' data-type="logo">点击更换</view>
+    </view>
+    <view wx:if='{{logoList.length > 0}}' style='width:100%;height:100rpx;'>
+      <scroll-view style="width:100%;height:80rpx;white-space:nowrap;" scroll-x="true">
+        <view wx:for="{{logolocalList}}" wx:key="key" style="float:left;">
+          <image style="height:80rpx;width:{{item.vwidth||80}}rpx;margin:0 5rpx;" src="{{item.img}}" bindload="imageLoadad" data-type="logo" data-index='{{index}}'></image>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+
+  <view style="width:100%;height:130rpx;border-bottom: 1rpx solid #e5e5e5;">
+    <view style="line-height:130rpx;float:left;margin:0 10rpx;">抽选数量</view>
+    <input class='numstyle' bindinput='numfun' type='number' value='{{name}}'></input>
+  </view>
+
+  <view style="width:100%;height:130rpx;border-bottom: 1rpx solid #e5e5e5;">
+    <view style="line-height:130rpx;float:left;margin:0 10rpx;">抽选单价</view>
+    <input class='numstyle' bindinput='pricefun' type='number' value='{{name}}' placeholder='{{inputtxt3}}'></input>
+  </view>
+
+  <view style="width:100%;height:130rpx;border-bottom: 1rpx solid #e5e5e5;">
+    <view style="line-height:130rpx;float:left;margin:0 10rpx;">联系方式</view>
+    <input class='numstyle' bindinput='phonefun' type='number' value='{{name}}' placeholder='{{inputtxt2}}' style="width:500rpx;"></input>
+  </view>
+
+  <view style="width:100%;height:130rpx;border-bottom: 1rpx solid #e5e5e5;">
+    <view style="line-height:130rpx;float:left;margin:0 10rpx;">开启时间</view>
+    <view style="float:left;line-height:130rpx;float:left;margin:0 10rpx;">{{starttime}}</view>
+    <image style="width:50rpx;height:50rpx;margin:40rpx 20rpx;float:right;" src="https://www.51chaidan.com/images/toyCabinet/set.png" catchtap="selecttime" data-tg="start"></image>
+  </view>
+
+  <view style="width:100%;height:130rpx;border-bottom: 1rpx solid #e5e5e5;">
+    <view style="line-height:130rpx;float:left;margin:0 10rpx;">结束时间</view>
+    <view style="float:left;line-height:130rpx;float:left;margin:0 10rpx;">{{stoptime}}</view>
+    <image style="width:50rpx;height:50rpx;margin:40rpx 20rpx;float:right;" src="https://www.51chaidan.com/images/toyCabinet/set.png" catchtap="selecttime" data-tg="stop"></image>
+  </view>
+
+  <view class="commitbtn" catchtap="commitinfo">提交审核</view>
+
+</view>
+
+<view wx:if='{{ishowpicker}}' style='width:100%;height:100%;position:fixed;bottom:0;left:0;z-index:9999999999999999999;'>
+  <view class="bgstyle" catchtap="closepicker"></view>
+
+  <view style="width:100%;height:650rpx;background:white;position:fixed;bottom:0;left:0;">
+
+    <view style="position:absolute;right:10rpx;top:10rpx;z-index:10;" catchtap="performpicker">完成</view>
+
+    <view style="height:100%;width:100%;">
+
+      <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="getTime">
+        <picker-view-column>
+          <view wx:for="{{years}}" wx:key='key' style="line-height: 50px">{{item}}年</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view wx:for="{{months}}" wx:key='key' style="line-height: 50px">{{item}}月</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view wx:for="{{days}}" wx:key='key' style="line-height: 50px">{{item}}日</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view wx:for="{{hours}}" wx:key='key' style="line-height: 50px">{{item}}时</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view wx:for="{{minutes}}" wx:key='key' style="line-height: 50px">{{item}}分</view>
+        </picker-view-column>
+      </picker-view>
+    </view>
+  </view>
+</view>

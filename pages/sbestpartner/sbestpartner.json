@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "最佳合伙人",
+    "usingComponents": {
+      "t_f": "../topfunction/topfunction"
+    }
+}

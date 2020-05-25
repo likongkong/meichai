@@ -1,0 +1,186 @@
+.bgstyle {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #000;
+  opacity: 0.5;
+}
+
+.publicColor {
+  background: #ff6968;
+}
+
+.tgaboxtwo{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;  
+  z-index: 9999999999999999999;  
+}
+
+.tgaboxtbg{
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity:0;
+}
+
+.tgaboxclick{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.tgaboxtgawchbochlibutboxtwo{
+  width: 100%;
+  height: 100%;
+  position: absolute; 
+  top: 0;
+  left: 0;
+  z-index: 2;
+  opacity: 0;
+}
+
+/*   单行  */
+
+.specialellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/*  双行  */
+
+.multilineellipsis {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: normal !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* 横向纵向居中 */
+.alignclass {
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+
+/* 地址选择 */
+.ship_list{
+  width: 100%;
+  height: 360rpx;
+  background: #fff;
+}
+.ship_list .ship_name{
+  width: 100%;
+  height: 80rpx;
+  border-bottom: 2rpx solid #F1f3f2;
+}
+.ship_list .ship_name text{
+  float: left;
+  line-height: 80rpx;
+  padding-left: 20rpx;
+  font-size: 28rpx;
+  color: #212121;
+}
+.ship_list .ship_name .ship_focus{
+  line-height: 80rpx;
+  padding-left: 70rpx;
+  font-size: 28rpx;
+  padding-top: 14rpx;
+}
+.ship_list .ship_area{
+  width: 100%;
+  height: 80rpx;
+  border-bottom: 2rpx solid #F1f3f2;
+}
+.ship_list .ship_area text{
+  float: left;
+  line-height: 80rpx;
+  padding-left: 20rpx;
+  font-size: 28rpx;
+  color: #212121;
+}
+.ship_list .ship_area .ship_citychoose{
+  width: auto;
+  font-size: 28rpx;
+  line-height: 80rpx;
+  color: #828282;
+  padding-left: 40rpx;
+  padding-top: 14rpx;
+}
+.ship_list .buy_street{
+  width: 100%;
+  height: 120rpx;
+}
+.ship_list .buy_street text{
+  float: left;
+  font-size: 28rpx;
+  color: #212121;
+  padding-left: 20rpx;
+  padding-top: 10rpx;
+}
+.ship_list .buy_street .buy_streetnumber{
+  width: 72%;
+  height: 110rpx;
+  margin-left: 170rpx;
+  padding-top: 12rpx;
+  font-size: 28rpx;
+}
+/*时间弹窗  */
+.citypickers{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  min-height: 100%;
+  background-color: #ff0;
+}
+.citybody {
+  position: fixed;
+  bottom: 0px;
+  z-index: 999999;
+  background: #fff;
+}
+.cityheader {
+  position: absolute;
+  top:0px;
+  width: 100%;
+  z-index: 5;
+}
+.city-cancel {
+  float: left;
+  margin: 20rpx;
+  color: #828282;
+}
+.city-true {
+  float: right;
+  margin: 20rpx;
+  color: #000;
+}
+.section .picker {
+  background-color: #fff;
+  border-bottom: 2px #cccccc solid;
+  border-top: 2px #d9d9d9 solid;
+  padding: 20rpx;
+}
+
+.disanum_sb_txt{
+  height: 50rpx;
+  width: 100%;
+  text-align: center;
+  line-height: 50rpx;
+  color: #ff2742;
+  font-size: 30rpx;
+}

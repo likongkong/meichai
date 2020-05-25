@@ -1,0 +1,93 @@
+
+
+<hidewindow id='hide'></hidewindow>
+
+
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view wx:if="{{headhidden}}" style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:999999;'></view>
+
+
+<view style='width:100%;position:fixed;top:{{statusBarHeightMc}}px;left:0;z-index:5;background:#f4f5f9;'>
+    <view style='width:100%;height:80rpx;background:#fff;'>
+      <view style='float:left;margin-left:30rpx;height:80rpx;line-height:80rpx;font-size:28rpx;'>官方发货  |  售后无忧  |  {{defaultinformation.carriage.freeForAmount||69}}包邮</view>
+      <view style='float:right;height:80rpx;line-height:80rpx;margin-right:20rpx;font-size:28rpx;color:#30b2fb;position:relative;' catchtap='jumpsmokelist'>去抽盒机》</view>
+    </view>
+
+    <view class='sousuo' style='margin:10rpx 0;'>
+      <input class='mIndheadinp' type='text' bindinput="inputChange" value='{{inputdata}}' bindconfirm="jumpsoousuo" placeholder='请输入款式名称'></input>
+      <view class='clicksousuo' bindtap='jumpsoousuo' style='position: relative;' wx:if='{{searchorwhole}}'>
+        <view style='width:100%;height:60rpx;line-height:60rpx;font-size:26rpx;color:#333;'>搜索</view>
+      </view>
+      <view class='clicksousuo' bindtap='wholefun' style='position: relative;' wx:else>
+        <view style='width:100%;height:60rpx;line-height:60rpx;font-size:26rpx;color:#333;'>全部</view>
+      </view>      
+    </view>    
+</view>
+
+<view style='width:100%;height:160rpx;background:#f4f5f9;'></view>
+
+<view class='offsignbox'>
+    <view class='offsigleft'>
+        <view class='offlistbox' wx:for='{{listdata}}' wx:key='key' wx:if='{{index%3==0}}' catchtap='owneridfun' data-ownerid='{{item.owner_id}}'>
+            <image class='listgoodsimg' mode="widthFix" src='{{item.roleImg}}'></image>
+            <image class='listuserimg' src='{{item.portrait}}'></image>
+            <view class='offsigimgbox'>￥{{item.shop_price}}</view>
+        </view>
+    </view>
+    <view class='offsigcenter'>
+        <view class='offlistbox' wx:for='{{listdata}}' wx:key='key' wx:if='{{index%3==1}}' catchtap='owneridfun' data-ownerid='{{item.owner_id}}'>
+            <image class='listgoodsimg' mode="widthFix" src='{{item.roleImg}}'></image>
+            <image class='listuserimg' src='{{item.portrait}}'></image>
+            <view class='offsigimgbox'>￥{{item.shop_price}}</view>
+        </view>
+    </view>
+    <view class='offsigright'>
+        <view class='offlistbox' wx:for='{{listdata}}' wx:key='key' wx:if='{{index%3==2}}' catchtap='owneridfun' data-ownerid='{{item.owner_id}}'>
+            <image class='listgoodsimg' mode="widthFix" src='{{item.roleImg}}'></image>
+            <image class='listuserimg' src='{{item.portrait}}'></image>
+            <view class='offsigimgbox'>￥{{item.shop_price}}</view>
+        </view>
+    </view>
+</view>
+
+
+    <view style='width:100%;padding-top:200rpx;' wx:if='{{listdata.length==0&&iftrnodata}}'>
+        <image src='../../../../pages/images/default_BG_Image@3x.png' style='width:414rpx;height:255rpx;display:block;margin:0 auto;'></image>
+    </view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' 
+dryinglistnum='{{dryinglistnum}}'></bnavigation>
+
+
+
+
+
+
+<!--  授权弹框  -->
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>
+
+
+
+
+
+

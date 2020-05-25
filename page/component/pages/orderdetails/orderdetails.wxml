@@ -1,0 +1,1147 @@
+<canvas canvas-id='myordercanimgser' class='myordercanimgsernew'></canvas>
+<!-- <loading hidden="{{headhidden}}" >
+    加载中...
+</loading>   -->
+
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<canvas  canvas-id='canimgserceshi' style='width:375px;height:788px;position:fixed;left:0;top:-999999rpx;'></canvas>
+ 
+<view class='box' style="{{upserimgbox||upserimgboxact?'position:fixed;top:0;left:0;right:0;bottom:0;':''}}padding-bottom:110rpx;">
+ 
+ 
+<view wx:if='{{comdata.order_type!=6}}'>
+      <view class='rdheadback' wx:if='{{comdata.status==0&&comdata.order_type!=7}}'>
+           等待付款
+           <image class='rdheadimg' src='../../../../pages/images/icon_wallet2.png'></image>
+      </view>
+      <view class='rdheadback' wx:if='{{comdata.status==0&&comdata.order_type==7}}'>
+           进行中
+           <image class='rdheadimg' src='../../../../pages/images/icon_wallet2.png'></image>
+      </view>
+      <view class='rdhead' wx:if='{{comdata.status==2}}'>
+           <!-- 等待拆单 -->
+           支付成功
+           <image class='rdheadimg' src='../../../../pages/images/icon_clock2.png'></image>
+      </view>      
+      <view class='rdhead' wx:if='{{comdata.status==3}}'>
+           等待发货
+           <image class='rdheadimg' src='../../../../pages/images/icon_package2.png'></image>
+      </view>
+ 
+      <view class='rdhead' wx:if='{{comdata.status==4}}'>
+           等待收货
+           <image class='rdheadimg' src='../../../../pages/images/icon_car4.png'></image>
+      </view>
+      <view class='rdhead' wx:if='{{comdata.status==5}}'>
+           交易成功
+           <image class='rdheadimg' src='../../../../pages/images/icon_complete.png'></image>
+      </view>
+      <view class='rdheadback' wx:if='{{comdata.status==7}}'>
+           已退款
+           <image class='rdheadimg' src='../../../../pages/images/icon_failed.png'></image>
+      </view>
+      <view class='rdheadback' wx:if='{{comdata.status==8}}'>
+           <block wx:if='{{comdata.status==8 && comdata.order_type!=7}}'>取消未付款</block>
+           <block wx:else>已取消订单</block>
+           <image class='rdheadimg' src='../../../../pages/images/icon_failed.png'></image>
+      </view>
+    </view>
+
+  <!-- {{comdata.order_type!=7&&comdata.status!=16&&comdata.status!=1&&comdata.status!=8&&comdata.status!=11}}   -->
+     
+  <view wx:if='{{comdata.order_type!=7&&(comdata.status!= 0||comdata.status!=8)&&(comdata.order_type!=2&&(comdata.status!=1||comdata.status!=16||comdata.status!=11))}}' class='boxch'>
+      <view class='ordetaaddleft'>
+          <image class='orderaddimg' src='../../../../pages/images/icon_address2.png'></image>
+      </view>
+      <view class='ordetaaddright'>
+          <view class='ordaddhead'>
+              <view class='odhleft'>收货人:{{comdata.consignee}}</view>
+              <view class='odhright'>{{comdata.mobile}}</view>
+          </view>
+          <view class='ordaddcon'>收货地址:{{comdata.province}}  {{comdata.city}}  {{comdata.district}} {{comdata.address}}
+          </view>
+      </view>
+  </view>
+  
+
+  <view class='addressmodify' wx:if='{{comdata.canChangedAddress}}'>注:每个订单只可修改一次收货地址<view class='modifaddclick' catchtap='modaddfun'>修改地址</view></view>
+
+  <view wx:if='{{comdata.order_type==7&&comdata.status==2}}' class='boxch'>
+      <view class='ordetaaddleft'>
+          <image class='orderaddimg' src='../../../../pages/images/icon_address2.png'></image>
+      </view>
+      <view class='ordetaaddright'>
+          <view class='ordaddhead'>
+              <view class='odhleft'>收货人:{{comdata.consignee}}</view>
+              <view class='odhright'>{{comdata.mobile}}</view>
+          </view>
+          <view class='ordaddcon'>收货地址:{{comdata.province}}  {{comdata.city}}  {{comdata.district}} {{comdata.address}}
+          </view>
+      </view>
+  </view>
+      <view class='odchtead' wx:if='{{comdata.order_type!=6}}'>
+          <view class='odchteadleft'>{{comdata.retailer}}</view>
+          <view class='wholeimgdel' data-oid='{{comdata.cart_id}}' bindtap='delwholeheadrimg' wx:if='{{comdata.status==8||comdata.status==5||comdata.status==10||comdata.status==11}}'>
+              <image src='../../../../pages/images/icon_delete.png' class='wholeheadrimg'></image> 
+          </view>
+                      <view class='wholeconnumrrbox'>
+                          <view class='wholeconnumrr' style='margin-right: 13rpx;' wx:if='{{(comdata.status!=0 && comdata.status!=1 && comdata.status!=10 &&comdata.status!=7&& comdata.status!=11&&comdata.status!=8&&comdata.status!=16&&comdata.status!=17) && comdata.order_type==2}}'>免单成功</view>                       
+                          <view class='wholeconnumrr' wx:if='{{comdata.status==0  && comdata.order_type!=7}}'> 
+                              未付款
+                          </view>
+                          <view class='wholeconnumrr' style='color:#259B24;' wx:if='{{comdata.status==0 && comdata.order_type==7}}'>
+                              结束时间:{{comdata.overtime}}
+                          </view>
+                          <view class='wholeconnumrr' wx:if='{{comdata.status==1&&comdata.order_type!=2}}'>
+                              已付款
+                          </view>
+                          <view class='wholeconnumrr' wx:if='{{comdata.status==1&&comdata.order_type==2}}'>
+                              <block wx:if='{{comdata.isAuditPic==1}}'>
+                                 <block wx:if='{{comdata.auditPic==0}}'>报名未完成,等待上传截图</block>
+                                 <block wx:if='{{comdata.auditPic==1}}'>上传完成,等待审核</block>
+                                 <block wx:if='{{comdata.auditPic==2}}'><text style='color:#42bd56;'>审核成功,等待开奖</text></block>
+                                 <block wx:if='{{comdata.auditPic==3}}'>审核失败,重新上传</block>
+                              </block>
+                              <block wx:else>报名成功  等待开奖</block>
+                          </view>                           
+                          <view class='wholeconnumrr' wx:if='{{comdata.status==2&&comdata.order_type==1}}'>
+                              支付成功
+                              <!-- <block wx:if='{{comdata.order_type==2}}'><text style='color:#42bd56;'>恭喜您中奖,等待收货</text></block>
+                              <block wx:else>拆单成功</block> -->
+                          </view>
+                          <view class='wholeconnumrr' style='color:#259B24;' wx:if='{{comdata.status==2 && comdata.order_type==7}}'> 
+                               活动结束，等待发货
+                          </view>
+                          <view class='wholeconnumrr' wx:if='{{comdata.stockup==0&&comdata.status==3}}'>
+                              等待发货
+                          </view>
+                          <view class='wholeconnumrr' wx:if='{{comdata.status==4}}'>
+                              等待收货
+                          </view>
+                          <view class='wholeconnumrr' wx:if='{{comdata.status==5}}'>
+                              已完成
+                          </view>
+                          <view class='wholeconnumrr' wx:if='{{comdata.status==6}}'>
+                              售后
+                          </view>
+                          <view class='wholeconnumrr' wx:if='{{comdata.status==7}}'>
+                              已退款
+                          </view>
+                          <view class='wholeconnumrr' wx:if='{{comdata.status==8 && comdata.order_type!=7}}'>  
+                              取消未付款
+                          </view>
+                          <view class='wholeconnumrr' style='color:#7D7D7D;' wx:if='{{comdata.status==8 && comdata.order_type==7}}'>  
+                              活动结束，订单关闭
+                          </view>
+                          <view class='wholeconnumrr' wx:if='{{comdata.status==10}}'>  
+                              报名失败
+                          </view>
+                          <view class='wholeconnumrr' wx:if='{{comdata.status==11}}'>  
+                              免单失败
+                          </view> 
+                          <view class='wholeconnumrr' wx:if='{{comdata.status==12}}'>  
+                              正在备货
+                          </view>
+                          <view class='wholeconnumrr' wx:if='{{comdata.status==13}}'>  
+                              等待发货
+                          </view>
+                          <view class='wholeconnumrr' wx:if='{{comdata.status==14}}'>  
+                              下单成功
+                          </view>
+                          <view class='wholeconnumrr' wx:if='{{comdata.status==15}}'>  
+                              下单失败
+                          </view>
+                          <view class='wholeconnumrr' wx:if='{{comdata.status==16 && comdata.order_type!=7 && comdata.order_type!=10&& comdata.order_type!=16}}'>
+                              <block wx:if='{{comdata.order_type==9}}'>购买商品领奖</block>
+                              <block wx:elif='{{comdata.showOrder==0}}'>已中奖，等待晒单</block> 
+                              <block wx:elif='{{comdata.showOrder==1}}'>已上传，待审核</block>
+                              <block wx:elif='{{comdata.is_receive==2}}'>已领奖，等待发货</block> 
+                              <block wx:elif='{{comdata.showOrder==2}}'>晒单成功，等待领奖</block>
+                              <block wx:elif='{{comdata.showOrder==3}}'>晒单失败，重新上传</block>
+                              <block wx:elif='{{comdata.showOrder==4}}'>上传晒单截图</block> 
+                          </view>
+                          <view class='wholeconnumrr' wx:if='{{comdata.status==16 && comdata.order_type==10&& comdata.order_type!=16}}'> 
+                               <block wx:if='{{comdata.showOrder==1}}'>已上传，待审核</block>
+                               <block wx:elif='{{comdata.showOrder==2}}'>晒单成功，等待领奖</block>
+                               <block wx:elif='{{comdata.showOrder==3}}'>晒单失败，重新上传</block>
+                               <block wx:else='{{comdata.showOrder==3}}'>晒单后领奖</block>
+                          </view>
+                          <view class='wholeconnumrr' style='color:#FF9800;' wx:if='{{comdata.status==16 && comdata.order_type==7}}'> 
+                               活动结束，等待领取
+                          </view>
+                          <view class='wholeconnumrr' wx:if='{{comdata.status==17&& comdata.order_type!=7}}'>  
+                              奖品过期已取消
+                          </view> 
+                          <view class='wholeconnumrr' style='color:#7D7D7D;' wx:if='{{comdata.status==17 && comdata.order_type==7}}'>  
+                              活动结束，订单关闭
+                          </view>    
+                          <view class='wholeconnumrr' wx:if='{{comdata.stockup==1&&comdata.status==3}}'>
+                              备货中
+                          </view> 
+                                                                        
+                      </view>
+          
+      </view>
+ 
+      <!-- 为了不把原来逻辑弄乱 ，所以砍价单写 -->
+      <view wx:if='{{comdata.order_type==6}}' class='odchtead'>
+        <view style='float:left;font-size:24rpx;' >订单编号:{{comdata.order_sn}}</view>
+        <view  class='wholeconnumrrbox'>
+              <view class='wholeconnumrr' wx:if='{{comdata.status==18}}'>  
+                  砍价中
+              </view>
+              <view class='wholeconnumrr' wx:if='{{comdata.status==0}}'>  
+                  砍价成功
+              </view>
+              <view class='wholeconnumrr' wx:if='{{comdata.status==2}}'>  
+                  已领取
+              </view>
+              <view class='wholeconnumrr' wx:if='{{comdata.status==3}}'>  
+                  待发货
+              </view>
+              <view class='wholeconnumrr' wx:if='{{comdata.status==4}}'>  
+                  待收货
+              </view>
+              <view class='wholeconnumrr' wx:if='{{comdata.status==5}}'>  
+                  已完成
+              </view>
+              <view class='wholeconnumrr' wx:if='{{comdata.status==17}}'>  
+                  砍价失败
+              </view>
+              <view class='wholeconnumrr' wx:if='{{comdata.status==12}}'>  
+                  采购中
+              </view>
+        </view>
+      </view>
+
+      
+            <block wx:if='{{!comdata.isToyCabinet}}'>
+                         <!--  商品状态  -->
+             <view class='logisticsstate' wx:if='{{comdata.order_type!=6&&(comdata.store_id==0&&comdata.status!=0&&comdata.status!=10&&comdata.status!=11&&comdata.status!=17&&comdata.status!=16&&comdata.status!=1&&comdata.status!=8)}}'>
+                <!--  status 4,5,6 全亮  -->
+                <view class='iftrlogisticsstate' wx:if='{{comdata.status==4||comdata.status==5||comdata.status==6}}'>
+                      <view class='logticstache'>
+                          <view class='logticstachetxt' wx:if='{{comdata.order_type==2}}'>免单成功</view>
+                          <view class='logticstachetxt' wx:else>支付成功</view>
+                          <view class='logticstachetxtimg'>
+                              <image src='../../../../pages/images/statemyorder1.png' class='statemyorder composition'></image>
+                              <image src='../../../../pages/images/statemybottom1.png' class='statemybottom composition'></image>
+                          </view>                     
+                      </view>
+                      <view class='logticstache'>
+                          <view class='logticstachetxt'>正在备货</view>
+                          <view class='logticstachetxtimg'>
+                              <image src='../../../../pages/images/statemyorder1.png' class='statemyorder composition'></image>
+                              <image src='../../../../pages/images/statemybottom1.png' class='statemybottom composition'></image>
+                          </view>
+                      </view>
+                      <view class='logticstache'>
+                          <view class='logticstachetxt'>等待发货</view>
+                          <view class='logticstachetxtimg'>
+                              <image src='../../../../pages/images/statemyorder1.png' class='statemyorder composition'></image>
+                              <image src='../../../../pages/images/statemybottom1.png' class='statemybottom composition'></image>
+                          </view>                     
+                      </view>
+                      <view class='logticstache'>
+                          <view class='logticstachetxt'>商品发货</view>
+                          <view class='logticstachetxtimg'>
+                              <image src='../../../../pages/images/statemyorder1.png' class='statemyorder composition'></image>
+                              <image src='../../../../pages/images/statemybottom1.png' class='statemybottom composition'></image>
+                          </view>                     
+                      </view>                
+                </view>
+                <!--  status 1,7,8,15,16,17 全暗  -->
+                <view class='iftrlogisticsstate' wx:elif='{{comdata.store_id==0&&comdata.status==1||comdata.status==7||comdata.status==8||comdata.status==15||comdata.status==16||comdata.status==17}}'>
+                      <view class='logticstache'>
+                          <view class='logticstachetxt' wx:if='{{comdata.order_type==2}}'>免单成功</view>
+                          <view class='logticstachetxt' wx:else>支付成功</view>
+                          <view class='logticstachetxtimg'>
+                              <image src='../../../../pages/images/statemyorder0.png' class='statemyorder composition'></image>
+                              <image src='../../../../pages/images/statemybottom0.png' class='statemybottom composition'></image>
+                          </view>                     
+                      </view>
+                      <view class='logticstache'>
+                          <view class='logticstachetxt'>正在备货</view>
+                          <view class='logticstachetxtimg'>
+                              <image src='../../../../pages/images/statemyorder0.png' class='statemyorder composition'></image>
+                              <image src='../../../../pages/images/statemybottom0.png' class='statemybottom composition'></image>
+                          </view>
+                      </view>
+                      <view class='logticstache'>
+                          <view class='logticstachetxt'>等待发货</view>
+                          <view class='logticstachetxtimg'>
+                              <image src='../../../../pages/images/statemyorder0.png' class='statemyorder composition'></image>
+                              <image src='../../../../pages/images/statemybottom0.png' class='statemybottom composition'></image>
+                          </view>                     
+                      </view>
+                      <view class='logticstache'>
+                          <view class='logticstachetxt'>商品发货</view>
+                          <view class='logticstachetxtimg'>
+                              <image src='../../../../pages/images/statemyorder0.png' class='statemyorder composition'></image>
+                              <image src='../../../../pages/images/statemybottom0.png' class='statemybottom composition'></image>
+                          </view>                     
+                      </view>                
+                </view>
+                <!--  status 2,14 亮1一个  -->
+                <view class='iftrlogisticsstate' wx:elif='{{comdata.store_id==0&&comdata.status==2||comdata.status==14}}'>
+                      <view class='logticstache'>
+                          <view class='logticstachetxt' wx:if='{{comdata.order_type==2&&comdata.status==2}}'>免单成功</view>
+                          <view class='logticstachetxt' wx:elif='{{comdata.status==14}}'>下单成功</view>
+                          <view class='logticstachetxt' wx:else>支付成功</view>
+                          <view class='logticstachetxtimg'>
+                              <image src='../../../../pages/images/statemyorder1.png' class='statemyorder composition'></image>
+                              <image src='../../../../pages/images/statemybottom1.png' class='statemybottom composition'></image>
+                          </view>                     
+                      </view>
+                      <view class='logticstache'>
+                          <view class='logticstachetxt'>正在备货</view>
+                          <view class='logticstachetxtimg'>
+                              <image src='../../../../pages/images/statemyorder0.png' class='statemyorder composition'></image>
+                              <image src='../../../../pages/images/statemybottom0.png' class='statemybottom composition'></image>
+                          </view>
+                      </view>
+                      <view class='logticstache'>
+                          <view class='logticstachetxt'>等待发货</view>
+                          <view class='logticstachetxtimg'>
+                              <image src='../../../../pages/images/statemyorder0.png' class='statemyorder composition'></image>
+                              <image src='../../../../pages/images/statemybottom0.png' class='statemybottom composition'></image>
+                          </view>                     
+                      </view>
+                      <view class='logticstache'>
+                          <view class='logticstachetxt'>商品发货</view>
+                          <view class='logticstachetxtimg'>
+                              <image src='../../../../pages/images/statemyorder0.png' class='statemyorder composition'></image>
+                              <image src='../../../../pages/images/statemybottom0.png' class='statemybottom composition'></image>
+                          </view>                     
+                      </view>                
+                </view>
+                <!--  status 12 亮2一个  -->
+                <view class='iftrlogisticsstate' wx:elif='{{comdata.store_id==0&&comdata.status==12}}'>
+                      <view class='logticstache'>
+                          <view class='logticstachetxt' wx:if='{{comdata.order_type==2}}'>免单成功</view>
+                          <view class='logticstachetxt' wx:else>支付成功</view>
+                          <view class='logticstachetxtimg'>
+                              <image src='../../../../pages/images/statemyorder1.png' class='statemyorder composition'></image>
+                              <image src='../../../../pages/images/statemybottom1.png' class='statemybottom composition'></image>
+                          </view>                     
+                      </view>
+                      <view class='logticstache'>
+                          <view class='logticstachetxt'>正在备货</view>
+                          <view class='logticstachetxtimg'>
+                              <image src='../../../../pages/images/statemyorder1.png' class='statemyorder composition'></image>
+                              <image src='../../../../pages/images/statemybottom1.png' class='statemybottom composition'></image>
+                          </view>
+                      </view>
+                      <view class='logticstache'>
+                          <view class='logticstachetxt'>等待发货</view>
+                          <view class='logticstachetxtimg'>
+                              <image src='../../../../pages/images/statemyorder0.png' class='statemyorder composition'></image>
+                              <image src='../../../../pages/images/statemybottom0.png' class='statemybottom composition'></image>
+                          </view>                     
+                      </view>
+                      <view class='logticstache'>
+                          <view class='logticstachetxt'>商品发货</view>
+                          <view class='logticstachetxtimg'>
+                              <image src='../../../../pages/images/statemyorder0.png' class='statemyorder composition'></image>
+                              <image src='../../../../pages/images/statemybottom0.png' class='statemybottom composition'></image>
+                          </view>                     
+                      </view>                
+                </view>
+                <!--  status 3,13 亮3一个  -->
+                <view class='iftrlogisticsstate' wx:elif='{{comdata.store_id==0&&comdata.status==3||comdata.status==13}}'>
+                      <view class='logticstache'>
+                          <view class='logticstachetxt' wx:if='{{comdata.order_type==2}}'>免单成功</view>
+                          <view class='logticstachetxt' wx:else>支付成功</view>
+                          <view class='logticstachetxtimg'>
+                              <image src='../../../../pages/images/statemyorder1.png' class='statemyorder composition'></image>
+                              <image src='../../../../pages/images/statemybottom1.png' class='statemybottom composition'></image>
+                          </view>                     
+                      </view>
+                      <view class='logticstache'>
+                          <view class='logticstachetxt'>正在备货</view>
+                          <view class='logticstachetxtimg'>
+                              <image src='../../../../pages/images/statemyorder1.png' class='statemyorder composition'></image>
+                              <image src='../../../../pages/images/statemybottom1.png' class='statemybottom composition'></image>
+                          </view>
+                      </view>
+                      <view class='logticstache'>
+                          <view class='logticstachetxt'>等待发货</view>
+                          <view class='logticstachetxtimg'>
+                              <image src='../../../../pages/images/statemyorder1.png' class='statemyorder composition'></image>
+                              <image src='../../../../pages/images/statemybottom1.png' class='statemybottom composition'></image>
+                          </view>                     
+                      </view>
+                      <view class='logticstache'>
+                          <view class='logticstachetxt'>商品发货</view>
+                          <view class='logticstachetxtimg'>
+                              <image src='../../../../pages/images/statemyorder0.png' class='statemyorder composition'></image>
+                              <image src='../../../../pages/images/statemybottom0.png' class='statemybottom composition'></image>
+                          </view>                     
+                      </view>                
+                </view>
+ 
+                <!--  结束  -->
+             </view>      
+ 
+                <!-- 砍价 -->
+                <view class='logisticsstate' wx:if='{{comdata.order_type==6}}'>
+              <!--  status 18 砍价中 ,17商品过期 全暗   status 0待领取 2待领取 亮1一个  status 3待发货 亮3一个  status 4,5 全亮 -->
+                    <view class='iftrlogisticsstate' >
+                          <view class='logticstache'>
+                              <view class='logticstachetxt' >砍价成功</view>
+                              <view class='logticstachetxtimg' wx:if='{{comdata.status==0||comdata.status==2||comdata.status==3||comdata.status==4||comdata.status==5||comdata.status==12}}'>
+                                    <image src='../../../../pages/images/statemyorder1.png' class='statemyorder composition'></image>
+                                    <image src='../../../../pages/images/statemybottom1.png' class='statemybottom composition'></image>
+                                </view>  
+                              <view class='logticstachetxtimg' wx:else>
+                                  <image src='../../../../pages/images/statemyorder0.png' class='statemyorder composition'></image>
+                                  <image src='../../../../pages/images/statemybottom0.png' class='statemybottom composition'></image>
+                              </view>             
+                          </view>
+                          
+                          <view class='logticstache'>
+                              <view class='logticstachetxt'>正在备货</view>
+                              <view class='logticstachetxtimg' wx:if='{{comdata.status==3||comdata.status==4||comdata.status==5||comdata.status==12}}'>
+                                    <image src='../../../../pages/images/statemyorder1.png' class='statemyorder composition'></image>
+                                    <image src='../../../../pages/images/statemybottom1.png' class='statemybottom composition'></image>
+                                </view>
+                              <view class='logticstachetxtimg' wx:else>
+                                  <image src='../../../../pages/images/statemyorder0.png' class='statemyorder composition'></image>
+                                  <image src='../../../../pages/images/statemybottom0.png' class='statemybottom composition'></image>
+                              </view>
+                          </view>
+ 
+                          <view class='logticstache'>
+                              <view class='logticstachetxt'>等待发货</view>
+                              <view class='logticstachetxtimg' wx:if='{{comdata.status==3||comdata.status==4||comdata.status==5}}'>
+                                    <image src='../../../../pages/images/statemyorder1.png' class='statemyorder composition'></image>
+                                    <image src='../../../../pages/images/statemybottom1.png' class='statemybottom composition'></image>
+                                </view> 
+                              <view class='logticstachetxtimg' wx:else>
+                                  <image src='../../../../pages/images/statemyorder0.png' class='statemyorder composition'></image>
+                                  <image src='../../../../pages/images/statemybottom0.png' class='statemybottom composition'></image>
+                              </view>                     
+                          </view>
+                          <view class='logticstache'>
+                              <view class='logticstachetxt'>商品发货</view>
+                              <view class='logticstachetxtimg' wx:if='{{comdata.status==4||comdata.status==5}}'>
+                                    <image src='../../../../pages/images/statemyorder1.png' class='statemyorder composition'></image>
+                                    <image src='../../../../pages/images/statemybottom1.png' class='statemybottom composition'></image>
+                                </view>     
+                              <view class='logticstachetxtimg' wx:else>
+                                  <image src='../../../../pages/images/statemyorder0.png' class='statemyorder composition'></image>
+                                  <image src='../../../../pages/images/statemybottom0.png' class='statemybottom composition'></image>
+                              </view>                     
+                          </view>                
+                    </view>
+                </view>
+            </block>
+
+ 
+     <view class='orderdetcon'>         
+          <view class='odchteadcom' data-gid='{{comdata.gid}}' data-order_type='{{comdata.order_type}}' data-activity_id='{{comdata.activity_id}}' bindtap='addressmanagement'>
+               <view class='odchcomleft'>
+                   <view class='odchlefimg'>
+                       <image src='{{comdata.gcover}}' bindload="imageLoadad" style='height: 100%;width:{{comdata.width||140}}rpx;margin:0 auto;display:{{comdata.width?"block":"none"}};' mode='aspectFill'></image>
+                       <view class='wholeconlefttxtbott' wx:if='{{comdata.order_type==2}}'>拆免单</view>
+                       <view class='wholeconlefttxtbott' wx:if='{{comdata.order_type==9}}'>签到</view>
+                       <view class='wholeconlefttxtbott' style='background:#3F51B5;' wx:if='{{comdata.order_type==7}}'>0元购</view>
+                   </view>
+               </view>
+               <view class='odchcomright' style='position:relative;' wx:if='{{comdata.order_type!=7}}'>
+                      <view class='odchrhead multilineellipsis'>
+                      <view wx:if='{{comdata.is_suit==1}}' style='display: inline-block;color:#ff2742;margin-right:12rpx;'>{{comdata.pre_name}}</view>
+                      <view wx:if='{{comdata.is_suit==1}}' style='display: inline-block;'>{{comdata.ds}}</view>                      
+                      {{comdata.gname}}
+                      </view>
+                      <view class='wholeconnum specialellipsis' wx:if='{{comdata.prize}}' style='padding-top:10rpx;'>奖品:{{comdata.prize}}</view> 
+                      <view class='wholeconnum specialellipsis'>
+                           <view class='wholeconnumdisilin'>数量:x{{comdata.gnumber}}<text wx:if='{{comdata.roleName}}' style='color:#ff2840;margin-left:15rpx;'>款式:{{comdata.roleName}}</text></view>
+                           <view class='wholeconnumdisilin' wx:if='{{comdata.size}}'>尺寸:{{comdata.size}}</view>
+                           <view class='wholeconnumdisilin' wx:if='{{comdata.color}}'>颜色:{{comdata.color}}</view>
+                           <view class='wholeconnumdisilin' wx:if='{{comdata.order_type==12 &&comdata.roleName!=null}}' style='color:#ff2840;'>明盒：{{comdata.roleName}}</view>
+                           <view class='wholeconnumdisilin' wx:if='{{comdata.order_type==14 &&comdata.roleName!=null}}' style='color:#ff2840;'>在线抽盒：{{comdata.roleName}}</view>
+                      </view>
+                      <view class='wholeconnum specialellipsis' wx:if='{{comdata.customer_note&&(comdata.status==1||comdata.status==2||comdata.status==12||comdata.status==13||comdata.status==3||comdata.status==4)}}'>备注:{{comdata.customer_note}}</view>                                  <view class='officialreply' wx:if='{{comdata.customer_reply&&(comdata.status==1||comdata.status==2||comdata.status==12||comdata.status==13||comdata.status==4||comdata.status==16)}}'>回复:{{comdata.customer_reply}}</view>
+                      <view class='taxrpice'>
+                          <view class='taxpricleft' wx:if='{{!comdata.roleName}}'>
+                          <block wx:if='{{comdata.order_type==1&&comdata.goods_price==0}}'>组合赠品</block>
+                          <block wx:elif='{{comdata.order_type==3}}'>拆币兑换</block>
+                          <block wx:elif='{{comdata.order_type==4}}'>邀请奖励</block>
+                          <block wx:elif='{{comdata.order_type==2||comdata.order_type==9}}'>免费</block>
+                          <block wx:else>￥{{comdata.goods_price}}</block>
+                          <view wx:if='{{comdata.is_suit==1}}' style='display: inline-block;color:#ff2742;margin-right:12rpx;'>{{comdata.gsale_suit}}</view></view><view wx:if='{{comdata.tax!=0.00}}' style='margin-left:10rpx;color:#999;' class='taxpricleft'>税费:￥{{comdata.tax}}<view wx:if='{{comdata.is_suit==1}}' style='display: inline-block;margin-right:12rpx;'>{{comdata.gsale_suit}}</view></view>
+                      </view>
+ 
+                  
+               </view>
+ 
+               <view class='odchcomright' style='position:relative;' wx:if='{{comdata.order_type==7}}'>
+                      <view class='odchrhead multilineellipsis'>
+                      <view wx:if='{{comdata.is_suit==1}}' style='display: inline-block;color:#ff2742;margin-right:12rpx;'>{{comdata.pre_name}}</view>
+                      <view wx:if='{{comdata.is_suit==1}}' style='display: inline-block;'>{{comdata.ds}}</view>                      
+                      {{comdata.gname}}
+                      </view>
+                      <view wx:if='{{comdata.schedule.finished}}' class='wholeconnum specialellipsis' data-cart_id='{{comdata.cart_id}}' >
+                           <view class='wholeconnumdisilin' style='color:#FF9800;'>额外送 {{comdata.schedule.finished}} {{comdata.schedule.unit}}(已达成)</view>
+                      </view>
+                      <view wx:if='{{comdata.schedule.progress}}' class='wholeconnum specialellipsis' data-cart_id='{{comdata.cart_id}}' >
+                           <view class='wholeconnumdisilin' style='color:#7D7D7D;'>额外送 {{comdata.schedule.progress}} {{comdata.schedule.unit}}(当前助力 {{comdata.schedule.less}} 未达成)</view>
+                      </view>
+                      <view wx:if='{{!comdata.schedule.finished&&!comdata.schedule.progress}}' class='wholeconnum specialellipsis' data-cart_id='{{comdata.cart_id}}' >
+                      <view class='wholeconnumdisilin' style='color:#7D7D7D;'>未达到档位</view>
+                      </view>
+               </view>
+          </view>
+          <view class='totalmon'>
+ 
+             <!-- 额外奖励 --> 
+             <view  style='min-height:30rpx;width:100%;position:relative;' wx:if='{{comdata.is_receive||comdata.is_receive!=2}}'>
+                <view class='awardrrboxtxt' wx:if='{{comdata.status==16&&(comdata.isShowOrder==0||comdata.showOrder==2||comdata.showOrder==1)}}'>奖品过期时间:{{comdata.receive_time}}</view>
+                <!-- <view class='awardrrbutposi' catchtap='clicktocollect' wx:if='{{comdata.is_receive==1&&(comdata.isShowOrder==0||comdata.showOrder==2||comdata.showOrder==1)}}' data-cart_id='{{comdata.cart_id}}'>中奖了! 点击领奖</view> -->    
+                <view style='height:70rpx;width:100%;position:relative;' wx:elif='{{comdata.is_receive==2&&(comdata.isShowOrder==0||comdata.showOrder==2)&&comdata.status!=5&&comdata.status!=4}}'>
+                    <view class='awardrrbutposi'>已领取,等待发货</view>
+                </view>
+                <view style='height:70rpx;width:100%;position:relative;' wx:elif='{{comdata.is_receive==3&&(comdata.isShowOrder==0||comdata.showOrder==2)}}'>
+                    <view class='awardrrbutposi' style='background:#999;'>奖品已过期</view>
+                </view>
+                <view class='awardrrboxtxt' style='color:#42bd56;' wx:elif='{{comdata.isToyCabinet}}'>请到玩具柜选择发货</view>
+ 
+ 
+             </view>
+ 
+ 
+              <view class='daifukuan' wx:if='{{comdata.order_type==1}}'>
+                  <!-- <view class='taxdisplay' wx:if='{{comdata.tax!=0.00}}'> + 税费￥{{comdata.tax}}</view>  -->
+                  商品总额:￥{{comdata.goods_amount}}-代金券￥{{comdata.bonus}}+运费￥{{comdata.carriage}}
+             </view>           
+               <view class='totalmonnum' wx:if='{{comdata.order_type==1}}'>
+                    合计:￥{{comdata.amount}}(含运费{{comdata.carriage}}元)
+               </view>
+ 
+               <view class='daifukuan' style='text-align:left;' wx:if='{{comdata.order_type==6&&(comdata.status==18||comdata.status==0)}}'>
+                  结束时间 : {{comdata.gift_time}}
+              </view> 
+ 
+              <view  wx:if='{{comdata.order_type!=6}}'>
+ 
+                <!--  等待付款  -->
+                <view class='totalmoncon' wx:if='{{comdata.status==0 && comdata.order_type!=7}}'>
+                    <!-- <view class='totalmoncleft'>拆单倒计时:{{countdown}}</view>  -->
+                   <view class='totalmoncright' bindtap='payment' style='position:relative;'>我要付款</view>
+                   <view class='totalmoncrightcel' bindtap='cancellationoforder' data-oid='{{comdata.cart_id}}' style='position:relative;'>取消订单</view>
+ 
+ 
+ 
+               </view> 
+              
+                <!-- 0元购 status为1 进行中 -->
+                <view class='totalmoncon' wx:if='{{comdata.status==0 && comdata.order_type==7}}'>
+                    <!-- <view class='totalmoncleft'>拆单倒计时:{{countdown}}</view>  -->
+                   <view class='totalmoncrightcel' bindtap='gofreedetail' data-cart_id='{{comdata.cart_id}}' style='position:relative;background:#3F51B5;color:#fff;border:0rpx;'>0元购助力</view>
+ 
+                   <view class='totalmoncright' wx:if='{{comdata.isGoods}}' bindtap='goodsetail' data-gid='{{comdata.gid}}' style='position:relative;margin-right:10rpx;'>直接购买</view>
+               </view> 
+              
+               
+               <!--  已付款  catchtap='upImgSer'-->
+               <view class='totalmoncon' wx:if='{{comdata.status==1||comdata.status==16&&comdata.order_type!=7}}'>
+                     
+                   <view class='totalmoncrightcel' wx:if='{{comdata.canRefund}}' bindtap='applicationforrefund' data-oid='{{comdata.cart_id}}' style='position:relative;'>申请退款</view>  
+                   
+                   <view wx:if='{{comdata.status==1&&comdata.isAuditPic==1&&comdata.auditPic!=2}}' style='color:#fff;font-size:26rpx;width:140rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;' data-cart_id='{{comdata.cart_id}}' catchtap='generatePicturesact'>上传截图</view>
+ 
+ 
+                  <view catchtap='clicktocollect' wx:if='{{comdata.is_receive==1&&(comdata.isShowOrder==0||comdata.showOrder==2||comdata.showOrder==1)&&comdata.order_type!=9&&comdata.order_type!=10&&comdata.order_type!=11}}' data-sorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}'  style='position:relative;height:54rpx;width:240rpx;line-height:54rpx;margin-left:20rpx;float:right;'>
+                     <view class='awardrrbutposi' style='right:0;height:54rpx;width:240rpx;line-height:54rpx;'>中奖了! 点击领奖</view>
+                  
+                  </view>
+
+                  <!-- <view catchtap='clicktocollect' wx:if='{{(comdata.showOrder==2||comdata.showOrder==1)&&comdata.order_type==10}}' data-cart_id='{{comdata.cart_id}}'  style='position:relative;height:54rpx;width:240rpx;line-height:54rpx;margin-left:20rpx;float:right;'>
+                     <view class='awardrrbutposi' style='right:0;height:54rpx;width:240rpx;line-height:54rpx;'>中奖了! 点击领奖</view>
+                  
+                  </view> -->
+ 
+ 
+                   <view wx:if='{{comdata.status==16&&comdata.isShowOrder==1&&comdata.showOrder!=1&&comdata.showOrder!=2}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
+                      <view style='width:100%;height:100%;position: relative;' wx:if='{{comdata.showOrder==0}}' data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}' data-cover='{{comdata.cover}}' data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
+                      <view style='width:100%;height:100%;' wx:if='{{comdata.showOrder==1}}' data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}' data-cover='{{comdata.cover}}' data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>等待审核</view>
+                      <view style='width:100%;height:100%;' wx:if='{{comdata.showOrder==3||comdata.showOrder==4}}'  data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}' data-cover='{{comdata.cover}}' data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>上传晒单截图</view>
+ 
+                   </view>
+ 
+ 
+                   <view wx:if='{{comdata.status==16&&(comdata.order_type==9||comdata.order_type==11)}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
+                      <view style='width:100%;height:100%;' catchtap='clicktocollect' data-cart_id='{{comdata.cart_id}}'>领取奖励</view>
+
+                   </view>
+                   
+                   <view wx:if='{{comdata.status==16&&comdata.order_type==10&&(comdata.showOrder==0||comdata.showOrder==3||comdata.showOrder==4)}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
+                      <view style='width:100%;height:100%;position: relative;'  data-qrcode='{{comdata.qrcode}}' data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具' data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png' data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
+
+                   </view>
+ 
+ 
+                   <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0}}'>
+                      <button  open-type="share" class='butshare'></button>
+                      分享好友
+                   </view>
+                  <view class='totalmoncright sharebox' wx:if='{{comdata.isToyCabinet}}' style='background:#42bd56;color:#fff;margin-right:10rpx;border:1rpx solid #fff;' catchtap='jumpowntoy'>
+                      我的玩具柜
+                   </view>
+ 
+ 
+               </view>  
+ 
+               <!-- 0元购 status为16 进行中 -->
+                <view class='totalmoncon' wx:if='{{comdata.status==16 && comdata.order_type==7}}'>
+                    <!-- <view class='totalmoncleft'>拆单倒计时:{{countdown}}</view>  -->
+ 
+                   <view class='totalmoncrightcel' catchtap='clicktocollect' data-cart_id='{{comdata.cart_id}}' style='position:relative;background:#FF9800;color:#fff;border:0rpx;'>领取奖励</view>
+                   <view wx:if='{{comdata.isGoods}}' class='totalmoncright' bindtap='goodsetail' data-gid='{{comdata.gid}}' style='position:relative;margin-right:10rpx;'>直接购买</view>
+               </view> 
+ 
+              <!--   等待拆单  -->
+               <view class='totalmoncon' wx:if='{{comdata.status==2 && comdata.order_type!=7}}'>
+
+
+
+                  <view class='totalmoncrightcel' wx:if='{{comdata.canRefund}}' bindtap='applicationforrefund' data-oid='{{comdata.cart_id}}' style='position:relative;'>申请退款</view>
+
+
+
+
+                   <view wx:if='{{comdata.status==2&&comdata.isShowOrder==1&&comdata.showOrder!=1&&comdata.showOrder!=2}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
+                      <view style='width:100%;height:100%;position: relative;' wx:if='{{comdata.showOrder==0}}' data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}' data-cover='{{comdata.cover}}' data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
+                      <view style='width:100%;height:100%;' wx:if='{{comdata.showOrder==1}}' data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}' data-cover='{{comdata.cover}}' data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>等待审核</view>
+                      <view style='width:100%;height:100%;' wx:if='{{comdata.showOrder==3||comdata.showOrder==4}}'  data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}' data-cover='{{comdata.cover}}' data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>上传晒单截图</view>
+ 
+                   </view>
+
+                   <view wx:if='{{comdata.status==2&&comdata.order_type==10&&(comdata.showOrder==0||comdata.showOrder==3||comdata.showOrder==4)}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
+                      <view style='width:100%;height:100%;position: relative;'  data-qrcode='{{comdata.qrcode}}' data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具' data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png' data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
+                   </view>
+ 
+                   <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0}}'>
+                      <button  open-type="share" class='butshare'></button>
+                      分享好友
+                   </view>  
+
+                  <view class='totalmoncright sharebox' wx:if='{{comdata.isToyCabinet}}' style='background:#42bd56;color:#fff;margin-right:10rpx;border:1rpx solid #fff;' catchtap='jumpowntoy'>
+                      我的玩具柜
+                   </view>
+ 
+ 
+ 
+               </view>
+ 
+               <!-- 0元购 status为2 进行中 -->
+                <view class='totalmoncon' wx:if='{{comdata.status==2 && comdata.order_type==7}}'>
+                    <!-- <view class='totalmoncleft'>拆单倒计时:{{countdown}}</view>  -->
+                   <view class='totalmoncrightcel' bindtap='gofreedetail' data-cart_id='{{comdata.cart_id}}' style='position:relative;background:#3F51B5;color:#fff;border:0rpx;'>0元购助力</view>
+               </view> 
+ 
+              <!--   等待发货  -->
+               <view class='totalmoncon' wx:if='{{comdata.status==3}}'>
+                   <view wx:if='{{comdata.stockup==1&&comdata.status==3}}' style='height:88rpx;line-height:60rpx;font-size:28rpx;color:#666;float:left;'>备货中，预计3-5个工作日送达</view>
+
+                    <view wx:if='{{comdata.status==3&&comdata.order_type==10&&(comdata.showOrder==0||comdata.showOrder==3||comdata.showOrder==4)}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
+                      <view style='width:100%;height:100%;position: relative;'  data-qrcode='{{comdata.qrcode}}' data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具' data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png' data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
+                   </view>
+
+                   <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0}}'>
+                      <button  open-type="share" class='butshare'></button>
+                      分享好友
+                   </view> 
+ 
+ 
+ 
+               </view>
+              <!--   采购商品  -->
+               <view class='totalmoncon' wx:if='{{comdata.status==12}}'>
+                   <view class='totalmoncrightcel' wx:if='{{comdata.canRefund}}' bindtap='applicationforrefund' data-oid='{{comdata.cart_id}}' style='position:relative;'>申请退款</view>
+
+                   <view wx:if='{{comdata.status==12&&comdata.isShowOrder==1&&comdata.showOrder!=1&&comdata.showOrder!=2}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
+                      <view style='width:100%;height:100%;position: relative;' wx:if='{{comdata.showOrder==0}}' data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}' data-cover='{{comdata.cover}}' data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
+                      <view style='width:100%;height:100%;' wx:if='{{comdata.showOrder==1}}' data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}' data-cover='{{comdata.cover}}' data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>等待审核</view>
+                      <view style='width:100%;height:100%;' wx:if='{{comdata.showOrder==3||comdata.showOrder==4}}'  data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}' data-cover='{{comdata.cover}}' data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>上传晒单截图</view>
+ 
+                   </view>
+
+                   <view wx:if='{{comdata.status==12&&comdata.order_type==10&&(comdata.showOrder==0||comdata.showOrder==3||comdata.showOrder==4)}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
+                      <view style='width:100%;height:100%;position: relative;'  data-qrcode='{{comdata.qrcode}}' data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具' data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png' data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
+                   </view>
+ 
+                   <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0}}'>
+                      <button  open-type="share" class='butshare'></button>
+                      分享好友
+                   </view>  
+
+                  <view class='totalmoncright sharebox' wx:if='{{comdata.isToyCabinet}}' style='background:#42bd56;color:#fff;margin-right:10rpx;border:1rpx solid #fff;' catchtap='jumpowntoy'>
+                      我的玩具柜
+                   </view>                   
+ 
+ 
+               </view>
+              <!--   商品入库  -->
+               <view class='totalmoncon' wx:if='{{comdata.status==13}}'>
+                   <view wx:if='{{comdata.status==13&&comdata.isShowOrder==1&&comdata.showOrder!=1&&comdata.showOrder!=2}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
+                      <view style='width:100%;height:100%;position: relative;' wx:if='{{comdata.showOrder==0}}' data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}' data-cover='{{comdata.cover}}' data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
+                      <view style='width:100%;height:100%;' wx:if='{{comdata.showOrder==1}}' data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}' data-cover='{{comdata.cover}}' data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>等待审核</view>
+                      <view style='width:100%;height:100%;' wx:if='{{comdata.showOrder==3||comdata.showOrder==4}}'  data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}' data-cover='{{comdata.cover}}' data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>上传晒单截图</view>
+ 
+                   </view>
+                   <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0}}'>
+                      <button  open-type="share" class='butshare'></button>
+                      分享好友
+                   </view>
+ 
+ 
+ 
+ 
+ 
+               </view>
+ 
+              <!--   等待收货  -->
+               <view class='totalmoncon' wx:if='{{comdata.status==4}}'>
+           <view wx:if='{{comdata.status==4&&comdata.isShowOrder==1&&comdata.showOrder!=1&&comdata.showOrder!=2}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:8rpx;position:relative;border:0;'>
+                      <view style='width:100%;height:100%;position: relative;' wx:if='{{comdata.showOrder==0}}' data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}' data-cover='{{comdata.cover}}' data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
+                      <view style='width:100%;height:100%;' wx:if='{{comdata.showOrder==1}}' data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}' data-cover='{{comdata.cover}}' data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>等待审核</view>
+                      <view style='width:100%;height:100%;' wx:if='{{comdata.showOrder==3||comdata.showOrder==4}}'  data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}' data-cover='{{comdata.cover}}' data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>上传晒单截图</view>
+ 
+                   </view>
+
+                   <view wx:if='{{comdata.status==4&&comdata.order_type==10&&(comdata.showOrder==0||comdata.showOrder==3||comdata.showOrder==4)}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
+                      <view style='width:100%;height:100%;position: relative;'  data-qrcode='{{comdata.qrcode}}' data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具' data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png' data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
+                   </view>
+
+                    <view class='totalmoncrightcel' data-oid='{{comdata.oid}}' bindtap='confirmationofreceipt'>确认收货</view>
+                   <view class='totalmoncrightcel'  data-oid='{{comdata.oid}}' data-gcover='{{comdata.gcover}}' bindtap='lookatthelogistics' style='margin-right:10rpx;position: relative;'>查看物流</view>             
+                      
+                   <view class='totalmoncright sharebox' style='margin-right:10rpx;'  wx:if='{{comdata.is_invite==0}}'>
+                      <button  open-type="share" class='butshare'></button>
+                      分享好友
+                   </view>
+ 
+<view class='totalmoncright' wx:if='{{comdata.order_type==1}}' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;margin-right:10rpx;' bindtap='personalhomepage'>
+                  发帖推荐
+                  </view>
+ 
+ 
+               </view>
+ 
+              <!--   已完成  -->
+               <view class='totalmoncon' wx:if='{{comdata.status==5}}'>
+
+               <view wx:if='{{comdata.status==5&&comdata.order_type==10&&(comdata.showOrder==0||comdata.showOrder==3||comdata.showOrder==4)}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
+                      <view style='width:100%;height:100%;position: relative;'  data-qrcode='{{comdata.qrcode}}' data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具' data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png' data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
+                   </view>
+
+                   <view class='totalmoncright sharebox'  wx:if='{{comdata.is_invite==0}}'>
+                      <button  open-type="share" class='butshare'></button>
+                      分享好友
+                   </view>
+                 
+
+                   <view class='totalmoncrightcel'  data-oid='{{comdata.oid}}' style='margin-right:10rpx;position: relative;' data-gcover='{{comdata.gcover}}' bindtap='lookatthelogistics'>查看物流</view>       
+ 
+<view class='totalmoncright' wx:if='{{comdata.order_type==1}}' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;margin-right:10rpx;' bindtap='personalhomepage'>发帖推荐</view>
+ 
+ 
+ 
+               </view>
+              <!--   已取消订单  -->
+               <view  style='min-height:1rpx;width:94%;padding: 0 3% 10rpx;overflow:hidden;' wx:if='{{comdata.status==8&&comdata.order_type!=7}}'>
+                   <view class='totalmoncright sharebox'  wx:if='{{comdata.is_invite==0}}'>
+                      <button  open-type="share" class='butshare'></button>
+                      分享好友
+                   </view>
+                  
+               </view>
+ 
+               <!-- 0元购 status为2 进行中 -->
+                <view class='totalmoncon' wx:if='{{comdata.status==8 && comdata.order_type==7}}'>
+                    <!-- <view class='totalmoncleft'>拆单倒计时:{{countdown}}</view>  -->
+                   <view class='totalmoncrightcel' bindtap='gofreedetail' data-cart_id='{{comdata.cart_id}}' style='position:relative;background:#3F51B5;color:#fff;border:0rpx;'>0元购助力</view>
+               </view> 
+ 
+              <!--   售后  -->
+               <!-- <view class='totalmoncon' wx:if='{{comdata.status==6}}'>
+                                    
+               </view> -->
+              <!--   拆单失败  -->
+               <view class='totalmoncon' wx:if='{{(comdata.status==10||comdata.status==11) && comdata.order_type==2}}'>
+                   <view class='totaltittrfai'>付款将会原路返回到您的支付账号中</view>  
+                   <view class='totalmoncright sharebox' style='margin-right:10rpx;'  wx:if='{{comdata.is_invite==0}}'>
+                      <button  open-type="share" class='butshare'></button>
+                      分享好友
+                   </view>  
+                
+               </view>    
+                <view class='totalmoncon' wx:if='{{comdata.status==7}}'>
+                   <view class='totaltittrfai'>付款将会原路返回到您的支付账号中</view>
+                   <view class='totalmoncright sharebox' style='margin-right:10rpx;' wx:if='{{comdata.is_invite==0}}'>
+                      <button  open-type="share" class='butshare'></button>
+                      分享好友
+                   </view>
+                   
+               </view>   
+              </view>            
+ 
+              <view wx:if='{{comdata.order_type==6}}' style='font-size:26rpx;overflow:hidden;'>
+ 
+            <view class='totalmoncon' wx:if='{{comdata.status == 18}}'>
+                
+            
+               <view wx:if='{{comdata.purchase_price==comdata.amount}}' style='color:#fff;font-size:26rpx;width:140rpx;height:54rpx;line-height:54rpx;text-align:center;background:#67BCEB;float:right;border-radius:10rpx;margin-left:10rpx;' data-ordersn='{{comdata.gifts_order}}' catchtap='gobargainDetail'>
+                继续邀请
+              </view>
+              <view wx:else style='color:#fff;font-size:26rpx;width:140rpx;height:54rpx;line-height:54rpx;text-align:center;background:#F9363C;float:right;border-radius:10rpx;margin-left:10rpx;' data-ordersn='{{comdata.gifts_order}}' catchtap='gobargainDetail'>
+                邀请砍价
+              </view>
+ 
+              <view wx:if='{{comdata.purchase_price==comdata.amount}}' style='color:#fff;font-size:26rpx;width:160rpx;height:54rpx;line-height:54rpx;text-align:center;background:#FF9900;float:right;border-radius:10rpx;margin-left:10rpx;' data-ordersn='{{item.gifts_order}}' catchtap='gobargainDetail'>
+                ￥{{comdata.purchase_price}}购买
+              </view>
+ 
+            </view>
+ 
+            
+            <view class='totalmoncon' wx:if='{{comdata.status == 0}}'>
+                
+              <view style='color:#fff;font-size:26rpx;width:160rpx;height:54rpx;line-height:54rpx;text-align:center;background:#F9363C;float:right;border-radius:10rpx;margin-left:10rpx;' data-ordersn='{{comdata.gifts_order}}' catchtap='gobargainDetail'>
+                ￥{{comdata.amount}}领取
+              </view>
+ 
+            </view>
+ 
+            <view class='totalmoncon' wx:if='{{comdata.status == 4 || comdata.status == 5}}'>
+                
+              <view class='totalmoncrightcel'  data-oid='{{comdata.oid}}' data-gcover='{{comdata.gcover}}' bindtap='lookatthelogistics' style='margin-right:10rpx;position: relative;'>查看物流</view>  
+ 
+            </view>
+              
+          </view>
+ 
+ 
+          </view>
+     </view>
+     <view class='orderbott'>
+         <view class='orderbottcon'>订单编号:{{comdata.order_sn}}</view>
+         <view class='orderbottcon' wx:if='{{comdata.status!=0&&comdata.status!=16&&comdata.status!=1&&comdata.status!=8&&comdata.status!=11}}'>支付方式:{{comdata.payment}}支付</view>
+         <!-- &&comdata.status!=16&&comdata.status!=1&&comdata.status!=8&&comdata.status!=11 -->
+         <view class='orderbottcon' wx:if='{{comdata.order_type!=2}}'>下单时间:{{comdata.ordertime}}</view>
+     </view>
+     <!--  官网微信号复制  -->
+    <view class='wxcusser'>
+        <view class='wxcusseribox'>
+            <image src='../../../../pages/images/icon_webchat.png' class='wxcusserimg'></image>
+        </view>
+        <view class='wxcussertbox' catchtap='copyTBL' style='position:relative;'>
+            <view class='wxcussertxt specialellipsis' style='margin-top:10rpx;'>美拆官方微信<view class='wxcussertxtwx'>{{wxnum}}</view>(点击复制)</view>
+            <view class='wxcussertxt specialellipsis'>添加微信好友获取专属福利，更多群福利等你来拿</view>
+        </view>
+    </view>     
+</view>
+ 
+ 
+<!--  背景颜色  -->
+<view class='tipback' wx:if='{{tipback}}' catchtouchmove="preventD"></view>
+<!--  支付订单  -->
+<view class='paymentorderbombbox' wx:if='{{paymentiftr}}'>
+    <view class='paymentboxhead'>
+        支付订单
+        <image src='../../../../pages/images/forknumber.png' class='paymentboxheadimg' bindtap='paymentboxheadfun'></image>
+    </view>
+    <view class='paymenttxt' style='color:#333;padding-top:30rpx;'>请在1小时之内完成支付:￥{{comdata.amount}}元</view>
+    <view class='paymenttxt' style='color:#22ce2a;'>付款成功后才可以拆单成功</view>
+    <view class='paymenwexinzf'>
+       <image src='../../../../pages/images/icon_webchat.png' class='paymenwexinzfimg'></image>
+       <view class='paymenwexinzftxt'>微信支付</view>
+       <image src='../../../../pages/images/icon_check.png' class='paymenwexiftrimg'></image>
+    </view>
+    <view class='payment' bindtap='paymentmony'>确认支付</view>
+</view>
+
+ 
+ 
+<!--  提交订单弹框防止多次提交  -->
+<view wx:if='{{suboformola}}' style='width:100%;height:100%;background:#000;opacity: 0.4;z-index: 1999;position: fixed;top: 0;left: 0;'></view>
+ 
+ 
+ 
+<!--   领奖提示  -->
+<view class='wsh' wx:if='{{awardrresentiftr}}'>
+    <view class='tgimgboxgb' style='background:#ccc;'  catchtap='awardrresentiftr'></view>
+    <view class='awardrresentation'>
+        <view class='adreshead'>领奖提示</view>
+        <view class='adrestxt'>
+           <text>{{rpinfotip}}</text>
+        </view>
+        <scroll-view class='adresscr' scroll-x="true" scroll-with-animation="true">
+            <view class='adresscrbox' wx:for='{{awardrresentation.Goods}}' wx:key='key' data-gid='{{item.goods_id}}' catchtap='addressmanagement'>
+                <image src='{{item.goods_thumb}}' class='adresbimg'></image>
+                <view class='disanum_sb_txtone multilineellipsis' style='color:#666;'>
+                    {{item.pre_name}}{{item.ds}}{{item.goods_name}}
+                </view>
+                <view class='specialellipsis' style='width:100%;height:40rpx;line-height:40rpx;color:#f93f45;font-size:22rpx;text-align:center;vertical-align:top;position:relative;top:5rpx;'>
+                    ￥{{item.goods_price}}
+                </view>
+            </view>
+        </scroll-view>
+        <view class='chaishopbutbox'>
+           <!-- <view class='chaishopbutleft' catchtap='payfreight'>支付运费领奖</view> -->
+           <view class='chaishopbut' data-href='{{awardrresentationjump.href}}' data-item_type='{{awardrresentationjump.item_type}}' catchtap='comindellistjump'  style='position:absolute;left:0;right:0;bottom:0;top:0;margin:auto;'>挑选商品领奖</view>
+        </view>
+        <view class='chaidanboxbor'></view>
+        <view class='chaidanboxborbot'>购买商品领奖后可以报名付费专享活动哦~</view>
+        <scroll-view class='adresbotsrc' scroll-x="true" scroll-with-animation="true">
+            <view class='adresbotsrcbox' wx:for='{{awardrresentation.activity}}' wx:key='key' data-gid='{{item.id}}' catchtap='actexempfun'>
+                <image src='{{item.goods_thumb}}' class='adresbimgbot'></image>
+                <view class='adresbottxt'>
+                    <image src='http://www.51chaidan.com/images/default/person1.png' class='adresbimguser'></image>
+                    {{item.users}}
+                </view>
+            </view>
+        </scroll-view>
+        <view class='adresboxbottonbut' catchtap='acetlistfun'>更多付费专享活动</view>
+    </view>
+ 
+</view>
+ 
+<!--  首页按钮  -->
+<!-- <view class='frontpagebuttonact' catchtap='frontpagebutton' style='bottom:685rpx;' style='bottom:465rpx;'>
+    <view style='height:40rpx;text-align:center;line-height:50rpx;width:100%;padding-top:4rpx;'>返回</view>
+    <view style='height:40rpx;text-align:center;width:100%;'>首页</view>
+</view> -->
+ 
+
+<!-- closeupserimg -->
+<view class='tgimgbox' wx:if='{{upserimgbox}}'>
+   <view class='tgimgboxgb' style='opacity:0.7;' catchtap='closeupserimg'></view>
+   <view class='upsertgimgbcon' style='{{windowHeight<500?"height:800rpx;":"height:1115rpx;"}}'>
+   <view style='width:100%;height:100%;overflow: scroll;'>
+       <view style='{{comdata.order_type==10?"width:435rpx;":"width:540rpx;"}}height:700rpx;margin:0 auto;position:relative;'>
+         <image class='tgimcimg'  mode='aspectFit' src='{{actimgshare}}' style='{{comdata.order_type==10?"width:435rpx;":"width:540rpx;"}}height:700rpx;margin:0 auto;position:absolute;'></image>
+       </view>
+        
+       <view class='upserbutbox'></view>
+       <view style='height:300rpx;width:100%;position:relative;'>
+          <view style='width:170rpx;height:260rpx;position: absolute;left:14rpx;bottom:20rpx;' bindtap='screenshotpreviewImgzhong'>
+              <image src='http://www.51chaidan.com/images/default/consultAudit.jpg' style='display:block;width:130rpx;height:220rpx;margin:auto;position: relative;'></image>
+              <view style='width:100%;height:40rpx;color:#fff;font-size:22rpx;text-align:center;line-height:40rpx;text-decoration:underline;'>查看截图参考</view>
+          </view>
+
+          <text style='width:400rpx;height:230rpx;position: absolute;left:200rpx;bottom:60rpx;font-size:26rpx;color:#fff;overflow: scroll;'>{{share_descWinningtheprize}}</text>
+      </view>
+      <view style='width:100%;height:66rpx;position:relative;'> 
+             <!-- wx:if='{{uploadscreenshots}}'   data-anum='2' catchtap='upImgSer'-->
+            <view style='width:280rpx;height:60rpx;position: absolute;right:0;bottom:0;font-size:26rpx;text-align:center;line-height:60rpx;color:#fff;border-radius: 10rpx;background: #087ac5;' catchtap='screenshottips' data-num='2'><view style='width:100%;height:100%;position:absolute;top:0;left:0;z-index:2;'>上传截图</view></view>
+
+            <view class='upsertgimcimgbut' catchtap='sharesavethepicture' data-indnum='1' style='width:280rpx;height:60rpx;position: absolute;left:0;bottom:0;font-size:26rpx;text-align:center;line-height:60rpx;color:#fff;border-radius: 10rpx;background: #1aad19;'>点击保存专属晒单图片</view>
+      </view>      
+      
+      </view>
+      <!-- <text class='upsertextcon'>{{share_desc}}</text>        -->
+
+
+       <image src='../../../../pages/images/icon_close3.png' class='usericonclose' catchtap='closeupserimg'></image>
+   </view>
+</view>
+ 
+ 
+<!--  图片授权  -->
+<view class='editorrecom' wx:if='{{picbox}}' style='z-index:9999999;'>
+    <view class='ngbackground'></view>
+    <view class='picbox'>
+        <view class='picboxhead'>授权之后才能保存图片</view>
+        <view class='picboxcon'>
+            <view class='picboxconleft' style='color:#333;' catchtap='imgCanelTg'>取消</view>
+            <view class='picboxconleft' style='color:#11fb3d;position:relative;'>
+               <button open-type="openSetting" bindopensetting="handleSetting" class='picbut'></button>
+               确定
+            </view>
+        </view>
+    </view>
+</view>
+ 
+ 
+ 
+<!-- canvas生成分享图片 -->
+<view class='headhiddenbox' hidden="{{headhidden}}"></view>
+<canvas canvas-id='canimgser' class='canimgsernew'></canvas>
+<!-- closeupserimg -->
+<view class='tgimgbox' wx:if='{{upserimgboxact}}'>
+   <view class='tgimgboxgb' style='opacity:0.7;'></view>
+   <view class='upsertgimgbcon' style='{{windowHeight<500?"height:800rpx;":""}}'>
+       <view style='width:100%;height:100%;overflow: scroll;'>
+       <image class='tgimcimg' mode='aspectFit' src='{{actimgshareact}}' style='width:600rpx;height:648rpx;'></image>
+       <view class='upserbutbox'></view>
+       <view style='height:300rpx;width:100%;position:relative;'>
+          <view style='width:170rpx;height:260rpx;position: absolute;left:14rpx;bottom:20rpx;' bindtap='screenshotpreviewImg'>
+              <image src='http://www.51chaidan.com/images/default/consultOrder.jpg' style='display:block;width:130rpx;height:220rpx;margin:auto;position: relative;'></image>
+              <view style='width:100%;height:40rpx;color:#fff;font-size:22rpx;text-align:center;line-height:40rpx;text-decoration:underline;'>查看截图参考</view>
+          </view>
+          <text style='width:400rpx;height:230rpx;position: absolute;left:200rpx;bottom:60rpx;font-size:26rpx;color:#fff;overflow: scroll;'>{{share_desc}}</text>
+
+      </view>
+
+<view style='width:100%;height:66rpx;position:relative;'>
+      <view style='width:100%;height:66rpx;position:relative;'>
+          <view style='width:280rpx;height:60rpx;position: absolute;right:0;bottom:0;font-size:26rpx;text-align:center;line-height:60rpx;color:#fff;border-radius: 10rpx;background: #087ac5;' catchtap='upImgSer'><view style='width:100%;height:100%;position:absolute;top:0;left:0;z-index:2;'>上传截图</view><view style='width:100%;height:100%;position:absolute;top:0;left:0;z-index:1;opacity: 0.7;background:#009BFF;'></view></view>
+
+          <view class='upsertgimcimgbut' catchtap='sharesavethepicture' data-indnum='2' style='width:280rpx;height:60rpx;position: absolute;left:0;bottom:0;font-size:26rpx;text-align:center;line-height:60rpx;color:#fff;border-radius: 10rpx;background: #1aad19;'>保存图片</view>
+      </view>
+</view>
+
+    </view>
+
+
+       <image src='../../../../pages/images/icon_close3.png' class='usericonclose' catchtap='acetlistfunact'></image>
+   </view>
+</view>
+
+
+
+<view class='awatip' wx:if='{{awatip}}'>
+    <view class='awabg' catchtap='awatipdisnone'></view>
+    <view class='awacontent'>
+       <view class='awaconhead'>领奖提示</view>
+       <text class='awaconcon'>领奖专区内购买任意商品\n即可领奖成功</text>
+       <view class='awaconbottom' catchtap='awajump'>确定</view>
+    </view>
+</view>
+
+
+
+<view class='awatip' wx:if='{{subscrproiftr}}' style='z-index:9999999999;'>
+    <view class='awabg'></view>
+    <view class='awacontent' style='width:600rpx;height:320rpx;'>
+       <view class='awaconhead'>提示</view>
+       <text class='awaconcon' style='color:#419417;height:110rpx;line-height:50rpx;width:90%;margin:0 auto;'>{{subscrpro}}</text>
+       <view class='awaconbottom' style='background:#f18f00;width:130rpx;position:relative;' catchtap='subscrprofun'>确定</view>
+    </view>
+</view>
+
+
+
+<!--  收货地址  -->
+<view class='receivingaddress' wx:if='{{receivingaddress}}'>
+  <view class='recgadhead'>
+    收货地址
+    <image src='../../../../pages/images/forknumber.png' class='recgadheadimg' bindtap='receivingaddressfun'></image>
+  </view>
+  <view class='recgadcon'>
+    <view class='recgaddata' wx:for='{{addressdata}}' wx:key='key'>
+      <view class='recgaddname' data-tipaid='{{item.aid}}' data-address='{{item.address}}' data-province='{{item.province}}'  data-city='{{item.city}}' data-district='{{item.district}}' data-consignee='{{item.consignee}}' data-phone='{{item.phone}}' catchtap='revisethereceivingaddress'>
+        <view class='recgaddnameleft'>{{item.consignee}}</view>
+        <view class='recgaddnameleft'>{{item.phone}}</view>
+      </view>
+      <view class='recgadaddress' data-tipaid='{{item.aid}}' data-address='{{item.address}}' data-province='{{item.province}}'  data-city='{{item.city}}' data-district='{{item.district}}' data-consignee='{{item.consignee}}' data-phone='{{item.phone}}' catchtap='revisethereceivingaddress'>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
+      <view class='recgadbottom'>
+        <view class='recgadbotleft'>
+          <image class='recgadbotleftimg' hidden='{{!item.checked}}' src='../../../../pages/images/pressed_click.png'></image>
+          <image class='recgadbotleftimg' hidden='{{item.checked}}' src='../../../../pages/images/normal_click.png'></image>
+          默认地址
+        </view>
+        <view class='recgadbotright' bindtap='deladdress' data-ind="{{item.aid}}">
+          <image src='../../../../pages/images/icon_delete.png' class='recgadbotleftimg'></image>
+          删除
+        </view>
+        <view class='recgadbotright' style='margin-right:50rpx;' bindtap='jumpeditaddress' data-address='{{item.address}}' data-aid='{{item.aid}}' data-city='{{item.city}}' data-consignee='{{item.consignee}}' data-district='{{item.district}}' data-phone='{{item.phone}}'
+          data-province='{{item.province}}' data-idcard='{{item.idcard}}'>
+          <image src='../../../../pages/images/icon_edit.png' class='recgadbotleftimg'></image>
+          编辑
+        </view>
+      </view>
+    </view>
+    <view class='recgadnodata' wx:if='{{addressdata.length==0}}'>
+      <image src='../../../../pages/images/recaddnodata.png' class='recgadnodataimg'></image>
+    </view>
+  </view>
+  <view class='recgadbot' bindtap='jumpaddress'>
+    增加新地址
+  </view>
+
+
+</view>
+
+<!-- 确认修改地址弹框 -->
+<view class='awatip' wx:if='{{addmodtip}}' style='z-index:999;'>
+    <view class='awabg'></view>
+    <view class='addmodbox'>
+        <view class='addmodtop'>确认修改地址:</view>
+        <view class='addmodname'>{{conphone}}</view>
+        <view class='addmodnamezz'>{{addmodtxt}}</view>
+        <view class='addmodname' style='color:#ff2929;'>温馨提示:</view>
+        <view class='addmodname' style='color:#ff2929;'>收货地址只可修改一次</view>
+        <view class='addmodname' style='color:#ff2929;'>同批购买的所有商品(含奖品)收货地址同步修改</view>
+        <view class='addmodbottom'>
+            <view style='width:50%;text-align:center;height:50rpx;float:left;color:#258bfa;font-size:26rpx;position:relative;' catchtap='addmodcancel'>取消</view>
+            <view style='width:50%;text-align:center;height:50rpx;float:right;color:#258bfa;font-size:26rpx;position:relative;' catchtap='addmoddetermine'>确定</view>
+        </view>
+    </view>
+</view>
+
+
+
+
+
+
+<!-- 底部导航 -->
+<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' 
+dryinglistnum='{{dryinglistnum}}'></bnavigation>
+
+
+
+
+<view class='awatip' wx:if='{{refundtips}}' style='z-index:99;'>
+    <view class='awabg' catchtap='refundtipsfun'></view>
+    <view class='awacontent' style='width:640rpx;height:470rpx;'>
+       <view class='awaconhead'>退款提示</view>
+       <text style='color:#ea565e;height:260rpx;line-height:45rpx;width:90%;margin:0 auto;font-size:26rpx;display:block;margin:0 auto;overflow: scroll;'>1.活动、0元购、转盘、赠品等购买优惠一并取消\n2.优惠券不予返还；支付优惠一并取消\n3.订单一旦取消，无法恢复\n4.返现金额会从小金库扣除\n5.退款金额1-3工作日原路退回</text>
+       <view style='width:90%;margin:0 auto;height:108rpx;'>
+            <view style='position:relative;width:46%;height:68rpx;line-height:68rpx;float:left;text-align:center;font-size:26rpx;background:#e94f57;color:#fff;' catchtap='refundtiosun'>申请退款</view>
+            <view style='position:relative;width:46%;height:68rpx;line-height:68rpx;float:right;text-align:center;font-size:26rpx;background:#cccccc;color:#000;' catchtap='refundtipsfun'>取消</view>
+       </view>
+    </view>
+</view>
+
+
+
+<view class='awatip' wx:if='{{refundtipssure}}' style='z-index:99999;'>
+    <view class='awabg' catchtap='refundtipssurefun'></view>
+    <view class='awacontent'>
+       <view class='awaconhead'>退款提示</view>
+       <text class='awaconcon'>您确定要退款吗？</text>
+       <view class='awaconbottom' catchtap='refundtipssuresure'>确定</view>
+    </view>
+</view>
+
+
+
+
+<!-- 领奖截图提示 --> 
+<view class='awatip' wx:if='{{screenshottipsiftr}}' style='z-index:9999;'>
+    <view class='awabg' catchtap='screenshottipsnone'></view>
+    <view class='awacontent' style='width:480rpx;height:400rpx;'>
+       <view class='awaconhead'>领奖截图提示</view>
+       <text class='awaconcon' style='color:#000000;height:200rpx;line-height:50rpx;width:90%;margin:0 auto;text-align:left;'>1.保存领奖图片\n2.分享朋友圈不分组\n3.一小时后截图并上传\n4.审核通过领奖({{defaultinformation.carriage.free}}元包邮)</text>
+       <view class='awaconbottom' style='background:#f18f00;width:130rpx;position:relative;' data-anum='2' catchtap='upImgSer'>去领奖</view>
+    </view>
+</view>
+
+<!--  上传成功之后来起授权  -->
+<view wx:if='{{pictboxbox}}' style='z-index:9999999;width:100%;height:100%;position:fixed;top:0;left:0;'>
+    <view style='width:100%;height:100%;background:#000;opacity:.5;'></view>
+    <view style='width:500rpx;height:240rpx;background:#fff;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;border-radius:16rpx;'>
+        <view style='padding:30rpx 0;width:100%;height:80rpx;text-align:center;line-height:80rpx;color:#333;font-size:26rpx;border-bottom:1rpx solid #e5e5e5;'>上传成功</view>
+        <view style='height:100rpx;width:100%;'>
+            <view style='color:#11fb3d;position:relative;width:100%;float:left;height:100rpx;line-height:100rpx;text-align:center;font-size:26rpx;' catchtap='pictboxboxfun'>
+               关闭
+            </view>
+        </view>
+    </view>
+</view>

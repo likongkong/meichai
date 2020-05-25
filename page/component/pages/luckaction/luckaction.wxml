@@ -1,0 +1,271 @@
+<!--page/component/pages/luckaction/luckaction.wxml-->
+
+<canvas canvas-id='canimgserceshi' style='width:375px;height:603px;position:fixed;left:0;top:-999999rpx;'></canvas>
+
+<!-- <canvas wx:key='key' canvas-id='canimgser' class='myordercanimgser'></canvas> -->
+
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view wx:if='{{type!=""}}' style='position:relative;'>
+
+  <view style='width:100%;height:400rpx;'>
+
+    <swiper current="{{goodsIndex}}" class="swiper" indicator-color="#fff" indicator-active-color="#ff2742" indicator-dots="true" circular="true" autoplay="true" interval="3000" duration="450">
+      <swiper-item wx:for="{{images}}" wx:key="key">
+
+        <image src="{{item.src}}" class="slide-image" mode="aspectFill" />
+
+      </swiper-item>
+
+    </swiper>
+
+  </view>
+
+  <view class='strategy' catchtap='jumpnotice'>攻略</view>
+
+  <view class='logo' style='width:100rpx;height:35rpx;'>
+    <image style='width:100rpx;height:35rpx;border-radius:10rpx;' src='https://clw.51chaidan.com/images/bargain/mc.png'></image>
+  </view>
+
+  <view class='toptitle'>
+    <view style='width:100%;height:100%;position:absolute;background:#000;opacity:0.3;'></view>
+    <view style='position:absolute;top:0;left:0;right:0;bottom:0;margin:0 auto;'>每周满
+      <text style='color:#FFCC00;font-size:70rpx;'>{{activityinfo.conditionNumber}}</text>件</view>
+  </view>
+
+  <view wx:if='{{type!=""}}' class='secondview'>
+
+    <view class='secondtitle'>瓜分
+      <text style='font-size:70rpx;color:#FFCC00'>{{activityinfo.totalPrizeNumber}}</text> 个盲盒
+      <text style='background:#000;font-size:20rpx;color:#fff;padding:0 5rpx;'>随机</text>
+    </view>
+
+    <view wx:if='{{type=="detailActivity"}}' style='font-size:25rpx;margin:20rpx 0 0 80rpx;'>· 每周支付满{{activityinfo.conditionNumber}}件商品，成为美拆大咖，均分{{activityinfo.sharingNumber}}个盲盒</view>
+    <view wx:if='{{type=="detailActivity"}}' style='font-size:25rpx;margin-left:80rpx;'>· 每周支付金额前{{activityinfo.top}}名，奖励翻倍，共{{activityinfo.doubleNumber}}个盲盒</view>
+
+    <view wx:if='{{type=="detailActivity"}}' class='thirdview'>
+      <view class='thirdunderview'></view>
+      <view class='thirdfloatview'>
+        <view class='alreadytitle'>本周您已支付
+          <text style='font-size:50rpx;color:#ff6968;'>{{mUserInfo.finishNumber}}</text>件</view>
+
+        <view wx:if='{{mUserInfo.lackNumber>0}}' class='needtitle'>再买
+          <text style='font-size:50rpx;color:#ff6968;'>{{mUserInfo.lackNumber}}</text>件即可均分{{activityinfo.sharingNumber}}个盲盒</view>
+
+        <view wx:if='{{mUserInfo.lackNumber<=0}}' class='needtitle'>再买
+          <text style='font-size:50rpx;color:#ff6968;'>{{mUserInfo.distanceNumber2Top}}</text>件即可进入TOP{{activityinfo.top}}</view>
+
+        <view style='font-size:25rpx;text-align:center;margin-top:20rpx;'>(目前已有
+          <text style='color:orange;'>{{activityinfo.countBigShot}}</text>人成为美拆大咖，周日23:59开奖)</view>
+      </view>
+    </view>
+
+    <view wx:if='{{type=="detailActivity"}}' style='margin-top:20rpx;position:relative;'>
+
+      <view style='margin:0 50rpx;font-size:25rpx;'>
+        <view style='position:relative;height:70rpx;'>
+          <view style='position:absolute;left:0;bottom:5rpx;'>我的进度</view>
+
+          <view wx:if='{{mUserInfo.lackNumber>0}}' style='width:110rpx;position:absolute;right:110rpx;bottom:0;'>
+            <view class='schedulewin'>
+              <!-- ￥{{mUserInfo.int2top}} -->
+              {{activityinfo.conditionNumber}}件
+            </view>
+
+            <image style='width:20rpx;height:10rpx;display:block;margin-left:45rpx;' src='../images/bottom_arrow.png'></image>
+          </view>
+
+          <view style='position:absolute;right:0;bottom:5rpx;'>
+            <view>排名</view>
+            <view>规则</view>
+          </view>
+        </view>
+
+        <view style='width:650rpx;height:40rpx;border-radius:20rpx;border:1rpx solid #E6E6E6;'>
+          <view class='scheduledot' style='background:{{mUserInfo.finishNumber>=1?"orange":"#E6E6E6"}};'></view>
+          <view class='scheduledot' style='background:{{mUserInfo.finishNumber>=2?"orange":"#E6E6E6"}}'></view>
+          <view class='scheduledot' style='background:{{mUserInfo.finishNumber>=3?"orange":"#E6E6E6"}}'></view>
+          <view class='scheduledot' style='background:{{mUserInfo.finishNumber>=4?"orange":"#E6E6E6"}}'></view>
+          <view class='scheduledot' style='background:{{mUserInfo.finishNumber>=5?"orange":"#E6E6E6"}}'></view>
+
+          <view class='schedule'>
+            <view class='schedulemeet' style='background:{{mUserInfo.finishNumber>=5?"orange":"#E6E6E6"}}'>已支付{{mUserInfo.finishNumber}}件商品</view>
+            <view wx:if='{{mUserInfo.lackNumber<=0}}' style='width:159rpx;line-height:28rpx;float:right;text-align:center;'>TOP{{activityinfo.top}}翻倍</view>
+          </view>
+
+        </view>
+
+      </view>
+
+      <view style='width:48rpx;height:48rpx;margin:10rpx 0 0 {{(mUserInfo.finishNumber>5?5:mUserInfo.finishNumber)*40+5}}rpx;'>
+        <image style='width:48rpx;height:48rpx;border-radius:25rpx;border:1rpx solid orange' src='{{avatarUrl}}'></image>
+      </view>
+
+    </view>
+
+    <view wx:if='{{type=="detailActivity"}}' style='width:100%;height:50rpx;'>
+      <view wx:if='{{mUserInfo.lackNumber<=0&&mUserInfo.distanceNumber2Top>0}}' style='font-size:30rpx;text-align:center;margin-top:20rpx;'>
+        <text style='font-weight:bold;'>距离TOP{{activityinfo.top}}仅差</text>
+        <text style='font-size:40rpx;color:#ff6968;font-weight:bold;'>{{mUserInfo.distanceNumber2Top}}件</text>
+        <text style='font-size:25rpx;'>(每15分钟刷新)</text>
+      </view>
+
+      <view wx:if='{{mUserInfo.lackNumber<=0&&mUserInfo.distanceNumber2Top<=0}}' style='font-size:30rpx;color:#ff6968;text-align:center;margin-top:20rpx;'>
+        <text style='font-weight:bold;'>恭喜您已经进入top100奖励</text>
+        <text style='font-size:25rpx;color:#000;'>(每15分钟刷新)</text>
+      </view>
+
+    </view>
+
+    <view wx:if='{{type=="detailPrize"}}' style='text-align:center;font-size:25rpx;font-weight:bold;'>共有{{activityinfo.countBigShot}}人成为美拆大咖，本周您完成{{mUserInfo.finishNumber}}件</view>
+
+    <view wx:if='{{type=="detailPrize"}}' style='font-size:30rpx;font-weight:bold;text-align:center;margin-top:50rpx;'>
+      <view>恭喜您获得本周</view>
+      <view>
+        <text wx:if='{{mUserInfo.isInTop}}' style='color:orange;'>TOP100</text>大咖奖励</view>
+    </view>
+
+    <view wx:if='{{type=="detailPrize"}}' style='width:100%;margin:80rpx  0;overflow:hidden;'>
+
+      <view style='overflow:hidden;text-align:center;'>
+
+        <view style='width:250rpx;height:250rpx;display:inline-block;position:relative;'>
+
+          <image style='width:250rpx;height:250rpx;' src='https://www.51chaidan.com/images/background/bgEar.png'></image>
+
+          <image style='width:170rpx;height:170rpx;border-radius:110rpx;margin:49rpx 40rpx 31rpx 40rpx;position:absolute;top:0;left:0;' src='{{prize[0].gcover}}'></image>
+
+        </view>
+
+        <view wx:if='{{prize.length > 1}}' style='width:250rpx;height:250rpx;display:inline-block;position:relative;margin-left:100rpx;'>
+
+          <image style='width:250rpx;height:250rpx;' src='https://www.51chaidan.com/images/background/bgEar.png'></image>
+
+          <image style='width:170rpx;height:170rpx;border-radius:110rpx;margin:49rpx 40rpx 31rpx 40rpx;position:absolute;top:0;left:0;' src='{{prize[1].gcover}}'></image>
+
+        </view>
+
+      </view>
+
+    </view>
+
+    <view wx:if='{{type!=""}}' style='width:100%;margin-top:20rpx;'>
+      <view wx:if='{{type=="detailActivity"}}' class='btnstyle' style='background:#1AAD19;'>
+          <button open-type="share" style='opacity: 0;z-index:3;position:absolute;top:0;left:0;height:100%;width:100%;'></button>
+        分享好友</view>
+      <view wx:if='{{type=="detailActivity"}}' class='btnstyle' style='background:#ff6968;' catchtap='addorder'>加单！加单！</view>
+      <view wx:if='{{type=="detailPrize"}}' class='btnstyle' style='background:#ff6968;margin-left:30%;' catchtap='upserimgboxiftr'>晒单领奖</view>
+    </view>
+
+  </view>
+
+  <view style='margin-top:820rpx;font-size:25rpx;padding:0 100rpx;line-height:40rpx;'>
+
+    <view style='text-align:center;font-size:30rpx;margin-top:20rpx;line-height:50rpx;'>活动规则</view>
+
+    <view style='margin-top:30rpx;'>一.瓜分{{activityinfo.totalPrizeNumber}}件盲盒</view>
+    <view>·一周内完成支付满{{activityinfo.conditionNumber}}件商品（不包含抽盒机），即可成为【美拆大咖】，参与瓜分盲盒</view>
+    <view>·一周内购买件数前{{activityinfo.top}}名，直接获得盲盒数量×2</view>
+    <view>·其余美拆大咖均分{{activityinfo.sharingNumber}}盲盒</view>
+    <view>·每周用户支付满足5件后，保底分得1个盲盒</view>
+
+    <view style='margin-top:30rpx;'>二.活动时间</view>
+    <view>·周一00:00-周日23:59</view>
+    <view>·本期活动周期为7天</view>
+
+    <view style='margin-top:30rpx;'>三.领奖时间</view>
+    <view>·每周一10:00领取奖励，奖品由美拆官方发放</view>
+    <view>·中奖用户需在活动结束后7天领取，逾期操作视为放弃领取，美拆不进行任何形式得补发</view>
+
+    <view style='margin:30rpx 0;position:relative;' catchtap='showrule'>详细规则></view>
+
+    <view style='height:180rpx;'></view>
+
+  </view>
+
+</view>
+
+<view style='width:100%;height:130rpx;' wx:if='{{spreadEntry}}'></view>
+
+<bnavigation isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+
+
+
+<view class='tgimgbox' wx:if='{{ishowrule}}'>
+
+  <view class='tgimgboxgb' style='opacity:0.9;font-size:25rpx;'>
+
+    <view style='color:#fff;overflow: scroll;width:80%;height:80%;padding:10%;'>
+      <view style='text-align:center;font-size:30rpx;margin-top:20rpx;line-height:50rpx;'>活动规则</view>
+
+      <view style='margin-top:30rpx;'>一.瓜分{{activityinfo.totalPrizeNumber}}件盲盒</view>
+      <view>·一周内完成支付满{{activityinfo.conditionNumber}}件商品（不包含抽盒机），即可成为【美拆大咖】，参与瓜分盲盒</view>
+      <view>·一周内购买件数前{{activityinfo.top}}名，直接获得盲盒数量×2</view>
+      <view>·其余美拆大咖均分{{activityinfo.sharingNumber}}盲盒</view>
+      <view>·每周用户支付满足5件后，保底分得1个盲盒</view>
+
+      <view style='margin-top:30rpx;'>二.活动时间</view>
+      <view>·周一00:00-周日23:59</view>
+      <view>·本期活动周期为7天</view>
+
+      <view style='margin-top:30rpx;'>三.领奖时间</view>
+      <view>·每周一10:00领取奖励，奖品由美拆官方发放</view>
+      <view>·中奖用户需在活动结束后7天领取，逾期操作视为放弃领取，美拆不进行任何形式得补发</view>
+
+      <view style='margin:30rpx 0;'></view>
+    </view>
+
+  </view>
+
+  <image src='../../../../pages/images/icon_close3.png' class='usericonclose' style='bottom:50rpx;' catchtap='showrule'></image>
+
+</view>
+
+<!--  授权弹框  -->
+<view class='tgaboxtwo' wx:if='{{tgabox}}' catchtap='clicktga'>
+  <view class='tgaboxtbg'></view>
+  <view class='tgaboxclick'>
+    <image mode='aspectFit' src='https://www.51chaidan.com/images/default/openscreen.jpg?log={{appNowTime}}' class='tgaboxclickbgImg'></image>
+    <image src='{{commoddata.cover}}' class='abcd'></image>
+
+  </view>
+  <button class='tgaboxtgawchbochlibutboxtwo' open-type="getUserInfo" type='primary' bindgetuserinfo="userInfoHandler"></button>
+
+</view>
+
+<!-- upserimgbox -->
+<view class='tgimgbox' wx:if='{{upserimgbox}}'>
+  <view class='tgimgboxgb' style='opacity:0.7;' catchtap='closeupserimg'></view>
+  <view class='upsertgimgbcon' style='height:1115rpx;'>
+    <view style='width:100%;height:100%;overflow: scroll;'>
+      <view style='width:435rpx;height:700rpx;margin:0 auto;position:relative;'>
+        <image class='tgimcimg' src='{{actimgshare}}' style='width:435rpx;height:700rpx;margin:0 auto;position:absolute;'></image>
+      </view>
+
+      <view class='upserbutbox'>
+
+      </view>
+      <view style='height:300rpx;width:100%;position:relative;'>
+        <view style='width:170rpx;height:260rpx;position: absolute;left:14rpx;bottom:20rpx;' bindtap='screenshotpreviewImgzhong'>
+          <image src='https://www.51chaidan.com/images/default/consultAudit.jpg' style='display:block;width:130rpx;height:220rpx;margin:auto;'></image>
+          <view style='width:100%;height:40rpx;color:#fff;font-size:22rpx;text-align:center;line-height:40rpx;text-decoration:underline;'>查看截图参考</view>
+        </view>
+        <text style='width:400rpx;height:230rpx;position: absolute;left:200rpx;bottom:60rpx;font-size:26rpx;color:#fff;overflow: scroll;'>{{activityinfo.showOrderDesc}}</text>
+      </view>
+
+      <view style='width:100%;height:66rpx;position:relative;'>
+        <!-- wx:if='{{uploadscreenshots}}' -->
+        <view style='width:280rpx;height:60rpx;position: absolute;right:0;bottom:0;font-size:26rpx;text-align:center;line-height:60rpx;color:#fff;border-radius: 10rpx;background: #087ac5;' data-anum='2' catchtap='upImgSer'>
+          <view style='width:100%;height:100%;position:absolute;top:0;left:0;z-index:2;'>上传截图</view>
+        </view>
+        <view catchtap='sharesavethepicture' data-indnum='1' style='width:280rpx;height:60rpx;position: absolute;left:0;bottom:0;font-size:26rpx;text-align:center;line-height:60rpx;color:#fff;border-radius: 10rpx;background: #1aad19;'>点击保存专属晒单图片</view>
+      </view>
+
+
+    </view>
+
+
+    <image src='../../../../pages/images/icon_close3.png' class='usericonclose' catchtap='closeupserimg'></image>
+  </view>
+</view>

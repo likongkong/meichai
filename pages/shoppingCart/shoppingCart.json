@@ -1,0 +1,10 @@
+{
+  "asdfasfdflePullDownRefresh": true,
+  "backgroundTextStyle": "light",
+  "navigationBarTitleText": "购物车",
+  "usingComponents": {
+    "t_f": "../topfunction/topfunction",
+    "bnavigation": "../bottomComponent/bottomComponent",
+    "tga_c": "../tgacomponent/tgacomponent"
+  }
+}

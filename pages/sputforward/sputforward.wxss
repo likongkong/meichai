@@ -1,0 +1,544 @@
+@import "../shopsquare/shopsquare.wxss";
+@import "../activitydetailspage/activitydetailspage.wxss";
+/*   单行  */
+.specialellipsis{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;  
+}
+.putforwardbox{
+  width: 94%;
+  padding: 20rpx 3% 120rpx;
+  background: #fff;
+}
+.pfheaddispaly{
+  width:100%;
+  height: 360rpx;
+  background: #fbaa36;
+  border-radius: 16rpx;
+  padding: 10rpx 0 ;
+  position: relative;
+}
+.pfheaddispalypo{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width:100%;
+  height: 360rpx;
+  z-index: 1;
+}
+.pfheaddispalyimg{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.pfhdcanputforward{
+  width:100%;
+  overflow: hidden;
+}
+.pfhcpfleft{
+  width: 370rpx;
+  padding: 0 0 0 30rpx;
+  height: 144rpx;
+  float: left;
+}
+.pfhcpfright{
+  float: right;
+  padding-top: 30rpx;
+  height: 110rpx;
+  width:300rpx;
+}
+.pfhcpflht{
+  height: 70rpx;
+  font-size: 24rpx;
+  color: #986618;
+  line-height: 70rpx;
+}
+.pfhcpflhtcont{
+  height: 70rpx;
+}
+.pfhcpflhtcontl{
+  float: left;
+  height: 70rpx;
+  line-height: 70rpx;
+  max-width: 290rpx;
+  color: #8F5C0B;
+  font-size: 58rpx;
+}
+.pfhcpflhtcontimg{
+  margin: 5rpx 0 0 15rpx;
+  width: 60rpx;
+  height: 60rpx;
+  float: left;
+}
+.pfhcpfrightbab{
+  padding: 0 0 0 30rpx;
+  height: 70rpx;
+}
+.pfhcpflhtcontlmizi{
+  float: left;
+  height: 70rpx;
+  line-height: 70rpx;
+  max-width: 500rpx;
+  color: #fff;
+  font-size: 38rpx;  
+}
+.canflowingwaterleft{
+  float: left;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #DCB374;
+  width:170rpx;
+  box-shadow: 0 2px 8px 0 rgba(38,40,46,0.50);
+  border-radius: 100px; 
+  background-image: linear-gradient(-90deg,#5B4E3B 0%,  #1D2026 99%); 
+  position: relative;
+}
+.canflowingwaterleftimg{
+  width:40rpx;
+  height:40rpx;
+  margin:12rpx 0 0 16rpx;
+  position: relative;
+}
+.lockmoney{
+  padding: 50rpx 0 0 50rpx;
+  overflow: hidden;
+  background: #eda338;
+}
+
+.lockmoneyleft{
+  width: 320rpx;
+  float: left;
+  
+}
+.lockmoneyright{
+  width:300rpx; 
+  float: right;
+}
+.lmlcomtxt{
+  width: 100%;
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 24rpx;
+  color: #986618;
+}
+.lmlcomtxtmizi{
+  width: 100%;
+  height: 40rpx;
+  font-size: 38rpx;
+  color: #fff;
+  line-height: 40rpx;
+}
+.bottommoneybot{
+  padding: 10rpx 0 0 30rpx;
+  overflow: hidden;  
+}
+.putforwardmode{
+  width: 100%;
+  height: 70rpx;
+  font-size: 34rpx;
+  color: #333;
+  line-height: 70rpx;
+}
+.putforwardmodebox{
+  overflow: hidden;
+  padding:0 0 0 30rpx; 
+  background: #fff;
+}
+.tx{
+  width: 100%;
+  font-size: 28rpx;
+  color: #666;
+}
+.putforwardmodebwx{
+  border: 1rpx solid #bbb;
+  font-size: 30rpx;
+  color: #333;
+  float: left;
+  padding: 10rpx 40rpx; 
+  border-radius: 10rpx;
+}
+.putforwardmodebwximg{
+  width: 44rpx;
+  height: 44rpx;
+  float: left;
+  margin-right: 14rpx;
+}
+.putforwardmodebwxtxt{
+  height: 44rpx;
+  line-height: 44rpx;
+  text-align: center;
+  float: left; 
+}
+.puformonnum{
+  width: 33.2%;
+  height: 160rpx;
+  float: left;
+  position: relative;
+}
+.puformonnumeve{
+  width: 140rpx;
+  height: 120rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border-radius: 10rpx;
+  border:1rpx solid #bbb;
+  text-align: center;
+  font-size: 32rpx;
+  line-height: 120rpx;
+}
+
+.putforwardbottom{
+  width: 100%;
+  height: 100rpx;
+  /* background: #F1172D; */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+}
+.putforwardbottombut{
+  width: 440rpx;
+  height: 100rpx;
+  text-align: center;
+  line-height: 100rpx;
+  color: #fff;
+  font-size: 30rpx;
+  position: absolute;
+  top: 0;
+  right: 20rpx;
+  bottom: 0;
+  margin: auto 0;
+}
+.putforwardbottombutleft{
+  width: 288rpx;
+  height: 100rpx;
+  text-align: center;
+  line-height: 100rpx;
+  color: #fff;
+  font-size: 30rpx;
+  background-image: linear-gradient(89deg, #BD8729 0%, #EDC882 100%);
+  box-shadow: 0 -1px 6px 0 rgba(0,0,0,0.05); 
+}
+view.puformonnumeveback{
+  border:1rpx solid #f72640;
+  color: #f72640;
+}
+.putforward{
+  width: 100%;
+  overflow: hidden;
+}
+.flowingwater{
+  width: 100%;
+  overflow: hidden;
+}
+.fgtitle{
+  height: 60rpx;
+  width: 100%;
+  text-align: center;
+  line-height: 60rpx;
+  color: #333;
+  font-size: 30rpx;
+}
+.ssheadpofixedputforward{
+  width: 100;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #bbb;
+}
+.fwdetail{
+  width: 100%;
+}
+.fwdetaileve{
+  width: 100%;
+  padding: 6rpx 0 14rpx 0;
+  border-bottom: 1rpx solid #bbb;
+}
+.fwdetailevehead{
+  height: 60rpx;
+  width: 100%;
+}
+.fwdetaileveheadleft{
+  float: left;
+}
+.fwdetaileveheadright{
+  float: right;
+}
+.fwdetaileveheadlrcom{
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 30rpx;
+  color: #333;
+}
+.fwdetailevecon{
+  width: 100%;
+}
+.fwdechead{
+  width: 100%;
+  overflow: hidden;
+}
+.fwdecheadimg{
+  width: 60rpx;
+  height: 60rpx;
+  float: left;
+  margin-right:12rpx; 
+  border-radius: 50%;
+}
+.fwdecheadtxt{
+  float: left;
+  width:600rpx;
+  line-height: 60rpx;
+  font-size: 30rpx;
+  color: #333;
+}
+
+
+
+.a{
+  width:100%;
+  height: 440rpx;
+  position: relative;
+  margin:20rpx auto 0; 
+  background: #fff;
+}
+.b{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.c{
+  height:100%;
+  padding: 0 5%;
+  width:  90%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.d{
+  height: 196rpx;
+  width: 100%;
+}
+.e{
+  width: 336rpx;
+  height: 176rpx;
+  float: left;
+}
+.f{
+  width: 100%;
+  height: 60rpx;
+  padding: 50rpx 0 20rpx 30rpx;
+}
+.g{
+  height: 58rpx;
+  line-height: 58rpx;
+  font-size:48rpx;
+  color:#8F5C0B;
+  float: left;  
+}
+
+.h{
+  width: 32rpx;
+  height: 24rpx;
+  float: left;
+  margin: 20rpx 0 0 20rpx;
+
+}
+.iab{
+  font-size: 24rpx;
+  color: #986618;
+  padding-left: 30rpx;
+  height: 34rpx;
+  text-align: left;
+}
+.j{
+  padding: 80rpx 30rpx 0 0;
+  float: right;
+}
+.k{
+  padding:0 30rpx 0;
+  margin-top: 40rpx;
+  overflow: hidden;
+  position: relative;
+}
+.kl{
+  float: left;
+}
+.kr{
+  float: right;
+}
+.q{
+  width: 100%;
+  height: 50rpx;
+  text-align: center;
+}
+.w{
+  display: inline-block;
+  position: relative;
+  height: 40rpx; 
+  width: 200rpx;
+}
+.ww{
+  width: 100%;
+  height: 20rpx;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: #D29D50;
+  opacity: 0.7;
+  z-index: 1;
+}
+.wt{
+  width: 100%;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  font-size:32rpx;
+  color: #333;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;  
+}
+.ll{
+  width: 33.3%;
+  height:80rpx;
+  text-align: center;
+  float: left;
+  
+}
+
+.lll{
+  display: inline-block;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 28rpx;
+  color: #666;
+  position: relative;
+}
+
+view.llclass{
+  font-size: 32rpx;
+  color: #333;
+}
+.butsharesp{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  opacity: 0;
+}
+
+.wline{
+  width: 4rpx;
+  height: 60rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background: #A07028;
+}
+
+
+
+
+
+
+/*  提示框  */
+.comtip{width: 100%;height: 100%;position: fixed;top: 0;left: 0;z-index: 199999;}
+.comtipback{width: 100%;height: 100%;background: #000;opacity: 0.4;}
+.comtipcon{width: 86%;height: 600rpx;background: #fff;position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;border-radius: 10rpx;}
+.comtipchead{width: 94%;height: 100rpx;line-height: 100rpx;font-size: 36rpx;color: #333;padding: 0 3%;}
+.comtipccon{width: 92%;height: 400rpx;font-size: 32rpx;color: #666;padding: 0 4%;overflow: scroll;-webkit-overflow-scrolling: touch;}
+.comtipcbot{width: 94%;height: 100rpx;padding: 0 3%;}
+.comtipcbri{width: 40%;height: 100rpx;line-height: 100rpx;font-size: 30rpx;color: #42bd56;text-align: right;float: right;padding-right: 32rpx;}
+
+
+.aslheadimagesposi{
+  height: 40rpx;
+  width: 40rpx;
+  position: absolute;
+  top: 24rpx;
+  right: 16rpx;
+}
+
+.icon_lock{
+  width:50rpx;
+  height: 50rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 6rpx;
+  margin: 0 auto; 
+}
+.cgoldcoinicon{
+  width: 50rpx;
+  height: 50rpx;
+  display: inline-block;
+  position: relative;
+  top: 12rpx;
+
+}
+.cbbut{
+  width: 100%;
+  height: 100rpx;
+  text-align: center;
+  line-height: 100rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin:0 auto;
+  border-top: 1rpx solid #afb4c3;
+  color: #3369ff;
+  font-size: 26rpx;
+  font-weight: bold;
+}
+.bgstyle {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #000;
+  opacity: 0.5;
+}
+.redfloatbtnstylel {
+  height: 79rpx;
+  color: white;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin:auto;
+  z-index:1;
+}
+.dialogstyle {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+}
+/* 横向纵向居中 */
+.alignclass {
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}

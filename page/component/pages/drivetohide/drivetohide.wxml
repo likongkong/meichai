@@ -1,0 +1,346 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'>
+</t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view wx:if="{{headhidden}}" style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:999999;'></view>
+
+<!-- 分享图片 -->
+  <canvas canvas-id='snapshot' class='canimgserdih'></canvas>
+
+
+<view class='dhhbox' style="position:relative;" catchtap='cancelfun'>
+  <view wx:if='{{true}}' style='width:100%;height:455rpx;'></view>
+  <view class='dhboxtop' style='position:absolute;left:0;top:-30rpx;'>
+    <swiper class="dhhswiperdetail" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
+      <swiper-item wx:for="{{listdata.gallery}}" wx:key="key">
+        <image src="{{item}}" class="dhhsimg" style="height:400rpx;border-radius:0;" mode="aspectFit"></image>
+      </swiper-item>
+    </swiper>
+    <view class='dhhtbottm' style='background:#fff;border-radius:0 0 15rpx 15rpx;'>
+      <view wx:if='{{activitydata.awardType!=0}}' class='dhhtbl' style='width:100rpx;'>
+        <image src='{{activitydata.awardImg}}' style='width:100rpx;border:2px solid {{item.awardType==1?"#54a9fd":"#f29611"}};' data-iftr='1' bindload='imageLoad' class='dhhtblimg' mode="widthFix"></image>
+      </view> 
+      <view wx:if='{{activitydata.awardType!=0}}' class='dhhtbltxt' style='color:{{activitydata.awardType==1?"#54a9fd":"#f29611"}}'>
+        <block wx:if='{{activitydata.awardType==1}}'>队长指定款</block>
+        <block wx:else>队长隐藏款</block>
+      </view>
+      <view class='dhhtbr'>{{activitydata.truthTeam}}/{{activitydata.limitTeam}}</view>
+      <image src='https://www.51chaidan.com/images/driveCar/team_member.png' style='float:right;top:14rpx;margin-right:8rpx;' class='dhhboclcenman'></image>
+    </view>
+
+    <view wx:if='{{activitydata.id}}' style="background:#000;text-align:center;font-size:22rpx;color:#fff;line-height:32rpx;border-radius:6rpx;margin-right:8rpx;padding:0 8rpx;display:inline-block;position:absolute;top:40rpx;left:20rpx;">Vol.{{activitydata.id}}</view>
+
+  </view>
+
+  <!-- wx:if='{{activitydata.status==2}}' -->
+  <view wx:if='{{activitydata.status==2}}' class='dhcontentcreat'>
+    <block wx:if='{{activitydata.isJoin}}'>
+
+      <block wx:if='{{activitydata.teamVolume==activitydata.teamMember.length}}'>
+        <view class='dhcctop'>
+          <view wx:if='{{activitydata.stop_time}}' class='dhcctopleft'>{{stoptimeStr}}后开奖</view>
+          <view class='dhcctopright' style='background:#fff;color:#eecc6f;'>已满员,等待开奖</view>
+        </view>
+        <view style='width:100%;overflow: hidden;padding:20rpx 0 30rpx 0;'>
+          <view class='dhccinvite'>
+            <view class='dhccceneveeve' wx:for='{{activitydata.teamMember}}' wx:if='{{index<5}}' wx:key='key'>
+              <image wx:if='{{item.team_job==1}}' src='https://www.51chaidan.com/images/driveCar/captain.png' class='hddcscretopimg'></image>
+              <image src='{{item.photo}}' class='dhccceneveeveimg'></image>
+            </view>
+            <view class='dhccinvitfr' style='background:#edc65c;'>分享好友
+              <button open-type="share" style='opacity: 0;position:absolute;top:0;left:0;height:100%;width:100%;'></button>
+            </view>
+          </view>
+        </view>
+      </block>
+
+      <block wx:else>
+        <view class='dhcctop'>
+          <view wx:if='{{activitydata.stop_time}}' class='dhcctopleft'>{{stoptimeStr}}后开奖</view>
+          <view class='dhcctopright' style='background:#fff;color:#e94f57;'>还差{{activitydata.teamVolume-activitydata.teamMember.length}}人,开车成功</view>
+        </view>
+        <view style='width:100%;overflow: hidden;padding:20rpx 0 30rpx 0;'>
+          <view class='dhccinvite'>
+            <view class='dhccceneveeve' wx:for='{{activitydata.addar}}' wx:if='{{index<5}}' wx:key='key'>
+              <image wx:if='{{item!=1 && item.team_job==1}}' src='https://www.51chaidan.com/images/driveCar/captain.png' class='hddcscretopimg'></image>
+              <image wx:if='{{item!=1}}' src='{{item.photo}}' class='dhccceneveeveimg'></image>
+              <view wx:if='{{item==1}}' wx:key='key' class='dhhbconbeveadd'>+
+                <button open-type="share" style='opacity: 0;position:absolute;top:0;left:0;height:100%;width:100%;'></button>
+              </view>
+
+            </view>
+            <view class='dhccinvitfr'>邀请好友
+              <button open-type="share" style='opacity: 0;position:absolute;top:0;left:0;height:100%;width:100%;'></button>
+            </view>
+          </view>
+        </view>
+
+
+      </block>
+
+    </block>
+
+    <!-- 没参加的样式 -->
+    <block wx:else>
+
+      <block>
+        <view class='dhcctop'>
+          <view wx:if='{{activitydata.limitTeam>activitydata.truthTeam}}' class='dhcctopleft'>还差{{activitydata.limitTeam-activitydata.truthTeam}}组满员车队开奖</view>
+          <view wx:elif='{{activitydata.stop_time}}' class='dhcctopleft'>{{stoptimeStr}}后开奖</view>
+          <view class='dhcctopright' catchtap="createTeam">创建车队当队长</view>
+        </view>
+        <view style='width:100%;overflow: hidden;'>
+          <view class='dhccceneveup' wx:for="{{listdata.halfTeam}}" wx:key='key' style='{{index%2==1?"float:right;":""}}'>
+            <view class='dhccceupbox' style="display:flex;width:250rpx;">
+              <view class='dhccceneveeve' style="flex:1;margin:15rpx auto;" wx:for='{{item}}' wx:if='{{index<5}}' wx:key='key'>
+                <image wx:if='{{item.user_id && item.team_job==1}}' src='https://www.51chaidan.com/images/driveCar/captain.png' class='hddcscretopimg'></image>
+                <image wx:if='{{item.user_id}}' src='{{item.photo}}' class='dhccceneveeveimg' style="width:50rpx;height:50rpx;margin:0 auto;"></image>
+                <view wx:if='{{!item.user_id}}' wx:key='key' class='dhhbconbeveadd' catchtap="joinTeam" data-teamid="{{item}}">+</view>
+              </view>
+            </view>
+            <view class='dhccceupboxtxt' style="right:5rpx;" catchtap="joinTeam" data-teamid="{{item[0].team_id}}">上车</view>
+          </view>
+        </view>
+      </block>
+
+    </block>
+
+
+
+
+
+    <view style='height:80rpx;background:#eeeeee;border-radius:5rpx;margin:20rpx 15rpx 0rpx 15rpx;position:relative;'>
+      <!-- 提示框 -->
+      <view class='dhhgiftelfr' style='left:5rpx;' wx:if='{{isbacktip}}'>
+        <view wx:if='{{backtip==1}}' class='dhhawaarrowmto' style='left:13rpx;'></view>
+        <view wx:elif='{{backtip==2}}' class='dhhawaarrowmto' style='left:75rpx;'></view>
+        <view wx:elif='{{backtip==3}}' class='dhhawaarrowmto' style='left:146rpx;'></view>
+        <view class='dhhgiftelfrtxt' style='height:50rpx;line-height:50rpx;'>
+          <view wx:if='{{backtip==1}}' class='dhhgigtxteve'>提示卡x1(抽盒机专用)</view>
+          <view wx:elif='{{backtip==2}}' class='dhhgigtxteve'>透视卡x1(抽盒机专用)</view>
+          <view wx:elif='{{backtip==3}}' class='dhhgigtxteve'>车票x1(开车专用)</view>
+        </view>
+      </view>
+
+      <view catchtap='backtipfun' data-ind='1' class='cartimg' style="border-radius:10rpx;border:4rpx solid #259B24;color:#259B24;text-align:center;line-height:52rpx;">!</view>
+      <view catchtap='backtipfun' data-ind='2' class='cartimg' style="border-radius:10rpx;border:4rpx solid #FF9800;color:#FF9800;position:relative;overflow:hidden;">
+        <image style="width:28rpx;height:20rpx;margin:16rpx 2rpx;" src="https://www.51chaidan.com/images/driveCar/show.png"></image>
+      </view>
+      <image catchtap='backtipfun' data-ind='3' src='https://www.51chaidan.com/images/turntable/ticket.png' class='cartimgtick'></image>
+      <view class='carttxtleft'>车队满员后队长可获得随机奖励一份</view>
+    </view>
+    <view style="width:100%;height:40rpx;"></view>
+
+    <view wx:if='{{fullTeamList.length > 0}}' style='width:100%;'>
+      <view class='dhconfull'>已满员({{activitydata.countFullTeam}})</view>
+      <view style='width:100%;overflow: hidden;'>
+        <view class='dhccceneveup' wx:for="{{fullTeamList}}" wx:key='key' style='{{index%2==1?"float:right;":""}}text-align:center;'>
+          <view class='dhccceneveeve' wx:for='{{item}}' wx:if='{{index<5}}' wx:key='key'>
+            <image wx:if='{{item.team_job==1}}' src='https://www.51chaidan.com/images/driveCar/captain.png' class='hddcscretopimg'></image>
+            <image src='{{item.photo}}' class='dhccceneveeveimg'></image>
+          </view>
+        </view>
+      </view>
+      <view wx:if='{{ishowmore}}' style="width:150rpx;line-height:40rpx;font-size:25rpx;text-align:center;overflow:hidden;margin-bottom:30rpx;" catchtap="lookmore">
+        <view style="float:left;">更多车队</view>
+        <view style="width:24rpx;height:24rpx;border:3rpx solid #000;margin:6rpx 0 0 10rpx;float:left;position:relative;">
+          <image style='width:18rpx;height:8rpx;display:block;position:absolute;top:0;left:0;bottom:0;right:0;margin:auto;' src='../images/black_arrow.png'></image>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+  <!-- wx:if='{{activitydata.status==2}}' -->
+  <view wx:if='{{activitydata.status==3}}' class='hddscroll'>
+    <view class='hddstop'>
+      <view class='hddstopcom' style='float:left;'>中奖记录</view>
+    </view>
+    <scroll-view scroll-x="true" class='hddcsr'>
+      <view class='hddcscreve' wx:for="{{listdata.winner}}" style='width:100rpx;height:140rpx;' wx:key='key'>
+        <image wx:if='{{item.team_job==1}}' src='https://www.51chaidan.com/images/driveCar/captain.png' class='hddcscretopimg'></image>
+        <image src='{{item.awardImg}}' class='hddcscreimg' sstyle='width:100rpx;height:140rpx;' mode='aspectFit'></image>
+        <image src='{{item.photo}}' class='hddcscrebotimg'></image>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view wx:if='{{activitydata.status==3 && activitydata.isWinner &&activitydata.teamMember&&activitydata.teamMember.length!=0}}' class='dhwtpcont'>
+    <view class='dhwtpcontxt'>恭喜您的车队中奖!</view>
+    <view class='dhwtpcontimg'>
+      <view style="display:inline-block;" wx:for='{{activitydata.teamMember}}' wx:key='key'>
+        <view class='dhwtpeve'>
+          <image wx:if='{{item.team_job==1}}' src='https://www.51chaidan.com/images/driveCar/captain.png' class='hddcscretopimg'></image>
+          <image src='{{item.awardImg}}' style='width:100%;display:block;' mode="widthFix"></image>
+          <image src='{{item.photo}}' class='hddcscrebotimg'></image>
+        </view>
+        <view wx:if='{{item.awardName!=""}}' style="width:160rpx;margin:0 25rpx;font-size:25rpx;text-align:center;">{{item.awardName}}</view>
+      </view>
+    </view>
+    <view wx:if='{{activitydata.pay_status == 16}}' class='dhwtpbotbut' catchtap="awajump">领取奖励</view>
+    <view wx:elif='{{activitydata.pay_status == 17}}' class='dhwtpbotbut' >已过期</view>
+    <view wx:else class='dhwtpbotbut' >已领取</view>
+  </view>
+
+
+  <somke colortitle='#000'></somke>
+
+  <view wx:if='{{activityList.length > 0}}' style="width:100%;text-align:center;line-height:50rpx;font-size:25rpx;color:gary;">—— 更多活动 ——</view>
+
+  <!-- 更多活动 -->
+  <view style='padding-bottom:210rpx;'>
+  <view wx:if='{{activityList.length > 0}}' class='dhhboxcontent'>
+    <!-- 左边 -->
+    <view class='dhhboxcleft'>
+      <view class='dhhboxclefteve' wx:for="{{activityList}}" wx:if='{{index%2==0}}' wx:key='key'>
+        <image src='{{item.cover}}' style='width:100%;height:331rpx;display:block;border-radius:15rpx 15rpx 0 0;' catchtap='jumpdhhdetail' data-id='{{item.id}}'></image>
+        <view class='dhhboclcen'>
+          <!-- 未开启 -->
+          <block wx:if='{{item.status==1}}'>
+            <image src='https://www.51chaidan.com/images/driveCar/team_member.png' class='dhhboclcenman'></image>
+            <view class='dhhbclceleft'>{{item.truthTeam}}/{{item.limitTeam}}</view>
+            <view wx:if='{{item.status==1}}' class='dhhbclceright' style='color:#4c9a23;'>尚未开启</view>
+          </block>
+          <!-- 进行中 -->
+          <block wx:elif='{{item.status==2}}'>
+            <image src='https://www.51chaidan.com/images/driveCar/team_member.png' class='dhhboclcenman'></image>
+            <view class='dhhbclceleft'>{{item.truthTeam}}/{{item.limitTeam}}</view>
+            <!-- 已报名 -->
+            <block wx:if='{{item.isJoin}}'>
+              <view wx:if='{{item.truthTeam>=item.limitTeam}}' class='dhhbclceright' style='color:#e7bd4f;'>等待开奖</view>
+              <view wx:elif='{{item.teamVolume!=item.teamMember.length}}' class='dhhbclceright' style='color:#ea575e;'>还差{{item.teamVolume-item.teamMember.length}}人,开车成功</view>
+            </block>
+            <!-- 未报名 -->
+            <block wx:else>
+              <view wx:if='{{item.truthTeam!=item.limitTeam}}' class='dhhbclceright' style='color:#4c9a23;text-decoration:underline;' catchtap='jumpdhhdetail' data-id='{{item.id}}'>点击上车</view>
+              <view wx:else class='dhhbclceright' style='color:#4c9a23;text-decoration:underline;'>等待开奖</view>
+            </block>
+          </block>
+          <!-- 已结束 -->
+          <block wx:elif='{{item.status==3}}'>
+            <view style='padding-left:{{item.width||0}}rpx;' class='dhhbclceleft'>
+              <image src='{{item.awardImg}}' class='dhhtblimg' data-ind='{{index}}' data-iftr='3' bindload='imageLoad' style='width:{{item.width||0}}rpx;'></image>已开奖</view>
+            <view class='dhhbclceright' style='color:#afafaf;'>查看></view>
+          </block>
+
+        </view>
+        <view class='dhhbconbottom' wx:if='{{item.teamMember&&item.teamMember.length!=0}}'>
+          <!--  -->
+          <view class='dhhbconbeve' wx:for="{{item.teamMember}}" wx:key='key' wx:for-item='w'>
+            <image wx:if='{{w.team_job==1}}' src='https://www.51chaidan.com/images/driveCar/captain.png' class='hddcscretopimg'></image>
+            <image src='{{w.photo}}' class='dhhbconbeveimg'></image>
+          </view>
+          <view wx:for='{{item.addarr}}' wx:key='key' class='dhhbconbeveadd'>+</view>
+        </view>
+      </view>
+    </view>
+    <!-- 右边 -->
+    <view class='dhhboxcleft' style='float:right;'>
+      <view class='dhhboxclefteve' wx:for="{{activityList}}" wx:if='{{index%2==1}}' wx:key='key'>
+        <image src='{{item.cover}}' style='width:100%;height:331rpx;display:block;border-radius:15rpx 15rpx 0 0;' catchtap='jumpdhhdetail' data-id='{{item.id}}'></image>
+        <view class='dhhboclcen'>
+          <!-- 未开启 -->
+          <block wx:if='{{item.status==1}}'>
+            <image src='https://www.51chaidan.com/images/driveCar/team_member.png' class='dhhboclcenman'></image>
+            <view class='dhhbclceleft'>{{item.truthTeam}}/{{item.limitTeam}}</view>
+            <view wx:if='{{item.status==1}}' class='dhhbclceright' style='color:#4c9a23;'>尚未开启</view>
+          </block>
+          <!-- 进行中 -->
+          <block wx:elif='{{item.status==2}}'>
+            <image src='https://www.51chaidan.com/images/driveCar/team_member.png' class='dhhboclcenman'></image>
+            <view class='dhhbclceleft'>{{item.truthTeam}}/{{item.limitTeam}}</view>
+            <!-- 已报名 -->
+            <block wx:if='{{item.isJoin}}'>
+              <view wx:if='{{item.truthTeam>=item.limitTeam}}' class='dhhbclceright' style='color:#e7bd4f;'>等待开奖</view>
+              <view wx:elif='{{item.teamVolume!=item.teamMember.length}}' class='dhhbclceright' style='color:#ea575e;'>还差{{item.teamVolume-item.teamMember.length}}人,开车成功</view>
+            </block>
+            <!-- 未报名 -->
+            <block wx:else>
+              <view wx:if='{{item.truthTeam!=item.limitTeam}}' class='dhhbclceright' style='color:#4c9a23;text-decoration:underline;' catchtap='jumpdhhdetail' data-id='{{item.id}}'>点击上车</view>
+              <view wx:else class='dhhbclceright' style='color:#4c9a23;text-decoration:underline;'>等待开奖</view>
+            </block>
+          </block>
+          <!-- 已结束 -->
+          <block wx:elif='{{item.status==3}}'>
+            <view style='padding-left:{{item.width||0}}rpx;' class='dhhbclceleft'>
+              <image src='{{item.awardImg}}' class='dhhtblimg' data-ind='{{index}}' data-iftr='3' bindload='imageLoad' style='width:{{item.width||0}}rpx;'></image>已开奖</view>
+            <view class='dhhbclceright' style='color:#afafaf;'>查看></view>
+          </block>
+
+        </view>
+        <view class='dhhbconbottom' wx:if='{{item.teamMember&&item.teamMember.length!=0}}'>
+          <!--  -->
+          <view class='dhhbconbeve' wx:for="{{item.teamMember}}" wx:key='key' wx:for-item='w'>
+            <image wx:if='{{w.team_job==1}}' src='https://www.51chaidan.com/images/driveCar/captain.png' class='hddcscretopimg'></image>
+            <image src='{{w.photo}}' class='dhhbconbeveimg'></image>
+          </view>
+          <view wx:for='{{item.addarr}}' wx:key='key' class='dhhbconbeveadd'>+</view>
+        </view>
+      </view>
+    </view>
+  </view>
+     <view style='{{nomoredata?"opacity:1;":"opacity:0;"}}height:80rpx;width:100%;text-align:center;line-height:60rpx;color:#666;font-size:30rpx;'>暂无更多数据</view>
+     </view>
+
+
+</view>
+
+<view class='dhhfbottom'>
+  <view class='dhhfbottleft'>
+    <view class='dhhfbotlcom'>
+      <!-- 提示框 -->
+      <view class='dhhgiftelfr' wx:if='{{tickettip}}'>
+        <view class='dhhawaarrowmto'></view>
+        <view class='dhhgiftelfrtxt'>
+          <view class='dhhgigtxteve' style='padding-top:7rpx;'>每次抽盒赠送车票x1</view>
+          <view class='dhhgigtxteve'>每次签到赠送车票x1</view>
+        </view>
+      </view>
+      <image catchtap='tickettipfun' src='https://www.51chaidan.com/images/turntable/ticket.png' class='dhhfbottlimg'></image>
+    </view>
+    <view class='dhhfbotlcom dhhfbotltxt'>车票:{{ticket}}张</view>
+  </view>
+  <view class='dhhfbotright' catchtap="jumpsmokeList">抽盒送车票</view>
+  <view catchtap='jumpnewsignin' class='dhhfbotrsignin'>签到领车票</view>
+</view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<bnavigation isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+
+
+<!-- ishownoticket -->
+<view wx:if='{{ishownoticket}}' style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:199;'>
+  <view class='bgstyle' style="opacity:0.5;" catchtap='closenoticket' catchtouchmove="myCatchTouch"></view>
+
+  <view style="width:500rpx;height:250rpx;background:white;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;font-size:27rpx;padding:20rpx;border-radius:10rpx;" catchtouchmove="myCatchTouch">
+    <view style="width:100%;font-size:30rpx;line-height:50rpx;text-align:center;margin-top:10rpx;">剩余车票不足，请先获取车票</view>
+
+    <view class="chipcollectstyle" style="background:#e6f1fc;color:#1989fa;position:relative;" catchtap="signinget">签到领车票</view>
+
+    <view class="chipcollectstyle" style="background:#FFD944;color:#D48004;position:relative;" catchtap='jumpsmokeList'>抽盒送车票</view>
+  </view>
+</view>
+
+
+
+<!--  授权弹框  -->
+  <tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+
+  <view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight}}px;width: 100%;z-index: 30;' catchtap='pullupsignin'></view>

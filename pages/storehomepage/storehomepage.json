@@ -1,0 +1,8 @@
+{
+  "asdfasfdflePullDownRefresh": true,
+  "enablePullDownRefresh": true,  
+  "navigationBarTitleText": "店主首页",
+    "usingComponents": {
+      "t_f": "../topfunction/topfunction"
+    }
+}

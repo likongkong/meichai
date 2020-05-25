@@ -1,0 +1,237 @@
+<!--page/secondpackge/pages/exhibitionwelfare/exhibitionwelfare.wxml-->
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view style='background:#000;height:68rpx;padding:0 20rpx;'>
+	<view wx:if='{{welfareInfo.welfareStatus!=0 && welfareInfo.welfareStatus!=4}}' class='countdown' style='font-size:40rpx;float:left;'>
+		<text  class='timetextstyle' style='margin-right:10rpx;'>活动倒计时</text>
+		<text wx:if='{{dayStr!=0}}' style='diaplay:inline-block;'>{{dayStr}}</text>
+		<text wx:if='{{dayStr!=0}}' class='timetextstyle'>天</text>
+		<text style='diaplay:inline-block;'>{{hrStr}}</text>
+		<text class='timetextstyle'>时</text>
+		<text style='diaplay:inline-block;'>{{minStr}}</text>
+		<text class='timetextstyle'>分</text>
+		<text style='diaplay:inline-block;'>{{secStr}}</text>
+		<text class='timetextstyle'>秒</text>
+	</view>
+	<view wx:if='{{welfareInfo.welfareStatus==4}}' class='countdown' style='font-size:30rpx;{{infoActivity.supportLogo?"float:left;":""}}'>
+		活动已结束
+	</view>
+	<view wx:if='{{welfareInfo.welfareStatus==0}}' class='countdown' style='font-size:40rpx;{{infoActivity.supportLogo?"float:left;":""}}'>
+		<text class='timetextstyle' style='margin-right:10rpx;'>未开始</text>
+	</view>
+	<view style='height:50rpx;float:right;margin:9rpx 0 0 0;line-height:50rpx;font-size:24rpx;color:white;' class='specialellipsis' catchtap="showextain">活动规则></view>
+</view>
+
+<view style="width:100%;margin-top:20rpx;overflow:hidden;padding-bottom:130rpx;">
+	<view wx:for='{{welfareInfoList}}' wx:key='key' style="width:230rpx;height:184rpx;margin:0 0 20rpx 20rpx;float:left;position:relative;">
+		<image src="{{item.images}}" mode='aspectFit' style="width:230rpx;height:184rpx;border-radius: 10rpx;" catchtap="lookdetail" data-ind="{{index}}"></image>
+		<view class="numstyle">{{item.number}}</view>
+	</view>
+</view>
+
+
+<view style="width:80rpx;height:130rpx;position:fixed;bottom:50rpx;left:20rpx;right:0;">
+	<view wx:if='{{ishowtips1}}' style='width:375rpx;height:50rpx;position:absolute;top:-50rpx;left:0rpx;z-index:10;'>
+		<view style='position:absolute;bottom:0;left:0;overflow:hidden;'>
+			<view style='line-height:30rpx;color:white;font-size:25rpx;text-align:center;border-radius:10rpx;background:#404040;position:relative;padding:5rpx;'>
+				<view wx:key='key' style='text-align:left;'>
+					<text>{{welfareInfo.giftName}}</text>
+				</view>
+			</view>
+			<view style='width:100%;height:10rpx;position:relative;'>
+				<image style='width:20rpx;height:10rpx;position:absolute;top:0;{{index==6?"right:20rpx;":"left:20rpx;"}}' src='https://clw.51chaidan.com/images/goods/black_arrow.png'></image>
+			</view>
+		</view>
+	</view>
+	<image style="width:80rpx;height:80rpx;" src="https://cdn.51chaidan.com/images/sign/fortune_bag.png" catchtap="showtips1"></image>
+	<view style="height:30rpx;width:80rpx;text-align:center;">
+		<image style="width:30rpx;height:30rpx;display:inline-block;vertical-align:top;" src="https://www.51chaidan.com/images/sign/poster.png"></image>
+		<view style="line-height:30rpx;font-size:25rpx;display:inline-block;vertical-align:top;">{{welfareInfo.haveNumber}}/{{welfareInfo.gearPosition}}</view>
+	</view>
+</view>
+
+<view style="width:300rpx;position:fixed;bottom:50rpx;left:0;right:0;margin:0 auto;">
+	<view wx:if='{{welfareInfo.welfareStatus==1}}' class="btnstyle" style="background:#fb595f;" catchtap="gettodayposter">领取今日海报</view>
+	<view wx:if='{{welfareInfo.welfareStatus==2}}' class="btnstyle" style="background:#1AAD19;">
+		<button style='width:100%;height:100%;position:absolute;top:0;right:0;opacity:0;' open-type='share'></button>
+		<view style="width:50rpx;height:50rpx;position:relative;top:15rpx;display:inline-block;">
+			<image style="width:50rpx;height:50rpx;display:block;" mode='aspectFit' src="https://www.51chaidan.com/images/sign/poster.png"></image>
+			<view wx:if='{{shareInfo.giveNumber>0}}' class="sharenum specialellipsis">{{shareInfo.giveNumber}}</view>
+		</view>
+		好友互赠
+	</view>
+	<view wx:if='{{welfareInfo.welfareStatus==3}}' class="btnstyle" style="background:#FFCC00;" catchtap="getaward">领取奖励</view>
+</view>
+
+<view wx:if='{{ishowdetail}}' style="width:100%;height:100%;position:fixed;top:0;left:0;z-index:10;">
+	<view class="bgstyle" catchtap="closedetail"></view>
+	<view style='width:100%;height:{{windowHeight-statusBarHeightMc}}px;position:absolute;left:0;top:{{statusBarHeightMc}}px;z-index:9;' catchtap="closedetail" catchtouchmove="myCatchTouch">
+
+		<view style="width:100%;height:220rpx;position:absolute;left:0;top:0;">
+			<swiper bindanimationfinish="changeGoodsSwip" current="{{currentIndex}}" class="nsswiperdetail" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
+				<swiper-item wx:for="{{adList}}" wx:key="key">
+					<image src="{{item.src}}" style="width:100%;height:200rpx;border-radius:10rpx;" catchtap="exhibitionpubjump" data-id='{{item.activity_id}}' data-type='{{item.href_type}}'></image>
+				</swiper-item>
+			</swiper>
+		</view>
+
+		<view style="width:100%;height:500rpx;position:absolute;top:280rpx;left:0;right:0;margin:0 auto;">
+			<view wx:if='{{brandInfo.giveCardUserInfo}}' style="margin-left:125rpx;">
+				<image style="width:50rpx;height:50rpx;border-radius:25rpx;float:left;margin-left:" src="{{brandInfo.giveCardUserInfo.uImg}}"></image>
+				<view style="float:left;color:white">{{brandInfo.giveCardUserInfo.uName}}赠送</view>
+			</view>
+			<view style="width:40rpx;height:40rpx;position:absolute;top:0;left:30rpx;bottom:0;margin:auto 0;" class="arrow arrow-left" catchtap="lookdetail" data-ind="{{currentind>0?currentind-1:0}}"></view>
+			<image style="width:500rpx;height:400rpx;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;border-radius: 10rpx;" src="{{bigimage}}" mode='aspectFit'></image>
+			<view style="width:40rpx;height:40rpx;position:absolute;top:0;right:30rpx;bottom:0;margin:auto 0;" class="arrow arrow-right" catchtap="lookdetail" data-ind="{{currentind<welfareInfoList.length-1?currentind+1:currentind}}"></view>
+			<view style="width:500rpx;position:absolute;left:125rpx;bottom:-80rpx;">
+				<view style="width:240rpx;line-height:80rpx;background:#FFCC00;border-radius:40rpx;text-align:center;color:white;float:left;font-size:30rpx;" catchtap="saveposter" data-img='{{bigimage}}'>保存海报</view>
+				<view wx:if='{{welfareInfo.welfareStatus==2}}' style="width:240rpx;line-height:80rpx;background:#1AAD19;border-radius:40rpx;text-align:center;color:white;position:relative;float:right;font-size:30rpx;">
+					<button style='width:100%;height:100%;position:absolute;top:0;right:0;opacity:0;' open-type='share'></button>
+					<view style="width:40rpx;height:40rpx;position:relative;top:12rpx;display:inline-block;">
+						<image style="width:40rpx;height:40rpx;display:block;" mode='aspectFit' src="https://www.51chaidan.com/images/sign/poster.png"></image>
+						<view wx:if='{{shareInfo.giveNumber>0}}' class="sharenum specialellipsis">{{shareInfo.giveNumber}}</view>
+					</view>
+					好友互赠
+				</view>
+				<view wx:if='{{welfareInfo.welfareStatus==1}}' class="btnstyle" style="width:240rpx;background:#fb595f;float:right;font-size:30rpx;" catchtap="gettodayposter">领取今日海报</view>
+				<view wx:if='{{welfareInfo.welfareStatus==3}}' class="btnstyle" style="width:240rpx;background:#FFCC00;float:right;" catchtap="getaward">领取奖励</view>
+			</view>
+		</view>
+
+		<view style="width:400rpx;position:absolute;bottom:180rpx;left:0;right:0;margin:0 auto;text-align:center;">
+			<view style="width:80rpx;height:80rpx;display:inline-block;vertical-align:top;position:relative;">
+				<view wx:if='{{ishowtips2}}' style='width:375rpx;height:50rpx;position:absolute;top:-50rpx;left:0rpx;z-index:10;'>
+					<view style='position:absolute;bottom:0;left:0;overflow:hidden;'>
+						<view style='line-height:30rpx;color:white;font-size:25rpx;text-align:center;border-radius:10rpx;background:#404040;position:relative;padding:5rpx;'>
+							<view wx:key='key' style='text-align:left;'>
+								<text>{{welfareInfo.giftName}}</text>
+							</view>
+						</view>
+						<view style='width:100%;height:10rpx;position:relative;'>
+							<image style='width:20rpx;height:10rpx;position:absolute;top:0;{{index==6?"right:20rpx;":"left:20rpx;"}}' src='https://clw.51chaidan.com/images/goods/black_arrow.png'></image>
+						</view>
+					</view>
+				</view>
+				<image style="width:80rpx;height:80rpx;" src="https://cdn.51chaidan.com/images/sign/fortune_bag.png" catchtap="showtips2"></image>
+			</view>
+
+			<view style="margin-left:20rpx;display:inline-block;vertical-align:top;color:white;max-width:300rpx;font-size:25rpx;line-height:40rpx;">
+				<view>已拥有海报{{welfareInfo.haveNumber}}/{{welfareInfo.gearPosition}}</view>
+				<view>再收集{{welfareInfo.gearPosition-welfareInfo.haveNumber}}张即可领取</view>
+			</view>
+
+		</view>
+
+		<view style="width:100%;height:160rpx;background:white;position:absolute;bottom:0;left:0;" catchtap="gobrandDetails" data-mid="{{welfareInfoList[currentind].brandId}}">
+			<image style="width:125rpx;height:125rpx;margin:15rpx;float:left;border-radius:10rpx;" src="{{brandInfo.brandInfo.logo}}"></image>
+			<view class="exhibdetxt">
+				<view class="exhibdxtxttitle specialellipsis" style="font-size:35rpx;font-weight:bold;">{{brandInfo.brandInfo.brandName}}</view>
+				<view class="exhibdxtxtadd" style="background:#31b3fb;border-radius:20rpx;" catchtap="addfrindcommonifun" data-url='{{brandInfo.brandInfo.picPublic}}'  data-name="{{brandInfo.brandInfo.brandName}}">关注公众号</view>
+				<view class="exhibdxtxtadd" style="background:#6aca6b;border-radius:20rpx;" catchtap="addfrindcommonifun" data-url='{{brandInfo.brandInfo.picFriend}}' data-name="{{brandInfo.brandInfo.brandName}}">添加好友</view>
+				<view class="dismtbcctxthead multilineellipsis" style="font-size:26rpx;color:#666;padding:15rpx 0 0 0;">简介：{{brandInfo.brandInfo.description}}</view>
+			</view>
+		</view>
+
+	</view>
+</view>
+
+<!-- 添加好友 关注公众号 图片弹框 -->
+
+<view class='mewcoupon' wx:if='{{addfrindcommoni}}'>
+	<view class='swfback' catchtouchmove="preventD" catchtap='closefrindcommoni'></view>
+	<view class="addfrindcommon">
+		<image class="addfrindcomimg" src="{{showimg}}" mode='aspectFit'></image>
+		<view class="addfrindcomsave" catchtap="sharesavethepicture">保存图片</view>
+	</view>
+</view>
+
+<!-- ishowsignin -->
+<view wx:if='{{ishowsignin}}' style="width:100%;height:100%;position:fixed;top:0;left:0;z-index:108;">
+	<view class='bgstyle' catchtap='closesignin' catchtouchmove="myCatchTouch"></view>
+
+	<view style="width:100%;height:{{windowHeight-statusBarHeightMc}}px;position:absolute;left:0;top:{{statusBarHeightMc}}px;z-index:10;" catchtap='closesignin' catchtouchmove="myCatchTouch">
+
+		<view style="width:100%;height:220rpx;position:absolute;left:0;top:0;">
+			<swiper bindanimationfinish="changeGoodsSwip" current="{{currentIndex}}" class="nsswiperdetail" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
+				<swiper-item wx:for="{{adList}}" wx:key="key">
+					<image src="{{item.src}}" style="width:100%;height:200rpx;border-radius:10rpx;" catchtap="exhibitionpubjump" data-id='{{item.activity_id}}' data-type='{{item.href_type}}'></image>
+				</swiper-item>
+			</swiper>
+		</view>
+
+		<view class="getsuccesstyle" catchtouchmove="myCatchTouch">
+			<view style="width:100%;font-size:35rpx;text-align:center;margin-top:20rpx;line-height:40rpx;">领取成功</view>
+
+			<view wx:for='{{receiveList}}' wx:key='key' style="width:460rpx;margin:20rpx 20rpx 0 20rpx;overflow:hidden;font-size:26rpx;">
+				<image style="width:100rpx;height:80rpx;float:left;border-radius: 10rpx;margin:20rpx 10rpx 0 0;" mode='aspectFit' src="{{item.img}}"></image>
+				<view class='multilineellipsis' style="width:300rpx;height:120rpx;float:left;display:table;">
+					<text style="display:table-cell;vertical-align:middle;">{{item.brandName}}海报×1</text></view>
+			</view>
+
+			<view class="btnstyle" style="background:#1AAD19;position:absolute;bottom:30rpx;left:100rpx;font-size:30rpx;">
+				<button style='width:100%;height:100%;position:absolute;top:0;right:0;opacity:0;' open-type='share'></button>
+				<view style="width:40rpx;height:40rpx;position:relative;top:10rpx;display:inline-block;">
+					<image style="width:40rpx;height:40rpx;display:block;" mode='aspectFit' src="https://www.51chaidan.com/images/sign/poster.png"></image>
+					<view wx:if='{{shareInfo.giveNumber>0}}' class="sharenum specialellipsis">{{shareInfo.giveNumber}}</view>
+				</view>
+				好友互赠
+			</view>
+
+		</view>
+
+		<view style="width:400rpx;position:absolute;bottom:80rpx;left:0;right:0;margin:0 auto;">
+			<view style="width:80rpx;height:80rpx;float:left;position:relative;">
+				<view wx:if='{{ishowtips3}}' style='width:375rpx;height:50rpx;position:absolute;top:-50rpx;left:0rpx;z-index:10;'>
+					<view style='position:absolute;bottom:0;left:0;overflow:hidden;'>
+						<view style='line-height:30rpx;color:white;font-size:25rpx;text-align:center;border-radius:10rpx;background:#404040;position:relative;padding:5rpx;'>
+							<view wx:key='key' style='text-align:left;'>
+								<text>{{welfareInfo.giftName}}</text>
+							</view>
+						</view>
+						<view style='width:100%;height:10rpx;position:relative;'>
+							<image style='width:20rpx;height:10rpx;position:absolute;top:0;{{index==6?"right:20rpx;":"left:20rpx;"}}' src='https://clw.51chaidan.com/images/goods/black_arrow.png'></image>
+						</view>
+					</view>
+				</view>
+				<image style="width:80rpx;height:80rpx;" src="https://cdn.51chaidan.com/images/sign/fortune_bag.png" catchtap="showtips3"></image>
+			</view>
+
+			<view style="margin-left:20rpx;float:left;color:white;max-width:300rpx;font-size:25rpx;">
+				<view>已拥有海报{{welfareInfo.haveNumber}}/{{welfareInfo.gearPosition}}</view>
+				<view>再收集{{welfareInfo.gearPosition-welfareInfo.haveNumber}}张即可领取</view>
+			</view>
+
+		</view>
+
+	</view>
+
+</view>
+
+<!--  图片授权  -->
+<view wx:if='{{exhpicsave}}' style='z-index:9999999;width:100%;height:100%;position:fixed;top:0;left:0;'>
+	<view style='width:100%;height:100%;background:#000;opacity:.5;'></view>
+	<view style='width:500rpx;height:240rpx;background:#fff;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;border-radius:16rpx;'>
+		<view style='padding:30rpx 0;width:100%;height:80rpx;text-align:center;line-height:80rpx;color:#333;font-size:26rpx;border-bottom:1rpx solid #e5e5e5;'>授权之后才能保存图片</view>
+		<view style='height:100rpx;width:100%;'>
+			<view style='color:#333;width:50%;float:left;height:100rpx;line-height:100rpx;text-align:center;font-size:26rpx;' catchtap='imgCanelTgexh'>取消</view>
+			<view style='color:#11fb3d;position:relative;width:50%;float:left;height:100rpx;line-height:100rpx;text-align:center;font-size:26rpx;'>
+				<button open-type="openSetting" bindopensetting="exhsavehandleSetting" style='width:100%;height:100%;position:absolute;left:0;top:0;opacity:0;z-index:1;'></button>
+				确定
+			</view>
+		</view>
+	</view>
+</view>
+
+<!--  授权弹框  -->
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight}}px;width: 100%;z-index: 30;' catchtap='pullupsignin'></view>
+
+<view wx:if='{{ishowextain}}' style="width:100%;height:100%;position:fixed;top:0;left:0;z-index:199999;">
+	<view class="bgstyle" catchtap="showextain"></view>
+	<view style="width:500rpx;height:500rpx;background:white;position:absolute;top:0;left:0;bottom:0;right:0;margin:auto;border-radius:10rpx;overflow:scroll;">
+		<view style="width:100%;text-align:center;font-size:35rpx;line-height:50rpx;marin-top:20rpx;">活动规则</view>
+		<view style="padding:10rpx;marin:20rpx 0;"><text style="font-size:26rpx;">{{welfareInfo.explain}}</text></view>
+	</view>
+</view>

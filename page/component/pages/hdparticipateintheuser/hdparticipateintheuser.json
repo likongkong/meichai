@@ -1,0 +1,9 @@
+{
+  "asdfasfdflePullDownRefresh": true,
+  "enablePullDownRefresh": true,  
+  "navigationBarTitleText": "活动参与用户",
+  "usingComponents": {
+    "hidewindow": "../../../../pages/hidewindow/hidewindow",
+    "t_f": "../../../../pages/topfunction/topfunction"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "asdfasfdflePullDownRefresh": true,
+  "enablePullDownRefresh": true,  
+  "navigationBarTitleText": "我的订单",
+    "usingComponents": {
+      "bnavigation": "../bottomComponent/bottomComponent",
+      "t_f": "../topfunction/topfunction"
+    }
+}

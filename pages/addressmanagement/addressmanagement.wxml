@@ -1,0 +1,43 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class='box'>
+	<radio-group class="radio-group">
+		<view class='addmhead' wx:for='{{addmandata}}' wx:key="key">
+			<!-- bindchange="radioChange" -->
+			<view class='addmheadcon'>
+				<view class='addmheatit'>
+					<view class='addmheadname'>{{item.consignee}}</view>
+					<view class='addmheadphone'>{{item.phone}}</view>
+				</view>
+				<view class='addaddman multilineellipsis'>
+					{{item.province}}{{item.city}}{{item.district}}{{item.address}}
+				</view>
+				<view class='addedit'>
+
+					<view class='addedleft addedtposi'>
+						<radio class='radipoi' name='addcheck' data-ind="{{item.aid}}" bindtap="obtainind" value="{{item.aid}}" checked="{{item.checked}}" />
+						<image class='addeditimgclick' hidden='{{!item.checked}}' src='../images/pressed_click.png'></image>
+						<image class='addeditimg' hidden='{{item.checked}}' src='../images/normal_click.png'></image>
+						默认地址
+					</view>
+
+					<view class='addedrightt addedtposi' bindtap='deladdress' data-isdefault='{{item.isdefault}}' data-ind="{{item.aid}}">
+						<image class='addeditimg' src='../images/icon_delete.png'></image>
+						删除
+					</view>
+					<view class='addedrighto addedtposi' bindtap='shippingAddress' data-address='{{item.address}}' data-aid='{{item.aid}}' data-city='{{item.city}}' data-consignee='{{item.consignee}}' data-district='{{item.district}}' data-phone='{{item.phone}}' data-province='{{item.province}}' data-idcard='{{item.idcard}}'>
+						<image class='addeditimg' src='../images/icon_edit.png'></image>
+						编辑
+					</view>
+
+				</view>
+
+			</view>
+
+		</view>
+	</radio-group>
+</view>
+<view class='addaddressmen' bindtap='addressnew'>添加新地址
+</view>
+<view style='width:100%;height:10rpx;'></view>

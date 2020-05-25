@@ -1,0 +1,8 @@
+@import "../../../../common/tabbar.wxss";
+@import "../../pages/drivetohidehome/drivetohidehome.wxss";
+
+page {
+  background: #f0f0f0;
+  width: 100%;
+  height: 100%;
+}

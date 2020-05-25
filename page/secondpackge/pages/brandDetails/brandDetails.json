@@ -1,0 +1,9 @@
+{
+  "asdfasfdflePullDownRefresh": true,
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "品牌详情",
+  "usingComponents": {
+    "t_f": "../../../../pages/topfunction/topfunction",
+    "tga_c": "../../../../pages/tgacomponent/tgacomponent"
+  }
+}

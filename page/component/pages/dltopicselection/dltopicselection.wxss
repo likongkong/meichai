@@ -1,0 +1,13 @@
+@import "../../pages/dldlcreate/dldlcreate.wxss";
+page{
+  background: #f4f5f9;
+}
+.dltshead{
+  padding: 0 26rpx;
+  height: 110rpx;
+  line-height: 110rpx;
+  font-size: 26rpx;
+  color: #a39ea1;
+}
+
+

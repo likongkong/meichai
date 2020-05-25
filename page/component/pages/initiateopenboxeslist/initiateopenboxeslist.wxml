@@ -1,0 +1,124 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view style='width:0;height:0;overflow:hidden;position:absolute;top:-1000px;' wx:for='{{listdata}}' wx:key='key' wx:if='{{item.open==1}}'>
+  <!-- <view style='width:100%;height:240px;background:#888;display:flex;justify-content:center;align-items:center;position:absolute;z-index:100;'> -->
+  <canvas canvas-id='snapshot{{item.activity_id}}' style='width:300px;height:240px;'></canvas>
+</view>
+
+
+<view style='width:100%;height:100%;  position: fixed;top: 0;left: 0;right: 0;bottom: 0;margin: auto;z-index:29;' wx:if='{{canvasshare}}'>
+    <view style='width:100%;height:100%;  background: #000;opacity: 0.5;' catchtap='sharebackgroundfun'></view>
+    <view style='width:300px;height:240px;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;'>
+          <image style='width:100%;height:100%;display:block;' src='{{snapshot}}'></image>
+          <view style='height:52rpx;line-height:52rpx;background:#3f9313;position:absolute;left:0;right:0;bottom:-100rpx;margin:auto;font-size:26rpx;color:#fff;width:200rpx;border-radius:10rpx;text-align:center;'><button open-type="share"  class='paycheadwconbott'></button>分享娃友群</view>
+    </view>
+    
+</view>
+
+
+
+
+<view style='position:fixed;top:{{statusBarHeightMc}}px;left:0;z-index:8;width:100%;'>
+   <view style='width:714rpx;height:90rpx;background:#fbea96;margin:20rpx auto 0;border:2rpx dashed #e9565d;border-radius:10rpx;position:relative;'>
+       <view style='width:120rpx;height:50rpx;line-height:50rpx;font-size:24rpx;color:#fff;text-align:center;background:#e46263;position:absolute;top:0;bottom:0;left:30rpx;margin:auto 0;border-radius:60rpx;z-index:1;'>拆盒奖励</view>
+       <view style='float:right;margin-right:23rpx;padding-top:5rpx; '>
+           <view style='width:100%;height:40rpx;font-size:26rpx;color:#000;text-align:right;'>每邀请1名新用户拆盒,拆整盒完成后返还<text style='color:#ed6366;'>≈</text><text style='font-size:34rpx;color:#ed6366;'>59</text><text style='color:#ed6366;font-size:24rpx;'>元</text></view>
+           <view style='font-size:22rpx;color:#575651;text-align:center;padding-top:5rpx;'>(返还上限=支付上限)</view>
+       </view>
+   </view>
+</view>
+
+<view style='width:100%;height:118rpx;'></view>
+
+<view wx:if='{{listdata.length>0}}' class='limlistbox' style='padding-top:15rpx;'>
+  <view class='aslbcbox' wx:for='{{listdata}}' wx:key='key' style='position: relative;border-bottom:none;background:#e4e4e4;margin:0 auto 20rpx;'>
+    <view class='aslbcbleft' style='height:{{item.heightc||382}}rpx;' catchtap='limitlotteryd' data-gid='{{item.goods_id}}'  data-activity_id='{{item.activity_id}}' data-id='{{item.id}}' data-open='{{item.open}}'>
+      <image class='bcimg' style='height:{{item.heightc||382}}rpx;width:100%;' src='{{item.cover}}' bindload="imageLoadad" data-indexnum='{{index}}'></image>
+      <view class='inopenboxus' wx:if='{{item.userInfo.length!=0}}'>
+           <image class='inopenboxuserimg' src='{{item.userInfo.headPortrait}}'></image>
+           <view class='inopenboxtxt'>
+               <view class='inopenboxtxtback'></view>
+               <view class='inopenboxtxtword'>{{item.userInfo.title}}</view>
+           </view>
+      </view>
+    </view>
+    <view style='border-radius: 0 0 10rpx 10rpx;background:#fff;padding:16rpx 12rpx 0;position:relative;'>
+      <view class='bctitle multilineellipsis' style='position:relative;' catchtap='limitlotteryd' data-gid='{{item.goods_id}}'  data-activity_id='{{item.activity_id}}' data-id='{{item.id}}' data-open='{{item.open}}'>{{item.shop_price}} {{item.name}}</view>
+      <view class='aslbccoto' catchtap='limitlotteryd' data-gid='{{item.goods_id}}'  data-activity_id='{{item.activity_id}}' data-id='{{item.id}}' data-open='{{item.open}}'>{{item.bottomInfo}}</view>
+      <view class='limitlbutli' style='position:relative;'>
+        <view class='aslbcbotrightboxil' wx:if='{{item.open==1}}'>
+         <!-- catchtap='distipshare' data-index='{{item.index}}' -->
+          <block wx:if='{{item.iftrshare}}'>
+              <view class='aslbcbotright' style='background:#3f9313;position:relative;'><button open-type="share" data-gid='{{item.goods_id}}' data-activity_id='{{item.activity_id}}' data-index='{{index}}' class='paycheadwconbott'></button>分享娃友群</view>
+          </block>
+          <block wx:else>
+              <view class='aslbcbotright' style='background:#3f9313;position:relative;' data-activity_id='{{item.activity_id}}' data-goods_id='{{item.goods_id}}' data-index='{{index}}' catchtap='shareimgbut'>分享娃友群</view>
+          </block>
+          
+          
+        </view> 
+        <view class='aslbcbotrightboxil' wx:else catchtap='limitlotteryd' data-gid='{{item.goods_id}}'  data-activity_id='{{item.activity_id}}' data-id='{{item.id}}' data-open='{{item.open}}'>
+          <view class='aslbcbotright' style='background:#3f85ff;position:relative;'>发起明盒</view>
+        </view>
+      </view>
+    </view>
+    <view style='width:100%;background:#e4e4e4;'>
+        <view style='width:640rpx;margin:0 auto;background:#fff;overflow: hidden;border-radius: 0 0 10rpx 10rpx;border-top:2rpx dashed #c8c8c8;'>
+            <view style='width:120rpx;height:70rpx;line-height:70rpx;float:left;font-size:26rpx;color:#f1940c;text-align:center;'>已邀请:</view>
+            <view style='width:400rpx;float:left;min-height:70rpx;'>
+                 <view style='width:65rpx;height:70rpx;float:left;position:relative;' wx:for='{{item.inviterInfor}}' wx:key='key'>
+                     <image style='width:50rpx;height:50rpx;line-height:50rpx;border-radius:50%;position:absolute;top:0;bottom:0;left:0;margin:auto 0;' src='{{item.headPhoto}}'></image>
+                 </view>
+                 <block wx:if='{{item.open==1}}'>
+                    <block  wx:if='{{item.iftrshare}}'>
+                         <view style='width:65rpx;height:70rpx;float:left;position:relative;'>
+                           <view style='width:50rpx;height:50rpx;line-height:46rpx;border-radius:50%;position:absolute;top:0;bottom:0;left:0;margin:auto 0;font-size:30rpx;color:#fff;background:#cfcfcf;text-align:center;'>+</view>
+                        <button open-type="share" data-gid='{{item.goods_id}}' data-activity_id='{{item.activity_id}}' data-index='{{index}}' class='paycheadwconbott'></button>
+                        </view>
+                    </block>
+                    <block wx:else>
+                         <view style='width:65rpx;height:70rpx;float:left;position:relative;' data-activity_id='{{item.activity_id}}' data-goods_id='{{item.goods_id}}' data-index='{{index}}' catchtap='shareimgbut'>
+                        <view style='width:50rpx;height:50rpx;line-height:46rpx;border-radius:50%;position:absolute;top:0;bottom:0;left:0;margin:auto 0;font-size:30rpx;color:#fff;background:#cfcfcf;text-align:center;'>+</view>
+                         </view>
+                    </block>
+                                     
+                 </block>
+                 <block wx:else>
+                    <view style='width:65rpx;height:70rpx;float:left;position:relative;' catchtap='clicktipstxt'>
+                        <view style='width:50rpx;height:50rpx;line-height:46rpx;border-radius:50%;position:absolute;top:0;bottom:0;left:0;margin:auto 0;font-size:30rpx;color:#fff;background:#cfcfcf;text-align:center;'>+</view>
+                    </view>                 
+                 </block>
+
+            </view>
+            <text style='width:120rpx;height:56rpx;line-height:30rpx;float:right;font-size:24rpx;color:#f1940c;text-align:center;padding:6rpx 0 0 0;' wx:if='{{item.open==1}}'>完成后\n返{{item.returnAmount}}元</text>
+            <text style='width:120rpx;height:56rpx;line-height:30rpx;float:right;font-size:24rpx;color:#f1940c;text-align:center;padding:6rpx 0 0 0;' wx:else>邀请1人\n返{{item.price}}元</text>
+        </view>
+    </view>
+
+
+
+
+  </view>
+</view>
+
+
+
+
+<!--  暂无数据  -->
+<view class='nodata' wx:if='{{listdata.length==0&&nodataiftr}}' style='height: 900rpx;width: 100%;position: relative;'>
+  <image src='../../../../pages/images/nodata.png' class='nodataimg' style='width: 280rpx;height: 300rpx;position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;'></image>
+</view>
+
+
+<view style='width:100%;{{isIphoneX?"height:140rpx;":"height:120rpx;"}}'></view>
+
+<view style='width:100%; position:fixed; left:0; bottom:0; border-top:1px solid #e5e5e5;background: #fff;z-index: 5;'>
+
+<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+
+
+
+</view>
+
+

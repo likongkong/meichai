@@ -1,0 +1,11 @@
+{
+  "asdfasfdflePullDownRefresh": true,
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "发现",
+  "usingComponents": {
+    "hidewindow": "../../../../pages/hidewindow/hidewindow",
+    "t_f": "../../../../pages/topfunction/topfunction",
+    "bnavigation": "/pages/bottomComponent/bottomComponent",
+    "tga_c": "../../../../pages/tgacomponent/tgacomponent"
+  }
+}

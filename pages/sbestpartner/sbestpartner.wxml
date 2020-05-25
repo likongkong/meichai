@@ -1,0 +1,103 @@
+
+    <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+    <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+<view class='bestpartnerbox' style='padding-bottom:160rpx;'>
+   <view class='bpbhead'>
+       <image class='bpbheadimg' src='http://www.51chaidan.com/images/store/rk_bor.png'></image>
+       <view class='bpblist'>
+           <view class='bpbhlbox'>
+               <view class='bpbhlleft'>
+                   <image class='bpbhllimg' data-suid='{{listdata[1].uid}}' catchtap='jumphompfun' wx:if='{{listdata[1].litpic}}' style='margin:106rpx auto 0;' src='{{listdata[1].litpic}}'></image>
+                   <view class='bpbhlltxt specialellipsis' wx:if='{{listdata[1].litpic}}'>{{listdata[1].nick}}</view>
+               </view>      
+               <view class='bpbhlleft' style='margin-left:50rpx;width:140rpx;'>
+                   <image src='http://www.51chaidan.com/images/store/rk_ac.png' data-suid='{{listdata[0].uid}}' catchtap='jumphompfun' wx:if='{{listdata[0].litpic}}' class='bpbhllefttopimg'></image>
+                   <image class='bpbhllimg' data-suid='{{listdata[0].uid}}' catchtap='jumphompfun' style='margin:30rpx auto 0;width:100rpx;height:100rpx;' wx:if='{{listdata[0].litpic}}' src='{{listdata[0].litpic}}'></image>
+                   <view class='bpbhlltxt specialellipsis'>{{listdata[0].nick}}</view>               
+               </view>
+               <view class='bpbhlleft' style='float:right;'>
+                   <image class='bpbhllimg' style='margin:140rpx auto 0;' data-suid='{{listdata[2].uid}}' catchtap='jumphompfun' wx:if='{{listdata[2].litpic}}' src='{{listdata[2].litpic}}'></image>
+                   <view class='bpbhlltxt specialellipsis' wx:if='{{listdata[2].litpic}}'>{{listdata[2].nick}}</view>               
+               </view>
+           </view>
+       </view>
+   </view> 
+   <view class='bpbcon'>
+      <view class='bpbconleft'>
+          <image class='bpbconleftimg' src='http://www.51chaidan.com/images/store/rk_sits.png'></image>
+          <view class='bpbconlefttxt specialellipsis'>开店成功</view>
+          <view class='bpbconlefttxt specialellipsis' style='color:#999;'>{{reward[0].desc}}</view>
+      </view>
+      <view class='bpbconleft'>
+          <image class='bpbconleftimg' src='http://www.51chaidan.com/images/store/rk_fs.png'></image>
+          <view class='bpbconlefttxt specialellipsis'>首单成功</view>
+          <view class='bpbconlefttxt specialellipsis' style='color:#999;'>{{reward[1].desc}}</view>
+      </view>
+      <view class='bpbconleft'>
+          <image class='bpbconleftimg' src='http://www.51chaidan.com/images/store/rk_ps.png'></image>
+          <view class='bpbconlefttxt specialellipsis'>利润分成</view>
+          <view class='bpbconlefttxt specialellipsis' style='color:#999;'>{{reward[2].desc}}</view>
+      </view>
+      <view class='bpbconleft'>
+          <image class='bpbconleftimg' src='http://www.51chaidan.com/images/store/rk_od.png'></image>
+          <view class='bpbconlefttxt specialellipsis'>订单分成</view>
+          <view class='bpbconlefttxt specialellipsis' style='color:#999;'>{{reward[3].desc}}</view>
+      </view>
+
+   </view>
+   <view style='height:16rpx;background:#F8F8F8;width:100%;'></view>
+   <view class='bpbbot'>
+
+
+        <view class='flowingwater'>
+            <view class='ssheadpofixedputforward' style='text-align:center;'>
+                    <view class='sshpofboxleft' catchtap='sshpofboxtab' data-ind='0'>
+                       <view class='sshpofboxlefttab {{tabind==0?"tabindclass":""}}'>合伙人列表<view class='sshpofboxlefttabbot' wx:if='{{tabind==0}}'></view></view>
+                    </view>
+                    <!-- <view class='sshpofboxleft' catchtap='sshpofboxtab' data-ind='1' >
+                       <view class='sshpofboxlefttab {{tabind==1?"tabindclass":""}}'>解优新品<view class='sshpofboxlefttabbot' wx:if='{{tabind==1}}'></view></view>
+                    </view>
+                    <view class='sshpofboxleft' catchtap='sshpofboxtab' data-ind='2' >
+                      <view class='sshpofboxlefttab {{tabind==2?"tabindclass":""}}'>解优新品<view class='sshpofboxlefttabbot' wx:if='{{tabind==2}}'></view></view>
+                    </view> -->
+            </view> 
+            <view class='bpbrecord'>
+                <view class='bpbrecordtit'>
+                    <view class='bpbrecordtitleft' style='color:#000;'>用户名</view>
+                    <view class='bpbrecordtitleft' style='color:#000;'>登录时间</view>
+                    <view class='bpbrecordtitleft' style='color:#000;'>合伙人分成(元)</view>
+                </view>
+                <view class='bpbrecordtit' wx:for='{{listdata}}' wx:key='key'>
+                    <view class='bpbrecordtitleft' data-suid='{{item.uid}}' catchtap='jumphompfun'>
+                        <view class='bpbtxtleft specialellipsis'>{{item.nick}}<image src='../images/jumpshopusers.png' class='jumpshopusers'></image></view>
+                    </view>
+                    <view class='bpbrecordtitleft'>{{item.login_time}}</view>
+                    <view class='bpbrecordtitleft'>{{item.profit}}
+                    <!-- <image class='profimg' src='http://www.51chaidan.com/images/store/rk_wx.png'></image> -->
+                    </view>
+                </view>
+
+      <!--  暂无数据  -->
+    <view wx:if='{{nodataiftr&&listdata.length==0}}' style='height:300rpx;width: 100%;position: relative;padding-top:150rpx;'>
+        <image src='../images/default_BG_Image@3x.png' style='width: 280rpx;height: 165rpx;margin:0 auto;display: block;'></image>
+        <view style='width:100%;height:60rpx;text-align: center;line-height: 60rpx;color: #8c8c8c;font-size: 30rpx;'>这里什么都没有</view>
+        <view style='width:100%;height:40rpx;text-align: center;line-height: 40rpx;color: #a0a0a0;font-size: 24rpx;'>快去看看别哒</view>
+    </view>
+
+
+
+
+            </view>   
+        </view>
+
+
+
+   </view>
+
+
+
+</view>
+
+<view class='spbottom' wx:if='{{B}}'>
+    <view class='spbottombut'><button  open-type="share" class='butsharesp'></button>邀请合伙人</view>
+</view>

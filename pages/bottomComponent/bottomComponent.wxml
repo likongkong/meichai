@@ -1,0 +1,75 @@
+<view class='comNavigation' style='{{isIphoneX?"height:130rpx;":"height:110rpx;"}}'>
+	<view class='comNavigationEve' catchtap='whomepage'>
+		<view style='width:100%;height:100%;'>
+			<view class='navigationltop'>
+				<image wx:if='{{whomepage}}' class='navigationltopimg' src='../images/pressed_shouye.png'></image>
+				<image wx:else class='navigationltopimg' src='../images/normal_shouye.png'></image>
+			</view>
+			<view wx:if='{{isChar}}' class='navigationlcon' style='{{whomepage?"color:#fd2844":""}};'>首页</view>
+		</view>
+	</view>
+	<view wx:if='{{isProduce}}' class='comNavigationEve' catchtap='dlfindfun'>
+		<view style='width:100%;height:100%;'>
+			<view class='navigationltop'>
+				<image wx:if='{{dlfind}}' class='navigationltopimg' src='https://clw.51chaidan.com//images/goods/findred.png'></image>
+				<image wx:else class='navigationltopimg' src='https://clw.51chaidan.com//images/goods/find1.png'></image>
+				<view class='tabshopimg specialellipsis' wx:if='{{dryinglistnum!=0}}' style='left:88rpx;'>{{dryinglistnum}}</view>
+			</view>
+			<view wx:if='{{isChar}}' class='navigationlcon' style='{{dlfind?"color:#fd2844":""}};'>发现</view>
+		</view>
+	</view>
+	<view wx:if='{{isProduce}}' class='comNavigationEve'>
+		<view style='width:100%;height:100%;position:relative;' bindtap='wnews'>
+			<view class='navigationltop'>
+				<image wx:if='{{wnews}}' src='https://www.51chaidan.com/images/toyCabinet/cabinet1.png' class='navigationltopimg'></image>
+				<image wx:else src='https://www.51chaidan.com/images/toyCabinet/cabinet.png' class='navigationltopimg'></image>
+			</view>
+			<view wx:if='{{isChar}}' class='navigationlcon' style='{{wnews?"color:#fd2844":""}};'>闲置</view>
+		</view>
+	</view>
+	 <!-- wx:if='{{isProduce}}' -->
+	<!-- <view class='comNavigationEve'>
+		<view style='width:100%;height:100%;position:relative;' bindtap='wnews'>
+			<view class='navigationltop'>
+            <image src='https://cdn.51chaidan.com/images/icon/iconToyShow.png?31' mode="widthFix" style="width:120rpx;height:60rpx;position:absolute;bottom:5rpx;right:0;left:0;margin:0 auto;"></image>
+			</view>
+			<view wx:if='{{isChar}}' class='navigationlcon' style="font-weight:bold;font-size:30rpx;">
+				<text style="color:#f93f45">潮</text>
+				<text style="color:#FFCC00">玩</text>
+				<text style="color:#31b3fb">展</text></view>
+		</view>
+	</view> -->
+	<view class='comNavigationEve' bindtap='wshoppingCart'>
+		<view style='width:100%;height:100%;position:relative;'>
+			<view class='navigationltop'>
+				<image wx:if='{{wCart}}' class='navigationltopimg' src='../images/shoppingCarImage@2x.png'></image>
+				<image wx:else class='navigationltopimg' src='../images/shoppingCarNotImage@2x.png'></image>
+				<view class='tabshopimg specialellipsis' wx:if='{{shopnum!=0}}' style='left:88rpx;'>{{shopnum}}</view>
+			</view>
+			<view wx:if='{{isChar}}' class='navigationlcon' style='{{wCart?"color:#fd2844":""}};'>购物车</view>
+		</view>
+	</view>
+	<view class='comNavigationEve' bindtap='wmy'>
+		<view style='width:100%;height:100%;'>
+			<view class='navigationltop'>
+				<image wx:if='{{wmy}}' class='navigationltopimg' src='../images/pressed_wode.png'></image>
+				<image wx:else class='navigationltopimg' src='../images/normal_wode.png'></image>
+			</view>
+			<view wx:if='{{isChar}}' class='navigationlcon' style='{{wmy?"color:#fd2844":""}};'>我的</view>
+		</view>
+	</view>
+</view>
+
+
+<view class="wsh" style="z-index:101;" wx:if='{{exhtipbox}}'>
+    <view class="tgimgboxgb" catchtap="exhtiphidden"></view>
+		<view style="width:620rpx;height:630rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;background:#fff;border-radius:10rpx;">
+				<swiper style="width:100%;height:332rpx;border-radius:10rpx;" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
+					<swiper-item wx:for="{{exhdata.banner}}" wx:key="key">
+						<image src="{{item.src}}" mode='aspectFit' style="width:100%;height:100%;display:block;border-radius:10rpx 10rpx 0 0;" data-type='{{item.type}}' data-url='{{item.url}}' catchtap="jumpimg"></image>
+					</swiper-item>
+				</swiper>	
+				<text style="display:block;padding:20rpx;text-align:center;color:#51a4fd;font-size:24rpx;line-height:38rpx;">{{exhdata.desc}}</text>	  
+				<view catchtap="comsubscribetip" style="width:200rpx;height:70rpx;line-height:70rpx;background:#e0b033;text-align:center;color:#fff;font-size:26rpx;position:absolute;left:0;right:0;bottom:20rpx;margin:0 auto;border-radius:50rpx;box-shadow: 3px 3px 5rpx #ccc;">订阅提醒<view style="width:160rpx;border-radius:8rpx;text-align:center;background:#fb595f;font-size:22rpx;color:#fff;position: absolute;top:-12rpx;right:-130rpx;height:40rpx;line-height:40rpx;">首次送优惠券</view></view>   
+		</view>
+</view>

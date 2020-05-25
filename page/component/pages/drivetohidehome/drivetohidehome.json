@@ -1,0 +1,9 @@
+{
+  "asdfasfdflePullDownRefresh": true,
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "bnavigation": "/pages/bottomComponent/bottomComponent",
+    "t_f": "../../../../pages/topfunction/topfunction"
+  }
+}

@@ -1,0 +1,151 @@
+@import "../../pages/dlfind/dlfind.wxss";
+@import "../../../../common/tabbar.wxss";
+@import "../../../../pages/signin/signin.wxss";
+@import "../../../../pages/detailspage/detailspage.wxss"; 
+@import "../../pages/awardwinningarea/awardwinningarea.wxss";
+@import "/pages/smokeboxlist/smokeboxlist.wxss";
+page{
+  background: #fff;
+  width:100%;
+}
+
+.dots {
+ height: 15rpx;
+ position: absolute;
+ left: 0;
+ bottom:0;
+ right: 0;
+ margin: auto;
+ text-align: center;
+}
+/*未选中时的小圆点样式 */
+.dot {
+ width: 15rpx;
+ height: 15rpx;
+ border-radius: 50%;
+ margin-right: 10rpx;
+ background-color: #ccc;
+ display: inline-block;
+ vertical-align: top;
+ opacity: 0.7;
+}
+.activeindex {
+  width: 15rpx;
+  height: 15rpx;
+  background-color:#ff2742;
+  opacity: 0.7;
+}
+
+.ocamenswiper{
+  width: 100%;
+  height: 280rpx;
+}
+.ocamenswipervie{
+  width: 720rpx;
+  height: 280rpx; 
+  margin: auto;
+}
+.ocamensweve{
+  width:100rpx;
+  height: 140rpx;
+  margin: 0 10rpx;
+  float: left; 
+}
+.ocamensweveimg{
+  height: 96rpx;
+  width: 96rpx;
+  border-radius: 50%;
+  display: block;
+  border:2rpx solid #fff;
+}
+.ocamenswevename{
+  width: 100%;
+  height: 40rpx;
+  font-size: 22rpx;
+  text-align: center;
+  line-height: 40rpx;
+
+}
+
+
+
+
+
+.ocabox{
+  width: 100%;
+}
+.ocaleftimgtit{
+  float: left;
+  width:50rpx;
+  height:36rpx;
+  margin:12rpx 10rpx 0 0;
+}
+.sousoo{
+  float: left;
+  width:30rpx;
+  height:30rpx;
+  margin:0 20rpx;
+  position:relative;
+  top:17rpx;
+  
+}
+.eveimgrange{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+.ocascroview{
+  width:506rpx;
+  white-space:nowrap;
+  height: 60rpx;
+  float: left;
+}
+.ocascrtxt{
+  height: 60rpx;
+  line-height: 60rpx;
+  float: right;
+  font-size: 24rpx;
+}
+.ocastev{
+  height: 60rpx;
+  line-height: 60rpx;
+  padding:0 20rpx 0 0;
+  display: inline-block;
+  font-size: 24rpx;
+}
+.ocabrandtxt{
+  height: 60rpx;
+  font-size: 24rpx;
+  line-height: 60rpx;
+  
+}
+/* scroll-view{ width: 100%; height: 100%;} */
+.letters{ position: fixed; top: 650rpx; right: 0; width: 120px; height: 700rpx;display: flex; flex-flow: column;z-index: 9;}
+.letters text{ display: block; font-size: 14px; color: #333; text-align: center; height:60rpx;line-height: 60rpx;}
+
+.ocambottom{
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  background: #fff;
+  position: fixed;
+  left: 0;
+  bottom: 110rpx;
+  z-index: 9;
+  text-align: center;
+  vertical-align: center;
+}
+.ocambottomeve{
+  display: inline-block;
+  width:350rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  border-radius: 10rpx;
+}
+.phcolor{
+  color: #595858;
+}

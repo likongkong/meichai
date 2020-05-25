@@ -1,0 +1,189 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class="robotbg" style="position:relative;">
+  <view style='width:660rpx;height:505rpx;margin:0 auto;padding-top:50rpx;position:relative;'>
+    <view style='position:absolute;width:100%;height:100%;top:0;left:0;z-index:3;'></view>
+    <swiper bindchange='mbindchange' current="{{goodsIndex}}" indicator-color="#fff" indicator-dots="{{false}}" circular="true" autoplay="true" interval="2200" duration="1000" style='width: 100%;height: 252rpx;'>
+      <swiper-item wx:for="{{msdata}}" wx:key="key">
+        <view style='width:100%;height:252rpx;'>
+          <view style='width:33%;height:252rpx;display:inline-block;vertical-align:top;' wx:for='{{item}}' wx:for-item='w' wx:for-index='num' wx:key="key">
+            <image src="{{w.src}}" bindload="mbimageLoadad" data-indexnum='1' data-ind='{{index}}' data-num='{{num}}' style='position:relative;width:{{w.width||660*0.33}}rpx;margin:0 auto;display: block;height: 175rpx;margin-top:7rpx;'></image>
+            <view class="multilineellipsis" style='height:56rpx;line-height:28rpx;width:92%;font-size:24rpx;text-align:center;margin:13rpx 4% 0 4%;'>{{w.content}}</view>
+          </view>
+        </view>
+      </swiper-item>
+    </swiper>
+    <!-- 盲盒 bindanimationfinish="changeGoodsSwip" -->
+    <swiper bindchange='bbindchange' current="{{goodsIndex}}" style='width: 100%;height: 252rpx;' indicator-color="#fff" indicator-dots="{{false}}" circular="true" autoplay="true" interval="2200" duration="1000" style='transform:rotateY(180deg);'>
+      <swiper-item wx:for="{{bsdata}}" wx:key="key">
+        <view style='width:100%;height:252rpx;transform:rotateY(180deg)'>
+          <view style='width:33%;height:252rpx;display:inline-block;vertical-align:top;' wx:for='{{item}}' wx:for-item='w' wx:for-index='num' wx:key="key">
+            <image src="{{w.src}}" bindload="mbimageLoadad" data-ind='{{index}}' data-num='{{num}}' data-indexnum='2' style='position:relative;width:{{w.width||660*0.33}}rpx;margin:0 auto;display: block;height: 175rpx;margin-top:10rpx;'></image>
+            <view class="multilineellipsis" style='height:56rpx;line-height:28rpx;width:92%;font-size:24rpx;text-align:center;margin:13rpx 4% 0 4%;'>{{w.content}}</view>
+          </view>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+  <view style="width:296rpx;height:170rpx;text-align:center;position:absolute;top:600rpx;right:90rpx;font-weight:bold;" catchtap="clickgetAward">
+    <view style="color:#101010;margin-top:30rpx;">剩余
+      <text style='color:#FB595F'>{{currenChance}}</text>次</view>
+    <view style="color:#FB595F;font-size:50rpx;">点击抽奖</view>
+  </view>
+  <view class="hintstyle specialellipsis" catchtap="seladdressfun">收货地址:
+    <text wx:if='{{aid!=0}}' style="text-decoration:underline;">{{addressinfo}}</text>
+    <text wx:else style="text-decoration:underline;">未设置</text>
+  </view>
+  <view style="width:200rpx;height:150rpx;position:absolute;top:600rpx;left:90rpx;">
+    <image class='awardstyle {{isappear?"appear":""}}' mode="aspectFit" src="{{awardimg}}"></image>
+  </view>
+</view>
+<view style="width:100%;margin:20rpx 0;">
+  <view class="chipcollectstyle" style="background:#e6f1fc;color:#1989fa;position:relative;">
+    <button open-type='share' style='opacity:0;position:absolute;top:0;left:0;height:100%;width:100%;'></button>
+    转发好友</view>
+  <view class="chipcollectstyle" style="background:#FFD944;color:#D48004;position:relative;" catchtap='gotosmokebox'>
+    去抽盒机</view>
+</view>
+<view style="width:100%;height:10rpx;"></view>
+
+<view style="width:680rpx;margin:15rpx;background:#323232;color:white;padding:20rpx;font-size:25rpx;">
+  <view style="width:100%;text-align:center;">活动规则\n</view>
+  <text>{{display}}</text>
+  <text catchtap="showactionrule">查看完整规则></text>
+</view>
+
+<view wx:if='{{recordList.length > 0}}' style="width:680rpx;margin:15rpx;background:#323232;padding:20rpx;">
+
+  <view style="color:white;">兑换记录</view>
+  <view wx:for='{{recordList}}' wx:key='key' style="margin-top:10rpx;color:{{item.roleType == 0 ? '#8BC34A':'#5CABFB'}};">
+    <view style="width:100%;height:60rpx;line-height:50rpx;color:{{item.roleType == 2 ? '#FE666B':''}};font-size:25rpx;overflow:hidden;">
+      <image style="width:50rpx;height:50rpx;float:left;" src="{{item.headphoto}}"></image>
+      <view class="specialellipsis" style="max-width:400rpx;float:left;margin-left:10rpx;">抽到了 {{item.content}}</view>
+      <view style="float:right;">{{item.insert_time}}</view>
+    </view>
+  </view>
+</view>
+
+<view wx:if='{{ishowawardpop}}' style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:199;'>
+
+  <view class='bgstyle' style="opacity:0.5;"  catchtouchmove="myCatchTouch"></view>
+
+  <view style="width:500rpx;height:450rpx;background:white;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;font-size:27rpx;padding:20rpx;border-radius:10rpx;" catchtouchmove="myCatchTouch">
+    <view style="width:100%;font-size:40rpx;line-height:50rpx;text-align:center;margin-top:10rpx;">恭喜您!</view>
+    <view style="width:100%;font-size:25rpx;line-height:50rpx;text-align:center;">抽到{{roleName}}</view>
+    <image style="width:200rpx;height:200rpx;margin:20rpx 150rpx;" mode="aspectFit" src="{{awardimg}}"></image>
+    <view style="width:100%;margin:20rpx 0;">
+      <view wx:if='{{true}}' class="againrollstyle" style="background:#e6f1fc;color:#1989fa;position:relative;" catchtap='againroll'>
+        <button open-type='share' style='opacity:0;position:absolute;top:0;left:0;height:100%;width:100%;'></button>
+        重抽一次</view>
+      <view class="againrollstyle" style="background:#FFD944;color:#D48004;position:relative;" catchtap='closeawardpop'>
+        确定领取</view>
+    </view>
+  </view>
+</view>
+
+<view wx:if='{{ishowagainroll}}' style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:199;'>
+
+  <view class='bgstyle' style="opacity:0.5;"  catchtouchmove="myCatchTouch"></view>
+
+  <view style="width:500rpx;height:450rpx;background:white;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;font-size:27rpx;padding:20rpx;border-radius:10rpx;" catchtouchmove="myCatchTouch">
+    <view style="width:100%;font-size:40rpx;line-height:50rpx;text-align:center;margin-top:10rpx;">重抽成功</view>
+
+    <view style="width:100%;font-size:25rpx;line-height:50rpx;text-align:center;">抽到{{roleName}}</view>
+
+    <image style="width:200rpx;height:200rpx;margin:20rpx 150rpx;" mode="aspectFit" src="{{awardimg}}"></image>
+
+    <view style="width:100%;margin:20rpx 0;">
+      <view class="againrollstyle" style="background:#FFD944;color:#D48004;position:relative;margin:0 150rpx;" catchtap='closeawardroll'>
+        确定领取</view>
+    </view>
+
+  </view>
+
+</view>
+
+
+<view style='width:100%;{{isIphoneX?"height:130rpx;":"height:110rpx;"}}'></view>
+
+<view style='width:100%; position:fixed; left:0; bottom:0; border-top:1px solid #e5e5e5;background: #fff;z-index: 5;'>
+  <bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+</view>
+
+<view wx:if='{{ishowlesschance}}' style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:199;'>
+  <view class='bgstyle' style="opacity:0.5;" catchtap='closelesschance' catchtouchmove="myCatchTouch"></view>
+  <view style="width:500rpx;height:250rpx;background:white;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;font-size:27rpx;padding:20rpx;border-radius:10rpx;" catchtouchmove="myCatchTouch">
+    <view style="width:100%;font-size:40rpx;line-height:50rpx;text-align:center;margin-top:10rpx;">剩余次数不足</view>
+    <view style="width:100%;font-size:25rpx;line-height:40rpx;text-align:center;margin-top:10rpx;color:gray">{{nochanceNotice}}</view>
+    <view style="line-height:60rpx;color:#FFD944;font-size:35rpx;position:absolute;left:0;right:0;bottom:30rpx;text-align:center;margin:0 auto;" catchtap='closelesschance'>
+      确定</view>
+  </view>
+</view>
+
+<view wx:if='{{ishowaddressNo}}' style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:199;'>
+  <view class='bgstyle' style="opacity:0.5;" catchtap='closeaddressNo' catchtouchmove="myCatchTouch"></view>
+  <view style="width:500rpx;height:250rpx;background:white;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;font-size:27rpx;padding:20rpx;border-radius:10rpx;" catchtouchmove="myCatchTouch">
+    <view style="width:100%;font-size:40rpx;line-height:50rpx;text-align:center;margin-top:10rpx;">未设置收货地址</view>
+    <view style="width:100%;font-size:25rpx;line-height:40rpx;text-align:center;margin-top:10rpx;color:gray">请选择收货地址后，再进行抽奖
+    </view>
+    <view style="line-height:60rpx;color:#FFD944;font-size:35rpx;position:absolute;left:0;right:0;bottom:30rpx;text-align:center;margin:0 auto;" catchtap='seladdressfun'>
+      设置地址</view>
+  </view>
+
+</view>
+
+<view wx:if='{{ishowawardrule}}' style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:199;'>
+  <view class='bgstyle' style="opacity:0.5;" catchtap='showactionrule' catchtouchmove="myCatchTouch"></view>
+  <view style="width:500rpx;height:550rpx;background:white;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;font-size:27rpx;padding:20rpx;border-radius:10rpx;" catchtouchmove="myCatchTouch">
+    <view style="width:100%;font-size:35rpx;line-height:50rpx;text-align:center;">活动规则</view>
+    <text>{{alert}}</text>
+    <view style="width:150rpx;line-height:60rpx;background:#FFD944;color:#D48004;position:absolute;left:0;right:0;bottom:50rpx;box-shadow: 3px 3px 6px 0px #999;text-align:center;margin:0 auto;" catchtap='showactionrule'>
+      去抽奖</view>
+  </view>
+</view>
+<!--  二级背景  -->
+<view class='tipbacktwo' wx:if='{{tipbacktwo}}' catchtouchmove="preventD" bindtap='receivingaddressfun'></view>
+<!--  收货地址  -->
+<view class='receivingaddress' wx:if='{{receivingaddress}}'>
+  <view class='recgadhead'>
+    收货地址
+    <image src='/pages/images/forknumber.png' class='recgadheadimg' bindtap='receivingaddressfun'></image>
+  </view>
+  <view class='recgadcon'>
+    <view class='recgaddata' wx:for='{{addressdata}}' wx:key='key'>
+      <view class='recgaddname' data-tipaid='{{item.aid}}' data-ind="{{index}}" data-tipadd='{{item.address}}' catchtap='revisethereceivingaddress'>
+        <view class='recgaddnameleft'>{{item.consignee}}</view>
+        <view class='recgaddnameleft'>{{item.phone}}</view>
+      </view>
+      <view class='recgadaddress' data-tipaid='{{item.aid}}' data-ind="{{index}}" data-tipadd='{{item.address}}' catchtap='revisethereceivingaddress'>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
+      <view class='recgadbottom'>
+        <view class='recgadbotleft'>
+          <image class='recgadbotleftimg' hidden='{{!item.checked}}' src='/pages/images/pressed_click.png'></image>
+          <image class='recgadbotleftimg' hidden='{{item.checked}}' src='/pages/images/normal_click.png'></image>
+          默认地址
+        </view>
+        <view class='recgadbotright' bindtap='deladdress' data-ind="{{item.aid}}">
+          <image src='/pages/images/icon_delete.png' class='recgadbotleftimg'></image>
+          删除
+        </view>
+        <view class='recgadbotright' style='margin-right:50rpx;' bindtap='jumpeditaddress' data-address='{{item.address}}' data-aid='{{item.aid}}' data-city='{{item.city}}' data-consignee='{{item.consignee}}' data-district='{{item.district}}' data-phone='{{item.phone}}'
+          data-province='{{item.province}}' data-idcard='{{item.idcard}}'>
+          <image src='/pages/images/icon_edit.png' class='recgadbotleftimg'></image>
+          编辑
+        </view>
+      </view>
+    </view>
+    <view class='recgadnodata' wx:if='{{addressdata.length==0}}'>
+      <image src='/pages/images/recaddnodata.png' class='recgadnodataimg'></image>
+    </view>
+  </view>
+  <view class='recgadbot' bindtap='jumpaddress'>
+    增加新地址
+  </view>
+</view>
+
+<view wx:if='{{suboformola}}' style='width:100%;height:100%;background:#000;opacity: 0;z-index: 1999;position: fixed;top: 0;left: 0;'></view>
+<!--  授权弹框  -->
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight}}px;width: 100%;z-index: 30;' catchtap='pullupsignin'></view>

@@ -1,0 +1,8 @@
+{
+  "asdfasfdflePullDownRefresh": true,
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "赚拆币",
+  "usingComponents": {
+    "t_f": "../../../../pages/topfunction/topfunction"
+  }
+}

@@ -1,0 +1,621 @@
+@import "../../pages/dlfind/dlfind.wxss";
+@import "../../../../common/tabbar.wxss";
+@import "../../../../pages/signin/signin.wxss";
+@import "../../../../pages/detailspage/detailspage.wxss";
+@import "../../../../pages/topfunction/topfunction.wxss";
+@import "/pages/smokeboxlist/smokeboxlist.wxss";
+
+page {
+  background: #fff;
+}
+
+.mtdgbox {
+  width: 100%;
+  height: 100%;
+  padding-bottom: 254rpx;
+}
+
+.topuserimg {
+  width: 50rpx;
+  height: 50rpx;
+  display: inline-block;
+  vertical-align: top;
+  border-radius: 50%;
+}
+
+.mtdghead {
+  width: 100%;
+  height: 100rpx;
+  border-bottom: 2rpx solid #b3b0b0;
+}
+
+.mtdghrtxt {
+  width: 150rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  padding-left: 10rpx;
+  font-size: 26rpx;
+  color: #1890ff;
+  float: left;
+}
+
+.mtdghleft {
+  width: 60rpx;
+  height: 100%;
+  position: relative;
+  float: left;
+}
+
+.mtdghright {
+  float: right;
+  line-height: 100rpx;
+  padding-right: 50rpx;
+  font-size: 26rpx;
+}
+
+.mtdghlimg {
+  width: 46rpx;
+  height: 46rpx;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+}
+
+.mtdghcom {
+  width: 100%;
+  height: 180rpx;
+  border-bottom: 2rpx solid #b3b0b0;
+}
+
+.mtdghimg {
+  width: 150rpx;
+  height: 100%;
+  float: left;
+  position: relative;
+}
+
+.mtdgimgb {
+  height: 150rpx;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto 0;
+}
+
+.mtdgctxt {
+  width: 460rpx;
+  height: 100%;
+  float: left;
+  margin-left: 12rpx;
+}
+
+.mtdbotbut {
+  height: 90rpx;
+  text-align: center;
+  line-height: 90rpx;
+  font-size: 26rpx;
+  position: fixed;
+  bottom: 112rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  display: flex;
+  background: #fff;
+  z-index: 9;
+}
+
+.hintbottom {
+  text-align: center;
+  font-size: 24rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  color: #747373;
+  position: fixed;
+  bottom: 200rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  z-index: 9;
+  /* background: #fff; */
+}
+
+/*  提示框  */
+
+.comtip {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 199999;
+}
+
+.comtipback {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.4;
+}
+
+.apptipbox {
+  height: 260rpx;
+  width: 500rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background: #fff;
+  border-radius: 20rpx;
+}
+
+.apptiphead {
+  height: 100rpx;
+  width: 100%;
+  text-align: center;
+  line-height: 100rpx;
+  font-size: 30rpx;
+  color: #666;
+  border-bottom: 1rpx solid #e5e5e5;
+}
+
+.apptipcont {
+  width: 94%;
+  margin: 0 auto;
+  padding: 60rpx 0 0 0;
+  font-size: 30rpx;
+  text-align: center;
+  color: #666;
+}
+
+.apptipbut {
+  height: 90rpx;
+  width: 100%;
+  border-top: 1rpx solid #e5e5e5;
+  font-size: 28rpx;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.apptiolefrigcom {
+  height: 90rpx;
+  line-height: 90rpx;
+  text-align: center;
+}
+
+.apptipleft {
+  width: 50%;
+  color: #474548;
+  float: left;
+  border-right: 1rpx solid #e5e5e5;
+}
+
+.apptipright {
+  width: 49%;
+  color: #36c225;
+  float: right;
+}
+
+.bcttconeve {
+  height: 40rpx;
+  line-height: 40rpx;
+  background: #fecccd;
+  font-size: 22rpx;
+  color: #ff1014;
+  padding: 0 15rpx;
+  border-radius: 20rpx;
+  float: left;
+  margin: 10rpx 12rpx 10rpx 0;
+}
+
+/*   单行  */
+
+.specialellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dlfdsimg {
+  width: 50rpx;
+  height: 50rpx;
+  display: inline-block;
+  position: relative;
+  top: 3rpx;
+  vertical-align: top;
+}
+
+.detaposiclick {
+  width: 100%;
+  height: 100rpx;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 3;
+}
+
+.detaposiclicktxt {
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: #000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.detaposiclickimg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.saleStyle {
+  height: 150rpx;
+  background: #000;
+  position: absolute;
+  opacity: 0.5;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto 0;
+}
+
+.saleimgStyle {
+  height: 150rpx;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto 0;
+}
+
+page {
+  background: #fff;
+}
+
+.mtotabeve {
+  width: 25%;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 26rpx;
+  text-align: center;
+  display: inline-block;
+  position: relative;
+}
+
+.mtotbebot {
+  width: 84%;
+  height: 6rpx;
+  background: #1890ff;
+  position: absolute;
+  bottom: -2rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+.mtobotbut {
+  height: 90rpx;
+  position: fixed;
+  bottom: 110rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  background: #fff;
+  z-index: 10;
+}
+
+.mtobotbuteve {
+  height: 84rpx;
+  width: 369rpx;
+  text-align: center;
+  line-height: 84rpx;
+  font-size: 26rpx;
+  color: #1890ff;
+  border: 2rpx solid #0076ff;
+  position: relative;
+  background: #fff;
+}
+
+.mtoceverig {
+  height: 48rpx;
+  line-height: 48rpx;
+  float: right;
+  padding-right: 40rpx;
+  position: relative;
+  font-size: 28rpx;
+}
+
+.mtoceveimg {
+  width: 34rpx;
+  height: 34rpx;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto 0;
+}
+
+.mtotipshop {
+  width: 500rpx;
+  height: 720rpx;
+  background: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+}
+
+.mtotipshead {
+  width: 100%;
+  height: 70rpx;
+}
+
+.mtotipimg {
+  width: 100%;
+  height: 300rpx;
+  position: relative;
+}
+
+.mtotipimgs {
+  width: 200rpx;
+  height: 300rpx;
+  margin: auto;
+  display: block;
+}
+
+.mtrindheadinpw {
+  width: 180rpx;
+  height: 66rpx;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.mtoheimg {
+  width: 36rpx;
+  height: 36rpx;
+  float: right;
+  padding: 17rpx 17rpx 0 0;
+}
+
+.statcfontcolor {
+  height: 48rpx;
+  font-size: 22rpx;
+  line-height: 28rpx;
+  color: #747373;
+  float: left;
+  width: 306rpx;
+  display: flex;
+  /* align-items: center; */
+  justify-content: space-around;
+  flex-direction: column;
+  text-align: left;
+}
+.multilineellipsistoy{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.awatipsclasif {
+  width: 230rpx;
+  height: 46rpx;
+  position: absolute;
+  top: -50rpx;
+  right: -10rpx;
+  z-index: 6;
+}
+
+.awaarrowmto {
+  width: 0;
+  height: 0;
+  border-left: 12rpx solid transparent;
+  border-right: 12rpx solid transparent;
+  border-top: 12rpx solid #000;
+  position: absolute;
+  bottom: -10rpx;
+  right: 27rpx;
+}
+
+.mtdghimgmask {
+  width: 100%;
+  height: 150rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto 0;
+  background: #000;
+  opacity: 0.5;
+  z-index: 2;
+}
+
+.mtdghimgmaskimg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 3;
+}
+
+.mtocevemak {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+}
+
+.awatipstxtci {
+  width: 100%;
+  height: 46rpx;
+  line-height: 46rpx;
+  text-align: center;
+  background: #000;
+  font-size: 24rpx;
+  color: #fff;
+  border-radius: 10rpx;
+}
+
+.today_disanum_tab_comtainer {
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  white-space: nowrap;
+  /* text-align: center;   */
+}
+
+.createPoster {
+  position: fixed;
+  left: 0;
+  top: -9999999rpx;
+  margin: auto;
+  z-index: 9999;
+}
+
+.bgstyle {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #000;
+  opacity: 0.5;
+}
+
+.tipimgurl{
+  width:460rpx;
+  position: absolute;
+  left: 0;right: 0;
+  top:320rpx;
+  z-index: 99;
+  border-radius: 9rpx;
+  margin: 0 auto;
+}
+.disanum_tab_myoher{
+  white-space:nowrap;
+  width:95%;
+  margin: auto;
+  height: 430rpx;
+  text-align: center;
+}
+.manyshopeve{
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+}
+.manyshopeveimg{
+  height: 240rpx;
+  width: 156rpx;
+  position: relative;
+}
+.mtotipimgseve {
+  width: 156rpx;
+  height: 240rpx;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+.addevesymbol{
+  width:45rpx;
+  height: 45rpx;
+  position: absolute;
+  top: 125rpx;
+  bottom: 0;
+  right: 0rpx;
+  color: #e94f57;
+  line-height: 45rpx;
+  text-align: center;
+  font-size: 38rpx;
+  font-weight: bold;
+  
+}
+
+.ocambottommy {
+  width:100%;
+  height:80rpx;
+  line-height:80rpx;
+  background:#fff;
+  position:fixed;
+  left:0;
+  bottom:110rpx;
+  z-index:9;
+  text-align:center;
+  vertical-align:center;
+  font-size:30rpx;
+}
+.ocambottomevemy {
+  display:inline-block;
+  width:350rpx;
+  height:60rpx;
+  line-height:60rpx;
+  text-align:center;
+  border-radius:10rpx;
+  position: relative;
+}
+.ocambottomevemy {
+  display:inline-block;
+  width:350rpx;
+  height:60rpx;
+  line-height:60rpx;
+  text-align:center;
+  border-radius:10rpx;
+  position: relative;
+}
+.fragment{
+  height:40rpx;
+  position: absolute;
+  bottom:15rpx;
+  z-index: 3;
+}
+.fragmentbg{
+  width:100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.6;
+}
+.fragmenttxt{
+  width: 100%;
+  height:40rpx;
+  text-align: center;
+  font-size: 20rpx;
+  color: #ecc65c;
+  position: absolute;
+  top: 0;
+  left: 0;
+  vertical-align: top;
+}
+.fragmentimg{
+  width: 16rpx;
+  height: 30rpx;
+  display: inline-block;
+  vertical-align: top;
+  margin:6rpx 5rpx 0 0;
+}
+.fragmentfont{
+  height: 40rpx;
+  display: inline-block;
+  line-height: 40rpx;
+}

@@ -1,0 +1,74 @@
+
+    <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+    <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+<view class='box'>
+     <view class='boxchir'>
+          <view class='perdahead'>
+              <view class='perdaheleft'>头像</view>
+              <view class='perdaheright'>
+                  <image class='perdahrimg' src='{{imgUrl}}'></image>
+                  <image class='whwddimg' src='../images/icon_in.png'></image> 
+              </view>
+          </view>
+           <view class='perdahead'> 
+              <view class='perdaheleft'>昵称</view>
+              <view class='perdaherighttit'>
+                  {{nametxt}}
+                  <image class='whwddimg' src='../images/icon_in.png'></image> 
+              </view>
+          </view>
+          <view class='perdahead' bindtap='sextipfun'>
+              <view class='perdaheleft'>性别</view>
+              <view class='perdaherighttit' wx:if='{{sex==1}}'>
+                  男
+                  <image class='whwddimg' src='../images/icon_in.png'></image> 
+              </view>
+              <view class='perdaherighttit' wx:if='{{sex==0}}'>
+                  女
+                  <image class='whwddimg' src='../images/icon_in.png'></image> 
+              </view>              
+          </view>
+          <view class='perdaheadbott' bindtap='open'>
+              <view class='perdaheleft'>地区</view>
+              <view class='perdaherighttit'>
+                  {{province}}  {{city}}  {{county}}
+                  <image class='whwddimg' src='../images/icon_in.png'></image> 
+              </view>
+          </view>
+
+
+
+
+
+
+     </view>
+</view>
+
+<!--  弹框背景  -->
+<view class='comback' wx:if='{{comback}}'></view>
+<!--  男女弹框  -->
+<view class='sexsel' wx:if='{{sextip}}'>
+   <view class='sexman womanclasstes' bindtap='selwoman'>女</view>
+   <view class='sexman tesclass' bindtap='selman'>男</view>
+   <view class='sexcancel' bindtap='sexcancel'>取消</view>
+</view>
+
+<!--  省市联动  -->
+<view class='citybackg' wx:if='{{cityback}}'></view>
+<view wx:if="{{condition}}" class="citypicker">
+  <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange" class="citybody">
+    <view class="cityheader">
+      <view bindtap="opencan" class="city-cancel">取消</view>
+      <view bindtap="opentr" class="city-true">确定</view>
+    </view>
+    <picker-view-column>
+      <view wx:for="{{provinces}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{citys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{countys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item}}</view>
+    </picker-view-column>
+  </picker-view>
+</view>

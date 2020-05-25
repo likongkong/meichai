@@ -1,0 +1,587 @@
+
+
+<canvas canvas-id='poster' class='createPoster' style='width:300px;height:{{canvasHeight}}px;'></canvas>
+
+<view style='width:0;height:0;overflow:hidden;position:absolute;top:-1000px;'>
+  <canvas canvas-id='snapshot' style='width:300px;height:240px;'></canvas>
+</view>
+
+<view class='topfbox' style='background:{{backcolor}};height:{{statusBarHeightMc}}px;'>
+  <view class='topftitletxt specialellipsis' style='vertical-align: top;'>
+    <image wx:if='{{userInfo.litpic}}' src='{{userInfo.litpic}}' class='topuserimg'></image>{{userInfo.nick}}的玩具柜</view>
+  <view class="left-icon" wx:if='{{arrow}}'>
+      <view class='topleftbackground'></view>
+      <view class='topnavigator' catchtap='gateback'></view>
+      <view class='topcontentline'></view>
+      <image src='https://www.51chaidan.com/images/homepage.png' class='toprightimg' catchtap='whomepage'></image>
+  </view>
+</view>
+
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view wx:if="{{headhidden}}" style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:999999;'></view>
+
+
+
+
+<view class='mtdgbox' wx:if='{{ownoth==2}}'>
+  <view class='mtdghead'>
+    <view class='mtdghleft' catchtap='allselect'>
+      <image src='{{isAllselect ? selectedimg : unselectedimg}}' class='mtdghlimg'></image>
+    </view>
+    <view class='mtdghrtxt'>全选</view>
+    <view class='mtdghright'>已选{{goodsNum}}个，总计￥{{goodsAmount}}</view>
+  </view>
+  <view wx:for='{{listdata}}' wx:key='key' class='mtdghcom' style='{{item.end||item.group_id==0?"border-bottom:2rpx solid #b3b0b0;":"border-bottom:0;"}}'>
+    <view class='mtdghleft'>
+      <!-- 组合商品 -->
+      <image wx:if='{{item.status!=1}}' src='{{item.selected ? selectedimg : unselectedimg}}' class='mtdghlimg' data-ind='{{index}}' data-group_id='{{item.group_id}}' data-toynumber='{{item.toyNumber}}' catchtap='singleselectgroup'></image>
+    </view> 
+    <view class='mtdghimg' catchtap='previewImgurl' data-imgurl='{{item.goods_img}}'>
+      <image src='{{item.goods_img}}' class='mtdgimgb' mode='aspectFit' style='width:150rpx;'></image>
+      <view wx:if='{{item.status==1}}' style='width:150rpx;' class='saleStyle'></view>
+      <image wx:if='{{item.status==1}}' style='width:150rpx;height:150rpx;' src='https://www.51chaidan.com/images/toyCabinet/selled.png' class='saleimgStyle'></image>
+            <!-- 碎片 -->
+      <view wx:if='{{item.channelId==3}}' class='fragment' style='width:150rpx;right:0;'>
+         <view class='fragmentbg'></view>
+         <view class='fragmenttxt'><image class='fragmentimg' src='https://www.51chaidan.com/images/toyCabinet/toyFragment.png'></image><text class='fragmentfont'>碎片</text></view>
+      </view>
+      <!-- 加号 -->
+      <view wx:if='{{item.group_id!=0&&!item.end}}' style='width:45rpx;height:45rpx;position:absolute;right:{{150/2-22}}rpx;bottom:-20rpx;color:#e94f57;line-height:45rpx;text-align:center;font-size:38rpx;font-weight:bold;z-index:3;'>+</view>
+    </view>
+    <view class='mtdgctxt' style='width:510rpx;'>
+      <view class='multilineellipsis' style='width:100%;height:73rpx;font-size:26rpx;line-height:36rpx;color:#000;margin-top:10rpx;'>{{item.chanceName}}{{item.goods_name}}</view>
+      <view class='specialellipsis ' style='width:100%;height:40rpx;font-size:24rpx;line-height:40rpx;color:#e51c23; '>款式:{{item.roleName}}<text wx:if='{{item.group_id!=0}}' style='float:right;color:#3f9313;font-size:26rpx;'>￥{{item.shop_price}}</text></view>
+      <view class='specialellipsis ' style='width:100%;height:48rpx;font-size:24rpx;line-height:48rpx;text-align:right; '>
+        <view wx:if='{{item.status==0&&item.channelId!=3&&item.channelId!=5}}' class='statcfontcolor specialellipsis'>截单时间：{{item.exprie_time}}</view>
+        <text style='float:left;color:#ff9800;' wx:if='{{item.desc && item.status==1}}'>{{item.desc}}</text>
+        <!-- 普通商品 -->
+        <text wx:if='{{item.group_id==0}}' style='float:right;color:#e51c23;font-size:28rpx;'>￥{{item.shop_price}}</text>
+        <!-- 组合商品 -->
+        <text wx:if='{{item.group_id!=0&&item.end}}' style='float:right;color:#e51c23;font-size:28rpx;'>组合价￥{{item.group_price}}</text>
+      </view>
+
+    </view>
+  </view>
+
+</view>
+
+
+<view wx:if='{{ownoth==2}}' class='hintbottom'>抽盒机确认款商品需要拆盒拆袋发货</view>
+<view class='ocambottommy' wx:if='{{ownoth==2}}'>
+  <view style='border:2rpx solid #85c25d;color:#85c25d;margin-right:15rpx;' class='ocambottomevemy' >
+    <button style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;' data-form='2' open-type="share"></button>生成海报</view>
+  <view  class='ocambottomevemy' style='border:2rpx solid #5daefd;color:#5daefd;' catchtap='dsbbbutclickt'>立即购买</view>
+</view>
+
+
+
+
+
+
+
+<bnavigation isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+
+
+
+
+
+<!--  授权弹框  -->
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight}}px;width: 100%;z-index: 130;'  catchtap='pullupsignin'></view>
+
+
+
+<!--  二级背景  -->
+<view class='tipbacktwo' wx:if='{{tipbacktwo}}' catchtouchmove="preventD" bindtap='tipbacktwo'></view>
+
+<view class='buybombsimmediately' wx:if='{{buybombsimmediately}}'>
+  <view class='bbsheadcon'>
+    <view class='bbshccom' bindtap='tipbacktwo' style='position: relative;'>
+      <view class='bbshccomleft'>已选购数量</view>
+      <image class='bbshccomimg' src='../../../../pages/images/icon_in.png'></image>
+      <view class='bbshccomright'>{{goodsNum}}</view>
+    </view>
+    <view class='bbshccom' bindtap='seladdressfun' style='position: relative;' wx:if='{{isshowaddress}}'>
+      <view class='bbshccomleft'>收货地址</view>
+      <image class='bbshccomimg' src='../../../../pages/images/icon_in.png'></image>
+      <view class='bbshccomright '>
+        <view style="width:100%;line-height:57rpx;text-align:right;" class="specialellipsis">{{tipnamephone}}</view>
+        <view style="width:100%;line-height:57rpx;text-align:right;" class="specialellipsis">{{tipaddress}}</view>
+      </view>
+    </view>
+
+    <view class='bbshccombot'>
+      <view class='bbshcombotleft'>应付金额</view>
+      <view class='bbshcombotright'>
+        <view class='bbshcombotpr'>￥{{total}}</view>
+        <view class='bbshcombotdet' bindtap='pricedetailc'>
+          <image class='bbshdetimg' src='../../../../pages/images/tipdet.png'></image>点击查看价格明细</view>
+      </view>
+    </view>
+    <view class='pricedetail' wx:if='{{pricedetailc}}'>
+      <view class='pricedetailo'>
+        <view class='pricedetailoleft'>商品价格</view>
+        <view class='pricedetailoright'>￥{{goodsAmount}}</view>
+      </view>
+
+      <view class='pricedetailo'>
+        <view class='pricedetailoleft'>运费<text style='padding-left:8rpx;color:#47981e;' wx:if='{{freightiftr>0}}'>(满￥{{defaultinformation.carriage.free}}包邮)</text></view>
+        <view class='pricedetailoright'>{{freight}}</view>
+      </view>
+
+    </view>
+    <view class='bbshccom'>
+      <view class='bbshccomleft'>买家留言</view>
+      <input class='buyermessage' type='text' bindinput="inputChange" value='{{desc}}' placeholder='选填备注,或添加微信好友({{wxnum}})'></input>
+    </view>
+  </view>
+  <view class='bbshbottom'>
+    <view class='bbshbottomhead'>
+    </view>
+    <view class='bbshbottombut' catchtap='diaplayaddressefm' style='position: relative;'>提交订单</view>
+  </view>
+
+</view>
+
+<!-- 地址确认提示 -->
+<view class='comtip' wx:if='{{addressefm}}'>
+  <view class='comtipback' catchtap='addresssefmcancel'></view>
+  <view class='apptipbox' style='height:300rpx;'>
+    <view class='apptipcont'>
+      <text>本单将以"{{tipaddress}}"地址发货</text>
+    </view>
+    <view class='apptipbut'>
+      <view class='apptipleft apptiolefrigcom' bindtap='seladdressfun'>更换地址</view>
+      <view class='apptipright apptiolefrigcom' style='position:relative;'  bindtap='placeorder'>确定下单</view>
+    </view>
+  </view>
+</view>
+
+
+
+
+<!--  收货地址  -->
+<view class='receivingaddress' wx:if='{{receivingaddress}}'>
+  <view class='recgadhead'>
+    收货地址
+    <image src='../../../../pages/images/forknumber.png' class='recgadheadimg' bindtap='receivingaddressfun'></image>
+  </view>
+  <view class='recgadcon'>
+    <view class='recgaddata' wx:for='{{addressdata}}' wx:key='key'>
+      <view class='recgaddname' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='revisethereceivingaddress'>
+        <view class='recgaddnameleft'>{{item.consignee}}</view>
+        <view class='recgaddnameleft'>{{item.phone}}</view>
+      </view>
+      <view class='recgadaddress' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='revisethereceivingaddress'>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
+      <view class='recgadbottom'>
+        <view class='recgadbotleft'>
+          <image class='recgadbotleftimg' hidden='{{!item.checked}}' src='../../../../pages/images/pressed_click.png'></image>
+          <image class='recgadbotleftimg' hidden='{{item.checked}}' src='../../../../pages/images/normal_click.png'></image>
+          默认地址
+        </view>
+        <view class='recgadbotright' bindtap='deladdress' data-ind="{{item.aid}}">
+          <image src='../../../../pages/images/icon_delete.png' class='recgadbotleftimg'></image>
+          删除
+        </view>
+        <view class='recgadbotright' style='margin-right:50rpx;' bindtap='jumpeditaddress' data-address='{{item.address}}' data-aid='{{item.aid}}' data-city='{{item.city}}' data-consignee='{{item.consignee}}' data-district='{{item.district}}' data-phone='{{item.phone}}'
+          data-province='{{item.province}}' data-idcard='{{item.idcard}}'>
+          <image src='../../../../pages/images/icon_edit.png' class='recgadbotleftimg'></image>
+          编辑
+        </view>
+      </view>
+    </view>
+    <view class='recgadnodata' wx:if='{{addressdata.length==0&&iftrnodata}}'>
+      <image src='../../../../pages/images/default_BG_Image@3x.png' style='width:414rpx;height:255rpx;display:block;margin:0 auto;'></image>
+    </view>
+  </view>
+  <view class='recgadbot' bindtap='jumpaddress'>
+    增加新地址
+  </view>
+
+</view>
+
+<view wx:if='{{suboformola}}' style='width:100%;height:100%;background:#000;opacity: 0.4;z-index: 1999;position: fixed;top: 0;left: 0;'></view>
+
+
+
+
+
+
+<!-- 我的玩具柜 -->
+
+<!-- 删除提示 -->
+<view class='comtip' wx:if='{{mtdlocation}}'>
+  <view class='comtipback'></view>
+  <view class='apptipbox'>
+    <!-- <view class='apptiphead'>提示</view> -->
+    <view class='apptipcont'>
+      <text>{{mtdtiploctxt}}</text>
+    </view>
+    <view class='apptipbut'>
+      <!-- <view class='apptipleft apptiolefrigcom' catchtap='apptiprightfun'>是</view> -->
+      <view class='apptipright apptiolefrigcom' style='position:relative;width:100%;' catchtap='mtdlocationfun'>确定</view>
+    </view>
+  </view>
+</view>
+
+
+
+
+
+
+<!-- 单个商品商品弹框 -->
+<view class='comtip' wx:if='{{pricemod}}'>
+  <view class='comtipback' catchtap='pricemodfun'></view>
+  <view class='mtotipshop'>
+    <view class='mtotipshead'>
+      <image src='../../../../pages/images/forknumber.png' class='mtoheimg' catchtap='pricemodfun'></image>
+    </view>
+    <view class='mtotipimg'>
+      <image class='mtotipimgs' style='width:{{tioimgwidth?tioimgwidth:""}}rpx;' src='{{goods_img}}'></image>
+    </view>
+    <view style='padding:20rpx 20rpx;text-align:center;color:#000;font-size:26rpx;'>{{rolename}}</view>
+    <view style='width:100%;height:70rpx;'>
+      <view style='width:200rpx;height:70rpx;line-height:70rpx;color:#000;font-size:26rpx;text-align:right;float:left;'>单卖价格</view>
+      <view style='width:280rpx;height:70rpx;float:left;'>
+        <view style='width:220rpx;border:2rpx solid #dcdfe6;height:66rpx;line-height:66rpx;font-size:26rpx;color:#909399;padding-left:15rpx;margin-left:15rpx;border-radius: 8rpx;'>
+          <text style='display: inline-block;height:66rpx;vertical-align: top;'>￥</text>
+          <input class='mtrindheadinpw' bindinput="inputChangeprice" type='number' value='{{inputdataprice}}'></input>
+        </view>
+      </view>
+    </view>
+    <view style='width:100%;height:70rpx;margin-top:20rpx;'>
+      <view style='width:200rpx;height:70rpx;line-height:70rpx;color:#59b11e;font-size:26rpx;text-align:right;float:left;'>组合寄售</view>
+      <view style='width:280rpx;height:70rpx;float:left;'>
+        <view style='width:235rpx;border:2rpx solid #59b11e;height:66rpx;line-height:66rpx;font-size:26rpx;color:#59b11e;margin-left:15rpx;border-radius: 8rpx;text-align:center;' catchtap='manydispalyfun'>添加商品</view>
+      </view>
+    </view>    
+    <view style='width:400rpx;height:66rpx;text-align:center;line-height:66rpx;color:#1989fa;font-size:26rpx;border:2rpx solid #a3d0fd;border-radius:8rpx;background:#e6f1fc;margin:26rpx auto 0;position:relative;' catchtap='modprice'>确定</view>
+  </view>
+</view>
+
+
+<!-- 多个商品商品弹框  catchtap='manypricemodfun' -->
+<view class='comtip' wx:if='{{manypricemod}}'>
+  <view class='comtipback'></view>
+  <view class='mtotipshop' style='width:640rpx;'>
+    <view class='mtotipshead'>
+      <image src='../../../../pages/images/forknumber.png' class='mtoheimg' catchtap='manypricemodfun'></image>
+    </view>
+    <scroll-view scroll-x="true" class="disanum_tab_myoher">
+        <!-- {{item.viewwidthtwo||240}} -->
+        <view class='manyshopeve' wx:for='{{tipsellist}}' style='width:156rpx;{{index+1!=tipsellist.length?"padding-right:45rpx;":""}}padding-top:30rpx;' wx:key='key'>
+            <!-- {{item.viewwidthtwo-14}} -->
+            <image wx:if='{{index!=0}}' style='position:absolute;left:142rpx;top:10rpx;height:40rpx;width:40rpx;border-radius:50%;z-index:1;' src='https://clw.51chaidan.com//images/goods/fork.png' data-ind='{{index}}' data-sid='{{item.id}}' catchtap='dldeletedata'></image>
+            <!-- {{item.viewwidthtwo||240}} -->
+            <view class='manyshopeveimg' style='width:156rpx;' >
+                <!-- style='width:{{item.viewwidthtwo||240}}rpx;' -->
+                <image class='mtotipimgseve' mode="aspectFill" src='{{item.goods_img}}'></image>
+            </view>
+            <view class='specialellipsis' style='padding:15rpx 2rpx;text-align:center;color:#000;font-size:24rpx;'>{{item.roleName}}</view>
+            <!-- {{item.viewwidthtwo||240}}  -->
+            <view style='width:156rpx;border:2rpx solid #dcdfe6;height:56rpx;line-height:56rpx;font-size:24rpx;color:#909399;padding-left:3rpx;border-radius: 8rpx;'>
+              <text style='display: inline-block;height:56rpx;vertical-align: top;width:30rpx;'>￥</text>
+              <!-- {{item.viewwidthtwo-30||240}} -->
+              <input style='width:126rpx;height:56rpx;display:inline-block;vertical-align:top;text-align:left;font-size:24rpx;' bindinput="inputselprice" data-inputindex='{{index}}' type='number' value='{{item.shop_price}}'></input>
+            </view>
+            <view class='addevesymbol' wx:if='{{index+1!=tipsellist.length}}'>+</view> 
+        </view>
+        <view wx:if='{{tipsellist.length!=3}}' style='width:60rpx;height:100%;position:relative;display: inline-block;vertical-align: top;'>
+            <!-- <view>+</view> -->
+            <image src='https://clw.51chaidan.com//images/goods/addicon.png' style='width:50rpx;height:50rpx;position:absolute;right:0;top:125rpx;' catchtap='addselshop'></image>
+        </view>
+    </scroll-view>
+
+    <view style='width:100%;height:70rpx;margin-top:20rpx;'>
+      <view style='width:183rpx;height:70rpx;line-height:70rpx;color:#59b11e;font-size:26rpx;text-align:right;float:left;'>组合价格</view>
+      <view style='width:360rpx;height:70rpx;float:left;'>
+        <view style='width:356rpx;border:2rpx solid #59b11e;height:66rpx;line-height:66rpx;font-size:26rpx;color:#59b11e;padding-left:15rpx;margin-left:15rpx;border-radius: 8rpx;'>
+          <text style='display: inline-block;height:66rpx;vertical-align: top;'>￥</text>
+          <input class='mtrindheadinpw' style='color:#59b11e;' bindinput="combinahangeprice" type='number' value='{{combinationprice}}'></input>
+        </view>
+      </view>
+    </view>    
+    <view style='width:500rpx;height:66rpx;text-align:center;line-height:66rpx;color:#1989fa;font-size:26rpx;border:2rpx solid #a3d0fd;border-radius:8rpx;background:#e6f1fc;margin:26rpx auto 0;position:relative;' catchtap='modpricemany'>确定</view>
+  </view>
+</view>
+
+<!-- 选择商品 -->
+<view wx:if='{{manyshopselect}}' style='position:fixed;top:{{statusBarHeightMc}}px;left:0;height:{{windowHeight-4+55}}px;width:100%;z-index:130;background:#fff;'>
+    <scroll-view  scroll-y="true" style='width:100%;height:{{windowHeight-40}}px;' bindscrolltolower='tolower'>
+        <view class='mtdghcom' wx:for='{{tiplist}}' wx:key='key'>
+          <view style='width:60rpx;height:100%;float:left;position:relative;' data-ind='{{index}}' catchtap='iftrcheckfunmony'>
+              <!-- 选中 -->
+              <image wx:if='{{item.iftrcheck}}' src='https://www.51chaidan.com/images/toyCabinet/selection.png' class='mtdghlimg'></image>        
+              <!-- 未选中 -->
+              <image wx:else src='https://www.51chaidan.com/images/toyCabinet/unchecked.png' class='mtdghlimg'></image>          
+          </view>
+          <view class='mtdghimg' style='width:160rpx;margin-left:20rpx;float:left;position: relative;' catchtap='previewImgurl' data-imgurl='{{item.goods_img}}'>
+            <image src='{{item.goods_img}}'  mode='aspectFit' style='left:0;width:150rpx;' class='mtdgimgb'></image>
+          </view>
+          <view class='mtdgctxt' style='width:480rpx;'>
+            <view class='multilineellipsis' style='width:100%;height:73rpx;font-size:26rpx;line-height:36rpx;color:#000;margin-top:10rpx;'>{{item.chanceName}}{{item.goods_name}}</view>
+            <view class='specialellipsis' style='width:100%;height:48rpx;font-size:24rpx;line-height:48rpx;color:#e51c23;'>款式:{{item.roleName}}<view class='mtoceverig' style='color:{{item.shop_price==0?"#000":"#e93d43"}};' wx:if='{{item.status!=4&&item.status!=3&&item.status!=2}}'>￥{{item.shop_price}}</view></view>
+          </view>
+        </view> 
+        <view style='width:100%;padding-top:200rpx;' wx:if='{{tiplist.length==0}}' catchtap='nonemanyshop'>
+          <image src='../../../../pages/images/default_BG_Image@3x.png' style='width:414rpx;height:255rpx;display:block;margin:0 auto;'></image>
+        </view>           
+    </scroll-view>
+    <view style='width:100%;height:40px;line-height:40px;text-align:center;color:#fff;background:#3f9313;position:absolute;left:0;bottom:55px;font-size:30rpx;' catchtap='selectsure'>添加组合</view>
+
+</view>
+
+
+
+
+
+
+
+
+<!-- 我的玩具柜 -->
+<view class='mtdgbox' wx:if='{{ownoth==1}}' style='{{manyshopselect?"height:80%;position:fixed;top:0;left:0;right:0;bottom:0;overflow:hidden;":""}}'>
+  <view class='mtdghead'>
+    <scroll-view scroll-x="true" class="today_disanum_tab_comtainer" scroll-with-animation="true" bindscroll='scrollleftf' scroll-left='{{scrollleft}}'>
+      <view class='mtotabeve' catchtap='headtabfun' wx:for='{{headtab}}' wx:key='key' id='q{{index}}' data-ind='{{item.ind}}' style='{{headtabid==item.ind?"color:#1890ff;":""}}'>{{item.name}}
+        <view class='mtotbebot' wx:if='{{headtabid==item.ind}}'></view>
+      </view>
+    </scroll-view>
+
+  </view>
+  <view class='mtdghcom' wx:for='{{listdataown}}' wx:key='key' style='{{item.end||item.group_id==0?"border-bottom:2rpx solid #b3b0b0;":"border-bottom:0;"}}'>
+    <view class='mtdghimg' style='width:160rpx;margin-left:20rpx;float:left;position: relative;' catchtap='previewImgurl' data-imgurl='{{item.goods_img}}'>
+      <image src='{{item.goods_img}}' mode='aspectFit' style='left:0;width:150rpx;' class='mtdgimgb'></image>
+      <view wx:if='{{item.status==1}}' class='mtdghimgmask' style='width:150rpx;'></view>
+      <image wx:if='{{item.status==1}}' class='mtdghimgmaskimg' style='width:150rpx;height:150rpx;' src='https://www.51chaidan.com/images/toyCabinet/selled.png'></image>
+
+      <!-- 碎片 -->
+      <view wx:if='{{item.channelId==3}}' class='fragment' style='width:150rpx;left:0;'>
+         <view class='fragmentbg'></view>
+         <view class='fragmenttxt'><image class='fragmentimg' src='https://www.51chaidan.com/images/toyCabinet/toyFragment.png'></image><text class='fragmentfont'>碎片</text></view>
+      </view>
+
+      <view wx:if='{{item.group_id!=0&&!item.end}}' style='width:45rpx;height:45rpx;position:absolute;left:{{150/2-22}}rpx;bottom:-20rpx;color:#e94f57;line-height:45rpx;text-align:center;font-size:38rpx;font-weight:bold;z-index:3;'>+</view>
+
+    </view>
+    <view class='mtdgctxt' style='width:540rpx;'>
+      <view class='multilineellipsis' style='width:100%;height:73rpx;font-size:26rpx;line-height:36rpx;color:#000;margin-top:10rpx;'>{{item.chanceName}}{{item.goods_name}}</view>
+      <view style='width:100%;height:40rpx;font-size:24rpx;line-height:40rpx;color:#e51c23;'>款式:{{item.roleName}}<view wx:if='{{item.status!=4&&item.status!=3&&item.status!=2&&item.group_id!=0}}' style='height:40rpx;font-size:24rpx;line-height:40rpx;color:#3f9313;float:right;margin-right:40rpx;'>￥{{item.shop_price}}</view></view>
+      
+      <view style='width:100%;height:48rpx;font-size:24rpx;color:#747373;'>
+        <view wx:if='{{item.status==0&&item.channelId!=3&&item.channelId!=5}}' class='statcfontcolor'>保留至{{item.exprie_time}}{{item.exprieStatus}}</view>
+        <view wx:elif='{{item.status==2||item.status==4}}' style='color:#42bd56;' class='statcfontcolor'>
+          <block wx:if='{{item.desc}}'>{{item.desc}}</block>
+          <block wx:else>待发货</block>
+        </view>
+        <view wx:elif='{{item.status==1}}' style='color:#ff9800;' class='statcfontcolor'>
+          <block wx:if='{{item.desc}}'>{{item.desc}}</block>
+          <block wx:else>已售出,款项3日内以微信零钱方式发放</block>
+        </view>
+        <view wx:elif='{{item.status==3}}' style='color:#299c28;' class='statcfontcolor'>
+          <block wx:if='{{item.desc}}'>{{item.desc}}</block>
+          <block wx:else>已发货,可到我的订单查询物流信息</block>
+        </view>
+
+
+        <!-- 普通调整价格 -->
+        <view class='mtoceverig' style='color:{{item.shop_price==0?"#000":"#e93d43"}};' wx:if='{{item.status!=4&&item.status!=3&&item.status!=2&&item.group_id==0}}'>￥{{item.shop_price}}
+          <image wx:if='{{item.shop_price==0&&item.status!=1}}' src='https://www.51chaidan.com/images/toyCabinet/set1.png' class='mtoceveimg'></image>
+          <image wx:elif='{{item.status!=1}}' src='https://www.51chaidan.com/images/toyCabinet/set.png' class='mtoceveimg'></image>
+          <!-- tips 提示 -->
+          <view class='awatipsclasif' wx:if='{{SHOW_TOP_MTO&&item.shop_price==0}}'>
+            <view class='awaarrowmto'></view>
+            <view class='awatipstxtci'>点击设置出售价格</view>
+          </view>
+          <view class='mtocevemak' catchtap='pricemodblocl' data-sid='{{item.id}}' data-shop_price='{{item.shop_price}}' data-rolename='{{item.roleName}}' data-viewwidthone='{{item.viewwidthone}}' data-viewwidthtwo='{{item.viewwidthtwo}}' data-goods_img='{{item.goods_img}}' wx:if='{{item.status!=1}}'></view>
+        </view>
+        <!-- 组合价格调整 -->
+        <view class='mtoceverig' style='color:{{item.shop_price==0?"#000":"#e93d43"}};' wx:if='{{item.status!=4&&item.status!=3&&item.status!=2&&item.group_id!=0&&item.end}}'>组合价￥{{item.group_price}}
+          <image wx:if='{{item.shop_price==0&&item.status!=1}}' src='https://www.51chaidan.com/images/toyCabinet/set1.png' class='mtoceveimg'></image>
+          <image wx:elif='{{item.status!=1}}' src='https://www.51chaidan.com/images/toyCabinet/set.png' class='mtoceveimg'></image>
+          <!-- tips 提示 -->
+          <view class='awatipsclasif' wx:if='{{SHOW_TOP_MTO&&item.shop_price==0}}'>
+            <view class='awaarrowmto'></view>
+            <view class='awatipstxtci'>点击设置出售价格</view>
+          </view>
+          <view class='mtocevemak' catchtap='selmodifyl' data-group_price='{{item.group_price}}' data-group_id='{{item.group_id}}' data-sid='{{item.id}}' data-shop_price='{{item.shop_price}}' data-rolename='{{item.roleName}}' data-viewwidthone='{{item.viewwidthone}}' data-viewwidthtwo='{{item.viewwidthtwo}}' data-goods_img='{{item.goods_img}}' wx:if='{{item.status!=1}}'></view>
+        </view>
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- 撤回 -->
+        <view wx:if='{{item.isWithdraw}}' style='width:100rpx;height:44rpx;line-height:44rpx;text-align:center;border:2rpx solid #fe8589;color:#fe8589;font-size:26rpx;float:right;border-radius:8rpx;' data-sid='{{item.id}}' catchtap='withdrawfun'>撤回</view>
+
+      </view>
+    </view>
+  </view>
+  <view style='width:100%;padding-top:200rpx;' wx:if='{{listdataown.length==0&&iftrnodata}}'>
+    <image src='../../../../pages/images/default_BG_Image@3x.png' style='width:414rpx;height:255rpx;display:block;margin:0 auto;'></image>
+  </view>
+
+</view>
+
+
+
+
+<view class='ocambottommy' wx:if='{{ownoth==1}}'>
+  <view style='border:2rpx solid #85c25d;color:#85c25d;margin-right:15rpx;' class='ocambottomevemy' catchtap='getPosterList'>
+    生成海报</view>
+  <view  class='ocambottomevemy' style='border:2rpx solid #5daefd;color:#5daefd;' catchtap='jumpmytoydg'>选择发货</view>
+</view>
+
+<!-- ishowposter -->
+<view wx:if='{{ishowposter}}' style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:199999;'>
+
+  <view class='bgstyle' catchtouchmove="myCatchTouch" catchtap='closeposter'></view>
+
+  <view style='width:600rpx;height:{{posterheight*2+120}}rpx;position:absolute;left:0;top:0;right:0;bottom:0;margin:auto;text-align:center;' >
+    <image style='width:{{posterwidth}}rpx;height:{{posterheight*2}}rpx;' mode="widthFix" src='{{imgPoster}}'> </image>
+
+    <view style='width:100%;height:60rpx;font-size:25rpx;margin-top:30rpx;display:flex;'>
+
+      <view style='flex:1;float:left;color:#fff;'>
+
+        <view style='width:250rpx;line-height:60rpx;border-radius:10rpx;background:#42a600;margin-left:25rpx;position:relative;'>
+          <button style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;' data-form='2' open-type="share"></button>
+          分享好友</view>
+
+      </view>
+
+      <view style='flex:1;float:left;color:#fff;'>
+
+        <view style='width:250rpx;line-height:60rpx;border-radius:10rpx;background:#5895e8;margin-left:25rpx;position:relative;' catchtap='savePoster'>保存海报</view>
+
+      </view>
+
+    </view>
+
+  </view>
+
+</view>
+
+<!-- ishowempty -->
+<view wx:if='{{ishowempty}}' style='width: 100%;height: 100%;position: fixed;top: 0;left: 0;z-index: 199999;'>
+
+  <view class='bgstyle' catchtouchmove="myCatchTouch" catchtap='closeempty'></view>
+
+  <view style='height:270rpx;width:520rpx;position:absolute;left:0;top:0;right:0;bottom:0;margin:auto;'>
+    <view style='height:270rpx;width:520rpx;background:#fff;border-radius:10rpx;'>
+
+      <view style='font-size:30rpx;padding:40rpx;line-height:60rpx;margin-top:30rpx;text-align:center;'>
+        <text>您的玩具柜空空如也</text>
+      </view>
+
+      <view style='width:300rpx;height:66rpx;text-align:center;line-height:66rpx;color:#1989fa;font-size:26rpx;border:2rpx solid #a3d0fd;border-radius:8rpx;background:#e6f1fc;margin:30rpx auto 0;position:relative;' catchtap='closeempty'>确定</view>
+
+    </view>
+
+  </view>
+
+</view>
+
+
+<view class='comtip' wx:if='{{tipimgurlbox}}'>
+  <view class='comtipback' catchtap='tipimgfun'></view>
+  <image class='tipimgurl' src='{{tipimgurl}}' mode="widthFix"></image>
+</view>
+
+<!-- isdelivergoods -->
+<view wx:if='{{isdelivergoods}}' style='width: 100%;height: 100%;position: fixed;top: 0;left: 0;z-index: 199999;'>
+  <view class='bgstyle' catchtouchmove="myCatchTouch"></view>
+
+  <view style='height:370rpx;width:520rpx;background:#fff;position:absolute;left:0;top:0;right:0;bottom:0;margin:auto;border-radius:10rpx;'>
+
+    <view style='font-size:30rpx;margin:20rpx;line-height:60rpx;text-align:left;'>
+      <view>放入玩具柜：可到抽盒机列表进入玩具柜再次交易</view>
+      <view>次日发货：现货次日发货，预售到货发出</view>
+    </view>
+
+    <view style='height:80rpx;font-size:30rpx;margin:20rpx;text-align:center;display:flex;'>
+
+      <view style='line-height:80rpx;color:#1989FA;float:left;z-index:1;flex: 1;position:relative;' catchtap="enterinto">放入玩具柜</view>
+
+      <view style='line-height:80rpx;color:#1989FA;float:left;z-index:1;flex: 1;position:relative;' catchtap="delivergoods">次日发货</view>
+    </view>
+  </view>
+
+</view>
+
+
+<!-- 撤回弹框 -->
+<view class='comtip' wx:if='{{withdrawiftr}}'>
+  <view class='comtipback' catchtap='cancelwidthdraw'></view>
+  <view class='apptipbox' style='height:300rpx;'>
+    <view class='apptiphead' style='color:#ec5b63;border-bottom:0;font-size:34rpx;'>撤回发货</view>
+    <view class='apptipcont' style='padding:0;font-size:26rpx;'>
+      <text>撤回后，可设置价格官方寄卖</text>
+      <view style='width:100%;text-align:center;color:#ef757b;'>(仅限1次)</view>
+    </view>
+    <view class='apptipbut' style='border-top:0;'>
+      <view class='apptipleft apptiolefrigcom' style='border-right:0;width:140rpx;height:56rpx;line-height:56rpx;text-align:center;color:#fff;background:#575757;margin-left:65rpx;border-radius:40rpx;' catchtap='cancelwidthdraw'>取消</view>
+      <view class='apptipright apptiolefrigcom' style='position:relative;width:140rpx;height:56rpx;line-height:56rpx;text-align:center;color:#fff;background:#e94f57;margin-right:65rpx;border-radius:40rpx;' catchtap='confirmwidthdraw'>撤回</view>
+    </view>
+  </view>
+</view>
+
+
+<view wx:if='{{!isBlindBoxDefaultAddress && ishowcover}}' style='width:100%;position:fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight}}px;z-index:12;' catchtap="showdealoradd"></view>
+
+<!-- ishowdealoradd -->
+<view wx:if='{{!isBlindBoxDefaultAddress && ishowdealoradd}}' style='width:100%;height:100%;position:fixed;top:0px;left:0;z-index:13;'>
+  <view class='bgstyle' catchtouchmove="myCatchTouch"></view>
+
+  <view style="width:650rpx;height:800rpx;position:absolute;top:0;bottom:0;left:50rpx;margin:auto 0;background:#f0f0f0;border-radius:20rpx;">
+    <view wx:if='{{ishowdeal}}' style="width:630rpx;height:670rpx;margin:10rpx;background:white;border-radius:20rpx;position:relative;">
+      <view style="width:100%;text-align:center;font-size:30rpx;line-height:80rpx;">抽盒机发货协议</view>
+      <image class="closestyle" src="https://www.51chaidan.com/images/driveCar/fanhui.png" catchtap='closedealoradd'></image>
+      <view style="width:570rpx;height:590rpx;font-size:28rpx;overflow:scroll;margin:0 30rpx;">
+        <text>抽盒机发货协议,\n一、关于完善小程序个人信息的说明\na)为完成您所达成的交易,自2019年12月11日起,您需要填写常用住所地地址作为默认收货地址。如无特殊情况(手动发货),我们将以该地址作为向您提供服务时所依凭据。\nb)自2019年12月11日起,若您未填写默认收货地址,您将无法使用抽盒机购买服务,其他服务正常使用。\n二、关于抽盒机发货规则修改的说明\na)自2019年12月11日起,抽盒机和玩具柜购买的商品次日发货(预售商品到货发出)，设置出售价格商品保留时间为21天(保留期),21天内未手动发货的,系统将在保留期届满时15天内(发货期),自动将到期商品发货到您的默认地址(预售商品到货发出)。因不可抗力、意外事件或市场物流高峰期发货期可能会有延误。\nb)请确保您的默认地址是真实有效的,如有变动请及时修改默认地址信息。因您地址错误或其他个人原因导致的任何损失由您自行承担。\nc)自动/手动发货的订单,自我方发货时起即完成了交付义务。无论您以任何理由拒收的,所造成的损失由您个人承担。\nd)本协议保留期与发货期时效的计算均以次日开始计算。即保留期为商品下单的次日。发货期则以保留期满的次日开始计算。\ne)本协议除特有说明外,天/日是指自然日而非工作日。 </text>
+      </view>
+    </view>
+    <view wx:if='{{ishowdeal}}' class="agreestyle" catchtap="agreeset">同意并设置默认收获地址</view>
+
+    <view wx:if='{{ishowadd}}' style="width:100%;height:100%;position:relative;">
+      <image class="closestyle" src="https://www.51chaidan.com/images/driveCar/fanhui.png" catchtap='closedealoradd'></image>
+      <view style="font-size:30rpx;line-height:50rpx;color:#ff2742;margin-left:10rpx;">必须选择一个默认收货地址</view>
+      <view style="width:630rpx;height:660rpx;margin:0 10rpx;overflow:scroll;">
+        <view wx:for='{{addressdata}}' wx:key='key' style="width:100%;height:150rpx;border-radius:10rpx;background:white;margin:5rpx 0;" catchtap="selectdefult" data-ind="{{index}}">
+          <view style="width:100rpx;height:100%;display:inline-block;vertical-align:top;"  >
+            <image class='recgadbotleftimg' hidden='{{!item.mchecked}}' src='/pages/images/pressed_click.png'></image>
+            <image class='recgadbotleftimg' hidden='{{item.mchecked}}' src='/pages/images/normal_click.png'></image>
+          </view>
+
+          <view style="width:500rpx;height:100%;display:inline-block;line-height:50rpx;vertical-align:top;">
+            <view style="width:100%;font-size:25rpx;margin-top:25rpx;">
+              <view style="display:inline-block;">{{item.consignee}}</view>
+              <view style="display:inline-block;margin-left:20rpx;">{{item.phone}}</view>
+            </view>
+
+            <view class="specialellipsis" style="font-size:25rpx;">{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
+          </view>
+        </view>
+
+        <view style="width:100%;height:150rpx;border-radius:10rpx;background:white;margin:5rpx 0;" catchtap="jumpaddress">
+          <view style="line-height:50rpx;text-align:center;padding-top:50rpx;">
+            <image style="width:50rpx;height:50rpx;display:inline-block;vertical-align:top;" src="https://www.51chaidan.com/images/driveCar/tianjia.png"></image>
+            <view style="display:inline-block;margin-left:20rpx;font-size:25rpx;vertical-align:top;" > 新建地址</view>
+          </view>
+        </view>
+      </view>
+      <view class="setcomplie" style="color:{{maddid!='' ? '#000': '#e0e0e0'}};" catchtap="{{maddid!='' ? 'setdefultadd': ''}}">设置完成</view>
+    </view>
+  </view>
+</view>
+
+
+
+

@@ -1,0 +1,173 @@
+/* page/component/pages/bargainDetail/bargainDetail.wxss */
+@import "../../common/mPublic.wxss";
+@import "../../../../pages/signin/signin.wxss";
+@import "../../../../common/newcoupon.wxss";
+
+page {
+  background: #ff6968;
+}
+
+.susBtnStyle {
+  width: 90rpx;
+  height: 90rpx;
+  font-size: 24rpx;
+  background: #000;
+  opacity: 0.5;
+  color: #fff;
+  border-radius: 50%;
+  position: fixed;
+  right: 20rpx;
+  top: 300px;
+  z-index: 3;
+}
+
+.susTextStyle {
+  height: 30rpx;
+  text-align: center;
+  width: 100%;
+  font-size: 24rpx;
+  color: #fff;
+}
+
+.oneStyle {
+  width: 710rpx;
+  margin: 0 20rpx;
+  position: relative;
+  top: 0;
+  overflow: hidden;
+  font-size: 30rpx;
+}
+
+.headStyle {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 10rpx;
+  position: absolute;
+  top: 20rpx;
+  left: 20rpx;
+  margin: 0 auto;
+}
+
+.get_awardStyle {
+  width: 550rpx;
+  height: 570rpx;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  font-size: 30rpx;
+  border-radius: 10rpx;
+}
+
+.inputstyle {
+  height: 55rpx;
+  font-size: 30rpx;
+  background: #dedede;
+  border-radius: 10rpx;
+  margin: 20rpx 20rpx;
+}
+
+.torustyle {
+  width: 170rpx;
+  height: 170rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+}
+
+.circlestyle {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.tagclass {
+  height: 40rpx;
+  background: #d9d9d9;
+  float: left;
+  margin-left: 10rpx;
+  padding: 0 10rpx;
+  border-radius: 5rpx;
+}
+
+/*  提示框  */
+
+.comtip {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1999;
+}
+
+.comtipback {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.4;
+}
+
+.apptipbox {
+  height: 360rpx;
+  width: 500rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 10;
+  background: #fff;
+  border-radius: 20rpx;
+}
+
+.actiontitle {
+  height: 50rpx;
+  width: 100%;
+  text-align: center;
+  line-height: 50rpx;
+  font-size: 32rpx;
+  color: #666;
+  border-bottom: 0;
+  font-weight: bold;
+  margin-top: 10rpx;
+}
+
+.apptipcont{
+  width: 100%;
+  padding: 30rpx 0;
+  font-size: 30rpx;
+  text-align: center;
+  color: #666;
+}
+
+.actionName{
+  width: 100%;
+  height:72rpx;
+  line-height: 36rpx;
+  color: #000;
+  text-align: center;
+  font-size:26rpx;
+}
+
+.actionApply {
+  width: 240rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  margin:26rpx 140rpx;
+  font-size: 28rpx;
+  text-align: center;
+  color: #fff;
+  border-radius: 10rpx;
+  background: #ff2742;
+}
+

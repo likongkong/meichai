@@ -1,0 +1,51 @@
+<!--page/component/pages/playgrasslist/playgrasslist.wxml-->
+
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}' is_share='{{is_share}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+
+<view wx:if='{{listdata.length>0}}' class='limlistbox' style='padding-top:15rpx;'>
+  <view class='aslbcbox' wx:for='{{listdata}}' wx:key='key' style='position:relative;box-shadow: 2px 2px 5rpx #ccc;' catchtap='crowdfunding' data-id='{{item.id}}'>
+    <view class='aslbcbleft' style='height:{{item.heightc||382}}rpx;'>
+      <image class='bcimg' style='height:{{item.heightc||382}}rpx;' src='{{item.cover}}' bindload="imageLoadad" data-id='{{item.id}}'></image>
+      <view wx:if='{{item.status == 3}}' class='actnewlabel_box specialellipsis' style="position:absolute;top:10rpx;right:10rpx;z-index:2;background:gray;font-size:24rpx;height:36rpx;line-height:36rpx; ">已结束</view>
+      <view wx:if='{{item.status == 2}}' class='actnewlabel_box specialellipsis' style="position:absolute;top:10rpx;right:10rpx;z-index:2;font-size:24rpx;height:36rpx;line-height:36rpx; ">剩余{{item.distanceEnd}}天</view>
+      <view wx:if='{{item.status == 1}}' class='actnewlabel_box specialellipsis' style="position:absolute;top:10rpx;right:10rpx;z-index:2;background:gray;font-size:24rpx;height:36rpx;line-height:36rpx;">未开始</view>
+    </view>
+    <view class='aslbcbright' style="overflow:hidden;padding:16rpx 12rpx; ">
+      <image class='chbleft' mode="aspectFit" data-indexnum='{{index}}' src="{{item.logBrand}} "></image>
+
+      <view style="width:500rpx;margin-left:10rpx;float:left;font-size:26rpx; ">
+        <view style="width:100%;color:#26AFFB " class='specialellipsis'>{{item.title}}</view>
+        <view style="width:100%;margin-top:10rpx;">{{item.name}}</view>
+         <!-- class='specialellipsis' -->
+      </view>
+
+    </view>
+    <view style="width:95%;height:10rpx;background:#e6e5e5;margin:auto;">
+      <view style="width:{{item.ratioTarget>100?100:item.ratioTarget}}%;height:10rpx;background:#ff2742; "></view>
+    </view>
+
+    <view style="width:100%;height:70rpx;display:flex;line-height:30rpx;text-align:center;font-size:26rpx;padding-top:13rpx; ">
+
+      <view style="flex:1;height:100%; ">
+        <view>种草金</view>
+        <view>￥{{item.amount}}</view>
+      </view>
+      <view style="flex:1;height:100%; ">
+        <view>已达成</view>
+        <view>{{item.ratioTarget}}%</view>
+      </view>
+      <view style="flex:1;height:100%; ">
+        <view>参与人数</view>
+        <view>{{item.count}}</view>
+      </view>
+
+    </view>
+  </view>
+  
+</view>
+
+<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' 
+dryinglistnum='{{dryinglistnum}}'></bnavigation>
+

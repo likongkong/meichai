@@ -1,0 +1,10 @@
+<view wx:if='{{isAwardOrder}}' style='width:120rpx;height:120rpx;position:fixed;right:15rpx;bottom:300rpx;z-index:9999;' catchtap='jumporder'>
+    <image wx:if='{{!awardOrder.Info.isAwardOrder}}' style='width:100%;height:100%;display:block;' src='https://www.51chaidan.com/images/background/bg_icon_freeOrder.png'></image>
+    <image wx:if='{{awardOrder.Info.isAwardOrder}}' style='width:100%;height:100%;display:block;border-radius:50%;' src='{{awardOrder.Info.cover}}'></image>
+  <view wx:if='{{overtime!=0&&!awardOrder.Info.isAwardOrder}}' style='font-size:17rpx;position:absolute;bottom:18rpx;left:0;right:0;margin:0 auto;text-align:center;color:#FD3648;font-weight:bold;' class='{{awardOrder.Info.isAwardOrder?"timebg":""}}'>    
+  <text decode="{{true}}">&nbsp;</text>   {{overtime}}</view>
+  
+  <view wx:if='{{overtime!=0&&awardOrder.Info.isAwardOrder}}' style='width:90%;font-size:20rpx;position:absolute;bottom:-15rpx;rpx;left:5%;right:0;margin:0 auto;text-align:center;color:#fff;font-weight:bold;background:#F2923C;border-radius:15rpx;opacity:0.8;line-height:22rpx;'>    
+  <view>点击领奖</view>
+  <text decode="{{true}}"></text>{{overtime}}</view>
+</view>

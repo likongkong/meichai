@@ -1,0 +1,374 @@
+
+
+<hidewindow id='hide'></hidewindow>
+
+
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view style='width:0;height:0;overflow:hidden;position:absolute;top:-1000px;'>
+    <canvas canvas-id='snapshot' style='width:300px; height:300px;'></canvas>
+</view> 
+
+<view hidden="{{headhidden}}" style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:999999;'></view>
+<view class='dlfdbox'>
+    <view class='dlfcontent' style='margin-bottom:0;'>
+        <view class='dlfchead'>
+            <view class='dlfchleft'>
+                <image src='{{listdata.litpic}}' catchtap='jumpdlfchlimgdetail' data-nick='{{listdata.nick}}' data-uid='{{listdata.uid}}' class='dlfchlimg'></image>
+            </view>
+            <view class='dlfchright'>
+                <view class='dlfchrgift'>
+                    <image wx:if='{{listdata.is_gift==1}}' src='https://clw.51chaidan.com//images/goods/giftBox.gif' data-drying_id='{{listdata.drying_id}}' data-is_gift='{{listdata.is_gift}}' catchtap='receivegifts' class='dlfchrtopgif'></image>
+                    <image wx:if='{{listdata.is_gift==2}}' src='https://clw.51chaidan.com//images/goods/giftBoxOpen.png' data-drying_id='{{listdata.drying_id}}' data-is_gift='{{listdata.is_gift}}' catchtap='receivegifts' class='dlfchrtopgif'></image>
+  <!-- 提示框 -->
+  <view class='giftelfr' wx:if='{{listdata.gift_name&&listdata.iftrtip}}'>
+      <view class='awaarrow'></view>
+      <view style='width:{{listdata.is_gift==1?"140rpx":""}};' class='specialellipsis giftelfrtxt'>{{listdata.is_gift==1?'点击领取':listdata.gift_name}}</view>
+  </view>
+                </view>                
+                <view class='dlfchposirig'>
+                    <block wx:if='{{listdata.is_follow!=2}}'>
+                      <view class='dlfchltxt' wx:if='{{listdata.is_follow==0}}' data-drying_id='{{listdata.uid}}' data-is_follow='{{listdata.is_follow}}' catchtap='followfun'>关注</view>
+                      <view class='dlfchltxt' wx:if='{{listdata.is_follow==1}}' style='background:#cbcbcb;font-size:22rpx;' data-drying_id='{{listdata.uid}}' data-is_follow='{{listdata.is_follow}}' catchtap='followfun'>取消关注</view>
+                  </block>
+                </view>
+                <view class='dlfchrtop'>{{listdata.nick}}<image wx:if='{{listdata.is_good==1}}' class='dlfchrtopimg' src='https://clw.51chaidan.com/images/goods/authentication1.png'></image>
+                </view>
+
+                <view class='dlfchrbott'>
+                   <image class='dlfchrbimgleft' wx:if='{{listdata.user_position}}' src='https://clw.51chaidan.com//images/goods/location.png'></image>
+                   <text class='dlfchrbtxt specialellipsis' wx:if='{{listdata.user_position}}'>{{listdata.user_position}}</text>
+                   <view class='dlfchrbimgs' wx:if='{{listdata.user_position}}'></view>
+                   <text class='dlfchrbtxt'>{{listdata.insert_time}}</text>
+                </view>
+            </view>
+        </view>
+        <view class='dlfcccont'>{{listdata.title}}</view>
+        <view class='dlfcconibox' style='padding-bottom:30rpx;position:relative;'>
+           <block wx:if='{{videolist&&videolist.length==0&&listdata.img_extend==0}}'>
+               <view style='width:100%;height:500rpx;position:relative;'>
+                      <view style='height:384rpx;width:680rpx;position:absolute;background:#000;top:0;left:0;right:0;bottom:0;margin:auto;'>
+                          <view class='dlfchrbright' style='z-index:5;' wx:if='{{listdata.topic_name}}'>{{listdata.topic_name}}</view>
+                          <block wx:if='{{listdata.video_img}}'>
+                              <image wx:if='{{!ishowvideo}}' bindload="imageLoad" data-ifvideo='1' data-ind='ww' data-index='{{index}}' style='width:{{listdata.width||384}}rpx;margin:0 auto;height:100%;display:block;' src='{{listdata.video_img}}'  bindtap='previewVideo' data-videonum='999'></image> 
+                              <image wx:if='{{!ishowvideo}}' style='width:70rpx;height:70rpx;position:absolute;bottom:0;left:0;right:0;top:0;margin:auto;' src='https://www.51chaidan.com/images/icon/iconPlayVideo.png' data-videonum='999' bindtap='previewVideo'></image>
+                          </block>
+                          <block wx:else>
+                              <image style='width:70rpx;height:70rpx;position:absolute;bottom:0;left:0;right:0;top:0;margin:auto;' src='https://www.51chaidan.com/images/icon/iconPlayVideo.png' data-videonum='999' bindtap='previewVideo'></image>
+                          </block>
+                            
+                          <video wx:if='{{ishowvideo}}' id="myVideo999" show-fullscreen-btn="{{true}}" enable-progress-gesture="{{false}}" autoplay='{{false}}' src='{{video}}' style='width:{{listdata.width||384}}rpx;height:100%;position:absolute;left:0;top:0;right:0;bottom:0;margin:auto;' data-id='{{listdata.drying_id}}'></video>
+                          
+                      </view>
+               </view>
+           </block>
+           <block wx:else>
+                <swiper bindanimationfinish="changeGoodsSwip" current="{{goodsIndex}}" class="swiper" indicator-color="#fff" indicator-active-color="#ff2742" indicator-dots="{{listdata.img_extend.length!=0}}" circular="true" autoplay="{{listdata.video_path?false:true}}" interval="4000" duration="450"> 
+                        
+                    <swiper-item wx:if='{{listdata.video_path}}'>
+                      <view style='height:384rpx;width:680rpx;position:absolute;background:#000;top:0;left:0;right:0;bottom:0;margin:auto;'>
+                          <view class='dlfchrbright' style='z-index:5;' wx:if='{{listdata.topic_name}}'>{{listdata.topic_name}}</view>
+                          <block wx:if='{{listdata.video_img}}'>
+                              <image wx:if='{{!ishowvideo}}' bindload="imageLoad" data-ifvideo='1' data-ind='ww' data-index='{{index}}' style='width:{{listdata.width||384}}rpx;margin:0 auto;height:100%;display:block;' src='{{listdata.video_img}}'  bindtap='previewVideo' data-videonum='999'></image> 
+                              <image wx:if='{{!ishowvideo}}' style='width:70rpx;height:70rpx;position:absolute;bottom:0;left:0;right:0;top:0;margin:auto;' src='https://www.51chaidan.com/images/icon/iconPlayVideo.png' data-videonum='999' bindtap='previewVideo'></image>
+                          </block>
+                          <block wx:else>
+                              <image style='width:70rpx;height:70rpx;position:absolute;bottom:0;left:0;right:0;top:0;margin:auto;' src='https://www.51chaidan.com/images/icon/iconPlayVideo.png' data-videonum='999' bindtap='previewVideo'></image>
+                          </block>
+                            
+                          <video wx:if='{{ishowvideo}}' id="myVideo999" show-fullscreen-btn="{{true}}" enable-progress-gesture="{{false}}" autoplay='{{false}}' src='{{video}}' style='width:{{listdata.width||384}}rpx;height:100%;position:absolute;left:0;top:0;right:0;bottom:0;margin:auto;' data-id='{{listdata.drying_id}}'></video>
+                      </view>
+                    </swiper-item>
+                    <swiper-item wx:if='{{videolist&&videolist.length!=0}}' wx:for='{{videolist}}' wx:key='key'>
+                      <view style='height:384rpx;width:680rpx;position:absolute;background:#000;top:0;left:0;right:0;bottom:0;margin:auto;'>
+                          <view class='dlfchrbright' style='z-index:5;' wx:if='{{listdata.topic_name}}'>{{listdata.topic_name}}</view>
+                          <block wx:if='{{item.video_img}}'>
+                              <image wx:if='{{!item.ishowvideo}}' bindload="imageLoadvio" data-ifvideo='1' data-index='{{index}}' style='width:{{listdata.width||384}}rpx;margin:0 auto;height:100%;display:block;' src='{{item.video_img}}'  bindtap='previewVideo' data-videonum='{{index}}'></image> 
+                              <image wx:if='{{!item.ishowvideo}}' style='width:70rpx;height:70rpx;position:absolute;bottom:0;left:0;right:0;top:0;margin:auto;' src='https://www.51chaidan.com/images/icon/iconPlayVideo.png' data-videonum='{{index}}'  bindtap='previewVideo'></image>
+                          </block>
+                          <block wx:else>
+                              <image style='width:70rpx;height:70rpx;position:absolute;bottom:0;left:0;right:0;top:0;margin:auto;' src='https://www.51chaidan.com/images/icon/iconPlayVideo.png' bindtap='previewVideo' data-videonum='{{index}}'></image>
+                          </block>
+                          <video wx:if='{{item.ishowvideo}}' id="myVideo{{index}}" show-fullscreen-btn="{{true}}" enable-progress-gesture="{{false}}" autoplay='{{false}}' src='{{item.video_path}}' style='width:{{listdata.width||384}}rpx;height:100%;position:absolute;left:0;top:0;right:0;bottom:0;margin:auto;' data-id='{{listdata.drying_id}}'></video>
+                      </view>
+                    </swiper-item>
+                    <swiper-item wx:for="{{listdata.img_extend}}" wx:key="key">
+                      <view style='width:{{item.width||500}}rpx;height:500rpx;margin:auto;position:relative;'>
+                          <view class='dlfchrbright' wx:if='{{listdata.topic_name}}' style='z-index:5;'>{{listdata.topic_name}}</view>
+                          <image bindload="imageLoad" data-ind='{{index}}' data-index='{{index}}' bindtap='previewImg' src="{{item.img}}?{{appNowTime}}" style='width:{{item.width||500}}rpx;height:500rpx;margin:auto;position: relative;' class="slide-image" mode="aspectFit"></image> 
+                      </view>
+                    </swiper-item>
+                </swiper>           
+           </block>
+        </view>
+    </view>
+    
+    <view class='dlfddint' wx:if='{{listdata.introduce}}'><text>{{listdata.introduce}}</text></view>
+
+    <block wx:if='{{listdata.drying_type==2}}'>
+        <view style='width:100%;height:260rpx;position:relative;background:#fff;'>
+            <view class='dlfdsleft' style='height:260rpx;'>
+                <image class='dlfdslimg' src='{{listdata.goodsInfo.goods_img}}'></image>
+            </view>
+            <view class='dlfdsright' style='height:260rpx;'>
+                <view style='height:30rpx;widht:100%;'></view>
+                <view class='bctitle multilineellipsis'>
+                    {{listdata.goodsInfo.goods_name}}
+                </view>
+                <view style='width:100%;height:60rpx;' class='specialellipsis'>
+                    <view class='bcttconeve' wx:for='{{listdata.goodsInfo.label}}' wx:key='key' wx:if='{{item.value==1}}'>{{item.name}}</view>
+                </view>
+                <view style='width:100%;height:60rpx;position:relative;'>
+                    <view class='dlfdsrprice'><image class='dlfdsimg' src='../../../../pages/images/cgoldcoin1.png'></image>x{{listdata.goodsInfo.currency_sum}}</view>
+                    <view class='dlfdsmony' wx:if="{{listdata.is_convertible==1}}" catchtap='exchangefun'>兑换</view>
+                </view>
+            </view>
+        </view>
+    </block>
+
+    <block wx:else>
+      <view class='dlfdshop' style='{{listdata.goodsInfo.length>3&&detaposiiftr?"overflow:hidden;height:525rpx;":""}}{{listdata.goodsInfo.length>3&&!detaposiiftr?"padding-bottom:100rpx;":""}}' wx:if='{{listdata.goodsInfo.length!=0}}'>
+          <view style='width:100%;height:160rpx;position:relative;margin-bottom:15rpx;' wx:for="{{listdata.goodsInfo}}" wx:key="key"  data-goods_id='{{item.goods_id}}' catchtap='jumpshopdetail'>
+              <view class='dlfdsleft'>
+                  <image class='dlfdslimg' src='{{item.goods_thumb}}'></image>
+              </view>
+              <view class='dlfdsright'>
+                  <view style='height:15rpx;widht:100%;'></view>
+                  <view class='bctitle multilineellipsis'>
+                      {{item.goods_name}}
+                  </view>
+                  <view style='width:100%;height:60rpx;position:relative;'>
+                      <view class='dlfdsrprice'>￥{{item.price}}</view>
+                      <view class='dlfdsmony'>购买</view>
+                  </view>
+              </view>
+          </view>
+          <view class='detaposiclick' wx:if='{{listdata.goodsInfo.length>3}}'>
+            <image src='https://clw.51chaidan.com//images/goods/GradualChangee.png' class='detaposiclickimg'></image>
+            <view class='detaposiclicktxt' catchtap='detaposiiftrfun'>
+                <block wx:if='{{detaposiiftr}}'>展开 ↓</block>
+                <block wx:else>收起 ↑</block>
+            </view>
+          </view>
+      </view>
+    </block>
+
+    <!-- 荣誉记录 -->
+    <view class='dlfddrec' wx:if='{{listdata.honor_infor.is_confirm==1||listdata.honor_infor.is_top==1||listdata.honor_infor.is_comment==1}}'>
+        <view class='dlfddrectit'>荣誉记录</view>
+        <view class='dlfddreceve' wx:if='{{listdata.honor_infor.is_confirm==1}}'>
+            <view style='width:100%;height:50rpx;'>
+                <text style='float:left;color:#ffaa3c;'>官方认证</text>
+                <text style='float:right;color:#aeb1b2;'>{{listdata.honor_infor.confirm_time}}</text>
+            </view>
+            <view style='width:100%;min-height:50rpx;color:#000;'>{{listdata.honor_infor.confirm_reason}}</view>
+        </view>
+        <view class='dlfddreceve' wx:if='{{listdata.honor_infor.is_top==1}}' style='border:0;'>
+            <view style='width:100%;height:50rpx;line-height:50rpx;'>
+                <text style='float:left;color:#ffaa3c;'>置顶</text>
+                <text style='float:right;color:#aeb1b2;'>{{listdata.honor_infor.top_time}}</text>
+            </view>
+            <view style='width:100%;min-height:50rpx;color:#000;'>{{listdata.honor_infor.top_reason}}</view>
+        </view>
+        <view class='dlfddreceve' wx:if='{{listdata.honor_infor.is_comment==1}}' style='border:0;'>
+            <view style='width:100%;height:50rpx;line-height:50rpx;'>
+                <text style='float:left;color:#ffaa3c;'>官方评论</text>
+                <text style='float:right;color:#aeb1b2;'>{{listdata.honor_infor.official_time}}</text>
+            </view>
+            <view style='width:100%;min-height:50rpx;color:#000;'>{{listdata.honor_infor.official_comment}}</view>
+        </view>
+    </view>
+    <!-- 评论 -->
+    <view class='dlfddrec'>
+        <view class='dlfddrectit'>评论({{comment_count}})</view>
+        <block wx:if='{{commentlist&&commentlist.length!=0}}'>
+          <view class='dlfddcomment' wx:for='{{commentlist}}' wx:key='key'>
+              <view class='dlfddcleft'>
+                  <image class='dlfddclimg' src='{{item.headphoto}}'></image>
+              </view>
+              <view class='dlfddcright'>
+                  <view class='dlfddcrtxt'>
+                    <text class='dlfddcrtna'>{{item.user_name}}</text>
+                    <image class='dlfddcrtnaim' wx:if='{{item.is_good==1}}' src='https://clw.51chaidan.com/images/goods/authentication1.png?'></image>
+                    <view class='dlfddmoright' wx:if='{{item.is_selected==1}}'>精</view>
+                    <view class='dlfddmoright' wx:if='{{item.is_top==1}}'>顶</view>
+                  </view>
+                  <view class='dlfddcrint'>{{item.content}}</view>
+                  <view class='dlfddcrcomb' wx:if='{{item.reply_count!=0}}'>
+                      <view class='dlfddchead' catchtap='dlfddchimgcfun' data-dlfddind='{{index}}'>
+                          <text class='dlfddchtxt' style='width:20rpx;'></text>
+                          <text class='dlfddchtxt' style='color:#6d7cfa;'>{{item.reply_first}}</text>
+                          <text class='dlfddchtxt'>等人</text>
+                          <text class='dlfddchtxt' style='width:60rpx;'></text>
+                          <text class='dlfddchtxt' style='color:#6d7cfa;'>共{{item.reply_count}}条回复</text>
+                          <image class='dlfddchimgc' wx:if='{{item.iftrdisplay}}'  src='https://clw.51chaidan.com/images/goods/uparrow.png?'></image>
+                          <image class='dlfddchimgc' wx:if='{{!item.iftrdisplay}}' src='https://clw.51chaidan.com/images/goods/downarrow.png?'></image>
+                      </view>
+                      <!-- 评论内容 -->
+                      <block wx:if='{{item.iftrdisplay}}'>
+                        <view class='dlfddconcomcon' wx:for='{{item.reply_list}}' wx:for-item='items' wx:for-index='indexs' wx:key='key'>
+                            <view class='dlfddcleft'>
+                                <image style='margin-left:13rpx;' class='dlfddclimg' src='{{items.headphoto}}'></image>
+                            </view>
+                            <view class='dlfddcright' style='width:500rpx;'>
+                                    <view class='dlfddcrtxt'>
+                                      <text class='dlfddcrtna'>{{items.user_name}}</text>
+                                      <image class='dlfddcrtnaim' wx:if='{{items.is_good==1}}'  src='https://clw.51chaidan.com/images/goods/authentication1.png?'></image>
+                                    </view>
+                                    <view class='dlfddcrint'>{{items.content}}</view>
+                                    <view class='dlfddchead' style='height:70rpx;line-height:70rpx;{{item.reply_list.length!=indexs+1?"border-bottom: 1rpx solid #c5c5c5;":""}}' data-abc='123'>
+                                        <text class='dlfddchtxt' style='color:#b0b1b1;height:70rpx;line-height:70rpx;'>{{items.add_date}}</text>
+                                        <view class='dlfddchfab'>
+                                  <!-- 未点赞 -->
+                                  <image class='dlfddchfimg'  wx:if='{{items.is_praise==0}}' data-drying_id='{{items.drying_id}}' data-is_praise='{{items.is_praise}}' catchtap='ispraisefuneveeve'  data-ind='{{index}}' data-inds='{{indexs}}'  src='https://www.51chaidan.com/images/brand/black_heart.png?'></image>
+                                  <!-- 已点赞 -->
+                                  <image class='dlfddchfimg'  wx:if='{{items.is_praise==1}}' data-drying_id='{{items.drying_id}}' data-is_praise='{{items.is_praise}}' catchtap='ispraisefuneveeve' data-comment_id='{{items.comment_id}}' data-ind='{{index}}' data-inds='{{indexs}}'   src='https://www.51chaidan.com/images/brand/red_heart.png?'></image>{{items.follow_sum>0?items.follow_sum:''}}
+                                        </view>
+                                    </view>
+                                </view>
+                        </view>
+                      </block>
+                  </view>
+                  <view class='dlfddchead' style='height:70rpx;line-height:70rpx;border-bottom: 1rpx solid #c5c5c5;'>
+                      <text class='dlfddchtxt' style='color:#b0b1b1;height:70rpx;line-height:70rpx;'>{{item.add_date}}</text>
+                      <view class='dlfddchfab'>
+                <!-- 未点赞 -->
+                <image class='dlfddchfimg' src='https://www.51chaidan.com/images/brand/black_heart.png?' wx:if='{{item.is_praise==0}}' data-drying_id='{{item.drying_id}}' data-comment_id='{{item.comment_id}}' data-ind='{{index}}' data-is_praise='{{item.is_praise}}' catchtap='ispraisefuneve' ></image>
+                <!-- 已点赞 -->
+                <image class='dlfddchfimg'  wx:if='{{item.is_praise==1}}' data-drying_id='{{item.drying_id}}' data-is_praise='{{item.is_praise}}' catchtap='ispraisefuneve'  data-comment_id='{{item.comment_id}}' data-ind='{{index}}' src='https://www.51chaidan.com/images/brand/red_heart.png?'></image>{{item.follow_sum>0?item.follow_sum:''}}
+                      </view>
+                      <image class='dlfddchimg' data-comment_id='{{item.comment_id}}' catchtap='inputboxfun'  src='https://clw.51chaidan.com//images/goods/comment.png?'></image>
+                  </view>
+              </view>
+          </view>        
+        </block>
+    </view>
+</view>
+
+<view style='width:100%;height:190rpx;'></view>
+<view class='dlfddbotcom' style='{{isIphoneX?"bottom:130rpx;":"bottom:110rpx;"}}'>
+    <view class='dlfddbotceve' wx:if='{{listdata.is_delete==1}}' style='border-right:1rpx solid #c0c0c0;width:24.5%;' catchtap='locationfun'>
+      <image class='dlfddbotceimg' src='https://clw.51chaidan.com//images/goods/delete.png'></image>
+    </view>
+    <view class='dlfddbotceve' style='position:relative;width:{{listdata.is_delete==1?"24.5%":"33%"}};'>
+      <button open-type="share" class='butshare' wx:if='{{isShareFun}}' style='position: absolute;height:100%;width:100%;left:0;top:0;z-index:3;'></button>
+      <image class='dlfddbotceimg' src='https://clw.51chaidan.com//images/goods/share3.png?'></image>{{listdata.forward?listdata.forward:''}}
+    </view>
+    <view class='dlfddbotceve' style='border-right:1rpx solid #c0c0c0;border-left:1rpx solid #c0c0c0;width:{{listdata.is_delete==1?"24.5%":"33%"}};' data-comment_id='-1' catchtap='inputboxfun'>
+      <image class='dlfddbotceimg' src='https://clw.51chaidan.com//images/goods/comment.png?'></image>{{listdata.comment_count?listdata.comment_count:''}}
+    </view>
+    <view class='dlfddbotceve' style='width:{{listdata.is_delete==1?"24.5%":"33%"}};'>
+        <!-- 未点赞 -->
+        <image class='dlfddbotceimg' wx:if='{{listdata.is_praise==0}}' data-drying_id='{{listdata.drying_id}}' data-is_praise='{{listdata.is_praise}}' catchtap='ispraisefun' src='https://www.51chaidan.com/images/brand/black_heart.png?'></image>
+        <!-- 已点赞 -->
+        <image class='dlfddbotceimg' wx:if='{{listdata.is_praise==1}}' data-drying_id='{{listdata.drying_id}}' data-is_praise='{{listdata.is_praise}}' catchtap='ispraisefun' src='https://www.51chaidan.com/images/brand/red_heart.png?'></image>{{listdata.praise_sum>0?listdata.praise_sum:''}}
+    </view>
+</view>
+
+<bnavigation isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' 
+dryinglistnum='{{dryinglistnum}}'></bnavigation>
+
+<!-- 输入框 -->
+<view class='inputbox' wx:if='{{inputbox}}'>
+    <view class='inputboxbg' catchtap='inputboxbgfun'></view>
+    <view class='ibinputcon' style='bottom:{{inputboxheight}}px;'>
+        <textarea class='intboxinp' focus='{{autofocus}}' maxlength='140' placeholder-style="font-size:24rpx;" placeholder='写评论...' bindfocus="bindfocus" bindblur='bindblur' bindinput="bindinput" bindconfirm="bindconfirm" show-confirm-bar='{{shbar}}' value='{{textconcent}}' />
+        <view class='intboxinptxt' catchtap='submissionfun'>发送</view>
+    </view>
+</view>
+
+<!--  授权弹框  -->
+<view class='tgaboxtwo' wx:if='{{tgabox}}' catchtap='clicktga'>
+    <view class='tgaboxtbg'></view>
+    <view class='tgaboxclick'>
+        <image mode='aspectFit' src='{{tgaimg}}?log={{appNowTime}}' class='tgaboxclickbgImg'></image>
+        <image src='{{commoddata.cover}}' class='abcd'></image>
+    </view>
+     <button class='tgaboxtgawchbochlibutboxtwo' open-type="getUserInfo" type='primary' bindgetuserinfo="userInfoHandler"></button>
+</view>
+
+<!-- 删除提示 -->
+<view class='comtip' wx:if='{{location}}'>
+    <view class='comtipback'></view>
+    <view class='apptipbox'>
+        <!-- <view class='apptiphead'>提示</view> -->
+        <view class='apptipcont'><text>确认删除该晒单？</text></view>
+        <view class='apptipbut'>
+           <view class='apptipleft apptiolefrigcom' catchtap='apptiprightfun'>是</view>
+           <view class='apptipright apptiolefrigcom' style='position:relative;' catchtap='apptipleftfun'>否</view>
+        </view>
+    </view>
+</view>
+
+<!-- 购买须知 -->
+<view style='position:fixed;width:100%;height:100%;top:0;left:0;z-index:9999;' wx:if='{{exchangeiftr}}'>
+   <view style='width:100%;height:100%;background:#000;opacity: 0.5;' catchtap='dlfderdprestion'></view>
+   <view style='width:500rpx;height:440rpx;position:absolute;top:0;left:0;bottom:0;right:0;margin:auto;background:#fff;z-index:2;border-radius:10rpx;'>
+       <image style='width:40rpx;height:40rpx;float:right;position:absolute;right:20rpx;top:20rpx;' src='../../../../pages/images/forknumber.png' catchtap='dlfderdprestion'></image>
+       <view style='height:90rpx;line-height:90rpx;width:100%;text-align:center;font-size:28rpx;'>
+          购买须知
+       </view>
+       <text style='width:460rpx;margin:0 auto;height:220rpx;font-size:26rpx;color:#000;display:block;overflow: scroll;line-height:40rpx;'>1.“拆币兑换”商品为用户自有商品。\n2.订单兑换完成后，卖家24小时内未发货，则订单自行取消。\n3.订单发货后7日，买家未确认则订单自行完成。</text>
+       <view style='width:100%;'>
+           <view style='height:50rpx;line-height:50rpx;width:200rpx;text-align:center;font-size:24rpx;color:#fff;border-radius:10rpx;background:#ff6968;margin:30rpx auto 0;'  bindtap='payfreight'>确认兑换</view>
+       </view>
+   </view>
+</view>
+
+<!--  收货地址  -->
+<view class='receivingaddress' wx:if='{{receivingaddress}}'>
+     <view class='recgadhead'>
+         收货地址
+         <image src='../../../../pages/images/forknumber.png' class='recgadheadimg' bindtap='receivingaddressfun'></image>
+     </view>
+     <view class='recgadcon'>
+         <view class='recgaddata' wx:for='{{addressdata}}' wx:key='key'>
+             <view class='recgaddname' data-tipaid='{{item.aid}}' data-ind='{{index}}' data-tipadd='{{item.address}}' catchtap='revisethereceivingaddress'>
+                 <view class='recgaddnameleft'>{{item.consignee}}</view>
+                 <view class='recgaddnameleft'>{{item.phone}}</view>
+             </view>
+             <view class='recgadaddress' data-tipaid='{{item.aid}}' data-ind='{{index}}' data-tipadd='{{item.address}}' catchtap='revisethereceivingaddress'>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
+             <view class='recgadbottom'>
+                  <view class='recgadbotleft'>
+                     <image class='recgadbotleftimg' hidden='{{!item.checked}}' src='../../../../pages/images/pressed_click.png'></image>
+                     <image class='recgadbotleftimg' hidden='{{item.checked}}' src='../../../../pages/images/normal_click.png'></image>                      
+                      默认地址
+                  </view>
+                  <view class='recgadbotright' bindtap='deladdress' data-ind="{{item.aid}}">
+                      <image src='../../../../pages/images/icon_delete.png' class='recgadbotleftimg'></image>
+                       删除
+                  </view>                  
+                  <view class='recgadbotright' style='margin-right:50rpx;' bindtap='jumpeditaddress' data-address='{{item.address}}' data-aid='{{item.aid}}' data-city='{{item.city}}'  data-consignee='{{item.consignee}}' data-district='{{item.district}}' data-phone='{{item.phone}}' data-province='{{item.province}}' data-idcard='{{item.idcard}}'>
+                     <image src='../../../../pages/images/icon_edit.png' class='recgadbotleftimg'></image>
+                      编辑
+                  </view>
+             </view>
+         </view>
+         <view class='recgadnodata' wx:if='{{addressdata.length==0}}'>
+             <image src='../../../../pages/images/recaddnodata.png' class='recgadnodataimg'></image>
+         </view>
+     </view>
+     <view class='recgadbot' bindtap='jumpaddress'>
+          增加新地址
+     </view>
+</view>
+
+<!--  立即购买弹框  支付运费弹框 -->
+<view class='buybombsimmediately' wx:if='{{payfreightone}}'>
+    <view class='bbsheadcon'>
+        <view class='bbshccom' bindtap='seladdressfun'>
+           <view class='bbshccomleft'>收货地址</view>
+           <image class='bbshccomimg' src='../../../../pages/images/icon_in.png'></image>
+           <view class='bbshccomright '>
+              <view style="width:100%;line-height:57rpx;text-align:right;" class="specialellipsis">{{tipnamephone}}</view>
+              <view style="width:100%;line-height:57rpx;text-align:right;" class="specialellipsis">{{tipaddress}}</view>
+            </view>
+        </view>
+    </view>
+    <view class='bbshbottom'>
+        <view class='bbshbottombut' bindtap='payfreighplaceorder'>提交订单</view>
+    </view>
+</view>
+<!--  背景颜色  -->
+<view class='tipback' wx:if='{{tipback}}' catchtouchmove="preventD" catchtap='tipbackfun'></view>

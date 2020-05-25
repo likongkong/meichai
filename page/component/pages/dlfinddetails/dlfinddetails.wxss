@@ -1,0 +1,332 @@
+@import "../../pages/dlfind/dlfind.wxss";
+@import "../../../../common/tabbar.wxss";
+@import "../../../../pages/signin/signin.wxss";
+@import "../../../../pages/detailspage/detailspage.wxss"; 
+page{
+  background: #f0eff5;
+}
+.dlfdbox{
+  width: 100%;
+  background: #f0eff5;
+}
+ .swiper {
+  height: 500rpx;
+  width: 100%;
+}
+.slide-image{
+  display: block;
+  height: 100%;
+  width: 100%;
+} 
+.dlfdshop{
+  width: 100%;
+  background: #fff;
+  margin-bottom: 15rpx;
+  position: relative;
+}
+.dlfdsleft{
+  width: 200rpx;
+  height: 100%;
+  position: relative;
+  float: left;
+}
+.dlfdsright{
+  width: 510rpx;
+  height: 100%;
+  float: left;
+}
+.dlfdslimg{
+  width:140rpx;
+  height: 140rpx;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto; 
+}
+.bctitle {
+  width:100%;
+  min-height:70rpx;
+  font-size:28rpx;
+  color:#333;
+  line-height:36rpx;
+}
+/*  双行  */
+.multilineellipsis{
+   /* display: -webkit-box; */
+   overflow: hidden;
+   text-overflow: ellipsis;
+   word-wrap: break-word;
+   white-space: normal !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.dlfdsrprice{
+  height: 60rpx;
+  line-height: 60rpx;
+  float: left;
+  font-size: 26rpx;
+  color: #ff6967;
+}
+.dlfdsmony{
+  width:144rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  text-align: center;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  border-radius: 8rpx;
+  font-size: 26rpx;
+  color: #fff; 
+  background: #ff6968;
+}
+.swipershop{
+  width: 100%;
+  height: 200rpx;
+}
+.dlfddint{
+  padding: 13rpx 34rpx;
+  color: #000;
+  font-size: 26rpx;
+  margin-bottom: 15rpx;
+  background: #fff;
+}
+.dlfddrec{
+  padding: 15rpx 0;
+  margin-bottom: 15rpx;
+  background: #fff;
+}
+.dlfddrectit{
+  padding-left: 24rpx;
+  height: 60rpx;
+  line-height: 50rpx;
+  color: #000;
+  font-size: 26rpx;
+}
+.dlfddreceve{
+  margin: 0 34rpx;
+  border-bottom: 1rpx solid #c4c4c4;
+  font-size: 24rpx;
+}
+.dlfddcomment{
+  padding: 0 24rpx 20rpx;
+  overflow: hidden;
+}
+.dlfddcleft{
+  width: 100rpx;
+  float: left;
+}
+.dlfddclimg{
+  display: block;
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+}
+.dlfddcright{
+  width: 600rpx;
+  float: left;
+}
+.dlfddcrtxt{
+  height: 50rpx;
+  width: 100%;
+}
+.dlfddcrtna{
+  font-size: 26rpx;
+  color: #ffaa3c;
+  float: left;
+}
+.dlfddcrtnaim{
+  width: 32rpx;
+  height: 32rpx;
+  float: left;
+  margin-left: 13rpx;
+  position: relative;
+  top: 3rpx;
+}
+.dlfddmoright{
+  height: 38rpx;
+  line-height: 38rpx;
+  border: 2rpx solid #f28d03;
+  font-size: 26rpx;
+  padding: 0 9rpx;
+  color: #f28d03;
+  margin-left:10rpx; 
+  float: right;
+  border-radius: 6rpx;
+}
+.dlfddcrint{
+  width: 100%;
+  color: #000;
+  font-size: 26rpx;
+  padding: 12rpx 0;
+}
+.dlfddcrcomb{
+  width: 100%;
+  background: #f0eff5;
+}
+.dlfddchead{
+  width: 100%;
+  height: 60rpx;
+  position: relative;
+}
+.dlfddchtxt{
+  float: left;
+  height: 60rpx;
+  line-height: 60rpx;
+  color: #000;
+  font-size: 26rpx;
+}
+.dlfddchimg{
+  float: right;
+  width: 40rpx;
+  height:40rpx;
+  margin-top: 17rpx;
+  position: relative;
+}
+.dlfddchfab{
+  float: right;
+  height: 70rpx;
+  color: #000;
+  line-height: 70rpx;
+  padding:0 20rpx 0 50rpx;
+  margin-left: 30rpx;
+  position: relative;
+  font-size: 26rpx;
+}
+.dlfddchfimg{
+  width:40rpx;
+  height: 40rpx;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto 0; 
+}
+.dlfddconcomcon{
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 15rpx;
+}
+.dlfddbotcom{
+  width: 100%;
+  height: 70rpx;
+  border: 1rpx solid #c0c0c0;
+  background: #fff;
+  position: fixed;
+  left: 0;
+  bottom: 111rpx;
+}
+.dlfddbotceve{
+  width: 33%;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  float: left;
+  font-size: 26rpx;
+  color: #000;
+}
+.dlfddbotceimg{
+  width: 40rpx;
+  height: 40rpx;
+  display: inline-block;
+  position: relative;
+  top: 9rpx;
+  margin-right: 10rpx;
+}
+
+
+/*  提示框  */
+.comtip{width: 100%;height: 100%;position: fixed;top: 0;left: 0;z-index: 199999;}
+
+.comtipback{width: 100%;height: 100%;background: #000;opacity: 0.4;}
+.apptipbox{height: 260rpx;width: 500rpx;position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;background: #fff;border-radius:20rpx; }
+.apptiphead{height: 100rpx;width: 100%;text-align:center;line-height: 100rpx;font-size: 30rpx;color: #666;border-bottom: 1rpx solid #e5e5e5;}
+.apptipcont{
+  width: 94%;
+  margin: 0 auto;
+  padding: 60rpx 0 0 0;
+  font-size: 30rpx;
+  text-align: center;
+  color: #666;
+}
+.apptipbut{
+  height: 90rpx;
+  width: 100%;
+  border-top: 1rpx solid #e5e5e5;
+  font-size: 28rpx;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+.apptiolefrigcom{
+  height: 90rpx;
+  line-height: 90rpx;
+  text-align: center;
+}
+.apptipleft{
+  width:50%;
+  color: #474548;
+  float: left;
+  border-right: 1rpx solid #e5e5e5;
+}
+.apptipright{
+  width: 49%;
+  color: #36c225;
+  float: right;
+}
+.bcttconeve{
+  height: 40rpx;
+  line-height: 40rpx;
+  background: #fecccd;
+  font-size: 22rpx;
+  color: #ff1014;
+  padding:0 15rpx;
+  border-radius: 20rpx;
+  float: left;
+  margin:10rpx 12rpx 10rpx 0;
+}
+/*   单行  */
+.specialellipsis{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;  
+}
+.dlfdsimg{
+  width: 50rpx;
+  height: 50rpx;
+  display: inline-block;
+  position: relative;
+  top:3rpx;
+  vertical-align:top;
+}
+
+.detaposiclick{
+  width: 100%;
+  height: 100rpx;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 3;
+}
+.detaposiclicktxt{
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: #000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+.detaposiclickimg{
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+

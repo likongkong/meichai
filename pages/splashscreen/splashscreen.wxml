@@ -1,0 +1,5 @@
+
+<image src="{{imgUrl}}" class="ind" bindload="imageLoad" style='width:{{imagewidth}}px;height:{{imageheight}}px;'></image>
+
+
+<text class='jumpCountdown' catchtap='clickcountdownfun'>{{countdown}}</text>

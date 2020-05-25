@@ -1,0 +1,34 @@
+/* pages/smokeComponent/smokeComponent.wxss */
+
+.itemstyle {
+  height: 280rpx;
+  width: 250rpx;
+  background: white;
+  display: inline-block;
+  margin: 5rpx;
+  border-radius: 10rpx;
+}
+
+.disanum_simgbox {
+  width: 100%;
+  height: 200rpx;
+  position: relative;
+}
+
+.disanum_simg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border-radius: 10rpx;
+}
+
+.specialellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

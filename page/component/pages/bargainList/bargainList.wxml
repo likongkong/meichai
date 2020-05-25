@@ -1,0 +1,241 @@
+<!--page/component/pages/bargainList/bargainList.wxml-->
+<hidewindow id='hide'></hidewindow>
+
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<somke colortitle='#000'></somke>
+
+<view wx:if='{{isbargain==1}}' style='width:100%;height:70rpx;background:white;position:absolute;border-bottom:1px solid #e5e5e5;z-index:5;'>
+
+	<view style='width:680rpx;height:100%;float:left;'>
+		<scroll-view scroll-x="true" style='width:100%;white-space:nowrap;height:100%;' scroll-with-animation="true" scroll-left='{{scrollleft}}'>
+			<view style='display:inline-block;height:100%;color:#FB6060;position:relative;' wx:for='{{typeList}}' id='q{{item.cat_id}}' wx:key='key' data-id='{{item.cat_id}}' data-index='{{item.cat_id}}' catchtap='typeClick'>
+
+					<view style='height:100%;margin:0 20rpx;padding:0 20rpx;float:left;font-size:30rpx;position:relative;display:block;' class='alignclass'>
+						<view style='height:60rpx;' class='alignclass'>
+							{{item.cat_name}}
+						</view>
+						<view wx:if='{{selectid == item.cat_id}}' style='height:10rpx;background:#ff6968;'></view>
+					</view>
+			</view>
+		</scroll-view>
+	</view>
+
+	<view catchtap='clickcut' style='overflow:hidden;'>
+			<image wx:if='{{!ishowlist}}' style='width:50rpx;height:50rpx;margin:10rpx;float:right;' src='../images/showgrid.png'> </image>
+			<image wx:if='{{ishowlist}}' style='width:50rpx;height:50rpx;margin:10rpx;float:right;' src='../images/showlist.png'> </image>
+	</view>
+</view>
+
+<view wx:if='{{isbargain==2}}' style='width:100%;height:70rpx;background:white;position:absolute;border-bottom:1px solid #e5e5e5;z-index:5;'>
+
+	<view style='width:49%;display:inline-block;height:100%;color:#FB6060;position:relative;' data-tag='1' catchtap='sharebargain'>
+
+			<view style='width:100%;height:100%;float:left;font-size:30rpx;position:relative;display:block;' class='alignclass'>
+				<view style='width:100%;height:60rpx;text-align:center;' class='alignclass'>
+					我发起的
+				</view>
+				<view wx:if='{{ishare == 1}}' style='width:150rpx;height:10rpx;background:#ff6968;position:absolute;left:0;right:0;bottom:0;margin:0 auto;'></view>
+			</view>
+	</view>
+	<view style='width:2rpx;height:50rpx;background:#e3e3e3;display:inline-block;margin-bottom:10rpx;'></view>
+	<view style='width:50%;display:inline-block;height:100%;color:#FB6060;position:relative;' data-tag='2' catchtap='sharebargain'>
+
+			<view style='width:100%;height:100%;float:left;font-size:30rpx;position:relative;display:block;' class='alignclass'>
+				<view style='width:100%;height:60rpx;text-align:center;' class='alignclass'>
+					共享砍价
+				</view>
+				<view wx:if='{{ishare == 2}}' style='width:150rpx;height:10rpx;background:#ff6968;position:absolute;left:0;right:0;bottom:0;margin:0 auto;'></view>
+			</view>
+	</view>
+
+	<view bindtap='openExplain' style='width:40rpx;height:40rpx;position:absolute;right:10rpx;top:10rpx;'>
+		<image style='width:40rpx;height:40rpx;' src='https://clw.51chaidan.com/images/bargain/Explain.png'></image>
+	</view>
+
+</view>
+
+<view style='padding-bottom:220rpx;overflow:hidden;'>
+
+	<view style='width:100%;height:70rpx;'></view>
+
+	<view wx:if='{{isbargain==1}}' wx:for='{{list}}' wx:key='key' style='width:100%;'>
+
+		<view wx:if='{{!ishowlist}}' style='width:100%;float:left;border-top:1rpx solid #e3e3e3;background:white;' data-id='{{item.goods_id}}' data-ishare='{{item.IsShare}}' catchtap='goDetail'>
+				<view>
+					<image style='width:200rpx;height:200rpx;float:left;margin:5rpx;' src='{{item.goods_cover}}'></image>
+					<view style='width:530rpx;font-size:25rpx;line-height:40rpx;text-align:left;float:left;margin-top:10rpx;'>
+
+						<view class='multilineellipsis' style='height:80rpx;margin:5rpx;'>
+							<text wx:if='{{item.label!=""}}' style='color:#ff6968;'>{{item.label}} | </text> {{item.goods_name}}
+						</view>
+
+						<view style='font-size:25rpx;margin-top:10rpx;height:40rpx;'>
+							<view wx:if='{{item.stock_status == 0}}' class='tagclass' style='color:#FF6968;'>
+								仅剩{{item.stock_sum}}件
+							</view>
+							<view class='tagclass'>
+								{{item.cutting_prices}}人正在砍
+							</view>
+							<view wx:if='{{item.IsShare == 1}}' class='tagclass'>
+								共享砍价
+							</view>
+							<text wx:if='{{item.bouble_coefficient!=0}}' style='float:right;color:#ff6968;'>{{item.bouble_coefficient}}%</text>
+						</view>
+
+
+						<view style='margin:10rpx;height:60rpx;line-height:50rpx;font-size:25rpx;'>
+							<view style='color:#ff6968;margin:5rpx;float:left;'>￥{{item.floor_price}}</view>
+							<view style='color:#999;margin:5rpx;float:left;text-decoration:line-through;'>￥{{item.market_price}}</view>
+							<image wx:if='{{item.bargain_goods_status == 0}}' style='width:50rpx;height:50rpx;float:right;' src='../images/bargin_red.png'></image>
+							<image wx:if='{{item.bargain_goods_status == 1}}' style='width:50rpx;height:50rpx;float:right;' src='../images/bargain_sign.png'></image>
+							<view wx:if='{{item.bargain_goods_status == 1}}' style='color:#67971A;margin:5rpx;float:right;'>砍价中...</view>
+						</view>
+
+
+					</view>
+
+				</view>
+		</view>
+
+		<view wx:if='{{ishowlist}}' style='width:48%;float:left;margin:1%;border-radius:10rpx;' data-id='{{item.goods_id}}' data-ishare='{{item.IsShare}}' catchtap='goDetail'>
+				<view style='font-size:30rpx;line-height:40rpx;background:white;border-radius:10rpx;'>
+					<image style='width:361rpx;height:361rpx;border-radius:10rpx;' src='{{item.goods_cover}}'></image>
+					<view style='height:80rpx;margin-top:-10rpx;'>
+						<view class='multilineellipsis' style='margin:10rpx;'>
+							<text wx:if='{{item.label!=""}}' style='color:#ff6968;'>{{item.label}} | </text> {{item.goods_name}}
+						</view>
+					</view>
+
+					<view style='font-size:23rpx;margin-top:10rpx;height:90rpx;'>
+						<view wx:if='{{item.stock_status == 0}}' class='tagclass' style='color:#FF6968;margin-top:5rpx;'>
+							仅剩{{item.stock_sum}}件
+						</view>
+						<view class='tagclass' style='margin-top:5rpx;'>
+							{{item.cutting_prices}}人正在砍
+						</view>
+
+						<text wx:if='{{item.bouble_coefficient!=0}}' style='float:right;color:#ff6968;'>{{item.bouble_coefficient}}%</text>
+
+						<view wx:if='{{item.IsShare == 1}}' class='tagclass' style='margin-top:5rpx;'>
+							共享砍价
+						</view>
+
+					</view>
+
+					<view style='margin:10rpx;height:60rpx;line-height:50rpx;font-size:25rpx;'>
+						<view style='color:#ff6968;margin:5rpx;float:left;'>￥{{item.floor_price}}</view>
+						<view style='color:#999;margin:5rpx;float:left;text-decoration:line-through;'>￥{{item.market_price}}</view>
+						<image wx:if='{{item.bargain_goods_status == 0}}' style='width:50rpx;height:50rpx;float:right;' src='../images/bargin_red.png'></image>
+						<image wx:if='{{item.bargain_goods_status == 1}}' style='width:50rpx;height:50rpx;float:right;' src='../images/bargain_sign.png'></image>
+						<view wx:if='{{item.bargain_goods_status == 1}}' style='color:#67971A;margin:5rpx;float:right;'>砍价中...</view>
+					</view>
+
+				</view>
+		</view>
+
+	</view>
+
+	<view wx:if='{{isbargain==2}}' wx:for='{{sharelist}}' wx:key='key' style='width:100%;'>
+		<view style='width:100%;float:left;border-top:1rpx solid #e3e3e3;background:white;' data-id='{{item.order_sn}}' data-ishare='{{item.IsShare}}' catchtap='gorder'>
+				<view>
+					<image style='width:200rpx;height:200rpx;float:left;margin:5rpx;' src='{{item.goods_cover}}'></image>
+					<view style='width:530rpx;font-size:25rpx;line-height:40rpx;text-align:left;float:left;margin-top:10rpx;'>
+
+						<view class='multilineellipsis' style='height:80rpx;margin:5rpx;'>
+							<text wx:if='{{item.label && item.label!=""}}' style='color:#ff6968;'>{{item.label}} | </text> {{item.goods_name}}
+						</view>
+
+						<view style='font-size:25rpx;margin-top:10rpx;height:40rpx;'>
+							<view wx:if='{{item.stock_status == 0}}' class='tagclass' style='color:#FF6968;'>
+								仅剩{{item.stock_sum}}件
+							</view>
+							<view class='tagclass'>
+								{{item.cutting_prices}}人正在砍
+							</view>
+							<view wx:if='{{item.IsShare == 1}}' class='tagclass'>
+								共享砍价
+							</view>
+						</view>
+
+
+						<view style='margin:10rpx;height:60rpx;line-height:50rpx;font-size:25rpx;'>
+							<view style='color:#ff6968;margin:5rpx;float:left;'>￥{{item.floor_price}}</view>
+							<view style='color:#999;margin:5rpx;float:left;text-decoration:line-through;'>￥{{item.price}}</view>
+							<image wx:if='{{item.status == 1}}' style='width:50rpx;height:50rpx;float:right;' src='../images/bargain_sign.png'></image>
+							<view wx:if='{{item.status == 1}}' style='color:#67971A;margin:5rpx;float:right;'>砍价中...</view>
+							<view wx:if='{{item.status == 3}}' style='background:#ff6968;color:#fff;width:120rpx;float:right;text-align:center;line-height:40rpx;border-radius:5rpx;'>购买</view>
+							<view wx:if='{{item.status == 2 || item.status == 4}}' style='color:#999;margin:5rpx;float:right;'>已结束</view>
+						</view>
+
+					</view>
+
+				</view>
+		</view>
+	</view>
+
+</view>
+
+<view style='width:100%; position:fixed; left:0; bottom:0; border-top:1px solid #e5e5e5; background: #fff; z-index: 5;'>
+
+	<view style='width:100%;height:90rpx;'>
+
+		<view style='width:49%;display:inline-block;height:100%;color:#FB6060;position:relative;' data-tag='1' catchtap='switchlist'>
+
+				<view style='width:100%;height:100%;float:left;font-size:30rpx;position:relative;display:block;' class='alignclass'>
+					<view style='width:100%;height:80rpx;text-align:center;' class='alignclass'>
+						砍价列表
+					</view>
+					<view wx:if='{{isbargain == 1}}' style='width:150rpx;height:10rpx;background:#ff6968;position:absolute;left:0;right:0;bottom:0;margin:0 auto;'></view>
+				</view>
+		</view>
+		<view style='width:2rpx;height:50rpx;background:#e3e3e3;display:inline-block;margin-bottom:20rpx;'></view>
+		<view style='width:50%;display:inline-block;height:100%;color:#FB6060;position:relative;' data-tag='2' catchtap='switchlist'>
+
+				<view style='width:100%;height:100%;float:left;font-size:30rpx;position:relative;display:block;' class='alignclass'>
+					<view style='width:100%;height:80rpx;text-align:center;' class='alignclass'>
+						我的砍价
+					</view>
+					<view wx:if='{{isbargain == 2}}' style='width:150rpx;height:10rpx;background:#ff6968;position:absolute;left:0;right:0;bottom:0;margin:0 auto;'></view>
+				</view>
+		</view>
+
+	</view>
+
+	<!-- <view>新人帮砍（新人砍价2-10呗暴击）</view> -->
+
+	<view style='{{isIphoneX?"height:130rpx;":"height:110rpx;"}}width:100%;position:relative;'>
+		<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+
+	</view>
+
+
+</view>
+
+<!-- 授权弹框 -->
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+
+<!-- ishowExplain -->
+<view wx:if='{{ishowExplain}}' style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:5;'>
+	<view class='bgstyle' catchtouchmove="myCatchTouch" catchtap='openExplain'></view>
+
+	<view style='width:600rpx;height:900rpx;position:absolute;top:0;left:0;bottom:0;right:0;margin:auto;background:#fff;font-size:30rpx;padding:10rpx;overflow:scroll;border-radius:10rpx;'>
+		<text>共享砍价规则
+1.共享砍价：发起人和帮砍人均可以用砍价后的优惠金额购买砍价商品。
+2.帮砍人限6人购买，同时支付以先付款时间为准。
+3.帮砍人也可提前购买共享砍价商品，购买后将不能继续享受之后的砍价优惠。
+4.砍价结束后发起人和帮砍人均不可以砍价优惠价格购买商品。
+注：共享砍价可在“我的砍价”-“共享砍价”中进行查看。
+
+砍价规则
+1.每位用户可以同时针对多款商品发起砍价；
+2.邀请好友即可帮忙砍价，每次帮砍价格随机，每件砍价商品最多20名老用户进行协助；
+3.砍价商品会设置档位金额（以砍价商品页面显示为准），用户可以选择完成全部砍价或在已达到档位金额支付购买。用户在完成下单购买后，则该商品不再支持继续砍价；
+4.用户发起商品砍价后需在第二日24点前完成砍价并下单购买（含在档位金额下购买），逾期未完成砍价或未付款的（未领取的），则本次砍价失败；
+5.如平台发现用户利用程序恶意参与活动或存在弄虚作假、刷单、套现等行为侵害平台利益的，平台有权取消砍价商品订单。用户因轻信第三方导致的损失，由用户自行负责；
+
+本活动最终解释权归美拆所有。
+    </text>
+	</view>
+</view>

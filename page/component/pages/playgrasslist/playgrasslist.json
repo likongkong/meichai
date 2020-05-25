@@ -1,0 +1,11 @@
+{
+  "asdfasfdflePullDownRefresh": true,
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "潮玩种草",
+  "usingComponents": {
+    "t_f": "../../../../pages/topfunction/topfunction",
+    "somke": "/pages/smokeComponent/smokeComponent",
+    "bnavigation": "/pages/bottomComponent/bottomComponent",
+    "tga_c": "../../../../pages/tgacomponent/tgacomponent"
+  }
+}

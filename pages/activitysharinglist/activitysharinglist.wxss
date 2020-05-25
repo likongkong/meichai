@@ -1,0 +1,310 @@
+@import "../../common/tabbar.wxss";
+@import "../../common/newcoupon.wxss";
+page{
+  background:#f5f6fa;
+}
+/*  双行  */
+.multilineellipsis{ 
+    display: -webkit-box;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp:2;   
+}
+/*   单行  */
+.specialellipsis{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;  
+    
+}
+.aslbox{ 
+  width: 100%; 
+  /* padding:90rpx 0 230rpx 0; */
+  padding:10rpx 0 230rpx 0;
+}
+.aslheadimages{
+  display: inline-block;
+  width: 40rpx;
+  height: 40rpx;
+  position: relative;
+  top: 8rpx;
+}
+.aslheadimagesarr{
+  display: inline-block;
+  width: 40rpx;
+  height: 40rpx;
+  position:absolute;
+  right: 0rpx;
+  top:-4rpx;
+  bottom: 0;
+  margin: auto;  
+}
+.aslhead{
+  height: 90rpx;
+  width: 100%;
+  background: #fff;
+  display: flex;  
+  flex-direction: row;  
+  border-bottom: 1rpx solid #e5e5e5; 
+}
+.aslheadleft{
+  height: 90rpx;
+  line-height: 90rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #666;
+  flex:1;
+  position: relative;
+}
+.boxcontent{
+  width: 100%;
+  /* background: #fff; */
+}
+.aslbcbox{
+  width:714rpx;
+  /* height:286rpx; */
+  border-bottom: 1rpx solid #e5e5e5;  
+  background: #fff;
+  margin: 0 auto 10rpx;
+  border-radius: 10rpx;
+}
+.aslbcbleft{
+  width:714rpx;
+  /* float: left; */
+  height:382rpx;
+  position: relative;
+  margin: 0 auto;
+}
+.bcimg{
+  display: block;
+  width:714rpx;
+  height:382rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border-radius: 6rpx;
+}
+.aslbcbleftposbootag{
+  width: 90%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+  text-align: center;
+  z-index: 2;
+  /* min-height: 50rpx; */
+}
+.actnewlabel_box{
+  background: #EC6F76;
+  height: 32rpx;
+  text-align: center;
+  font-size: 22rpx;
+  color: #fff;
+  line-height: 32rpx; 
+  border-radius: 6rpx;
+  margin-right:8rpx;
+  padding: 0 8rpx; 
+  margin-bottom: 4rpx;
+  display: inline-block;
+}
+.aslbcbright{
+  /* float: left; */
+  width:690rpx;
+  padding:16rpx 12rpx 0;
+  position: relative;
+}
+.bctitle{
+  width:100%;
+  max-height:76rpx;
+  font-size:28rpx;
+  color: #101010; 
+  line-height: 36rpx;
+  font-weight: bold;
+}
+.aslbccoto{
+  height: 30rpx;
+  line-height: 30rpx;
+  width: 100%;
+  font-size: 26rpx;
+  margin-top: 10rpx;
+  color: #000000 75%;
+}
+.aslbcnop{
+  height: 50rpx;
+  line-height: 30rpx;  
+  width: 100%;
+  font-size: 26rpx;
+  color:#000000 75%;
+  padding-top: 16rpx;
+  position: relative;
+}
+.aslbcbott{
+  height: 60rpx;
+  position: absolute;
+  top:8rpx;
+  right: 10rpx;
+}
+.aslbcbotleft{
+  height: 30rpx;
+  float: left;
+  font-size: 28rpx;
+  color: #ff2742;
+  text-decoration:line-through;
+}
+.aslbcbotrightbox{
+  float: right;
+  height: 44rpx;
+  font-size: 28rpx;
+  color: #fff;
+  text-align: center;
+  line-height: 44rpx;
+}
+.aslbcbotright{
+  padding: 0 20rpx;
+  border-radius: 10rpx;
+}
+.aslboxfoot{
+  height: 100rpx;
+  width: 100%;
+  position: relative;
+}
+.aslboxfootleft{
+  float: left;
+  height: 100rpx;
+  font-size: 28rpx;
+  color: #333;
+  padding-left: 18rpx;
+}
+.aslboxfootright{
+  position: absolute;
+  top: 0;
+  right: 28rpx;
+  bottom: 0;
+  margin: auto;
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 24rpx; 
+  color: #EC6F76;
+  background: #fff;
+  border:2rpx solid #EC6F76;
+  border-radius: 10rpx;
+  padding: 0 20rpx; 
+  width: 140rpx; 
+}
+.aslboxfadd{
+  width: 38rpx;
+  height: 38rpx;
+  display: inline-block;
+  border-radius: 10rpx;
+  position: relative;
+  top: 10rpx;
+  margin-left: 6rpx;
+}
+/*  提示框  */
+.comtip{width: 100%;height: 100%;position: fixed;top: 0;left: 0;z-index: 199999;}
+.comtipback{width: 100%;height: 100%;background: #000;opacity: 0.4;}
+.comtipcon{width: 86%;height: 600rpx;background: #fff;position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;border-radius: 10rpx;}
+.comtipchead{width: 94%;height: 100rpx;line-height: 100rpx;font-size: 36rpx;color: #333;padding: 0 3%;}
+.comtipccon{width: 92%;height: 400rpx;font-size: 32rpx;color: #666;padding: 0 4%;overflow: scroll;}
+.comtipcbot{width: 94%;height: 100rpx;padding: 0 3%;}
+.comtipcbri{width: 40%;height: 100rpx;line-height: 100rpx;font-size: 30rpx;color: #42bd56;text-align: right;float: right;padding-right: 32rpx;}
+
+
+.aslheadimagesposi{
+  height: 40rpx;
+  width: 40rpx;
+  position: absolute;
+  top: 24rpx;
+  right: 16rpx;
+}
+
+.actlisttop{
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 8;
+}
+.actlisttab{
+  width: 100%;
+  height: 80rpx;
+  background: #eef0f4;
+}
+
+.today_disanum_tab_comtainer{
+  height: 100%;
+  width:100%;
+  margin: 0 auto;
+  white-space:nowrap;
+  /* text-align: center;   */
+}
+.tdscrchbutlist{
+  height: 100%;
+  padding-right:50rpx; 
+  margin-right: 50rpx;
+  line-height: 80rpx;
+  display: inline-block;
+  position:relative;
+  font-size: 30rpx;
+  color: #363536;
+  
+}
+
+.ssclinst{
+  height: 80rpx;
+  line-height: 80rpx;
+  position: absolute;
+  right:2.5%;
+  top: 0;
+  font-size:24rpx;
+  color: #EC6F76;
+}
+
+.ssclimg{
+  width:30rpx;
+  height: 30rpx;
+  display: inline-block;
+  position: relative;
+  top: 4rpx;
+  margin-right:6rpx; 
+}
+.cgoimglsit{
+  width:40rpx;
+  height:40rpx;
+  display:inline-block;
+  vertical-align:top;
+  position:relative;
+  top:-7rpx;
+}
+
+.sponsorbox{
+  position: absolute;
+  right: 15rpx;
+  top: 15rpx;
+  height: 40rpx;
+  border-radius: 15rpx;
+  overflow: hidden;
+  z-index: 5;
+  padding: 10rpx 15rpx;
+}
+.sponsorboxbg{
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  border-radius: 30rpx;
+}
+
+
+
+

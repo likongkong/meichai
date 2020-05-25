@@ -1,0 +1,20 @@
+
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class='rofcobox'>
+    <view class='rofcohead'>
+        <view class='rofcheadtxt'>我的拆币</view>
+        <view class='rofcheadnum'>{{coin}}<text style='font-size:26rpx;position: relative;top:0;'>枚</text></view>  
+    </view>
+    <view class='rofccontent'>
+        <view class='rofcceve' wx:for='{{listdata}}' wx:key='key'>
+            <view class='rofccevehead'><view class='rofccevecirco'></view>{{item.integral_name}}</view>
+            <view class='rofccevedata'>{{item.insert_time}}</view>
+            <view class='rofcceveright'><block wx:if='{{item.style_type==1}}'>+</block><block wx:if='{{item.style_type==2}}'>-</block>{{item.amount}}拆币</view>
+        </view>  
+    
+    </view>
+
+
+</view>

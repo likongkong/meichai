@@ -1,0 +1,50 @@
+
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+
+      <view class='box'>
+
+
+
+
+    
+        <!--   信息流  -->
+        <view class='comboxw'  wx:for="{{commoddata}}" wx:key="key">
+                <!--  普通商品  -->
+                <view class='bchar' data-gid="{{item.gid}}" bindtap='addressmanagement' style='position:relative;'>    
+                    <view class='bcleft'>
+                        <image class="bcimg" mode='aspectFit' src="{{item.gcover}}"></image>
+                        <view class='shopsellout' wx:if='{{item.debuff==2}}' style='top:40rpx;right:30rpx;'>售罄</view>
+                    </view>
+                    <view class='bcright'>
+                        <view class='bctitle multilineellipsis' style='font-size:26rpx;'>
+                            {{item.gname}}
+                        </view>
+                        <view class='bcLabel'>
+                            <view class='bclabeys specialellipsis' style='background:#FDF3D9;color:#FF7A00;border:0rpx;' wx:for="{{item.gtag}}" wx:key="key" wx:for-item="bcla" wx:if='{{index<=2}}'>{{bcla}}</view>
+                        </view>
+
+                        <view class='bcrilistbott'>
+                                      <view class='bccompric' >
+                                        <view class='bccompricleft'><text style='font-size:22rpx;' wx:if='{{item.pre_name}}'>{{item.pre_name}}:</text><text style='font-weight: bold;'>￥{{item.gsale}}</text></view>
+                                        <view wx:if='{{item.gsale != item.market_price}}' class='bccompricright'>{{item.gsource}}:￥{{item.market_price}}</view>
+                                      </view>   
+                        </view>
+
+                    </view>
+                </view>
+                
+        </view>
+
+
+      <view style='height:60rpx;width:100%;text-align:center;line-height:60rpx;color:#666;font-size:30rpx;' wx:if='{{commoddata.length>=15}}'>{{loadprompt}}</view>
+
+    
+
+
+      <view class='nodata' wx:if='{{commoddata.length==0&&nodataiftr}}' style='height: 600rpx;width: 100%;position: relative;'>
+          <image src='../../../../pages/images/nodata.png' class='nodataimg' style='width: 280rpx;height: 300rpx;position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;'></image>
+      </view>
+
+  </view>    

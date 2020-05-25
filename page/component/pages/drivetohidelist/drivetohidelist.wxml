@@ -1,0 +1,25 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'>
+</t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view style="width:100%;">
+  <view class='hddscroll' style="margin:0 30rpx 10rpx 30rpx;" wx:for='{{recordList}}' wx:for-index='{{outindex}}' wx:key='key'>
+    <view class='hddstop'>
+      <view class='hddstopcom' style='float:left;'>Vol.{{item.activityId}}</view>
+    </view>
+    <scroll-view scroll-x="true" class='hddcsr'>
+      <view class='hddcscreve' wx:for="{{item.record}}" style='width:100rpx;height:140rpx;' wx:key='key'>
+        <image wx:if='{{item.team_job==1}}' src='https://www.51chaidan.com/images/driveCar/captain.png' class='hddcscretopimg'></image>
+        <image src='{{item.awardImg}}' class='hddcscreimg' style='width:100rpx;height:140rpx;' mode='aspectFit'></image>
+        <image src='{{item.photo}}' class='hddcscrebotimg'></image>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view style="width:100%;height:110rpx;"></view>
+
+</view>
+
+
+<bnavigation isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+

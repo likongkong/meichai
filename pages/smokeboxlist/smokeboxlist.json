@@ -1,0 +1,10 @@
+{
+  "asdfasfdflePullDownRefresh": true,
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "抽盒机列表",
+  "usingComponents": {
+    "t_f": "../../../../pages/topfunction/topfunction",
+    "bnavigation": "../bottomComponent/bottomComponent",
+    "tga_c": "../../../../pages/tgacomponent/tgacomponent"
+  }
+}

@@ -1,0 +1,12 @@
+{
+    "navigationBarTitleText": "隐藏功能",
+    "navigationBarBackgroundColor": "#22292C",
+    "asdfasfdflePullDownRefresh": false,
+    "enablePullDownRefresh": true,
+    "usingComponents": {
+      "somke": "/pages/smokeComponent/smokeComponent",
+      "bnavigation": "/pages/bottomComponent/bottomComponent",
+
+      "t_f": "../../../../pages/topfunction/topfunction"
+    }
+}

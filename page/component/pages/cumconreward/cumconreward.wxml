@@ -1,0 +1,76 @@
+<hidewindow id='hide'></hidewindow>
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+
+<view style="width:100%;padding-bottom:110rpx;{{awatip?'position:fixed;top:0;left:0;right:0;bottom:0;':''}}">
+    <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+    <view style='width:100%;'>
+      <view style='background:#fcefd7;width:100%;'>
+        <view class='awabhead' wx:if='{{countdown&&commoddata.day!=00||commoddata.hour!=00||commoddata.minute!=00||commoddata.second!=00}}'>
+          <text class='awabhtxtico' style='padding-right:6rpx;'>距离过期还剩</text>
+          <text class='awabhtxt' wx:if='{{commoddata.day!=00}}'>{{commoddata.day}}</text>
+          <text class='awabhtxtico' wx:if='{{commoddata.day!=00}}'>天</text>
+          <text class='awabhtxt'>{{commoddata.hour}}</text>
+          <text class='awabhtxtico'>:</text>
+          <text class='awabhtxt'>{{commoddata.minute}}</text>
+          <text class='awabhtxtico'>:</text>
+          <text class='awabhtxt'>{{commoddata.second}}</text>
+          <text class='awabhtxtico'>:</text>
+          <image class='awamsimg' src='https://www.51chaidan.com/images/toyCabinet/Millisecond.gif?1'></image>
+          <!-- <text class='awabhtxtico' style='background:#e63640;color:#fff;'>{{commoddata.ms}}</text> -->
+        </view>
+        <view style='height:50rpx;line-height:50rpx;font-size:24rpx;text-align:center;color:#f19002;' wx:if='{{awatxt}}'>{{awatxt}}</view>
+      </view>
+
+      <view class='awabtab' wx:if='{{scrdata.length>1}}'>
+        <view id='the_id' class='Locationtab' wx:if='{{scrdata.length>1}}'>
+          <scroll-view scroll-x="true" class="today_disanum_tab_comtainer" scroll-with-animation="true" bindscroll='scrollleftf' scroll-left='{{scrollleft}}'>
+            <view class='cumcontab' wx:for='{{scrdata}}' id='q{{item.value}}' wx:key='key' data-category_id='{{item.value}}' catchtap='tabbotdata' style='{{tabid==item.value?"color:#e94f57;font-size:26rpx;":"font-size:24rpx;"}}'>
+              <view class='tdstabbotimg'>{{item.display}}</view>
+            </view>
+          </scroll-view>
+        </view>
+      </view>
+    </view>
+    <view class='cumconcontent'>
+        <view class='cumconceve' wx:for='{{listdata}}' wx:key='key' style='{{index%3==2?"margin:0 0 20rpx 0;":""}}'>
+           <view class='cumcomcimg' catchtap='detailspagefun' data-gid='{{item.goods_id}}'>
+              <image class='cumconci' src='{{item.goods_thumb}}'></image>
+           </view>
+           <view class='disanum_sb_txtone  multilineellipsis' style='color:#000;max-height:70rpx;width:90%;margin:0 auto;'>{{item.goods_name}}</view>
+           <view class='cumcontxt'>
+               <view class='cumconprice'>￥{{item.shop_price}}/{{item.goods_company}}</view>
+               <view class='cumconreceive' wx:if='{{signdraw=="sign"&&item.is_status==1}}' catchtap='receiveawards' data-frequency='{{item.frequency}}' data-sign_total='{{item.sign_total}}' data-goods_id='{{item.goods_id}}'>领取</view>
+               <view class='cumconreceive' wx:elif='{{signdraw=="draw"&&item.receive_status==1}}' catchtap='receiveawardsweek' data-frequency='{{item.frequency}}' data-goods_id='{{item.goods_id}}'>领取</view>
+           </view>
+        </view>
+    </view>
+    <view style='width:100%;padding-top:200rpx;' wx:if='{{listdata.length==0&&iftrnodata}}'>
+          <image src='../../../../pages/images/default_BG_Image@3x.png' style='width:414rpx;height:255rpx;display:block;margin:0 auto;'></image>
+    </view>
+</view>
+
+<bnavigation isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' 
+dryinglistnum='{{dryinglistnum}}'></bnavigation>
+
+
+
+<!--  授权弹框  -->
+<view class='tgaboxtwo' wx:if='{{tgabox}}' catchtap='clicktga'>
+    <view class='tgaboxtbg'></view>
+    <view class='tgaboxclick'>
+        <image mode='aspectFit' src='https://www.51chaidan.com/images/default/openscreen.jpg?log={{appNowTime}}' class='tgaboxclickbgImg'></image>
+        <image src='{{commoddata.cover}}' class='abcd'></image>
+       
+    </view>
+     <button class='tgaboxtgawchbochlibutboxtwo' open-type="getUserInfo" type='primary' bindgetuserinfo="userInfoHandler"></button>
+</view>
+
+<view class='awatip' wx:if='{{awatip}}'>
+    <view class='awabg' catchtap='disfuncumnone'></view>
+    <view class='awacontent'>
+       <view class='awaconhead'>领奖提示</view>
+       <text class='awaconcon'>领奖专区内购买任意商品\n即可领奖成功</text>
+       <view class='awaconbottom' catchtap='awajump' style='position:relative;'>确定</view>
+    </view>
+</view>
+

@@ -1,0 +1,354 @@
+@import "../../pages/dlfind/dlfind.wxss";
+@import "../../../../common/tabbar.wxss";
+@import "../../../../pages/signin/signin.wxss";
+@import "../../../../pages/detailspage/detailspage.wxss";
+@import "../../../../pages/topfunction/topfunction.wxss";
+
+page {
+  background: #f5f6fa;
+}
+.crowbox{
+  padding:10rpx 20rpx 0 20rpx;
+}
+.crowhead{
+  width: 100%;
+  min-height: 300rpx;
+  background: #fff;
+  border-radius: 10rpx;
+  margin-bottom: 10rpx;
+  
+}
+.crowheadimg{
+  display: block;
+  width: 100%;
+  border-radius:10rpx 10rpx 0 0;
+  height:379rpx;
+}
+.crowheadimgeve{
+  display: block;
+  width: 100%;
+  border-radius:10rpx 10rpx 0 0;
+  height:100%;
+}
+.crowheadbot{
+  width: 100%;
+  height: 100rpx;
+  border-radius: 0 0 10rpx 10rpx;
+  overflow: hidden;
+}
+.chbleft{
+  width:140rpx;
+  height: 74rpx;
+  margin:14rpx 10rpx 0 10rpx;
+  border-radius: 5rpx;
+  float: left;
+}
+.chbright{
+  width: 520rpx;
+  height: 100rpx;
+  float: left;
+}
+.chbrighttxt{
+  width: 100%;
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 24rpx;
+}
+.crowscroll{
+  width: 100%;
+  background: #fff;
+  border-radius: 10rpx;
+  padding-bottom: 10rpx;
+  margin-bottom: 10rpx;
+}
+.crowscrollbox{
+  width: 670rpx;
+  margin: auto;
+  white-space:nowrap;
+}
+.crowscrolleve{
+  width: 120rpx;
+  display: inline-block;
+  overflow: hidden;
+  margin-right: 14rpx;
+  vertical-align: top;
+}
+.csleimg{
+  width: 120rpx;
+  height: 120rpx;
+  display: block;
+  margin: 15rpx 0;
+  border-radius: 50%;
+}
+.csleimgontxt{
+  width: 100%;
+  height: 36rpx;
+  line-height: 36rpx;
+  text-align: center;
+  font-size: 22rpx;
+}
+.csleimgtwtxt{
+  color:#666;max-height:70rpx;width:100%;margin:0 auto;font-size: 24rpx;text-align: center;
+}
+.crowspgi{
+  padding-left: 20rpx;
+  font-size: 26rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+.crowspcontxt{
+  padding:0 20rpx 15rpx 20rpx;
+  font-size: 24rpx;
+  display: block;
+  position: relative;
+}
+.crowsssssss{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.crowscrollvideo{
+  height: 186rpx;
+  margin-right: 15rpx;
+  display: inline-block;
+  width: 230rpx;
+  vertical-align: top;
+}
+.csleimgvideo{
+  height: 146rpx;
+  display: block;
+  width: 100%;
+  border-radius: 10rpx;
+  /* margin: auto; */
+  
+}
+.csleimgontxtvide{
+  height: 40rpx;
+  line-height: 40rpx;
+  font-size: 22rpx;
+  width: 100%;
+}
+.buttonvideo{
+  width: 35rpx;
+  height: 35rpx;
+  position: absolute;
+  bottom: 8rpx;
+  left: 8rpx;
+  z-index: 3;
+}
+
+.crowlimit{
+  width:60rpx;
+  height: 34rpx;
+  line-height: 34rpx;
+  text-align: center;
+  background: #fff;
+  border:2rpx solid #e9666d;
+  color: #e9666d;
+  font-size: 22rpx;
+  position: absolute;
+  top: 10rpx;
+  right: 10rpx;
+  border-radius: 8rpx;
+}
+.cslpricedec{
+  text-decoration:line-through;
+  font-size: 20rpx;
+  position: relative;
+  display: inline-block;
+  top: 3rpx;
+  margin-left: 4rpx;
+  color: #757575;
+}
+.csleimgnum{
+  width: 70rpx;
+  height: 40rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+}
+.csleimgnumbg{
+  width: 100%;
+  height: 100%;
+  border-radius: 30rpx;
+  background: #000;
+  opacity: 0.7;
+}
+.csleimgnumnum{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  text-align: center;
+  line-height: 40rpx;
+  color: #fff;
+  font-size: 24rpx;
+}
+.crowfl{
+  display:inline-block;
+  font-size: 22rpx;
+  color: #8bc34a;
+  margin-left: 12rpx;
+}
+.crowbuttom{
+  width:170rpx;height:90rpx;float:right;margin:10rpx 30rpx 0 0;border-radius: 6rpx;
+  background: #8bc34a;
+  font-size: 24rpx;
+  text-align: center;
+  line-height: 90rpx;
+  color: #fff;
+  position: relative;
+}
+.crowbottomnav{
+  width: 100%;
+  height: 110rpx;
+  position: fixed;
+  left: 0;
+  bottom: 110rpx;
+  background: #fff;
+  z-index: 11;
+}
+.cbmn{
+  width:85rpx;
+  height:60rpx;
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  margin:auto;
+}
+.crowrighgbottred{
+  width: 300rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  color: #fff;
+  font-size: 30rpx;
+  background: #fb595f;
+  border-radius: 6rpx;
+  float: right;
+  margin: 20rpx 20rpx 0 0;
+}
+.crowadrestxt{
+  display:block;
+  padding: 20rpx 20rpx 20rpx 120rpx;
+  height: 90rpx;
+  font-size: 26rpx;
+  color: #858585;
+  overflow:scroll;
+}
+.crowbottom{
+  width: 100%;
+  height: 60rpx;
+}
+.crowbottomcom{
+  width: 49%;
+  height: 60rpx;
+  font-size: 26rpx;
+  text-align: center;
+  position: relative;
+}
+.crowbottomleft{
+  float: left;
+}
+.crowbottomright{
+  float: right;
+}
+.questionstylecrow {
+  width:36rpx;height:56rpx;
+  line-height:56rpx;
+  border-radius: 10rpx;
+  border: 4rpx solid #d64650;
+  color: #d64650;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -18rpx;
+  margin: auto 0;
+  font-weight:bold;background:white;
+  font-size: 34rpx;
+}
+.sharenumcrow {
+  width: 22rpx;
+  line-height: 22rpx;
+  border: 4rpx solid #d64650;
+  border-radius: 15rpx;
+  font-size: 20rpx;
+  position: absolute;
+  right: -15rpx;
+  top: -15rpx;
+  background: white;
+}
+
+
+.bottomdetail{
+  width: 100%;
+  height: 70%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 16;
+  background: #fff;
+  overflow:scroll;
+}
+.crowspcontxtdbu{
+  height: 40rpx;
+  padding:0 20rpx;
+  line-height: 40rpx;
+  color: #50ba11;
+  text-align: right;
+  font-size: 24rpx
+}
+.crowrighgbottredshop{
+  width: 300rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  color: #fff;
+  font-size: 30rpx;
+  background: #fb595f;
+  border-radius: 6rpx;
+  position: absolute;
+  bottom: 30rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.crowscrollevef{
+  height: 186rpx;
+  width:99rpx;
+  margin-right:15rpx;
+  float: left;
+}
+.templateimg image{display:block;width:100% !important;}
+.awabottomclose{
+  position: absolute;
+  right: 20rpx;
+  top: 20rpx;
+  z-index: 3;
+  width: 60rpx;
+  height: 60rpx;
+}
+.canvasshare{
+  width:600rpx;
+  height: 800rpx;
+  background: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+
+

@@ -1,0 +1,43 @@
+
+    <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+    <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+    <view class='goodstobereceived' wx:if='{{!gcoveriftr}}'>
+         <view class='nodata'>
+              <image src='../images/nodata.png' class='nodataimg'></image>
+         </view>    
+    </view>
+
+<view class='headdh' wx:if='{{gcoveriftr}}'>
+    <view class='headdhleft'>
+       <image src='{{gcover}}' class='lookimg'></image>
+    </view>
+    <view class='headdhright'>
+        <view class='headtxt' wx:if='{{info.trace_state==0}}' style='padding-top:20rpx;'>物流状态：无轨迹</view>
+        <view class='headtxt' wx:if='{{info.trace_state==1}}' style='padding-top:20rpx;'>物流状态：已揽收</view>
+        <view class='headtxt' wx:if='{{info.trace_state==2}}' style='padding-top:20rpx;'>物流状态：在途中</view>
+        <view class='headtxt' wx:if='{{info.trace_state==201}}' style='padding-top:20rpx;'>物流状态：到达派件城市</view>
+        <view class='headtxt' wx:if='{{info.trace_state==3}}' style='padding-top:20rpx;'>物流状态：签收</view>
+        <view class='headtxt' wx:if='{{info.trace_state==4}}' style='padding-top:20rpx;'>物流状态：问题件</view>
+
+        <view class='headtxt'>承运来源：{{info.express_name?info.express_name:""}}</view>
+        <view class='headtxt'>运单编号：{{info.express_no?info.express_no:""}}</view>
+        <view class='headtxt'>官方电话：{{info.express_tel?info.express_tel:""}}</view>
+    </view>
+</view>
+<view class="reviewProgress" wx:if='{{list.length!=0}}'>
+  <view class="reviewProBox" wx:for='{{list}}' wx:key='key'>
+      <view class="reviewProLeft img  {{list.length==index+1?'last':''}}">
+         <image src="image/circle_1_transfer.png"></image>
+      </view>
+      <view class="reviewProRight">
+          <view class="exitMoney">{{item.AcceptStation}}</view>
+          <view class="dataTime">{{item.AcceptTime}}</view>
+      </view>
+  </view>
+  
+  
+  
+</view>
+
+<hidewindow id='hide'></hidewindow>

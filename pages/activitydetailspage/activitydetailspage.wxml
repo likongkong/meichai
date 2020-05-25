@@ -1,0 +1,1634 @@
+<!--  html页面转换  -->
+<import src="../../wxParse/wxParse.wxml" />
+<loading hidden="{{headhidden}}">
+  加载中...
+</loading>
+
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}' is_share='{{is_share}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class='headhiddenbox' hidden="{{headhiddengeneratePictures}}"></view>
+
+<canvas canvas-id='myordercanimgser' class='myordercanimgsernew'></canvas>
+<!-- myordercanimgser  -->
+<!-- canvas生成分享图片 -->
+<view class='headhiddenbox' hidden="{{headhidden}}"></view>
+
+
+<canvas canvas-id='canimgser' class='canimgsernew'></canvas>
+<!-- canimgser  -->
+<!-- closeupserimg -->
+<view class='tgimgbox' wx:if='{{upserimgbox}}'>
+  <view class='tgimgboxgb' style='opacity:0.7;'></view>
+  <view class='upsertgimgbcon' style='{{windowHeight<500?"height:800rpx;":""}}'>
+    <view style='width:100%;height:100%;overflow: scroll;'>
+      <image class='tgimcimg' src='{{actimgshare}}' mode='aspectFit' style='width:600rpx;height:648rpx;'></image>
+      <view class='upserbutbox'></view>
+      <view style='height:300rpx;width:100%;position:relative;margin-top:30rpx;'>
+        <view style='width:170rpx;height:260rpx;position: absolute;left:14rpx;bottom:20rpx;' bindtap='screenshotpreviewImg'>
+          <image src='http://www.51chaidan.com/images/default/consultOrder.jpg' style='display:block;width:130rpx;height:220rpx;margin:auto;'></image>
+          <view style='width:100%;height:40rpx;color:#fff;font-size:22rpx;text-align:center;line-height:40rpx;text-decoration:underline;'>查看截图参考</view>
+        </view>
+        <text style='width:400rpx;height:230rpx;position: absolute;left:200rpx;bottom:60rpx;font-size:26rpx;color:#fff;overflow: scroll;'>{{share_desc}}</text>
+      </view>
+      <view style='width:100%;height:66rpx;position:relative;'>
+        <view style='width:280rpx;height:60rpx;position: absolute;right:0;bottom:0;font-size:26rpx;text-align:center;line-height:60rpx;color:#fff;border-radius: 10rpx;background: #087ac5;' wx:if='{{commoddata.auditPic==0||commoddata.auditPic==1||commoddata.auditPic==3}}' catchtap='upImgSer'>
+          <view style='width:100%;height:100%;position:absolute;top:0;left:0;z-index:2;'>上传截图</view>
+        </view>
+        <view catchtap='sharesavethepictureadd' style='width:280rpx;height:60rpx;position: absolute;left:0;bottom:0;font-size:26rpx;text-align:center;line-height:60rpx;color:#fff;border-radius: 10rpx;background: #1aad19;'>
+          保存图片报名
+        </view>
+      </view>
+    </view>
+    <image src='../images/icon_close3.png' class='usericonclose' catchtap='acetlistfunfun'></image>
+  </view>
+</view>
+
+
+<!-- 生成图片 -->
+<view class='tgimgbox' wx:if='{{tgimgbox}}'>
+  <view class='tgimgboxgb' catchtap='tgimgbg'></view>
+  <view class='tgimgbcon'>
+    <image class='tgimcimg' src='{{commoddata.supportUrl}}' style='width:560rpx;height:{{imageLoadSponsorheight}}rpx;' bindload="imageLoadSponsor"></image>
+    <view class='tgimcimgbut' catchtap='savethepicture'>保存图片</view>
+  </view>
+</view>
+
+
+<!-- 保存图片  -->
+<view class='tgimgbox' wx:if='{{tgfrShareIftr}}'>
+  <view class='tgimgboxgb' catchtap='tgfrShareIftrFun'></view>
+  <view class='tgimgbcon' style='width:300px;height:324px;top:-230rpx;'>
+    <image class='tgimcimg' src='{{actimgshare}}' style='width:300px;height:324px;'></image>
+  </view>
+  <view class='tgfrindShare'>
+    <view class='tgfrShareLeft' wx:if='{{isShareFun}}'>
+      <view class='tgftShLText' style='background:#3f9314;color:#e8f7f0;'>
+        <button open-type="share" style='position: absolute;left: 0;top: 0;width: 100%; height: 100%;opacity: 0;padding:0;'  type="default" size="mini"></button>
+        邀请朋友
+      </view>
+    </view>
+    <view class='tgfrShareright'>
+      <view class='tgftShLText' style='background:#f18f00;color:#fceeef;' catchtap='sharesavethepicture'>保存海报
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 邀请提示弹框 -->
+<view class='comtip' hidden="{{comtipiftrtask}}">
+  <view class='comtipback' catchtap='taskhidcomtip'></view>
+  <view class='comtipcon'>
+    <view class='comtipchead'>提示</view>
+    <view class='comtipccon'>
+      <text>{{tipstask}}</text>
+    </view>
+    <view class='comtipcbot'>
+      <view class='comtipcbri' catchtap='taskhidcomtip'>知道了</view>
+    </view>
+  </view>
+</view>
+
+
+<view style='width:0;height:0;overflow:hidden;position:absolute;top:-1000px;'>
+  <!-- <view style='width:100%;height:240px;background:#888;display:flex; justify-content:center; align-items:center;'> -->
+  <canvas canvas-id='snapshot' style='width:300px; height:240px;'></canvas>
+</view>
+
+
+<view class='adspbox {{tipback||upserimgbox?"tripList_root":""}}' style="{{newcoupon||!headhidden||upserimgbox||upserimgboxWinningtheprize||perspcardiftrmax?'position:fixed;top:0;left:0;right:0;bottom:0;':''}}">
+  <view style='width:100%;height:386rpx;position:relative;'>
+    <swiper class="swiper" indicator-color="#fff" indicator-active-color="#ff2742" indicator-dots="{{false}}" circular="true" autoplay="true" interval="10000" duration="450" style='height:386rpx;' bindchange="swiperChange">
+
+      <swiper-item>
+        <view class="slide-image">
+          <image src="{{commoddata.cover}}" mode="aspectFill" data-index='{{index}}' bindtap='previewImg' bindload="imageLoadmon" style='width:100%;height:386rpx;'></image>
+          <view class='slide-image-box'>
+            <block wx:if='{{fragmentTotalNumber==4}}'>
+              <view class='sibeve' wx:for='{{[1,2,3,4]}}' wx:key='key'>
+                <image class='sibeveimg' wx:if='{{item<=totalPatch}}' src='https://www.51chaidan.com/images/turntable/red_check_mark.png'></image>
+                <view class='sibevebg' wx:else></view>
+              </view>
+            </block>
+            <block wx:if='{{fragmentTotalNumber==3}}'>
+              <view class='sibeve' wx:for='{{[1,2,3]}}' wx:key='key' style='height:386rpx;width:250rpx;'>
+                <image class='sibeveimg' wx:if='{{item<=totalPatch}}' src='https://www.51chaidan.com/images/turntable/red_check_mark.png'></image>
+                <view class='sibevebg' wx:else style='height:378rpx;width:240rpx;'></view>
+              </view>
+            </block>
+            <block wx:if='{{fragmentTotalNumber==2}}'>
+              <view class='sibeve' wx:for='{{[1,2]}}' wx:key='key' style='height:386rpx;'>
+                <image class='sibeveimg' wx:if='{{item<=totalPatch}}' src='https://www.51chaidan.com/images/turntable/red_check_mark.png'></image>
+                <view class='sibevebg' wx:else style='height:378rpx;'></view>
+              </view>
+            </block>
+          </view>
+        </view>
+      </swiper-item>
+      <block wx:for="{{movies}}" wx:key="key">
+        <swiper-item>
+            <image src="{{item}}" class="slide-image" mode="aspectFill" data-index='{{index}}' bindtap='previewImg' bindload="imageLoadmon" style='width:386rpx;height:386rpx;'></image>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class='swiperNumBot' wx:if='{{movies.length!=0}}'>{{swiperCurrent+1}}/{{movies.length==0?1:(movies.length+1)}}</view>
+  </view>
+
+
+  <view class='dltitle' style='text-align:center;padding:20rpx 40rpx 10rpx 40rpx;font-size:32rpx;'>
+    {{commoddata.name==''||commoddata.name==null?commoddata.goods_name:commoddata.name}}
+  </view>
+  <view class='mebcontent'>
+    <view class='mebconhead'>
+      <view class='mebchright' wx:if='{{commoddata.status==0}}'>
+        未开始
+      </view>
+      <view class='mebchright' wx:elif='{{commoddata.status==1}}'>
+        {{toDateTime}} 开始
+      </view>
+      <view class='mebchright' wx:elif='{{commoddata.status==2}}'>
+        <view wx:if='{{commoddata.is_full==1&&commoddata.is_limit==1}}'>开奖中</view>
+        <view wx:elif='{{commoddata.is_join==1}}'>已报名</view>
+        <view wx:elif='{{commoddata.is_full==1}}'>距离开奖 {{countdown}}</view>
+        <view wx:elif='{{commoddata.is_limit==1}}'>人满开奖 {{commoddata.truth_users}}/{{commoddata.limit_users}}</view>
+        <view wx:elif='{{commoddata.is_full==0}}'>{{toDateTime}} 开奖</view>
+      </view>
+      <view class='mebchright' wx:elif='{{commoddata.status==3}}'>
+        已开奖
+      </view>
+    </view>
+  </view>
+
+
+  <view class='dltityh' style='text-align:center;padding:6rpx 20rpx 20rpx 20rpx;'>
+    <view class='dlyhnnimeMod'>Vol.{{commoddata.id}}</view>
+    <view class='dlyhnnimeMod' wx:for='{{commoddata.tag}}' wx:key='key'>{{item}}</view>
+  </view>
+
+
+  <!-- 赞助商 -->
+  <view class='sponsor' wx:if='{{commoddata.supportName}}' style='margin:10rpx 0 4rpx 0;' wx:if='{{videoOpportunity}}'>
+    <view class='sponsorone' wx:if='{{commoddata.supportImg==1}}' style='position:relative;'>
+      <image class='sonsoimg' src='{{commoddata.supportLogo}}' catchtap='sponsofun'>
+      </image>
+      <view class='sonsotxt specialellipsis' catchtap='sponsofun'>
+        {{commoddata.supportName}}
+      </view>
+      <view class='sonsoright' catchtap='sponsofun'>
+        赞助
+      </view>
+      <view wx:if='{{uidid}}' class='sonsoright' style='color:rgba(147, 146, 146, 1);font-size:20rpx;margin-right:26rpx;text-decoration:none;' catchtap='sponsofun'>
+        {{uidid}}人浏览了该商品
+      </view>
+    </view>
+    <view wx:else class='sponsorone' style='position:relative;'>
+      <image class='sonsoimg' src='{{commoddata.supportLogo}}' catchtap='sponsocopyone'>
+      </image>
+      <view class='sonsotxt specialellipsis' catchtap='sponsocopyone'>
+        {{commoddata.supportName}}
+      </view>
+      <view class='sonsoright' catchtap='sponsocopyone'>
+        我要赞助
+      </view>
+      <view wx:if='{{uidid}}' class='sonsoright' style='color:rgba(147, 146, 146, 1);font-size:20rpx;margin-right:26rpx;text-decoration:none;' catchtap='sponsocopyone'>
+        {{uidid}}人浏览了该商品
+      </view>
+    </view>
+  </view>
+
+  <!-- 碎片 -->
+  <view style="width:100%;background:white;overflow:hidden;margin:10rpx 0;" wx:if='{{!isGainPatchBySelf}}'>
+    <view style="width:100%;margin:20rpx 0;">
+      <view style="width:100%;font-size:25rpx;line-height:30rpx;text-align:center;margin:5rpx 0;">送你4张万能碎片，跟好友互赠100%获得缺失碎片</view>
+      <view style="width:100%;height:100rpx;margin:10rpx 0;text-align:center;padding-top:10rpx;">
+        <view wx:for='{{patchReceive}}' wx:key='key' style='border:6rpx solid #FF9800;height:85rpx;border-radius:10rpx;margin:0 15rpx;display:inline-block;position:relative;width:50rpx;'>
+          <image class='fragmentkey' src='https://www.51chaidan.com/images/turntable/drawKey.png'></image>
+          <image class='fragmentuser' src='{{item.src}}'></image>
+        </view>
+      </view>
+      <view style="width:80%;height:80rpx;margin:30rpx 10%;">
+        <view style="width:40%;font-size:25rpx;float:left;margin-top:10rpx;">
+          <view style="color:#8abe39;">已点亮碎片×{{totalPatch}}</view>
+          <view style="color:#FE666B;">还需要碎片×{{fragmentTotalNumber-totalPatch}}</view>
+        </view>
+        <view style="width:60%;background:#8abe39;color:white;line-height:80rpx;border-radius:5rpx;float:right;text-align:center;position:relative;font-size:26rpx;">
+          <button style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;' data-form='2' open-type="share"></button>好友互赠,全部点亮报名成功</view>
+      </view>
+
+    </view>
+
+  </view>
+
+  <view class='actDetailSignUp' wx:if='{{isGainPatchBySelf}}' style='{{!videoOpportunity?"margin-top:10rpx;":""}}'>
+    <swiper autoplay="{{false}}" bindanimationfinish="changeGoodsSwip" current="{{goodsIndex}}" indicator-color="#a39f99" indicator-active-color="#f49641" indicator-dots="{{false}}" previous-margin="170rpx" next-margin="170rpx" bindchange="bindchange" style='height:300rpx;'>
+      <block wx:for='{{swiperarr}}' wx:key='key'>
+        <swiper-item>
+          <view id='img{{index}}' class="slide-image {{swiperIndex == index ? 'active' : 'quiet'}}" mode='aspectFill' data-typestr='free' style='width:410rpx;height:300rpx;'>
+
+            <block wx:if='{{swiperarr.length==2}}'>
+              <image src='http://www.51chaidan.com//images/default/lefttoright.png' wx:if='{{index==0}}' class='lefttorightimg'></image>
+              <image wx:if='{{index==0}}' src='https://www.51chaidan.com/images/default/left_slide.png' class='gestureImg'></image>
+            </block>
+            <block wx:elif='{{swiperarr.length==3}}'>
+              <image src='http://www.51chaidan.com//images/default/lefttoright.png' wx:if='{{index==1}}' class='lefttorightimg'></image>
+              <image src='http://www.51chaidan.com//images/default/righttoleft.png' wx:if='{{index==1}}' class='righttoleftimg'></image>
+              <image wx:if='{{index==1}}' src='https://www.51chaidan.com/images/default/left_slide.png' class='gestureImg'></image>
+            </block>
+
+            <view class='clickRedCir {{item.jumpclass==1?"rotate":""}}' style='background:{{item.abcircular}};'>
+              <block wx:if='{{item.stynum==2||item.stynum==3}}'>
+                <view class='clickRedch' style='background:{{item.witcircular}};'>
+                  <image src='http://www.51chaidan.com/images/default/level1.png' class='levelChampionImg' wx:if='{{item.clickiftr==3||item.clickiftr==4||item.clickiftr==8}}'></image>
+                  <view class='clickRtitle' style='{{item.stynum==3?"padding-top:50rpx;font-size:28rpx;":""}}'>{{item.name}}</view>
+                  <view class='clickRcont' style='{{item.stynum==3?"padding-top:17rpx;":""}}' wx:if='{{item.subname==1&&iftrTimeCd}}'>
+                    <text class='countDownSwiper' wx:if='{{countdown.dayStr!=00}}' style='color:{{item.witcircular}};'>{{countdown.dayStr}}</text>
+                    <text class='countDownSwiperSpot' style='margin:0 4rpx;' wx:if='{{countdown.dayStr!=00}}'>天</text>
+                    <text class='countDownSwiper' style='color:{{item.witcircular}};'>{{countdown.hrStr}}</text>
+                    <text class='countDownSwiperSpot'>:</text>
+                    <text class='countDownSwiper' style='color:{{item.witcircular}};'>{{countdown.minStr}}</text>
+                    <text class='countDownSwiperSpot'>:</text>
+                    <text class='countDownSwiper' style='color:{{item.witcircular}};'>{{countdown.secStr}}</text>
+                  </view>
+                  <view class='clickRcont' style='{{item.stynum==3?"padding-top:17rpx;":""}}color:{{item.sizeColor}};{{item.needChance==1?"font-size:22rpx;color:#fff;":""}}' wx:elif='{{item.subname!=1}}'>{{item.subname}}</view>
+                  <view class='moneySymbol' style='background:{{item.witcircular}}' wx:if='{{swiperarr.length==2&&index==1&&iftrmoneySymbol&&!blackCity}}'>￥</view>
+
+                  <!-- 分享 -->
+                  <view wx:if='{{item.ifshare==1}}' style='width:100%;height:100%;position: absolute;left:0;top:0;z-index:3;'>
+                  </view>
+
+                  <!-- clickiftr 1 我要免单 -->
+                  <view wx:if='{{item.clickiftr==1&&item.needChance}}' style='width:100%;height:100%;position: absolute;left:0;top:0;z-index:3;' catchtap='sharerequier'></view>
+                  <!-- clickiftr 2 上传截图 -->
+                  <view wx:if='{{item.clickiftr==2}}' catchtap='upserimgboxiftr' style='width:100%;height:100%;position: absolute;left:0;top:0;z-index:3;'>
+                      <view style='width:100%;height:100%;'></view>
+                  </view>
+                  <!-- clickiftr 3 上传晒单截图 -->
+                  <view wx:if='{{item.clickiftr==3}}' data-qrcode='{{commoddata.qrcode}}' data-awardinfo='{{commoddata.award_info}}' data-cover='{{commoddata.cover}}' data-showorder='{{commoddata.showOrder}}' data-cart_id='{{commoddata.cart_id}}' catchtap='upserimgboxiftrWinningtheprize'
+                    style='width:100%;height:100%;position: absolute;left:0;top:0;z-index:3;'>
+                      <view style='width:100%;height:100%;'></view>
+                  </view>
+                  <!-- clickiftr 4 领取奖励 -->
+                  <view wx:if='{{item.clickiftr==4}}' catchtap='clicktocollect' style='width:100%;height:100%;position: absolute;left:0;top:0;z-index:3;'>
+                      <view style='width:100%;height:100%;'></view>
+                  </view>
+                  <!-- clickiftr 5 邀请返现 -->
+                  <view wx:if='{{item.clickiftr==5}}' style='width:100%;height:100%;position: absolute;left:0;top:0;z-index:3;'>
+                      <button wx:if='{{isShareFun}}' open-type="share" style='z-index:3;position: absolute;left: 0;top: 0;width: 100%; height: 100%;opacity: 0;' type="default" size="mini"></button>
+                    <view wx:else catchtap='ifsharedis' style='position: absolute;height:100%;width:100%;left:0;top:0;z-index:3;'></view>
+                  </view>
+                  <!-- clickiftr 6 任务领取奖励 -->
+                  <view wx:if='{{item.clickiftr==6}}' catchtap='receiveAprize' style='width:100%;height:100%;position: absolute;left:0;top:0;z-index:3;'>
+                      <view style='width:100%;height:100%;'></view>
+                  </view>
+                  <view wx:if='{{item.clickiftr==9}}' catchtap='subscrfunsoon' style='width:100%;height:100%;position: absolute;left:0;top:0;z-index:3;'></view>
+                  
+                </view>
+              </block>
+              <block wx:else>
+                <view class='clickRedch' style='background:{{item.witcircular}};'>
+                  <image src='http://www.51chaidan.com/images/default/level1.png' class='levelChampionImg' wx:if='{{item.clickiftr==3||item.clickiftr==4||item.clickiftr==8}}'></image>
+                  <view style='width:100%;height:200rpx;line-height:200rpx;text-align:center;font-size:36rpx;color:#fff;'>{{item.name}}</view>
+                  <!-- clickiftr 1 我要免单 -->
+                  <view wx:if='{{item.clickiftr==1}}' style='width:100%;height:100%;position: absolute;left:0;top:0;z-index:3;' catchtap='sharerequier'>
+                      <view style='width:100%;height:100%;'></view>
+                  </view>
+                  <!-- clickiftr 2 上传截图 -->
+                  <view wx:if='{{item.clickiftr==2}}' catchtap='upserimgboxiftr' style='width:100%;height:100%;position: absolute;left:0;top:0;z-index:3;'>
+                      <view style='width:100%;height:100%;'></view>
+                  </view>
+                </view>
+              </block>
+            </view>
+          </view>
+        </swiper-item>
+      </block>
+
+    </swiper>
+
+    <view class='actDetailCon' wx:if='{{signtask.length!=0}}' wx:if='{{!taskOrUserImg}}'>
+      <block wx:for='{{signtask}}' wx:key='key'>
+        <block wx:if='{{item.type=="invite"}}'>
+          <view style='width:100%;height:60rpx;text-align:center;font-size:26rpx;line-height:60rpx;' catchtap='invitingfriends'>
+            {{item.name}}
+            <text style='color:#f93f45;'>{{item.special}}</text>
+            <image src='../images/comtriangle.png' catchtap='discomtip' wx:if='{{item.desc!=""&&item.desc}}' data-desc='{{item.desc}}' style='width:30rpx;height:18rpx;position:relative;top:0;'>
+            </image>
+          </view>
+        </block>
+        <block wx:else>
+          <view style='width:100%;height:60rpx;text-align:center;font-size:26rpx;line-height:60rpx;'>
+            {{item.name}}
+            <text style='color:#f93f45;'>{{item.special}}</text>
+            <image src='../images/comtriangle.png' catchtap='discomtip' wx:if='{{item.desc!=""&&item.desc}}' data-desc='{{item.desc}}' style='width:30rpx;height:18rpx;position:relative;top:0;'>
+            </image>
+          </view>
+        </block>
+      </block>
+    </view>
+
+    <view class='aDetSigImgBox' wx:if='{{commoddata.actor.length!=0&&taskOrUserImg}}'>
+      <view class='aDetSigImg'>
+        <view class='aDetSigImgUp' wx:if='{{commoddata.actor.length!=0}}' catchtap='hdparticipateintheuser' data-hdid='{{commoddata.id}}'>
+          <view class='aDetSigImgTitle' style='position:relative;'>已有{{commoddata.truth_users}}人参与，
+            <text style='color:#5970F2;'>查看全部></text>
+          </view>
+          <view class='wxfImgaDBox'>
+            <image wx:for='{{commoddata.actor}}' wx:key='key' src='{{item.headphoto}}' wx:if='{{item.headphoto!="../images/pic_headc.png"&&index<18}}' class='wxfImgaD'></image>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+  <block wx:if='{{is_exhibition!=1}}'>
+    <view class='detalOrPrize'>
+      <view class='dopTab'>
+        <view class='dopTabPrize doptrpdcom' style='border-right:0;{{tabdopnum==1?"background:#919191;color:#fff;":""}}' data-tabdopnum='1' catchtap='tabdopnum'>
+          奖品介绍
+        </view>
+        <view class='dopTabDeta doptrpdcom' style='border-left:0;{{tabdopnum==2?"background:#919191;color:#fff;":""}}' data-tabdopnum='2' catchtap='tabdopnum'>
+          商品详情
+        </view>
+        <view class='dopPosRight' catchtap='jumppicture'>
+          <!--  catchtap='activitydescription' -->
+            <view style='height:50rpx;line-height:50rpx;text-align:right;font-size:24rpx;color:#919191;'>
+              <image src='../images/explain.png' class='explainDpop'></image>说明
+            </view>
+        </view>
+      </view>
+      <!-- 奖品介绍 -->
+      <view class='dopPrizeBox' wx:if='{{tabdopnum==1}}'>
+        <!--  一等奖  -->
+        <view style='{{commoddata.awarder.champion.list.length>40&&commoddata.status==2?"padding:0 80rpx 100rpx 80rpx;":"padding:0 80rpx 30rpx 80rpx;"}}position:relative;{{commoddata.awarder.champion.list.length>40&&detaposiiftr&&commoddata.status==2?"height:500rpx;overflow:hidden;":""}}'
+          wx:if='{{commoddata.awarder.champion}}'>
+          <view class='wtpconirname'>
+            <image src='http://www.51chaidan.com/images/default/level1.png' class='wtpconirnameImg'></image>
+            {{commoddata.awarder.champion.prize}}
+          </view>
+          <view class='wtpconirbox'>
+            <view class='wtpconnanimg' wx:for='{{commoddata.awarder.champion.list}}' wx:key='key'>
+
+              <view class='wtpconantxt' wx:if='{{!item.headphoto}}' style='position:relative;background:#ffe5bf;'>
+                  <button wx:if='{{commoddata.status!=3&&isShareFun}}' open-type="share" style='position: absolute;left: 0;top: 0;width: 100%; height: 100%;opacity: 0;padding:0;z-index:5;' type="default" size="mini"></button>
+                <view wx:elif='{{commoddata.status!=3}}' catchtap='ifsharedis' style='position: absolute;height:100%;width:100%;left:0;top:0;z-index:3;'></view>
+                <view class='wtpconantxtchcom' style='padding:12rpx 0 0 0;color:#ff9e11;'>等待</view>
+                <view class='wtpconantxtchcom' style='color:#ff9e11;'>开奖</view>
+              </view>
+              <image wx:if='{{item.headphoto}}' src='{{item.headphoto||"../images/pic_headc.png"}}' class='wtpconnaniusim'></image>
+
+            </view>
+          </view>
+          <view class='detaposiclick' wx:if='{{commoddata.awarder.champion.list.length>50&&commoddata.status==2}}'>
+            <image src='https://clw.51chaidan.com//images/goods/GradualChangee.png' class='detaposiclickimg'></image>
+            <view class='detaposiclicktxt' catchtap='detaposiiftrfun'>
+              <block wx:if='{{detaposiiftr}}'>展开 ↓</block>
+              <block wx:else>收起 ↑</block>
+            </view>
+          </view>
+        </view>
+
+        <!--  二等奖  -->
+        <view style='padding:0 80rpx 30rpx 80rpx;' wx:if='{{commoddata.awarder.secondplace}}'>
+          <view class='wtpconirname'>
+            <image src='http://www.51chaidan.com/images/default/level2.png' class='wtpconirnameImg'></image>
+            {{commoddata.awarder.secondplace.prize}}
+          </view>
+          <view class='wtpconirbox'>
+            <view class='wtpconnanimg' wx:for='{{commoddata.awarder.secondplace.list}}' wx:key='key'>
+
+              <view class='wtpconantxt' wx:if='{{!item.headphoto}}' style='position:relative;background:#f2f2f2;'>
+                <button wx:if='{{commoddata.status!=3&&isShareFun}}' open-type="share" style='position: absolute;left: 0;top: 0;width: 100%; height: 100%;opacity: 0;padding:0;z-index:5;' type="default" size="mini"></button>
+                <view wx:elif='{{commoddata.status!=3}}' catchtap='ifsharedis' style='position: absolute;height:100%;width:100%;left:0;top:0;z-index:3;'></view>
+
+                <view class='wtpconantxtchcom' style='padding:10rpx 0 0 0;color:#a0a0a0;'>等待</view>
+                <view class='wtpconantxtchcom' style='color:#a0a0a0;'>开奖</view>
+              </view>
+              <image wx:if='{{item.headphoto}}' src='{{item.headphoto||"../images/pic_headc.png"}}' class='wtpconnaniusim'></image>
+
+            </view>
+          </view>
+        </view>
+
+        <!--  三等奖  -->
+        <view style='padding:0 80rpx 30rpx 80rpx;' wx:if='{{commoddata.awarder.thirdplace}}'>
+          <view class='wtpconirname'>
+            <image src='http://www.51chaidan.com/images/default/level3.png' class='wtpconirnameImg'></image>
+            {{commoddata.awarder.thirdplace.prize}}
+          </view>
+          <view class='wtpconirbox'>
+            <view class='wtpconnanimg' wx:for='{{commoddata.awarder.thirdplace.list}}' wx:key='key'>
+
+              <view class='wtpconantxt' wx:if='{{!item.headphoto}}' style='position:relative;background:#f2f2f2;'>
+                <button wx:if='{{commoddata.status!=3&&isShareFun}}' open-type="share" style='position: absolute;left: 0;top: 0;width: 100%; height: 100%;opacity: 0;padding:0;z-index:5;' type="default" size="mini"></button>
+                <view wx:elif='{{commoddata.status!=3}}' catchtap='ifsharedis' style='position: absolute;height:100%;width:100%;left:0;top:0;z-index:3;'></view>
+
+                <view class='wtpconantxtchcom' style='padding:10rpx 0 0 0;color:#a0a0a0;'>等待</view>
+                <view class='wtpconantxtchcom' style='color:#a0a0a0;'>开奖</view>
+              </view>
+              <image wx:if='{{item.headphoto}}' src='{{item.headphoto||"../images/pic_headc.png"}}' class='wtpconnaniusim'></image>
+
+            </view>
+          </view>
+        </view>
+
+
+
+
+        <view style='width:100%;height:10rpx;background:#f4f5f9;' wx:if='{{actrecactlist.length!=0}}'></view>
+        <!-- 推荐活动 -->
+        <view class='actrecact' wx:if='{{actrecactlist.length!=0}}'>
+          <view class='dopTab'>
+            <view class='dopright' catchtap='acetlistfun'>全部></view>
+            <view style='width:100%;color:#333;font-size:26rpx;height:73rpx;line-height:73rpx;text-align:center;'>活动推荐</view>
+          </view>
+          <view class='actrecactcont' wx:if='{{actrecactlist.length!=0}}'>
+            <scroll-view scroll-x="true" bindscrolltolower='loaddataright' class="scractrecactcont" scroll-with-animation="true" scroll-left='{{actscrollleft}}'>
+              <view class='scractrecacteve' wx:for='{{actrecactlist}}' wx:key='key' catchtap='actexempfun' data-gid="{{item.id}}" wx:if='{{item.status!=3}}'>
+                <image class='actrecimg' src='{{item.cover}}'></image>
+                <view class='bctitle multilineellipsis' style='font-size:22rpx;padding:0;width:100%;height:76rpx;'>
+                  <block wx:if='{{item.status==1||item.status==0}}'>报名时间 {{item.start_time}}</block>
+                  <block wx:if='{{item.status==3}}'>已开奖</block>
+                  <block wx:elif='{{item.is_limit==1}}'>人满开奖 {{item.truth_users}}/{{item.limit_users}}</block>
+                  <block wx:elif='{{item.status==2}}'>{{item.stop_time}} 自动开奖</block>
+                  {{item.goods_name}}
+                </view>
+              </view>
+            </scroll-view>
+          </view>
+        </view>
+
+
+
+
+
+
+
+        <view style='width:100%;height:10rpx;background:#f4f5f9;' wx:if='{{listLotto.length!=0}}'></view>
+        <!-- 抽签 -->
+        <view class='actrecact' wx:if='{{listLotto.length!=0}}'>
+          <view class='dopTab'>
+            <view class='dopright' catchtap='limitlottfun'>全部></view>
+            <view style='width:100%;color:#333;font-size:26rpx;height:73rpx;line-height:73rpx;text-align:center;'>限定抽签</view>
+          </view>
+          <view class='actrecactcont' wx:if='{{listLotto.length!=0}}' style='height:119rpx;'>
+            <scroll-view scroll-x="true" class="scractrecactcont" scroll-with-animation="true">
+              <!--  列表  -->
+              <view class='disanumofgoods_box' wx:if='{{listLotto.length!=0}}'>
+                <view class='disanum_scr' style='padding-left:0;width:100%;'>
+                  <scroll-view scroll-x="true" class="disanum_tab_comtainer" style='width:100%;'>
+                    <view class='disanum_scr_box' wx:for='{{listLotto}}' wx:key='key' wx:for-item='w' style='height:119rpx;width:222rpx;'>
+                      <view class='disanum_simgbox' catchtap='jumpdlflottery' data-id='{{w.id}}' style='height:119rpx;width:222rpx;'>
+                        <image class='disanum_simg' src='{{w.cover}}' style='height:119rpx;width:222rpx;'></image>
+                        <view class='videomaskcom' wx:if='{{w.shop_price || w.stop_time}}' style='background:#000;opacity: 0.4;z-index:1;'></view>
+                        <view class='videomaskcom specialellipsis' wx:if='{{w.shop_price || w.stop_time}}' style='z-index:2;'>
+                          <text style='float:left;padding-left:4rpx;font-size:20rpx;' wx:if='{{w.shop_price}}'>￥{{w.shop_price}}</text>
+                          <text style='float:right;padding-right:10rpx;'>{{w.stop_time}}</text>
+                        </view>
+                      </view>
+                    </view>
+
+                  </scroll-view>
+                </view>
+              </view>
+            </scroll-view>
+          </view>
+        </view>
+
+
+
+
+
+        <view style='width:100%;height:10rpx;background:#f4f5f9;' wx:if='{{listBlindBox.length!=0}}'></view>
+        <!-- 在线抽盒机 -->
+        <view class='actrecact' wx:if='{{listBlindBox.length!=0}}'>
+          <view class='dopTab'>
+            <view class='dopright' catchtap='bblistfun'>全部></view>
+            <view style='width:100%;color:#333;font-size:26rpx;height:73rpx;line-height:73rpx;text-align:center;'>在线抽盒机</view>
+          </view>
+          <view class='actrecactcont' wx:if='{{listBlindBox.length!=0}}' style='height:217rpx;'>
+            <scroll-view scroll-x="true" class="scractrecactcont" scroll-with-animation="true">
+              <view class='scractrecacteve' wx:for='{{listBlindBox}}' wx:key='key' catchtap='bbevebox' data-gid="{{item.id}}" style='height:217rpx;width:{{item.width||480}}rpx;'>
+                <image class='actrecimg' src='{{item.cover}}' bindload="imageLoadad" data-indexnum='1' data-num='{{index}}' style='width:{{item.width||480}}rpx;height:177rpx;'></image>
+                <view class='bctitle specialellipsis' style='font-size:26rpx;padding:0;width:100%;height:36rpx;text-align:center;'>
+                  {{item.name}}
+                </view>
+              </view>
+            </scroll-view>
+          </view>
+        </view>
+        <view style='width:100%;height:10rpx;background:#f4f5f9;' wx:if='{{listShowBox.length!=0}}'></view>
+        <!-- 原价拆明盒 -->
+        <view class='actrecact' wx:if='{{listShowBox.length!=0}}'>
+          <view class='dopTab'>
+            <view class='dopright' catchtap='showboxlistfun'>全部></view>
+            <view style='width:100%;color:#333;font-size:26rpx;height:73rpx;line-height:73rpx;text-align:center;'>原价拆明盒</view>
+          </view>
+          <view class='actrecactcont' wx:if='{{listShowBox.length!=0}}' style="height:300rpx;">
+            <scroll-view scroll-x="true" class="scractrecactcont" scroll-with-animation="true">
+              <view class='disanum_scr_box' wx:for='{{listShowBox}}' wx:key='key' style='height:300rpx;width:{{item.width||200}}rpx;'>
+                <view class='disanum_simgbox' catchtap='jumpopenbox' data-id='{{item.id}}' style='height:240rpx;width:{{item.width||200}}rpx;'>
+                  <image class='disanum_simg' src='{{item.cover}}' style='height:240rpx;width:{{item.width||200}}rpx;' bindload="imageLoadad" data-indexnum='2' data-num='{{index}}'></image>
+                </view>
+                <view style='height:60rpx;line-height:60rpx;text-align:center;font-size:24rpx;color:#ff2742;'>{{item.unpackRole }}/{{item.limitRole}}</view>
+              </view>
+            </scroll-view>
+          </view>
+        </view>
+
+      </view>
+      <!-- 商品详情 -->
+      <view style='width:100%;' wx:if='{{tabdopnum==2}}'>
+        <view class='detailimg'>
+          <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+        </view>
+      </view>
+
+
+    </view>
+  </block>
+
+  <block wx:elif='{{is_exhibition==1}}'>
+    <view style="width:100%;height:80rpx;">
+      <view style="width:33%;height:100%;{{exhibdetail==1?'font-size:26rpx;font-weight: bold;':'font-size:24rpx;'}}text-align:center;line-height:80rpx;float:left;position:relative;" catchtap="exhibdetailfun" data-ind='1'>
+        奖项介绍
+        <view wx:if='{{exhibdetail==1}}' style='width:100rpx;height:6rpx;background:#000;position:absolute;left:0;right:0;bottom:0;margin:auto;'></view>
+      </view>
+      <view style="width:33%;height:100%;{{exhibdetail==2?'font-size:26rpx;font-weight: bold;':'font-size:24rpx;'}}text-align:center;line-height:80rpx;float:left;position:relative;" catchtap="exhibdetailfun" data-ind='2'>
+        <view style='width:2rpx;height:50rpx;float:left;background:#BBB9B9;margin-top:15rpx;'></view>
+        品牌专区
+        <view style='width:2rpx;height:50rpx;float:right;background:#BBB9B9;margin-top:15rpx;'></view>
+        <view wx:if='{{exhibdetail==2}}' style='width:100rpx;height:6rpx;background:#000;position:absolute;left:0;right:0;bottom:0;margin:auto;'></view>
+      </view>
+      <view style="width:33%;height:100%;{{exhibdetail==3?'font-size:26rpx;font-weight: bold;':'font-size:24rpx;'}}text-align:center;line-height:80rpx;float:left;position:relative;" catchtap="exhibdetailfun" data-ind='3'>
+        商品详情
+        <view wx:if='{{exhibdetail==3}}' style='width:100rpx;height:6rpx;background:#000;position:absolute;left:0;right:0;bottom:0;margin:auto;'></view>
+      </view>
+    </view>
+
+    <!-- 奖项介绍 -->
+
+    <view id='exh1' style="background:#fff;">
+      <!--  一等奖  -->
+      <view style='{{commoddata.awarder.champion.list.length>40&&commoddata.status==2?"padding:0 80rpx 100rpx 80rpx;":"padding:0 80rpx 30rpx 80rpx;"}}position:relative;{{commoddata.awarder.champion.list.length>40&&detaposiiftr&&commoddata.status==2?"height:500rpx;overflow:hidden;":""}}'
+        wx:if='{{commoddata.awarder.champion}}'>
+        <view class='wtpconirname'>
+          <image src='http://www.51chaidan.com/images/default/level1.png' class='wtpconirnameImg'></image>
+          {{commoddata.awarder.champion.prize}}
+        </view>
+        <view class='wtpconirbox'>
+          <view class='wtpconnanimg' wx:for='{{commoddata.awarder.champion.list}}' wx:key='key'>
+            <view class='wtpconantxt' wx:if='{{!item.headphoto}}' style='position:relative;background:#ffe5bf;'>
+                <button wx:if='{{commoddata.status!=3&&isShareFun}}' open-type="share" style='position: absolute;left: 0;top: 0;width: 100%; height: 100%;opacity: 0;padding:0;z-index:5;' type="default" size="mini"></button>
+              <view wx:elif='{{commoddata.status!=3}}' catchtap='ifsharedis' style='position: absolute;height:100%;width:100%;left:0;top:0;z-index:3;'></view>
+              <view class='wtpconantxtchcom' style='padding:12rpx 0 0 0;color:#ff9e11;'>等待</view>
+              <view class='wtpconantxtchcom' style='color:#ff9e11;'>开奖</view>
+            </view>
+            <image wx:if='{{item.headphoto}}' src='{{item.headphoto||"../images/pic_headc.png"}}' class='wtpconnaniusim'></image>
+          </view>
+        </view>
+        <view class='detaposiclick' wx:if='{{commoddata.awarder.champion.list.length>50&&commoddata.status==2}}'>
+          <image src='https://clw.51chaidan.com//images/goods/GradualChangee.png' class='detaposiclickimg'></image>
+          <view class='detaposiclicktxt' catchtap='detaposiiftrfun'>
+            <block wx:if='{{detaposiiftr}}'>展开 ↓</block>
+            <block wx:else>收起 ↑</block>
+          </view>
+        </view>
+      </view>
+      <!--  二等奖  -->
+      <view style='padding:0 80rpx 30rpx 80rpx;' wx:if='{{commoddata.awarder.secondplace}}'>
+        <view class='wtpconirname'>
+          <image src='http://www.51chaidan.com/images/default/level2.png' class='wtpconirnameImg'></image>
+          {{commoddata.awarder.secondplace.prize}}
+        </view>
+        <view class='wtpconirbox'>
+          <view class='wtpconnanimg' wx:for='{{commoddata.awarder.secondplace.list}}' wx:key='key'>
+            <view class='wtpconantxt' wx:if='{{!item.headphoto}}' style='position:relative;background:#f2f2f2;'>
+                <button wx:if='{{commoddata.status!=3&&isShareFun}}' open-type="share" style='position: absolute;left: 0;top: 0;width: 100%; height: 100%;opacity: 0;padding:0;z-index:5;' type="default" size="mini"></button>
+              <view wx:elif='{{commoddata.status!=3}}' catchtap='ifsharedis' style='position: absolute;height:100%;width:100%;left:0;top:0;z-index:3;'></view>
+              <view class='wtpconantxtchcom' style='padding:10rpx 0 0 0;color:#a0a0a0;'>等待</view>
+              <view class='wtpconantxtchcom' style='color:#a0a0a0;'>开奖</view>
+            </view>
+            <image wx:if='{{item.headphoto}}' src='{{item.headphoto||"../images/pic_headc.png"}}' class='wtpconnaniusim'></image>
+          </view>
+        </view>
+      </view>
+      <!--  三等奖  -->
+      <view style='padding:0 80rpx 30rpx 80rpx;' wx:if='{{commoddata.awarder.thirdplace}}'>
+        <view class='wtpconirname'>
+          <image src='http://www.51chaidan.com/images/default/level3.png' class='wtpconirnameImg'></image>
+          {{commoddata.awarder.thirdplace.prize}}
+        </view>
+        <view class='wtpconirbox'>
+          <view class='wtpconnanimg' wx:for='{{commoddata.awarder.thirdplace.list}}' wx:key='key'>
+            <view class='wtpconantxt' wx:if='{{!item.headphoto}}' style='position:relative;background:#f2f2f2;'>
+              <button wx:if='{{commoddata.status!=3&&isShareFun}}' open-type="share" style='position: absolute;left: 0;top: 0;width: 100%; height: 100%;opacity: 0;padding:0;z-index:5;' type="default" size="mini"></button>
+              <view wx:elif='{{commoddata.status!=3}}' catchtap='ifsharedis' style='position: absolute;height:100%;width:100%;left:0;top:0;z-index:3;'></view>
+              <view class='wtpconantxtchcom' style='padding:10rpx 0 0 0;color:#a0a0a0;'>等待</view>
+              <view class='wtpconantxtchcom' style='color:#a0a0a0;'>开奖</view>
+            </view>
+            <image wx:if='{{item.headphoto}}' src='{{item.headphoto||"../images/pic_headc.png"}}' class='wtpconnaniusim'></image>
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+    <!-- 品牌专区 -->
+    <view id='exh2'>
+      <!-- 展会 -->
+      <view style='width:100%;overflow:hidden;'>
+        <view style="padding:20rpx;overflow:hidden;">
+          <image class="exhibdeimg" mode='aspectFit' catchtap='gobrandDetails' data-mid='{{userbranddata.id}}' src="{{userbranddata.logo}}"></image>
+          <view class="exhibdetxt">
+            <view class="exhibdxtxttitle specialellipsis" catchtap='gobrandDetails' data-mid='{{userbranddata.id}}'>{{userbranddata.brandName}}</view>
+            <view class="exhibdxtxtadd" style="background:#31b3fb;" catchtap="addfrindcommonifun" data-url='{{userbranddata.picPublic}}' data-name='{{userbranddata.brandName}}'>关注公众号</view>
+            <view class="exhibdxtxtadd" style="background:#6aca6b;margin-right:15rpx;" catchtap="addfrindcommonifun" data-url='{{userbranddata.picFriend}}' data-name='{{userbranddata.brandName}}'>添加好友</view>
+            <view style="font-size:26rpx;color:#333;padding:40rpx 0 0 0;text-align:left;line-height:30rpx;" wx:if='{{userbranddata.bradDesc}}' catchtap='gobrandDetails' data-mid='{{userbranddata.id}}'>简介：{{userbranddata.bradDesc}}</view>
+          </view>
+        </view>
+
+    <!-- 直播 -->
+  <block wx:if='{{livebroadcast&&livebroadcast.length!=0}}'>
+   
+			<swiper style="width:710rpx;margin:auto;height:170rpx;" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
+				<swiper-item  wx:for='{{livebroadcast}}' wx:key='key' wx:for-item='w'>
+						<view style="height:139rpx;background:#fff;position:relative;margin:15rpx 0;border-radius: 10rpx;">
+							<navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{w.room_id}}" style='position: absolute;height:100%;width:100%;left:0rpx;top:0;z-index:3;'></navigator>
+							<view style="overflow:hidden;border-radius:10rpx;">
+								<image style="height:139rpx;width:174rpx;float:left;border-radius:10rpx;"  mode='aspectFit' src="{{w.images}}"></image>
+								<view style="width:460rpx;height:119rpx;position:relative;float:left;margin:10rpx;">
+									<view style="font-size:30rpx;">{{w.name}}</view>
+									<view style="width:100%;position:absolute;bottom:0rpx;left:0;">
+										<view wx:if='{{w.status==102}}' style="font-size:25rpx;line-height:30rpx;;color:#fff;float:left;padding:5rpx 10rpx;border-radius:10rpx;background:#32ACFB;">{{w.start_time}}开播</view>
+										<view wx:elif='{{w.status==101}}' style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">直播中</view>
+										<view wx:elif='{{w.status==103}}' style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">已结束</view>
+										<view wx:else style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">尚未开播</view>
+									</view>
+								</view>
+							</view>
+						</view>
+				</swiper-item>
+			</swiper>
+
+
+  </block>
+
+
+        <view class="exhibboxcon">
+
+          <view style="float:left;margin-left:20rpx;">
+            <view class="mexhibboxconeve" wx:for='{{exhdata}}' wx:key='key' wx:if='{{index%2==0}}' catchtap="jumpexhdetail" data-id='{{item.id}}' data-brandid='{{item.brandId}}' data-mtype="{{item.type}}" data-gid='{{item.goodsId}}'>
+              <block wx:if='{{item.type == 4 || item.type == 11|| item.type == 12 || item.type == 1 || item.type == 5|| item.type == 8|| item.type == 9}}'>
+                <image class="exhibboxeveimg" mode='widthFix' src="{{item.images}}"></image>
+                <view wx:if='{{item.type != 11 && item.type != 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.name}}</view>
+                <view wx:elif='{{item.type == 11 || item.type == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.goodsName}}</view>
+                <view wx:if='{{item.type == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:#666;">{{item.content}}</view>
+                <view style="width:100%;padding:10rpx 0;overflow:hidden;">
+                  <view wx:if='{{item.shopPrice && item.shopPrice!="" && item.type != 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#ff2742;float:left;">￥{{item.shopPrice}}</view>
+                  <view wx:elif='{{item.type == 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#ff2742;float:left;">免单活动</view>
+                  <view wx:if='{{item.type == 4 || item.type == 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;">
+                    <block wx:if='{{item.status==1}}'>{{item.start_time}}报名</block>
+                    <view wx:elif='{{item.status==2&&item.isSign}}' style="color:#6aca6b;">已报名</view>
+                    <block wx:elif='{{item.status==2}}'>{{item.stop_time}}开奖</block>
+                    <block wx:elif='{{item.status==3}}'>已开奖</block>
+                  </view>
+                  <view wx:elif='{{item.type == 11 || item.type == 12}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;">
+                    <view wx:if='{{item.status==1}}' style='color:#6aca6b;'>{{item.start_time}}开售</view>
+                    <view wx:elif='{{item.status==2}}' style='color:#6aca6b;'>{{item.stop_time}}结束</view>
+                    <view wx:elif='{{item.status==3}}' style='color:black;'>已结束</view>
+                  </view>
+                  <view wx:elif='{{item.type == 5 && item.tags.length>0}}'>
+                    <view wx:for='{{item.tags}}' wx:if='{{index<1}}' wx:key='key' class="exhshoptiright specialellipsis">{{item}}</view>
+                  </view>
+                </view>
+                <view style="width:100%;height:46rpx;">
+                  <image class="exhshopimg" src="{{item.brandLogo}}"></image>
+                  <view class="specialellipsis" style="width:160rpx;height:46rpx;line-height:46rpx;font-size:22rpx;float:left;margin-left:3rpx;">{{item.brandName}}</view>
+                  <view wx:if='{{item.tags.length>0 && item.type != 5}}' class="exhshoptiright specialellipsis">{{item.tags[0]}}</view>
+                </view>
+              </block>
+
+              <block wx:else>
+                <image class="exhibboxeveimg" mode='widthFix' src="{{item.img_extend[0].img}}"></image>
+                <view class="exibactna specialellipsis" style="text-align:left;">{{item.title}}</view>
+                <view style="width:100%;height:46rpx;">
+                  <image class="exhshopimg" src="{{item.logo}}"></image>
+                  <view class="specialellipsis" style="width:160rpx;height:46rpx;line-height:46rpx;font-size:26rpx;float:left;margin-left:3rpx;">{{item.name}}</view>
+                  <view style="float:right;width:70rpx;height:46rpx;" catchtap="ispraisefun" data-is_praise="{{item.is_praise}}" data-ind="{{index}}" data-lid="{{item.id}}" data-idx="{{idx}}">
+                    <view style="height:46rpx;line-height:46rpx;font-size:26rpx;display:inline-block;vertical-align:top;float:right;{{item.is_praise == 1?'color:#f93f45;':'color:#BEBEBE;'}}">{{item.praise_sum}}</view>
+                    <image style="width:30rpx;height:30rpx;margin:8rpx 0;display:inline-block;vertical-align:top;float:right;" src="{{item.is_praise == 0?'https://www.51chaidan.com/images/brand/black_heart.png':'https://www.51chaidan.com/images/brand/red_heart.png?'}}"></image>
+                  </view>
+                </view>
+              </block>
+            </view>
+          </view>
+
+          <view style="float:left;margin-left:20rpx;">
+            <view class="mexhibboxconeve" wx:for='{{exhdata}}' wx:key='key' wx:if='{{index%2==1}}' catchtap="jumpexhdetail" data-id='{{item.id}}' data-brandid='{{item.brandId}}' data-mtype="{{item.type}}" data-gid='{{item.goodsId}}'>
+              <block wx:if='{{item.type == 4 || item.type == 11|| item.type == 12 || item.type == 1 || item.type == 5|| item.type == 8|| item.type == 9}}'>
+                <image class="exhibboxeveimg" mode='widthFix' src="{{item.images}}"></image>
+                <view wx:if='{{item.type != 11 && item.type != 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.name}}</view>
+                <view wx:elif='{{item.type == 11 || item.type == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.goodsName}}</view>
+                <view wx:if='{{item.type == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:#666;">{{item.content}}</view>
+                <view style="width:100%;padding:10rpx 0;overflow:hidden;">
+                  <view wx:if='{{item.shopPrice && item.shopPrice!="" && item.type != 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#ff2742;float:left;">￥{{item.shopPrice}}</view>
+                  <view wx:elif='{{item.type == 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#ff2742;float:left;">免单活动</view>
+                  <view wx:if='{{item.type == 4 || item.type == 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;">
+                    <block wx:if='{{item.status==1}}'>{{item.start_time}}报名</block>
+                    <view wx:elif='{{item.status==2&&item.isSign}}' style="color:#6aca6b;">已报名</view>
+                    <block wx:elif='{{item.status==2}}'>{{item.stop_time}}开奖</block>
+                    <block wx:elif='{{item.status==3}}'>已开奖</block>
+                  </view>
+                  <view wx:elif='{{item.type == 11 || item.type == 12}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;">
+                    <view wx:if='{{item.status==1}}' style='color:#6aca6b;'>{{item.start_time}}开售</view>
+                    <view wx:elif='{{item.status==2}}' style='color:#6aca6b;'>{{item.stop_time}}结束</view>
+                    <view wx:elif='{{item.status==3}}' style='color:black;'>已结束</view>
+                  </view>
+                  <view wx:elif='{{item.type == 5 && item.tags.length>0}}'>
+                    <view wx:for='{{item.tags}}' wx:if='{{index<1}}' wx:key='key' class="exhshoptiright specialellipsis">{{item}}</view>
+                  </view>
+                </view>
+                <view style="width:100%;height:46rpx;">
+                  <image class="exhshopimg" src="{{item.brandLogo}}"></image>
+                  <view class="specialellipsis" style="width:160rpx;height:46rpx;line-height:46rpx;font-size:22rpx;float:left;margin-left:3rpx;">{{item.brandName}}</view>
+                  <view wx:if='{{item.tags.length>0 && item.type != 5}}' class="exhshoptiright specialellipsis">{{item.tags[0]}}</view>
+                </view>
+              </block>
+
+              <block wx:else>
+                <image class="exhibboxeveimg" mode='widthFix' src="{{item.img_extend[0].img}}"></image>
+                <view class="exibactna specialellipsis" style="text-align:left;">{{item.title}}</view>
+                <view style="width:100%;height:46rpx;">
+                  <image class="exhshopimg" src="{{item.logo}}"></image>
+                  <view class="specialellipsis" style="width:160rpx;height:46rpx;line-height:46rpx;font-size:26rpx;float:left;margin-left:3rpx;">{{item.name}}</view>
+                  <view style="float:right;width:70rpx;height:46rpx;" catchtap="ispraisefun" data-is_praise="{{item.is_praise}}" data-ind="{{index}}" data-lid="{{item.id}}" data-idx="{{idx}}">
+                    <view style="height:46rpx;line-height:46rpx;font-size:26rpx;display:inline-block;vertical-align:top;float:right;{{item.is_praise == 1?'color:#f93f45;':'color:#BEBEBE;'}}">{{item.praise_sum}}</view>
+                    <image style="width:30rpx;height:30rpx;margin:8rpx 0;display:inline-block;vertical-align:top;float:right;" src="{{item.is_praise == 0?'https://www.51chaidan.com/images/brand/black_heart.png':'https://www.51chaidan.com/images/brand/red_heart.png?'}}"></image>
+                  </view>
+                </view>
+              </block>
+
+            </view>
+          </view>
+
+        </view>
+
+        <!-- 广告 -->
+        <view class="exhibboxconibox" wx:if='{{addsetData[0].length!=0}}' style="height:200rpx;">
+          <swiper class="swiper" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450" style="height:197rpx;">
+            <swiper-item wx:for="{{addsetData[0]}}" wx:key="key" wx:for-item='w'>
+              <image src="{{w.src}}?imageMogr2/thumbnail/x800" catchtap="exhibitionpubjump" data-id='{{w.activity_id}}' data-type='{{w.href_type}}' class="exhibboxconiboimg" mode='aspectFit'></image>
+            </swiper-item>
+          </swiper>
+        </view>
+
+      </view>
+    </view>
+
+    <view class='dltittheme' id='exh3'>
+      <image class='dttemeimg' src='../images/rad_left.png'></image>
+      <view class='dlttemelef'>
+        商品详情
+      </view>
+    </view>    
+    <!-- 商品详情 -->
+    <view style='width:100%;'>
+      <view class='detailimg'>
+        <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+      </view>
+    </view>
+    <view style="width:100%;height:140rpx;"></view>
+  </block>
+  <!-- 活动说明弹框 -->
+  <view class='comtip' wx:if='{{activitydescription}}'>
+    <view class='comtipback' catchtap='activitydescription'></view>
+    <view class='Activitydcf'>
+      <view style='width:100%;height:70rpx;line-height:70rpx;text-align:center;font-size:30rpx;color:#000;'>活动说明</view>
+      <view style='width:100%;height:660rpx;overflow:scroll;'>
+        <template is="wxParse" data="{{wxParseData:article1.nodes}}" />
+      </view>
+      <view catchtap='activitydescription' style='width:90%;padding:0 5%;height:70rpx;line-height:70rpx;text-align:right;font-size:26rpx;color:#45a944;'>我知道了</view>
+    </view>
+  </view>
+
+  <view style='width:100%;height:130rpx;' wx:if='{{commoddata.is_on_sale==1}}'></view>
+
+  <!-- 底部导航 -->
+  <view style='width:100%;position:fixed;left:0;{{isIphoneX?"bottom:130rpx;":"bottom:110rpx;"}}background:#fff;z-index:10;'>
+    <!-- 直接购买   -->
+
+
+    <block wx:if='{{isAwardOrder}}'>
+      <!-- 中奖悬浮框提示 -->
+      <view class='winningthepbox' catchtap='jumporder'>
+        <view class='winningthepimgtxt'>
+          <image class='winningthepimgshop' src='{{awardOrder.Info.cover}}'></image>
+          <view class='winningtheptime specialellipsis'>{{winningovertime}}</view>
+        </view>
+        <image class='winningthepimg' src='http://www.51chaidan.com/images/FreeSheet/WinningThePrize.png'></image>
+      </view>
+    </block>
+    <block wx:else>
+      <swiper class='Directpurchase' indicator-active-color="#ff2742" circular="true" autoplay="true" interval="5000" duration="450" wx:if='{{commoddata.is_on_sale==1||commoddata.isDirect}}'>
+        <swiper-item wx:if='{{commoddata.is_on_sale==1&&commoddata.arrDirect[0].type!=5}}'>
+          <view class='Directpurchase' catchtap='addressmanagement' data-gid='{{commoddata.goods_id}}'>
+              <image src='{{commoddata.gcover}}' class='dpImG'></image>
+              <view class='dpImGLeft'>
+                <view class='duIgLefH multilineellipsis'>{{commoddata.goods_name}}</view>
+                <view style='width:100%;height:40rpx;line-height:40rpx;text-align:left;'>
+                  <text style='font-size:36rpx;color:#000;font-weight:bold;'>￥{{commoddata.gsales}}{{commoddata.gsale_suit}}</text>
+                  <text style='font-size:20rpx;color:#a9a8a8;text-decoration:line-through;margin-left:15rpx;' wx:if='{{commoddata.gsales!=commoddata.msales}}'>￥{{commoddata.msales}}{{commoddata.msale_suit}}</text>
+                </view>
+              </view>
+            <view class='Directmay'>
+                <view style='color:#F93F45;height:22px;line-height:22px;font-size:12px;'>直接购买</view>
+            </view>
+          </view>
+        </swiper-item>
+        <block wx:if='{{commoddata.isDirect}}'>
+          <swiper-item wx:for='{{commoddata.arrDirect}}' wx:key='key'>
+            <view class='Directpurchase'>
+                <image src='{{item.gcover}}' class='dpImG'></image>
+                <view class='dpImGLeft'>
+                  <view class='duIgLefH multilineellipsis'>{{item.goods_name}}</view>
+                  <view style='width:100%;height:40rpx;line-height:40rpx;text-align:left;'>
+                    <text style='font-size:36rpx;color:#000;font-weight:bold;'>￥{{item.gsales}}{{item.gsale_suit}}</text>
+                    <text style='font-size:20rpx;color:#a9a8a8;text-decoration:line-through;margin-left:15rpx;' wx:if='{{item.gsales!=item.msales}}'>￥{{item.msales}}{{item.msale_suit}}</text>
+                  </view>
+                </view>
+              <view class='Directmay'>
+                  <block wx:if='{{item.type==5}}'>
+                    <view style='color:#F93F45;height:22px;line-height:22px;font-size:12px;' catchtap='addresssmokebox' data-gid='{{item.goods_id}}'>在线抽盒机</view>
+                  </block>
+                  <block wx:else>
+                    <view style='color:#F93F45;height:22px;line-height:22px;font-size:12px;' catchtap='addressmanagement' data-gid='{{item.goods_id}}'>直接购买</view>
+                  </block>
+
+              </view>
+            </view>
+          </swiper-item>
+
+
+        </block>
+
+
+
+
+
+      </swiper>
+    </block>
+
+  </view>
+
+
+</view>
+
+<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+
+
+<!--  背景颜色  -->
+<view class='tipback' wx:if='{{tipback}}' catchtouchmove="preventD">
+
+</view>
+<ad unit-id="adunit-6b4207cd303cf730" wx:if='{{tipback}}' style='position:fixed;top:0;left:0;z-index:10;'></ad>
+<!--  拆单购买弹框 -->
+<view class='dsbframe' wx:if='{{dsbframeiftr}}'>
+  <view class='dsbfhead'>
+    <view class='dsbfcileft'>
+      <image src='{{commoddata.gcover}}' class='dasbfcommodityimg'></image>
+    </view>
+    <view class='dsbfhcon'>
+      <view class='dsbfhcprice'>￥{{commoddata.sales}}</view>
+      <view style='height:50rpx;line-height:50rpx;font-size:30rpx;color:#999;width:100%;' class='specialellipsis' wx:if='{{commoddata.color.length!=0||commoddata.size.length!=0}}'>已选择：
+        <text style='display: inline-block;' wx:for='{{commoddata.color}}' wx:for-item="chit" wx:key='key' wx:if='{{chit.no==colorid}}'>{{chit.property}}</text>
+        <text decode="{{true}}" style='display: inline-block;' wx:for='{{commoddata.size}}' wx:for-item="chit" wx:key='key' wx:if='{{chit.no==sizeid}}'>&nbsp;{{chit.property}}</text>
+      </view>
+    </view>
+    <image class='dsbfheadrightimg' src='../images/forknumber.png' bindtap='dsbffun'></image>
+  </view>
+  <view class='dsbfcontent'>
+    <view class='purchasequantity'>
+      <view class='purchasequantityleft'>购买数量</view>
+      <view class='purchasequantityright'>
+        <view class='pchriadaredleft pcridarcom'>-</view>
+        <view class='pchriadaredcon pcridarcom'>{{numberofdismantling}}</view>
+        <view class='pchriadaredright pcridarcom'>+</view>
+      </view>
+    </view>
+    <view class='coloseltit' wx:if='{{commoddata.color.length!=0}}'>选择颜色</view>
+    <view class='comcolor'>
+      <view wx:for='{{commoddata.color}}' wx:key='key' class='comcolorchid {{item.no==colorid?"comcolorchidback":""}}' data-no='{{item.no}}' data-property='{{item.property}}' catchtap='comcolorsel'>{{item.property}}</view>
+    </view>
+    <view class='coloseltit' wx:if='{{commoddata.size.length!=0}}'>选择型号</view>
+    <view class='comcolor'>
+      <view wx:for='{{commoddata.size}}' wx:key='key' class='comcolorchid {{item.no==sizeid?"comcolorchidback":""}}' data-no='{{item.no}}' data-property='{{item.property}}' catchtap='comsizesel'>{{item.property}}</view>
+    </view>
+  </view>
+  <view class='dsbfbottom'>
+    <view class='dsbfbauto'>
+      <view class='dsbbbutclickadd' bindtap='dsbbbutclickt' wx:if='{{quantityofgoods!=0}}'>立即购买</view>
+      <view class='dsbbbutclickadd' style='background:#999;' wx:if='{{quantityofgoods==0}}'>库存不足</view>
+    </view>
+  </view>
+</view>
+
+
+<!--  二级背景  -->
+<view class='tipbacktwo' wx:if='{{tipbacktwo}}' catchtouchmove="preventD">
+
+</view>
+<ad unit-id="adunit-d09daebcc6e698d4" wx:if='{{tipbacktwo}}' style='position:fixed;top:0;left:0;z-index:889;'></ad>
+<!--  立即购买弹框  -->
+
+<view class='buybombsimmediately' wx:if='{{buybombsimmediately}}'>
+  <view class='bbsheadcon'>
+    <view class='bbshccom' wx:if='{{judgmentactivity==1}}'>
+      <view class='bbshccomleft'>数量</view>
+      <image class='bbshccomimg' src='../images/icon_in.png'></image>
+      <view class='bbshccomright'>{{numberofdismantling}}</view>
+    </view>
+    <view class='bbshccom' bindtap='seladdressfun'>
+      <view class='bbshccomleft'>收货地址</view>
+      <image class='bbshccomimg' src='../images/icon_in.png'></image>
+      <view class='bbshccomright multilineellipsis'>{{tipaddress}}</view>
+    </view>
+    <view class='bbshccom' bindtap='couponprofun' wx:if='{{judgmentactivity==2}}'>
+      <view class='bbshccomleft'>优惠券</view>
+      <image class='bbshccomimg' src='../images/icon_in.png'></image>
+      <text class='bbshccomright multilineellipsis' style='text-align: right;font-size:28rpx;'>{{tipcoupon}}</text>
+    </view>
+    <view class='bbshccombot' wx:if='{{commoddata.is_free != 1}}'>
+      <view class='bbshcombotleft'>应付金额</view>
+      <view class='bbshcombotright'>
+        <view class='bbshcombotpr'>￥{{amountpayable}}</view>
+        <view class='bbshcombotdet' bindtap='pricedetailc'>
+          <image class='bbshdetimg' src='../images/tipdet.png'></image>点击查看价格明细
+        </view>
+      </view>
+    </view>
+    <view class='pricedetail' wx:if='{{pricedetailc}}'>
+      <view class='pricedetailo'>
+        <view class='pricedetailoleft'>商品价格</view>
+        <view class='pricedetailoright'>￥{{commodityprice}}</view>
+      </view>
+      <view class='pricedetailo'>
+        <view class='pricedetailoleft'>税费</view>
+        <view class='pricedetailoright'>￥{{taxation}}</view>
+      </view>
+      <view class='pricedetailo'>
+        <view class='pricedetailoleft'>运费
+          <text style='padding-left:8rpx;color:#47981e;' wx:if='{{freightiftr>0}}'>(满￥{{defaultinformation.carriage.free}}包邮)</text>
+        </view>
+        <view class='pricedetailoright'>{{freight}}</view>
+      </view>
+      <view class='pricedetailo'>
+        <view class='pricedetailoleft' wx:if='{{coupon_type==2}}'>折扣券</view>
+        <view class='pricedetailoleft' wx:else>代金券</view>
+        <view class='pricedetailorightcol green' wx:if='{{coudata2mon>0&&coupon_type==2}}'>-￥{{coudata2mondiscount}}</view>
+        <view class='pricedetailorightcol green' wx:elif='{{coudata2mon>0}}'>-￥{{coudata2mon}}</view>
+        <view class='pricedetailorightcol' wx:elif='{{coudata2mon<=0}}'>￥{{coudata2mon}}</view>
+      </view>
+      <view class='pricedetailo'>
+        <view class='pricedetailoleft'>运费券</view>
+        <view class='pricedetailorightcol green' wx:if='{{coudata1mon>0}}'>-￥{{coudata1mon}}</view>
+        <view class='pricedetailorightcol' wx:if='{{coudata1mon<=0}}'>￥{{coudata1mon}}</view>
+      </view>
+    </view>
+    <view class='bbshccom'>
+      <view class='bbshccomleft'>买家留言</view>
+      <input class='buyermessage' type='text' bindinput="inputChange" value='{{desc}}' placeholder='选填备注,或添加微信好友({{wxnum}})'></input>
+    </view>
+
+
+  </view>
+  <view class='bbshbottom'>
+    <view class='bbshbottomhead'>
+
+    </view>
+    <view class='bbshbottombut' bindtap='placeorder'>提交订单</view>
+  </view>
+
+</view>
+
+<!--  立即购买弹框  支付运费弹框 -->
+
+<view class='buybombsimmediately' wx:if='{{payfreightone}}'>
+  <view class='bbsheadcon'>
+    <view class='bbshccom' bindtap='seladdressfun'>
+      <view class='bbshccomleft'>收货地址</view>
+      <image class='bbshccomimg' src='../images/icon_in.png'></image>
+      <view class='bbshccomright multilineellipsis'>{{tipaddress}}</view>
+    </view>
+    <view class='bbshccombot'>
+      <view class='bbshcombotleft'>应付金额</view>
+      <view class='bbshcombotright'>
+        <view class='bbshcombotpr'>￥{{payfreightmony}}</view>
+
+      </view>
+    </view>
+
+
+  </view>
+  <view class='bbshbottom'>
+    <view class='bbshbottombut' bindtap='payfreighplaceorder'>提交订单</view>
+  </view>
+
+</view>
+
+
+
+
+
+
+<!--  收货地址  -->
+<view class='receivingaddress' wx:if='{{receivingaddress}}'>
+  <view class='recgadhead'>
+    收货地址
+    <image src='../images/forknumber.png' class='recgadheadimg' bindtap='receivingaddressfun'></image>
+  </view>
+  <view class='recgadcon'>
+    <view class='recgaddata' wx:for='{{addressdata}}' wx:key='key'>
+      <view class='recgaddname' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' catchtap='revisethereceivingaddress'>
+        <view class='recgaddnameleft'>{{item.consignee}}</view>
+        <view class='recgaddnameleft'>{{item.phone}}</view>
+      </view>
+      <view class='recgadaddress' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' catchtap='revisethereceivingaddress'>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
+      <view class='recgadbottom'>
+        <view class='recgadbotleft'>
+          <!-- <image src='../images/normal_click.png' class='recgadbotleftimg'></image> -->
+          <image class='recgadbotleftimg' hidden='{{!item.checked}}' src='../images/pressed_click.png'></image>
+          <image class='recgadbotleftimg' hidden='{{item.checked}}' src='../images/normal_click.png'></image>
+          默认地址
+        </view>
+        <view class='recgadbotright' bindtap='deladdress' data-ind="{{item.aid}}">
+          <image src='../images/icon_delete.png' class='recgadbotleftimg'></image>
+          删除
+        </view>
+        <view class='recgadbotright' style='margin-right:50rpx;' bindtap='jumpeditaddress' data-address='{{item.address}}' data-aid='{{item.aid}}' data-city='{{item.city}}' data-consignee='{{item.consignee}}' data-district='{{item.district}}' data-phone='{{item.phone}}'
+          data-province='{{item.province}}' data-idcard='{{item.idcard}}'>
+          <image src='../images/icon_edit.png' class='recgadbotleftimg'></image>
+          编辑
+        </view>
+      </view>
+    </view>
+    <view class='recgadnodata' wx:if='{{addressdata.length==0}}'>
+      <image src='../images/recaddnodata.png' class='recgadnodataimg'></image>
+    </view>
+  </view>
+  <view class='recgadbot' bindtap='jumpaddress'>
+    增加新地址
+  </view>
+
+</view>
+
+
+
+
+
+
+
+
+<!--  提交订单弹框防止多次提交  -->
+<view wx:if='{{suboformola}}' style='width:100%;height:100%;z-index: 1999999;position: fixed;top: 0;left: 0;'></view>
+<!--  授权弹框  -->
+<view class='tgaboxtwo' wx:if='{{tgabox}}' catchtap='clicktga'>
+  <view class='tgaboxtbg'></view>
+  <view class='tgaboxclick'>
+    <image mode='aspectFit' src='{{tgaimg}}?log={{appNowTime}}' class='tgaboxclickbgImg'></image>
+    <image src='{{commoddata.cover}}' class='abcd'></image>
+
+  </view>
+  <button class='tgaboxtgawchbochlibutboxtwo' open-type="getUserInfo" type='primary' bindgetuserinfo="userInfoHandler"></button>
+
+</view>
+
+
+
+
+
+<!--  loading 加载提示  -->
+<view hidden="{{headhidden}}" style='position: fixed;top: 0;left: 0;height: 100%;width: 100%;z-index: 30;' catchtouchmove="preventD"></view>
+
+
+
+<!--  优惠券弹框  -->
+<view class='couponprojectile' wx:if='{{couponprojectile}}'>
+  <!--  数据  -->
+  <view class='recgadhead'>
+    优惠券
+    <image src='../images/forknumber.png' class='recgadheadimg' bindtap='couponprojectilefun'></image>
+  </view>
+  <view class='couponsousuo'>
+    <input class='indheadinp' type='text' value='{{coupondata}}' bindinput='coupondatafun' placeholder='请输入兑换码'></input>
+    <view class='sousuoclik' catchtap='couclicksou'>兑换</view>
+  </view>
+  <view class='recgadcon'>
+    <!--   运费卷    -->
+    <view class='boxfirst' wx:for='{{coudata1}}' wx:key='key' data-cid='{{item.cid}}' data-index='{{index}}' catchtap='checkimg1'>
+      <!-- 背景 -->
+      <image wx:if='{{item.status!=0}}' class='boxfirstimg' src='../images/bg_ticket_grey2.png'></image>
+      <image wx:if='{{item.status==0}}' class='boxfirstimg' src='../images/bg_ticket_grey2.png'></image>
+      <!-- 已过期  -->
+      <image wx:if='{{item.status==2}}' class='yinzhengimg' src='../images/icon_expired.png'></image>
+      <!--  已使用  -->
+      <image wx:if='{{item.status==1}}' class='yinzhengimg' src='../images/icon_used.png'></image>
+      <view class='chebo' wx:if='{{item.imgcheck}}'>
+        <image class='chebochekcl' src='../images/icon_check.png'></image>
+      </view>
+      <view class='boxcon' bindtap=''>
+        <view class='boxconhead'>
+          <view class='bocohealef'>
+            <view class='bchll'>{{item.unit}}</view>
+            <view class='bchlr'>{{item.value}}</view>
+          </view>
+          <view class='bocohearig'>
+            <view class='bocohighe specialellipsis'>{{item.name}}</view>
+            <view class='bocohigcon specialellipsis'>{{item.detail}}</view>
+            <view wx:if='{{item.status!=1}}' class='bocohigcon specialellipsis'>{{item.overtime}}到期</view>
+            <view wx:if='{{item.status==1}}' class='bocohigcon specialellipsis'>{{item.overtime}}使用</view>
+          </view>
+        </view>
+        <view class='boxconcon'>{{item.desc}}</view>
+      </view>
+    </view>
+    <!--   代金券  -->
+    <view class='boxfirst' wx:for='{{coudata2}}' wx:key='key' data-cid='{{item.cid}}' catchtap='checkimg2'>
+      <!-- 背景 -->
+      <image wx:if='{{item.status!=0}}' class='boxfirstimg' src='../images/bg_ticket_grey2.png'></image>
+      <image wx:if='{{item.status==0}}' class='boxfirstimg' src='../images/bg_ticket_grey2.png'></image>
+      <!-- 已过期  -->
+      <image wx:if='{{item.status==2}}' class='yinzhengimg' src='../images/icon_expired.png'></image>
+      <!--  已使用  -->
+      <image wx:if='{{item.status==1}}' class='yinzhengimg' src='../images/icon_used.png'></image>
+      <view class='chebo' wx:if='{{item.imgcheck}}'>
+        <image class='chebochekcl' src='../images/icon_check.png'></image>
+      </view>
+      <view class='boxcon' bindtap=''>
+        <view class='boxconhead'>
+          <view class='bocohealef'>
+            <view class='bchll' wx:if='{{item.coupon_type!=2}}'>{{item.unit}}</view>
+            <view class='bchlr' style='{{item.coupon_type==2?"margin-left:6rpx;text-align:right;":""}}'>{{item.value}}</view>
+            <view class='bchll' wx:if='{{item.coupon_type==2}}' style='font-size:22rpx;width:24rpx;'>折</view>
+          </view>
+          <view class='bocohearig'>
+            <view class='bocohighe specialellipsis'>{{item.name}}</view>
+            <view class='bocohigcon specialellipsis'>{{item.detail}}</view>
+            <view wx:if='{{item.status!=1}}' class='bocohigcon specialellipsis'>{{item.overtime}}到期</view>
+            <view wx:if='{{item.status==1}}' class='bocohigcon specialellipsis'>{{item.overtime}}使用</view>
+          </view>
+        </view>
+        <view class='boxconcon'>{{item.desc}}</view>
+      </view>
+    </view>
+    <!--  没数据图片  -->
+    <view class='recgadnodata' wx:if='{{coudata.length==0}}'>
+      <image src='../images/nocoupon.png' class='recgadnodataimg'></image>
+    </view>
+  </view>
+  <view class='couponprorecgadbot' catchtap='querencouponprojectilefun'>
+    确认
+  </view>
+</view>
+
+
+
+
+<!--  活动提示 新人专享提示 ifcomtipiftr==1 机会不足提示 ifcomtipiftr==2-->
+<view class='comtip' wx:if='{{comtipiftr}}' style='z-index:2100;'>
+  <view class='comtipback' catchtap='hidcomtip'></view>
+  <view class='comtipcon'>
+    <view class='comtipchead' wx:if='{{ifcomtipiftr==1}}'>免单说明</view>
+    <view class='comtipchead' wx:if='{{ifcomtipiftr==2}}'>增加免单机会</view>
+    <view class='comtipchead' wx:if='{{ifcomtipiftr==3}}'>提示</view>
+    <!--  新人专享提示  -->
+    <view class='comtipccon' wx:if='{{ifcomtipiftr==1}}'>
+      <text>{{newtips}}</text>
+    </view>
+    <!--  机会不足提示  -->
+    <view class='comtipccon' wx:if='{{ifcomtipiftr==2}}'>
+      <text>{{tips}}</text>
+    </view>
+    <!-- 任务提示 -->
+    <view class='comtipccon' wx:if='{{ifcomtipiftr==3}}'>
+      <text>{{tipstask}}</text>
+    </view>
+    <view class='comtipcbot'>
+      <view class='comtipcbri' style='position:relative;' catchtap='hidcomtip' wx:if='{{ifcomtipiftr==1}}'>快去报名
+      </view>
+      <view class='comtipcbri' catchtap='hidcomtip' style='position:relative;' wx:if='{{ifcomtipiftr==2||ifcomtipiftr==3}}'>知道了
+      </view>
+    </view>
+  </view>
+</view>
+
+
+
+
+
+<!--  填写身份证号  -->
+<view class='idnumberboxw' wx:if='{{idnumberboxiftr}}'>
+  <view class='idnumberboxwback'></view>
+  <view class='idnumberbox'>
+    <view class='idnumberboxhead'>补充清关信息</view>
+    <view class='idnumberboxprompt'>海关政策需补充身份信息仅用于海关清关</view>
+    <input class='idnumberboxinp' type='text' value='{{inputnamedata}}' bindinput="inputnameChange" placeholder='真实姓名'></input>
+    <input class='idnumberboxinp' type='text' value='{{inputidnumberdata}}' bindinput="inputidChange" placeholder='身份证号' style='margin-top:20rpx;'></input>
+    <view class='idnumberboxbut'>
+      <view class='idnumbbcen idnumbbcombut' catchtap='idnumbbcenfun'>取消</view>
+      <view class='idnumbbsub idnumbbcombut' catchtap='idnumbbsubfun'>提交</view>
+    </view>
+  </view>
+</view>
+
+
+
+<!--  图片授权  -->
+<view class='editorrecom' wx:if='{{picbox}}' style='z-index:9999999;'>
+  <view class='ngbackground'></view>
+  <view class='picbox'>
+    <view class='picboxhead'>授权之后才能保存图片</view>
+    <view class='picboxcon'>
+      <view class='picboxconleft' style='color:#333;' catchtap='imgCanelTg'>取消</view>
+      <view class='picboxconleft' style='color:#11fb3d;position:relative;'>
+        <button open-type="openSetting" bindopensetting="handleSetting" class='picbut'></button>
+        确定
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<!--  图片授权  -->
+<view wx:if='{{exhpicsave}}' style='z-index:9999999;width:100%;height:100%;position:fixed;top:0;left:0;'>
+  <view style='width:100%;height:100%;background:#000;opacity:.5;'></view>
+  <view style='width:500rpx;height:240rpx;background:#fff;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;border-radius:16rpx;'>
+    <view style='padding:30rpx 0;width:100%;height:80rpx;text-align:center;line-height:80rpx;color:#333;font-size:26rpx;border-bottom:1rpx solid #e5e5e5;'>授权之后才能保存图片</view>
+    <view style='height:100rpx;width:100%;'>
+      <view style='color:#333;width:50%;float:left;height:100rpx;line-height:100rpx;text-align:center;font-size:26rpx;' catchtap='imgCanelTgexh'>取消</view>
+      <view style='color:#11fb3d;position:relative;width:50%;float:left;height:100rpx;line-height:100rpx;text-align:center;font-size:26rpx;'>
+        <button open-type="openSetting" bindopensetting="exhsavehandleSetting" style='width:100%;height:100%;position:absolute;left:0;top:0;opacity:0;z-index:1;'></button>
+        确定
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<!--  赞助商 微信号复制  -->
+<view class='editorrecom' style='z-index:9999999;' wx:if='{{copyiftr}}'>
+  <view class='ngbackground' catchtap='copyfitrfun'></view>
+  <view class='picbox' style='height:300rpx;'>
+    <view style='height:100rpx;text-align:center;line-height:120rpx;color:#333;font-size:28rpx;'>赞助合作</view>
+    <view class='picboxhead specialellipsis' style='padding:0 0 20rpx 0;'>请联系美拆微信:{{wxnum}}</view>
+    <view class='picboxcon' style='line-height:100rpx;text-align:center;color:#0fbe0e;font-size:28rpx;' catchtap='sponsocopytwo'>
+      点击复制
+    </view>
+  </view>
+</view>
+
+
+
+<!-- 免单提示 -->
+<view class='wsh' wx:if='{{wsh}}'>
+  <view class='tgimgboxgb' style='background:#ccc;' catchtap='tgimgbg'></view>
+  <view class='wshcon'>
+    <view class='wshchead'>免单提示</view>
+    <text class='wshcselhead'>同一个奖品每天只能参与一次\n看看其他活动吧</text>
+    <view class='wshcseibox'>
+      <view class='wshciboxeve' wx:for='{{eshlist}}' wx:key='key'>
+        <image class='wshciboxeveimg' catchtap='actexempfun' data-gid="{{item.id}}" src='{{item.goods_thumb}}'></image>
+      </view>
+    </view>
+    <view class='wshbuttom' catchtap='acetlistfun' style='position:relative;'>更多免单
+    </view>
+  </view>
+</view>
+
+<!-- 免单提示 -->
+<view class='wsh' wx:if='{{wshpay}}'>
+  <view class='tgimgboxgb' style='background:#ccc;' catchtap='tgimgbg'></view>
+  <view class='wshconPay'>
+    <view class='wshchead'>免单提示</view>
+    <text class='wshcselhead'>付费专享活动需要购买任意商品后\n即可报名，快去挑选吧。</text>
+    <view class='wshcseiboxPay'>
+      <view class='wshciboxevePay' wx:for='{{eshlist}}' wx:key='key' data-gid='{{item.goods_id}}' catchtap='addressmanagement'>
+        <image class='wshciboxeveimgPay' src='{{item.goods_thumb}}'></image>
+        <view class='bctitlepay multilineellipsis'>{{item.goods_name }}</view>
+        <view class='wshpayprice specialellipsis'>{{item.goods_price}}</view>
+      </view>
+    </view>
+    <view class='wshbuttom' catchtap='jumprecom' data-type="{{eshjumphref.item_type}}" data-href="{{eshjumphref.href}}" data-name="拆盒买">更多拆单商品</view>
+  </view>
+</view>
+
+
+<!--   领奖提示   -->
+<view class='wsh' wx:if='{{awardrresentiftr}}'>
+  <view class='tgimgboxgb' style='background:#ccc;' catchtap='awardrresentiftr'></view>
+  <view class='awardrresentation'>
+    <view class='adreshead'>领奖提示</view>
+    <view class='adrestxt'>
+      <text>{{rpinfotip}}</text>
+    </view>
+    <scroll-view class='adresscr' scroll-x="true" scroll-with-animation="true">
+      <view class='adresscrbox' wx:for='{{awardrresentation.Goods}}' wx:key='key' data-gid='{{item.goods_id}}' catchtap='addressmanagement'>
+        <image src='{{item.goods_thumb}}' class='adresbimg'></image>
+        <view class='disanum_sb_txtone multilineellipsis' style='color:#666;'>
+          {{item.pre_name}}{{item.ds}}{{item.goods_name}}
+        </view>
+        <view class='specialellipsis' style='width:100%;height:40rpx;line-height:40rpx;color:#f93f45;font-size:22rpx;text-align:center;vertical-align:top;position:relative;top:5rpx;'>
+          ￥{{item.goods_price}}
+        </view>
+      </view>
+    </scroll-view>
+    <view class='chaishopbutbox'>
+      <view class='chaishopbut' data-href='{{awardrresentationjump.href}}' data-item_type='{{awardrresentationjump.item_type}}' catchtap='comindellistjump' style='position:absolute;left:0;right:0;bottom:0;top:0;margin:auto;'>挑选商品领奖</view>
+      <view class='chaishopbut' data-href='{{awardrresentationjump.href}}' data-item_type='{{awardrresentationjump.item_type}}' catchtap='comindellistjump' style='position:absolute;left:0;right:0;bottom:0;top:0;margin:auto;'>挑选商品领奖</view>
+    </view>
+
+    <view class='chaidanboxbor'></view>
+    <view class='chaidanboxborbot'>购买商品领奖后可以报名付费专享活动哦~</view>
+    <scroll-view class='adresbotsrc' scroll-x="true" scroll-with-animation="true">
+      <view class='adresbotsrcbox' wx:for='{{awardrresentation.activity}}' wx:key='key' data-gid='{{item.id}}' catchtap='actexempfun'>
+        <image src='{{item.goods_thumb}}' class='adresbimgbot'></image>
+        <view class='adresbottxt'>
+          <image src='http://www.51chaidan.com/images/default/person1.png' class='adresbimguser'></image>
+          {{item.users}}
+        </view>
+      </view>
+    </scroll-view>
+    <view class='adresboxbottonbut' catchtap='acetlistfun'>更多付费专享活动</view>
+  </view>
+
+</view>
+
+<!-- 红包口令  -->
+<view class='comtip' wx:if='{{redpinputdataiftr}}'>
+  <view class='comtipback' catchtap='redpinputdataiftr'></view>
+  <view class='apptipbox'>
+    <view class='apptiphead' style='font-size:32rpx;border-bottom:0;font-weight: bold;'>官方群专属口令</view>
+    <view class='apptipcont' style='padding:10rpx 0 0 0;font-size:26rpx;color:#6aab48;line-height: 36rpx;'>
+      <text>官方群获得口令,输入后即可报名\n添加官方微信:{{wxnum}}进群</text>
+    </view>
+    <input wx:if='{{commoddata.is_numeric==1}}' type="number" class='redinpnum' bindinput="redpinputChange" value='{{redpinputdata}}' placeholder='请输入美拆群专属口令,本次活动有效'></input>
+    <input wx:else class='redinpnum' bindinput="redpinputChange" value='{{redpinputdata}}' placeholder='请输入美拆群专属口令,本次活动有效'></input>
+    <view class='redbutbotpcopy commoncopyimmed' catchtap='sponsocopytwo' style='color:#ff2742;'>复制微信
+    </view>
+    <view class='redbutbotpimmed commoncopyimmed' catchtap='placeorder'>立即报名
+    </view>
+  </view>
+</view>
+
+
+<view class='tgimgbox' wx:if='{{upserimgboxWinningtheprize}}'>
+  <view class='tgimgboxgb' style='opacity:0.7;' catchtap='closeupserimg'></view>
+  <view class='upsertgimgbcon' style='{{windowHeight<500?"height:800rpx;":"height:1115rpx;"}}'>
+    <view style='width:100%;height:100%;overflow: scroll;'>
+      <view style='width:540rpx;height:700rpx;margin:0 auto;position:relative;'>
+        <image class='tgimcimg' src='{{actimgshareWinningtheprize}}' mode='aspectFit' style='width:540rpx;height:700rpx;margin:0 auto;position:absolute;'></image>
+      </view>
+      <view class='upserbutbox'></view>
+      <view style='height:300rpx;width:100%;position:relative;'>
+        <view style='width:170rpx;height:260rpx;position: absolute;left:14rpx;bottom:20rpx;' bindtap='screenshotpreviewImgzhong'>
+          <image src='http://www.51chaidan.com/images/default/consultAudit.jpg' style='display:block;width:130rpx;height:220rpx;margin:auto;'></image>
+          <view style='width:100%;height:40rpx;color:#fff;font-size:22rpx;text-align:center;line-height:40rpx;text-decoration:underline;'>查看截图参考</view>
+        </view>
+        <text class='upsertextcon' style='width:400rpx;height:230rpx;position: absolute;left:200rpx;bottom:60rpx;font-size:26rpx;color:#fff;overflow: scroll;'>{{share_descWinningtheprize}}</text>
+
+      </view>
+      <view style='width:100%;height:66rpx;position:relative;'>
+        <view style='width:280rpx;height:60rpx;position: absolute;right:0;bottom:0;font-size:26rpx;text-align:center;line-height:60rpx;color:#fff;border-radius: 10rpx;background: #087ac5;' catchtap='screenshottips' data-num='2'>
+          <view style='width:100%;height:100%;position:absolute;top:0;left:0;z-index:2;'>上传截图</view>
+        </view>
+        <view catchtap='sharesavethepictureWinningtheprize' style='width:280rpx;height:60rpx;position: absolute;left:0;bottom:0;font-size:26rpx;text-align:center;line-height:60rpx;color:#fff;border-radius: 10rpx;background: #1aad19;'>
+          点击保存专属晒单图片
+        </view>
+      </view>
+    </view>
+
+
+
+    <image src='../images/icon_close3.png' class='usericonclose' catchtap='closeupserimg'></image>
+  </view>
+</view>
+
+
+
+<!--  优惠券 新人红包  -->
+<view class='newcoupon' wx:if='{{newcoupon}}'>
+  <view class='swfback' catchtouchmove="preventD" catchtap='newhbfun'></view>
+  <view class='newcoucon'>
+    <view class='newcouchead'>
+      <view class='newcouhhead centertxt'>{{newcoutitle}}</view>
+      <view class='newcouhocon'>
+        <view class='newcoucx' wx:for='{{newcoupondata}}' wx:key='key'>
+          <image class='newcoucximg' src='../images/botchofcou.png'></image>
+          <view class='newcoucxcon'>
+            <view class='newcoucxconleft'>
+              <view class='newcoucxconlefttop centertxt' style='text-align:center;' wx:if='{{couponType==2}}'>{{item.value}}张</view>
+              <view class='newcoucxconlefttop centertxt' wx:else>
+                <view style=' font-size:24rpx;display:inline-block;position: relative;top: 8rpx;'>{{item.unit}}</view>{{item.value}}
+              </view>
+              <view class='newcoucxconleftbott specialellipsis'>{{item.desc}}</view>
+            </view>
+            <view class='newcoucxconright'>
+              <view class='newcoucxconrighttop'>
+                <view class='specialellipsis' style=' font-size:30rpx;padding-top:10rpx;{{couponType==2?"height:90%;line-height:70rpx;":"height:36rpx;"}}'>{{item.name}}</view>
+                <view style=' font-size:24rpx;'>
+                  <block wx:if='{{item.overtime}}'>{{item.overtime}}过期</block>
+                </view>
+              </view>
+              <view class='newcoucxconrightbott specialellipsis'>{{item.detail}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='newcouhbott'>
+        <view class='newcouhbotmimg centertxt' wx:if='{{newcouiftr==1}}' catchtap='swfcanimgcouone'>去 使 用</view>
+        <view class='newcouhbotmimg centertxt' wx:else catchtap='swfcanimgcou'>一 键 领 取</view>
+        <image src='../images/cancelthefork.png' class='swfcanimgnewcou' catchtap='swfcanimgcou'></image>
+      </view>
+    </view>
+
+  </view>
+</view>
+
+
+
+<view class='awatip' wx:if='{{awatip}}'>
+  <view class='awabg' catchtap='awatipdisnone'></view>
+  <view class='awacontent'>
+    <view class='awaconhead'>领奖提示</view>
+    <text class='awaconcon'>领奖专区内购买任意商品\n即可领奖成功</text>
+    <view class='awaconbottom' catchtap='awajump'>确定</view>
+  </view>
+</view>
+
+<!-- catchtap='sucfulregfun'  360 130 -->
+<view class='awatip' wx:if='{{successfulregistration}}'>
+  <view class='awabg'></view>
+  <view class='awacontent' style='width:600rpx;height:320rpx;'>
+    <view class='awaconhead' style='height:50rpx;'></view>
+    <text class='awaconcon' style='color:#419417;height:150rpx;line-height:50rpx;'>上传截图审核成功后可增加\n欧气值+10\n抽盒机透视卡、提示卡、重抽机会(随机一张)</text>
+    <view class='awaconbottom' style='background:#f18f00;width:160rpx;position:relative;' catchtap='subscrfun'>
+      生成图片
+    </view>
+  </view>
+</view>
+
+<view class='awatip' wx:if='{{tipfulregistration}}'>
+  <view class='awabg'></view>
+  <view class='awacontent' style='width:600rpx;height:320rpx;'>
+    <view class='awaconhead' style='height:50rpx;'></view>
+    <text class='awaconcon' style='color:#419417;height:150rpx;line-height:50rpx;'>上传截图审核成功后可增加\n欧气值+10\n抽盒机透视卡、提示卡、重抽机会(随机一张)</text>
+    <view class='awaconbottom' style='background:#f18f00;width:160rpx;position:relative;' catchtap='tipfulregistrationfun'>
+      生成图片
+    </view>
+  </view>
+</view>
+
+
+
+
+
+<view class='awatip' wx:if='{{subscrproiftr}}' style='z-index:9999999999;'>
+  <view class='awabg'></view>
+  <view class='awacontent' style='width:600rpx;height:320rpx;'>
+    <view class='awaconhead'>提示</view>
+    <text class='awaconcon' style='color:#419417;height:110rpx;line-height:50rpx;width:90%;margin:0 auto;'>{{subscrpro}}</text>
+    <view class='awaconbottom' style='background:#f18f00;width:130rpx;position:relative;' catchtap='subscrprofun'>
+      确定
+    </view>
+  </view>
+</view>
+
+<!-- 透视卡 -->
+<view class='awatip' wx:if='{{perspcardiftrmax}}' style='z-index:999;'>
+  <view class='awabg' catchtap='perspcarfun'></view>
+  <view class='perspcard'>
+    <image src='http://www.51chaidan.com/images/icon/alertTempXRay.jpg' style='display:block;width:100%;height:100%;border-radius:30rpx;'></image>
+    <text class='perspcardtxt' catchtap='bblistfun'>立即使用\n(当日有效)</text>
+  </view>
+</view>
+
+<!-- 透视卡 小悬浮 -->
+<view wx:if='{{perspcardiftrmin}}' catchtap='bblistfun' style='width:110rpx;height:170rpx;position:fixed;right:20rpx;bottom:260rpx;z-index:9;'>
+  <image src='http://www.51chaidan.com/images/icon/iconTempXRay.jpg' style='width:110rpx;height:110rpx;display:block;border-radius:50%;'></image>
+  <view style="width:110rpx;height:54rpx;font-size:22rpx;color:#ffffff;position:relative;">
+    <view style="width:110rpx;height:54rpx;background:#cb6a15;opacity:0.8;border-radius:10rpx;"></view>
+    <text style='display:block;text-align:center;width:110rpx;height:54rpx;line-height:27rpx;position:absolute;left:0;top:0rpx;'>点击使用\n{{percountdown}}</text>
+  </view>
+</view>
+
+
+<!-- 领奖截图提示 -->
+<view class='awatip' wx:if='{{screenshottipsiftr}}' style='z-index:9999;'>
+  <view class='awabg' catchtap='screenshottipsnone'></view>
+  <view class='awacontent' style='width:480rpx;height:400rpx;'>
+    <view class='awaconhead'>领奖截图提示</view>
+    <text class='awaconcon' style='color:#000000;height:200rpx;line-height:50rpx;width:90%;margin:0 auto;text-align:left;'>1.保存领奖图片\n2.分享朋友圈不分组\n3.一小时后截图并上传\n4.审核通过领奖({{defaultinformation.carriage.free}}元包邮)</text>
+    <view class='awaconbottom' style='background:#f18f00;width:130rpx;position:relative;' data-anum='2' catchtap='upImgSernum'>去领奖</view>
+  </view>
+</view>
+
+
+
+<!-- ishowgetchip  -->
+<view wx:if='{{ishowgetchip}}' style="width:100%;height:100%;position:fixed;top:0;left:0;z-index:199999;">
+  <view class='awabg' catchtap='closegetchip' catchtouchmove="myCatchTouch"></view>
+
+  <view style="width:740rpx;position:absolute;left:0;top:{{statusBarHeightMc}}px;z-index:11;">
+    <somke colortitle='white'></somke>
+  </view>
+
+  <view style="width:100%;height:100%;position:absolute;left:0;top:{{statusBarHeightMc-20}}px;z-index:10;" catchtap='closegetchip' catchtouchmove="myCatchTouch">
+
+    <view style="width:600rpx;height:{{otherimgarr.length!=0?515:460}}rpx;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;z-index:9;background:white;border-radius:10rpx;" catchtouchmove="myCatchTouch" catchtap="myCatchTouch">
+      <view style="width:100%;font-size:30rpx;text-align:center;margin-top:20rpx;line-height:40rpx;height:40rpx;">{{isshowusertip}}</view>
+      <view class='isshowuserbox' wx:if='{{otherimgarr.length!=0}}'>
+        <image class='isshowuserbimg' wx:for='{{otherimgarr}}' wx:key='key' src='{{item.src}}'></image>
+      </view>
+      <view style='width:100%;position:relative;'>
+        <image src="{{commoddata.cover}}" style="width:500rpx;margin:20rpx 50rpx;border-radius:10rpx;height:267rpx;" mode="widthFix" />
+        <view style="width:500rpx;height:267rpx;position:absolute;top:20rpx;left:50rpx;">
+          <block wx:if='{{fragreturnCode==200}}'>
+            <block wx:if='{{fragmentTotalNumber==4}}'>
+              <view class='sibeve' wx:for='{{[1,2,3,4]}}' wx:key='key' style='height:133.5rpx;'>
+                <image class='sibeveimg' wx:if='{{item==totalPatch}}' src='https://www.51chaidan.com/images/turntable/red_check_mark.png'></image>
+                <view class='sibevebg' wx:else style='height:129rpx;'></view>
+              </view>
+            </block>
+            <block wx:if='{{fragmentTotalNumber==3}}'>
+              <view class='sibeve' wx:for='{{[1,2,3]}}' wx:key='key' style='height:267rpx;width:166rpx;'>
+                <image class='sibeveimg' wx:if='{{item==totalPatch}}' src='https://www.51chaidan.com/images/turntable/red_check_mark.png'></image>
+                <view class='sibevebg' wx:else style='height:257rpx;width:156rpx;'></view>
+              </view>
+            </block>
+            <block wx:if='{{fragmentTotalNumber==2}}'>
+              <view class='sibeve' wx:for='{{[1,2]}}' wx:key='key' style='height:267rpx;width:250rpx;'>
+                <image class='sibeveimg' wx:if='{{item==totalPatch}}' src='https://www.51chaidan.com/images/turntable/red_check_mark.png'></image>
+                <view class='sibevebg' wx:else style='height:257rpx;width:240rpx;'></view>
+              </view>
+            </block>
+          </block>
+          <block wx:else>
+            <block wx:if='{{fragmentTotalNumber==4}}'>
+              <view class='sibeve' wx:for='{{[1,2,3,4]}}' wx:key='key' style='height:133.5rpx;'>
+                <image class='sibeveimg' wx:if='{{item<=otherimgarr.length}}' src='https://www.51chaidan.com/images/turntable/red_check_mark.png'></image>
+                <view class='sibevebg' wx:else style='height:129rpx;'></view>
+              </view>
+            </block>
+            <block wx:if='{{fragmentTotalNumber==3}}'>
+              <view class='sibeve' wx:for='{{[1,2,3]}}' wx:key='key' style='height:267rpx;width:166rpx;'>
+                <image class='sibeveimg' wx:if='{{item<=otherimgarr.length}}' src='https://www.51chaidan.com/images/turntable/red_check_mark.png'></image>
+                <view class='sibevebg' wx:else style='height:257rpx;width:156rpx;'></view>
+              </view>
+            </block>
+            <block wx:if='{{fragmentTotalNumber==2}}'>
+              <view class='sibeve' wx:for='{{[1,2]}}' wx:key='key' style='height:267rpx;width:250rpx;'>
+                <image class='sibeveimg' wx:if='{{item<=otherimgarr.length}}' src='https://www.51chaidan.com/images/turntable/red_check_mark.png'></image>
+                <view class='sibevebg' wx:else style='height:257rpx;width:240rpx;'></view>
+              </view>
+            </block>
+
+
+          </block>
+
+        </view>
+      </view>
+      <view class='wowantfree' catchtap='closegetchip' catchtouchmove="myCatchTouch">我要免单</view>
+    </view>
+  </view>
+
+</view>
+
+<view class='newcoupon' wx:if='{{limsaveiftr}}'>
+  <view class='swfback' catchtouchmove="preventD" catchtap='limsavefun'></view>
+  <view class='limsavebox'>
+    <image class='limsavbimg' mode='aspectFit' src='{{saveimgurl}}'></image>
+    <view class='limsavebuttom' catchtap='sharesavethepicture'>保存图片</view>
+  </view>
+
+</view>
+
+<view class='newcoupon' wx:if='{{addfrindcommoni}}'>
+  <view class='swfback' catchtouchmove="preventD" catchtap='closefrindcommoni'></view>
+  <view class="addfrindcommon">
+    <image class="addfrindcomimg" src="{{saveimgurlfrpb}}" mode='aspectFit'></image>
+    <view class="addfrindcomsave" catchtap="frpcomsavethepicture">保存图片</view>
+  </view>
+</view>
+
+<!--  上传成功之后拉起订阅  -->
+<view wx:if='{{pictboxbox}}' style='z-index:9999999;width:100%;height:100%;position:fixed;top:0;left:0;'>
+  <view style='width:100%;height:100%;background:#000;opacity:.5;'></view>
+  <view style='width:500rpx;height:240rpx;background:#fff;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;border-radius:16rpx;'>
+    <view style='padding:30rpx 0;width:100%;height:80rpx;text-align:center;line-height:80rpx;color:#333;font-size:26rpx;border-bottom:1rpx solid #e5e5e5;'>上传成功</view>
+    <view style='height:100rpx;width:100%;'>
+      <view style='color:#11fb3d;position:relative;width:100%;float:left;height:100rpx;line-height:100rpx;text-align:center;font-size:26rpx;' catchtap='pictboxboxfun'>
+        关闭
+      </view>
+    </view>
+  </view>
+</view>

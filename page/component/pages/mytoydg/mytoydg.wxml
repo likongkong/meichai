@@ -1,0 +1,149 @@
+
+
+<hidewindow id='hide'></hidewindow>
+
+
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view wx:if="{{headhidden}}" style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:999999;'></view>
+
+
+ 
+
+<view class='mtdgbox' style="{{immdevery?'position:fixed;top:0;left:0;right:0;bottom:0;':''}}">
+    <view class='mtdghead' catchtap='comcheckfun'>
+        <view class='mtdghleft'>
+            <!-- 未选中 -->
+            <image wx:if='{{comcheck}}' src='https://www.51chaidan.com/images/toyCabinet/selection.png' class='mtdghlimg'></image>
+            <!-- 选中 -->
+            <image wx:else src='https://www.51chaidan.com/images/toyCabinet/unchecked.png' class='mtdghlimg'></image>
+        </view>
+        <view class='mtdghrtxt'>全选</view>
+    </view>
+    <view class='mtdghcom' wx:for='{{listdata}}' wx:key='key'>
+        <view class='mtdghcommask' data-ind='{{index}}' catchtap='iftrcheckfun'></view>
+        <view class='mtdghleft'>
+           <!-- 选中 -->
+           <image wx:if='{{item.iftrcheck}}' src='https://www.51chaidan.com/images/toyCabinet/selection.png' class='mtdghlimg'></image>        
+           <!-- 未选中 -->
+           <image wx:else src='https://www.51chaidan.com/images/toyCabinet/unchecked.png' class='mtdghlimg'></image>
+        </view>
+        <view class='mtdghimg'>
+           <image src='{{item.goods_img}}' mode='aspectFit' class='mtdgimgb'></image>
+        </view>
+        <view class='mtdgctxt'>
+            <view class='multilineellipsis' style='width:100%;height:73rpx;font-size:26rpx;line-height:36rpx;color:#000;margin-top:10rpx;'>{{item.chanceName}}{{item.goods_name}}</view>
+            <view class='specialellipsis' style='width:100%;height:40rpx;font-size:24rpx;line-height:40rpx;color:#e51c23;'>款式:{{item.roleName}}</view>
+            <view class='specialellipsis' style='width:100%;height:48rpx;font-size:24rpx;line-height:48rpx;color:#747373;'>保留至{{item.exprie_time}} 自动发货</view>
+        </view>
+        
+    </view>
+    <view style='width:100%;padding-top:200rpx;' wx:if='{{listdata.length==0&&iftrnodata}}'>
+        <image src='../../../../pages/images/default_BG_Image@3x.png' style='width:414rpx;height:255rpx;display:block;margin:0 auto;'></image>
+    </view>
+
+</view>
+
+
+<view  class='mtdbotbut' style='border:0;' catchtap='immeddelfunone'>
+    <view style='border:2rpx solid #0076ff;width:90%;height:60rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;text-align:center;line-height:60rpx;border-radius:6rpx;'>立即发货</view>
+</view>
+
+<bnavigation isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+
+
+
+
+
+<!--  授权弹框  -->
+<view class='tgaboxtwo' wx:if='{{tgabox}}' catchtap='clicktga'>
+    <view class='tgaboxtbg'></view>
+    <view class='tgaboxclick'>
+        <image mode='aspectFit' src='{{tgaimg}}?log={{appNowTime}}' class='tgaboxclickbgImg'></image>
+        <image src='{{commoddata.cover}}' class='abcd'></image>
+       
+    </view>
+     <button class='tgaboxtgawchbochlibutboxtwo' open-type="getUserInfo" type='primary' bindgetuserinfo="userInfoHandler"></button>
+
+</view>
+
+<!-- 删除提示 -->
+<view class='comtip' wx:if='{{mtdlocation}}'>
+    <view class='comtipback'></view>
+    <view class='apptipbox'>
+        <!-- <view class='apptiphead'>提示</view> -->
+        <view class='apptipcont'><text>{{mtdtiploctxt}}</text></view>
+        <view class='apptipbut'>
+           <!-- <view class='apptipleft apptiolefrigcom' catchtap='apptiprightfun'>是</view> -->
+           <view class='apptipright apptiolefrigcom' style='position:relative;width:100%;' catchtap='mtdlocationfun'>确定</view>
+        </view>
+    </view>
+</view>
+
+
+
+<!-- 立即发货提示 -->
+<view class='comtip' wx:if='{{immdevery}}'>
+    <view class='comtipback'></view>
+    <view class='apptipbox'>
+        <view class='apptipcont'><text>{{mtdtipimd}}</text></view>
+        <view class='apptipbut'>
+           <view class='apptipleft apptiolefrigcom' catchtap='immdeverycanncel' style='position:relative;'>取消</view>
+           <view class='apptipright apptiolefrigcom' style='position:relative;' catchtap='immeddelfun'>确定</view>
+        </view>
+    </view>
+</view>
+
+
+
+
+
+
+<view class='buybombsimmediately' wx:if='{{buybombsimmediately}}'>
+  <view class='bbsheadcon'>
+    <view class='bbshccom' style='position: relative;'>
+      <view class='bbshccomleft'>发货数量</view>
+      <image class='bbshccomimg' src='../../../../pages/images/icon_in.png'></image>
+      <view class='bbshccomright'>{{numberofdismantling}}</view>
+    </view>
+    <view class='bbshccom' bindtap='seladdressfun' style='position: relative;'>
+      <view class='bbshccomleft'>收货地址</view>
+      <image class='bbshccomimg' src='../../../../pages/images/icon_in.png'></image>
+      <view class='bbshccomright '>
+        <view style="width:100%;line-height:57rpx;text-align:right;" class="specialellipsis">{{tipnamephone}}</view>
+        <view style="width:100%;line-height:57rpx;text-align:right;" class="specialellipsis">{{tipaddress}}</view>
+      </view>
+    </view>
+  </view>
+  <view class='bbshbottom'>
+    <view class='bbshbottomhead'>
+    </view>
+    <view class='bbshbottombut' bindtap='immeddelfun' style='position: relative;'>确定</view>
+  </view>
+
+</view>
+<!--  收货地址  -->
+<view class='receivingaddress' wx:if='{{receivingaddress}}'>
+  <view class='recgadhead'>
+    选择收货地址
+    <image src='../../../../pages/images/forknumber.png' class='recgadheadimg' bindtap='receivingaddressfun'></image>
+  </view>
+  <view class='recgadcon'>
+    <view class='recgaddata' style='height:190rpx;' wx:for='{{addressdata}}' wx:key='key'>
+      <view class='recgaddname' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='revisethereceivingaddress'>
+        <view class='recgaddnameleft'>{{item.consignee}}</view>
+        <view class='recgaddnameleft'>{{item.phone}}</view>
+      </view>
+      <view class='recgadaddress' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='revisethereceivingaddress'>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
+    </view>
+  </view>
+  <view class='recgadbot' bindtap='jumpaddress'>
+    增加新地址
+  </view>
+
+
+</view>
+
+<view class='tipback' wx:if='{{tipback}}' catchtouchmove="preventD" catchtap='tipbackfun' style='opacity: 0.8;'></view>
+

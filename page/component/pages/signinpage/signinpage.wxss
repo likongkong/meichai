@@ -1,0 +1,302 @@
+@import "../../../../pages/activitydetailspage/activitydetailspage.wxss";
+@import "../../../../pages/signin/signin.wxss";
+@import "../../common/mPublic.wxss";
+@import "../../../../common/tabbar.wxss";
+page{
+  background: #f0eff5;
+}
+/*   单行  */
+.specialellipsis{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;  
+} 
+/*  双行  */
+.multilineellipsis{
+   display: -webkit-box;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   word-wrap: break-word;
+   white-space: normal !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.specialellipsis{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+    
+}
+.spbox{
+  width: 100%;
+}
+.spbhead{
+  width: 100%;
+  height: 673rpx;
+  position: relative;
+}
+.spbheadimg{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.spbheadcon{
+  width: 100%;
+  height: 663rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+.spbhchead{
+  width: 680rpx;
+  height: 90rpx;
+  background: #fff;
+  border-radius: 110rpx;
+  margin: 20rpx auto 20rpx;
+}
+.spbheconimg{
+  float: left;
+  width: 70rpx;
+  height: 70rpx;
+  margin: 10rpx;
+  border-radius: 50%;
+}
+.spbheconbt{
+  float: left;
+  width: 190rpx;
+  height: 90rpx;
+}
+.spbhbttxt{
+  width: 100%;
+  height: 50rpx;
+  line-height: 60rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #999999;
+}
+.spbhbttxtnum{
+  width: 100%;
+  height: 40rpx;
+  color: #000;
+  font-size: 24rpx;
+  text-align: center;
+}
+.spbhbttxtnimg{
+  display: inline-block;
+  width: 30rpx;
+  height: 30rpx;
+  position: relative;
+  top: 3rpx;
+  vertical-align: top;
+}
+
+.spbheconbtrig{
+  float: left;
+  width: 190rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #999999;   
+}
+.spbheconriline{
+  width: 2rpx;
+  height: 66rpx;
+  float: left;
+  position: relative;
+  top:12rpx;
+  border-right: 1rpx solid #999;
+}
+
+.spbhchccda{
+  width: 100%;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  font-size: 26rpx;
+  font-weight: bold;
+}
+
+.spbhchsiginbox{
+  width: 160rpx;
+  height: 160rpx;
+  margin:20rpx auto;
+  position: relative;
+}
+.spbhchsigitxt{
+  width: 100%;
+  height: 40rpx;
+  font-size: 25rpx;
+  color: #fff;
+  text-align: center;
+  position: absolute;
+  top: 103rpx;
+  left: 0;
+  z-index: 1;
+}
+
+.spbhchsigswipbox{
+  width: 100%;
+  height:280rpx;
+}
+.spbswbobotsw{
+  width: 640rpx;
+  height: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+.swipercl {
+  height: 240rpx;
+  width: 100%;
+}
+.slide-image{
+  display: block;
+  height: 100%;
+  width: 100%;
+} 
+.slidtopnum{
+  width: 100%;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #999999;
+}
+.slidtopnumimg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 60rpx;
+  height: 60rpx;
+  z-index: 2;
+}
+.supsing{
+  width: 60rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  font-size: 22rpx;
+  color: #fff;
+  background: #67971a;
+  border-radius: 6rpx;
+  margin: 0 auto;
+}
+.slidbotimgline{
+  width: 100%;
+  height: 60rpx;
+  position: relative;
+}
+.slidlinered{
+  width: 50%;
+  height: 20rpx;
+  background: #ff6968;
+  position: absolute;
+  top: 23rpx;
+}
+.swiperposibot{
+  width: 100%;
+  height: 30rpx;
+  text-align: center;
+  position: absolute;
+  bottom:0;
+  left: 0;
+}
+.swiperevedoc{
+  width: 60rpx;
+  height: 8rpx;
+  background: #c5c5c5;
+  margin-right:10rpx;
+  display: inline-block;
+  vertical-align: top; 
+}
+.singtask{
+  width: 100%;
+  background: #fff;
+}
+.singtasktop{
+  height: 60rpx;
+  line-height: 60rpx;
+  padding: 20rpx 30rpx;
+  font-size: 26rpx;
+}
+.singtaskcon{
+  padding-left: 30rpx;
+  height: 284rpx;
+}
+.signscrollviewo{
+  width: 100%;
+  height: 284rpx;
+  white-space:nowrap; 
+}
+.sscieoeve{
+  display: inline-block;
+  width: 220rpx;
+  height: 280rpx;
+  background: #f3f3f3;
+  border-radius: 6rpx;
+  margin-right: 10rpx;
+  vertical-align: top;
+  position: relative;
+}
+.sscieevetop{
+  padding-top: 40rpx;
+  color: #eb492c;
+  font-size: 40rpx;
+  text-align: center;
+}
+.sscieevecon{
+  width: 200rpx;
+  margin: 0 auto;
+  min-height: 70rpx;
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 17rpx;
+}
+.sscievebot{
+  width: 70%;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  color: #fff;
+  font-size: 22rpx;
+  border-radius: 50rpx;
+  background: #FF6968;
+  position: absolute;
+  bottom: 20rpx;
+  left: 0;right: 0;
+  margin: 0 auto;
+  
+}
+.spbswbotsarrow{
+  width:50rpx;
+  height: 50rpx;
+  position: absolute;
+  top:55rpx; 
+}
+.supsingeve{
+  width: 120rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #fff;
+  background: #67971a;
+  border-radius: 6rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -75rpx;
+  margin: 0 auto;
+}
+.videosigninimg{
+  width: 44rpx;
+  height: 44rpx;
+  display: inline-block;
+  position: relative;
+  top: 10rpx;
+  margin-right: 8rpx;
+}
