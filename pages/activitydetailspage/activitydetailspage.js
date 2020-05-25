@@ -494,9 +494,6 @@ closefrindcommoni:function(){
       },
       fail: function () { }
     });
-
-
-
   },
   // 调取展会品牌数据
   exhibdatafun: function (num) {
