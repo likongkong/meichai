@@ -83,11 +83,7 @@ Page({
     };
     if (toyids.length == 0) {
       if (listdata.legnth != 0) {
-        wx.showToast({
-          title: '请选中发货商品',
-          icon: 'none',
-          duration: 2000
-        });
+        app.showToastC('请选中发货商品');
       };
       return false;
     };
@@ -114,11 +110,7 @@ Page({
     };
     if (toyids.length==0){
       if (listdata.legnth!=0){
-        wx.showToast({
-          title: '请选中发货商品',
-          icon: 'none',
-          duration: 2000
-        });
+        app.showToastC('请选中发货商品');
       };
        return false;
     };

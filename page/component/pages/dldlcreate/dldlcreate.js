@@ -228,20 +228,12 @@ Page({
     };
     
     if (_this.data.topic_id==''){
-      wx.showToast({
-        title: '话题不能为空',
-        icon: 'none',
-        duration: 1000
-      });
+      app.showToastC('话题不能为空');
       return false;
     };
     if (_this.data.videolist.length == 0){
       if (tempFilePaths.length==0){
-        wx.showToast({
-          title: '图片和视频必须上传一个',
-          icon: 'none',
-          duration: 1000
-        });
+        app.showToastC('图片和视频必须上传一个');
         return false;
       };
     };
@@ -291,12 +283,7 @@ Page({
               }
             });
           }else{
-            wx.showToast({
-              title: res.data.Msg,
-              icon: 'none',
-              mask: true,
-              duration: 3000
-            });
+            app.showToastC(res.data.Msg);
           };
           _this.setData({ headhidden: true, masklayer: false })
         };
@@ -354,22 +341,14 @@ Page({
               };
             };
           } else {
-            wx.showToast({
-              title: res.data,
-              icon: 'none',
-              duration: 2000
-            });
+            app.showToastC(res.data);
           }
         };
       },
       fail: function (res) {
         _this.setData({ headhidden: true });
         wx.hideToast();
-        wx.showToast({
-          title: '上传失败',
-          icon: 'none',
-          duration: 1500
-        });
+        app.showToastC('上传失败');
       }
     })
   },

@@ -123,11 +123,7 @@ Page({
             _this.listdata(1);
           };
         } else { 
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 1000
-          });
+          app.showToastC(res.data.Msg);
         };
       }
     });
@@ -292,11 +288,7 @@ Page({
            
             wx.hideLoading()
             if (res.data.ReturnCode == 200) {
-              wx.showToast({
-                title: '解锁成功',
-                icon: 'none',
-                duration: 1000
-              });
+              app.showToastC('解锁成功');
               var putforwardnumdata = _this.data.putforwardnumdata;
               var putforwardnum = _this.data.putforwardnum;
               var iftrnum = '';
@@ -329,11 +321,7 @@ Page({
                   is_cbb: true
                 });
               }else{
-                wx.showToast({
-                  title: res.data.Msg,
-                  icon: 'none',
-                  duration: 1000
-                });
+                app.showToastC(res.data.Msg);
               };
 
             };
@@ -353,11 +341,7 @@ Page({
            
             wx.hideLoading()
             if (res.data.ReturnCode == 200) {
-              wx.showToast({
-                title: '提现成功，请注意查收',
-                icon: 'none',
-                duration: 1000
-              });
+              app.showToastC('提现成功，请注意查收');
               _this.onLoadfun();
             } else {
               if (res.data.ReturnCode == 1251) {
@@ -369,11 +353,7 @@ Page({
                   ishowphone:true
                 });
               } else {
-                wx.showToast({
-                  title: res.data.Msg,
-                  icon: 'none',
-                  duration: 1000
-                });
+                app.showToastC(res.data.Msg);
               };
             };
             wx.hideLoading()
@@ -418,11 +398,7 @@ Page({
                   _this.setData({ ishowphone: false});
                 } else {
                   _this.setData({ ishowphone: false });
-                  wx.showToast({
-                    title: res.data.Msg,
-                    icon: 'none',
-                    duration: 1000
-                  });
+                  app.showToastC(res.data.Msg);
                 };
               }
             });
@@ -501,19 +477,11 @@ Page({
             if (num == 1){
               _this.setData({ listdata: [] })
             };
-            wx.showToast({
-              title: '暂无更多数据',
-              icon: 'none',
-              duration: 1000
-            });            
+            app.showToastC('暂无更多数据');            
           };
           
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 1000
-          });
+          app.showToastC(res.data.Msg);
         };
       }
     });

@@ -44,29 +44,13 @@ Page({
             header: { 'Accept': 'application/json' },
             success: function (res) {
               if (res.data.ReturnCode == 200) {
-                wx.showToast({
-                  title: '设置成功',
-                  icon: 'none',
-                  duration: 1500
-                });
+                app.showToastC('设置成功');
               }else if (res.data.ReturnCode == 900) {
-                wx.showToast({
-                  title: '登陆状态有误',
-                  icon: 'none',
-                  duration: 1500
-                });
+                app.showToastC('登陆状态有误');
               }else if (res.data.ReturnCode == 908) {
-                wx.showToast({
-                  title: 'aid和uid不匹配',
-                  icon: 'none',
-                  duration: 1500
-                });
+                app.showToastC('aid和uid不匹配');
               }else{
-                wx.showToast({
-                  title: res.data.Msg,
-                  icon: 'none',
-                  duration: 1500
-                });                
+                app.showToastC(res.data.Msg);                
               };              
              
             }
@@ -116,12 +100,7 @@ Page({
        }
     };
     if (iftrdefault) {
-      wx.showToast({
-        title: '默认地址不能删除',
-        icon: 'none',
-        mask: true,
-        duration: 1500
-      });
+      app.showToastC('默认地址不能删除');
       return false;
     };
 
@@ -141,23 +120,11 @@ Page({
                   addmandata: dat
                 });
               }else if (res.data.ReturnCode == 900) {
-                wx.showToast({
-                  title: '登陆状态有误',
-                  icon: 'none',
-                  duration: 1500
-                });
+                app.showToastC('登陆状态有误');
               }else if (res.data.ReturnCode == 908) {
-                wx.showToast({
-                  title: 'aid和uid不匹配',
-                  icon: 'none',
-                  duration: 1500
-                });
+                app.showToastC('aid和uid不匹配');
               } else {
-                wx.showToast({
-                  title: res.data.Msg,
-                  icon: 'none',
-                  duration: 1500
-                });
+                app.showToastC(res.data.Msg);
               };                          
             }
           })          
@@ -238,11 +205,7 @@ Page({
           })
         };
         if (res.data.ReturnCode == 900) {
-          wx.showToast({
-            title: '登陆状态有误',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('登陆状态有误');
         };     
       },
       fail: function () {
@@ -279,17 +242,9 @@ Page({
             })
           };
         }else if (res.data.ReturnCode == 900) {
-          wx.showToast({
-            title: '登陆状态有误',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('登陆状态有误');
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC(res.data.Msg);
         };      
       }
     });

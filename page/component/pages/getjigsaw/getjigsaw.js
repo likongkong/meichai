@@ -109,11 +109,7 @@ Page({
         wx.saveImageToPhotosAlbum({
           filePath: res.tempFilePath,
           success: function(data) {
-            wx.showToast({
-              title: '保存成功',
-              icon: 'success',
-              duration: 2000
-            })
+            app.showToastC('保存成功')
             _this.dialogClick()
           },
           fail: function(err) {
@@ -226,22 +222,14 @@ Page({
           headhidden: true,
         })
         if (res.data.ReturnCode == 200) {
-          wx.showToast({
-            title: "恭喜您，赠送拼图碎片成功啦",
-            icon: 'none',
-            duration: 3000
-          })
+          app.showToastC("恭喜您，赠送拼图碎片成功啦")
           _this.setData({
             help_ratio: res.data.Info.help_ratio,
             help_num: res.data.Info.help_num,
           })
           _this.jigsaworderinfo();
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 5000
-          })
+          app.showToastC(res.data.Msg)
         }
 
       },
@@ -349,11 +337,7 @@ Page({
           _this.setData({
             headhidden: true,
           })
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 3000
-          })
+          app.showToastC(res.data.Msg)
         }
       },
     })
@@ -390,11 +374,7 @@ Page({
             ishowsendtwo: false,
           })
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 3000
-          })
+          app.showToastC(res.data.Msg)
         }
       },
     })
@@ -617,11 +597,7 @@ Page({
             })
           }
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 3000
-          })
+          app.showToastC(res.data.Msg)
         }
 
       },
@@ -718,11 +694,7 @@ Page({
             ishowcreate: true,
           })
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 3000
-          })
+          app.showToastC(res.data.Msg)
         }
       },
     })

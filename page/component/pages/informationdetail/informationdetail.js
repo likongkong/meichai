@@ -254,11 +254,7 @@ Page({
               infodata: comdataarr,
             });
           }else{
-            wx.showToast({
-              title: '没有更多数据了',
-              icon: 'none',
-              duration: 1000
-            });
+            app.showToastC('没有更多数据了');
           };
         };
         // 判断非200和登录

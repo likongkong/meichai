@@ -239,11 +239,7 @@ Page({
           });
         };
       }else{
-        wx.showToast({
-          title: '暂无更多数据',
-          icon: 'none',
-          duration: 1000
-        });
+        app.showToastC('暂无更多数据');
       }
 
     });
@@ -260,11 +256,7 @@ Page({
       drying_uid: drying_id,
       is_follow: is_follow
     }, function(res) {
-      wx.showToast({
-        title: '关注成功',
-        icon: 'none',
-        duration: 2500
-      });
+      app.showToastC('关注成功');
       if (_this.data.cat_id == 2) {
         var eldatalist = _this.data.eldatalist;
         eldatalist[ind].is_follow = 1;

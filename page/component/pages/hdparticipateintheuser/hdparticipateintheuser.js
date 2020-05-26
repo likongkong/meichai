@@ -123,27 +123,15 @@ Page({
                 commoddata: comdataarr
               });
             }else{
-              wx.showToast({
-                title: '没有更多数据了',
-                icon: 'none',
-                duration: 1000
-              });              
+              app.showToastC('没有更多数据了');              
             };
           };
         };
         if (res.data.ReturnCode == 400) {
-          wx.showToast({
-            title: '暂无信息',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('暂无信息');
         };
         if (res.data.ReturnCode == 900) {
-          wx.showToast({
-            title: '登陆状态有误',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('登陆状态有误');
         };
       }
     });

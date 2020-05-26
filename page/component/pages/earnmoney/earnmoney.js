@@ -130,11 +130,7 @@ Page({
           _this.setData({ listdata: [] });
         };
         _this.setData({ loadprompt: '没有更多数据了' });
-        wx.showToast({
-          title: '暂无更多数据',
-          icon: 'none',
-          duration: 2000
-        });
+        app.showToastC('暂无更多数据');
       };
 
     },function(){
@@ -249,11 +245,7 @@ Page({
     var _this = this;
     var shipping_number = _this.data.inputdata || '';
     if (shipping_number==''){
-      wx.showToast({
-        title: '快递单号不能为空',
-        icon: 'none',
-        duration: 2000
-      });
+      app.showToastC('快递单号不能为空');
       return false;
     };
     var objectIndex = _this.data.objectIndex || 0;
@@ -262,11 +254,7 @@ Page({
     var shipping_code = expressdata[objectIndex].code||'';
     var shipping_name = expressdata[objectIndex].name||'';
     Pub.postRequest(_this, 'confirm_deliver', { uid: _this.data.uid, loginid: _this.data.loginid, order_id: order_id, shipping_code: shipping_code, shipping_name: shipping_name, shipping_number: shipping_number}, function (res) {
-      wx.showToast({
-        title: '发货成功',
-        icon: 'none',
-        duration: 2000
-      });
+      app.showToastC('发货成功');
       _this.setData({
         shipping_number:'',
         objectIndex:0
@@ -283,11 +271,7 @@ Page({
     var order_id = w.currentTarget.dataset.order_id || w.target.dataset.order_id || '';
     var _this = this;
     Pub.postRequest(_this, 'cancel_exchangeOrder', { uid: _this.data.uid, loginid: _this.data.loginid, order_id: order_id }, function (res) {
-      wx.showToast({
-        title: '取消成功',
-        icon: 'none',
-        duration: 2000
-      });
+      app.showToastC('取消成功');
       _this.listdata(0);
     });
   },
@@ -296,11 +280,7 @@ Page({
     var order_id = w.currentTarget.dataset.order_id || w.target.dataset.order_id || '';
     var _this = this;
     Pub.postRequest(_this, 'confirm_receipt', { uid: _this.data.uid, loginid: _this.data.loginid, order_id: order_id}, function (res) {
-      wx.showToast({
-        title: '确认成功',
-        icon: 'none',
-        duration: 2000
-      });
+      app.showToastC('确认成功');
       _this.listdata(0);
     });    
   },
@@ -324,11 +304,7 @@ Page({
     wx.setClipboardData({
       data: content,
       success: function (res) {
-        wx.showToast({
-          title: '复制成功',
-          icon: 'none',
-          duration: 1500
-        });
+        app.showToastC('复制成功');
       }
     });
 

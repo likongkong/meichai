@@ -123,11 +123,7 @@ Page({
       _this.setData({locationtitle: location})
     }
     Pub.postRequest(_this, 'upUserinfor', { uid: _this.data.uid, loginid: _this.data.loginid, position: location }, function (res) {
-      wx.showToast({
-        title: '修改成功',
-        icon: 'none',
-        duration: 1500
-      })
+      app.showToastC('修改成功')
     });
   },
   // 失去焦点
@@ -135,11 +131,7 @@ Page({
     var _this = this;
     if (this.data.inputdata == this.data.userdata.comment){return false;};
     Pub.postRequest(_this, 'upUserinfor', { uid: _this.data.uid, loginid: _this.data.loginid, introduce:_this.data.inputdata }, function (res) {
-      wx.showToast({
-        title: '修改成功',
-        icon: 'none',
-        duration: 1500
-      })
+      app.showToastC('修改成功')
     });
   },
   // tab 切换
@@ -254,11 +246,7 @@ Page({
           _this.setData({ listdata: ltlist });
         };
       } else {
-        wx.showToast({
-          title: '暂无更多数据',
-          icon: 'none',
-          duration: 2500
-        });
+        app.showToastC('暂无更多数据');
         _this.setData({ loadprompt: '没有更多数据了' });
       };
     });
@@ -475,12 +463,7 @@ Page({
       return false;
     } else if (is_gift == 1) {
       Pub.postRequest(_this, 'receiveAwards', { uid: _this.data.uid, loginid: _this.data.loginid, drying_id: drying_id }, function (res) {
-        wx.showToast({
-          title: res.data.List.gift_name || '',
-          icon: 'none',
-          mask: true,
-          duration: 2000
-        });
+        app.showToastC(res.data.List.gift_name || '');
         setTimeout(function () {
           _this.listdata(0)
         }, 2000);

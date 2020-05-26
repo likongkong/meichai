@@ -165,35 +165,19 @@ Page({
     };
 
     if (tempFilePaths.length == 0) {
-      wx.showToast({
-        title: '图片至少上传一个',
-        icon: 'none',
-        duration: 1500
-      });
+      app.showToastC('图片至少上传一个');
       return false;
     };
     if (_this.data.inputdataname == '') {
-      wx.showToast({
-        title: '商品名称不能为空',
-        icon: 'none',
-        duration: 1500
-      });
+      app.showToastC('商品名称不能为空');
       return false;
     };
     if (_this.data.currencysum == '') {
-      wx.showToast({
-        title: '拆币不能为空',
-        icon: 'none',
-        duration: 1500
-      });
+      app.showToastC('拆币不能为空');
       return false;
     };
     if (_this.data.stocksum == '') {
-      wx.showToast({
-        title: '商品个数不能为空',
-        icon: 'none',
-        duration: 1500
-      });
+      app.showToastC('商品个数不能为空');
       return false;
     };
 
@@ -295,22 +279,13 @@ Page({
               };
             };
           } else {
-            wx.showToast({
-              title: res.data,
-              icon: 'none',
-              duration: 2000
-            });
+            wx.hideToast(res.data);
           }
         };
       },
       fail: function (res) {
         _this.setData({ headhidden: true });
-        wx.hideToast();
-        wx.showToast({
-          title: '上传失败',
-          icon: 'none',
-          duration: 1500
-        });
+        wx.hideToast('上传失败');
       }
     })
   },

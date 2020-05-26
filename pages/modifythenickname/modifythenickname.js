@@ -35,11 +35,7 @@ Page({
   addinp:function(){
    var _this=this;
    if (this.data.inpdata==''){
-     wx.showToast({
-       title: '昵称不能为空!',
-       icon: 'none',
-       duration: 1500
-     });
+    app.showToastC('昵称不能为空!');
      return false;
    };
    var q = Dec.Aese('mod=info&operation=tptinfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1&nick=' + _this.data.inpdata)
@@ -49,18 +45,10 @@ Page({
       header: { 'Accept': 'application/json' },
       success: function (res) {
         if (res.data.ReturnCode == 200) {
-          wx.showToast({
-            title: '提交成功',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('提交成功');
         };
         if (res.data.ReturnCode == 201) {
-          wx.showToast({
-            title: '第三方登录信息有误',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('第三方登录信息有误');
         };        
         // 判断非200和登录
         Dec.comiftrsign(_this, res, app);          

@@ -133,11 +133,7 @@ Page({
              // 性别弹框
              sextip: false
            });
-           wx.showToast({
-             title: '提交成功',
-             icon: 'none',
-             duration: 1500
-           });
+           app.showToastC('提交成功');
          };
          // 判断非200和登录
          Dec.comiftrsign(_this, res, app); 
@@ -166,11 +162,7 @@ Page({
             // 性别弹框
             sextip: false
           });          
-          wx.showToast({
-            title: '提交成功',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('提交成功');
         };
         // 判断非200和登录
         Dec.comiftrsign(_this, res, app); 
@@ -393,11 +385,7 @@ Page({
       header: { 'Accept': 'application/json' },
       success: function (res) {
         if (res.data.ReturnCode == 200) {
-          wx.showToast({
-            title: '提交成功',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('提交成功');
         };
         // 判断非200和登录
         Dec.comiftrsign(_this, res, app);

@@ -521,22 +521,14 @@ Page({
             if (zunmdata.option[1] == zunmdata.anwer){
               _this.placeorder();
             }else{
-              wx.showToast({
-                title: '回答错误',
-                icon: 'none',
-                duration: 1500
-              });
+              app.showToastC('回答错误');
               return false;
             }
           }else{
             if (zunmdata.option[0] == zunmdata.anwer) {
               _this.placeorder();
             }else{
-              wx.showToast({
-                title: '回答错误',
-                icon: 'none',
-                duration: 1500
-              });
+              app.showToastC('回答错误');
               return false;
             }            
           }
@@ -550,20 +542,12 @@ Page({
   placeorder:function(){
     var _this = this;
     if (!this.data.radioagreement){
-      wx.showToast({
-        title: '请同意并接受协议',
-        icon: 'none',
-        duration: 1500
-      });
+      app.showToastC('请同意并接受协议');
       return false;
     };
     // 验证地址
     if (this.data.tipaid == '') {
-      wx.showToast({
-        title: '请选择地址',
-        icon: 'none',
-        duration: 1500
-      });
+      app.showToastC('请选择地址');
       return false;
     };    
     // 判断是否是海外购 填写身份证
@@ -796,46 +780,22 @@ Page({
             suboformola: false
           });        
           if (res.data.ReturnCode == 800) {
-            wx.showToast({
-              title: '非该用户订单',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('非该用户订单');
           };
           if (res.data.ReturnCode == 815) {
-            wx.showToast({
-              title: '订单状态错误',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('订单状态错误');
           };
           if (res.data.ReturnCode == 816) {
-            wx.showToast({
-              title: '不支持的支付类型',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('不支持的支付类型');
           };
           if (res.data.ReturnCode == 817) {
-            wx.showToast({
-              title: '付款明细已生成',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('付款明细已生成');
           };
           if (res.data.ReturnCode == 201) {
-            wx.showToast({
-              title: '微信预支付失败',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('微信预支付失败');
           }; 
           if (res.data.ReturnCode == 805) {
-            wx.showToast({
-              title: '剩余库存不足',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('剩余库存不足');
           };                 
           // 判断非200和登录
           Dec.comiftrsign(_this, res, app);     
@@ -1039,20 +999,12 @@ Page({
     var zunmdata = this.data.zunmdata;
     if (zunmdata.limitBuy > 0) {
       if (index > zunmdata.limitBuy) {
-        wx.showToast({
-          title: '该商品最多一次性购买' + zunmdata.limitBuy + '件',
-          icon: 'none',
-          duration: 1500
-        });
+        app.showToastC('该商品最多一次性购买' + zunmdata.limitBuy + '件');
         return false;
       };
     };
     if (index>this.data.quantityofgoods){
-      wx.showToast({
-        title: '选中数量不能超过库存',
-        icon: 'none',
-        duration: 1500
-      });
+      app.showToastC('选中数量不能超过库存');
       return false;
     };
     this.setData({
@@ -1208,11 +1160,7 @@ Page({
           });
         };
         if (res.data.ReturnCode == 100) {
-          wx.showToast({
-            title: '该商品已下架',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('该商品已下架');
         };
         // 判断非200和登录
         Dec.comiftrsign(_this, res, app);
@@ -1249,25 +1197,13 @@ Page({
              _this.setData({
                zunmdata:numzum
              });             
-             wx.showToast({
-               title: '取消点赞',
-               icon: 'none',
-               duration: 1500
-             });
+             app.showToastC('取消点赞');
            };
            if (res.data.ReturnCode == 100) {
-             wx.showToast({
-               title: '该商品已下架',
-               icon: 'none',
-               duration: 1500
-             });
+            app.showToastC('该商品已下架');
            };
            if (res.data.ReturnCode == 918) {
-             wx.showToast({
-               title: '未关注过该商品',
-               icon: 'none',
-               duration: 1500
-             });
+            app.showToastC('未关注过该商品');
            };                      
            // 判断非200和登录
            Dec.comiftrsign(_this, res, app);           
@@ -1287,25 +1223,13 @@ Page({
              _this.setData({
                zunmdata: numzum
              });               
-             wx.showToast({
-               title: '提交成功',
-               icon: 'none',
-               duration: 1500
-             });
+             app.showToastC('提交成功');
            };
            if (res.data.ReturnCode == 100) {
-             wx.showToast({
-               title: '该商品已下架',
-               icon: 'none',
-               duration: 1500
-             });
+            app.showToastC('该商品已下架');
            };
            if (res.data.ReturnCode == 917) {
-             wx.showToast({
-               title: '已经为这个商品点赞',
-               icon: 'none',
-               duration: 1500
-             });
+            app.showToastC('已经为这个商品点赞');
            };              
            // 判断非200和登录
            Dec.comiftrsign(_this, res, app);           
@@ -1330,43 +1254,19 @@ Page({
       header: { 'Accept': 'application/json' },
       success: function (res) {
         if (res.data.ReturnCode == 906) {
-          wx.showToast({
-            title: '激活码错误',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('激活码错误');
         }else if (res.data.ReturnCode == 907) {
-          wx.showToast({
-            title: '激活码已被使用',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('激活码已被使用');
         }else if (res.data.ReturnCode == 914) {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC(res.data.Msg);
         }else if (res.data.ReturnCode == 908) {
-          wx.showToast({
-            title: '激活码已过期',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('激活码已过期');
         }else if (res.data.ReturnCode == 200) {
-          wx.showToast({
-            title: '兑换成功',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('兑换成功');
           // 调取购物券
           _this.comcouponprfun();
         }else{
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 1500
-          });  
+          app.showToastC(res.data.Msg);  
         };
       }
     })
@@ -1781,12 +1681,7 @@ Page({
       }
     };
     if (iftrdefault) {
-      wx.showToast({
-        title: '默认地址不能删除',
-        icon: 'none',
-        mask: true,
-        duration: 1500
-      });
+      app.showToastC('默认地址不能删除');
       return false;
     };
     wx.showModal({
@@ -1806,11 +1701,7 @@ Page({
                 });
               };
               if (res.data.ReturnCode == 908) {
-                wx.showToast({
-                  title: 'aid和uid不匹配',
-                  icon: 'none',
-                  duration: 1500
-                });
+                app.showToastC('aid和uid不匹配');
               };              
               // 判断非200和登录
               Dec.comiftrsign(_this, res, app);              
@@ -1944,28 +1835,16 @@ Page({
     var zunmdata = this.data.zunmdata;
     if (zunmdata.limitBuy > 0) {
       if (numbadd > zunmdata.limitBuy) {
-        wx.showToast({
-          title: '该商品最多一次性购买' + zunmdata.limitBuy + '件',
-          icon: 'none',
-          duration: 1500
-        });
+        app.showToastC('该商品最多一次性购买' + zunmdata.limitBuy + '件');
         numbadd = zunmdata.limitBuy;
       };
     };
     if (numbadd>10){
-      wx.showToast({
-        title: '该商品最多一次性购买10件',
-        icon: 'none',
-        duration: 1500
-      });      
+      app.showToastC('该商品最多一次性购买10件');      
       numbadd = 10;
     };
     if (parseInt(_this.data.quantityofgoods) < numbadd){
-      wx.showToast({
-        title: '该商品最多不能超过库存',
-        icon: 'none',
-        duration: 1500
-      });
+      app.showToastC('该商品最多不能超过库存');
       numbadd = _this.data.quantityofgoods;
     };    
     var taxation = parseFloat(numbadd) * parseFloat(_this.data.zunmdata.tax||0);
@@ -2105,11 +1984,7 @@ Page({
             suboformola: false
           });
           if (res.data.ReturnCode == 200){
-              wx.showToast({
-                title: '已成功加入购物车',
-                icon: 'none',
-                duration: 1000
-              });
+            app.showToastC('已成功加入购物车');
               _this.setData({
                 tipback: false,
                 dsbframeiftr: false,
@@ -2117,29 +1992,13 @@ Page({
             // 购物车数据显示
             Dec.shopnum(_this,app.signindata.comurl);
           } else if (res.data.ReturnCode == 802){
-              wx.showToast({
-                title: '规格选择有误',
-                icon: 'none',
-                duration: 1000
-              });
+            app.showToastC('规格选择有误');
           } else if (res.data.ReturnCode == 805){
-              wx.showToast({
-                title: '库存不足',
-                icon: 'none',
-                duration: 1000
-              });
+            app.showToastC('库存不足');
           } else if (res.data.ReturnCode == 201) {
-              wx.showToast({
-                title: '添加失败',
-                icon: 'none',
-                duration: 1000
-              });
+            app.showToastC('添加失败');
           } else if (res.data.ReturnCode == 302){
-              wx.showToast({
-                title: '无效信息',
-                icon: 'none',
-                duration: 1000
-              });
+            app.showToastC('无效信息');
           }
         },
         fail: function () {
@@ -2634,21 +2493,13 @@ Page({
           // _this.sharefrind();
         };
         if (res.data.ReturnCode == 100) {
-          wx.showToast({
-            title: '该商品已下架',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('该商品已下架');
           wx.reLaunch({
             url: "/pages/index/index?judgeprof=2"
           });
         };
         if (res.data.ReturnCode == '000') {
-          wx.showToast({
-            title: '商品暂时找不到了',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('商品暂时找不到了');
           wx.reLaunch({
             url: "/pages/index/index?judgeprof=2"
           });
@@ -2806,11 +2657,7 @@ Page({
       header: { 'Accept': 'application/json' },
       success: function (res) {
         if (res.data.ReturnCode == 200) {
-          wx.showToast({
-            title: '点赞成功',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('点赞成功');
           var abcdata = _this.data.allcomlist;
           var ind = parseInt(w.currentTarget.dataset.ind);
           abcdata[ind].praised = 1;
@@ -2820,18 +2667,10 @@ Page({
           })
         };
         if (res.data.ReturnCode == 912) {
-          wx.showToast({
-            title: 'gid和cid不匹配',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('gid和cid不匹配');
         };
         if (res.data.ReturnCode == 917) {
-          wx.showToast({
-            title: '已经为这个商品点赞',
-            icon: 'none',
-            duration: 1500
-          }); 
+          app.showToastC('已经为这个商品点赞'); 
         };
         // 判断非200和登录 
         Dec.comiftrsign(_this, res, app);    
@@ -2849,11 +2688,7 @@ Page({
       header: { 'Accept': 'application/json' },
       success: function (res) {
         if (res.data.ReturnCode == 200) {
-          wx.showToast({
-            title: '已取消点赞',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('已取消点赞');
           var abcdata = _this.data.allcomlist;
           var ind = parseInt(w.currentTarget.dataset.ind);
           abcdata[ind].praised = 0;
@@ -2863,11 +2698,7 @@ Page({
           })
         };
         if (res.data.ReturnCode == 918) {
-          wx.showToast({
-            title: '未关注过该商品',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('未关注过该商品');
         };        
         // 判断非200和登录
         Dec.comiftrsign(_this, res, app);            
@@ -2949,32 +2780,16 @@ Page({
         header: { 'Accept': 'application/json' },
         success: function (res) {
           if (res.data.ReturnCode == 200) {
-            wx.showToast({
-              title: res.data.Info.notify,
-              icon: 'none',
-              duration: 3000
-            });
+            app.showToastC(res.data.Info.notify);
           };
           if (res.data.ReturnCode == 900) {
-            wx.showToast({
-              title: '登陆状态有误',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('登陆状态有误');
           };
           if (res.data.ReturnCode == 800) {
-            wx.showToast({
-              title: '非该用户订单',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('非该用户订单');
           };
           if (res.data.ReturnCode == 701) {
-            wx.showToast({
-              title: '订单状态有误(不是“已完成”状态)',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('订单状态有误(不是“已完成”状态)');
           };
         },
       })      
@@ -3122,27 +2937,15 @@ Page({
   idnumbbsubfun: function () {
     var _this = this; 
     if (_this.data.inputnamedata==''){
-      wx.showToast({
-        title: '姓名不能为空',
-        icon: 'none',
-        duration: 1500
-      });
+      app.showToastC('姓名不能为空');
       return false;
     };
     var regIdCard = /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/;
     if (this.data.inputidnumberdata == '') {
-      wx.showToast({
-        title: '身份证号不能为空',
-        icon: 'none',
-        duration: 1000
-      });
+      app.showToastC('身份证号不能为空');
       return false;
     } else if (!regIdCard.test(this.data.inputidnumberdata)){
-      wx.showToast({
-        title: '身份证号格式不正确',
-        icon: 'none',
-        duration: 1000
-      });
+      app.showToastC('身份证号格式不正确');
       return false;
     }else{};
     var isisdefault = _this.data.addressdata;
@@ -3168,39 +2971,19 @@ Page({
           });          
         };
         if (res.data.ReturnCode == 900) {
-          wx.showToast({
-            title: '登陆状态有误',
-            icon: 'none',
-            duration: 1500
-          }); 
+          app.showToastC('登陆状态有误'); 
         };
         if (res.data.ReturnCode == 901) {
-          wx.showToast({
-            title: '身份证号格式不正确',
-            icon: 'none',
-            duration: 1500
-          }); 
+          app.showToastC('身份证号格式不正确'); 
         };
         if (res.data.ReturnCode == 909) {
-          wx.showToast({
-            title: '身份证信息不匹配',
-            icon: 'none',
-            duration: 1500
-          }); 
+          app.showToastC('身份证信息不匹配'); 
         };
         if (res.data.ReturnCode == 910) {
-          wx.showToast({
-            title: '身份信息错误次数过多，请明天再试。',
-            icon: 'none',
-            duration: 1500
-          }); 
+          app.showToastC('身份信息错误次数过多，请明天再试。'); 
         };
         if (res.data.ReturnCode == 913) {
-          wx.showToast({
-            title: '地址有误',
-            icon: 'none',
-            duration: 1500
-          }); 
+          app.showToastC('地址有误'); 
         };
       },
       fail: function () { }
@@ -3346,11 +3129,11 @@ Page({
               wx.saveImageToPhotosAlbum({
                 filePath: imgSrc,
                 success() {
-                  wx.showToast({title: '保存成功'});
+                  app.showToastC('保存成功')
                   _this.setData({ upserimgbox: false, savepicturesiftr: true, tgfrShareIftr: false });
                 },
                 fail() {
-                  wx.showToast({title: '保存失败',icon: 'none'});
+                  app.showToastC('保存失败')
                   _this.setData({ upserimgbox: false, savepicturesiftr: true, tgfrShareIftr: false });
                 }
               })
@@ -3362,11 +3145,11 @@ Page({
           wx.saveImageToPhotosAlbum({
             filePath: imgSrc,
             success() {
-              wx.showToast({title: '保存成功'});
+              app.showToastC('保存成功');
               _this.setData({ upserimgbox: false, savepicturesiftr: true, tgfrShareIftr: false });
             },
             fail() {
-              wx.showToast({title: '保存失败',icon: 'none'});
+              app.showToastC('保存失败');
               _this.setData({ upserimgbox: false, savepicturesiftr: true, tgfrShareIftr: false });
             }
           })
@@ -3428,21 +3211,12 @@ Page({
               var ltlist = _this.data.dryinglist.concat(dryinglist);
               _this.setData({ dryinglist: ltlist });
             }else{
-              wx.showToast({
-                title: '暂无更多数据',
-                icon: 'none',
-                mask: true,
-                duration: 2500
-              });
+              app.showToastC('暂无更多数据');
               _this.setData({ loadprompttxt: '暂无更多数据' });
             };
           };
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 1500
-          })
+          app.showToastC(res.data.Msg)
         }
       },
       fail: function () {}
@@ -3483,11 +3257,7 @@ Page({
               };
               _this.setData({ dryinglist: listdata });
           } else {
-            wx.showToast({
-              title: res.data.Msg,
-              icon: 'none',
-              duration: 1500
-            })
+            app.showToastC(res.data.Msg)
           }
         },
         fail: function () {}
@@ -3601,12 +3371,7 @@ Page({
                 exhdata: comdataarr
               })
             } else {
-              wx.showToast({
-                title: '没有更多数据了',
-                icon: 'none',
-                mask: true,
-                duration: 2000
-              });
+              app.showToastC('没有更多数据了');
             }
           };
         };
@@ -3677,11 +3442,11 @@ Page({
                     wx.saveImageToPhotosAlbum({
                       filePath: imgSrc,
                       success() {
-                        wx.showToast({title: '保存成功'});
+                        app.showToastC('保存成功');
                         _this.setData({ addfrindcommoni: false })
                       },
                       fail() {
-                        wx.showToast({title: '保存失败',icon: 'none'});
+                        app.showToastC('保存失败');
                         _this.setData({ addfrindcommoni: false })
                       }
                     })
@@ -3695,11 +3460,11 @@ Page({
               wx.saveImageToPhotosAlbum({
                 filePath: imgSrc,
                 success(res) {
-                  wx.showToast({title: '保存成功'});
+                  app.showToastC('保存成功')
                   _this.setData({ addfrindcommoni: false })
                 },
                 fail(res) {
-                  wx.showToast({ title: '保存失败',icon: 'none'});
+                  app.showToastC('保存失败')
                   _this.setData({ addfrindcommoni: false })
                 }
               })
@@ -3735,11 +3500,7 @@ Page({
         saveimgurlfrpb: url
       });
     } else {
-      wx.showToast({
-        title: name + '未提供此方式',
-        icon: 'none',
-        duration: 1000
-      });
+      app.showToastC(name + '未提供此方式');
     }
   },
   closefrindcommoni: function () {

@@ -167,6 +167,7 @@ Page({
         title: '删除成功',
         icon: 'none',
         duration: 1000,
+        mask:true,
         complete: function () {
           wx.reLaunch({
             url: "/page/component/pages/dlfind/dlfind",
@@ -515,17 +516,9 @@ Page({
     var _this = this;
     Pub.postRequest(_this, 'focuonusers', { uid: _this.data.uid, loginid: _this.data.loginid, drying_uid: drying_id, is_follow: is_follow }, function (res) {
       if (is_follow==0){
-        wx.showToast({
-          title: '关注成功',
-          icon: 'none',
-          duration: 1500
-        })
+        app.showToastC('关注成功')
       }else{
-        wx.showToast({
-          title: '已取消关注',
-          icon: 'none',
-          duration: 1500
-        })
+        app.showToastC('已取消关注')
       };
       _this.listdata();
     });
@@ -728,11 +721,7 @@ Page({
       return false;
     } else if(is_gift==1){
       Pub.postRequest(_this, 'receiveAwards', { uid: _this.data.uid, loginid: _this.data.loginid, drying_id: drying_id }, function (res) {
-        wx.showToast({
-          title: res.data.List.gift_name || '',
-          icon: 'none',
-          duration: 1500
-        });
+        app.showToastC(res.data.List.gift_name || '')
         _this.listdata();
       });
     }
@@ -744,11 +733,7 @@ Page({
     if (listdata.currency_status==1){
       _this.setData({ exchangeiftr:true});
     }else{
-      wx.showToast({
-        title: '拆币不足',
-        icon: 'none',
-        duration: 2500
-      })
+      app.showToastC('拆币不足')
     }
   },
   dlfderdprestion:function(){
@@ -802,11 +787,7 @@ Page({
                 });
               };
               if (res.data.ReturnCode == 908) {
-                wx.showToast({
-                  title: 'aid和uid不匹配',
-                  icon: 'none',
-                  duration: 1500
-                });
+                app.showToastC('aid和uid不匹配');
               };
             }
           })
@@ -873,11 +854,7 @@ Page({
           };
         };
         if (res.data.ReturnCode == 900) {
-          wx.showToast({
-            title: '登陆状态有误',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('登陆状态有误');
         };
       }
     });
@@ -902,11 +879,7 @@ Page({
     var addressdata = _this.data.addressdata||[];
     var tipaid = _this.data.tipaid || '';
     if (tipaid==''){
-      wx.showToast({
-        title: '请选择地址',
-        icon: 'none',
-        duration: 2000
-      });
+      app.showToastC('请选择地址');
       return false;
     };
     var drying_id = _this.data.drying_id||'', province = '', city = '', district = '', address = '', consignee = '', idcard = '', tel = '';
@@ -924,11 +897,7 @@ Page({
        }
     };
     Pub.postRequest(_this, 'exchange_order', { uid: _this.data.uid, loginid: _this.data.loginid, drying_id: drying_id, province: province, city: city, district: district, address: address, consignee: consignee, idcard: idcard, tel: tel}, function (res) {
-      wx.showToast({
-        title: '下单成功',
-        icon: 'none',
-        duration: 2500
-      });
+      app.showToastC('下单成功');
       _this.tipbackfun();
       _this.listdata();
     });

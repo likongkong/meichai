@@ -64,11 +64,7 @@ Page({
         }
       });
     } else {
-      wx.showToast({
-        title: '获取手机号失败！',
-        icon: 'none',
-        duration: 1500
-      });
+      app.showToastC('获取手机号失败！');
       _this.setData({ havephoneiftr: true })
     }
   },
@@ -409,11 +405,7 @@ Page({
           _this.setData({ preventmultiplesubmission: true });
           wx.hideLoading();
           if (res.data.ReturnCode == 200) {
-            wx.showToast({
-              title: '领取成功',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('领取成功');
             _this.onLoadfun();
           } else if (res.data.ReturnCode == 830) {
             var rpiinfo = res.data.Info.tip.replace(/\\n/g, '\n') || '';
@@ -431,11 +423,7 @@ Page({
               payfreightmony: res.data.Info.amount || 10
             });
           } else {
-            wx.showToast({
-              title: res.data.Msg,
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC(res.data.Msg);
           };
         }
       });

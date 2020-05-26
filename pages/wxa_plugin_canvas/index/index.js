@@ -517,7 +517,7 @@ Component({
                     });
                 })
                 .catch((err) => {
-                    wx.showToast({ icon: 'none', title: err.errMsg || '生成失败' });
+                    app.showToastC( err.errMsg || '生成失败');
                     console.error(err);
                 });
         },

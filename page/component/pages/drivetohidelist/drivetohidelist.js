@@ -111,20 +111,10 @@ Page({
               recordList: ltlist
             });
           } else {
-            wx.showToast({
-              title: '没有更多数据了',
-              icon: 'none',
-              mask: true,
-              duration: 2000
-            });
+            app.showToastC('没有更多数据了');
           }
         } else {
-          wx.showToast({
-            title: '没有更多数据了',
-            icon: 'none',
-            mask: true,
-            duration: 2000
-          });
+          app.showToastC('没有更多数据了');
         }
       }
     });

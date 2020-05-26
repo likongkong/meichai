@@ -56,41 +56,17 @@ Page({
           wx.hideLoading();
           _this.setData({ clicktherequestiftr:true});
           if (res.data.ReturnCode == 906) {
-            wx.showToast({
-              title: '激活码错误',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('激活码错误');
           }else if (res.data.ReturnCode == 907) {
-            wx.showToast({
-              title: '激活码已被使用',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('激活码已被使用');
           } else if (res.data.ReturnCode == 914) {
-            wx.showToast({
-              title: res.data.Msg,
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC(res.data.Msg);
           } else if (res.data.ReturnCode == 908) {
-            wx.showToast({
-              title: '激活码已过期',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('激活码已过期');
           } else if (res.data.ReturnCode == 200) {
-            wx.showToast({
-              title: '兑换成功',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('兑换成功');
           } else {
-            wx.showToast({
-              title: res.data.Msg,
-              icon: 'none',
-              duration: 1500
-            });    
+            app.showToastC(res.data.Msg);    
           };
           var qq = Dec.Aese('mod=coupon&operation=getlist&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
           wx.request({

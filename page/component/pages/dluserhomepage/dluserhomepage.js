@@ -112,11 +112,7 @@ Page({
     var is_follow = w.currentTarget.dataset.is_follow || w.target.dataset.is_follow || 0;
     var _this = this;
     Pub.postRequest(_this, 'focuonusers', { uid: _this.data.uid, loginid: _this.data.loginid, drying_uid: drying_id, is_follow: is_follow }, function (res) {
-      wx.showToast({
-        title: '关注成功',
-        icon: 'none',
-        duration: 2500
-      })
+      app.showToastC('关注成功')
       _this.listdata(0);
     });
   },
@@ -199,11 +195,7 @@ Page({
           _this.setData({ listdata: ltlist });
         };
       } else {
-        wx.showToast({
-          title: '暂无更多数据',
-          icon: 'none',
-          duration: 2500
-        });
+        app.showToastC('暂无更多数据');
         _this.setData({ loadprompt: '没有更多数据了' });
       };
     });
@@ -372,12 +364,7 @@ Page({
       return false;
     } else if (is_gift == 1) {
       Pub.postRequest(_this, 'receiveAwards', { uid: _this.data.uid, loginid: _this.data.loginid, drying_id: drying_id }, function (res) {
-        wx.showToast({
-          title: res.data.List.gift_name || '',
-          icon: 'none',
-          mask: true,
-          duration: 2000
-        });
+        app.showToastC(res.data.List.gift_name || '');
         setTimeout(function () {
           _this.listdata(0)
         }, 2000);

@@ -102,11 +102,7 @@ Page({
     wx.setClipboardData({
       data: _this.data.cliptxt||'',
       success: function (res) {
-        wx.showToast({
-          title: '复制成功',
-          icon: 'none',
-          duration: 1000
-        });
+        app.showToastC('复制成功');
       }
     });
     this.businesscooperationfun();
@@ -335,11 +331,7 @@ Page({
     wx.setClipboardData({
       data: self.data.wxnum,
       success: function (res) {
-        wx.showToast({
-          title: '复制成功',
-          icon: 'none',
-          duration: 1000
-        });
+        app.showToastC('复制成功');
       }
     });
 
@@ -582,11 +574,7 @@ Page({
     wx.setClipboardData({
       data: "meichaimeichai",
       success: function (res) {
-        wx.showToast({
-          title: '复制成功',
-          icon: 'none',
-          duration: 1000
-        });
+        app.showToastC('复制成功');
         _this.setData({
           copyiftr: false
         });

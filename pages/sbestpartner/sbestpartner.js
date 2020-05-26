@@ -153,11 +153,7 @@ Page({
               })
           };
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 1000
-          });
+          app.showToastC(res.data.Msg);
         };
       }
     }); 

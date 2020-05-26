@@ -41,11 +41,7 @@ Page({
       header: { 'Accept': 'application/json' },
       success: function (res) {
         if (res.data.ReturnCode == 200) {
-          wx.showToast({
-            title: '点赞成功',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('点赞成功');
           var abcdata = _this.data.allcomlist;
           var ind = parseInt(w.currentTarget.dataset.ind);
           abcdata[ind].praised=1;
@@ -55,25 +51,13 @@ Page({
           })
         };
         if (res.data.ReturnCode == 900) {
-          wx.showToast({
-            title: '登陆状态有误',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('登陆状态有误');
         };
         if (res.data.ReturnCode == 912) {
-          wx.showToast({
-            title: 'gid和cid不匹配',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('gid和cid不匹配');
         };
         if (res.data.ReturnCode == 917) {
-          wx.showToast({
-            title: '已经为这个商品点赞',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('已经为这个商品点赞');
         };        
 
       }
@@ -90,11 +74,7 @@ Page({
       header: { 'Accept': 'application/json' },
       success: function (res) {
         if (res.data.ReturnCode == 200) {
-          wx.showToast({
-            title: '已取消点赞',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('已取消点赞');
           var abcdata = _this.data.allcomlist;
           var ind = parseInt(w.currentTarget.dataset.ind);
           abcdata[ind].praised = 0;
@@ -104,11 +84,7 @@ Page({
           })
         };
         if (res.data.ReturnCode == 918) {
-          wx.showToast({
-            title: '未关注过该商品',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('未关注过该商品');
         };        
         // 判断非200和登录
         Dec.comiftrsign(_this, res, app);      
@@ -319,18 +295,10 @@ Page({
                 page: res.data.List[lengthl].cid
               });              
             }else{
-              wx.showToast({
-                title: '没有更多数据了',
-                icon: 'none',
-                duration: 1500
-              });
+              app.showToastC('没有更多数据了');
             };
         }else{
-          wx.showToast({
-            title: '没有更多数据了',
-            icon: 'none',
-            duration: 1500
-          })                    
+          app.showToastC('没有更多数据了')                    
         };       
       }
     })   

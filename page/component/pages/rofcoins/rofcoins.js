@@ -92,11 +92,7 @@ Page({
             _this.setData({ listdata: ltlist });
           };
         }else{
-          wx.showToast({
-            title: '暂无更多数据',
-            icon: 'none',
-            duration: 2500
-          });
+          app.showToastC('暂无更多数据');
         }
 
     }); 

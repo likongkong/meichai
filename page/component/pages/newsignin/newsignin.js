@@ -334,12 +334,7 @@ Page({
           _this.getInfo();
 
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            mask: true,
-            duration: 1000
-          });
+          app.showToastC(res.data.Msg);
         }
       }
     });
@@ -411,12 +406,7 @@ Page({
           _this.getInfo();
 
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            mask: true,
-            duration: 3000
-          });
+          app.showToastC(res.data.Msg);
         }
       }
     })
@@ -473,23 +463,13 @@ Page({
       },
       success: function (res) {
         if (res.data.ReturnCode == 200) {
-          wx.showToast({
-            title: '领取成功',
-            icon: 'none',
-            mask: true,
-            duration: 3000
-          });
+          app.showToastC('领取成功');
           _this.setData({
             ishowgetcard: false,
           })
           _this.getInfo();
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            mask: true,
-            duration: 3000
-          });
+          app.showToastC(res.data.Msg);
         }
       }
     })
@@ -766,11 +746,7 @@ Page({
                 },
                 fail: function (res) {
                   wx.hideLoading()
-                  wx.showToast({
-                    title: '图片生成失败，请重新刷新页面重试,{ReturnCode:01}',
-                    icon: 'none',
-                    duration: 1500
-                  });
+                  app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:01}');
                   _this.setData({
                     upserimgbox: false,
                   });
@@ -782,11 +758,7 @@ Page({
           },
           fail: function (res) {
             wx.hideLoading()
-            wx.showToast({
-              title: '图片生成失败，请重新刷新页面重试,{ReturnCode:02}',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:02}');
             _this.setData({
               upserimgbox: false,
             });
@@ -796,11 +768,7 @@ Page({
       },
       fail: function (res) {
         wx.hideLoading()
-        wx.showToast({
-          title: '图片生成失败，请重新刷新页面重试,{ReturnCode:06}',
-          icon: 'none',
-          duration: 1500
-        });
+        app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:06}');
         _this.setData({
           upserimgbox: false,
         });
@@ -854,12 +822,7 @@ Page({
             roleList: res.data.List.roleList,
           })
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            mask: true,
-            duration: 3000
-          });
+          app.showToastC(res.data.Msg);
         }
       },
       fail: function (res) {}
@@ -878,23 +841,13 @@ Page({
       },
       success: function (res) {
         if (res.data.ReturnCode == 200) {
-          wx.showToast({
-            title: "领取成功",
-            icon: 'none',
-            mask: true,
-            duration: 3000
-          });
+          app.showToastC("领取成功");
           _this.setData({
             ishowRetro: false,
           })
           _this.getInfo();
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            mask: true,
-            duration: 3000
-          });
+          app.showToastC(res.data.Msg);
         }
       },
       fail: function (res) {}
@@ -933,12 +886,7 @@ Page({
             ishowSwitch: !_this.data.ishowSwitch,
           })
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            mask: true,
-            duration: 3000
-          });
+          app.showToastC(res.data.Msg);
         }
       }
     })
@@ -977,23 +925,13 @@ Page({
       },
       success: function (res) {
         if (res.data.ReturnCode == 200) {
-          wx.showToast({
-            title: "切换成功",
-            icon: 'none',
-            mask: true,
-            duration: 3000
-          });
+          app.showToastC("切换成功");
           _this.setData({
             ishowSwitch: false,
           })
           _this.getInfo();
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            mask: true,
-            duration: 3000
-          });
+          app.showToastC(res.data.Msg);
         }
       }
     })

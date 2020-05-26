@@ -246,34 +246,15 @@ Page({
                 listdata: ltlist
               });
             } else {
-              // wx.showToast({
-              //   title: '没有更多数据了',
-              //   icon: 'none',
-              //   mask: true,
-              //   duration: 1000
-              // });
               _this.setData({ nomoredata: true })
             };
 
           };
 
         } else if (res.data.ReturnCode == 300) {
-          // wx.showToast({
-          //   title: '没有更多数据了',
-          //   icon: 'none',
-          //   mask: true,
-          //   duration: 1000
-          // });
           _this.setData({ nomoredata: true })
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            mask: true,
-            duration: 2000,
-            mask: true
-          });
-
+          app.showToastC(res.data.Msg);
         };
       }
     });

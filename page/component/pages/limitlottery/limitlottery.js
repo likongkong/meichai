@@ -268,16 +268,11 @@ Page({
                     wx.saveImageToPhotosAlbum({
                       filePath: imgSrc,
                       success() {
-                        wx.showToast({
-                          title: '保存成功'
-                        });
+                        app.showToastC('保存成功');
                         _this.setData({ addfrindcommoni: false })
                       },
                       fail() {
-                        wx.showToast({
-                          title: '保存失败',
-                          icon: 'none'
-                        });
+                        app.showToastC('保存失败');
                         _this.setData({ addfrindcommoni: false })
                       }
                     })
@@ -293,16 +288,11 @@ Page({
               wx.saveImageToPhotosAlbum({
                 filePath: imgSrc,
                 success(res) {
-                  wx.showToast({
-                    title: '保存成功'
-                  });
+                  app.showToastC('保存成功');
                   _this.setData({ addfrindcommoni: false })
                 },
                 fail(res) {
-                  wx.showToast({
-                    title: '保存失败',
-                    icon: 'none'
-                  });
+                  app.showToastC('保存失败');
                   _this.setData({ addfrindcommoni: false })
                 }
               })
@@ -342,11 +332,7 @@ Page({
         saveimgurlfrpb: url
       });
     } else {
-      wx.showToast({
-        title: name +'未提供此方式',
-        icon: 'none',
-        duration: 1000
-      });
+      app.showToastC(name +'未提供此方式');
     }
   },
   closefrindcommoni:function(){
@@ -829,12 +815,7 @@ Page({
                 exhdata: comdataarr
               })
             } else {
-              wx.showToast({
-                title: '没有更多数据了',
-                icon: 'none',
-                mask: true,
-                duration: 2000
-              });
+              app.showToastC('没有更多数据了');
             }
           };
         } else {
@@ -996,11 +977,7 @@ Page({
     } else if (type == 6) {
       _this.activityMD()
     } else if (type == 5 && !_this.data.infoActivity.isTodayShare) {
-      wx.showToast({
-        title: "今日已完成，每天都可以推荐获得抽签，去完成其他任务吧",
-        icon: 'none',
-        duration: 3000
-      });
+      app.showToastC("今日已完成，每天都可以推荐获得抽签，去完成其他任务吧");
     } else if (type == 7) {
       _this.showxray()
     }
@@ -1028,11 +1005,7 @@ Page({
           _this.setData({
             redpinputdataiftr: false,
           })
-          wx.showToast({
-            title: "激活成功",
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC("激活成功");
         } else {
           wx.showModal({
             content: res.data.Msg || '',
@@ -1515,11 +1488,7 @@ Page({
                 });
               };
               if (res.data.ReturnCode == 908) {
-                wx.showToast({
-                  title: 'aid和uid不匹配',
-                  icon: 'none',
-                  duration: 1500
-                });
+                app.showToastC('aid和uid不匹配');
               };
               // 判断非200和登录
               Dec.comiftrsign(_this, res, app);
@@ -1556,11 +1525,7 @@ Page({
   placeorder: function () {
     var _this = this;
     if (this.data.tipaid == '') {
-      wx.showToast({
-        title: '请选择地址',
-        icon: 'none',
-        duration: 1500
-      });
+      app.showToastC('请选择地址');
       return false;
     };
 
@@ -1592,11 +1557,7 @@ Page({
           _this.setData({
             suboformola: false
           });
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC(res.data.Msg);
         };
       }
     })
@@ -1642,11 +1603,7 @@ Page({
                   url: "/page/component/pages/hidefun/hidefun?type=1&cart_id=" + _this.data.cart_id
                 });
               } else {
-                wx.showToast({
-                  title: '购买成功',
-                  icon: 'none',
-                  duration: 1500
-                });
+                app.showToastC('购买成功');
               }
             },
             'fail': function (res) {
@@ -1668,46 +1625,22 @@ Page({
             suboformola: false
           });
           if (res.data.ReturnCode == 800) {
-            wx.showToast({
-              title: '非该用户订单',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('非该用户订单');
           };
           if (res.data.ReturnCode == 815) {
-            wx.showToast({
-              title: '订单状态错误',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('订单状态错误');
           };
           if (res.data.ReturnCode == 816) {
-            wx.showToast({
-              title: '不支持的支付类型',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('不支持的支付类型');
           };
           if (res.data.ReturnCode == 817) {
-            wx.showToast({
-              title: '付款明细已生成',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('付款明细已生成');
           };
           if (res.data.ReturnCode == 201) {
-            wx.showToast({
-              title: '微信预支付失败',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('微信预支付失败');
           };
           if (res.data.ReturnCode == 805) {
-            wx.showToast({
-              title: '剩余库存不足',
-              icon: 'none',
-              duration: 1000
-            });
+            app.showToastC('剩余库存不足');
           };
           // 判断非200和登录
           Dec.comiftrsign(_this, res, app);
@@ -1787,18 +1720,13 @@ Page({
                   wx.saveImageToPhotosAlbum({
                     filePath: imgSrc,
                     success() {
-                      wx.showToast({
-                        title: '保存成功'
-                      });
+                      app.showToastC('保存成功');
                       _this.setData({
                         limsaveiftr: false
                       });
                     },
                     fail() {
-                      wx.showToast({
-                        title: '保存失败',
-                        icon: 'none'
-                      });
+                      app.showToastC('保存失败');
                       _this.setData({
                         limsaveiftr: false
                       });
@@ -1816,18 +1744,13 @@ Page({
               wx.saveImageToPhotosAlbum({
                 filePath: imgSrc,
                 success(res) {
-                  wx.showToast({
-                    title: '保存成功'
-                  });
+                  app.showToastC('保存成功');
                   _this.setData({
                     limsaveiftr: false
                   });
                 },
                 fail(res) {
-                  wx.showToast({
-                    title: '保存失败',
-                    icon: 'none'
-                  });
+                  app.showToastC('保存失败');
                   _this.setData({
                     limsaveiftr: false
                   });

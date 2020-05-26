@@ -67,20 +67,12 @@ Page({
         success: function (res) {
           _this.setData({ preventmultiplesubmission: true });
           if (res.data.ReturnCode == 200) {
-            wx.showToast({
-              title: '领取成功',
-              icon: 'none',
-              duration: 2000
-            });
+            app.showToastC('领取成功');
             _this.onLoadfun();
           } else if (res.data.ReturnCode == 830) {
             _this.setData({ awatip: true });
           } else {
-            wx.showToast({
-              title: res.data.Msg,
-              icon: 'none',
-              duration: 2000
-            });
+            app.showToastC(res.data.Msg);
           };
         }
       });
@@ -422,11 +414,7 @@ Page({
           });
         };
       }else{
-        wx.showToast({
-          title: '暂无更多数据',
-          icon: 'none',
-          duration: 2000
-        });
+        app.showToastC('暂无更多数据');
       };
 
     },function(){

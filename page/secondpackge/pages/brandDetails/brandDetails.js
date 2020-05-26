@@ -74,10 +74,7 @@ Page({
         addfrindcommoni: !this.data.addfrindcommoni
       });
     } else {
-      wx.showToast({
-        title: name + '未提供此方式',
-        icon: 'none'
-      });
+      app.showToastC(name + '未提供此方式');
     }
   },
   closefrindcommoni:function(){
@@ -106,16 +103,11 @@ Page({
                     wx.saveImageToPhotosAlbum({
                       filePath: imgSrc,
                       success() {
-                        wx.showToast({
-                          title: '保存成功'
-                        });
+                        app.showToastC('保存成功');
                         _this.setData({ addfrindcommoni: false })
                       },
                       fail() {
-                        wx.showToast({
-                          title: '保存失败',
-                          icon: 'none'
-                        });
+                        app.showToastC('保存失败');
                         _this.setData({ addfrindcommoni: false })
                       }
                     })
@@ -131,18 +123,13 @@ Page({
               wx.saveImageToPhotosAlbum({
                 filePath: imgSrc,
                 success(res) {
-                  wx.showToast({
-                    title: '保存成功'
-                  });
+                  app.showToastC('保存成功');
                   _this.setData({
                     addfrindcommoni: false
                   });
                 },
                 fail(res) {
-                  wx.showToast({
-                    title: '保存失败',
-                    icon: 'none'
-                  });
+                  app.showToastC('保存失败');
                   _this.setData({
                     addfrindcommoni: false
                   });

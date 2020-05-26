@@ -468,11 +468,7 @@ Page({
                 });
               };
               if (res.data.ReturnCode == 908) {
-                wx.showToast({
-                  title: 'aid和uid不匹配',
-                  icon: 'none',
-                  duration: 1500
-                });
+                app.showToastC('aid和uid不匹配');
               };
               // 判断非200和登录
               Dec.comiftrsign(_this, res, app);
@@ -582,11 +578,7 @@ Page({
           _this.setData({
             suboformola: false,
           })
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC(res.data.Msg);
         }
       },
       fail: function() {
@@ -659,11 +651,7 @@ Page({
             luckyValueDesc:res.data.Info.role.luckyValueDesc
           })
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC(res.data.Msg);
         }
       },
       fail: function() {

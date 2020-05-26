@@ -146,11 +146,7 @@ Page({
         }
       });
     } else {
-      wx.showToast({
-        title: '获取手机号失败！',
-        icon: 'none',
-        duration: 1500
-      });
+      app.showToastC('获取手机号失败！');
       _this.setData({
         havephoneiftr: true
       })
@@ -1090,11 +1086,7 @@ Page({
                 });
               };
               if (res.data.ReturnCode == 908) {
-                wx.showToast({
-                  title: 'aid和uid不匹配',
-                  icon: 'none',
-                  duration: 1500
-                });
+                app.showToastC('aid和uid不匹配');
               };
               // 判断非200和登录
               Dec.comiftrsign(_this, res, app);
@@ -1130,21 +1122,9 @@ Page({
   // 提交订单
   placeorder: function() {
     var _this = this;
-    // if (!this.data.radioagreement) {
-    //   wx.showToast({
-    //     title: '请同意并接受协议',
-    //     icon: 'none',
-    //     duration: 1500
-    //   });
-    //   return false;
-    // };
     // 验证地址
     if (this.data.tipaid == '') {
-      wx.showToast({
-        title: '请选择地址',
-        icon: 'none',
-        duration: 1500
-      });
+      app.showToastC('请选择地址');
       return false;
     };
 
@@ -1181,11 +1161,7 @@ Page({
           _this.setData({
             suboformola: false
           });
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC(res.data.Msg);
         };
       }
     })
@@ -1257,17 +1233,6 @@ Page({
               wx.navigateTo({
                 url: "/page/component/pages/initiateopenboxeslist/initiateopenboxeslist"
               });
-              // if (payinfo.isFreeBuyOrder) {
-              //   wx.navigateTo({
-              //     url: "/page/component/pages/hidefun/hidefun?type=1&cart_id=" + _this.data.cart_id
-              //   });
-              // } else {
-              //   wx.showToast({
-              //     title: '购买成功',
-              //     icon: 'none',
-              //     duration: 1500
-              //   });
-              // }
             },
             'fail': function(res) {
               _this.setData({
@@ -1304,46 +1269,22 @@ Page({
             suboformola: false
           });
           if (res.data.ReturnCode == 800) {
-            wx.showToast({
-              title: '非该用户订单',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('非该用户订单');
           };
           if (res.data.ReturnCode == 815) {
-            wx.showToast({
-              title: '订单状态错误',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('订单状态错误');
           };
           if (res.data.ReturnCode == 816) {
-            wx.showToast({
-              title: '不支持的支付类型',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('不支持的支付类型');
           };
           if (res.data.ReturnCode == 817) {
-            wx.showToast({
-              title: '付款明细已生成',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('付款明细已生成');
           };
           if (res.data.ReturnCode == 201) {
-            wx.showToast({
-              title: '微信预支付失败',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('微信预支付失败');
           };
           if (res.data.ReturnCode == 805) {
-            wx.showToast({
-              title: '剩余库存不足',
-              icon: 'none',
-              duration: 1000
-            });
+            app.showToastC('剩余库存不足');
           };
           // 判断非200和登录
           Dec.comiftrsign(_this, res, app);

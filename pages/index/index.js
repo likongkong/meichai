@@ -646,11 +646,7 @@ Page({
                   nodataiftr: true
                 });
               } else {
-                wx.showToast({
-                  title: '没有更多数据了',
-                  icon: 'none',
-                  duration: 1000
-                });
+                app.showToastC('没有更多数据了');
                 _this.setData({ loadprompt: '没有更多数据了', nodataiftr: true});
               };
             };
@@ -1349,34 +1345,18 @@ Page({
       header: { 'Accept': 'application/json' },
       success: function (res) {
         if (res.data.ReturnCode == 200) {
-          wx.showToast({
-            title: '已成功加入购物车',
-            icon: 'none',
-            duration: 1000
-          });
+          app.showToastC('已成功加入购物车');
           Dec.shopnum(_this,app.signindata.comurl);
         } else if (res.data.ReturnCode == 802) {
           wx.navigateTo({   
             url: "/pages/detailspage/detailspage?gid=" + gid
           });
         } else if (res.data.ReturnCode == 805) {
-          wx.showToast({
-            title: '库存不足',
-            icon: 'none',
-            duration: 1000
-          });
+          app.showToastC('库存不足');
         } else if (res.data.ReturnCode == 201) {
-          wx.showToast({
-            title: '添加失败',
-            icon: 'none',
-            duration: 1000
-          });
+          app.showToastC('添加失败');
         } else if (res.data.ReturnCode == 302) {
-          wx.showToast({
-            title: '无效信息',
-            icon: 'none',
-            duration: 1000
-          });
+          app.showToastC('无效信息');
         }
       },
       fail: function () { }

@@ -912,11 +912,7 @@ Page({
             wx.hideLoading()
           }
         } else if (res.data.ReturnCode == 348) {
-          wx.showToast({
-            title: '即将开放，敬请期待',
-            icon: 'none',
-            duration: 3000
-          });
+          app.showToastC('即将开放，敬请期待');
           _this.subscrfun();
         }
       },
@@ -1091,11 +1087,7 @@ Page({
             isagainroll: false,
           })
           _this.stopDraw();
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC(res.data.Msg);
         }
       },
       fail: function () {
@@ -1438,11 +1430,7 @@ Page({
                 });
               };
               if (res.data.ReturnCode == 908) {
-                wx.showToast({
-                  title: 'aid和uid不匹配',
-                  icon: 'none',
-                  duration: 1500
-                });
+                app.showToastC('aid和uid不匹配');
               };
               // 判断非200和登录
               Dec.comiftrsign(_this, res, app);
@@ -1534,11 +1522,7 @@ Page({
           _this.setData({
             suboformola: false
           });
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC(res.data.Msg);
         };
       }
     })
@@ -1548,11 +1532,7 @@ Page({
     var _this = this;
 
     if (this.data.tipaid == '') {
-      wx.showToast({
-        title: '请选择地址',
-        icon: 'none',
-        duration: 1500
-      });
+      app.showToastC('请选择地址');
       return false;
     };
 
@@ -1585,14 +1565,8 @@ Page({
 
         } else {
           // 提交订单蒙层
-          _this.setData({
-            suboformola: false
-          });
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 1500
-          });
+          _this.setData({suboformola: false});
+          app.showToastC(res.data.Msg);
         };
       }
     })
@@ -1635,11 +1609,7 @@ Page({
                     url: "/page/component/pages/hidefun/hidefun?type=1&cart_id=" + _this.data.cart_id
                   });
                 } else {
-                  wx.showToast({
-                    title: '购买成功',
-                    icon: 'none',
-                    duration: 2500
-                  });
+                  app.showToastC('购买成功');
                 }
 
                 if (_this.data.iswholePay) {
@@ -1676,46 +1646,22 @@ Page({
             suboformola: false
           });
           if (res.data.ReturnCode == 800) {
-            wx.showToast({
-              title: '非该用户订单',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('非该用户订单');
           };
           if (res.data.ReturnCode == 815) {
-            wx.showToast({
-              title: '订单状态错误',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('订单状态错误');
           };
           if (res.data.ReturnCode == 816) {
-            wx.showToast({
-              title: '不支持的支付类型',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('不支持的支付类型');
           };
           if (res.data.ReturnCode == 817) {
-            wx.showToast({
-              title: '付款明细已生成',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('付款明细已生成');
           };
           if (res.data.ReturnCode == 201) {
-            wx.showToast({
-              title: '微信预支付失败',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('微信预支付失败');
           };
           if (res.data.ReturnCode == 805) {
-            wx.showToast({
-              title: '剩余库存不足',
-              icon: 'none',
-              duration: 1000
-            });
+            app.showToastC('剩余库存不足');
           };
           // 判断非200和登录
           Dec.comiftrsign(_this, res, app);
@@ -1746,11 +1692,7 @@ Page({
   changeone: function () {
     var _this = this
     if (_this.data.boxnum < 2) {
-      wx.showToast({
-        title: '已经是最后一盒了，不能换了哟',
-        icon: 'none',
-        duration: 3000
-      });
+      app.showToastC('已经是最后一盒了，不能换了哟');
       return;
     }
     if (_this.data.ischange) {
@@ -1766,11 +1708,7 @@ Page({
           if (res.data.ReturnCode == 200) {
             _this.placeorder();
           } else {
-            wx.showToast({
-              title: res.data.Msg,
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC(res.data.Msg);
           }
         },
         fail: function () { }
@@ -1902,11 +1840,7 @@ Page({
           }
 
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC(res.data.Msg);
         }
       },
       fail: function () {
@@ -2014,31 +1948,17 @@ Page({
       title: '加载中',
     })
 
-    if (_this.data.activity.aheadUser == 0 && _this.data.activity.isInQueue) {
-
-    } else {
-      wx.showToast({
-        title: "您已不在队列中，请重新排队",
-        icon: 'none',
-        duration: 3000
-      });
+    if (_this.data.activity.aheadUser == 0 && _this.data.activity.isInQueue) {} else {
+      app.showToastC("您已不在队列中，请重新排队");
       return;
     }
 
     var type = w.currentTarget.dataset.type || w.target.dataset.type;
     if (type == "tip" && _this.data.isusertip) {
-      wx.showToast({
-        title: "该盲盒只可使用1次提示卡",
-        icon: 'none',
-        duration: 3000
-      });
+      app.showToastC("该盲盒只可使用1次提示卡");
       return;
     } else if (type == "XRay" && _this.data.isuserray) {
-      wx.showToast({
-        title: "该盲盒只可使用1次透视卡",
-        icon: 'none',
-        duration: 3000
-      });
+      app.showToastC("该盲盒只可使用1次透视卡");
       return;
     }
 
@@ -2091,11 +2011,7 @@ Page({
           }
         } else {
           setTimeout(function () {
-            wx.showToast({
-              title: res.data.Msg,
-              icon: 'none',
-              duration: 3000
-            });
+            app.showToastC(res.data.Msg);
           }, 500)
         }
       },
@@ -2145,11 +2061,7 @@ Page({
   showWhole: function () {
     var _this = this
     if (_this.data.isOpenWholeBox) { } else {
-      wx.showToast({
-        title: "库存不足",
-        icon: 'none',
-        duration: 3000
-      });
+      app.showToastC("库存不足");
       return;
     }
     _this.setData({
@@ -2170,11 +2082,7 @@ Page({
     var _this = this;
 
     if (this.data.tipaid == '') {
-      wx.showToast({
-        title: '请选择地址',
-        icon: 'none',
-        duration: 1500
-      });
+      app.showToastC('请选择地址');
       return false;
     };
 
@@ -2216,11 +2124,7 @@ Page({
           _this.setData({
             suboformola: false
           });
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC(res.data.Msg);
         };
       }
     })
@@ -2324,11 +2228,7 @@ Page({
             })
           }
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC(res.data.Msg);
         };
       }
     })
@@ -2381,28 +2281,16 @@ Page({
         wx.hideLoading()
         if (res.data) {
           if (res.data == 200) {
-            wx.showToast({
-              title: '上传成功',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('上传成功');
             _this.refreshupdate();
           } else {
-            wx.showToast({
-              title: res.data,
-              icon: 'none',
-              duration: 3000
-            });
+            app.showToastC(res.data);
           }
         };
       },
       fail: function (res) {
         wx.hideLoading()
-        wx.showToast({
-          title: '上传失败',
-          icon: 'none',
-          duration: 1500
-        });
+        app.showToastC('上传失败');
       }
     })
   },
@@ -2941,18 +2829,10 @@ Page({
       success: function (res) {
         wx.hideLoading()
         if (res.data.ReturnCode == 200) {
-          wx.showToast({
-            title: '领取成功',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('领取成功');
           _this.redpagInfo(welfareId)
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC(res.data.Msg);
           _this.setData({
             ishowredpackage: false,
           })
@@ -2984,11 +2864,7 @@ Page({
             welfareList: res.data.List.welfare,
           })
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC(res.data.Msg);
         }
       }
     });
@@ -3021,11 +2897,7 @@ Page({
             isharepag: true,
           })
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC(res.data.Msg);
         }
       }
     });
@@ -3130,12 +3002,7 @@ Page({
                 exhdata: comdataarr
               })
             } else {
-              wx.showToast({
-                title: '没有更多数据了',
-                icon: 'none',
-                mask: true,
-                duration: 2000
-              });
+              app.showToastC('没有更多数据了');
             }
           };
         } else {
@@ -3201,11 +3068,7 @@ Page({
             };
             _this.setData({ exhdata: listdata });
           } else {
-            wx.showToast({
-              title: res.data.Msg,
-              icon: 'none',
-              duration: 1500
-            })
+            app.showToastC(res.data.Msg)
           }
         },
         fail: function () { }
@@ -3223,10 +3086,7 @@ Page({
         addfrindcommoni: !this.data.addfrindcommoni
       });
     } else {
-      wx.showToast({
-        title: name + '未提供此方式',
-        icon: 'none'
-      });
+      app.showToastC(name + '未提供此方式');
     }
   },
   closefrindcommoni: function () {
@@ -3255,16 +3115,11 @@ Page({
                     wx.saveImageToPhotosAlbum({
                       filePath: imgSrc,
                       success() {
-                        wx.showToast({
-                          title: '保存成功'
-                        });
+                        app.showToastC('保存成功');
                         _this.setData({ addfrindcommoni: false })
                       },
                       fail() {
-                        wx.showToast({
-                          title: '保存失败',
-                          icon: 'none'
-                        });
+                        app.showToastC('保存失败');
                         _this.setData({ addfrindcommoni: false })
                       }
                     })
@@ -3280,18 +3135,13 @@ Page({
               wx.saveImageToPhotosAlbum({
                 filePath: imgSrc,
                 success(res) {
-                  wx.showToast({
-                    title: '保存成功'
-                  });
+                  app.showToastC('保存成功');
                   _this.setData({
                     addfrindcommoni: false
                   });
                 },
                 fail(res) {
-                  wx.showToast({
-                    title: '保存失败',
-                    icon: 'none'
-                  });
+                  app.showToastC('保存失败');
                   _this.setData({
                     addfrindcommoni: false
                   });
@@ -3404,15 +3254,9 @@ Page({
             blindBoxLucky: res.data.Info.user.blindBoxLucky,
             exchangeLuckyCondition: res.data.Info.user.exchangeLuckyCondition,
           })
-          wx.showToast({
-            title: '兑换成功',
-            icon: 'none'
-          });
+          app.showToastC('兑换成功');
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none'
-          });
+          app.showToastC(res.data.Msg);
         };
       },
       fail: function () { }

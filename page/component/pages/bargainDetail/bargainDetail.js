@@ -150,11 +150,7 @@ Page({
   },
 
   giftclick: function() {
-    wx.showToast({
-      title: "砍至￥0，奖励翻倍！",
-      icon: 'none',
-      duration: 3000
-    })
+    app.showToastC("砍至￥0，奖励翻倍！")
   },
 
   gosignin: function() {
@@ -281,92 +277,48 @@ Page({
     var _this = this
 
     if (this.data.name == '') {
-      wx.showToast({
-        title: '姓名不能为空',
-        icon: 'none',
-        duration: 3000
-      });
+      app.showToastC('姓名不能为空');
       return false;
     }
     //判断是手机号
     var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
     if (this.data.tele.length == 0) {
-      wx.showToast({
-        title: '输入的手机号为空',
-        icon: 'none',
-        duration: 3000
-      })
+      app.showToastC('输入的手机号为空')
       return false;
     } else if (this.data.tele.length < 11) {
-      wx.showToast({
-        title: '手机号长度有误！',
-        icon: 'none',
-        duration: 3000
-      })
+      app.showToastC('手机号长度有误！')
       return false;
     } else if (!myreg.test(this.data.tele)) {
-      wx.showToast({
-        title: '手机号有误！',
-        icon: 'none',
-        duration: 3000
-      })
+      app.showToastC('手机号有误！')
       return false;
     } else {}
     if (this.data.province.replace(/\s+/g, '') == '') {
-      wx.showToast({
-        title: '地区不能为空',
-        icon: 'none',
-        duration: 3000
-      });
+      app.showToastC('地区不能为空');
       return false;
     }
     if (this.data.city.replace(/\s+/g, '') == '') {
-      wx.showToast({
-        title: '地区不能为空',
-        icon: 'none',
-        duration: 3000
-      });
+      app.showToastC('地区不能为空');
       return false;
     }
     if (this.data.county.replace(/\s+/g, '') == '') {
-      wx.showToast({
-        title: '地区不能为空',
-        icon: 'none',
-        duration: 3000
-      });
+      app.showToastC('地区不能为空');
       return false;
     }
     if (this.data.address == '') {
-      wx.showToast({
-        title: '地址不能为空',
-        icon: 'none',
-        duration: 3000
-      });
+      app.showToastC('地址不能为空');
       return false;
     }
     if (this.data.address.length > 50) {
-      wx.showToast({
-        title: '地址不能超过50个字',
-        icon: 'none',
-        duration: 3000
-      });
+      app.showToastC('地址不能超过50个字');
       return false;
     }
     // //判断身份证号
     var regIdCard = /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/;
     if (this.data.goodsInfo.retailer == 1 && this.data.card == '') {
-      wx.showToast({
-        title: '身份证号不能为空',
-        icon: 'none',
-        duration: 3000
-      });
+      app.showToastC('身份证号不能为空');
       return false;
     } else if (this.data.goodsInfo.retailer == 1 && !regIdCard.test(this.data.card)) {
-      wx.showToast({
-        title: '身份证号不正确',
-        icon: 'none',
-        duration: 3000
-      });
+      app.showToastC('身份证号不正确');
       return false;
     } else {};
 
@@ -416,11 +368,7 @@ Page({
                   ishowaddress: false,
                 })
                 _this.getjigsawinfo(2);
-                wx.showToast({
-                  title: '领取成功',
-                  icon: 'none',
-                  duration: 3000
-                })
+                app.showToastC('领取成功')
 
                 if (payinfo.isFreeBuyOrder) {
                   wx.navigateTo({
@@ -438,11 +386,7 @@ Page({
               ishowaddress: false,
             })
             _this.getjigsawinfo(2);
-            wx.showToast({
-              title: '领取成功',
-              icon: 'none',
-              duration: 3000
-            })
+            app.showToastC('领取成功')
 
             if (payinfo.isFreeBuyOrder) {
               wx.navigateTo({
@@ -451,11 +395,7 @@ Page({
             }
           }
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 5000
-          })
+          app.showToastC(res.data.Msg)
         }
       },
     })
@@ -760,11 +700,7 @@ Page({
             }.bind(_this), 100);
           }
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 5000
-          })
+          app.showToastC(res.data.Msg)
         }
         if (num == 1) {
           setTimeout(function() {
@@ -885,11 +821,7 @@ Page({
           _this.getjigsawinfo(2);
         } else {
           wx.hideLoading()
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 3000
-          })
+          app.showToastC(res.data.Msg)
         }
       },
     })
@@ -1008,11 +940,7 @@ Page({
           _this.getjigsawinfo(2);
 
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 3000
-          })
+          app.showToastC(res.data.Msg)
         }
       },
     })
@@ -1101,11 +1029,7 @@ Page({
 
           }
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 3000
-          })
+          app.showToastC(res.data.Msg)
           _this.setData({
             helpInfo: res.data.Info,
             isgetphone: false,
@@ -1144,11 +1068,7 @@ Page({
             ishowcreate: true,
           })
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 3000
-          })
+          app.showToastC(res.data.Msg)
         }
       },
     })
@@ -1162,11 +1082,7 @@ Page({
         wx.saveImageToPhotosAlbum({
           filePath: res.tempFilePath,
           success: function(data) {
-            wx.showToast({
-              title: '保存成功',
-              icon: 'success',
-              duration: 2000
-            })
+            app.showToastC('保存成功')
             _this.dialogClick()
           },
           fail: function(err) {

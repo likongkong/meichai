@@ -272,11 +272,7 @@ Page({
           })
         };
         if (res.data.ReturnCode == 900) {
-          wx.showToast({
-            title: '登陆状态有误',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('登陆状态有误');
         };
 
       }
@@ -335,24 +331,15 @@ Page({
           });          
         };
         if (res.data.ReturnCode == 300) {
-          wx.showToast({
-            title: '暂无更多数据',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('暂无更多数据');
           if(num==1){
             _this.setData({
               commoddata: []
             });
           }
-           
         };
         if (res.data.ReturnCode == 900) {
-          wx.showToast({
-            title: '登陆状态有误',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('登陆状态有误');
         };
         _this.setData({
           nodataiftr: true
@@ -477,11 +464,7 @@ Page({
           _this.setData({countdown: countdown})
         };
         if (res.data.ReturnCode == 900) {
-          wx.showToast({
-            title: '登陆状态有误',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('登陆状态有误');
         };
       }
     });          

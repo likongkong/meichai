@@ -125,52 +125,26 @@ Page({
 // 提交数据
   submissionofdata:function(){
     if (this.data.name == '') {
-      wx.showToast({
-        title: '姓名不能为空',
-        icon: 'none',
-        duration: 1500
-      });
+      app.showToastC('姓名不能为空');
       return false;
     };
     var myreg = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57]|19[0-9]|16[0-9])[0-9]{8}$/;
     if (this.data.tel.length == 0) {
-      wx.showToast({
-        title: '输入的手机号为空',
-        icon: 'none',
-        duration: 1500
-      })
+      app.showToastC('输入的手机号为空')
       return false;
     } else if (this.data.tel.length < 11) {
-      wx.showToast({
-        title: '手机号长度有误！',
-        icon: 'none',
-        duration: 1500
-      })
+      app.showToastC('手机号长度有误！')
       return false;
     } else if (!myreg.test(this.data.tel)) {
-      wx.showToast({
-        title: '手机号有误！',
-        icon: 'none',
-        duration: 1500
-      })
+      app.showToastC('手机号有误！')
       return false;
-    } else {
-
-    }
+    } else {}
     if (this.data.province == '') {
-      wx.showToast({
-        title: '所在区不能为空',
-        icon: 'none',
-        duration: 1500
-      });
+      app.showToastC('所在区不能为空');
       return false;
     };
     if (this.data.deladdress == '') {
-      wx.showToast({
-        title: '详细地址不能为空',
-        icon: 'none',
-        duration: 1500
-      });
+      app.showToastC('详细地址不能为空');
       return false;
     };
     var regIdCard = /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/;
@@ -197,11 +171,7 @@ Page({
           whitemask: false
         });        
         if (res.data.ReturnCode == 200) {
-          wx.showToast({
-            title: '提交成功',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('提交成功');
           var pages = getCurrentPages();  
           var beforePage = pages[pages.length - 2];
           wx.navigateBack({
@@ -210,35 +180,15 @@ Page({
             }
           });
         }else if (res.data.ReturnCode == 901) {
-          wx.showToast({
-            title: '身份证号格式不正确',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('身份证号格式不正确');
         }else if (res.data.ReturnCode == 909) {
-          wx.showToast({
-            title: '身份证信息不匹配',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('身份证信息不匹配');
         }else if (res.data.ReturnCode == 910) {
-          wx.showToast({
-            title: '身份信息错误次数过多，请明天再试',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('身份信息错误次数过多，请明天再试');
         }else if (res.data.ReturnCode == 913) {
-          wx.showToast({
-            title: '地址id有误',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('地址id有误');
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC(res.data.Msg);
         };        
       },
       fail: function () {}

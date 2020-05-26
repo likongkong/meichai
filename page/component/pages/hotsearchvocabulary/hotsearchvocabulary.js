@@ -76,11 +76,7 @@ Page({
   jumpsoousuo: function (event) {
     var hot = this.data.inputdata || '';
     if (this.data.inputdata == '') {
-      wx.showToast({
-        title: '搜索内容不能为空',
-        icon: 'none',
-        duration: 1500
-      });
+      app.showToastC('搜索内容不能为空');
       return false;
     };
     var _this = this;

@@ -124,11 +124,7 @@ Page({
          
           _this.setData({ preventmultiplesubmission: true });
           if (res.data.ReturnCode == 200) {
-            wx.showToast({
-              title: '领取成功',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('领取成功');
             _this.onLoadfun();
           } else if (res.data.ReturnCode == 830) {
             var rpiinfo = res.data.Info.tip.replace(/\\n/g, '\n') || '';
@@ -146,11 +142,7 @@ Page({
               payfreightmony: res.data.Info.amount || 10
             });
           } else {
-            wx.showToast({
-              title: res.data.Msg,
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC(res.data.Msg);
           };
         }
       });
@@ -223,11 +215,7 @@ Page({
         }
       });
     } else {
-      wx.showToast({
-        title: '获取手机号失败！',
-        icon: 'none',
-        duration: 1500
-      });
+      app.showToastC('获取手机号失败！');
       _this.setData({phoneiftr: false})
     }
   },
@@ -252,27 +240,15 @@ Page({
     if (vident == 1) {
       // 获取身份证号
       if (_this.data.inputnamedata == '') {
-        wx.showToast({
-          title: '姓名不能为空',
-          icon: 'none',
-          duration: 1500
-        });
+        app.showToastC('姓名不能为空');
         return false;
       };
       var regIdCard = /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/;
       if (this.data.inputidnumberdata == '') {
-        wx.showToast({
-          title: '身份证号不能为空',
-          icon: 'none',
-          duration: 1000
-        });
+        app.showToastC('身份证号不能为空');
         return false;
       } else if (!regIdCard.test(this.data.inputidnumberdata)) {
-        wx.showToast({
-          title: '身份证号格式不正确',
-          icon: 'none',
-          duration: 1000
-        });
+        app.showToastC('身份证号格式不正确');
         return false;
       } else { };
     }
@@ -300,19 +276,11 @@ Page({
           'signType': 'MD5',
           'paySign': res.data.List.pay.paySign,
           'success': function (res) {
-            wx.showToast({
-              title: '支付成功',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('支付成功');
             _this.onLoadfun();           
           },
           'fail': function (res) {
-            wx.showToast({
-              title: '支付失败',
-              icon: 'none',
-              duration: 1500
-            })
+            app.showToastC('支付失败')
           },
           'complete': function (res) { 
             _this.setData({ phoneiftr: false, inputdata: '', phoneiftr: false, havephoneiftr: false, idnumberboxiftr: false}); 
@@ -534,11 +502,7 @@ Page({
           _this.setData({ listdata: [] });
         };
         _this.setData({ loadprompt: '没有更多数据了' });
-        wx.showToast({
-          title: '暂无更多数据',
-          icon: 'none',
-          duration: 2000
-        });
+        app.showToastC('暂无更多数据');
       };
 
     }, '', function () {
@@ -657,11 +621,7 @@ Page({
     var order_id = w.currentTarget.dataset.order_id || w.target.dataset.order_id || '';
     var _this = this;
     Pub.postRequest(_this, 'confirm_receipt', { uid: _this.data.uid, loginid: _this.data.loginid, order_id: order_id }, function (res) {
-      wx.showToast({
-        title: '确认成功',
-        icon: 'none',
-        duration: 2000
-      });
+      app.showToastC('确认成功');
       _this.listdata(0);
     });
   },

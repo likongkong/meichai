@@ -461,11 +461,7 @@ Page({
             });
           };
         }else{
-          wx.showToast({
-            title: '没有更多数据了',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('没有更多数据了');
         };  
       }
     }); 

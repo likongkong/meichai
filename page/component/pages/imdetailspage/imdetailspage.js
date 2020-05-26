@@ -259,11 +259,7 @@ Page({
       var aid = _this.data.tipaid;
       // 验证地址
       if (this.data.tipaid == '') {
-        wx.showToast({
-          title: '请选择地址',
-          icon: 'none',
-          duration: 1500
-        });
+        app.showToastC('请选择地址');
         return false;
       }; 
       var q = Dec.Aese('mod=operate&operation=exchange&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&address_id=' + aid + '&goods_id=' + _this.data.gid);
@@ -291,11 +287,7 @@ Page({
               buybombsimmediately: !_this.data.buybombsimmediately
             });          
           }else{
-            wx.showToast({
-              title: res.data.Msg,
-              icon: 'none',
-              duration: 1000
-            });
+            app.showToastC(res.data.Msg);
             _this.setData({
               tipbacktwo: !_this.data.tipbacktwo,
               buybombsimmediately: !_this.data.buybombsimmediately
@@ -366,11 +358,7 @@ Page({
                 });
               };
               if (res.data.ReturnCode == 908) {
-                wx.showToast({
-                  title: 'aid和uid不匹配',
-                  icon: 'none',
-                  duration: 1500
-                });
+                app.showToastC('aid和uid不匹配');
               };              
               // 判断非200和登录
               Dec.comiftrsign(_this, res, app);              

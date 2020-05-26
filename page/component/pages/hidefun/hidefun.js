@@ -529,11 +529,7 @@ Page({
           })
           _this.getfreeinfo(0)
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 1000
-          });
+          app.showToastC(res.data.Msg);
         }
       },
       complete: function() {
@@ -557,11 +553,7 @@ Page({
       },
       success: function(res) {
         if (res.data.ReturnCode == 200) {
-          wx.showToast({
-            title: '领取成功',
-            icon: 'none',
-            duration: 1000
-          });
+          app.showToastC('领取成功');
           _this.onLoadfun();
         } else if (res.data.ReturnCode == 830) {
           var rpiinfo = res.data.Info.tip.replace(/\\n/g, '\n') || '';
@@ -585,11 +577,7 @@ Page({
             payfreightmony: res.data.Info.amount || 10
           });
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 1000
-          });
+          app.showToastC(res.data.Msg);
         };
       }
     });
@@ -799,9 +787,7 @@ Page({
               wx.saveImageToPhotosAlbum({
                 filePath: imgSrc,
                 success() {
-                  wx.showToast({
-                    title: '保存成功'
-                  });
+                  app.showToastC('保存成功');
                   _this.setData({
                     upserimgbox: false,
                     savepicturesiftr: true,
@@ -810,10 +796,7 @@ Page({
                   });
                 },
                 fail() {
-                  wx.showToast({
-                    title: '保存失败',
-                    icon: 'none'
-                  });
+                  app.showToastC('保存失败');
                   _this.setData({
                     upserimgbox: false,
                     savepicturesiftr: true,
@@ -834,9 +817,7 @@ Page({
           wx.saveImageToPhotosAlbum({
             filePath: imgSrc,
             success() {
-              wx.showToast({
-                title: '保存成功'
-              });
+              app.showToastC('保存成功');
               _this.setData({
                 upserimgbox: false,
                 savepicturesiftr: true,
@@ -845,10 +826,7 @@ Page({
               });
             },
             fail() {
-              wx.showToast({
-                title: '保存失败',
-                icon: 'none'
-              });
+              app.showToastC('保存失败');
               _this.setData({
                 upserimgbox: false,
                 savepicturesiftr: true,

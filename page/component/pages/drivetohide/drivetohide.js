@@ -459,19 +459,8 @@ Page({
             _this.data.page = --pagenum;
           }
           _this.setData({ nomoredata: true })
-          // wx.showToast({
-          //   title: '没有更多数据了',
-          //   icon: 'none',
-          //   mask: true,
-          //   duration: 1000
-          // });
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            mask: true,
-            duration: 2000,
-          });
+          app.showToastC(res.data.Msg);
         };
       }
     });
@@ -503,12 +492,7 @@ Page({
           var pagenum = parseInt(_this.data.page)
           _this.data.page = ++pagenum;
         } else {
-          wx.showToast({
-            title: '没有更多数据了',
-            icon: 'none',
-            mask: true,
-            duration: 2000
-          });
+          app.showToastC('没有更多数据了');
           _this.setData({
             ishowmore: false,
           })
@@ -574,12 +558,7 @@ Page({
           });
           _this.listdata(0);
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            mask: true,
-            duration: 2000
-          });
+          app.showToastC(res.data.Msg);
         }
       }
     });
@@ -651,12 +630,7 @@ Page({
           });
           _this.listdata(0);
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            mask: true,
-            duration: 2000
-          });
+          app.showToastC(res.data.Msg);
         }
       }
     });
@@ -790,12 +764,7 @@ Page({
   },
 
   signinget: function() {
-    wx.showToast({
-      title: "暂未开放",
-      icon: 'none',
-      mask: true,
-      duration: 2000
-    });
+    app.showToastC("暂未开放");
     this.setData({
       ishownoticket: false,
     })

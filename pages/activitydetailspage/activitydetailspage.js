@@ -222,7 +222,6 @@ Page({
     // tab切换
     tabdopnum:1,
     shopnum:0,
-    activitydescription:false,
     // 防止swiper卡住
     swiperError: 0,
     goodsIndex: 0,
@@ -381,16 +380,11 @@ Page({
                     wx.saveImageToPhotosAlbum({
                       filePath: imgSrc,
                       success() {
-                        wx.showToast({
-                          title: '保存成功'
-                        });
+                        app.showToastC('保存成功');
                         _this.setData({ addfrindcommoni: false })
                       },
                       fail() {
-                        wx.showToast({
-                          title: '保存失败',
-                          icon: 'none'
-                        });
+                        app.showToastC('保存失败');
                         _this.setData({ addfrindcommoni: false })
                       }
                     })
@@ -406,16 +400,11 @@ Page({
               wx.saveImageToPhotosAlbum({
                 filePath: imgSrc,
                 success(res) {
-                  wx.showToast({
-                    title: '保存成功'
-                  });
+                  app.showToastC('保存成功');
                   _this.setData({ addfrindcommoni: false })
                 },
                 fail(res) {
-                  wx.showToast({
-                    title: '保存失败',
-                    icon: 'none'
-                  });
+                  app.showToastC('保存失败');
                   _this.setData({ addfrindcommoni:false})
                 }
               })
@@ -435,11 +424,7 @@ Page({
         saveimgurlfrpb: url
       });
     } else {
-      wx.showToast({
-        title: name+'未提供此方式',
-        icon: 'none',
-        duration: 1000
-      });
+      app.showToastC(name+'未提供此方式');
     }
   },
 
@@ -533,12 +518,7 @@ closefrindcommoni:function(){
                 exhdata: comdataarr
               })
             } else {
-              wx.showToast({
-                title: '没有更多数据了',
-                icon: 'none',
-                mask: true,
-                duration: 2000
-              });
+              app.showToastC('没有更多数据了');
             }
           };
         };
@@ -635,11 +615,6 @@ closefrindcommoni:function(){
         this.setData({ swiperError: 0 })
       }
     }
-  },
-  activitydescription:function(){
-     this.setData({
-       activitydescription: !this.data.activitydescription
-     });
   },
   // tab切换
   tabdopnum:function(w){
@@ -933,14 +908,8 @@ closefrindcommoni:function(){
     wx.setClipboardData({
       data: _this.data.wxnum,
       success: function (res) {
-        wx.showToast({
-          title: '复制成功',
-          icon: 'none',
-          duration: 1000
-        });
-        _this.setData({
-          copyiftr:false
-        });
+        app.showToastC('复制成功');
+        _this.setData({copyiftr:false});
       }
     });
   },
@@ -961,11 +930,7 @@ closefrindcommoni:function(){
         wx.saveImageToPhotosAlbum({
           filePath: res.tempFilePath,
           success: function (data) {
-            wx.showToast({
-              title: '保存成功',
-              icon: 'none',
-              duration: 1000
-            });
+            app.showToastC('保存成功');
             _this.setData({ shareshopiftr: false, tgimgbox: false});
           },
           fail: function (err) {
@@ -982,11 +947,7 @@ closefrindcommoni:function(){
   },
   // 取消保存图片授权
   imgCanelTg: function () {
-    wx.showToast({
-      title: '保存失败',
-      icon: 'none',
-      duration: 1000
-    });
+    app.showToastC('保存失败');
     this.setData({ shareshopiftr: false, tgimgbox: false, picbox: false });
   },
   handleSetting: function (e) {
@@ -1629,19 +1590,11 @@ closefrindcommoni:function(){
           _this.data.shareUId = 0;
         }else{
           if (res.data.ReturnCode == 200) {
-            wx.showToast({
-              title: res.data.Msg,
-              icon: 'none',
-              duration: 1000
-            });
+            app.showToastC(res.data.Msg);
             _this.detailfun();
             _this.subscrfunstar();
           } else if (res.data.ReturnCode == 100 || res.data.ReturnCode == 201 || res.data.ReturnCode == 203) {
-            wx.showToast({
-              title: res.data.Msg,
-              icon: 'none',
-              duration: 1000
-            });
+            app.showToastC(res.data.Msg);
           } else if (res.data.ReturnCode == 202) {
             _this.placeorder();
             _this.data.shareUId = 0;
@@ -2090,18 +2043,10 @@ closefrindcommoni:function(){
             });
         };
         if (res.data.ReturnCode == 305) {
-          wx.showToast({
-            title: '数据异常',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('数据异常');
         };
         if (res.data.ReturnCode == 900) {
-          wx.showToast({
-            title: '登陆状态有误',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('登陆状态有误');
         };
       }
     });    
@@ -2120,6 +2065,7 @@ closefrindcommoni:function(){
   },
   onLoad: function (options) {
     console.log('options======',options)
+
     var _this = this;
     this.data.ctxt = wx.createCanvasContext('myordercanimgser');
     _this.data.loginid = app.signindata.loginid;
@@ -2391,18 +2337,10 @@ closefrindcommoni:function(){
                 } else {}
               };
               if (res.data.ReturnCode == 304) {
-                wx.showToast({
-                  title: "活动id有误",
-                  icon: 'none',
-                  duration: 1000
-                });
+                app.showToastC("活动id有误")
               };
               if (res.data.ReturnCode == 900) {
-                wx.showToast({
-                  title: "登陆状态有误",
-                  icon: 'none',
-                  duration: 1000
-                });
+                app.showToastC("登陆状态有误");
               };
             },
           })
@@ -2534,11 +2472,7 @@ closefrindcommoni:function(){
                 });
               };
               if (res.data.ReturnCode == 908) {
-                wx.showToast({
-                  title: 'aid和uid不匹配',
-                  icon: 'none',
-                  duration: 1500
-                });
+                app.showToastC('aid和uid不匹配');
               };
             }
           })
@@ -2582,11 +2516,7 @@ closefrindcommoni:function(){
           };
         };
         if (res.data.ReturnCode == 900) {
-          wx.showToast({
-            title: '登陆状态有误',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('登陆状态有误');
         };
       }
     });
@@ -2679,11 +2609,7 @@ closefrindcommoni:function(){
       var url = app.signindata.comurl + 'spread.php' + q;
     }else{
       if (this.data.tipaid == '') {
-        wx.showToast({
-          title: '请选择地址',
-          icon: 'none',
-          duration: 1500
-        });
+        app.showToastC('请选择地址');
         return false;
       };
       var zunmdata = this.data.combdataimg.goods_detial;
@@ -2761,17 +2687,9 @@ closefrindcommoni:function(){
             suboformola: false
           }); 
           if (res.data.ReturnCode == 900) {
-            wx.showToast({
-              title: '登陆状态有误',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('登陆状态有误');
           } else if (res.data.ReturnCode == 317){
-            wx.showToast({
-              title: '口令不正确',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('口令不正确');
             _this.setData({ 
               redpinputdataiftr: true,
               redpinputdata:''
@@ -2788,115 +2706,51 @@ closefrindcommoni:function(){
                 eshjumphref: res.data.Info||''
               }); 
           }else if (res.data.ReturnCode == 301) {
-              wx.showToast({
-                title: '机会不足',
-                icon: 'none',
-                duration: 1500
-              });
+              app.showToastC('机会不足');
               _this.setData({
                 ifcomtipiftr: 2,
                 comtipiftr: !_this.data.comtipiftr
               });
           } else if (res.data.ReturnCode == 321) {
-              wx.showToast({
-                title: '拆币不足',
-                icon: 'none',
-                duration: 1500
-              });
+              app.showToastC('拆币不足');
               setTimeout(function(){
                 wx.navigateTo({    //签到
                   url: "/page/component/pages/newsignin/newsignin"
                 });
               },1500);
           }else if (res.data.ReturnCode == 302) {
-            wx.showToast({
-              title: '今天报名次数已达到上限',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('今天报名次数已达到上限');
             _this.onLoadfun();
           }else if (res.data.ReturnCode == 311) {
-            wx.showToast({
-              title: '本次免单商品只对没参加过免单活动的用户开启，请选择其他免单商品报名，祝你好运',
-              icon: 'none',
-              duration: 3000
-            });
+            app.showToastC('本次免单商品只对没参加过免单活动的用户开启，请选择其他免单商品报名，祝你好运');
             _this.onLoadfun();
           }else if (res.data.ReturnCode == 312) {
-            wx.showToast({
-              title: '本次免单商品只对近期购买过商品的用户开启，请选择其他免单商品报名，祝你好运',
-              icon: 'none',
-              duration: 3000
-            });
+            app.showToastC('本次免单商品只对近期购买过商品的用户开启，请选择其他免单商品报名，祝你好运');
             _this.onLoadfun();
           }else if (res.data.ReturnCode == 303) {
-            wx.showToast({
-              title: '再分享'+res.data.Info.need_times+'可参与活动',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('再分享'+res.data.Info.need_times+'可参与活动');
           }else if (res.data.ReturnCode == 305) {
-            wx.showToast({
-              title: '数据异常',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('数据异常');
           }else if (res.data.ReturnCode == 304) {
-            wx.showToast({
-              title: '活动id有误',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('活动id有误');
           }else if (res.data.ReturnCode == 306) {
-            wx.showToast({
-              title: '活动状态异常无法报名',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('活动状态异常无法报名');
           }else if (res.data.ReturnCode == 307) {
-            wx.showToast({
-              title: '已报名',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('已报名');
             _this.onLoadfun();
           }else if (res.data.ReturnCode == 308) {
-            wx.showToast({
-              title: '名额已满',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('名额已满');
             _this.onLoadfun();
           }else if (res.data.ReturnCode == 913) {
-            wx.showToast({
-              title: '地址id和用户id不匹配',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('地址id和用户id不匹配');
           }else if (res.data.ReturnCode == 808) {
-            wx.showToast({
-              title: '该优惠券以被使用过',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('该优惠券以被使用过');
           }else if (res.data.ReturnCode == 809) {
-            wx.showToast({
-              title: '该优惠券未达到使用条件',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('该优惠券未达到使用条件');
           }else if (res.data.ReturnCode == 822) {
-            wx.showToast({
-              title: '优惠券类型相同',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('优惠券类型相同');
           } else {
-            wx.showToast({
-              title: res.data.Msg,
-              icon: 'none',
-              duration: 1000
-            });
+            app.showToastC(res.data.Msg);
           };
         };
       }
@@ -3105,12 +2959,8 @@ closefrindcommoni:function(){
           // 提交订单蒙层
           _this.setData({
             suboformola: false
-          });           
-          wx.showToast({
-            title: res.data.Msg || res.data.msg,
-            icon: 'none',
-            duration: 1000
-          });           
+          });    
+          app.showToastC(res.data.Msg || res.data.msg);           
         };
       }
     })
@@ -3326,19 +3176,11 @@ closefrindcommoni:function(){
       header: { 'Accept': 'application/json' },
       success: function (res) {         
         if (res.data.ReturnCode == 200) {
-          wx.showToast({
-            title: '兑换成功',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('兑换成功');
           // 调取购物券
           _this.comcouponprfun();
         }else{
-          wx.showToast({
-            title: res.data.Msg || res.data.msg,
-            icon: 'none',
-            duration: 1000
-          });
+          app.showToastC(res.data.Msg || res.data.msg);
         };
       },
       fail: function () {}
@@ -3388,27 +3230,15 @@ closefrindcommoni:function(){
   idnumbbsubfun: function () {
     var _this = this;
     if (_this.data.inputnamedata == '') {
-      wx.showToast({
-        title: '姓名不能为空',
-        icon: 'none',
-        duration: 1500
-      });
+      app.showToastC('姓名不能为空');
       return false;
     };
     var regIdCard = /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/;
     if (this.data.inputidnumberdata == '') {
-      wx.showToast({
-        title: '身份证号不能为空',
-        icon: 'none',
-        duration: 1000
-      });
+      app.showToastC('身份证号不能为空');
       return false;
     } else if (!regIdCard.test(this.data.inputidnumberdata)) {
-      wx.showToast({
-        title: '身份证号格式不正确',
-        icon: 'none',
-        duration: 1000
-      });
+      app.showToastC('身份证号格式不正确');
       return false;
     } else { };
     var isisdefault = _this.data.addressdata;
@@ -3433,11 +3263,7 @@ closefrindcommoni:function(){
             idnumberboxiftr: !_this.data.idnumberboxiftr
           });
         }else{
-          wx.showToast({
-            title: res.data.Msg || res.data.msg,
-            icon: 'none',
-            duration: 1000
-          });
+          app.showToastC(res.data.Msg || res.data.msg);
         };
       },
       fail: function () { }
@@ -3527,11 +3353,7 @@ closefrindcommoni:function(){
         success: function (res) {
           _this.setData({ preventmultiplesubmission: true });
           if (res.data.ReturnCode == 200) {
-            wx.showToast({
-              title: '领取成功',
-              icon: 'none',
-              duration: 1000
-            });
+            app.showToastC('领取成功');
             _this.onLoadfun();
           } else if (res.data.ReturnCode == 830) {
             var rpiinfo = res.data.Info.tip.replace(/\\n/g, '\n')||'';
@@ -3549,11 +3371,7 @@ closefrindcommoni:function(){
               payfreightmony: res.data.Info.amount || 10
             });
           } else {
-            wx.showToast({
-              title: res.data.Msg,
-              icon: 'none',
-              duration: 1000
-            });
+            app.showToastC(res.data.Msg);
           };
         }
       });
@@ -3618,11 +3436,7 @@ closefrindcommoni:function(){
                   }
                 })
               } else {
-                wx.showToast({
-                  title: res.data.Msg,
-                  icon: 'none',
-                  duration: 1000
-                });
+                app.showToastC(res.data.Msg);
               };
             }
           })
@@ -3675,18 +3489,10 @@ closefrindcommoni:function(){
         success: function (res) {
           _this.setData({ clicktherequestiftr:true});
           if (res.data.ReturnCode == 200) {
-            wx.showToast({
-              title: '领取成功',
-              icon: 'none',
-              duration: 1000
-            });
+            app.showToastC('领取成功');
             _this.onLoadfun();
           } else {
-            wx.showToast({
-              title: res.data.Msg,
-              icon: 'none',
-              duration: 1000
-            });
+            app.showToastC(res.data.Msg);
           };
         },
         fail: function () { }
@@ -3823,11 +3629,7 @@ closefrindcommoni:function(){
                                         });
                                       },
                                       fail: function (res) {
-                                        wx.showToast({
-                                          title: '图片生成失败，请重新刷新页面重试,{ReturnCode:01}',
-                                          icon: 'none',
-                                          duration: 1500
-                                        });
+                                        app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:01}');
                                         _this.setData({upserimgbox:false,headhidden:true,headhiddengeneratePictures:true});
                                       },
                                     });
@@ -3846,11 +3648,7 @@ closefrindcommoni:function(){
                                         });
                                       },
                                       fail: function (res) {
-                                        wx.showToast({
-                                          title: '图片生成失败，请重新刷新页面重试,{ReturnCode:01}',
-                                          icon: 'none',
-                                          duration: 1500
-                                        });
+                                        app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:01}');
                                         _this.setData({upserimgbox:false,headhidden:true,headhiddengeneratePictures:true});
                                       },
                                     });
@@ -3859,49 +3657,29 @@ closefrindcommoni:function(){
                               })
                             },
                             fail: function (res) {
-                              wx.showToast({
-                                title: '图片生成失败，请重新刷新页面重试,{ReturnCode:16}',
-                                icon: 'none',
-                                duration: 1500
-                              });
+                              app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:16}');
                               _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
                             }
                           });
                         },
                         fail: function () {
-                          wx.showToast({
-                            title: '图片生成失败，请重新刷新页面重试,{ReturnCode:011}',
-                            icon: 'none',
-                            duration: 1500
-                          });
+                          app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:011}');
                         }
                       })
                   },
                   fail:function(){
-                    wx.showToast({
-                      title: '图片生成失败，请重新刷新页面重试,{ReturnCode:010}',
-                      icon: 'none',
-                      duration: 1500
-                    });
+                    app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:010}');
                   }
                 });
               },
               fail: function (res) {
-                wx.showToast({
-                  title: '图片生成失败，请重新刷新页面重试,{ReturnCode:03}',
-                  icon: 'none',
-                  duration: 1500
-                });
+                app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:03}');
                 _this.setData({ upserimgbox: false, headhidden: true, headhiddengeneratePictures: true});
               }              
             })
           },
           fail:function(res){
-            wx.showToast({
-              title: '图片生成失败，请重新刷新页面重试,{ReturnCode:04}',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:04}');
             _this.setData({ upserimgbox: false, headhidden: true, headhiddengeneratePictures: true });
           }
         })
@@ -3966,9 +3744,7 @@ closefrindcommoni:function(){
               wx.saveImageToPhotosAlbum({
                 filePath: imgSrc,
                 success() {
-                  wx.showToast({
-                    title: '保存成功'
-                  });
+                  app.showToastC('保存成功');
                   _this.setData({ upserimgbox: false, savepicturesiftr: true, tgfrShareIftr:false});
                   // _this.placeorder();
                   if (_this.data.commoddata.is_join != 1) {
@@ -3978,10 +3754,7 @@ closefrindcommoni:function(){
                   };
                 },
                 fail() {
-                  wx.showToast({
-                    title: '保存失败',
-                    icon: 'none'
-                  });
+                  app.showToastC('保存失败');
                   _this.setData({ upserimgbox: false, savepicturesiftr: true, tgfrShareIftr: false });
                 }
               })
@@ -3997,9 +3770,7 @@ closefrindcommoni:function(){
           wx.saveImageToPhotosAlbum({
             filePath: imgSrc,
             success(res) {
-              wx.showToast({
-                title: '保存成功'
-              });
+              app.showToastC('保存成功');
               _this.setData({ upserimgbox: false, savepicturesiftr: true, tgfrShareIftr: false});
              if (_this.data.commoddata.is_join != 1){
                 // _this.placeorder();
@@ -4008,10 +3779,7 @@ closefrindcommoni:function(){
              };
             },
             fail() {
-              wx.showToast({
-                title: '保存失败',
-                icon: 'none'
-              });
+              app.showToastC('保存失败');
               _this.setData({ upserimgbox: false, savepicturesiftr: true, tgfrShareIftr: false });
             }
           })
@@ -4031,11 +3799,7 @@ closefrindcommoni:function(){
   upImgSer:function(){
     var _this = this;
     if (_this.data.commoddata.is_join != 1){
-      wx.showToast({
-        title: '未报名,不能上传截图',
-        icon: 'none',
-        duration: 1000
-      });
+      app.showToastC('未报名,不能上传截图');
       return false;
     };
     var auditPicTime = _this.data.commoddata.auditPicTime||0;
@@ -4107,11 +3871,7 @@ closefrindcommoni:function(){
       fail: function (res) {
         _this.setData({ headhidden: true });
         wx.hideToast();
-        wx.showToast({
-          title: '上传失败',
-          icon: 'none',
-          duration: 1500
-        });
+        app.showToastC('上传失败');
       }
     })
   },
@@ -4272,11 +4032,7 @@ closefrindcommoni:function(){
                                         });
                                       },
                                       fail: function (res) {
-                                        wx.showToast({
-                                          title: '图片生成失败，请重新刷新页面重试,{ReturnCode:05}',
-                                          icon: 'none',
-                                          duration: 1500
-                                        });
+                                        app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:05}');
                                         _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
                                       },
                                     });
@@ -4294,32 +4050,20 @@ closefrindcommoni:function(){
 
                       },
                       fail: function (res) {
-                        wx.showToast({
-                          title: '图片生成失败，请重新刷新页面重试,{ReturnCode:06}',
-                          icon: 'none',
-                          duration: 1500
-                        });
+                        app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:06}');
                         _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
                       }
                     });
                   },
                   fail: function (res) {
-                    wx.showToast({
-                      title: '图片生成失败，请重新刷新页面重试,{ReturnCode:07}',
-                      icon: 'none',
-                      duration: 1500
-                    });
+                    app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:07}');
                     _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
                   }
                 });
 
               },
               fail: function (res) {
-                wx.showToast({
-                  title: '图片生成失败，请重新刷新页面重试,{ReturnCode:08}',
-                  icon: 'none',
-                  duration: 1500
-                });
+                app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:08}');
                 _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
               }
             })
@@ -4422,11 +4166,7 @@ closefrindcommoni:function(){
                                         });
                                       },
                                       fail: function (res) {
-                                        wx.showToast({
-                                          title: '图片生成失败，请重新刷新页面重试,{ReturnCode:05}',
-                                          icon: 'none',
-                                          duration: 1500
-                                        });
+                                        app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:05}');
                                         _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
                                       },
                                     });
@@ -4444,32 +4184,20 @@ closefrindcommoni:function(){
 
                       },
                       fail: function (res) {
-                        wx.showToast({
-                          title: '图片生成失败，请重新刷新页面重试,{ReturnCode:06}',
-                          icon: 'none',
-                          duration: 1500
-                        });
+                        app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:06}');
                         _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
                       }
                     });
                   },
                   fail: function (res) {
-                    wx.showToast({
-                      title: '图片生成失败，请重新刷新页面重试,{ReturnCode:07}',
-                      icon: 'none',
-                      duration: 1500
-                    });
+                    app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:07}');
                     _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
                   }
                 });
 
               },
               fail: function (res) {
-                wx.showToast({
-                  title: '图片生成失败，请重新刷新页面重试,{ReturnCode:08}',
-                  icon: 'none',
-                  duration: 1500
-                });
+                app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:08}');
                 _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
               }
             })
@@ -4477,11 +4205,7 @@ closefrindcommoni:function(){
         })
       },
       fail: function (res) {
-        wx.showToast({
-          title: '图片生成失败，请重新刷新页面重试,{ReturnCode:10}',
-          icon: 'none',
-          duration: 1500
-        });
+        app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:10}');
         _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
       }
     });  
@@ -4504,10 +4228,7 @@ closefrindcommoni:function(){
                   _this.saveimgfun();
                 },
                 fail() {
-                  wx.showToast({
-                    title: '保存失败',
-                    icon: 'none'
-                  });
+                  app.showToastC('保存失败');
                   _this.setData({ upserimgboxWinningtheprize: false, actimgshare: '' });
                 }
               })
@@ -4526,13 +4247,9 @@ closefrindcommoni:function(){
             filePath: imgSrc,
             success() {
               _this.saveimgfun();
-
             },
             fail() {
-              wx.showToast({
-                title: '保存失败',
-                icon: 'none'
-              });
+              app.showToastC('保存失败');
               _this.setData({ upserimgboxWinningtheprize: false, savepicturesiftr: true, actimgshare: '' });
             }
           })
@@ -4548,9 +4265,7 @@ closefrindcommoni:function(){
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
-        wx.showToast({
-          title: '保存成功'
-        });
+        app.showToastC('保存成功');
         _this.setData({ upserimgboxWinningtheprize: false, actimgshare: '' });
         _this.onLoadfun();
       },
@@ -4659,11 +4374,7 @@ closefrindcommoni:function(){
           }
         };
         if (res.data.ReturnCode == 900) {
-          wx.showToast({
-            title: '登陆状态有误',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('登陆状态有误');
         };
       }
     });
@@ -4812,11 +4523,7 @@ closefrindcommoni:function(){
               };
               _this.setData({ exhdata: listdata });
           } else {
-            wx.showToast({
-              title: res.data.Msg,
-              icon: 'none',
-              duration: 1500
-            })
+            app.showToastC(res.data.Msg);
           }
         },
         fail: function () {}

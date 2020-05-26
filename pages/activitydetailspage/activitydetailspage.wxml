@@ -14,7 +14,6 @@
 <!-- canvas生成分享图片 -->
 <view class='headhiddenbox' hidden="{{headhidden}}"></view>
 
-
 <canvas canvas-id='canimgser' class='canimgsernew'></canvas>
 <!-- canimgser  -->
 <!-- closeupserimg -->
@@ -44,7 +43,6 @@
   </view>
 </view>
 
-
 <!-- 生成图片 -->
 <view class='tgimgbox' wx:if='{{tgimgbox}}'>
   <view class='tgimgboxgb' catchtap='tgimgbg'></view>
@@ -53,7 +51,6 @@
     <view class='tgimcimgbut' catchtap='savethepicture'>保存图片</view>
   </view>
 </view>
-
 
 <!-- 保存图片  -->
 <view class='tgimgbox' wx:if='{{tgfrShareIftr}}'>
@@ -89,12 +86,10 @@
   </view>
 </view>
 
-
 <view style='width:0;height:0;overflow:hidden;position:absolute;top:-1000px;'>
   <!-- <view style='width:100%;height:240px;background:#888;display:flex; justify-content:center; align-items:center;'> -->
   <canvas canvas-id='snapshot' style='width:300px; height:240px;'></canvas>
 </view>
-
 
 <view class='adspbox {{tipback||upserimgbox?"tripList_root":""}}' style="{{newcoupon||!headhidden||upserimgbox||upserimgboxWinningtheprize||perspcardiftrmax?'position:fixed;top:0;left:0;right:0;bottom:0;':''}}">
   <view style='width:100%;height:386rpx;position:relative;'>
@@ -134,7 +129,6 @@
     <view class='swiperNumBot' wx:if='{{movies.length!=0}}'>{{swiperCurrent+1}}/{{movies.length==0?1:(movies.length+1)}}</view>
   </view>
 
-
   <view class='dltitle' style='text-align:center;padding:20rpx 40rpx 10rpx 40rpx;font-size:32rpx;'>
     {{commoddata.name==''||commoddata.name==null?commoddata.goods_name:commoddata.name}}
   </view>
@@ -159,12 +153,10 @@
     </view>
   </view>
 
-
   <view class='dltityh' style='text-align:center;padding:6rpx 20rpx 20rpx 20rpx;'>
     <view class='dlyhnnimeMod'>Vol.{{commoddata.id}}</view>
     <view class='dlyhnnimeMod' wx:for='{{commoddata.tag}}' wx:key='key'>{{item}}</view>
   </view>
-
 
   <!-- 赞助商 -->
   <view class='sponsor' wx:if='{{commoddata.supportName}}' style='margin:10rpx 0 4rpx 0;' wx:if='{{videoOpportunity}}'>
@@ -214,7 +206,6 @@
         <view style="width:60%;background:#8abe39;color:white;line-height:80rpx;border-radius:5rpx;float:right;text-align:center;position:relative;font-size:26rpx;">
           <button style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;' data-form='2' open-type="share"></button>好友互赠,全部点亮报名成功</view>
       </view>
-
     </view>
 
   </view>
@@ -281,7 +272,6 @@
                       <view style='width:100%;height:100%;'></view>
                   </view>
                   <view wx:if='{{item.clickiftr==9}}' catchtap='subscrfunsoon' style='width:100%;height:100%;position: absolute;left:0;top:0;z-index:3;'></view>
-                  
                 </view>
               </block>
               <block wx:else>
@@ -302,7 +292,6 @@
           </view>
         </swiper-item>
       </block>
-
     </swiper>
 
     <view class='actDetailCon' wx:if='{{signtask.length!=0}}' wx:if='{{!taskOrUserImg}}'>
@@ -340,7 +329,6 @@
     </view>
   </view>
 
-
   <block wx:if='{{is_exhibition!=1}}'>
     <view class='detalOrPrize'>
       <view class='dopTab'>
@@ -351,7 +339,6 @@
           商品详情
         </view>
         <view class='dopPosRight' catchtap='jumppicture'>
-          <!--  catchtap='activitydescription' -->
             <view style='height:50rpx;line-height:50rpx;text-align:right;font-size:24rpx;color:#919191;'>
               <image src='../images/explain.png' class='explainDpop'></image>说明
             </view>
@@ -396,16 +383,13 @@
           </view>
           <view class='wtpconirbox'>
             <view class='wtpconnanimg' wx:for='{{commoddata.awarder.secondplace.list}}' wx:key='key'>
-
               <view class='wtpconantxt' wx:if='{{!item.headphoto}}' style='position:relative;background:#f2f2f2;'>
                 <button wx:if='{{commoddata.status!=3&&isShareFun}}' open-type="share" style='position: absolute;left: 0;top: 0;width: 100%; height: 100%;opacity: 0;padding:0;z-index:5;' type="default" size="mini"></button>
                 <view wx:elif='{{commoddata.status!=3}}' catchtap='ifsharedis' style='position: absolute;height:100%;width:100%;left:0;top:0;z-index:3;'></view>
-
                 <view class='wtpconantxtchcom' style='padding:10rpx 0 0 0;color:#a0a0a0;'>等待</view>
                 <view class='wtpconantxtchcom' style='color:#a0a0a0;'>开奖</view>
               </view>
               <image wx:if='{{item.headphoto}}' src='{{item.headphoto||"../images/pic_headc.png"}}' class='wtpconnaniusim'></image>
-
             </view>
           </view>
         </view>
@@ -432,9 +416,6 @@
           </view>
         </view>
 
-
-
-
         <view style='width:100%;height:10rpx;background:#f4f5f9;' wx:if='{{actrecactlist.length!=0}}'></view>
         <!-- 推荐活动 -->
         <view class='actrecact' wx:if='{{actrecactlist.length!=0}}'>
@@ -457,12 +438,6 @@
             </scroll-view>
           </view>
         </view>
-
-
-
-
-
-
 
         <view style='width:100%;height:10rpx;background:#f4f5f9;' wx:if='{{listLotto.length!=0}}'></view>
         <!-- 抽签 -->
@@ -494,10 +469,6 @@
             </scroll-view>
           </view>
         </view>
-
-
-
-
 
         <view style='width:100%;height:10rpx;background:#f4f5f9;' wx:if='{{listBlindBox.length!=0}}'></view>
         <!-- 在线抽盒机 -->
@@ -543,8 +514,6 @@
           <template is="wxParse" data="{{wxParseData:article.nodes}}" />
         </view>
       </view>
-
-
     </view>
   </block>
 
@@ -567,7 +536,6 @@
     </view>
 
     <!-- 奖项介绍 -->
-
     <view id='exh1' style="background:#fff;">
       <!--  一等奖  -->
       <view style='{{commoddata.awarder.champion.list.length>40&&commoddata.status==2?"padding:0 80rpx 100rpx 80rpx;":"padding:0 80rpx 30rpx 80rpx;"}}position:relative;{{commoddata.awarder.champion.list.length>40&&detaposiiftr&&commoddata.status==2?"height:500rpx;overflow:hidden;":""}}'
@@ -633,7 +601,6 @@
       </view>
     </view>
 
-
     <!-- 品牌专区 -->
     <view id='exh2'>
       <!-- 展会 -->
@@ -671,9 +638,7 @@
 				</swiper-item>
 			</swiper>
 
-
   </block>
-
 
         <view class="exhibboxcon">
 
@@ -768,7 +733,6 @@
                   </view>
                 </view>
               </block>
-
             </view>
           </view>
 
@@ -782,7 +746,6 @@
             </swiper-item>
           </swiper>
         </view>
-
       </view>
     </view>
 
@@ -800,24 +763,12 @@
     </view>
     <view style="width:100%;height:140rpx;"></view>
   </block>
-  <!-- 活动说明弹框 -->
-  <view class='comtip' wx:if='{{activitydescription}}'>
-    <view class='comtipback' catchtap='activitydescription'></view>
-    <view class='Activitydcf'>
-      <view style='width:100%;height:70rpx;line-height:70rpx;text-align:center;font-size:30rpx;color:#000;'>活动说明</view>
-      <view style='width:100%;height:660rpx;overflow:scroll;'>
-        <template is="wxParse" data="{{wxParseData:article1.nodes}}" />
-      </view>
-      <view catchtap='activitydescription' style='width:90%;padding:0 5%;height:70rpx;line-height:70rpx;text-align:right;font-size:26rpx;color:#45a944;'>我知道了</view>
-    </view>
-  </view>
 
   <view style='width:100%;height:130rpx;' wx:if='{{commoddata.is_on_sale==1}}'></view>
 
   <!-- 底部导航 -->
   <view style='width:100%;position:fixed;left:0;{{isIphoneX?"bottom:130rpx;":"bottom:110rpx;"}}background:#fff;z-index:10;'>
     <!-- 直接购买   -->
-
 
     <block wx:if='{{isAwardOrder}}'>
       <!-- 中奖悬浮框提示 -->
@@ -864,33 +815,21 @@
                   <block wx:else>
                     <view style='color:#F93F45;height:22px;line-height:22px;font-size:12px;' catchtap='addressmanagement' data-gid='{{item.goods_id}}'>直接购买</view>
                   </block>
-
               </view>
             </view>
           </swiper-item>
-
-
         </block>
-
-
-
-
-
       </swiper>
     </block>
-
   </view>
-
 
 </view>
 
 <bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
 
-
 <!--  背景颜色  -->
-<view class='tipback' wx:if='{{tipback}}' catchtouchmove="preventD">
+<view class='tipback' wx:if='{{tipback}}' catchtouchmove="preventD"></view>
 
-</view>
 <ad unit-id="adunit-6b4207cd303cf730" wx:if='{{tipback}}' style='position:fixed;top:0;left:0;z-index:10;'></ad>
 <!--  拆单购买弹框 -->
 <view class='dsbframe' wx:if='{{dsbframeiftr}}'>
@@ -933,11 +872,9 @@
   </view>
 </view>
 
-
 <!--  二级背景  -->
-<view class='tipbacktwo' wx:if='{{tipbacktwo}}' catchtouchmove="preventD">
+<view class='tipbacktwo' wx:if='{{tipbacktwo}}' catchtouchmove="preventD"></view>
 
-</view>
 <ad unit-id="adunit-d09daebcc6e698d4" wx:if='{{tipbacktwo}}' style='position:fixed;top:0;left:0;z-index:889;'></ad>
 <!--  立即购买弹框  -->
 
@@ -1000,7 +937,6 @@
       <input class='buyermessage' type='text' bindinput="inputChange" value='{{desc}}' placeholder='选填备注,或添加微信好友({{wxnum}})'></input>
     </view>
 
-
   </view>
   <view class='bbshbottom'>
     <view class='bbshbottomhead'>
@@ -1012,7 +948,6 @@
 </view>
 
 <!--  立即购买弹框  支付运费弹框 -->
-
 <view class='buybombsimmediately' wx:if='{{payfreightone}}'>
   <view class='bbsheadcon'>
     <view class='bbshccom' bindtap='seladdressfun'>
@@ -1024,22 +959,13 @@
       <view class='bbshcombotleft'>应付金额</view>
       <view class='bbshcombotright'>
         <view class='bbshcombotpr'>￥{{payfreightmony}}</view>
-
       </view>
     </view>
-
-
   </view>
   <view class='bbshbottom'>
     <view class='bbshbottombut' bindtap='payfreighplaceorder'>提交订单</view>
   </view>
-
 </view>
-
-
-
-
-
 
 <!--  收货地址  -->
 <view class='receivingaddress' wx:if='{{receivingaddress}}'>
@@ -1082,13 +1008,6 @@
 
 </view>
 
-
-
-
-
-
-
-
 <!--  提交订单弹框防止多次提交  -->
 <view wx:if='{{suboformola}}' style='width:100%;height:100%;z-index: 1999999;position: fixed;top: 0;left: 0;'></view>
 <!--  授权弹框  -->
@@ -1103,14 +1022,8 @@
 
 </view>
 
-
-
-
-
 <!--  loading 加载提示  -->
 <view hidden="{{headhidden}}" style='position: fixed;top: 0;left: 0;height: 100%;width: 100%;z-index: 30;' catchtouchmove="preventD"></view>
-
-
 
 <!--  优惠券弹框  -->
 <view class='couponprojectile' wx:if='{{couponprojectile}}'>
@@ -1191,9 +1104,6 @@
   </view>
 </view>
 
-
-
-
 <!--  活动提示 新人专享提示 ifcomtipiftr==1 机会不足提示 ifcomtipiftr==2-->
 <view class='comtip' wx:if='{{comtipiftr}}' style='z-index:2100;'>
   <view class='comtipback' catchtap='hidcomtip'></view>
@@ -1222,10 +1132,6 @@
   </view>
 </view>
 
-
-
-
-
 <!--  填写身份证号  -->
 <view class='idnumberboxw' wx:if='{{idnumberboxiftr}}'>
   <view class='idnumberboxwback'></view>
@@ -1240,8 +1146,6 @@
     </view>
   </view>
 </view>
-
-
 
 <!--  图片授权  -->
 <view class='editorrecom' wx:if='{{picbox}}' style='z-index:9999999;'>
@@ -1258,7 +1162,6 @@
   </view>
 </view>
 
-
 <!--  图片授权  -->
 <view wx:if='{{exhpicsave}}' style='z-index:9999999;width:100%;height:100%;position:fixed;top:0;left:0;'>
   <view style='width:100%;height:100%;background:#000;opacity:.5;'></view>
@@ -1274,7 +1177,6 @@
   </view>
 </view>
 
-
 <!--  赞助商 微信号复制  -->
 <view class='editorrecom' style='z-index:9999999;' wx:if='{{copyiftr}}'>
   <view class='ngbackground' catchtap='copyfitrfun'></view>
@@ -1286,8 +1188,6 @@
     </view>
   </view>
 </view>
-
-
 
 <!-- 免单提示 -->
 <view class='wsh' wx:if='{{wsh}}'>
@@ -1321,7 +1221,6 @@
     <view class='wshbuttom' catchtap='jumprecom' data-type="{{eshjumphref.item_type}}" data-href="{{eshjumphref.href}}" data-name="拆盒买">更多拆单商品</view>
   </view>
 </view>
-
 
 <!--   领奖提示   -->
 <view class='wsh' wx:if='{{awardrresentiftr}}'>
@@ -1380,7 +1279,6 @@
   </view>
 </view>
 
-
 <view class='tgimgbox' wx:if='{{upserimgboxWinningtheprize}}'>
   <view class='tgimgboxgb' style='opacity:0.7;' catchtap='closeupserimg'></view>
   <view class='upsertgimgbcon' style='{{windowHeight<500?"height:800rpx;":"height:1115rpx;"}}'>
@@ -1395,7 +1293,6 @@
           <view style='width:100%;height:40rpx;color:#fff;font-size:22rpx;text-align:center;line-height:40rpx;text-decoration:underline;'>查看截图参考</view>
         </view>
         <text class='upsertextcon' style='width:400rpx;height:230rpx;position: absolute;left:200rpx;bottom:60rpx;font-size:26rpx;color:#fff;overflow: scroll;'>{{share_descWinningtheprize}}</text>
-
       </view>
       <view style='width:100%;height:66rpx;position:relative;'>
         <view style='width:280rpx;height:60rpx;position: absolute;right:0;bottom:0;font-size:26rpx;text-align:center;line-height:60rpx;color:#fff;border-radius: 10rpx;background: #087ac5;' catchtap='screenshottips' data-num='2'>
@@ -1406,8 +1303,6 @@
         </view>
       </view>
     </view>
-
-
 
     <image src='../images/icon_close3.png' class='usericonclose' catchtap='closeupserimg'></image>
   </view>
@@ -1489,9 +1384,6 @@
 </view>
 
 
-
-
-
 <view class='awatip' wx:if='{{subscrproiftr}}' style='z-index:9999999999;'>
   <view class='awabg'></view>
   <view class='awacontent' style='width:600rpx;height:320rpx;'>
@@ -1531,8 +1423,6 @@
     <view class='awaconbottom' style='background:#f18f00;width:130rpx;position:relative;' data-anum='2' catchtap='upImgSernum'>去领奖</view>
   </view>
 </view>
-
-
 
 <!-- ishowgetchip  -->
 <view wx:if='{{ishowgetchip}}' style="width:100%;height:100%;position:fixed;top:0;left:0;z-index:199999;">
@@ -1591,10 +1481,7 @@
                 <view class='sibevebg' wx:else style='height:257rpx;width:240rpx;'></view>
               </view>
             </block>
-
-
           </block>
-
         </view>
       </view>
       <view class='wowantfree' catchtap='closegetchip' catchtouchmove="myCatchTouch">我要免单</view>
@@ -1609,7 +1496,6 @@
     <image class='limsavbimg' mode='aspectFit' src='{{saveimgurl}}'></image>
     <view class='limsavebuttom' catchtap='sharesavethepicture'>保存图片</view>
   </view>
-
 </view>
 
 <view class='newcoupon' wx:if='{{addfrindcommoni}}'>
@@ -1626,9 +1512,7 @@
   <view style='width:500rpx;height:240rpx;background:#fff;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;border-radius:16rpx;'>
     <view style='padding:30rpx 0;width:100%;height:80rpx;text-align:center;line-height:80rpx;color:#333;font-size:26rpx;border-bottom:1rpx solid #e5e5e5;'>上传成功</view>
     <view style='height:100rpx;width:100%;'>
-      <view style='color:#11fb3d;position:relative;width:100%;float:left;height:100rpx;line-height:100rpx;text-align:center;font-size:26rpx;' catchtap='pictboxboxfun'>
-        关闭
-      </view>
+      <view style='color:#11fb3d;position:relative;width:100%;float:left;height:100rpx;line-height:100rpx;text-align:center;font-size:26rpx;' catchtap='pictboxboxfun'>关闭</view>
     </view>
   </view>
 </view>

@@ -142,26 +142,9 @@ Page({
             serieslist:listdata,
             lettersheight: lettersheight
           });
-          // if (listdata.length != 0) {
-          //   _this.setData({
-          //     brandscroll: listdata,
-          //     tabselid: listdata[0].id
-          //   });
-          //   _this.brandscrollfun(listdata[0].id);
-          // } else {
-          //   wx.showToast({
-          //     title: '暂无更多数据',
-          //     icon: 'none',
-          //     duration: 2000
-          //   });
-          // };
 
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 2000
-          });
+          app.showToastC(res.data.Msg);
         };
       }
     });
@@ -226,19 +209,11 @@ Page({
              });
              _this.brandscrollfun(listdata[0].id);
           } else {
-            wx.showToast({
-              title: '暂无更多数据',
-              icon: 'none',
-              duration: 2000
-            });
+            app.showToastC('暂无更多数据');
           };
 
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 2000
-          });
+          app.showToastC(res.data.Msg);
         };
       }
     });
@@ -272,19 +247,11 @@ Page({
               brandlist: listdata,
             })
           } else {
-            wx.showToast({
-              title: '暂无更多数据',
-              icon: 'none',
-              duration: 2000
-            });
+            app.showToastC('暂无更多数据');
           };
 
         } else {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 2000
-          });
+          app.showToastC(res.data.Msg);
           _this.setData({ infodata: { drawBox:false} })
         };
       }
@@ -307,12 +274,7 @@ Page({
   // 搜索
   jumpsoousuo: function () {
     if (this.data.inputdata==''){
-      wx.showToast({
-        title: '输入框不能为空！',
-        icon: 'none',
-        mask:true,
-        duration: 2000
-      });
+      app.showToastC('输入框不能为空！');
       return false;
     };
     // 获取list数据
@@ -528,19 +490,11 @@ Page({
               _this.setData({ listdata: ltlist });
             };
           }else{
-            wx.showToast({
-              title: '暂无更多数据',
-              icon: 'none',
-              duration: 2000
-            });
+            app.showToastC('暂无更多数据');
           };
 
         }else{
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 2000
-          });          
+          app.showToastC(res.data.Msg);          
         };
       }
     });     
@@ -785,11 +739,7 @@ Page({
     var minprice = w.currentTarget.dataset.minprice || w.target.dataset.minprice||0;
     var maxprice = w.currentTarget.dataset.maxprice || w.target.dataset.maxprice || 0;
     if (minprice == 0 && maxprice==0){
-      wx.showToast({
-        title: '暂无该款信息',
-        icon: 'none',
-        duration: 1500
-      });
+      app.showToastC('暂无该款信息');
       return false
     };
     wx.navigateTo({

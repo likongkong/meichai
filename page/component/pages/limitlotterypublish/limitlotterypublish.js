@@ -345,22 +345,14 @@ Page({
             })
           }
         } else {
-          wx.showToast({
-            title: '上传失败,请重新上传',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('上传失败,请重新上传');
         }
       },
       fail: function(res) {
         if (ishidden) {
           wx.hideLoading()
         }
-        wx.showToast({
-          title: '上传失败,请重新上传',
-          icon: 'none',
-          duration: 1500
-        });
+        app.showToastC('上传失败,请重新上传');
       }
     })
   },
@@ -416,93 +408,42 @@ Page({
   commitinfo: function(w) {
     var _this = this;
     if (this.data.name.length > 20) {
-      wx.showToast({
-        title: '活动名称应少于20个字',
-        icon: 'none',
-        duration: 1500
-      })
+      app.showToastC('活动名称应少于20个字')
       return false;
     } else if (this.data.name.length == 0) {
-      wx.showToast({
-        title: '请输入名称',
-        icon: 'none',
-        duration: 1500
-      })
+      app.showToastC('请输入名称')
       return false;
     } else if (this.data.num.length == 0) {
-      wx.showToast({
-        title: '请输入数量',
-        icon: 'none',
-        duration: 1500
-      })
+      app.showToastC('请输入数量')
       return false;
     } else if (this.data.price.length == 0) {
-      wx.showToast({
-        title: '请输入价格',
-        icon: 'none',
-        duration: 1500
-      })
+      app.showToastC('请输入价格')
       return false;
     } else if (this.data.banner.length == 0) {
-      wx.showToast({
-        title: '请选择banner图片',
-        icon: 'none',
-        duration: 1500
-      })
+      app.showToastC('请选择banner图片')
       return false;
     } else if (this.data.goodsImg.length == 0) {
-      wx.showToast({
-        title: '请选择详情图片',
-        icon: 'none',
-        duration: 1500
-      })
+      app.showToastC('请选择详情图片')
       return false;
     } else if (this.data.logo.length == 0) {
-      wx.showToast({
-        title: '请选择logo',
-        icon: 'none',
-        duration: 1500
-      })
+      app.showToastC('请选择logo')
       return false;
     } else if (this.data.phone == 0) {
-      wx.showToast({
-        title: '输入的手机号为空',
-        icon: 'none',
-        duration: 1500
-      })
+      app.showToastC('输入的手机号为空')
       return false;
     } else if (this.data.phone.length < 11) {
-      wx.showToast({
-        title: '手机号长度有误',
-        icon: 'none',
-        duration: 1500
-      })
+      app.showToastC('手机号长度有误')
       return false;
     } else if (this.data.phone && this.data.phone[0] != 1) {
-      // !myreg.test(this.data.tel)
-      wx.showToast({
-        title: '手机号有误！',
-        icon: 'none',
-        duration: 1500
-      })
+      app.showToastC('手机号有误！')
       return false;
     } else if (this.data.starttime.length == 0) {
-      wx.showToast({
-        title: '请选择开始时间',
-        icon: 'none',
-        duration: 1500
-      })
+      app.showToastC('请选择开始时间')
       return false;
     } else if (this.data.stoptime.length == 0) {
-      wx.showToast({
-        title: '请选择结束时间',
-        icon: 'none',
-        duration: 1500
-      })
+      app.showToastC('请选择结束时间')
       return false;
-    } else {
-
-    }
+    } else {}
     wx.showLoading({
       title: '加载中...',
     })
@@ -517,17 +458,12 @@ Page({
       success: function(res) {
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
-          wx.showToast({
-            title: '提交成功',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('提交成功');
           _this.setData({
             name: '',
             num: '',
             price: '',
             phone: '',
-
             banner: "",
             bannerList: [],
             bannerlocalList: [],

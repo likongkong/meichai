@@ -133,11 +133,7 @@ Page({
                 nodataiftr: true
               });
             } else {
-              wx.showToast({
-                title: '没有更多数据了',
-                icon: 'none',
-                duration: 1000
-              });
+              app.showToastC('没有更多数据了');
               _this.setData({ loadprompt: '没有更多数据了', nodataiftr: true });
             };
           };

@@ -55,46 +55,22 @@ Page({
             })
         };
         if (res.data.ReturnCode == 814) {
-          wx.showToast({
-            title: '查询失败',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('查询失败');
         };
         if (res.data.ReturnCode == 813) {
-          wx.showToast({
-            title: '异常订单，无法查询',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('异常订单，无法查询');
         };
         if (res.data.ReturnCode == 811) {
-          wx.showToast({
-            title: '该订单未付款，无法查询',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('该订单未付款，无法查询');
         };
         if (res.data.ReturnCode == 812) {
-          wx.showToast({
-            title: '该订单尚未发货',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('该订单尚未发货');
         };
         if (res.data.ReturnCode == 812) {
-          wx.showToast({
-            title: '该订单尚未发货',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('该订单尚未发货');
         };
         if (res.data.ReturnCode == 900) {
-          wx.showToast({
-            title: '登陆状态有误',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('登陆状态有误');
         };        
       },
       fail: function () {

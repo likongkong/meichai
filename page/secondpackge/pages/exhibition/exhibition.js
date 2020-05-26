@@ -520,11 +520,7 @@ Page({
               listdata: l,
             })
           } else {
-            wx.showToast({
-              title: '暂无更多数据',
-              icon: 'none',
-              duration: 2000
-            });
+            app.showToastC('暂无更多数据');
             _this.setData({
               page: page - 1,
             })

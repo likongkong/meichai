@@ -376,11 +376,7 @@ Page({
                   },
                   fail: function (res) {
                     wx.hideLoading()
-                    wx.showToast({
-                      title: '图片生成失败，请重新刷新页面重试,{ReturnCode:01}',
-                      icon: 'none',
-                      duration: 1500
-                    });
+                    app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:01}');
                     _this.setData({
                       upserimgbox: false,
                     });
@@ -392,11 +388,7 @@ Page({
             },
             fail: function (res) {
               wx.hideLoading()
-              wx.showToast({
-                title: '图片生成失败，请重新刷新页面重试,{ReturnCode:02}',
-                icon: 'none',
-                duration: 1500
-              });
+              app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:02}');
               _this.setData({
                 upserimgbox: false,
               });
@@ -423,11 +415,7 @@ Page({
                         },
                         fail: function (res) {
                           wx.hideLoading()
-                          wx.showToast({
-                            title: '图片生成失败，请重新刷新页面重试,{ReturnCode:03}',
-                            icon: 'none',
-                            duration: 1500
-                          });
+                          app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:03}');
                           _this.setData({
                             upserimgbox: false,
                           });
@@ -438,11 +426,7 @@ Page({
                   },
                   fail: function (res) {
                     wx.hideLoading()
-                    wx.showToast({
-                      title: '图片生成失败，请重新刷新页面重试,{ReturnCode:04}',
-                      icon: 'none',
-                      duration: 1500
-                    });
+                    app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:04}');
                     _this.setData({
                       upserimgbox: false,
                     });
@@ -451,11 +435,7 @@ Page({
             }, 
             fail: function (res) {
               wx.hideLoading()
-              wx.showToast({
-                title: '图片生成失败，请重新刷新页面重试,{ReturnCode:05}',
-                icon: 'none',
-                duration: 1500
-              });
+              app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:05}');
               _this.setData({
                 upserimgbox: false,
               });
@@ -467,11 +447,7 @@ Page({
       },
       fail: function (res) {
         wx.hideLoading()
-        wx.showToast({
-          title: '图片生成失败，请重新刷新页面重试,{ReturnCode:06}',
-          icon: 'none',
-          duration: 1500
-        });
+        app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:06}');
         _this.setData({
           upserimgbox: false,
         });
@@ -536,11 +512,7 @@ Page({
                         },
                         fail: function(res) {
                           wx.hideLoading()
-                          wx.showToast({
-                            title: '图片生成失败，请重新刷新页面重试,{ReturnCode:01}',
-                            icon: 'none',
-                            duration: 1500
-                          });
+                          app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:01}');
                           _this.setData({
                             upserimgbox: false,
                           });
@@ -552,11 +524,7 @@ Page({
                   },
                   fail: function(res) {
                     wx.hideLoading()
-                    wx.showToast({
-                      title: '图片生成失败，请重新刷新页面重试,{ReturnCode:02}',
-                      icon: 'none',
-                      duration: 1500
-                    });
+                    app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:02}');
                     _this.setData({
                       upserimgbox: false,
                     });
@@ -566,11 +534,7 @@ Page({
               },
               fail: function(res) {
                 wx.hideLoading()
-                wx.showToast({
-                  title: '图片生成失败，请重新刷新页面重试,{ReturnCode:03}',
-                  icon: 'none',
-                  duration: 1500
-                });
+                app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:03}');
                 _this.setData({
                   upserimgbox: false,
                 });
@@ -581,11 +545,7 @@ Page({
           },
           fail: function(res) {
             wx.hideLoading()
-            wx.showToast({
-              title: '图片生成失败，请重新刷新页面重试,{ReturnCode:04}',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:04}');
             _this.setData({
               upserimgbox: false,
             });
@@ -595,11 +555,7 @@ Page({
       },
       fail: function(res) {
         wx.hideLoading()
-        wx.showToast({
-          title: '图片生成失败，请重新刷新页面重试,{ReturnCode:05}',
-          icon: 'none',
-          duration: 1500
-        });
+        app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:05}');
         _this.setData({
           upserimgbox: false,
         });
@@ -627,19 +583,13 @@ Page({
               wx.saveImageToPhotosAlbum({
                 filePath: imgSrc,
                 success() {
-                  wx.showToast({
-                    title: '保存成功',
-                    icon: 'none'
-                  });
+                  app.showToastC('保存成功');
                   _this.setData({
                     upserimgbox: false
                   });
                 },
                 fail() {
-                  wx.showToast({
-                    title: '保存失败',
-                    icon: 'none'
-                  });
+                  app.showToastC('保存失败');
                   _this.setData({
                     upserimgbox: false,
                     actimgshare: ''
@@ -660,19 +610,13 @@ Page({
           wx.saveImageToPhotosAlbum({
             filePath: imgSrc,
             success() {
-              wx.showToast({
-                title: '保存成功',
-                icon: 'none'
-              });
+              app.showToastC('保存成功');
               _this.setData({
                 upserimgbox: false
               });
             },
             fail() {
-              wx.showToast({
-                title: '保存失败',
-                icon: 'none'
-              });
+              app.showToastC('保存失败');
               _this.setData({
                 upserimgbox: false,
                 savepicturesiftr: true,
@@ -733,17 +677,9 @@ Page({
         wx.hideToast();
         if (res.data) {
           if (res.data == 200) {
-            wx.showToast({
-              title: '上传成功',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('上传成功');
           } else {
-            wx.showToast({
-              title: res.data,
-              icon: 'none',
-              duration: 3000
-            });
+            app.showToastC(res.data);
           }
         };
         setTimeout(function(){
@@ -758,11 +694,7 @@ Page({
           upserimgboxact: false
         });
         wx.hideToast();
-        wx.showToast({
-          title: '上传失败',
-          icon: 'none',
-          duration: 1500
-        });
+        app.showToastC('上传失败');
       }
     })
   },

@@ -893,6 +893,14 @@ App({
       return M + '.' + D + ' ' + h + ':' + m;
     }
   },
+  showToastC:function(title){
+    wx.showToast({
+      title: title,
+      icon: 'none',
+      mask:true,
+      duration:2000
+    });    
+  }
 })
 
 
