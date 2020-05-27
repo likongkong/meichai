@@ -1681,12 +1681,24 @@ Page({
   // 跳转活动详情页
   jumpopenbox: function (event) {
     var gid = event.currentTarget.dataset.gid || event.target.dataset.gid;
+    var hreftype = event.currentTarget.dataset.hreftype || event.target.dataset.hreftype || "normal";
+    console.log(hreftype)
     var _this = this;
     _this.setData({ jumpdevanningiftr: true });
-    wx.navigateTo({
-      url: "/page/component/pages/mingbox/mingbox?gid=" + gid,
-      complete: function () {_this.setData({ jumpdevanningiftr: false });}
-    });
+    if(hreftype == "openedList"){
+      wx.navigateTo({
+        url: "/page/component/pages/mingboxList/mingboxList",
+        complete: function () {
+          _this.setData({ jumpdevanningiftr: false });
+        }
+      });
+    }else{
+      wx.navigateTo({
+        url: "/page/component/pages/mingbox/mingbox?gid=" + gid,
+        complete: function () {_this.setData({ jumpdevanningiftr: false });}
+      });
+    }
+
   },
   jumpdlflottery: function (event){
     var id = event.currentTarget.dataset.id || event.target.dataset.id;

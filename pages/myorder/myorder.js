@@ -292,11 +292,7 @@ Page({
           };
         };
         if (res.data.ReturnCode == 900) {
-          wx.showToast({
-            title: '登陆状态有误',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('登陆状态有误');
         };
       }
     });
@@ -374,11 +370,7 @@ Page({
                 });
               };
               if (res.data.ReturnCode == 908) {
-                wx.showToast({
-                  title: 'aid和uid不匹配',
-                  icon: 'none',
-                  duration: 1500
-                });
+                app.showToastC('aid和uid不匹配');
               };
             }
           })
@@ -803,11 +795,7 @@ Page({
             });
             wx.hideLoading()
           }else{
-            wx.showToast({
-              title: '没有更多数据了',
-              icon: 'none',
-              duration: 1500
-            }); 
+            app.showToastC('没有更多数据了'); 
           };
         };
         // 判断非200和登录
@@ -839,35 +827,19 @@ Page({
           header: { 'Accept': 'application/json' },
           success: function (res) {
             if (res.data.ReturnCode == 200) {
-              wx.showToast({
-                title: res.data.Info.notify,
-                icon: 'none',
-                duration: 3000
-              });
+              app.showToastC(res.data.Info.notify);
               _this.setData({
                 payiftr: false
               });
             };
             if (res.data.ReturnCode == 900) {
-              wx.showToast({
-                title: '登陆状态有误',
-                icon: 'none',
-                duration: 1500
-              });
+              app.showToastC('登陆状态有误');
             };
             if (res.data.ReturnCode == 800) {
-              wx.showToast({
-                title: '非该用户订单',
-                icon: 'none',
-                duration: 1500
-              });
+              app.showToastC('非该用户订单');
             };
             if (res.data.ReturnCode == 701) {
-              wx.showToast({
-                title: '订单状态有误(不是“已完成”状态)',
-                icon: 'none',
-                duration: 1500
-              });
+              app.showToastC('订单状态有误(不是“已完成”状态)');
             };
           },
         })        
@@ -955,36 +927,20 @@ Page({
               header: { 'Accept': 'application/json' },
               success: function (res) {
                 if (res.data.ReturnCode == 200) {
-                  wx.showToast({
-                    title: res.data.Info.notify,
-                    icon: 'none',
-                    duration: 3000
-                  });
+                  app.showToastC(res.data.Info.notify);
                   _this.onLoadfun();
                   _this.setData({
                     payiftr:false
                   });
                 };
                 if (res.data.ReturnCode == 900) {
-                  wx.showToast({
-                    title: '登陆状态有误',
-                    icon: 'none',
-                    duration: 1500
-                  });
+                  app.showToastC('登陆状态有误');
                 };
                 if (res.data.ReturnCode == 800) {
-                  wx.showToast({
-                    title: '非该用户订单',
-                    icon: 'none',
-                    duration: 1500
-                  });
+                  app.showToastC('非该用户订单');
                 };
                 if (res.data.ReturnCode == 701) {
-                  wx.showToast({
-                    title: '订单状态有误(不是“已完成”状态)',
-                    icon: 'none',
-                    duration: 1500
-                  });
+                  app.showToastC('订单状态有误(不是“已完成”状态)');
                 };
               },
             })
@@ -1036,26 +992,14 @@ Page({
       header: { 'Accept': 'application/json' },
       success: function (res) {
         if (res.data.ReturnCode == 200) {
-          wx.showToast({
-            title: '操作成功',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('操作成功');
           _this.datatransfer();
         };
         if (res.data.ReturnCode == 800) {
-          wx.showToast({
-            title: '非该用户订单',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('非该用户订单');
         };
         if (res.data.ReturnCode == 810) {
-          wx.showToast({
-            title: '仅可以取消未付款订单',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('仅可以取消未付款订单');
         };
         // 判断非200和登录
         Dec.comiftrsign(_this, res, app);  
@@ -1163,46 +1107,22 @@ Page({
              suboformola: false
           })
           if (res.data.ReturnCode == 800) {
-            wx.showToast({
-              title: '非该用户订单',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('非该用户订单');
           };
           if (res.data.ReturnCode == 815) {
-            wx.showToast({
-              title: '订单状态错误',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('订单状态错误');
           };
           if (res.data.ReturnCode == 816) {
-            wx.showToast({
-              title: '不支持的支付类型',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('不支持的支付类型');
           };
           if (res.data.ReturnCode == 817) {
-            wx.showToast({
-              title: '付款明细已生成',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('付款明细已生成');
           };
           if (res.data.ReturnCode == 201) {
-            wx.showToast({
-              title: '微信预支付失败',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('微信预支付失败');
           }; 
           if (res.data.ReturnCode == 805) {
-            wx.showToast({
-              title: '剩余库存不足',
-              icon: 'none',
-              duration: 1000
-            });
+            app.showToastC('剩余库存不足');
           };           
           // 判断非200和登录
           Dec.comiftrsign(_this, res, app); 
@@ -1245,26 +1165,14 @@ Page({
       header: { 'Accept': 'application/json' },
       success: function (res) {
         if (res.data.ReturnCode == 200) {
-          wx.showToast({
-            title: '操作成功',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('操作成功');
           _this.datatransfer();
         };
         if (res.data.ReturnCode == 800) {
-          wx.showToast({
-            title: '非该用户订单',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('非该用户订单');
         };
         if (res.data.ReturnCode == 824) {
-          wx.showToast({
-            title: '订单状态有误',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('订单状态有误');
         };
         // 判断非200和登录
         Dec.comiftrsign(_this, res, app);          
@@ -1284,30 +1192,14 @@ Page({
       header: { 'Accept': 'application/json' },
       success: function (res) {
         if (res.data.ReturnCode == 200) {
-          wx.showToast({
-            title: '操作成功',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('操作成功');
           _this.datatransfer();
         }else if (res.data.ReturnCode == 800) {
-          wx.showToast({
-            title: '非该用户订单',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('非该用户订单');
         }else if (res.data.ReturnCode == 824) {
-          wx.showToast({
-            title: '订单状态有误',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('订单状态有误');
         }else{
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            duration: 1500
-          });         
+          app.showToastC(res.data.Msg);         
         };      
         // 判断非200和登录
         Dec.comiftrsign(_this, res, app);        
@@ -1374,11 +1266,7 @@ Page({
 
     var showorder = w.currentTarget.dataset.sorder || w.target.dataset.sorder || 0;
     if(showorder ==1){
-      wx.showToast({
-        title: '请等待审核',
-        icon: 'none',
-        duration: 3000
-      });
+      app.showToastC('请等待审核');
       return ;
     }
 
@@ -1397,11 +1285,7 @@ Page({
           success: function (res) {
             _this.setData({ preventmultiplesubmission: true });
             if (res.data.ReturnCode == 200) {
-              wx.showToast({
-                title: '领取成功',
-                icon: 'none',
-                duration: 1000
-              });
+              app.showToastC('领取成功');
               _this.onLoadfun(); 
             } else if (res.data.ReturnCode == 830) {
               var rpiinfo = res.data.Info.tip.replace(/\\n/g, '\n') || '';
@@ -1423,11 +1307,7 @@ Page({
                 payfreightmony: res.data.Info.amount || 10
               });
             } else {
-              wx.showToast({
-                title: res.data.Msg,
-                icon: 'none',
-                duration: 1500
-              });
+              app.showToastC(res.data.Msg);
               setTimeout(function () {
                 _this.onLoadfun();
               }, 1500)
@@ -1528,53 +1408,21 @@ Page({
                 })
               } else {
                 if (res.data.ReturnCode == 900) {
-                  wx.showToast({
-                    title: '登陆状态有误',
-                    icon: 'none',
-                    duration: 1500
-                  });
+                  app.showToastC('登陆状态有误');
                 } else if (res.data.ReturnCode == 800) {
-                  wx.showToast({
-                    title: '非该用户订单',
-                    icon: 'none',
-                    duration: 1500
-                  });
+                  app.showToastC('非该用户订单');
                 } else if (res.data.ReturnCode == 815) {
-                  wx.showToast({
-                    title: '订单状态错误',
-                    icon: 'none',
-                    duration: 1500
-                  });
+                  app.showToastC('订单状态错误');
                 } else if (res.data.ReturnCode == 816) {
-                  wx.showToast({
-                    title: '不支持的支付类型',
-                    icon: 'none',
-                    duration: 1500
-                  });
+                  app.showToastC('不支持的支付类型');
                 } else if (res.data.ReturnCode == 817) {
-                  wx.showToast({
-                    title: '付款明细已生成',
-                    icon: 'none',
-                    duration: 1500
-                  });
+                  app.showToastC('付款明细已生成');
                 } else if (res.data.ReturnCode == 201) {
-                  wx.showToast({
-                    title: '微信预支付失败',
-                    icon: 'none',
-                    duration: 1500
-                  });
+                  app.showToastC('微信预支付失败');
                 } else if (res.data.ReturnCode == 805) {
-                  wx.showToast({
-                    title: '剩余库存不足',
-                    icon: 'none',
-                    duration: 1000
-                  });
+                  app.showToastC('剩余库存不足');
                 } else {
-                  wx.showToast({
-                    title: res.data.Msg,
-                    icon: 'none',
-                    duration: 1000
-                  });
+                  app.showToastC(res.data.Msg);
                 };
               };
 
@@ -1586,11 +1434,7 @@ Page({
           _this.setData({
             suboformola: false
           });
-          wx.showToast({
-            title: res.data.msg,
-            icon: 'none',
-            duration: 1000
-          });
+          app.showToastC(res.data.msg);
         }
       },
       fail: function () { }
@@ -1666,11 +1510,7 @@ Page({
         _this.setData({ headhidden: true, upserimgbox: false, upserimgboxact: false  });
         wx.hideLoading()
         wx.hideToast();
-        wx.showToast({
-          title: '上传失败',
-          icon: 'none',
-          duration: 1500
-        });
+        app.showToastC('上传失败');
       }
     })
   },
@@ -1830,11 +1670,7 @@ Page({
                                           },
                                           fail: function (res) {
                                             wx.hideLoading()
-                                            wx.showToast({
-                                              title: '图片生成失败，请重新刷新页面重试,{ReturnCode:01}',
-                                              icon: 'none',
-                                              duration: 1500
-                                            });
+                                            app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:01}');
                                             _this.setData({ upserimgbox: false, headhidden: true });
 
                                           },
@@ -1851,33 +1687,21 @@ Page({
                       },
                       fail: function (res) {
                         wx.hideLoading()
-                        wx.showToast({
-                          title: '图片生成失败，请重新刷新页面重试,{ReturnCode:02}',
-                          icon: 'none',
-                          duration: 1500
-                        });
+                        app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:02}');
                         _this.setData({ upserimgbox: false, headhidden: true });
                       }
                     });
                   },
                   fail: function (res) {
                     wx.hideLoading()
-                    wx.showToast({
-                      title: '图片生成失败，请重新刷新页面重试,{ReturnCode:03}',
-                      icon: 'none',
-                      duration: 1500
-                    });
+                    app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:03}');
                     _this.setData({ upserimgbox: false, headhidden: true });
                   }
                 });
               },
               fail: function (res) {
                 wx.hideLoading()
-                wx.showToast({
-                  title: '图片生成失败，请重新刷新页面重试,{ReturnCode:04}',
-                  icon: 'none',
-                  duration: 1500
-                });
+                app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:04}');
                 _this.setData({ upserimgbox: false, headhidden: true });
               }
             })
@@ -1989,11 +1813,7 @@ Page({
                                           },
                                           fail: function (res) {
                                             wx.hideLoading()
-                                            wx.showToast({
-                                              title: '图片生成失败，请重新刷新页面重试,{ReturnCode:01}',
-                                              icon: 'none',
-                                              duration: 1500
-                                            });
+                                            app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:01}');
                                             _this.setData({ upserimgbox: false, headhidden: true });
 
                                           },
@@ -2010,11 +1830,7 @@ Page({
                       },
                       fail: function (res) {
                         wx.hideLoading()
-                        wx.showToast({
-                          title: '图片生成失败，请重新刷新页面重试,{ReturnCode:02}',
-                          icon: 'none',
-                          duration: 1500
-                        });
+                        app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:02}');
                         _this.setData({ upserimgbox: false, headhidden: true });
 
                       }
@@ -2022,11 +1838,7 @@ Page({
                   },
                   fail: function (res) {
                     wx.hideLoading()
-                    wx.showToast({
-                      title: '图片生成失败，请重新刷新页面重试,{ReturnCode:03}',
-                      icon: 'none',
-                      duration: 1500
-                    });
+                    app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:03}');
                     _this.setData({ upserimgbox: false, headhidden: true });
 
                   }
@@ -2035,11 +1847,7 @@ Page({
               },
               fail: function (res) {
                 wx.hideLoading()
-                wx.showToast({
-                  title: '图片生成失败，请重新刷新页面重试,{ReturnCode:04}',
-                  icon: 'none',
-                  duration: 1500
-                });
+                app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:04}');
                 _this.setData({ upserimgbox: false, headhidden: true });
 
               }
@@ -2050,11 +1858,7 @@ Page({
 
       },
       fail: function (res) {
-        wx.showToast({
-          title: '图片生成失败，请重新刷新页面重试,{ReturnCode:16}',
-          icon: 'none',
-          duration: 1500
-        });
+        app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:16}');
         _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
       }
     });
@@ -2177,11 +1981,7 @@ Page({
                           },
                           fail: function (res) {
                             wx.hideLoading()
-                            wx.showToast({
-                              title: '图片生成失败，请重新刷新页面重试,{ReturnCode:01}',
-                              icon: 'none',
-                              duration: 1500
-                            });
+                            app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:01}');
                             _this.setData({
                               upserimgbox: false,
                             });
@@ -2199,11 +1999,7 @@ Page({
             },
             fail: function (res) {
               wx.hideLoading()
-              wx.showToast({
-                title: '图片生成失败，请重新刷新页面重试,{ReturnCode:02}',
-                icon: 'none',
-                duration: 1500
-              });
+              app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:02}');
               _this.setData({
                 upserimgbox: false,
               });
@@ -2304,11 +2100,7 @@ Page({
                               },
                               fail: function (res) {
                                 wx.hideLoading()
-                                wx.showToast({
-                                  title: '图片生成失败，请重新刷新页面重试,{ReturnCode:03}',
-                                  icon: 'none',
-                                  duration: 1500
-                                });
+                                app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:03}');
                                 _this.setData({
                                   upserimgbox: false,
                                 });
@@ -2325,11 +2117,7 @@ Page({
                 },
                 fail: function (res) {
                   wx.hideLoading()
-                  wx.showToast({
-                    title: '图片生成失败，请重新刷新页面重试,{ReturnCode:04}',
-                    icon: 'none',
-                    duration: 1500
-                  });
+                  app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:04}');
                   _this.setData({
                     upserimgbox: false,
                   });
@@ -2339,11 +2127,7 @@ Page({
             },
             fail: function (res) {
               wx.hideLoading()
-              wx.showToast({
-                title: '图片生成失败，请重新刷新页面重试,{ReturnCode:05}',
-                icon: 'none',
-                duration: 1500
-              });
+              app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:05}');
               _this.setData({
                 upserimgbox: false,
               });
@@ -2356,11 +2140,7 @@ Page({
       },
       fail: function (res) {
         wx.hideLoading()
-        wx.showToast({
-          title: '图片生成失败，请重新刷新页面重试,{ReturnCode:06}',
-          icon: 'none',
-          duration: 1500
-        });
+        app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:06}');
         _this.setData({
           upserimgbox: false,
         });
@@ -2394,10 +2174,7 @@ Page({
                   _this.setData({ upserimgbox: false, upserimgboxact: false });
                 },
                 fail() {
-                  wx.showToast({
-                    title: '保存失败',
-                    icon: 'none'
-                  });
+                  app.showToastC('保存失败');
                   _this.setData({ upserimgbox: false, actimgshare: ''});
                 }
               })
@@ -2422,10 +2199,7 @@ Page({
               _this.setData({ upserimgbox: false, upserimgboxact: false });
             },
             fail() {
-              wx.showToast({
-                title: '保存失败',
-                icon: 'none'
-              });
+              app.showToastC('保存失败');
               _this.setData({ upserimgbox: false, savepicturesiftr: true, actimgshare: '' });
             }
           })
@@ -2444,9 +2218,7 @@ Page({
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
-        wx.showToast({
-          title: '保存成功'
-        });
+        app.showToastC('保存成功');
         _this.setData({ upserimgbox: false, actimgshare: '' });
         _this.onLoadfun();
       },
@@ -2689,11 +2461,7 @@ Page({
                                   },
                                   fail: function (res) {
                                     wx.hideLoading()
-                                    wx.showToast({
-                                      title: '图片生成失败，请重新刷新页面重试,{ReturnCode:01}',
-                                      icon: 'none',
-                                      duration: 1500
-                                    });
+                                    app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:01}');
                                     _this.setData({ upserimgboxact: false, headhidden: true });
 
                                   },
@@ -2716,11 +2484,7 @@ Page({
                                   },
                                   fail: function (res) {
                                     wx.hideLoading()
-                                    wx.showToast({
-                                      title: '图片生成失败，请重新刷新页面重试,{ReturnCode:01}',
-                                      icon: 'none',
-                                      duration: 1500
-                                    });
+                                    app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:01}');
                                     _this.setData({ upserimgboxact: false, headhidden: true });
 
                                   },
@@ -2731,31 +2495,19 @@ Page({
                           })
                         },
                         fail: function (res) {
-                          wx.showToast({
-                            title: '图片生成失败，请重新刷新页面重试,{ReturnCode:16}',
-                            icon: 'none',
-                            duration: 1500
-                          });
+                          app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:16}');
                           _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
                         }
                       });
 
                       },
                       fail: function () {
-                        wx.showToast({
-                          title: '图片生成失败，请重新刷新页面重试,{ReturnCode:011}',
-                          icon: 'none',
-                          duration: 1500
-                        });
+                        app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:011}');
                       }
                     })
                   },
                   fail: function () {
-                    wx.showToast({
-                      title: '图片生成失败，请重新刷新页面重试,{ReturnCode:010}',
-                      icon: 'none',
-                      duration: 1500
-                    });
+                    app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:010}');
                   }
                 });
 
@@ -2764,11 +2516,7 @@ Page({
               },
               fail: function (res) {
                 wx.hideLoading()
-                wx.showToast({
-                  title: '图片生成失败，请重新刷新页面重试,{ReturnCode:03}',
-                  icon: 'none',
-                  duration: 1500
-                });
+                app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:03}');
                 _this.setData({ upserimgboxact: false, headhidden: true });
                 
               }
@@ -2776,11 +2524,7 @@ Page({
           },
           fail: function (res) {
             wx.hideLoading()
-            wx.showToast({
-              title: '图片生成失败，请重新刷新页面重试,{ReturnCode:04}',
-              icon: 'none',
-              duration: 1500
-            });
+            app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:04}');
             _this.setData({ upserimgboxact: false, headhidden: true });
             
           }
@@ -2852,11 +2596,7 @@ Page({
   },
   // 取消保存图片授权
   imgCanelTg: function () {
-    wx.showToast({
-      title: '保存失败',
-      icon: 'none',
-      duration: 1000
-    });
+    app.showToastC('保存失败');
     this.setData({ shareshopiftr: false, tgimgbox: false, picbox: false });
   },
 

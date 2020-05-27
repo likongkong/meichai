@@ -241,11 +241,7 @@ Page({
               _this.setData({ listdata: ltlist });
             };
           }else{
-            wx.showToast({
-              title: '暂无更多数据',
-              icon: 'none',
-              duration: 2000
-            });
+            app.showToastC('暂无更多数据');
           };
           if (_this.data.inputdata==''){
             _this.setData({

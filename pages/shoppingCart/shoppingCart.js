@@ -475,11 +475,7 @@ Page({
       header: { 'Accept': 'application/json' },
       success: function (res) {
         if (res.data.ReturnCode == 200) {
-          wx.showToast({
-            title: '删除成功',
-            icon: 'none',
-            duration: 1000
-          });
+          app.showToastC('删除成功');
           _this.data.zunmdata.splice(index, 1);
           _this.setData({
             zunmdata: _this.data.zunmdata
@@ -492,23 +488,11 @@ Page({
           // 购物车数据显示
           Dec.shopnum(_this,app.signindata.comurl);
         } else if (res.data.ReturnCode == 825) {
-          wx.showToast({
-            title: '用户id和购物车信息id不匹配',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('用户id和购物车信息id不匹配');
         } else if (res.data.ReturnCode == 826) {
-          wx.showToast({
-            title: 'cart_id个数和count不匹配',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('cart_id个数和count不匹配');
         } else if (res.data.ReturnCode == 900) {
-          wx.showToast({
-            title: '登陆状态有误',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('登陆状态有误');
         };
         _this.setData({ upMongolia: false });
       },
@@ -524,11 +508,7 @@ Page({
     var index = target.currentTarget.dataset.add || target.target.dataset.add||0;
     var stock = parseFloat(this.data.zunmdata[index].stock)||1;
     if ((parseFloat(this.data.zunmdata[index].numberofdismantling) + 1) > stock){
-      wx.showToast({
-        title: '商品库存不足',
-        icon: 'none',
-        duration: 1500
-      });
+      app.showToastC('商品库存不足');
       return false;
     };
     this.data.zunmdata[index].numberofdismantling = parseFloat(this.data.zunmdata[index].numberofdismantling) + 1;
@@ -751,11 +731,7 @@ Page({
                   };
               };
             } else {
-              wx.showToast({
-                title: '暂无更多数据',
-                icon: 'none',
-                duration: 1000
-              });
+              app.showToastC('暂无更多数据');
             };
           };
           if (num == 1) {
@@ -879,11 +855,7 @@ Page({
           })
 
         } else if (res.data.ReturnCode == 900) {
-          wx.showToast({
-            title: '登陆状态有误',
-            icon: 'none',
-            duration: 1000
-          });
+          app.showToastC('登陆状态有误');
         };
       },
       fail: function () { }
@@ -1149,29 +1121,13 @@ Page({
             // 购物车数据显示
             Dec.shopnum(_this,app.signindata.comurl);
           } else if (res.data.ReturnCode == 805) {
-            wx.showToast({
-              title: '没有足够库存',
-              icon: 'none',
-              duration: 1000
-            });
+            app.showToastC('没有足够库存');
           } else if (res.data.ReturnCode == 825) {
-            wx.showToast({
-              title: '用户id和购物车信息id不匹配',
-              icon: 'none',
-              duration: 1000
-            });
+            app.showToastC('用户id和购物车信息id不匹配');
           } else if (res.data.ReturnCode == 201) {
-            wx.showToast({
-              title: '异常情况 修改失败',
-              icon: 'none',
-              duration: 1000
-            });
+            app.showToastC('异常情况 修改失败');
           } else if (res.data.ReturnCode == 900) {
-            wx.showToast({
-              title: '登陆状态有误',
-              icon: 'none',
-              duration: 1000
-            });
+            app.showToastC('登陆状态有误');
           }
         };
         if (num == 3){
@@ -1243,11 +1199,7 @@ Page({
     var _this = this;
 
     if (this.data.tipaid == '') {
-      wx.showToast({
-        title: '请选择地址',
-        icon: 'none',
-        duration: 1500
-      });
+      app.showToastC('请选择地址');
       return false;
     };
 
@@ -1484,39 +1436,19 @@ Page({
           // _this.shoppingcartlist(1);
         };
         if (res.data.ReturnCode == 800) {
-          wx.showToast({
-            title: '非该用户订单',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('非该用户订单');
         };
         if (res.data.ReturnCode == 815) {
-          wx.showToast({
-            title: '订单状态错误',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('订单状态错误');
         };
         if (res.data.ReturnCode == 816) {
-          wx.showToast({
-            title: '不支持的支付类型',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('不支持的支付类型');
         };
         if (res.data.ReturnCode == 817) {
-          wx.showToast({
-            title: '付款明细已生成',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('付款明细已生成');
         };
         if (res.data.ReturnCode == 201) {
-          wx.showToast({
-            title: '微信预支付失败',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('微信预支付失败');
         };
         // 判断非200和登录
         Dec.comiftrsign(_this, res, app);
@@ -1707,34 +1639,16 @@ Page({
       header: { 'Accept': 'application/json' },
       success: function (res) {
         if (res.data.ReturnCode == 906) {
-          wx.showToast({
-            title: '激活码错误',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('激活码错误');
         };
-
         if (res.data.ReturnCode == 907) {
-          wx.showToast({
-            title: '激活码已被使用',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('激活码已被使用');
         };
-
         if (res.data.ReturnCode == 908) {
-          wx.showToast({
-            title: '激活码已过期',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('激活码已过期');
         };
         if (res.data.ReturnCode == 200) {
-          wx.showToast({
-            title: '兑换成功',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('兑换成功');
           // 调取优惠券
           this.comcouponprfun();
 
@@ -2170,12 +2084,7 @@ Page({
       }
     };
     if (iftrdefault) {
-      wx.showToast({
-        title: '默认地址不能删除',
-        icon: 'none',
-        mask: true,
-        duration: 1500
-      });
+      app.showToastC('默认地址不能删除');
       return false;
     };
 
@@ -2196,11 +2105,7 @@ Page({
                 });
               };
               if (res.data.ReturnCode == 908) {
-                wx.showToast({
-                  title: 'aid和uid不匹配',
-                  icon: 'none',
-                  duration: 1500
-                });
+                app.showToastC('aid和uid不匹配');
               };
               // 判断非200和登录
               Dec.comiftrsign(_this, res, app);
@@ -2474,27 +2379,15 @@ Page({
   idnumbbsubfun: function () {
     var _this = this;
     if (_this.data.inputnamedata == '') {
-      wx.showToast({
-        title: '姓名不能为空',
-        icon: 'none',
-        duration: 1500
-      });
+      app.showToastC('姓名不能为空');
       return false;
     };
     var regIdCard = /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/;
     if (this.data.inputidnumberdata == '') {
-      wx.showToast({
-        title: '身份证号不能为空',
-        icon: 'none',
-        duration: 1000
-      });
+      app.showToastC('身份证号不能为空');
       return false;
     } else if (!regIdCard.test(this.data.inputidnumberdata)) {
-      wx.showToast({
-        title: '身份证号格式不正确',
-        icon: 'none',
-        duration: 1000
-      });
+      app.showToastC('身份证号格式不正确');
       return false;
     } else { };
     var isisdefault = _this.data.addressdata;
@@ -2520,39 +2413,19 @@ Page({
           });
         };
         if (res.data.ReturnCode == 900) {
-          wx.showToast({
-            title: '登陆状态有误',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('登陆状态有误');
         };
         if (res.data.ReturnCode == 901) {
-          wx.showToast({
-            title: '身份证号格式不正确',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('身份证号格式不正确');
         };
         if (res.data.ReturnCode == 909) {
-          wx.showToast({
-            title: '身份证信息不匹配',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('身份证信息不匹配');
         };
         if (res.data.ReturnCode == 910) {
-          wx.showToast({
-            title: '身份信息错误次数过多，请明天再试。',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('身份信息错误次数过多，请明天再试。');
         };
         if (res.data.ReturnCode == 913) {
-          wx.showToast({
-            title: '地址有误',
-            icon: 'none',
-            duration: 1500
-          });
+          app.showToastC('地址有误');
         };
       },
       fail: function () { }
@@ -2645,36 +2518,16 @@ Page({
       header: { 'Accept': 'application/json' },
       success: function (res) {
         if (res.data.ReturnCode == 200) {
-          wx.showToast({
-            title: '已成功加入购物车',
-            icon: 'none',
-            duration: 1000
-          });
+          app.showToastC('已成功加入购物车');
           _this.shoppingcartlist(1);
         } else if (res.data.ReturnCode == 802) {
-          wx.showToast({
-            title: '规格选择有误',
-            icon: 'none',
-            duration: 1000
-          });
+          app.showToastC('规格选择有误');
         } else if (res.data.ReturnCode == 805) {
-          wx.showToast({
-            title: '库存不足',
-            icon: 'none',
-            duration: 1000
-          });
+          app.showToastC('库存不足');
         } else if (res.data.ReturnCode == 201) {
-          wx.showToast({
-            title: '添加失败',
-            icon: 'none',
-            duration: 1000
-          });
+          app.showToastC('添加失败');
         } else if (res.data.ReturnCode == 302) {
-          wx.showToast({
-            title: '无效信息',
-            icon: 'none',
-            duration: 1000
-          });
+          app.showToastC('无效信息');
         }
       },
       fail: function () { }
@@ -2697,11 +2550,7 @@ Page({
         success: function (res) {
           _this.data.clicktherequestiftr = true;
           if (res.data.ReturnCode == 200) {
-            wx.showToast({
-              title: '已成功加入购物车',
-              icon: 'none',
-              duration: 1000
-            });
+            app.showToastC('已成功加入购物车');
             _this.shoppingcartlist(1);
             Dec.shopnum(_this,app.signindata.comurl);
           } else if (res.data.ReturnCode == 802) {
@@ -2709,23 +2558,11 @@ Page({
               url: "/pages/detailspage/detailspage?gid=" + gid
             });
           } else if (res.data.ReturnCode == 805) {
-            wx.showToast({
-              title: '库存不足',
-              icon: 'none',
-              duration: 1000
-            });
+            app.showToastC('库存不足');
           } else if (res.data.ReturnCode == 201) {
-            wx.showToast({
-              title: '添加失败',
-              icon: 'none',
-              duration: 1000
-            });
+            app.showToastC('添加失败');
           } else if (res.data.ReturnCode == 302) {
-            wx.showToast({
-              title: '无效信息',
-              icon: 'none',
-              duration: 1000
-            });
+            app.showToastC('无效信息');
           }
         },
         fail: function () { }
@@ -2829,36 +2666,16 @@ Page({
       header: { 'Accept': 'application/json' },
       success: function (res) {
         if (res.data.ReturnCode == 200) {
-          wx.showToast({
-            title: '已成功加入购物车',
-            icon: 'none',
-            duration: 1000
-          });
+          app.showToastC('已成功加入购物车');
           _this.shoppingcartlist(1);
         } else if (res.data.ReturnCode == 802) {
-          wx.showToast({
-            title: '规格选择有误',
-            icon: 'none',
-            duration: 1000
-          });
+          app.showToastC('规格选择有误');
         } else if (res.data.ReturnCode == 805) {
-          wx.showToast({
-            title: '库存不足',
-            icon: 'none',
-            duration: 1000
-          });
+          app.showToastC('库存不足');
         } else if (res.data.ReturnCode == 201) {
-          wx.showToast({
-            title: '添加失败',
-            icon: 'none',
-            duration: 1000
-          });
+          app.showToastC('添加失败');
         } else if (res.data.ReturnCode == 302) {
-          wx.showToast({
-            title: '无效信息',
-            icon: 'none',
-            duration: 1000
-          });
+          app.showToastC('无效信息');
         }
       },
       fail: function () { }
