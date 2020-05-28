@@ -19,8 +19,6 @@ Page({
     uid: app.signindata.uid,
     openid: app.signindata.openid,
     avatarUrl: app.signindata.avatarUrl,
-    grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-    isStore: app.signindata.isStore,
     isProduce: app.signindata.isProduce,
 
     type: '',
@@ -65,8 +63,6 @@ Page({
     _this.data.pushWay = options.pushWay || 0;
     _this.setData({
       uid: app.signindata.uid,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       avatarUrl: app.signindata.avatarUrl,
     });
@@ -85,8 +81,6 @@ Page({
           _this.setData({
             uid: app.signindata.uid,
             avatarUrl: app.signindata.avatarUrl,
-            grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-            isStore: app.signindata.isStore,
             isProduce: app.signindata.isProduce,
           });
           // 判断是否登录
@@ -134,8 +128,6 @@ Page({
           // '已经授权'
           _this.setData({
             uid: app.signindata.uid,
-            grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-            isStore: app.signindata.isStore,
             isProduce: app.signindata.isProduce,
             avatarUrl: app.signindata.avatarUrl,
           });
@@ -165,8 +157,6 @@ Page({
     _this.data.openid = app.signindata.openid;
     _this.setData({
       uid: app.signindata.uid,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       avatarUrl: app.signindata.avatarUrl,
     });

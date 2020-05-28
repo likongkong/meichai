@@ -50,7 +50,7 @@ Page({
     point:0,
     // 点击请求判断防止多次提交
     clicktherequestiftr: true,  
-    B: false, C: false,
+    B: false,
     temporary_store_id:'',
     // 判断美拆 or 店铺
     iftrstor:0,
@@ -61,7 +61,6 @@ Page({
     isIphoneX: app.signindata.isIphoneX,
     // 随机显示复制背景颜色
     wxcopybg:1 ,
-    grocerystoreiftr: app.signindata.grocerystoreiftr || 'off', 
     //公告标题
     notice_title: "",
     //公告链接
@@ -71,7 +70,6 @@ Page({
     defaultinformation: "",
     // 晒单数量
     dryinglistnum: 0,
-    isStore: app.signindata.isStore,
     isProduce: app.signindata.isProduce,
     c_title: '',
     c_arrow: true,
@@ -210,8 +208,6 @@ Page({
       store_id: options.store_id || 0,
       uid: app.signindata.uid,
       store_id: app.signindata.store_id || 0,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
     });
  
@@ -223,15 +219,13 @@ Page({
     _this.setData({
       uid: app.signindata.uid,
       store_id: app.signindata.store_id || 0,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
     });  
     _this.setData({
       bothidden: true
     }); 
     wx.hideLoading()    
-    _this.setData({ B: true, C: false, iftr_wx: true });  
+    _this.setData({ B: true, iftr_wx: true });  
 
     var q = Dec.Aese('mod=getinfo&operation=myorder&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
     wx.request({
@@ -364,8 +358,6 @@ Page({
           _this.data.loginid = app.signindata.loginid;
           _this.setData({
             uid: app.signindata.uid,
-            grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-            isStore: app.signindata.isStore,
             isProduce: app.signindata.isProduce,
             signinlayer: true,
             tgabox: false

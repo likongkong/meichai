@@ -228,8 +228,6 @@ Page({
           _this.setData({
             uid: app.signindata.uid,
             avatarUrl: app.signindata.avatarUrl,
-            grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-            isStore: app.signindata.isStore,
             isProduce: app.signindata.isProduce,
           });
           // 判断是否登录

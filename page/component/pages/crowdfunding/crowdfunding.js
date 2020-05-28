@@ -471,8 +471,6 @@ Page({
     app.signindata.activity_id = options.aid || 0;
     _this.setData({
       uid: app.signindata.uid,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       avatarUrl: app.signindata.avatarUrl,
       id:options.aid,
@@ -490,8 +488,6 @@ Page({
           _this.setData({
             uid: app.signindata.uid,
             avatarUrl: app.signindata.avatarUrl,
-            grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-            isStore: app.signindata.isStore,
             isProduce: app.signindata.isProduce,
             signinlayer: true,
             tgabox: false
@@ -547,8 +543,6 @@ Page({
             _this.setData({
               uid: app.signindata.uid,
               avatarUrl: app.signindata.avatarUrl,
-              grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-              isStore: app.signindata.isStore,
               isProduce: app.signindata.isProduce,
             });
           // 判断是否登录
@@ -580,8 +574,6 @@ Page({
     _this.data.openid = app.signindata.openid;
     _this.setData({
       uid: app.signindata.uid,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       avatarUrl: app.signindata.avatarUrl,
     });

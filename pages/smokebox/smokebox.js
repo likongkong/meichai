@@ -19,8 +19,6 @@ Page({
     uid: app.signindata.uid,
     openid: app.signindata.openid,
     avatarUrl: app.signindata.avatarUrl,
-    grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-    isStore: app.signindata.isStore,
     isProduce: app.signindata.isProduce,
     // 适配苹果X
     isIphoneX: app.signindata.isIphoneX,
@@ -265,6 +263,7 @@ Page({
     var _this = this;
     if (_this.data.awardfront != _this.data.awardback) {
       _this.data.intervaltimer = setInterval(function () {
+        console.log('startDraw------>clickCard')
         _this.clickCard()
       }.bind(_this), 2000);
     }
@@ -352,8 +351,6 @@ Page({
     _this.data.openid = app.signindata.openid;
     _this.setData({
       uid: app.signindata.uid,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       avatarUrl: app.signindata.avatarUrl,
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
@@ -372,8 +369,6 @@ Page({
           _this.setData({
             uid: app.signindata.uid,
             avatarUrl: app.signindata.avatarUrl,
-            grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-            isStore: app.signindata.isStore,
             isProduce: app.signindata.isProduce,
             signinlayer: true,
             isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
@@ -430,8 +425,6 @@ Page({
             _this.setData({
               uid: app.signindata.uid,
               avatarUrl: app.signindata.avatarUrl,
-              grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-              isStore: app.signindata.isStore,
               isProduce: app.signindata.isProduce,
               isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
             });
@@ -464,8 +457,6 @@ Page({
     _this.data.perspcardata = app.signindata.perspcardata || '';
     _this.setData({
       uid: app.signindata.uid,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       avatarUrl: app.signindata.avatarUrl,
       automat: app.signindata.automat || {
@@ -584,7 +575,6 @@ Page({
     //   viewWidth = 500 * ratio;
     //   viewHeight = 500;
     // };
-    console.log('$height=================', viewHeight)
     if (viewHeight>400){
        this.setData({
          imgwidth:300
@@ -952,7 +942,7 @@ Page({
 
   ubpackbox: function () {
     var _this = this
-
+    console.log('ishowaward================ishowaward支付完成显示重抽')
     _this.setData({
       ishowaward: true,
       ishowguess: false,
@@ -1615,6 +1605,9 @@ Page({
                 if (_this.data.iswholePay) {
                   _this.getPatchInfo();
                 } else {
+
+                  clearInterval(_this.data.timer);
+
                   wx.hideLoading();
                   // _this.instantopen()
                   _this.ubpackbox()
@@ -1635,10 +1628,9 @@ Page({
                 ishowcard: false,
                 desc: ''
               })
+
             },
-            'complete': function (res) {
-              // 订阅授权
-            }
+            'complete': function (res) {}
           })
         } else {
           // 提交订单蒙层

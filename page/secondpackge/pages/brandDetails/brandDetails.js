@@ -188,8 +188,6 @@ Page({
           _this.setData({
             uid: app.signindata.uid,
             avatarUrl: app.signindata.avatarUrl,
-            grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-            isStore: app.signindata.isStore,
             isProduce: app.signindata.isProduce,
             signinlayer: true,
             isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
@@ -241,8 +239,6 @@ Page({
             _this.setData({
               uid: app.signindata.uid,
               avatarUrl: app.signindata.avatarUrl,
-              grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-              isStore: app.signindata.isStore,
               isProduce: app.signindata.isProduce,
               isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
             });
@@ -272,8 +268,6 @@ Page({
     _this.data.openid = app.signindata.openid;
     _this.setData({
       uid: app.signindata.uid,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       avatarUrl: app.signindata.avatarUrl,
     });

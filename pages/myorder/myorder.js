@@ -12,7 +12,6 @@ Page({
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
     windowHeight: app.signindata.windowHeight || 600,
-    isStore: app.signindata.isStore,
     isProduce: app.signindata.isProduce,
     // loading 加载
     headhidden: true, 
@@ -195,9 +194,7 @@ Page({
       blackCity: app.signindata.blackCity,
       spreadEntry: app.signindata.spreadEntry,
       windowHeight: app.signindata.windowHeight || 600,
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off'
     });
     // 调取数据
     this.datatransfer(); 
@@ -612,7 +609,6 @@ Page({
             uid: app.signindata.uid,
             openid: app.signindata.openid,
             store_id: app.signindata.store_id || 0,
-            grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
             blackCity: app.signindata.blackCity,
             spreadEntry: app.signindata.spreadEntry,
           });

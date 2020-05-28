@@ -12,8 +12,6 @@ Page({
     uid: app.signindata.uid,
     openid: app.signindata.openid,
     avatarUrl: app.signindata.avatarUrl,
-    grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-    isStore: app.signindata.isStore,
     isProduce: app.signindata.isProduce,
     // 适配苹果X
     isIphoneX: app.signindata.isIphoneX,
@@ -43,11 +41,8 @@ Page({
       loginid: app.signindata.loginid,
       uid: app.signindata.uid,
       openid: app.signindata.openid,
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       spreadEntry: app.signindata.spreadEntry,
-      // 是否显示杂货铺
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
       // 适配苹果X 
       isIphoneX: app.signindata.isIphoneX
     });
@@ -60,11 +55,8 @@ Page({
             loginid: app.signindata.loginid,
             uid: app.signindata.uid,
             openid: app.signindata.openid,
-            isStore: app.signindata.isStore,
             isProduce: app.signindata.isProduce,
             spreadEntry: app.signindata.spreadEntry,
-            // 是否显示杂货铺
-            grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
             // 适配苹果X 
             isIphoneX: app.signindata.isIphoneX
           });
@@ -94,11 +86,8 @@ Page({
       loginid: app.signindata.loginid,
       uid: app.signindata.uid,
       openid: app.signindata.openid,
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       spreadEntry: app.signindata.spreadEntry,
-      // 是否显示杂货铺
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
       // 适配苹果X 
       isIphoneX: app.signindata.isIphoneX
     });
@@ -144,8 +133,6 @@ Page({
             _this.setData({
               uid: app.signindata.uid,
               avatarUrl: app.signindata.avatarUrl,
-              grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-              isStore: app.signindata.isStore,
               isProduce: app.signindata.isProduce,
             });
           // 判断是否登录

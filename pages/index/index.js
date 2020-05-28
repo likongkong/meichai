@@ -81,7 +81,6 @@ Page({
     jumpdevanningiftr:false,
     // 晒单数量
     dryinglistnum:0,
-    isStore: app.signindata.isStore,
     isProduce: app.signindata.isProduce,
     ceshilist:[],
     npswtab:1, // 1 新品 2 热销
@@ -682,7 +681,6 @@ Page({
     };
     _this.setData({
       uid: app.signindata.uid,
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       defaultinformation:app.signindata.defaultinformation||'',
       headhidden: true,
@@ -1006,7 +1004,6 @@ Page({
       headhidden: false,
       judgeprof: options.judgeprof||1,
       uid: app.signindata.uid,
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       defaultinformation: app.signindata.defaultinformation || ''
     }); 
@@ -1034,7 +1031,6 @@ Page({
           _this.data.openid = app.signindata.openid;
           _this.setData({
             uid: app.signindata.uid,
-            isStore: app.signindata.isStore,
             isProduce: app.signindata.isProduce,
             defaultinformation: app.signindata.defaultinformation||'',
             tgabox: false

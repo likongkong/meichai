@@ -174,8 +174,6 @@ Page({
     welvalue:false,
     // 晒单数量
     dryinglistnum: 0,
-    
-    isStore: app.signindata.isStore,
     isProduce: app.signindata.isProduce,
     product: '',
     // 是否显示购买
@@ -2198,7 +2196,6 @@ Page({
       uid: app.signindata.uid,
       openid:app.signindata.openid,
       avatarUrl: app.signindata.avatarUrl,
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       isShareFun: app.signindata.isShareFun,
       signinlayer: true,
@@ -2556,7 +2553,6 @@ Page({
       uid: app.signindata.uid,
       openid: app.signindata.openid,
       avatarUrl: app.signindata.avatarUrl,
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       isShareFun: app.signindata.isShareFun
     });

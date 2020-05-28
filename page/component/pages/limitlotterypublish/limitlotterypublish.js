@@ -161,7 +161,6 @@ Page({
       _this.data.openid = app.signindata.openid;
       _this.setData({
         uid: app.signindata.uid,
-        grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
         isShareFun: app.signindata.isShareFun,
       });
     } else {
@@ -169,7 +168,6 @@ Page({
       _this.data.openid = app.signindata.openid;
       _this.setData({
         uid: app.signindata.uid,
-        grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
         isShareFun: app.signindata.isShareFun,
       });
     }
@@ -183,8 +181,6 @@ Page({
           _this.setData({
             uid: app.signindata.uid,
             avatarUrl: app.signindata.avatarUrl,
-            grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-            isStore: app.signindata.isStore,
             isProduce: app.signindata.isProduce,
             signinlayer: true,
           });
@@ -234,9 +230,7 @@ Page({
     _this.data.openid = app.signindata.openid;
     _this.setData({
       uid: app.signindata.uid,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
       isShareFun: app.signindata.isShareFun,
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
     });
     wx.hideShareMenu();

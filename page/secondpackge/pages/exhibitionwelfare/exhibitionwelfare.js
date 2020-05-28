@@ -234,7 +234,6 @@ Page({
       _this.data.openid = app.signindata.openid;
       _this.setData({
         uid: app.signindata.uid,
-        grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
         isShareFun: app.signindata.isShareFun,
         referee: _this.getSearchString('referee', scene) || 0,
         mshareId: _this.getSearchString('share_id', scene) || 0,
@@ -245,7 +244,6 @@ Page({
       _this.data.openid = app.signindata.openid;
       _this.setData({
         uid: app.signindata.uid,
-        grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
         isShareFun: app.signindata.isShareFun,
         referee: options.referee || 0,
         mshareId: options.share_id || 0,
@@ -261,8 +259,6 @@ Page({
           _this.setData({
             uid: app.signindata.uid,
             avatarUrl: app.signindata.avatarUrl,
-            grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-            isStore: app.signindata.isStore,
             isProduce: app.signindata.isProduce,
             signinlayer: true,
             isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
@@ -314,8 +310,6 @@ Page({
             _this.setData({
               uid: app.signindata.uid,
               avatarUrl: app.signindata.avatarUrl,
-              grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-              isStore: app.signindata.isStore,
               isProduce: app.signindata.isProduce,
               isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
             });
@@ -346,8 +340,6 @@ Page({
     _this.data.openid = app.signindata.openid;
     _this.setData({
       uid: app.signindata.uid,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       avatarUrl: app.signindata.avatarUrl,
     });

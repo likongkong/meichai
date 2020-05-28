@@ -79,7 +79,6 @@ Page({
           _this.data.openid = app.signindata.openid,
           _this.setData({
             uid: app.signindata.uid,
-            grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
           });
           // 判断是否登录
           if (_this.data.loginid != '' && _this.data.uid != '') {

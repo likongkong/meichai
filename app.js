@@ -30,8 +30,6 @@ App({
     channel: '',
     // 判断跳哪个首页
     last_store_id: 0,
-    // 判断杂货铺开店提示
-    iftr_sgr: 0,
     iftr_mc: false,
     // 版本号
     versionnumber:Dec.versionnumber,
@@ -39,8 +37,6 @@ App({
     isIphoneX: false,
     // 判断是ios还是android  ios:true, android:false
     iftriosorand: true,
-    // 判断是否显示店铺
-    grocerystoreiftr: 'off',
     // 用户注册统计
     token: "",
     // 用户头像图片
@@ -58,8 +54,6 @@ App({
     defaultinformation: '',
     isNewer: false,
     freeOvertime: 0,
-    // 是否有店铺入口
-    isStore: false,
     tid: 0,
     // 是否开启了分享功能
     isShareFun: true,
@@ -90,8 +84,9 @@ App({
     isBlindBoxDefaultAddress: false,
     // 授权图片
     tgaimg: 'https://www.51chaidan.com/images/default/openscreen.jpg',
-    // 是否能进入展会
+    // 服务器随机数
     randommaximum:20,
+    // 是否能进入展会
     isOpenToyShow:false, // 是否开启展会
     statusBarHeightMc:0
   },
@@ -135,11 +130,10 @@ App({
                   // 是否开启展会 
                   _this.signindata.isOpenToyShow = res.data.Info.isOpenToyShow || false;
 
-                  _this.signindata.grocerystoreiftr = res.data.Info.switch || 'off';
+
                   _this.signindata.isNewer = res.data.Info.isNewer || false;
                   _this.signindata.token = '';
                   _this.signindata.freeOvertime = res.data.Info.freeOrder.Info.overtime || 0;
-                  _this.signindata.isStore = res.data.Info.isStore || false;
                   _this.signindata.isAwardOrder = res.data.Info.isAwardOrder || false;
                   _this.signindata.awardOrder = res.data.Info.awardOrder || { Info: { cover: "", isAwardOrder: false, overtime: 0, url: "", } };
 
@@ -165,10 +159,6 @@ App({
                   if (res.data.Info.store) {
                     _this.signindata.store_id = res.data.Info.store.store_id || 0;
                     _this.signindata.last_store_id = res.data.Info.store.last_store_id || 0;
-                    // 判断杂货铺开店提示
-                    if (res.data.Info.store.store_id <= 0) {
-                      _this.signindata.iftr_sgr = 1;
-                    };
                   };
                   var openid = res.data.Info.openid || '';
                   var loginid = res.data.Info.loginid || '';

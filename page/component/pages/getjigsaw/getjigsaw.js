@@ -428,7 +428,6 @@ Page({
             loginid: app.signindata.loginid,
             uid: app.signindata.uid,
             openid: app.signindata.openid,
-            grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
           });
           // 判断是否登录
           if (_this.data.loginid != '' && _this.data.uid != '') {

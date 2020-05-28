@@ -16,8 +16,6 @@ Page({
     uid: app.signindata.uid,
     openid: app.signindata.openid,
     avatarUrl: app.signindata.avatarUrl,
-    grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-    isStore: app.signindata.isStore,
     isProduce: app.signindata.isProduce,
     // 适配苹果X
     isIphoneX: app.signindata.isIphoneX,
@@ -222,8 +220,6 @@ Page({
     _this.data.id = options.id || 0;
     _this.setData({
       uid: app.signindata.uid,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       avatarUrl: app.signindata.avatarUrl,
       referee: options.referee || 0,
@@ -243,8 +239,6 @@ Page({
           _this.setData({
             uid: app.signindata.uid,
             avatarUrl: app.signindata.avatarUrl,
-            grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-            isStore: app.signindata.isStore,
             isProduce: app.signindata.isProduce,
             signinlayer: true,
           });
@@ -297,8 +291,6 @@ Page({
             _this.setData({
               uid: app.signindata.uid,
               avatarUrl: app.signindata.avatarUrl,
-              grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-              isStore: app.signindata.isStore,
               isProduce: app.signindata.isProduce,
             });
           // 判断是否登录
@@ -329,8 +321,6 @@ Page({
     _this.data.perspcardata = app.signindata.perspcardata || '';
     _this.setData({
       uid: app.signindata.uid,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-      isStore: app.signindata.isStore,
       avatarUrl: app.signindata.avatarUrl,
       isProduce: app.signindata.isProduce,
     });

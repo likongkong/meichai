@@ -243,7 +243,6 @@ Page({
     headhiddengeneratePictures:true,
     // 晒单数量
     dryinglistnum: 0,
-    isStore: app.signindata.isStore,
     isProduce: app.signindata.isProduce,
     awatip:false,
     uidid:'',
@@ -1449,7 +1448,6 @@ closefrindcommoni:function(){
       avatarUrl:app.signindata.avatarUrl,
       blackCity: app.signindata.blackCity,
       defaultinformation: app.signindata.defaultinformation || '',
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       isShareFun: app.signindata.isShareFun,
       windowHeight: app.signindata.windowHeight || 600,
@@ -2076,7 +2074,6 @@ closefrindcommoni:function(){
       avatarUrl: app.signindata.avatarUrl,
       blackCity: app.signindata.blackCity,
       defaultinformation: app.signindata.defaultinformation || '',
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       isShareFun: app.signindata.isShareFun,
       windowHeight: app.signindata.windowHeight || 600,
@@ -2156,7 +2153,6 @@ closefrindcommoni:function(){
             avatarUrl: app.signindata.avatarUrl,
             blackCity: app.signindata.blackCity,
             defaultinformation: app.signindata.defaultinformation || '',
-            isStore: app.signindata.isStore,
             isProduce: app.signindata.isProduce,
             isShareFun: app.signindata.isShareFun
           });

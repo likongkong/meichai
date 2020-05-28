@@ -14,9 +14,7 @@ Page({
     openid: app.signindata.openid,
     appNowTime: Date.parse(new Date()),
     // 适配苹果X 
-    isIphoneX: app.signindata.isIphoneX,
-    // 是否显示杂货铺
-    grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',    
+    isIphoneX: app.signindata.isIphoneX,  
     listdata:[],
     shopnum: 0,  
     defaultinformation:'',
@@ -30,7 +28,6 @@ Page({
     locationtitle:'',
     // 晒单数量
     dryinglistnum: 0,
-    isStore: app.signindata.isStore,
     isProduce: app.signindata.isProduce,
     // 是否开启了分享功能
     isShareFun: true,
@@ -156,8 +153,6 @@ Page({
       loginid: app.signindata.loginid,
       uid: app.signindata.uid,
       openid: app.signindata.openid,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       isShareFun: app.signindata.isShareFun
     });
@@ -169,7 +164,6 @@ Page({
             loginid: app.signindata.loginid,
             uid: app.signindata.uid,
             openid: app.signindata.openid,
-            grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
             isShareFun: app.signindata.isShareFun
           });
           // 判断是否登录
@@ -193,8 +187,6 @@ Page({
       loginid: app.signindata.loginid,
       uid: app.signindata.uid,
       openid: app.signindata.openid,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       isShareFun: app.signindata.isShareFun
     });

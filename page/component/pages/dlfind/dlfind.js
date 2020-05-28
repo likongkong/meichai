@@ -14,8 +14,6 @@ Page({
     openid: app.signindata.openid,
     // 适配苹果X 
     isIphoneX: app.signindata.isIphoneX,
-    // 是否显示杂货铺
-    grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
     shopnum: 0,
     // tab  0为热门 1为关注
     cat_id: 2,
@@ -31,7 +29,6 @@ Page({
     appNowTime: Date.parse(new Date()),
     nodataiftr: false,
     videoContext: '',
-    isStore: app.signindata.isStore,
     isProduce: app.signindata.isProduce,
     // 是否开启了分享功能
     isShareFun: true,
@@ -281,9 +278,7 @@ Page({
       loginid: app.signindata.loginid,
       uid: app.signindata.uid,
       openid: app.signindata.openid,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
       user_id: app.signindata.uid,
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       isShareFun: app.signindata.isShareFun,
       topic_id: options.topic_id || 0
@@ -297,7 +292,6 @@ Page({
             loginid: app.signindata.loginid,
             uid: app.signindata.uid,
             openid: app.signindata.openid,
-            grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
             isShareFun: app.signindata.isShareFun
           });
           // 判断是否登录
@@ -367,9 +361,7 @@ Page({
       loginid: app.signindata.loginid,
       uid: app.signindata.uid,
       openid: app.signindata.openid,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
       user_id: app.signindata.uid,
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       isShareFun: app.signindata.isShareFun
     });

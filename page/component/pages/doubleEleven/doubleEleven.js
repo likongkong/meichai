@@ -16,7 +16,6 @@ Page({
     uid: app.signindata.uid,
     openid: app.signindata.openid,
     avatarUrl: app.signindata.avatarUrl,
-    isStore: app.signindata.isStore,
     isProduce: app.signindata.isProduce,
     // 适配苹果X
     isIphoneX: app.signindata.isIphoneX,
@@ -70,7 +69,6 @@ Page({
     _this.data.openid = app.signindata.openid;
     _this.setData({
       uid: app.signindata.uid,
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       avatarUrl: app.signindata.avatarUrl,
       aid: app.signindata.aid,
@@ -88,7 +86,6 @@ Page({
           _this.setData({
             uid: app.signindata.uid,
             avatarUrl: app.signindata.avatarUrl,
-            isStore: app.signindata.isStore,
             isProduce: app.signindata.isProduce,
             aid: app.signindata.aid,
             addressinfo: app.signindata.addressinfo,
@@ -141,7 +138,6 @@ Page({
             _this.setData({
               uid: app.signindata.uid,
               avatarUrl: app.signindata.avatarUrl,
-              isStore: app.signindata.isStore,
               isProduce: app.signindata.isProduce,
               aid: app.signindata.aid,
               addressinfo: app.signindata.addressinfo,
@@ -170,7 +166,6 @@ Page({
     _this.data.openid = app.signindata.openid;
     _this.setData({
       uid: app.signindata.uid,
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       avatarUrl: app.signindata.avatarUrl,
       aid: app.signindata.aid,

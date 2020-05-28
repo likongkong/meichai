@@ -32,7 +32,6 @@ Page({
     defaultinformation: '',
     // 适配苹果X
     isIphoneX: app.signindata.isIphoneX,
-    isStore: app.signindata.isStore,
     isProduce: app.signindata.isProduce,
     isbargain: 1,
     ishare: 1, //共享
@@ -180,7 +179,6 @@ Page({
     _this.data.pushWay = options.pushWay || 0;
     _this.setData({
       uid: app.signindata.uid,
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
     });
 
@@ -233,7 +231,6 @@ Page({
     _this.data.openid = app.signindata.openid;
     _this.setData({
       uid: app.signindata.uid,
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
     });
 

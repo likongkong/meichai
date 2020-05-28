@@ -14,8 +14,6 @@ Page({
     appNowTime: Date.parse(new Date()),
     // 适配苹果X 
     isIphoneX: app.signindata.isIphoneX,
-    // 是否显示杂货铺
-    grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',  
     // 数据 
     listdata:[],
     headhidden:false,
@@ -218,7 +216,6 @@ Page({
             loginid: app.signindata.loginid,
             uid: app.signindata.uid,
             openid: app.signindata.openid,
-            grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
             avatarUrl: app.signindata.avatarUrl,
             isShareFun: app.signindata.isShareFun
           });
@@ -260,9 +257,7 @@ Page({
     _this.data.openid = app.signindata.openid;
     _this.setData({
       uid: app.signindata.uid,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
       isShareFun: app.signindata.isShareFun,
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
     });
     _this.listdata(0);
@@ -304,7 +299,6 @@ Page({
     _this.setData({
       drying_id: options.drying_id||'',
       uid: app.signindata.uid,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
       isShareFun: app.signindata.isShareFun
     });
     wx.getSetting({
@@ -315,7 +309,6 @@ Page({
           _this.data.openid = app.signindata.openid;
           _this.setData({
             uid: app.signindata.uid,
-            grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
             isShareFun: app.signindata.isShareFun
           });
           // 判断是否登录

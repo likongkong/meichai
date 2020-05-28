@@ -55,7 +55,6 @@ Page({
     newcoutitle: '新人礼包',
     // 赠送优惠券弹框是否显示
     newcoupon: false, 
-    isStore: app.signindata.isStore,
     isProduce: app.signindata.isProduce,
     // 晒单数量
     dryinglistnum: 0,
@@ -146,7 +145,6 @@ Page({
       loginid: app.signindata.loginid,
       uid: app.signindata.uid,
       openid: app.signindata.openid,
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       spreadEntry: app.signindata.spreadEntry,
       // 适配苹果X 
@@ -361,7 +359,6 @@ Page({
       loginid: app.signindata.loginid,
       uid: app.signindata.uid,
       openid: app.signindata.openid,
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       spreadEntry: app.signindata.spreadEntry,
       // 适配苹果X 
@@ -375,7 +372,6 @@ Page({
             loginid: app.signindata.loginid,
             uid: app.signindata.uid,
             openid: app.signindata.openid,
-            isStore: app.signindata.isStore,
             isProduce: app.signindata.isProduce,
             spreadEntry: app.signindata.spreadEntry,
             // 适配苹果X 

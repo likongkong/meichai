@@ -28,7 +28,6 @@ Page({
     page:1,
     // 晒单数量
     dryinglistnum: 0,
-    isStore: app.signindata.isStore,
     isProduce: app.signindata.isProduce,
     // 是否开启了分享功能
     isShareFun: true,
@@ -127,7 +126,6 @@ Page({
       openid: app.signindata.openid,
       user_id: options.uid||'',
       nick: options.nick + '的主页',
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       isShareFun: app.signindata.isShareFun
     });
@@ -142,7 +140,6 @@ Page({
       loginid: app.signindata.loginid,
       uid: app.signindata.uid,
       openid: app.signindata.openid,
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       isShareFun: app.signindata.isShareFun
     });

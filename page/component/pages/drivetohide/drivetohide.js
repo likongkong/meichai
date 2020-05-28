@@ -243,7 +243,6 @@ Page({
             _this.setData({
               uid: app.signindata.uid,
               avatarUrl: app.signindata.avatarUrl,
-              isStore: app.signindata.isStore,
               isProduce: app.signindata.isProduce,
             });
           // 判断是否登录
@@ -275,7 +274,6 @@ Page({
     _this.setData({
       uid: app.signindata.uid,
       isShareFun: app.signindata.isShareFun,
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
     });
     _this.listdata(0);
@@ -324,7 +322,6 @@ Page({
           _this.setData({
             uid: app.signindata.uid,
             avatarUrl: app.signindata.avatarUrl,
-            isStore: app.signindata.isStore,
             isProduce: app.signindata.isProduce,
             signinlayer: true,
           });

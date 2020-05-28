@@ -53,7 +53,6 @@ Page({
     addressdata:[],
     tipback:false,
     headhidden:true,
-    isStore: app.signindata.isStore,
     isProduce: app.signindata.isProduce,
     videolist:[],
 
@@ -260,7 +259,6 @@ Page({
     _this.setData({
       uid: app.signindata.uid,
       isShareFun: app.signindata.isShareFun,
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
     });
     _this.listdata();

@@ -19,8 +19,6 @@ Page({
     appNowTime: app.signindata.appNowTime,
     // 适配苹果X 
     isIphoneX: app.signindata.isIphoneX,
-    // 是否显示杂货铺
-    grocerystoreiftr: app.signindata.grocerystoreiftr || 'off', 
     // 公共默认信息
     defaultinformation: app.signindata.defaultinformation,
     shopnum: 0, 
@@ -47,7 +45,6 @@ Page({
     // 晒单数量
     dryinglistnum: 0,
     widthheight:{width:'',height:''},
-    isStore: app.signindata.isStore,
     isProduce: app.signindata.isProduce,
     tabdata:[],
     currencysum:'',
@@ -330,8 +327,6 @@ Page({
     _this.data.openid = app.signindata.openid;
     _this.setData({
       uid: app.signindata.uid,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
     });
     // 购物车数量显示
@@ -353,9 +348,7 @@ Page({
     _this.data.openid = app.signindata.openid;
     _this.setData({
       uid: app.signindata.uid,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
       mylist: mylist||[],
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
     });
     wx.getSetting({
@@ -366,7 +359,6 @@ Page({
           _this.data.openid = app.signindata.openid;
           _this.setData({
             uid: app.signindata.uid,
-            grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
           });
           // 判断是否登录
           if (_this.data.loginid != '' && _this.data.uid != '') {

@@ -241,7 +241,6 @@ Page({
             loginid: app.signindata.loginid,
             uid: app.signindata.uid,
             openid: app.signindata.openid,
-            grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
             avatarUrl: app.signindata.avatarUrl,
             isShareFun: app.signindata.isShareFun,
             isProduce: app.signindata.isProduce,

@@ -20,7 +20,6 @@ Page({
     openid: app.signindata.openid,
     spreadEntry: app.signindata.spreadEntry,
     appNowTime: Date.parse(new Date()),
-    isStore: app.signindata.isStore,
     isProduce: app.signindata.isProduce,
     // 适配苹果X 
     isIphoneX: app.signindata.isIphoneX,
@@ -617,7 +616,6 @@ Page({
       uid: app.signindata.uid,
       openid: app.signindata.openid,
       spreadEntry: app.signindata.spreadEntry,
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       isHellBlackUser: app.signindata.isHellBlackUser,
     });

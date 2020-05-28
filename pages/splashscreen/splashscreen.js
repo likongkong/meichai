@@ -155,17 +155,6 @@ Page({
         }) 
       };
       app.signindata.iftr_mc=true;
-      // if (app.signindata.store_id > 0 || app.signindata.last_store_id == 0) {
-      //     wx.reLaunch({
-      //       url: "/pages/index/index"
-      //     }) 
-      //   app.signindata.iftr_mc=true;
-      // } else {
-      //     wx.reLaunch({
-      //       url: "/pages/index/index"
-      //     })
-      //   app.signindata.iftr_mc = false;
-      // }
     }else{
       var scene = _this.data.scene;
       var goods_id = _this.getSearchString('goods_id', scene)||0;

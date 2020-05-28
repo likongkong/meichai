@@ -17,8 +17,6 @@ Page({
     appNowTime: Date.parse(new Date()),
     // 适配苹果X 
     isIphoneX: app.signindata.isIphoneX,
-    // 是否显示杂货铺
-    grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
 
     c_title: '签到领福利',
     c_arrow: true,
@@ -112,8 +110,6 @@ Page({
             _this.setData({
               uid: app.signindata.uid,
               avatarUrl: app.signindata.avatarUrl,
-              grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-              isStore: app.signindata.isStore,
               isProduce: app.signindata.isProduce,
             });
           // 判断是否登录
@@ -149,7 +145,6 @@ Page({
       _this.data.openid = app.signindata.openid;
       _this.setData({
         uid: app.signindata.uid,
-        grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
         isShareFun: app.signindata.isShareFun,
         id: _this.getSearchString('id', scene) || 0,
         referee: _this.getSearchString('referee', scene) || 0,
@@ -162,7 +157,6 @@ Page({
       _this.data.openid = app.signindata.openid;
       _this.setData({
         uid: app.signindata.uid,
-        grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
         isShareFun: app.signindata.isShareFun,
         id: options.id || 0,
         referee: options.referee || 0,
@@ -183,8 +177,6 @@ Page({
           _this.setData({
             uid: app.signindata.uid,
             avatarUrl: app.signindata.avatarUrl,
-            grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-            isStore: app.signindata.isStore,
             isProduce: app.signindata.isProduce,
             signinlayer: true,
           });
@@ -213,9 +205,7 @@ Page({
     _this.data.openid = app.signindata.openid;
     _this.setData({
       uid: app.signindata.uid,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
       isShareFun: app.signindata.isShareFun,
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
     });
 

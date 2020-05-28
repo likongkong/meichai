@@ -443,7 +443,6 @@ Page({
           _this.data.openid = app.signindata.openid;
           _this.setData({
             uid: app.signindata.uid,
-            grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
             isShareFun: app.signindata.isShareFun
           });
           // 判断是否登录

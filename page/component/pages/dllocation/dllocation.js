@@ -16,8 +16,6 @@ Page({
     appNowTime: Date.parse(new Date()),
     // 适配苹果X 
     isIphoneX: app.signindata.isIphoneX,
-    // 是否显示杂货铺
-    grocerystoreiftr: app.signindata.grocerystoreiftr || 'off', 
     listdata:[],
     page:1,
 
@@ -35,7 +33,6 @@ Page({
       loginid: app.signindata.loginid,
       uid: app.signindata.uid,
       openid: app.signindata.openid,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
     });
     // 获取当前的地理位置
     wx.getSetting({

@@ -46,9 +46,6 @@ Page({
     //新头像集合
     newlist: '',
     olderlist: '',
-
-    // 是否显示杂货铺
-    grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
     isProduce: app.signindata.isProduce,
     // 公共默认信息
     defaultinformation: '',
@@ -179,7 +176,6 @@ Page({
             uid: app.signindata.uid,
             openid: app.signindata.openid,
             avatarUrl: app.signindata.avatarUrl,
-            grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
             isProduce: app.signindata.isProduce,
           });
           // 判断是否登录

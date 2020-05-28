@@ -20,12 +20,9 @@ Page({
     openid: app.signindata.openid,
     spreadEntry: app.signindata.spreadEntry,
     appNowTime: Date.parse(new Date()),
-    isStore: app.signindata.isStore,
     isProduce: app.signindata.isProduce,
     // 适配苹果X 
     isIphoneX: app.signindata.isIphoneX,
-    // 是否显示杂货铺
-    grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
     tgabox: false,
     // tab 数据
     scrdata: [],
@@ -475,8 +472,6 @@ Page({
       uid: app.signindata.uid,
       openid: app.signindata.openid,
       spreadEntry: app.signindata.spreadEntry,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       c_title: title,
     });
@@ -520,7 +515,6 @@ Page({
       uid: app.signindata.uid,
       openid: app.signindata.openid,
       spreadEntry: app.signindata.spreadEntry,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
       cart_id: options.cart_id || 0,
       signtype: options.type || 0,
       activity_id: options.activity_id || 0,
@@ -542,7 +536,6 @@ Page({
             uid: app.signindata.uid,
             openid: app.signindata.openid,
             spreadEntry: app.signindata.spreadEntry,
-            grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
           });
           // 判断是否登录
           if (_this.data.loginid != '' && _this.data.uid != '') {
@@ -614,7 +607,6 @@ Page({
             loginid: app.signindata.loginid,
             uid: app.signindata.uid,
             openid: app.signindata.openid,
-            grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
             avatarUrl: app.signindata.avatarUrl,
             isShareFun: app.signindata.isShareFun
           });

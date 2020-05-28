@@ -19,8 +19,6 @@ Page({
     isIphoneX: app.signindata.isIphoneX,
     defaultinformation: '',
     wxnum: '',
-    // 是否显示杂货铺
-    grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
     // 数据 
     listdata: [],
     headhidden: false,
@@ -797,8 +795,6 @@ Page({
     _this.data.openid = app.signindata.openid;
     _this.setData({
       uid: app.signindata.uid,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       avatarUrl: app.signindata.avatarUrl,
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
@@ -816,8 +812,6 @@ Page({
           _this.setData({
             uid: app.signindata.uid,
             avatarUrl: app.signindata.avatarUrl,
-            grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-            isStore: app.signindata.isStore,
             isProduce: app.signindata.isProduce,
             isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
             signinlayer: true,
@@ -883,8 +877,6 @@ Page({
             _this.setData({
               uid: app.signindata.uid,
               avatarUrl: app.signindata.avatarUrl,
-              grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-              isStore: app.signindata.isStore,
               isProduce: app.signindata.isProduce,
               isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
             });
@@ -926,8 +918,6 @@ Page({
     _this.data.openid = app.signindata.openid;
     _this.setData({
       uid: app.signindata.uid,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       avatarUrl: app.signindata.avatarUrl,
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,

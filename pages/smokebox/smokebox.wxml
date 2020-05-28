@@ -554,7 +554,7 @@
 		</view>
 
 	</view>
-
+ 
 	<!-- ishowaward -->
 	<view wx:if='{{ishowaward}}' style='width:100%;height:100%;position:fixed;top:0px;left:0;z-index:13;'>
 		<view class='bgstyle' style="background:#E8E8E9;opacity:1;top:{{statusBarHeightMc}}px" catchtouchmove="myCatchTouch" data-type='1' catchtap='closeaward'>

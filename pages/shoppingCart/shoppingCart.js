@@ -146,7 +146,6 @@ Page({
     //  店铺购物车是否显示导航栏
     navigationiftr: 0,
     temporary_store_id: 0,
-    grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
     // 底部弹框列表
     bulletlist:[],
     // 判断底部列表是否显示
@@ -160,7 +159,6 @@ Page({
     unavailablearr: [],
     // 晒单数量
     dryinglistnum: 0,
-    isStore: app.signindata.isStore,
     isProduce: app.signindata.isProduce,
     spreadEntry: app.signindata.spreadEntry,
     // 领奖列表
@@ -868,8 +866,6 @@ Page({
       uid: app.signindata.uid,
       openid: app.signindata.openid,
       store_id: app.signindata.store_id || 0,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       spreadEntry: app.signindata.spreadEntry,
       // 公共默认信息
@@ -968,8 +964,6 @@ Page({
       uid: app.signindata.uid,
       openid: app.signindata.openid,
       store_id: app.signindata.store_id || 0,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-      isStore: app.signindata.isStore,
       isProduce: app.signindata.isProduce,
       spreadEntry: app.signindata.spreadEntry, 
       isHellBlackUser: app.signindata.isHellBlackUser,   
@@ -1050,8 +1044,6 @@ Page({
             uid: app.signindata.uid,
             openid: app.signindata.openid,
             store_id: app.signindata.store_id || 0,
-            grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
-            isStore: app.signindata.isStore,
             isProduce: app.signindata.isProduce,
             spreadEntry: app.signindata.spreadEntry,
             signinlayer: true,

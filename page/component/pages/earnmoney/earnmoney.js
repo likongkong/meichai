@@ -15,8 +15,6 @@ Page({
     appNowTime: Date.parse(new Date()),
     // 适配苹果X 
     isIphoneX: app.signindata.isIphoneX,
-    // 是否显示杂货铺
-    grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',  
     tgabox:false,
     listdata:[],
     emtabnum:1,
@@ -56,7 +54,6 @@ Page({
       loginid: app.signindata.loginid,
       uid: app.signindata.uid,
       openid: app.signindata.openid,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
     });
     // 判断是否登录
     if (_this.data.loginid != '' && _this.data.uid != '') {
@@ -71,7 +68,6 @@ Page({
             loginid: app.signindata.loginid,
             uid: app.signindata.uid,
             openid: app.signindata.openid,
-            grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
           });
           // 判断是否登录
           if (_this.data.loginid != '' && _this.data.uid != '') {
@@ -94,7 +90,6 @@ Page({
       loginid: app.signindata.loginid,
       uid: app.signindata.uid,
       openid: app.signindata.openid,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
     });
     _this.listdata(0);
     _this.stayshipped();

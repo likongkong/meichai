@@ -443,9 +443,7 @@ Page({
       windowHeight: app.signindata.windowHeight || 600,
       comdata:{},
       isProduce: app.signindata.isProduce,
-      grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
       isShareFun: app.signindata.isShareFun,
-      isStore: app.signindata.isStore,
     });
     var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
     var q = Dec.Aese('mod=getinfo&operation=orderdetail&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&oid=' + _this.data.oid + '&blackCity=' + _this.data.blackCity);
@@ -553,7 +551,6 @@ Page({
             loginid: app.signindata.loginid,
             uid: app.signindata.uid,
             openid: app.signindata.openid,
-            grocerystoreiftr: app.signindata.grocerystoreiftr || 'off',
             blackCity: app.signindata.blackCity,
           });
           // 判断是否登录
