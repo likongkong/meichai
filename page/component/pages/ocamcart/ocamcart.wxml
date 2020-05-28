@@ -109,10 +109,7 @@
 </view>
 
 
-
-
-
-<view style='width:100%;position:fixed;left:0;background:#fff;bottom:110rpx;z-index:11;'>
+<view style='width:100%;position:fixed;left:0;background:#fff;bottom:{{isIphoneX?"130":"110"}}rpx;z-index:11;'>
 
   <view style="width:100%;height:134rpx;background:#5C5B5B;border-radius:60rpx;color:#fff;" catchtap="showCart">
 

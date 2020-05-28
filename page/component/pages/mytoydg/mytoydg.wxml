@@ -46,7 +46,7 @@
 </view>
 
 
-<view  class='mtdbotbut' style='border:0;' catchtap='immeddelfunone'>
+<view  class='mtdbotbut' style='border:0;bottom:{{isIphoneX?"130":"110"}}rpx;' catchtap='immeddelfunone'>
     <view style='border:2rpx solid #0076ff;width:90%;height:60rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;text-align:center;line-height:60rpx;border-radius:6rpx;'>立即发货</view>
 </view>
 
