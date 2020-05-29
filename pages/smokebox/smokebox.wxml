@@ -15,7 +15,7 @@
     <view class="{{showClass ? 'backm' : 'back'}} card-item">反面</view>
   </view>
 </view> -->
- 
+
 <!-- 全局父view -->
 <view style='width:100%;min-height:100%;background:{{pageBg}};position:relative;{{iftrdetailpagetwo?"height:80%;position:fixed;top:0;left:0;right:0;bottom:0;overflow:hidden;":""}}'>
 
@@ -48,7 +48,7 @@
 						<block wx:for="{{item.infoHide}}" wx:key='key'>
 							<swiper-item>
 								<view style='width:{{hidewidth}}rpx;height:{{hideheight}}rpx;border:5rpx solid #e94f57;margin:0 auto;'>
-									<image style='width:{{hidewidth}}rpx;display:block;' data-hidewidth='{{hidewidth}}' data-hideheight='{{hideheight}}' bindload='imageLoadhide' mode="widthFix" src='{{zdyurl + item.img}}'></image>
+									<image style='width:{{hidewidth}}rpx;display:block;' bindload='imageLoadhide' mode="widthFix" src='{{zdyurl + item.img}}'></image>
 								</view>
 							</swiper-item>
 						</block>
