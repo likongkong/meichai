@@ -35,7 +35,7 @@
 
 		<swiper bindanimationfinish="changeGoodsSwip" current="{{goodsIndex}}" class="swiper" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450" wx:if='{{isProduce}}'>
 			<swiper-item wx:for="{{movies}}" wx:key="key">
-				<image src="{{item.image}}?imageMogr2/thumbnail/x800" class="slide-image" mode="aspectFill" data-item_type='{{item.item_type}}' data-href='{{item.href}}' bindtap='jumpbanner' data-imgurl='{{item.image}}' style='position:relative;'>
+				<image src="{{item.image}}?imageMogr2/thumbnail/x800" class="slide-image" mode="aspectFill" data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}' bindtap='jumpbanner' data-imgurl='{{item.image}}' style='position:relative;'>
 				</image>
 			</swiper-item>
 		</swiper>
@@ -378,7 +378,7 @@
 								<view class='disanum_sb_txtone  multilineellipsis' style='color:#666;max-height:70rpx;'>{{ww.goods_name}}</view>
 								<view class='disanum_sb_txt specialellipsis'>￥{{ww.shop_price}}{{ww.gsale_unit}}</view>
 							</view>
-							<view class='disanum_scr_box' style='height:200rpx;' catchtap='newpsellwellfun' data-href='{{item.href}}' data-title='{{item.title}}'>
+							<view class='disanum_scr_box' style='height:200rpx;' catchtap='newpsellwellfun' data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}'>
 									<view class='disanum_stxt'>
 										<view class='disanum_stxtd' style='line-height:120rpx;'>查 看</view>
 										<view class='disanum_stxtd' style='line-height:40rpx;'>全 部</view>

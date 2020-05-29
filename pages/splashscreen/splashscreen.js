@@ -99,12 +99,13 @@ Page({
     this.onLoadfun();
   },
   onLoad: function (options) {
+    
     var nowTime = Date.parse(new Date());//当前时间戳
-    // var imgnum = Math.floor(Math.random() * 180) || 0;
-    // console.log('imgnum==============================',imgnum)
-    // var imgUrl = 'https://cdn.51chaidan.com/images/openscreen/openscreen'+imgnum+'.jpg?time=' + nowTime;
+    var imgnum = Math.floor(Math.random() * 3) || 0;
+    console.log('imgnum==============================',imgnum)
+    var imgUrl = 'https://cdn.51chaidan.com/images/openscreen/openscreen'+imgnum+'.jpg?time=' + nowTime;
 
-    var imgUrl = 'https://cdn.51chaidan.com/images/openscreen/openscreen.jpg?time=' + nowTime;
+    // var imgUrl = 'https://cdn.51chaidan.com/images/openscreen/openscreen.jpg?time=' + nowTime;
 
     var _this = this;
     _this.setData({

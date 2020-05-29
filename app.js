@@ -214,7 +214,7 @@ App({
   // 跳转商品详情页
   detailspage: function (gid) {
     if (gid) {
-      wx.navigateTo({    // 商品详情页
+      wx.navigateTo({
         url: "/pages/detailspage/detailspage?gid=" + gid
       });
     };

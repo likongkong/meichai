@@ -191,7 +191,7 @@ Page({
     var whref = w.currentTarget.dataset.href || w.target.dataset.href;
     var item_type = w.currentTarget.dataset.item_type || w.target.dataset.item_type||0;
     var imgurl = w.currentTarget.dataset.imgurl || w.target.dataset.imgurl || '';
-    var wname = '';
+    var wname = w.currentTarget.dataset.title || w.target.dataset.title || '美拆'; 
     // 公共跳转
     this.comjumpwxnav(item_type, whref, wname, imgurl);
 
@@ -219,8 +219,9 @@ Page({
       // url: "/page/component/pages/drivetohidehome/drivetohidehome"
       // url: "/page/component/pages/exhibition/exhibition"
       // url: "/page/component/pages/exhibitiondetail/exhibitiondetail?id=43161"
-      url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
-      // url: "/pages/detailspage/detailspage?gid=33309"
+      // url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
+      // url: "/page/secondpackge/pages/brandDetails/brandDetails?id=140"
+      url: "/pages/detailspage/detailspage?gid=33309"
       // url: "/pages/detailspage/detailspage?gid=331603"
       // url: "/page/component/pages/playgrasslist/playgrasslist"
       
@@ -445,6 +446,15 @@ Page({
           _this.setData({ jumpdevanningiftr: false });
         }
       });
+    } else if (item_type == 9014) { 
+      wx.navigateTo({
+        url: "/page/component/pages/newpsellwell/newpsellwell?" + whref + '&title=' + wname,
+        complete: function () {
+          _this.setData({ jumpdevanningiftr: false });
+        }
+      });
+    }else{
+      app.showToastC('请更新至最新版本');
     };
 
     _this.setData({ jumpdevanningiftr: false, indexelafra: false, index_ela_fra:false });
@@ -1525,11 +1535,19 @@ Page({
     })
   },
   newpsellwellfun:function(w){
+    var item_type = w.currentTarget.dataset.item_type || w.target.dataset.item_type || 0;
     var href = w.currentTarget.dataset.href || w.target.dataset.href || 0;
     var title = w.currentTarget.dataset.title || w.target.dataset.title || '';
-    wx.navigateTo({
-      url: "/page/component/pages/newpsellwell/newpsellwell?" + href + '&title=' + title,
-    })
+    var imgurl = '';
+    if(item_type==9014){
+      // 公共跳转
+      this.comjumpwxnav(item_type, href, title, imgurl);
+    }else{
+      wx.navigateTo({
+        url: "/page/component/pages/newpsellwell/newpsellwell?" + href + '&title=' + title,
+      })
+    }
+
   },
   // 计算图片大小
   imageLoadad: function (e) {

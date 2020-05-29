@@ -610,7 +610,7 @@ Page({
       },
 
       success: function (res) {
-        console.log(res)
+        console.log('getInfo======',res)
         wx.stopPullDownRefresh();
         _this.data.isloadfun = true
         wx.stopPullDownRefresh()
@@ -1602,16 +1602,19 @@ Page({
                   app.showToastC('购买成功');
                 }
 
+                wx.hideLoading();
                 if (_this.data.iswholePay) {
                   _this.getPatchInfo();
                 } else {
 
-                  clearInterval(_this.data.timer);
-
-                  wx.hideLoading();
+                  // clearInterval(_this.data.timer);
+                  
                   // _this.instantopen()
+                  
+
                   _this.ubpackbox()
                   _this.queueup(2, 6)
+
                   setTimeout(function () {
                     _this.getInfo()
                   }, 3000)
@@ -1770,6 +1773,7 @@ Page({
       ratio = $width / $height;
     var viewHeight = 65,
       viewWidth = 65 * ratio;
+      
     _this.setData({
       hideheight: 65,
       hidewidth: viewWidth,
