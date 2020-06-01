@@ -3,7 +3,7 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 <view style="height:{{windowHeight}}px" class="fullviewBox">
-  <image class="bgimg" src="{{bgimg}}" mode="widthFix"></image>
+  <image class="bgimg" src="{{bgimg}}" mode="aspectFit"></image>
   <view class="fullview" bindtouchmove="handletouchmove" bindtouchstart="handletouchstart"> 
     <block wx:for="{{fullview}}" wx:key='key'>
       <view class="{{item.active?'active':''}} turntable">

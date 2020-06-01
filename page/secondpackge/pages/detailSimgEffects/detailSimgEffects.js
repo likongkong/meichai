@@ -13,16 +13,6 @@ Page({
     c_backcolor: '#fff',
     txtcolor:'#000000',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
-    images:[
-      {active:true,img:'https://cdn.shopify.com/s/files/1/0701/0143/products/Death_Milk_WarmThoughts_Turnarounds_01_800x.png?v=1589337531'},
-      {active:false,img:'https://cdn.shopify.com/s/files/1/0701/0143/products/Death_Milk_WarmThoughts_Turnarounds_08_800x.png?v=1589337531'},
-      {active:false,img:'https://cdn.shopify.com/s/files/1/0701/0143/products/Death_Milk_WarmThoughts_Turnarounds_07_800x.png?v=1589337531'},
-      {active:false,img:'https://cdn.shopify.com/s/files/1/0701/0143/products/Death_Milk_WarmThoughts_Turnarounds_06_800x.png?v=1589337531'},
-      {active:false,img:'https://cdn.shopify.com/s/files/1/0701/0143/products/Death_Milk_WarmThoughts_Turnarounds_05_800x.png?v=1589337531'},
-      {active:false,img:'https://cdn.shopify.com/s/files/1/0701/0143/products/Death_Milk_WarmThoughts_Turnarounds_04_800x.png?v=1589337531'},
-      {active:false,img:'https://cdn.shopify.com/s/files/1/0701/0143/products/Death_Milk_WarmThoughts_Turnarounds_03_800x.png?v=1589337531'},
-      {active:false,img:'https://cdn.shopify.com/s/files/1/0701/0143/products/Death_Milk_WarmThoughts_Turnarounds_02_800x.png?v=1589337531'},
-    ],
     fullview:[], 
     prenum:0,
     scalevalue:0,
@@ -50,7 +40,10 @@ Page({
             if(i == 0)  _this.data.fullview.push({active:true,img:res.data.List.overAllView[i]})
             else  _this.data.fullview.push({active:false,img:res.data.List.overAllView[i]})
           }
-          _this.setData({bgimg:res.data.info.overAllViewBackGround,fullview:_this.data.fullview})
+          _this.setData({
+            bgimg:res.data.info.overAllViewBackGround,
+            fullview:_this.data.fullview
+          })
           wx.getSystemInfo({
             success: function (res) {
               _this.setData({
