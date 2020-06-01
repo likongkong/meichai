@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "t_f": "../../../../pages/topfunction/topfunction",
+    "tga_c": "../../../../pages/tgacomponent/tgacomponent"
+  }
+}

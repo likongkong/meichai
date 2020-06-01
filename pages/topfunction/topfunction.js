@@ -18,6 +18,10 @@ Component({
     backcolor:{
       type:String,
       value:'#ff2742'
+    },
+    txtcolor:{
+      type:String,
+      value:'#ffffff'
     }
   },
   data: {

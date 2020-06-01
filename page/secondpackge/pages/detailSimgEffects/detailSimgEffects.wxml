@@ -1,0 +1,12 @@
+<!--pages/wei3d/index.wxml-->
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}' txtcolor='{{txtcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+
+<view  bindtouchmove="handletouchmove" bindtouchstart="handletouchstart"> 
+  <block wx:for="{{images}}" wx:key='key'>
+    <view class="{{item.active?'active':''}} turntable">
+      <image src="{{item.img}}" mode="widthFix"></image>
+    </view>
+  </block>
+</view>

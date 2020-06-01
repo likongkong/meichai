@@ -1,5 +1,5 @@
 <view class='topfbox' style='background:{{backcolor}};height:{{topheight}}px;'>
-    <view class='topftitletxt'>{{title}}</view>
+    <view class='topftitletxt' style="color:{{txtcolor}};">{{title}}</view>
     <block wx:if='{{arrow}}'>
         <block wx:if='{{!is_share}}'>
             <view class="left-icon">

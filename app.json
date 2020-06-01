@@ -98,7 +98,8 @@
         "pages/exhibition/exhibition",
         "pages/exhibitionlist/exhibitionlist",
         "pages/brandDetails/brandDetails",
-        "pages/exhibitionwelfare/exhibitionwelfare"
+        "pages/exhibitionwelfare/exhibitionwelfare",
+        "pages/detailSimgEffects/detailSimgEffects"
       ]
     }
   ],

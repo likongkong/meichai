@@ -221,9 +221,10 @@ Page({
       // url: "/page/component/pages/exhibitiondetail/exhibitiondetail?id=43161"
       // url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
       // url: "/page/secondpackge/pages/brandDetails/brandDetails?id=140"
-      url: "/pages/detailspage/detailspage?gid=33309"
+      // url: "/pages/detailspage/detailspage?gid=33309"
       // url: "/pages/detailspage/detailspage?gid=331603"
       // url: "/page/component/pages/playgrasslist/playgrasslist"
+      url: "/page/secondpackge/pages/detailSimgEffects/detailSimgEffects"
       
     });
   },
