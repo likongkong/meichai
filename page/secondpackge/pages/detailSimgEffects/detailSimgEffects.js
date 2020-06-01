@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '美拆', // -正品折扣多一点
+    c_title: '全景展示', // -正品折扣多一点
     c_arrow: true,
     c_backcolor: '#fff',
     txtcolor:'#000000',
@@ -23,16 +23,22 @@ Page({
       {active:false,img:'https://cdn.shopify.com/s/files/1/0701/0143/products/Death_Milk_WarmThoughts_Turnarounds_03_800x.png?v=1589337531'},
       {active:false,img:'https://cdn.shopify.com/s/files/1/0701/0143/products/Death_Milk_WarmThoughts_Turnarounds_02_800x.png?v=1589337531'},
     ],
+    fullview:[], 
     prenum:0,
-    scalevalue:0
+    scalevalue:0,
+    windowHeight:0
   },
-  onLoad: function () {
+  onLoad: function (options) {
     var _this = this;
 
     wx.showLoading({title: '加载中...',})
-    var exh = Dec.Aese('mod=show&operation=liveShowList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
+
+    var exh = Dec.Aese('mod=getinfo&operation=overallView&uid=' + app.signindata.uid + '&loginid=' + app.signindata.loginid +'&gid='+options.gid);
+
+    console.log(app.signindata.comurl + 'goods.php?mod=getinfo&operation=overallView&uid=' + app.signindata.uid + '&loginid=' + app.signindata.loginid +'&gid='+options.gid)
+
     wx.request({
-      url: app.signindata.comurl + 'toy.php' + exh,
+      url: app.signindata.comurl + 'goods.php' + exh,
       method: 'GET',
       header: {'Accept': 'application/json'},
       success: function (res) {
@@ -40,36 +46,26 @@ Page({
         wx.stopPullDownRefresh();
         console.log('3D图片列表===========',res)
         if (res.data.ReturnCode == 200) {
-
+          for(var i = 0; i<res.data.List.overAllView.length;i++){
+            if(i == 0)  _this.data.fullview.push({active:true,img:res.data.List.overAllView[i]})
+            else  _this.data.fullview.push({active:false,img:res.data.List.overAllView[i]})
+          }
+          _this.setData({bgimg:res.data.info.overAllViewBackGround,fullview:_this.data.fullview})
+          wx.getSystemInfo({
+            success: function (res) {
+              _this.setData({
+                scalevalue:res.windowWidth/_this.data.fullview.length,
+                windowHeight:res.windowHeight-_this.data.statusBarHeightMc
+              });
+            }
+          });
         } else {
-          app.showToastC(res.data.Msg);
+          app.showToastC(res.data.msg);
         };
       },
       fail: function () { }
     });
-
-
-
-
-
-
-    wx.getSystemInfo({
-      success: function (res) {
-        _this.setData({
-          scalevalue:res.windowWidth/_this.data.images.length
-        });
-      }
-    });
-
-
-
-
-
-
-
-
-
-
+    
   },
   // 手指触摸
   handletouchstart(event){
@@ -79,7 +75,7 @@ Page({
   handletouchmove(event){
     let nownum = event.touches[0].pageX;
     let prenum = this.data.prenum;
-    let images = this.data.images;
+    let images = this.data.fullview;
     console.log('当前值'+nownum,'上一个值'+prenum,'相差值'+ this.differencevalue(prenum,nownum))
     let differencevalue = this.differencevalue(prenum,nownum)
     if(differencevalue > this.data.scalevalue){
@@ -93,7 +89,7 @@ Page({
             i === 0? i=images.length-1: i--;
           }
           images[i].active = true;
-          this.setData({images:images})
+          this.setData({fullview:images})
           break;
         }
       }

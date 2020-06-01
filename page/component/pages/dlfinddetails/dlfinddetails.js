@@ -330,6 +330,7 @@ Page({
     })
     // 发现详情
     Pub.postRequest(_this, 'dryingdetails', { uid: _this.data.uid, loginid: _this.data.loginid, drying_id:_this.data.drying_id},function (res) { 
+      console.log(res)
       var listdata = res.data.List||{};
       var videolist = res.data.List.video||[];
       if (videolist && videolist.length!=0){

@@ -1,4 +1,22 @@
-
+.fullviewBox{
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
+.fullview{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.bgimg{
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 .turntable{
   width: 100%;
   display: none;

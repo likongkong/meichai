@@ -49,6 +49,7 @@
         </block>
       </view>
     </view>
+
     <!-- 带视频 -->
     <swiper bindchange='swiperchangeindex' bindanimationfinish="changeGoodsSwip" current="{{goodsIndex}}" wx:if='{{isVideoSwiper}}' class="swiper" indicator-color="#fff" indicator-active-color="#ff2742" indicator-dots="{{false}}" circular="true" autoplay="{{isVideoSwiper?false:true}}"
       interval="15000" duration="450" style='height:500rpx;'>
@@ -119,6 +120,8 @@
         {{zunmdata.gname}}
       </view>
       <view class='dPrice'>
+        <!-- 3D图片显示 -->
+        <image wx:if='{{zunmdata.isOverAllView}}' src='https://cdn.51chaidan.com//images/sign/panorama.png' catchtap="jumpDSIE" class="detailS3Dimg"></image>
         <text wx:if='{{zunmdata.is_suit==1}}' style='color:#ff2742;font-size:24rpx;margin-right:10rpx;'>{{zunmdata.suitName}}<text style='font-size:30rpx;'>{{zunmdata.unpackUnit}}</text></text>
         <text style='font-size:30rpx;color:#000;font-weight:bold;'><text style='font-size:30rpx;'>￥</text>{{zunmdata.gsale}}</text>
         <text wx:if='{{zunmdata.gsale!=zunmdata.gprice}}' style='color: #959595;font-size: 24rpx;text-decoration:line-through;position: relative;top:3rpx;margin-left: 10rpx;'>￥{{zunmdata.gprice}}</text>

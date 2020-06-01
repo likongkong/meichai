@@ -225,6 +225,11 @@ Page({
     subscribeCouponTip:''
  
   },
+  jumpDSIE(){
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/detailSimgEffects/detailSimgEffects?gid="+this.data.gid
+    });
+  },
   // 抽盒机详情页 
   addresssmokebox: function (event) {
     var gid = event.currentTarget.dataset.gid || event.target.dataset.gid;
