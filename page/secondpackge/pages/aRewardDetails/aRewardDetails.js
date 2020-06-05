@@ -431,12 +431,12 @@ Page({
                   'success': function (res) { 
 
 
-                    
+                    _this.scrapingboxfun();
                     // 订阅授权
                     app.comsubscribe(_this);
                   },
                   'fail':function(res){},
-                  'complete': function (res) {_this.scrapingboxfun()}
+                  'complete': function (res) {}
                 })
         }else{
           // 提交订单蒙层
