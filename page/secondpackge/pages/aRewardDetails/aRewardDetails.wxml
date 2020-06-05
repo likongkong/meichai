@@ -102,8 +102,8 @@
    <view class="scrapingPurchase">
       <view class="scrapPurtime">刮卡剩余时间:{{remaintime}}s</view>
       <view class="scrPurEve" catchtap="placeAnOrder" data-number='0'>全收</view>
-      <view class="scrPurEve" catchtap="{{activity.shopPrice>=10?'placeAnOrder':''}}" data-number='10'><view class="adhcevehbg" wx:if='{{activity.shopPrice<10}}'></view>刮10张</view>
-      <view class="scrPurEve" catchtap="{{activity.shopPrice>=3?'placeAnOrder':''}}" data-number='3'><view class="adhcevehbg" wx:if='{{activity.shopPrice<3}}'></view>刮3张</view>
+      <view class="scrPurEve" catchtap="{{activity.suplusNum>=10?'placeAnOrder':''}}" data-number='10'><view class="adhcevehbg" wx:if='{{activity.suplusNum<10}}'></view>刮10张</view>
+      <view class="scrPurEve" catchtap="{{activity.suplusNum>=3?'placeAnOrder':''}}" data-number='3'><view class="adhcevehbg" wx:if='{{activity.suplusNum<3}}'></view>刮3张</view>
       <view class="scrPurEve" catchtap="placeAnOrder" data-number='1'><view class="adhcevehbg" wx:if='{{false}}'></view>刮1张</view>
    </view>
 </view>

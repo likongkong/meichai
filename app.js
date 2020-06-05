@@ -969,4 +969,6 @@ App({
 //  exhibition 展会页面
 //  exhibitionlist 展会列表
 
+// aRewardList    一番赏详情页
 // aRewardDetails 一番赏详情
+// aRewardHistory 一番赏历史

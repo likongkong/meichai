@@ -3,8 +3,7 @@ page {
   background: #f5f6fa;
 }
 .ardbox{
-  padding:0 20rpx;
-  margin-bottom: 200rpx;
+  padding:0 20rpx 200rpx;
 }
 .adhead{
   height: 80rpx;
@@ -295,6 +294,7 @@ page {
   left: 0;
   bottom: 0;
   background: #f5f6fa;
+  z-index: 10;
 }
 .scrapbscroll{
   width: 100%;

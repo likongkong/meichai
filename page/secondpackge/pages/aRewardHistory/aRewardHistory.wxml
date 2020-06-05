@@ -1,7 +1,7 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
-<view class="main" style="min-height:{{windowHeight}}px;"> 
+<view class="main" style="min-height:{{windowHeight}}px;padding:0 36rpx {{todayActivity.length != 0?'370':'120'}}rpx 36rpx;"> 
   <text class="title">刮卡记录</text>
   <view class="record">
     <block wx:for="{{history}}" wx:key='key' wx:for-item="item">
@@ -20,16 +20,18 @@
   </view>
 </view>
 
-<view wx:if="{{todayActivity.length != 0}}" class="done"> 
-  <text class="title">已完成一番赏</text>
-  <scroll-view scroll-x>
-    <block wx:for="{{todayActivity}}" wx:key='key' wx:for-item="item">
-      <view class="card" data-id="{{item.id}}" bindtap="toARewardHistoryPage">
-        <image class="pic" src="{{item.cover}}" mode="aspectFill"></image>
-        <text>Vol.{{item.id}}</text>
-      </view>
-    </block>
-  </scroll-view>
+<view wx:if="{{todayActivity.length != 0}}" class="donebox">
+  <view class="done"> 
+    <text class="title">已完成一番赏</text>
+    <scroll-view scroll-x>
+      <block wx:for="{{todayActivity}}" wx:key='key' wx:for-item="item">
+        <view class="card" data-id="{{item.id}}" bindtap="toARewardHistoryPage">
+          <image class="pic" src="{{item.cover}}" mode="aspectFill"></image>
+          <text>Vol.{{item.id}}</text>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
 </view>
 
 <bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' 

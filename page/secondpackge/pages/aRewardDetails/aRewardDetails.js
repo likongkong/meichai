@@ -285,14 +285,14 @@ Page({
           var activity = res.data.Info.activity ||{};
 
 
-          if(activity.status==3){
+          if ( activity.status==3 || activity.suplusNum<=0 ) {
             wx.showModal({
               title: '提示',
               content: '活动已结束',
               showCancel: false,
               success: function (res) {
                 wx.reLaunch({
-                  url: "/pages/index/index?judgeprof=2"
+                  url: "/page/secondpackge/pages/aRewardList/aRewardList"
                 });
               }
             });

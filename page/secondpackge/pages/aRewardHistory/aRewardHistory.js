@@ -60,7 +60,7 @@ Page({
                 })
                 _this.setData({loadprompt : true })
               }else{
-                let alldata = [...res.data.List.history,..._this.data.history];
+                let alldata = [..._this.data.history,...res.data.List.history];
                 // console.log(alldata)
                 _this.setData({history : alldata})
               }

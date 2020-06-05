@@ -78,7 +78,7 @@ Page({
           if(res.data.List.activity.length == 0 && _this.data.page == 0){
             _this.setData({ nodata : true})
           }else{
-            let alldata = [...res.data.List.activity,..._this.data.datalist];
+            let alldata = [..._this.data.datalist,...res.data.List.activity];
             // console.log(alldata)
             _this.setData({datalist : alldata})
           }
