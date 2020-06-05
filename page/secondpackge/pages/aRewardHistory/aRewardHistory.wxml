@@ -2,7 +2,7 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 <view class="main" style="min-height:{{history.length != 0?windowHeight:'0'}}px;padding:0 36rpx {{history.length != 0?(todayActivity.length != 0?'370':'120'):'0'}}rpx 36rpx;"> 
-  <text class="title">刮卡记录</text>
+  <text class="title">刮卡记录  </text>
   <view class="record">
     <block wx:for="{{history}}" wx:key='key' wx:for-item="item">
       <view class="recordbox">
