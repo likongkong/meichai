@@ -40,6 +40,7 @@ Page({
     recordtime:'',
     // 订单信息
     order:'',
+    is_nowpage:false,
   },
   howToPlayFun:function(){
      this.setData({
@@ -240,6 +241,23 @@ Page({
     // 判断是否授权
     this.activsign();
   },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    console.log('onshow=======================',this.data.uid,this.data.loginid,this.data.recordtime)
+    console.log('this.data.is_nowpage=========',this.data.is_nowpage)
+    if(this.data.is_nowpage){
+      this.data.is_nowpage = false;
+      return false;
+    }
+
+    if(this.data.uid&&this.data.loginid&&this.data.recordtime){
+       this.listdata();
+    }
+  },
+
   onLoadfun:function(){
 
     // 判断是否有默认地址
@@ -283,7 +301,6 @@ Page({
           var userimg = res.data.List.queue || [];
           var goodsdata = res.data.List.goods || [];
           var activity = res.data.Info.activity ||{};
-
 
           if ( activity.status==3 || activity.suplusNum<=0 ) {
             wx.showModal({
@@ -600,19 +617,13 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-     console.log('onshow=======================',this.data.uid,this.data.loginid,this.data.recordtime)
-     if(this.data.uid&&this.data.loginid&&this.data.recordtime){
-        this.listdata();
-     }
-  },
-
-  /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
+    console.log('onHide.onHide.onHide=========',this.data.is_nowpage)
+    if(this.data.is_nowpage){
+      return false;
+    }
     clearInterval(this.data.timer)
   },
 
@@ -620,6 +631,10 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
+    if(this.data.is_nowpage){
+      this.data.is_nowpage = false;
+      return false;
+    }
     clearInterval(this.data.timer)
   },
 
@@ -644,8 +659,33 @@ Page({
 
   },
   scrapingRecord:function(){
+    var _this = this;
     wx.navigateTo({   
-      url: "/page/secondpackge/pages/aRewardHistory/aRewardHistory?id="+this.data.id
+      url: "/page/secondpackge/pages/aRewardHistory/aRewardHistory?id="+this.data.id,
+      complete:function(){
+        _this.data.is_nowpage = false;
+      }
     });     
   },
+  // 图片预览
+  previewImg: function (w) {
+    var index = w.currentTarget.dataset.index || w.target.dataset.index||0;
+    var goodsdata = this.data.goodsdata||[];
+    var imgArr = [];
+    if(goodsdata.length!=0){
+      for(var i=0;i<goodsdata.length;i++){
+        imgArr.push(goodsdata[i].img)
+      };
+    };
+    this.data.is_nowpage = true;
+    wx.previewImage({
+      current: imgArr[index],   
+      urls: imgArr,              
+      success: function (res) {},
+      fail: function (res) {}
+    });
+  },
+
+
+
 })

@@ -45,7 +45,7 @@
           <view class="adcspenum">买走最后一个周边立即拥有</view>
       </view>   
       <view class="adcweve" style="border-left: 4rpx dashed #f5f6fa;height:500rpx;">
-          <image class="adcspecialimg" src="{{goodsdata[0].img}}" mode='aspectFit'></image>
+          <image class="adcspecialimg" bindtap='previewImg' data-index='0' src="{{goodsdata[0].img}}" mode='aspectFit'></image>
       </view>
    </view>
    <view>
@@ -57,7 +57,7 @@
               </view>
               <view class="adcspenum" style="text-align:left;">共{{item.limit}}个</view>
           </view>
-          <image class="adcweveimg" src="{{item.img}}" mode='widthFix'></image>
+          <image class="adcweveimg" bindtap='previewImg' data-index='{{index}}' src="{{item.img}}" mode='widthFix'></image>
           <view class="adcwevename specialellipsis">{{item.title}}</view>
       </view>
       <view class="adcweve" wx:if='{{goodsdata.length%2==0}}'></view>
