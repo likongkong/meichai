@@ -9,7 +9,7 @@
 }
 .cardTbox{
   width: 100%;
-  height: 340rpx;
+  height: 384rpx;
   position: relative;
 }
 .cardTbox .serialnum{
@@ -25,7 +25,7 @@
 }
 .cardTbox .pic{
   width: 100%;
-  height: 340rpx;
+  height: 384rpx;
   border-radius: 10rpx 10rpx 0 0;
 }
 .cardTbox .reward-num{
