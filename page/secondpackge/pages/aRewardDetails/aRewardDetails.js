@@ -298,7 +298,6 @@ Page({
             });
           }
 
-
           if (activity.isInQueue) {
             var timestamp = Date.parse(new Date())
             //总的秒数 

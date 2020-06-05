@@ -109,7 +109,6 @@
 </view>
 
 <!-- 刮奖 -->
-
 <view class="wsh" catchtouchmove="true" wx:if='{{scrapingBox}}'>
     <view class="scrapingbox" style="height:{{windowHeight}}px;">
         <scroll-view scroll-y="true" class="scrapbscroll" style="height:{{windowHeight-60}}px;">
