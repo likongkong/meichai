@@ -133,7 +133,6 @@ page {
 .adcweve{
   display: inline-block;
   width: 353rpx;
-  height: 500rpx;
   border-top: 4rpx dashed #000;
   vertical-align: top;
   position: relative;
@@ -213,8 +212,8 @@ page {
 .adcweveimg{
   margin:30rpx auto 0;
   width: 85%;
-  height: 410rpx;
   display: block;
+  height: auto;
 }
 .adcwevename{
   padding: 0 15rpx;

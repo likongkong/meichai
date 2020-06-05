@@ -33,7 +33,7 @@
    </view>
    <view class="adheadutnum" style="text-align:center;">{{activity.shopPrice}}元随机获得一款限定周边(最终赏除外)</view>
    <view class="adcspecial">
-      <view class="adcweve" id='evepos0'>
+      <view class="adcweve" id='evepos0' style="height:500rpx;">
           <view class="adcspezzs">
              <view class="adcspezzstxt" style="line-height:60rpx;">最</view>
              <view class="adcspezzstxt">终</view>
@@ -44,7 +44,7 @@
           <view class="adcspencxy">超稀有!</view>
           <view class="adcspenum">买走最后一个周边立即拥有</view>
       </view>   
-      <view class="adcweve" style="border-left: 4rpx dashed #f5f6fa;">
+      <view class="adcweve" style="border-left: 4rpx dashed #f5f6fa;height:500rpx;">
           <image class="adcspecialimg" src="{{goodsdata[0].img}}" mode='aspectFit'></image>
       </view>
    </view>
@@ -57,7 +57,7 @@
               </view>
               <view class="adcspenum" style="text-align:left;">共{{item.limit}}个</view>
           </view>
-          <image class="adcweveimg" src="{{item.img}}" mode='aspectFit'></image>
+          <image class="adcweveimg" src="{{item.img}}" mode='widthFix'></image>
           <view class="adcwevename specialellipsis">{{item.title}}</view>
       </view>
       <view class="adcweve" wx:if='{{goodsdata.length%2==0}}'></view>
