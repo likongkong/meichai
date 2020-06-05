@@ -315,7 +315,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-    var _this = this
+    var _this = this;
     var share = {
       title: "家里有矿 1直买1直送",
       imageUrl: "https://www.51chaidan.com/images/turntable/share.jpg",

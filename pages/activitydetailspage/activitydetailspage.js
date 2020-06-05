@@ -2036,7 +2036,7 @@ closefrindcommoni:function(){
               success: function (res) {
                 wx.reLaunch({
                   url: "/pages/index/index?judgeprof=2"
-                });4
+                });
               }
             });
         };

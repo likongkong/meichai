@@ -126,7 +126,6 @@ App({
                   _this.signindata.loginid = res.data.Info.loginid || '';
                   _this.signindata.uid = res.data.Info.uid || '';
 
-
                   console.log(Dec.comurl(),Dec.clwcomurl())
                   // 是否开启展会 
                   _this.signindata.isOpenToyShow = res.data.Info.isOpenToyShow || false;
@@ -969,3 +968,5 @@ App({
 
 //  exhibition 展会页面
 //  exhibitionlist 展会列表
+
+// aRewardDetails 一番赏详情

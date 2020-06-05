@@ -1,0 +1,59 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class="main">
+  <block wx:for="{{datalist}}" wx:key='key' wx:for-item="item">
+    <view class="card" data-id="{{item.id}}" bindtap="toaRewarddeyails">
+      <view class="cardTbox">
+        <text class="serialnum">Vol.{{item.id}}</text>
+        <image class="pic" src="{{item.cover}}" mode="aspectFill"></image>
+        <view class="reward-num">
+          <block wx:for="{{item.betterGoods}}" wx:key='key' wx:for-item="itemgear">
+            <text wx:if="{{itemgear.gear == 'A' || itemgear.gear == 'B' || itemgear.gear == 'C' || itemgear.gear == 'D'}}">{{itemgear.gear}}赏 {{itemgear.suplus}}/{{itemgear.limit}}</text>
+          </block>
+        </view>
+      </view>
+      <view class="progress-box">
+        <progress percent="{{(item.suplusGoods/item.limitGoods)*100}}" color="#ff2742" stroke-width='12' active duration="5" />
+        <text style="padding-left:15rpx;">剩余：{{item.suplusGoods}}</text>
+      </view>
+      <view class="cardBbox"> 
+        <view class="title">{{item.name}}</view>
+        <view class="price">￥{{item.shopPrice}}</view>
+      </view>
+    </view>
+  </block>
+</view>
+
+<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' 
+dryinglistnum='{{dryinglistnum}}'></bnavigation>
+
+
+<view style='{{isIphoneX?"height:90rpx;":"height:60rpx;"}}width:100%;text-align:center;line-height:60rpx;color:#666;font-size:30rpx;padding-bottom: 100rpx;' wx:if='{{loadprompt}}'>没有更多数据了</view>
+<!--  暂无数据  -->
+<view class='nodata' wx:if='{{nodata}}' style='height: 600rpx;width: 100%;position: relative;'>
+  <image src='../../../../pages/images/recaddnodata.png' class='nodataimg' style='width: 280rpx;height: 300rpx;position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;'></image>
+</view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>

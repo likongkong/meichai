@@ -99,7 +99,11 @@
         "pages/exhibitionlist/exhibitionlist",
         "pages/brandDetails/brandDetails",
         "pages/exhibitionwelfare/exhibitionwelfare",
-        "pages/detailSimgEffects/detailSimgEffects"
+        "pages/detailSimgEffects/detailSimgEffects",
+        "pages/aRewardDetails/aRewardDetails",
+        "pages/aRewardHistory/aRewardHistory",
+        "pages/aRewardList/aRewardList"
+        
       ]
     }
   ],

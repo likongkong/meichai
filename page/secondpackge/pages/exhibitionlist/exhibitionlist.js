@@ -622,7 +622,6 @@ Page({
     if (e.detail.detail.userInfo) { } else {
       app.clicktga(8)  //用户按了拒绝按钮
     };
-
   },
   pullupsignin: function () {
     // // '没有授权'

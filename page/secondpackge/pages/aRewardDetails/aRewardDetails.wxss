@@ -1,0 +1,463 @@
+@import "/common/tabbar.wxss";
+page {
+  background: #f5f6fa;
+}
+.ardbox{
+  padding:0 20rpx;
+  margin-bottom: 200rpx;
+}
+.adhead{
+  height: 80rpx;
+  padding:20rpx 0;
+}
+.adhleft{
+  width: 569rpx;
+  height:80rpx;
+  white-space: nowrap;
+  float: left;
+}
+.adhlimg{
+  display: inline-block;
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 11rpx;
+}
+.adhright{
+  float: right;
+  width: 70rpx;
+  font-size: 24rpx;
+  text-align:right;
+  padding: 10rpx 0;
+  color: #777777;
+}
+
+.adheadutnum{
+  font-size:22rpx;
+  width:100%;
+  height: 50rpx;
+}
+.adhbanner{
+  width: 100%;
+  height: 378rpx;
+  position: relative;
+  margin-bottom: 20rpx;
+}
+.adhswiper{
+  width: 100%;
+  height: 100%;
+}
+.adhswiperimg{
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 20rpx;
+}
+.adhcontent{
+  width: 100%;
+  margin-bottom: 20rpx;
+}
+
+.adhceve{
+  display: inline-block;
+  width: 163rpx;
+  height: 163rpx;
+  box-shadow: 2px 2px 10px 0px #999;
+  border-radius: 10rpx;
+  margin-right: 20rpx;
+  margin-bottom: 40rpx;
+  position: relative;
+}
+.adhcevehbg{
+  width: 100%;
+  height: 100%;
+  border-radius: 10rpx;
+  background: #000;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index:3 ;
+}
+.adhceveimg{
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 10rpx;
+}
+.adhclet{
+  width: 55rpx;
+  height: 55rpx;
+  position: absolute;
+  top: 13rpx;
+  left: 13rpx;
+  z-index: 1;
+  background:#ff2742;
+  color: #fff;
+  font-size: 28rpx;
+  text-align: center;
+  line-height:55rpx;
+  border-radius: 8rpx;
+}
+.adhcnum{
+  width: 100rpx;
+  height: 44rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -23rpx;
+  margin:auto;
+  z-index: 2;
+}
+.adhcnumbg{
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.5;
+  border-radius: 30rpx;
+}
+.adhcnumtxt{
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-size: 26rpx;
+  color: #fff;
+  line-height: 44rpx;
+  position: absolute;
+  top: 0;left: 0;
+  z-index: 1;
+}
+.adcspecial{
+  width: 100%;
+  height: 500rpx;
+}
+.adcweve{
+  display: inline-block;
+  width: 353rpx;
+  height: 500rpx;
+  border-top: 4rpx dashed #000;
+  vertical-align: top;
+  position: relative;
+}
+.adcspecialimg{
+  width: 100%;
+  height: 80%;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+.adcspezzs{
+  width: 70rpx;
+  height: 150rpx;
+  background: #ff2742;
+  margin:60rpx auto 0;
+  border-radius: 12rpx;
+}
+.adcspezzstxt{
+  width: 70rpx;
+  height: 50rpx;
+  text-align: center;
+  line-height: 50rpx;
+  font-size: 26rpx;
+  color: #fff;
+  font-weight: bold;
+}
+.adcspenum{
+  width: 100%;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color:#ff2742 ;
+}
+.adcspename{
+  width: 100%;
+  max-height: 35px;
+  font-size: 24rpx;
+  color:#000;
+  text-align:center;
+}
+.adcspencxy{
+  width: 100%;
+  height: 60rpx;
+  line-height: 80rpx;
+  text-align: center;
+  color: #ff2742;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.adcweveleft{
+  width: 120rpx;
+  position: absolute;
+  top: 30rpx;
+  left: 15rpx;
+  z-index: 1;
+}
+.adcwelbg{
+  width: 70rpx;
+  height: 100rpx;
+  background: #ff2742;
+  border-radius: 12rpx;
+}
+.adcweltxt{
+  width: 70rpx;
+  height: 50rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: #fff;
+  font-weight: bold;  
+}
+.adcweveimg{
+  margin:30rpx auto 0;
+  width: 85%;
+  height: 410rpx;
+  display: block;
+}
+.adcwevename{
+  padding: 0 15rpx;
+  width: 320rpx;
+  height:60rpx;
+  line-height: 60rpx;
+  font-size: 24rpx;
+}
+.ardbottom{
+  width: 100%;
+  height: 80rpx;
+  position: fixed;
+  bottom: 110rpx;
+  left: 0;
+  z-index: 10;
+  
+}
+.ardbottomeve{
+  width:300rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 30rpx;
+  font-size: 28rpx;
+  text-align: center;
+}
+
+.ardbmeleft{
+  float:left;margin-left:50rpx;border:2rpx solid #ccc;background: #fff;
+}
+.ardbmeright{
+  float:right;margin-right:50rpx;background:#ff2742;color:#fff;
+}
+.scrapingPurchase{
+  width: 100%;
+  height: 190rpx;
+  background: #fff;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 3;
+  padding-top: 80rpx;
+}
+.scrapPurtime{
+  width: 100%;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  font-size: 24rpx;
+  position: absolute;
+  left: 0;
+  top: 20rpx;
+}
+.scrPurEve{
+  height:150rpx;
+  line-height: 150rpx;
+  text-align: center;
+  width: 150rpx;
+  background: #ff2742;
+  border-radius: 10rpx;
+  font-size: 26rpx;
+  color: #fff;
+  margin-left: 30rpx;
+  display: inline-block;
+  position: relative;
+}
+.adhBannerVol{
+  position: absolute;
+  top: 15rpx;
+  left: 15rpx;
+  z-index: 3;
+  color: #fff;
+  font-size: 24rpx;
+}
+.scrapingbox{
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: #f5f6fa;
+}
+.scrapbscroll{
+  width: 100%;
+}
+.scrapboxbottom{
+  width: 100%;
+  height:50px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+
+
+
+
+
+
+.card{
+  width: 100%;
+  height: 208rpx;
+  position: relative;
+  margin-bottom: 15rpx;
+}
+.bgimg{
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.box {
+  position: absolute;
+  top:0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin:auto;
+  z-index: 1;
+  width: 80%;
+  height: 140rpx;
+  backface-visibility: hidden;
+ }
+ .b1{
+  background:rgba(0,0,0,.5);
+  border: 4rpx dashed #fff;
+ }
+ .b1 text{
+   width: 100%;
+   display: block;
+   color: #fff;
+   font-size: 30rpx;
+   line-height: 140rpx;
+   text-align: center;
+ }
+ .b2 {
+  background:#fff;
+  transform: rotateY(-180deg);
+  border-radius: 10rpx;
+ }
+
+
+.boxbt{
+  width: 80rpx;
+  height: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+  font-size: 70rpx;
+  float: left;
+  margin:30rpx 40rpx 0;
+  position: relative;
+}
+.boxbtappre{
+  width: 24rpx;
+  height: 24rpx;
+  position: absolute;
+  right: -10rpx;
+  bottom: 10rpx;
+  font-size: 22rpx;
+  line-height: 24rpx;
+}
+.boxbtright{
+  width: 400rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 26rpx;
+  float: right;
+  margin:30rpx 0 0;
+  position: relative;
+  font-weight: bold;
+}
+
+.closestyle {
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 5rpx;
+  text-align: center;  
+}
+  
+
+.setcomplie {
+  width: 500rpx;
+  line-height: 80rpx;
+  position: absolute;
+  left: 75rpx;
+  bottom: 10rpx;
+  background: white;
+  text-align: center;
+  border-radius: 10rpx;
+}
+  
+.recgadbotleftimg {
+  width: 34rpx;
+  height: 34rpx;
+  display: inline-block;
+  position: relative;
+  top: 6rpx;
+  margin: 58rpx 0 0 33rpx;
+}
+
+.howToPlay{
+  width: 500rpx;
+  height: 700rpx;
+  background: #fff;
+  border-radius: 10rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 2;
+}
+.howToPlayHead{
+  width: 100%;
+  height: 85rpx;
+  text-align: center;
+  line-height: 85rpx;
+  font-size: 26rpx;
+}
+
+.howToPlayScroll{
+  width: 100%;
+  height:500rpx;
+}
+.howToPlayTxt{
+  width: 80%;
+  display: block;
+  font-size: 24rpx;
+  margin: auto;
+}
+.howToPlayBut{
+  width: 300rpx;
+  height: 60rpx;
+  text-align: center;
+  line-height: 60rpx;
+  color: #fff;
+  font-size: 26rpx;
+  margin:30rpx auto 0;
+  background: #ff2742;
+  border-radius: 15rpx;
+}
+
+

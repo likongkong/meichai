@@ -221,9 +221,11 @@ Page({
       // url: "/page/component/pages/exhibitiondetail/exhibitiondetail?id=43161"
       // url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
       // url: "/page/secondpackge/pages/brandDetails/brandDetails?id=140"
-      url: "/pages/detailspage/detailspage?gid=33985"
+      // url: "/pages/detailspage/detailspage?gid=33985"
       // url: "/page/component/pages/playgrasslist/playgrasslist"
       // url: "/page/secondpackge/pages/detailSimgEffects/detailSimgEffects?gid=32852"
+      // url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails"
+      url: "/page/secondpackge/pages/aRewardList/aRewardList"
       
     });
   },
@@ -927,11 +929,12 @@ Page({
                 clearInterval(_this.data.timer);
                 var comdataarr = [];
             };
+
             // 分类 首页弹框
-            if(List.indexSpread&&List.indexSpread.length!=0){
+            if ( List.indexSpread && List.indexSpread.length != 0 ) {
               var indexnum = Math.floor(Math.random() * List.indexSpread.length) || 0;
-              var indexelafra = List.indexSpread[indexnum] || [];
-              if (indexelafra) {
+              var indexelafra = List.indexSpread[indexnum] || '';
+              if ( indexelafra && indexelafra.src ) {
                 _this.setData({
                   elafradata: indexelafra,
                   indexelafra: true
@@ -941,11 +944,12 @@ Page({
                 _this.setData({ indexelafra: false, index_ela_fra: false });
                 app.signindata.index_ela_fra = false;
               };
-            }else{
+            } else {
               _this.setData({ indexelafra: false, index_ela_fra: false });
               app.signindata.index_ela_fra = false;     
             }
-            if(List.category&&List.category.length!=0){
+
+            if (List.category && List.category.length != 0) {
               var num = Math.floor(Math.random() * List.category.length) || 0;
               var classification = List.category[num];
               if (classification.length != 0) {
@@ -955,6 +959,7 @@ Page({
                   }
                 };
               };
+
               // banner
               var banlist = List.banner||[];
               if (banlist.length != 0) {
@@ -971,6 +976,9 @@ Page({
               nodataiftr: true,
               movies: banlist||''
             });
+            console.warn('elafradata=====',JSON.stringify(_this.data.elafradata))
+            console.warn('classificationlist=====',JSON.stringify(_this.data.classificationlist))
+
         };    
       },
       fail: function (res) {}

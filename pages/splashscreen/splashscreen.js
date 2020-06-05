@@ -26,6 +26,7 @@ Page({
     timer:'',
     imagewidth: 0,//缩放后的宽
     imageheight: 0,//缩放后的高 
+    is_jump_index:false
   },
   imageLoad: function (e) {
     var imageSize = this.imageUtil(e)
@@ -89,7 +90,9 @@ Page({
         if (num <= 0) {
           clearInterval(_this.data.timer);
           setTimeout(function(){
-            _this.onLoadfun();
+            if(!_this.data.is_jump_index){
+              _this.onLoadfun();
+            };
           },1000);
         };
       },1000);
@@ -152,7 +155,10 @@ Page({
         })
       }else{
         wx.reLaunch({
-          url: "/pages/index/index"
+          url: "/pages/index/index",
+          complete:function(){
+            _this.data.is_jump_index = true
+          }
         }) 
       };
       app.signindata.iftr_mc=true;
@@ -237,14 +243,14 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+    clearInterval(this.data.timer);
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    clearInterval(this.data.timer);
   },
 
   /**

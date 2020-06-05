@@ -319,7 +319,7 @@ Page({
             share_id: res.data.Info.share_id ? res.data.Info.share_id : 0,
             subscribedata: res.data.Info.subscribe,
           })
-          _this.subscrfun();
+          // _this.subscrfun();
           app.signindata.isTodaySign = true;
           _this.getInfo();
 

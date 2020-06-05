@@ -1,0 +1,69 @@
+.main{
+  padding: 0 0 120rpx 0;
+}
+.card{
+  width: 100%;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  margin-top: 20rpx;
+}
+.cardTbox{
+  width: 100%;
+  height: 340rpx;
+  position: relative;
+}
+.cardTbox .serialnum{
+  display: block;
+  position: absolute;
+  top: 6rpx;
+  left: 6rpx;
+  padding: 8rpx;
+  box-sizing: border-box;
+  font-size: 24rpx;
+  color: #fff;
+  background: rgba(0,0,0,.5);
+}
+.cardTbox .pic{
+  width: 100%;
+  height: 340rpx;
+  border-radius: 10rpx 10rpx 0 0;
+}
+.cardTbox .reward-num{
+  position: absolute;
+  top: 6rpx;
+  right: 0;
+  padding: 12rpx 16rpx;
+  box-sizing: border-box;
+  background: rgba(0,0,0,.5);
+}
+.cardTbox .reward-num text{
+  height: 40rpx;
+  color: #fff;
+  font-size: 24rpx;
+  line-height: 40rpx;
+  display: block;
+  opacity: .8;
+}
+.progress-box{
+  position: relative;
+  border-radius: 0 0 10rpx 10rpx;
+  overflow: hidden;
+}
+.progress-box text{
+  display: inline-block;
+  height: 24rpx;
+  line-height: 24rpx;
+  position: absolute;
+  top: 0;font-size: 20rpx;
+  color: #000;
+}
+.cardBbox{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.cardBbox view{
+  color: #333;
+  font-size: 24rpx;
+  margin-top: 10rpx;
+}

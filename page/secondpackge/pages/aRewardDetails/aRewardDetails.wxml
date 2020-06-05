@@ -1,0 +1,199 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+
+
+<view class="ardbox">
+   <view class="adhead">
+       <scroll-view scroll-x="true" class="adhleft">
+           <image wx:for='{{userimg}}' wx:key='key' src="{{item.headphoto}}" class="adhlimg"></image>
+       </scroll-view>
+       <text class="adhright" catchtap="howToPlayFun">玩法\n说明</text>
+   </view>
+   <view class="adheadutnum">{{activity.queueNum}}人正在刮奖券</view>
+   <view class="adhbanner">
+      <view class="adhBannerVol" wx:if='{{activity.id}}'>Vol.{{activity.id}}</view>
+      <swiper class="adhswiper" circular="true" autoplay="true" interval="3000" duration="450">
+        <swiper-item wx:for="{{activity.listBanner}}" wx:key="key">
+          <image src="{{item}}" mode='aspectFit' class="adhswiperimg"></image>
+        </swiper-item>
+      </swiper>   
+   </view>
+   <view class="adhcontent">
+      <view class="adhceve" wx:for='{{goodsdata}}' catchtap="jumpposition" data-ind='{{index}}' wx:key='key' style="{{index%4==3?'margin-right:0;':''}}">
+          <image src="{{item.img}}" class="adhceveimg" mode='aspectFit'></image>
+          <view class="adhclet">{{item.gear}}</view>
+          <view class="adhcnum">
+              <view class="adhcnumbg"></view>
+              <view class="adhcnumtxt">{{item.suplus}}/{{item.limit}}</view>
+          </view>
+          <!-- 蒙层 -->
+          <view class="adhcevehbg" wx:if='{{item.suplus==0}}'></view>
+      </view>
+   </view>
+   <view class="adheadutnum" style="text-align:center;">{{activity.shopPrice}}元随机获得一款限定周边(最终赏除外)</view>
+   <view class="adcspecial">
+      <view class="adcweve" id='evepos0'>
+          <view class="adcspezzs">
+             <view class="adcspezzstxt" style="line-height:60rpx;">最</view>
+             <view class="adcspezzstxt">终</view>
+             <view class="adcspezzstxt" style="line-height:40rpx;">赏</view>
+          </view>
+          <view class="adcspenum">共1个</view>
+          <view class="adcspename multilineellipsis">{{goodsdata[0].title}}</view>
+          <view class="adcspencxy">超稀有!</view>
+          <view class="adcspenum">买走最后一个周边立即拥有</view>
+      </view>   
+      <view class="adcweve" style="border-left: 4rpx dashed #f5f6fa;">
+          <image class="adcspecialimg" src="{{goodsdata[0].img}}" mode='aspectFit'></image>
+      </view>
+   </view>
+   <view>
+      <view class="adcweve" wx:for='{{goodsdata}}' wx:if='{{index!=0}}' id='evepos{{index}}' wx:key='key' style="{{index%2==1?'border-right: 4rpx dashed #000;':''}}">
+          <view class="adcweveleft">
+              <view class="adcwelbg">
+                 <view class="adcweltxt" style="line-height:60rpx;">{{item.gear}}</view>
+                 <view class="adcweltxt" style="line-height:40rpx;">赏</view>
+              </view>
+              <view class="adcspenum" style="text-align:left;">共{{item.limit}}个</view>
+          </view>
+          <image class="adcweveimg" src="{{item.img}}" mode='aspectFit'></image>
+          <view class="adcwevename specialellipsis">{{item.title}}</view>
+      </view>
+      <view class="adcweve" wx:if='{{goodsdata.length%2==0}}'></view>
+
+
+   </view>
+
+
+
+</view>
+
+
+
+
+
+<view class="ardbottom">
+    <view class="ardbottomeve ardbmeleft" catchtap="scrapingRecord">刮卡记录</view>
+    <view wx:if='{{activity.status==1}}' class="ardbottomeve ardbmeright">暂未开始 {{activity.start_time}}</view>
+    <view wx:elif='{{activity.aheadUser&&activity.isInQueue}}' class="ardbottomeve ardbmeright" catchtap="scrapingPurfun">我要刮卡({{remaintime}}s)</view>
+    <view wx:elif='{{activity.isInQueue}}' class="ardbottomeve ardbmeright">排队中</view>
+    <view wx:else class="ardbottomeve ardbmeright" catchtap="lineUpNow">立即排队</view>
+
+</view>
+
+
+
+<!-- 玩法说明 -->
+<view class="wsh" catchtouchmove="true" wx:if='{{isHowToPlay}}'>
+   <view class="tgimgboxgb" catchtap="howToPlayFun"></view>
+   <view class="howToPlay">
+       <view class="howToPlayHead">玩法说明</view>
+       <scroll-view scroll-y="true" class="howToPlayScroll">
+          <text class="howToPlayTxt">{{activity.explain}}</text>
+       </scroll-view>
+       <view class="howToPlayBut" catchtap="howToPlayFun">确定</view>
+   </view>
+</view>
+
+<!-- 刮奖购买 -->
+<view class="wsh" catchtouchmove="true" wx:if='{{scrapingPur}}'>
+   <view class="tgimgboxgb" catchtap="scrapingPurfun"></view>
+   <view class="scrapingPurchase">
+      <view class="scrapPurtime">刮卡剩余时间:{{remaintime}}s</view>
+      <view class="scrPurEve" catchtap="placeAnOrder" data-number='0'>全收</view>
+      <view class="scrPurEve" catchtap="{{activity.shopPrice>=10?'placeAnOrder':''}}" data-number='10'><view class="adhcevehbg" wx:if='{{activity.shopPrice<10}}'></view>刮10张</view>
+      <view class="scrPurEve" catchtap="{{activity.shopPrice>=3?'placeAnOrder':''}}" data-number='3'><view class="adhcevehbg" wx:if='{{activity.shopPrice<3}}'></view>刮3张</view>
+      <view class="scrPurEve" catchtap="placeAnOrder" data-number='1'><view class="adhcevehbg" wx:if='{{false}}'></view>刮1张</view>
+   </view>
+</view>
+
+<!-- 刮奖 -->
+
+<view class="wsh" catchtouchmove="true" wx:if='{{scrapingBox}}'>
+    <view class="scrapingbox" style="height:{{windowHeight}}px;">
+        <scroll-view scroll-y="true" class="scrapbscroll" style="height:{{windowHeight-60}}px;">
+            <block wx:for="{{cardList}}" wx:key='key' data-index="{{index}}">
+              <view class="card">
+                <image class="bgimg" src="{{activity.lottoBackGround}}" mode="aspectFill"></image>
+                <!--正面的框 -->
+                <view class="box b1" animation="{{item.animation_main}}" bindtap='rotateFn' data-index="{{index}}" data-id="1" >
+                  <text>点击刮卡</text>
+                </view>
+                <!--背面的框 -->
+                <view class="box b2" animation="{{item.animation_back}}" bindtap='rotateFn' data-index="{{index}}" data-id="2">
+                    <view class="boxbt" style="{{item.gear=='终'?'font-size:52rpx;color:#ff2742;':''}}">{{item.gear}}<view class="boxbtappre">赏</view></view>
+                    <view class="boxbtright specialellipsis">{{item.name}}</view>
+                </view>
+              </view>
+            </block>
+            
+        </scroll-view>
+        <view class="scrapboxbottom">
+           <view class="ardbottomeve ardbmeleft" catchtap="rotateFnWhole">全部开启</view>
+           <view class="ardbottomeve ardbmeright" catchtap="scrapingBoxfun">继续刮奖({{remaintime}}s)</view>
+        </view>
+    </view>
+</view>
+
+
+
+
+
+<bnavigation isProduce='{{isProduce}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+
+
+
+
+
+
+
+
+
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>
+
+
+
+
+<!-- 默认地址 -->
+
+
+
+<view wx:if='{{!isBlindBoxDefaultAddress}}' style='width:100%;position:fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;z-index:12;' catchtap="showdealoradd"></view>
+
+<view wx:if='{{ishowdealoradd}}' style='width:100%;height:100%;position:fixed;top:0px;left:0;z-index:13;'>
+	<view class='tgimgboxgb' catchtouchmove="true"></view>
+
+	<view style="width:650rpx;height:800rpx;position:absolute;top:0;bottom:0;left:50rpx;margin:auto 0;background:#f0f0f0;border-radius:20rpx;">
+		<view style="width:100%;height:100%;position:relative;">
+			<image class="closestyle" src="https://www.51chaidan.com/images/driveCar/fanhui.png" catchtap='closedealoradd'></image>
+			<view style="font-size:30rpx;line-height:50rpx;color:#ff2742;margin-left:10rpx;text-align: center;">必须选择一个默认收货地址</view>
+			<view style="width:630rpx;height:660rpx;margin:0 10rpx;overflow:scroll;">
+				<view wx:for='{{addressdata}}' wx:key='key' style="width:100%;height:150rpx;border-radius:10rpx;background:white;margin:5rpx 0;" catchtap="selectdefult" data-ind="{{index}}">
+					<view style="width:100rpx;height:100%;display:inline-block;vertical-align:top;">
+						<image class='recgadbotleftimg' hidden='{{!item.checked}}' src='/pages/images/pressed_click.png'></image>
+						<image class='recgadbotleftimg' hidden='{{item.checked}}' src='/pages/images/normal_click.png'></image>
+					</view>
+					<view style="width:500rpx;height:100%;display:inline-block;line-height:50rpx;vertical-align:top;">
+						<view style="width:100%;font-size:25rpx;margin-top:25rpx;">
+							<view style="display:inline-block;">{{item.consignee}}</view>
+							<view style="display:inline-block;margin-left:20rpx;">{{item.phone}}</view>
+						</view>
+
+						<view class='specialellipsis' style="font-size:25rpx;">{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
+					</view>
+				</view>
+
+				<view style="width:100%;height:150rpx;border-radius:10rpx;background:white;margin:5rpx 0;" catchtap="jumpaddress">
+					<view style="line-height:50rpx;text-align:center;padding-top:50rpx;">
+						<image style="width:50rpx;height:50rpx;display:inline-block;vertical-align:top;" src="https://www.51chaidan.com/images/driveCar/tianjia.png"></image>
+						<view style="display:inline-block;margin-left:20rpx;font-size:25rpx;vertical-align:top;"> 新建地址</view>
+					</view>
+				</view>
+			</view>
+			<view class="setcomplie" style="color:{{maddid!='' ? '#000': '#e0e0e0'}};" catchtap="{{maddid!='' ? 'setdefultadd': ''}}">设置完成</view>
+		</view>
+	</view>
+</view>
+

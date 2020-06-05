@@ -1,0 +1,99 @@
+.main{
+  padding:0 36rpx 120rpx;
+  box-sizing: border-box;
+}
+.main .title{
+  display: block;
+  height: 110rpx;
+  line-height: 110rpx;
+  color: #000;
+  font-size: 26rpx;
+}
+.recordbox{
+  display: flex;
+  justify-content: space-between;
+}
+.recordbox text{
+  line-height: 60rpx;
+  display: inline-block;
+}
+.recordinfo{
+  width: 428rpx;
+  display: flex;
+  justify-content: start;
+}
+.recordinfo .avatar{
+  width: 60rpx;
+  height: auto;
+  margin-right: 28rpx;
+}
+.recordinfo>view{
+  font-size: 24rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.recordinfo .good_name{
+  font-size: 22rpx;
+  font-weight: bold;
+}
+.recordbox .time{
+  width: 250rpx;
+  font-size: 24rpx;
+}
+.recordbox .time text{
+  float: right;
+}
+
+.done{
+  width: 710rpx;
+  height: 220rpx;
+  position: fixed;
+  bottom: 200rpx;
+  left: 20rpx;
+  border-radius: 8rpx;
+  box-shadow: 1px 4px 8px #999999;
+  overflow:hidden;white-space:nowrap;
+}
+.done scroll-view{
+  padding: 0 18rpx;
+  box-sizing: border-box;
+}
+.done .title{
+  height: 62rpx;
+  line-height: 62rpx;
+  display: block;
+  color: #000;
+  font-size: 26rpx;
+  padding-left: 22rpx;
+  box-sizing: border-box;
+}
+.done .card{
+  width: 268rpx;
+  height: 142rpx;
+  border-radius: 10rpx;
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+  margin-right: 14rpx;
+}
+.done .card:last-child{
+  margin-right: 0;
+}
+.done .card .pic{
+  width: 268rpx;
+  height: 142rpx;
+}
+.done .card text{
+  width: 148rpx;
+  height: 50rpx;
+  text-align: center;
+  line-height: 50rpx;
+  position: absolute;
+  top: 10rpx;
+  left: 4rpx;
+  display: block;
+  background: rgba(0,0,0,.6);
+  border-radius: 10rpx;
+  color: #fff;
+}
