@@ -71,8 +71,6 @@
 
 
 
-
-
 <view class="ardbottom">
     <view class="ardbottomeve ardbmeleft" catchtap="scrapingRecord">刮卡记录</view>
     <view wx:if='{{activity.status==1}}' class="ardbottomeve ardbmeright">暂未开始 {{activity.start_time}}</view>
