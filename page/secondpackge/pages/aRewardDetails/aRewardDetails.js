@@ -303,16 +303,16 @@ Page({
           var activity = res.data.Info.activity ||{};
 
           if ( activity.status==3 || activity.suplusNum<=0 ) {
-            wx.showModal({
-              title: '提示',
-              content: '活动已结束',
-              showCancel: false,
-              success: function (res) {
-                wx.reLaunch({
-                  url: "/page/secondpackge/pages/aRewardList/aRewardList"
-                });
-              }
-            });
+            // wx.showModal({
+            //   title: '提示',
+            //   content: '活动已结束',
+            //   showCancel: false,
+            //   success: function (res) {
+            //     wx.reLaunch({
+            //       url: "/page/secondpackge/pages/aRewardList/aRewardList"
+            //     });
+            //   }
+            // });
           }
 
           if (activity.isInQueue) {
@@ -327,7 +327,7 @@ Page({
             _this.data.recordtime = activity.refreshTime;	
             _this.countdown();
           }else{
-            if(userimg.length==0){
+            if(userimg.length==0&&activity.status!=3&&activity.suplusNum>0){
               _this.queuefun(1,1);
             };
           }
@@ -679,6 +679,23 @@ Page({
       fail: function (res) {}
     });
   },
-
+  // 跳转列表
+  jumpaRewardList:function(){
+      let pages = getCurrentPages();
+      let prevpage = pages[pages.length - 2];
+      if (prevpage) {
+        if (prevpage.route == 'page/secondpackge/pages/aRewardList/aRewardList') {
+          wx.navigateBack();
+        } else {
+          wx.redirectTo({
+            url: "/page/secondpackge/pages/aRewardList/aRewardList"
+          });
+        };
+      } else {
+        wx.redirectTo({
+          url: "/page/secondpackge/pages/aRewardList/aRewardList"
+        });
+      };
+  }
 
 })

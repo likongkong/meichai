@@ -395,6 +395,10 @@ Page({
       wx.navigateTo({
         url: "/page/component/pages/crowdfunding/crowdfunding?aid=" + activity_id
       })
+    } else if(order_type == 21){
+      wx.navigateTo({   
+        url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + activity_id
+      });
     } else{
       wx.navigateTo({    
         url: "../../../../pages/detailspage/detailspage?gid=" + gid

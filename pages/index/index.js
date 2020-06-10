@@ -455,6 +455,20 @@ Page({
           _this.setData({ jumpdevanningiftr: false });
         }
       });
+    } else if (item_type == 9015) { 
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/aRewardList/aRewardList",
+        complete: function () {
+          _this.setData({ jumpdevanningiftr: false });
+        }
+      });
+    } else if (item_type == 9016) { 
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + whref ,
+        complete: function () {
+          _this.setData({ jumpdevanningiftr: false });
+        }
+      });
     }else{
       app.showToastC('请更新至最新版本');
     };
