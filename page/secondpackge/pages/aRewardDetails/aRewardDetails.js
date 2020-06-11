@@ -690,7 +690,7 @@ Page({
 
                     _this.scrapingboxfun();
                     // 订阅授权
-                    app.comsubscribe(_this);
+                    // app.comsubscribe(_this);
                   },
                   'fail':function(res){},
                   'complete': function (res) {}

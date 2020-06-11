@@ -1560,6 +1560,7 @@ closefrindcommoni:function(){
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
+        console.log('报名================',res)
         wx.hideLoading();
         if (num == 1){
           if (res.data.ReturnCode == 200) {

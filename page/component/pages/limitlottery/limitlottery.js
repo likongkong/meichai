@@ -26,7 +26,6 @@ Page({
     isIphoneX: app.signindata.isIphoneX,
     defaultinformation: '',
     wxnum: "",
-
     // 晒单数量
     dryinglistnum: 0,
     shopnum: 0,
@@ -525,7 +524,7 @@ Page({
         if (res.data.ReturnCode == 200) {
           _this.setData({
             defaultinformation: res.data.Info,
-            wxnum: res.data.Info.cs.wxid || 'meichai666666',
+            comwxnum: res.data.Info.cs.wxid || 'meichai666666',
           });
         };
         // 判断非200和登录
@@ -846,6 +845,8 @@ Page({
       wx.navigateTo({
         url: "/page/component/pages/newsigninarea/newsigninarea?type=3",
       });
+    }  else if (_this.data.infoActivity.isCommandActivity) {
+        this.redpinputdataiftr();
     } else {
       this.joinDraw(0);
     }
@@ -989,9 +990,9 @@ Page({
 
       success: function (res) {
         wx.stopPullDownRefresh();
+        wx.hideLoading()
         if (res.data.ReturnCode == 200) {
           _this.getinfo()
-          wx.hideLoading()
           _this.setData({
             redpinputdataiftr: false,
           })
@@ -1792,7 +1793,17 @@ Page({
       });
     }
   },
-
+  // 复制微信号
+  sponsocopytwo:function(){
+    var _this = this;
+    wx.setClipboardData({
+      data:_this.data.infoActivity.wx|| _this.data.wxnum,
+      success: function (res) {
+        app.showToastC('复制成功');
+        _this.setData({copyiftr:false});
+      }
+    });
+  },
 
 
 })

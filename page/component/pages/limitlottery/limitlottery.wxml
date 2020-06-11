@@ -646,3 +646,21 @@
 		</view>
 	</view>
 </view>
+
+
+<!-- 红包口令  -->
+<view class='comtip' wx:if='{{redpinputdataiftr}}'>
+  <view class='comtipback' catchtap='redpinputdataiftr'></view>
+  <view class='apptipbox'>
+    <view class='apptiphead' style='font-size:32rpx;border-bottom:0;font-weight: bold;'>官方群专属口令</view>
+    <view class='apptipcont' style='padding:10rpx 0 0 0;font-size:26rpx;color:#6aab48;line-height: 36rpx;'>
+      <text>官方群获得口令,输入后即可报名\n添加官方微信:{{infoActivity.wx|| wxnum}}进群</text>
+    </view>
+    <input wx:if='{{commoddata.is_numeric==1}}' type="number" class='redinpnum' bindinput="redpinputChange" value='{{redpinputdata}}' placeholder='请输入美拆群专属口令,本次活动有效'></input>
+    <input wx:else class='redinpnum' bindinput="redpinputChange" value='{{redpinputdata}}' placeholder='请输入美拆群专属口令,本次活动有效'></input>
+    <view class='redbutbotpcopy commoncopyimmed' catchtap='sponsocopytwo' style='color:#ff2742;'>复制微信
+    </view>
+    <view class='redbutbotpimmed commoncopyimmed' catchtap='getword'>立即报名
+    </view>
+  </view>
+</view>

@@ -10,7 +10,7 @@
   <view style='padding:0 0 20rpx 20rpx;font-size:24rpx;'>限定抽签</view>
   <view style='padding:0 20rpx;overflow: hidden;'>
     <view class='limieve' wx:for='{{listdata}}' wx:key='key' style='{{index%2==1?"margin-right:0;":""}}' catchtap='limitlotteryd' data-gid='{{item.id}}'>
-      <image class='limieveimg' src='{{item.cover}}' mode='aspectFit'></image>
+      <image class='limieveimg' src='{{item.cover}}' mode='widthFix'></image>
       <view class='limievetxtname multilineellipsis'>
         <text style='color:#fd434c;'>抽签价￥{{item.shop_price}} </text>{{item.name}}</view>
       <view class='limievetxttime specialellipsis' wx:if='{{item.status==1}}'>{{item.start_time}} 开启</view>

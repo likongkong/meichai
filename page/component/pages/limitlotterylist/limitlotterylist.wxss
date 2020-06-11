@@ -23,7 +23,7 @@ page {
 }
 .limieveimg{
   width: 100%;
-  height: 183.4rpx;
+  height:auto;
   display: block;
   border-radius: 10rpx 10rpx 0 0;
 }
