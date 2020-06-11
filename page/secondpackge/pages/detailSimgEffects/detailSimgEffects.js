@@ -21,7 +21,7 @@ Page({
     windowWidth:0,  //屏幕宽度
     timeOut:'', //定时器
     autorotation:true,  //是否自动旋转
-    duration:1000 //持续时间
+    duration:500 //持续时间
   },
   onLoad: function (options) {
     var _this = this;

@@ -3,7 +3,6 @@
   position: fixed;
   left: 0;
   bottom: 0;
-  z-index: -1;
 }
 .fullview{
   width: 100%;
@@ -29,4 +28,14 @@
 }
 .active{
  display: block;
+}
+.tiptext{
+  width: 100%;
+  font-size: 24rpx;
+  color: #999;
+  display: block;
+  text-align: center;
+  position: fixed;
+  left: 0;
+  bottom: 200rpx;
 }
