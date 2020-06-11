@@ -1,7 +1,8 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
-
+<!--  html页面转换  -->
+<import src="../../../../wxParse/wxParse.wxml"/>
 
 <view class="ardbox">
    <view class="adhead">
@@ -21,7 +22,11 @@
    </view>
    <view class="adhcontent">
       <view class="adhceve" wx:for='{{goodsdata}}' catchtap="jumpposition" data-ind='{{index}}' wx:key='key' style="{{index%4==3?'margin-right:0;':''}}">
-          <image src="{{item.img}}" class="adhceveimg" mode='aspectFit'></image>
+          <swiper class="adcswiper" circular="true" autoplay="true" interval="3000" duration="450">
+            <swiper-item wx:for="{{item.img_arr}}" wx:key="key">
+              <image src="{{item}}" class="adhceveimg" mode='aspectFit'></image>
+            </swiper-item>
+          </swiper>          
           <view class="adhclet">{{item.gear}}</view>
           <view class="adhcnum">
               <view class="adhcnumbg"></view>
@@ -33,38 +38,57 @@
    </view>
    <view class="adheadutnum" style="text-align:center;">{{activity.shopPrice}}元随机获得一款限定周边(最终赏除外)</view>
    <view class="adcspecial">
-      <view class="adcweve" id='evepos0' style="height:500rpx;">
+      <view class="adcweve" id='evepos0' style="height:500rpx;border-top: 4rpx dashed #000;">
           <view class="adcspezzs">
              <view class="adcspezzstxt" style="line-height:60rpx;">最</view>
              <view class="adcspezzstxt">终</view>
              <view class="adcspezzstxt" style="line-height:40rpx;">赏</view>
           </view>
           <view class="adcspenum">共1个</view>
-          <view class="adcspename multilineellipsis">{{goodsdata[0].title}}</view>
+          <view class="adcspename multilineellipsis">{{finalReward.title}}</view>
           <view class="adcspencxy">超稀有!</view>
           <view class="adcspenum">买走最后一个周边立即拥有</view>
       </view>   
-      <view class="adcweve" style="border-left: 4rpx dashed #f5f6fa;height:500rpx;">
-          <image class="adcspecialimg" bindtap='previewImg' data-index='0' src="{{goodsdata[0].img}}" mode='aspectFit'></image>
+      <view class="adcweve" style="border-left: 4rpx dashed #f5f6fa;height:500rpx;border-top: 4rpx dashed #000;">
+          <image class="adcspecialimg" style="height:{{finalReward.height}}rpx;" bindload="imageLoadad" catchtap="iftrdetailpagen" data-index='10000' data-is_buy='{{finalReward.is_buy}}' data-goods_id='{{finalReward.goods_id}}' src="{{finalReward.img}}"></image>
       </view>
    </view>
    <view>
-      <view class="adcweve" wx:for='{{goodsdata}}' wx:if='{{index!=0}}' id='evepos{{index}}' wx:key='key' style="{{index%2==1?'border-right: 4rpx dashed #000;':''}}">
+      <!-- <view class="adcweve" wx:for='{{goodsdata}}' wx:if='{{index!=0}}' id='evepos{{index}}' wx:key='key' style="{{index%2==1?'border-right: 4rpx dashed #000;':''}}">
           <view class="adcweveleft">
               <view class="adcwelbg">
-                 <view class="adcweltxt" style="line-height:60rpx;">{{item.gear}}</view>
+                 <view class="adcweltxt" style="line-height:60rpx;">{{item.gear}}</view> 
                  <view class="adcweltxt" style="line-height:40rpx;">赏</view>
               </view>
-              <view class="adcspenum" style="text-align:left;">共{{item.limit}}个</view>
           </view>
-          <image class="adcweveimg" bindtap='previewImg' data-index='{{index}}' src="{{item.img}}" mode='widthFix'></image>
-          <view class="adcwevename specialellipsis">{{item.title}}</view>
+          <image catchtap="iftrdetailpagen" data-index='{{index}}' data-is_buy='{{item.is_buy}}' data-goods_id='{{item.goods_id}}' class="adcweveimg" src="{{item.img}}" mode='widthFix'></image>
+          <view class="adcwevename multilineellipsis">{{item.title}}</view>
       </view>
-      <view class="adcweve" wx:if='{{goodsdata.length%2==0}}'></view>
+      <view class="adcweve" wx:if='{{goodsdata.length%2==0}}'></view> -->
+
+
+        <view wx:for='{{goodsExhibition}}' wx:key='key' id='evepos{{index}}' style="{{item.length>1||item[0].is_width?'text-align: center;':'display:inline-block;'}}{{item[0].is_width?'border-top: 4rpx dashed #000;':''}}">
+            <view class="adcweve" wx:for='{{item}}' wx:for-item='w' wx:for-index='num' wx:key='key' style="{{w.rightline?'border-right: 4rpx dashed #000;':''}}{{!item[0].is_width&&num<2?'border-top: 4rpx dashed #000;':''}}">
+                <view class="adcweveleft" wx:if='{{w.gear}}'>
+                    <view class="adcwelbg">
+                        <view class="adcweltxt" style="line-height:60rpx;">{{w.gear}}</view> 
+                        <view class="adcweltxt" style="line-height:40rpx;">赏</view>
+                    </view>
+                </view>
+                <image catchtap="iftrdetailpagen" data-index='{{index}}' data-num='{{num}}' data-is_buy='{{w.is_buy}}' data-goods_id='{{w.goods_id}}' class="adcweveimg" src="{{w.img}}" mode='widthFix'></image>
+                <view class="adcwevename multilineellipsis">{{w.title}}</view>
+            </view>
+        </view>
+
+
+
+
 
 
    </view>
 
+
+   <view class="ardbottomeve prizeScrapingRecord" style="width:600rpx" catchtap="scrapingRecord">刮卡记录</view>
 
 
 </view>
@@ -72,12 +96,12 @@
 
 
 <view class="ardbottom">
-    <view class="ardbottomeve ardbmeleft" catchtap="scrapingRecord">刮卡记录</view>
-    <view wx:if='{{activity.status==1}}' class="ardbottomeve ardbmeright">暂未开始 {{activity.start_time}}</view>
-    <view wx:elif='{{activity.status==3}}' class="ardbottomeve ardbmeright" catchtap="jumpaRewardList">已结束</view>
-    <view wx:elif='{{activity.aheadUser&&activity.isInQueue}}' class="ardbottomeve ardbmeright" catchtap="scrapingPurfun">我要刮卡({{remaintime}}s)</view>
-    <view wx:elif='{{activity.isInQueue}}' class="ardbottomeve ardbmeright">排队中</view>
-    <view wx:else class="ardbottomeve ardbmeright" catchtap="lineUpNow">立即排队</view>
+    
+    <view wx:if='{{activity.status==1}}' style="width:600rpx" class="ardbottomeve ardbmerightbottom">暂未开始 {{activity.start_time}}</view>
+    <view wx:elif='{{activity.status==3}}' style="width:600rpx" class="ardbottomeve ardbmerightbottom" catchtap="jumpaRewardList">已结束</view>
+    <view wx:elif='{{activity.aheadUser&&activity.isInQueue}}' style="width:600rpx" class="ardbottomeve ardbmerightbottom" catchtap="scrapingPurfun">我要刮卡({{remaintime}}s)</view>
+    <view wx:elif='{{activity.isInQueue}}' style="width:600rpx" class="ardbottomeve ardbmerightbottom">排队中</view>
+    <view wx:else class="ardbottomeve ardbmerightbottom" style="width:600rpx" catchtap="lineUpNow">立即排队</view>
 
 </view>
 
@@ -109,7 +133,7 @@
 
 <!-- 刮奖 -->
 <view class="wsh" catchtouchmove="true" wx:if='{{scrapingBox}}'>
-    <view class="scrapingbox" style="height:{{windowHeight}}px;">
+    <view class="scrapingbox" style="height:{{windowHeight}}px;z-index:999999999;">
         <scroll-view scroll-y="true" class="scrapbscroll" style="height:{{windowHeight-60}}px;">
             <block wx:for="{{cardList}}" wx:key='key' data-index="{{index}}">
               <view class="card">
@@ -195,3 +219,18 @@
 	</view>
 </view>
 
+
+<!-- 商品详情  -->
+<view style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:199;' catchtouchmove="true" wx:if='{{iftrdetailpagetwo}}'>
+	<view class='tgimgboxgb' catchtap='iftrdetailpageb'></view>
+
+	<view style='width:100%;height:65%;position:absolute;left:0;bottom:0;background:#ccc;z-index:9;'>
+		<image src='https://www.51chaidan.com/images/spread/dial/fork.png' catchtap='iftrdetailpageb' style='width:50rpx;height:50rpx;padding:30rpx;border-radius:50%;display:block;position:absolute;top:0rpx;right:0;z-index:10;'>
+		</image>
+		<scroll-view scroll-y="true" style="width:100%;height:100%;background:#f0eff5;" class='detailsmokebox'>
+			<template is="wxParse" data="{{wxParseData:article.nodes}}" />
+		</scroll-view>
+        <view style="width:600rpx" wx:if='{{isbuynow}}' catchtap="jumpdetails" class="ardbottomeve buyNow">立即购买</view>
+	</view>
+
+</view>

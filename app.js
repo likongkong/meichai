@@ -123,15 +123,12 @@ App({
                 if (res.data.ReturnCode == 200 || res.data.ReturnCode == 201) {
                   _this.signindata.openid = res.data.Info.openid || '';
 
-
                   _this.signindata.loginid = res.data.Info.loginid || '';
                   _this.signindata.uid = res.data.Info.uid || '';
 
-                  
                   console.log(Dec.comurl(),Dec.clwcomurl())
                   // 是否开启展会 
                   _this.signindata.isOpenToyShow = res.data.Info.isOpenToyShow || false;
-
 
                   _this.signindata.isNewer = res.data.Info.isNewer || false;
                   _this.signindata.token = '';

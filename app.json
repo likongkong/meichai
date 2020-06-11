@@ -128,7 +128,7 @@
   "sitemapLocation": "sitemap71.json",
   "plugins": {
     "live-player-plugin": {
-      "version": "1.0.8",
+      "version": "1.0.15",
       "provider": "wx2b03c6e691cd7370"
     }
   }

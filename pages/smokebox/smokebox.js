@@ -1087,8 +1087,10 @@ Page({
   },
 
   onShow: function () {
-    var _this = this
+    var _this = this;
+    console.log('onShow===============')
     if (_this.data.loginid != '' && _this.data.uid != '' && _this.data.isloadfun) {
+      console.log('onshow=================111111')
       _this.getInfo();
     };
     Dec.getdoubleEleven(this, app);
@@ -1576,7 +1578,8 @@ Page({
         if (res.data.ReturnCode == 200) {
           // 支付完成弹框显示数据
           var payinfo = res.data.Info;
-
+          console.log('isloadfun=====================false2')
+          _this.data.isloadfun = false;
           wx.requestPayment({
             'timeStamp': res.data.Info.timeStamp.toString(),
             'nonceStr': res.data.Info.nonceStr,
@@ -1586,13 +1589,15 @@ Page({
             'success': function (res) {
               setTimeout(function () {
                 var cart_id = _this.data.cart_id || '0';
+                console.log('isloadfun=====================false1')
                 _this.setData({
                   tipbacktwo: false,
                   buybombsimmediately: false,
                   suboformola: false,
                   ishowsurebuy: false,
                   ishowcard: false,
-                  desc: ''
+                  desc: '',
+                  isloadfun:false
                 });
                 if (payinfo.isFreeBuyOrder) {
                   wx.navigateTo({

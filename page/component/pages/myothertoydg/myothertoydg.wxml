@@ -37,7 +37,7 @@
       <!-- 组合商品 -->
       <image wx:if='{{item.status!=1}}' src='{{item.selected ? selectedimg : unselectedimg}}' class='mtdghlimg' data-ind='{{index}}' data-group_id='{{item.group_id}}' data-toynumber='{{item.toyNumber}}' catchtap='singleselectgroup'></image>
     </view> 
-    <view class='mtdghimg' catchtap='previewImgurl' data-imgurl='{{item.goods_img}}'>
+    <view class='mtdghimg'  catchtap='{{item.isPanorama==1?"jumpDSIE":"previewImgurl"}}' data-imgurl='{{item.goods_img}}' data-gid='{{item.goodsId}}'>
       <image src='{{item.goods_img}}' class='mtdgimgb' mode='aspectFit' style='width:150rpx;'></image>
       <view wx:if='{{item.status==1}}' style='width:150rpx;' class='saleStyle'></view>
       <image wx:if='{{item.status==1}}' style='width:150rpx;height:150rpx;' src='https://www.51chaidan.com/images/toyCabinet/selled.png' class='saleimgStyle'></image>
@@ -316,7 +316,7 @@
               <!-- 未选中 -->
               <image wx:else src='https://www.51chaidan.com/images/toyCabinet/unchecked.png' class='mtdghlimg'></image>          
           </view>
-          <view class='mtdghimg' style='width:160rpx;margin-left:20rpx;float:left;position: relative;' catchtap='previewImgurl' data-imgurl='{{item.goods_img}}'>
+          <view class='mtdghimg' style='width:160rpx;margin-left:20rpx;float:left;position: relative;'  catchtap='{{item.isPanorama==1?"jumpDSIE":"previewImgurl"}}' data-imgurl='{{item.goods_img}}' data-gid='{{item.goodsId}}'>
             <image src='{{item.goods_img}}'  mode='aspectFit' style='left:0;width:150rpx;' class='mtdgimgb'></image>
           </view>
           <view class='mtdgctxt' style='width:480rpx;'>
@@ -350,7 +350,7 @@
 
   </view>
   <view class='mtdghcom' wx:for='{{listdataown}}' wx:key='key' style='{{item.end||item.group_id==0?"border-bottom:2rpx solid #b3b0b0;":"border-bottom:0;"}}'>
-    <view class='mtdghimg' style='width:160rpx;margin-left:20rpx;float:left;position: relative;' catchtap='previewImgurl' data-imgurl='{{item.goods_img}}'>
+    <view class='mtdghimg' style='width:160rpx;margin-left:20rpx;float:left;position: relative;' catchtap='{{item.isPanorama==1?"jumpDSIE":"previewImgurl"}}' data-imgurl='{{item.goods_img}}' data-gid='{{item.goodsId}}'>
       <image src='{{item.goods_img}}' mode='aspectFit' style='left:0;width:150rpx;' class='mtdgimgb'></image>
       <view wx:if='{{item.status==1}}' class='mtdghimgmask' style='width:150rpx;'></view>
       <image wx:if='{{item.status==1}}' class='mtdghimgmaskimg' style='width:150rpx;height:150rpx;' src='https://www.51chaidan.com/images/toyCabinet/selled.png'></image>

@@ -572,13 +572,14 @@ Page({
         'Accept': 'application/json'
       },
       success: function (res) {
+        console.log('listdataown=====',res)
         wx.hideLoading();
         wx.stopPullDownRefresh()
         _this.mtotipscliffun();
         _this.setData({
           iftrnodata: true
         });
-        _this.data.isonshow = true;
+        // _this.data.isonshow = true;
         if (res.data.ReturnCode == 200) {
           var listdata = res.data.List.activity || [];
           
@@ -588,12 +589,8 @@ Page({
               for (var l = 0; l < listdata.length; l++) {
                 listdatamy.push(listdata[l]);
               };
-
             };
              
-
-
-
             _this.setData({
               listdataown: listdata
             });
@@ -1022,6 +1019,7 @@ Page({
         'Accept': 'application/json'
       },
       success: function (res) {
+        console.log('listdata=========',res)
         wx.stopPullDownRefresh()
         wx.hideLoading();
         // _this.data.isonshow = true;
@@ -2696,7 +2694,13 @@ Page({
       }
     });
   },
-
+  jumpDSIE(w){
+    var gid = w.currentTarget.dataset.gid;
+    console.log('gid=============',gid)
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/detailSimgEffects/detailSimgEffects?gid="+gid
+    });
+  },
 
 
 })

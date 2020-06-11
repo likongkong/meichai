@@ -1192,14 +1192,6 @@ Page({
       url: "../../../../pages/index/index?judgeprof=2"
     })
   },  
-
-
-  // 跳转首页
-  frontpagebutton: function () {
-    wx.reLaunch({
-      url: "../../../../pages/index/index?judgeprof=2"
-    })
-  },
   // 生成图片
   generatePictures: function (qrcode, awardinfo, cover) {
     var _this = this;
