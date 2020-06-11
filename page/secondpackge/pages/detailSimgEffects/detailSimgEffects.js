@@ -14,9 +14,14 @@ Page({
     txtcolor:'#000000',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
     fullview:[], 
-    prenum:0,
-    scalevalue:0,
-    windowHeight:0
+    windowHeight:0,
+    prenum:0, //上一个位置
+    scalevalue:0,  //比率值
+    nownum:0, //当前位置
+    windowWidth:0,  //屏幕宽度
+    timeOut:'', //定时器
+    autorotation:true,  //是否自动旋转
+    duration:1000 //持续时间
   },
   onLoad: function (options) {
     var _this = this;
@@ -47,8 +52,11 @@ Page({
           wx.getSystemInfo({
             success: function (res) {
               _this.setData({
+                windowHeight:res.windowHeight-_this.data.statusBarHeightMc,
                 scalevalue:res.windowWidth/_this.data.fullview.length,
-                windowHeight:res.windowHeight-_this.data.statusBarHeightMc
+                windowWidth:res.windowWidth,
+                nownum:res.windowWidth,
+                prenum:res.windowWidth,
               });
             }
           });
@@ -60,6 +68,41 @@ Page({
     });
     
   },
+  onShow(){
+    this.autorotationFun();
+  },
+  //页面隐藏
+  onHide(){
+    clearInterval(this.data.timeOut);
+  },
+  //页面卸载
+  onUnload(){
+    clearInterval(this.data.timeOut);
+  },
+  switchChange(e){
+    if(e.detail.value){
+      this.setData({autorotation: true});
+      this.autorotationFun();
+    }else{
+      this.setData({autorotation: false});
+      clearInterval(this.data.timeOut);
+    }
+  },
+  autorotationFun(){
+    let _this = this;
+    if(_this.data.autorotation){
+      let time = setInterval(function () {
+        if(_this.data.nownum <= 0){
+          _this.setData({nownum:_this.data.windowWidth,prenum:_this.data.windowWidth})
+        }
+        _this.setData({nownum:_this.data.nownum - _this.data.scalevalue})
+        _this.moveFun(_this.data.nownum,_this.data.prenum);
+      },_this.data.duration)
+      _this.setData({
+        timeOut: time
+      });
+    }
+  },
   // 手指触摸
   handletouchstart(event){
     this.setData({prenum:event.touches[0].pageX})
@@ -68,11 +111,15 @@ Page({
   handletouchmove(event){
     let nownum = event.touches[0].pageX;
     let prenum = this.data.prenum;
+    this.moveFun(nownum,prenum);
+  },
+  moveFun(nownum,prenum){
     let images = this.data.fullview;
-    console.log('当前值'+nownum,'上一个值'+prenum,'相差值'+ this.differencevalue(prenum,nownum))
+    console.log(' 当前值'+nownum +' 上一个值'+prenum +' 相差值'+ this.differencevalue(prenum,nownum) +' 比率值'+this.data.scalevalue)
     let differencevalue = this.differencevalue(prenum,nownum)
-    if(differencevalue > this.data.scalevalue){
+    if(differencevalue >= this.data.scalevalue){
       this.setData({prenum:nownum})
+      this.setData({nownum:nownum})
       for(var i = 0;i<images.length;i++){
         if(images[i].active){
           images[i].active = false;

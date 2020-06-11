@@ -2,6 +2,11 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}' txtcolor='{{txtcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
+<view>
+  <switch checked bindchange="switchChange"/>
+  <text>{{autorotation?'关闭':'打开'}}</text>
+</view>
+
 <view style="height:{{windowHeight}}px" class="fullviewBox">
   <image class="bgimg" src="{{bgimg}}" mode="aspectFit"></image>
   <view class="fullview" bindtouchmove="handletouchmove" bindtouchstart="handletouchstart"> 
