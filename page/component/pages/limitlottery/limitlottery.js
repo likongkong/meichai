@@ -524,7 +524,7 @@ Page({
         if (res.data.ReturnCode == 200) {
           _this.setData({
             defaultinformation: res.data.Info,
-            comwxnum: res.data.Info.cs.wxid || 'meichai666666',
+            wxnum: res.data.Info.cs.wxid || 'meichai666666',
           });
         };
         // 判断非200和登录
@@ -922,11 +922,13 @@ Page({
 
         } else {
           if(res.data.ReturnCode != 300){
-            wx.showModal({
-              content: res.data.Msg || '',
-              showCancel: false,
-              success: function (res) {}
-            })
+            if(res.data.Msg){
+              wx.showModal({
+                content: res.data.Msg || '',
+                showCancel: false,
+                success: function (res) {}
+              })              
+            }
           };
         }
       },

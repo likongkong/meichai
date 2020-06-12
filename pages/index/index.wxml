@@ -71,9 +71,9 @@
 	</view>
 
 	<!--  测试  -->
-	<!-- <view style='height:220rpx;width:100%;text-align:center; display: table;' class='rotate' catchtap='jumpxinxi'>
+	<view style='height:220rpx;width:100%;text-align:center; display: table;' class='rotate' catchtap='jumpxinxi'>
 		<text style='display: table-cell;vertical-align:middle;text-align:center;'>转盘\n盘转</text>
-	</view> -->
+	</view>
 	<!--   数据  -->
 
 	<!--  信息流  -->
@@ -449,16 +449,16 @@
 				<view class='disanumofgoods_box' wx:if='{{item.List.length!=0}}'>
 					<view class='disanum_scr'>
 						<scroll-view scroll-x="true" class="disanum_tab_comtainer">
-							<view class='disanum_scr_box' wx:for='{{item.List}}' wx:key='key' wx:for-item='w' style='height:119rpx;width:222rpx;'>
-								<view class='disanum_simgbox' catchtap='jumpdlflottery' data-id='{{w.id}}' style='height:119rpx;width:222rpx;'>
-									<image class='disanum_simg' src='{{w.cover}}?imageMogr2/thumbnail/x238' style='height:119rpx;width:222rpx;' mode='aspectFit'></image>
+							<view class='disanum_scr_box' wx:for='{{item.List}}' wx:key='key' wx:for-item='w' wx:for-index='num' style='height:159rpx;width:{{w.width}}rpx;'>
+								<view class='disanum_simgbox' catchtap='jumpdlflottery' data-id='{{w.id}}' style='height:119rpx;width:{{w.width}}rpx;'>
+									<image class='disanum_simg'  bindload="imageLoadad" data-indexnum='989' data-num='{{num}}' data-ind='{{index}}' src='{{w.cover}}?imageMogr2/thumbnail/x238' style='height:119rpx;width:{{w.width}}rpx;' mode='aspectFit'></image>
 
-									<view class='videomaskcom' wx:if='{{w.shop_price || w.stop_time}}' style='background:#000;opacity: 0.4;z-index:1;'></view>
-									<view class='videomaskcom specialellipsis' wx:if='{{w.shop_price || w.stop_time}}' style='z-index:2;'>
-										<text style='float:left;padding-left:4rpx;font-size:20rpx;' wx:if='{{w.shop_price}}'>￥{{w.shop_price}}</text>
-										<text style='float:right;padding-right:10rpx;'>{{w.stop_time}}</text>
+									<view class='videomaskcom specialellipsis' wx:if='{{w.shop_price}}' style='z-index:2;height:40rpx;'>
+										<text style='float:left;padding:0 8rpx 0 4rpx;font-size:24rpx;color:#fff;background: rgba(0,0,0,0.4);height:40rpx;border-radius:10rpx;line-height:42rpx;' wx:if='{{w.shop_price}}'>￥{{w.shop_price}}</text>
+										<!-- <text style='float:right;padding-right:10rpx;'>{{w.stop_time}}</text> -->
 									</view>
 								</view>
+								<view class="limittxtindex specialellipsis">{{w.stop_time}}</view>
 							</view>
 							<view class='disanum_scr_box' style='height:118rpx;' wx:if='{{item.List.length>=4&&item.item_type}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}' catchtap='imgcomindellistjump'>
 									<view class='disanum_stxt' style='top:0;width:118rpx;height:118rpx;'>

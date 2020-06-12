@@ -1635,6 +1635,23 @@ Page({
           })
         };
       };
+    } else if (indexnum == 989) {
+      var ind = e.currentTarget.dataset.ind || e.target.dataset.ind || 0;
+      var num = e.currentTarget.dataset.num || e.target.dataset.num || 0;
+      var $width = e.detail.width,
+        $height = e.detail.height,
+        ratio = $width / $height;
+      var viewHeight = 119,
+        viewWidth = 119 * ratio;
+      var commoddata = this.data.commoddata;
+      if (commoddata[ind]) {
+        if (commoddata[ind].List && commoddata[ind].List[num]) {
+          commoddata[ind].List[num].width = viewWidth;
+          _this.setData({
+            ['commoddata['+ind+'].List['+num+'].width'] : viewWidth
+          })
+        };
+      };
     } else if (indexnum == 7) {
       var ind = e.currentTarget.dataset.ind || e.target.dataset.ind || 0;
       var num = e.currentTarget.dataset.num || e.target.dataset.num || 0;

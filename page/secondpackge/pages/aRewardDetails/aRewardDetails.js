@@ -50,7 +50,11 @@ Page({
     // 详情弹框
     iftrdetailpagetwo:false,
     isbuynow:false,
-    isbuynowid:''
+    isbuynowid:'',
+    // 刮奖分享选择
+    isSharingSAwards:false,
+    // 继续刮奖 true 跳转列表 false
+    scratchOrList:true
   },
   howToPlayFun:function(){
      this.setData({
@@ -304,233 +308,31 @@ Page({
           var userimg = res.data.List.queue || [];
           var goodsdata = res.data.List.goods || [];
           var activity = res.data.Info.activity ||{};
-          var finalReward = '' || {};
-          var goodsExhibition = '' || [];
-
-          var goodsExhibition = [
-            [
-                {
-                  "roleId": 0,
-                  "title": "终盾之乙女 玛修・基利艾拉特 角色模型",
-                  "img": "http://test.51chaidan.com/images/spread/yiFanShang/goodsImg_0_1591691241.png",
-                  "gear": "A",
-                  "goods_id": "331640",
-                  "is_hand_do": "1",
-                  "limit": "1",
-                  "goods_desc": "<img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527150334_77390.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527150334_95055.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527150334_18641.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527150334_36504.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527150335_58672.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527150337_66817.jpg' alt=''/>",
-                  "is_buy": 2,
-                  "suplus": "1"
-                },
-            ],
-            [
-              {
-                "roleId": 1,
-                "title": "1阿狸迷你公仔·寻找月亮郡（10%机率掉落异色款）品牌方发货现货顺丰到付",
-                "img": "http://test.51chaidan.com/images/spread/yiFanShang/goodsImg_1_1591691241.png",
-                "gear": "B",
-                "goods_id": "331641",
-                "limit": "2",
-                "is_hand_do": null,
-                "isBetter": true,
-                "goods_desc": "<img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152619_93252.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152619_55787.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152619_89569.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152619_48016.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152619_32762.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152619_59287.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152620_16388.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152620_83743.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152620_26830.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152621_36785.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152621_80723.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152621_77341.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152621_65520.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152622_60994.jpg' alt=''/>",
-                "is_buy": 2,
-                "suplus": "2"
-            },
-             {
-                "roleId": 1,
-                "title": "2阿狸迷你公仔·寻找月亮郡（10%机率掉落异色款）品牌方发货现货顺丰到付",
-                "img": "http://test.51chaidan.com/images/spread/yiFanShang/goodsImg_1_1591691241.png",
-                "gear": "B",
-                "goods_id": "331641",
-                "limit": "2",
-                "is_hand_do": null,
-                "isBetter": true,
-                "goods_desc": "<img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152619_93252.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152619_55787.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152619_89569.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152619_48016.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152619_32762.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152619_59287.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152620_16388.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152620_83743.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152620_26830.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152621_36785.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152621_80723.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152621_77341.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152621_65520.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152622_60994.jpg' alt=''/>",
-                "is_buy": 2,
-                "suplus": "2"
-            },
-             {
-                "roleId": 1,
-                "title": "3阿狸迷你公仔·寻找月亮郡（10%机率掉落异色款）品牌方发货现货顺丰到付",
-                "img": "http://test.51chaidan.com/images/spread/yiFanShang/goodsImg_1_1591691241.png",
-                "gear": "B",
-                "goods_id": "331641",
-                "limit": "2",
-                "is_hand_do": null,
-                "isBetter": true,
-                "goods_desc": "<img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152619_93252.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152619_55787.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152619_89569.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152619_48016.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152619_32762.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152619_59287.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152620_16388.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152620_83743.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152620_26830.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152621_36785.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152621_80723.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152621_77341.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152621_65520.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200527152622_60994.jpg' alt=''/>",
-                "is_buy": 2,
-                "suplus": "2"
-              },
-              {
-                "roleId": 2,
-                "title": "融化炸弹品牌方发货预计水电费发货发货快递到付",
-                "img": "http://test.51chaidan.com/images/spread/yiFanShang/goodsImg_2_1591691241.jpg",
-                "gear": "B",
-                "goods_id": "331642",
-                "limit": "3",
-                "is_hand_do": null,
-                "isBetter": false,
-                "goods_desc": "<img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200529171957_59973.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200529171958_62579.jpg' alt=''/>",
-                "is_buy": 2,
-                "suplus": "3"
-              },
-            ],
-            [
-
-              {
-                "roleId": 2,
-                "title": "融化炸弹品牌方发货预计水电费发货发货快递到付",
-                "img": "http://test.51chaidan.com/images/spread/yiFanShang/goodsImg_2_1591691241.jpg",
-                "gear": "G",
-                "goods_id": "331642",
-                "limit": "3",
-                "is_hand_do": null,
-                "isBetter": false,
-                "goods_desc": "<img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200529171957_59973.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200529171958_62579.jpg' alt=''/>",
-                "is_buy": 2,
-                "suplus": "3"
-              },
-            ],
-            [
-              {
-                "roleId": 2,
-                "title": "融化炸弹品牌方发货预计水电费发货发货快递到付",
-                "img": "http://test.51chaidan.com/images/spread/yiFanShang/goodsImg_2_1591691241.jpg",
-                "gear": "H",
-                "goods_id": "331642",
-                "limit": "3",
-                "is_hand_do": null,
-                "isBetter": false,
-                "goods_desc": "<img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200529171957_59973.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200529171958_62579.jpg' alt=''/>",
-                "is_buy": 2,
-                "suplus": "3"
-              }
-            ],
-            [
-              {
-                "roleId": 2,
-                "title": "融化炸弹品牌方发货预计水电费发货发货快递到付",
-                "img": "http://test.51chaidan.com/images/spread/yiFanShang/goodsImg_2_1591691241.jpg",
-                "gear": "C",
-                "goods_id": "331642",
-                "limit": "3",
-                "is_hand_do": null,
-                "isBetter": false,
-                "goods_desc": "<img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200529171957_59973.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200529171958_62579.jpg' alt=''/>",
-                "is_buy": 2,
-                "suplus": "3"
-              },
-              {
-                "roleId": 2,
-                "title": "融化炸弹品牌方发货预计水电费发货发货快递到付",
-                "img": "http://test.51chaidan.com/images/spread/yiFanShang/goodsImg_2_1591691241.jpg",
-                "gear": "C",
-                "goods_id": "331642",
-                "limit": "3",
-                "is_hand_do": null,
-                "isBetter": false,
-                "goods_desc": "<img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200529171957_59973.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200529171958_62579.jpg' alt=''/>",
-                "is_buy": 2,
-                "suplus": "3"
-              },
-              {
-                "roleId": 2,
-                "title": "融化炸弹品牌方发货预计水电费发货发货快递到付",
-                "img": "http://test.51chaidan.com/images/spread/yiFanShang/goodsImg_2_1591691241.jpg",
-                "gear": "C",
-                "goods_id": "331642",
-                "limit": "3",
-                "is_hand_do": null,
-                "isBetter": false,
-                "goods_desc": "<img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200529171957_59973.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200529171958_62579.jpg' alt=''/>",
-                "is_buy": 2,
-                "suplus": "3"
-              }                 
-            ],
-            [
-              {
-                "roleId": 2,
-                "title": "融化炸弹品牌方发货预计水电费发货发货快递到付",
-                "img": "http://test.51chaidan.com/images/spread/yiFanShang/goodsImg_2_1591691241.jpg",
-                "gear": "E",
-                "goods_id": "331642",
-                "limit": "3",
-                "is_hand_do": null,
-                "isBetter": false,
-                "goods_desc": "<img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200529171957_59973.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200529171958_62579.jpg' alt=''/>",
-                "is_buy": 2,
-                "suplus": "3"
-              } 
-            ],
-            [
-              {
-                "roleId": 2,
-                "title": "融化炸弹品牌方发货预计水电费发货发货快递到付",
-                "img": "http://test.51chaidan.com/images/spread/yiFanShang/goodsImg_2_1591691241.jpg",
-                "gear": "F",
-                "goods_id": "331642",
-                "limit": "3",
-                "is_hand_do": null,
-                "isBetter": false,
-                "goods_desc": "<img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200529171957_59973.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200529171958_62579.jpg' alt=''/>",
-                "is_buy": 2,
-                "suplus": "3"
-              },
-              {
-                "roleId": 2,
-                "title": "融化炸弹品牌方发货预计水电费发货发货快递到付",
-                "img": "http://test.51chaidan.com/images/spread/yiFanShang/goodsImg_2_1591691241.jpg",
-                "gear": "F",
-                "goods_id": "331642",
-                "limit": "3",
-                "is_hand_do": null,
-                "isBetter": false,
-                "goods_desc": "<img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200529171957_59973.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200529171958_62579.jpg' alt=''/>",
-                "is_buy": 1,
-                "suplus": "3"
-              } 
-            ]
-
-        ]
-
-
-        finalReward = {
-          "roleId": 2,
-          "title": "融化炸弹品牌方发货预计水电费发货发货快递到付",
-          "img": "http://test.51chaidan.com/images/spread/yiFanShang/goodsImg_2_1591691241.jpg",
-          "gear": "终",
-          "goods_id": "331642",
-          "limit": "3",
-          "is_hand_do": null,
-          "isBetter": false,
-          "goods_desc": "<img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200529171957_59973.jpg' alt=''/><img src='http://test.51chaidan.com/images/toyShow2/goodsDesc/20200529171958_62579.jpg' alt=''/>",
-          "is_buy": 2,
-          "suplus": "3"
-        } 
+          var finalReward = res.data.List.eventually || {};
+          var goodsExhibition = res.data.List.goods_gear_list || [];
         
-        var rightline = true;
-        for(var i=0;i<goodsExhibition.length;i++){
-           if(goodsExhibition[i].length>1){
-              rightline = true;
-           }else{
-            goodsExhibition[i][0].rightline = rightline;
-              rightline = !rightline;
-           };
-        };
-
-        var newarr = [];
-        for(var i=0;i<goodsExhibition.length;i++){
-          newarr.push(goodsExhibition[i])
-          if(goodsExhibition[i].length<=1){
-             if(goodsExhibition[i][0].rightline&&goodsExhibition[i+1]&&goodsExhibition[i+1].length>1){
-                if(newarr[i]){
-                  newarr[i][0].is_width = true;
-                  newarr[i][0].rightline = false;
-                }
-             };
+          var rightline = true;
+          for(var i=0;i<goodsExhibition.length;i++){
+            if(goodsExhibition[i].length>1){
+                rightline = true;
+            }else{
+              goodsExhibition[i][0].rightline = rightline;
+                rightline = !rightline;
+            };
           };
-       };
+
+          var newarr = [];
+          for(var i=0;i<goodsExhibition.length;i++){
+            newarr.push(goodsExhibition[i])
+            if(goodsExhibition[i].length<=1){
+              if(goodsExhibition[i][0].rightline&&goodsExhibition[i+1]&&goodsExhibition[i+1].length>1){
+                  if(newarr[i]){
+                    newarr[i][0].is_width = true;
+                    newarr[i][0].rightline = false;
+                  }
+              };
+            };
+        };
         console.log('newarr====',newarr)
         console.log(goodsExhibition)
 
@@ -559,7 +361,7 @@ Page({
             // },second)  
             _this.data.recordtime = activity.refreshTime;	
 
-            // _this.countdown();
+            _this.countdown();
 
           }else{
             if(userimg.length==0&&activity.status!=3&&activity.suplusNum>0){
@@ -687,12 +489,13 @@ Page({
                   'paySign': res.data.Info.paySign,
                   'success': function (res) { 
 
-
                     _this.scrapingboxfun();
                     // 订阅授权
                     // app.comsubscribe(_this);
                   },
-                  'fail':function(res){},
+                  'fail':function(res){
+                    _this.scrapingboxfun();
+                  },
                   'complete': function (res) {}
                 })
         }else{
@@ -754,7 +557,28 @@ Page({
       }
     } else if (second <= 0) {
       clearInterval(_this.data.timer)
-      _this.listdata();
+      if(_this.data.scrapingBox){
+        _this.setData({scratchOrList:false});
+      }else{
+        _this.setData({scratchOrList:true});
+        if(_this.data.activity.aheadUser){
+          wx.showModal({
+            title: '重新排队提示',
+            content: '等待时间过长,已被移除队列,是否继续排队',
+            success: function (res) {
+              if (res.confirm) {
+                _this.lineUpNow();
+              }else{
+                _this.jumpaRewardList();
+              };
+            }
+          });
+        }else{
+          _this.listdata();
+        }
+
+      }
+
     }
   },
   // 跳转定位

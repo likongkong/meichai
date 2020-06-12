@@ -9,19 +9,37 @@
 <view wx:if='{{listdata.length>0}}' class='limlistbox' style='padding-top:15rpx;'>
   <view style='padding:0 0 20rpx 20rpx;font-size:24rpx;'>限定抽签</view>
   <view style='padding:0 20rpx;overflow: hidden;'>
-    <view class='limieve' wx:for='{{listdata}}' wx:key='key' style='{{index%2==1?"margin-right:0;":""}}' catchtap='limitlotteryd' data-gid='{{item.id}}'>
-      <image class='limieveimg' src='{{item.cover}}' mode='widthFix'></image>
-      <view class='limievetxtname multilineellipsis'>
-        <text style='color:#fd434c;'>抽签价￥{{item.shop_price}} </text>{{item.name}}</view>
-      <view class='limievetxttime specialellipsis' wx:if='{{item.status==1}}'>{{item.start_time}} 开启</view>
-      <view class='limievetxttime specialellipsis' wx:if='{{item.status==2}}'>{{item.stop_time}} 公布中签结果</view>
-      <view class='limievetxttime specialellipsis' wx:if='{{item.status==3}}' style="text-align:right;color:#3f9313;font-weight:bold;">已抽签完成</view>
-      <view class='labelstyle'>
-        <view style='background:#FB595F;border-radius:7rpx;'>{{item.tip}}</view>
-      </view>
-      <view style='height:40rpx;background:#fff;border-radius:5rpx;vertical-align: top;line-height:40rpx;font-size:20rpx;padding:0 4rpx 0 2rpx;max-width:160rpx;position:absolute;top:10rpx;left:10rpx;' class='specialellipsis' wx:if='{{item.supportLogo}}'>
-           <image src='{{item.supportLogo}}' class='limstorlogo'></image>{{item.supportName}}
-      </view>      
+    <view style="width:364rpx;float:left;">
+        <view class='limieve' wx:for='{{listdata}}' wx:key='key' wx:if='{{index%2==0}}' catchtap='limitlotteryd' data-gid='{{item.id}}'>
+          <image class='limieveimg' src='{{item.cover}}' mode='widthFix'></image>
+          <view class='limievetxtname multilineellipsis'>
+            <text style='color:#fd434c;'>抽签价￥{{item.shop_price}} </text>{{item.name}}</view>
+          <view class='limievetxttime specialellipsis' wx:if='{{item.status==1}}'>{{item.start_time}} 开启</view>
+          <view class='limievetxttime specialellipsis' wx:if='{{item.status==2}}'>{{item.stop_time}} 公布中签结果</view>
+          <view class='limievetxttime specialellipsis' wx:if='{{item.status==3}}' style="text-align:right;color:#3f9313;font-weight:bold;">已抽签完成</view>
+          <view class='labelstyle'>
+            <view style='background:#FB595F;border-radius:7rpx;'>{{item.tip}}</view>
+          </view>
+          <view style='height:40rpx;background:#fff;border-radius:5rpx;vertical-align: top;line-height:40rpx;font-size:20rpx;padding:0 4rpx 0 2rpx;max-width:160rpx;position:absolute;top:10rpx;left:10rpx;' class='specialellipsis' wx:if='{{item.supportLogo}}'>
+              <image src='{{item.supportLogo}}' class='limstorlogo'></image>{{item.supportName}}
+          </view>      
+        </view>    
+    </view>
+    <view style="width:344rpx;float:left;">
+        <view class='limieve' wx:for='{{listdata}}' wx:key='key' style='margin-right:0;' wx:if='{{index%2==1}}' catchtap='limitlotteryd' data-gid='{{item.id}}'>
+          <image class='limieveimg' src='{{item.cover}}' mode='widthFix'></image>
+          <view class='limievetxtname multilineellipsis'>
+            <text style='color:#fd434c;'>抽签价￥{{item.shop_price}} </text>{{item.name}}</view>
+          <view class='limievetxttime specialellipsis' wx:if='{{item.status==1}}'>{{item.start_time}} 开启</view>
+          <view class='limievetxttime specialellipsis' wx:if='{{item.status==2}}'>{{item.stop_time}} 公布中签结果</view>
+          <view class='limievetxttime specialellipsis' wx:if='{{item.status==3}}' style="text-align:right;color:#3f9313;font-weight:bold;">已抽签完成</view>
+          <view class='labelstyle'>
+            <view style='background:#FB595F;border-radius:7rpx;'>{{item.tip}}</view>
+          </view>
+          <view style='height:40rpx;background:#fff;border-radius:5rpx;vertical-align: top;line-height:40rpx;font-size:20rpx;padding:0 4rpx 0 2rpx;max-width:160rpx;position:absolute;top:10rpx;left:10rpx;' class='specialellipsis' wx:if='{{item.supportLogo}}'>
+              <image src='{{item.supportLogo}}' class='limstorlogo'></image>{{item.supportName}}
+          </view>      
+        </view>    
     </view>
 
   </view>
@@ -36,8 +54,8 @@
     <view style='width:100%;height:60rpx;line-height:60rpx;font-size:24rpx;'>已报名抽签</view>
     <view style='width:100%;height:140rpx;'>
       <scroll-view scroll-x="true" style='width:100%;white-space:nowrap;height:100%;'>
-        <view wx:for='{{signlist}}' wx:key='key' style='vertical-align: top;position: relative;width:262rpx;height:100%;margin-right:20rpx;display: inline-block;' catchtap='limitlotteryd' data-gid='{{item.id}}'>
-          <image style='display:block;width:100%;height:100%;border-radius:6rpx;' src='{{item.cover}}'></image>
+        <view wx:for='{{signlist}}' wx:key='key' style='vertical-align: top;position: relative;width:{{item.width}}rpx;height:100%;margin-right:20rpx;display: inline-block;' catchtap='limitlotteryd' data-gid='{{item.id}}'>
+          <image bindload="imageLoadad" data-indexnum='1' data-ind='{{index}}' style='display:block;width:{{item.width}}rpx;height:100%;border-radius:6rpx;' src='{{item.cover}}'></image>
         </view>
       </scroll-view>
     </view>
@@ -50,8 +68,8 @@
     <view style='width:100%;height:60rpx;line-height:60rpx;font-size:24rpx;'>已完成抽签</view>
     <view style='width:100%;height:140rpx;'>
       <scroll-view scroll-x="true" style='width:100%;white-space:nowrap;height:100%;'>
-        <view wx:for='{{finishedlist}}' wx:key='key' style='vertical-align: top;position: relative;width:262rpx;height:100%;margin-right:20rpx;display: inline-block;' catchtap='limitlotteryd' data-gid='{{item.id}}'>
-          <image style='display:block;width:100%;height:100%;border-radius:6rpx;' src='{{item.cover}}'></image>
+        <view wx:for='{{finishedlist}}' wx:key='key' style='vertical-align: top;position: relative;width:{{item.width}}rpx;height:100%;margin-right:20rpx;display: inline-block;' catchtap='limitlotteryd' data-gid='{{item.id}}'>
+          <image bindload="imageLoadad" data-indexnum='2' data-ind='{{index}}' style='display:block;width:{{item.width}}rpx;height:100%;border-radius:6rpx;' src='{{item.cover}}'></image>
         </view>
       </scroll-view>
     </view>

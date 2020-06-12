@@ -81,10 +81,6 @@
         </view>
 
 
-
-
-
-
    </view>
 
 
@@ -133,8 +129,9 @@
 
 <!-- 刮奖 -->
 <view class="wsh" catchtouchmove="true" wx:if='{{scrapingBox}}'>
-    <view class="scrapingbox" style="height:{{windowHeight}}px;z-index:999999999;">
+    <view class="scrapingbox" style="height:{{windowHeight}}px;z-index:999;">
         <scroll-view scroll-y="true" class="scrapbscroll" style="height:{{windowHeight-60}}px;">
+            <view class="scrapbscrollHead">60s后自动刮开全部奖券</view>
             <block wx:for="{{cardList}}" wx:key='key' data-index="{{index}}">
               <view class="card">
                 <image class="bgimg" src="{{activity.lottoBackGround}}" mode="aspectFill"></image>
@@ -144,22 +141,39 @@
                 </view>
                 <!--背面的框 -->
                 <view class="box b2" animation="{{item.animation_back}}" bindtap='rotateFn' data-index="{{index}}" data-id="2">
-                    <view class="boxbt" style="{{item.gear=='终'?'font-size:52rpx;color:#ff2742;':''}}">{{item.gear}}<view class="boxbtappre">赏</view></view>
-                    <view class="boxbtright specialellipsis">{{item.name}}</view>
+                    <view class="boxbtbox">
+                       <image class="boxbtboximg" src="{{item.cover}}"></image>
+                       <view class="boxbt" style="{{item.gear=='终'?'font-size:34rpx;color:#ff2742;':''}}">{{item.gear}}<view class="boxbtappre">赏</view></view>
+                    </view>
+                    <view class="boxbtright multilineellipsis">{{item.name}}</view>
                 </view>
               </view>
             </block>
             
         </scroll-view>
         <view class="scrapboxbottom">
-           <view class="ardbottomeve ardbmeleft" catchtap="rotateFnWhole">全部开启</view>
-           <view class="ardbottomeve ardbmeright" catchtap="scrapingBoxfun">继续刮奖({{remaintime}}s)</view>
+           <view class="scrapboxbutcontinue" catchtap="{{scratchOrList?'scrapingBoxfun':'jumpaRewardList'}}">
+              <block wx:if='{{scratchOrList}}'>继续刮奖 ({{remaintime}}s)</block>
+              <block wx:else>返回列表</block>
+           </view>
         </view>
     </view>
 </view>
 
-
-
+<!-- 刮奖 -->
+<view class="wsh" catchtouchmove="true" wx:if='{{isSharingSAwards}}' style="z-index:9999;">
+    <view class="tgimgboxgb" catchtap="scrapingPurfun"></view>
+    <view class="SharingSAwards">
+        <view class="SSAhead">恭喜您!</view>
+        <view class="SSAname multilineellipsis">刮到我妻善逸手办刮到我妻善逸手办刮到我妻善逸手办刮到我妻善逸手办</view>
+        <image class="SSAimg" src="https://cdn.51chaidan.com/images/toyShow1/448/0/goods/Gallery/1588098592_1.jpg"></image>
+        <view class="SSAsharetxt">分享到微信群,随机更换款式</view>
+        <view class="SSAbut">
+           <view class="SSAbutLeft SSLcomlr">更换款式<button class="SSAbutShare" open-type='share'></button></view>
+           <view class="SSAbutRight SSLcomlr">放入玩具柜</view>
+        </view>
+    </view>
+</view>
 
 
 <bnavigation isProduce='{{isProduce}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>

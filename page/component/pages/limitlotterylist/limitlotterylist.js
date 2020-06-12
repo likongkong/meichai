@@ -365,6 +365,41 @@ Page({
       tgabox: true
     });
   },
-
+  // 计算图片大小
+  imageLoadad: function (e) {
+    var _this = this;
+    var indexnum = e.currentTarget.dataset.indexnum || e.target.dataset.indexnum || 0;
+    // 已报名
+    if (indexnum == 1) {
+      var ind = e.currentTarget.dataset.ind || e.target.dataset.ind || 0;
+      var $width = e.detail.width,
+        $height = e.detail.height,
+        ratio = $width / $height;
+      var viewHeight = 140,
+        viewWidth = 140 * ratio;
+      var signlist = this.data.signlist;
+      if (signlist[ind]) {
+        if (signlist[ind]) {
+          signlist[ind].width = viewWidth;
+          _this.setData({
+            ['signlist[' + ind + '].width']: viewWidth
+          });
+        };
+      };
+    } else if (indexnum == 2) { // 已完成
+      var ind = e.currentTarget.dataset.ind || e.target.dataset.ind || 0;
+      var $width = e.detail.width,
+        $height = e.detail.height,
+        ratio = $width / $height;
+      var viewHeight = 140,
+        viewWidth = 140 * ratio;
+      var finishedlist = this.data.finishedlist;
+      if (finishedlist[ind]) {
+        _this.setData({
+          ['finishedlist['+ind+'].width']: viewWidth
+        })
+      };
+    };
+  },
 
 })
