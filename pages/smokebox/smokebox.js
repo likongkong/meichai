@@ -231,6 +231,10 @@ Page({
     imgwidth:450,
     isDirectShipping:false,
     iftrcloud: true,
+    // 端盒送实物
+    whole_boxGift:'',
+    wholeBoxGiftImg:'',
+    wholeBoxGiftInfo:{}
   },
 
   exhibdetailfun: function (w) {
@@ -626,24 +630,6 @@ Page({
               pageBg: "#e6d4c6"
             })
           }
-          // 商品详情 
-          if (res.data.Info && res.data.Info.goods) {
-            if (res.data.Info.goods.goods_desc) {
-              WxParse.wxParse('article', 'html', res.data.Info.goods.goods_desc, _this, 0);
-              _this.setData({
-                iftrdetailpageone: true,
-                goods_thumb: res.data.Info.goods.goods_thumb ? res.data.Info.goods.goods_thumb : "",
-              });
-            } else {
-              _this.setData({
-                iftrdetailpageone: false
-              });
-            };
-          } else {
-            _this.setData({
-              iftrdetailpageone: false
-            });
-          };
           if (res.data.Info.activity.status == 1) {
             res.data.Info.activity.start_time = time.toDate(res.data.Info.activity.start_time);
           }
@@ -692,8 +678,31 @@ Page({
             exchangeLuckyCondition: res.data.Info.user.exchangeLuckyCondition,
             wholeBoxImg: res.data.Info.img.wholeBox ? res.data.Info.img.wholeBox : "https://www.51chaidan.com/images/blindbox/gold_case.png",
             isSubscribeCoupon: res.data.Info.activity.isSubscribeCoupon || false,
-            subscribeCouponTip: res.data.Info.activity.subscribeCouponTip || ''
+            subscribeCouponTip: res.data.Info.activity.subscribeCouponTip || '',
+            // 是否是端盒送实物
+            whole_boxGift:res.data.Info.whole_boxGift,
+            wholeBoxGiftImg:res.data.Info.wholeBoxGiftImg
           })
+
+          // 商品详情 
+          if (res.data.Info && res.data.Info.goods) {
+            if (res.data.Info.goods.goods_desc) {
+              WxParse.wxParse('article', 'html', res.data.Info.goods.goods_desc, _this, 0);
+              _this.setData({
+                iftrdetailpageone: true,
+                goods_thumb: res.data.Info.goods.goods_thumb ? res.data.Info.goods.goods_thumb : "",
+              });
+            } else {
+              _this.setData({
+                iftrdetailpageone: false
+              });
+            };
+          } else {
+            _this.setData({
+              iftrdetailpageone: false
+            });
+          };
+
 
           var l = res.data.List.employ.concat(res.data.List.queue);
           _this.setData({ queueList: l })
@@ -1578,7 +1587,6 @@ Page({
         if (res.data.ReturnCode == 200) {
           // 支付完成弹框显示数据
           var payinfo = res.data.Info;
-          console.log('isloadfun=====================false2')
           _this.data.isloadfun = false;
           wx.requestPayment({
             'timeStamp': res.data.Info.timeStamp.toString(),
@@ -1589,7 +1597,6 @@ Page({
             'success': function (res) {
               setTimeout(function () {
                 var cart_id = _this.data.cart_id || '0';
-                console.log('isloadfun=====================false1')
                 _this.setData({
                   tipbacktwo: false,
                   buybombsimmediately: false,
@@ -1778,7 +1785,6 @@ Page({
       ratio = $width / $height;
     var viewHeight = 65,
       viewWidth = 65 * ratio;
-      
     _this.setData({
       hideheight: 65,
       hidewidth: viewWidth,
@@ -2100,10 +2106,9 @@ Page({
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q,
       method: 'GET',
-      header: {
-        'Accept': 'application/json'
-      },
+      header: {'Accept': 'application/json'},
       success: function (res) {
+        console.log('wholebox=======',res)
         wx.hideLoading()
         if (res.data.ReturnCode == 200) {
           for (var i = 0; i < res.data.List.role.length; i++) {
@@ -2138,8 +2143,10 @@ Page({
     this.setData({
       ishowWholeBoxList: false,
     });
-
-    if (mtype == "open" && this.data.isRepeatOpenWholeBox) {
+    // 是否是端盒送实物
+    if(this.data.whole_boxGift){
+      this.collectchip();
+    } else if (mtype == "open" && this.data.isRepeatOpenWholeBox) {
       this.setData({
         iswholePay: true,
         isRepeatOpen: 1,
@@ -2325,6 +2332,7 @@ Page({
       blindBoxdetailpagetwo: false,
       hideBoxdetailpagetwo: false,
       iftrdetailpagehtml: false,
+      wholeBGIDetail:false
     });
   },
   iftrdetailpagen: function () {
@@ -2334,6 +2342,21 @@ Page({
         iftrdetailpagehtml: true,
       })
     };
+  },
+  // 赠送实物详情
+  wholeBGIDetailfun:function(){
+    var _this = this;
+    var wholeBoxGiftInfo = this.data.wholeBoxGiftInfo || [];
+    if(wholeBoxGiftInfo&&wholeBoxGiftInfo.goods_desc){
+        WxParse.wxParse('detail', 'html', wholeBoxGiftInfo.goods_desc, _this, 0);
+    }
+    this.setData({
+      iftrdetailpagetwo: true,
+      wholeBGIDetail:true,
+      iftrdetailpagehtml: false,
+      blindBoxdetailpagetwo:false,
+      hideBoxdetailpagetwo:false
+    })
   },
   blindBoxdetailpagen: function (w) {
     var ind = w.currentTarget.dataset.ind;
@@ -2499,49 +2522,54 @@ Page({
         'Accept': 'application/json'
       },
       success: function (res) {
+        console.log('collectchip========',res)
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
-
-          if (res.data.Info.blindBoxImg && res.data.Info.blindBoxDesc) {
-            WxParse.wxParse('blindBox', 'html', res.data.Info.blindBoxDesc, _this, 0);
+          if(_this.data.whole_boxGift){
             _this.setData({
-              blindBoxdetailpageone: true,
+              wholeBoxGiftInfo: res.data.Info.wholeBoxGiftInfo||''
             });
-          } else {
+          }else{
+            if (res.data.Info.blindBoxImg && res.data.Info.blindBoxDesc) {
+              WxParse.wxParse('blindBox', 'html', res.data.Info.blindBoxDesc, _this, 0);
+              _this.setData({
+                blindBoxdetailpageone: true,
+              });
+            } else {
+              _this.setData({
+                blindBoxdetailpageone: false
+              });
+            }
+  
+            if (res.data.Info.hideBoxImg && res.data.Info.hideBoxDesc) {
+              WxParse.wxParse('hideBox', 'html', res.data.Info.hideBoxDesc, _this, 0);
+              _this.setData({
+                hideBoxdetailpageone: true,
+              });
+            } else {
+              _this.setData({
+                hideBoxdetailpageone: false
+              });
+            }
+  
             _this.setData({
-              blindBoxdetailpageone: false
-            });
+              tricklinelist: res.data.List.line,
+              chiplist: res.data.List.role,
+              patchList: res.data.List.patch,
+              chiprule: res.data.Info.rule,
+              countLine: res.data.Info.countLine,
+              hideBoxImg: res.data.Info.hideBoxImg ? res.data.Info.hideBoxImg : "https://www.51chaidan.com/images/blindbox/gold_case.png",
+              blindBoxImg: res.data.Info.blindBoxImg ? res.data.Info.blindBoxImg : "https://www.51chaidan.com/images/blindbox/silver_case.png",
+              blindboxTip: res.data.Info.blindboxTip ? res.data.Info.blindboxTip : "随机盲盒碎片：收集5片自动合成,可到玩具柜查看",
+              hideBoxTip: res.data.Info.hideBoxTip ? res.data.Info.hideBoxTip : "随机隐藏碎片：收集20片自动合成,可到玩具柜查看",
+            })
+  
+            _this.selectData(0);
           }
-
-          if (res.data.Info.hideBoxImg && res.data.Info.hideBoxDesc) {
-            WxParse.wxParse('hideBox', 'html', res.data.Info.hideBoxDesc, _this, 0);
-            _this.setData({
-              hideBoxdetailpageone: true,
-            });
-          } else {
-            _this.setData({
-              hideBoxdetailpageone: false
-            });
-          }
-
-          _this.setData({
-            tricklinelist: res.data.List.line,
-            chiplist: res.data.List.role,
-            patchList: res.data.List.patch,
-            chiprule: res.data.Info.rule,
-            countLine: res.data.Info.countLine,
-            hideBoxImg: res.data.Info.hideBoxImg ? res.data.Info.hideBoxImg : "https://www.51chaidan.com/images/blindbox/gold_case.png",
-            blindBoxImg: res.data.Info.blindBoxImg ? res.data.Info.blindBoxImg : "https://www.51chaidan.com/images/blindbox/silver_case.png",
-            blindboxTip: res.data.Info.blindboxTip ? res.data.Info.blindboxTip : "随机盲盒碎片：收集5片自动合成,可到玩具柜查看",
-            hideBoxTip: res.data.Info.hideBoxTip ? res.data.Info.hideBoxTip : "随机隐藏碎片：收集20片自动合成,可到玩具柜查看",
-          })
-
-
-          _this.selectData(0);
-
           _this.setData({
             ishowcollectchip: !_this.data.ishowcollectchip,
           })
+
         }
       },
       fail: function () {
@@ -2550,7 +2578,6 @@ Page({
     })
 
   },
-
   tabClick: function (w) {
     var _this = this
     var id = w.currentTarget.dataset.id;
