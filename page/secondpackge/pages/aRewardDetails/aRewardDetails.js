@@ -55,13 +55,28 @@ Page({
     isSharingSAwards:false,
     // 继续刮奖 true 跳转列表 false
     scratchOrList:true,
-
+    is_finish:false,
     //更换周边
     gearCount:null,   //可替换数量
     awardsData:null,   //奖品数据
     isChangeAwards:false,   //是否显示更换成功
-    awardsIndex:null    //当前奖品index
+    awardsIndex:null,    //当前奖品index
+    orderid:null
   },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function() {
+    var _this = this
+    var share = {
+      title:  _this.data.activity.name + ' 来看我一发入魂',
+      path: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id="+_this.data.activity.id,
+      imageUrl:  _this.data.finalReward.img
+    }
+    return share;
+  },
+
   howToPlayFun:function(){
      this.setData({
         isHowToPlay:!this.data.isHowToPlay
@@ -189,6 +204,7 @@ Page({
     var id = e.currentTarget.dataset.id;
     var gear = e.currentTarget.dataset.gear;  //档位
     var isreplace = e.currentTarget.dataset.isreplace;  //是否可替换
+    var orderid = e.currentTarget.dataset.orderid;  //是否可替换
     let animation_main = wx.createAnimation({
       duration:400,
       timingFunction:'linear'
@@ -205,7 +221,8 @@ Page({
       this.data.cardList[index].animation_back   = animation_back.export() 
       this.setData({
         cardList: this.data.cardList,
-        gear:gear
+        gear:gear,
+        orderid:orderid
       })
       if(isreplace && this.data.gearCount[this.data.gear]>0){
         this.setData({
@@ -226,8 +243,8 @@ Page({
   changeStyleFun(){
     var _this = this;
     //  调取收货地址
-    var q = Dec.Aese('mod=yifanshang&operation=chengeGoods&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.activity.id + '&order_id=' + _this.data.order.order_id)
-    console.log('更换样式=========',app.signindata.comurl + 'spread.php?mod=yifanshang&operation=chengeGoods&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.activity.id + '&order_id=' + _this.data.order.order_id )
+    var q = Dec.Aese('mod=yifanshang&operation=chengeGoods&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.activity.id + '&order_id=' + _this.data.orderid)
+    console.log('更换样式=========',app.signindata.comurl + 'spread.php?mod=yifanshang&operation=chengeGoods&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.activity.id + '&order_id=' + _this.data.orderid )
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q,
       method: 'GET',
@@ -235,15 +252,20 @@ Page({
         'Accept': 'application/json'
       },
       success: function (res) {
+        console.log("更换数据===================",res)
         if (res.data.ReturnCode == 200) {
-          console.log("更换成功===================",res)
-          --_this.data.gearCount[_this.data.gear];
-          console.log("可替换数量==================",_this.data.gearCount)
-          _this.data.cardList[_this.data.awardsIndex].cover = res.data.Info.imgRole;
-          _this.data.cardList[_this.data.awardsIndex].name = res.data.Info.roleName;
-          _this.data.awardsData.cover = res.data.Info.imgRole;
-          _this.data.awardsData.name = res.data.Info.roleName;
-          _this.setData({isChangeAwards: true,cardList:_this.data.cardList,awardsData:_this.data.awardsData})
+          setTimeout(function(){
+            console.log("更换成功===================",res)
+            --_this.data.gearCount[_this.data.gear];
+            console.log("可替换数量==================",_this.data.gearCount)
+            _this.data.cardList[_this.data.awardsIndex].cover = res.data.Info.imgRole;
+            _this.data.cardList[_this.data.awardsIndex].name = res.data.Info.roleName;
+            _this.data.awardsData.cover = res.data.Info.imgRole;
+            _this.data.awardsData.name = res.data.Info.roleName;
+            _this.setData({isChangeAwards: true,cardList:_this.data.cardList,awardsData:_this.data.awardsData})
+          },1000)
+        }else{
+          app.showToastC(res.data.Msg);
         }
       }
     });
@@ -292,6 +314,7 @@ Page({
       scrapingBox:true
      })    
   },
+  
   /**
    * 生命周期函数--监听页面加载
    */
@@ -505,6 +528,7 @@ Page({
            _this.setData({
             cardList : res.data.List.goods || [],
             gearCount : res.data.List.relRefillGearCount,
+            is_finish:res.data.Info.isFinished
            })
            _this.data.recordtime = res.data.Info.newOverTime;	
            _this.countdown();
@@ -764,13 +788,13 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {},
-  scrapingRecord:function(){
-    var _this = this;
-    wx.navigateTo({   
-      url: "/page/secondpackge/pages/aRewardHistory/aRewardHistory?id="+this.data.id
-    });     
-  },
+  // onShareAppMessage: function () {},
+  // scrapingRecord:function(){
+  //   var _this = this;
+  //   wx.navigateTo({   
+  //     url: "/page/secondpackge/pages/aRewardHistory/aRewardHistory?id="+this.data.id
+  //   });     
+  // },
   // 跳转列表
   jumpaRewardList:function(){
       let pages = getCurrentPages();
