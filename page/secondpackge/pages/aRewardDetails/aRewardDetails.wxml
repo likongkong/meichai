@@ -93,11 +93,11 @@
 
 <view class="ardbottom">
     
-    <view wx:if='{{activity.status==1}}' style="width:600rpx" class="ardbottomeve ardbmerightbottom">暂未开始 {{activity.start_time}}</view>
-    <view wx:elif='{{activity.status==3}}' style="width:600rpx" class="ardbottomeve ardbmerightbottom" catchtap="jumpaRewardList">已结束</view>
-    <view wx:elif='{{activity.aheadUser&&activity.isInQueue}}' style="width:600rpx" class="ardbottomeve ardbmerightbottom" catchtap="scrapingPurfun">我要刮卡({{remaintime}}s)</view>
-    <view wx:elif='{{activity.isInQueue}}' style="width:600rpx" class="ardbottomeve ardbmerightbottom">排队中</view>
-    <view wx:else class="ardbottomeve ardbmerightbottom" style="width:600rpx" catchtap="lineUpNow">立即排队</view>
+    <view wx:if='{{activity.status==1}}' class="ardbottomeve ardbmerightbottom">暂未开始 {{activity.start_time}}</view>
+    <view wx:elif='{{activity.status==3}}' class="ardbottomeve ardbmerightbottom" catchtap="jumpaRewardList">已结束</view>
+    <view wx:elif='{{activity.aheadUser&&activity.isInQueue}}' class="ardbottomeve ardbmerightbottom" catchtap="scrapingPurfun">我要刮卡({{remaintime}}s)</view>
+    <view wx:elif='{{activity.isInQueue}}' class="ardbottomeve ardbmerightbottom">排队中</view>
+    <view wx:else class="ardbottomeve ardbmerightbottom" catchtap="lineUpNow">立即排队</view>
 
 </view>
 
