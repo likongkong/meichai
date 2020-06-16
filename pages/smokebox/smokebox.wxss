@@ -614,3 +614,42 @@ page {
   line-height: 40rpx;
   text-align: center;
 }
+.whole_boxGift{
+  position: absolute;
+  left:10rpx;
+  bottom: 0;
+  border-radius: 6rpx;
+  padding:4rpx 6rpx;
+  background: rgba(250, 41, 41, 0.6);
+  font-size: 18rpx;
+  color: #fff;
+}
+.wholeBoxGiftInfosel{
+  margin:auto;position:relative;width:420rpx;height:376rpx;
+}
+.wholeBoxGiftInfoimg{
+  display:block;width:100%;height:100%;border-radius: 10rpx;
+}
+.wholeBoxGiftInfoTxt{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  border-radius: 10rpx;
+  padding:8rpx 20rpx;
+  background: rgba(250, 41, 41, 0.6);
+  font-size: 26rpx;
+  color: #fff;  
+}
+.wholeBoxGiftInfobox{
+  width: 700rpx;
+  height: 730rpx;
+  background: #fff;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  border-radius: 15rpx;
+  z-index: 1;
+}
