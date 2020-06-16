@@ -96,10 +96,9 @@
 			</view>	
 	</block>
 
-
 	<view wx:if='{{welfare.length > 0}}' catchtap='hidepackage' style='width:95rpx;position:absolute;right:5rpx;top:{{hideheight+240}}rpx;z-index:9;'>
     <view class="tabshopimg specialellipsis" style="top:-8rpx;left:56rpx;" wx:if='{{welfare&&welfare.length!=0&&welfare.length!=1}}'>{{welfare.length}}</view>
-		<image src='http://www.51chaidan.com/images/blindBox/doublePackage.png' style='width:75rpx;height:75rpx;display:block;margin-left:10rpx;'></image>
+		<image src='http://www.51chaidan.com/images/blindBox/doublePackage.png' style='width:75rpx;height:75rpx;display:block;git margin-left:10rpx;'></image>
 		<!-- <view style="color:red;text-align:center;font-size:20rpx;font-weight:bold;"><text>幸运值\n</text>{{welfare[0].currentAmount}}/{{welfare[0].limitAmount}}</view> -->
     <view style="color:red;text-align:center;font-size:20rpx;font-weight:bold;"><text>幸运值\n</text>{{welfare[0].limitAmount-welfare[0].currentAmount}}点可领</view>
 	</view>
