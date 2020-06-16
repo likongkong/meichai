@@ -271,7 +271,7 @@ page {
 .prizeScrapingRecord{
   width: 600rpx;
   margin: 20rpx auto;
-  border:2rpx solid #ccc;background: #fff;
+  /* border:2rpx solid #ccc;background: #fff; */
 }
 .scrapingPurchase{
   width: 100%;
@@ -298,7 +298,7 @@ page {
   line-height: 150rpx;
   text-align: center;
   width: 150rpx;
-  background: #ff2742;
+  background: #e94f57;
   border-radius: 10rpx;
   font-size: 26rpx;
   color: #fff;
@@ -391,7 +391,7 @@ page {
   left: 0;
   color: #fff;
   background: rgba(0,0,0,0.4);
-  border-radius: 8rpx 0 0 8rpx;
+  border-radius: 8rpx 8rpx 8rpx 8rpx;
 }
 
 .boxbtappre{

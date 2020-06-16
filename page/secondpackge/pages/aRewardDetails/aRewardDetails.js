@@ -242,7 +242,7 @@ Page({
           _this.data.cardList[_this.data.awardsIndex].name = res.data.Info.roleName;
           _this.data.awardsData.cover = res.data.Info.imgRole;
           _this.data.awardsData.name = res.data.Info.roleName;
-          _this.setData({isChangeAwards: true,cardList:_this.data.cardList})
+          _this.setData({isChangeAwards: true,cardList:_this.data.cardList,awardsData:_this.data.awardsData})
         }
       }
     });
