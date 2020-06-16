@@ -6,12 +6,11 @@
   <view class="record">
     <block wx:for="{{history}}" wx:key='key' wx:for-item="item">
       <view class="recordbox">
-        <view class="recordinfo">
-          <image class="avatar" src="{{item.litpic}}" mode="widthFix"></image>
-          <view style="{{item.gear == '终'?'color: #ff2742':'color: #83c530'}}">
-            刮到了  <text>{{item.gear == '终'?'最'+item.gear:item.gear}}</text>赏  <text style="{{item.gear == '终'?'color: #ff2742':'color: #83c530'}}" class="good_name">{{item.title}}</text>
-          </view>
-        </view>
+        <image class="avatar" src="{{item.litpic}}" mode="widthFix"></image>
+        <view class="gear" style="{{item.gear == '终'?'color: #ff2742':'color: #83c530'}}"> 
+          刮到了  <text>{{item.gear == '终'?'最'+item.gear:item.gear}}</text>赏
+        </view>  
+        <view style="{{item.gear == '终'?'color: #ff2742':'color: #83c530'}}" class="good_name">{{item.title}}</view>
         <view class="time">
           <text style="{{item.gear == '终'?'color: #ff2742':'color: #83c530'}}">{{item.insert_time}}</text>
         </view>

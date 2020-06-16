@@ -25,10 +25,10 @@
   </block>
 </view>
 
-<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' 
+<bnavigation isChar='{{false}}' bind:run='gitList' wnews='{{true}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' 
 dryinglistnum='{{dryinglistnum}}'></bnavigation>
 
-<view style='{{isIphoneX?"height:90rpx;":"height:60rpx;"}}width:100%;text-align:center;line-height:60rpx;color:#666;font-size:30rpx;padding-bottom: 100rpx;' wx:if='{{loadprompt}}'>没有更多数据了</view>
+<view style='{{isIphoneX?"height:90rpx;":"height:60rpx;"}}width:100%;text-align:center;line-height:60rpx;color:#666;font-size:30rpx;padding-bottom: 140rpx;' wx:if='{{loadprompt}}'>没有更多数据了</view>
 <!--  暂无数据  -->
 <view class='nodata' wx:if='{{nodata}}' style='height: 600rpx;width: 100%;position: relative;'>
   <image src='../../../../pages/images/recaddnodata.png' class='nodataimg' style='width: 280rpx;height: 300rpx;position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;'></image>
