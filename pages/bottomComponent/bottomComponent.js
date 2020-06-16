@@ -82,9 +82,10 @@ Component({
         this.triggerEvent("run");
         return;
       }
-      wx.redirectTo({  // 一番赏
-        url: "/page/secondpackge/pages/aRewardList/aRewardList"
-      });
+      app.limitlottery(_this);
+      // wx.redirectTo({  // 一番赏
+      //   url: "/page/secondpackge/pages/aRewardList/aRewardList"
+      // });
       // if(app.signindata.isOpenToyShow){
       //   app.limitlottery(_this);
       // }else{
