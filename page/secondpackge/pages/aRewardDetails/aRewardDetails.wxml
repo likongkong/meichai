@@ -136,11 +136,11 @@
               <view class="card">
                 <image class="bgimg" src="{{activity.lottoBackGround}}" mode="aspectFill"></image>
                 <!--正面的框 -->
-                <view class="box b1" animation="{{item.animation_main}}" bindtap='rotateFn' data-index="{{index}}" data-id="1" >
+                <view class="box b1" animation="{{item.animation_main}}" data-gear="{{item.gear}}" data-isReplace="{{item.isReplace}}" bindtap='rotateFn' data-index="{{index}}" data-id="1" >
                   <text>点击刮卡</text>
                 </view>
                 <!--背面的框 -->
-                <view class="box b2" animation="{{item.animation_back}}" bindtap='rotateFn' data-index="{{index}}" data-id="2">
+                <view class="box b2" animation="{{item.animation_back}}" data-gear="{{item.gear}}" bindtap='rotateFn' data-index="{{index}}" data-id="2">
                     <view class="boxbtbox">
                        <image class="boxbtboximg" src="{{item.cover}}"></image>
                        <view class="boxbt" style="{{item.gear=='终'?'font-size:34rpx;color:#ff2742;':''}}">{{item.gear}}<view class="boxbtappre">赏</view></view>
@@ -162,15 +162,15 @@
 
 <!-- 刮奖 -->
 <view class="wsh" catchtouchmove="true" wx:if='{{isSharingSAwards}}' style="z-index:9999;">
-    <view class="tgimgboxgb" catchtap="scrapingPurfun"></view>
+    <view class="tgimgboxgb" catchtap="hideWsh"></view>
     <view class="SharingSAwards">
-        <view class="SSAhead">恭喜您!</view>
-        <view class="SSAname multilineellipsis">刮到我妻善逸手办刮到我妻善逸手办刮到我妻善逸手办刮到我妻善逸手办</view>
-        <image class="SSAimg" src="https://cdn.51chaidan.com/images/toyShow1/448/0/goods/Gallery/1588098592_1.jpg"></image>
-        <view class="SSAsharetxt">分享到微信群,随机更换款式</view>
+        <view class="SSAhead">{{!isChangeAwards?'恭喜您!':'更换成功'}}</view>
+        <view class="SSAname multilineellipsis">{{awardsData.name}}</view>
+        <image class="SSAimg" src="{{awardsData.cover}}" mode="aspectFit"></image>
+        <view class="SSAsharetxt" style="{{!isChangeAwards?'opacity:1':'opacity:0'}}">分享到微信群,随机更换款式</view>
         <view class="SSAbut">
-           <view class="SSAbutLeft SSLcomlr">更换款式<button class="SSAbutShare" open-type='share'></button></view>
-           <view class="SSAbutRight SSLcomlr">放入玩具柜</view>
+           <view class="SSAbutLeft SSLcomlr" bindtap="changeStyleFun" wx:if="{{!isChangeAwards}}">更换款式<button class="SSAbutShare" open-type='share'></button></view>
+           <view class="SSAbutRight SSLcomlr" bindtap="hideWsh">放入玩具柜</view>
         </view>
     </view>
 </view>

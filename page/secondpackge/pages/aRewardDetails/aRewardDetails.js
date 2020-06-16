@@ -54,7 +54,13 @@ Page({
     // 刮奖分享选择
     isSharingSAwards:false,
     // 继续刮奖 true 跳转列表 false
-    scratchOrList:true
+    scratchOrList:true,
+
+    //更换周边
+    gearCount:null,   //可替换数量
+    awardsData:null,   //奖品数据
+    isChangeAwards:false,   //是否显示更换成功
+    awardsIndex:null    //当前奖品index
   },
   howToPlayFun:function(){
      this.setData({
@@ -181,6 +187,8 @@ Page({
   rotateFn(e) {
     var index = e.currentTarget.dataset.index;
     var id = e.currentTarget.dataset.id;
+    var gear = e.currentTarget.dataset.gear;  //档位
+    var isreplace = e.currentTarget.dataset.isreplace;  //是否可替换
     let animation_main = wx.createAnimation({
       duration:400,
       timingFunction:'linear'
@@ -196,9 +204,48 @@ Page({
       this.data.cardList[index].animation_main = animation_main.export() 
       this.data.cardList[index].animation_back   = animation_back.export() 
       this.setData({
-        cardList: this.data.cardList
+        cardList: this.data.cardList,
+        gear:gear
       })
+      if(isreplace && this.data.gearCount[this.data.gear]>0){
+        this.setData({
+          awardsData: this.data.cardList[index],
+          isChangeAwards:false,
+          isSharingSAwards:true,
+          awardsIndex:index
+        })
+      }
     }
+  },
+  
+  // 隐藏换卡弹框
+  hideWsh(){
+    this.setData({isSharingSAwards: false})
+  },
+  // 更换样式
+  changeStyleFun(){
+    var _this = this;
+    //  调取收货地址
+    var q = Dec.Aese('mod=yifanshang&operation=chengeGoods&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.activity.id + '&order_id=' + _this.data.order.order_id)
+    console.log('更换样式=========',app.signindata.comurl + 'spread.php?mod=yifanshang&operation=chengeGoods&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.activity.id + '&order_id=' + _this.data.order.order_id )
+    wx.request({
+      url: app.signindata.comurl + 'spread.php' + q,
+      method: 'GET',
+      header: {
+        'Accept': 'application/json'
+      },
+      success: function (res) {
+        if (res.data.ReturnCode == 200) {
+          console.log("更换成功===================",res)
+          --_this.data.gearCount[_this.data.gear];
+          _this.data.cardList[_this.data.awardsIndex].cover = res.data.Info.imgRole;
+          _this.data.cardList[_this.data.awardsIndex].name = res.data.Info.roleName;
+          _this.data.awardsData.cover = res.data.Info.imgRole;
+          _this.data.awardsData.name = res.data.Info.roleName;
+          _this.setData({isChangeAwards: true,cardList:_this.data.cardList})
+        }
+      }
+    });
   },
   // 全部刮奖翻转卡片
   rotateFnWhole:function(){
@@ -217,7 +264,7 @@ Page({
       animation_back.rotateY(0).step()
       cardList[i].animation_main = animation_main.export() 
       cardList[i].animation_back   = animation_back.export() 
-      console.log(cardList)
+      // console.log(cardList)
       _this.setData({
         cardList:cardList
       })
@@ -332,7 +379,10 @@ Page({
                   }
               };
             };
-        };
+          };
+          if(newarr&&newarr.length!=0&&newarr[newarr.length-1]&&newarr[newarr.length-1][0].rightline){
+            newarr.push([{}])
+          }
         console.log('newarr====',newarr)
         console.log(goodsExhibition)
 
@@ -450,10 +500,10 @@ Page({
         wx.hideLoading()
         console.log('placeAnOrder=====',res)
         if (res.data.ReturnCode == 200) {
-           
            _this.data.order = res.data.Info.order;
            _this.setData({
-            cardList : res.data.List.goods || []
+            cardList : res.data.List.goods || [],
+            gearCount : res.data.List.relRefillGearCount,
            })
            _this.data.recordtime = res.data.Info.newOverTime;	
            _this.countdown();
@@ -488,7 +538,10 @@ Page({
                   'signType': 'MD5',
                   'paySign': res.data.Info.paySign,
                   'success': function (res) { 
-
+                    // var pages = getCurrentPages();
+                    // var prevPage = pages[pages.length - 2];  //上一个页面
+                    // prevPage.reset();
+                    // prevPage.gitList();
                     _this.scrapingboxfun();
                     // 订阅授权
                     // app.comsubscribe(_this);

@@ -11,31 +11,31 @@
 .recordbox{
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10rpx;
 }
 .recordbox text{
   line-height: 60rpx;
   display: inline-block;
 }
-.recordinfo{
-  width: 428rpx;
-  display: flex;
-  justify-content: start;
-}
-.recordinfo .avatar{
+.recordbox .avatar{
   width: 60rpx;
   height: auto;
-  margin-right: 28rpx;
+  margin-right: 14rpx;
 }
-.recordinfo>view{
-  font-size: 24rpx;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.recordinfo .good_name{
+.recordbox .good_name{
+  width: 220rpx;
   font-size: 22rpx;
   font-weight: bold;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
+.recordbox .gear{
+  font-size: 24rpx;
+}
+
+
 .recordbox .time{
   width: 250rpx;
   font-size: 24rpx;
