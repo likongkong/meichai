@@ -120,10 +120,10 @@
    <view class="tgimgboxgb" catchtap="scrapingPurfun"></view>
    <view class="scrapingPurchase">
       <view class="scrapPurtime">刮卡剩余时间:{{remaintime}}s</view>
-      <view class="scrPurEve" catchtap="placeAnOrder" data-number='0'>全收</view>
+      <view class="scrPurEve" catchtap="{{!is_finish?'placeAnOrder':''}}" data-number='0'><view class="adhcevehbg" wx:if='{{!is_finish}}'></view>全收</view>
       <view class="scrPurEve" catchtap="{{activity.suplusNum>=10?'placeAnOrder':''}}" data-number='10'><view class="adhcevehbg" wx:if='{{activity.suplusNum<10}}'></view>刮10张</view>
       <view class="scrPurEve" catchtap="{{activity.suplusNum>=3?'placeAnOrder':''}}" data-number='3'><view class="adhcevehbg" wx:if='{{activity.suplusNum<3}}'></view>刮3张</view>
-      <view class="scrPurEve" catchtap="placeAnOrder" data-number='1'><view class="adhcevehbg" wx:if='{{false}}'></view>刮1张</view>
+      <view class="scrPurEve" catchtap="{{!is_finish?'placeAnOrder':''}}" data-number='1'><view class="adhcevehbg" wx:if='{{!is_finish}}'></view>刮1张</view>
    </view>
 </view>
 
@@ -136,7 +136,7 @@
               <view class="card">
                 <image class="bgimg" src="{{activity.lottoBackGround}}" mode="aspectFill"></image>
                 <!--正面的框 -->
-                <view class="box b1" animation="{{item.animation_main}}" data-gear="{{item.gear}}" data-isReplace="{{item.isReplace}}" bindtap='rotateFn' data-index="{{index}}" data-id="1" >
+                <view class="box b1" animation="{{item.animation_main}}" data-orderid="{{item.orderId}}" data-gear="{{item.gear}}" data-isReplace="{{item.isReplace}}" bindtap='rotateFn' data-index="{{index}}" data-id="1" >
                   <text>点击刮卡</text>
                 </view>
                 <!--背面的框 -->
