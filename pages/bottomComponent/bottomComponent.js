@@ -82,33 +82,36 @@ Component({
         this.triggerEvent("run");
         return;
       }
-      if(app.signindata.isOpenToyShow){
-        app.limitlottery(_this);
-      }else{
-        if(app.signindata.loginid!='' && app.signindata.uid!=''){
-          _this.data.is_show_modal = true;
-          if(_this.data.exhdata){
-            _this.exhtiphidden();
-          }else{
-            wx.request({
-              url: 'https://cdn.51chaidan.com/common/toyShowAlert.json',
-              method: 'GET',
-              header: { 'Accept': 'application/json' },
-              success: function (res) {
-                  console.log(res)
-                  if(res.data.ReturnCode==200){
-                    _this.setData({
-                      exhdata:res.data,
-                      subscribedata:res.data.subscribe
-                    })
-                    _this.exhtiphidden();
-                  };
-              },
-              fail: function (res) {}
-            });
-          };
-        }
-      }
+      wx.redirectTo({  // 一番赏
+        url: "/page/secondpackge/pages/aRewardList/aRewardList"
+      });
+      // if(app.signindata.isOpenToyShow){
+      //   app.limitlottery(_this);
+      // }else{
+      //   if(app.signindata.loginid!='' && app.signindata.uid!=''){
+      //     _this.data.is_show_modal = true;
+      //     if(_this.data.exhdata){
+      //       _this.exhtiphidden();
+      //     }else{
+      //       wx.request({
+      //         url: 'https://cdn.51chaidan.com/common/toyShowAlert.json',
+      //         method: 'GET',
+      //         header: { 'Accept': 'application/json' },
+      //         success: function (res) {
+      //             console.log(res)
+      //             if(res.data.ReturnCode==200){
+      //               _this.setData({
+      //                 exhdata:res.data,
+      //                 subscribedata:res.data.subscribe
+      //               })
+      //               _this.exhtiphidden();
+      //             };
+      //         },
+      //         fail: function (res) {}
+      //       });
+      //     };
+      //   }
+      // }
 
       
     },

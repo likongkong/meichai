@@ -3089,7 +3089,7 @@ Page({
   },
   // 图片预览
   previewVideo: function () {
-    var _this = this
+    var _this = this;
     if (_this.data.isVideoSwiper) {
       _this.setData({
         ishowvideo: true,
