@@ -238,6 +238,7 @@ Page({
         if (res.data.ReturnCode == 200) {
           console.log("更换成功===================",res)
           --_this.data.gearCount[_this.data.gear];
+          console.log("可替换数量==================",_this.data.gearCount)
           _this.data.cardList[_this.data.awardsIndex].cover = res.data.Info.imgRole;
           _this.data.cardList[_this.data.awardsIndex].name = res.data.Info.roleName;
           _this.data.awardsData.cover = res.data.Info.imgRole;
