@@ -131,7 +131,7 @@
 								</image>		
 
 								<view style="padding:15rpx 20rpx 0;font-size:24rpx;color:#000;display: flex;justify-content:space-between;" >
-								  <view class="specialellipsis">{{w.name}}{{w.name}}{{w.name}}{{w.name}}{{w.name}}{{w.name}}{{w.name}}</view>
+								  <view class="specialellipsis">{{w.name}}</view>
 									<view>￥{{w.shopPrice}}</view>
 								</view>					
 							</view>
