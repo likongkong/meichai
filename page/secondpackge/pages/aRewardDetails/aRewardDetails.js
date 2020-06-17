@@ -308,13 +308,12 @@ Page({
       scrapingPur:!this.data.scrapingPur
      })
   },
-  scrapingboxfun:function(){
+  scrapingboxfunlit:function(){
     this.setData({
       scrapingPur:false,
       scrapingBox:true
      })    
   },
-  
   /**
    * 生命周期函数--监听页面加载
    */
@@ -567,7 +566,7 @@ Page({
                     // var prevPage = pages[pages.length - 2];  //上一个页面
                     // prevPage.reset();
                     // prevPage.gitList();
-                    _this.scrapingboxfun();
+                    _this.scrapingboxfunlit();
                     // 订阅授权
                     // app.comsubscribe(_this);
                   },

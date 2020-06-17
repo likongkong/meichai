@@ -24,7 +24,7 @@
       <view class="adhceve" wx:for='{{goodsdata}}' catchtap="jumpposition" data-ind='{{index}}' wx:key='key' style="{{index%4==3?'margin-right:0;':''}}">
           <swiper class="adcswiper" circular="true" autoplay="true" interval="3000" duration="450">
             <swiper-item wx:for="{{item.img_arr}}" wx:key="key">
-              <image src="{{item}}" class="adhceveimg" mode='aspectFit'></image>
+              <image src="{{item}}" class="adhceveimg" mode='aspectFill'></image>
             </swiper-item>
           </swiper>          
           <view class="adhclet">{{item.gear}}</view>
@@ -94,7 +94,7 @@
 <view class="ardbottom">
     
     <view wx:if='{{activity.status==1}}' class="ardbottomeve ardbmerightbottom">暂未开始 {{activity.start_time}}</view>
-    <view wx:elif='{{activity.status==3}}' class="ardbottomeve ardbmerightbottom" catchtap="jumpaRewardList">已结束</view>
+    <view wx:elif='{{activity.status==3||activity.suplusNum<=0}}' class="ardbottomeve ardbmerightbottom" catchtap="jumpaRewardList">已结束</view>
     <view wx:elif='{{activity.aheadUser&&activity.isInQueue}}' class="ardbottomeve ardbmerightbottom" catchtap="scrapingPurfun">我要刮卡({{remaintime}}s)</view>
     <view wx:elif='{{activity.isInQueue}}' class="ardbottomeve ardbmerightbottom">排队中</view>
     <view wx:else class="ardbottomeve ardbmerightbottom" catchtap="lineUpNow">立即排队</view>
@@ -116,7 +116,7 @@
 </view>
 
 <!-- 刮奖购买 -->
-<view class="wsh" catchtouchmove="true" wx:if='{{scrapingPur}}'>
+<view class="wsh" catchtouchmove="true" wx:if='{{scrapingPur&&activity.suplusNum>0}}'>
    <view class="tgimgboxgb" catchtap="scrapingPurfun"></view>
    <view class="scrapingPurchase">
       <view class="scrapPurtime">刮卡剩余时间:{{remaintime}}s</view>
