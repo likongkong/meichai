@@ -787,12 +787,12 @@ Page({
    * 用户点击右上角分享
    */
   // onShareAppMessage: function () {},
-  // scrapingRecord:function(){
-  //   var _this = this;
-  //   wx.navigateTo({   
-  //     url: "/page/secondpackge/pages/aRewardHistory/aRewardHistory?id="+this.data.id
-  //   });     
-  // },
+  scrapingRecord:function(){
+    var _this = this;
+    wx.navigateTo({   
+      url: "/page/secondpackge/pages/aRewardHistory/aRewardHistory?id="+this.data.id
+    });     
+  },
   // 跳转列表
   jumpaRewardList:function(){
       let pages = getCurrentPages();
