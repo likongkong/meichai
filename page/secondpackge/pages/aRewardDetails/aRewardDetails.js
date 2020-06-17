@@ -627,12 +627,10 @@ Page({
       _this.setData({
         remaintime: second,
       })
-      if(second<10&&this.data.scrapingBox){
-        this.rotateFnWhole()
-      }
     } else if (second <= 0) {
       clearInterval(_this.data.timer)
       if(_this.data.scrapingBox){
+        _this.rotateFnWhole()
         _this.setData({scratchOrList:false});
       }else{
         _this.setData({scratchOrList:true});
@@ -794,21 +792,25 @@ Page({
   },
   // 跳转列表
   jumpaRewardList:function(){
-      let pages = getCurrentPages();
-      let prevpage = pages[pages.length - 2];
-      if (prevpage) {
-        if (prevpage.route == 'page/secondpackge/pages/aRewardList/aRewardList') {
-          wx.navigateBack();
-        } else {
-          wx.redirectTo({
-            url: "/page/secondpackge/pages/aRewardList/aRewardList"
-          });
-        };
-      } else {
-        wx.redirectTo({
-          url: "/page/secondpackge/pages/aRewardList/aRewardList"
-        });
-      };
+      // let pages = getCurrentPages();
+      // let prevpage = pages[pages.length - 2];
+      // if (prevpage) {
+      //   if (prevpage.route == 'page/secondpackge/pages/aRewardList/aRewardList') {
+      //     wx.navigateBack();
+      //   } else {
+      //     wx.redirectTo({
+      //       url: "/page/secondpackge/pages/aRewardList/aRewardList"
+      //     });
+      //   };
+      // } else {
+      //   wx.redirectTo({
+      //     url: "/page/secondpackge/pages/aRewardList/aRewardList"
+      //   });
+      // };
+      wx.redirectTo({
+        url: "/page/secondpackge/pages/aRewardList/aRewardList"
+      });
+
   },
   iftrdetailpageb: function () {
     this.setData({
