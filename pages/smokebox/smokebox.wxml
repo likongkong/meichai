@@ -1107,7 +1107,7 @@
 										</view>
 										<view wx:if='{{item.isFinished}}' style="width:{{nogetimagewidth}}rpx;height:{{chipItemHeight}}rpx;display: inline-block;position:relative;overflow:hidden;vertical-align: top;">
 											<image style="width:{{nogetimagewidth}}rpx;height:{{nogetimagewidth}}rpx;" mode="aspectFit" src="{{item.img}}"></image>
-											<view class='fragment' style='width:{{nogetimagewidth}}rpx;left:0;'>
+											<view class='fragment' wx:if='{{item.isPatch}}' style='width:{{nogetimagewidth}}rpx;left:0;'>
 												<view class='fragmentbg'></view>
 												<view class='fragmenttxt'>
 													<image class='fragmentimg' src='https://www.51chaidan.com/images/toyCabinet/toyFragment.png'></image>
