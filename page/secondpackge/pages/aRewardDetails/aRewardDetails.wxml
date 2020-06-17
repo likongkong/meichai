@@ -120,10 +120,10 @@
    <view class="tgimgboxgb" catchtap="scrapingPurfun"></view>
    <view class="scrapingPurchase">
       <view class="scrapPurtime">刮卡剩余时间:{{remaintime}}s</view>
-      <view class="scrPurEve" catchtap="{{!is_finish?'placeAnOrder':''}}" data-number='0'><view class="adhcevehbg" wx:if='{{!is_finish}}'></view>全收</view>
+      <view class="scrPurEve" catchtap="{{!is_finish?'placeAnOrder':''}}" data-number='0'><view class="adhcevehbg" wx:if='{{is_finish}}'></view>全收</view>
       <view class="scrPurEve" catchtap="{{activity.suplusNum>=10?'placeAnOrder':''}}" data-number='10'><view class="adhcevehbg" wx:if='{{activity.suplusNum<10}}'></view>刮10张</view>
       <view class="scrPurEve" catchtap="{{activity.suplusNum>=3?'placeAnOrder':''}}" data-number='3'><view class="adhcevehbg" wx:if='{{activity.suplusNum<3}}'></view>刮3张</view>
-      <view class="scrPurEve" catchtap="{{!is_finish?'placeAnOrder':''}}" data-number='1'><view class="adhcevehbg" wx:if='{{!is_finish}}'></view>刮1张</view>
+      <view class="scrPurEve" catchtap="{{!is_finish?'placeAnOrder':''}}" data-number='1'><view class="adhcevehbg" wx:if='{{is_finish}}'></view>刮1张</view>
    </view>
 </view>
 

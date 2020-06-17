@@ -571,9 +571,7 @@ Page({
                     // 订阅授权
                     // app.comsubscribe(_this);
                   },
-                  'fail':function(res){
-                    _this.scrapingboxfun();
-                  },
+                  'fail':function(res){},
                   'complete': function (res) {}
                 })
         }else{

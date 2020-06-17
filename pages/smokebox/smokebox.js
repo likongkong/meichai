@@ -565,8 +565,7 @@ Page({
       transformOrigin: 'center center 0',
       success: function (res) {}
     })
-
-    _this.mAnimation() //开启动画
+    // _this.mAnimation() //开启动画
   },
   imageLoadhead: function (e) {
     var _this = this;
@@ -592,6 +591,7 @@ Page({
     clearInterval(this.data.atimer)
     this.data.atimer = setInterval(function () {
       this.animation.translate(0, -13).step().translate(0, 0).step().translate(0, -5).step().translate(0, 0).step()
+      console.log('11111111111111')
       this.setData({
         //输出动画
         animation: this.animation.export(),
@@ -681,7 +681,7 @@ Page({
             subscribeCouponTip: res.data.Info.activity.subscribeCouponTip || '',
             // 是否是端盒送实物
             whole_boxGift:res.data.Info.whole_boxGift,
-            wholeBoxGiftImg:res.data.Info.wholeBoxGiftImg
+            wholeBoxGiftImg:res.data.Info.wholeBoxGiftImg || ''
           })
 
           // 商品详情 
@@ -1643,7 +1643,6 @@ Page({
                 ishowcard: false,
                 desc: ''
               })
-
             },
             'complete': function (res) {}
           })
