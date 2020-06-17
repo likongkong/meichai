@@ -2524,6 +2524,9 @@ Page({
         console.log('collectchip========',res)
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
+          _this.setData({
+            whole_boxGift:res.data.Info.whole_boxGift
+          });
           if(_this.data.whole_boxGift){
             _this.setData({
               wholeBoxGiftInfo: res.data.Info.wholeBoxGiftInfo||''

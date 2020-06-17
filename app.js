@@ -88,7 +88,9 @@ App({
     randommaximum:20,
     // 是否能进入展会
     isOpenToyShow:false, // 是否开启展会
-    statusBarHeightMc:0
+    statusBarHeightMc:0,
+    // 是否开启一番赏
+    isYiFanShang:false
   },
   // 登录
   signin: function (callback, BSkipData) {
@@ -148,6 +150,8 @@ App({
                   _this.signindata.isHellBlackUser = res.data.Info.isHellBlackUser || false;
                   // 是否能进入展会
                   _this.signindata.isOpenToyShow = res.data.Info.isOpenToyShow;
+                  // 是否能进入一番赏
+                  _this.signindata.isYiFanShang = res.data.Info.function.isYiFanShang;                  
                   // 透视卡倒计时
                   _this.signindata.perspcardata = res.data.Info.tempChance.length != 0 ? res.data.Info.tempChance[0].over_time || '' : '';
 

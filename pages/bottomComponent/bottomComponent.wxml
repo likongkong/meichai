@@ -19,16 +19,16 @@
 		</view>
 	</view>
   <!-- 一番赏 -->
-	<!-- <view wx:if='{{isProduce}}' class='comNavigationEve'>
+	<view wx:if='{{isProduce}}' class='comNavigationEve'>
 		<view style='width:100%;height:100%;position:relative;' bindtap='wnews'>
 			<view class='navigationltop'>
 				<image src='https://cdn.51chaidan.com//images/sign/yifanshang.png' class='navigationltopimg'></image>
 			</view>
 			<view wx:if='{{isChar}}' class='navigationlcon' style='{{wnews?"color:#fd2844":""}};'>一番赏</view>
 		</view>
-	</view> -->
+	</view>
 	<!-- 闲置 -->
-	<view wx:if='{{isProduce}}' class='comNavigationEve'>
+	<!-- <view wx:if='{{isProduce}}' class='comNavigationEve'>
 		<view style='width:100%;height:100%;position:relative;' bindtap='wnews'>
 			<view class='navigationltop'>
 				<image wx:if='{{wnews}}' src='https://www.51chaidan.com/images/toyCabinet/cabinet1.png' class='navigationltopimg'></image>
@@ -36,7 +36,7 @@
 			</view>
 			<view wx:if='{{isChar}}' class='navigationlcon' style='{{wnews?"color:#fd2844":""}};'>闲置</view>
 		</view>
-	</view>
+	</view> -->
 	<!-- 潮玩展 -->
 	 <!-- wx:if='{{isProduce}}' -->
 	<!-- <view class='comNavigationEve'>

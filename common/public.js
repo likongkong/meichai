@@ -1,8 +1,8 @@
 var Aes = require('crypto-js.js');  //引用AES源码js
 
 
-// var env = 'online';   //线上
-var env = 'test';     //测试
+var env = 'online';   //线上
+// var env = 'test';     //测试
 var versionnumber = '7.2.5';
 
 

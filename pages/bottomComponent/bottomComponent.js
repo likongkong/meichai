@@ -82,10 +82,16 @@ Component({
         this.triggerEvent("run");
         return;
       }
-      app.limitlottery(_this);
-      // wx.redirectTo({  // 一番赏
-      //   url: "/page/secondpackge/pages/aRewardList/aRewardList"
-      // });
+
+      if(app.signindata.isYiFanShang){
+        wx.redirectTo({  // 一番赏
+          url: "/page/secondpackge/pages/aRewardList/aRewardList"
+        });
+      }else{
+        app.showToastC('暂未开放敬请期待');
+      }      
+      
+
       // if(app.signindata.isOpenToyShow){
       //   app.limitlottery(_this);
       // }else{
