@@ -142,7 +142,7 @@
                 <!--背面的框 -->
                 <view class="box b2" animation="{{item.animation_back}}" data-gear="{{item.gear}}" bindtap='rotateFn' data-index="{{index}}" data-id="2">
                     <view class="boxbtbox">
-                       <image class="boxbtboximg" src="{{item.cover}}"></image>
+                       <image class="boxbtboximg" mode="aspectFill" src="{{item.cover}}"></image>
                        <view class="boxbt" style="{{item.gear=='终'?'font-size:34rpx;color:#ff2742;':''}}">{{item.gear}}<view class="boxbtappre">赏</view></view>
                     </view>
                     <view class="boxbtright multilineellipsis">{{item.name}}</view>
