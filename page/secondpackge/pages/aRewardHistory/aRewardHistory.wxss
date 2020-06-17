@@ -9,10 +9,11 @@
   font-size: 26rpx;
 }
 .recordbox{
-  display: flex;
+  /* display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: center; */
   margin-bottom: 10rpx;
+  overflow: hidden;
 }
 .recordbox text{
   line-height: 60rpx;
@@ -22,23 +23,29 @@
   width: 60rpx;
   height: auto;
   margin-right: 14rpx;
+  float: left;
 }
 .recordbox .good_name{
-  width: 220rpx;
+  width: 190rpx;
   font-size: 22rpx;
+  line-height: 60rpx;
   font-weight: bold;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  float: left;
+  margin-left: 10rpx;
 }
 .recordbox .gear{
   font-size: 24rpx;
+  float: left;
 }
 
 
 .recordbox .time{
   width: 250rpx;
   font-size: 24rpx;
+  float: right;
 }
 .recordbox .time text{
   float: right;
