@@ -1642,7 +1642,7 @@ Page({
                 ishowsurebuy: false,
                 ishowcard: false,
                 desc: ''
-              })
+              }) 
             },
             'complete': function (res) {}
           })
@@ -2097,7 +2097,8 @@ Page({
 
     // 提交订单蒙层
     _this.setData({
-      suboformola: true
+      suboformola: true,
+      iswholePay: true,
     });
 
     var q = Dec.Aese('mod=blindBox&operation=openWholeBox&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&aid=' + aid + '&desc=' + _this.data.desc + '&isRepeatOpen=' + _this.data.isRepeatOpen);
