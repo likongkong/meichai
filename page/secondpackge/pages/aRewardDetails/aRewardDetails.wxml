@@ -1,18 +1,20 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
-<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+<view style='width:100%;height:{{statusBarHeightMc}}px; margin-bottom:170rpx'></view>
 
 <!--  html页面转换  -->
 <import src="../../../../wxParse/wxParse.wxml"/>
 
+<view class="adheadbox" style="width:100%;padding: 0 20rpx;box-sizing: border-box; position: fixed;top:{{statusBarHeightMc}}px;left: 0; z-index: 10;background: #f5f6fa;">
+    <view class="adhead">
+    <scroll-view scroll-x="true" class="adhleft">
+        <image wx:for='{{userimg}}' wx:key='key' src="{{item.headphoto}}" class="adhlimg"></image>
+    </scroll-view>
+    <text class="adhright" catchtap="howToPlayFun">玩法\n说明</text>
+    </view>
+    <view class="adheadutnum">{{activity.queueNum}}人正在刮奖券</view>
+</view>
 <view class="ardbox">
-   <view class="adhead">
-       <scroll-view scroll-x="true" class="adhleft">
-           <image wx:for='{{userimg}}' wx:key='key' src="{{item.headphoto}}" class="adhlimg"></image>
-       </scroll-view>
-       <text class="adhright" catchtap="howToPlayFun">玩法\n说明</text>
-   </view>
-   <view class="adheadutnum">{{activity.queueNum}}人正在刮奖券</view>
-   <view class="adhbanner">
+    <view class="adhbanner">
       <view class="adhBannerVol" wx:if='{{activity.id}}'>Vol.{{activity.id}}</view>
       <swiper class="adhswiper" circular="true" autoplay="true" interval="3000" duration="450">
         <swiper-item wx:for="{{activity.listBanner}}" wx:key="key">
@@ -84,9 +86,8 @@
    </view>
 
 
-   <view class="ardbottomeve prizeScrapingRecord" style="width:600rpx" catchtap="scrapingRecord">刮卡记录</view>
-
-
+   <view class="ardbottomeve prizeScrapingRecord" style="width:600rpx">刮卡记录</view>
+   <history id="history" activityid='{{activity.id}}' wx:if="{{isHistory}}"></history>
 </view>
 
 

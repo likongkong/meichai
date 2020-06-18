@@ -1,8 +1,8 @@
-<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
-<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+<!-- <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view> -->
 
-<view class="main" style="min-height:{{history.length != 0?windowHeight:'0'}}px;padding:0 36rpx {{history.length != 0?(todayActivity.length != 0?'370':'120'):'0'}}rpx 36rpx;"> 
-  <text class="title">刮卡记录</text>
+<view class="main" style="padding: 0 0 20rpx 0"> 
+  <!-- <text class="title">刮卡记录</text> -->
   <view class="record">
     <block wx:for="{{history}}" wx:key='key' wx:for-item="item">
       <view class="recordbox">
@@ -24,7 +24,7 @@
     <text class="title">已完成一番赏</text>
     <scroll-view scroll-x>
       <block wx:for="{{todayActivity}}" wx:key='key' wx:for-item="item">
-        <view class="card" data-id="{{item.id}}" bindtap="toARewardHistoryPage">
+        <view class="card" data-id="{{item.id}}" bindtap="_toARewardHistoryPage">
           <image class="pic" src="{{item.cover}}" mode="aspectFill"></image>
           <text>Vol.{{item.id}}</text>
         </view>

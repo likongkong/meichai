@@ -1,9 +1,9 @@
 var Aes = require('crypto-js.js');  //引用AES源码js
 
 
-var env = 'online';   //线上
-// var env = 'test';     //测试
-var versionnumber = '7.2.6';
+// var env = 'online';   //线上
+var env = 'test';     //测试
+var versionnumber = '7.2.5';
 
 
 var key = env=='online'?Aes.enc.Utf8.parse("danzhuan1chaijia"):Aes.enc.Utf8.parse("danzhuanichaijia");
@@ -15,7 +15,6 @@ function comurl() {
 function clwcomurl(){
   return env=='online'?'https://clw.51chaidan.com/':'http://clw-test.51chaidan.com/'
 }
-
 // 公共地址 图片
 function zdyurl() {
   // 测试

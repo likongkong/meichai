@@ -61,7 +61,9 @@ Page({
     awardsData:null,   //奖品数据
     isChangeAwards:false,   //是否显示更换成功
     awardsIndex:null,    //当前奖品index
-    orderid:null
+    orderid:null,
+    //是否加载刮卡记录组件
+    isHistory:false,
   },
 
   /**
@@ -319,6 +321,7 @@ Page({
    */
   onLoad: function (options) {
     console.log('onload=============')
+
     this.setData({
       id: options.id
     })
@@ -458,8 +461,11 @@ Page({
             goodsdata:goodsdata,
             activity:activity,
             finalReward:finalReward,
-            goodsExhibition:newarr
+            goodsExhibition:newarr,
+            isHistory:true
           })
+
+
 
         }else{
           app.showToastC(res.data.Msg);
@@ -774,12 +780,15 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    this.selectComponent('#history')._onPullDownRefresh();
     this.listdata();
   },
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {},
+  onReachBottom: function () {
+    this.selectComponent('#history')._onReachBottom();
+  },
   /**
    * 用户点击右上角分享
    */
