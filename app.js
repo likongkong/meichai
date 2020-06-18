@@ -151,7 +151,7 @@ App({
                   // 是否能进入展会
                   _this.signindata.isOpenToyShow = res.data.Info.isOpenToyShow;
                   // 是否能进入一番赏
-                  _this.signindata.isYiFanShang = res.data.Info.function.isYiFanShang;                  
+                  _this.signindata.isYiFanShang = res.data.Info.function?res.data.Info.function.isYiFanShang:false;                  
                   // 透视卡倒计时
                   _this.signindata.perspcardata = res.data.Info.tempChance.length != 0 ? res.data.Info.tempChance[0].over_time || '' : '';
 
