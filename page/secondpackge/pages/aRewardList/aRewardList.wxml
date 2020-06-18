@@ -14,7 +14,7 @@
         </view>
       </view>
       <view class="progress-box">
-        <progress percent="{{(item.suplusGoods/item.limitGoods)*100}}" color="#ff2742" stroke-width='12' active duration="5" />
+        <progress percent="{{(item.suplusGoods/item.limitGoods)*100}}" color="{{(item.suplusGoods/item.limitGoods)*100 === 100?'#11EE3D':(item.suplusGoods/item.limitGoods)*100 < 100 && (item.suplusGoods/item.limitGoods)*100 > 50?'#FEB51D':'#ff2742'}}" backgroundColor="#cccccc" stroke-width='12' active duration="5" />
         <text style="padding-left:15rpx;">剩余：{{item.suplusGoods}}</text>
       </view>
       <view class="cardBbox"> 
