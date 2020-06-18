@@ -58,7 +58,7 @@
   line-height: 24rpx;
   position: absolute;
   top: 0;font-size: 20rpx;
-  color: #000;
+  color: #fff;
 }
 .cardBbox{
   width: 100%;

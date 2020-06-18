@@ -26,7 +26,7 @@
       <view class="adhceve" wx:for='{{goodsdata}}' catchtap="jumpposition" data-ind='{{index}}' wx:key='key' style="{{index%4==3?'margin-right:0;':''}}">
           <swiper class="adcswiper" circular="true" autoplay="true" interval="3000" duration="450">
             <swiper-item wx:for="{{item.img_arr}}" wx:key="key">
-              <image src="{{item}}" class="adhceveimg" mode='aspectFill'></image>
+              <image src="{{item}}" class="adhceveimg" mode='aspectFit'></image>
             </swiper-item>
           </swiper>          
           <view class="adhclet">{{item.gear}}</view>
@@ -143,7 +143,7 @@
                 <!--背面的框 -->
                 <view class="box b2" animation="{{item.animation_back}}" data-gear="{{item.gear}}" bindtap='rotateFn' data-index="{{index}}" data-id="2">
                     <view class="boxbtbox">
-                       <image class="boxbtboximg" mode="aspectFill" src="{{item.cover}}"></image>
+                       <image class="boxbtboximg" mode='aspectFit' src="{{item.cover}}"></image>
                        <view class="boxbt" style="{{item.gear=='终'?'font-size:34rpx;color:#ff2742;':''}}">{{item.gear}}<view class="boxbtappre">赏</view></view>
                     </view>
                     <view class="boxbtright multilineellipsis">{{item.name}}</view>
