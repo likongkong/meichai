@@ -501,7 +501,7 @@ Page({
   // 下单
   placeAnOrder:function(w){
     var _this = this;
-    wx.showLoading({title: '加载中...',})
+    wx.showLoading({title: '加载中...',mask:true});
 
     var number = w.currentTarget.dataset.number || w.target.dataset.number || 0;
 
