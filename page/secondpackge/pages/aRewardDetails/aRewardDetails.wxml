@@ -135,18 +135,22 @@
             <view class="scrapbscrollHead">60s后自动刮开全部奖券</view>
             <block wx:for="{{cardList}}" wx:key='key' data-index="{{index}}">
               <view class="card">
-                <image class="bgimg" src="{{activity.lottoBackGround}}" mode="aspectFill"></image>
+                <!-- <image class="bgimg" src="{{activity.lottoBackGround}}" mode="aspectFill"></image> -->
+                <image class="bgimg" src="https://cdn.51chaidan.com/images/sign/shave_img.jpg" mode="aspectFill"></image>
                 <!--正面的框 -->
-                <view class="box b1" animation="{{item.animation_main}}" data-orderid="{{item.orderId}}" data-gear="{{item.gear}}" data-isReplace="{{item.isReplace}}" bindtap='rotateFn' data-index="{{index}}" data-id="1" >
-                  <text>点击刮卡</text>
+                <view class="box" animation="{{item.animation_main}}" data-orderid="{{item.orderId}}" data-gear="{{item.gear}}" data-isReplace="{{item.isReplace}}" bindtap='rotateFn' data-index="{{index}}" data-id="1" >
+                  <!-- <text>点击刮卡</text> -->
                 </view>
                 <!--背面的框 -->
                 <view class="box b2" animation="{{item.animation_back}}" data-gear="{{item.gear}}" bindtap='rotateFn' data-index="{{index}}" data-id="2">
-                    <view class="boxbtbox">
-                       <image class="boxbtboximg" mode='aspectFit' src="{{item.cover}}"></image>
-                       <view class="boxbt" style="{{item.gear=='终'?'font-size:34rpx;color:#ff2742;':''}}">{{item.gear}}<view class="boxbtappre">赏</view></view>
+                    <view class="scratchBgBox">
+                        <view class="boxbtbox">
+                        <image class="boxbtboximg" mode='aspectFit' src="{{item.cover}}"></image>
+                        <view class="boxbt" style="{{item.gear=='终'?'font-size:34rpx;color:#ff2742;':''}}">{{item.gear}}<view class="boxbtappre">赏</view></view>
+                        </view>
+                        <view class="boxbtright multilineellipsis">{{item.name}}</view>                   
                     </view>
-                    <view class="boxbtright multilineellipsis">{{item.name}}</view>
+                    <image class="scratchBgImg" src="https://cdn.51chaidan.com/images/sign/base_map.jpg"></image>
                 </view>
               </view>
             </block>

@@ -681,7 +681,8 @@ Page({
             subscribeCouponTip: res.data.Info.activity.subscribeCouponTip || '',
             // 是否是端盒送实物
             whole_boxGift:res.data.Info.whole_boxGift,
-            wholeBoxGiftImg:res.data.Info.wholeBoxGiftImg || ''
+            wholeBoxGiftImg:res.data.Info.wholeBoxGiftImg || '',
+            definePicture:res.data.Info.img||{},
           })
 
           // 商品详情 
@@ -2565,6 +2566,7 @@ Page({
               blindBoxImg: res.data.Info.blindBoxImg ? res.data.Info.blindBoxImg : "https://www.51chaidan.com/images/blindbox/silver_case.png",
               blindboxTip: res.data.Info.blindboxTip ? res.data.Info.blindboxTip : "随机盲盒碎片：收集5片自动合成,可到玩具柜查看",
               hideBoxTip: res.data.Info.hideBoxTip ? res.data.Info.hideBoxTip : "随机隐藏碎片：收集20片自动合成,可到玩具柜查看",
+              wholeBoxTitle:res.data.Info.wholeBoxTitle||''
             })
   
             _this.selectData(0);
