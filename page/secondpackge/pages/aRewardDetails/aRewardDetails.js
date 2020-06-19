@@ -365,7 +365,8 @@ Page({
     _this.setData({
       userimg:[],
       goodsdata:[],
-      activity:''
+      activity:'',
+      finalReward:''
     });
     var exh = Dec.Aese('mod=yifanshang&operation=info&id='+_this.data.id+'&uid='+_this.data.uid+'&loginid='+_this.data.loginid);
     console.log(app.signindata.comurl + 'spread.php?mod=yifanshang&operation=info&id='+_this.data.id+'&uid='+_this.data.uid+'&loginid='+_this.data.loginid)
