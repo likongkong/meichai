@@ -153,7 +153,11 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
-  }
+  onShareAppMessage: function() {
+    var _this = this
+    var share = {
+      imageUrl:  "https://cdn.51chaidan.com/images/sign/yifanshangLisSharet.jpg"
+    }
+    return share;
+  },
 })
