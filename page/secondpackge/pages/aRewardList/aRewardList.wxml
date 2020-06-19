@@ -5,21 +5,30 @@
   <block wx:for="{{datalist}}" wx:key='key' wx:for-item="item">
     <view class="card" data-id="{{item.id}}" bindtap="toaRewarddeyails">
       <view class="cardTbox">
-        <text class="serialnum">Vol.{{item.id}}</text>
-        <image class="pic" src="{{item.cover}}" mode="aspectFill"></image>
-        <view class="reward-num">
+        <!-- <text class="serialnum">Vol.{{item.id}}</text> -->
+        <!-- <image class="pic" src="{{item.cover}}" mode="aspectFill"></image> -->
+        <!-- <view class="reward-num">
           <block wx:for="{{item.betterGoods}}" wx:key='key' wx:for-item="itemgear">
             <text wx:if="{{itemgear.gear == 'A' || itemgear.gear == 'B' || itemgear.gear == 'C' || itemgear.gear == 'D'}}">{{itemgear.gear}}赏 {{itemgear.suplus}}/{{itemgear.limit}}</text>
           </block>
-        </view>
+        </view> -->
+        <block wx:for="{{item.betterGoods}}" wx:key='key' wx:for-item="itemgear">
+          <view wx:if="{{itemgear.gear == 'A' || itemgear.gear == 'B' || itemgear.gear == 'C' || itemgear.gear == 'D'}}" class="gearitem">
+            <image class="pic" src="{{itemgear.img}}" mode="aspectFill"></image>
+            <view class="gearnum">
+              <text>{{itemgear.gear}}赏 {{itemgear.suplus}}/{{itemgear.limit}}</text> 
+            </view>
+          </view>
+        </block>
       </view>
       <view class="progress-box">
-        <progress percent="{{(item.suplusGoods/item.limitGoods)*100}}" color="{{(item.suplusGoods/item.limitGoods)*100 === 100?'#11EE3D':(item.suplusGoods/item.limitGoods)*100 < 100 && (item.suplusGoods/item.limitGoods)*100 > 50?'#FEB51D':'#ff2742'}}" backgroundColor="#cccccc" stroke-width='12' active duration="5" />
-        <text style="padding-left:15rpx;">剩余：{{item.suplusGoods}}</text>
+        <progress percent="{{(item.suplusGoods/item.limitGoods)*100}}" color="{{(item.suplusGoods/item.limitGoods)*100 === 100?'#6FBE0D':(item.suplusGoods/item.limitGoods)*100 < 100 && (item.suplusGoods/item.limitGoods)*100 > 50?'#FEB51D':'#ff2742'}}" backgroundColor="#cccccc" stroke-width='8' active duration="5" />
+        <!-- <text style="padding-left:15rpx;">剩余：{{item.suplusGoods}}</text> -->
       </view>
       <view class="cardBbox"> 
-        <view class="title">{{item.name}}</view>
         <view class="price">￥{{item.shopPrice}}</view>
+        <view class="title">{{item.name}}</view>
+        <view class="num">剩余1{{item.suplusGoods}}/{{item.limitGoods}}</view>
       </view>
     </view>
   </block>
