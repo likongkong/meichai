@@ -86,7 +86,7 @@
    </view>
 
 
-   <view class="ardbottomeve prizeScrapingRecord" style="width:600rpx">刮卡记录</view>
+   <view class="ardbottomeve prizeScrapingRecord" style="width:600rpx"></view>
    <history id="history" activityid='{{activity.id}}' wx:if="{{isHistory}}"></history>
 </view>
 
