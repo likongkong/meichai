@@ -19,7 +19,7 @@
   </view>
 </view>
 
-<view wx:if="{{todayActivity.length != 0}}" class="donebox">
+<!-- <view wx:if="{{todayActivity.length != 0}}" class="donebox">
   <view class="done"> 
     <text class="title">已完成一番赏</text>
     <scroll-view scroll-x>
@@ -31,7 +31,7 @@
       </block>
     </scroll-view>
   </view>
-</view>
+</view> -->
 
 <bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' 
 dryinglistnum='{{dryinglistnum}}'></bnavigation>

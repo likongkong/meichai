@@ -63,9 +63,9 @@ Component({
                   _this.setData({history : alldata})
                 }
               }
-              _this.setData({
-                todayActivity:res.data.List.todayActivity
-              })
+              // _this.setData({
+              //   todayActivity:res.data.List.todayActivity
+              // })
           } else {
             app.showToastC(res.data.msg);
           }
