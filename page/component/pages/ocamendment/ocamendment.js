@@ -196,6 +196,7 @@ Page({
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
+        console.log('tab切换二级数据=======',res)
         wx.hideLoading();
         _this.setData({ iftrnodata: true });
         if (res.data.ReturnCode == 200) {
@@ -234,6 +235,7 @@ Page({
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
+        console.log('tab三级数据=====',res)
         wx.hideLoading();
         _this.setData({ iftrnodatabr: true });
         if (res.data.ReturnCode == 200) {

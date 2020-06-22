@@ -1761,11 +1761,19 @@ Page({
       url: "/page/component/pages/limitlotterypublish/limitlotterypublish",
     })
   },
-  jumpdetail:function(){
+  jumpdetail:function(w){
     var _this = this;
-    wx.navigateTo({
-      url: "/pages/detailspage/detailspage?gid=" + _this.data.infoActivity.goods_id||'',
-    });
+    var is_blind_box = w.currentTarget.dataset.is_blind_box || w.target.dataset.is_blind_box || 0;
+    if(is_blind_box){
+      wx.navigateTo({
+        url: "/pages/smokebox/smokebox?gid=" + + _this.data.infoActivity.goods_id||'',
+      });
+    }else{
+      wx.navigateTo({
+        url: "/pages/detailspage/detailspage?gid=" + _this.data.infoActivity.goods_id||'',
+      });
+    }
+
   },
 
   // 点赞

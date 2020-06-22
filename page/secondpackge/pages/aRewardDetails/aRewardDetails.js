@@ -74,7 +74,7 @@ Page({
     var share = {
       title:  _this.data.activity.name + ' 来看我一发入魂',
       path: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id="+_this.data.activity.id,
-      imageUrl:  _this.data.finalReward.img
+      imageUrl: _this.data.activity.lottoBackGround || _this.data.finalReward.img
     }
     return share;
   },
