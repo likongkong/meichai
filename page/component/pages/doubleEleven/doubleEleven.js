@@ -65,6 +65,10 @@ Page({
     } else {
       app.signindata.referee = options.referee || 0;
     }
+
+    // 推送统计
+    _this.data.push_id = options.push_id || 0;
+
     _this.data.loginid = app.signindata.loginid;
     _this.data.openid = app.signindata.openid;
     _this.setData({
@@ -184,12 +188,13 @@ Page({
   },
   getInfo: function() {
     var _this = this;
-    var q1 = Dec.Aese('mod=automat&operation=getInfo' + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
+    var q1 = Dec.Aese('mod=automat&operation=getInfo' + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid+ '&push_id='+_this.data.push_id);
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q1,
       method: 'GET',
       header: {'Accept': 'application/json'},
       success: function(res) {
+        _this.data.push_id =  0;
         if (res.data.Info) {
           _this.setData({
             title: res.data.Info.title,

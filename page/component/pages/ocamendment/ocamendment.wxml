@@ -84,7 +84,7 @@
            <scroll-view scroll-x="true" class='ocascroview' scroll-with-animation="true" bindscroll='scrollleftf' scroll-left='{{scrollleft}}'>
                <view class='ocastev' wx:for='{{brandscroll}}' wx:key='key' id='q{{item.id}}' data-c_id='{{item.id}}' catchtap='tabbotdata' style='{{tabselid==item.id?"color:#f29a19;text-decoration:underline;":""}}'>{{item.name}}</view>
            </scroll-view>
-           <view class='ocascrtxt' style="color:#ff2742;" catchtap='everybodbuy'>去抽盒》</view>
+           <view class='ocascrtxt' style="color:#ff2742;" catchtap='everybodbuy'>{{infodata.activityType==10?'一番赏》':'去抽盒》'}}</view>
         </view>
         <view style='width:100%;overflow: hidden;'>
             <view style='width:25%;height:303rpx;float:left;' wx:for='{{brandlist}}' wx:key='key' catchtap='jumpshopbut' data-name='{{item.role_name}}' data-minprice='{{item.minPrice}}' data-maxprice='{{item.maxPrice}}'>

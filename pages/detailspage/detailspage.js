@@ -2312,12 +2312,13 @@ Page({
     _this.setData({headhidden: false}); 
     wx.showLoading({ title: '加载中...', })
     var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
-    var q = Dec.Aese('mod=getinfo&operation=info&gid=' + _this.data.gid + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+    var q = Dec.Aese('mod=getinfo&operation=info&gid=' + _this.data.gid + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid+ '&push_id='+_this.data.push_id)
     wx.request({
       url: app.signindata.comurl + 'goods.php' + q,
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
+        _this.data.push_id =  0;
         console.log('详情',res)
         _this.setData({ headhidden: true }); 
         wx.hideLoading();
@@ -2549,6 +2550,10 @@ Page({
         othershop: othershop
       });
     }
+
+    // 推送统计
+    this.data.push_id = options.push_id || 0;
+
     this.setData({
       rec_goods_id: options.rec_goods_id || 0,
       rec_cart_id: options.rec_cart_id || 0,

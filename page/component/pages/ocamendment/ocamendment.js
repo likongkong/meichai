@@ -91,15 +91,28 @@ Page({
     //   series: false,
     // });
     var infodata = this.data.infodata||{};
-    if (infodata&&infodata.drawBox && infodata.drawBox){
-      wx.navigateTo({
-        url: "/pages/smokebox/smokebox?gid=" + infodata.goods_id,
-      });
+    if(infodata.activityType==10){
+      if (infodata&&infodata.yifanshang && infodata.activity_id){
+        wx.navigateTo({
+          url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + infodata.activity_id
+        });
+      }else{
+        wx.navigateTo({
+          url: "/page/secondpackge/pages/aRewardList/aRewardList"
+        });
+      }
     }else{
-      wx.navigateTo({
-        url: "/pages/smokeboxlist/smokeboxlist"
-      });
-    }
+      if (infodata&&infodata.drawBox && infodata.goods_id){
+        wx.navigateTo({
+          url: "/pages/smokebox/smokebox?gid=" + infodata.goods_id,
+        });
+      }else{
+        wx.navigateTo({
+          url: "/pages/smokeboxlist/smokeboxlist"
+        });
+      }
+    };
+
     
   },
   // 热门品牌显示
@@ -252,7 +265,7 @@ Page({
 
         } else {
           app.showToastC(res.data.Msg);
-          _this.setData({ infodata: { drawBox:false} })
+          _this.setData({ infodata:res.data.Info || { drawBox:false} })
         };
       }
     });

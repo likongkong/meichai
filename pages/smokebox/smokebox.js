@@ -351,6 +351,9 @@ Page({
     // _this.data.id = 47670;
     // _this.data.gid = 0;
 
+    // 推送统计
+    _this.data.push_id = options.push_id || 0;
+
     _this.data.loginid = app.signindata.loginid;
     _this.data.openid = app.signindata.openid;
     _this.setData({
@@ -604,7 +607,7 @@ Page({
     wx.showLoading({
       title: '加载中...',
     })
-    var q1 = Dec.Aese('mod=blindBox&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&gid=' + _this.data.gid);
+    var q1 = Dec.Aese('mod=blindBox&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&gid=' + _this.data.gid+ '&push_id='+_this.data.push_id);
 
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q1,
@@ -614,6 +617,7 @@ Page({
       },
 
       success: function (res) {
+        _this.data.push_id =  0;
         console.log('getInfo======',res)
         wx.stopPullDownRefresh();
         _this.data.isloadfun = true

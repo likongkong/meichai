@@ -368,6 +368,7 @@ Page({
     } else {
       app.signindata.referee = options.referee || 0;
       app.signindata.activity_id = options.id || 0;
+
       _this.data.id = options.id || 0;
       _this.data.gid = options.gid || 0;
       this.setData({
@@ -375,6 +376,9 @@ Page({
         brandId:options.brandId||''
       })
     };
+    // 推送统计
+    _this.data.push_id = options.push_id || 0;
+
     _this.data.loginid = app.signindata.loginid;
     _this.data.openid = app.signindata.openid;
     _this.data.isNewer = app.signindata.isNewer;
@@ -545,7 +549,7 @@ Page({
       title: '加载中...',
     })
 
-    var q1 = Dec.Aese('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&isNewer=' + _this.data.isNewer + '&gid=' + _this.data.gid);
+    var q1 = Dec.Aese('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&isNewer=' + _this.data.isNewer + '&gid=' + _this.data.gid + '&push_id='+_this.data.push_id);
 
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q1,
@@ -555,6 +559,8 @@ Page({
       },
 
       success: function (res) {
+        _this.data.push_id =  0;
+
         console.log(res)
         wx.stopPullDownRefresh();
         wx.stopPullDownRefresh()

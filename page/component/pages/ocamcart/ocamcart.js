@@ -2,7 +2,6 @@ var Pub = require('../../common/mPublic.js'); //aes加密解密js
 var Dec = require('../../../../common/public.js'); //aes加密解密js
 const app = getApp();
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -213,6 +212,7 @@ Page({
       method: 'GET',
       header: {'Accept': 'application/json'},
       success: function (res) {
+        console.log('闲置购买数据=====',res)
         // 刷新完自带加载样式回去
         wx.stopPullDownRefresh()
         if (res.data.ReturnCode == 200) {
