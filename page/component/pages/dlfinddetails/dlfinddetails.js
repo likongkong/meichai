@@ -63,8 +63,54 @@ Page({
     // 生成分享图片
     snapshot: '',
     detaposiiftr: true,
-    tgaimg: app.signindata.tgaimg || 'https://www.51chaidan.com/images/default/openscreen.jpg'
+    tgaimg: app.signindata.tgaimg || 'https://www.51chaidan.com/images/default/openscreen.jpg',
+    id:'',
+    subscribedata:[],
   },
+  subscrfundom:function(w){
+    var _this = this;
+    var listdata = _this.data.listdata;
+    var index = w.currentTarget.dataset.index || w.target.dataset.index || 0;
+    var id = listdata.goodsInfo[index].goods_id || '';
+    var toyShowSubscribe = listdata.goodsInfo[index].toyShowSubscribe||'';
+    _this.setData({
+      id:id,
+      subscribedata:toyShowSubscribe,
+    })
+    console.log(1,id)
+    _this.subscrfunstar()
+  },
+  // 拉起订阅
+  subscrfunstar: function () {
+    var _this = this;
+    var subscribedata = _this.data.subscribedata || '';
+    console.log(2,subscribedata)
+    if (subscribedata && subscribedata.template_id && app.signindata.subscribeif) {
+      if (subscribedata.template_id instanceof Array) {
+        wx.requestSubscribeMessage({
+          tmplIds: subscribedata.template_id || [],
+          success(res) {
+            for (var i = 0; i < subscribedata.template_id.length; i++) {
+              if (res[subscribedata.template_id[i]] == "accept") {
+                app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+              };
+            };
+          },
+        })
+      } else {
+        wx.requestSubscribeMessage({
+          tmplIds: [subscribedata.template_id || ''],
+          success(res) {
+            if (res[subscribedata.template_id] == "accept") {
+              app.subscribefun(_this, 0, subscribedata.template_id, subscribedata.subscribe_type);
+            };
+          }
+        })
+      };
+    };
+  },
+
+
   detaposiiftrfun: function () {
     this.setData({ detaposiiftr: !this.data.detaposiiftr });
   },

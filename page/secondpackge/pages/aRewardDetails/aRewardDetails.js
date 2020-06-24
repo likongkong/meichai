@@ -1,6 +1,6 @@
 var Dec = require('../../../../common/public.js'); //aes加密解密js
 var Pub = require('../../common/mPublic.js'); //aes加密解密js
-
+var utiltime = require('../../../../utils/util.js');
 var WxParse = require('../../../../wxParse/wxParse.js');
 
 const app = getApp();
@@ -358,7 +358,6 @@ Page({
 
     this.nextpagediao();
   },
-
   listdata:function(){
     var _this = this;
     wx.showLoading({title: '加载中...',})
@@ -384,7 +383,11 @@ Page({
           var activity = res.data.Info.activity ||{};
           var finalReward = res.data.List.eventually || {};
           var goodsExhibition = res.data.List.goods_gear_list || [];
-        
+          
+          if(activity.status==1){
+            activity.start_time = utiltime.toDate(activity.start_time)
+          };
+
           var rightline = true;
           for(var i=0;i<goodsExhibition.length;i++){
             if(goodsExhibition[i].length>1){

@@ -69,6 +69,7 @@ page{background:#f5f6fa;}.dlfbox{width:100%;background:#f5f6fa;}::-webkit-scroll
 }
 .emlcontent{
   width: 100%;
+  position: relative;
 }
 .emlcontentimg{
   width:100%;

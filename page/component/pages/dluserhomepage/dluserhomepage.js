@@ -38,8 +38,62 @@ Page({
     inputbox: false,
     inputboxheight: 0,
     textconcent: '',
-    noticeind: 0
+    noticeind: 0,
+    id:'',
+    subscribedata:[],
   },
+
+  subscrfundom:function(w){
+    var _this = this;
+    var eldatalist = _this.data.listdata;
+    var num = w.currentTarget.dataset.num || w.target.dataset.num || 0;
+    var index = w.currentTarget.dataset.index || w.target.dataset.index || 0;
+    if(eldatalist&&eldatalist[index]&&eldatalist[index].goodsInfo&&eldatalist[index].goodsInfo[num]){
+      _this.setData({
+        id:eldatalist[index].goodsInfo[num].id,
+        subscribedata:eldatalist[index].goodsInfo[num].toyShowSubscribe
+      })
+      _this.subscrfunstar()
+    }
+
+  },
+  // 跳转商品详情
+  jumpshopdetail:function(w){
+    var goods_id = w.currentTarget.dataset.goods_id || w.target.dataset.goods_id || 0;
+    wx.navigateTo({
+      url: "../../../../pages/detailspage/detailspage?gid=" + goods_id,
+    }); 
+  },
+  // 拉起订阅
+  subscrfunstar: function () {
+    var _this = this;
+    var subscribedata = _this.data.subscribedata || '';
+    if (subscribedata && subscribedata.template_id && app.signindata.subscribeif) {
+      if (subscribedata.template_id instanceof Array) {
+        wx.requestSubscribeMessage({
+          tmplIds: subscribedata.template_id || [],
+          success(res) {
+            for (var i = 0; i < subscribedata.template_id.length; i++) {
+              if (res[subscribedata.template_id[i]] == "accept") {
+                app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+              };
+            };
+          },
+        })
+      } else {
+        wx.requestSubscribeMessage({
+          tmplIds: [subscribedata.template_id || ''],
+          success(res) {
+            if (res[subscribedata.template_id] == "accept") {
+              app.subscribefun(_this, 0, subscribedata.template_id, subscribedata.subscribe_type);
+            };
+          },
+          complete() {}
+        })
+      };
+    };
+  },
+
   inputboxfun: function (w) {
     var drying_idnotice = w.currentTarget.dataset.drying_idnotice || w.target.dataset.drying_idnotice || -1;
     var noticeind = w.currentTarget.dataset.noticeind || w.target.dataset.noticeind || 0;

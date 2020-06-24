@@ -2635,6 +2635,7 @@ closefrindcommoni:function(){
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
+        console.log('报名订单=============',res)
         if (res.data.ReturnCode == 200) {
           _this.setData({
             tipbacktwo: false,

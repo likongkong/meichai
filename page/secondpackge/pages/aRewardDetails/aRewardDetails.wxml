@@ -91,7 +91,6 @@
 </view>
 
 
-
 <view class="ardbottom">
     
     <view wx:if='{{activity.status==1}}' class="ardbottomeve ardbmerightbottom">暂未开始 {{activity.start_time}}</view>

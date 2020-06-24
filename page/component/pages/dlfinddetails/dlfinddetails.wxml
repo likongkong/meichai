@@ -129,7 +129,7 @@
 
     <block wx:else>
       <view class='dlfdshop' style='{{listdata.goodsInfo.length>3&&detaposiiftr?"overflow:hidden;height:525rpx;":""}}{{listdata.goodsInfo.length>3&&!detaposiiftr?"padding-bottom:100rpx;":""}}' wx:if='{{listdata.goodsInfo.length!=0}}'>
-          <view style='width:100%;height:160rpx;position:relative;margin-bottom:15rpx;' wx:for="{{listdata.goodsInfo}}" wx:key="key"  data-goods_id='{{item.goods_id}}' catchtap='jumpshopdetail'>
+          <view style='width:100%;height:160rpx;position:relative;margin-bottom:15rpx;' wx:for="{{listdata.goodsInfo}}" wx:key="key"  data-goods_id='{{item.goods_id}}' catchtap='jumpshopdetail' data-index='{{index}}'>
               <view class='dlfdsleft'>
                   <image class='dlfdslimg' src='{{item.goods_thumb}}'></image>
               </view>
@@ -140,7 +140,7 @@
                   </view>
                   <view style='width:100%;height:60rpx;position:relative;'>
                       <view class='dlfdsrprice'>￥{{item.price}}</view>
-                      <view class='dlfdsmony'>购买</view>
+                      <view class='dlfdsmony'>{{item.isSubscribe?'订阅':'购买'}}</view>
                   </view>
               </view>
           </view>

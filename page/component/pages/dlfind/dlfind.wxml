@@ -25,7 +25,7 @@
       <view class='dlfhlrcom' style='{{cat_id==2?"font-size:36rpx;":""}}' data-tab='2' catchtap='daltabhfun'>
         最新
         <view wx:if='{{cat_id==2}}' class='dlfhrcombot'></view>
-      </view>      
+      </view>
       <view class='dlfhlrcom' style='{{cat_id==0?"font-size:36rpx;":""}}' data-tab='0' catchtap='daltabhfun'>
         分享
         <view wx:if='{{cat_id==0}}' class='dlfhrcombot'></view>
@@ -69,8 +69,10 @@
                 <view wx:else class="emlhright" style=" border:2rpx solid #ff2742;color:#ff2742;" data-drying_id='{{item.uid}}' data-is_follow='{{item.is_follow}}' data-ind='{{index}}' catchtap='followfun'>关注</view>
             </view>
             <view class="emlcontent" data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>
-                <image class="emlcontentimg" src="{{item.img_extend[0].img}}" mode="widthFix"></image>
+                <image wx:if='{{item.video_img}}' style='width:70rpx;height:70rpx;position:absolute;bottom:0;left:0;right:0;top:0;margin:auto;z-index:1;' src='https://www.51chaidan.com/images/icon/iconPlayVideo.png'></image>
+                <image class="emlcontentimg" src="{{item.video_img?item.video_img:item.img_extend[0].img}}" mode="widthFix"></image>
             </view>
+
             <!-- bottom -->
             <view style="min-height:40rpx;padding: 20rpx;position: relative;">
                 <view style="width:100%;min-height:40rpx;">
@@ -85,6 +87,28 @@
                       </view>
                 </view>
             </view>
+
+
+             <!--  -->
+            <view style='width:100%;height:160rpx;position:relative;margin-bottom:15rpx;' data-index='{{index}}' wx:for="{{item.goodsInfo}}" wx:key="key" wx:for-item='w' wx:for-index='num' data-num='{{num}}' data-goods_id='{{w.goods_id}}'  catchtap='jumpshopdetail'>
+                <view style="width:200rpx;height:100%;position:relative;float:left;">
+                    <image style="width:140rpx;height:140rpx;position:absolute;left:0;top:0;bottom:0;right:0;margin:auto;" src='{{w.goods_thumb}}'></image>
+                </view>
+                <view style="width:510rpx;height:100%;float:left;">
+                    <view style='height:15rpx;widht:100%;'></view>
+                    <view class='multilineellipsis' style="width:100%;min-height:70rpx;font-size:28rpx;color:#333;line-height:36rpx;">
+                         {{w.goods_name}}
+                    </view>
+                    <view style='width:100%;height:60rpx;position:relative;'>
+                        <view style="height: 60rpx;line-height: 60rpx;float: left;font-size: 26rpx;color: #ff6967;">￥{{w.price}}</view>
+                        <view style="width:144rpx;height:56rpx;line-height:56rpx;text-align:center;position:absolute;right:0;top:0;bottom:0;margin:auto 0;border-radius:8rpx;font-size:26rpx;color:#fff;background:#ff6968;">{{w.isSubscribe?'订阅':'购买'}}</view>
+                    </view>
+                </view>
+            </view>
+
+
+
+
         </view> 
         <!--  暂无数据  -->
         <view class='goodstobereceived' wx:if='{{eldatalist.length==0&&nodataiftr}}'>
