@@ -684,7 +684,7 @@ Page({
             isSubscribeCoupon: res.data.Info.activity.isSubscribeCoupon || false,
             subscribeCouponTip: res.data.Info.activity.subscribeCouponTip || '',
             // 是否是端盒送实物
-            whole_boxGift:res.data.Info.whole_boxGift,
+            whole_boxGift:res.data.Info.whole_boxGift||'',
             wholeBoxGiftImg:res.data.Info.wholeBoxGiftImg || '',
             definePicture:res.data.Info.img||{},
           })
@@ -737,7 +737,7 @@ Page({
             _this.data.firstshowredpag = false
           }
 
-          if (res.data.List.role.length == 8 || res.data.List.role.length == 12 || res.data.List.role.length == 7 || res.data.List.role.length == 10 || res.data.List.role.length == 11) {
+          if (res.data.List.role.length == 8 || res.data.List.role.length == 12 || res.data.List.role.length == 7 || res.data.List.role.length == 10 || res.data.List.role.length == 11 || res.data.List.role.length == 24) {
             _this.setData({
               linenum: 4,
             })
@@ -2531,7 +2531,7 @@ Page({
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
           _this.setData({
-            whole_boxGift:res.data.Info.whole_boxGift
+            whole_boxGift:res.data.Info.whole_boxGift||''
           });
           if(_this.data.whole_boxGift){
             _this.setData({

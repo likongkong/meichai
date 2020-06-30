@@ -2,13 +2,8 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
-
       <view class='box'>
 
-
-
-
-    
         <!--   信息流  -->
         <view class='comboxw'  wx:for="{{commoddata}}" wx:key="key">
                 <!--  普通商品  -->
@@ -16,6 +11,7 @@
                     <view class='bcleft'>
                         <image class="bcimg" mode='aspectFit' src="{{item.gcover}}"></image>
                         <view class='shopsellout' wx:if='{{item.debuff==2}}' style='top:40rpx;right:30rpx;'>售罄</view>
+                        <view class='shopsellout' wx:elif='{{item.goods_type==3}}' style='line-height:32rpx;background:#298DF8;top:40rpx;right:30rpx;'>定金</view>
                     </view>
                     <view class='bcright'>
                         <view class='bctitle multilineellipsis' style='font-size:26rpx;'>

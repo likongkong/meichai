@@ -120,7 +120,7 @@
 		<view class='{{ischangebox?"changebox":""}}'>
       <!-- margin:0 148rpx; -->
 			<image style='width:{{imgwidth+4}}rpx;display:block;margin:0 auto;' catchtap='iftrdetailpagen' mode="widthFix" src='{{activity.cover}}?imageMogr2/thumbnail/908x' bindload='imageLoadhead'></image>
- 
+  
 			<view id='boxindex' class='parentBoxStyle' style="position:relative;width:{{imgwidth}}rpx;">
 				<view wx:for='{{roleList}}' wx:key="key">
 					<view wx:if='{{!item.isSoldOut}}' data-n='{{activity.radioImgBox}}' style='width:{{boxwidth}}px;height:{{boxwidth * activity.radioImgBox}}px;border:2rpx solid #000;float:left;position:relative;' catchtap='{{activity.canOperate?"selectbox":""}}'>
