@@ -692,6 +692,12 @@ Page({
       }
     }) 
   },
+  // 支付尾款
+  paythebalance:function(){
+    var _this = this;
+    _this.data.cart_id = _this.data.zunmdata.orderSn || '';
+    _this.paymentmony();
+  },
   // 微信支付
   paymentmony:function(){
     var _this = this; 

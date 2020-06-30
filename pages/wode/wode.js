@@ -377,7 +377,6 @@ Page({
           // '没有授权 统计'
           app.userstatistics(4);
 
-          
         }
       }
     });
