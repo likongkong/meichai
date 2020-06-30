@@ -328,7 +328,7 @@ Page({
         wx.requestSubscribeMessage({
           tmplIds: subscribedata.template_id || [],
           success(res) {
-            var is_show_modal = true;
+            var is_show_modal = _this.data.zunmdata.goods_type==3?false:true;
             for (var i = 0; i < subscribedata.template_id.length; i++) {
               if (res[subscribedata.template_id[i]] == "accept") {
                 app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
@@ -754,7 +754,11 @@ Page({
                     var title = '分享给你一个实用好物，[' + sharename + ']更便宜！';
 
                     // 订阅授权
-                    app.comsubscribe(_this);
+                    if(zunmdata.goods_type==3){
+                       _this.subscrfun();
+                    }else{
+                      app.comsubscribe(_this);
+                    };
                     
                     if (payinfo.isFreeBuyOrder) {
                       wx.navigateTo({
