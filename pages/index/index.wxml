@@ -397,6 +397,7 @@
 								<view class='disanum_simgbox' style='width:100%;padding-top:100%;height:1rpx;'>
 									<image class='disanum_simg' mode='aspectFit' src='{{ww.cover}}' style='border-radius: 10rpx;'></image>
 									<view class='shopsellout' wx:if='{{ww.debuff==2}}' style='line-height:32rpx;'>售罄</view>
+									<view class='shopsellout' wx:elif='{{ww.goods_type==3}}' style='line-height:32rpx;background:#298DF8;'>定金</view>
 								</view>
 								<view class='disanum_sb_txtone  multilineellipsis' style='color:#666;max-height:70rpx;'>{{ww.goods_name}}</view>
 								<view class='disanum_sb_txt specialellipsis'>￥{{ww.shop_price}}{{ww.gsale_unit}}</view>
@@ -567,6 +568,7 @@
 											<view class='disanum_simgbox' style='width:100%;padding-top:100%;height:1rpx;'>
 												<image class='disanum_simg' mode='aspectFit' src='{{ww.cover}}' style='border-radius: 10rpx;'></image>
 												<view class='shopsellout' wx:if='{{ww.debuff==2}}' style='line-height:32rpx;'>售罄</view>
+												<view class='shopsellout' wx:elif='{{ww.goods_type==3}}' style='line-height:32rpx;background:#298DF8;'>定金</view>
 											</view>
 											<view class='disanum_sb_txtone  multilineellipsis' style='color:#666;max-height:70rpx;'>{{ww.goods_name}}</view>
 											<view class='disanum_sb_txt specialellipsis'>￥{{ww.shop_price}}{{ww.gsale_unit}}</view>
@@ -585,6 +587,7 @@
 										<view class='disanum_simgbox' style='width:100%;margin:0 auto;height:1rpx;padding-top:100%;'>
 											<image class='disanum_simg' mode='aspectFit' src='{{ww.cover}}' style='border-radius: 10rpx;'></image>
 											<view class='shopsellout' wx:if='{{ww.debuff==2}}'>售罄</view>
+											<view class='shopsellout' wx:elif='{{ww.goods_type==3}}' style='line-height:32rpx;background:#298DF8;'>定金</view>
 										</view>
 										<view class='disanum_sb_txtone  multilineellipsis' style='color:#666;max-height:70rpx;width:100%;margin:0 auto;'>{{ww.goods_name}}</view>
 										<view class='disanum_sb_txt specialellipsis' style='width:100%;margin:0 auto;'>￥{{ww.shop_price}}{{ww.gsale_unit}}</view>
@@ -612,6 +615,7 @@
 										<view class='disanum_simgbox' style='width:100%;padding-top:100%;height:1rpx;'>
 											<image class='disanum_simg' mode='aspectFit' src='{{ww.cover}}' style='border-radius: 10rpx;'></image>
 											<view class='shopsellout' wx:if='{{ww.debuff==2}}' style='line-height:32rpx;'>售罄</view>
+											<view class='shopsellout' wx:elif='{{ww.goods_type==3}}' style='line-height:32rpx;background:#298DF8;'>定金</view>
 										</view>
 										<view class='disanum_sb_txtone  multilineellipsis' style='color:#666;max-height:70rpx;'>{{ww.goods_name}}</view>
 										<view class='disanum_sb_txt specialellipsis'>￥{{ww.shop_price}}{{ww.gsale_unit}}</view>
@@ -630,6 +634,7 @@
 										<view class='disanum_simgbox' style='width:100%;margin:0 auto;height:1rpx;padding-top:100%;'>
 											<image class='disanum_simg' mode='aspectFit' src='{{ww.cover}}' style='border-radius: 10rpx;'></image>
 											<view class='shopsellout' wx:if='{{ww.debuff==2}}'>售罄</view>
+											<view class='shopsellout' wx:elif='{{ww.goods_type==3}}' style='line-height:32rpx;background:#298DF8;'>定金</view>
 										</view>
 										<view class='disanum_sb_txtone  multilineellipsis' style='color:#666;max-height:70rpx;width:100%;margin:0 auto;'>{{ww.goods_name}}</view>
 										<view class='disanum_sb_txt specialellipsis' style='width:100%;margin:0 auto;'>￥{{ww.shop_price}}{{ww.gsale_unit}}</view>
@@ -726,6 +731,7 @@
 							<view class='dismtbccimgboxwatfa' data-gid='{{w.gid}}' catchtap='addressmanagement'>
 								<image src='{{w.gcover}}?imageMogr2/thumbnail/x696' class='dismtbccimgwatfa' mode='aspectFit'></image>
 								<view class='shopsellout' wx:if='{{w.debuff==2}}'>售罄</view>
+								<view class='shopsellout' wx:elif='{{w.goods_type==3}}' style='line-height:32rpx;background:#298DF8;'>定金</view>
 							</view>
 							<view class='dismtbcctxtbox' data-gid='{{w.gid}}' catchtap='addtocart'>
 								<view class='dismtbcctxtheadwatfal multilineellipsis'>

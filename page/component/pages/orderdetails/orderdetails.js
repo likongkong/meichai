@@ -457,7 +457,7 @@ Page({
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
-
+        console.log('订单详情===',res)
         if (res.data.ReturnCode == 200) {
           if (res.data.Info){
             var infoshow = res.data.Info;
