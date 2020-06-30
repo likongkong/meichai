@@ -391,6 +391,7 @@ Page({
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
+        console.log('列表=====',res)
         _this.setData({ headhidden: true});
         wx.hideLoading()
         if (res.data.ReturnCode == 200) {
@@ -440,7 +441,9 @@ Page({
             _this.setData({
               myordata: arrchil,
               subscribedata: infoshow.subscribe||''
-            },function(){});
+            },function(){
+              console.log(_this.data.myordata)
+            });
           }else{
               _this.setData({
                 myordata: []
@@ -550,7 +553,10 @@ Page({
         prizeCover: arr[j][0].prizeCover||[],
         isToyCabinet: arr[j][0].isToyCabinet || '',
         couponvalue: arr[j][0].couponValue||'',
-        auditPicTime: arr[j][0].auditPicTime || 0
+        auditPicTime: arr[j][0].auditPicTime || 0,
+        isBalances: arr[j][0].isBalances || 0,
+        dateTitle: arr[j][0].dateTitle || '',
+        depositOrderPayPrice: arr[j][0].depositOrderPayPrice || ''
       })
     };   
     if (arrchil && arrchil.length != 0){

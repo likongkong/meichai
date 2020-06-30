@@ -222,8 +222,15 @@ Page({
     iftrrefresh:true,
     subscribedata:'',
     isSubscribeCoupon:false,
-    subscribeCouponTip:''
+    subscribeCouponTip:'',
+    // 定金参数
+    depositbox:false
  
+  },
+  depositboxfun:function(){
+    this.setData({
+      depositbox:!this.data.depositbox
+    })
   },
   jumpDSIE(){
     wx.navigateTo({
@@ -633,6 +640,7 @@ Page({
     _this.setData({
       suboformola:true
     });
+
     var q = Dec.Aese('mod=order&operation=carorder&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&gcount=1&aid=' + aid + '&cid=' + cid + '&ginfo=' + ginfo + '&desc=' + _this.data.desc + '&gdt_vid=' + _this.data.gdt_vid + '&weixinadinfo=' + _this.data.weixinadinfo + '&roomId=' + _this.data.room_id);
     wx.request({
       url: app.signindata.comurl + 'goods.php'+q,
@@ -921,11 +929,12 @@ Page({
   },
   // 金额计算
   amountcalculation:function(){
+    var zunmdata = this.data.zunmdata || {};
     // 税费
-    var txton = parseFloat(this.data.zunmdata.tax || 0) * parseFloat(this.data.numberofdismantling); 
+    var txton = parseFloat(zunmdata.tax || 0) * parseFloat(this.data.numberofdismantling); 
     // 商品价格
-    var compric = parseFloat(this.data.zunmdata.gsale) * parseFloat(this.data.numberofdismantling);   
-    var compricbj = parseFloat(this.data.zunmdata.gsale) * parseFloat(this.data.numberofdismantling) - parseFloat(this.data.coudata2mon);      
+    var compric = parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling);   
+    var compricbj = parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling) - parseFloat(this.data.coudata2mon);      
      // 运费 
     var acc = 0;
     var xianshi = '0.00';
@@ -949,32 +958,32 @@ Page({
             freightiftr = 0;
             xianshi = '满￥' + parseFloat(this.data.defaultinformation.carriage.free||"99").toFixed(2) + '包邮';
       }else{
-        if (this.data.zunmdata.carriage !== '') {
-          var tdzuncar = this.data.zunmdata.carriage;
+        if (zunmdata.carriage !== '') {
+          var tdzuncar = zunmdata.carriage;
         } else {
           var tdzuncar = this.data.defaultinformation.carriage.d;
         };        
         xianshi = '￥' + parseFloat(tdzuncar).toFixed(2);
         freightiftr = parseFloat(tdzuncar);
-        acc = parseFloat(tdzuncar) > parseFloat(this.data.coudata1mon) ? parseFloat(this.data.zunmdata.carriage) - parseFloat(this.data.coudata1mon) : 0;
+        acc = parseFloat(tdzuncar) > parseFloat(this.data.coudata1mon) ? parseFloat(zunmdata.carriage) - parseFloat(this.data.coudata1mon) : 0;
       };  
     }else{
-        if (this.data.zunmdata.carriage !== '') {
-          var tdzuncar = this.data.zunmdata.carriage;
+        if (zunmdata.carriage !== '') {
+          var tdzuncar = zunmdata.carriage;
         } else {
           var tdzuncar = this.data.defaultinformation.carriage.d;
         };      
         xianshi = '￥0.00';
         freightiftr = parseFloat(tdzuncar);
-        acc = parseFloat(tdzuncar) > parseFloat(this.data.coudata1mon) ? parseFloat(this.data.zunmdata.carriage) - parseFloat(this.data.coudata1mon) : 0;
+        acc = parseFloat(tdzuncar) > parseFloat(this.data.coudata1mon) ? parseFloat(zunmdata.carriage) - parseFloat(this.data.coudata1mon) : 0;
     };
      // 应付金额
     var _this = this;
     if (this.data.coupon_type==1){
-      var ap = parseFloat(this.data.zunmdata.gsale) * parseFloat(this.data.numberofdismantling) - parseFloat(this.data.coudata2mon) + acc + txton;
+      var ap = parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling) - parseFloat(this.data.coudata2mon) + acc + txton;
     }else{
-      var ap = parseFloat(this.data.zunmdata.gsale) * parseFloat(this.data.numberofdismantling) * (parseFloat(this.data.coudata2mon) / 10) + acc + txton;
-      var coudata2mondiscount = (parseFloat(this.data.zunmdata.gsale) * parseFloat(this.data.numberofdismantling)) - parseFloat(this.data.zunmdata.gsale) * parseFloat(this.data.numberofdismantling) * (parseFloat(this.data.coudata2mon) / 10)
+      var ap = parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling) * (parseFloat(this.data.coudata2mon) / 10) + acc + txton;
+      var coudata2mondiscount = (parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling)) - parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling) * (parseFloat(this.data.coudata2mon) / 10)
       this.setData({
         coudata2mondiscount: coudata2mondiscount.toFixed(2)||'0'
       })
@@ -982,6 +991,15 @@ Page({
     if (ap <=0){
         ap=0;
     };
+
+    // 定金
+    if(zunmdata.goods_type==3){
+      ap = parseFloat(zunmdata.promote_price) || 0;
+      xianshi = '￥0.00';
+      freightiftr = 0;
+      txton = 0.00;
+    }
+
     this.setData({
       // 应付金额
       amountpayable: ap.toFixed(2),
@@ -1786,8 +1804,10 @@ Page({
     }else{
       this.hdramountcalculation()
     };
-    // 调取购物券
-    this.comcouponprfun();    
+    // 调取购物券   不是定金的时候调取优惠券
+    if(this.data.zunmdata.goods_type!=3){
+      this.comcouponprfun();   
+    };
   },
   // 协议radio
   radioagreement:function(){
@@ -2469,6 +2489,9 @@ Page({
             if (res.data.Ginfo.specialWay && res.data.Ginfo.specialWay==1){
               _this.winningtheprizetimedetail(redauin.endTime);
             };
+          };
+          if(redauin.goods_type==3&&redauin.status != 1){
+            _this.winningtheprizetimedetail(redauin.endTime);
           };
           _this.setData({
             movies: res.data.Ginfo.gimages,

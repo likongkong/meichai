@@ -40,65 +40,74 @@
                       <image src='../images/icon_delete.png' class='wholeheadrimg'></image> 
                   </view>
                        <view wx:if='{{item.order_type!=6}}' class='wholeconnumrrbox'>
-                          <view class='wholeconnumrr' style='margin-right: 13rpx;' wx:if='{{(item.status!=0 && item.status!=1 && item.status!=10 && item.status!=11&&item.status!=7&&item.status!=8&&item.status!=16&&item.status!=17) && item.order_type==2}}'>免单成功</view>                       
-                          <view class='wholeconnumrr' wx:if='{{item.status==0 && item.order_type!=7}}'>未付款</view>
-                          <view class='wholeconnumrr' style='color:#259B24;' wx:if='{{item.status==0 && item.order_type==7}}'>
-                              结束时间:{{item.surtime}}
-                          </view>
-                          <view class='wholeconnumrr' wx:if='{{item.status==1&&item.order_type!=2}}'>已付款</view>
-                          <view class='wholeconnumrr' wx:if='{{item.status==1&&item.order_type==2}}'>
-                              <block wx:if='{{item.isAuditPic==1}}'>
-                                 <block wx:if='{{item.auditPic==0}}'>报名未完成,等待上传截图</block>
-                                 <block wx:if='{{item.auditPic==1}}'>上传完成,等待审核</block>
-                                 <block wx:if='{{item.auditPic==2}}'><text style='color:#42bd56;'>审核成功,等待开奖</text></block>
-                                 <block wx:if='{{item.auditPic==3}}'>审核失败,重新上传</block>
-                              </block>
-                              <block wx:else>报名成功  等待开奖</block>
-                          </view>  
-                          <view class='wholeconnumrr' wx:if='{{item.status==2&&item.order_type==1}}'>支付成功</view>
-                          <view class='wholeconnumrr' style='color:#259B24;' wx:if='{{item.status==2 && item.order_type==7}}'> 
-                               活动结束，等待发货
-                          </view>
-                          <view class='wholeconnumrr' wx:if='{{item.stockup==0&&item.status==3}}'>等待发货</view>
-                          <view class='wholeconnumrr' wx:if='{{item.status==4}}'>等待收货</view>
-                          <view class='wholeconnumrr' wx:if='{{item.status==5}}'>已完成</view>
-                          <view class='wholeconnumrr' wx:if='{{item.status==6}}'>售后</view>
-                          <view class='wholeconnumrr' wx:if='{{item.status==7}}'>已退款</view>
-                          <view class='wholeconnumrr' wx:if='{{item.status==8 && item.order_type!=7}}'>取消未付款</view>
-                          <view class='wholeconnumrr' style='color:#7D7D7D;' wx:if='{{item.status==8 && item.order_type==7}}'>  
-                              活动结束，订单关闭
-                          </view>
-                          <view class='wholeconnumrr' wx:if='{{item.status==10}}'>报名失败</view>
-                          <view class='wholeconnumrr' wx:if='{{item.status==11}}'>免单失败</view>  
-                          <view class='wholeconnumrr' wx:if='{{item.status==12}}'>正在备货</view>
-                          <view class='wholeconnumrr' wx:if='{{item.status==13}}'>等待发货</view>
-                          <view class='wholeconnumrr' wx:if='{{item.status==14}}'>下单成功</view>
-                          <view class='wholeconnumrr' wx:if='{{item.status==15}}'>下单失败</view>
-                          <view class='wholeconnumrr' wx:if='{{item.status==16 && item.order_type!=7 && item.order_type!=10&& item.order_type!=16}}'> 
-                              <block wx:if='{{item.order_type==9}}'>购买商品领奖</block>
-                              <block wx:elif='{{item.showOrder==0}}'>已中奖，等待晒单</block> 
-                              <block wx:elif='{{item.showOrder==1}}'>已上传，待审核</block>
-                              <block wx:elif='{{item.is_receive==2}}'>已领奖，等待发货</block> 
-                              <block wx:elif='{{item.showOrder==2}}'>晒单成功，等待领奖</block>
-                              <block wx:elif='{{item.showOrder==3}}'>晒单失败，重新上传</block>
-                              <block wx:elif='{{item.showOrder==4}}'>上传晒单截图</block> 
-                          </view>
-                          <view class='wholeconnumrr' wx:if='{{item.status==16 && item.order_type==10&& item.order_type==16}}'> 
-                               <block wx:if='{{item.showOrder==1}}'>已上传，待审核</block> 
-                               <block wx:elif='{{item.showOrder==2}}'>晒单成功，等待领奖</block>
-                               <block wx:elif='{{item.showOrder==3}}'>晒单失败，重新上传</block>
-                               <block wx:else='{{item.showOrder==1}}'>晒单后领奖</block>
-                          </view>
-                          <view class='wholeconnumrr' style='color:#FF9800;' wx:if='{{item.status==16 && item.order_type==7}}'> 
-                               活动结束，等待领取
-                          </view>
-                          <view class='wholeconnumrr' wx:if='{{item.status==17 && item.order_type!=7}}'>  
-                              奖品过期已取消
-                          </view>                                                    
-                          <view class='wholeconnumrr' style='color:#7D7D7D;' wx:if='{{item.status==17 && item.order_type==7}}'> 
-                              活动结束，订单关闭
-                          </view>                                                    
-                          <view class='wholeconnumrr' wx:if='{{item.stockup==1&&item.status==3}}'>备货中</view>         
+                          <view class='wholeconnumrr' style='margin-right: 13rpx;' wx:if='{{(item.status!=0 && item.status!=1 && item.status!=10 && item.status!=11&&item.status!=7&&item.status!=8&&item.status!=16&&item.status!=17) && item.order_type==2}}'>免单成功</view>       
+
+                                <view class='wholeconnumrr' wx:if='{{item.status==0 && item.order_type!=7}}'>
+                                     <block wx:if='{{item.order_type==24}}'>
+                                        <block wx:if='{{item.status==0&&(item.isBalances==1||item.isBalances==2)}}'>已付定金</block>
+                                        <block  wx:elif='{{item.status==8&&item.isBalances==3}}'>奖品过期已取消</block>  
+                                     </block>
+                                     <block wx:else>未付款</block>
+                                </view>
+                                <view class='wholeconnumrr' style='color:#259B24;' wx:if='{{item.status==0 && item.order_type==7}}'>
+                                    结束时间:{{item.surtime}}
+                                </view>
+                                <view class='wholeconnumrr' wx:if='{{item.status==1&&item.order_type!=2}}'>已付款</view>
+                                <view class='wholeconnumrr' wx:if='{{item.status==1&&item.order_type==2}}'>
+                                    <block wx:if='{{item.isAuditPic==1}}'>
+                                        <block wx:if='{{item.auditPic==0}}'>报名未完成,等待上传截图</block>
+                                        <block wx:if='{{item.auditPic==1}}'>上传完成,等待审核</block>
+                                        <block wx:if='{{item.auditPic==2}}'><text style='color:#42bd56;'>审核成功,等待开奖</text></block>
+                                        <block wx:if='{{item.auditPic==3}}'>审核失败,重新上传</block>
+                                    </block>
+                                    <block wx:else>报名成功  等待开奖</block>
+                                </view>  
+                                <view class='wholeconnumrr' wx:if='{{item.status==2&&item.order_type==1}}'>支付成功</view>
+                                <view class='wholeconnumrr' style='color:#259B24;' wx:if='{{item.status==2 && item.order_type==7}}'> 
+                                    活动结束，等待发货
+                                </view>
+                                <view class='wholeconnumrr' wx:if='{{item.stockup==0&&item.status==3}}'>等待发货</view>
+                                <view class='wholeconnumrr' wx:if='{{item.status==4}}'>等待收货</view>
+                                <view class='wholeconnumrr' wx:if='{{item.status==5}}'>已完成</view>
+                                <view class='wholeconnumrr' wx:if='{{item.status==6}}'>售后</view>
+                                <view class='wholeconnumrr' wx:if='{{item.status==7}}'>已退款</view>
+                                <view class='wholeconnumrr' wx:if='{{item.status==8 && item.order_type!=7}}'>取消未付款</view>
+                                <view class='wholeconnumrr' style='color:#7D7D7D;' wx:if='{{item.status==8 && item.order_type==7}}'>  
+                                    活动结束，订单关闭
+                                </view>
+                                <view class='wholeconnumrr' wx:if='{{item.status==10}}'>报名失败</view>
+                                <view class='wholeconnumrr' wx:if='{{item.status==11}}'>免单失败</view>  
+                                <view class='wholeconnumrr' wx:if='{{item.status==12}}'>正在备货</view>
+                                <view class='wholeconnumrr' wx:if='{{item.status==13}}'>等待发货</view>
+                                <view class='wholeconnumrr' wx:if='{{item.status==14}}'>下单成功</view>
+                                <view class='wholeconnumrr' wx:if='{{item.status==15}}'>下单失败</view>
+                                <view class='wholeconnumrr' wx:if='{{item.status==16 && item.order_type!=7 && item.order_type!=10&& item.order_type!=16}}'> 
+                                    <block wx:if='{{item.order_type==9}}'>购买商品领奖</block>
+                                    <block wx:elif='{{item.showOrder==0}}'>已中奖，等待晒单</block> 
+                                    <block wx:elif='{{item.showOrder==1}}'>已上传，待审核</block>
+                                    <block wx:elif='{{item.is_receive==2}}'>已领奖，等待发货</block> 
+                                    <block wx:elif='{{item.showOrder==2}}'>晒单成功，等待领奖</block>
+                                    <block wx:elif='{{item.showOrder==3}}'>晒单失败，重新上传</block>
+                                    <block wx:elif='{{item.showOrder==4}}'>上传晒单截图</block> 
+                                </view>
+                                <view class='wholeconnumrr' wx:if='{{item.status==16 && item.order_type==10&& item.order_type==16}}'> 
+                                    <block wx:if='{{item.showOrder==1}}'>已上传，待审核</block> 
+                                    <block wx:elif='{{item.showOrder==2}}'>晒单成功，等待领奖</block>
+                                    <block wx:elif='{{item.showOrder==3}}'>晒单失败，重新上传</block>
+                                    <block wx:else='{{item.showOrder==1}}'>晒单后领奖</block>
+                                </view>
+                                <view class='wholeconnumrr' style='color:#FF9800;' wx:if='{{item.status==16 && item.order_type==7}}'> 
+                                    活动结束，等待领取
+                                </view>
+                                <view class='wholeconnumrr' wx:if='{{item.status==17 && item.order_type!=7}}'>  
+                                    奖品过期已取消
+                                </view>                                                    
+                                <view class='wholeconnumrr' style='color:#7D7D7D;' wx:if='{{item.status==17 && item.order_type==7}}'> 
+                                    活动结束，订单关闭
+                                </view>                                                    
+                                <view class='wholeconnumrr' wx:if='{{item.stockup==1&&item.status==3}}'>备货中</view>  
+           
+       
                       </view>
                       <!-- 为了不把原来逻辑弄乱 ，所以砍价单写 -->
                       <view wx:if='{{item.order_type==6}}' class='wholeconnumrrbox'>
@@ -415,230 +424,252 @@
 
              <view class='wholebottom' wx:if='{{item.order_type==1}}'>合计:￥{{item.amount}}<view style='display: inline-block;' wx:if="{{item.carriage==''}}">(含运费{{item.carriage}}元）</view></view>
               
-              <view  wx:if='{{item.order_type!=6}}'>
-              <!-- 等待付款  -->
-              <view class='daifukuandianji' wx:if='{{item.status==0 && item.order_type!=7}}'>
-                  <view class='dfkdjrleft'>{{countdown}}</view>
-                  <view class='dfkdjrighg' data-oid='{{item.cart_id}}' bindtap='cancellationoforder' style='position:relative;'>取消订单</view>
-                  <view class='dfkdjrighg' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;' bindtap='payment' data-amount='{{item.amount}}' data-oid='{{item.oid}}' data-cart_id='{{item.cart_id}}' data-gcover='{{item.gcover}}' data-gid='{{item.gid}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}'  data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-order_type='{{item.order_type}}'>我要付款</view>
-  
-             </view>
+              <block wx:if='{{item.order_type==24&&item.status!=8}}'>
+                    <view class='daifukuan'>
+                        商品总额:￥{{item.goods_amount}}-定金￥{{item.depositOrderPayPrice}}+运费￥{{item.carriage}}
+                    </view>  
+                    <view class='wholebottom'>合计:￥{{item.amount}}</view>  
 
-              <!-- 0元购 status为1 进行中 -->
-              <view class='daifukuandianji' wx:if='{{item.status==0 && item.order_type==7}}'>
-                  <view class='dfkdjrleft'>{{countdown}}</view>
-                  <view class='dfkdjrighg' data-cart_id='{{item.cart_id}}' bindtap='gofreedetail' style='position:relative;background:#3F51B5;color:#fff;border:0rpx;'>0元购助力</view>
-                  <view wx:if='{{item.isGoods}}' class='dfkdjrighg' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;' bindtap='goodsetail' data-gid='{{item.gid}}' >直接购买</view>
-             </view>
+                    <view class='daifukuandianji' wx:if='{{item.status==0}}'>
+                        <view class='dfkdjrleft' style="height:54rpx;line-height:54rpx;">{{item.dateTitle}}</view>
+                        <block wx:if='{{item.isBalances==1}}'>
+                           <view class='dfkdjrighg' style='color:#ccc;border:1rpx solid #ccc;position:relative;'>支付尾款</view>
+                        </block>
+                        <block wx:elif='{{item.isBalances==2}}'>
+                           <view class='dfkdjrighg' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;' bindtap='payment' data-amount='{{item.amount}}' data-oid='{{item.oid}}' data-cart_id='{{item.cart_id}}' data-gcover='{{item.gcover}}' data-gid='{{item.gid}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}'  data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-order_type='{{item.order_type}}'>支付尾款</view>                          
+                        </block>
+                    </view>
+                    <view class='daifukuandianji' wx:if='{{item.status==4||item.status==5}}'>
+                           <view class='wholebottomaddright' style='margin-right:20rpx;position: relative;' data-oid='{{item.oid}}' data-gcover='{{item.gcover}}' bindtap='lookatthelogistics'>查看物流</view>
+                    </view>
+              </block>
+              <view  wx:elif='{{item.order_type!=6}}'>
+                    <!-- 等待付款  -->
+                    <view class='daifukuandianji' wx:if='{{item.status==0 && item.order_type!=7}}'>
+
+                        <view class='dfkdjrleft'>{{countdown}}</view>
+
+                        <view class='dfkdjrighg' data-oid='{{item.cart_id}}' bindtap='cancellationoforder' style='position:relative;'>取消订单</view>
+
+                        <view class='dfkdjrighg' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;' bindtap='payment' data-amount='{{item.amount}}' data-oid='{{item.oid}}' data-cart_id='{{item.cart_id}}' data-gcover='{{item.gcover}}' data-gid='{{item.gid}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}'  data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-order_type='{{item.order_type}}'>我要付款</view>
+        
+                    </view>
+
+                    <!-- 0元购 status为1 进行中 -->
+                    <view class='daifukuandianji' wx:if='{{item.status==0 && item.order_type==7}}'>
+                        <view class='dfkdjrleft'>{{countdown}}</view>
+                        <view class='dfkdjrighg' data-cart_id='{{item.cart_id}}' bindtap='gofreedetail' style='position:relative;background:#3F51B5;color:#fff;border:0rpx;'>0元购助力</view>
+                        <view wx:if='{{item.isGoods}}' class='dfkdjrighg' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;' bindtap='goodsetail' data-gid='{{item.gid}}' >直接购买</view>
+                    </view>
    
-               <!--  已付款  catchtap='upImgSer' --> 
-               <view class='wholebottomadd' wx:if='{{item.status==1||item.status==16  && item.order_type!=7}}'>
-                   <view wx:if='{{item.status==1&&item.isAuditPic==1&&item.auditPic!=2}}' style='color:#fff;font-size:26rpx;width:140rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;' data-cart_id='{{item.cart_id}}' data-share_url='{{item.share_url}}' data-qrcode='{{item.qrcode}}' data-auditpictime='{{item.auditPicTime||0}}' catchtap='generatePicturesact'>上传截图</view>
+                    <!--  已付款  catchtap='upImgSer' --> 
+                    <view class='wholebottomadd' wx:if='{{item.status==1||item.status==16  && item.order_type!=7}}'>
+                        <view wx:if='{{item.status==1&&item.isAuditPic==1&&item.auditPic!=2}}' style='color:#fff;font-size:26rpx;width:140rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;' data-cart_id='{{item.cart_id}}' data-share_url='{{item.share_url}}' data-qrcode='{{item.qrcode}}' data-auditpictime='{{item.auditPicTime||0}}' catchtap='generatePicturesact'>上传截图</view>
 
-                  <view style='position:relative;height:54rpx;width:240rpx;line-height:54rpx;margin-left:20rpx;float:right;'   catchtap='clicktocollect' data-sorder='{{item.showOrder}}' data-order_type='{{item.order_type}}' data-cart_id='{{item.cart_id}}'  wx:if='{{item.is_receive==1&&(item.isShowOrder==0||item.showOrder==2||item.showOrder==1)&&item.order_type!=9&&item.order_type!=10&&item.order_type!=11}}'>
-                        <view class='awardrrbutposi' data-cart_id='{{item.cart_id}}' style='right:0;height:54rpx;width:240rpx;line-height:54rpx;'>中奖了! 点击领奖</view>
-                  </view>
+                        <view style='position:relative;height:54rpx;width:240rpx;line-height:54rpx;margin-left:20rpx;float:right;'   catchtap='clicktocollect' data-sorder='{{item.showOrder}}' data-order_type='{{item.order_type}}' data-cart_id='{{item.cart_id}}'  wx:if='{{item.is_receive==1&&(item.isShowOrder==0||item.showOrder==2||item.showOrder==1)&&item.order_type!=9&&item.order_type!=10&&item.order_type!=11}}'>
+                                <view class='awardrrbutposi' data-cart_id='{{item.cart_id}}' style='right:0;height:54rpx;width:240rpx;line-height:54rpx;'>中奖了! 点击领奖</view>
+                        </view>
 
-                   <view wx:if='{{item.status==16&&item.isShowOrder==1&&item.showOrder!=1&&item.showOrder!=2}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
-                      <view style='width:100%;height:100%;position: relative;' wx:if='{{item.showOrder==0}}' data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
-                      <view style='width:100%;height:100%;' wx:if='{{item.showOrder==1}}' data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>等待审核</view>
-                      <view style='width:100%;height:100%;position: relative;' wx:if='{{item.showOrder==3||item.showOrder==4}}'  data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>上传晒单截图</view>
-                   </view>
+                        <view wx:if='{{item.status==16&&item.isShowOrder==1&&item.showOrder!=1&&item.showOrder!=2}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
+                            <view style='width:100%;height:100%;position: relative;' wx:if='{{item.showOrder==0}}' data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
+                            <view style='width:100%;height:100%;' wx:if='{{item.showOrder==1}}' data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>等待审核</view>
+                            <view style='width:100%;height:100%;position: relative;' wx:if='{{item.showOrder==3||item.showOrder==4}}'  data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>上传晒单截图</view>
+                        </view>
 
-                   <view wx:if='{{item.status==16&&(item.order_type==9||item.order_type==11)}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
-                      <view style='width:100%;height:100%;' catchtap='clicktocollect' data-order_type='{{item.order_type}}' data-cart_id='{{item.cart_id}}'>领取奖励</view>
-                   </view>
+                        <view wx:if='{{item.status==16&&(item.order_type==9||item.order_type==11)}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
+                            <view style='width:100%;height:100%;' catchtap='clicktocollect' data-order_type='{{item.order_type}}' data-cart_id='{{item.cart_id}}'>领取奖励</view>
+                        </view>
 
-                   <view wx:if='{{item.status==16&&item.order_type==10&&(item.showOrder==0||item.showOrder==3||item.showOrder==4)}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
-                      <view style='width:100%;height:100%;position: relative;' data-qrcode='{{item.qrcode}}' data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具' data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
+                        <view wx:if='{{item.status==16&&item.order_type==10&&(item.showOrder==0||item.showOrder==3||item.showOrder==4)}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
+                            <view style='width:100%;height:100%;position: relative;' data-qrcode='{{item.qrcode}}' data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具' data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
 
-                   </view>
+                        </view>
 
-                   <view class='wholebottomaddright sharebox redborcol' wx:if='{{item.is_invite==0}}'>
-                      <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
-                      分享好友
-                   </view>
-              
-                   <view class='wholebottomaddright sharebox redborcol' style='background:#42bd56;color:#fff;margin-right:10rpx;border:1rpx solid #fff;' wx:if='{{item.isToyCabinet}}' catchtap='jumpowntoy'>
-                      我的玩具柜
-                   </view>
- 
-               </view>
+                        <view class='wholebottomaddright sharebox redborcol' wx:if='{{item.is_invite==0}}'>
+                            <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
+                            分享好友
+                        </view>
+                    
+                        <view class='wholebottomaddright sharebox redborcol' style='background:#42bd56;color:#fff;margin-right:10rpx;border:1rpx solid #fff;' wx:if='{{item.isToyCabinet}}' catchtap='jumpowntoy'>
+                            我的玩具柜
+                        </view>
+        
+                    </view>
 
-               <!-- 0元购 status为16 进行中  gofreedetail -->
-              <view class='daifukuandianji' wx:if='{{item.status==16 && item.order_type==7}}'>
-                  <view class='dfkdjrleft'>{{countdown}}</view>
-                  <view class='dfkdjrighg' data-cart_id='{{item.cart_id}}' data-order_type='{{item.order_type}}' bindtap='clicktocollect' style='position:relative;background:#FF9800;color:#fff;border:0rpx;'>领取奖励</view>
-                  <view class='dfkdjrighg' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;' wx:if='{{item.isGoods}}'  bindtap='goodsetail' data-gid='{{item.gid}}' >直接购买</view>
-             </view>
+                    <!-- 0元购 status为16 进行中  gofreedetail -->
+                    <view class='daifukuandianji' wx:if='{{item.status==16 && item.order_type==7}}'>
+                        <view class='dfkdjrleft'>{{countdown}}</view>
+                        <view class='dfkdjrighg' data-cart_id='{{item.cart_id}}' data-order_type='{{item.order_type}}' bindtap='clicktocollect' style='position:relative;background:#FF9800;color:#fff;border:0rpx;'>领取奖励</view>
+                        <view class='dfkdjrighg' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;' wx:if='{{item.isGoods}}'  bindtap='goodsetail' data-gid='{{item.gid}}' >直接购买</view>
+                    </view>
 
-               <!--  采购商品  -->
-               <view class='wholebottomadd' wx:if='{{item.status==12}}'>
+                    <!--  采购商品  -->
+                    <view class='wholebottomadd' wx:if='{{item.status==12}}'>
 
-<view wx:if='{{item.status==12&&item.isShowOrder==1&&item.showOrder!=1&&item.showOrder!=2}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
-                      <view style='width:100%;height:100%;' wx:if='{{item.showOrder==0}}' data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
-                      <view style='width:100%;height:100%;' wx:if='{{item.showOrder==1}}' data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>等待审核</view>
-                      <view style='width:100%;height:100%;' wx:if='{{item.showOrder==3||item.showOrder==4}}'  data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>上传晒单截图</view>
+                        <view wx:if='{{item.status==12&&item.isShowOrder==1&&item.showOrder!=1&&item.showOrder!=2}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
+                            <view style='width:100%;height:100%;' wx:if='{{item.showOrder==0}}' data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
+                            <view style='width:100%;height:100%;' wx:if='{{item.showOrder==1}}' data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>等待审核</view>
+                            <view style='width:100%;height:100%;' wx:if='{{item.showOrder==3||item.showOrder==4}}'  data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>上传晒单截图</view>
 
-                   </view>
+                        </view>
 
-                   <view wx:if='{{item.status==12&&item.order_type==10&&(item.showOrder==0||item.showOrder==3||item.showOrder==4)}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
-                      <view style='width:100%;height:100%;position: relative;' data-qrcode='{{item.qrcode}}' data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具' data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
+                        <view wx:if='{{item.status==12&&item.order_type==10&&(item.showOrder==0||item.showOrder==3||item.showOrder==4)}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
+                            <view style='width:100%;height:100%;position: relative;' data-qrcode='{{item.qrcode}}' data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具' data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
 
-                   </view>
+                        </view>
 
-                   <view class='wholebottomaddright sharebox redborcol' wx:if='{{item.is_invite==0}}'>
-                      <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
-                      分享好友
-                   </view>                   
+                        <view class='wholebottomaddright sharebox redborcol' wx:if='{{item.is_invite==0}}'>
+                            <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
+                            分享好友
+                        </view>                   
 
-                   <view class='wholebottomaddright sharebox redborcol' style='background:#42bd56;color:#fff;margin-right:10rpx;border:1rpx solid #fff;' wx:if='{{item.isToyCabinet}}' catchtap='jumpowntoy'>
-                      我的玩具柜
-                   </view>
-                   
-               </view>
+                        <view class='wholebottomaddright sharebox redborcol' style='background:#42bd56;color:#fff;margin-right:10rpx;border:1rpx solid #fff;' wx:if='{{item.isToyCabinet}}' catchtap='jumpowntoy'>
+                            我的玩具柜
+                        </view>
+                        
+                    </view>
 
-               <!--  商品入库  -->
-               <view class='wholebottomadd' wx:if='{{item.status==13}}'>
-                   <view wx:if='{{item.status==13&&item.isShowOrder==1&&item.showOrder!=1&&item.showOrder!=2}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
-                      <view style='width:100%;height:100%;' wx:if='{{item.showOrder==0}}' data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
-                      <view style='width:100%;height:100%;' wx:if='{{item.showOrder==1}}' data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>等待审核</view>
-                      <view style='width:100%;height:100%;' wx:if='{{item.showOrder==3||item.showOrder==4}}'  data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>上传晒单截图</view>
+                    <!--  商品入库  -->
+                    <view class='wholebottomadd' wx:if='{{item.status==13}}'>
+                        <view wx:if='{{item.status==13&&item.isShowOrder==1&&item.showOrder!=1&&item.showOrder!=2}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
+                            <view style='width:100%;height:100%;' wx:if='{{item.showOrder==0}}' data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
+                            <view style='width:100%;height:100%;' wx:if='{{item.showOrder==1}}' data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>等待审核</view>
+                            <view style='width:100%;height:100%;' wx:if='{{item.showOrder==3||item.showOrder==4}}'  data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>上传晒单截图</view>
 
-                   </view>
-                   
-                   <view class='wholebottomaddright sharebox redborcol' wx:if='{{item.is_invite==0}}'>
-                      <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
-                      分享好友
-                   </view>                       
-                 
-               </view>
+                        </view>
+                        
+                        <view class='wholebottomaddright sharebox redborcol' wx:if='{{item.is_invite==0}}'>
+                            <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
+                            分享好友
+                        </view>                       
+                        
+                    </view>
 
-               <!--  等待拆单  -->
-               <view class='wholebottomadd' wx:if='{{item.status==2 && item.order_type!=7}}'>
-                   <view wx:if='{{item.status==2&&item.isShowOrder==1&&item.showOrder!=1&&item.showOrder!=2}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
-                      <view style='width:100%;height:100%;' wx:if='{{item.showOrder==0}}' data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
-                      <view style='width:100%;height:100%;' wx:if='{{item.showOrder==1}}' data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>等待审核</view>
-                      <view style='width:100%;height:100%;' wx:if='{{item.showOrder==3||item.showOrder==4}}'  data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>上传晒单截图</view>
+                    <!--  等待拆单  -->
+                    <view class='wholebottomadd' wx:if='{{item.status==2 && item.order_type!=7}}'>
+                        <view wx:if='{{item.status==2&&item.isShowOrder==1&&item.showOrder!=1&&item.showOrder!=2}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
+                            <view style='width:100%;height:100%;' wx:if='{{item.showOrder==0}}' data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
+                            <view style='width:100%;height:100%;' wx:if='{{item.showOrder==1}}' data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>等待审核</view>
+                            <view style='width:100%;height:100%;' wx:if='{{item.showOrder==3||item.showOrder==4}}'  data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>上传晒单截图</view>
 
-                   </view>
+                        </view>
 
-                   <view wx:if='{{item.status==2&&item.order_type==10&&(item.showOrder==0||item.showOrder==3||item.showOrder==4)}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
-                      <view style='width:100%;height:100%;' data-qrcode='{{item.qrcode}}' data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具' data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
+                        <view wx:if='{{item.status==2&&item.order_type==10&&(item.showOrder==0||item.showOrder==3||item.showOrder==4)}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
+                            <view style='width:100%;height:100%;' data-qrcode='{{item.qrcode}}' data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具' data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
 
-                   </view>
+                        </view>
 
-                   <view class='wholebottomaddright sharebox redborcol' wx:if='{{item.is_invite==0}}'>
-                      <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
-                      分享好友
-                   </view>                  
-                  
-                   <view class='wholebottomaddright sharebox redborcol' style='background:#42bd56;color:#fff;margin-right:10rpx;border:1rpx solid #fff;' wx:if='{{item.isToyCabinet}}' catchtap='jumpowntoy'>
-                      我的玩具柜
-                   </view>
+                        <view class='wholebottomaddright sharebox redborcol' wx:if='{{item.is_invite==0}}'>
+                            <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
+                            分享好友
+                        </view>                  
+                        
+                        <view class='wholebottomaddright sharebox redborcol' style='background:#42bd56;color:#fff;margin-right:10rpx;border:1rpx solid #fff;' wx:if='{{item.isToyCabinet}}' catchtap='jumpowntoy'>
+                            我的玩具柜
+                        </view>
 
-               </view>
+                    </view>
 
-               <!-- 0元购 status为2 进行中 -->
-              <view class='daifukuandianji' wx:if='{{item.status==2 && item.order_type==7}}'>
-                  <view class='dfkdjrleft'>{{countdown}}</view>
-                  <view class='dfkdjrighg' data-cart_id='{{item.cart_id}}' bindtap='gofreedetail' style='position:relative;background:#3F51B5;color:#fff;border:0rpx;'>0元购助力</view>
-              </view>
+                    <!-- 0元购 status为2 进行中 -->
+                    <view class='daifukuandianji' wx:if='{{item.status==2 && item.order_type==7}}'>
+                        <view class='dfkdjrleft'>{{countdown}}</view>
+                        <view class='dfkdjrighg' data-cart_id='{{item.cart_id}}' bindtap='gofreedetail' style='position:relative;background:#3F51B5;color:#fff;border:0rpx;'>0元购助力</view>
+                    </view>
 
-               <!--  等待发货  -->
-               <view class='wholebottomadd' wx:if='{{item.status==3}}'>
-                   <view wx:if='{{item.stockup==1&&item.status==3}}' style='height:88rpx;line-height:60rpx;font-size:28rpx;color:#666;float:left;'>备货中，预计3-5个工作日送达</view>
+                    <!--  等待发货  -->
+                    <view class='wholebottomadd' wx:if='{{item.status==3}}'>
+                        <view wx:if='{{item.stockup==1&&item.status==3}}' style='height:88rpx;line-height:60rpx;font-size:28rpx;color:#666;float:left;'>备货中，预计3-5个工作日送达</view>
 
-                   <view wx:if='{{item.status==3&&item.order_type==10&&(item.showOrder==0||item.showOrder==3||item.showOrder==4)}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
-                      <view style='width:100%;height:100%;' data-qrcode='{{item.qrcode}}' data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具' data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
+                        <view wx:if='{{item.status==3&&item.order_type==10&&(item.showOrder==0||item.showOrder==3||item.showOrder==4)}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
+                            <view style='width:100%;height:100%;' data-qrcode='{{item.qrcode}}' data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具' data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
 
-                   </view>
-                   
-                   <view class='wholebottomaddright sharebox redborcol' wx:if='{{item.is_invite==0}}'>
-                      <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
-                      分享好友
-                   </view>    
-                
-               </view>
+                        </view>
+                        
+                        <view class='wholebottomaddright sharebox redborcol' wx:if='{{item.is_invite==0}}'>
+                            <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
+                            分享好友
+                        </view>    
+                        
+                    </view>
 
-               <!--  等待收货  --> 
-              <view class='wholebottomadd' wx:if='{{item.status==4}}'> 
-                   <view wx:if='{{item.status==4&&item.isShowOrder==1&&item.showOrder!=1&&item.showOrder!=2}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
-                      <view style='width:100%;height:100%;' wx:if='{{item.showOrder==0}}' data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
-                      <view style='width:100%;height:100%;' wx:if='{{item.showOrder==1}}' data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>等待审核</view>
-                      <view style='width:100%;height:100%;' wx:if='{{item.showOrder==3||item.showOrder==4}}'  data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>上传晒单截图</view>
+                    <!--  等待收货  --> 
+                    <view class='wholebottomadd' wx:if='{{item.status==4}}'> 
+                        <view wx:if='{{item.status==4&&item.isShowOrder==1&&item.showOrder!=1&&item.showOrder!=2}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
+                            <view style='width:100%;height:100%;' wx:if='{{item.showOrder==0}}' data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
+                            <view style='width:100%;height:100%;' wx:if='{{item.showOrder==1}}' data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>等待审核</view>
+                            <view style='width:100%;height:100%;' wx:if='{{item.showOrder==3||item.showOrder==4}}'  data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>上传晒单截图</view>
 
-                   </view>
+                        </view>
 
-                   <view wx:if='{{item.status==4&&item.order_type==10&&(item.showOrder==0||item.showOrder==3||item.showOrder==4)}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
-                      <view style='width:100%;height:100%;' data-qrcode='{{item.qrcode}}' data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具' data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
+                        <view wx:if='{{item.status==4&&item.order_type==10&&(item.showOrder==0||item.showOrder==3||item.showOrder==4)}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
+                            <view style='width:100%;height:100%;' data-qrcode='{{item.qrcode}}' data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具' data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
 
-                   </view>
+                        </view>
 
-                   <view class='wholebottomaddright' data-oid='{{item.oid}}' bindtap='confirmationofreceipt'>确认收货</view>             
-                   <view class='wholebottomaddright' data-oid='{{item.oid}}' data-gcover='{{item.gcover}}' bindtap='lookatthelogistics' style='margin-right:10rpx;position: relative;'>查看物流</view> 
-                   <view class='wholebottomaddright sharebox redborcol' style='margin-right:20rpx;' wx:if='{{item.is_invite==0}}'>
-                      <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
-                      分享好友
-                   </view>
-                   
-<view class='wholebottomaddright' wx:if='{{item.order_type==1}}' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;margin-right:10rpx;' data-ind='{{index}}' bindtap='personalhomepage'>
-                  发帖推荐
-                  </view>
+                        <view class='wholebottomaddright' data-oid='{{item.oid}}' bindtap='confirmationofreceipt'>确认收货</view>             
+                        <view class='wholebottomaddright' data-oid='{{item.oid}}' data-gcover='{{item.gcover}}' bindtap='lookatthelogistics' style='margin-right:10rpx;position: relative;'>查看物流</view> 
+                        <view class='wholebottomaddright sharebox redborcol' style='margin-right:20rpx;' wx:if='{{item.is_invite==0}}'>
+                            <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
+                            分享好友
+                        </view>
+                        
+        <view class='wholebottomaddright' wx:if='{{item.order_type==1}}' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;margin-right:10rpx;' data-ind='{{index}}' bindtap='personalhomepage'>
+                        发帖推荐
+                        </view>
 
-              </view> 
+                    </view> 
+                    <!--  已完成  -->
+                    <view class='wholebottomadd' wx:if='{{item.status==5}}'>      
+
+                    <view wx:if='{{item.status==5&&item.order_type==10&&(item.showOrder==0||item.showOrder==3||item.showOrder==4)}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
+                            <view style='width:100%;height:100%;' data-qrcode='{{item.qrcode}}' data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具' data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
+                        </view>
+                                
+                        <view class='wholebottomaddright sharebox redborcol' wx:if='{{item.is_invite==0}}'>
+                            <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
+                            分享好友
+                        </view> 
+                    
+                        <view class='wholebottomaddright' style='margin-right:20rpx;position: relative;' data-oid='{{item.oid}}' data-gcover='{{item.gcover}}' bindtap='lookatthelogistics'>查看物流</view> 
+
+                        <view class='wholebottomaddright' wx:if='{{item.order_type==1}}' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;margin-right:10rpx;' data-ind='{{index}}' bindtap='personalhomepage'>
+                        发帖推荐
+                        </view>
+
+                    </view>
               <!--  已完成  -->
-               <view class='wholebottomadd' wx:if='{{item.status==5}}'>      
 
-               <view wx:if='{{item.status==5&&item.order_type==10&&(item.showOrder==0||item.showOrder==3||item.showOrder==4)}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
-                      <view style='width:100%;height:100%;' data-qrcode='{{item.qrcode}}' data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具' data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
-                   </view>
-                          
-                   <view class='wholebottomaddright sharebox redborcol' wx:if='{{item.is_invite==0}}'>
-                      <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
-                      分享好友
-                   </view> 
-              
-                   <view class='wholebottomaddright' style='margin-right:20rpx;position: relative;' data-oid='{{item.oid}}' data-gcover='{{item.gcover}}' bindtap='lookatthelogistics'>查看物流</view> 
+                    <!--  拆单失败  -->
+                    <view class='wholebottomadd' wx:if='{{item.status==7}}'>
+                        <view class='totaltittrfai'>付款将会原路返回到您的支付账号中</view>
+                        <view class='wholebottomaddright sharebox redborcol' wx:if='{{item.is_invite==0}}'>
+                            <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
+                            分享好友
+                        </view>                   
+                    </view>
+                    <!--  已取消订单  -->
+                    <view wx:if='{{item.status==8 && item.order_type!=7}}' style='min-height:1rpx;width:94%;padding: 0 3% 10rpx;overflow:hidden;'>    
 
-                   <view class='wholebottomaddright' wx:if='{{item.order_type==1}}' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;margin-right:10rpx;' data-ind='{{index}}' bindtap='personalhomepage'>
-                  发帖推荐
-                  </view>
+                        <view class='wholebottomaddright sharebox redborcol' wx:if='{{item.is_invite==0}}'>
+                            <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
+                            分享好友
+                        </view>                        
 
-               </view>
-              <!--  已完成  -->
+                    </view>
 
-            <!--  拆单失败  -->
-               <view class='wholebottomadd' wx:if='{{item.status==7}}'>
-                   <view class='totaltittrfai'>付款将会原路返回到您的支付账号中</view>
-                   <view class='wholebottomaddright sharebox redborcol' wx:if='{{item.is_invite==0}}'>
-                      <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
-                      分享好友
-                   </view>                   
-               </view>
-            <!--  已取消订单  -->
-               <view wx:if='{{item.status==8 && item.order_type!=7}}' style='min-height:1rpx;width:94%;padding: 0 3% 10rpx;overflow:hidden;'>    
+                    <!-- 0元购 status为8 进行中 -->
+                    <view class='daifukuandianji' wx:if='{{item.status==8 && item.order_type==7}}'>
+                        <view class='dfkdjrleft'>{{countdown}}</view>
+                        <view class='dfkdjrighg' data-cart_id='{{item.cart_id}}' bindtap='gofreedetail' style='position:relative;background:#3F51B5;color:#fff;border:0rpx;'>0元购助力</view>
+                    </view>
 
-                   <view class='wholebottomaddright sharebox redborcol' wx:if='{{item.is_invite==0}}'>
-                      <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
-                      分享好友
-                   </view>                        
-
-               </view>
-
-              <!-- 0元购 status为8 进行中 -->
-              <view class='daifukuandianji' wx:if='{{item.status==8 && item.order_type==7}}'>
-                  <view class='dfkdjrleft'>{{countdown}}</view>
-                  <view class='dfkdjrighg' data-cart_id='{{item.cart_id}}' bindtap='gofreedetail' style='position:relative;background:#3F51B5;color:#fff;border:0rpx;'>0元购助力</view>
-             </view>
-
-               <view class='wholebottomadd' wx:if='{{item.status==10||item.status==11}}'>
-                   <view class='totaltittrfai' >付款将会原路返回到您的支付账号中</view>  
-                   <view class='wholebottomaddright sharebox redborcol' wx:if='{{item.is_invite==0}}'>
-                      <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
-                      分享好友
-                   </view>         
-               </view>  
+                    <view class='wholebottomadd' wx:if='{{item.status==10||item.status==11}}'>
+                        <view class='totaltittrfai' >付款将会原路返回到您的支付账号中</view>  
+                        <view class='wholebottomaddright sharebox redborcol' wx:if='{{item.is_invite==0}}'>
+                            <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
+                            分享好友
+                        </view>         
+                    </view>  
          </view>
          
         <view wx:if='{{item.order_type==6}}' style='font-size:26rpx;'>
@@ -819,10 +850,10 @@
 </view>
 
 <!--  首页按钮  -->
-<view class='frontpagebuttonact' catchtap='frontpagebutton' style='bottom:685rpx;' style='bottom:465rpx;'>
+<!-- <view class='frontpagebuttonact' catchtap='frontpagebutton' style='bottom:685rpx;' style='bottom:465rpx;'>
     <view style='height:40rpx;text-align:center;line-height:50rpx;width:100%;padding-top:4rpx;'>返回</view>
     <view style='height:40rpx;text-align:center;width:100%;'>首页</view>
-</view>
+</view> -->
 
 <!-- closeupserimg -->
 <view class='tgimgbox' wx:if='{{upserimgbox}}'>

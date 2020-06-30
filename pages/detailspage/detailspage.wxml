@@ -88,6 +88,26 @@
     </swiper>
   </view>
 
+  <!-- 定金 -->
+  <view class="detailDeposit" wx:if='{{zunmdata.goods_type==3}}'>
+      <view class="deDeposleft">
+          <view class="deDeposst">定金 ￥{{zunmdata.promote_price}}</view>
+          <view class="deDepPresale">预售价 ￥{{zunmdata.gsale}}</view>
+      </view>
+      <view class="deDeposright">
+          <block wx:if='{{zunmdata.status==2}}'>
+            <view class="deDepossttime" style="padding: 18rpx 0 10rpx 0;">距离预定结束:</view>
+            <view class="deDepossttime"><block wx:if='{{winningovertimedetail.dayStr}}'>{{winningovertimedetail.dayStr}}天</block>  {{winningovertimedetail.hrStr}}:{{winningovertimedetail.minStr}}:{{winningovertimedetail.secStr}}</view>          
+          </block>
+          <view wx:else style="width:100%;height:110rpx;text-align:center;line-height:110rpx;font-size:24rpx;color:#EA4F57;">
+              <block wx:if='{{zunmdata.status==3}}'>已结束</block>
+              <block wx:elif='{{zunmdata.status==1}}'>{{zunmdata.datatimew}}开售</block>  
+              <block wx:elif='{{zunmdata.status==0}}'>已售罄</block>         
+          </view>
+
+      </view>
+  </view>
+
   <block wx:if='{{is_exhibition==1||zunmdata.status==1}}'>
       <view style="width:100%;height:60rpx;background:#000;" wx:if='{{zunmdata.status!=0&&zunmdata.status!=3}}'>
         <view style="height:60rpx;float:left;line-height:60rpx;padding-left:20rpx;font-size:24rpx;color:#fff;">
@@ -148,6 +168,19 @@
         <view class='dlyhnnimeMod' wx:for="{{zunmdata.gtag}}" wx:key="key">{{item}}</view>
       </view>  
   </block>
+
+  <!-- 定金 -->
+  <view class="dDepositconcent" wx:if='{{zunmdata.goods_type==3}}'>
+     <view class="dDepositcontop">
+         <view class="dDepositcl">尾款</view>
+         <view class="dDepositcltxt" style="color:#ff2742;padding:18rpx 0 5rpx 0;">￥{{zunmdata.end_price}}</view>
+         <view class="dDepositcltxt">{{zunmdata.finalPaymentTime}}</view>
+     </view>
+     <view class="dDepositcontop">
+         <view class="dDepositcl">流程</view>
+         <view class="dDeposibottxt">1.付定金-2.付尾款-3.发货<view class="dDepositxtright" catchtap="depositboxfun">预售规则</view></view>
+     </view>
+  </view>
 
   <view class='winningthepbox' wx:if='{{isAwardOrder}}' catchtap='jumporder'>
     <view class='winningthepimgtxt'>
@@ -454,6 +487,39 @@
       </view>
     </view>   
 </block>
+<!--  底部定金tab -->
+<block wx:elif='{{zunmdata.goods_type==3}}'>
+    <view class="detailfooter" style='{{isIphoneX?"bottom:130rpx;":"bottom:110rpx;"}}'>
+      <view style='width:100%;min-height:98rpx;overflow:hidden;background:#f4f4f4;'>
+        <view style='height:98rpx;width:202rpx;float:left;position:relative;' catchtap='displaysharefriend'>
+            <image src='https://www.51chaidan.com/images/icon/iconShareWX.png' style='width:50rpx;height:50rpx;display:block;margin:10rpx auto 0;'></image>
+            <view style='font-size:22rpx;width:100%;color:#919191;text-align:center;height:40rpx;line-height:40rpx;'>分享好友</view>
+        </view>
+ 
+        <block wx:if='{{zunmdata.status==2}}'>
+          <view class="footer-child large sale" style='height:80rpx;margin-top:9rpx;border-radius:10rpx;padding:0;width:255rpx;margin-right:20rpx;' bindtap="dsbffunblock">
+              <view class="money" style='font-size:28rpx;'>支付定金</view>
+              <view class="money" style='font-size:28rpx;'>￥{{zunmdata.promote_price}}</view>
+          </view>        
+        </block>
+        <block wx:else>
+          <view class="footer-child large sale" style='height:80rpx;margin-top:9rpx;border-radius:10rpx;padding:0;width:255rpx;margin-right:20rpx;{{zunmdata.status==3||zunmdata.status==0?"background:#999999;":""}}' catchtap="{{zunmdata.status==1?'subscrfun':''}}">
+              <view style='width:100%;height:80rpx;text-align:center;color:#fff;line-height:80rpx;font-size:28rpx;'>
+                    <block wx:if='{{zunmdata.status==3}}'>已结束</block>
+                    <block wx:elif='{{zunmdata.status==0}}'>已售罄</block>
+                    <block wx:elif='{{zunmdata.status==1}}'>{{zunmdata.datatimew}}开售</block>
+              </view>
+          </view>        
+        </block>
+
+        <view class="footer-child large turn" style='height:80rpx;margin-top:9rpx;padding:0;width:200rpx;margin-right:40rpx;background:#f8b21d;text-align:center;line-height:80rpx;color:#fff;border-radius:10rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' catchtap='subscrfun'>
+              订阅提醒
+        </view>
+
+
+      </view>
+    </view>   
+</block>
 <block wx:elif='{{is_exhibition==1||zunmdata.status==1}}'>
 	<view style='width:100%;height:79rpx;position:fixed;left:0;bottom:{{isIphoneX?"130rpx":"110rpx"}};z-index:5;'>
 		<view style='height:69rpx;width:152rpx;float:left;position:relative;'>
@@ -652,14 +718,17 @@
       <view class='taxvalueright'>{{zunmdata.munit}}{{taxation}}</view>
     </view>
     <view class='dsbfbauto'>
-      <view class='dsbbbutclick' style='float:left;background:#999;' wx:if='{{quantityofgoods==0&&zunmdata.limitBuy<=0&&room_id<=0&&is_exhibition!=1}}'>加入购物车</view>
-      <view class='dsbbbutclick' style='float:right;background:#999;' wx:if='{{quantityofgoods==0}}'>库存不足</view>
-      <view class='dsbbbutclick' style='float:left;position:relative;{{awa==1?"width:100%;":""}}' wx:if='{{quantityofgoods!=0&&zunmdata.limitBuy<=0&&room_id<=0&&is_exhibition!=1}}' bindtap='addtocart'>
-        加入购物车
-      </view>
-      <view class='dsbbbutclick' style='float:right;position:relative;{{zunmdata.limitBuy>0||room_id>0||is_exhibition==1?"width:100%;":""}}' wx:if='{{quantityofgoods!=0&&awa!=1}}' bindtap='dsbbbutclickt'>
-        立即购买
-      </view>
+      <block wx:if='{{quantityofgoods==0}}'>
+        <view class='dsbbbutclick' style='float:left;background:#999;'>加入购物车</view>
+        <view class='dsbbbutclick' style='float:right;background:#999;'>库存不足</view>      
+      </block>
+      <block wx:else>
+        <view class='dsbbbutclick' style='float:left;position:relative;{{awa==1?"width:100%;":""}}' wx:if='{{quantityofgoods!=0&&zunmdata.limitBuy<=0&&room_id<=0&&is_exhibition!=1&&zunmdata.goods_type!=3}}' bindtap='addtocart'>加入购物车</view>
+        <view class='dsbbbutclick' style='float:right;position:relative;{{zunmdata.limitBuy>0||room_id>0||is_exhibition==1||zunmdata.goods_type==3?"width:100%;":""}}' wx:if='{{quantityofgoods!=0&&awa!=1}}' bindtap='dsbbbutclickt'>
+          立即购买
+        </view>      
+      </block>
+
     </view>
   </view>
 </view>
@@ -683,7 +752,7 @@
         <view style="width:100%;line-height:57rpx;text-align:right;" class="specialellipsis">{{tipaddress}}</view>
       </view>
     </view>
-    <view class='bbshccom' bindtap='couponprofun' style='position: relative;'>
+    <view class='bbshccom' bindtap='couponprofun' wx:if='{{zunmdata.goods_type!=3}}' style='position: relative;'>
       <view class='bbshccomleft'>优惠券</view>
       <image class='bbshccomimg' src='../images/icon_in.png'></image>
       <text class='bbshccomright multilineellipsis' style='text-align: right;font-size:28rpx;'>{{tipcoupon}}</text>
@@ -977,3 +1046,15 @@
 			<view class="addfrindcomsave" catchtap="frpcomsavethepicture">保存图片</view>
 		</view>
 	</view>
+
+
+  <!-- 定金玩法说明 -->
+<view class="wsh" catchtouchmove="true" wx:if='{{depositbox}}'>
+   <view class="tgimgboxgb" catchtap="depositboxfun"></view>
+   <view class="howToPlay">
+       <view class="howToPlayHead">预售规则</view>
+       <scroll-view scroll-y="true" class="howToPlayScroll">
+          <text class="howToPlayTxt">{{zunmdata.rule}}</text>
+       </scroll-view>
+   </view>
+</view>
