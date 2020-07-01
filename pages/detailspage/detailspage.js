@@ -33,8 +33,6 @@ Page({
     tipback:false,
     // 点赞变化
     gttu:false,
-    // 收藏变化
-    collection:false,
     // 拆单数量
     numberofdismantling:1,
     // 拆单弹框显示隐藏
@@ -696,11 +694,15 @@ Page({
   paythebalance:function(){
     var _this = this;
     _this.data.cart_id = _this.data.zunmdata.orderSn || '';
+    console.log('支付尾款=====',_this.data.cart_id)
     _this.paymentmony();
   },
   // 微信支付
   paymentmony:function(){
     var _this = this; 
+
+    console.log('微信支付===','mod=operate&operation=prepay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1&oid=' + _this.data.cart_id + '&xcx=1' + '&openid=' + _this.data.openid)
+
     var q = Dec.Aese('mod=operate&operation=prepay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1&oid=' + _this.data.cart_id + '&xcx=1' + '&openid=' + _this.data.openid)
     wx.request({
       url: app.signindata.comurl + 'order.php'+q,
@@ -762,6 +764,8 @@ Page({
                     // 订阅授权
                     if(zunmdata.goods_type==3){
                        _this.subscrfun();
+                       // 商品详情
+                       _this.detailfunshop();                       
                     }else{
                       app.comsubscribe(_this);
                     };
@@ -791,7 +795,11 @@ Page({
                         //  活动支付完成隐藏弹框
                         suboformola: false,
                         desc: ''                                                                          
-                      })                    
+                      })
+                      if(_this.data.zunmdata.goods_type==3){
+                        // 商品详情
+                        _this.detailfunshop();                       
+                      }
                    },
                   'complete': function (res) {}
                 })
@@ -1118,12 +1126,6 @@ Page({
         if (res.data.ReturnCode == 200) {
           if (!reg.test(res.data.Ginfo.goods_thumb)) {
             res.data.Ginfo.goods_thumb = _this.data.zdyurl + res.data.Ginfo.goods_thumb;
-          };
-          // 是否关注
-          if (res.data.Ginfo.focus == 1) {
-            _this.data.collection=true;
-          } else {
-            _this.data.collection = false;
           };
           // 颜色
           if (res.data.Ginfo.color) {
@@ -2359,12 +2361,6 @@ Page({
           if (!reg.test(res.data.Ginfo.goods_thumb)) {
             res.data.Ginfo.goods_thumb = _this.data.zdyurl + res.data.Ginfo.goods_thumb;
           };
-          // 是否关注
-          if (res.data.Ginfo.focus == 1) {
-            _this.data.collection= true;
-          } else {
-            _this.data.collection = false;
-          };
           // 相关商品
           var relative_goods = res.data.Ginfo.relative_goods || [];
           if (relative_goods){
@@ -2496,13 +2492,13 @@ Page({
             var datatimewell = redauin.endTime;
             redauin.datatimew = datatimewell;
             redauin.datatimew = _this.toDatehd(redauin.datatimew);
-            if (res.data.Ginfo.specialWay && res.data.Ginfo.specialWay==1){
+            if ((res.data.Ginfo.specialWay && res.data.Ginfo.specialWay==1)){
+              _this.winningtheprizetimedetail(redauin.endTime);
+            }else if(redauin.finalDepositTime){}else if(redauin.goods_type==3){
               _this.winningtheprizetimedetail(redauin.endTime);
             };
           };
-          if(redauin.goods_type==3&&redauin.status != 1){
-            _this.winningtheprizetimedetail(redauin.endTime);
-          };
+          
           _this.setData({
             movies: res.data.Ginfo.gimages,
             zunmdata: redauin,

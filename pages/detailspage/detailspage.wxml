@@ -89,13 +89,16 @@
   </view>
 
   <!-- 定金 -->
-  <view class="detailDeposit" wx:if='{{zunmdata.goods_type==3}}'>
+  <view class="detailDeposit" wx:if='{{zunmdata.goods_type==3&&zunmdata.status!=3}}'>
       <view class="deDeposleft">
           <view class="deDeposst">定金 ￥{{zunmdata.promote_price}}</view>
           <view class="deDepPresale">预售价 ￥{{zunmdata.gsale}}</view>
       </view>
       <view class="deDeposright">
-          <block wx:if='{{zunmdata.status==2}}'>
+          <view wx:if='{{zunmdata.finalDepositTime}}' style="width:100%;height:110rpx;text-align:center;line-height:110rpx;font-size:24rpx;color:#EA4F57;">
+              {{zunmdata.finalDepositTime}}         
+          </view>          
+          <block wx:elif='{{zunmdata.status==2}}'>
             <view class="deDepossttime" style="padding: 18rpx 0 10rpx 0;">距离预定结束:</view>
             <view class="deDepossttime"><block wx:if='{{winningovertimedetail.dayStr}}'>{{winningovertimedetail.dayStr}}天</block>  {{winningovertimedetail.hrStr}}:{{winningovertimedetail.minStr}}:{{winningovertimedetail.secStr}}</view>          
           </block>
@@ -496,10 +499,19 @@
             <view style='font-size:22rpx;width:100%;color:#919191;text-align:center;height:40rpx;line-height:40rpx;'>分享好友</view>
         </view>
         <block wx:if='{{zunmdata.status==2}}'>
-          <view class="footer-child large sale" style='height:80rpx;margin-top:9rpx;border-radius:10rpx;padding:0;width:255rpx;margin-right:20rpx;' bindtap="dsbffunblock">
-              <view class="money" style='font-size:28rpx;'>支付定金</view>
-              <view class="money" style='font-size:28rpx;'>￥{{zunmdata.promote_price}}</view>
-          </view>        
+            <block wx:if='{{zunmdata.isDisplayDeposit}}'>
+                <view class="footer-child large sale" style='height:80rpx;margin-top:9rpx;border-radius:10rpx;padding:0;width:255rpx;margin-right:20rpx;' bindtap="{{zunmdata.orderSn?'paythebalance':'dsbffunblock'}}">
+                    <view class="money" style='font-size:28rpx;'>支付定金</view>
+                    <view class="money" style='font-size:28rpx;'>￥{{zunmdata.promote_price}}</view>
+                </view>          
+            </block>
+            <block wx:else>
+                <view class="footer-child large sale" style='height:80rpx;margin-top:9rpx;border-radius:10rpx;padding:0;width:255rpx;margin-right:20rpx;background:#999999;' catchtap='subscrfun'>
+                    <view style='width:100%;height:80rpx;text-align:center;color:#fff;line-height:80rpx;font-size:28rpx;'>
+                          支付尾款
+                    </view>
+                </view>
+            </block>
         </block>
         <block wx:elif='{{zunmdata.status==3&&zunmdata.orderSn}}'>
           <view class="footer-child large sale" style='height:80rpx;margin-top:9rpx;border-radius:10rpx;padding:0;width:255rpx;margin-right:20rpx;' bindtap="paythebalance">
@@ -681,13 +693,19 @@
       <image src='{{zunmdata.goods_thumb}}' style='width:{{addimgwidth||90}}rpx;' bindload="imageLoadabb" class='dasbfcommodityimg' catchtap='dasbfcommodityimg'></image>
     </view>
     <view class='dsbfhcon'>
-      <view class='dsbfhcprice'>{{zunmdata.munit}}{{zunmdata.gsale}}
+      <view class='dsbfhcprice' style="{{zunmdata.goods_type==3?'color:#000;':''}}">{{zunmdata.munit}}{{zunmdata.gsale}}
         <view wx:if='{{zunmdata.is_suit==1}}' style='display: inline-block; '>{{zunmdata.gsale_suit}}</view>
       </view>
-      <view style='height:50rpx;line-height:50rpx;font-size:30rpx;color:#999;width:100%;' class='specialellipsis' wx:if='{{zunmdata.color.length!=0||zunmdata.size.length!=0}}'>已选择：
-        <text style='display: inline-block;' wx:for='{{zunmdata.color}}' wx:for-item="chit" wx:key='key' wx:if='{{chit.no==colorid}}'>{{chit.property}}</text>
-        <text decode="{{true}}" style='display: inline-block;' wx:for='{{zunmdata.size}}' wx:for-item="chit" wx:key='key' wx:if='{{chit.no==sizeid}}'>&nbsp;{{chit.property}}</text>
-      </view>
+      <block wx:if='{{zunmdata.goods_type==3}}'>
+          <view style='height:50rpx;line-height:50rpx;font-size:30rpx;color:#f3223f;width:100%;' class='specialellipsis'>定金 ￥{{zunmdata.promote_price}}</view>      
+      </block>
+      <block wx:else>
+          <view style='height:50rpx;line-height:50rpx;font-size:30rpx;color:#999;width:100%;' class='specialellipsis' wx:if='{{zunmdata.color.length!=0||zunmdata.size.length!=0}}'>已选择：
+            <text style='display: inline-block;' wx:for='{{zunmdata.color}}' wx:for-item="chit" wx:key='key' wx:if='{{chit.no==colorid}}'>{{chit.property}}</text>
+            <text decode="{{true}}" style='display: inline-block;' wx:for='{{zunmdata.size}}' wx:for-item="chit" wx:key='key' wx:if='{{chit.no==sizeid}}'>&nbsp;{{chit.property}}</text>
+          </view>      
+      </block>
+
     </view>
     <image class='dsbfheadrightimg' src='../images/forknumber.png' bindtap='dsbffun'>
     </image>
@@ -771,19 +789,25 @@
       </view>
     </view>
     <view class='pricedetail' wx:if='{{pricedetailc}}'>
+      <!-- 定金 -->
+      <view class='pricedetailo' wx:if='{{zunmdata.goods_type==3}}'>
+        <view class='pricedetailoleft'>尾款</view>
+        <view class='pricedetailorightcol'>{{zunmdata.munit}}{{zunmdata.end_price}}</view>
+      </view>
+
       <view class='pricedetailo'>
         <view class='pricedetailoleft'>商品价格</view>
-        <view class='pricedetailoright'>{{zunmdata.munit}}{{commodityprice}}</view>
+        <view class='pricedetailoright' style="{{zunmdata.goods_type==3?'color:#999;':''}}">{{zunmdata.munit}}{{commodityprice}}</view>
       </view>
       <view class='pricedetailo'>
         <view class='pricedetailoleft'>税费</view>
-        <view class='pricedetailoright'>{{zunmdata.munit}}{{taxation}}</view>
+        <view class='pricedetailoright' style="{{zunmdata.goods_type==3?'color:#999':''}}">{{zunmdata.munit}}{{taxation}}</view>
       </view>
       <view class='pricedetailo'>
         <view class='pricedetailoleft'>运费
           <text style='padding-left:8rpx;color:#47981e;' wx:if='{{freightiftr>0}}'>(满￥{{defaultinformation.carriage.free}}包邮)</text>
         </view>
-        <view class='pricedetailoright'>{{freight}}</view>
+        <view class='pricedetailoright' style="{{zunmdata.goods_type==3?'color:#999':''}}">{{freight}}</view>
       </view>
       <view class='pricedetailo'>
         <view class='pricedetailoleft' wx:if='{{coupon_type==2}}'>折扣券</view>
