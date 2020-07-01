@@ -529,7 +529,7 @@
           </view>        
         </block>
 
-        <view wx:if='{{zunmdata.status==1 || (zunmdata.isDepositSubscribe && zunmdata.status==2)}}' class="footer-child large turn" style='height:80rpx;margin-top:9rpx;padding:0;width:200rpx;margin-right:40rpx;background:#f8b21d;text-align:center;line-height:80rpx;color:#fff;border-radius:10rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' catchtap='subscrfun'>
+        <view wx:if='{{zunmdata.status==1 || (zunmdata.isDepositSubscribe && zunmdata.status==2)}}' class="footer-child large turn" style='height:80rpx;margin-top:9rpx;padding:0;width:200rpx;margin-right:40rpx;background:#f8b21d;text-align:center;line-height:80rpx;color:#fff;border-radius:10rpx;float:right;position: relative;' catchtap='subscrfun'>
               订阅提醒
         </view>
 

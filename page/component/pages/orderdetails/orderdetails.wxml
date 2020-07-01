@@ -537,7 +537,7 @@
               <view  wx:if='{{comdata.order_type==24&&comdata.status!=8}}'>
  
                     <view class='daifukuan'>
-                        商品总额:￥{{comdata.goods_amount}}-定金{{comdata.bonus}}+运费￥{{comdata.carriage}}
+                        商品总额:￥{{comdata.goods_amount}}-定金{{comdata.depositOrderPayPrice}}+运费￥{{comdata.carriage}}
                     </view>           
                     <view class='totalmonnum'>
                             合计:￥{{comdata.amount}}
