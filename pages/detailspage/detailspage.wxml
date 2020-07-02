@@ -150,7 +150,7 @@
             <text style='font-size:30rpx;color:#000;font-weight:bold;'><text style='font-size:30rpx;'>￥</text>{{zunmdata.gsale}}</text>
             <text wx:if='{{zunmdata.gsale!=zunmdata.gprice}}' style='color: #959595;font-size: 24rpx;text-decoration:line-through;position: relative;top:3rpx;margin-left: 10rpx;'>￥{{zunmdata.gprice}}</text>
           </view>
-          <view class='dltityh' style='text-align:center;margin-bottom:10rpx;padding:12rpx 20rpx;position:relative;'>
+          <view class='dltityh' style='text-align:center;margin-bottom:10rpx;padding:12rpx 20rpx;position:relative;min-height:36rpx;'>
             <view class='dlyhnnimeMod' wx:for="{{zunmdata.gtag}}" wx:key="key">{{item}}</view>
           </view>      
       </block>
@@ -167,7 +167,7 @@
         <text style='font-size:30rpx;color:#000;font-weight:bold;'><text style='font-size:30rpx;'>￥</text>{{zunmdata.gsale}}</text>
         <text wx:if='{{zunmdata.gsale!=zunmdata.gprice}}' style='color: #959595;font-size: 24rpx;text-decoration:line-through;position: relative;top:3rpx;margin-left: 10rpx;'>￥{{zunmdata.gprice}}</text>
       </view>
-      <view class='dltityh' style='text-align:center;margin-bottom:10rpx;padding:12rpx 20rpx;position:relative;'>
+      <view class='dltityh' style='text-align:center;margin-bottom:10rpx;padding:12rpx 20rpx;position:relative;min-height:36rpx;'>
         <view class='dlyhnnimeMod' wx:for="{{zunmdata.gtag}}" wx:key="key">{{item}}</view>
       </view>  
   </block>
@@ -782,8 +782,8 @@
     </view>
     <!-- 口令 -->
     <view class='bbshccom' wx:if='{{zunmdata.isCommand}}'>
-      <view class='bbshccomleft'>口令</view>
-      <input class='buyermessage' type='text' bindinput="inputChangePW" value='{{descpassword}}' placeholder='填写口令'></input>
+      <view class='bbshccomleft'>输入口令</view>
+      <input class='buyermessage' type='text' bindblur="passWOnBlur" bindinput="inputChangePW" value='{{descpassword}}' placeholder='填写口令'></input>
     </view>
 
     <view class='bbshccombot'>

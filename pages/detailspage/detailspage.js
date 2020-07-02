@@ -515,11 +515,25 @@ Page({
     });
     this.paymentcompletionwimg();
   },
+  passWOnBlur:function(){
+    console.log('失去焦点')
+    var _this = this;
+    var zunmdata = this.data.zunmdata;
+    if(_this.data.descpassword && (zunmdata.arrCommand.indexOf(_this.data.descpassword) > -1)){
+      
+      var relCommandAwarda = zunmdata.relCommandAward || {};
+      var nameValue = relCommandAwarda[_this.data.descpassword];
+      console.log('口令值判断=====',nameValue)
+
+    }
+  },
   qandanswerquestions:function(){
     var _this = this;
     var zunmdata = this.data.zunmdata;
     if(zunmdata.isCommand){
-      if(_this.data.descpassword == zunmdata.command){
+      if(_this.data.descpassword == ''){
+        _this.placeorder();
+      }else if (zunmdata.arrCommand.indexOf(_this.data.descpassword) > -1){
         _this.placeorder();
       }else{
         wx.showModal({
@@ -533,7 +547,7 @@ Page({
               _this.placeorder();
             }
           }
-        })
+        }) 
       }
 
     }else if (zunmdata.additional_type==2){
@@ -659,7 +673,10 @@ Page({
       suboformola:true
     });
 
-    var q = Dec.Aese('mod=order&operation=carorder&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&gcount=1&aid=' + aid + '&cid=' + cid + '&ginfo=' + ginfo + '&desc=' + _this.data.desc + '&gdt_vid=' + _this.data.gdt_vid + '&weixinadinfo=' + _this.data.weixinadinfo + '&roomId=' + _this.data.room_id);
+    var q = Dec.Aese('mod=order&operation=carorder&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&gcount=1&aid=' + aid + '&cid=' + cid + '&ginfo=' + ginfo + '&desc=' + _this.data.desc + '&gdt_vid=' + _this.data.gdt_vid + '&weixinadinfo=' + _this.data.weixinadinfo + '&roomId=' + _this.data.room_id+'&command='+_this.data.descpassword);
+
+    console.log('mod=order&operation=carorder&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&gcount=1&aid=' + aid + '&cid=' + cid + '&ginfo=' + ginfo + '&desc=' + _this.data.desc + '&gdt_vid=' + _this.data.gdt_vid + '&weixinadinfo=' + _this.data.weixinadinfo + '&roomId=' + _this.data.room_id+'&command='+_this.data.descpassword)
+
     wx.request({
       url: app.signindata.comurl + 'goods.php'+q,
       method: 'GET',
@@ -767,7 +784,8 @@ Page({
                         numberofdismantling:1,
                         //  活动支付完成隐藏弹框
                         suboformola: false,
-                        desc: ''                       
+                        desc: '',
+                        descpassword:''                       
                       });   
                     var zunmdata = _this.data.zunmdata;
                     var cart_id = _this.data.cart_id || '0';
@@ -814,7 +832,8 @@ Page({
                         numberofdismantling: 1,
                         //  活动支付完成隐藏弹框
                         suboformola: false,
-                        desc: ''                                                                          
+                        desc: '',
+                        descpassword:''                                                                          
                       })
                       if(_this.data.zunmdata.goods_type==3){
                         // 商品详情
