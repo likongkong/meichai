@@ -18,7 +18,6 @@ Page({
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
     openid: app.signindata.openid,
-    spreadEntry: app.signindata.spreadEntry,
     appNowTime: Date.parse(new Date()),
     isProduce: app.signindata.isProduce,
     // 适配苹果X 
@@ -615,7 +614,6 @@ Page({
       loginid: app.signindata.loginid,
       uid: app.signindata.uid,
       openid: app.signindata.openid,
-      spreadEntry: app.signindata.spreadEntry,
       isProduce: app.signindata.isProduce,
       isHellBlackUser: app.signindata.isHellBlackUser,
     });
@@ -659,7 +657,6 @@ Page({
       loginid: app.signindata.loginid,
       uid: app.signindata.uid,
       openid: app.signindata.openid,
-      spreadEntry: app.signindata.spreadEntry,
       isHellBlackUser: app.signindata.isHellBlackUser,
       cart_id: options.cart_id || 0
     });
@@ -679,7 +676,6 @@ Page({
             loginid: app.signindata.loginid,
             uid: app.signindata.uid,
             openid: app.signindata.openid,
-            spreadEntry: app.signindata.spreadEntry,
           });
           // 判断是否登录
           if (_this.data.loginid != '' && _this.data.uid != '') {

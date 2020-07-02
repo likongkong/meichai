@@ -22,10 +22,19 @@
                         </view>
 
                         <view class='bcrilistbott'>
-                                      <view class='bccompric' >
-                                        <view class='bccompricleft'><text style='font-size:22rpx;' wx:if='{{item.pre_name}}'>{{item.pre_name}}:</text><text style='font-weight: bold;'>￥{{item.gsale}}</text></view>
-                                        <view wx:if='{{item.gsale != item.market_price}}' class='bccompricright'>{{item.gsource}}:￥{{item.market_price}}</view>
-                                      </view>   
+                            <view class='bccompric'>
+                                <view class='bccompricleft'>
+                                    <block wx:if='{{item.goods_type==3}}'>
+                                        <text style='font-size:22rpx;'>定金:</text>
+                                        <text style='font-weight: bold;'>￥{{item.promote_price}}</text>    
+                                    </block>
+                                    <block wx:else>
+                                        <text style='font-size:22rpx;' wx:if='{{item.pre_name}}'>{{item.pre_name}}:</text>
+                                        <text style='font-weight: bold;'>￥{{item.gsale}}</text>
+                                    </block>    
+                                </view>
+                                <view wx:if='{{item.gsale != item.market_price}}' class='bccompricright'>{{item.gsource}}:￥{{item.market_price}}</view>
+                            </view>   
                         </view>
 
                     </view>
