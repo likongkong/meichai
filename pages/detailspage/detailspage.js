@@ -120,6 +120,8 @@ Page({
     suboformola:false,
     // 买家备注
     desc:'',
+    // 口令
+    descpassword:'',
     // 满减优惠券的使用判断
     commoditypriceiftr: 0,  
     // 购买显示商品数量
@@ -516,7 +518,25 @@ Page({
   qandanswerquestions:function(){
     var _this = this;
     var zunmdata = this.data.zunmdata;
-    if (zunmdata.additional_type==2){
+    if(zunmdata.isCommand){
+      if(_this.data.descpassword == zunmdata.command){
+        _this.placeorder();
+      }else{
+        wx.showModal({
+          content: '输入口令错误',
+          cancelText: '重新输入',
+          confirmText: '直接支付',
+          confirmColor:'#000',
+          cancelColor: '#000',
+          success: function (res) {
+            if (res.confirm) {
+              _this.placeorder();
+            }
+          }
+        })
+      }
+
+    }else if (zunmdata.additional_type==2){
       wx.showModal({
         title: '限购答题',
         content: zunmdata.subject,
@@ -2952,6 +2972,11 @@ Page({
   inputChange: function (e) {
     this.setData({desc: e.detail.value});
   }, 
+  // 口令
+  inputChangePW: function (e) {
+    this.setData({descpassword: e.detail.value});
+  }, 
+
   // 图片预览
   previewImg: function (w) {
     var index = w.currentTarget.dataset.index || w.target.dataset.index||0;

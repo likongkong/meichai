@@ -16,10 +16,10 @@
   <image class='winningthepimg' src='http://www.51chaidan.com/images/FreeSheet/WinningThePrize.png'></image>
 </view>
 
-<view style='width:100%;height:128rpx;position: relative;' wx:elif='{{spreadEntry}}'>
-  <swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="5000" duration="450">
+<view style='width:100%;height:200rpx;position: relative;' wx:elif='{{spreadEntry}}'>
+  <swiper style='width:100%;height:100%;margin:0 auto;display:block;' circular="true" autoplay="true" interval="5000" duration="450">
     <swiper-item wx:for="{{spreadEntry}}" wx:key="key">
-      <image style='width:100%;height:128rpx;display:block;position: relative;' src='{{item.src}}' catchtap='jumpaction' data-path='{{item.path}}'></image>
+      <image style='width:100%;height:100%;display:block;position: relative;' src='{{item.src}}' catchtap='jumpaction' data-path='{{item.path}}'></image>
     </swiper-item>
   </swiper>
 </view>

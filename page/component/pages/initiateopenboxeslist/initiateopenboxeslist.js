@@ -24,7 +24,6 @@ Page({
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
-    spreadEntry: app.signindata.spreadEntry,
     listdata: [],
     pid: 0,
     // 晒单数量
@@ -166,7 +165,6 @@ Page({
       uid: app.signindata.uid,
       openid: app.signindata.openid,
       isProduce: app.signindata.isProduce,
-      spreadEntry: app.signindata.spreadEntry,
       // 适配苹果X 
       isIphoneX: app.signindata.isIphoneX
     });
@@ -184,7 +182,6 @@ Page({
             uid: app.signindata.uid,
             openid: app.signindata.openid,
             isProduce: app.signindata.isProduce,
-            spreadEntry: app.signindata.spreadEntry,
             // 适配苹果X 
             isIphoneX: app.signindata.isIphoneX
           });
@@ -221,7 +218,6 @@ Page({
       uid: app.signindata.uid,
       openid: app.signindata.openid,
       isProduce: app.signindata.isProduce,
-      spreadEntry: app.signindata.spreadEntry,
       // 适配苹果X 
       isIphoneX: app.signindata.isIphoneX
     });
