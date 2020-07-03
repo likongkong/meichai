@@ -510,7 +510,7 @@ Page({
   }, 
   // 返回首页
   returntothehomepage:function(){
-    wx.reLaunch({   
+    wx.reLaunch({
       url: "/pages/index/index"
     });
     this.paymentcompletionwimg();
@@ -530,27 +530,28 @@ Page({
   qandanswerquestions:function(){
     var _this = this;
     var zunmdata = this.data.zunmdata;
-    if(zunmdata.isCommand){
-      if(_this.data.descpassword == ''){
-        _this.placeorder();
-      }else if (zunmdata.arrCommand.indexOf(_this.data.descpassword) > -1){
-        _this.placeorder();
-      }else{
-        wx.showModal({
-          content: '输入口令错误',
-          cancelText: '重新输入',
-          confirmText: '直接支付',
-          confirmColor:'#000',
-          cancelColor: '#000',
-          success: function (res) {
-            if (res.confirm) {
-              _this.placeorder();
-            }
-          }
-        }) 
-      }
+    // if(zunmdata.isCommand){
+    //   if(_this.data.descpassword == ''){
+    //     _this.placeorder();
+    //   }else if (zunmdata.arrCommand.indexOf(_this.data.descpassword) > -1){
+    //     _this.placeorder();
+    //   }else{
+    //     wx.showModal({
+    //       content: '输入口令错误',
+    //       cancelText: '重新输入',
+    //       confirmText: '直接支付',
+    //       confirmColor:'#000',
+    //       cancelColor: '#000',
+    //       success: function (res) {
+    //         if (res.confirm) {
+    //           _this.placeorder();
+    //         }
+    //       }
+    //     }) 
+    //   }
 
-    }else if (zunmdata.additional_type==2){
+    // }else 
+    if (zunmdata.additional_type==2){
       wx.showModal({
         title: '限购答题',
         content: zunmdata.subject,

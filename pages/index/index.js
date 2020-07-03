@@ -1741,7 +1741,7 @@ Page({
     _this.setData({ jumpdevanningiftr: true });
     if(hreftype == "openedList"){
       wx.navigateTo({
-        url: "/page/component/pages/mingboxList/mingboxList",
+        url: "/page/component/pages/initiateopenboxeslist/initiateopenboxeslist",
         complete: function () {
           _this.setData({ jumpdevanningiftr: false });
         }

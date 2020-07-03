@@ -201,11 +201,13 @@ Page({
         wx.stopPullDownRefresh();
         wx.stopPullDownRefresh()
         if (res.data.ReturnCode == 200) {
-          var mlist = res.data.List.activity
+          var mlist = res.data.List.activity || [];
           for (let i = 0; i < mlist.length; i++) {
             mlist[i].stopdate = formatTimeTwo(mlist[i].stop_time, 'M.D h:m')
           }
-          if (pid == 0 && mlist.length > 0) {
+          if(pid == 0 && mlist.length == 0){
+            _this.jumpinitiateopenboxes();
+          }else if (pid == 0 && mlist.length > 0) {
             _this.setData({
               list: mlist,
             })

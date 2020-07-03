@@ -781,10 +781,10 @@
       <text class='bbshccomright multilineellipsis' style='text-align: right;font-size:28rpx;'>{{tipcoupon}}</text>
     </view>
     <!-- 口令 -->
-    <view class='bbshccom' wx:if='{{zunmdata.isCommand}}'>
+    <!-- <view class='bbshccom' wx:if='{{zunmdata.isCommand}}'>
       <view class='bbshccomleft'>输入口令</view>
       <input class='buyermessage' type='text' bindblur="passWOnBlur" bindinput="inputChangePW" value='{{descpassword}}' placeholder='填写口令'></input>
-    </view>
+    </view> -->
 
     <view class='bbshccombot'>
       <view class='bbshcombotleft'>应付金额</view>

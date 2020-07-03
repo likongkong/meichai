@@ -401,7 +401,7 @@
 								</view>
 								<view class='disanum_sb_txtone  multilineellipsis' style='color:#666;max-height:70rpx;'>{{ww.goods_name}}</view>
 								<view class='disanum_sb_txt specialellipsis'>
-								   <block wx:if='{{ww.goods_type==3}}'>定金￥{{ww.promote_price}}</block>
+								   <block wx:if='{{ww.goods_type==3}}'>￥{{ww.promote_price}}</block>
 									 <block wx:else>￥{{ww.shop_price}}{{ww.gsale_unit}}</block>
 								</view>
 							</view>
@@ -575,7 +575,7 @@
 											</view>
 											<view class='disanum_sb_txtone  multilineellipsis' style='color:#666;max-height:70rpx;'>{{ww.goods_name}}</view>
 											<view class='disanum_sb_txt specialellipsis'>
-												<block wx:if='{{ww.goods_type==3}}'>定金￥{{ww.promote_price}}</block>
+												<block wx:if='{{ww.goods_type==3}}'>￥{{ww.promote_price}}</block>
 												<block wx:else>￥{{ww.shop_price}}{{ww.gsale_unit}}</block>	
 											</view>
 									</view>
@@ -628,7 +628,7 @@
 										</view>
 										<view class='disanum_sb_txtone  multilineellipsis' style='color:#666;max-height:70rpx;'>{{ww.goods_name}}</view>
 										<view class='disanum_sb_txt specialellipsis'>
-												<block wx:if='{{ww.goods_type==3}}'>定金￥{{ww.promote_price}}</block>
+												<block wx:if='{{ww.goods_type==3}}'>￥{{ww.promote_price}}</block>
 												<block wx:else>￥{{ww.shop_price}}{{ww.gsale_unit}}</block>
 										</view>
 									</view>
