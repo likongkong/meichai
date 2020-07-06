@@ -202,14 +202,14 @@ Page({
     var _this = this;
 
     // wx.requestSubscribeMessage({
-    //   tmplIds: ['Q0tWM7kOihw1TilTeR3YmLzWp5tS0McgyOeJx2xX-B0'],
+    //   tmplIds: ['3WAWEH_WbiNgERXFObUE4sjaY9f90O_0CjxCfTGp3Qg'],
     //   success(res) {
-    //       if (res['Q0tWM7kOihw1TilTeR3YmLzWp5tS0McgyOeJx2xX-B0'] == "accept") {
-    //         app.subscribefun(_this, 1, 'Q0tWM7kOihw1TilTeR3YmLzWp5tS0McgyOeJx2xX-B0', 1);
+    //       if (res['3WAWEH_WbiNgERXFObUE4sjaY9f90O_0CjxCfTGp3Qg'] == "accept") {
+    //         app.subscribefun(_this, 1, '3WAWEH_WbiNgERXFObUE4sjaY9f90O_0CjxCfTGp3Qg', 1);
     //       };
     //   }
     // })
-    wx.navigateTo({  
+    // wx.navigateTo({  
       // url: "/page/component/pages/doubleElevenexh/doubleElevenexh?specialsource=1"
       // url: "/page/component/pages/crowdfunding/crowdfunding?aid=47947"
       // url: "/page/component/pages/drivetohidelist/drivetohidelist"
@@ -228,7 +228,7 @@ Page({
       // url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails"
       // url: "/page/secondpackge/pages/aRewardList/aRewardList"
       
-    });
+    // });
   },
   // 公共跳转
   comjumpwxnav: function (item_type, whref, wname, imgurl){
