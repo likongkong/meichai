@@ -133,7 +133,6 @@ page {
 }
 .adcspecial{
   width: 100%;
-  height: 500rpx;
 }
 .adcweve{
   display: inline-block;

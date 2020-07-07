@@ -440,11 +440,11 @@ Page({
             //   _this.listdata();
             // },second)  
             _this.data.recordtime = activity.refreshTime;	
-
+ 
             _this.countdown();
 
           }else{
-            if(userimg.length==0&&activity.status!=3&&activity.suplusNum>0){
+            if(userimg.length==0&&activity.status==2&&activity.suplusNum>0){
               _this.queuefun(1,1);
             };
           }
@@ -879,12 +879,12 @@ Page({
     var $width = e.detail.width,
     $height = e.detail.height,
     ratio = $width / $height;
-    var viewWidth = 353,
-    viewHeight = 353 / ratio;
+    var viewWidth = 310,
+    viewHeight = 310 / ratio;
     var finalReward = this.data.finalReward;
-    if (viewHeight > 495) {
-      viewHeight = 495;
-    };
+    // if (viewHeight > 495) {
+    //   viewHeight = 495;
+    // };
     if (finalReward) {
         finalReward.height= viewHeight
         _this.setData({
