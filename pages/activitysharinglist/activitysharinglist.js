@@ -18,36 +18,20 @@ Page({
     typea:1,    
     //  免单次数
     countdown:'',
-    // 提示语
-    tips:'',
-    // 弹框判断
-    comtipiftr:false,
     // 数据
     commoddata:[],
     // 最大上线数
     maxchange:3,
-    // 机会不足提示语
-    tips: '',
-    // 新人专享提示语
-    newtips: '',
-    // 新人专享和机会不足提示判断
-    ifcomtipiftr: 1,   
     // 第一次加载不显示暂无数据
     nodataiftr: false,
     // tab 数据
     scrdata:[],
     // tab 数据
     category_id:-1, 
-    // 领奖提示数据
-    awardrresentation: [],
-    awardrresentiftr: false,
-    awardrresentationjump: '',
     // 防止多次提交
     preventmultiplesubmission:true,
     // 列表分页
     pid:0,
-    // 领奖提示
-    rpinfotip:'',
 
     // 赠送优惠券数据
     newcoupondata: [],
@@ -238,16 +222,8 @@ Page({
       header: { 'Accept': 'application/json' },
       success: function (res) {
         if (res.data.ReturnCode == 200) {
-          var tips = res.data.Info.tips[0].miandan;
-          tips = decodeURIComponent(tips.replace(/\+/g, ' '));
-          tips = tips.replace(/\\n/g, '\n');
-          var newtips = res.data.Info.desc[0].miandan;
-          newtips = decodeURIComponent(newtips.replace(/\+/g, ' '));
-          newtips = newtips.replace(/\\n/g, '\n');
           _this.setData({
             defaultinformation: res.data.Info,
-            tips: tips,
-            newtips: newtips,
             maxchange: res.data.Info.chance_max[0].miandan || 3,
             wxnum: res.data.Info.cs.wxid || 'meichai666666',
           })
@@ -296,6 +272,7 @@ Page({
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
+        console.log('listdata=====',res)
         // 刷新完自带加载样式回去
         wx.hideLoading()
         wx.stopPullDownRefresh(); 
@@ -494,32 +471,6 @@ Page({
       url: "/pages/myorder/myorder?tabnum=0"
     });
   },
-  // 隐藏弹框
-  hidcomtip:function(){
-    this.setData({
-      comtipiftr:!this.data.comtipiftr
-    })
-  },
-  // 显示弹框
-  discomtip:function(){
-    this.setData({
-      ifcomtipiftr: 2,      
-      comtipiftr: !this.data.comtipiftr,
-    });
-  },
-  // 新人提示
-  newlyweds: function () {
-    this.setData({
-      ifcomtipiftr: 1,
-      comtipiftr: !this.data.comtipiftr,
-    });
-  }, 
-
-  awardrresentiftr: function () {
-    this.setData({
-      awardrresentiftr: !this.data.awardrresentiftr
-    })
-  },
   // 跳转详情页 
   addressmanagement: function (event) {
     var gid = event.currentTarget.dataset.gid || event.target.dataset.gid;
@@ -577,15 +528,6 @@ Page({
     var gid = event.currentTarget.dataset.gid || event.target.dataset.gid;
     wx.redirectTo({
       url: "/pages/activitydetailspage/activitydetailspage?id=" + gid
-    });
-  },
-  acetlistfun: function () {
-    wx.redirectTo({
-      url: "/pages/activitysharinglist/activitysharinglist"
-    });
-    this.setData({
-      wsh: false,
-      awardrresentiftr: false
     });
   },
   // 导航跳转 

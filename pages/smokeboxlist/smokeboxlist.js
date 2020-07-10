@@ -64,7 +64,9 @@ Page({
     ishowofficial:false,
     officialid:0,
     appid:0,
-    brandprompts:false
+    brandprompts:false,
+    brand_id:0,
+    is_havedata:false
   },
   swiperChange: function(e) {
     this.setData({
@@ -142,7 +144,6 @@ Page({
       }
     });
 
-    _this.onLoadfun();
 
   },
 
@@ -242,6 +243,7 @@ Page({
 
   },
 
+
   getdefault: function() {
     var _this = this;
     // 调取晒单数量
@@ -271,62 +273,122 @@ Page({
 
   },
 
+  jumpsouchtem:function(w){
+    var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
+    this.setData({
+      brand_id: id||0,
+    })
+    this.getlist(0);
+  },
 
   getlist: function(pid) {
     var _this = this
     wx.showLoading({
       title: '加载中...',
     })
-  
-    var q1 = Dec.Aese('mod=blindBox&operation=list&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + "&pid=" + pid);
+     
+    _this.setData({is_havedata:false})
+
+    var q1 = Dec.Aese('mod=blindBox&operation=list&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + "&pid=" + pid+'&brandId='+_this.data.brand_id);
 
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q1,
       method: 'GET',
-      header: {
-        'Accept': 'application/json'
-      },
-
+      header: {'Accept': 'application/json'},
       success: function(res) {
+        console.log('listdata=====',res)
         wx.stopPullDownRefresh();
-        wx.stopPullDownRefresh()
         if (res.data.ReturnCode == 200) {
-          console.log(res)
-          var mlist = res.data.List.activity
+          var mlist = res.data.List.activity|| [];
           if (pid == 0 && mlist.length > 0) {
             var listbutnum = res.data.Info.countToys || 0;
             var festivalId = res.data.Info.festivalId || false;
             var festivalTicket = res.data.Info.festivalTicket || "";
+
+            // 品牌id
+            var eldataclass = res.data.List.brand || [];
+
+            // 添加广告
+            var adlist = res.data.List.ads || [];
+            var listdata = [];
+            if(adlist&&adlist.length!=0){
+              var adindex = 0;
+              for(var i=0;i<mlist.length;i++){
+                  listdata.push(mlist[i]);
+                  if(i%8==7){
+                    console.log('i%8==8',i+'%8==7')
+                    listdata.push({
+                      list:adlist[adindex],
+                      showtype:2
+                    });
+                    adindex++;
+                    if(adindex >= adlist.length){
+                      adindex=0;
+                    };
+                  }
+              };
+            }else{
+              listdata = mlist;
+            };
+
+            console.log('添加广告===',listdata)
+
             _this.setData({
-              list: mlist,
+              // list: mlist,
+              list: listdata,
               alert: res.data.List.alert,
               listbutnum: listbutnum,
               festivalId: festivalId,
               festivalTicket: festivalTicket,
               bannerList: res.data.List.banner || [],
+              eldataclass:eldataclass
             })
           } else if (mlist.length > 0) {
-            mlist = _this.data.list.concat(mlist)
+
+
+            // 添加广告
+            var adlist = res.data.List.ads || [];
+            var listdata = [];
+            if(adlist&&adlist.length!=0){
+              var adindex = 0;
+              for(var i=0;i<mlist.length;i++){
+                  listdata.push(mlist[i]);
+                  if(i%4==3){
+                    console.log('i%4==0',i+'%4==0')
+                    listdata.push({
+                      list:adlist[adindex],
+                      showtype:2
+                    });
+                    adindex++;
+                    if(adindex >= adlist.length){
+                      adindex=0;
+                    };
+                  }
+              };
+            }else{
+              listdata = mlist;
+            };
+
+            mlist = _this.data.list.concat(listdata)
             _this.setData({
               list: mlist,
             })
+            
           } else {
             _this.setData({
               pid: pid - 1,
             })
           }
         }
-        wx.hideLoading()
       },
-
-      fail: function(res) {
+      complete:function(){
+        _this.setData({is_havedata:true});
         wx.stopPullDownRefresh();
         wx.hideLoading()
       }
 
     })
   },
-
   topjumpdetail: function(w) {
     var _this = this;
     var gid = w.currentTarget.dataset.gid;
@@ -474,8 +536,10 @@ Page({
       avatarUrl: app.signindata.avatarUrl,
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
     });
+    if(app.signindata.uid==''&&app.signindata.loginid==''){
+      this.getlist(0)
+    }
     
-    this.getlist(0)
     if (app.signindata.perspcardata) {
       clearInterval(this.data.countdowntime);
       _this.setData({

@@ -2539,6 +2539,10 @@ Page({
             };
           };
           
+          // if(res.data.Ginfo&&res.data.Ginfo.brandId>0){
+          //   res.data.Ginfo.specialWay = 1;
+          // };
+
           _this.setData({
             movies: res.data.Ginfo.gimages,
             zunmdata: redauin,
@@ -2551,7 +2555,7 @@ Page({
             isSubscribeCoupon: res.data.isSubscribeCoupon || false,
             subscribeCouponTip: res.data.subscribeCouponTip || ''
           });
-          if (_this.data.is_exhibition==1){
+          if (_this.data.is_exhibition==1||(_this.data.is_exhibition!=1&&_this.data.brandId>0)){
             // 展会
             _this.exhibdatafun(1);
             app.livebroadcast(_this, res.data.Ginfo.brandId)  // 直播数据

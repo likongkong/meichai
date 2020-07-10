@@ -209,7 +209,7 @@ Page({
     //       };
     //   }
     // })
-    // wx.navigateTo({  
+    wx.navigateTo({  
       // url: "/page/component/pages/doubleElevenexh/doubleElevenexh?specialsource=1"
       // url: "/page/component/pages/crowdfunding/crowdfunding?aid=47947"
       // url: "/page/component/pages/drivetohidelist/drivetohidelist"
@@ -222,13 +222,14 @@ Page({
       // url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
       // url: "/page/secondpackge/pages/brandDetails/brandDetails?id=140"
       // url: "/pages/detailspage/detailspage?gid=331669"
-      // url: "/pages/smokebox/smokebox?gid=47949"
+      url: "/pages/smokebox/smokebox?gid=340701"
       // url: "/page/component/pages/playgrasslist/playgrasslist"
       // url: "/page/secondpackge/pages/detailSimgEffects/detailSimgEffects?gid=32852"
       // url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails"
       // url: "/page/secondpackge/pages/aRewardList/aRewardList"
+      // url: "/page/component/pages/hidefun/hidefun"
       
-    // });
+    });
   },
   // 公共跳转
   comjumpwxnav: function (item_type, whref, wname, imgurl){
@@ -1028,7 +1029,15 @@ Page({
       });
     }
   },
+  onShareTimeline:function(){
+    return {
+      title:'美拆',
+      path:'/pages/storehomepage/storehomepage'
+    }
+  },
   onLoad: function (options) {
+    console.log('options====',options)
+
     var _this = this;
     wx.showLoading({ title: '加载中...', })
     _this.data.loginid = app.signindata.loginid;
@@ -1056,51 +1065,56 @@ Page({
     };
     // 判断是否授权 
     var _this = this;
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // '已经授权'
-          _this.data.loginid = app.signindata.loginid;
-          _this.data.openid = app.signindata.openid;
-          _this.setData({
-            uid: app.signindata.uid,
-            isProduce: app.signindata.isProduce,
-            defaultinformation: app.signindata.defaultinformation||'',
-            tgabox: false
-          });
-          // 判断是否登录
-          if (_this.data.loginid != '' && _this.data.uid != '') {
-            _this.onLoadfun();
+    if(app.signindata.sceneValue==1154){
+      _this.unauthorized();
+    }else{
+      wx.getSetting({
+        success: res => {
+          if (res.authSetting['scope.userInfo']) {
+            // '已经授权'
+            _this.data.loginid = app.signindata.loginid;
+            _this.data.openid = app.signindata.openid;
+            _this.setData({
+              uid: app.signindata.uid,
+              isProduce: app.signindata.isProduce,
+              defaultinformation: app.signindata.defaultinformation||'',
+              tgabox: false
+            });
+            // 判断是否登录
+            if (_this.data.loginid != '' && _this.data.uid != '') {
+              _this.onLoadfun();
+            } else {
+              app.signin(_this);
+            }
           } else {
-            app.signin(_this);
+            _this.unauthorized();
+            // app.userstatistics(2);
+            // wx.request({
+            //   url: 'https://api.51chaidan.com/config/verifyVersion.conf',
+            //   method: 'GET',
+            //   header: { 'Accept': 'application/json' },
+            //   success: function (res) {
+            //     console.log(res.data.WeChat, app.signindata.versionnumber)
+            //     if (res.data.WeChat == app.signindata.versionnumber) { } else {
+            //       app.userstatistics(2);
+            //       _this.setData({
+            //         tgabox: true
+            //       });
+            //     }
+            //   },
+            //   fail: function (res) {
+            //     app.userstatistics(2);
+            //     _this.setData({
+            //       tgabox: true
+            //     });
+            //   }
+            // })
+  
           }
-        } else {
-          _this.unauthorized();
-          // app.userstatistics(2);
-          // wx.request({
-          //   url: 'https://api.51chaidan.com/config/verifyVersion.conf',
-          //   method: 'GET',
-          //   header: { 'Accept': 'application/json' },
-          //   success: function (res) {
-          //     console.log(res.data.WeChat, app.signindata.versionnumber)
-          //     if (res.data.WeChat == app.signindata.versionnumber) { } else {
-          //       app.userstatistics(2);
-          //       _this.setData({
-          //         tgabox: true
-          //       });
-          //     }
-          //   },
-          //   fail: function (res) {
-          //     app.userstatistics(2);
-          //     _this.setData({
-          //       tgabox: true
-          //     });
-          //   }
-          // })
-
         }
-      }
-    });
+      });
+    }
+
   },
   // 授权点击统计
   clicktga: function () {

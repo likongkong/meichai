@@ -90,7 +90,9 @@ App({
     isOpenToyShow:false, // 是否开启展会
     statusBarHeightMc:0,
     // 是否开启一番赏
-    isYiFanShang:false
+    isYiFanShang:false,
+    // 场景值
+    sceneValue:0
   },
   // 登录
   signin: function (callback, BSkipData) {
@@ -239,6 +241,10 @@ App({
   },
   onLaunch: function (options) {
     var _this = this;
+
+    console.log('场景值=====',options.scene)
+    _this.signindata.sceneValue = options.scene || 0;
+
     if (wx.canIUse('getUpdateManager')) { // 获取小程序更新机制兼容
       const updateManager = wx.getUpdateManager();
       updateManager.onCheckForUpdate(function (res) {

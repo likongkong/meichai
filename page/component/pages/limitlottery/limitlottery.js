@@ -682,7 +682,17 @@ Page({
             console.log(2)
             var brandid = res.data.Info.infoActivity ? res.data.Info.infoActivity.brandId||'' : '';
           };
+
+          // var is_brand_display = false;
+          // if(brandid&&brandid>0){
+          //   res.data.Info.infoActivity.specialWay = 1;
+          //   // 不是展会 但是是品牌
+          //   is_brand_display = true;
+          // }
+
+          console.log('res.data.Info.infoActivity.specialWay=====',res.data.Info.infoActivity.specialWay)
           _this.setData({
+            // is_brand_display:is_brand_display,
             activityDesc: res.data.Info.activityDesc || "",
             shareStatus: res.data.Info.shareStatus || "",
             activityMD: res.data.Info.activityMD || "",
@@ -702,7 +712,7 @@ Page({
             id:res.data.Info.infoActivity.id||0
           })
           // 是否调取展会数据
-          if (res.data.Info.infoActivity && res.data.Info.infoActivity.specialWay && res.data.Info.infoActivity.specialWay == 1) {
+          if (res.data.Info.infoActivity && res.data.Info.infoActivity.specialWay && res.data.Info.infoActivity.specialWay == 1||(res.data.Info.infoActivity.specialWay != 1&&brandid>0)) {
             _this.exhibdatafun(1)
             app.livebroadcast(_this, res.data.Info.infoActivity.brandId)  // 直播数据
           }

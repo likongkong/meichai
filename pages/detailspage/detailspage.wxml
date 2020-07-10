@@ -95,7 +95,7 @@
           <view class="deDepPresale">预售价 ￥{{zunmdata.gsale}}</view>
       </view>
       <view class="deDeposright">
-          <view wx:if='{{zunmdata.finalDepositTime}}' style="width:100%;height:110rpx;text-align:center;line-height:110rpx;font-size:24rpx;color:#EA4F57;">
+          <view wx:if='{{zunmdata.finalDepositTime}}' class="specialellipsis" style="width:100%;height:110rpx;text-align:center;line-height:110rpx;font-size:24rpx;color:#EA4F57;">
               {{zunmdata.finalDepositTime}}         
           </view>          
           <block wx:elif='{{zunmdata.status==2}}'>
@@ -177,7 +177,7 @@
      <view class="dDepositcontop">
          <view class="dDepositcl">尾款</view>
          <view class="dDepositcltxt" style="color:#ff2742;padding:18rpx 0 5rpx 0;">￥{{zunmdata.end_price}}</view>
-         <view class="dDepositcltxt">{{zunmdata.finalPaymentTime}}</view>
+         <view class="dDepositcltxt specialellipsis">{{zunmdata.finalPaymentTime}}</view>
      </view>
      <view class="dDepositcontop">
          <view class="dDepositcl">流程</view>
@@ -222,7 +222,7 @@
   </view>
 
 
-  <block wx:if='{{is_exhibition==1}}'>
+  <block wx:if='{{is_exhibition==1||(is_exhibition!=1&&brandId>0)}}'>
       <view style="width:100%;height:80rpx;">
         <view style="width:50%;height:100%;{{exhibdetail?'font-size:26rpx;font-weight: bold;':'font-size:24rpx;'}}text-align:center;line-height:80rpx;float:left;position:relative;" data-ind='1' catchtap="exhibdetailfun">
         品牌专区
@@ -775,7 +775,7 @@
         <view style="width:100%;line-height:57rpx;text-align:right;" class="specialellipsis">{{tipaddress}}</view>
       </view>
     </view>
-    <view class='bbshccom' bindtap='couponprofun' wx:if='{{zunmdata.goods_type!=3}}' style='position: relative;'>
+    <view class='bbshccom' bindtap='couponprofun' wx:if='{{zunmdata.goods_type!=3&&brandId<=0}}' style='position: relative;'>
       <view class='bbshccomleft'>优惠券</view>
       <image class='bbshccomimg' src='../images/icon_in.png'></image>
       <text class='bbshccomright multilineellipsis' style='text-align: right;font-size:28rpx;'>{{tipcoupon}}</text>

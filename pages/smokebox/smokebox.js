@@ -236,7 +236,14 @@ Page({
     wholeBoxGiftImg:'',
     wholeBoxGiftInfo:{}
   },
-
+  // 在线抽盒机
+  bbevebox: function(event) {
+    var id = event.currentTarget.dataset.gid || event.target.dataset.gid;
+    var _this = this;
+    wx.redirectTo({
+      url: "/pages/smokebox/smokebox?gid=" + id
+    });
+  },
   exhibdetailfun: function (w) {
     this.setData({
       exhibdetail: !this.data.exhibdetail
@@ -687,6 +694,8 @@ Page({
             whole_boxGift:res.data.Info.whole_boxGift||'',
             wholeBoxGiftImg:res.data.Info.wholeBoxGiftImg || '',
             definePicture:res.data.Info.img||{},
+            idendataList:res.data.List.sameBrandActivity||[], // 相同品牌数据 
+            branddata:res.data.Info.brand || '' // 品牌数据
           })
 
           // 商品详情 
@@ -713,7 +722,7 @@ Page({
           _this.setData({ queueList: l })
 
           // 是否调取展会数据
-          if (!_this.data.isfirst && res.data.Info.activity.specialWay && res.data.Info.activity.specialWay == 1) {
+          if (!_this.data.isfirst && res.data.Info.activity.specialWay && res.data.Info.activity.specialWay == 1||(res.data.Info.activity.specialWay!=1&&_this.data.brandId>0)) {
             _this.data.isfirst = true;
             // wx.hideShareMenu()
             _this.exhibdatafun(1)

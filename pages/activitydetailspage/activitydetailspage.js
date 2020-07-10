@@ -1987,6 +1987,11 @@ closefrindcommoni:function(){
           var listBlindBox = arrlist.listBlindBox||[];
           var listShowBox = arrlist.listShowBox||[];
           var listLotto = arrlist.listLotto||[];
+
+          // if(res.data.Info&&res.data.Info.brandId>0){
+          //   res.data.Info.specialWay = 1;
+          // };
+
           _this.setData({
             commoddata: arrlist,
             subscribedata: res.data.Info.subscribe,
@@ -2008,7 +2013,7 @@ closefrindcommoni:function(){
             brandId:res.data.Info.brandId || '',
           });
           // 是否调取展会数据
-          if (res.data.Info.specialWay && res.data.Info.specialWay == 1) {
+          if (res.data.Info.specialWay && res.data.Info.specialWay == 1||(res.data.Info.specialWay!=1&&_this.data.brandId>0)) {
             //  wx.hideShareMenu();
             _this.exhibdatafun(1)
             app.livebroadcast(_this, res.data.Info.brandId)  // 直播数据
