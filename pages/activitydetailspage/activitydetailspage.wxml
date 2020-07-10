@@ -160,7 +160,19 @@
 
   <!-- 赞助商 -->
   <view class='sponsor' wx:if='{{commoddata.supportName}}' style='margin:10rpx 0 4rpx 0;' wx:if='{{videoOpportunity}}'>
-    <view class='sponsorone' wx:if='{{commoddata.supportImg==1}}' style='position:relative;'>
+
+    <view class='sponsorone' wx:if='{{commoddata.brand}}' style='position:relative;'>
+      <image class='sonsoimg' catchtap='gobrandDetails' data-mid='{{userbranddata.id}}' src='{{commoddata.brand.logo}}'>
+      </image>
+      <view class='sonsotxt specialellipsis' catchtap='gobrandDetails' data-mid='{{userbranddata.id}}' style="width:460rpx;">
+        {{commoddata.brand.name}}旗舰店
+      </view>
+      <view class='sonsoright' catchtap='sponsocopyone'>
+        品牌入驻
+      </view>
+
+    </view>  
+    <view class='sponsorone' wx:elif='{{commoddata.supportImg==1}}' style='position:relative;'>
       <image class='sonsoimg' src='{{commoddata.supportLogo}}' catchtap='sponsofun'>
       </image>
       <view class='sonsotxt specialellipsis' catchtap='sponsofun'>
@@ -179,7 +191,7 @@
       <view class='sonsotxt specialellipsis' catchtap='sponsocopyone'>
         {{commoddata.supportName}}
       </view>
-      <view class='sonsoright' catchtap='sponsocopyone'>
+      <view class='sonsoright' wx:if='{{commoddata.supportLogo}}' catchtap='sponsocopyone'>
         我要赞助
       </view>
       <view wx:if='{{uidid}}' class='sonsoright' style='color:rgba(147, 146, 146, 1);font-size:20rpx;margin-right:26rpx;text-decoration:none;' catchtap='sponsocopyone'>
@@ -1181,8 +1193,14 @@
 <view class='editorrecom' style='z-index:9999999;' wx:if='{{copyiftr}}'>
   <view class='ngbackground' catchtap='copyfitrfun'></view>
   <view class='picbox' style='height:300rpx;'>
-    <view style='height:100rpx;text-align:center;line-height:120rpx;color:#333;font-size:28rpx;'>赞助合作</view>
-    <view class='picboxhead specialellipsis' style='padding:0 0 20rpx 0;'>请联系美拆微信:{{wxnum}}</view>
+    <block wx:if='{{commoddata.brand}}'>
+      <view style='height:100rpx;text-align:center;line-height:120rpx;color:#333;font-size:28rpx;'>提示</view>
+      <text style='padding:0 20rpx 20rpx 20rpx;display:block;height:80rpx;text-align:center;line-height:40rpx;color:#333;font-size:26rpx;border-bottom:1rpx solid #e5e5e5'>商务合作发邮件至{{cliptxt}}</text>  
+    </block>
+    <block wx:else>
+      <view style='height:100rpx;text-align:center;line-height:120rpx;color:#333;font-size:28rpx;'>赞助合作</view>
+      <view class='picboxhead specialellipsis' style='padding:0 0 20rpx 0;'>请联系美拆微信:{{wxnum}}</view>   
+    </block>
     <view class='picboxcon' style='line-height:100rpx;text-align:center;color:#0fbe0e;font-size:28rpx;' catchtap='sponsocopytwo'>
       点击复制
     </view>

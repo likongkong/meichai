@@ -309,6 +309,7 @@ Page({
     saveimgurlfrpb: '',
 
     pictboxbox: false,
+    cliptxt:'zhangjing@51chaidan.com',
   },
   pictboxboxfun: function () {
     this.setData({ pictboxbox: false });
@@ -904,8 +905,13 @@ closefrindcommoni:function(){
   },
   sponsocopytwo:function(){
     var _this = this;
+    if(_this.data.commoddata.brand){
+        var txt = _this.data.cliptxt || '';
+    }else{
+        var txt = _this.data.wxnum;
+    }
     wx.setClipboardData({
-      data: _this.data.wxnum,
+      data: txt ,
       success: function (res) {
         app.showToastC('复制成功');
         _this.setData({copyiftr:false});

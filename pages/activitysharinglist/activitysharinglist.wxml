@@ -52,7 +52,6 @@
               </view>
               <view class='aslbcbrightnew' catchtap='activitydetailspage'  data-id='{{item.id}}' data-type='{{item.type}}'>
                 <view class='acshlbctitle multilineellipsis' style='position:relative;font-size:24rpx;'>
-                  <!-- Vol.{{item.id}} -->奖品:
                   <view wx:if='{{item.is_suit==1&&(item.name==""||item.name==null)}}' style='display: inline-block;color:#ff2742;margin-right:12rpx;'>{{item.pre_name}}</view>
                   <view wx:if='{{item.is_suit==1&&(item.name==""||item.name==null)}}' style='display: inline-block;'>{{item.ds}}</view>
                   {{item.name==''||item.name==null?item.goods_name:item.name}}
@@ -128,7 +127,6 @@
               </view>
               <view class='aslbcbrightnew' catchtap='activitydetailspage'  data-id='{{item.id}}' data-type='{{item.type}}'>
                 <view class='acshlbctitle multilineellipsis' style='position:relative;font-size:24rpx;'>
-                  <!-- Vol.{{item.id}} -->奖品:
                   <view wx:if='{{item.is_suit==1&&(item.name==""||item.name==null)}}' style='display: inline-block;color:#ff2742;margin-right:12rpx;'>{{item.pre_name}}</view>
                   <view wx:if='{{item.is_suit==1&&(item.name==""||item.name==null)}}' style='display: inline-block;'>{{item.ds}}</view>
                   {{item.name==''||item.name==null?item.goods_name:item.name}}

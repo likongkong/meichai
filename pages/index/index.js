@@ -844,7 +844,6 @@ Page({
     }else{
       var url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/test/Index.json';  // 测试 
     };
-    console.log(url)
     wx.request({
       url: url,
       method: 'GET',
@@ -1066,6 +1065,10 @@ Page({
     // 判断是否授权 
     var _this = this;
     if(app.signindata.sceneValue==1154){
+      _this.setData({
+        isProduce: true,
+      });    
+      console.log(_this.data.isProduce)  
       _this.unauthorized();
     }else{
       wx.getSetting({
@@ -1132,10 +1135,14 @@ Page({
     Dec.getdoubleEleven(this, app);
     if (this.data.commoddata.length != 0) {
       this.countdownbfun()
-    };  
-    this.setData({
-      isProduce: app.signindata.isProduce,
-    })
+    };
+    if(app.signindata.sceneValue!=1154){
+      this.setData({
+        isProduce: app.signindata.isProduce,
+      })
+    }
+
+
     var _this = this;
     if (app.signindata.perspcardata) {
       clearInterval(this.data.countdowntime);

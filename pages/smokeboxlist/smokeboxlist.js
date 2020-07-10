@@ -331,7 +331,6 @@ Page({
               listdata = mlist;
             };
 
-            console.log('添加广告===',listdata)
 
             _this.setData({
               // list: mlist,
@@ -353,7 +352,7 @@ Page({
               var adindex = 0;
               for(var i=0;i<mlist.length;i++){
                   listdata.push(mlist[i]);
-                  if(i%4==3){
+                  if(i%8==7){
                     console.log('i%4==0',i+'%4==0')
                     listdata.push({
                       list:adlist[adindex],

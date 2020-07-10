@@ -107,7 +107,7 @@
 
   
   <!--  显示品牌信息  -->
-	<view style='padding:20rpx 20rpx 0 20rpx;position:relative;text-align:center;' wx:if='{{branddata}}'>
+	<view style='padding:20rpx 20rpx 0 20rpx;position:relative;text-align:center;' catchtap='gobrandDetails' data-mid='{{userbranddata.id}}' wx:if='{{branddata}}'>
 			<image src='{{branddata.logo}}' style='display:inline-block;width:50rpx;height:50rpx;border-radius:50%;vertical-align:top;'></image>
 			<view style='max-width:500rpx;display:inline-block;height:50rpx;line-height:50rpx;font-size:24rpx;color:#000;margin-left:10rpx;vertical-align:top;' class='specialellipsis'>{{branddata.name}}旗舰店</view>	
 	</view>

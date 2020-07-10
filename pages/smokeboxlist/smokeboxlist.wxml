@@ -100,6 +100,11 @@
 									<!-- 实物图片 -->
 									<image class="physicalPicture" mode="widthFix" wx:if='{{item.tipImg}}' src="{{item.tipImg}}"></image>
 									<image style="width:100%;height:184rpx;border-radius:10rpx 10rpx 0 0;display:block;" src='{{item.cover}}?imageMogr2/thumbnail/x270'></image>
+									<view  wx:if='{{item.brand}}' style="position:absolute;left:6rpx;bottom:6rpx;height:30rpx;overflow:hidden;z-index:5;padding: 4rpx 8rpx;">
+											<image src='{{item.brand.logo}}' style='float:left;width:30rpx;height:30rpx;border-radius:50%;'></image>
+											<view style='float:left;height:30rpx;line-height:30rpx;font-size:20rpx;color:#fff;margin-left:10rpx;max-width:200rpx;' class='specialellipsis'>{{item.brand.name}}旗舰店</view>
+											<view style="  width: 100%;height: 100%;background: #000;opacity: 0.6;position: absolute;top: 0;left: 0;z-index: -1;border-radius: 10rpx;"></view>
+									</view>									
 							</view>
 							<view wx:if='{{item.status == 2 && item.tag!=""}}' class='labelstyle'>
 								<view wx:if='{{item.tag=="新品"}}' style='background:#FF9800;border-radius:7rpx;'>{{item.tag}}</view>
