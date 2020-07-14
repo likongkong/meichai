@@ -10,7 +10,7 @@
 
 <view class='headdh' wx:if='{{gcoveriftr}}'>
     <view class='headdhleft'>
-       <image src='{{gcover}}' class='lookimg'></image>
+       <image src='{{gcover}}' mode='aspectFit' class='lookimg'></image>
     </view>
     <view class='headdhright'>
         <view class='headtxt' wx:if='{{info.trace_state==0}}' style='padding-top:20rpx;'>物流状态：无轨迹</view>

@@ -209,7 +209,7 @@ Page({
     //       };
     //   }
     // })
-    wx.navigateTo({  
+     wx.navigateTo({  
       // url: "/page/component/pages/doubleElevenexh/doubleElevenexh?specialsource=1"
       // url: "/page/component/pages/crowdfunding/crowdfunding?aid=47947"
       // url: "/page/component/pages/drivetohidelist/drivetohidelist"
@@ -222,12 +222,13 @@ Page({
       // url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
       // url: "/page/secondpackge/pages/brandDetails/brandDetails?id=140"
       // url: "/pages/detailspage/detailspage?gid=331669"
-      url: "/pages/smokebox/smokebox?gid=340701"
+      // url: "/pages/smokebox/smokebox?gid=340701"
       // url: "/page/component/pages/playgrasslist/playgrasslist"
       // url: "/page/secondpackge/pages/detailSimgEffects/detailSimgEffects?gid=32852"
       // url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails"
       // url: "/page/secondpackge/pages/aRewardList/aRewardList"
-      // url: "/page/component/pages/hidefun/hidefun"
+      url: "/page/component/pages/hidefun/hidefun"
+      
       
     });
   },
@@ -1030,8 +1031,8 @@ Page({
   },
   onShareTimeline:function(){
     return {
-      title:'美拆',
-      path:'/pages/storehomepage/storehomepage'
+      title:'潮玩社交平台',
+      path:''
     }
   },
   onLoad: function (options) {
