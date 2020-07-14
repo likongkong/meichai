@@ -180,6 +180,7 @@ Page({
         'Accept': 'application/json'
       },
       success: function(res) {
+        console.log('listdata===',res)
         // 刷新完自带加载样式回去
         wx.hideLoading()
         wx.stopPullDownRefresh();

@@ -88,15 +88,18 @@ function calMoreImageInfo(e, idx, that, bindName) {
   // var bindData = {};
   // bindData[bindName] = temData;
   // that.setData(bindData);
-  var index = temImages[idx].index
-  var key = `${bindName}`
-  for (var i of index.split('.')) key+=`.nodes[${i}]`
-  var keyW = key + '.width'
-  var keyH = key + '.height'
-  that.setData({
-    [keyW]: recal.imageWidth,
-    [keyH]: recal.imageheight,
-  })
+  if(temImages&&temImages[idx]){
+    var index = temImages[idx].index;
+    var key = `${bindName}`
+    for (var i of index.split('.')) key+=`.nodes[${i}]`
+    var keyW = key + '.width'
+    var keyH = key + '.height'
+    that.setData({
+      [keyW]: recal.imageWidth,
+      [keyH]: recal.imageheight,
+    })
+  }
+
 }
 
 // 计算视觉优先的图片宽高

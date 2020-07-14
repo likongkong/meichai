@@ -479,10 +479,18 @@
 
 									<view class='videomaskcom specialellipsis' wx:if='{{w.shop_price}}' style='z-index:2;height:40rpx;'>
 										<text style='float:left;padding:0 8rpx 0 4rpx;font-size:24rpx;color:#fff;background: rgba(0,0,0,0.4);height:40rpx;border-radius:10rpx;line-height:42rpx;' wx:if='{{w.shop_price}}'>￥{{w.shop_price}}</text>
-										<!-- <text style='float:right;padding-right:10rpx;'>{{w.stop_time}}</text> -->
 									</view>
 								</view>
-								<view class="limittxtindex specialellipsis">{{w.stop_time}}</view>
+								<block wx:if='{{w.brand}}'>
+										<view  wx:if='{{w.brand}}' style="height:30rpx;overflow:hidden;padding-top:5rpx;">
+												<image src='{{w.brand.logo}}' style='float:left;width:30rpx;height:30rpx;border-radius:50%;'></image>
+												<view style='float:left;height:30rpx;line-height:32rpx;font-size:24rpx;color:#000;margin-left:10rpx;max-width:{{w.width-44}}rpx;' class='specialellipsis'>{{w.brand.name}}旗舰店</view>
+										</view>
+								</block>
+								<block wx:else>
+								   <view class="limittxtindex specialellipsis">{{w.stop_time}}</view>
+								</block>
+								
 							</view>
 							<view class='disanum_scr_box' style='height:118rpx;' wx:if='{{item.List.length>=4&&item.item_type}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}' catchtap='imgcomindellistjump'>
 									<view class='disanum_stxt' style='top:0;width:118rpx;height:118rpx;'>

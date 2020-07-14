@@ -127,11 +127,19 @@ page{
   line-height: 36rpx;
   font-weight: bold;
 }
+.acshlbctitle{
+  width:100%;
+  height:76rpx;
+  font-size:28rpx;
+  color: #101010; 
+  line-height: 36rpx;
+  font-weight: bold;
+}
 .aslbccoto{
   height: 30rpx;
   line-height: 30rpx;
   width: 100%;
-  font-size: 26rpx;
+  font-size: 22rpx;
   margin-top: 10rpx;
   color: #000000 75%;
 }
@@ -139,15 +147,14 @@ page{
   height: 50rpx;
   line-height: 30rpx;  
   width: 100%;
-  font-size: 26rpx;
+  font-size: 22rpx;
   color:#000000 75%;
   padding-top: 16rpx;
   position: relative;
 }
 .aslbcbott{
-  height: 60rpx;
   position: absolute;
-  top:8rpx;
+  top:10rpx;
   right: 10rpx;
 }
 .aslbcbotleft{
@@ -159,11 +166,11 @@ page{
 }
 .aslbcbotrightbox{
   float: right;
-  height: 44rpx;
-  font-size: 28rpx;
+  height: 40rpx;
+  font-size: 22rpx;
   color: #fff;
   text-align: center;
-  line-height: 44rpx;
+  line-height: 40rpx;
 }
 .aslbcbotright{
   padding: 0 20rpx;
@@ -306,5 +313,12 @@ page{
 }
 
 
-
-
+.bcimgnew{
+  width: 100%;
+  border-radius: 6rpx;
+  display: block;
+}
+.aslbcbrightnew{
+  padding: 16rpx 12rpx 0;
+  position: relative;
+}

@@ -11,6 +11,12 @@
   <view style='padding:0 20rpx;overflow: hidden;'>
     <view style="width:364rpx;float:left;">
         <view class='limieve' wx:for='{{listdata}}' wx:key='key' wx:if='{{index%2==0}}' catchtap='limitlotteryd' data-gid='{{item.id}}'>
+          <view  wx:if='{{item.brand}}' style="position:absolute;left:15rpx;top:15rpx;height:36rpx;overflow:hidden;z-index:5;padding: 4rpx 8rpx;">
+              <image src='{{item.brand.logo}}' style='float:left;width:36rpx;height:36rpx;border-radius:50%;'></image>
+              <view style='float:left;height:36rpx;line-height:36rpx;font-size:22rpx;color:#fff;margin-left:10rpx;max-width:260rpx;' class='specialellipsis'>{{item.brand.name}}旗舰店</view>
+              <view style="  width: 100%;height: 100%;background: #000;opacity: 0.6;position: absolute;top: 0;left: 0;z-index: -1;border-radius: 10rpx;"></view>
+          </view>
+
           <image class='limieveimg' src='{{item.cover}}' mode='widthFix'></image>
           <view class='limievetxtname multilineellipsis'>
             <text style='color:#fd434c;'>抽签价￥{{item.shop_price}} </text>{{item.name}}</view>
@@ -27,6 +33,13 @@
     </view>
     <view style="width:344rpx;float:left;">
         <view class='limieve' wx:for='{{listdata}}' wx:key='key' style='margin-right:0;' wx:if='{{index%2==1}}' catchtap='limitlotteryd' data-gid='{{item.id}}'>
+
+          <view  wx:if='{{item.brand}}' style="position:absolute;left:15rpx;top:15rpx;height:36rpx;overflow:hidden;z-index:5;padding: 4rpx 8rpx;">
+              <image src='{{item.brand.logo}}' style='float:left;width:36rpx;height:36rpx;border-radius:50%;'></image>
+              <view style='float:left;height:36rpx;line-height:36rpx;font-size:22rpx;color:#fff;margin-left:10rpx;max-width:260rpx;' class='specialellipsis'>{{item.brand.name}}旗舰店</view>
+              <view style="  width: 100%;height: 100%;background: #000;opacity: 0.6;position: absolute;top: 0;left: 0;z-index: -1;border-radius: 10rpx;"></view>
+          </view>
+
           <image class='limieveimg' src='{{item.cover}}' mode='widthFix'></image>
           <view class='limievetxtname multilineellipsis'>
             <text style='color:#fd434c;'>抽签价￥{{item.shop_price}} </text>{{item.name}}</view>

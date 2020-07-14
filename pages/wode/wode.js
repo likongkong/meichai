@@ -85,6 +85,7 @@ Page({
     awasustipimages:false,
     luckyValue:0
   },
+
   awasustipimages: function () {
     this.setData({
       awasustipimages: !this.data.awasustipimages

@@ -349,7 +349,7 @@
   z-index: 1;
 }
 .dDepositcltxt{
-  width: 100%;
+  width: 90%;
   font-size: 24rpx;
 }
 .dDeposibottxt{

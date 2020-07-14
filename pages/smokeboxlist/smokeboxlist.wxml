@@ -42,8 +42,31 @@
 
 </view>
 
+
+
 <view class='storbox'>
 	<view style='width:100%;height:280rpx;'></view>
+  <!-- 品牌logo -->
+	<view style="min-height:80rpx;background:#fff;margin:15rpx 10rpx 15rpx 10rpx;padding-top:15rpx;" wx:if='{{eldataclass&&eldataclass.length!=0}}'>
+			<view style="position:relative;height:150rpx;">
+					<view style="width:100rpx;height:140rpx;margin: 0 10rpx;float:left;">
+							<view class="ocamensweve" catchtap="jumpsouchtem" data-id='{{eldataclass[0].id}}'>
+									<image class="ocamensweveimg" style="{{eldataclass[0].id==brand_id?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{eldataclass[0].logo}}"></image>
+									<view class="ocamenswevename specialellipsis" style="{{eldataclass[0].id==brand_id?'color:#f19207;':''}}">{{eldataclass[0].name}}</view>
+							</view>                 
+					</view> 
+					<scroll-view scroll-x="true" style="width:600rpx;white-space: nowrap;height:150rpx;float:left;">
+							<block wx:for='{{eldataclass}}' wx:key='key' wx:for-item='w'>
+									<view class="ocamensweve" catchtap="jumpsouchtem" data-id='{{w.id}}' wx:if='{{w.id!=0}}'>
+											<image class="ocamensweveimg" style="{{w.id==brand_id?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{w.logo}}"></image>
+											<view class="ocamenswevename specialellipsis" style="{{w.id==brand_id?'color:#f19207;':''}}">{{w.name}}</view>
+									</view>
+							</block>
+					</scroll-view>
+			</view>
+	</view>
+
+
 	<view style='width:730rpx;margin:10rpx;overflow:hidden;padding-bottom:70rpx;'>
 		<view wx:if='{{false}}' style='width:44%;margin:10rpx 3%;float:left;' wx:for='{{list}}' wx:key='key'>
 			<view class='vm_list' style='font-size:25rpx;text-align:center;' catchtap='jumpdetail' data-id='{{item.id}}' data-gid="{{item.goods_id}}">
@@ -61,32 +84,49 @@
 			</view>
 		</view>
 
-		<view style="width:345rpx;height:280rpx;margin:10rpx;float:left;background:white;border-radius:10rpx;position:relative;" wx:for='{{list}}' wx:key='key' catchtap='jumpdetail' data-id='{{item.id}}' data-gid="{{item.goods_id}}" data-official="{{item.isBusinessActivity}}" data-appid="{{item.appId}}" data-isdirectshipping='{{item.isDirectShipping}}'>
-		  <view style="position:relative;margin-bottom:5rpx;">
-			    <!-- 实物图片 -->
-          <image class="physicalPicture" mode="widthFix" wx:if='{{item.tipImg}}' src="{{item.tipImg}}"></image>
-					<image style="width:100%;height:184rpx;border-radius:10rpx 10rpx 0 0;display:block;" src='{{item.cover}}?imageMogr2/thumbnail/x270'></image>
-			</view>
-			
-			<view wx:if='{{item.status == 2 && item.tag!=""}}' class='labelstyle'>
-				<view wx:if='{{item.tag=="新品"}}' style='background:#FF9800;border-radius:7rpx;'>{{item.tag}}</view>
-				<view wx:if='{{item.tag=="预售"}}' style='background:#FB595F;border-radius:7rpx;'>{{item.tag}}</view>
-				<view wx:if='{{item.tag=="限量"}}' style='background:#31b3fb;border-radius:7rpx;'>{{item.tag}}</view>
-			</view>
-			<view wx:if='{{item.status == 1}}' class='labelstyle' style='background: #000;'>未开放</view>
+    <block wx:for='{{list}}' wx:key='key'>
+		    <block wx:if='{{item.showtype==2}}'>
+						<view class="smokebLisAdv">
+								<swiper class="swiper" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450" style="height:100%;">
+									<swiper-item wx:for="{{item.list}}" wx:key="key" wx:for-item='w'>
+										<image src="{{w.img}}" class="smokebLisAdvimg" mode='aspectFill'catchtap='jumpdetail' data-id='{{w.id}}' data-gid="{{w.goods_id}}" ></image>
+									</swiper-item>
+								</swiper>  
+						</view>				
+				</block>
+		    <block wx:else>
+						<view style="width:345rpx;height:280rpx;margin:10rpx;float:left;background:white;border-radius:10rpx;position:relative;" catchtap='jumpdetail' data-id='{{item.id}}' data-gid="{{item.goods_id}}" data-official="{{item.isBusinessActivity}}" data-appid="{{item.appId}}" data-isdirectshipping='{{item.isDirectShipping}}'>
+							<view style="position:relative;margin-bottom:5rpx;">
+									<!-- 实物图片 -->
+									<image class="physicalPicture" mode="widthFix" wx:if='{{item.tipImg}}' src="{{item.tipImg}}"></image>
+									<image style="width:100%;height:184rpx;border-radius:10rpx 10rpx 0 0;display:block;" src='{{item.cover}}?imageMogr2/thumbnail/x270'></image>
+									<view  wx:if='{{item.brand}}' style="position:absolute;left:6rpx;bottom:6rpx;height:30rpx;overflow:hidden;z-index:5;padding: 4rpx 8rpx;">
+											<image src='{{item.brand.logo}}' style='float:left;width:30rpx;height:30rpx;border-radius:50%;'></image>
+											<view style='float:left;height:30rpx;line-height:30rpx;font-size:20rpx;color:#fff;margin-left:10rpx;max-width:200rpx;' class='specialellipsis'>{{item.brand.name}}旗舰店</view>
+											<view style="  width: 100%;height: 100%;background: #000;opacity: 0.6;position: absolute;top: 0;left: 0;z-index: -1;border-radius: 10rpx;"></view>
+									</view>									
+							</view>
+							<view wx:if='{{item.status == 2 && item.tag!=""}}' class='labelstyle'>
+								<view wx:if='{{item.tag=="新品"}}' style='background:#FF9800;border-radius:7rpx;'>{{item.tag}}</view>
+								<view wx:if='{{item.tag=="预售"}}' style='background:#FB595F;border-radius:7rpx;'>{{item.tag}}</view>
+								<view wx:if='{{item.tag=="限量"}}' style='background:#31b3fb;border-radius:7rpx;'>{{item.tag}}</view>
+							</view>
+							<view wx:if='{{item.status == 1}}' class='labelstyle' style='background: #000;'>未开放</view>
+							<view style="width:100%;height:40rpx;color:#d64650;">
+								<view style="float:left;font-size:35rpx;margin-left:10rpx;">
+									<text style="font-size:20rpx;">￥</text>{{item.price}}</view>
+								<view wx:if="{{item.tip!='' && !item.isBusinessActivity}}" style="float:right;font-size:20rpx;line-height:30rpx;border:3rpx solid #d64650;border-radius:7rpx;margin:8rpx 10rpx 0 0;">{{item.tip}}</view>
+								<view wx:if="{{item.tip!='' && item.isBusinessActivity}}" style="float:right;font-size:20rpx;line-height:30rpx;border:3rpx solid #4c9a23;border-radius:7rpx;margin:2rpx 10rpx 0 0;color:#4c9a23">{{item.tip}}</view>
+							</view>
+							<view class='specialellipsis' style="width:94%;line-height:30rpx;text-align:left;font-size:26rpx;margin:0 3%;">{{item.title}}</view>
+						</view>
+				</block>
 
 
-			<view style="width:100%;height:40rpx;color:#d64650;">
-				<view style="float:left;font-size:35rpx;margin-left:10rpx;">
-					<text style="font-size:20rpx;">￥</text>{{item.price}}</view>
-				<view wx:if="{{item.tip!='' && !item.isBusinessActivity}}" style="float:right;font-size:20rpx;line-height:30rpx;border:3rpx solid #d64650;border-radius:7rpx;margin:8rpx 10rpx 0 0;">{{item.tip}}</view>
-				<view wx:if="{{item.tip!='' && item.isBusinessActivity}}" style="float:right;font-size:20rpx;line-height:30rpx;border:3rpx solid #4c9a23;border-radius:7rpx;margin:2rpx 10rpx 0 0;color:#4c9a23">{{item.tip}}</view>
-			</view>
+		</block>
+    
+		<image wx:if='{{is_havedata&&list.length==0}}' style="width:400rpx;height:400rpx;margin:20rpx auto;display:block;" mode="aspectFit" src='../images/default_BG_Image@3x.png' ></image>
 
-			<view class='specialellipsis' style="width:94%;line-height:30rpx;text-align:left;font-size:26rpx;margin:0 3%;">{{item.title}}</view>
-
-
-		</view>
 
 	</view>
 	<view style='width:100%;{{isIphoneX?"height:170rpx;":"height:150rpx;"}}'></view>

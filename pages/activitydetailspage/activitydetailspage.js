@@ -309,6 +309,7 @@ Page({
     saveimgurlfrpb: '',
 
     pictboxbox: false,
+    cliptxt:'zhangjing@51chaidan.com',
   },
   pictboxboxfun: function () {
     this.setData({ pictboxbox: false });
@@ -904,8 +905,13 @@ closefrindcommoni:function(){
   },
   sponsocopytwo:function(){
     var _this = this;
+    if(_this.data.commoddata.brand){
+        var txt = _this.data.cliptxt || '';
+    }else{
+        var txt = _this.data.wxnum;
+    }
     wx.setClipboardData({
-      data: _this.data.wxnum,
+      data: txt ,
       success: function (res) {
         app.showToastC('复制成功');
         _this.setData({copyiftr:false});
@@ -1987,6 +1993,11 @@ closefrindcommoni:function(){
           var listBlindBox = arrlist.listBlindBox||[];
           var listShowBox = arrlist.listShowBox||[];
           var listLotto = arrlist.listLotto||[];
+
+          // if(res.data.Info&&res.data.Info.brandId>0){
+          //   res.data.Info.specialWay = 1;
+          // };
+
           _this.setData({
             commoddata: arrlist,
             subscribedata: res.data.Info.subscribe,
@@ -2008,7 +2019,7 @@ closefrindcommoni:function(){
             brandId:res.data.Info.brandId || '',
           });
           // 是否调取展会数据
-          if (res.data.Info.specialWay && res.data.Info.specialWay == 1) {
+          if (res.data.Info.specialWay && res.data.Info.specialWay == 1||(res.data.Info.specialWay!=1&&_this.data.brandId>0)) {
             //  wx.hideShareMenu();
             _this.exhibdatafun(1)
             app.livebroadcast(_this, res.data.Info.brandId)  // 直播数据
