@@ -157,7 +157,7 @@ page {
   background: #ff2742;
   margin:60rpx auto 0;
   border-radius: 12rpx;
-}
+} 
 .adcspezzstxt{
   width: 70rpx;
   height: 50rpx;
