@@ -472,6 +472,13 @@ Page({
           _this.setData({ jumpdevanningiftr: false });
         }
       });
+    } else if (item_type == 9017) { 
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + whref ,
+        complete: function () {
+          _this.setData({ jumpdevanningiftr: false });
+        }
+      });
     }else{
       app.showToastC('请更新至最新版本');
     };
@@ -1307,7 +1314,7 @@ Page({
       var iftrcomb = 1;
       for (var i = 0; i < len; i++) {
         if (commoddata[i].show_type==5){
-  　　　　var nowTime = new Date();
+      　  var nowTime = new Date();
   　　　　var nowTime = Date.parse(nowTime);//当前时间戳
          var lastTime = commoddata[i].stop_time*1000;
   　　　　var differ_time = lastTime - nowTime;//时间差：
@@ -1584,15 +1591,14 @@ Page({
     var href = w.currentTarget.dataset.href || w.target.dataset.href || 0;
     var title = w.currentTarget.dataset.title || w.target.dataset.title || '';
     var imgurl = '';
-    if(item_type==9014){
-      // 公共跳转
-      this.comjumpwxnav(item_type, href, title, imgurl);
-    }else{
-      wx.navigateTo({
-        url: "/page/component/pages/newpsellwell/newpsellwell?" + href + '&title=' + title,
-      })
-    }
-
+    // 公共跳转
+    this.comjumpwxnav(item_type, href, title, imgurl);
+    // if(item_type==9014){
+    // }else{
+    //   wx.navigateTo({
+    //     url: "/page/component/pages/newpsellwell/newpsellwell?" + href + '&title=' + title,
+    //   })
+    // }
   },
   // 计算图片大小
   imageLoadad: function (e) {

@@ -569,9 +569,9 @@
 				<!--  新品  -->
 				<view class='disanumofgoods' wx:if='{{npswtab==1}}' wx:for='{{item.List.new.list}}' wx:for-item='w' wx:key='key' wx:for-index='ind' style='{{(ind+1)!=(item.List.new.list.length)?"border-bottom:2rpx dashed #e6e6e6;":""}}margin-bottom:0;'>
 					<!--  列表标题  -->
-					<view class='disantitle' catchtap='newpsellwellfun' data-title='{{w.title}}' data-href='{{w.href}}'>
+					<view class='disantitle' catchtap='newpsellwellfun' data-item_type='9014' data-title='{{w.title}}' data-href='{{w.href}}'>
 						{{w.title}}
-						<view class='disantitletitright' catchtap='newpsellwellfun' data-title='{{w.title}}' data-href='{{w.href}}' style='font-weight:normal;position:relative;color:#31b3fb;'>查看更多
+						<view class='disantitletitright' catchtap='newpsellwellfun' data-item_type='9014' data-title='{{w.title}}' data-href='{{w.href}}' style='font-weight:normal;position:relative;color:#31b3fb;'>查看更多
 						</view>
 					</view>
 					<!--  列表  -->
@@ -591,7 +591,7 @@
 												<block wx:else>￥{{ww.shop_price}}{{ww.gsale_unit}}</block>	
 											</view>
 									</view>
-									<view class='disanum_scr_box' style='height:200rpx;' catchtap='newpsellwellfun' data-href='{{w.href}}' data-title='{{w.title}}'>
+									<view class='disanum_scr_box' style='height:200rpx;' data-item_type='9014' catchtap='newpsellwellfun' data-href='{{w.href}}' data-title='{{w.title}}'>
 											<view class='disanum_stxt'>
 												<view class='disanum_stxtd' style='line-height:120rpx;'>查 看</view>
 												<view class='disanum_stxtd' style='line-height:40rpx;'>全 部</view>
@@ -622,9 +622,9 @@
 				<!--  热销  -->
 				<view class='disanumofgoods' wx:if='{{npswtab==2}}' wx:for='{{item.List.hot.list}}' wx:for-item='w' wx:key='key' style='{{(ind+1)!=(item.List.hot.list.length)?"border-bottom:2rpx dashed #e6e6e6;":""}}margin-bottom:0;'>
 					<!--  列表标题  -->
-					<view class='disantitle' catchtap='newpsellwellfun' data-title='{{w.title}}' data-href='{{w.href}}'>
+					<view class='disantitle' catchtap='newpsellwellfun' data-item_type='9014' data-title='{{w.title}}' data-href='{{w.href}}'>
 						{{w.title}}
-						<view class='disantitletitright' catchtap='newpsellwellfun' data-title='{{w.title}}' data-href='{{w.href}}' style='font-weight:normal;position:relative;color:#31b3fb;'>查看更多
+						<view class='disantitletitright' catchtap='newpsellwellfun' data-item_type='9014' data-title='{{w.title}}' data-href='{{w.href}}' style='font-weight:normal;position:relative;color:#31b3fb;'>查看更多
 						</view>
 					</view>
 					<!--  列表  -->
@@ -644,7 +644,7 @@
 												<block wx:else>￥{{ww.shop_price}}{{ww.gsale_unit}}</block>
 										</view>
 									</view>
-									<view class='disanum_scr_box' style='height:200rpx;' catchtap='newpsellwellfun' data-href='{{w.href}}' data-title='{{w.title}}'>
+									<view class='disanum_scr_box' style='height:200rpx;' catchtap='newpsellwellfun' data-item_type='9014' data-href='{{w.href}}' data-title='{{w.title}}'>
 											<view class='disanum_stxt'>
 												<view class='disanum_stxtd' style='line-height:120rpx;'>查 看</view>
 												<view class='disanum_stxtd' style='line-height:40rpx;'>全 部</view>

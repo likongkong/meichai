@@ -171,14 +171,38 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  //key(需要检错的键） url（传入的需要分割的url地址）
+  getSearchString:function(key, Url) {
+    // 获取URL中?之后的字符
+    var str = Url;
+    var arr = str.split("&");
+    var obj = new Object();
+    // 将每一个数组元素以=分隔并赋给obj对象 
+    for(var i = 0; i<arr.length; i++) {
+        var tmp_arr = arr[i].split("=");
+        obj[decodeURIComponent(tmp_arr[0])] = decodeURIComponent(tmp_arr[1]);
+    }
+    return obj[key];
+  },
+
   onLoad: function (options) {
     var _this = this;
     console.log(options)
-    // wx.hideShareMenu();
-    _this.setData({
-      brandId: options.id || 0,
-      type: options.type||''
-    })
+
+    if (options.scene) {
+      let scene = decodeURIComponent(options.scene);
+      console.log(scene)
+      _this.setData({
+        brandId: _this.getSearchString('id', scene) || 0,
+        type:_this.getSearchString('type', scene) || ''
+      })
+    }else{
+      _this.setData({
+        brandId: options.id || 0,
+        type: options.type||''
+      })
+    }
+    console.log('品牌值============',_this.data.brandId,_this.data.type)
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {

@@ -34,7 +34,6 @@ Page({
     ishowdealoradd:false,
     // 地址id
     maddid:'',
-    addressdata:'',
     id:'',
     goodsdata:[],
     // 最终赏数据
@@ -674,13 +673,11 @@ Page({
     query.exec(function(res) {
       if (res && res[0] && res[1]) {
         wx.pageScrollTo({
-           scrollTop:res[0].top+res[1].scrollTop-app.signindata.statusBarHeightMc||90,
+           scrollTop:( res[0].top+res[1].scrollTop-app.signindata.statusBarHeightMc||90 )-85,
            duration:300
         })
       }
     });
-
-
 
   },
 

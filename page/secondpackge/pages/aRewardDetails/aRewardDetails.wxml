@@ -69,7 +69,7 @@
       <view class="adcweve" wx:if='{{goodsdata.length%2==0}}'></view> -->
 
 
-        <view wx:for='{{goodsExhibition}}' wx:key='key' id='evepos{{index}}' style="{{item.length>1||item[0].is_width?'text-align: center;':'display:inline-block;'}}{{item[0].is_width?'border-top: 4rpx dashed #000;':''}}">
+        <view wx:for='{{goodsExhibition}}' wx:key='key' id='evepos{{index+1}}' style="{{item.length>1||item[0].is_width?'text-align: center;':'display:inline-block;'}}{{item[0].is_width?'border-top: 4rpx dashed #000;':''}}">
             <view class="adcweve" wx:for='{{item}}' wx:for-item='w' wx:for-index='num' wx:key='key' style="{{w.rightline?'border-right: 4rpx dashed #000;':''}}{{!item[0].is_width&&num<2?'border-top: 4rpx dashed #000;':''}}">
                 <view class="adcweveleft" wx:if='{{w.gear}}'>
                     <view class="adcwelbg">
