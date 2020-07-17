@@ -220,6 +220,7 @@ Page({
             mUserInfo: user,
             images: res.data.List.banner,
             cart_idsave: res.data.Info.cart_id || "",
+            infoRule:res.data.Info.tips|| ""
           })
           _this.data.qrcode = res.data.Info.qrcode;
 

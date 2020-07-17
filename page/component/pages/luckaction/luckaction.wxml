@@ -161,10 +161,10 @@
   </view>
 
   <view style='margin-top:820rpx;font-size:25rpx;padding:0 100rpx;line-height:40rpx;'>
-
+    
     <view style='text-align:center;font-size:30rpx;margin-top:20rpx;line-height:50rpx;'>活动规则</view>
-
-    <view style='margin-top:30rpx;'>一.瓜分{{activityinfo.totalPrizeNumber}}件盲盒</view>
+    <text style="display:block;">{{infoRule}}</text>
+    <!-- <view style='margin-top:30rpx;'>一.瓜分{{activityinfo.totalPrizeNumber}}件盲盒</view>
     <view>·一周内完成支付满{{activityinfo.conditionNumber}}件商品（不包含抽盒机），即可成为【美拆大咖】，参与瓜分盲盒</view>
     <view>·一周内购买件数前{{activityinfo.top}}名，直接获得盲盒数量×2</view>
     <view>·其余美拆大咖均分{{activityinfo.sharingNumber}}盲盒</view>
@@ -176,7 +176,7 @@
 
     <view style='margin-top:30rpx;'>三.领奖时间</view>
     <view>·每周一10:00领取奖励，奖品由美拆官方发放</view>
-    <view>·中奖用户需在活动结束后7天领取，逾期操作视为放弃领取，美拆不进行任何形式得补发</view>
+    <view>·中奖用户需在活动结束后7天领取，逾期操作视为放弃领取，美拆不进行任何形式得补发</view> -->
 
     <view style='margin:30rpx 0;position:relative;' catchtap='showrule'>详细规则></view>
 
@@ -198,8 +198,8 @@
 
     <view style='color:#fff;overflow: scroll;width:80%;height:80%;padding:10%;'>
       <view style='text-align:center;font-size:30rpx;margin-top:20rpx;line-height:50rpx;'>活动规则</view>
-
-      <view style='margin-top:30rpx;'>一.瓜分{{activityinfo.totalPrizeNumber}}件盲盒</view>
+      <text style="display:block;">{{infoRule}}</text>
+      <!-- <view style='margin-top:30rpx;'>一.瓜分{{activityinfo.totalPrizeNumber}}件盲盒</view>
       <view>·一周内完成支付满{{activityinfo.conditionNumber}}件商品（不包含抽盒机），即可成为【美拆大咖】，参与瓜分盲盒</view>
       <view>·一周内购买件数前{{activityinfo.top}}名，直接获得盲盒数量×2</view>
       <view>·其余美拆大咖均分{{activityinfo.sharingNumber}}盲盒</view>
@@ -211,7 +211,7 @@
 
       <view style='margin-top:30rpx;'>三.领奖时间</view>
       <view>·每周一10:00领取奖励，奖品由美拆官方发放</view>
-      <view>·中奖用户需在活动结束后7天领取，逾期操作视为放弃领取，美拆不进行任何形式得补发</view>
+      <view>·中奖用户需在活动结束后7天领取，逾期操作视为放弃领取，美拆不进行任何形式得补发</view> -->
 
       <view style='margin:30rpx 0;'></view>
     </view>
