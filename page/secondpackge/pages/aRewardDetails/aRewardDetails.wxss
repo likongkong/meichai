@@ -628,5 +628,141 @@ page {
   margin: auto;
   z-index: 1; 
 }
+/* 幸运值 */
+.bgstyle {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #000;
+  opacity: 0.6;
+}
 
 
+.redpackage {
+  width: 600rpx;
+  height: 800rpx;
+  border-radius: 20rpx;
+  position: relative;
+  color: #f0ca97;
+  margin-bottom: 40rpx;
+}
+
+.readpagname {
+  width: 100%;
+  text-align: center;
+  margin-top: 60rpx;
+  font-size: 30rpx;
+}
+
+.redpagbtom {
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  bottom: 30rpx;
+  font-size: 30rpx;
+}
+
+.redbg {
+  width: 600rpx;
+  height: 1000rpx;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  border-radius: 20rpx;
+  color: #f0ca97;
+  background: white;
+  font-size: 30rpx;
+}
+
+.pagshare {
+  width: 50rpx;
+  height: 50rpx;
+  position: absolute;
+  top: 10rpx;
+  right: 10rpx;
+}
+
+.getpagbtm {
+  width: 100%;
+  height: 650rpx;
+  border-radius: 20rpx;
+  background: white;
+  margin-top: -20rpx;
+  position: relative;
+}
+
+.alreadyget {
+  width: 580rpx;
+  font-size: 28rpx;
+  line-height: 70rpx;
+  color: gray;
+  border-bottom: 2rpx solid #e3e3e3;
+  margin-left: 20rpx;
+}
+
+.stoptime {
+  width: 100%;
+  line-height: 40rpx;
+  color: gray;
+  background: white;
+  font-size: 25rpx;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+}
+
+.pagitem {
+  height: 100rpx;
+  width: 500rpx;
+  display: inline-block;
+  border-bottom: 2rpx solid #e3e3e3;
+  font-size: 25rpx;
+  text-align: center;
+}
+
+.imgtextstyle {
+  font-size: 30rpx;
+  line-height: 70rpx;
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 20rpx;
+}
+
+.headsty {
+  width: 70rpx;
+  height: 70rpx;
+  display: inline-block;
+  vertical-align: top;
+  border-radius: 5rpx;
+}
+
+.sharebtn {
+  width: 360rpx;
+  line-height: 60rpx;
+  background: #fb595f;
+  font-size: 26rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 40rpx;
+  margin: 0 auto;
+  color: white;
+  text-align: center;
+  border-radius: 10rpx;
+}
+
+.snapshotshareclass {
+  width: 300px;
+  height: 240px;
+  position: fixed;
+  top: -9999px;
+  left: 0;
+}

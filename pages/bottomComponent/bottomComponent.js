@@ -105,6 +105,8 @@ Component({
               fail: function (res) {}
             });
           };
+        }else{
+          this.triggerEvent("runex",true);
         }
       }
     },

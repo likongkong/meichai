@@ -29,6 +29,7 @@
     "pages/tgacomponent/tgacomponent",
     "pages/hidewindow/hidewindow",
     "pages/bottomComponent/bottomComponent",
+    "pages/shopsquare/shopsquare",
     "pages/smokeComponent/smokeComponent"
   ],
   "subPackages": [
