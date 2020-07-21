@@ -71,9 +71,9 @@
 	</view>
 
 	<!--  测试  -->
-	<!-- <view style='height:220rpx;width:100%;text-align:center; display: table;position: relative;' class='rotate' catchtap='jumpxinxi'>
+	<view style='height:220rpx;width:100%;text-align:center; display: table;position: relative;' class='rotate' catchtap='jumpxinxi'>
 		<text style='display: table-cell;vertical-align:middle;text-align:center;'>转盘\n盘转</text>
-	</view> -->
+	</view>
 	<!--   数据  -->
 
 	<!--  信息流  -->
@@ -797,7 +797,7 @@
 </view>
 
 
-<bnavigation bind:run='obtaintabfun' whomepage='{{true}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+<bnavigation bind:run='obtaintabfun' bind:runex='togation' whomepage='{{true}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
 
 
 <!--  优惠券 新人红包  -->

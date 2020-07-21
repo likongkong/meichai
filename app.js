@@ -943,7 +943,7 @@ App({
 //  streasurylist  金库排行榜
 //  soviceguidance  店铺新手引导
 //  invitingfriends  邀请好友 and 邀请拆单
-//  shopsquare 解优广场
+//  shopsquare 展会打卡
 
 
 //  redenvelopes 红包页面

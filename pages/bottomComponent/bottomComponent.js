@@ -75,6 +75,41 @@ Component({
         url: "/pages/index/index"
       });
     },
+    // 潮玩展
+    fashionShow:function(){
+      var _this = this;
+      if(app.signindata.isOpenToyShow){
+        wx.navigateTo({
+          url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
+        });
+      }else{
+        if(app.signindata.loginid!='' && app.signindata.uid!=''){
+          _this.data.is_show_modal = true;
+          if(_this.data.exhdata){
+            _this.exhtiphidden();
+          }else{
+            wx.request({
+              url: 'https://cdn.51chaidan.com/common/toyShowAlert.json',
+              method: 'GET',
+              header: { 'Accept': 'application/json' },
+              success: function (res) {
+                  console.log(res)
+                  if(res.data.ReturnCode==200){
+                    _this.setData({
+                      exhdata:res.data,
+                      subscribedata:res.data.subscribe
+                    })
+                    _this.exhtiphidden();
+                  };
+              },
+              fail: function (res) {}
+            });
+          };
+        }else{
+          this.triggerEvent("runex",true);
+        }
+      }
+    },
     // 导航跳转 
     wnews: function () {
       var _this = this;
@@ -90,36 +125,6 @@ Component({
       }else{
         app.showToastC('暂未开放敬请期待');
       }      
-      
-
-      // if(app.signindata.isOpenToyShow){
-      //   app.limitlottery(_this);
-      // }else{
-      //   if(app.signindata.loginid!='' && app.signindata.uid!=''){
-      //     _this.data.is_show_modal = true;
-      //     if(_this.data.exhdata){
-      //       _this.exhtiphidden();
-      //     }else{
-      //       wx.request({
-      //         url: 'https://cdn.51chaidan.com/common/toyShowAlert.json',
-      //         method: 'GET',
-      //         header: { 'Accept': 'application/json' },
-      //         success: function (res) {
-      //             console.log(res)
-      //             if(res.data.ReturnCode==200){
-      //               _this.setData({
-      //                 exhdata:res.data,
-      //                 subscribedata:res.data.subscribe
-      //               })
-      //               _this.exhtiphidden();
-      //             };
-      //         },
-      //         fail: function (res) {}
-      //       });
-      //     };
-      //   }
-      // }
-
       
     },
     wshoppingCart: function () {

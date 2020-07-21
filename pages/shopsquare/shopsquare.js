@@ -7,7 +7,17 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {},
+  data: {
+    c_title: '一番赏', 
+    c_arrow: true,
+    c_backcolor: '#ff2742',
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    windowHeight: app.signindata.windowHeight - wx.getStorageSync('statusBarHeightMc')||0,
+    signinlayer: true,
+    tgabox:false,
+    loginid: app.signindata.loginid,
+    uid: app.signindata.uid,    
+  },
   upload: function(){
     var _this = this;
     var cos = new COS({
@@ -55,8 +65,91 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {},
-
+  onLoad: function (options) {
+      // 判断是否授权
+      this.activsign();
+  },
+  onLoadfun:function(){
+    var _this = this;
+    // '已经授权'
+    _this.setData({
+      loginid: app.signindata.loginid,
+      uid: app.signindata.uid,
+      openid: app.signindata.openid,
+      avatarUrl: app.signindata.avatarUrl,
+      isShareFun: app.signindata.isShareFun,
+      isProduce: app.signindata.isProduce
+    });
+    
+  },
+  // 点击登录获取权限
+  userInfoHandler: function (e) {
+    var _this = this;
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userInfo']) {
+          _this.setData({
+            signinlayer: true,
+            tgabox: false
+          });
+          _this.activsign();
+          // 确认授权用户统计
+          app.clicktga(4);          
+        }
+      }
+    });
+    if (e.detail.detail.userInfo) { } else {
+      app.clicktga(8)  //用户按了拒绝按钮
+    };
+  },
+  pullupsignin: function () {
+    // // '没有授权'
+    this.setData({
+      tgabox: true
+    });
+  },
+  activsign: function () {
+    // 判断是否授权 
+    var _this = this;
+    // 判断是否登录
+    if (_this.data.loginid != '' && _this.data.uid != '') {
+      _this.onLoadfun();
+      return false;
+    };    
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userInfo']) {
+          // '已经授权'
+          _this.setData({
+            loginid: app.signindata.loginid,
+            uid: app.signindata.uid,
+            openid: app.signindata.openid,
+            avatarUrl: app.signindata.avatarUrl,
+            isShareFun: app.signindata.isShareFun,
+            isProduce: app.signindata.isProduce,
+            signinlayer: true,
+            tgabox: false
+          });
+          // 判断是否登录
+          if (_this.data.loginid != '' && _this.data.uid != '') {
+            _this.onLoadfun();
+          } else {
+            app.signin(_this);
+          }
+        } else {
+          console.log(11111111111111111111111111111)
+          _this.setData({
+            tgabox: false,
+            signinlayer: false
+          })
+          console.log()
+          // '没有授权 统计'
+          app.userstatistics(42);
+          _this.onLoadfun();
+        }
+      }
+    });      
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
