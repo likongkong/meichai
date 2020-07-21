@@ -2835,6 +2835,15 @@ Page({
   /**
    * 用户点击右上角分享
    */
+  onShareTimeline:function(){
+    var _this = this;
+    return {
+      title:_this.data.c_title || '潮玩社交平台',
+      query:{
+        'gid':_this.data.gid
+      }    
+    }
+  },
   onShareAppMessage: function (options) {
     var _this = this;
     _this.setData({ tgfrShareIftr:false});
@@ -2917,38 +2926,44 @@ Page({
     if (_this.data.loginid != '' && _this.data.uid != '') {
       _this.onLoadfun();
       return false;
-    };    
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // '已经授权'
-          _this.setData({
-            loginid: app.signindata.loginid,
-            uid: app.signindata.uid,
-            openid: app.signindata.openid,
-            avatarUrl: app.signindata.avatarUrl,
-            isShareFun: app.signindata.isShareFun,
-            signinlayer: true,
-            tgabox: false
-          });
-          // 判断是否登录
-          if (_this.data.loginid != '' && _this.data.uid != '') {
-            _this.onLoadfun();
+    }; 
+    if(app.signindata.sceneValue==1154){
+      app.signindata.isProduce = true;  
+      _this.detailfunshop();
+    }else{
+      
+      wx.getSetting({
+        success: res => {
+          if (res.authSetting['scope.userInfo']) {
+            // '已经授权'
+            _this.setData({
+              loginid: app.signindata.loginid,
+              uid: app.signindata.uid,
+              openid: app.signindata.openid,
+              avatarUrl: app.signindata.avatarUrl,
+              isShareFun: app.signindata.isShareFun,
+              signinlayer: true,
+              tgabox: false
+            });
+            // 判断是否登录
+            if (_this.data.loginid != '' && _this.data.uid != '') {
+              _this.onLoadfun();
+            } else {
+              app.signin(_this);
+            }
           } else {
-            app.signin(_this);
+            _this.setData({
+              tgabox: false,
+              signinlayer: false
+            })
+            // '没有授权 统计'
+            app.userstatistics(7);
+            // 商品详情
+            _this.detailfunshop();
           }
-        } else {
-          _this.setData({
-            tgabox: false,
-            signinlayer: false
-          })
-          // '没有授权 统计'
-          app.userstatistics(7);
-          // 商品详情
-          _this.detailfunshop();
         }
-      }
-    });      
+      });  
+    };    
   },  
   pullupsignin: function () {
     // // '没有授权'

@@ -54,7 +54,7 @@ Page({
     c_title: '兑换拆币',
     c_arrow: true,
     c_backcolor: '#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
   },
 
   locationfun: function (location) {},
@@ -351,29 +351,35 @@ Page({
       mylist: mylist||[],
       isProduce: app.signindata.isProduce,
     });
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // '已经授权'
-          _this.data.loginid = app.signindata.loginid;
-          _this.data.openid = app.signindata.openid;
-          _this.setData({
-            uid: app.signindata.uid,
-          });
-          // 判断是否登录
-          if (_this.data.loginid != '' && _this.data.uid != '') {
-            _this.onLoadfun();
+
+    if(app.signindata.sceneValue==1154){
+      app.signindata.isProduce = true;  
+      _this.onLoadfun();
+    }else{
+      wx.getSetting({
+        success: res => {
+          if (res.authSetting['scope.userInfo']) {
+            // '已经授权'
+            _this.data.loginid = app.signindata.loginid;
+            _this.data.openid = app.signindata.openid;
+            _this.setData({
+              uid: app.signindata.uid,
+            });
+            // 判断是否登录
+            if (_this.data.loginid != '' && _this.data.uid != '') {
+              _this.onLoadfun();
+            } else {
+              app.signin(_this)
+            }
           } else {
-            app.signin(_this)
+            // 跳转获取权限页面
+            wx.navigateTo({
+              url: "../../../../pages/signin/signin"
+            });
           }
-        } else {
-          // 跳转获取权限页面
-          wx.navigateTo({
-            url: "../../../../pages/signin/signin"
-          });
         }
-      }
-    });
+      });
+    };
   },
 
   /**
@@ -406,6 +412,13 @@ Page({
   onShareAppMessage: function () {
     var reshare = Dec.sharemc();
     return reshare 
+  },
+  onShareTimeline:function(){
+    var _this = this;
+    return {
+      title:_this.data.c_title || '潮玩社交平台',
+      query:{}    
+    }
   },
   // 导航跳转 
   wnews: function () {

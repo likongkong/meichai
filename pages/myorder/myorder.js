@@ -97,7 +97,7 @@ Page({
     c_title: '我的订单',
     c_arrow: true,
     c_backcolor: '#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),  
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,  
     subscrproiftr:false,
     subscrpro:'',
     auditpictime:0,

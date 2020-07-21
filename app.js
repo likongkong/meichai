@@ -1,7 +1,7 @@
 // 阿拉丁
 const ald = require('./utils/ald-stat.js');
 // talkingdata
-var tdweapp = require('./utils/tdweapp.js');
+// var tdweapp = require('./utils/tdweapp.js');
 //aes加密解密js
 var Dec = require('common/public.js');
 App({

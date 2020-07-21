@@ -50,7 +50,7 @@ Page({
     c_title: '发现',
     c_arrow: true,
     c_backcolor: '#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     isExchange: 1,
     exchangeTips: '',
     inputbox: false,
@@ -338,32 +338,35 @@ Page({
       isShareFun: app.signindata.isShareFun,
       topic_id: options.topic_id || 0
     });
-
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          _this.setData({
-            signinlayer: true,
-            loginid: app.signindata.loginid,
-            uid: app.signindata.uid,
-            openid: app.signindata.openid,
-            isShareFun: app.signindata.isShareFun
-          });
-          // 判断是否登录
-          if (_this.data.loginid != '' && _this.data.uid != '') {
-            _this.onLoadfun();
+    if(app.signindata.sceneValue==1154){
+        app.signindata.isProduce = true;  
+        _this.onLoadfun();
+    }else{
+      wx.getSetting({
+        success: res => {
+          if (res.authSetting['scope.userInfo']) {
+            _this.setData({
+              signinlayer: true,
+              loginid: app.signindata.loginid,
+              uid: app.signindata.uid,
+              openid: app.signindata.openid,
+              isShareFun: app.signindata.isShareFun
+            });
+            // 判断是否登录
+            if (_this.data.loginid != '' && _this.data.uid != '') {
+              _this.onLoadfun();
+            } else {
+              app.signin(_this)
+            }
           } else {
-            app.signin(_this)
+            this.setData({
+              signinlayer: false,
+            })
+            _this.onLoadfun();
           }
-        } else {
-          this.setData({
-            signinlayer: false,
-          })
-          _this.onLoadfun();
         }
-      }
-    });
-    
+      });
+    };
   },
 
   clicktganone: function() {
@@ -606,7 +609,13 @@ Page({
       this.listdata(1)
     };
   },
-
+  onShareTimeline:function(){
+    var _this = this;
+    return {
+      title:_this.data.c_title || '潮玩社交平台',
+      query:{}
+    }
+  },
   onShareAppMessage: function(options) {
     // 发现详情
     var _this = this;

@@ -57,7 +57,7 @@ Page({
     c_title: '订单详情',
     c_arrow: true,
     c_backcolor: '#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     subscrproiftr: false,
     subscrpro:'',
     receivingaddress:false,
@@ -547,45 +547,49 @@ Page({
 
     // 判断是否授权 
     var _this = this;
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // '已经授权'
-          _this.setData({
-            loginid: app.signindata.loginid,
-            uid: app.signindata.uid,
-            openid: app.signindata.openid,
-            blackCity: app.signindata.blackCity,
-          });
-          // 判断是否登录
-          if (_this.data.loginid != '' && _this.data.uid != '') {
-            _this.onLoadfun();
-          } else {
-            app.signin(_this);
-          }
-        } else {
-          _this.unauthorized();
-          wx.getUserInfo({
-            success: res => {
-              // 判断是否登录
-              if (_this.data.loginid != '' && _this.data.uid != '') {
-                _this.onLoadfun();
-              } else {
-                app.signin(_this);
-              }
-            },
-                        fail: res => {
-              app.userstatistics(38);
-              _this.setData({
-                tgabox: true
-              });
+    if(app.signindata.sceneValue==1154){
+      app.signindata.isProduce = true;  
+      _this.onLoadfun();
+    }else{
+      wx.getSetting({
+        success: res => {
+          if (res.authSetting['scope.userInfo']) {
+            // '已经授权'
+            _this.setData({
+              loginid: app.signindata.loginid,
+              uid: app.signindata.uid,
+              openid: app.signindata.openid,
+              blackCity: app.signindata.blackCity,
+            });
+            // 判断是否登录
+            if (_this.data.loginid != '' && _this.data.uid != '') {
+              _this.onLoadfun();
+            } else {
+              app.signin(_this);
             }
-          });
+          } else {
+            _this.unauthorized();
+            wx.getUserInfo({
+              success: res => {
+                // 判断是否登录
+                if (_this.data.loginid != '' && _this.data.uid != '') {
+                  _this.onLoadfun();
+                } else {
+                  app.signin(_this);
+                }
+              },
+                          fail: res => {
+                app.userstatistics(38);
+                _this.setData({
+                  tgabox: true
+                });
+              }
+            });
 
+          }
         }
-      }
-    });
-
+      });
+    }
 
 
 
@@ -616,6 +620,13 @@ Page({
   /**
    * 用户点击右上角分享
    */
+  onShareTimeline:function(){
+    var _this = this;
+    return {
+      title:_this.data.c_title || '潮玩社交平台',
+      query:{'oid': _this.data.oid,}    
+    }
+  },
   onShareAppMessage: function () {
     var _this = this;
     var gar = parseFloat(_this.data.comdata.goods_amount||1)/parseFloat(_this.data.comdata.gnumber||1);

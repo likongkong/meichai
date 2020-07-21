@@ -10,7 +10,7 @@ Page({
     c_title: '一番赏', 
     c_arrow: true,
     c_backcolor: '#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     windowHeight: app.signindata.windowHeight - wx.getStorageSync('statusBarHeightMc')||0,
     signinlayer: true,
     tgabox:false,
@@ -22,36 +22,7 @@ Page({
     // 适配苹果X
     isIphoneX: false,
     isProduce: app.signindata.isProduce,
-    datalist:[
-      // {
-      //   id:1,
-      //   cover:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591076527694&di=00dd5497b5330da26d7568be4f02a4f2&imgtype=0&src=http%3A%2F%2Fwww.xiaot.com%2Fdata%2Fattachment%2Fportal%2F201801%2F08%2F215325k41ap1g56cg60x4m.jpg',
-      //   betterGoods:[
-      //     {gear:'A', suplus:1, limit:1},
-      //     {gear:'B', suplus:1, limit:2},
-      //     {gear:'C', suplus:6, limit:6},
-      //     {gear:'D', suplus:6, limit:6},
-      //   ],
-      //   limitGoods:80,
-      //   suplusGoods:64,
-      //   name:'一番赏鬼灭之刃限定周边',
-      //   shopPrice:50
-      // },
-      // {
-      //   id:2,
-      //   cover:'https://cdn.51chaidan.com//images/brand/1587535959_16/1/goods/banner/1587535963.jpg',
-      //   betterGoods:[
-      //     {gear:'A', suplus:1, limit:1},
-      //     {gear:'B', suplus:1, limit:2},
-      //     {gear:'C', suplus:6, limit:6},
-      //     {gear:'D', suplus:6, limit:6},
-      //   ],
-      //   limitGoods:50,
-      //   suplusGoods:25,
-      //   name:'一番赏鬼灭之刃限定周边',
-      //   shopPrice:50
-      // },
-    ]
+    datalist:[]
 
   },
 
@@ -159,5 +130,12 @@ Page({
       imageUrl:  "https://cdn.51chaidan.com/images/sign/yifanshangLisSharet.jpg"
     }
     return share;
+  },
+  onShareTimeline:function(){
+    var _this = this;
+    return {
+      title:_this.data.c_title || '潮玩社交平台',
+      query:{}
+    }
   },
 })

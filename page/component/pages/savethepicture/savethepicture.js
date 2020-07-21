@@ -13,7 +13,7 @@ Page({
     c_title: '',
     c_arrow: true,
     c_backcolor: '#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'), 
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90, 
     is_txt:false,
     txt:'' 
   },

@@ -23,7 +23,7 @@ Page({
     c_arrow: true,
     c_backcolor: '#ff2742',
     page: 0,
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     iftrnodata: false,
     inputdata: '',
     searchorwhole: true,
@@ -262,33 +262,39 @@ Page({
       but: options.but||'cart',
       name:options.name||''
     });
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // '已经授权'
-          _this.data.loginid = app.signindata.loginid;
-          _this.data.openid = app.signindata.openid;
-          _this.setData({
-            signinlayer: true,
-            uid: app.signindata.uid,
-            isProduce: app.signindata.isProduce,
-            isShareFun: app.signindata.isShareFun
-          });
-          // 判断是否登录
-          if (_this.data.loginid != '' && _this.data.uid != '') {
-            _this.onLoadfun();
-          } else {
-            app.signin(_this)
-          }
-        } else {
-          _this.onLoadfun();
-          this.setData({
-            signinlayer: false,
-          })
-        }
-      }
-    });
 
+    if(app.signindata.sceneValue==1154){
+      app.signindata.isProduce = true;  
+      _this.onLoadfun();
+    }else{
+
+      wx.getSetting({
+        success: res => {
+          if (res.authSetting['scope.userInfo']) {
+            // '已经授权'
+            _this.data.loginid = app.signindata.loginid;
+            _this.data.openid = app.signindata.openid;
+            _this.setData({
+              signinlayer: true,
+              uid: app.signindata.uid,
+              isProduce: app.signindata.isProduce,
+              isShareFun: app.signindata.isShareFun
+            });
+            // 判断是否登录
+            if (_this.data.loginid != '' && _this.data.uid != '') {
+              _this.onLoadfun();
+            } else {
+              app.signin(_this)
+            }
+          } else {
+            _this.onLoadfun();
+            this.setData({
+              signinlayer: false,
+            })
+          }
+        }
+      });
+    };
 
   },
   listdata: function(num) {
@@ -439,6 +445,17 @@ Page({
   onShareAppMessage: function(options) {
     var reshare = Dec.sharemc();
     return reshare
+  },
+  onShareTimeline:function(){
+    var _this = this;
+    return {
+      title:_this.data.c_title || '潮玩社交平台',
+      query:{
+        drying_id: _this.data.drying_id || '',
+        but: _this.data.but||'cart',
+        name:_this.data.name||''
+      }    
+    }
   },
   dlfindfun: function() {
     wx.reLaunch({

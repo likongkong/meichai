@@ -73,7 +73,7 @@ Page({
     c_title: '送拼图',
     c_arrow: true,
     c_backcolor: '#ff6968',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
   },
 
   dialogClick: function() {

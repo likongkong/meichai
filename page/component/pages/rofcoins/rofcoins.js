@@ -36,30 +36,36 @@ Page({
       _this.onLoadfun();
       return false;
     };
-    // 判断是否授权 
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // '已经授权'
-          _this.setData({
-            loginid: app.signindata.loginid,
-            uid: app.signindata.uid,
-            openid: app.signindata.openid
-          });
-          // 判断是否登录
-          if (_this.data.loginid != '' && _this.data.uid != '') {
-            _this.onLoadfun();
-          } else {
-            app.signin(_this)
+
+    if(app.signindata.sceneValue==1154){
+      app.signindata.isProduce = true;  
+      _this.onLoadfun();
+      }else{
+        // 判断是否授权 
+        wx.getSetting({
+          success: res => {
+            if (res.authSetting['scope.userInfo']) {
+              // '已经授权'
+              _this.setData({
+                loginid: app.signindata.loginid,
+                uid: app.signindata.uid,
+                openid: app.signindata.openid
+              });
+              // 判断是否登录
+              if (_this.data.loginid != '' && _this.data.uid != '') {
+                _this.onLoadfun();
+              } else {
+                app.signin(_this)
+              }
+            } else {
+              // 跳转获取权限页面
+              wx.navigateTo({
+                url: "../../../../pages/signin/signin"
+              })
+            }
           }
-        } else {
-          // 跳转获取权限页面
-          wx.navigateTo({
-            url: "../../../../pages/signin/signin"
-          })
-        }
-      }
-    });
+        });
+      };
   },
   onLoadfun:function(){
     var _this = this;
@@ -142,6 +148,12 @@ Page({
   /**
    * 用户点击右上角分享
    */
+  onShareTimeline:function(){
+    return {
+      title:'潮玩社交平台',
+      query:{}    
+    }
+  },
   onShareAppMessage: function () {
     return Dec.sharemc()
   }

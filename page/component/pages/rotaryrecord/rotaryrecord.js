@@ -436,28 +436,33 @@ Page({
       _this.onLoadfun();
       return false;
     };
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // '已经授权'
-          _this.data.loginid = app.signindata.loginid;
-          _this.data.uid = app.signindata.uid;
-          _this.data.openid = app.signindata.openid;
-          // 判断是否登录
-          if (_this.data.loginid != '' && _this.data.uid != '') {
-            _this.onLoadfun();
+    if(app.signindata.sceneValue==1154){
+      app.signindata.isProduce = true;  
+      _this.onLoadfun();
+    }else{
+      wx.getSetting({
+        success: res => {
+          if (res.authSetting['scope.userInfo']) {
+            // '已经授权'
+            _this.data.loginid = app.signindata.loginid;
+            _this.data.uid = app.signindata.uid;
+            _this.data.openid = app.signindata.openid;
+            // 判断是否登录
+            if (_this.data.loginid != '' && _this.data.uid != '') {
+              _this.onLoadfun();
+            } else {
+              app.signin(_this)
+            }
           } else {
-            app.signin(_this)
+            // 跳转获取权限页面
+            _this.setData({
+              tgabox: true
+            });
+            app.userstatistics(24);
           }
-        } else {
-          // 跳转获取权限页面
-          _this.setData({
-            tgabox: true
-          });
-          app.userstatistics(24);
         }
-      }
-    });
+      });
+    };
   },
   onLoadfun: function () {
     var _this = this;
@@ -597,6 +602,12 @@ Page({
   onShareAppMessage: function () {
     var reshare = Dec.sharemc();
     return reshare
+  },
+  onShareTimeline:function(){
+    return {
+      title:'潮玩社交平台',
+      query:{}    
+    }
   },
   // 发货
   delivergoods: function (w) {

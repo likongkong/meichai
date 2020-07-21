@@ -60,7 +60,7 @@ Page({
     c_title: '潮玩种草',
     c_arrow: true,
     c_backcolor: '#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     ceshi:[],
     shopdetail:{},
     movies:[],
@@ -479,37 +479,41 @@ Page({
       sid: options.sid||0
     });
 
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // '已经授权'
-          _this.data.loginid = app.signindata.loginid;
-          _this.data.openid = app.signindata.openid;
-          _this.setData({
-            uid: app.signindata.uid,
-            avatarUrl: app.signindata.avatarUrl,
-            isProduce: app.signindata.isProduce,
-            signinlayer: true,
-            tgabox: false
-          });
-          // 判断是否登录
-          if (_this.data.loginid != '' && _this.data.uid != '') {
-            _this.onLoadfun();
+    if(app.signindata.sceneValue==1154){
+      app.signindata.isProduce = true;  
+      _this.onLoadfun();
+    }else{
+      wx.getSetting({
+        success: res => {
+          if (res.authSetting['scope.userInfo']) {
+            // '已经授权'
+            _this.data.loginid = app.signindata.loginid;
+            _this.data.openid = app.signindata.openid;
+            _this.setData({
+              uid: app.signindata.uid,
+              avatarUrl: app.signindata.avatarUrl,
+              isProduce: app.signindata.isProduce,
+              signinlayer: true,
+              tgabox: false
+            });
+            // 判断是否登录
+            if (_this.data.loginid != '' && _this.data.uid != '') {
+              _this.onLoadfun();
+            } else {
+              app.signin(_this)
+            }
           } else {
-            app.signin(_this)
+            wx.hideLoading()
+            app.userstatistics(32);
+            _this.setData({
+              tgabox: false,
+              signinlayer: false
+            });
+            _this.onLoadfun();
           }
-        } else {
-          wx.hideLoading()
-          app.userstatistics(32);
-          _this.setData({
-            tgabox: false,
-            signinlayer: false
-          });
-          _this.onLoadfun();
         }
-      }
-    });
-
+      });
+    };
   },
   pullupsignin: function () {
     // // '没有授权'
@@ -787,6 +791,13 @@ Page({
   /**
    * 用户点击右上角分享
    */
+  onShareTimeline:function(){
+    var _this = this;
+    return {
+      title:_this.data.c_title || '潮玩社交平台',
+      query:{}    
+    }
+  },
   onShareAppMessage: function (options) {
     var _this = this
     if (options.from == 'button') {

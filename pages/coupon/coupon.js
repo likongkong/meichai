@@ -24,7 +24,7 @@ Page({
     c_title: '优惠券',
     c_arrow: true,
     c_backcolor: '#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),  
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,  
     tgabox:false,
     iftrscene:false
   },
@@ -238,45 +238,51 @@ Page({
       _this.onLoadfun();
       return false;
     };
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // '已经授权'
-          _this.setData({
-            loginid: app.signindata.loginid,
-            uid: app.signindata.uid,
-            openid: app.signindata.openid,
-            avatarUrl: app.signindata.avatarUrl,
-            isShareFun: app.signindata.isShareFun
-          });
-          // 判断是否登录
-          if (_this.data.loginid != '' && _this.data.uid != '') {
-            _this.onLoadfun();
-          } else {
-            app.signin(_this);
-          }
-        } else {
-          wx.getUserInfo({
-            success: res => {
-              // 判断是否登录
-              if (_this.data.loginid != '' && _this.data.uid != '') {
-                _this.onLoadfun();
-              } else {
-                app.signin(_this);
-              }
-            },
-            fail: res => {
-              // '没有授权 统计'
-              app.userstatistics(14);
-              // '没有授权'
-              _this.setData({
-                tgabox: true
-              });
+    if(app.signindata.sceneValue==1154){
+      app.signindata.isProduce = true;  
+      _this.onLoadfun();
+    }else{
+
+      wx.getSetting({
+        success: res => {
+          if (res.authSetting['scope.userInfo']) {
+            // '已经授权'
+            _this.setData({
+              loginid: app.signindata.loginid,
+              uid: app.signindata.uid,
+              openid: app.signindata.openid,
+              avatarUrl: app.signindata.avatarUrl,
+              isShareFun: app.signindata.isShareFun
+            });
+            // 判断是否登录
+            if (_this.data.loginid != '' && _this.data.uid != '') {
+              _this.onLoadfun();
+            } else {
+              app.signin(_this);
             }
-          });
+          } else {
+            wx.getUserInfo({
+              success: res => {
+                // 判断是否登录
+                if (_this.data.loginid != '' && _this.data.uid != '') {
+                  _this.onLoadfun();
+                } else {
+                  app.signin(_this);
+                }
+              },
+              fail: res => {
+                // '没有授权 统计'
+                app.userstatistics(14);
+                // '没有授权'
+                _this.setData({
+                  tgabox: true
+                });
+              }
+            });
+          }
         }
-      }
-    });
+      });
+    };
   }, 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -323,6 +329,12 @@ Page({
   /**
    * 用户点击右上角分享
    */
+  onShareTimeline:function(){
+    return {
+      title:'潮玩社交平台',
+      query:{}    
+    }
+  },
   onShareAppMessage: function () {
     return Dec.sharemc()  
   }

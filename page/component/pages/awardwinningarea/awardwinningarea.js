@@ -50,7 +50,7 @@ Page({
     c_title: '领奖专区',
     c_arrow: true,
     c_backcolor: '#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc') || 90,
 
     ishowCart: false,
     cartlist: [],

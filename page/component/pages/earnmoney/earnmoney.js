@@ -35,7 +35,7 @@ Page({
     c_title: '赚拆币',
     c_arrow: true,
     c_backcolor: '#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     
   },
   // input 值改变
@@ -60,29 +60,35 @@ Page({
       _this.onLoadfun();
       return false;
     };
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // '已经授权'
-          _this.setData({
-            loginid: app.signindata.loginid,
-            uid: app.signindata.uid,
-            openid: app.signindata.openid,
-          });
-          // 判断是否登录
-          if (_this.data.loginid != '' && _this.data.uid != '') {
-            _this.onLoadfun();
+
+    if(app.signindata.sceneValue==1154){
+      app.signindata.isProduce = true;  
+      _this.onLoadfun();
+    }else{
+      wx.getSetting({
+        success: res => {
+          if (res.authSetting['scope.userInfo']) {
+            // '已经授权'
+            _this.setData({
+              loginid: app.signindata.loginid,
+              uid: app.signindata.uid,
+              openid: app.signindata.openid,
+            });
+            // 判断是否登录
+            if (_this.data.loginid != '' && _this.data.uid != '') {
+              _this.onLoadfun();
+            } else {
+              app.signin(_this)
+            }
           } else {
-            app.signin(_this)
+            // 跳转获取权限页面
+            _this.setData({
+              tgabox: true
+            });
           }
-        } else {
-          // 跳转获取权限页面
-          _this.setData({
-            tgabox: true
-          });
         }
-      }
-    });    
+      });  
+    };  
   },
   onLoadfun: function () {
     var _this = this;
@@ -210,6 +216,12 @@ Page({
     var emtabnum = w.currentTarget.dataset.emtabnum || w.target.dataset.emtabnum||1;
     this.setData({ emtabnum: emtabnum});
     this.listdata(0);
+  },
+  onShareTimeline:function(){
+    return {
+      title:'潮玩社交平台',
+      query:{}    
+    }
   },
   // 发货
   delivergoods:function(w){

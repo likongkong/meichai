@@ -12,7 +12,7 @@ Page({
     c_arrow: true,
     c_backcolor: '#fff',
     txtcolor:'#000000',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     fullview:[], 
     windowHeight:0,
     prenum:0, //上一个位置

@@ -41,7 +41,7 @@ Page({
     c_title: '发布抽签',
     c_arrow: true,
     c_backcolor: '#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
 
     inputtxt1: '20字以内（例如：bobo&coco太空告白限定手办）',
     inputtxt2: '手机号（美拆联系使用不对外公布）',

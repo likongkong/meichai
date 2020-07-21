@@ -48,7 +48,7 @@ Page({
     c_title: '我的小金库',
     c_arrow: true,
     c_backcolor: '#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
   },
   // 金额显示隐藏
   numiftrfun:function(){

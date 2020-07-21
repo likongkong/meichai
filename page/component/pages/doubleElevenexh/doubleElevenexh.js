@@ -25,7 +25,7 @@ Page({
     c_title: 'PicoPico X 美拆 五一福利免费抽盲盒！',
     c_arrow: true,
     c_backcolor: '#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     windowHeight: app.signindata.windowHeight - 65 - wx.getStorageSync('statusBarHeightMc') || 0,
     pid: 0,
     awardimg: "",

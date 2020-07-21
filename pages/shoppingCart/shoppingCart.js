@@ -179,7 +179,7 @@ Page({
     c_title: '购物车',
     c_arrow: true,
     c_backcolor: '#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     // 是否显示提示弹框
     buySthToCabinet: false,
     // 是否是地域黑用户  false不是地狱拉黑用户 true是地狱拉黑用户
@@ -1034,39 +1034,43 @@ Page({
       _this.onLoadfun();
       return false;
     };
-
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // '已经授权'
-          _this.setData({
-            loginid: app.signindata.loginid,
-            uid: app.signindata.uid,
-            openid: app.signindata.openid,
-            store_id: app.signindata.store_id || 0,
-            isProduce: app.signindata.isProduce,
-            spreadEntry: app.signindata.spreadEntry,
-            signinlayer: true,
-            tgabox: false,
-            raplist:[]
-          }); 
-          // 判断是否登录
-          if (_this.data.loginid != '' && _this.data.uid != '') {
-            _this.onLoadfun();
+    if(app.signindata.sceneValue==1154){
+      app.signindata.isProduce = true;  
+      _this.onLoadfun();
+    }else{
+      wx.getSetting({
+        success: res => {
+          if (res.authSetting['scope.userInfo']) {
+            // '已经授权'
+            _this.setData({
+              loginid: app.signindata.loginid,
+              uid: app.signindata.uid,
+              openid: app.signindata.openid,
+              store_id: app.signindata.store_id || 0,
+              isProduce: app.signindata.isProduce,
+              spreadEntry: app.signindata.spreadEntry,
+              signinlayer: true,
+              tgabox: false,
+              raplist:[]
+            }); 
+            // 判断是否登录
+            if (_this.data.loginid != '' && _this.data.uid != '') {
+              _this.onLoadfun();
+            } else {
+              app.signin(_this)
+            }
           } else {
-            app.signin(_this)
-          }
-        } else {
-          app.userstatistics(3);
-          // '没有授权'
-          _this.setData({
-            tgabox: false,
-            signinlayer: false
-          });
+            app.userstatistics(3);
+            // '没有授权'
+            _this.setData({
+              tgabox: false,
+              signinlayer: false
+            });
 
+          }
         }
-      }
-    });
+      });
+    };
   
   },
 
@@ -1145,6 +1149,13 @@ Page({
   /**
    * 用户点击右上角分享
    */
+  onShareTimeline:function(){
+    var _this = this;
+    return {
+      title:_this.data.c_title || '潮玩社交平台',
+      query:{}
+    }
+  },
   onShareAppMessage: function () {
     var _this = this;
     if (_this.data.payiftr) {

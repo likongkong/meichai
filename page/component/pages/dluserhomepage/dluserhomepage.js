@@ -34,7 +34,7 @@ Page({
     c_title: '个人主页',
     c_arrow: true,
     c_backcolor: '#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     inputbox: false,
     inputboxheight: 0,
     textconcent: '',
@@ -300,6 +300,13 @@ Page({
   /**
    * 用户点击右上角分享
    */
+  onShareTimeline:function(){
+    var _this = this;
+    return {
+      title:_this.data.c_title || '潮玩社交平台',
+      query:{}    
+    }
+  },
   onShareAppMessage: function (options) {
     // 发现详情
     var _this = this;

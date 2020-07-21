@@ -22,7 +22,7 @@ Page({
     c_title: '',
     c_arrow: true,
     c_backcolor: '#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
  
   },
   // 商品详情
@@ -52,27 +52,32 @@ Page({
       category_id: w.category_id||'',
       c_title: w.title || '',
     }); 
-    // 判断是否授权 
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // '已经授权'
-          _this.setData({
-            loginid: app.signindata.loginid,
-            uid: app.signindata.uid,
-            openid: app.signindata.openid,
-          });
-          // 判断是否登录
-          if (_this.data.loginid != '' && _this.data.uid != '') {
-            _this.onLoadfun();
+    if(app.signindata.sceneValue==1154){
+      app.signindata.isProduce = true;  
+      _this.onLoadfun();
+    }else{
+      // 判断是否授权 
+      wx.getSetting({
+        success: res => {
+          if (res.authSetting['scope.userInfo']) {
+            // '已经授权'
+            _this.setData({
+              loginid: app.signindata.loginid,
+              uid: app.signindata.uid,
+              openid: app.signindata.openid,
+            });
+            // 判断是否登录
+            if (_this.data.loginid != '' && _this.data.uid != '') {
+              _this.onLoadfun();
+            } else {
+              app.signin(_this)
+            }
           } else {
-            app.signin(_this)
+            _this.onLoadfun();
           }
-        } else {
-          _this.onLoadfun();
         }
-      }
-    });    
+      });  
+    };  
     // if (_this.data.loginid != '' && _this.data.uid != '') {
     //   _this.onLoadfun();
     //   return false;
@@ -213,5 +218,11 @@ Page({
   onShareAppMessage: function () {
     return Dec.sharemc()
   },   
+  onShareTimeline:function(){
+    return {
+      title:'潮玩社交平台',
+      query:{}    
+    }
+  },
      
 })

@@ -27,7 +27,7 @@ Page({
     c_title: '通知',
     c_arrow: true,
     c_backcolor: '#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
 
     iftrnodata:false
 

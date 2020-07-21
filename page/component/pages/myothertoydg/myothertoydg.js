@@ -29,7 +29,7 @@ Page({
     title: '别人的玩具柜',
     arrow: true,
     backcolor: '#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     ownerId: 0,
     listdata: [],
     iefwidth: 0,
@@ -63,7 +63,7 @@ Page({
     c_title: '我的玩具柜',
     c_arrow: true,
     c_backcolor: '#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     inputdataprice: 0,
     pricemod: false,
     tipelafra: false,
@@ -800,46 +800,51 @@ Page({
       title: '加载中...',
     })
 
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // '已经授权'
-          _this.data.loginid = app.signindata.loginid;
-          _this.data.openid = app.signindata.openid;
-          _this.setData({
-            uid: app.signindata.uid,
-            avatarUrl: app.signindata.avatarUrl,
-            isProduce: app.signindata.isProduce,
-            isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
-            signinlayer: true,
-            tgabox: false
-          });
-          // 判断是否登录
-          if (_this.data.loginid != '' && _this.data.uid != '') {
-            _this.onLoadfun();
-          } else {
-            if (_this.data.isBusinessSkip == 1) {
-              var BSkipData = {
-                businessClientUserId: _this.data.ownerId,
-                isBusinessSkip: _this.data.isBusinessSkip,
-                isMergedUserInfo: _this.data.isMergedUserInfo,
-              }
-              app.signin(_this, BSkipData)
+    if(app.signindata.sceneValue==1154){
+      app.signindata.isProduce = true;  
+      _this.onLoadfun();
+    }else{
+      wx.getSetting({
+        success: res => {
+          if (res.authSetting['scope.userInfo']) {
+            // '已经授权'
+            _this.data.loginid = app.signindata.loginid;
+            _this.data.openid = app.signindata.openid;
+            _this.setData({
+              uid: app.signindata.uid,
+              avatarUrl: app.signindata.avatarUrl,
+              isProduce: app.signindata.isProduce,
+              isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
+              signinlayer: true,
+              tgabox: false
+            });
+            // 判断是否登录
+            if (_this.data.loginid != '' && _this.data.uid != '') {
+              _this.onLoadfun();
             } else {
-              app.signin(_this)
+              if (_this.data.isBusinessSkip == 1) {
+                var BSkipData = {
+                  businessClientUserId: _this.data.ownerId,
+                  isBusinessSkip: _this.data.isBusinessSkip,
+                  isMergedUserInfo: _this.data.isMergedUserInfo,
+                }
+                app.signin(_this, BSkipData)
+              } else {
+                app.signin(_this)
+              }
             }
+          } else {
+            wx.hideLoading()
+            app.userstatistics(32);
+            _this.setData({
+              tgabox: false,
+              signinlayer: false
+            });
+            _this.onLoadfun();
           }
-        } else {
-          wx.hideLoading()
-          app.userstatistics(32);
-          _this.setData({
-            tgabox: false,
-            signinlayer: false
-          });
-          _this.onLoadfun();
         }
-      }
-    });
+      });
+    };
 
   },
   pullupsignin: function () {
@@ -1384,7 +1389,13 @@ Page({
     return share;
 
   },
-
+  onShareTimeline:function(){
+    var _this = this;
+    return {
+      title:_this.data.c_title || '潮玩社交平台',
+      query:{'ownerId':_this.data.uid}    
+    }
+  },
 
 
   // 计算图片大小

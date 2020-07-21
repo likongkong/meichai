@@ -89,7 +89,7 @@ Page({
     c_title: '美拆', // -正品折扣多一点
     c_arrow:false,
     c_backcolor:'#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     index_ela_fra: app.signindata.index_ela_fra,
     loadmoreiftr:true,
     // 倒计时时间戳
@@ -197,9 +197,12 @@ Page({
 
   },
 
+ 
+
   // 测试 
   jumpxinxi:function(){
     var _this = this;
+
 
     // wx.requestSubscribeMessage({
     //   tmplIds: ['3WAWEH_WbiNgERXFObUE4sjaY9f90O_0CjxCfTGp3Qg'],
@@ -227,8 +230,8 @@ Page({
       // url: "/page/secondpackge/pages/detailSimgEffects/detailSimgEffects?gid=32852"
       // url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails"
       // url: "/page/secondpackge/pages/aRewardList/aRewardList"
-      url: "/page/component/pages/hidefun/hidefun"
-      
+      // url: "/page/component/pages/hidefun/hidefun"
+      url: "/pages/shopsquare/shopsquare"
       
     });
   },

@@ -31,7 +31,7 @@ Page({
     c_title: '潮玩种草',
     c_arrow: true,
     c_backcolor: '#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
   },
 
 
@@ -214,6 +214,12 @@ Page({
   /**
    * 用户点击右上角分享
    */
+  onShareTimeline:function(){
+    return {
+      title:'潮玩社交平台',
+      query:{}    
+    }
+  },
   onShareAppMessage: function() {
 
   }

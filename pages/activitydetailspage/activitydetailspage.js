@@ -257,7 +257,7 @@ Page({
     c_title: '活动详情',
     c_arrow: true,
     c_backcolor: '#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     listBlindBox: [],
     listShowBox: [],
     listLotto:[],
@@ -2154,65 +2154,70 @@ closefrindcommoni:function(){
       _this.onLoadfun();
       return false;
     };
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // '已经授权'
-          _this.data.loginid = app.signindata.loginid;
-          _this.data.openid = app.signindata.openid;
-          _this.setData({
-            uid: app.signindata.uid,
-            avatarUrl: app.signindata.avatarUrl,
-            blackCity: app.signindata.blackCity,
-            defaultinformation: app.signindata.defaultinformation || '',
-            isProduce: app.signindata.isProduce,
-            isShareFun: app.signindata.isShareFun
-          });
-          // 判断是否登录
-          if (_this.data.loginid != '' && _this.data.uid != '') {
-            _this.onLoadfun();
-          } else {
-            app.signin(_this)
-          }
-        } else {
-          _this.detailfun();
-          wx.getUserInfo({
-            success: res => {
-              // 判断是否登录
-              if (_this.data.loginid != '' && _this.data.uid != '') {
-                _this.onLoadfun();
-              } else {
-                app.signin(_this);
-              }
-            },
-            fail: res => {
-              // '没有授权 统计'
-              if(_this.data.cs==1){
-                app.userstatistics(1000);
-              } else if (app.signindata.activity_type_share==1){
-                app.userstatistics(1001);
-              } else if (app.signindata.activity_type_share == 2){
-                app.userstatistics(1002);
-              }else{
-                app.userstatistics(5);
-              };
-              _this.setData({
-                tgabox: true
-              });
+    if(app.signindata.sceneValue==1154){
+      app.signindata.isProduce = true;  
+      _this.onLoadfun();
+    }else{
+      wx.getSetting({
+        success: res => {
+          if (res.authSetting['scope.userInfo']) {
+            // '已经授权'
+            _this.data.loginid = app.signindata.loginid;
+            _this.data.openid = app.signindata.openid;
+            _this.setData({
+              uid: app.signindata.uid,
+              avatarUrl: app.signindata.avatarUrl,
+              blackCity: app.signindata.blackCity,
+              defaultinformation: app.signindata.defaultinformation || '',
+              isProduce: app.signindata.isProduce,
+              isShareFun: app.signindata.isShareFun
+            });
+            // 判断是否登录
+            if (_this.data.loginid != '' && _this.data.uid != '') {
+              _this.onLoadfun();
+            } else {
+              app.signin(_this)
             }
-          });
-          // 统计新用户
-          var qqqqq=Dec.Aese('mod=share&operation=dotactivity'+'&referee='+app.signindata.referee+'&activity_id='+app.signindata.activity_id);
-          wx.request({
-            url: app.signindata.comurl + 'statistics.php' + qqqqq,
-            method: 'GET',
-            header: { 'Accept': 'application/json' },
-            success: function (res) {},
-            fail: function () { }
-          });
+          } else {
+            _this.detailfun();
+            wx.getUserInfo({
+              success: res => {
+                // 判断是否登录
+                if (_this.data.loginid != '' && _this.data.uid != '') {
+                  _this.onLoadfun();
+                } else {
+                  app.signin(_this);
+                }
+              },
+              fail: res => {
+                // '没有授权 统计'
+                if(_this.data.cs==1){
+                  app.userstatistics(1000);
+                } else if (app.signindata.activity_type_share==1){
+                  app.userstatistics(1001);
+                } else if (app.signindata.activity_type_share == 2){
+                  app.userstatistics(1002);
+                }else{
+                  app.userstatistics(5);
+                };
+                _this.setData({
+                  tgabox: true
+                });
+              }
+            });
+            // 统计新用户
+            var qqqqq=Dec.Aese('mod=share&operation=dotactivity'+'&referee='+app.signindata.referee+'&activity_id='+app.signindata.activity_id);
+            wx.request({
+              url: app.signindata.comurl + 'statistics.php' + qqqqq,
+              method: 'GET',
+              header: { 'Accept': 'application/json' },
+              success: function (res) {},
+              fail: function () { }
+            });
+          }
         }
-      }
-    });
+      });
+    };
   },
   // 授权
   clicktga:function(){
@@ -2296,6 +2301,16 @@ closefrindcommoni:function(){
   /**
    * 用户点击右上角分享
    */
+  onShareTimeline:function(){
+    var _this = this;
+    return {
+      title:_this.data.c_title || '潮玩社交平台',
+      query:{
+        'id': _this.data.id
+      }    
+    }
+  },
+
   onShareAppMessage: function (options) {
     var _this = this;
     _this.setData({ tgfrShareIftr:false});

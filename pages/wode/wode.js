@@ -74,7 +74,7 @@ Page({
     c_title: '',
     c_arrow: true,
     c_backcolor: '#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'), 
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90, 
     // 是否授权
     signinlayer:true,
     windowHeight: app.signindata.windowHeight - 65 - wx.getStorageSync('statusBarHeightMc')||0,
@@ -351,36 +351,40 @@ Page({
     wx.showLoading({ title: '加载中...', }) 
     // 判断是否授权 
     var _this = this;
-
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // '已经授权'
-          _this.data.loginid = app.signindata.loginid;
-          _this.setData({
-            uid: app.signindata.uid,
-            isProduce: app.signindata.isProduce,
-            signinlayer: true,
-            tgabox: false
-          });
-          // 判断是否登录
-          if (_this.data.loginid != '' && _this.data.uid != '') {
-            _this.onLoadfun();
+    if(app.signindata.sceneValue==1154){
+      app.signindata.isProduce = true;  
+      _this.onLoadfun();
+    }else{
+      wx.getSetting({
+        success: res => {
+          if (res.authSetting['scope.userInfo']) {
+            // '已经授权'
+            _this.data.loginid = app.signindata.loginid;
+            _this.setData({
+              uid: app.signindata.uid,
+              isProduce: app.signindata.isProduce,
+              signinlayer: true,
+              tgabox: false
+            });
+            // 判断是否登录
+            if (_this.data.loginid != '' && _this.data.uid != '') {
+              _this.onLoadfun();
+            } else {
+              app.signin(_this)
+            }
           } else {
-            app.signin(_this)
-          }
-        } else {
-          wx.hideLoading();
-          _this.setData({
-            bothidden: true,
-            signinlayer:false
-          }); 
-          // '没有授权 统计'
-          app.userstatistics(4);
+            wx.hideLoading();
+            _this.setData({
+              bothidden: true,
+              signinlayer:false
+            }); 
+            // '没有授权 统计'
+            app.userstatistics(4);
 
+          }
         }
-      }
-    });
+      });
+    };
   },
   // 授权点击统计
   clicktga: function () {
@@ -459,6 +463,13 @@ Page({
   onShareAppMessage: function () {
     return Dec.sharemc()    
   },
+  onShareTimeline:function(){
+    return {
+      title:'潮玩社交平台',
+      query:{}
+    }
+  },
+
   // 导航跳转
   whomepage: function () {
     wx.reLaunch({

@@ -20,7 +20,7 @@ Page({
     c_title: '美拆',
     c_arrow: true,
     c_backcolor: '#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
   },
 
   /**
@@ -75,6 +75,13 @@ Page({
   /**
    * 用户点击右上角分享
    */
+  onShareTimeline:function(){
+    var _this = this;
+    return {
+      title:_this.data.c_title || '潮玩社交平台',
+      query:{'webview':encodeURIComponent(_this.data.webview)}    
+    }
+  },
   onShareAppMessage: function () {
     var _this = this;
     var pageurl = '/page/component/pages/webview/webview?webview=' + encodeURIComponent(_this.data.webview) + "&imgurl=" + encodeURIComponent(_this.data.imgurl);

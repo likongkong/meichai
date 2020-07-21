@@ -19,7 +19,7 @@ Page({
     c_title: '选择话题',
     c_arrow: true,
     c_backcolor: '#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
   },
   /**
    * 生命周期函数--监听页面加载
@@ -114,5 +114,12 @@ Page({
   onShareAppMessage: function () {
     var reshare = Dec.sharemc();
     return reshare 
+  },
+  onShareTimeline:function(){
+    var _this = this;
+    return {
+      title:_this.data.c_title || '潮玩社交平台',
+      query:{}    
+    }
   },
 })

@@ -22,7 +22,7 @@ Page({
     c_arrow: true,
     c_backcolor: '#ff2742',
     page: 0,
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     bannerdata: [{
         img: 'https://www.51chaidan.com//data/afficheimg/chaiminghe.jpg'
       },

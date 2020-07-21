@@ -105,7 +105,7 @@ Page({
     c_title: '发起拆明盒',
     c_arrow: true,
     c_backcolor: '#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
 
     combinatorialLists: [],
     giftInfo: {},

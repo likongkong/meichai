@@ -33,7 +33,7 @@ Page({
     c_title: '搜索',
     c_arrow: true,
     c_backcolor: '#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
   },
   onFocus: function (w) {
     this.setData({
@@ -116,30 +116,33 @@ Page({
     var _this = this;
     this.selectComponent("#hide").getappData()
 
-
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // '已经授权'
-          _this.data.loginid = app.signindata.loginid;
-          _this.setData({
-            uid: app.signindata.uid,
-            avatarUrl: app.signindata.avatarUrl,
-            isProduce: app.signindata.isProduce,
-          });
-          // 判断是否登录
-          if (_this.data.loginid != '' && _this.data.uid != '') {
-            _this.onLoadfun();
+    if(app.signindata.sceneValue==1154){
+      app.signindata.isProduce = true;  
+      _this.onLoadfun();
+    }else{
+      wx.getSetting({
+        success: res => {
+          if (res.authSetting['scope.userInfo']) {
+            // '已经授权'
+            _this.data.loginid = app.signindata.loginid;
+            _this.setData({
+              uid: app.signindata.uid,
+              avatarUrl: app.signindata.avatarUrl,
+              isProduce: app.signindata.isProduce,
+            });
+            // 判断是否登录
+            if (_this.data.loginid != '' && _this.data.uid != '') {
+              _this.onLoadfun();
+            } else {
+              app.signin(_this)
+            }
           } else {
-            app.signin(_this)
+            _this.onLoadfun();
           }
-        } else {
-          _this.onLoadfun();
         }
-      }
-    });
+      });
 
-
+    };
 
     
   },
@@ -471,7 +474,12 @@ Page({
   onShareAppMessage: function () {
     return Dec.sharemc()    
   },
-
+  onShareTimeline:function(){
+    return {
+      title:'潮玩社交平台',
+      query:{}    
+    }
+  },
   recommend: function (w) {
     var gid = w.currentTarget.dataset.gid || w.target.dataset.gid;
     var _this = this

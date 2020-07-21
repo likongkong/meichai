@@ -35,7 +35,7 @@ Page({
     c_title: '在线抽盒机',
     c_arrow: true,
     c_backcolor: '#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
 
     list: [1, 1, 1, 1, 1, 1],
 
@@ -234,7 +234,9 @@ Page({
     // 端盒送实物
     whole_boxGift:'',
     wholeBoxGiftImg:'',
-    wholeBoxGiftInfo:{}
+    wholeBoxGiftInfo:{},
+    // 防止重复提交
+    pmc:true    
   },
   // 在线抽盒机
   bbevebox: function(event) {
@@ -373,41 +375,44 @@ Page({
       title: '加载中...',
     })
     _this.getHideBox()
-
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // '已经授权'
-          _this.data.loginid = app.signindata.loginid;
-          _this.data.openid = app.signindata.openid;
-          _this.setData({
-            uid: app.signindata.uid,
-            avatarUrl: app.signindata.avatarUrl,
-            isProduce: app.signindata.isProduce,
-            signinlayer: true,
-            isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
-          });
-          // 判断是否登录
-          if (_this.data.loginid != '' && _this.data.uid != '') {
-            _this.onLoadfun();
+    if(app.signindata.sceneValue==1154){
+      app.signindata.isProduce = true;  
+      _this.onLoadfun();
+    }else{
+      wx.getSetting({
+        success: res => {
+          if (res.authSetting['scope.userInfo']) {
+            // '已经授权'
+            _this.data.loginid = app.signindata.loginid;
+            _this.data.openid = app.signindata.openid;
+            _this.setData({
+              uid: app.signindata.uid,
+              avatarUrl: app.signindata.avatarUrl,
+              isProduce: app.signindata.isProduce,
+              signinlayer: true,
+              isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
+            });
+            // 判断是否登录
+            if (_this.data.loginid != '' && _this.data.uid != '') {
+              _this.onLoadfun();
+            } else {
+              app.signin(_this)
+            }
           } else {
-            app.signin(_this)
+            wx.hideLoading()
+            if (_this.data.isredpag==1){
+              app.userstatistics(41);
+            }else{
+              app.userstatistics(30);
+            }
+            _this.onLoadfun();
+            this.setData({
+              signinlayer: false,
+            })
           }
-        } else {
-          wx.hideLoading()
-          if (_this.data.isredpag==1){
-            app.userstatistics(41);
-          }else{
-            app.userstatistics(30);
-          }
-          _this.onLoadfun();
-          this.setData({
-            signinlayer: false,
-          })
         }
-      }
-    });
-
+      });
+    };
 
 
   },
@@ -1157,6 +1162,16 @@ Page({
   /**
    * 用户点击右上角分享
    */
+  onShareTimeline:function(){
+    var _this = this;
+    return {
+      title:_this.data.c_title || '潮玩社交平台',
+      query:{
+        'id': _this.data.id,
+        'gid':_this.data.gid
+      }    
+    }
+  },
   onShareAppMessage: function () {
     var _this = this
     if (_this.data.ishowpagInfo) {
@@ -2863,28 +2878,31 @@ Page({
     wx.showLoading({
       title: '开启中...',
     })
-
-    var q = Dec.Aese('mod=blindBox&operation=receiveWelfare&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&welfareId=' + welfareId)
-
-    wx.request({
-      url: app.signindata.comurl + 'spread.php' + q,
-      method: 'GET',
-      header: {
-        'Accept': 'application/json'
-      },
-      success: function (res) {
-        wx.hideLoading()
-        if (res.data.ReturnCode == 200) {
-          app.showToastC('领取成功');
-          _this.redpagInfo(welfareId)
-        } else {
-          app.showToastC(res.data.Msg);
-          _this.setData({
-            ishowredpackage: false,
-          })
+    
+    if(_this.data.pmc){
+      console.log('_this.data.pmc========',_this.data.pmc)
+      _this.data.pmc = false;
+      var q = Dec.Aese('mod=blindBox&operation=receiveWelfare&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&welfareId=' + welfareId)
+      wx.request({
+        url: app.signindata.comurl + 'spread.php' + q,
+        method: 'GET',
+        header: {'Accept': 'application/json'},
+        success: function (res) {
+          wx.hideLoading()
+          _this.data.pmc = true;
+          if (res.data.ReturnCode == 200) {
+            app.showToastC('领取成功');
+            _this.redpagInfo(welfareId)
+          } else {
+            app.showToastC(res.data.Msg);
+            _this.setData({
+              ishowredpackage: false,
+            })
+          }
         }
-      }
-    });
+      });
+    }
+
   },
 
   redpagInfo: function (welfareId) {

@@ -114,7 +114,7 @@ Page({
     c_title: '砍价',
     c_arrow: true,
     c_backcolor: '#ff6968',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     pushWay: 0,
 
     ishowAction:false,

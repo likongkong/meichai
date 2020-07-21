@@ -22,7 +22,7 @@ Page({
     c_title: '所在位置',
     c_arrow: true,
     c_backcolor: '#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
   },
   /**
    * 生命周期函数--监听页面加载

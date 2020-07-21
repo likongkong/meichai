@@ -50,7 +50,7 @@ Page({
     c_title: '',
     c_arrow: true,
     c_backcolor: '#5b94fd',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
   },
   // 获取手机号
   getPhoneNumber: function (e) {
