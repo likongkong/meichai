@@ -295,7 +295,7 @@ page {
 }
 .scrPurEve{
   height:150rpx;
-  line-height: 150rpx;
+  /* line-height: 150rpx; */
   text-align: center;
   width: 150rpx;
   background: #e94f57;
@@ -305,6 +305,13 @@ page {
   margin-left: 30rpx;
   display: inline-block;
   position: relative;
+}
+.scrPurEve>view{
+  margin-top: 40rpx;
+}
+.scrPurEve text{
+  display: block;
+  text-align: center;
 }
 .adhBannerVol{
   position: absolute;
@@ -630,3 +637,64 @@ page {
 }
 
 
+.worthSubsidiary{
+  width: 560rpx;
+  background: #ffffff;
+  position: absolute;
+  top: 200rpx;
+  border-radius: 10rpx;
+  z-index: 3;
+}
+.adcspecialPrice{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.adcspecialPrice image{
+  width: 280rpx;
+  border-radius: 10rpx;
+  height: 280rpx;
+  margin-bottom: 6rpx;
+  margin-top: 40rpx;
+}
+.adcspecialPrice text{
+  font-size: 24rpx;
+  color: #101010;
+  display: block;
+  text-align: center;
+}
+.otherPrice{
+  width: 480rpx;
+  border-top: 2rpx solid #bbb;
+  border-bottom: 2rpx solid #bbb;
+  margin-left: 40rpx;
+  margin-top: 20rpx;
+  padding: 20rpx 0;
+  box-sizing: border-box;
+}
+.otherPrice>view{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 24rpx;
+  box-sizing: border-box;
+  margin-bottom: 20rpx;
+}
+.otherPrice>view:last-child{
+  margin-bottom: 0;
+}
+.otherPrice>view text{
+  font-size: 24rpx;
+  color: #101010;
+}
+.totalPrice{
+  width: 480rpx;
+  margin-left: 40rpx;
+  display: flex;
+  justify-content: space-between;
+  padding: 40rpx 0;
+  box-sizing: border-box;
+}
+.totalPrice text{
+  font-size: 24rpx;
+  color: #101010;
+}
