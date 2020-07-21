@@ -57,8 +57,10 @@
           </view>
           <view class="adcspenum">共1个</view>
           <view class="adcspename multilineellipsis">{{finalReward.title}}</view>
-          <!-- <view class="adcspencxy">超稀有!</view> -->
-          <view class="adcspencxy">价值：￥199</view>
+          <view class="adcspencxy">
+             <block wx:if='{{finalReward.isShowPrice}}'>价值:￥{{finalReward.shop_price}}</block>
+             <block wx:else>超稀有!</block>
+          </view>
           <view class="adcspenum">买走最后一个周边立即拥有</view>
       </view>   
       <view class="adcweve" style="border-left: 4rpx dashed #f5f6fa;height:{{finalReward.height<500?500:finalReward.height}}rpx;border-top: 4rpx dashed #000;">
@@ -89,7 +91,7 @@
                 </view>
                 <image catchtap="iftrdetailpagen" data-index='{{index}}' data-num='{{num}}' data-is_buy='{{w.is_buy}}' data-goods_id='{{w.goods_id}}' class="adcweveimg" src="{{w.img}}" mode='widthFix'></image>
                 <view class="adcwevename multilineellipsis">
-                    <text style="color: #ff2742;">价值：￥99</text>
+                    <text style="color: #ff2742;" wx:if='{{w.isShowPrice}}'>价值:￥{{w.shop_price}}</text>
                     {{w.title}}
                 </view>
             </view>
@@ -129,63 +131,58 @@
 </view>
 
 <!-- 刮奖购买 -->
-<view class="wsh" catchtouchmove="true" wx:if='{{scrapingPur&&activity.suplusNum>0}}' style=" display: flex;justify-content: center;">
+<view class="wsh" catchtouchmove="true" wx:if='{{scrapingPur&&activity.suplusNum>0}}'>
    <view class="tgimgboxgb" catchtap="scrapingPurfun"></view>
 
     <view class="worthSubsidiary" >
         <view class="adcspecialPrice">
             <view>
-                <image src="https://cdn.51chaidan.com/images/201908/thumb_img/32756_thumb_G_1565840996518.jpg" mode="aspectFill"></image>
-                <text>最终赏 价值600</text>
+                <image src="{{finalReward.img}}" mode="aspectFill" mode='aspectFit'></image>
+                <text><block wx:if='{{finalReward.isShowPrice}}'>价值:￥{{finalReward.shop_price}}</block><block wx:else>超稀有!</block></text>
             </view>
         </view>
-        <view class="otherPrice">
-            <view>
-                <text>D赏</text>
-                <text>价值：暂无价值</text>
-            </view>
-            <view>
-                <text>F赏</text>
-                <text>价值：￥39 * 2</text>
-            </view>
-            <view>
-                <text>G赏</text>
-                <text>价值：￥39 * 2</text>
-            </view>
-            <view>
-                <text>G赏</text>
-                <text>价值：￥39 * 2</text>
-            </view>
-        </view>
+        <scroll-view scroll-y="true" class="otherPrice">
+            <view wx:for='{{goodsdata}}' wx:key='key' style="overflow: hidden;margin-bottom:10rpx;" wx:if='{{item.gear!="终"}}'>
+                <view class="otherPricecom">{{item.gear}}赏</view>
+                <view class="otherPricecom" style="float:right;">
+                    <view class="otherPriceRight">价值:</view>
+                    <view class="otherPriceRight specialellipsis" style="width:130rpx;text-align:right;">
+                       <block wx:if='{{item.isShowPrice}}'>￥{{item.shop_price}}x{{item.suplus}}</block><block wx:else>暂无价值</block>
+                    </view>
+                </view>
+            </view> 
+
+        </scroll-view>
+
         <view class="totalPrice">
-            <text>剩余17抽</text>
-            <text>总价值：￥1002+</text>
+            <text>剩余{{activity.suplusNum}}抽</text>
+            <text>总价值:<block wx:if='{{activity.total_value}}'>￥{{activity.total_value}}</block><block wx:else>暂无价值</block>+</text>
         </view>
     </view>
 
    <view class="scrapingPurchase">
       <view class="scrapPurtime">刮卡剩余时间:{{remaintime}}s</view>
       <view class="scrPurEve" catchtap="{{!is_finish?'placeAnOrder':''}}" data-number='0'><view class="adhcevehbg" wx:if='{{is_finish}}'></view>
-        <view>
-            <text>￥663</text>
+        <view class="scrOutBox">
+            <text style="margin-bottom:6rpx;">￥{{activity.suplusNum*activity.shopPrice}}</text>
             <text>全收</text>
         </view>
       </view>
       <view class="scrPurEve" catchtap="{{activity.suplusNum>=10?'placeAnOrder':''}}" data-number='10'><view class="adhcevehbg" wx:if='{{activity.suplusNum<10}}'></view>
-        <view>
-            <text>￥390</text>
+        <view class="scrOutBox">
+            <text style="margin-bottom:6rpx;">￥{{10*activity.shopPrice}}</text>
             <text>刮10张</text>
         </view>
       </view>
       <view class="scrPurEve" catchtap="{{activity.suplusNum>=3?'placeAnOrder':''}}" data-number='3'><view class="adhcevehbg" wx:if='{{activity.suplusNum<3}}'></view>
-        <view>
-            <text>￥177</text>
+        <view class="scrOutBox">
+            <text style="margin-bottom:6rpx;">￥{{3*activity.shopPrice}}</text>
             <text>刮3张</text>
         </view>
       </view>
       <view class="scrPurEve" catchtap="{{!is_finish?'placeAnOrder':''}}" data-number='1'><view class="adhcevehbg" wx:if='{{is_finish}}'></view>
-        <view>
-            <text>￥39</text>
+        <view class="scrOutBox">
+            <text style="margin-bottom:6rpx;">￥{{activity.shopPrice}}</text>
             <text>刮1张</text>
         </view>
       </view>
@@ -320,10 +317,8 @@
 
 <!-- 幸运值 -->
 
-<view class="aRDLuckyValue"></view>
-
 <!-- ishowredpackage -->
-<view wx:if='{{ishowredpackage}}' style="width:100%;height:100%;position:fixed;top:0px;left:0;z-index:13;">
+<view wx:if='{{ishowredpackage}}' catchtouchmove="true" style="width:100%;height:100%;position:fixed;top:0px;left:0;z-index:13;">
 	<view class='bgstyle' style="background:white" catchtouchmove="myCatchTouch" catchtap="hidepackage"></view>
 
 
@@ -368,7 +363,7 @@
 
 </view>
 
-<view wx:if='{{ishowpagInfo}}' style="width:100%;height:100%;position:fixed;top:0px;left:0;z-index:13;">
+<view wx:if='{{ishowpagInfo}}' catchtouchmove="true" style="width:100%;height:100%;position:fixed;top:0px;left:0;z-index:13;">
 	<view class='bgstyle' style="background:white" catchtouchmove="myCatchTouch" catchtap="closepagInfo"></view>
 	<view class="redbg">
 		<view style="width:100%;height:370rpx;background:#d14e46;border-radius:20rpx;">

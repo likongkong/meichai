@@ -306,8 +306,8 @@ page {
   display: inline-block;
   position: relative;
 }
-.scrPurEve>view{
-  margin-top: 40rpx;
+.scrPurEve .scrOutBox{
+  margin-top: 35rpx;
 }
 .scrPurEve text{
   display: block;
@@ -774,23 +774,25 @@ page {
 }
 .worthSubsidiary{
   width: 560rpx;
+  height: 730rpx;
   background: #ffffff;
   position: absolute;
-  top: 200rpx;
+  top:400rpx;
+  left: 0;
+  right: 0;
+  margin: auto;
   border-radius: 10rpx;
   z-index: 3;
 }
 .adcspecialPrice{
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
 }
 .adcspecialPrice image{
   width: 280rpx;
   border-radius: 10rpx;
   height: 280rpx;
-  margin-bottom: 6rpx;
-  margin-top: 40rpx;
+  margin: 40rpx auto 6rpx;
+  display: block;
 }
 .adcspecialPrice text{
   font-size: 24rpx;
@@ -802,10 +804,9 @@ page {
   width: 480rpx;
   border-top: 2rpx solid #bbb;
   border-bottom: 2rpx solid #bbb;
-  margin-left: 40rpx;
-  margin-top: 20rpx;
+  margin:20rpx auto 0;
   padding: 20rpx 0;
-  box-sizing: border-box;
+  height: 230rpx;
 }
 .otherPrice>view{
   display: flex;
@@ -826,10 +827,19 @@ page {
   margin-left: 40rpx;
   display: flex;
   justify-content: space-between;
-  padding: 40rpx 0;
+  padding: 20rpx 0;
   box-sizing: border-box;
 }
 .totalPrice text{
   font-size: 24rpx;
   color: #101010;
+}
+.otherPricecom{
+  font-size: 24rpx;
+  color: #101010;
+  float: left;
+}
+.otherPriceRight{
+  display: inline-block;
+  vertical-align: top;
 }
