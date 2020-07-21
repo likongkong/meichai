@@ -57,7 +57,8 @@
           </view>
           <view class="adcspenum">共1个</view>
           <view class="adcspename multilineellipsis">{{finalReward.title}}</view>
-          <view class="adcspencxy">超稀有!</view>
+          <!-- <view class="adcspencxy">超稀有!</view> -->
+          <view class="adcspencxy">价值：￥199</view>
           <view class="adcspenum">买走最后一个周边立即拥有</view>
       </view>   
       <view class="adcweve" style="border-left: 4rpx dashed #f5f6fa;height:{{finalReward.height<500?500:finalReward.height}}rpx;border-top: 4rpx dashed #000;">
@@ -87,7 +88,10 @@
                     </view>
                 </view>
                 <image catchtap="iftrdetailpagen" data-index='{{index}}' data-num='{{num}}' data-is_buy='{{w.is_buy}}' data-goods_id='{{w.goods_id}}' class="adcweveimg" src="{{w.img}}" mode='widthFix'></image>
-                <view class="adcwevename multilineellipsis">{{w.title}}</view>
+                <view class="adcwevename multilineellipsis">
+                    <text style="color: #ff2742;">价值：￥99</text>
+                    {{w.title}}
+                </view>
             </view>
         </view>
 
@@ -125,14 +129,66 @@
 </view>
 
 <!-- 刮奖购买 -->
-<view class="wsh" catchtouchmove="true" wx:if='{{scrapingPur&&activity.suplusNum>0}}'>
+<view class="wsh" catchtouchmove="true" wx:if='{{scrapingPur&&activity.suplusNum>0}}' style=" display: flex;justify-content: center;">
    <view class="tgimgboxgb" catchtap="scrapingPurfun"></view>
+
+    <view class="worthSubsidiary" >
+        <view class="adcspecialPrice">
+            <view>
+                <image src="https://cdn.51chaidan.com/images/201908/thumb_img/32756_thumb_G_1565840996518.jpg" mode="aspectFill"></image>
+                <text>最终赏 价值600</text>
+            </view>
+        </view>
+        <view class="otherPrice">
+            <view>
+                <text>D赏</text>
+                <text>价值：暂无价值</text>
+            </view>
+            <view>
+                <text>F赏</text>
+                <text>价值：￥39 * 2</text>
+            </view>
+            <view>
+                <text>G赏</text>
+                <text>价值：￥39 * 2</text>
+            </view>
+            <view>
+                <text>G赏</text>
+                <text>价值：￥39 * 2</text>
+            </view>
+        </view>
+        <view class="totalPrice">
+            <text>剩余17抽</text>
+            <text>总价值：￥1002+</text>
+        </view>
+    </view>
+
    <view class="scrapingPurchase">
       <view class="scrapPurtime">刮卡剩余时间:{{remaintime}}s</view>
-      <view class="scrPurEve" catchtap="{{!is_finish?'placeAnOrder':''}}" data-number='0'><view class="adhcevehbg" wx:if='{{is_finish}}'></view>全收</view>
-      <view class="scrPurEve" catchtap="{{activity.suplusNum>=10?'placeAnOrder':''}}" data-number='10'><view class="adhcevehbg" wx:if='{{activity.suplusNum<10}}'></view>刮10张</view>
-      <view class="scrPurEve" catchtap="{{activity.suplusNum>=3?'placeAnOrder':''}}" data-number='3'><view class="adhcevehbg" wx:if='{{activity.suplusNum<3}}'></view>刮3张</view>
-      <view class="scrPurEve" catchtap="{{!is_finish?'placeAnOrder':''}}" data-number='1'><view class="adhcevehbg" wx:if='{{is_finish}}'></view>刮1张</view>
+      <view class="scrPurEve" catchtap="{{!is_finish?'placeAnOrder':''}}" data-number='0'><view class="adhcevehbg" wx:if='{{is_finish}}'></view>
+        <view>
+            <text>￥663</text>
+            <text>全收</text>
+        </view>
+      </view>
+      <view class="scrPurEve" catchtap="{{activity.suplusNum>=10?'placeAnOrder':''}}" data-number='10'><view class="adhcevehbg" wx:if='{{activity.suplusNum<10}}'></view>
+        <view>
+            <text>￥390</text>
+            <text>刮10张</text>
+        </view>
+      </view>
+      <view class="scrPurEve" catchtap="{{activity.suplusNum>=3?'placeAnOrder':''}}" data-number='3'><view class="adhcevehbg" wx:if='{{activity.suplusNum<3}}'></view>
+        <view>
+            <text>￥177</text>
+            <text>刮3张</text>
+        </view>
+      </view>
+      <view class="scrPurEve" catchtap="{{!is_finish?'placeAnOrder':''}}" data-number='1'><view class="adhcevehbg" wx:if='{{is_finish}}'></view>
+        <view>
+            <text>￥39</text>
+            <text>刮1张</text>
+        </view>
+      </view>
    </view>
 </view>
 
