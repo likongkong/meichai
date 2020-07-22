@@ -2862,10 +2862,11 @@ Page({
   onShareTimeline:function(){
     var _this = this;
     return {
-      title:_this.data.c_title || '潮玩社交平台',
+      title:_this.data.zunmdata.gname,
       query:{
         'gid':_this.data.gid
-      }    
+      },
+      imageUrl:'https://cdn.51chaidan.com'+_this.data.zunmdata.goods_share 
     }
   },
   onShareAppMessage: function (options) {

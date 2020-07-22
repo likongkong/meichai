@@ -41,6 +41,8 @@ App({
     token: "",
     // 用户头像图片
     avatarUrl: '',
+    // 用户名称
+    nickName:'',
     share_source: 1,
     modelData: '',
     systemData: '',
@@ -109,6 +111,7 @@ App({
             _this.signindata.avatarUrl = res.userInfo.avatarUrl;
             wx.setStorageSync('image_cache', '')
             var nicname = res.userInfo.nickName;
+            _this.signindata.nickName = res.userInfo.nickName;
             var iconsex = res.userInfo.gender;
             var encryptedData = res.encryptedData;
             _this.signindata.userInfo = res.userInfo;

@@ -299,7 +299,16 @@ Page({
 
     return share;
   },
-
+  onShareTimeline:function(){
+    var _this = this;
+    return {
+      title:_this.data.activity.name,
+      query:{
+        id:_this.data.id
+      },
+      imageUrl:_this.data.activity.cover
+    }
+  },
   howToPlayFun:function(){
      this.setData({
         isHowToPlay:!this.data.isHowToPlay
@@ -1072,13 +1081,6 @@ Page({
     wx.navigateTo({   
       url: "/page/secondpackge/pages/aRewardHistory/aRewardHistory?id="+this.data.id
     });     
-  },
-  onShareTimeline:function(){
-    var _this = this;
-    return {
-      title:_this.data.c_title || '潮玩社交平台',
-      query:{id:_this.data.id}    
-    }
   },
   // 跳转列表
   jumpaRewardList:function(){

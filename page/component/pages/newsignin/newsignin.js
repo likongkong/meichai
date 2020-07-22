@@ -528,8 +528,9 @@ Page({
   onShareTimeline:function(){
     var _this = this;
     return {
-      title:_this.data.c_title || '潮玩社交平台',
-      query:{}    
+      title:'我在签到领盲盒，送你们随机款式x3，一起互换卡片吧',
+      query:{},
+      imageUrl:_this.data.signinfo.goods_share 
     }
   },
   onShareAppMessage: function () {

@@ -301,10 +301,11 @@ Page({
   onShareTimeline:function(){
     var _this = this;
     return {
-      title:_this.data.c_title || '潮玩社交平台',
+      title:'这个活动真给力！每周购买5件商品，瓜分2000个盲盒。',
       query:{
         'pushWay': _this.data.pushWay||''
-      }    
+      },
+      imageUrl: 'https://cdn.51chaidan.com/images/sign/manghe.jpg'
     }
   },
   // 关闭保存图片上传图片

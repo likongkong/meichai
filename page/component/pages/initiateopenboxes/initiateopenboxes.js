@@ -780,6 +780,17 @@ Page({
   /**
    * 用户点击右上角分享
    */
+  onShareTimeline:function(){
+    var _this = this;
+    return {
+      title:_this.data.c_title || '潮玩社交平台',
+      query:{
+        'gid':_this.data.infoActivity.goods_id,
+        'id':_this.data.infoActivity.id
+      },
+      imageUrl: _this.data.infoActivity.cover
+    }
+  },
   onShareAppMessage: function(options) {
     var _this = this;
     var share = {

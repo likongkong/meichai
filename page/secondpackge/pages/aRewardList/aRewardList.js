@@ -134,8 +134,9 @@ Page({
   onShareTimeline:function(){
     var _this = this;
     return {
-      title:_this.data.c_title || '潮玩社交平台',
-      query:{}
+      title:'来美拆一番赏，一发入魂，抢战最终手办大赏',
+      query:{},
+      imageUrl: 'https://cdn.51chaidan.com/images/sign/yifanshangShareImg.jpg'
     }
   },
 })

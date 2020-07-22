@@ -2304,13 +2304,13 @@ closefrindcommoni:function(){
   onShareTimeline:function(){
     var _this = this;
     return {
-      title:_this.data.c_title || '潮玩社交平台',
+      title:'免费送你'+_this.data.commoddata.name,
       query:{
         'id': _this.data.id
-      }    
+      },
+      imageUrl:_this.data.commoddata.cover
     }
   },
-
   onShareAppMessage: function (options) {
     var _this = this;
     _this.setData({ tgfrShareIftr:false});
