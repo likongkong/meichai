@@ -533,7 +533,6 @@
               订阅提醒
         </view>
 
-
       </view>
     </view>   
 </block>
@@ -564,9 +563,20 @@
           </text>
         </view>     
     </block>
-		<view class="footer-child large turn" style='height:60rpx;margin-top:9rpx;padding:0;width:200rpx;margin-right:40rpx;background:#f8b21d;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' wx:if='{{zunmdata.status==1&&subscribedata}}' catchtap='subscrfun'>
-			开售提醒<view class="coupposi" wx:if='{{isSubscribeCoupon}}'>订阅送优惠券</view>
-		</view>
+    <!-- 跳转直播间 -->
+    <block wx:if='{{zunmdata.liveShowRoomId&&zunmdata.status!=1}}'>
+      <view class="footer-child large turn" style='height:60rpx;margin-top:9rpx;padding:0;width:200rpx;margin-right:40rpx;background:#f8b21d;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' catchtap="livebroadcast">
+        直播间
+        <!-- <navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{zunmdata.liveShowRoomId}}" style='position: absolute;height:100%;width:100%;{{w.status==102?"right:250":"left:0"}}rpx;top:0;z-index:3;'></navigator> -->
+      </view>
+    </block>
+    <block wx:else>
+      <view class="footer-child large turn" style='height:60rpx;margin-top:9rpx;padding:0;width:200rpx;margin-right:40rpx;background:#f8b21d;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' wx:if='{{zunmdata.status==1&&subscribedata}}' catchtap='subscrfun'>
+        开售提醒<view class="coupposi" wx:if='{{isSubscribeCoupon}}'>订阅送优惠券</view>
+      </view>    
+    </block>
+
+
 	</view>
 </block>
 

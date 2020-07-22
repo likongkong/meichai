@@ -43,7 +43,7 @@
 
 
 .recordbox .time{
-  width: 250rpx;
+  width: 260rpx;
   font-size: 24rpx;
   float: right;
 }

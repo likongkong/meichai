@@ -134,20 +134,22 @@
 <view class="wsh" catchtouchmove="true" wx:if='{{scrapingPur&&activity.suplusNum>0}}'>
    <view class="tgimgboxgb" catchtap="scrapingPurfun"></view>
 
-    <view class="worthSubsidiary" >
+    <view class="worthSubsidiary">
         <view class="adcspecialPrice">
             <view>
                 <image src="{{finalReward.img}}" mode="aspectFill" mode='aspectFit'></image>
-                <text><block wx:if='{{finalReward.isShowPrice}}'>价值:￥{{finalReward.shop_price}}</block><block wx:else>超稀有!</block></text>
+                <text>最终赏  <block wx:if='{{finalReward.isShowPrice}}'>价值:￥{{finalReward.shop_price}}</block><block wx:else>超稀有!</block></text>
             </view>
         </view>
         <scroll-view scroll-y="true" class="otherPrice">
-            <view wx:for='{{goodsdata}}' wx:key='key' style="overflow: hidden;margin-bottom:10rpx;" wx:if='{{item.gear!="终"}}'>
+            <view wx:for='{{goodsdata}}' wx:key='key' style="overflow: hidden;margin-bottom:10rpx;height:32rpx;" wx:if='{{item.gear!="终"}}'>
                 <view class="otherPricecom">{{item.gear}}赏</view>
                 <view class="otherPricecom" style="float:right;">
                     <view class="otherPriceRight">价值:</view>
                     <view class="otherPriceRight specialellipsis" style="width:130rpx;text-align:right;">
-                       <block wx:if='{{item.isShowPrice}}'>￥{{item.shop_price}}x{{item.suplus}}</block><block wx:else>暂无价值</block>
+                       <block wx:if='{{item.suplus==0}}'>抢光了</block>
+                       <block wx:elif='{{item.isShowPrice}}'>￥{{item.shop_price}}x{{item.suplus}}</block>
+                       <block wx:else>暂无价值</block>
                     </view>
                 </view>
             </view> 

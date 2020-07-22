@@ -16,7 +16,100 @@ Page({
     signinlayer: true,
     tgabox:false,
     loginid: app.signindata.loginid,
-    uid: app.signindata.uid,    
+    uid: app.signindata.uid,  
+    movies:[
+      {
+        href: "33817", 
+        image: "https://cdn.51chaidan.com//data/afficheimg/33817.jpg", 
+        type: "1", 
+        title: "咪咪嘎嘎吊卡", 
+        item_type: "1"
+      }
+    ],
+    dateDate:[{'id':1,name:'8月7日'},{'id':2,name:'8月8日'},{'id':3,name:'8月9日'}],
+    checkid:1,
+    imgdata:[
+      {
+        src:'https://cdn.51chaidan.com//images/hiddenFragments/1580710232.png',
+        name:'08.17 18:00抽签'
+      },
+      {
+        src:'https://cdn.51chaidan.com/images/spread/blindBox/34325_5_1594984147.jpg',
+        name:'08.17 18:00抽签08.17 18:00抽签'
+      },
+      {
+        src:'https://cdn.51chaidan.com/images/spread/blindBox/33719_56_1588063522.jpg',
+        name:'08.17 18:00抽签08.17 18:00抽签08.17 18:00抽签'
+      },
+      {
+        src:'https://cdn.51chaidan.com/images/202007/thumb_img/34326_thumb_G_1594969369893.jpg',
+        name:'08.17 18:00抽签08.17 18:00抽签08.17 18:00抽签'
+      },
+      {
+        src:'https://cdn.51chaidan.com/images/spread/blindBox/34325_5_1594984147.jpg',
+        name:'08.17 18:00抽签08.17 18:00抽签'
+      },
+      {
+        src:'https://cdn.51chaidan.com/images/spread/blindBox/33719_56_1588063522.jpg',
+        name:'08.17 18:00抽签08.17 18:00抽签08.17 18:00抽签'
+      },
+      {
+        src:'https://cdn.51chaidan.com/images/202007/thumb_img/34326_thumb_G_1594969369893.jpg',
+        name:'08.17 18:00抽签08.17 18:00抽签08.17 18:00抽签'
+      },
+      {
+        src:'https://cdn.51chaidan.com/images/spread/blindBox/34325_5_1594984147.jpg',
+        name:'08.17 18:00抽签08.17 18:00抽签'
+      },
+      {
+        src:'https://cdn.51chaidan.com/images/spread/blindBox/33719_56_1588063522.jpg',
+        name:'08.17 18:00抽签08.17 18:00抽签08.17 18:00抽签'
+      },
+      {
+        src:'https://cdn.51chaidan.com/images/202007/thumb_img/34326_thumb_G_1594969369893.jpg',
+        name:'08.17 18:00抽签08.17 18:00抽签08.17 18:00抽签'
+      },
+      {
+        src:'https://cdn.51chaidan.com/images/spread/blindBox/34325_5_1594984147.jpg',
+        name:'08.17 18:00抽签08.17 18:00抽签'
+      },
+      {
+        src:'https://cdn.51chaidan.com/images/spread/blindBox/33719_56_1588063522.jpg',
+        name:'08.17 18:00抽签08.17 18:00抽签08.17 18:00抽签'
+      },
+      {
+        src:'https://cdn.51chaidan.com/images/202007/thumb_img/34326_thumb_G_1594969369893.jpg',
+        name:'08.17 18:00抽签08.17 18:00抽签08.17 18:00抽签'
+      },
+      {
+        src:'https://cdn.51chaidan.com/images/spread/blindBox/34325_5_1594984147.jpg',
+        name:'08.17 18:00抽签08.17 18:00抽签'
+      },
+      {
+        src:'https://cdn.51chaidan.com/images/spread/blindBox/33719_56_1588063522.jpg',
+        name:'08.17 18:00抽签08.17 18:00抽签08.17 18:00抽签'
+      },
+      {
+        src:'https://cdn.51chaidan.com/images/202007/thumb_img/34326_thumb_G_1594969369893.jpg',
+        name:'08.17 18:00抽签08.17 18:00抽签08.17 18:00抽签'
+      }
+    ]
+  },
+  clickcheck:function(w){
+    var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
+    this.setData({
+      checkid:id
+    })
+  },
+  // banner 跳转
+  jumpbanner: function (w) {
+    var whref = w.currentTarget.dataset.href || w.target.dataset.href;
+    var item_type = w.currentTarget.dataset.item_type || w.target.dataset.item_type||0;
+    var imgurl = w.currentTarget.dataset.imgurl || w.target.dataset.imgurl || '';
+    var wname = w.currentTarget.dataset.title || w.target.dataset.title || '美拆'; 
+    // 公共跳转
+    app.comjumpwxnav(item_type, whref, wname, imgurl);
+
   },
   upload: function(){
     var _this = this;
@@ -28,8 +121,8 @@ Page({
     // 先选择文件，得到临时路径
     wx.chooseImage({
       count: 1, // 默认9
-      sizeType: ['original'], // 可以指定是原图还是压缩图，默认用原图
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      sizeType: ['compressed'], // 可以指定是原图original还是压缩图compressed，默认用原图
+      sourceType: ['camera'], // 'album'相册  camera 相机
       success: function (res) {
           console.log(res)
           var filePath = res.tempFiles[0].path;

@@ -215,11 +215,36 @@ Page({
         if (res.data.ReturnCode == 200) {
           var listdata = res.data.List.series || [];
           if (listdata.length != 0) {
+              var tabselid = '';
+              for(var i=0;i<listdata.length;i++){
+                if(listdata[i].id == bid){
+                  tabselid = listdata[i].id || '';
+                };
+              };
+              if(tabselid==''){
+                tabselid = listdata[0].id
+              }
              _this.setData({
                brandscroll: listdata,
-               tabselid: listdata[0].id
+               tabselid: tabselid
+             },function(){
+               if(tabselid!=listdata[0].id){
+                  var query = wx.createSelectorQuery();
+                  //选择id
+                  query.select('#q' + tabselid).boundingClientRect();
+                  query.exec(function (res) {
+                    console.log(res)
+                    if (res && res[0]) {
+                      if (res[0].width) {
+                        _this.setData({
+                          scrollleft: res[0].left - wx.getSystemInfoSync().windowWidth / 2 + 70 + (res[0].width / 2)
+                        });
+                      };
+                    }
+                  });
+               };
              });
-             _this.brandscrollfun(listdata[0].id);
+             _this.brandscrollfun(tabselid);
           } else {
             app.showToastC('暂无更多数据');
           };
