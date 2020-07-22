@@ -109,6 +109,12 @@ Page({
     is_formaldress:false,
     judgeLoadData:true
   },
+  // 临时展会授权
+  togation:function(e){
+    this.setData({
+      tgabox:true
+    })
+  },  
   doubleEleven: function () {
     var _this = this;
     wx.navigateTo({
@@ -224,14 +230,14 @@ Page({
       // url: "/page/component/pages/exhibitiondetail/exhibitiondetail?id=43161"
       // url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
       // url: "/page/secondpackge/pages/brandDetails/brandDetails?id=140"
-      // url: "/pages/detailspage/detailspage?gid=331669"
-      // url: "/pages/smokebox/smokebox?gid=340701"
+      // url: "/pages/detailspage/detailspage?gid=34391"
+      // url: "/pages/smokebox/smokebox?gid=331671"
       // url: "/page/component/pages/playgrasslist/playgrasslist"
       // url: "/page/secondpackge/pages/detailSimgEffects/detailSimgEffects?gid=32852"
-      // url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails"
+      url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=105883"
       // url: "/page/secondpackge/pages/aRewardList/aRewardList"
       // url: "/page/component/pages/hidefun/hidefun"
-      url: "/pages/shopsquare/shopsquare"
+      // url: "/pages/shopsquare/shopsquare"
       
     });
   },

@@ -63,18 +63,240 @@ Page({
     orderid:null,
     //是否加载刮卡记录组件
     isHistory:false,
+    // 幸运值
+    welfare: [],
+    redpagList: [],
+    ishowredpackage: false,
+    firstshowredpag: true,
+    ishowpagInfo: false,
+    welfareInfo: "",
+    welfareList: [],
+    isharepag: false,
+    isredshare: false,
+    welfareid: 0,
+    isredpag: 0,
+    redpagshareimg: "http://www.51chaidan.com/images/blindBox/halfPackage.jpg",
+    ishowsurebuy: false,
+    wwheight: app.signindata.windowHeight,
+    isheavyroll: false, // 点击了重抽
+    rollbefore: "",
+    rollbelater: "",
+    isallready: false,
+    istipsure: false,
+    israysure: false,
+    framtop: (app.signindata.windowHeight - 400) / 2,
+    pmc:true
   },
 
+  // 幸运值
+  drawredpagshare: function (ind) {
+    var _this = this
+    var info = _this.data.redpagList[ind]
+    wx.getImageInfo({
+      src: "https://www.51chaidan.com/images/blindBox/halfPackage.jpg",
+      success: function (res) {
+        const ctxt = wx.createCanvasContext('redpagshare');
+        ctxt.drawImage(res.path, 0, 0, 300, 240)
+        wx.getImageInfo({
+          src: info.roleImg,
+          success: function (res) {
+            var radio = res.width / res.height;
+            var width = 120 * radio;
+            if(width>=120){
+              var widthOther = 90 * radio;
+              ctxt.drawImage(res.path, 25, 25, widthOther, 90)
+            }else{
+              ctxt.drawImage(res.path, 25, 25, width, 120)
+            }
+            
+
+            ctxt.setFontSize(25);
+            ctxt.setFillStyle('#f0ca97');
+            if (info.welfareType == 1) {
+              ctxt.fillText("隐藏红包", 155, 60);
+              ctxt.fillText(parseInt(info.limitAmount) + "元", 167, 90);
+              ctxt.fillText("隐藏红包", 155, 60.5);
+              ctxt.fillText(parseInt(info.limitAmount) + "元", 167.5, 90);
+            } else {
+              ctxt.fillText("幸运值红包", 135, 60);
+              ctxt.fillText(parseInt(info.limitAmount) + "点", 160, 90);
+              ctxt.fillText("幸运值红包", 135, 60.5);
+              ctxt.fillText(parseInt(info.limitAmount) + "点", 160.5, 90);
+            }
+            ctxt.draw(true, setTimeout(function () {
+              wx.canvasToTempFilePath({
+                canvasId: 'redpagshare',
+                success: function (res) {
+                  _this.setData({
+                    redpagshareimg: res.tempFilePath
+                  })
+                },
+                fail: function (res) {},
+              });
+            }, 300));
+
+          }
+        })
+
+      }
+    })
+  },
+  openpackage: function (w) {
+    var _this = this;
+    var id = w.currentTarget.dataset.mid;
+    var isget = w.currentTarget.dataset.isget;
+    var samount = w.currentTarget.dataset.samount;
+    var ind = w.currentTarget.dataset.ind;
+    _this.drawredpagshare(ind)
+    if (!isget || (samount && samount == 0)) {
+      _this.openredpackage(id)
+      _this.setData({
+        welfareid: id,
+        redpagind: ind,
+      })
+    } else {
+      _this.redpagInfo(id)
+      _this.setData({
+        welfareid: id,
+        redpagind: ind,
+      })
+    }
+
+  },
+  mmm: function () {
+
+  },
+  openredpackage: function (welfareId) {
+    var _this = this;
+    wx.showLoading({
+      title: '开启中...',
+    })
+    
+    if(_this.data.pmc){
+      console.log('_this.data.pmc========',_this.data.pmc)
+      _this.data.pmc = false;
+      var q = Dec.Aese('mod=blindBox&operation=receiveWelfare&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&welfareId=' + welfareId)
+      wx.request({
+        url: app.signindata.comurl + 'spread.php' + q,
+        method: 'GET',
+        header: {'Accept': 'application/json'},
+        success: function (res) {
+          wx.hideLoading()
+          _this.data.pmc = true;
+          if (res.data.ReturnCode == 200) {
+            app.showToastC('领取成功');
+            _this.redpagInfo(welfareId)
+          } else {
+            app.showToastC(res.data.Msg);
+            _this.setData({
+              ishowredpackage: false,
+            })
+          }
+        }
+      });
+    }
+
+  },
+
+  redpagInfo: function (welfareId) {
+    var _this = this
+    wx.showLoading({
+      title: '加载中...',
+    })
+    var q = Dec.Aese('mod=blindBox&operation=getWelfareDetail&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&welfareId=' + welfareId)
+
+    wx.request({
+      url: app.signindata.comurl + 'spread.php' + q,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        console.log('领取红包=========',res)
+        wx.hideLoading()
+        if (res.data.ReturnCode == 200) {
+          _this.setData({
+            ishowredpackage: false,
+            ishowpagInfo: true,
+            welfareInfo: res.data.Info.welfare,
+            welfareList: res.data.List.welfare,
+          })
+        } else {
+          app.showToastC(res.data.Msg);
+        }
+      }
+    });
+  },
+
+  closepagInfo: function () {
+    var _this = this
+    _this.setData({
+      ishowpagInfo: false,
+    })
+  },
+
+  shareopen: function (welfareId) {
+    var _this = this;
+
+    var q = Dec.Aese('mod=blindBox&operation=getWelfareInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&welfareId=' + welfareId)
+
+    wx.request({
+      url: app.signindata.comurl + 'spread.php' + q,
+      method: 'GET',
+      header: {
+        'Accept': 'application/json'
+      },
+      success: function (res) {
+        wx.hideLoading()
+        console.log('分享打开===========',res)
+        if (res.data.ReturnCode == 200) {
+          _this.setData({
+            redpagList: res.data.Info.welfare || [],
+            ishowredpackage: true,
+            isharepag: true,
+          })
+        } else {
+          app.showToastC(res.data.Msg);
+        }
+      }
+    });
+  },
+  hidepackage: function () {
+    var _this = this;
+    if (!_this.data.ishowredpackage) {
+      _this.setData({
+        redpagList: _this.data.welfare,
+      })
+    }
+    _this.setData({
+      ishowredpackage: !_this.data.ishowredpackage,
+      isharepag: false,
+    })
+  },
+  
+  // 幸运值
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-    var _this = this
-    var share = {
-      title:  _this.data.activity.name + ' 来看我一发入魂',
-      path: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id="+_this.data.activity.id,
-      imageUrl: _this.data.activity.lottoBackGround || _this.data.finalReward.img
+    var _this = this;
+
+    if (_this.data.ishowpagInfo) {
+      var info = _this.data.redpagList[_this.data.redpagind];
+      var title = "我抽到了" + info.gear + '赏' + info.roleName + "，幸运值红包送给你们。";
+      var share = {
+        title: title,
+        imageUrl: _this.data.redpagshareimg,
+        path: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" +_this.data.activity.id + '&referee=' + _this.data.uid + '&gid=' + _this.data.gid + '&welfareid=' + _this.data.welfareid + '&isredpag=1',
+        success: function (res) {}
+      }
+    } else {
+      var share = {
+        title:  _this.data.activity.name + ' 来看我一发入魂',
+        path: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id="+_this.data.activity.id,
+        imageUrl: _this.data.activity.lottoBackGround || _this.data.finalReward.img
+      }
     }
+
+
     return share;
   },
   onShareTimeline:function(){
@@ -328,11 +550,36 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('onload=============')
+    console.log('onload=============',options)
+    var _this = this;
 
-    this.setData({
-      id: options.id
-    })
+    if (options.scene) {
+      // '&welfareid=' + _this.data.welfareid + '&isredpag=1'
+      let scene = decodeURIComponent(options.scene);
+      app.signindata.referee = _this.getSearchString('referee', scene) || 0;
+      app.signindata.activity_id = _this.getSearchString('id', scene) || 0;
+      _this.data.id = _this.getSearchString('id', scene) || 0;
+      _this.data.gid = _this.getSearchString('gid', scene) || 0;
+      _this.data.welfareid = _this.getSearchString('welfareid', scene) || 0;
+      _this.data.isredpag = _this.getSearchString('isredpag', scene) || 0;
+      _this.setData({
+        is_share: _this.getSearchString('referee', scene) || 0 ? true : false
+      })
+    } else {
+      app.signindata.referee = options.referee || 0;
+      app.signindata.activity_id = options.id || 0;
+      _this.data.id = options.id || 0;
+      _this.data.gid = options.gid || 0;
+      _this.data.welfareid = options.welfareid || 0;
+      _this.data.isredpag = options.isredpag || 0;
+      _this.setData({
+        is_share: options.referee ? true : false
+      })
+    }
+
+    // this.setData({
+    //   id: options.id
+    // })
     // 判断是否授权
     this.activsign();
   },
@@ -348,6 +595,7 @@ Page({
 
   onLoadfun:function(){
 
+    var _this = this;
     // 判断是否有默认地址
     var ishowdealoradd = false;
     if(!app.signindata.isBlindBoxDefaultAddress){
@@ -365,6 +613,11 @@ Page({
     this.listdata();
 
     this.nextpagediao();
+
+    if (this.data.isredpag == 1) {
+      this.shareopen(this.data.welfareid)
+    }
+
   },
   listdata:function(){
     var _this = this;
@@ -422,7 +675,7 @@ Page({
             newarr.push([{}])
           }
         console.log('newarr====',newarr)
-        console.log(goodsExhibition)
+
 
 
           if ( activity.status==3 || activity.suplusNum<=0 ) {
@@ -468,13 +721,27 @@ Page({
           //   }) 
           // }
 
+          // 幸运值
+
+          if (_this.data.firstshowredpag && res.data.List.welfare.length > 0 && res.data.List.welfare[0].currentAmount == 0 && _this.data.isredpag != 1) {
+            _this.hidepackage()
+            _this.setData({
+              redpagList: res.data.List.welfare || [],
+              firstshowredpag: false,
+            })
+          } else if (_this.data.firstshowredpag) {
+            _this.data.firstshowredpag = false
+          }
+
+
           _this.setData({
             userimg:userimg,
             goodsdata:goodsdata,
             activity:activity,
             finalReward:finalReward,
             goodsExhibition:newarr,
-            isHistory:true
+            isHistory:true,
+            welfare: res.data.List.welfare || [],
           })
 
 
