@@ -677,8 +677,9 @@ Page({
   onShareTimeline:function(){
     var _this = this;
     return {
-      title:_this.data.c_title || '潮玩社交平台',
-      query:{'id':_this.data.id}    
+      title:app.signindata.nickName+'邀请你加入车队，3人开车！3人开车！',
+      query:{'id':_this.data.id},
+      imageUrl: _this.data.activitydata.cover 
     }
   },
   onShareAppMessage: function(options) {

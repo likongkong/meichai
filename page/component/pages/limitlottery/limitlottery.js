@@ -1159,11 +1159,12 @@ Page({
   onShareTimeline:function(){
     var _this = this;
     return {
-      title:_this.data.c_title || '潮玩社交平台',
+      title: _this.data.infoGoods.shop_price +'元 限定原价购 '+ _this.data.infoActivity.name +'，一起互换碎片！',
       query:{
         'id': _this.data.infoActivity.id,
         'gid':_this.data.gid
-      }    
+      },
+      imageUrl:_this.data.infoActivity.cover 
     }
   },
   onShareAppMessage: function () {

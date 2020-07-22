@@ -1383,17 +1383,18 @@ Page({
       path: "/page/component/pages/myothertoydg/myothertoydg?ownerId=" + _this.data.uid,
       imageUrl: _this.data.snapshot,
       success: function (res) {
-
       }
     }
     return share;
-
   },
   onShareTimeline:function(){
     var _this = this;
     return {
-      title:_this.data.c_title || '潮玩社交平台',
-      query:{'ownerId':_this.data.uid}    
+      title:'快来围观我的玩具柜，直接下单，美拆发货，官方售后',
+      query:{
+        'ownerId':_this.data.uid
+      },
+      imageUrl:_this.data.listdataown[0].goods_img
     }
   },
 
