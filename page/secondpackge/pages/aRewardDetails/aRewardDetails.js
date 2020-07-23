@@ -85,7 +85,9 @@ Page({
     istipsure: false,
     israysure: false,
     framtop: (app.signindata.windowHeight - 400) / 2,
-    pmc:true
+    pmc:true,
+    //是否显示购买按钮
+    isPurchase:true
   },
 
   // 幸运值
@@ -535,10 +537,15 @@ Page({
     this.queuefun(2,2)
   },
   // 刮奖购买
-  scrapingPurfun:function(){
-     this.setData({
+  scrapingPurfun:function(e){
+    if(e.currentTarget.dataset.purchase){
+      this.setData({isPurchase:false})
+    }else{
+      this.setData({isPurchase:true})
+    }
+    this.setData({
       scrapingPur:!this.data.scrapingPur
-     })
+    })
   },
   scrapingboxfunlit:function(){
     this.setData({
@@ -692,7 +699,7 @@ Page({
           }
 
           if (activity.isInQueue) {
-            var timestamp = Date.parse(new Date())
+            // var timestamp = Date.parse(new Date())
             //总的秒数 
             // var second = activity.refreshTime - (timestamp / 1000);
             // second = second > 0 ? second : 0;
@@ -700,14 +707,18 @@ Page({
             // setTimeout(function(){
             //   _this.listdata();
             // },second)  
-            _this.data.recordtime = activity.refreshTime;	
- 
+            if( activity.aheadUser ){
+              _this.data.recordtime = activity.refreshTime;	
+            }else{
+              _this.data.recordtime = activity.refreshTimeForQueuer;	
+            }
             _this.countdown();
-
           }else{
-            if(userimg.length==0&&activity.status==2&&activity.suplusNum>0&&_this.data.uid){
-              // _this.queuefun(1,1);
-            };
+            _this.data.recordtime = activity.refreshTime;	
+            _this.countdown();
+            // if(userimg.length==0&&activity.status==2&&activity.suplusNum>0&&_this.data.uid){
+            //   _this.queuefun(1,1);
+            // };
           }
           
 
@@ -758,13 +769,13 @@ Page({
   },
   // 排队
   // type 排队类型(1正常排队， 2延长排队时间)
-  // continuedType 延长排队时间标识类型(1我要刮卡	2.继续刮奖)
-  queuefun:function(type,continuedType){
+  // continuType 延长排队时间标识类型(1我要刮卡	2.继续刮奖)
+  queuefun:function(type,continuType){
     var _this = this;
     // wx.showLoading({title: '加载中...',})
 
-    var exh = Dec.Aese('mod=yifanshang&operation=lineup&id='+_this.data.id+'&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&type='+type+'&continuedType='+continuedType);
-    console.log(app.signindata.comurl + 'spread.php?mod=yifanshang&operation=lineup&id='+_this.data.id+'&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&type='+type+'&continuedType='+continuedType)
+    var exh = Dec.Aese('mod=yifanshang&operation=lineup&id='+_this.data.id+'&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&type='+type+'&continuType='+continuType);
+    console.log(app.signindata.comurl + 'spread.php?mod=yifanshang&operation=lineup&id='+_this.data.id+'&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&type='+type+'&continuType='+continuType)
     wx.request({
       url: app.signindata.comurl + 'spread.php' + exh,
       method: 'GET',
@@ -852,6 +863,7 @@ Page({
                     // prevPage.reset();
                     // prevPage.gitList();
                     _this.scrapingboxfunlit();
+                    _this.queuefun(2,4)
                     // 订阅授权
                     // app.comsubscribe(_this);
                   },
@@ -927,10 +939,14 @@ Page({
               if (res.confirm) {
                 _this.lineUpNow();
               }else{
-                _this.jumpaRewardList();
+                // _this.jumpaRewardList();
+                _this.listdata();
               };
             }
           });
+          // wx.redirectTo({   
+          //   url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + _this.data.id
+          // });
         }else{
           _this.listdata();
         }

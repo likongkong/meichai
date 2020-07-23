@@ -111,8 +111,12 @@
     <view wx:if='{{activity.status==1}}' class="ardbottomeve ardbmerightbottom">暂未开始 {{activity.start_time}}</view>
     <view wx:elif='{{activity.status==3||activity.suplusNum<=0}}' class="ardbottomeve ardbmerightbottom" catchtap="jumpaRewardList">已结束</view>
     <view wx:elif='{{activity.aheadUser&&activity.isInQueue}}' class="ardbottomeve ardbmerightbottom" catchtap="scrapingPurfun">我要刮卡({{remaintime}}s)</view>
-    <view wx:elif='{{activity.isInQueue}}' class="ardbottomeve ardbmerightbottom">排队中</view>
+    <view style="display: flex;justify-content: center;align-items: center;" wx:elif='{{activity.isInQueue}}'>
+        <view wx:if="{{!activity.isAllHidePrice}}" class="ardbottomeve ardbmerightbottom" data-purchase="false" catchtap="scrapingPurfun">排队中( 查看价值 )</view>
+        <view wx:else class="ardbottomeve ardbmerightbottom">排队中</view>
+    </view>
     <view wx:else class="ardbottomeve ardbmerightbottom" catchtap="lineUpNow">立即排队</view>
+
 
 </view>
 
@@ -132,9 +136,9 @@
 
 <!-- 刮奖购买 -->
 <view class="wsh" catchtouchmove="true" wx:if='{{scrapingPur&&activity.suplusNum>0}}'>
-   <view class="tgimgboxgb" catchtap="scrapingPurfun"></view>
+    <view class="tgimgboxgb" catchtap="scrapingPurfun"></view>
 
-    <view class="worthSubsidiary">
+    <view wx:if="{{!activity.isAllHidePrice}}" class="worthSubsidiary" style="{{!isPurchase?'height:844rpx;top:376rpx;':''}}">
         <view class="adcspecialPrice">
             <view>
                 <image src="{{finalReward.img}}" mode="aspectFill" mode='aspectFit'></image>
@@ -167,13 +171,13 @@
             <text>剩余{{activity.suplusNum}}抽</text>
             <text>总价值:<block wx:if='{{activity.total_value}}'>￥{{activity.total_value}}</block><block wx:else>暂无价值</block>+</text>
         </view>
-        <view style="width: 300rpx;height: 60rpx;background: #e94f57;text-align: center;line-height: 60rpx;color: #fff;border-radius: 10rpx;font-size: 24rpx; position: absolute;bottom: 20rpx;left: 50%;margin-left: -150rpx;" catchtap="{{!is_finish?'placeAnOrder':''}}" data-number='0'>
+        <view wx:if="{{isPurchase}}" style="width: 300rpx;height: 60rpx;background: #e94f57;text-align: center;line-height: 60rpx;color: #fff;border-radius: 10rpx;font-size: 24rpx; position: absolute;bottom: 20rpx;left: 50%;margin-left: -150rpx;" catchtap="{{!is_finish?'placeAnOrder':''}}" data-number='0'>
             <text style="margin-bottom:6rpx;">￥{{activity.suplusNum*activity.shopPrice}}全收</text>
             <view class="adhcevehbg" wx:if='{{is_finish}}'></view>
         </view>
     </view>
 
-   <view class="scrapingPurchase">
+    <view wx:if="{{isPurchase}}" class="scrapingPurchase">
       <view class="scrapPurtime">刮卡剩余时间:{{remaintime}}s</view>
       <view class="scrPurEve" catchtap="{{!is_finish?'placeAnOrder':''}}" data-number='0'><view class="adhcevehbg" wx:if='{{is_finish}}'></view>
         <view class="scrOutBox">

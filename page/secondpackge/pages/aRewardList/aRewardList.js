@@ -22,7 +22,8 @@ Page({
     // 适配苹果X
     isIphoneX: false,
     isProduce: app.signindata.isProduce,
-    datalist:[]
+    datalist:[],
+    swiperdata:[]
 
   },
 
@@ -54,7 +55,7 @@ Page({
           }else{
             let alldata = [..._this.data.datalist,...res.data.List.activity];
             // console.log(alldata)
-            _this.setData({datalist : alldata})
+            _this.setData({datalist : alldata,swiperdata:res.data.List.topicActivity})
           }
         } else if (res.data.ReturnCode == 201){
           _this.setData({loadprompt : true })
