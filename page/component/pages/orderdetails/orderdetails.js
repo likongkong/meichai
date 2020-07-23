@@ -630,7 +630,7 @@ Page({
   onShareAppMessage: function () {
     var _this = this;
     var gar = parseFloat(_this.data.comdata.goods_amount||1)/parseFloat(_this.data.comdata.gnumber||1);
-    if (_this.data.payiftr) {
+    if (false) {
       var shareimg = _this.data.paycheadwsongimg || _this.data.comdata.gcover;
       var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
       if (!reg.test(shareimg)) {
@@ -690,6 +690,13 @@ Page({
         var reshare = {
           title: '我用拆币兑换了' + _this.data.comdata.gname + '，一起分享赢拆币！',
           path: '/page/component/pages/imdetailspage/imdetailspage?goods_id=' + _this.data.comdata.gid,
+          imageUrl: _this.data.comdata.gcover,
+          success: function (res) { },
+        };
+      } else if (_this.data.comdata.order_type == 21){  // 一番赏
+        var reshare = {
+          title:_this.data.comdata.gname + ' 来看我一发入魂',
+          path: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + _this.data.comdata.activity_id,
           imageUrl: _this.data.comdata.gcover,
           success: function (res) { },
         };

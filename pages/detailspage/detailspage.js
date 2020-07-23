@@ -235,20 +235,6 @@ Page({
     wx.reLaunch({
       url: "plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id="+liveShowRoomId
     });
-
-    // if (prevpage) {
-    //   if (prevpage.route == 'plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin') {
-
-    //   } else {
-    //     wx.redirectTo({
-    //       url: "plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id="+liveShowRoomId
-    //     });
-    //   };
-    // } else {
-    //   wx.redirectTo({
-    //     url: "plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id="+liveShowRoomId
-    //   });
-    // };
   },
   
   depositboxfun:function(){
