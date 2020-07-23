@@ -808,7 +808,7 @@ page {
   margin:20rpx auto 0;
   padding: 20rpx 0;
   /* height: 230rpx; */
-  height: 420rpx;
+  height: 346rpx;
 }
 .otherPrice>view{
   display: flex;
