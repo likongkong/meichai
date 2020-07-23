@@ -138,27 +138,38 @@
         <view class="adcspecialPrice">
             <view>
                 <image src="{{finalReward.img}}" mode="aspectFill" mode='aspectFit'></image>
-                <text>最终赏  <block wx:if='{{finalReward.isShowPrice}}'>价值:￥{{finalReward.shop_price}}</block><block wx:else>超稀有!</block></text>
+                <text><block wx:if='{{finalReward.isShowPrice}}'>最终赏 价值{{finalReward.shop_price}}</block><block wx:else>超稀有!</block></text>
             </view>
         </view>
         <scroll-view scroll-y="true" class="otherPrice">
-            <view wx:for='{{goodsdata}}' wx:key='key' style="overflow: hidden;margin-bottom:10rpx;height:32rpx;" wx:if='{{item.gear!="终"}}'>
-                <view class="otherPricecom">{{item.gear}}赏</view>
+            <!-- <view wx:for='{{goodsdata}}' wx:key='key' style="overflow: hidden;margin-bottom:10rpx;" wx:if='{{item.gear!="终"}}'> -->
+            <view wx:for='{{goodsdata}}' wx:key='key' style="overflow: hidden;margin-bottom:10rpx;display: flex;justify-content: space-between;">
+                <view class="otherPricecom" style="text-align: right;width:76rpx;">{{item.gear=="终"?'最':''}}{{item.gear}}赏</view>
+                <!-- <view class="otherPricecom" style="float:right;"> -->
                 <view class="otherPricecom" style="float:right;">
-                    <view class="otherPriceRight">价值:</view>
+                    <!-- <view class="otherPriceRight">价值:</view> -->
                     <view class="otherPriceRight specialellipsis" style="width:130rpx;text-align:right;">
-                       <block wx:if='{{item.suplus==0}}'>抢光了</block>
-                       <block wx:elif='{{item.isShowPrice}}'>￥{{item.shop_price}}x{{item.suplus}}</block>
+                       <block wx:if='{{item.isShowPrice && item.suplus!=0}}'>￥{{item.shop_price}}x{{item.suplus}}</block>
+                       <block wx:elif='{{item.isShowPrice && item.suplus==0}}'>抢完了</block>
                        <block wx:else>暂无价值</block>
                     </view>
                 </view>
+                <view class="otherPricecom" style="text-align: right;width:180rpx;">
+                    <view class="otherPriceRight">总价值:</view>
+                    <block wx:if='{{item.isShowPrice && item.suplus!=0}}'>￥{{item.suplus!=0?item.shop_price * item.suplus:item.shop_price}}</block>
+                    <block wx:elif='{{item.isShowPrice && item.suplus==0}}'>抢完了</block>
+                    <block wx:else>暂无价值</block>
+                </view>
             </view> 
-
         </scroll-view>
 
         <view class="totalPrice">
             <text>剩余{{activity.suplusNum}}抽</text>
             <text>总价值:<block wx:if='{{activity.total_value}}'>￥{{activity.total_value}}</block><block wx:else>暂无价值</block>+</text>
+        </view>
+        <view style="width: 300rpx;height: 60rpx;background: #e94f57;text-align: center;line-height: 60rpx;color: #fff;border-radius: 10rpx;font-size: 24rpx; position: absolute;bottom: 20rpx;left: 50%;margin-left: -150rpx;" catchtap="{{!is_finish?'placeAnOrder':''}}" data-number='0'>
+            <text style="margin-bottom:6rpx;">￥{{activity.suplusNum*activity.shopPrice}}全收</text>
+            <view class="adhcevehbg" wx:if='{{is_finish}}'></view>
         </view>
     </view>
 

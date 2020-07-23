@@ -82,6 +82,7 @@ page {
   top: 0;
   left: 0;
   z-index:3 ;
+  
 }
 .adhceveimg{
   width: 100%;
@@ -774,7 +775,6 @@ page {
 }
 .worthSubsidiary{
   width: 560rpx;
-  /* height: 730rpx; */
   height: 920rpx;
   background: #ffffff;
   position: absolute;
@@ -808,7 +808,7 @@ page {
   margin:20rpx auto 0;
   padding: 20rpx 0;
   /* height: 230rpx; */
-  height: 420rpx;
+  height: 346rpx;
 }
 .otherPrice>view{
   display: flex;
