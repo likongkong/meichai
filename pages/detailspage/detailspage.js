@@ -2842,7 +2842,7 @@ Page({
       query:{
         'gid':_this.data.gid
       },
-      imageUrl:'https://cdn.51chaidan.com'+_this.data.zunmdata.goods_share 
+      imageUrl:'https://cdn.51chaidan.com/'+_this.data.zunmdata.goods_share 
     }
   },
   onShareAppMessage: function (options) {

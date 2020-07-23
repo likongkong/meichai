@@ -706,7 +706,7 @@ Page({
 
           }else{
             if(userimg.length==0&&activity.status==2&&activity.suplusNum>0&&_this.data.uid){
-              _this.queuefun(1,1);
+              // _this.queuefun(1,1);
             };
           }
           
