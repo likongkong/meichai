@@ -227,6 +227,30 @@ Page({
     depositbox:false
  
   },
+  livebroadcast:function(){
+    let pages = getCurrentPages();
+    let prevpage = pages[pages.length - 2];
+    var liveShowRoomId = this.data.zunmdata.liveShowRoomId;
+    console.log(pages)
+    wx.reLaunch({
+      url: "plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id="+liveShowRoomId
+    });
+
+    // if (prevpage) {
+    //   if (prevpage.route == 'plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin') {
+
+    //   } else {
+    //     wx.redirectTo({
+    //       url: "plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id="+liveShowRoomId
+    //     });
+    //   };
+    // } else {
+    //   wx.redirectTo({
+    //     url: "plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id="+liveShowRoomId
+    //   });
+    // };
+  },
+  
   depositboxfun:function(){
     this.setData({
       depositbox:!this.data.depositbox

@@ -775,10 +775,10 @@ page {
 }
 .worthSubsidiary{
   width: 560rpx;
-  height: 806rpx;
+  height: 920rpx;
   background: #ffffff;
   position: absolute;
-  top:326rpx;
+  top:300rpx;
   left: 0;
   right: 0;
   margin: auto;
@@ -807,7 +807,8 @@ page {
   border-bottom: 2rpx solid #bbb;
   margin:20rpx auto 0;
   padding: 20rpx 0;
-  height: 230rpx;
+  /* height: 230rpx; */
+  height: 420rpx;
 }
 .otherPrice>view{
   display: flex;

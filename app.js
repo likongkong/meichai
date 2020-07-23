@@ -247,7 +247,10 @@ App({
 
     console.log('场景值=====',options.scene)
     _this.signindata.sceneValue = options.scene || 0;
-
+    // 朋友圈分享不显示地址弹框
+    if(options.scene==1154){
+      _this.signindata.isBlindBoxDefaultAddress = true
+    };
     if (wx.canIUse('getUpdateManager')) { // 获取小程序更新机制兼容
       const updateManager = wx.getUpdateManager();
       updateManager.onCheckForUpdate(function (res) {
@@ -411,75 +414,76 @@ App({
   },
   // 公共跳转
   comjumpwxnav: function (item_type, whref, wname, imgurl) {
+
     if (item_type == 0) {
       var url = encodeURIComponent(whref);
       var encodeimgurl = encodeURIComponent(imgurl);
       wx.navigateTo({    // 外部链接
-        url: "/page/component/pages/webview/webview?webview=" + url + "&imgurl=" + encodeimgurl,
+        url: "/page/component/pages/webview/webview?webview=" + url + "&imgurl=" + encodeimgurl
       }); 
     } else if (item_type == 1) {
       wx.navigateTo({    // 商品详情页
-        url: "/pages/detailspage/detailspage?gid=" + whref,
+        url: "/pages/detailspage/detailspage?gid=" + whref
       });
     } else if (item_type == 9003) {
       wx.navigateTo({    // 抽签详情页
-        url: "/page/component/pages/limitlottery/limitlottery?gid=" + whref,
+        url: "/page/component/pages/limitlottery/limitlottery?gid=" + whref
       });
     } else if (item_type == 9004) {
       wx.navigateTo({    // 拆明盒详情页
-        url: "/page/component/pages/mingbox/mingbox?gid="+ whref,
+        url: "/page/component/pages/mingbox/mingbox?gid="+ whref
       });
     } else if (item_type ==9005) {
       wx.navigateTo({    // 抽盒机详情页
-        url: "/pages/smokebox/smokebox?gid=" + whref,
+        url: "/pages/smokebox/smokebox?gid=" + whref
       });
     } else if (item_type == 2 || item_type == 3 || item_type == 21) {
       wx.navigateTo({    // 信息流
-        url: "/pages/classificationpage/classificationpage?" + whref + '&wtype=' + item_type + '&wname=' + wname,
-      });
+        url: "/pages/classificationpage/classificationpage?" + whref + '&wtype=' + item_type + '&wname=' + wname
+      });  
     } else if (item_type == 4 || item_type == 5 || item_type==22) {
       wx.navigateTo({    // 瀑布流
-        url: "/pages/classificationpage/classificationpage?" + whref + '&wtype=' + item_type + '&wname=' + wname,
+        url: "/pages/classificationpage/classificationpage?" + whref + '&wtype=' + item_type + '&wname=' + wname
       });     
     } else if (item_type == 6 || item_type == 7) {
       wx.redirectTo({    // 活动列表
-        url: "/pages/activitysharinglist/activitysharinglist",
+        url: "/pages/activitysharinglist/activitysharinglist"
       });
     } else if (item_type == 8) {
       wx.navigateTo({    // 活动详情页
-        url: "/pages/activitydetailspage/activitydetailspage?id=" + whref,
+        url: "/pages/activitydetailspage/activitydetailspage?id=" + whref
       });    
     } else if (item_type == 9) {
       wx.navigateTo({ 
-        url: "/page/component/pages/newsignin/newsignin",
-      });  
+        url: "/page/component/pages/newsignin/newsignin"
+      }); 
     } else if (item_type == 9002){
       var imgurl = encodeURIComponent(whref)
       wx.navigateTo({   
-        url: "/page/component/pages/savethepicture/savethepicture?imgurl=" + imgurl,
-      });      
+        url: "/page/component/pages/savethepicture/savethepicture?imgurl=" + imgurl
+      });     
     } else if (item_type == 12) {
       wx.navigateTo({   
-        url: "/pages/combination/combination",
+        url: "/pages/combination/combination"
       });
     } else if (item_type == 9003) {
       wx.navigateTo({
-        url: "/pages/combination/combination",
+        url: "/pages/combination/combination"
       }); 
     } else if (item_type == 9004) {
       wx.navigateTo({
-        url: "/pages/activitysharinglist/activitysharinglist",
+        url: "/pages/activitysharinglist/activitysharinglist"
       }); 
     } else if (item_type == 9005) {
       wx.navigateTo({
-        url: "/pages/activitydetailspage/activitydetailspage?" + whref,
-      });  
+        url: "/pages/activitydetailspage/activitydetailspage?" + whref
+      }); 
     } else if (item_type == 998) {
-      wx.reLaunch({ 
-        url: "/pages/index/index?judgeprof=2",
+      wx.reLaunch({    //签到
+        url: "/pages/index/index?judgeprof=2"
       });
     } else if (item_type == 995) {
-      wx.navigateTo({ 
+      wx.navigateTo({    //活动
         url: "/page/component/pages/luckaction/luckaction"
       });
     } else if (item_type == 994) {
@@ -492,37 +496,66 @@ App({
       });
     } else if (item_type == 991) {
       wx.navigateTo({
-        url: "/page/component/pages/dlfind/dlfind?topic_id=9",
+        url: "/page/component/pages/dlfind/dlfind?topic_id=9"
       });
     } else if (item_type == 990) {
       wx.navigateTo({
-        url: "/page/component/pages/mingboxList/mingboxList",
+        url: "/page/component/pages/mingboxList/mingboxList"
       });
     } else if (item_type == 989) {
       wx.navigateTo({
-        url: "/page/component/pages/limitlotterylist/limitlotterylist",
+        url: "/page/component/pages/limitlotterylist/limitlotterylist"
       });
     } else if (item_type == 988) {
       wx.navigateTo({
-        url: "/pages/smokeboxlist/smokeboxlist",
+        url: "/pages/smokeboxlist/smokeboxlist"
       });
     } else if (item_type == 992) {
       wx.navigateTo({
-        url: "/page/component/pages/bargainList/bargainList",
-      }); 
+        url: "/page/component/pages/bargainList/bargainList"
+      });
     } else if (item_type == 9006) {
       wx.navigateTo({
-        url: "/page/component/pages/ocamendment/ocamendment",
+        url: "/page/component/pages/ocamendment/ocamendment"
       });
     } else if (item_type == 9007) {
       wx.navigateTo({
-        url: "/page/component/pages/doubleEleven/doubleEleven",
+        url: "/page/component/pages/doubleEleven/doubleEleven"
       });
     } else if (item_type == 9008) {
+        wx.navigateTo({
+          url: "/page/component/pages/drivetohidehome/drivetohidehome"
+        });
+    } else if (item_type == 9011) {
       wx.navigateTo({
-        url: "/page/component/pages/drivetohidehome/drivetohidehome",
+        url: "/page/secondpackge/pages/exhibition/exhibition?type=15"
+      });
+    } else if (item_type == 9012) {  // 种草
+      wx.navigateTo({
+        url: "/page/component/pages/playgrasslist/playgrasslist"
+      });
+    } else if (item_type == 9013) {  // 种草详情
+      wx.navigateTo({
+        url: "/page/component/pages/crowdfunding/crowdfunding?aid=" + whref
+      });
+    } else if (item_type == 9014) { 
+      wx.navigateTo({
+        url: "/page/component/pages/newpsellwell/newpsellwell?" + whref + '&title=' + wname,
+      });
+    } else if (item_type == 9015) { 
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/aRewardList/aRewardList"
+      });
+    } else if (item_type == 9016) { 
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + whref 
+      });
+    } else if (item_type == 9017) { 
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + whref 
       });
     };
+
 
   },
   // 中奖提示倒计时

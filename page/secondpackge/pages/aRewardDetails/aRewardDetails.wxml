@@ -134,7 +134,7 @@
 <view class="wsh" catchtouchmove="true" wx:if='{{scrapingPur&&activity.suplusNum>0}}'>
    <view class="tgimgboxgb" catchtap="scrapingPurfun"></view>
 
-    <view class="worthSubsidiary" >
+    <view class="worthSubsidiary">
         <view class="adcspecialPrice">
             <view>
                 <image src="{{finalReward.img}}" mode="aspectFill" mode='aspectFit'></image>
@@ -161,7 +161,6 @@
                     <block wx:else>暂无价值</block>
                 </view>
             </view> 
-
         </scroll-view>
 
         <view class="totalPrice">
