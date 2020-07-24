@@ -10,7 +10,7 @@ page {
   padding:20rpx 0;
 }
 .adhleft{
-  width: 569rpx;
+  width: 500rpx;
   height:80rpx;
   white-space: nowrap;
   float: left;
@@ -282,7 +282,7 @@ page {
   left: 0;
   bottom: 0;
   z-index: 3;
-  padding-top: 80rpx;
+  padding-top: 44rpx;
 }
 .scrapPurtime{
   width: 100%;

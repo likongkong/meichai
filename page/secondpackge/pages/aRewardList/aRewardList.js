@@ -55,7 +55,7 @@ Page({
           }else{
             let alldata = [..._this.data.datalist,...res.data.List.activity];
             // console.log(alldata)
-            _this.setData({datalist : alldata,swiperdata:res.data.List.topicActivity})
+            _this.setData({datalist : alldata,rewardswiperData:res.data.List.topicActivity,consumemessageData:res.data.List.record})
           }
         } else if (res.data.ReturnCode == 201){
           _this.setData({loadprompt : true })

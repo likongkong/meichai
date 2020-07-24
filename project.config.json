@@ -79,10 +79,17 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 3,
 					"name": "一番赏详情",
 					"pathName": "page/secondpackge/pages/aRewardDetails/aRewardDetails",
-					"query": "id=105883",
+					"query": "id=104417",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "抽盒机列表",
+					"pathName": "pages/smokeboxlist/smokeboxlist",
+					"query": "",
 					"scene": null
 				}
 			]

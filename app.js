@@ -94,8 +94,26 @@ App({
     // 是否开启一番赏
     isYiFanShang:false,
     // 场景值
-    sceneValue:0
+    sceneValue:0,
+    yifanshangIsInQueue:false,
+    timer:''
   },
+  //一番赏队列倒计时
+  // yifanshangIsInQueueFun(time){
+  //   var _this = this
+  //   console.log('yifanshangIsInQueue====',_this.signindata.yifanshangIsInQueue)
+  //   var timestamp = Date.parse(new Date())
+  //   var num = time - (timestamp / 1000);
+  //   _this.signindata.timer = setInterval(function(){
+  //     num--;
+  //     console.log('倒计时====',num)
+  //     if (num <= 0) {
+  //       clearInterval(_this.signindata.timer);
+  //       _this.signindata.yifanshangIsInQueue = false;
+  //       console.log('yifanshangIsInQueue====',_this.signindata.yifanshangIsInQueue)
+  //     }
+  //   },1000);
+  // },
   // 登录
   signin: function (callback, BSkipData) {
     // 获取id    
