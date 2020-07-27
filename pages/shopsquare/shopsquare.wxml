@@ -4,7 +4,7 @@
 	
 <view class="punchTheClock">	
 
-		<view class="ptcswipter">
+		<view class="ptcswipter" wx:if='{{movies&&movies.length!=0}}'>
 				<swiper style="width:100%;height:400rpx;" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
 					<swiper-item wx:for="{{movies}}" wx:key="key">
 						<image src="{{item.image}}?imageMogr2/thumbnail/x800" class="slideimage" mode="aspectFill" data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}' bindtap='jumpbanner' data-imgurl='{{item.image}}' style='position:relative;'>
@@ -14,56 +14,68 @@
 		</view>	
     <!-- 日期 -->
 		<view class="ptcconTimeData">
-		     <view wx:for='{{dateDate}}' wx:key='key' class="ptcTdeve {{index==1?'ptcTdeveborder':''}} {{checkid==item.id?'checkid':''}}" catchtap="clickcheck" data-id='{{item.id}}'>{{item.name}}</view>
+		     <view wx:for='{{timeTab}}' wx:key='key' class="ptcTdeve {{index==1?'ptcTdeveborder':''}} {{timedata==item.data_time?'checkid':''}}" catchtap="clickcheck" data-id='{{item.data_time}}'>{{item.display_time}}</view>
 		</view>
     <!-- 打卡奖励 -->
 		<view class="punchInRewardtxt">—————— 打卡奖励 ——————</view>
 		<scroll-view class="punChInReScr" scroll-x="true">
-		    <view class="punCheveSrc" wx:for='{{imgdata}}' wx:key='key'>
-				    <view class="punSrcImgBox">
-						    <image class="punCheveSrcImg" src="{{item.src}}" mode='heightFix'></image>
-								<view class="punSrcIBTxt">已领取</view>
+		    <view class="punCheveSrc" wx:for='{{giftList}}' wx:key='key' catchtap="rewardboxfun" data-ind='{{index}}'>
+				    <view class="punSrcImgBox boxShadow">
+						    <image class="punCheveSrcImg" src="{{item.gift_img}}" mode='heightFix'></image>
+								<!-- <view wx:if='{{item.gift_status==2}}' class="punSrcIBTxt">已领取</view> -->
 						</view>
-				    <!-- <view class="punCheveSrcTxt">打开x10</view> -->
-						<view class="punSrRTxt" wx:if='{{index%2==1}}'>可领取</view>
-						<view class="punSrRTxt" style="background:#757575;" wx:else>已抢光</view>
-
+				    <view wx:if='{{item.gift_status==0}}' class="punCheveSrcTxt">打卡x{{item.clockin_num}}</view>
+						<view wx:elif='{{item.gift_status==2}}' class="punCheveSrcTxt">已领取</view>
+						<view wx:elif='{{item.gift_status==1}}' class="punSrRTxt">可领取</view>
+						<view wx:elif='{{item.gift_status==3}}' class="punSrRTxt" style="background:#757575;">已抢光</view>
 				</view>
 		</scroll-view>
 	
 	  <!-- 打卡奖励 -->
 		<view class="punchInRewardtxt">—————— 打卡点 ——————</view>
 		<view class="punchInReward">
-         <view class="punchInReEve" wx:for='{{imgdata}}' wx:key='key' style="{{index%4==3?'margin: 0 0 20rpx 0;':''}}">
-				     <image class="pInReEveImg" mode="aspectFit" src="{{item.src}}"></image>
+         <view class="punchInReEve" wx:for='{{expoList}}' wx:key='key' style="{{index%4==3?'margin: 0 0 20rpx 0;':''}}" >
+				     <!-- <button wx:if='{{item.examine_status==1||item.examine_status==3}}' bindtap='upload' data-ind='{{index}}' data-id='{{item.id}}' style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:3;opacity: 0;"></button> -->
+						 <view  wx:if='{{item.examine_status==1||item.examine_status==3||item.examine_status==0}}' bindtap='uploaddata' data-ind='{{index}}' data-id='{{item.id}}' data-examine_status='{{item.examine_status}}' style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:3;opacity: 0;"></view>
+
+				     <block wx:if='{{item.examine_status==1}}'>
+						    <image class="pInReEveImg" mode="aspectFit" src="{{item.logo}}"></image>
+						 </block>
+						 <block wx:else>
+						    <image class="pInReEveImg" mode="aspectFit" src="{{item.clockin_img}}"></image>
+						 </block>
 						 <!-- 头像 -->
-						 <image class="pInReEveImgLogo" mode="aspectFit" src="{{item.src}}"></image>
+						 <image wx:if='{{item.examine_status!=1}}' class="pInReEveImgLogo" mode="aspectFit" src="{{item.logo}}"></image>
 						 <!-- 审核中 -->
-						 <view wx:if='{{index%3==2}}' class="pcIRBtxt" style="background:#32acfb;">审核中</view>
+						 <view wx:if='{{item.examine_status==0}}' class="pcIRBtxt" style="background:#32acfb;">审核中</view>
 						 <!-- 未通过 -->
-						 <view wx:elif='{{index%3==1}}' class="pcIRBtxt" style="background:#fb595f;">未通过</view>
+						 <view wx:elif='{{item.examine_status==3}}' class="pcIRBtxt" style="background:#fb595f;">未通过</view>
 						 <!-- 通过 -->
-						 <image wx:else src="https://cdn.51chaidan.com/images/sign/duihao.png" mode="aspectFit" class="punapproved"></image>
+						 <image wx:elif='{{item.examine_status==2}}' src="https://cdn.51chaidan.com/images/sign/duihao.png" mode="aspectFit" class="punapproved"></image>
 				 </view>
 		</view>
 	  <!-- 打卡记录 -->
 		<view class="punchInRewardtxt">—————— 打卡记录 ——————</view>
  
     <view class="punchInRecord">
-		    <view class="punchInRBox" wx:for='{{imgdata}}' wx:key='key' >
-				   <image class="punchInRImg" src="{{item.src}}" mode="aspectFit" style="border-radius:50%;margin-right: 10rpx;"></image>
-					 <view class="punchInRTxt specialellipsis">{{item.name}}</view>
-					 <image class="punchInRImg" src="{{item.src}}" mode="aspectFit" style="margin-left: 10rpx;"></image>
+		    <view class="punchInRBox" wx:for='{{allClockinList}}' wx:key='key' >
+				   <image class="punchInRImg" src="{{item.litpic}}" mode="aspectFit" style="border-radius:50%;margin-right: 10rpx;"></image>
+					 <view class="punchInRTxt specialellipsis">
+					    {{item.insert_time}}
+					    <block wx:if='{{item.type==1}}'>完成了{{item.brand_name}}打卡</block>
+							<block wx:else>领取的打卡奖励</block>
+					 </view>
+					 <image class="punchInRImg" src="{{item.type==1?item.brand_logo:item.gift_img}}" mode="aspectFit" style="margin-left: 10rpx;"></image>
 				</view>
 		</view>
 
 
 	  <view class="punchBottom">
 		   <view class="punchBottomtxt">已打卡</view>
-			 <view class="punchBotImgBox" style="width:{{50+imgdata.length*15>530?'530':50+imgdata.length*15}}rpx;">
-			    <image class="punchBotImg" wx:for='{{imgdata}}' wx:key='key' src="{{item.src}}" style="z-index:{{index+1}};left:{{index*15}}rpx;" wx:if='{{index*15<480}}'></image>
+			 <view class="punchBotImgBox" style="width:{{50+myClockinList.list.length*15>530?'530':50+myClockinList.list.length*15}}rpx;" wx:if='{{myClockinList.list.length!=0}}'>
+			    <image class="punchBotImg" wx:for='{{myClockinList.list}}' wx:key='key' src="{{item.brand_logo}}" style="z-index:{{index+1}};left:{{index*15}}rpx;" wx:if='{{index*15<480}}'></image>
 			 </view>
-			 <view class="punchBottomtxt">x{{imgdata.length}}</view>
+			 <view class="punchBottomtxt">x{{myClockinList.myClockinNum}}</view>
 		</view>
 
 </view>
@@ -73,24 +85,40 @@
 	
 <!-- 弹框   -->
 
-<view class='wsh' wx:if='{{false}}'>
-    <view class='tgimgboxgb'></view>
+<view class='wsh' wx:if='{{rewardbox}}'>
+    <view class='tgimgboxgb' catchtap="rewardboxhidden"></view>
     <view class="puntipbox">
+		    <image class="puntbimg" catchtap="jumpdetail" mode='heightFix' src="{{rewardbdata.gift_img}}"></image>
+				<view class="puntbtitle multilineellipsis">{{rewardbdata.gift_name}}</view>
+				<view class="puntbtname">
+				    <block wx:if='{{rewardbdata.gift_status==0}}'>
+								<view style="color:#42bd56;">需打卡品牌x{{rewardbdata.clockin_num}}</view>
+								<view style="text-decoration:underline;color:#42bd56;">{{rewardbdata.draw_tips_one}}</view>						
+						</block>
+						<block wx:elif='{{rewardbdata.gift_status==1}}'>
+								<view style="color:#ff2840;">已满足打卡需求</view>
+								<view style="text-decoration:underline;color:#ff2840;">{{rewardbdata.draw_tips_one}}</view>						
+						</block>
+						<block wx:else>
+						    <view style="color:#ACACAC;">已领取</view>
+						</block>
+				</view>
+        <view wx:if='{{rewardbdata.gift_status==1}}' class="punSrRTxt" catchtap="receiverewards" data-id='{{rewardbdata.id}}' style="width:130rpx;">领取成功</view>
 	  </view>
 </view>
 	
 	
 	
-	<view style='height:220rpx;width:100%;text-align:center; display: table;position: relative;' class='rotate' catchtap='jumpxinxi'>
+	<!-- <view style='height:220rpx;width:100%;text-align:center; display: table;position: relative;' class='rotate' catchtap='jumpxinxi'>
 		<text style='display: table-cell;vertical-align:middle;text-align:center;'>转盘\n盘转</text>
-		<button bindtap='upload' style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;">上传文件</button>
-	</view>
+		
+	</view> -->
 
 
 
 
 
-
+<bnavigation isChar='{{false}}' isProduce='{{isProduce}}'></bnavigation>
 
 
 

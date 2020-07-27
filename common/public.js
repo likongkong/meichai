@@ -59,6 +59,13 @@ function sharemc(){
     success: function (res) {}
   }  
 }
+// 分享朋友圈
+function shareWechatMoments(){
+  return {
+    title:'美拆',
+    imageUrl:'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
+  }
+}
 // 购物车显示数据
 function shopnum(_this,comurl){
   var _this = _this;
@@ -167,3 +174,6 @@ module.exports.subversionNumber = subversionNumber;
 module.exports.env = env;
 module.exports.versionnumber = versionnumber;
 module.exports.clwcomurl = clwcomurl;
+module.exports.shareWechatMoments = shareWechatMoments;
+
+

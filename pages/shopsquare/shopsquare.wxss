@@ -5,6 +5,7 @@ page{background:#fefefe}.squarebox{width:100%;height:100%}.sshead{width:100%;hei
 
 .punchTheClock{
   width: 100%;
+  padding-bottom: 220rpx;
 }
 .ptcswipter{
   border:6rpx solid #000;
@@ -21,15 +22,19 @@ page{background:#fefefe}.squarebox{width:100%;height:100%}.sshead{width:100%;hei
   border:6rpx solid #000;
   margin: 20rpx auto 30rpx;
   border-radius: 8rpx;
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 .ptcTdeve{
-  width:196rpx;
   height: 50rpx;
   line-height: 50rpx;
   text-align: center;
   font-size: 24rpx;
   color: #000;
   display: inline-block;
+  flex: 1;
 }
 .ptcTdeveborder{
   border-left: 6rpx solid #000;
@@ -59,11 +64,11 @@ page{background:#fefefe}.squarebox{width:100%;height:100%}.sshead{width:100%;hei
   display: inline-block;
   height: 240rpx;
   margin-right: 22rpx;
+  vertical-align: top;
 }
 .punSrcImgBox{
   border:4rpx solid #000;
   position: relative;
-  box-shadow: 1px 2px 6px #999999;
 }
 .punCheveSrcImg{
   height: 160rpx;
@@ -71,7 +76,7 @@ page{background:#fefefe}.squarebox{width:100%;height:100%}.sshead{width:100%;hei
 }
 .punCheveSrcTxt{
   width: 100%;
-  margin-top: 8rpx;
+  margin-top: 14rpx;
   height: 40rpx;
   line-height: 40rpx;
   text-align: center;
@@ -106,17 +111,20 @@ page{background:#fefefe}.squarebox{width:100%;height:100%}.sshead{width:100%;hei
 .punchInReward{
   width: 700rpx;
   margin:20rpx auto 30rpx;
+  text-align:center;
 }
 .punchInReEve{
   height: 167rpx;
+  width:164rpx;
   padding-top: 35rpx;
   position: relative;
   display: inline-block;
   margin: 0 15rpx 20rpx 0;
+  vertical-align: top;
 }
 .pInReEveImg{
-  width:155rpx;
-  height:155rpx;
+  width:156rpx;
+  height:156rpx;
   display: block;
   border: 4rpx solid #000;
 }
@@ -160,7 +168,7 @@ page{background:#fefefe}.squarebox{width:100%;height:100%}.sshead{width:100%;hei
 
 .punchInRecord{
   width: 670rpx;
-  margin:20rpx auto 120rpx;
+  margin:20rpx auto 60rpx;
 }
 .punchInRBox{
   width: 100%;
@@ -171,6 +179,7 @@ page{background:#fefefe}.squarebox{width:100%;height:100%}.sshead{width:100%;hei
   width: 60rpx;
   height: 60rpx;
   display: inline-block;
+  vertical-align: top;
 }
 .punchInRTxt{
   display: inline-block;
@@ -178,13 +187,14 @@ page{background:#fefefe}.squarebox{width:100%;height:100%}.sshead{width:100%;hei
   line-height: 60rpx;
   font-size: 24rpx;
   max-width:515rpx;
+  vertical-align: top;
 }
 
 .punchBottom{
-  /* position: fixed;
-  bottom: 0;
+  position: fixed;
+  bottom: 120rpx;
   right: 0;
-  left: 0; */
+  left: 0;
   margin:20rpx auto 0;
   border: 6rpx solid #000;
   z-index: 12;
@@ -230,5 +240,29 @@ page{background:#fefefe}.squarebox{width:100%;height:100%}.sshead{width:100%;hei
   margin:auto;
 }
 
+.puntbimg{
+  max-width: 380rpx;
+  height: 300rpx;
+  margin:30rpx auto 15rpx;
+  border-radius: 8rpx;
+  border:4rpx solid #000;
+  display: block;
+}
+.puntbtitle{
+  width: 100%;
+  height: 35px;
+  text-align: center;
+  line-height: 36rpx;
+  color: #666;
+  font-size: 24rpx;
+}
 
-
+.puntbtname{
+  width: 100%;
+  padding:30rpx auto 0;
+  font-size: 22rpx;
+}
+.puntbtname view{
+  height:40rpx;
+  text-align:center;
+}
