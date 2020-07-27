@@ -464,7 +464,7 @@ App({
         url: "/pages/classificationpage/classificationpage?" + whref + '&wtype=' + item_type + '&wname=' + wname
       });     
     } else if (item_type == 6 || item_type == 7) {
-      wx.redirectTo({    // 活动列表
+      wx.navigateTo({    // 活动列表
         url: "/pages/activitysharinglist/activitysharinglist"
       });
     } else if (item_type == 8) {
@@ -805,7 +805,7 @@ App({
         url: "/pages/smokebox/smokebox?gid=" + jumpid
       });
     } else if (item_type == 6 || item_type == 7) {
-      wx.redirectTo({ // 活动列表
+      wx.navigateTo({ // 活动列表
         url: "/pages/activitysharinglist/activitysharinglist"
       });
     } else if (item_type == 8) {

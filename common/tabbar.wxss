@@ -380,3 +380,8 @@
 .winningtheptime{
   width:240rpx;height:50rpx;line-height:50rpx;text-align:center;font-size:26rpx;color:#e14d55;position:absolute;bottom:4rpx;left:210rpx;
 }
+/* 阴影 */
+
+.boxShadow{
+  box-shadow:0px 6px 5px #ccc;
+}

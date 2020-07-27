@@ -1,5 +1,8 @@
 
 var COS = require('../../common/cos-wx-sdk-v5.js');
+
+var Dec = require('../../common/public.js'); //aes加密解密js
+
 const app = getApp();
 
 Page({
@@ -8,7 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '一番赏', 
+    c_title: '打卡', 
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
@@ -17,89 +20,91 @@ Page({
     tgabox:false,
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,  
-    movies:[
-      {
-        href: "33817", 
-        image: "https://cdn.51chaidan.com//data/afficheimg/33817.jpg", 
-        type: "1", 
-        title: "咪咪嘎嘎吊卡", 
-        item_type: "1"
+    movies:[],
+    pid:0,
+    page:0,
+    timedata:'',
+    rewardbox:false,
+    rewardbdata:{},
+    // 防止重复提交
+    pmc:true,
+    audit_tips:''
+  },
+  // 跳转详情
+  jumpdetail:function(){
+     if(this.data.rewardbdata&&this.data.rewardbdata.is_goods==2){
+       var gid = this.data.rewardbdata.goods_id || '';
+        app.detailspage(gid)
+     };
+  },
+  // 领取奖励
+  receiverewards:function(w){
+    var _this = this;
+    var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
+    
+    wx.showModal({
+      title:'打卡奖励',
+      content:_this.data.rewardbdata.draw_tips_two,
+      showCancel:true,
+      cancelText:'领取成功',
+      cancelColor:'#ff2840',
+      confirmText:'未领取',
+      confirmColor:'#ccc',
+      success: function (res) {
+          if (res.cancel){
+              if(_this.data.pmc){
+                _this.data.pmc = false;
+                var q1 = Dec.Aese('mod=brandsignin&operation=collectGifts&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&gift_id=' + id + '&time='+ _this.data.timedata);
+
+                console.log('mod=brandsignin&operation=collectGifts&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&gift_id=' + id + '&time='+ _this.data.timedata)
+                wx.showLoading({ title: '加载中...', })
+                wx.request({
+                  url: app.signindata.comurl + 'spread.php' + q1,
+                  method: 'GET',
+                  header: {'Accept': 'application/json'},
+                  success: function(res) {
+                    wx.hideLoading()
+                    _this.data.pmc = true;
+                    console.log('获取礼物=====',res)
+                    wx.showModal({
+                      content: res.data.Msg || res.data.msg,
+                      success: function (res) {
+                        _this.getlist(1);
+                        _this.rewardboxhidden();
+                      }
+                    });
+                  },
+
+                })
+              }
+          };
       }
-    ],
-    dateDate:[{'id':1,name:'8月7日'},{'id':2,name:'8月8日'},{'id':3,name:'8月9日'}],
-    checkid:1,
-    imgdata:[
-      {
-        src:'https://cdn.51chaidan.com//images/hiddenFragments/1580710232.png',
-        name:'08.17 18:00抽签'
-      },
-      {
-        src:'https://cdn.51chaidan.com/images/spread/blindBox/34325_5_1594984147.jpg',
-        name:'08.17 18:00抽签08.17 18:00抽签'
-      },
-      {
-        src:'https://cdn.51chaidan.com/images/spread/blindBox/33719_56_1588063522.jpg',
-        name:'08.17 18:00抽签08.17 18:00抽签08.17 18:00抽签'
-      },
-      {
-        src:'https://cdn.51chaidan.com/images/202007/thumb_img/34326_thumb_G_1594969369893.jpg',
-        name:'08.17 18:00抽签08.17 18:00抽签08.17 18:00抽签'
-      },
-      {
-        src:'https://cdn.51chaidan.com/images/spread/blindBox/34325_5_1594984147.jpg',
-        name:'08.17 18:00抽签08.17 18:00抽签'
-      },
-      {
-        src:'https://cdn.51chaidan.com/images/spread/blindBox/33719_56_1588063522.jpg',
-        name:'08.17 18:00抽签08.17 18:00抽签08.17 18:00抽签'
-      },
-      {
-        src:'https://cdn.51chaidan.com/images/202007/thumb_img/34326_thumb_G_1594969369893.jpg',
-        name:'08.17 18:00抽签08.17 18:00抽签08.17 18:00抽签'
-      },
-      {
-        src:'https://cdn.51chaidan.com/images/spread/blindBox/34325_5_1594984147.jpg',
-        name:'08.17 18:00抽签08.17 18:00抽签'
-      },
-      {
-        src:'https://cdn.51chaidan.com/images/spread/blindBox/33719_56_1588063522.jpg',
-        name:'08.17 18:00抽签08.17 18:00抽签08.17 18:00抽签'
-      },
-      {
-        src:'https://cdn.51chaidan.com/images/202007/thumb_img/34326_thumb_G_1594969369893.jpg',
-        name:'08.17 18:00抽签08.17 18:00抽签08.17 18:00抽签'
-      },
-      {
-        src:'https://cdn.51chaidan.com/images/spread/blindBox/34325_5_1594984147.jpg',
-        name:'08.17 18:00抽签08.17 18:00抽签'
-      },
-      {
-        src:'https://cdn.51chaidan.com/images/spread/blindBox/33719_56_1588063522.jpg',
-        name:'08.17 18:00抽签08.17 18:00抽签08.17 18:00抽签'
-      },
-      {
-        src:'https://cdn.51chaidan.com/images/202007/thumb_img/34326_thumb_G_1594969369893.jpg',
-        name:'08.17 18:00抽签08.17 18:00抽签08.17 18:00抽签'
-      },
-      {
-        src:'https://cdn.51chaidan.com/images/spread/blindBox/34325_5_1594984147.jpg',
-        name:'08.17 18:00抽签08.17 18:00抽签'
-      },
-      {
-        src:'https://cdn.51chaidan.com/images/spread/blindBox/33719_56_1588063522.jpg',
-        name:'08.17 18:00抽签08.17 18:00抽签08.17 18:00抽签'
-      },
-      {
-        src:'https://cdn.51chaidan.com/images/202007/thumb_img/34326_thumb_G_1594969369893.jpg',
-        name:'08.17 18:00抽签08.17 18:00抽签08.17 18:00抽签'
-      }
-    ]
+    });
+
+
+
+
   },
   clickcheck:function(w){
     var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
     this.setData({
-      checkid:id
+      timedata:id
     })
+    this.getlist(1);
+    this.allpunchrecords(1);
+  },
+  rewardboxhidden:function(){
+    this.setData({
+      rewardbox:false
+    })
+  },
+  rewardboxfun:function(w){
+    var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
+    var rewardbdata = this.data.giftList[ind] || [];
+    this.setData({
+      rewardbdata:rewardbdata,
+      rewardbox:true
+    });
   },
   // banner 跳转
   jumpbanner: function (w) {
@@ -111,7 +116,34 @@ Page({
     app.comjumpwxnav(item_type, whref, wname, imgurl);
 
   },
-  upload: function(){
+
+  uploaddata:function(w){
+    var _this = this;
+    var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
+    var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
+    var examine_status = w.currentTarget.examine_status || w.target.dataset.examine_status || 0;
+    if(examine_status==0){
+          wx.showModal({
+            title:'提示',
+            content:_this.data.audit_tips,
+            showCancel:true,
+            cancelText:'重新上传',
+            cancelColor:'#ff2840',
+            confirmText:'取消',
+            confirmColor:'#ccc',
+            success: function (res) {
+                if (res.cancel) {
+                    _this.upload(ind,id)
+                };
+            }
+          });
+    }else{
+      _this.upload(ind,id)
+    };
+  },
+
+  upload: function(ind,id){
+    
     var _this = this;
     var cos = new COS({
       SecretId: 'AKIDmY0RxErYIm2TfkckG8mEYbcNA4wYsPbe',
@@ -124,6 +156,10 @@ Page({
       sizeType: ['compressed'], // 可以指定是原图original还是压缩图compressed，默认用原图
       sourceType: ['camera'], // 'album'相册  camera 相机
       success: function (res) {
+  
+          wx.showLoading({
+            title: '加载中...',
+          })
           console.log(res)
           var filePath = res.tempFiles[0].path;
 
@@ -146,7 +182,46 @@ Page({
                 }
               },
               function (err, data) {
-                  console.log(err || data);
+                  console.log(data);
+                  if(data){
+                      if(_this.data.pmc){
+                          _this.data.pmc = false;                      
+                          var q1 = Dec.Aese('mod=brandsignin&operation=addSignIn&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&brandid=' + id +'&clockin_img=' +data.Location + '&time='+ _this.data.timedata);
+
+                          console.log('mod=brandsignin&operation=addSignIn&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&brandid=' + id +'&clockin_img=' +data.Location + '&time='+ _this.data.timedata)
+
+                          wx.request({
+                            url: app.signindata.comurl + 'spread.php' + q1,
+                            method: 'GET',
+                            header: {'Accept': 'application/json'},
+                            success: function(res) {
+                              wx.hideLoading();
+                              _this.data.pmc = true;
+                              console.log('上传图片=====',res)
+                              wx.showModal({
+                                content: res.data.Msg || res.data.msg,
+                                showCancel:false,
+                                success: function (res) {
+                                  _this.getlist(1)
+                                }
+                              });
+                            },
+                          })
+                      }
+                  }else{
+                    wx.hideLoading()
+                  };
+                  console.log('err============',err)
+                  if(err){
+                      wx.showModal({
+                        content: err,
+                        showCancel:false,
+                        success: function (res) {}
+                      });
+                  }
+
+
+
               }
           );
       }
@@ -174,6 +249,101 @@ Page({
       isProduce: app.signindata.isProduce
     });
     
+    _this.getlist(1);
+    _this.allpunchrecords(1)
+  },
+  // 所有打卡记录
+  allpunchrecords:function(num){
+
+    var _this = this
+    wx.showLoading({
+      title: '加载中...',
+    })
+
+    if (num==1){
+      _this.data.page = 0;
+    }else{
+      var pagenum = _this.data.page;
+      _this.data.page = ++pagenum;
+    };
+
+    var q1 = Dec.Aese('mod=brandsignin&operation=allClockinList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + "&pid=" + _this.data.page +'&time='+ _this.data.timedata);
+
+    console.log('mod=brandsignin&operation=allClockinList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + "&pid=" + _this.data.page +'&time='+ _this.data.timedata)
+
+    wx.request({
+      url: app.signindata.comurl + 'spread.php' + q1,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function(res) {
+        console.log('所有打卡记录=====',res)
+        wx.stopPullDownRefresh();
+        wx.hideLoading()
+        if (res.data.ReturnCode == 200) {
+           var allClockinList = res.data.List.allClockinList || [];
+           _this.setData({
+             allClockinList:allClockinList
+           })
+        };
+      },
+
+    })
+
+  },
+  // 品牌列表
+  getlist: function(num) {
+    var _this = this
+    wx.showLoading({
+      title: '加载中...',
+    })
+
+    if (num==1){
+      _this.data.pid = 0;
+    }else{
+      var pagenum = _this.data.pid;
+      _this.data.pid = ++pagenum;
+    };
+
+    var q1 = Dec.Aese('mod=brandsignin&operation=brandList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + "&pid=" + _this.data.pid +'&time='+ _this.data.timedata);
+    
+    console.log('mod=brandsignin&operation=brandList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + "&pid=" + _this.data.pid +'&time='+ _this.data.timedata)
+
+    wx.request({
+      url: app.signindata.comurl + 'spread.php' + q1,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function(res) {
+        console.log('listdata=====',res)
+        wx.stopPullDownRefresh();
+        wx.hideLoading()
+        if (res.data.ReturnCode == 200) {
+           var expoList = res.data.List.expoList || [];
+           var timeTab = res.data.List.timeTab || [];
+           var myClockinList = res.data.List.myClockinList || {};
+           var giftList = res.data.List.giftList || [];
+           var RotationList = res.data.List.RotationList || [];
+           var timedata = '';
+           var audit_tips = res.data.List.audit_tips || '';
+           if(timeTab&&timeTab.length!=0){
+             for( var i=0; i<timeTab.length; i++ ){
+                if(timeTab[i].status==1){
+                  timedata = timeTab[i].data_time
+                };
+             };
+           };
+           _this.setData({
+              expoList:expoList,
+              timeTab:timeTab,
+              myClockinList:myClockinList,
+              giftList:giftList,
+              timedata:timedata,
+              movies:RotationList,
+              audit_tips:audit_tips
+           });
+        };
+      },
+
+    })
   },
   // 点击登录获取权限
   userInfoHandler: function (e) {
@@ -273,20 +443,34 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    
+    this.getlist(1);
+    this.allpunchrecords(1);
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    
+    this.allpunchrecords(2);
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    
-  }
+      return {
+        title: '美拆',
+        imageUrl: 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
+      }    
+  },
+  onShareTimeline:function(){
+    var _this = this;
+    return {
+      title:'美拆',
+      imageUrl: 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
+    }
+  },  
+  clicktganone: function () {
+    this.setData({ tgabox: false })
+  },  
 })
