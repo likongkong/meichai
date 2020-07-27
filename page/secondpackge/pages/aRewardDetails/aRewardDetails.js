@@ -85,7 +85,10 @@ Page({
     istipsure: false,
     israysure: false,
     framtop: (app.signindata.windowHeight - 400) / 2,
-    pmc:true
+    pmc:true,
+    //是否显示购买按钮
+    isPurchase:true,
+    requestNum:0
   },
 
   // 幸运值
@@ -535,10 +538,15 @@ Page({
     this.queuefun(2,2)
   },
   // 刮奖购买
-  scrapingPurfun:function(){
-     this.setData({
+  scrapingPurfun:function(e){
+    if(e.currentTarget.dataset.purchase){
+      this.setData({isPurchase:false})
+    }else{
+      this.setData({isPurchase:true})
+    }
+    this.setData({
       scrapingPur:!this.data.scrapingPur
-     })
+    })
   },
   scrapingboxfunlit:function(){
     this.setData({
@@ -610,7 +618,8 @@ Page({
       ishowdealoradd:ishowdealoradd
     });
 
-    this.listdata();
+    // this.listdata();
+    _this.queuefun(1,1);
 
     this.nextpagediao();
 
@@ -690,9 +699,11 @@ Page({
             //   }
             // });
           }
-
-          if (activity.isInQueue) {
-            var timestamp = Date.parse(new Date())
+          // if(activity.status==2&&activity.suplusNum>0&&_this.data.uid){
+          //     _this.queuefun(1,1);
+          // };
+          // if (activity.isInQueue) {
+            // var timestamp = Date.parse(new Date())
             //总的秒数 
             // var second = activity.refreshTime - (timestamp / 1000);
             // second = second > 0 ? second : 0;
@@ -700,19 +711,20 @@ Page({
             // setTimeout(function(){
             //   _this.listdata();
             // },second)  
-            _this.data.recordtime = activity.refreshTime;	
- 
-            _this.countdown();
-
-          }else{
-            if(userimg.length==0&&activity.status==2&&activity.suplusNum>0&&_this.data.uid){
-              // _this.queuefun(1,1);
-            };
-          }
-          
-
-          
-
+          //   if( activity.aheadUser ){
+          //     _this.data.recordtime = activity.refreshTime;	
+          //   }else{
+          //     _this.data.recordtime = activity.refreshTimeForQueuer;	
+          //   }
+          //   _this.countdown();
+          // }else{
+          //   _this.data.recordtime = activity.refreshTime;	
+          //   _this.countdown();
+            // if(userimg.length==0&&activity.status==2&&activity.suplusNum>0&&_this.data.uid){
+            //   _this.queuefun(1,1);
+            // };
+          // }
+  
           // 是否可以下单
           // if ( !activity.aheadUser ) {
           //   _this.setData({
@@ -758,13 +770,13 @@ Page({
   },
   // 排队
   // type 排队类型(1正常排队， 2延长排队时间)
-  // continuedType 延长排队时间标识类型(1我要刮卡	2.继续刮奖)
-  queuefun:function(type,continuedType){
+  // continuType 延长排队时间标识类型(1我要刮卡	2.继续刮奖)
+  queuefun:function(type,continuType){
     var _this = this;
     // wx.showLoading({title: '加载中...',})
 
-    var exh = Dec.Aese('mod=yifanshang&operation=lineup&id='+_this.data.id+'&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&type='+type+'&continuedType='+continuedType);
-    console.log(app.signindata.comurl + 'spread.php?mod=yifanshang&operation=lineup&id='+_this.data.id+'&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&type='+type+'&continuedType='+continuedType)
+    var exh = Dec.Aese('mod=yifanshang&operation=lineup&id='+_this.data.id+'&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&type='+type+'&continuType='+continuType);
+    console.log(app.signindata.comurl + 'spread.php?mod=yifanshang&operation=lineup&id='+_this.data.id+'&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&type='+type+'&continuType='+continuType)
     wx.request({
       url: app.signindata.comurl + 'spread.php' + exh,
       method: 'GET',
@@ -774,8 +786,13 @@ Page({
         // wx.stopPullDownRefresh();
         console.log('queuefun=====',res)
         if (res.data.ReturnCode == 200) {
-           _this.data.recordtime = res.data.Info.newOverTime || 0;
-           _this.listdata();
+          _this.data.recordtime = res.data.Info.newOverTime || 0;
+          _this.listdata();
+
+          // clearInterval(app.signindata.timer);
+          // app.signindata.yifanshangIsInQueue = true;
+          // app.yifanshangIsInQueueFun(_this.data.recordtime);
+
         }else{
           app.showToastC(res.data.Msg);
         }
@@ -809,13 +826,13 @@ Page({
         console.log('placeAnOrder=====',res)
         if (res.data.ReturnCode == 200) {
            _this.data.order = res.data.Info.order;
-           _this.setData({
-            cardList : res.data.List.goods || [],
-            gearCount : res.data.List.relRefillGearCount,
-            is_finish:res.data.Info.isFinished
-           })
-           _this.data.recordtime = res.data.Info.newOverTime;	
-           _this.countdown();
+          //  _this.setData({
+          //   cardList : res.data.List.goods || [],
+          //   gearCount : res.data.List.relRefillGearCount,
+          //   is_finish:res.data.Info.isFinished
+          //  })
+          //  _this.data.recordtime = res.data.Info.newOverTime;	
+          //  _this.countdown();
 
            _this.paymentmony();
         }else{
@@ -851,7 +868,9 @@ Page({
                     // var prevPage = pages[pages.length - 2];  //上一个页面
                     // prevPage.reset();
                     // prevPage.gitList();
-                    _this.scrapingboxfunlit();
+                    // _this.scrapingboxfunlit();
+                    _this.queuefun(2,4)
+                    _this.getOrderRecord();
                     // 订阅授权
                     // app.comsubscribe(_this);
                   },
@@ -887,20 +906,95 @@ Page({
       }
     })
   },
+  getOrderRecord(){
+    wx.showLoading({
+      title: '加载中',
+    })
+    var _this = this; 
+    var requestNum = _this.data.requestNum;
+    var q = Dec.Aese('mod=yifanshang&operation=getOrderRecord&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&cart_id=' + _this.data.order.cart_id)
+    console.log('支付状态查询=====','mod=yifanshang&operation=getOrderRecord&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&cart_id=' + _this.data.order.cart_id)
+    // var q = Dec.Aese('mod=yifanshang&operation=getOrderRecord&uid=853&loginid=833fd30ef03cf5510d22fee4a0e4b29c&cart_id=20200723008906491')
+    // console.log('支付状态查询=====','mod=yifanshang&operation=getOrderRecord&uid=853&loginid=833fd30ef03cf5510d22fee4a0e4b29c&cart_id=20200723008906491')
+    wx.request({
+      url: app.signindata.comurl + 'spread.php'+q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('支付状态查询结果=============',res)
+        if (res.data.ReturnCode == 200) {
+           _this.setData({
+            cardList : res.data.List.goods || [],
+            gearCount : res.data.List.relRefillGearCount,
+            is_finish:res.data.Info.isFinished
+           })
+          _this.scrapingboxfunlit();
+          wx.hideLoading();
+        }else if(res.data.ReturnCode == 201){
+          requestNum++;
+          _this.setData({requestNum})
+          console.log('n=============',requestNum)
+          if(requestNum != 5){
+            setTimeout(function(){
+              _this.getOrderRecord();
+            },1000)
+          }else{
+            app.showToastC('订单状态错误');
+            _this.setData({requestNum:0})
+            setTimeout(function(){
+              wx.navigateTo({
+                url: '/pages/myorder/myorder?tabnum=0'
+              })
+            },2000)
+          }
+        }else if(res.data.ReturnCode == 202){
+          wx.hideLoading();
+          app.showToastC(res.data.Msg);
+          setTimeout(function(){
+            wx.navigateTo({
+              url: '/pages/myorder/myorder?tabnum=0'
+            })
+          },2000)
+        }else{
+          wx.hideLoading();
+          wx.navigateTo({
+            url: '/pages/myorder/myorder?tabnum=0'
+          })
+        }
+      }
+    })
+  },
+  toMyorderPage(){
+
+  },
   // 立即排队
   lineUpNow:function(){
-    this.queuefun(1,1)
+    var _this = this;
+    // if(app.signindata.yifanshangIsInQueue){
+    //   wx.showModal({
+    //     title: '提示',
+    //     content: '你在其他活动有排队，是否继续排队',
+    //     success (res) {
+    //       if (res.confirm) {
+    //         _this.queuefun(1,1)
+    //       }
+    //     }
+    //   })
+    // }else{
+    //   _this.queuefun(1,1)
+    // }
+    _this.queuefun(1,1)
   },
   // 倒计时时间
-  countdown: function () {
-    var _this = this;
-    clearInterval(_this.data.timer);
-    _this.setData({remaintime:''});
-    _this.data.timer = setInterval(function () {
-      //将时间传如 调用 
-      _this.dateformat(_this.data.recordtime);
-    }.bind(_this), 1000);
-  },
+  // countdown: function () {
+  //   var _this = this;
+  //   clearInterval(_this.data.timer);
+  //   _this.setData({remaintime:''});
+  //   _this.data.timer = setInterval(function () {
+  //     //将时间传如 调用 
+  //     _this.dateformat(_this.data.recordtime);
+  //   }.bind(_this), 1000);
+  // },
   // 时间格式化输出，将时间戳转为
   dateformat: function (micro_second) {
     var _this = this
@@ -927,10 +1021,14 @@ Page({
               if (res.confirm) {
                 _this.lineUpNow();
               }else{
-                _this.jumpaRewardList();
+                // _this.jumpaRewardList();
+                _this.listdata();
               };
             }
           });
+          // wx.redirectTo({   
+          //   url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + _this.data.id
+          // });
         }else{
           _this.listdata();
         }
@@ -1064,7 +1162,8 @@ Page({
    */
   onPullDownRefresh: function () {
     this.selectComponent('#history')._onPullDownRefresh();
-    this.listdata();
+    // this.listdata();
+    this.queuefun(1,1);
   },
   /**
    * 页面上拉触底事件的处理函数

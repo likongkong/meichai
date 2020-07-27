@@ -2,27 +2,71 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 <view class="main">
-  <block wx:for="{{datalist}}" wx:key='key' wx:for-item="item">
-    <view class="card" data-id="{{item.id}}" bindtap="toaRewarddeyails">
-      <view class="cardTbox">
-        <text class="serialnum">Vol.{{item.id}}</text>
-        <image class="pic" src="{{item.cover}}" mode="aspectFill"></image>
-        <view class="reward-num">
-          <block wx:for="{{item.betterGoods}}" wx:key='key' wx:for-item="itemgear">
-            <text wx:if="{{itemgear.gear == 'A' || itemgear.gear == 'B' || itemgear.gear == 'C' || itemgear.gear == 'D'}}">{{itemgear.gear}}赏 {{itemgear.suplus}}/{{itemgear.limit}}</text>
+
+  <view class="head">
+    <view class="rewardswiper">
+      <swiper autoplay="{{true}}" circular="true" interval="3000">
+        <block wx:for="{{rewardswiperData}}" wx:key='key' wx:for-item="item">
+          <swiper-item>
+            <view class="card" data-id="{{item.id}}" bindtap="toaRewarddeyails">
+              <view class="cardTbox">
+                <text class="serialnum">Vol.{{item.id}}</text>
+                <image class="pic" src="{{item.cover}}" mode="aspectFill"></image>
+                <view class="reward-num">
+                  <block wx:for="{{item.betterGoods}}" wx:key='key' wx:for-item="itemgear">
+                    <text wx:if="{{itemgear.gear == 'A' || itemgear.gear == 'B' || itemgear.gear == 'C' || itemgear.gear == 'D'}}">{{itemgear.gear}}赏 {{itemgear.suplus}}/{{itemgear.limit}}</text>
+                  </block>
+                </view>
+              </view>
+              <view class="progress-box">
+                <progress percent="{{(item.suplusGoods/item.limitGoods)*100}}" color="{{(item.suplusGoods/item.limitGoods)*100 === 100?'#6FBE0D':(item.suplusGoods/item.limitGoods)*100 < 100 && (item.suplusGoods/item.limitGoods)*100 > 50?'#FEB51D':'#ff2742'}}" backgroundColor="#cccccc" stroke-width='12' active duration="5" />
+                <text style="padding-left:15rpx;">剩余：{{item.suplusGoods}}</text>
+              </view>
+              <view class="cardBbox"> 
+                <view class="title">{{item.name}}</view>
+                <view class="price">￥{{item.shopPrice}}</view>
+              </view>
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <view class="consumemessage">
+        <swiper vertical="true" autoplay="true" circular="true" interval="2500">
+          <block wx:for="{{consumemessageData}}" wx:key='key'>
+            <swiper-item class="swiper-item">
+              <image style='width:50rpx;height:50rpx;margin:15rpx;float:left;border-radius:50%;' src='{{item.headphoto}}'></image>
+              <view>{{item.name}}</view>
+            </swiper-item>
           </block>
+        </swiper>
+    </view>
+  </view>
+
+  <view class="content">
+    <block wx:for="{{datalist}}" wx:key='key' wx:for-item="item">
+      <view class="card specialCard" data-id="{{item.id}}" bindtap="toaRewarddeyails">
+        <view class="cardTbox">
+          <text class="serialnum">Vol.{{item.id}}</text>
+          <image class="pic" src="{{item.cover}}" mode="aspectFill"></image>
+          <view class="reward-num">
+            <block wx:for="{{item.betterGoods}}" wx:key='key' wx:for-item="itemgear">
+              <text wx:if="{{itemgear.gear == 'A' || itemgear.gear == 'B' || itemgear.gear == 'C' || itemgear.gear == 'D'}}">{{itemgear.gear}}赏 {{itemgear.suplus}}/{{itemgear.limit}}</text>
+            </block>
+          </view>
+        </view>
+        <view class="progress-box">
+          <progress percent="{{(item.suplusGoods/item.limitGoods)*100}}" color="{{(item.suplusGoods/item.limitGoods)*100 === 100?'#6FBE0D':(item.suplusGoods/item.limitGoods)*100 < 100 && (item.suplusGoods/item.limitGoods)*100 > 50?'#FEB51D':'#ff2742'}}" backgroundColor="#cccccc" stroke-width='12' active duration="5" />
+          <text style="padding-left:15rpx;">剩余：{{item.suplusGoods}}</text>
+        </view>
+        <view class="cardBbox"> 
+          <view class="price"><text>￥</text>{{item.shopPrice}}</view>
+          <view class="title">{{item.name}}</view>
         </view>
       </view>
-      <view class="progress-box">
-        <progress percent="{{(item.suplusGoods/item.limitGoods)*100}}" color="{{(item.suplusGoods/item.limitGoods)*100 === 100?'#6FBE0D':(item.suplusGoods/item.limitGoods)*100 < 100 && (item.suplusGoods/item.limitGoods)*100 > 50?'#FEB51D':'#ff2742'}}" backgroundColor="#cccccc" stroke-width='12' active duration="5" />
-        <text style="padding-left:15rpx;">剩余：{{item.suplusGoods}}</text>
-      </view>
-      <view class="cardBbox"> 
-        <view class="title">{{item.name}}</view>
-        <view class="price">￥{{item.shopPrice}}</view>
-      </view>
-    </view>
-  </block>
+    </block>
+  </view>
+  
 </view>
 
 <bnavigation isChar='{{false}}' bind:run='gitList' wnews='{{true}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' 
