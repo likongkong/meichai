@@ -11,11 +11,11 @@
         <image wx:for='{{userimg}}' wx:key='key' src="{{item.headphoto}}" class="adhlimg"></image>
     </scroll-view>
     <view wx:if='{{welfare.length > 0}}' catchtap='hidepackage' style='width:95rpx;position:absolute;right:92rpx;top:5rpx;z-index:9;'>
-         <view class="tabshopimg specialellipsis" style="top:-8rpx;left:56rpx;" wx:if='{{welfare&&welfare.length!=0&&welfare.length!=1}}'>{{welfare.length}}</view>
-        <image src='http://www.51chaidan.com/images/blindBox/doublePackage.png' style='width:75rpx;height:75rpx;display:block;margin-left:10rpx;'></image>
-        <!-- <view style="color:red;text-align:center;font-size:20rpx;font-weight:bold;"><text>幸运值\n</text>{{welfare[0].currentAmount}}/{{welfare[0].limitAmount}}</view> -->
-        <view style="color:#e94f57;text-align:center;font-size:20rpx;font-weight:bold;"><text>幸运值\n</text>{{welfare[0].limitAmount-welfare[0].currentAmount}}点可领</view>
-      </view>
+        <view class="tabshopimg specialellipsis" style="top:-8rpx;left:56rpx;" wx:if='{{welfare&&welfare.length!=0&&welfare.length!=1}}'>{{welfare.length}}</view>
+            <image src='http://www.51chaidan.com/images/blindBox/doublePackage.png' style='width:75rpx;height:75rpx;display:block;margin-left:10rpx;'></image>
+            <!-- <view style="color:red;text-align:center;font-size:20rpx;font-weight:bold;"><text>幸运值\n</text>{{welfare[0].currentAmount}}/{{welfare[0].limitAmount}}</view> -->
+            <view style="color:#e94f57;text-align:center;font-size:20rpx;font-weight:bold;"><text>幸运值\n</text>{{welfare[0].limitAmount-welfare[0].currentAmount}}点可领</view>
+        </view>
     <text class="adhright" catchtap="howToPlayFun">玩法\n说明</text>
     </view>
     <view class="adheadutnum">{{activity.queueNum}}人正在刮奖券</view>
@@ -177,31 +177,31 @@
     </view>
 
     <view wx:if="{{isPurchase}}" class="scrapingPurchase">
-      <!-- <view class="scrapPurtime">刮卡剩余时间:{{remaintime}}s</view> -->
-      <view class="scrPurEve" catchtap="{{!is_finish?'placeAnOrder':''}}" data-number='0'><view class="adhcevehbg" wx:if='{{is_finish}}'></view>
-        <view class="scrOutBox">
-            <text style="margin-bottom:6rpx;">￥{{activity.suplusNum*activity.shopPrice}}</text>
-            <text>全收</text>
+        <!-- <view class="scrapPurtime">刮卡剩余时间:{{remaintime}}s</view> -->
+        <view class="scrPurEve" catchtap="{{!is_finish?'placeAnOrder':''}}" data-number='0'><view class="adhcevehbg" wx:if='{{is_finish}}'></view>
+            <view class="scrOutBox">
+                <text style="margin-bottom:6rpx;">￥{{activity.suplusNum*activity.shopPrice}}</text>
+                <text>全收</text>
+            </view>
         </view>
-      </view>
-      <view class="scrPurEve" catchtap="{{activity.suplusNum>=10?'placeAnOrder':''}}" data-number='10'><view class="adhcevehbg" wx:if='{{activity.suplusNum<10}}'></view>
-        <view class="scrOutBox">
-            <text style="margin-bottom:6rpx;">￥{{10*activity.shopPrice}}</text>
-            <text>刮10张</text>
+        <view class="scrPurEve" catchtap="{{activity.suplusNum>=10?'placeAnOrder':''}}" data-number='10'><view class="adhcevehbg" wx:if='{{activity.suplusNum<10}}'></view>
+            <view class="scrOutBox">
+                <text style="margin-bottom:6rpx;">￥{{10*activity.shopPrice}}</text>
+                <text>刮10张</text>
+            </view>
         </view>
-      </view>
-      <view class="scrPurEve" catchtap="{{activity.suplusNum>=3?'placeAnOrder':''}}" data-number='3'><view class="adhcevehbg" wx:if='{{activity.suplusNum<3}}'></view>
-        <view class="scrOutBox">
-            <text style="margin-bottom:6rpx;">￥{{3*activity.shopPrice}}</text>
-            <text>刮3张</text>
+        <view class="scrPurEve" catchtap="{{activity.suplusNum>=3?'placeAnOrder':''}}" data-number='3'><view class="adhcevehbg" wx:if='{{activity.suplusNum<3}}'></view>
+            <view class="scrOutBox">
+                <text style="margin-bottom:6rpx;">￥{{3*activity.shopPrice}}</text>
+                <text>刮3张</text>
+            </view>
         </view>
-      </view>
-      <view class="scrPurEve" catchtap="{{!is_finish?'placeAnOrder':''}}" data-number='1'><view class="adhcevehbg" wx:if='{{is_finish}}'></view>
-        <view class="scrOutBox">
-            <text style="margin-bottom:6rpx;">￥{{activity.shopPrice}}</text>
-            <text>刮1张</text>
+        <view class="scrPurEve" catchtap="{{!is_finish?'placeAnOrder':''}}" data-number='1'><view class="adhcevehbg" wx:if='{{is_finish}}'></view>
+            <view class="scrOutBox">
+                <text style="margin-bottom:6rpx;">￥{{activity.shopPrice}}</text>
+                <text>刮1张</text>
+            </view>
         </view>
-      </view>
    </view>
 </view>
 

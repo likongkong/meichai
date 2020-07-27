@@ -91,6 +91,13 @@
 					"pathName": "pages/smokeboxlist/smokeboxlist",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": 5,
+					"name": "商品详情",
+					"pathName": "pages/detailspage/detailspage",
+					"query": "gid=34183",
+					"scene": null
 				}
 			]
 		}

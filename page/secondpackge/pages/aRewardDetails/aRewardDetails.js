@@ -596,9 +596,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if(this.data.uid&&this.data.loginid&&this.data.recordtime){
-       this.listdata();
-    }
+    // if(this.data.uid&&this.data.loginid&&this.data.recordtime){
+    //    this.listdata();
+    // }
   },
 
   onLoadfun:function(){
@@ -744,8 +744,6 @@ Page({
           } else if (_this.data.firstshowredpag) {
             _this.data.firstshowredpag = false
           }
-
-
           _this.setData({
             userimg:userimg,
             goodsdata:goodsdata,
@@ -755,9 +753,6 @@ Page({
             isHistory:true,
             welfare: res.data.List.welfare || [],
           })
-
-
-
         }else{
           app.showToastC(res.data.Msg);
         }
@@ -773,8 +768,7 @@ Page({
   // continuType 延长排队时间标识类型(1我要刮卡	2.继续刮奖)
   queuefun:function(type,continuType){
     var _this = this;
-    // wx.showLoading({title: '加载中...',})
-
+    // wx.showLoading({title: '加载中...'})
     var exh = Dec.Aese('mod=yifanshang&operation=lineup&id='+_this.data.id+'&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&type='+type+'&continuType='+continuType);
     console.log(app.signindata.comurl + 'spread.php?mod=yifanshang&operation=lineup&id='+_this.data.id+'&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&type='+type+'&continuType='+continuType)
     wx.request({
@@ -787,8 +781,12 @@ Page({
         console.log('queuefun=====',res)
         if (res.data.ReturnCode == 200) {
           _this.data.recordtime = res.data.Info.newOverTime || 0;
-          _this.listdata();
-
+          if(continuType==4){
+           _this.countdown();
+          }else{
+            _this.listdata();
+          }
+         
           // clearInterval(app.signindata.timer);
           // app.signindata.yifanshangIsInQueue = true;
           // app.yifanshangIsInQueueFun(_this.data.recordtime);
@@ -822,7 +820,7 @@ Page({
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
-        wx.hideLoading()
+        // wx.hideLoading()
         console.log('placeAnOrder=====',res)
         if (res.data.ReturnCode == 200) {
            _this.data.order = res.data.Info.order;
@@ -836,6 +834,7 @@ Page({
 
            _this.paymentmony();
         }else{
+          wx.hideLoading()
           app.showToastC(res.data.Msg);
         }
       },
@@ -869,8 +868,8 @@ Page({
                     // prevPage.reset();
                     // prevPage.gitList();
                     // _this.scrapingboxfunlit();
-                    _this.queuefun(2,4)
                     _this.getOrderRecord();
+                    _this.queuefun(2,4)
                     // 订阅授权
                     // app.comsubscribe(_this);
                   },
@@ -907,15 +906,10 @@ Page({
     })
   },
   getOrderRecord(){
-    wx.showLoading({
-      title: '加载中',
-    })
     var _this = this; 
     var requestNum = _this.data.requestNum;
     var q = Dec.Aese('mod=yifanshang&operation=getOrderRecord&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&cart_id=' + _this.data.order.cart_id)
     console.log('支付状态查询=====','mod=yifanshang&operation=getOrderRecord&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&cart_id=' + _this.data.order.cart_id)
-    // var q = Dec.Aese('mod=yifanshang&operation=getOrderRecord&uid=853&loginid=833fd30ef03cf5510d22fee4a0e4b29c&cart_id=20200723008906491')
-    // console.log('支付状态查询=====','mod=yifanshang&operation=getOrderRecord&uid=853&loginid=833fd30ef03cf5510d22fee4a0e4b29c&cart_id=20200723008906491')
     wx.request({
       url: app.signindata.comurl + 'spread.php'+q,
       method: 'GET',
@@ -923,49 +917,41 @@ Page({
       success: function (res) {
         console.log('支付状态查询结果=============',res)
         if (res.data.ReturnCode == 200) {
-           _this.setData({
+          wx.hideLoading();
+          _this.setData({
             cardList : res.data.List.goods || [],
             gearCount : res.data.List.relRefillGearCount,
             is_finish:res.data.Info.isFinished
-           })
+          })
           _this.scrapingboxfunlit();
-          wx.hideLoading();
         }else if(res.data.ReturnCode == 201){
           requestNum++;
           _this.setData({requestNum})
-          console.log('n=============',requestNum)
           if(requestNum != 5){
             setTimeout(function(){
               _this.getOrderRecord();
             },1000)
           }else{
+            wx.hideLoading();
             app.showToastC('订单状态错误');
-            _this.setData({requestNum:0})
-            setTimeout(function(){
-              wx.navigateTo({
-                url: '/pages/myorder/myorder?tabnum=0'
-              })
-            },2000)
+            _this.setData({requestNum:0});
           }
         }else if(res.data.ReturnCode == 202){
           wx.hideLoading();
           app.showToastC(res.data.Msg);
-          setTimeout(function(){
-            wx.navigateTo({
-              url: '/pages/myorder/myorder?tabnum=0'
-            })
-          },2000)
         }else{
-          wx.hideLoading();
-          wx.navigateTo({
-            url: '/pages/myorder/myorder?tabnum=0'
-          })
+          _this.toMyorderPage(0);
         }
       }
     })
   },
-  toMyorderPage(){
-
+  toMyorderPage(delay){
+    setTimeout(function(){
+      wx.hideLoading();
+      wx.navigateTo({
+        url: '/pages/myorder/myorder?tabnum=0'
+      })
+    },2000)
   },
   // 立即排队
   lineUpNow:function(){
@@ -986,15 +972,15 @@ Page({
     _this.queuefun(1,1)
   },
   // 倒计时时间
-  // countdown: function () {
-  //   var _this = this;
-  //   clearInterval(_this.data.timer);
-  //   _this.setData({remaintime:''});
-  //   _this.data.timer = setInterval(function () {
-  //     //将时间传如 调用 
-  //     _this.dateformat(_this.data.recordtime);
-  //   }.bind(_this), 1000);
-  // },
+  countdown: function () {
+    var _this = this;
+    clearInterval(_this.data.timer);
+    _this.setData({remaintime:''});
+    _this.data.timer = setInterval(function () {
+      //将时间传如 调用 
+      _this.dateformat(_this.data.recordtime);
+    }.bind(_this), 1000);
+  },
   // 时间格式化输出，将时间戳转为
   dateformat: function (micro_second) {
     var _this = this

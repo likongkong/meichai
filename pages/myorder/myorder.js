@@ -464,6 +464,12 @@ Page({
     var _this = this;
     var arrlist = arrlist || [];
     var qarr = [];
+    for (var i = 0; i < arrlist.length; i++) {
+      if(arrlist[i].order_type==21 && arrlist[i].status==7){
+        arrlist.splice(i, 1); 
+      }
+    }
+
     for (var q = 0; q < arrlist.length; q++) {
       var warr = []
       for (var w = 0; w < arrlist.length; w++) {
