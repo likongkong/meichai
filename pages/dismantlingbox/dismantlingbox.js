@@ -494,7 +494,7 @@ Page({
     }
 
     return {
-      title: 'Bilibiliworld x MCTS 8.7~8.9 不见不散，打卡送超多奖励',
+      title: 'Bilibiliworld x MCTS 8.7~8.9 不见不散，超多展品不要错过',
       imageUrl: img
     }    
   },
@@ -506,7 +506,7 @@ Page({
       img = bannerList[0].img || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
     }
     return {
-      title:'Bilibiliworld x MCTS 8.7~8.9 不见不散，打卡送超多奖励',
+      title:'Bilibiliworld x MCTS 8.7~8.9 不见不散，超多展品不要错过',
       imageUrl: img
     }
   },  
