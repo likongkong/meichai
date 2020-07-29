@@ -561,7 +561,7 @@ Page({
     //   }
 
     // }else 
-    if (zunmdata.additional_type==2){
+    if (zunmdata.additional_type==2&&zunmdata.option){
       wx.showModal({
         title: '限购答题',
         content: zunmdata.subject,

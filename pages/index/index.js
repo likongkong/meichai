@@ -230,7 +230,7 @@ Page({
       // url: "/page/component/pages/exhibitiondetail/exhibitiondetail?id=43161"
       // url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
       // url: "/page/secondpackge/pages/brandDetails/brandDetails?id=140"
-      // url: "/pages/detailspage/detailspage?gid=34183"
+      // url: "/pages/detailspage/detailspage?gid=34175"
       // url: "/pages/smokebox/smokebox?gid=331671"
       // url: "/page/component/pages/playgrasslist/playgrasslist"
       // url: "/page/secondpackge/pages/detailSimgEffects/detailSimgEffects?gid=32852"
@@ -238,6 +238,7 @@ Page({
       // url: "/page/secondpackge/pages/aRewardList/aRewardList"
       // url: "/page/component/pages/hidefun/hidefun"
       url: "/pages/shopsquare/shopsquare"
+      // url: "/pages/dismantlingbox/dismantlingbox"
       
     });
   },

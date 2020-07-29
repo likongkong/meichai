@@ -1,1 +1,110 @@
-<view></view>
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+
+<view class='showsubbox'>
+		<view class="ptcswipter" wx:if='{{bannerList&&bannerList.length!=0}}'>
+				<swiper style="width:100%;height:400rpx;" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
+					<swiper-item wx:for="{{bannerList}}" wx:key="key">
+						<image src="{{item.img}}?imageMogr2/thumbnail/x800" class="slideimage" mode="aspectFill" data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}' bindtap='jumpbanner' data-imgurl='{{item.image}}' style='position:relative;'>
+						</image>
+					</swiper-item>
+				</swiper>
+		</view>	
+    <!-- 直播间 -->
+    <view class="ssubLiveBroadcast" wx:for="{{liveListData}}" wx:key="key">
+
+        <navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{item.room_id}}" style='position: absolute;height:100%;width:500rpx;left:0;top:0;z-index:3;'></navigator>
+
+        <view class="ssubLiveBroad">
+            <image class="ssubLiveBImg" src="{{item.cover_img}}" mode='aspectFit'></image>
+        </view>
+        <view class="ssubLiveBroadRig">
+           <view class="ssubSSAname multilineellipsis">{{item.name}}</view>
+           <view class="ssubSBotTime">
+               <view class="ssubSBotTimeleft">{{item.start_time}}</view>
+               <view class="ssubBotRight" data-roomid='{{item.room_id}}' style="width:110rpx;background:#fff;"><subscribe style="width:100%;height:100%;position:absolute;right:0;top:0;bottom:0;margin:auto;z-index:1;" room-id="{{item.room_id}}"></subscribe></view>
+           </view>
+        </view>
+    </view>
+
+    <!-- 线上 -->
+		<view class="punchInRewardtxt" style="margin:20rpx 0;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}'>—————— 线上 ——————</view>
+    <view style="padding:0 15rpx 20rpx;overflow: hidden;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}'>
+        <view class="ssubOnlinEve boxShadow" wx:for="{{goodsListOne.goodsList}}" wx:key="key" style="{{index%3==1?'margin:10rpx 30rpx;':''}}" catchtap="evesubscrfun" data-type='1' data-eveid='{{item.goods_id}}'>
+           <image class="ssubOnliimg" src="{{item.goods_thumb}}" mode='aspectFit'></image>
+           <view class="SSAname multilineellipsis">{{item.goods_name}}</view>
+           <view class="ssubBotbox">
+              <view class="ssubBotbLeft specialellipsis" wx:if='{{item.shop_price}}'>￥{{item.shop_price}}</view>
+              <view class="ssubBotRight">订阅</view>
+           </view>
+        </view>
+    </view>
+    <!-- 直播商品 -->
+		<view class="punchInRewardtxt" style="margin:20rpx 0;" wx:if='{{goodsListThree&&goodsListThree.goodsList&&goodsListThree.goodsList.length!=0}}'>—————— 直播 ——————</view>
+    <view style="padding:0 15rpx 20rpx;overflow: hidden;" wx:if='{{goodsListThree&&goodsListThree.goodsList&&goodsListThree.goodsList.length!=0}}'>
+        <view class="ssubOnlinEve boxShadow" wx:for="{{goodsListThree.goodsList}}" wx:key="key" style="{{index%3==1?'margin:10rpx 30rpx;':''}}" catchtap="evesubscrfun" data-type='3' data-eveid='{{item.goods_id}}'>
+           <image class="ssubOnliimg" src="{{item.goods_thumb}}" mode='aspectFit'></image>
+           <view class="SSAname multilineellipsis">{{item.goods_name}}</view>
+           <view class="ssubBotbox">
+              <view class="ssubBotbLeft specialellipsis" wx:if='{{item.shop_price}}'>￥{{item.shop_price}}</view>
+              <view class="ssubBotRight">订阅</view>
+           </view>
+        </view>
+    </view>
+
+
+    <!-- BilibIliworld -->
+		<view class="punchInRewardtxt" style="margin:20rpx 0;" wx:if='{{goodsListTwo&&goodsListTwo.goodsList&&goodsListTwo.goodsList.length!=0}}'>—————— BilibIliworld ——————</view>
+    <view style="width:100%;overflow: hidden;" wx:if='{{goodsListTwo&&goodsListTwo.goodsList&&goodsListTwo.goodsList.length!=0}}'>
+        <view class="ssubBilEve" wx:for="{{goodsListTwo.goodsList}}" wx:key="key" catchtap="evesubscrfun" data-type='2' data-eveid='{{item.goods_id}}'>
+           <image class="ssubBiliimgs boxShadow" src="{{item.goods_thumb}}" mode='aspectFit'></image>
+        </view>
+    </view>
+
+    <!-- 参展品牌 -->
+		<view class="punchInRewardtxt" style="margin:20rpx 0;" wx:if='{{brandList&&brandList.length!=0}}'>—————— 参展品牌 ——————</view>
+    <view style="width:100%;overflow: hidden;" wx:if='{{brandList&&brandList.length!=0}}'>
+        <view class="ssubBrandEve" wx:for="{{brandList}}" wx:key="key">
+           <image class="ssubBiliimgbr" src="{{item.logo}}" mode='aspectFit'></image>
+        </view>
+    </view>
+    <view class="ssubBotTxt">售卖商品陆续更新,最终以展会开售为准</view>
+</view>
+
+
+
+
+
+
+
+<bnavigation isChar='{{false}}' bind:run='auditversion' fashionShow='{{true}}' isProduce='{{isProduce}}'></bnavigation>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>

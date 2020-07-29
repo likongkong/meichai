@@ -2,7 +2,7 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 
-<bnavigation bind:run='auditversion' wnews='{{true}}' isProduce='{{isProduce}}' shopnum='{{shopnum}}' 
+<bnavigation bind:run='auditversion' fashionShow='{{true}}' isProduce='{{isProduce}}' shopnum='{{shopnum}}' 
 dryinglistnum='{{dryinglistnum}}'></bnavigation>
 
 <!-- 展会福利首页悬停icon -->

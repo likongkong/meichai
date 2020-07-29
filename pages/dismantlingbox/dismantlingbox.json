@@ -1,5 +1,11 @@
 {
   "asdfasfdflePullDownRefresh": true,
   "enablePullDownRefresh": true,
-  "navigationBarTitleText": "拆盒装"
+  "navigationBarTitleText": "拆盒装",
+  "usingComponents": {
+    "t_f": "../topfunction/topfunction",
+    "bnavigation": "../bottomComponent/bottomComponent",
+    "tga_c": "../tgacomponent/tgacomponent",
+    "subscribe":"plugin-private://wx2b03c6e691cd7370/components/subscribe/subscribe"
+  }
 }

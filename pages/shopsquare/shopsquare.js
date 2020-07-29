@@ -14,7 +14,7 @@ Page({
     c_title: '打卡', 
     c_arrow: true,
     c_backcolor: '#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     windowHeight: app.signindata.windowHeight - wx.getStorageSync('statusBarHeightMc')||0,
     signinlayer: true,
     tgabox:false,
@@ -234,8 +234,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if(app.signindata.sceneValue==1154){
+      this.onLoadfun();
+    }else{
       // 判断是否授权
       this.activsign();
+    }
+
   },
   onLoadfun:function(){
     var _this = this;
@@ -458,16 +463,27 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+      var _this = this;
+      var movies = _this.data.movies;
+      var img = 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
+      if(movies&&movies[0]){
+        img = movies[0].image || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
+      }
       return {
-        title: '美拆',
-        imageUrl: 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
+        title: 'Bilibiliworld x MCTS 8.7~8.9 不见不散，打卡送超多奖励',
+        imageUrl: img
       }    
   },
   onShareTimeline:function(){
     var _this = this;
+    var movies = _this.data.movies;
+    var img = 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
+    if(movies&&movies[0]){
+      img = movies[0].image || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
+    }
     return {
-      title:'美拆',
-      imageUrl: 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
+      title:'Bilibiliworld x MCTS 8.7~8.9 不见不散，打卡送超多奖励',
+      imageUrl: img
     }
   },  
   clicktganone: function () {

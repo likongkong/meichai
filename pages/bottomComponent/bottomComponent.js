@@ -45,7 +45,11 @@ Component({
     isChar: {
       type: Boolean,
       value: true,
-    }
+    },
+    fashionShow: {
+      type: Boolean,
+      value: false,
+    }   
   },
   /**
    * 组件的初始数据
@@ -78,6 +82,10 @@ Component({
     // 潮玩展
     fashionShow:function(){
       var _this = this;
+      if (_this.properties.fashionShow) {
+        this.triggerEvent("run");
+        return;
+      };
       if(app.signindata.isOpenToyShow){
         wx.navigateTo({
           url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
@@ -85,26 +93,30 @@ Component({
       }else{
         if(app.signindata.loginid!='' && app.signindata.uid!=''){
           _this.data.is_show_modal = true;
-          if(_this.data.exhdata){
-            _this.exhtiphidden();
-          }else{
-            wx.request({
-              url: 'https://cdn.51chaidan.com/common/toyShowAlert.json',
-              method: 'GET',
-              header: { 'Accept': 'application/json' },
-              success: function (res) {
-                  console.log(res)
-                  if(res.data.ReturnCode==200){
-                    _this.setData({
-                      exhdata:res.data,
-                      subscribedata:res.data.subscribe
-                    })
-                    _this.exhtiphidden();
-                  };
-              },
-              fail: function (res) {}
-            });
-          };
+          wx.navigateTo({
+            url: "/pages/dismantlingbox/dismantlingbox"
+          });
+
+          // if(_this.data.exhdata){
+          //   _this.exhtiphidden();
+          // }else{
+          //   wx.request({
+          //     url: 'https://cdn.51chaidan.com/common/toyShowAlert.json',
+          //     method: 'GET',
+          //     header: { 'Accept': 'application/json' },
+          //     success: function (res) {
+          //         console.log(res)
+          //         if(res.data.ReturnCode==200){
+          //           _this.setData({
+          //             exhdata:res.data,
+          //             subscribedata:res.data.subscribe
+          //           })
+          //           _this.exhtiphidden();
+          //         };
+          //     },
+          //     fail: function (res) {}
+          //   });
+          // };
         }else{
           this.triggerEvent("runex",true);
         }

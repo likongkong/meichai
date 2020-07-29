@@ -998,6 +998,7 @@ App({
 //  soviceguidance  店铺新手引导
 //  invitingfriends  邀请好友 and 邀请拆单
 //  shopsquare 展会打卡
+//  dismantlingbox 展会订阅
 
 
 //  redenvelopes 红包页面
