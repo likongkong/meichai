@@ -238,7 +238,7 @@
       <image src='../../../../pages/images/forknumber.png' class='mtoheimg' catchtap='pricemodfun'></image>
     </view>
     <view class='mtotipimg'>
-      <image class='mtotipimgs' style='width:{{tioimgwidth?tioimgwidth:""}}rpx;' src='{{goods_img}}'></image>
+      <image class='mtotipimgs' style='width:100%;display:block' mode="aspectFit" src='{{goods_img}}'></image>
     </view>
     <view style='padding:20rpx 20rpx;text-align:center;color:#000;font-size:26rpx;'>{{rolename}}</view>
     <view style='width:100%;height:70rpx;'>
@@ -393,7 +393,7 @@
             <view class='awaarrowmto'></view>
             <view class='awatipstxtci'>点击设置出售价格</view>
           </view>
-          <view class='mtocevemak' catchtap='pricemodblocl' data-sid='{{item.id}}' data-shop_price='{{item.shop_price}}' data-rolename='{{item.roleName}}' data-viewwidthone='{{item.viewwidthone}}' data-viewwidthtwo='{{item.viewwidthtwo}}' data-goods_img='{{item.goods_img}}' wx:if='{{item.status!=1}}'></view>
+          <view class='mtocevemak' catchtap='pricemodblocl' data-sid='{{item.id}}' data-shop_price='{{item.shop_price}}' data-rolename='{{item.roleName}}' data-viewwidthone='{{item.viewwidthone}}' data-goods_name="{{item.goods_name}}" data-viewwidthtwo='{{item.viewwidthtwo}}' data-goods_img='{{item.goods_img}}' wx:if='{{item.status!=1}}'></view>
         </view>
         <!-- 组合价格调整 -->
         <view class='mtoceverig' style='color:{{item.shop_price==0?"#000":"#e93d43"}};' wx:if='{{item.status!=4&&item.status!=3&&item.status!=2&&item.group_id!=0&&item.end}}'>组合价￥{{item.group_price}}
