@@ -35,7 +35,7 @@
 
 		<swiper bindanimationfinish="changeGoodsSwip" current="{{goodsIndex}}" class="swiper" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450" wx:if='{{isProduce}}'>
 			<swiper-item wx:for="{{movies}}" wx:key="key">
-				<image src="{{item.image}}?imageMogr2/thumbnail/x800" class="slide-image" mode="aspectFill" data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}' bindtap='jumpbanner' data-imgurl='{{item.image}}' style='position:relative;'>
+				<image src="{{item.image}}" class="slide-image" mode="aspectFill" data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}' bindtap='jumpbanner' data-imgurl='{{item.image}}' style='position:relative;'>
 				</image>
 			</swiper-item>
 		</swiper>
@@ -54,7 +54,7 @@
 
 			<!-- 跳转其他小程序 -->
 			<navigator wx:if='{{item.item_type==997}}' target="miniProgram" open-type="navigate" app-id="wxfe253b7309e29868" path="{{item.href}}" extra-data="" version="release" style='position: absolute;height:100%;width:100%;{{item.item_type==997}}left:0;top:0;z-index:3;'></navigator>
-			<image class='erverimg' style='margin:17rpx auto 2rpx;' mode='aspectFit' src='{{item.img}}?imageMogr2/thumbnail/x196'></image>
+			<image class='erverimg' style='margin:17rpx auto 2rpx;' mode='aspectFit' src='{{item.img}}'></image>
 			<view class='ervertext specialellipsis'>{{item.name}}
 				<view wx:if='{{!isTodaySign&&item.item_type==9}}' class='erversignintxt'>今日未签到</view>
 			</view>
@@ -101,7 +101,7 @@
 						<scroll-view scroll-x="true" class="disanum_tab_comtainer">
 							<view class='disanum_scr_box' wx:for='{{item.List}}' wx:key='key' wx:for-item='w' style='height:119rpx;width:222rpx;'>
 								<view class='disanum_simgbox' catchtap='activitydetailspage' data-id='{{w.id}}' style='height:119rpx;width:222rpx;'>
-									<image class='disanum_simg' src='{{w.cover}}?imageMogr2/thumbnail/x238' style='height:119rpx;width:222rpx;'></image>
+									<image class='disanum_simg' src='{{w.cover}}' style='height:119rpx;width:222rpx;'></image>
 								</view>
 							</view>
 							<view class='disanum_scr_box' style='height:118rpx;' wx:if='{{item.List.length>=4&&item.item_type}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}' catchtap='imgcomindellistjump'>
@@ -302,7 +302,7 @@
 						<scroll-view scroll-x="true" class="disanum_tab_comtainer">
 							<view class='disanum_scr_box' wx:for='{{item.List}}' wx:key='key' wx:for-item='w' style='height:207rpx;width:{{w.width||222}}rpx;' wx:for-index='num'>
 								<view class='disanum_simgbox' catchtap='driveDetail' data-id='{{w.id}}' style='height:147rpx;width:{{w.width||222}}rpx;'>
-									<image class='disanum_simg' src='{{w.cover}}?imageMogr2/thumbnail/x294' style='height:147rpx;width:{{w.width||222}}rpx;' bindload="imageLoadad" data-indexnum='4' data-num='{{num}}' data-ind='{{index}}'></image>
+									<image class='disanum_simg' src='{{w.cover}}' style='height:147rpx;width:{{w.width||222}}rpx;' bindload="imageLoadad" data-indexnum='4' data-num='{{num}}' data-ind='{{index}}'></image>
 								</view>
 								<view class='dhhboclcen' style='overflow: hidden;'>
 									<!-- 未开启 -->
@@ -362,7 +362,7 @@
 						<scroll-view scroll-x="true" class="disanum_tab_comtainer">
 							<view class='disanum_scr_box' wx:for='{{item.List}}' wx:key='key' wx:for-item='w' style='height:274rpx;width:{{w.width||200}}rpx;' wx:for-index='num'>
 								<view class='disanum_simgbox' catchtap='jumpopenbox' data-hreftype='{{w.hrefType}}' data-gid='{{w.goodsId}}' style='height:240rpx;width:{{w.width||200}}rpx;'>
-									<image class='disanum_simg' src='{{w.cover}}?imageMogr2/thumbnail/x480' style='height:240rpx;width:{{w.width||200}}rpx;' bindload="imageLoadad" data-indexnum='2' data-num='{{num}}' data-ind='{{index}}'></image>
+									<image class='disanum_simg' src='{{w.cover}}' style='height:240rpx;width:{{w.width||200}}rpx;' bindload="imageLoadad" data-indexnum='2' data-num='{{num}}' data-ind='{{index}}'></image>
 								</view>
 								<view style='height:30rpx;padding-top:4rpx;text-align:center;font-size:24rpx;color:#ff2742;'>{{w.unpackRole }}/{{w.limitRole}}</view>
 							</view>
@@ -442,7 +442,7 @@
 						<scroll-view scroll-x="true" class="disanum_tab_comtainer">
 							<view class='disanum_scr_box' wx:for='{{item.List}}' wx:key='key' wx:for-item='w' style='height:134rpx;width:{{w.width||160}}rpx;' wx:for-index='num'>
 								<view class='disanum_simgbox' catchtap='myordertoyind' data-gid='{{w.owner_id}}' style='height:100rpx;width:{{w.width||200}}rpx;'>
-									<image class='disanum_simg' src='{{w.cover}}?imageMogr2/thumbnail/x200' style='height:100rpx;width:{{w.width||200}}rpx;' bindload="imageLoadad" data-indexnum='3' data-num='{{num}}' data-ind='{{index}}'></image>
+									<image class='disanum_simg' src='{{w.cover}}' style='height:100rpx;width:{{w.width||200}}rpx;' bindload="imageLoadad" data-indexnum='3' data-num='{{num}}' data-ind='{{index}}'></image>
 								</view>
 								<view style='height:30rpx;padding-top:4rpx;text-align:center;font-size:24rpx;color:#ff2742;'>￥{{w.shop_price}}</view>
 							</view>
@@ -479,7 +479,7 @@
 						<scroll-view scroll-x="true" class="disanum_tab_comtainer">
 							<view class='disanum_scr_box' wx:for='{{item.List}}' wx:key='key' wx:for-item='w' wx:for-index='num' style='height:159rpx;width:{{w.width}}rpx;'>
 								<view class='disanum_simgbox' catchtap='jumpdlflottery' data-id='{{w.id}}' style='height:119rpx;width:{{w.width}}rpx;'>
-									<image class='disanum_simg'  bindload="imageLoadad" data-indexnum='989' data-num='{{num}}' data-ind='{{index}}' src='{{w.cover}}?imageMogr2/thumbnail/x238' style='height:119rpx;width:{{w.width}}rpx;' mode='aspectFit'></image>
+									<image class='disanum_simg'  bindload="imageLoadad" data-indexnum='989' data-num='{{num}}' data-ind='{{index}}' src='{{w.cover}}' style='height:119rpx;width:{{w.width}}rpx;' mode='aspectFit'></image>
 
 									<view class='videomaskcom specialellipsis' wx:if='{{w.shop_price}}' style='z-index:2;height:40rpx;'>
 										<text style='float:left;padding:0 8rpx 0 4rpx;font-size:24rpx;color:#fff;background: rgba(0,0,0,0.4);height:40rpx;border-radius:10rpx;line-height:42rpx;' wx:if='{{w.shop_price}}'>￥{{w.shop_price}}</text>
@@ -531,7 +531,7 @@
 						<scroll-view scroll-x="true" class="disanum_tab_comtainer">
 							<view class='disanum_scr_box' wx:for='{{item.List}}' wx:key='key' wx:for-item='w' style='height:160rpx;width:299rpx;'>
 								<view class='disanum_simgbox' catchtap='jumpdlfdetail' data-id='{{w.id}}' style='height:160rpx;width:299rpx;'>
-									<image class='disanum_simg' src='{{w.cover}}?imageMogr2/thumbnail/x320' style='height:160rpx;width:299rpx;'></image>
+									<image class='disanum_simg' src='{{w.cover}}' style='height:160rpx;width:299rpx;'></image>
 									<image wx:if='{{w.video}}' src='https://www.51chaidan.com/images/icon/iconPlayVideo.png' style='width:30px;height:30px;position:absolute;bottom:0;left:0;right:0;top:0;margin:auto;'></image>
 									<view class='videomaskcom' wx:if='{{w.title}}' style='background:#000;opacity: 0.4;z-index:1;'></view>
 									<view class='videomaskcom specialellipsis' wx:if='{{w.title}}' style='z-index:2;'>{{w.title}}</view>
@@ -756,7 +756,7 @@
 					<view class='dismtbcchwatfa' wx:for='{{item.List}}' wx:key='key' wx:for-item='w' wx:for-index='num'>
 						<view class='dismtbcchecheve' style='{{num%2==0?"margin-left:18rpx;":"float:right;margin-right:18rpx;"}}'>
 							<view class='dismtbccimgboxwatfa' data-gid='{{w.gid}}' catchtap='addressmanagement'>
-								<image src='{{w.gcover}}?imageMogr2/thumbnail/x696' class='dismtbccimgwatfa' mode='aspectFit'></image>
+								<image src='{{w.gcover}}' class='dismtbccimgwatfa' mode='aspectFit'></image>
 								<view class='shopsellout' wx:if='{{w.debuff==2}}'>售罄</view>
 								<view class='shopsellout' wx:elif='{{w.goods_type==3}}' style='line-height:32rpx;background:#298DF8;'>定金</view>
 							</view>

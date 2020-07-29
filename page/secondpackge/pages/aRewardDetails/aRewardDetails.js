@@ -791,6 +791,8 @@ Page({
           // app.signindata.yifanshangIsInQueue = true;
           // app.yifanshangIsInQueueFun(_this.data.recordtime);
 
+        }else if(res.data.ReturnCode == 348){
+          _this.listdata();
         }else{
           app.showToastC(res.data.Msg);
         }
@@ -854,6 +856,7 @@ Page({
       header: { 'Accept': 'application/json' },
       success: function (res) {
         if (res.data.ReturnCode == 200) {
+              wx.hideLoading();
               var payinfo = res.data.Info;
               _this.data.subscribedata = res.data.Info.subscribe || ''  // 订阅信息
               wx.requestPayment({
@@ -906,6 +909,7 @@ Page({
     })
   },
   getOrderRecord(){
+    wx.showLoading({title: '加载中...',mask:true});
     var _this = this; 
     var requestNum = _this.data.requestNum;
     var q = Dec.Aese('mod=yifanshang&operation=getOrderRecord&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&cart_id=' + _this.data.order.cart_id)
@@ -999,25 +1003,25 @@ Page({
         _this.setData({scratchOrList:false});
       }else{
         _this.setData({scratchOrList:true});
-        if(_this.data.activity.aheadUser){
-          wx.showModal({
-            title: '重新排队提示',
-            content: '等待时间过长,已被移除队列,是否继续排队',
-            success: function (res) {
-              if (res.confirm) {
-                _this.lineUpNow();
-              }else{
-                // _this.jumpaRewardList();
-                _this.listdata();
-              };
-            }
-          });
-          // wx.redirectTo({   
-          //   url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + _this.data.id
-          // });
-        }else{
-          _this.listdata();
-        }
+        // if(_this.data.activity.aheadUser){
+        //   wx.showModal({
+        //     title: '重新排队提示',
+        //     content: '等待时间过长,已被移除队列,是否继续排队',
+        //     success: function (res) {
+        //       if (res.confirm) {
+        //         _this.lineUpNow();
+        //       }else{
+        //         // _this.jumpaRewardList();
+        //         _this.listdata();
+        //       };
+        //     }
+        //   });
+        //   // wx.redirectTo({   
+        //   //   url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + _this.data.id
+        //   // });
+        // }else{
+        //   _this.listdata();
+        // }
 
       }
 

@@ -628,10 +628,17 @@ Page({
             app.showToastC('价格修改不能小于10');
             return false;
           };
-          if (parseFloat(_this.data.inputdataprice) > 999) {
-            app.showToastC('价格修改不能大于999');
-            return false;
-          };
+          if(_this.data.goods_name == 'BE@RBRICK'){
+            if (parseFloat(_this.data.inputdataprice) > 9999) {
+              app.showToastC('价格修改不能大于9999');
+              return false;
+            };
+          }else{
+            if (parseFloat(_this.data.inputdataprice) > 999) {
+              app.showToastC('价格修改不能大于999');
+              return false;
+            };
+          }
           var qqq = Dec.Aese('mod=cabinet&operation=setPrice&id=' + _this.data.sid + '&price=' + _this.data.inputdataprice + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
           wx.showLoading({
             title: '加载中...',
@@ -702,6 +709,7 @@ Page({
     var goods_img = w.currentTarget.dataset.goods_img || w.target.dataset.goods_img || '';
     var viewwidthone = w.currentTarget.dataset.viewwidthone || w.target.dataset.viewwidthone || 0;
     var viewwidthtwo = w.currentTarget.dataset.viewwidthtwo || w.target.dataset.viewwidthtwo || 0;
+    var goods_name = w.currentTarget.dataset.goods_name || w.target.dataset.goods_name || 0;
 
 
     // listdata[ind].viewwidthone = viewwidthone;
@@ -714,7 +722,8 @@ Page({
       "shop_price": shop_price,
       "roleName": rolename,
       "goods_img": goods_img,
-      "viewwidthtwo": viewwidthtwo
+      "viewwidthtwo": viewwidthtwo,
+      "goods_name": goods_name
     }];
     this.setData({
       pricemod: true,
@@ -725,7 +734,8 @@ Page({
       goods_img: goods_img,
       tioimgwidth: viewwidthone,
       tipsellist: tipsellist,
-      isnewold:1
+      isnewold:1,
+      goods_name:goods_name
     })
   },
   // input 值改变
