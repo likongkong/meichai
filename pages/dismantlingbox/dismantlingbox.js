@@ -39,7 +39,9 @@ Page({
     goodsListThree:[],
     goodsListTwo:[],
     goodsListOne:[],
-    liveListData:[]
+    liveListData:[],
+    typeEve:1,
+    indexEve:0
   },
   // banner 跳转
   jumpbanner: function (w) {
@@ -59,6 +61,7 @@ Page({
     var _this = this;
     var eveid = w.currentTarget.dataset.eveid || w.target.dataset.eveid||1;
     var type = w.currentTarget.dataset.type || w.target.dataset.type||1;
+    var index = w.currentTarget.dataset.index || w.target.dataset.index||0;
     var subscribedata = '';
     if(type==1){
        var goodsListOne = _this.data.goodsListOne;
@@ -72,7 +75,9 @@ Page({
     };
     _this.setData({
       subscribedata:subscribedata,
-      id:eveid
+      id:eveid,
+      typeEve:type,
+      indexEve:index
     });
     _this.subscrfun();
   },
@@ -113,12 +118,33 @@ Page({
   },
   subshowmodalfun: function () {
     var _this = this;
-    wx.showModal({
-      // title: '提示',
-      content: '订阅成功',
-      showCancel: false,
-      success: function (res) {}
-    })
+    // wx.showModal({
+    //   // title: '提示',
+    //   content: '订阅成功',
+    //   showCancel: false,
+    //   success: function (res) {
+          var typeEve = _this.data.typeEve || 1;
+          var indexEve = _this.data.indexEve || 0;
+          console.log(typeEve,indexEve)
+          if(typeEve==1){
+              var goodsListOne = _this.data.goodsListOne;
+              _this.setData({
+                 ['goodsListOne.goodsList['+indexEve+'].is_subscribe']: 1
+              })
+          }else if(typeEve==2){
+            var goodsListTwo = _this.data.goodsListTwo;
+            _this.setData({
+                 ['goodsListTwo.goodsList['+indexEve+'].is_subscribe']: 1
+            })
+          }else if(typeEve==3){
+            var goodsListThree = _this.data.goodsListThree;
+            _this.setData({
+                ['goodsListThree.goodsList['+indexEve+'].is_subscribe']: 1
+            })
+          };
+          
+      // }
+    // })
   },
 
   /**
@@ -254,7 +280,7 @@ Page({
       wx.showLoading({
         title: '加载中...',
       })
-      var q1 = Dec.Aese('mod=subscription&operation=goodsList&type=' + type + "&pid=" + _this.data.page);
+      var q1 = Dec.Aese('mod=subscription&operation=goodsList&type=' + type + "&pid=" + _this.data.page + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid );
       console.log('mod=subscription&operation=goodsList&type=' + type + "&pid=" + _this.data.page)
       wx.request({
         url: app.signindata.comurl + 'toy.php' + q1,

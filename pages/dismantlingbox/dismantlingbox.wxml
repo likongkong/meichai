@@ -31,24 +31,24 @@
     <!-- 线上 -->
 		<view class="punchInRewardtxt" style="margin:20rpx 0;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}'>—————— 线上 ——————</view>
     <view style="padding:0 15rpx 20rpx;overflow: hidden;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}'>
-        <view class="ssubOnlinEve boxShadow" wx:for="{{goodsListOne.goodsList}}" wx:key="key" style="{{index%3==1?'margin:10rpx 30rpx;':''}}" catchtap="evesubscrfun" data-type='1' data-eveid='{{item.goods_id}}'>
+        <view class="ssubOnlinEve boxShadow" wx:for="{{goodsListOne.goodsList}}" wx:key="key" style="{{index%3==1?'margin:10rpx 30rpx;':''}}" catchtap="evesubscrfun" data-type='1' data-eveid='{{item.goods_id}}' data-index='{{index}}'>
            <image class="ssubOnliimg" src="{{item.goods_thumb}}" mode='aspectFit'></image>
            <view class="SSAname multilineellipsis">{{item.goods_name}}</view>
            <view class="ssubBotbox">
               <view class="ssubBotbLeft specialellipsis" wx:if='{{item.shop_price}}'>￥{{item.shop_price}}</view>
-              <view class="ssubBotRight">订阅</view>
+              <view class="ssubBotRight" style="{{item.is_subscribe==1?'background:#fff;color:#32ACFB;':''}}">{{item.is_subscribe==1?'已订阅':'订阅'}}</view>
            </view>
         </view>
     </view>
     <!-- 直播商品 -->
 		<view class="punchInRewardtxt" style="margin:20rpx 0;" wx:if='{{goodsListThree&&goodsListThree.goodsList&&goodsListThree.goodsList.length!=0}}'>—————— 直播 ——————</view>
     <view style="padding:0 15rpx 20rpx;overflow: hidden;" wx:if='{{goodsListThree&&goodsListThree.goodsList&&goodsListThree.goodsList.length!=0}}'>
-        <view class="ssubOnlinEve boxShadow" wx:for="{{goodsListThree.goodsList}}" wx:key="key" style="{{index%3==1?'margin:10rpx 30rpx;':''}}" catchtap="evesubscrfun" data-type='3' data-eveid='{{item.goods_id}}'>
+        <view class="ssubOnlinEve boxShadow" wx:for="{{goodsListThree.goodsList}}" wx:key="key" style="{{index%3==1?'margin:10rpx 30rpx;':''}}" catchtap="evesubscrfun" data-type='3' data-eveid='{{item.goods_id}}' data-index='{{index}}'>
            <image class="ssubOnliimg" src="{{item.goods_thumb}}" mode='aspectFit'></image>
            <view class="SSAname multilineellipsis">{{item.goods_name}}</view>
            <view class="ssubBotbox">
               <view class="ssubBotbLeft specialellipsis" wx:if='{{item.shop_price}}'>￥{{item.shop_price}}</view>
-              <view class="ssubBotRight">订阅</view>
+              <view class="ssubBotRight" style="{{item.is_subscribe==1?'background:#fff;color:#32ACFB;':''}}">{{item.is_subscribe==1?'已订阅':'订阅'}}</view>
            </view>
         </view>
     </view>
@@ -57,7 +57,7 @@
     <!-- BilibIliworld -->
 		<view class="punchInRewardtxt" style="margin:20rpx 0;" wx:if='{{goodsListTwo&&goodsListTwo.goodsList&&goodsListTwo.goodsList.length!=0}}'>—————— BilibIliworld ——————</view>
     <view style="width:100%;overflow: hidden;" wx:if='{{goodsListTwo&&goodsListTwo.goodsList&&goodsListTwo.goodsList.length!=0}}'>
-        <view class="ssubBilEve" wx:for="{{goodsListTwo.goodsList}}" wx:key="key" catchtap="evesubscrfun" data-type='2' data-eveid='{{item.goods_id}}'>
+        <view class="ssubBilEve" wx:for="{{goodsListTwo.goodsList}}" wx:key="key" catchtap="evesubscrfun" data-type='2' data-eveid='{{item.goods_id}}' data-index='{{index}}'>
            <image class="ssubBiliimgs boxShadow" src="{{item.goods_thumb}}" mode='aspectFit'></image>
         </view>
     </view>
