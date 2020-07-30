@@ -513,12 +513,7 @@ Page({
    */
   onShareAppMessage: function () {
     var _this = this;
-    var bannerList = _this.data.bannerList;
-    var img = 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
-    if(bannerList&&bannerList[0]){
-      img = bannerList[0].img || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
-    }
-
+    var img = 'https://cdn.51chaidan.com/images/default/toyShow/toyshowShare.jpg';
     return {
       title: 'Bilibiliworld x MCTS 8.7~8.9 不见不散，超多展品不要错过',
       imageUrl: img
@@ -526,11 +521,7 @@ Page({
   },
   onShareTimeline:function(){
     var _this = this;
-    var bannerList = _this.data.bannerList;
-    var img = 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
-    if(bannerList&&bannerList[0]){
-      img = bannerList[0].img || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
-    }
+    var img = 'https://cdn.51chaidan.com/images/default/toyShow/toyshowShare.jpg';
     return {
       title:'Bilibiliworld x MCTS 8.7~8.9 不见不散，超多展品不要错过',
       imageUrl: img

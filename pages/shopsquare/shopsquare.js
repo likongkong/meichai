@@ -28,7 +28,25 @@ Page({
     rewardbdata:{},
     // 防止重复提交
     pmc:true,
-    audit_tips:''
+    audit_tips:'',
+    mapImgDisplay:false
+  },
+  // 图片预览
+  previewImg: function (w) {
+    var index = 0;
+    var imgArr = ['https://cdn.51chaidan.com/images/sign/toyShowBrandPosition.jpg'];
+    wx.previewImage({
+      current: imgArr[index],    
+      urls: imgArr,               
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  },
+  mapImgDisplayfun:function(){
+    this.setData({
+      mapImgDisplay:!this.data.mapImgDisplay
+    })
   },
   // 跳转详情
   jumpdetail:function(){

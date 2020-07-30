@@ -8,8 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    newdataexh:Date.parse(new Date())/1000<1588175999?true:false,
-    exhitime:Date.parse(new Date())/1000<1588607999?true:false,
+    newdataexh:Date.parse(new Date())/1000<1596729599?true:false,
+    exhitime:Date.parse(new Date())/1000<1596988799?true:false,
     // 接口地址
     comurl: app.signindata.comurl,
     // 图片地址

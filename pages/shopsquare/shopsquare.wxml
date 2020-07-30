@@ -32,7 +32,7 @@
 		</scroll-view>
 	
 	  <!-- 打卡奖励 -->
-		<view class="punchInRewardtxt">—————— 打卡点 ——————</view>
+		<view class="punchInRewardtxt">———— 打卡点 ————<image catchtap="mapImgDisplayfun" class="mapImg" mode='aspectFit' src="https://cdn.51chaidan.com/images/sign/map.png?2"></image></view>
 		<view class="punchInReward">
          <view class="punchInReEve" wx:for='{{expoList}}' wx:key='key' style="{{index%4==3?'margin: 0 0 20rpx 0;':''}}" >
 				     <!-- <button wx:if='{{item.examine_status==1||item.examine_status==3}}' bindtap='upload' data-ind='{{index}}' data-id='{{item.id}}' style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:3;opacity: 0;"></button> -->
@@ -80,7 +80,13 @@
 
 </view>
 	
-	
+
+<!-- 弹框   -->
+
+<view class='wsh' wx:if='{{mapImgDisplay}}'>
+    <view class='tgimgboxgb' catchtap="mapImgDisplayfun"></view>
+		<image class="mapImgbox" catchtap="previewImg" mode='aspectFit' src="https://cdn.51chaidan.com/images/sign/toyShowBrandPosition.jpg"></image>
+</view>	
 
 	
 <!-- 弹框   -->

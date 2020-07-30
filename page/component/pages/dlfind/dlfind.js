@@ -16,7 +16,7 @@ Page({
     isIphoneX: app.signindata.isIphoneX,
     shopnum: 0,
     // tab  0为热门 1为关注
-    cat_id: 2,
+    cat_id: '',
     // 话题id
     topic_id: 0,
     dlfhboteve: [],
@@ -69,6 +69,13 @@ Page({
     brand_id:0,
     id:'',
     subscribedata:[],
+    isOpenToyShow:false
+  },
+  // 跳转打卡
+  jumpshopqueque:function(){
+    wx.navigateTo({
+      url: "../../../../pages/shopsquare/shopsquare",
+    }); 
   },
   // 跳转商品详情
   jumpshopdetail:function(w){
@@ -421,8 +428,15 @@ Page({
       openid: app.signindata.openid,
       user_id: app.signindata.uid,
       isProduce: app.signindata.isProduce,
-      isShareFun: app.signindata.isShareFun
+      isShareFun: app.signindata.isShareFun,
+      isOpenToyShow:app.signindata.isOpenToyShow
     });
+
+    if(app.signindata.isOpenToyShow){
+      _this.setData({c_title:'MCTS打卡',cat_id:3});
+    }else{
+      _this.setData({cat_id:2});
+    };
 
     // 晒单分类
     Pub.postRequest(_this, 'topicclass', {

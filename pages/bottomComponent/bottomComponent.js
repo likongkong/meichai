@@ -62,7 +62,10 @@ Component({
     subscribedata:'',
     exhtipbox:false,
     subscribeCouponTip:'',
-    is_show_modal:true
+    is_show_modal:true,
+    isOpenToyShow:1596729599<Date.parse(new Date())/1000&&Date.parse(new Date())/1000<1596988799?true:false
+    // isOpenToyShow:1596104581<Date.parse(new Date())/1000<1596988799?true:false
+
   },
   /**
    * 组件的方法列表

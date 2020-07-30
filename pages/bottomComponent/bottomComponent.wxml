@@ -7,16 +7,31 @@
 			</view>
 			<view wx:if='{{isChar}}' class='navigationlcon' style='{{whomepage?"color:#fd2844":""}};'>首页</view>
 		</view>
-	</view>
+	</view> 
+
 	<view wx:if='{{isProduce}}' class='comNavigationEve' catchtap='dlfindfun'>
-		<view style='width:100%;height:100%;'>
-			<view class='navigationltop'>
-				<image wx:if='{{dlfind}}' class='navigationltopimg' src='https://clw.51chaidan.com//images/goods/findred.png'></image>
-				<image wx:else class='navigationltopimg' src='https://clw.51chaidan.com//images/goods/find1.png'></image>
-				<view class='tabshopimg specialellipsis' wx:if='{{dryinglistnum!=0}}' style='left:88rpx;'>{{dryinglistnum}}</view>
-			</view>
-			<view wx:if='{{isChar}}' class='navigationlcon' style='{{dlfind?"color:#fd2844":""}};'>发现</view>
-		</view>
+	  <!-- 打卡 -->
+	  <block wx:if='{{isOpenToyShow}}'>  
+				<view style='width:100%;height:100%;'>
+					<view class='navigationltop'>
+						<image class='navigationltopimg' src='https://cdn.51chaidan.com/images/sign/camera.png?'></image>
+						<view class='tabshopimg specialellipsis' wx:if='{{dryinglistnum!=0}}' style='left:88rpx;'>{{dryinglistnum}}</view>
+					</view>
+					<view wx:if='{{isChar}}' class='navigationlcon' style='{{dlfind?"color:#fd2844":""}};'>打卡</view>
+				</view>		
+		</block>
+		<!-- 发现 -->
+		<block wx:else>
+				<view style='width:100%;height:100%;'>
+					<view class='navigationltop'>
+						<image wx:if='{{dlfind}}' class='navigationltopimg' src='https://clw.51chaidan.com//images/goods/findred.png'></image>
+						<image wx:else class='navigationltopimg' src='https://clw.51chaidan.com//images/goods/find1.png'></image>
+						<view class='tabshopimg specialellipsis' wx:if='{{dryinglistnum!=0}}' style='left:88rpx;'>{{dryinglistnum}}</view>
+					</view>
+					<view wx:if='{{isChar}}' class='navigationlcon' style='{{dlfind?"color:#fd2844":""}};'>发现</view>
+				</view>		
+		</block>
+
 	</view>
 
 	<!-- 潮玩展 -->

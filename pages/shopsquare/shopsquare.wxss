@@ -52,8 +52,19 @@ page{background:#fefefe}.squarebox{width:100%;height:100%}.sshead{width:100%;hei
   line-height: 60rpx;
   font-size: 30rpx;
   font-weight: bold;
+  position: relative;
 }
-
+.mapImg{
+  height:90rpx;
+  width:90rpx;
+  position: absolute;
+  right: 43rpx;
+  top: -15rpx;
+  z-index: 1;
+}
+.mapImgbox{
+  width:600rpx;height:720rpx;margin:auto;display:block;position:absolute;z-index:199;top:0;left:0;right:0;bottom:0;margin: auto;
+}
 .punChInReScr{
   width: 700rpx;
   height: 240rpx;
