@@ -41,6 +41,7 @@ Page({
     // 商品展示数据
     goodsExhibition:[],
     activity:'',
+    otherActivity:'',
     isHowToPlay:false,
     remaintime:'',
     recordtime:'',
@@ -88,7 +89,8 @@ Page({
     pmc:true,
     //是否显示购买按钮
     isPurchase:true,
-    requestNum:0
+    requestNum:0,
+    is_jump:false
   },
 
   // 幸运值
@@ -602,7 +604,6 @@ Page({
   },
 
   onLoadfun:function(){
-
     var _this = this;
     // 判断是否有默认地址
     var ishowdealoradd = false;
@@ -648,9 +649,13 @@ Page({
         wx.stopPullDownRefresh();
         console.log('listdata=====',res)
         if (res.data.ReturnCode == 200) {
+          if(res.data.Info.is_jump && res.data.Info.is_jump==2){
+            _this.setData({is_jump: true});  
+          }
           var userimg = res.data.List.queue || [];
           var goodsdata = res.data.List.goods || [];
           var activity = res.data.Info.activity ||{};
+          var otherActivity = res.data.Info.activity.otherActivity ||{};
           var finalReward = res.data.List.eventually || {};
           var goodsExhibition = res.data.List.goods_gear_list || [];
           
@@ -748,6 +753,7 @@ Page({
             userimg:userimg,
             goodsdata:goodsdata,
             activity:activity,
+            otherActivity:otherActivity,
             finalReward:finalReward,
             goodsExhibition:newarr,
             isHistory:true,
@@ -835,7 +841,13 @@ Page({
           //  _this.countdown();
 
            _this.paymentmony();
-        }else{
+        } else if(res.data.ReturnCode == 341){
+          wx.hideLoading()
+          if(res.data.Info.is_jump && res.data.Info.is_jump==2){
+            var otherActivity = res.data.Info.otherActivity ||{};
+            _this.setData({ is_jump: true ,otherActivity:otherActivity,isPurchase:false,scrapingPur:!_this.data.scrapingPur});  
+          }
+        } else {
           wx.hideLoading()
           app.showToastC(res.data.Msg);
         }
@@ -1260,6 +1272,18 @@ Page({
         });
     };
 
+  },
+  //跳转详情
+  toaRewarddeyails(e){
+    let id = e.currentTarget.dataset.id;
+    wx.redirectTo({   
+      url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + id
+    });
+  },
+  //关闭跳转其他一番赏弹框
+  closefinishedBox(){
+    this.setData({is_jump:false});
+    this.queuefun(1,1);
   },
 
 })

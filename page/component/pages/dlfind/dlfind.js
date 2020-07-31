@@ -21,7 +21,7 @@ Page({
     topic_id: 0,
     dlfhboteve: [],
     listdata: [],
-    page: 1,
+    page: 1, 
     // 加载提示
     loadprompt: '加载更多.....',
     // 公共默认信息
@@ -64,6 +64,7 @@ Page({
     currentSwiper: 0,
     eldataclass:[],
     eldatalist:[],
+    mctslist:[],
     brand_name:'',
     elsearch:false,
     brand_id:0,
@@ -303,6 +304,53 @@ Page({
  
     });
   },  
+  // mcts列表
+  mctslistfun(num){
+    var _this = this;
+    if (num == 0) {
+      _this.data.page = 1;
+      _this.setData({
+        loadprompt: '加载更多.....',
+        mctslist: [],
+        nodataiftr: false
+      });
+    } else {
+      var pagenum = parseInt(_this.data.page)
+      _this.data.page = ++pagenum;
+      _this.setData({
+        loadprompt: '加载更多.....',
+        nodataiftr: false,
+      });
+    };
+    Pub.postRequest(_this, 'dryinglist', {
+      uid: _this.data.uid,
+      loginid: _this.data.loginid,
+      cat_id: _this.data.cat_id,
+      brand_name: _this.data.brand_name||'',
+      brand_id: _this.data.brand_id || 0,
+      page: _this.data.page
+    }, function (res) {
+      console.log(res);
+      var listdata = res.data.List|| [];
+      if(listdata.length!=0){
+        if (num == 0) {
+          _this.setData({
+            eldatalist: listdata,
+            nodataiftr: true
+          });
+        } else {
+          var ltlist = _this.data.eldatalist.concat(listdata);
+          _this.setData({
+            eldatalist: ltlist,
+            nodataiftr: true
+          });
+        };
+      }else{
+        app.showToastC('暂无更多数据');
+      }
+ 
+    });
+  },
   // 关注函数
   followfun: function(w) {
     var drying_id = w.currentTarget.dataset.drying_id || w.target.dataset.drying_id || 0;
@@ -429,6 +477,7 @@ Page({
       user_id: app.signindata.uid,
       isProduce: app.signindata.isProduce,
       isShareFun: app.signindata.isShareFun,
+      // isOpenToyShow:true
       isOpenToyShow:app.signindata.isOpenToyShow
     });
 
@@ -486,6 +535,8 @@ Page({
     if (this.data.cat_id == 2) {
       _this.eldatalistfun(0);
       _this.eldataclassfun();
+    }else if(this.data.cat_id == 3) {
+      _this.mctslistfun(0);
     } else {
       _this.listdata(0);
     }
@@ -596,8 +647,6 @@ Page({
           nodataiftr: true
         });
       };
-
-
     });
   },
   onReady: function() {},
@@ -611,6 +660,8 @@ Page({
   onPullDownRefresh: function() {
     if (this.data.cat_id==2) {
       this.eldatalistfun(0);
+    } else if(this.data.cat_id == 3){
+      this.mctslistfun(0);
     } else {
       this.listdata(0)
     }
@@ -619,6 +670,8 @@ Page({
   onReachBottom: function() {
     if (this.data.cat_id == 2){
       this.eldatalistfun(1);
+    }else if(this.data.cat_id == 3){
+      this.mctslistfun(1);
     }else{
       this.listdata(1)
     };
