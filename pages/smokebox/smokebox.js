@@ -902,7 +902,7 @@ Page({
 
   // continuType  1是跳详情    2选择一个盲盒   3再来一个  4分享   5跳转新增地址  6支付成功  7重roll
   // type 1是排队  2是延时
-  queueup: function (type, continuType) {
+  queueup: function (type, continuType,refresh) {
     var _this = this
     wx.showLoading({
       title: '加载中...',
@@ -932,6 +932,9 @@ Page({
         } else if (res.data.ReturnCode == 348) {
           app.showToastC('即将开放，敬请期待');
           _this.subscrfun();
+        };
+        if(refresh){
+          _this.getInfo()
         }
       },
       fail: function () {
@@ -1654,11 +1657,11 @@ Page({
                   
 
                   _this.ubpackbox()
-                  _this.queueup(2, 6)
+                  _this.queueup(2, 6,true)
 
-                  setTimeout(function () {
-                    _this.getInfo()
-                  }, 3000)
+                  // setTimeout(function () {
+                  //   _this.getInfo()
+                  // }, 3000)
                 }
               }, 1000);
 

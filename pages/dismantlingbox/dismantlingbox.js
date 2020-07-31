@@ -41,7 +41,24 @@ Page({
     goodsListOne:[],
     liveListData:[],
     typeEve:1,
-    indexEve:0
+    indexEve:0,
+    tipaid:'',
+    punchAddres:false,
+    giftList:[],
+    giftInfo:{},
+    shareBoxTip:false,
+    shareId:'',
+    referee:'',
+    defaultinformation:'',
+    paybuythree:false,
+    // true 运费  false 幸运值
+    lucValOrFreig:true
+  },
+  paybuythreeFun:function(){
+    this.setData({paybuythree:!this.data.paybuythree});
+  },
+  shareBoxTipfun:function(){
+    this.setData({shareBoxTip:!this.data.shareBoxTip});
   },
   // banner 跳转
   jumpbanner: function (w) {
@@ -151,6 +168,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      shareId:options.shareId||'',
+      referee:options.referee||''
+    })
     if(app.signindata.sceneValue==1154){
       this.onLoadfun();
     }else{
@@ -168,7 +189,8 @@ Page({
       openid: app.signindata.openid,
       avatarUrl: app.signindata.avatarUrl,
       isShareFun: app.signindata.isShareFun,
-      isProduce: app.signindata.isProduce
+      isProduce: app.signindata.isProduce,
+      defaultinformation:app.signindata.defaultinformation
     });
 
     _this.brandinformation(1);
@@ -177,23 +199,279 @@ Page({
     // blibli
     _this.commodityinformation(1,2);
     // 直播商品
-    _this.commodityinformation(1,3)
+    _this.commodityinformation(1,3);
     // 直播列表
-    _this.liveList(1)
+    _this.liveList(1);
+
+    //  收货地址
+    _this.nextpagediao();
+
+    if(_this.data.referee&&_this.data.referee!=_this.data.uid){
+       _this.shareExhBen();
+    }else{
+      // 展会福利
+      _this.exhibitionBenefits();
+    };
+
+    if(_this.data.defaultinformation){}else{
+      console.log('defaultinformation=====接口')
+      app.defaultinfofun(_this);
+    }
   },
+  // 分享展会福利
+  shareExhBen:function(){
+    var _this = this;
+    var q1 = Dec.Aese('mod=subscription&operation=giftList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid );
+    console.log('mod=subscription&operation=giftList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+    wx.showLoading({title: '加载中...',})
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + q1,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function(res) {
+        console.log('分享展会福利=====',res)
+        wx.stopPullDownRefresh();
+        wx.hideLoading()
+        if (res.data.ReturnCode == 200) {
+          _this.setData({
+            giftList:res.data.List.giftList || [],
+            giftInfo:res.data.Info || {}
+          });
+          // 分享数据调取完成调取展会福利
+          _this.exhibitionBenefits();
+        };
+      },
+
+    })
+  },
+  // 展会福利
+  exhibitionBenefits:function(){
+    var _this = this;
+    var q1 = Dec.Aese('mod=subscription&operation=giftList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid );
+    console.log('mod=subscription&operation=giftList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+    wx.showLoading({title: '加载中...',})
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + q1,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function(res) {
+        console.log('展会福利=====',res)
+        wx.stopPullDownRefresh();
+        wx.hideLoading()
+        if (res.data.ReturnCode == 200) {
+          _this.setData({
+            giftList:res.data.List.giftList || [],
+            giftInfo:res.data.Info || {}
+          })
+        };
+      },
+
+    })
+  },
+  // 跳转增加新地址
+  jumpaddress:function(){
+    wx.navigateTo({ 
+      url: "/pages/newreceivingaddress/newreceivingaddress"
+    })     
+  },
+  // 下订单
+  placingSnOrder:function(){
+      var _this = this;
+      if(_this.data.lucValOrFreig){
+         var type = 2;
+      }else{
+         var type = 1;
+      }
+      var q1 = Dec.Aese('mod=subscription&operation=getGift&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid +'&type='+type +'&gId=' + _this.data.goods_id + '&aid=' + _this.data.tipaid );
+
+      console.log('mod=subscription&operation=getGift&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid +'&type='+type +'&gId=' + _this.data.goods_id + '&aid=' + _this.data.tipaid )
+
+      wx.showLoading({title: '加载中...',mask:true})
+      wx.request({
+        url: app.signindata.comurl + 'toy.php' + q1,
+        method: 'GET',
+        header: {'Accept': 'application/json'},
+        success: function(res) {
+          console.log('生成订单=====',res)
+          wx.stopPullDownRefresh();
+          wx.hideLoading()
+          if (res.data.ReturnCode == 200) {
+            // 运费领奖
+            if(_this.data.lucValOrFreig){
+                _this.data.cart_id = res.data.Info.cart_id || '';
+                _this.paymentmony()
+            }else{
+              _this.paybuythreeFun();
+              wx.showModal({
+                content: res.data.Msg,
+                showCancel: false,
+                success: function (res) { }
+              }) 
+              _this.exhibitionBenefits()
+            };
+          }else{
+            wx.showModal({
+              content: res.data.Msg,
+              showCancel: false,
+              success: function (res) { }
+            }) 
+          };
+        },
+
+      })
+  },
+  // 微信支付
+  paymentmony: function () {
+    var _this = this;
+    var q = Dec.Aese('mod=operate&operation=prepay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1&oid=' + _this.data.cart_id + '&xcx=1' + '&openid=' + _this.data.openid);
+    wx.showLoading({title: '加载中...',mask:true})
+    wx.request({
+      url: app.signindata.comurl + 'order.php' + q,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        wx.hideLoading()
+        if (res.data.ReturnCode == 200) {
+          // 支付完成弹框显示数据
+          var payinfo = res.data.Info;
+          wx.requestPayment({
+            'timeStamp': res.data.Info.timeStamp.toString(),
+            'nonceStr': res.data.Info.nonceStr,
+            'package': res.data.Info.package,
+            'signType': 'MD5',
+            'paySign': res.data.Info.paySign,
+            'success': function (res) {
+                 _this.setData({
+                    paybuythree:false,
+                    punchAddres:false
+                 });
+                 _this.exhibitionBenefits()
+            },
+            'fail': function (res) {
+                _this.setData({
+                  paybuythree:false,
+                  punchAddres:false
+                });
+            },
+            'complete': function (res) {}
+          })
+        } else {
+          app.showToastC('剩余库存不足');
+        };
+      }
+    })
+  },
+  // 地址确认框
+  displeyNoneAdd:function(){
+    var _this = this;
+    // 隐藏选地址框
+    _this.punchAddresfun();
+    // 显示选择幸运值或运费领奖框
+    this.paybuythreeFun();
+  },
+  // 幸运值领奖
+  paybuytwoleft:function(){
+     var giftInfo = this.data.giftInfo;
+     this.data.lucValOrFreig = false;
+     console.log(giftInfo.luckNumber<giftInfo.getCostLuckNumber)
+     if(giftInfo.luckNumber<giftInfo.getCostLuckNumber){
+        wx.showModal({
+          content: '幸运值不足',
+          showCancel:false,
+          confirmText:'确定',
+          success: function (res) {}
+        })        
+     }else{
+       console.log(11111111)
+       this.placingSnOrder()
+     }
+  },
+  // 运费领奖
+  paybuytworight:function(){
+    this.data.lucValOrFreig = true;
+    this.placingSnOrder()
+  },
+  // 修改收货地址
+  revisethereceivingaddress:function(w){
+    var tipaid = w.currentTarget.dataset.tipaid || w.target.dataset.tipaid;
+    var tipadd = w.currentTarget.dataset.tipadd || w.target.dataset.tipadd;
+    var ind = w.currentTarget.dataset.ind || w.target.dataset.ind||0;
+    this.data.tipaid = tipaid;
+    var addressdata = this.data.addressdata || [];
+    for (var i = 0; i < addressdata.length; i++) {
+      addressdata[i].checked = false;
+    };
+    if (addressdata[ind]) {
+      addressdata[ind].checked = true;
+    };
+    this.setData({
+      addressdata:addressdata
+    });
+  },
+  punchAddresfun:function(w){
+    console.log(w,1,this.data.goods_id)
+    if(w){
+      this.data.goods_id = w.currentTarget.dataset.goods_id || w.target.dataset.goods_id || '';
+      console.log(w,2,this.data.goods_id)
+    };
+    this.setData({punchAddres:!this.data.punchAddres});
+  },
+  // 下一页返回调取
+  nextpagediao:function(){
+    var _this = this;
+    //  调取收货地址
+    var q = Dec.Aese('mod=address&operation=getlist&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+    wx.showLoading({title: '加载中...',})
+    wx.request({
+      url: app.signindata.comurl + 'user.php'+q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        wx.hideLoading()
+        if (res.data.ReturnCode == 200){
+          var rdl = res.data.List;
+          var tptipadi = '';
+          var tptipadd = '';
+          var tipnamephone = '';
+          if (rdl.length != 0) {
+            for (var i = 0; i < rdl.length; i++) {
+              if (rdl[i].isdefault == 1) {
+                rdl[i].checked = true;
+                tptipadi = rdl[i].aid;
+                tptipadd = rdl[i].address;
+                tipnamephone = rdl[i].consignee + " " + rdl[i].phone;
+              } else {
+                rdl[i].checked = false;
+              }
+            };
+            _this.data.tipaid = tptipadi;
+            _this.setData({
+              addressdata: rdl,
+              tipnamephone: tipnamephone,
+              tipaddress: tptipadd
+            })
+          } else {
+            _this.setData({
+              addressdata: [],
+            })
+          };
+        };
+        // 判断非200和登录
+        Dec.comiftrsign(_this, res, app);         
+      }
+    });
+  },
+
   // 直播信息  
   liveList:function(num){
     var _this = this
-    wx.showLoading({
-      title: '加载中...',
-    })
+    wx.showLoading({title: '加载中...',})
     if (num==1){
       _this.data.liveind = 0;
     }else{
       var pagenum = _this.data.liveind;
       _this.data.liveind = ++pagenum;
     };
-
 
     var q1 = Dec.Aese('mod=subscription&operation=liveList&pid=' + _this.data.liveind );
     console.log('mod=subscription&operation=brandList&pid=' + _this.data.liveind)
@@ -487,7 +765,10 @@ Page({
     // 直播商品
     _this.commodityinformation(1,3)
     // 直播列表
-    _this.liveList(1)
+    _this.liveList(1);
+    // 展会福利
+    _this.exhibitionBenefits();
+
   },
 
   /**
@@ -516,6 +797,7 @@ Page({
     var img = 'https://cdn.51chaidan.com/images/default/toyShow/toyshowShare.jpg';
     return {
       title: 'Bilibiliworld x MCTS 8.7~8.9 不见不散，超多展品不要错过',
+      path: "/pages/dismantlingbox/dismantlingbox?shareId=" + _this.data.giftInfo.shareId + '&referee=' + _this.data.uid,
       imageUrl: img
     }    
   },

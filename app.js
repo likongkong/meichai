@@ -954,7 +954,27 @@ App({
       mask:true,
       duration:2000
     });    
-  }
+  },
+  // 基础数据
+  defaultinfofun:function(_this){
+      var _this = _this;
+      var app  = this;
+      var qqq = Dec.Aese('operation=info&mod=info');
+      // 获取默认信息
+      wx.request({
+        url: app.signindata.comurl + 'general.php' + qqq,
+        method: 'GET',
+        header: { 'Accept': 'application/json' },
+        success: function (res) {
+          if (res.data.ReturnCode == 200) {
+            _this.setData({
+              defaultinformation: res.data.Info || '',
+            });
+            app.signindata.defaultinformation = res.data.Info || '';
+          };
+        }
+      });
+  },
 })
 
 

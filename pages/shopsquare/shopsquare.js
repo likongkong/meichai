@@ -29,12 +29,14 @@ Page({
     // 防止重复提交
     pmc:true,
     audit_tips:'',
-    mapImgDisplay:false
+    mapImgDisplay:false,
+    sormUrl:''
   },
   // 图片预览
   previewImg: function (w) {
     var index = 0;
-    var imgArr = ['https://cdn.51chaidan.com/images/sign/toyShowBrandPosition.jpg'];
+    var sormUrl = this.data.sormUrl||'https://cdn.51chaidan.com/images/sign/toyShowBrandPosition.jpg';
+    var imgArr = [sormUrl];
     wx.previewImage({
       current: imgArr[index],    
       urls: imgArr,               
@@ -43,9 +45,17 @@ Page({
       complete: function (res) { },
     })
   },
-  mapImgDisplayfun:function(){
+  mapImgDisplayfun:function(w){
+    var type = w.currentTarget.dataset.type || w.target.dataset.type||1;
+    var sormUrl = ''
+    if(type=='map'){
+      sormUrl = 'https://cdn.51chaidan.com/images/sign/toyShowBrandPosition.jpg';
+    }else{
+      sormUrl = 'https://cdn.51chaidan.com//images/brandEntry/abbreviation/20200710/86c7acad56ba574a0f1387c477b04129.jpg'
+    }
     this.setData({
-      mapImgDisplay:!this.data.mapImgDisplay
+      mapImgDisplay:!this.data.mapImgDisplay,
+      sormUrl:sormUrl
     })
   },
   // 跳转详情

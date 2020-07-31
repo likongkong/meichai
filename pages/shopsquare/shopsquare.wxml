@@ -4,10 +4,12 @@
 	
 <view class="punchTheClock">	
 
+
+		<!-- bindtap='jumpbanner' -->
 		<view class="ptcswipter" wx:if='{{movies&&movies.length!=0}}'>
 				<swiper style="width:100%;height:400rpx;" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
 					<swiper-item wx:for="{{movies}}" wx:key="key">
-						<image src="{{item.image}}?imageMogr2/thumbnail/x800" class="slideimage" mode="aspectFill" data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}' bindtap='jumpbanner' data-imgurl='{{item.image}}' style='position:relative;'>
+						<image src="{{item.image}}?imageMogr2/thumbnail/x800" class="slideimage" mode="aspectFill" data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}' catchtap="mapImgDisplayfun" data-type='swip'  data-imgurl='{{item.image}}' style='position:relative;'>
 						</image>
 					</swiper-item>
 				</swiper>
@@ -32,7 +34,7 @@
 		</scroll-view>
 	
 	  <!-- 打卡奖励 -->
-		<view class="punchInRewardtxt">———— 打卡点 ————<image catchtap="mapImgDisplayfun" class="mapImg" mode='aspectFit' src="https://cdn.51chaidan.com/images/sign/map.png?2"></image></view>
+		<view class="punchInRewardtxt">———— 打卡点 ————<image catchtap="mapImgDisplayfun" data-type='map' class="mapImg" mode='aspectFit' src="https://cdn.51chaidan.com/images/sign/map.png?2"></image></view>
 		<view class="punchInReward">
          <view class="punchInReEve" wx:for='{{expoList}}' wx:key='key' style="{{index%4==3?'margin: 0 0 20rpx 0;':''}}" >
 				     <!-- <button wx:if='{{item.examine_status==1||item.examine_status==3}}' bindtap='upload' data-ind='{{index}}' data-id='{{item.id}}' style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:3;opacity: 0;"></button> -->
@@ -85,7 +87,7 @@
 
 <view class='wsh' wx:if='{{mapImgDisplay}}'>
     <view class='tgimgboxgb' catchtap="mapImgDisplayfun"></view>
-		<image class="mapImgbox" catchtap="previewImg" mode='aspectFit' src="https://cdn.51chaidan.com/images/sign/toyShowBrandPosition.jpg"></image>
+		<image class="mapImgbox" catchtap="previewImg" mode='aspectFit' src="{{sormUrl}}"></image>
 </view>	
 
 	

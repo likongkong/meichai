@@ -28,6 +28,34 @@
         </view>
     </view>
 
+    <!-- 展会福利 -->
+    <block wx:if='{{giftList&&giftList.length!=0}}'>
+        <view class="punchInRewardtxt" style="margin:20rpx 0;">———— 展会福利 ————</view>
+        <view class="punchExhben">
+            <view class="punCheveSrc" wx:for='{{giftList}}' wx:key='key' style="{{index%3==2||index+1==giftList.length?'margin-right:0;':''}}">
+                <view class="punSrcImgBox boxShadow">
+                    <image class="punCheveSrcImg" src="{{item.gift_img}}" mode='aspectFit'></image>
+                </view>
+                <view wx:if='{{item.status==0}}' class="punCheveSrcTxt">
+                    <block wx:if='{{item.type==1}}'>订阅{{item.trueNumber}}/{{item.total}}</block>
+                    <block wx:else>围观{{item.trueNumber}}/{{item.total}}</block>
+                </view>
+                <view wx:elif='{{item.status==2}}' class="punCheveSrcTxt">已领取</view>
+                <view wx:elif='{{item.status==1}}' catchtap="punchAddresfun" data-goods_id='{{item.goods_id}}' class="punSrRTxt">可领取</view>
+                <view wx:elif='{{item.status==3}}' class="punSrRTxt" style="background:#757575;">已抢光</view>
+                <view wx:elif='{{item.status==4}}' class="punCheveSrcTxt">未开启</view>
+            </view>    
+        </view>
+        <view class="punchBottom">
+          <view class="punchBotImgBox" style="width:{{50+giftInfo.circuseeInfo.circuseeUserInfo.length*15>440?'440':50+giftInfo.circuseeInfo.circuseeUserInfo.length*15}}rpx;" wx:if='{{giftInfo.circuseeInfo.circuseeUserInfo.length!=0}}'>
+              <image class="punchBotImg" wx:for='{{giftInfo.circuseeInfo.circuseeUserInfo}}' wx:key='key' src="{{item.gift_img}}" style="z-index:{{index+1}};left:{{index*15}}rpx;" wx:if='{{index*15<390}}'></image>
+          </view>
+          <view class="punchBottomtxt">已围观人数x{{giftInfo.circuseeInfo.circuseeNumber}}</view>
+        </view> 
+        <image class="punchImgWxShare" src="https://www.51chaidan.com/images/icon/iconShareWX.png"><button open-type="share"  style='position:absolute;height:100%;width:100%;left:0;top:0;z-index:3;opacity:0;'></button></image>
+
+    </block>   
+
     <!-- 线上 -->
 		<view class="punchInRewardtxt" style="margin:20rpx 0;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}'>—————— 线上 ——————</view>
     <view style="padding:0 15rpx 20rpx;overflow: hidden;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}'>
@@ -74,6 +102,65 @@
 
 
 
+<!--  收货地址 receivingaddress -->
+<view class='wsh' wx:if='{{punchAddres}}' catchtouchmove="true">
+    <view class='tgimgboxgb' catchtap="punchAddresfun"></view>
+    <view class='ssubaddress'>
+      <view class='recgadhead'>
+          请选择收货地址
+      </view>
+      <scroll-view class='recgadcon'  scroll-y="true">
+        <view class='recgaddata' wx:for='{{addressdata}}' wx:key='key'>
+          <view class='recgaddname' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='revisethereceivingaddress'>
+            <view class='recgaddnameleft'>{{item.consignee}}</view>
+            <view class='recgaddnameleft'>{{item.phone}}</view>
+            <image src="../images/icon_check.png" mode='aspectFit' wx:if='{{item.checked}}' class="punchCheckImg"></image>
+          </view>
+          <view class='recgadaddress' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='revisethereceivingaddress'>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
+        </view>
+        <view class='recgadnodata' wx:if='{{addressdata.length==0}}'>
+          <image src='../images/recaddnodata.png' class='recgadnodataimg'></image>
+        </view>
+        <view class='recgadbotadd' bindtap='jumpaddress'>
+          增加新地址
+        </view>
+      </scroll-view>
+      <view class='recgadbot' bindtap='displeyNoneAdd'>
+           确定
+      </view>
+    </view>
+</view>
+
+<!--  购买提示框三  幸运值  -->
+<view class='wsh' wx:if='{{paybuythree}}' catchtouchmove="true">
+  <view class='tgimgboxgb' catchtap="paybuythreeFun"></view>
+  <view class='awatipbox'>
+      <view class='awatiphead' catchtap="awasustipimages">提示</view>
+        <view catchtap="awasustipimages" style="width:100%;height:44rpx;text-align:center;font-size:28rpx;">扣除{{giftInfo.getCostLuckNumber}}点幸运值或{{defaultinformation.carriage.d}}元运费领奖</view>
+        <view catchtap="awasustipimages" style="width:100%;height:30rpx;text-align:center;font-size:28rpx;vertical-align:middle;">当前幸运值:{{giftInfo.luckNumber}}点</view>
+      <view class='awatipbottom'>
+          <view class='awatipbotleft' catchtap='paybuytwoleft'>幸运值领奖</view>
+          <view class='awatipbotright' catchtap='paybuytworight'>{{defaultinformation.carriage.d}}元运费领奖</view>
+      </view>
+  </view>
+</view>
+
+
+<!-- 弹框   -->
+
+<view class='wsh' wx:if='{{shareBoxTip}}'>
+    <view class='tgimgboxgb' catchtap="shareBoxTipfun"></view>
+    <view class="puntipbox">
+        <view class="puntbtitle multilineellipsis" style="color:#42bd56;">围观成功</view>
+		    <image class="puntbimg" catchtap="jumpdetail" mode='heightFix' src="{{rewardbdata.gift_img}}"></image>
+				<view class="puntbtname">
+				    <block>
+								<view>每日只能围观1人,记得明日再来</view>						
+						</block>
+				</view>
+        <view class="punSrRTxttip" catchtap="shareBoxTipfun">确定</view>
+	  </view>
+</view>
 
 
 
