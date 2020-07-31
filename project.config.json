@@ -24,7 +24,7 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": true,
+		"useCompilerModule": false,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
@@ -82,7 +82,7 @@
 					"id": 3,
 					"name": "一番赏详情",
 					"pathName": "page/secondpackge/pages/aRewardDetails/aRewardDetails",
-					"query": "id=104417",
+					"query": "id=97052",
 					"scene": null
 				},
 				{

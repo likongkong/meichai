@@ -430,3 +430,24 @@
 
 </view>
 
+<view class="finishedBox" wx:if="{{is_jump}}">
+    <view class="mask" catchtap="closefinishedBox"></view>
+    <view class="popup">
+        <text>该一番赏已结束</text>
+        <text>进入其他一番赏查看更多精彩</text>
+        <view class="activityBox" data-id="{{otherActivity.id}}" bindtap="toaRewarddeyails">
+            <image src="{{otherActivity.cover}}"></image>
+            <view class="progressBox">
+                <progress percent="{{(otherActivity.suplusNum/otherActivity.limit_users)*100}}" color="{{(otherActivity.suplusNum/otherActivity.limit_users)*100 === 100?'#6FBE0D':(otherActivity.suplusNum/otherActivity.limit_users)*100 < 100 && (otherActivity.suplusNum/otherActivity.limit_users)*100 > 50?'#FEB51D':'#ff2742'}}" backgroundColor="#cccccc" stroke-width='12' active duration="5" />
+                <view style="display: flex;justify-content: space-between;position: absolute;top: 0;width:100%;">
+                    <text style="padding-left:15rpx;">剩余：{{otherActivity.suplusNum}}</text>
+                    <text style="padding-right:15rpx;">￥{{otherActivity.shopPrice}}</text>
+                </view>
+            </view>
+            <view class="gray">
+                <text style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{otherActivity.name}}</text>
+                <text style="width:160rpx;text-align: right;">点击进入</text>
+            </view> 
+        </view>
+    </view>
+</view>
