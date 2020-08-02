@@ -766,8 +766,6 @@ Page({
               nodataiftr: true,
               movies: banlist||''
             });
-            console.warn('elafradata=====',JSON.stringify(_this.data.elafradata))
-            console.warn('classificationlist=====',JSON.stringify(_this.data.classificationlist))
 
         };    
       },

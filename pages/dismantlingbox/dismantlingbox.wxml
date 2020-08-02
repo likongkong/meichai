@@ -2,6 +2,7 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 
+
 <view class='showsubbox'>
 		<view class="ptcswipter" wx:if='{{bannerList&&bannerList.length!=0}}'>
 				<swiper style="width:100%;height:400rpx;" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
@@ -12,7 +13,7 @@
 				</swiper>
 		</view>	
     <!-- 直播间 -->
-    <view class="ssubLiveBroadcast" wx:for="{{liveListData}}" wx:key="key">
+    <view class="ssubLiveBroadcast" wx:for="{{liveListData}}" wx:key="key" id='e1'>
 
         <navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{item.room_id}}" style='position: absolute;height:100%;width:500rpx;left:0;top:0;z-index:3;'></navigator>
 
@@ -30,10 +31,10 @@
 
     <!-- 展会福利 -->
     <block wx:if='{{giftList&&giftList.length!=0}}'>
-        <view class="punchInRewardtxt" style="margin:20rpx 0;">———— 展会福利 ————</view>
+        <view class="punchInRewardtxt" style="margin:20rpx 0;" id='e2'>———— 订阅福利 ————</view>
         <view class="punchExhben">
             <view class="punCheveSrc" wx:for='{{giftList}}' wx:key='key' style="{{index%3==2||index+1==giftList.length?'margin-right:0;':''}}">
-                <view class="punSrcImgBox boxShadow">
+                <view class="punSrcImgBox boxShadow" catchtap="displayDetail" data-ind='{{index}}'>
                     <image class="punCheveSrcImg" src="{{item.gift_img}}" mode='aspectFit'></image>
                 </view>
                 <view wx:if='{{item.status==0}}' class="punCheveSrcTxt">
@@ -47,17 +48,21 @@
             </view>    
         </view>
         <view class="punchBottom">
-          <view class="punchBotImgBox" style="width:{{50+giftInfo.circuseeInfo.circuseeUserInfo.length*15>440?'440':50+giftInfo.circuseeInfo.circuseeUserInfo.length*15}}rpx;" wx:if='{{giftInfo.circuseeInfo.circuseeUserInfo.length!=0}}'>
-              <image class="punchBotImg" wx:for='{{giftInfo.circuseeInfo.circuseeUserInfo}}' wx:key='key' src="{{item.gift_img}}" style="z-index:{{index+1}};left:{{index*15}}rpx;" wx:if='{{index*15<390}}'></image>
+          <view class="punchBotImgBox" style="width:{{50+giftInfo.circuseeInfo.circuseeUserInfo.length*15>400?'400':50+giftInfo.circuseeInfo.circuseeUserInfo.length*15}}rpx;" wx:if='{{giftInfo.circuseeInfo.circuseeUserInfo.length!=0}}'>
+              <image class="punchBotImg" wx:for='{{giftInfo.circuseeInfo.circuseeUserInfo}}' wx:key='key' src="{{item.litpic}}" style="z-index:{{index+1}};left:{{index*15}}rpx;" wx:if='{{index*15<350}}'></image>
           </view>
-          <view class="punchBottomtxt">已围观人数x{{giftInfo.circuseeInfo.circuseeNumber}}</view>
+          <view class="punchBottomtxt">分享围观人数x{{giftInfo.circuseeInfo.circuseeNumber}}</view>
         </view> 
-        <image class="punchImgWxShare" src="https://www.51chaidan.com/images/icon/iconShareWX.png"><button open-type="share"  style='position:absolute;height:100%;width:100%;left:0;top:0;z-index:3;opacity:0;'></button></image>
+        <view style="position: relative;">
+          <image class="punchImgWxShare" src="https://www.51chaidan.com/images/icon/iconShareWX.png"><button open-type="share"  style='position:absolute;height:100%;width:100%;left:0;top:0;z-index:3;opacity:0;'></button></image>
+           <view class="clockInIns" catchtap="mapImgDisplayfun">{{giftInfo.titleIntroduce}}</view>
+        </view>
+        
 
     </block>   
 
     <!-- 线上 -->
-		<view class="punchInRewardtxt" style="margin:20rpx 0;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}'>—————— 线上 ——————</view>
+		<view class="punchInRewardtxt" style="margin:20rpx 0;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}' id='e3'>—————— 线上 ——————</view>
     <view style="padding:0 15rpx 20rpx;overflow: hidden;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}'>
         <view class="ssubOnlinEve boxShadow" wx:for="{{goodsListOne.goodsList}}" wx:key="key" style="{{index%3==1?'margin:10rpx 30rpx;':''}}" catchtap="evesubscrfun" data-type='1' data-eveid='{{item.goods_id}}' data-index='{{index}}'>
            <image class="ssubOnliimg" src="{{item.goods_thumb}}" mode='aspectFit'></image>
@@ -69,7 +74,7 @@
         </view>
     </view>
     <!-- 直播商品 -->
-		<view class="punchInRewardtxt" style="margin:20rpx 0;" wx:if='{{goodsListThree&&goodsListThree.goodsList&&goodsListThree.goodsList.length!=0}}'>—————— 直播 ——————</view>
+		<view class="punchInRewardtxt" style="margin:20rpx 0;" wx:if='{{goodsListThree&&goodsListThree.goodsList&&goodsListThree.goodsList.length!=0}}' id='e4'>—————— 直播 ——————</view>
     <view style="padding:0 15rpx 20rpx;overflow: hidden;" wx:if='{{goodsListThree&&goodsListThree.goodsList&&goodsListThree.goodsList.length!=0}}'>
         <view class="ssubOnlinEve boxShadow" wx:for="{{goodsListThree.goodsList}}" wx:key="key" style="{{index%3==1?'margin:10rpx 30rpx;':''}}" catchtap="evesubscrfun" data-type='3' data-eveid='{{item.goods_id}}' data-index='{{index}}'>
            <image class="ssubOnliimg" src="{{item.goods_thumb}}" mode='aspectFit'></image>
@@ -83,7 +88,7 @@
 
 
     <!-- BilibIliworld -->
-		<view class="punchInRewardtxt" style="margin:20rpx 0;" wx:if='{{goodsListTwo&&goodsListTwo.goodsList&&goodsListTwo.goodsList.length!=0}}'>—————— BilibIliworld ——————</view>
+		<view class="punchInRewardtxt" style="margin:20rpx 0;" wx:if='{{goodsListTwo&&goodsListTwo.goodsList&&goodsListTwo.goodsList.length!=0}}' id='e5'>—————— BilibIliworld ——————</view>
     <view style="width:100%;overflow: hidden;" wx:if='{{goodsListTwo&&goodsListTwo.goodsList&&goodsListTwo.goodsList.length!=0}}'>
         <view class="ssubBilEve" wx:for="{{goodsListTwo.goodsList}}" wx:key="key" catchtap="evesubscrfun" data-type='2' data-eveid='{{item.goods_id}}' data-index='{{index}}'>
            <image class="ssubBiliimgs boxShadow" src="{{item.goods_thumb}}" mode='aspectFit'></image>
@@ -146,30 +151,60 @@
 </view>
 
 
-<!-- 弹框   -->
+<!-- 弹框  shareShopData -->
 
-<view class='wsh' wx:if='{{shareBoxTip}}'>
+<view class='wsh' wx:if='{{shareBoxTip&&shareShopData}}'>
     <view class='tgimgboxgb' catchtap="shareBoxTipfun"></view>
     <view class="puntipbox">
-        <view class="puntbtitle multilineellipsis" style="color:#42bd56;">围观成功</view>
-		    <image class="puntbimg" catchtap="jumpdetail" mode='heightFix' src="{{rewardbdata.gift_img}}"></image>
+        <view class="puntbtitle multilineellipsis" style="{{shareShopData.status==1?'color:#42bd56;':'color:#ff2742;'}}">
+            <block wx:if='{{shareShopData.status==1}}'>围观成功</block>
+            <block wx:else>今日你已围观{{shareShopData.limit}}次好友了</block>
+        </view>
+		    <image class="puntbimg" catchtap="jumpdetail" mode='heightFix' src="{{shareShopData.img}}"></image>
 				<view class="puntbtname">
-				    <block>
-								<view>每日只能围观1人,记得明日再来</view>						
+				    <block wx:if='{{shareShopData.status!=1}}'>
+								<view>每日只能围观{{shareShopData.limit}}人,记得明日再来</view>						
 						</block>
 				</view>
         <view class="punSrRTxttip" catchtap="shareBoxTipfun">确定</view>
 	  </view>
 </view>
 
+<!-- 弹框   -->
+
+<view class='wsh' wx:if='{{mapImgDisplay}}' style="z-index:999;" catchtouchmove="true">
+    <view class='tgimgboxgb' catchtap="mapImgDisplayfun"></view>
+		<image class="mapImgbox" catchtap="previewImg" mode='aspectFit' src="{{giftInfo.imgIntroduce}}"></image>
+</view>	
 
 
+<!-- 商品详情 -->
+<view  class='wsh' wx:if='{{iftrdetailpagetwo}}' catchtouchmove="true">
+	<view class='tgimgboxgb' catchtap='iftrdetailpageb'></view>
+
+	<view style='width:100%;height:65%;position:absolute;left:0;bottom:0;background:#ccc;z-index:9;'>
+		<image src='https://www.51chaidan.com/images/spread/dial/fork.png' catchtap='iftrdetailpageb' style='width:50rpx;height:50rpx;padding:30rpx;border-radius:50%;display:block;position:absolute;top:0rpx;right:0;z-index:10;'>
+		</image>
+		<scroll-view scroll-y="true" style="width:100%;height:100%;background:#f0eff5;" class='detailsmokebox'>
+			<template is="wxParse" data="{{wxParseData:article.nodes}}" />
+		</scroll-view>
+    <view class="shunqbtnstyle" catchtap="mapImgDisplayfun">订阅福利</view>
+	</view>
+
+</view>
+
+
+<!-- 底部导航条 -->
+<view class="shunButBar">
+   <view class="shunButBarEve" wx:for='{{shunButBarData}}' wx:key='key' catchtap="jumpposition" data-tid='{{item.tid}}' style="{{index+1==shunButBarData.length?'border-right:0;':''}}">{{item.name}}</view>
+</view>
 
 <bnavigation isChar='{{false}}' bind:run='auditversion' fashionShow='{{true}}' isProduce='{{isProduce}}'></bnavigation>
 
 
 
-
+<!--  html页面转换  -->
+<import src="../../wxParse/wxParse.wxml" />
 
 
 
