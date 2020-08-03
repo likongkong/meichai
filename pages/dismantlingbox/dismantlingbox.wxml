@@ -48,7 +48,7 @@
         </view>
         <view class="punchBottom">
           <view class="punchBotImgBox" style="width:{{50+giftInfo.circuseeInfo.circuseeUserInfo.length*15>440?'440':50+giftInfo.circuseeInfo.circuseeUserInfo.length*15}}rpx;" wx:if='{{giftInfo.circuseeInfo.circuseeUserInfo.length!=0}}'>
-              <image class="punchBotImg" wx:for='{{giftInfo.circuseeInfo.circuseeUserInfo}}' wx:key='key' src="{{item.gift_img}}" style="z-index:{{index+1}};left:{{index*15}}rpx;" wx:if='{{index*15<390}}'></image>
+              <image class="punchBotImg" wx:for='{{giftInfo.circuseeInfo.circuseeUserInfo}}' wx:key='key' src="{{item.litpic}}" style="z-index:{{index+1}};left:{{index*15}}rpx;" wx:if='{{index*15<390}}'></image>
           </view>
           <view class="punchBottomtxt">已围观人数x{{giftInfo.circuseeInfo.circuseeNumber}}</view>
         </view> 
@@ -146,16 +146,19 @@
 </view>
 
 
-<!-- 弹框   -->
+<!-- 弹框  shareShopData -->
 
-<view class='wsh' wx:if='{{shareBoxTip}}'>
+<view class='wsh' wx:if='{{shareBoxTip&&shareShopData}}'>
     <view class='tgimgboxgb' catchtap="shareBoxTipfun"></view>
     <view class="puntipbox">
-        <view class="puntbtitle multilineellipsis" style="color:#42bd56;">围观成功</view>
-		    <image class="puntbimg" catchtap="jumpdetail" mode='heightFix' src="{{rewardbdata.gift_img}}"></image>
+        <view class="puntbtitle multilineellipsis" style="{{shareShopData.status==1?'color:#42bd56;':'color:#ff2742;'}}">
+            <block wx:if='{{shareShopData.status==1}}'>围观成功</block>
+            <block wx:else>今日你已围观{{shareShopData.limit}}次好友了</block>
+        </view>
+		    <image class="puntbimg" catchtap="jumpdetail" mode='heightFix' src="{{shareShopData.img}}"></image>
 				<view class="puntbtname">
-				    <block>
-								<view>每日只能围观1人,记得明日再来</view>						
+				    <block wx:if='{{shareShopData.status!=1}}'>
+								<view>每日只能围观{{shareShopData.limit}}人,记得明日再来</view>						
 						</block>
 				</view>
         <view class="punSrRTxttip" catchtap="shareBoxTipfun">确定</view>

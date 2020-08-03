@@ -191,7 +191,7 @@ page{
 }
 .punCheveSrc{
   display: inline-block;
-  height: 240rpx;
+  height: 260rpx;
   margin-right: 32rpx;
   vertical-align: top;
   position: relative;
@@ -201,8 +201,8 @@ page{
   position: relative;
 }
 .punCheveSrcImg{
-  width: 160rpx;
-  height: 160rpx;
+  width: 180rpx;
+  height: 180rpx;
   display: block;
 }
 .punCheveSrcTxt{

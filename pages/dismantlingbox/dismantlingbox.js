@@ -52,7 +52,8 @@ Page({
     defaultinformation:'',
     paybuythree:false,
     // true 运费  false 幸运值
-    lucValOrFreig:true
+    lucValOrFreig:true,
+    shareShopData:''
   },
   paybuythreeFun:function(){
     this.setData({paybuythree:!this.data.paybuythree});
@@ -221,8 +222,9 @@ Page({
   // 分享展会福利
   shareExhBen:function(){
     var _this = this;
-    var q1 = Dec.Aese('mod=subscription&operation=giftList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid );
-    console.log('mod=subscription&operation=giftList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+
+    var q1 = Dec.Aese('mod=subscription&operation=circusee&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&shareId='+_this.data.shareId + '&shareUid=' +_this.data.referee);
+    console.log('mod=subscription&operation=circusee&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&shareId='+_this.data.shareId + '&shareUid=' +_this.data.referee)
     wx.showLoading({title: '加载中...',})
     wx.request({
       url: app.signindata.comurl + 'toy.php' + q1,
@@ -233,10 +235,11 @@ Page({
         wx.stopPullDownRefresh();
         wx.hideLoading()
         if (res.data.ReturnCode == 200) {
+           
           _this.setData({
-            giftList:res.data.List.giftList || [],
-            giftInfo:res.data.Info || {}
+            shareShopData:res.data.Info.circuseeInfo || ''
           });
+          _this.shareBoxTipfun();
           // 分享数据调取完成调取展会福利
           _this.exhibitionBenefits();
         };
@@ -345,7 +348,14 @@ Page({
                     paybuythree:false,
                     punchAddres:false
                  });
-                 _this.exhibitionBenefits()
+                 wx.showModal({
+                    content: '领取成功',
+                    showCancel: false,
+                    success: function (res) {
+                      _this.exhibitionBenefits()
+                    }
+                }) 
+                 
             },
             'fail': function (res) {
                 _this.setData({
