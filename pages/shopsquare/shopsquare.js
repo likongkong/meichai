@@ -11,7 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '打卡', 
+    c_title: 'MCTS打卡福利', 
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
@@ -51,7 +51,7 @@ Page({
     if(type=='map'){
       sormUrl = 'https://cdn.51chaidan.com/images/sign/toyShowBrandPosition.jpg';
     }else{
-      sormUrl = 'https://cdn.51chaidan.com//images/brandEntry/abbreviation/20200710/86c7acad56ba574a0f1387c477b04129.jpg'
+      sormUrl = 'https://cdn.51chaidan.com/images/spread/toyShow/daka_explain.jpg'
     }
     this.setData({
       mapImgDisplay:!this.data.mapImgDisplay,
@@ -262,6 +262,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
+    // 推送统计
+    this.data.push_id = options.push_id || 0;
+
     if(app.signindata.sceneValue==1154){
       this.onLoadfun();
     }else{
@@ -337,15 +341,16 @@ Page({
       _this.data.pid = ++pagenum;
     };
 
-    var q1 = Dec.Aese('mod=brandsignin&operation=brandList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + "&pid=" + _this.data.pid +'&time='+ _this.data.timedata);
+    var q1 = Dec.Aese('mod=brandsignin&operation=brandList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + "&pid=" + _this.data.pid +'&time='+ _this.data.timedata+ '&push_id='+_this.data.push_id);
     
-    console.log('mod=brandsignin&operation=brandList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + "&pid=" + _this.data.pid +'&time='+ _this.data.timedata)
+    console.log('mod=brandsignin&operation=brandList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + "&pid=" + _this.data.pid +'&time='+ _this.data.timedata+ '&push_id='+_this.data.push_id)
 
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q1,
       method: 'GET',
       header: {'Accept': 'application/json'},
       success: function(res) {
+        _this.data.push_id =  0;
         console.log('listdata=====',res)
         wx.stopPullDownRefresh();
         wx.hideLoading()

@@ -85,7 +85,7 @@
 
 <!-- 弹框   -->
 
-<view class='wsh' wx:if='{{mapImgDisplay}}'>
+<view class='wsh' wx:if='{{mapImgDisplay}}' style="z-index:199;">
     <view class='tgimgboxgb' catchtap="mapImgDisplayfun"></view>
 		<image class="mapImgbox" catchtap="previewImg" mode='aspectFit' src="{{sormUrl}}"></image>
 </view>	
@@ -101,11 +101,11 @@
 				<view class="puntbtname">
 				    <block wx:if='{{rewardbdata.gift_status==0}}'>
 								<view style="color:#42bd56;">需打卡品牌x{{rewardbdata.clockin_num}}</view>
-								<view style="text-decoration:underline;color:#42bd56;">{{rewardbdata.draw_tips_one}}</view>						
+								<view catchtap="mapImgDisplayfun" data-type="map" style="text-decoration:underline;color:#42bd56;">{{rewardbdata.draw_tips_one}}</view>						
 						</block>
 						<block wx:elif='{{rewardbdata.gift_status==1}}'>
 								<view style="color:#ff2840;">已满足打卡需求</view>
-								<view style="text-decoration:underline;color:#ff2840;">{{rewardbdata.draw_tips_one}}</view>						
+								<view catchtap="mapImgDisplayfun" data-type="map" style="text-decoration:underline;color:#ff2840;">{{rewardbdata.draw_tips_one}}</view>						
 						</block>
 						<block wx:else>
 						    <view style="color:#ACACAC;">已领取</view>

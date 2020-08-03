@@ -1,5 +1,6 @@
 var Dec = require('../../common/public.js'); //aes加密解密js
 const app = getApp();
+var WxParse = require('../../wxParse/wxParse.js');
 Page({
 
   /**
@@ -53,7 +54,69 @@ Page({
     paybuythree:false,
     // true 运费  false 幸运值
     lucValOrFreig:true,
-    shareShopData:''
+    shareShopData:'',
+    mapImgDisplay:false,
+    iftrdetailpagetwo:false,
+    shunButBarData:[
+      {name:'直播间',tid:1},
+      {name:'订阅福利',tid:2},
+      {name:'线上商品',tid:3},
+      {name:'直播商品',tid:4},
+      {name:'线下商品',tid:5}
+    ]
+  },
+  // 跳转定位
+  jumpposition:function(w){
+    var tid = w.currentTarget.dataset.tid || w.target.dataset.tid || 0;
+
+    var query = wx.createSelectorQuery();
+    query.select('#e' + tid).boundingClientRect();
+    query.selectViewport().scrollOffset();
+    query.exec(function(res) {
+      if (res && res[0] && res[1]) {
+        wx.pageScrollTo({
+           scrollTop:( res[0].top+res[1].scrollTop-app.signindata.statusBarHeightMc||90 )-85,
+           duration:300
+        })
+      }
+    });
+
+  },
+  displayDetail:function(w){
+    wx.showLoading({title: '加载中...',})
+    var _this = this;
+    var ind = w.currentTarget.dataset.ind || w.target.dataset.ind||0;
+    var giftList = this.data.giftList || [];
+    if(giftList[ind]&&giftList[ind].goods_desc){
+      var gdesc = decodeURIComponent(giftList[ind].goods_desc.replace(/\+/g, ' '));
+      console.log(gdesc)
+      WxParse.wxParse('article', 'html', gdesc, _this, 0);
+      this.setData({
+        iftrdetailpagetwo:true
+      })
+
+    }
+    wx.hideLoading()
+
+  },
+  iftrdetailpageb:function(){
+    this.setData({iftrdetailpagetwo:false});
+  },
+  // 图片预览
+  previewImg: function (w) {
+    var index = 0;
+    var giftInfo = this.data.giftInfo.imgIntroduce || 'https://cdn.51chaidan.com/images/sign/toyShowBrandPosition.jpg';
+    var imgArr = [giftInfo];
+    wx.previewImage({
+      current: imgArr[index],    
+      urls: imgArr,               
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  },  
+  mapImgDisplayfun:function(){
+    this.setData({mapImgDisplay:!this.data.mapImgDisplay});
   },
   paybuythreeFun:function(){
     this.setData({paybuythree:!this.data.paybuythree});
@@ -103,12 +166,18 @@ Page({
   subscrfun: function () {
     var _this = this;
     var subscribedata = _this.data.subscribedata || '';
+    console.log('subscribedata===',subscribedata)
+    console.warn(1,subscribedata && subscribedata.template_id && app.signindata.subscribeif)
+
     if (subscribedata && subscribedata.template_id && app.signindata.subscribeif) {
+      console.warn(2)
       if (subscribedata.template_id instanceof Array) {
+        console.warn(3)
         wx.requestSubscribeMessage({
           tmplIds: subscribedata.template_id || [],
           success(res) {
             var is_show_modal = true;
+            console.warn(4)
             for (var i = 0; i < subscribedata.template_id.length; i++) {
               if (res[subscribedata.template_id[i]] == "accept") {
                 app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
@@ -122,6 +191,7 @@ Page({
           complete() { }
         })
       } else {
+        console.warn(5)
         wx.requestSubscribeMessage({
           tmplIds: [subscribedata.template_id || ''],
           success(res) {
@@ -173,6 +243,10 @@ Page({
       shareId:options.shareId||'',
       referee:options.referee||''
     })
+
+    // 推送统计
+    this.data.push_id = options.push_id || 0;
+
     if(app.signindata.sceneValue==1154){
       this.onLoadfun();
     }else{
@@ -250,14 +324,15 @@ Page({
   // 展会福利
   exhibitionBenefits:function(){
     var _this = this;
-    var q1 = Dec.Aese('mod=subscription&operation=giftList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid );
-    console.log('mod=subscription&operation=giftList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+    var q1 = Dec.Aese('mod=subscription&operation=giftList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid+ '&push_id='+_this.data.push_id );
+    console.log('mod=subscription&operation=giftList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid+ '&push_id='+_this.data.push_id)
     wx.showLoading({title: '加载中...',})
     wx.request({
       url: app.signindata.comurl + 'toy.php' + q1,
       method: 'GET',
       header: {'Accept': 'application/json'},
       success: function(res) {
+        _this.data.push_id =  0;
         console.log('展会福利=====',res)
         wx.stopPullDownRefresh();
         wx.hideLoading()
@@ -804,19 +879,21 @@ Page({
    */
   onShareAppMessage: function () {
     var _this = this;
+    var giftInfo = _this.data.giftInfo || {};
     var img = 'https://cdn.51chaidan.com/images/default/toyShow/toyshowShare.jpg';
     return {
-      title: 'Bilibiliworld x MCTS 8.7~8.9 不见不散，超多展品不要错过',
+      title:giftInfo.titleShare || 'Bilibiliworld x MCTS 8.7~8.9 不见不散，超多展品不要错过',
       path: "/pages/dismantlingbox/dismantlingbox?shareId=" + _this.data.giftInfo.shareId + '&referee=' + _this.data.uid,
-      imageUrl: img
+      imageUrl:giftInfo.imgShare || img
     }    
   },
   onShareTimeline:function(){
     var _this = this;
+    var giftInfo = _this.data.giftInfo || {};
     var img = 'https://cdn.51chaidan.com/images/default/toyShow/toyshowShare.jpg';
     return {
-      title:'Bilibiliworld x MCTS 8.7~8.9 不见不散，超多展品不要错过',
-      imageUrl: img
+      title:giftInfo.titleShare || 'Bilibiliworld x MCTS 8.7~8.9 不见不散，超多展品不要错过',
+      imageUrl:giftInfo.imgShare || img
     }
   },  
 })

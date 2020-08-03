@@ -572,6 +572,10 @@ App({
       wx.navigateTo({
         url: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + whref 
       });
+    } else if (item_type == 9018) { 
+      wx.navigateTo({
+        url: "/pages/dismantlingbox/dismantlingbox"
+      });
     };
 
 
@@ -666,7 +670,7 @@ App({
       url: app.signindata.comurl + 'statistics.php' + q1,
       method: 'GET',
       header: { 'Accept': 'application/json' },
-      success: function (res) { }
+      success: function (res) {}
     });
   },
   comsubscribe: function (_this) {
