@@ -378,7 +378,7 @@ page{
 
 
 .puntipbox{
-  width:400rpx;
+  width:460rpx;
   height: 540rpx;
   background: #fff;
   border-radius: 8rpx;
@@ -542,4 +542,12 @@ page{
   text-align: center;
   border-right: 2rpx solid #000;
   margin-top: 15rpx;
+}
+.butgetnum{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
 }

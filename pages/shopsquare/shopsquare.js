@@ -49,7 +49,7 @@ Page({
     var type = w.currentTarget.dataset.type || w.target.dataset.type||1;
     var sormUrl = ''
     if(type=='map'){
-      sormUrl = 'https://cdn.51chaidan.com/images/sign/toyShowBrandPosition.jpg';
+      sormUrl = 'https://cdn.51chaidan.com/images/sign/toyShowBrandPosition.jpg?';
     }else{
       sormUrl = 'https://cdn.51chaidan.com/images/spread/toyShow/daka_explain.jpg'
     }
@@ -114,12 +114,12 @@ Page({
 
   },
   clickcheck:function(w){
-    var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
-    this.setData({
-      timedata:id
-    })
-    this.getlist(1);
-    this.allpunchrecords(1);
+    // var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
+    // this.setData({
+    //   timedata:id
+    // })
+    // this.getlist(1);
+    // this.allpunchrecords(1);
   },
   rewardboxhidden:function(){
     this.setData({

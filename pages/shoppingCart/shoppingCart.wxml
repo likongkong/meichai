@@ -480,7 +480,7 @@
 
 </view>
 
-<bnavigation wCart='{{true}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' 
+<bnavigation bind:runex='togation' wCart='{{true}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' 
 dryinglistnum='{{dryinglistnum}}'></bnavigation>
 
 <tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
