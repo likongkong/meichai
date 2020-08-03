@@ -2773,4 +2773,10 @@ Page({
 
     }
   },
+  // 临时展会授权
+  togation:function(e){
+    this.setData({
+      tgabox:true
+    })
+  },  
 })

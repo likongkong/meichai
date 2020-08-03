@@ -158,11 +158,12 @@
     <view class="puntipbox">
         <view class="puntbtitle multilineellipsis" style="{{shareShopData.status==1?'color:#42bd56;':'color:#ff2742;'}}">
             <block wx:if='{{shareShopData.status==1}}'>围观成功</block>
+            <block wx:elif='{{shareShopData.status==2}}'>相同好友只能围观一次,去开启订阅福利吧</block>
             <block wx:else>今日你已围观{{shareShopData.limit}}次好友了</block>
         </view>
 		    <image class="puntbimg" catchtap="jumpdetail" mode='heightFix' src="{{shareShopData.img}}"></image>
-				<view class="puntbtname">
-				    <block wx:if='{{shareShopData.status!=1}}'>
+				<view class="puntbtname">        
+				    <block wx:if='{{shareShopData.status!=1&&shareShopData.status!=2}}'>
 								<view>每日只能围观{{shareShopData.limit}}人,记得明日再来</view>						
 						</block>
 				</view>
@@ -171,12 +172,23 @@
 </view>
 
 <!-- 弹框   -->
-
 <view class='wsh' wx:if='{{mapImgDisplay}}' style="z-index:999;" catchtouchmove="true">
     <view class='tgimgboxgb' catchtap="mapImgDisplayfun"></view>
 		<image class="mapImgbox" catchtap="previewImg" mode='aspectFit' src="{{giftInfo.imgIntroduce}}"></image>
 </view>	
 
+<!-- 手机号授权   -->
+<view class='wsh' wx:if='{{havephoneiftr}}' style="z-index:999;" catchtouchmove="true">
+    <view class='tgimgboxgb' catchtap="havephoneiftrfun"></view>
+    <view class='awatipbox'>
+        <view class='awatiphead' catchtap="awasustipimages">提示</view>
+        <view catchtap="awasustipimages" style="width:100%;height:80rpx;text-align:center;font-size:28rpx;line-height:80rpx;">授权手机号才能围观和订阅</view>
+        <view class='awatipbottom'>
+            <view class='awatipbotleft' catchtap='havephoneiftrfun'>取消</view>
+            <view class='awatipbotright' style="color:#42bd56;position:relative;"><button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" class='butgetnum'></button>确定</view>
+        </view>
+    </view>		
+</view>	
 
 <!-- 商品详情 -->
 <view  class='wsh' wx:if='{{iftrdetailpagetwo}}' catchtouchmove="true">

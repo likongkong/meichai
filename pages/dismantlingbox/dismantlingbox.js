@@ -17,22 +17,7 @@ Page({
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
 
-    movies:[
-      {
-        image: "https://cdn.51chaidan.com//images/brandEntry/abbreviation/20200710/812c1f02fde1fde61be8b4afd48a4e70.jpg",
-        item_type: "1",
-        title: "标题",
-        type: "1",
-        price: "6789"
-      },
-      {
-        image: "https://cdn.51chaidan.com//images/brandEntry/abbreviation/20200710/86c7acad56ba574a0f1387c477b04129.jpg",
-        item_type: "2",
-        title: "咪咪嘎嘎吊卡",
-        type: "2",
-        price: "12345"        
-      }
-    ],
+    movies:[],
     // 订阅上传id
     pid:0,
     page:0,
@@ -63,8 +48,72 @@ Page({
       {name:'线上商品',tid:3},
       {name:'直播商品',tid:4},
       {name:'线下商品',tid:5}
-    ]
+    ],
+    // 获取手机号弹框
+    havephoneiftr:false,
+    // 是否已认证手机号
+    isMobileAuth:false,
+    // 是分享还是订阅授权手机号
+    isShareOrSub:true
   },
+  havephoneiftrfun:function(){
+    this.setData({havephoneiftr:!this.data.havephoneiftr});
+  },
+  // 获取手机号
+  getPhoneNumber: function(e) {
+    var _this = this;
+    console.log(e.detail.errMsg == 'getPhoneNumber: ok' || e.detail.errMsg == "getPhoneNumber:ok");
+    if (e.detail.errMsg == 'getPhoneNumber: ok' || e.detail.errMsg == "getPhoneNumber:ok") {
+      wx.login({
+        success: function(res) {
+          if (res.code) {
+            _this.helpOther(res.code, e.detail.encryptedData, e.detail.iv)
+          };
+        }
+      });
+    } else {
+      app.showToastC('获取手机号失败！');
+      _this.setData({
+        havephoneiftr: true
+      })
+    }
+  },
+  helpOther: function(code, encryptedData, iv) {
+    var _this = this;
+    wx.showLoading({
+      title: '加载中...',
+    });
+    console.log('mod=subscription&operation=authMobile&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&iv=' + iv + '&encryptedData=' + encryptedData + '&code=' + code)
+    var q1 = Dec.Aese('mod=subscription&operation=authMobile&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&iv=' + iv + '&encryptedData=' + encryptedData + '&code=' + code);
+
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + q1,
+      method: 'GET',
+      header: {
+        'Accept': 'application/json'
+      },
+      success: function(res) {
+        console.log('手机号授权提交=====',res)
+        if(res.data.ReturnCode == 200){
+          _this.setData({
+            havephoneiftr: false,
+            isMobileAuth:true
+          });
+          if(_this.data.isShareOrSub){
+            _this.shareExhBen();
+          }
+          app.showToastC(res.data.Msg||'');
+        }else{
+          app.showToastC(res.data.Msg||'');
+        };
+
+      },
+      complete: function(res) {
+        wx.hideLoading()
+      }
+    })
+  },
+
   // 跳转定位
   jumpposition:function(w){
     var tid = w.currentTarget.dataset.tid || w.target.dataset.tid || 0;
@@ -140,6 +189,15 @@ Page({
   // 每一个拉起订阅
   evesubscrfun:function(w){
     var _this = this;
+
+    // 是否认证手机号
+    if(!_this.data.isMobileAuth){
+      _this.data.isShareOrSub = false;
+      _this.havephoneiftrfun();
+      return false;
+    };
+
+
     var eveid = w.currentTarget.dataset.eveid || w.target.dataset.eveid||1;
     var type = w.currentTarget.dataset.type || w.target.dataset.type||1;
     var index = w.currentTarget.dataset.index || w.target.dataset.index||0;
@@ -206,33 +264,25 @@ Page({
   },
   subshowmodalfun: function () {
     var _this = this;
-    // wx.showModal({
-    //   // title: '提示',
-    //   content: '订阅成功',
-    //   showCancel: false,
-    //   success: function (res) {
-          var typeEve = _this.data.typeEve || 1;
-          var indexEve = _this.data.indexEve || 0;
-          console.log(typeEve,indexEve)
-          if(typeEve==1){
-              var goodsListOne = _this.data.goodsListOne;
-              _this.setData({
-                 ['goodsListOne.goodsList['+indexEve+'].is_subscribe']: 1
-              })
-          }else if(typeEve==2){
-            var goodsListTwo = _this.data.goodsListTwo;
-            _this.setData({
-                 ['goodsListTwo.goodsList['+indexEve+'].is_subscribe']: 1
-            })
-          }else if(typeEve==3){
-            var goodsListThree = _this.data.goodsListThree;
-            _this.setData({
-                ['goodsListThree.goodsList['+indexEve+'].is_subscribe']: 1
-            })
-          };
-          
-      // }
-    // })
+    var typeEve = _this.data.typeEve || 1;
+    var indexEve = _this.data.indexEve || 0;
+    console.log(typeEve,indexEve)
+    if(typeEve==1){
+        var goodsListOne = _this.data.goodsListOne;
+        _this.setData({
+            ['goodsListOne.goodsList['+indexEve+'].is_subscribe']: 1
+        })
+    }else if(typeEve==2){
+      var goodsListTwo = _this.data.goodsListTwo;
+      _this.setData({
+            ['goodsListTwo.goodsList['+indexEve+'].is_subscribe']: 1
+      })
+    }else if(typeEve==3){
+      var goodsListThree = _this.data.goodsListThree;
+      _this.setData({
+          ['goodsListThree.goodsList['+indexEve+'].is_subscribe']: 1
+      })
+    };
   },
 
   /**
@@ -281,13 +331,6 @@ Page({
     //  收货地址
     _this.nextpagediao();
 
-    if(_this.data.referee&&_this.data.referee!=_this.data.uid){
-       _this.shareExhBen();
-    }else{
-      // 展会福利
-      _this.exhibitionBenefits();
-    };
-
     if(_this.data.defaultinformation){}else{
       console.log('defaultinformation=====接口')
       app.defaultinfofun(_this);
@@ -296,7 +339,6 @@ Page({
   // 分享展会福利
   shareExhBen:function(){
     var _this = this;
-
     var q1 = Dec.Aese('mod=subscription&operation=circusee&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&shareId='+_this.data.shareId + '&shareUid=' +_this.data.referee);
     console.log('mod=subscription&operation=circusee&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&shareId='+_this.data.shareId + '&shareUid=' +_this.data.referee)
     wx.showLoading({title: '加载中...',})
@@ -305,17 +347,23 @@ Page({
       method: 'GET',
       header: {'Accept': 'application/json'},
       success: function(res) {
+        _this.data.referee = '';
         console.log('分享展会福利=====',res)
         wx.stopPullDownRefresh();
         wx.hideLoading()
         if (res.data.ReturnCode == 200) {
-           
           _this.setData({
             shareShopData:res.data.Info.circuseeInfo || ''
           });
           _this.shareBoxTipfun();
           // 分享数据调取完成调取展会福利
           _this.exhibitionBenefits();
+        }else{
+          wx.showModal({
+            content: res.data.Msg || res.data.msg,
+            showCancel:false,
+            success: function (res) {}
+          });          
         };
       },
 
@@ -601,8 +649,8 @@ Page({
         var pagenum = _this.data.pid;
         _this.data.pid = ++pagenum;
       };
-      var q1 = Dec.Aese('mod=subscription&operation=brandList&type=1&pid=' + _this.data.pid );
-      console.log('mod=subscription&operation=brandList&type=1&pid=' + _this.data.pid)
+      var q1 = Dec.Aese('mod=subscription&operation=brandList&type=1&pid=' + _this.data.pid+'&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid );
+      console.log('mod=subscription&operation=brandList&type=1&pid=' + _this.data.pid+'&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
       wx.request({
         url: app.signindata.comurl + 'toy.php' + q1,
         method: 'GET',
@@ -615,10 +663,15 @@ Page({
             if(num==1){
               var bannerList = res.data.List.bannerList || [];
               var brandList = res.data.List.brandList || [];
+              var isMobileAuth = res.data.Info.isMobileAuth || false;
               _this.setData({
                 bannerList:bannerList,
-                brandList:brandList
-              })
+                brandList:brandList,
+                isMobileAuth:isMobileAuth
+              });
+              // 是否是分享围观
+              _this.shareReferee();
+
             }else{
               var brandList = res.data.List.brandList || [];
               if(brandList&&brandList.length!=0){
@@ -636,6 +689,22 @@ Page({
         },
   
       })
+  },
+  shareReferee:function(){
+     var _this = this;
+     if(_this.data.referee&&_this.data.uid&&_this.data.referee!=_this.data.uid){
+        if(_this.data.isMobileAuth){
+          _this.shareExhBen();             
+        }else{
+          _this.data.isShareOrSub = true;
+          _this.havephoneiftrfun();
+          // 展会福利
+          _this.exhibitionBenefits();
+        };
+     }else{
+        // 展会福利
+        _this.exhibitionBenefits();
+     };
   },
   // 商品信息 type 1为线上 2为blibli 3为直播
   commodityinformation:function(num,type){

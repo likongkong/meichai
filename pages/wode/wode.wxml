@@ -190,7 +190,7 @@
     </view>
 </view>
 
-<bnavigation wmy='{{true}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' 
+<bnavigation bind:runex='togation' wmy='{{true}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' 
 dryinglistnum='{{dryinglistnum}}'></bnavigation>
 
 

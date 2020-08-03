@@ -96,7 +96,7 @@ App({
     // 场景值
     sceneValue:0,
     yifanshangIsInQueue:false,
-    timer:''
+    timer:'',
   },
   //一番赏队列倒计时
   // yifanshangIsInQueueFun(time){
