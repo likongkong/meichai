@@ -187,20 +187,21 @@ page{background:#f5f6fa;}.dlfbox{width:100%;background:#f5f6fa;}::-webkit-scroll
 
 .main{
   width: 100%;
-  padding: 0 30rpx;
+  padding: 0 30rpx 150rpx 30rpx;
   box-sizing: border-box;
+  overflow: hidden;
 }
 .main .item{
   width: 326rpx;
   height: auto;
   border: 6rpx solid #000;
   border-radius: 10rpx;
-  float: left;
   position: relative;
   margin-top: 12rpx;
+  /* float: left; */
 }
 .main .item:nth-child(2n){
-  float: right;
+  /* float: right; */
 }
 .main .item .itemImg{
   width: 100%;
@@ -210,7 +211,7 @@ page{background:#f5f6fa;}.dlfbox{width:100%;background:#f5f6fa;}::-webkit-scroll
 .main .itemBox{
   width: 100%;
   position: absolute;
-  bottom: 4rpx;
+  bottom: 8rpx;
   left: 0;
   padding: 0 10rpx;
   box-sizing: border-box;
@@ -226,11 +227,13 @@ page{background:#f5f6fa;}.dlfbox{width:100%;background:#f5f6fa;}::-webkit-scroll
   height: 50rpx;
   border-radius: 50rpx;
   margin-right: 6rpx;
+  box-shadow:0px 0 10rpx 0rpx #444444;
 }
 .main .itemBox .like{
-  width: 30rpx;
-  height: 30rpx;
+  width: 34rpx;
+  height: 34rpx;
   margin-left: 6rpx;
+  margin-top: 2rpx;
 }
 .main .itemBox text{
   color: #fff;

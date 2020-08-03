@@ -49,24 +49,41 @@
 
     <block wx:if='{{cat_id==3}}'>
       <view class="main">
-        <view class="item"> 
-          <image class="itemImg" src="../../images/code-cloud-callback-config.png" mode="widthFix"></image>
-          <view class="itemBox">
-            <view class="">
-              <image class="avatar" src="../../images/code-db-inc-dec.png"></image>
-              <text class="userName">用户名称</text>
+        <!-- 左边 -->
+        <view style="float: left;">
+          <block wx:for='{{mctslist}}' wx:key='key' wx:if="{{index%2==0}}">
+            <view class="item"> 
+              <image bindload="finishLoad" class="itemImg" src="{{!finishLoadFlag?'../../../../pages/images/goods_Item_Default_Image.png':item.clockin_img}}" mode="widthFix"></image>
+              <view class="itemBox">
+                <view class="">
+                  <image class="avatar" src="{{item.litpic}}"></image>
+                  <text class="userName">{{item.nick}}</text>
+                </view>
+                <view catchtap="likeClick" data-id="{{item.id}}" data-index="{{index}}" data-support="{{item.is_support}}">
+                  <text class="likenum">{{item.support_num}}</text>
+                  <image class="like" src="{{item.is_support==1?'https://www.51chaidan.com/images/brand/black_heart.png':'https://www.51chaidan.com/images/brand/red_heart.png'}}"></image>
+                </view>
+              </view>
             </view>
-            <view>
-              <text class="likenum">1234</text>
-              <image class="like" src="../../images/code-db-inc-dec.png"></image>
+          </block>
+        </view>
+        <!-- 右边 -->
+        <view style="float: right;">
+          <block wx:for='{{mctslist}}' wx:key='key' wx:if="{{index%2==1}}">
+            <view class="item"> 
+              <image bindload="finishLoad" class="itemImg" src="{{!finishLoadFlag?'../../../../pages/images/goods_Item_Default_Image.png':item.clockin_img}}" mode="widthFix"></image>
+              <view class="itemBox">
+                <view class="">
+                  <image class="avatar" src="{{item.litpic}}"></image>
+                  <text class="userName">{{item.nick}}</text>
+                </view>
+                <view catchtap="likeClick" data-id="{{item.id}}" data-index="{{index}}" data-support="{{item.is_support}}">
+                  <text class="likenum">{{item.support_num}}</text>
+                  <image class="like" src="{{item.is_support==1?'https://www.51chaidan.com/images/brand/black_heart.png':'https://www.51chaidan.com/images/brand/red_heart.png'}}"></image>
+                </view>
+              </view>
             </view>
-          </view>
-        </view>
-        <view class="item"> 
-          <image class="itemImg" src="../../images/code-db-inc-dec.png" mode="widthFix"></image>
-        </view>
-        <view class="item"> 
-          <image class="itemImg" src="../../images/code-db-inc-dec.png" mode="widthFix"></image>
+          </block>
         </view>
       </view>
     </block>
