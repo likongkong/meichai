@@ -26,7 +26,10 @@
 						    <image class="punCheveSrcImg" src="{{item.gift_img}}" mode='heightFix'></image>
 								<!-- <view wx:if='{{item.gift_status==2}}' class="punSrcIBTxt">已领取</view> -->
 						</view>
-				    <view wx:if='{{item.gift_status==0}}' class="punCheveSrcTxt">打卡x{{item.clockin_num}}</view>
+				    <view wx:if='{{item.gift_status==0}}' class="punCheveSrcTxt">
+							<block wx:if='{{item.clockin_num==1}}'>打卡美拆</block>
+              <block wx:else>打卡x{{item.clockin_num}}</block>
+						</view>
 						<view wx:elif='{{item.gift_status==2}}' class="punCheveSrcTxt">已领取</view>
 						<view wx:elif='{{item.gift_status==1}}' class="punSrRTxt">可领取</view>
 						<view wx:elif='{{item.gift_status==3}}' class="punSrRTxt" style="background:#757575;">已抢光</view>
