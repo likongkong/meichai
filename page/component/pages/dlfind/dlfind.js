@@ -16,7 +16,7 @@ Page({
     isIphoneX: app.signindata.isIphoneX,
     shopnum: 0,
     // tab  0为热门 1为关注
-    cat_id: '',
+    cat_id: 3,
     // 话题id
     topic_id: 0,
     dlfhboteve: [],
@@ -70,7 +70,14 @@ Page({
     brand_id:0,
     id:'',
     subscribedata:[],
-    isOpenToyShow:false
+    isOpenToyShow:false,
+    defaultImage:'/images/goods_Item_Default_Image.png',
+    finishLoadFlag:false
+  },
+  finishLoad(){
+    this.setData({
+      finishLoadFlag: true
+    })
   },
   // 跳转打卡
   jumpshopqueque:function(){
@@ -304,7 +311,7 @@ Page({
  
     });
   },  
-  // mcts列表
+  // 打卡列表
   mctslistfun(num){
     var _this = this;
     if (num == 0) {
@@ -322,35 +329,71 @@ Page({
         nodataiftr: false,
       });
     };
-    Pub.postRequest(_this, 'dryinglist', {
-      uid: _this.data.uid,
-      loginid: _this.data.loginid,
-      cat_id: _this.data.cat_id,
-      brand_name: _this.data.brand_name||'',
-      brand_id: _this.data.brand_id || 0,
-      page: _this.data.page
-    }, function (res) {
-      console.log(res);
-      var listdata = res.data.List|| [];
-      if(listdata.length!=0){
-        if (num == 0) {
-          _this.setData({
-            eldatalist: listdata,
-            nodataiftr: true
-          });
-        } else {
-          var ltlist = _this.data.eldatalist.concat(listdata);
-          _this.setData({
-            eldatalist: ltlist,
-            nodataiftr: true
-          });
-        };
-      }else{
-        app.showToastC('暂无更多数据');
+
+    wx.request({
+      url: app.signindata.clwcomurl + 'api/brandClockin/index' + '?uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&page=' + _this.data.page,
+      method: 'GET',
+      header: {
+        'Accept': 'application/json'
+      },
+      success: function (res) {
+        wx.stopPullDownRefresh();
+        console.log('打卡数据=======',res.data.List)
+        var listdata = res.data.List|| [];
+        if(listdata.length!=0){
+          if (num == 0) {
+            _this.setData({
+              mctslist: listdata,
+              nodataiftr: true
+            });
+          } else {
+            var ltlist = _this.data.mctslist.concat(listdata);
+            _this.setData({
+              mctslist: ltlist,
+              nodataiftr: true
+            });
+          };
+        }else{
+          wx.showToast({
+            title: '暂无更多数据',
+            icon: 'none',
+            duration: 1000
+          })
+          // app.showToastC('暂无更多数据');
+        }
       }
- 
     });
   },
+
+  likeClick(e){
+    var _this = this;
+    let id = e.currentTarget.dataset.id;
+    let index = e.currentTarget.dataset.index;
+    let mctslist = _this.data.mctslist;
+    var support= mctslist[index].is_support;
+    wx.request({
+      url: app.signindata.clwcomurl + 'api/brandClockin/pushSupportForClockin' + '?uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + id,
+      method: 'GET',
+      header: {
+        'Accept': 'application/json'
+      },
+      success: function (res) {
+        console.log('点赞=======',res.data)
+        console.log('mctslist=======',_this.data.mctslist)
+        console.log(support)
+        if(support == 1){
+          mctslist[index].support_num++;
+          mctslist[index].is_support = 2;
+        }else{
+          mctslist[index].support_num--;
+          mctslist[index].is_support = 1;
+        }
+        _this.setData({mctslist});
+      }
+    });
+  },
+
+
   // 关注函数
   followfun: function(w) {
     var drying_id = w.currentTarget.dataset.drying_id || w.target.dataset.drying_id || 0;
@@ -477,10 +520,10 @@ Page({
       user_id: app.signindata.uid,
       isProduce: app.signindata.isProduce,
       isShareFun: app.signindata.isShareFun,
-      // isOpenToyShow:true
       isOpenToyShow:app.signindata.isOpenToyShow
+      // isOpenToyShow:app.signindata.isOpenToyShow
     });
-
+     
     if(app.signindata.isOpenToyShow){
       _this.setData({c_title:'MCTS打卡',cat_id:3});
     }else{
