@@ -523,7 +523,7 @@ Page({
       isOpenToyShow:app.signindata.isOpenToyShow
       // isOpenToyShow:app.signindata.isOpenToyShow
     });
-
+     
     if(app.signindata.isOpenToyShow){
       _this.setData({c_title:'MCTS打卡',cat_id:3});
     }else{
