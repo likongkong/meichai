@@ -636,6 +636,15 @@ Page({
             var arrlist = List.index||[];
             if (arrlist.length != 0) {
               for (var i = 0; i < arrlist.length; i++) {
+                if (arrlist[i].item_type == 9014) {
+                  let dp = [...arrlist[i].List];
+                  let result = [];
+                  while (dp.length > 0) {
+                    let randomIndex = Math.floor(Math.random() * (dp.length))
+                    result.push(dp.splice(randomIndex, 1)[0])
+                  }
+                  arrlist[i].List = result;
+                }
                 if (arrlist[i].item_type == 992) {
                   for (var li = 0; li < arrlist[i].List.length;li++){
                     if (arrlist[i].List[li]) {
