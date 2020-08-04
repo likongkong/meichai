@@ -6,7 +6,7 @@
 dryinglistnum='{{dryinglistnum}}'></bnavigation>
 
 <!-- 展会福利首页悬停icon -->
-<image wx:if='{{exhitime}}' catchtap="jumpdouble" mode='aspectFit' data-type="9" class="exhListwIcon" src="https://cdn.51chaidan.com/images/icon/toyshowWelfare.png"></image>
+<!-- <image wx:if='{{exhitime}}' catchtap="jumpdouble" mode='aspectFit' data-type="9" class="exhListwIcon" src="https://cdn.51chaidan.com/images/icon/toyshowWelfare.png"></image> -->
 
 <view class="exhibbox">
 
