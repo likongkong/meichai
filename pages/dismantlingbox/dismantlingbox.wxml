@@ -130,7 +130,7 @@
           增加新地址
         </view>
       </scroll-view>
-      <view class='recgadbot' bindtap='displeyNoneAdd'>
+      <view class='recgadbotDisbox' bindtap='displeyNoneAdd'>
            确定
       </view>
     </view>
