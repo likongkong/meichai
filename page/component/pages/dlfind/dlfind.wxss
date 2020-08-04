@@ -198,10 +198,6 @@ page{background:#f5f6fa;}.dlfbox{width:100%;background:#f5f6fa;}::-webkit-scroll
   border-radius: 10rpx;
   position: relative;
   margin-top: 12rpx;
-  /* float: left; */
-}
-.main .item:nth-child(2n){
-  /* float: right; */
 }
 .main .item .itemImg{
   width: 100%;

@@ -70,13 +70,12 @@ Page({
     brand_id:0,
     id:'',
     subscribedata:[],
-    isOpenToyShow:false,
-    defaultImage:'/images/goods_Item_Default_Image.png',
-    finishLoadFlag:false
+    isOpenToyShow:false
   },
-  finishLoad(){
+  finishLoad(w){
+    var ind = w.currentTarget.dataset.ind || w.target.dataset.ind||0;
     this.setData({
-      finishLoadFlag: true
+      ['mctslist[' + ind + '].finishLoadFlag']: true
     })
   },
   // 跳转打卡
@@ -314,10 +313,12 @@ Page({
   // 打卡列表
   mctslistfun(num){
     var _this = this;
+    wx.showLoading({
+      title: '加载中...',
+    })
     if (num == 0) {
       _this.data.page = 1;
       _this.setData({
-        loadprompt: '加载更多.....',
         mctslist: [],
         nodataiftr: false
       });
@@ -325,7 +326,6 @@ Page({
       var pagenum = parseInt(_this.data.page)
       _this.data.page = ++pagenum;
       _this.setData({
-        loadprompt: '加载更多.....',
         nodataiftr: false,
       });
     };
@@ -337,6 +337,7 @@ Page({
         'Accept': 'application/json'
       },
       success: function (res) {
+        wx.hideLoading()
         wx.stopPullDownRefresh();
         console.log('打卡数据=======',res.data.List)
         var listdata = res.data.List|| [];
@@ -359,7 +360,6 @@ Page({
             icon: 'none',
             duration: 1000
           })
-          // app.showToastC('暂无更多数据');
         }
       }
     });

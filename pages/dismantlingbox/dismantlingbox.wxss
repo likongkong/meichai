@@ -10,7 +10,7 @@ page{
 /*  展会订阅 */
 .showsubbox{
   width: 100%;
-  padding-bottom: 120rpx;
+  padding-bottom: 170rpx;
 }
 
 .ptcswipter{
