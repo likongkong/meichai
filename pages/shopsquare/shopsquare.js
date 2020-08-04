@@ -317,15 +317,22 @@ Page({
         wx.stopPullDownRefresh();
         wx.hideLoading()
         if (res.data.ReturnCode == 200) {
-           var allClockinList = res.data.List.allClockinList || [];
-           _this.setData({
-             allClockinList:allClockinList
-           })
-        };
+          if(num==1){
+            var allClockinListNum = res.data.List.allClockinList || [];
+          }else{
+            var liveList = res.data.List.allClockinList || [];
+            console.log('品牌信息=======2',res)
+            var allClockinListNum = _this.data.allClockinList.concat(liveList);
+            if(res.data.List.allClockinList.length==0){
+              app.showToastC('没有更多数据了');
+            }
+          };
+          _this.setData({
+            allClockinList:allClockinListNum
+          })
+       };
       },
-
     })
-
   },
   // 品牌列表
   getlist: function(num) {
