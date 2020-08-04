@@ -153,8 +153,7 @@ App({
                   _this.signindata.uid = res.data.Info.uid || '';
 
                   console.log(Dec.comurl(),Dec.clwcomurl())
-                  // 是否开启展会 
-                  _this.signindata.isOpenToyShow = res.data.Info.isOpenToyShow || false;
+
 
                   _this.signindata.isNewer = res.data.Info.isNewer || false;
                   _this.signindata.token = '';
@@ -172,8 +171,8 @@ App({
 
                   // 是否是地域黑模式
                   _this.signindata.isHellBlackUser = res.data.Info.isHellBlackUser || false;
-                  // 是否能进入展会
-                  _this.signindata.isOpenToyShow = res.data.Info.isOpenToyShow;
+                  // 是否开启展会 
+                  _this.signindata.isOpenToyShow = res.data.Info.isOpenToyShow || false;
                   // 是否能进入一番赏
                   _this.signindata.isYiFanShang = res.data.Info.function?res.data.Info.function.isYiFanShang:false;                  
                   // 透视卡倒计时

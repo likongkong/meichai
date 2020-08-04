@@ -297,7 +297,7 @@ page{
   color: #333;
   height: 90rpx;
 }
-.recgadbot {
+.recgadbotDisbox {
   width: 300rpx;
   height: 70rpx;
   background:#ff5566;
