@@ -527,7 +527,6 @@ Page({
       app.winningtheprizetime(_this);
     };
   },
-
   jumporder: function () {
     var _this = this;
     app.jumporder(_this);
@@ -637,13 +636,17 @@ Page({
             if (arrlist.length != 0) {
               for (var i = 0; i < arrlist.length; i++) {
                 if (arrlist[i].item_type == 9014) {
-                  let dp = [...arrlist[i].List];
-                  let result = [];
-                  while (dp.length > 0) {
-                    let randomIndex = Math.floor(Math.random() * (dp.length))
-                    result.push(dp.splice(randomIndex, 1)[0])
+                  let al = [...arrlist[i].List];
+                  if(al.length<=10){
+                    let result = [];
+                    while (al.length > 0) {
+                      let randomIndex = Math.floor(Math.random() * (al.length))
+                      result.push(al.splice(randomIndex, 1)[0])
+                    }
+                    arrlist[i].List = result;
+                  }else{
+                    arrlist[i].List = _this.makeRandomArr(al,10);
                   }
-                  arrlist[i].List = result;
                 }
                 if (arrlist[i].item_type == 992) {
                   for (var li = 0; li < arrlist[i].List.length;li++){
@@ -780,6 +783,21 @@ Page({
       },
       fail: function (res) {}
     })    
+  },
+  //随机取出数组中N个不重复的数据
+  makeRandomArr(arrList,num){
+    if(num>arrList.length){
+      return;
+    }
+    var tempArr=arrList.slice(0);
+    var newArrList=[];    
+    for(var i=0;i<num;i++){
+        var random=Math.floor(Math.random()*(tempArr.length-1));
+        var arr=tempArr[random];
+        tempArr.splice(random, 1);
+        newArrList.push(arr);    
+    }
+    return newArrList;
   },
   // 一天只显示一次 商品推荐弹框
   indexelafradatefun:function(){
