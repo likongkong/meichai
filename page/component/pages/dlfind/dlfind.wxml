@@ -52,8 +52,8 @@
         <!-- 左边 -->
         <view style="float: left;">
           <block wx:for='{{mctslist}}' wx:key='key' wx:if="{{index%2==0}}">
-            <view class="item"> 
-              <image bindload="finishLoad" class="itemImg" src="{{!finishLoadFlag?'../../../../pages/images/goods_Item_Default_Image.png':item.clockin_img}}" mode="widthFix"></image>
+            <view class="item" style="{{item.finishLoadFlag?'':'opacity: 0;'}}"> 
+              <image bindload="finishLoad" data-ind='{{index}}' class="itemImg" src="{{item.clockin_img}}" mode="widthFix"></image>
               <view class="itemBox">
                 <view class="">
                   <image class="avatar" src="{{item.litpic}}"></image>
@@ -70,8 +70,8 @@
         <!-- 右边 -->
         <view style="float: right;">
           <block wx:for='{{mctslist}}' wx:key='key' wx:if="{{index%2==1}}">
-            <view class="item"> 
-              <image bindload="finishLoad" class="itemImg" src="{{!finishLoadFlag?'../../../../pages/images/goods_Item_Default_Image.png':item.clockin_img}}" mode="widthFix"></image>
+            <view class="item" style="{{item.finishLoadFlag?'':'opacity: 0;'}}"> 
+              <image bindload="finishLoad" data-ind='{{index}}' class="itemImg" src="{{item.clockin_img}}" mode="widthFix"></image>
               <view class="itemBox">
                 <view class="">
                   <image class="avatar" src="{{item.litpic}}"></image>

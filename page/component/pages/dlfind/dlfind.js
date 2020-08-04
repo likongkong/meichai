@@ -70,13 +70,12 @@ Page({
     brand_id:0,
     id:'',
     subscribedata:[],
-    isOpenToyShow:false,
-    defaultImage:'/images/goods_Item_Default_Image.png',
-    finishLoadFlag:false
+    isOpenToyShow:false
   },
-  finishLoad(){
+  finishLoad(w){
+    var ind = w.currentTarget.dataset.ind || w.target.dataset.ind||0;
     this.setData({
-      finishLoadFlag: true
+      ['mctslist[' + ind + '].finishLoadFlag']: true
     })
   },
   // 跳转打卡
@@ -520,11 +519,11 @@ Page({
       user_id: app.signindata.uid,
       isProduce: app.signindata.isProduce,
       isShareFun: app.signindata.isShareFun,
-      isOpenToyShow:app.signindata.isOpenToyShow
+      isOpenToyShow:true
       // isOpenToyShow:app.signindata.isOpenToyShow
     });
      
-    if(app.signindata.isOpenToyShow){
+    if(true){
       _this.setData({c_title:'MCTS打卡',cat_id:3});
     }else{
       _this.setData({cat_id:2});
