@@ -228,8 +228,6 @@ Page({
  
   },
   livebroadcast:function(){
-    let pages = getCurrentPages();
-    let prevpage = pages[pages.length - 2];
     var liveShowRoomId = this.data.zunmdata.liveShowRoomId;
     console.log(this.data.zunmdata.liveShowRoomId)
     wx.reLaunch({

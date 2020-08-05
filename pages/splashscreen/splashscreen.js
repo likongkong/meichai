@@ -149,9 +149,12 @@ Page({
     if (_this.data.iftrjump){
       //获取当前时间戳  
       var timestamp = Date.parse(new Date()) / 1000; 
-      if(timestamp>=1588175999 && timestamp<1588607999){
+      if(timestamp>=1596729599 && timestamp<1596988799){
         wx.reLaunch({
-          url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
+          url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist",
+          complete:function(){
+            _this.data.is_jump_index = true
+          }
         })
       }else{
         wx.reLaunch({
