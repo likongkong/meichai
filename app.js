@@ -152,7 +152,6 @@ App({
                   _this.signindata.loginid = res.data.Info.loginid || '';
                   _this.signindata.uid = res.data.Info.uid || '';
 
-
                   if(Dec.env=='online'){
                     var num = _this.signindata.randommaximum - res.data.Info.uid%_this.signindata.randommaximum;
                     if(num<10){
@@ -832,17 +831,17 @@ App({
   },
   // 云统计
   cloudstatistics: function (tablename,data){
-    // wx.cloud.init() // 引入云
-    // var _this = this;
-    // if(wx.cloud){
-    //   wx.cloud.init({ traceUser: true })
-    //   var edition = { 'uid': _this.signindata.uid || 0, 'timestamp': Date.parse(new Date()) };
-    //   if (data != '') {
-    //     var data = JSON.parse((JSON.stringify(edition) + JSON.stringify(data)).replace(/}{/, ','));
-    //   } else { var data = edition; };
-    //   const db = wx.cloud.database();
-    //   db.collection(tablename).add({ data: data }).then(res => { });
-    // }
+    wx.cloud.init() // 引入云
+    var _this = this;
+    if(wx.cloud){ 
+      wx.cloud.init({ traceUser: true })
+      var edition = { 'uid': _this.signindata.uid || 0, 'timestamp': Date.parse(new Date()) };
+      if (data != '') {
+        var data = JSON.parse((JSON.stringify(edition) + JSON.stringify(data)).replace(/}{/, ','));
+      } else { var data = edition; };
+      const db = wx.cloud.database();
+      db.collection(tablename).add({ data: data }).then(res => { });
+    }
   },
   // 展会跳转
   exhibitionpubjump: function (item_type, jumpid) {
