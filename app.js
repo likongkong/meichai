@@ -87,7 +87,7 @@ App({
     // 授权图片
     tgaimg: 'https://www.51chaidan.com/images/default/openscreen.jpg',
     // 服务器随机数
-    randommaximum:20,
+    randommaximum:10,
     // 是否能进入展会
     isOpenToyShow:false, // 是否开启展会
     statusBarHeightMc:0,
@@ -152,8 +152,24 @@ App({
                   _this.signindata.loginid = res.data.Info.loginid || '';
                   _this.signindata.uid = res.data.Info.uid || '';
 
-                  console.log(Dec.comurl(),Dec.clwcomurl())
-
+                  if(Dec.env=='online'){
+                    var num = _this.signindata.randommaximum - res.data.Info.uid%_this.signindata.randommaximum;
+                    if(num<10){
+                        num = '00'+num
+                    }else if(num>=10){
+                      num = '0'+num.toString()
+                    };       
+                    // 接口地址  
+                    _this.signindata.comurl = 'https://api-slb.51chaidan.com/'+num+'/';
+                    // 发现地址
+                    _this.signindata.clwcomurl = 'https://clw-slb.51chaidan.com/'+num+'/';
+                    console.log('app===sigin',_this.signindata.comurl,_this.signindata.clwcomurl,_this.signindata.randommaximum,num,Dec.versionnumber)
+                  }else{
+                    // 接口地址  
+                    _this.signindata.comurl = 'http://api-test.51chaidan.com/';
+                    // 发现地址
+                    _this.signindata.clwcomurl = 'http://clw-test.51chaidan.com/';
+                  };
 
                   _this.signindata.isNewer = res.data.Info.isNewer || false;
                   _this.signindata.token = '';
@@ -261,6 +277,49 @@ App({
   },
   onLaunch: function (options) {
     var _this = this;
+
+
+    wx.request({
+      url: 'https://cdn.51chaidan.com/produce/serverDetail.txt',
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log(res.data)
+        var re = /^[0-9]+.?[0-9]*/;//判断字符串是否为数字//判断正整数/[1−9]+[0−9]∗]∗/ 
+        console.log('re.test(res.data)===',re.test(res.data))
+      　if (re.test(res.data)) { 
+        　var resdata = res.data;
+      　}else{
+          var resdata = 10;
+        };
+        if(_this.signindata.loginid!=''&&_this.signindata.uid!=''){
+          _this.signindata.randommaximum = resdata || 10;
+        }else{
+          var num = Math.floor(Math.random() * resdata || _this.signindata.randommaximum)+1 || 0;
+          _this.signindata.randommaximum = resdata;
+          if(num<10){
+             num = '00'+num
+          }else if(num>=10){
+            num = '0'+num.toString()
+          };
+          if(Dec.env=='online'){
+            // 接口地址  
+            _this.signindata.comurl = 'https://api-slb.51chaidan.com/'+num+'/';
+            // 发现地址
+            _this.signindata.clwcomurl = 'https://clw-slb.51chaidan.com/'+num+'/';
+          }else{
+            // 接口地址  
+            _this.signindata.comurl = 'http://api-test.51chaidan.com/';
+            // 发现地址
+            _this.signindata.clwcomurl = 'http://clw-test.51chaidan.com/';
+          };
+          console.log(_this.signindata.comurl,_this.signindata.clwcomurl,_this.signindata.randommaximum)
+        }
+        console.log('num===================',num,res)
+      },
+      fail: function (res) {}
+    }); 
+
 
     console.log('场景值=====',options.scene)
     _this.signindata.sceneValue = options.scene || 0;
@@ -772,17 +831,17 @@ App({
   },
   // 云统计
   cloudstatistics: function (tablename,data){
-    // wx.cloud.init() // 引入云
-    // var _this = this;
-    // if(wx.cloud){
-    //   wx.cloud.init({ traceUser: true })
-    //   var edition = { 'uid': _this.signindata.uid || 0, 'timestamp': Date.parse(new Date()) };
-    //   if (data != '') {
-    //     var data = JSON.parse((JSON.stringify(edition) + JSON.stringify(data)).replace(/}{/, ','));
-    //   } else { var data = edition; };
-    //   const db = wx.cloud.database();
-    //   db.collection(tablename).add({ data: data }).then(res => { });
-    // }
+    wx.cloud.init() // 引入云
+    var _this = this;
+    if(wx.cloud){ 
+      wx.cloud.init({ traceUser: true })
+      var edition = { 'uid': _this.signindata.uid || 0, 'timestamp': Date.parse(new Date()) };
+      if (data != '') {
+        var data = JSON.parse((JSON.stringify(edition) + JSON.stringify(data)).replace(/}{/, ','));
+      } else { var data = edition; };
+      const db = wx.cloud.database();
+      db.collection(tablename).add({ data: data }).then(res => { });
+    }
   },
   // 展会跳转
   exhibitionpubjump: function (item_type, jumpid) {

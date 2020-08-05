@@ -89,6 +89,7 @@ Component({
         this.triggerEvent("run");
         return;
       };
+      
       if(app.signindata.isOpenToyShow){
         wx.navigateTo({
           url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
