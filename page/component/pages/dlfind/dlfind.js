@@ -520,11 +520,11 @@ Page({
       user_id: app.signindata.uid,
       isProduce: app.signindata.isProduce,
       isShareFun: app.signindata.isShareFun,
-      isOpenToyShow:app.signindata.isOpenToyShow
+      isOpenToyShow:true
       // isOpenToyShow:app.signindata.isOpenToyShow
     });
      
-    if(app.signindata.isOpenToyShow){
+    if(true){
       _this.setData({c_title:'MCTS打卡',cat_id:3});
     }else{
       _this.setData({cat_id:2});

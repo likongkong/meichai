@@ -231,7 +231,7 @@ Page({
     let pages = getCurrentPages();
     let prevpage = pages[pages.length - 2];
     var liveShowRoomId = this.data.zunmdata.liveShowRoomId;
-    console.log(pages)
+    console.log(this.data.zunmdata.liveShowRoomId)
     wx.reLaunch({
       url: "plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id="+liveShowRoomId
     });
@@ -3018,6 +3018,13 @@ Page({
       url: "/pages/detailspage/detailspage?gid=" + gid
     })
   },   
+  jumpecqdetail: function (w) {
+      var id = w.currentTarget.dataset.id || w.target.dataset.id || '';
+      var brandid = w.currentTarget.dataset.brandid || w.target.dataset.brandid || "";
+      wx.navigateTo({
+        url: "/page/component/pages/limitlottery/limitlottery?gid=" + id+'&brandId='+brandid,
+      });
+  },
   // 买家备注
   inputChange: function (e) {
     this.setData({desc: e.detail.value});
