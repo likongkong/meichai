@@ -104,7 +104,7 @@ Page({
   onLoad: function (options) {
     
     var nowTime = Date.parse(new Date());//当前时间戳
-    var imgnum = Math.floor(Math.random() * 3) || 0;
+    var imgnum = Math.floor(Math.random() * 58) || 0;
     console.log('imgnum==============================',imgnum)
     var imgUrl = 'https://cdn.51chaidan.com/images/openscreen/openscreen'+imgnum+'.jpg?time=' + nowTime;
 
