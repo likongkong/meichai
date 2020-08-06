@@ -161,7 +161,7 @@ Page({
       var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
       var idx = w.currentTarget.dataset.idx || w.target.dataset.idx || 0;
       var lid = w.currentTarget.dataset.lid || w.target.dataset.lid || 0;
-      var brandList = _this.data.exhibdata[ind];
+      var brandList = _this.data.pullUpData[ind];
       if (_this.data.loginid != '' && _this.data.uid != '') {
         Pub.postRequest(_this, 'praiseDrying', {
           uid: _this.data.uid,
@@ -170,14 +170,14 @@ Page({
           is_praise: is_praise
         }, function (res) {
           if (is_praise == 0) {
-            brandList.list[idx].is_praise = 1;
-            brandList.list[idx].praise_sum = parseInt(brandList.list[idx].praise_sum) + 1;
+            brandList.detail[idx].is_praise = 1;
+            brandList.detail[idx].praise_sum = parseInt(brandList.detail[idx].praise_sum) + 1;
           } else {
-            brandList.list[idx].is_praise = 0;
-            brandList.list[idx].praise_sum = parseInt(brandList.list[idx].praise_sum) - 1;
+            brandList.detail[idx].is_praise = 0;
+            brandList.detail[idx].praise_sum = parseInt(brandList.detail[idx].praise_sum) - 1;
           };
           _this.setData({
-            ['exhibdata[' + ind + ']']: brandList
+            ['pullUpData[' + ind + ']']: brandList
           });
         });
       }
