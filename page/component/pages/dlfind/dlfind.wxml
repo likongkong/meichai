@@ -48,7 +48,7 @@
     </view>
 
     <block wx:if='{{cat_id==3}}'>
-      <view class="main">
+      <view class="main" style="{{mctslist.length==0&&nodataiftr?'padding: 0 30rpx 0 30rpx':''}}">
         <!-- 左边 -->
         <view style="float: left;">
           <block wx:for='{{mctslist}}' wx:key='key' wx:if="{{index%2==0}}">
@@ -86,6 +86,12 @@
           </block>
         </view>
       </view>
+      <!--  暂无数据  -->
+        <view class='goodstobereceived' wx:if='{{mctslist.length==0&&nodataiftr}}'>
+          <view class='nodata' style='height:900rpx;width:100%;position:relative;'>
+            <image src='../../../../pages/images/nodata.png' class='nodataimg' style='width:280rpx;height:300rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;'></image>
+          </view>
+        </view>     
     </block>
 
     <block wx:elif='{{cat_id==2}}'>

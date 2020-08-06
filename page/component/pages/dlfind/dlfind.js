@@ -354,7 +354,11 @@ Page({
               nodataiftr: true
             });
           };
-        }else{
+        } else if(listdata.length==0&&_this.data.page==1){
+          _this.setData({
+            nodataiftr: true
+          });
+        } else{
           wx.showToast({
             title: '暂无更多数据',
             icon: 'none',
