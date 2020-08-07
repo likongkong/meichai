@@ -232,6 +232,10 @@ page{background:#f5f6fa;}.dlfbox{width:100%;background:#f5f6fa;}::-webkit-scroll
   margin-top: 2rpx;
 }
 .main .itemBox text{
+  max-width: 170rpx;
   color: #fff;
   font-size: 24rpx;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
 }
