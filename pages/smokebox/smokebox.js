@@ -1214,7 +1214,7 @@ Page({
   snapshotsharefun: function () {
     var _this = this;
     wx.getImageInfo({
-      src: "https://www.51chaidan.com/images/blindbox/" + _this.data.id + ".jpg",
+      src: "https://cdn.51chaidan.com/images/blindbox/" + _this.data.id + ".jpg",
       success: function (res) {
 
         const ctxt = wx.createCanvasContext('snapshotshare');
