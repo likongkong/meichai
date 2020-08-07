@@ -49,7 +49,8 @@
 					<view style="width:100%;height:40rpx;padding:10rpx 0;">
 						<view wx:if='{{item.shopPrice && item.shopPrice!=""}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#ff2742;float:left;">￥{{item.shopPrice}}</view>
 						<view wx:if='{{pagetype == 4}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;">
-							<block wx:if='{{item.status==1}}'>{{item.start}}报名</block>
+						  <view wx:if='{{item.saleButtonDisplay}}' style='color:#6aca6b;'>{{item.saleButtonDisplay}}</view>
+							<block wx:elif='{{item.status==1}}'>{{item.start}}报名</block>
 							<view wx:elif='{{item.status==2&&item.isSign}}' style="color:#6aca6b;">已报名</view>
 							<block wx:elif='{{item.status==2}}'>{{item.stop}}开奖</block>
 							<block wx:elif='{{item.status==3}}'>已开奖</block>
