@@ -206,8 +206,8 @@ Page({
               var finishedarray = res.data.List.finished || [];
             } else {
               var comdataarr = _this.data.listdata.concat(arrlist);
-              var signarray = _this.data.listdata.concat(res.data.List.sign);
-              var finishedarray = _this.data.listdata.concat(res.data.List.finished);
+              var signarray = _this.data.signlist.concat(res.data.List.sign);
+              var finishedarray = _this.data.finishedlist.concat(res.data.List.finished);
             };
             _this.setData({
               listdata: comdataarr,
