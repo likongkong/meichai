@@ -52,7 +52,7 @@
         <!-- 左边 -->
         <view style="float: left;">
           <block wx:for='{{mctslist}}' wx:key='key' wx:if="{{index%2==0}}">
-            <view class="item" style="{{item.finishLoadFlag?'':'opacity: 0;'}}"> 
+            <view class="item" style="{{item.finishLoadFlag?'':'height:326rpx'}}">
               <image bindload="finishLoad" data-ind='{{index}}' class="itemImg" src="{{item.clockin_img}}" mode="widthFix"></image>
               <view class="itemBox">
                 <view class="">
@@ -70,7 +70,7 @@
         <!-- 右边 -->
         <view style="float: right;">
           <block wx:for='{{mctslist}}' wx:key='key' wx:if="{{index%2==1}}">
-            <view class="item" style="{{item.finishLoadFlag?'':'opacity: 0;'}}"> 
+            <view class="item" style="{{item.finishLoadFlag?'':'height:326rpx'}}">
               <image bindload="finishLoad" data-ind='{{index}}' class="itemImg" src="{{item.clockin_img}}" mode="widthFix"></image>
               <view class="itemBox">
                 <view class="">
