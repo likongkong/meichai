@@ -580,6 +580,7 @@ Page({
       uid: app.signindata.uid,
       isProduce: app.signindata.isProduce,
       avatarUrl: app.signindata.avatarUrl,
+      defaultinformation:app.signindata.defaultinformation,
     });
     
     setTimeout(function () {

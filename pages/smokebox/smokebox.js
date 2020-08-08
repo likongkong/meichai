@@ -485,6 +485,7 @@ Page({
       automatTimes: app.signindata.automat.times,
       automattitle: app.signindata.automattitle || '',
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
+      defaultinformation:app.signindata.defaultinformation,
     });
     if (_this.data.isredpag == 1) {
       this.shareopen(_this.data.welfareid)

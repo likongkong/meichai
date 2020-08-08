@@ -157,6 +157,7 @@ Page({
       uid: app.signindata.uid,
       isProduce: app.signindata.isProduce,
       isShareFun: app.signindata.isShareFun,
+      defaultinformation:app.signindata.defaultinformation,
     });
     if (this.data.but == 'cart') {
       this.listdatafun();

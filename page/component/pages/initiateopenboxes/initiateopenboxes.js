@@ -309,6 +309,7 @@ Page({
       uid: app.signindata.uid,
       avatarUrl: app.signindata.avatarUrl,
       isProduce: app.signindata.isProduce,
+      defaultinformation:app.signindata.defaultinformation,
     });
 
     _this.getinfo()

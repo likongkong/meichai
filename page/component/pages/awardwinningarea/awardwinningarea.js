@@ -616,6 +616,7 @@ Page({
       openid: app.signindata.openid,
       isProduce: app.signindata.isProduce,
       isHellBlackUser: app.signindata.isHellBlackUser,
+      defaultinformation:app.signindata.defaultinformation,
     });
 
     // 获取默认信息
