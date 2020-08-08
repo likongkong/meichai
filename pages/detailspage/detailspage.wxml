@@ -592,9 +592,7 @@
     <!-- 左边按钮 -->
       <!-- 有直播间号有抽选活动：进入直播间 -->
       <block wx:if='{{is_exhibition==1&&zunmdata.liveShowRoomId&&zunmdata.isLotto}}'>
-        <view class="footer-child large turn" style='height:60rpx;margin-top:9rpx;padding:0;width:200rpx;margin-right:40rpx;background:#f8b21d;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' catchtap="livebroadcast">
-          直播间
-        </view>
+        <view class="footer-child large turn" style='height:60rpx;margin-top:9rpx;padding:0;width:200rpx;margin-right:40rpx;background:#f8b21d;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' catchtap="livebroadcast">返回直播间</view>
       </block>
       <!-- 无直播间号有抽选活动有库存：进入抽选 -->
       <block wx:elif='{{is_exhibition==1&&!zunmdata.liveShowRoomId&&zunmdata.isLotto&&zunmdata.debuff==0}}'>
@@ -611,10 +609,7 @@
       <block wx:else>
         <!-- 跳转直播间 -->
         <block wx:if='{{zunmdata.liveShowRoomId&&zunmdata.status!=1}}'>
-          <view class="footer-child large turn" style='height:60rpx;margin-top:9rpx;padding:0;width:200rpx;margin-right:40rpx;background:#f8b21d;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' catchtap="livebroadcast">
-            直播间
-            <!-- <navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{zunmdata.liveShowRoomId}}" style='position: absolute;height:100%;width:100%;{{w.status==102?"right:250":"left:0"}}rpx;top:0;z-index:3;'></navigator> -->
-          </view>
+          <view class="footer-child large turn" style='height:60rpx;margin-top:9rpx;padding:0;width:200rpx;margin-right:40rpx;background:#f8b21d;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' catchtap="livebroadcast">返回直播间</view>
         </block>
         <block wx:else>
           <view class="footer-child large turn" style='height:60rpx;margin-top:9rpx;padding:0;width:200rpx;margin-right:40rpx;background:#f8b21d;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' wx:if='{{zunmdata.status==1&&subscribedata}}' catchtap='subscrfun'>

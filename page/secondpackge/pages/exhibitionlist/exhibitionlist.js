@@ -193,6 +193,7 @@ Page({
 
     // 判断是否授权
     this.activsign();
+
   },
   activsign: function () {
     // 判断是否授权 

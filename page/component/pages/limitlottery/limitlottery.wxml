@@ -77,7 +77,7 @@
 					<image class='limshareimg' src='https://www.51chaidan.com/images/act/brand/createPoster.png'></image>
 					<view style='color:#53a5fd;font-size:22rpx;padding:3rpx 0 0 0;text-align:center;'>生成海报</view>
 				</view>
-				<view class='limsharebox' catchtap="ishowtipsfun" style="left:140rpx;">
+				<view class='limsharebox' catchtap="ishowtipsfun" wx:if='{{false}}' style="left:140rpx;">
 					<image class='limshareimg' src='https://cdn.51chaidan.com/images/icon/iconBankCard.png'></image>
 					<view style='color:#53a5fd;font-size:22rpx;padding:3rpx 0 0 0;text-align:center;'>抽选卡</view>
 					<view class="tabshopimg specialellipsis" style="top:-12rpx;left:70rpx;">{{infoActivity.toyShowChance}}</view>
@@ -94,7 +94,7 @@
 				<image class='limshareimg' src='https://www.51chaidan.com/images/act/brand/createPoster.png'></image>
 				<view style='color:#53a5fd;font-size:22rpx;padding:3rpx 0 0 0;text-align:center;'>生成海报</view>
 			</view>
-			<view class='limsharebox' catchtap="ishowtipsfun" style="left:140rpx;">
+			<view class='limsharebox' catchtap="ishowtipsfun" style="left:140rpx;" wx:if='{{false}}'>
 				<image class='limshareimg' src='https://cdn.51chaidan.com/images/icon/iconBankCard.png'></image>
 				<view style='color:#53a5fd;font-size:22rpx;padding:3rpx 0 0 0;text-align:center;'>抽选卡</view>
 				<view class="tabshopimg specialellipsis" style="top:-12rpx;left:70rpx;">{{infoActivity.toyShowChance}}</view>

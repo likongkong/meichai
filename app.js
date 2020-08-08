@@ -320,6 +320,8 @@ App({
       fail: function (res) {}
     }); 
 
+    // 基础数据
+    _this.defaultinfofun()
 
     console.log('场景值=====',options.scene)
     _this.signindata.sceneValue = options.scene || 0;
@@ -329,27 +331,30 @@ App({
     };
     if (wx.canIUse('getUpdateManager')) { // 获取小程序更新机制兼容
       const updateManager = wx.getUpdateManager();
-      updateManager.onCheckForUpdate(function (res) {
-        if (res.hasUpdate) {  // 请求完新版本信息的回调
-          updateManager.onUpdateReady(function () {
-            wx.showModal({
-              title: '更新提示',
-              content: '新版本已经准备好，是否重启应用？',
-              success: function (res) {
-                if (res.confirm) {
-                  updateManager.applyUpdate() // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+      if(updateManager){
+        updateManager.onCheckForUpdate(function (res) {
+          if (res.hasUpdate) {  // 请求完新版本信息的回调
+            updateManager.onUpdateReady(function () {
+              wx.showModal({
+                title: '更新提示',
+                content: '新版本已经准备好，是否重启应用？',
+                success: function (res) {
+                  if (res.confirm) {
+                    updateManager.applyUpdate() // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+                  }
                 }
-              }
+              })
             })
-          })
-          updateManager.onUpdateFailed(function () { // 新的版本下载失败
-            wx.showModal({
-              title: '已经有新版本了哟~',
-              content: '新版本已经上线啦~，请您删除当前小程序，重新搜索打开哟~',
+            updateManager.onUpdateFailed(function () { // 新的版本下载失败
+              wx.showModal({
+                title: '已经有新版本了哟~',
+                content: '新版本已经上线啦~，请您删除当前小程序，重新搜索打开哟~',
+              })
             })
-          })
-        }
-      })
+          }
+        })
+      }
+
     } else {
       wx.showModal({  // 如果希望用户在最新版本的客户端上体验您的小程序，可以这样子提示
         title: '提示',
@@ -1023,15 +1028,18 @@ App({
       var app  = this;
       var qqq = Dec.Aese('operation=info&mod=info');
       // 获取默认信息
+      console.log('获取默认信息===',app.signindata.comurl + 'general.php' + qqq)
       wx.request({
         url: app.signindata.comurl + 'general.php' + qqq,
         method: 'GET',
         header: { 'Accept': 'application/json' },
         success: function (res) {
           if (res.data.ReturnCode == 200) {
-            _this.setData({
-              defaultinformation: res.data.Info || '',
-            });
+            if(_this){
+              _this.setData({
+                defaultinformation: res.data.Info || '',
+              });
+            }
             app.signindata.defaultinformation = res.data.Info || '';
           };
         }

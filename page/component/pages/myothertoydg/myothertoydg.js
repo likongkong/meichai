@@ -933,6 +933,7 @@ Page({
       isProduce: app.signindata.isProduce,
       avatarUrl: app.signindata.avatarUrl,
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
+      defaultinformation:app.signindata.defaultinformation,
     });
     if (_this.data.ownerId == _this.data.uid || _this.data.ownerId == 'own') {
       var userInfo = {

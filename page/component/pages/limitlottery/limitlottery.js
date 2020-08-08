@@ -185,7 +185,7 @@ Page({
         };
       };
     },
-  ishowtipsfun:function(){
+  ishowtipsfun:function(){ 
     var _this = this;
     wx.showModal({
       content: _this.data.infoActivity.toyShowTips || '抽选卡:展会抽盒机、展会限时购、展会福袋任意消费可获得抽选卡x1',
@@ -495,6 +495,7 @@ Page({
       uid: app.signindata.uid,
       isProduce: app.signindata.isProduce,
       avatarUrl: app.signindata.avatarUrl,
+      defaultinformation:app.signindata.defaultinformation,
     });
 
     _this.getinfo();

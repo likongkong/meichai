@@ -2283,6 +2283,7 @@ Page({
       avatarUrl: app.signindata.avatarUrl,
       isProduce: app.signindata.isProduce,
       isShareFun: app.signindata.isShareFun,
+      defaultinformation:app.signindata.defaultinformation,
       signinlayer: true,
       tgabox: false
     });

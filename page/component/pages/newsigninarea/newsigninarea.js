@@ -472,6 +472,7 @@ Page({
       openid: app.signindata.openid,
       isProduce: app.signindata.isProduce,
       c_title: title,
+      defaultinformation:app.signindata.defaultinformation,
     });
 
 
