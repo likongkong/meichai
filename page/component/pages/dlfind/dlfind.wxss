@@ -193,12 +193,13 @@ page{background:#f5f6fa;}.dlfbox{width:100%;background:#f5f6fa;}::-webkit-scroll
 }
 .main .item{
   width: 326rpx;
-  height: auto;
-  border: 6rpx solid #000;
+  max-height: 380rpx;
+  border: 6rpx solid #000;  
   border-radius: 10rpx;
-  position: relative;
+  position: relative; 
   margin-top: 12rpx;
   background-image: url(https://meichai-1300990269.cos.ap-beijing.myqcloud.com/toyshow/sign/1596813765109_231618.png);
+  overflow: hidden;
 }
 .main .item .itemImg{
   width: 100%;
