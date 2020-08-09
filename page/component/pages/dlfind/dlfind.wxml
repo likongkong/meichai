@@ -15,7 +15,7 @@
 
     <view class='dlfheadtab'>
 
-      <block wx:if='{{cat_id==3}}'>
+      <block wx:if='{{cat_id==3&&isPunchTheClock}}'>
           <view class='dlfheadrhimg' style='right:20rpx;color:#ff2742;font-size:24rpx;text-decoration:underline;width:130rpx;line-height:50rpx;text-align:center;font-weight:bold;' catchtap='jumpshopqueque'>我要打卡</view>      
       </block>
       <block wx:else>

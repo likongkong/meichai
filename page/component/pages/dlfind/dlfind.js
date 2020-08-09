@@ -70,7 +70,8 @@ Page({
     brand_id:0,
     id:'',
     subscribedata:[],
-    isOpenToyShow:false
+    isOpenToyShow:false,
+    isPunchTheClock:1596729599<Date.parse(new Date())/1000&&Date.parse(new Date())/1000<1596988799?true:false
   },
   finishLoad(w){
     var ind = w.currentTarget.dataset.ind || w.target.dataset.ind||0;
