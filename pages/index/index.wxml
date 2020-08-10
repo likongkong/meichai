@@ -492,7 +492,7 @@
 										</view>
 								</block>
 								<block wx:else>
-								   <view class="limittxtindex specialellipsis">{{w.stop_time}}</view>
+								   <view class="limittxtindex specialellipsis">{{w.tip!=''?w.tip:w.stop_time}}</view>
 								</block>
 								
 							</view>
