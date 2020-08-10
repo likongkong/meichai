@@ -472,7 +472,7 @@
 					{{item.title}}
 					<view class='disantitletitright' wx:if='{{item.item_type}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump' style='font-weight:normal;position:relative;color:#31b3fb;'>查看更多
 					</view>
-				</view>
+				</view>  
 				<!--  列表  -->
 				<view class='disanumofgoods_box' wx:if='{{item.List.length!=0}}'>
 					<view class='disanum_scr'>
