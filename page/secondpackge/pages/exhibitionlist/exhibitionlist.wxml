@@ -8,7 +8,7 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
 <!-- 展会福利首页悬停icon -->
 <!-- <image wx:if='{{exhitime}}' catchtap="jumpdouble" mode='aspectFit' data-type="9" class="exhListwIcon" src="https://cdn.51chaidan.com/images/icon/toyshowWelfare.png"></image> -->
 
-<view class="exhibbox">
+<view class="exhibbox" style="min-height:{{windowHeight}}px;">
 
 	<swiper class="mswiper" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450" style="height:197rpx;">
 		<swiper-item wx:for="{{swiperdata}}" wx:key="key">

@@ -158,7 +158,7 @@ App({
                         num = '00'+num
                     }else if(num>=10){
                       num = '0'+num.toString()
-                    };       
+                    };        
                     // 接口地址  
                     _this.signindata.comurl = 'https://api-slb.51chaidan.com/'+num+'/';
                     // 发现地址

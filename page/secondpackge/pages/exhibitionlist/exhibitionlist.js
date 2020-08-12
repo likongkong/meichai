@@ -253,6 +253,7 @@ Page({
       avatarUrl: app.signindata.avatarUrl,
       isShareFun: app.signindata.isShareFun,
       isProduce: app.signindata.isProduce,
+      windowHeight:app.signindata.windowHeight+20 || 820
     });
 
     this.auditversion();
