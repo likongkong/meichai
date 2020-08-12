@@ -645,7 +645,18 @@ Page({
                     }
                     arrlist[i].List = result;
                   }else{
-                    arrlist[i].List = _this.makeRandomArr(al,10);
+                    let topArrList = [];
+                    for(let j=0; j < arrlist[i].List.length; j++){
+                      if(arrlist[i].List[j].isTop){
+                        topArrList.push(arrlist[i].List[j]);  
+                        al.splice(j, 1);
+                      }
+                    }
+                    if(topArrList.length>=10){
+                      arrlist[i].List = topArrList;
+                    }else{
+                      arrlist[i].List = [...topArrList,..._this.makeRandomArr(al,10-topArrList.length)];
+                    }
                   }
                 }
                 if (arrlist[i].item_type == 992) {
@@ -790,6 +801,7 @@ Page({
       return;
     }
     var tempArr=arrList.slice(0);
+    // console.log(tempArr)
     var newArrList=[];    
     for(var i=0;i<num;i++){
         var random=Math.floor(Math.random()*(tempArr.length-1));
