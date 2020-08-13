@@ -528,7 +528,7 @@ Page({
       isOpenToyShow:app.signindata.isOpenToyShow
     });
      
-    if(app.signindata.isOpenToyShow){
+    if(false){
       _this.setData({c_title:'MCTS打卡',cat_id:3});
     }else{
       _this.setData({cat_id:2});
