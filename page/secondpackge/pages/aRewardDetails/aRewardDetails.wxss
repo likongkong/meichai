@@ -777,13 +777,9 @@ page {
   width: 560rpx;
   height: 920rpx;
   background: #ffffff;
-  position: absolute;
-  top:300rpx;
-  left: 0;
-  right: 0;
-  margin: auto;
   border-radius: 10rpx;
   z-index: 3;
+  position: relative;
 }
 .adcspecialPrice{
   width: 100%;

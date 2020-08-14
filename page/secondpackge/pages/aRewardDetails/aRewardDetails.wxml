@@ -134,10 +134,11 @@
 </view>
 
 <!-- 刮奖购买 -->
-<view class="wsh" catchtouchmove="true" wx:if='{{scrapingPur&&activity.suplusNum>0}}'>
+<view class="wsh" style="height:{{worthSubsidiaryHeight}}px;margin-top:{{topheight}}px;"  catchtouchmove="true" wx:if='{{scrapingPur&&activity.suplusNum>0}}'>
     <view class="tgimgboxgb" catchtap="scrapingPurfun"></view>
 
-    <view wx:if="{{!activity.isAllHidePrice}}" class="worthSubsidiary" style="{{!isPurchase?'height:844rpx;top:376rpx;':''}}">
+    <view catchtap="scrapingPurfun" wx:if="{{!activity.isAllHidePrice}}" style="width:100%;height:{{worthSubsidiaryHeight-117}}px;display: flex;align-items: center;justify-content: center;position:absolute;left: 0;top: 0;">
+    <view class="worthSubsidiary" style="{{!isPurchase?'height:844rpx;':''}}" catchtap="zhanwei">
         <view class="adcspecialPrice">
             <view>
                 <image src="{{finalReward.img}}" mode="aspectFill" mode='aspectFit'></image>
@@ -174,6 +175,7 @@
             <text style="margin-bottom:6rpx;">￥{{activity.suplusNum*activity.shopPrice}}全收</text>
             <view class="adhcevehbg" wx:if='{{is_finish}}'></view>
         </view>
+    </view>
     </view>
 
     <view wx:if="{{isPurchase}}" class="scrapingPurchase">

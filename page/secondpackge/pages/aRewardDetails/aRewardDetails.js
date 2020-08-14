@@ -562,6 +562,14 @@ Page({
   onLoad: function (options) {
     console.log('onload=============',options)
     var _this = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        _this.setData({
+          topheight : res.statusBarHeight+44,
+          worthSubsidiaryHeight:wx.getSystemInfoSync().windowHeight - (res.statusBarHeight+44)
+        });
+      }
+    })
 
     if (options.scene) {
       // '&welfareid=' + _this.data.welfareid + '&isredpag=1'
@@ -1285,5 +1293,6 @@ Page({
     this.setData({is_jump:false});
     this.queuefun(1,1);
   },
+  zhanwei(){}
 
 })
