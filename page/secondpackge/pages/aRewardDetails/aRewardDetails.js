@@ -566,7 +566,7 @@ Page({
       success: function (res) {
         _this.setData({
           topheight : res.statusBarHeight+44,
-          worthSubsidiaryHeight:wx.getSystemInfoSync().windowHeight - (res.statusBarHeight+44)
+          worthSubsidiaryHeight:res.windowHeight - (res.statusBarHeight+44)
         });
       }
     })
