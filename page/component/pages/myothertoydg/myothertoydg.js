@@ -528,6 +528,7 @@ Page({
     if (viewwidth > 160) {
       viewwidth = 160;
     };
+    console.log('listdata=========',ind,ratio)
     if (listdata[ind]) {
       listdata[ind].width = viewwidth;
       listdata[ind].ratio = ratio;
@@ -2058,7 +2059,7 @@ Page({
     };
 
     var lineobj ={}; 
-    
+    console.log('mlist==========',mlist)
     for (let i = 0; i < mlist.length; i++) {
       ctx.setFontSize(10);
       ctx.fillStyle = 'red';

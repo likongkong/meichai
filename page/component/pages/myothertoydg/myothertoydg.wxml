@@ -351,7 +351,7 @@
   </view>
   <view class='mtdghcom' wx:for='{{listdataown}}' wx:key='key' style='{{item.end||item.group_id==0?"border-bottom:2rpx solid #b3b0b0;":"border-bottom:0;"}}'>
     <view class='mtdghimg' style='width:160rpx;margin-left:20rpx;float:left;position: relative;' catchtap='{{item.isPanorama==1?"jumpDSIE":"previewImgurl"}}' data-imgurl='{{item.goods_img}}' data-gid='{{item.goodsId}}'>
-      <image src='{{item.goods_img}}' mode='aspectFit' style='left:0;width:150rpx;' class='mtdgimgb'></image>
+      <image src='{{item.goods_img}}' mode='aspectFit' bindload="imageLoadown" data-ind='{{index}}' style='left:0;width:150rpx;' class='mtdgimgb'></image>
       <view wx:if='{{item.status==1}}' class='mtdghimgmask' style='width:150rpx;'></view>
       <image wx:if='{{item.status==1}}' class='mtdghimgmaskimg' style='width:150rpx;height:150rpx;' src='https://www.51chaidan.com/images/toyCabinet/selled.png'></image>
 
@@ -406,17 +406,6 @@
           </view>
           <view class='mtocevemak' catchtap='selmodifyl' data-group_price='{{item.group_price}}' data-group_id='{{item.group_id}}' data-sid='{{item.id}}' data-shop_price='{{item.shop_price}}' data-rolename='{{item.roleName}}' data-viewwidthone='{{item.viewwidthone}}' data-viewwidthtwo='{{item.viewwidthtwo}}' data-goods_img='{{item.goods_img}}' wx:if='{{item.status!=1}}'></view>
         </view>
-
-
-
-
-
-
-
-
-
-
-
 
         <!-- 撤回 -->
         <view wx:if='{{item.isWithdraw}}' style='width:100rpx;height:44rpx;line-height:44rpx;text-align:center;border:2rpx solid #fe8589;color:#fe8589;font-size:26rpx;float:right;border-radius:8rpx;' data-sid='{{item.id}}' catchtap='withdrawfun'>撤回</view>

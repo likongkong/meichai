@@ -365,7 +365,7 @@
             </view>
           </view>
           <!-- 广告 -->
-          <view class="exhibboxconibox" wx:if='{{addsetData[0].length!=0}}' style="height:200rpx;">
+          <view class="exhibboxconibox" wx:if='{{addsetData[0].length!=0&&is_exhibition==1}}' style="height:200rpx;">
             <swiper class="swiper" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450" style="height:197rpx;">
               <swiper-item wx:for="{{addsetData[0]}}" wx:key="key" wx:for-item='w'>
                 <image src="{{w.src}}?imageMogr2/thumbnail/x800" class="exhibboxconiboimg" catchtap="exhibitionpubjump" data-id='{{w.activity_id}}' data-type='{{w.href_type}}' mode='aspectFit'></image>

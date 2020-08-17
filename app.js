@@ -163,6 +163,12 @@ App({
                     _this.signindata.comurl = 'https://api-slb.51chaidan.com/'+num+'/';
                     // 发现地址
                     _this.signindata.clwcomurl = 'https://clw-slb.51chaidan.com/'+num+'/';
+
+                    // // 接口地址  
+                    // _this.signindata.comurl = 'https://api.51chaidan.com/';
+                    // // 发现地址
+                    // _this.signindata.clwcomurl = 'https://clw.51chaidan.com/';
+
                     console.log('app===sigin',_this.signindata.comurl,_this.signindata.clwcomurl,_this.signindata.randommaximum,num,Dec.versionnumber)
                   }else{
                     // 接口地址  

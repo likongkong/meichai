@@ -2558,7 +2558,7 @@ Page({
             subscribedata: res.data.toyShowSubscribe || '',
             taxation: redauin.tax || 0,
             isVideoSwiper: res.data.Ginfo.videoBanner||false,
-            is_exhibition: res.data.Ginfo.specialWay || '',
+            is_exhibition: res.data.Ginfo.specialWay || 0,
             brandId: res.data.Ginfo ? res.data.Ginfo.brandId : '',
             exhibdetail: res.data.Ginfo.specialWay==1?true:false,
             isSubscribeCoupon: res.data.isSubscribeCoupon || false,
@@ -3454,7 +3454,7 @@ Page({
       _this.data.exhpage = ++pagenum;
     };
     // 展会
-    var exh = Dec.Aese('mod=show&operation=brandDetail&brandId=' + _this.data.brandId + '&page=' + _this.data.exhpage + '&gid=' + _this.data.gid + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
+    var exh = Dec.Aese('mod=show&operation=brandDetail&brandId=' + _this.data.brandId + '&page=' + _this.data.exhpage + '&gid=' + _this.data.gid + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid+'&dataType='+_this.data.is_exhibition);
     wx.request({
       url: app.signindata.comurl + 'toy.php' + exh,
       method: 'GET',

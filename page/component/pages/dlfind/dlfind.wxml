@@ -60,7 +60,7 @@
                   <text class="userName">{{item.nick}}</text>
                 </view>
                 <view catchtap="likeClick" data-id="{{item.id}}" data-index="{{index}}" data-support="{{item.is_support}}">
-                  <text class="likenum">{{item.support_num}}</text>
+                  <text class="likenum">{{item.support_num>0?item.support_num:''}}</text>
                   <image class="like" src="{{item.is_support==1?'https://www.51chaidan.com/images/brand/black_heart.png':'https://www.51chaidan.com/images/brand/red_heart.png'}}"></image>
                 </view>
               </view>
@@ -78,7 +78,7 @@
                   <text class="userName">{{item.nick}}</text>
                 </view>
                 <view catchtap="likeClick" data-id="{{item.id}}" data-index="{{index}}" data-support="{{item.is_support}}">
-                  <text class="likenum">{{item.support_num}}</text>
+                  <text class="likenum">{{item.support_num>0?item.support_num:''}}</text>
                   <image class="like" src="{{item.is_support==1?'https://www.51chaidan.com/images/brand/black_heart.png':'https://www.51chaidan.com/images/brand/red_heart.png'}}"></image>
                 </view>
               </view>
@@ -142,7 +142,7 @@
                         <button open-type="share" class='butshare' data-drying_id='{{item.id}}' data-title='{{item.title}}' data-shareimg='{{item.shareImg}}' data-currency_sum='{{item.currency_sum}}' data-topic_name='{{item.topic_name}}' style='position: absolute;height:100%;width:100%;left:0;top:0;z-index:3;'></button>  
                         </image>
                         <image class="emlplefimgshare" src="{{item.is_praise==0?'https://www.51chaidan.com/images/brand/black_heart.png':'https://www.51chaidan.com/images/brand/red_heart.png'}}" data-lid='{{item.id}}' data-is_praise='{{item.is_praise}}' catchtap='ispraisefun' data-ind='{{index}}' ></image>
-                        <text style="float:right;margin-right:10rpx;">{{item.praise_sum>0?item.praise_sum:'0'}}</text>
+                        <text style="float:right;margin-right:10rpx;">{{item.praise_sum>0?item.praise_sum:''}}</text>
                       </view>
                 </view>
             </view>
@@ -305,7 +305,7 @@
               <view class='dlfhpbtxt specialellipsis' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>{{item.nick}}
                 <image wx:if='{{item.is_authentication==1}}' class='dlfchrtopimgnew' src='https://clw.51chaidan.com/images/goods/authentication1.png'></image>
               </view>
-              <view class="specialellipsis" style="float:right;width:63rpx;padding-right:50rpx;height:55rpx;line-height:55rpx;display:inline-block;position:relative;vertical-align:top;font-size:24rpx;position:relative;text-align:right;">{{item.praise_sum>0?item.praise_sum:'0'}}<image style="float:right;margin-top:6rpx;" class='dlfcbeveimgnewone' wx:if='{{item.is_praise==0}}' data-lid='{{item.id}}' data-is_praise='{{item.is_praise}}' catchtap='ispraisefun' data-ind='{{index}}' src='https://www.51chaidan.com/images/brand/black_heart.png?'></image>
+              <view class="specialellipsis" style="float:right;width:63rpx;padding-right:50rpx;height:55rpx;line-height:55rpx;display:inline-block;position:relative;vertical-align:top;font-size:24rpx;position:relative;text-align:right;">{{item.praise_sum>0?item.praise_sum:''}}<image style="float:right;margin-top:6rpx;" class='dlfcbeveimgnewone' wx:if='{{item.is_praise==0}}' data-lid='{{item.id}}' data-is_praise='{{item.is_praise}}' catchtap='ispraisefun' data-ind='{{index}}' src='https://www.51chaidan.com/images/brand/black_heart.png?'></image>
                 <image style="float:right;" class='dlfcbeveimgnewone' wx:if='{{item.is_praise==1}}' data-lid='{{item.id}}' data-is_praise='{{item.is_praise}}' catchtap='ispraisefun' data-ind='{{index}}' src='https://www.51chaidan.com/images/brand/red_heart.png?'></image>
               </view>
             </view>
@@ -338,7 +338,7 @@
               <view class='dlfhpbtxt specialellipsis' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>{{item.nick}}
                 <image wx:if='{{item.is_authentication==1}}' class='dlfchrtopimgnew' src='https://clw.51chaidan.com/images/goods/authentication1.png'></image>
               </view>
-              <view class="specialellipsis" style="float:right;width:63rpx;padding-right:50rpx;height:55rpx;line-height:55rpx;display:inline-block;position:relative;vertical-align:top;font-size:24rpx;position:relative;text-align:right;">{{item.praise_sum>0?item.praise_sum:'0'}}<image style="float:right;margin-top:6rpx;" class='dlfcbeveimgnewone' wx:if='{{item.is_praise==0}}' data-lid='{{item.id}}' data-is_praise='{{item.is_praise}}' catchtap='ispraisefun' data-ind='{{index}}' src='https://www.51chaidan.com/images/brand/black_heart.png?'></image>
+              <view class="specialellipsis" style="float:right;width:63rpx;padding-right:50rpx;height:55rpx;line-height:55rpx;display:inline-block;position:relative;vertical-align:top;font-size:24rpx;position:relative;text-align:right;">{{item.praise_sum>0?item.praise_sum:''}}<image style="float:right;margin-top:6rpx;" class='dlfcbeveimgnewone' wx:if='{{item.is_praise==0}}' data-lid='{{item.id}}' data-is_praise='{{item.is_praise}}' catchtap='ispraisefun' data-ind='{{index}}' src='https://www.51chaidan.com/images/brand/black_heart.png?'></image>
                 <image style="float:right;" class='dlfcbeveimgnewone' wx:if='{{item.is_praise==1}}' data-lid='{{item.id}}' data-is_praise='{{item.is_praise}}' catchtap='ispraisefun' data-ind='{{index}}' src='https://www.51chaidan.com/images/brand/red_heart.png?'></image>
               </view>
             </view>
