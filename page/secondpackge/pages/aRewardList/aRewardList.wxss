@@ -18,7 +18,7 @@
   height: 80rpx;
   line-height: 80rpx;
   font-size: 24rpx;
-  color: #000;
+  /* color: #000; */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
