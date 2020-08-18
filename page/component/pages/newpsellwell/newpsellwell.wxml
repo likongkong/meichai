@@ -3,44 +3,74 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
       <view class='box'>
-
+       
         <!--   信息流  -->
-        <view class='comboxw'  wx:for="{{commoddata}}" wx:key="key">
-                <!--  普通商品  -->
-                <view class='bchar' data-gid="{{item.gid}}" bindtap='addressmanagement' style='position:relative;'>    
-                    <view class='bcleft'>
-                        <image class="bcimg" mode='aspectFit' src="{{item.gcover}}"></image>
-                        <view class='shopsellout' wx:if='{{item.debuff==2}}' style='top:40rpx;right:30rpx;'>售罄</view>
-                        <view class='shopsellout' wx:elif='{{item.goods_type==3}}' style='line-height:32rpx;background:#298DF8;top:40rpx;right:30rpx;'>定金</view>
+        <block wx:if='{{ifOrWf==1}}'>
+            <view class='comboxw'  wx:for="{{commoddata}}" wx:key="key">
+                    <!--  普通商品  -->
+                    <view class='bchar' data-gid="{{item.gid}}" bindtap='addressmanagement' style='position:relative;'>    
+                        <view class='bcleft'>
+                            <image class="bcimg" mode='aspectFit' src="{{item.gcover}}"></image>
+                            <view class='shopsellout' wx:if='{{item.debuff==2}}' style='top:40rpx;right:30rpx;'>售罄</view>
+                            <view class='shopsellout' wx:elif='{{item.goods_type==3}}' style='line-height:32rpx;background:#298DF8;top:40rpx;right:30rpx;'>定金</view>
+                        </view>
+                        <view class='bcright'>
+                            <view class='bctitle multilineellipsis' style='font-size:26rpx;'>
+                                {{item.gname}}
+                            </view>
+                            <view class='bcLabel'>
+                                <view class='bclabeys specialellipsis' style='background:#FDF3D9;color:#FF7A00;border:0rpx;' wx:for="{{item.gtag}}" wx:key="key" wx:for-item="bcla" wx:if='{{index<=2}}'>{{bcla}}</view>
+                            </view>
+
+                            <view class='bcrilistbott'>
+                                <view class='bccompric'>
+                                    <view class='bccompricleft'>
+                                        <block wx:if='{{item.goods_type==3}}'>
+                                            <text style='font-size:22rpx;'>定金:</text>
+                                            <text style='font-weight: bold;'>￥{{item.promote_price}}</text>    
+                                        </block>
+                                        <block wx:else>
+                                            <text style='font-size:22rpx;' wx:if='{{item.pre_name}}'>{{item.pre_name}}:</text>
+                                            <text style='font-weight: bold;'>￥{{item.gsale}}</text>
+                                        </block>    
+                                    </view>
+                                    <view wx:if='{{item.gsale != item.market_price}}' class='bccompricright'>{{item.gsource}}:￥{{item.market_price}}</view>
+                                </view>   
+                            </view>
+
+                        </view>
                     </view>
-                    <view class='bcright'>
-                        <view class='bctitle multilineellipsis' style='font-size:26rpx;'>
-                            {{item.gname}}
-                        </view>
-                        <view class='bcLabel'>
-                            <view class='bclabeys specialellipsis' style='background:#FDF3D9;color:#FF7A00;border:0rpx;' wx:for="{{item.gtag}}" wx:key="key" wx:for-item="bcla" wx:if='{{index<=2}}'>{{bcla}}</view>
-                        </view>
+                    
+            </view>        
+        </block>
 
-                        <view class='bcrilistbott'>
-                            <view class='bccompric'>
-                                <view class='bccompricleft'>
-                                    <block wx:if='{{item.goods_type==3}}'>
-                                        <text style='font-size:22rpx;'>定金:</text>
-                                        <text style='font-weight: bold;'>￥{{item.promote_price}}</text>    
-                                    </block>
-                                    <block wx:else>
-                                        <text style='font-size:22rpx;' wx:if='{{item.pre_name}}'>{{item.pre_name}}:</text>
-                                        <text style='font-weight: bold;'>￥{{item.gsale}}</text>
-                                    </block>    
+        <block wx:if='{{ifOrWf==2}}'>
+        <!-- 瀑布流 -->
+            <view style='overflow:hidden;background:#f4f5f9;padding-top:16rpx;'>
+
+                <view class='dismtbcchwatfa' wx:for='{{commoddata}}' wx:key='key' wx:for-item='w' wx:for-index='num'>
+                    <view class='dismtbcchecheve' style='{{num%2==0?"margin-left:18rpx;":"float:right;margin-right:18rpx;"}}'>
+                        <view class='dismtbccimgboxwatfa' data-gid='{{w.gid}}' catchtap='addressmanagement'>
+                            <image src='{{w.gcover}}' class='dismtbccimgwatfa' mode='aspectFit'></image>
+                            <view class='shopsellout' wx:if='{{w.debuff==2}}'>售罄</view>
+                            <view class='shopsellout' wx:elif='{{w.goods_type==3}}' style='line-height:32rpx;background:#298DF8;'>定金</view>
+                        </view>
+                        <view class='dismtbcctxtbox' data-gid='{{w.gid}}' catchtap='{{w.goods_type==3?"addressmanagement":"addtocart"}}'>
+                            <view class='dismtbcctxtheadwatfal multilineellipsis'>{{w.gname}}</view>
+                            <view class='dismtbcctxtbott'>
+                                <view class='dismtbcctxtbottleft specialellipsis'>
+                                        <block wx:if='{{w.goods_type==3}}'>定金￥{{w.promote_price}}</block>
+                                        <block wx:else>￥{{w.gsale}}</block>									
                                 </view>
-                                <view wx:if='{{item.gsale != item.market_price}}' class='bccompricright'>{{item.gsource}}:￥{{item.market_price}}</view>
-                            </view>   
+                                <image wx:if='{{w.goods_type!=3}}' src='../../../../pages/images/dismtb.png' class='addshopcar'></image>
+                            </view>
                         </view>
-
                     </view>
                 </view>
-                
-        </view>
+
+            </view>        
+        </block>
+
 
 
       <view style='height:60rpx;width:100%;text-align:center;line-height:60rpx;color:#666;font-size:30rpx;' wx:if='{{commoddata.length>=15}}'>{{loadprompt}}</view>

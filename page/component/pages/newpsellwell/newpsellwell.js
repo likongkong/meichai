@@ -23,16 +23,47 @@ Page({
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
- 
+    ifOrWf:2
   },
   // 商品详情
   addressmanagement: function (event){
-    // 统计商品点击量
     var gid = event.currentTarget.dataset.gid || event.target.dataset.gid;
     wx.navigateTo({ 
       url: "/pages/detailspage/detailspage?gid=" +gid
     });
   },
+  // 加入购物车
+  addtocart: function (w) {
+    var _this = this;
+    var gid = w.currentTarget.dataset.gid || w.target.dataset.gid;
+    var adtocar = [{ 'goods_id': gid, 'color_id': 0, 'size_id': 0, 'count': 1 }];
+    var adtocarleng = adtocar.length;
+    adtocar = JSON.stringify(adtocar);
+    var qformid = Dec.Aese('mod=cart&operation=add&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&gcount=' + adtocarleng + '&ginfo=' + adtocar);
+    wx.request({
+      url: app.signindata.comurl + 'goods.php' + qformid,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        if (res.data.ReturnCode == 200) {
+          app.showToastC('已成功加入购物车');
+          Dec.shopnum(_this,app.signindata.comurl);
+        } else if (res.data.ReturnCode == 802) {
+          wx.navigateTo({   
+            url: "/pages/detailspage/detailspage?gid=" + gid
+          });
+        } else if (res.data.ReturnCode == 805) {
+          app.showToastC('库存不足');
+        } else if (res.data.ReturnCode == 201) {
+          app.showToastC('添加失败');
+        } else if (res.data.ReturnCode == 302) {
+          app.showToastC('无效信息');
+        }
+      },
+      fail: function () { }
+    });
+  },   
+
   /**
    * 生命周期函数--监听页面加载
    */
