@@ -36,7 +36,7 @@
           <block wx:for="{{consumemessageData}}" wx:key='key'>
             <swiper-item class="swiper-item" data-id="{{item.activity_id}}" bindtap="toaRewarddeyails">
               <image style='width:50rpx;height:50rpx;margin:15rpx;float:left;border-radius:50%;' src='{{item.headphoto}}'></image>
-              <view style="color:{{item.color}}">{{item.name}}</view>
+              <view style="color:{{item.color?item.color:'#000000'}}">{{item.name}}</view>
             </swiper-item>
           </block>
         </swiper>
