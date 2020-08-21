@@ -635,9 +635,10 @@ Page({
             var arrlist = List.index||[];
             if (arrlist.length != 0) {
               for (var i = 0; i < arrlist.length; i++) {
-                if (arrlist[i].item_type == 9014) {
+                if (arrlist[i].item_type == 9014 || arrlist[i].item_type == 989) {
+                  var shouNum = arrlist[i].item_type == 9014?10:6
                   let al = [...arrlist[i].List];
-                  if(al.length<=10){
+                  if(al.length<=shouNum){
                     let result = [];
                     while (al.length > 0) {
                       let randomIndex = Math.floor(Math.random() * (al.length))
@@ -652,10 +653,10 @@ Page({
                         al.splice(j, 1);
                       }
                     }
-                    if(topArrList.length>=10){
+                    if(topArrList.length>=shouNum){
                       arrlist[i].List = topArrList;
                     }else{
-                      arrlist[i].List = [...topArrList,..._this.makeRandomArr(al,10-topArrList.length)];
+                      arrlist[i].List = [...topArrList,..._this.makeRandomArr(al,shouNum-topArrList.length)];
                     }
                   }
                 }
