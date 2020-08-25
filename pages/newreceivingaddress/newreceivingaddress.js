@@ -220,11 +220,13 @@ Page({
     if (wx.chooseAddress) {
       wx.chooseAddress({
         success(res) {
+          console.log(res)
           var provinces = _this.data.provinces || [];
           var flag = false;
           if(provinces.indexOf(res.provinceName) > -1) {
             flag = true;
           };
+          console.log(provinces,flag)
           if(flag){
             _this.setData({
               deladdress: res.detailInfo,
