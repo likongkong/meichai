@@ -106,27 +106,27 @@ Page({
           src: info.roleImg,
           success: function (res) {
             var radio = res.width / res.height;
-            var width = 120 * radio;
-            if(width>=120){
-              var widthOther = 90 * radio;
-              ctxt.drawImage(res.path, 25, 25, widthOther, 90)
+            var width = 80 * radio;
+            if(width>=110){
+              var widthOther = 60 * radio;
+              ctxt.drawImage(res.path, 25, 25, widthOther, 60)
             }else{
-              ctxt.drawImage(res.path, 25, 25, width, 120)
+              ctxt.drawImage(res.path, 25, 25, width, 80)
             }
             
 
             ctxt.setFontSize(25);
             ctxt.setFillStyle('#f0ca97');
             if (info.welfareType == 1) {
-              ctxt.fillText("隐藏红包", 155, 60);
-              ctxt.fillText(parseInt(info.limitAmount) + "元", 167, 90);
-              ctxt.fillText("隐藏红包", 155, 60.5);
-              ctxt.fillText(parseInt(info.limitAmount) + "元", 167.5, 90);
+              ctxt.fillText("隐藏红包", 165, 60);
+              ctxt.fillText(parseInt(info.limitAmount) + "元", 177, 90);
+              ctxt.fillText("隐藏红包", 165, 60.5);
+              ctxt.fillText(parseInt(info.limitAmount) + "元", 177.5, 90);
             } else {
-              ctxt.fillText("幸运值红包", 135, 60);
-              ctxt.fillText(parseInt(info.limitAmount) + "点", 160, 90);
-              ctxt.fillText("幸运值红包", 135, 60.5);
-              ctxt.fillText(parseInt(info.limitAmount) + "点", 160.5, 90);
+              ctxt.fillText("幸运值红包", 145, 60);
+              ctxt.fillText(parseInt(info.limitAmount) + "点", 170, 90);
+              ctxt.fillText("幸运值红包", 145, 60.5);
+              ctxt.fillText(parseInt(info.limitAmount) + "点", 170.5, 90);
             }
             ctxt.draw(true, setTimeout(function () {
               wx.canvasToTempFilePath({
