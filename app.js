@@ -571,6 +571,14 @@ App({
         url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + whref 
       });
     } else if (item_type == 9017) {
+      console.log(wname,typeof wname ,wname.indexOf("旗舰店") != -1,)
+      if(wname === '0' || wname === '1' || typeof wname === 'number'){
+        var wname = wname;
+      }else if(wname.indexOf("旗舰店") != -1){
+        var wname = 0;
+      }else{
+        var wname = 1;
+      };
       wx.navigateTo({
         url: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + whref +"&settlement="+wname
       });
