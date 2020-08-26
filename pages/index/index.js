@@ -634,8 +634,8 @@ Page({
             var arrlist = List.index||[];
             if (arrlist.length != 0) {
               for (var i = 0; i < arrlist.length; i++) {
-                if (arrlist[i].item_type == 9014 || arrlist[i].item_type == 989) {
-                  var shouNum = arrlist[i].item_type == 9014?10:6
+                if (arrlist[i].item_type == 9014 || arrlist[i].item_type == 989 || arrlist[i].item_type == 9017) {
+                  var shouNum = arrlist[i].item_type == 9014||9017?10:6
                   let al = [...arrlist[i].List];
                   if(al.length<=shouNum){
                     let result = [];
