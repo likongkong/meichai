@@ -570,9 +570,9 @@ App({
       wx.navigateTo({
         url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + whref 
       });
-    } else if (item_type == 9017) { 
+    } else if (item_type == 9017) {
       wx.navigateTo({
-        url: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + whref 
+        url: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + whref +"&settlement="+wname
       });
     } else if (item_type == 9018) { 
       wx.navigateTo({
@@ -864,7 +864,7 @@ App({
       });
     } else if (item_type == 9006) {
       wx.navigateTo({
-        url: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + jumpid
+        url: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + jumpid + "&settlement=1"
       });
     } else if (item_type == 9007) {
       wx.navigateTo({

@@ -37,7 +37,8 @@ Page({
 
     signinlayer: true,
     windowHeight: app.signindata.windowHeight,
-    type:''
+    type:'',
+    settlement:0
   },
 
   // 展会公共跳转
@@ -194,12 +195,14 @@ Page({
       console.log(scene)
       _this.setData({
         brandId: _this.getSearchString('id', scene) || 0,
-        type:_this.getSearchString('type', scene) || ''
+        type:_this.getSearchString('type', scene) || '',
+        settlement:1
       })
     }else{
       _this.setData({
         brandId: options.id || 0,
-        type: options.type||''
+        type: options.type||'',
+        settlement:options.settlement||0
       })
     }
     console.log('品牌值============',_this.data.brandId,_this.data.type)
@@ -315,7 +318,7 @@ Page({
     wx.showLoading({
       title: '加载中...',
     })
-    var exh = Dec.Aese('mod=show&operation=brandSummary&brandId=' + _this.data.brandId + '&page=' + page + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=' + _this.data.type);
+    var exh = Dec.Aese('mod=show&operation=brandSummary&brandId=' + _this.data.brandId + '&page=' + page + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=' + _this.data.type+"&settlement="+_this.data.settlement);
     wx.request({
       url: app.signindata.comurl + 'toy.php' + exh,
       method: 'GET',
@@ -506,7 +509,7 @@ Page({
     var share = {
       title: _this.data.brandinfo.shareDesc,
       imageUrl: _this.data.brandinfo.shareImg,
-      path: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + _this.data.brandId + '&referee=' + _this.data.uid,
+      path: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + _this.data.brandId + '&referee=' + _this.data.uid+"&settlement="+_this.data.settlement,
       success: function (res) { }
     }
     return share;

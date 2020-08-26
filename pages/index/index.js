@@ -197,13 +197,12 @@ Page({
     var whref = w.currentTarget.dataset.href || w.target.dataset.href;
     var item_type = w.currentTarget.dataset.item_type || w.target.dataset.item_type||0;
     var imgurl = w.currentTarget.dataset.imgurl || w.target.dataset.imgurl || '';
-    var wname = w.currentTarget.dataset.title || w.target.dataset.title || '美拆'; 
+    var wname = w.currentTarget.dataset.title || w.target.dataset.title || ''; 
     // 公共跳转
     this.comjumpwxnav(item_type, whref, wname, imgurl);
 
   },
 
- 
 
   // 测试 
   jumpxinxi:function(){

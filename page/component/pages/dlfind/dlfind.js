@@ -141,7 +141,7 @@ Page({
   jumpexhdetail: function (w) {
     var id = w.currentTarget.dataset.id || w.target.dataset.id || '';
     wx.navigateTo({
-      url: "/page/secondpackge/pages/brandDetails/brandDetails?type=drying&id=" + id
+      url: "/page/secondpackge/pages/brandDetails/brandDetails?type=drying&id=" + id+"&settlement=1"
     });
   },
   jumpsouchtem:function(w){

@@ -67,7 +67,7 @@ Page({
     } else if (type == 2) {
       var id = w.currentTarget.dataset.id || w.target.dataset.id || '';
       wx.navigateTo({
-        url: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + id
+        url: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + id + "&settlement=1"
       });
     } else if (type == 1) {
       var id = w.currentTarget.dataset.id || w.target.dataset.id || '';

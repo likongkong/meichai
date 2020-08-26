@@ -51,7 +51,10 @@
 		</scroll-view>
 	</view>
 
-	<view style="width:100%;font-size:30rpx;text-align:center;margin-top:20rpx;font-weight:bold;">参展汇总</view>
+	<view style="width:100%;font-size:30rpx;text-align:center;margin-top:20rpx;font-weight:bold;">
+		<block wx:if='{{settlement==1}}'>参展汇总</block>
+		<block wx:else>商品汇总</block>	
+	</view>
 
 	<view class="exhibboxcon">
 
@@ -158,7 +161,7 @@
 
 	<view style="width:100%;height:194rpx;"></view>
 
-	<view style="width:100%;height:210rpx;position:fixed;left:0;bottom:0;">
+	<view style="width:100%;height:210rpx;position:fixed;left:0;bottom:0;" wx:if='{{settlement==1}}'>
 		<swiper current="{{currentIndex}}" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450" style="height:100%;width:100%;height:100%;">
 			<swiper-item wx:for="{{adList}}" wx:key="key">
 				<image src="{{item.src}}" style="width:100%;height:100%;border-radius:20rpx;display:block;" catchtap="exhibitionpubjump" data-id='{{item.activity_id}}' data-type='{{item.href_type}}' mode='aspectFit'></image>

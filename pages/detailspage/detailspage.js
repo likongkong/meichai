@@ -2431,7 +2431,7 @@ Page({
                 };
               }
             }
-          };
+          }; 
           // 颜色
           if (res.data.Ginfo.color) {
             if (res.data.Ginfo.color.length != 0) {
@@ -3419,8 +3419,9 @@ Page({
   },
   gobrandDetails: function (w) {
     var mid = w.currentTarget.dataset.mid || w.target.dataset.mid || 0;
+    var settlement = this.data.is_exhibition;
     wx.navigateTo({
-      url: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + mid,
+      url: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + mid + "&settlement="+settlement,
     });
   },
   //展会推荐列表跳转

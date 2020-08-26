@@ -112,7 +112,7 @@ Page({
     } else if (type == 2) {
       var id = w.currentTarget.dataset.id || w.target.dataset.id || '';
       wx.navigateTo({
-        url: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + id
+        url: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + id+"&settlement=1"
       });
     } else if (type == 1) {
       var id = w.currentTarget.dataset.id || w.target.dataset.id || '';
@@ -136,7 +136,7 @@ Page({
   gobrandDetails: function (w) {
     var mid = w.currentTarget.dataset.mid || w.target.dataset.mid || 0;
     wx.navigateTo({
-      url: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + mid,
+      url: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + mid + "&settlement=1",
     });
   },
   //  获取滚动条位置

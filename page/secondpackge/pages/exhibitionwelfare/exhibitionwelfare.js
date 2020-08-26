@@ -160,7 +160,7 @@ Page({
   gobrandDetails: function (w) {
     var mid = w.currentTarget.dataset.mid || w.target.dataset.mid || 0;
     wx.navigateTo({
-      url: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + mid,
+      url: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + mid + "&settlement=1",
     });
   },
 
