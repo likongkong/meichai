@@ -29,6 +29,12 @@
           <image src="{{item}}" mode='aspectFit' class="adhswiperimg"></image>
         </swiper-item>
       </swiper>   
+
+        <view class="progress-box">
+            <progress percent="{{(activity.suplusNum/activity.limit_users)*100}}" color="{{(activity.suplusNum/activity.limit_users)*100 === 100?'#6FBE0D':(activity.suplusNum/activity.limit_users)*100 < 100 && (activity.suplusNum/activity.limit_users)*100 > 50?'#FEB51D':'#ff2742'}}" backgroundColor="#cccccc" stroke-width='12' active duration="5" />
+            <text style="padding-left:15rpx;">剩余：{{activity.suplusNum}}</text>
+        </view>
+
    </view>
    <view class="adhcontent">
       <view class="adhceve" wx:for='{{goodsdata}}' catchtap="jumpposition" data-ind='{{index}}' wx:key='key' style="{{index%4==3?'margin-right:0;':''}}">
