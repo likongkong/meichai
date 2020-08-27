@@ -34,7 +34,7 @@
   text-overflow: ellipsis;
   overflow: hidden;
   float: left;
-  margin-left: 10rpx;
+  margin-left: 20rpx;
 }
 .recordbox .gear{
   font-size: 24rpx;
