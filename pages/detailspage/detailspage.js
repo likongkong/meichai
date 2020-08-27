@@ -2560,7 +2560,8 @@ Page({
             isVideoSwiper: res.data.Ginfo.videoBanner||false,
             is_exhibition: res.data.Ginfo.specialWay || 0,
             brandId: res.data.Ginfo ? res.data.Ginfo.brandId : '',
-            exhibdetail: res.data.Ginfo.specialWay==1?true:false,
+            // exhibdetail: res.data.Ginfo.specialWay==1?true:false,
+            exhibdetail:false,
             isSubscribeCoupon: res.data.isSubscribeCoupon || false,
             subscribeCouponTip: res.data.subscribeCouponTip || ''
           });

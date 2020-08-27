@@ -224,16 +224,116 @@
 
   <block wx:if='{{is_exhibition==1||(is_exhibition!=1&&brandId>0)}}'>
       <view style="width:100%;height:80rpx;">
-        <view style="width:50%;height:100%;{{exhibdetail?'font-size:26rpx;font-weight: bold;':'font-size:24rpx;'}}text-align:center;line-height:80rpx;float:left;position:relative;" data-ind='1' catchtap="exhibdetailfun">
-        品牌专区
-        <view wx:if='{{exhibdetail}}' style='width:100rpx;height:6rpx;background:#000;position:absolute;left:0;right:0;bottom:0;margin:auto;'></view>
-        </view>
         <view style="width:50%;height:100%;{{!exhibdetail?'font-size:26rpx;font-weight: bold;':'font-size:24rpx;'}}text-align:center;line-height:80rpx;float:left;position:relative;" data-ind='2' catchtap="exhibdetailfun">
         <view style='width:2rpx;height:50rpx;float:left;background:#BBB9B9;margin-top:15rpx;'></view>
         商品详情
         <view wx:if='{{!exhibdetail}}' style='width:100rpx;height:6rpx;background:#000;position:absolute;left:0;right:0;bottom:0;margin:auto;'></view>
         </view>
+        <view style="width:50%;height:100%;{{exhibdetail?'font-size:26rpx;font-weight: bold;':'font-size:24rpx;'}}text-align:center;line-height:80rpx;float:left;position:relative;" data-ind='1' catchtap="exhibdetailfun">
+        品牌专区
+        <view wx:if='{{exhibdetail}}' style='width:100rpx;height:6rpx;background:#000;position:absolute;left:0;right:0;bottom:0;margin:auto;'></view>
+        </view>
+
+
       </view>  
+
+  </block>
+  <block wx:else>
+     <somke colortitle='#000'></somke>
+  </block>
+  <block>
+      <view class='dltittheme'  id='exh2'>
+        <image class='dttemeimg' src='../images/rad_left.png'></image>
+        <view class='dlttemelef'>
+          商品详情
+        </view>
+      </view>
+      <!--  商品详情图片 转换HTML标签  -->
+      <view class='detailimg' style='padding:0;{{detaposiiftr&&dryinglist.length!=0?"height:1300rpx;":""}}{{!detaposiiftr&&dryinglist.length!=0?"padding-bottom:100rpx;":""}}'>
+        <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+        <view class='detaposiclick' wx:if='{{dryinglist.length!=0}}'>
+          <image src='https://clw.51chaidan.com//images/goods/GradualChangee.png' class='detaposiclickimg'></image>
+          <view class='detaposiclicktxt' catchtap='detaposiiftrfun'>
+            <block wx:if='{{detaposiiftr}}'>展开 ↓</block>
+            <block wx:else>收起 ↑</block>
+          </view>
+        </view>
+      </view>
+      <view class='dltittheme' wx:if='{{dryinglist.length!=0}}'>
+        <image class='dttemeimg' src='../images/rad_left.png'></image>
+        <view class='dlttemelef'>
+          用户晒单
+          <block wx:if='{{drydisnum!=0}}'>({{drydisnum}})</block>
+        </view>
+      </view>
+      <view style='width:100%;background:#fff;' wx:if='{{dryinglist.length!=0}}'>
+        <view wx:for='{{dryinglist}}' wx:key='key' style='width:100%;'>
+          <view class='detdlhead'>
+            <image class='detdlheadimg' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail' src='{{item.litpic}}'>
+            </image>
+            <view class='detdlheadtxt specialellipsis' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>{{item.nick}}</view>
+            <image class='detdlheadimglast' wx:if='{{item.is_authentication==1}}' src='https://clw.51chaidan.com/images/goods/authentication1.png'></image>
+            <image class='detsieimg' wx:if='{{item.is_praise==0}}' data-lid='{{item.id}}' data-is_praise='{{item.is_praise}}' catchtap='ispraisefun' data-ind='{{index}}' src='https://www.51chaidan.com/images/brand/black_heart.png?'>
+            </image>
+            <image class='detsieimg' wx:if='{{item.is_praise==1}}' data-lid='{{item.id}}' data-is_praise='{{item.is_praise}}' catchtap='ispraisefun' data-ind='{{index}}' src='https://www.51chaidan.com/images/brand/red_heart.png?'>
+            </image>
+            <view class='detdaltxtnum' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>{{item.praise_sum>0?item.praise_sum:''}}</view>
+          </view>
+          <view wx:if='{{item.introduce}}' style='padding:15rpx 20rpx;color:#000;font-size:24rpx;position: relative;' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>{{item.introduce}}
+          </view>
+          <scroll-view scroll-x="true" class="disanum_tab_comtainer" style='height:160rpx;background:#fff;'>
+            <view class='detdlscrollbox' wx:if='{{item.video_img}}' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>
+              <image class='detdlscrimg' src='{{item.video_img}}'></image>
+              <image class='detdlvideclick' src='https://www.51chaidan.com/images/icon/iconPlayVideo.png'></image>
+            </view>
+            <view class='detdlscrollbox' wx:for='{{item.img_extend}}' wx:key='key' wx:for-item='w' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>
+              <image class='detdlscrimg' src='{{w.img}}'></image>
+            </view>
+          </scroll-view>
+        </view>
+        <view wx:if='{{dryinglist.length>=3}}' style='width:100%;height:80rpx;line-height:80rpx;color:#000;font-size:26rpx;text-align:center;background:#f4f5f9;position:relative;' catchtap='delpostdatamore'>{{loadprompttxt}}</view>
+      </view>
+      <view class='dltittheme' wx:if='{{allcomlist.length!=0}}'>
+        <image class='dttemeimg' src='../images/rad_left.png'></image>
+        <view class='dlttemelef'>热门评论</view>
+      </view>
+      <!--  评论数据  -->
+      <view class='pinglunbox' wx:if='{{allcomlist.length!=0}}'>
+        <view class='allcom' wx:for='{{allcomlist}}' wx:if='{{index<2}}' wx:key='key' data-cid='{{item.cid}}' data-uid='{{item.uid}}'>
+          <view class='allcomhead'>
+            <view class='allcomhleft'>
+              <image class='achlimg' src='{{item.headphoto}}'></image>
+              <view class='allcomname'>
+                <view class='allcomnametit specialellipsis'>
+                  {{item.nick}}
+                  <image wx:if='{{item.gender==0}}' class='allcmmtitn' src='../images/allcom_wman.png'></image>
+                  <image wx:if='{{item.gender==1}}' class='allcmmtitn' src='../images/allcom_man.png'></image>
+                </view>
+                <view class='loutime'>{{item.rank}}楼 {{item.time}}</view>
+              </view>
+            </view>
+            <view class='allcomhright'>
+              <view class='allcomripoi'>
+                {{item.praise}}
+                <image wx:if='{{item.praised==0}}' class='allrigimgz' src='../images/zzzzz.png' bindtap='commentary' data-cid='{{item.cid}}' data-ind='{{index}}'></image>
+                <image wx:if='{{item.praised==1}}' class='allrigimgz' src='../images/pressed_good.png' bindtap='cancelcommentary' data-cid='{{item.cid}}' data-ind='{{index}}'></image>
+              </view>
+            </view>
+          </view>
+          <view class='allcompinglun'>
+            <view class='huifu' wx:if='{{item.conhif==1}}'>
+              {{item.conh}}
+            </view>
+            <view class='pinglun'>
+              {{item.content}}
+            </view>
+          </view>
+        </view>
+        <view class='morecomments' wx:if='{{allcomlist.length!=0}}' bindtap='jumpallcomments'>查看全部评论</view>
+        <image class='qiangsf' wx:if='{{allcomlist.length==0}}' src='../images/qiangsf.png' bindtap='jumpallcomments'></image>
+      </view>
+  </block>
+  <block wx:if='{{is_exhibition==1||(is_exhibition!=1&&brandId>0)}}'>
       <view id='exh1'>
         <!-- 展会 -->
         <view style='width:100%;overflow:hidden;'>
@@ -246,28 +346,28 @@
               <view style="font-size:26rpx;color:#333;padding:40rpx 0 0 0;text-align:left;line-height:30rpx;padding-top:40rpx;" wx:if='{{userbranddata.bradDesc}}' catchtap='gobrandDetails' data-mid='{{userbranddata.id}}'>简介：{{userbranddata.bradDesc}}</view>
             </view>
           </view>
-    <!-- 直播 -->
-  <block wx:if='{{livebroadcast&&livebroadcast.length!=0}}'>
-			<swiper style="width:710rpx;margin:auto;height:170rpx;" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
-				<swiper-item  wx:for='{{livebroadcast}}' wx:key='key' wx:for-item='w'>
-						<view style="height:139rpx;background:#fff;position:relative;margin:15rpx 0;border-radius: 10rpx;">
-							<navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{w.room_id}}" style='position: absolute;height:100%;width:100%;left:0rpx;top:0;z-index:3;'></navigator>
-							<view style="overflow:hidden;border-radius:10rpx;">
-								<image style="height:139rpx;width:174rpx;float:left;border-radius:10rpx;"  mode='aspectFit' src="{{w.images}}"></image>
-								<view style="width:460rpx;height:119rpx;position:relative;float:left;margin:10rpx;">
-									<view style="font-size:30rpx;">{{w.name}}</view>
-									<view style="width:100%;position:absolute;bottom:0rpx;left:0;">
-										<view wx:if='{{w.status==102}}' style="font-size:25rpx;line-height:30rpx;;color:#fff;float:left;padding:5rpx 10rpx;border-radius:10rpx;background:#32ACFB;">{{w.start_time}}开播</view>
-										<view wx:elif='{{w.status==101}}' style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">直播中</view>
-										<view wx:elif='{{w.status==103}}' style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">已结束</view>
-										<view wx:else style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">尚未开播</view>
-									</view>
-								</view>
-							</view>
-						</view>
-				</swiper-item>
-			</swiper>
-  </block>
+            <!-- 直播 -->
+          <block wx:if='{{livebroadcast&&livebroadcast.length!=0}}'>
+              <swiper style="width:710rpx;margin:auto;height:170rpx;" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
+                <swiper-item  wx:for='{{livebroadcast}}' wx:key='key' wx:for-item='w'>
+                    <view style="height:139rpx;background:#fff;position:relative;margin:15rpx 0;border-radius: 10rpx;">
+                      <navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{w.room_id}}" style='position: absolute;height:100%;width:100%;left:0rpx;top:0;z-index:3;'></navigator>
+                      <view style="overflow:hidden;border-radius:10rpx;">
+                        <image style="height:139rpx;width:174rpx;float:left;border-radius:10rpx;"  mode='aspectFit' src="{{w.images}}"></image>
+                        <view style="width:460rpx;height:119rpx;position:relative;float:left;margin:10rpx;">
+                          <view style="font-size:30rpx;">{{w.name}}</view>
+                          <view style="width:100%;position:absolute;bottom:0rpx;left:0;">
+                            <view wx:if='{{w.status==102}}' style="font-size:25rpx;line-height:30rpx;;color:#fff;float:left;padding:5rpx 10rpx;border-radius:10rpx;background:#32ACFB;">{{w.start_time}}开播</view>
+                            <view wx:elif='{{w.status==101}}' style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">直播中</view>
+                            <view wx:elif='{{w.status==103}}' style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">已结束</view>
+                            <view wx:else style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">尚未开播</view>
+                          </view>
+                        </view>
+                      </view>
+                    </view>
+                </swiper-item>
+              </swiper>
+          </block>
           <view class="exhibboxcon">
             <view style="float:left;margin-left:20rpx;">
               <view class="mexhibboxconeve" wx:for='{{exhdata}}' wx:key='key' wx:if='{{index%2==0}}' catchtap="jumpexhdetail" data-id='{{item.id}}' data-brandid='{{item.brandId}}' data-mtype="{{item.type}}" data-gid='{{item.goodsId}}'>
@@ -375,102 +475,9 @@
         </view>
       </view>
   </block>
-  <block wx:else>
-     <somke colortitle='#000'></somke>
-  </block>
-  <block>
-      <view class='dltittheme'  id='exh2'>
-        <image class='dttemeimg' src='../images/rad_left.png'></image>
-        <view class='dlttemelef'>
-          商品详情
-        </view>
-      </view>
-      <!--  商品详情图片 转换HTML标签  -->
-      <view class='detailimg' style='padding:0;{{detaposiiftr&&dryinglist.length!=0?"height:1300rpx;":""}}{{!detaposiiftr&&dryinglist.length!=0?"padding-bottom:100rpx;":""}}'>
-        <template is="wxParse" data="{{wxParseData:article.nodes}}" />
-        <view class='detaposiclick' wx:if='{{dryinglist.length!=0}}'>
-          <image src='https://clw.51chaidan.com//images/goods/GradualChangee.png' class='detaposiclickimg'></image>
-          <view class='detaposiclicktxt' catchtap='detaposiiftrfun'>
-            <block wx:if='{{detaposiiftr}}'>展开 ↓</block>
-            <block wx:else>收起 ↑</block>
-          </view>
-        </view>
-      </view>
-      <view class='dltittheme' wx:if='{{dryinglist.length!=0}}'>
-        <image class='dttemeimg' src='../images/rad_left.png'></image>
-        <view class='dlttemelef'>
-          用户晒单
-          <block wx:if='{{drydisnum!=0}}'>({{drydisnum}})</block>
-        </view>
-      </view>
-      <view style='width:100%;background:#fff;' wx:if='{{dryinglist.length!=0}}'>
-        <view wx:for='{{dryinglist}}' wx:key='key' style='width:100%;'>
-          <view class='detdlhead'>
-            <image class='detdlheadimg' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail' src='{{item.litpic}}'>
-            </image>
-            <view class='detdlheadtxt specialellipsis' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>{{item.nick}}</view>
-            <image class='detdlheadimglast' wx:if='{{item.is_authentication==1}}' src='https://clw.51chaidan.com/images/goods/authentication1.png'></image>
-            <image class='detsieimg' wx:if='{{item.is_praise==0}}' data-lid='{{item.id}}' data-is_praise='{{item.is_praise}}' catchtap='ispraisefun' data-ind='{{index}}' src='https://www.51chaidan.com/images/brand/black_heart.png?'>
-            </image>
-            <image class='detsieimg' wx:if='{{item.is_praise==1}}' data-lid='{{item.id}}' data-is_praise='{{item.is_praise}}' catchtap='ispraisefun' data-ind='{{index}}' src='https://www.51chaidan.com/images/brand/red_heart.png?'>
-            </image>
-            <view class='detdaltxtnum' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>{{item.praise_sum>0?item.praise_sum:''}}</view>
-          </view>
-          <view wx:if='{{item.introduce}}' style='padding:15rpx 20rpx;color:#000;font-size:24rpx;position: relative;' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>{{item.introduce}}
-          </view>
-          <scroll-view scroll-x="true" class="disanum_tab_comtainer" style='height:160rpx;background:#fff;'>
-            <view class='detdlscrollbox' wx:if='{{item.video_img}}' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>
-              <image class='detdlscrimg' src='{{item.video_img}}'></image>
-              <image class='detdlvideclick' src='https://www.51chaidan.com/images/icon/iconPlayVideo.png'></image>
-            </view>
-            <view class='detdlscrollbox' wx:for='{{item.img_extend}}' wx:key='key' wx:for-item='w' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>
-              <image class='detdlscrimg' src='{{w.img}}'></image>
-            </view>
-          </scroll-view>
-        </view>
-        <view wx:if='{{dryinglist.length>=3}}' style='width:100%;height:80rpx;line-height:80rpx;color:#000;font-size:26rpx;text-align:center;background:#f4f5f9;position:relative;' catchtap='delpostdatamore'>{{loadprompttxt}}</view>
-      </view>
-      <view class='dltittheme' wx:if='{{allcomlist.length!=0}}'>
-        <image class='dttemeimg' src='../images/rad_left.png'></image>
-        <view class='dlttemelef'>热门评论</view>
-      </view>
-      <view style='width:100%;{{allcomlist.length==0?"height:240rpx;":"height:0;"}}'></view>
-      <!--  评论数据  -->
-      <view class='pinglunbox' wx:if='{{allcomlist.length!=0}}'>
-        <view class='allcom' wx:for='{{allcomlist}}' wx:if='{{index<2}}' wx:key='key' data-cid='{{item.cid}}' data-uid='{{item.uid}}'>
-          <view class='allcomhead'>
-            <view class='allcomhleft'>
-              <image class='achlimg' src='{{item.headphoto}}'></image>
-              <view class='allcomname'>
-                <view class='allcomnametit specialellipsis'>
-                  {{item.nick}}
-                  <image wx:if='{{item.gender==0}}' class='allcmmtitn' src='../images/allcom_wman.png'></image>
-                  <image wx:if='{{item.gender==1}}' class='allcmmtitn' src='../images/allcom_man.png'></image>
-                </view>
-                <view class='loutime'>{{item.rank}}楼 {{item.time}}</view>
-              </view>
-            </view>
-            <view class='allcomhright'>
-              <view class='allcomripoi'>
-                {{item.praise}}
-                <image wx:if='{{item.praised==0}}' class='allrigimgz' src='../images/zzzzz.png' bindtap='commentary' data-cid='{{item.cid}}' data-ind='{{index}}'></image>
-                <image wx:if='{{item.praised==1}}' class='allrigimgz' src='../images/pressed_good.png' bindtap='cancelcommentary' data-cid='{{item.cid}}' data-ind='{{index}}'></image>
-              </view>
-            </view>
-          </view>
-          <view class='allcompinglun'>
-            <view class='huifu' wx:if='{{item.conhif==1}}'>
-              {{item.conh}}
-            </view>
-            <view class='pinglun'>
-              {{item.content}}
-            </view>
-          </view>
-        </view>
-        <view class='morecomments' wx:if='{{allcomlist.length!=0}}' bindtap='jumpallcomments'>查看全部评论</view>
-        <image class='qiangsf' wx:if='{{allcomlist.length==0}}' src='../images/qiangsf.png' bindtap='jumpallcomments'></image>
-      </view>
-  </block>
+
+
+  <view style='width:100%;{{allcomlist.length==0?"height:240rpx;":"height:0;"}}'></view>
 
 </view>
 
