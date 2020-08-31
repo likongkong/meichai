@@ -338,7 +338,6 @@ Page({
           method: 'GET',
           header: { 'Accept': 'application/json' },
           success: function (res) {
-           
             wx.hideLoading()
             if (res.data.ReturnCode == 200) {
               app.showToastC('提现成功，请注意查收');
@@ -356,7 +355,6 @@ Page({
                 app.showToastC(res.data.Msg);
               };
             };
-            wx.hideLoading()
             _this.data.iftrputfor = true;
           }
         });

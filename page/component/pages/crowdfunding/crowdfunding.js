@@ -26,7 +26,7 @@ Page({
     wxnum: '',
     shopnum: 0,
     dryinglistnum: 0,
-
+ 
     // 授权弹框
     tgabox: false,
 
@@ -859,10 +859,26 @@ Page({
   },
   // 立即购买弹框
   dsbbbutclickt: function () {
-    this.setData({
-      tipbacktwo: true,
-      dsbframeiftr:true
-    });
+
+    if(this.data.shopdetail.status==1){
+      wx.showModal({
+        title: '提示',
+        content: '活动暂未开启',
+        showCancel: false
+      });
+    }else if(this.data.shopdetail.status==3){
+      wx.showModal({
+        title: '提示',
+        content: '活动已结束',
+        showCancel: false
+      });
+    }else{
+      this.setData({
+        tipbacktwo: true,
+        dsbframeiftr:true
+      });
+    };
+
   },
   buybombsimmediatelyfun:function(){
     var _this = this;
