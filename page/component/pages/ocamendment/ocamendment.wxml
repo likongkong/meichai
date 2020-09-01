@@ -96,7 +96,10 @@
                     <view class='specialellipsis' style='width:170rpx;height:40rpx;text-align:center;font-size:24rpx;color:#ec656c;margin:0 auto;'>暂无报价</view>
                 </block>
                 <block wx:else>
-                    <view class='specialellipsis' style='width:170rpx;height:40rpx;text-align:center;font-size:24rpx;color:#ec656c;margin:0 auto;'>{{item.minPrice}}~{{item.maxPrice}}元</view>
+                    <view class='specialellipsis' style='width:170rpx;height:40rpx;text-align:center;font-size:24rpx;color:#ec656c;margin:0 auto;'>
+                        <block wx:if='{{item.minPrice!=item.maxPrice}}'>{{item.minPrice}}~{{item.maxPrice}}元</block>
+                        <block wx:else>{{item.maxPrice}}元</block>
+                    </view>
                 </block>
                 
             </view>
@@ -143,7 +146,10 @@
                 <view class='specialellipsis' style='width:170rpx;height:40rpx;text-align:center;font-size:24rpx;color:#ec656c;margin:0 auto;'>暂无报价</view>
             </block>
             <block wx:else>
-                <view class='specialellipsis' style='width:170rpx;height:40rpx;text-align:center;font-size:24rpx;color:#ec656c;margin:0 auto;'>{{item.minPrice}}~{{item.maxPrice}}元</view>
+                <view class='specialellipsis' style='width:170rpx;height:40rpx;text-align:center;font-size:24rpx;color:#ec656c;margin:0 auto;'>
+                        <block wx:if='{{item.minPrice!=item.maxPrice}}'>{{item.minPrice}}~{{item.maxPrice}}元</block>
+                        <block wx:else>{{item.maxPrice}}元</block>
+                </view>
             </block>
             
         </view>
