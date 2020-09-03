@@ -204,7 +204,10 @@
           <view style='width:100%;height:40rpx;position:absolute;bottom:0rpx;left:0;background:#999;opacity:0.8;border-radius:0 0 10rpx 10rpx;'></view>
           <view style='width:100%;position:absolute;bottom:0rpx;left:0;font-size:25rpx;line-height:40rpx;color:#fff;'>
             <text style='float:left;margin-left:20rpx;'>已拆 {{item.truth_users}}/{{item.limit_users}}</text>
-            <text style='float:right;margin-right:20rpx;'>{{item.stopdate}}结束</text>
+            <text style='float:right;margin-right:20rpx;'>
+              <block wx:if='{{item.truth_users==item.limit_users}}'>已结束</block>
+              <block wx:else>{{item.stopdate}}结束</block>             
+            </text>
           </view>
         </view>
       </view>
@@ -222,7 +225,10 @@
           <view style='width:100%;height:40rpx;position:absolute;bottom:0rpx;left:0;background:#999;opacity:0.8;border-radius:0 0 10rpx 10rpx;'></view>
           <view style='width:100%;position:absolute;bottom:0rpx;left:0;font-size:25rpx;line-height:40rpx;color:#fff;'>
             <text style='float:left;margin-left:20rpx;'>已拆 {{item.truth_users}}/{{item.limit_users}}</text>
-            <text style='float:right;margin-right:20rpx;'>{{item.stopdate}}结束</text>
+            <text style='float:right;margin-right:20rpx;'>
+              <block wx:if='{{item.truth_users==item.limit_users}}'>已结束</block>
+              <block wx:else>{{item.stopdate}}结束</block>             
+            </text>
           </view>
         </view>
       </view>
