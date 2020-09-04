@@ -277,7 +277,7 @@ Page({
     // 省市联动
     var that = this;
     that.setData({
-      'province': "北京",
+      'province': "北京市",
       'city': "北京市",
       'county': "东城区"      
     });
