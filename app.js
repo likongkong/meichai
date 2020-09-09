@@ -400,6 +400,7 @@ App({
   // 40  展会福利
   // 41  抽盒机红包进入
   // 42  展会列表
+  // 43 一番赏
   userstatistics: function (num) {
     var _this = this;
     var num = num || 0
