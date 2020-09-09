@@ -1103,9 +1103,8 @@ Page({
               tgabox: false,
               signinlayer: false
             })
-            console.log()
             // '没有授权 统计'
-            app.userstatistics(42);
+            app.userstatistics(43);
             _this.onLoadfun();
           }
         }
