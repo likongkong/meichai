@@ -380,8 +380,7 @@
                               <block wx:elif='{{item.order_type==2||item.order_type==9}}'>免费</block>
                               <block wx:elif='{{item.order_type==1&&item.suitPrice&&item.suitName&&item.suitNumber}}'>￥{{item.suitPrice}}</block>
                               <block wx:else>￥{{item.goods_price}}</block>
-                              
-                              <view wx:if='{{item.is_suit==1}}' style='display: inline-block;color:#ff2742;margin-right:12rpx;'>
+                              <view wx:if='{{item.is_suit==1}}' style='display: inline-block;color:#ff2742;'>
                                   <block wx:if='{{item.order_type==1&&item.suitPrice&&item.suitName&&item.suitNumber}}'></block>
                                   <block wx:else>{{item.gsale_suit}}</block>
                               </view>

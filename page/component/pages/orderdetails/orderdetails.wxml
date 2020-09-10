@@ -490,11 +490,11 @@
 
                             <block wx:if='{{comdata.order_type==1&&comdata.suitPrice&&comdata.suitName&&comdata.suitNumber}}'></block>
                             <block wx:else>
-                                <view wx:if='{{comdata.is_suit==1}}' style='display: inline-block;color:#ff2742;margin-right:12rpx;'>{{comdata.gsale_suit}}</view>
+                                <view wx:if='{{comdata.is_suit==1}}' style='display: inline-block;color:#ff2742;'>{{comdata.gsale_suit}}</view>
                             </block>
                             
                           </view>
-                          <view wx:if='{{comdata.tax!=0.00}}' style='margin-left:10rpx;color:#999;' class='taxpricleft'>税费:￥{{comdata.tax}}<view wx:if='{{comdata.is_suit==1}}' style='display: inline-block;margin-right:12rpx;'>{{comdata.gsale_suit}}</view></view>
+                          <view wx:if='{{comdata.tax!=0.00}}' style='margin-left:10rpx;color:#999;' class='taxpricleft'>税费:￥{{comdata.tax}}<view wx:if='{{comdata.is_suit==1}}' style='display: inline-block;'>{{comdata.gsale_suit}}</view></view>
 
                       </view>
                   
