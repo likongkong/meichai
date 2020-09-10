@@ -1631,6 +1631,7 @@ Page({
                 tptipadi = rdl[i].aid;
                 tptipadd = rdl[i].address;
                 tipnamephone = rdl[i].consignee + " " + rdl[i].phone;
+                _this.setBlindBoxDefaultAddress(rdl[i].aid);
               } else {
                 rdl[i].checked = false;
               }
@@ -2723,32 +2724,6 @@ Page({
     console.log('gid=============',gid)
     wx.navigateTo({
       url: "/page/secondpackge/pages/detailSimgEffects/detailSimgEffects?gid="+gid
-    });
-  },
-
-  // 下一页返回调取
-  nextpagediao: function () {
-    var _this = this;
-    //  调取收货地址
-    var q = Dec.Aese('mod=address&operation=getlist&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
-    wx.request({
-      url: app.signindata.comurl + 'user.php' + q,
-      method: 'GET',
-      header: {
-        'Accept': 'application/json'
-      },
-      success: function (res) {
-        if (res.data.ReturnCode == 200) {
-          var rdl = res.data.List;
-          if (rdl.length != 0) {
-            for (var i = 0; i < rdl.length; i++) {
-              if (rdl[i].isdefault == 1) {
-                _this.setBlindBoxDefaultAddress(rdl[i].aid);
-              }
-            };
-          }
-        };
-      }
     });
   },
 
