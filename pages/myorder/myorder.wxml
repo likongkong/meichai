@@ -489,10 +489,14 @@
                             <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
                             分享好友
                         </view>
-                    
+
                         <view class='wholebottomaddright sharebox redborcol' style='background:#42bd56;color:#fff;margin-right:10rpx;border:1rpx solid #fff;' wx:if='{{item.isToyCabinet}}' catchtap='jumpowntoy'>
                             我的玩具柜
                         </view>
+
+                        <view class='wholebottomaddright sharebox redborcol' wx:if="{{item.order_type == 14 && !item.isToyCabinet && !isBlindBoxDefaultAddress}}" style='width: 160rpx;color:#42bd56;margin-right:10rpx;border:1rpx solid #42bd56;' catchtap="goAddress">
+                            填写收货地址
+                        </view>   
         
                     </view>
 
@@ -526,6 +530,10 @@
                         <view class='wholebottomaddright sharebox redborcol' style='background:#42bd56;color:#fff;margin-right:10rpx;border:1rpx solid #fff;' wx:if='{{item.isToyCabinet}}' catchtap='jumpowntoy'>
                             我的玩具柜
                         </view>
+
+                        <view class='wholebottomaddright sharebox redborcol' wx:if="{{item.order_type == 14 && !item.isToyCabinet && !isBlindBoxDefaultAddress}}" style='width: 160rpx;color:#42bd56;margin-right:10rpx;border:1rpx solid #42bd56;' catchtap="goAddress">
+                            填写收货地址
+                        </view>  
                         
                     </view>
 
@@ -541,7 +549,11 @@
                         <view class='wholebottomaddright sharebox redborcol' wx:if='{{item.is_invite==0}}'>
                             <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
                             分享好友
-                        </view>                       
+                        </view>   
+
+                        <view class='wholebottomaddright sharebox redborcol' wx:if="{{item.order_type == 14 && !isBlindBoxDefaultAddress}}" style='width: 160rpx;color:#42bd56;margin-right:10rpx;border:1rpx solid #42bd56;' catchtap="goAddress">
+                            填写收货地址
+                        </view>                    
                         
                     </view>
 
@@ -568,6 +580,10 @@
                             我的玩具柜
                         </view>
 
+                        <view class='wholebottomaddright sharebox redborcol' wx:if="{{item.order_type == 14 && !item.isToyCabinet && !isBlindBoxDefaultAddress}}" style='width: 160rpx;color:#42bd56;margin-right:10rpx;border:1rpx solid #42bd56;' catchtap="goAddress">
+                            填写收货地址
+                        </view>  
+
                     </view>
 
                     <!-- 0元购 status为2 进行中 -->
@@ -590,6 +606,9 @@
                             分享好友
                         </view>    
                         
+                        <view class='wholebottomaddright sharebox redborcol' wx:if="{{item.order_type == 14 && !item.isToyCabinet && !isBlindBoxDefaultAddress}}" style='width: 160rpx;color:#42bd56;margin-right:10rpx;border:1rpx solid #42bd56;' catchtap="goAddress">
+                            填写收货地址
+                        </view>
                     </view>
 
                     <!--  等待收货  --> 
@@ -636,6 +655,7 @@
                         发帖推荐
                         </view>
 
+
                     </view>
               <!--  已完成  -->
 
@@ -645,7 +665,8 @@
                         <view class='wholebottomaddright sharebox redborcol' wx:if='{{item.is_invite==0}}'>
                             <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
                             分享好友
-                        </view>                   
+                        </view>     
+                                
                     </view>
                     <!--  已取消订单  -->
                     <view wx:if='{{item.status==8 && item.order_type!=7}}' style='min-height:1rpx;width:94%;padding: 0 3% 10rpx;overflow:hidden;'>    
@@ -653,7 +674,9 @@
                         <view class='wholebottomaddright sharebox redborcol' wx:if='{{item.is_invite==0}}'>
                             <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
                             分享好友
-                        </view>                        
+                        </view>    
+
+                                        
 
                     </view>
 
@@ -668,7 +691,8 @@
                         <view class='wholebottomaddright sharebox redborcol' wx:if='{{item.is_invite==0}}'>
                             <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
                             分享好友
-                        </view>         
+                        </view>       
+
                     </view>  
          </view>
          

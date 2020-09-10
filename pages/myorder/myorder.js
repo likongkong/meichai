@@ -13,6 +13,7 @@ Page({
     uid: app.signindata.uid,
     windowHeight: app.signindata.windowHeight || 600,
     isProduce: app.signindata.isProduce,
+    isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
     // loading 加载
     headhidden: true, 
     bothidden: true,        
@@ -185,6 +186,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoadfun: function () {
+    console.log(111111,app.signindata.isBlindBoxDefaultAddress)
     var _this = this;
     _this.setData({
       loginid: app.signindata.loginid,
@@ -195,6 +197,7 @@ Page({
       spreadEntry: app.signindata.spreadEntry,
       windowHeight: app.signindata.windowHeight || 600,
       isProduce: app.signindata.isProduce,
+      isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress
     });
     // 调取数据
     this.datatransfer(); 
@@ -2705,6 +2708,83 @@ Page({
         })
       };
     };
+  },
+
+  // 地址管理
+  goAddress:function(){
+    wx.navigateTo({ 
+      url: "/pages/newreceivingaddress/newreceivingaddress"
+    });
+  },
+
+    // 下一页返回调取
+    nextpagediao: function () {
+      var _this = this;
+      //  调取收货地址
+      var q = Dec.Aese('mod=address&operation=getlist&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+      wx.request({
+        url: app.signindata.comurl + 'user.php' + q,
+        method: 'GET',
+        header: {
+          'Accept': 'application/json'
+        },
+        success: function (res) {
+          if (res.data.ReturnCode == 200) {
+            var rdl = res.data.List;
+            if (rdl.length != 0) {
+              for (var i = 0; i < rdl.length; i++) {
+                if (rdl[i].isdefault == 1) {
+                  _this.addmoddetermine(rdl[i].aid);
+                  _this.setBlindBoxDefaultAddress(rdl[i].aid);
+                  app.signindata.isBlindBoxDefaultAddress = true;
+                  _this.setData({
+                    isBlindBoxDefaultAddress: true
+                  });
+                }
+              };
+            }
+          };
+        }
+      });
+    },
+
+  //  添加地址
+  addmoddetermine:function(aid){
+    var _this = this;
+    var q = Dec.Aese('mod=operate&operation=changeAddress&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&aid=' + aid + '&oid=11' + '&isSupplyAddress=1')
+    wx.request({
+      url: app.signindata.comurl + 'order.php' + q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        if (res.data.ReturnCode == 200) {
+          // wx.showModal({
+          //   content: '设置成功',
+          //   success: function (res) {
+              _this.onPullDownRefresh();
+            // }
+          // })     
+        }
+      }
+    }); 
+  },
+
+  // 设置抽盒機默認地址
+  setBlindBoxDefaultAddress: function (aid) {
+    var _this = this;
+    //  调取收货地址
+    var q = Dec.Aese('mod=address&operation=setBlindBoxDefaultAddress&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&aid=' + aid)
+    wx.request({
+      url: app.signindata.comurl + 'user.php' + q,
+      method: 'GET',
+      header: {
+        'Accept': 'application/json'
+      },
+      success: function (res) {
+        if (res.data.ReturnCode == 200) {
+        }
+      }
+    });
   },
 
 })

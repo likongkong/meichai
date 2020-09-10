@@ -150,7 +150,7 @@ Page({
           });
           // 判断是否登录
           if (_this.data.loginid != '' && _this.data.uid != '') {
-            _this.onLoadfun();
+            _this.onLoadfun(options);
           } else {
             app.signin(_this)
           }
@@ -159,7 +159,7 @@ Page({
             success: res => {
               // 判断是否登录
               if (_this.data.loginid != '' && _this.data.uid != '') {
-                _this.onLoadfun();
+                _this.onLoadfun(options);
               } else {
                 app.signin(_this);
               }

@@ -187,6 +187,7 @@ Page({
                   beforePage.nextpagediao();   
                 }
               });              
+              
               app.showToastC('提交成功');
             }else if (res.data.ReturnCode == 901) {
               app.showToastC('身份证号格式不正确');

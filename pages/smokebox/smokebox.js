@@ -897,7 +897,8 @@ Page({
   },
 
   lineup: function () {
-    var _this = this
+    var _this = this;
+    console.log(1111111111)
     _this.queueup(1, 0)
   },
 
@@ -1565,11 +1566,11 @@ Page({
   updateadd: function () {
     var _this = this;
 
-    if (this.data.tipaid == '') {
-      app.showToastC('请选择地址');
-      return false;
-    };
-
+    // if (this.data.tipaid == '') {
+    //   app.showToastC('请选择地址');
+    //   return false;
+    // };
+   
     var orderid = _this.data.order_id;
     var aid = _this.data.tipaid;
 
@@ -1577,33 +1578,43 @@ Page({
     _this.setData({
       suboformola: true
     });
-
-    var q = Dec.Aese('mod=blindBox&operation=updateAddress&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&order_id=' + orderid + '&aid=' + aid);
-
-    wx.request({
-      url: app.signindata.comurl + 'spread.php' + q,
-      method: 'GET',
-      header: {
-        'Accept': 'application/json'
-      },
-      success: function (res) {
-        if (res.data.ReturnCode == 200) {
-          _this.setData({
-            tipbacktwo: false,
-            buybombsimmediately: false,
-            receivingaddress: false,
-            iswholePay: false,
-          });
-          _this.queueup(2, 2)
-          _this.paymentmony()
-
-        } else {
-          // 提交订单蒙层
-          _this.setData({suboformola: false});
-          app.showToastC(res.data.Msg);
-        };
-      }
-    })
+    if (this.data.tipaid != '') {
+      var q = Dec.Aese('mod=blindBox&operation=updateAddress&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&order_id=' + orderid + '&aid=' + aid);
+      wx.request({
+        url: app.signindata.comurl + 'spread.php' + q,
+        method: 'GET',
+        header: {
+          'Accept': 'application/json'
+        },
+        success: function (res) {
+          if (res.data.ReturnCode == 200) {
+            _this.setData({
+              tipbacktwo: false,
+              buybombsimmediately: false,
+              receivingaddress: false,
+              iswholePay: false,
+            });
+            _this.queueup(2, 2)
+            _this.paymentmony()
+  
+          } else {
+            // 提交订单蒙层
+            _this.setData({suboformola: false});
+            app.showToastC(res.data.Msg);
+          };
+        }
+      })
+    }else{
+      _this.setData({
+        tipbacktwo: false,
+        buybombsimmediately: false,
+        receivingaddress: false,
+        iswholePay: false,
+      });
+      _this.queueup(2, 2)
+      _this.paymentmony()
+    }
+    
   },
 
   // 微信支付
@@ -2120,20 +2131,20 @@ Page({
   wholebox: function () {
     var _this = this;
 
-    if (this.data.tipaid == '') {
-      app.showToastC('请选择地址');
-      return false;
-    };
+    // if (this.data.tipaid == '') {
+    //   app.showToastC('请选择地址');
+    //   return false;
+    // };
 
     var orderid = _this.data.order_id;
-    var aid = _this.data.tipaid;
+    var aid = _this.data.tipaid?_this.data.tipaid:-1;
 
     // 提交订单蒙层
     _this.setData({
       suboformola: true,
       iswholePay: true,
     });
-
+    
     var q = Dec.Aese('mod=blindBox&operation=openWholeBox&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&aid=' + aid + '&desc=' + _this.data.desc + '&isRepeatOpen=' + _this.data.isRepeatOpen);
 
     wx.request({

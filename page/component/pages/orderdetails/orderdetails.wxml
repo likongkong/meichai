@@ -52,7 +52,7 @@
     </view>
 
   <!-- {{comdata.order_type!=7&&comdata.status!=16&&comdata.status!=1&&comdata.status!=8&&comdata.status!=11}}   -->
-     
+  <block wx:if="{{comdata.consignee != 0 && comdata.consignee != ''}}">
   <view wx:if='{{comdata.order_type!=7&&(comdata.status!= 0||comdata.status!=8)&&(comdata.order_type!=2&&(comdata.status!=1||comdata.status!=16||comdata.status!=11))}}' class='boxch'>
       <view class='ordetaaddleft'>
           <image class='orderaddimg' src='../../../../pages/images/icon_address2.png'></image>
@@ -66,7 +66,7 @@
           </view>
       </view>
   </view>
-  
+  </block>
 
   <view class='addressmodify' wx:if='{{comdata.canChangedAddress}}'>注:每个订单只可修改一次收货地址<view class='modifaddclick' catchtap='modaddfun'>修改地址</view></view>
 
