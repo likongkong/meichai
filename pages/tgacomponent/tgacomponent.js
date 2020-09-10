@@ -5,8 +5,12 @@ Component({
     tgaimg: app.signindata.tgaimg||'https://www.51chaidan.com/images/default/openscreen.jpg'
   },
   ready:function(){
+
+    var imgnum = Math.floor(Math.random() * app.signindata.imgUrlNum) || 0;
+    var imgUrl = 'https://cdn.51chaidan.com/images/openscreen/openscreen'+imgnum+'.jpg';
+
     this.setData({
-      tgaimg: app.signindata.tgaimg || 'https://www.51chaidan.com/images/default/openscreen.jpg'
+      tgaimg: imgUrl || 'https://www.51chaidan.com/images/default/openscreen.jpg'
     })
   },
   methods: {

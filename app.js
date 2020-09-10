@@ -95,6 +95,8 @@ App({
     sceneValue:0,
     yifanshangIsInQueue:false,
     timer:'',
+    // 开机屏随机图片个数
+    imgUrlNum:3
   },
   //一番赏队列倒计时
   // yifanshangIsInQueueFun(time){

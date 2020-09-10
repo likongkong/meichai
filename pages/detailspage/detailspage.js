@@ -196,7 +196,6 @@ Page({
     c_backcolor:'#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
     othershop:[],
-    addimgwidth: 90,
     // 是否授权
     windowHeight: app.signindata.windowHeight - 65 - wx.getStorageSync('statusBarHeightMc') || 0,
     tgabox: false,
@@ -224,7 +223,9 @@ Page({
     isSubscribeCoupon:false,
     subscribeCouponTip:'',
     // 定金参数
-    depositbox:false
+    depositbox:false,
+    // 抽盒机规则选择个数
+    isBlindBoxNum:1
  
   },
   livebroadcast:function(){
@@ -653,14 +654,35 @@ Page({
       var gid = _this.data.gid;
       var color = _this.data.colorid || 0;
       var size = _this.data.sizeid || 0;
-      var count = _this.data.numberofdismantling;
+      
       var aid = _this.data.tipaid;
       var cid = [];
       if (_this.data.coudata1cid != '') { cid.push(_this.data.coudata1cid); };
       if (_this.data.coudata2cid != '') { cid.push(_this.data.coudata2cid); };
       var cid = cid.join();
-      var ginfo = [{ gid: gid, color: color, size: size, count: count, rec_goods_id: (_this.data.rec_goods_id || 0), rec_cart_id: (_this.data.rec_cart_id || 0), 'referee': _this.data.referee }];
+      if(_this.data.zunmdata.isBlindBox){
+        var count = _this.data.numberofdismantling*_this.data.isBlindBoxNum;
+        
+        if(_this.data.isBlindBoxNum>1){
+          var isWholeSuit = 1;
+        }else{
+          var isWholeSuit = 0;
+        };
+        
+        console.log(11,count,_this.data.numberofdismantling,_this.data.isBlindBoxNum,'isWholeSuit=='+isWholeSuit)
+
+        var ginfo = [{ gid: gid, color: color, size: size, count: count,isWholeSuit:isWholeSuit, rec_goods_id: (_this.data.rec_goods_id || 0), rec_cart_id: (_this.data.rec_cart_id || 0), 'referee': _this.data.referee }];
+
+      }else{
+        var count = _this.data.numberofdismantling;
+        console.log(22,count)
+
+        var ginfo = [{ gid: gid, color: color, size: size, count: count, rec_goods_id: (_this.data.rec_goods_id || 0), rec_cart_id: (_this.data.rec_cart_id || 0), 'referee': _this.data.referee }];
+
+      };
+
       ginfo = JSON.stringify(ginfo);
+      console.log(ginfo)
     }else{
       var zunmdata = this.data.combdataimg.goods_detial;
       var ginfo = [];
@@ -791,6 +813,7 @@ Page({
                         //  分享判断是否支付成功
                         payiftr:true,
                         numberofdismantling:1,
+                        isBlindBoxNum:1,
                         //  活动支付完成隐藏弹框
                         suboformola: false,
                         desc: '',
@@ -839,6 +862,7 @@ Page({
                         //  分享判断是否支付成功
                         payiftr: false,
                         numberofdismantling: 1,
+                        isBlindBoxNum:1,
                         //  活动支付完成隐藏弹框
                         suboformola: false,
                         desc: '',
@@ -995,18 +1019,31 @@ Page({
   },
   // 金额计算
   amountcalculation:function(){
+    var _this = this;
     var zunmdata = this.data.zunmdata || {};
     // 税费
     var txton = parseFloat(zunmdata.tax || 0) * parseFloat(this.data.numberofdismantling); 
-    // 商品价格
-    var compric = parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling);   
-    var compricbj = parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling) - parseFloat(this.data.coudata2mon);      
+     
      // 运费 
     var acc = 0;
     var xianshi = '0.00';
     var freightiftr = '0.00';
-    // 商品个数
-    var mcnum = parseInt(this.data.numberofdismantling);
+
+
+    if(_this.data.zunmdata.isBlindBox){
+      // 商品价格
+      var compric = parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling)*parseFloat(this.data.isBlindBoxNum);   
+      var compricbj = parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling)*parseFloat(this.data.isBlindBoxNum) - parseFloat(this.data.coudata2mon); 
+      // 商品个数
+      var mcnum = parseInt(this.data.numberofdismantling)*parseFloat(this.data.isBlindBoxNum);
+    }else{
+      // 商品价格
+      var compric = parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling);   
+      var compricbj = parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling) - parseFloat(this.data.coudata2mon); 
+      // 商品个数
+      var mcnum = parseInt(this.data.numberofdismantling);
+    }
+
     if ((this.data.defaultinformation.carriage.free||"99")!='-1'){
       var tddefcarfr = parseFloat(this.data.defaultinformation.carriage.free||"99");
       if (mcnum >= parseFloat(this.data.defaultinformation.carriage.freeMCPieces)) {
@@ -1046,13 +1083,27 @@ Page({
      // 应付金额
     var _this = this;
     if (this.data.coupon_type==1){
-      var ap = parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling) - parseFloat(this.data.coudata2mon) + acc + txton;
+      if(_this.data.zunmdata.isBlindBox){
+        var ap = parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling)*parseFloat(this.data.isBlindBoxNum) - parseFloat(this.data.coudata2mon) + acc + txton;
+      }else{
+        var ap = parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling) - parseFloat(this.data.coudata2mon) + acc + txton;
+      }
+
     }else{
-      var ap = parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling) * (parseFloat(this.data.coudata2mon) / 10) + acc + txton;
-      var coudata2mondiscount = (parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling)) - parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling) * (parseFloat(this.data.coudata2mon) / 10)
-      this.setData({
-        coudata2mondiscount: coudata2mondiscount.toFixed(2)||'0'
-      })
+      
+      if(_this.data.zunmdata.isBlindBox){
+        var ap = parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling) *parseFloat(this.data.isBlindBoxNum)* (parseFloat(this.data.coudata2mon) / 10) + acc + txton;
+        var coudata2mondiscount = (parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling)*parseFloat(this.data.isBlindBoxNum)) - parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling) * (parseFloat(this.data.coudata2mon) / 10)
+        this.setData({
+          coudata2mondiscount: coudata2mondiscount.toFixed(2)||'0'
+        })
+      }else{
+        var ap = parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling) * (parseFloat(this.data.coudata2mon) / 10) + acc + txton;
+        var coudata2mondiscount = (parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling)) - parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling) * (parseFloat(this.data.coudata2mon) / 10)
+        this.setData({
+          coudata2mondiscount: coudata2mondiscount.toFixed(2)||'0'
+        })       
+      };
     }
     if (ap <=0){
         ap=0;
@@ -1066,6 +1117,8 @@ Page({
       txton = 0.00;
     }
 
+    console.log(ap,xianshi,freightiftr,compric,mcnum)
+
     this.setData({
       // 应付金额
       amountpayable: ap.toFixed(2),
@@ -1078,6 +1131,26 @@ Page({
       // 税费
       taxation: txton.toFixed(2)
     });     
+  },
+  // 抽盒机规则选择
+  isBlindBoxsel:function(w){
+    var index = w.currentTarget.dataset.no || w.target.dataset.no;
+    var taxation = parseFloat(index) * parseFloat(this.data.zunmdata.tax||0);  
+    var zunmdata = this.data.zunmdata;
+    if (zunmdata.limitBuy > 0) {
+      if (index > zunmdata.limitBuy) {
+        app.showToastC('该商品最多一次性购买' + zunmdata.limitBuy + '件');
+        return false;
+      };
+    };
+    if (index>this.data.quantityofgoods){
+      app.showToastC('选中数量不能超过库存');
+      return false;
+    };
+    this.setData({
+      isBlindBoxNum: index,
+      taxation: taxation.toFixed(2)
+    });
   },
   // 选择拆单数量
   comissuitsel:function(w){ 
@@ -1922,9 +1995,9 @@ Page({
         numbadd = zunmdata.limitBuy;
       };
     };
-    if (numbadd>10){
-      app.showToastC('该商品最多一次性购买10件');      
-      numbadd = 10;
+    if (numbadd>99){
+      app.showToastC('该商品最多一次性购买99件');      
+      numbadd = 99;
     };
     if (parseInt(_this.data.quantityofgoods) < numbadd){
       app.showToastC('该商品最多不能超过库存');
@@ -2045,7 +2118,14 @@ Page({
     _this.setData({
       suboformola: true
     });
-    var adtocar = [{ 'goods_id': _this.data.gid, 'color_id': _this.data.colorid || 0, 'size_id': _this.data.sizeid || 0, 'count': _this.data.numberofdismantling, rec_goods_id: (_this.data.rec_goods_id || 0), rec_cart_id: (_this.data.rec_cart_id || 0), 'referee': _this.data.referee||0}];
+    if(_this.data.zunmdata.isBlindBox){
+       var count = parseFloat(_this.data.numberofdismantling) * parseFloat(_this.data.isBlindBoxNum);
+    }else{
+      var count = _this.data.numberofdismantling
+    }
+    var adtocar = [{ 'goods_id': _this.data.gid, 'color_id': _this.data.colorid || 0, 'size_id': _this.data.sizeid || 0, 'count':count , rec_goods_id: (_this.data.rec_goods_id || 0), rec_cart_id: (_this.data.rec_cart_id || 0), 'referee': _this.data.referee||0}];
+
+    console.log(adtocar)
 
     if (_this.data.awa == 1){
       var othershop = _this.data.othershop||[];
@@ -3402,19 +3482,6 @@ Page({
       commoddata[index].width = viewWidth;
       _this.setData({
         movies: commoddata
-      });
-    };
-  },
-  imageLoadabb: function (e) {
-    var _this = this;
-    var $width = e.detail.width,    //获取图片真实宽度
-      $height = e.detail.height,
-      ratio = $width / $height;
-    var viewHeight = 90,           //设置图片显示宽度，
-      viewWidth = 90 * ratio;
-    if (viewWidth) {
-      _this.setData({
-        addimgwidth: viewWidth
       });
     };
   },

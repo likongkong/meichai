@@ -399,3 +399,28 @@
   font-size: 24rpx;
   margin: auto;
 }
+.isBBClWhole{
+  display: inline-block;
+  width:40rpx ;
+  height: 40rpx;
+  margin-right: 15rpx;
+  vertical-align: top;
+}
+.comcolorchWhole.wholeIsBBack{
+  color: #ff7d8f;
+  border: 4rpx solid #ff7d8f;
+}
+.comcolorchWhole{
+  padding: 6rpx 16rpx;
+  height: 40rpx;
+  line-height:40rpx;
+  border: 4rpx solid #e5e5e5;
+  float: left;
+  font-size: 24rpx;
+  color: #666;
+  margin-right: 12rpx;
+  border-radius: 5rpx;
+  margin-bottom: 16rpx;
+  position: relative;
+  
+}

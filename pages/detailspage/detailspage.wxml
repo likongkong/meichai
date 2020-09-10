@@ -747,20 +747,31 @@
 <view class='dsbframe' wx:if='{{dsbframeiftr}}'>
   <view class='dsbfhead'>
     <view class='dsbfcileft'>
-      <image src='{{zunmdata.goods_thumb}}' style='width:{{addimgwidth||90}}rpx;' bindload="imageLoadabb" class='dasbfcommodityimg' catchtap='dasbfcommodityimg'></image>
+      <image src='{{zunmdata.goods_thumb}}' class='dasbfcommodityimg' mode='aspectFit'></image>
     </view>
     <view class='dsbfhcon'>
-      <view class='dsbfhcprice' style="{{zunmdata.goods_type==3?'color:#000;':''}}">{{zunmdata.munit}}{{zunmdata.gsale}}
-        <view wx:if='{{zunmdata.is_suit==1}}' style='display: inline-block; '>{{zunmdata.gsale_suit}}</view>
+      <view class='dsbfhcprice' style="{{zunmdata.goods_type==3?'color:#000;':''}}">
+          <block wx:if='{{zunmdata.isBlindBox}}'>{{zunmdata.munit}}{{zunmdata.gsale*isBlindBoxNum}}</block>
+          <block wx:else>{{zunmdata.munit}}{{zunmdata.gsale}}<view wx:if='{{zunmdata.is_suit==1}}' style='display: inline-block; '>{{zunmdata.gsale_suit}}</view>          
+          </block>
       </view>
       <block wx:if='{{zunmdata.goods_type==3}}'>
           <view style='height:50rpx;line-height:50rpx;font-size:30rpx;color:#f3223f;width:100%;' class='specialellipsis'>定金 ￥{{zunmdata.promote_price}}</view>      
       </block>
       <block wx:else>
-          <view style='height:50rpx;line-height:50rpx;font-size:30rpx;color:#999;width:100%;' class='specialellipsis' wx:if='{{zunmdata.color.length!=0||zunmdata.size.length!=0}}'>已选择：
-            <text style='display: inline-block;' wx:for='{{zunmdata.color}}' wx:for-item="chit" wx:key='key' wx:if='{{chit.no==colorid}}'>{{chit.property}}</text>
-            <text decode="{{true}}" style='display: inline-block;' wx:for='{{zunmdata.size}}' wx:for-item="chit" wx:key='key' wx:if='{{chit.no==sizeid}}'>&nbsp;{{chit.property}}</text>
-          </view>      
+          <block wx:if='{{zunmdata.isBlindBox}}'>
+              <view style='height:50rpx;line-height:50rpx;font-size:30rpx;color:#999;width:100%;' class='specialellipsis'>已选择：<text style='display: inline-block;'>
+                    <block wx:if='{{isBlindBoxNum==zunmdata.suit_num}}'>整套({{isBlindBoxNum}}个)</block>
+                    <block wx:else>盲盒({{isBlindBoxNum}}个)</block>
+                </text>
+              </view>         
+          </block>
+          <block wx:else>
+              <view style='height:50rpx;line-height:50rpx;font-size:30rpx;color:#999;width:100%;' class='specialellipsis' wx:if='{{zunmdata.color.length!=0||zunmdata.size.length!=0}}'>已选择：
+                <text style='display: inline-block;' wx:for='{{zunmdata.color}}' wx:for-item="chit" wx:key='key' wx:if='{{chit.no==colorid}}'>{{chit.property}}</text>
+                <text decode="{{true}}" style='display: inline-block;' wx:for='{{zunmdata.size}}' wx:for-item="chit" wx:key='key' wx:if='{{chit.no==sizeid}}'>&nbsp;{{chit.property}}</text>
+              </view>           
+          </block>
       </block>
 
     </view>
@@ -768,7 +779,7 @@
     </image>
   </view>
   <view class='dsbfcontent'>
-    <view class='purchasequantity'>
+    <view class='purchasequantity' wx:if='{{!zunmdata.isBlindBox}}'>
       <view class='purchasequantityleft'>购买数量</view>
       <view class='purchasequantityright' wx:if='{{zunmdata.is_suit!=1}}'>
         <view class='pchriadaredleft pcridarcom' style='position: relative;' bindtap='clicksub'>-</view>
@@ -776,11 +787,36 @@
         <view class='pchriadaredright pcridarcom' style='position: relative;' bindtap='clickadd'>+</view>
       </view>
     </view>
+    <view class='coloseltit' wx:if='{{zunmdata.isBlindBox&&zunmdata.is_suit==1}}'>购买规格</view>
     <view class='comcolor'>
-      <view wx:for='{{zunmdata.issuit}}' wx:key='key' class='comcolorchid {{item==numberofdismantling?"comcolorchidback":""}}' data-no='{{item}}' style='position: relative;' catchtap='comissuitsel'>{{item*zunmdata.unpackTruthNum}}{{zunmdata.unpackTruthUnit}}</view>
-      <view class='comcolorchid {{(zunmdata.limitnum==numberofdismantling&&zunmdata.limitnum>(zunmdata.issuit.length*zunmdata.unpackTruthNum))?"comcolorchidback":""}}' wx:if='{{zunmdata.limitnum&&zunmdata.limitnum>0&&zunmdata.limitnum>(zunmdata.issuit.length*zunmdata.unpackTruthNum)}}'>{{zunmdata.limitnum}}{{zunmdata.unpackTruthUnit}}</view>
-      <view class='comcolorchid' data-gid='{{zunmdata.whole_id}}' wx:if='{{zunmdata.whole_id}}' catchtap='addressmanagementlastno'>1盒</view>
+      <block wx:if='{{zunmdata.isBlindBox&&zunmdata.is_suit==1}}'>
+          <view class='comcolorchWhole {{1==isBlindBoxNum?"wholeIsBBack":""}}' data-no='1' style='position: relative;' catchtap='isBlindBoxsel'>
+              <image class="isBBClWhole" mode='aspectFit' src="{{zunmdata.goods_thumb}}"></image>
+              <block>盲盒(1个)</block>
+          </view>  
+          <view wx:key='key' class='comcolorchWhole {{zunmdata.suit_num==isBlindBoxNum?"wholeIsBBack":""}}' data-no='{{zunmdata.suit_num}}' style='position: relative;' catchtap='isBlindBoxsel'>
+              <image class="isBBClWhole" mode='aspectFit' src="{{zunmdata.wholeBox}}"></image>
+              <block>整套({{zunmdata.suit_num}}个)</block>
+          </view>
+
+      </block>
+      <block wx:else>
+          <view wx:for='{{zunmdata.issuit}}' wx:key='key' class='comcolorchid {{item==numberofdismantling?"comcolorchidback":""}}' data-no='{{item}}' style='position: relative;' catchtap='comissuitsel'>{{item*zunmdata.unpackTruthNum}}{{zunmdata.unpackTruthUnit}}</view>
+          <view class='comcolorchid {{(zunmdata.limitnum==numberofdismantling&&zunmdata.limitnum>(zunmdata.issuit.length*zunmdata.unpackTruthNum))?"comcolorchidback":""}}' wx:if='{{zunmdata.limitnum&&zunmdata.limitnum>0&&zunmdata.limitnum>(zunmdata.issuit.length*zunmdata.unpackTruthNum)}}'>{{zunmdata.limitnum}}{{zunmdata.unpackTruthUnit}}</view>
+          <view class='comcolorchid' data-gid='{{zunmdata.whole_id}}' wx:if='{{zunmdata.whole_id}}' catchtap='addressmanagementlastno'>1盒</view>      
+      </block>
+
     </view>
+
+    <view class='purchasequantity' wx:if='{{zunmdata.isBlindBox&&zunmdata.is_suit==1}}'>
+      <view class='purchasequantityleft'>购买数量</view>
+      <view class='purchasequantityright'>
+        <view class='pchriadaredleft pcridarcom' style='position: relative;' bindtap='clicksub'>-</view>
+        <view class='pchriadaredcon pcridarcom'>{{numberofdismantling}}</view>
+        <view class='pchriadaredright pcridarcom' style='position: relative;' bindtap='clickadd'>+</view>
+      </view>
+    </view>
+
     <view class='coloseltit' wx:if='{{zunmdata.color.length!=0}}'>选择颜色</view>
     <view class='comcolor'>
       <view wx:for='{{zunmdata.color}}' wx:key='key' class='comcolorchid {{item.no==colorid?"comcolorchidback":""}}' data-no='{{item.no}}' data-property='{{item.property}}' catchtap='comcolorsel'>{{item.property}}
