@@ -24,15 +24,21 @@
     <view class="adhbanner">
       <view class="adhBannerVol" wx:if='{{activity.id}}'>Vol.{{activity.id}}</view>
 
-      <swiper class="adhswiper" circular="true" autoplay="true" interval="3000" duration="450">
+        <swiper class="adhswiper" circular="true" autoplay="true" interval="3000" duration="450">
         <swiper-item wx:for="{{activity.listBanner}}" wx:key="key">
-          <image src="{{item}}" mode='aspectFit' class="adhswiperimg"></image>
+            <image src="{{item}}" mode='aspectFit' class="adhswiperimg"></image>
         </swiper-item>
-      </swiper>   
+        </swiper>   
 
-        <view class="progress-box">
-            <progress percent="{{(activity.suplusNum/activity.limit_users)*100}}" color="{{(activity.suplusNum/activity.limit_users)*100 === 100?'#6FBE0D':(activity.suplusNum/activity.limit_users)*100 < 100 && (activity.suplusNum/activity.limit_users)*100 > 50?'#FEB51D':'#ff2742'}}" backgroundColor="#cccccc" stroke-width='12' active duration="5" />
-            <text style="padding-left:15rpx;">剩余：{{activity.suplusNum}}</text>
+        <view class="adhbannerBox">
+            <view class="yfsNumWrap">
+                <view>当前: 第{{activity.otherNowNum}}套</view>
+                <view>总套数: {{activity.otherAllNum}}套</view>
+            </view>
+            <view class="progress-box">
+                <progress percent="{{(activity.suplusNum/activity.limit_users)*100}}" color="{{(activity.suplusNum/activity.limit_users)*100 === 100?'#6FBE0D':(activity.suplusNum/activity.limit_users)*100 < 100 && (activity.suplusNum/activity.limit_users)*100 > 50?'#FEB51D':'#ff2742'}}" backgroundColor="#cccccc" stroke-width='12' active duration="5" />
+                <text style="padding-left:15rpx;">剩余：{{activity.suplusNum}}</text>
+            </view>
         </view>
 
    </view>
@@ -112,7 +118,7 @@
 
 
 <view class="ardbottom">
-    
+    <view wx:if='{{activity.isCheckOther==2}}' class="ardbottomeve ardbmeleftbottom" data-id="{{item.id}}" catchtap="toaRewarddeyails">换一套({{activity.otherNowNum}}/{{activity.otherAllNum}})</view>
     <view wx:if='{{activity.status==1}}' class="ardbottomeve ardbmerightbottom">暂未开始 {{activity.start_time}}</view>
     <view wx:elif='{{activity.status==3||activity.suplusNum<=0}}' class="ardbottomeve ardbmerightbottom" catchtap="jumpaRewardList">已结束</view>
     <view wx:elif='{{activity.isInQueue}}' class="ardbottomeve ardbmerightbottom" catchtap="scrapingPurfun">我要刮卡</view>

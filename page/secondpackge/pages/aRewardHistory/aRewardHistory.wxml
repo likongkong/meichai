@@ -1,7 +1,7 @@
 <!-- <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view> -->
 
-<view class="main" style="padding: 0 0 20rpx 0"> 
+<view class="main"> 
   <!-- <text class="title">刮卡记录</text> -->
   <view class="record">
     <block wx:for="{{history}}" wx:key='key' wx:for-item="item">

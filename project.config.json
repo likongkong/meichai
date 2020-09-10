@@ -24,7 +24,7 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": false,
+		"useCompilerModule": true,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
@@ -97,6 +97,13 @@
 					"name": "商品详情",
 					"pathName": "pages/detailspage/detailspage",
 					"query": "gid=34183",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "抽盒机详情",
+					"pathName": "pages/smokebox/smokebox",
+					"query": "gid=33056",
 					"scene": null
 				}
 			]

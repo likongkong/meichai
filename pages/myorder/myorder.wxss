@@ -133,12 +133,14 @@
   min-height: 180rpx;
   width: 532rpx;
   margin-bottom: 10rpx;
+  position: relative;
 }
 .wholecontxt{
   padding-top: 20rpx;
   max-height: 66rpx;
   color: #666;
   font-size: 24rpx;
+  width: 400rpx;
 }
 .wholeconnum{
   height: 40rpx;
@@ -242,14 +244,16 @@
 .taxdisplay{display: inline-block;}
 
 .wholeconnumdisilin{
-  float: left;
-  margin-right: 13rpx;
+  float: right;
+  margin-left: 13rpx;
 }
 
 .taxrpice{
  height:40rpx;
  font-size:24rpx;
- width: 100%;
+ position: absolute;
+ top:20rpx;
+ right: 0;
 }
 .taxpricleft{
   height:40rpx;

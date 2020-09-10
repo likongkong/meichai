@@ -629,6 +629,11 @@
           <block wx:if='{{activity.isDirectShipping}}'>确认后将直接发货，此款商品不进入玩具柜</block>
           <block wx:else>确认后将放入您的玩具柜（自由出售or直接发货）</block>
       </view>
+			<view style='width:100%;line-height:30rpx;color:#000;font-size: 24rpx;text-align: center;margin-top: 10rpx;'>
+				如未填写收货地址，请进入小程序-我的-我的订单中填写
+      </view>
+
+
 
 			<view style='width:100%;height:80rpx;position:relative;margin-top:30rpx;'>
 
@@ -893,6 +898,8 @@
 			</view>
 
 			<view style='width:100%;line-height:30rpx;color:#4c9a23;margin-top:40rpx'><text>抽盒机抽整盒为拆盒确认款\n</text><block wx:if='{{activity.isDirectShipping}}'>确认后将直接发货，此款商品不进入玩具柜</block><block wx:else>确认后将放入您的玩具柜（自由出售or直接发货）</block></view>
+
+			<view style='width:100%;line-height:30rpx;color:#000000;font-size:24rpx;text-align: center;margin-top: 10rpx;'>如未填写收货地址，请进入小程序-我的-我的订单中填写</view>
 
 		</view>
 
@@ -1215,10 +1222,10 @@
 
 </view>
 
-<view wx:if='{{!isBlindBoxDefaultAddress && ishowcover}}' style='width:100%;position:fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight}}px;z-index:12;' catchtap="showdealoradd"></view>
+<!-- <view wx:if='{{!isBlindBoxDefaultAddress && ishowcover}}' style='width:100%;position:fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight}}px;z-index:12;' catchtap="showdealoradd"></view> -->
 
 <!-- ishowdealoradd -->
-<view wx:if='{{!isBlindBoxDefaultAddress && ishowdealoradd}}' style='width:100%;height:100%;position:fixed;top:0px;left:0;z-index:13;'>
+<!-- <view wx:if='{{!isBlindBoxDefaultAddress && ishowdealoradd}}' style='width:100%;height:100%;position:fixed;top:0px;left:0;z-index:13;'>
 	<view class='bgstyle' catchtouchmove="myCatchTouch"></view>
 
 	<view style="width:650rpx;height:800rpx;position:absolute;top:0;bottom:0;left:50rpx;margin:auto 0;background:#f0f0f0;border-radius:20rpx;">
@@ -1261,7 +1268,7 @@
 			<view class="setcomplie" style="color:{{maddid!='' ? '#000': '#e0e0e0'}};" catchtap="{{maddid!='' ? 'setdefultadd': ''}}">设置完成</view>
 		</view>
 	</view>
-</view>
+</view> -->
 
 <!-- ishowredpackage -->
 <view wx:if='{{ishowredpackage}}' style="width:100%;height:100%;position:fixed;top:0px;left:0;z-index:13;">
