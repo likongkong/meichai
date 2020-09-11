@@ -591,6 +591,7 @@ Page({
       _this.data.welfareid = options.welfareid || 0;
       _this.data.isredpag = options.isredpag || 0;
       _this.setData({
+        checkOtherActivity:options.checkOtherActivity || 0,
         is_share: options.referee ? true : false
       })
     }
@@ -646,7 +647,12 @@ Page({
       activity:'',
       finalReward:''
     });
-    var exh = Dec.Aese('mod=yifanshang&operation=info&id='+_this.data.id+'&uid='+_this.data.uid+'&loginid='+_this.data.loginid);
+    if(_this.data.checkOtherActivity && _this.data.checkOtherActivity == 2) {
+      var exh = Dec.Aese('mod=yifanshang&operation=info&id='+_this.data.id+'&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&checkOtherActivity='+_this.data.checkOtherActivity);
+      console.log('mod=yifanshang&operation=info&id='+_this.data.id+'&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&checkOtherActivity='+_this.data.checkOtherActivity)
+    }else{
+      var exh = Dec.Aese('mod=yifanshang&operation=info&id='+_this.data.id+'&uid='+_this.data.uid+'&loginid='+_this.data.loginid);
+    }
     console.log(app.signindata.comurl + 'spread.php?mod=yifanshang&operation=info&id='+_this.data.id+'&uid='+_this.data.uid+'&loginid='+_this.data.loginid)
     wx.request({
       url: app.signindata.comurl + 'spread.php' + exh,
@@ -783,8 +789,14 @@ Page({
   queuefun:function(type,continuType){
     var _this = this;
     // wx.showLoading({title: '加载中...'})
-    var exh = Dec.Aese('mod=yifanshang&operation=lineup&id='+_this.data.id+'&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&type='+type+'&continuType='+continuType);
-    console.log(app.signindata.comurl + 'spread.php?mod=yifanshang&operation=lineup&id='+_this.data.id+'&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&type='+type+'&continuType='+continuType)
+
+
+    if(_this.data.checkOtherActivity && _this.data.checkOtherActivity == 2) {
+      var exh = Dec.Aese('mod=yifanshang&operation=lineup&id='+_this.data.id+'&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&type='+type+'&continuType='+continuType+'&checkOtherActivity='+_this.data.checkOtherActivity);
+    }else{
+      var exh = Dec.Aese('mod=yifanshang&operation=lineup&id='+_this.data.id+'&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&type='+type+'&continuType='+continuType);
+      console.log(app.signindata.comurl + 'spread.php?mod=yifanshang&operation=lineup&id='+_this.data.id+'&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&type='+type+'&continuType='+continuType)
+    }
     wx.request({
       url: app.signindata.comurl + 'spread.php' + exh,
       method: 'GET',
@@ -1285,6 +1297,12 @@ Page({
     let id = e.currentTarget.dataset.id;
     wx.redirectTo({   
       url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + id
+    });
+  },
+  changeRewarddeyails(e){
+    let id = e.currentTarget.dataset.id;
+    wx.redirectTo({   
+      url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + id +"&checkOtherActivity=2"
     });
   },
   //关闭跳转其他一番赏弹框
