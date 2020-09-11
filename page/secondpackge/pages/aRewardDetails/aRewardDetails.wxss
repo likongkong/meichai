@@ -231,7 +231,6 @@ page {
 .ardbottom{
   width: 100%;
   height: 120rpx;
-  background: #ffffff;
   position: fixed;
   bottom: 112rpx;
   left: 0;

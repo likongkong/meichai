@@ -677,6 +677,8 @@ Page({
             activity.start_time = utiltime.toDate(activity.start_time)
           };
 
+          _this.data.id = activity.id;
+
           var rightline = true;
           for(var i=0;i<goodsExhibition.length;i++){
             if(goodsExhibition[i].length>1){
