@@ -236,14 +236,14 @@
 
 	</block>
 
-	<view class='newcoupon' wx:if='{{limsaveiftr}}'>
+	<!-- <view class='newcoupon' wx:if='{{limsaveiftr}}'>
 		<view class='swfback' catchtouchmove="preventD" catchtap='limsavefun'></view>
 		<view class='limsavebox'>
 			<image class='limsavbimg' mode='aspectFit' src='{{saveimgurlfrpb}}'></image>
 			<view class='limsavebuttom' catchtap='frpcomsavethepicture'>保存图片</view>
 		</view>
 
-	</view>
+	</view> -->
 
 
 	<view class='newcoupon' wx:if='{{addfrindcommoni}}'>

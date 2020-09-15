@@ -90,7 +90,8 @@ Page({
     //是否显示购买按钮
     isPurchase:true,
     requestNum:0,
-    is_jump:false
+    is_jump:false,
+    checkOtherActivity:''
   },
 
   // 幸运值
@@ -1185,6 +1186,9 @@ Page({
    */
   onPullDownRefresh: function () {
     this.selectComponent('#history')._onPullDownRefresh();
+    this.setData({
+      checkOtherActivity:''
+    })
     // this.listdata();
     this.queuefun(1,1);
   },
