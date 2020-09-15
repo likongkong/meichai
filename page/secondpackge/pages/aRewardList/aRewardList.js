@@ -39,8 +39,8 @@ Page({
     if(_this.data.page ==0){
       this.setData({datalist:[]})
     };
-    var exh = Dec.Aese('mod=yifanshang&operation=list&pid='+_this.data.page)
-    console.log("一番赏活动列表接口地址 ===== "+app.signindata.comurl + 'mod=yifanshang&operation=list&pid='+_this.data.page)
+    var exh = Dec.Aese('mod=yifanshang&operation=list&pid='+_this.data.page+'&uid='+app.signindata.uid+'&loginid='+app.signindata.loginid)
+    console.log("一番赏活动列表接口地址 ===== "+app.signindata.comurl + 'mod=yifanshang&operation=list&pid='+_this.data.page+'&uid='+app.signindata.uid+'&loginid='+app.signindata.loginid)
     wx.request({
       url: app.signindata.comurl + 'spread.php' + exh,
       method: 'GET',
