@@ -1,3 +1,10 @@
+/* 隐藏滚动条 */
+scroll-view ::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+  display: none;
+}
 .main{
   /* padding: 0 15rpx 20rpx 15rpx; */
   padding: 0 0 20rpx 0;
@@ -6,6 +13,32 @@
 }
 .rewardswiper swiper{
  height: 438rpx;
+}
+.classifyTab{
+  width: 100%;
+  height: 80rpx;
+}
+.classifyItem{
+  display: inline-block;
+  padding: 0 15rpx;
+  line-height: 80rpx;
+  font-size: 26rpx;
+  color: #999;
+  box-sizing: border-box;
+}
+.active{
+  color: #000;
+  position: relative;
+}
+.active::before{
+  content: '';
+  position: absolute;
+  bottom: 10rpx;
+  left: 50%;
+  width: 80%;
+  height: 8rpx;
+  background: #1E88E5;
+  transform: translate(-50%, 0);  
 }
 .consumemessage{
   width: 720rpx;
