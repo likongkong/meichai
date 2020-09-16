@@ -457,8 +457,9 @@
 				<image src="{{infoActivity.cover}}" style="width:500rpx;height:267rpx;margin:20rpx 50rpx;border-radius:10rpx;" mode="aspectFit" />
 				<view id='chipson' style="width:500rpx;height:267rpx;position:absolute;top:20rpx;left:50rpx;">
 					<view wx:for='{{chiplist}}' wx:key='key' style="width:{{chipsonwidth || (boxwidth/1.42-2)}}px;height:131rpx;float:left;margin:1px;position:relative;">
-						<image wx:if='{{index == (ranking-1)}}' src="https://www.51chaidan.com/images/turntable/red_check_mark.png" style="width:43rpx;height:30rpx;position:absolute:top:0;left:0;"></image>
-						<view style="width:100%;height:100%;background:white;opacity:{{index == (ranking-1) ? 0 : 0.5}};"></view>
+					  <!-- index == (ranking-1) --> 
+						<image wx:if='{{ index>(ranking-1-brightNumber)&&index<=(ranking-1)}}' src="https://www.51chaidan.com/images/turntable/red_check_mark.png" style="width:43rpx;height:30rpx;position:absolute:top:0;left:0;"></image>
+						<view style="width:100%;height:100%;background:white;opacity:{{index>(ranking-1-brightNumber)&&index<=(ranking-1) ? 0 : 0.5}};"></view>
 					</view>
 				</view>
 			</view>

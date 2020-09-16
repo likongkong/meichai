@@ -135,6 +135,8 @@ Page({
     brandId: '',
     userbranddata: '',
     saveimgurlfrpb: '',
+    perayu:0, // 0正常分享  1朋友圈
+    brightNumber:0
   },
   subshowmodalfun: function () {
     var _this = this;
@@ -356,7 +358,7 @@ Page({
    */
   onLoad: function (options) {
     var _this = this;
-    console.log(options)
+    console.log('options========',options)
     if (options.scene) {
       let scene = decodeURIComponent(options.scene);
       app.signindata.referee = _this.getSearchString('referee', scene) || 0;
@@ -367,11 +369,14 @@ Page({
         share_id: _this.getSearchString('referee', scene) || 0,
       })
     } else {
+      console.log(2)
       app.signindata.referee = options.referee || 0;
       app.signindata.activity_id = options.id || 0;
 
       _this.data.id = options.id || 0;
       _this.data.gid = options.gid || 0;
+      // 是否是朋友圈进入
+      _this.data.perayu = options.perayu || 0;
       this.setData({
         share_id: options.referee || 0,
         brandId:options.brandId||''
@@ -664,6 +669,9 @@ Page({
             }
           }
 
+          console.log(chiplist)
+
+
           if (res.data.Info.infoActivity.joinMothed == "blindBox" && !res.data.Info.infoActivity.isCanOpenLotto) {
             wx.hideShareMenu();
           } else {
@@ -881,7 +889,9 @@ Page({
       title: '加载中...',
     })
 
-    var q1 = Dec.Aese('mod=lotto&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid=' + share_uid);
+    var q1 = Dec.Aese('mod=lotto&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid=' + share_uid+'&perayu='+_this.data.perayu);
+
+    console.log('朋友圈测试','mod=lotto&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid=' + share_uid+'&perayu='+_this.data.perayu)
 
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q1,
@@ -897,6 +907,7 @@ Page({
             _this.setData({
               ishowgetchip: !_this.data.ishowgetchip,
               ranking: res.data.Info.ranking,
+              brightNumber:res.data.Info.brightNumber
             })
 
             setTimeout(function () {
@@ -1162,10 +1173,12 @@ Page({
     var _this = this;
     return {
       title: _this.data.infoGoods.shop_price +'元 限定原价购 '+ _this.data.infoActivity.name +'，一起互换碎片！',
-      query:{
-        'id': _this.data.infoActivity.id,
-        'gid':_this.data.gid
-      },
+      query:'id='+_this.data.infoActivity.id+'&gid='+_this.data.gid+ '&referee=' + _this.data.uid+'&perayu=1',
+
+      // query:{
+      //   'id': _this.data.infoActivity.id,
+      //   'gid':_this.data.gid
+      // },
       imageUrl:_this.data.infoActivity.cover 
     }
   },
