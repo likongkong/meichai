@@ -1170,11 +1170,12 @@ Page({
   onShareTimeline:function(){
     var _this = this;
     return {
-      title:_this.data.c_title || '潮玩社交平台',
+      title:_this.data.activity.name || '潮玩社交平台',
       query:{
         'id': _this.data.id,
         'gid':_this.data.gid
-      }    
+      },
+      imageUrl:'https://cdn.51chaidan.com/images/blindbox/'+_this.data.activity.id+'.jpg'    
     }
   },
   onShareAppMessage: function () {

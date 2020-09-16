@@ -164,7 +164,10 @@
 				</view>
 
 				<view wx:if='{{shareStatus&&(is_exhibition!=1||brandId==388||(is_exhibition!=1&&brandId>0))}}' style="width:60%;background:#8abe39;color:white;line-height:80rpx;border-radius:5rpx;float:right;text-align:center;position:relative;font-size:26rpx;">
-					<button style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;' data-form='2' open-type="share"></button>好友互赠,全部领取签号+1</view>
+				  <!-- 判断是ios 还是android  -->
+          <button wx:if='{{iftriosorand}}' style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;' data-form='2' open-type="share"></button>
+				  <view wx:else style="width:100%;height:100%;opacity:0;position:absolute;z-index:1;" catchtap="sharefriend"></view>
+					好友互赠,全部领取签号+1</view>
 				<view wx:if='{{!shareStatus}}' style="width:60%;background:gray;color:white;line-height:80rpx;border-radius:5rpx;float:right;text-align:center;position:relative;font-size:26rpx;">今日已赠完,明日再来</view>
 			</view>
 
@@ -670,4 +673,30 @@
     <view class='redbutbotpimmed commoncopyimmed' catchtap='getword'>立即报名
     </view>
   </view>
+</view>
+
+<!-- android和ios区别分享  -->
+
+<view class='newcoupon' wx:if='{{shareFriendBox}}'>
+	<view class='swfback' catchtouchmove="preventD" catchtap='sharefriend'></view>
+	<view class="shareFbox" wx:if='{{shFrBxBo}}'>
+	    <view class="shareEveBox">
+			   <image class='shareEveBoxImg' mode='aspectFit' src='https://cdn.51chaidan.com/images/sign/wx.png'></image>
+				 <view class="shareEveBoxTxt">分享好友</view>
+				 <button style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' data-form='2' open-type="share"></button>
+			</view>
+	    <view class="shareEveBox" catchtap="shFrBxToFun">
+			   <image class='shareEveBoxImg' mode='aspectFit' src='https://cdn.51chaidan.com/images/sign/pyq.png'></image>
+				 <view class="shareEveBoxTxt">分享朋友圈</view>
+				 <view class="shareEveBoxPos">碎片x{{infoActivity.socialGroup}}</view>
+			</view>
+	</view>
+	<view class="shareCenter" wx:if='{{shFrBxTo}}'>
+	    <image class='shareEveBoxJian' mode='aspectFit' src='https://cdn.51chaidan.com/images/sign/jiantou.png'></image>
+	    <view class="shareEveBox" style="height:250rpx;">
+			   <image class='shareEveBoxImg' style="width:140rpx;height:140rpx;" mode='aspectFit' src='https://cdn.51chaidan.com/images/sign/pyq.png'></image>
+				 <view class="shareEveBoxTxt" style="color:#fff;font-size:28rpx;">分享朋友圈</view>
+				 <view class="shareEveBoxPos">碎片x{{infoActivity.socialGroup}}</view>
+			</view>	
+	</view>
 </view>

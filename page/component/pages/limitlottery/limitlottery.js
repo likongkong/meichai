@@ -136,7 +136,25 @@ Page({
     userbranddata: '',
     saveimgurlfrpb: '',
     perayu:0, // 0正常分享  1朋友圈
-    brightNumber:0
+    brightNumber:0,
+    // 判断是ios 还是android
+    iftriosorand:app.signindata.iftriosorand || true,
+    shareFriendBox:false,
+    shFrBxBo:false,
+    shFrBxTo:false
+  },
+  sharefriend:function(){
+     this.setData({
+      shareFriendBox:!this.data.shareFriendBox,
+      shFrBxBo:true,
+      shFrBxTo:false
+     })
+  },
+  shFrBxToFun:function(){
+    this.setData({
+      shFrBxBo:false,
+      shFrBxTo:true
+     })   
   },
   subshowmodalfun: function () {
     var _this = this;
@@ -502,6 +520,7 @@ Page({
       isProduce: app.signindata.isProduce,
       avatarUrl: app.signindata.avatarUrl,
       defaultinformation:app.signindata.defaultinformation,
+      iftriosorand:app.signindata.iftriosorand || true 
     });
 
     _this.getinfo();
@@ -1171,6 +1190,9 @@ Page({
    */
   onShareTimeline:function(){
     var _this = this;
+    _this.setData({
+      shareFriendBox:false
+    })
     return {
       title: _this.data.infoGoods.shop_price +'元 限定原价购 '+ _this.data.infoActivity.name +'，一起互换碎片！',
       query:'id='+_this.data.infoActivity.id+'&gid='+_this.data.gid+ '&referee=' + _this.data.uid+'&perayu=1',
@@ -1184,6 +1206,10 @@ Page({
   },
   onShareAppMessage: function () {
     var _this = this;
+    _this.setData({
+      shareFriendBox:false
+    })
+
     if(_this.data.infoActivity.isShareBrandId){
       var urlpath = "/page/component/pages/limitlottery/limitlottery?id=" + _this.data.infoActivity.id + '&referee=' + _this.data.uid + '&gid=' + _this.data.gid+'&brandId='+_this.data.brandId||'';
     }else{
