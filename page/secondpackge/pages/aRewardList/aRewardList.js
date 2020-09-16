@@ -23,10 +23,12 @@ Page({
     isIphoneX: false,
     isProduce: app.signindata.isProduce,
     datalist:[],
-    swiperdata:[]
-
+    swiperdata:[],
+    classifyIndex:0,
+    scrollleft:0,
+    classifyName:'',
+    classifyArr:[]
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -55,7 +57,7 @@ Page({
           }else{
             let alldata = [..._this.data.datalist,...res.data.List.activity];
             // console.log(alldata)
-            _this.setData({datalist : alldata,rewardswiperData:res.data.List.topicActivity,consumemessageData:res.data.List.record})
+            _this.setData({datalist : alldata,rewardswiperData:res.data.List.topicActivity,consumemessageData:res.data.List.record,classifyArr:res.data.List.classifyList})
           }
         } else if (res.data.ReturnCode == 201){
           _this.setData({loadprompt : true })
@@ -140,4 +142,28 @@ Page({
       imageUrl: 'https://cdn.51chaidan.com/images/sign/yifanshangShareImg.jpg'
     }
   },
+  classifyChange(e){
+    let that = this;
+    let index = e.currentTarget.dataset.index;
+    let name = e.currentTarget.dataset.name;
+    let ele = '#ele' + index;
+    that.setData({
+      classifyIndex:index,
+      classifyName:index != 0?name:'',
+      loadprompt:false
+    })
+    //创建节点选择器
+    var query = wx.createSelectorQuery();
+    //选择id
+    query.select(ele).boundingClientRect();
+    query.exec(function(res) {
+      that.setData({
+        scrollleft:e.currentTarget.offsetLeft - wx.getSystemInfoSync().windowWidth/2 + (res[0].width/2)
+      })
+    })
+  },
+  //  获取滚动条位置
+  scrollleftf: function(e) {
+    this.data.scrollleft = e.detail.scrollLeft;
+  }
 })
