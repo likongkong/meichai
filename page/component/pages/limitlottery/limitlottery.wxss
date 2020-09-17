@@ -596,6 +596,6 @@
   width: 80rpx;
   height: 80rpx;
   position: absolute;
-  right: 160rpx;
+  right: 190rpx;
   top: 0;
 }

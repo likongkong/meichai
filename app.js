@@ -306,6 +306,7 @@ App({
     // 适配苹果X
     wx.getSystemInfo({
       success: res => {
+        console.log('手机型号',res)
         let modelmes = res.model;
         if (modelmes.search('iPhone X') != -1 || modelmes.search('iPhone XR') != -1) {
           _this.signindata.isIphoneX = true
@@ -330,6 +331,7 @@ App({
         } else if (res.platform == "android") {
           _this.signindata.iftriosorand = false;
         }
+        console.log('判断是ios还是Android',_this.signindata.iftriosorand)
       }
     });
 
@@ -574,7 +576,6 @@ App({
         url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + whref 
       });
     } else if (item_type == 9017) {
-      console.log(wname,typeof wname ,wname.indexOf("旗舰店") != -1,)
       if(wname === '0' || wname === '1' || typeof wname === 'number'){
         var wname = wname;
       }else if(wname.indexOf("旗舰店") != -1){
@@ -978,7 +979,6 @@ App({
       var app  = this;
       var qqq = Dec.Aese('operation=info&mod=info');
       // 获取默认信息
-      console.log('获取默认信息===',app.signindata.comurl + 'general.php' + qqq)
       wx.request({
         url: app.signindata.comurl + 'general.php' + qqq,
         method: 'GET',

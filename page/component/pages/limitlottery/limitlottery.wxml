@@ -165,8 +165,8 @@
 
 				<view wx:if='{{shareStatus&&(is_exhibition!=1||brandId==388||(is_exhibition!=1&&brandId>0))}}' style="width:60%;background:#8abe39;color:white;line-height:80rpx;border-radius:5rpx;float:right;text-align:center;position:relative;font-size:26rpx;">
 				  <!-- 判断是ios 还是android  -->
-          <button wx:if='{{iftriosorand}}' style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;' data-form='2' open-type="share"></button>
-				  <view wx:else style="width:100%;height:100%;opacity:0;position:absolute;z-index:1;" catchtap="sharefriend"></view>
+          <button wx:if='{{iftriosorand}}' style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' data-form='2' open-type="share"></button>
+				  <view wx:else style="width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;" catchtap="sharefriend"></view>
 					好友互赠,全部领取签号+1</view>
 				<view wx:if='{{!shareStatus}}' style="width:60%;background:gray;color:white;line-height:80rpx;border-radius:5rpx;float:right;text-align:center;position:relative;font-size:26rpx;">今日已赠完,明日再来</view>
 			</view>

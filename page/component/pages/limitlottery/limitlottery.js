@@ -520,8 +520,9 @@ Page({
       isProduce: app.signindata.isProduce,
       avatarUrl: app.signindata.avatarUrl,
       defaultinformation:app.signindata.defaultinformation,
-      iftriosorand:app.signindata.iftriosorand || true 
+      iftriosorand:app.signindata.iftriosorand
     });
+    console.log('限定判断手机型号',_this.data.iftriosorand)
 
     _this.getinfo();
 
