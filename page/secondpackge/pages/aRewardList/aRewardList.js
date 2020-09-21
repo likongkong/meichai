@@ -27,7 +27,9 @@ Page({
     classifyIndex:0,
     scrollleft:0,
     classifyName:'',
-    classifyArr:[]
+    classifyArr:[],
+    ClassifyTabW:0, //分类tab宽
+    animationData:{}
   },
   /**
    * 生命周期函数--监听页面加载
@@ -58,6 +60,13 @@ Page({
             let alldata = [..._this.data.datalist,...res.data.List.activity];
             // console.log(alldata)
             _this.setData({datalist : alldata,rewardswiperData:res.data.List.topicActivity,consumemessageData:res.data.List.record,classifyArr:res.data.List.classifyList})
+            //创建节点选择器
+            // var query = wx.createSelectorQuery();
+            // query.select('#ele'+_this.data.classifyIndex).boundingClientRect();
+            // query.exec(function(res) {
+            //   console.log(res[0])
+            //   _this.animationFun(_this,res[0].left,res[0].width);
+            // })
           }
         } else if (res.data.ReturnCode == 201){
           _this.setData({loadprompt : true })
@@ -157,13 +166,24 @@ Page({
     //选择id
     query.select(ele).boundingClientRect();
     query.exec(function(res) {
+      console.log(res[0])
       that.setData({
         scrollleft:e.currentTarget.offsetLeft - wx.getSystemInfoSync().windowWidth/2 + (res[0].width/2)
       })
+
+      // that.animationFun(that,e.currentTarget.offsetLeft,res[0].width);
     })
   },
-  //  获取滚动条位置
-  scrollleftf: function(e) {
-    this.data.scrollleft = e.detail.scrollLeft;
+  animationFun(that,offsetLeft,width){
+    // 创建一个动画实例
+    var animation  = wx.createAnimation({
+        duration:300,
+        timingFunction:'linear'
+    })
+
+    animation.translateX(offsetLeft+(width-width*0.8)/2).width(width*0.8).step()
+    that.setData({
+      animationData: animation.export()
+    })
   }
 })

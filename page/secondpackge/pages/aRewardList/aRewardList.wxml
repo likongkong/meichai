@@ -32,8 +32,9 @@
       </swiper>
     </view>
     <view class="classifyTab">
-      <scroll-view scroll-x="true" style="width: 100%;height: 100%;white-space: nowrap;" scroll-with-animation="true" bindscroll='scrollleftf' scroll-left='{{scrollleft}}'>
+      <scroll-view scroll-x="true" style="width: 100%;height: 100%;white-space: nowrap;" scroll-with-animation="true" scroll-left='{{scrollleft}}'>
         <view wx:for="{{classifyArr}}" wx:key='key' wx:for-item="item" id="ele{{index}}" class="classifyItem {{classifyIndex == index?'active':''}}" data-index="{{index}}" data-name="{{item.name}}" catchtap="classifyChange">{{item.name}}</view>
+        <!-- <view style="width:0px; height: 8rpx;background: #1E88E5;position: relative;z-index:10;bottom:12rpx;px" animation='{{animationData}}' class="classifyTabBar"></view> -->
       </scroll-view>
     </view>
     <view class="consumemessage">
