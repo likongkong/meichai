@@ -1038,6 +1038,7 @@ App({
 //  soviceguidance  店铺新手引导
 //  invitingfriends  邀请好友 and 邀请拆单
 //  shopsquare 展会打卡
+//  shopsquaretrip 展会打卡第三方
 //  dismantlingbox 展会订阅
 
 

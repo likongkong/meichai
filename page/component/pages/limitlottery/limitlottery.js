@@ -1836,7 +1836,11 @@ Page({
   jumpdetail:function(w){
     var _this = this;
     var is_blind_box = w.currentTarget.dataset.is_blind_box || w.target.dataset.is_blind_box || 0;
-    if(is_blind_box){
+    if(_this.data.infoGoods.isShowBox){
+      wx.navigateTo({
+        url: "/page/component/pages/mingboxList/mingboxList",
+      });
+    }else if(is_blind_box){
       wx.navigateTo({
         url: "/pages/smokebox/smokebox?gid=" + + _this.data.infoActivity.goods_id||'',
       });

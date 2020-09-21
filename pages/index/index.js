@@ -219,7 +219,7 @@ Page({
     // })
      wx.navigateTo({  
       // url: "/page/component/pages/doubleElevenexh/doubleElevenexh?specialsource=1"
-      url: "/page/component/pages/crowdfunding/crowdfunding?aid=75127"
+      // url: "/page/component/pages/crowdfunding/crowdfunding?aid=75127"
       // url: "/page/component/pages/drivetohidelist/drivetohidelist"
       // url: "/pages/activitydetailspage/activitydetailspage?id=18376"
       // url: "/pages/activitydetailspage/activitydetailspage?id=18185"
@@ -238,6 +238,7 @@ Page({
       // url: "/page/component/pages/hidefun/hidefun"
       // url: "/pages/shopsquare/shopsquare"
       // url: "/pages/dismantlingbox/dismantlingbox"
+      url: "/page/secondpackge/pages/shopsquaretrip/shopsquaretrip"
       
     });
   },

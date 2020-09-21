@@ -103,6 +103,7 @@
         "pages/detailSimgEffects/detailSimgEffects",
         "pages/aRewardDetails/aRewardDetails",
         "pages/aRewardHistory/aRewardHistory",
+        "pages/shopsquaretrip/shopsquaretrip",
         "pages/aRewardList/aRewardList"
         
       ]
