@@ -207,7 +207,10 @@ Page({
       var pagenum = parseInt(_this.data.page)
       _this.data.page = ++pagenum;
     };
-    var qqq = Dec.Aese('mod=cabinet&operation=detailRole&roleName=' + _this.data.name + '&pid=' + _this.data.page);
+    var urlname = encodeURIComponent(_this.data.name);
+    console.log('mod=cabinet&operation=detailRole&roleName=' + urlname + '&pid=' + _this.data.page)
+    var qqq = Dec.Aese('mod=cabinet&operation=detailRole&roleName=' + urlname + '&pid=' + _this.data.page);
+
     wx.request({
       url: app.signindata.comurl + 'toy.php' + qqq,
       method: 'GET',
@@ -249,7 +252,7 @@ Page({
   // 阻止蒙层冒泡
   preventD() {},
   onLoad: function(options) {
-
+    
     // 购物车数据显示
     var _this = this;
     _this.data.loginid = app.signindata.loginid;
@@ -260,9 +263,9 @@ Page({
       isProduce: app.signindata.isProduce,
       isShareFun: app.signindata.isShareFun,
       but: options.but||'cart',
-      name:options.name||''
+      name:decodeURIComponent(options.name)||''
     });
-
+    console.log(options,decodeURIComponent(options.name))
     if(app.signindata.sceneValue==1154){
       app.signindata.isProduce = true;  
       _this.onLoadfun();

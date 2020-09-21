@@ -784,8 +784,9 @@ Page({
       app.showToastC('暂无该款信息');
       return false
     };
+    var urlname = encodeURIComponent(name);
     wx.navigateTo({
-      url: "/page/component/pages/ocamcart/ocamcart?name=" + name+"&but=shop"
+      url: "/page/component/pages/ocamcart/ocamcart?name=" + urlname+"&but=shop"
     });
   },
   jumpmyo:function(){
