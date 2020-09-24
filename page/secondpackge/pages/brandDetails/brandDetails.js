@@ -196,7 +196,7 @@ Page({
       _this.setData({
         brandId: _this.getSearchString('id', scene) || 0,
         type:_this.getSearchString('type', scene) || '',
-        settlement:1
+        settlement:_this.getSearchString('sl', scene) || 0,
       })
     }else{
       _this.setData({
