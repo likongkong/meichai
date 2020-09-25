@@ -2151,7 +2151,7 @@ Page({
       title: '加载中',
       mask:true,
     })
-    
+
     var orderid = _this.data.order_id;
     var aid = _this.data.tipaid?_this.data.tipaid:-1;
 
@@ -2418,14 +2418,15 @@ Page({
     var wholeBoxGiftInfo = this.data.wholeBoxGiftInfo || [];
     if(wholeBoxGiftInfo&&wholeBoxGiftInfo.goods_desc){
         WxParse.wxParse('detail', 'html', wholeBoxGiftInfo.goods_desc, _this, 0);
+        this.setData({
+          iftrdetailpagetwo: true,
+          wholeBGIDetail:true,
+          iftrdetailpagehtml: false,
+          blindBoxdetailpagetwo:false,
+          hideBoxdetailpagetwo:false
+        })
     }
-    this.setData({
-      iftrdetailpagetwo: true,
-      wholeBGIDetail:true,
-      iftrdetailpagehtml: false,
-      blindBoxdetailpagetwo:false,
-      hideBoxdetailpagetwo:false
-    })
+
   },
   blindBoxdetailpagen: function (w) {
     var ind = w.currentTarget.dataset.ind;
