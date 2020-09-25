@@ -1662,6 +1662,15 @@ Page({
                 wx.hideLoading();
                 if (_this.data.iswholePay) {
                   _this.getPatchInfo();
+                  
+                  var wholeBoxGiftInfo = _this.data.wholeBoxGiftInfo || '';
+                  if(wholeBoxGiftInfo&&wholeBoxGiftInfo.goods_thumbHidden){
+                    _this.setData({
+                      ['wholeBoxGiftInfo.goods_thumb']: wholeBoxGiftInfo.goods_thumbHidden,
+                      ['wholeBoxGiftInfo.goods_name']: wholeBoxGiftInfo.goods_nameHidden,
+                    })
+                  }
+
                 } else {
 
                   // clearInterval(_this.data.timer);
@@ -1997,6 +2006,7 @@ Page({
     var _this = this
     wx.showLoading({
       title: '加载中',
+      mask:true,
     })
 
     if (_this.data.activity.aheadUser == 0 && _this.data.activity.isInQueue) {} else {
@@ -2137,6 +2147,11 @@ Page({
     //   return false;
     // };
 
+    wx.showLoading({
+      title: '加载中',
+      mask:true,
+    })
+    
     var orderid = _this.data.order_id;
     var aid = _this.data.tipaid?_this.data.tipaid:-1;
 
@@ -2167,6 +2182,15 @@ Page({
             ishowwholebox: false,
             // ishowWholeBoxList:true,
           });
+
+          if(res.data.Info.wholeBoxGiftInfo&&res.data.Info.wholeBoxGiftInfo.goods_thumb){
+            _this.setData({
+              ['wholeBoxGiftInfo.goods_thumbHidden']: res.data.Info.wholeBoxGiftInfo.goods_thumb,
+              ['wholeBoxGiftInfo.goods_nameHidden']: res.data.Info.wholeBoxGiftInfo.goods_name||''
+            })
+          };
+
+          
 
           // 微信支付
           _this.paymentmony()
@@ -2523,6 +2547,9 @@ Page({
     wx.showLoading({
       title: '开盒中,请稍后',
       mask: true,
+    })
+    _this.setData({
+      ishowcollectchip: false
     })
     setTimeout(function () {
       wx.hideLoading();

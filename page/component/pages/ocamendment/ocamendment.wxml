@@ -87,7 +87,7 @@
            <view class='ocascrtxt' style="color:#ff2742;" catchtap='everybodbuy' wx:if='{{infodata.activityType!=0}}'>{{infodata.activityType==10?'一番赏》':'去抽盒》'}}</view>
         </view>
         <view style='width:100%;overflow: hidden;'>
-            <view style='width:25%;height:303rpx;float:left;' wx:for='{{brandlist}}' wx:key='key' catchtap='jumpshopbut' data-name='{{item.role_name}}' data-minprice='{{item.minPrice}}' data-maxprice='{{item.maxPrice}}'>
+            <view style='width:25%;height:303rpx;float:left;' wx:for='{{brandlist}}' wx:key='key' catchtap='jumpshopbut' data-name='{{item.role_name}}' data-minprice='{{item.minPrice}}' data-maxprice='{{item.maxPrice}}' data-goods_id='{{item.goods_id}}'>
                 <view style='width:100%;height:220rpx;position:relative;'>
                     <image class='eveimgrange'  style='height:200rpx;width:96%;' mode='aspectFit' src='{{item.img}}?imageMogr2/thumbnail/x400'></image>
                 </view>
@@ -137,7 +137,7 @@
 
     <!-- 推荐  -->
     <view style='width:100%;overflow: hidden;padding-bottom:210rpx;'>
-        <view style='width:25%;height:303rpx;float:left;' wx:for='{{listdata}}' wx:key='key' catchtap='jumpshopbut' data-name='{{item.role_name}}' data-minprice='{{item.minPrice}}' data-maxprice='{{item.maxPrice}}'>
+        <view style='width:25%;height:303rpx;float:left;' wx:for='{{listdata}}' wx:key='key' catchtap='jumpshopbut' data-name='{{item.role_name}}' data-minprice='{{item.minPrice}}' data-maxprice='{{item.maxPrice}}' data-goods_id='{{item.goods_id}}'>
             <view style='width:100%;height:220rpx;position:relative;'>
                 <image class='eveimgrange'  style='height:200rpx;width:96%' mode='aspectFit' src='{{item.img}}?imageMogr2/thumbnail/x400'></image>
             </view>

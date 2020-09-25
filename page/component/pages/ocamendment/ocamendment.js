@@ -780,13 +780,14 @@ Page({
     var name = w.currentTarget.dataset.name || w.target.dataset.name;
     var minprice = w.currentTarget.dataset.minprice || w.target.dataset.minprice||0;
     var maxprice = w.currentTarget.dataset.maxprice || w.target.dataset.maxprice || 0;
+    var goods_id = w.currentTarget.dataset.goods_id || w.target.dataset.goods_id || '';
     if (minprice == 0 && maxprice==0){
       app.showToastC('暂无该款信息');
       return false
     };
     var urlname = encodeURIComponent(name);
     wx.navigateTo({
-      url: "/page/component/pages/ocamcart/ocamcart?name=" + urlname+"&but=shop"
+      url: "/page/component/pages/ocamcart/ocamcart?name=" + urlname+"&but=shop&goods_id="+goods_id
     });
   },
   jumpmyo:function(){

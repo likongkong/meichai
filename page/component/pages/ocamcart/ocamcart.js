@@ -208,8 +208,8 @@ Page({
       _this.data.page = ++pagenum;
     };
     var urlname = encodeURIComponent(_this.data.name);
-    console.log('mod=cabinet&operation=detailRole&roleName=' + urlname + '&pid=' + _this.data.page)
-    var qqq = Dec.Aese('mod=cabinet&operation=detailRole&roleName=' + urlname + '&pid=' + _this.data.page);
+    console.log('mod=cabinet&operation=detailRole&roleName=' + urlname + '&pid=' + _this.data.page + '&goods_id='+_this.data.goods_id)
+    var qqq = Dec.Aese('mod=cabinet&operation=detailRole&roleName=' + urlname + '&pid=' + _this.data.page + '&goods_id='+_this.data.goods_id);
 
     wx.request({
       url: app.signindata.comurl + 'toy.php' + qqq,
@@ -257,6 +257,7 @@ Page({
     var _this = this;
     _this.data.loginid = app.signindata.loginid;
     _this.data.openid = app.signindata.openid;
+    _this.data.goods_id = options.goods_id||'';
     _this.setData({
       drying_id: options.drying_id || '',
       uid: app.signindata.uid,

@@ -639,9 +639,10 @@ page {
   background: rgba(250, 41, 41, 0.6);
   font-size: 18rpx;
   color: #fff;
+
 }
 .wholeBoxGiftInfosel{
-  margin:auto;position:relative;width:420rpx;height:376rpx;
+  margin:auto;position:relative;width:376rpx;height:376rpx;
 }
 .wholeBoxGiftInfoimg{
   display:block;width:100%;height:100%;border-radius: 10rpx;
