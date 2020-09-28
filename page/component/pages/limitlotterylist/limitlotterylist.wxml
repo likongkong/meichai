@@ -19,7 +19,8 @@
 
           <image class='limieveimg' src='{{item.cover}}' mode='widthFix'></image>
           <view class='limievetxtname multilineellipsis'>
-            <text style='color:#fd434c;'>抽签价￥{{item.shop_price}} </text>{{item.name}}</view>
+            <!-- <text style='color:#fd434c;'>抽签价￥{{item.shop_price}} </text>{{item.name}}</view> -->
+            <text style='color:#298DF8;'>押金￥{{item.shop_price}} </text>{{item.name}}</view>
           <view class='limievetxttime specialellipsis' wx:if='{{item.status==1}}'>{{item.start_time}} 开启</view>
           <view class='limievetxttime specialellipsis' wx:if='{{item.status==2}}'>{{item.stop_time}} 公布中签结果</view>
           <view class='limievetxttime specialellipsis' wx:if='{{item.status==3}}' style="text-align:right;color:#3f9313;font-weight:bold;">已抽签完成</view>
@@ -42,7 +43,8 @@
 
           <image class='limieveimg' src='{{item.cover}}' mode='widthFix'></image>
           <view class='limievetxtname multilineellipsis'>
-            <text style='color:#fd434c;'>抽签价￥{{item.shop_price}} </text>{{item.name}}</view>
+            <!-- <text style='color:#fd434c;'>抽签价￥{{item.shop_price}} </text>{{item.name}}</view> -->
+            <text style='color:#298DF8;'>押金￥{{item.shop_price}} </text>{{item.name}}</view>
           <view class='limievetxttime specialellipsis' wx:if='{{item.status==1}}'>{{item.start_time}} 开启</view>
           <view class='limievetxttime specialellipsis' wx:if='{{item.status==2}}'>{{item.stop_time}} 公布中签结果</view>
           <view class='limievetxttime specialellipsis' wx:if='{{item.status==3}}' style="text-align:right;color:#3f9313;font-weight:bold;">已抽签完成</view>

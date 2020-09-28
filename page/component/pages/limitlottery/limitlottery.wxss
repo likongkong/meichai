@@ -5,6 +5,10 @@
 @import "../../../../common/newcoupon.wxss";
 @import "../../common/exhibition.wxss";
 
+.buttonArter::after{
+  border: none;
+}
+
 .bgstyle {
   width: 100%;
   height: 100%;
