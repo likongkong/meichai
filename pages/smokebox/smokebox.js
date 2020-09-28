@@ -2718,7 +2718,7 @@ Page({
 
     var chipList = _this.data.chiplist;
 
-    if (chipList.length == 8 || chipList.length == 12 || chipList.length == 7 || chipList.length == 11 || chipList.length == 4) {
+    if (chipList.length == 8 || chipList.length == 12 || chipList.length == 7 || chipList.length == 11 || chipList.length == 4||chipList.length == 18) {
       _this.setData({
         chiplinenum: 4,
       })
