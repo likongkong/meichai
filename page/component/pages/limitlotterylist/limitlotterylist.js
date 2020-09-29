@@ -28,6 +28,7 @@ Page({
     nodataiftr: false,
     windowHeight: app.signindata.windowHeight - 65 - wx.getStorageSync('statusBarHeightMc') || 0,
     signinlayer: false,
+    iscashpledge:false
   },
 
   /**

@@ -104,6 +104,9 @@
                                 </view>                                                    
                                 <view class='wholeconnumrr' style='color:#7D7D7D;' wx:if='{{item.status==17 && item.order_type==7}}'> 
                                     活动结束，订单关闭
+                                </view> 
+                                <view class='wholeconnumrr' style='color:#ff2840;' wx:if='{{item.status==2 && item.order_type==27}}'> 
+                                    已付押金
                                 </view>                                                    
                                 <view class='wholeconnumrr' wx:if='{{item.stockup==1&&item.status==3}}'>备货中</view>  
            

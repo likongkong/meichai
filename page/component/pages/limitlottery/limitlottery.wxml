@@ -65,17 +65,21 @@
 
 	</view>
 
-	<view style="width:100%;font-size:27rpx;margin-bottom:20rpx;">
-		<view style="width:70%;padding:0 20rpx;float:left;">Vol.{{infoActivity.id}} {{infoActivity.name}}</view>
-		<view style="width:15%;padding:0 20rpx;color:#FE666B;text-align:right;float:right;">￥{{infoGoods.shop_price}}</view>
-	</view>
-	<!-- <view style="width:100%;font-size:27rpx;margin-bottom:20rpx;display: flex;justify-content: space-between;align-items: center;">
-		<view style="width:65%;padding:0 20rpx;">Vol.{{infoActivity.id}} {{infoActivity.name}}</view>
-		<view style="width:25%;padding:0 20rpx;text-align: right;">
-			<text style="color:#298DF8;display: inline-block;">押金 ￥15</text>
-			<text style="color:#BEC2C9;display: inline-block;">抽签价 ￥15</text>
+	<block>
+		<view wx:if="{{infoActivity.joinMothed == 'payTicket'}}" style="width:100%;font-size:27rpx;margin-bottom:20rpx;display: flex;justify-content: space-between;align-items: center;">
+			<view style="width:65%;padding:0 20rpx;">Vol.{{infoActivity.id}} {{infoActivity.name}}</view>
+			<view style="width:25%;padding:0 20rpx;text-align: right;">
+				<text style="color:#298DF8;display: inline-block;">押金 ￥{{cashPledge}}</text>
+				<text style="color:#BEC2C9;display: inline-block;">抽签价 ￥{{infoGoods.shop_price}}</text>
+			</view>
 		</view>
-	</view> -->
+		<view wx:else style="width:100%;font-size:27rpx;margin-bottom:20rpx;">
+			<view style="width:70%;padding:0 20rpx;float:left;">Vol.{{infoActivity.id}} {{infoActivity.name}}</view>
+			<view style="width:15%;padding:0 20rpx;color:#FE666B;text-align:right;float:right;">￥{{infoGoods.shop_price}}</view>
+		</view>
+	
+	</block>
+	
 
 	<view style="width:100%;background:white;overflow:hidden;position:relative;">
 
@@ -534,7 +538,7 @@
 		<view class='bbshccombot'>
 			<view class='bbshcombotleft'>应付金额</view>
 			<view class='bbshcombotright'>
-				<view class='bbshcombotpr'>￥{{payprice}}</view>
+				<view class='bbshcombotpr'>￥{{payprice-cashPledge}}</view>
 				<view class='bbshcombotdet' bindtap='pricedetailc'>
 					<image class='bbshdetimg' src='../../../../pages/images/tipdet.png'></image>点击查看价格明细
 				</view>
@@ -716,13 +720,13 @@
 
 
 
-<!-- <view style="width:100%;height:100%;position:fixed;top:0;left:0;z-index:199999;">
+<view wx:if="{{payMask}}" style="width:100%;height:100%;position:fixed;top:0;left:0;z-index:199999;">
 	<view class='bgstyle'></view>
-	<view style="width:100%;height:100%;position:absolute;left:0;z-index:10;">
-		<view style="width:500rpx;height:320rpx;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;z-index:9;background:white;border-radius:10rpx;text-align: center;">
-			<text style="display: block;color: #000;font-size: 24rpx;margin-top: 70rpx;">参与该抽签需支付押金￥5</text>
+	<view style="width:100%;height:100%;position:absolute;left:0;z-index:10;" catchtap="tigglePayMask">
+		<view style="width:500rpx;height:320rpx;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;z-index:9;background:white;border-radius:10rpx;text-align: center;" catchtap="emptyFun">
+			<text style="display: block;color: #000;font-size: 24rpx;margin-top: 70rpx;">参与该抽签需支付押金￥{{cashPledge}}</text>
 			<text style="display: block;color: #BEC2C9;font-size: 24rpx;margin-top: 30rpx;">(如未中签则押金原路返回)</text>
-			<button class="buttonArter" style="width: 300rpx;height: 60rpx;line-height: 60rpx;font-size: 28rpx;text-align: center;border: none;background:#8abe39;color:#fff;margin-top: 70rpx;">参与抽签</button>
+			<button class="buttonArter" style="width: 300rpx;height: 60rpx;line-height: 60rpx;font-size: 28rpx;text-align: center;border: none;background:#8abe39;color:#fff;margin-top: 70rpx;" catchtap="paymentmony">参与抽签</button>
 		</view>
 	</view>
-</view> -->
+</view>

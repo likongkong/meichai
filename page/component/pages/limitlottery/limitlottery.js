@@ -141,8 +141,11 @@ Page({
     iftriosorand:app.signindata.iftriosorand || true,
     shareFriendBox:false,
     shFrBxBo:false,
-    shFrBxTo:false
+    shFrBxTo:false,
+    iscashpledge:false,
+    payMask:false
   },
+  
   sharefriend:function(){
      this.setData({
       shareFriendBox:!this.data.shareFriendBox,
@@ -742,7 +745,8 @@ Page({
             winnerLotto: res.data.List.winnerLotto || "",
             payprice: res.data.Info.infoGoods.shop_price || 0,
             subscribedata: res.data.Info.subscribe || '',
-            id:res.data.Info.infoActivity.id||0
+            id:res.data.Info.infoActivity.id||0,
+            cashPledge:res.data.Info.cashPledge||0
           })
           // 是否调取展会数据
           if (res.data.Info.infoActivity && res.data.Info.infoActivity.specialWay && res.data.Info.infoActivity.specialWay == 1||(res.data.Info.infoActivity.specialWay != 1&&brandid>0)) {
@@ -899,7 +903,6 @@ Page({
     } else {
       this.joinDraw(0);
     }
-
   },
 
   joinDraw: function (share_uid) {
@@ -972,6 +975,11 @@ Page({
             };
           };
 
+        } else if (res.data.ReturnCode == 358){
+          _this.setData({
+            payMask: true,
+            cart_id: res.data.Info.cart_id
+          })
         } else {
           if(res.data.ReturnCode != 300){
             if(res.data.Msg){
@@ -1653,6 +1661,7 @@ Page({
             'paySign': res.data.Info.paySign,
             'success': function (res) {
               _this.setData({
+                payMask:false,
                 tipbacktwo: false,
                 buybombsimmediately: false,
                 suboformola: false,
@@ -1662,7 +1671,7 @@ Page({
               var cart_id = _this.data.cart_id || '0';
 
               _this.getinfo()
-
+              _this.joinDraw(0);
               if (payinfo.isFreeBuyOrder) {
                 wx.navigateTo({
                   url: "/page/component/pages/hidefun/hidefun?type=1&cart_id=" + _this.data.cart_id
@@ -1890,6 +1899,11 @@ Page({
       }
     });
   },
-
+  tigglePayMask(){
+    this.setData({
+      payMask:!this.data.payMask
+    })
+  },
+  emptyFun(){},
 
 })
