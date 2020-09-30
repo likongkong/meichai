@@ -1639,7 +1639,7 @@ Page({
 
 
   // 微信支付
-  paymentmony: function () {
+  paymentmony: function (e) {
     var _this = this;
     var q = Dec.Aese('mod=operate&operation=prepay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1&oid=' + _this.data.cart_id + '&xcx=1' + '&openid=' + _this.data.openid)
     wx.request({
@@ -1671,7 +1671,11 @@ Page({
               var cart_id = _this.data.cart_id || '0';
 
               _this.getinfo()
-              _this.joinDraw(0);
+              
+              if(e && e != "undefined"){
+                _this.joinDraw(0);
+              }
+
               if (payinfo.isFreeBuyOrder) {
                 wx.navigateTo({
                   url: "/page/component/pages/hidefun/hidefun?type=1&cart_id=" + _this.data.cart_id
