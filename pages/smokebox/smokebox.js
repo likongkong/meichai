@@ -752,7 +752,7 @@ Page({
             _this.data.firstshowredpag = false
           }
 
-          if (res.data.List.role.length == 8 || res.data.List.role.length == 12 || res.data.List.role.length == 7 || res.data.List.role.length == 10 || res.data.List.role.length == 11 || res.data.List.role.length == 24) {
+          if (res.data.List.role.length == 8 || res.data.List.role.length == 12 || res.data.List.role.length == 7 || res.data.List.role.length == 10 || res.data.List.role.length == 11 || res.data.List.role.length == 24 || res.data.List.role.length == 18) {
             _this.setData({
               linenum: 4,
             })
