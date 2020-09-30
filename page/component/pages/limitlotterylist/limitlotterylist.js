@@ -201,6 +201,11 @@ Page({
                 arrlist[i].stop_time = _this.toDate(arrlist[i].stop_time);
               };
             };
+
+            for (var i = 0; i < res.data.List.finished.length; i++) {
+              res.data.List.finished[i].cover = res.data.List.finished[i].cover+"?random="+Math.ceil(Math.random()*10000)
+            };
+
             if (num == 1) {
               var comdataarr = arrlist || [];
               var signarray = res.data.List.sign || [];
@@ -350,22 +355,22 @@ Page({
     });
   },
   // 计算图片大小
-  imageLoadad: function(e) {
-    var _this = this;
-    var indexnum = e.currentTarget.dataset.indexnum || e.target.dataset.indexnum || 0;
-    var listdata = _this.data.listdata || [];
-    var $width = e.detail.width,
-      $height = e.detail.height,
-      ratio = $width / $height;
-    var viewWidth = 714,
-      viewHeight = 714 / ratio;
-    if (listdata[indexnum]) {
-      listdata[indexnum].heightc = viewHeight;
-      _this.setData({
-        listdata: listdata
-      })
-    };
-  },
+  // imageLoadad: function(e) {
+  //   var _this = this;
+  //   var indexnum = e.currentTarget.dataset.indexnum || e.target.dataset.indexnum || 0;
+  //   var listdata = _this.data.listdata || [];
+  //   var $width = e.detail.width,
+  //     $height = e.detail.height,
+  //     ratio = $width / $height;
+  //   var viewWidth = 714,
+  //     viewHeight = 714 / ratio;
+  //   if (listdata[indexnum]) {
+  //     listdata[indexnum].heightc = viewHeight;
+  //     _this.setData({
+  //       listdata: listdata
+  //     })
+  //   };
+  // },
 
   pullupsignin: function () {
     // // '没有授权'
