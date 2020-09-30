@@ -7,9 +7,12 @@ scroll-view ::-webkit-scrollbar {
 }
 .main{
   /* padding: 0 15rpx 20rpx 15rpx; */
-  padding: 0 0 20rpx 0;
+  /* padding: 0 0 20rpx 0; */
   overflow: hidden;
   /* box-sizing: border-box; */
+}
+.content{
+  overflow: hidden;
 }
 .rewardswiper swiper{
  height: 438rpx;
