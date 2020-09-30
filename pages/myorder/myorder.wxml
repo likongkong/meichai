@@ -373,7 +373,9 @@
                            <view class='wholeconnumdisilin' wx:if='{{item.order_type == 14 && item.roleName!=null}}' style='color:#ff2840;'>在线抽盒：{{item.roleName}}</view>
                       </view>
                       <view class='wholeconnum specialellipsis' wx:if='{{item.customer_note&&(item.status==1||item.status==12||item.status==13||item.status==2||item.status==3||item.status==4)}}'>备注:{{item.customer_note}}</view>                                       
-                      <view class='officialreply' wx:if='{{item.customer_reply&&(item.status==1||item.status==12||item.status==13||item.status==2||item.status==3||item.status==4||item.status==16)}}'>回复:{{item.customer_reply}}</view>
+                      <view class='officialreply' wx:if='{{item.customer_reply&&(item.status==1||item.status==12||item.status==13||item.status==2||item.status==3||item.status==4||item.status==16)}}'>
+                        <text wx:if="{{item.order_type!=22}}">回复:{{item.customer_reply}}</text>
+                      </view>
                       <view class='taxrpice'>
                           <view class='taxpricleft' wx:if='{{!item.roleName}}'>
                               <block wx:if='{{item.order_type==1&&item.goods_price==0}}'>组合赠品</block>
