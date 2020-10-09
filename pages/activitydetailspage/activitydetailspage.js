@@ -3980,6 +3980,39 @@ closefrindcommoni:function(){
                       src: cover, // banner 图片
                       success: function (res) {
                         ctxt.drawImage(res.path, 17, 180, 285, 151);
+
+
+                        if(app.signindata.is_eveShareAdver){
+
+
+                          // 渲染广告图片
+                          wx.getImageInfo({
+                            src: 'https://cdn.51chaidan.com//images/spread/yiFanShang/1599123436.jpg',
+                            success: function (res) {
+                              ctxt.drawImage(res.path, 0, 414, 319, 175)
+                              ctxt.draw(true);
+                              ctxt.draw(true, setTimeout(function () {
+                                wx.canvasToTempFilePath({
+                                  canvasId: 'myordercanimgser',
+                                  success: function (res) {
+                                    _this.setData({
+                                      actimgshareWinningtheprize: res.tempFilePath,
+                                      headhidden: true
+                                    });
+                                  },
+                                  fail: function (res) {
+                                    app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:05}');
+                                    _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
+                                  },
+                                });
+                              }, 300));
+
+                            },
+                            fail: function () {},
+                          });
+
+                      }else{
+
                           // 第一步 底部背景颜色改变
                           ctxt.fillStyle = '#feffff';
                           ctxt.fillRect(0, 414, 319, 175);
@@ -4071,7 +4104,7 @@ closefrindcommoni:function(){
 
                           },
                         });
-
+                        }
                       },
                       fail: function (res) {
                         app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:06}');
@@ -4114,6 +4147,39 @@ closefrindcommoni:function(){
                       src: cover, // banner 图片
                       success: function (res) {
                         ctxt.drawImage(res.path, 17, 180, 285, 151);
+
+
+                        if(app.signindata.is_eveShareAdver){
+
+
+                          // 渲染广告图片
+                          wx.getImageInfo({
+                            src: 'https://cdn.51chaidan.com//images/spread/yiFanShang/1599123436.jpg',
+                            success: function (res) {
+                              ctxt.drawImage(res.path, 0, 414, 319, 175)
+                              ctxt.draw(true);
+                              ctxt.draw(true, setTimeout(function () {
+                                wx.canvasToTempFilePath({
+                                  canvasId: 'myordercanimgser',
+                                  success: function (res) {
+                                    _this.setData({
+                                      actimgshareWinningtheprize: res.tempFilePath,
+                                      headhidden: true
+                                    });
+                                  },
+                                  fail: function (res) {
+                                    app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:05}');
+                                    _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
+                                  },
+                                });
+                              }, 300));
+
+                            },
+                            fail: function () {},
+                          });
+
+                      }else{
+
                           // 第一步 底部背景颜色改变
                           ctxt.fillStyle = '#feffff';
                           ctxt.fillRect(0, 414, 319, 175);
@@ -4205,7 +4271,7 @@ closefrindcommoni:function(){
 
                           },
                         });
-
+                        }
                       },
                       fail: function (res) {
                         app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:06}');

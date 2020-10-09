@@ -96,7 +96,9 @@ App({
     yifanshangIsInQueue:false,
     timer:'',
     // 开机屏随机图片个数
-    imgUrlNum:4
+    imgUrlNum:4,
+    // 活动分享朋友圈底部是否显示广告
+    is_eveShareAdver:false
   },
   //一番赏队列倒计时
   // yifanshangIsInQueueFun(time){

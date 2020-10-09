@@ -1604,6 +1604,42 @@ Page({
                         ctxt.drawImage(res.path, 17, 180, 285, 151);
 
 
+                        if(app.signindata.is_eveShareAdver){
+
+
+                            // 渲染广告图片
+                            wx.getImageInfo({
+                              src: 'https://cdn.51chaidan.com//images/spread/yiFanShang/1599123436.jpg',
+                              success: function (res) {
+                                ctxt.drawImage(res.path, 0, 414, 319, 175)
+                                ctxt.draw(true);
+                                ctxt.draw(true, setTimeout(function () {
+                                  wx.canvasToTempFilePath({
+                                    canvasId: 'myordercanimgser' + cart_idsave,
+                                    success: function (res) {
+                                      generatePicturesimg['myordercanimgser' + cart_idsave] = res.tempFilePath
+                                      _this.setData({
+                                        actimgshare: res.tempFilePath,
+                                        headhidden: true,
+                                        generatePicturesimg: generatePicturesimg
+                                      });
+                                      wx.hideLoading()
+                                    },
+                                    fail: function (res) {
+                                      wx.hideLoading()
+                                      app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:01}');
+                                      _this.setData({ upserimgbox: false, headhidden: true });
+
+                                    },
+                                  });
+                                }, 300));
+
+                              },
+                              fail: function () {},
+                            });
+
+                        }else{
+
                         // 第一步 底部背景颜色改变
                         // ctxt.fillStyle = '#b3b2b2';
                         ctxt.fillStyle = '#feffff';
@@ -1701,7 +1737,7 @@ Page({
                           },
                           fail: function () {},
                         });     
-
+                        }
                       },
                       fail: function (res) {
                         wx.hideLoading()
@@ -1747,6 +1783,42 @@ Page({
                       success: function (res) {
                         ctxt.drawImage(res.path, 17, 180, 285, 151);
 
+                        if(app.signindata.is_eveShareAdver){
+
+
+                          // 渲染广告图片
+                          wx.getImageInfo({
+                            src: 'https://cdn.51chaidan.com//images/spread/yiFanShang/1599123436.jpg',
+                            success: function (res) {
+                              ctxt.drawImage(res.path, 0, 414, 319, 175)
+                              ctxt.draw(true);
+                              ctxt.draw(true, setTimeout(function () {
+                                wx.canvasToTempFilePath({
+                                  canvasId: 'myordercanimgser' + cart_idsave,
+                                  success: function (res) {
+                                    generatePicturesimg['myordercanimgser' + cart_idsave] = res.tempFilePath
+                                    _this.setData({
+                                      actimgshare: res.tempFilePath,
+                                      headhidden: true,
+                                      generatePicturesimg: generatePicturesimg
+                                    });
+                                    wx.hideLoading()
+                                  },
+                                  fail: function (res) {
+                                    wx.hideLoading()
+                                    app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:01}');
+                                    _this.setData({ upserimgbox: false, headhidden: true });
+
+                                  },
+                                });
+                              }, 300));
+
+                            },
+                            fail: function () {},
+                          });
+
+                      }else{
+
                         // 第一步 底部背景颜色改变
                         // ctxt.fillStyle = '#b3b2b2';
                         ctxt.fillStyle = '#feffff';
@@ -1844,7 +1916,7 @@ Page({
                           },
                           fail: function () {},
                         });     
-
+                      }
                       },
                       fail: function (res) {
                         wx.hideLoading()
@@ -1917,6 +1989,42 @@ Page({
             src: "https://www.51chaidan.com/images/cast/ca_1.png",
             success: function (res) {
               ctxt.drawImage(res.path, 0, 0, 375, 603);
+
+              if(app.signindata.is_eveShareAdver){
+
+
+                // 渲染广告图片
+                wx.getImageInfo({
+                  src: 'https://cdn.51chaidan.com//images/spread/yiFanShang/1599123436.jpg',
+                  success: function (res) {
+                    ctxt.drawImage(res.path, 0, 414, 319, 175)
+                    ctxt.draw(true);
+                      ctxt.draw(true, setTimeout(function () {
+                        wx.canvasToTempFilePath({
+                          canvasId: 'myordercanimgser' + cart_idsave,
+                          success: function (res) {
+                            generatePicturesimg['myordercanimgser' + cart_idsave] = res.tempFilePath
+                            _this.setData({
+                              actimgshare: res.tempFilePath,
+                              headhidden: true,
+                              generatePicturesimg: generatePicturesimg
+                            });
+                            wx.hideLoading()
+                          },
+                          fail: function (res) {
+                            wx.hideLoading()
+                            app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:01}');
+                            _this.setData({ upserimgbox: false, headhidden: true });
+
+                          },
+                        });
+                      }, 300));
+
+                  },
+                  fail: function () {},
+                });
+
+            }else{
 
               // 第一步 底部背景颜色改变
               ctxt.fillStyle = '#feffff';
@@ -2013,7 +2121,8 @@ Page({
                     });
                   },
                   fail: function () {},
-                }); 
+                });
+              } 
             },
             fail: function (res) {
               wx.hideLoading()

@@ -409,6 +409,8 @@ Page({
     var gid = w.currentTarget.dataset.gid;
     var official = w.currentTarget.dataset.official;
     var isdirectshipping = w.currentTarget.dataset.isdirectshipping;
+    var isnoautomat = w.currentTarget.dataset.isnoautomat;
+    
     var appid = w.currentTarget.dataset.appid;
     if (gid && gid != 0 && typeof(gid) != "undefined") {
       if (official){
@@ -416,11 +418,30 @@ Page({
           ishowofficial:true,
           officialid: gid,
           appid:appid,
+          isnoautomat:false
         })
       } else if (isdirectshipping){
+        if(isnoautomat){
+          this.setData({
+            gid: gid,
+            brandprompts:true,
+            isnoautomat:true,
+            is_isdirectshipping:true
+          })
+        }else{
+          this.setData({
+            gid: gid,
+            brandprompts:true,
+            isnoautomat:false,
+            is_isdirectshipping:false
+          })
+        }
+      }else if(isnoautomat){
         this.setData({
           gid: gid,
-          brandprompts:true
+          brandprompts:true,
+          isnoautomat:isnoautomat,
+          is_isdirectshipping:false
         })
       } else {
         wx.navigateTo({

@@ -95,7 +95,7 @@
 						</view>				
 				</block>
 		    <block wx:else>
-						<view style="width:345rpx;height:280rpx;margin:10rpx;float:left;background:white;border-radius:10rpx;position:relative;" catchtap='jumpdetail' data-id='{{item.id}}' data-gid="{{item.goods_id}}" data-official="{{item.isBusinessActivity}}" data-appid="{{item.appId}}" data-isdirectshipping='{{item.isDirectShipping}}'>
+						<view style="width:345rpx;height:280rpx;margin:10rpx;float:left;background:white;border-radius:10rpx;position:relative;" catchtap='jumpdetail' data-id='{{item.id}}' data-gid="{{item.goods_id}}" data-official="{{item.isBusinessActivity}}" data-appid="{{item.appId}}" data-isdirectshipping='{{item.isDirectShipping}}' data-isnoautomat='{{item.isNoAutomat}}'>
 							<view style="position:relative;margin-bottom:5rpx;">
 									<!-- 实物图片 -->
 									<image class="physicalPicture" mode="widthFix" wx:if='{{item.tipImg}}' src="{{item.tipImg}}"></image>
@@ -223,16 +223,24 @@
 	</view>
 
 </view>
-
+ 
 
 <view wx:if='{{brandprompts}}' style="width:100%;height:100%;position:fixed;top:0px;left:0;z-index:20;">
 
 	<view class='bgstyle' catchtouchmove="myCatchTouch" catchtap="closeoffbp"></view>
 
 	<view style="width:80%;height:310rpx;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;background:white;border-radius:15rpx">
-		<view style="width:100%;color:black;font-size:35rpx;text-align:center;margin-top:20rpx;">{{alert.directShipping.title}}</view>
+	  <block wx:if='{{isnoautomat}}'>
+			<view style="width:100%;color:black;font-size:35rpx;text-align:center;margin-top:20rpx;">温馨提示</view>
 
-		<view style="width:80%;margin:20rpx 10%;font-size:27rpx;color:gray;"><text>{{alert.directShipping.description}}</text></view>
+			<view style="width:80%;margin:20rpx 10%;font-size:27rpx;color:gray;height:130rpx;"><text>{{alert.index.noAutomat}}\n</text><text wx:if='{{is_isdirectshipping}}'>{{alert.directShipping.description}}</text></view>		
+		</block>
+		<block wx:else>
+			<view style="width:100%;color:black;font-size:35rpx;text-align:center;margin-top:20rpx;">{{alert.directShipping.title}}</view>
+
+			<view style="width:80%;margin:20rpx 10%;font-size:27rpx;color:gray;"><text>{{alert.directShipping.description}}</text></view>		
+		</block>
+
 
 		<view style="width:100%;color:#4c9a23;font-size:35rpx;text-align:center;" catchtap="brandpromptsjump">确定</view>
 	</view>
