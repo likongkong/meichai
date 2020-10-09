@@ -607,7 +607,6 @@ Page({
     clearInterval(this.data.atimer)
     this.data.atimer = setInterval(function () {
       this.animation.translate(0, -13).step().translate(0, 0).step().translate(0, -5).step().translate(0, 0).step()
-      console.log('11111111111111')
       this.setData({
         //输出动画
         animation: this.animation.export(),
@@ -701,7 +700,8 @@ Page({
             wholeBoxGiftImg:res.data.Info.wholeBoxGiftImg || '',
             definePicture:res.data.Info.img||{},
             idendataList:res.data.List.sameBrandActivity||[], // 相同品牌数据 
-            branddata:res.data.Info.brand || '' // 品牌数据
+            branddata:res.data.Info.brand || '', // 品牌数据
+            ishowcollectchip: false
           })
 
           // 商品详情 
