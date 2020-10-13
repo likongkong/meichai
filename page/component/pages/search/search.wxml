@@ -23,7 +23,7 @@
         </view> 
         <view class='bchar' style='position:relative;' wx:for="{{commoddata}}" wx:key="key" data-gid="{{item.gid}}" bindtap='addressmanagement'>
                     <view class='bcleft' style='position:relative;'>
-                        <image class="bcimg" src="{{item.gcover}}"></image>
+                        <image class="bcimg" mode='aspectFit' src="{{item.gcover}}"></image>
                         <image wx:if='{{item.stock<=0}}' class='iconSoldOut' src="http://www.51chaidan.com/images/icon/iconSoldOut.png"></image>
                         <view class='bclefticon' wx:if='{{item.stock<=0}}'></view>
                     </view>

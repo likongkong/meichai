@@ -382,18 +382,23 @@
           <block wx:if='{{item.desc}}'>{{item.desc}}</block>
           <block wx:else>已发货,可到我的订单查询物流信息</block>
         </view>
-
+        <view wx:elif='{{item.status==8}}' style='color:#ff9800;' class='statcfontcolor'>
+          <block wx:if='{{item.desc}}'>{{item.desc}}</block>
+          <block wx:else>已回收,请到我的-小金库查看</block>
+        </view>
 
         <!-- 普通调整价格 -->
-        <view class='mtoceverig' style='color:{{item.shop_price==0?"#000":"#e93d43"}};' wx:if='{{item.status!=4&&item.status!=3&&item.status!=2&&item.group_id==0}}'>￥{{item.shop_price}}
-          <image wx:if='{{item.shop_price==0&&item.status!=1}}' src='https://www.51chaidan.com/images/toyCabinet/set1.png' class='mtoceveimg'></image>
-          <image wx:elif='{{item.status!=1}}' src='https://www.51chaidan.com/images/toyCabinet/set.png' class='mtoceveimg'></image>
+        <view class='mtoceverig' style='color:{{item.shop_price==0?"#000":"#e93d43"}};' wx:if='{{item.status!=4&&item.status!=3&&item.status!=2&&item.group_id==0}}'>
+          <block wx:if='{{item.status==8}}'>{{item.shop_price}}抽盒金</block>
+          <block wx:else>￥{{item.shop_price}}</block>
+          <image wx:if='{{item.shop_price==0&&item.status!=1&&item.status!=8}}' src='https://www.51chaidan.com/images/toyCabinet/set1.png' class='mtoceveimg'></image>
+          <image wx:elif='{{item.status!=1&&item.status!=8}}' src='https://www.51chaidan.com/images/toyCabinet/set.png' class='mtoceveimg'></image>
           <!-- tips 提示 -->
-          <view class='awatipsclasif' wx:if='{{SHOW_TOP_MTO&&item.shop_price==0}}'>
+          <view class='awatipsclasif' wx:if='{{SHOW_TOP_MTO&&item.shop_price==0&&item.status!=8}}'>
             <view class='awaarrowmto'></view>
             <view class='awatipstxtci'>点击设置出售价格</view>
           </view>
-          <view class='mtocevemak' catchtap='pricemodblocl' data-sid='{{item.id}}' data-shop_price='{{item.shop_price}}' data-rolename='{{item.roleName}}' data-viewwidthone='{{item.viewwidthone}}' data-goods_name="{{item.goods_name}}" data-viewwidthtwo='{{item.viewwidthtwo}}' data-goods_img='{{item.goods_img}}' wx:if='{{item.status!=1}}'></view>
+          <view class='mtocevemak' catchtap='pricemodblocl' data-sid='{{item.id}}' data-shop_price='{{item.shop_price}}' data-rolename='{{item.roleName}}' data-viewwidthone='{{item.viewwidthone}}' data-goods_name="{{item.goods_name}}" data-viewwidthtwo='{{item.viewwidthtwo}}' data-goods_img='{{item.goods_img}}' wx:if='{{item.status!=1&&item.status!=8}}'></view>
         </view>
         <!-- 组合价格调整 -->
         <view class='mtoceverig' style='color:{{item.shop_price==0?"#000":"#e93d43"}};' wx:if='{{item.status!=4&&item.status!=3&&item.status!=2&&item.group_id!=0&&item.end}}'>组合价￥{{item.group_price}}
