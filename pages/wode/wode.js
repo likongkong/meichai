@@ -85,7 +85,9 @@ Page({
     awasustipimages:false,
     luckyValue:0
   },
-
+  wodesblist:function(){
+    app.comjumpwxnav(988,'','','')
+  },
   awasustipimages: function () {
     this.setData({
       awasustipimages: !this.data.awasustipimages

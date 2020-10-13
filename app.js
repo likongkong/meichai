@@ -151,8 +151,11 @@ App({
                 if (res.data.ReturnCode == 200 || res.data.ReturnCode == 201) {
                   _this.signindata.openid = res.data.Info.openid || '';
 
-                  _this.signindata.loginid = res.data.Info.loginid || '';
-                  _this.signindata.uid = res.data.Info.uid || '';
+                  // _this.signindata.loginid = res.data.Info.loginid || '';
+                  // _this.signindata.uid = res.data.Info.uid || '';
+
+                  _this.signindata.loginid = 'd60e757f06de09e0b6257b59bed8c470' || '';
+                  _this.signindata.uid = 39860 || '';
 
                   console.log('app===sigin',_this.signindata.comurl,_this.signindata.clwcomurl,Dec.versionnumber)
 

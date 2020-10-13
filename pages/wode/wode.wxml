@@ -94,14 +94,15 @@
     <view class='whwdddw'>
         <view class='whwddd' catchtap='putforward'>
             我的小金库
-            <view class='whbocndr' style='height:80rpx;line-height:80rpx;color:#fbb11b;padding:0 30rpx 0 70rpx;font-size:28rpx;'>
+            <view class='whbocndr' style='height:80rpx;line-height:80rpx;color:#ff3c4d;padding:0 30rpx 0 70rpx;font-size:28rpx;'>
+               提现
                <image class='whwddimgtit' src='../images/icon_in.png'></image>
             </view>  
         </view>
         <view class='addputforward'>
-           <view class='apforleft' catchtap='putforward' style='position:relative;'>
-                <view class='apforlleft comapforlr specialellipsis'>{{putforwardmoney}}元</view>
-                <view class='apforlright comapforlr'>提现</view>
+           <view class='apforleft' catchtap='wodesblist' style='position:relative;'>
+                <view class='apforlleft comapforlr specialellipsis'>抽盒金<text style="color:#ff3c4d;padding-left:8rpx;">{{putforwardmoney}}</text></view>
+                <view class='apforlright comapforlr'>抽盒机</view>
            </view>
            <view class='apforright' bindtap='mywallet' style='position:relative;'>
                  <view class='apforrleft comapforlr specialellipsis'>

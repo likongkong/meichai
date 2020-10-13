@@ -352,9 +352,9 @@
   <view class='mtdghcom' wx:for='{{listdataown}}' wx:key='key' style='{{item.end||item.group_id==0?"border-bottom:2rpx solid #b3b0b0;":"border-bottom:0;"}}'>
     <view class='mtdghimg' style='width:160rpx;margin-left:20rpx;float:left;position: relative;' catchtap='{{item.isPanorama==1?"jumpDSIE":"previewImgurl"}}' data-imgurl='{{item.goods_img}}' data-gid='{{item.goodsId}}'>
       <image src='{{item.goods_img}}' mode='aspectFit' bindload="imageLoadown" data-ind='{{index}}' style='left:0;width:150rpx;' class='mtdgimgb'></image>
-      <view wx:if='{{item.status==1}}' class='mtdghimgmask' style='width:150rpx;'></view>
+      <view wx:if='{{item.status==1||item.status==8}}' class='mtdghimgmask' style='width:150rpx;'></view>
       <image wx:if='{{item.status==1}}' class='mtdghimgmaskimg' style='width:150rpx;height:150rpx;' src='https://www.51chaidan.com/images/toyCabinet/selled.png'></image>
-
+      <image wx:elif='{{item.status==8}}' class='mtdghimgmaskimg' style='width:150rpx;height:150rpx;' src='https://www.51chaidan.com/images/toyCabinet/hasRecycled.png'></image>
       <!-- 碎片 -->
       <view wx:if='{{item.channelId==3}}' class='fragment' style='width:150rpx;left:0;'>
          <view class='fragmentbg'></view>
