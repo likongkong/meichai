@@ -534,6 +534,23 @@ Page({
   },
   otherdata:function(){
     var _this = this;
+    // 抽盒金
+    if (_this.data.uid) {
+      // 获取默认信息
+      var gbm = Dec.Aese('mod=blindBox&operation=getBlindboxMoney&uid='+_this.data.uid);
+      wx.request({
+        url: app.signindata.comurl + 'spread.php' + gbm,
+        method: 'GET',
+        header: { 'Accept': 'application/json' },
+        success: function (res) {
+          if (res.data.ReturnCode == 200) {
+            _this.setData({
+              blindboxMoney: res.data.Info.blindbox_money || ""
+            });
+          };
+        }
+      })
+    }    
     if (_this.data.defaultinformation == '') {
       // 获取默认信息
       var qqq = Dec.Aese('operation=info&mod=info');
