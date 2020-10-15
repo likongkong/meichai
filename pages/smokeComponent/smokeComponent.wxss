@@ -32,3 +32,15 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.labelstyle {
+  width: 100rpx;
+  line-height: 30rpx;
+  opacity: 0.9;
+  position: absolute;
+  top: 10rpx;
+  right: 20rpx;
+  color: #fff;
+  border-radius: 7rpx;
+  font-size: 25rpx;
+  text-align: center;
+}

@@ -352,9 +352,9 @@
   <view class='mtdghcom' wx:for='{{listdataown}}' wx:key='key' style='{{item.end||item.group_id==0?"border-bottom:2rpx solid #b3b0b0;":"border-bottom:0;"}}'>
     <view class='mtdghimg' style='width:160rpx;margin-left:20rpx;float:left;position: relative;' catchtap='{{item.isPanorama==1?"jumpDSIE":"previewImgurl"}}' data-imgurl='{{item.goods_img}}' data-gid='{{item.goodsId}}'>
       <image src='{{item.goods_img}}' mode='aspectFit' bindload="imageLoadown" data-ind='{{index}}' style='left:0;width:150rpx;' class='mtdgimgb'></image>
-      <view wx:if='{{item.status==1}}' class='mtdghimgmask' style='width:150rpx;'></view>
+      <view wx:if='{{item.status==1||item.status==8}}' class='mtdghimgmask' style='width:150rpx;'></view>
       <image wx:if='{{item.status==1}}' class='mtdghimgmaskimg' style='width:150rpx;height:150rpx;' src='https://www.51chaidan.com/images/toyCabinet/selled.png'></image>
-
+      <image wx:elif='{{item.status==8}}' class='mtdghimgmaskimg' style='width:150rpx;height:150rpx;' src='https://www.51chaidan.com/images/toyCabinet/hasRecycled.png'></image>
       <!-- 碎片 -->
       <view wx:if='{{item.channelId==3}}' class='fragment' style='width:150rpx;left:0;'>
          <view class='fragmentbg'></view>
@@ -382,18 +382,23 @@
           <block wx:if='{{item.desc}}'>{{item.desc}}</block>
           <block wx:else>已发货,可到我的订单查询物流信息</block>
         </view>
-
+        <view wx:elif='{{item.status==8}}' style='color:#ff9800;' class='statcfontcolor'>
+          <block wx:if='{{item.desc}}'>{{item.desc}}</block>
+          <block wx:else>已回收,请到我的-小金库查看</block>
+        </view>
 
         <!-- 普通调整价格 -->
-        <view class='mtoceverig' style='color:{{item.shop_price==0?"#000":"#e93d43"}};' wx:if='{{item.status!=4&&item.status!=3&&item.status!=2&&item.group_id==0}}'>￥{{item.shop_price}}
-          <image wx:if='{{item.shop_price==0&&item.status!=1}}' src='https://www.51chaidan.com/images/toyCabinet/set1.png' class='mtoceveimg'></image>
-          <image wx:elif='{{item.status!=1}}' src='https://www.51chaidan.com/images/toyCabinet/set.png' class='mtoceveimg'></image>
+        <view class='mtoceverig' style='color:{{item.shop_price==0?"#000":"#e93d43"}};' wx:if='{{item.status!=4&&item.status!=3&&item.status!=2&&item.group_id==0}}'>
+          <block wx:if='{{item.status==8}}'>{{item.shop_price}}抽盒金</block>
+          <block wx:else>￥{{item.shop_price}}</block>
+          <image wx:if='{{item.shop_price==0&&item.status!=1&&item.status!=8}}' src='https://www.51chaidan.com/images/toyCabinet/set1.png' class='mtoceveimg'></image>
+          <image wx:elif='{{item.status!=1&&item.status!=8}}' src='https://www.51chaidan.com/images/toyCabinet/set.png' class='mtoceveimg'></image>
           <!-- tips 提示 -->
-          <view class='awatipsclasif' wx:if='{{SHOW_TOP_MTO&&item.shop_price==0}}'>
+          <view class='awatipsclasif' wx:if='{{SHOW_TOP_MTO&&item.shop_price==0&&item.status!=8}}'>
             <view class='awaarrowmto'></view>
             <view class='awatipstxtci'>点击设置出售价格</view>
           </view>
-          <view class='mtocevemak' catchtap='pricemodblocl' data-sid='{{item.id}}' data-shop_price='{{item.shop_price}}' data-rolename='{{item.roleName}}' data-viewwidthone='{{item.viewwidthone}}' data-goods_name="{{item.goods_name}}" data-viewwidthtwo='{{item.viewwidthtwo}}' data-goods_img='{{item.goods_img}}' wx:if='{{item.status!=1}}'></view>
+          <view class='mtocevemak' catchtap='pricemodblocl' data-sid='{{item.id}}' data-shop_price='{{item.shop_price}}' data-rolename='{{item.roleName}}' data-viewwidthone='{{item.viewwidthone}}' data-goods_name="{{item.goods_name}}" data-viewwidthtwo='{{item.viewwidthtwo}}' data-goods_img='{{item.goods_img}}' wx:if='{{item.status!=1&&item.status!=8}}'></view>
         </view>
         <!-- 组合价格调整 -->
         <view class='mtoceverig' style='color:{{item.shop_price==0?"#000":"#e93d43"}};' wx:if='{{item.status!=4&&item.status!=3&&item.status!=2&&item.group_id!=0&&item.end}}'>组合价￥{{item.group_price}}

@@ -1234,6 +1234,19 @@ Page({
       _this.adjdatagid();
     };    
   },
+
+  switchProducts:function(w){
+      var _this = this;
+      var gid = w.currentTarget.dataset.gid || w.target.dataset.gid;
+      console.log(gid,_this.data.gid)
+      if (gid != '' && gid != 0 && gid != _this.data.gid && gid) {
+        // _this.setData({gid: gid});
+        // _this.adjdatagid();
+        wx.redirectTo({
+          url: "/pages/detailspage/detailspage?gid=" + gid
+        });        
+      }; 
+  },
   // 颜色尺寸根据gid不同从新加载数据
   adjdatagid:function(){
     var _this = this;
@@ -1928,6 +1941,7 @@ Page({
   },
   // 立即购买弹框
   dsbbbutclickt:function(){
+    
     this.setData({
       tipbacktwo: true,
       buybombsimmediately: true

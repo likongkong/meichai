@@ -424,3 +424,18 @@
   position: relative;
   
 }
+.detaiSpec{
+  padding: 6rpx 16rpx;
+  border: 2rpx solid #f2f2f2;
+  font-size: 24rpx;
+  border-radius: 30rpx;
+  margin-bottom: 20rpx;
+  background: #f2f2f2;
+  float: left;
+  margin-right: 12rpx;
+}
+.detaiSpec.detaiSpecSel{
+  border: 2rpx solid #d57364;
+  background: #f6eded;
+  color:#ce3e32;
+}

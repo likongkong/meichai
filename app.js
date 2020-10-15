@@ -98,7 +98,9 @@ App({
     // 开机屏随机图片个数
     imgUrlNum:4,
     // 活动分享朋友圈底部是否显示广告
-    is_eveShareAdver:false
+    is_eveShareAdver:false,
+    // 抽盒金
+    blindboxMoney:0
   },
   //一番赏队列倒计时
   // yifanshangIsInQueueFun(time){
@@ -165,6 +167,8 @@ App({
                   _this.signindata.isShareFun = res.data.Info.isShareFun;
 
                   _this.signindata.isTodaySign = res.data.Info.isTodaySign;
+                  // 抽盒金
+                  _this.signindata.blindboxMoney = res.data.Info.blindboxMoney || 0
 
                   _this.signindata.spreadEntry = res.data.List ? res.data.List.spreadEntry : false || false;
                   _this.signindata.index_ela_fra = true;

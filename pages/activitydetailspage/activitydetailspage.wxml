@@ -820,8 +820,8 @@
                 <view class='dpImGLeft'>
                   <view class='duIgLefH multilineellipsis'>{{item.goods_name}}</view>
                   <view style='width:100%;height:40rpx;line-height:40rpx;text-align:left;'>
-                    <text style='font-size:36rpx;color:#000;font-weight:bold;'>￥{{item.gsales}}{{item.gsale_suit}}</text>
-                    <text style='font-size:20rpx;color:#a9a8a8;text-decoration:line-through;margin-left:15rpx;' wx:if='{{item.gsales!=item.msales}}'>￥{{item.msales}}{{item.msale_suit}}</text>
+                    <text style='font-size:30rpx;color:#000;font-weight:bold;height:40rpx;'>￥{{item.gsales}}{{item.gsale_suit}}</text>
+                    <text style='font-size:22rpx;color:#fff;margin-left:15rpx;background:#1890ff;border-radius:7rpx;position:relative;top:-2rpx;padding:3rpx 6rpx;' wx:if='{{item.type==5&&item.isRecycle&&item.recycleRatio}}'>{{item.recycleRatio}}折回收</text>
                   </view>
                 </view>
               <view class='Directmay'>

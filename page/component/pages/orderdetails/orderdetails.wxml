@@ -189,7 +189,10 @@
                           <view class='wholeconnumrr' wx:if='{{comdata.stockup==1&&comdata.status==3}}'>
                               备货中
                           </view> 
-                                                                        
+                          <!-- 已回收 -->
+                          <view class='wholeconnumrr' style="color:#666;" wx:if='{{comdata.status==20}}'>
+                              已回收
+                          </view>                                                                        
                       </view>
           
       </view>
