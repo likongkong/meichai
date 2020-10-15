@@ -256,6 +256,7 @@
 				<!--  列表标题   -->
 				<view class='disantitle' wx:if='{{item.title}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump'>
 					{{item.title}} <text style='display:inline-block;font-size:24rpx;border:2rpx solid #ff2742;color:#ff2742;border-radius:6rpx;height:32rpx;line-height:32rpx;padding:0 4rpx;margin-left:6rpx;' wx:if='{{item.tip}}'>{{item.tip}}</text>
+					<text style='display:inline-block;font-size:24rpx;color:#ff2742;height:32rpx;line-height:32rpx;padding:0 4rpx;margin-left:16rpx;' wx:if='{{blindboxMoney&&blindboxMoney!="0.00"}}'>拥有抽盒金：{{blindboxMoney}}</text>
 					<view class='disantitletitright' wx:if='{{item.item_type}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump' style='font-weight:normal;position:relative;color:#31b3fb;'>查看更多
 					</view>
 				</view>

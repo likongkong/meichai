@@ -9,12 +9,13 @@
   <image class='backgroimgimg' src='https://www.51chaidan.com/images/store/vm_maxbg.png'></image>
 </view> -->
 
-<view class='vm_top' style='top:{{statusBarHeightMc}}px;'>
+<view  style='width:100%;'>
 
-	<view class='vm_head'>
+	<view style="width:100%;position:relative;background: white;">
 		<swiper class="nsswiperdetail" bindchange="swiperChange" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
 			<swiper-item wx:for="{{bannerList}}" wx:key="key">
 				<image src="{{item.src}}?imageMogr2/thumbnail/x400" style="width:100%;height:200rpx;" catchtap='topjumpdetail' data-gid="{{item.gid}}"></image>
+				<view class='labelstyle' wx:if='{{item.isRecycle}}' style='background:#1890ff;border-radius:7rpx;width:120rpx;left:0;top:0;'>{{item.recycleRatio}}折回收</view>
 			</swiper-item>
 		</swiper>
 		<!--重置小圆点的样式 -->
@@ -25,8 +26,16 @@
 		</view>
 	</view>
 
-	<view class='vm_two'>
-		<view class='vm_tbot'>
+	<view class="elsearch" wx:if='{{elsearch}}'>
+			<view class="elsearchch">
+					<image class="elserarchimg" catchtap="jumpsearch" src="https://www.51chaidan.com/images/toyCabinet/search.png"></image>
+					<input class="elinputbut" bindfocus='onFocus' placeholder='请输入名称搜索' bindinput="inputChange" bindconfirm="jumpsearch" value="{{brand_name}}"></input>
+					<view class="elserbotom" catchtap="jumpsearch">搜索</view>
+			</view>
+	</view>
+
+	<view style="width:100%;position:relative;background: white;">
+		<view style="width: 710rpx;height: 80rpx;position:relative;margin: 0 auto;">
 			<swiper class="swiper_container" vertical="true" autoplay="true" circular="true" interval="2500">
 				<block wx:for="{{boastlist}}" wx:key='key'>
 					<swiper-item class='swiperiteme'>
@@ -36,7 +45,9 @@
 				</block>
 			</swiper>
 
-			<view style='width:100%;height:100%;position:absolute;top:0;left:0;z-index:2;'></view>
+			<view style='width:100%;height:100%;position:absolute;top:0;left:0;z-index:2;'>
+			    <image src='https://www.51chaidan.com/images/toyCabinet/search.png' class='dlfheadrhimg' catchtap='elsearchfun'></image>
+			</view>
 		</view>
 	</view>
 
@@ -44,8 +55,10 @@
 
 
 
+
 <view class='storbox'>
-	<view style='width:100%;height:280rpx;'></view>
+	<!-- <view style='width:100%;height:280rpx;'></view> -->
+
   <!-- 品牌logo -->
 	<view style="min-height:80rpx;background:#fff;margin:15rpx 10rpx 15rpx 10rpx;padding-top:15rpx;" wx:if='{{eldataclass&&eldataclass.length!=0}}'>
 			<view style="position:relative;height:150rpx;">
@@ -111,6 +124,9 @@
 								<view wx:if='{{item.tag=="预售"}}' style='background:#FB595F;border-radius:7rpx;'>{{item.tag}}</view>
 								<view wx:if='{{item.tag=="限量"}}' style='background:#31b3fb;border-radius:7rpx;'>{{item.tag}}</view>
 							</view>
+              
+							<view class='labelstyle' style='background:#1890ff;border-radius:7rpx;width:120rpx;left:20rpx;' wx:if='{{item.isRecycle}}'>{{item.recycleRatio}}折回收</view>
+
 							<view wx:if='{{item.status == 1}}' class='labelstyle' style='background: #000;'>未开放</view>
 							<view style="width:100%;height:40rpx;color:#d64650;">
 								<view style="float:left;font-size:35rpx;margin-left:10rpx;">
@@ -192,7 +208,7 @@
 <tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
 
 <!-- 双十一 入口 -->
-<view wx:if='{{automat.isOpen}}' catchtap='doubleEleven' style='width:95rpx;position:fixed;right:10rpx;top:{{statusBarHeightMc + 85}}px;z-index:9;'>
+<view wx:if='{{automat.isOpen}}' catchtap='doubleEleven' style='width:95rpx;position:fixed;right:10rpx;top:{{statusBarHeightMc + 10}}px;z-index:9;'>
 	<image src='https://www.51chaidan.com/images/turntable/turntable_colour.png' style='width:75rpx;height:75rpx;display:block;margin-left:10rpx;'></image>
 	<view wx:if='{{automatTimes>0}}' class='tabshopimg specialellipsis' style='top:-10rpx;;left:50rpx;'>{{automatTimes}}</view>
 	<view style="width:95rpx;height:30rpx;position:relative;font-size:22rpx;">

@@ -98,7 +98,9 @@ App({
     // 开机屏随机图片个数
     imgUrlNum:4,
     // 活动分享朋友圈底部是否显示广告
-    is_eveShareAdver:false
+    is_eveShareAdver:false,
+    // 抽盒金
+    blindboxMoney:0
   },
   //一番赏队列倒计时
   // yifanshangIsInQueueFun(time){
@@ -151,11 +153,8 @@ App({
                 if (res.data.ReturnCode == 200 || res.data.ReturnCode == 201) {
                   _this.signindata.openid = res.data.Info.openid || '';
 
-                  // _this.signindata.loginid = res.data.Info.loginid || '';
-                  // _this.signindata.uid = res.data.Info.uid || '';
-
-                  _this.signindata.loginid = 'd60e757f06de09e0b6257b59bed8c470' || '';
-                  _this.signindata.uid = 39860 || '';
+                  _this.signindata.loginid = res.data.Info.loginid || '';
+                  _this.signindata.uid = res.data.Info.uid || '';
 
                   console.log('app===sigin',_this.signindata.comurl,_this.signindata.clwcomurl,Dec.versionnumber)
 
@@ -168,6 +167,8 @@ App({
                   _this.signindata.isShareFun = res.data.Info.isShareFun;
 
                   _this.signindata.isTodaySign = res.data.Info.isTodaySign;
+                  // 抽盒金
+                  _this.signindata.blindboxMoney = res.data.Info.blindboxMoney || 0
 
                   _this.signindata.spreadEntry = res.data.List ? res.data.List.spreadEntry : false || false;
                   _this.signindata.index_ela_fra = true;

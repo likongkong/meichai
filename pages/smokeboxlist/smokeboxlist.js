@@ -66,7 +66,28 @@ Page({
     appid:0,
     brandprompts:false,
     brand_id:0,
-    is_havedata:false
+    is_havedata:false,
+    elsearch:false,
+    brand_name:""
+  },
+
+  // input 值改变
+  inputChange: function (e) {
+    this.setData({
+      brand_name: e.detail.value
+    });
+  },
+  jumpsearch:function(){
+    // this.eldatalistfun(0);
+    this.getlist(0);
+  },
+  onFocus: function (w) {
+    this.setData({
+      brand_name:""
+    });
+  },  
+  elsearchfun:function(){
+    this.setData({ elsearch: !this.data.elsearch});
   },
   swiperChange: function(e) {
     this.setData({
@@ -291,10 +312,15 @@ Page({
     wx.showLoading({
       title: '加载中...',
     })
-     
+    if(pid==0){
+      _this.setData({
+        list:[]
+      })
+    } 
     _this.setData({is_havedata:false})
 
-    var q1 = Dec.Aese('mod=blindBox&operation=list&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + "&pid=" + pid+'&brandId='+_this.data.brand_id);
+    console.log('mod=blindBox&operation=list&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + "&pid=" + pid+'&brandId='+_this.data.brand_id+'&searchKey='+_this.data.brand_name)
+    var q1 = Dec.Aese('mod=blindBox&operation=list&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + "&pid=" + pid+'&brandId='+_this.data.brand_id+'&searchKey='+_this.data.brand_name);
 
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q1,

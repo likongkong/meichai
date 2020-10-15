@@ -90,7 +90,7 @@
                                     <block wx:elif='{{item.showOrder==3}}'>晒单失败，重新上传</block>
                                     <block wx:elif='{{item.showOrder==4}}'>上传晒单截图</block> 
                                 </view>
-                                <view class='wholeconnumrr' wx:if='{{item.status==16 && item.order_type==10&& item.order_type==16}}'> 
+                                <view class='wholeconnumrr' wx:if='{{item.status==16 && item.order_type==10&& item.order_type!=16}}'> 
                                     <block wx:if='{{item.showOrder==1}}'>已上传，待审核</block> 
                                     <block wx:elif='{{item.showOrder==2}}'>晒单成功，等待领奖</block>
                                     <block wx:elif='{{item.showOrder==3}}'>晒单失败，重新上传</block>
@@ -108,8 +108,10 @@
                                 <view class='wholeconnumrr' style='color:#ff2840;' wx:if='{{item.status==2 && item.order_type==27}}'> 
                                     已付押金
                                 </view>                                                    
-                                <view class='wholeconnumrr' wx:if='{{item.stockup==1&&item.status==3}}'>备货中</view>  
-           
+                                <view class='wholeconnumrr' wx:if='{{item.stockup==1&&item.status==3}}'>备货中</view>
+                                <!-- 已回收 -->
+                                <view class='wholeconnumrr' style="color:#666;" wx:if='{{item.status==20}}'>已回收</view>  
+            
        
                       </view>
                       <!-- 为了不把原来逻辑弄乱 ，所以砍价单写 -->

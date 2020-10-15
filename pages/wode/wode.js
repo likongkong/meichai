@@ -83,7 +83,9 @@ Page({
     businesscooperation:false,
     cliptxt:'zhangjing@51chaidan.com',
     awasustipimages:false,
-    luckyValue:0
+    luckyValue:0,
+    // 抽盒金
+    blindbox_money:0
   },
   wodesblist:function(){
     app.comjumpwxnav(988,'','','')
@@ -252,7 +254,9 @@ Page({
               // 提现金额
               putforwardmoney: res.data.Info.money || "0.00",
               // 幸运值
-              luckyValue: res.data.Info.blindbox_lucky||0
+              luckyValue: res.data.Info.blindbox_lucky||0,
+              // 抽盒金
+              blindbox_money:res.data.Info.blindbox_money||0
             });
             _this.data.after_sale = res.data.Info.after_sale || 0;// 售后数
           };

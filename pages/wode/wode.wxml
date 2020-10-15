@@ -93,7 +93,7 @@
     </view>
     <view class='whwdddw'>
         <view class='whwddd' catchtap='putforward'>
-            我的小金库
+            我的小金库<view style="height: 97rpx;line-height:98rpx;color:#ff3c4d;position:absolute;top:0;left:180rpx">￥{{putforwardmoney}}</view>
             <view class='whbocndr' style='height:80rpx;line-height:80rpx;color:#ff3c4d;padding:0 30rpx 0 70rpx;font-size:28rpx;'>
                提现
                <image class='whwddimgtit' src='../images/icon_in.png'></image>
@@ -101,8 +101,10 @@
         </view>
         <view class='addputforward'>
            <view class='apforleft' catchtap='wodesblist' style='position:relative;'>
-                <view class='apforlleft comapforlr specialellipsis'>抽盒金<text style="color:#ff3c4d;padding-left:8rpx;">{{putforwardmoney}}</text></view>
-                <view class='apforlright comapforlr'>抽盒机</view>
+                <view class='apforlleft comapforlr specialellipsis'>抽盒金<text style="color:#ff3c4d;padding-left:8rpx;">{{blindbox_money}}</text></view>
+                <view class='apforlright comapforlr'>使用</view>
+                <!-- <view class='apforlleft comapforlr specialellipsis'>{{putforwardmoney}}元</view>
+                <view class='apforlright comapforlr'>提现</view> -->
            </view>
            <view class='apforright' bindtap='mywallet' style='position:relative;'>
                  <view class='apforrleft comapforlr specialellipsis'>
