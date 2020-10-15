@@ -236,7 +236,24 @@ Page({
     wholeBoxGiftImg:'',
     wholeBoxGiftInfo:{},
     // 防止重复提交
-    pmc:true    
+    pmc:true,
+    //是否可回收
+    isRecycle:false,
+    //是否可用抽盒金抵扣
+    isDeduct:false,
+    //是否使用抽盒金抵扣
+    isUseDeduct:false,
+    //抽盒金规则
+    isrecyclerule:false,
+    thePreviousSelOrder:true,
+    //是否获得抽盒金
+    isRecycleMask:false,
+    isRecycleStateA:true,
+    isSingle:true,
+
+    //端盒60秒倒计时C
+    dhRecycleCount:60,
+    isDhRecycleBtn:true
   },
   // 在线抽盒机
   bbevebox: function(event) {
@@ -701,7 +718,16 @@ Page({
             definePicture:res.data.Info.img||{},
             idendataList:res.data.List.sameBrandActivity||[], // 相同品牌数据 
             branddata:res.data.Info.brand || '', // 品牌数据
-            ishowcollectchip: false
+            //刷新关闭弹框
+            ishowcollectchip: false,
+            //是否可回收
+            isRecycle:res.data.Info.activity.isRecycle,
+            //是否可使用抽盒金抵扣
+            isDeduct:res.data.Info.activity.isDeduct,
+            //是否可使用抽盒金抵扣
+            isUseDeduct:res.data.Info.activity.isDeduct?true:false,
+            isRecycleMask:false,
+            isRecycleStateA:true
           })
 
           // 商品详情 
@@ -949,6 +975,8 @@ Page({
     var _this = this
     _this.setData({
       ishowcollectchip: false,
+      isUseDeduct:_this.data.isDeduct,
+      payFail:false
     })
     if (_this.data.activity.aheadUser == 0 && _this.data.activity.isInQueue) {
       _this.placeorder()
@@ -1051,6 +1079,9 @@ Page({
     } else {
       _this.againroll()
     }
+    _this.setData({
+      isRecycleMask: false,
+    })
   },
   closeJudgeAgainRoll: function () {
     var _this = this
@@ -1500,7 +1531,7 @@ Page({
   },
 
   // 提交订单
-  placeorder: function () {
+  placeorder: function (callback) {
     var _this = this;
 
     wx.showLoading({
@@ -1515,7 +1546,8 @@ Page({
       payprice: _this.data.activity.shop_price,
       iswholePay: false,
     });
-    var q = Dec.Aese('mod=blindBox&operation=order&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + id + '&aid=' + aid + '&desc=' + _this.data.desc);
+    var q = Dec.Aese('mod=blindBox&operation=order&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + id + '&aid=' + aid + '&desc=' + _this.data.desc + '&isDeduct='+(_this.data.isUseDeduct?1:0));
+    console.log('mod=blindBox&operation=order&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + id + '&aid=' + aid + '&desc=' + _this.data.desc + '&isDeduct='+(_this.data.isUseDeduct?1:0))
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q,
       method: 'GET',
@@ -1525,6 +1557,13 @@ Page({
       success: function (res) {
         wx.hideLoading()
         if (res.data.ReturnCode == 200) {
+          console.log(res.data.Info.cart_id,444444444)
+
+          if(_this.data.isUseDeduct){  // 当前选中
+            _this.data.thePreviousSelOrder = true;
+          }else{
+            _this.data.thePreviousSelOrder = false;
+          };
           _this.setData({
             suboformola: false,
             cart_id: res.data.Info.cart_id,
@@ -1553,6 +1592,11 @@ Page({
           });
 
           _this.queueup(2, 2)
+
+          if(typeof callback == "function") {
+            callback();
+          }
+
         } else {
           // 提交订单蒙层
           _this.setData({
@@ -1566,12 +1610,33 @@ Page({
 
   updateadd: function () {
     var _this = this;
+      if(_this.data.isUseDeduct){  // 当前选中
+        if(_this.data.thePreviousSelOrder){  // 上一个选中
+          _this.updateAddress()
+        }else{
+          _this.placeorder(function(){
+            _this.updateAddress()
+          })          
+        }
+      }else{
+        if(_this.data.thePreviousSelOrder){  // 上一个选中
+          _this.placeorder(function(){
+            _this.updateAddress()
+          })          
+        }else{
+          _this.updateAddress()
+        }
+      }
+  },
+
+  updateAddress(){
+    var _this = this;
 
     // if (this.data.tipaid == '') {
     //   app.showToastC('请选择地址');
     //   return false;
     // };
-   
+  
     var orderid = _this.data.order_id;
     var aid = _this.data.tipaid;
 
@@ -1615,8 +1680,8 @@ Page({
       _this.queueup(2, 2)
       _this.paymentmony()
     }
-    
   },
+
 
   // 微信支付
   paymentmony: function () {
@@ -2161,7 +2226,8 @@ Page({
       iswholePay: true,
     });
     
-    var q = Dec.Aese('mod=blindBox&operation=openWholeBox&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&aid=' + aid + '&desc=' + _this.data.desc + '&isRepeatOpen=' + _this.data.isRepeatOpen);
+    var q = Dec.Aese('mod=blindBox&operation=openWholeBox&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&aid=' + aid + '&desc=' + _this.data.desc + '&isRepeatOpen=' + _this.data.isRepeatOpen + '&isDeduct='+(_this.data.isUseDeduct?1:0));
+    console.log('mod=blindBox&operation=openWholeBox&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&aid=' + aid + '&desc=' + _this.data.desc + '&isRepeatOpen=' + _this.data.isRepeatOpen + '&isDeduct='+(_this.data.isUseDeduct?1:0))
 
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q,
@@ -2222,7 +2288,9 @@ Page({
       })
       this.dsbbbutclickt()
     }
-
+    this.setData({
+      isRecycleMask:false
+    })
   },
 
   circulationshow: function (u) {
@@ -2560,6 +2628,18 @@ Page({
       })
       _this.circulationshow(0);
     }, 2000);
+    var inter = setInterval(function() {
+      this.setData({
+        dhRecycleCount: this.data.dhRecycleCount - 1
+      });
+      if (this.data.dhRecycleCount < 0) {
+        clearInterval(inter)
+        this.setData({
+          dhRecycleCount: 60,
+          isDhRecycleBtn:false
+        });
+      }
+    }.bind(this), 1000);
   },
 
   closecollectchip: function () {
@@ -3395,6 +3475,51 @@ Page({
     app.exhibitionpubjump(type, jumpid)   
     var clouddata = { type:15 ,adv_id: jumpid};
     app.cloudstatistics('advertisingStat', clouddata) 
-
+  },
+  toggleRecyclerule(){
+    this.setData({
+      isrecyclerule:!this.data.isrecyclerule
+    })
+  },
+  toggleBlindBoxAmount(){
+    this.setData({
+      isUseDeduct:!this.data.isUseDeduct
+    })
+  },
+  getBlindBoxAmount(){
+    if (this.data.iswholePay) {
+      this.setData({isSingle:false})
+    }else{
+      this.setData({isSingle:true})
+    }
+    console.log(11111111111111)
+    this.setData({
+      isRecycleMask:true
+    })
+  },
+  closeRecycleMask(){
+    this.setData({
+      isRecycleMask:false
+    })
+  },
+  confirmGetBlindBoxAmount(){
+    var _this = this;
+    wx.showLoading({
+      title: '加载中',
+    })
+    var exh = Dec.Aese('mod=blindBox&operation=recycle&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&cart_id=' + _this.data.cart_id);
+    console.log('mod=blindBox&operation=recycle&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&cart_id=' + _this.data.cart_id)
+    wx.request({
+      url: app.signindata.comurl + 'spread.php' + exh,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        wx.hideLoading();
+        _this.setData({
+          isRecycleStateA: false
+        })
+      },
+      fail: function () { }
+    });
   }
 })

@@ -161,13 +161,13 @@ page {
 
 .tryStyle {
   color: #1989fa;
-  width: 50%;
+  /* width: 50%; */
   height: 80rpx;
   float: left;
   line-height: 80rpx;
   font-size: 25rpx;
   z-index: 2;
-  position: relative;
+  /* position: relative; */
 }
 
 .queueBtnStyle {
@@ -187,7 +187,7 @@ page {
 }
 
 .queuebtnstyle2 {
-  width: 280rpx;
+  width: 200rpx;
   line-height: 80rpx;
   border-radius: 40rpx;
   /* border: 5rpx solid #a3d0fd; */
@@ -696,4 +696,94 @@ page {
   bottom: 0;
   margin: auto;
   border-radius: 10rpx;
+}
+
+.recycleruleWrap{
+  width: 100%;height: 100%; position: fixed;top: 0;left: 0;z-index: 10;display: flex;justify-content: center;align-items: center;
+}
+.recyclerule_mask{
+  width: 100%;height: 100%; position: fixed;top: 0;left: 0;background: rgba(0,0,0,.6);z-index: -1;
+}
+.recycleruleContent{
+  width: 600rpx;background: #fff;border-radius: 8rpx;padding: 0 35rpx;box-sizing: border-box;position: relative;
+}
+.recycleruleIcon{
+  width: 30rpx;height: 30rpx;position: absolute;top: 0;right: 0;display: block;padding: 14rpx 30rpx;
+}
+.recycleruleTitle{
+  width: 100%;height: 60rpx; display: flex;justify-content: center;align-items: center;font-size: 24rpx;
+}
+.recycleruleTxt{
+margin-top: 20rpx;
+}
+.recycleruleTxt scroll-view{
+  height: 370rpx;
+}
+.recycleruleTxt text{
+  display: inline-block;font-size: 26rpx;line-height: 30rpx;margin-bottom: 15rpx;
+}
+.recycleruleContent button{
+  width: 400rpx;height: 80rpx;background: #e94f57;font-size: 26rpx;line-height: 80rpx;color: #fff;border-radius: 80rpx;margin:20rpx auto 50rpx auto;
+}
+
+.ch_integralWrap{
+  width: 650rpx; height: 140rpx; background: #fff;border: 2rpx solid gray;border-radius: 10rpx;margin: 60rpx auto 0 auto;display: flex;align-items: center;justify-content: space-between;overflow: hidden;position: relative;
+}
+.ch_cornerMask{
+  width: 50rpx; height: 50rpx; position: absolute;bottom: 0;right: 0;
+}
+.ch_active{
+  border: 2rpx solid #ff5630;
+}
+.ch_spendable{
+  font-size: 60rpx;padding-left: 40rpx;box-sizing: border-box;
+}
+.ch_spendable text{
+  font-size: 38rpx;
+}
+.ch_integralTxt text:first-child{
+  margin-bottom: 10rpx;
+}
+.ch_integralTxt text{
+  display: block;text-align: left;color: gray;font-size: 26rpx;padding-right: 74rpx;box-sizing: border-box;
+}
+
+
+.recycleExplain{
+  text-align: left;
+}
+
+
+.recycleWrap{
+  width: 100%;height: 100%; position: fixed;top: 0;left: 0;z-index: 100;display: flex;justify-content: center;align-items: center;
+}
+.recycle_mask{
+  width: 100%;height: 100%; position: fixed;top: 0;left: 0;background: rgba(0,0,0,.6);z-index: -1;
+}
+.recycleContent{
+  width: 600rpx;background: #fff;border-radius: 8rpx;padding: 60rpx 35rpx 40rpx 35rpx;box-sizing: border-box;position: relative;
+}
+.recycleIcon{
+  width: 30rpx;height: 30rpx;position: absolute;top: 0;right: 0;display: block;padding: 14rpx 30rpx;
+}
+.recycletitle{
+  text-align: center;font-weight: bold;margin-bottom: 15rpx;
+}
+.recycletxt{
+  font-size: 26rpx;color: gray;display: block;margin-top: 30rpx;
+}
+.recyclebtn{
+  width: 100%;display: flex;justify-content: space-between;margin-top: 80rpx;
+}
+.recyclebtn button{
+  width: 240rpx;height: 80rpx;font-size: 28rpx;box-shadow: 5px 5px 10px 0px #999;border-radius: 80rpx;background: #e94f57;color: white;line-height: 80rpx;
+}
+.recyclebtn .cancel{
+  background: #fff;color: #000;
+}
+.recycleContentStateB .recycletxt{
+  margin-top: 80rpx;text-align: center;
+}
+.recycleContentStateB .recyclebtn button{
+  width: 350rpx;
 }
