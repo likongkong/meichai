@@ -630,13 +630,13 @@
 	</view>
  
 	<!-- ishowaward -->
-	<view wx:if='{{ishowaward}}' style='width:100%;height:100%;position:fixed;top:0px;left:0;z-index:13;'>
-	<!-- <view style='width:100%;height:100%;position:fixed;top:0px;left:0;z-index:13;'> -->
-		<view class='bgstyle' style="background:#E8E8E9;opacity:1;top:{{statusBarHeightMc}}px" catchtouchmove="myCatchTouch" data-type='1' catchtap='closeaward'>
+	<view wx:if='{{ishowaward}}' style='width:100%;height:100%;position:fixed;top:0px;left:0;z-index:13;overflow: scroll;'>
+	<!-- <view style='width:100%;height:100%;position:fixed;top:0px;left:0;z-index:13;overflow: scroll;'> -->
+		<view class='bgstyle' style="background:#E8E8E9;opacity:1;top:{{statusBarHeightMc}}px;z-index:-1;" catchtouchmove="myCatchTouch" data-type='1' catchtap='closeaward'>
 			<view wx:if='{{isTry}}' style="font-size:25rpx;color:#1989fa;margin:35rpx 35rpx;">返回抽盒机</view>
 		</view>
 
-		<view style='width:100%;height:{{iefheight+320}}rpx;position:absolute;top:{{statusBarHeightMc + 40}}px;left:0;text-align:center;font-size:30rpx;'>
+		<view style='width:100%;height:{{iefheight+320}}rpx;margin-top:{{statusBarHeightMc + 40}}px;text-align:center;font-size:30rpx;'>
 
 			<view style='width:{{iewidth}}rpx;height:{{iefheight}}rpx;margin:0 auto;' class='{{ischangeagain?"changebox":""}} card-module'>
 
@@ -696,7 +696,7 @@
 
 		</view>
 
-		<view style="width:100%;position:absolute;bottom:30rpx;left:0;" data-type='1' catchtap='closeaward'>
+		<view style="width:100%;" data-type='1' catchtap='closeaward'>
 
 			<view style="width:80%;margin:0 10%;font-size:25rpx;" catchtap="mmm">
 				<view>免费重抽说明:</view>
@@ -707,9 +707,7 @@
 
 			<view wx:if="{{isRecycle}}" style="width:80%;margin:50rpx 10%;font-size:25rpx;" catchtap="mmm">
 				<view>回收说明:</view>
-				<view>1.重抽时间为60秒内，倒计时结束自动放入玩具柜</view>
-				<view>2.仅剩一盒时不支持重抽</view>
-				<view>3.重抽时间为60秒内，倒计时结束自动放入玩具柜</view>
+				<text style="">{{activity.recycleExplain}}</text>
 			</view>
 
 			<view style="width:100%;height:200rpx;position:relative;margin-top:20rpx;">
@@ -952,9 +950,7 @@
 
 			<view wx:if="{{isRecycle}}" class="recycleExplain" style="width:80%;margin:50rpx 10%;font-size:25rpx;" catchtap="mmm">
 				<view>回收说明:</view>
-				<view>1.重抽时间为60秒内，倒计时结束自动放入玩具柜</view>
-				<view>2.仅剩一盒时不支持重抽</view>
-				<view>3.重抽时间为60秒内，倒计时结束自动放入玩具柜</view>
+				<text style="">{{activity.recycleExplain}}</text>
 			</view>
 
 		</view>
@@ -1493,12 +1489,7 @@
 		</view>
 		<view class="recycleruleTxt">
 			<scroll-view scroll-y>
-				<text>1.ask哈萨克觉得哈萨克记得哈数据库的哈数据库撒大苏打啊实打实的</text>
-				<text>1.ask哈萨克觉得哈萨克记得哈数据库的哈数据库撒大苏打啊实打实的</text>
-				<text>1.ask哈萨克觉得哈萨克记得哈数据库的哈数据库撒大苏打啊实打实的</text>
-				<text>1.ask哈萨克觉得哈萨克记得哈数据库的哈数据库撒大苏打啊实打实的</text>
-				<text>1.ask哈萨克觉得哈萨克记得哈数据库的哈数据库撒大苏打啊实打实的</text>
-				<text>1.ask哈萨克觉得哈萨克记得哈数据库的哈数据库撒大苏打啊实打实的</text>
+				<text>{{activity.recycleExplain}}</text>
 			</scroll-view>
 		</view>
 		<button catchtap="toggleRecyclerule">知道了</button>

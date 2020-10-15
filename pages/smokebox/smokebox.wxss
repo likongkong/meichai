@@ -720,7 +720,7 @@ margin-top: 20rpx;
   height: 370rpx;
 }
 .recycleruleTxt text{
-  display: inline-block;font-size: 26rpx;line-height: 30rpx;margin-bottom: 15rpx;
+  display: inline-block;font-size: 26rpx;line-height: 42rpx;margin-bottom: 15rpx;
 }
 .recycleruleContent button{
   width: 400rpx;height: 80rpx;background: #e94f57;font-size: 26rpx;line-height: 80rpx;color: #fff;border-radius: 80rpx;margin:20rpx auto 50rpx auto;
