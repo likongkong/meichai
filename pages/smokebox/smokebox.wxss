@@ -778,6 +778,9 @@ margin-top: 20rpx;
 .recyclebtn button{
   width: 240rpx;height: 80rpx;font-size: 28rpx;box-shadow: 5px 5px 10px 0px #999;border-radius: 80rpx;background: #e94f57;color: white;line-height: 80rpx;
 }
+.recyclebtn button::after{
+  border: none;
+}
 .recyclebtn .cancel{
   background: #fff;color: #000;
 }

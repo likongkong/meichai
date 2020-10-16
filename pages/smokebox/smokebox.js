@@ -1791,7 +1791,7 @@ Page({
         _this.instantopen()
       }
     } else if (second == 0) {
-      console.log('定时器======1111111111111')
+      // console.log('定时器======1111111111111')
       clearInterval(_this.data.timer)
       _this.getInfo()
     }
