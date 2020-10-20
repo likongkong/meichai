@@ -238,6 +238,7 @@ Page({
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
+        console.log(res)
         if (res.data.Message != "Empty info") {
           if (res.data.ReturnCode == 200){
             _this.setData({
@@ -258,6 +259,7 @@ Page({
               // 抽盒金
               blindbox_money:res.data.Info.blindbox_money||0
             });
+            app.signindata.blindboxMoney = res.data.Info.blindbox_money||0;
             _this.data.after_sale = res.data.Info.after_sale || 0;// 售后数
           };
         // 判断非200和登录
