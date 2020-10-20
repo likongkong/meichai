@@ -89,7 +89,8 @@
 				</view>
 				<view style="color:#FF9800;text-align:center;font-size:20rpx;font-weight:bold;"><text>端盒送</text></view>
 			</view>
-			<view wx:elif='{{isOpenLine}}' style="width:95rpx;position:absolute;top:{{hideheight+100}}rpx;right:10rpx;z-index:1;" catchtap="{{isDirectOpenWholeBox ? 'wholebox' : 'collectchip'}}">
+			<view wx:elif='{{isOpenLine}}' style="width:95rpx;position:absolute;top:{{hideheight+100}}rpx;right:10rpx;z-index:1;" catchtap="collectchip">
+			  <!-- {{isDirectOpenWholeBox ? 'wholebox' : 'collectchip'}} -->
 				<image style="width:75rpx;width:75rpx;margin-left:10rpx;border-radius:6rpx;" mode="widthFix" src='{{activity.wholeBoxTitle?definePicture.wholeBoxImg:wholeBoxImg}}'></image>
 				<view style="color:#FF9800;text-align:center;font-size:20rpx;font-weight:bold;">
 				  <text wx:if='{{activity.wholeBoxTitle}}'>{{activity.wholeBoxTitle}}</text>
@@ -153,7 +154,7 @@
 	<view wx:if='{{isallready && ishowhalf}}' style='width:100%;font-size:30rpx;text-align:center;padding-top:20rpx;position:relative;overflow:hidden;'>
 		<!-- && activity.status == 2 -->
 
-		<view style='width:100%;height:80rpx;overflow:hidden;'>
+		<!-- <view style='width:100%;height:80rpx;overflow:hidden;'>
 
 			<view style="width:50%;height:80rpx;line-height:80rpx;font-size:25rpx;z-index:2;float:left;position:relative;">
 				<view style="width:150rpx;overflow:hidden;position:absolute;left:0;right:0;top:0;margin:0 auto;" catchtap='iftrdetailpagen'>
@@ -164,6 +165,26 @@
 
 			<view wx:if='{{suplusTry>0}}' class='tryStyle'>
 				<view style="width:150rpx;position:absolute;left:0;right:0;top:0;margin:0 auto;" data-isretry='0' catchtap='havetry'>试一试({{suplusTry}}次)</view>
+			</view>
+
+		</view> -->
+		<view style='width:100%;height:80rpx;overflow:hidden;display: flex;justify-content: center;align-items: center;'>
+
+			<view style="height:80rpx;line-height:80rpx;font-size:25rpx;z-index:2;display: inline-block;">
+				<view style="width:150rpx;overflow:hidden;" catchtap='iftrdetailpagen'>
+					<image style="width:40rpx;height:40rpx;margin-top:20rpx;display:inline-block;vertical-align:top;" src="https://www.51chaidan.com/images/turntable/Magnifier.png"></image>
+					<view style="display:inline-block;vertical-align:top;">商品预览</view>
+				</view>
+			</view>
+
+			<block>
+			<view wx:if="{{activity.isRecycle}}" style="min-width:108rpx;height:80rpx;line-height:80rpx;display: inline-block;color: #4c9a23;font-size: 24rpx;margin:0 60rpx;" catchtap="toggleRecyclerule">{{activity.recycleRatio}}折回收</view>
+			<view wx:else style="width:108rpx; height:80rpx;line-height:80rpx;display: inline-block;color: #4c9a23;font-size: 24rpx;margin:0 60rpx;"></view>
+			</block>
+			
+
+			<view wx:if='{{suplusTry>0}}' class='tryStyle'>
+				<view style="width:150rpx;" data-isretry='0' catchtap='havetry'>试一试({{suplusTry}}次)</view>
 			</view>
 
 		</view>
@@ -590,20 +611,33 @@
 				</view>
 
 			</view>
+ 
+			<!-- 我的抽盒金 -->
+			<view wx:if="{{isDeduct}}" class="ch_integralWrap {{isUseDeduct?'ch_active':''}}" catchtap="toggleBlindBoxAmount">
+				<image wx:if="{{isUseDeduct}}" class="ch_cornerMask" src="https://www.51chaidan.com/images/toyCabinet/cornerMask.png"></image>
+				<view class="ch_spendable"> <text>￥</text>{{activity.deductAmountSingle}}</view>
+				<view class="ch_integralTxt">
+					<text>使用{{activity.deductAmountSingle}}抽盒金抵扣￥{{activity.deductAmountSingle}}</text>
+					<text>当前剩余抽盒金：{{activity.userBlindBoxAmount}}</text>
+				</view>
+			</view>
+			
 
 		</view>
+
 		<view style='width:100%;height:100rpx;position:absolute;bottom:100rpx;left:0;font-size:25rpx;z-index:13;text-align:center;color:gray;'>盲盒类商品拆盒后(含在线拆盒)不支持7天无理由退换
 		</view>
 
 	</view>
  
 	<!-- ishowaward -->
-	<view wx:if='{{ishowaward}}' style='width:100%;height:100%;position:fixed;top:0px;left:0;z-index:13;'>
-		<view class='bgstyle' style="background:#E8E8E9;opacity:1;top:{{statusBarHeightMc}}px" catchtouchmove="myCatchTouch" data-type='1' catchtap='closeaward'>
+	<view wx:if='{{ishowaward}}' style='width:100%;height:100%;position:fixed;top:0px;left:0;z-index:13;' catchtouchmove="true">
+		<view class='bgstyle' style="background:#E8E8E9;opacity:1;top:{{statusBarHeightMc}}px;z-index:-1;" catchtouchmove="myCatchTouch" data-type='1' catchtap='closeaward'>
 			<view wx:if='{{isTry}}' style="font-size:25rpx;color:#1989fa;margin:35rpx 35rpx;">返回抽盒机</view>
 		</view>
 
-		<view style='width:100%;height:{{iefheight+320}}rpx;position:absolute;top:{{statusBarHeightMc + 40}}px;left:0;text-align:center;font-size:30rpx;'>
+		<scroll-view style='width:100%;height:100%;' scroll-y>
+		<view style='width:100%;height:{{iefheight+320}}rpx;margin-top:{{statusBarHeightMc + 40}}px;text-align:center;font-size:30rpx;'>
 
 			<view style='width:{{iewidth}}rpx;height:{{iefheight}}rpx;margin:0 auto;' class='{{ischangeagain?"changebox":""}} card-module'>
 
@@ -637,8 +671,8 @@
 
 			<view style='width:100%;height:80rpx;position:relative;margin-top:30rpx;'>
 
-				<view style="width:50%;height:80rpx;position:relative;float:left;">
-					<view wx:if='{{!isTry && boxnum > 0 && !isheavyroll}}' class='queuebtnstyle2' style="background:white;float:left;" catchtap='judgeAgainRoll'>免费重抽（{{remaintime}}秒）</view>
+				<view style="width:33.33%;height:80rpx;position:relative;float:left;">
+					<view wx:if='{{!isTry && boxnum > 0 && !isheavyroll}}' class='queuebtnstyle2' style="background:white;float:left;" catchtap='judgeAgainRoll'>免费重抽({{remaintime}}秒)</view>
 					<view wx:if='{{!isTry && (boxnum <= 0 || isheavyroll)}}' class='queuebtnstyle2' style="background:#B0B0B0;color:white;float:left;">免费重抽</view>
 
 					<view wx:if='{{isTry && isReTry}}' class='queuebtnstyle2' style="background:white;float:left;" data-isretry='1' catchtap='havetry'>免费重抽</view>
@@ -647,7 +681,11 @@
 
 				</view>
 
-				<view style="width:50%;height:80rpx;position:relative;float:right;" data-type='1' catchtap='closeaward'>
+				<view wx:if="{{isRecycle}}" style="width:33.33%;height:80rpx;position:relative;float:left;">
+					<view class='queuebtnstyle2' style="background:white;float:left;" catchtap='getBlindBoxAmount'>回收({{remaintime}}秒)</view>
+				</view>
+
+				<view style="width:33.33%;height:80rpx;position:relative;float:right;" data-type='1' catchtap='closeaward'>
 					<view wx:if='{{isTry}}' class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;" data-type='2' catchtap='closeaward'>再试一次</view>
 
 					<view wx:if='{{!isTry}}' class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;" data-type='2' catchtap='closeaward'>再买一个</view>
@@ -659,13 +697,18 @@
 
 		</view>
 
-		<view style="width:100%;position:absolute;bottom:30rpx;left:0;" data-type='1' catchtap='closeaward'>
+		<view style="width:100%;" data-type='1' catchtap='closeaward'>
 
 			<view style="width:80%;margin:0 10%;font-size:25rpx;" catchtap="mmm">
 				<view>免费重抽说明:</view>
 				<view>1.每次抽盒只能重抽一次，随机款式（与上次不同）</view>
 				<view>2.仅剩一盒时不支持重抽</view>
 				<view>3.重抽时间为60秒内，倒计时结束自动放入玩具柜</view>
+			</view>
+
+			<view wx:if="{{isRecycle}}" style="width:80%;margin:50rpx 10%;font-size:25rpx;" catchtap="mmm">
+				<view>回收说明:</view>
+				<text style="">{{activity.recycleExplain}}</text>
 			</view>
 
 			<view style="width:100%;height:200rpx;position:relative;margin-top:20rpx;">
@@ -683,6 +726,8 @@
 			</view>
 
 		</view>
+		</scroll-view>
+
 
 	</view>
 
@@ -895,13 +940,21 @@
 				</block>
 			</view>
 
-			<view style="width:100%;height:80rpx;position:relative;">
-				<view class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;" catchtap='closeWholePay' data-mtype="open">再抽一盒</view>
+			<view style="width:100%;height:80rpx;position:relative;display: flex;justify-content: center;">
+				<block wx:if="{{isRecycle}}">
+					<view wx:if="{{isDhRecycleBtn}}" class='' style="background:#fff;color:#000;margin-right:40rpx;font-size: 25rpx;box-shadow: 5px 5px 10px 0px #999;width: 200rpx;line-height: 80rpx;border-radius: 40rpx;" catchtap='getBlindBoxAmount' data-mtype="open">整盒回收({{dhRecycleCount}})</view>
+				</block>
+				<view class='' style="background:#e94f57;color:white;font-size: 25rpx;box-shadow: 5px 5px 10px 0px #999;width: 200rpx;line-height: 80rpx;border-radius: 40rpx;" catchtap='closeWholePay' data-mtype="open">再抽一盒</view>
 			</view>
 
 			<view style='width:100%;line-height:30rpx;color:#4c9a23;margin-top:40rpx'><text>抽盒机抽整盒为拆盒确认款\n</text><block wx:if='{{activity.isDirectShipping}}'>确认后将直接发货，此款商品不进入玩具柜</block><block wx:else>确认后将放入您的玩具柜（自由出售or直接发货）</block></view>
 
 			<view style='width:100%;line-height:30rpx;color:#000000;font-size:24rpx;text-align: center;margin-top: 10rpx;'>如未填写收货地址，请进入小程序-我的-我的订单中填写</view>
+
+			<view wx:if="{{isRecycle}}" class="recycleExplain" style="width:80%;margin:50rpx 10%;font-size:25rpx;" catchtap="mmm">
+				<view>回收说明:</view>
+				<text style="">{{activity.recycleExplain}}</text>
+			</view>
 
 		</view>
 
@@ -1097,48 +1150,85 @@
 			</block>
 			<block wx:else>
 
-				<view style="width:700rpx;height:{{chipItemHeight*chiprownum + 340}}rpx;background:white;position:absolute;top:0;bottom:0;left:25rpx;margin:auto 0;border-radius:10rpx;visibility:{{chipItemHeight>0?'visible':'hidden'}};" catchtouchmove="myCatchTouch">
-
+				<view style="width:700rpx;height:{{chipItemHeight*chiprownum + 340 + 220}}rpx;background:white;position:absolute;top:0;bottom:0;left:25rpx;margin:auto 0;border-radius:10rpx;" catchtouchmove="myCatchTouch">
 					<image style="width:40rpx;height:40rpx;position:absolute;top:10rpx;right:10rpx;" src="../images/explain.png" catchtap="showchiprule"></image>
+					<view wx:if='{{isDirectOpenWholeBox}}' style="height:96rpx;"></view>
+          <block>
+					    <view style="visibility:{{chipItemHeight>0?'visible':'hidden'}};" wx:if='{{!isDirectOpenWholeBox}}'>
+									<view style="width:630rpx;">
+										<scroll-view scroll-x="true" style='width:100%;white-space:nowrap;height:100%;' scroll-with-animation="true" scroll-left='{{scrollleft}}'>
+											<view style='display:inline-block;height:100%;position:relative;' wx:for='{{tricklinelist}}' id='q{{index}}' wx:key='key' data-id='{{index}}' catchtap='tabClick'>
+												<view style='height:100%;margin:0 10rpx;padding:0 10rpx;float:left;font-size:26rpx;position:relative;display:block;' class='alignclass'>
+													<view wx:if='{{!item.isFinishedCollect}}' style='height:50rpx;{{iselected == index ? "color:#1890FF" : "color:#000"}};' class='alignclass'>
+														第{{index+1}}套{{tricklinelist[index].lightRole.length}}/{{chiplist.length}}
+													</view>
+													<view wx:if='{{item.isFinishedCollect}}' style='height:50rpx;{{iselected == index ? "color:#1890FF" : "color:#D4D4D4"}};' class='alignclass'>
+														已完成{{tricklinelist[index].lightRole.length}}/{{chiplist.length}}
+													</view>
+													<view wx:if='{{iselected == index}}' style='height:2rpx;background:#1890FF;'></view>
+												</view>
+											</view>
+										</scroll-view>
+									</view>	
+									<view style="color:##101010;font-size:24rpx;text-align:center;margin:20rpx 0;">每次抽盒可点亮对应款式卡片，连线后可获得对应奖励</view>
+										<view style="margin-left:80rpx;">
+											<view id='chipcollectindex' style="width:420rpx;overflow:hidden;display:inline-block;vertical-align: top;">
+												<view wx:for='{{chiplist}}' wx:key='key' style="display:inline-block;vertical-align: top;">
+													<view style='width:{{chipItemWidth}}rpx;position:relative;margin:2rpx 2rpx 2rpx 2rpx;'>
+														<image style='width:100%;height:{{chipItemHeight}}rpx;{{item.islight ?"":"opacity:0.3"}};display:block;backgroun:#000;' bindload='imageLoadchip' mode="widthFix" src='{{item.img}}'></image>
+													</view>
+												</view>
+											</view>
+											<view style="display:inline-block;vertical-align:top;">
+												<view wx:for='{{rowData}}' wx:key='key'>
+													<view style="height:{{chipItemHeight}}rpx;margin:2rpx 0;">
+														<view style="color:#FE666B;display:inline-block;line-height:{{chipItemHeight}}rpx;margin:0 5rpx;font-size:25rpx;vertical-align: top;">
+															→
+														</view>
+														<view wx:if='{{!item.isFinished}}' style="width:{{nogetimagewidth}}rpx;height:{{chipItemHeight}}rpx;display:inline-block;position:relative;vertical-align:top;" catchtap="hideBoxdetailpagen" data-ind="{{index}}">
+															<view wx:if='{{index==goldtip}}' style='width:200rpx;height:50rpx;position:absolute;top:-20rpx;right:0;z-index:10;'>
+																<view style='position:absolute;bottom:0;right:0;overflow:hidden;'>
+																	<view style='line-height:30rpx;color:white;font-size:20rpx;text-align:center;border-radius:10rpx;background:#404040;position:relative;padding:0 10rpx;'>
+																		<view style='text-align:left;'>
+																			{{hideBoxTip}}
+																		</view>
+																	</view>
+																	<view style='width:100%;height:10rpx;position:relative;'>
+																		<image style='width:20rpx;height:10rpx;position:absolute;top:0;right:30rpx;' src='https://clw.51chaidan.com/images/goods/black_arrow.png'></image>
+																	</view>
+																</view>
+															</view>
+															<image style="width:{{nogetimagewidth}}rpx;height:{{nogetimagewidth}}rpx;margin:auto;position:absolute;left:0;top:0;bottom:0;right:0;opacity:0.3" mode="aspectFit" src="{{hideBoxImg}}"></image>
+														</view>
+														<view wx:if='{{item.isFinished}}' style="width:{{nogetimagewidth}}rpx;height:{{chipItemHeight}}rpx;display: inline-block;position:relative;overflow:hidden;vertical-align: top;">
+															<image style="width:{{nogetimagewidth}}rpx;height:{{nogetimagewidth}}rpx;" mode="aspectFit" src="{{item.img}}"></image>
+															<view class='fragment' wx:if='{{item.isPatch}}' style='width:{{nogetimagewidth}}rpx;left:0;'>
+																<view class='fragmentbg'></view>
+																<view class='fragmenttxt'>
+																	<image class='fragmentimg' src='https://www.51chaidan.com/images/toyCabinet/toyFragment.png'></image>
+																	<text class='fragmentfont'>碎片</text>
+																</view>
+															</view>
+														</view>
+													</view>
+												</view>
+											</view>
 
-					<view style="width:630rpx;">
-						<scroll-view scroll-x="true" style='width:100%;white-space:nowrap;height:100%;' scroll-with-animation="true" scroll-left='{{scrollleft}}'>
-							<view style='display:inline-block;height:100%;position:relative;' wx:for='{{tricklinelist}}' id='q{{index}}' wx:key='key' data-id='{{index}}' catchtap='tabClick'>
-								<view style='height:100%;margin:0 10rpx;padding:0 10rpx;float:left;font-size:26rpx;position:relative;display:block;' class='alignclass'>
-									<view wx:if='{{!item.isFinishedCollect}}' style='height:50rpx;{{iselected == index ? "color:#1890FF" : "color:#000"}};' class='alignclass'>
-										第{{index+1}}套{{tricklinelist[index].lightRole.length}}/{{chiplist.length}}
-									</view>
-									<view wx:if='{{item.isFinishedCollect}}' style='height:50rpx;{{iselected == index ? "color:#1890FF" : "color:#D4D4D4"}};' class='alignclass'>
-										已完成{{tricklinelist[index].lightRole.length}}/{{chiplist.length}}
-									</view>
-									<view wx:if='{{iselected == index}}' style='height:2rpx;background:#1890FF;'></view>
-								</view>
-							</view>
-						</scroll-view>
-					</view>
 
 
-						<view style="color:##101010;font-size:24rpx;text-align:center;margin:20rpx 0;">每次抽盒可点亮对应款式卡片，连线后可获得对应奖励</view>
-						<view style="margin-left:80rpx;">
-							<view id='chipcollectindex' style="width:420rpx;overflow:hidden;display:inline-block;vertical-align: top;">
-								<view wx:for='{{chiplist}}' wx:key='key' style="display:inline-block;vertical-align: top;">
-									<view style='width:{{chipItemWidth}}rpx;position:relative;margin:2rpx 2rpx 2rpx 2rpx;'>
-										<image style='width:100%;height:{{chipItemHeight}}rpx;{{item.islight ?"":"opacity:0.3"}};display:block;backgroun:#000;' bindload='imageLoadchip' mode="widthFix" src='{{item.img}}'></image>
-									</view>
-								</view>
-							</view>
-							<view style="display:inline-block;vertical-align:top;">
-								<view wx:for='{{rowData}}' wx:key='key'>
-									<view style="height:{{chipItemHeight}}rpx;margin:2rpx 0;">
-										<view style="color:#FE666B;display:inline-block;line-height:{{chipItemHeight}}rpx;margin:0 5rpx;font-size:25rpx;vertical-align: top;">
-											→
 										</view>
-										<view wx:if='{{!item.isFinished}}' style="width:{{nogetimagewidth}}rpx;height:{{chipItemHeight}}rpx;display:inline-block;position:relative;vertical-align:top;" catchtap="hideBoxdetailpagen" data-ind="{{index}}">
-											<view wx:if='{{index==goldtip}}' style='width:200rpx;height:50rpx;position:absolute;top:-20rpx;right:0;z-index:10;'>
+
+
+									<view wx:if='{{false}}' style="margin:0 0 20rpx 80rpx;">
+										<view wx:for='{{columnData}}' wx:key='key' style="width:{{chipItemWidth}}rpx;display:inline-block;position:relative;margin:0 2rpx;">
+											<view style="color:#FE666B;text-align:center;font-size:25rpx;">
+												↓
+											</view>
+											<view wx:if='{{index==sivertip}}' style='width:200rpx;height:50rpx;position:absolute;top:-20rpx;right:0;z-index:10;'>
 												<view style='position:absolute;bottom:0;right:0;overflow:hidden;'>
 													<view style='line-height:30rpx;color:white;font-size:20rpx;text-align:center;border-radius:10rpx;background:#404040;position:relative;padding:0 10rpx;'>
 														<view style='text-align:left;'>
-															{{hideBoxTip}}
+															{{blindboxTip}}
 														</view>
 													</view>
 													<view style='width:100%;height:10rpx;position:relative;'>
@@ -1146,47 +1236,16 @@
 													</view>
 												</view>
 											</view>
-											<image style="width:{{nogetimagewidth}}rpx;height:{{nogetimagewidth}}rpx;margin:auto;position:absolute;left:0;top:0;bottom:0;right:0;opacity:0.3" mode="aspectFit" src="{{hideBoxImg}}"></image>
+											<image style='width:{{nogetimagewidth}}rpx;height:{{nogetimagewidth}}rpx;margin:0 auto;display:block;{{item.isFinished?"":"opacity:0.3"}}' mode="aspectFit" src="{{blindBoxImg}}" catchtap="blindBoxdetailpagen" data-ind="{{index}}"></image>
 										</view>
-										<view wx:if='{{item.isFinished}}' style="width:{{nogetimagewidth}}rpx;height:{{chipItemHeight}}rpx;display: inline-block;position:relative;overflow:hidden;vertical-align: top;">
-											<image style="width:{{nogetimagewidth}}rpx;height:{{nogetimagewidth}}rpx;" mode="aspectFit" src="{{item.img}}"></image>
-											<view class='fragment' wx:if='{{item.isPatch}}' style='width:{{nogetimagewidth}}rpx;left:0;'>
-												<view class='fragmentbg'></view>
-												<view class='fragmenttxt'>
-													<image class='fragmentimg' src='https://www.51chaidan.com/images/toyCabinet/toyFragment.png'></image>
-													<text class='fragmentfont'>碎片</text>
-												</view>
-											</view>
-										</view>
-									</view>
-								</view>
+									</view>							
 							</view>
 
+					</block>
 
 
-						</view>
 
-
-					<view wx:if='{{false}}' style="margin:0 0 20rpx 80rpx;">
-						<view wx:for='{{columnData}}' wx:key='key' style="width:{{chipItemWidth}}rpx;display:inline-block;position:relative;margin:0 2rpx;">
-							<view style="color:#FE666B;text-align:center;font-size:25rpx;">
-								↓
-							</view>
-							<view wx:if='{{index==sivertip}}' style='width:200rpx;height:50rpx;position:absolute;top:-20rpx;right:0;z-index:10;'>
-								<view style='position:absolute;bottom:0;right:0;overflow:hidden;'>
-									<view style='line-height:30rpx;color:white;font-size:20rpx;text-align:center;border-radius:10rpx;background:#404040;position:relative;padding:0 10rpx;'>
-										<view style='text-align:left;'>
-											{{blindboxTip}}
-										</view>
-									</view>
-									<view style='width:100%;height:10rpx;position:relative;'>
-										<image style='width:20rpx;height:10rpx;position:absolute;top:0;right:30rpx;' src='https://clw.51chaidan.com/images/goods/black_arrow.png'></image>
-									</view>
-								</view>
-							</view>
-							<image style='width:{{nogetimagewidth}}rpx;height:{{nogetimagewidth}}rpx;margin:0 auto;display:block;{{item.isFinished?"":"opacity:0.3"}}' mode="aspectFit" src="{{blindBoxImg}}" catchtap="blindBoxdetailpagen" data-ind="{{index}}"></image>
-						</view>
-					</view>
+						
 
 
 					<view style="width:100%;margin:20rpx 0;">
@@ -1201,15 +1260,25 @@
 							<view wx:else style="width:130rpx;line-height:30rpx;position:absolute;top:-15rpx;right:-30rpx;background:#FE666B;color:white;font-size:20rpx;border-radius:10rpx;text-align:center;">领取全部奖励</view>
 							{{wholeBoxTitle?wholeBoxTitle:'端整盒'}}
 						</view>
+					</view>
+					<!-- <view wx:if='{{activity.displayTotal}}' style="width:100%;font-size:22rpx;text-align:center;color:#4c9a23;">端盒送隐藏活动请以列表赠送标识为准</view> -->
+					<view wx:if='{{activity.displayTotal}}' style="width:100%;font-size:22rpx;text-align:center;color:#4c9a23;margin-top:40rpx;">抽盒机抽整盒为拆盒确认款,有几率获得隐藏款替换任意一款</view>
 
-						<!-- <view wx:if='{{activity.displayTotal}}' style="width:100%;font-size:22rpx;text-align:center;color:#4c9a23;position:absolute;bottom:50rpx;">端盒送隐藏活动请以列表赠送标识为准</view> -->
-						<view wx:if='{{activity.displayTotal}}' style="width:100%;font-size:22rpx;text-align:center;color:#4c9a23;position:absolute;bottom:30rpx;">抽盒机抽整盒为拆盒确认款,有几率获得隐藏款替换任意一款</view>
-
+					<!-- 我的抽盒金 -->
+					<view wx:if="{{isDeduct}}" class="ch_integralWrap {{isUseDeduct?'ch_active':''}}" catchtap="toggleBlindBoxAmount">
+						<image wx:if="{{isUseDeduct}}" class="ch_cornerMask" src="https://www.51chaidan.com/images/toyCabinet/cornerMask.png"></image>
+						<view class="ch_spendable"> <text>￥</text>{{activity.deductAmountBox}}</view>
+						<view class="ch_integralTxt">
+							<text>使用{{activity.deductAmountBox}}抽盒金抵扣￥{{activity.deductAmountBox}}</text>
+							<text>当前剩余抽盒金：{{activity.userBlindBoxAmount}}</text>
+						</view>
 					</view>
 
 				</view>
 
 			</block>
+
+			
 
 </view>
 
@@ -1417,5 +1486,71 @@
 	<view class="addfrindcommon">
 		<image class="addfrindcomimg" src="{{showimg}}" mode='aspectFit'></image>
 		<view class="addfrindcomsave" catchtap="sharesavethepicture">保存图片</view>
+	</view>
+</view>
+
+<!-- 回收规则弹框 -->
+<view wx:if="{{isrecyclerule}}" class="recycleruleWrap">
+	<view class="recyclerule_mask" catchtap="toggleRecyclerule"></view>
+	<view class="recycleruleContent">
+		<image class="recycleruleIcon" src="../images/forknumber.png" catchtap="toggleRecyclerule"></image>
+		<view class="recycleruleTitle">
+			<text>回收规则</text>
+		</view>
+		<view class="recycleruleTxt">
+			<scroll-view scroll-y>
+				<text>{{activity.recycleExplain}}</text>
+			</scroll-view>
+		</view>
+		<button catchtap="toggleRecyclerule">知道了</button>
+	</view>
+</view>
+
+<!-- 回收弹框 -->
+<view wx:if="{{isRecycleMask}}" class="recycleWrap">
+	<view class="recycle_mask" catchtap="closeRecycleMask"></view>
+	<view class="recycleContent">
+		<image class="recycleIcon" catchtap="closeRecycleMask" src="../images/forknumber.png"></image>
+
+		<block>
+		<view wx:if="{{isRecycleStateA}}" class="recycleContentStateA">
+			<view class="recycletitle">
+				卖给美拆，你将获得
+			</view>
+			<block>
+				<view wx:if="{{isSingle}}" class="recycletitle">
+					{{activity.recycleAmountSingle}}抽盒金
+				</view>
+				<view wx:else class="recycletitle">
+					{{activity.recycleAmountBox}}抽盒金
+				</view>
+			</block>
+			<view class="recycletxt">
+				获得的抽盒金可用于您下次购买指定抽盒机商品，抽盒金暂不支持提现，此操作不可逆
+			</view>
+			<view class="recyclebtn">
+				<button class="cancel" catchtap="closeRecycleMask">取消</button>
+				<button class="affirm" catchtap="confirmGetBlindBoxAmount">确认</button>
+			</view>
+		</view>	
+		<view wx:else class="recycleContentStateB">
+			<block>
+				<view wx:if="{{isSingle}}" class="recycletitle">
+					你获得{{activity.recycleAmountSingle}}抽盒金
+				</view>
+				<view wx:else class="recycletitle">
+					你获得{{activity.recycleAmountBox}}抽盒金
+				</view>
+			</block>
+			<view class="recycletxt">
+				可在“我的-小金库”中查看
+			</view>
+			<view class="recyclebtn">
+				<button wx:if="{{isSingle}}" class="affirm" catchtap='judgeAgainRoll'>再抽一次</button>
+				<button wx:else class="affirm" catchtap='closeWholePay' data-mtype="open">再抽一盒</button>
+			</view>
+		</view>
+		</block>
+
 	</view>
 </view>
