@@ -264,9 +264,13 @@
 				<view class='disanumofgoods_box' wx:if='{{item.List.length!=0}}'>
 					<view class='disanum_scr'>
 						<scroll-view scroll-x="true" class="disanum_tab_comtainer">
-							<view class='disanum_scr_box' wx:for='{{item.List}}' wx:key='key' wx:for-item='w' style='height:211rpx;width:{{w.width||222}}rpx;' wx:for-index='num'>
+							<view class='disanum_scr_box' wx:for='{{item.List}}' wx:key='key' wx:for-item='w' style='height:251rpx;width:{{w.width||222}}rpx;' wx:for-index='num'>
 								<view class='disanum_simgbox' catchtap='bbevebox' data-gid='{{w.goodsId}}' style='height:177rpx;width:{{w.width||222}}rpx;'>
 									<image class='disanum_simg' src='{{w.cover}}' style='height:177rpx;width:{{w.width||222}}rpx;' bindload="imageLoadad" data-indexnum='7' data-num='{{num}}' data-ind='{{index}}'></image>
+								</view>
+								<view style='height:40rpx;text-align: center;'>
+								   <text wx:if='{{w.isRecycle}}' style="background:#1890ff;border-radius:7rpx;display:inline-block;padding:0 8rpx;font-size:22rpx;color:#fff;">{{w.recycleRatio}}折回收</text>
+									 <text wx:elif='{{w.isOpenWholeBoxCheaper}}' style="border-radius:7rpx;display:inline-block;padding:0 8rpx;border:1px solid #ff2742;color: #ff2742;font-size:22rpx;height:28rpx;line-height:30rpx;">端盒立减</text>
 								</view>
 								<view class='specialellipsis' style='font-size:24rpx;padding-top:4rpx;width:100%;height:32rpx;text-align:center;color:#333;'>{{w.name}}</view>
 							</view>

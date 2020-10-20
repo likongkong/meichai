@@ -101,7 +101,7 @@
         </view>
         <view class='addputforward'>
            <view class='apforleft' catchtap='wodesblist' style='position:relative;'>
-                <view class='apforlleft comapforlr specialellipsis'>抽盒金<text style="color:#ff3c4d;padding-left:8rpx;">{{blindbox_money}}</text></view>
+                 <view class='apforlleft comapforlr specialellipsis'>抽盒金<text style="color:#ff3c4d;padding-left:8rpx;">{{blindbox_money}}</text></view>
                 <view class='apforlright comapforlr'>使用</view>
                 <!-- <view class='apforlleft comapforlr specialellipsis'>{{putforwardmoney}}元</view>
                 <view class='apforlright comapforlr'>提现</view> -->

@@ -268,7 +268,6 @@ page{
 .apforlleft{
   float: left;
   width: 230rpx;
-  text-align: center;
   line-height: 80rpx;
   color: #333;
 }
