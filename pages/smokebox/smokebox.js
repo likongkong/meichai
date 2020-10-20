@@ -613,7 +613,7 @@ Page({
     }.bind(this), 1350)
   },
 
-  getInfo: function () {
+  getInfo: function (recycle = true) {
     var _this = this
     wx.showLoading({
       title: '加载中...',
@@ -706,11 +706,16 @@ Page({
             isRecycle:res.data.Info.activity.isRecycle,
             //是否可使用抽盒金抵扣
             isDeduct:res.data.Info.activity.isDeduct,
-            //是否可使用抽盒金抵扣
-            isUseDeduct:res.data.Info.activity.isDeduct?true:false,
-            isRecycleMask:false,
-            isRecycleStateA:true
+            //是否使用抽盒金抵扣
+            isUseDeduct:res.data.Info.activity.isDeduct?true:false
           })
+
+          if(recycle){
+            _this.setData({
+              isRecycleMask:false,
+              isRecycleStateA:true
+            })
+          }
 
           // 商品详情 
           if (res.data.Info && res.data.Info.goods) {
@@ -1006,6 +1011,8 @@ Page({
         ishowbox: false,
         ishowhalf: true,
         isTry: false,
+        isRecycleMask:false,
+        isRecycleStateA:true
       })
       _this.stopDraw();
     } else {
@@ -1539,8 +1546,6 @@ Page({
       success: function (res) {
         wx.hideLoading()
         if (res.data.ReturnCode == 200) {
-          console.log(res.data.Info.cart_id,444444444)
-
           if(_this.data.isUseDeduct){  // 当前选中
             _this.data.thePreviousSelOrder = true;
           }else{
@@ -1696,7 +1701,9 @@ Page({
                   ishowsurebuy: false,
                   ishowcard: false,
                   desc: '',
-                  isloadfun:false
+                  isloadfun:false,
+                  isDhRecycleBtn:true,
+                  dhRecycleCount:60
                 });
                 if (payinfo.isFreeBuyOrder) {
                   wx.navigateTo({
@@ -1939,6 +1946,7 @@ Page({
           } else {
             _this.setData({
               ishowaward: true,
+              isDhRecycleBtn:false,
               ishowhalf: false,
               isTry: true,
               isheavyroll: false,
@@ -2268,6 +2276,8 @@ Page({
       this.setData({
         iswholePay: true,
         isRepeatOpen: 1,
+        isRecycleMask:false,
+        isRecycleStateA:true
       })
       this.dsbbbutclickt()
     }
@@ -3475,7 +3485,6 @@ Page({
     }else{
       this.setData({isSingle:true})
     }
-    console.log(11111111111111)
     this.setData({
       isRecycleMask:true
     })
@@ -3498,9 +3507,15 @@ Page({
       header: { 'Accept': 'application/json' },
       success: function (res) {
         wx.hideLoading();
-        _this.setData({
-          isRecycleStateA: false
-        })
+        if (res.data.ReturnCode == 200) {
+          _this.setData({
+            isRecycleStateA: false,
+            isDhRecycleBtn:false
+          })
+          _this.getInfo(false);
+        } else {
+          app.showToastC(res.data.Msg);
+        };
       },
       fail: function () { }
     });

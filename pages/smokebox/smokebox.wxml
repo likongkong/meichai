@@ -178,7 +178,7 @@
 			</view>
 
 			<block>
-			<view wx:if="{{activity.isRecycle}}" style="min-width:108rpx;height:80rpx;line-height:80rpx;display: inline-block;color: #4c9a23;font-size: 24rpx;margin:0 60rpx;" catchtap="toggleRecyclerule">{{activity.recycleRatio}}折回收</view>
+			<view wx:if="{{activity.isRecycle}}" style="min-width:108rpx;background:#1890ff;border-radius:3px;width:60px;left:10px;font-size: 24rpx;color:#ffffff;margin:0 60rpx;" catchtap="toggleRecyclerule">{{activity.recycleRatio}}折回收</view>
 			<view wx:else style="width:108rpx; height:80rpx;line-height:80rpx;display: inline-block;color: #4c9a23;font-size: 24rpx;margin:0 60rpx;"></view>
 			</block>
 			
@@ -613,7 +613,7 @@
 			</view>
  
 			<!-- 我的抽盒金 -->
-			<view wx:if="{{isDeduct}}" class="ch_integralWrap {{isUseDeduct?'ch_active':''}}" catchtap="toggleBlindBoxAmount">
+			<view wx:if="{{isDeduct && activity.userBlindBoxAmount!=0}}" class="ch_integralWrap {{isUseDeduct?'ch_active':''}}" catchtap="toggleBlindBoxAmount">
 				<image wx:if="{{isUseDeduct}}" class="ch_cornerMask" src="https://www.51chaidan.com/images/toyCabinet/cornerMask.png"></image>
 				<view class="ch_spendable"> <text>￥</text>{{activity.deductAmountSingle}}</view>
 				<view class="ch_integralTxt">
@@ -633,6 +633,8 @@
 	<!-- ishowaward -->
 	<view wx:if='{{ishowaward}}' style='width:100%;height:100%;position:fixed;top:0px;left:0;z-index:13;' catchtouchmove="true">
 		<view class='bgstyle' style="background:#E8E8E9;opacity:1;top:{{statusBarHeightMc}}px;z-index:-1;" catchtouchmove="myCatchTouch" data-type='1' catchtap='closeaward'>
+		</view>
+		<view class='bgstyle' style="width: 100%;height: 102rpx;position: fixed;left: 0;background:transparent;opacity:1;top:{{statusBarHeightMc}}px;z-index:2;" catchtouchmove="myCatchTouch" data-type='1' catchtap='closeaward'>
 			<view wx:if='{{isTry}}' style="font-size:25rpx;color:#1989fa;margin:35rpx 35rpx;">返回抽盒机</view>
 		</view>
 
@@ -671,7 +673,7 @@
 
 			<view style='width:100%;height:80rpx;position:relative;margin-top:30rpx;'>
 
-				<view style="width:33.33%;height:80rpx;position:relative;float:left;">
+				<view style="width:{{isDhRecycleBtn?'33.33%':'50%'}};height:80rpx;position:relative;float:left;">
 					<view wx:if='{{!isTry && boxnum > 0 && !isheavyroll}}' class='queuebtnstyle2' style="background:white;float:left;" catchtap='judgeAgainRoll'>免费重抽({{remaintime}}秒)</view>
 					<view wx:if='{{!isTry && (boxnum <= 0 || isheavyroll)}}' class='queuebtnstyle2' style="background:#B0B0B0;color:white;float:left;">免费重抽</view>
 
@@ -681,11 +683,11 @@
 
 				</view>
 
-				<view wx:if="{{isRecycle}}" style="width:33.33%;height:80rpx;position:relative;float:left;">
-					<view class='queuebtnstyle2' style="background:white;float:left;" catchtap='getBlindBoxAmount'>回收({{remaintime}}秒)</view>
+				<view wx:if="{{isRecycle}}" style="width:{{isDhRecycleBtn?'33.33%':'0'}};height:80rpx;position:relative;float:left;">
+					<view wx:if="{{isDhRecycleBtn}}" class='queuebtnstyle2' style="background:white;float:left;" catchtap='getBlindBoxAmount'>回收({{remaintime}}秒)</view>
 				</view>
 
-				<view style="width:33.33%;height:80rpx;position:relative;float:right;" data-type='1' catchtap='closeaward'>
+				<view style="width:{{isDhRecycleBtn?'33.33%':'50%'}};height:80rpx;position:relative;float:right;" data-type='1' catchtap='closeaward'>
 					<view wx:if='{{isTry}}' class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;" data-type='2' catchtap='closeaward'>再试一次</view>
 
 					<view wx:if='{{!isTry}}' class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;" data-type='2' catchtap='closeaward'>再买一个</view>
@@ -727,7 +729,6 @@
 
 		</view>
 		</scroll-view>
-
 
 	</view>
 
@@ -1150,7 +1151,7 @@
 			</block>
 			<block wx:else>
 
-				<view style="width:700rpx;height:{{chipItemHeight*chiprownum + 340 + 220}}rpx;background:white;position:absolute;top:0;bottom:0;left:25rpx;margin:auto 0;border-radius:10rpx;" catchtouchmove="myCatchTouch">
+				<view style="width:700rpx;height:{{activity.userBlindBoxAmount!=0?chipItemHeight*chiprownum + 340 + 220:chipItemHeight*chiprownum + 340}}rpx;background:white;position:absolute;top:0;bottom:0;left:25rpx;margin:auto 0;border-radius:10rpx;" catchtouchmove="myCatchTouch">
 					<image style="width:40rpx;height:40rpx;position:absolute;top:10rpx;right:10rpx;" src="../images/explain.png" catchtap="showchiprule"></image>
 					<view wx:if='{{isDirectOpenWholeBox}}' style="height:96rpx;"></view>
           <block>
@@ -1265,7 +1266,7 @@
 					<view wx:if='{{activity.displayTotal}}' style="width:100%;font-size:22rpx;text-align:center;color:#4c9a23;margin-top:40rpx;">抽盒机抽整盒为拆盒确认款,有几率获得隐藏款替换任意一款</view>
 
 					<!-- 我的抽盒金 -->
-					<view wx:if="{{isDeduct}}" class="ch_integralWrap {{isUseDeduct?'ch_active':''}}" catchtap="toggleBlindBoxAmount">
+					<view wx:if="{{isDeduct && activity.userBlindBoxAmount!=0}}" class="ch_integralWrap {{isUseDeduct?'ch_active':''}}" catchtap="toggleBlindBoxAmount">
 						<image wx:if="{{isUseDeduct}}" class="ch_cornerMask" src="https://www.51chaidan.com/images/toyCabinet/cornerMask.png"></image>
 						<view class="ch_spendable"> <text>￥</text>{{activity.deductAmountBox}}</view>
 						<view class="ch_integralTxt">
@@ -1529,7 +1530,7 @@
 				获得的抽盒金可用于您下次购买指定抽盒机商品，抽盒金暂不支持提现，此操作不可逆
 			</view>
 			<view class="recyclebtn">
-				<button class="cancel" catchtap="closeRecycleMask">取消</button>
+				<button class="cancel"  catchtap="closeRecycleMask">取消</button>
 				<button class="affirm" catchtap="confirmGetBlindBoxAmount">确认</button>
 			</view>
 		</view>	
@@ -1546,7 +1547,7 @@
 				可在“我的-小金库”中查看
 			</view>
 			<view class="recyclebtn">
-				<button wx:if="{{isSingle}}" class="affirm" catchtap='judgeAgainRoll'>再抽一次</button>
+				<button wx:if="{{isSingle}}" class="affirm" data-type='2' catchtap='closeaward'>再抽一次</button>
 				<button wx:else class="affirm" catchtap='closeWholePay' data-mtype="open">再抽一盒</button>
 			</view>
 		</view>
