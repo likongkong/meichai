@@ -120,7 +120,7 @@
 									</view>									
 							</view>
 							<view class='labelstyle'>
-							  <view wx:if='{{item.isRecycle}}' style='background:#1890ff;border-radius:7rpx;display:inline-block;padding:0 8rpx;'>{{item.recycleRatio}}折回收</view>
+							  <view wx:if='{{item.isRecycle}}' style='background:#1890ff;border-radius:7rpx;display:inline-block;padding:0 8rpx;margin-right:5rpx;'>{{item.recycleRatio}}折回收</view>
 								<block wx:if='{{item.status == 2 && item.tag!=""}}'>
 										<view wx:if='{{item.tag=="新品"}}' style='background:#FF9800;border-radius:7rpx;display:inline-block;padding:0 8rpx;'>{{item.tag}}</view>
 										<view wx:if='{{item.tag=="预售"}}' style='background:#FB595F;border-radius:7rpx;display:inline-block;padding:0 8rpx;'>{{item.tag}}</view>
