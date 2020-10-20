@@ -3512,6 +3512,7 @@ Page({
             isRecycleStateA: false,
             isDhRecycleBtn:false
           })
+          app.signindata.blindboxMoney = res.data.Info[0].finalMoney||0;
           _this.getInfo(false);
         } else {
           app.showToastC(res.data.Msg);

@@ -736,7 +736,7 @@ margin-top: 20rpx;
   border: 2rpx solid #ff5630;
 }
 .ch_spendable{
-  font-size: 60rpx;padding-left: 40rpx;box-sizing: border-box;
+  font-size: 60rpx;padding-left: 30rpx;box-sizing: border-box;
 }
 .ch_spendable text{
   font-size: 38rpx;
@@ -745,7 +745,7 @@ margin-top: 20rpx;
   margin-bottom: 10rpx;
 }
 .ch_integralTxt text{
-  display: block;text-align: left;color: gray;font-size: 26rpx;padding-right: 74rpx;box-sizing: border-box;
+  display: block;text-align: left;color: gray;font-size: 26rpx;padding-right: 36rpx;box-sizing: border-box;
 }
 
 
