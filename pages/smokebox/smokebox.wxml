@@ -605,6 +605,8 @@
 				<view style="width:50%;height:80rpx;position:relative;float:left;">
 					<view class='queuebtnstyle2' style="background:white;float:left;" catchtap='changeone'>换一个</view>
 				</view>
+				
+				<view wx:if="{{activity.isRecycle}}" style="background:#1890ff;border-radius:3px;width:60px;font-size: 24rpx;color:#ffffff;margin:auto;position:absolute;top: 0rpx;left: 0;right: 0;bottom:0;height:36rpx;z-index:1;"  catchtap="toggleRecyclerule">{{activity.recycleRatio}}折回收</view>
 
 				<view style="width:50%;height:80rpx;position:relative;float:right;">
 					<view class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;" catchtap='{{isusedWelfare ? "showsurebuy" : "updateadd"}}'>就买它</view>
@@ -617,7 +619,8 @@
 				<image wx:if="{{isUseDeduct}}" class="ch_cornerMask" src="https://www.51chaidan.com/images/toyCabinet/cornerMask.png"></image>
 				<view class="ch_spendable"> <text>-￥</text>{{activity.deductAmountSingle}}</view>
 				<view class="ch_integralTxt">
-					<text>使用{{activity.deductAmountSingle}}抽盒金抵扣￥{{activity.deductAmountSingle}}</text>
+					<text>使用抽盒金抵扣</text>
+					<!-- <text>使用{{activity.deductAmountSingle}}抽盒金抵扣￥{{activity.deductAmountSingle}}</text> -->
 					<text>当前剩余抽盒金：{{activity.userBlindBoxAmount}}</text>
 				</view>
 			</view>
@@ -1492,14 +1495,14 @@
 
 <!-- 回收规则弹框 -->
 <view wx:if="{{isrecyclerule}}" class="recycleruleWrap">
-	<view class="recyclerule_mask" catchtap="toggleRecyclerule"></view>
-	<view class="recycleruleContent">
+	<view class="recyclerule_mask" catchtap="toggleRecyclerule" catchtouchmove="true"></view>
+	<view class="recycleruleContent" catchtouchmove="true">
 		<image class="recycleruleIcon" src="../images/forknumber.png" catchtap="toggleRecyclerule"></image>
 		<view class="recycleruleTitle">
 			<text>回收规则</text>
 		</view>
 		<view class="recycleruleTxt">
-			<scroll-view scroll-y>
+			<scroll-view scroll-y enhanced="true" show-scrollbar="true">
 				<text>{{activity.recycleExplain}}</text>
 			</scroll-view>
 		</view>

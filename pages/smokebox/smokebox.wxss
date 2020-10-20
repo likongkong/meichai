@@ -699,7 +699,7 @@ page {
 }
 
 .recycleruleWrap{
-  width: 100%;height: 100%; position: fixed;top: 0;left: 0;z-index: 10;display: flex;justify-content: center;align-items: center;
+  width: 100%;height: 100%; position: fixed;top: 0;left: 0;z-index: 15;display: flex;justify-content: center;align-items: center;
 }
 .recyclerule_mask{
   width: 100%;height: 100%; position: fixed;top: 0;left: 0;background: rgba(0,0,0,.6);z-index: -1;
@@ -708,7 +708,7 @@ page {
   width: 600rpx;background: #fff;border-radius: 8rpx;padding: 0 35rpx;box-sizing: border-box;position: relative;
 }
 .recycleruleIcon{
-  width: 30rpx;height: 30rpx;position: absolute;top: 0;right: 0;display: block;padding: 14rpx 30rpx;
+  width: 30rpx;height: 30rpx;position: absolute;top: 0;right: 0;display: block;padding: 25rpx 25rpx;
 }
 .recycleruleTitle{
   width: 100%;height: 60rpx; display: flex;justify-content: center;align-items: center;font-size: 24rpx;
@@ -724,6 +724,9 @@ margin-top: 20rpx;
 }
 .recycleruleContent button{
   width: 400rpx;height: 80rpx;background: #e94f57;font-size: 26rpx;line-height: 80rpx;color: #fff;border-radius: 80rpx;margin:20rpx auto 50rpx auto;
+}
+.recycleruleContent button::after{
+  border: none;
 }
 
 .ch_integralWrap{
@@ -764,7 +767,7 @@ margin-top: 20rpx;
   width: 600rpx;background: #fff;border-radius: 8rpx;padding: 60rpx 35rpx 40rpx 35rpx;box-sizing: border-box;position: relative;
 }
 .recycleIcon{
-  width: 30rpx;height: 30rpx;position: absolute;top: 0;right: 0;display: block;padding: 14rpx 30rpx;
+  width: 30rpx;height: 30rpx;position: absolute;top: 0;right: 0;display: block;padding: 25rpx 25rpx;
 }
 .recycletitle{
   text-align: center;font-weight: bold;margin-bottom: 15rpx;
