@@ -202,6 +202,18 @@ page {
   box-shadow: 5px 5px 10px 0px #999;
 }
 
+.queuebtnstyle1 {
+  width: 200rpx;
+  line-height: 80rpx;
+  border-radius: 40rpx;
+  /* border: 5rpx solid #a3d0fd; */
+  /* color: #1989fa; */
+  margin: 0 25rpx;
+  z-index: 1;
+  font-size: 25rpx;
+  box-shadow: 5px 5px 10px 0px #999;
+}
+
 .changeTextBox {
   width: 100%;
   margin-top: 40rpx;
