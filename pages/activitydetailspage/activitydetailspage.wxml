@@ -466,7 +466,7 @@
                   <scroll-view scroll-x="true" class="disanum_tab_comtainer" style='width:100%;'>
                     <view class='disanum_scr_box' wx:for='{{listLotto}}' wx:key='key' wx:for-item='w' style='height:119rpx;width:222rpx;'>
                       <view class='disanum_simgbox' catchtap='jumpdlflottery' data-id='{{w.id}}' style='height:119rpx;width:222rpx;'>
-                        <image class='disanum_simg' src='{{w.cover}}' style='height:119rpx;width:222rpx;'></image>
+                        <image class='disanum_simg' mode='aspectFit' src='{{w.cover}}' style='height:119rpx;width:222rpx;'></image>
                         <view class='videomaskcom' wx:if='{{w.shop_price || w.stop_time}}' style='background:#000;opacity: 0.4;z-index:1;'></view>
                         <view class='videomaskcom specialellipsis' wx:if='{{w.shop_price || w.stop_time}}' style='z-index:2;'>
                           <text style='float:left;padding-left:4rpx;font-size:20rpx;' wx:if='{{w.shop_price}}'>￥{{w.shop_price}}</text>
