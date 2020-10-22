@@ -751,7 +751,7 @@
     </view>
     <view class='dsbfhcon'>
       <view class='dsbfhcprice' style="{{zunmdata.goods_type==3?'color:#000;':''}}">
-          <block wx:if='{{zunmdata.isBlindBox}}'>{{zunmdata.munit}}{{zunmdata.gsale*isBlindBoxNum}}</block>
+          <block wx:if='{{zunmdata.wholeBox}}'>{{zunmdata.munit}}{{zunmdata.gsale*isBlindBoxNum}}</block>
           <block wx:else>{{zunmdata.munit}}{{zunmdata.gsale}}<view wx:if='{{zunmdata.is_suit==1}}' style='display: inline-block; '>{{zunmdata.gsale_suit}}</view>          
           </block>
       </view>
@@ -759,7 +759,7 @@
           <view style='height:50rpx;line-height:50rpx;font-size:30rpx;color:#f3223f;width:100%;' class='specialellipsis'>定金 ￥{{zunmdata.promote_price}}</view>      
       </block>
       <block wx:else>
-          <block wx:if='{{zunmdata.isBlindBox}}'>
+          <block wx:if='{{zunmdata.wholeBox}}'>
               <view style='height:50rpx;line-height:50rpx;font-size:30rpx;color:#999;width:100%;' class='specialellipsis'>已选择：<text style='display: inline-block;'>
                     <block wx:if='{{isBlindBoxNum==zunmdata.suit_num}}'>整套({{isBlindBoxNum}}个)</block>
                     <block wx:else>盲盒({{isBlindBoxNum}}个)</block>
@@ -779,7 +779,7 @@
     </image>
   </view>
   <view class='dsbfcontent'>
-    <view class='purchasequantity' wx:if='{{!zunmdata.isBlindBox}}'>
+    <view class='purchasequantity' wx:if='{{!zunmdata.wholeBox}}'>
       <view class='purchasequantityleft'>购买数量</view>
       <view class='purchasequantityright' wx:if='{{zunmdata.is_suit!=1}}'>
         <view class='pchriadaredleft pcridarcom' style='position: relative;' bindtap='clicksub'>-</view>
@@ -787,9 +787,9 @@
         <view class='pchriadaredright pcridarcom' style='position: relative;' bindtap='clickadd'>+</view>
       </view>
     </view>
-    <view class='coloseltit' wx:if='{{zunmdata.isBlindBox&&zunmdata.is_suit==1}}'>购买规格</view>
+    <view class='coloseltit' wx:if='{{zunmdata.wholeBox&&zunmdata.is_suit==1}}'>购买规格</view>
     <view class='comcolor'>
-      <block wx:if='{{zunmdata.isBlindBox&&zunmdata.is_suit==1}}'>
+      <block wx:if='{{zunmdata.wholeBox&&zunmdata.is_suit==1}}'>
           <view class='comcolorchWhole {{1==isBlindBoxNum?"wholeIsBBack":""}}' data-no='1' style='position: relative;' catchtap='isBlindBoxsel'>
               <image class="isBBClWhole" mode='aspectFit' src="{{zunmdata.goods_thumb}}"></image>
               <block>盲盒(1个)</block>
@@ -808,7 +808,7 @@
 
     </view>
 
-    <view class='purchasequantity' wx:if='{{zunmdata.isBlindBox&&zunmdata.is_suit==1}}'>
+    <view class='purchasequantity' wx:if='{{zunmdata.wholeBox&&zunmdata.is_suit==1}}'>
       <view class='purchasequantityleft'>购买数量</view>
       <view class='purchasequantityright'>
         <view class='pchriadaredleft pcridarcom' style='position: relative;' bindtap='clicksub'>-</view>
