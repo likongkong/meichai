@@ -167,7 +167,10 @@ Page({
     if (num == 1) {
       _this.setData({
         pid: 0,
-        nodataiftr: false
+        nodataiftr: false,
+        listdata: [],
+        signlist: [],
+        finishedlist: [],
       });
     } else {
       var pagenum = _this.data.pid;

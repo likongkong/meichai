@@ -143,7 +143,11 @@ Page({
     shFrBxBo:false,
     shFrBxTo:false,
     iscashpledge:false,
-    payMask:false
+    payMask:false,
+    // 判断是否能分享
+    is_share_but:true,
+    // 太阳码参数 用户是否能分享 1 可以分享 
+    canShare:0
   },
   
   sharefriend:function(){
@@ -382,10 +386,14 @@ Page({
     console.log('options========',options)
     if (options.scene) {
       let scene = decodeURIComponent(options.scene);
+      console.log('options========',scene)
       app.signindata.referee = _this.getSearchString('referee', scene) || 0;
       app.signindata.activity_id = _this.getSearchString('id', scene) || 0;
       _this.data.id = _this.getSearchString('id', scene) || 0;
       _this.data.gid = _this.getSearchString('gid', scene) || 0;
+      // 用户是否能分享
+      _this.data.canShare = _this.getSearchString('canShare', scene) || 0;
+
       this.setData({
         share_id: _this.getSearchString('referee', scene) || 0,
       })
@@ -396,6 +404,7 @@ Page({
 
       _this.data.id = options.id || 0;
       _this.data.gid = options.gid || 0;
+      _this.data.canShare = options.canShare || 0;
       // 是否是朋友圈进入
       _this.data.perayu = options.perayu || 0;
       this.setData({
@@ -606,21 +615,24 @@ Page({
           WxParse.wxParse('article', 'html', res.data.Info.infoGoods.goods_desc, _this, 0);
           clearInterval(_this.data.timer)
 
-          if (res.data.Info.infoActivity.status == 1) {
-            _this.data.timer = setInterval(function () {
-              //将时间传如 调用 
-              _this.dateformat(res.data.Info.infoActivity.start_time);
-            }.bind(_this), 1000);
-          }
 
-          if (res.data.Info.infoActivity.status == 2) {
+          if(res.data.Info.infoActivity.is_limit==1){
 
-            _this.data.timer = setInterval(function () {
-              //将时间传如 调用 
-              _this.dateformat(res.data.Info.infoActivity.stop_time);
-            }.bind(_this), 1000);
+          }else{
+            if (res.data.Info.infoActivity.status == 1) {
+              _this.data.timer = setInterval(function () {
+                //将时间传如 调用 
+                _this.dateformat(res.data.Info.infoActivity.start_time);
+              }.bind(_this), 1000);
+            }
+            if (res.data.Info.infoActivity.status == 2) {
+              _this.data.timer = setInterval(function () {
+                //将时间传如 调用 
+                _this.dateformat(res.data.Info.infoActivity.stop_time);
+              }.bind(_this), 1000);
+            }
+          };
 
-          }
 
           if (res.data.Info.infoActivity.status == 3) {
 
@@ -643,6 +655,7 @@ Page({
               } else if (res.data.Info.infoActivity.nextOrder) { // 中奖了
                 _this.setData({
                   awardstatus: 2,
+                  isgetaward:true
                 })
                 _this.data.timer = setInterval(function () {
                   //将时间传如 调用 
@@ -701,9 +714,15 @@ Page({
             wx.showShareMenu();
           }
 
-          if(res.data.Info.infoActivity.specialWay == 1){
-            // wx.hideShareMenu();
-          }
+          // res.data.List.ShareUser && res.data.List.ShareUser.indexOf(_this.data.uid) == -1
+
+          if(res.data.Info.infoActivity.detail == 1 && _this.data.canShare!=1){
+            console.log('detail == 1','不能分享')
+            wx.hideShareMenu();
+            _this.setData({
+              is_share_but:false
+            })
+          };
           
           // 云统计
           var clouddata = { act_id: _this.data.id, type: res.data.Info.infoActivity.specialWay || 0 }
@@ -820,8 +839,8 @@ Page({
       _this.data.exhpage = ++pagenum;
     };
     // 展会
-    console.log('mod=show&operation=brandDetail&brandId=' + _this.data.brandId + '&page=' + _this.data.exhpage + '&gid=' + _this.data.gid+ '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
-    var exh = Dec.Aese('mod=show&operation=brandDetail&brandId=' + _this.data.brandId + '&page=' + _this.data.exhpage + '&gid=' + _this.data.gid+ '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
+    console.log('mod=show&operation=brandDetail&brandId=' + _this.data.brandId + '&page=' + _this.data.exhpage + '&gid=' + _this.data.gid+ '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid+'&dataType='+_this.data.is_exhibition)
+    var exh = Dec.Aese('mod=show&operation=brandDetail&brandId=' + _this.data.brandId + '&page=' + _this.data.exhpage + '&gid=' + _this.data.gid+ '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid+'&dataType='+_this.data.is_exhibition);
     wx.request({
       url: app.signindata.comurl + 'toy.php' + exh,
       method: 'GET',

@@ -383,7 +383,10 @@
                       <view wx:if='{{item.saleButtonDisplay}}' style='color:#6aca6b;'>{{item.saleButtonDisplay}}</view>
                       <block wx:elif='{{item.status==1}}'>{{item.start_time}}报名</block>
                       <view wx:elif='{{item.status==2&&item.isSign}}' style="color:#6aca6b;">已报名</view>
-                      <block wx:elif='{{item.status==2}}'>{{item.stop_time}}开奖</block>
+                      <block wx:elif='{{item.status==2}}'>
+                        <block wx:if='{{item.is_limit==1}}'>满{{item.limit_users}}人开奖</block>
+                        <block wx:else>{{item.stop_time}}开奖</block>										
+                      </block>
                       <block wx:elif='{{item.status==3}}'>已开奖</block>
                     </view>
                     <view wx:elif='{{item.type == 11 || item.type == 12}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;">
@@ -430,7 +433,10 @@
                       <view wx:if='{{item.saleButtonDisplay}}' style='color:#6aca6b;'>{{item.saleButtonDisplay}}</view>
                       <block wx:elif='{{item.status==1}}'>{{item.start_time}}报名</block>
                       <view wx:elif='{{item.status==2&&item.isSign}}' style="color:#6aca6b;">已报名</view>
-                      <block wx:elif='{{item.status==2}}'>{{item.stop_time}}开奖</block>
+                      <block wx:elif='{{item.status==2}}'>
+                        <block wx:if='{{item.is_limit==1}}'>满{{item.limit_users}}人开奖</block>
+                        <block wx:else>{{item.stop_time}}开奖</block>										
+                      </block>
                       <block wx:elif='{{item.status==3}}'>已开奖</block>
                     </view>
                     <view wx:elif='{{item.type == 11 || item.type == 12}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;">

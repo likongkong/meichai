@@ -3130,15 +3130,15 @@ Page({
 
   // 图片预览
   previewImg: function (w) {
-    var index = w.currentTarget.dataset.index || w.target.dataset.index||0;
-    var imgArr = this.data.imgArr;
-    wx.previewImage({
-      current: imgArr[index],    
-      urls: imgArr,               
-      success: function (res) { },
-      fail: function (res) { },
-      complete: function (res) { },
-    })
+    // var index = w.currentTarget.dataset.index || w.target.dataset.index||0;
+    // var imgArr = this.data.imgArr;
+    // wx.previewImage({
+    //   current: imgArr[index],    
+    //   urls: imgArr,               
+    //   success: function (res) { },
+    //   fail: function (res) { },
+    //   complete: function (res) { },
+    // })
   },
   // 身份证号弹框取消事件
   idnumbbcenfun:function(){

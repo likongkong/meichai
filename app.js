@@ -95,8 +95,6 @@ App({
     sceneValue:0,
     yifanshangIsInQueue:false,
     timer:'',
-    // 开机屏随机图片个数
-    imgUrlNum:4,
     // 活动分享朋友圈底部是否显示广告
     is_eveShareAdver:false,
     // 抽盒金
@@ -155,7 +153,7 @@ App({
 
                   _this.signindata.loginid = res.data.Info.loginid || '';
                   _this.signindata.uid = res.data.Info.uid || '';
-
+                  
                   console.log('app===sigin',_this.signindata.comurl,_this.signindata.clwcomurl,Dec.versionnumber)
 
                   _this.signindata.isNewer = res.data.Info.isNewer || false;

@@ -102,18 +102,29 @@ Page({
     this.onLoadfun();
   },
   onLoad: function (options) {
-    
-    var nowTime = Date.parse(new Date());//当前时间戳
-    var imgnum = Math.floor(Math.random() * app.signindata.imgUrlNum) || 0;
-    console.log('imgnum==============================',imgnum,app.signindata.imgUrlNum)
-    var imgUrl = 'https://cdn.51chaidan.com/images/openscreen/openscreen'+imgnum+'.jpg?time=' + nowTime;
-
-    // var imgUrl = 'https://cdn.51chaidan.com/images/openscreen/openscreen.jpg?time=' + nowTime;
-
     var _this = this;
-    _this.setData({
-      imgUrl: imgUrl
-    });
+    wx.request({
+      url: 'http://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/openScreen.json',
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        if(res.data && res.data.List && res.data.List.openscreen){
+          var openscreen = res.data.List.openscreen || [];
+          var imgnum = Math.floor(Math.random() * openscreen.length) || 0;
+          var nowTime = Date.parse(new Date());//当前时间戳
+          if(openscreen[imgnum]){
+            var imgUrl = openscreen[imgnum]+'?time=' + nowTime;
+            app.signindata.tgaimg = imgUrl;
+            console.log('首页开机图片===========', res,imgnum,imgUrl)
+            _this.setData({
+              imgUrl: imgUrl
+            });
+          }
+        };    
+      },
+      fail: function (res) {}
+    }) 
+
     if (options.scene) {
       let scene = decodeURIComponent(options.scene);
       app.signindata.referee = _this.getSearchString('referee', scene) || 0;

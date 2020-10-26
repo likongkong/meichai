@@ -2,16 +2,30 @@ const app = getApp();
 Component({
   properties: {},
   data: {
-    tgaimg: app.signindata.tgaimg||'https://www.51chaidan.com/images/default/openscreen.jpg'
+    tgaimg: ''
   },
   ready:function(){
+    var _this = this;
+    wx.request({
+      url: 'http://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/openScreen.json',
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        if(res.data && res.data.List && res.data.List.openscreen){
+          var openscreen = res.data.List.openscreen || [];
+          var imgnum = Math.floor(Math.random() * openscreen.length) || 0;
+          if(openscreen[imgnum]){
+            var nowTime = Date.parse(new Date());//当前时间戳
+            var imgUrl = openscreen[imgnum]+'?time=' + nowTime;
+            _this.setData({
+              tgaimg: imgUrl
+            });
+          }
+        };    
+      },
+      fail: function (res) {}
+    }) 
 
-    var imgnum = Math.floor(Math.random() * app.signindata.imgUrlNum) || 0;
-    var imgUrl = 'https://cdn.51chaidan.com/images/openscreen/openscreen'+imgnum+'.jpg';
-
-    this.setData({
-      tgaimg: imgUrl || 'https://www.51chaidan.com/images/default/openscreen.jpg'
-    })
   },
   methods: {
     clicktga:function() {
