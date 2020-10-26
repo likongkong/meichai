@@ -104,7 +104,7 @@ Page({
   onLoad: function (options) {
     var _this = this;
     wx.request({
-      url: 'http://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/openScreen.json',
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/openScreen.json',
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
