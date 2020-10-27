@@ -97,6 +97,8 @@ App({
     timer:'',
     // 活动分享朋友圈底部是否显示广告
     is_eveShareAdver:false,
+    indexShareImg:'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+    mergePicImg:'',
     // 抽盒金
     blindboxMoney:0
   },
@@ -999,6 +1001,47 @@ App({
         }
       });
   },
+  // 首页分享和合成图片的banner图
+  indexShareBanner:function(){
+    var _this = this;
+    wx.request({
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/indexResource.json',
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('首页分享和合成图片的banner图',res)
+        if(res.data && res.data.List){
+
+          var nowTime = Date.parse(new Date());//当前时间戳
+          // 首页分享图片
+          var indexShare = res.data.List.indexShare || [];
+          var indexShareNum = Math.floor(Math.random() * indexShare.length) || 0;
+          if(indexShare.length!=0 && indexShare[indexShareNum]){
+            var indexShareImg = indexShare[indexShareNum]+'?time=' + nowTime;
+            _this.signindata.indexShareImg = indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg';
+            console.log('_this.signindata.indexShareImg', _this.signindata.indexShareImg)
+          }else{
+            _this.signindata.indexShareImg = 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
+          };
+
+          // 合成图片的banner图
+          var mergePic = res.data.List.mergePic || [];
+          var mergePicNum = Math.floor(Math.random() * mergePic.length) || 0;
+          if(mergePic.length!=0 && mergePic[mergePicNum]){
+            var mergePicImg = mergePic[mergePicNum]+'?time=' + nowTime;
+            _this.signindata.mergePicImg = mergePicImg || '';
+            _this.signindata.is_eveShareAdver = true;
+            console.log('_this.signindata.mergePicImg', _this.signindata.mergePicImg,_this.signindata.is_eveShareAdver)
+          }else{
+            _this.signindata.is_eveShareAdver = false;
+            _this.signindata.mergePicImg = '';
+          };
+
+        };    
+      },
+      fail: function (res) {}
+    })    
+  }
 })
 
 

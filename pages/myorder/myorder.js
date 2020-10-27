@@ -203,7 +203,7 @@ Page({
     this.datatransfer(); 
     // 调取收货地址
     // _this.nextpagediao();
-    setTimeout(function () { _this.otherdata()},1000)
+    setTimeout(function () { _this.otherdata(); app.indexShareBanner()},1000)
  
     if (app.signindata.isAwardOrder) {
       _this.setData({ isAwardOrder: app.signindata.isAwardOrder, awardOrder: app.signindata.awardOrder || false });
@@ -1604,18 +1604,27 @@ Page({
                         ctxt.drawImage(res.path, 17, 180, 285, 151);
 
 
-                        if(app.signindata.is_eveShareAdver){
+                        if(app.signindata.is_eveShareAdver && app.signindata.mergePicImg){
 
 
                             // 渲染广告图片
                             wx.getImageInfo({
-                              src: 'https://cdn.51chaidan.com//images/spread/yiFanShang/1599123436.jpg',
+                              src: app.signindata.mergePicImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
                               success: function (res) {
-                                ctxt.drawImage(res.path, 0, 414, 319, 175)
+                                var ratio = res.width / res.height;   
+                                var viewHeight = (319/ratio)<=175?(319/ratio):175;    
+  
+                                ctxt.drawImage(res.path, 0, 414, 319, viewHeight)
                                 ctxt.draw(true);
                                 ctxt.draw(true, setTimeout(function () {
                                   wx.canvasToTempFilePath({
                                     canvasId: 'myordercanimgser' + cart_idsave,
+                                    x:0,
+                                    y:0,
+                                    width:319,
+                                    height:414+viewHeight,
+                                    destWidth:319*4,
+                                    destHeight:(414+viewHeight)*4,
                                     success: function (res) {
                                       generatePicturesimg['myordercanimgser' + cart_idsave] = res.tempFilePath
                                       _this.setData({
@@ -1783,18 +1792,27 @@ Page({
                       success: function (res) {
                         ctxt.drawImage(res.path, 17, 180, 285, 151);
 
-                        if(app.signindata.is_eveShareAdver){
+                        if(app.signindata.is_eveShareAdver && app.signindata.mergePicImg){
 
 
                           // 渲染广告图片
                           wx.getImageInfo({
-                            src: 'https://cdn.51chaidan.com//images/spread/yiFanShang/1599123436.jpg',
+                            src: app.signindata.mergePicImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
                             success: function (res) {
-                              ctxt.drawImage(res.path, 0, 414, 319, 175)
+                              var ratio = res.width / res.height;   
+                              var viewHeight = (319/ratio)<=175?(319/ratio):175;    
+
+                              ctxt.drawImage(res.path, 0, 414, 319, viewHeight)
                               ctxt.draw(true);
                               ctxt.draw(true, setTimeout(function () {
                                 wx.canvasToTempFilePath({
                                   canvasId: 'myordercanimgser' + cart_idsave,
+                                  x:0,
+                                  y:0,
+                                  width:319,
+                                  height:414+viewHeight,
+                                  destWidth:319*4,
+                                  destHeight:(414+viewHeight)*4,
                                   success: function (res) {
                                     generatePicturesimg['myordercanimgser' + cart_idsave] = res.tempFilePath
                                     _this.setData({
@@ -1989,43 +2007,6 @@ Page({
             src: "https://www.51chaidan.com/images/cast/ca_1.png",
             success: function (res) {
               ctxt.drawImage(res.path, 0, 0, 375, 603);
-
-              if(app.signindata.is_eveShareAdver){
-
-
-                // 渲染广告图片
-                wx.getImageInfo({
-                  src: 'https://cdn.51chaidan.com//images/spread/yiFanShang/1599123436.jpg',
-                  success: function (res) {
-                    ctxt.drawImage(res.path, 0, 414, 319, 175)
-                    ctxt.draw(true);
-                      ctxt.draw(true, setTimeout(function () {
-                        wx.canvasToTempFilePath({
-                          canvasId: 'myordercanimgser' + cart_idsave,
-                          success: function (res) {
-                            generatePicturesimg['myordercanimgser' + cart_idsave] = res.tempFilePath
-                            _this.setData({
-                              actimgshare: res.tempFilePath,
-                              headhidden: true,
-                              generatePicturesimg: generatePicturesimg
-                            });
-                            wx.hideLoading()
-                          },
-                          fail: function (res) {
-                            wx.hideLoading()
-                            app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:01}');
-                            _this.setData({ upserimgbox: false, headhidden: true });
-
-                          },
-                        });
-                      }, 300));
-
-                  },
-                  fail: function () {},
-                });
-
-            }else{
-
               // 第一步 底部背景颜色改变
               ctxt.fillStyle = '#feffff';
               ctxt.fillRect(0, 603, 375, 185);
@@ -2122,7 +2103,6 @@ Page({
                   },
                   fail: function () {},
                 });
-              } 
             },
             fail: function (res) {
               wx.hideLoading()

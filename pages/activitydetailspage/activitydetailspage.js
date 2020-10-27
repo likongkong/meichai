@@ -491,7 +491,7 @@ closefrindcommoni:function(){
       _this.data.exhpage = ++pagenum;
     };
     // 展会
-    var exh = Dec.Aese('mod=show&operation=brandDetail&brandId=' + _this.data.brandId + '&page=' + _this.data.exhpage + '&gid=' + _this.data.gid+ '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
+    var exh = Dec.Aese('mod=show&operation=brandDetail&brandId=' + _this.data.brandId + '&page=' + _this.data.exhpage + '&gid=' + _this.data.gid+ '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid+'&dataType='+_this.data.is_exhibition);
     wx.request({
       url: app.signindata.comurl + 'toy.php' + exh,
       method: 'GET',
@@ -1625,6 +1625,8 @@ closefrindcommoni:function(){
       Dec.dryingSum(_this, app.signindata.clwcomurl);
       // 调取收货地址
       _this.nextpagediao();
+      // 分享和生成图片底部广告
+      app.indexShareBanner();
     },1000);
   },
   //时间戳转换时间  
@@ -3982,19 +3984,31 @@ closefrindcommoni:function(){
                         ctxt.drawImage(res.path, 17, 180, 285, 151);
 
 
-                        if(app.signindata.is_eveShareAdver){
+                        if(app.signindata.is_eveShareAdver && app.signindata.mergePicImg){
 
 
                           // 渲染广告图片
                           wx.getImageInfo({
-                            src: 'https://cdn.51chaidan.com//images/spread/yiFanShang/1599123436.jpg',
+                            src: app.signindata.mergePicImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
                             success: function (res) {
-                              ctxt.drawImage(res.path, 0, 414, 319, 175)
+                              console.log('渲染广告图片',res)
+
+                              var ratio = res.width / res.height;   
+                              var viewHeight = (319/ratio)<=175?(319/ratio):175;    
+
+                              ctxt.drawImage(res.path, 0, 414, 319, viewHeight)
                               ctxt.draw(true);
                               ctxt.draw(true, setTimeout(function () {
                                 wx.canvasToTempFilePath({
                                   canvasId: 'myordercanimgser',
+                                  x:0,
+                                  y:0,
+                                  width:319,
+                                  height:414+viewHeight,
+                                  destWidth:319*4,
+                                  destHeight:(414+viewHeight)*4,
                                   success: function (res) {
+                                    console.log(414+viewHeight,res,'切割图片生成')
                                     _this.setData({
                                       actimgshareWinningtheprize: res.tempFilePath,
                                       headhidden: true
@@ -4149,18 +4163,28 @@ closefrindcommoni:function(){
                         ctxt.drawImage(res.path, 17, 180, 285, 151);
 
 
-                        if(app.signindata.is_eveShareAdver){
+                        if(app.signindata.is_eveShareAdver && app.signindata.mergePicImg){
 
 
                           // 渲染广告图片
                           wx.getImageInfo({
-                            src: 'https://cdn.51chaidan.com//images/spread/yiFanShang/1599123436.jpg',
+                            src: app.signindata.mergePicImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
                             success: function (res) {
-                              ctxt.drawImage(res.path, 0, 414, 319, 175)
+                              
+                              var ratio = res.width / res.height;   
+                              var viewHeight = (319/ratio)<=175?(319/ratio):175;    
+
+                              ctxt.drawImage(res.path, 0, 414, 319, viewHeight)
                               ctxt.draw(true);
                               ctxt.draw(true, setTimeout(function () {
                                 wx.canvasToTempFilePath({
                                   canvasId: 'myordercanimgser',
+                                  x:0,
+                                  y:0,
+                                  width:319,
+                                  height:414+viewHeight,
+                                  destWidth:319*4,
+                                  destHeight:(414+viewHeight)*4,
                                   success: function (res) {
                                     _this.setData({
                                       actimgshareWinningtheprize: res.tempFilePath,

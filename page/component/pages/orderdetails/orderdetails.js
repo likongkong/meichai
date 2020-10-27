@@ -1260,14 +1260,16 @@ Page({
                     ctxt.drawImage(res.path, 129.5, 340, 60, 60);
                     // ctxt.draw(true);
 
-                    if(app.signindata.is_eveShareAdver){
-
+                    if(app.signindata.is_eveShareAdver && app.signindata.mergePicImg){
 
                       // 渲染广告图片
                       wx.getImageInfo({
-                        src: 'https://cdn.51chaidan.com//images/spread/yiFanShang/1599123436.jpg',
+                        src: app.signindata.mergePicImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
                         success: function (res) {
-                          ctxt.drawImage(res.path, 0, 414, 319, 175)
+                          var ratio = res.width / res.height;   
+                          var viewHeight = (319/ratio)<=175?(319/ratio):175;    
+
+                          ctxt.drawImage(res.path, 0, 414, 319, viewHeight)
                           ctxt.draw(true);
                           wx.getImageInfo({
                             src: cover, // banner 图片 
@@ -1276,6 +1278,12 @@ Page({
                               ctxt.draw(true, setTimeout(function () {
                                 wx.canvasToTempFilePath({
                                   canvasId: 'myordercanimgser',
+                                  x:0,
+                                  y:0,
+                                  width:319,
+                                  height:414+viewHeight,
+                                  destWidth:319*4,
+                                  destHeight:(414+viewHeight)*4,
                                   success: function (res) {
                                     _this.setData({
                                       actimgshare: res.tempFilePath,
@@ -1451,14 +1459,18 @@ Page({
                     ctxt.drawImage(res.path, 129.5, 340, 60, 60);
                     // ctxt.draw(true);
 
-                    if(app.signindata.is_eveShareAdver){
+                    if(app.signindata.is_eveShareAdver && app.signindata.mergePicImg){
 
 
                       // 渲染广告图片
                       wx.getImageInfo({
-                        src: 'https://cdn.51chaidan.com//images/spread/yiFanShang/1599123436.jpg',
+                        src: app.signindata.mergePicImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
                         success: function (res) {
-                          ctxt.drawImage(res.path, 0, 414, 319, 175)
+
+                          var ratio = res.width / res.height;   
+                          var viewHeight = (319/ratio)<=175?(319/ratio):175;    
+
+                          ctxt.drawImage(res.path, 0, 414, 319, viewHeight)
                           ctxt.draw(true);
                           wx.getImageInfo({
                             src: cover, // banner 图片 
@@ -1467,6 +1479,12 @@ Page({
                               ctxt.draw(true, setTimeout(function () {
                                 wx.canvasToTempFilePath({
                                   canvasId: 'myordercanimgser',
+                                  x:0,
+                                  y:0,
+                                  width:319,
+                                  height:414+viewHeight,
+                                  destWidth:319*4,
+                                  destHeight:(414+viewHeight)*4,
                                   success: function (res) {
                                     _this.setData({
                                       actimgshare: res.tempFilePath,

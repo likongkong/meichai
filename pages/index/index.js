@@ -522,6 +522,7 @@ Page({
     _this.obtaintabfun(); 
     setTimeout(function(){
       _this.otherdata();
+      app.indexShareBanner()
     },1000);
     if (app.signindata.isAwardOrder) {
       _this.setData({ isAwardOrder: app.signindata.isAwardOrder, awardOrder: app.signindata.awardOrder || false });
@@ -1021,8 +1022,12 @@ Page({
    */
   onShareAppMessage: function (options) {
     var _this = this;
-    var reshare = Dec.sharemc();
-    return reshare
+    return {
+      title: '潮玩社交平台',
+      path: 'pages/index/index',
+      imageUrl:app.signindata.indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      success: function (res) {}
+    }  
   },
   scroll:function(){},
   //回到顶部
