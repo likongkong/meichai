@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '一番赏', 
+    c_title: '万圣节活动', 
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
