@@ -1,6 +1,10 @@
 {
-  "navigationBarTitleText": "修改昵称",
+  "asdfasfdflePullDownRefresh": true,
+  "enablePullDownRefresh": true,  
+  "navigationBarTitleText": "万圣节活动",
     "usingComponents": {
+      "bnavigation": "../bottomComponent/bottomComponent",
+      "tga_c": "../tgacomponent/tgacomponent",
       "t_f": "../topfunction/topfunction"
     }
 }

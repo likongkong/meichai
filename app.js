@@ -155,7 +155,7 @@ App({
 
                   _this.signindata.loginid = res.data.Info.loginid || '';
                   _this.signindata.uid = res.data.Info.uid || '';
-                  
+
                   console.log('app===sigin',_this.signindata.comurl,_this.signindata.clwcomurl,Dec.versionnumber)
 
                   _this.signindata.isNewer = res.data.Info.isNewer || false;
@@ -411,6 +411,7 @@ App({
   // 41  抽盒机红包进入
   // 42  展会列表
   // 43 一番赏
+  // 44 万圣节活动
   userstatistics: function (num) {
     var _this = this;
     var num = num || 0
@@ -1048,7 +1049,7 @@ App({
 //  index 首页
 //  wode 我的
 //  personaldata 个人资料
-//  modifythenickname 修改昵称
+//  modifythenickname 万圣活动
 //  information  消息中心
 //  addressmanagement  收货地址
 //  orderdetails  订单详情

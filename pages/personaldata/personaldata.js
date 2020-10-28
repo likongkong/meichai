@@ -177,13 +177,7 @@ Page({
       // 性别弹框
       sextip: false
     })
-  },    
-  // 跳转修改昵称页面
-  modifythenickname:function(){
-    wx.navigateTo({ 
-      url: "/pages/modifythenickname/modifythenickname"
-    })
-  },
+  }, 
   /**
    * 生命周期函数--监听页面加载
    */

@@ -2,7 +2,7 @@
     <view class='tgaboxtbg' style='position:relative;'><button class='tgaboxtgawchbochlibutboxtwo' open-type="getUserInfo" type='primary' bindgetuserinfo="userInfoHandler"></button></view>
     <view class='tgaboxclick'>
           <!-- https://www.51chaidan.com/images/default/unauthorized.jpg -->
-          <image mode='aspectFit' src='{{tgaimg}}?log={{appNowTime}}' class='tgaboxclickbgImg'><button class='tgaboxtgawchbochlibutboxtwo' open-type="getUserInfo" type='primary' bindgetuserinfo="userInfoHandler"></button></image>
+          <image mode='aspectFit' wx:if='{{tgaimg}}' src='{{tgaimg}}?log={{appNowTime}}' class='tgaboxclickbgImg'><button class='tgaboxtgawchbochlibutboxtwo' open-type="getUserInfo" type='primary' bindgetuserinfo="userInfoHandler"></button></image>
           <view class='tgauthbutbox'>
               <view style='height:50rpx;line-height:50rpx;width:130rpx;text-align:center;font-size:24rpx;color:#fff;border-radius:50rpx;position: absolute;left:0;right:0;bottom:-160rpx;margin:auto;z-index:20;'  catchtap='tgatipnone'>取消</view>
               <view style='height:70rpx;line-height:70rpx;width:500rpx;text-align:center;font-size:24rpx;color:#fff;border-radius:50rpx;background:#3d7dfc;position:relative;margin-right:80rpx;margin:auto;'><button class='tgaboxtgawchbochlibutboxtwo' open-type="getUserInfo" type='primary' bindgetuserinfo="userInfoHandler"></button>授权登录</view>

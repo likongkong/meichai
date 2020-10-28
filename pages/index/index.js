@@ -223,7 +223,7 @@ Page({
       // url: "/page/component/pages/drivetohidelist/drivetohidelist"
       // url: "/pages/activitydetailspage/activitydetailspage?id=18376"
       // url: "/pages/activitydetailspage/activitydetailspage?id=18185"
-      url: "/page/component/pages/limitlottery/limitlottery?id=201425",
+      // url: "/page/component/pages/limitlottery/limitlottery?id=201425",
       // url: "/page/component/pages/drivetohidehome/drivetohidehome"
       // url: "/page/component/pages/exhibition/exhibition"
       // url: "/page/component/pages/exhibitiondetail/exhibitiondetail?id=43161"
@@ -239,6 +239,7 @@ Page({
       // url: "/pages/shopsquare/shopsquare"
       // url: "/pages/dismantlingbox/dismantlingbox"
       // url: "/page/secondpackge/pages/shopsquaretrip/shopsquaretrip"
+      url: "/pages/modifythenickname/modifythenickname"
       
     });
   },
