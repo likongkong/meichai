@@ -3,6 +3,7 @@
   "enablePullDownRefresh": true,
   "navigationBarTitleText": "发布抽签",
   "usingComponents": {
+    "h_p": "../../../../pages/halloweenparty/halloweenparty",
     "t_f": "../../../../pages/topfunction/topfunction"
   }
 }

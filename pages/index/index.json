@@ -6,6 +6,7 @@
     "hidewindow": "../../../../pages/hidewindow/hidewindow",
     "add-tips": "../weplug-add-tips/index",
     "t_f": "../topfunction/topfunction",
+    "h_p": "../halloweenparty/halloweenparty",
     "tga_c": "../tgacomponent/tgacomponent",
     "bnavigation": "../bottomComponent/bottomComponent"
   }

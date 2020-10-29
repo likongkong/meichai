@@ -6,6 +6,7 @@
     "bnavigation": "../bottomComponent/bottomComponent",
     "hidewindow": "../../../../pages/hidewindow/hidewindow",
     "t_f": "../topfunction/topfunction",
+    "h_p": "../halloweenparty/halloweenparty",
     "somke": "/pages/smokeComponent/smokeComponent"
   }
 }

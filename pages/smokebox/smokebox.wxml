@@ -1,5 +1,5 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}' is_share='{{is_share}}'></t_f>
-
+<h_p id="h_p"></h_p>
 <!--  html页面转换  -->
 <import src="../../wxParse/wxParse.wxml" />
 
@@ -32,7 +32,7 @@
 				</view>
 			</view>
 		</scroll-view>
-
+ 
 		<view wx:else style='width:100%;white-space:nowrap;height:90rpx;'></view>
 
 		<view style='font-size:25rpx;line-height:25rpx;margin-left:10rpx;'>
@@ -463,7 +463,7 @@
 				</view>
 
 			</view>
-			<view id='exh2'>
+			<view id='exh2' style="padding:20rpx 0;">
 				<!--  商品详情图片 转换HTML标签  -->
 				<view class='detailimg'>
 					<template is="wxParse" data="{{wxParseData:article.nodes}}" />

@@ -3,6 +3,8 @@
 <!-- 授权弹框 -->
 <tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
 
+<h_p id="h_p"></h_p>
+
 <!-- 商品弹框 -->
 <view class='indexelafra' wx:if='{{indexelafra&&index_ela_fra}}' catchtouchmove="true">
 	<view class='tgawback' style='position: relative;' catchtap='indexelafrafun'>
@@ -71,9 +73,9 @@
 	</view>
 
 	<!--  测试  -->
-	<view style='height:220rpx;width:100%;text-align:center; display: table;position: relative;' class='rotate' catchtap='jumpxinxi'>
+	<!-- <view style='height:220rpx;width:100%;text-align:center; display: table;position: relative;' class='rotate' catchtap='jumpxinxi'>
 		<text style='display: table-cell;vertical-align:middle;text-align:center;'>转盘\n盘转</text>
-	</view>
+	</view> -->
 	<!--   数据  -->
 
 	<!--  信息流  -->
@@ -853,11 +855,10 @@
 
 <!-- 双十一 入口  automat.isOpen-->
 <view wx:if='{{false}}' catchtap='doubleEleven' style='width:95rpx;position:fixed;right:10rpx;bottom:260rpx;z-index:9;'>
-	<image src='https://www.51chaidan.com/images/turntable/turntable_colour.png' style='width:75rpx;height:75rpx;display:block;margin-left:10rpx;'></image>
-	<view wx:if='{{automatTimes>0}}' class='tabshopimg specialellipsis' style='top:-10rpx;;left:50rpx;'>{{automatTimes}}</view>
+	<image mode="aspectFit" src='https://www.51chaidan.com/images/turntable/turntable_colour.png' style='width:75rpx;height:75rpx;display:block;margin-left:10rpx;'></image>
 	<view style="width:95rpx;height:30rpx;position:relative;font-size:22rpx;">
 		<view style="width:95rpx;height:30rpx;background:#000;position:absolute;top:0;left:0;opacity:0.4;border-radius:5rpx;"></view>
-		<view style="width:95rpx;height:30rpx;position:absolute;top:0;left:0;color:#e94f57;text-align:center;font-weight:bold;">{{automattitle}}</view>
+		<view style="width:95rpx;height:30rpx;position:absolute;top:0;left:0;color:#e94f57;text-align:center;font-weight:bold;">南瓜{{halloweenScore}}</view>
 	</view>
 </view>
 

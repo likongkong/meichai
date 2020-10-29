@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "收货地址",
   "usingComponents": {
+    "h_p": "../halloweenparty/halloweenparty",
     "t_f": "../topfunction/topfunction"
   }
 }

@@ -100,7 +100,10 @@ App({
     indexShareImg:'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
     mergePicImg:'',
     // 抽盒金
-    blindboxMoney:0
+    blindboxMoney:0,
+    // 是否显示万圣节悬浮标签
+    isHalloween:1603878181<Date.parse(new Date())/1000&&Date.parse(new Date())/1000<1604246399?true:false,
+    halloweenScore:0
   },
   //一番赏队列倒计时
   // yifanshangIsInQueueFun(time){
@@ -174,6 +177,8 @@ App({
                   _this.signindata.index_ela_fra = true;
                   _this.signindata.isProduce = res.data.Info.isProduce || false;
 
+                  // 万圣节南瓜个数
+                  _this.signindata.halloweenScore = res.data.Info.score || 0;
                   // 是否是地域黑模式
                   _this.signindata.isHellBlackUser = res.data.Info.isHellBlackUser || false;
                   // 是否开启展会 
@@ -1043,6 +1048,7 @@ App({
       fail: function (res) {}
     })    
   }
+
 })
 
 
@@ -1126,3 +1132,5 @@ App({
 // aRewardList    一番赏详情页
 // aRewardDetails 一番赏详情
 // aRewardHistory 一番赏历史
+
+// halloweenparty 万圣节活动组件

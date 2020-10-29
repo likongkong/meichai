@@ -2,6 +2,7 @@
   "navigationBarTitleText": "",
   "navigationBarBackgroundColor": "#5b94fd",
   "usingComponents": {
+    "h_p": "../../../../pages/halloweenparty/halloweenparty",
     "t_f": "../../../../pages/topfunction/topfunction"
   }
 }

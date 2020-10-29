@@ -1,7 +1,7 @@
 <!--pages/wei3d/index.wxml-->
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}' txtcolor='{{txtcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
-
+<h_p></h_p>
 <!-- <view>
   <switch checked bindchange="switchChange"/>
   <text>{{autorotation?'关闭':'打开'}}</text>

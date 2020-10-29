@@ -1,6 +1,4 @@
-<!-- <loading hidden="{{headhidden}}">
-    加载中...
-</loading>   -->
+<h_p></h_p>
 
     <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
     <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>

@@ -1214,6 +1214,8 @@ Page({
               var cart_id = _this.data.cart_id || '0';
               setTimeout(function(){
                 _this.shopdetail()
+                _this.selectComponent('#h_p').indexShareBanner();
+
               },1000);
               app.showToastC('购买成功');
             },

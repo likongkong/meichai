@@ -2,6 +2,7 @@
   "navigationBarTitleText": "收货地址",
   "usingComponents": {
     "hidewindow": "../../../../pages/hidewindow/hidewindow",
+    "h_p": "../halloweenparty/halloweenparty",
     "t_f": "../topfunction/topfunction"
   }
 }

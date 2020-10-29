@@ -5,6 +5,7 @@
   "usingComponents": {
     "hidewindow": "../../../../pages/hidewindow/hidewindow",
     "bnavigation": "/pages/bottomComponent/bottomComponent",
+    "h_p": "../../../../pages/halloweenparty/halloweenparty",
     "t_f": "../../../../pages/topfunction/topfunction"
   }
 }

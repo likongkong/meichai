@@ -1413,6 +1413,8 @@ Page({
                   url: "/page/component/pages/hidefun/hidefun?type=1&cart_id=" + cart_id
                 });
               }
+              _this.selectComponent('#h_p').indexShareBanner();
+
             },
             'fail': function (res) {
               _this.setData({

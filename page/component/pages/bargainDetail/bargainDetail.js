@@ -375,6 +375,9 @@ Page({
                     url: "../hidefun/hidefun?type=1&cart_id=" + payinfo.cart_id
                   });
                 }
+
+                _this.selectComponent('#h_p').indexShareBanner();
+                
               },
               'fail': function(res) {},
               'complete': function(res) {
