@@ -196,7 +196,7 @@ page{
 }
 .selfPumpkinWrap view{
   display: block;
-  font-size: 22rpx;
+  font-size: 26rpx;
   font-weight: bold;
   text-align: center;
 }
@@ -213,7 +213,7 @@ page{
 .refresh{
   color: #615d54;
   /* text-decoration:underline; */
-  margin-top: 4rpx;
+  margin-top:10rpx;
 }
 .threePumpkin{
   display: flex;
@@ -289,7 +289,7 @@ page{
 .smallPrizeRank>view{
   display: flex;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
 }
 .smallPrizeRank image{
   width: 50rpx;
@@ -303,16 +303,19 @@ page{
   font-weight: bold;
 }
 .smallPrizeRank .place{
-  width: 100rpx;
+  width: 50rpx;
+  margin-left: 20rpx;
 }
 .smallPrizeRank .name{
   width: 200rpx;
+  margin-left: 34rpx;
 }
 .smallPrizeRank .pumpkinNum{
-  width: 154rpx;
+  width: 150rpx;
+  margin-left: 34rpx;
 }
 .smallPrizeRank .award{
-  width: 154rpx;
+  width: 50rpx;
 }
 .smallPrizeRank .award>view{
   width: 40rpx;
@@ -369,6 +372,10 @@ page{
   line-height: 60rpx; 
   font-size: 30rpx;
   float: right; 
+  background-color: transparent;
+}
+.punchBottomtxt::after{
+  border: none;
 }
 .punchBotImgBox{
   height: 60rpx;
@@ -472,18 +479,35 @@ page{
 }
 .sharePopupContent view{
   display: flex;
-  height: 50rpx;
+  height: 60rpx;
   justify-content: center;
   align-items: center;
 }
 .sharePopupContent text{
   display: block;
-  font-size: 24rpx;
+  font-size: 30rpx;
 }
 .sharePopupContent image{
   width: 30rpx;
   display: block;
   height: auto;
+}
+.sharePopupshare{
+  font-size: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 2rpx solid #dfdfdf;
+  border-radius: 0;
+  height: 80rpx;
+}
+.sharePopupshare::after{
+  border: none;
+}
+.sharePopupshare image{
+  width: 30rpx;
+  display: block;
+  margin-top: 4rpx;
 }
 .invitefriend{
   width: 100%;
@@ -491,11 +515,12 @@ page{
   display: flex;
   justify-content: center;
   align-items: center;
-  border-top: 2rpx solid #615d54;
+  border-top: 2rpx solid #f8f8f8;
 }
 .invitefriend text{
   display: inline-block;
   vertical-align: middle;
+  font-size: 24rpx;
 }
 .invitefriend image{
   width: 30rpx;

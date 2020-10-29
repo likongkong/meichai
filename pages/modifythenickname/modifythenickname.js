@@ -280,6 +280,10 @@ Page({
 
   // },
 
+  refresh(){
+    this.getDate()
+  },
+
   clicktganone: function () {
     this.setData({ tgabox: false })
   }, 
