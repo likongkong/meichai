@@ -1,6 +1,6 @@
 <hidewindow id='hide'></hidewindow>
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
-
+<h_p></h_p>
 <view style="width:100%;padding-bottom:110rpx;{{awatip?'position:fixed;top:0;left:0;right:0;bottom:0;':''}}">
     <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
     <view style='width:100%;'>

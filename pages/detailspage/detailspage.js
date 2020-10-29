@@ -840,6 +840,8 @@ Page({
                       app.comsubscribe(_this);
                     };
                     
+                    _this.selectComponent('#h_p').indexShareBanner();
+
                     if (payinfo.isFreeBuyOrder) {
                       wx.navigateTo({
                         url: "/page/component/pages/hidefun/hidefun?type=1&cart_id=" + _this.data.cart_id

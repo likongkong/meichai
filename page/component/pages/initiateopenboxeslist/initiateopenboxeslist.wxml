@@ -1,6 +1,6 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
-
+<h_p></h_p>
 <view style='width:0;height:0;overflow:hidden;position:absolute;top:-1000px;' wx:for='{{listdata}}' wx:key='key' wx:if='{{item.open==1}}'>
   <!-- <view style='width:100%;height:240px;background:#888;display:flex;justify-content:center;align-items:center;position:absolute;z-index:100;'> -->
   <canvas canvas-id='snapshot{{item.activity_id}}' style='width:300px;height:240px;'></canvas>

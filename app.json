@@ -30,6 +30,7 @@
     "pages/hidewindow/hidewindow",
     "pages/bottomComponent/bottomComponent",
     "pages/shopsquare/shopsquare",
+    "pages/halloweenparty/halloweenparty",
     "pages/smokeComponent/smokeComponent"
   ],
   "subPackages": [

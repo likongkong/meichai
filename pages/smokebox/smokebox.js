@@ -738,6 +738,9 @@ Page({
 
 
           var l = res.data.List.employ.concat(res.data.List.queue);
+          if(l&&l.length!=0){
+            l = _this.distinct(l)
+          };
           _this.setData({ queueList: l })
 
           // 是否调取展会数据
@@ -868,7 +871,20 @@ Page({
     })
   },
 
-
+  //  数组去重
+  distinct:function(arr){
+    var arr = arr,i,j,len = arr.length;
+    for(i = 0; i < len; i++){
+        for(j = i + 1; j < len; j++){
+          if (arr[i].headphoto == arr[j].headphoto){
+              arr.splice(j,1);
+              len--;
+              j--;
+          }
+        }
+    }
+    return arr;
+  },
 
   reset: function () {
     var _this = this
@@ -1551,6 +1567,7 @@ Page({
           }else{
             _this.data.thePreviousSelOrder = false;
           };
+          console.log('提交订单===========',res)
           _this.setData({
             suboformola: false,
             cart_id: res.data.Info.cart_id,
@@ -1739,6 +1756,8 @@ Page({
                   //   _this.getInfo()
                   // }, 3000)
                 }
+                _this.selectComponent('#h_p').indexShareBanner();
+
               }, 1000);
 
             },

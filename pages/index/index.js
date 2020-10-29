@@ -238,8 +238,8 @@ Page({
       // url: "/page/component/pages/hidefun/hidefun"
       // url: "/pages/shopsquare/shopsquare"
       // url: "/pages/dismantlingbox/dismantlingbox"
-      // url: "/page/secondpackge/pages/shopsquaretrip/shopsquaretrip"
-      url: "/pages/modifythenickname/modifythenickname"
+      url: "/page/secondpackge/pages/shopsquaretrip/shopsquaretrip"
+      // url: "/pages/modifythenickname/modifythenickname"
       
     });
   },
@@ -523,7 +523,8 @@ Page({
     _this.obtaintabfun(); 
     setTimeout(function(){
       _this.otherdata();
-      app.indexShareBanner()
+      app.indexShareBanner();
+      _this.selectComponent('#h_p').indexShareBanner();
     },1000);
     if (app.signindata.isAwardOrder) {
       _this.setData({ isAwardOrder: app.signindata.isAwardOrder, awardOrder: app.signindata.awardOrder || false });

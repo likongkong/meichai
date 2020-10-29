@@ -860,6 +860,8 @@ Page({
               _this.onLoadfun();
               // 订阅授权
               app.comsubscribe(_this);
+
+              _this.selectComponent('#h_p').indexShareBanner();
             },
             'fail': function (res) { 
               _this.setData({

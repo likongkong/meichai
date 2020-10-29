@@ -1235,6 +1235,8 @@ Page({
               wx.navigateTo({
                 url: "/page/component/pages/initiateopenboxeslist/initiateopenboxeslist"
               });
+
+              _this.selectComponent('#h_p').indexShareBanner();
             },
             'fail': function(res) {
               _this.setData({

@@ -3,6 +3,7 @@
   "enablePullDownRefresh": true,  
   "navigationBarTitleText": "",
   "usingComponents": {
+    "h_p": "../../../../pages/halloweenparty/halloweenparty",
     "t_f": "../../../../pages/topfunction/topfunction"
   }
 }

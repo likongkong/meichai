@@ -436,7 +436,7 @@ Page({
     var official = w.currentTarget.dataset.official;
     var isdirectshipping = w.currentTarget.dataset.isdirectshipping;
     var isnoautomat = w.currentTarget.dataset.isnoautomat;
-    
+     
     var appid = w.currentTarget.dataset.appid;
     if (gid && gid != 0 && typeof(gid) != "undefined") {
       if (official){

@@ -910,6 +910,8 @@ Page({
                     _this.queuefun(2,4)
                     // 订阅授权
                     // app.comsubscribe(_this);
+                    _this.selectComponent('#h_p').indexShareBanner();
+
                   },
                   'fail':function(res){},
                   'complete': function (res) {}

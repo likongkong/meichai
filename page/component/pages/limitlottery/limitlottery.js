@@ -1702,6 +1702,8 @@ Page({
               } else {
                 app.showToastC('购买成功');
               }
+              _this.selectComponent('#h_p').indexShareBanner();
+
             },
             'fail': function (res) {
               _this.setData({

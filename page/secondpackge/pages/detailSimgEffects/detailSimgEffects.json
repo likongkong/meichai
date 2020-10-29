@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "t_f": "../../../../pages/topfunction/topfunction",
+    "h_p": "../../../../pages/halloweenparty/halloweenparty",
     "tga_c": "../../../../pages/tgacomponent/tgacomponent"
   }
 }

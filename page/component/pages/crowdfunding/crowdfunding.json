@@ -7,6 +7,7 @@
     "t_f": "../../../../pages/topfunction/topfunction",
     "bnavigation": "/pages/bottomComponent/bottomComponent",
     "poster": "/pages/wxa_plugin_canvas/poster/index",
+    "h_p": "../../../../pages/halloweenparty/halloweenparty",
     "tga_c": "../../../../pages/tgacomponent/tgacomponent"
   }
 }

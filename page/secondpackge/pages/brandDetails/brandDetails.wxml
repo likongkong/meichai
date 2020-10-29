@@ -1,7 +1,7 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc-44}}px;'></view>
 <view style='width:100%;height:{{statusBarHeightMc-44}}px;background:#ff2742;position:fixed;top:0;left:0;z-index:100;'></view>
-
+<h_p></h_p>
 <view style='width:100%;overflow:hidden;'>
 
 	<swiper style="width:100%;height:400rpx;background:#fff;" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">

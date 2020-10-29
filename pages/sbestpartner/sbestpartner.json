@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "最佳合伙人",
     "usingComponents": {
+      "h_p": "../halloweenparty/halloweenparty",
       "t_f": "../topfunction/topfunction"
     }
 }
