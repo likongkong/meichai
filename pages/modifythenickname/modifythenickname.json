@@ -1,6 +1,6 @@
 {
   "asdfasfdflePullDownRefresh": true,
-  "enablePullDownRefresh": true,  
+  "enablePullDownRefresh": false,  
   "navigationBarTitleText": "万圣节活动",
     "usingComponents": {
       "bnavigation": "../bottomComponent/bottomComponent",

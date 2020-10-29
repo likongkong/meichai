@@ -1,6 +1,135 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
+<!-- <view class="wrap"> 
+  <view class="tabWrap" style="top:{{statusBarHeightMc}}px;">
+    <block wx:for="{{datetimeAll}}" wx:key="key">
+      <text class="{{dateTime==index?'active':''}}" catchtap="tabBtnFun" data-dateTime="{{index}}">{{item}}</text>
+    </block>
+  </view>
+  <view class="contentWrap" style="margin-top:100rpx">
+    <block wx:for="{{rank[dateTime]}}" wx:key="key">
+      <view class="userInfoWrap">
+        <view class="ranking">{{item.rank}}</view>
+        <view class="userInfoContent">
+          <view>
+            <image class="toux" src="{{item.headphoto}}" mode="aspectFill"></image>
+            <text>{{item.nick}}</text>
+          </view>
+          <view>
+            <image class="pumpkin" src="{{item.img}}" mode="widthFix"></image>
+            <text>{{item.num}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+  
+    <view wx:if="{{rank[dateTime]==0}}" class="nodata">
+      <image src="../images/recaddnodata.png" mode="widthFix"></image>
+    </view>
+  </view>
+</view> -->
+
+
+
+
+<view class="wrap">
+  <view class="countdownWrap">
+    <image src="http://www.51chaidan.com/images/sign/2020wsj/ws_1.jpg" mode="widthFix"></image>
+    <view class="countdownToday">
+      <text>
+        {{todaycountdown}}
+      </text>
+    </view>
+  </view>
+  <view class="contentWrap">
+    <view class="treeWrap">
+      <image class="tree" src="http://www.51chaidan.com/images/sign/2020wsj/ws_2.png" mode="widthFix"></image>
+    </view>
+    <view class="rankWrap">
+      <view class="rankBoxWrap">
+        <view class="dateTimeRank"> 
+          <block wx:for="{{datetimeAll}}" wx:key="key">
+            <text class="{{dateTime==index?'active':''}}" catchtap="tabBtnFun" data-dateTime="{{index}}">{{item}}</text>
+          </block>
+        </view>
+        <block>
+          <view class="rankBoxInWrap" wx:if="{{rank[dateTime].length!=0}}"> 
+            <view class="titleIconWrap">
+              <image class="titleIcon" src="http://www.51chaidan.com/images/sign/2020wsj/ws_3.png" mode="widthFix"></image>
+            </view>
+            <view class="selfPumpkinWrap"> 
+              <view class="selfPumpkinNum">我的南瓜数：9 <text catchtap="showSharePopup">如何获得?</text> </view>
+              <view class="refresh">每5分钟自动刷新</view>
+            </view>
+            <view class="threePumpkin">
+              <image class="threePumpkinIcon" src="http://www.51chaidan.com/images/sign/2020wsj/ws_4.png" mode="widthFix"></image>
+            </view>
+            <view class="topThreeWrap">
+              <view>
+                <image class="topThreeHeadphoto" src="{{rank[dateTime][1].headphoto}}" mode="aspectFill"></image>
+                <text>{{rank[dateTime][1].nick}}</text>
+                <view class="topThreeAward">
+                  <image src="{{rank[dateTime][1].img}}" mode="aspectFill"></image>
+                </view>
+              </view>
+              <view class="first">
+                <image class="topThreeHeadphoto" src="{{rank[dateTime][0].headphoto}}" mode="aspectFill"></image>
+                <text>{{rank[dateTime][0].nick}}</text>
+                <view class="topThreeAward">
+                  <image src="{{rank[dateTime][0].img}}" mode="aspectFill"></image>
+                </view>
+              </view>
+              <view>
+                <image class="topThreeHeadphoto" src="{{rank[dateTime][2].headphoto}}" mode="aspectFill"></image>
+                <text>{{rank[dateTime][2].nick}}</text>
+                <view class="topThreeAward">
+                  <image src="{{rank[dateTime][2].img}}" mode="aspectFill"></image>
+                </view>
+              </view>
+            </view>
+            <view class="smallPrizeWrap">
+              <image class="smallPrizeTitleIcon" src="http://www.51chaidan.com/images/sign/2020wsj/ws_5.png?20201029" mode="widthFix"></image>
+              <view class="smallPrizeRankWrap">
+                <view wx:if="{{rank[dateTime].length < 4}}">
+                  <view class="nodata">暂无榜单</view>
+                </view>
+                <view wx:else>
+                  <block wx:for="{{rank[dateTime]}}" wx:key="key">
+                    <view wx:if="{{item.rank > 3}}" class="smallPrizeRank">
+                      <view class="place">
+                        <text>{{item.rank}}</text>
+                      </view>
+                      <view class="name">
+                        <image class="marginR" src="{{item.headphoto}}" mode="aspectFill"></image>
+                        <text>{{item.nick}}</text>
+                      </view>
+                      <view class="pumpkinNum">
+                        <image class="marginR" src="http://www.51chaidan.com/images/sign/2020wsj/ws_6.png" mode="aspectFill"></image>
+                        <text>{{item.num}}</text>
+                      </view>
+                      <view class="award">
+                        <view>
+                          <image class="marginR" src="{{item.img}}" mode="aspectFill"></image>
+                        </view>
+                      </view>
+                    </view>
+                  </block>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="rankBoxInWrap" wx:else>
+            <view class="nodata">暂无榜单</view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+  <view class="activityRrulesWrap">
+    <image src="http://www.51chaidan.com/images/sign/2020wsj/ws_7.jpg" mode="widthFix"></image>
+  </view>
+</view>
 
 
 
@@ -8,21 +137,62 @@
 
 
 
+<view class="sharePopup" wx:if="{{issharePopup}}">
+  <view class="sharePopupMask" catchtap="showSharePopup"></view>
+  <view class="sharePopupBox">
+     <view class="sharePopupTitle"> <text>每消费1元可获得</text> <image src="http://www.51chaidan.com/images/sign/2020wsj/ws_6.png" mode="widthFix"></image> <text>x10</text> </view>
+     <view class="sharePopupContent">
+        <view>
+          <text>去抽盒机</text>
+          <image src="http://www.51chaidan.com/images/sign/2020wsj/tiaozhuan.png" mode="widthFix"></image>
+        </view>
+        <view>
+          <text>去一番赏</text>
+          <image src="http://www.51chaidan.com/images/sign/2020wsj/tiaozhuan.png" mode="widthFix"></image>
+        </view>
+        <view>
+          <text>去一番赏</text>
+          <image src="http://www.51chaidan.com/images/sign/2020wsj/tiaozhuan.png" mode="widthFix"></image>
+        </view>
+     </view>
+     <!-- <view class="invitefriend"> 
+      <text>邀请朋友</text>
+      <image src="http://www.51chaidan.com/images/sign/2020wsj/tiaozhuan.png" mode="widthFix"></image>
+     </view> -->
+    <button>邀请朋友</button>
+  </view>
+</view>
+
+
+<view class="helpPopup" wx:if="{{ishelpPopup}}">
+  <view class="helpPopupMask" catchtap="showhelpPopup"></view>
+  <view class="helpPopupBox">
+    <view class="helpPopupTitle">
+      {{tips.share}}
+    </view>
+    <view class="helppeople">
+      <block wx:for='{{share}}' wx:key='key'>
+        <image src="{{item.headphoto}}" mode="widthFix"></image>
+      </block>
+    </view>
+    <button>分享</button>
+  </view>
+</view>
 
 
 
+<view class="punchBottom" catchtap="showhelpPopup">
+    <!-- <view class="punchBottomtxt">已打卡</view> -->
+    <view class="punchBotImgBox" style="width:{{50+share.length*15>530?'530':50+share.length*15}}rpx;" wx:if='{{share.length!=0}}'>
+      <image class="punchBotImg" wx:for='{{share}}' wx:key='key' src="{{item.headphoto}}" style="z-index:{{index+1}};left:{{index*15}}rpx;" wx:if='{{index*15<480}}'></image>
+    </view>
+    <view class="punchBottomtxt" catchtap="showSharePopup">分享得南瓜</view>
+</view>
 
 
-
-
-
-
-
-
-
-
-
-
+<view class="helpBtn" wx:if="canAssist">
+助力
+</view>
 
 <tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
 <view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>
