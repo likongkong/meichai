@@ -148,6 +148,7 @@ hideModal: function () {
           
                 if (res.data.ReturnCode == 200) {
                   _this.dialogClick();
+                  _this.getData();
                   wx.showModal({
                     title: '提示',
                     content: '助力成功',
@@ -208,7 +209,7 @@ hideModal: function () {
   onShareAppMessage: function (options) {
     var _this = this;
     return {
-      title: '',
+      title: '万圣节抢限量大体，端盒送隐藏！',
       path: 'pages/modifythenickname/modifythenickname?shareUId='+_this.data.uid,
       imageUrl:app.signindata.indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
       success: function (res) {
@@ -419,6 +420,7 @@ hideModal: function () {
     var whref = w.currentTarget.dataset.whref || w.target.dataset.whref || 100000;
     app.comjumpwxnav(num,whref)
   },
+  navmap(){},
   // 五分钟倒计时
   countDown:function(){
     var _this = this;

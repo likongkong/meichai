@@ -96,21 +96,22 @@
                 </view>
                 <view wx:else>
                   <block wx:for="{{rank[dateTime]}}" wx:key="key">
-                    <view wx:if="{{item.rank > 3}}" class="smallPrizeRank">
+                    <view class="smallPrizeRank">
                       <view class="place">
-                        <text>{{item.rank}}</text>
+                        <text style="text-align: center;">{{item.rank}}</text>
                       </view>
                       <view class="name">
                         <image class="marginR" src="{{item.headphoto}}" mode="aspectFill"></image>
                         <text>{{item.nick}}</text>
                       </view>
                       <view class="pumpkinNum">
-                        <image class="marginR" src="http://www.51chaidan.com/images/sign/2020wsj/ws_6.png" mode="aspectFill"></image>
-                        <text>{{item.score}}</text>
+                        <image class="marginR" src="http://www.51chaidan.com/images/sign/2020wsj/ws_6.png" mode="aspectFit"></image>
+                        <text>x {{item.score}}</text>
                       </view>
                       <view class="award">
-                        <view>
+                        <view catchtap="jumpOtherPage" data-num='1' data-whref='{{item.goodsId}}'>
                           <image class="marginR" src="{{item.img}}" mode="aspectFill"></image>
+                          <text>x {{item.num}}</text>
                         </view>
                       </view>
                     </view>
@@ -127,13 +128,12 @@
     </view>
   </view>
   <view class="activityRrulesWrap">
-    <image src="http://www.51chaidan.com/images/sign/2020wsj/ws_7.jpg" mode="widthFix"></image>
-    <scroll-view scroll-y class="">
+    <image src="http://www.51chaidan.com/images/sign/2020wsj/ws_7.jpg?20201029" mode="widthFix"></image>
+    <!-- <scroll-view scroll-y class=""> -->
       <text>
         {{tips.introduce}}
       </text>
-    </scroll-view>
-   
+    <!-- </scroll-view> -->
   </view>
 </view>
 
@@ -195,13 +195,16 @@
     <view class="punchBotImgBox" style="width:{{50+share.length*15>530?'530':50+share.length*15}}rpx;" wx:if='{{share.length!=0}}'>
       <image class="punchBotImg" wx:for='{{share}}' wx:key='key' src="{{item.headphoto}}" style="z-index:{{index+1}};left:{{index*15}}rpx;" wx:if='{{index*15<480}}'></image>
     </view>
-    <button open-type="share" catchtouchmove="true" class="punchBottomtxt">分享得南瓜</button>
+    <button open-type="share" catchtap='navmap' class="punchBottomtxt">分享得南瓜</button>
 </view>
 
 
-<view class="helpBtn" wx:if="{{canAssist}}" catchtap="isPhone">
-助力
+<view class="helpBtnWrap"  catchtouchmove="return">
+  <view class="helpBtn" wx:if="{{canAssist}}" catchtap="isPhone">
+  助力
+  </view>
 </view>
+
 
 <tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
 <view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>
@@ -240,8 +243,8 @@
 
 <!-- <button bindtap="showModal">点我</button> -->
 
-<view class="modals modals-bottom-dialog" hidden="{{ishelpPopup}}">
-    <view class="modals-cancel" bindtap="hideModal"></view>
+<view class="modals modals-bottom-dialog" hidden="{{ishelpPopup}}"  catchtouchmove="return">
+    <view class="modals-cancel" bindtap="hideModal"  catchtouchmove="return"></view>
     <view class="bottom-dialog-body bottom-pos" animation="{{animationData}}">
       <view class="helpPopupTitle">
         <!-- 邀请好友送南瓜，老朋友送1个，新朋友送5个 -->

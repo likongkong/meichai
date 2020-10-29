@@ -185,6 +185,7 @@ page{
   width: 640rpx;
   background-color: #fff4e2;
   border-radius: 56rpx;
+  overflow: hidden;
 }
 .titleIconWrap{
   display: flex;
@@ -245,7 +246,7 @@ page{
   width: 50rpx;
   height: 50rpx;
   display: block;
-  border-radius: 50rpx;
+  border-radius: 8rpx;
   margin: 0 auto;
 }
 .topThreeWrap text{
@@ -260,6 +261,7 @@ page{
   width: 150rpx;
   height: 150rpx;
   border-radius: 8rpx;
+  overflow: hidden;
   /* background-color: #b2ddff; */
 }
 .topThreeAward image{
@@ -300,12 +302,15 @@ page{
   width: 50rpx;
   height: 50rpx;
   display: inline-block;
-  border-radius: 50rpx;
+  border-radius: 8rpx;
 }
 .smallPrizeRank text{
+  display: inline-block;
+  width: 140rpx;
   font-size: 20rpx;
   color: #3f2622;
   font-weight: bold;
+  word-break: break-all;
 }
 .smallPrizeRank .place{
   width: 50rpx;
@@ -323,15 +328,17 @@ page{
   width: 50rpx;
 }
 .smallPrizeRank .award>view{
-  width: 40rpx;
-  height: 40rpx;
+  /* width: 80rpx;
+  height: 80rpx; */
   border-radius: 8rpx;
   /* background-color: #b2ddff; */
-  margin-left: 34rpx;
+  margin-left: 8rpx;
+  display: flex;
+  align-items: center;
 }
 .smallPrizeRank .award>view image{
-  width: 40rpx;
-  height: 40rpx;
+  width: 80rpx;
+  height: 80rpx;
   display: block;
 }
 
@@ -344,19 +351,26 @@ page{
   height: auto;
   display: block;
 }
-.activityRrulesWrap scroll-view{
+/* .activityRrulesWrap scroll-view{
   width: 380rpx;
   height: 330rpx;
   position: absolute;
   top: 100rpx;
   left: 50%;
   margin-left: -190rpx;
-}
+} */
 .activityRrulesWrap text{
+  width: 600rpx;
+  height: 330rpx;
+  position: absolute;
+  top: 165rpx;
+  left: 0;
+  margin-left: 75rpx;
   display: block;
-  width: 100%;
   font-size: 24rpx;
+  text-align: center;
   color: #fff;
+  display: block;
 }
 
 
@@ -579,6 +593,9 @@ page{
   background-color: #fff;
   border-radius: 10rpx;
 }
+.helpPopupBOX text{
+  font-size: 20rpx;
+}
 .helpPopupBox button{
   margin-top: 20rpx;
 }
@@ -597,21 +614,28 @@ page{
   width: 60rpx;
   height: auto;
 }
-.helpBtn{
+.helpBtnWrap{
+  width: 100%;
+  height: 100%;
   position: fixed;
-  width: 100rpx;
-  height: 100rpx;
-  border-radius: 100rpx;
-  background-color: #fff;
-  font-size: 30rpx;
-  color: #000;
-  text-align: center;
-  line-height: 100rpx;
-  top: 50%;
-  left: 50%;
-  margin-left: -50rpx;
-  margin-top: -50rpx;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 14;
+  background: rgba(0,0,0,.5);
+}
+.helpBtn{
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 200rpx;
+  background-color: #d5690e;
+  font-size: 40rpx;
+  color: #fff;
+  text-align: center;
+  line-height: 200rpx;
+  box-shadow: 0 0 10rpx #888888;
 }
 
 .bgstyle {
@@ -689,15 +713,15 @@ page{
   box-sizing: border-box;
 }
 .helpPopupscroll{
-  margin-right: 64rpx;
+  margin-right: 40rpx;
   display: inline-block;
+  text-align: center;
 }
-.helpPopupscroll:nth-child(5n){
+.helpPopupscroll:nth-child(8n){
   margin-right: 0;
-
 }
 .helpPopupscroll .popupimg{
-  width: 90rpx;
+  width: 54rpx;
   height: auto;
   border-radius: 8rpx;
   margin-top: 20rpx;
