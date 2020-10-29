@@ -1,5 +1,6 @@
 page{
   background: #19021f;
+  padding-bottom: 110rpx;
 }
 /* .tabWrap{
   width: 100%;
@@ -203,9 +204,13 @@ page{
 .selfPumpkinNum{
   position: relative;
 }
+.selfPumpkinNum image{
+  width: 30rpx;
+  height: auto;
+}
 .selfPumpkinNum text{
   position: absolute;
-  right:100rpx;
+  right:70rpx;
   color: #615d54;
   text-decoration:underline;
 }
@@ -339,6 +344,20 @@ page{
   height: auto;
   display: block;
 }
+.activityRrulesWrap scroll-view{
+  width: 380rpx;
+  height: 330rpx;
+  position: absolute;
+  top: 100rpx;
+  left: 50%;
+  margin-left: -190rpx;
+}
+.activityRrulesWrap text{
+  display: block;
+  width: 100%;
+  font-size: 24rpx;
+  color: #fff;
+}
 
 
 .marginR{
@@ -459,6 +478,7 @@ page{
   /* height: 300rpx; */
   background-color: #fff;
   border-radius: 10rpx;
+  overflow: hidden;
 }
 .sharePopupTitle{
   display: flex;
@@ -500,6 +520,8 @@ page{
   border-top: 2rpx solid #dfdfdf;
   border-radius: 0;
   height: 80rpx;
+  border-bottom-left-radius: 10rpx;
+  border-bottom-right-radius: 10rpx;
 }
 .sharePopupshare::after{
   border: none;
@@ -560,12 +582,12 @@ page{
 .helpPopupBox button{
   margin-top: 20rpx;
 }
-.helpPopupTitle{
+/* .helpPopupTitle{
   font-size: 24rpx;
   padding: 30rpx;
   box-sizing: border-box;
   text-align: center;
-}
+} */
 .helppeople{
   display: flex;
   justify-content: center;
@@ -641,3 +663,55 @@ page{
 .bottom-dialog-body{position:absolute; z-index:10001; bottom:0; left:0; right:0; height:700rpx; background-color: #fff;}
 /*动画前初始位置*/
 .bottom-pos{-webkit-transform:translateY(100%);transform:translateY(100%);}
+.helpPopupTitle{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40rpx 0;
+  box-sizing: border-box;
+}
+.helpPopupTitle text{
+  font-size: 32rpx;
+}
+.helpPopupTitle image{
+  width: 30rpx;
+}
+.helpPopupContent{
+
+}
+.helpPopupBOX{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.helpPopupscrollWrap{
+  padding: 0 25rpx;
+  box-sizing: border-box;
+}
+.helpPopupscroll{
+  margin-right: 64rpx;
+  display: inline-block;
+}
+.helpPopupscroll:nth-child(5n){
+  margin-right: 0;
+
+}
+.helpPopupscroll .popupimg{
+  width: 90rpx;
+  height: auto;
+  border-radius: 8rpx;
+  margin-top: 20rpx;
+}
+.helpPopupscroll .nanguaicon{
+  width: 30rpx;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modals button{
+background: transparent;
+}
+.modals button::after{
+  border: none;
+}
