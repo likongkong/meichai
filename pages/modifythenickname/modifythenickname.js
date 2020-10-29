@@ -387,7 +387,8 @@ fadeDown:function(){
   // 跳转
   jumpOtherPage:function(w){
     var num = w.currentTarget.dataset.num || w.target.dataset.num || 100000;
-    app.comjumpwxnav(num)
+    var whref = w.currentTarget.dataset.whref || w.target.dataset.whref || 100000;
+    app.comjumpwxnav(num,whref)
   }
   
 

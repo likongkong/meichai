@@ -69,21 +69,21 @@
               <view>
                 <image class="topThreeHeadphoto" src="{{rank[dateTime][1].headphoto}}" mode="aspectFill"></image>
                 <text>{{rank[dateTime][1].nick}}</text>
-                <view class="topThreeAward">
+                <view class="topThreeAward" catchtap="jumpOtherPage" data-num='1' data-whref='{{rank[dateTime][1].goodsId}}'>
                   <image src="{{rank[dateTime][1].img}}" mode="aspectFill"></image>
                 </view>
               </view>
               <view class="first">
                 <image class="topThreeHeadphoto" src="{{rank[dateTime][0].headphoto}}" mode="aspectFill"></image>
                 <text>{{rank[dateTime][0].nick}}</text>
-                <view class="topThreeAward">
+                <view class="topThreeAward" catchtap="jumpOtherPage" data-num='1' data-whref='{{rank[dateTime][0].goodsId}}'>
                   <image src="{{rank[dateTime][0].img}}" mode="aspectFill"></image>
                 </view>
               </view>
               <view>
                 <image class="topThreeHeadphoto" src="{{rank[dateTime][2].headphoto}}" mode="aspectFill"></image>
                 <text>{{rank[dateTime][2].nick}}</text>
-                <view class="topThreeAward">
+                <view class="topThreeAward" catchtap="jumpOtherPage" data-num='1' data-whref='{{rank[dateTime][2].goodsId}}'>
                   <image src="{{rank[dateTime][2].img}}" mode="aspectFill"></image>
                 </view>
               </view>
