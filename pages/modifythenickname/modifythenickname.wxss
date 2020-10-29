@@ -532,8 +532,19 @@ page{
   background-color: #fff;
   border-radius: 10rpx;
 }
+.helpPopupBox button{
+  margin-top: 20rpx;
+}
 .helpPopupTitle{
   font-size: 24rpx;
+  padding: 30rpx;
+  box-sizing: border-box;
+  text-align: center;
+}
+.helppeople{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .helppeople image{
   width: 60rpx;
@@ -553,7 +564,7 @@ page{
   left: 50%;
   margin-left: -50rpx;
   margin-top: -50rpx;
-  z-index: 100;
+  z-index: 14;
 }
 
 .bgstyle {
