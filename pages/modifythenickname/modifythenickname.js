@@ -24,8 +24,27 @@ Page({
     ishowphone:false, // 微信手机号授权
     hideModal:true, //模态框的状态  true-隐藏  false-显示
     animationData:{},//
-
+    countTime:300,
+    overtimer:'',
+    // 刷新时间
+    refreshtime:''
   },
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+    var _this = this
+    clearInterval(_this.data.overtimer);
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+    var _this = this
+    clearInterval(_this.data.overtimer);
+  },
+
 // 显示遮罩层
 showModal: function () {
   var that=this;
@@ -181,6 +200,7 @@ fadeDown:function(){
       isAuthMobile:app.signindata.isAuthMobile
     });
     this.getData();
+    this.countDown();
   },
   /**
    * 用户点击右上角分享
@@ -200,6 +220,7 @@ fadeDown:function(){
     var _this = this;
     var myDate = new Date();
     var time = myDate.toLocaleDateString().split('/').join('');
+    _this.data.refreshtime = Date.parse(new Date())/1000;
     wx.showLoading({ title: '加载中...', }) 
     var q = Dec.Aese('mod=festival&operation=listWSJ&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&shareUId='+_this.data.shareUId+'&shareDate='+time);
     console.log(app.signindata.comurl + 'spread.php?mod=festival&operation=listWSJ&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&shareUId='+_this.data.shareUId+'&shareDate='+time)
@@ -332,7 +353,15 @@ fadeDown:function(){
   // },
 
   refresh(){
-    this.getDate()
+    var _this = this;
+    if(Date.parse(new Date())/1000 - _this.data.refreshtime > 80){
+      _this.data.countTime = 300;
+      this.getData();
+    }else{
+      app.showToastC('不能频繁刷新');
+    }
+    
+
   },
 
   clicktganone: function () {
@@ -389,6 +418,18 @@ fadeDown:function(){
     var num = w.currentTarget.dataset.num || w.target.dataset.num || 100000;
     var whref = w.currentTarget.dataset.whref || w.target.dataset.whref || 100000;
     app.comjumpwxnav(num,whref)
+  },
+  // 五分钟倒计时
+  countDown:function(){
+    var _this = this;
+    _this.data.overtimer = setInterval(function () {
+        _this.data.countTime--;
+        console.log(_this.data.countTime)
+        if (_this.data.countTime<=0) {
+          _this.data.countTime=300;
+          _this.getData()
+        }
+    }, 1000);
   }
   
 
