@@ -51,6 +51,37 @@ Component({
       value: false,
     }   
   },
+
+  ready:function(){
+    var _this = this;
+    _this.setData({
+      halloweenScore:app.signindata.halloweenScore
+    });
+    wx.request({
+      url:'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/wsjStartTime.txt',
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        
+        if (res.data) {
+          var time = Date.parse(new Date())/1000;
+          console.log('是否开启万圣节活动',time>=res.data,res)
+          if(time>=res.data){
+            _this.setData({
+              isHalloween:true
+            });            
+          }else{
+            _this.setData({
+              isHalloween:false
+            });             
+          };
+        };  
+      },
+      fail: function (res) {}
+    })
+
+  },
+
   /**
    * 组件的初始数据
    */
@@ -59,13 +90,16 @@ Component({
     uid: app.signindata.uid,
 
     exhdata:'',
-    subscribedata:'',
+    subscribedata:{
+      template_id:['Q0tWM7kOihw1TilTeR3YmLzWp5tS0McgyOeJx2xX-B0'],
+      subscribe_type:['15']
+    },
     exhtipbox:false,
     subscribeCouponTip:'',
     is_show_modal:true,
     isOpenToyShow:1596729599<Date.parse(new Date())/1000&&Date.parse(new Date())/1000<1596988799?true:false,
     // isOpenToyShow:1596104581<Date.parse(new Date())/1000<1596988799?true:false
-    isHalloween:1603878181<Date.parse(new Date())/1000&&Date.parse(new Date())/1000<1604246399?true:false, 
+    isHalloween:false, 
   },
   /**
    * 组件的方法列表
@@ -195,78 +229,78 @@ Component({
         exhtipbox:!this.data.exhtipbox
       })
     },
-  // 拉起订阅
-  subscrfun: function () {
-    var _this = this;
-    this.setData({
-      exhtipbox:false
-    })
-    var subscribedata = _this.data.subscribedata || '';
-    if (subscribedata && subscribedata.template_id && app.signindata.subscribeif) {
-      if (subscribedata.template_id instanceof Array) {
-        wx.requestSubscribeMessage({
-          tmplIds: subscribedata.template_id || [],
-          success(res) {
-            for (var i = 0; i < subscribedata.template_id.length; i++) {
-              if (res[subscribedata.template_id[i]] == "accept") {
-                _this.subscribefun(_this, 1, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+    // 拉起订阅
+    subscrfun: function () {
+      var _this = this;
+      // this.setData({
+      //   exhtipbox:false
+      // })
+      var subscribedata = _this.data.subscribedata || '';
+      if (subscribedata && subscribedata.template_id && app.signindata.subscribeif) {
+        if (subscribedata.template_id instanceof Array) {
+          wx.requestSubscribeMessage({
+            tmplIds: subscribedata.template_id || [],
+            success(res) {
+              for (var i = 0; i < subscribedata.template_id.length; i++) {
+                if (res[subscribedata.template_id[i]] == "accept") {
+                  _this.subscribefun(_this, 1, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+                };
               };
-            };
-          },
-          complete() { }
-        })
-      } else {
-        wx.requestSubscribeMessage({
-          tmplIds: [subscribedata.template_id || ''],
-          success(res) {
-            if (res[subscribedata.template_id] == "accept") {
-              _this.subscribefun(_this, 1, subscribedata.template_id, subscribedata.subscribe_type);
-              _this.subshowmodalfun();
-            };
-          }
-        })
-      };
-    };
-  },
-  // 订阅统计
-  subscribefun: function (_this, num, template_id, subscribe_type){
-    var _this = _this;
-    var subscribedata = _this.data.subscribedata || '';
-    if (num == 1) {
-      var subscribe_id = 0;
-    } else {
-      var subscribe_id = _this.data.id
-    };
-    var q1 = Dec.Aese('mod=subscribe&operation=accept&uid=' + app.signindata.uid + '&loginid=' + app.signindata.loginid + '&subscribe_type=' + subscribe_type + '&template_id=' + template_id + '&subscribe_id=' + subscribe_id);
-    wx.request({
-      url: app.signindata.comurl + 'statistics.php' + q1,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        console.log(res)
-        if(res.data.ReturnCode==202){
-          _this.data.subscribeCouponTip = res.data.Msg||'';
-        }
-        if (_this.data.is_show_modal) {
-          _this.subshowmodalfun();
-          _this.data.is_show_modal = false;
+            },
+            complete() { }
+          })
+        } else {
+          wx.requestSubscribeMessage({
+            tmplIds: [subscribedata.template_id || ''],
+            success(res) {
+              if (res[subscribedata.template_id] == "accept") {
+                _this.subscribefun(_this, 1, subscribedata.template_id, subscribedata.subscribe_type);
+                _this.subshowmodalfun();
+              };
+            }
+          })
         };
-      }
-    });
-  },
-  subshowmodalfun: function () {
-    var _this = this;
-    wx.showModal({
-      title: '提示',
-      content: _this.data.subscribeCouponTip || '订阅成功,开售前通过微信发送提醒',
-      showCancel: false,
-      success: function (res) {
-        _this.setData({
-          subscribeCouponTip:''
-        })
-       }
-    })
-  },
+      };
+    },
+    // 订阅统计
+    subscribefun: function (_this, num, template_id, subscribe_type){
+      var _this = _this;
+      var subscribedata = _this.data.subscribedata || '';
+      if (num == 1) {
+        var subscribe_id = 0;
+      } else {
+        var subscribe_id = _this.data.id
+      };
+      var q1 = Dec.Aese('mod=subscribe&operation=accept&uid=' + app.signindata.uid + '&loginid=' + app.signindata.loginid + '&subscribe_type=' + subscribe_type + '&template_id=' + template_id + '&subscribe_id=' + subscribe_id);
+      wx.request({
+        url: app.signindata.comurl + 'statistics.php' + q1,
+        method: 'GET',
+        header: { 'Accept': 'application/json' },
+        success: function (res) {
+          console.log(res)
+          if(res.data.ReturnCode==202){
+            _this.data.subscribeCouponTip = res.data.Msg||'';
+          }
+          if (_this.data.is_show_modal) {
+            _this.subshowmodalfun();
+            _this.data.is_show_modal = false;
+          };
+        }
+      });
+    },
+    subshowmodalfun: function () {
+      var _this = this;
+      wx.showModal({
+        title: '提示',
+        content: '订阅成功',
+        showCancel: false,
+        success: function (res) {
+          _this.setData({
+            subscribeCouponTip:''
+          })
+        }
+      })
+    },
 
 
 

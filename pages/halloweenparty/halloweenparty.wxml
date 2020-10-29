@@ -1,4 +1,4 @@
-<view wx:if='{{isHalloween}}' catchtap='gateback' style='width:120rpx;position:fixed;right:10rpx;bottom:460rpx;z-index:9;'>
+<view catchtap='{{isHalloween?"gateback":"subscrfun"}}' style='width:120rpx;position:fixed;right:10rpx;bottom:460rpx;z-index:9;'>
 	<image mode="aspectFit" src='https://www.51chaidan.com/images/sign/20201029icon.png' style='width:120rpx;height:120rpx;display:block;'></image>
 	<view style="width:120rpx;height:{{halloweenScore>0?60:30}}rpx;position:relative;font-size:22rpx;">
 		<view style="width:120rpx;height:100%;background:#000;position:absolute;top:0;left:0;opacity:0.3;border-radius:5rpx;z-index:-1;"></view>
