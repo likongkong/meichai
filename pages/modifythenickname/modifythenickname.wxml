@@ -106,7 +106,7 @@
                       </view>
                       <view class="pumpkinNum">
                         <image class="marginR" src="http://www.51chaidan.com/images/sign/2020wsj/ws_6.png" mode="aspectFit"></image>
-                        <text>x {{item.score}}</text>
+                        <text>{{item.score?'x '+item.score:''}}</text>
                       </view>
                       <view class="award">
                         <view catchtap="jumpOtherPage" data-num='1' data-whref='{{item.goodsId}}'>
@@ -199,7 +199,8 @@
 </view>
 
 
-<view class="helpBtnWrap" catchtouchmove="return" wx:if="{{canAssist}}">
+<view class="helpBtnWrap" catchtouchmove="return" wx:if="{{canAssist}}" catchtap="isPhone">
+  <!-- <view class="helpBtnMask"></view> -->
   <view class="helpBtn" catchtap="isPhone">
   助力
   </view>

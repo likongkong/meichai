@@ -17,7 +17,6 @@ Page({
     uid: app.signindata.uid,
     dateTime:0,
     issharePopup:false,
-    ishelpPopup:false,
     canAssist:false,
     halloweenScore:app.signindata.halloweenScore,
     shareUId:0,
@@ -105,6 +104,8 @@ hideModal: function () {
         success: function (res) {
           console.log('助力',res)
           if (res.data.ReturnCode == 200) {
+            _this.getData();
+            // _this.showModal();
             wx.showModal({
               title: '提示',
               content: '助力成功',
@@ -149,6 +150,7 @@ hideModal: function () {
                 if (res.data.ReturnCode == 200) {
                   _this.dialogClick();
                   _this.getData();
+                  // _this.showModal();
                   wx.showModal({
                     title: '提示',
                     content: '助力成功',
@@ -197,7 +199,6 @@ hideModal: function () {
     this.setData({
       loginid: app.signindata.loginid,
       uid: app.signindata.uid,
-      halloweenScore:app.signindata.halloweenScore,
       isAuthMobile:app.signindata.isAuthMobile
     });
     this.getData();
@@ -211,7 +212,7 @@ hideModal: function () {
     return {
       title: '万圣节抢限量大体，端盒送隐藏！',
       path: 'pages/modifythenickname/modifythenickname?shareUId='+_this.data.uid,
-      imageUrl:app.signindata.indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      imageUrl:'http://www.51chaidan.com/images/sign/2020wsj/wsj.jpg',
       success: function (res) {
 
       }
@@ -235,13 +236,18 @@ hideModal: function () {
           for(let i=0;i<res.data.List.date.length;i++){
             res.data.List.date[i] = _this.formatTime(res.data.List.date[i])
           }
+          if(res.data.Info.festival.score){
+            app.signindata.halloweenScore=res.data.Info.festival.score;
+          }
           _this.setData({
             datetimeAll:res.data.List.date,
             rank:res.data.List.rank,
             tips:res.data.Info.tips,
             share:res.data.List.share,
-            canAssist:res.data.Info.canAssist
+            canAssist:res.data.Info.canAssist,
+            halloweenScore:app.signindata.halloweenScore,
           })
+         
         }
       },
       fail: function () {},
@@ -432,6 +438,11 @@ hideModal: function () {
           _this.getData()
         }
     }, 1000);
+  },
+  hidehelpBtnWrap(){
+    this.setData({
+      canAssist:false
+    })
   }
   
 

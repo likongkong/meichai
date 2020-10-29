@@ -261,13 +261,16 @@ page{
   width: 150rpx;
   height: 150rpx;
   border-radius: 8rpx;
-  overflow: hidden;
+  /* overflow: hidden; */
   /* background-color: #b2ddff; */
 }
 .topThreeAward image{
   width: 150rpx;
   height: 150rpx;
   display: block;
+  border-radius: 8rpx;
+  box-shadow: 0 0 10rpx #888888;
+
 }
 .first .topThreeHeadphoto{
   margin-top: -10rpx;
