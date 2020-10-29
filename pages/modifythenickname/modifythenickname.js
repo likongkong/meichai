@@ -22,7 +22,7 @@ Page({
     halloweenScore:app.signindata.halloweenScore,
     shareUId:0,
     ishowphone:false, // 微信手机号授权
-    hideModal:true, //模态框的状态  true-隐藏  false-显示
+    ishelpPopup:true, //模态框的状态  true-隐藏  false-显示
     animationData:{},//
     countTime:300,
     overtimer:'',
@@ -49,7 +49,7 @@ Page({
 showModal: function () {
   var that=this;
   that.setData({
-    hideModal:false
+    ishelpPopup:false
   })
   var animation = wx.createAnimation({
     duration: 800,//动画的持续时间 默认400ms   数值越大，动画越慢   数值越小，动画越快
@@ -72,25 +72,25 @@ hideModal: function () {
   that.fadeDown();//调用隐藏动画   
   setTimeout(function(){
     that.setData({
-      hideModal:true
+      ishelpPopup:true
     })      
-  },800)//先执行下滑动画，再隐藏模块
+  },300)//先执行下滑动画，再隐藏模块
   
 },
 
-//动画集
-fadeIn:function(){
-  this.animationData.translateY(0).step()
-  this.setData({
-    animationData: this.animationData.export()//动画实例的export方法导出动画数据传递给组件的animation属性
-  })    
-},
-fadeDown:function(){
-  this.animationData.translateY(700).step()
-  this.setData({
-    animationData: this.animationData.export(),  
-  })
-}, 
+  //动画集
+  fadeIn:function(){
+    this.animationData.translateY(0).step()
+    this.setData({
+      animationData: this.animationData.export()//动画实例的export方法导出动画数据传递给组件的animation属性
+    })    
+  },
+  fadeDown:function(){
+    this.animationData.translateY(700).step()
+    this.setData({
+      animationData: this.animationData.export(),  
+    })
+  }, 
 
 
   // 是否需要手机号
