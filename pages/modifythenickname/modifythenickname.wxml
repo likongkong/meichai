@@ -199,8 +199,8 @@
 </view>
 
 
-<view class="helpBtnWrap"  catchtouchmove="return">
-  <view class="helpBtn" wx:if="{{canAssist}}" catchtap="isPhone">
+<view class="helpBtnWrap" catchtouchmove="return" wx:if="{{canAssist}}">
+  <view class="helpBtn" catchtap="isPhone">
   助力
   </view>
 </view>
