@@ -102,7 +102,7 @@ App({
     // 抽盒金
     blindboxMoney:0,
     // 是否显示万圣节悬浮标签
-    isHalloween:1603878181<Date.parse(new Date())/1000&&Date.parse(new Date())/1000<1604246399?true:false,
+    isHalloween:false,
     halloweenScore:0,
     isAuthMobile:false // 万圣节是否手机号认证
   },
