@@ -238,8 +238,9 @@ Page({
       // url: "/page/component/pages/hidefun/hidefun"
       // url: "/pages/shopsquare/shopsquare"
       // url: "/pages/dismantlingbox/dismantlingbox"
-      url: "/page/secondpackge/pages/shopsquaretrip/shopsquaretrip"
-      // url: "/pages/modifythenickname/modifythenickname"
+      // url: "/page/secondpackge/pages/shopsquaretrip/shopsquaretrip"
+      url: "/pages/modifythenickname/modifythenickname"
+      // url: "/pages/sputforward/sputforward"
       
     });
   },
