@@ -59,7 +59,7 @@
               <image class="titleIcon" src="http://www.51chaidan.com/images/sign/2020wsj/ws_3.png" mode="widthFix"></image>
             </view>
             <view class="selfPumpkinWrap"> 
-              <view class="selfPumpkinNum">我的南瓜数：9 <text catchtap="showSharePopup">如何获得?</text> </view>
+              <view class="selfPumpkinNum">我的南瓜数：{{halloweenScore}} <text catchtap="showSharePopup">如何获得?</text> </view>
               <view class="refresh">每5分钟自动刷新</view>
             </view>
             <view class="threePumpkin">
@@ -190,7 +190,7 @@
 </view>
 
 
-<view class="helpBtn" wx:if="canAssist">
+<view class="helpBtn" wx:if="{{canAssist}}">
 助力
 </view>
 

@@ -18,14 +18,16 @@ Page({
     dateTime:0,
     issharePopup:false,
     ishelpPopup:false,
-    canAssist:false
+    canAssist:false,
+    halloweenScore:app.signindata.halloweenScore,
+    shareUId:0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
+    console.log(options.shareUId)
     this.showLeft();
     // this.getData();
     // 判断是否授权
@@ -35,15 +37,33 @@ Page({
     // '已经授权'
     this.setData({
       loginid: app.signindata.loginid,
-      uid: app.signindata.uid
+      uid: app.signindata.uid,
+      halloweenScore:app.signindata.halloweenScore,
+      isAuthMobile:app.signindata.isAuthMobile
     });
     this.getData();
   },
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function (options) {
+    var _this = this;
+    return {
+      title: '',
+      path: 'pages/modifythenickname/modifythenickname?shareUId='+_this.data.uid,
+      imageUrl:app.signindata.indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      success: function (res) {
+
+      }
+    }  
+  },
   getData(){
     var _this = this;
+    var myDate = new Date();
+    var time = myDate.toLocaleDateString().split('/').join('');
     wx.showLoading({ title: '加载中...', }) 
-    var q = Dec.Aese('mod=festival&operation=listWSJ&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&shareUId='+_this.data.shareUId+'&shareDate='+_this.data.shareDate);
-    console.log('mod=festival&operation=listWSJ&uid=' +_this.data.uid+'&loginid='+_this.data.loginid)
+    var q = Dec.Aese('mod=festival&operation=listWSJ&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&shareUId='+_this.data.shareUId+'&shareDate='+time);
+    console.log(app.signindata.comurl + 'spread.php?mod=festival&operation=listWSJ&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&shareUId='+_this.data.shareUId+'&shareDate='+time)
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q,
       method: 'GET',
