@@ -47,7 +47,18 @@
 				<text style="color:#31b3fb">展</text></view>
 		</view>
 	</view> -->
-
+<block wx:if='{{isHalloween}}'>
+  <!-- 万圣节 -->
+	<view class='comNavigationEve'>
+		<view style='width:100%;height:100%;position:relative;' bindtap='jumphp'>
+			<view class='navigationltop'>
+				<image src='http://www.51chaidan.com/images/sign/2020wsj/ws_6.png' class='navigationltopimg'></image>
+			</view>
+			<view wx:if='{{isChar}}' class='navigationlcon' style='{{wnews?"color:#fd2844":""}};'>万圣节活动</view>
+		</view>
+	</view>
+</block>
+<block wx:else>
   <!-- 一番赏 -->
 	<view wx:if='{{isProduce}}' class='comNavigationEve'>
 		<view style='width:100%;height:100%;position:relative;' bindtap='wnews'>
@@ -57,6 +68,8 @@
 			<view wx:if='{{isChar}}' class='navigationlcon' style='{{wnews?"color:#fd2844":""}};'>一番赏</view>
 		</view>
 	</view>
+</block>
+
 	<!-- 闲置 -->
 	<!-- <view wx:if='{{isProduce}}' class='comNavigationEve'>
 		<view style='width:100%;height:100%;position:relative;' bindtap='wnews'>
