@@ -26,7 +26,7 @@ Page({
   // 是否需要手机号
   isPhone:function(){
     var _this = this;
-    if(app.signindata.isAuthMobile){  // 授权
+    if(app.signindata.isAuthMobile){  // 不需要
       var q = Dec.Aese('mod=festival&operation=shareWSJ&isMobile=0&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid +'&shareUId='+_this.data.shareUId)
       wx.request({
         url: app.signindata.comurl + 'spread.php' + q,
@@ -47,13 +47,15 @@ Page({
         }
       });
     }else{
-      _this.dialogClick();
+      this.setData({
+        ishowphone: true
+      });
     }
   },
   // 手机号授权弹框
   dialogClick:function(){
     this.setData({
-      ishowphone: !this.data.ishowphone
+      ishowphone: false
     });
   },
   getPhoneNumber: function (e) {
@@ -75,7 +77,7 @@ Page({
               success: function (res) {
           
                 if (res.data.ReturnCode == 200) {
-                  _this.setData({ ishowphone: false});
+                  _this.dialogClick();
                   wx.showModal({
                     title: '提示',
                     content: '助力成功',
@@ -83,13 +85,13 @@ Page({
                     success: function (res) {}
                   }) 
                 } else {
-                  _this.setData({ ishowphone: false });
+                  _this.dialogClick();
                   app.showToastC(res.data.Msg);
                 };
               }
             });
           } else {
-        
+            _this.dialogClick();        
           }
         }
       });
@@ -99,7 +101,7 @@ Page({
 
     } else { 
 
-      this.dialogClick()
+      _this.dialogClick();
 
 
 
@@ -112,7 +114,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.shareUId)
+    console.log('options===',options)
+    this.data.shareUId = options.shareUId;
     this.showLeft();
     // this.getData();
     // 判断是否授权
@@ -154,6 +157,7 @@ Page({
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) { 
+        console.log('getData====',res)
         if (res.data.ReturnCode == 200) {
           for(let i=0;i<res.data.List.date.length;i++){
             res.data.List.date[i] = _this.formatTime(res.data.List.date[i])
