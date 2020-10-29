@@ -63,14 +63,20 @@ Component({
     exhtipbox:false,
     subscribeCouponTip:'',
     is_show_modal:true,
-    isOpenToyShow:1596729599<Date.parse(new Date())/1000&&Date.parse(new Date())/1000<1596988799?true:false
+    isOpenToyShow:1596729599<Date.parse(new Date())/1000&&Date.parse(new Date())/1000<1596988799?true:false,
     // isOpenToyShow:1596104581<Date.parse(new Date())/1000<1596988799?true:false
-
+    isHalloween:1603878181<Date.parse(new Date())/1000&&Date.parse(new Date())/1000<1604246399?true:false, 
   },
   /**
    * 组件的方法列表
    */
   methods: {
+    // 万圣节跳转
+    jumphp:function(){
+      wx.navigateTo({
+        url: "/pages/modifythenickname/modifythenickname"
+      });
+    },
     // 导航跳转
     whomepage: function (e) {
       var _this = this
