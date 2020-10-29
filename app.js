@@ -103,7 +103,8 @@ App({
     blindboxMoney:0,
     // 是否显示万圣节悬浮标签
     isHalloween:1603878181<Date.parse(new Date())/1000&&Date.parse(new Date())/1000<1604246399?true:false,
-    halloweenScore:0
+    halloweenScore:0,
+    isAuthMobile:false // 万圣节是否手机号认证
   },
   //一番赏队列倒计时
   // yifanshangIsInQueueFun(time){
@@ -179,6 +180,10 @@ App({
 
                   // 万圣节南瓜个数
                   _this.signindata.halloweenScore = res.data.Info.score || 0;
+                  // 万圣节南瓜个数
+                  _this.signindata.isAuthMobile = res.data.Info.isAuthMobile;
+
+                  
                   // 是否是地域黑模式
                   _this.signindata.isHellBlackUser = res.data.Info.isHellBlackUser || false;
                   // 是否开启展会 

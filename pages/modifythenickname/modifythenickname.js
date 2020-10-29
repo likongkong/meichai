@@ -20,7 +20,92 @@ Page({
     ishelpPopup:false,
     canAssist:false,
     halloweenScore:app.signindata.halloweenScore,
-    shareUId:0
+    shareUId:0,
+    ishowphone:false, // 微信手机号授权
+  },
+  // 是否需要手机号
+  isPhone:function(){
+    var _this = this;
+    if(app.signindata.isAuthMobile){  // 授权
+      var q = Dec.Aese('mod=festival&operation=shareWSJ&isMobile=0&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid +'&shareUId='+_this.data.shareUId)
+      wx.request({
+        url: app.signindata.comurl + 'spread.php' + q,
+        method: 'GET',
+        header: { 'Accept': 'application/json' },
+        success: function (res) {
+          console.log('助力',res)
+          if (res.data.ReturnCode == 200) {
+            wx.showModal({
+              title: '提示',
+              content: '助力成功',
+              showCancel: false,
+              success: function (res) { }
+            })            
+          } else {
+            app.showToastC(res.data.Msg);
+          };
+        }
+      });
+    }else{
+      _this.dialogClick();
+    }
+  },
+  // 手机号授权弹框
+  dialogClick:function(){
+    this.setData({
+      ishowphone: !this.data.ishowphone
+    });
+  },
+  getPhoneNumber: function (e) {
+    var _this = this
+    if (e.detail.errMsg == 'getPhoneNumber: ok' || e.detail.errMsg == "getPhoneNumber:ok") {  //授权通过执行跳转
+      wx.login({
+        success: function (res) {
+          if (res.code) {
+            var encryptedData = e.detail.encryptedData||'';
+            var iv = e.detail.iv||'';
+            var code = res.code||'';
+            //发起网络请求
+            
+            var q = Dec.Aese('mod=festival&operation=shareWSJ&isMobile=1&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&code=' + code + '&iv=' + iv + '&encryptedData=' + encryptedData+'&shareUId='+_this.data.shareUId)
+            wx.request({
+              url: app.signindata.comurl + 'spread.php' + q,
+              method: 'GET',
+              header: { 'Accept': 'application/json' },
+              success: function (res) {
+          
+                if (res.data.ReturnCode == 200) {
+                  _this.setData({ ishowphone: false});
+                  wx.showModal({
+                    title: '提示',
+                    content: '助力成功',
+                    showCancel: false,
+                    success: function (res) {}
+                  }) 
+                } else {
+                  _this.setData({ ishowphone: false });
+                  app.showToastC(res.data.Msg);
+                };
+              }
+            });
+          } else {
+        
+          }
+        }
+      });
+
+
+
+
+    } else { 
+
+      this.dialogClick()
+
+
+
+
+    };
+
   },
 
   /**
