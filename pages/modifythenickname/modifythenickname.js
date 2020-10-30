@@ -139,14 +139,12 @@ hideModal: function () {
             var iv = e.detail.iv||'';
             var code = res.code||'';
             //发起网络请求
-            
             var q = Dec.Aese('mod=festival&operation=shareWSJ&isMobile=1&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&code=' + code + '&iv=' + iv + '&encryptedData=' + encryptedData+'&shareUId='+_this.data.shareUId)
             wx.request({
               url: app.signindata.comurl + 'spread.php' + q,
               method: 'GET',
               header: { 'Accept': 'application/json' },
               success: function (res) {
-          
                 if (res.data.ReturnCode == 200) {
                   _this.dialogClick();
                   _this.getData();
@@ -168,19 +166,12 @@ hideModal: function () {
           }
         }
       });
-
-
-
-
     } else { 
-
+      _this.setData({
+        canAssist: false
+      });
       _this.dialogClick();
-
-
-
-
     };
-
   },
 
   /**
@@ -353,9 +344,7 @@ hideModal: function () {
     });
     if (e.detail.detail.userInfo) { } else {
       app.clicktga(8)  //用户按了拒绝按钮
-      _this.setData({
-        canAssist: false
-      });
+      
     };
   },
   pullupsignin: function () {
