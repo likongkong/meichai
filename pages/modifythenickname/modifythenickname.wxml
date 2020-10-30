@@ -123,7 +123,7 @@
                         <text class="text">{{item.nick}}</text>
                       </view>
                       <view class="pumpkinNum">
-                        <image class="marginR" src="http://www.51chaidan.com/images/sign/2020wsj/ws_6.png" mode="aspectFit"></image>
+                        <image class="marginR" style="margin-right:0rpx" src="http://www.51chaidan.com/images/sign/2020wsj/ws_6.png" mode="aspectFit"></image>
                         <text class="text">{{item.score?'x '+item.score:''}}</text>
                       </view>
                       <view class="award">
