@@ -226,6 +226,19 @@ hideModal: function () {
     var _this = this;
     var myDate = new Date();
     var time = myDate.toLocaleDateString().split('/').join('');
+    if( time == 20201030){
+      _this.setData({
+        dateTime : 0,
+      })
+    }else if( time == 20201031){
+      _this.setData({
+        dateTime : 1,
+      })
+    }else{
+      _this.setData({
+        dateTime : 2,
+      })
+    }
     _this.data.refreshtime = Date.parse(new Date())/1000;
     wx.showLoading({ title: '加载中...', }) 
     var q = Dec.Aese('mod=festival&operation=listWSJ&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&shareUId='+_this.data.shareUId+'&shareDate='+time);
@@ -404,6 +417,7 @@ hideModal: function () {
     minute = this.timerFilter(minute);
     second = this.timerFilter(second);
     // console.log(hour + "时" + minute + "分" + second + "秒")
+
     this.setData({
       todaycountdown:hour + ":" + minute + ":" + second
     })
