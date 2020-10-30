@@ -84,7 +84,7 @@ Page({
       c_title: w.title || '',
     }); 
     // 推送统计
-    _this.data.push_id = options.push_id || 0;
+    _this.data.push_id = w.push_id || 0;
     if(app.signindata.sceneValue==1154){
       app.signindata.isProduce = true;  
       _this.onLoadfun();
