@@ -532,7 +532,7 @@
                 <view style='height:70rpx;width:100%;position:relative;' wx:elif='{{comdata.is_receive==3&&(comdata.isShowOrder==0||comdata.showOrder==2)}}'>
                     <view class='awardrrbutposi' style='background:#999;'>奖品已过期</view>
                 </view>
-                <view class='awardrrboxtxt' style='color:#42bd56;' wx:elif='{{comdata.isToyCabinet}}'>请到玩具柜选择发货</view>
+                <view class='awardrrboxtxt' style='color:#42bd56;' wx:elif='{{comdata.isToyCabinet&&comdata.status!=20}}'>请到玩具柜选择发货</view>
  
  
              </view>

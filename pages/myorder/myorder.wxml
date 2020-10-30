@@ -425,7 +425,7 @@
                 <view style='height:70rpx;width:100%;position:relative;' wx:elif='{{item.is_receive==3&&(item.isShowOrder==0||item.showOrder==2)}}'>
                     <view class='awardrrbutposi' style='background:#999;'>奖品已过期</view>
                  </view>
-                 <view class='awardrrboxtxt' style='color:#42bd56;' wx:elif='{{item.isToyCabinet}}'>请到玩具柜选择发货</view>
+                 <view class='awardrrboxtxt' style='color:#42bd56;' wx:elif='{{item.isToyCabinet&&item.status!=20}}'>请到玩具柜选择发货</view>
              </view>
 
               <view class='daifukuan' wx:if='{{item.order_type==1}}'>
