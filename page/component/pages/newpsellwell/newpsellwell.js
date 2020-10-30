@@ -83,6 +83,8 @@ Page({
       category_id: w.category_id||'',
       c_title: w.title || '',
     }); 
+    // 推送统计
+    _this.data.push_id = options.push_id || 0;
     if(app.signindata.sceneValue==1154){
       app.signindata.isProduce = true;  
       _this.onLoadfun();
@@ -121,12 +123,12 @@ Page({
     if (num == 1) {
       _this.data.page = 0;
       _this.setData({ headhidden: false, loadprompt: '加载更多.....', commoddata: [] });
-      var q = Dec.Aese('mod=getinfo&operation=list&category_id=' + _this.data.category_id +'&uid=' + _this.data.uid);
+      var q = Dec.Aese('mod=getinfo&operation=list&category_id=' + _this.data.category_id +'&uid=' + _this.data.uid + '&push_id='+_this.data.push_id);
     } else {
       var pagenum = parseInt(_this.data.page)
       _this.data.page = ++pagenum;
       _this.setData({ headhidden: false, loadprompt: '加载更多.....' });
-      var q = Dec.Aese('mod=getinfo&operation=list&ltype=more&category_id=' + _this.data.category_id+'&pid=' + _this.data.page + '&uid=' + _this.data.uid);
+      var q = Dec.Aese('mod=getinfo&operation=list&ltype=more&category_id=' + _this.data.category_id+'&pid=' + _this.data.page + '&uid=' + _this.data.uid + '&push_id='+_this.data.push_id);
     };
     wx.showLoading({ title: '加载中...', })
     wx.request({
@@ -134,6 +136,7 @@ Page({
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
+        _this.data.push_id =  0;
         // 刷新完自带加载样式回去
         wx.stopPullDownRefresh()
         wx.hideLoading()
