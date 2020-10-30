@@ -247,11 +247,11 @@ hideModal: function () {
             datetimeAll:res.data.List.date,
             rank:res.data.List.rank,
             tips:res.data.Info.tips,
+            lastRank:res.data.Info.lastRank,
             share:res.data.List.share,
             canAssist:res.data.Info.canAssist,
             halloweenScore:app.signindata.halloweenScore,
           })
-         
         }
       },
       fail: function () {},
