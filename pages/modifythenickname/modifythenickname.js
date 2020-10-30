@@ -192,7 +192,12 @@ hideModal: function () {
     this.showLeft();
     // this.getData();
     // 判断是否授权
-    this.activsign();
+    if(app.signindata.sceneValue==1154){
+      app.signindata.isProduce = true;  
+      this.onLoadfun();
+    }else{
+      this.activsign();
+    };
   },
   onLoadfun:function(){
     // '已经授权'
@@ -217,6 +222,14 @@ hideModal: function () {
 
       }
     }  
+  },
+  onShareTimeline:function(){
+    var _this = this;
+    return {
+      title:'万圣节抢限量大体，端盒送隐藏！',
+      query:'shareUId='+_this.data.uid,
+      imageUrl:'http://www.51chaidan.com/images/sign/2020wsj/wsj.jpg'
+    }
   },
   getData(){
     var _this = this;
@@ -340,6 +353,9 @@ hideModal: function () {
     });
     if (e.detail.detail.userInfo) { } else {
       app.clicktga(8)  //用户按了拒绝按钮
+      _this.setData({
+        canAssist: false
+      });
     };
   },
   pullupsignin: function () {
@@ -420,19 +436,20 @@ hideModal: function () {
   showhelpPopup(){
     this.setData({ ishelpPopup: !this.data.ishelpPopup })
   },
-  // 跳转
-  jumpOtherPage:function(w){
-    var num = w.currentTarget.dataset.num || w.target.dataset.num || 100000;
-    var whref = w.currentTarget.dataset.whref || w.target.dataset.whref || 100000;
-    app.comjumpwxnav(num,whref)
-  },
+    // 跳转
+    jumpOtherPage:function(w){
+      var num = w.currentTarget.dataset.num || w.target.dataset.num || 100000;
+      var whref = w.currentTarget.dataset.whref || w.target.dataset.whref || 100000;
+      var title = w.currentTarget.dataset.title || w.target.dataset.title || '';
+      app.comjumpwxnav(num,whref,title)
+    },
   navmap(){},
   // 五分钟倒计时
   countDown:function(){
     var _this = this;
     _this.data.overtimer = setInterval(function () {
         _this.data.countTime--;
-        console.log(_this.data.countTime)
+        // console.log(_this.data.countTime)
         if (_this.data.countTime<=0) {
           _this.data.countTime=300;
           _this.getData()

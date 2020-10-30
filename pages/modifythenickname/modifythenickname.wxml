@@ -156,7 +156,7 @@
           <text>去一番赏</text>
           <image src="http://www.51chaidan.com/images/sign/2020wsj/tiaozhuan.png" mode="widthFix"></image>
         </view>
-        <view catchtap="jumpOtherPage" data-num='998'>
+        <view catchtap="jumpOtherPage" data-num='9014' data-whref="category_id=G19" data-title="潮玩手办">
           <text>去手办</text>
           <image src="http://www.51chaidan.com/images/sign/2020wsj/tiaozhuan.png" mode="widthFix"></image>
         </view>
