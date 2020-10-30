@@ -98,20 +98,38 @@
                   <block wx:for="{{rank[dateTime]}}" wx:key="key">
                     <view class="smallPrizeRank">
                       <view class="place">
-                        <text style="text-align: center;">{{item.rank}}</text>
+                        <block wx:if="{{item.lastRank == 0}}">
+                          <view class="" style="{{item.rank<10?'text-align: center;':''}}">{{item.rank}}</view> 
+                          <view>
+                            <image src="http://www.51chaidan.com/images/sign/2020wsj/jt_ss.png" mode="widthFix"></image>
+                            <text style="color:#1da900"> {{100-item.rank == 0?'':100-item.rank}}</text>
+                          </view>
+                        </block>
+                        <block wx:elif="{{!item.lastRank}}">
+                          <view class="" style="width: 100rpx;text-align: center;display: block;">{{item.rank}}</view> 
+                        </block>
+                        <block wx:elif="{{item.rank == item.lastRank}}">
+                          <view class="" style="width: 100rpx;text-align: center;display: block;">{{item.rank}}</view> 
+                        </block>
+                        <block wx:else>
+                          <view class="" style="{{item.rank<10?'text-align: center;':''}}">{{item.rank}}</view> 
+                          <view>
+                            <image src="{{item.rank<item.lastRank?'http://www.51chaidan.com/images/sign/2020wsj/jt_ss.png':'http://www.51chaidan.com/images/sign/2020wsj/jt_xj.png'}}" mode="widthFix"></image> <text style="{{item.rank<item.lastRank?'color:#1da900':'color:#d0021b'}}"> {{item.rank < item.lastRank?item.lastRank-item.rank:item.rank-item.lastRank}} </text>
+                          </view>
+                        </block>
                       </view>
                       <view class="name">
                         <image class="marginR" src="{{item.headphoto}}" mode="aspectFill"></image>
-                        <text>{{item.nick}}</text>
+                        <text class="text">{{item.nick}}</text>
                       </view>
                       <view class="pumpkinNum">
                         <image class="marginR" src="http://www.51chaidan.com/images/sign/2020wsj/ws_6.png" mode="aspectFit"></image>
-                        <text>{{item.score?'x '+item.score:''}}</text>
+                        <text class="text">{{item.score?'x '+item.score:''}}</text>
                       </view>
                       <view class="award">
                         <view catchtap="jumpOtherPage" data-num='1' data-whref='{{item.goodsId}}'>
                           <image class="marginR" src="{{item.img}}" mode="aspectFill"></image>
-                          <text>x {{item.num}}</text>
+                          <text class="text">x {{item.num}}</text>
                         </view>
                       </view>
                     </view>

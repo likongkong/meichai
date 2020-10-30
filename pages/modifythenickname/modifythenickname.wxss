@@ -307,25 +307,55 @@ page{
   display: inline-block;
   border-radius: 8rpx;
 }
-.smallPrizeRank text{
+.smallPrizeRank .text{
   display: inline-block;
-  width: 140rpx;
+  width: 142rpx;
   font-size: 20rpx;
   color: #3f2622;
   font-weight: bold;
   word-break: break-all;
 }
 .smallPrizeRank .place{
-  width: 50rpx;
-  margin-left: 20rpx;
+  width: 100rpx;
+  /* margin-left: 20rpx; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 8rpx;
+  box-sizing: border-box;
+}
+.smallPrizeRank .place view:first-child{
+  width: 40rpx;
+  font-size: 20rpx;
+  color: #3f2622;
+  font-weight: bold;
+  word-break: break-all;
+}
+.smallPrizeRank .place view:last-child{
+  width: 60rpx;
+  display: flex;
+  align-items: center;
+}
+.smallPrizeRank .place view:last-child text{
+  display: inline-block;
+  font-size: 20rpx;
+  color: #3f2622;
+  font-weight: bold;
+  word-break: break-all;
+}
+.smallPrizeRank .place view:last-child image{
+  width: 24rpx;
+  height: auto;
+  display: block;
 }
 .smallPrizeRank .name{
   width: 200rpx;
-  margin-left: 34rpx;
+  margin-left: 30rpx;
 }
 .smallPrizeRank .pumpkinNum{
   width: 150rpx;
-  margin-left: 34rpx;
+  margin-left: 6rpx;
+  text-align: center;
 }
 .smallPrizeRank .award{
   width: 50rpx;

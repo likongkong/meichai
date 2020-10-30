@@ -139,14 +139,12 @@ hideModal: function () {
             var iv = e.detail.iv||'';
             var code = res.code||'';
             //发起网络请求
-            
             var q = Dec.Aese('mod=festival&operation=shareWSJ&isMobile=1&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&code=' + code + '&iv=' + iv + '&encryptedData=' + encryptedData+'&shareUId='+_this.data.shareUId)
             wx.request({
               url: app.signindata.comurl + 'spread.php' + q,
               method: 'GET',
               header: { 'Accept': 'application/json' },
               success: function (res) {
-          
                 if (res.data.ReturnCode == 200) {
                   _this.dialogClick();
                   _this.getData();
@@ -168,19 +166,12 @@ hideModal: function () {
           }
         }
       });
-
-
-
-
     } else { 
-
+      _this.setData({
+        canAssist: false
+      });
       _this.dialogClick();
-
-
-
-
     };
-
   },
 
   /**
@@ -235,6 +226,19 @@ hideModal: function () {
     var _this = this;
     var myDate = new Date();
     var time = myDate.toLocaleDateString().split('/').join('');
+    if( time == 20201030){
+      _this.setData({
+        dateTime : 0,
+      })
+    }else if( time == 20201031){
+      _this.setData({
+        dateTime : 1,
+      })
+    }else{
+      _this.setData({
+        dateTime : 2,
+      })
+    }
     _this.data.refreshtime = Date.parse(new Date())/1000;
     wx.showLoading({ title: '加载中...', }) 
     var q = Dec.Aese('mod=festival&operation=listWSJ&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&shareUId='+_this.data.shareUId+'&shareDate='+time);
@@ -256,11 +260,11 @@ hideModal: function () {
             datetimeAll:res.data.List.date,
             rank:res.data.List.rank,
             tips:res.data.Info.tips,
+            lastRank:res.data.Info.lastRank,
             share:res.data.List.share,
             canAssist:res.data.Info.canAssist,
             halloweenScore:app.signindata.halloweenScore,
           })
-         
         }
       },
       fail: function () {},
@@ -353,9 +357,7 @@ hideModal: function () {
     });
     if (e.detail.detail.userInfo) { } else {
       app.clicktga(8)  //用户按了拒绝按钮
-      _this.setData({
-        canAssist: false
-      });
+      
     };
   },
   pullupsignin: function () {
@@ -415,6 +417,7 @@ hideModal: function () {
     minute = this.timerFilter(minute);
     second = this.timerFilter(second);
     // console.log(hour + "时" + minute + "分" + second + "秒")
+
     this.setData({
       todaycountdown:hour + ":" + minute + ":" + second
     })
