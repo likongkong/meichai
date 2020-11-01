@@ -16,7 +16,8 @@ Component({
     subscribedata:{
       template_id:['Q0tWM7kOihw1TilTeR3YmLzWp5tS0McgyOeJx2xX-B0'],
       subscribe_type:['15']
-    }
+    },
+    btTimg:Date.parse(new Date())/1000<1604246399?true:false,
 
   },
   ready:function(){
