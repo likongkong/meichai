@@ -3,7 +3,6 @@
   "enablePullDownRefresh": true,
   "navigationBarTitleText": "我的小金库",
     "usingComponents": {
-      "h_p": "../halloweenparty/halloweenparty",
       "t_f": "../topfunction/topfunction"
     }
 } 

@@ -4,7 +4,6 @@
   "navigationBarTitleText": "我的订单",
     "usingComponents": {
       "bnavigation": "../bottomComponent/bottomComponent",
-      "h_p": "../halloweenparty/halloweenparty",
       "t_f": "../topfunction/topfunction"
     }
 }

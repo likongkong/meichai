@@ -52,36 +52,6 @@ Component({
     }   
   },
 
-  ready:function(){
-    var _this = this;
-    _this.setData({
-      halloweenScore:app.signindata.halloweenScore
-    });
-    wx.request({
-      url:'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/wsjStartTime.txt',
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        
-        if (res.data) {
-          var time = Date.parse(new Date())/1000;
-          console.log('是否开启万圣节活动',time>=res.data,res)
-          if(time>=res.data){
-            _this.setData({
-              isHalloween:true
-            });            
-          }else{
-            _this.setData({
-              isHalloween:false
-            });             
-          };
-        };  
-      },
-      fail: function (res) {}
-    })
-
-  },
-
   /**
    * 组件的初始数据
    */
@@ -99,20 +69,12 @@ Component({
     is_show_modal:true,
     isOpenToyShow:1596729599<Date.parse(new Date())/1000&&Date.parse(new Date())/1000<1596988799?true:false,
     // isOpenToyShow:1596104581<Date.parse(new Date())/1000<1596988799?true:false
-    isHalloween:false, 
-    btTimg:Date.parse(new Date())/1000<1604246399?true:false,
     
   },
   /**
    * 组件的方法列表
    */
   methods: {
-    // 万圣节跳转
-    jumphp:function(){
-      wx.navigateTo({
-        url: "/pages/modifythenickname/modifythenickname"
-      });
-    },
     // 导航跳转
     whomepage: function (e) {
       var _this = this

@@ -1,5 +1,4 @@
 <!--/pages/smokeboxlist/smokeboxlist.wxml-->
-<h_p></h_p>
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'>
 </t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
@@ -79,6 +78,32 @@
 			</view>
 	</view>
 
+  <!-- 品牌 ip -->
+	<!-- <view style="min-height:80rpx;background:#fff;margin:15rpx 0 15rpx 0;padding-top:15rpx;" wx:if='{{brandListIp&&brandListIp.length!=0}}'>
+			<view style="position:relative;height:150rpx;">
+					<view style="width:120rpx;height:140rpx;float:left;">
+							<view class="ocamensweve" catchtap="jumpsouchtem" data-id='{{brandListIp[0].id}}'>
+									<image class="ocamensweveimg" style="{{brandListIp[0].id==brand_id?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{brandListIp[0].img_url}}"></image>
+									<view class="ocamenswevename specialellipsis" style="{{brandListIp[0].id==brand_id?'color:#f19207;':''}}">{{brandListIp[0].ip_name}}</view>
+							</view>                 
+					</view> 
+					<scroll-view scroll-x="true" style="width:500rpx;white-space: nowrap;height:150rpx;float:left;">
+							<block wx:for='{{brandListIp}}' wx:key='key' wx:for-item='w'>
+									<view class="ocamensweve" catchtap="jumpsouchtem" data-id='{{w.id}}' wx:if='{{w.id!=0}}'>
+											<image class="ocamensweveimg" style="{{w.id==brand_id?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{w.img_url}}"></image>
+											<view class="ocamenswevename specialellipsis" style="{{w.id==brand_id?'color:#f19207;':''}}">{{w.ip_name}}</view>
+									</view>
+							</block>
+					</scroll-view>
+					<view style="width:120rpx;height:140rpx;float:left;">
+							<view class="ocamensweve" catchtap="jumpsouchtem">
+									<image class="ocamensweveimg boxShadow" style="background:#fff;" src="http://www.51chaidan.com/images/sign/activity/20201111/more.png"></image>
+									<view class="ocamenswevename specialellipsis" style="{{brandListIp[0].id==brand_id?'color:#f19207;':''}}">更多品牌</view>
+							</view>                 
+					</view>
+
+			</view>
+	</view> -->
 
 	<view style='width:730rpx;margin:10rpx;overflow:hidden;padding-bottom:70rpx;'>
 		<view wx:if='{{false}}' style='width:44%;margin:10rpx 3%;float:left;' wx:for='{{list}}' wx:key='key'>
@@ -121,6 +146,7 @@
 							</view>
 							<view class='labelstyle'>
 							  <view wx:if='{{item.isRecycle}}' style='background:#1890ff;border-radius:7rpx;display:inline-block;padding:0 8rpx;margin-right:5rpx;'>{{item.recycleRatio}}折回收</view>
+								<view wx:if='{{item.status == 1}}' style='background: #000;border-radius:7rpx;display:inline-block;padding:0 8rpx;margin-right:5rpx;'>未开放</view>
 								<block wx:if='{{item.status == 2 && item.tag!=""}}'>
 										<view wx:if='{{item.tag=="新品"}}' style='background:#FF9800;border-radius:7rpx;display:inline-block;padding:0 8rpx;'>{{item.tag}}</view>
 										<view wx:if='{{item.tag=="预售"}}' style='background:#FB595F;border-radius:7rpx;display:inline-block;padding:0 8rpx;'>{{item.tag}}</view>
@@ -129,10 +155,12 @@
 							</view>
               
 						
-							<view wx:if='{{item.status == 1}}' class='labelstyle' style='background: #000;padding:0 8rpx;'>未开放</view>
+							
 							<view style="width:100%;height:40rpx;color:#d64650;">
 								<view style="float:left;font-size:35rpx;margin-left:10rpx;">
-									<text style="font-size:20rpx;">￥</text>{{item.price}}</view>
+									<block wx:if='{{item.cheaperPrice}}'><text style="font-size:20rpx;">￥</text>{{item.cheaperPrice}}<text style="font-size:20rpx;color:#ccc;text-decoration:line-through;margin-left:10rpx;">￥{{item.price}}</text></block>
+									<block wx:else><text style="font-size:20rpx;">￥</text>{{item.price}}</block>
+								</view>
 								<view wx:if="{{item.tip!='' && !item.isBusinessActivity}}" style="float:right;font-size:20rpx;line-height:30rpx;border:3rpx solid #d64650;border-radius:7rpx;margin:8rpx 10rpx 0 0;">{{item.tip}}</view>
 								<view wx:if="{{item.tip!='' && item.isBusinessActivity}}" style="float:right;font-size:20rpx;line-height:30rpx;border:3rpx solid #4c9a23;border-radius:7rpx;margin:2rpx 10rpx 0 0;color:#4c9a23">{{item.tip}}</view>
 							</view>
@@ -261,6 +289,21 @@
 
 
 		<view style="width:100%;color:#4c9a23;font-size:35rpx;text-align:center;" catchtap="brandpromptsjump">确定</view>
+	</view>
+
+</view>
+
+<!-- 一进列表弹框 -->
+<view wx:if='{{specialActivity}}' style="width:100%;height:100%;position:fixed;top:0px;left:0;z-index:20;">
+
+	<view class='bgstyle' catchtouchmove="myCatchTouch" catchtap="sbltipfun"></view>
+
+	<view style="width:80%;height:320rpx;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;background:white;border-radius:15rpx">
+	  <view style="width:100%;color:black;font-size:35rpx;text-align:center;margin-top:20rpx;">温馨提示</view>
+	  <view style="width:80%;margin:20rpx 10%;font-size:27rpx;color:gray;height:140rpx;">
+		    <text>{{sbltiptxt}}</text>
+		</view>	
+		<view style="width:100%;color:#4c9a23;font-size:35rpx;text-align:center;" catchtap="sbltipfun">确定</view>
 	</view>
 
 </view>

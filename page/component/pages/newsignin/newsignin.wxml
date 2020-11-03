@@ -1,7 +1,6 @@
 <!--  html页面转换  -->
 <import src="../../../../wxParse/wxParse.wxml" />
 
-<h_p></h_p>
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'>
 </t_f>
 

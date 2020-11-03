@@ -1,6 +1,5 @@
 <!--  html页面转换  -->
 <import src="../../wxParse/wxParse.wxml" />
-<h_p id='h_p'></h_p>
 
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}' is_share='{{is_share}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>

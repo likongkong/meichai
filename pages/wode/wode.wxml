@@ -1,7 +1,6 @@
     <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}' is_share='{{is_share}}'></t_f> 
     <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
-<h_p></h_p>
 
 <view hidden="{{bothidden}}" style='position: fixed;top: 0;left: 0;height: 100%;width: 100%;z-index: 30;' catchtouchmove="preventD"></view>
 <view class='box' style="{{tgabox||!bothidden?'position:fixed;top:0;left:0;right:0;bottom:0;':''}}{{isIphoneX?'padding-bottom:138rpx;':''}}">

@@ -68,9 +68,15 @@ Page({
     brand_id:0,
     is_havedata:false,
     elsearch:false,
-    brand_name:""
+    brand_name:"",
+    sbltiptxt:"",
+    specialActivity:false
   },
-
+  sbltipfun:function(){
+    this.setData({
+      specialActivity:!this.data.specialActivity
+    })
+  },  
   // input 值改变
   inputChange: function (e) {
     this.setData({
@@ -331,13 +337,27 @@ Page({
         wx.stopPullDownRefresh();
         if (res.data.ReturnCode == 200) {
           var mlist = res.data.List.activity|| [];
+          if(pid == 0 ){
+            // 品牌id
+            var eldataclass = res.data.List.brand || [];
+            // 品牌ip
+            // var brandListIp = res.data.List.ip || [];
+            // 是否显示弹框
+            var specialActivity = res.data.Info.specialActivity;
+            var special = res.data.List.alert.special || '';
+            _this.setData({
+              eldataclass:eldataclass,
+              // brandListIp:brandListIp,
+              specialActivity:specialActivity,
+              sbltiptxt:special
+            })
+          };
           if (pid == 0 && mlist.length > 0) {
             var listbutnum = res.data.Info.countToys || 0;
             var festivalId = res.data.Info.festivalId || false;
             var festivalTicket = res.data.Info.festivalTicket || "";
 
-            // 品牌id
-            var eldataclass = res.data.List.brand || [];
+
 
             // 添加广告
             var adlist = res.data.List.ads || [];

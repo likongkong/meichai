@@ -1,8 +1,6 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
-
-<h_p></h_p>
 <view class="robotbg" style="position:relative;">
 
   <view style='width:660rpx;height:505rpx;margin:0 auto;padding-top:50rpx;position:relative;'>

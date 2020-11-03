@@ -4,7 +4,6 @@
   "navigationBarTitleText": "限定抽签",
   "usingComponents": {
     "t_f": "../../../../pages/topfunction/topfunction",
-    "h_p": "../../../../pages/halloweenparty/halloweenparty",
     "bnavigation": "/pages/bottomComponent/bottomComponent"
   }
 }

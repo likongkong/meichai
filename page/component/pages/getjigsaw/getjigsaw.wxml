@@ -3,7 +3,6 @@
 
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
-<h_p></h_p>
 <view style='position:relative;padding-top:40rpx;'>
   <image style='width:100rpx;height:100rpx;border-radius:50%;position:absolute;top:0;left:0;right:0;margin:0 auto;' src='{{jigsawinfo.litpic}}'></image>
   <view style='width:94%;background:#fff;margin:0 3% 0 3%;border-radius:10rpx;padding-top:60rpx;'>

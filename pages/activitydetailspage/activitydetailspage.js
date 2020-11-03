@@ -310,6 +310,7 @@ Page({
 
     pictboxbox: false,
     cliptxt:'zhangjing@51chaidan.com',
+    addsetData:[[]]
   },
   pictboxboxfun: function () {
     this.setData({ pictboxbox: false });
@@ -509,7 +510,11 @@ closefrindcommoni:function(){
               exhdata: list,
               userbranddata: brand
             })
-            _this.addsementfun();
+
+            if(_this.data.is_exhibition==1){
+              _this.addsementfun();
+            };
+
           } else {
             var list = res.data.List.activity || [];
             if (list.length != 0) {

@@ -1,5 +1,5 @@
 <import src="../../../../wxParse/wxParse.wxml" />
-<h_p id="h_p"></h_p>
+
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}' is_share='{{is_share}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
@@ -243,6 +243,16 @@
 
 	</view>
 
+		<view wx:if="{{brandRule!=''}}" style='width:100%;overflow:hidden;'>
+						<view style="margin:20rpx 30rpx;">
+										<view style="width:100%;line-height:40rpx;padding:20rpx 0;">
+														<view style='width:100%;text-align:center;font-size:30rpx;'>参与规则</view>
+														<view style="margin: 0 40rpx;font-size:25rpx;">
+																		<text>{{brandRule}}</text>
+														</view>
+										</view>
+						</view>
+		</view>
 
 	<block wx:if='{{is_exhibition!=1&&brandId<=0}}'>
 		<view style='width:100%;overflow:hidden;'>

@@ -1,7 +1,6 @@
 <!--page/secondpackge/pages/exhibitionwelfare/exhibitionwelfare.wxml-->
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
-<h_p></h_p>
 <view style='background:#000;height:68rpx;padding:0 20rpx;'>
 	<view wx:if='{{welfareInfo.welfareStatus!=0 && welfareInfo.welfareStatus!=4}}' class='countdown' style='font-size:40rpx;float:left;'>
 		<text  class='timetextstyle' style='margin-right:10rpx;'>活动倒计时</text>

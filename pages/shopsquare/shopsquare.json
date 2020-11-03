@@ -4,7 +4,6 @@
   "usingComponents": {
     "t_f": "../../../../pages/topfunction/topfunction",
     "bnavigation": "/pages/bottomComponent/bottomComponent",
-    "h_p": "../halloweenparty/halloweenparty",
     "tga_c": "../../../../pages/tgacomponent/tgacomponent"
   }
 }

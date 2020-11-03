@@ -5,7 +5,6 @@
   "usingComponents": {
     "t_f": "../topfunction/topfunction",
     "bnavigation": "../bottomComponent/bottomComponent",
-    "h_p": "../halloweenparty/halloweenparty",
     "tga_c": "../tgacomponent/tgacomponent"
   }
 }

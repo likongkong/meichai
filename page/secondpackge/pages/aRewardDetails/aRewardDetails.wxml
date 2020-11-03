@@ -4,7 +4,6 @@
 <canvas canvas-id='redpagshare' class='snapshotshareclass'></canvas>
 <!--  html页面转换  -->
 <import src="../../../../wxParse/wxParse.wxml"/>
-<h_p id="h_p"></h_p>
 <view class="adheadbox" style="width:100%;padding: 0 20rpx;box-sizing: border-box; position: fixed;top:{{statusBarHeightMc}}px;left: 0; z-index: 10;background: #f5f6fa;">
     <view class="adhead">
     <scroll-view scroll-x="true" class="adhleft">

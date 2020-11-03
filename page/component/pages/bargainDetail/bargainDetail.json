@@ -5,7 +5,6 @@
   "navigationBarBackgroundColor": "#ff6968",
   "usingComponents": {
     "hidewindow": "../../../../pages/hidewindow/hidewindow",
-    "h_p": "../../../../pages/halloweenparty/halloweenparty",
     "t_f": "../../../../pages/topfunction/topfunction"
   }
 }

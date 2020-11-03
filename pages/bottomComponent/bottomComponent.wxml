@@ -48,17 +48,8 @@
 		</view>
 	</view> -->
 
-  <!-- 万圣节 -->
-<view class='comNavigationEve' wx:if='{{btTimg}}'>
-	<view style='width:100%;height:100%;position:relative;' bindtap='{{isHalloween?"jumphp":"subscrfun"}}'>
-		<view class='navigationltop'>
-			<image src='http://www.51chaidan.com/images/sign/2020wsj/ws_6.png' class='navigationltopimg'></image>
-		</view>
-		<view wx:if='{{isChar}}' class='navigationlcon' style='{{wnews?"color:#fd2844":""}};'>万圣节活动</view>
-	</view>
-</view>
 <!-- 一番赏 -->
-<view wx:elif='{{isProduce}}' class='comNavigationEve'>
+<view wx:if='{{isProduce}}' class='comNavigationEve'>
 	<view style='width:100%;height:100%;position:relative;' bindtap='wnews'>
 		<view class='navigationltop'>
 			<image src='https://cdn.51chaidan.com//images/sign/yifanshang.png' class='navigationltopimg'></image>

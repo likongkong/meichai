@@ -1,7 +1,7 @@
 
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
-<h_p></h_p>
+
 <view class='dllocabox'>
    <view class='dllockbox' style='border:0;' data-title='0' catchtap='jumpbackgcreat'>
       <view class='dllocktxtl' style='color:#4e628a;font-weight: bold;'>

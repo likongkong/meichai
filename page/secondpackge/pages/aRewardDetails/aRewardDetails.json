@@ -3,7 +3,6 @@
   "enablePullDownRefresh": true,
   "usingComponents": {
     "t_f": "../../../../pages/topfunction/topfunction",
-    "h_p": "../../../../pages/halloweenparty/halloweenparty",
     "bnavigation": "/pages/bottomComponent/bottomComponent",
     "tga_c": "../../../../pages/tgacomponent/tgacomponent",
     "history": "../aRewardHistory/aRewardHistory"

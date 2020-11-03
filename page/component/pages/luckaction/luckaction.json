@@ -2,9 +2,7 @@
   "navigationBarTitleText": "美拆大咖",
   "asdfasfdflePullDownRefresh": true,
   "enablePullDownRefresh": true,
-
   "usingComponents": {
-    "h_p": "../../../../pages/halloweenparty/halloweenparty",
     "bnavigation": "/pages/bottomComponent/bottomComponent",
     "t_f": "../../../../pages/topfunction/topfunction"
   }

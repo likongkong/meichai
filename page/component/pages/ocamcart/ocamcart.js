@@ -966,7 +966,6 @@ Page({
                 _this.getCartList("total");
               },1500)
 
-              _this.selectComponent('#h_p').indexShareBanner();
             },
             'fail': function (res) {
               _this.getCartList("limit");

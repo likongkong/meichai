@@ -2,9 +2,7 @@
   "asdfasfdflePullDownRefresh": true,
   "enablePullDownRefresh": true,  
   "navigationBarTitleText": "消息中心",
-
   "usingComponents": {
-    "h_p": "../../../../pages/halloweenparty/halloweenparty",
     "t_f": "../../../../pages/topfunction/topfunction"
   }
 

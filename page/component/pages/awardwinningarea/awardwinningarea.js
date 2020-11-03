@@ -2206,8 +2206,6 @@ Page({
               _this.getCartInfo()
               // 订阅授权
               app.comsubscribe(_this);
-              
-              _this.selectComponent('#h_p').indexShareBanner();
 
               var cart_id = _this.data.cart_id;
               if (_this.data.isAddToyCabinet==1){

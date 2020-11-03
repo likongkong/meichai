@@ -1293,7 +1293,6 @@ Page({
                 app.signindata.perspcardata = _this.data.tempChance.overtime;
                 _this.data.perspcardata = _this.data.tempChance.overtime;
               }
-              _this.selectComponent('#h_p').indexShareBanner();
 
             },
             'fail': function(res) {

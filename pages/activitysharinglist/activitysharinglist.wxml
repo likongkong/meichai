@@ -2,7 +2,6 @@
     <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
     <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
  
-<h_p></h_p>
 
  <!-- position:fixed;top:{{statusBarHeightMc}}px;left:0;z-index:8; -->
 <view style='width:100%;margin-bottom:10rpx;'>

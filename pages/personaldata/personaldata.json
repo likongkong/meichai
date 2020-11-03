@@ -1,7 +1,6 @@
 {
   "navigationBarTitleText": "个人资料",
   "usingComponents": {
-    "h_p": "../halloweenparty/halloweenparty",
     "t_f": "../topfunction/topfunction"
   }
 }

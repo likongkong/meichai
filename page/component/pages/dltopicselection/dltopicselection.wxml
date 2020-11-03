@@ -1,7 +1,6 @@
 
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
-<h_p></h_p>
 <view class='dltshead'>请从下方选择话题</view>
 <view class='dldlbottom' wx:for='{{dlfhboteve}}' wx:key='key' catchtap='selectfun' data-topic_id='{{item.topic_id}}' data-topic_name='{{item.topic_name}}'>
     <view class='dldltottomleft' style='color:#000;'><image class='dldlbotimg' src='{{item.topic_img}}'></image>{{item.topic_name}}</view>

@@ -644,7 +644,12 @@ Page({
             _this.setData({
               pageBg: "#e6d4c6"
             })
-          }
+          };
+          // 是否有便宜价格
+          if(res.data.Info.activity.cheaperPrice){
+            res.data.Info.activity.shop_price = res.data.Info.activity.cheaperPrice
+          };
+
           if (res.data.Info.activity.status == 1) {
             res.data.Info.activity.start_time = time.toDate(res.data.Info.activity.start_time);
           }
@@ -1756,7 +1761,6 @@ Page({
                   //   _this.getInfo()
                   // }, 3000)
                 }
-                _this.selectComponent('#h_p').indexShareBanner();
 
               }, 1000);
 

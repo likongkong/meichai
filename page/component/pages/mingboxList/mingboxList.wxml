@@ -1,7 +1,6 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'>
 </t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
-<h_p></h_p>
 <view class='winningthepbox' wx:if='{{isAwardOrder}}' catchtap='jumporder'>
   <view class='winningthepimgtxt'>
     <image class='winningthepimgshop' src='{{awardOrder.Info.cover}}'></image>

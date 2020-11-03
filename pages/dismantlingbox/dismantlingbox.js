@@ -478,7 +478,6 @@ Page({
                       _this.exhibitionBenefits()
                     }
                 }) 
-                _this.selectComponent('#h_p').indexShareBanner();
                  
             },
             'fail': function (res) {

@@ -4,7 +4,6 @@
   加载中...
 </loading>
 
-<h_p></h_p>
 
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}' is_share='{{is_share}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
@@ -486,7 +485,7 @@
 
         <view style='width:100%;height:10rpx;background:#f4f5f9;' wx:if='{{listBlindBox.length!=0}}'></view>
         <!-- 在线抽盒机 -->
-        <view class='actrecact' wx:if='{{listBlindBox.length!=0}}'>
+        <!-- <view class='actrecact' wx:if='{{listBlindBox.length!=0}}'>
           <view class='dopTab'>
             <view class='dopright' catchtap='bblistfun'>全部></view>
             <view style='width:100%;color:#333;font-size:26rpx;height:73rpx;line-height:73rpx;text-align:center;'>在线抽盒机</view>
@@ -498,10 +497,13 @@
                 <view class='bctitle specialellipsis' style='font-size:26rpx;padding:0;width:100%;height:36rpx;text-align:center;'>
                   {{item.name}}
                 </view>
-              </view>
+              </view> 
             </scroll-view>
           </view>
-        </view>
+        </view> -->
+
+        <somke colortitle='#000'></somke>
+
         <view style='width:100%;height:10rpx;background:#f4f5f9;' wx:if='{{listShowBox.length!=0}}'></view>
         <!-- 原价拆明盒 -->
         <view class='actrecact' wx:if='{{listShowBox.length!=0}}'>

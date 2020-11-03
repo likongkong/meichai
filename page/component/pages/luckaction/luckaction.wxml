@@ -1,7 +1,7 @@
 <!--page/component/pages/luckaction/luckaction.wxml-->
 
 <canvas canvas-id='canimgserceshi' style='width:375px;height:603px;position:fixed;left:0;top:-999999rpx;'></canvas>
-<h_p></h_p>
+
 <!-- <canvas wx:key='key' canvas-id='canimgser' class='myordercanimgser'></canvas> -->
 
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 

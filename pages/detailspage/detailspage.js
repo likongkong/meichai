@@ -458,16 +458,7 @@ Page({
         var scale = height / dh
         ctx.setFillStyle('#fff')
         ctx.fillRect(0, 0, dw, 240)
-        ctx.drawImage(res.path, (dw - width / scale) / 2, 0, width / scale, dh)
-        var lineHeight = 25; // 标题的高度
-        var initHeight = 180;
-        ctx.setFontSize(18)
-        ctx.setFillStyle('red')
-        var price = '';
-        var begin = _this.drawText(ctx, price + ' ', initHeight + lineHeight, lineHeight, 0, dw);
-        ctx.setFillStyle('black')
-        var gsale_suit = _this.data.zunmdata.gsale_suit?_this.data.zunmdata.gsale_suit.replace(/[\r\n]/g, ""):"";
-        var pre_name = _this.data.zunmdata.pre_name ? _this.data.zunmdata.pre_name.replace(/[\r\n]/g, ""):"";
+        ctx.drawImage(res.path, (dw - width / scale) / 2, 0, width / scale, dh);
         ctx.draw(true, setTimeout(function () {
           wx.canvasToTempFilePath({
             canvasId: 'snapshot',
@@ -840,7 +831,6 @@ Page({
                       app.comsubscribe(_this);
                     };
                     
-                    _this.selectComponent('#h_p').indexShareBanner();
 
                     if (payinfo.isFreeBuyOrder) {
                       wx.navigateTo({
@@ -2965,8 +2955,7 @@ Page({
         title: '￥' + _this.data.zunmdata.gsale + '  ' + _this.data.zunmdata.gname,
         path: '/pages/detailspage/detailspage?gid=' + _this.data.gid + '&store_id=0&referee='+_this.data.uid,
         imageUrl: _this.data.snapshot,
-        success: function (res) {
-        }, 
+        success: function (res) {}, 
       };
       var q = Dec.Aese('mod=share&operation=order&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&oid=' + _this.data.cart_id)
       wx.request({

@@ -147,7 +147,8 @@ Page({
     // 判断是否能分享
     is_share_but:true,
     // 太阳码参数 用户是否能分享 1 可以分享 
-    canShare:0
+    canShare:0,
+    addsetData:[[]]
   },
   
   sharefriend:function(){
@@ -749,6 +750,7 @@ Page({
           _this.setData({
             // is_brand_display:is_brand_display,
             activityDesc: res.data.Info.activityDesc || "",
+            brandRule: res.data.Info.infoActivity.brandRule || "",
             shareStatus: res.data.Info.shareStatus || "",
             activityMD: res.data.Info.activityMD || "",
             infoActivity: res.data.Info.infoActivity,
@@ -867,7 +869,10 @@ Page({
               exhdata: list,
               userbranddata: brand
             })
-            _this.addsementfun();
+            if(_this.data.is_exhibition==1){
+              _this.addsementfun();
+            };
+
           } else {
             var list = res.data.List.activity || [];
             if (list.length != 0) {
@@ -1702,7 +1707,6 @@ Page({
               } else {
                 app.showToastC('购买成功');
               }
-              _this.selectComponent('#h_p').indexShareBanner();
 
             },
             'fail': function (res) {

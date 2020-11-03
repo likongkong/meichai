@@ -2,7 +2,6 @@
 
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
-<h_p></h_p>
 <view class='box'>
     <view class='sousuo'>
        <input class='indheadinp' type='text' bindinput="inputChange" value='{{inputdata}}' placeholder='{{inputtxt1}}' placeholder='{{inputtxt1}}' bindfocus='onFocus' bindblur='onBlur' bindconfirm="jumpsoousuo"></input>

@@ -525,7 +525,6 @@ Page({
     setTimeout(function(){
       _this.otherdata();
       app.indexShareBanner();
-      _this.selectComponent('#h_p').indexShareBanner();
     },1000);
     if (app.signindata.isAwardOrder) {
       _this.setData({ isAwardOrder: app.signindata.isAwardOrder, awardOrder: app.signindata.awardOrder || false });
@@ -834,7 +833,7 @@ Page({
     }
     return newArrList;
   },
-  // 一天只显示一次 商品推荐弹框
+  // 一天只显示一次 商品推荐弹框 
   indexelafradatefun:function(){
     var STORAGE_KEY = 'INDEX_ELA_FRA';
     var _this = this;
