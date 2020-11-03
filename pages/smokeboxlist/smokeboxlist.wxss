@@ -326,3 +326,33 @@ page {
   font-size: 24rpx;
 }
 
+.sblipsebox{
+  width:100%;display:flex;justify-content: space-between;flex-wrap: wrap;
+}
+.sblipseve{
+  width: 80rpx;
+  display: inline-block;
+  margin:0 15rpx 20rpx 15rpx ;
+}
+.sblipseveimg{
+  width: 80rpx;
+  height: 80rpx;
+  display: inline-block;
+  border-radius: 50%;
+}
+.sblipsevetxt{
+  width: 100%;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #000;
+}
+.wholesblimgdown{
+  width:26rpx;height:12rpx;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 5%;
+  margin:auto;
+}

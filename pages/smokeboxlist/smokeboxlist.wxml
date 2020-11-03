@@ -81,29 +81,70 @@
   <!-- 品牌 ip -->
 	<!-- <view style="min-height:80rpx;background:#fff;margin:15rpx 0 15rpx 0;padding-top:15rpx;" wx:if='{{brandListIp&&brandListIp.length!=0}}'>
 			<view style="position:relative;height:150rpx;">
-					<view style="width:120rpx;height:140rpx;float:left;">
-							<view class="ocamensweve" catchtap="jumpsouchtem" data-id='{{brandListIp[0].id}}'>
-									<image class="ocamensweveimg" style="{{brandListIp[0].id==brand_id?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{brandListIp[0].img_url}}"></image>
+					<view style="width:110rpx;height:140rpx;float:left;">
+							<view class="sblipseve" catchtap="jumpsouchtem" data-id='{{brandListIp[0].id}}'>
+									<image class="sblipseveimg"  style="{{brandListIp[0].id==brand_id?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{brandListIp[0].img_url}}"></image>
 									<view class="ocamenswevename specialellipsis" style="{{brandListIp[0].id==brand_id?'color:#f19207;':''}}">{{brandListIp[0].ip_name}}</view>
 							</view>                 
 					</view> 
-					<scroll-view scroll-x="true" style="width:500rpx;white-space: nowrap;height:150rpx;float:left;">
+					<scroll-view scroll-x="true" style="width:520rpx;white-space: nowrap;height:150rpx;float:left;">
 							<block wx:for='{{brandListIp}}' wx:key='key' wx:for-item='w'>
-									<view class="ocamensweve" catchtap="jumpsouchtem" data-id='{{w.id}}' wx:if='{{w.id!=0}}'>
-											<image class="ocamensweveimg" style="{{w.id==brand_id?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{w.img_url}}"></image>
+									<view class="sblipseve" catchtap="jumpsouchtem" data-id='{{w.id}}' wx:if='{{w.id!=0}}'>
+											<image class="sblipseveimg"  style="{{w.id==brand_id?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{w.img_url}}"></image>
 											<view class="ocamenswevename specialellipsis" style="{{w.id==brand_id?'color:#f19207;':''}}">{{w.ip_name}}</view>
 									</view>
 							</block>
 					</scroll-view>
-					<view style="width:120rpx;height:140rpx;float:left;">
-							<view class="ocamensweve" catchtap="jumpsouchtem">
-									<image class="ocamensweveimg boxShadow" style="background:#fff;" src="http://www.51chaidan.com/images/sign/activity/20201111/more.png"></image>
-									<view class="ocamenswevename specialellipsis" style="{{brandListIp[0].id==brand_id?'color:#f19207;':''}}">更多品牌</view>
+					<view style="width:110rpx;height:140rpx;float:left;">
+							<view class="sblipseve" catchtap="morebranfun">
+									<image class="sblipseveimg boxShadow" style="background:#fff;" src="http://www.51chaidan.com/images/sign/activity/20201111/more.png"></image>
+									<view class="ocamenswevename specialellipsis">更多品牌</view>
 							</view>                 
 					</view>
 
 			</view>
 	</view> -->
+
+  <block wx:if='{{false}}'>
+	
+				<!-- 大家都在买  -->
+				<view style='width:100%;' wx:if='{{brand}}'>
+						<view style='width:700rpx;height:60rpx;margin:0 auto;'>
+							<scroll-view scroll-x="true" class='ocascroview' scroll-with-animation="true" bindscroll='scrollleftf' scroll-left='{{scrollleft}}'>
+									<view class='ocastev' wx:for='{{brandscroll}}' wx:key='key' id='q{{item.id}}' data-c_id='{{item.id}}' catchtap='tabbotdata' style='{{tabselid==item.id?"color:#f29a19;text-decoration:underline;":""}}'>{{item.name}}</view>
+							</scroll-view>
+							<view class='ocascrtxt' style="color:#ff2742;" catchtap='everybodbuy' wx:if='{{infodata.activityType!=0}}'>{{infodata.activityType==10?'一番赏》':'去抽盒》'}}</view>
+						</view>
+						<view style='width:100%;overflow: hidden;'>
+								<view style='width:25%;height:303rpx;float:left;' wx:for='{{brandlist}}' wx:key='key' catchtap='jumpshopbut' data-name='{{item.role_name}}' data-minprice='{{item.minPrice}}' data-maxprice='{{item.maxPrice}}' data-goods_id='{{item.goods_id}}'>
+										<view style='width:100%;height:220rpx;position:relative;'>
+												<image class='eveimgrange'  style='height:200rpx;width:96%;' mode='aspectFit' src='{{item.img}}?imageMogr2/thumbnail/x400'></image>
+										</view>
+										<view class='specialellipsis' style='width:170rpx;height:40rpx;text-align:center;font-size:24rpx;color:#000;margin:0 auto;'>{{item.role_name}}</view>
+										<block wx:if='{{item.minPrice==0&&item.maxPrice==0}}'>
+												<view class='specialellipsis' style='width:170rpx;height:40rpx;text-align:center;font-size:24rpx;color:#ec656c;margin:0 auto;'>暂无报价</view>
+										</block>
+										<block wx:else>
+												<view class='specialellipsis' style='width:170rpx;height:40rpx;text-align:center;font-size:24rpx;color:#ec656c;margin:0 auto;'>
+														<block wx:if='{{item.minPrice!=item.maxPrice}}'>{{item.minPrice}}~{{item.maxPrice}}元</block>
+														<block wx:else>{{item.maxPrice}}元</block>
+												</view>
+										</block>
+										
+								</view>
+						</view>
+				</view>
+
+				<view style='width:100%;padding-top:200rpx;' wx:if='{{brandlist.length==0&&iftrnodatabr&&brand}}'>
+						<image src='../../../../pages/images/default_BG_Image@3x.png' style='width:414rpx;height:255rpx;display:block;margin:0 auto;'></image>
+				</view>
+
+
+
+	</block>
+
+
+
 
 	<view style='width:730rpx;margin:10rpx;overflow:hidden;padding-bottom:70rpx;'>
 		<view wx:if='{{false}}' style='width:44%;margin:10rpx 3%;float:left;' wx:for='{{list}}' wx:key='key'>
@@ -158,7 +199,7 @@
 							
 							<view style="width:100%;height:40rpx;color:#d64650;">
 								<view style="float:left;font-size:35rpx;margin-left:10rpx;">
-									<block wx:if='{{item.cheaperPrice}}'><text style="font-size:20rpx;">￥</text>{{item.cheaperPrice}}<text style="font-size:20rpx;color:#ccc;text-decoration:line-through;margin-left:10rpx;">￥{{item.price}}</text></block>
+									<block wx:if='{{item.cheaperPrice}}'><text style="font-size:20rpx;">￥</text>{{item.cheaperPrice}}<text style="font-size:20rpx;color:#7b7b7b;text-decoration:line-through;margin-left:10rpx;">￥{{item.price}}</text></block>
 									<block wx:else><text style="font-size:20rpx;">￥</text>{{item.price}}</block>
 								</view>
 								<view wx:if="{{item.tip!='' && !item.isBusinessActivity}}" style="float:right;font-size:20rpx;line-height:30rpx;border:3rpx solid #d64650;border-radius:7rpx;margin:8rpx 10rpx 0 0;">{{item.tip}}</view>
@@ -306,4 +347,23 @@
 		<view style="width:100%;color:#4c9a23;font-size:35rpx;text-align:center;" catchtap="sbltipfun">确定</view>
 	</view>
 
+</view>
+
+
+<!--ip列表弹框 -->
+<view wx:if='{{morebrankip}}' style="width:100%;height:100%;position:fixed;top:0px;left:0;z-index:20;">
+	<view class='bgstyle' catchtouchmove="myCatchTouch" catchtap="morebranfun"></view>
+	<view style="width:100%;height:820rpx;position:absolute;bottom:0;left:0;right:0;margin:auto;background:white;border-radius:15rpx">
+	  <view catchtap="morebranfun" style="width:100%;color:black;font-size:35rpx;text-align:center;margin:20rpx 0;position: relative;">全部IP<image src="../images/comtriangle.png" class="wholesblimgdown"></image></view>
+	  <view style="width:90%;margin:auto;height:700rpx;">
+		   <scroll-view scroll-y="true" style='width:100%;height:100%;'>
+			     <view class="sblipsebox">
+							<view class="sblipseve" wx:for='{{list}}' wx:key='key'>
+									<image class="sblipseveimg" src="{{item.cover}}"></image>
+									<view class="sblipsevetxt specialellipsis">{{item.title}}</view>
+							</view>					 
+					 </view>
+			 </scroll-view>
+		</view>	
+	</view>
 </view>

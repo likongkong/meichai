@@ -70,7 +70,13 @@ Page({
     elsearch:false,
     brand_name:"",
     sbltiptxt:"",
-    specialActivity:false
+    specialActivity:false,
+    morebrankip:false
+  },
+  morebranfun:function(){
+    this.setData({
+      morebrankip:!this.data.morebrankip
+    })
   },
   sbltipfun:function(){
     this.setData({
