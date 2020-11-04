@@ -66,13 +66,53 @@ Page({
     appid:0,
     brandprompts:false,
     brand_id:0,
+    ip_brand_id:0,
+    ip_id:0,
+    brandArr:[],
+    ipArr :[],
     is_havedata:false,
     elsearch:false,
     brand_name:"",
     sbltiptxt:"",
     specialActivity:false,
-    morebrankip:false
+    morebrankip:false,
+    scrollleft: 1,
+    jumpBulletBox:true
   },
+
+  // tab切换
+  tabbotdata: function (w) {
+    var _this = this;
+    var value = w.currentTarget.dataset.c_id || w.target.dataset.c_id || 0;
+    var tablist = _this.data.tablist || [];
+
+    _this.setData({
+      ip_id: value
+    });
+
+    // 获取list数据
+    this.getlist(0);
+    //创建节点选择器
+    var query = wx.createSelectorQuery();
+    //选择id
+    query.select('#q' + value).boundingClientRect();
+    query.exec(function (res) {
+      if (res && res[0]) {
+        if (res[0].width) {
+          _this.setData({
+            scrollleft: w.currentTarget.offsetLeft - wx.getSystemInfoSync().windowWidth / 2 + 70 + (res[0].width / 2)
+          });
+        };
+      }
+    });
+  },
+
+  //  获取滚动条位置
+  scrollleftf: function (event) {
+    this.data.scrollwidth = event.detail.scrollwidth;
+  },
+
+
   morebranfun:function(){
     this.setData({
       morebrankip:!this.data.morebrankip
@@ -319,6 +359,17 @@ Page({
     this.getlist(0);
   },
 
+  // ip 的品牌
+  jumpsouchtemip:function(w){
+    var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
+    this.setData({
+      ip_brand_id: id||0,
+      ip_id: 0,
+      morebrankip:false
+    });
+    this.getlist(0);
+  },
+
   getlist: function(pid) {
     var _this = this
     wx.showLoading({
@@ -331,8 +382,9 @@ Page({
     } 
     _this.setData({is_havedata:false})
 
-    console.log('mod=blindBox&operation=list&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + "&pid=" + pid+'&brandId='+_this.data.brand_id+'&searchKey='+_this.data.brand_name)
-    var q1 = Dec.Aese('mod=blindBox&operation=list&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + "&pid=" + pid+'&brandId='+_this.data.brand_id+'&searchKey='+_this.data.brand_name);
+    console.log('mod=blindBox&operation=list&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + "&pid=" + pid+'&brandId='+_this.data.ip_brand_id+'&searchKey='+_this.data.brand_name+'&ip_id='+_this.data.ip_id)
+
+    var q1 = Dec.Aese('mod=blindBox&operation=list&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + "&pid=" + pid+'&brandId='+_this.data.ip_brand_id+'&searchKey='+_this.data.brand_name+'&ip_id='+_this.data.ip_id);
 
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q1,
@@ -345,18 +397,43 @@ Page({
           var mlist = res.data.List.activity|| [];
           if(pid == 0 ){
             // 品牌id
-            var eldataclass = res.data.List.brand || [];
+            // var eldataclass = res.data.List.brand || [];
             // 品牌ip
-            // var brandListIp = res.data.List.ip || [];
+            var brandArr = res.data.List.brandArr || [];
+            var ipArr = res.data.List.ipArr || [];
             // 是否显示弹框
-            var specialActivity = res.data.Info.specialActivity;
+            if(_this.data.jumpBulletBox){
+              var specialActivity = res.data.Info.specialActivity;
+              _this.data.jumpBulletBox = false;
+            }else{
+              var specialActivity = false;
+            };
             var special = res.data.List.alert.special || '';
+            var ip_id = res.data.List.checkIpId || 0;
             _this.setData({
-              eldataclass:eldataclass,
-              // brandListIp:brandListIp,
+              // eldataclass:eldataclass,
+              brandArr:brandArr,
+              ipArr:ipArr,
               specialActivity:specialActivity,
-              sbltiptxt:special
-            })
+              sbltiptxt:special,
+              ip_id:ip_id
+            },function(){
+              if(ip_id){
+                 var query = wx.createSelectorQuery();
+                 //选择id
+                 query.select('#q' + ip_id).boundingClientRect();
+                 query.exec(function (res) {
+                   console.log(res)
+                   if (res && res[0]) {
+                     if (res[0].width) {
+                       _this.setData({
+                         scrollleft: res[0].left - wx.getSystemInfoSync().windowWidth / 2 + 70 + (res[0].width / 2)
+                       });
+                     };
+                   }
+                 });
+              };
+            });
           };
           if (pid == 0 && mlist.length > 0) {
             var listbutnum = res.data.Info.countToys || 0;
@@ -397,7 +474,7 @@ Page({
               festivalId: festivalId,
               festivalTicket: festivalTicket,
               bannerList: res.data.List.banner || [],
-              eldataclass:eldataclass
+              // eldataclass:eldataclass
             })
           } else if (mlist.length > 0) {
 

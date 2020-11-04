@@ -330,15 +330,16 @@ page {
   width:100%;display:flex;justify-content: space-between;flex-wrap: wrap;
 }
 .sblipseve{
-  width: 80rpx;
+  width: 106rpx;
   display: inline-block;
-  margin:0 15rpx 20rpx 15rpx ;
+  margin:0 0 20rpx 0 ;
 }
 .sblipseveimg{
   width: 80rpx;
   height: 80rpx;
   display: inline-block;
   border-radius: 50%;
+  margin: auto;
 }
 .sblipsevetxt{
   width: 100%;
@@ -356,3 +357,27 @@ page {
   right: 5%;
   margin:auto;
 }
+.ocascroview{
+  width:700rpx;
+  white-space:nowrap;
+  height: 60rpx;
+  float: left;
+}
+.ocastev{
+  height: 60rpx;
+  line-height: 60rpx;
+  padding:0 20rpx 0 0;
+  display: inline-block;
+  font-size: 24rpx;
+}
+.ocascrtxt{
+  height: 60rpx;
+  line-height: 60rpx;
+  float: right;
+  font-size: 24rpx;
+}
+
+
+
+
+

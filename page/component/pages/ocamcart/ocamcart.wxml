@@ -10,7 +10,7 @@
 <view style='width:100%;padding-bottom:260rpx;' wx:if='{{shopdetail}}'>
   <view style='width:100%;overflow:hidden;padding:50rpx 0;'>
     <view style='width:300rpx;float:left;height:200rpx;position:relative;'>
-      <image style='width:{{shopimgtop}}rpx;height:200rpx;display:block;float:right;' bindload="imageLoadad" src='{{shopdetail.roleImg}}'></image>
+      <image style='width:200rpx;height:200rpx;display:block;float:right;' mode='aspectFit' src='{{shopdetail.roleImg}}'></image>
                   <!-- 碎片 -->
       <view wx:if='{{shopdetail.channelId==3}}' class='fragment' style='width:{{shopimgtop}}rpx;right:0;bottom:0;'>
          <view class='fragmentbg'></view>
@@ -39,7 +39,7 @@
       <view style='width:246rpx;float:left;margin-left:15rpx;height:100%;'>
         <scroll-view scroll-x="true" class="disanum_tab_comtainer" style='width:600rpx;' style='width:100%;'>
           <view wx:for='{{item.role}}' wx:key='key' wx:for-index='wn' wx:for-item='w' style='width:{{w.width||100}}rpx;height:120rpx;position:relative;margin-right:30rpx;display:inline-block;'>
-            <image bindload="imageLoad" data-eve='5' data-ind='{{index}}' data-num='{{wn}}' style='width:{{w.width||100}}rpx;height:100rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;' src='{{w.roleImg}}'></image>
+            <image bindload="imageLoad" data-eve='5' data-ind='{{index}}' mode='aspectFit' data-num='{{wn}}' style='width:{{w.width||100}}rpx;height:100rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;' src='{{w.roleImg}}'></image>
             <view wx:if='{{(wn+1)!=item.role.length}}' style='width:30rpx;height:120rpx;position:absolute;top:0;right:-30rpx;line-height:120rpx;color:#ef767c;text-align:center;'>+</view>
                               <!-- 碎片 -->
             <view wx:if='{{w.channelId==3}}' class='fragment' style='width:{{w.width||100}}rpx;left:0;bottom:10rpx;'>
@@ -71,7 +71,7 @@
                 <view style='width:460rpx;float:left;height:100%;'>
                   <scroll-view scroll-x="true" class="disanum_tab_comtainer" style='width:600rpx;' style='width:100%;'>
                     <view style='width:{{w.width||120}}rpx;height:120rpx;position:relative;margin-right:30rpx;display:inline-block;' wx:for='{{item.role}}' wx:key='key' wx:for-item='w' wx:for-index='wn'>
-                      <image style='width:{{w.width||120}}rpx;height:100rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;' src='{{w.roleImg}}' bindload="imageLoad" data-eve='2' data-ind='{{index}}' data-num='{{wn}}'></image>
+                      <image style='width:{{w.width||120}}rpx;height:100rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;' src='{{w.roleImg}}' mode='aspectFit' bindload="imageLoad" data-eve='2' data-ind='{{index}}' data-num='{{wn}}'></image>
                       <view wx:if='{{(wn+1)!=item.role.length}}' style='width:30rpx;height:120rpx;position:absolute;top:0;right:-30rpx;line-height:120rpx;color:#ef767c;text-align:center;'>+</view>
                        <!-- 碎片 -->
                         <view wx:if='{{w.channelId==3}}' class='fragment' style='width:{{w.width||100}}rpx;left:0;bottom:10rpx;right:0;margin:0 auto;'>
@@ -84,7 +84,7 @@
           </block>
           <block wx:else>
               <view style='position:relative;width:100rpx;height:100%;float:left;'>
-                <image style='width:{{item.role[0].width||120}}rpx;height:100rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;' src='{{item.role[0].roleImg}}'  bindload="imageLoad" data-eve='2' data-ind='{{index}}' data-num='0'></image>
+                <image style='width:{{item.role[0].width||120}}rpx;height:100rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;' src='{{item.role[0].roleImg}}'  mode='aspectFit' bindload="imageLoad" data-eve='2' data-ind='{{index}}' data-num='0'></image>
                 <!-- 碎片 -->
                 <view wx:if='{{item.role[0].channelId==3}}' class='fragment' style='width:{{item.role[0].width||100}}rpx;left:0;bottom:10rpx;right:0;margin:0 auto;'>
                   <view class='fragmentbg'></view>
@@ -121,7 +121,7 @@
               <block wx:for='{{item.role}}' wx:key='key' wx:for-item='w' wx:for-index='wn'>
                   <view style='width:{{w.width>80?w.width:"80"}}rpx;height:130rpx;display:inline-block;margin-right:10rpx;vertical-align: top;'>
                       <view style='width:{{w.width>80?w.width:"80"}}rpx;height:100rpx;position:relative;'>
-                          <image style="width:{{w.width||80}}rpx;height:100rpx;border-radius: 6rpx;display:block;margin:auto;" src="{{w.roleImg}}"  bindload="imageLoad" data-eve='1' data-ind='{{index}}' data-num='{{wn}}'></image>
+                          <image style="width:{{w.width||80}}rpx;height:100rpx;border-radius: 6rpx;display:block;margin:auto;" src="{{w.roleImg}}"  mode='aspectFit' bindload="imageLoad" data-eve='1' data-ind='{{index}}' data-num='{{wn}}'></image>
                           <view wx:if='{{w.group_id>0&&(wn+1)!=item.role.length}}' style='width:30rpx;height:30rpx;position:absolute;top:30rpx;right:-20rpx;z-index:1;font-size:24rpx;color:#ee676d;text-align:center;font-weight:blod;'>+</view>
                           <!-- 碎片 -->
                           <view wx:if='{{w.channelId==3}}' class='fragment' style='width:{{w.width}}rpx;left:0;bottom:0;right:0;margin:0 auto;'>
