@@ -337,7 +337,7 @@ page {
 .sblipseveimg{
   width: 80rpx;
   height: 80rpx;
-  display: inline-block;
+  display: block;
   border-radius: 50%;
   margin: auto;
 }

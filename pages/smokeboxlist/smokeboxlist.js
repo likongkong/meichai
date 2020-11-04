@@ -84,7 +84,6 @@ Page({
   tabbotdata: function (w) {
     var _this = this;
     var value = w.currentTarget.dataset.c_id || w.target.dataset.c_id || 0;
-    var tablist = _this.data.tablist || [];
 
     _this.setData({
       ip_id: value
@@ -100,16 +99,11 @@ Page({
       if (res && res[0]) {
         if (res[0].width) {
           _this.setData({
-            scrollleft: w.currentTarget.offsetLeft - wx.getSystemInfoSync().windowWidth / 2 + 70 + (res[0].width / 2)
+            scrollleft: w.currentTarget.offsetLeft - wx.getSystemInfoSync().windowWidth / 2 + (res[0].width / 2)+12
           });
         };
       }
     });
-  },
-
-  //  获取滚动条位置
-  scrollleftf: function (event) {
-    this.data.scrollwidth = event.detail.scrollwidth;
   },
 
 
@@ -423,11 +417,10 @@ Page({
                  //选择id
                  query.select('#q' + ip_id).boundingClientRect();
                  query.exec(function (res) {
-                   console.log(res)
                    if (res && res[0]) {
                      if (res[0].width) {
                        _this.setData({
-                         scrollleft: res[0].left - wx.getSystemInfoSync().windowWidth / 2 + 70 + (res[0].width / 2)
+                         scrollleft: res[0].left - wx.getSystemInfoSync().windowWidth / 2 + (res[0].width / 2)+12
                        });
                      };
                    }

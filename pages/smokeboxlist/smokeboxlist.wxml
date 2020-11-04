@@ -105,12 +105,10 @@
 			</view>
 	</view>
 
-  <block wx:if='{{true}}'>
-	
 				<!-- 大家都在买  -->
 				<view style='width:100%;background:#fff;' wx:if='{{ipArr&&ipArr.length!=0}}'>
 						<view style='width:700rpx;height:60rpx;margin:0 auto;'>
-							<scroll-view scroll-x="true" class='ocascroview' scroll-with-animation="true" bindscroll='scrollleftf' scroll-left='{{scrollleft}}'>
+							<scroll-view scroll-x="true" class='ocascroview' scroll-with-animation="true" scroll-left='{{scrollleft}}'>
 									<view class='ocastev' wx:for='{{ipArr}}' wx:key='key' id='q{{item.id}}' data-c_id='{{item.id}}' catchtap='tabbotdata' style='{{ip_id==item.id?"color:#f29a19;text-decoration:underline;":""}}'>{{item.ip_name}}</view>
 							</scroll-view>
 						</view>
@@ -139,8 +137,6 @@
 				</view> -->
 
 
-
-	</block>
 
 
 
@@ -350,10 +346,10 @@
 
 
 <!--ip列表弹框 -->
-<view wx:if='{{morebrankip}}' style="width:100%;height:100%;position:fixed;top:0px;left:0;z-index:20;">
-	<view class='bgstyle' catchtouchmove="myCatchTouch" catchtap="morebranfun"></view>
+<view wx:if='{{morebrankip}}'  catchtouchmove="true" style="width:100%;height:100%;position:fixed;top:0px;left:0;z-index:20;">
+	<view class='bgstyle' catchtouchmove="true" catchtap="morebranfun"></view>
 	<view style="width:100%;height:820rpx;position:absolute;bottom:0;left:0;right:0;margin:auto;background:white;border-radius:15rpx">
-	  <view catchtap="morebranfun" style="width:100%;color:black;font-size:35rpx;text-align:center;margin:20rpx 0;position: relative;">全部IP<image src="../images/comtriangle.png" class="wholesblimgdown"></image></view>
+	  <view catchtap="morebranfun" style="width:100%;color:black;font-size:35rpx;text-align:center;margin:20rpx 0;position: relative;">全部品牌<image src="../images/comtriangle.png" class="wholesblimgdown"></image></view>
 	  <view style="width:90%;margin:auto;height:700rpx;">
 		   <scroll-view scroll-y="true" style='width:100%;height:100%;'>
 			     <view class="sblipsebox">
