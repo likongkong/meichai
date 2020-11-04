@@ -404,15 +404,19 @@ Page({
             };
             var special = res.data.List.alert.special || '';
             var ip_id = res.data.List.checkIpId || 0;
+            if(ip_id&&ip_id!=_this.data.ip_id){
+              _this.setData({
+                ip_id:ip_id
+              })
+            };
             _this.setData({
               // eldataclass:eldataclass,
               brandArr:brandArr,
               ipArr:ipArr,
               specialActivity:specialActivity,
-              sbltiptxt:special,
-              ip_id:ip_id
+              sbltiptxt:special
             },function(){
-              if(ip_id){
+              if(ip_id&&ip_id!=_this.data.ip_id){
                  var query = wx.createSelectorQuery();
                  //选择id
                  query.select('#q' + ip_id).boundingClientRect();
