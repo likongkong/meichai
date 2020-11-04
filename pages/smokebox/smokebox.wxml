@@ -679,9 +679,9 @@
 
 
 
-			<view style='width:100%;height:80rpx;position:relative;margin-top:30rpx;display: flex;justify-content: space-between;'>
+			<view style='width:100%;height:80rpx;position:relative;margin-top:30rpx;display: flex;justify-content: center;'>
 
-				<view style="height:80rpx;">
+				<view style="height:80rpx;" wx:if="{{rollchance != 0}}">
 					<block wx:if="{{isDhRecycleBtn}}">
 						<view wx:if='{{!isTry && boxnum > 0 && !isheavyroll}}' class='queuebtnstyle1' style="background:white;float:left;" catchtap='judgeAgainRoll'>免费重抽({{remaintime}}秒)</view>
 						<view wx:if='{{!isTry && (boxnum <= 0 || isheavyroll)}}' class='queuebtnstyle1' style="background:#B0B0B0;color:white;float:left;">免费重抽</view>
