@@ -330,7 +330,7 @@ page {
   width:100%;display:flex;justify-content: space-between;flex-wrap: wrap;
 }
 .sblipseve{
-  width: 106rpx;
+  width: 112rpx;
   display: inline-block;
   margin:0 0 20rpx 0 ;
 }
@@ -376,7 +376,16 @@ page {
   float: right;
   font-size: 24rpx;
 }
-
+.flagshipStoreB{
+  position: absolute;
+  right: 16rpx;
+  bottom: 0;
+  background:rgba(0, 0, 0, 0.7);
+  font-size: 18rpx;
+  color: #fff;
+  padding:0 4rpx;
+  border-radius: 6rpx;
+}
 
 
 
