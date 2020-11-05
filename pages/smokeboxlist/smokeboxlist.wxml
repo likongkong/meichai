@@ -91,7 +91,7 @@
 							<block wx:for='{{brandArr}}' wx:key='key' wx:for-item='w' wx:if='{{index<11&&w.id!=0}}'>
 									<view class="sblipseve" catchtap="jumpsouchtemip" data-id='{{w.id}}'>
 									    <view style="position: relative;">
-											   <image class="sblipseveimg"  mode='aspectFit' style="{{w.id==ip_brand_id?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{w.thumb}}"></image>
+											   <image class="sblipseveimg"  mode='aspectFill' style="{{w.id==ip_brand_id?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{w.thumb}}"></image>
 												 <view class="flagshipStoreB" wx:if='{{w.isFlagship}}'>旗舰店</view>
 											</view>
 											<view class="ocamenswevename specialellipsis" style="{{w.id==ip_brand_id?'color:#f19207;':''}}">{{w.name}}</view>
@@ -358,10 +358,9 @@
 			     <!-- <view class="sblipsebox"> -->
 							<view class="sblipseve" wx:for='{{brandArr}}' wx:key='key' catchtap="jumpsouchtemip" wx:if='{{index!=0}}' data-id='{{item.id}}'>
 									<view style="position: relative;">
-											<image class="sblipseveimg" mode='aspectFit' src="{{item.thumb}}"></image>
+											<image class="sblipseveimg" mode='aspectFill' src="{{item.thumb}}"></image>
 											<view class="flagshipStoreB" wx:if='{{item.isFlagship}}'>旗舰店</view>
 									</view>
-
 									<view class="sblipsevetxt specialellipsis">{{item.name}}</view>
 							</view>					 
 					 <!-- </view> -->

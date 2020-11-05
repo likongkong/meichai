@@ -472,7 +472,6 @@ Page({
     }  
   },
   onLoadfun: function (){
-
     var _this = this;
     _this.data.loginid = app.signindata.loginid;
     _this.data.openid = app.signindata.openid;
@@ -530,6 +529,16 @@ Page({
       _this.setData({ isAwardOrder: app.signindata.isAwardOrder, awardOrder: app.signindata.awardOrder || false });
       app.winningtheprizetime(_this);
     };
+    //调取搜索关键词跳转对应列表数据
+    wx.request({
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/searchNavi.json',
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('搜索关键词跳转对应列表数据======',res.data)
+        app.signindata.searchSkipKeyword = res.data;
+      }
+    })
   },
   jumporder: function () {
     var _this = this;

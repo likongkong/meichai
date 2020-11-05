@@ -104,7 +104,9 @@ App({
     // 是否显示万圣节悬浮标签
     isHalloween:false,
     halloweenScore:0,
-    isAuthMobile:false // 万圣节是否手机号认证
+    isAuthMobile:false, // 万圣节是否手机号认证
+    //搜索关键词跳转对应列表数据
+    searchSkipKeyword:[]
   },
   //一番赏队列倒计时
   // yifanshangIsInQueueFun(time){

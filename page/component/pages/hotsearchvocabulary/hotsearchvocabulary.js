@@ -45,7 +45,7 @@ Page({
     var _this = this;
     var hot = event.currentTarget.dataset.hot || event.target.dataset.hot || '';
     
-    var hotdatalist = _this.data.hotdatalist || [];
+    var hotdatalist = app.signindata.searchSkipKeyword || [];
     var iftradopt = false;
     var keyname = hot;
     for (var i = 0; i < hotdatalist.length; i++) {
