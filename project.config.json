@@ -103,6 +103,12 @@
           "pathName": "pages/modifythenickname/modifythenickname",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "搜索结果页",
+          "pathName": "page/component/pages/search/search",
+          "query": "hot=盲盒",
+          "scene": null
         }
       ]
     }

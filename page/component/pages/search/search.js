@@ -197,7 +197,7 @@ Page({
   jump:function(){
     var _this = this;
     _this.searchhisfun();
-    var hotdata = _this.data.hotdata||[];
+    var hotdata = app.signindata.searchSkipKeyword||[];
     var iftradopt = false;
     var keyname = _this.data.inputdata;
     for (var i = 0; i < hotdata.length;i++){
@@ -233,7 +233,6 @@ Page({
         method: 'GET',
         header: { 'Accept': 'application/json' },
         success: function (res) {
-
           _this.setData({ clicktherequestiftr: true});
           wx.hideLoading()
           if (res.data.ReturnCode == 200) {
