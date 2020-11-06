@@ -85,23 +85,25 @@
 <view class="tipbacktwo" style="z-index:10;" catchtouchmove="preventD" wx:if='{{ishowCart}}' catchtap="showCart"></view>
 
 <view style='width:100%;position:fixed;left:0;background:#fff;bottom:{{isIphoneX?"130rpx;":"110rpx;"}};z-index:11;'>
+  <view style="background:#fcefd7;">
+    <view style="width:100%;font-size:24rpx;line-height:45rpx;background:#fcefd7;overflow: hidden;" catchtap="showCart">
+      <block wx:if='{{isFreeCost}}'>
+        <!-- <text style="color:#ff2742;margin-left:30rpx;">满{{defaultinformation.carriage.free}}元买{{mAmount+1>=2?mAmount+1:2}}个(包邮)</text> ({{defaultinformation.carriage.free}}元买{{mAmount+1>=2?mAmount+1:2}}个) -->
+        <text style="color:#ff2742;margin-left:10rpx;">任意消费,额外送透视卡</text>
+      </block>
+      <block wx:else>
+        <text wx:if='{{isFinished}}' style="color:#f19002;margin-left:10rpx;">已满足条件</text>
+        <text wx:if='{{!isFinished}}' style="color:#ff6968;margin-left:10rpx;">未满足领取条件</text>    
+      </block>
 
-  <view style="width:100%;height:50rpx;font-size:24rpx;line-height:45rpx;background:#fcefd7;" catchtap="showCart">
-    <block wx:if='{{isFreeCost}}'>
-      <!-- <text style="color:#ff2742;margin-left:30rpx;">满{{defaultinformation.carriage.free}}元买{{mAmount+1>=2?mAmount+1:2}}个(包邮)</text> -->
-      <text style="color:#ff2742;margin-left:10rpx;">任意消费,额外送透视卡({{defaultinformation.carriage.free}}元买{{mAmount+1>=2?mAmount+1:2}}个)</text>
-    </block>
-    <block wx:else>
-      <text wx:if='{{isFinished}}' style="color:#f19002;margin-left:10rpx;">已满足条件</text>
-      <text wx:if='{{!isFinished}}' style="color:#ff6968;margin-left:10rpx;">未满足领取条件</text>    
-    </block>
+      <view style='float:right;margin-right:10rpx;'>总计
+        <text style="font-size:32rpx;color:#ff6968;font-weight:bold;">{{mAmount+1}}</text>个：￥{{totalMoney}}
+        <text wx:if='{{goodsDiscount!=""&&goodsDiscount>0}}' style='color:#ff6968;font-size:32rpx;font-weight:bold;float:right;'>-￥{{goodsDiscount}}</text>
+      </view>
 
-    <view style='float:right;margin-right:10rpx;'>总计
-      <text style="font-size:32rpx;color:#ff6968;font-weight:bold;">{{mAmount+1}}</text>个：￥{{totalMoney}}
-      <text wx:if='{{goodsDiscount!=""&&goodsDiscount>0}}' style='color:#ff6968;font-size:32rpx;font-weight:bold;float:right;'>-￥{{goodsDiscount}}</text>
-    </view>
-
+    </view>  
   </view>
+
 
   <view wx:if='{{ishowCart}}' style="width:100%;max-height:{{windowHeight-statusBarHeightMc-208}}px;padding-bottom:90rpx;overflow:scroll;">
 

@@ -276,7 +276,7 @@ Page({
     if (stock==0){
       app.showToastC('该商品库存不足');
       return;
-    }
+    } 
 
     if (_this.data.clicktherequestiftr) {
       _this.setData({
@@ -306,8 +306,6 @@ Page({
           });
           if (res.data.ReturnCode == 200) {
             app.showToastC('已成功加入购物车');
-            // 购物车数量显示
-            Dec.shopnum(_this,app.signindata.comurl);
             setTimeout(function(){
               _this.getCartInfo()
             },1500);
@@ -644,9 +642,7 @@ Page({
   },
 
   getdefultInfo: function() {
-    var _this = this
-    // 购物车数量显示
-    Dec.shopnum(_this,app.signindata.comurl);
+    var _this = this;
     // 调取晒单数量
     Dec.dryingSum(_this, app.signindata.clwcomurl);
   },
@@ -957,17 +953,12 @@ Page({
       };
     };
 
-    var shopnum = parseFloat(_this.data.shopnum) + 1;
-
     this.setData({
       zunmdata: this.data.zunmdata,
     })
 
     //  每隔一段时间提交数据
     _this.jumpaddupdata();
-    _this.setData({
-      shopnum: shopnum
-    });
   },
 
   reduceEvent: function(target) {
@@ -982,7 +973,6 @@ Page({
     };
     this.data.zunmdata[index].numberofdismantling = this.data.zunmdata[index].numberofdismantling - 1;
     this.data.zunmdata[index].iftrcheck = true;
-    var shopnum = parseFloat(_this.data.shopnum) - 1;
 
     var groupData = _this.data.zunmdata[index].groupData;
     if (groupData) {
@@ -1004,9 +994,6 @@ Page({
     });
     //  每隔一段时间提交数据
     _this.jumpaddupdata();
-    _this.setData({
-      shopnum: shopnum
-    });
   },
 
   // 全选金额计算 
@@ -1098,8 +1085,6 @@ Page({
             zunmdata: _this.data.zunmdata
           })
           _this.getCartInfo();
-          // 购物车数据显示
-          Dec.shopnum(_this,app.signindata.comurl);
         } else if (res.data.ReturnCode == 825) {
           app.showToastC('用户id和购物车信息id不匹配');
         } else if (res.data.ReturnCode == 826) {
