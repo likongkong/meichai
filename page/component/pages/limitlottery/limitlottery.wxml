@@ -158,13 +158,13 @@
 					<block wx:if='{{is_exhibition!=1||brandId==388||(is_exhibition!=1&&brandId>0)}}'>
 							<view style="width:100%;font-size:25rpx;line-height:30rpx;text-align:center;margin:5rpx 0;">送你{{infoFragment.totalFragmentNumber}}张万能碎片，跟好友互赠100%获得缺失碎片</view>
 
-							<view id="mchip" style="width:85%;height:{{chipwidth*1.1}}px;margin:10rpx 7.5%;">
-								<view wx:for='{{shareUserInfo}}' wx:key='key'>
-									<view style="width:{{chipwidth*0.6}}px;height:{{chipwidth*0.8}}px;border:{{chipwidth*0.05}}px solid #FF9800;margin:{{chipwidth*0.15}}px;float:left;position:relative;border-radius:5rpx;">
+							<view id="mchip" style="width:85%;height:{{chipwidth*1.1}}px;margin:10rpx 7.5%;text-align: center;">
+								<block wx:for='{{shareUserInfo}}' wx:key='key'>
+									<view style="width:{{chipwidth*0.6}}px;height:{{chipwidth*0.8}}px;border:{{chipwidth*0.05}}px solid #FF9800;margin:{{chipwidth*0.15}}px;position:relative;border-radius:5rpx;display: inline-block;">
 										<image style="width:{{chipwidth*0.5}}px;height:{{chipwidth*0.5}}px;position:absolute;bottom:0;top:0;left:0;right:0;margin:auto;" src="https://www.51chaidan.com/images/turntable/drawKey.png"></image>
 										<image wx:if='{{item!=1}}' style="width:{{chipwidth*0.5}}px;height:{{chipwidth*0.5}}px;border-radius:{{chipwidth*0.25}}px;position:absolute;bottom:-{{chipwidth*0.25}}px;left:0;right:0;margin:0 auto;" src="{{item.litpic}}"></image>
 									</view>
-								</view>
+								</block>
 							</view>			
 					</block>			
 			</block>

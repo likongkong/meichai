@@ -792,8 +792,9 @@ Page({
           mchip.exec(function (res) {
             if (res && res[0]) {
               _this.setData({
-                chipwidth: res[0].width / infoFragment.totalFragmentNumber,
+                chipwidth: res[0].width / infoFragment.totalFragmentNumber>=40?40:res[0].width / infoFragment.totalFragmentNumber,
               })
+              console.log(_this.data.chipwidth)
             };
           })
 
