@@ -123,9 +123,9 @@ Page({
       }
     });    
    setTimeout(function(){
-     let hot = _this.data.inputdata?hot:_this.data.inputtxt1;
+     let hot1 = _this.data.inputdata?hot:_this.data.inputtxt1;
      wx.navigateTo({
-       url: "/page/component/pages/search/search?hot=" + hot
+       url: "/page/component/pages/search/search?hot=" + hot1
      });
    },100);
 
