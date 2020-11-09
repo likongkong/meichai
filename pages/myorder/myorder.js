@@ -1636,7 +1636,7 @@ Page({
                                     },
                                     fail: function (res) {
                                       wx.hideLoading()
-                                      app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:01}');
+                                      app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:01}');
                                       _this.setData({ upserimgbox: false, headhidden: true });
 
                                     },
@@ -1733,7 +1733,7 @@ Page({
                                           },
                                           fail: function (res) {
                                             wx.hideLoading()
-                                            app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:01}');
+                                            app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:01}');
                                             _this.setData({ upserimgbox: false, headhidden: true });
 
                                           },
@@ -1750,21 +1750,21 @@ Page({
                       },
                       fail: function (res) {
                         wx.hideLoading()
-                        app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:02}');
+                        app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:02}');
                         _this.setData({ upserimgbox: false, headhidden: true });
                       }
                     });
                   },
                   fail: function (res) {
                     wx.hideLoading()
-                    app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:03}');
+                    app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:03}');
                     _this.setData({ upserimgbox: false, headhidden: true });
                   }
                 });
               },
               fail: function (res) {
                 wx.hideLoading()
-                app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:04}');
+                app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:04}');
                 _this.setData({ upserimgbox: false, headhidden: true });
               }
             })
@@ -1824,7 +1824,7 @@ Page({
                                   },
                                   fail: function (res) {
                                     wx.hideLoading()
-                                    app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:01}');
+                                    app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:01}');
                                     _this.setData({ upserimgbox: false, headhidden: true });
 
                                   },
@@ -1921,7 +1921,7 @@ Page({
                                           },
                                           fail: function (res) {
                                             wx.hideLoading()
-                                            app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:01}');
+                                            app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:01}');
                                             _this.setData({ upserimgbox: false, headhidden: true });
 
                                           },
@@ -1938,7 +1938,7 @@ Page({
                       },
                       fail: function (res) {
                         wx.hideLoading()
-                        app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:02}');
+                        app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:02}');
                         _this.setData({ upserimgbox: false, headhidden: true });
 
                       }
@@ -1946,7 +1946,7 @@ Page({
                   },
                   fail: function (res) {
                     wx.hideLoading()
-                    app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:03}');
+                    app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:03}');
                     _this.setData({ upserimgbox: false, headhidden: true });
 
                   }
@@ -1955,7 +1955,7 @@ Page({
               },
               fail: function (res) {
                 wx.hideLoading()
-                app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:04}');
+                app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:04}');
                 _this.setData({ upserimgbox: false, headhidden: true });
 
               }
@@ -1966,7 +1966,7 @@ Page({
 
       },
       fail: function (res) {
-        app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:16}');
+        app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:16}');
         _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
       }
     });
@@ -2088,7 +2088,7 @@ Page({
                           },
                           fail: function (res) {
                             wx.hideLoading()
-                            app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:01}');
+                            app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:01}');
                             _this.setData({
                               upserimgbox: false,
                             });
@@ -2106,7 +2106,7 @@ Page({
             },
             fail: function (res) {
               wx.hideLoading()
-              app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:02}');
+              app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:02}');
               _this.setData({
                 upserimgbox: false,
               });
@@ -2207,7 +2207,7 @@ Page({
                               },
                               fail: function (res) {
                                 wx.hideLoading()
-                                app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:03}');
+                                app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:03}');
                                 _this.setData({
                                   upserimgbox: false,
                                 });
@@ -2224,7 +2224,7 @@ Page({
                 },
                 fail: function (res) {
                   wx.hideLoading()
-                  app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:04}');
+                  app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:04}');
                   _this.setData({
                     upserimgbox: false,
                   });
@@ -2234,7 +2234,7 @@ Page({
             },
             fail: function (res) {
               wx.hideLoading()
-              app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:05}');
+              app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:05}');
               _this.setData({
                 upserimgbox: false,
               });
@@ -2247,7 +2247,7 @@ Page({
       },
       fail: function (res) {
         wx.hideLoading()
-        app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:06}');
+        app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:06}');
         _this.setData({
           upserimgbox: false,
         });
@@ -2568,7 +2568,7 @@ Page({
                                   },
                                   fail: function (res) {
                                     wx.hideLoading()
-                                    app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:01}');
+                                    app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:01}');
                                     _this.setData({ upserimgboxact: false, headhidden: true });
 
                                   },
@@ -2591,7 +2591,7 @@ Page({
                                   },
                                   fail: function (res) {
                                     wx.hideLoading()
-                                    app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:01}');
+                                    app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:01}');
                                     _this.setData({ upserimgboxact: false, headhidden: true });
 
                                   },
@@ -2602,19 +2602,19 @@ Page({
                           })
                         },
                         fail: function (res) {
-                          app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:16}');
+                          app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:16}');
                           _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
                         }
                       });
 
                       },
                       fail: function () {
-                        app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:011}');
+                        app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:011}');
                       }
                     })
                   },
                   fail: function () {
-                    app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:010}');
+                    app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:010}');
                   }
                 });
 
@@ -2623,7 +2623,7 @@ Page({
               },
               fail: function (res) {
                 wx.hideLoading()
-                app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:03}');
+                app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:03}');
                 _this.setData({ upserimgboxact: false, headhidden: true });
                 
               }
@@ -2631,7 +2631,7 @@ Page({
           },
           fail: function (res) {
             wx.hideLoading()
-            app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:04}');
+            app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:04}');
             _this.setData({ upserimgboxact: false, headhidden: true });
             
           }

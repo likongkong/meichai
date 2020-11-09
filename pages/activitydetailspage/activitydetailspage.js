@@ -2697,7 +2697,7 @@ closefrindcommoni:function(){
             return false;
           }else{
             // 提交订单支付
-            _this.paymentmony();
+            // _this.paymentmony();
           };
           if (_this.data.judgmentactivity == 1 && _this.data.islimittery == 1){
             var pages = getCurrentPages(); // 当前页面
@@ -2898,104 +2898,104 @@ closefrindcommoni:function(){
           _this.onLoadfun();
   },
   // 微信支付
-  paymentmony: function () {
-    var _this = this;
-    if (_this.data.commoddata.is_free == 1){
-      _this.setData({
-        suboformola:false
-      });
-      return false;   
-    } else {};
-    var q = Dec.Aese('mod=operate&operation=prepay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1&oid=' + _this.data.cart_id + '&xcx=1' + '&openid=' + _this.data.openid)
-    wx.request({
-      url: app.signindata.comurl + 'order.php' + q,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        if (res.data.ReturnCode == 200) {
-          // 支付完成弹框显示数据
-          var shareinfo = res.data.Shareinfo;
-          if (shareinfo) {
-            for (var f = 0; f < shareinfo.length; f++) {
-              if (!app.signindata.reg.test(shareinfo[f].img)) {
-                shareinfo[f].img = _this.data.zdyurl + shareinfo[f].img;
-              };
-              shareinfo[f].name = shareinfo[f].name.replace(/\\n/g, '\n');
-            };
-            _this.setData({ shareinfo: shareinfo });
-          };           
-          wx.requestPayment({
-            'timeStamp': res.data.Info.timeStamp.toString(),
-            'nonceStr': res.data.Info.nonceStr,
-            'package': res.data.Info.package,
-            'signType': 'MD5',
-            'paySign': res.data.Info.paySign,
-            'success': function (res) {
-              _this.setData({
-                tipbacktwo: false,
-                buybombsimmediately: false,
-                tipback: false,
-                tipbox: false,
-                dsbframeiftr: false,
-                paymentiftr: false,
-                // 优惠券清空
-                tipcoupon: '请选择优惠券',
-                coudata1cid: '',
-                coudata1mon: '0.00',
-                coudata2cid: '',
-                coudata2mon: '0.00',
-                //  分享判断是否支付成功
-                payiftr: true,
-                numberofdismantling: 1,
-                suboformola: false,
-                desc: ''
-              });              
-              if (_this.data.commoddata.is_redpack){
-                // 跳转红包页面
-                wx.navigateTo({
-                  url: "/pages/redenvelopes/redenvelopes?cart_id=" + _this.data.cart_id
-                });
-              } else if(_this.data.commoddata.is_invite == 1) {
-                _this.invitingfriends();  // 跳转邀请页面
-              }else{
-                _this.setData({
-                  successfulregistration:true
-                });
-              };
-            },
-            'fail': function (res) {
-              _this.setData({
-                tipback: false,
-                tipbox: false,
-                tipbacktwo: false,
-                buybombsimmediately: false,
-                dsbframeiftr: false,
-                paymentiftr: false,
-                // 优惠券清空
-                tipcoupon: '请选择优惠券',
-                coudata1cid: '',
-                coudata1mon: '0.00',
-                coudata2cid: '',
-                coudata2mon: '0.00',
-                //  分享判断是否支付成功
-                payiftr: true,
-                numberofdismantling: 1,
-                suboformola: false,
-                desc: '' 
-              })
-            },
-            'complete': function (res) {}
-          })
-        }else{
-          // 提交订单蒙层
-          _this.setData({
-            suboformola: false
-          });    
-          app.showToastC(res.data.Msg || res.data.msg);           
-        };
-      }
-    })
-  },  
+  // paymentmony: function () {
+  //   var _this = this;
+  //   if (_this.data.commoddata.is_free == 1){
+  //     _this.setData({
+  //       suboformola:false
+  //     });
+  //     return false;   
+  //   } else {};
+  //   var q = Dec.Aese('mod=operate&operation=prepay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1&oid=' + _this.data.cart_id + '&xcx=1' + '&openid=' + _this.data.openid)
+  //   wx.request({
+  //     url: app.signindata.comurl + 'order.php' + q,
+  //     method: 'GET',
+  //     header: { 'Accept': 'application/json' },
+  //     success: function (res) {
+  //       if (res.data.ReturnCode == 200) {
+  //         // 支付完成弹框显示数据
+  //         var shareinfo = res.data.Shareinfo;
+  //         if (shareinfo) {
+  //           for (var f = 0; f < shareinfo.length; f++) {
+  //             if (!app.signindata.reg.test(shareinfo[f].img)) {
+  //               shareinfo[f].img = _this.data.zdyurl + shareinfo[f].img;
+  //             };
+  //             shareinfo[f].name = shareinfo[f].name.replace(/\\n/g, '\n');
+  //           };
+  //           _this.setData({ shareinfo: shareinfo });
+  //         };           
+  //         wx.requestPayment({
+  //           'timeStamp': res.data.Info.timeStamp.toString(),
+  //           'nonceStr': res.data.Info.nonceStr,
+  //           'package': res.data.Info.package,
+  //           'signType': 'MD5',
+  //           'paySign': res.data.Info.paySign,
+  //           'success': function (res) {
+  //             _this.setData({
+  //               tipbacktwo: false,
+  //               buybombsimmediately: false,
+  //               tipback: false,
+  //               tipbox: false,
+  //               dsbframeiftr: false,
+  //               paymentiftr: false,
+  //               // 优惠券清空
+  //               tipcoupon: '请选择优惠券',
+  //               coudata1cid: '',
+  //               coudata1mon: '0.00',
+  //               coudata2cid: '',
+  //               coudata2mon: '0.00',
+  //               //  分享判断是否支付成功
+  //               payiftr: true,
+  //               numberofdismantling: 1,
+  //               suboformola: false,
+  //               desc: ''
+  //             });              
+  //             if (_this.data.commoddata.is_redpack){
+  //               // 跳转红包页面
+  //               wx.navigateTo({
+  //                 url: "/pages/redenvelopes/redenvelopes?cart_id=" + _this.data.cart_id
+  //               });
+  //             } else if(_this.data.commoddata.is_invite == 1) {
+  //               _this.invitingfriends();  // 跳转邀请页面
+  //             }else{
+  //               _this.setData({
+  //                 successfulregistration:true
+  //               });
+  //             };
+  //           },
+  //           'fail': function (res) {
+  //             _this.setData({
+  //               tipback: false,
+  //               tipbox: false,
+  //               tipbacktwo: false,
+  //               buybombsimmediately: false,
+  //               dsbframeiftr: false,
+  //               paymentiftr: false,
+  //               // 优惠券清空
+  //               tipcoupon: '请选择优惠券',
+  //               coudata1cid: '',
+  //               coudata1mon: '0.00',
+  //               coudata2cid: '',
+  //               coudata2mon: '0.00',
+  //               //  分享判断是否支付成功
+  //               payiftr: true,
+  //               numberofdismantling: 1,
+  //               suboformola: false,
+  //               desc: '' 
+  //             })
+  //           },
+  //           'complete': function (res) {}
+  //         })
+  //       }else{
+  //         // 提交订单蒙层
+  //         _this.setData({
+  //           suboformola: false
+  //         });    
+  //         app.showToastC(res.data.Msg || res.data.msg);           
+  //       };
+  //     }
+  //   })
+  // },  
   // 支付完成隐藏弹框
   paymentcompletionwimg: function () {
     this.onLoadfun();
@@ -3660,7 +3660,7 @@ closefrindcommoni:function(){
                                         });
                                       },
                                       fail: function (res) {
-                                        app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:01}');
+                                        app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:01}');
                                         _this.setData({upserimgbox:false,headhidden:true,headhiddengeneratePictures:true});
                                       },
                                     });
@@ -3679,7 +3679,7 @@ closefrindcommoni:function(){
                                         });
                                       },
                                       fail: function (res) {
-                                        app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:01}');
+                                        app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:01}');
                                         _this.setData({upserimgbox:false,headhidden:true,headhiddengeneratePictures:true});
                                       },
                                     });
@@ -3688,29 +3688,29 @@ closefrindcommoni:function(){
                               })
                             },
                             fail: function (res) {
-                              app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:16}');
+                              app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:16}');
                               _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
                             }
                           });
                         },
                         fail: function () {
-                          app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:011}');
+                          app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:011}');
                         }
                       })
                   },
                   fail:function(){
-                    app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:010}');
+                    app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:010}');
                   }
                 });
               },
               fail: function (res) {
-                app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:03}');
+                app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:03}');
                 _this.setData({ upserimgbox: false, headhidden: true, headhiddengeneratePictures: true});
               }              
             })
           },
           fail:function(res){
-            app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:04}');
+            app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:04}');
             _this.setData({ upserimgbox: false, headhidden: true, headhiddengeneratePictures: true });
           }
         })
@@ -3781,7 +3781,7 @@ closefrindcommoni:function(){
                   if (_this.data.commoddata.is_join != 1) {
                     // _this.placeorder();
                     // 提交订单支付
-                    _this.paymentmony();
+                    // _this.paymentmony();
                   };
                 },
                 fail() {
@@ -3806,7 +3806,7 @@ closefrindcommoni:function(){
              if (_this.data.commoddata.is_join != 1){
                 // _this.placeorder();
                // 提交订单支付
-               _this.paymentmony();
+              //  _this.paymentmony();
              };
             },
             fail() {
@@ -4020,7 +4020,7 @@ closefrindcommoni:function(){
                                     });
                                   },
                                   fail: function (res) {
-                                    app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:05}');
+                                    app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:05}');
                                     _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
                                   },
                                 });
@@ -4108,7 +4108,7 @@ closefrindcommoni:function(){
                                         });
                                       },
                                       fail: function (res) {
-                                        app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:05}');
+                                        app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:05}');
                                         _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
                                       },
                                     });
@@ -4126,20 +4126,20 @@ closefrindcommoni:function(){
                         }
                       },
                       fail: function (res) {
-                        app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:06}');
+                        app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:06}');
                         _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
                       }
                     });
                   },
                   fail: function (res) {
-                    app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:07}');
+                    app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:07}');
                     _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
                   }
                 });
 
               },
               fail: function (res) {
-                app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:08}');
+                app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:08}');
                 _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
               }
             })
@@ -4197,7 +4197,7 @@ closefrindcommoni:function(){
                                     });
                                   },
                                   fail: function (res) {
-                                    app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:05}');
+                                    app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:05}');
                                     _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
                                   },
                                 });
@@ -4285,7 +4285,7 @@ closefrindcommoni:function(){
                                         });
                                       },
                                       fail: function (res) {
-                                        app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:05}');
+                                        app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:05}');
                                         _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
                                       },
                                     });
@@ -4303,20 +4303,20 @@ closefrindcommoni:function(){
                         }
                       },
                       fail: function (res) {
-                        app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:06}');
+                        app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:06}');
                         _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
                       }
                     });
                   },
                   fail: function (res) {
-                    app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:07}');
+                    app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:07}');
                     _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
                   }
                 });
 
               },
               fail: function (res) {
-                app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:08}');
+                app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:08}');
                 _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
               }
             })
@@ -4324,7 +4324,7 @@ closefrindcommoni:function(){
         })
       },
       fail: function (res) {
-        app.showToastC('图片生成失败，请重新刷新页面重试,{ReturnCode:10}');
+        app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:10}');
         _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
       }
     });  
