@@ -14,6 +14,7 @@ Page({
     uid: app.signindata.uid,
     commoddata:[],
     listDataB:[],
+    listDataC:[],
     // loading 加载
     headhidden: true,
     bothidden: true, 
@@ -44,9 +45,9 @@ Page({
     });
   },
   sscloseFun(){
-    this.setData({
-      inputdata: ""
-    });
+    setTimeout( ()=>{
+      this.setData({ inputdata: '' });
+    },200)
     wx.navigateBack();
   },
   onBlur: function (w) {
@@ -260,25 +261,48 @@ Page({
           if (res.data.ReturnCode == 200) {
             console.log('listDataA======',res.data.List.record.normal)
             console.log('listDataB======',res.data.List.record.store)
-            if(res.data.List.record.normal.length==0 && (!res.data.List.record.store || res.data.List.record.store.length==0) && _this.data.pid==0){
-              _this.setData({
-                iftrimg:true
-              });
-            } else if ( res.data.List.record.normal && (!res.data.List.record.store || res.data.List.record.store.length<5)){
-              _this.setData({
-                isonReachBottom:false
-              });
+            console.log('listDataC======',res.data.List.record.recommend)
+            let normal = res.data.List.record.normal;
+            let store = res.data.List.record.store;
+            let recommend = res.data.List.record.recommend;
+
+            if(_this.data.pid==0){
+              _this.data.listDataC = recommend;
             }
 
-            if(res.data.List.record.store && res.data.List.record.normal){
+            if(normal.length==0 && (!store || store.length==0) && _this.data.pid==0){
               _this.setData({
-                listDataA:res.data.List.record.normal,
-                listDataB: [..._this.data.listDataB,...res.data.List.record.store]
+                iftrimg:true,
+                isonReachBottom:false,
+                listDataB: [..._this.data.listDataB,..._this.data.listDataC]
               });
-            } else {
+            } else if ((!store || store.length<5) && _this.data.pid!=0){
               _this.setData({
-                listDataA:res.data.List.record.normal
+                isonReachBottom:false,
+                listDataB: [..._this.data.listDataB,..._this.data.listDataC]
               });
+            }else if(store && normal){
+              _this.setData({
+                listDataA:normal,
+                listDataB: [..._this.data.listDataB,...store]
+              });
+            } else if(normal && !store){
+              _this.setData({
+                isonReachBottom:false,
+                listDataA:[...normal,..._this.data.listDataC]
+              });
+             
+            } else if (normal.length==0 &&store){
+              if(store.length<5){
+                _this.setData({
+                  isonReachBottom:false,
+                  listDataB: [...store,..._this.data.listDataC]
+                });
+              }else{
+                _this.setData({
+                  listDataB: store
+                });
+              }
             }
           }
         },

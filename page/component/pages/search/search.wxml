@@ -7,11 +7,13 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 <!-- 顶部搜索框 -->
 <view class='sousuo'>
-    <input class='indheadinpw'  bindinput="inputChange" type='text' value='{{inputdata}}' placeholder='{{inputtxt1}}' bindfocus='onFocus' bindblur='onBlur' bindconfirm="jump"></input>
+    <view style="width: 80%;position:relative;">
+        <input class='indheadinpw'  bindinput="inputChange" type='text' value='{{inputdata}}' placeholder='{{inputtxt1}}' bindfocus='onFocus' bindblur='onBlur' bindconfirm="jump"></input>
+        <image wx:if="{{inputdata}}" src="https://cdn.51chaidan.com/images/sign/share/ss_close.png" catchtap="sscloseFun" mode="widthFix"></image>
+    </view>
     <view class='clicksousuo' bindtap='jump'>
         <view style='width:100%;height:60rpx;line-height:60rpx;font-size:26rpx;color:#333;'>搜索</view>
     </view>
-    <image wx:if="{{inputdata}}" src="https://cdn.51chaidan.com/images/sign/share/ss_close.png" catchtap="sscloseFun" mode="widthFix"></image>
 </view>
 
 <view class='box'>
@@ -19,7 +21,7 @@
     <!-- wx:if='{{iftrimg}}' -->
     <view class='nodata' wx:if='{{iftrimg}}'>
             <!-- <image src='../../../../pages/images/suosounodata.png' class='suosuoimgno'></image> -->
-            <text class='nodatasuous'>抱歉，没有找到{{inputdata}}</text>
+            <text class='nodatasuous'>抱歉，没有找到{{inputdata}}，为您推荐其他热门商品</text>
     </view> 
 
 
@@ -52,9 +54,8 @@
         </view>
     </view>
 
-    <block wx:for="{{listDataB}}" wx:key="index" wx:for-item="parentItem">
-    <view class="contentWrap">
-        <view class='list-center'>
+    <view class="contentWrap" style="padding-bottom: 20rpx;box-sizing: border-box;">
+        <view class='list-center' wx:for="{{listDataB}}" wx:key="index" wx:for-item="parentItem" wx:if="{{!parentItem.itemType}}">
             <block wx:for="{{parentItem}}" wx:key="index">
                 <view wx:if="{{item.itemType == 'store'}}">
                     <template is="store" data="{{...item}}"></template>
@@ -62,7 +63,7 @@
             </block>
         </view>
         <view class='list-left'>
-            <block wx:for="{{parentItem}}" wx:key="index">
+            <block wx:for="{{listDataB}}" wx:key="index">
                 <!-- <view wx:if="{{item.itemType == 'store' && index%2 == 0}}">
                     <template is="store" data="{{...item}}"></template>
                 </view> -->
@@ -77,9 +78,8 @@
                 </view>
             </block>
         </view>
-        
         <view class='list-right'>
-            <block wx:for="{{parentItem}}" wx:key="index">
+            <block wx:for="{{listDataB}}" wx:key="index">
                 <view wx:if="{{item.itemType == 'blindBox' && index%2 != 0}}">
                     <template is="blindBox" data="{{...item}}"></template>
                 </view>
@@ -92,7 +92,6 @@
             </block>
         </view>
     </view>
-    </block>
 
 
 </view> 

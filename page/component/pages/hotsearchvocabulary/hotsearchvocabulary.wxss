@@ -24,19 +24,19 @@ page{
   height: auto;
   position: absolute;
   display: block;
-  position: absolute;
-  top: 16rpx;
-  right: 24%;
+  top: 0;
+  right: 0;
+  padding: 15rpx 14rpx;
 }
 .indheadinp{
-  width: 80%;
+  width: 100%;
   padding-left: 3%;
   height: 60rpx;
   background: #fff;
   border-radius: 10rpx;
   float: left;
   font-size: 26rpx;
-  padding-right: 9%;
+  padding-right: 60rpx;
   box-sizing: border-box;
 }
 .clicksousuo{
@@ -73,12 +73,13 @@ page{
 .hotcon{
   float: left;
   padding: 0 12rpx;
-  height: 40rpx;
-  line-height: 40rpx;
+  /* height: 40rpx;
+  line-height: 40rpx; */
   border-radius: 5rpx;
   border:1rpx solid #e5e5e5;
   font-size: 30rpx;
   margin:0 10rpx 10rpx 0;
+  box-sizing: border-box;
 }
 
 

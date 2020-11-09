@@ -4,11 +4,13 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 <view class='box'>
     <view class='sousuo'>
-       <input class='indheadinp' type='text' bindinput="inputChange" value='{{inputdata}}' placeholder='{{inputtxt1}}' placeholder='{{inputtxt1}}' bindfocus='onFocus' bindblur='onBlur' bindconfirm="jumpsoousuo"></input>
+        <view style="width: 80%;position:relative;">
+            <input class='indheadinp' type='text' bindinput="inputChange" value='{{inputdata}}' placeholder='{{inputtxt1}}' bindfocus='onFocus' bindblur='onBlur' bindconfirm="jumpsoousuo"></input>
+            <image wx:if="{{inputdata}}" src="https://cdn.51chaidan.com/images/sign/share/ss_close.png" catchtap="sscloseFun" mode="widthFix"></image>
+        </view>
        <view class='clicksousuo' bindtap='jumpsoousuo'>
           <view style='width:100%;height:60rpx;line-height:60rpx;font-size:26rpx;color:#333;'>搜索</view>
        </view>
-        <!-- <image wx:if="{{inputdata}}" src="https://cdn.51chaidan.com/images/sign/share/ss_close.png" catchtap="sscloseFun" mode="widthFix"></image> -->
     </view>
     <view class='hotseavoc'>
         <view class='hothead'>历史记录
@@ -17,14 +19,14 @@
            </view>
         </view>
         <view class='hotci'>
-            <view class='hotcon' wx:for='{{hotdatahis}}' wx:if='{{index<=12}}' data-hot='{{item}}' wx:key='key' bindtap='jump'>
-            <view style='font-size:30rpx;height:40rpx;line-height:40rpx;'>{{item}}</view>
+            <view class='hotcon' wx:for='{{hotdatahis}}' wx:if='{{index<=12}}' data-hot='{{item}}' wx:key='key' bindtap='jump' style='max-width:100%; font-size:30rpx;line-height:40rpx;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;'>
+            {{item}}
             </view>
         </view>       
         <view class='hothead'>热词搜索</view>
         <view class='hotci'> 
-            <view class='hotcon' wx:for='{{hotdata}}' data-hot='{{item}}' wx:key='key' bindtap='jump'>
-              <view style='font-size:30rpx;height:40rpx;line-height:40rpx;'>{{item}}</view>
+            <view class='hotcon' wx:for='{{hotdata}}' data-hot='{{item}}' wx:key='key' bindtap='jump' style=' max-width:100%;font-size:30rpx;line-height:40rpx;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;'>
+              {{item}}
             </view>
         </view>
     </view>

@@ -35,15 +35,15 @@ Page({
       inputtxt1: " "
     });
   },
-  sscloseFun(){
-    this.setData({
-      inputdata: ""
-    });
-  },
   onBlur: function (w) {
     this.setData({
       inputtxt1: "想要找点什么"
     });
+  },
+  sscloseFun(){
+    setTimeout(()=>{
+      this.setData({ inputdata: '' });
+    },200)
   },
   // 跳转搜索
   jump:function(event){
@@ -100,7 +100,7 @@ Page({
                if (iftr){
                  rd.unshift(_this.data.inputdata);
                  if(rd.length>=13){
-                    rd.splice(11, 1)
+                    rd.splice(12)
                  };
                  wx.setStorage({
                    key: "hotdatahis",

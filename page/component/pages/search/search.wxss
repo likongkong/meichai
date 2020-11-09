@@ -20,11 +20,12 @@ page{
   position: absolute;
   display: block;
   position: absolute;
-  top: 30rpx;
-  right: 24%;
+  top: 0;
+  right: 0;
+  padding: 15rpx;
 }
 .indheadinpw{
-  width: 80%;
+  width: 100%;
   padding-left: 3%;
   height: 60rpx;
   background: #fff;
@@ -32,7 +33,7 @@ page{
   border-radius: 10rpx;
   float: left;
   font-size: 26rpx;
-  padding-right: 9%;
+  padding-right: 60rpx;
   box-sizing: border-box;
 }
 .clicksousuo{
@@ -53,10 +54,11 @@ page{
 .nodata{
   width: 100%;
   /* background: #f1f1f1; */
-  padding: 30rpx 0;
+  padding: 30rpx 30rpx;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
 }
 .suosuoimgno{
   width: 120rpx;
@@ -66,11 +68,12 @@ page{
 }
 .nodatasuous{
   width: 100%;
-  height: 40rpx;
+  /* height: 40rpx; */
   text-align: center;
   line-height: 40rpx;
   font-size: 24rpx;
   color: #999;
+  word-break: break-all;
 }
 /* 弹框 */
 .searchtip{
@@ -273,9 +276,7 @@ page{
   display: block;
   opacity: .8;
 }
-.specialCard .reward-num{
 
-}
 .specialCard .reward-num text{
   height: 22rpx;
   font-size: 16rpx;
@@ -313,9 +314,7 @@ page{
   padding: 10rpx 10rpx 16rpx 10rpx;
   box-sizing: border-box;
 }
-.specialCard .cardBbox view{
-  /* height: 40rpx; */
-}
+
 .specialCard .cardBbox .price{
   color: #d64650;
   height: 40rpx;
