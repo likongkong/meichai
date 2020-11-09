@@ -2669,7 +2669,6 @@ Page({
 
   collectchip: function () {
     var _this = this;
-
     _this.setData({
       payprice: _this.data.activity.shop_price * _this.data.roleList.length,
       iswholePay: true,

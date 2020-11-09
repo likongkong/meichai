@@ -88,8 +88,8 @@
 				</view>
 				<view style="color:#FF9800;text-align:center;font-size:20rpx;font-weight:bold;"><text>端盒送</text></view>
 			</view>
-			<view wx:elif='{{isOpenLine}}' style="width:95rpx;position:absolute;top:{{hideheight+100}}rpx;right:10rpx;z-index:1;" catchtap="collectchip">
-			  <!-- {{isDirectOpenWholeBox ? 'wholebox' : 'collectchip'}} -->
+			<view wx:elif='{{isOpenLine}}' style="width:95rpx;position:absolute;top:{{hideheight+100}}rpx;right:10rpx;z-index:1;" catchtap="{{(isDirectOpenWholeBox&&!isDeduct) || (isDirectOpenWholeBox&&isDeduct&&activity.userBlindBoxAmount==0) ? 'wholebox' : 'collectchip'}}">
+			  <!-- collectchip -->
 				<image style="width:75rpx;width:75rpx;margin-left:10rpx;border-radius:6rpx;" mode="widthFix" src='{{activity.wholeBoxTitle?definePicture.wholeBoxImg:wholeBoxImg}}'></image>
 				<view style="color:#FF9800;text-align:center;font-size:20rpx;font-weight:bold;">
 				  <text wx:if='{{activity.wholeBoxTitle}}'>{{activity.wholeBoxTitle}}</text>
