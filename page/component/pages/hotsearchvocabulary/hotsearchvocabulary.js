@@ -80,10 +80,10 @@ Page({
   },
   jumpsoousuo: function (event) {
     var hot = this.data.inputdata || '';
-    if (this.data.inputdata == '') {
-      app.showToastC('搜索内容不能为空');
-      return false;
-    };
+    // if (this.data.inputdata == '') {
+    //   app.showToastC('搜索内容不能为空');
+    //   return false;
+    // };
     var _this = this;
     wx.getStorage({ 
       key: 'hotdatahis',
@@ -123,6 +123,7 @@ Page({
       }
     });    
    setTimeout(function(){
+     let hot = _this.data.inputdata?hot:_this.data.inputtxt1;
      wx.navigateTo({
        url: "/page/component/pages/search/search?hot=" + hot
      });
@@ -158,6 +159,10 @@ Page({
   },  
   onLoad: function (options) {
     var _this = this;
+    let hotKeyword =app.signindata.hotKeyword[Math.floor(Math.random()*app.signindata.hotKeyword.length)];
+    this.setData({
+      inputtxt1:app.signindata.hotKeyword.length!=0?hotKeyword:_this.data.inputtxt1
+    });
     wx.getStorage({
       key: 'hotdatahis',
       success: function (res) {

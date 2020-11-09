@@ -539,6 +539,16 @@ Page({
         app.signindata.searchSkipKeyword = res.data;
       }
     })
+    //调取热门搜索关键词
+    wx.request({
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/searchPlaceholder.json',
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('热门搜索关键词数据======',res.data)
+        app.signindata.hotKeyword = res.data;
+      }
+    })
   },
   jumporder: function () {
     var _this = this;
