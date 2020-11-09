@@ -1,64 +1,201 @@
-<loading hidden="{{headhidden}}">
-    加载中...
-</loading>
+<!--<loading hidden="{{headhidden}}">
+        加载中...
+    </loading> -->
 <hidewindow id='hide'></hidewindow>
 
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
-    <!-- 顶部搜索框 -->
-    <view class='sousuo'>
-       <input class='indheadinpw'  bindinput="inputChange" type='text' value='{{inputdata}}' placeholder='{{inputtxt1}}' placeholder='{{inputtxt1}}' bindfocus='onFocus' bindblur='onBlur' bindconfirm="jump"></input>
-       <view class='clicksousuo' bindtap='jump'>
-          <view style='width:100%;height:60rpx;line-height:60rpx;font-size:26rpx;color:#333;'>搜索</view>
-       </view>
+<!-- 顶部搜索框 -->
+<view class='sousuo'>
+    <input class='indheadinpw'  bindinput="inputChange" type='text' value='{{inputdata}}' placeholder='{{inputtxt1}}' bindfocus='onFocus' bindblur='onBlur' bindconfirm="jump"></input>
+    <view class='clicksousuo' bindtap='jump'>
+        <view style='width:100%;height:60rpx;line-height:60rpx;font-size:26rpx;color:#333;'>搜索</view>
+    </view>
+    <image wx:if="{{inputdata}}" src="https://cdn.51chaidan.com/images/sign/share/ss_close.png" catchtap="sscloseFun" mode="widthFix"></image>
+</view>
+
+<view class='box'>
+    <!-- 没有找到商品 -->
+    <!-- wx:if='{{iftrimg}}' -->
+    <view class='nodata' wx:if='{{iftrimg}}'>
+            <!-- <image src='../../../../pages/images/suosounodata.png' class='suosuoimgno'></image> -->
+            <text class='nodatasuous'>抱歉，没有找到{{inputdata}}</text>
+    </view> 
+
+
+    <view class="contentWrap" style="padding-bottom: 20rpx;box-sizing: border-box;">
+        <view class='list-left'>
+            <block wx:for="{{listDataA}}" wx:key="index">
+                <view wx:if="{{item.itemType == 'blindBox' && index%2 == 0}}">
+                    <template is="blindBox" data="{{...item}}"></template>
+                </view>
+                <view wx:elif="{{item.itemType == 'goods' && index%2 == 0}}">
+                    <template is="goods" data="{{...item}}"></template>
+                </view>
+                <view wx:elif="{{item.itemType == 'yifanshang' && index%2 == 0}}">
+                    <template is="yifanshang" data="{{...item}}"></template>
+                </view>
+            </block>
+        </view>
+        <view class='list-right'>
+            <block wx:for="{{listDataA}}" wx:key="index">
+                <view wx:if="{{item.itemType == 'blindBox' && index%2 != 0}}">
+                    <template is="blindBox" data="{{...item}}"></template>
+                </view>
+                <view wx:elif="{{item.itemType == 'goods' && index%2 != 0}}">
+                    <template is="goods" data="{{...item}}"></template>
+                </view>
+                <view wx:elif="{{item.itemType == 'yifanshang' && index%2 != 0}}">
+                    <template is="yifanshang" data="{{...item}}"></template>
+                </view>
+            </block>
+        </view>
     </view>
 
-    <view class='box'>
-        <!-- 没有找到商品 -->
-        <view class='nodata' wx:if='{{iftrimg}}'>
-              <image src='../../../../pages/images/suosounodata.png' class='suosuoimgno'></image>
-              <view class='nodatasuous'>没有找到"{{inputdatano}}"</view>
-              <view class='nodatasuous'>推荐以下商品</view>
-        </view> 
-        <view class='bchar' style='position:relative;' wx:for="{{commoddata}}" wx:key="key" data-gid="{{item.gid}}" bindtap='addressmanagement'>
-            <view class='bcleft' style='position:relative;'>
-                <image class="bcimg" mode='aspectFit' src="{{item.gcover}}"></image>
-                <image wx:if='{{item.stock<=0}}' class='iconSoldOut' src="http://www.51chaidan.com/images/icon/iconSoldOut.png"></image>
-                <view class='bclefticon' wx:if='{{item.stock<=0}}'></view>
-            </view>
-            <view class='bcright'>
-                <view class='bctitle multilineellipsis' style='font-size:26rpx;'>
-                    {{item.gname}}
+    <block wx:for="{{listDataB}}" wx:key="index" wx:for-item="parentItem">
+    <view class="contentWrap">
+        <view class='list-center'>
+            <block wx:for="{{parentItem}}" wx:key="index">
+                <view wx:if="{{item.itemType == 'store'}}">
+                    <template is="store" data="{{...item}}"></template>
                 </view>
-                <view class='bcLabel'>
-                    <view class='bclabeys specialellipsis' style='background:#FDF3D9;color:#FF7A00;border:0rpx;' wx:for="{{item.gtag}}" wx:key="key" wx:for-item="bcla" wx:if='{{index<=2}}'>{{bcla}}</view>
+            </block>
+        </view>
+        <view class='list-left'>
+            <block wx:for="{{parentItem}}" wx:key="index">
+                <!-- <view wx:if="{{item.itemType == 'store' && index%2 == 0}}">
+                    <template is="store" data="{{...item}}"></template>
+                </view> -->
+                <view wx:if="{{item.itemType == 'blindBox' && index%2 == 0}}">
+                    <template is="blindBox" data="{{...item}}"></template>
                 </view>
-                <view class='bcrilistbott'>
-                    <view class='bccompric' >
-                        <view wx:if='{{item.is_suit==1}}' class='bccompricleft'><text style='font-size:22rpx;'>{{item.pre_name}}:￥</text><text style='font-weight: bold;'>{{item.gsale}}</text></view>
-                        <view wx:if='{{item.is_suit!=1}}' class='bccompricleft'><text style='font-size:22rpx;'>拆单:￥</text><text style='font-weight: bold;'>{{item.gsale}}</text></view>
-                        <view wx:if='{{item.gsale != item.market_price}}' class='bccompricright'>{{item.gsource}}:￥{{item.market_price}}</view>
-                    </view>   
+                <view wx:elif="{{item.itemType == 'goods' && index%2 == 0}}">
+                    <template is="goods" data="{{...item}}"></template>
+                </view>
+                <view wx:elif="{{item.itemType == 'yifanshang' && index%2 == 0}}">
+                    <template is="yifanshang" data="{{...item}}"></template>
+                </view>
+            </block>
+        </view>
+        
+        <view class='list-right'>
+            <block wx:for="{{parentItem}}" wx:key="index">
+                <view wx:if="{{item.itemType == 'blindBox' && index%2 != 0}}">
+                    <template is="blindBox" data="{{...item}}"></template>
+                </view>
+                <view wx:elif="{{item.itemType == 'goods' && index%2 != 0}}">
+                    <template is="goods" data="{{...item}}"></template>
+                </view>
+                <view wx:elif="{{item.itemType == 'yifanshang' && index%2 != 0}}">
+                    <template is="yifanshang" data="{{...item}}"></template>
+                </view>
+            </block>
+        </view>
+    </view>
+    </block>
 
-                    <!-- /*原来注释的部分*/
-                    <view style='position:absolute;right:0;bottom:-8rpx;z-index:10;' data-gid="{{item.gid}}" catchtap='recommend'>
-                        <view  style='font-size:22rpx;float:right;margin-top:14rpx;'>{{item.praise}}</view>
-                        <share-button style='float:right;'
-                            product="{{item.product}}"
-                            bind:error="on_error"
-                            type="2"
-                            size="30"
-                        />
+
+</view> 
+
+<!-- 店铺 -->
+<template name="store">
+    <view class="entireRowWrap" data-itemid="{{infoStore.id}}" data-itemType="{{itemType}}" data-idtype="id" data-url="/page/secondpackge/pages/brandDetails/brandDetails" catchtap="clickJump">
+        <view class="shopNameWdap">
+            <view>
+                <image src="{{infoStore.logo}}" mode="widthFix"></image>
+                <text>{{infoStore.name}}</text>
+            </view>
+            <view>
+                <text style="color:#9b9999;">进店看看 ></text>
+            </view>
+        </view>
+        <view class="shopGoodsWrap">
+            <view wx:for="{{recommend}}" wx:key="index" data-itemid="{{item.itemId}}" data-idtype="gid" data-url="/pages/detailspage/detailspage" catchtap="clickJump">
+                <image src="{{item.itemCover}}" mode="widthFix"></image>
+                <text>￥{{item.itemPrice}}</text>
+            </view>
+        </view>
+    </view>
+</template>
+<!-- 一番赏 -->
+<template name="yifanshang">
+    <view class="card specialCard" data-itemid="{{itemId}}" data-itemType="{{itemType}}" data-idtype="id" data-url="/page/secondpackge/pages/aRewardDetails/aRewardDetails" catchtap="clickJump">
+        <swiper autoplay="{{true}}" circular="true" interval="3000" style="height:174rpx">
+            <!-- <block wx:for="{{item.list_arr}}" wx:key='key' wx:for-item="sonitem"> -->
+            <swiper-item data-id="933121" bindtap="toaRewarddeyails">
+                <view class="cardTbox">
+                    <text class="serialnum">Vol.{{itemId}}</text>
+                    <image class="pic" src="{{itemCover}}" mode="aspectFill"></image>
+                    <view class="reward-num">
+                    <block wx:for="{{listGear}}" wx:key='key' wx:for-item="itemgear">
+                        <text wx:if="{{itemgear.gear == 'A' || itemgear.gear == 'B' || itemgear.gear == 'C' || itemgear.gear == 'D'}}">{{itemgear.gear}}赏 {{itemgear.suplus}}/{{itemgear.limit}}</text>
+                    </block>
                     </view>
-                    /*原来注释的部分*/ -->
-                    
+                </view>
+                <view class="progress-box">
+                    <progress percent="{{(suplusUsers/limitUsers)*100}}" color="{{(suplusUsers/limitUsers)*100 === 100?'#6FBE0D':(suplusUsers/limitUsers)*100 < 100 && (suplusUsers/limitUsers)*100 > 50?'#FEB51D':'#ff2742'}}" backgroundColor="#cccccc" stroke-width='12' active duration="5"/>
+                    <text style="padding-left:15rpx;">剩余：{{suplusUsers}}</text>
+                </view>
+                </swiper-item>
+            <!-- </block> -->
+        </swiper>
+        <view class="cardBbox"> 
+            <view class="title multilineellipsis">{{itemTitle}}</view>
+            <view class="cardBboxPrice">
+                <view class="price">￥{{itemPrice}}</view>
+                <view style="color:#9b9999;">一番赏 ></view>
+            </view>
+        </view>
+    </view>
+</template>
+<!-- 抽盒机 -->
+<template name="blindBox">
+    <view class="card specialCard chj" data-itemid="{{itemId}}" data-itemType="{{itemType}}" data-idtype="gid" data-url="/pages/smokebox/smokebox" catchtap="clickJump">
+        <view class="cardTbox">
+            <image class="pic" src="{{itemCover}}" mode="aspectFill"></image>
+            <view class="cardTLabelWrap">
+                <view wx:if="{{isRecycle}}" class="cardTLabel recycle">{{recycleRatio}}折回收</view>
+            </view>
+            <view class="cardBLabelWrap">
+                <view class="shopNameWrap" wx:if="{{store}}">
+                    <image src="{{store.logo}}" mode="widthFix"></image>
+                    <text>{{store.name}}</text>
                 </view>
             </view>
         </view>
-    </view> 
-<loading hidden="{{bothidden}}">
-    加载中...
-</loading>     
+        <view class="cardBbox"> 
+            <view class="title multilineellipsis">{{itemTitle}}</view>
+            <view class="cardBboxPrice">
+                <view class="price">
+                <text>￥{{cheaperPrice&&cheaperPrice!=''?cheaperPrice:itemPrice}}</text>
+                <view wx:if="{{tip!=''}}" class="label">{{tip}}</view>
+                </view>
+                <view style="color:#9b9999;">抽盒机 ></view>
+            </view>
+        </view>
+    </view>
+</template>
+<!-- 商品 -->
+<template name="goods">
+    <view class="card specialCard ptGoods" data-itemid="{{itemId}}" data-itemType="{{itemType}}" data-idtype="gid" data-url="/pages/detailspage/detailspage" catchtap="clickJump">
+        <view class="cardTbox">
+            <image class="pic" src="{{itemCover}}" mode="aspectFill"></image>
+            <view class="sellOut" wx:if="{{stock<=0}}">
+                <image src="http://www.51chaidan.com/images/sign/2020wsj/finish.png" mode="widthFix"></image>
+            </view>
+        </view>
+        <view class="cardBbox"> 
+            <view class="title multilineellipsis">{{itemTitle}}</view>
+            <view class="cardBboxPrice">
+                <view class="price">￥{{itemPrice}}</view>
+            </view>
+        </view>
+        <view class="shopNameWrap" wx:if="{{store}}">
+            <image src="{{store.logo}}" mode="widthFix"></image>
+            <text>{{store.name}}</text>
+        </view>
+    </view>
+</template>
 
 <view class='searchtip' wx:if='{{iftrsearchtip}}'>
     <view class='searchtipbg' catchtap='iftrsearchtipfun'></view>

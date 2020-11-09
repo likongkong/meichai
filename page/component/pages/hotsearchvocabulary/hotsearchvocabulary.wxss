@@ -17,15 +17,27 @@ page{
   height: 60rpx;
   width: 94%;
   padding: 0 3%;
+  position: relative;
+}
+.sousuo image{
+  width: 30rpx;
+  height: auto;
+  position: absolute;
+  display: block;
+  position: absolute;
+  top: 16rpx;
+  right: 24%;
 }
 .indheadinp{
-  width: 77%;
+  width: 80%;
   padding-left: 3%;
   height: 60rpx;
   background: #fff;
   border-radius: 10rpx;
   float: left;
   font-size: 26rpx;
+  padding-right: 9%;
+  box-sizing: border-box;
 }
 .clicksousuo{
   height: 60rpx;

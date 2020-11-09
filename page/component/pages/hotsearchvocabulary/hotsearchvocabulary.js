@@ -35,6 +35,11 @@ Page({
       inputtxt1: " "
     });
   },
+  sscloseFun(){
+    this.setData({
+      inputdata: ""
+    });
+  },
   onBlur: function (w) {
     this.setData({
       inputtxt1: "想要找点什么"

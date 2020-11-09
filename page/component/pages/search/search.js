@@ -13,16 +13,19 @@ Page({
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
     commoddata:[],
+    listDataB:[],
     // loading 加载
     headhidden: true,
     bothidden: true, 
     // 上拉加载数据
-    page: 0 ,
+    pid: 0 ,
     // input 值
     inputdata:'',
     inputdatano:'',
     // 有无数据img
     iftrimg:false,
+    // 数据小于21不可以触发分页
+    isonReachBottom:true,
     // 点击请求判断防止多次提交
     clicktherequestiftr: true, 
     inputtxt1:'想要找点什么',
@@ -33,12 +36,18 @@ Page({
     c_title: '搜索',
     c_arrow: true,
     c_backcolor: '#ff2742',
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90
   },
   onFocus: function (w) {
     this.setData({
-      inputtxt1: " "
+      inputtxt1: ""
     });
+  },
+  sscloseFun(){
+    this.setData({
+      inputdata: ""
+    });
+    wx.navigateBack();
   },
   onBlur: function (w) {
     this.setData({
@@ -86,24 +95,26 @@ Page({
       isProduce: app.signindata.isProduce,
     });
 
-    var q = Dec.Aese('mod=getinfo&operation=list&type=hot')
-    wx.request({
-      url: app.signindata.comurl + 'search.php' + q,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
+    _this.jump();
+   
+    // var q = Dec.Aese('mod=getinfo&operation=list&type=hot')
+    // wx.request({
+    //   url: app.signindata.comurl + 'search.php' + q,
+    //   method: 'GET',
+    //   header: { 'Accept': 'application/json' },
+    //   success: function (res) {
 
-        if (res.data.Navi) {
-          _this.setData({
-            hotdata: res.data.Navi || []
-          });
-        }
-        _this.jump();
-      },
-      fail: function () {
-        _this.jump();
-      }
-    })
+    //     if (res.data.Navi) {
+    //       _this.setData({
+    //         hotdata: res.data.Navi || []
+    //       });
+    //     }
+    //     _this.jump();
+    //   },
+    //   fail: function () {
+    //     _this.jump();
+    //   }
+    // })
   },
   onLoad: function (w) {
     var hot = w.hot || '';
@@ -141,10 +152,7 @@ Page({
           }
         }
       });
-
     };
-
-    
   },
   // 搜索历史记录
   searchhisfun:function(){
@@ -219,87 +227,73 @@ Page({
     if (iftradopt){
       return false;
     };
-    
     if (_this.data.clicktherequestiftr){
       _this.setData({clicktherequestiftr:false});
-      var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
-      var arrlist = '';
-      // 商品列表
-      
-      var qq = Dec.Aese('mod=getinfo&operation=search&key=' + _this.data.inputdata + '&uid=' + _this.data.uid);
+      // '+ _this.data.inputdata +'
       wx.showLoading({ title: '加载中...', })
+      _this.setData({
+        listDataA:[],
+        listDataB:[],
+        pid:0,
+        iftrimg:false,
+        isonReachBottom:true
+      });
+      _this.gitInfo();
+    };
+  },
+  gitInfo(){
+      var _this = this;
+      // 商品列表
+      // var q = Dec.Aese('mod=search&operation=search&key=Mix&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&pid='+_this.data.pid)
+      var q = Dec.Aese('mod=search&operation=search&key='+ _this.data.inputdata +'&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&pid='+_this.data.pid)
+      console.log('https://api.51chaidan.com/search.php?mod=search&operation=search&key='+ _this.data.inputdata +'&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&pid='+_this.data.pid)
       wx.request({
-        url: app.signindata.comurl + 'search.php' + qq,
+        url: app.signindata.comurl + 'search.php' + q,
         method: 'GET',
         header: { 'Accept': 'application/json' },
         success: function (res) {
+          console.log('商品列表=======',res.data)
           _this.setData({ clicktherequestiftr: true});
-          wx.hideLoading()
+          wx.hideLoading();
+          // 刷新完自带加载样式回去
+           wx.stopPullDownRefresh();
           if (res.data.ReturnCode == 200) {
-            var arrlist = res.data.List;
-            if (arrlist){
-              if (arrlist.length != 0) {
-                for (var i = 0; i < arrlist.length; i++) {
-                  if (!reg.test(arrlist[i].gcover)) {
-                    arrlist[i].gcover = _this.data.zdyurl + arrlist[i].gcover;
-                  }
-                  arrlist[i].gpublish = _this.toDate(arrlist[i].gpublish);
-                  // arrlist[i].product = {
-                  //   "item_code": arrlist[i].gid,
-                  //   "title": arrlist[i].gname,
-                  //   "desc": arrlist[i].gname,
-                  //   "category_list": ['1', '1'],
-                  //   "image_list": [arrlist[i].gcover],
-                  //   "src_mini_program_path": "/pages/detailspage/detailspage?gid=" + arrlist[i].gid,
-                  //   "brand_info": {
-                  //     "brand_name": "美拆",
-                  //     "brand_url": "https://www.51chaidan.com/images/meichai.png",
-                  //   }
-                  // };
-                }
-                _this.setData({
-                  commoddata: arrlist,
-                  page: 0,
-                  iftrimg: false
-                });
-              }
-            };  
-          }
-          if (res.data.ReturnCode == 101) {
-            var arrlist = res.data.List;
-            if (arrlist){
-              if (arrlist.length != 0) {
-                for (var i = 0; i < arrlist.length; i++) {
-                  if (!reg.test(arrlist[i].gcover)) {
-                    arrlist[i].gcover = _this.data.zdyurl + arrlist[i].gcover;
-                  }
-                  arrlist[i].gpublish = _this.toDate(arrlist[i].gpublish);
+            console.log('listDataA======',res.data.List.record.normal)
+            console.log('listDataB======',res.data.List.record.store)
+            if(res.data.List.record.normal.length==0 && (!res.data.List.record.store || res.data.List.record.store.length==0) && _this.data.pid==0){
+              _this.setData({
+                iftrimg:true
+              });
+            } else if ( res.data.List.record.normal && (!res.data.List.record.store || res.data.List.record.store.length<5)){
+              _this.setData({
+                isonReachBottom:false
+              });
+            }
 
-                  // arrlist[i].product = {
-                  //   "item_code": arrlist[i].gid,
-                  //   "title": arrlist[i].gname,
-                  //   "desc": arrlist[i].gname,
-                  //   "category_list": ['1', '1'],
-                  //   "image_list": [arrlist[i].gcover],
-                  //   "src_mini_program_path": "/pages/detailspage/detailspage?gid=" + arrlist[i].gid,
-                  //   "brand_info": {
-                  //     "brand_name": "美拆",
-                  //     "brand_url": "https://www.51chaidan.com/images/meichai.png",
-                  //   }
-                  // };
-                }
-                _this.setData({
-                  commoddata: arrlist,
-                  page: 0,
-                  iftrimg: true,
-                  inputdatano: _this.data.inputdata
-                });
-              };
-            };
+            if(res.data.List.record.store && res.data.List.record.normal){
+              _this.setData({
+                listDataA:res.data.List.record.normal,
+                listDataB: [..._this.data.listDataB,...res.data.List.record.store]
+              });
+            } else {
+              _this.setData({
+                listDataA:res.data.List.record.normal
+              });
+            }
           }
+        },
+        fail: function () {
         }
-      });          
-    };
+      })   
+  },
+  clickJump(e){
+    let itemid = e.currentTarget.dataset.itemid;
+    let itemtype = e.currentTarget.dataset.itemtype;
+    let url = e.currentTarget.dataset.url;
+    let idtype = e.currentTarget.dataset.idtype;
+    wx.navigateTo({
+      url: url+'?'+idtype+'='+e.currentTarget.dataset.itemid
+    });
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -345,59 +339,17 @@ Page({
       return false;
     };
 
-    this.setData({
+    _this.setData({
       headhidden: false,
+      listDataA:[],
+      listDataB:[],
+      iftrimg:false,
+      pid:0,
+      isonReachBottom:true
     });
-    var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
-    
-    var arrlist = '';
     // 商品列表
-    
-    var q = Dec.Aese('mod=getinfo&operation=search&key=' + _this.data.inputdata + '&uid=' + _this.data.uid)
-    wx.request({
-      url: app.signindata.comurl + 'search.php'+q,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        // 刷新完自带加载样式回去
-        wx.stopPullDownRefresh();
-        _this.setData({headhidden: true});        
-        if (res.data.ReturnCode == 200){
-          var arrlist = res.data.List;
-          if (arrlist.length != 0) {
-            for (var i = 0; i < arrlist.length; i++) {
-              if (!reg.test(arrlist[i].gcover)) {
-                arrlist[i].gcover = _this.data.zdyurl + arrlist[i].gcover;
-              }
-              arrlist[i].gpublish = _this.toDate(arrlist[i].gpublish);
-            }
-            _this.setData({
-              commoddata: arrlist,
-              headhidden: true,
-              page: 0
-            });
-          };         
-        };
-        if (res.data.ReturnCode == 101) {
-          var arrlist = res.data.List;
-          if (arrlist.length != 0) {
-            for (var i = 0; i < arrlist.length; i++) {
-              if (!reg.test(arrlist[i].gcover)) {
-                arrlist[i].gcover = _this.data.zdyurl + arrlist[i].gcover;
-              }
-              arrlist[i].gpublish = _this.toDate(arrlist[i].gpublish);
-            }
-            _this.setData({
-              commoddata: arrlist,
-              page: 0,
-              iftrimg: true,
-              inputdatano: _this.data.inputdata
-            });
-          }
-        };                    
-      }
-    }); 
-       
+    wx.showLoading({ title: '加载中...', })
+    _this.gitInfo();
   },
 
   /**
@@ -430,41 +382,16 @@ Page({
 
     this.setData({
       bothidden: false,
-      page: ++this.data.page
+      pid: ++this.data.pid
     });
-    var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
-    
-    var arrlist = '';
     // 商品列表
-    var q = Dec.Aese('mod=getinfo&operation=search&key=' + _this.data.inputdata + '&pid=' + _this.data.page + '&uid=' + _this.data.uid)
-    wx.request({
-      url: app.signindata.comurl+'search.php'+q,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        _this.setData({bothidden: true});         
-        if (res.data.ReturnCode == 200){
-          var arrlist = res.data.List;
-          if (arrlist.length != 0) {
-            for (var i = 0; i < arrlist.length; i++) {
-              if (!reg.test(arrlist[i].gcover)) {
-                arrlist[i].gcover = _this.data.zdyurl + arrlist[i].gcover;
-              }
-              arrlist[i].gpublish = _this.toDate(arrlist[i].gpublish);
-            }
-            var comdataarr = _this.data.commoddata.concat(arrlist);
-            _this.setData({
-              commoddata: comdataarr,
-              bothidden: true
-            });
-          };
-        }else{
-          app.showToastC('没有更多数据了');
-        };  
-      }
-    }); 
-
-
+    if(_this.data.isonReachBottom){
+      wx.showLoading({ title: '加载中...', })
+      _this.gitInfo();
+    }else{
+      app.showToastC('没有更多数据了');
+    }
+    
   },
 
   /**

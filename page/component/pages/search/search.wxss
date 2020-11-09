@@ -1,4 +1,7 @@
 @import "../../../../pages/index/index.wxss";
+page{
+  background: #f4f5f9;
+}
 .box{
   padding-top:90rpx; 
 }
@@ -11,8 +14,17 @@
   background: #f4f5f9; 
   z-index: 99;
 }
+.sousuo image{
+  width: 30rpx;
+  height: auto;
+  position: absolute;
+  display: block;
+  position: absolute;
+  top: 30rpx;
+  right: 24%;
+}
 .indheadinpw{
-  width: 77%;
+  width: 80%;
   padding-left: 3%;
   height: 60rpx;
   background: #fff;
@@ -20,6 +32,8 @@
   border-radius: 10rpx;
   float: left;
   font-size: 26rpx;
+  padding-right: 9%;
+  box-sizing: border-box;
 }
 .clicksousuo{
   height: 60rpx;
@@ -38,8 +52,11 @@
 
 .nodata{
   width: 100%;
-  background: #f1f1f1;
-  padding: 50rpx 0;
+  /* background: #f1f1f1; */
+  padding: 30rpx 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .suosuoimgno{
   width: 120rpx;
@@ -115,3 +132,321 @@
 
 
 
+
+.contentWrap{
+  padding: 0 15rpx;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.list-left{
+  /* width: 352.2rpx; */
+  display: inline-block;
+  float: left;
+}
+.list-center{
+  width: 100%;
+  margin: 5rpx 0 35rpx 0;
+}
+.list-right{
+  /* width: 352.2rpx; */
+  display: inline-block;
+  float: right;
+}
+/* 店铺 */
+.entireRowWrap{
+  width: 100%;
+  height: 100%;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+.shopNameWdap{
+  width: 100%;
+  height: 80rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.shopNameWdap>view{
+  display: flex;
+  align-items: center;
+}
+.shopNameWdap image{
+  width: 50rpx;
+  height: auto;
+  margin-right: 10rpx;
+}
+.shopNameWdap text{
+  font-size: 26rpx;
+} 
+.shopGoodsWrap{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+}
+.shopGoodsWrap>view{
+  width: 216rpx;
+  position: relative;
+  margin-right: 18rpx;
+}
+.shopGoodsWrap>view:last-child{
+  margin-right: 0;
+}
+.shopGoodsWrap>view image{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.shopGoodsWrap>view text{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: block;
+  height: 44rpx;
+  background-color: rgba(0,0,0,.5);
+  color: #fff;
+  line-height: 44rpx;
+  font-size: 24rpx;
+  padding: 0 10rpx;
+  box-sizing: border-box;
+}
+
+/* 一番赏 */
+.card{
+  width: 720rpx;
+  margin: 0 15rpx;
+  box-sizing: border-box;
+  margin-top: 20rpx;
+  box-shadow: 1px 2px 6px #999999;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+.specialCard{
+  margin: 20rpx 0 0 0;
+  width: 352.2rpx;
+  display: inline-block;
+}
+.cardTbox{
+  width: 100%;
+  height: 308rpx;
+  position: relative;
+}
+.cardTbox .serialnum{
+  display: block;
+  position: absolute;
+  top: 6rpx;
+  left: 6rpx;
+  padding: 8rpx;
+  box-sizing: border-box;
+  font-size: 24rpx;
+  color: #fff;
+  background: rgba(0,0,0,.5);
+}
+.cardTbox .pic{
+  width: 100%;
+  height: 308rpx;
+  border-radius: 10rpx 10rpx 0 0;
+}
+.specialCard .cardTbox{
+  height: 150rpx;
+}
+.specialCard .cardTbox .serialnum{
+  font-size: 16rpx;
+}
+.specialCard .cardTbox .pic{
+  height: 150rpx;
+}
+.cardTbox .reward-num{
+  position: absolute;
+  top: 6rpx;
+  right: 6rpx;
+  padding: 8rpx 12rpx;
+  box-sizing: border-box;
+  background: rgba(0,0,0,.5);
+}
+.cardTbox .reward-num text{
+  height: 40rpx;
+  color: #fff;
+  font-size: 24rpx;
+  line-height: 40rpx;
+  display: block;
+  opacity: .8;
+}
+.specialCard .reward-num{
+
+}
+.specialCard .reward-num text{
+  height: 22rpx;
+  font-size: 16rpx;
+  line-height: 22rpx;
+}
+.progress-box{
+  position: relative;
+  /* border-radius: 0 0 10rpx 10rpx; */
+  overflow: hidden;
+}
+.progress-box text{
+  display: inline-block;
+  height: 24rpx;
+  line-height: 24rpx;
+  position: absolute;
+  top: 0;font-size: 20rpx;
+  color: #fff;
+}
+.cardBbox{
+  width: 100%;
+  padding: 0 10rpx;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+.cardBbox view{
+  /* height: 70rpx;
+  line-height: 70rpx; */
+  color: #333;
+  font-size: 24rpx;
+  /* margin-top: 10rpx; */
+}
+.specialCard .cardBbox{
+  display: block;
+  padding: 10rpx 10rpx 16rpx 10rpx;
+  box-sizing: border-box;
+}
+.specialCard .cardBbox view{
+  /* height: 40rpx; */
+}
+.specialCard .cardBbox .price{
+  color: #d64650;
+  height: 40rpx;
+  line-height: 40rpx;
+}
+/* .specialCard .cardBbox .price text{
+  font-size: 20rpx;
+} */
+.specialCard .cardBbox .price{
+  font-size: 28rpx;
+}
+.specialCard .cardBbox .title{
+  /* height: 32rpx; */
+  line-height: 34rpx;
+}
+.specialCard .cardBbox .cardBboxPrice{
+  height: 50rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 抽盒机 */
+.chj .cardTbox{
+  height: 184rpx !important;
+  position: relative;
+}
+.chj .cardTLabelWrap{
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 8rpx 8rpx;
+  box-sizing: border-box;
+}
+.chj .cardTLabel{
+  border-radius: 3px;
+  display: inline-block;
+  padding: 0 4px;
+  margin-right: 2px;
+  font-size: 25rpx;
+  text-align: center;
+  opacity: 0.9;
+}
+.chj .cardBLabelWrap{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 15rpx 15rpx;
+  box-sizing: border-box;
+}
+.chj .recycle{
+  background: #1890ff;
+  color: #fff;
+}
+.chj .shopNameWrap{
+  height: 34rpx;
+  padding: 2rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  background-color: rgba(0,0,0,.8);
+}
+.chj .shopNameWrap image{
+  width: 30rpx;
+  height: auto;
+}
+.chj .shopNameWrap text{
+  font-size: 22rpx;
+  color: #fff;
+}
+.chj .pic{
+  height: 184rpx !important;
+  border-bottom-left-radius: 10rpx;
+  border-bottom-right-radius: 10rpx;
+}
+.chj .price{
+  display: flex;
+  align-items: center;
+}
+.chj .label{
+  height: 34rpx;
+  line-height: 34rpx;
+  text-align: center;
+  padding: 0 8rpx;
+  box-sizing: border-box;
+  border: 1rpx solid #d64650;
+  border-radius: 6rpx;
+  font-size: 22rpx;
+  color: #d64650;
+  margin-left: 15rpx;
+}
+
+/* 商品 */
+.ptGoods .cardTbox{
+  height: 348rpx !important;
+}
+.ptGoods .pic{
+  height: 348rpx !important;
+  border-bottom-left-radius: 10rpx;
+  border-bottom-right-radius: 10rpx;
+}
+.ptGoods .cardBbox{
+  padding: 10rpx 10rpx 0 10rpx;
+}
+.ptGoods .shopNameWrap{
+  height: 50rpx;
+  display: flex;
+  align-items: center;
+  padding: 0 10rpx;
+  box-sizing: border-box;
+}
+.ptGoods .shopNameWrap image{
+  width: 50rpx;
+  height: auto;
+  margin-right: 8rpx;
+}
+.ptGoods .shopNameWrap text{
+  font-size: 26rpx;
+}
+.ptGoods .sellOut{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(255,255,255,.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ptGoods .sellOut image{
+  width: 180rpx;
+  height: auto;
+}
