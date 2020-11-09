@@ -385,6 +385,7 @@ page{
 .chj .shopNameWrap text{
   font-size: 22rpx;
   color: #fff;
+  margin-left: 10rpx;
 }
 .chj .pic{
   height: 184rpx !important;
@@ -424,11 +425,10 @@ page{
   height: 50rpx;
   display: flex;
   align-items: center;
-  padding: 0 10rpx;
-  box-sizing: border-box;
+  padding: 0 10rpx 10rpx 10rpx;
 }
 .ptGoods .shopNameWrap image{
-  width: 50rpx;
+  width: 40rpx;
   height: auto;
   margin-right: 8rpx;
 }
