@@ -19,6 +19,7 @@ Page({
     inputdata:'',
     iftr:true, 
     inputtxt1: '想要找点什么',
+    hotKeyword:[],
     hotdatalist:[],
     searchtip:'',
     iftrsearchtip: false,
@@ -31,18 +32,19 @@ Page({
     signinlayer: true,
   },
   onFocus: function (w) {
-    this.setData({
-      inputtxt1: " "
-    });
+    // this.setData({
+    //   inputtxt1: ""
+    // });
   },
   onBlur: function (w) {
+    let hotKeyword = this.data.hotKeyword;
     this.setData({
-      inputtxt1: "想要找点什么"
+      inputtxt1: hotKeyword.length!=0?hotKeyword:'想要找点什么'
     });
   },
   sscloseFun(){
     setTimeout(()=>{
-      this.setData({ inputdata: '' });
+      this.setData({ inputdata: ''});
     },200)
   },
   // 跳转搜索
@@ -80,10 +82,10 @@ Page({
   },
   jumpsoousuo: function (event) {
     var hot = this.data.inputdata || '';
-    // if (this.data.inputdata == '') {
-    //   app.showToastC('搜索内容不能为空');
-    //   return false;
-    // };
+    if (this.data.hotKeyword.length==0 && this.data.inputdata == '') {
+      app.showToastC('搜索内容不能为空');
+      return false;
+    };
     var _this = this;
     wx.getStorage({ 
       key: 'hotdatahis',
@@ -93,12 +95,16 @@ Page({
           if (rd.length!=0){
               var iftr = true;
               for (var i = 0; i < rd.length;i++){
-                 if (rd[i] == _this.data.inputdata){
+                 if (rd[i] == _this.data.inputdata|| rd[i] == _this.data.hotKeyword){
                    iftr =false;
                   }
                };
                if (iftr){
-                 rd.unshift(_this.data.inputdata);
+                 if(_this.data.inputdata){
+                  rd.unshift(_this.data.inputdata);
+                 }else{
+                  rd.unshift(_this.data.hotKeyword);
+                 }
                  if(rd.length>=13){
                     rd.splice(12)
                  };
@@ -107,11 +113,18 @@ Page({
                    data: rd 
                  }) 
                }
-           }else{
-             wx.setStorage({
-               key: "hotdatahis",
-               data: [_this.data.inputdata]
-             })             
+          }else{
+             if(_this.data.inputdata){
+              wx.setStorage({
+                key: "hotdatahis",
+                data: [_this.data.inputdata]
+              })  
+             }else{
+              wx.setStorage({
+                key: "hotdatahis",
+                data: [_this.data.hotKeyword]
+              })  
+             }
            }
         }
       },
@@ -128,7 +141,6 @@ Page({
        url: "/page/component/pages/search/search?hot=" + hot1
      });
    },100);
-
   },  
   // input 值改变
   inputChange: function (e) {
@@ -159,17 +171,23 @@ Page({
   },  
   onLoad: function (options) {
     var _this = this;
-    let hotKeyword =app.signindata.hotKeyword[Math.floor(Math.random()*app.signindata.hotKeyword.length)];
+    let hotKeyword;
+    if(app.signindata.hotKeyword.length!=0){
+       hotKeyword =app.signindata.hotKeyword[Math.floor(Math.random()*app.signindata.hotKeyword.length)];
+    }else{
+       hotKeyword =[];
+    }
     this.setData({
-      inputtxt1:app.signindata.hotKeyword.length!=0?hotKeyword:_this.data.inputtxt1
+      hotKeyword,
+      inputtxt1:hotKeyword.length!=0?hotKeyword:_this.data.inputtxt1
     });
     wx.getStorage({
       key: 'hotdatahis',
       success: function (res) {
         if (res.data) {
-             _this.setData({
-               hotdatahis: res.data
-             });
+          _this.setData({
+            hotdatahis: res.data
+          });
         }
       }
     })    
