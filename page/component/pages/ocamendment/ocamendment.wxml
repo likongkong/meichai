@@ -14,7 +14,7 @@
     <view class='disanumofgoods' style='margin-bottom:0;'>
         <!--  列表标题  -->
         <view class='disantitle' style='padding:0 20rpx 0;'>
-          <image src='https://cdn.51chaidan.com/images/icon/iconNew.png' style='width:36rpx;' class='ocaleftimgtit'></image><text style='height:100%;float:left;'>最新上架</text>
+          <image src='https://cdn.51chaidan.com/images/icon/iconNew.png' mode="aspectFit" style='width:36rpx;' class='ocaleftimgtit'></image><text style='height:100%;float:left;'>最新上架</text>
         </view> 
         <!--  列表  -->
         <view class='disanumofgoods_box'>
@@ -23,7 +23,7 @@
                 <swiper-item wx:for='{{brandseries.series}}' wx:key='key'>
                   <view class="ocamenswipervie">
                       <view class="ocamensweve" wx:for='{{item}}' wx:key='key' wx:for-item='w'  catchtap='brandfun' data-bid='{{w.id}}' data-isbs='1'>
-                          <image class="ocamensweveimg" style="{{w.id==brandid?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{w.thumb}}"></image>
+                          <image class="ocamensweveimg" mode="aspectFit" style="{{w.id==brandid?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{w.thumb}}"></image>
                           <view class="ocamenswevename specialellipsis" style="{{w.id==brandid?'color:#f19207;':''}}">{{w.name}}</view>
                       </view>
                   </view>
