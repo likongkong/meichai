@@ -77,7 +77,8 @@ Page({
     specialActivity:false,
     morebrankip:false,
     scrollleft: 1,
-    jumpBulletBox:true
+    jumpBulletBox:true,
+    push_id:0
   },
 
   // tab切换
@@ -173,6 +174,10 @@ Page({
     var _this = this
     _this.data.loginid = app.signindata.loginid;
     _this.data.openid = app.signindata.openid;
+
+    // 推送统计
+    _this.data.push_id = options.push_id || 0;
+
     _this.setData({
       uid: app.signindata.uid,
       isProduce: app.signindata.isProduce,
@@ -376,9 +381,9 @@ Page({
     } 
     _this.setData({is_havedata:false})
 
-    console.log('mod=blindBox&operation=list&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + "&pid=" + pid+'&brandId='+_this.data.ip_brand_id+'&searchKey='+_this.data.brand_name+'&ip_id='+_this.data.ip_id)
+    console.log('mod=blindBox&operation=list&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + "&pid=" + pid+'&brandId='+_this.data.ip_brand_id+'&searchKey='+_this.data.brand_name+'&ip_id='+_this.data.ip_id+'&push_id='+_this.data.push_id)
 
-    var q1 = Dec.Aese('mod=blindBox&operation=list&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + "&pid=" + pid+'&brandId='+_this.data.ip_brand_id+'&searchKey='+_this.data.brand_name+'&ip_id='+_this.data.ip_id);
+    var q1 = Dec.Aese('mod=blindBox&operation=list&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + "&pid=" + pid+'&brandId='+_this.data.ip_brand_id+'&searchKey='+_this.data.brand_name+'&ip_id='+_this.data.ip_id+'&push_id='+_this.data.push_id);
 
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q1,
