@@ -392,6 +392,7 @@ Page({
       success: function(res) {
         console.log('listdata=====',res)
         wx.stopPullDownRefresh();
+        _this.data.push_id =  0;
         if (res.data.ReturnCode == 200) {
           var mlist = res.data.List.activity|| [];
           if(pid == 0 ){
