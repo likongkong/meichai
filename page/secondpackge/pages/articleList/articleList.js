@@ -142,14 +142,16 @@ Page({
         for(let i=0;i<res.data.length;i++){
           let arr = [];
           for(let k=0;k<res.data.length;k++){
-            if(res.data[k].publish_time == res.data[i].publish_time){
+            if(res.data[i].publish_time == res.data[k].publish_time){
               arr.push(res.data[k])
             }
           }
-          arr1.push({list:arr,publish_time:_this.formatTime(res.data[i].publish_time)})
+          arr1.push({list:arr,publish_time:res.data[i].publish_time})
         }
-        var listarr = _this.distinct(arr1);
-
+        let listarr = _this.distinct(arr1);
+        for(let i =0;i<listarr.length;i++){
+          listarr[i].publish_time = _this.formatTime(listarr[i].publish_time)
+        }
         console.log(listarr)
         _this.setData({
           listData:listarr,
