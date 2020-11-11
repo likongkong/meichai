@@ -197,7 +197,7 @@ Page({
     return m + '月' + d + '日';
   },
   jumpWebview(e){
-    let url = e.currentTarget.dataset.uel;
+    let url = e.currentTarget.dataset.url;
     app.comjumpwxnav(0,url,'','')
   },
   /**
@@ -232,6 +232,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    var _this = this;
     _this.getData();
   },
 

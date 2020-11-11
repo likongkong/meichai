@@ -48,7 +48,7 @@
           <view class="shortPic" data-url="{{sonItem.url}}" catchtap="jumpWebview"> 
             <view>
               <text class="title multilineellipsis">{{sonItem.title}}</text>
-              <text class="subtitle">{{sonItem.subtitle}}</text>
+              <text class="subtitle multilineellipsis">{{sonItem.subtitle}}</text>
             </view>
             <image src="{{sonItem.litpic}}" mode="aspectFit"></image>
           </view>
@@ -68,7 +68,7 @@
           <view class="shortPic" data-url="{{sonItem.url}}" catchtap="jumpWebview"> 
             <view>
               <text class="title multilineellipsis">{{sonItem.title}}</text>
-              <text class="subtitle">{{sonItem.subtitle}}</text>
+              <text class="subtitle multilineellipsis">{{sonItem.subtitle}}</text>
             </view>
             <image src="{{sonItem.litpic}}" mode="aspectFit"></image>
           </view>
@@ -91,7 +91,7 @@
         <view class="shortPic"> 
           <view style="width:100%">
             <text class="title multilineellipsis">{{list[0].title}}</text>
-            <text class="subtitle">{{list[0].subtitle}}</text>
+            <text class="subtitle multilineellipsis">{{list[0].subtitle}}</text>
           </view>
         </view>
       </view>
