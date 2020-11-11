@@ -4,12 +4,12 @@
 <view class="wrap">
     <view class="brandWrap">
       <view class="brandLogo">
-        <image src="https://www.51chaidan.com/images/mc.jpg" mode="widthFix"></image>
+        <image src="https://www.51chaidan.com/images/newMcLogo.jpg" mode="widthFix"></image>
         <!-- <view>点击关注</view> -->
       </view>
       <view class="brandName">
-        <text class="name">美拆</text>
-        <text class="introduce">潮玩社交电商平台，在线抽盒机-免费重抽，限定抽签原价购。</text>
+        <text class="name">FORTUNE TOYS</text>
+        <text class="introduce">潮玩新品每日更新！关注公众号，不错过每一次上新，还有超多福利等你哦！</text>
         <text class="articleNum">{{listDataLen}}篇原创内容</text>
       </view>
     </view>
