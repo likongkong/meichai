@@ -105,8 +105,8 @@
         "pages/aRewardDetails/aRewardDetails",
         "pages/aRewardHistory/aRewardHistory",
         "pages/shopsquaretrip/shopsquaretrip",
-        "pages/aRewardList/aRewardList"
-        
+        "pages/aRewardList/aRewardList",
+        "pages/articleList/articleList" 
       ]
     }
   ],
