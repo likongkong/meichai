@@ -369,7 +369,7 @@
 				<view class='disanumofgoods_box' wx:if='{{item.List.length!=0}}'>
 					<view class='disanum_scr'>
 						<scroll-view scroll-x="true" class="disanum_tab_comtainer">
-							<view class='disanum_scr_box' wx:for='{{item.List}}' wx:key='key' wx:for-item='w' style='height:207rpx;width:{{w.width||222}}rpx;' wx:for-index='num'>
+							<view class='disanum_scr_box' wx:for='{{item.List}}' wx:key='key' wx:for-item='w' style='height:207rpx;width:{{w.width>140?w.width:140}}rpx;' wx:for-index='num'>
 								<view class='disanum_simgbox' catchtap='driveDetail' data-id='{{w.id}}' style='height:147rpx;width:{{w.width||222}}rpx;'>
 									<image class='disanum_simg' src='{{w.cover}}' style='height:147rpx;width:{{w.width||222}}rpx;' bindload="imageLoadad" data-indexnum='4' data-num='{{num}}' data-ind='{{index}}'></image>
 								</view>
