@@ -20,7 +20,7 @@
   height:60rpx;font-size:22rpx;line-height:60rpx;float:left;position: relative;
 }
 .dhhboclcen{
-  padding: 0 15rpx;
+  padding: 0 10rpx;
   height: 60rpx;
 }
 
@@ -178,7 +178,7 @@
 }
   
 .oAccountPrompt{
-  width:700rpx;height:40rpx;margin:0 auto;margin-top: 15rpx;
+  width:700rpx;height:40rpx;margin:20rpx auto 15rpx;
 }
 .oApImg{
   width: 40rpx;
