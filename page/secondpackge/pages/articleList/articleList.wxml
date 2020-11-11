@@ -44,7 +44,7 @@
           </view>
           <image wx:if="{{sonItem.first}}" class="labelIcon" src="https://www.51chaidan.com/images/sign/activity/new1.png" mode="widthFix"></image>
         </view>
-        <view style="padding: 36rpx 0 15rpx 0;box-sizing: border-box;" wx:else>
+        <view style="padding: 30rpx 0 15rpx 0;box-sizing: border-box;" wx:else>
           <view class="shortPic" data-url="{{sonItem.url}}" catchtap="jumpWebview"> 
             <view>
               <text class="title multilineellipsis">{{sonItem.title}}</text>
@@ -64,7 +64,7 @@
     </view>
     <view class="articleGroupBoxWrap">
       <block wx:for="{{list}}" wx:key="key" wx:for-item="sonItem">
-        <view style="padding: 36rpx 0 15rpx 0;box-sizing: border-box;">
+        <view style="padding: 30rpx 0 15rpx 0;box-sizing: border-box;">
           <view class="shortPic" data-url="{{sonItem.url}}" catchtap="jumpWebview"> 
             <view>
               <text class="title multilineellipsis">{{sonItem.title}}</text>
@@ -87,7 +87,7 @@
         <image class="pic" src="{{list[0].litpic}}" mode="widthFix"></image>
         <image wx:if="{{list[0].first}}" class="labelIcon" src="https://www.51chaidan.com/images/sign/activity/new1.png" mode="widthFix"></image>
       </view>
-      <view style="padding: 36rpx 0 15rpx 0;box-sizing: border-box;">
+      <view style="padding: 26rpx 0 15rpx 0;box-sizing: border-box;">
         <view class="shortPic"> 
           <view style="width:100%">
             <text class="title multilineellipsis">{{list[0].title}}</text>
