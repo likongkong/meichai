@@ -2,10 +2,10 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 <view class="wrap">
-    <view class="brandWrap">
+    <view class="brandWrap" data-url="http://mp.weixin.qq.com/s?__biz=MzUyNzMyNTg4Ng==&mid=100000975&idx=1&sn=ef370685e8a3c081684671ae961d16a7&chksm=7a000b1e4d77820819a1b4a07cc00432f987b0f79b798cef886ecdb4fffbd07ce2054c6689b1#rd" catchtap="jumpWebview">
       <view class="brandLogo">
         <image src="https://www.51chaidan.com/images/newMcLogo.jpg" mode="widthFix"></image>
-        <!-- <view>点击关注</view> -->
+        <view>点击关注</view>
       </view>
       <view class="brandName">
         <text class="name">FORTUNE TOYS</text>

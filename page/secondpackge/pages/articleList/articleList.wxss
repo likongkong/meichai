@@ -11,8 +11,8 @@ page{
   width: 230rpx;
   padding-left: 62rpx;
   box-sizing: border-box;
-  display: flex;
-  align-items: center;
+  /* display: flex;
+  align-items: center; */
 }
 .brandLogo image{
   width: 128rpx;
