@@ -65,7 +65,7 @@
 
 			<view style="width:95rpx;position:relative;margin:10rpx 10rpx 0 0;">
 				<view style='width:{{hidewidth}}rpx;height:{{hideheight}}rpx;border:5rpx solid #e94f57;margin:0 auto;'>
-					<image style='width:{{hidewidth}}rpx;display:block;' bindload='imageLoadhide' mode="widthFix" src='{{goods_thumb}}?imageMogr2/thumbnail/{{hidewidth*2}}x'></image>
+					<image style='width:{{hidewidth}}rpx;display:block;' bindload='imageLoadhide' mode="widthFix" src='{{goods_thumb}}'></image>
 				</view>
 				
 				<view style='width:{{hidewidth}}rpx;height:10rpx;'></view>
@@ -126,18 +126,18 @@
 
 		<view class='{{ischangebox?"changebox":""}}'>
       <!-- margin:0 148rpx; -->
-			<image style='width:{{imgwidth+4}}rpx;display:block;margin:0 auto;' catchtap='iftrdetailpagen' mode="widthFix" src='{{activity.cover}}?imageMogr2/thumbnail/908x' bindload='imageLoadhead'></image>
+			<image style='width:{{imgwidth+4}}rpx;display:block;margin:0 auto;' catchtap='iftrdetailpagen' mode="widthFix" src='{{activity.cover}}' bindload='imageLoadhead'></image>
   
 			<view id='boxindex' class='parentBoxStyle' style="position:relative;width:{{imgwidth}}rpx;">
 				<view wx:for='{{roleList}}' wx:key="key">
 					<view wx:if='{{!item.isSoldOut}}' data-n='{{activity.radioImgBox}}' style='width:{{boxwidth}}px;height:{{boxwidth * activity.radioImgBox}}px;border:2rpx solid #000;float:left;position:relative;' catchtap='{{activity.canOperate?"selectbox":""}}'>
-						<image style='width:100%;height:100%;' src='{{activity.imgTop}}?imageMogr2/thumbnail/{{boxwidth * 2}}x'></image>
+						<image style='width:100%;height:100%;' src='{{activity.imgTop}}'></image>
 						<image wx:if='{{item.headphoto!=""}}' style="width:{{boxwidth * activity.radioImgBox * 0.5}}px;height:{{boxwidth * activity.radioImgBox * 0.5}}px;position:absolute;left:0;top:0;bottom:0;right:0;margin:auto;border-radius:50%;" src="{{item.headphoto}}"></image>
 
 						<view wx:if='{{!activity.isInQueue}}' style='width:100%;height:100%;position:absolute;top:0;left:0;z-index:1;' catchtap='lineup'></view>
 					</view>
 					<view wx:if='{{item.isSoldOut}}' style='width:{{boxwidth}}px;height:{{boxwidth * activity.radioImgBox}}px;border:2rpx solid #000;float:left;background:#E6E3E3;position:relative;' catchtap='{{activity.isOpenNewBox?"againOpenBox":""}}'>
-						<image style='width:60%;position:absolute;left:20%;top:0;bottom:0;margin:auto 0;' mode="widthFix" src='{{activity.imgSoldOut}}?imageMogr2/thumbnail/{{boxwidth*1.2}}x'></image>
+						<image style='width:60%;position:absolute;left:20%;top:0;bottom:0;margin:auto 0;' mode="widthFix" src='{{activity.imgSoldOut}}'></image>
 					</view>
 				</view>
 
@@ -454,7 +454,7 @@
 					<view class="exhibboxconibox" wx:if='{{addsetData[0].length!=0&&is_exhibition==1}}' style="height:200rpx;">
 						<swiper class="swiper" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450" style="height:197rpx;">
 							<swiper-item wx:for="{{addsetData[0]}}" wx:key="key" wx:for-item='w'>
-								<image src="{{w.src}}?imageMogr2/thumbnail/x800" class="exhibboxconiboimg" catchtap="exhibitionpubjump" data-id='{{w.activity_id}}' data-type='{{w.href_type}}' style="border-radius:10rpx;"></image>
+								<image src="{{w.src}}" class="exhibboxconiboimg" catchtap="exhibitionpubjump" data-id='{{w.activity_id}}' data-type='{{w.href_type}}' style="border-radius:10rpx;"></image>
 							</swiper-item>
 						</swiper>
 					</view>
