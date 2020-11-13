@@ -23,6 +23,17 @@ Page({
     minStr: "00",
     secStr: "00",
 
+    // 签号攻略
+    isSignStrategyPopup:false,
+    // 抽选规则
+    isChRulePopup:false,
+    // 参与成功/兑换成功/兑换失败
+    isSignPopup:false,
+    // 未获得签号
+    isGetSignNumPopup:false,
+    // 我的签号
+    isMySignNumPopup:false
+
   },
 
 
@@ -72,7 +83,6 @@ Page({
         secStr: "00",
       })
     }
-
   },
 
 
