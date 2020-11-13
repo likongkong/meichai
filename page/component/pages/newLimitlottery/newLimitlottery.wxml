@@ -3,13 +3,15 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 <view class="nlTopTimte">
-    <block>
+    <block wx:if='{{infoActivity.status==1}}'>活动暂未开启</block>
+    <block wx:elif='{{infoActivity.status==2}}'>
 		  <block>距离活动结束:</block>
 			<block wx:if='{{dayStr!="00"}}'>{{dayStr}}天</block>
 			<block wx:if='{{hrStr!="00"}}'>{{hrStr}}小时</block>
 			<block wx:if='{{minStr!="00"}}'>{{minStr}}分</block>
 			<block wx:if='{{secStr!="00"}}'>{{secStr}}秒</block>		
 		</block>
+		<block wx:elif='{{infoActivity.status==3}}'>抽签已完成</block>
 </view>
 <view class="nLbox">
     <image src="{{infoActivity.cover}}" mode="aspectFit" class="nLbTopImg"></image>
@@ -23,7 +25,7 @@
 		   <view class="nLSelectionPlaces"><text style="font-size:28rpx;color:#DB6313;margin-right:50rpx;">￥236</text>抽选名额:3</view>
 		   <view class="nLSelectionPrice">抽选价格:￥236</view>
 
-			 <view class="nLSelectionPrice">保证金:6.2 <text style="font-size:28rpx;color:#868383;margin-left:40rpx;">抽选价:236</text></view>
+			 <view class="nLSelectionPrice">保证金:{{cashPledge}} <text style="font-size:28rpx;color:#868383;margin-left:40rpx;">抽选价:236</text></view>
 
        <view class="isWinningThePrize">
 			     <view class="notWinningThePrizeO" style="padding:40rpx 30rpx 0;">很遗憾,您未中奖</view>
