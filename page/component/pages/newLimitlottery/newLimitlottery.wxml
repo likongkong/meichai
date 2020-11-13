@@ -17,14 +17,105 @@
 
 
 
+<!-- 签号攻略 -->
+<view class="popUpBox" catchtouchmove="true" wx:if="{{isSignStrategyPopup}}">
+  <view class="signContentWrap"> 
+    <view>
+      <view class="leftWrap">1</view>
+      <view class="rightWrap">
+        <text>每日签到</text>
+        <text>参加签到活动，签到成功即可获得抽签号x1，“每日签到”获得签号只可参加一个抽选活动</text>
+      </view>
+    </view>
+    <view>
+      <view class="leftWrap">2</view>
+      <view class="rightWrap">
+        <text>参与抽盒</text>
+        <text>每参与一次抽盒可获得一次兑换抽签号的机会，兑换机会当日24时清空</text>
+      </view>
+    </view>
+    <view>
+      <view class="leftWrap">3</view>
+      <view class="rightWrap">
+        <text>好友助力</text>
+        <text>每邀请20名好友助力可获得抽签号x1，每日限5个</text>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 抽选规则 -->
+<view class="popUpBox" catchtouchmove="true" wx:if="{{isChRulePopup}}">
+  <view class="ruleContentWrap"> 
+    <view class="ruleContentTitle">抽选规则</view>
+    <scroll-view scroll-y class="ruleScrollView">
+      <view>
+        1.阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的 1.阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的 1.阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的
+        1.阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的 1.阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的 1.阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的
+        1.阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的 1.阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的 1.阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的
+        1.阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的 1.阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的 1.阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的
+        1.阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的 1.阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的 1.阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的阿三大苏打实打实的
+      </view>
+    </scroll-view>
+  </view>
+</view>
+<!-- 参与成功/兑换成功/兑换失败 -->
+<view class="popUpBox" catchtouchmove="true" wx:if="{{isSignPopup}}">
+  <view class="joinContentWrap"> 
+    <!-- <text>参与成功</text>
+    <text>恭喜您，获得抽签号</text>
+    <text class="signNumber">NF6984</text>
+    <text>快去获得更多签号吧</text> -->
 
+    <!-- <text>兑换成功</text>
+    <text>恭喜您，获得抽签号</text>
+    <text class="signNumber">NF6984</text>
+    <text>快去获得更多签号吧</text> -->
+
+    <text>兑换失败</text>
+    <text>去抽盒，获得兑换机会</text>
+    <view>去抽盒</view>
+  </view>
+</view>
+<!-- 未获得签号 -->
+<view class="popUpBox" catchtouchmove="true" wx:if="{{isGetSignNumPopup}}">
+  <view class="notgetSignContentWrap"> 
+    您还未获得抽签号
+  </view>
+</view>
+<!-- 我的签号 -->
+<view class="popUpBox" catchtouchmove="true" wx:if="{{isMySignNumPopup}}">
+  <view class="mySignContentWrap"> 
+    <scroll-view scroll-y class="mySignScrollContentWrap">
+      <view class="mySignScrollContentWrapBox">
+        <view class="mySignLeftWrap">
+          <view>
+            <text class="mySignTxt">每日签到</text>
+            <text class="mySignData">10月2号</text>
+          </view>
+        </view>
+        <view class="mySignRightWrap">
+          NF633984
+        </view>
+      </view>
+      <view class="mySignScrollContentWrapBox">
+        <view class="mySignLeftWrap">
+          <view>
+            <text class="mySignTxt">每日签到</text>
+            <text class="mySignData">10月2号</text>
+          </view>
+        </view>
+        <view class="mySignRightWrap">
+          NF633984
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
 
 
 
 <!-- 底部导航 -->
 <bnavigation isProduce='{{isProduce}}' isChar='{{false}}'></bnavigation>
-
-
 <!--  授权弹框  -->
 <tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
 

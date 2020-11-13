@@ -16,9 +16,16 @@ Page({
     tgabox: false,
     signinlayer:true,
     windowHeight: app.signindata.windowHeight - 65 - wx.getStorageSync('statusBarHeightMc') || 0,
-
-
-
+    // 签号攻略
+    isSignStrategyPopup:false,
+    // 抽选规则
+    isChRulePopup:false,
+    // 参与成功/兑换成功/兑换失败
+    isSignPopup:false,
+    // 未获得签号
+    isGetSignNumPopup:false,
+    // 我的签号
+    isMySignNumPopup:false
   },
 
   /**
