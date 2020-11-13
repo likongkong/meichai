@@ -1,4 +1,245 @@
 @import "../../../../pages/signin/signin.wxss";
 @import "../../../../common/newcoupon.wxss";
 @import "../../../../common/tabbar.wxss";
+@import "../../common/exhibition.wxss";
 
+
+.nlTopTimte{
+  background:#000;height:68rpx;text-align: center;line-height: 68rpx;font-size: 24rpx;color: #fff;
+}
+.nLbox{
+  padding: 20rpx 0 200rpx;
+  background: #fff;
+}
+.nLbTopImg{
+  width:710rpx;
+  height:378rpx;
+  display: block;
+  border-radius: 10rpx;
+  margin:auto ;
+}
+.nlbName{
+  padding: 20rpx 20rpx 0;
+  position: relative;
+}
+
+.shareImg{
+  width: 60rpx;
+  height: 60rpx;
+  display: block;
+}
+.shareImgTxt{
+  text-align: center;
+  font-size: 20rpx;
+  color: #535353;
+}
+.shareImgBox{
+  position: absolute;
+  top: 20rpx;
+  right: 10rpx;
+  z-index: 6;
+}
+
+
+
+.nlbNtop{
+  width:70%;
+  font-size:27rpx;
+  margin-bottom:20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nLSelectionPlaces{
+  color: #9B9999;
+  font-size: 26rpx;
+  margin-bottom:20rpx;
+}
+.nLSelectionPrice{
+  color: #DB6313;
+  font-size: 36rpx;
+  margin-bottom:20rpx;
+}
+.percentageNum{
+  width: 100%;
+  text-align: center;
+}
+
+.pNLeftNum{
+  width: 100rpx;
+  height: 70rpx;
+  padding:10rpx 0;
+  font-size: 24rpx;
+  display:inline-block;
+  vertical-align: top;
+
+}
+.pNLeftNum text{
+  display: block;
+  text-align: center;
+}
+.pNLeftCenter{
+  margin: 30rpx 15rpx;
+  width: 400rpx;
+  height: 20rpx;
+  border-radius:20rpx;
+  border:2rpx solid #BBBBBB;
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+}
+.pNLeftCenterBg{
+  height: 100%;
+  background:#DB6313;
+  border-radius:20rpx;
+}
+
+.pNLeftCenterTxt{
+  color: #9B9999;
+  font-size: 20rpx;
+  position:absolute ;
+  left: 0;
+  right: 0;
+  bottom: -35rpx;
+  margin:auto;
+}
+
+.pNLeftRight{
+  height: 90rpx;
+  line-height: 80rpx;
+  color:#DB6313;
+  font-size: 24rpx;
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 20rpx;
+}
+
+.titlebStrategy{
+  width: 100%;
+  padding: 30rpx 0;
+  font-size: 24rpx;
+  color:#535353;
+  overflow: hidden;
+}
+.eveStrBox{
+  width: 100%;
+  height: 260rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+.eveStrMode{
+  width: 220rpx;
+  height: 260rpx;
+  background: #EDEDED;
+  border-radius: 8rpx;
+}
+
+.eveStrModeTxt{
+  display: block;
+  font-size: 22rpx;
+  padding:20rpx 0 0 0;
+  text-align: center;
+}
+.eSMbut{
+  width:140rpx;
+  color: #fff;
+  height: 40rpx;
+  line-height: 40rpx;
+  border-radius: 40rpx;
+  font-size: 24rpx;
+  background: #DB6313;
+  margin:30rpx auto 0;
+  text-align: center;
+}
+
+.nltRrule{
+  background:#EDEDED;
+  padding: 20rpx;
+  font-size: 24rpx;
+}
+.nltRruleTxt{
+  padding: 20rpx;
+  background: #fff;
+}
+.nltRruleTxt text{
+  font-size: 24rpx;
+}
+.isWinningThePrize{
+  width: 100%;
+}
+.notWinningThePrizeO{
+  font-size: 26rpx;
+  color: #000;
+  text-align: center;
+}
+.WinningThePrize{
+  font-size: 42rpx;
+  text-align: center;
+  color:#DB6313;
+  padding:30rpx 30rpx 0;
+}
+.winningList{
+  width: 100%;
+  text-align: center;
+  margin-bottom: 15rpx;
+}
+.winningListLeft{
+  width: 200rpx;
+  height: 80rpx;
+  background:#EDEDED;
+  border-radius: 16rpx;
+  display:inline-block;
+  margin-right: 15rpx;
+  position: relative;
+  vertical-align: top;
+}
+.winningListRight{
+  width: 360rpx;
+  height: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+  font-size:#DB6313;
+  font-size: 44rpx;
+  background:#EDEDED;
+  border-radius: 16rpx; 
+  display: inline-block; 
+  vertical-align: top;
+}
+.winningListLImg{
+  width: 60rpx;
+  height: 60rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin:auto;
+  border-radius:50%;
+}
+
+
+
+
+
+
+
+
+.drawLotsBut{
+   position: fixed;
+   left: 0;
+   right: 0;
+   bottom: 120rpx;
+   margin: auto;
+   z-index: 10;
+   width: 520rpx;
+   height: 80rpx;
+   text-align: center;
+   font-size: 26rpx;
+   line-height: 80rpx;
+   color: #fff;
+   background:#EA4F57;
+   border-radius: 50rpx;
+}

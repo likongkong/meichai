@@ -245,7 +245,7 @@ Page({
       url: "/page/component/pages/newLimitlottery/newLimitlottery?id=201425",
 
 
-      
+
 
 
     });
@@ -1642,7 +1642,7 @@ Page({
     var _this = this;
     _this.setData({ jumpdevanningiftr: true });
     wx.navigateTo({
-      url: "/page/component/pages/limitlottery/limitlottery?id=" + id,
+      url: "/page/component/pages/newLimitlottery/newLimitlottery?id=" + id,
       complete: function () {_this.setData({ jumpdevanningiftr: false });}
     });   
   },

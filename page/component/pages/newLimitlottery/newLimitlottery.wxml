@@ -2,6 +2,241 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}' is_share='{{is_share}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
+<view class="nlTopTimte">
+    <block>
+		  <block>距离活动结束:</block>
+			<block wx:if='{{dayStr!="00"}}'>{{dayStr}}天</block>
+			<block wx:if='{{hrStr!="00"}}'>{{hrStr}}小时</block>
+			<block wx:if='{{minStr!="00"}}'>{{minStr}}分</block>
+			<block wx:if='{{secStr!="00"}}'>{{secStr}}秒</block>		
+		</block>
+</view>
+<view class="nLbox">
+    <image src="{{infoActivity.cover}}" mode="aspectFit" class="nLbTopImg"></image>
+    <view class="nlbName">
+		   <!-- 分享 -->
+			 <view class="shareImgBox">
+			    <image src="https://clw.51chaidan.com//images/goods/share3.png" mode='aspectFit' class="shareImg"></image>
+					<view class="shareImgTxt">分享</view>
+			 </view>
+		   <view class="nlbNtop">Vol.{{infoActivity.id}} {{infoActivity.name}}</view>
+		   <view class="nLSelectionPlaces"><text style="font-size:28rpx;color:#DB6313;margin-right:50rpx;">￥236</text>抽选名额:3</view>
+		   <view class="nLSelectionPrice">抽选价格:￥236</view>
+
+			 <view class="nLSelectionPrice">保证金:6.2 <text style="font-size:28rpx;color:#868383;margin-left:40rpx;">抽选价:236</text></view>
+
+       <view class="isWinningThePrize">
+			     <view class="notWinningThePrizeO" style="padding:40rpx 30rpx 0;">很遗憾,您未中奖</view>
+					 <view class="WinningThePrize" style="">NF6984</view>
+					 <view class="notWinningThePrizeO" style="color:#868383;padding:30rpx 0 30rpx 0;">点击查看中奖名单</view>
+			 </view>
+
+
+			 <view class="percentageNum">
+			     <view class="pNLeftNum">
+					    <text>抽签号</text>
+							<text style="color:#DB6313;">0个</text>
+					 </view>
+					 <view class="pNLeftCenter">
+					     <view class="pNLeftCenterBg" style="width:78%;"></view>
+					     <view class="pNLeftCenterTxt">签号越多中奖几率越高哦~</view>
+					 </view>
+					 <view class="pNLeftRight">我的签号></view>
+			 </view>
+		</view>
+		<view style="padding:0 20rpx 25rpx;">
+				<view class="titlebStrategy">
+					<text style="float:left;">获得抽签号</text>
+					<text style="float:right;">获取抽签号攻略></text>
+				</view>
+				<view class="eveStrBox">
+					<view class="eveStrMode">
+							<view class="eveStrModeTxt">每日签到</view>
+							<text class="eveStrModeTxt">签到成功\n得一抽签号</text>
+							<view class="eSMbut" catchtap="mywallet">去签到</view>
+							<view class="eveStrModeTxt" style="padding:10rpx 0 0 0;">今日获得:<text style="color:#DB6313;">0/3</text></view>
+					</view>
+					<view class="eveStrMode">
+							<view class="eveStrModeTxt">参与抽盒</view>
+							<text class="eveStrModeTxt">每抽一盒\n可兑换一签号</text>
+							<view class="eSMbut">去抽盒</view>
+							<view class="eveStrModeTxt" style="padding:10rpx 0 0 0;">可兑换签号数:<text style="color:#DB6313;">0/3</text></view>	
+					</view>
+					<view class="eveStrMode">
+							<view class="eveStrModeTxt">好友助力</view>
+							<text class="eveStrModeTxt">每邀请7人助力\n得一抽签号</text>
+							<view class="eSMbut">去签到</view>
+							<view class="eveStrModeTxt" style="padding:10rpx 0 0 0;">今日可获得数:<text style="color:#DB6313;">3/5</text></view>
+					</view>
+				</view>		
+		</view>
+
+    <!-- 规则 -->
+	  <block>
+				<view class="nltRrule">参与规则</view>
+				<view class="nltRruleTxt">
+					<text>1.规则1\n2.规则2\n3.规则3</text>
+				</view>		
+		</block>
+
+
+    <!-- 商品详情 -->
+		<block  wx:if="{{false}}">
+				<view class="nltRrule">商品详情</view>
+				<view class="nltRruleTxt">
+							<rich-text style="font-size:0;" nodes="{{infoGoods.goods_desc}}"></rich-text>	
+				</view>		
+		</block>
+
+        <!-- 商品详情 -->
+		<block>
+				<view class="nltRrule">中奖名单</view>
+				<view class="nltRruleTxt">
+							<view class="winningList">
+							    <view class="winningListLeft"><image class="winningListLImg" src="https://cdn.51chaidan.com/images/brandEntry/logo/20201104/472fe6ec9944fb34cc902550f9fb3b1a.png"></image></view>
+									<view class="winningListRight">N568F6</view>
+							</view>
+							<view class="winningList">
+							    <view class="winningListLeft"><image class="winningListLImg" src="https://cdn.51chaidan.com/images/brandEntry/logo/20201104/472fe6ec9944fb34cc902550f9fb3b1a.png"></image></view>
+									<view class="winningListRight">N568F6</view>
+							</view>
+							<view class="winningList">
+							    <view class="winningListLeft"><image class="winningListLImg" src="https://cdn.51chaidan.com/images/brandEntry/logo/20201104/472fe6ec9944fb34cc902550f9fb3b1a.png"></image></view>
+									<view class="winningListRight">N568F6</view>
+							</view>
+							<view class="winningList">
+							    <view class="winningListLeft"><image class="winningListLImg" src="https://cdn.51chaidan.com/images/brandEntry/logo/20201104/472fe6ec9944fb34cc902550f9fb3b1a.png"></image></view>
+									<view class="winningListRight">N568F6</view>
+							</view>
+
+
+
+
+				</view>		
+		</block>
+
+		<!-- 更多活动 -->
+		<block>
+				<view class="nltRrule">更多活动</view>	
+
+				<view class="exhibboxcon">
+
+					<view style="float:left;margin-left:20rpx;">
+						<view class="mexhibboxconeve" wx:for='{{exhdata}}' wx:key='key' wx:if='{{index%2==0}}' catchtap="jumpexhdetail" data-id='{{item.id}}' data-brandid='{{item.brandId}}' data-mtype="{{item.type}}" data-gid='{{item.goodsId}}'>
+							<block wx:if='{{item.type == 4 || item.type == 11|| item.type == 12 || item.type == 1 || item.type == 5|| item.type == 8|| item.type == 9}}'>
+								<image class="exhibboxeveimg" mode='widthFix' src="{{item.images}}"></image>
+								<view wx:if='{{item.type != 11 && item.type != 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.name}}</view>
+								<view wx:elif='{{item.type == 11 || item.type == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.goodsName}}</view>
+								<view wx:if='{{item.type == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:#666;">{{item.content}}</view>
+								<view style="width:100%;padding:10rpx 0;overflow:hidden;">
+									<view wx:if='{{item.shopPrice && item.shopPrice!="" && item.type != 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#ff2742;float:left;">￥{{item.shopPrice}}</view>
+									<view wx:elif='{{item.type == 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#ff2742;float:left;">免单活动</view>
+									<view wx:if='{{item.type == 4 || item.type == 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;">
+									  <view wx:if='{{item.saleButtonDisplay}}' style='color:#6aca6b;'>{{item.saleButtonDisplay}}</view>
+										<block wx:elif='{{item.status==1}}'>{{item.start_time}}报名</block>
+										<view wx:elif='{{item.status==2&&item.isSign}}' style="color:#6aca6b;">已报名</view>
+										<block wx:elif='{{item.status==2}}'>
+											<block wx:if='{{item.is_limit==1}}'>满{{item.limit_users}}人开奖</block>
+											<block wx:else>{{item.stop_time}}开奖</block>										
+										</block>
+										<block wx:elif='{{item.status==3}}'>已开奖</block>
+									</view>
+									<view wx:elif='{{item.type == 11 || item.type == 12}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;">
+									  <view wx:if='{{item.saleButtonDisplay}}' style='color:#6aca6b;'>{{item.saleButtonDisplay}}</view>
+										<view wx:elif='{{item.status==1}}' style='color:#6aca6b;'>{{item.start_time}}开售</view>
+										<view wx:elif='{{item.status==2}}' style='color:#6aca6b;'>{{item.stop_time}}结束</view>
+										<view wx:elif='{{item.status==3}}' style='color:black;'>已结束</view>
+									</view>
+									<view wx:elif='{{item.type == 5 && item.tags.length>0}}'>
+										<view wx:for='{{item.tags}}' wx:if='{{index<1}}' wx:key='key' class="exhshoptiright specialellipsis">{{item}}</view>
+									</view>
+								</view>
+								<view style="width:100%;height:46rpx;">
+									<image class="exhshopimg" src="{{item.brandLogo}}"></image>
+									<view  class="specialellipsis" style="width:160rpx;height:46rpx;line-height:46rpx;font-size:22rpx;float:left;margin-left:3rpx;">{{item.brandName}}</view>
+									<view wx:if='{{item.tags.length>0 && item.type != 5}}' class="exhshoptiright specialellipsis">{{item.tags[0]}}</view>
+								</view>
+							</block>
+
+							<block wx:else>
+								<image class="exhibboxeveimg" mode='widthFix' src="{{item.img_extend[0].img}}"></image>
+								<view class="exibactna specialellipsis" style="text-align:left;">{{item.title}}</view>
+								<view style="width:100%;height:46rpx;">
+									<image class="exhshopimg" src="{{item.logo}}"></image>
+									<view class="specialellipsis" style="width:160rpx;height:46rpx;line-height:46rpx;font-size:26rpx;float:left;margin-left:3rpx;">{{item.name}}</view>
+									<view style="float:right;width:88rpx;height:46rpx;" catchtap="ispraisefun" data-is_praise="{{item.is_praise}}" data-ind="{{index}}" data-lid="{{item.id}}" data-idx="{{idx}}">
+										<view class="specialellipsis" style="max-width:46rpx;height:46rpx;line-height:46rpx;font-size:26rpx;display:inline-block;vertical-align:top;float:right;{{item.is_praise == 1?'color:#f93f45;':'color:#BEBEBE;'}}">{{item.praise_sum}}</view>
+										<image style="width:30rpx;height:30rpx;margin:8rpx 0;display:inline-block;vertical-align:top;float:right;" src="{{item.is_praise == 0?'https://www.51chaidan.com/images/brand/black_heart.png':'https://www.51chaidan.com/images/brand/red_heart.png?'}}"></image>
+									</view>
+								</view>
+							</block>
+						</view>
+					</view>
+
+					<view style="float:left;margin-left:20rpx;">
+						<view class="mexhibboxconeve" wx:for='{{exhdata}}' wx:key='key' wx:if='{{index%2==1}}' catchtap="jumpexhdetail" data-id='{{item.id}}' data-brandid='{{item.brandId}}' data-mtype="{{item.type}}" data-gid='{{item.goodsId}}'>
+							<block wx:if='{{item.type == 4 || item.type == 11|| item.type == 12 || item.type == 1 || item.type == 5|| item.type == 8|| item.type == 9}}'>
+								<image class="exhibboxeveimg" mode='widthFix' src="{{item.images}}"></image>
+								<view wx:if='{{item.type != 11 && item.type != 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.name}}</view>
+								<view wx:elif='{{item.type == 11 || item.type == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.goodsName}}</view>
+								<view wx:if='{{item.type == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:#666;">{{item.content}}</view>
+								<view style="width:100%;padding:10rpx 0;overflow:hidden;">
+									<view wx:if='{{item.shopPrice && item.shopPrice!="" && item.type != 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#ff2742;float:left;">￥{{item.shopPrice}}</view>
+									<view wx:elif='{{item.type == 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#ff2742;float:left;">免单活动</view>
+									<view wx:if='{{item.type == 4 || item.type == 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;">
+									  <view wx:if='{{item.saleButtonDisplay}}' style='color:#6aca6b;'>{{item.saleButtonDisplay}}</view>
+										<block wx:elif='{{item.status==1}}'>{{item.start_time}}报名</block>
+										<view wx:elif='{{item.status==2&&item.isSign}}' style="color:#6aca6b;">已报名</view>
+										<block wx:elif='{{item.status==2}}'>
+											<block wx:if='{{item.is_limit==1}}'>满{{item.limit_users}}人开奖</block>
+											<block wx:else>{{item.stop_time}}开奖</block>										
+										</block>
+										<block wx:elif='{{item.status==3}}'>已开奖</block>
+									</view>
+									<view wx:elif='{{item.type == 11 || item.type == 12}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;">
+									  <view wx:if='{{item.saleButtonDisplay}}' style='color:#6aca6b;'>{{item.saleButtonDisplay}}</view>
+										<view wx:elif='{{item.status==1}}' style='color:#6aca6b;'>{{item.start_time}}开售</view>
+										<view wx:elif='{{item.status==2}}' style='color:#6aca6b;'>{{item.stop_time}}结束</view>
+										<view wx:elif='{{item.status==3}}' style='color:black;'>已结束</view>
+									</view>
+									<view wx:elif='{{item.type == 5 && item.tags.length>0}}'>
+										<view wx:for='{{item.tags}}' wx:if='{{index<1}}' wx:key='key' class="exhshoptiright specialellipsis">{{item}}</view>
+									</view>
+								</view>
+								<view style="width:100%;height:46rpx;">
+									<image class="exhshopimg" src="{{item.brandLogo}}"></image>
+									<view  class="specialellipsis" style="width:160rpx;height:46rpx;line-height:46rpx;font-size:22rpx;float:left;margin-left:3rpx;">{{item.brandName}}</view>
+									<view wx:if='{{item.tags.length>0 && item.type != 5}}' class="exhshoptiright specialellipsis">{{item.tags[0]}}</view>
+								</view>
+							</block>
+
+							<block wx:else>
+								<image class="exhibboxeveimg" mode='widthFix' src="{{item.img_extend[0].img}}"></image>
+								<view class="exibactna specialellipsis" style="text-align:left;">{{item.title}}</view>
+								<view style="width:100%;height:46rpx;">
+									<image class="exhshopimg" src="{{item.logo}}"></image>
+									<view class="specialellipsis" style="width:160rpx;height:46rpx;line-height:46rpx;font-size:26rpx;float:left;margin-left:3rpx;">{{item.name}}</view>
+									<view style="float:right;width:88rpx;height:46rpx;" catchtap="ispraisefun" data-is_praise="{{item.is_praise}}" data-ind="{{index}}" data-lid="{{item.id}}" data-idx="{{idx}}">
+										<view class="specialellipsis" style="max-width:46rpx;height:46rpx;line-height:46rpx;font-size:26rpx;display:inline-block;vertical-align:top;float:right;{{item.is_praise == 1?'color:#f93f45;':'color:#BEBEBE;'}}">{{item.praise_sum}}</view>
+										<image style="width:30rpx;height:30rpx;margin:8rpx 0;display:inline-block;vertical-align:top;float:right;" src="{{item.is_praise == 0?'https://www.51chaidan.com/images/brand/black_heart.png':'https://www.51chaidan.com/images/brand/red_heart.png?'}}"></image>
+									</view>
+								</view>
+							</block>
+
+						</view>
+					</view>
+
+				</view>
+
+
+
+
+
+		</block>
+
+
+
+</view>
 
 
 
@@ -21,8 +256,7 @@
 
 
 
-
-
+<view class="drawLotsBut">报名抽选</view>
 
 <!-- 底部导航 -->
 <bnavigation isProduce='{{isProduce}}' isChar='{{false}}'></bnavigation>
