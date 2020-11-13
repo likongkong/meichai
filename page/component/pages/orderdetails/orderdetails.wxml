@@ -67,7 +67,7 @@
   </view>
   </block>
 
-  <view class='addressmodify' wx:if='{{comdata.canChangedAddress}}'>注:每个订单只可修改一次收货地址<view class='modifaddclick' catchtap='modaddfun'>修改地址</view></view>
+  <view class='addressmodify' wx:if='{{comdata.canChangedAddress&&comdata.status!=20}}'>注:每个订单只可修改一次收货地址<view class='modifaddclick' catchtap='modaddfun'>修改地址</view></view>
 
   <view wx:if='{{comdata.order_type==7&&comdata.status==2}}' class='boxch'>
       <view class='ordetaaddleft'>

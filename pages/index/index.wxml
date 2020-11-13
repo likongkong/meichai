@@ -83,20 +83,12 @@
 			<!--  每日免单  -->
 			<view class='disanumofgoods' wx:if='{{item.show_type==108}}' style='{{item.isHideBreakLine?"margin-bottom:0rpx;":""}}'>
 				<view style='width:100%;height:20rpx;' wx:if='{{item.banner&&item.banner.length!=0}}'></view>
-					<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450" wx:if='{{item.banner&&item.banner.length!=0}}'>
-						<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
-							<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
-							</image>
-						</swiper-item>
-					</swiper>
-					<view class="oAccountPrompt" wx:if='{{item.listArticle&&item.listArticle.length!=0}}'>
-					   <image class="oApImg" mode="aspectFit" src="https://cdn.51chaidan.com//images/sign/activity/trumpet.png"></image>
-						 <swiper class="oApSwiper" circular="true" autoplay="true" interval="3000" vertical="true" duration="450">
-						     <swiper-item wx:for="{{item.listArticle}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
-								    <view  data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' class="oApSwiperTxt specialellipsis">{{w.title}}</view>
-								 </swiper-item>
-						 </swiper>
-					</view>
+				<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450" wx:if='{{item.banner&&item.banner.length!=0}}'>
+					<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
+						<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
+						</image>
+					</swiper-item>
+				</swiper>
 
 				<!--  列表标题  -->
 				<view class='disantitle' wx:if='{{item.title}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump'>
@@ -124,27 +116,48 @@
 				</view>
 			</view>
 
-      <!-- 一番赏 -->
-			<view class='disanumofgoods' wx:elif='{{item.show_type==118}}' style='{{item.isHideBreakLine?"margin-bottom:0rpx;":""}}'>
 
-
+      <!-- 通知 -->
+			<view class='disanumofgoods' wx:elif='{{item.show_type==119}}' style='{{item.isHideBreakLine?"margin-bottom:0rpx;":""}}'>
 				<view style='width:100%;height:20rpx;' wx:if='{{item.banner&&item.banner.length!=0}}'></view>
-					<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' wx:if='{{item.banner&&item.banner.length!=0}}' circular="true" autoplay="true" interval="3000" duration="450">
-						<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
-							<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
-							</image>
+				<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' wx:if='{{item.banner&&item.banner.length!=0}}' circular="true" autoplay="true" interval="3000" duration="450">
+					<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
+						<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
+						</image>
+					</swiper-item>
+				</swiper>
+				<!--  列表标题  -->
+				<view class='disantitle' wx:if='{{item.title}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump'>
+					{{item.title}}
+					<view class='disantitletitright' wx:if='{{item.item_type}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump' style='font-weight:normal;position:relative;color:#31b3fb;'>查看更多
+					</view>
+				</view>
+				<view style='min-height:104rpx;padding:0 20rpx 0;' wx:if='{{item.List.length!=0}}'>
+					<swiper style='width:100%;height:150rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450">
+						<swiper-item wx:for="{{item.List}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
+								<view style="padding: 15rpx 0 0 0;box-sizing: border-box;">
+									<view class="shortPic" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump'> 
+										<view>
+											<text class="title multilineellipsis">{{w.title}}</text>
+											<text class="subtitle specialellipsis">{{w.subtitle}}</text>
+										</view>
+										<image src="{{w.cover}}" mode="aspectFit"></image>
+									</view>
+								</view>
 						</swiper-item>
 					</swiper>
-					<view class="oAccountPrompt" wx:if='{{item.listArticle&&item.listArticle.length!=0}}'>
-					   <image class="oApImg" mode="aspectFit" src="https://cdn.51chaidan.com//images/sign/activity/trumpet.png"></image>
-						 <swiper class="oApSwiper" circular="true" autoplay="true" interval="3000" vertical="true" duration="450">
-						     <swiper-item wx:for="{{item.listArticle}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
-								    <view  data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' class="oApSwiperTxt specialellipsis">{{w.title}}</view>
-								 </swiper-item>
-						 </swiper>
-					</view>
+				</view>
+			</view>
 
-
+      <!-- 一番赏 -->
+			<view class='disanumofgoods' wx:elif='{{item.show_type==118}}' style='{{item.isHideBreakLine?"margin-bottom:0rpx;":""}}'>
+				<view style='width:100%;height:20rpx;' wx:if='{{item.banner&&item.banner.length!=0}}'></view>
+				<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' wx:if='{{item.banner&&item.banner.length!=0}}' circular="true" autoplay="true" interval="3000" duration="450">
+					<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
+						<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
+						</image>
+					</swiper-item>
+				</swiper>
 				<!--  列表标题  -->
 				<view class='disantitle' wx:if='{{item.title}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump'>
 					{{item.title}}
@@ -174,22 +187,12 @@
 			<!-- 潮玩种草列表  -->
 			<view class='disanumofgoods' wx:elif='{{item.show_type==17}}' style='{{item.isHideBreakLine?"margin-bottom:0rpx;":""}}'>
 				<view style='width:100%;height:20rpx;' wx:if='{{item.banner&&item.banner.length!=0}}'></view>
-					<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450" wx:if='{{item.banner&&item.banner.length!=0}}'>
-						<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
-							<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
-							</image>
-						</swiper-item>
-					</swiper>
-					<view class="oAccountPrompt" wx:if='{{item.listArticle&&item.listArticle.length!=0}}'>
-					   <image class="oApImg" mode="aspectFit" src="https://cdn.51chaidan.com//images/sign/activity/trumpet.png"></image>
-						 <swiper class="oApSwiper" circular="true" autoplay="true" interval="3000" vertical="true" duration="450">
-						     <swiper-item wx:for="{{item.listArticle}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
-								    <view  data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' class="oApSwiperTxt specialellipsis">{{w.title}}</view>
-								 </swiper-item>
-						 </swiper>
-					</view>
-
-
+				<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450" wx:if='{{item.banner&&item.banner.length!=0}}'>
+					<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
+						<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
+						</image>
+					</swiper-item>
+				</swiper>
 
 				<!--  列表标题  -->
 				<view class='disantitle' wx:if='{{item.title}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump'>
@@ -292,20 +295,12 @@
 			<!--  在线抽盒机  -->
 			<view class='disanumofgoods' wx:elif='{{item.show_type==113}}' style='{{item.isHideBreakLine?"margin-bottom:0rpx;":""}}'>
 				<view style='width:100%;height:20rpx;' wx:if='{{item.banner&&item.banner.length!=0}}'></view>
-					<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450" wx:if='{{item.banner&&item.banner.length!=0}}'>
-						<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
-							<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
-							</image>
-						</swiper-item>
-					</swiper>
-					<view class="oAccountPrompt" wx:if='{{item.listArticle&&item.listArticle.length!=0}}'>
-					   <image class="oApImg" mode="aspectFit" src="https://cdn.51chaidan.com//images/sign/activity/trumpet.png"></image>
-						 <swiper class="oApSwiper" circular="true" autoplay="true" interval="3000" vertical="true" duration="450">
-						     <swiper-item wx:for="{{item.listArticle}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
-								    <view  data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' class="oApSwiperTxt specialellipsis">{{w.title}}</view>
-								 </swiper-item>
-						 </swiper>
-					</view>
+				<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450" wx:if='{{item.banner&&item.banner.length!=0}}'>
+					<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
+						<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
+						</image>
+					</swiper-item>
+				</swiper>
 
 				<!--  列表标题   -->
 				<view class='disantitle' wx:if='{{item.title}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump'>
@@ -343,21 +338,12 @@
 			<!--  车队  -->
 			<view class='disanumofgoods' wx:elif='{{item.show_type==115}}' style='{{item.isHideBreakLine?"margin-bottom:0rpx;":""}}'>
 				<view style='width:100%;height:20rpx;' wx:if='{{item.banner&&item.banner.length!=0}}'></view>
-					<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450" wx:if='{{item.banner&&item.banner.length!=0}}'>
-						<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
-							<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
-							</image>
-						</swiper-item>
-					</swiper>
-
-					<view class="oAccountPrompt" wx:if='{{item.listArticle&&item.listArticle.length!=0}}'>
-					   <image class="oApImg" mode="aspectFit" src="https://cdn.51chaidan.com//images/sign/activity/trumpet.png"></image>
-						 <swiper class="oApSwiper" circular="true" autoplay="true" interval="3000" vertical="true" duration="450">
-						     <swiper-item wx:for="{{item.listArticle}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
-								    <view  data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' class="oApSwiperTxt specialellipsis">{{w.title}}</view>
-								 </swiper-item>
-						 </swiper>
-					</view>
+				<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450" wx:if='{{item.banner&&item.banner.length!=0}}'>
+					<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
+						<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
+						</image>
+					</swiper-item>
+				</swiper>
 
 				<!--  列表标题  -->
 				<view class='disantitle' wx:if='{{item.title}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump'>
@@ -412,21 +398,12 @@
 			<!--  原价拆明盒  -->
 			<view class='disanumofgoods' wx:elif='{{item.show_type==111}}' style='{{item.isHideBreakLine?"margin-bottom:0rpx;":""}}'>
 				<view style='width:100%;height:20rpx;' wx:if='{{item.banner&&item.banner.length!=0}}'></view>
-					<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450" wx:if='{{item.banner&&item.banner.length!=0}}'>
-						<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
-							<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
-							</image>
-						</swiper-item>
-					</swiper>
-
-					<view class="oAccountPrompt" wx:if='{{item.listArticle&&item.listArticle.length!=0}}'>
-					   <image class="oApImg" mode="aspectFit" src="https://cdn.51chaidan.com//images/sign/activity/trumpet.png"></image>
-						 <swiper class="oApSwiper" circular="true" autoplay="true" interval="3000" vertical="true" duration="450">
-						     <swiper-item wx:for="{{item.listArticle}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
-								    <view  data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' class="oApSwiperTxt specialellipsis">{{w.title}}</view>
-								 </swiper-item>
-						 </swiper>
-					</view>
+				<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450" wx:if='{{item.banner&&item.banner.length!=0}}'>
+					<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
+						<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
+						</image>
+					</swiper-item>
+				</swiper>
 
 				<!--  列表标题  -->
 				<view class='disantitle' wx:if='{{item.title}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump'>
@@ -458,21 +435,12 @@
 			<!--  特殊商品  -->
 			<view class='disanumofgoods' wx:elif='{{item.show_type==116}}' style='{{item.isHideBreakLine?"margin-bottom:0rpx;":""}}'>
 				<view style='width:100%;height:20rpx;' wx:if='{{item.banner&&item.banner.length!=0}}'></view>
-					<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450" wx:if='{{item.banner&&item.banner.length!=0}}'>
-						<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
-							<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
-							</image>
-						</swiper-item>
-					</swiper>
-
-					<view class="oAccountPrompt" wx:if='{{item.listArticle&&item.listArticle.length!=0}}'>
-					   <image class="oApImg" mode="aspectFit" src="https://cdn.51chaidan.com//images/sign/activity/trumpet.png"></image>
-						 <swiper class="oApSwiper" circular="true" autoplay="true" interval="3000" vertical="true" duration="450">
-						     <swiper-item wx:for="{{item.listArticle}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
-								    <view  data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' class="oApSwiperTxt specialellipsis">{{w.title}}</view>
-								 </swiper-item>
-						 </swiper>
-					</view>
+				<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450" wx:if='{{item.banner&&item.banner.length!=0}}'>
+					<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
+						<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
+						</image>
+					</swiper-item>
+				</swiper>
 
 				<!--  列表标题  -->
 				<view class='disantitle' wx:if='{{item.title}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='newpsellwellfun'>
@@ -510,20 +478,12 @@
 			<!--  官方寄售  -->
 			<view class='disanumofgoods' wx:elif='{{item.show_type==114}}' style='{{item.isHideBreakLine?"margin-bottom:0rpx;":""}}'>
 				<view style='width:100%;height:20rpx;' wx:if='{{item.banner&&item.banner.length!=0}}'></view>
-					<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450" wx:if='{{item.banner&&item.banner.length!=0}}'>
-						<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
-							<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
-							</image>
-						</swiper-item>
-					</swiper>
-					<view class="oAccountPrompt" wx:if='{{item.listArticle&&item.listArticle.length!=0}}'>
-					   <image class="oApImg" mode="aspectFit" src="https://cdn.51chaidan.com//images/sign/activity/trumpet.png"></image>
-						 <swiper class="oApSwiper" circular="true" autoplay="true" interval="3000" vertical="true" duration="450">
-						     <swiper-item wx:for="{{item.listArticle}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
-								    <view  data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' class="oApSwiperTxt specialellipsis">{{w.title}}</view>
-								 </swiper-item>
-						 </swiper>
-					</view>
+				<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450" wx:if='{{item.banner&&item.banner.length!=0}}'>
+					<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
+						<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
+						</image>
+					</swiper-item>
+				</swiper>
 
 				<!--  列表标题  -->
 				<view class='disantitle' wx:if='{{item.title}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump'>
@@ -555,21 +515,12 @@
 			<!--  限定抽签  -->
 			<view class='disanumofgoods' wx:elif='{{item.show_type==112}}' style='{{item.isHideBreakLine?"margin-bottom:0rpx;":""}}'>
 				<view style='width:100%;height:20rpx;' wx:if='{{item.banner&&item.banner.length!=0}}'></view>
-					<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450" wx:if='{{item.banner&&item.banner.length!=0}}'>
-						<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
-							<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
-							</image>
-						</swiper-item>
-					</swiper>
-
-					<view class="oAccountPrompt" wx:if='{{item.listArticle&&item.listArticle.length!=0}}'>
-					   <image class="oApImg" mode="aspectFit" src="https://cdn.51chaidan.com//images/sign/activity/trumpet.png"></image>
-						 <swiper class="oApSwiper" circular="true" autoplay="true" interval="3000" vertical="true" duration="450">
-						     <swiper-item wx:for="{{item.listArticle}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
-								    <view  data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' class="oApSwiperTxt specialellipsis">{{w.title}}</view>
-								 </swiper-item>
-						 </swiper>
-					</view>
+				<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450" wx:if='{{item.banner&&item.banner.length!=0}}'>
+					<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
+						<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
+						</image>
+					</swiper-item>
+				</swiper>
 
 				<!--  列表标题  -->
 				<view class='disantitle' wx:if='{{item.title}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump'>
@@ -616,21 +567,12 @@
 			<!--  官方拆盒  -->
 			<view class='disanumofgoods' wx:elif='{{item.show_type==109}}' style='{{item.isHideBreakLine?"margin-bottom:0rpx;":""}}'>
 				<view style='width:100%;height:20rpx;' wx:if='{{item.banner&&item.banner.length!=0}}'></view>
-					<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450" wx:if='{{item.banner&&item.banner.length!=0}}'>
-						<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
-							<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
-							</image>
-						</swiper-item>
-					</swiper>
-
-					<view class="oAccountPrompt" wx:if='{{item.listArticle&&item.listArticle.length!=0}}'>
-					   <image class="oApImg" mode="aspectFit" src="https://cdn.51chaidan.com//images/sign/activity/trumpet.png"></image>
-						 <swiper class="oApSwiper" circular="true" autoplay="true" interval="3000" vertical="true" duration="450">
-						     <swiper-item wx:for="{{item.listArticle}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
-								    <view  data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' class="oApSwiperTxt specialellipsis">{{w.title}}</view>
-								 </swiper-item>
-						 </swiper>
-					</view>
+				<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450" wx:if='{{item.banner&&item.banner.length!=0}}'>
+					<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
+						<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
+						</image>
+					</swiper-item>
+				</swiper>
 
 				<!--  列表标题  -->
 				<view class='disantitle' wx:if='{{item.title}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump'>
@@ -664,20 +606,12 @@
 			<!-- 新品  热销  -->
 			<view style='background: #fff;margin-bottom:20rpx;' wx:elif='{{item.show_type==110}}'>
 				<view style='width:100%;height:20rpx;' wx:if='{{item.banner&&item.banner.length!=0}}'></view>
-					<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450" wx:if='{{item.banner&&item.banner.length!=0}}'>
-						<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
-							<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
-							</image>
-						</swiper-item>
-					</swiper>
-					<view class="oAccountPrompt" wx:if='{{item.listArticle&&item.listArticle.length!=0}}'>
-					   <image class="oApImg" mode="aspectFit" src="https://cdn.51chaidan.com//images/sign/activity/trumpet.png"></image>
-						 <swiper class="oApSwiper" circular="true" autoplay="true" interval="3000" vertical="true" duration="450">
-						     <swiper-item wx:for="{{item.listArticle}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
-								    <view  data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' class="oApSwiperTxt specialellipsis">{{w.title}}</view>
-								 </swiper-item>
-						 </swiper>
-					</view>
+				<swiper style='width:100%;height:128rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450" wx:if='{{item.banner&&item.banner.length!=0}}'>
+					<swiper-item wx:for="{{item.banner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
+						<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' style='width:100%;height:128rpx;margin:0 auto;display:block;position: relative;'>
+						</image>
+					</swiper-item>
+				</swiper>
 				
 				<view class='indcomtabbox'>
 					<view class='indctabbtxt' style='{{npswtab==1?"color:#1989fa;":""}}' data-npswnum='1' catchtap='npswtabfun'>新 品

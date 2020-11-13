@@ -177,6 +177,8 @@
   padding-left:15rpx;
 }
   
+
+/* 1 */
 .oAccountPrompt{
   width:700rpx;height:40rpx;margin:20rpx auto 15rpx;
 }
@@ -197,4 +199,33 @@
   line-height: 40rpx;
   font-size: 24rpx;
   color:#9B9999;
+}
+
+/* 2 */
+
+.shortPic{
+  padding: 0 30rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.shortPic view{
+  width: 75%;
+}
+.shortPic text{
+  width: 100%;
+}
+.shortPic .title{
+  font-size: 30rpx;
+  color: #0b0d0a;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+.shortPic .subtitle{
+  font-size: 26rpx;
+  color: #918e8f;
+}
+.shortPic image{
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 6rpx;
 }
