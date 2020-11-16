@@ -707,9 +707,9 @@
                             分享好友
                         </view> 
 
-                        <view wx:if='{{item.order_type==27}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
+                        <!-- <view wx:if='{{item.order_type==27}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
                             等待开奖支付尾款，未中奖原路退回
-                        </view>   
+                        </view>    -->
                                 
                     </view>
                     <!--  已取消订单  -->
