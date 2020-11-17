@@ -463,8 +463,10 @@
                </view>
                <view class='odchcomright' style='position:relative;' wx:if='{{comdata.order_type!=7}}'>
                       <view class='odchrhead multilineellipsis'>
-                      <view wx:if='{{comdata.is_suit==1}}' style='display: inline-block;color:#ff2742;margin-right:12rpx;'>{{comdata.pre_name}}</view>
-                      <view wx:if='{{comdata.is_suit==1}}' style='display: inline-block;'>{{comdata.ds}}</view>                      
+                      <block wx:if='{{comdata.order_type!=13}}'>
+                            <view wx:if='{{comdata.is_suit==1}}' style='display: inline-block;color:#ff2742;margin-right:12rpx;'>{{comdata.pre_name}}</view>
+                            <view wx:if='{{comdata.is_suit==1}}' style='display: inline-block;'>{{comdata.ds}}</view>                    
+                      </block>
                       {{comdata.gname}}
                       </view>
                       <view class='wholeconnum specialellipsis' wx:if='{{comdata.prize}}' style='padding-top:10rpx;'>奖品:{{comdata.prize}}</view> 
@@ -492,11 +494,15 @@
 
                             <block wx:if='{{comdata.order_type==1&&comdata.suitPrice&&comdata.suitName&&comdata.suitNumber}}'></block>
                             <block wx:else>
-                                <view wx:if='{{comdata.is_suit==1}}' style='display: inline-block;color:#ff2742;'>{{comdata.gsale_suit}}</view>
+                                <block wx:if='{{comdata.order_type!=13}}'>
+                                     <view wx:if='{{comdata.is_suit==1}}' style='display: inline-block;color:#ff2742;'>{{comdata.gsale_suit}}</view>
+                                </block>
                             </block>
-                            
                           </view>
-                          <view wx:if='{{comdata.tax!=0.00}}' style='margin-left:10rpx;color:#999;' class='taxpricleft'>税费:￥{{comdata.tax}}<view wx:if='{{comdata.is_suit==1}}' style='display: inline-block;'>{{comdata.gsale_suit}}</view></view>
+                          <block wx:if='{{comdata.order_type!=13}}'>
+                               <view wx:if='{{comdata.tax!=0.00}}' style='margin-left:10rpx;color:#999;' class='taxpricleft'>税费:￥{{comdata.tax}}<view wx:if='{{comdata.is_suit==1}}' style='display: inline-block;'>{{comdata.gsale_suit}}</view></view>                         
+                          </block>
+
 
                       </view>
                   
@@ -549,7 +555,30 @@
                   结束时间 : {{comdata.gift_time}}
               </view> 
  
-              <view  wx:if='{{comdata.order_type==24&&comdata.status!=8}}'>
+              <!-- 抽签 -->
+
+              <view  wx:if='{{comdata.order_type==13&&comdata.status==0&&comdata.depositOrderPayPrice}}'>
+ 
+                    <view class='daifukuan'>
+                        商品总额:￥{{comdata.goods_amount}}-定金{{comdata.depositOrderPayPrice}}+运费￥{{comdata.carriage}}
+                    </view>           
+                    <view class='totalmonnum'>
+                            合计:￥{{comdata.amount}}
+                    </view>
+
+                    <!--  等待付款  -->
+                    <view class='totalmoncon' wx:if='{{comdata.status==0}}'>
+                        <view class='totalmoncright' bindtap='payment' style='position:relative;margin-left:20rpx;'>支付尾款</view>
+                        
+                        <view class='totalmoncleft' wx:if='{{comdata.dateTitle}}' style="height:58rpx;line-height:58rpx;width:500rpx;font-size:24rpx;float:right;">{{comdata.dateTitle}}</view>
+                               
+                    </view>       
+                    <view class='totalmoncon' wx:if='{{comdata.status==4||comdata.status==5}}'>    
+                        <view class='totalmoncrightcel'  data-oid='{{comdata.oid}}' data-gcover='{{comdata.gcover}}' bindtap='lookatthelogistics' style='margin-right:10rpx;position: relative;'>查看物流</view>
+                    </view> 
+              </view> 
+
+              <view  wx:elif='{{comdata.order_type==24&&comdata.status!=8}}'>
  
                     <view class='daifukuan'>
                         商品总额:￥{{comdata.goods_amount}}-定金{{comdata.depositOrderPayPrice}}+运费￥{{comdata.carriage}}

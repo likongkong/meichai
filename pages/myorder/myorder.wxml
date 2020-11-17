@@ -354,8 +354,10 @@
                  </view>
                  <view class='wholeconright' wx:if='{{item.order_type!=7}}'>
                       <view class='wholecontxt multilineellipsis' style='position:relative;'>
-                      <view wx:if='{{item.is_suit==1}}' style='display: inline-block;color:#ff2742;margin-right:12rpx;'>{{item.pre_name}}</view>
-                      <view wx:if='{{item.is_suit==1}}' style='display: inline-block;'>{{item.ds}}</view>                       
+                      <block wx:if='{{item.order_type!=13}}'>
+                            <view wx:if='{{item.is_suit==1}}' style='display: inline-block;color:#ff2742;margin-right:12rpx;'>{{item.pre_name}}</view>
+                            <view wx:if='{{item.is_suit==1}}' style='display: inline-block;'>{{item.ds}}</view>  
+                      </block>
                       {{item.gname}}
                       </view>
                       <view class='wholeconnum specialellipsis' wx:if='{{item.prize}}' style='padding-top:10rpx;'>奖品:{{item.prize}}</view>
@@ -384,10 +386,13 @@
                               <block wx:elif='{{item.order_type==2||item.order_type==9}}'>免费</block>
                               <block wx:elif='{{item.order_type==1&&item.suitPrice&&item.suitName&&item.suitNumber}}'>￥{{item.suitPrice}}</block>
                               <block wx:else>￥{{item.goods_price}}</block>
-                              <view wx:if='{{item.is_suit==1}}' style='display: inline-block;color:#ff2742;'>
-                                  <block wx:if='{{item.order_type==1&&item.suitPrice&&item.suitName&&item.suitNumber}}'></block>
-                                  <block wx:else>{{item.gsale_suit}}</block>
-                              </view>
+                              <block wx:if='{{item.order_type!=13}}'>
+                                    <view wx:if='{{item.is_suit==1}}' style='display: inline-block;color:#ff2742;'>
+                                        <block wx:if='{{item.order_type==1&&item.suitPrice&&item.suitName&&item.suitNumber}}'></block>
+                                        <block wx:else>{{item.gsale_suit}}</block>
+                                    </view>
+                              </block>
+                              
                           </view>
                       <view wx:if='{{item.tax!=0.00}}' style='margin-left:10rpx;color:#999;' class='taxpricleft'>税费:￥{{item.tax}}</view>
                       </view>
@@ -397,7 +402,7 @@
                  <view class='wholeconright' wx:if='{{item.order_type==7}}'>
                       <view class='wholecontxt multilineellipsis' style='position:relative;'>
                       <view wx:if='{{item.is_suit==1}}' style='display: inline-block;color:#ff2742;margin-right:12rpx;'>{{item.pre_name}}</view>
-                      <view wx:if='{{item.is_suit==1}}' style='display: inline-block;'>{{item.ds}}</view>                       
+                      <view wx:if='{{item.is_suit==1}}' style='display: inline-block;'>{{item.ds}}</view>         
                       {{item.gname}}
                       </view>
                       <view wx:if='{{item.schedule.finished}}' class='wholeconnum specialellipsis' data-cart_id='{{item.cart_id}}' >
@@ -435,8 +440,26 @@
               </view> 
 
              <view class='wholebottom' wx:if='{{item.order_type==1}}'>合计:￥{{item.amount}}<view style='display: inline-block;' wx:if="{{item.carriage==''}}">(含运费{{item.carriage}}元）</view></view>
-              
-              <block wx:if='{{item.order_type==24&&item.status!=8}}'>
+              <!-- 抽签 -->
+              <block wx:if='{{item.order_type == 13&&item.status == 0 && item.depositOrderPayPrice}}'>
+                    <view class='daifukuan'>
+                        商品总额:￥{{item.goods_amount}}-定金￥{{item.depositOrderPayPrice}}+运费￥{{item.carriage}}
+                    </view>  
+                    <view class='wholebottom'>合计:￥{{item.amount}}</view>  
+
+                    <view class='daifukuandianji' wx:if='{{item.status==0}}'>
+                        <view class='dfkdjrighg' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;margin-left:20rpx;' bindtap='payment' data-amount='{{item.amount}}' data-oid='{{item.oid}}' data-cart_id='{{item.cart_id}}' data-gcover='{{item.gcover}}' data-gid='{{item.gid}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}'  data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-order_type='{{item.order_type}}'>支付尾款</view>
+
+                        <view class='dfkdjrleft' style="height:54rpx;line-height:54rpx;float:right;" wx:if='{{item.dateTitle}}'>{{item.dateTitle}}</view>
+
+                    </view>
+                    <view class='daifukuandianji' wx:if='{{item.status==4||item.status==5}}'>
+                           <view class='wholebottomaddright' style='margin-right:20rpx;position: relative;' data-oid='{{item.oid}}' data-gcover='{{item.gcover}}' bindtap='lookatthelogistics'>查看物流</view>
+                    </view>
+              </block>
+
+
+              <block wx:elif='{{item.order_type==24&&item.status!=8}}'>
                     <view class='daifukuan'>
                         商品总额:￥{{item.goods_amount}}-定金￥{{item.depositOrderPayPrice}}+运费￥{{item.carriage}}
                     </view>  
@@ -668,7 +691,7 @@
                             等待开奖支付尾款，未中奖原路退回
                         </view>
                         
-        <view class='wholebottomaddright' wx:if='{{item.order_type==1}}' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;margin-right:10rpx;' data-ind='{{index}}' bindtap='personalhomepage'>
+                <view class='wholebottomaddright' wx:if='{{item.order_type==1}}' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;margin-right:10rpx;' data-ind='{{index}}' bindtap='personalhomepage'>
                         发帖推荐
                         </view>
 

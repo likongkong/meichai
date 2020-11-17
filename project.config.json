@@ -24,7 +24,7 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": true,
+		"useCompilerModule": false,
 		"userConfirmedUseCompilerModuleSwitch": false,
 		"useMultiFrameRuntime": false,
 		"useApiHook": true,
@@ -33,7 +33,7 @@
 		"minifyWXSS": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.13.2",
+	"libVersion": "2.14.0",
 	"appid": "wxb41da0ebe032a6f5",
 	"projectname": "meichai",
 	"isGameTourist": false,

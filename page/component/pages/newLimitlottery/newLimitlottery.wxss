@@ -2,10 +2,26 @@
 @import "../../../../common/newcoupon.wxss";
 @import "../../../../common/tabbar.wxss";
 @import "../../common/exhibition.wxss";
+@import "../../pages/limitlotterylist/limitlotterylist.wxss";
 
 
 .nlTopTimte{
-  background:#000;height:68rpx;text-align: center;line-height: 68rpx;font-size: 24rpx;color: #fff;
+  background:#000;height:68rpx;text-align: center;line-height: 68rpx;font-size: 24rpx;color: #fff;position: relative;
+}
+.drawRules{
+  width: 120rpx;
+  height: 45rpx;
+  line-height: 45rpx;
+  top: 0;
+  bottom: 0;
+  right: 20rpx;
+  margin: auto;
+  z-index: 1;
+  text-align: center;
+  color:#fff ;
+  background:#9B9999;
+  border-radius: 8rpx;
+  position: absolute;
 }
 .nLbox{
   padding: 20rpx 0 200rpx;
@@ -39,7 +55,7 @@
   right: 10rpx;
   z-index: 6;
 }
-
+.canimgsernew{width:360px;height:574px;position:fixed;left:0;top:-9999999rpx;margin:auto;z-index:9999;background:#fff;}
 
 
 .nlbNtop{
@@ -69,7 +85,7 @@
   width: 100rpx;
   height: 70rpx;
   padding:10rpx 0;
-  font-size: 24rpx;
+  font-size: 26rpx;
   display:inline-block;
   vertical-align: top;
 
@@ -108,7 +124,7 @@
   height: 90rpx;
   line-height: 80rpx;
   color:#DB6313;
-  font-size: 24rpx;
+  font-size: 26rpx;
   display: inline-block;
   vertical-align: top;
   margin-left: 20rpx;
@@ -139,8 +155,8 @@
 
 .eveStrModeTxt{
   display: block;
-  font-size: 22rpx;
-  padding:20rpx 0 0 0;
+  font-size: 24rpx;
+  padding:15rpx 0 0 0;
   text-align: center;
 }
 .eSMbut{
@@ -151,8 +167,9 @@
   border-radius: 40rpx;
   font-size: 24rpx;
   background: #DB6313;
-  margin:30rpx auto 0;
+  margin:45rpx auto 0;
   text-align: center;
+  position: relative;
 }
 
 .nltRrule{
@@ -243,8 +260,29 @@
    background:#EA4F57;
    border-radius: 50rpx;
 }
-
-
+.drawLotsButRec{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 120rpx;
+    margin: auto;
+    z-index: 10;
+    width: 520rpx;
+    height: 80rpx;
+    text-align: center;
+    font-size: 24rpx;
+    color: #fff;
+    background:#EA4F57;
+    border-radius: 50rpx;    
+}
+.drawLBRTop{
+    padding: 10rpx 0 4rpx 0;
+    font-size: 24rpx;
+    height: 28rpx;
+}
+.drawutRecAlrr{
+   width:100%;text-align:center;line-height:80rpx;
+}
 
 
 
@@ -335,7 +373,7 @@
   display: block;
   text-align: center;
   color: #fff;
-  font-size: 26rpx;
+  font-size: 32rpx;
   font-weight:bold;
   margin-bottom: 22rpx;
 }
@@ -351,18 +389,18 @@
   margin: 0 auto;
 }
 .joinContentWrap text:last-child{
-  font-size: 18rpx;
+  font-size: 26rpx;
   margin-top: 22rpx;
 }
 .joinContentWrap view{
-  width: 200rpx;
-  height: 56rpx;
+  width: 300rpx;
+  height: 70rpx;
   background-color: #EA4F57;
-  font-size: 22rpx;
+  font-size: 28rpx;
   color: #fff;
   border-radius: 8rpx;
   text-align: center;
-  line-height: 56rpx;
+  line-height: 70rpx;
   margin: 50rpx auto;
 }
 
@@ -386,9 +424,24 @@
   left: 0;
   bottom: 0;
   background-color: #fff;
+  z-index: 1;
+}
+.mySignContentHead{
+  height: 8%;
+  position: relative;
+}
+.mySignContentImg{
+  position: absolute;
+  height: 50rpx;
+  width: 50rpx;
+  top: 0;
+  bottom: 0;
+  right: 25rpx;
+  margin: auto;
+  z-index: 1;
 }
 .mySignScrollContentWrap{
-  height: 100%;
+  height: 92%;
   padding: 15rpx 25rpx;
   box-sizing: border-box;
 }
@@ -431,3 +484,128 @@
   border-radius: 8rpx;
   background-color: #EDEDED;
 }
+
+
+.exchangeSmoke{
+  color: #DB6313;
+  height: 45rpx;
+  line-height: 45rpx;
+  font-size: 22rpx;
+  text-align: center;
+}
+
+/* 红包口令弹框样式 */
+.comtip{width: 100%;height: 100%;position: fixed;top: 0;left: 0;z-index: 1999;}
+.comtipback{width: 100%;height: 100%;background: #000;opacity: 0.4;}
+.comtipcon{width: 86%;height: 600rpx;background: #fff;position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;border-radius: 10rpx;}
+.comtipchead{width: 94%;height: 100rpx;line-height: 100rpx;font-size: 36rpx;color: #333;padding: 0 3%;}
+.comtipccon{width: 92%;height: 400rpx;font-size: 32rpx;color: #666;padding: 0 4%;overflow: scroll;}
+.comtipcbot{width: 94%;height: 100rpx;padding: 0 3%;}
+.comtipcbri{width: 40%;height: 100rpx;line-height: 100rpx;font-size: 30rpx;color: #42bd56;text-align: right;float: right;padding-right: 32rpx;}
+.apptipbox {height: 360rpx;width: 500rpx;position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;z-index: 10;background: #fff;border-radius: 20rpx;}
+.apptiphead{height: 100rpx;width: 100%;text-align:center;line-height: 100rpx;font-size: 30rpx;color: #666;border-bottom: 1rpx solid #e5e5e5;}
+.apptipcont{width: 94%;margin: 0 auto;padding: 60rpx 0 0 0;font-size: 30rpx;text-align: center;color: #666;}
+.redinpnum{display:block;width:450rpx;padding-left:10rpx;height:50rpx;line-height:50rpx;color:#000;font-size:26rpx;margin:10rpx auto 0;background:#f2f2f2;}
+.redbutbotp{width:100%;height:80rpx;line-height:80rpx;background:#ff2742;position:absolute;left:0;bottom:0;font-size:32rpx;text-align:center;color:#fff;border-radius:0 0 20rpx 20rpx;}
+.redbutbotpcopy{left:40rpx;color:#ff2742;text-decoration:underline;}
+.redbutbotpimmed{right:40rpx;background:#ff2742;}
+.commoncopyimmed{width:190rpx;height:60rpx;line-height:60rpx;position:absolute;bottom:20rpx;font-size:28rpx;text-align:center;color:#fff;border-radius:10rpx;}
+
+
+
+
+.eveMtXtxt{
+  display: block;
+  font-size: 22rpx;
+  text-align: center;  
+}
+.eveMtXtxtA{
+  height: 2px;
+  width: 148rpx;
+  background-color:#fff;
+  margin:2rpx auto;
+}
+
+
+
+.shareFbox{
+  width: 100%;
+  height:300rpx;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: #fff;
+  border-radius: 20rpx 20rpx 0 0;
+  text-align: center;
+}
+.shareEveBox{
+  height: 200rpx;
+  width: 200rpx;
+  vertical-align: top;
+  display: inline-block;
+  padding-top: 50rpx;
+  position: relative;
+}
+.shareEveBoxImg{
+  width: 120rpx;
+  height: 120rpx;
+  display: block;
+  margin: auto;
+}
+.shareEveBoxTxt{
+  width: 100%;
+  height: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+  font-size: 24rpx;
+  color: #000;
+}
+.shareEveBoxPos{
+  width: 100rpx;
+  height: 40rpx;
+  line-height:40rpx;
+  background: #ff2742;
+  color: #fff;
+  font-size: 24rpx;
+  border-radius: 8rpx;
+  position: absolute;
+  left:120rpx;
+  top: 43rpx;
+}
+.shareCenter{
+  width: 100%;
+  height: 300rpx;
+  position: absolute;
+  left: 0;
+  top: 200rpx;
+  text-align: center;
+  padding-top: 200rpx;
+}
+.shareEveBoxJian{
+  width: 80rpx;
+  height: 80rpx;
+  position: absolute;
+  right: 190rpx;
+  top: 0;
+}
+
+
+.ownPromptBox{
+  width: 300rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  background: #000;
+  border-radius: 10rpx;
+  font-size: 30rpx;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+
+
