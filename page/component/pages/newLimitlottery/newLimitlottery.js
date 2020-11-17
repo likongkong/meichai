@@ -439,10 +439,6 @@ Page({
                   btntext: "已领取成功",
                   awardstatus: 1,
                 })
-
-                app.signindata.isAwardOrder = false;
-                app.signindata.awardOrder = { Info: { cover: "", isAwardOrder: false, overtime: 0, url: "", } };
-
               } else if (res.data.Info.infoActivity.nextPay) { // 直接吊起预支付
                 _this.setData({
                   btntext: "直接购买",
@@ -1571,8 +1567,7 @@ Page({
     if(this.data.infoActivity.status == 3){
       app.showToastC("抽签已完成");
     }else{
-      // app.showToastC("请先报名");
-      this.payMaskFun();
+      app.showToastC("请先报名");
     }
     
   }

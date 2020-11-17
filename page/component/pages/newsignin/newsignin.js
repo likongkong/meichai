@@ -79,6 +79,7 @@ Page({
     subscribedata: "",
     // 订阅判断
     subscribeif: app.signindata.subscribeif,
+    limaid:0
   },
   // 授权点击统计
   clicktga: function () {
@@ -143,6 +144,9 @@ Page({
       app.signindata.activity_id = _this.getSearchString('id', scene) || 0;
       _this.data.loginid = app.signindata.loginid;
       _this.data.openid = app.signindata.openid;
+
+      _this.data.limaid = _this.getSearchString('limaid', scene) || 0;
+
       _this.setData({
         uid: app.signindata.uid,
         isShareFun: app.signindata.isShareFun,
@@ -155,6 +159,7 @@ Page({
       app.signindata.activity_id = options.id || 0;
       _this.data.loginid = app.signindata.loginid;
       _this.data.openid = app.signindata.openid;
+      _this.data.limaid = options.limaid || 0;
       _this.setData({
         uid: app.signindata.uid,
         isShareFun: app.signindata.isShareFun,
@@ -296,7 +301,7 @@ Page({
 
   signin: function () {
     var _this = this;
-    var qqq = Dec.Aese('mod=Obtain&operation=todaySign&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
+    var qqq = Dec.Aese('mod=Obtain&operation=todaySign&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&lottoActivityId='+_this.data.limaid);
     _this.setData({
       ishowrecord: false,
     })

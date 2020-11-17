@@ -71,6 +71,7 @@
         "pages/signinpage/signinpage",
         "pages/turntable/turntable",
         "pages/limitlottery/limitlottery",
+        "pages/newLimitlottery/newLimitlottery",
         "pages/limitlotterylist/limitlotterylist",
         "pages/mytoydg/mytoydg",
         "pages/myothertoydg/myothertoydg",

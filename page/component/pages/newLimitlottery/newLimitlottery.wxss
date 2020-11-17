@@ -14,13 +14,13 @@
   line-height: 45rpx;
   top: 0;
   bottom: 0;
-  right: 0;
+  right: 20rpx;
   margin: auto;
   z-index: 1;
   text-align: center;
-  color:#000 ;
-  background:#FFF5A7;
-  border-radius:45rpx 0 0 45rpx;
+  color:#fff ;
+  background:#9B9999;
+  border-radius: 8rpx;
   position: absolute;
 }
 .nLbox{
@@ -66,20 +66,15 @@
   justify-content: space-between;
   align-items: center;
 }
-.nLSelectionPlBox{
-  width: 100%;
-  height: 60rpx;
-  padding-top: 32rpx;
-}
 .nLSelectionPlaces{
   color: #9B9999;
   font-size: 26rpx;
-  float: right;
+  margin-bottom:20rpx;
 }
 .nLSelectionPrice{
-  color: #ff2742;
+  color: #DB6313;
   font-size: 36rpx;
-  float: left;
+  margin-bottom:20rpx;
 }
 .percentageNum{
   width: 100%;
@@ -111,7 +106,7 @@
 }
 .pNLeftCenterBg{
   height: 100%;
-  background:#ff2742;
+  background:#DB6313;
   border-radius:20rpx;
 }
 
@@ -128,7 +123,7 @@
 .pNLeftRight{
   height: 90rpx;
   line-height: 80rpx;
-  color:#ff2742;
+  color:#DB6313;
   font-size: 26rpx;
   display: inline-block;
   vertical-align: top;
@@ -171,7 +166,7 @@
   line-height: 40rpx;
   border-radius: 40rpx;
   font-size: 24rpx;
-  background: #ff2742;
+  background: #DB6313;
   margin:45rpx auto 0;
   text-align: center;
   position: relative;
@@ -200,7 +195,7 @@
 .WinningThePrize{
   font-size: 42rpx;
   text-align: center;
-  color:#ff2742;
+  color:#DB6313;
   padding:30rpx 30rpx 0;
 }
 .winningList{
@@ -223,7 +218,7 @@
   height: 80rpx;
   text-align: center;
   line-height: 80rpx;
-  font-size:#ff2742;
+  font-size:#DB6313;
   font-size: 44rpx;
   background:#EDEDED;
   border-radius: 16rpx; 
@@ -473,7 +468,7 @@
 }
 .mySignLeftWrap .mySignTxt{
   font-size: 30rpx;
-  color: #ff2742;
+  color: #db6313;
 }
 .mySignLeftWrap .mySignData{
   font-size: 22rpx;
@@ -485,16 +480,16 @@
   text-align: center;
   line-height: 100rpx;
   font-size: 50rpx;
-  color: #ff2742;
+  color: #db6313;
   border-radius: 8rpx;
   background-color: #EDEDED;
 }
 
 
 .exchangeSmoke{
-  color: #ff2742;
-  height: 40rpx;
-  line-height: 40rpx;
+  color: #DB6313;
+  height: 45rpx;
+  line-height: 45rpx;
   font-size: 22rpx;
   text-align: center;
 }

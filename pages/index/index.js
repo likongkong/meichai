@@ -217,7 +217,7 @@ Page({
     //       };
     //   }
     // })
-    //  wx.navigateTo({  
+     wx.navigateTo({  
       // url: "/page/component/pages/doubleElevenexh/doubleElevenexh?specialsource=1"
       // url: "/page/component/pages/crowdfunding/crowdfunding?aid=75127"
       // url: "/page/component/pages/drivetohidelist/drivetohidelist"
@@ -242,8 +242,13 @@ Page({
       // url: "/pages/modifythenickname/modifythenickname"
       // url: "/page/secondpackge/pages/articleList/articleList"
       // url: "/pages/sputforward/sputforward"
-      
-    // });
+      url: "/page/component/pages/limitlottery/limitlottery?id=201425",
+
+
+
+
+
+    });
   },
   // 公共跳转
   comjumpwxnav: function (item_type, whref, wname, imgurl){
