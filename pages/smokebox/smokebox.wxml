@@ -178,7 +178,7 @@
 
 			<block>
 			<view wx:if="{{activity.isRecycle}}" style="min-width:108rpx;background:#1890ff;border-radius:3px;width:60px;left:10px;font-size: 24rpx;color:#ffffff;margin:0 60rpx;" catchtap="toggleRecyclerule">{{activity.recycleRatio}}折回收</view>
-			<view wx:else style="width:108rpx; height:80rpx;line-height:80rpx;display: inline-block;color: #4c9a23;font-size: 24rpx;margin:0 60rpx;"></view>
+			<view wx:elif="{{suplusTry>0}}" style="width:108rpx; height:80rpx;line-height:80rpx;display: inline-block;color: #4c9a23;font-size: 24rpx;margin:0 60rpx;"></view>
 			</block>
 			
 
