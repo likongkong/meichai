@@ -542,8 +542,15 @@ Page({
     var official = w.currentTarget.dataset.official;
     var isdirectshipping = w.currentTarget.dataset.isdirectshipping;
     var isnoautomat = w.currentTarget.dataset.isnoautomat;
-     
+    var status = w.currentTarget.dataset.status;
+
     var appid = w.currentTarget.dataset.appid;
+    if(status == 1){
+        wx.navigateTo({
+          url: "/pages/smokebox/smokebox?gid=" + gid
+        });
+        return false;
+    }
     if (gid && gid != 0 && typeof(gid) != "undefined") {
       if (official){
         _this.setData({
@@ -569,12 +576,12 @@ Page({
           })
         }
       }else if(isnoautomat){
-        this.setData({
-          gid: gid,
-          brandprompts:true,
-          isnoautomat:isnoautomat,
-          is_isdirectshipping:false
-        })
+          this.setData({
+            gid: gid,
+            brandprompts:true,
+            isnoautomat:isnoautomat,
+            is_isdirectshipping:false
+          })
       } else {
         wx.navigateTo({
           url: "/pages/smokebox/smokebox?gid=" + gid
