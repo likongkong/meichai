@@ -735,9 +735,9 @@
 				<view class='disantitle' wx:if='{{item.title}}'>
 					{{item.title}}
 				</view>
-				<view class='bchar imgiftr' data-imgiftr='{{index}}' data-gid="{{item.gid}}" catchtap='addressmanagement' style='position:relative;'>
+				<view class='bchar' data-gid="{{item.gid}}" catchtap='addressmanagement' style='position:relative;'>
 						<view class='bcleft'>
-							<image class="bcimg" src="{{item.showiftr?item.gcover:'../images/goods_Item_Default_Image.png'}}" style='width:{{item.width||200}}rpx;' bindload="imageLoadad" data-indexnum='5' data-ind='{{index}}'></image>
+							<image class="bcimg" src="{{item.gcover}}" style='width:{{item.width||200}}rpx;' bindload="imageLoadad" data-indexnum='5' data-ind='{{index}}'></image>
 						</view>
 					<view class='bcright'>
 						<view class='bctitle multilineellipsis' style='font-size:26rpx;'>

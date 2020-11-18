@@ -541,9 +541,16 @@ Page({
   // 跳转商品详情
   jumpshopdetail:function(w){
     var goods_id = w.currentTarget.dataset.goods_id || w.target.dataset.goods_id || 0;
-    wx.navigateTo({
-      url: "../../../../pages/detailspage/detailspage?gid=" + goods_id,
-    }); 
+    var isblindbox = w.currentTarget.dataset.isblindbox || 0;
+    if(isblindbox){
+      wx.navigateTo({
+        url: "/pages/smokebox/smokebox?gid=" + goods_id,
+      });
+    }else{
+      wx.navigateTo({
+        url: "../../../../pages/detailspage/detailspage?gid=" + goods_id,
+      });
+    } 
   },
   inputboxfun:function(w){
     var comment_id = w.currentTarget.dataset.comment_id || w.target.dataset.comment_id || -1;

@@ -29,26 +29,27 @@ Component({
     attached: function() {
 
       var _this = this;
-      var q1 = Dec.Aese('mod=spread&operation=getActivity&type=1');
-      wx.request({
-        url: app.signindata.comurl + 'model.php' + q1,
-        method: 'GET',
-        header: {'Accept': 'application/json'},
-        success: function(res) {
-          if(res.data.ReturnCode == 200){
-            console.log('smokeComponent=============',res)
-            if(res.data.List){
-              if(res.data.List.activity){
-                 _this.setData({
-                   dataList: res.data.List.activity.blindbox||[],
-                 })
+      setTimeout(function(){
+          var q1 = Dec.Aese('mod=spread&operation=getActivity&type=1');
+          wx.request({
+            url: app.signindata.comurl + 'model.php' + q1,
+            method: 'GET',
+            header: {'Accept': 'application/json'},
+            success: function(res) {
+              if(res.data.ReturnCode == 200){
+                console.log('smokeComponent=============',res)
+                if(res.data.List){
+                  if(res.data.List.activity){
+                    _this.setData({
+                      dataList: res.data.List.activity.blindbox||[],
+                    })
+                  }
               }
-           }
-          }
+              }
+            }
+          });
+      },500);
 
-
-        }
-      });
     },
     moved: function() {},
     detached: function() {},

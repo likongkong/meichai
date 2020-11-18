@@ -1,7 +1,7 @@
 // /pages/smokebox/smokebox.js
 var Dec = require('../../common/public.js'); //aes加密解密js
 var time = require('../../utils/util.js');
-var WxParse = require('../../wxParse/wxParse.js');
+// var WxParse = require('../../wxParse/wxParse.js');
 const app = getApp();
 
 Page({
@@ -18,19 +18,11 @@ Page({
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
     openid: app.signindata.openid,
-    avatarUrl: app.signindata.avatarUrl,
     isProduce: app.signindata.isProduce,
-    // 适配苹果X
-    isIphoneX: app.signindata.isIphoneX,
     defaultinformation: '',
-    wxnum: '',
 
     // 授权弹框
     tgabox: false,
-
-    // 晒单数量
-    dryinglistnum: 0,
-    shopnum: 0,
 
     c_title: '在线抽盒机',
     c_arrow: true,
@@ -38,8 +30,6 @@ Page({
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
 
     list: [1, 1, 1, 1, 1, 1],
-
-    testlist: [1, 1, 1, 1, 1, 1, 1, 1],
 
     boxwidth: 0,
 
@@ -69,7 +59,6 @@ Page({
     awardimg: "",
     awardname: "",
     order_id: "",
-    total: '',
 
     isqueue: true,
     ishowbox: false,
@@ -184,7 +173,6 @@ Page({
     is_share: false,
     automat: app.signindata.automat,
     automatTimes: 0,
-    automattitle: '',
 
     showClass: false,
 
@@ -322,14 +310,10 @@ Page({
       title: '加载中...',
     })
     var q1 = Dec.Aese('mod=blindBox&operation=openNew' + '&id=' + _this.data.id);
-
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q1,
       method: 'GET',
-      header: {
-        'Accept': 'application/json'
-      },
-
+      header: {'Accept': 'application/json'},
       success: function (res) {
         wx.hideLoading()
         if (res.data.ReturnCode == 200) {
@@ -351,7 +335,6 @@ Page({
   onLoad: function (options) {
     var _this = this;
     if (options.scene) {
-      // '&welfareid=' + _this.data.welfareid + '&isredpag=1'
       let scene = decodeURIComponent(options.scene);
       app.signindata.referee = _this.getSearchString('referee', scene) || 0;
       app.signindata.activity_id = _this.getSearchString('id', scene) || 0;
@@ -374,18 +357,13 @@ Page({
       })
     }
 
-    // _this.data.id = 47670;
-    // _this.data.gid = 0;
-
     // 推送统计
     _this.data.push_id = options.push_id || 0;
-
     _this.data.loginid = app.signindata.loginid;
     _this.data.openid = app.signindata.openid;
     _this.setData({
       uid: app.signindata.uid,
       isProduce: app.signindata.isProduce,
-      avatarUrl: app.signindata.avatarUrl,
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
     });
     wx.showLoading({
@@ -404,7 +382,6 @@ Page({
             _this.data.openid = app.signindata.openid;
             _this.setData({
               uid: app.signindata.uid,
-              avatarUrl: app.signindata.avatarUrl,
               isProduce: app.signindata.isProduce,
               signinlayer: true,
               isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
@@ -431,7 +408,6 @@ Page({
       });
     };
 
-
   },
 
   // 授权点击统计
@@ -456,11 +432,10 @@ Page({
             signinlayer: true,
           });
           // '已经授权'
-          _this.data.loginid = app.signindata.loginid,
+            _this.data.loginid = app.signindata.loginid,
             _this.data.openid = app.signindata.openid,
             _this.setData({
               uid: app.signindata.uid,
-              avatarUrl: app.signindata.avatarUrl,
               isProduce: app.signindata.isProduce,
               isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
             });
@@ -487,20 +462,14 @@ Page({
 
     var _this = this
     wx.hideLoading()
-
     _this.data.loginid = app.signindata.loginid;
     _this.data.openid = app.signindata.openid;
     _this.data.perspcardata = app.signindata.perspcardata || '';
     _this.setData({
       uid: app.signindata.uid,
       isProduce: app.signindata.isProduce,
-      avatarUrl: app.signindata.avatarUrl,
-      automat: app.signindata.automat || {
-        isOpen: false,
-        times: 0
-      },
+      automat: app.signindata.automat || {isOpen: false, times: 0 },
       automatTimes: app.signindata.automat.times,
-      automattitle: app.signindata.automattitle || '',
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
       defaultinformation:app.signindata.defaultinformation,
     });
@@ -533,19 +502,13 @@ Page({
 
   getdefault: function () {
     var _this = this;
-
     if(_this.data.defaultinformation){}else{
-      console.log('defaultinformation=====接口')
-      
       app.defaultinfofun(_this);
     }
-
-
   },
 
   initview: function () {
     var _this = this
-
     //创建节点选择器
     var box = wx.createSelectorQuery();
     //选择id
@@ -589,10 +552,6 @@ Page({
     var ratio = $width / $height;
     var viewWidth = 454,
       viewHeight = viewWidth / ratio;
-    // if (viewHeight > 500) {
-    //   viewWidth = 500 * ratio;
-    //   viewHeight = 500;
-    // };
     if (viewHeight>400){
        this.setData({
          imgwidth:300
@@ -623,97 +582,94 @@ Page({
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q1,
       method: 'GET',
-      header: {
-        'Accept': 'application/json'
-      },
-
+      header: {'Accept': 'application/json'},
       success: function (res) {
         _this.data.push_id =  0;
         console.log('getInfo======',res)
         wx.stopPullDownRefresh();
-        _this.data.isloadfun = true
-        wx.stopPullDownRefresh()
+        _this.data.isloadfun = true;
+        wx.hideLoading()
         if (res.data.ReturnCode == 200) {
           clearInterval(_this.data.timer)
           clearInterval(_this.data.atimer)
-          if (res.data.Info.activity.backgroundCode && res.data.Info.activity.backgroundCode != "") {
-            _this.setData({
-              pageBg: res.data.Info.activity.backgroundCode
-            })
-          } else {
-            _this.setData({
-              pageBg: "#e6d4c6"
-            })
+
+          var infoData = res.data.Info;
+          var listDataDetail = res.data.List;
+          var activityData = infoData.activity;
+
+          var l = (listDataDetail.employ || []).concat(listDataDetail.queue || []);
+          if(l&&l.length!=0){
+            l = _this.distinct(l)
           };
-          // 是否有便宜价格
-          if(res.data.Info.activity.cheaperPrice){
-            res.data.Info.activity.shop_price = res.data.Info.activity.cheaperPrice
-          };
-
-          if (res.data.Info.activity.status == 1) {
-            res.data.Info.activity.start_time = time.toDate(res.data.Info.activity.start_time);
-          }
-
-
-          // if (redauin.status == 1) {
-          //   var datatimewell = redauin.startTime;
-          //   redauin.datatimew = datatimewell;
-          //   redauin.datatimew = _this.toDatehd(redauin.datatimew);
-          //   _this.winningtheprizetimedetail(redauin.startTime);
-          // };
 
 
           _this.setData({
-            activity: res.data.Info.activity,
-            festivalId: res.data.Info.festivalId || false,
-            festivalTicket: res.data.Info.festivalTicket || false,
-            inviteList: res.data.List.invite || [],
-            queueList: res.data.List.queue || [],
-            roleList: res.data.List.role || [],
-            employList: res.data.List.employ || [],
-            retry: res.data.Info.alert ? res.data.Info.alert.retry : "免费重抽不支持二选一",
-            multipleHide: res.data.List.multipleHide || [],
-            id: res.data.Info.activity.id,
-            gid: res.data.Info.activity.goods_id,
-            rollchance: res.data.Info.activity.suplusChance,
-            idlist: res.data.List.arrActivityId || [],
-            relAidList: res.data.List.relAIdUnpack || [],
-            suplusTry: res.data.Info.activity.suplusTry,
-            cardTip: res.data.Info.user.cardTip,
-            cardXRay: res.data.Info.user.cardXRay,
-            isOpenWholeBox: res.data.Info.activity.isOpenWholeBox||'',
-            isRepeatOpenWholeBox: res.data.Info.function.isRepeatOpenWholeBox || true,
-            isFirstOrder: res.data.Info.function.isFirstOrder || false,
-            firstOrderDiscount: res.data.Info.function.firstOrderDiscount || 0,
-            countLine: res.data.Info.countLine,
-            countRole: res.data.Info.countRole,
-            isOpenLine: res.data.Info.isOpenLine,
-            isDirectOpenWholeBox: res.data.Info.isDirectOpenWholeBox||'',
-            welfare: res.data.Info.welfare || [],
-            is_exhibition: res.data.Info.activity.specialWay ? res.data.Info.activity.specialWay : 0,
-            brandId: res.data.Info.activity ? res.data.Info.activity.brandId : '',
-            tipCheapForWholeBox: res.data.Info.tipCheapForWholeBox || 0,
-            subscribedata: res.data.Info.subscribe || '',
-            blindBoxLucky: res.data.Info.user.blindBoxLucky,
-            exchangeLuckyCondition: res.data.Info.user.exchangeLuckyCondition,
-            wholeBoxImg: res.data.Info.img.wholeBox ? res.data.Info.img.wholeBox : "https://www.51chaidan.com/images/blindbox/gold_case.png",
-            isSubscribeCoupon: res.data.Info.activity.isSubscribeCoupon || false,
-            subscribeCouponTip: res.data.Info.activity.subscribeCouponTip || '',
+            isallready: true,
+            queueList: l,
+            activity: activityData,
+            festivalId: infoData.festivalId || false,
+            festivalTicket: infoData.festivalTicket || false,
+            inviteList: listDataDetail.invite || [],
+            roleList: listDataDetail.role || [],
+            employList: listDataDetail.employ || [],
+            retry: infoData.alert ? infoData.alert.retry : "免费重抽不支持二选一",
+            multipleHide: listDataDetail.multipleHide || [],
+            id: activityData.id,
+            gid: activityData.goods_id,
+            rollchance: activityData.suplusChance,
+            idlist: listDataDetail.arrActivityId || [],
+            relAidList: listDataDetail.relAIdUnpack || [],
+            suplusTry: activityData.suplusTry,
+            cardTip: infoData.user.cardTip,
+            cardXRay: infoData.user.cardXRay,
+            isOpenWholeBox: activityData.isOpenWholeBox||'',
+            isRepeatOpenWholeBox: infoData.function.isRepeatOpenWholeBox || true,
+            isFirstOrder: infoData.function.isFirstOrder || false,
+            firstOrderDiscount: infoData.function.firstOrderDiscount || 0,
+            countLine: infoData.countLine,
+            countRole: infoData.countRole,
+            isOpenLine: infoData.isOpenLine,
+            isDirectOpenWholeBox: infoData.isDirectOpenWholeBox||'',
+            welfare: infoData.welfare || [],
+            is_exhibition: activityData.specialWay ? activityData.specialWay : 0,
+            brandId: activityData ? activityData.brandId : '',
+            tipCheapForWholeBox: infoData.tipCheapForWholeBox || 0,
+            subscribedata: infoData.subscribe || '',
+            blindBoxLucky: infoData.user.blindBoxLucky,
+            exchangeLuckyCondition: infoData.user.exchangeLuckyCondition,
+            wholeBoxImg: infoData.img.wholeBox ? infoData.img.wholeBox : "https://www.51chaidan.com/images/blindbox/gold_case.png",
+            isSubscribeCoupon: activityData.isSubscribeCoupon || false,
+            subscribeCouponTip: activityData.subscribeCouponTip || '',
             // 是否是端盒送实物
-            whole_boxGift:res.data.Info.whole_boxGift||'',
-            wholeBoxGiftImg:res.data.Info.wholeBoxGiftImg || '',
-            definePicture:res.data.Info.img||{},
-            idendataList:res.data.List.sameBrandActivity||[], // 相同品牌数据 
-            branddata:res.data.Info.brand || '', // 品牌数据
+            whole_boxGift:infoData.whole_boxGift||'',
+            wholeBoxGiftImg:infoData.wholeBoxGiftImg || '',
+            definePicture:infoData.img||{},
+            idendataList:listDataDetail.sameBrandActivity||[], // 相同品牌数据 
+            branddata:infoData.brand || '', // 品牌数据
             //刷新关闭弹框
             ishowcollectchip: false,
             //是否可回收
-            isRecycle:res.data.Info.activity.isRecycle,
+            isRecycle:activityData.isRecycle,
             //是否可使用抽盒金抵扣
-            isDeduct:res.data.Info.activity.isDeduct,
+            isDeduct:activityData.isDeduct,
             //是否使用抽盒金抵扣
-            isUseDeduct:res.data.Info.activity.isDeduct?true:false
+            isUseDeduct:activityData.isDeduct?true:false
           })
+
+
+          if (activityData.backgroundCode && activityData.backgroundCode != "" && activityData.backgroundCode != "#e6d4c6") {
+            _this.setData({
+              pageBg: activityData.backgroundCode
+            })
+          };
+          // 是否有便宜价格
+          if(activityData.cheaperPrice){
+            activityData.shop_price = activityData.cheaperPrice
+          };
+
+          if (activityData.status == 1) {
+            activityData.start_time = time.toDate(activityData.start_time);
+          }
 
           if(recycle){
             _this.setData({
@@ -723,69 +679,58 @@ Page({
           }
 
           // 商品详情 
-          if (res.data.Info && res.data.Info.goods) {
-            if (res.data.Info.goods.goods_desc) {
-              WxParse.wxParse('article', 'html', res.data.Info.goods.goods_desc, _this, 0);
+          if (infoData && infoData.goods && infoData.goods.goods_desc) {
+              // WxParse.wxParse('article', 'html', res.data.Info.goods.goods_desc, _this, 0);
+              var goodsDescDetails  = infoData.goods.goods_desc.replace(/<img/gi, '<img style="width:100%;height:auto;display:block;"');
               _this.setData({
                 iftrdetailpageone: true,
-                goods_thumb: res.data.Info.goods.goods_thumb ? res.data.Info.goods.goods_thumb : "",
+                goodsDescDetails:goodsDescDetails,
+                goods_thumb: infoData.goods.goods_thumb ? infoData.goods.goods_thumb : "",
               });
-            } else {
-              _this.setData({
-                iftrdetailpageone: false
-              });
-            };
           } else {
             _this.setData({
               iftrdetailpageone: false
             });
           };
 
-
-          var l = res.data.List.employ.concat(res.data.List.queue);
-          if(l&&l.length!=0){
-            l = _this.distinct(l)
-          };
-          _this.setData({ queueList: l })
-
           // 是否调取展会数据
-          if (!_this.data.isfirst && res.data.Info.activity.specialWay && res.data.Info.activity.specialWay == 1||(res.data.Info.activity.specialWay!=1&&_this.data.brandId>0)) {
+          if (!_this.data.isfirst && activityData.specialWay && activityData.specialWay == 1||(activityData.specialWay!=1&&_this.data.brandId>0)) {
             _this.data.isfirst = true;
             // wx.hideShareMenu()
             _this.exhibdatafun(1)
-            app.livebroadcast(_this, res.data.Info.activity.brandId)  // 直播数据
+            app.livebroadcast(_this, activityData.brandId)  // 直播数据
           }
           // 云统计
           if (_this.data.iftrcloud) {
-            var clouddata = { act_id: _this.data.id, type: res.data.Info.activity.specialWay || 0 };
+            var clouddata = { act_id: _this.data.id, type: activityData.specialWay || 0 };
             app.cloudstatistics('activityStatistics', clouddata);
             _this.data.iftrcloud = false;
           };
 
 
-          if (_this.data.firstshowredpag && res.data.Info.welfare.length > 0 && res.data.Info.welfare[0].currentAmount == 0 && _this.data.isredpag != 1) {
+          if (_this.data.firstshowredpag && infoData.welfare.length > 0 && infoData.welfare[0].currentAmount == 0 && _this.data.isredpag != 1) {
             _this.hidepackage()
             _this.setData({
-              redpagList: res.data.Info.welfare || [],
+              redpagList: infoData.welfare || [],
               firstshowredpag: false,
             })
           } else if (_this.data.firstshowredpag) {
             _this.data.firstshowredpag = false
           }
 
-          if (res.data.List.role.length == 8 || res.data.List.role.length == 12 || res.data.List.role.length == 7 || res.data.List.role.length == 10 || res.data.List.role.length == 11 || res.data.List.role.length == 24 || res.data.List.role.length == 18) {
+          if (listDataDetail.role.length == 8 || listDataDetail.role.length == 12 || listDataDetail.role.length == 7 || listDataDetail.role.length == 10 || listDataDetail.role.length == 11 || listDataDetail.role.length == 24 || listDataDetail.role.length == 18) {
             _this.setData({
               linenum: 4,
             })
-          } else if (res.data.List.role.length == 9 || res.data.List.role.length == 6 || res.data.List.role.length == 5 || res.data.List.role.length == 3) {
+          } else if (listDataDetail.role.length == 9 || listDataDetail.role.length == 6 || listDataDetail.role.length == 5 || listDataDetail.role.length == 3) {
             _this.setData({
               linenum: 3,
             })
-          } else if (res.data.List.role.length == 13 || res.data.List.role.length == 14 || res.data.List.role.length == 15) {
+          } else if (listDataDetail.role.length == 13 || listDataDetail.role.length == 14 || listDataDetail.role.length == 15) {
             _this.setData({
               linenum: 5,
             })
-          } else if (res.data.List.role.length == 4 || res.data.List.role.length == 2) {
+          } else if (listDataDetail.role.length == 4 || listDataDetail.role.length == 2) {
             _this.setData({
               linenum: 2,
             })
@@ -802,45 +747,46 @@ Page({
             })
           }
 
-          if (res.data.Info.activity.aheadUser == 0 && !_this.data.activity.isInQueue) {
+          if (activityData.aheadUser == 0 && !_this.data.activity.isInQueue) {
             _this.reset()
           }
 
-          if (res.data.Info.activity.aheadUser == 0 && !_this.data.activity.isInQueue && res.data.Info.activity.status == 2 && _this.data.isqueue) {
+          if (activityData.aheadUser == 0 && !_this.data.activity.isInQueue && activityData.status == 2 && _this.data.isqueue) {
             _this.queueup(1, 0) //排队 
             _this.setData({
               isqueue: false,
             })
           }
-
-          if (res.data.Info.activity.refreshTime) {
-            if (_this.data.recordtime == 0 || res.data.Info.activity.refreshTime >= _this.data.recordtime) {
+          
+          
+          if (activityData.refreshTime) {
+            if (_this.data.recordtime == 0 || activityData.refreshTime >= _this.data.recordtime) {
               _this.setData({
-                recordtime: res.data.Info.activity.refreshTime + (parseInt(res.data.Info.activity.aheadUser) * 2)
+                recordtime: activityData.refreshTime + (parseInt(activityData.aheadUser) * 2)
               })
             }
 
             var timestamp = Date.parse(new Date()) / 1000
-            if (res.data.Info.activity.refreshTime > timestamp) {
+            if (activityData.refreshTime > timestamp) {
               _this.countdown()
-            } else if (!res.data.Info.activity.canOperate) {
+            } else if (!activityData.canOperate) {
               _this.reset()
             }
           }
 
-          if (res.data.List.hideRole.length > 0) {
-            for (var i = 0; i < res.data.List.hideRole.length; i++) {
-              res.data.List.hideRole[i].img = _this.data.zdyurl + res.data.List.hideRole[i].img;
+          if (listDataDetail.hideRole.length > 0) {
+            for (var i = 0; i < listDataDetail.hideRole.length; i++) {
+              listDataDetail.hideRole[i].img = _this.data.zdyurl + listDataDetail.hideRole[i].img;
             }
             _this.setData({
-              hideList: res.data.List.hideRole,
+              hideList: listDataDetail.hideRole,
             })
           }
 
-          if (res.data.List.role.length > 0) {
+          if (listDataDetail.role.length > 0) {
             var boxnum = 0;
-            for (var i = 0; i < res.data.List.role.length; i++) {
-              if (!res.data.List.role[i].isSoldOut) {
+            for (var i = 0; i < listDataDetail.role.length; i++) {
+              if (!listDataDetail.role[i].isSoldOut) {
                 boxnum++;
               }
             }
@@ -851,21 +797,20 @@ Page({
 
           _this.initview()
 
-          // 生成图片
-          if (res.data.Info.function.isFirstOrderActivity) {
-            _this.snapshotsharefun();
-          };
 
           setTimeout(function () {
+            
+            // 生成图片
+            if (infoData.function.isFirstOrderActivity) {
+              _this.snapshotsharefun();
+            };
             _this.nextpagediao()
-            _this.setData({
-              isallready: true,
-            })
+
           }, 500) //延迟时间 这里是1秒
 
 
         }
-        wx.hideLoading()
+        
       },
 
       fail: function (res) {
@@ -1104,10 +1049,9 @@ Page({
     var _this = this
     wx.showLoading({
       title: '加载中...',
+      mask:true
     })
-
     var q1 = Dec.Aese('mod=blindBox&operation=reRoll&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&order_id=' + _this.data.order_id);
-
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q1,
       method: 'GET',
@@ -1238,17 +1182,14 @@ Page({
         title: title,
         imageUrl: _this.data.redpagshareimg,
         path: "/pages/smokebox/smokebox?id=" + _this.data.id + '&referee=' + _this.data.uid + '&gid=' + _this.data.gid + '&welfareid=' + _this.data.welfareid + '&isredpag=1',
-        success: function (res) {
-        }
+        success: function (res) {}
       }
     } else {
       var share = {
         title: "我正在在线抽盲盒，免费重抽！免费重抽！免费重抽！",
         imageUrl: _this.data.snapshotshare || "https://www.51chaidan.com/images/blindbox/" + _this.data.id + ".jpg",
         path: "/pages/smokebox/smokebox?id=" + _this.data.id + '&referee=' + _this.data.uid + '&gid=' + _this.data.gid + '&welfareid=' + _this.data.welfareid + '&isredpag=0',
-        success: function (res) {
-
-        }
+        success: function (res) {}
       }
     }
     _this.queueup(2, 4)
@@ -1757,9 +1698,6 @@ Page({
                   _this.ubpackbox()
                   _this.queueup(2, 6,true)
 
-                  // setTimeout(function () {
-                  //   _this.getInfo()
-                  // }, 3000)
                 }
 
               }, 1000);
@@ -2270,8 +2208,6 @@ Page({
             })
           };
 
-          
-
           // 微信支付
           _this.paymentmony()
         } else {
@@ -2501,13 +2437,16 @@ Page({
     var _this = this;
     var wholeBoxGiftInfo = this.data.wholeBoxGiftInfo || [];
     if(wholeBoxGiftInfo&&wholeBoxGiftInfo.goods_desc){
-        WxParse.wxParse('detail', 'html', wholeBoxGiftInfo.goods_desc, _this, 0);
+        // WxParse.wxParse('detail', 'html', wholeBoxGiftInfo.goods_desc, _this, 0);
+        var detailDetails = wholeBoxGiftInfo.goods_desc.replace(/<img/gi, '<img style="width:100%;height:auto;display:block;"');
+
         this.setData({
           iftrdetailpagetwo: true,
           wholeBGIDetail:true,
           iftrdetailpagehtml: false,
           blindBoxdetailpagetwo:false,
-          hideBoxdetailpagetwo:false
+          hideBoxdetailpagetwo:false,
+          detailDetails:detailDetails
         })
     }
 
@@ -2693,18 +2632,23 @@ Page({
         console.log('collectchip========',res)
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
+
+          var infoData = res.data.Info; 
+
           _this.setData({
-            whole_boxGift:res.data.Info.whole_boxGift||''
+            whole_boxGift:infoData.whole_boxGift||''
           });
           if(_this.data.whole_boxGift){
             _this.setData({
-              wholeBoxGiftInfo: res.data.Info.wholeBoxGiftInfo||''
+              wholeBoxGiftInfo: infoData.wholeBoxGiftInfo||''
             });
           }else{
-            if (res.data.Info.blindBoxImg && res.data.Info.blindBoxDesc) {
-              WxParse.wxParse('blindBox', 'html', res.data.Info.blindBoxDesc, _this, 0);
+            if (infoData.blindBoxImg && infoData.blindBoxDesc) {
+              // WxParse.wxParse('blindBox', 'html', res.data.Info.blindBoxDesc, _this, 0);
+              var blindBoxDetails = infoData.blindBoxDesc.replace(/<img/gi, '<img style="width:100%;display:block;" ');
               _this.setData({
                 blindBoxdetailpageone: true,
+                blindBoxDetails:blindBoxDetails
               });
             } else {
               _this.setData({
@@ -2712,10 +2656,12 @@ Page({
               });
             }
   
-            if (res.data.Info.hideBoxImg && res.data.Info.hideBoxDesc) {
-              WxParse.wxParse('hideBox', 'html', res.data.Info.hideBoxDesc, _this, 0);
+            if (infoData.hideBoxImg && infoData.hideBoxDesc) {
+              // WxParse.wxParse('hideBox', 'html', res.data.Info.hideBoxDesc, _this, 0);
+              var hideBoxDetails = infoData.hideBoxDesc.replace(/<img/gi, '<img style="width:100%;height:auto;display:block;"');
               _this.setData({
                 hideBoxdetailpageone: true,
+                hideBoxDetails:hideBoxDetails
               });
             } else {
               _this.setData({
@@ -2727,13 +2673,13 @@ Page({
               tricklinelist: res.data.List.line,
               chiplist: res.data.List.role,
               patchList: res.data.List.patch,
-              chiprule: res.data.Info.rule,
-              countLine: res.data.Info.countLine,
-              hideBoxImg: res.data.Info.hideBoxImg ? res.data.Info.hideBoxImg : "https://www.51chaidan.com/images/blindbox/gold_case.png",
-              blindBoxImg: res.data.Info.blindBoxImg ? res.data.Info.blindBoxImg : "https://www.51chaidan.com/images/blindbox/silver_case.png",
-              blindboxTip: res.data.Info.blindboxTip ? res.data.Info.blindboxTip : "随机盲盒碎片：收集5片自动合成,可到玩具柜查看",
-              hideBoxTip: res.data.Info.hideBoxTip ? res.data.Info.hideBoxTip : "随机隐藏碎片：收集20片自动合成,可到玩具柜查看",
-              wholeBoxTitle:res.data.Info.wholeBoxTitle||''
+              chiprule: infoData.rule,
+              countLine: infoData.countLine,
+              hideBoxImg: infoData.hideBoxImg ? infoData.hideBoxImg : "https://www.51chaidan.com/images/blindbox/gold_case.png",
+              blindBoxImg: infoData.blindBoxImg ? infoData.blindBoxImg : "https://www.51chaidan.com/images/blindbox/silver_case.png",
+              blindboxTip: infoData.blindboxTip ? infoData.blindboxTip : "随机盲盒碎片：收集5片自动合成,可到玩具柜查看",
+              hideBoxTip: infoData.hideBoxTip ? infoData.hideBoxTip : "随机隐藏碎片：收集20片自动合成,可到玩具柜查看",
+              wholeBoxTitle:infoData.wholeBoxTitle||''
             })
   
             _this.selectData(0);
@@ -2883,34 +2829,6 @@ Page({
     }
   },
 
-  agreeset: function () {
-    var _this = this;
-    _this.setData({
-      ishowdeal: false,
-      ishowadd: true,
-    })
-  },
-
-  closedealoradd: function () {
-    var _this = this;
-    if (!_this.data.ishowdealoradd) {
-      _this.setData({
-        ishowdealoradd: true,
-      })
-    } else {
-      if (_this.data.ishowadd) {
-        _this.setData({
-          ishowdeal: true,
-          ishowadd: false,
-        })
-      } else {
-        _this.setData({
-          ishowdealoradd: false,
-        })
-      }
-    }
-  },
-
   showdealoradd: function () {
     var _this = this;
     _this.setData({
@@ -3054,9 +2972,7 @@ Page({
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q,
       method: 'GET',
-      header: {
-        'Accept': 'application/json'
-      },
+      header: {'Accept': 'application/json'},
       success: function (res) {
         wx.hideLoading()
         if (res.data.ReturnCode == 200) {
@@ -3082,15 +2998,11 @@ Page({
 
   shareopen: function (welfareId) {
     var _this = this;
-
     var q = Dec.Aese('mod=blindBox&operation=getWelfareInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&welfareId=' + welfareId)
-
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q,
       method: 'GET',
-      header: {
-        'Accept': 'application/json'
-      },
+      header: {'Accept': 'application/json'},
       success: function (res) {
         wx.hideLoading()
         if (res.data.ReturnCode == 200) {
@@ -3165,10 +3077,7 @@ Page({
     })
   },
 
-  mmm: function () {
-
-  },
-
+  mmm: function () {},
 
   // 调取展会品牌数据
   exhibdatafun: function (num) {

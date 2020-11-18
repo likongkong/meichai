@@ -76,8 +76,6 @@ Page({
     secStr: "",
     defaultinformation: app.signindata.defaultinformation||'',
     snapshot: "",
-    devaname: "",
-    devaid: 0,
     jumpdevanningiftr:false,
     // 晒单数量
     dryinglistnum:0,
@@ -91,7 +89,6 @@ Page({
     c_backcolor:'#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     index_ela_fra: app.signindata.index_ela_fra,
-    loadmoreiftr:true,
     // 倒计时时间戳
     perspcardata: '',
     // 倒计时展示数据
@@ -339,12 +336,12 @@ Page({
       _this.data.judgeLoadData = false;
       if(num==1){
         _this.data.page = 0;
-        _this.setData({ headhidden: false, loadmoreiftr:false, loadprompt: '加载更多.....', commoddata: [], nodataiftr:false});
+        _this.setData({ headhidden: false, loadprompt: '加载更多.....', commoddata: [], nodataiftr:false});
         var q = Dec.Aese('mod=getinfo&operation=list&category_id=-1&uid=' + _this.data.uid+'&blackCity='+_this.data.blackCity);
       }else{
         var pagenum = parseInt(_this.data.page)
         _this.data.page = ++pagenum;
-        _this.setData({ headhidden: false, loadmoreiftr:false, loadprompt: '加载更多.....' });
+        _this.setData({ headhidden: false, loadprompt: '加载更多.....' });
         var q = Dec.Aese('mod=getinfo&operation=list&ltype=more&category_id=-1&pid=' + _this.data.page + '&uid=' + _this.data.uid + '&blackCity=' + _this.data.blackCity);
       }; 
       wx.showLoading({ title: '加载中...', }) 
@@ -367,11 +364,7 @@ Page({
                   }
                   _this.setData({islive:true})
                 }
-                if (i>6){
-                  arrlist[i].showiftr = false;
-                }else{
-                  arrlist[i].showiftr = true;
-                };
+
                 if (arrlist[i].show_type == 2) {
                   if (arrlist[i].img != '' && arrlist[i].img){
                     if (!app.signindata.reg.test(arrlist[i].img)) {
@@ -461,7 +454,6 @@ Page({
               };
             };
           };
-          _this.setData({ loadmoreiftr: true});
           // 判断非200和登录
           Dec.comiftrsign(_this, res, app);
         },
@@ -654,7 +646,7 @@ Page({
   // 数据请求
   auditversion:function(){
     var _this = this;
-    _this.setData({ headhidden: false, loadmoreiftr:false, loadprompt: '加载更多.....', commoddata: [], nodataiftr:false,page: 0});
+    _this.setData({ headhidden: false, loadprompt: '加载更多.....', commoddata: [], nodataiftr:false,page: 0});
     if(Dec.env=='online'){
       if(_this.data.is_formaldress){
         var url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/index.json'; // 审核 
@@ -714,11 +706,7 @@ Page({
                   }
                   _this.setData({islive:true})
                 }
-                if (i>6){
-                  arrlist[i].showiftr = false;
-                }else{
-                  arrlist[i].showiftr = true;
-                };
+
                 if (arrlist[i].show_type == 2) {
                   if (arrlist[i].img != '' && arrlist[i].img){
                     if (!app.signindata.reg.test(arrlist[i].img)) {
@@ -1411,28 +1399,6 @@ Page({
       url: "/page/component/pages/dlfind/dlfind",
       complete: function () { _this.setData({ jumpdevanningiftr: false }); }
     })
-  },
-  showImg:function(){
-    var _this = this;   
-    let commoddata = _this.data.commoddata;
-    let height = parseInt(_this.data.windowHeight) * 2;
-    wx.createSelectorQuery().selectAll('.imgiftr').boundingClientRect((ret) => {
-      ret.forEach((item, index) => {
-        if (item.top <= height) {
-          if (commoddata[item.dataset.imgiftr]) {
-            commoddata[item.dataset.imgiftr].showiftr = true
-          };
-        }
-      })
-      _this.setData({
-        commoddata: commoddata
-      })
-    }).exec()
-  },
-  onPageScroll() { 
-    if(this.data.loadmoreiftr) {
-      this.showImg()
-    };
   },
   // 跳转详情
   jumpdlfdetail: function (w) {

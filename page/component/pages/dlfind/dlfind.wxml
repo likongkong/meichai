@@ -149,7 +149,7 @@
 
 
              <!--  -->
-            <view style='width:100%;height:160rpx;position:relative;margin-bottom:15rpx;' data-index='{{index}}' wx:for="{{item.goodsInfo}}" wx:key="key" wx:for-item='w' wx:for-index='num' data-num='{{num}}' data-goods_id='{{w.goods_id}}'  catchtap='jumpshopdetail'>
+            <view style='width:100%;height:160rpx;position:relative;margin-bottom:15rpx;' data-index='{{index}}' wx:for="{{item.goodsInfo}}" wx:key="key" wx:for-item='w' wx:for-index='num' data-num='{{num}}' data-goods_id='{{w.goods_id}}' catchtap='jumpshopdetail' data-isblindbox='{{w.isBlindBox}}'>
                 <view style="width:200rpx;height:100%;position:relative;float:left;">
                     <image style="width:140rpx;height:140rpx;position:absolute;left:0;top:0;bottom:0;right:0;margin:auto;" src='{{w.goods_thumb}}'></image>
                 </view>
@@ -160,7 +160,10 @@
                     </view>
                     <view style='width:100%;height:60rpx;position:relative;'>
                         <view style="height: 60rpx;line-height: 60rpx;float: left;font-size: 26rpx;color: #ff6967;">￥{{w.price}}</view>
-                        <view style="width:144rpx;height:56rpx;line-height:56rpx;text-align:center;position:absolute;right:0;top:0;bottom:0;margin:auto 0;border-radius:8rpx;font-size:26rpx;color:#fff;background:#ff6968;">{{w.isSubscribe?'订阅':'购买'}}</view>
+                        <view style="width:144rpx;height:56rpx;line-height:56rpx;text-align:center;position:absolute;right:0;top:0;bottom:0;margin:auto 0;border-radius:8rpx;font-size:26rpx;color:#fff;background:#ff6968;">
+                           <block wx:if='{{w.isBlindBox}}'>去抽盒</block>
+                           <block wx:else>{{w.isSubscribe?'订阅':'购买'}}</block>
+                        </view>
                     </view>
                 </view>
             </view>

@@ -405,9 +405,7 @@ Page({
 
           // res.data.Info.infoGoods.goods_desc = decodeURIComponent(res.data.Info.infoGoods.goods_desc.replace(/<br>/g, ' '));
 
-          res.data.Info.infoGoods.goods_desc = res.data.Info.infoGoods.goods_desc.replace(/<img/gi, '<img style="width:100%;display:block;" ')
-          .replace(/<section/g, '<div')
-          .replace(/\/section>/g, '\div>');
+          res.data.Info.infoGoods.goods_desc = res.data.Info.infoGoods.goods_desc.replace(/<img/gi, '<img style="width:100%;height:auto;display:block;"');
 
 
           clearInterval(_this.data.timer)
@@ -807,7 +805,7 @@ Page({
       shareFriendBox:false
     })
     return {
-      title: _this.data.infoGoods.shop_price +'元 限定原价购 '+ _this.data.infoActivity.name +'，一起互换碎片！',
+      title: _this.data.infoGoods.shop_price +'元 限定原价购 '+ _this.data.infoActivity.name +'，互相助力中大奖！',
       query:'id='+_this.data.infoActivity.id+'&gid='+_this.data.gid+ '&referee=' + _this.data.uid+'&perayu=1',
 
       // query:{
@@ -829,7 +827,7 @@ Page({
       var urlpath = "/page/component/pages/limitlottery/limitlottery?id=" + _this.data.infoActivity.id + '&referee=' + _this.data.uid + '&gid=' + _this.data.gid;
     };
     var share = {
-      title: _this.data.infoGoods.shop_price + "元 限定原价购 " + _this.data.infoActivity.name + ",一起互换碎片!",
+      title: _this.data.infoGoods.shop_price + "元 限定原价购 " + _this.data.infoActivity.name + ",互相助力中大奖!",
       imageUrl: _this.data.snapshotlim,
       path:urlpath ,
       success: function (res) {}

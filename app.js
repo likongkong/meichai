@@ -199,6 +199,8 @@ App({
 
                   _this.signindata.automat = res.data.Info.automat ? res.data.Info.automat : { isOpen: false, times: 0, title: "" };
                   _this.signindata.automattitle = res.data.Info.automat ? res.data.Info.automat.title : '';
+
+                  
                   _this.signindata.isBlindBoxDefaultAddress = res.data.Info.address.isBlindBoxDefaultAddress || false;
 
                   if (res.data.Info.store) {
