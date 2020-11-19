@@ -474,13 +474,13 @@ Page({
     }
 
     for (var q = 0; q < arrlist.length; q++) {
-      var warr = []
+      var warr = [];
       for (var w = 0; w < arrlist.length; w++) {
         if (arrlist[q].cart_id == arrlist[w].cart_id && arrlist[q].status == arrlist[w].status) {
           warr.push(arrlist[w]);
         };
       };
-      qarr.push({ list: warr, cart_id: arrlist[q].cart_id||'', status: arrlist[q].status||'' })
+      qarr.push({ list: warr, cart_id: arrlist[q].cart_id||'', status: arrlist[q].status||''})
     };
     // 去重
     var charr = this.distinct(qarr);
@@ -493,6 +493,10 @@ Page({
     for (var j = 0; j < arr.length; j++) {
       // 商品总价
       var goods_amount = 0;
+      // 抽盒抵扣金
+      var deductAmount = 0;
+      // 加购减
+      var cartDiscount = 0;
       // 代金券
       var bonus = 0;
       // 税
@@ -506,15 +510,18 @@ Page({
       // 时间
       var ordertime = arr[j][0].ordertime;
       for (var f = 0; f < arr[j].length; f++) {
+        cartDiscount += parseFloat(arr[j][f].cartDiscount);
+        deductAmount += parseFloat(arr[j][f].deductAmount);
         goods_amount += parseFloat(arr[j][f].goods_amount);
         bonus += parseFloat(arr[j][f].bonus);
         tax += parseFloat(arr[j][f].tax||0);
         carriage += parseFloat(arr[j][f].carriage);
         amount += parseFloat(arr[j][f].amount);
-
       }
       arrchil.push({
+        deductAmount: deductAmount.toFixed(2),
         goods_amount: goods_amount.toFixed(2),
+        cartDiscount: cartDiscount.toFixed(2),
         bonus: bonus.toFixed(2),
         tax: tax.toFixed(2),
         carriage: carriage.toFixed(2),
@@ -565,8 +572,7 @@ Page({
         auditPicTime: arr[j][0].auditPicTime || 0,
         isBalances: arr[j][0].isBalances || 0,
         dateTitle: arr[j][0].dateTitle || '',
-        depositOrderPayPrice: arr[j][0].depositOrderPayPrice || '',
-        deductAmount:arr[j][0].deductAmount || ''
+        depositOrderPayPrice: arr[j][0].depositOrderPayPrice || ''
       })
     };   
     if (arrchil && arrchil.length != 0){

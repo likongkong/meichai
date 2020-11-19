@@ -433,7 +433,7 @@
              </view>
 
               <view class='daifukuan' wx:if='{{item.order_type==1}}'>
-                  商品总额:￥{{item.goods_amount}}{{item.bonus!='0.00'?' - 代金券￥'+item.bonus:''}} + 运费￥{{item.carriage}}{{item.deductAmount!='0.00'?' - 抽盒金￥'+item.deductAmount:''}}
+                  商品总额:￥{{item.goods_amount}}{{item.cartDiscount!='0.00'?' - 加购减'+item.cartDiscount:''}}{{item.bonus!='0.00'?' - 代金券￥'+item.bonus:''}} + 运费￥{{item.carriage}}{{item.deductAmount!='0.00'?' - 抽盒金￥'+item.deductAmount:''}}
              </view> 
              <view class='daifukuan' style='text-align:left;' wx:if='{{item.order_type==6&&(item.status==18||item.status==0)}}'>
                   结束时间 : {{item.gift_time}}

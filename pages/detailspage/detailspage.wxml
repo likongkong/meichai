@@ -935,7 +935,7 @@
         </view>
         <view class='pricedetailoright' style="{{zunmdata.goods_type==3?'color:#999':''}}">{{freight}}</view>
       </view>
-      <view class='pricedetailo' wx:if="{{isUseBlindboxMoney}}">
+      <view class='pricedetailo' wx:if="{{isUseBlindboxMoney && blindboxMoney!=0}}">
         <view class='pricedetailoleft'>抽盒金抵扣</view>
         <view class='pricedetailorightcol' style="color: #f42251;">-￥{{useblindAmountpayable}}</view>
       </view>

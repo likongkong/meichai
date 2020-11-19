@@ -599,7 +599,11 @@ Page({
             countdown: countdown,
             awatxt: res.data.Info.notice || '',
             order_id: res.data.Info.order_id,
-            infodata:res.data.Info
+            infodata:res.data.Info,
+            deductRatio:res.data.Info.deductRatio,
+            isDeduct:res.data.Info.isDeduct,
+            isUseBlindboxMoney:res.data.Info.isDeduct?true:false,
+            isDeductNum:res.data.Info.isDeduct&&_this.data.blindboxMoney!=0?1:0
           });
           if (_this.data.countdown) {
             _this.countdownbfun();
@@ -1858,9 +1862,17 @@ Page({
       ap = 0;
     };
 
+
+    let useblindAmountpayable = this.data.blindboxMoney>(ap.toFixed(2)*this.data.deductRatio)?ap.toFixed(2)*this.data.deductRatio:this.data.blindboxMoney;
+    let amountpayable = this.data.blindboxMoney!=0? this.data.isDeduct? this.data.isUseBlindboxMoney? (ap.toFixed(2)-useblindAmountpayable).toFixed(2) :ap.toFixed(2) :ap.toFixed(2) :ap.toFixed(2)
+   
     this.setData({
       // 应付金额
-      amountpayable: ap.toFixed(2),
+      amountpayable:amountpayable,
+      // 原始应付金额
+      originalAmountpayable: ap.toFixed(2),
+      // 使用抽盒金后应付金额
+      useblindAmountpayable: parseFloat(useblindAmountpayable).toFixed(3).slice(0,-1),
       // 运费
       //  freight: acc,
       freight: xianshi,
@@ -2074,7 +2086,7 @@ Page({
     var cid = cid.join();
     ginfo = JSON.stringify(ginfo);
     if (iftrshop){
-      var q = Dec.Aese('mod=order&operation=carorder&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&gcount=' + gcount + '&aid=' + aid + '&cid=' + cid + '&ginfo=' + ginfo + '&desc=' + _this.data.desc + '&cart_id=' + cart_id + '&goodsDiscount=' + JSON.stringify(_this.data.relGidTips) + '&awardOrderId=' + _this.data.awardOrderId + '&singleAwardId=' + _this.data.order_id + '&isAddToyCabinet=' + _this.data.isAddToyCabinet)
+      var q = Dec.Aese('mod=order&operation=carorder&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&gcount=' + gcount + '&aid=' + aid + '&cid=' + cid + '&ginfo=' + ginfo + '&desc=' + _this.data.desc + '&cart_id=' + cart_id + '&goodsDiscount=' + JSON.stringify(_this.data.relGidTips) + '&awardOrderId=' + _this.data.awardOrderId + '&singleAwardId=' + _this.data.order_id + '&isAddToyCabinet=' + _this.data.isAddToyCabinet + '&isDeduct='+_this.data.isDeductNum)
       var geturl = 'goods.php' + q;
     }else{
       // 判断是否是只有一个免单奖品
@@ -2226,6 +2238,26 @@ Page({
                   url: "../../../../pages/myorder/myorder?tabnum=0"
                 });          
               }
+
+              // 更新抽盒金
+              if(_this.data.isDeduct && _this.data.isUseBlindboxMoney){
+                var gbm = Dec.Aese('mod=blindBox&operation=getBlindboxMoney&uid='+_this.data.uid);
+                wx.request({
+                  url: app.signindata.comurl + 'spread.php' + gbm,
+                  method: 'GET',
+                  header: { 'Accept': 'application/json' },
+                  success: function (res) {
+                    if (res.data.ReturnCode == 200) {
+                      console.log('更新抽盒金=====',res)
+                      _this.setData({
+                        blindboxMoney: res.data.Info.blindbox_money || ""
+                      });
+                      app.signindata.blindboxMoney = res.data.Info.blindbox_money || ""
+                    };
+                  }
+                })
+              }
+
             },
             'fail': function(res) {
               _this.setData({
