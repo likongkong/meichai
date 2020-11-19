@@ -565,7 +565,8 @@ Page({
         auditPicTime: arr[j][0].auditPicTime || 0,
         isBalances: arr[j][0].isBalances || 0,
         dateTitle: arr[j][0].dateTitle || '',
-        depositOrderPayPrice: arr[j][0].depositOrderPayPrice || ''
+        depositOrderPayPrice: arr[j][0].depositOrderPayPrice || '',
+        deductAmount:arr[j][0].deductAmount || ''
       })
     };   
     if (arrchil && arrchil.length != 0){

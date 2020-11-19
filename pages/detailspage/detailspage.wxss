@@ -439,3 +439,18 @@
   background: #f6eded;
   color:#ce3e32;
 }
+
+
+
+
+
+
+.blindboxMoneyWrap{
+  height:100rpx;width:100%;border-bottom:1rpx solid #e5e5e5;display: flex;align-items: center;justify-content: space-between;padding-right: 4rpx;box-sizing: border-box;
+}
+.blindboxMoneyleft{
+  float:left;font-size: 30rpx;color: #1d1d1d;
+}
+.blindboxMoneyright{
+  float:right;font-size: 26rpx; color: #f42251; border:1rpx solid #f42251;border-radius: 8rpx;padding: 8rpx 15rpx;
+}

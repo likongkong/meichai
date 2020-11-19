@@ -545,10 +545,10 @@
  
               <view class='daifukuan' wx:if='{{comdata.order_type==1}}'>
                   <!-- <view class='taxdisplay' wx:if='{{comdata.tax!=0.00}}'> + 税费￥{{comdata.tax}}</view>  -->
-                  商品总额:￥{{comdata.goods_amount}}-代金券￥{{comdata.bonus}}+运费￥{{comdata.carriage}}
+                  商品总额:￥{{comdata.goods_amount}}{{comdata.bonus!='0.00'?' - 代金券￥'+comdata.bonus:''}} + 运费￥{{comdata.carriage}}{{comdata.deductAmount!='0.00'?' - 抽盒金￥'+comdata.deductAmount:''}}
              </view>           
                <view class='totalmonnum' wx:if='{{comdata.order_type==1}}'>
-                    合计:￥{{comdata.amount}}(含运费{{comdata.carriage}}元)
+                    合计:￥{{comdata.amount}}
                </view>
  
                <view class='daifukuan' style='text-align:left;' wx:if='{{comdata.order_type==6&&(comdata.status==18||comdata.status==0)}}'>

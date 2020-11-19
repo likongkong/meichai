@@ -166,7 +166,26 @@ Page({
     paybuythree:false,
     tgaimg: app.signindata.tgaimg || 'https://www.51chaidan.com/images/default/openscreen.jpg',
     infodata:'',
-    awasustipimages:false
+    awasustipimages:false,
+    //我的抽盒金
+    blindboxMoney:'',
+    // 使用抽盒金比率
+    deductRatio:0.6,
+    // 此商品是否可以使用抽盒金抵扣
+    isDeduct:true,
+    // 是否使用抽盒金抵扣
+    isUseBlindboxMoney:true,
+    // 提交订单时是否使用抽盒金抵扣
+    isDeductNum:1
+  },
+  useBlindboxMoneyFun(){
+    this.setData({
+      isUseBlindboxMoney:!this.data.isUseBlindboxMoney,
+    })
+    this.setData({
+      amountpayable:this.data.isUseBlindboxMoney? (this.data.originalAmountpayable-this.data.useblindAmountpayable).toFixed(2):this.data.originalAmountpayable,
+      isDeductNum:this.data.isUseBlindboxMoney?1:0
+    })
   },
   bottomdetailnone: function () {
     this.setData({ bottomdetail: false });
@@ -655,7 +674,8 @@ Page({
       uid: app.signindata.uid,
       openid: app.signindata.openid,
       isHellBlackUser: app.signindata.isHellBlackUser,
-      cart_id: options.cart_id || 0
+      cart_id: options.cart_id || 0,
+      blindboxMoney:app.signindata.blindboxMoney
     });
 
     this.awatipscliffun();
