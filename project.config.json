@@ -18,6 +18,8 @@
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
+    "useMultiFrameRuntime": false,
+    "useApiHook": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -26,8 +28,6 @@
     "useIsolateContext": true,
     "useCompilerModule": false,
     "userConfirmedUseCompilerModuleSwitch": false,
-    "useMultiFrameRuntime": false,
-    "useApiHook": true,
     "packNpmManually": false,
     "packNpmRelationList": [],
     "minifyWXSS": true
@@ -109,6 +109,12 @@
           "name": "领奖专区",
           "pathName": "page/component/pages/awardwinningarea/awardwinningarea",
           "query": "cart_id=20200601127696379",
+          "scene": null
+        },
+        {
+          "name": "我的",
+          "pathName": "pages/wode/wode",
+          "query": "",
           "scene": null
         }
       ]

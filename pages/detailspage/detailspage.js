@@ -2709,7 +2709,8 @@ Page({
             subscribeCouponTip: res.data.subscribeCouponTip || '',
             deductRatio:res.data.Ginfo.deductRatio,
             isDeduct:res.data.Ginfo.isDeduct,
-            isUseBlindboxMoney:res.data.Ginfo.isDeduct?true:false
+            isUseBlindboxMoney:res.data.Ginfo.isDeduct?true:false,
+            isDeductNum:res.data.Ginfo.isDeduct&&_this.data.blindboxMoney!=0?1:0
           });
           if (_this.data.is_exhibition==1||(_this.data.is_exhibition!=1&&_this.data.brandId>0)){
             // 展会
