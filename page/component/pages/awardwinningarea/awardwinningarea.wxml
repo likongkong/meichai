@@ -272,6 +272,14 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
       <text class='bbshccomright multilineellipsis' style='text-align: right;font-size:28rpx;'>{{tipcoupon}}</text>
     </view>
 
+    <!-- <view class="blindboxMoneyWrap" wx:if="{{isDeduct && blindboxMoney!=0}}" catchtap="useBlindboxMoneyFun">
+        <view class='blindboxMoneyleft'>使用抽盒金抵扣 <text style="color: #f42251;">￥{{useblindAmountpayable}}</text> <text style="font-size:24rpx;"> (剩余抽盒金</text> <text style="font-size:24rpx;color: #f42251;">￥{{blindboxMoney}})</text> </view>
+        <block>
+          <image wx:if="{{isUseBlindboxMoney}}" style="width:40rpx;height:auto" src="https://www.51chaidan.com/images/sign/order/xuanzhong.png" mode="widthFix"></image>
+          <image wx:else style="width:40rpx;height:auto" src="https://www.51chaidan.com/images/sign/order/weixuanzhong.png" mode="widthFix"></image>
+        </block>
+    </view> -->
+
     <view class='bbshccombot'>
       <view class='bbshcombotleft'>应付金额</view>
       <view class='bbshcombotright'>
@@ -293,6 +301,12 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
         <view class='pricedetailoleft'>运费<text style='padding-left:8rpx;color:#47981e;' wx:if='{{freightiftr>0}}'>(满￥{{defaultinformation.carriage.free}}包邮)</text></view>
         <view class='pricedetailoright'>{{freight}}</view>
       </view>
+
+      <!-- <view class='pricedetailo' wx:if="{{isUseBlindboxMoney}}">
+        <view class='pricedetailoleft'>抽盒金抵扣</view>
+        <view class='pricedetailorightcol' style="color: #f42251;">-￥{{useblindAmountpayable}}</view>
+      </view> -->
+
       <view class='pricedetailo'>
         <view class='pricedetailoleft' wx:if='{{coupon_type==2}}'>折扣券</view>
         <view class='pricedetailoleft' wx:else>代金券</view>

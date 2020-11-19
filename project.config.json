@@ -104,6 +104,12 @@
           "pathName": "pages/detailspage/detailspage",
           "query": "gid=34013",
           "scene": null
+        },
+        {
+          "name": "领奖专区",
+          "pathName": "page/component/pages/awardwinningarea/awardwinningarea",
+          "query": "cart_id=20200601127696379",
+          "scene": null
         }
       ]
     }
