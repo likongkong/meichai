@@ -34,7 +34,7 @@
 			{{notice_title}}>
 		</view>
 
-		<swiper bindanimationfinish="changeGoodsSwip" current="{{goodsIndex}}" class="swiper" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450" wx:if='{{isProduce}}'>
+		<swiper bindanimationfinish="changeGoodsSwip" current="{{goodsIndex}}" class="swiper" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450" wx:if='{{!is_formaldress}}'>
 			<swiper-item wx:for="{{movies}}" wx:key="key">
 				<image src="{{item.image}}" class="slide-image" mode="aspectFill" data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}' bindtap='jumpbanner' data-imgurl='{{item.image}}' style='position:relative;'>
 				</image>
@@ -42,7 +42,7 @@
 		</swiper>
 
 		<!--重置小圆点的样式 -->
-		<view class="dots" wx:if='{{isProduce}}'>
+		<view class="dots" wx:if='{{!is_formaldress}}'>
 			<block wx:for="{{movies}}" wx:key='key'>
 				<view class="dot{{index == currentSwiper ? ' activeindex' : ''}}"></view>
 			</block>
@@ -50,7 +50,7 @@
 	</view>
 
 	<!--  分类  ||islive-->
-	<view class='recommendind' style='{{isAwardOrder||islive?"margin-bottom:0;":""}}' wx:if='{{isProduce}}'>
+	<view class='recommendind' style='{{isAwardOrder||islive?"margin-bottom:0;":""}}' wx:if='{{!is_formaldress}}'>
 		<view class='erverrecom' wx:for='{{classificationlist}}' wx:key='key' data-href='{{item.href}}' data-item_type='{{item.item_type}}' data-name='{{item.name}}' bindtap='jumprecom' style='position:relative;height:160rpx;'>
 
 			<!-- 跳转其他小程序 -->

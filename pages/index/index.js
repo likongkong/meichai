@@ -319,135 +319,139 @@ Page({
   listdata:function(num){  // num=1 下拉 num=2 上拉
     var _this = this;   
     // 商品列表
-      if(num==1){
-        _this.data.page = 0;
-        _this.setData({loadprompt: '加载更多.....', commoddata: [], nodataiftr:false});
-        var q = Dec.Aese('mod=getinfo&operation=list&category_id=-1&uid=' + _this.data.uid+'&blackCity='+_this.data.blackCity);
-      }else{
-        var pagenum = parseInt(_this.data.page)
-        _this.data.page = ++pagenum;
-        _this.setData({ loadprompt: '加载更多.....' });
-        var q = Dec.Aese('mod=getinfo&operation=list&ltype=more&category_id=-1&pid=' + _this.data.page + '&uid=' + _this.data.uid + '&blackCity=' + _this.data.blackCity);
-      }; 
-      wx.showLoading({ title: '加载中...',mask:true }) 
-      console.log('page===========',_this.data.page)
-      wx.request({
-        url: app.signindata.comurl + 'goods.php' + q,
-        method: 'GET',
-        header: { 'Accept': 'application/json' },
-        success: function (res) {
-          console.log('列表===========',res)
-          if (res.data.ReturnCode == 200) {
-            var arrlist = res.data.List||[];
-            if (arrlist.length != 0) {
-              for (var i = 0; i < arrlist.length; i++) {
-                if (arrlist[i].item_type == 992) {
-                  for (var li = 0; li < arrlist[i].List.length;li++){
-                    if (arrlist[i].List[li]) {
-                      arrlist[i].List[li].start_time = _this.toDatehd(arrlist[i].List[li].start_time)
-                    };
-                  }
-                  _this.setData({islive:true})
-                }
+    if(num==1){
+      _this.data.page = 0;
+      _this.setData({loadprompt: '加载更多.....', commoddata: [], nodataiftr:false});
+      var q = Dec.Aese('mod=getinfo&operation=list&category_id=-1&uid=' + _this.data.uid+'&blackCity='+_this.data.blackCity);
+    }else{
+      var pagenum = parseInt(_this.data.page)
+      _this.data.page = ++pagenum;
+      _this.setData({ loadprompt: '加载更多.....' });
+      var q = Dec.Aese('mod=getinfo&operation=list&ltype=more&category_id=-1&pid=' + _this.data.page + '&uid=' + _this.data.uid + '&blackCity=' + _this.data.blackCity);
+    }; 
+    wx.showLoading({ title: '加载中...',mask:true }) 
+    console.log('page===========',_this.data.page)
+    wx.request({
+      url: app.signindata.comurl + 'goods.php' + q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('列表===========',res)
+        if (res.data.ReturnCode == 200) {
+          var arrlist = res.data.List||[];
 
-                if (arrlist[i].show_type == 2) {
+          var zdyurl = _this.data.zdyurl || '';
+          var regData = app.signindata.reg || /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/ ;
+
+          if (arrlist.length != 0) {
+            for (var i = 0; i < arrlist.length; i++) {
+              if (arrlist[i].item_type == 992) {
+                for (var li = 0; li < arrlist[i].List.length;li++){
+                  if (arrlist[i].List[li]) {
+                    arrlist[i].List[li].start_time = _this.toDatehd(arrlist[i].List[li].start_time)
+                  };
+                }
+                _this.setData({islive:true})
+              }
+
+              if (arrlist[i].show_type == 2) {
+                if (arrlist[i].img != '' && arrlist[i].img){
+                  if (!regData.test(arrlist[i].img)) {
+                    arrlist[i].img = zdyurl + arrlist[i].img;
+                  };
+                }else{
+                  arrlist[i].img = _this.data.defaultimg;
+                };
+              } else if (arrlist[i].show_type == 3 || arrlist[i].show_type == 4 || arrlist[i].show_type == 5) {
+                if (arrlist[i].show_type == 3) {
                   if (arrlist[i].img != '' && arrlist[i].img){
-                    if (!app.signindata.reg.test(arrlist[i].img)) {
-                      arrlist[i].img = _this.data.zdyurl + arrlist[i].img;
+                    if (!regData.test(arrlist[i].img)) {
+                      arrlist[i].img = zdyurl + arrlist[i].img;
                     };
                   }else{
                     arrlist[i].img = _this.data.defaultimg;
                   };
-                } else if (arrlist[i].show_type == 3 || arrlist[i].show_type == 4 || arrlist[i].show_type == 5) {
-                  if (arrlist[i].show_type == 3) {
-                    if (arrlist[i].img != '' && arrlist[i].img){
-                      if (!app.signindata.reg.test(arrlist[i].img)) {
-                        arrlist[i].img = _this.data.zdyurl + arrlist[i].img;
+                };
+                if (arrlist[i].show_type == 4 || arrlist[i].show_type == 5) {
+                  if (!regData.test(arrlist[i].icon)) {
+                    arrlist[i].icon = zdyurl + arrlist[i].icon;
+                  };
+                };
+                if (arrlist[i].List){
+                  for (var ar = 0; ar < arrlist[i].List.length; ar++) {
+                    if (arrlist[i].List[ar].img != '' && arrlist[i].List[ar].img){
+                      if (!regData.test(arrlist[i].List[ar].img)) {
+                        arrlist[i].List[ar].img = zdyurl + arrlist[i].List[ar].img;
                       };
                     }else{
-                      arrlist[i].img = _this.data.defaultimg;
+                      arrlist[i].List[ar].img = _this.data.defaultimg;
                     };
                   };
-                  if (arrlist[i].show_type == 4 || arrlist[i].show_type == 5) {
-                    if (!app.signindata.reg.test(arrlist[i].icon)) {
-                      arrlist[i].icon = _this.data.zdyurl + arrlist[i].icon;
-                    };
+                }
+              } else if (arrlist[i].show_type == 103){
+                var goodsListdata = arrlist[i].goodsList||[];
+                for (var q = 0; q < goodsListdata.length;q++){
+                  if (!regData.test(goodsListdata[q].goods_cover)) {
+                    goodsListdata[q].goods_cover = zdyurl + goodsListdata[q].goods_cover;
                   };
-                  if (arrlist[i].List){
-                    for (var ar = 0; ar < arrlist[i].List.length; ar++) {
-                      if (arrlist[i].List[ar].img != '' && arrlist[i].List[ar].img){
-                        if (!app.signindata.reg.test(arrlist[i].List[ar].img)) {
-                          arrlist[i].List[ar].img = _this.data.zdyurl + arrlist[i].List[ar].img;
-                        };
-                      }else{
-                        arrlist[i].List[ar].img = _this.data.defaultimg;
-                      };
-                    };
-                  }
-                } else if (arrlist[i].show_type == 103){
-                  var goodsListdata = arrlist[i].goodsList||[];
-                  for (var q = 0; q < goodsListdata.length;q++){
-                    if (!app.signindata.reg.test(goodsListdata[q].goods_cover)) {
-                      goodsListdata[q].goods_cover = _this.data.zdyurl + goodsListdata[q].goods_cover;
-                    };
-                  };
-                  var arrpresentList = arrlist[i].presentList || [];
-                  if (arrpresentList) {
-                    for (var v = 0; v < arrpresentList.length; v++) {
-                      if (!app.signindata.reg.test(arrpresentList[v].goods_cover)) {
-                        arrpresentList[v].goods_cover = _this.data.zdyurl + arrpresentList[v].goods_cover;
-                      };
-                    };
-                  };
-                  if (!app.signindata.reg.test(arrlist[i].gcover)) {
-                    arrlist[i].gcover = _this.data.zdyurl + arrlist[i].gcover;
-                  };
-                } else if (arrlist[i].show_type == 105) {
-                  var stop_time = arrlist[i].List[0].stop_time;
-                  setInterval(function () {
-                    //   //将时间传如 调用 
-                    _this.dateformat(stop_time);
-                  }.bind(_this), 1000);
-                } else if (arrlist[i].show_type == 1) {
-                  if (!app.signindata.reg.test(arrlist[i].gcover)) {
-                    arrlist[i].gcover = _this.data.zdyurl + arrlist[i].gcover;
-                  }
-                  arrlist[i].gpublish = _this.toDate(arrlist[i].gpublish);
                 };
-              };
-              if (num == 1) {
-                var comdataarr = arrlist||[];
-              } else {
-                var comdataarr = _this.data.commoddata.concat(arrlist);
-              };
-              _this.setData({
-                commoddata: comdataarr,
-                nodataiftr: true
-              });
-              // 限时购倒计时
-              // _this.countdownbfun();
-            } else {
-              if (num == 1) {
-                clearInterval(_this.data.timer);
-                _this.setData({
-                  commoddata: [],
-                  nodataiftr: true
-                });
-              } else {
-                app.showToastC('没有更多数据了');
-                _this.setData({ loadprompt: '没有更多数据了', nodataiftr: true});
+                var arrpresentList = arrlist[i].presentList || [];
+                if (arrpresentList) {
+                  for (var v = 0; v < arrpresentList.length; v++) {
+                    if (!regData.test(arrpresentList[v].goods_cover)) {
+                      arrpresentList[v].goods_cover = zdyurl + arrpresentList[v].goods_cover;
+                    };
+                  };
+                };
+                if (!regData.test(arrlist[i].gcover)) {
+                  arrlist[i].gcover = zdyurl + arrlist[i].gcover;
+                };
+              } else if (arrlist[i].show_type == 105) {
+                var stop_time = arrlist[i].List[0].stop_time;
+                setInterval(function () {
+                  //   //将时间传如 调用 
+                  _this.dateformat(stop_time);
+                }.bind(_this), 1000);
+              } else if (arrlist[i].show_type == 1) {
+                if (!regData.test(arrlist[i].gcover)) {
+                  arrlist[i].gcover = zdyurl + arrlist[i].gcover;
+                }
+                arrlist[i].gpublish = _this.toDate(arrlist[i].gpublish);
               };
             };
+            if (num == 1) {
+              var comdataarr = arrlist||[];
+            } else {
+              var comdataarr = _this.data.commoddata.concat(arrlist);
+            };
+            _this.setData({
+              commoddata: comdataarr,
+              nodataiftr: true
+            });
+            // 限时购倒计时
+            // _this.countdownbfun();
+          } else {
+            if (num == 1) {
+              clearInterval(_this.data.timer);
+              _this.setData({
+                commoddata: [],
+                nodataiftr: true
+              });
+            } else {
+              app.showToastC('没有更多数据了');
+              _this.setData({ loadprompt: '没有更多数据了', nodataiftr: true});
+            };
           };
-          // 判断非200和登录
-          Dec.comiftrsign(_this, res, app);
-        },
-        complete:function(){
-          // 刷新完自带加载样式回去
-          wx.stopPullDownRefresh()
-          wx.hideLoading()
-        }
-      }); 
+        };
+        // 判断非200和登录
+        Dec.comiftrsign(_this, res, app);
+      },
+      complete:function(){
+        // 刷新完自带加载样式回去
+        wx.stopPullDownRefresh()
+        wx.hideLoading()
+      }
+    }); 
   },
   onLoadfun: function (){
     var _this = this;
@@ -496,8 +500,6 @@ Page({
       },
       fail: function () {}
     });
-    // 调取数据
-    _this.obtaintabfun(); 
     setTimeout(function(){
       _this.otherdata();
       app.indexShareBanner();
@@ -506,26 +508,7 @@ Page({
       _this.setData({ isAwardOrder: app.signindata.isAwardOrder, awardOrder: app.signindata.awardOrder || false });
       app.winningtheprizetime(_this);
     };
-    //调取搜索关键词跳转对应列表数据
-    wx.request({
-      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/searchNavi.json',
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        console.log('搜索关键词跳转对应列表数据======',res.data)
-        app.signindata.searchSkipKeyword = res.data;
-      }
-    })
-    //调取热门搜索关键词
-    wx.request({
-      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/searchPlaceholder.json',
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        console.log('热门搜索关键词数据======',res.data)
-        app.signindata.hotKeyword = res.data;
-      }
-    })
+
   },
   jumporder: function () {
     var _this = this;
@@ -582,6 +565,29 @@ Page({
     Dec.shopnum(_this,app.signindata.comurl);
     // 调取晒单数量
     Dec.dryingSum(_this, app.signindata.clwcomurl);
+    //调取搜索关键词跳转对应列表数据
+    wx.request({
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/searchNavi.json',
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('搜索关键词跳转对应列表数据======',res.data)
+        app.signindata.searchSkipKeyword = res.data;
+      }
+    })
+    //调取热门搜索关键词
+    wx.request({
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/searchPlaceholder.json',
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('热门搜索关键词数据======',res.data)
+        app.signindata.hotKeyword = res.data;
+      }
+    })
+
+
+
   },
   //key(需要检错的键） url（传入的需要分割的url地址）
   getSearchString: function (key, Url) {
@@ -601,7 +607,7 @@ Page({
     var _this = this;
     _this.setData({newcoupon: false});
     // 调取数据
-    _this.obtaintabfun();         
+    // _this.obtaintabfun();         
   },
   // 获取首页数据
   obtaintabfun:function(){
@@ -613,9 +619,9 @@ Page({
       header: { 'Accept': 'application/json' },
       success: function (res) {
         if (res.data.WeChat == app.signindata.versionnumber) {
-             _this.data.is_formaldress = true;
+             _this.setData({is_formaldress : true})
         } else {
-             _this.data.is_formaldress = false;
+             _this.setData({is_formaldress : false})
         };
          _this.auditversion();
       },
@@ -625,6 +631,7 @@ Page({
   // 数据请求
   auditversion:function(){
     var _this = this;
+    wx.showLoading({ title: '加载中...',mask:true }) 
     _this.setData({ loadprompt: '加载更多.....', commoddata: [], nodataiftr:false,page: 0});
     if(Dec.env=='online'){
       if(_this.data.is_formaldress){
@@ -648,6 +655,9 @@ Page({
             var List = res.data.List;
             //  商品列表数据
             var arrlist = List.index||[];
+            var zdyurl = _this.data.zdyurl || '';
+            var regData = app.signindata.reg || /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/ ;
+
             if (arrlist.length != 0) {
               for (var i = 0; i < arrlist.length; i++) {
                 if (arrlist[i].item_type == 9014 || arrlist[i].item_type == 989 || arrlist[i].item_type == 9017) {
@@ -686,8 +696,8 @@ Page({
 
                 if (arrlist[i].show_type == 2) {
                   if (arrlist[i].img != '' && arrlist[i].img){
-                    if (!app.signindata.reg.test(arrlist[i].img)) {
-                      arrlist[i].img = _this.data.zdyurl + arrlist[i].img;
+                    if (!regData.test(arrlist[i].img)) {
+                      arrlist[i].img = zdyurl + arrlist[i].img;
                     };
                   }else{
                     arrlist[i].img = _this.data.defaultimg;
@@ -695,23 +705,23 @@ Page({
                 } else if (arrlist[i].show_type == 3 || arrlist[i].show_type == 4 || arrlist[i].show_type == 5) {
                   if (arrlist[i].show_type == 3) {
                     if (arrlist[i].img != '' && arrlist[i].img){
-                      if (!app.signindata.reg.test(arrlist[i].img)) {
-                        arrlist[i].img = _this.data.zdyurl + arrlist[i].img;
+                      if (!regData.test(arrlist[i].img)) {
+                        arrlist[i].img = zdyurl + arrlist[i].img;
                       };
                     }else{
                       arrlist[i].img = _this.data.defaultimg;
                     };
                   };
                   if (arrlist[i].show_type == 4 || arrlist[i].show_type == 5) {
-                    if (!app.signindata.reg.test(arrlist[i].icon)) {
-                      arrlist[i].icon = _this.data.zdyurl + arrlist[i].icon;
+                    if (!regData.test(arrlist[i].icon)) {
+                      arrlist[i].icon = zdyurl + arrlist[i].icon;
                     };
                   };
                   if (arrlist[i].List){
                     for (var ar = 0; ar < arrlist[i].List.length; ar++) {
                       if (arrlist[i].List[ar].img != '' && arrlist[i].List[ar].img){
-                        if (!app.signindata.reg.test(arrlist[i].List[ar].img)) {
-                          arrlist[i].List[ar].img = _this.data.zdyurl + arrlist[i].List[ar].img;
+                        if (!regData.test(arrlist[i].List[ar].img)) {
+                          arrlist[i].List[ar].img = zdyurl + arrlist[i].List[ar].img;
                         };
                       }else{
                         arrlist[i].List[ar].img = _this.data.defaultimg;
@@ -721,20 +731,20 @@ Page({
                 } else if (arrlist[i].show_type == 103){
                   var goodsListdata = arrlist[i].goodsList||[];
                   for (var q = 0; q < goodsListdata.length;q++){
-                    if (!app.signindata.reg.test(goodsListdata[q].goods_cover)) {
-                      goodsListdata[q].goods_cover = _this.data.zdyurl + goodsListdata[q].goods_cover;
+                    if (!regData.test(goodsListdata[q].goods_cover)) {
+                      goodsListdata[q].goods_cover = zdyurl + goodsListdata[q].goods_cover;
                     };
                   };
                   var arrpresentList = arrlist[i].presentList || [];
                   if (arrpresentList) {
                     for (var v = 0; v < arrpresentList.length; v++) {
-                      if (!app.signindata.reg.test(arrpresentList[v].goods_cover)) {
-                        arrpresentList[v].goods_cover = _this.data.zdyurl + arrpresentList[v].goods_cover;
+                      if (!regData.test(arrpresentList[v].goods_cover)) {
+                        arrpresentList[v].goods_cover = zdyurl + arrpresentList[v].goods_cover;
                       };
                     };
                   };
-                  if (!app.signindata.reg.test(arrlist[i].gcover)) {
-                    arrlist[i].gcover = _this.data.zdyurl + arrlist[i].gcover;
+                  if (!regData.test(arrlist[i].gcover)) {
+                    arrlist[i].gcover = zdyurl + arrlist[i].gcover;
                   };
                 } else if (arrlist[i].show_type == 105) {
                   var stop_time = arrlist[i].List[0].stop_time;
@@ -743,8 +753,8 @@ Page({
                     _this.dateformat(stop_time);
                   }.bind(_this), 1000);
                 } else if (arrlist[i].show_type == 1) {
-                  if (!app.signindata.reg.test(arrlist[i].gcover)) {
-                    arrlist[i].gcover = _this.data.zdyurl + arrlist[i].gcover;
+                  if (!regData.test(arrlist[i].gcover)) {
+                    arrlist[i].gcover = zdyurl + arrlist[i].gcover;
                   }
                   arrlist[i].gpublish = _this.toDate(arrlist[i].gpublish);
                 };
@@ -779,8 +789,8 @@ Page({
               var classification = List.category[num];
               if (classification.length != 0) {
                 for (var i = 0; i < classification.length; i++) {
-                  if (!app.signindata.reg.test(classification[i].img)) {
-                    classification[i].img = _this.data.zdyurl + classification[i].img;
+                  if (!regData.test(classification[i].img)) {
+                    classification[i].img = zdyurl + classification[i].img;
                   }
                 };
               };
@@ -789,8 +799,8 @@ Page({
               var banlist = List.banner||[];
               if (banlist.length != 0) {
                 for (var i = 0; i < banlist.length; i++) {
-                  if (!app.signindata.reg.test(banlist[i].image)) {
-                    banlist[i].image = _this.data.zdyurl + banlist[i].image;
+                  if (!regData.test(banlist[i].image)) {
+                    banlist[i].image = zdyurl + banlist[i].image;
                   }
                 };
               };
@@ -813,7 +823,6 @@ Page({
       return;
     }
     var tempArr=arrList.slice(0);
-    // console.log(tempArr)
     var newArrList=[];    
     for(var i=0;i<num;i++){
         var random=Math.floor(Math.random()*(tempArr.length-1));
@@ -823,35 +832,7 @@ Page({
     }
     return newArrList;
   },
-  // 一天只显示一次 商品推荐弹框 
-  indexelafradatefun:function(){
-    var STORAGE_KEY = 'INDEX_ELA_FRA';
-    var _this = this;
-    let cache = wx.getStorageSync(STORAGE_KEY);
-    console.log(new Date(cache).toDateString(), new Date().toDateString())
-    if (cache) {
-      if (new Date(cache).toDateString() === new Date().toDateString()) {
-        return false;
-      } else {
-        wx.setStorage({
-          key: STORAGE_KEY,
-          data: +new Date,
-        });
-        this.setData({
-          indexelafra: true
-        });
-      }
-    } else {
-      // 没显示过，则进行展示
-      wx.setStorage({
-        key: STORAGE_KEY,
-        data: +new Date,
-      });
-      this.setData({
-        indexelafra: true
-      });
-    }
-  },
+
   onShareTimeline:function(){
     return {
       title:'潮玩社交平台',
@@ -862,7 +843,7 @@ Page({
     console.log('options====',options)
 
     var _this = this;
-    wx.showLoading({ title: '加载中...', })
+    wx.showLoading({ title: '加载中...',mask:true })
     _this.data.loginid = app.signindata.loginid;
     _this.data.openid = app.signindata.openid;
     this.setData({
@@ -880,13 +861,17 @@ Page({
     };
     // 判断是否通过扫码进入
     app.signindata.channel = options.channel || '';
+
+    // 调取数据
+    _this.obtaintabfun();    
+
     // 判断是否登录
     if (_this.data.loginid != '' && _this.data.uid != '') {
       _this.onLoadfun();
       return false;
     };
+     
     // 判断是否授权 
-    var _this = this;
     if(app.signindata.sceneValue==1154){
       _this.setData({
         isProduce: true,
@@ -914,28 +899,6 @@ Page({
             }
           } else {
             _this.unauthorized();
-            // app.userstatistics(2);
-            // wx.request({
-            //   url: 'https://api.51chaidan.com/config/verifyVersion.conf',
-            //   method: 'GET',
-            //   header: { 'Accept': 'application/json' },
-            //   success: function (res) {
-            //     console.log(res.data.WeChat, app.signindata.versionnumber)
-            //     if (res.data.WeChat == app.signindata.versionnumber) { } else {
-            //       app.userstatistics(2);
-            //       _this.setData({
-            //         tgabox: true
-            //       });
-            //     }
-            //   },
-            //   fail: function (res) {
-            //     app.userstatistics(2);
-            //     _this.setData({
-            //       tgabox: true
-            //     });
-            //   }
-            // })
-  
           }
         }
       });
@@ -964,8 +927,6 @@ Page({
         isProduce: app.signindata.isProduce,
       })
     }
-
-
     var _this = this;
     if (app.signindata.perspcardata) {
       clearInterval(this.data.countdowntime);
@@ -1020,15 +981,7 @@ Page({
       success: function (res) {}
     }  
   },
-  scroll:function(){},
-  //回到顶部
-  goTop: function (e) {  // 一键回到顶部
-    if (wx.pageScrollTo) {
-      wx.pageScrollTo({
-        scrollTop: 0
-      })
-    };
-  },   
+  scroll:function(){},  
   whomepage:function(){
     wx.pageScrollTo({
       scrollTop: 0,
@@ -1240,41 +1193,6 @@ Page({
       newcoupon: !this.data.newcoupon
     });
   },
-  moreJigsaw: function (w) {
-    var type = w.currentTarget.dataset.type || w.target.dataset.type;
-    if (type == 1) {
-      wx.navigateTo({
-        url: "/page/component/pages/jigsawList/jigsawList"
-      })
-    } else {
-      wx.navigateTo({
-        url: "/page/component/pages/bargainList/bargainList"
-      })
-    };
-  },
-  jumpDetail: function (w) {
-    var id = w.currentTarget.dataset.id || w.target.dataset.id;
-    var meichai_jigsaw = w.currentTarget.dataset.meichai_jigsaw || w.target.dataset.meichai_jigsaw;
-    if (meichai_jigsaw == 1) {
-      wx.navigateTo({
-        url: "/page/component/pages/jigsawDetail/jigsawDetail?goods_id=" + id,
-      })
-    } else {
-      wx.navigateToMiniProgram({
-        appId: 'wxfe253b7309e29868',
-        path: "/pages/jigsawDetail/jigsawDetail?goods_id=" + id,
-        extraData: {foo: 'bar'},
-        envVersion: 'release',
-        success(res) {}
-      })
-    }
-  },
-  jumpbargain: function (w) {
-    var id = w.currentTarget.dataset.id || w.target.dataset.id;
-    wx.navigateTo({
-      url: "/page/component/pages/bargainDetail/bargainDetail?goods_id=" + id
-    })
-  },
   changeGoodsSwip: function (detail) {
     if (detail.detail.source == "touch") {
       if (detail.detail.current == 0) {
@@ -1386,12 +1304,7 @@ Page({
     var imgurl = '';
     // 公共跳转
     this.comjumpwxnav(item_type, href, title, imgurl);
-    // if(item_type==9014){
-    // }else{
-    //   wx.navigateTo({
-    //     url: "/page/component/pages/newpsellwell/newpsellwell?" + href + '&title=' + title,
-    //   })
-    // }
+
   },
   // 计算图片大小
   imageLoadad: function (e) {

@@ -602,6 +602,15 @@ Page({
             l = _this.distinct(l)
           };
 
+          // 是否有便宜价格
+          if(activityData.cheaperPrice){
+            activityData.shop_price = activityData.cheaperPrice
+          };
+
+          if (activityData.status == 1) {
+            activityData.start_time = time.toDate(activityData.start_time);
+          }
+
 
           _this.setData({
             isallready: true,
@@ -662,14 +671,7 @@ Page({
               pageBg: activityData.backgroundCode
             })
           };
-          // 是否有便宜价格
-          if(activityData.cheaperPrice){
-            activityData.shop_price = activityData.cheaperPrice
-          };
 
-          if (activityData.status == 1) {
-            activityData.start_time = time.toDate(activityData.start_time);
-          }
 
           if(recycle){
             _this.setData({
