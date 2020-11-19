@@ -121,8 +121,20 @@ Page({
     }
   },
 
-
-  /**
+  //key(需要检错的键） url（传入的需要分割的url地址）
+  getSearchString: function (key, Url) {
+    // 获取URL中?之后的字符
+    var str = Url;
+    var arr = str.split("&");
+    var obj = new Object();
+    // 将每一个数组元素以=分隔并赋给obj对象 
+    for (var i = 0; i < arr.length; i++) {
+      var tmp_arr = arr[i].split("=");
+      obj[decodeURIComponent(tmp_arr[0])] = decodeURIComponent(tmp_arr[1]);
+    }
+    return obj[key];
+  },
+  /** 
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
