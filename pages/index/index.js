@@ -21,7 +21,6 @@ Page({
     // 适配苹果X
     isIphoneX: app.signindata.isIphoneX,
     windowHeight:app.signindata.windowHeight,
-    headhidden:true,
     // 商品默认图片
     defaultimg:'../images/goods_Item_Default_Image.png',
     movies: [],
@@ -30,8 +29,6 @@ Page({
     classificationlist:[],
     // 页数
     page:0,
-    // 头部搜索值
-    topsousuo:'搜索',
     // 购物车显示数据
     shopnum:0,
     // 授权弹框
@@ -50,10 +47,6 @@ Page({
     item_type: 2,
     // 第一次加载不显示暂无数据
     nodataiftr:false,
-    scrollwidth:0,
-    scrollwidthiftr:true,
-    // 点击请求判断防止多次提交
-    clicktherequestiftr:true, 
     // 加载提示
     loadprompt:'加载更多.....',
     // 拆礼物传递参数
@@ -75,12 +68,10 @@ Page({
     minStr: "",
     secStr: "",
     defaultinformation: app.signindata.defaultinformation||'',
-    snapshot: "",
     jumpdevanningiftr:false,
     // 晒单数量
     dryinglistnum:0,
     isProduce: app.signindata.isProduce,
-    ceshilist:[],
     npswtab:1, // 1 新品 2 热销
     indexelafra:false,
     elafradata:'',
@@ -104,7 +95,6 @@ Page({
     islive:false,
     // 审核版本 or 不是审核版本
     is_formaldress:false,
-    judgeLoadData:true
   },
   // 临时展会授权
   togation:function(e){
@@ -113,7 +103,6 @@ Page({
     })
   },  
   doubleEleven: function () {
-    var _this = this;
     wx.navigateTo({
       url: "/page/component/pages/doubleEleven/doubleEleven"
     });
@@ -197,9 +186,7 @@ Page({
     var wname = w.currentTarget.dataset.title || w.target.dataset.title || ''; 
     // 公共跳转
     this.comjumpwxnav(item_type, whref, wname, imgurl);
-
   },
-
 
   // 测试 
   jumpxinxi:function(){
@@ -332,19 +319,17 @@ Page({
   listdata:function(num){  // num=1 下拉 num=2 上拉
     var _this = this;   
     // 商品列表
-    if(_this.data.judgeLoadData){
-      _this.data.judgeLoadData = false;
       if(num==1){
         _this.data.page = 0;
-        _this.setData({ headhidden: false, loadprompt: '加载更多.....', commoddata: [], nodataiftr:false});
+        _this.setData({loadprompt: '加载更多.....', commoddata: [], nodataiftr:false});
         var q = Dec.Aese('mod=getinfo&operation=list&category_id=-1&uid=' + _this.data.uid+'&blackCity='+_this.data.blackCity);
       }else{
         var pagenum = parseInt(_this.data.page)
         _this.data.page = ++pagenum;
-        _this.setData({ headhidden: false, loadprompt: '加载更多.....' });
+        _this.setData({ loadprompt: '加载更多.....' });
         var q = Dec.Aese('mod=getinfo&operation=list&ltype=more&category_id=-1&pid=' + _this.data.page + '&uid=' + _this.data.uid + '&blackCity=' + _this.data.blackCity);
       }; 
-      wx.showLoading({ title: '加载中...', }) 
+      wx.showLoading({ title: '加载中...',mask:true }) 
       console.log('page===========',_this.data.page)
       wx.request({
         url: app.signindata.comurl + 'goods.php' + q,
@@ -460,14 +445,9 @@ Page({
         complete:function(){
           // 刷新完自带加载样式回去
           wx.stopPullDownRefresh()
-          _this.data.clicktherequestiftr = true;
-          _this.setData({ headhidden: true});
           wx.hideLoading()
-          _this.data.judgeLoadData = true;
         }
       }); 
-
-    }  
   },
   onLoadfun: function (){
     var _this = this;
@@ -485,7 +465,6 @@ Page({
       uid: app.signindata.uid,
       isProduce: app.signindata.isProduce,
       defaultinformation:app.signindata.defaultinformation||'',
-      headhidden: true,
       index_ela_fra: app.signindata.index_ela_fra,
       automat: app.signindata.automat || { isOpen: false, times: 0 },
       automatTimes: app.signindata.automat.times,
@@ -646,7 +625,7 @@ Page({
   // 数据请求
   auditversion:function(){
     var _this = this;
-    _this.setData({ headhidden: false, loadprompt: '加载更多.....', commoddata: [], nodataiftr:false,page: 0});
+    _this.setData({ loadprompt: '加载更多.....', commoddata: [], nodataiftr:false,page: 0});
     if(Dec.env=='online'){
       if(_this.data.is_formaldress){
         var url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/index.json'; // 审核 
@@ -664,8 +643,6 @@ Page({
         console.log('版本数据===========', res)
         // 刷新完自带加载样式回去
         wx.stopPullDownRefresh()
-        _this.data.clicktherequestiftr = true;
-        _this.setData({ headhidden: true});
         wx.hideLoading()
         if(res.data.ReturnCode == 200){
             var List = res.data.List;
@@ -889,7 +866,6 @@ Page({
     _this.data.loginid = app.signindata.loginid;
     _this.data.openid = app.signindata.openid;
     this.setData({
-      headhidden: false,
       judgeprof: options.judgeprof||1,
       uid: app.signindata.uid,
       isProduce: app.signindata.isProduce,
@@ -1058,11 +1034,7 @@ Page({
       scrollTop: 0,
       duration: 300
     })
-    // 防止多次提交
-    if (this.data.clicktherequestiftr){
-      this.data.clicktherequestiftr = false;
-      this.onPullDownRefresh();
-    };
+    this.onPullDownRefresh();
   },
   // 导航跳转 
   wnews: function () {

@@ -250,12 +250,12 @@
 
 
 .drawLotsBut{
-   position: fixed;
+   /* position: fixed;
    left: 0;
    right: 0;
    bottom: 120rpx;
-   margin: auto;
-   z-index: 10;
+   z-index: 10; */
+   margin:0 auto 20rpx;
    width: 520rpx;
    height: 80rpx;
    text-align: center;
@@ -266,12 +266,12 @@
    border-radius: 50rpx;
 }
 .drawLotsButRec{
-    position: fixed;
+    /* position: fixed;
     left: 0;
     right: 0;
     bottom: 120rpx;
-    margin: auto;
-    z-index: 10;
+    z-index: 10; */
+    margin:0 auto 20rpx;
     width: 520rpx;
     height: 80rpx;
     text-align: center;

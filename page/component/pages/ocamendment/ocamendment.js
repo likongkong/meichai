@@ -101,6 +101,10 @@ Page({
           url: "/page/secondpackge/pages/aRewardList/aRewardList"
         });
       }
+    }else if(infodata.activityType == 6){
+      wx.navigateTo({
+        url: "/page/component/pages/mingboxList/mingboxList"
+      });
     }else{
       if (infodata&&infodata.drawBox && infodata.goods_id){
         wx.navigateTo({

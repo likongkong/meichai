@@ -20,7 +20,7 @@
 <view style='position:fixed;left:0;top:{{statusBarHeightMc}}px;z-index:16;width:100%;'>
 	<view class='headss'>
 		<view class='indheadinp' bindtap="namefocus">
-			<image class='indheadinpimg' src='../images/searchIcon.png'></image>{{topsousuo}}
+			<image class='indheadinpimg' src='../images/searchIcon.png'></image>搜索
 		</view>
 	</view>
 </view>
@@ -890,14 +890,6 @@
 	</view>
 </view>
 
-
-
-<!--  loading 加载提示  -->
-<view hidden="{{headhidden}}" style='position: fixed;top: 0;left: 0;height: 100%;width: 100%;z-index: 30;' catchtouchmove="preventD"></view>
-
-<view style='width:0;height:0;overflow:hidden;position:absolute;top:-1000px;' data-uid='{{uid}}' data-loginid='{{loginid}}' data-openid='{{openid}}' data-page='{{page}}'>
-	<canvas canvas-id='snapshot' style='width:300px; height:240px;'></canvas>
-</view>
 
 <view style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:99;' wx:if='{{jumpdevanningiftr}}'></view>
 
