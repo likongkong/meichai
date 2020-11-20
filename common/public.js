@@ -135,6 +135,12 @@ function comiftrsign(_this,res,app) {
         }
       }
     });
+  }else if(res.data.ReturnCode == 999){
+    wx.showToast({
+      title: res.data.Message,
+      icon: 'none',
+      duration: 1500
+    });
   };
 }
 function getdoubleEleven(_this, app) {

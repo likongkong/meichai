@@ -293,8 +293,9 @@ page {
   position: absolute;
   left: 0;
   bottom: 0;
-  z-index: 3;
+  z-index: 11;
   padding-top: 44rpx;
+  display: flex;
 }
 .scrapPurtime{
   width: 100%;
@@ -304,7 +305,32 @@ page {
   font-size: 24rpx;
   position: absolute;
   left: 0;
-  top: 20rpx;
+  top: -20rpx;
+}
+.deduct{
+  width: 100%;
+  height: 100rpx;
+  line-height: 40rpx;
+  text-align: center;
+  font-size: 24rpx;
+  position: absolute;
+  left: 0;
+  top: -80rpx;
+  background: #fff;
+}
+.deductWrap{
+  width: 680rpx;
+  height: 100rpx;
+  margin-left: 35rpx;
+  border-bottom: 1rpx solid #c8c8c8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.deductWrap view{
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
 }
 .scrPurEve{
   height:150rpx;
@@ -316,15 +342,27 @@ page {
   font-size: 26rpx;
   color: #fff;
   margin-left: 30rpx;
-  display: inline-block;
+  /* display: inline-block; */
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .scrPurEve .scrOutBox{
-  margin-top: 35rpx;
+  /* margin-top: 35rpx; */
 }
 .scrPurEve text{
   display: block;
   text-align: center;
+}
+.scrPurEve text:last-child{
+  font-size: 22rpx;
+}
+.useBlindboxRuleMask{
+  width: 560rpx;
+  height: 920rpx;
+  background: #fff;
+  border-radius: 8rpx;
 }
 .adhBannerVol{
   position: absolute;
@@ -984,4 +1022,33 @@ page {
   position: absolute;
   top: 0;font-size: 20rpx;
   color: #fff;
+}
+
+
+.useBlindboxRuleMask{
+  padding: 0 30rpx;
+  box-sizing: border-box;
+}
+.wxParse-h1>view{
+  text-align: center;
+  font-size: 24rpx;
+  margin: 50rpx 0 20rpx 0;
+}
+.wxParse-h2>view{
+  font-size: 24rpx;
+  margin-bottom: 25rpx;
+  margin-top: 32rpx;
+}
+.wxParse-p>view{
+  color: #666;
+  font-size: 24rpx;
+  padding: 0 18rpx;
+  box-sizing: border-box;
+}
+.wxParse-span>view{
+  color: #666;
+  font-size: 24rpx;
+  padding: 0 18rpx;
+  box-sizing: border-box;
+  margin: 15rpx 0;
 }

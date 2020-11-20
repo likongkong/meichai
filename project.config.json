@@ -116,6 +116,12 @@
           "pathName": "pages/wode/wode",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "一番赏详情",
+          "pathName": "page/secondpackge/pages/aRewardDetails/aRewardDetails",
+          "query": "id=217004",
+          "scene": null
         }
       ]
     }
