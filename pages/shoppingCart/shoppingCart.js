@@ -191,8 +191,26 @@ Page({
     isDisplayBlock:true,
     // 是否授权
     signinlayer: true,
-    windowHeight: app.signindata.windowHeight - 65 - wx.getStorageSync('statusBarHeightMc') || 0
-
+    windowHeight: app.signindata.windowHeight - 65 - wx.getStorageSync('statusBarHeightMc') || 0,
+    //我的抽盒金
+    blindboxMoney:'',
+    // 使用抽盒金比率
+    deductRatio:0.6,
+    // 此商品是否可以使用抽盒金抵扣
+    isDeduct:true,
+    // 是否使用抽盒金抵扣
+    isUseBlindboxMoney:true,
+    // 提交订单时是否使用抽盒金抵扣
+    isDeductNum:1
+  },
+  useBlindboxMoneyFun(){
+    this.setData({
+      isUseBlindboxMoney:!this.data.isUseBlindboxMoney,
+    })
+    this.setData({
+      amountpayable:this.data.isUseBlindboxMoney? (this.data.originalAmountpayable-this.data.useblindAmountpayable).toFixed(2):this.data.originalAmountpayable,
+      isDeductNum:this.data.isUseBlindboxMoney?1:0
+    })
   },
   topcabinetordelgoods: function (w) {
     var num = w.currentTarget.dataset.num || w.target.dataset.num || 0;
@@ -625,6 +643,7 @@ Page({
         if (res.data.ReturnCode == 200) {
           var rdw = res.data.list.cart || [];
           var rdwGruop = res.data.list.group || '';
+          var deduct = res.data.Info.deduct || '';
 
           // 领奖商品
           if (num==1){
@@ -750,6 +769,7 @@ Page({
             zomiftr: iftrcom,
             dsbbmoncom: iftrdsbbmoncom
           });
+
           if (_this.data.recommand.length == 0) {
             var rdwrecommand = res.data.list.recommand || [];
             _this.data.recommandPage = _this.data.page;
@@ -763,6 +783,12 @@ Page({
               recommand: abclist
             });
           };
+          _this.setData({
+            deductRatio:deduct.deductRatio,
+            isDeduct:deduct.isDeduct,
+            isUseBlindboxMoney:deduct.isDeduct?true:false,
+            isDeductNum:deduct.isDeduct&&_this.data.blindboxMoney!=0?1:0
+          })
           // 计算金额
           _this.totalMoneyEvent();
         } else if (res.data.ReturnCode == 300) {
@@ -871,7 +897,8 @@ Page({
       // 公共默认信息
       defaultinformation: app.signindata.defaultinformation,
       isHellBlackUser: app.signindata.isHellBlackUser,
-      raplist:[]
+      raplist:[],
+      blindboxMoney:app.signindata.blindboxMoney
     });
     // 判断是在哪个店
     if (_this.data.temporary_store_id == _this.data.uid) {
@@ -1267,7 +1294,7 @@ Page({
     if (_this.data.coudata2cid != '') { cid.push(_this.data.coudata2cid); };
     var cid = cid.join();
     ginfo = JSON.stringify(ginfo);
-    var q = Dec.Aese('mod=order&operation=carorder&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&gcount=' + gcount + '&aid=' + aid + '&cid=' + cid + '&ginfo=' + ginfo + '&desc=' + _this.data.desc + '&cart_id=' + cart_id + '&goodsDiscount=' + JSON.stringify(_this.data.relGidTips) + '&awardOrderId=' + _this.data.awardOrderId + '&isAddToyCabinet=' + _this.data.isAddToyCabinet)
+    var q = Dec.Aese('mod=order&operation=carorder&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&gcount=' + gcount + '&aid=' + aid + '&cid=' + cid + '&ginfo=' + ginfo + '&desc=' + _this.data.desc + '&cart_id=' + cart_id + '&goodsDiscount=' + JSON.stringify(_this.data.relGidTips) + '&awardOrderId=' + _this.data.awardOrderId + '&isAddToyCabinet=' + _this.data.isAddToyCabinet+'&isDeduct='+_this.data.isDeductNum)
   var geturl = 'goods.php' + q;
 
     wx.request({
@@ -1412,6 +1439,25 @@ Page({
                 wx.navigateTo({
                   url: "/page/component/pages/hidefun/hidefun?type=1&cart_id=" + cart_id
                 });
+              }
+
+              // 更新抽盒金
+              if(_this.data.isDeduct && _this.data.isUseBlindboxMoney){
+                var gbm = Dec.Aese('mod=blindBox&operation=getBlindboxMoney&uid='+_this.data.uid);
+                wx.request({
+                  url: app.signindata.comurl + 'spread.php' + gbm,
+                  method: 'GET',
+                  header: { 'Accept': 'application/json' },
+                  success: function (res) {
+                    if (res.data.ReturnCode == 200) {
+                      console.log('更新抽盒金=====',res)
+                      _this.setData({
+                        blindboxMoney: res.data.Info.blindbox_money || ""
+                      });
+                      app.signindata.blindboxMoney = res.data.Info.blindbox_money || ""
+                    };
+                  }
+                })
               }
 
             },
@@ -1570,10 +1616,16 @@ Page({
     if (ap <= 0) {
       ap = 0;
     };
-    
+
+    let useblindAmountpayable = this.data.blindboxMoney>(ap.toFixed(2)*this.data.deductRatio)?ap.toFixed(2)*this.data.deductRatio:this.data.blindboxMoney;
+    let amountpayable = this.data.blindboxMoney!=0? this.data.isDeduct? this.data.isUseBlindboxMoney? (ap.toFixed(2)-useblindAmountpayable).toFixed(2) :ap.toFixed(2) :ap.toFixed(2) :ap.toFixed(2)
     this.setData({
       // 应付金额
-      amountpayable: ap.toFixed(2),
+      amountpayable:amountpayable,
+      // 原始应付金额
+      originalAmountpayable: ap.toFixed(2),
+      // 使用抽盒金后应付金额
+      useblindAmountpayable: parseFloat(useblindAmountpayable).toFixed(3).slice(0,-1),
       // 运费
       //  freight: acc,
       freight: xianshi,
