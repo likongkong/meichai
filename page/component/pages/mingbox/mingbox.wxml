@@ -131,8 +131,8 @@
       <view wx:if='{{!isorder}}' style='background:#E6F1FC;border: 1rpx solid #A3D0FD;color:#1989FA;text-align:center;line-height:80rpx;position:relative;' catchtap='rollgoods'>
         {{bottomtext}}</view>
       <view wx:if='{{isorder}}' style='background:#E6F1FC;background:#FE666B;color:#fff;text-align:center;line-height:80rpx;overflow:hidden;position:relative;' catchtap='dsbbbutclickt'>
-        <view wx:if='{{discountAmount==0}}' style='float:left;margin-left:20rpx;'>￥{{payprice}}</view>
-        <view wx:if='{{discountAmount>0}}' style='float:left;margin-left:20rpx;'>￥{{payprice}} - ￥{{discountAmount*2}}</view>
+        <view wx:if='{{discountAmount==0}}' style='float:left;margin-left:20rpx;'>￥{{originalAmountpayable}}</view>
+        <view wx:if='{{discountAmount>0}}' style='float:left;margin-left:20rpx;'>￥{{originalAmountpayable}} - ￥{{discountAmount*2}}</view>
         <view style='float:right;margin-right:20rpx;'>选好了，立即购买</view>
       </view>
     </view>
@@ -272,8 +272,8 @@
     <view wx:if='{{!isorder}}' style='background:#E6F1FC;border: 1rpx solid #A3D0FD;color:#1989FA;text-align:center;line-height:80rpx;position:relative;' catchtap='rollgoods'>{{bottomtext}}</view>
 
     <view wx:if='{{isorder}}' style='background:#E6F1FC;background:#FE666B;color:#fff;text-align:center;line-height:80rpx;overflow:hidden;position:relative;' catchtap='dsbbbutclickt'>
-      <view wx:if='{{discountAmount==0}}' style='float:left;margin-left:20rpx;'>￥{{payprice}}</view>
-      <view wx:if='{{discountAmount>0}}' style='float:left;margin-left:20rpx;'>￥{{payprice}} - ￥{{discountAmount*2}}</view>
+      <view wx:if='{{discountAmount==0}}' style='float:left;margin-left:20rpx;'>￥{{originalAmountpayable}}</view>
+      <view wx:if='{{discountAmount>0}}' style='float:left;margin-left:20rpx;'>￥{{originalAmountpayable}} - ￥{{discountAmount*2}}</view>
       <view style='float:right;margin-right:20rpx;'>选好了，立即购买</view>
     </view>
   </view>
@@ -301,8 +301,9 @@
 <!--  二级背景  -->
 <view class='tipbacktwo' wx:if='{{tipbacktwo}}' catchtouchmove="preventD" bindtap='tipbacktwo'></view>
 
-<view class='buybombsimmediately' wx:if='{{buybombsimmediately}}'>
+<view catchtouchmove="preventD" class='buybombsimmediately' wx:if='{{buybombsimmediately}}'>
   <view class='bbsheadcon'>
+    <scroll-view scroll-y style="height: 100%;">
     <view class='bbshccom' bindtap='tipbacktwo' style='position: relative;'>
       <view class='bbshccomleft'>已选购数量</view>
       <image class='bbshccomimg' src='../../../../pages/images/icon_in.png'></image>
@@ -316,6 +317,15 @@
         <view style="width:100%;line-height:57rpx;text-align:right;" class="specialellipsis">{{tipaddress}}</view>
       </view>
     </view>
+
+    <view class="blindboxMoneyWrap" wx:if="{{isDeduct && blindboxMoney!=0}}" catchtap="useBlindboxMoneyFun">
+        <view class='blindboxMoneyleft'>使用抽盒金抵扣 <text style="color: #f42251;">￥{{useblindAmountpayable}}</text> <text style="font-size:24rpx;"> (剩余抽盒金</text> <text style="font-size:24rpx;color: #f42251;">￥{{blindboxMoney}})</text> </view>
+        <block>
+          <image wx:if="{{isUseBlindboxMoney}}" style="width:40rpx;height:auto" src="https://www.51chaidan.com/images/sign/order/xuanzhong.png" mode="widthFix"></image>
+          <image wx:else style="width:40rpx;height:auto" src="https://www.51chaidan.com/images/sign/order/weixuanzhong.png" mode="widthFix"></image>
+        </block>
+    </view>
+
     <view class='bbshccombot'>
       <view class='bbshcombotleft'>应付金额</view>
       <view class='bbshcombotright'>
@@ -328,8 +338,12 @@
     <view class='pricedetail' wx:if='{{pricedetailc}}'>
       <view class='pricedetailo'>
         <view class='pricedetailoleft'>商品价格</view>
-        <view wx:if='{{discountAmount==0}}' class='pricedetailoright'>￥{{payprice}}</view>
-        <view wx:if='{{discountAmount>0}}' class='pricedetailoright'>￥{{payprice - (discountAmount*2)}}</view>
+        <view wx:if='{{discountAmount==0}}' class='pricedetailoright'>￥{{originalAmountpayable}}</view>
+        <view wx:if='{{discountAmount>0}}' class='pricedetailoright'>￥{{originalAmountpayable - (discountAmount*2)}}</view>
+      </view>
+      <view class='pricedetailo' wx:if="{{isUseBlindboxMoney && blindboxMoney!=0}}">
+        <view class='pricedetailoleft'>抽盒金抵扣</view>
+        <view class='pricedetailorightcol' style="color: #f42251;">-￥{{useblindAmountpayable}}</view>
       </view>
       <!-- <view class='pricedetailo'>
         <view class='pricedetailoleft'>税费</view>
@@ -356,6 +370,7 @@
       <view class='bbshccomleft'>买家留言</view>
       <input class='buyermessage' type='text' bindinput="inputChange" value='{{desc}}' placeholder='选填备注,或添加微信好友({{wxnum}})'></input>
     </view>
+    </scroll-view>
   </view>
   <view class='bbshbottom'>
     <view class='bbshbottomhead'>

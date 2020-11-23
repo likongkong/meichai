@@ -131,9 +131,27 @@ Page({
     percountdown: '',
     // 倒计时
     countdowntime: '',
-    is_share: false
+    is_share: false,
+    //我的抽盒金
+    blindboxMoney:'',
+    // 使用抽盒金比率
+    deductRatio:0.6,
+    // 此商品是否可以使用抽盒金抵扣
+    isDeduct:true,
+    // 是否使用抽盒金抵扣
+    isUseBlindboxMoney:true,
+    // 提交订单时是否使用抽盒金抵扣
+    isDeductNum:1,
   },
-
+  useBlindboxMoneyFun(){
+    this.setData({
+      isUseBlindboxMoney:!this.data.isUseBlindboxMoney,
+    })
+    this.setData({
+      payprice:this.data.isUseBlindboxMoney? (this.data.originalAmountpayable-this.data.useblindAmountpayable).toFixed(2):this.data.originalAmountpayable,
+      isDeductNum:this.data.isUseBlindboxMoney?1:0
+    })
+  },
   // 获取手机号
   getPhoneNumber: function(e) {
     var _this = this;
@@ -329,6 +347,7 @@ Page({
       avatarUrl: app.signindata.avatarUrl,
       isProduce: app.signindata.isProduce,
       defaultinformation:app.signindata.defaultinformation,
+      blindboxMoney:app.signindata.blindboxMoney
     });
 
     _this.getinfo()
@@ -454,6 +473,10 @@ Page({
             addsharec: addsharec,
             discountAmount: res.data.Info.discountAmount || 0,
             superpositionTime: res.data.Info.superpositionTime ? res.data.Info.superpositionTime : "",
+            deductRatio:res.data.Info.deduct.deductRatio,
+            isDeduct:res.data.Info.deduct.isDeduct,
+            isUseBlindboxMoney:res.data.Info.deduct.isDeduct?true:false,
+            isDeductNum:res.data.Info.deduct.isDeduct&&_this.data.blindboxMoney!=0?1:0
           })
           _this.initview()
 
@@ -731,9 +754,18 @@ Page({
         bottomtext: "先挑选一款喜欢的吧"
       })
     } else if (rednum != 0 && rednum == bluenum) {
+      let originalpayprice = (_this.data.infoGoods.shop_price * (rednum + bluenum)).toFixed(2);
+      let useblindAmountpayable = this.data.blindboxMoney>(originalpayprice*this.data.deductRatio)?originalpayprice*this.data.deductRatio:this.data.blindboxMoney;
+      let payprice = this.data.blindboxMoney!=0? this.data.isDeduct? this.data.isUseBlindboxMoney? (originalpayprice-useblindAmountpayable).toFixed(2) :originalpayprice :originalpayprice :originalpayprice
       _this.setData({
         isorder: true,
-        payprice: (_this.data.infoGoods.shop_price * (rednum + bluenum)).toFixed(2)
+        // payprice: (_this.data.infoGoods.shop_price * (rednum + bluenum)).toFixed(2)
+        // 应付金额
+        payprice:payprice,
+        // 原始应付金额
+        originalAmountpayable: (_this.data.infoGoods.shop_price * (rednum + bluenum)).toFixed(2),
+        // 使用抽盒金后应付金额
+        useblindAmountpayable: parseFloat(useblindAmountpayable).toFixed(3).slice(0,-1),
       })
       // _this.data.timout = setTimeout(function() {
       //   _this.showlist()
@@ -1180,7 +1212,8 @@ Page({
     _this.setData({
       suboformola: true
     });
-    var q = Dec.Aese('mod=showBox&operation=order&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + id + '&roleId=' + roleId + '&aid=' + aid + '&desc=' + _this.data.desc);
+    var q = Dec.Aese('mod=showBox&operation=order&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + id + '&roleId=' + roleId + '&aid=' + aid + '&desc=' + _this.data.desc+'&isDeduct='+_this.data.isDeductNum);
+    console.log('mod=showBox&operation=order&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + id + '&roleId=' + roleId + '&aid=' + aid + '&desc=' + _this.data.desc+'&isDeduct='+_this.data.isDeductNum)
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q,
       method: 'GET',
@@ -1292,6 +1325,25 @@ Page({
                 })
                 app.signindata.perspcardata = _this.data.tempChance.overtime;
                 _this.data.perspcardata = _this.data.tempChance.overtime;
+              }
+
+              // 更新抽盒金
+              if(_this.data.isDeduct && _this.data.isUseBlindboxMoney){
+                var gbm = Dec.Aese('mod=blindBox&operation=getBlindboxMoney&uid='+_this.data.uid);
+                wx.request({
+                  url: app.signindata.comurl + 'spread.php' + gbm,
+                  method: 'GET',
+                  header: { 'Accept': 'application/json' },
+                  success: function (res) {
+                    if (res.data.ReturnCode == 200) {
+                      console.log('更新抽盒金=====',res)
+                      _this.setData({
+                        blindboxMoney: res.data.Info.blindbox_money || ""
+                      });
+                      app.signindata.blindboxMoney = res.data.Info.blindbox_money || ""
+                    };
+                  }
+                })
               }
 
             },
