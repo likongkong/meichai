@@ -3,8 +3,8 @@ var Aes = require('crypto-js.js');  //引用AES源码js
 
 var env = 'online';   //线上
 // var env = 'test';  //测试
-var versionnumber = '8.7.1';
-
+var versionnumber = '8.7.4';
+  
 
 var key = env=='online'?Aes.enc.Utf8.parse("danzhuan1chaijia"):Aes.enc.Utf8.parse("danzhuanichaijia");
 // 公共地址 接口
@@ -134,6 +134,12 @@ function comiftrsign(_this,res,app) {
           })
         }
       }
+    });
+  }else if(res.data.ReturnCode == 999){
+    wx.showToast({
+      title: res.data.Message,
+      icon: 'none',
+      duration: 1500
     });
   };
 }

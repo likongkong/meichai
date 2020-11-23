@@ -91,9 +91,34 @@ Page({
     isPurchase:true,
     requestNum:0,
     is_jump:false,
-    checkOtherActivity:''
+    checkOtherActivity:'',
+     //我的抽盒金
+     blindboxMoney:'',
+     // 使用抽盒金比率
+     deductRatio:0.6,
+     // 此商品是否可以使用抽盒金抵扣
+     isDeduct:true,
+     // 是否使用抽盒金抵扣
+     isUseBlindboxMoney:true,
+     // 提交订单时是否使用抽盒金抵扣
+     isDeductNum:1,
+     //抽盒金抵扣使用规则
+     isBlindboxRuleMask:false
   },
-
+  useBlindboxMoneyFun(){
+    this.setData({
+      isUseBlindboxMoney:!this.data.isUseBlindboxMoney,
+    })
+    this.setData({
+      amountpayable:this.data.isUseBlindboxMoney? (this.data.originalAmountpayable-this.data.useblindAmountpayable).toFixed(2):this.data.originalAmountpayable,
+      isDeductNum:this.data.isUseBlindboxMoney?1:0
+    })
+  },
+  blindboxRuleFun(){
+    this.setData({
+      isBlindboxRuleMask:!this.data.isBlindboxRuleMask,
+    }) 
+  },
   // 幸运值
   drawredpagshare: function (ind) {
     var _this = this
@@ -548,7 +573,8 @@ Page({
       this.setData({isPurchase:true})
     }
     this.setData({
-      scrapingPur:!this.data.scrapingPur
+      scrapingPur:!this.data.scrapingPur,
+      isBlindboxRuleMask:false
     })
   },
   scrapingboxfunlit:function(){
@@ -626,7 +652,8 @@ Page({
       openid: app.signindata.openid,
       isProduce: app.signindata.isProduce,
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
-      ishowdealoradd:ishowdealoradd
+      ishowdealoradd:ishowdealoradd,
+      blindboxMoney:app.signindata.blindboxMoney
     });
 
     // this.listdata();
@@ -637,6 +664,15 @@ Page({
     if (this.data.isredpag == 1) {
       this.shareopen(this.data.welfareid)
     }
+
+    wx.request({
+      url: 'https://cdn.51chaidan.com/produce/tipDeductForYifanshang.json',
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        WxParse.wxParse('article', 'html', res.data.tip, _this,5);
+      }
+    })
 
   },
   listdata:function(){
@@ -775,6 +811,20 @@ Page({
             goodsExhibition:newarr,
             isHistory:true,
             welfare: res.data.List.welfare || [],
+            deductRatio:res.data.Info.deduct.deductRatio,
+            isDeduct:res.data.Info.deduct.isDeduct,
+            isUseBlindboxMoney:res.data.Info.deduct.isDeduct?true:false,
+            isDeductNum:res.data.Info.deduct.isDeduct&&_this.data.blindboxMoney!=0?1:0
+          })
+          var allDeductMoney = Number(parseFloat((activity.suplusNum*activity.shopPrice)*_this.data.deductRatio).toFixed(3).slice(0,-1));
+          var tenDeductMoney = Number(parseFloat((10*activity.shopPrice)*_this.data.deductRatio).toFixed(3).slice(0,-1));
+          var threeDeductMoney = Number(parseFloat((3*activity.shopPrice)*_this.data.deductRatio).toFixed(3).slice(0,-1));
+          var oneDeductMoney = Number(parseFloat(activity.shopPrice*_this.data.deductRatio).toFixed(3).slice(0,-1));
+          _this.setData({
+            allDeductMoney:allDeductMoney>_this.data.blindboxMoney?_this.data.blindboxMoney:allDeductMoney,
+            tenDeductMoney:tenDeductMoney>_this.data.blindboxMoney?_this.data.blindboxMoney:tenDeductMoney,
+            threeDeductMoney:threeDeductMoney>_this.data.blindboxMoney?_this.data.blindboxMoney:threeDeductMoney,
+            oneDeductMoney:oneDeductMoney>_this.data.blindboxMoney?_this.data.blindboxMoney:oneDeductMoney,
           })
         }else{
           app.showToastC(res.data.Msg);
@@ -842,9 +892,9 @@ Page({
       return false;
     };
 
-    var exh = Dec.Aese('mod=yifanshang&operation=order&id='+_this.data.id+'&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&number='+number+'&aid=' + _this.data.tipaid);
+    var exh = Dec.Aese('mod=yifanshang&operation=order&id='+_this.data.id+'&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&number='+number+'&aid=' + _this.data.tipaid+'&isDeduct='+_this.data.isDeductNum);
 
-    console.log('下单=========',app.signindata.comurl + 'spread.php?mod=yifanshang&operation=order&id='+_this.data.id+'&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&number='+number+'&aid=' + _this.data.tipaid)
+    console.log('下单=========',app.signindata.comurl + 'spread.php?mod=yifanshang&operation=order&id='+_this.data.id+'&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&number='+number+'&aid=' + _this.data.tipaid+'&isDeduct='+_this.data.isDeductNum)
 
     wx.request({
       url: app.signindata.comurl + 'spread.php' + exh,
@@ -911,6 +961,25 @@ Page({
                     // 订阅授权
                     // app.comsubscribe(_this);
 
+                    // 更新抽盒金
+                    if(_this.data.isDeduct && _this.data.isUseBlindboxMoney){
+                      var gbm = Dec.Aese('mod=blindBox&operation=getBlindboxMoney&uid='+_this.data.uid);
+                      wx.request({
+                        url: app.signindata.comurl + 'spread.php' + gbm,
+                        method: 'GET',
+                        header: { 'Accept': 'application/json' },
+                        success: function (res) {
+                          if (res.data.ReturnCode == 200) {
+                            console.log('更新抽盒金=====',res)
+                            _this.setData({
+                              blindboxMoney: res.data.Info.blindbox_money || ""
+                            });
+                            app.signindata.blindboxMoney = res.data.Info.blindbox_money || ""
+                          };
+                        }
+                      })
+                    }
+
                   },
                   'fail':function(res){},
                   'complete': function (res) {}
@@ -937,7 +1006,8 @@ Page({
           }; 
           if (res.data.ReturnCode == 805) {
             app.showToastC('剩余库存不足');
-          };                 
+          }; 
+               
           // 判断非200和登录
           Dec.comiftrsign(_this, res, app);     
         };   
