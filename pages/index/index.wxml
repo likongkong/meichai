@@ -5,7 +5,7 @@
 
 
 <!-- 商品弹框 --> 
-<view class='indexelafra' wx:if='{{indexelafra&&index_ela_fra}}' catchtouchmove="true">
+<view class='indexelafra' wx:if='{{indexelafra&&index_ela_fra&&elafradata.src}}' catchtouchmove="true">
 	<view class='tgawback' style='position: relative;' catchtap='indexelafrafun'>
 	</view>
 	<view class='indexelafracon' style='height:800rpx;'>

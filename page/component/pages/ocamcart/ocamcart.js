@@ -387,9 +387,7 @@ Page({
     wx.request({
       url: app.signindata.comurl + 'toy.php' + qqq,
       method: 'GET',
-      header: {
-        'Accept': 'application/json'
-      },
+      header: {'Accept': 'application/json'},
       success: function(res) {
         wx.hideLoading();
         if (res.data.ReturnCode == "200") {
@@ -407,6 +405,10 @@ Page({
               conut: res.data.Info.count || 0,
               payprice: res.data.Info.totalAmount,
             })
+            if(_this.data.listdata.length == 0){
+              _this.setData({ islistdata : false });
+            }
+
           }
 
         }

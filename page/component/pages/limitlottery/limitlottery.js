@@ -53,7 +53,8 @@ Page({
     iftriosorand:app.signindata.iftriosorand || true,
     ownPromptBox:false,
     ownPromptBoxTxt:'',
-    winningList:1
+    winningList:1,
+    isJumpSignin:false
 
   },
   sharefriend:function(){
@@ -777,7 +778,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    if(this.data.isJumpSignin && this.data.uid){
+      this.getinfo();
+      this.data.isJumpSignin = false;
+    };
   },
 
   /**
@@ -856,6 +860,7 @@ Page({
     wx.navigateTo({    //签到
       url: "/page/component/pages/newsignin/newsignin?limaid="+_this.data.id
     });
+    this.data.isJumpSignin = true;
   },  
   jumpsmoke:function(){
     var _this = this;

@@ -65,7 +65,7 @@ App({
     spreadEntry: false,
     // 屏幕高度
     windowHeight: 0,
-    index_ela_fra: false,
+    index_ela_fra: true,
     isProduce: false,
     // 订阅判断
     subscribeif: false,
@@ -179,7 +179,7 @@ App({
                   _this.signindata.blindboxMoney = res.data.Info.blindboxMoney || 0
 
                   _this.signindata.spreadEntry = res.data.List ? res.data.List.spreadEntry : false || false;
-                  _this.signindata.index_ela_fra = true;
+                  // _this.signindata.index_ela_fra = true;
                   _this.signindata.isProduce = res.data.Info.isProduce || false;
 
                   // 万圣节南瓜个数

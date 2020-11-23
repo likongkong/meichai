@@ -658,6 +658,25 @@ Page({
             var zdyurl = _this.data.zdyurl || '';
             var regData = app.signindata.reg || /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/ ;
 
+            // 分类 首页弹框
+            if ( List.indexSpread && List.indexSpread.length != 0 ) {
+              var indexnum = Math.floor(Math.random() * List.indexSpread.length) || 0;
+              var indexelafra = List.indexSpread[indexnum] || '';
+              if ( indexelafra && indexelafra.src ) {
+                _this.setData({
+                  elafradata: indexelafra,
+                  indexelafra: true
+                });
+                app.signindata.tgaimg = indexelafra.src ||'https://www.51chaidan.com/images/default/openscreen.jpg';
+              } else {
+                _this.setData({ indexelafra: false, index_ela_fra: false });
+                app.signindata.index_ela_fra = false;
+              };
+            } else {
+              _this.setData({ indexelafra: false, index_ela_fra: false });
+              app.signindata.index_ela_fra = false;     
+            }
+
             if (arrlist.length != 0) {
               for (var i = 0; i < arrlist.length; i++) {
                 if (arrlist[i].item_type == 9014 || arrlist[i].item_type == 989 || arrlist[i].item_type == 9017) {
@@ -765,28 +784,12 @@ Page({
                 var comdataarr = [];
             };
 
-            // 分类 首页弹框
-            if ( List.indexSpread && List.indexSpread.length != 0 ) {
-              var indexnum = Math.floor(Math.random() * List.indexSpread.length) || 0;
-              var indexelafra = List.indexSpread[indexnum] || '';
-              if ( indexelafra && indexelafra.src ) {
-                _this.setData({
-                  elafradata: indexelafra,
-                  indexelafra: true
-                });
-                app.signindata.tgaimg = indexelafra.src ||'https://www.51chaidan.com/images/default/openscreen.jpg';
-              } else {
-                _this.setData({ indexelafra: false, index_ela_fra: false });
-                app.signindata.index_ela_fra = false;
-              };
-            } else {
-              _this.setData({ indexelafra: false, index_ela_fra: false });
-              app.signindata.index_ela_fra = false;     
-            }
 
+            var classification = [];
+            var banlist = [];
             if (List.category && List.category.length != 0) {
               var num = Math.floor(Math.random() * List.category.length) || 0;
-              var classification = List.category[num];
+              classification = List.category[num];
               if (classification.length != 0) {
                 for (var i = 0; i < classification.length; i++) {
                   if (!regData.test(classification[i].img)) {
@@ -796,7 +799,7 @@ Page({
               };
 
               // banner
-              var banlist = List.banner||[];
+              banlist = List.banner||[];
               if (banlist.length != 0) {
                 for (var i = 0; i < banlist.length; i++) {
                   if (!regData.test(banlist[i].image)) {
