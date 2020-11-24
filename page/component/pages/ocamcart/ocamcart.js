@@ -37,7 +37,36 @@ Page({
     shopimgtop:0,
     addressefm: false,
     isaddress:false, //是否显示地址（是否有地址）
-    pricedetailc:true
+    pricedetailc:true,
+    //我的抽盒金
+    blindboxMoney:'',
+    // 使用抽盒金比率
+    deductRatio:0.6,
+    // 此商品是否可以使用抽盒金抵扣
+    isDeduct:true,
+    // 是否使用抽盒金抵扣
+    isUseBlindboxMoney:true,
+    // 提交订单时是否使用抽盒金抵扣
+    isDeductNum:1
+  },
+  useBlindboxMoneyFun(){
+    this.setData({
+      isUseBlindboxMoney:!this.data.isUseBlindboxMoney,
+    })
+    if(this.data.freightiftr>0){
+      var tdzuncar = this.data.defaultinformation.carriage.d;
+      let freightiftr = (parseFloat(tdzuncar) + parseFloat(this.data.payprice)).toFixed(2);
+      this.setData({
+        freightiftr:this.data.isUseBlindboxMoney? freightiftr : (parseFloat(tdzuncar) + this.data.originalAmountpayable).toFixed(2),
+      })
+    }else{
+      this.setData({
+        payprice:this.data.isUseBlindboxMoney? (this.data.originalAmountpayable-this.data.useblindAmountpayable).toFixed(2):this.data.originalAmountpayable
+      })
+    }
+    this.setData({
+      isDeductNum:this.data.isUseBlindboxMoney?1:0
+    })
   },
   addresssefmcancel: function () {
     this.setData({ addressefm: false })
@@ -158,6 +187,7 @@ Page({
       isProduce: app.signindata.isProduce,
       isShareFun: app.signindata.isShareFun,
       defaultinformation:app.signindata.defaultinformation,
+      blindboxMoney:app.signindata.blindboxMoney
     });
     if (this.data.but == 'cart') {
       this.listdatafun();
@@ -380,6 +410,7 @@ Page({
     }
     // 发现详情
     var qqq = Dec.Aese('mod=cabinet&operation=showCartList' + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&request=' + request);
+    console.log(app.signindata.comurl + 'toy.php?' +'mod=cabinet&operation=showCartList' + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&request=' + request)
     wx.showLoading({
       title: '加载中...',
       mask: true
@@ -391,26 +422,42 @@ Page({
       success: function(res) {
         wx.hideLoading();
         if (res.data.ReturnCode == "200") {
+          _this.setData({
+            deductRatio:res.data.Info.deduct.deductRatio,
+            isDeduct:res.data.Info.deduct.isDeduct,
+            isUseBlindboxMoney:res.data.Info.deduct.isDeduct?true:false,
+            isDeductNum:res.data.Info.deduct.isDeduct&&_this.data.blindboxMoney!=0?1:0
+          })
+          let payprice = res.data.Info.totalAmount;
+          let useblindAmountpayable = _this.data.blindboxMoney>(payprice.toFixed(2)*_this.data.deductRatio)?payprice.toFixed(2)*_this.data.deductRatio:_this.data.blindboxMoney;
+          let amountpayable = _this.data.blindboxMoney!=0? _this.data.isDeduct? _this.data.isUseBlindboxMoney? (payprice.toFixed(2)-useblindAmountpayable).toFixed(2) :payprice.toFixed(2) :payprice.toFixed(2) :payprice.toFixed(2)
+          console.log(amountpayable)
           if (request == "limit"){
             _this.setData({
               cartInfo: res.data.Info,
               cartData: res.data.List,
               conut: res.data.Info.count||0,
-              payprice: res.data.Info.totalAmount,
+              payprice: amountpayable,
+              // 原始应付金额
+              originalAmountpayable: payprice,
+              // 使用抽盒金后应付金额
+              useblindAmountpayable: parseFloat(useblindAmountpayable).toFixed(3).slice(0,-1),
             })
           }else{
             _this.setData({
               cartInfo: res.data.Info,
               listdata: res.data.List,
               conut: res.data.Info.count || 0,
-              payprice: res.data.Info.totalAmount,
+              payprice: amountpayable,
+              // 原始应付金额
+              originalAmountpayable: payprice,
+              // 使用抽盒金后应付金额
+              useblindAmountpayable: parseFloat(useblindAmountpayable).toFixed(3).slice(0,-1),
             })
             if(_this.data.listdata.length == 0){
               _this.setData({ islistdata : false });
             }
-
           }
-
         }
       },
     })
@@ -752,13 +799,13 @@ Page({
           freightiftr = 0;
           xianshi = '商品包邮';
         };
-      } else if (_this.data.payprice >= tddefcarfr) {
+      } else if (_this.data.originalAmountpayable >= tddefcarfr) {
         freightiftr = 0;
         xianshi = '满￥' + parseFloat(this.data.defaultinformation.carriage.free || "99").toFixed(2) + '包邮';
       } else {
         var tdzuncar = this.data.defaultinformation.carriage.d;
         xianshi = '￥' + parseFloat(tdzuncar).toFixed(2);
-        freightiftr = parseFloat(tdzuncar);
+        freightiftr = (parseFloat(tdzuncar) + parseFloat(_this.data.payprice)).toFixed(2);
       };
     } else {
       var tdzuncar = this.data.defaultinformation.carriage.d;
@@ -901,8 +948,8 @@ Page({
     _this.setData({
       suboformola: true,
     });
-    var q = Dec.Aese('mod=cabinet&operation=cartPurchase&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&aid=' + aid + '&desc=' + _this.data.desc);
-
+    var q = Dec.Aese('mod=cabinet&operation=cartPurchase&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&aid=' + aid + '&desc=' + _this.data.desc+'&isDeduct='+_this.data.isDeductNum);
+    console.log('mod=cabinet&operation=cartPurchase&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&aid=' + aid + '&desc=' + _this.data.desc+'&isDeduct='+_this.data.isDeductNum)
     wx.request({
       url: app.signindata.comurl + 'toy.php' + q,
       method: 'GET',
@@ -967,6 +1014,25 @@ Page({
                 _this.getCartList("limit");
                 _this.getCartList("total");
               },1500)
+
+              // 更新抽盒金
+              if(_this.data.isDeduct && _this.data.isUseBlindboxMoney){
+                var gbm = Dec.Aese('mod=blindBox&operation=getBlindboxMoney&uid='+_this.data.uid);
+                wx.request({
+                  url: app.signindata.comurl + 'spread.php' + gbm,
+                  method: 'GET',
+                  header: { 'Accept': 'application/json' },
+                  success: function (res) {
+                    if (res.data.ReturnCode == 200) {
+                      console.log('更新抽盒金=====',res)
+                      _this.setData({
+                        blindboxMoney: res.data.Info.blindbox_money || ""
+                      });
+                      app.signindata.blindboxMoney = res.data.Info.blindbox_money || ""
+                    };
+                  }
+                })
+              }
 
             },
             'fail': function (res) {

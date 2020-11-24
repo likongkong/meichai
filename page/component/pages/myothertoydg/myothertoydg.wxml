@@ -110,7 +110,14 @@
         <view style="width:100%;line-height:57rpx;text-align:right;" class="specialellipsis">{{tipaddress}}</view>
       </view>
     </view>
-
+    <view class="blindboxMoneyWrap" wx:if="{{isDeduct && blindboxMoney!=0}}" catchtap="useBlindboxMoneyFun">
+        <view class='blindboxMoneyleft'>使用抽盒金抵扣 <text style="color: #f42251;">￥{{useblindAmountpayable}}</text> <text style="font-size:24rpx;"> (剩余抽盒金</text> <text style="font-size:24rpx;color: #f42251;">￥{{blindboxMoney}})</text> </view>
+        <block>
+          <image wx:if="{{isUseBlindboxMoney}}" style="width:40rpx;height:auto" src="https://www.51chaidan.com/images/sign/order/xuanzhong.png" mode="widthFix"></image>
+          <image wx:else style="width:40rpx;height:auto" src="https://www.51chaidan.com/images/sign/order/weixuanzhong.png" mode="widthFix"></image>
+        </block>
+        <!-- <view class='blindboxMoneyright' style="{{!isUseBlindboxMoney?'color: #999; border:1rpx solid #999;':''}}" catchtap="useBlindboxMoneyFun">使用</view> -->
+    </view>
     <view class='bbshccombot'>
       <view class='bbshcombotleft'>应付金额</view>
       <view class='bbshcombotright'>
@@ -129,7 +136,10 @@
         <view class='pricedetailoleft'>运费<text style='padding-left:8rpx;color:#47981e;' wx:if='{{freightiftr>0}}'>(满￥{{defaultinformation.carriage.free}}包邮)</text></view>
         <view class='pricedetailoright'>{{freight}}</view>
       </view>
-
+      <view class='pricedetailo' wx:if="{{isUseBlindboxMoney && blindboxMoney!=0}}">
+        <view class='pricedetailoleft'>抽盒金抵扣</view>
+        <view class='pricedetailorightcol' style="color: #f42251;">-￥{{useblindAmountpayable}}</view>
+      </view>
     </view>
     <view class='bbshccom'>
       <view class='bbshccomleft'>买家留言</view>
