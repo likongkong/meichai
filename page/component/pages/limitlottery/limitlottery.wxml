@@ -97,8 +97,8 @@
 		</view>
 		<view style="padding:0 20rpx 25rpx;">
 				<view class="titlebStrategy">
-					<text style="float:left;">获得抽签号</text>
-					<text style="float:right;" catchtap="signatureStrategy">获取抽签号攻略></text>
+					<text style="float:left;">获取签号</text>
+					<text style="float:right;" catchtap="signatureStrategy">获取签号攻略></text>
 				</view>
 				<view class="eveStrBox">
 					<view class="eveStrMode">
