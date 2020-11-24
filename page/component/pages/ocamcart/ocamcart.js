@@ -428,7 +428,12 @@ Page({
             isUseBlindboxMoney:res.data.Info.deduct.isDeduct?true:false,
             isDeductNum:res.data.Info.deduct.isDeduct&&_this.data.blindboxMoney!=0?1:0
           })
-          let payprice = res.data.Info.totalAmount;
+          
+          if(res.data.Info.totalAmount >= _this.data.defaultinformation.carriage.freeForAmount){
+            var payprice = res.data.Info.totalAmount;
+          }else{
+            var payprice = parseFloat(res.data.Info.totalAmount) + parseFloat(_this.data.defaultinformation.carriage.d)
+          }
           let useblindAmountpayable = _this.data.blindboxMoney>(payprice.toFixed(2)*_this.data.deductRatio)?payprice.toFixed(2)*_this.data.deductRatio:_this.data.blindboxMoney;
           let amountpayable = _this.data.blindboxMoney!=0? _this.data.isDeduct? _this.data.isUseBlindboxMoney? (payprice.toFixed(2)-useblindAmountpayable).toFixed(2) :payprice.toFixed(2) :payprice.toFixed(2) :payprice.toFixed(2)
           console.log(amountpayable)
