@@ -571,6 +571,12 @@ Page({
     //   }
 
     // }else 
+
+    if(!_this.data.isShareGood && _this.data.desc==''){
+      app.showToastC('请填写品牌信息及联系方式');
+      return false;
+    }
+
     if (zunmdata.additional_type==2&&zunmdata.option){
       wx.showModal({
         title: '限购答题',
