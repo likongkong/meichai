@@ -83,17 +83,23 @@
 }
 .percentageNum{
   width: 100%;
-  text-align: center;
+  margin:0 auto 20rpx;
+  height:100rpx;
+  border-radius: 20rpx;
+  position: relative;
+  background: #EDEDED;
 }
 
 .pNLeftNum{
-  width: 100rpx;
-  height: 70rpx;
-  padding:10rpx 0;
-  font-size: 26rpx;
-  display:inline-block;
-  vertical-align: top;
-
+  height: 30rpx;
+  line-height: 30rpx;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 16rpx;
+  font-size: 24rpx;
+  color: #000;
+  margin: auto;
 }
 .pNLeftNum text{
   display: block;
@@ -117,30 +123,27 @@
 
 .pNLeftCenterTxt{
   color: #9B9999;
-  font-size: 20rpx;
-  position:absolute ;
-  left: 0;
-  right: 0;
-  bottom: -35rpx;
-  margin:auto;
+  height: 50rpx;
+  line-height:44rpx;  
+  font-size: 24rpx;
+  margin-left: 30rpx;
 }
 
 .pNLeftRight{
-  height: 90rpx;
-  line-height: 80rpx;
-  color:#ff2742;
-  font-size: 26rpx;
-  display: inline-block;
-  vertical-align: top;
-  margin-left: 20rpx;
+  height: 50rpx;
+  line-height:63rpx;
+  color:#000;
+  font-size: 24rpx;
+  margin-left:30rpx;
 }
 
 .titlebStrategy{
   width: 100%;
-  padding: 30rpx 0;
-  font-size: 24rpx;
-  color:#535353;
+  padding: 26rpx 0;
+  font-size: 28rpx;
+  color:#000;
   overflow: hidden;
+  text-align: center;
 }
 .eveStrBox{
   width: 100%;
@@ -255,6 +258,9 @@
    right: 0;
    bottom: 120rpx;
    z-index: 10; */
+
+
+
    margin:0 auto 20rpx;
    width: 520rpx;
    height: 80rpx;
@@ -611,6 +617,25 @@
   bottom: 0;
   margin: auto;
 }
+.exchjump{
+  width: 96%;
+  height: 40rpx;
+  margin:45rpx auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
 
+}
+.exchjumpeve{
+  width:98rpx;
+  color: #fff;
+  height: 40rpx;
+  line-height: 40rpx;
+  border-radius: 40rpx;
+  font-size: 24rpx;
+  background: #ff2742;
+  text-align: center;
+}
 
 

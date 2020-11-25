@@ -484,7 +484,17 @@ Page({
             res.data.Info.gift_time = _this.toDate(res.data.Info.gift_time || 0);
             res.data.Info.receive_time = _this.toDate(res.data.Info.receive_time||0,1);
             res.data.Info.overtime = _this.toDate(res.data.Info.overtime || 0, 2);
+
+            var isShareGood = true;
+            if(app.signindata.notAllowShareGoodsId&&app.signindata.notAllowShareGoodsId.length!=0){
+              if(app.signindata.notAllowShareGoodsId.indexOf(res.data.Info.gid) > -1){
+                isShareGood = false;
+                wx.hideShareMenu();
+              }
+            };
+
             _this.setData({
+              isShareGood:isShareGood,
               comdata: res.data.Info,
               id: res.data.Info.gid,
               subscribedata: res.data.Info.subscribe,
@@ -695,7 +705,7 @@ Page({
           title: '我用拆币兑换了' + _this.data.comdata.gname + '，一起分享赢拆币！',
           path: '/page/component/pages/imdetailspage/imdetailspage?goods_id=' + _this.data.comdata.gid,
           imageUrl: _this.data.comdata.gcover,
-          success: function (res) { },
+          success: function (res) {},
         };
       } else if (_this.data.comdata.order_type == 21){  // 一番赏
         var reshare = {

@@ -1,8 +1,18 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
-<view style="width:730rpx;margin:10rpx;">
-  <somke colortitle='#000'></somke>
+<!-- 已报名 -->
+<view wx:if='{{signlist.length>0}}' class='aslbcbox'>
+  <view style='padding:5rpx 13rpx 20rpx;'>
+    <view style='width:100%;height:60rpx;line-height:60rpx;font-size:24rpx;'>已报名抽签</view>
+    <view style='width:100%;height:140rpx;'>
+      <scroll-view scroll-x="true" style='width:100%;white-space:nowrap;height:100%;'>
+        <view wx:for='{{signlist}}' wx:key='key' style='vertical-align: top;position: relative;width:{{item.width}}rpx;height:100%;margin-right:20rpx;display: inline-block;' catchtap='limitlotteryd' data-gid='{{item.id}}'>
+          <image bindload="imageLoadad" data-indexnum='1' data-ind='{{index}}' style='display:block;width:{{item.width}}rpx;height:100%;border-radius:6rpx;' src='{{item.cover}}'></image>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
 </view>
 
 <view wx:if='{{listdata.length>0}}' class='limlistbox' style='padding-top:15rpx;'>
@@ -73,21 +83,11 @@
 
 </view>
 
-
-
-<!-- 已报名 -->
-<view wx:if='{{signlist.length>0}}' class='aslbcbox'>
-  <view style='padding:5rpx 13rpx 20rpx;'>
-    <view style='width:100%;height:60rpx;line-height:60rpx;font-size:24rpx;'>已报名抽签</view>
-    <view style='width:100%;height:140rpx;'>
-      <scroll-view scroll-x="true" style='width:100%;white-space:nowrap;height:100%;'>
-        <view wx:for='{{signlist}}' wx:key='key' style='vertical-align: top;position: relative;width:{{item.width}}rpx;height:100%;margin-right:20rpx;display: inline-block;' catchtap='limitlotteryd' data-gid='{{item.id}}'>
-          <image bindload="imageLoadad" data-indexnum='1' data-ind='{{index}}' style='display:block;width:{{item.width}}rpx;height:100%;border-radius:6rpx;' src='{{item.cover}}'></image>
-        </view>
-      </scroll-view>
-    </view>
-  </view>
+<view style="width:730rpx;margin:10rpx;">
+  <somke colortitle='#000'></somke>
 </view>
+
+
 
 <!-- 已完成 -->
 <view wx:if='{{finishedlist.length>0}}' class='aslbcbox'>

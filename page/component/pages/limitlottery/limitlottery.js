@@ -1129,7 +1129,19 @@ Page({
   },
   // 签号攻略
   signatureStrategy:function(){
-    this.setData({isSignStrategyPopup:!this.data.isSignStrategyPopup})
+    var _this = this;
+    if (_this.data.infoLottoList.length == 0 && !_this.data.isSignStrategyPopup ) {
+      var qq = Dec.Aese('mod=click&operation=activity&type=13&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid+'&activityId='+_this.data.id);
+      wx.request({
+        url: app.signindata.comurl + 'statistics.php' + qq,
+        method: 'GET',
+        header: { 'Accept': 'application/json' },
+        success: function (res) {}
+      })
+    };
+    this.setData({isSignStrategyPopup:!this.data.isSignStrategyPopup});
+
+
   },
   winnerlogic: function () {
     var _this = this

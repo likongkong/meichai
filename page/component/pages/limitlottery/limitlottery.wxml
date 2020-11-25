@@ -82,80 +82,14 @@
 			 </block>
 
 
-
-			 <view class="percentageNum">
-			     <view class="pNLeftNum" style="float:left;">
-					    <text>签号数</text>
-							<text style="color:#ff2742;">{{infoLottoList.length}}个</text>
-					 </view>
-					 <view class="pNLeftCenter">
-					     <view class="pNLeftCenterBg" style="width:{{infoLottoList.length>100?100:infoLottoList.length}}%;"></view>
-					     <view class="pNLeftCenterTxt">签号越多中奖几率越高哦~</view>
-					 </view>
-					 <view class="pNLeftRight" style="float:right;" catchtap="isMySignNumPopupfun" data-ind='1'>我的签号></view>
+			 <view class="percentageNum" wx:if='{{infoLottoList.length!=0}}' catchtap="isMySignNumPopupfun" data-ind='1'>
+          <view class="pNLeftRight">我的签号</view>
+          <view class="pNLeftCenterTxt">签号越多,中奖几率越高</view>
+          <view class="pNLeftNum">{{infoLottoList.length}}个签号  ></view>
 			 </view>
+
 		</view>
-		<view style="padding:0 20rpx 25rpx;">
-				<view class="titlebStrategy">
-					<text style="float:left;">获取签号</text>
-					<text style="float:right;" catchtap="signatureStrategy">获取签号攻略></text>
-				</view>
-				<view class="eveStrBox">
-					<view class="eveStrMode">
-							<view class="eveStrModeTxt">每日签到</view>
-							<text class="eveStrModeTxt">签到成功\n获得签号+1</text>
-							
 
-							<view class="eSMbut" wx:if='{{!forceGetLotto || infoActivity.status == 3}}' catchtap="regPromptBox" style="background:#9B9999;margin: 40rpx auto 0;">
-							   <block wx:if='{{lottoGetInfo.isSignLotto}}'>去签到</block>
-								 <block wx:else>已签到</block>							
-							</view>
-							<view class="eSMbut" wx:else catchtap="{{lottoGetInfo.isSignLotto?'mywallet':''}}" style="{{lottoGetInfo.isSignLotto?'':'background:#9B9999;'}}margin: 40rpx auto 0;">
-							   <block wx:if='{{lottoGetInfo.isSignLotto}}'>去签到</block>
-								 <block wx:else>已签到</block>
-							</view>
-
-
-							<view class="eveStrModeTxt" style="padding:10rpx 0 0 0;">今日获得:<text style="color:#ff2742;">{{lottoGetInfo.signLottoNumber}}/1</text></view>
-					</view>
-					<view class="eveStrMode">
-							<view class="eveStrModeTxt" catchtap="{{!forceGetLotto || infoActivity.status == 3?'regPromptBox':'exchangeSmoke'}}">参与抽盒</view>
-							<text class="eveStrModeTxt" catchtap="{{!forceGetLotto || infoActivity.status == 3?'regPromptBox':'exchangeSmoke'}}">每抽一盒\n可兑换签号数+1</text>
-
-							<block wx:if='{{!forceGetLotto || infoActivity.status == 3}}'>
-								<view class="eSMbut" class="exchangeSmoke" catchtap="regPromptBox">点击兑换</view>
-								<view class="eSMbut" style="margin:0 auto 0;background:#9B9999;" catchtap="regPromptBox">去抽盒</view>							
-							</block>
-							<block wx:else>
-								<view class="eSMbut" class="exchangeSmoke" catchtap="exchangeSmoke">点击兑换</view>
-								<view class="eSMbut" style="margin:0 auto 0;" catchtap="jumpsmoke">去抽盒</view>							
-							</block>
-
-
-							<view class="eveStrModeTxt" style="padding:10rpx 0 0 0;">可兑换签号数:<text style="color:#ff2742;">{{lottoGetInfo.blindBoxNumber}}</text></view>	
-					</view>
-					<view class="eveStrMode">
-							<view class="eveStrModeTxt">好友助力</view>
-              <text class="eveStrModeTxt">每邀{{lottoGetInfo.helpUserNumber}}人签号+1\n邀请进度({{lottoGetInfo.thisTimeUserNumber}}/{{lottoGetInfo.helpUserNumber}})</text>
-
-							<view class="eSMbut" wx:if='{{!forceGetLotto || infoActivity.status == 3}}' catchtap="regPromptBox" style="background:#9B9999;margin: 40rpx auto 0;">去邀请</view>
-
-							<view class="eSMbut" wx:else style="{{lottoGetInfo.isFriendHelp?'':'background:#9B9999;'}}margin: 40rpx auto 0;">去邀请<block wx:if='{{is_share_but}}'><button wx:if='{{iftriosorand}}' style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' data-form='2' open-type="share"></button><view wx:else style="width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;" catchtap="sharefriend"></view></block></view>
-
-
-							<!-- <view style="background:#BEBEBE;width:180rpx;border-radius: 8rpx;margin:14rpx auto 0;padding:8rpx 0;" class="eveMtXtxt">
-							   <view>每邀{{lottoGetInfo.helpUserNumber}}人得一签号</view>
-								 <view class="eveMtXtxtA"></view>	
-								 <text>({{lottoGetInfo.thisTimeUserNumber}}/{{lottoGetInfo.helpUserNumber}})</text>			     
-							</view>
-							<view class="eSMbut" wx:if='{{!forceGetLotto || infoActivity.status == 3}}' catchtap="regPromptBox" style="background:#9B9999;margin:27rpx auto 0;">去邀请</view>
-
-							<view class="eSMbut" wx:else style="{{lottoGetInfo.isFriendHelp?'':'background:#9B9999;'}}margin:27rpx auto 0;">去邀请<block wx:if='{{is_share_but}}'><button wx:if='{{iftriosorand}}' style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' data-form='2' open-type="share"></button><view wx:else style="width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;" catchtap="sharefriend"></view></block></view> -->
-
-							<view class="eveStrModeTxt" style="padding:10rpx 0 0 0;">今日可获得数:<text style="color:#ff2742;">{{lottoGetInfo.friendHelpNumber}}/{{lottoGetInfo.friendHelpTotalLotto}}</text></view>
-					</view>
-				</view>		
-		</view>
 
     <!-- 规则 -->
 	  <block wx:if="{{brandRule!=''}}">
@@ -302,6 +236,11 @@
 	</view>
 	<view class="drawLotsBut" catchtap="payMaskFun" wx:elif='{{infoLottoList.length==0 && (infoActivity.isCommandActivity || infoActivity.joinMothed == "payTicket" || !is_share_but)}}'>报名抽选</view>
 
+	<view class="drawLotsBut" catchtap="signatureStrategy" wx:elif='{{infoActivity.status==2}}'>{{infoLottoList.length==0?'报名抽选':'获取更多签号'}}</view>
+
+
+
+
 	<view style='width:100%;height:130rpx;background:#fff;border-bottom:1px solid #f9f7f7;' wx:if='{{infoGoods.is_on_sale==1||infoGoods.isShowBox}}' catchtap='jumpdetail' data-is_blind_box='{{infoGoods.is_blind_box}}'>
 		<image src='{{infoGoods.goods_thumb}}' style='display:block;width:110rpx;height:110rpx;float:left;margin:11rpx;' mode='aspectFit'></image>
 		<view style='width:600rpx;height:110rpx;float:left;position:relative;margin-top:10rpx;'>
@@ -366,6 +305,78 @@
       </view>
     </view>
   </view>
+
+		<view style="padding:0 20rpx 50rpx;position:absolute;left: 0;bottom: 0;width: 710rpx;background: #fff;">
+				<view class="titlebStrategy">
+				    获得签号即报名抽选成功
+					<!-- <text style="float:left;">获取签号</text>
+					<text style="float:right;" catchtap="signatureStrategy">获取签号攻略></text> -->
+				</view>
+				<view class="eveStrBox">
+					<view class="eveStrMode">
+							<view class="eveStrModeTxt">每日签到</view>
+							<text class="eveStrModeTxt">签到成功\n获得签号+1</text>
+							
+
+							<view class="eSMbut" wx:if='{{!forceGetLotto || infoActivity.status == 3}}' catchtap="regPromptBox" style="background:#9B9999;margin: 40rpx auto 0;">
+							   <block wx:if='{{lottoGetInfo.isSignLotto}}'>去签到</block>
+								 <block wx:else>已签到</block>							
+							</view>
+							<view class="eSMbut" wx:else catchtap="{{lottoGetInfo.isSignLotto?'mywallet':''}}" style="{{lottoGetInfo.isSignLotto?'':'background:#9B9999;'}}margin: 40rpx auto 0;">
+							   <block wx:if='{{lottoGetInfo.isSignLotto}}'>去签到</block>
+								 <block wx:else>已签到</block>
+							</view>
+
+
+							<view class="eveStrModeTxt" style="padding:10rpx 0 0 0;">今日获得:<text style="color:#ff2742;">{{lottoGetInfo.signLottoNumber}}/1</text></view>
+					</view>
+					<view class="eveStrMode">
+							<view class="eveStrModeTxt" catchtap="{{!forceGetLotto || infoActivity.status == 3?'regPromptBox':'exchangeSmoke'}}">参与抽盒</view>
+							<text class="eveStrModeTxt" catchtap="{{!forceGetLotto || infoActivity.status == 3?'regPromptBox':'exchangeSmoke'}}">每抽一盒\n可兑换签号数+1</text>
+
+							<block wx:if='{{!forceGetLotto || infoActivity.status == 3}}'>
+							  <view class="exchjump">
+                    <view class="exchjumpeve" style="background:#9B9999;" catchtap="regPromptBox">兑换</view>
+ 										<view class="exchjumpeve" style="background:#9B9999;" catchtap="regPromptBox">抽盒</view>
+								</view>	
+								<!-- <view class="eSMbut" class="exchangeSmoke" catchtap="regPromptBox">点击兑换</view>
+								<view class="eSMbut" style="margin:0 auto 0;background:#9B9999;" catchtap="regPromptBox">去抽盒</view>		 -->
+							</block>
+							<block wx:else>
+							  <view class="exchjump">
+                    <view class="exchjumpeve" catchtap="exchangeSmoke">兑换</view>
+ 										<view class="exchjumpeve" catchtap="jumpsmoke">抽盒</view>
+								</view>
+								<!-- <view class="eSMbut" class="exchangeSmoke" catchtap="exchangeSmoke">点击兑换</view>
+								<view class="eSMbut" style="margin:0 auto 0;" catchtap="jumpsmoke">去抽盒</view>							 -->
+							</block>
+
+
+							<view class="eveStrModeTxt" style="padding:10rpx 0 0 0;">可兑换签号数:<text style="color:#ff2742;">{{lottoGetInfo.blindBoxNumber}}</text></view>	
+					</view>
+					<view class="eveStrMode">
+							<view class="eveStrModeTxt">好友助力</view>
+              <text class="eveStrModeTxt">每邀{{lottoGetInfo.helpUserNumber}}人签号+1\n邀请进度({{lottoGetInfo.thisTimeUserNumber}}/{{lottoGetInfo.helpUserNumber}})</text>
+
+							<view class="eSMbut" wx:if='{{!forceGetLotto || infoActivity.status == 3}}' catchtap="regPromptBox" style="background:#9B9999;margin: 40rpx auto 0;">去邀请</view>
+
+							<view class="eSMbut" wx:else style="{{lottoGetInfo.isFriendHelp?'':'background:#9B9999;'}}margin: 40rpx auto 0;">去邀请<block wx:if='{{is_share_but}}'><button wx:if='{{iftriosorand}}' style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' data-form='2' open-type="share"></button><view wx:else style="width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;" catchtap="sharefriend"></view></block></view>
+
+
+							<!-- <view style="background:#BEBEBE;width:180rpx;border-radius: 8rpx;margin:14rpx auto 0;padding:8rpx 0;" class="eveMtXtxt">
+							   <view>每邀{{lottoGetInfo.helpUserNumber}}人得一签号</view>
+								 <view class="eveMtXtxtA"></view>	
+								 <text>({{lottoGetInfo.thisTimeUserNumber}}/{{lottoGetInfo.helpUserNumber}})</text>			     
+							</view>
+							<view class="eSMbut" wx:if='{{!forceGetLotto || infoActivity.status == 3}}' catchtap="regPromptBox" style="background:#9B9999;margin:27rpx auto 0;">去邀请</view>
+
+							<view class="eSMbut" wx:else style="{{lottoGetInfo.isFriendHelp?'':'background:#9B9999;'}}margin:27rpx auto 0;">去邀请<block wx:if='{{is_share_but}}'><button wx:if='{{iftriosorand}}' style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' data-form='2' open-type="share"></button><view wx:else style="width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;" catchtap="sharefriend"></view></block></view> -->
+
+							<view class="eveStrModeTxt" style="padding:10rpx 0 0 0;">今日可获得数:<text style="color:#ff2742;">{{lottoGetInfo.friendHelpNumber}}/{{lottoGetInfo.friendHelpTotalLotto}}</text></view>
+					</view>
+				</view>		
+		</view>
+
 </view>
 <!-- 抽选规则 -->
 <view class="popUpBox" catchtouchmove="true" wx:if="{{isChRulePopup}}" catchtap="drawRulesFun">
@@ -377,7 +388,7 @@
   </view>
 </view>
 <!-- 参与成功/兑换成功/兑换失败 -->
-<view class="popUpBox" catchtouchmove="true" wx:if="{{isSignPopup}}" catchtap="isSignPopupFun">
+<view class="popUpBox" catchtouchmove="true" wx:if="{{isSignPopup}}" catchtap="isSignPopupFun" style="z-index:110;">
   <view class="joinContentWrap"> 
 	  <block wx:if='{{exchangeReturn==1}}'>
 				<text>兑换成功</text>

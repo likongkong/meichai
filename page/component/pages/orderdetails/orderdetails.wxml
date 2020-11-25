@@ -657,7 +657,7 @@
                    </view>
  
  
-                   <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0}}'>
+                   <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0&&isShareGood}}'>
                       <button  open-type="share" class='butshare'></button>
                       分享好友
                    </view>
@@ -697,7 +697,7 @@
                       <view style='width:100%;height:100%;position: relative;'  data-qrcode='{{comdata.qrcode}}' data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具' data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png' data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
                    </view>
  
-                   <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0}}'>
+                   <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0&&isShareGood}}'>
                       <button  open-type="share" class='butshare'></button>
                       分享好友
                    </view>  
@@ -724,7 +724,7 @@
                       <view style='width:100%;height:100%;position: relative;'  data-qrcode='{{comdata.qrcode}}' data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具' data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png' data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
                    </view>
 
-                   <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0}}'>
+                   <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0&&isShareGood}}'>
                       <button  open-type="share" class='butshare'></button>
                       分享好友
                    </view> 
@@ -747,7 +747,7 @@
                       <view style='width:100%;height:100%;position: relative;'  data-qrcode='{{comdata.qrcode}}' data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具' data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png' data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
                    </view>
  
-                   <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0}}'>
+                   <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0&&isShareGood}}'>
                       <button  open-type="share" class='butshare'></button>
                       分享好友
                    </view>  
@@ -766,7 +766,7 @@
                       <view style='width:100%;height:100%;' wx:if='{{comdata.showOrder==3||comdata.showOrder==4}}'  data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}' data-cover='{{comdata.cover}}' data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>上传晒单截图</view>
  
                    </view>
-                   <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0}}'>
+                   <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0&&isShareGood}}'>
                       <button  open-type="share" class='butshare'></button>
                       分享好友
                    </view>
@@ -793,7 +793,7 @@
                     <view class='totalmoncrightcel' data-oid='{{comdata.oid}}' bindtap='confirmationofreceipt'>确认收货</view>
                    <view class='totalmoncrightcel'  data-oid='{{comdata.oid}}' data-gcover='{{comdata.gcover}}' bindtap='lookatthelogistics' style='margin-right:10rpx;position: relative;'>查看物流</view>             
                       
-                   <view class='totalmoncright sharebox' style='margin-right:10rpx;'  wx:if='{{comdata.is_invite==0}}'>
+                   <view class='totalmoncright sharebox' style='margin-right:10rpx;'  wx:if='{{comdata.is_invite==0&&isShareGood}}'>
                       <button  open-type="share" class='butshare'></button>
                       分享好友
                    </view>
@@ -812,7 +812,7 @@
                       <view style='width:100%;height:100%;position: relative;'  data-qrcode='{{comdata.qrcode}}' data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具' data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png' data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
                    </view>
 
-                   <view class='totalmoncright sharebox'  wx:if='{{comdata.is_invite==0}}'>
+                   <view class='totalmoncright sharebox'  wx:if='{{comdata.is_invite==0&&isShareGood}}'>
                       <button  open-type="share" class='butshare'></button>
                       分享好友
                    </view>
@@ -827,7 +827,7 @@
                </view>
               <!--   已取消订单  -->
                <view  style='min-height:1rpx;width:94%;padding: 0 3% 10rpx;overflow:hidden;' wx:if='{{comdata.status==8&&comdata.order_type!=7}}'>
-                   <view class='totalmoncright sharebox'  wx:if='{{comdata.is_invite==0}}'>
+                   <view class='totalmoncright sharebox'  wx:if='{{comdata.is_invite==0&&isShareGood}}'>
                       <button  open-type="share" class='butshare'></button>
                       分享好友
                    </view>
@@ -847,7 +847,7 @@
               <!--   拆单失败  -->
                <view class='totalmoncon' wx:if='{{(comdata.status==10||comdata.status==11) && comdata.order_type==2}}'>
                    <view class='totaltittrfai'>付款将会原路返回到您的支付账号中</view>  
-                   <view class='totalmoncright sharebox' style='margin-right:10rpx;'  wx:if='{{comdata.is_invite==0}}'>
+                   <view class='totalmoncright sharebox' style='margin-right:10rpx;'  wx:if='{{comdata.is_invite==0&&isShareGood}}'>
                       <button  open-type="share" class='butshare'></button>
                       分享好友
                    </view>  
@@ -855,7 +855,7 @@
                </view>    
                 <view class='totalmoncon' wx:if='{{comdata.status==7}}'>
                    <view class='totaltittrfai'>付款将会原路返回到您的支付账号中</view>
-                   <view class='totalmoncright sharebox' style='margin-right:10rpx;' wx:if='{{comdata.is_invite==0}}'>
+                   <view class='totalmoncright sharebox' style='margin-right:10rpx;' wx:if='{{comdata.is_invite==0&&isShareGood}}'>
                       <button  open-type="share" class='butshare'></button>
                       分享好友
                    </view>

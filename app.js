@@ -108,7 +108,9 @@ App({
     //搜索关键词跳转对应列表数据
     searchSkipKeyword:[],
     //热门搜索关键词
-    hotKeyword:[]
+    hotKeyword:[],
+    // 不能分享 商品gid
+    notAllowShareGoodsId:''
   },
   //一番赏队列倒计时
   // yifanshangIsInQueueFun(time){
@@ -200,6 +202,7 @@ App({
                   _this.signindata.automat = res.data.Info.automat ? res.data.Info.automat : { isOpen: false, times: 0, title: "" };
                   _this.signindata.automattitle = res.data.Info.automat ? res.data.Info.automat.title : '';
 
+                  _this.signindata.notAllowShareGoodsId = res.data.Info.notAllowShareGoodsId || [];
                   
                   _this.signindata.isBlindBoxDefaultAddress = res.data.Info.address.isBlindBoxDefaultAddress || false;
 

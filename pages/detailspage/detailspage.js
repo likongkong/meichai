@@ -2419,7 +2419,17 @@ Page({
   },
   onLoadfun:function(){
     var _this = this;
+
+    var isShareGood = true;
+    if(app.signindata.notAllowShareGoodsId&&app.signindata.notAllowShareGoodsId.length!=0){
+      if(app.signindata.notAllowShareGoodsId.indexOf(_this.data.gid) > -1){
+        isShareGood = false;
+      }
+    };
+    
+
     _this.setData({
+      isShareGood:isShareGood,
       loginid: app.signindata.loginid,
       uid: app.signindata.uid,
       openid:app.signindata.openid,
@@ -2710,7 +2720,8 @@ Page({
             deductRatio:res.data.Ginfo.deductRatio,
             isDeduct:res.data.Ginfo.isDeduct,
             isUseBlindboxMoney:res.data.Ginfo.isDeduct?true:false,
-            isDeductNum:res.data.Ginfo.isDeduct&&_this.data.blindboxMoney!=0?1:0
+            isDeductNum:res.data.Ginfo.isDeduct&&_this.data.blindboxMoney!=0?1:0,
+            isCanShare:res.data.Ginfo.isCanShare
           });
           if (_this.data.is_exhibition==1||(_this.data.is_exhibition!=1&&_this.data.brandId>0)){
             // 展会
@@ -2724,6 +2735,15 @@ Page({
           _this.getSnapshot();
           // 生成图片
           // _this.sharefrind();
+          // 是否能分享
+          if(!res.data.Ginfo.isCanShare){
+            console.log('不能分享')
+            wx.hideShareMenu();
+            _this.setData({isShareFun : false});
+          };
+
+
+
         };
         if (res.data.ReturnCode == 100) {
           app.showToastC('该商品已下架');
@@ -2763,6 +2783,9 @@ Page({
     }
   },  
   onLoad: function (options) { 
+
+
+
     console.log(options)
     this.data.gdt_vid = options.gdt_vid||'';
     this.data.weixinadinfo = options.weixinadinfo||'';
