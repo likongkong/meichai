@@ -28,7 +28,7 @@
 			<block wx:if='{{employList.length>0}}'>{{employList.length}}人正在选盒</block>
 			<block wx:if='{{activity.aheadUser>0}}'>您前面有{{activity.aheadUser}}人排队</block>
 		</view>
- 
+  
 		<view wx:if='{{multipleHide.length>0}}' style="position:absolute;top:0;right:0rpx;" catchtap='iftrdetailpagen'>
 			<view wx:for="{{multipleHide}}" wx:key='key' style="width:95rpx;float:right;position:relative;margin:10rpx 10rpx 0 0;text-align: center;">
 				<block>

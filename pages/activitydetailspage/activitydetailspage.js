@@ -2007,7 +2007,7 @@ closefrindcommoni:function(){
 
           _this.setData({
             commoddata: arrlist,
-            subscribedata: res.data.Info.subscribe,
+            subscribedata: res.data.Info.subscribe || '',
             cart_id: arrlist.cart_id || '',
             share_desc: share_desc,
             swiperarr: swiperarr,
@@ -2681,7 +2681,8 @@ closefrindcommoni:function(){
             payment: res.data.Info.amount,
             redpinputdata:'',  // 红包口令
             redpinputdataiftr: false, // 红包口令
-            subscribedata: res.data.Info.subscribe,  // 模版类型  
+            subscribedata: res.data.Info.subscribe || '',  // 模版类型  
+            suboformola:false
           }); 
           if (res.data.Info.tempChance){
             // 透视卡数据

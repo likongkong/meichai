@@ -101,8 +101,26 @@
 
 
     <!-- 商品详情 -->
-		<block  wx:if="{{true}}">
+		<block  wx:if="{{infoGoods.goods_desc}}">
 				<view class="nltRrule">商品详情</view>
+        <!-- 推荐 -->
+				<view style='width:710rpx;height:130rpx;background:#fff;border-bottom:1px solid #f9f7f7;margin:20rpx auto 0;' wx:if='{{infoGoods.is_on_sale==1||infoGoods.isShowBox}}' catchtap='jumpdetail' data-is_blind_box='{{infoGoods.is_blind_box}}'>
+					<image src='{{infoGoods.goods_thumb}}' style='display:block;width:110rpx;height:110rpx;float:left;margin:11rpx;' mode='aspectFit'></image>
+					<view style='width:575rpx;height:110rpx;float:left;position:relative;margin-top:10rpx;'>
+						<view class='multilineellipsis' style='height:58rpx;width:425rpx;font-size:28rpx;color:#666;line-height:30rpx;'>{{infoGoods.goods_name}}</view>
+						<view style='width:100%;height:40rpx;line-height:40rpx;font-size:28rpx;margin-top:10rpx;'>
+							<block wx:if='{{infoGoods.goods_type==3}}'>定金￥{{infoGoods.promote_price}}</block>
+							<block wx:else>￥{{infoGoods.shopPrice}}</block>
+							<text style='font-size:22rpx;color:#fff;margin-left:15rpx;background:#1890ff;border-radius:7rpx;position:relative;top:-2rpx;padding:3rpx 6rpx;' wx:if='{{infoGoods.is_blind_box&&infoGoods.isRecycle&&infoGoods.recycleRatio}}'>{{infoGoods.recycleRatio}}折回收</text>
+						</view>
+						<view style='width:130rpx;height:46rpx;background:#ff2742;font-size:24rpx;color:#fff;text-align:center;line-height:46rpx;border-radius:10rpx;position:absolute;top:0;bottom:0;right:0;margin:auto 0;z-index:1;'>
+							<block wx:if='{{infoGoods.isShowBox}}'>原价拼明盒</block>
+							<block wx:elif='{{infoGoods.is_blind_box}}'>在线抽盒机</block>
+							<block wx:else>直接购买</block>
+						</view>
+					</view>
+				</view>
+
 				<view class="nltRruleTxt">
 							<rich-text style="font-size:0;" nodes="{{infoGoods.goods_desc}}"></rich-text>	
 				</view>		
@@ -214,7 +232,7 @@
 
 
 
-<view style='width:100%;position:fixed;left:0;bottom:110rpx;z-index:5;'>
+<view style='width:100%;position:fixed;left:0;bottom:110rpx;z-index:5;background:#fff;padding-top:20rpx;'>
 	<!-- 底部报名按钮 -->
 	<view class="drawLotsButRec" wx:if='{{infoActivity.isWinner}}'>
 		<block wx:if='{{awardstatus == 2}}'>
@@ -239,25 +257,6 @@
 	<view class="drawLotsBut" catchtap="signatureStrategy" wx:elif='{{infoActivity.status==2}}'>{{infoLottoList.length==0?'报名抽选':'获取更多签号'}}</view>
 
 
-
-
-	<view style='width:100%;height:130rpx;background:#fff;border-bottom:1px solid #f9f7f7;' wx:if='{{infoGoods.is_on_sale==1||infoGoods.isShowBox}}' catchtap='jumpdetail' data-is_blind_box='{{infoGoods.is_blind_box}}'>
-		<image src='{{infoGoods.goods_thumb}}' style='display:block;width:110rpx;height:110rpx;float:left;margin:11rpx;' mode='aspectFit'></image>
-		<view style='width:600rpx;height:110rpx;float:left;position:relative;margin-top:10rpx;'>
-			<view class='multilineellipsis' style='height:58rpx;width:450rpx;font-size:28rpx;color:#666;line-height:30rpx;'>{{infoGoods.goods_name}}</view>
-			<view style='width:100%;height:40rpx;line-height:40rpx;font-size:28rpx;margin-top:10rpx;'>
-			   <block wx:if='{{infoGoods.goods_type==3}}'>定金￥{{infoGoods.promote_price}}</block>
-				 <block wx:else>￥{{infoGoods.shopPrice}}</block>
-				 <text style='font-size:22rpx;color:#fff;margin-left:15rpx;background:#1890ff;border-radius:7rpx;position:relative;top:-2rpx;padding:3rpx 6rpx;' wx:if='{{infoGoods.is_blind_box&&infoGoods.isRecycle&&infoGoods.recycleRatio}}'>{{infoGoods.recycleRatio}}折回收</text>
-			</view>
-			<view style='width:130rpx;height:46rpx;background:#ff2742;font-size:24rpx;color:#fff;text-align:center;line-height:46rpx;border-radius:10rpx;position:absolute;top:0;bottom:0;right:10rpx;margin:auto 0;z-index:1;'>
-			   <block wx:if='{{infoGoods.isShowBox}}'>原价拼明盒</block>
-				 <block wx:elif='{{infoGoods.is_blind_box}}'>在线抽盒机</block>
-				 <block wx:else>直接购买</block>
-			</view>
-		</view>
-	</view>
- 
 </view>
 <!-- 底部导航 -->
 <bnavigation isProduce='{{isProduce}}' isChar='{{false}}'></bnavigation>

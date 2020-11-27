@@ -259,8 +259,6 @@
    bottom: 120rpx;
    z-index: 10; */
 
-
-
    margin:0 auto 20rpx;
    width: 520rpx;
    height: 80rpx;
@@ -270,6 +268,7 @@
    color: #fff;
    background:#EA4F57;
    border-radius: 50rpx;
+   box-shadow: 5px 5px 10px 0px #999;
 }
 .drawLotsButRec{
     /* position: fixed;
@@ -284,7 +283,8 @@
     font-size: 24rpx;
     color: #fff;
     background:#EA4F57;
-    border-radius: 50rpx;    
+    border-radius: 50rpx;  
+    box-shadow: 5px 5px 10px 0px #999;  
 }
 .drawLBRTop{
     padding: 10rpx 0 4rpx 0;
