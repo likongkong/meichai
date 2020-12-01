@@ -251,23 +251,19 @@ page{
 .addputforward{
   width: 100%;
   padding-top: 8rpx;
-  height: 88rpx;
+  padding-bottom: 8rpx;
+  /* height: 88rpx; */
   border-bottom:1rpx solid #e5e5e5;
+  overflow: hidden;
 }
-.apforleft{
-  width: 50%;
+.apforWrap{
+  width: 100%;
   height: 80rpx;
-  float: left;
-  border-right: 1rpx solid #bbbbbb;
 }
-.apforright{
-  width: 48%;
-  height: 80rpx;
-  float: right;
-}
+
 .apforlleft{
   float: left;
-  width: 230rpx;
+  width: 570rpx;
   line-height: 80rpx;
   color: #333;
 }
@@ -286,7 +282,6 @@ page{
   width: 230rpx;
   color:#fbb11b;  
   display: flex;
-  justify-content: center;
   align-items: center;  
 }
 .cgoldcoinonexin{

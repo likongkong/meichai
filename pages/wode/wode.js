@@ -257,9 +257,11 @@ Page({
               // 幸运值
               luckyValue: res.data.Info.blindbox_lucky||0,
               // 抽盒金
-              blindbox_money:res.data.Info.blindbox_money||0
+              blindbox_money:res.data.Info.blindbox_money||0,
+              // 限时抽盒金
+              tempBlindboxMoney:res.data.Info.tempBlindboxMoney||0,
             });
-            app.signindata.blindboxMoney = res.data.Info.blindbox_money||0;
+            app.signindata.tempBlindboxMoney = res.data.Info.tempBlindboxMoney||0;
             _this.data.after_sale = res.data.Info.after_sale || 0;// 售后数
           };
         // 判断非200和登录

@@ -101,17 +101,31 @@
             </view>  
         </view>
         <view class='addputforward'>
-           <view class='apforleft' catchtap='wodesblist' style='position:relative;'>
-                 <view class='apforlleft comapforlr specialellipsis'>抽盒金<text style="color:#ff3c4d;padding-left:8rpx;">{{blindbox_money}}</text></view>
-                <view class='apforlright comapforlr'>使用</view>
+           <view class='apforWrap' catchtap='wodesblist' style='position:relative;'>
+                <view class='apforlleft comapforlr specialellipsis'>
+                    抽盒金<text style="color:#ff3c4d;padding-left:8rpx;">{{blindbox_money}}</text> 
+                    <block wx:if="{{tempBlindboxMoney!=0}}">
+                        <text style="color:#ff3c4d;font-size:24rpx">（ 限时抽盒金: </text> 
+                        <text style="color:#ff3c4d;font-size:24rpx">{{tempBlindboxMoney}} ）</text>
+                    </block>
+                </view>
+                <view class='whbocndr' style='height:80rpx;line-height:80rpx;color:#ff3c4d;padding:0 30rpx 0 70rpx;font-size:28rpx;'>
+                    使用
+                    <image class='whwddimgtit' src='../images/icon_in.png'></image>
+                </view>  
                 <!-- <view class='apforlleft comapforlr specialellipsis'>{{putforwardmoney}}元</view>
                 <view class='apforlright comapforlr'>提现</view> -->
            </view>
-           <view class='apforright' bindtap='mywallet' style='position:relative;'>
+        </view>
+        <view class='addputforward'>
+           <view class='apforWrap' bindtap='mywallet' style='position:relative;'>
                  <view class='apforrleft comapforlr specialellipsis'>
-                    <image src='../images/cgoldcoin1.png' class='cgoldcoinonexin'></image>X{{point}}                     
+                    <text style="color: #333;"> 拆币 </text><image src='../images/cgoldcoin1.png' class='cgoldcoinonexin'></image>X{{point}}                     
                  </view>
-                 <view class='apforlright comapforlr'>签到</view> 
+                 <view class='whbocndr' style='height:80rpx;line-height:80rpx;color:#ff3c4d;padding:0 30rpx 0 70rpx;font-size:28rpx;'>
+                    签到
+                    <image class='whwddimgtit' src='../images/icon_in.png'></image>
+                </view> 
            </view>
         </view>
     </view> 
