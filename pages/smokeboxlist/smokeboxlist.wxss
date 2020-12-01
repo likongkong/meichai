@@ -128,7 +128,7 @@ page {
   opacity: 0.9;
   position: absolute;
   top: 10rpx;
-  right: 20rpx;
+  right: 48rpx;
   color: #fff;
   border-radius: 7rpx;
   font-size: 25rpx;
@@ -385,6 +385,14 @@ page {
   color: #fff;
   padding:0 4rpx;
   border-radius: 6rpx;
+}
+
+.labelstyleImg{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width:60rpx;
+  height:60rpx;
 }
 
 

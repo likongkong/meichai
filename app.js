@@ -1073,7 +1073,7 @@ App({
 //  index 首页
 //  wode 我的
 //  personaldata 个人资料
-//  modifythenickname 万圣活动
+
 //  information  消息中心
 //  addressmanagement  收货地址
 //  orderdetails  订单详情
@@ -1152,3 +1152,6 @@ App({
 // aRewardHistory 一番赏历史
 
 // halloweenparty 万圣节活动组件
+
+// calendarList 日历列表
+// modifythenickname 日历详情
