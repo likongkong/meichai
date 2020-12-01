@@ -101,6 +101,8 @@ App({
     mergePicImg:'',
     // 抽盒金
     blindboxMoney:0,
+    // 限时抽盒金
+    tempBlindboxMoney:0,
     // 是否显示万圣节悬浮标签
     isHalloween:false,
     halloweenScore:0,
@@ -178,7 +180,9 @@ App({
 
                   _this.signindata.isTodaySign = res.data.Info.isTodaySign;
                   // 抽盒金
-                  _this.signindata.blindboxMoney = res.data.Info.blindboxMoney || 0
+                  _this.signindata.blindboxMoney = res.data.Info.blindboxMoney || 0;
+                  // 限时抽盒金
+                  _this.signindata.tempBlindboxMoney = res.data.Info.tempBlindboxMoney || 0
 
                   _this.signindata.spreadEntry = res.data.List ? res.data.List.spreadEntry : false || false;
                   // _this.signindata.index_ela_fra = true;

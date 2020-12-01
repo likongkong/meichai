@@ -974,7 +974,8 @@ Page({
                             _this.setData({
                               blindboxMoney: res.data.Info.blindbox_money || ""
                             });
-                            app.signindata.blindboxMoney = res.data.Info.blindbox_money || ""
+                            app.signindata.blindboxMoney = res.data.Info.blindbox_money || "";
+                            app.signindata.tempBlindboxMoney = res.data.Info.tempBlindboxMoney || "";
                           };
                         }
                       })
