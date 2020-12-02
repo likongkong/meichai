@@ -16,7 +16,9 @@ Page({
     tgabox: false,
     signinlayer:true,
     windowHeight: app.signindata.windowHeight - 65 - wx.getStorageSync('statusBarHeightMc') || 0,
-
+    tabIndex:0,
+    ispopupMask:false,
+    isShowSearch:false
 
   },
 
@@ -193,5 +195,10 @@ Page({
    */
   onShareAppMessage: function () {
     
+  },
+  showSearchFun(){
+    this.setData({
+      isShowSearch:true
+    })
   }
 })

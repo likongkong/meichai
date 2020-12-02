@@ -2,3 +2,368 @@
 @import "../../../../common/newcoupon.wxss";
 @import "../../../../common/tabbar.wxss";
 
+page{
+  padding-bottom: 230rpx;
+}
+
+.swiperWrap{
+  width: 100%;
+}
+.swiperWrap swiper{
+  height: 340rpx;
+}
+.swiperItem{
+  width: 100%;
+}
+.swiperItem>view{
+  width: 710rpx;
+  margin: 10rpx 20rpx;
+  position: relative;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+.swiperItemBanner{
+  width: 100%;
+  height: auto;
+  display: block;
+} 
+.swiperItemBrandWrap{
+  width: 100%;
+  height: 60rpx;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,.5);
+  border-radius: 8rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15rpx;
+  box-sizing: border-box;
+}
+.swiperItemBrandInfo{
+  display: flex;
+  align-items: center;
+}
+.swiperItemBrandLogo{
+  width: 50rpx;
+  height: auto;
+  border-radius: 50rpx;
+  margin-right: 20rpx;
+  display: block;
+}
+.swiperItemBrandName{
+  font-size: 28rpx;
+  color: #fff;
+}
+.swiperItemBrandVote{
+  font-size: 28rpx;
+  color: #fff;
+}
+
+.content{
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+
+.elsearch{
+  width: 100%;
+  height:90rpx;
+  background: #f5f6fa;
+  margin:15rpx 0;
+}
+.elsearchch{
+  width: 100%;
+  height:100%;
+  background: #fff;
+  border-radius: 200rpx;
+}
+.elserarchimg{
+  width: 50rpx;
+  height: 50rpx;
+  float: left;
+  margin: 20rpx;
+}
+.elserbotom{
+  width: 90rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  border-radius: 40rpx;
+  font-size: 24rpx;
+  color: #fff;
+  background: #50a3fd;
+  float: right;
+  margin: 20rpx;
+}
+.elinputbut{
+  height: 100%;
+  width: 480rpx;
+  float: left;
+  font-size: 24rpx;
+}
+
+
+.tabNav{
+  width: 100%;
+  position: relative;
+}
+.tabNav .active{
+  color: #E94F57;
+}
+.tabNav text{
+  padding: 25rpx 20rpx;
+  font-size: 28rpx;
+  color: #000;
+  display: inline-block;
+}
+.tabNavssIcon{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100rpx;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.tabNavssIcon image{
+  width: 45rpx;
+  height: auto;
+}
+/* 全部 */
+.allCalendar{
+  width: 100%;
+}
+.calendarItem{
+  width: 345rpx;
+  display: inline-block;
+  position: relative;
+  margin-right: 20rpx;
+  margin-bottom: 30rpx;
+}
+.calendarItem:nth-child(2n){
+  margin-right: 0;
+}
+.calendarItemBanner{
+  width: 100%;
+  height: auto;
+  border-radius: 8rpx;
+  display: block;
+}
+.calendarItemInfo{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10rpx;
+  box-sizing: border-box;
+}
+.calendarItemInfo>view{
+  display: flex;
+  align-items: center;
+  padding: 15rpx 0;
+}
+.calendarItemInfo>view image{
+  width: 35rpx;
+  height: auto;
+  margin-right: 6rpx;
+}
+.calendarItemInfo>view text{
+  font-size: 24rpx;
+  color: #000;
+  display: inline-block;
+}
+.calendarItemBrand{
+  background: rgba(0,0,0,.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  padding: 4rpx 15rpx 4rpx 4rpx;
+  border-top-left-radius: 8rpx;
+  border-top-right-radius: 8rpx;
+  border-bottom-right-radius: 8rpx;
+}
+.calendarItemBrand image{
+  width: 40rpx;
+  height: auto;
+  display: inline-block;
+  margin-right: 5rpx;
+  border-radius: 40rpx;
+}
+.calendarItemBrand text{
+  font-size: 24rpx;
+  color: #fff;
+  display: inline-block;
+}
+/* 排行榜 */
+.rankingItem{
+  width: 100%;
+}
+.rankNum{
+  position: absolute;
+  top: 15rpx;
+  left: 15rpx;
+  width: 60rpx;
+  height: 60rpx;
+  background: rgba(0,0,0,.5);
+  text-align: center;
+  line-height: 60rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #fff;
+  border-radius: 6rpx;
+}
+.rankingItemWrap{
+  width: 100%;
+  position: relative;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+.rankingBanner{
+  width: 100%;
+  height: auto;
+  display: block;
+} 
+.rankingBrandWrap{
+  width: 100%;
+  height: 60rpx;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,.5);
+  border-radius: 8rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15rpx;
+  box-sizing: border-box;
+}
+.rankingBrandInfo{
+  display: flex;
+  align-items: center;
+}
+.rankingBrandLogo{
+  width: 50rpx;
+  height: auto;
+  border-radius: 50rpx;
+  margin-right: 20rpx;
+  display: block;
+}
+.rankingBrandName{
+  font-size: 28rpx;
+  color: #fff;
+}
+.rankingBrandVote{
+  font-size: 28rpx;
+  color: #fff;
+}
+.rankingTwoThree{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10rpx;
+}
+.rankingTwo{
+  width: 350rpx;
+  margin-right: 10rpx;
+}
+.rankingThree{
+  width: 350rpx;
+}
+.rankingOthers{
+  width: 100%;
+  display: flex;
+}
+.rankingOthers:last-child .rankingOthersR{
+  border: none;
+}
+.rankingOthersL{
+  width: 80rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.rankingOthersL image{
+  width: 40rpx;
+  height: auto;
+}
+.rankingOthersL text{
+  font-size: 28rpx;
+}
+.rankingOthersR{
+  width: 620rpx;
+  border-bottom: 2rpx solid #bbbbbb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+}
+.rankingOthersRLogo{
+  width: 60rpx;
+  height: auto;
+  border-radius:60rpx;
+}
+.rankingOthersR>view{
+  display: flex;
+  align-items: center;
+}
+.rankingOthersR>view image{
+  width: 40rpx;
+  height: auto;
+  margin-right: 20rpx;
+}
+.rankingOthersR>view text{
+  font-size: 24rpx;
+}
+
+.btn{
+  width: 450rpx;
+  height: 80rpx;
+  border-radius: 80rpx;
+  background-color: #E94F57;
+  color: #fff;
+  font-size: 30rpx;
+  text-align: center;
+  line-height: 80rpx;
+  position: fixed;
+  bottom: 130rpx;
+  left: 50%;
+  margin-left: -225rpx;
+}
+
+
+.popupMask{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.voteSucceed{
+  width: 300rpx;
+  height: 80rpx;
+  border-radius: 8rpx;
+  text-align: center;
+  line-height: 80rpx;
+  color: #000;
+  font-size: 28rpx;
+  background-color: #fff;
+}
+.voteFail{
+  width: 500rpx;
+  border-radius: 8rpx;
+  background-color: #fff;
+  padding: 25rpx 0;
+}
+.voteFail text{
+  display: block;
+  color: #000;
+  font-size: 28rpx;
+  text-align: center;
+}

@@ -213,7 +213,7 @@ Page({
       // url: "/page/component/pages/exhibitiondetail/exhibitiondetail?id=43161"
       // url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
       // url: "/page/secondpackge/pages/brandDetails/brandDetails?id=140"
-      url: "/pages/detailspage/detailspage?gid=35283"
+      // url: "/pages/detailspage/detailspage?gid=35283"
       // url: "/pages/smokebox/smokebox?gid=331671"
       // url: "/page/component/pages/playgrasslist/playgrasslist"
       // url: "/page/secondpackge/pages/detailSimgEffects/detailSimgEffects?gid=32852"
@@ -225,6 +225,7 @@ Page({
       // url: "/page/secondpackge/pages/shopsquaretrip/shopsquaretrip"
       // url: "/pages/modifythenickname/modifythenickname"
       // url: "/page/secondpackge/pages/articleList/articleList"
+      url: "/page/secondpackge/pages/calendarList/calendarList"
       // url: "/pages/sputforward/sputforward"
       // url: "/page/component/pages/limitlottery/limitlottery?id=201425",
 

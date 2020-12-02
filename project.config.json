@@ -40,12 +40,6 @@
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "condition": {
-    "search": {
-      "list": []
-    },
-    "conversation": {
-      "list": []
-    },
     "plugin": {
       "list": []
     },
@@ -96,6 +90,12 @@
           "name": "商品详情",
           "pathName": "pages/detailspage/detailspage",
           "query": "gid=34183",
+          "scene": null
+        },
+        {
+          "name": "展会日历",
+          "pathName": "page/secondpackge/pages/calendarList/calendarList",
+          "query": "gid=33056",
           "scene": null
         }
       ]
