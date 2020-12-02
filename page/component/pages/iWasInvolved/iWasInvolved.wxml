@@ -8,13 +8,13 @@
 <view class="iwashead">
    <view class="iwashtop">
 	    <text style="float:left;">我的投票</text>
-			<text style="float:right">查看更多></text>
+			<text style="float:right" catchtap="ballotboxfun">查看更多></text>
 	 </view>
 	 <scroll-view class="iwasscroll" scroll-x="true">
-	    <view class="iwasscrollEve" wx:for='{{text}}' wx:key='key'>
-			   <image class="iwassEveImg" src="https://cdn.51chaidan.com/images/spread/blindBox/a1606396898.png" mode="heightFix"></image>
-				 <view class="iwassEveTxt">
-				    <view class="iwassEveNum">我已投票:1</view>
+	    <view class="iwasscrollEve" wx:for='{{voteCalendarList}}' wx:key='key'>
+			   <image class="iwassEveImg" catchtap="jumpLeaflet" data-calendar_id='{{item.calendar_id}}' src="{{item.calendar_img}}" mode="heightFix"></image>
+				 <view class="iwassEveTxt" catchtap="votingInterface" data-brand_id='{{item.brand_id}}' data-calendar_id='{{item.calendar_id}}'>
+				    <view class="iwassEveNum">我已投票:{{item.number}}</view>
 						<image class="brandTicImg" mode='aspectFit' src="http://www.51chaidan.com/images/sign/calendar/vote.png"></image>
 				 </view>
 			</view>
@@ -22,58 +22,102 @@
 </view>
 
 <view class="iwasTitle">获取投票券</view>
-<view class="taskEve" wx:for='{{text}}' wx:key='key'>
-   <view class="taskEveLeft">
+
+<view class="taskEve">
+   <view class="taskEveLeft" catchtap="{{taskInfo.getDays?'evereceivefun':'subscrfun'}}" data-num='1'>
 	    <view class="telTitle">每日领取</view>
 			<view class="telTitleNum">投票券+1</view>
-			<view class="clickButton" style="{{index%2==0?'background: #298CF7;':''}}">明日更新</view>
+			<view class="clickButton" style="{{taskInfo.getDays?'':'background: #298CF7;'}}">
+			    {{taskInfo.getDays?'领取':'明日更新'}}
+			</view>
+	 </view>
+</view>
+
+<view class="taskEve">
+   <view class="taskEveLeft" catchtap="evereceivefun" data-num='2'>
+	    <view class="telTitle">VIP专属券</view>
+			<view class="telTitleNum">投票券+1</view>
+			<view class="clickButton" style="{{taskInfo.memberTicket?'background: #298CF7;':''}}">
+			   {{taskInfo.memberTicket?'明日更新':'领取'}}
+			</view>
+	 </view>
+</view>
+
+<view class="taskEve">
+   <view class="taskEveLeft" catchtap="{{taskInfo.daysSign?'subscrfun':'jumpOtherPage'}}" data-num='9'>
+	    <view class="telTitle">每日签到</view>
+			<view class="telTitleNum">投票券+1</view>
+			<view class="clickButton" style="{{taskInfo.daysSign?'background: #298CF7;':''}}">
+			   {{taskInfo.daysSign?'明日更新':'去签到'}}
+			</view>
+	 </view>
+</view>
+
+<view class="taskEve">
+   <view class="taskEveLeft" catchtap="{{taskInfo.subscribeToyShow?'subscrfun':'bookingExhib'}}">
+	    <view class="telTitle">预约展会</view>
+			<view class="telTitleNum">投票券+1</view>
+			<view class="clickButton" style="{{taskInfo.subscribeToyShow?'background: #298CF7;':''}}">
+			    {{taskInfo.subscribeToyShow?'明日更新':'去预约'}}
+			</view>
+	 </view>
+</view>
+
+<view class="taskEve">
+   <view class="taskEveLeft" catchtap="{{taskInfo.subscribeToyShowTicket?'subscrfun':'bookingExhib'}}">
+	    <view class="telTitle">预约展会门票</view>
+			<view class="telTitleNum">投票券+1</view>
+			<view class="clickButton" style="{{taskInfo.subscribeToyShowTicket?'background: #298CF7;':''}}">
+			    {{taskInfo.subscribeToyShowTicket?'明日更新':'去预约'}}
+			</view>
+	 </view>
+</view>
+
+<view class="taskEve">
+   <view class="taskEveLeft">
+	    <view class="telTitle">邀请好友投票</view>
+			<view class="telTitleNum">每邀请好友投票成功投票券+1(上限50/天)</view>
+			<view class="clickButton" style="{{taskInfo.inviteFriend?'':'background: #298CF7;'}}">
+			  {{taskInfo.inviteFriend?'去邀请':'明日更新'}}
+				<button wx:if='{{taskInfo.inviteFriend}}' style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' open-type="share"></button>
+			</view>
+	 </view>
+</view>
+
+<view class="taskEve">
+   <view class="taskEveLeft">
+	    <view class="telTitle">开通VIP</view>
+			<view class="telTitleNum">投票券+10</view>
+			<view class="clickButton" style="{{taskInfo.openMember?'background:#ADADAD;':''}}">
+			    {{taskInfo.openMember?'已完成':'开通'}}
+			</view>
 	 </view>
 </view>
 
 
+
+
 <view class="iwasButon">
-   <view class="iwasButonTxt">我的投票剩余:<text style="color:#E94F57;margin:0 10rpx;">5</text>(当日有效)</view>
-	 <view class="clickButton">去投票</view>
+   <view class="iwasButonTxt">我的投票剩余:<text style="color:#E94F57;margin:0 10rpx;">{{voteChance}}</text>(当日有效)</view>
+	 <view class="clickButton" catchtap="jumpiwas">去投票</view>
 </view>
 
 
 
 <!-- 投票弹框 -->
-<view wx:if='{{true}}' class="wsh">
-   <view class="tgimgboxgb"></view>
+<view wx:if='{{ballotbox}}' class="wsh" catchtouchmove="true">
+   <view class="tgimgboxgb" catchtap="ballotboxnone"></view>
 	 <view class="iwastip" style="height:{{windowHeight-100}}px;">
-	    <scroll-view scroll-y="true" class="iwastipscroll">
-				<view class="calendarItem">
-					<image class="calendarItemBanner" src="http://www.51chaidan.com/images/spread/yiFanShang/1595406724.jpg" mode="widthFix"></image>
-					<view class="calendarItemInfo">
-						<view> <text>1.3w票</text> </view>
+	    <scroll-view scroll-y="true" class="iwastipscroll" bindscrolltolower="bindDownLoad">
+				<view class="calendarItem" wx:for='{{voteCalendarList}}' wx:key='key'>
+					<image class="calendarItemBanner" src="{{item.calendar_img}}" catchtap="jumpLeaflet" data-calendar_id='{{item.calendar_id}}' mode='aspectFit'></image>
+					<view class="calendarItemInfo" catchtap="votingInterface" data-brand_id='{{item.brand_id}}' data-calendar_id='{{item.calendar_id}}'>
+						<view> <text>{{item.number}}票</text> </view>
 						<view> <image class="calendarItemBanner" src="http://www.51chaidan.com/images/sign/calendar/vote.png" mode="widthFix"></image>  <text>投票</text></view>
 					</view>
 					<view class="calendarItemBrand">
-						<image src="https://www.51chaidan.com/images/default/headphoto/32781.jpg" mode="widthFix"></image>
-						<text>没拆</text>
-					</view>
-				</view>
-				<view class="calendarItem">
-					<image class="calendarItemBanner" src="http://www.51chaidan.com/images/spread/yiFanShang/1595406724.jpg" mode="widthFix"></image>
-					<view class="calendarItemInfo">
-						<view> <text>1.3w票</text> </view>
-						<view> <image class="calendarItemBanner" src="http://www.51chaidan.com/images/sign/calendar/vote.png" mode="widthFix"></image>  <text>投票</text></view>
-					</view>
-					<view class="calendarItemBrand">
-						<image src="https://www.51chaidan.com/images/default/headphoto/32781.jpg" mode="widthFix"></image>
-						<text>没拆</text>
-					</view>
-				</view>
-				<view class="calendarItem">
-					<image class="calendarItemBanner" src="http://www.51chaidan.com/images/spread/yiFanShang/1595406724.jpg" mode="widthFix"></image>
-					<view class="calendarItemInfo">
-						<view> <text>1.3w票</text> </view>
-						<view> <image class="calendarItemBanner" src="http://www.51chaidan.com/images/sign/calendar/vote.png" mode="widthFix"></image>  <text>投票</text></view>
-					</view>
-					<view class="calendarItemBrand">
-						<image src="https://www.51chaidan.com/images/default/headphoto/32781.jpg" mode="widthFix"></image>
-						<text>没拆</text>
+						<image src="{{item.brand_logo}}" mode="widthFix"></image>
+						<text>{{item.brand_name}}</text>
 					</view>
 				</view>
 			</scroll-view>
