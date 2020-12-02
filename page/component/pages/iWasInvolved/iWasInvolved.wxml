@@ -43,7 +43,39 @@
    <view class="tgimgboxgb"></view>
 	 <view class="iwastip" style="height:{{windowHeight-100}}px;">
 	    <scroll-view scroll-y="true" class="iwastipscroll">
-			
+				<view class="calendarItem">
+					<image class="calendarItemBanner" src="http://www.51chaidan.com/images/spread/yiFanShang/1595406724.jpg" mode="widthFix"></image>
+					<view class="calendarItemInfo">
+						<view> <text>1.3w票</text> </view>
+						<view> <image class="calendarItemBanner" src="http://www.51chaidan.com/images/sign/calendar/vote.png" mode="widthFix"></image>  <text>投票</text></view>
+					</view>
+					<view class="calendarItemBrand">
+						<image src="https://www.51chaidan.com/images/default/headphoto/32781.jpg" mode="widthFix"></image>
+						<text>没拆</text>
+					</view>
+				</view>
+				<view class="calendarItem">
+					<image class="calendarItemBanner" src="http://www.51chaidan.com/images/spread/yiFanShang/1595406724.jpg" mode="widthFix"></image>
+					<view class="calendarItemInfo">
+						<view> <text>1.3w票</text> </view>
+						<view> <image class="calendarItemBanner" src="http://www.51chaidan.com/images/sign/calendar/vote.png" mode="widthFix"></image>  <text>投票</text></view>
+					</view>
+					<view class="calendarItemBrand">
+						<image src="https://www.51chaidan.com/images/default/headphoto/32781.jpg" mode="widthFix"></image>
+						<text>没拆</text>
+					</view>
+				</view>
+				<view class="calendarItem">
+					<image class="calendarItemBanner" src="http://www.51chaidan.com/images/spread/yiFanShang/1595406724.jpg" mode="widthFix"></image>
+					<view class="calendarItemInfo">
+						<view> <text>1.3w票</text> </view>
+						<view> <image class="calendarItemBanner" src="http://www.51chaidan.com/images/sign/calendar/vote.png" mode="widthFix"></image>  <text>投票</text></view>
+					</view>
+					<view class="calendarItemBrand">
+						<image src="https://www.51chaidan.com/images/default/headphoto/32781.jpg" mode="widthFix"></image>
+						<text>没拆</text>
+					</view>
+				</view>
 			</scroll-view>
 	 </view>
 </view>
