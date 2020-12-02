@@ -1,0 +1,62 @@
+
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}' is_share='{{is_share}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+
+
+
+<view class="iwashead">
+   <view class="iwashtop">
+	    <text style="float:left;">我的投票</text>
+			<text style="float:right">查看更多></text>
+	 </view>
+	 <scroll-view class="iwasscroll" scroll-x="true">
+	    <view class="iwasscrollEve" wx:for='{{text}}' wx:key='key'>
+			   <image class="iwassEveImg" src="https://cdn.51chaidan.com/images/spread/blindBox/a1606396898.png" mode="heightFix"></image>
+				 <view class="iwassEveTxt">
+				    <view class="iwassEveNum">我已投票:1</view>
+						<image class="brandTicImg" mode='aspectFit' src="http://www.51chaidan.com/images/sign/calendar/vote.png"></image>
+				 </view>
+			</view>
+	 </scroll-view>
+</view>
+
+<view class="iwasTitle">获取投票券</view>
+<view class="taskEve" wx:for='{{text}}' wx:key='key'>
+   <view class="taskEveLeft">
+	    <view class="telTitle">每日领取</view>
+			<view class="telTitleNum">投票券+1</view>
+			<view class="clickButton" style="{{index%2==0?'background: #298CF7;':''}}">明日更新</view>
+	 </view>
+</view>
+
+
+<view class="iwasButon">
+   <view class="iwasButonTxt">我的投票剩余:<text style="color:#E94F57;margin:0 10rpx;">5</text>(当日有效)</view>
+	 <view class="clickButton">去投票</view>
+</view>
+
+
+
+<!-- 投票弹框 -->
+<view wx:if='{{true}}' class="wsh">
+   <view class="tgimgboxgb"></view>
+	 <view class="iwastip" style="height:{{windowHeight-100}}px;">
+	    <scroll-view scroll-y="true" class="iwastipscroll">
+			
+			</scroll-view>
+	 </view>
+</view>
+
+
+
+
+
+<!-- 底部导航 -->
+<!-- <bnavigation isProduce='{{isProduce}}' isChar='{{false}}'></bnavigation> -->
+
+
+<!--  授权弹框  -->
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight}}px;width: 100%;z-index: 30;' catchtap='pullupsignin'></view>

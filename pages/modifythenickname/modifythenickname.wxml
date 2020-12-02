@@ -1,290 +1,150 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
-<!-- <view class="wrap"> 
-  <view class="tabWrap" style="top:{{statusBarHeightMc}}px;">
-    <block wx:for="{{datetimeAll}}" wx:key="key">
-      <text class="{{dateTime==index?'active':''}}" catchtap="tabBtnFun" data-dateTime="{{index}}">{{item}}</text>
-    </block>
-  </view>
-  <view class="contentWrap" style="margin-top:100rpx">
-    <block wx:for="{{rank[dateTime]}}" wx:key="key">
-      <view class="userInfoWrap">
-        <view class="ranking">{{item.rank}}</view>
-        <view class="userInfoContent">
-          <view>
-            <image class="toux" src="{{item.headphoto}}" mode="aspectFill"></image>
-            <text>{{item.nick}}</text>
+
+
+<!-- 单张详情 -->
+<block wx:if='{{isBrandDetail==1}}'>
+   <view class="calendDtailPad">
+      <view class="cDetBhead">
+          <image src="https://cdn.51chaidan.com/images/spread/blindBox/a1606396898.png" mode="widthFix" class="cDetBheadImg"></image>
+          <view class="cDetBhBrand">
+             <image class="headBrandLogo" src="https://cdn.51chaidan.com/images/spread/blindBox/a1606396898.png"></image>
+             <view class="headBrandName specialellipsis">美拆</view>
+             <view class="headBrandName specialellipsis" style="float:right;max-width:145rpx;margin-right:15rpx;">5000票</view>
           </view>
-          <view>
-            <image class="pumpkin" src="{{item.img}}" mode="widthFix"></image>
-            <text>{{item.num}}</text>
+      </view>   
+   </view>
+   <view class="calendDtailPad">
+      <view class="ticketRanking">
+          <view class="ticketRankingNum">1</view>
+          <view class="ticketRankingBox">
+            <image class="ticketRankingImg" src="https://cdn.51chaidan.com/images/spread/blindBox/a1606396898.png"></image>
+            <view class="ticketRankingInd">已投5000票</view>
           </view>
-        </view>
       </view>
-    </block>
-  
-    <view wx:if="{{rank[dateTime]==0}}" class="nodata">
-      <image src="../images/recaddnodata.png" mode="widthFix"></image>
-    </view>
-  </view>
-</view> -->
-
-
-
-
-<view class="wrap">
-  <view class="countdownWrap">
-    <image src="http://www.51chaidan.com/images/sign/2020wsj/ws_1.jpg" mode="widthFix"></image>
-    <view class="countdownToday">
-      <text>
-        {{todaycountdown}}
-      </text>
-    </view>
-  </view>
-  <view class="contentWrap">
-    <view class="treeWrap">
-      <image class="tree" src="http://www.51chaidan.com/images/sign/2020wsj/ws_2.png" mode="widthFix"></image>
-    </view>
-    <view class="rankWrap">
-      <view class="rankBoxWrap">
-        <view class="dateTimeRank"> 
-          <block wx:for="{{datetimeAll}}" wx:key="key">
-            <text class="{{dateTime==index?'active':''}}" catchtap="tabBtnFun" data-dateTime="{{index}}">{{item}}</text>
-          </block>
-        </view>
-        <block>
-          <view class="rankBoxInWrap" wx:if="{{rank[dateTime].length!=0}}"> 
-            <view class="titleIconWrap">
-              <image class="titleIcon" src="http://www.51chaidan.com/images/sign/2020wsj/ws_3.png" mode="widthFix"></image>
-            </view>
-            <view class="selfPumpkinWrap"> 
-              <view class="selfPumpkinNum">我的南瓜：<image src="http://www.51chaidan.com/images/sign/2020wsj/ws_6.png" mode="widthFix"></image> {{halloweenScore}} <text catchtap="showSharePopup">如何获得?</text> </view>
-              <view class="refresh" catchtap="refresh">每5分钟自动刷新</view>
-            </view>
-            <view class="threePumpkin">
-              <image class="threePumpkinIcon" src="http://www.51chaidan.com/images/sign/2020wsj/ws_4.png" mode="widthFix"></image>
-            </view>
-            <view class="topThreeWrap">
-              <view>
-                <image class="topThreeHeadphoto" src="{{rank[dateTime][1].headphoto}}" mode="aspectFill"></image>
-                <text>{{rank[dateTime][1].nick}}</text>
-                <view class="topThreeAward" catchtap="jumpOtherPage" data-num='1' data-whref='{{rank[dateTime][1].goodsId}}'>
-                  <image src="{{rank[dateTime][1].img}}" mode="aspectFill"></image>
-                </view>
-              </view>
-              <view class="first">
-                <image class="topThreeHeadphoto" src="{{rank[dateTime][0].headphoto}}" mode="aspectFill"></image>
-                <text>{{rank[dateTime][0].nick}}</text>
-                <view class="topThreeAward" catchtap="jumpOtherPage" data-num='1' data-whref='{{rank[dateTime][0].goodsId}}'>
-                  <image src="{{rank[dateTime][0].img}}" mode="aspectFill"></image>
-                </view>
-              </view>
-              <view>
-                <image class="topThreeHeadphoto" src="{{rank[dateTime][2].headphoto}}" mode="aspectFill"></image>
-                <text>{{rank[dateTime][2].nick}}</text>
-                <view class="topThreeAward" catchtap="jumpOtherPage" data-num='1' data-whref='{{rank[dateTime][2].goodsId}}'>
-                  <image src="{{rank[dateTime][2].img}}" mode="aspectFill"></image>
-                </view>
-              </view>
-            </view>
-            <view class="smallPrizeWrap">
-              <image class="smallPrizeTitleIcon" src="http://www.51chaidan.com/images/sign/2020wsj/ws_5.png?20201029" mode="widthFix"></image>
-              <view class="smallPrizeRankWrap">
-                <view wx:if="{{rank[dateTime].length < 4}}">
-                  <view class="nodata">暂无榜单</view>
-                </view>
-                <view wx:else>
-                  <block wx:for="{{rank[dateTime]}}" wx:key="key">
-                    <view class="smallPrizeRank">
-                      <view class="place">
-                        <block wx:if="{{item.lastRank == 0}}">
-                          <view class="" style="{{item.rank<10?'text-align: center;':''}}">{{item.rank}}</view> 
-                          <view>
-                            <image src="http://www.51chaidan.com/images/sign/2020wsj/jt_ss.png" mode="widthFix"></image>
-                            <text style="color:#1da900"> {{100-item.rank == 0?'':100-item.rank}}</text>
-                          </view>
-                        </block>
-                        <block wx:elif="{{!item.lastRank}}">
-                          <view class="" style="width: 100rpx;text-align: center;display: block;">{{item.rank}}</view> 
-                        </block>
-                        <block wx:elif="{{item.rank == item.lastRank}}">
-                          <view class="" style="width: 100rpx;text-align: center;display: block;">{{item.rank}}</view> 
-                        </block>
-                        <block wx:else>
-                          <view class="" style="{{item.rank<10?'text-align: center;':''}}">{{item.rank}}</view> 
-                          <view>
-                            <image src="{{item.rank<item.lastRank?'http://www.51chaidan.com/images/sign/2020wsj/jt_ss.png':'http://www.51chaidan.com/images/sign/2020wsj/jt_xj.png'}}" mode="widthFix"></image> <text style="{{item.rank<item.lastRank?'color:#1da900':'color:#d0021b'}}"> {{item.rank < item.lastRank?item.lastRank-item.rank:item.rank-item.lastRank}} </text>
-                          </view>
-                        </block>
-                      </view>
-                      <view class="name">
-                        <image class="marginR" src="{{item.headphoto}}" mode="aspectFill"></image>
-                        <text class="text">{{item.nick}}</text>
-                      </view>
-                      <view class="pumpkinNum">
-                        <image class="marginR" style="margin-right:0rpx" src="http://www.51chaidan.com/images/sign/2020wsj/ws_6.png" mode="aspectFit"></image>
-                        <text class="text">{{item.score?'x '+item.score:''}}</text>
-                      </view>
-                      <view class="award">
-                        <view catchtap="jumpOtherPage" data-num='1' data-whref='{{item.goodsId}}'>
-                          <image class="marginR" src="{{item.img}}" mode="aspectFill"></image>
-                          <text class="text">x {{item.num}}</text>
-                        </view>
-                      </view>
-                    </view>
-                  </block>
-                </view>
-              </view>
-            </view>
+      <view class="ticketRanking">
+          <view class="ticketRankingNum">2</view>
+          <view class="ticketRankingBox">
+            <image class="ticketRankingImg" src="https://cdn.51chaidan.com/images/spread/blindBox/a1606396898.png"></image>
+            <view class="ticketRankingInd">已投5000票</view>
           </view>
-          <view class="rankBoxInWrap" wx:else>
-            <view class="nodata">暂无榜单</view>
-          </view>
-        </block>
       </view>
-    </view>
-  </view>
-  <view class="activityRrulesWrap">
-    <image src="http://www.51chaidan.com/images/sign/2020wsj/ws_7.jpg?20201029" mode="widthFix"></image>
-    <!-- <scroll-view scroll-y class=""> -->
-      <text>
-        {{tips.introduce}}
-      </text>
-    <!-- </scroll-view> -->
-  </view>
-</view>
 
+   </view> 
+   <view class="leafletBottom">
+       <view class="leafletBottomEve">分享日历</view>
+       <view class="leafletBottomEve" style="margin-left:60rpx;">投票</view>
+   </view>
 
+</block>
 
-
-
-
-
-<view class="sharePopup" wx:if="{{issharePopup}}">
-  <view class="sharePopupMask" catchtap="showSharePopup"></view>
-  <view class="sharePopupBox">
-     <view class="sharePopupTitle"> <text>每消费1元可获得</text> <image src="http://www.51chaidan.com/images/sign/2020wsj/ws_6.png" mode="widthFix"></image> <text>x10</text> </view>
-     <view class="sharePopupContent">
-        <view catchtap="jumpOtherPage" data-num='988'>
-          <text>去抽盒机</text>
-          <image src="http://www.51chaidan.com/images/sign/2020wsj/tiaozhuan.png" mode="widthFix"></image>
+<!-- 品牌详情 -->
+<block wx:elif='{{isBrandDetail==2}}'>
+    <view class="detailBrandHead">
+        <image class="detailBImg" mode='aspectFit' src="https://cdn.51chaidan.com/images/202011/thumb_img/35310_thumb_G_1606739742263.png"></image>
+        <view class="detailBName">
+            <view class="detailBNTxt">大美术馆</view>
+            <view class="detailBNTick">3.4w票</view>
         </view>
-        <view catchtap="jumpOtherPage" data-num='9015'>
-          <text>去一番赏</text>
-          <image src="http://www.51chaidan.com/images/sign/2020wsj/tiaozhuan.png" mode="widthFix"></image>
+        <view class="detailBRTick">
+            <view class="detailBRTNum">3</view>
+            <view class="detailBRTrank">排名</view>
         </view>
-        <view catchtap="jumpOtherPage" data-num='9014' data-whref="category_id=G19" data-title="潮玩手办">
-          <text>去手办</text>
-          <image src="http://www.51chaidan.com/images/sign/2020wsj/tiaozhuan.png" mode="widthFix"></image>
-        </view>
-     </view>
-     <!-- <view class="invitefriend"> 
-      <text>邀请朋友</text>
-      <image src="http://www.51chaidan.com/images/sign/2020wsj/tiaozhuan.png" mode="widthFix"></image>
-     </view> -->
-    <button open-type="share" class="sharePopupshare">
-      邀请朋友
-      <image src="http://www.51chaidan.com/images/sign/2020wsj/tiaozhuan.png" mode="widthFix"></image>
-    </button>
-  </view>
-</view>
-
-
-<!-- <view class="helpPopup" wx:if="{{ishelpPopup}}">
-  <view class="helpPopupMask" catchtap="showhelpPopup"></view>
-  <view class="helpPopupBox">
-    <view class="helpPopupTitle">
-      {{tips.share}}
     </view>
-    <view class="helppeople">
-      <block wx:for='{{share}}' wx:key='key'>
-        <image src="{{item.headphoto}}" mode="widthFix"></image>
-      </block>
+
+    <view class="calendDtailPad">
+        <view class="cDetBhead">
+            <image src="https://cdn.51chaidan.com/images/spread/blindBox/a1606396898.png" mode="widthFix" class="cDetBheadImg"></image>
+            <view class="cDetBhBrand">
+
+              <view class="headBrandName specialellipsis" style="margin-left:15rpx;">已投5325票</view>
+              <view class="brandShareBox"><image class="brandShareImg" mode='aspectFit' src="http://www.51chaidan.com/images/sign/calendar/vote.png"></image>投票</view>
+              <view class="brandShareBox"><image class="brandShareImg" mode='aspectFit' src="https://clw.51chaidan.com//images/goods/share3.png"></image>分享</view>
+
+            </view>
+        </view>   
     </view>
-    <button>分享</button>
-  </view>
-</view> -->
+
+   <view class="calendDtailPad">
+      <view class="ticketRanking">
+          <view class="ticketRankingNum">2</view>
+          <view class="ticketRankingBox">
+            <image class="ticketRankingImg" src="https://cdn.51chaidan.com/images/spread/blindBox/a1606396898.png"></image>
+            <view class="ticketRankingInd" style="float:left;margin:0 0 0 15rpx;">已投5000票</view>
+            <view class="ticketRightNum">x2</view>
+            <image class="ticketRightImg" mode='aspectFit' src="https://cdn.51chaidan.com/images/spread/blindBox/a1606396898.png"></image>
+            
+          </view>
+      </view>
+      <view class="ticketRanking">
+          <view class="ticketRankingNum">2</view>
+          <view class="ticketRankingBox">
+            <image class="ticketRankingImg" src="https://cdn.51chaidan.com/images/spread/blindBox/a1606396898.png"></image>
+            <view class="ticketRankingInd" style="float:left;margin:0 0 0 15rpx;">已投5000票</view>
+            <view class="ticketRightNum">x2</view>
+            <image class="ticketRightImg" mode='aspectFit' src="https://cdn.51chaidan.com/images/spread/blindBox/a1606396898.png"></image>
+            
+          </view>
+      </view>
+
+   </view> 
 
 
-
-<view class="punchBottom" catchtap="showModal">
-    <!-- <view class="punchBottomtxt">已打卡</view> -->
-    <view class="punchBotImgBox" style="width:{{50+share.length*15>530?'530':50+share.length*15}}rpx;" wx:if='{{share.length!=0}}'>
-      <image class="punchBotImg" wx:for='{{share}}' wx:key='key' src="{{item.headphoto}}" style="z-index:{{index+1}};left:{{index*15}}rpx;" wx:if='{{index*15<480}}'></image>
+    <view class="leafletBottom">
+        <view class="leafletBottomEve">我参与的</view>
     </view>
-    <button open-type="share" catchtap='navmap' class="punchBottomtxt">分享得南瓜</button>
-</view>
 
 
-<view class="helpBtnWrap" catchtouchmove="return" wx:if="{{canAssist}}" catchtap="isPhone">
-  <!-- <view class="helpBtnMask"></view> -->
-  <view class="helpBtn" catchtap="isPhone">
-  助力
-  </view>
-</view>
+</block>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
 <view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>
-
-
-<!-- 手机号授权弹框 ishowphone-->
-<view wx:if='{{ishowphone}}' class='dialogstyle' style='z-index:10000;'>
-  <view class='bgstyle' catchtap='dialogClick'></view>
-
-  <view class='redfloatbtnstylel' style='width:500rpx;height:500rpx;background:#fff;border-radius:10rpx;'>
-    <view class='alignclass' style='width:100%;height:80rpx;color:#000;font-size:35rpx;'>
-      微信授权
-    </view>
-    <view style='width:100%;height:2rpx;background:#e5e5e5;'></view>
-
-    <image style='width:80rpx;height:80rpx;margin:30rpx 210rpx;' src='../images/statemyorder1.png'></image>
-
-    <view class='alignclass' style='width:100%;font-size:30rpx;color:#000;'>微信授权成功</view>
-
-    <view style='width:300rpx;height:2rpx;background:#e5e5e5;margin:20rpx 100rpx;'></view>
-
-    <view class='alignclass' style='width:100%;font-size:25rpx;color:#999;'>授权绑定你的手机号码</view>
-
-    <view style='width:100%;height:82rpx;color:#000;font-size:30rpx;position:absolute;bottom:0px;'>
-      <view style='width:100%;height:2rpx;background:#e5e5e5;'></view>
-      <view style='width:100%;height:80rpx;'>
-        <view class='alignclass' style='width:500rpx;height:80rpx;float:left;color:#7ABF69;'>
-          <button style='width:500rpx;height:80rpx;opacity:0;position:absolute;' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
-          </button>
-          允许
-        </view>
-      </view>
-    </view>
-  </view>
-</view>
-
-<!-- <button bindtap="showModal">点我</button> -->
-
-<view class="modals modals-bottom-dialog" hidden="{{ishelpPopup}}"  catchtouchmove="return">
-    <view class="modals-cancel" bindtap="hideModal"  catchtouchmove="return"></view>
-    <view class="bottom-dialog-body bottom-pos" animation="{{animationData}}">
-      <view class="helpPopupTitle">
-        <!-- 邀请好友送南瓜，老朋友送1个，新朋友送5个 -->
-        <text>邀请好友送</text><image src="http://www.51chaidan.com/images/sign/2020wsj/ws_6.png" mode="widthFix"></image><text>, 老朋友</text><image src="http://www.51chaidan.com/images/sign/2020wsj/ws_6.png" mode="widthFix"></image><text>x1,</text><text> 新朋友</text><image src="http://www.51chaidan.com/images/sign/2020wsj/ws_6.png" mode="widthFix"></image><text>x5</text>
-      </view>
-      <view class="helpPopupContent">
-        <scroll-view scroll-y style="height:460rpx;">
-          <view class="helpPopupscrollWrap">
-            <block wx:for='{{share}}' wx:key='key'>
-              <view class="helpPopupscroll">
-                <image class="popupimg" src="{{item.headphoto}}" mode="widthFix"></image>
-                <view class="helpPopupBOX">
-                  <image class="nanguaicon" src="http://www.51chaidan.com/images/sign/2020wsj/ws_6.png" mode="widthFix"></image>
-                  <text>x{{item.score}}</text>
-                </view>
-              </view>
-            </block>
-          </view>
-        </scroll-view>
-      </view>
-      <button open-type="share">分享</button>
-    </view>
-</view>
-

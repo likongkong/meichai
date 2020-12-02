@@ -1,771 +1,191 @@
+
+@import "../../common/tabbar.wxss";
 page{
-  background: #19021f;
+  background:#f4f5f9;
   padding-bottom: 110rpx;
 }
-/* .tabWrap{
-  width: 100%;
-  height: 100rpx;
-  position: fixed;
-  left: 0;
-  display: flex;
-  background: #fff;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
+.calendDtailPad{
+  padding: 20rpx 20rpx 0 20rpx;
 }
-.tabWrap text{
-  display: inline-block;
-  width: 30%;
-  height: 70rpx;
+.cDetBhead{
   background: #fff;
   border-radius: 10rpx;
-  text-align: center;
-  line-height: 70rpx;
-  margin: 0 10rpx;
-  box-shadow:0px 0px 10rpx #c5c5c5;
 }
-.active{
-  background: #f2f2f2 !important;
-  color: #4a4a4a;
-}
-.banner{
-  width: 100%;
-  height: 550rpx;
+.cDetBheadImg{
   display: block;
-}
-
-.contentWrap{
-  padding-bottom: 100rpx;
-  box-sizing: border-box;
-}
-.userInfoWrap{
   width: 100%;
-  height: 140rpx;
-  background: #fff;
-  display: flex;
+  border-radius: 10rpx 10rpx 0 0;
 }
-.ranking{
-  width: 80rpx;
-  height: 140rpx;
-  text-align: center;
-  line-height: 140rpx;
-}
-.userInfoContent{
-  width: 670rpx;
-  height: 140rpx;
-  display: flex;
-  justify-content: space-between;
-  padding-right: 25rpx;
-  box-sizing: border-box;
-  position: relative;
-}
-.userInfoContent::before{
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 670rpx;
-  height: 1rpx;
-  background-color: black;
-  transform: scale(1, 0.2);
-  display: block;
-}
-.self::before{
-  height: 0;
-}
-.userInfoContent view{
-  display: flex;
-  align-items: center;
-
-}
-.userInfoContent view text{
-  color: #000;
-  font-size: 24rpx;
-}
-.toux{
-  width: 80rpx;
+.cDetBhBrand{
+  width: 100%;
   height: 80rpx;
-  border-radius: 8rpx;
-  margin-right: 10rpx;
 }
-.pumpkin{
-  width: 60rpx;
-  height: auto;
-  margin-right: 10rpx;
-}
-
-
-
- */
-
-
-.wrap{
-  width: 100%;
-  height: 100%;
-}
-.countdownWrap{
-  width: 100%;
-  position: relative;
-}
-.countdownWrap image{
-  width: 100%;
-  height: auto;
-  display: block;
-}
-.countdownToday{
-  width: 100%;
-  position:absolute;
-  left: 0;
-  bottom: 10rpx;
-  text-align: center;
-}
-.countdownToday text{
-  color: #fef8e0;
-  font-size: 60rpx;
-}
-
-/* .contentWrap{
-  background-color: burlywood;
-} */
-.treeWrap{
-  display: flex;
-  justify-content: center;
-  position: relative;
-  top: 0;
-  left: 0;
-  padding-top: 20rpx;
-  box-sizing: border-box;
-}
-.tree{
-  width: 335rpx;
-  height: auto;
-}
-.rankWrap{
-  display: flex;
-  justify-content: center;
-  position: relative;
-  z-index: 10;
-  top: -4rpx;
-}
-.rankBoxWrap{
-  width: 660rpx;
-  background-color: #d5690e;
-  border-radius: 60rpx;
-  position: relative;
-  padding: 10rpx;
-  box-sizing: border-box;
-}
-.dateTimeRank{
-  width: 100%;
-  height: 100rpx;
-  position: absolute;
-  top: -44rpx;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  z-index: -1;
-}
-.dateTimeRank text{
-  display: block; 
-  width: 140rpx;
-  height: 100rpx;
-  background-color: #d5690e;
-  border-radius: 30rpx;
-  margin: 0 28rpx;
-  color: #3e2622;
-  font-size: 24rpx;
-  font-weight: bold;
-  text-align: center;
-  line-height: 48rpx;
-}
-.active{
-  color: #fff4e2 !important;
-}
-.rankBoxInWrap{
-  width: 640rpx;
-  background-color: #fff4e2;
-  border-radius: 56rpx;
-  overflow: hidden;
-}
-.titleIconWrap{
-  display: flex;
-  justify-content: center;
-  padding-top: 26rpx;
-  box-sizing: border-box;
-}
-.titleIcon{
-  width: 300rpx;
-}
-.selfPumpkinWrap view{
-  display: block;
-  font-size: 26rpx;
-  font-weight: bold;
-  text-align: center;
-}
-.selfPumpkinNum{
-  position: relative;
-}
-.selfPumpkinNum image{
-  width: 30rpx;
-  height: auto;
-}
-.selfPumpkinNum text{
-  position: absolute;
-  right:70rpx;
-  color: #615d54;
-  text-decoration:underline;
-}
-
-.refresh{
-  color: #615d54;
-  /* text-decoration:underline; */
-  margin-top:10rpx;
-}
-.threePumpkin{
-  display: flex;
-  justify-content: center;
-}
-.threePumpkinIcon{
-  width: 470rpx;
-  height: auto;
-  margin-top: 20rpx;
-}
-.topThreeWrap{
-  display: flex;
-  justify-content: center;
-  position: relative;
-  top: -30rpx;
-}
-.topThreeWrap>view{
-  text-align: center;
-}
-.first{
-  margin: 0 46rpx;
-}
-.topThreeHeadphoto{
-  width: 50rpx;
-  height: 50rpx;
-  display: block;
-  border-radius: 8rpx;
-  margin: 0 auto;
-}
-.topThreeWrap text{
-  font-size: 20rpx;
-  color: #3c2722;
-  font-weight: bold;
-  display: block;
-  margin-bottom: 12rpx;
-  margin-top: 4rpx;
-}
-.topThreeAward{
-  width: 150rpx;
-  height: 150rpx;
-  border-radius: 8rpx;
-  /* overflow: hidden; */
-  /* background-color: #b2ddff; */
-}
-.topThreeAward image{
-  width: 150rpx;
-  height: 150rpx;
-  display: block;
-  border-radius: 8rpx;
-  box-shadow: 0 0 10rpx #888888;
-
-}
-.first .topThreeHeadphoto{
-  margin-top: -10rpx;
-}
-.first text{
-  margin-bottom: 22rpx;
-}
-
-.smallPrizeWrap{
-  width: 590rpx;
-  margin-left: 25rpx;
-}
-.smallPrizeTitleIcon{
-  width: 100%;
-  height: auto;
-}
-.smallPrizeRankWrap{
-  padding-bottom: 10rpx;
-  box-sizing: border-box;
-}
-.smallPrizeRank{
-  display: flex;
-  align-items: center;
-  margin-bottom: 14rpx;
-}
-.smallPrizeRank>view{
-  display: flex;
-  align-items: center;
-  /* justify-content: center; */
-}
-.smallPrizeRank image{
-  width: 50rpx;
-  height: 50rpx;
-  display: inline-block;
-  border-radius: 8rpx;
-}
-.smallPrizeRank .text{
-  display: inline-block;
-  width: 142rpx;
-  font-size: 20rpx;
-  color: #3f2622;
-  font-weight: bold;
-  word-break: break-all;
-}
-.smallPrizeRank .place{
-  width: 100rpx;
-  /* margin-left: 20rpx; */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 8rpx;
-  box-sizing: border-box;
-}
-.smallPrizeRank .place view:first-child{
-  width: 40rpx;
-  font-size: 20rpx;
-  color: #3f2622;
-  font-weight: bold;
-  word-break: break-all;
-}
-.smallPrizeRank .place view:last-child{
-  width: 60rpx;
-  display: flex;
-  align-items: center;
-}
-.smallPrizeRank .place view:last-child text{
-  display: inline-block;
-  font-size: 20rpx;
-  color: #3f2622;
-  font-weight: bold;
-  word-break: break-all;
-}
-.smallPrizeRank .place view:last-child image{
-  width: 24rpx;
-  height: auto;
-  display: block;
-}
-.smallPrizeRank .name{
-  width: 200rpx;
-  margin-left: 30rpx;
-}
-.smallPrizeRank .pumpkinNum{
-  width: 150rpx;
-  margin-left: 6rpx;
-  text-align: center;
-}
-.smallPrizeRank .award{
-  width: 50rpx;
-}
-.smallPrizeRank .award>view{
-  /* width: 80rpx;
-  height: 80rpx; */
-  border-radius: 8rpx;
-  /* background-color: #b2ddff; */
-  margin-left: 8rpx;
-  display: flex;
-  align-items: center;
-}
-.smallPrizeRank .award>view image{
-  width: 80rpx;
-  height: 80rpx;
-  display: block;
-}
-
-.activityRrulesWrap{
-  width: 100%;
-  position: relative;
-}
-.activityRrulesWrap image{
-  width: 100%;
-  height: auto;
-  display: block;
-}
-/* .activityRrulesWrap scroll-view{
-  width: 380rpx;
-  height: 330rpx;
-  position: absolute;
-  top: 100rpx;
-  left: 50%;
-  margin-left: -190rpx;
-} */
-.activityRrulesWrap text{
-  width: 600rpx;
-  height: 330rpx;
-  position: absolute;
-  top: 165rpx;
-  left: 0;
-  margin-left: 75rpx;
-  display: block;
-  font-size: 24rpx;
-  text-align: center;
-  color: #fff;
-  display: block;
-}
-
-
-.marginR{
-  margin-right: 10rpx;
-}
-
-.nodata{
-  width: 100%;
-  text-align: center;
-  padding: 100rpx 0;
-  box-sizing: border-box;
-}
-
-
-.punchBottom{
-  position: fixed;
-  bottom: 50rpx;
-  right: 0;
-  left: 0;
-  margin:20rpx auto 0;
-  border: 6rpx solid #000;
-  z-index: 12;
-  background: #fff;
-  width: 690rpx;
-  height: 60rpx;
-  font-size: 30rpx;
-  padding:0 6rpx;
-}
-.punchBottomtxt{
-  height: 60rpx;
-  line-height: 60rpx; 
-  font-size: 30rpx;
-  float: right; 
-  background-color: transparent;
-}
-.punchBottomtxt::after{
-  border: none;
-}
-.punchBotImgBox{
-  height: 60rpx;
-  line-height: 60rpx; 
+.headBrandLogo{
   float: left;
-  position: relative;
-}
-.punchBotImg{
+  margin: 15rpx;
   width: 50rpx;
   height: 50rpx;
-  position:absolute;
-  top: 0;
-  bottom: 0;
-  margin:auto;
-  /* border: 4rpx solid #fff; */
   border-radius: 50%;
 }
-
-.puntipbox{
-  width:400rpx;
-  height: 600rpx;
-  background: #fff;
-  border-radius: 8rpx;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin:auto;
-}
-
-.puntbimg{
-  max-width: 380rpx;
-  height: 300rpx;
-  margin:30rpx auto 15rpx;
-  border-radius: 8rpx;
-  border:4rpx solid #000;
-  display: block;
-}
-.puntbtitle{
-  width: 100%;
-  height: 35px;
-  text-align: center;
-  line-height: 36rpx;
-  color: #666;
-  font-size: 24rpx;
-}
-
-.puntbtname{
-  width: 100%;
-  padding:30rpx auto 0;
-  font-size: 22rpx;
-}
-.puntbtname view{
-  height:40rpx;
-  text-align:center;
-}
-
-.sharePopup{
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  z-index: 15;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.sharePopupMask{
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,.5);
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -1;
-}
-.sharePopupBox{
-  width: 400rpx;
-  /* height: 300rpx; */
-  background-color: #fff;
-  border-radius: 10rpx;
-  overflow: hidden;
-}
-.sharePopupTitle{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 10rpx 0;
-}
-.sharePopupTitle text{
-  font-size: 26rpx;
-}
-.sharePopupTitle image{
-  width: 30rpx;
-  height: auto;
-}
-.sharePopupContent{
-  padding: 20rpx 0;
-  box-sizing: border-box;
-}
-.sharePopupContent view{
-  display: flex;
-  height: 60rpx;
-  justify-content: center;
-  align-items: center;
-}
-.sharePopupContent text{
-  display: block;
-  font-size: 30rpx;
-}
-.sharePopupContent image{
-  width: 30rpx;
-  display: block;
-  height: auto;
-}
-.sharePopupshare{
-  font-size: 30rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-top: 2rpx solid #dfdfdf;
-  border-radius: 0;
+.headBrandName{
   height: 80rpx;
-  border-bottom-left-radius: 10rpx;
-  border-bottom-right-radius: 10rpx;
-}
-.sharePopupshare::after{
-  border: none;
-}
-.sharePopupshare image{
-  width: 30rpx;
-  display: block;
-  margin-top: 4rpx;
-}
-.invitefriend{
-  width: 100%;
-  height: 80rpx;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-top: 2rpx solid #f8f8f8;
-}
-.invitefriend text{
-  display: inline-block;
-  vertical-align: middle;
+  line-height: 80rpx;
+  color: #000;
   font-size: 24rpx;
+  float: left;
+  max-width: 460rpx;
 }
-.invitefriend image{
-  width: 30rpx;
-  display: inline-block;
-  vertical-align: middle;
-}
-
-
-
-
-.helpPopup{
+.ticketRanking{
   width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  z-index: 15;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 100rpx;
 }
-.helpPopupMask{
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,.5);
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -1;
-}
-.helpPopupBox{
-  width: 400rpx;
-  /* height: 300rpx; */
-  background-color: #fff;
-  border-radius: 10rpx;
-}
-.helpPopupBOX text{
-  font-size: 20rpx;
-}
-.helpPopupBox button{
-  margin-top: 20rpx;
-}
-/* .helpPopupTitle{
-  font-size: 24rpx;
-  padding: 30rpx;
-  box-sizing: border-box;
+.ticketRankingNum{
+  float: left;
+  width: 80rpx;
+  height: 100rpx;
+  line-height: 100rpx;
   text-align: center;
-} */
-.helppeople{
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  color: #000;
+  font-size: 24;
 }
-.helppeople image{
-  width: 60rpx;
-  height: auto;
+.ticketRankingBox{
+  width: 628rpx;
+  height: 98rpx;
+  float: right;
+  border-bottom: 2rpx solid #BBBBBB;
 }
-.helpBtnWrap{
+.ticketRankingImg{
+  float: left;
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  margin: 14rpx 0;
+}
+.ticketRankingInd{
+  height: 98rpx;
+  line-height: 100rpx;
+  float: right;
+  margin: 0 15rpx 0 0;
+  font-size: 24rpx;
+  color:#666666;
+}
+.leafletBottom{
   width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
+  height:70rpx;
   display: flex;
   justify-content: center;
-  align-items: center;
-  z-index: 14;
-  background: rgba(0,0,0,.5);
+  position: fixed;
+  left: 0;
+  bottom: 40rpx;
+  z-index: 11;
 }
-.helpBtn{
-  width: 200rpx;
-  height: 200rpx;
-  border-radius: 200rpx;
-  background-color: #d5690e;
-  font-size: 40rpx;
+.leafletBottomEve{
+  width: 240rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  background:#E94F57;
+  border-radius: 70rpx;
   color: #fff;
+  font-size: 24rpx;
   text-align: center;
-  line-height: 200rpx;
-  box-shadow: 0 0 10rpx #888888;
 }
-
-.bgstyle {
-  width: 100%;
+.detailBrandHead{
+  padding: 0 20rpx;
+  background: #fff;
+  height: 120rpx;
+}
+.detailBImg{
+  float: left;
+  width: 90rpx;
+  height: 90rpx;
+  margin: 15rpx;
+}
+.detailBName{
+  width: 460rpx;
   height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: #000;
-  opacity: 0.5;
+  float: left;
 }
-.redfloatbtnstylel {
-  height: 79rpx;
-  color: white;
+.detailBNTxt{
+  width: 100%;
+  height: 36rpx;
+  color: #000;
+  font-size: 26rpx; 
+  padding:18rpx 0 10rpx 0; 
+}
+.detailBNTick{
+  width: 100%;
+  height: 40rpx;
+  color: #666666;
+  font-size: 24rpx;   
+}
+.detailBRTick{
+  float: right;
+  height: 100%;
+  width:100rpx;
+}
+.detailBRTNum{
+  width: 100%;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  color:#E94F57;
+  font-size: 40rpx;
+}
+.detailBRTrank{
+  width: 100%;
+  text-align: center;
+  font-size: 24rpx;
+
+}
+.brandShareBox{
+  height: 80rpx;
+  line-height: 80rpx;
+  color: #000;
+  font-size: 24rpx;
+  float:right;
+  margin-right:15rpx;
+  padding-left: 56rpx;
+  position: relative;
+}
+.brandShareImg{
+  width: 50rpx;
+  height: 50rpx;
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
   top: 0;
-  margin:auto;
-  z-index:1;
-}
-.dialogstyle {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
   bottom: 0;
-  right: 0;
-  z-index: 10;
+  left: 0;
+  margin: auto;
 }
-/* 横向纵向居中 */
-.alignclass {
-  text-align: center;
-  display: flex;
-  justify-content: space-around;
-  flex-direction: column;
+.ticketRightImg{
+  float: right;
+  width: 70rpx;
+  height: 70rpx;
+  margin:14rpx 14rpx 14rpx 0;
+}
+.ticketRightNum{
+  height: 98rpx;
+  line-height: 147rpx; 
+  font-size: 20rpx;
+  float: right; 
 }
 
 
 
 
-/*模态框*/
-.modals{position:fixed; z-index: 999; top:0; left: 0; right:0; bottom: 0;}
-.modals-cancel{position:absolute; z-index:1000; top:0; left: 0; right:0; bottom: 0; background-color: rgba(0,0,0,.5);}
-.bottom-dialog-body{position:absolute; z-index:10001; bottom:0; left:0; right:0; height:700rpx; background-color: #fff;}
-/*动画前初始位置*/
-.bottom-pos{-webkit-transform:translateY(100%);transform:translateY(100%);}
-.helpPopupTitle{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40rpx 0;
-  box-sizing: border-box;
-}
-.helpPopupTitle text{
-  font-size: 32rpx;
-}
-.helpPopupTitle image{
-  width: 30rpx;
-}
-.helpPopupBOX{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.helpPopupscrollWrap{
-  padding: 0 25rpx;
-  box-sizing: border-box;
-}
-.helpPopupscroll{
-  margin-right: 40rpx;
-  display: inline-block;
-  text-align: center;
-}
-.helpPopupscroll:nth-child(8n){
-  margin-right: 0;
-}
-.helpPopupscroll .popupimg{
-  width: 54rpx;
-  height: auto;
-  border-radius: 8rpx;
-  margin-top: 20rpx;
-}
-.helpPopupscroll .nanguaicon{
-  width: 30rpx;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.modals button{
-background: transparent;
-}
-.modals button::after{
-  border: none;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

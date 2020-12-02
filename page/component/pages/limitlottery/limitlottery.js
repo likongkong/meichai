@@ -148,9 +148,25 @@ Page({
     is_share_but:true,
     // 太阳码参数 用户是否能分享 1 可以分享 
     canShare:0,
-    addsetData:[[]]
+    addsetData:[[]],
+    scrollTopPage:0
   },
-  
+  onPageScroll: function (ev) {
+    var _this = this;
+    //当滚动的top值最大或最小时，为什么要做这一步是因为在手机实测小程序的时候会发生滚动条回弹，所以为了处理回弹，设置默认最大最小值
+    if (ev.scrollTop <= 0) {
+      ev.scrollTop = 0;
+    } else if (ev.scrollTop > wx.getSystemInfoSync().windowHeight) {
+      ev.scrollTop = wx.getSystemInfoSync().windowHeight;
+    };
+    
+    //给scrollTop重新赋值
+    setTimeout(function () {
+      _this.setData({
+        scrollTopPage: ev.scrollTop
+      })
+    }, 0)
+  },
   sharefriend:function(){
      this.setData({
       shareFriendBox:!this.data.shareFriendBox,

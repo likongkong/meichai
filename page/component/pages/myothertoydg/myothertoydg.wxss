@@ -111,16 +111,10 @@ page {
 .hintbottom {
   text-align: center;
   font-size: 24rpx;
-  height: 40rpx;
-  line-height: 40rpx;
+  height: 60rpx;
+  line-height: 78rpx;
   color: #747373;
-  position: fixed;
-  bottom: 200rpx;
-  left: 0;
-  right: 0;
   margin: 0 auto;
-  z-index: 9;
-  /* background: #fff; */
 }
 
 /*  提示框  */
