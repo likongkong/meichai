@@ -16,7 +16,7 @@ Page({
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
     // 品牌详情 2 单张详情 1
-    isBrandDetail:2
+    isBrandDetail:1
 
   },
   /**
@@ -42,11 +42,11 @@ Page({
   onLoad: function (options) {
     console.log('options===',options)
     this.data.shareUId = options.shareUId;
+    // lb 品牌详情 2 单张详情 1
+    //   this.setData({
+    //     isBrandDetail:options.lb || 1
+    //   })
 
-    
-    // this.setData({
-    //   isBrandDetail:options.b || 1
-    // })
 
 
     // 判断是否授权
@@ -97,19 +97,17 @@ Page({
     var _this = this;
     return {
       title: '万圣节抢限量大体，端盒送隐藏！',
-      path: 'pages/modifythenickname/modifythenickname?shareUId='+_this.data.uid,
-      imageUrl:'http://www.51chaidan.com/images/sign/2020wsj/wsj.jpg',
-      success: function (res) {
-
-      }
+      path: 'pages/modifythenickname/modifythenickname?lb='+_this.data.isBrandDetail,
+      imageUrl:'',
+      success: function (res) {}
     }  
   },
   onShareTimeline:function(){
     var _this = this;
     return {
       title:'万圣节抢限量大体，端盒送隐藏！',
-      query:'shareUId='+_this.data.uid,
-      imageUrl:'http://www.51chaidan.com/images/sign/2020wsj/wsj.jpg'
+      query:'lb='+_this.data.isBrandDetail,
+      imageUrl:''
     }
   },
 
@@ -201,13 +199,19 @@ Page({
   }, 
  
 
-    // 跳转
-    jumpOtherPage:function(w){
-      var num = w.currentTarget.dataset.num || w.target.dataset.num || 100000;
-      var whref = w.currentTarget.dataset.whref || w.target.dataset.whref || 100000;
-      var title = w.currentTarget.dataset.title || w.target.dataset.title || '';
-      app.comjumpwxnav(num,whref,title)
-    },
+  // 跳转
+  jumpOtherPage:function(w){
+    var num = w.currentTarget.dataset.num || w.target.dataset.num || 100000;
+    var whref = w.currentTarget.dataset.whref || w.target.dataset.whref || 100000;
+    var title = w.currentTarget.dataset.title || w.target.dataset.title || '';
+    app.comjumpwxnav(num,whref,title)
+  },
+  // 跳转我参与的
+  jumpiwas:function(){
+    wx.navigateTo({
+      url: "/page/component/pages/iWasInvolved/iWasInvolved"
+    })
+  }
 
 
 })

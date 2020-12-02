@@ -88,6 +88,7 @@ page{
   color: #fff;
   font-size: 24rpx;
   text-align: center;
+  position: relative;
 }
 .detailBrandHead{
   padding: 0 20rpx;

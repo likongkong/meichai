@@ -33,7 +33,7 @@
 
    </view> 
    <view class="leafletBottom">
-       <view class="leafletBottomEve">分享日历</view>
+       <view class="leafletBottomEve"><button style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' open-type="share"></button>分享日历</view>
        <view class="leafletBottomEve" style="margin-left:60rpx;">投票</view>
    </view>
 
@@ -60,7 +60,7 @@
 
               <view class="headBrandName specialellipsis" style="margin-left:15rpx;">已投5325票</view>
               <view class="brandShareBox"><image class="brandShareImg" mode='aspectFit' src="http://www.51chaidan.com/images/sign/calendar/vote.png"></image>投票</view>
-              <view class="brandShareBox"><image class="brandShareImg" mode='aspectFit' src="https://clw.51chaidan.com//images/goods/share3.png"></image>分享</view>
+              <view class="brandShareBox"><image class="brandShareImg" mode='aspectFit' src="https://clw.51chaidan.com//images/goods/share3.png"></image>分享<button style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' open-type="share"></button></view>
 
             </view>
         </view>   
@@ -92,7 +92,7 @@
 
 
     <view class="leafletBottom">
-        <view class="leafletBottomEve">我参与的</view>
+        <view class="leafletBottomEve" catchtap="jumpiwas" style="width:400rpx;">我参与的</view>
     </view>
 
 
