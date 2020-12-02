@@ -231,7 +231,7 @@ Page({
       // url: "/pages/sputforward/sputforward"
       // url: "/page/component/pages/limitlottery/limitlottery?id=201425",
 
-      url: "/page/component/pages/iWasInvolved/iWasInvolved",
+      // url: "/page/component/pages/iWasInvolved/iWasInvolved",
 
 
 
