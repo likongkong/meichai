@@ -16,9 +16,16 @@ Page({
     tgabox: false,
     signinlayer:true,
     windowHeight: app.signindata.windowHeight - 65 - wx.getStorageSync('statusBarHeightMc') || 0,
-    tabIndex:0,
+    share_uid:0,
+    tabIndex:1,
     ispopupMask:false,
-    isShowSearch:false
+    isShowSearch:false,
+    swiperCalendrList:[],
+    listData:[],
+    brandData:[],
+    pid:0,
+    isReachBottom:true,
+    brand_name:''
 
   },
 
@@ -28,6 +35,7 @@ Page({
   onLoad: function(options) {
     // 判断是否授权 
     var _this = this;
+    this.data.share_uid + options.share_uid || 0
     _this.setData({
       loginid: app.signindata.loginid,
       uid: app.signindata.uid,
@@ -82,11 +90,11 @@ Page({
       // 适配苹果X 
       isIphoneX: app.signindata.isIphoneX
     });
-
-    // _this.listdata(1),
-
-
-
+    wx.showLoading({
+      title: '加载中...',
+    })
+    _this.getInfo();
+    _this.getSwiperInfo();
   },
 
 
@@ -180,25 +188,250 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    
+    this.setData({
+      listData:[],
+      brandData:[],
+      pid:0,
+      isReachBottom:true
+    })
+    wx.showLoading({
+      title: '加载中...',
+    })
+    if(this.data.tabIndex != 3){
+      this.getInfo()
+    }else{
+      this.getBrandRanking();
+    }
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    
+    if(this.data.isReachBottom){
+      this.setData({
+        pid:++this.data.pid
+      })
+      if(this.data.tabIndex != 3){
+        this.getInfo()
+      }else{
+        this.getBrandRanking();
+      }
+    }else{
+      wx.showToast({
+        title: '没有更多数据了',
+        icon: 'none',
+        duration: 1500
+      })
+    }
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    
+    var _this = this;
+    return {
+      title: '日历',
+      path: '/page/secondpackge/pages/calendarList/calendarList?share_uid='+_this.data.uid,
+      imageUrl:'',
+      success: function (res) {}
+    } 
+  },
+  onFocus: function (w) {
+    this.setData({
+      brand_name:""
+    });
+  },
+  // input 值改变
+  inputChange: function (e) {
+    this.setData({
+      brand_name: e.detail.value
+    });
   },
   showSearchFun(){
     this.setData({
       isShowSearch:true
     })
-  }
+  },
+  tabChangeFun(e){
+    let ind = e.currentTarget.dataset.ind;
+    this.setData({
+      tabIndex:ind,
+      pid:0,
+      listData:[],
+      brandData:[],
+      isReachBottom:true
+    })
+    wx.showLoading({
+      title: '加载中...',
+    })
+    if(ind == 1 || ind == 2){
+      this.getInfo();
+    }else{
+      this.getBrandRanking();
+    }
+  },
+  jumptoIWasInvolved(e){
+    wx.navigateTo({ 
+      url: "/page/component/pages/iWasInvolved/iWasInvolved?share_uid=" + this.data.share_uid
+    })
+  },
+  jumptoCalendarDetail(e){
+    console.log(e.currentTarget.dataset.brand_id)
+    console.log(e.currentTarget.dataset.calendar_id)
+    wx.navigateTo({ 
+      url: "/pages/modifythenickname/modifythenickname?share_uid=" + this.data.share_uid + "&brand_id=" + e.currentTarget.dataset.brand_id + "&calendar_id="+e.currentTarget.dataset.calendar_id
+    })
+  },
+  jumpsearch(){
+    this.setData({
+      tabIndex:1,
+      pid:0,
+      listData:[],
+      isReachBottom:true
+    })
+    let search = true;
+    this.getInfo(search);
+  },
+  getSwiperInfo(){
+    let _this = this;
+    let q = Dec.Aese('mod=Obtain&operation=calendarList&type='+3)
+    wx.request({
+      url: app.signindata.comurl + 'brandDrying.php'+q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('顶部日历轮播=============',res)
+        if (res.data.ReturnCode == 200) {
+          _this.setData({
+            swiperCalendrList:res.data.List.calendrList
+          })
+        }else{
+          _this.setData({
+            swiperCalendrList:[]
+          })
+        }
+      }
+    })
+  },
+  getInfo(search = false){
+    let _this = this;
+    if(search){
+      var q = Dec.Aese('mod=Obtain&operation=calendarList&type='+_this.data.tabIndex+'&pid='+_this.data.pid+'&keyword='+_this.data.brand_name)
+      console.log('mod=Obtain&operation=calendarList&type='+_this.data.tabIndex+'&pid='+_this.data.pid+'&keyword='+_this.data.brand_name)
+    }else{
+      var q = Dec.Aese('mod=Obtain&operation=calendarList&type='+_this.data.tabIndex+'&pid='+_this.data.pid)
+      console.log('mod=Obtain&operation=calendarList&type='+_this.data.tabIndex+'&pid='+_this.data.pid)
+    }
+    wx.request({
+      url: app.signindata.comurl + 'brandDrying.php'+q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        wx.hideLoading();
+        wx.stopPullDownRefresh();
+        console.log('内容=============',res)
+        if (res.data.ReturnCode == 200) {
+          // if(res.data.List.calendrList.length<40 && _this.data.pid != 0){
+          //   _this.setData({
+          //     isReachBottom:false
+          //   })
+          //   wx.showToast({
+          //     title: '没有更多数据了',
+          //     icon: 'none',
+          //     duration: 1500
+          //   })
+          // }
+          _this.setData({
+            listData:[..._this.data.listData,...res.data.List.calendrList]
+          })
+        }else if(res.data.ReturnCode == 201){
+          _this.setData({
+            isReachBottom:false
+          })
+          wx.showToast({
+            title: res.data.Msg,
+            icon: 'none',
+            duration: 1500
+          })
+        }
+      }
+    })
+  },
+  getBrandRanking(){
+    let _this = this;
+    let q = Dec.Aese('mod=Obtain&operation=calendarBrandList&pid='+_this.data.pid)
+    console.log('mod=Obtain&operation=calendarBrandList&pid='+_this.data.pid)
+    wx.request({
+      url: app.signindata.comurl + 'brandDrying.php'+q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        wx.hideLoading();
+        wx.stopPullDownRefresh();
+        console.log('品牌排行榜=============',res)
+        if (res.data.ReturnCode == 200) {
+          _this.setData({
+            brandData:[..._this.data.brandData,...res.data.List.calendrList]
+          })
+        }else if(res.data.ReturnCode == 201){
+          _this.setData({
+            isReachBottom:false
+          })
+          wx.showToast({
+            title: res.data.Msg,
+            icon: 'none',
+            duration: 1500
+          })
+        }
+      }
+    })
+  },
+
+   // 投票
+   votingInterface:function(w){
+
+    var _this = this;
+
+    var brand_id = w.currentTarget.dataset.brand_id || w.target.dataset.brand_id || 0;
+    var calendar_id = w.currentTarget.dataset.calendar_id || w.target.dataset.calendar_id || 0;
+
+    wx.showLoading({ title: '加载中...',mask:true }) 
+
+    var q = Dec.Aese('mod=Obtain&operation=recordVote&uid=' +_this.data.uid+'&loginid='+_this.data.loginid + '&calendar_id=' + calendar_id + '&brand_id=' + brand_id + '&share_uid=' + _this.data.share_uid);
+
+
+    console.log(app.signindata.comurl +'brandDrying.php?' + 'mod=Obtain&operation=recordVote&uid=' +_this.data.uid+'&loginid='+_this.data.loginid + '&calendar_id=' + calendar_id + '&calendar_id=' + brand_id + '&share_uid=' + _this.data.share_uid)
+
+
+    wx.request({
+      url: app.signindata.comurl + 'brandDrying.php' + q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) { 
+        console.log('receivefun====',res)
+        if (res.data.ReturnCode == 200) {
+          wx.showModal({
+            title: '',
+            content: '投票成功',
+            showCancel: false,
+            success: function (res) { }
+          })
+          _this.listdata(1);
+        }else{
+          wx.showModal({
+            title: '提示',
+            content: res.data.Msg,
+            showCancel: false,
+            success: function (res) { }
+          })          
+        }
+      },
+      fail: function () {},
+      complete:function(){
+        wx.hideLoading()
+      }
+    });    
+  },
 })

@@ -11,7 +11,7 @@ page{
   width: 100%;
 }
 .swiperWrap swiper{
-  height: 340rpx;
+  height: 409.3rpx;
 }
 .swiperItem{
   width: 100%;
@@ -25,7 +25,7 @@ page{
 }
 .swiperItemBanner{
   width: 100%;
-  height: auto;
+  height: 399.3rpx;
   display: block;
 } 
 .swiperItemBrandWrap{
@@ -63,7 +63,7 @@ page{
 }
 
 .content{
-  padding: 0 20rpx;
+  padding: 20rpx 20rpx;
   box-sizing: border-box;
 }
 
@@ -71,7 +71,6 @@ page{
   width: 100%;
   height:90rpx;
   background: #f5f6fa;
-  margin:15rpx 0;
 }
 .elsearchch{
   width: 100%;
@@ -148,7 +147,7 @@ page{
 }
 .calendarItemBanner{
   width: 100%;
-  height: auto;
+  height: 194rpx;
   border-radius: 8rpx;
   display: block;
 }
@@ -225,9 +224,14 @@ page{
 }
 .rankingBanner{
   width: 100%;
-  height: auto;
+  height: 399.3rpx;
   display: block;
 } 
+.rankingTwoThreeBanner{
+  width: 100%;
+  height: 196.875rpx;
+  display: block;
+}
 .rankingBrandWrap{
   width: 100%;
   height: 60rpx;

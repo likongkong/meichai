@@ -2,20 +2,22 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}' is_share='{{is_share}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
-<view class="swiperWrap">
+<view class="swiperWrap" wx:if="{{swiperCalendrList.length!=0}}">
   <swiper>
-    <swiper-item class="swiperItem">
-      <view>
-        <image class="swiperItemBanner" src="http://www.51chaidan.com/images/spread/yiFanShang/1595406724.jpg" mode="widthFix"></image>
-        <view class="swiperItemBrandWrap">
-          <view class="swiperItemBrandInfo">
-            <image class="swiperItemBrandLogo" src="https://www.51chaidan.com/images/default/headphoto/32781.jpg" mode="widthFix"></image>
-            <text class="swiperItemBrandName">没拆</text>
+    <block wx:for="{{swiperCalendrList}}" wx:key='key' data-index="{{index}}">
+      <swiper-item class="swiperItem" data-brand_id='{{item.brand_id}}' data-calendar_id='{{item.id}}' catchtap="jumptoCalendarDetail">
+        <view>
+          <image class="swiperItemBanner" src="{{item.calendar_img}}" mode="aspectFill"></image>
+          <view class="swiperItemBrandWrap">
+            <view class="swiperItemBrandInfo">
+              <image class="swiperItemBrandLogo" src="{{item.logo}}" mode="widthFix"></image>
+              <text class="swiperItemBrandName">{{item.name}}</text>
+            </view>
+            <view class="swiperItemBrandVote">{{item.vote_number}}票</view>
           </view>
-          <view class="swiperItemBrandVote">5000票</view>
         </view>
-      </view>
-    </swiper-item>
+      </swiper-item>
+    </block>
   </swiper>
 </view>
 <view class="content">
@@ -28,129 +30,95 @@
   </view>
 
   <view class="tabNav">
-    <text class="{{tabIndex==0?'active':''}}">最新</text>
-    <text class="{{tabIndex==1?'active':''}}">热门</text>
-    <text class="{{tabIndex==2?'active':''}}">排行榜</text>
+    <text class="{{tabIndex==1?'active':''}}" data-ind="1" catchtap="tabChangeFun">最新</text>
+    <text class="{{tabIndex==2?'active':''}}" data-ind="2" catchtap="tabChangeFun">热门</text>
+    <text class="{{tabIndex==3?'active':''}}" data-ind="3" catchtap="tabChangeFun">排行榜</text>
     <view class="tabNavssIcon" wx:if="{{!isShowSearch}}" catchtap="showSearchFun">
       <image src="http://www.51chaidan.com/images/sign/calendar/seek.png" mode="widthFix"></image>
     </view>
   </view>
   <block>
-    <view wx:if="{{tabIndex==0}}" class="allCalendar">
-      <view class="calendarItem">
-        <image class="calendarItemBanner" src="http://www.51chaidan.com/images/spread/yiFanShang/1595406724.jpg" mode="widthFix"></image>
-        <view class="calendarItemInfo">
-          <view> <text>1.3w票</text> </view>
-          <view> <image class="calendarItemBanner" src="http://www.51chaidan.com/images/sign/calendar/heat.png" mode="widthFix"></image>  <text>1.3w</text></view>
-          <view> <image class="calendarItemBanner" src="http://www.51chaidan.com/images/sign/calendar/vote.png" mode="widthFix"></image>  <text>投票</text></view>
+    <view wx:if="{{tabIndex==1 || tabIndex==2}}" class="allCalendar">
+      <block wx:for="{{listData}}" wx:key='key' data-index="{{index}}">
+        <view class="calendarItem">
+          <image class="calendarItemBanner" src="{{item.calendar_img}}" mode="aspectFill" data-lb="1" data-brand_id='{{item.brand_id}}' data-calendar_id='{{item.id}}' catchtap="jumptoCalendarDetail"></image>
+          <view class="calendarItemInfo">
+            <view> <text>{{item.vote_number}}票</text> </view>
+            <view> <image class="calendarItemBanner" src="http://www.51chaidan.com/images/sign/calendar/heat.png" mode="widthFix"></image>  <text>{{item.heat}}</text></view>
+            <view catchtap="votingInterface" data-brand_id='{{item.brand_id}}' data-calendar_id='{{item.id}}'> <image class="calendarItemBanner" src="http://www.51chaidan.com/images/sign/calendar/vote.png" mode="widthFix"></image>  <text>投票</text></view>
+          </view>
+          <view class="calendarItemBrand">
+            <image src="{{item.logo}}" mode="widthFix"></image>
+            <text>{{item.name}}</text>
+          </view>
         </view>
-        <view class="calendarItemBrand">
-          <image src="https://www.51chaidan.com/images/default/headphoto/32781.jpg" mode="widthFix"></image>
-          <text>没拆</text>
-        </view>
-      </view>
+      </block>
     </view>
-    <view wx:if="{{tabIndex==1}}">
-      <view class="calendarItem">
-        <image class="calendarItemBanner" src="http://www.51chaidan.com/images/spread/yiFanShang/1595406724.jpg" mode="widthFix"></image>
-        <view class="calendarItemInfo">
-          <view> <text>1.3w票</text> </view>
-          <view> <image class="calendarItemBanner" src="http://www.51chaidan.com/images/sign/calendar/heat.png" mode="widthFix"></image>  <text>1.3w</text></view>
-          <view> <image class="calendarItemBanner" src="http://www.51chaidan.com/images/sign/calendar/vote.png" mode="widthFix"></image>  <text>投票</text></view>
-        </view>
-        <view class="calendarItemBrand">
-          <image src="https://www.51chaidan.com/images/default/headphoto/32781.jpg" mode="widthFix"></image>
-          <text>没拆</text>
-        </view>
-      </view>
-    </view>
-    <view wx:if="{{tabIndex==2}}" class="ranking">
-      <view class="rankingItem rankingOne">
+    
+    <view wx:if="{{tabIndex==3}}" class="ranking">
+      <view class="rankingItem rankingOne" wx:if="{{brandData[0]}}" data-lb="2"  data-brand_id='{{brandData[0].brand_id}}' data-calendar_id='{{brandData[0].id}}' catchtap="jumptoCalendarDetail">
         <view class="rankingItemWrap">
-          <text class="rankNum">1</text>
-          <image class="rankingBanner" src="http://www.51chaidan.com/images/spread/yiFanShang/1595406724.jpg" mode="widthFix"></image>
+          <text class="rankNum">{{brandData[0].rank}}</text>
+          <image class="rankingBanner" src="{{brandData[0].calendar_img}}" mode="aspectFill"></image>
           <view class="rankingBrandWrap">
             <view class="rankingBrandInfo">
-              <image class="rankingBrandLogo" src="https://www.51chaidan.com/images/default/headphoto/32781.jpg" mode="widthFix"></image>
-              <text class="rankingBrandName">没拆</text>
+              <image class="rankingBrandLogo" src="{{brandData[0].logo}}" mode="widthFix"></image>
+              <text class="rankingBrandName">{{brandData[0].name}}</text>
             </view>
-            <view class="rankingBrandVote">4.3w票</view>
+            <view class="rankingBrandVote">{{brandData[0].vote_number}}票</view>
           </view>
         </view>
       </view>
       <view class="rankingItem rankingTwoThree">
-        <view class="rankingTwo">
+        <view class="rankingTwo" wx:if="{{brandData[1]}}" data-lb="2" data-brand_id='{{brandData[1].brand_id}}' data-calendar_id='{{brandData[1].id}}' catchtap="jumptoCalendarDetail">
           <view class="rankingItemWrap">
-            <text class="rankNum">2</text>
-            <image class="rankingBanner" src="http://www.51chaidan.com/images/spread/yiFanShang/1595406724.jpg" mode="widthFix"></image>
+            <text class="rankNum">{{brandData[1].rank}}</text>
+            <image class="rankingTwoThreeBanner" src="{{brandData[1].calendar_img}}" mode="aspectFill"></image>
             <view class="rankingBrandWrap">
               <view class="rankingBrandInfo">
-                <image class="rankingBrandLogo" src="https://www.51chaidan.com/images/default/headphoto/32781.jpg" mode="widthFix"></image>
-                <text class="rankingBrandName">没拆</text>
+                <image class="rankingBrandLogo" src="{{brandData[1].logo}}" mode="widthFix"></image>
+                <text class="rankingBrandName">{{brandData[1].name}}</text>
               </view>
-              <view class="rankingBrandVote">4.3w票</view>
+              <view class="rankingBrandVote">{{brandData[1].vote_number}}票</view>
             </view>
           </view>
         </view>
-        <view class="rankingThree">
+        <view class="rankingThree" wx:if="{{brandData[2]}}" data-lb="2"  data-brand_id='{{brandData[2].brand_id}}' data-calendar_id='{{brandData[2].id}}' catchtap="jumptoCalendarDetail">
           <view class="rankingItemWrap">
-            <text class="rankNum">3</text>
-            <image class="rankingBanner" src="http://www.51chaidan.com/images/spread/yiFanShang/1595406724.jpg" mode="widthFix"></image>
+            <text class="rankNum">{{brandData[2].rank}}</text>
+            <image class="rankingTwoThreeBanner" src="{{brandData[2].calendar_img}}" mode="aspectFill"></image>
             <view class="rankingBrandWrap">
               <view class="rankingBrandInfo">
-                <image class="rankingBrandLogo" src="https://www.51chaidan.com/images/default/headphoto/32781.jpg" mode="widthFix"></image>
-                <text class="rankingBrandName">没拆</text>
+                <image class="rankingBrandLogo" src="{{brandData[2].logo}}" mode="widthFix"></image>
+                <text class="rankingBrandName">{{brandData[2].name}}</text>
               </view>
-              <view class="rankingBrandVote">4.3w票</view>
+              <view class="rankingBrandVote">{{brandData[2].vote_number}}票</view>
             </view>
           </view>
         </view>
       </view>
-      <view class="rankingOthers">
-        <view class="rankingOthersL">
-          <image src="http://www.51chaidan.com/images/sign/calendar/greenArrows.png" mode="widthFix"></image>
-          <text>4</text>
-        </view>
-        <view class="rankingOthersR">
-          <image class="rankingOthersRLogo" src="https://www.51chaidan.com/images/default/headphoto/32781.jpg" mode="widthFix"></image>
-          <view>
-            <image src="http://www.51chaidan.com/images/sign/calendar/ticket.png" mode="widthFix"></image>
-            <text>5001</text>
+      <block wx:for="{{brandData}}" wx:key='key' data-index="{{index}}" wx:if="{{index>3}}"> 
+        <view class="rankingOthers" data-lb="2"  data-brand_id='{{item.brand_id}}' data-calendar_id='{{item.id}}' catchtap="jumptoCalendarDetail">
+          <view class="rankingOthersL">
+            <image src="http://www.51chaidan.com/images/sign/calendar/greenArrows.png" mode="widthFix"></image>
+            <text>{{item.rank}}</text>
           </view>
-        </view> 
-      </view>
-      <view class="rankingOthers">
-        <view class="rankingOthersL">
-          <image src="http://www.51chaidan.com/images/sign/calendar/greenArrows.png" mode="widthFix"></image>
-          <text>5</text>
+          <view class="rankingOthersR">
+            <image class="rankingOthersRLogo" src="{{item.logo}}" mode="widthFix"></image>
+            <view>
+              <image src="http://www.51chaidan.com/images/sign/calendar/ticket.png" mode="widthFix"></image>
+              <text>{{item.vote_number}}</text>
+            </view>
+          </view> 
         </view>
-        <view class="rankingOthersR">
-          <image class="rankingOthersRLogo" src="https://www.51chaidan.com/images/default/headphoto/32781.jpg" mode="widthFix"></image>
-          <view>
-            <image src="http://www.51chaidan.com/images/sign/calendar/ticket.png" mode="widthFix"></image>
-            <text>5001</text>
-          </view>
-        </view> 
-      </view>
-      <view class="rankingOthers">
-        <view class="rankingOthersL">
-          <image src="http://www.51chaidan.com/images/sign/calendar/greenArrows.png" mode="widthFix"></image>
-          <text>5</text>
-        </view>
-        <view class="rankingOthersR">
-          <image class="rankingOthersRLogo" src="https://www.51chaidan.com/images/default/headphoto/32781.jpg" mode="widthFix"></image>
-          <view>
-            <image src="http://www.51chaidan.com/images/sign/calendar/ticket.png" mode="widthFix"></image>
-            <text>5001</text>
-          </view>
-        </view> 
-      </view>
+      </block>
+      
     </view>
   </block>
 </view>
 
 
-<view class="btn">
+<view class="btn" catchtap="jumptoIWasInvolved">
   我参与的
 </view>
 
@@ -164,6 +132,10 @@
   </view>
 </view>
 
+<!-- 
+<view>
+  没有数据
+</view> -->
 
 
 
