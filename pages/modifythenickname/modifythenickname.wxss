@@ -76,7 +76,7 @@ page{
   justify-content: center;
   position: fixed;
   left: 0;
-  bottom: 40rpx;
+  bottom: 30rpx;
   z-index: 11;
 }
 .leafletBottomEve{
@@ -169,7 +169,12 @@ page{
   font-size: 20rpx;
   float: right; 
 }
-
+.iwasTitle{
+  height: 80rpx;
+  line-height: 80rpx;
+  padding:0 20rpx;
+  font-size: 26rpx;
+}
 
 
 

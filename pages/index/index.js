@@ -224,14 +224,14 @@ Page({
       // url: "/pages/dismantlingbox/dismantlingbox"
       // url: "/page/secondpackge/pages/shopsquaretrip/shopsquaretrip"
 
-      url: "/pages/modifythenickname/modifythenickname"
+      // url: "/pages/modifythenickname/modifythenickname"
 
       // url: "/page/secondpackge/pages/articleList/articleList"
-      // url: "/page/secondpackge/pages/calendarList/calendarList"
+      url: "/page/secondpackge/pages/calendarList/calendarList"
       // url: "/pages/sputforward/sputforward"
       // url: "/page/component/pages/limitlottery/limitlottery?id=201425",
 
-      url: "/page/component/pages/iWasInvolved/iWasInvolved",
+      // url: "/page/component/pages/iWasInvolved/iWasInvolved",
 
 
 

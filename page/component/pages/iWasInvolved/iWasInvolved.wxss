@@ -28,6 +28,7 @@ page{
   position: relative;
   vertical-align: top;
   margin-left: 20rpx;
+  min-width: 190rpx;
   
 }
 .iwassEveImg{
@@ -139,7 +140,7 @@ page{
 }
 .calendarItemBanner{
   width: 100%;
-  height: auto;
+  height: 194rpx;
   border-radius: 8rpx;
   display: block;
 }

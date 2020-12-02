@@ -16,9 +16,11 @@ Page({
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
     // 品牌详情 2 单张详情 1
-    isBrandDetail:1
-
+    isBrandDetail:0,
+    share_uid:0,
+    pid:0
   },
+
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -41,12 +43,32 @@ Page({
    */
   onLoad: function (options) {
     console.log('options===',options)
-    this.data.shareUId = options.shareUId;
-    // lb 品牌详情 2 单张详情 1
-    //   this.setData({
-    //     isBrandDetail:options.lb || 1
-    //   })
 
+    // 品牌详情 2 单张详情 1
+    if(options.brand_id){
+      this.setData({
+        isBrandDetail:2,
+        brand_id:options.brand_id || 518
+      })
+    }else{
+      this.setData({
+        isBrandDetail:1,
+        calendar_id:options.calendar_id || 518
+      })      
+    }
+
+    // this.setData({
+    //   isBrandDetail:2,
+    //   brand_id:options.brand_id || 518
+    // })
+
+    // this.setData({
+    //   isBrandDetail:1,
+    //   calendar_id:2
+    // })
+
+
+    this.data.share_uid + options.share_uid || 0
 
 
     // 判断是否授权
@@ -64,23 +86,90 @@ Page({
       uid: app.signindata.uid,
       isAuthMobile:app.signindata.isAuthMobile
     });
-    this.getData();
+    if(this.data.isBrandDetail==2){
+      this.brandDetail()
+    }else{
+      this.calendarDetail(1);
+    }
+    
   },
 
-  getData(){
+  brandDetail:function(){
     var _this = this;
 
     wx.showLoading({ title: '加载中...',mask:true }) 
-    var q = Dec.Aese('mod=festival&operation=listWSJ&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&shareUId='+_this.data.shareUId+'&shareDate=1');
-    console.log(app.signindata.comurl + 'spread.php?mod=festival&operation=listWSJ&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&shareUId='+_this.data.shareUId+'&shareDate=1')
+
+    var q = Dec.Aese('mod=Obtain&operation=BrandToCalendarList&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&brand_id='+_this.data.brand_id);
+
+
+
+    console.log(app.signindata.comurl + 'spread.php?'+'mod=Obtain&operation=BrandToCalendarList&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&brand_id='+_this.data.brand_id)
+
     wx.request({
-      url: app.signindata.comurl + 'spread.php' + q,
+      url: app.signindata.comurl + 'brandDrying.php' + q,
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) { 
-        console.log('getData====',res)
+        console.log('brandDetail====',res)
         if (res.data.ReturnCode == 200) {
+          _this.setData({
+            brandDetails:res.data.List.brandDetails,
+            calendarDetails:res.data.List.calendarDetails,
+            voteToUserList:res.data.List.voteToUserList
+          })
+        }else{
+          wx.showModal({
+            title: '提示',
+            content: res.data.Msg,
+            showCancel: false,
+            success: function (res) { }
+          })           
+        }
+      },
+      fail: function () {},
+      complete:function(){
+        wx.hideLoading()
+      }
+    });
+  },
+  calendarDetail:function(num){
+    var _this = this;
 
+    if (num == 1) {
+      _this.data.pid = 0;
+      _this.setData({
+        listdata: [],
+      });
+    } else {
+      var pagenum = parseInt(_this.data.pid)
+      _this.data.pid = ++pagenum;
+    };
+
+    wx.showLoading({ title: '加载中...',mask:true }) 
+
+    var q = Dec.Aese('mod=Obtain&operation=calendarInfo&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&id='+_this.data.calendar_id+'&pid='+_this.data.pid);
+
+
+    console.log(app.signindata.comurl + 'brandDrying.php?'+'mod=Obtain&operation=calendarInfo&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&id='+_this.data.calendar_id+'&pid='+_this.data.pid)
+
+    wx.request({
+      url: app.signindata.comurl + 'brandDrying.php' + q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) { 
+        console.log('calendarDetail====',res)
+        if (res.data.ReturnCode == 200) {
+          _this.setData({
+            calendarDetails:res.data.List.calendarDetails,
+            calendarDetailsToUser:res.data.List.calendarDetailsToUser
+          })
+        }else{
+          wx.showModal({
+            title: '提示',
+            content: res.data.Msg,
+            showCancel: false,
+            success: function (res) { }
+          })  
         }
       },
       fail: function () {},
@@ -95,18 +184,28 @@ Page({
    */
   onShareAppMessage: function (options) {
     var _this = this;
+    if(_this.data.isBrandDetail == 2){
+       var shareUrl = 'pages/modifythenickname/modifythenickname?brand_id='+_this.data.brand_id + '&share_uid=' + _this.data.uid;
+    }else{
+       var shareUrl = 'pages/modifythenickname/modifythenickname?calendar_id='+_this.data.calendar_id + '&share_uid=' + _this.data.uid;
+    };
     return {
-      title: '万圣节抢限量大体，端盒送隐藏！',
-      path: 'pages/modifythenickname/modifythenickname?lb='+_this.data.isBrandDetail,
+      title: '日历',
+      path:shareUrl,
       imageUrl:'',
       success: function (res) {}
     }  
   },
   onShareTimeline:function(){
     var _this = this;
+    if(_this.data.isBrandDetail == 2){
+      var shareUrl = 'brand_id='+_this.data.brand_id+'&share_uid='+_this.data.share_uid;
+   }else{
+      var shareUrl = 'calendar_id='+_this.data.calendar_id+'&share_uid='+_this.data.share_uid;
+   };
     return {
-      title:'万圣节抢限量大体，端盒送隐藏！',
-      query:'lb='+_this.data.isBrandDetail,
+      title:'日历',
+      query:shareUrl,
       imageUrl:''
     }
   },
@@ -211,7 +310,96 @@ Page({
     wx.navigateTo({
       url: "/page/component/pages/iWasInvolved/iWasInvolved"
     })
-  }
+  },
+    // 投票
+  votingInterface:function(w){
 
+    var _this = this;
+
+    var brand_id = w.currentTarget.dataset.brand_id || w.target.dataset.brand_id || 0;
+    var calendar_id = w.currentTarget.dataset.calendar_id || w.target.dataset.calendar_id || 0;
+
+    wx.showLoading({ title: '加载中...',mask:true }) 
+
+    var q = Dec.Aese('mod=Obtain&operation=recordVote&uid=' +_this.data.uid+'&loginid='+_this.data.loginid + '&calendar_id=' + calendar_id + '&brand_id=' + brand_id + '&share_uid=' + _this.data.share_uid);
+
+
+    console.log(app.signindata.comurl +'brandDrying.php?' + 'mod=Obtain&operation=recordVote&uid=' +_this.data.uid+'&loginid='+_this.data.loginid + '&calendar_id=' + calendar_id + '&calendar_id=' + brand_id + '&share_uid=' + _this.data.share_uid)
+
+
+    wx.request({
+      url: app.signindata.comurl + 'brandDrying.php' + q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) { 
+        console.log('receivefun====',res)
+        if (res.data.ReturnCode == 200) {
+          wx.showModal({
+            title: '',
+            content: '投票成功',
+            showCancel: false,
+            success: function (res) { }
+          })
+          _this.listdata(1);
+        }else{
+          wx.showModal({
+            title: '提示',
+            content: res.data.Msg,
+            showCancel: false,
+            success: function (res) { }
+          })          
+        }
+      },
+      fail: function () {},
+      complete:function(){
+        wx.hideLoading()
+      }
+    });    
+  },
+  // 投票
+  votingInterface:function(w){
+
+    var _this = this;
+
+    var brand_id = w.currentTarget.dataset.brand_id || w.target.dataset.brand_id || 0;
+    var calendar_id = w.currentTarget.dataset.calendar_id || w.target.dataset.calendar_id || 0;
+
+    wx.showLoading({ title: '加载中...',mask:true }) 
+
+    var q = Dec.Aese('mod=Obtain&operation=recordVote&uid=' +_this.data.uid+'&loginid='+_this.data.loginid + '&calendar_id=' + calendar_id + '&brand_id=' + brand_id + '&share_uid=' + _this.data.share_uid);
+
+
+    console.log(app.signindata.comurl +'brandDrying.php?' + 'mod=Obtain&operation=recordVote&uid=' +_this.data.uid+'&loginid='+_this.data.loginid + '&calendar_id=' + calendar_id + '&calendar_id=' + brand_id + '&share_uid=' + _this.data.share_uid)
+
+
+    wx.request({
+      url: app.signindata.comurl + 'brandDrying.php' + q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) { 
+        console.log('receivefun====',res)
+        if (res.data.ReturnCode == 200) {
+          wx.showModal({
+            title: '',
+            content: '投票成功',
+            showCancel: false,
+            success: function (res) { }
+          })
+          _this.listdata(1);
+        }else{
+          wx.showModal({
+            title: '提示',
+            content: res.data.Msg,
+            showCancel: false,
+            success: function (res) { }
+          })          
+        }
+      },
+      fail: function () {},
+      complete:function(){
+        wx.hideLoading()
+      }
+    });    
+  },
 
 })
