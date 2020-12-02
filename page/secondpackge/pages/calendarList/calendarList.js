@@ -278,11 +278,15 @@ Page({
     })
   },
   jumptoCalendarDetail(e){
-    console.log(e.currentTarget.dataset.brand_id)
-    console.log(e.currentTarget.dataset.calendar_id)
-    wx.navigateTo({ 
-      url: "/pages/modifythenickname/modifythenickname?share_uid=" + this.data.share_uid + "&brand_id=" + e.currentTarget.dataset.brand_id + "&calendar_id="+e.currentTarget.dataset.calendar_id
-    })
+    if(e.currentTarget.dataset.brand_id){
+      wx.navigateTo({ 
+        url: "/pages/modifythenickname/modifythenickname?share_uid=" + this.data.share_uid + "&brand_id=" + e.currentTarget.dataset.brand_id
+      })
+    }else{
+      wx.navigateTo({ 
+        url: "/pages/modifythenickname/modifythenickname?share_uid=" + this.data.share_uid + "&calendar_id="+e.currentTarget.dataset.calendar_id
+      })
+    }
   },
   jumpsearch(){
     this.setData({
