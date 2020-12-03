@@ -191,3 +191,47 @@ page{
   color: #fff;
   display: inline-block;
 }
+/* 
+.vipiwastip{
+  width: 600rpx;
+  height: 400rpx;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  margin:auto;
+  background: #fff;
+  border-radius: 20rpx;
+}
+.Vipadrestxt{
+  width: 500rpx;
+  padding:10rpx 0;
+  font-size: 26rpx;
+  color: #000;
+  margin:auto;
+  overflow:scroll;
+}
+.VipTxtEve{
+  height: 100rpx;
+}
+.VipTxtEve text{
+  display: inline-block;
+  height: 80rpx;
+  vertical-align: top;
+}
+.Vipbutposi{
+  height: 60rpx;
+  width: 300rpx;
+  line-height: 60rpx;
+  color: #fff;
+  font-size: 26rpx;
+  text-align: center;
+  position: absolute;
+  right: 0;
+  bottom:30rpx;
+  left:0;
+  margin:0 auto ;
+  border-radius:60rpx;
+  background:#E94F57;
+} */

@@ -377,12 +377,30 @@ Page({
             _this.calendarDetail(1);
           }
         }else{
-          wx.showModal({
-            title: '提示',
-            content: res.data.Msg,
-            showCancel: false,
-            success: function (res) { }
-          })          
+          if(res.data.ReturnCode == 386){
+            wx.showModal({
+              title: '提示',
+              content: res.data.Msg,
+              showCancel: true,
+              cancelText:"取消",
+              confirmText:"去获取",
+              success: function (res) { 
+                if (res.cancel) {} else {
+                  //点击确定
+                  _this.jumpiwas();
+                }
+              }
+            }) 
+          }else{
+            if(res.data.Msg){
+              wx.showModal({
+                title: '提示',
+                content: res.data.Msg,
+                showCancel: false,
+                success: function (res) { }
+              })
+            };
+          };
         }
       },
       fail: function () {},

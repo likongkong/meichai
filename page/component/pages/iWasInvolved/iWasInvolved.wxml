@@ -87,7 +87,7 @@
 				</view>
 		</view>
 
-		<view class="taskEve">
+		<view class="taskEve" catchtap="tipVipMode">
 				<view class="taskEveLeft">
 						<view class="telTitle">开通VIP</view>
 						<view class="telTitleNum">投票券+10</view>
@@ -131,7 +131,24 @@
 	 </view>
 </view>
 
-
+<!-- VIP开通弹框 -->
+<!-- <view wx:if='{{Viptip}}' class="wsh" catchtouchmove="true">
+   <view class="tgimgboxgb" catchtap="tipVipMode"></view>
+	 <view class="vipiwastip">
+       <view class="adreshead" style="line-height:80rpx;">VIP开通特权</view>
+			 <view class="Vipadrestxt">
+			    <view class="VipTxtEve">
+					    <text style="margin-right:10rpx;width:100rpx;">特权一:</text>
+							<text style="width:390rpx;">赠送2021MCTS展会限量台历x1</text>
+					</view>
+			    <view class="VipTxtEve">
+					    <text style="margin-right:10rpx;width:100rpx;">特权二:</text>
+							<text style="width:390rpx;">每日限时抽盒金x5  (持续365天)共计1825抽盒金</text>
+					</view>
+			 </view>
+			 <view class="Vipbutposi" catchtap="evereceivefun" data-num='3'>立即开通</view>
+	 </view>
+</view> -->
 
 
 
