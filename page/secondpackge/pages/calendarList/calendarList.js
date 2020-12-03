@@ -128,8 +128,8 @@ Page({
           });
           // '已经授权'
           _this.data.loginid = app.signindata.loginid,
-            _this.data.openid = app.signindata.openid,
-            _this.data.isNewer = app.signindata.isNewer;
+          _this.data.openid = app.signindata.openid,
+          _this.data.isNewer = app.signindata.isNewer;
 
           _this.setData({
             uid: app.signindata.uid,
@@ -216,6 +216,9 @@ Page({
     if(this.data.isReachBottom){
       this.setData({
         pid:++this.data.pid
+      })
+      wx.showLoading({
+        title: '加载中...',
       })
       if(this.data.tabIndex != 3){
         this.getInfo()
