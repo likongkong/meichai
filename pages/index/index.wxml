@@ -72,11 +72,11 @@
 	</view>
  
 	<!--  测试  -->
-	<view style='height:220rpx;width:100%;text-align:center; display: table;position: relative;' class='rotate' catchtap='jumpxinxi'>
+	<!-- <view style='height:220rpx;width:100%;text-align:center; display: table;position: relative;' class='rotate' catchtap='jumpxinxi'>
 		<text style='display: table-cell;vertical-align:middle;text-align:center;'>转盘\n盘转</text>
-<!-- <navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id=26" style='position: absolute;height:100%;width:100%;left:0rpx;top:0;z-index:3;'></navigator> -->
+	</view> -->
 
-	</view>
+
 	<!--   数据  -->
 
 	<!--  信息流  -->

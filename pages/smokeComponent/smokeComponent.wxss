@@ -7,6 +7,7 @@
   display: inline-block;
   margin: 5rpx;
   border-radius: 10rpx;
+  position: relative;
 }
 
 .disanum_simgbox {
@@ -43,4 +44,14 @@
   border-radius: 7rpx;
   font-size: 25rpx;
   text-align: center;
+}
+
+
+.labelstyleImg{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width:60rpx;
+  height:60rpx;
+  z-index: 10;
 }

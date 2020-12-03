@@ -3958,6 +3958,13 @@ closefrindcommoni:function(){
     } else {
       var tdavatar = _this.data.avatarUrl;
     };
+    var labelstyleImg = '';
+    wx.getImageInfo({
+      src: 'https://cdn.51chaidan.com/images/icon/newArrival.png', // 新上抽盒机角标图片
+      success: function (res) {
+        labelstyleImg = res.path;
+      }
+    })
     wx.getImageInfo({
       src: 'https://www.51chaidan.com/images/mc.jpg', // 美拆头像
       success: function (res) {
@@ -4053,6 +4060,10 @@ closefrindcommoni:function(){
                               ctxt.draw(true);
                               ctxt.drawImage(res.path, 10, 449, 144, 77)
                               ctxt.draw(true);
+                              if(_this.data.activityblindbox[0].isNewArrival){
+                                ctxt.drawImage(labelstyleImg, 114, 449, 40, 40)
+                                ctxt.draw(true);
+                              }
                               ctxt.setFontSize(11);
                               ctxt.setFillStyle('#000');
                               ctxt.fillText(_this.data.activityblindbox[0].name, 13, 544);
@@ -4081,6 +4092,10 @@ closefrindcommoni:function(){
                                   ctxt.draw(true);
                                   ctxt.drawImage(res.path, 164, 449, 144, 77)
                                   ctxt.draw(true);
+                                  if(_this.data.activityblindbox[1].isNewArrival){
+                                    ctxt.drawImage(labelstyleImg, 268, 449, 40, 40)
+                                    ctxt.draw(true);
+                                  }
                                   ctxt.setFontSize(11);
                                   ctxt.setFillStyle('#000');
                                   ctxt.fillText(_this.data.activityblindbox[1].name, 167, 544);
@@ -4230,6 +4245,10 @@ closefrindcommoni:function(){
                               ctxt.draw(true);
                               ctxt.drawImage(res.path, 10, 449, 144, 77)
                               ctxt.draw(true);
+                              if(_this.data.activityblindbox[0].isNewArrival){
+                                ctxt.drawImage(labelstyleImg, 114, 449, 40, 40)
+                                ctxt.draw(true);
+                              }
                               ctxt.setFontSize(11);
                               ctxt.setFillStyle('#000');
                               ctxt.fillText(_this.data.activityblindbox[0].name, 13, 544);
@@ -4258,6 +4277,10 @@ closefrindcommoni:function(){
                                   ctxt.draw(true);
                                   ctxt.drawImage(res.path, 164, 449, 144, 77)
                                   ctxt.draw(true);
+                                  if(_this.data.activityblindbox[1].isNewArrival){
+                                    ctxt.drawImage(labelstyleImg, 268, 449, 40, 40)
+                                    ctxt.draw(true);
+                                  }
                                   ctxt.setFontSize(11);
                                   ctxt.setFillStyle('#000');
                                   ctxt.fillText(_this.data.activityblindbox[1].name, 167, 544);

@@ -5,6 +5,7 @@
   <view style="width:100%;margin:5rpx 0 5rpx 0;">
     <scroll-view scroll-x="true" style="white-space:nowrap;">
       <view wx:for='{{dataList}}' wx:key='key' wx:for-item='w' class="itemstyle">
+        <image wx:if='{{w.isNewArrival}}' class="labelstyleImg" src="https://cdn.51chaidan.com/images/icon/newArrival.png"></image>
         <view catchtap='bbevebox' data-gid='{{w.goodsId}}' style='height:177rpx;width:250rpx;position:relative;margin-top:20rpx;'>
           <image class='disanum_simg' src='{{w.cover}}' style='height:177rpx;width:222rpx;'></image>
           <view class='labelstyle' wx:if='{{w.isRecycle}}' style='background:#1890ff;border-radius:7rpx;width:120rpx;left:10rpx;top:-4rpx;'>{{w.recycleRatio}}折回收</view>

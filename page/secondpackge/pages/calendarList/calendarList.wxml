@@ -1,7 +1,5 @@
-
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}' is_share='{{is_share}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
-
 <view class="swiperWrap" wx:if="{{swiperCalendrList.length!=0}}">
   <swiper>
     <block wx:for="{{swiperCalendrList}}" wx:key='key' data-index="{{index}}">
@@ -20,6 +18,7 @@
     </block>
   </swiper>
 </view>
+
 <view class="content">
   <view class="elsearch" wx:if="{{isShowSearch}}">
       <view class="elsearchch">
@@ -37,6 +36,7 @@
       <image src="http://www.51chaidan.com/images/sign/calendar/seek.png" mode="widthFix"></image>
     </view>
   </view>
+
   <block>
     <view wx:if="{{tabIndex==1 || tabIndex==2}}" class="allCalendar">
       <block wx:for="{{listData}}" wx:key='key' data-index="{{index}}">
@@ -54,7 +54,6 @@
         </view>
       </block>
     </view>
-    
     <view wx:if="{{tabIndex==3}}" class="ranking">
       <view class="rankingItem rankingOne" wx:if="{{brandData[0]}}" data-lb="2"  data-brand_id='{{brandData[0].brand_id}}' catchtap="jumptoCalendarDetail">
         <view class="rankingItemWrap">
@@ -80,7 +79,11 @@
       <block wx:for="{{brandData}}" wx:key='key' data-index="{{index}}" wx:if="{{index>2}}"> 
         <view class="rankingOthers" data-lb="2"  data-brand_id='{{item.brand_id}}' catchtap="jumptoCalendarDetail">
           <view class="rankingOthersL">
-            <image src="http://www.51chaidan.com/images/sign/calendar/greenArrows.png" mode="widthFix"></image>
+            <block>
+              <image wx:if="{{item.lastRank==1}}" src="" mode="widthFix"></image>
+              <image wx:if="{{item.lastRank==2}}" src="http://www.51chaidan.com/images/sign/calendar/redArrows.png" mode="widthFix"></image>
+              <image wx:if="{{item.lastRank==3}}" src="http://www.51chaidan.com/images/sign/calendar/greenArrows.png" mode="widthFix"></image>
+            </block>
             <text>{{item.rank}}</text>
           </view>
           <view class="rankingOthersR">
