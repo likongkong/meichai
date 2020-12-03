@@ -48,7 +48,7 @@ page{
 }
 .swiperItemBrandLogo{
   width: 50rpx;
-  height: auto;
+  height: 50rpx;
   border-radius: 50rpx;
   margin-right: 20rpx;
   display: block;
@@ -252,7 +252,7 @@ page{
 }
 .rankingBrandLogo{
   width: 50rpx;
-  height: auto;
+  height: 50rpx;
   border-radius: 50rpx;
   margin-right: 10rpx;
   display: block;
@@ -310,7 +310,7 @@ page{
 }
 .rankingOthersRLogo{
   width: 60rpx;
-  height: auto;
+  height: 60rpx;
   border-radius:60rpx;
 }
 .rankingOthersR>view{

@@ -8,7 +8,7 @@
           <image class="swiperItemBanner" src="{{item.calendar_img}}" mode="aspectFit"></image>
           <view class="swiperItemBrandWrap">
             <view class="swiperItemBrandInfo">
-              <image class="swiperItemBrandLogo" src="{{item.logo}}" mode="widthFix"></image>
+              <image class="swiperItemBrandLogo" src="{{item.logo}}" mode="aspectFit"></image>
               <text class="swiperItemBrandName specialellipsis" style="width:460rpx">{{item.name}}</text>
             </view>
             <view class="swiperItemBrandVote">{{item.vote_number}}票</view>
@@ -61,7 +61,7 @@
           <image class="rankingBanner" src="{{brandData[0].calendar_img}}" mode="aspectFit"></image>
           <view class="rankingBrandWrap">
             <view class="rankingBrandInfo">
-              <image class="rankingBrandLogo" src="{{brandData[0].logo}}" mode="widthFix"></image>
+              <image class="rankingBrandLogo" src="{{brandData[0].logo}}" mode="aspectFit"></image>
               <text class="rankingBrandName specialellipsis" style="width:460rpx">{{brandData[0].name}}</text>
             </view>
             <view class="rankingBrandVote">{{brandData[0].all_vote_number}}票</view>
@@ -87,7 +87,7 @@
             <text>{{item.rank}}</text>
           </view>
           <view class="rankingOthersR">
-            <image class="rankingOthersRLogo" src="{{item.logo}}" mode="widthFix"></image>
+            <image class="rankingOthersRLogo" src="{{item.logo}}" mode="aspectFit"></image>
             <view>
               <image src="http://www.51chaidan.com/images/sign/calendar/ticket.png" mode="widthFix"></image>
               <text>{{item.all_vote_number}}</text>
@@ -128,7 +128,7 @@
     <image class="rankingTwoThreeBanner" src="{{calendar_img}}" mode="aspectFit"></image>
     <view class="rankingBrandWrap">
       <view class="rankingBrandInfo">
-        <image class="rankingBrandLogo" src="{{logo}}" mode="widthFix"></image>
+        <image class="rankingBrandLogo" src="{{logo}}" mode="aspectFit"></image>
         <text class="rankingBrandName specialellipsis" style="width:160rpx">{{name}}</text>
       </view>
       <view class="rankingBrandVote">{{all_vote_number}}票</view>
