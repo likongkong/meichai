@@ -198,7 +198,12 @@ Page({
       title: '加载中...',
     })
     if(this.data.tabIndex != 3){
-      this.getInfo()
+      if(this.data.brand_name!=''){
+        let search = true;
+        this.getInfo(search);
+      }else{
+        this.getInfo()
+      }
     }else{
       this.getBrandRanking();
     }
@@ -400,6 +405,7 @@ Page({
 
     var brand_id = w.currentTarget.dataset.brand_id || w.target.dataset.brand_id || 0;
     var calendar_id = w.currentTarget.dataset.calendar_id || w.target.dataset.calendar_id || 0;
+    var index = w.currentTarget.dataset.index || w.target.dataset.index || 0;
 
     wx.showLoading({ title: '加载中...',mask:true }) 
 
@@ -408,7 +414,7 @@ Page({
 
     console.log(app.signindata.comurl +'brandDrying.php?' + 'mod=Obtain&operation=recordVote&uid=' +_this.data.uid+'&loginid='+_this.data.loginid + '&calendar_id=' + calendar_id + '&calendar_id=' + brand_id + '&share_uid=' + _this.data.share_uid)
 
-
+    
     wx.request({
       url: app.signindata.comurl + 'brandDrying.php' + q,
       method: 'GET',
@@ -422,7 +428,10 @@ Page({
             showCancel: false,
             success: function (res) { }
           })
-          _this.listdata(1);
+          let change = "listData["+ index +"].vote_number";
+          _this.setData({
+            [change]: ++_this.data.listData[ index ].vote_number
+          })
         }else{
           wx.showModal({
             title: '提示',

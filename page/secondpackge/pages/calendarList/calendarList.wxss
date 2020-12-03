@@ -254,12 +254,15 @@ page{
   width: 50rpx;
   height: auto;
   border-radius: 50rpx;
-  margin-right: 20rpx;
+  margin-right: 10rpx;
   display: block;
 }
 .rankingBrandName{
   font-size: 28rpx;
   color: #fff;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
 }
 .rankingBrandVote{
   font-size: 28rpx;
@@ -325,13 +328,13 @@ page{
 
 .btn{
   width: 450rpx;
-  height: 80rpx;
-  border-radius: 80rpx;
+  height: 70rpx;
+  border-radius: 70rpx;
   background-color: #E94F57;
   color: #fff;
   font-size: 30rpx;
   text-align: center;
-  line-height: 80rpx;
+  line-height: 70rpx;
   position: fixed;
   bottom: 130rpx;
   left: 50%;

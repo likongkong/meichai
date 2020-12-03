@@ -7,11 +7,11 @@
     <block wx:for="{{swiperCalendrList}}" wx:key='key' data-index="{{index}}">
       <swiper-item class="swiperItem" data-calendar_id='{{item.id}}' catchtap="jumptoCalendarDetail">
         <view>
-          <image class="swiperItemBanner" src="{{item.calendar_img}}" mode="aspectFill"></image>
+          <image class="swiperItemBanner" src="{{item.calendar_img}}" mode="aspectFit"></image>
           <view class="swiperItemBrandWrap">
             <view class="swiperItemBrandInfo">
               <image class="swiperItemBrandLogo" src="{{item.logo}}" mode="widthFix"></image>
-              <text class="swiperItemBrandName">{{item.name}}</text>
+              <text class="swiperItemBrandName specialellipsis" style="width:460rpx">{{item.name}}</text>
             </view>
             <view class="swiperItemBrandVote">{{item.vote_number}}票</view>
           </view>
@@ -41,11 +41,11 @@
     <view wx:if="{{tabIndex==1 || tabIndex==2}}" class="allCalendar">
       <block wx:for="{{listData}}" wx:key='key' data-index="{{index}}">
         <view class="calendarItem">
-          <image class="calendarItemBanner" src="{{item.calendar_img}}" mode="aspectFill" data-lb="1" data-calendar_id='{{item.id}}' catchtap="jumptoCalendarDetail"></image>
+          <image class="calendarItemBanner" src="{{item.calendar_img}}" mode="aspectFit" data-lb="1" data-calendar_id='{{item.id}}' catchtap="jumptoCalendarDetail"></image>
           <view class="calendarItemInfo">
             <view> <text>{{item.vote_number}}票</text> </view>
             <view> <image class="calendarItemBanner" src="http://www.51chaidan.com/images/sign/calendar/heat.png" mode="widthFix"></image>  <text>{{item.heat}}</text></view>
-            <view catchtap="votingInterface" data-brand_id='{{item.brand_id}}' data-calendar_id='{{item.id}}'> <image class="calendarItemBanner" src="http://www.51chaidan.com/images/sign/calendar/vote.png" mode="widthFix"></image>  <text>投票</text></view>
+            <view catchtap="votingInterface" data-index='{{index}}' data-brand_id='{{item.brand_id}}' data-calendar_id='{{item.id}}'> <image class="calendarItemBanner" src="http://www.51chaidan.com/images/sign/calendar/vote.png" mode="widthFix"></image>  <text>投票</text></view>
           </view>
           <view class="calendarItemBrand">
             <image src="{{item.logo}}" mode="widthFix"></image>
@@ -59,45 +59,25 @@
       <view class="rankingItem rankingOne" wx:if="{{brandData[0]}}" data-lb="2"  data-brand_id='{{brandData[0].brand_id}}' catchtap="jumptoCalendarDetail">
         <view class="rankingItemWrap">
           <text class="rankNum">{{brandData[0].rank}}</text>
-          <image class="rankingBanner" src="{{brandData[0].calendar_img}}" mode="aspectFill"></image>
+          <image class="rankingBanner" src="{{brandData[0].calendar_img}}" mode="aspectFit"></image>
           <view class="rankingBrandWrap">
             <view class="rankingBrandInfo">
               <image class="rankingBrandLogo" src="{{brandData[0].logo}}" mode="widthFix"></image>
-              <text class="rankingBrandName">{{brandData[0].name}}</text>
+              <text class="rankingBrandName specialellipsis" style="width:460rpx">{{brandData[0].name}}</text>
             </view>
-            <view class="rankingBrandVote">{{brandData[0].vote_number}}票</view>
+            <view class="rankingBrandVote">{{brandData[0].all_vote_number}}票</view>
           </view>
         </view>
       </view>
       <view class="rankingItem rankingTwoThree">
         <view class="rankingTwo" wx:if="{{brandData[1]}}" data-lb="2" data-brand_id='{{brandData[1].brand_id}}' catchtap="jumptoCalendarDetail">
-          <view class="rankingItemWrap">
-            <text class="rankNum">{{brandData[1].rank}}</text>
-            <image class="rankingTwoThreeBanner" src="{{brandData[1].calendar_img}}" mode="aspectFill"></image>
-            <view class="rankingBrandWrap">
-              <view class="rankingBrandInfo">
-                <image class="rankingBrandLogo" src="{{brandData[1].logo}}" mode="widthFix"></image>
-                <text class="rankingBrandName">{{brandData[1].name}}</text>
-              </view>
-              <view class="rankingBrandVote">{{brandData[1].vote_number}}票</view>
-            </view>
-          </view>
+          <template is="rankingItem" data="{{...brandData[1]}}"/>
         </view>
         <view class="rankingThree" wx:if="{{brandData[2]}}" data-lb="2"  data-brand_id='{{brandData[2].brand_id}}' catchtap="jumptoCalendarDetail">
-          <view class="rankingItemWrap">
-            <text class="rankNum">{{brandData[2].rank}}</text>
-            <image class="rankingTwoThreeBanner" src="{{brandData[2].calendar_img}}" mode="aspectFill"></image>
-            <view class="rankingBrandWrap">
-              <view class="rankingBrandInfo">
-                <image class="rankingBrandLogo" src="{{brandData[2].logo}}" mode="widthFix"></image>
-                <text class="rankingBrandName">{{brandData[2].name}}</text>
-              </view>
-              <view class="rankingBrandVote">{{brandData[2].vote_number}}票</view>
-            </view>
-          </view>
+          <template is="rankingItem" data="{{...brandData[2]}}"/>
         </view>
       </view>
-      <block wx:for="{{brandData}}" wx:key='key' data-index="{{index}}" wx:if="{{index>3}}"> 
+      <block wx:for="{{brandData}}" wx:key='key' data-index="{{index}}" wx:if="{{index>2}}"> 
         <view class="rankingOthers" data-lb="2"  data-brand_id='{{item.brand_id}}' catchtap="jumptoCalendarDetail">
           <view class="rankingOthersL">
             <image src="http://www.51chaidan.com/images/sign/calendar/greenArrows.png" mode="widthFix"></image>
@@ -107,7 +87,7 @@
             <image class="rankingOthersRLogo" src="{{item.logo}}" mode="widthFix"></image>
             <view>
               <image src="http://www.51chaidan.com/images/sign/calendar/ticket.png" mode="widthFix"></image>
-              <text>{{item.vote_number}}</text>
+              <text>{{item.all_vote_number}}</text>
             </view>
           </view> 
         </view>
@@ -139,7 +119,19 @@
 
 
 
-
+<template name="rankingItem">
+  <view class="rankingItemWrap">
+    <text class="rankNum">{{rank}}</text>
+    <image class="rankingTwoThreeBanner" src="{{calendar_img}}" mode="aspectFit"></image>
+    <view class="rankingBrandWrap">
+      <view class="rankingBrandInfo">
+        <image class="rankingBrandLogo" src="{{logo}}" mode="widthFix"></image>
+        <text class="rankingBrandName specialellipsis" style="width:160rpx">{{name}}</text>
+      </view>
+      <view class="rankingBrandVote">{{all_vote_number}}票</view>
+    </view>
+  </view>
+</template>
 
 
 
