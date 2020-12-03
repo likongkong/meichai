@@ -2,8 +2,7 @@
     <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 
-<view hidden="{{bothidden}}" style='position: fixed;top: 0;left: 0;height: 100%;width: 100%;z-index: 30;' catchtouchmove="preventD"></view>
-<view class='box' style="{{tgabox||!bothidden?'position:fixed;top:0;left:0;right:0;bottom:0;':''}}{{isIphoneX?'padding-bottom:138rpx;':''}}">
+<view class='box' style="{{tgabox?'position:fixed;top:0;left:0;right:0;bottom:0;':''}}{{isIphoneX?'padding-bottom:138rpx;':''}}">
     <view class='wdhead'> 
         <view class='personalhomepage' catchtap='personalhomepage'>个人主页</view>
         <view class='wdhl'>
@@ -40,7 +39,20 @@
         </view>
 
     </view>  
+    <view class="vipbox" wx:if='{{requestCompleted}}'>
+       <text>
+           <block wx:if='{{isVip}}'>可领取抽盒金5（今日有效）</block>
+           <block wx:else>开通VIP赠送价值￥2000+好礼</block>
+       </text>
+       <block wx:if='{{isVip}}'>
+            <view class="vipButOpen" catchtap="receivefun" wx:if='{{isGetVipBlindBoxMoney}}'>领取抽盒金</view>
+            <view class="vipButOpen" wx:else style="background:#BEBEBE;">明日可领取</view>       
+       </block>
+       <block wx:else>
+            <view class="vipButOpen" catchtap="openingVip">立即开通</view>      
+       </block>
 
+    </view>
     <view class='winningthepbox' wx:if='{{isAwardOrder}}' catchtap='jumporder'>
       <view class='winningthepimgtxt'>
         <image class='winningthepimgshop' src='{{awardOrder.Info.cover}}'></image>

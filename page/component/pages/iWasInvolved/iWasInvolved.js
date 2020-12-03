@@ -123,6 +123,12 @@ Page({
 
   evereceivefun:function(w){
     var num = w.currentTarget.dataset.num || w.target.dataset.num || 0;
+
+    if(num == 2){
+      app.showToastC('敬请期待');
+      return false;
+    }
+
     this.receivefun(num)
   },
   // 投票
@@ -146,7 +152,7 @@ Page({
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) { 
-        console.log('receivefun====',res)
+        console.log('votingInterface====',res)
         if (res.data.ReturnCode == 200) {
           wx.showModal({
             title: '',
@@ -423,6 +429,10 @@ Page({
   },
   // 预约展会
   bookingExhib:function(){
+
+    app.showToastC('敬请期待');
+    return false;
+
     wx.navigateTo({
       url: "/pages/dismantlingbox/dismantlingbox"
     });

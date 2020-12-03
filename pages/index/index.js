@@ -228,6 +228,9 @@ Page({
 
       // url: "/page/secondpackge/pages/articleList/articleList"
       url: "/page/secondpackge/pages/calendarList/calendarList"
+
+      // url: "/page/secondpackge/pages/vipPage/vipPage"
+
       // url: "/pages/sputforward/sputforward"
       // url: "/page/component/pages/limitlottery/limitlottery?id=201425",
 

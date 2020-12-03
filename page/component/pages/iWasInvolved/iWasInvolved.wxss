@@ -34,6 +34,7 @@ page{
 .iwassEveImg{
   height: 120rpx;
   display: block;
+  border-radius: 10rpx;
 }
 .iwassEveTxt{
   width: 100%;
