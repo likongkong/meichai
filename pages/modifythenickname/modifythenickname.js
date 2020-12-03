@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '展会日历', 
+    c_title: '', 
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
@@ -47,12 +47,13 @@ Page({
     // 品牌详情 2 单张详情 1
     if(options.brand_id){
       this.setData({
-        isBrandDetail:2,
+        isBrandDetail:2, 
         brand_id:options.brand_id || 518
       })
     }else{
       this.setData({
         isBrandDetail:1,
+        c_title: '展会日历',
         calendar_id:options.calendar_id || 518
       })      
     }
@@ -112,7 +113,9 @@ Page({
       success: function (res) { 
         console.log('brandDetail====',res)
         if (res.data.ReturnCode == 200) {
+          var name = res.data.List.brandDetails.name || '展会日历';
           _this.setData({
+            c_title: name, 
             brandDetails:res.data.List.brandDetails,
             calendarDetails:res.data.List.calendarDetails,
             voteToUserList:res.data.List.voteToUserList
