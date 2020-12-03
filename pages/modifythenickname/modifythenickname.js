@@ -95,16 +95,17 @@ Page({
     
   },
 
-  brandDetail:function(){
+  brandDetail:function(refresh){
     var _this = this;
+
+    var refresh = refresh || false;
 
     wx.showLoading({ title: '加载中...',mask:true }) 
 
-    var q = Dec.Aese('mod=Obtain&operation=BrandToCalendarList&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&brand_id='+_this.data.brand_id);
+    var q = Dec.Aese('mod=Obtain&operation=BrandToCalendarList&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&brand_id='+_this.data.brand_id + '&refresh=' + refresh);
 
 
-
-    console.log(app.signindata.comurl + 'spread.php?'+'mod=Obtain&operation=BrandToCalendarList&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&brand_id='+_this.data.brand_id)
+    console.log(app.signindata.comurl + 'spread.php?'+'mod=Obtain&operation=BrandToCalendarList&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&brand_id='+_this.data.brand_id + '&refresh=' + refresh)
 
     wx.request({
       url: app.signindata.comurl + 'brandDrying.php' + q,
@@ -137,8 +138,10 @@ Page({
       }
     });
   },
-  calendarDetail:function(num){
+  calendarDetail:function(num,refresh){
     var _this = this;
+
+    var refresh = refresh || false;
 
     if (num == 1) {
       _this.data.pid = 0;
@@ -152,10 +155,10 @@ Page({
 
     wx.showLoading({ title: '加载中...',mask:true }) 
 
-    var q = Dec.Aese('mod=Obtain&operation=calendarInfo&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&id='+_this.data.calendar_id+'&pid='+_this.data.pid);
+    var q = Dec.Aese('mod=Obtain&operation=calendarInfo&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&id='+_this.data.calendar_id+'&pid='+_this.data.pid + '&refresh=' + refresh);
 
 
-    console.log(app.signindata.comurl + 'brandDrying.php?'+'mod=Obtain&operation=calendarInfo&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&id='+_this.data.calendar_id+'&pid='+_this.data.pid)
+    console.log(app.signindata.comurl + 'brandDrying.php?'+'mod=Obtain&operation=calendarInfo&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&id='+_this.data.calendar_id+'&pid='+_this.data.pid + '&refresh=' + refresh)
 
     wx.request({
       url: app.signindata.comurl + 'brandDrying.php' + q,
@@ -311,9 +314,9 @@ Page({
 
   onPullDownRefresh: function () {
     if(this.data.isBrandDetail==2){
-      this.brandDetail()
+      this.brandDetail(true)
     }else{
-      this.calendarDetail(1);
+      this.calendarDetail(1,true);
     }
   },
   onReachBottom: function () {
