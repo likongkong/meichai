@@ -5,7 +5,7 @@
 
 
 
-<view class="iwashead">
+<view class="iwashead" wx:if='{{voteCalendarList&&voteCalendarList.length!=0}}'>
    <view class="iwashtop">
 	    <text style="float:left;">我的投票</text>
 			<text style="float:right" catchtap="ballotboxfun">查看更多></text>
@@ -35,44 +35,44 @@
 				</view>
 		</view>
 
-		<view class="taskEve" catchtap="evereceivefun" data-num='2'>
+		<view class="taskEve" catchtap="{{taskInfo.memberTicket?'evereceivefun':'subscrfun'}}" data-num='2'>
 				<view class="taskEveLeft">
 						<view class="telTitle">VIP专属券</view>
 						<view class="telTitleNum">投票券+1</view>
 				</view>
-				<view class="clickButton" style="{{taskInfo.memberTicket?'background: #298CF7;':''}}">
-					{{taskInfo.memberTicket?'明日更新':'领取'}}
+				<view class="clickButton" style="{{taskInfo.memberTicket?'':'background: #298CF7;'}}">
+					{{taskInfo.memberTicket?'领取':'明日更新'}}
 				</view>
 
 		</view>
 
-		<view class="taskEve" catchtap="{{taskInfo.daysSign?'subscrfun':'jumpOtherPage'}}" data-num='9'>
+		<view class="taskEve" catchtap="{{taskInfo.daysSign?'jumpOtherPage':'subscrfun'}}" data-num='9'>
 				<view class="taskEveLeft">
 						<view class="telTitle">每日签到</view>
 						<view class="telTitleNum">投票券+1</view>
 				</view>
-				<view class="clickButton" style="{{taskInfo.daysSign?'background: #298CF7;':''}}">
-					{{taskInfo.daysSign?'明日更新':'去签到'}}
+				<view class="clickButton" style="{{taskInfo.daysSign?'':'background: #298CF7;'}}">
+					{{taskInfo.daysSign?'去签到':'明日更新'}}
 				</view>
 		</view>
 
-		<view class="taskEve" catchtap="{{taskInfo.subscribeToyShow?'subscrfun':'bookingExhib'}}">
+		<view class="taskEve" catchtap="{{taskInfo.subscribeToyShow?'bookingExhib':'subscrfun'}}">
 				<view class="taskEveLeft">
 						<view class="telTitle">预约展会</view>
 						<view class="telTitleNum">投票券+1</view>
 				</view>
-				<view class="clickButton" style="{{taskInfo.subscribeToyShow?'background: #298CF7;':''}}">
-						{{taskInfo.subscribeToyShow?'明日更新':'去预约'}}
+				<view class="clickButton" style="{{taskInfo.subscribeToyShow?'':'background: #298CF7;'}}">
+						{{taskInfo.subscribeToyShow?'去预约':'明日更新'}}
 				</view>
 		</view>
 
-		<view class="taskEve" catchtap="{{taskInfo.subscribeToyShowTicket?'subscrfun':'bookingExhib'}}">
+		<view class="taskEve" catchtap="{{taskInfo.subscribeToyShowTicket?'bookingExhib':'subscrfun'}}">
 					<view class="taskEveLeft">
 							<view class="telTitle">预约展会门票</view>
 							<view class="telTitleNum">投票券+1</view>
 					</view>
-					<view class="clickButton" style="{{taskInfo.subscribeToyShowTicket?'background: #298CF7;':''}}">
-							{{taskInfo.subscribeToyShowTicket?'明日更新':'去预约'}}
+					<view class="clickButton" style="{{taskInfo.subscribeToyShowTicket?'':'background: #298CF7;'}}">
+							{{taskInfo.subscribeToyShowTicket?'去预约':'明日更新'}}
 					</view>
 		</view>
 
@@ -87,7 +87,7 @@
 				</view>
 		</view>
 
-		<view class="taskEve" catchtap="tipVipMode">
+		<view class="taskEve" catchtap="bookingExhib">
 				<view class="taskEveLeft">
 						<view class="telTitle">开通VIP</view>
 						<view class="telTitleNum">投票券+10</view>

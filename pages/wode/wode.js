@@ -38,8 +38,6 @@ Page({
     putforwardmoney:0,
     // 最佳合伙人
     partner:[],
-    // 下拉提示
-    bothidden: true,
     // 购物车显示数据
     shopnum: 0,
     // 授权弹框
@@ -48,8 +46,6 @@ Page({
     wxnum:'',
     // 我的钱包数据
     point:0,
-    // 点击请求判断防止多次提交
-    clicktherequestiftr: true,  
     B: false,
     temporary_store_id:'',
     // 判断美拆 or 店铺
@@ -85,8 +81,87 @@ Page({
     awasustipimages:false,
     luckyValue:0,
     // 抽盒金
-    blindbox_money:0
+    blindbox_money:0,
+    // 是否请求完成
+    requestCompleted:false
   },
+  // 开通VIP
+  openingVip:function(){
+
+    app.showToastC('敬请期待');
+    return false;
+    var _this = this;
+    var qqq = Dec.Aese('mod=getinfo&operation=vipPay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
+
+    console.log(app.signindata.comurl + 'order.php?' +'mod=getinfo&operation=vipPay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+
+    wx.request({
+      url: app.signindata.comurl + 'order.php' + qqq,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('开通VIP',res)
+        if (res.data.ReturnCode == 200) {
+
+           _this.paymentmony(res.data.Info.cart_id)
+        };
+      }
+    }) 
+  },
+  // 微信支付
+  paymentmony:function(cart_id){
+    var _this = this; 
+
+    console.log('微信支付===', app.signindata.comurl + 'order.php?'+'mod=operate&operation=prepay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1&oid=' + cart_id + '&xcx=1' + '&openid=' + app.signindata.openid)
+
+    var q = Dec.Aese('mod=operate&operation=prepay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1&oid=' + cart_id + '&xcx=1' + '&openid=' + app.signindata.openid)
+    wx.request({
+      url: app.signindata.comurl + 'order.php'+q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        if (res.data.ReturnCode == 200) {
+              wx.requestPayment({
+                  'timeStamp': res.data.Info.timeStamp.toString(),
+                  'nonceStr': res.data.Info.nonceStr,
+                  'package': res.data.Info.package,
+                  'signType': 'MD5',
+                  'paySign': res.data.Info.paySign,
+                  'success': function (res) {          
+
+                   },
+                  'fail':function(res){
+
+                   },
+                  'complete': function (res) {}
+                })
+        }else{       
+          if (res.data.ReturnCode == 800) {
+            app.showToastC('非该用户订单');
+          };
+          if (res.data.ReturnCode == 815) {
+            app.showToastC('订单状态错误');
+          };
+          if (res.data.ReturnCode == 816) {
+            app.showToastC('不支持的支付类型');
+          };
+          if (res.data.ReturnCode == 817) {
+            app.showToastC('付款明细已生成');
+          };
+          if (res.data.ReturnCode == 201) {
+            app.showToastC('微信预支付失败');
+          }; 
+          if (res.data.ReturnCode == 805) {
+            app.showToastC('剩余库存不足');
+          };   
+        };   
+      }
+    })
+  },
+
+
+
+
   wodesblist:function(){
     app.comjumpwxnav(988,'','','')
   },
@@ -217,21 +292,9 @@ Page({
     });
  
   },
-  onLoadfun:function(){
-    //  我的订单数据
+  listdata:function(){
     var _this = this;
-    _this.data.loginid = app.signindata.loginid;
-    _this.setData({
-      uid: app.signindata.uid,
-      store_id: app.signindata.store_id || 0,
-      isProduce: app.signindata.isProduce,
-    });  
-    _this.setData({
-      bothidden: true
-    }); 
-    wx.hideLoading()    
-    _this.setData({ B: true, iftr_wx: true });  
-
+    wx.showLoading({ title: '加载中...', mask:true })
     var q = Dec.Aese('mod=getinfo&operation=myorder&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
     wx.request({
       url: app.signindata.comurl + 'order.php'+q,
@@ -239,6 +302,9 @@ Page({
       header: { 'Accept': 'application/json' },
       success: function (res) {
         console.log(res)
+        // 刷新完自带加载样式回去
+        wx.stopPullDownRefresh();
+        wx.hideLoading();
         if (res.data.Message != "Empty info") {
           if (res.data.ReturnCode == 200){
             _this.setData({
@@ -260,6 +326,12 @@ Page({
               blindbox_money:res.data.Info.blindbox_money||0,
               // 限时抽盒金
               tempBlindboxMoney:res.data.Info.tempBlindboxMoney||0,
+              // 是否开通vip
+              isVip:res.data.Info.isVip || false,
+              // 是否可领取抽盒机金
+              isGetVipBlindBoxMoney:res.data.Info.isGetVipBlindBoxMoney || false,
+              requestCompleted:true
+
             });
             app.signindata.tempBlindboxMoney = res.data.Info.tempBlindboxMoney||0;
             _this.data.after_sale = res.data.Info.after_sale || 0;// 售后数
@@ -276,11 +348,25 @@ Page({
             nonsend: 0,
             // 待收货数
             nonreceive: 0,
+            requestCompleted:true
           });
           _this.data.after_sale = 0;// 售后数
         }
       }
     }); 
+  },
+  onLoadfun:function(){
+    //  我的订单数据
+    var _this = this;
+    _this.data.loginid = app.signindata.loginid;
+    _this.setData({
+      uid: app.signindata.uid,
+      store_id: app.signindata.store_id || 0,
+      isProduce: app.signindata.isProduce,
+    });  
+    wx.hideLoading()    
+    _this.setData({ B: true, iftr_wx: true });  
+    _this.listdata()
     var qqq = Dec.Aese('operation=info&mod=info');
     // 获取默认信息
     wx.request({
@@ -354,11 +440,8 @@ Page({
       tgabox: true
     });
   },
-  onShow: function () {
-    this.setData({
-      bothidden: false
-    });    
-    wx.showLoading({ title: '加载中...', }) 
+  onShow: function () {   
+    wx.showLoading({ title: '加载中...', mask:true  }) 
     // 判断是否授权 
     var _this = this;
     if(app.signindata.sceneValue==1154){
@@ -385,7 +468,6 @@ Page({
           } else {
             wx.hideLoading();
             _this.setData({
-              bothidden: true,
               signinlayer:false
             }); 
             // '没有授权 统计'
@@ -412,56 +494,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    var _this = this;
-    _this.setData({
-      bothidden: false
-    }); 
-    wx.showLoading({ title: '加载中...', })   
-    var q = Dec.Aese('mod=getinfo&operation=myorder&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
-    wx.request({
-      url: app.signindata.comurl + 'order.php' + q,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        // 刷新完自带加载样式回去
-        wx.stopPullDownRefresh();
-        _this.setData({
-          bothidden: true,
-          // 多次提交判断
-          clicktherequestiftr: true,
-        });        
-        wx.hideLoading()
-        if (res.data.Message != "Empty info") {
-          if (res.data.ReturnCode == 200) {
-            _this.setData({
-              // 待付款
-              nonpayment: res.data.Info.non_payment,
-              // 待拆单数
-              nonunpack: res.data.Info.non_unpack,
-              // 待发货数
-              nonsend: res.data.Info.non_send,
-              // 待收货数
-              nonreceive: res.data.Info.non_receive,
-            });
-            _this.data.after_sale = res.data.Info.after_sale;// 售后数
-          };
-          // 判断非200和登录
-          Dec.comiftrsign(_this, res, app);
-        } else {
-          _this.setData({
-            // 待付款
-            nonpayment: 0,
-            // 待拆单数
-            nonunpack: 0,
-            // 待发货数
-            nonsend: 0,
-            // 待收货数
-            nonreceive: 0,
-          });
-          _this.data.after_sale = 0;// 售后数
-        };        
-      }
-    });    
+    this.listdata();  
   },
   /**
    * 页面上拉触底事件的处理函数
@@ -496,12 +529,8 @@ Page({
       url: "/pages/shoppingCart/shoppingCart"
     });
   },
-  wmy: function () {
-    //  刷新 防止多次提交
-    if (this.data.clicktherequestiftr) {
-      this.setData({ clicktherequestiftr: false });
-      this.onPullDownRefresh(); 
-    };        
+  wmy: function () { 
+    this.onPullDownRefresh(); 
   },
   clicktganone: function () {
     this.setData({ tgabox: false })
@@ -599,5 +628,48 @@ Page({
     this.setData({
       tgabox:true
     })
-  },    
+  }, 
+    // 每日领取，vip专属券  3 领取vip专属限时抽盒金
+  receivefun:function(getType){
+    var _this = this;
+
+    wx.showLoading({ title: '加载中...',mask:true }) 
+
+    var q = Dec.Aese('mod=Obtain&operation=getCalendarTicket&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&getType='+3);
+
+
+    console.log(app.signindata.comurl +'brandDrying.php?' + 'mod=Obtain&operation=getCalendarTicket&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&getType='+3)
+
+
+    wx.request({
+      url: app.signindata.comurl + 'brandDrying.php' + q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) { 
+        console.log('receivefun====',res)
+        if (res.data.ReturnCode == 200) {
+          wx.showModal({
+            title: '',
+            content: '领取成功',
+            showCancel: false,
+            success: function (res) { }
+          }),
+          _this.listdata();
+        }else{
+          wx.showModal({
+            title: '提示',
+            content: res.data.Msg,
+            showCancel: false,
+            success: function (res) { }
+          })          
+        }
+      },
+      fail: function () {},
+      complete:function(){
+        wx.hideLoading()
+      }
+    });
+  },
+  
+
 })

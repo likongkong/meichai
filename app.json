@@ -107,6 +107,7 @@
         "pages/aRewardHistory/aRewardHistory",
         "pages/shopsquaretrip/shopsquaretrip",
         "pages/calendarList/calendarList",
+        "pages/vipPage/vipPage",
         "pages/aRewardList/aRewardList",
         "pages/articleList/articleList" 
       ]
