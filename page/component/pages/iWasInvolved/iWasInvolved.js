@@ -25,7 +25,8 @@ Page({
     voteCalendarList: [],
     taskInfo:'', 
     subscribedata:'',
-    share_uid:0
+    share_uid:0,
+    isJumpSignin:false
 
 
   },
@@ -162,6 +163,8 @@ Page({
       fail: function () {},
       complete:function(){
         wx.hideLoading()
+        // 刷新完自带加载样式回去
+        wx.stopPullDownRefresh()        
       }
     });    
   },
@@ -204,6 +207,9 @@ Page({
       fail: function () {},
       complete:function(){
         wx.hideLoading()
+        // 刷新完自带加载样式回去
+        wx.stopPullDownRefresh()
+
       }
     });
   },
@@ -259,6 +265,9 @@ Page({
       fail: function () {},
       complete:function(){
         wx.hideLoading()
+        // 刷新完自带加载样式回去
+        wx.stopPullDownRefresh()
+
       }
     });
   },
@@ -331,7 +340,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    if(this.data.isJumpSignin && this.data.uid){
+      this.listdata(1);
+      this.data.isJumpSignin = false;
+    };
   },
 
   /**
@@ -352,14 +364,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.listData(1);
+    this.listdata(1);
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    
+    this.listdata(2)
   },
 
   /**
@@ -368,7 +380,7 @@ Page({
   onShareAppMessage: function () {
     var _this = this;
     return {
-      title: '日历',
+      title: '这个展会限量版台历太好看了，快来为它投票免费拿',
       path: '/page/secondpackge/pages/calendarList/calendarList?share_uid='+_this.data.uid,
       imageUrl:'',
       success: function (res) {}
@@ -386,7 +398,11 @@ Page({
     var num = w.currentTarget.dataset.num || w.target.dataset.num || 100000;
     var whref = w.currentTarget.dataset.whref || w.target.dataset.whref || 100000;
     var title = w.currentTarget.dataset.title || w.target.dataset.title || '';
-    app.comjumpwxnav(num,whref,title)
+    app.comjumpwxnav(num,whref,title);
+    if(num==9){
+      this.data.isJumpSignin = true;
+    }
+
   },
   // 预约展会
   bookingExhib:function(){
