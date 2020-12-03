@@ -8,7 +8,9 @@
           <image class="swiperItemBanner" src="{{item.calendar_img}}" mode="aspectFit"></image>
           <view class="swiperItemBrandWrap">
             <view class="swiperItemBrandInfo">
-              <image class="swiperItemBrandLogo" src="{{item.logo}}" mode="aspectFit"></image>
+              <view class="brandLogoBgFFF">
+                <image class="swiperItemBrandLogo" src="{{item.logo}}" mode="aspectFit"></image>
+              </view>
               <text class="swiperItemBrandName specialellipsis" style="width:460rpx">{{item.name}}</text>
             </view>
             <view class="swiperItemBrandVote">{{item.vote_number}}票</view>
@@ -48,7 +50,9 @@
             <view catchtap="votingInterface" data-index='{{index}}' data-brand_id='{{item.brand_id}}' data-calendar_id='{{item.id}}'> <image class="calendarItemBanner" src="http://www.51chaidan.com/images/sign/calendar/vote.png" mode="widthFix"></image>  <text>投票</text></view>
           </view>
           <view class="calendarItemBrand">
-            <image src="{{item.logo}}" mode="aspectFit"></image>
+            <view class="brandLogoBgFFF">
+              <image src="{{item.logo}}" mode="aspectFit"></image>
+            </view>
             <text>{{item.name}}</text>
           </view>
         </view>
@@ -61,7 +65,9 @@
           <image class="rankingBanner" src="{{brandData[0].calendar_img}}" mode="aspectFit"></image>
           <view class="rankingBrandWrap">
             <view class="rankingBrandInfo">
-              <image class="rankingBrandLogo" src="{{brandData[0].logo}}" mode="aspectFit"></image>
+              <view class="brandLogoBgFFF">
+                <image class="rankingBrandLogo" src="{{brandData[0].logo}}" mode="aspectFit"></image>
+              </view>
               <text class="rankingBrandName specialellipsis" style="width:460rpx">{{brandData[0].name}}</text>
             </view>
             <view class="rankingBrandVote">{{brandData[0].all_vote_number}}票</view>
@@ -87,8 +93,10 @@
             <text>{{item.rank}}</text>
           </view>
           <view class="rankingOthersR">
-            <image class="rankingOthersRLogo" src="{{item.logo}}" mode="aspectFit"></image>
-            <view>
+            <view class="brandLogoBgFFF">
+              <image class="rankingOthersRLogo" src="{{item.logo}}" mode="aspectFit"></image>
+            </view>
+            <view class="rankingOthersRNum">
               <image src="http://www.51chaidan.com/images/sign/calendar/ticket.png" mode="widthFix"></image>
               <text>{{item.all_vote_number}}</text>
             </view>
@@ -128,7 +136,9 @@
     <image class="rankingTwoThreeBanner" src="{{calendar_img}}" mode="aspectFit"></image>
     <view class="rankingBrandWrap">
       <view class="rankingBrandInfo">
-        <image class="rankingBrandLogo" src="{{logo}}" mode="aspectFit"></image>
+        <view class="brandLogoBgFFF">
+          <image class="rankingBrandLogo" src="{{logo}}" mode="aspectFit"></image>
+        </view>
         <text class="rankingBrandName specialellipsis" style="width:160rpx">{{name}}</text>
       </view>
       <view class="rankingBrandVote">{{all_vote_number}}票</view>
