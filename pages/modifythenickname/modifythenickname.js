@@ -132,6 +132,8 @@ Page({
       fail: function () {},
       complete:function(){
         wx.hideLoading()
+        // 刷新完自带加载样式回去
+        wx.stopPullDownRefresh()        
       }
     });
   },
@@ -162,10 +164,18 @@ Page({
       success: function (res) { 
         console.log('calendarDetail====',res)
         if (res.data.ReturnCode == 200) {
-          _this.setData({
-            calendarDetails:res.data.List.calendarDetails,
-            calendarDetailsToUser:res.data.List.calendarDetailsToUser
-          })
+          if(num == 1){
+            _this.setData({
+              calendarDetails:res.data.List.calendarDetails,
+              calendarDetailsToUser:res.data.List.calendarDetailsToUser
+            })
+          }else{
+            var store = res.data.List.calendarDetailsToUser || [];
+            _this.setData({
+              calendarDetailsToUser: [..._this.data.calendarDetailsToUser,...store]
+            });
+          }
+
         }else{
           wx.showModal({
             title: '提示',
@@ -177,7 +187,10 @@ Page({
       },
       fail: function () {},
       complete:function(){
-        wx.hideLoading()
+        wx.hideLoading();
+        // 刷新完自带加载样式回去
+        wx.stopPullDownRefresh()
+
       }
     });
   },
@@ -187,15 +200,25 @@ Page({
    */
   onShareAppMessage: function (options) {
     var _this = this;
-    if(_this.data.isBrandDetail == 2){
-       var shareUrl = 'pages/modifythenickname/modifythenickname?brand_id='+_this.data.brand_id + '&share_uid=' + _this.data.uid;
+    var form = options.target.dataset.form || 0;
+    if (options.from == 'button' && form == 1) {
+        var num = options.target.dataset.num || 0;
+        var shareUrl = 'pages/modifythenickname/modifythenickname?calendar_id='+_this.data.calendarDetails[num].id + '&share_uid=' + _this.data.uid;
+        var imageUrl = _this.data.calendarDetails[num].calendar_img || '';
     }else{
-       var shareUrl = 'pages/modifythenickname/modifythenickname?calendar_id='+_this.data.calendar_id + '&share_uid=' + _this.data.uid;
-    };
+      if(_this.data.isBrandDetail == 2){
+        var shareUrl = 'pages/modifythenickname/modifythenickname?brand_id='+_this.data.brand_id + '&share_uid=' + _this.data.uid;
+        var imageUrl = _this.data.calendarDetails[0].calendar_img || [];
+     }else{
+        var shareUrl = 'pages/modifythenickname/modifythenickname?calendar_id='+_this.data.calendar_id + '&share_uid=' + _this.data.uid;
+        var imageUrl = _this.data.calendarDetails.calendar_img || '';
+     };
+    };  
+    console.log(shareUrl,imageUrl)
     return {
-      title: '日历',
+      title: '这个展会限量版台历太好看了，快来为它投票免费拿',
       path:shareUrl,
-      imageUrl:'',
+      imageUrl:imageUrl,
       success: function (res) {}
     }  
   },
@@ -203,13 +226,15 @@ Page({
     var _this = this;
     if(_this.data.isBrandDetail == 2){
       var shareUrl = 'brand_id='+_this.data.brand_id+'&share_uid='+_this.data.share_uid;
+      var imageUrl = _this.data.calendarDetails[0].calendar_img || [];
    }else{
       var shareUrl = 'calendar_id='+_this.data.calendar_id+'&share_uid='+_this.data.share_uid;
+      var imageUrl = _this.data.calendarDetails.calendar_img || '';
    };
     return {
-      title:'日历',
+      title:'这个展会限量版台历太好看了，快来为它投票免费拿',
       query:shareUrl,
-      imageUrl:''
+      imageUrl:imageUrl
     }
   },
 
@@ -289,12 +314,18 @@ Page({
     });
   },
 
-  // onPullDownRefresh: function () {
-  
-  // },
-  // onReachBottom: function () {
-
-  // },
+  onPullDownRefresh: function () {
+    if(this.data.isBrandDetail==2){
+      this.brandDetail()
+    }else{
+      this.calendarDetail(1);
+    }
+  },
+  onReachBottom: function () {
+    if(this.data.isBrandDetail==1){
+      this.calendarDetail(2);
+    }
+  },
 
   clicktganone: function () {
     this.setData({ tgabox: false })
@@ -310,55 +341,12 @@ Page({
   },
   // 跳转我参与的
   jumpiwas:function(){
+    var _this = this;
     wx.navigateTo({
-      url: "/page/component/pages/iWasInvolved/iWasInvolved"
+      url: "/page/component/pages/iWasInvolved/iWasInvolved?share_uid=" + _this.data.share_uid || 0
     })
   },
-    // 投票
-  votingInterface:function(w){
 
-    var _this = this;
-
-    var brand_id = w.currentTarget.dataset.brand_id || w.target.dataset.brand_id || 0;
-    var calendar_id = w.currentTarget.dataset.calendar_id || w.target.dataset.calendar_id || 0;
-
-    wx.showLoading({ title: '加载中...',mask:true }) 
-
-    var q = Dec.Aese('mod=Obtain&operation=recordVote&uid=' +_this.data.uid+'&loginid='+_this.data.loginid + '&calendar_id=' + calendar_id + '&brand_id=' + brand_id + '&share_uid=' + _this.data.share_uid);
-
-
-    console.log(app.signindata.comurl +'brandDrying.php?' + 'mod=Obtain&operation=recordVote&uid=' +_this.data.uid+'&loginid='+_this.data.loginid + '&calendar_id=' + calendar_id + '&calendar_id=' + brand_id + '&share_uid=' + _this.data.share_uid)
-
-
-    wx.request({
-      url: app.signindata.comurl + 'brandDrying.php' + q,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) { 
-        console.log('receivefun====',res)
-        if (res.data.ReturnCode == 200) {
-          wx.showModal({
-            title: '',
-            content: '投票成功',
-            showCancel: false,
-            success: function (res) { }
-          })
-          _this.listdata(1);
-        }else{
-          wx.showModal({
-            title: '提示',
-            content: res.data.Msg,
-            showCancel: false,
-            success: function (res) { }
-          })          
-        }
-      },
-      fail: function () {},
-      complete:function(){
-        wx.hideLoading()
-      }
-    });    
-  },
   // 投票
   votingInterface:function(w){
 
@@ -388,7 +376,11 @@ Page({
             showCancel: false,
             success: function (res) { }
           })
-          _this.listdata(1);
+          if(_this.data.isBrandDetail==2){
+            _this.brandDetail()
+          }else{
+            _this.calendarDetail(1);
+          }
         }else{
           wx.showModal({
             title: '提示',
@@ -401,8 +393,24 @@ Page({
       fail: function () {},
       complete:function(){
         wx.hideLoading()
+        // 刷新完自带加载样式回去
+        wx.stopPullDownRefresh()
+
       }
     });    
   },
+  jumpLeaflet:function(w){
+
+    var calendar_id = w.currentTarget.dataset.calendar_id || w.target.dataset.calendar_id || '';
+
+    this.setData({
+      isBrandDetail:1,
+      c_title: '展会日历',
+      calendar_id: calendar_id
+    })
+
+    this.calendarDetail(1);
+
+  }
 
 })
