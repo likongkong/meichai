@@ -35,17 +35,6 @@
 				</view>
 		</view>
 
-		<view class="taskEve" catchtap="{{taskInfo.memberTicket?'evereceivefun':'subscrfun'}}" data-num='2'>
-				<view class="taskEveLeft">
-						<view class="telTitle">VIP专属券</view>
-						<view class="telTitleNum">投票券+1</view>
-				</view>
-				<view class="clickButton" style="{{taskInfo.memberTicket?'':'background: #298CF7;'}}">
-					{{taskInfo.memberTicket?'领取':'明日更新'}}
-				</view>
-
-		</view>
-
 		<view class="taskEve" catchtap="{{taskInfo.daysSign?'jumpOtherPage':'subscrfun'}}" data-num='9'>
 				<view class="taskEveLeft">
 						<view class="telTitle">每日签到</view>
@@ -56,13 +45,14 @@
 				</view>
 		</view>
 
-		<view class="taskEve" catchtap="{{taskInfo.subscribeToyShow?'bookingExhib':'subscrfun'}}">
+		<view class="taskEve">
 				<view class="taskEveLeft">
-						<view class="telTitle">预约展会</view>
-						<view class="telTitleNum">投票券+1</view>
+						<view class="telTitle">邀请好友投票</view>
+						<view class="telTitleNum">每邀请好友投票成功投票券+1(上限50/天)</view>
 				</view>
-				<view class="clickButton" style="{{taskInfo.subscribeToyShow?'':'background: #298CF7;'}}">
-						{{taskInfo.subscribeToyShow?'去预约':'明日更新'}}
+				<view class="clickButton" style="{{taskInfo.inviteFriend?'':'background: #298CF7;'}}">
+					{{taskInfo.inviteFriend?'去邀请':'明日更新'}}
+					<button wx:if='{{taskInfo.inviteFriend}}' style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' open-type="share"></button>
 				</view>
 		</view>
 
@@ -76,15 +66,25 @@
 					</view>
 		</view>
 
-		<view class="taskEve">
+		<view class="taskEve" catchtap="{{taskInfo.subscribeToyShow?'bookingExhib':'subscrfun'}}">
 				<view class="taskEveLeft">
-						<view class="telTitle">邀请好友投票</view>
-						<view class="telTitleNum">每邀请好友投票成功投票券+1(上限50/天)</view>
+						<view class="telTitle">预约展会</view>
+						<view class="telTitleNum">投票券+1</view>
 				</view>
-				<view class="clickButton" style="{{taskInfo.inviteFriend?'':'background: #298CF7;'}}">
-					{{taskInfo.inviteFriend?'去邀请':'明日更新'}}
-					<button wx:if='{{taskInfo.inviteFriend}}' style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' open-type="share"></button>
+				<view class="clickButton" style="{{taskInfo.subscribeToyShow?'':'background: #298CF7;'}}">
+						{{taskInfo.subscribeToyShow?'去预约':'明日更新'}}
 				</view>
+		</view>
+
+		<view class="taskEve" catchtap="{{taskInfo.memberTicket?'evereceivefun':'subscrfun'}}" data-num='2'>
+				<view class="taskEveLeft">
+						<view class="telTitle">VIP专属券</view>
+						<view class="telTitleNum">投票券+1</view>
+				</view>
+				<view class="clickButton" style="{{taskInfo.memberTicket?'':'background: #298CF7;'}}">
+					{{taskInfo.memberTicket?'领取':'明日更新'}}
+				</view>
+
 		</view>
 
 		<view class="taskEve" catchtap="bookingExhib">

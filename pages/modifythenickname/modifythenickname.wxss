@@ -26,10 +26,11 @@ page{
 }
 .headBrandLogo{
   display: inline-block;
-  margin: 15rpx;
+  margin:15rpx;
   width: 50rpx;
   height: 50rpx;
   border-radius: 50%;
+  vertical-align: top;
 }
 .headBrandName{
   height: 80rpx;
@@ -38,6 +39,7 @@ page{
   font-size: 24rpx;
   display: inline-block;
   max-width: 320rpx;
+  vertical-align: top;
 }
 .ticketRanking{
   width: 100%;
@@ -177,26 +179,11 @@ page{
   line-height: 80rpx;
   padding:0 20rpx;
   font-size: 26rpx;
+  
 }
 
-.degreeOfHeat{
-  height: 80rpx;
-  line-height: 80rpx;
-  color: #000;
-  font-size: 24rpx;
-  padding-left: 40rpx;
-  position: relative;
-}
-.calendarItemBanner{
-  width: 35rpx;
-  height: 35rpx;
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  margin:auto;
-  z-index: 1;
-}
+
+
 
 
 
