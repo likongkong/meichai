@@ -69,7 +69,7 @@ Page({
     // })
 
 
-    this.data.share_uid + options.share_uid || 0
+    this.data.share_uid = options.share_uid || 0
 
 
     // 判断是否授权
@@ -177,12 +177,7 @@ Page({
           }
 
         }else{
-          wx.showModal({
-            title: '提示',
-            content: res.data.Msg,
-            showCancel: false,
-            success: function (res) { }
-          })  
+          app.showToastC(res.data.Msg);
         }
       },
       fail: function () {},

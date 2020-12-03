@@ -55,7 +55,7 @@ Page({
   onLoad: function(options) {
     // 判断是否授权 
     var _this = this;
-    this.data.share_uid + options.share_uid || 0
+    this.data.share_uid = options.share_uid || 0
     _this.setData({
       loginid: app.signindata.loginid,
       uid: app.signindata.uid,
@@ -252,6 +252,7 @@ Page({
               subscribedata:infoData.subscribe,
               voteChance:infoData.voteChance
              })
+             _this.data.shareImg = infoData.shareImg || '';
           }else{
             var store = res.data.List.voteCalendarList || [];
             _this.setData({
@@ -260,6 +261,8 @@ Page({
           };
     
 
+        }else{
+          app.showToastC(res.data.Msg);
         }
       },
       fail: function () {},
@@ -373,7 +376,14 @@ Page({
   onReachBottom: function () {
     this.listdata(2)
   },
-
+  onShareTimeline:function(){
+    var _this = this;
+    return {
+      title: '这个展会限量版台历太好看了，快来为它投票免费拿',
+      query:'share_uid='+_this.data.uid,
+      imageUrl:_this.data.shareImg,
+    }
+  },
   /**
    * 用户点击右上角分享
    */
@@ -382,7 +392,7 @@ Page({
     return {
       title: '这个展会限量版台历太好看了，快来为它投票免费拿',
       path: '/page/secondpackge/pages/calendarList/calendarList?share_uid='+_this.data.uid,
-      imageUrl:'',
+      imageUrl:_this.data.shareImg,
       success: function (res) {}
     }      
   },

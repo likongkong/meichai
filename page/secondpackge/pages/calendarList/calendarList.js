@@ -35,7 +35,7 @@ Page({
   onLoad: function(options) {
     // 判断是否授权 
     var _this = this;
-    this.data.share_uid + options.share_uid || 0
+    this.data.share_uid = options.share_uid || 0
     _this.setData({
       loginid: app.signindata.loginid,
       uid: app.signindata.uid,
