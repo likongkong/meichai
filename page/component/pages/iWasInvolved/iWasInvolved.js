@@ -26,11 +26,15 @@ Page({
     taskInfo:'', 
     subscribedata:'',
     share_uid:0,
-    isJumpSignin:false
+    isJumpSignin:false,
+    // Viptip:false
 
 
   },
-
+  // vip 弹框
+  // tipVipMode:function(){
+  //   this.setData({Viptip:!this.data.Viptip})
+  // },
   // 订阅授权
   subscrfun:function(){
     var _this = this;
@@ -169,7 +173,7 @@ Page({
     });    
   },
 
-  // 每日领取，vip专属券
+  // 每日领取，vip专属券  3 领取vip专属限时抽盒金
   receivefun:function(getType){
     var _this = this;
 
@@ -187,6 +191,9 @@ Page({
       header: { 'Accept': 'application/json' },
       success: function (res) { 
         console.log('receivefun====',res)
+        // if(getType == 3){
+        //   _this.setData({Viptip:false})
+        // };
         if (res.data.ReturnCode == 200) {
           wx.showModal({
             title: '',
