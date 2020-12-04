@@ -35,7 +35,8 @@
     <text class="{{tabIndex==2?'active':''}}" data-ind="2" catchtap="tabChangeFun">热门</text>
     <text class="{{tabIndex==3?'active':''}}" data-ind="3" catchtap="tabChangeFun">排行榜</text>
     <view class="tabNavssIcon" catchtap="showSearchFun">
-      <image src="https://cdn.51chaidan.com/images/icon/iconButtonTip.png" mode="widthFix"></image>
+      <!-- <image src="https://cdn.51chaidan.com/images/icon/iconButtonTip.png" mode="widthFix"></image> -->
+      活动规则
     </view>
   </view>
 
@@ -45,8 +46,8 @@
         <view class="calendarItem boxShadowEve">
           <image class="calendarItemBanner" src="{{item.calendar_img}}" mode="aspectFit" data-lb="1" data-calendar_id='{{item.id}}' catchtap="jumptoCalendarDetail"></image>
           <view class="calendarItemInfo">
-            <view> <text>{{item.vote_number}}票</text> </view>
-            <!-- <view> <image src="http://www.51chaidan.com/images/sign/calendar/heat.png" mode="widthFix"></image>  <text>{{item.heat}}</text></view> -->
+            <view wx:if='{{tabIndex==1}}'> <text>{{item.vote_number}}票</text> </view>
+            <view wx:if='{{tabIndex==2}}'> <image src="http://www.51chaidan.com/images/sign/calendar/heat.png" mode="widthFix"></image>  <text>{{item.heat}}</text></view>
             <view catchtap="votingInterface" data-index='{{index}}' data-brand_id='{{item.brand_id}}' data-calendar_id='{{item.id}}'> <image class="calendarItemBanner" src="http://www.51chaidan.com/images/sign/calendar/vote.png" mode="widthFix"></image>  <text>投票</text></view>
           </view>
           <view class="calendarItemBrand">
@@ -58,58 +59,70 @@
         </view>
       </block>
     </view>
-    <view wx:if="{{tabIndex==3}}" class="ranking">
-      <view class="rankingItem rankingOne" wx:if="{{brandData[0]}}" data-lb="2"  data-brand_id='{{brandData[0].brand_id}}' catchtap="jumptoCalendarDetail">
-        <view class="rankingItemWrap boxShadowEve">
-          <text class="rankNum">{{brandData[0].rank}}</text>
-          <image class="rankingBanner" src="{{brandData[0].calendar_img}}" mode="widthFix"></image>
-          <view class="rankingBrandWrap">
-            <view class="rankingBrandInfo">
-              <view class="brandLogoBgFFF">
-                <image class="rankingBrandLogo" src="{{brandData[0].logo}}" mode="aspectFit"></image>
-              </view>
-              <text class="rankingBrandName specialellipsis" style="width:460rpx">{{brandData[0].name}}</text>
-            </view>
-            <view class="rankingBrandVote">{{brandData[0].all_vote_number}}票</view>
-          </view>
-        </view>
-      </view>
-      <view class="rankingItem rankingTwoThree">
-        <view class="rankingTwo boxShadowEve" wx:if="{{brandData[1]}}" data-lb="2" data-brand_id='{{brandData[1].brand_id}}' catchtap="jumptoCalendarDetail">
-          <template is="rankingItem" data="{{...brandData[1]}}"/>
-        </view>
-        <view class="rankingThree boxShadowEve" wx:if="{{brandData[2]}}" data-lb="2"  data-brand_id='{{brandData[2].brand_id}}' catchtap="jumptoCalendarDetail">
-          <template is="rankingItem" data="{{...brandData[2]}}"/>
-        </view>
-      </view>
-      <block wx:for="{{brandData}}" wx:key='key' data-index="{{index}}" wx:if="{{index>2}}"> 
-        <view class="rankingOthers" data-lb="2"  data-brand_id='{{item.brand_id}}' catchtap="jumptoCalendarDetail">
-          <view class="rankingOthersL">
-            <block>
-              <image wx:if="{{item.lastRank==1}}" src="" mode="widthFix"></image>
-              <image wx:if="{{item.lastRank==2}}" src="http://www.51chaidan.com/images/sign/calendar/redArrows.png" mode="widthFix"></image>
-              <image wx:if="{{item.lastRank==3}}" src="http://www.51chaidan.com/images/sign/calendar/greenArrows.png" mode="widthFix"></image>
-            </block>
-            <text>{{item.rank}}</text>
-          </view>
-          <view class="rankingOthersR">
-            <!-- <view class="brandLogoBgFFF"></view> -->
-            <view style="display:flex;align-items:center;">
-               <image class="rankingOthersRLogo" src="{{item.logo}}" mode='aspectFit'></image>
-               <text class="rankingOthersRName specialellipsis">{{item.name}}</text>
-            </view>
-            <view class="rankingOthersRNum">
-              <image src="http://www.51chaidan.com/images/sign/calendar/ticket.png" mode="widthFix"></image>
-              <text>{{item.all_vote_number}}</text>
-            </view>
-          </view> 
-        </view>
-      </block>
-      
-    </view>
+
   </block>
 </view>
+<view>
 
+
+      
+      <view wx:if="{{tabIndex==3}}" class="ranking">
+          <view style="padding:20rpx 20rpx 0 20rpx;">
+              <view class="rankingItem rankingOne" wx:if="{{brandData[0]}}" data-lb="2"  data-brand_id='{{brandData[0].brand_id}}' catchtap="jumptoCalendarDetail">
+                <view class="rankingItemWrap boxShadowEve">
+                  <text class="rankNum">{{brandData[0].rank}}</text>
+                  <image class="rankingBanner" src="{{brandData[0].calendar_img}}" mode="widthFix"></image>
+                  <view class="rankingBrandWrap">
+                    <view class="rankingBrandInfo">
+                      <view class="brandLogoBgFFF">
+                        <image class="rankingBrandLogo" src="{{brandData[0].logo}}" mode="aspectFit"></image>
+                      </view>
+                      <text class="rankingBrandName specialellipsis" style="width:460rpx">{{brandData[0].name}}</text>
+                    </view>
+                    <view class="rankingBrandVote">{{brandData[0].all_vote_number}}票</view>
+                  </view>
+                </view>
+              </view>
+              <view class="rankingItem rankingTwoThree">
+                <view class="rankingTwo boxShadowEve" wx:if="{{brandData[1]}}" data-lb="2" data-brand_id='{{brandData[1].brand_id}}' catchtap="jumptoCalendarDetail">
+                  <template is="rankingItem" data="{{...brandData[1]}}"/>
+                </view>
+                <view class="rankingThree boxShadowEve" wx:if="{{brandData[2]}}" data-lb="2"  data-brand_id='{{brandData[2].brand_id}}' catchtap="jumptoCalendarDetail">
+                  <template is="rankingItem" data="{{...brandData[2]}}"/>
+                </view>
+              </view>      
+          </view>
+          <view style="padding:0 20rpx 20rpx 20rpx;background:#fff">
+              <block wx:for="{{brandData}}" wx:key='key' data-index="{{index}}" wx:if="{{index>2}}"> 
+                <view class="rankingOthers" data-lb="2"  data-brand_id='{{item.brand_id}}' catchtap="jumptoCalendarDetail">
+                  <view class="bottomLine"></view>
+                  <view class="rankingOthersL">
+                    <block>
+                      <image wx:if="{{item.lastRank==1}}" src="" mode="widthFix"></image>
+                      <image wx:if="{{item.lastRank==2}}" src="http://www.51chaidan.com/images/sign/calendar/redArrows.png" mode="widthFix"></image>
+                      <image wx:if="{{item.lastRank==3}}" src="http://www.51chaidan.com/images/sign/calendar/greenArrows.png" mode="widthFix"></image>
+                    </block>
+                    <text>{{item.rank}}</text>
+                  </view>
+                  <view class="rankingOthersR">
+                    <!-- <view class="brandLogoBgFFF"></view> -->
+                    <view style="display:flex;align-items:center;">
+                      <image class="rankingOthersRLogo" src="{{item.logo}}" mode='aspectFit'></image>
+                      <text class="rankingOthersRName specialellipsis">{{item.name}}</text>
+                    </view>
+                    <view class="rankingOthersRNum">
+                      <image src="http://www.51chaidan.com/images/sign/calendar/ticket.png" mode="widthFix"></image>
+                      <text>{{item.all_vote_number}}</text>
+                    </view>
+                  </view> 
+                </view>
+              </block>      
+          </view>
+
+      
+    </view>
+
+</view>
 
 <view class="btn boxShadowEve" catchtap="jumptoIWasInvolved">
   我的投票

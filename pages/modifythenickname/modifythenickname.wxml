@@ -45,8 +45,9 @@
 
    <block wx:if='{{calendarDetailsToUser&&calendarDetailsToUser.length!=0}}'>
         <view class='calendTxtTitle' style="line-height:110rpx;">投票排行</view>
-        <view class="calendDtailPad">
+        <view class="calendDtailPad" style="background:#fff;">
             <view class="ticketRanking" wx:for='{{calendarDetailsToUser}}' wx:key='key'>
+                <view class="bottomLine"></view>
                 <view class="ticketRankingNum">{{item.rank}}</view>
                 <view class="ticketRankingBox">
                     <image class="ticketRankingImg" src="{{item.litpic}}"></image>
@@ -76,8 +77,8 @@
             <view class="detailBRTrank">排名</view>
         </view>
     </view>
-
-   <view class="iwasTitle" wx:if='{{calendarDetails&&calendarDetails.length!=0}}'><image src="https://cdn.51chaidan.com/images/icon/iconButtonTip.png" mode="widthFix" catchtap="showSearchFun" class="iwasTitletitle"></image>参赛日历</view>
+   
+   <view class="iwasTitle" wx:if='{{calendarDetails&&calendarDetails.length!=0}}'><view catchtap="showSearchFun"  class="iwasTitletitle">活动规则</view><image wx:if='{{false}}' src="https://cdn.51chaidan.com/images/icon/iconButtonTip.png" mode="widthFix" ></image>参赛日历</view>
 
     <view class="calendDtailPad" wx:for='{{calendarDetails}}' wx:key='key'>
         <view class="cDetBhead boxShadowEve">
@@ -86,7 +87,7 @@
 
               <view class="headBrandName specialellipsis" style="margin-left:15rpx;">已投{{item.vote_number}}票</view>
 
-              <view class="brandShareBox"> <image class="brandShareImg" src="http://www.51chaidan.com/images/sign/calendar/heat.png"  mode='aspectFit'></image>{{item.heat}}</view>             
+              <view class="brandShareBox" wx:if='{{item.heat>0}}'> <image class="brandShareImg" src="http://www.51chaidan.com/images/sign/calendar/heat.png"  mode='aspectFit'></image>{{item.heat}}</view>             
 
 
               <view class="brandShareBox"><image class="brandShareImg" mode='aspectFit' src="http://www.51chaidan.com/images/sign/calendar/share.png"></image>分享<button data-num='{{index}}' data-form='1' style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' open-type="share"></button></view>
@@ -100,7 +101,7 @@
 
    <view class="iwasTitle" wx:if='{{voteToUserList&&voteToUserList.length!=0}}'>品牌投票榜</view>
 
-   <view class="calendDtailPad">
+   <view class="calendDtailPad" style="background:#fff;">
       <view class="ticketRanking" wx:for='{{voteToUserList}}' wx:key='key'>
           <view class="bottomLine"></view>
           <view class="ticketRankingNum">{{item.rank}}</view>

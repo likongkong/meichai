@@ -240,9 +240,9 @@ Page({
   onShareAppMessage: function () {
     var _this = this;
     return {
-      title: '日历',
+      title: '这个展会限量版台历太好看了，快来为Ta投票免费拿',
       path: '/page/secondpackge/pages/calendarList/calendarList?share_uid='+_this.data.uid,
-      imageUrl:'',
+      imageUrl:_this.data.shareImg,
       success: function (res) {}
     } 
   },
@@ -322,8 +322,9 @@ Page({
         if (res.data.ReturnCode == 200) {
           _this.setData({
             swiperCalendrList:res.data.List.calendrList,
-            explain:res.data.List.explain || ''
+            explain:res.data.List.explain || '',
           })
+          _this.data.shareImg = res.data.List.shareImg || '';
         }else{
           _this.setData({
             swiperCalendrList:[]

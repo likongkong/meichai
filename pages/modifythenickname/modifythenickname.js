@@ -252,7 +252,7 @@ Page({
     };  
     console.log(shareUrl,imageUrl)
     return {
-      title: '这个展会限量版台历太好看了，快来为它投票免费拿',
+      title: '这个展会限量版台历太好看了，快来为Ta投票免费拿',
       path:shareUrl,
       imageUrl:imageUrl,
       success: function (res) {}
@@ -268,7 +268,7 @@ Page({
       var imageUrl = _this.data.calendarDetails.calendar_img || '';
    };
     return {
-      title:'这个展会限量版台历太好看了，快来为它投票免费拿',
+      title:'这个展会限量版台历太好看了，快来为Ta投票免费拿',
       query:shareUrl,
       imageUrl:imageUrl
     }

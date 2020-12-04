@@ -87,7 +87,7 @@
 
 		</view>
 
-		<view class="taskEve" catchtap="bookingExhib">
+		<view class="taskEve" catchtap="bookingExhibVip">
 				<view class="taskEveLeft">
 						<view class="telTitle">开通VIP</view>
 						<view class="telTitleNum">投票券+10</view>

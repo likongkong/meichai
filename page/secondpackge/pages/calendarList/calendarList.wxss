@@ -125,6 +125,7 @@ page{
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  font-size: 24rpx;
 }
 .tabNavssIcon image{
   width: 45rpx;
@@ -295,6 +296,7 @@ page{
 .rankingOthers{
   width: 100%;
   display: flex;
+  position: relative;
 }
 .rankingOthers:last-child .rankingOthersR{
   border: none;
@@ -314,11 +316,20 @@ page{
 }
 .rankingOthersR{
   width: 620rpx;
-  border-bottom: 2rpx solid #bbbbbb;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20rpx 0;
+}
+.bottomLine{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2rpx;
+  background:#FBFBFB;
+  width: 600rpx;
+  margin: auto;
 }
 .rankingOthersRLogo{
   width: 60rpx;
