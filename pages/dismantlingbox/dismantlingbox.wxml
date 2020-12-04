@@ -7,15 +7,38 @@
 				<swiper style="width:100%;height:400rpx;" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
 					<swiper-item wx:for="{{bannerList}}" wx:key="key">
 						<image src="{{item.img}}?imageMogr2/thumbnail/x800" class="slideimage" mode="aspectFill" data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}' bindtap='jumpbanner' data-imgurl='{{item.image}}' style='position:relative;'>
-						</image>
+            </image>
 					</swiper-item>
 				</swiper>
-		</view>	
+    </view>	
+    
+    <!-- 展会活动 -->
+    <view class="calendarActivityWrap">
+      <view class="punchInRewardtxt" style="margin:20rpx 0;" id='e1'>———— 展会活动 ————</view>
+      <view class="calendarTxt">展会限定日历,投票赢好礼</view>
+      <swiper class="calendarSwiper" indicator-dots="{{true}}" previous-margin='30px' next-margin='30px' bindchange="swiperChange" indicator-active-color="#298CF7" style="height:{{swiperH+30}}px;">
+        <swiper-item wx:for='{{calendarList}}' wx:key='key' catchtap="jumpCalendarList">
+          <view class="calendarSwiperItem {{nowIdx==index?'le-active':''}}">
+            <image class='le-img' bindload='getHeight' src='{{item.calendar_img}}' style='height:{{swiperH}}px;' mode="aspectFit"></image>
+            <view class="swiperItemBrandWrap">
+              <view class="swiperItemBrandInfo">
+                <view class="brandLogoBgFFF">
+                  <image class="swiperItemBrandLogo" src="{{item.brandLogo}}" mode="aspectFit"></image>
+                </view>
+                <text class="swiperItemBrandName specialellipsis" style="width:460rpx">{{item.brandName}}</text>
+              </view>
+              <view class="swiperItemBrandVote">{{item.vote_number}}票</view>
+            </view>
+          </view>
+        </swiper-item>
+      </swiper>
+    </view>
+
+    
+
     <!-- 直播间 -->
-    <view class="ssubLiveBroadcast" wx:for="{{liveListData}}" wx:key="key" id='e1'>
-
+    <!-- <view class="ssubLiveBroadcast" wx:for="{{liveListData}}" wx:key="key" id='e1'>
         <navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{item.room_id}}" style='position: absolute;height:100%;width:500rpx;left:0;top:0;z-index:3;'></navigator>
-
         <view class="ssubLiveBroad">
             <image class="ssubLiveBImg" src="{{item.cover_img}}" mode='aspectFit'></image>
         </view>
@@ -26,10 +49,25 @@
                <view class="ssubBotRight" data-roomid='{{item.room_id}}' style="width:110rpx;background:#fff;"><subscribe style="width:100%;height:100%;position:absolute;right:0;top:0;bottom:0;margin:auto;z-index:1;" room-id="{{item.room_id}}"></subscribe></view>
            </view>
         </view>
+    </view> -->
+    <view class="punchInRewardtxt" style="margin:20rpx 0;" id='e1'>————— 线上潮玩展 —————</view>
+    <view class="ssubLiveBroadcast" wx:key="key" id='e1' catchtap="arousesubscribeFun" data-subscribe_data="{{test[0]}}">
+        <!-- <navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{item.room_id}}" style='position: absolute;height:100%;width:100%;left:0;top:0;z-index:3;'></navigator>  -->
+        <image class="ssubLiveBImg" src="https://cdn.51chaidan.com/images/toyShow3/liveshowSubscribe.jpg" mode='aspectFit'></image>
+        <view class="ssubLiveBroadRig">
+           <view class="ssubSSAname multilineellipsis">
+            <text>MCTS x JSS线上潮玩展</text> 
+            <text>线上直播</text> 
+            </view>
+           <view class="ssubSBotTime">
+               <view class="ssubSBotTimeleft">预约订阅</view>
+               <!-- <view class="ssubBotRight" data-roomid='{{item.room_id}}' style="width:110rpx;background:#fff;"><subscribe style="width:100%;height:100%;position:absolute;right:0;top:0;bottom:0;margin:auto;z-index:1;" room-id="{{item.room_id}}"></subscribe></view> -->
+           </view>
+        </view>
     </view>
 
     <!-- 展会福利 -->
-    <block wx:if='{{giftList&&giftList.length!=0}}'>
+    <!-- <block wx:if='{{giftList&&giftList.length!=0}}'>
         <view class="punchInRewardtxt" style="margin:20rpx 0;" id='e2'>———— 订阅福利 ————</view>
         <view class="punchExhben">
             <view class="punCheveSrc" wx:for='{{giftList}}' wx:key='key' style="{{index%3==2||index+1==giftList.length?'margin-right:0;':''}}">
@@ -56,12 +94,10 @@
           <image class="punchImgWxShare" src="https://www.51chaidan.com/images/icon/iconShareWX.png"><button open-type="share"  style='position:absolute;height:100%;width:100%;left:0;top:0;z-index:3;opacity:0;'></button></image>
            <view class="clockInIns" catchtap="mapImgDisplayfun">{{giftInfo.titleIntroduce}}</view>
         </view>
-        
-
-    </block>   
+    </block>    -->
 
     <!-- 线上 -->
-		<view class="punchInRewardtxt" style="margin:20rpx 0;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}' id='e3'>—————— 线上 ——————</view>
+		<!-- <view class="punchInRewardtxt" style="margin:20rpx 0;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}' id='e3'>————— 线上 —————</view>
     <view style="padding:0 15rpx 20rpx;overflow: hidden;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}'>
         <view class="ssubOnlinEve boxShadow" wx:for="{{goodsListOne.goodsList}}" wx:key="key" style="{{index%3==1?'margin:10rpx 30rpx;':''}}" catchtap="evesubscrfun" data-type='1' data-eveid='{{item.goods_id}}' data-index='{{index}}'>
            <image class="ssubOnliimg" src="{{item.goods_thumb}}" mode='aspectFit'></image>
@@ -71,9 +107,9 @@
               <view class="ssubBotRight" style="{{item.is_subscribe==1?'background:#fff;color:#32ACFB;':''}}">{{item.is_subscribe==1?'已订阅':'订阅'}}</view>
            </view>
         </view>
-    </view>
+    </view> -->
     <!-- 直播商品 -->
-		<view class="punchInRewardtxt" style="margin:20rpx 0;" wx:if='{{goodsListThree&&goodsListThree.goodsList&&goodsListThree.goodsList.length!=0}}' id='e4'>—————— 直播 ——————</view>
+		<!-- <view class="punchInRewardtxt" style="margin:20rpx 0;" wx:if='{{goodsListThree&&goodsListThree.goodsList&&goodsListThree.goodsList.length!=0}}' id='e4'>—————— 直播 ——————</view>
     <view style="padding:0 15rpx 20rpx;overflow: hidden;" wx:if='{{goodsListThree&&goodsListThree.goodsList&&goodsListThree.goodsList.length!=0}}'>
         <view class="ssubOnlinEve boxShadow" wx:for="{{goodsListThree.goodsList}}" wx:key="key" style="{{index%3==1?'margin:10rpx 30rpx;':''}}" catchtap="evesubscrfun" data-type='3' data-eveid='{{item.goods_id}}' data-index='{{index}}'>
            <image class="ssubOnliimg" src="{{item.goods_thumb}}" mode='aspectFit'></image>
@@ -83,25 +119,25 @@
               <view class="ssubBotRight" style="{{item.is_subscribe==1?'background:#fff;color:#32ACFB;':''}}">{{item.is_subscribe==1?'已订阅':'订阅'}}</view>
            </view>
         </view>
-    </view>
+    </view> -->
 
 
     <!-- BilibIliworld -->
-		<view class="punchInRewardtxt" style="margin:20rpx 0;" wx:if='{{goodsListTwo&&goodsListTwo.goodsList&&goodsListTwo.goodsList.length!=0}}' id='e5'>—————— BilibIliworld ——————</view>
+		<!-- <view class="punchInRewardtxt" style="margin:20rpx 0;" wx:if='{{goodsListTwo&&goodsListTwo.goodsList&&goodsListTwo.goodsList.length!=0}}' id='e5'>—————— BilibIliworld ——————</view>
     <view style="width:100%;overflow: hidden;" wx:if='{{goodsListTwo&&goodsListTwo.goodsList&&goodsListTwo.goodsList.length!=0}}'>
         <view class="ssubBilEve" wx:for="{{goodsListTwo.goodsList}}" wx:key="key" catchtap="evesubscrfun" data-type='2' data-eveid='{{item.goods_id}}' data-index='{{index}}'>
            <image class="ssubBiliimgs boxShadow" src="{{item.goods_thumb}}" mode='aspectFit'></image>
         </view>
-    </view>
+    </view> -->
 
-    <!-- 参展品牌 -->
-		<view class="punchInRewardtxt" style="margin:20rpx 0;" wx:if='{{brandList&&brandList.length!=0}}'>—————— 参展品牌 ——————</view>
-    <view style="width:100%;overflow: hidden;" wx:if='{{brandList&&brandList.length!=0}}'>
+    <!-- 品牌合作 -->
+		<view class="punchInRewardtxt" style="margin:20rpx 0;" wx:if='{{brandList&&brandList.length!=0}}'>—————— 品牌合作 ——————</view>
+    <view style="width:100%;overflow: hidden;padding:0 40rpx;box-sizing: border-box;" wx:if='{{brandList&&brandList.length!=0}}'>
         <view class="ssubBrandEve" wx:for="{{brandList}}" wx:key="key">
-           <image class="ssubBiliimgbr" src="{{item.logo}}" mode='aspectFit'></image>
+           <image class="ssubBiliimgbr" src="{{item.brandLogo}}" mode='aspectFit'></image>
         </view>
     </view>
-    <view class="ssubBotTxt">售卖商品陆续更新,最终以展会开售为准</view>
+    <!-- <view class="ssubBotTxt">售卖商品陆续更新,最终以展会开售为准</view> -->
 </view>
 
 
@@ -201,9 +237,14 @@
 		</scroll-view>
     <view class="shunqbtnstyle" catchtap="mapImgDisplayfun">订阅福利</view>
 	</view>
-
 </view>
 
+
+<!-- 底部购票图片 -->
+<view class="BottomBuyTickets">
+  <image src="https://www.51chaidan.com/images/calendar/getTicket.png" mode="widthFix"></image>
+  <text>已有684664241人想去</text>
+</view>
 
 <!-- 底部导航条 -->
 <view class="shunButBar">

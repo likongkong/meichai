@@ -54,7 +54,38 @@ Page({
     // 是否已认证手机号
     isMobileAuth:false,
     // 是分享还是订阅授权手机号
-    isShareOrSub:true
+    isShareOrSub:true,
+    nowIdx: 0,//当前swiper索引
+　　imgList: [//图片列表
+　　　　'https://cdn.51chaidan.com/data/afficheimg/20200730bw.jpg?imageMogr2/thumbnail/x800',
+　　　　'https://cdn.51chaidan.com/data/afficheimg/20200730bw.jpg?imageMogr2/thumbnail/x800',
+　　　　'https://cdn.51chaidan.com/data/afficheimg/20200730bw.jpg?imageMogr2/thumbnail/x800',
+　　],
+    test:[
+       {"toyshowStart":{"template_id":["Q0tWM7kOihw1TilTeR3YmLzWp5tS0McgyOeJx2xX-B0","7rx-pSLTpdYH6IdOKAudkP1A0MmAzN0cOS2RXMTVyKo"], "subscribe_type":["12","12"]}},{"toyshowTicket":{"template_id":["Q0tWM7kOihw1TilTeR3YmLzWp5tS0McgyOeJx2xX-B0","7rx-pSLTpdYH6IdOKAudkP1A0MmAzN0cOS2RXMTVyKo"], "subscribe_type":["17","17"]}}
+    ]
+  },
+  // 跳转日历列表
+  jumpCalendarList(){
+    wx.navigateTo({ 
+      url: "/page/secondpackge/pages/calendarList/calendarList"
+    })
+  },
+  //获取swiper高度
+  getHeight: function (e) {
+  　　var winWid = wx.getSystemInfoSync().windowWidth - 2 * 30;//获取当前屏幕的宽度
+  　　var imgh = e.detail.height;//图片高度
+  　　var imgw = e.detail.width;
+  　　var sH = winWid * imgh / imgw;
+  　　this.setData({
+  　　　　swiperH: sH//设置高度
+  　　})
+  },
+  //swiper滑动事件
+  swiperChange: function (e) {
+  　　this.setData({
+  　　　　nowIdx: e.detail.current
+  　　})
   },
   havephoneiftrfun:function(){
     this.setData({havephoneiftr:!this.data.havephoneiftr});
@@ -186,6 +217,15 @@ Page({
   auditversion:function(){
      this.onLoadfun();
   },
+
+  arousesubscribeFun:function(e){
+    var subscribe_data = e.currentTarget.dataset.subscribe_data;
+    this.setData({
+      subscribedata:subscribe_data.toyshowStart
+    })
+    app.comsubscribe(this)
+  },
+
   // 每一个拉起订阅
   evesubscrfun:function(w){
     var _this = this;
@@ -662,10 +702,12 @@ Page({
           if (res.data.ReturnCode == 200) {
             if(num==1){
               var bannerList = res.data.List.bannerList || [];
-              var brandList = res.data.List.brandList || [];
+              var calendarList = res.data.List.calendar || [];
+              var brandList = res.data.List.brand || [];
               var isMobileAuth = res.data.Info.isMobileAuth || false;
               _this.setData({
                 bannerList:bannerList,
+                calendarList,
                 brandList:brandList,
                 isMobileAuth:isMobileAuth
               });
@@ -800,7 +842,7 @@ Page({
 
       })
   },
-
+  
   activsign: function () {
     // 判断是否授权 
     var _this = this;

@@ -10,7 +10,7 @@ page{
 /*  展会订阅 */
 .showsubbox{
   width: 100%;
-  padding-bottom: 170rpx;
+  padding-bottom: 340rpx;
 }
 
 .ptcswipter{
@@ -26,7 +26,7 @@ page{
   height: 60rpx;
   text-align: center;
   line-height: 60rpx;
-  font-size: 30rpx;
+  font-size: 34rpx;
   font-weight: bold;
 }
 
@@ -110,16 +110,22 @@ page{
   overflow: hidden;
 } */
 .ssubBrandEve{
-  width:16.6%;
-  height: 140rpx;
-  float: left;
+  width:90rpx;
+  height: 117rpx;
+  /* float: left; */
+  display: inline-block;
+  margin-right: 27.5rpx;
 }
 .ssubBiliimgbr{
-  width:113rpx;
-  height: 113rpx;
-  border-radius: 6rpx;
+  width:90rpx;
+  height: 90rpx;
+  border-radius: 10rpx;
   margin: auto;
   display: block;
+  border: 1rpx solid #bbb;
+}
+.ssubBrandEve:nth-child(6n){
+  margin-right: 0;
 }
 .ssubBotTxt{
   width: 100%;
@@ -129,30 +135,36 @@ page{
   text-align: center;
 }
 .ssubLiveBroadcast{
-  width: 700rpx;
+  width: 660rpx;
   height:160rpx;
   margin:10rpx auto;
   border-radius: 6rpx;
-  border:4rpx solid #000;
+  border:2rpx solid #000;
   position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15rpx;
+  box-sizing: border-box;
 }
 
 .ssubLiveBroad{
-  width:220rpx;
-  height:120rpx;
-  float: left;
-  margin:20rpx;
+  width:250rpx;
+  height:160rpx;
+  /* float: left; */
+  /* margin:20rpx; */
+  
 }
 .ssubLiveBImg{
-  width: 100%;
-  height: 100%;
-  border-radius: 5rpx;
+  width: 250rpx;
+  height: 134rpx;
+  /* border-radius: 5rpx; */
   display: block;
 }
 .ssubLiveBroadRig{
-  width:430rpx;
+  width:410rpx;
   height:160rpx;
-  float: left;  
+  /* float: right;   */
 }
 .ssubSSAname{
   height: 35px;
@@ -160,18 +172,25 @@ page{
   font-size: 24rpx;
   line-height: 36rpx;
   margin: 20rpx auto 0;
+  text-align: center;
+}
+.ssubSSAname text{
+  display: block;
+  text-align: center;
 }
 .ssubSBotTime{
   margin-top: 15rpx;
   width: 100%;
   height:40rpx;
+  display: flex;
+  justify-content: center;
 }
 .ssubSBotTimeleft{
   font-size:25rpx;
   line-height:30rpx;
   color:#fff;
   float:left;
-  padding:5rpx 10rpx;
+  padding:5rpx 40rpx;
   border-radius:10rpx;
   background:#32ACFB;
   
@@ -550,4 +569,90 @@ page{
   top: 0;
   left: 0;
   opacity: 0;
+}
+
+/* 展会日历活动 */
+.calendarActivityWrap{}
+.calendarTxt{
+  text-align: center;
+  font-size: 24rpx;
+  color: #444;
+  margin-top: -10rpx;
+}
+.calendarSwiper {
+  height: 412.375rpx;
+  padding-top: 25rpx;
+}
+.calendarSwiper swiper-item{
+  position: relative;
+}
+.calendarSwiperItem{
+  transform: scale(0.9);
+  transition: all 0.3s ease;
+}
+.swiperItemBrandWrap{
+  width: 100%;
+  height: 60rpx;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,.5);
+  border-radius: 8rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15rpx;
+  box-sizing: border-box;
+}
+.swiperItemBrandInfo{
+  display: flex;
+  align-items: center;
+}
+.swiperItemBrandLogo{
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50rpx;
+  display: block;
+}
+.swiperItemBrandName{
+  font-size: 28rpx;
+  color: #fff;
+}
+.swiperItemBrandVote{
+  font-size: 28rpx;
+  color: #fff;
+}
+.brandLogoBgFFF{
+  background-color: #fff;
+  margin-right: 8rpx;
+  border-radius: 100%;
+}
+.le-img {
+  width: 100%;
+  height: 354.375rpx;
+  display: block;
+  border-radius: 6px;
+}
+.le-active {
+  transform: scale(1);
+}
+
+.BottomBuyTickets{
+  width: 520rpx;
+  position: fixed;
+  bottom: 180rpx;
+  left: 30rpx;
+  right: 0;
+  z-index: 11;
+}
+.BottomBuyTickets image{
+  width: 100%;
+}
+.BottomBuyTickets text{
+  width: 100%;
+  display: block;
+  position: absolute;
+  bottom: 26rpx;
+  left: 25rpx;
+  font-size: 24rpx;
 }
