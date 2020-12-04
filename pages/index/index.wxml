@@ -73,9 +73,8 @@
  
 	<!--  测试  -->
 	<view style='height:220rpx;width:100%;text-align:center; display: table;position: relative;' class='rotate' catchtap='jumpxinxi'>
-		<text style='display: table-cell;vertical-align:middle;text-align:center;'>转盘\n盘转</text>
+		<text style='display: table-cell;vertical-align:middle;text-align:center;'>日历\n测试</text>
 	</view>
-
 
 	<!--   数据  -->
 

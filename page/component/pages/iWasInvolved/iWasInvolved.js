@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '我参与的',
+    c_title: '我的投票',
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
@@ -17,7 +17,6 @@ Page({
     signinlayer:true,
     windowHeight: app.signindata.windowHeight - 65 - wx.getStorageSync('statusBarHeightMc') || 0,
     
-    text:[1,2,3,3,3,3,3,3],
     ballotbox:false,
     pid:0,
     subscribedata:'',
@@ -409,7 +408,7 @@ Page({
       success: function (res) {}
     }      
   },
-  // 跳转我参与的
+  // 跳转我的投票
   jumpiwas:function(){
     var _this = this;
     wx.navigateTo({

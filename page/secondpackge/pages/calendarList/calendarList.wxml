@@ -22,10 +22,11 @@
 </view>
 
 <view class="content">
-  <view class="elsearch" wx:if="{{isShowSearch}}">
+   <!-- wx:if="{{isShowSearch}}" -->
+  <view class="elsearch">
       <view class="elsearchch">
           <image class="elserarchimg" catchtap="jumpsearch" src="https://www.51chaidan.com/images/toyCabinet/search.png"></image>
-          <input class="elinputbut" bindfocus='onFocus' placeholder='请输入品牌名称搜索' bindinput="inputChange" bindconfirm="jumpsearch" value="{{brand_name}}"></input>
+          <input class="elinputbut" bindfocus='onFocus' placeholder='请输入品牌名称搜索' bindinput="inputChange" bindconfirm="jumpsearch" value="{{brand_name_dis}}"></input>
           <view class="elserbotom" catchtap="jumpsearch">搜索</view>
       </view>
   </view>
@@ -35,14 +36,14 @@
     <text class="{{tabIndex==2?'active':''}}" data-ind="2" catchtap="tabChangeFun">热门</text>
     <text class="{{tabIndex==3?'active':''}}" data-ind="3" catchtap="tabChangeFun">排行榜</text>
     <view class="tabNavssIcon" wx:if="{{!isShowSearch}}" catchtap="showSearchFun">
-      <image src="http://www.51chaidan.com/images/sign/calendar/seek.png" mode="widthFix"></image>
+      <image src="http://www.51chaidan.com/images/sign/calendar/seek.png" wx:if='{{false}}' mode="widthFix"></image>
     </view>
   </view>
 
   <block>
     <view wx:if="{{tabIndex==1 || tabIndex==2}}" class="allCalendar">
       <block wx:for="{{listData}}" wx:key='key' data-index="{{index}}">
-        <view class="calendarItem">
+        <view class="calendarItem boxShadowEve">
           <image class="calendarItemBanner" src="{{item.calendar_img}}" mode="aspectFit" data-lb="1" data-calendar_id='{{item.id}}' catchtap="jumptoCalendarDetail"></image>
           <view class="calendarItemInfo">
             <view> <text>{{item.vote_number}}票</text> </view>
@@ -60,9 +61,9 @@
     </view>
     <view wx:if="{{tabIndex==3}}" class="ranking">
       <view class="rankingItem rankingOne" wx:if="{{brandData[0]}}" data-lb="2"  data-brand_id='{{brandData[0].brand_id}}' catchtap="jumptoCalendarDetail">
-        <view class="rankingItemWrap">
+        <view class="rankingItemWrap boxShadowEve">
           <text class="rankNum">{{brandData[0].rank}}</text>
-          <image class="rankingBanner" src="{{brandData[0].calendar_img}}" mode="aspectFit"></image>
+          <image class="rankingBanner" src="{{brandData[0].calendar_img}}" mode="widthFix"></image>
           <view class="rankingBrandWrap">
             <view class="rankingBrandInfo">
               <view class="brandLogoBgFFF">
@@ -75,10 +76,10 @@
         </view>
       </view>
       <view class="rankingItem rankingTwoThree">
-        <view class="rankingTwo" wx:if="{{brandData[1]}}" data-lb="2" data-brand_id='{{brandData[1].brand_id}}' catchtap="jumptoCalendarDetail">
+        <view class="rankingTwo boxShadowEve" wx:if="{{brandData[1]}}" data-lb="2" data-brand_id='{{brandData[1].brand_id}}' catchtap="jumptoCalendarDetail">
           <template is="rankingItem" data="{{...brandData[1]}}"/>
         </view>
-        <view class="rankingThree" wx:if="{{brandData[2]}}" data-lb="2"  data-brand_id='{{brandData[2].brand_id}}' catchtap="jumptoCalendarDetail">
+        <view class="rankingThree boxShadowEve" wx:if="{{brandData[2]}}" data-lb="2"  data-brand_id='{{brandData[2].brand_id}}' catchtap="jumptoCalendarDetail">
           <template is="rankingItem" data="{{...brandData[2]}}"/>
         </view>
       </view>
@@ -93,8 +94,10 @@
             <text>{{item.rank}}</text>
           </view>
           <view class="rankingOthersR">
-            <view class="brandLogoBgFFF">
-              <image class="rankingOthersRLogo" src="{{item.logo}}" mode="aspectFit"></image>
+            <!-- <view class="brandLogoBgFFF"></view> -->
+            <view style="display:flex;align-items:center;">
+               <image class="rankingOthersRLogo" src="{{item.logo}}" mode='aspectFit'></image>
+               <text class="rankingOthersRName specialellipsis">{{item.name}}</text>
             </view>
             <view class="rankingOthersRNum">
               <image src="http://www.51chaidan.com/images/sign/calendar/ticket.png" mode="widthFix"></image>
@@ -109,8 +112,8 @@
 </view>
 
 
-<view class="btn" catchtap="jumptoIWasInvolved">
-  我参与的
+<view class="btn boxShadowEve" catchtap="jumptoIWasInvolved">
+  我的投票
 </view>
 
 

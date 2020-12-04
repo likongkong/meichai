@@ -25,8 +25,8 @@ Page({
     brandData:[],
     pid:0,
     isReachBottom:true,
-    brand_name:''
-
+    brand_name:'',
+    brand_name_dis:''
   },
 
   /**
@@ -248,13 +248,15 @@ Page({
   },
   onFocus: function (w) {
     this.setData({
-      brand_name:""
+      brand_name:"",
+      brand_name_dis:''
     });
   },
   // input 值改变
   inputChange: function (e) {
     this.setData({
-      brand_name: e.detail.value
+      brand_name: e.detail.value,
+      brand_name_dis:e.detail.value
     });
   },
   showSearchFun(){
@@ -269,7 +271,9 @@ Page({
       pid:0,
       listData:[],
       brandData:[],
-      isReachBottom:true
+      isReachBottom:true,
+      brand_name:'',
+      brand_name_dis:''
     })
     wx.showLoading({
       title: '加载中...',
@@ -329,13 +333,13 @@ Page({
   },
   getInfo(search = false){
     let _this = this;
-    if(search){
+    // if(search){
       var q = Dec.Aese('mod=Obtain&operation=calendarList&type='+_this.data.tabIndex+'&pid='+_this.data.pid+'&keyword='+_this.data.brand_name)
       console.log('mod=Obtain&operation=calendarList&type='+_this.data.tabIndex+'&pid='+_this.data.pid+'&keyword='+_this.data.brand_name)
-    }else{
-      var q = Dec.Aese('mod=Obtain&operation=calendarList&type='+_this.data.tabIndex+'&pid='+_this.data.pid)
-      console.log('mod=Obtain&operation=calendarList&type='+_this.data.tabIndex+'&pid='+_this.data.pid)
-    }
+    // }else{
+    //   var q = Dec.Aese('mod=Obtain&operation=calendarList&type='+_this.data.tabIndex+'&pid='+_this.data.pid)
+    //   console.log('mod=Obtain&operation=calendarList&type='+_this.data.tabIndex+'&pid='+_this.data.pid)
+    // }
     wx.request({
       url: app.signindata.comurl + 'brandDrying.php'+q,
       method: 'GET',
@@ -356,11 +360,13 @@ Page({
           //   })
           // }
           _this.setData({
-            listData:[..._this.data.listData,...res.data.List.calendrList]
+            listData:[..._this.data.listData,...res.data.List.calendrList],
+            brand_name_dis:''
           })
         }else if(res.data.ReturnCode == 201){
           _this.setData({
-            isReachBottom:false
+            isReachBottom:false,
+            brand_name_dis:''
           })
           wx.showToast({
             title: res.data.Msg,
@@ -436,12 +442,31 @@ Page({
             [change]: ++_this.data.listData[ index ].vote_number
           })
         }else{
-          wx.showModal({
-            title: '提示',
-            content: res.data.Msg,
-            showCancel: false,
-            success: function (res) { }
-          })          
+          if(res.data.ReturnCode == 386){
+            wx.showModal({
+              title: '提示',
+              content: res.data.Msg,
+              showCancel: true,
+              cancelText:"取消",
+              confirmText:"去获取",
+              success: function (res) { 
+                if (res.cancel) {} else {
+                  wx.navigateTo({
+                    url: "/page/component/pages/iWasInvolved/iWasInvolved?share_uid=" + _this.data.share_uid || 0
+                  })
+                }
+              }
+            }) 
+          }else{
+            if(res.data.Msg){
+              wx.showModal({
+                title: '提示',
+                content: res.data.Msg,
+                showCancel: false,
+                success: function (res) { }
+              })
+            };
+          };         
         }
       },
       fail: function () {},

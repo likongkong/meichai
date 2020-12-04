@@ -105,8 +105,7 @@
 
 
 <view class="iwasButon">
-   <view class="iwasButonTxt">我的投票剩余:<text style="color:#E94F57;margin:0 10rpx;">{{voteChance}}</text>(当日有效)</view>
-	 <view class="clickButton" catchtap="jumpiwas">去投票</view>
+   <view class="iwasButonTxt">我的投票剩余:<text style="color:#E94F57;margin:0 10rpx;">{{voteChance}}</text>(当日有效)<view class="clickButton" catchtap="jumpiwas">去投票</view></view>
 </view>
 
 
@@ -116,7 +115,7 @@
    <view class="tgimgboxgb" catchtap="ballotboxnone"></view>
 	 <view class="iwastip" style="height:{{windowHeight-100}}px;">
 	    <scroll-view scroll-y="true" class="iwastipscroll" bindscrolltolower="bindDownLoad">
-				<view class="calendarItem" wx:for='{{voteCalendarList}}' wx:key='key'>
+				<view class="calendarItem boxShadowEve" wx:for='{{voteCalendarList}}' wx:key='key'>
 					<image class="calendarItemBanner" src="{{item.calendar_img}}" catchtap="jumpLeaflet" data-calendar_id='{{item.calendar_id}}' mode='aspectFit'></image>
 					<view class="calendarItemInfo" catchtap="votingInterface" data-brand_id='{{item.brand_id}}' data-calendar_id='{{item.calendar_id}}'>
 						<view> <text>{{item.number}}票</text> </view>
