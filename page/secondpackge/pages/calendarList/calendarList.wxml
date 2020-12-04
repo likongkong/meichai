@@ -22,7 +22,6 @@
 </view>
 
 <view class="content">
-   <!-- wx:if="{{isShowSearch}}" -->
   <view class="elsearch">
       <view class="elsearchch">
           <image class="elserarchimg" catchtap="jumpsearch" src="https://www.51chaidan.com/images/toyCabinet/search.png"></image>
@@ -35,8 +34,8 @@
     <text class="{{tabIndex==1?'active':''}}" data-ind="1" catchtap="tabChangeFun">最新</text>
     <text class="{{tabIndex==2?'active':''}}" data-ind="2" catchtap="tabChangeFun">热门</text>
     <text class="{{tabIndex==3?'active':''}}" data-ind="3" catchtap="tabChangeFun">排行榜</text>
-    <view class="tabNavssIcon" wx:if="{{!isShowSearch}}" catchtap="showSearchFun">
-      <image src="http://www.51chaidan.com/images/sign/calendar/seek.png" wx:if='{{false}}' mode="widthFix"></image>
+    <view class="tabNavssIcon" catchtap="showSearchFun">
+      <image src="https://cdn.51chaidan.com/images/icon/iconButtonTip.png" mode="widthFix"></image>
     </view>
   </view>
 
@@ -161,3 +160,13 @@
 <tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
 
 <view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight}}px;width: 100%;z-index: 30;' catchtap='pullupsignin'></view>
+
+
+<view class="popupMask" wx:if="{{isShowSearch}}" catchtouchmove="true" catchtap="showSearchFun">
+   <view class="explainBox">
+      <view class="explainBoxHead">活动规则</view>
+      <scroll-view scroll-y="true" class="callscroll">
+          <text class="callscrollTxt">{{explain}}</text>
+      </scroll-view>
+   </view>
+</view>

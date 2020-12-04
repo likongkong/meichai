@@ -261,7 +261,7 @@ Page({
   },
   showSearchFun(){
     this.setData({
-      isShowSearch:true
+      isShowSearch:!this.data.isShowSearch
     })
   },
   tabChangeFun(e){
@@ -321,7 +321,8 @@ Page({
         console.log('顶部日历轮播=============',res)
         if (res.data.ReturnCode == 200) {
           _this.setData({
-            swiperCalendrList:res.data.List.calendrList
+            swiperCalendrList:res.data.List.calendrList,
+            explain:res.data.List.explain || ''
           })
         }else{
           _this.setData({

@@ -30,9 +30,17 @@ Page({
   // 跳转品牌
   jumpBrandDeail:function(w){
     var mid = w.currentTarget.dataset.mid || w.target.dataset.mid || 0;
-    wx.navigateTo({
-      url: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + mid + "&settlement=1",
-    });
+    this.setData({
+      isBrandDetail:2, 
+      brand_id: mid
+    })
+
+    this.brandDetail();
+
+
+    // wx.navigateTo({
+    //   url: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + mid + "&settlement=1",
+    // });
   },
   /**
    * 生命周期函数--监听页面隐藏
@@ -61,13 +69,13 @@ Page({
     if(options.brand_id){
       this.setData({
         isBrandDetail:2, 
-        brand_id:options.brand_id || 518
+        brand_id:options.brand_id
       })
     }else{
       this.setData({
         isBrandDetail:1,
         c_title: '展会日历',
-        calendar_id:options.calendar_id || 518
+        calendar_id:options.calendar_id
       })      
     }
 

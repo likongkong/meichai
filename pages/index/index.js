@@ -236,7 +236,7 @@ Page({
 
       // url: "/page/component/pages/iWasInvolved/iWasInvolved",
 
-
+      // url: "/pages/detailspage/detailspage?gid=35327"
 
     });
   },
