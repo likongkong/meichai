@@ -10,7 +10,7 @@
           <image src="{{calendarDetails.calendar_img}}" mode="widthFix" class="cDetBheadImg"></image>
           <view class="cDetBhBrand">
              <view>
-                <image class="headBrandLogo" src="{{calendarDetails.logo}}"></image>
+                <image class="headBrandLogo" mode="aspectFit" src="{{calendarDetails.logo}}"></image>
                 <view class="headBrandName specialellipsis">{{calendarDetails.name}}</view>             
              </view>
              <view class="brandShareBox"> <image class="brandShareImg" src="http://www.51chaidan.com/images/sign/calendar/heat.png" mode="widthFix"></image>{{calendarDetails.heat}}</view> 
