@@ -43,10 +43,10 @@ Page({
     mapImgDisplay:false,
     iftrdetailpagetwo:false,
     shunButBarData:[
-      {name:'直播间',tid:1},
-      {name:'订阅福利',tid:2},
-      {name:'线上商品',tid:3},
-      {name:'直播商品',tid:4},
+      {name:'展会活动',tid:1},
+      {name:'线上潮玩展',tid:2},
+      {name:'票务信息',tid:3},
+      {name:'品牌合作',tid:4},
       {name:'线下商品',tid:5}
     ],
     // 获取手机号弹框
