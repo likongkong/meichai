@@ -178,20 +178,21 @@ page{
 }
 .ticketRightImg{
   float: right;
-  width: 70rpx;
+  width: 75rpx;
   height: 70rpx;
   margin:14rpx 14rpx 14rpx 0;
+  border-radius: 8rpx;
 }
 .ticketRightNum{
   height: 98rpx;
-  line-height:100rpx; 
-  font-size: 20rpx;
+  line-height:98rpx; 
+  font-size: 22rpx;
   float: right; 
 }
 
 .ticketRightName{
   float: right;
-  width: 70rpx;
+  width: 53rpx;
   height: 70rpx;
   margin: 14rpx 14rpx 14rpx 0;
   font-size: 22rpx;
