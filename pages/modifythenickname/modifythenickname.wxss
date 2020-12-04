@@ -1,5 +1,8 @@
 
 @import "../../common/tabbar.wxss";
+
+@import "../topfunction/topfunction.wxss";
+
 page{
   background:#f4f5f9;
   padding-bottom: 110rpx;
@@ -29,8 +32,8 @@ page{
   margin:15rpx;
   width: 50rpx;
   height: 50rpx;
-  border-radius: 50%;
   vertical-align: top;
+  border-radius: 8rpx;
 }
 .headBrandName{
   height: 80rpx;
@@ -106,6 +109,7 @@ page{
   width: 90rpx;
   height: 90rpx;
   margin: 15rpx;
+  border-radius: 10rpx;
 }
 .detailBName{
   width: 460rpx;
@@ -181,9 +185,32 @@ page{
   font-size: 26rpx;
   
 }
+.calendTxtTitle{
+  padding:0 20rpx;
+  height: 80rpx;
+  font-size: 24rpx;
+  line-height: 80rpx;
+}
 
-
-
+.iwasscroll{
+  min-height: 80rpx;
+  width:100%;
+  white-space: nowrap;
+}
+.iwasscrollEve{
+  height:120rpx;
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+  margin-left: 20rpx;
+  min-width: 190rpx;
+  
+}
+.iwassEveImg{
+  height: 120rpx;
+  display: block;
+  border-radius: 10rpx;
+}
 
 
 

@@ -35,7 +35,7 @@ page{
   left: 0;
   bottom: 0;
   background-color: rgba(0,0,0,.5);
-  border-radius: 8rpx;
+  border-radius: 0 0 8rpx 8rpx;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -49,7 +49,7 @@ page{
 .swiperItemBrandLogo{
   width: 50rpx;
   height: 50rpx;
-  border-radius: 50rpx;
+  border-radius: 8rpx;
   display: block;
 }
 .swiperItemBrandName{
@@ -140,6 +140,8 @@ page{
   position: relative;
   margin-right: 20rpx;
   margin-bottom: 30rpx;
+  background: #fff;
+  border-radius: 8rpx;
 }
 .calendarItem:nth-child(2n){
   margin-right: 0;
@@ -147,7 +149,7 @@ page{
 .calendarItemBanner{
   width: 100%;
   height: 194rpx;
-  border-radius: 8rpx;
+  border-radius: 8rpx 8rpx 0 0;
   display: block;
 }
 .calendarItemInfo{
@@ -189,13 +191,13 @@ page{
 .brandLogoBgFFF{
   background-color: #fff;
   margin-right: 8rpx;
-  border-radius: 100%;
+  border-radius: 8rpx;
 }
 .calendarItemBrand image{
   width: 40rpx;
   height: 40rpx;
   display: block;
-  border-radius: 40rpx;
+  border-radius: 8rpx;
 }
 .calendarItemBrand text{
   width: 100%;
@@ -237,8 +239,9 @@ page{
 } 
 .rankingTwoThreeBanner{
   width: 100%;
-  height: 196.875rpx;
+  height: 198rpx;
   display: block;
+  border-radius: 8rpx;
 }
 .rankingBrandWrap{
   width: 100%;
@@ -247,7 +250,7 @@ page{
   left: 0;
   bottom: 0;
   background-color: rgba(0,0,0,.5);
-  border-radius: 8rpx;
+  border-radius: 0 0 8rpx 8rpx;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -261,7 +264,7 @@ page{
 .rankingBrandLogo{
   width: 50rpx;
   height: 50rpx;
-  border-radius: 50rpx;
+  border-radius: 8rpx;
   display: block;
 }
 .rankingBrandName{
@@ -283,9 +286,11 @@ page{
 .rankingTwo{
   width: 350rpx;
   margin-right: 10rpx;
+  border-radius: 8rpx;
 }
 .rankingThree{
   width: 350rpx;
+  border-radius: 8rpx;
 }
 .rankingOthers{
   width: 100%;
@@ -318,7 +323,15 @@ page{
 .rankingOthersRLogo{
   width: 60rpx;
   height: 60rpx;
-  border-radius:60rpx;
+  border-radius:8rpx;
+  display: inline-block;
+  background: #fff;
+  vertical-align: top;
+}
+.rankingOthersRName{
+  font-size: 24rpx;
+  margin-left: 15rpx;
+  max-width: 320rpx;
 }
 .rankingOthersRNum{
   display: flex;

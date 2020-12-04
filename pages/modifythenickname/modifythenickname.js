@@ -18,9 +18,22 @@ Page({
     // 品牌详情 2 单张详情 1
     isBrandDetail:0,
     share_uid:0,
-    pid:0
+    pid:0,
+    isBrandJumpCalend:false,
+    shopDetail:false
   },
-
+  shopDetailfun:function(){
+    this.setData({
+      shopDetail:!this.data.shopDetail
+    })
+  },
+  // 跳转品牌
+  jumpBrandDeail:function(w){
+    var mid = w.currentTarget.dataset.mid || w.target.dataset.mid || 0;
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + mid + "&settlement=1",
+    });
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -43,7 +56,7 @@ Page({
    */
   onLoad: function (options) {
     console.log('options===',options)
-
+    var _this = this;
     // 品牌详情 2 单张详情 1
     if(options.brand_id){
       this.setData({
@@ -58,15 +71,14 @@ Page({
       })      
     }
 
-    // this.setData({
-    //   isBrandDetail:2,
-    //   brand_id:options.brand_id || 518
-    // })
+    wx.getSystemInfo({
+      success: function (res) {
+        _this.setData({
+          topheight : res.statusBarHeight+44 || 90
+        });
+      }
+    })
 
-    // this.setData({
-    //   isBrandDetail:1,
-    //   calendar_id:2
-    // })
 
 
     this.data.share_uid = options.share_uid || 0
@@ -114,12 +126,20 @@ Page({
       success: function (res) { 
         console.log('brandDetail====',res)
         if (res.data.ReturnCode == 200) {
-          var name = res.data.List.brandDetails.name || '展会日历';
+          var name = '展会日历';
+          var goodsDescDetails = '';
+          if(res.data.List && res.data.List.brandDetails){
+            name = res.data.List.brandDetails.name || '展会日历';
+            goodsDescDetails  = res.data.List.goodsInfo.goods_desc.replace(/<img/gi, '<img style="width:100%;height:auto;display:block;"');
+          };
+          
+
           _this.setData({
             c_title: name, 
             brandDetails:res.data.List.brandDetails,
             calendarDetails:res.data.List.calendarDetails,
-            voteToUserList:res.data.List.voteToUserList
+            voteToUserList:res.data.List.voteToUserList,
+            goodsDescDetails:goodsDescDetails || ''
           })
         }else{
           wx.showModal({
@@ -170,7 +190,8 @@ Page({
           if(num == 1){
             _this.setData({
               calendarDetails:res.data.List.calendarDetails,
-              calendarDetailsToUser:res.data.List.calendarDetailsToUser
+              calendarDetailsToUser:res.data.List.calendarDetailsToUser,
+              otherCalendarByBrand:res.data.List.otherCalendarByBrand || []
             })
           }else{
             var store = res.data.List.calendarDetailsToUser || [];
@@ -337,7 +358,7 @@ Page({
     var title = w.currentTarget.dataset.title || w.target.dataset.title || '';
     app.comjumpwxnav(num,whref,title)
   },
-  // 跳转我参与的
+  // 跳转我的投票
   jumpiwas:function(){
     var _this = this;
     wx.navigateTo({
@@ -422,11 +443,51 @@ Page({
     this.setData({
       isBrandDetail:1,
       c_title: '展会日历',
-      calendar_id: calendar_id
+      calendar_id: calendar_id,
+      isBrandJumpCalend:true
     })
 
     this.calendarDetail(1);
 
-  }
+  },
+
+  jumpLeafletNew:function(w){
+    var calendar_id = w.currentTarget.dataset.calendar_id || w.target.dataset.calendar_id || '';
+    this.setData({
+      isBrandDetail:1,
+      c_title: '展会日历',
+      calendar_id: calendar_id
+    })
+    this.calendarDetail(1);
+  },
+
+  jumphomepage:function(){
+    //获取当前时间戳  
+    wx.redirectTo({
+      url: "/pages/index/index" 
+    });     
+
+  },
+  // 返回上一页
+  gateback: function () {
+    var _this = this;
+    let pages = getCurrentPages();
+    let prevpage = pages[pages.length - 2];
+    if (prevpage) {
+      if(_this.data.isBrandJumpCalend){
+          _this.setData({
+            isBrandDetail:2,
+            isBrandJumpCalend:false
+          })
+          _this.brandDetail();
+      }else{
+          wx.navigateBack();
+      };
+    } else {
+      wx.redirectTo({
+        url: "/pages/index/index"
+      });
+    };
+  },
 
 })

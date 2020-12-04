@@ -1159,5 +1159,5 @@ App({
 
 // calendarList 日历列表
 // modifythenickname 日历详情
-// iWasInvolved 日历 我参与的
+// iWasInvolved 日历 我的投票
 // vipPage  vip 页面
