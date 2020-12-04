@@ -77,7 +77,7 @@
         </view>
     </view>
 
-   <view class="iwasTitle" wx:if='{{calendarDetails&&calendarDetails.length!=0}}'>参赛日历</view>
+   <view class="iwasTitle" wx:if='{{calendarDetails&&calendarDetails.length!=0}}'><image src="https://cdn.51chaidan.com/images/icon/iconButtonTip.png" mode="widthFix" catchtap="showSearchFun" class="iwasTitletitle"></image>参赛日历</view>
 
     <view class="calendDtailPad" wx:for='{{calendarDetails}}' wx:key='key'>
         <view class="cDetBhead boxShadowEve">
@@ -102,11 +102,13 @@
 
    <view class="calendDtailPad">
       <view class="ticketRanking" wx:for='{{voteToUserList}}' wx:key='key'>
+          <view class="bottomLine"></view>
           <view class="ticketRankingNum">{{item.rank}}</view>
           <view class="ticketRankingBox">
             <image class="ticketRankingImg" src="{{item.litpic}}"></image>
             <view class="ticketRankingInd" style="float:left;margin:0 0 0 15rpx;">已投{{item.all_vote_number}}票</view>
             <view class="ticketRightNum" wx:if='{{item.gift_num}}'>x{{item.gift_num}}</view>
+            <text class="ticketRightName">限定\n日历</text>
             <image class="ticketRightImg" catchtap="shopDetailfun" mode='aspectFit' wx:if='{{item.gift_img}}' src="{{item.gift_img}}"></image>
           </view>
       </view>
@@ -138,7 +140,14 @@
 
 </view>
 
-
+<view class="popupMask" wx:if="{{isShowSearch}}" catchtouchmove="true" catchtap="showSearchFun">
+   <view class="explainBox">
+      <view class="explainBoxHead">活动规则</view>
+      <scroll-view scroll-y="true" class="callscroll">
+          <text class="callscrollTxt">{{explain}}</text>
+      </scroll-view>
+   </view>
+</view>
 
 
 
