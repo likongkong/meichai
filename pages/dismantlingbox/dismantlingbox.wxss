@@ -127,7 +127,7 @@ page{
   border-radius: 10rpx;
   margin: auto;
   display: block;
-  border: 1rpx solid #bbb;
+  border: 1rpx solid #fff;
 }
 .ssubBrandEve:nth-child(6n){
   margin-right: 0;
@@ -706,7 +706,7 @@ page{
   font-size: 24rpx;
   color: #fff;
   display: inline-block;
-  padding: 6rpx 30rpx;
+  padding: 6rpx 18rpx;
   border-radius: 8rpx;
 }
 .addGoods{
@@ -755,6 +755,7 @@ page{
 .addGoodsBottom>view image{
   width: 100%;
   height: auto;
+  border-radius: 8rpx;
 }
 .addGoodsBottomName{
   font-size: 28rpx;

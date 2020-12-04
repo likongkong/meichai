@@ -18,7 +18,7 @@
     <view class="calendarActivityWrap">
       <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e1'>———— 展会活动 ————</view>
       <view class="calendarTxt">展会限定日历,投票赢好礼</view>
-      <swiper class="calendarSwiper" indicator-dots="{{true}}" previous-margin='30px' next-margin='30px' bindchange="swiperChange" indicator-active-color="#298CF7" style="height:{{swiperH+30}}px;">
+      <swiper class="calendarSwiper" autoplay="true" circular="true" interval="5000" indicator-dots="{{false}}" previous-margin='30px' next-margin='30px' bindchange="swiperChange" indicator-active-color="#298CF7" style="height:{{swiperH}}px;">
         <swiper-item wx:for='{{calendarList}}' wx:key='key' catchtap="jumpCalendarList">
           <view class="calendarSwiperItem {{nowIdx==index?'le-active':''}}">
             <image class='le-img' bindload='getHeight' src='{{item.calendar_img}}' style='height:{{swiperH}}px;' mode="aspectFit"></image>
@@ -143,7 +143,7 @@
             <text class="txt">单日游玩</text>
           </view>
           <view>
-            <text class="subscriptionBtn">订阅</text>
+            <text class="subscriptionBtn">开票订阅</text>
           </view>
         </view>
       </view>
@@ -151,20 +151,20 @@
         <view class="addGoodsT">
           <image src="https://cdn.51chaidan.com/images/icon/iconYellowStar.png" mode="widthFix"></image>
           <view>
-            <text>门票加购潮玩</text>
-            <text>购买门票后可加购两款神秘潮玩（每款每人限1只）</text>
+            <text>门票玩具</text>
+            <text>购买后线下展会领取</text>
           </view>
         </view>
         <view class="addGoodsBottom">
           <view>
             <image src="https://www.51chaidan.com/images/calendar/ticketsA.jpg" mode="widthFix"></image>
             <text class="addGoodsBottomName">门票玩具A</text>
-            <text class="addGoodsBottomDy">订阅商品</text>
+            <text class="addGoodsBottomDy">开票订阅</text>
           </view>
           <view>
             <image src="https://cdn.51chaidan.com/images/calendar/ticketsB.jpg" mode="widthFix"></image>
             <text class="addGoodsBottomName">门票玩具B</text>
-            <text class="addGoodsBottomDy">订阅商品</text>
+            <text class="addGoodsBottomDy">开票订阅</text>
           </view>
         </view>
       </view> 
