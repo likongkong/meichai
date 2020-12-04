@@ -187,7 +187,7 @@
                 <view style="width:100%;min-height:40rpx;">
                       <view class="emlhlttop specialellipsis" wx:if='{{item.title}}'><text style="color:#50a3fd;margin-right:5rpx;"></text>{{item.title}}</view>
                       <view class="emlhltbottom" style="font-size:24rpx;height:40rpx;line-height:40rpx;">
-                        <text class="emlplefttxt" data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>评论({{item.comment_count?item.comment_count:'0'}})</text>
+                        <text class="emlplefttxt" data-drying_id='{{item.id}}' wx:if='{{item.comment_count}}' catchtap='jumpdlfdetail'>评论({{item.comment_count?item.comment_count:'0'}})</text>
                         <image class="emlplefimgshare" src="https://clw.51chaidan.com//images/goods/share3.png">
                         <button open-type="share" class='butshare' data-drying_id='{{item.id}}' data-title='{{item.title}}' data-shareimg='{{item.shareImg}}' data-currency_sum='{{item.currency_sum}}' data-topic_name='{{item.topic_name}}' style='position: absolute;height:100%;width:100%;left:0;top:0;z-index:3;'></button>  
                         </image>
