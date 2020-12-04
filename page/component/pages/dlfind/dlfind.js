@@ -73,6 +73,15 @@ Page({
     isOpenToyShow:false,
     isPunchTheClock:1596729599<Date.parse(new Date())/1000&&Date.parse(new Date())/1000<1596988799?true:false
   },
+  // 跳转日历
+  jumpCal:function(){
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/calendarList/calendarList"
+    }); 
+  },
+  jumpVip:function(){
+    app.showToastC('敬请期待');
+  },
   finishLoad(w){
     var ind = w.currentTarget.dataset.ind || w.target.dataset.ind||0;
     this.setData({
