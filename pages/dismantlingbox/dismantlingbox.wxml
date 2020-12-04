@@ -53,7 +53,7 @@
         </view>
     </view> -->
     <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e1'>————— 线上潮玩展 —————</view>
-    <view class="ssubLiveBroadcast" wx:key="key" id='e1' catchtap="arousesubscribeFun" data-subscribe_data="{{test[0]}}">
+    <view class="ssubLiveBroadcast" wx:key="key" id='e1' catchtap="arousesubscribeFun" data-subscribe_data="{{subscribeJson[0].toyshowStart}}">
         <!-- <navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{item.room_id}}" style='position: absolute;height:100%;width:100%;left:0;top:0;z-index:3;'></navigator>  -->
         <image class="ssubLiveBImg" src="https://cdn.51chaidan.com/images/toyShow3/liveshowSubscribe.jpg" mode='aspectFit'></image>
         <view class="ssubLiveBroadRig">
@@ -134,7 +134,7 @@
 
     <!-- 票务信息 -->
     <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e10'>————— 票务信息 —————</view>
-    <view class="ticketWrap" catchtap="arousesubscribeFun" data-subscribe_data="{{test[1]}}">
+    <view class="ticketWrap" catchtap="arousesubscribeFun" data-subscribe_data="{{subscribeJson[1].toyshowTicket}}">
       <view class="ticketInfo">
         <image src="https://cdn.51chaidan.com/data/afficheimg/2020101MCTS.jpg?imageMogr2/thumbnail/x800" mode="aspectFit"></image>
         <view class="ticketInfoWrap">

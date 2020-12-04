@@ -61,7 +61,7 @@ Page({
 　　　　'https://cdn.51chaidan.com/data/afficheimg/20200730bw.jpg?imageMogr2/thumbnail/x800',
 　　　　'https://cdn.51chaidan.com/data/afficheimg/20200730bw.jpg?imageMogr2/thumbnail/x800',
 　　],
-    test:[
+    subscribeJson:[
        {"toyshowStart":{"template_id":["Q0tWM7kOihw1TilTeR3YmLzWp5tS0McgyOeJx2xX-B0","7rx-pSLTpdYH6IdOKAudkP1A0MmAzN0cOS2RXMTVyKo"], "subscribe_type":["12","12"]}},{"toyshowTicket":{"template_id":["Q0tWM7kOihw1TilTeR3YmLzWp5tS0McgyOeJx2xX-B0","7rx-pSLTpdYH6IdOKAudkP1A0MmAzN0cOS2RXMTVyKo"], "subscribe_type":["17","17"]}}
     ]
   },
@@ -220,8 +220,9 @@ Page({
 
   arousesubscribeFun:function(e){
     var subscribe_data = e.currentTarget.dataset.subscribe_data;
+    console.log(subscribe_data)
     this.setData({
-      subscribedata:subscribe_data.toyshowStart
+      subscribedata:subscribe_data
     })
     app.comsubscribe(this)
   },
