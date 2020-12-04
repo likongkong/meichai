@@ -20,8 +20,16 @@ Page({
     share_uid:0,
     pid:0,
     isBrandJumpCalend:false,
-    shopDetail:false
+    shopDetail:false,
+    isShowSearch:false
   },
+
+  showSearchFun(){
+    this.setData({
+      isShowSearch:!this.data.isShowSearch
+    })
+  },
+
   shopDetailfun:function(){
     this.setData({
       shopDetail:!this.data.shopDetail
@@ -147,7 +155,8 @@ Page({
             brandDetails:res.data.List.brandDetails,
             calendarDetails:res.data.List.calendarDetails,
             voteToUserList:res.data.List.voteToUserList,
-            goodsDescDetails:goodsDescDetails || ''
+            goodsDescDetails:goodsDescDetails || '',
+            explain:res.data.List.explain || ''
           })
         }else{
           wx.showModal({

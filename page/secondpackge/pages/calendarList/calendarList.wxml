@@ -1,7 +1,7 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}' is_share='{{is_share}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 <view class="swiperWrap" wx:if="{{swiperCalendrList.length!=0}}">
-  <swiper>
+  <swiper indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
     <block wx:for="{{swiperCalendrList}}" wx:key='key' data-index="{{index}}">
       <swiper-item class="swiperItem" data-calendar_id='{{item.id}}' catchtap="jumptoCalendarDetail">
         <view>
