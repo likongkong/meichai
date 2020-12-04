@@ -705,9 +705,11 @@ Page({
               var calendarList = res.data.List.calendar || [];
               var brandList = res.data.List.brand || [];
               var isMobileAuth = res.data.Info.isMobileAuth || false;
+              var countSubsribe = res.data.Info.countSubsribe || 0;
               _this.setData({
                 bannerList:bannerList,
                 calendarList,
+                countSubsribe,
                 brandList:brandList,
                 isMobileAuth:isMobileAuth
               });

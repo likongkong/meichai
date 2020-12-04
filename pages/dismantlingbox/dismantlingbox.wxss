@@ -656,3 +656,113 @@ page{
   left: 25rpx;
   font-size: 24rpx;
 }
+
+
+/* 票务信息 */
+.ticketInfo{
+  width: 700rpx;
+  height: 200rpx;
+  box-shadow: 1px 2px 6px #999999;
+  border-radius: 10rpx;
+  margin-left: 25rpx;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ticketInfo image{
+  width: 376rpx;
+  height: 200rpx;
+}
+.ticketInfoWrap{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 324rpx;
+  height: 200rpx;
+  padding: 0 34rpx;
+  box-sizing: border-box;
+}
+.ticketInfoWrap text{
+}
+.price{
+  font-size: 30rpx;
+  font-weight: bold;
+  display: block;
+}
+.txt{
+  font-size: 22rpx;
+  display: block;
+  color: #666;
+}
+.subscriptionBtn{
+  background-color: #E94F57;
+  font-size: 24rpx;
+  color: #fff;
+  display: inline-block;
+  padding: 6rpx 30rpx;
+  border-radius: 8rpx;
+}
+.addGoods{
+  width: 700rpx;
+  box-shadow: 1px 2px 6px #999999;
+  border-radius: 10rpx;
+  margin-left: 25rpx;
+  margin-top: 20rpx;
+  padding: 25rpx 0;
+  box-sizing: border-box;
+}
+.addGoodsT{
+  display: flex;
+  padding: 0 25rpx;
+  box-sizing: border-box;
+}
+.addGoodsT image{
+  width: 36rpx;
+  height: auto;
+  margin-right: 15rpx;
+}
+.addGoodsT view text{
+  display: block;
+}
+.addGoodsT>view text:first-child{
+  font-size: 28rpx;
+  color: #101010;
+}
+.addGoodsT>view text:last-child{
+  font-size: 22rpx;
+  color: #666;
+  margin-left: -4rpx;
+}
+.addGoodsBottom{
+ padding: 0 34rpx;
+ box-sizing: border-box;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ margin-top: 15rpx;
+}
+.addGoodsBottom>view{
+  width: 300rpx;
+  text-align: center;
+}
+.addGoodsBottom>view image{
+  width: 100%;
+  height: auto;
+}
+.addGoodsBottomName{
+  font-size: 28rpx;
+  color: #101010;
+  display: block;
+  text-align: center;
+  margin-top: 20rpx;
+}
+.addGoodsBottomDy{
+  background-color: #E94F57;
+  font-size: 24rpx;
+  color: #fff;
+  display: inline-block;
+  padding: 6rpx 15rpx;
+  border-radius: 8rpx;
+  margin-top: 10rpx;
+}
