@@ -77,9 +77,10 @@
                 <view class="brandLogoBgFFF">
                   <image class="swiperItemBrandLogo" src="{{item.brandLogo}}" mode="aspectFit"></image>
                 </view>
-                <text class="swiperItemBrandName specialellipsis" style="width:460rpx">{{item.brandName}}</text>
+                <text class="swiperItemBrandName specialellipsis" style="width:400rpx">{{item.brandName}}</text>
               </view>
-              <view class="swiperItemBrandVote">{{item.vote_number}}票</view>
+              <!-- <view class="swiperItemBrandVote">{{item.vote_number}}票</view> -->
+              <view class="swiperItemBrandVote">点击投票</view>
             </view>
           </view>
         </swiper-item>

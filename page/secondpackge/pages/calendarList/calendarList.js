@@ -242,7 +242,7 @@ Page({
         commoddata: commoddata
       });
 
-      console.log(_this.data.commoddata)
+      // console.log(_this.data.commoddata)
       
       if (iftrins) {
         clearInterval(_this.data.timer);
