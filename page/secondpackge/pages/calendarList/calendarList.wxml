@@ -176,7 +176,7 @@
 
 
 <view class="iwasButon">
-   <view class="iwasButonTxt">我的投票剩余:<text style="color:#E94F57;margin:0 10rpx;">{{voteChance}}</text>(当日有效)<view class="clickButton" catchtap="jumptoIWasInvolved">我的投票</view></view>
+   <view class="iwasButonTxt">我的投票剩余:<text style="color:#E94F57;margin:0 10rpx;">{{voteChance}}</text>(当日有效)<view class="clickButton" catchtap="jumptoIWasInvolved">获取更多</view></view>
 </view>
 
 <!-- <view class="btn boxShadowEve" catchtap="jumptoIWasInvolved">
