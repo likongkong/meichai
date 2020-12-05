@@ -8,8 +8,8 @@
   <view class="countdownWrap" catchtouchmove="true">
     <view class="boxShadowEve"> 
       <view class="countdownAwardWrap" catchtouchmove="" catchtap="toggleAwardFun">
-        <view>
-          <image src="https://cdn.51chaidan.com/images/calendar/gift2.png" mode="widthFix"></image>
+        <view style="position:relative;float:left;">
+          <image mode="heightFix" src="http://www.51chaidan.com/images/calendar/calendar_gift.png"></image>
           <text>活动奖品</text>
         </view>
       </view>

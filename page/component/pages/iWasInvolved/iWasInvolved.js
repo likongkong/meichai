@@ -277,9 +277,14 @@ Page({
              _this.countdownbfun();
           }else{
             var store = res.data.List.voteCalendarList || [];
-            _this.setData({
-              voteCalendarList: [..._this.data.voteCalendarList,...store]
-            });
+            if(store.length!=0){
+              _this.setData({
+                voteCalendarList: [..._this.data.voteCalendarList,...store]
+              });
+            }else{
+              app.showToastC('暂无更多数据');
+            };
+
           };
     
 
@@ -503,13 +508,10 @@ Page({
   },
   // 预约展会
   bookingExhib:function(){
-
-    // app.showToastC('敬请期待');
-    // return false;
-
     wx.navigateTo({
       url: "/pages/dismantlingbox/dismantlingbox"
     });
+    this.data.isJumpSignin = true;
   },
   // 单张详情
   jumpLeaflet:function(w){

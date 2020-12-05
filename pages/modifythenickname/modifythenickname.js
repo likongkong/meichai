@@ -50,7 +50,7 @@ Page({
       brand_id: mid
     })
 
-    this.brandDetail();
+    this.brandDetail(1);
 
 
     // wx.navigateTo({
@@ -128,7 +128,6 @@ Page({
         commoddata: commoddata
       });
 
-      console.log(_this.data.commoddata)
       
       if (iftrins) {
         clearInterval(_this.data.timer);
@@ -192,24 +191,34 @@ Page({
       isAuthMobile:app.signindata.isAuthMobile
     });
     if(this.data.isBrandDetail==2){
-      this.brandDetail()
+      this.brandDetail(1)
     }else{
       this.calendarDetail(1);
     }
     
   },
 
-  brandDetail:function(refresh){
+  brandDetail:function(num,refresh){
     var _this = this;
 
     var refresh = refresh || false;
 
     wx.showLoading({ title: '加载中...',mask:true }) 
 
-    var q = Dec.Aese('mod=Obtain&operation=BrandToCalendarList&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&brand_id='+_this.data.brand_id + '&refresh=' + refresh);
+    if (num == 1) {
+      _this.data.pid = 0;
+      _this.setData({
+        listdata: [],
+      });
+    } else {
+      var pagenum = parseInt(_this.data.pid)
+      _this.data.pid = ++pagenum;
+    };
+
+    var q = Dec.Aese('mod=Obtain&operation=BrandToCalendarList&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&brand_id='+_this.data.brand_id + '&refresh=' + refresh+'&pid='+_this.data.pid);
 
 
-    console.log(app.signindata.comurl + 'spread.php?'+'mod=Obtain&operation=BrandToCalendarList&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&brand_id='+_this.data.brand_id + '&refresh=' + refresh)
+    console.log(app.signindata.comurl + 'spread.php?'+'mod=Obtain&operation=BrandToCalendarList&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&brand_id='+_this.data.brand_id + '&refresh=' + refresh+'&pid='+_this.data.pid)
 
     wx.request({
       url: app.signindata.comurl + 'brandDrying.php' + q,
@@ -218,25 +227,37 @@ Page({
       success: function (res) { 
         console.log('brandDetail====',res)
         if (res.data.ReturnCode == 200) {
-          var name = '展会日历';
-          var goodsDescDetails = '';
-          if(res.data.List && res.data.List.brandDetails){
-            name = res.data.List.brandDetails.name || '展会日历';
-            goodsDescDetails  = res.data.List.goodsInfo.goods_desc.replace(/<img/gi, '<img style="width:100%;height:auto;display:block;"');
-          };
-          
 
-          _this.setData({
-            c_title: name, 
-            brandDetails:res.data.List.brandDetails,
-            calendarDetails:res.data.List.calendarDetails,
-            voteToUserList:res.data.List.voteToUserList,
-            goodsDescDetails:goodsDescDetails || '',
-            explain:res.data.List.explain || '',
-            voteChance:res.data.List.voteChance || 0
-          })
-          _this.data.countdown = res.data.List.endTime || '';
-          _this.countdownbfun();
+          if(num == 1){
+            var name = '展会日历';
+            var goodsDescDetails = '';
+            if(res.data.List && res.data.List.brandDetails){
+              name = res.data.List.brandDetails.name || '展会日历';
+              goodsDescDetails  = res.data.List.goodsInfo.goods_desc.replace(/<img/gi, '<img style="width:100%;height:auto;display:block;"');
+            };
+            
+            _this.setData({
+              c_title: name, 
+              brandDetails:res.data.List.brandDetails,
+              calendarDetails:res.data.List.calendarDetails,
+              voteToUserList:res.data.List.voteToUserList,
+              goodsDescDetails:goodsDescDetails || '',
+              explain:res.data.List.explain || '',
+              voteChance:res.data.List.voteChance || 0
+            })
+            _this.data.countdown = res.data.List.endTime || '';
+            _this.countdownbfun();
+          } else {
+            var store = res.data.List.voteToUserList || [];
+            if(store.length!=0){
+              _this.setData({
+                voteToUserList: [..._this.data.voteToUserList,...store]
+              });
+            }else{
+              app.showToastC('暂无更多数据');
+            };
+          };
+
 
         }else{
           wx.showModal({
@@ -295,9 +316,14 @@ Page({
 
           }else{
             var store = res.data.List.calendarDetailsToUser || [];
-            _this.setData({
-              calendarDetailsToUser: [..._this.data.calendarDetailsToUser,...store]
-            });
+            if(store.length!=0){
+              _this.setData({
+                calendarDetailsToUser: [..._this.data.calendarDetailsToUser,...store]
+              });
+            }else{
+              app.showToastC('暂无更多数据');
+            };
+
           }
 
         }else{
@@ -319,18 +345,21 @@ Page({
    */
   onShareAppMessage: function (options) {
     var _this = this;
-    var form = options.target.dataset.form || 0;
+    var form = 0;
+    if(options.target && options.target.dataset){
+      form = options.target.dataset.form || 0;
+    };
     if (options.from == 'button' && form == 1) {
         var num = options.target.dataset.num || 0;
         var shareUrl = 'pages/modifythenickname/modifythenickname?calendar_id='+_this.data.calendarDetails[num].id + '&share_uid=' + _this.data.uid;
-        var imageUrl = _this.data.calendarDetails[num].calendar_img || '';
+        var imageUrl = _this.data.calendarDetails[num].shareImg || '';
     }else{
       if(_this.data.isBrandDetail == 2){
-        var shareUrl = 'pages/modifythenickname/modifythenickname?brand_id='+_this.data.brand_id + '&share_uid=' + _this.data.uid;
-        var imageUrl = _this.data.calendarDetails[0].calendar_img || [];
+        var shareUrl = 'pages/modifythenickname/modifythenickname?brand_id='+_this.data.brand_id + '&share_uid=' + _this.data.uid; 
+        var imageUrl = _this.data.brandDetails.shareImg || _this.data.calendarDetails[0].shareImg || [];
      }else{
         var shareUrl = 'pages/modifythenickname/modifythenickname?calendar_id='+_this.data.calendar_id + '&share_uid=' + _this.data.uid;
-        var imageUrl = _this.data.calendarDetails.calendar_img || '';
+        var imageUrl = _this.data.calendarDetails.shareImg || '';
      };
     };  
     console.log(shareUrl,imageUrl)
@@ -345,10 +374,10 @@ Page({
     var _this = this;
     if(_this.data.isBrandDetail == 2){
       var shareUrl = 'brand_id='+_this.data.brand_id+'&share_uid='+_this.data.share_uid;
-      var imageUrl = _this.data.calendarDetails[0].calendar_img || [];
+      var imageUrl = _this.data.calendarDetails[0].shareImg || [];
    }else{
       var shareUrl = 'calendar_id='+_this.data.calendar_id+'&share_uid='+_this.data.share_uid;
-      var imageUrl = _this.data.calendarDetails.calendar_img || '';
+      var imageUrl = _this.data.calendarDetails.shareImg || '';
    };
     return {
       title:'这个展会限量版日历太好看了，快来为Ta投票免费拿',
@@ -436,15 +465,18 @@ Page({
 
   onPullDownRefresh: function () {
     if(this.data.isBrandDetail==2){
-      this.brandDetail(true)
+      this.brandDetail(1,true)
     }else{
       this.calendarDetail(1,true);
     }
   },
   onReachBottom: function () {
-    if(this.data.isBrandDetail==1){
+    if(this.data.isBrandDetail==2){
+      this.brandDetail(2)
+    }else{
       this.calendarDetail(2);
-    }
+    };
+
   },
 
   clicktganone: function () {
@@ -497,7 +529,7 @@ Page({
             success: function (res) { }
           })
           if(_this.data.isBrandDetail==2){
-            _this.brandDetail()
+            _this.brandDetail(1)
           }else{
             _this.calendarDetail(1);
           }
@@ -580,7 +612,7 @@ Page({
             isBrandDetail:2,
             isBrandJumpCalend:false
           })
-          _this.brandDetail();
+          _this.brandDetail(1);
       }else{
           wx.navigateBack();
       };
