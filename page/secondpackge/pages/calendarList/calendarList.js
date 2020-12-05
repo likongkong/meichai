@@ -17,7 +17,7 @@ Page({
     signinlayer:true,
     windowHeight: app.signindata.windowHeight - 65 - wx.getStorageSync('statusBarHeightMc') || 0,
     share_uid:0,
-    tabIndex:1,
+    tabIndex:4,
     ispopupMask:false,
     isShowSearch:false,
     swiperCalendrList:[],
@@ -28,7 +28,8 @@ Page({
     brand_name:'',
     brand_name_dis:'',
     countdown:'',
-    isAwardBox:false
+    isAwardBox:false,
+    isJumpSignin:false
   },
   toggleAwardFun(){
     this.setData({
@@ -176,6 +177,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    if(this.data.isJumpSignin && this.data.uid){
+      this.getSwiperInfo();
+      this.data.isJumpSignin = false;
+    };
     if (this.data.countdown) {
       this.countdownbfun();
     };
@@ -355,6 +360,7 @@ Page({
     }
   },
   jumptoIWasInvolved(e){
+    this.data.isJumpSignin = true;
     wx.navigateTo({ 
       url: "/page/component/pages/iWasInvolved/iWasInvolved?share_uid=" + this.data.share_uid
     })
@@ -394,9 +400,10 @@ Page({
           _this.setData({
             swiperCalendrList:res.data.List.calendrList,
             explain:res.data.List.explain || '',
+            voteChance:res.data.List.voteChance
           })
           _this.data.shareImg = res.data.List.shareImg || '';
-          _this.data.countdown = res.data.List.endTime || '1607160702';
+          _this.data.countdown = res.data.List.endTime || '';
           _this.countdownbfun();          
 
         }else{
@@ -440,6 +447,7 @@ Page({
             voteChance:res.data.List.voteChance,
             brand_name_dis:''
           })
+          console.log('listData====',_this.data.listData)
         }else if(res.data.ReturnCode == 201){
           _this.setData({
             isReachBottom:false,

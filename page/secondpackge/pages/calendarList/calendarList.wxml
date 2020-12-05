@@ -80,9 +80,9 @@
   </view>
 
   <view class="tabNav">
+    <text class="{{tabIndex==4?'active':''}}" data-ind="4" catchtap="tabChangeFun">票数最多</text>
     <text class="{{tabIndex==1?'active':''}}" data-ind="1" catchtap="tabChangeFun">最新</text>
     <text class="{{tabIndex==2?'active':''}}" data-ind="2" catchtap="tabChangeFun">热门</text>
-    <text class="{{tabIndex==4?'active':''}}" data-ind="4" catchtap="tabChangeFun">票数最多</text>
     <text class="{{tabIndex==5?'active':''}}" data-ind="5" catchtap="tabChangeFun">品牌排行</text>
     <view class="tabNavssIcon" catchtap="showSearchFun">
       <!-- <image src="https://cdn.51chaidan.com/images/icon/iconButtonTip.png" mode="widthFix"></image> -->
@@ -112,7 +112,6 @@
             <view wx:if='{{tabIndex==2}}'> <image src="http://www.51chaidan.com/images/sign/calendar/heat.png" mode="widthFix"></image>  <text>{{item.heat}}</text></view>
             <view catchtap="votingInterface" data-index='{{index}}' data-brand_id='{{item.brand_id}}' data-calendar_id='{{item.id}}'> <image class="calendarItemBanner" src="http://www.51chaidan.com/images/sign/calendar/vote.png" mode="widthFix"></image>  <text>投票</text></view>
           </view>
-          
         </view>
       </block>
     </view>
@@ -120,7 +119,7 @@
 </view>
 <view>
   <view wx:if="{{tabIndex==5}}" class="ranking">
-    <view style="padding:20rpx 20rpx 0 20rpx;">
+    <view style="padding:0 20rpx 0 20rpx;">
         <view class="rankingItem rankingOne" wx:if="{{brandData[0]}}" data-lb="2"  data-brand_id='{{brandData[0].brand_id}}' catchtap="jumptoCalendarDetail">
           <view class="rankingItemWrap boxShadowEve">
             <text class="rankNum">{{brandData[0].rank}}</text>

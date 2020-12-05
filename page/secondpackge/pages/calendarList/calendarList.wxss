@@ -109,6 +109,18 @@ page{
 }
 .tabNav .active{
   color: #E94F57;
+  font-size: 32rpx;
+  position: relative;
+}
+.tabNav .active::after{
+  content: '';
+  position: absolute;
+  bottom: 15rpx;
+  left: 50%;
+  margin-left: -35%;
+  width:  70%;
+  height: 4rpx;
+  background-color: #E94F57;
 }
 .tabNav text{
   padding: 25rpx 20rpx;
@@ -134,6 +146,7 @@ page{
 /* 全部 */
 .allCalendar{
   width: 100%;
+  margin-top: 20rpx;
 }
 .calendarItem{
   width: 345rpx;

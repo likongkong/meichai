@@ -15,6 +15,7 @@ Page({
     commoddata:[],
     listDataB:[],
     listDataC:[],
+    listDataD:[],
     // loading 加载
     headhidden: true,
     bothidden: true, 
@@ -38,6 +39,11 @@ Page({
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90
+  },
+  jumptoCalendarDetail(e){
+    wx.navigateTo({ 
+      url: "/pages/modifythenickname/modifythenickname?share_uid=" + this.data.share_uid + "&calendar_id="+e.currentTarget.dataset.calendar_id
+    })
   },
   onFocus: function (w) {
     this.setData({
@@ -265,12 +271,15 @@ Page({
             let normal = res.data.List.record.normal;
             let store = res.data.List.record.store;
             let recommend = res.data.List.record.recommend;
+            let calendar = res.data.List.record.calendar;
 
+            
+            
             if(_this.data.pid==0){
               _this.data.listDataC = recommend;
             }
 
-            if(normal.length==0 && (!store || store.length==0) && _this.data.pid==0){
+            if(normal.length==0 && (!store || store.length==0) && _this.data.pid==0 && calendar.length==0){
               _this.setData({
                 iftrimg:true,
                 isonReachBottom:false,
@@ -291,7 +300,6 @@ Page({
                 isonReachBottom:false,
                 listDataA:[...normal,..._this.data.listDataC]
               });
-             
             } else if (normal.length==0 &&store){
               if(store.length<5){
                 _this.setData({
@@ -304,6 +312,14 @@ Page({
                 });
               }
             }
+
+
+            if(calendar && calendar.length != 0){
+              _this.setData({
+                listDataA:[...calendar,..._this.data.listDataA]
+              });
+            }
+
           }
         },
         fail: function () {

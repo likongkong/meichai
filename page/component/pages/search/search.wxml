@@ -28,6 +28,9 @@
     <view class="contentWrap" style="padding-bottom: 20rpx;box-sizing: border-box;">
         <view class='list-left'>
             <block wx:for="{{listDataA}}" wx:key="index">
+                <view wx:if="{{item.itemType == 'rili' && index%2 == 0}}">
+                    <template is="rili" data="{{...item}}"></template>
+                </view>
                 <view wx:if="{{item.itemType == 'blindBox' && index%2 == 0}}">
                     <template is="blindBox" data="{{...item}}"></template>
                 </view>
@@ -41,6 +44,9 @@
         </view>
         <view class='list-right'>
             <block wx:for="{{listDataA}}" wx:key="index">
+                <view wx:if="{{item.itemType == 'rili' && index%2 != 0}}">
+                    <template is="rili" data="{{...item}}"></template>
+                </view>
                 <view wx:if="{{item.itemType == 'blindBox' && index%2 != 0}}">
                     <template is="blindBox" data="{{...item}}"></template>
                 </view>
@@ -192,6 +198,26 @@
         <view class="shopNameWrap" wx:if="{{store}}">
             <image src="{{store.logo}}" mode="widthFix"></image>
             <text>{{store.name}}</text>
+        </view>
+    </view>
+</template>
+<!-- 日历 -->
+<template name="rili">
+    <view class="calendarItem">
+        <view style="position:relative;">
+            <image class="calendarItemBanner" src="{{calendar_img}}" mode="aspectFit" data-lb="1" data-calendar_id='{{id}}' catchtap="jumptoCalendarDetail"></image>
+            <view class="calendarItemBrand">
+              <view style="width:70%;display: flex;align-items: center;">
+                <view class="brandLogoBgFFF" style="display:inline-block;">
+                  <image src="{{logo}}" mode="aspectFit"></image>
+                </view>
+                <text>{{name}}</text>
+              </view>
+              <view style="width:30%;font-size: 24rpx;color: #fff;display: inline-block;text-align: right;">{{vote_number}}票</view>
+            </view>
+        </view>
+        <view class="calendarItemInfo" style="justify-content: center;">
+            <view catchtap="votingInterface" data-index='{{index}}' data-brand_id='{{brand_id}}' data-calendar_id='{{id}}'> <image class="calendarItemBanner" src="http://www.51chaidan.com/images/sign/calendar/vote.png" mode="widthFix"></image>  <text>投票</text></view>
         </view>
     </view>
 </template>

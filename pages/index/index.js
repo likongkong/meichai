@@ -573,7 +573,7 @@ Page({
     Dec.dryingSum(_this, app.signindata.clwcomurl);
     //调取搜索关键词跳转对应列表数据
     wx.request({
-      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/searchNavi.json',
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/searchNavi.json?20201205',
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {

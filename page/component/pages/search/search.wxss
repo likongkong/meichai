@@ -449,3 +449,97 @@ page{
   width: 180rpx;
   height: auto;
 }
+
+
+/* 日历 */
+.calendarItem{
+  width: 345rpx;
+  display: inline-block;
+  position: relative;
+  margin-top: 20rpx;
+  background: #fff;
+  border-radius: 8rpx;
+  overflow: hidden;
+  box-shadow: 1px 2px 6px #999999;
+}
+.calendarItem:nth-child(2n){
+  margin-right: 0;
+}
+.singleCalendarRank{
+  position: absolute;
+  top: 15rpx;
+  left: 15rpx;
+  width: 60rpx;
+  height: 60rpx;
+  background: rgba(0,0,0,.5);
+  text-align: center;
+  line-height: 60rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #fff;
+  border-radius: 6rpx;  
+}
+.calendarItemBanner{
+  width: 100%;
+  height: 194rpx;
+  border-radius: 8rpx 8rpx 0 0;
+  display: block;
+}
+.calendarItemInfo{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10rpx;
+  box-sizing: border-box;
+}
+.calendarItemInfo>view{
+  display: flex;
+  align-items: center;
+  padding: 15rpx 0;
+}
+.calendarItemInfo>view image{
+  width: 35rpx;
+  height: auto;
+  margin-right: 6rpx;
+}
+.calendarItemInfo>view text{
+  font-size: 24rpx;
+  color: #000;
+  display: inline-block;
+}
+.calendarItemBrand{
+  background: rgba(0,0,0,.3);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4rpx 10rpx 4rpx 4rpx;
+  /* border-top-left-radius: 8rpx;
+  border-top-right-radius: 8rpx;
+  border-bottom-right-radius: 8rpx; */
+  width: 100%;
+  box-sizing: border-box;
+}
+.brandLogoBgFFF{
+  background-color: #fff;
+  margin-right: 8rpx;
+  border-radius: 8rpx;
+}
+.calendarItemBrand image{
+  width: 40rpx;
+  height: 40rpx;
+  display: block;
+  border-radius: 8rpx;
+}
+.calendarItemBrand text{
+  width: 100%;
+  font-size: 24rpx;
+  color: #fff;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
