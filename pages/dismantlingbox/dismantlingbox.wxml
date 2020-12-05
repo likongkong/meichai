@@ -32,7 +32,10 @@
             </view>
             <view class="countdownNumWrap">
               <view>
-                <view class="countdownNumTxt">距投票结束还有</view>
+                <view class="countdownNumTxt">
+                  <block wx:if='{{commoddata.day=="00"&&commoddata.hour=="00"&&commoddata.minute=="00"&&commoddata.second=="00"}}'>活动已结束</block>
+                  <block wx:else>距投票结束还有</block>
+                </view>
                 <view class="countdownNumTime">{{commoddata.day}}<text>天</text>{{commoddata.hour}}<text>时</text>{{commoddata.minute}}<text>分</text>{{commoddata.second}}<text>秒</text></view>
               </view>
             </view>

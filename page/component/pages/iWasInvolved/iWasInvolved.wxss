@@ -262,7 +262,7 @@ page{
   width: 230rpx;
   height: 160rpx;
   background-color: #E94F57;
-  border-radius: 8rpx;
+  border-radius: 8rpx 0 0 8rpx;
   display: flex;
   justify-content: center;
   align-items: center;

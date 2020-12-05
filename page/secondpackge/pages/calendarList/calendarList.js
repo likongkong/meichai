@@ -398,7 +398,7 @@ Page({
             explain:res.data.List.explain || '',
           })
           _this.data.shareImg = res.data.List.shareImg || '';
-          _this.data.countdown = res.data.List.endTime || '';
+          _this.data.countdown = res.data.List.endTime || '1607160702';
           _this.countdownbfun();          
 
         }else{
