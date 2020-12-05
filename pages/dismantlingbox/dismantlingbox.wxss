@@ -102,18 +102,7 @@ page{
   height: 100%;
   display: block;
 }
-/* .ssubBrandEve{
-  width:113rpx;
-  height: 113rpx;
-  margin:10rpx 0 0 10rpx;
-  float: left;
-  overflow: hidden;
-} */
-.ssubBrandEveWrap{
-  /* display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap; */
-}
+
 .ssubBrandEve{
   width:90rpx;
   height: 117rpx;
@@ -577,7 +566,7 @@ page{
 }
 
 /* 展会日历活动 */
-.calendarActivityWrap{}
+
 .calendarTxt{
   text-align: center;
   font-size: 24rpx;
@@ -689,8 +678,7 @@ page{
   padding: 0 34rpx;
   box-sizing: border-box;
 }
-.ticketInfoWrap text{
-}
+
 .price{
   font-size: 30rpx;
   font-weight: bold;

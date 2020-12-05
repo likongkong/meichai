@@ -23,7 +23,7 @@
       <!-- 倒计时 -->
       <block>
         <view class="countdownWrap" catchtouchmove="true">
-          <view class="boxShadowEve"> 
+          <view style="background:#F3F4F4;"> 
             <view class="countdownAwardWrap" catchtouchmove="" catchtap="toggleAwardFun">
               <view>
                 <image src="https://cdn.51chaidan.com/images/calendar/gift2.png" mode="widthFix"></image>
