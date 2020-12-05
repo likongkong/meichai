@@ -3,10 +3,59 @@
 
 
 
+<view class="vipTop">
+   <view class="vipTopDisplay">
+       <view class="vipTopName">开通即享VIP特权</view>
+       <view class="vipTopTitle" style="color: #E94F57;">2021MCTS展会限量台历+1825元豪华礼包</view>
+       <view class="vipTopTitle" style="color: #101010;">VIP会员总价值￥2024</view>
+   </view>
+</view>
+<view class="vipEveTitle">VIP特权</view>
+<view class="vipButtom">
+   <view class="vipButtomEve">
+      <image class="vipButtomEveImg" mode="aspectFit" src="https://cdn.51chaidan.com/images/202010/thumb_img/35160_thumb_G_1603964924859.jpg"></image>
+      <view class="vipButtomEveRight">
+         <view class="vipbeRTop specialellipsis">限量台历限量台历限量台历限量台历限量台历限量台历限量台历限量台历</view>
+         <view class="vipbeRCenter specialellipsis">赠送 2021MCTS展会限量台历x1</view>
+         <view class="vipbeRButtom specialellipsis">价值￥1825</view>
+      </view>
+   </view>
+   <view class="vipButtomEve">
+      <image class="vipButtomEveImg" mode="aspectFit" src="https://cdn.51chaidan.com/images/202010/thumb_img/35160_thumb_G_1603964924859.jpg"></image>
+      <view class="vipButtomEveRight">
+         <view class="vipbeRTop specialellipsis">限量台历限量台历限量台历限量台历限量台历限量台历限量台历限量台历</view>
+         <view class="vipbeRCenter specialellipsis">赠送 2021MCTS展会限量台历x1</view>
+         <view class="vipbeRButtom specialellipsis">价值￥1825</view>
+      </view>
+   </view>
+
+   <view class="vipButtomEve">
+      <image class="vipButtomEveImg" mode="aspectFit" src="https://cdn.51chaidan.com/images/202010/thumb_img/35160_thumb_G_1603964924859.jpg"></image>
+      <view class="vipButtomEveRight">
+         <view class="vipbeRTop specialellipsis">限量台历限量台历限量台历限量台历限量台历限量台历限量台历限量台历</view>
+         <view class="vipbeRCenter specialellipsis">赠送 2021MCTS展会限量台历x1</view>
+         <view class="vipbeRButtom specialellipsis">价值￥1825</view>
+      </view>
+   </view>
+   
+   <view class="vipButtomEve">
+      <image class="vipButtomEveImg" mode="aspectFit" src="https://cdn.51chaidan.com/images/202010/thumb_img/35160_thumb_G_1603964924859.jpg"></image>
+      <view class="vipButtomEveRight">
+         <view class="vipbeRTop specialellipsis">限量台历限量台历限量台历限量台历限量台历限量台历限量台历限量台历</view>
+         <view class="vipbeRCenter specialellipsis">赠送 2021MCTS展会限量台历x1</view>
+         <view class="vipbeRButtom specialellipsis">价值￥1825</view>
+      </view>
+   </view>
 
 
 
 
+</view>
+
+
+<view class="btn boxShadowEve" catchtap="jumptoIWasInvolved">
+  立即开通￥199/年 <text style="margin-left:15rpx;text-decoration:line-through;">￥2024</text>
+</view>
 
 
 
