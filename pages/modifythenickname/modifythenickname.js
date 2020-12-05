@@ -156,7 +156,8 @@ Page({
             calendarDetails:res.data.List.calendarDetails,
             voteToUserList:res.data.List.voteToUserList,
             goodsDescDetails:goodsDescDetails || '',
-            explain:res.data.List.explain || ''
+            explain:res.data.List.explain || '',
+            voteChance:res.data.List.voteChance || 0
           })
         }else{
           wx.showModal({
@@ -252,7 +253,7 @@ Page({
     };  
     console.log(shareUrl,imageUrl)
     return {
-      title: '这个展会限量版台历太好看了，快来为Ta投票免费拿',
+      title: '这个展会限量版日历太好看了，快来为Ta投票免费拿',
       path:shareUrl,
       imageUrl:imageUrl,
       success: function (res) {}
@@ -268,7 +269,7 @@ Page({
       var imageUrl = _this.data.calendarDetails.calendar_img || '';
    };
     return {
-      title:'这个展会限量版台历太好看了，快来为Ta投票免费拿',
+      title:'这个展会限量版日历太好看了，快来为Ta投票免费拿',
       query:shareUrl,
       imageUrl:imageUrl
     }

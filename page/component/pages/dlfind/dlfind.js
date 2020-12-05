@@ -73,15 +73,6 @@ Page({
     isOpenToyShow:false,
     isPunchTheClock:1596729599<Date.parse(new Date())/1000&&Date.parse(new Date())/1000<1596988799?true:false
   },
-  // 跳转日历
-  jumpCal:function(){
-    wx.navigateTo({
-      url: "/page/secondpackge/pages/calendarList/calendarList"
-    }); 
-  },
-  jumpVip:function(){
-    app.showToastC('敬请期待');
-  },
   finishLoad(w){
     var ind = w.currentTarget.dataset.ind || w.target.dataset.ind||0;
     this.setData({
@@ -98,7 +89,10 @@ Page({
   jumpshopdetail:function(w){
     var goods_id = w.currentTarget.dataset.goods_id || 0;
     var isblindbox = w.currentTarget.dataset.isblindbox || 0;
-    if(isblindbox){
+    var is_calendar = w.currentTarget.dataset.is_calendar || 0;
+    if(is_calendar == 1){
+      app.showToastC('敬请期待');
+    } else if(isblindbox){
       wx.navigateTo({
         url: "/pages/smokebox/smokebox?gid=" + goods_id,
       });
@@ -106,8 +100,7 @@ Page({
       wx.navigateTo({
         url: "../../../../pages/detailspage/detailspage?gid=" + goods_id,
       });
-    }
- 
+    };
   },
   subscrfundom:function(w){
     var _this = this;
@@ -305,9 +298,10 @@ Page({
       cat_id: _this.data.cat_id,
       brand_name: _this.data.brand_name||'',
       brand_id: _this.data.brand_id || 0,
-      page: _this.data.page
+      page: _this.data.page,
+      vcode:app.signindata.versionnumber
     }, function (res) {
-      console.log(res);
+      console.log('数据===',res);
       var listdata = res.data.List|| [];
       if(listdata.length!=0){
         if (num == 0) {
@@ -751,31 +745,42 @@ Page({
     // 发现详情
     var _this = this;
     if (options.from == 'button') {
+      var is_calendar = options.target.dataset.is_calendar || 0;
       var drying_id = options.target.dataset.drying_id;
       var currency_sum = options.target.dataset.currency_sum || '';
-      var title = options.target.dataset.title
       var shareimg = options.target.dataset.shareimg || '';
       var topic_name = options.target.dataset.topic_name || '';
-      if (currency_sum) {
-        title = '拆币X' + currency_sum + ' ' + title;
+      var pathUrl = '';
+      var title = '';
+      if(is_calendar == 1){
+        title = '这个展会限量版日历太好看了，快来为Ta投票免费拿';
+        pathUrl = 'page/secondpackge/pages/calendarList/calendarList?share_uid='+_this.data.uid;
+      } else {
+        title = options.target.dataset.title;
+        if (currency_sum) {
+          title = '拆币X' + currency_sum + ' ' + title;
+        };
+        if (topic_name) {
+          title = topic_name + '#  ' + title;
+        };
+        pathUrl = 'page/component/pages/dlfinddetails/dlfinddetails?drying_id=' + drying_id;
+        Pub.postRequest(_this, 'dryingshare', {
+          uid: _this.data.uid,
+          loginid: _this.data.loginid,
+          drying_id: drying_id
+        }, function(res) {});
       };
-      if (topic_name) {
-        title = topic_name + '#  ' + title;
-      };
+
+
 
       if (shareimg) {
         if (shareimg.indexOf("https") < 0) {
           shareimg = shareimg.replace(/http/, 'https');
         };
       };
-      Pub.postRequest(_this, 'dryingshare', {
-        uid: _this.data.uid,
-        loginid: _this.data.loginid,
-        drying_id: drying_id
-      }, function(res) {});
       var reshare = {
         title: title || '我在美拆发现一个优质话题，你也快来看看吧!',
-        path: 'page/component/pages/dlfinddetails/dlfinddetails?drying_id=' + drying_id,
+        path: pathUrl,
         imageUrl: shareimg || Pub.dryinglistshare(),
         success: function(res) {},
       };
@@ -822,9 +827,18 @@ Page({
   // 跳转详情
   jumpdlfdetail: function(w) {
     var drying_id = w.currentTarget.dataset.drying_id || w.target.dataset.drying_id || 0;
-    wx.navigateTo({
-      url: "../dlfinddetails/dlfinddetails?drying_id=" + drying_id,
-    })
+    var is_calendar = w.currentTarget.dataset.is_calendar || w.target.dataset.is_calendar || 0;
+    if(is_calendar == 1){
+      // 跳转日历
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/calendarList/calendarList"
+      }); 
+    } else {
+      wx.navigateTo({
+        url: "../dlfinddetails/dlfinddetails?drying_id=" + drying_id,
+      })
+    }
+
 
   },
   // 点赞

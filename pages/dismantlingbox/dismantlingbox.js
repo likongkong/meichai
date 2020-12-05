@@ -1004,7 +1004,7 @@ Page({
     var giftInfo = _this.data.giftInfo || {};
     var img = 'https://cdn.51chaidan.com/images/default/toyShow/toyshowShare.jpg';
     return {
-      title:'这个展会限量版台历太好看了，快来为Ta投票免费拿' || 'Bilibiliworld x MCTS 8.7~8.9 不见不散，超多展品不要错过',
+      title:'这个展会限量版日历太好看了，快来为Ta投票免费拿' || 'Bilibiliworld x MCTS 8.7~8.9 不见不散，超多展品不要错过',
       path: "/pages/dismantlingbox/dismantlingbox?shareId=" + _this.data.giftInfo.shareId + '&referee=' + _this.data.uid,
       imageUrl:giftInfo.imgShare || img
     }    
@@ -1014,7 +1014,7 @@ Page({
     var giftInfo = _this.data.giftInfo || {};
     var img = 'https://cdn.51chaidan.com/images/default/toyShow/toyshowShare.jpg';
     return {
-      title:'这个展会限量版台历太好看了，快来为Ta投票免费拿' || 'Bilibiliworld x MCTS 8.7~8.9 不见不散，超多展品不要错过',
+      title:'这个展会限量版日历太好看了，快来为Ta投票免费拿' || 'Bilibiliworld x MCTS 8.7~8.9 不见不散，超多展品不要错过',
       imageUrl:giftInfo.imgShare || img
     }
   },  

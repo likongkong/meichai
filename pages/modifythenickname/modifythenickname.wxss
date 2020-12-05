@@ -302,7 +302,38 @@ page{
 
 
 
-
+.iwasButon{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 11;
+  width: 100%;
+  height: 130rpx;
+  background: #fff;
+}
+.iwasButonTxt{
+  padding:0 20rpx;
+  height: 110rpx;
+  line-height: 110rpx;
+  font-size: 24rpx;
+  position: relative;
+}
+.clickButton{
+  position: absolute;
+  right: 20rpx;
+  bottom: 0;
+  top: 0;
+  margin:auto;
+  z-index: 1;
+  border-radius: 10rpx;
+  height:46rpx;
+  text-align:center;
+  line-height:46rpx;
+  color: #fff;
+  font-size: 24rpx;
+  width: 130rpx;
+  background: #E94F57;
+}
 
 
 

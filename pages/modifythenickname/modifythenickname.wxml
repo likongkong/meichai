@@ -117,9 +117,13 @@
    </view> 
 
 
-    <view class="leafletBottom">
-        <view class="leafletBottomEve boxShadowEve" catchtap="jumpiwas" style="width:400rpx;">我的投票</view>
+    <view class="iwasButon">
+        <view class="iwasButonTxt">我的投票剩余:<text style="color:#E94F57;margin:0 10rpx;">{{voteChance}}</text>(当日有效)<view class="clickButton"  catchtap="jumpiwas">我的投票</view></view>
     </view>
+
+    <!-- <view class="leafletBottom">
+        <view class="leafletBottomEve boxShadowEve" style="width:400rpx;"></view>
+    </view> -->
 
 
 </block>
