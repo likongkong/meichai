@@ -178,7 +178,7 @@ page{
 }
 .ticketRightImg{
   float: right;
-  width: 75rpx;
+  width: 70rpx;
   height: 70rpx;
   margin:14rpx 14rpx 14rpx 0;
   border-radius: 8rpx;
