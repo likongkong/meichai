@@ -307,11 +307,12 @@ Page({
           _this.setData({
             tgabox: false,
             signinlayer: false
-          })
-          console.log()
-          // '没有授权 统计'
-          app.userstatistics(44);
+          });
           _this.onLoadfun();
+
+          // '没有授权 统计'
+          app.userstatistics(46);
+
         }
       }
     });      

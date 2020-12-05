@@ -435,6 +435,10 @@ App({
   // 42  展会列表
   // 43 一番赏
   // 44 万圣节活动
+
+  // 45  日历列表
+  // 46  日历详情
+  // 47  日历 我的投票
   userstatistics: function (num) {
     var _this = this;
     var num = num || 0

@@ -72,9 +72,12 @@ Page({
             } else {
               wx.hideLoading()
               _this.onLoadfun();
-              this.setData({
+              _this.setData({
                 signinlayer: false,
               })
+              // '没有授权 统计'
+              app.userstatistics(45);
+
             }
           }
         });
