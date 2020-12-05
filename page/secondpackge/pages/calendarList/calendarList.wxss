@@ -232,7 +232,7 @@ page{
 }
 .calendarItemBrand text{
   width: 100%;
-  font-size: 24rpx;
+  font-size: 22rpx;
   color: #fff;
   display: inline-block;
   overflow: hidden;
@@ -299,14 +299,14 @@ page{
   display: block;
 }
 .rankingBrandName{
-  font-size: 28rpx;
+  font-size: 22rpx;
   color: #fff;
   overflow: hidden;
   text-overflow:ellipsis;
   white-space: nowrap;
 }
 .rankingBrandVote{
-  font-size: 28rpx;
+  font-size: 22rpx;
   color: #fff;
 }
 .rankingTwoThree{

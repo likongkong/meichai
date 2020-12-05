@@ -104,7 +104,7 @@
                 </view>
                 <text>{{item.name}}</text>
               </view>
-              <view style="width:30%;font-size: 24rpx;color: #fff;display: inline-block;text-align: right;">{{item.vote_number}}票</view>
+              <view style="width:30%;font-size: 22rpx;color: #fff;display: inline-block;text-align: right;">{{item.vote_number}}票</view>
             </view>
           </view>
           <view class="calendarItemInfo" style="{{tabIndex==1 || tabIndex==4?'justify-content: center;':''}}">
@@ -208,7 +208,7 @@
         <view class="brandLogoBgFFF">
           <image class="rankingBrandLogo" src="{{logo}}" mode="aspectFit"></image>
         </view>
-        <text class="rankingBrandName specialellipsis" style="width:160rpx">{{name}}</text>
+        <text class="rankingBrandName specialellipsis" style="width:185rpx">{{name}}</text>
       </view>
       <view class="rankingBrandVote">{{all_vote_number}}票</view>
     </view>
