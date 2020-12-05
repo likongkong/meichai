@@ -722,6 +722,8 @@ Page({
               var brandList = res.data.List.brand || [];
               var isMobileAuth = res.data.Info.isMobileAuth || false;
               var countSubsribe = res.data.Info.countSubsribe || 0;
+              _this.data.countdown = res.data.Info.endTime || '';
+              _this.countdownbfun();
               _this.setData({
                 bannerList:bannerList,
                 calendarList,
