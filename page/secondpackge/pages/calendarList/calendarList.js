@@ -449,12 +449,15 @@ Page({
           //     duration: 1500
           //   })
           // }
+          let listData = [..._this.data.listData,...res.data.List.calendrList];
+          // listData.sort(function(a,b){
+          //   return a.rank - b.rank
+          // })
           _this.setData({
-            listData:[..._this.data.listData,...res.data.List.calendrList],
+            listData,
             voteChance:res.data.List.voteChance,
             brand_name_dis:''
           })
-          console.log('listData====',_this.data.listData)
         }else if(res.data.ReturnCode == 201){
           _this.setData({
             isReachBottom:false,
@@ -482,8 +485,12 @@ Page({
         wx.stopPullDownRefresh();
         console.log('品牌排行榜=============',res)
         if (res.data.ReturnCode == 200) {
+          let brandData = [..._this.data.brandData,...res.data.List.calendrList];
+          // brandData.sort(function(a,b){
+          //   return a.rank - b.rank
+          // })
           _this.setData({
-            brandData:[..._this.data.brandData,...res.data.List.calendrList]
+            brandData
           })
         }else if(res.data.ReturnCode == 201){
           _this.setData({
