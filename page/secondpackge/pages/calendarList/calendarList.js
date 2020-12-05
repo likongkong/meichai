@@ -26,9 +26,14 @@ Page({
     pid:0,
     isReachBottom:true,
     brand_name:'',
-    brand_name_dis:''
+    brand_name_dis:'',
+    isAwardBox:false
   },
-
+  toggleAwardFun(){
+    this.setData({
+      isAwardBox:!this.data.isAwardBox
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

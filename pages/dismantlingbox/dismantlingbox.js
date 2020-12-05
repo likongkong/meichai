@@ -63,7 +63,13 @@ Page({
 　　],
     subscribeJson:[
        {"toyshowStart":{"template_id":["Q0tWM7kOihw1TilTeR3YmLzWp5tS0McgyOeJx2xX-B0","7rx-pSLTpdYH6IdOKAudkP1A0MmAzN0cOS2RXMTVyKo"], "subscribe_type":["12","12"]}},{"toyshowTicket":{"template_id":["Q0tWM7kOihw1TilTeR3YmLzWp5tS0McgyOeJx2xX-B0","7rx-pSLTpdYH6IdOKAudkP1A0MmAzN0cOS2RXMTVyKo"], "subscribe_type":["17","17"]}}
-    ]
+    ],
+    isAwardBox:false
+  },
+  toggleAwardFun(){
+    this.setData({
+      isAwardBox:!this.data.isAwardBox
+    })
   },
   // 跳转日历列表
   jumpCalendarList(){

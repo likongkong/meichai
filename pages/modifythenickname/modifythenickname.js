@@ -21,9 +21,15 @@ Page({
     pid:0,
     isBrandJumpCalend:false,
     shopDetail:false,
-    isShowSearch:false
+    isShowSearch:false,
+    isAwardBox:false
   },
-
+  toggleAwardFun(){
+    this.setData({
+      isAwardBox:!this.data.isAwardBox
+    })
+  },
+  
   showSearchFun(){
     this.setData({
       isShowSearch:!this.data.isShowSearch
