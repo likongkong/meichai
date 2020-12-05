@@ -16,7 +16,7 @@
       <view class="countdownNumWrap">
         <view>
           <view class="countdownNumTxt">距投票结束还有</view>
-          <view class="countdownNumTime">7<text>天</text>20<text>时</text>45<text>分</text>34<text>秒</text></view>
+          <view class="countdownNumTime">{{commoddata.day}}<text>天</text>{{commoddata.hour}}<text>时</text>{{commoddata.minute}}<text>分</text>{{commoddata.second}}<text>秒</text></view>
         </view>
       </view>
     </view>
