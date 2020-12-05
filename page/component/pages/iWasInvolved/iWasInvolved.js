@@ -27,11 +27,14 @@ Page({
     share_uid:0,
     isJumpSignin:false,
     // Viptip:false
-    countdown:''
-
+    countdown:'',
+    isAwardBox:false
   },
-
-
+  toggleAwardFun(){
+    this.setData({
+      isAwardBox:!this.data.isAwardBox
+    })
+  },
   // vip 弹框
   // tipVipMode:function(){
   //   this.setData({Viptip:!this.data.Viptip})

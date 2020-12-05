@@ -17,7 +17,54 @@
     <!-- 展会活动 -->
     <view class="calendarActivityWrap">
       <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e1'>———— 展会活动 ————</view>
-      <view class="calendarTxt">展会限定日历,投票赢好礼</view>
+
+
+      <!-- <view class="calendarTxt">展会限定日历,投票赢好礼</view> -->
+      <!-- 倒计时 -->
+      <block>
+        <view class="countdownWrap" catchtouchmove="true">
+          <view class="boxShadowEve"> 
+            <view class="countdownAwardWrap" catchtouchmove="" catchtap="toggleAwardFun">
+              <view>
+                <image src="https://cdn.51chaidan.com/images/calendar/gift2.png" mode="widthFix"></image>
+                <text>活动奖品</text>
+              </view>
+            </view>
+            <view class="countdownNumWrap">
+              <view>
+                <view class="countdownNumTxt">距投票结束还有</view>
+                <view class="countdownNumTime">7<text>天</text>20<text>时</text>45<text>分</text>34<text>秒</text></view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="awardMask" catchtouchmove="true" wx:if="{{isAwardBox}}" catchtap="toggleAwardFun">
+          <view class="awardWrap" catchtap="true">
+            <view class="awardTitle">——— 奖品信息 ———</view>
+            <view class="awardBoxWrap">
+              <view class="awardBoxWrapTu">
+                <image src="https://cdn.51chaidan.com/images/calendar/calendar_gift.png?1=1" mode="widthFix"></image>
+              </view>
+              <view class="awardBoxWrapName">
+                <view>
+                  <text>MCTS x JSS 潮玩之旅 展会限定日历（非卖品）</text>
+                  <text>价值：￥199</text> 
+                </view>
+              </view>
+            </view>
+            <view class="awardTitle">——— 获取方式 ———</view>
+            <view style="padding:20rpx 30rpx 0 30rpx;box-sizing: border-box;">
+              <text class="awardBigTxt">1.通过为品牌投票获取</text>
+              <text class="awardSmallTxt">每个品牌下，为该品牌投票的用户，排名前3名可免费领取活动奖品一份</text>
+              <text class="awardBigTxt">2.通过抽选获取</text>
+              <text class="awardSmallTxt">每个品牌下，在未获得奖品的用户中，额外抽取2名幸运用户，免费领取活动奖品一份</text>
+              <text class="awardBigTxt">Ps：每人最多只可获取1份活动奖品</text>
+            </view>
+          </view>
+        </view>
+      </block>
+
+
       <swiper class="calendarSwiper" autoplay="true" circular="true" interval="5000" indicator-dots="{{false}}" previous-margin='30px' next-margin='30px' bindchange="swiperChange" indicator-active-color="#298CF7" style="height:{{swiperH}}px;">
         <swiper-item wx:for='{{calendarList}}' wx:key='key' catchtap="jumpCalendarList">
           <view class="calendarSwiperItem {{nowIdx==index?'le-active':''}}">

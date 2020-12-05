@@ -773,3 +773,137 @@ page{
   border-radius: 8rpx;
   margin-top: 10rpx;
 }
+
+
+
+/* 倒计时 */
+.countdownWrap{
+  width: 100%;
+  padding: 20rpx 20rpx 10rpx 20rpx;
+  background: #fff;
+  position: relative;
+  z-index: 10;
+  box-sizing: border-box;
+}
+.countdownWrap>view{
+  width: 710rpx;
+  height: 160rpx;
+  border-radius: 8rpx;
+  /* box-shadow: 1px 2px 6px #999999; */
+  background: #fff;
+  overflow: hidden;
+  display: flex;
+}
+.countdownAwardWrap{
+  width: 230rpx;
+  height: 160rpx;
+  background-color: #E94F57;
+  border-radius: 8rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.countdownAwardWrap image{
+  width: 60rpx;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+.countdownAwardWrap text{
+  font-size: 24rpx;
+  color: #fff;
+  display: block;
+  margin-top: 10rpx;
+}
+.countdownNumWrap{
+  width: 480rpx;
+  height: 160rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.countdownNumTxt{
+  font-size: 24rpx;
+  color: #ADADAD;
+  text-align: center;
+}
+.countdownNumTime{
+  font-size: 40rpx;
+  color: #000;
+  margin-top: 15rpx;
+}
+.countdownNumTime text{
+  font-size: 28rpx;
+  margin: 0 20rpx 0 6rpx;
+}
+
+.awardMask{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,.5);
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.awardWrap{
+  width: 600rpx;
+  padding: 30rpx;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 10rpx;
+}
+.awardTitle{
+  font-size: 28rpx;
+  color: #000000;
+  text-align: center;
+}
+.awardBoxWrap{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 25rpx;
+  margin-bottom: 30rpx;
+}
+.awardBoxWrapTu{
+  width: 168rpx;
+}
+.awardBoxWrapTu image{
+  width: 100%;
+  height: auto;
+  border-radius: 8rpx;
+}
+.awardBoxWrapName{
+  width: 372rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0 0 25rpx;
+  box-sizing: border-box;
+}
+.awardBoxWrapName text{
+  font-size: 26rpx;
+  color: #000;
+  display: block;
+  text-align: left;
+}
+.awardBoxWrapName text:first-child{
+  margin-bottom: 20rpx;
+}
+.awardBigTxt{
+  font-size: 26rpx;
+  color: #000;
+  display: block;
+  margin-bottom: 10rpx;
+}
+.awardSmallTxt{
+  font-size: 26rpx;
+  color: #666;
+  display: block;
+  padding-left: 18rpx;
+  box-sizing: border-box;
+  margin-bottom: 30rpx;
+}
