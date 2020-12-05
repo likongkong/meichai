@@ -446,7 +446,8 @@ Page({
           })
           let change = "listData["+ index +"].vote_number";
           _this.setData({
-            [change]: ++_this.data.listData[ index ].vote_number
+            [change]: ++_this.data.listData[ index ].vote_number,
+            voteChance:--_this.data.voteChance
           })
         }else{
           if(res.data.ReturnCode == 386){
