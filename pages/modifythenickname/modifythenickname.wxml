@@ -18,8 +18,8 @@
   <view class="countdownWrap" catchtouchmove="true">
     <view class="boxShadowEve"> 
       <view class="countdownAwardWrap" catchtouchmove="" catchtap="toggleAwardFun">
-        <view>
-          <image src="https://cdn.51chaidan.com/images/calendar/gift2.png" mode="widthFix"></image>
+        <view style="position:relative;float:left;">
+          <image mode="heightFix" src="http://www.51chaidan.com/images/calendar/calendar_gift.png"></image>
           <text>活动奖品</text>
         </view>
       </view>
@@ -145,7 +145,7 @@
         </view>   
     </view>
 
-   <view class="iwasTitle" wx:if='{{voteToUserList&&voteToUserList.length!=0}}'>品牌投票榜</view>
+   <view class="iwasTitle" wx:if='{{voteToUserList&&voteToUserList.length!=0}}'>品牌投票榜<text style="color:#ADADAD;margin-left: 20rpx;">(品牌下所有日历图个人投票总和)</text></view>
 
    <view class="calendDtailPad" style="background:#fff;">
       <view class="ticketRanking" wx:for='{{voteToUserList}}' wx:key='key'>

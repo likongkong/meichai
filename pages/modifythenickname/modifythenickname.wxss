@@ -5,7 +5,7 @@
 
 page{
   background:#f4f5f9;
-  padding-bottom: 110rpx;
+  padding-bottom: 140rpx;
 }
 .calendDtailPad{
   padding: 20rpx 20rpx 0 20rpx;
@@ -360,23 +360,26 @@ page{
 .countdownAwardWrap{
   width: 230rpx;
   height: 160rpx;
-  background-color: #E94F57;
   border-radius: 8rpx 0 0 8rpx;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: hidden;
 }
 .countdownAwardWrap image{
-  width: 60rpx;
-  height: auto;
+  height: 160rpx;
   display: block;
-  margin: 0 auto;
 }
 .countdownAwardWrap text{
   font-size: 24rpx;
   color: #fff;
   display: block;
   margin-top: 10rpx;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0,0,0,.3);
+  line-height: 46rpx;
+  height: 46rpx;
+  text-align: center;
 }
 .countdownNumWrap{
   width: 480rpx;

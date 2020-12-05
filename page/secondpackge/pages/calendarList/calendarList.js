@@ -308,7 +308,14 @@ Page({
       })
     }
   },
-
+  onShareTimeline:function(){
+    var _this = this;
+    return {
+      title: '这个展会限量版日历太好看了，快来为Ta投票免费拿',
+      query:'share_uid='+_this.data.uid,
+      imageUrl:_this.data.shareImg,
+    }
+  },
   /**
    * 用户点击右上角分享
    */
