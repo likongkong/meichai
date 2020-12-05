@@ -243,7 +243,7 @@ Page({
   onShareAppMessage: function () {
     var _this = this;
     return {
-      title: '这个展会限量版台历太好看了，快来为Ta投票免费拿',
+      title: '这个展会限量版日历太好看了，快来为Ta投票免费拿',
       path: '/page/secondpackge/pages/calendarList/calendarList?share_uid='+_this.data.uid,
       imageUrl:_this.data.shareImg,
       success: function (res) {}
