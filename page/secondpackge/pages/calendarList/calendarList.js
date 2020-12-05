@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '日历列表',
+    c_title: '限定日历投票',
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
@@ -200,7 +200,7 @@ Page({
     wx.showLoading({
       title: '加载中...',
     })
-    if(this.data.tabIndex != 3){
+    if(this.data.tabIndex != 5){
       if(this.data.brand_name!=''){
         let search = true;
         this.getInfo(search);
@@ -223,7 +223,7 @@ Page({
       wx.showLoading({
         title: '加载中...',
       })
-      if(this.data.tabIndex != 3){
+      if(this.data.tabIndex != 5){
         this.getInfo()
       }else{
         this.getBrandRanking();
@@ -281,7 +281,7 @@ Page({
     wx.showLoading({
       title: '加载中...',
     })
-    if(ind == 1 || ind == 2){
+    if(ind == 1 || ind == 2 || ind == 4){
       this.getInfo();
     }else{
       this.getBrandRanking();
@@ -315,7 +315,8 @@ Page({
   },
   getSwiperInfo(){
     let _this = this;
-    let q = Dec.Aese('mod=Obtain&operation=calendarList&type='+3)
+    let q = Dec.Aese('mod=Obtain&operation=calendarList&type='+3+'&uid=' +_this.data.uid+'&loginid='+_this.data.loginid)
+    console.log('顶部日历轮播请求=============','mod=Obtain&operation=calendarList&type='+3+'&uid=' +_this.data.uid+'&loginid='+_this.data.loginid)
     wx.request({
       url: app.signindata.comurl + 'brandDrying.php'+q,
       method: 'GET',
@@ -339,8 +340,8 @@ Page({
   getInfo(search = false){
     let _this = this;
     // if(search){
-      var q = Dec.Aese('mod=Obtain&operation=calendarList&type='+_this.data.tabIndex+'&pid='+_this.data.pid+'&keyword='+_this.data.brand_name)
-      console.log('mod=Obtain&operation=calendarList&type='+_this.data.tabIndex+'&pid='+_this.data.pid+'&keyword='+_this.data.brand_name)
+      var q = Dec.Aese('mod=Obtain&operation=calendarList&type='+_this.data.tabIndex+'&pid='+_this.data.pid+'&keyword='+_this.data.brand_name+'&uid=' +_this.data.uid+'&loginid='+_this.data.loginid)
+      console.log('mod=Obtain&operation=calendarList&type='+_this.data.tabIndex+'&pid='+_this.data.pid+'&keyword='+_this.data.brand_name+'&uid=' +_this.data.uid+'&loginid='+_this.data.loginid)
     // }else{
     //   var q = Dec.Aese('mod=Obtain&operation=calendarList&type='+_this.data.tabIndex+'&pid='+_this.data.pid)
     //   console.log('mod=Obtain&operation=calendarList&type='+_this.data.tabIndex+'&pid='+_this.data.pid)
@@ -366,6 +367,7 @@ Page({
           // }
           _this.setData({
             listData:[..._this.data.listData,...res.data.List.calendrList],
+            voteChance:res.data.List.voteChance,
             brand_name_dis:''
           })
         }else if(res.data.ReturnCode == 201){
