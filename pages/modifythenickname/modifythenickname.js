@@ -21,7 +21,8 @@ Page({
     pid:0,
     isBrandJumpCalend:false,
     shopDetail:false,
-    isShowSearch:false
+    isShowSearch:false,
+    countdown:''
   },
 
   showSearchFun(){
@@ -50,20 +51,89 @@ Page({
     //   url: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + mid + "&settlement=1",
     // });
   },
+
+   /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    if (this.data.countdown) {
+      this.countdownbfun();
+    };
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    clearInterval(this.data.timer);
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    clearInterval(this.data.timer);
   },
 
+  // 倒计时
+  countdownbfun: function () {
+    var _this = this;
+    clearInterval(_this.data.timer);
+    var countdown = _this.data.countdown || '';
+    var commoddata = _this.data.commoddata||{};
+
+    function nowTime() { //时间函数
+      var iftrins = true;
+      // 获取现在的时间
+      var nowTime = new Date().getTime();
+      // nowTime = Date.parse(nowTime);//当前时间戳
+      var lastTime = countdown * 1000;
+      var differ_time = lastTime - nowTime; //时间差：
+      if (differ_time >= 0) {
+        var differ_day = Math.floor(differ_time / (3600 * 24 * 1e3));
+        var differ_hour = Math.floor(differ_time % (3600 * 1e3 * 24) / (1e3 * 60 * 60));
+        var differ_minute = Math.floor(differ_time % (3600 * 1e3) / (1000 * 60));
+        var s = Math.floor(differ_time % (3600 * 1e3) % (1000 * 60) / 1000);
+        if (differ_day.toString().length < 2) {
+          differ_day = "0" + differ_day;
+        };
+        if (differ_hour.toString().length < 2) {
+          differ_hour = "0" + differ_hour;
+        };
+        if (differ_minute.toString().length < 2) {
+          differ_minute = "0" + differ_minute;
+        };
+        if (s.toString().length < 2) {
+          s = "0" + s;
+        };
+        commoddata.day = differ_day;
+        commoddata.hour = differ_hour;
+        commoddata.minute = differ_minute;
+        commoddata.second = s;
+      } else {
+        commoddata.day = '00'
+        commoddata.hour = '00';
+        commoddata.minute = '00';
+        commoddata.second = '00';
+      };
+      if (commoddata.day != '00' || commoddata.hour != '00' || commoddata.minute != '00' || commoddata.second != '00') {
+        iftrins = false;
+      };
+      _this.setData({
+        commoddata: commoddata
+      });
+
+      console.log(_this.data.commoddata)
+      
+      if (iftrins) {
+        clearInterval(_this.data.timer);
+      };
+    }
+    if (countdown) {
+      nowTime();
+      clearInterval(_this.data.timer);
+      _this.data.timer = setInterval(nowTime, 1000);
+    };
+  },
 
 
 
@@ -159,6 +229,9 @@ Page({
             explain:res.data.List.explain || '',
             voteChance:res.data.List.voteChance || 0
           })
+          _this.data.countdown = res.data.List.endTime || '';
+          _this.countdownbfun();
+
         }else{
           wx.showModal({
             title: '提示',
@@ -211,6 +284,9 @@ Page({
               calendarDetailsToUser:res.data.List.calendarDetailsToUser,
               otherCalendarByBrand:res.data.List.otherCalendarByBrand || []
             })
+            _this.data.countdown = res.data.List.endTime || '';
+            _this.countdownbfun();
+
           }else{
             var store = res.data.List.calendarDetailsToUser || [];
             _this.setData({

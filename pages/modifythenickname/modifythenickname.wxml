@@ -108,9 +108,12 @@
           <view class="ticketRankingBox">
             <image class="ticketRankingImg" src="{{item.litpic}}"></image>
             <view class="ticketRankingInd" style="float:left;margin:0 0 0 15rpx;">已投{{item.all_vote_number}}票</view>
-            <view class="ticketRightNum" wx:if='{{item.gift_num}}'>x{{item.gift_num}}</view>
-            <text class="ticketRightName">限定\n日历</text>
-            <image class="ticketRightImg" catchtap="shopDetailfun" mode='aspectFit' wx:if='{{item.gift_img}}' src="{{item.gift_img}}"></image>
+            <block wx:if='{{item.gift_img}}'>
+                <view class="ticketRightNum" wx:if='{{item.gift_num}}'>x{{item.gift_num}}</view>
+                <text class="ticketRightName">限定\n日历</text>
+                <image class="ticketRightImg" catchtap="shopDetailfun" mode='aspectFit' wx:if='{{item.gift_img}}' src="{{item.gift_img}}"></image>            
+            </block>
+
           </view>
       </view>
 

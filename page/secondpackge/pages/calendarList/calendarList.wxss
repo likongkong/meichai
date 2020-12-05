@@ -143,22 +143,24 @@ page{
   margin-bottom: 30rpx;
   background: #fff;
   border-radius: 8rpx;
+  overflow: hidden;
 }
 .calendarItem:nth-child(2n){
   margin-right: 0;
 }
 .singleCalendarRank{
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 50rpx;
-  height: 50rpx;
-  border-bottom-right-radius: 8rpx;
-  background-color: rgba(0,0,0,.3);
-  font-size: 24rpx;
-  line-height: 50rpx;
-  color: #fff;
+  top: 15rpx;
+  left: 15rpx;
+  width: 60rpx;
+  height: 60rpx;
+  background: rgba(0,0,0,.5);
   text-align: center;
+  line-height: 60rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #fff;
+  border-radius: 6rpx;  
 }
 .calendarItemBanner{
   width: 100%;
@@ -265,7 +267,7 @@ page{
   position: absolute;
   left: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,.5);
+  background-color: rgba(0,0,0,.3);
   border-radius: 0 0 8rpx 8rpx;
   display: flex;
   justify-content: space-between;

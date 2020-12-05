@@ -27,9 +27,11 @@ Page({
     share_uid:0,
     isJumpSignin:false,
     // Viptip:false
-
+    countdown:''
 
   },
+
+
   // vip 弹框
   // tipVipMode:function(){
   //   this.setData({Viptip:!this.data.Viptip})
@@ -58,6 +60,7 @@ Page({
   onLoad: function(options) {
     // 判断是否授权 
     var _this = this;
+
     this.data.share_uid = options.share_uid || 0
     _this.setData({
       loginid: app.signindata.loginid,
@@ -248,7 +251,6 @@ Page({
 
     var q = Dec.Aese('mod=Obtain&operation=personageInfo&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&pid='+_this.data.pid);
 
-
     console.log(app.signindata.comurl+ 'brandDrying.php?' + 'mod=Obtain&operation=personageInfo&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&pid='+_this.data.pid)
 
     wx.request({
@@ -268,6 +270,8 @@ Page({
               voteChance:infoData.voteChance
              })
              _this.data.shareImg = infoData.shareImg || '';
+             _this.data.countdown = listData.endTime || '';
+             _this.countdownbfun();
           }else{
             var store = res.data.List.voteCalendarList || [];
             _this.setData({
@@ -362,20 +366,83 @@ Page({
       this.listdata(1);
       this.data.isJumpSignin = false;
     };
+    if (this.data.countdown) {
+      this.countdownbfun();
+    };
   },
-
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    
+    clearInterval(this.data.timer);
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    
+    clearInterval(this.data.timer);
+  },
+
+  // 倒计时
+  countdownbfun: function () {
+    var _this = this;
+    clearInterval(_this.data.timer);
+    var countdown = _this.data.countdown || '';
+    var commoddata = _this.data.commoddata||{};
+
+    function nowTime() { //时间函数
+      var iftrins = true;
+      // 获取现在的时间
+      var nowTime = new Date().getTime();
+      // nowTime = Date.parse(nowTime);//当前时间戳
+      var lastTime = countdown * 1000;
+      var differ_time = lastTime - nowTime; //时间差：
+      if (differ_time >= 0) {
+        var differ_day = Math.floor(differ_time / (3600 * 24 * 1e3));
+        var differ_hour = Math.floor(differ_time % (3600 * 1e3 * 24) / (1e3 * 60 * 60));
+        var differ_minute = Math.floor(differ_time % (3600 * 1e3) / (1000 * 60));
+        var s = Math.floor(differ_time % (3600 * 1e3) % (1000 * 60) / 1000);
+        if (differ_day.toString().length < 2) {
+          differ_day = "0" + differ_day;
+        };
+        if (differ_hour.toString().length < 2) {
+          differ_hour = "0" + differ_hour;
+        };
+        if (differ_minute.toString().length < 2) {
+          differ_minute = "0" + differ_minute;
+        };
+        if (s.toString().length < 2) {
+          s = "0" + s;
+        };
+        commoddata.day = differ_day;
+        commoddata.hour = differ_hour;
+        commoddata.minute = differ_minute;
+        commoddata.second = s;
+      } else {
+        commoddata.day = '00'
+        commoddata.hour = '00';
+        commoddata.minute = '00';
+        commoddata.second = '00';
+      };
+      if (commoddata.day != '00' || commoddata.hour != '00' || commoddata.minute != '00' || commoddata.second != '00') {
+        iftrins = false;
+      };
+      _this.setData({
+        commoddata: commoddata
+      });
+
+      console.log(_this.data.commoddata)
+      
+      if (iftrins) {
+        clearInterval(_this.data.timer);
+      };
+    }
+    if (countdown) {
+      nowTime();
+      clearInterval(_this.data.timer);
+      _this.data.timer = setInterval(nowTime, 1000);
+    };
   },
 
   /**
