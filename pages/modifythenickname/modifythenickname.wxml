@@ -215,7 +215,8 @@
 
 
 
-
+<!-- 底部导航 -->
+<bnavigation isProduce='{{isProduce}}' isChar='{{false}}'></bnavigation>
 
 
 

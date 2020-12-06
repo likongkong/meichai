@@ -188,7 +188,8 @@ Page({
     this.setData({
       loginid: app.signindata.loginid,
       uid: app.signindata.uid,
-      isAuthMobile:app.signindata.isAuthMobile
+      isAuthMobile:app.signindata.isAuthMobile,
+      isProduce: app.signindata.isProduce,
     });
     if(this.data.isBrandDetail==2){
       this.brandDetail(1)
