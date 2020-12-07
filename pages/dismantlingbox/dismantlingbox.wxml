@@ -26,7 +26,7 @@
           <view style="background:#F3F4F4;"> 
             <view class="countdownAwardWrap" catchtouchmove="" catchtap="toggleAwardFun">
               <view style="position:relative;float:left;">
-                <image mode="heightFix" src="http://www.51chaidan.com/images/calendar/calendar_gift.png"></image>
+                <image mode="heightFix" src="https://cdn.51chaidan.com/images/calendar/calendar_gift.png"></image>
                 <text>活动奖品</text>
               </view>
             </view>
@@ -144,7 +144,7 @@
           <view class="punchBottomtxt">分享围观人数x{{giftInfo.circuseeInfo.circuseeNumber}}</view>
         </view> 
         <view style="position: relative;">
-          <image class="punchImgWxShare" src="https://www.51chaidan.com/images/icon/iconShareWX.png"><button open-type="share"  style='position:absolute;height:100%;width:100%;left:0;top:0;z-index:3;opacity:0;'></button></image>
+          <image class="punchImgWxShare" src="https://cdn.51chaidan.com/images/icon/iconShareWX.png"><button open-type="share"  style='position:absolute;height:100%;width:100%;left:0;top:0;z-index:3;opacity:0;'></button></image>
            <view class="clockInIns" catchtap="mapImgDisplayfun">{{giftInfo.titleIntroduce}}</view>
         </view>
     </block>    -->
@@ -208,7 +208,7 @@
         </view>
         <view class="addGoodsBottom">
           <view>
-            <image src="https://www.51chaidan.com/images/calendar/ticketsA.jpg" mode="widthFix"></image>
+            <image src="https://cdn.51chaidan.com/images/calendar/ticketsA.jpg" mode="widthFix"></image>
             <text class="addGoodsBottomName">门票玩具A</text>
             <text class="addGoodsBottomDy">开票订阅</text>
           </view>
@@ -321,7 +321,7 @@
 	<view class='tgimgboxgb' catchtap='iftrdetailpageb'></view>
 
 	<view style='width:100%;height:65%;position:absolute;left:0;bottom:0;background:#ccc;z-index:9;'>
-		<image src='https://www.51chaidan.com/images/spread/dial/fork.png' catchtap='iftrdetailpageb' style='width:50rpx;height:50rpx;padding:30rpx;border-radius:50%;display:block;position:absolute;top:0rpx;right:0;z-index:10;'>
+		<image src='https://cdn.51chaidan.com/images/spread/dial/fork.png' catchtap='iftrdetailpageb' style='width:50rpx;height:50rpx;padding:30rpx;border-radius:50%;display:block;position:absolute;top:0rpx;right:0;z-index:10;'>
 		</image>
 		<scroll-view scroll-y="true" style="width:100%;height:100%;background:#f0eff5;" class='detailsmokebox'>
 			<template is="wxParse" data="{{wxParseData:article.nodes}}" />
@@ -333,7 +333,7 @@
 
 <!-- 底部购票图片 -->
 <view class="BottomBuyTickets" catchtap="jumpposition" data-tid='3' data-subscribe_data="{{subscribeJson[0].toyshowStart}}">
-  <image src="https://www.51chaidan.com/images/calendar/getTicket.png" mode="widthFix"></image>
+  <image src="https://cdn.51chaidan.com/images/calendar/getTicket.png" mode="widthFix"></image>
   <text>已有{{countSubsribe}}人想去</text>
 </view>
 

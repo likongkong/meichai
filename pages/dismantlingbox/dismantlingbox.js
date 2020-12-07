@@ -26,7 +26,7 @@ Page({
     goodsListTwo:[],
     goodsListOne:[],
     liveListData:[],
-    typeEve:1,
+    typeEve:0,
     indexEve:0,
     tipaid:'',
     punchAddres:false,
@@ -234,12 +234,15 @@ Page({
   },
 
   arousesubscribeFun:function(e){
+    var _this = this;
     var subscribe_data = e.currentTarget.dataset.subscribe_data;
     console.log(subscribe_data)
     this.setData({
       subscribedata:subscribe_data
-    })
-    app.comsubscribe(this)
+    });
+
+    _this.subscrfun(1);
+
   },
 
   // 每一个拉起订阅
@@ -277,7 +280,7 @@ Page({
     _this.subscrfun();
   },
   // 拉起订阅
-  subscrfun: function () {
+  subscrfun: function (num) {
     var _this = this;
     var subscribedata = _this.data.subscribedata || '';
     console.log('subscribedata===',subscribedata)
@@ -294,9 +297,15 @@ Page({
             console.warn(4)
             for (var i = 0; i < subscribedata.template_id.length; i++) {
               if (res[subscribedata.template_id[i]] == "accept") {
-                app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+                if(num == 1){
+                  app.subscribefun(_this, 1, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+                }else{
+                  app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+                };
+                
                 if (is_show_modal) {
                   _this.subshowmodalfun();
+                  _this.subshowmodalTip();
                   is_show_modal = false;
                 };
               };
@@ -318,9 +327,19 @@ Page({
       };
     };
   },
+  subshowmodalTip: function () {
+    var _this = this;
+    wx.showModal({
+      title: '提示',
+      content: '订阅成功',
+      showCancel: false,
+      success: function (res) {}
+    })
+  },
+
   subshowmodalfun: function () {
     var _this = this;
-    var typeEve = _this.data.typeEve || 1;
+    var typeEve = _this.data.typeEve || 0;
     var indexEve = _this.data.indexEve || 0;
     console.log(typeEve,indexEve)
     if(typeEve==1){
