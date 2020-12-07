@@ -70,7 +70,7 @@ Page({
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
-        console.log('vip数据======',res)
+        console.log('领取vip奖励======',res)
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
           app.showToastC(res.data.Msg);
