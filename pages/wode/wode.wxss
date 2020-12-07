@@ -17,12 +17,13 @@ page{
 .wdhead{
   width:100%;
   padding-top: 30rpx;
-  height: 202rpx;
+  /* height: 202rpx; */
   /* background: #ff2742; */
   margin-bottom: 10rpx;
   position: relative;
-  background: url('http://www.51chaidan.com/images/default/userModelTop.jpg') no-repeat;
+  background: #ff2742;
   background-size: 100% auto;
+  padding-bottom: 10rpx;
 }
 .newinimg{
   width:60rpx;
@@ -34,7 +35,7 @@ page{
 }
 .wdhl{
   width:170rpx;
-  height: 202rpx;
+  /* height: 202rpx; */
   float: left;
 }
 .wdhlimg{
@@ -60,7 +61,7 @@ page{
 }
 .wdhr{
   width:400rpx;
-  height: 202rpx;
+  /* height: 202rpx; */
   float: left;
 }
 .wdhrtitname{
@@ -460,10 +461,11 @@ page{
 
 
 .vipbox{
-  width: 680rpx;
+  width: 700rpx;
   height: 70rpx;
   line-height: 70rpx;
   background:#E6CC8F;
+  background-image: linear-gradient(to bottom right, #FFFFDE , #FFBE3E);
   margin: 0 auto 10rpx;
   position: relative;
   font-size: 24rpx;
@@ -471,7 +473,8 @@ page{
   color: #fff;
 }
 .vipbox text{
-  margin-left: 40rpx;
+  /* margin-left: 40rpx; */
+  color: #B95B06;
 }
 .vipButOpen{
   width: 166rpx;
@@ -483,7 +486,14 @@ page{
   bottom: 0;
   right: 20rpx;
   margin:auto;
-  background:#E94F57;
+  background-color: #fff;
+  color: #C38925;
   z-index: 1;
   border-radius: 46rpx;
+}
+.crownIcon{
+  width: 40rpx;
+  height: auto;
+  margin-left: 34rpx;
+  margin-right: 10rpx;
 }

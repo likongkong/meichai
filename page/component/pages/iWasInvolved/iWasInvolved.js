@@ -30,6 +30,11 @@ Page({
     countdown:'',
     isAwardBox:false
   },
+  jumpVipPage(){
+    wx.navigateTo({  
+      url: "/page/secondpackge/pages/vipPage/vipPage"
+    })
+  },
   toggleAwardFun(){
     this.setData({
       isAwardBox:!this.data.isAwardBox
@@ -132,10 +137,10 @@ Page({
   evereceivefun:function(w){
     var num = w.currentTarget.dataset.num || w.target.dataset.num || 0;
 
-    if(num == 2){
-      app.showToastC('敬请期待');
-      return false;
-    }
+    // if(num == 2){
+    //   app.showToastC('敬请期待');
+    //   return false;
+    // }
 
     this.receivefun(num)
   },

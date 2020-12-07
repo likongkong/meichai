@@ -4,55 +4,67 @@
 
 <view class='box' style="{{tgabox?'position:fixed;top:0;left:0;right:0;bottom:0;':''}}{{isIphoneX?'padding-bottom:138rpx;':''}}">
     <view class='wdhead'> 
-        <view class='personalhomepage' catchtap='personalhomepage'>个人主页</view>
-        <view class='wdhl'>
-          <view class='wdhlimg' bindtap="personaldata">
-              <image src='{{avatarUrl}}' class='wdhlimgimg' style='position: relative;'></image>
-              <image src='../images/icon_man2.png' hidden='{{icon_sex==2}}' class='icwoam'></image>
-              <image src='../images/icon_woman2.png' hidden='{{icon_sex==1}}' class='icwoam'></image>                        
-          </view>
-        </view>
-        <view class='wdhr'>
-            <view class='wdhrtit' hidden='{{istit}}'>
-                 <view class='wdhrtitdz' bindtap='wxjurisdiction'>登录</view> 
+        <view style="overflow: hidden;position: relative;margin-bottom: 20rpx;">
+            <view class='personalhomepage' catchtap='personalhomepage'>个人主页</view>
+            <view class='wdhl'>
+            <view class='wdhlimg' bindtap="personaldata">
+                <image src='{{avatarUrl}}' class='wdhlimgimg' style='position: relative;'></image>
+                <image src='../images/icon_man2.png' hidden='{{icon_sex==2}}' class='icwoam'></image>
+                <image src='../images/icon_woman2.png' hidden='{{icon_sex==1}}' class='icwoam'></image>                        
             </view>
-            <view class='wdhrtitname specialellipsis' hidden='{{istitnex}}' style='margin-top:20rpx;'>{{nickName}}</view>
-            <!-- 幸运值 -->
-            <view catchtap="awasustipimages" style="width:100%;font-size:24rpx;color:#fff;height:40rpx;vertical-align: middle;" hidden='{{istitnex}}'>
-                幸运值:{{luckyValue}}
-                <view style="width:30rpx;height:30rpx;display: inline-block;margin-left:6rpx;vertical-align:middle;position: relative;top:-2rpx;">
-                    <image src="/pages/images/explain.png" style="width:100%;height:100%;display:block;"></image>
-                    <view class="awasustip" wx:if='{{awasustipimages}}'>
-                        <view class="awasustipbg">
-                            <view class="awasusawaarrow"></view>
-                        </view>
-                        <view class="awasustiptxt">
-                            <text style="padding:20rpx;color:#fff;font-size:22rpx;text-align:left;display:block;">幸运值\n1.抽盒机抽盒后赠送获得\n2.送完可获得双倍幸运值\n3.100点幸运值可兑换透视卡x1</text>
+            </view>
+            <view class='wdhr'>
+                <view class='wdhrtit' hidden='{{istit}}'>
+                    <view class='wdhrtitdz' bindtap='wxjurisdiction'>登录</view> 
+                </view>
+                <view class='wdhrtitname specialellipsis' hidden='{{istitnex}}' style='margin-top:20rpx;'>{{nickName}}</view>
+                <!-- 幸运值 -->
+                <view catchtap="awasustipimages" style="width:100%;font-size:24rpx;color:#fff;height:40rpx;vertical-align: middle;" hidden='{{istitnex}}'>
+                    幸运值:{{luckyValue}}
+                    <view style="width:30rpx;height:30rpx;display: inline-block;margin-left:6rpx;vertical-align:middle;position: relative;top:-2rpx;">
+                        <image src="/pages/images/explain.png" style="width:100%;height:100%;display:block;"></image>
+                        <view class="awasustip" wx:if='{{awasustipimages}}'>
+                            <view class="awasustipbg">
+                                <view class="awasusawaarrow"></view>
+                            </view>
+                            <view class="awasustiptxt">
+                                <text style="padding:20rpx;color:#fff;font-size:22rpx;text-align:left;display:block;">幸运值\n1.抽盒机抽盒后赠送获得\n2.送完可获得双倍幸运值\n3.100点幸运值可兑换透视卡x1</text>
+                            </view>
                         </view>
                     </view>
                 </view>
             </view>
+            <view wx:if="{{notice_title!=''}}" style='height:50rpx;line-height:50rpx;font-size:25rpx;background:#000;opacity:0.9;border-radius:10rpx;position:absolute;left:20rpx;bottom:15rpx;color:#fff;padding:0 20rpx;' catchtap='jumpnotice'>
+            <image style='width:35rpx;height:35rpx;margin:8rpx 10rpx 8px 0rpx;display:inline-block;vertical-align:top;position:relative;' src='https://www.51chaidan.com/images/default/notice.png'></image>
+            {{notice_title}}>
+            </view>
         </view>
-        <view wx:if="{{notice_title!=''}}" style='height:50rpx;line-height:50rpx;font-size:25rpx;background:#000;opacity:0.9;border-radius:10rpx;position:absolute;left:20rpx;bottom:15rpx;color:#fff;padding:0 20rpx;' catchtap='jumpnotice'>
-        <image style='width:35rpx;height:35rpx;margin:8rpx 10rpx 8px 0rpx;display:inline-block;vertical-align:top;position:relative;' src='https://www.51chaidan.com/images/default/notice.png'></image>
-        {{notice_title}}>
+        
+        <view class="vipbox" wx:if='{{requestCompleted}}'>
+            <block wx:if='{{showVipStatus != 1}}'>
+                <view style="display: flex;align-items: center;" catchtap="jumpVipPage">
+                    <image class="crownIcon" src="https://cdn.51chaidan.com/images/calendar/crown.png" mode="widthFix"></image>
+                    <text>VIP有效期至{{vipExpiryTime}}</text>
+                </view>
+                <view class="vipButOpen" wx:if='{{showVipStatus == 2}}' catchtap="jumpVipPrivilegePage">领取特权</view>
+                <view class="vipButOpen" wx:else style="background:#ffffff;color:#C38925;" catchtap="subscrfun">明日领取</view>       
+            </block>
+            <block wx:else>
+                <text style="margin-left: 34rpx;">开通VIP立即领取价值￥2024好礼</text>
+                <view class="vipButOpen" catchtap="jumpVipPage">查看特权></view>      
+            </block>
+            <!-- <text>
+                <block wx:if='{{isVip}}'>开通VIP立即领取价值￥2024好礼</block>
+                <block wx:else>开通VIP赠送价值￥2000+好礼</block>
+            </text>
+            <block wx:if='{{isVip}}'>
+                <view class="vipButOpen" catchtap="receivefun" wx:if='{{isGetVipBlindBoxMoney}}'>领取抽盒金</view>
+                <view class="vipButOpen" wx:else style="background:#ffffff;color:#C38925;">明日可领取</view>       
+            </block> -->
+            
         </view>
-
     </view>  
-    <view class="vipbox" wx:if='{{requestCompleted}}'>
-       <text>
-           <block wx:if='{{isVip}}'>可领取抽盒金5（今日有效）</block>
-           <block wx:else>开通VIP赠送价值￥2000+好礼</block>
-       </text>
-       <block wx:if='{{isVip}}'>
-            <view class="vipButOpen" catchtap="receivefun" wx:if='{{isGetVipBlindBoxMoney}}'>领取抽盒金</view>
-            <view class="vipButOpen" wx:else style="background:#BEBEBE;">明日可领取</view>       
-       </block>
-       <block wx:else>
-            <view class="vipButOpen" catchtap="openingVip">立即开通</view>      
-       </block>
-
-    </view>
+    
     <view class='winningthepbox' wx:if='{{isAwardOrder}}' catchtap='jumporder'>
       <view class='winningthepimgtxt'>
         <image class='winningthepimgshop' src='{{awardOrder.Info.cover}}'></image>

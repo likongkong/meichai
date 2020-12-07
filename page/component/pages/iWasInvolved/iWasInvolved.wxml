@@ -134,7 +134,7 @@
 		<view class="taskEve" catchtap="{{taskInfo.memberTicket?'evereceivefun':'subscrfun'}}" data-num='2'>
 				<view class="taskEveLeft">
 						<view class="telTitle">VIP专属券</view>
-						<view class="telTitleNum">投票券+1</view>
+						<view class="telTitleNum">投票券+2</view>
 				</view>
 				<view class="clickButton" style="{{taskInfo.memberTicket?'':'background: #298CF7;'}}">
 					{{taskInfo.memberTicket?'领取':'明日更新'}}
@@ -142,7 +142,7 @@
 
 		</view>
 
-		<view class="taskEve" catchtap="bookingExhibVip">
+		<view class="taskEve" catchtap="{{taskInfo.openMember?'':'jumpVipPage'}}">
 				<view class="taskEveLeft">
 						<view class="telTitle">开通VIP</view>
 						<view class="telTitleNum">投票券+10</view>
