@@ -6,7 +6,7 @@
         <view class='topleftbackground'></view>
         <view class='topnavigator' catchtap='gateback'></view>
         <view class='topcontentline'></view>
-        <image src='https://www.51chaidan.com/images/homepage.png' class='toprightimg' catchtap='jumphomepage'></image>
+        <image src='https://cdn.51chaidan.com/images/homepage.png' class='toprightimg' catchtap='jumphomepage'></image>
     </view>
 </view>
 
@@ -19,7 +19,7 @@
     <view class="boxShadowEve"> 
       <view class="countdownAwardWrap" catchtouchmove="" catchtap="toggleAwardFun">
         <view style="position:relative;float:left;">
-          <image mode="heightFix" src="http://www.51chaidan.com/images/calendar/calendar_gift.png"></image>
+          <image mode="heightFix" src="https://cdn.51chaidan.com/images/calendar/calendar_gift.png"></image>
           <text>活动奖品</text>
         </view>
       </view>
@@ -71,7 +71,7 @@
                 <image class="headBrandLogo" mode="aspectFit" src="{{calendarDetails.logo}}"></image>
                 <view class="headBrandName specialellipsis">{{calendarDetails.name}}</view>             
              </view>
-             <view class="brandShareBox"> <image class="brandShareImg" src="http://www.51chaidan.com/images/sign/calendar/heat.png" mode="widthFix"></image>{{calendarDetails.heat}}</view> 
+             <view class="brandShareBox"> <image class="brandShareImg" src="https://cdn.51chaidan.com/images/sign/calendar/heat.png" mode="widthFix"></image>{{calendarDetails.heat}}</view> 
 
              <view class="headBrandName specialellipsis" style="max-width:145rpx;margin-right:15rpx;">{{calendarDetails.vote_number}}票</view>
           </view>
@@ -133,12 +133,12 @@
 
               <view class="headBrandName specialellipsis" style="margin-left:15rpx;">已投{{item.vote_number}}票</view>
 
-              <view class="brandShareBox" wx:if='{{item.heat>0}}'> <image class="brandShareImg" src="http://www.51chaidan.com/images/sign/calendar/heat.png"  mode='aspectFit'></image>{{item.heat}}</view>             
+              <view class="brandShareBox" wx:if='{{item.heat>0}}'> <image class="brandShareImg" src="https://cdn.51chaidan.com/images/sign/calendar/heat.png"  mode='aspectFit'></image>{{item.heat}}</view>             
 
 
-              <view class="brandShareBox"><image class="brandShareImg" mode='aspectFit' src="http://www.51chaidan.com/images/sign/calendar/share.png"></image>分享<button data-num='{{index}}' data-form='1' style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' open-type="share"></button></view>
+              <view class="brandShareBox"><image class="brandShareImg" mode='aspectFit' src="https://cdn.51chaidan.com/images/sign/calendar/share.png"></image>分享<button data-num='{{index}}' data-form='1' style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' open-type="share"></button></view>
 
-              <view class="brandShareBox" catchtap="votingInterface" data-brand_id='{{item.brand_id}}' data-calendar_id='{{brandDetails.id}}'><image class="brandShareImg" mode='aspectFit' src="http://www.51chaidan.com/images/sign/calendar/vote.png"></image>投票</view>
+              <view class="brandShareBox" catchtap="votingInterface" data-brand_id='{{item.brand_id}}' data-calendar_id='{{brandDetails.id}}'><image class="brandShareImg" mode='aspectFit' src="https://cdn.51chaidan.com/images/sign/calendar/vote.png"></image>投票</view>
 
 
             </view>
@@ -184,7 +184,7 @@
 <view wx:if='{{shopDetail}}' class="wsh" catchtouchmove="true">
    <view class="tgimgboxgb" catchtap="shopDetailfun"></view>>
 	<view style='width:100%;height:65%;position:absolute;left:0;bottom:0;background:#ccc;z-index:9;'>
-		<image src='https://www.51chaidan.com/images/spread/dial/fork.png' catchtap='shopDetailfun' style='width:50rpx;height:50rpx;padding:30rpx;border-radius:50%;display:block;position:absolute;top:0rpx;right:0;z-index:10;'>
+		<image src='https://cdn.51chaidan.com/images/spread/dial/fork.png' catchtap='shopDetailfun' style='width:50rpx;height:50rpx;padding:30rpx;border-radius:50%;display:block;position:absolute;top:0rpx;right:0;z-index:10;'>
 		</image>
 		<scroll-view scroll-y="true" style="width:100%;height:100%;background:#f0eff5;" class='detailsmokebox'>
 		    <rich-text style="font-size:0;" nodes="{{goodsDescDetails}}"></rich-text>

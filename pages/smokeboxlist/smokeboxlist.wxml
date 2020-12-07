@@ -186,7 +186,7 @@
 
 							<image wx:if='{{item.isNewArrival}}' class="labelstyleImg" src="https://cdn.51chaidan.com/images/icon/newArrival.png"></image>
 
-							<view class='labelstyle'>
+							<view class='labelstyle' style="{{item.isNewArrival?'right:48rpx;':'right:20rpx;'}}">
 							  <view wx:if='{{item.isRecycle}}' style='background:#1890ff;border-radius:7rpx;display:inline-block;padding:0 8rpx;margin-right:5rpx;'>{{item.recycleRatio}}折回收</view>
 								<view wx:if='{{item.status == 1}}' style='background: #000;border-radius:7rpx;display:inline-block;padding:0 8rpx;margin-right:5rpx;'>未开放</view>
 								<block wx:if='{{item.status == 2 && item.tag!=""}}'>

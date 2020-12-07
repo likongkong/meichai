@@ -7,7 +7,7 @@
     <view class="boxShadowEve"> 
       <view class="countdownAwardWrap" catchtouchmove="" catchtap="toggleAwardFun">
         <view style="position:relative;float:left;">
-          <image mode="heightFix" src="http://www.51chaidan.com/images/calendar/calendar_gift.png"></image>
+          <image mode="heightFix" src="https://cdn.51chaidan.com/images/calendar/calendar_gift.png"></image>
           <text>活动奖品</text>
         </view>
       </view>
@@ -73,7 +73,7 @@
 <view class="content">
   <view class="elsearch">
       <view class="elsearchch">
-          <image class="elserarchimg" catchtap="jumpsearch" src="https://www.51chaidan.com/images/toyCabinet/search.png"></image>
+          <image class="elserarchimg" catchtap="jumpsearch" src="https://cdn.51chaidan.com/images/toyCabinet/search.png"></image>
           <input class="elinputbut" bindfocus='onFocus' placeholder='请输入品牌名称搜索' bindinput="inputChange" bindconfirm="jumpsearch" value="{{brand_name_dis}}"></input>
           <view class="elserbotom" catchtap="jumpsearch">搜索</view>
       </view>
@@ -109,8 +109,8 @@
           </view>
           <view class="calendarItemInfo" style="{{tabIndex==1 || tabIndex==4?'justify-content: center;':''}}">
             <!-- <view wx:if='{{tabIndex==1 || tabIndex==4}}'> <text>{{item.vote_number}}票</text> </view> -->
-            <view wx:if='{{tabIndex==2}}'> <image src="http://www.51chaidan.com/images/sign/calendar/heat.png" mode="widthFix"></image>  <text>{{item.heat}}</text></view>
-            <view catchtap="votingInterface" data-index='{{index}}' data-brand_id='{{item.brand_id}}' data-calendar_id='{{item.id}}'> <image class="calendarItemBanner" src="http://www.51chaidan.com/images/sign/calendar/vote.png" mode="widthFix"></image>  <text>投票</text></view>
+            <view wx:if='{{tabIndex==2}}'> <image src="https://cdn.51chaidan.com/images/sign/calendar/heat.png" mode="widthFix"></image>  <text>{{item.heat}}</text></view>
+            <view catchtap="votingInterface" data-index='{{index}}' data-brand_id='{{item.brand_id}}' data-calendar_id='{{item.id}}'> <image class="calendarItemBanner" src="https://cdn.51chaidan.com/images/sign/calendar/vote.png" mode="widthFix"></image>  <text>投票</text></view>
           </view>
         </view>
       </block>
@@ -151,8 +151,8 @@
             <view class="rankingOthersL">
               <block>
                 <image wx:if="{{item.lastRank==1}}" src="" mode="widthFix"></image>
-                <image wx:if="{{item.lastRank==2}}" src="http://www.51chaidan.com/images/sign/2020wsj/jt_ss.png" mode="widthFix"></image>
-                <image wx:if="{{item.lastRank==3}}" src="http://www.51chaidan.com/images/sign/2020wsj/jt_xj.png" mode="widthFix"></image>
+                <image wx:if="{{item.lastRank==2}}" src="https://cdn.51chaidan.com/images/sign/2020wsj/jt_ss.png" mode="widthFix"></image>
+                <image wx:if="{{item.lastRank==3}}" src="https://cdn.51chaidan.com/images/sign/2020wsj/jt_xj.png" mode="widthFix"></image>
               </block>
               <text>{{item.rank}}</text>
             </view>
@@ -163,7 +163,7 @@
                 <text class="rankingOthersRName specialellipsis">{{item.name}}</text>
               </view>
               <view class="rankingOthersRNum">
-                <image src="http://www.51chaidan.com/images/sign/calendar/ticket.png" mode="widthFix"></image>
+                <image src="https://cdn.51chaidan.com/images/sign/calendar/ticket.png" mode="widthFix"></image>
                 <text>{{item.all_vote_number}}</text>
               </view>
             </view> 
