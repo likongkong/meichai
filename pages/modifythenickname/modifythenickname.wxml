@@ -96,8 +96,11 @@
                 <view class="bottomLine"></view>
                 <view class="ticketRankingNum">{{item.rank}}</view>
                 <view class="ticketRankingBox">
+                  <view style="position: relative;float: left; margin: 14rpx 0;">
                     <image class="ticketRankingImg" src="{{item.litpic}}"></image>
-                    <view class="ticketRankingInd">已投{{item.all_vote_number}}票</view>
+                    <view wx:if="{{item.isVip}}" class='vipBG'><image src='https://cdn.51chaidan.com/images/calendar/VipCase.png' style='position: relative;'></image></view>
+                  </view>
+                  <view class="ticketRankingInd">已投{{item.all_vote_number}}票</view>
                 </view>
             </view>
         </view>   
@@ -152,7 +155,10 @@
           <view class="bottomLine"></view>
           <view class="ticketRankingNum">{{item.rank}}</view>
           <view class="ticketRankingBox">
-            <image class="ticketRankingImg" src="{{item.litpic}}"></image>
+            <view style="position: relative;float: left; margin: 14rpx 0;">
+              <image class="ticketRankingImg" src="{{item.litpic}}"></image>
+              <view wx:if="{{item.isVip}}" class='vipBG'><image src='https://cdn.51chaidan.com/images/calendar/VipCase.png' style='position: relative;'></image></view>
+            </view>
             <view class="ticketRankingInd" style="float:left;margin:0 0 0 15rpx;">已投{{item.all_vote_number}}票</view>
             <block wx:if='{{item.gift_img}}'>
                 <view class="ticketRightNum" wx:if='{{item.gift_num}}'>x{{item.gift_num}}</view>

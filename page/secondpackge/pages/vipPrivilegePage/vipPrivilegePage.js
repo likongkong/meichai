@@ -28,15 +28,17 @@ Page({
     this.activsign();
   },
   onLoadfun:function(){
+    this.setData({
+      uid: app.signindata.uid,
+      loginid:app.signindata.loginid
+    }); 
     this.getInfo();
-    // this.setData({
-    //   listData:this.data.listData
-    // })
   },
   getInfo(){
     var _this = this;
     wx.showLoading({ title: '加载中...'})
     var q = Dec.Aese('mod=memberVip&operation=vipPrivilegeInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+    console.log('vip特权领取数据请求======','mod=memberVip&operation=vipPrivilegeInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
     wx.request({
       url: app.signindata.comurl + 'member.php'+q,
       method: 'GET',
@@ -51,7 +53,7 @@ Page({
             listData:res.data.List.vipPrerogativeStyle,
             subscribedata:res.data.Info.subscribe
           })
-        }else{
+        }else if(res.data.ReturnCode == 201){
           wx.navigateTo({ 
             url: "/pages/wode/wode"
           }) 
@@ -111,9 +113,8 @@ Page({
             app.signin(_this);
           }
         } else {
-          console.log(11111111111111111111111111111)
           _this.setData({
-            tgabox: false,
+            tgabox: true,
             signinlayer: false
           })
           console.log()
@@ -130,6 +131,9 @@ Page({
   },
   clicktganone: function () {
     this.setData({ tgabox: false })
+    wx.navigateTo({ 
+      url: "/pages/wode/wode"
+    }) 
   },
   // 点击登录获取权限
   userInfoHandler: function (e) {
@@ -199,9 +203,6 @@ Page({
   onReachBottom: function () {
 
   },
-  clicktganone: function () {
-    this.setData({ tgabox: false })
-  }, 
   /**
    * 用户点击右上角分享
    */

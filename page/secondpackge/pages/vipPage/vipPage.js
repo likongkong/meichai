@@ -87,6 +87,9 @@ paymentmony:function(cart_id){
                 'paySign': res.data.Info.paySign,
                 'success': function (res) {          
                   _this.getInfo();
+
+                  app.signindata.isVip = true;
+
                  },
                 'fail':function(res){
 

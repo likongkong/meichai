@@ -83,7 +83,8 @@ Page({
     // 抽盒金
     blindbox_money:0,
     // 是否请求完成
-    requestCompleted:false
+    requestCompleted:false,
+    showVipStatus:1
   },
   jumpVipPrivilegePage(){
     wx.navigateTo({  
@@ -381,6 +382,7 @@ Page({
     _this.data.loginid = app.signindata.loginid;
     _this.setData({
       uid: app.signindata.uid,
+      isVip: app.signindata.isVip,
       store_id: app.signindata.store_id || 0,
       isProduce: app.signindata.isProduce,
     });  

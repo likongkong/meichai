@@ -467,6 +467,7 @@ Page({
     _this.data.perspcardata = app.signindata.perspcardata || '';
     _this.setData({
       uid: app.signindata.uid,
+      isVip: app.signindata.isVip,
       isProduce: app.signindata.isProduce,
       automat: app.signindata.automat || {isOpen: false, times: 0 },
       automatTimes: app.signindata.automat.times,
