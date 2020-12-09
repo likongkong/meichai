@@ -179,6 +179,8 @@ App({
                   _this.signindata.isShareFun = res.data.Info.isShareFun;
 
                   _this.signindata.isTodaySign = res.data.Info.isTodaySign;
+                  // VIP
+                  _this.signindata.isVip = res.data.Info.isVip || 0;
                   // 抽盒金
                   _this.signindata.blindboxMoney = res.data.Info.blindboxMoney || 0;
                   // 限时抽盒金
@@ -631,6 +633,10 @@ App({
     } else if (item_type == 9020) { 
       wx.navigateTo({
         url: "/page/secondpackge/pages/calendarList/calendarList"
+      });
+    } else if (item_type == 9021) { 
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/vipPage/vipPage"
       });
     };
 

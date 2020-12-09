@@ -73,6 +73,11 @@ Page({
     isOpenToyShow:false,
     isPunchTheClock:1596729599<Date.parse(new Date())/1000&&Date.parse(new Date())/1000<1596988799?true:false
   },
+  jumpVipPage(){
+    wx.navigateTo({  
+      url: "/page/secondpackge/pages/vipPage/vipPage"
+    })
+  },
   finishLoad(w){
     var ind = w.currentTarget.dataset.ind || w.target.dataset.ind||0;
     this.setData({
@@ -90,8 +95,18 @@ Page({
     var goods_id = w.currentTarget.dataset.goods_id || 0;
     var isblindbox = w.currentTarget.dataset.isblindbox || 0;
     var is_calendar = w.currentTarget.dataset.is_calendar || 0;
+    var openMember = w.currentTarget.dataset.openmember || false;
     if(is_calendar == 1){
-      app.showToastC('敬请期待');
+      if(!openMember){
+        wx.navigateTo({  
+          url: "/page/secondpackge/pages/vipPage/vipPage"
+        })
+      }else{
+        // 跳转日历
+        wx.navigateTo({
+          url: "/page/secondpackge/pages/calendarList/calendarList"
+        }); 
+      }
     } else if(isblindbox){
       wx.navigateTo({
         url: "/pages/smokebox/smokebox?gid=" + goods_id,

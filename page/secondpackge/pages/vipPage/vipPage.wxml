@@ -5,56 +5,87 @@
 
 <view class="vipTop">
    <view class="vipTopDisplay">
-       <view class="vipTopName">开通即享VIP特权</view>
+       <!-- <view class="vipTopName">开通即享VIP特权</view>
        <view class="vipTopTitle" style="color: #E94F57;">2021MCTS展会限量台历+1825元豪华礼包</view>
-       <view class="vipTopTitle" style="color: #101010;">VIP会员总价值￥2024</view>
+       <view class="vipTopTitle" style="color: #101010;">VIP会员总价值￥2024</view> -->
+      <view class="vipTopDisplayT">
+         <view class="vipUserWrap">
+         <image class="vipAvatar" src="{{avatarUrl}}" mode="widthFix"></image>
+         <view>
+            <text class="name">{{nickName}}</text>
+            <text class="vipType">{{infoData.openMember?"VIP有效期至"+memberExpireTime:"未开通"}}</text>
+         </view>
+         </view>
+         <view wx:if="{{!infoData.openMember}}" class="openVip" catchtap="openingVip">
+         开通VIP
+         </view>
+      </view>
+      <view class="vipTopDisplayB">
+         <block wx:for="{{infoData.complimentary}}" wx:key='key' data-index="{{index}}">
+            <view>
+               <text class="giftTxt">赠送：</text>
+               <text style="max-width:300rpx;" class="gift">{{item.name}}</text>
+            </view>
+         </block>
+      </view>
    </view>
 </view>
 <view class="vipEveTitle">VIP特权</view>
 <view class="vipButtom">
-   <view class="vipButtomEve">
+   <!-- <view class="vipButtomEve">
       <image class="vipButtomEveImg" mode="aspectFit" src="https://cdn.51chaidan.com/images/202010/thumb_img/35160_thumb_G_1603964924859.jpg"></image>
       <view class="vipButtomEveRight">
          <view class="vipbeRTop specialellipsis">限量台历限量台历限量台历限量台历限量台历限量台历限量台历限量台历</view>
          <view class="vipbeRCenter specialellipsis">赠送 2021MCTS展会限量台历x1</view>
          <view class="vipbeRButtom specialellipsis">价值￥1825</view>
       </view>
-   </view>
-   <view class="vipButtomEve">
-      <image class="vipButtomEveImg" mode="aspectFit" src="https://cdn.51chaidan.com/images/202010/thumb_img/35160_thumb_G_1603964924859.jpg"></image>
-      <view class="vipButtomEveRight">
-         <view class="vipbeRTop specialellipsis">限量台历限量台历限量台历限量台历限量台历限量台历限量台历限量台历</view>
-         <view class="vipbeRCenter specialellipsis">赠送 2021MCTS展会限量台历x1</view>
-         <view class="vipbeRButtom specialellipsis">价值￥1825</view>
+   </view> -->
+   <block wx:for="{{listData.prerogativeList}}" wx:key='key' data-index="{{index}}">
+      <view class="vipPrivilegeWrap">
+         <view class="vipPrivilegeTab" data-index="{{index+1}}" catchtap="toggleShowVipPrivilegeFun">
+            <view>
+               <text style="font-size:30rpx;color:#101010;margin-right:60rpx">{{item.headline}}</text>
+               <text style="font-size:24rpx;color:#000;">{{item.title}}</text>
+            </view>
+            <view style="font-size:24rpx;color:#adadad;">
+               查看 >
+            </view>
+         </view>
+         <view class="vipPrivilegeAward" wx:if="{{tabNum == index+1}}">
+            <text class="title">{{item.headline}}</text>
+            <block>
+               <image catchtap="iftrdetailpagen" wx:if="{{!item.awardInfo}}" class="vipPrivilegeAwardImg" src="{{item.img}}" mode="widthFix"></image>
+               <view wx:else class="vipPrivilegeAwardGroup">
+                  <block wx:for="{{item.awardInfo}}" wx:key='key' data-index="{{index}}" wx:for-item="sonItem"> 
+                     <view>
+                        <image src="{{sonItem.img}}" mode="widthFix"></image>
+                        <view>
+                           <text>{{sonItem.name}}</text>
+                           <text>{{sonItem.number}}{{sonItem.day}}</text>
+                        </view>
+                     </view>
+                  </block>
+               </view>
+            </block>
+            <block>
+               <text wx:if="{{!item.explain}}" class="vipPrivilegeAwardExplain">{{item.name}}</text>
+               <view wx:else>
+                  <block wx:for="{{item.explain}}" wx:key='key' data-index="{{index}}" wx:for-item="sonItem"> 
+                     <text class="vipPrivilegeAwardExplain">{{sonItem}}</text>
+                  </block>
+               </view>
+               
+            </block>
+         </view>
       </view>
-   </view>
-
-   <view class="vipButtomEve">
-      <image class="vipButtomEveImg" mode="aspectFit" src="https://cdn.51chaidan.com/images/202010/thumb_img/35160_thumb_G_1603964924859.jpg"></image>
-      <view class="vipButtomEveRight">
-         <view class="vipbeRTop specialellipsis">限量台历限量台历限量台历限量台历限量台历限量台历限量台历限量台历</view>
-         <view class="vipbeRCenter specialellipsis">赠送 2021MCTS展会限量台历x1</view>
-         <view class="vipbeRButtom specialellipsis">价值￥1825</view>
-      </view>
-   </view>
+   </block>
    
-   <view class="vipButtomEve">
-      <image class="vipButtomEveImg" mode="aspectFit" src="https://cdn.51chaidan.com/images/202010/thumb_img/35160_thumb_G_1603964924859.jpg"></image>
-      <view class="vipButtomEveRight">
-         <view class="vipbeRTop specialellipsis">限量台历限量台历限量台历限量台历限量台历限量台历限量台历限量台历</view>
-         <view class="vipbeRCenter specialellipsis">赠送 2021MCTS展会限量台历x1</view>
-         <view class="vipbeRButtom specialellipsis">价值￥1825</view>
-      </view>
-   </view>
-
-
-
-
+  
 </view>
 
 
-<view class="btn boxShadowEve" catchtap="jumptoIWasInvolved">
-  立即开通￥199/年 <text style="margin-left:15rpx;text-decoration:line-through;">￥2024</text>
+<view wx:if="{{!infoData.openMember}}" class="btn boxShadowEve" catchtap="openingVip">
+  立即开通{{infoData.vipPrice}}{{infoData.vipDay}} <text style="margin-left:15rpx;text-decoration:line-through;">{{infoData.vipOldPrice}}</text>
 </view>
 
 
@@ -75,3 +106,24 @@
 
 <tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
 <view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>
+
+
+
+<!-- 商品详情 -->
+<view style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:199;' wx:if='{{iftrdetailpagetwo}}'>
+	<view class='bgstyle' catchtap='iftrdetailpageb' catchtouchmove="true"></view>
+
+	<view style='width:100%;height:65%;position:absolute;left:0;bottom:0;background:#ccc;z-index:9;'>
+		<image src='https://www.51chaidan.com/images/spread/dial/fork.png' catchtap='iftrdetailpageb' style='width:50rpx;height:50rpx;padding:30rpx;border-radius:50%;display:block;position:absolute;top:0rpx;right:0;z-index:10;'>
+		</image>
+		<scroll-view scroll-y="true" style="width:100%;height:100%;background:#f0eff5;" class='detailsmokebox'>
+
+		  
+		  <rich-text style="font-size:0;" nodes="{{goodsDescDetails}}"></rich-text>
+
+
+		</scroll-view>
+
+	</view>
+
+</view>

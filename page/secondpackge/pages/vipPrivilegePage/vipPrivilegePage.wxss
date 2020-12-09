@@ -1,0 +1,72 @@
+/* page/secondpackge//pages/aRewardDetails/aRewardDetails.wxss */
+@import "../../../../pages/signin/signin.wxss";
+@import "../../../../common/newcoupon.wxss";
+@import "../../../../common/tabbar.wxss";
+
+page{
+  background:#f4f5f9;
+  padding-bottom: 230rpx;
+}
+.color0{
+  color: #000;
+}
+.colorf{
+  color: #fff;
+}
+.color6{
+  color: #666;
+}
+.colorB9{
+  color: #B95B06;
+}
+.colorC3{
+  color: #C38925;
+}
+.backgroundFFBE3E{
+  background-image: linear-gradient(to bottom right, #FFFFDE , #FFBE3E);
+}
+.btnBgColorRed{
+  background-color: #E94F57;
+  color: #fff;
+}
+.btnBgColorWhite{
+  background-color: #fff;
+  color: #C38925;
+}
+
+.cardWrap{
+  width: 710rpx;
+  margin: 25rpx 20rpx 0 20rpx;
+  padding: 30rpx 34rpx 24rpx 34rpx;
+  box-sizing: border-box;
+  background-color: #999;
+  border-radius: 8rpx;
+}
+.h1{
+  font-size: 32rpx;
+  display: block;
+  margin-bottom: 20rpx;
+}
+.h2{
+  font-size: 24rpx;
+  display: block;
+  line-height: 38rpx;
+  margin-bottom: 30rpx;
+}
+.cardBtn{
+  display: flex;
+  align-items: center;
+}
+.cardBtn text{
+  width: 156rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  font-size: 24rpx;
+  display: inline-block;
+  box-shadow: 0px 4rpx 12rpx 0px rgba(0, 0, 0, 0.4);
+  border-radius: 50rpx;
+}
+.cardBtn text:last-child{
+  margin-left: 25rpx;
+}

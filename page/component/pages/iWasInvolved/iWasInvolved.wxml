@@ -70,6 +70,36 @@
 
 <block wx:if='{{taskInfo}}'>
 
+	  <view class="taskEve" catchtap="{{taskInfo.openMember?'':'jumpVipPage'}}">
+				<view class="taskEveLeft">
+						<view class="telTitle">开通VIP</view>
+						<view class="telTitleNum">投票券+10</view>
+				</view>
+				<view class="clickButton" style="{{taskInfo.openMember?'background:#ADADAD;':''}}">
+						{{taskInfo.openMember?'已完成':'开通'}}
+				</view>
+		</view>
+
+		<view class="taskEve" catchtap="{{taskInfo.memberTicket?'evereceivefun':'subscrfun'}}" data-num='2'>
+				<view class="taskEveLeft">
+						<view class="telTitle">VIP专属券</view>
+						<view class="telTitleNum">投票券+2</view>
+				</view>
+				<view class="clickButton" style="{{taskInfo.memberTicket?'':'background: #298CF7;'}}">
+					{{taskInfo.memberTicket?'领取':'明日更新'}}
+				</view>
+		</view>
+
+		<view class="taskEve" catchtap="jumpOtherPage" data-num='988'>
+				<view class="taskEveLeft">
+						<view class="telTitle">在线抽盒</view>
+						<view class="telTitleNum">在抽盒机中每抽1盒投票券+2</view>
+				</view>
+				<view class="clickButton">
+					去抽盒
+				</view>
+		</view>		
+
 		<view class="taskEve" catchtap="{{taskInfo.getDays?'evereceivefun':'subscrfun'}}" data-num='1'>
 				<view class="taskEveLeft">
 						<view class="telTitle">每日领取</view>
@@ -101,16 +131,6 @@
 				</view>
 		</view>
 
-		<view class="taskEve" catchtap="jumpOtherPage" data-num='988'>
-				<view class="taskEveLeft">
-						<view class="telTitle">在线抽盒</view>
-						<view class="telTitleNum">在抽盒机中每抽1盒投票券+2</view>
-				</view>
-				<view class="clickButton">
-					去抽盒
-				</view>
-		</view>		
-
 		<view class="taskEve" catchtap="{{taskInfo.subscribeToyShowTicket?'bookingExhib':'subscrfun'}}">
 					<view class="taskEveLeft">
 							<view class="telTitle">预约展会门票</view>
@@ -130,28 +150,6 @@
 						{{taskInfo.subscribeToyShow?'去预约':'明日更新'}}
 				</view>
 		</view>
-
-		<view class="taskEve" catchtap="{{taskInfo.memberTicket?'evereceivefun':'subscrfun'}}" data-num='2'>
-				<view class="taskEveLeft">
-						<view class="telTitle">VIP专属券</view>
-						<view class="telTitleNum">投票券+1</view>
-				</view>
-				<view class="clickButton" style="{{taskInfo.memberTicket?'':'background: #298CF7;'}}">
-					{{taskInfo.memberTicket?'领取':'明日更新'}}
-				</view>
-
-		</view>
-
-		<view class="taskEve" catchtap="bookingExhibVip">
-				<view class="taskEveLeft">
-						<view class="telTitle">开通VIP</view>
-						<view class="telTitleNum">投票券+10</view>
-				</view>
-				<view class="clickButton" style="{{taskInfo.openMember?'background:#ADADAD;':''}}">
-						{{taskInfo.openMember?'已完成':'开通'}}
-				</view>
-		</view>
-
 </block>
 
 

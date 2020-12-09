@@ -1,0 +1,29 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+
+<view class="wrap">
+  <!-- <view class="cardWrap">
+    <text class="h1 color0">抽盒金</text>
+    <text class="h2 color6">VIP可免费领取抽盒金x5，抽盒金可在消费中抵扣现金使用，当日有效。</text>
+    <view class="cardBtn">
+      <text class="getAward btnBgColorRed">领取</text>
+      <text class="lookAward btnBgColorRed">查看特权</text>
+    </view>
+  </view> -->
+  <block wx:for="{{listData}}" wx:key='key' data-index="{{index}}">
+    <view class="cardWrap backgroundFFBE3E">
+      <text class="h1 colorB9">{{item.title}}</text>
+      <text class="h2 colorC3">{{item.explain}}</text>
+      <view class="cardBtn">
+        <text class="getAward btnBgColorWhite" data-type="{{item.type}}" data-index="{{index}}" catchtap="{{item.status?'getAward':'subscrfun'}}"> {{item.status?'领取':'明日再来'}} </text>
+        <text class="lookAward btnBgColorWhite" catchtap="jumpVipPage">查看特权</text>
+      </view>
+    </view>
+  </block>
+</view>
+
+
+
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>

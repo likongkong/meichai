@@ -234,7 +234,7 @@ Page({
       // url: "/pages/giftCollection/giftCollection?oid="
 
 
-      // url: "/page/secondpackge/pages/vipPage/vipPage"
+      // url: "/page/secondpackge/pages/vipPrivilegePage/vipPrivilegePage"
 
       // url: "/pages/sputforward/sputforward"
       // url: "/page/component/pages/limitlottery/limitlottery?id=201425",
@@ -654,7 +654,7 @@ Page({
         var url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/Index.json';  // 未审核
       };
     }else{
-      var url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/test/Index.json';  // 测试 
+      var url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/test/Index.json?3';  // 测试 
     };
     wx.request({
       url: url,

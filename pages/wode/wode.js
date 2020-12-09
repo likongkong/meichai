@@ -83,7 +83,23 @@ Page({
     // 抽盒金
     blindbox_money:0,
     // 是否请求完成
-    requestCompleted:false
+    requestCompleted:false,
+    showVipStatus:1
+  },
+  jumpVipPrivilegePage(){
+    wx.navigateTo({  
+      url: "/page/secondpackge/pages/vipPrivilegePage/vipPrivilegePage?data="+JSON.stringify(this.data.vipPrerogativeStyle)
+    })
+  },
+  jumpVipPage(){
+    wx.navigateTo({  
+      url: "/page/secondpackge/pages/vipPage/vipPage"
+    })
+  },
+   // 订阅授权
+  subscrfun:function(){
+    var _this = this;
+    app.comsubscribe(_this);
   },
   // 开通VIP
   openingVip:function(){
@@ -326,11 +342,16 @@ Page({
               blindbox_money:res.data.Info.blindbox_money||0,
               // 限时抽盒金
               tempBlindboxMoney:res.data.Info.tempBlindboxMoney||0,
-              // 是否开通vip
-              isVip:res.data.Info.isVip || false,
+              //显示状态 1为未开通 2为待领取 3为明日领取
+              showVipStatus:res.data.Info.showVipStatus || 1,
+              //vip到期时间
+              vipExpiryTime:_this.formatTime(res.data.Info.vipExpiryTime,'Y年M月D日'),
+              //vip可领取特权数据
+              vipPrerogativeStyle:res.data.Info.vipPrerogativeStyle,
               // 是否可领取抽盒机金
               isGetVipBlindBoxMoney:res.data.Info.isGetVipBlindBoxMoney || false,
-              requestCompleted:true
+              requestCompleted:true,
+              subscribedata:res.data.Info.subscribe,
 
             });
             app.signindata.tempBlindboxMoney = res.data.Info.tempBlindboxMoney||0;
@@ -361,6 +382,7 @@ Page({
     _this.data.loginid = app.signindata.loginid;
     _this.setData({
       uid: app.signindata.uid,
+      isVip: app.signindata.isVip,
       store_id: app.signindata.store_id || 0,
       isProduce: app.signindata.isProduce,
     });  
@@ -670,6 +692,21 @@ Page({
       }
     });
   },
-  
+  formatTime(number, format) {
+    var formateArr = ['Y', 'M', 'D', 'h', 'm', 's'];
+    var returnArr = [];
+    var date = new Date(number * 1000);
+    returnArr.push(date.getFullYear());
+    returnArr.push(date.getMonth() + 1);
+    returnArr.push(date.getDate());
+    returnArr.push(date.getHours());
+    returnArr.push(date.getMinutes());
+    returnArr.push(date.getSeconds());
+   
+    for (var i in returnArr) {
+      format = format.replace(formateArr[i], returnArr[i]);
+    }
+    return format;
+  }
 
 })
