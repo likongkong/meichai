@@ -634,6 +634,10 @@ App({
       wx.navigateTo({
         url: "/page/secondpackge/pages/calendarList/calendarList"
       });
+    } else if (item_type == 9021) { 
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/vipPage/vipPage"
+      });
     };
 
 

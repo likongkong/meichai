@@ -34,7 +34,7 @@ page{
   z-index: 6; 
 }
 .wdhl{
-  width:170rpx;
+  width:182rpx;
   /* height: 202rpx; */
   float: left;
 }
@@ -42,7 +42,7 @@ page{
   display: block;
   width:122rpx;
   height: 122rpx;
-  margin-left:20rpx;
+  margin-left:32rpx;
   position: relative;
   box-sizing: border-box;
   border-radius: 50%;
@@ -71,7 +71,7 @@ page{
   bottom: 6rpx;
 }
 .wdhr{
-  width:400rpx;
+  width:388rpx;
   /* height: 202rpx; */
   float: left;
 }

@@ -18,7 +18,7 @@
 			<view style='display:inline-block;' wx:for="{{queueList}}" wx:key="key">
 				<view style='width:60rpx;height:60rpx;border-radius:50%;float:left;margin:15rpx;position: relative;'>
 					<image style='width:60rpx;height:60rpx;border-radius:50%;' src='{{item.headphoto}}'></image>
-					<!-- <view wx:if="{{item.isVip}}" class='vipBG'><image src='https://cdn.51chaidan.com/images/calendar/VipCase.png' style='position: relative;'></image></view> -->
+					<view wx:if="{{item.isVip}}" class='vipBG'><image src='https://cdn.51chaidan.com/images/calendar/VipCase.png' style='position: relative;'></image></view>
 				</view>
 			</view>
 		</scroll-view>
