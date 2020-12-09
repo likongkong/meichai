@@ -1,0 +1,209 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+
+<swiper class="swiperbox" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
+  <swiper-item wx:for="{{banner}}" wx:key="key">
+    <image src="{{item.img}}" class="slide-image" mode="aspectFill">
+    </image>
+  </swiper-item>
+</swiper>
+
+
+<view class="bTbox">
+  <view class="bTboxTxtTitle">场次</view>
+  <!-- one -->
+  <view class="bTscrollBox">
+    <scroll-view class="bTscroll" scroll-x="true">
+        <block wx:for='{{ticket}}' wx:key='key'>
+            <view class="bTscrollEve {{tabOneId==item.day?'borderBg':''}}" catchtap="tabObtainData" data-obtain='1' data-num='{{item.day}}' data-ind='{{index}}'>
+                <view class="btset">{{item.date}}</view>
+                <view>{{item.timeRange}}</view>
+            </view>        
+        </block>
+    </scroll-view>
+  </view>
+
+
+  <!-- two -->
+
+  <view class="bTboxTxtTitle">票档</view> 
+  <view class="bTscrollBox">
+      <block wx:for='{{ticketTwo}}' wx:key='key'>
+          <block wx:if='{{item.img}}'>
+              <view class="bTEveTwo {{tabTwoId==item.type?'borderBg':''}}" catchtap="tabObtainData" data-obtain='2' data-num='{{item.type}}' data-ind='{{index}}'>
+                  <image class="bTEveTwoImg"  mode='aspectFit' src="{{item.img}}"></image>
+                  <text class="specialellipsis" wx:if='{{item.subTitle}}' style="margin-left:20rpx;display:inline-block;max-width:200rpx;vertical-align:top;">{{item.subTitle}}</text>
+                  <text>+{{item.title}}</text>
+                  <text style="float:right;margin-right:15rpx;color:#E94F57;">￥{{item.price}}</text>
+              </view>        
+          </block>
+          <block wx:else>
+              <view class="bTEveTwo {{tabTwoId==item.type?'borderBg':''}}" catchtap="tabObtainData" data-obtain='2' data-num='{{item.type}}' data-ind='{{index}}'>
+                  <text style="margin-left:30rpx;">{{item.title}}</text>
+                  <text style="float:right;margin-right:30rpx;color:#E94F57;">￥{{item.price}}</text>
+              </view>        
+          </block>
+      </block>
+  </view>
+
+
+
+
+</view>
+
+
+
+<view class="leafletBottom">
+   <view class="leafletBottomTxt">门票玩具线下展会领取，购票场次时间内有效</view>
+   <view class="leafletBottomEve boxShadowEve" catchtap="buyabframe" style="width:400rpx;">立即购买</view>
+</view>
+
+
+<!-- 实名制参展  -->
+<view wx:if='{{realNameSystem}}' class="wsh" catchtouchmove="true" style="z-index:99;">
+   <view class="tgimgboxgb" catchtap="realNameSysfun"></view>
+	 <view class="identityTipBox" style="width:460rpx;height:440rpx;">
+        <view class="adreshead" style="line-height:80rpx;">实名制参展</view>
+        <view style="width:100%;height:26rpx;"></view>
+        <text class="realNtxt">1.本展会需要实名制购票及入场\n \n2.参展请本人携带购票时填写证件入场</text>
+        <view class="leafletBottomEve boxShadowEve" catchtap="identityTipFun" style="width:320rpx;height:60rpx;line-height:60rpx;">预填实名参展人</view>
+        <view class="reNaSysCen" catchtap="realNameSysfun">知道了</view>
+
+	 </view>
+</view>
+
+
+
+<!-- 购买弹框 -->
+<view wx:if='{{buyabulletframe}}' class="wsh" catchtouchmove="true">
+   <view class="tgimgboxgb" catchtap="buyabframe"></view>
+	 <view class="confirmOrder" style="height:{{windowHeight-130}}px;">
+      <scroll-view class="confirmOrderScroll" style="height:{{windowHeight-200}}px;" scroll-y="true">
+          <view style="padding:30rpx;background:#f4f5f9;">
+              <view class="bTcOHeadTip">因购票火爆，请在下单后2分钟内完成支付</view>   
+              <view class="bTcOcontentTip">
+                  <view class="bTcOcontentTTxt" style="font-size:28rpx;">MCTS x JSS 北京潮流艺术与手办玩具展览会</view>
+                  <view class="bTcOcontentTTxt">中国国际展览中心（静安庄馆）</view>
+              </view>
+
+              <view class="bTcOcontentTip">
+                  <view class="bTcOcontentTTxt">
+                     <block wx:for='{{ticket}}' wx:key='key' wx:if='{{tabOneId==item.day}}'>{{item.date}} {{item.timeRange}}</block>
+                  </view>
+                  <view class="bTcOcontentTTxt">
+                     <block wx:for='{{ticketTwo}}' wx:key='key' wx:if='{{tabTwoId==item.type}}'>{{item.title}}<block wx:if='{{item.subTitle}}'>  +  {{item.subTitle}}</block></block>
+                  </view>
+                  <block wx:for='{{ticketTwo}}' wx:key='key' wx:if='{{tabTwoId==item.type}}'>
+                     <view class="bTcOcontentTTxt" wx:if='{{item.subTitle}}'>{{item.subTitle}}线下展会领取</view>
+                  </block>
+                  
+              </view>
+
+              <view class="bTcObottTip" catchtap="ticketInstrutfun" data-ind='1'>
+                  <text>不支持退</text>
+                  <text style="margin-left:60rpx;">实名制购票</text>
+                  <text style="float:right;">></text>
+              </view>
+          </view>
+          <view class="ididentity">
+             <view class="ididentityeve">
+                 <view class="ididentityeveTit">实名制购票</view>
+                 <view class="ididentityeveTit" style="color:#E94F57;">入场需携带对应证件</view>
+                 <view class="ididentModify" catchtap="identityTipFun">新增</view>
+             </view>
+
+             <block wx:for='{{identity}}' wx:key='key'>
+                 <view class="ididentityinf">
+                    <view style="position: relative;"><text style="display: inline-block;width:100rpx;vertical-align:top;">{{item.consignee}}</text><text style="color:#BEBEBE;margin-left:20rpx;">身份证   {{item.idcarddis}}</text><image catchtap="identitysel" data-ind='{{index}}' class="ididentisel" src="{{item.isCheck?'https://cdn.51chaidan.com/images/calendar/select.png':'https://cdn.51chaidan.com/images/calendar/case.png'}}"></image><image style="right:70rpx;" src='../../../../pages/images/forknumber.png' catchtap="deleteIdent" class='recgadheadimg' data-ind='{{index}}'></image></view>
+                    <view class="ididentiphone">{{item.mobiledis}}</view>
+                 </view>             
+             </block>
+
+             
+          </view>
+
+          <!-- <view class="ididentity">
+              <view class="ididentityeve">
+                  <view class="ididentityeveTit">联系人</view>
+                  <input class='contactsinput' type='text' value='{{contactsname}}' bindinput="contactsChangen" placeholder='请填写联系人姓名'></input>
+                  <input class='contactsinput' type='text' value='{{contactsphone}}' bindinput="contactsChangep" placeholder='请填写联系人手机号'></input>
+              </view>
+          </view> -->
+
+
+      </scroll-view>
+      <view class="pricebgbraek" catchtap="priceBreakBoxFun" wx:if='{{priceBreakBox}}'></view>
+      <view class="confirmOrderButtom">
+          <view class="confOrdButTxt">点击提交订单视为同意<text style="color:#298CF7;" catchtap="ticketInstrutfun" data-ind='2'>《美拆购票服务条款》</text></view>
+          <view class="confOrdBut">
+              <view class="confOrdButLeft" catchtap="priceBreakBoxFun">￥{{sumPrice}}<text class="cobdetailed">明细</text><text class="{{priceBreakBox?'uptriangle':'downtriangle'}}"></text></view>
+              <view class="confOrdButn boxShadowEve" catchtap="buyingTickPay">提交订单</view>
+              <!-- 价格明细 -->
+              <view class="priceBreakdown" wx:if='{{priceBreakBox}}'>
+                  <view class="priceBreakdHead" catchtap="priceBreakBoxFun">价格明细<image src='../../../../pages/images/forknumber.png' class='recgadheadimg'></image></view>
+                  <view class="priceBreakdTit">购买信息</view>
+                  <view style="background:#fff;padding:0 20rpx;">
+                    <view class="priceBreakEve" wx:for='{{detail[tabTwoId]}}' wx:key='key'>
+                        <text style="float:left;">￥{{item.price}}</text>
+                        <text style="margin-left:20rpx;float:left;max-width:430rpx;" class="specialellipsis">{{item.title}}</text>
+                        <text style="float:right;">{{seldate}}</text>
+                    </view>                  
+                  </view>
+
+              </view>
+          </view>
+      </view>
+
+
+	 </view>
+</view>
+
+
+
+
+<!-- 购票须知 -->
+<view wx:if='{{ticketInstrut}}' class="wsh" catchtouchmove="true" style="z-index:120;">
+   <view class="tgimgboxgb" catchtap="ticketInstrutfun" data-ind='0'></view>
+	 <view class="ticketInstrutc" style="height:{{windowHeight-130}}px;">
+        <scroll-view class="confirmOrderScroll" style="height:{{windowHeight-160}}px;margin-top:10px;" scroll-y="true">
+           <block wx:if='{{explainnum==1}}'>
+                <view class="ticketInsHead">------购票须知------</view>
+                <text style="padding:30rpx;display:block;font-size:24rpx;">{{ticketingInOne}}</text>
+                <view class="ticketInsHead">------温馨提示------</view>
+                <text style="padding:30rpx;display:block;font-size:24rpx;">{{ticketingInTwo}}</text>           
+           </block>
+           <block wx:else>
+                <text style="padding:30rpx;display:block;font-size:24rpx;">{{agreement}}</text>     
+           </block>
+        </scroll-view>
+	 </view>
+</view>
+
+
+
+<!-- 身份信息 弹框 -->
+<view wx:if='{{identityTip}}' class="wsh" catchtouchmove="true" style="z-index:99;">
+   <view class="tgimgboxgb" catchtap="identityTipFun"></view>
+	 <view class="identityTipBox">
+        <view class="adreshead" style="line-height:80rpx;">身份信息</view>
+        <view style="width:100%;height:26rpx;"></view>
+        <input class='idnumberboxinp' type='text' value='{{inputnamedata}}' bindinput="inputnameChange" placeholder='真实姓名'></input>
+        <input class='idnumberboxinp' type='text' value='{{contactsphone}}' bindinput="contactsChangep" placeholder='请填写手机号' style='margin-top:20rpx;'></input>
+        <input class='idnumberboxinp' type='text' value='{{inputidnumberdata}}' bindinput="inputidChange" placeholder='身份证号' style='margin-top:20rpx;'></input>
+
+        <view class='awatipbottom'>
+            <view class='awatipbotleft' catchtap='identityTipFun'>取消</view>
+            <view class='awatipbotright' catchtap="upIdentity" style="color:#42bd56;position:relative;">确定</view>
+        </view>
+
+	 </view>
+</view>
+
+
+<!-- 底部导航 -->
+<bnavigation isProduce='{{isProduce}}' isChar='{{false}}'></bnavigation>
+
+
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>

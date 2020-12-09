@@ -227,7 +227,12 @@ Page({
       // url: "/pages/modifythenickname/modifythenickname"
 
       // url: "/page/secondpackge/pages/articleList/articleList"
-      url: "/page/secondpackge/pages/calendarList/calendarList"
+      // url: "/page/secondpackge/pages/calendarList/calendarList"
+
+      url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
+
+      // url: "/pages/giftCollection/giftCollection?oid="
+
 
       // url: "/page/secondpackge/pages/vipPage/vipPage"
 
