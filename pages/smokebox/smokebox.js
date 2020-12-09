@@ -243,6 +243,40 @@ Page({
     dhRecycleCount:60,
     isDhRecycleBtn:true
   },
+  jumpVipPage(){
+    wx.navigateTo({  
+      url: "/page/secondpackge/pages/vipPage/vipPage"
+    })
+  },
+  // 订阅授权
+  subscrfun:function(){
+    var _this = this;
+    app.comsubscribe(_this);
+  },
+  getAward(e){
+    // var index = e.currentTarget.dataset.index;
+    var type = 1;
+    var _this = this;
+    wx.showLoading({ title: '加载中...'})
+    var q = Dec.Aese('mod=memberVip&operation=getVipWelfare&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&getType='+type)
+    wx.request({
+      url: app.signindata.comurl + 'member.php'+q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('领取抽盒金成功======',res)
+        wx.hideLoading();
+        if (res.data.ReturnCode == 200) {
+          app.showToastC(res.data.Msg);
+          _this.getInfo();
+          // let change = "listData["+ index +"].status";
+          // _this.setData({
+          //   [change]: false,
+          // })
+        }
+      }
+    }); 
+  },
   // 在线抽盒机
   bbevebox: function(event) {
     var id = event.currentTarget.dataset.gid || event.target.dataset.gid;
@@ -663,7 +697,14 @@ Page({
             //是否可使用抽盒金抵扣
             isDeduct:activityData.isDeduct,
             //是否使用抽盒金抵扣
-            isUseDeduct:activityData.isDeduct?true:false
+            isUseDeduct:activityData.isDeduct?true:false,
+            // 是否是VIP
+            isVip:infoData.isVip,
+            //是否可领取vip限时抽盒金 
+            vipTimeLimitMoney:infoData.vipTimeLimitMoney,
+            vipBlindBoxMoney:infoData.vipBlindBoxMoney,
+            vipTotalBlindBoxMoney:infoData.vipTotalBlindBoxMoney,
+            subscribedata:infoData.vipSubscribe,
           })
 
 
