@@ -1169,3 +1169,9 @@ App({
 // modifythenickname 日历详情
 // iWasInvolved 日历 我的投票
 // vipPage  vip 页面
+// vipPage  购票 页面
+// giftCollection 领取礼物
+
+
+
+

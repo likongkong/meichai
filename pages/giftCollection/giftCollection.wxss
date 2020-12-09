@@ -1,0 +1,9 @@
+
+@import "../../common/tabbar.wxss";
+
+@import "../topfunction/topfunction.wxss";
+
+page{
+  background:#f4f5f9;
+  padding-bottom: 230rpx;
+}

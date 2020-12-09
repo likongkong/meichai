@@ -31,6 +31,7 @@
     "pages/bottomComponent/bottomComponent",
     "pages/shopsquare/shopsquare",
     "pages/halloweenparty/halloweenparty",
+    "pages/giftCollection/giftCollection",
     "pages/smokeComponent/smokeComponent"
   ],
   "subPackages": [
@@ -109,6 +110,7 @@
         "pages/calendarList/calendarList",
         "pages/vipPage/vipPage",
         "pages/aRewardList/aRewardList",
+        "pages/buyingTickets/buyingTickets",
         "pages/articleList/articleList" 
       ]
     }
