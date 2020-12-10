@@ -13,8 +13,11 @@
 <view class='dlfdbox'>
     <view class='dlfcontent' style='margin-bottom:0;'>
         <view class='dlfchead'>
-            <view class='dlfchleft'>
-                <image src='{{listdata.litpic}}' catchtap='jumpdlfchlimgdetail' data-nick='{{listdata.nick}}' data-uid='{{listdata.uid}}' class='dlfchlimg'></image>
+            <view class='dlfchleft' style="display: flex;justify-content: center;align-items: center;">
+                <view style='width:100rpx;height:100rpx;border-radius:50%;float:left;position: relative;' catchtap='jumpdlfchlimgdetail' data-nick='{{listdata.nick}}' data-uid='{{listdata.uid}}'>
+                    <image src='{{listdata.litpic}}' style="width:100%;height:100%;border-radius:50%;"></image>
+                    <view wx:if="{{listdata.isVip}}" class='vipBG'><image src='https://cdn.51chaidan.com/images/calendar/VipCase.png' style='position: relative;'></image></view>
+                </view>
             </view>
             <view class='dlfchright'>
                 <view class='dlfchrgift'>
