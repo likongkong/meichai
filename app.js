@@ -112,7 +112,9 @@ App({
     //热门搜索关键词
     hotKeyword:[],
     // 不能分享 商品gid
-    notAllowShareGoodsId:''
+    notAllowShareGoodsId:'',
+    // 是否是管理员  有权限进入 发放门票商品的页面
+    isManager:false
   },
   //一番赏队列倒计时
   // yifanshangIsInQueueFun(time){
@@ -168,6 +170,33 @@ App({
                   _this.signindata.loginid = res.data.Info.loginid || '';
                   _this.signindata.uid = res.data.Info.uid || '';
 
+
+                  if(Dec.env=='online'){
+                    var num = _this.signindata.randommaximum - res.data.Info.uid%_this.signindata.randommaximum;
+                    if(num<10){
+                        num = '00'+num
+                    }else if(num>=10){
+                      num = '0'+num.toString()
+                    };       
+                    // // 接口地址  
+                    // _this.signindata.comurl = 'https://api-slb.51chaidan.com/'+num+'/';
+                    // // 发现地址
+                    // _this.signindata.clwcomurl = 'https://clw-slb.51chaidan.com/'+num+'/';
+
+                    // 接口地址  
+                    _this.signindata.comurl = 'https://api-slb.51chaidan.com/002/';
+                    // 发现地址
+                    _this.signindata.clwcomurl = 'https://clw-slb.51chaidan.com/002/';
+
+                    console.log('app===sigin',_this.signindata.comurl,_this.signindata.clwcomurl,_this.signindata.randommaximum,num,Dec.versionnumber)
+                  }else{
+                    // 接口地址  
+                    _this.signindata.comurl = 'http://api-test.51chaidan.com/';
+                    // 发现地址
+                    _this.signindata.clwcomurl = 'http://clw-test.51chaidan.com/';
+                  };
+
+
                   console.log('app===sigin',_this.signindata.comurl,_this.signindata.clwcomurl,Dec.versionnumber)
 
                   _this.signindata.isNewer = res.data.Info.isNewer || false;
@@ -184,7 +213,9 @@ App({
                   // 抽盒金
                   _this.signindata.blindboxMoney = res.data.Info.blindboxMoney || 0;
                   // 限时抽盒金
-                  _this.signindata.tempBlindboxMoney = res.data.Info.tempBlindboxMoney || 0
+                  _this.signindata.tempBlindboxMoney = res.data.Info.tempBlindboxMoney || 0;
+                  // 是否是管理员  有权限进入 发放门票商品的页面
+                  _this.signindata.isManager = res.data.Info.isManager || false;
 
                   _this.signindata.spreadEntry = res.data.List ? res.data.List.spreadEntry : false || false;
                   // _this.signindata.index_ela_fra = true;
@@ -291,6 +322,42 @@ App({
   },
   onLaunch: function (options) {
     var _this = this;
+
+    wx.request({
+      url: 'https://cdn.51chaidan.com/produce/serverDetail.txt',
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log(res.data)
+        if(_this.signindata.loginid!=''&&_this.signindata.uid!=''){
+          _this.signindata.randommaximum = res.data;
+        }else{
+          var num = Math.floor(Math.random() * res.data || _this.signindata.randommaximum)+1 || 0;
+          _this.signindata.randommaximum = res.data;
+          if(num<10){
+             num = '00'+num
+          }else if(num>=10){
+            num = '0'+num.toString()
+          };
+          if(Dec.env=='online'){
+            // 接口地址  
+            _this.signindata.comurl = 'https://api-slb.51chaidan.com/'+num+'/';
+            // 发现地址
+            _this.signindata.clwcomurl = 'https://clw-slb.51chaidan.com/'+num+'/';
+          }else{
+            // 接口地址  
+            _this.signindata.comurl = 'http://api-test.51chaidan.com/';
+            // 发现地址
+            _this.signindata.clwcomurl = 'http://clw-test.51chaidan.com/';
+          };
+          console.log(_this.signindata.comurl,_this.signindata.clwcomurl,_this.signindata.randommaximum)
+        }
+        console.log('num===================',num)
+      },
+      fail: function (res) {}
+    }); 
+
+
 
     // 基础数据
     _this.defaultinfofun()
@@ -1177,7 +1244,7 @@ App({
 // vipPage  vip 页面
 // vipPage  购票 页面
 // giftCollection 领取礼物
-
+// electronicTicket 电子票详情
 
 
 
