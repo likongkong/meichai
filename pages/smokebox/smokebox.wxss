@@ -804,4 +804,47 @@ margin-top: 20rpx;
 }
 .recycleContentStateB .recyclebtn button{
   width: 350rpx;
+  position: absolute;left: 0;
+}
+
+
+
+.vipBox{
+  width: 650rpx;
+  height: 140rpx;
+  margin: 40rpx auto 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-image: linear-gradient(to bottom right, #FFFFDE , #FFBE3E);
+  border-radius: 8rpx;
+  padding: 50rpx 40rpx 40rpx 40rpx;
+  box-sizing: border-box;
+}
+.vipBoxBtn{
+  width: 160rpx;
+  height: 45rpx;
+  line-height: 45rpx;
+  background: #fff;
+  box-shadow: 0 4rpx 12rpx 0 rgba(0, 0, 0, 0.4);
+  color: #C38925;
+  font-size: 26rpx;
+  border-radius: 50rpx;
+  text-align: center;
+}
+.vipBoxTxt{
+  font-size: 26rpx;
+  font-weight: bold;
+  color: #C38925;
+  display: block;
+  margin-bottom: 14rpx;
+}
+.blindboxMoney{
+  font-size: 24rpx;
+  color: #C38925;
+  text-align: left;
+}
+.bigBlindboxMoney{
+  font-size: 40rpx;
+  color: #B95B06;
 }
