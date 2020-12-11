@@ -221,6 +221,7 @@
   margin-bottom: 10rpx;
 }
 .shortPic .subtitle{
+  display: block;
   font-size: 26rpx;
   color: #918e8f;
 }

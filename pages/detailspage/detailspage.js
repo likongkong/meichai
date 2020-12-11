@@ -2390,14 +2390,16 @@ Page({
             wx.hideLoading()
           },
           success: function (res) {
+
             ctx.drawImage(res.path,32,40,246,246);
             ctx.draw(true);
             // 二维码
+            console.log(_this.data.zunmdata.qrcode,2222222)
             wx.getImageInfo({
               src: _this.data.zunmdata.qrcode,
               fail: function (res) {
                 _this.setData({ shareFriendMask: false, headhidden: true });
-                wx.hideLoading()
+                wx.hideLoading();
               },
               success: function (res) {
                 ctx.drawImage(res.path,205,300,85,85);

@@ -219,7 +219,7 @@ Page({
     var q = Dec.Aese('mod=Obtain&operation=BrandToCalendarList&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&brand_id='+_this.data.brand_id + '&refresh=' + refresh+'&pid='+_this.data.pid);
 
 
-    console.log(app.signindata.comurl + 'spread.php?'+'mod=Obtain&operation=BrandToCalendarList&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&brand_id='+_this.data.brand_id + '&refresh=' + refresh+'&pid='+_this.data.pid)
+    console.log(app.signindata.comurl + 'brandDrying.php?'+'mod=Obtain&operation=BrandToCalendarList&uid=' +_this.data.uid+'&loginid='+_this.data.loginid+'&brand_id='+_this.data.brand_id + '&refresh=' + refresh+'&pid='+_this.data.pid)
 
     wx.request({
       url: app.signindata.comurl + 'brandDrying.php' + q,
