@@ -56,11 +56,7 @@ Page({
     // 是分享还是订阅授权手机号
     isShareOrSub:true,
     nowIdx: 0,//当前swiper索引
-　　imgList: [//图片列表
-　　　　'https://cdn.51chaidan.com/data/afficheimg/20200730bw.jpg?imageMogr2/thumbnail/x800',
-　　　　'https://cdn.51chaidan.com/data/afficheimg/20200730bw.jpg?imageMogr2/thumbnail/x800',
-　　　　'https://cdn.51chaidan.com/data/afficheimg/20200730bw.jpg?imageMogr2/thumbnail/x800',
-　　],
+　　imgList: [],
     subscribeJson:[
        {"toyshowStart":{"template_id":["Q0tWM7kOihw1TilTeR3YmLzWp5tS0McgyOeJx2xX-B0","7rx-pSLTpdYH6IdOKAudkP1A0MmAzN0cOS2RXMTVyKo"], "subscribe_type":["12","12"]}},{"toyshowTicket":{"template_id":["Q0tWM7kOihw1TilTeR3YmLzWp5tS0McgyOeJx2xX-B0","7rx-pSLTpdYH6IdOKAudkP1A0MmAzN0cOS2RXMTVyKo"], "subscribe_type":["17","17"]}}
     ],
@@ -372,8 +368,10 @@ Page({
     // 推送统计
     this.data.push_id = options.push_id || 0;
 
+    this.onLoadfun();
+
     if(app.signindata.sceneValue==1154){
-      this.onLoadfun();
+      
     }else{
       // 判断是否授权
       this.activsign();
@@ -394,17 +392,17 @@ Page({
     });
 
     _this.brandinformation(1);
-    // 线上
-    _this.commodityinformation(1,1);
-    // blibli
-    _this.commodityinformation(1,2);
-    // 直播商品
-    _this.commodityinformation(1,3);
-    // 直播列表
-    _this.liveList(1);
+    // // 线上
+    // _this.commodityinformation(1,1);
+    // // blibli
+    // _this.commodityinformation(1,2);
+    // // 直播商品
+    // _this.commodityinformation(1,3);
+    // // 直播列表
+    // _this.liveList(1);
 
-    //  收货地址
-    _this.nextpagediao();
+    // //  收货地址
+    // _this.nextpagediao();
 
     if(_this.data.defaultinformation){}else{
       console.log('defaultinformation=====接口')
@@ -712,6 +710,23 @@ Page({
     })
 },
 
+  brandJson:function(){
+     var _this = this;
+    //调取搜索关键词跳转对应列表数据
+    wx.request({
+      url: 'https://cdn.51chaidan.com/json/toyshowBrand.json',
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('品牌数据logo===',res)
+        _this.setData({
+          brandList:res.data || []
+        })
+      }
+    })
+
+
+  },
   // 品牌信息
   brandinformation:function(num){
       var _this = this
@@ -734,11 +749,12 @@ Page({
           console.log('品牌信息=====',res)
           wx.stopPullDownRefresh();
           wx.hideLoading()
+          // 品牌数据
+          _this.brandJson();
           if (res.data.ReturnCode == 200) {
             if(num==1){
               var bannerList = res.data.List.bannerList || [];
               var calendarList = res.data.List.calendar || [];
-              var brandList = res.data.List.brand || [];
               var isMobileAuth = res.data.Info.isMobileAuth || false;
               var countSubsribe = res.data.Info.countSubsribe || 0;
               _this.data.countdown = res.data.Info.endTime || '';
@@ -747,9 +763,9 @@ Page({
                 bannerList:bannerList,
                 calendarList,
                 countSubsribe,
-                brandList:brandList,
-                isMobileAuth:isMobileAuth
+                isMobileAuth:isMobileAuth,
               });
+              console.log(111111)
               // 是否是分享围观
               _this.shareReferee();
 
@@ -780,11 +796,11 @@ Page({
           _this.data.isShareOrSub = true;
           _this.havephoneiftrfun();
           // 展会福利
-          _this.exhibitionBenefits();
+          // _this.exhibitionBenefits();
         };
      }else{
         // 展会福利
-        _this.exhibitionBenefits();
+        // _this.exhibitionBenefits();
      };
   },
   // 商品信息 type 1为线上 2为blibli 3为直播
@@ -887,7 +903,7 @@ Page({
     var _this = this;
     // 判断是否登录
     if (_this.data.loginid != '' && _this.data.uid != '') {
-      _this.onLoadfun();
+
       return false;
     };    
     wx.getSetting({
@@ -906,7 +922,7 @@ Page({
           });
           // 判断是否登录
           if (_this.data.loginid != '' && _this.data.uid != '') {
-            _this.onLoadfun();
+
           } else {
             app.signin(_this);
           }
@@ -919,7 +935,6 @@ Page({
           console.log()
           // '没有授权 统计'
           app.userstatistics(42);
-          _this.onLoadfun();
         }
       }
     });      
@@ -1053,16 +1068,16 @@ Page({
     var _this = this;
     _this.data.page = 0;
     _this.brandinformation(1);
-    // 线上
-    _this.commodityinformation(1,1);
-    // blibli
-    _this.commodityinformation(1,2);
-    // 直播商品
-    _this.commodityinformation(1,3)
-    // 直播列表
-    _this.liveList(1);
-    // 展会福利
-    _this.exhibitionBenefits();
+    // // 线上
+    // _this.commodityinformation(1,1);
+    // // blibli
+    // _this.commodityinformation(1,2);
+    // // 直播商品
+    // _this.commodityinformation(1,3)
+    // // 直播列表
+    // _this.liveList(1);
+    // // 展会福利
+    // _this.exhibitionBenefits();
 
   },
 
