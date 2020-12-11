@@ -93,6 +93,7 @@
         "pages/newsigninarea/newsigninarea",
         "pages/limitlotterypublish/limitlotterypublish",
         "pages/doubleElevenexh/doubleElevenexh",
+        "pages/electronicTicket/electronicTicket",
         "pages/ocamcart/ocamcart"
       ]
     },

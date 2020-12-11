@@ -227,9 +227,13 @@ Page({
       // url: "/pages/modifythenickname/modifythenickname"
 
       // url: "/page/secondpackge/pages/articleList/articleList"
-      // url: "/page/secondpackge/pages/calendarList/calendarList"
 
-      url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
+      url: "/page/secondpackge/pages/calendarList/calendarList"
+
+      // url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
+
+      // url: "/page/component/pages/electronicTicket/electronicTicket?oid=2314"
+      
 
       // url: "/pages/giftCollection/giftCollection?oid="
 
@@ -237,6 +241,7 @@ Page({
       // url: "/page/secondpackge/pages/vipPrivilegePage/vipPrivilegePage"
 
       // url: "/pages/sputforward/sputforward"
+
       // url: "/page/component/pages/limitlottery/limitlottery?id=201425",
 
       // url: "/page/component/pages/iWasInvolved/iWasInvolved",

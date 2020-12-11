@@ -15,11 +15,49 @@ Page({
     tgabox:false,
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
-
+    oid:''
 
   },
 
+  getItNow:function(){
+     var _this = this;
 
+     var qqq = Dec.Aese('mod=ticket&operation=buyTicket&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&consignee=' + consignee + '&idcard=' + idcard + '&date=' + _this.data.tabOneId + '&type=' + _this.data.tabTwoId +'&mobile=' + mobile);
+
+     console.log('mod=ticket&operation=buyTicket&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&consignee=' + consignee + '&idcard=' + idcard + '&date=' + _this.data.tabOneId + '&type=' + _this.data.tabTwoId +'&mobile=' + mobile)
+     wx.showLoading({ title: '加载中...',mask:true }) 
+     wx.request({
+       url: app.signindata.comurl + 'toy.php' + qqq,
+       method: 'GET',
+       header: { 'Accept': 'application/json' },
+       success: function (res) {
+         console.log('提交订单',res)
+         wx.hideLoading()
+         if (res.data.ReturnCode == 200) {
+          wx.showModal({
+            title: '提示',
+            content: '领取成功',
+            showCancel: false,
+            success: function (res) {
+              wx.redirectTo({
+                url: "/pages/index/index"
+              });
+            }
+          });
+         }else{
+           if(res.data.Msg){
+             wx.showModal({
+               title: '提示',
+               content: res.data.Msg,
+               showCancel: false,
+               success: function (res) { }
+             })
+           };
+         };
+       }
+     })
+
+  },
 
    /**
    * 生命周期函数--监听页面显示
@@ -42,7 +80,19 @@ Page({
   },
 
 
-
+  //key(需要检错的键） url（传入的需要分割的url地址）
+  getSearchString: function (key, Url) {
+    // 获取URL中?之后的字符
+    var str = Url;
+    var arr = str.split("&");
+    var obj = new Object();
+    // 将每一个数组元素以=分隔并赋给obj对象 
+    for (var i = 0; i < arr.length; i++) {
+      var tmp_arr = arr[i].split("=");
+      obj[decodeURIComponent(tmp_arr[0])] = decodeURIComponent(tmp_arr[1]);
+    }
+    return obj[key];
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -55,7 +105,7 @@ Page({
       let scene = decodeURIComponent(options.scene);
       console.log('options========',scene)
       this.setData({
-        oid: _this.getSearchString('referee', oid) || 0,
+        oid: _this.getSearchString('oid', scene) || 0,
       })
     } else {
       console.log(2)
@@ -79,7 +129,19 @@ Page({
       uid: app.signindata.uid,
       isAuthMobile:app.signindata.isAuthMobile,
       isProduce: app.signindata.isProduce,
+      isManager:app.signindata.isManager || false
     });
+
+    if(!app.signindata.isManager){
+      wx.showModal({
+        content: '暂无权限访问该页面',
+        success: function (res) {
+          wx.redirectTo({
+            url: "/pages/index/index"
+          });
+        }
+      })  
+    };
 
   },
 

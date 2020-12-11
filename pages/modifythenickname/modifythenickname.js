@@ -23,7 +23,9 @@ Page({
     shopDetail:false,
     isShowSearch:false,
     countdown:'',
-    isAwardBox:false
+    isAwardBox:false,
+    // 是否显示投票
+    isShowVote:(Date.parse(new Date())/1000)<=1607702399?true:false
   },
   toggleAwardFun(){
     this.setData({

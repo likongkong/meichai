@@ -114,7 +114,8 @@ App({
     // 不能分享 商品gid
     notAllowShareGoodsId:'',
     // 是否是管理员  有权限进入 发放门票商品的页面
-    isManager:false
+    isManager:false,
+    randommaximum:5
   },
   //一番赏队列倒计时
   // yifanshangIsInQueueFun(time){
@@ -178,15 +179,10 @@ App({
                     }else if(num>=10){
                       num = '0'+num.toString()
                     };       
-                    // // 接口地址  
-                    // _this.signindata.comurl = 'https://api-slb.51chaidan.com/'+num+'/';
-                    // // 发现地址
-                    // _this.signindata.clwcomurl = 'https://clw-slb.51chaidan.com/'+num+'/';
-
                     // 接口地址  
-                    _this.signindata.comurl = 'https://api-slb.51chaidan.com/002/';
+                    _this.signindata.comurl = 'https://api-slb.51chaidan.com/'+num+'/';
                     // 发现地址
-                    _this.signindata.clwcomurl = 'https://clw-slb.51chaidan.com/002/';
+                    _this.signindata.clwcomurl = 'https://clw-slb.51chaidan.com/'+num+'/';
 
                     console.log('app===sigin',_this.signindata.comurl,_this.signindata.clwcomurl,_this.signindata.randommaximum,num,Dec.versionnumber)
                   }else{

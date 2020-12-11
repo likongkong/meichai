@@ -343,7 +343,7 @@
              </block>
 
              <view style='border-top: 1rpx solid #e5e5e5;margin:0 3%;width:94%;'></view>
-             <view class='wholecon' wx:for='{{item.list}}' wx:for-index='num' wx:key='key' bindtap='dismantling' data-status='{{item.status}}' data-oid='{{item.oid}}'>
+             <view class='wholecon' wx:for='{{item.list}}' wx:for-index='num' wx:key='key' bindtap='dismantling' data-status='{{item.status}}' data-oid='{{item.oid}}' data-order_type='{{item.order_type}}'>
                  <view class='wholeconleft'>
                      <view class='wholeconimg'>
                         <image src='{{item.gcover}}' data-num='{{num}}' data-ind='{{index}}' bindload="imageLoadad" style='height: 100%;width:{{item.width||140}}rpx;margin:0 auto;;' mode='aspectFill'></image>

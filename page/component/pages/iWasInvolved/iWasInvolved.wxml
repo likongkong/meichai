@@ -58,9 +58,9 @@
 	 <scroll-view class="iwasscroll" scroll-x="true">
 	    <view class="iwasscrollEve" wx:for='{{voteCalendarList}}' wx:key='key'>
 			   <image class="iwassEveImg" catchtap="jumpLeaflet" data-calendar_id='{{item.calendar_id}}' src="{{item.calendar_img}}" mode="heightFix"></image>
-				 <view class="iwassEveTxt" catchtap="votingInterface" data-brand_id='{{item.brand_id}}' data-calendar_id='{{item.calendar_id}}'>
+				 <view class="iwassEveTxt" catchtap="{{isShowVote?'votingInterface':''}}" data-brand_id='{{item.brand_id}}' data-calendar_id='{{item.calendar_id}}'>
 				    <view class="iwassEveNum">我已投票:{{item.number}}</view>
-						<image class="brandTicImg" mode='aspectFit' src="https://cdn.51chaidan.com/images/sign/calendar/vote.png"></image>
+						<image class="brandTicImg" wx:if='{{isShowVote}}' mode='aspectFit' src="https://cdn.51chaidan.com/images/sign/calendar/vote.png"></image>
 				 </view>
 			</view>
 	 </scroll-view>
@@ -70,54 +70,93 @@
 
 <block wx:if='{{taskInfo}}'>
 
-	  <view class="taskEve" catchtap="{{taskInfo.openMember?'':'jumpVipPage'}}">
+	  <view class="taskEve">
 				<view class="taskEveLeft">
 						<view class="telTitle">开通VIP</view>
 						<view class="telTitleNum">投票券+10</view>
 				</view>
-				<view class="clickButton" style="{{taskInfo.openMember?'background:#ADADAD;':''}}">
-						{{taskInfo.openMember?'已完成':'开通'}}
-				</view>
+				<block wx:if='{{isShowVote}}'>
+						<view class="clickButton" catchtap="{{taskInfo.openMember?'':'jumpVipPage'}}" style="{{taskInfo.openMember?'background:#ADADAD;':''}}">
+								{{taskInfo.openMember?'已完成':'开通'}}
+						</view>					
+				</block>
+				<block wx:else>
+						<view class="clickButton" style="background:#ADADAD;">已完成</view>				
+				</block>
+
+
 		</view>
 
-		<view class="taskEve" catchtap="{{taskInfo.memberTicket?'evereceivefun':'subscrfun'}}" data-num='2'>
+		<view class="taskEve">
 				<view class="taskEveLeft">
 						<view class="telTitle">VIP专属券</view>
 						<view class="telTitleNum">投票券+2</view>
 				</view>
-				<view class="clickButton" style="{{taskInfo.memberTicket?'':'background: #298CF7;'}}">
-					{{taskInfo.memberTicket?'领取':'明日更新'}}
-				</view>
+
+				<block wx:if='{{isShowVote}}'>
+						<view class="clickButton"  catchtap="{{taskInfo.memberTicket?'evereceivefun':'subscrfun'}}" data-num='2' style="{{taskInfo.memberTicket?'':'background: #298CF7;'}}">
+							{{taskInfo.memberTicket?'领取':'明日更新'}}
+						</view>				
+				</block>
+				<block wx:else>
+				    <view class="clickButton" style="background:#ADADAD;">已完成</view>				
+				</block>
+
+
 		</view>
 
-		<view class="taskEve" catchtap="jumpOtherPage" data-num='988'>
+		<view class="taskEve">
 				<view class="taskEveLeft">
 						<view class="telTitle">在线抽盒</view>
 						<view class="telTitleNum">在抽盒机中每抽1盒投票券+2</view>
 				</view>
-				<view class="clickButton">
-					去抽盒
-				</view>
+
+				<block wx:if='{{isShowVote}}'>
+					<view class="clickButton" catchtap="jumpOtherPage" data-num='988'>
+						去抽盒
+					</view>				
+				</block>
+				<block wx:else>
+				    <view class="clickButton" style="background:#ADADAD;">已完成</view>				
+				</block>
+
+
 		</view>		
 
-		<view class="taskEve" catchtap="{{taskInfo.getDays?'evereceivefun':'subscrfun'}}" data-num='1'>
+		<view class="taskEve">
 				<view class="taskEveLeft">
 						<view class="telTitle">每日领取</view>
 						<view class="telTitleNum">投票券+1</view>
 				</view>
-				<view class="clickButton" style="{{taskInfo.getDays?'':'background: #298CF7;'}}">
-						{{taskInfo.getDays?'领取':'明日更新'}}
-				</view>
+
+				<block wx:if='{{isShowVote}}'>
+						<view class="clickButton" catchtap="{{taskInfo.getDays?'evereceivefun':'subscrfun'}}" data-num='1' style="{{taskInfo.getDays?'':'background: #298CF7;'}}">
+								{{taskInfo.getDays?'领取':'明日更新'}}
+						</view>				
+				</block>
+				<block wx:else>
+				    <view class="clickButton" style="background:#ADADAD;">已完成</view>				
+				</block>
+
+
 		</view>
 
-		<view class="taskEve" catchtap="{{taskInfo.daysSign?'jumpOtherPage':'subscrfun'}}" data-num='9'>
+		<view class="taskEve">
 				<view class="taskEveLeft">
 						<view class="telTitle">每日签到</view>
 						<view class="telTitleNum">投票券+1</view>
 				</view>
-				<view class="clickButton" style="{{taskInfo.daysSign?'':'background: #298CF7;'}}">
-					{{taskInfo.daysSign?'去签到':'明日更新'}}
-				</view>
+
+				<block wx:if='{{isShowVote}}'>
+						<view class="clickButton"  catchtap="{{taskInfo.daysSign?'jumpOtherPage':'subscrfun'}}" data-num='9' style="{{taskInfo.daysSign?'':'background: #298CF7;'}}">
+							{{taskInfo.daysSign?'去签到':'明日更新'}}
+						</view>				
+				</block>
+				<block wx:else>
+				    <view class="clickButton" style="background:#ADADAD;">已完成</view>				
+				</block>
+
+
 		</view>
 
 		<view class="taskEve">
@@ -125,30 +164,55 @@
 						<view class="telTitle">邀请好友投票</view>
 						<view class="telTitleNum">每邀请好友投票成功投票券+1(上限50/天)</view>
 				</view>
+
+				<block wx:if='{{isShowVote}}'>
+
+
 				<view class="clickButton" style="{{taskInfo.inviteFriend?'':'background: #298CF7;'}}">
 					{{taskInfo.inviteFriend?'去邀请':'明日更新'}}
 					<button wx:if='{{taskInfo.inviteFriend}}' style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' open-type="share"></button>
-				</view>
+				</view>				
+				</block>
+				<block wx:else>
+				    <view class="clickButton" style="background:#ADADAD;">已完成</view>				
+				</block>
+
 		</view>
 
-		<view class="taskEve" catchtap="{{taskInfo.subscribeToyShowTicket?'bookingExhib':'subscrfun'}}">
+		<view class="taskEve">
 					<view class="taskEveLeft">
 							<view class="telTitle">预约展会门票</view>
 							<view class="telTitleNum">投票券+1</view>
 					</view>
-					<view class="clickButton" style="{{taskInfo.subscribeToyShowTicket?'':'background: #298CF7;'}}">
+
+				<block wx:if='{{isShowVote}}'>
+					<view class="clickButton" catchtap="{{taskInfo.subscribeToyShowTicket?'bookingExhib':'subscrfun'}}" style="{{taskInfo.subscribeToyShowTicket?'':'background: #298CF7;'}}">
 							{{taskInfo.subscribeToyShowTicket?'去预约':'明日更新'}}
-					</view>
+					</view>				
+				</block>
+				<block wx:else>
+				    <view class="clickButton" style="background:#ADADAD;">已完成</view>				
+				</block>
+
+
 		</view>
 
-		<view class="taskEve" catchtap="{{taskInfo.subscribeToyShow?'bookingExhib':'subscrfun'}}">
+		<view class="taskEve">
 				<view class="taskEveLeft">
 						<view class="telTitle">预约展会</view>
 						<view class="telTitleNum">投票券+1</view>
 				</view>
-				<view class="clickButton" style="{{taskInfo.subscribeToyShow?'':'background: #298CF7;'}}">
+
+				<block wx:if='{{isShowVote}}'>
+				<view class="clickButton"  catchtap="{{taskInfo.subscribeToyShow?'bookingExhib':'subscrfun'}}" style="{{taskInfo.subscribeToyShow?'':'background: #298CF7;'}}">
 						{{taskInfo.subscribeToyShow?'去预约':'明日更新'}}
-				</view>
+				</view>				
+				</block>
+				<block wx:else>
+				    <view class="clickButton" style="background:#ADADAD;">已完成</view>				
+				</block>
+
+
 		</view>
 </block>
 
@@ -170,9 +234,9 @@
 	    <scroll-view scroll-y="true" class="iwastipscroll" bindscrolltolower="bindDownLoad">
 				<view class="calendarItem boxShadowEve" wx:for='{{voteCalendarList}}' wx:key='key'>
 					<image class="calendarItemBanner" src="{{item.calendar_img}}" catchtap="jumpLeaflet" data-calendar_id='{{item.calendar_id}}' mode='aspectFit'></image>
-					<view class="calendarItemInfo" catchtap="votingInterface" data-brand_id='{{item.brand_id}}' data-calendar_id='{{item.calendar_id}}'>
+					<view class="calendarItemInfo" catchtap="{{isShowVote?'votingInterface':''}}" data-brand_id='{{item.brand_id}}' data-calendar_id='{{item.calendar_id}}'>
 						<view> <text>{{item.number}}票</text> </view>
-						<view> <image class="calendarItemBanner" src="https://cdn.51chaidan.com/images/sign/calendar/vote.png" mode="widthFix"></image>  <text>投票</text></view>
+						<view wx:if='{{isShowVote}}'> <image class="calendarItemBanner" src="https://cdn.51chaidan.com/images/sign/calendar/vote.png" mode="widthFix"></image>  <text>投票</text></view>
 					</view>
 					<view class="calendarItemBrand">
 						<image src="{{item.brand_logo}}" mode="widthFix"></image>

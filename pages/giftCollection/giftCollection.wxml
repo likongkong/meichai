@@ -6,7 +6,7 @@
 
 
 
-
+<view class="leafletBottomEve boxShadowEve" catchtap="getItNow" style="">立即领取</view>
 
 
 
@@ -39,7 +39,7 @@
 
 
 <!-- 底部导航 -->
-<bnavigation isProduce='{{isProduce}}' isChar='{{false}}'></bnavigation>
+<!-- <bnavigation isProduce='{{isProduce}}' isChar='{{false}}'></bnavigation> -->
 
 
 

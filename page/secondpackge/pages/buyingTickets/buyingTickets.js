@@ -28,7 +28,7 @@ Page({
     // tab one
     tabOneId:1,
     // tab two
-    tabTwoId:1,
+    tabTwoId:'',
 
     priceBreakBox:false,
     // 联系人 名字好手机号
@@ -46,7 +46,9 @@ Page({
     ticketingInOne:'',
     ticketingInTwo:'',
     explainnum:1,
-    realNameSystem:false
+    realNameSystem:false,
+
+    buyNowOrOppor:false
 
   },
   realNameSysfun:function(){
@@ -115,11 +117,14 @@ Page({
 
     console.log('mod=ticket&operation=buyTicket&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&consignee=' + consignee + '&idcard=' + idcard + '&date=' + _this.data.tabOneId + '&type=' + _this.data.tabTwoId +'&mobile=' + mobile)
 
+    wx.showLoading({ title: '加载中...',mask:true }) 
+
     wx.request({
       url: app.signindata.comurl + 'toy.php' + qqq,
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
+        wx.hideLoading()
         console.log('提交订单',res)
         if (res.data.ReturnCode == 200) {
 
@@ -144,11 +149,13 @@ Page({
     console.log('微信支付===', app.signindata.comurl + 'order.php?'+'mod=operate&operation=prepay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1&oid=' + cart_id + '&xcx=1' + '&openid=' + app.signindata.openid)
 
     var q = Dec.Aese('mod=operate&operation=prepay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1&oid=' + cart_id + '&xcx=1' + '&openid=' + app.signindata.openid)
+    wx.showLoading({ title: '加载中...',mask:true }) 
     wx.request({
       url: app.signindata.comurl + 'order.php'+q,
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
+        wx.hideLoading()
         if (res.data.ReturnCode == 200) {
               wx.requestPayment({
                   'timeStamp': res.data.Info.timeStamp.toString(),
@@ -157,14 +164,31 @@ Page({
                   'signType': 'MD5',
                   'paySign': res.data.Info.paySign,
                   'success': function (res) {          
-                      wx.redirectTo({
-                        url: "/pages/dismantlingbox/dismantlingbox"
-                      });
+                      wx.showModal({
+                        title: '',
+                        content: '恭喜您，门票购票成功\n请在门票规定入场时间内\n持本人身份证入场\n详情请到“我的”-“订单”中查看',
+                        cancelText: '查看订单',
+                        confirmText: '继续购买',
+                        confirmColor:'#000',
+                        cancelColor: '#000',
+                        success (res) {
+                          if (res.confirm) {
+                              _this.setData({
+                                buyabulletframe:false
+                              });
+                          } else if (res.cancel) {
+                              wx.navigateTo({
+                                url: "/pages/myorder/myorder?tabnum=3"
+                              });
+                              _this.setData({
+                                buyabulletframe:false
+                              });
+                          }
+                        }
+                      })
 
                    },
-                  'fail':function(res){
-
-                   },
+                  'fail':function(res){},
                   'complete': function (res) {}
                 })
         }else{       
@@ -203,6 +227,10 @@ Page({
      });
   },
   buyabframe:function(){
+    if(this.data.tabTwoId == ''){
+      app.showToastC('请选择票档')
+      return false;
+    };
     this.setData({buyabulletframe:!this.data.buyabulletframe})
   },
   priceBreakBoxFun:function(){
@@ -215,6 +243,7 @@ Page({
     var num = w.currentTarget.dataset.num || 0;
     var ind = w.currentTarget.dataset.ind || 0;
     var obtain = w.currentTarget.dataset.obtain || 0;
+    var buyNowOrOppor = false;
     console.log('num======obtain',num,obtain)
     // tab one
     if(obtain == 1){
@@ -223,9 +252,12 @@ Page({
       var tabTwoId = '';
       var sumPrice = 0;
       for(var i=0 ; i< ticketTwo.length ; i++){
-        if(ticketTwo[i].stock>0){
+        if(ticketTwo[i].stock>0 || ticketTwo[i].isFillChance){
          tabTwoId = ticketTwo[i].type || '';
          sumPrice = ticketTwo[i].price || 0;
+         if(ticketTwo[i].isFillChance){
+            buyNowOrOppor = true;
+         };
          break;
         };
       };
@@ -234,17 +266,23 @@ Page({
         ticketTwo:ticketTwo || [],
         tabTwoId:tabTwoId,
         seldate:ticket[ind].date || '',
-        sumPrice:sumPrice
+        sumPrice:sumPrice,
+        buyNowOrOppor:buyNowOrOppor
       })
     }else if(obtain == 2){ // tab two
       var ticketTwo = _this.data.ticketTwo || [];
-      if(ticketTwo[ind] && ticketTwo[ind].stock <= 0){
+      if(ticketTwo[ind] && ticketTwo[ind].stock <= 0 && !ticketTwo[ind].isFillChance){
         app.showToastC('库存不足');
         return false;
       };
+      if(ticketTwo[ind] && ticketTwo[ind].stock <= 0){
+        buyNowOrOppor = true;
+      };
+
       _this.setData({
         tabTwoId:num,
-        sumPrice:ticketTwo[ind].price || 0
+        sumPrice:ticketTwo[ind].price || 0,
+        buyNowOrOppor:buyNowOrOppor
       });
 
     };
@@ -335,14 +373,18 @@ Page({
           var iid = '';
           var seldate = '';
           var sumPrice = 0;
+          var buyNowOrOppor = false;
           if(ticket && ticket.length != 0){
             tabOneId = ticket[0].day || '';
             seldate = ticket[0].date || '';
             ticketTwo = ticket[0].listTicket || [];
             for(var i=0 ; i< ticketTwo.length ; i++){
-               if(ticketTwo[i].stock>0){
+               if(ticketTwo[i].stock>0 || ticketTwo[i].isFillChance){
                 tabTwoId = ticketTwo[i].type || '';
                 sumPrice = ticketTwo[i].price || 0;
+                if(ticketTwo[i].isFillChance){
+                  buyNowOrOppor = true;
+                };
                 break;
                };
             };
@@ -360,6 +402,7 @@ Page({
             _this.realNameSysfun();
           };
           _this.setData({
+            buyNowOrOppor:buyNowOrOppor,
             banner:res.data.List.banner || [],
             ticket:ticket,
             identity:identity,

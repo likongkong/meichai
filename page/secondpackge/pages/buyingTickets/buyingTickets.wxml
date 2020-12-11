@@ -34,14 +34,14 @@
               <view class="bTEveTwo {{tabTwoId==item.type?'borderBg':''}}" catchtap="tabObtainData" data-obtain='2' data-num='{{item.type}}' data-ind='{{index}}'>
                   <image class="bTEveTwoImg"  mode='aspectFit' src="{{item.img}}"></image>
                   <text class="specialellipsis" wx:if='{{item.subTitle}}' style="margin-left:20rpx;display:inline-block;max-width:200rpx;vertical-align:top;">{{item.subTitle}}</text>
-                  <text>+{{item.title}}</text>
+                  <text class="specialellipsis" style="max-width:320rpx;display:inline-block;vertical-align:top;">+{{item.title}}</text>
                   <text style="float:right;margin-right:15rpx;color:#E94F57;">￥{{item.price}}</text>
               </view>        
           </block>
           <block wx:else>
               <view class="bTEveTwo {{tabTwoId==item.type?'borderBg':''}}" catchtap="tabObtainData" data-obtain='2' data-num='{{item.type}}' data-ind='{{index}}'>
                   <text style="margin-left:30rpx;">{{item.title}}</text>
-                  <text style="float:right;margin-right:30rpx;color:#E94F57;">￥{{item.price}}</text>
+                  <text style="float:right;margin-right:15rpx;color:#E94F57;">￥{{item.price}}</text>
               </view>        
           </block>
       </block>
@@ -56,7 +56,14 @@
 
 <view class="leafletBottom">
    <view class="leafletBottomTxt">门票玩具线下展会领取，购票场次时间内有效</view>
-   <view class="leafletBottomEve boxShadowEve" catchtap="buyabframe" style="width:400rpx;">立即购买</view>
+
+   <view wx:if='{{tabTwoId==""}}' class="leafletBottomEve boxShadowEve" style="width:400rpx;background:#ADADAD;">
+        请选择票档
+   </view>   
+   <view wx:else class="leafletBottomEve boxShadowEve" catchtap="{{buyNowOrOppor?'':'buyabframe'}}" style="width:400rpx;{{buyNowOrOppor?'background:#ADADAD':''}}">
+           <block wx:if='{{buyNowOrOppor}}'>有订单未支付，还有机会</block>
+           <block wx:else>立即购买</block>
+   </view>
 </view>
 
 
@@ -109,7 +116,7 @@
           <view class="ididentity">
              <view class="ididentityeve">
                  <view class="ididentityeveTit">实名制购票</view>
-                 <view class="ididentityeveTit" style="color:#E94F57;">入场需携带对应证件</view>
+                 <view class="ididentityeveTit" style="color:#E94F57;">入场需携带本人身份证</view>
                  <view class="ididentModify" catchtap="identityTipFun">新增</view>
              </view>
 
@@ -188,8 +195,8 @@
 	 <view class="identityTipBox">
         <view class="adreshead" style="line-height:80rpx;">身份信息</view>
         <view style="width:100%;height:26rpx;"></view>
-        <input class='idnumberboxinp' type='text' value='{{inputnamedata}}' bindinput="inputnameChange" placeholder='真实姓名'></input>
-        <input class='idnumberboxinp' type='text' value='{{contactsphone}}' bindinput="contactsChangep" placeholder='请填写手机号' style='margin-top:20rpx;'></input>
+        <input class='idnumberboxinp' type='text' value='{{inputnamedata}}' bindinput="inputnameChange" placeholder='姓名'></input>
+        <input class='idnumberboxinp' type='text' value='{{contactsphone}}' bindinput="contactsChangep" placeholder='手机号' style='margin-top:20rpx;'></input>
         <input class='idnumberboxinp' type='text' value='{{inputidnumberdata}}' bindinput="inputidChange" placeholder='身份证号' style='margin-top:20rpx;'></input>
 
         <view class='awatipbottom'>

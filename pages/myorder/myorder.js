@@ -162,9 +162,17 @@ Page({
   // 订单状态
   dismantling: function (event) {
     var oid = event.currentTarget.dataset.oid || event.target.dataset.oid;
-    wx.navigateTo({    
-      url: "/page/component/pages/orderdetails/orderdetails?oid=" + oid
-    })
+    var order_type = event.currentTarget.dataset.order_type || event.target.dataset.order_type;
+    if(order_type==29){
+      wx.navigateTo({    
+        url: "/page/component/pages/electronicTicket/electronicTicket?oid=" + oid
+      })
+    }else{
+      wx.navigateTo({    
+        url: "/page/component/pages/orderdetails/orderdetails?oid=" + oid
+      })
+    }
+
   },
   // 查看物流
   lookatthelogistics:function(w){

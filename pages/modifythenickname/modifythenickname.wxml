@@ -108,7 +108,7 @@
  
    <view class="leafletBottom">
        <view class="leafletBottomEve boxShadowEve"><button style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' open-type="share"></button>分享日历</view>
-       <view class="leafletBottomEve boxShadowEve" catchtap="votingInterface" data-brand_id='{{calendarDetails.brand_id}}' data-calendar_id='{{calendarDetails.id}}' style="margin-left:60rpx;">投票</view>
+       <view class="leafletBottomEve boxShadowEve" wx:if='{{isShowVote}}' catchtap="votingInterface" data-brand_id='{{calendarDetails.brand_id}}' data-calendar_id='{{calendarDetails.id}}' style="margin-left:60rpx;">投票</view>
    </view>
 
 </block>
@@ -141,7 +141,7 @@
 
               <view class="brandShareBox"><image class="brandShareImg" mode='aspectFit' src="https://cdn.51chaidan.com/images/sign/calendar/share.png"></image>分享<button data-num='{{index}}' data-form='1' style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' open-type="share"></button></view>
 
-              <view class="brandShareBox" catchtap="votingInterface" data-brand_id='{{item.brand_id}}' data-calendar_id='{{brandDetails.id}}'><image class="brandShareImg" mode='aspectFit' src="https://cdn.51chaidan.com/images/sign/calendar/vote.png"></image>投票</view>
+              <view class="brandShareBox" wx:if='{{isShowVote}}' catchtap="votingInterface" data-brand_id='{{item.brand_id}}' data-calendar_id='{{brandDetails.id}}'><image class="brandShareImg" mode='aspectFit' src="https://cdn.51chaidan.com/images/sign/calendar/vote.png"></image>投票</view>
 
 
             </view>
