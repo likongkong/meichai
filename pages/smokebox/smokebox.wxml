@@ -536,15 +536,14 @@
 
 	<view wx:if='{{suboformola}}' style='width:100%;height:100%;background:#000;opacity:0;z-index:100;position:fixed;top:0;left:0;'></view>
 
-	<view wx:if='{{ishowbox}}' style='width:100%;height:100%;position:fixed;top:0px;left:0;z-index:13;'>
+	<view wx:if='{{ishowbox}}' style='width:100%;height:100%;position:fixed;top:0px;left:0;z-index:13;' catchtouchmove="true">
 
 		<view class='bgstyle' style="background:#E8E8E9;opacity:1;position: absolute;left: 0;top:{{statusBarHeightMc}}px" catchtouchmove="true" catchtap='closeselect'>
 			<view style="font-size:25rpx;color:#1989fa;margin:35rpx 35rpx;">返回抽盒机</view>
 		</view>
-
-		<view style='width:100%;heigth:100%;margin:260rpx 0 0 0;text-align:center;position: absolute;left: 0;top:0; overflow-y:scroll'>
+		<view style='width:100%; height:100%;margin:260rpx 0 0 0;text-align:center;position: absolute;left: 0;top:0;'>
 			<scroll-view scroll-y="true" style="width:100%;heigth:100%">
-				<view style='width:{{iewidth}}rpx;height:{{iefheight}}rpx;margin:0 auto;'>
+				<view style="width:{{iewidth}}rpx;height:{{iefheight}}rpx;margin:0 auto;">
 					<image style='width:{{iewidth}}rpx;' mode="widthFix" src='{{activity.imgBox}}' class='{{ischange?"change":""}}' bindload='imageLoadad'></image>
 				</view>
 
@@ -997,9 +996,9 @@
 
 </view>
 
-<view wx:if='{{ishowcollectchip}}' style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:99;'>
+<view wx:if='{{ishowcollectchip}}' style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:99;' catchtouchmove="true">
 <!-- <view style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:99;'> -->
-	<view class='bgstyle' style="background:#E8E8E9;opacity:1;position: absolute;left: 0;top:{{statusBarHeightMc}}px" catchtap='closecollectchip'></view>
+	<view class='bgstyle' style="background:#E8E8E9;opacity:1;position: absolute;left: 0;top:{{statusBarHeightMc}}px" catchtap='closecollectchip' catchtouchmove="true"></view>
 
 			<block wx:if='{{whole_boxGift}}'>
 				<view class="wholeBoxGiftInfobox">
@@ -1036,7 +1035,7 @@
 				<!-- <view style="width:700rpx;height:{{isDeduct && activity.userBlindBoxAmount!=0?chipItemHeight*chiprownum + 340 + 220:chipItemHeight*chiprownum + 340}}rpx;background:white;position:absolute;top:0;bottom:0;left:25rpx;margin:auto 0;border-radius:10rpx;" catchtouchmove="myCatchTouch"> -->
 			
 			
-				<view style="width:750rpx; height:100%; margin: 180rpx 0 0 0;border-radius:10rpx;padding:50rpx 0;box-sizing: border-box;overflow:scroll">
+				<view style="width:750rpx; height:{{wwheight-statusBarHeightMc}}px; margin: 180rpx 0 0 0;border-radius:10rpx;padding:50rpx 0;box-sizing: border-box;">
 					<image style="width:40rpx;height:40rpx;position:absolute;top:10rpx;right:25rpx;" src="../images/explain.png" catchtap="showchiprule"></image>
 					<scroll-view class="duanhe" scroll-y="true" style="width:100%;height:100%;">
 						<view style="padding:0 25rpx;box-sizing: border-box;">
@@ -1126,7 +1125,7 @@
 							</view>
 						</view>
 						<!-- VIP -->
-						<!-- <view class="vipBox" catchtap="{{!isVip?'jumpVipPage':isVip && vipTimeLimitMoney?'getAward':'subscrfun'}}">
+						<view class="vipBox" catchtap="{{!isVip?'jumpVipPage':isVip && vipTimeLimitMoney?'getAward':'subscrfun'}}">
 							<view>
 								<block>
 									<text wx:if="{{!isVip}}" class="vipBoxTxt">开通VIP可领取抽盒金</text>
@@ -1142,7 +1141,7 @@
 								<view wx:elif="{{isVip && vipTimeLimitMoney}}" class="vipBoxBtn">领取</view>
 								<view wx:else class="vipBoxBtn">明日领取</view>
 							</block>
-						</view> -->
+						</view>
 						</view>
 
 			  	</scroll-view>

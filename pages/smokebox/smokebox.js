@@ -269,6 +269,7 @@ Page({
         if (res.data.ReturnCode == 200) {
           app.showToastC(res.data.Msg);
           _this.getInfo();
+          _this.placeorder();
           // let change = "listData["+ index +"].status";
           // _this.setData({
           //   [change]: false,

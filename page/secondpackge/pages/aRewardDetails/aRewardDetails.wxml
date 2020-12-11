@@ -158,15 +158,15 @@
 <view class="wsh" style="height:{{worthSubsidiaryHeight}}px;margin-top:{{topheight}}px;"  catchtouchmove="true" wx:if='{{scrapingPur&&activity.suplusNum>0}}'>
     <view class="tgimgboxgb" catchtap="scrapingPurfun"></view>
 
-    <view catchtap="scrapingPurfun" wx:if="{{!activity.isAllHidePrice}}" style="width:100%;height:{{worthSubsidiaryHeight-117}}px;display: flex;align-items: center;justify-content: center;position:absolute;left: 0;top: 0;">
-    <view class="worthSubsidiary" style="{{!isPurchase?'height:844rpx;':''}}" catchtap="zhanwei">
+    <view catchtap="scrapingPurfun" wx:if="{{!activity.isAllHidePrice}}" style="width:100%;height:{{isDeduct && blindboxMoney!=0? worthSubsidiaryHeight-157:worthSubsidiaryHeight-117}}px;display: flex;align-items: center;justify-content: center;position:absolute;left: 0;top: 0;">
+    <view class="worthSubsidiary" style="{{!isPurchase?'height:844rpx;':isDeduct && blindboxMoney!=0?'height:844rpx;':''}}" catchtap="zhanwei">
         <view class="adcspecialPrice">
             <view>
                 <image src="{{finalReward.img}}" mode="aspectFill" mode='aspectFit'></image>
                 <text><block wx:if='{{finalReward.isShowPrice}}'>最终赏 价值{{finalReward.shop_price}}</block><block wx:else>超稀有!</block></text>
             </view>
         </view>
-        <scroll-view scroll-y="true" class="otherPrice">
+        <scroll-view scroll-y="true" class="otherPrice" style="{{isDeduct && blindboxMoney!=0?'height: 252rpx;':''}}">
             <!-- <view wx:for='{{goodsdata}}' wx:key='key' style="overflow: hidden;margin-bottom:10rpx;" wx:if='{{item.gear!="终"}}'> -->
             <view wx:for='{{goodsdata}}' wx:key='key' style="overflow: hidden;margin-bottom:10rpx;display: flex;justify-content: space-between;">
                 <view class="otherPricecom" style="text-align: right;width:76rpx;">{{item.gear=="终"?'最':''}}{{item.gear}}赏</view>
