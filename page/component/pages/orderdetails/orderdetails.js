@@ -74,6 +74,9 @@ Page({
     // 上传截图提示弹框
     screenshottipsiftr: false,
     pictboxbox:false,
+
+    // 电子票
+    electronicTicket:true
   },
   pictboxboxfun:function(){
     this.setData({ pictboxbox:false});

@@ -22,17 +22,20 @@ Page({
   getItNow:function(){
      var _this = this;
 
-     var qqq = Dec.Aese('mod=ticket&operation=buyTicket&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&consignee=' + consignee + '&idcard=' + idcard + '&date=' + _this.data.tabOneId + '&type=' + _this.data.tabTwoId +'&mobile=' + mobile);
+     var qqq = Dec.Aese('mod=ticket&operation=varifyTicket&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&oid=' + _this.data.oid);
 
-     console.log('mod=ticket&operation=buyTicket&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&consignee=' + consignee + '&idcard=' + idcard + '&date=' + _this.data.tabOneId + '&type=' + _this.data.tabTwoId +'&mobile=' + mobile)
+     console.log('mod=ticket&operation=varifyTicket&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&oid=' + _this.data.oid)
+
      wx.showLoading({ title: '加载中...',mask:true }) 
      wx.request({
        url: app.signindata.comurl + 'toy.php' + qqq,
        method: 'GET',
        header: { 'Accept': 'application/json' },
        success: function (res) {
-         console.log('提交订单',res)
-         wx.hideLoading()
+         console.log('领取礼物',res)
+         wx.hideLoading();
+         // 刷新完自带加载样式回去
+         wx.stopPullDownRefresh();          
          if (res.data.ReturnCode == 200) {
           wx.showModal({
             title: '提示',
@@ -58,7 +61,45 @@ Page({
      })
 
   },
+  getData:function(){
+    var _this = this;
 
+
+
+    var qqq = Dec.Aese('mod=ticket&operation=getTicketInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&oid=' + _this.data.oid);
+
+    console.log('mod=ticket&operation=getTicketInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&oid=' + _this.data.oid)
+    
+    wx.showLoading({ title: '加载中...',mask:true })
+
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + qqq,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('订单数据',res)
+        wx.hideLoading();
+        // 刷新完自带加载样式回去
+        wx.stopPullDownRefresh();
+
+        if (res.data.ReturnCode == 200) {
+            _this.setData({
+              giftData:res.data.Info || {}
+            })
+        }else{
+          if(res.data.Msg){
+            wx.showModal({
+              title: '提示',
+              content: res.data.Msg,
+              showCancel: false,
+              success: function (res) { }
+            })
+          };
+        };
+      }
+    })
+
+ },
    /**
    * 生命周期函数--监听页面显示
    */
@@ -135,13 +176,18 @@ Page({
     if(!app.signindata.isManager){
       wx.showModal({
         content: '暂无权限访问该页面',
+        showCancel:false,
         success: function (res) {
           wx.redirectTo({
             url: "/pages/index/index"
           });
         }
       })  
+    }else{
+      this.getData()
     };
+
+
 
   },
 
@@ -238,7 +284,7 @@ Page({
   },
 
   onPullDownRefresh: function () {
-
+    this.getData()
   },
   onReachBottom: function () {
 

@@ -230,7 +230,7 @@ Page({
 
       // url: "/page/secondpackge/pages/calendarList/calendarList"
 
-      // url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
+      url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
 
       // url: "/page/component/pages/electronicTicket/electronicTicket?oid=2314"
       
@@ -239,7 +239,7 @@ Page({
 
       // url: "/page/secondpackge/pages/priorityVoting/priorityVoting"
 
-      url: "/page/secondpackge/pages/luckyDraw/luckyDraw"
+      // url: "/page/secondpackge/pages/luckyDraw/luckyDraw"
       
       // url: "/page/secondpackge/pages/vipPrivilegePage/vipPrivilegePage"
 
