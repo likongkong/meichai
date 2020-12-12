@@ -113,6 +113,8 @@
         "pages/vipPrivilegePage/vipPrivilegePage",
         "pages/aRewardList/aRewardList",
         "pages/buyingTickets/buyingTickets",
+        "pages/priorityVoting/priorityVoting",
+        "pages/luckyDraw/luckyDraw",
         "pages/articleList/articleList" 
       ]
     }

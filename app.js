@@ -508,6 +508,10 @@ App({
   // 45  日历列表
   // 46  日历详情
   // 47  日历 我的投票
+
+  // 48 priorityVoting  优先权抽选
+  // 49 luckyDraw  抽奖活动
+
   userstatistics: function (num) {
     var _this = this;
     var num = num || 0
@@ -1246,5 +1250,7 @@ App({
 // giftCollection 领取礼物
 // electronicTicket 电子票详情
 
+// priorityVoting  优先权抽选
+// luckyDraw  抽奖活动
 
 

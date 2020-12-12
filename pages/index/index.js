@@ -228,7 +228,7 @@ Page({
 
       // url: "/page/secondpackge/pages/articleList/articleList"
 
-      url: "/page/secondpackge/pages/calendarList/calendarList"
+      // url: "/page/secondpackge/pages/calendarList/calendarList"
 
       // url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
 
@@ -237,7 +237,10 @@ Page({
 
       // url: "/pages/giftCollection/giftCollection?oid="
 
+      // url: "/page/secondpackge/pages/priorityVoting/priorityVoting"
 
+      url: "/page/secondpackge/pages/luckyDraw/luckyDraw"
+      
       // url: "/page/secondpackge/pages/vipPrivilegePage/vipPrivilegePage"
 
       // url: "/pages/sputforward/sputforward"
