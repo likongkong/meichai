@@ -1,0 +1,124 @@
+/* page/secondpackge//pages/aRewardDetails/aRewardDetails.wxss */
+@import "../../../../pages/signin/signin.wxss";
+@import "../../../../common/newcoupon.wxss";
+@import "../../../../common/tabbar.wxss";
+
+page{
+  background:#f4f5f9;
+  padding-bottom: 230rpx;
+}
+
+.contentTopWrap{
+  padding: 55rpx 35rpx 30rpx 35rpx;
+  box-sizing: border-box;
+}
+.buyTicketsBtn{
+  width: 680rpx;
+  height: 90rpx;
+  background: #DEB640;
+  border-radius: 90rpx;
+  text-align: center;
+  line-height: 90rpx;
+  color: #B95B06;
+  font-size: 26rpx;
+}
+
+.contentBottomWrap{
+  padding: 0 28rpx;
+  box-sizing: border-box;
+}
+.introduceTitle{
+  font-size: 24rpx;
+  margin-bottom: 14rpx;
+  display: block;
+}
+.introduceTxt{
+  font-size: 26rpx;
+  color: #666666;
+}
+
+.cardWrap{
+  width: 690rpx;
+  height: 360rpx;
+  background: #666666;
+  border-radius: 14rpx;
+  margin-bottom: 15rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.cardLWrap{
+  width: 490rpx;
+  height: 360rpx;
+}
+.cardRWrap{
+  width: 200rpx;
+  height: 360rpx;
+  position: relative;
+}
+.cardRT{
+  position: absolute;
+  top: 20rpx;
+  left: 10rpx;
+}
+.cardRT text{
+  font-size: 20rpx;
+  font-weight: bold;
+  color: #fff;
+  display: block;
+}
+.cardRC{
+  width: 150rpx;
+  height: 60rpx;
+  border-radius: 60rpx;
+  color: #fff;
+  font-size: 26rpx;
+  line-height: 60rpx;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  margin-top: -44rpx;
+}
+.cardRCImg{
+  width: 120rpx;
+  height: 120rpx;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  margin-top: -68rpx;
+}
+.cardRCImg image{
+  width: 100%;
+  height: auto;
+}
+.red{
+  background: #E94F57;
+}
+.blue{
+  background: #298CF7;
+}
+.cardRB{
+  position: absolute;
+  bottom: 10rpx;
+  left: 10rpx;
+}
+.cardRB>view{
+  display: flex;
+}
+.cardRB>view text:first-child{
+  width: 56rpx;
+  font-size: 14rpx;
+  color: #fff;
+  display: block;
+}
+.cardRB>view text:last-child{
+  font-size: 14rpx;
+  color: #fff;
+  display: block;
+}
+.activityName{
+  font-size: 20rpx;
+  font-weight: bold;
+  color: #fff;
+  display: block;
+}
