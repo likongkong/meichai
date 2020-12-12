@@ -23,3 +23,28 @@ page{
   margin:auto;
   z-index: 1;
 }
+.giftBox{
+  padding: 60rpx;
+}
+.giftBoxEve{
+  padding-top: 40rpx;
+  font-size: 26rpx;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

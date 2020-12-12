@@ -10,7 +10,88 @@
 <view class='box' style="{{upserimgbox||upserimgboxact?'position:fixed;top:0;left:0;right:0;bottom:0;':''}}padding-bottom:110rpx;">
  
 
-<view wx:if='{{comdata.order_type!=6}}'>
+ <!-- 电子 -->
+<block wx:if='{{comdata.isToyshowDrawGoods && comdata.status == 2}}'>
+
+     <view class="ordeQRcode">
+         <view class="ordeQRImgBox">
+            <image src="{{comdata.qrcode}}" class="ordeQRImgBoxImg"></image>
+         </view>
+         <view class="ordeQRTitN" style="text-align:center;border-top:0;">需凭本人身份证线下扫码领取</view>
+     </view>
+
+     <view class='orderdetcon'>         
+            <view class='odchteadcom' data-gid='{{comdata.gid}}' data-order_type='{{comdata.order_type}}' data-activity_id='{{comdata.activity_id}}' style="border-top:0;" bindtap='addressmanagement'>
+               <view class='odchcomleft'>
+                   <view class='odchlefimg'>
+                       <image src='{{comdata.gcover}}' bindload="imageLoadad" style='height: 100%;width:{{comdata.width||140}}rpx;margin:0 auto;display:{{comdata.width?"block":"none"}};' mode='aspectFill'></image>
+                   </view>
+               </view>
+               <view class='odchcomright' style='position:relative;' wx:if='{{comdata.order_type!=7}}'>
+                      <view class='odchrhead multilineellipsis'>{{comdata.gname}}</view>
+                      <view class='wholeconnum specialellipsis' wx:if='{{comdata.prize}}' style='padding-top:10rpx;'>奖品:{{comdata.prize}}</view> 
+                      <view class='wholeconnum specialellipsis'>
+                           <view class='wholeconnumdisilin'>
+                              <block wx:if='{{comdata.order_type==1&&comdata.suitName&&comdata.suitNumber}}'>
+                                 {{comdata.suitName}}x{{comdata.suitNumber}}
+                              </block>
+                              <block wx:else>数量:x{{comdata.gnumber}}<text wx:if='{{comdata.roleName}}' style='color:#ff2840;margin-left:15rpx;'>款式:{{comdata.roleName}}</text></block>                           
+                           </view>
+                           <view class='wholeconnumdisilin' wx:if='{{comdata.size}}'>尺寸:{{comdata.size}}</view>
+                           <view class='wholeconnumdisilin' wx:if='{{comdata.color}}'>颜色:{{comdata.color}}</view>
+                      </view>
+                      <view class='wholeconnum specialellipsis' wx:if='{{comdata.customer_note&&(comdata.status==1||comdata.status==2||comdata.status==12||comdata.status==13||comdata.status==3||comdata.status==4)}}'>备注:{{comdata.customer_note}}</view>                                  
+                      <view class='officialreply' wx:if='{{comdata.customer_reply&&(comdata.status==1||comdata.status==2||comdata.status==12||comdata.status==13||comdata.status==4||comdata.status==16)}}'>回复:{{comdata.customer_reply}}</view>
+                      <view class='taxrpice'>
+                          <view class='taxpricleft' wx:if='{{!comdata.roleName}}'>
+                            <block wx:if='{{comdata.order_type==1&&comdata.goods_price==0}}'>组合赠品</block>
+                            <block wx:elif='{{comdata.order_type==3}}'>拆币兑换</block>
+                            <block wx:elif='{{comdata.order_type==4}}'>邀请奖励</block>
+                            <block wx:elif='{{comdata.order_type==2||comdata.order_type==9}}'>免费</block>
+                            <block wx:elif='{{comdata.order_type==1&&comdata.suitPrice&&comdata.suitName&&comdata.suitNumber}}'>￥{{comdata.suitPrice}}</block>
+                            <block wx:else>￥{{comdata.goods_price}}</block>
+                          </view>
+                      </view>
+                  
+               </view>
+
+            </view>
+            <view class='totalmon'>
+ 
+                <view class='totalmonnum' wx:if='{{comdata.order_type==1}}'>
+                    合计:￥{{comdata.amount}}
+                </view>
+ 
+                <view class='daifukuan' style='text-align:left;' wx:if='{{comdata.order_type==6&&(comdata.status==18||comdata.status==0)}}'>
+                  结束时间 : {{comdata.gift_time}}
+                </view> 
+  
+            </view>  
+
+            <view style="padding:0 0 20rpx 0;background:#fff;">
+                <view class="ordeQRTitle" style="border-top: 1rpx solid #e5e5e5;">
+                    <view class="ordeQRTitN"><text style="color:#666;">配送方式：</text>线下展会扫码领取</view>
+                </view>
+            </view>
+
+            <view style="padding:0 0 20rpx 0;background:#fff;">
+                <view class="ordeQRTitle">
+                    <view class="ordeQRTitN"><text style="color:#666;display:inline-block;vertical-align:top;width:120rpx;">参展人：</text>{{comdata.consignee}} {{comdata.mobile}}</view>
+                    <view class="ordeQRTitN"><text style="color:#666;display:inline-block;vertical-align:top;width:120rpx;"></text>身份证 {{comdata.idcard}}</view>
+                </view>
+            </view>           
+                     
+ 
+     </view>
+
+
+
+
+</block>
+<!-- 普通 -->
+<block wx:else>
+
+    <view wx:if='{{comdata.order_type!=6}}'>
       <view class='rdheadback' wx:if='{{comdata.status==0&&comdata.order_type!=7}}'>
            <block wx:if='{{comdata.order_type==24&&(comdata.isBalances==1||comdata.isBalances==2)}}'>已付定金</block>
            <block wx:else>等待付款</block>
@@ -21,7 +102,6 @@
            <image class='rdheadimg' src='../../../../pages/images/icon_wallet2.png'></image>
       </view>
       <view class='rdhead' wx:if='{{comdata.status==2}}'>
-           <!-- 等待拆单 -->
            支付成功
            <image class='rdheadimg' src='../../../../pages/images/icon_clock2.png'></image>
       </view>      
@@ -52,7 +132,7 @@
 
   <!-- {{comdata.order_type!=7&&comdata.status!=16&&comdata.status!=1&&comdata.status!=8&&comdata.status!=11}}   -->
   <block wx:if="{{comdata.consignee != 0 && comdata.consignee != ''}}">
-  <view wx:if='{{comdata.order_type!=7&&(comdata.status!= 0||comdata.status!=8)&&(comdata.order_type!=2&&(comdata.status!=1||comdata.status!=16||comdata.status!=11))}}' class='boxch'>
+    <view wx:if='{{comdata.order_type!=7&&(comdata.status!= 0||comdata.status!=8)&&(comdata.order_type!=2&&(comdata.status!=1||comdata.status!=16||comdata.status!=11))}}' class='boxch'>
       <view class='ordetaaddleft'>
           <image class='orderaddimg' src='../../../../pages/images/icon_address2.png'></image>
       </view>
@@ -64,24 +144,24 @@
           <view class='ordaddcon'>收货地址:{{comdata.province}}  {{comdata.city}}  {{comdata.district}} {{comdata.address}}
           </view>
       </view>
-  </view>
+    </view>
   </block>
 
-  <view class='addressmodify' wx:if='{{comdata.canChangedAddress&&comdata.status!=20}}'>注:每个订单只可修改一次收货地址<view class='modifaddclick' catchtap='modaddfun'>修改地址</view></view>
+    <view class='addressmodify' wx:if='{{comdata.canChangedAddress&&comdata.status!=20}}'>注:每个订单只可修改一次收货地址<view class='modifaddclick' catchtap='modaddfun'>修改地址</view></view>
 
-  <view wx:if='{{comdata.order_type==7&&comdata.status==2}}' class='boxch'>
-      <view class='ordetaaddleft'>
-          <image class='orderaddimg' src='../../../../pages/images/icon_address2.png'></image>
-      </view>
-      <view class='ordetaaddright'>
-          <view class='ordaddhead'>
-              <view class='odhleft'>收货人:{{comdata.consignee}}</view>
-              <view class='odhright'>{{comdata.mobile}}</view>
-          </view>
-          <view class='ordaddcon'>收货地址:{{comdata.province}}  {{comdata.city}}  {{comdata.district}} {{comdata.address}}
-          </view>
-      </view>
-  </view>
+        <view wx:if='{{comdata.order_type==7&&comdata.status==2}}' class='boxch'>
+            <view class='ordetaaddleft'>
+                <image class='orderaddimg' src='../../../../pages/images/icon_address2.png'></image>
+            </view>
+            <view class='ordetaaddright'>
+                <view class='ordaddhead'>
+                    <view class='odhleft'>收货人:{{comdata.consignee}}</view>
+                    <view class='odhright'>{{comdata.mobile}}</view>
+                </view>
+                <view class='ordaddcon'>收货地址:{{comdata.province}}  {{comdata.city}}  {{comdata.district}} {{comdata.address}}
+                </view>
+            </view>
+        </view>
 
       
 
@@ -798,7 +878,7 @@
                       分享好友
                    </view>
  
-<view class='totalmoncright' wx:if='{{comdata.order_type==1}}' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;margin-right:10rpx;' bindtap='personalhomepage'>
+                  <view class='totalmoncright' wx:if='{{comdata.order_type==1}}' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;margin-right:10rpx;' bindtap='personalhomepage'>
                   发帖推荐
                   </view>
  
@@ -820,7 +900,7 @@
 
                    <view class='totalmoncrightcel'  data-oid='{{comdata.oid}}' style='margin-right:10rpx;position: relative;' data-gcover='{{comdata.gcover}}' bindtap='lookatthelogistics'>查看物流</view>       
  
-<view class='totalmoncright' wx:if='{{comdata.order_type==1}}' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;margin-right:10rpx;' bindtap='personalhomepage'>发帖推荐</view>
+                    <view class='totalmoncright' wx:if='{{comdata.order_type==1}}' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;margin-right:10rpx;' bindtap='personalhomepage'>发帖推荐</view>
  
  
  
@@ -901,6 +981,11 @@
  
           </view>
      </view>
+
+
+</block>
+
+
      <view class='orderbott'>
          <view class='orderbottcon'>订单编号:{{comdata.order_sn}}</view>
          <view class='orderbottcon' wx:if='{{comdata.status!=0&&comdata.status!=16&&comdata.status!=1&&comdata.status!=8&&comdata.status!=11}}'>支付方式:{{comdata.payment}}支付</view>
@@ -919,70 +1004,71 @@
     </view>     
 </view>
  
+
  
-<!--  背景颜色  -->
-<view class='tipback' wx:if='{{tipback}}' catchtouchmove="preventD"></view>
-<!--  支付订单  -->
-<view class='paymentorderbombbox' wx:if='{{paymentiftr}}'>
-    <view class='paymentboxhead'>
-        支付订单
-        <image src='../../../../pages/images/forknumber.png' class='paymentboxheadimg' bindtap='paymentboxheadfun'></image>
-    </view>
-    <view class='paymenttxt' style='color:#333;padding-top:30rpx;'>请在1小时之内完成支付:￥{{comdata.amount}}元</view>
-    <view class='paymenttxt' style='color:#22ce2a;'>付款成功后才可以拆单成功</view>
-    <view class='paymenwexinzf'>
-       <image src='../../../../pages/images/icon_webchat.png' class='paymenwexinzfimg'></image>
-       <view class='paymenwexinzftxt'>微信支付</view>
-       <image src='../../../../pages/images/icon_check.png' class='paymenwexiftrimg'></image>
-    </view>
-    <view class='payment' bindtap='paymentmony'>确认支付</view>
-</view>
+        <!--  背景颜色  -->
+        <view class='tipback' wx:if='{{tipback}}' catchtouchmove="preventD"></view>
+        <!--  支付订单  -->
+        <view class='paymentorderbombbox' wx:if='{{paymentiftr}}'>
+            <view class='paymentboxhead'>
+                支付订单
+                <image src='../../../../pages/images/forknumber.png' class='paymentboxheadimg' bindtap='paymentboxheadfun'></image>
+            </view>
+            <view class='paymenttxt' style='color:#333;padding-top:30rpx;'>请在1小时之内完成支付:￥{{comdata.amount}}元</view>
+            <view class='paymenttxt' style='color:#22ce2a;'>付款成功后才可以拆单成功</view>
+            <view class='paymenwexinzf'>
+            <image src='../../../../pages/images/icon_webchat.png' class='paymenwexinzfimg'></image>
+            <view class='paymenwexinzftxt'>微信支付</view>
+            <image src='../../../../pages/images/icon_check.png' class='paymenwexiftrimg'></image>
+            </view>
+            <view class='payment' bindtap='paymentmony'>确认支付</view>
+        </view>
 
  
  
-<!--  提交订单弹框防止多次提交  -->
-<view wx:if='{{suboformola}}' style='width:100%;height:100%;background:#000;opacity: 0.4;z-index: 1999;position: fixed;top: 0;left: 0;'></view>
+        <!--  提交订单弹框防止多次提交  -->
+        <view wx:if='{{suboformola}}' style='width:100%;height:100%;background:#000;opacity: 0.4;z-index: 1999;position: fixed;top: 0;left: 0;'></view>
  
  
  
-<!--   领奖提示  -->
-<view class='wsh' wx:if='{{awardrresentiftr}}'>
-    <view class='tgimgboxgb' style='background:#ccc;'  catchtap='awardrresentiftr'></view>
-    <view class='awardrresentation'>
-        <view class='adreshead'>领奖提示</view>
-        <view class='adrestxt'>
-           <text>{{rpinfotip}}</text>
-        </view>
-        <scroll-view class='adresscr' scroll-x="true" scroll-with-animation="true">
-            <view class='adresscrbox' wx:for='{{awardrresentation.Goods}}' wx:key='key' data-gid='{{item.goods_id}}' catchtap='addressmanagement'>
-                <image src='{{item.goods_thumb}}' class='adresbimg'></image>
-                <view class='disanum_sb_txtone multilineellipsis' style='color:#666;'>
-                    {{item.pre_name}}{{item.ds}}{{item.goods_name}}
+        <!--   领奖提示  -->
+        <view class='wsh' wx:if='{{awardrresentiftr}}'>
+            <view class='tgimgboxgb' style='background:#ccc;'  catchtap='awardrresentiftr'></view>
+            <view class='awardrresentation'>
+                <view class='adreshead'>领奖提示</view>
+                <view class='adrestxt'>
+                <text>{{rpinfotip}}</text>
                 </view>
-                <view class='specialellipsis' style='width:100%;height:40rpx;line-height:40rpx;color:#f93f45;font-size:22rpx;text-align:center;vertical-align:top;position:relative;top:5rpx;'>
-                    ￥{{item.goods_price}}
+                <scroll-view class='adresscr' scroll-x="true" scroll-with-animation="true">
+                    <view class='adresscrbox' wx:for='{{awardrresentation.Goods}}' wx:key='key' data-gid='{{item.goods_id}}' catchtap='addressmanagement'>
+                        <image src='{{item.goods_thumb}}' class='adresbimg'></image>
+                        <view class='disanum_sb_txtone multilineellipsis' style='color:#666;'>
+                            {{item.pre_name}}{{item.ds}}{{item.goods_name}}
+                        </view>
+                        <view class='specialellipsis' style='width:100%;height:40rpx;line-height:40rpx;color:#f93f45;font-size:22rpx;text-align:center;vertical-align:top;position:relative;top:5rpx;'>
+                            ￥{{item.goods_price}}
+                        </view>
+                    </view>
+                </scroll-view>
+                <view class='chaishopbutbox'>
+                <!-- <view class='chaishopbutleft' catchtap='payfreight'>支付运费领奖</view> -->
+                <view class='chaishopbut' data-href='{{awardrresentationjump.href}}' data-item_type='{{awardrresentationjump.item_type}}' catchtap='comindellistjump'  style='position:absolute;left:0;right:0;bottom:0;top:0;margin:auto;'>挑选商品领奖</view>
                 </view>
+                <view class='chaidanboxbor'></view>
+                <view class='chaidanboxborbot'>购买商品领奖后可以报名付费专享活动哦~</view>
+                <scroll-view class='adresbotsrc' scroll-x="true" scroll-with-animation="true">
+                    <view class='adresbotsrcbox' wx:for='{{awardrresentation.activity}}' wx:key='key' data-gid='{{item.id}}' catchtap='actexempfun'>
+                        <image src='{{item.goods_thumb}}' class='adresbimgbot'></image>
+                        <view class='adresbottxt'>
+                            <image src='http://www.51chaidan.com/images/default/person1.png' class='adresbimguser'></image>
+                            {{item.users}}
+                        </view>
+                    </view>
+                </scroll-view>
+                <view class='adresboxbottonbut' catchtap='acetlistfun'>更多付费专享活动</view>
             </view>
-        </scroll-view>
-        <view class='chaishopbutbox'>
-           <!-- <view class='chaishopbutleft' catchtap='payfreight'>支付运费领奖</view> -->
-           <view class='chaishopbut' data-href='{{awardrresentationjump.href}}' data-item_type='{{awardrresentationjump.item_type}}' catchtap='comindellistjump'  style='position:absolute;left:0;right:0;bottom:0;top:0;margin:auto;'>挑选商品领奖</view>
+        
         </view>
-        <view class='chaidanboxbor'></view>
-        <view class='chaidanboxborbot'>购买商品领奖后可以报名付费专享活动哦~</view>
-        <scroll-view class='adresbotsrc' scroll-x="true" scroll-with-animation="true">
-            <view class='adresbotsrcbox' wx:for='{{awardrresentation.activity}}' wx:key='key' data-gid='{{item.id}}' catchtap='actexempfun'>
-                <image src='{{item.goods_thumb}}' class='adresbimgbot'></image>
-                <view class='adresbottxt'>
-                    <image src='http://www.51chaidan.com/images/default/person1.png' class='adresbimguser'></image>
-                    {{item.users}}
-                </view>
-            </view>
-        </scroll-view>
-        <view class='adresboxbottonbut' catchtap='acetlistfun'>更多付费专享活动</view>
-    </view>
- 
-</view>
  
 <!--  首页按钮  -->
 <!-- <view class='frontpagebuttonact' catchtap='frontpagebutton' style='bottom:685rpx;' style='bottom:465rpx;'>
@@ -991,54 +1077,54 @@
 </view> -->
  
 
-<!-- closeupserimg -->
-<view class='tgimgbox' wx:if='{{upserimgbox}}'>
-   <view class='tgimgboxgb' style='opacity:0.7;' catchtap='closeupserimg'></view>
-   <view class='upsertgimgbcon' style='{{windowHeight<500?"height:800rpx;":"height:1115rpx;"}}'>
-   <view style='width:100%;height:100%;overflow: scroll;'>
-       <view style='{{comdata.order_type==10?"width:435rpx;":"width:540rpx;"}}height:700rpx;margin:0 auto;position:relative;'>
-         <image class='tgimcimg'  mode='aspectFit' src='{{actimgshare}}' style='{{comdata.order_type==10?"width:435rpx;":"width:540rpx;"}}height:700rpx;margin:0 auto;position:absolute;'></image>
-       </view>
+        <!-- closeupserimg -->
+        <view class='tgimgbox' wx:if='{{upserimgbox}}'>
+        <view class='tgimgboxgb' style='opacity:0.7;' catchtap='closeupserimg'></view>
+        <view class='upsertgimgbcon' style='{{windowHeight<500?"height:800rpx;":"height:1115rpx;"}}'>
+        <view style='width:100%;height:100%;overflow: scroll;'>
+            <view style='{{comdata.order_type==10?"width:435rpx;":"width:540rpx;"}}height:700rpx;margin:0 auto;position:relative;'>
+                <image class='tgimcimg'  mode='aspectFit' src='{{actimgshare}}' style='{{comdata.order_type==10?"width:435rpx;":"width:540rpx;"}}height:700rpx;margin:0 auto;position:absolute;'></image>
+            </view>
+                
+            <view class='upserbutbox'></view>
+            <view style='height:300rpx;width:100%;position:relative;'>
+                <view style='width:170rpx;height:260rpx;position: absolute;left:14rpx;bottom:20rpx;' bindtap='screenshotpreviewImgzhong'>
+                    <image src='http://www.51chaidan.com/images/default/consultAudit.jpg' style='display:block;width:130rpx;height:220rpx;margin:auto;position: relative;'></image>
+                    <view style='width:100%;height:40rpx;color:#fff;font-size:22rpx;text-align:center;line-height:40rpx;text-decoration:underline;'>查看截图参考</view>
+                </view>
+
+                <text style='width:400rpx;height:230rpx;position: absolute;left:200rpx;bottom:60rpx;font-size:26rpx;color:#fff;overflow: scroll;'>{{share_descWinningtheprize}}</text>
+            </view>
+            <view style='width:100%;height:66rpx;position:relative;'> 
+                    <!-- wx:if='{{uploadscreenshots}}'   data-anum='2' catchtap='upImgSer'-->
+                    <view style='width:280rpx;height:60rpx;position: absolute;right:0;bottom:0;font-size:26rpx;text-align:center;line-height:60rpx;color:#fff;border-radius: 10rpx;background: #087ac5;' catchtap='screenshottips' data-num='2'><view style='width:100%;height:100%;position:absolute;top:0;left:0;z-index:2;'>上传截图</view></view>
+
+                    <view class='upsertgimcimgbut' catchtap='sharesavethepicture' data-indnum='1' style='width:280rpx;height:60rpx;position: absolute;left:0;bottom:0;font-size:26rpx;text-align:center;line-height:60rpx;color:#fff;border-radius: 10rpx;background: #1aad19;'>点击保存专属晒单图片</view>
+            </view>      
+            
+            </view>
+            <!-- <text class='upsertextcon'>{{share_desc}}</text>        -->
+
+
+            <image src='../../../../pages/images/icon_close3.png' class='usericonclose' catchtap='closeupserimg'></image>
+        </view>
+        </view>
+ 
         
-       <view class='upserbutbox'></view>
-       <view style='height:300rpx;width:100%;position:relative;'>
-          <view style='width:170rpx;height:260rpx;position: absolute;left:14rpx;bottom:20rpx;' bindtap='screenshotpreviewImgzhong'>
-              <image src='http://www.51chaidan.com/images/default/consultAudit.jpg' style='display:block;width:130rpx;height:220rpx;margin:auto;position: relative;'></image>
-              <view style='width:100%;height:40rpx;color:#fff;font-size:22rpx;text-align:center;line-height:40rpx;text-decoration:underline;'>查看截图参考</view>
-          </view>
-
-          <text style='width:400rpx;height:230rpx;position: absolute;left:200rpx;bottom:60rpx;font-size:26rpx;color:#fff;overflow: scroll;'>{{share_descWinningtheprize}}</text>
-      </view>
-      <view style='width:100%;height:66rpx;position:relative;'> 
-             <!-- wx:if='{{uploadscreenshots}}'   data-anum='2' catchtap='upImgSer'-->
-            <view style='width:280rpx;height:60rpx;position: absolute;right:0;bottom:0;font-size:26rpx;text-align:center;line-height:60rpx;color:#fff;border-radius: 10rpx;background: #087ac5;' catchtap='screenshottips' data-num='2'><view style='width:100%;height:100%;position:absolute;top:0;left:0;z-index:2;'>上传截图</view></view>
-
-            <view class='upsertgimcimgbut' catchtap='sharesavethepicture' data-indnum='1' style='width:280rpx;height:60rpx;position: absolute;left:0;bottom:0;font-size:26rpx;text-align:center;line-height:60rpx;color:#fff;border-radius: 10rpx;background: #1aad19;'>点击保存专属晒单图片</view>
-      </view>      
-      
-      </view>
-      <!-- <text class='upsertextcon'>{{share_desc}}</text>        -->
-
-
-       <image src='../../../../pages/images/icon_close3.png' class='usericonclose' catchtap='closeupserimg'></image>
-   </view>
-</view>
- 
- 
-<!--  图片授权  -->
-<view class='editorrecom' wx:if='{{picbox}}' style='z-index:9999999;'>
-    <view class='ngbackground'></view>
-    <view class='picbox'>
-        <view class='picboxhead'>授权之后才能保存图片</view>
-        <view class='picboxcon'>
-            <view class='picboxconleft' style='color:#333;' catchtap='imgCanelTg'>取消</view>
-            <view class='picboxconleft' style='color:#11fb3d;position:relative;'>
-               <button open-type="openSetting" bindopensetting="handleSetting" class='picbut'></button>
-               确定
+        <!--  图片授权  -->
+        <view class='editorrecom' wx:if='{{picbox}}' style='z-index:9999999;'>
+            <view class='ngbackground'></view>
+            <view class='picbox'>
+                <view class='picboxhead'>授权之后才能保存图片</view>
+                <view class='picboxcon'>
+                    <view class='picboxconleft' style='color:#333;' catchtap='imgCanelTg'>取消</view>
+                    <view class='picboxconleft' style='color:#11fb3d;position:relative;'>
+                    <button open-type="openSetting" bindopensetting="handleSetting" class='picbut'></button>
+                    确定
+                    </view>
+                </view>
             </view>
         </view>
-    </view>
-</view>
  
  
  

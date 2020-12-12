@@ -145,7 +145,7 @@
           <view class="confOrdButTxt">点击提交订单视为同意<text style="color:#298CF7;" catchtap="ticketInstrutfun" data-ind='2'>《美拆购票服务条款》</text></view>
           <view class="confOrdBut">
               <view class="confOrdButLeft" catchtap="priceBreakBoxFun">￥{{sumPrice}}<text class="cobdetailed">明细</text><text class="{{priceBreakBox?'uptriangle':'downtriangle'}}"></text></view>
-              <view class="confOrdButn boxShadowEve" catchtap="buyingTickPay">提交订单</view>
+              <view class="confOrdButn boxShadowEve" catchtap="buyingTickPayOne">提交订单</view>
               <!-- 价格明细 -->
               <view class="priceBreakdown" wx:if='{{priceBreakBox}}'>
                   <view class="priceBreakdHead" catchtap="priceBreakBoxFun">价格明细<image src='../../../../pages/images/forknumber.png' class='recgadheadimg'></image></view>

@@ -80,6 +80,39 @@ Page({
     });
 
   },
+  
+  buyingTickPayOne:function(){
+    var _this = this;
+    var tabTwoId = _this.data.tabTwoId;
+    if(tabTwoId==1){
+      _this.buyingTickPay();
+    }else{
+      var ticketTwo = _this.data.ticketTwo || [];
+      var subTitle = '';
+      for(var i=0; i<ticketTwo.length; i++){
+         if(ticketTwo[i].type == tabTwoId){
+          subTitle = ticketTwo[i].subTitle || '';
+          break;
+         };
+      };
+
+
+      wx.showModal({
+        title: '',
+        content:  '凭本人身份证现场领取'+subTitle,
+        cancelText: '取消',
+        confirmText: '确定',
+        confirmColor:'#000',
+        cancelColor: '#000',
+        success (res) {
+          if (res.confirm) {
+            _this.buyingTickPay();
+          };
+        }
+      })
+    }
+  },
+  
 
   // 
   buyingTickPay:function(){

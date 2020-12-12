@@ -574,3 +574,54 @@ page{
   bottom: 0;
   z-index: 1;
 }
+
+
+/* 电子票 */
+
+.ordeQRcode{
+  padding:40rpx 20rpx 20rpx;
+}
+.ordeQRImgBox{
+  width: 400rpx;
+  height: 400rpx;
+  margin:auto;
+  border-radius: 10rpx;
+  position: relative;
+}
+.ordeQRImgBoxImg{
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 10rpx;
+}
+.useImg{
+  width: 100rpx;
+  height: 100rpx;
+  position: absolute;
+  top: 0;
+  right: -50rpx;
+  z-index: 1;
+}
+.ordeQRTickNum{
+  text-align: center;
+  padding: 30rpx;
+  font-size: 26rpx;
+}
+.ordeQRTitle{
+  padding-bottom: 30rpx;
+  border-bottom: 1rpx solid #e5e5e5;
+}
+.ordeQRTitN{
+  font-size: 28rpx;
+  padding:30rpx 30rpx 0 30rpx;
+}
+
+
+.countdownNumTime{
+  font-size: 24rpx;
+  text-align: center;
+  padding: 20rpx;
+}
+
+
+

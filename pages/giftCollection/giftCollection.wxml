@@ -2,11 +2,21 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 
+<view class="giftBox">
+   <view class="giftBoxEve">姓名：{{giftData.consignee}}</view>
+   <view class="giftBoxEve">电话：{{giftData.tel}}</view>
+   <view class="giftBoxEve">身份证号：{{giftData.idcard}}</view>
+   <view class="giftBoxEve">商品名称：{{giftData.goods_name}}</view>
+   <view class="giftBoxEve">是否领取：
+      <block wx:if='{{giftData.pay_status==2}}'>未领取</block>
+      <block wx:elif='{{giftData.pay_status==5}}'>已领取</block>
+   </view>
+</view>
 
 
 
 
-<view class="leafletBottomEve boxShadowEve" catchtap="getItNow" style="">立即领取</view>
+<view class="leafletBottomEve boxShadowEve" wx:if='{{giftData.pay_status==2}}' catchtap="getItNow">立即领取</view>
 
 
 
