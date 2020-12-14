@@ -48,9 +48,16 @@ Page({
     explainnum:1,
     realNameSystem:false,
 
-    buyNowOrOppor:false
+    buyNowOrOppor:false,
+    isSubscribe:false
 
   },
+  // 订阅授权
+  subscrfun:function(){
+    var _this = this;
+    app.comsubscribe(_this);
+  },
+
   realNameSysfun:function(){
     this.setData({
       realNameSystem:!this.data.realNameSystem
@@ -277,6 +284,7 @@ Page({
     var ind = w.currentTarget.dataset.ind || 0;
     var obtain = w.currentTarget.dataset.obtain || 0;
     var buyNowOrOppor = false;
+    var isSubscribe = false;
     console.log('num======obtain',num,obtain)
     // tab one
     if(obtain == 1){
@@ -284,38 +292,64 @@ Page({
       var ticketTwo = ticket[ind].listTicket || []; 
       var tabTwoId = '';
       var sumPrice = 0;
-      for(var i=0 ; i< ticketTwo.length ; i++){
-        if(ticketTwo[i].stock>0 || ticketTwo[i].isFillChance){
-         tabTwoId = ticketTwo[i].type || '';
-         sumPrice = ticketTwo[i].price || 0;
-         if(ticketTwo[i].isFillChance){
-            buyNowOrOppor = true;
-         };
-         break;
-        };
+      // for(var i=0 ; i< ticketTwo.length ; i++){
+      //   if(ticketTwo[i].stock>0 || ticketTwo[i].isFillChance){
+      //    tabTwoId = ticketTwo[i].type || '';
+      //    sumPrice = ticketTwo[i].price || 0;
+      //    if(ticketTwo[i].isFillChance){
+      //       buyNowOrOppor = true;
+      //    };
+      //    break;
+      //   };
+      // };
+
+      tabTwoId = ticketTwo[0].type || '';
+      sumPrice = ticketTwo[0].price || 0;
+
+      if(ticketTwo[0].stock>0){
+        buyNowOrOppor = false;
+        isSubscribe = false;
+      }else if(ticketTwo[0].isFillChance){
+        buyNowOrOppor = true;
+        isSubscribe = false;
+      }else{
+        isSubscribe = true;
       };
+
       _this.setData({
         tabOneId:num,
         ticketTwo:ticketTwo || [],
         tabTwoId:tabTwoId,
         seldate:ticket[ind].date || '',
         sumPrice:sumPrice,
-        buyNowOrOppor:buyNowOrOppor
+        buyNowOrOppor:buyNowOrOppor,
+        isSubscribe:isSubscribe
       })
     }else if(obtain == 2){ // tab two
       var ticketTwo = _this.data.ticketTwo || [];
-      if(ticketTwo[ind] && ticketTwo[ind].stock <= 0 && !ticketTwo[ind].isFillChance){
-        app.showToastC('库存不足');
-        return false;
-      };
-      if(ticketTwo[ind] && ticketTwo[ind].stock <= 0){
+      // if(ticketTwo[ind] && ticketTwo[ind].stock <= 0 && !ticketTwo[ind].isFillChance){
+      //   app.showToastC('库存不足');
+      //   return false;
+      // };
+      // if(ticketTwo[ind] && ticketTwo[ind].stock <= 0){
+      //   buyNowOrOppor = true;
+      // };
+
+      if(ticketTwo[ind].stock>0){
+        buyNowOrOppor = false;
+        isSubscribe = false;
+      }else if(ticketTwo[ind].isFillChance){
         buyNowOrOppor = true;
+        isSubscribe = false;
+      }else{
+        isSubscribe = true;
       };
 
       _this.setData({
         tabTwoId:num,
         sumPrice:ticketTwo[ind].price || 0,
-        buyNowOrOppor:buyNowOrOppor
+        buyNowOrOppor:buyNowOrOppor,
+        isSubscribe:isSubscribe
       });
 
     };
@@ -407,20 +441,36 @@ Page({
           var seldate = '';
           var sumPrice = 0;
           var buyNowOrOppor = false;
+          var isSubscribe = false;
           if(ticket && ticket.length != 0){
             tabOneId = ticket[0].day || '';
             seldate = ticket[0].date || '';
             ticketTwo = ticket[0].listTicket || [];
-            for(var i=0 ; i< ticketTwo.length ; i++){
-               if(ticketTwo[i].stock>0 || ticketTwo[i].isFillChance){
-                tabTwoId = ticketTwo[i].type || '';
-                sumPrice = ticketTwo[i].price || 0;
-                if(ticketTwo[i].isFillChance){
-                  buyNowOrOppor = true;
-                };
-                break;
-               };
+
+            tabTwoId = ticketTwo[0].type || '';
+            sumPrice = ticketTwo[0].price || 0;
+
+            if(ticketTwo[0].stock>0){
+              buyNowOrOppor = false;
+              isSubscribe = false;
+            }else if(ticketTwo[0].isFillChance){
+              buyNowOrOppor = true;
+              isSubscribe = false;
+            }else{
+              isSubscribe = true;
             };
+
+            // for(var i=0 ; i< ticketTwo.length ; i++){
+            //    if(ticketTwo[i].stock>0 || ticketTwo[i].isFillChance){
+            //     tabTwoId = ticketTwo[i].type || '';
+            //     sumPrice = ticketTwo[i].price || 0;
+            //     if(ticketTwo[i].isFillChance){
+            //       buyNowOrOppor = true;
+            //     };
+            //     break;
+            //    };
+            // };
+
           };
           var identity = res.data.List.identity || [];
           if(identity && identity.length != 0){
@@ -446,6 +496,8 @@ Page({
             detail:res.data.List.detail || [],
             sumPrice:sumPrice,
             seldate:seldate,
+            subscribedata:res.data.Info.subscribe,
+            isSubscribe:isSubscribe
             // contactsname:res.data.Info.contact || '',
             // contactsphone:res.data.Info.mobile || ''
           });

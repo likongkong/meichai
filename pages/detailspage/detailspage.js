@@ -280,6 +280,12 @@ Page({
       url:"/page/component/pages/crowdfunding/crowdfunding?aid=" + gid,
     });
   },
+  // vip 页面
+  jumpVipPage: function (event) {
+    wx.navigateTo({  
+      url: "/page/secondpackge/pages/vipPage/vipPage"
+    })
+  },
   //时间戳转换时间  
   toDatehd: function (number) {
     var date = new Date(number * 1000);

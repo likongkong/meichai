@@ -509,7 +509,7 @@ App({
   // 46  日历详情
   // 47  日历 我的投票
 
-  // 48 priorityVoting  优先权抽选
+  // 48 priorityVoting  优先权抽选  暂时未用
   // 49 luckyDraw  抽奖活动
 
   userstatistics: function (num) {

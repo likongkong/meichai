@@ -77,7 +77,29 @@ Page({
     electronicInvoice:true,
 
   },
-
+  // 刷新二维码
+  refreshQRCode:function(){
+    var _this = this;
+   
+    wx.showLoading({ title: '加载中...', }) 
+    var comdata = _this.data.comdata;
+    wx.request({
+      url: 'http://brandentry-test.51chaidan.com/verificationcode?orderNum='+comdata.ticketQrKey,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        wx.hideLoading()
+        if (res.data.ReturnCode == 200) {
+          comdata.qrcode = res.data.List.imgBase || '';
+          _this.setData({
+            comdata:comdata
+          });
+        };
+        // 判断非200和登录
+        Dec.comiftrsign(_this, res, app);
+      }
+    }); 
+  },
   pictboxboxfun:function(){
     this.setData({ pictboxbox:false});
     this.subscrfunstar();
