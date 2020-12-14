@@ -1,0 +1,76 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+<import src="../../../../wxParse/wxParse.wxml"/>
+
+
+<view class="wrap"> 
+  <view class="contentTopWrap">
+      <block wx:if="{{listData.length==0}}">
+        <view class="buyTicketsBtn">
+          还未购票？点击立即购票
+        </view>
+      </block>
+      <block wx:else>
+        <block wx:for="{{listData}}" wx:key="key">
+          <view class="cardWrap">
+            <view class="cardLWrap">
+              <!-- <image></image> -->
+            </view>
+            <view class="cardRWrap" data-id="{{item.id}}" catchtap="{{item.status==0?'signup':''}}">
+              <view class="cardRT">
+                <text>入场序号</text>
+                <text>未开启抽选</text>
+              </view>
+              <block>
+                <view wx:if="{{item.status==0 || item.status==1}}" class="cardRC {{item.status==0?'red':'blue'}}">
+                  <text> {{item.status==0?'参加抽签':'等待开奖'}}</text>
+                </view>
+                <view wx:elif="{{item.status==2}}" class="cardRCImg">
+                  <image src="https://cdn.51chaidan.com/images/calendar/zhongqian.png" mode="widthFix"></image>
+                </view>
+              </block>
+              
+              <view class="cardRB">
+                <text class="activityName">MCTS x JSS</text>
+                <view><text decode="true">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:</text><text>{{item.consignee}}</text></view>
+                <view><text>手 机 号:</text> <text>{{item.mobile}}</text> </view>
+                <view><text>证 件 号:</text><text>{{item.idcard}}</text></view>
+                <view><text decode="true">日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;期:</text><text>2021年1月{{item.date}}日</text></view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </block>
+  </view>
+  <view class="contentBottomWrap">
+    <text class="introduceTitle">活动介绍</text>
+    <view class="introduceTxt">
+      <!-- <template is="wxParse" data="{{wxParseData:article.nodes}}" /> -->
+      <text style="display:block;">{{descDetails}}</text>
+    </view>
+  </view>
+</view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>
+
