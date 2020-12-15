@@ -9,6 +9,17 @@
  
 <view class='box' style="{{upserimgbox||upserimgboxact?'position:fixed;top:0;left:0;right:0;bottom:0;':''}}padding-bottom:110rpx;">
  
+    <view class="ordeQRcode">
+         <view class="ordeQRImgBox">
+            <image src="{{comdata.qrcode}}" class="ordeQRImgBoxImg"></image>
+         </view>
+         <view class="ordeQRTitN" style="text-align:center;border-top:0;">二维码一分钟内有效</view>
+         <view style="width:100%;height:70rpx;">
+            <view wx:if='{{isrefresh}}' style="color:#ff2840;border:1rpx solid #ff2840;" class="totalmoncright" catchtap="refreshQRCode">刷新</view>
+         </view>
+         
+    </view> 
+
 
     <view style="padding:0 20rpx 20rpx 20rpx;background:#fff;" wx:if='{{electronicInvoice}}'>
         <view class="ordeQRTitle" style="border-bottom: 2rpx solid #fff;">

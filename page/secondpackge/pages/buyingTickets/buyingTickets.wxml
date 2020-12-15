@@ -57,9 +57,9 @@
 <view class="leafletBottom">
    <view class="leafletBottomTxt">门票玩具线下展会领取，购票场次时间内有效</view>
 
-   <view wx:if='{{tabTwoId==""}}' class="leafletBottomEve boxShadowEve" style="width:400rpx;background:#ADADAD;">
-        请选择票档
-   </view>   
+   <view wx:if='{{isSubscribe}}' catchtap="subscrfun" class="leafletBottomEve boxShadowEve" style="width:400rpx;line-height:35rpx;background:#eeae19;">
+        <text style="line-height:32rpx;display:block;padding-top:5rpx;">已售罄\n补货提醒</text>
+   </view>
    <view wx:else class="leafletBottomEve boxShadowEve" catchtap="{{buyNowOrOppor?'':'buyabframe'}}" style="width:400rpx;{{buyNowOrOppor?'background:#ADADAD':''}}">
            <block wx:if='{{buyNowOrOppor}}'>有订单未支付，还有机会</block>
            <block wx:else>立即购买</block>

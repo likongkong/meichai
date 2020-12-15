@@ -75,9 +75,115 @@ Page({
     screenshottipsiftr: false,
     pictboxbox:false,
     electronicInvoice:true,
+    isrefresh :false,
+    commoddata:{}
 
   },
 
+
+  // 倒计时
+  countdownbfun: function() {
+    var _this = this;
+    clearInterval(_this.data.timer);
+    var countdown = _this.data.countdown;
+    var commoddata = _this.data.commoddata;
+    console.log(2)
+    function nowTime() { //时间函数
+      var iftrins = true;
+      // 获取现在的时间
+      var nowTime = new Date().getTime();
+      var lastTime = countdown * 1000;
+      var differ_time = lastTime - nowTime; //时间差：
+      if (differ_time >= 0) {
+        var differ_day = Math.floor(differ_time / (3600 * 24 * 1e3));
+        var differ_hour = Math.floor(differ_time % (3600 * 1e3 * 24) / (1e3 * 60 * 60));
+        var differ_minute = Math.floor(differ_time % (3600 * 1e3) / (1000 * 60));
+        var s = Math.floor(differ_time % (3600 * 1e3) % (1000 * 60) / 1000);
+        var ms = Math.floor(differ_time % 1000 / 100);
+        if (differ_day.toString().length < 2) {
+          differ_day = "0" + differ_day;
+        };
+        if (differ_hour.toString().length < 2) {
+          differ_hour = "0" + differ_hour;
+        };
+        if (differ_minute.toString().length < 2) {
+          differ_minute = "0" + differ_minute;
+        };
+        if (s.toString().length < 2) {
+          s = "0" + s;
+        };
+        commoddata.day = differ_day;
+        commoddata.hour = differ_hour;
+        commoddata.minute = differ_minute;
+        commoddata.second = s;
+        commoddata.ms = ms;
+      } else {
+        commoddata.day = '00'
+        commoddata.hour = '00';
+        commoddata.minute = '00';
+        commoddata.second = '00';
+        commoddata.ms = '00';
+      };
+      if (commoddata.day != '00' || commoddata.hour != '00' || commoddata.minute != '00' || commoddata.second != '00') {
+        iftrins = false;
+      };
+      _this.setData({
+        commoddata: commoddata,
+        isrefresh:false
+      });
+      console.log(_this.data.commoddata)
+      if (iftrins) {
+        clearInterval(_this.data.timer);
+        _this.setData({
+          isrefresh:true
+        });
+      };
+    }
+    if (_this.data.countdown) {
+      nowTime();
+      clearInterval(_this.data.timer);
+      _this.data.timer = setInterval(nowTime, 1000);
+    };
+
+  },
+  onShow: function() {
+    if (this.data.countdown) {
+      this.countdownbfun();
+    };
+  },
+
+  onHide: function() {
+    clearInterval(this.data.timer);
+  },
+
+  onUnload: function() {
+    clearInterval(this.data.timer);
+  },
+  // 刷新二维码
+  refreshQRCode:function(){
+    var _this = this;
+    console.log(1)
+    wx.showLoading({ title: '加载中...', }) 
+    var comdata = _this.data.comdata;
+    wx.request({
+      url: 'http://brandentry-test.51chaidan.com/verificationcode?orderNum='+comdata.ticketQrKey,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        wx.hideLoading()
+        if (res.data.ReturnCode == 200) {
+          comdata.qrcode = res.data.List.imgBase || '';
+          _this.setData({
+            comdata:comdata,
+            countdown:res.data.List.expiryTime || 0
+          });
+          _this.countdownbfun();
+        };
+        // 判断非200和登录
+        Dec.comiftrsign(_this, res, app);
+      }
+    }); 
+  },
   pictboxboxfun:function(){
     this.setData({ pictboxbox:false});
     this.subscrfunstar();
@@ -491,6 +597,7 @@ Page({
                id: res.data.Info.gid,
                subscribedata: res.data.Info.subscribe,
              })
+             _this.refreshQRCode();
              
            };
          };

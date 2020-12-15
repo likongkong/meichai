@@ -10,6 +10,7 @@
             <view class="card" data-id="{{item.id}}" bindtap="toaRewarddeyails">
               <view class="cardTbox">
                 <text class="serialnum">Vol.{{item.id}}</text>
+                <text class="serialnum" wx:if='{{item.isScratch}}' style="left:160rpx;">送刮刮卡</text>
                 <image class="pic" src="{{item.cover}}" mode="aspectFill"></image>
                 <view class="reward-num">
                   <block wx:for="{{item.betterGoods}}" wx:key='key' wx:for-item="itemgear">
@@ -57,6 +58,7 @@
           <swiper-item data-id="{{sonitem.id}}" bindtap="toaRewarddeyails">
               <view class="cardTbox">
                 <text class="serialnum">Vol.{{sonitem.id}}</text>
+                <text class="serialnum" wx:if='{{sonitem.isScratch}}' style="left:110rpx;">送刮刮卡</text>
                 <image class="pic" src="{{sonitem.cover}}" mode="aspectFill"></image>
                 <view class="reward-num">
                   <block wx:for="{{sonitem.betterGoods}}" wx:key='key' wx:for-item="itemgear">

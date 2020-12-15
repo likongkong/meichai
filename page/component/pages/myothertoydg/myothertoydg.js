@@ -1972,7 +1972,9 @@ Page({
         wx.getImageInfo({
           src: mlist[i].goods_img,
           success: function (head) {
-            mlist[i].localhead = head.path
+            console.log('head=====',head)
+            mlist[i].localhead = head.path;
+            mlist[i].ratio = head.width / head.height;
             if (i == mlist.length - 1) {
               _this.setData({
                 listdata: mlist,
@@ -2115,17 +2117,43 @@ Page({
 
     var lineobj ={}; 
     console.log('mlist==========',mlist)
+    var temimgHeight = '';
+    var temtop = '';
+
     for (let i = 0; i < mlist.length; i++) {
       ctx.setFontSize(10);
       ctx.fillStyle = 'red';
+
       if (mlist[i].ratio && mlist[i].ratio != null && typeof (mlist[i].ratio) != "undefined") {
       } else {
         mlist[i].ratio = 1;
       }
       var str = "￥" + parseInt(mlist[i].shop_price)
       var leftInterval = (singlewidth - imgHeight * mlist[i].ratio) / 2;
+
+      // if(leftInterval<0){
+      //   leftInterval = 1;
+      // }
+      // console.log(leftInterval,singlewidth,imgHeight * mlist[i].ratio)
+
       if (mlist[i].localhead && mlist[i].localhead != "") {
-        ctx.drawImage(mlist[i].localhead, recordLeftInterval + leftInterval, recordTopInterval, imgHeight * mlist[i].ratio, imgHeight);
+
+        if(leftInterval<=0){
+          leftInterval = 0;
+          console.log(leftInterval, recordLeftInterval , leftInterval, recordTopInterval, imgHeight * mlist[i].ratio, imgHeight)
+          var temimgHeight = singlewidth / mlist[i].ratio;
+          var temtop = (imgHeight - temimgHeight) / 2;
+          ctx.drawImage(mlist[i].localhead, recordLeftInterval + leftInterval, recordTopInterval+temtop,singlewidth, temimgHeight);
+          
+        }else{
+          console.log( recordLeftInterval , leftInterval, recordTopInterval, imgHeight * mlist[i].ratio, imgHeight)
+
+          ctx.drawImage(mlist[i].localhead, recordLeftInterval + leftInterval, recordTopInterval, imgHeight * mlist[i].ratio, imgHeight);
+        }
+
+
+
+        // ctx.drawImage(mlist[i].localhead, recordLeftInterval + leftInterval, recordTopInterval, imgHeight * mlist[i].ratio, imgHeight);
       }
       // 
       if (mlist[i].group_id != "0") {
@@ -2184,13 +2212,23 @@ Page({
           var txttop = recordTopInterval + imgHeight + 10;
         };
         var strlength = ctx.measureText(str).width;
-        ctx.fillText(str, recordLeftInterval + leftInterval - (strlength / 2) + (imgHeight * mlist[i].ratio)/2, txttop)
+        if(leftInterval<=0){
+          ctx.fillText(str, recordLeftInterval + leftInterval - (strlength / 2) + (singlewidth)/2, txttop)
+        }else{
+          ctx.fillText(str, recordLeftInterval + leftInterval - (strlength / 2) + (imgHeight * mlist[i].ratio)/2, txttop)
+        }
+        
       }
 
       if (mlist[i].chancelId == 2){
         ctx.setFontSize(7);
         var txtw = ctx.measureText('盲盒全新未拆').width;
-        var redtxt = recordLeftInterval + leftInterval + (imgHeight * mlist[i].ratio - txtw) / 2
+        if(leftInterval<=0){
+          var redtxt = recordLeftInterval + leftInterval + (singlewidth - txtw) / 2
+        }else{
+          var redtxt = recordLeftInterval + leftInterval + (imgHeight * mlist[i].ratio - txtw) / 2
+        };
+        
         var redtxttop = recordTopInterval + imgHeight;
         ctx.setFillStyle("#e94f57");
         ctx.fillRect(redtxt - 3, redtxttop - 10, txtw + 6, 10);
@@ -2199,7 +2237,11 @@ Page({
       }else if (mlist[i].chancelId == 3) {
         ctx.setFontSize(7);
         var txtw = ctx.measureText('隐藏碎片').width;
-        var redtxt = recordLeftInterval + leftInterval + (imgHeight * mlist[i].ratio - txtw) / 2
+        if(leftInterval<=0){
+          var redtxt = recordLeftInterval + leftInterval + (singlewidth - txtw) / 2
+        }else{
+          var redtxt = recordLeftInterval + leftInterval + (imgHeight * mlist[i].ratio - txtw) / 2
+        };
         var redtxttop = recordTopInterval + imgHeight;
         ctx.setFillStyle("#e94f57");
         ctx.fillRect(redtxt - 3, redtxttop - 10, txtw + 6, 10);
@@ -2208,7 +2250,11 @@ Page({
       } else if (mlist[i].chancelId == 5){
         ctx.setFontSize(7);
         var txtw = ctx.measureText('随机盲盒碎片').width;
-        var redtxt = recordLeftInterval + leftInterval + (imgHeight * mlist[i].ratio - txtw) / 2
+        if(leftInterval<=0){
+          var redtxt = recordLeftInterval + leftInterval + (singlewidth - txtw) / 2
+        }else{
+          var redtxt = recordLeftInterval + leftInterval + (imgHeight * mlist[i].ratio - txtw) / 2
+        };
         var redtxttop = recordTopInterval + imgHeight;
         ctx.setFillStyle("#e94f57");
         ctx.fillRect(redtxt - 3, redtxttop - 10, txtw + 6, 10);
