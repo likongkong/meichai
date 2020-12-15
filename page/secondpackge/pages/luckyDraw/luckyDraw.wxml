@@ -3,6 +3,104 @@
 
 
 
+<view class="wrap">
+  <view class="luckyDrawTimeWrap">
+    <text class="luckyDrawRule">抽选规则</text>
+    <image class="luckyDrawTimetu" src="https://cdn.51chaidan.com/images/calendar/luckyDraw/luckyDraw2.png" mode="widthFix"></image>
+    <view class="luckyDrawShare">
+      <image src="https://clw.51chaidan.com//images/goods/share3.png" mode="widthFix"></image>
+      <text>分享</text>
+    </view>
+  </view>
+  <view class="aheadTicketWrap">
+    <block wx:for="{{activity.ticket}}" wx:key="key">
+      <view>
+        <view class="tickettu">
+          <image src="{{item.img}}" mode="widthFix"></image>
+        </view>
+        <text class="aheadTime">{{item.titile}}</text>
+        <text class="surplusAheadNum">剩余：{{item.suplus}}</text>
+      </view>
+    </block>
+  </view>
+  <view class="drawWrap">
+    <text class="drawCountdown"> 距离活动结束：{{commoddata.day}}<text>天</text>{{commoddata.hour}}<text>时</text>{{commoddata.minute}}<text>分</text>{{commoddata.second}}<text>秒</text> </text>
+    <view class="drawBox">
+      <view>
+        <image src="https://cdn.51chaidan.com/images/calendar/luckyDraw/luckyDraw3.png" mode="widthFix"></image>
+        <text class="joinDrawPeopleNum">累计参与人数：{{activity.countJoin}}人</text>
+        <block>
+          <text wx:if="{{user.suplusChance == 0}}" class="myDrewNum">暂无抽选券</text>
+          <text wx:else class="myDrewNum">剩余抽选券：{{user.suplusChance}}（当日有效）</text>
+        </block>
+      </view>
+    </view>
+    <view class="XinYunZhiWrap">
+      <view class="XinYunZhiNum">
+        <text>幸运值</text>
+        <text style="color:#E94F57;">{{totalScratch}}</text>
+      </view>
+      <view class="XinYunZhiProgress">
+        <progress stroke-width='10' activeColor='#E94F57' percent="{{percent}}"/>
+      </view>
+      <view class="drawRecord" catchtap="togglerecordFun">
+        抽奖记录
+      </view>
+    </view>
+    <view class="drawBtn">
+      <block wx:if="{{bindIdentity.length!=0}}">
+        <view catchtap="toggleawardFun">抽一张</view>
+        <view class="drawBtnAfter">抽十张</view>
+      </block>
+      <block wx:else>
+        <view style="width:70%;" catchtap="toggleidCardFun">绑定展会门票</view>
+      </block>
+    </view>
+  </view>
+  <view class="cardWrap">
+    <view>
+      <text class="title">获取奖券</text>
+      <block wx:for="{{scratch}}" wx:key="key" wx:for-index="idx">
+        <view class="cardVipItem" wx:if="{{item.type == 1}}">
+          <view class="cardVipItemTxtWrap">
+            <view style="color:#C38925;">{{item.title}}</view>
+            <view style="color:#B95B06;">{{item.descirption}}</view>
+          </view>
+          <block>
+            <view wx:if="{{!user.isVIP}}"class="cardVipItemBtn">开通VIP</view>
+            <view wx:elif="{{user.isVIP}}" class="cardVipItemBtn" style="background:#ADADAD; color:#fff;box-shadow:none;">已开通</view>
+          </block>
+        </view>
+        <view class="cardItem" wx:else>
+          <view class="cardItemTxtWrap">
+            <view>{{item.title}}</view>
+            <view class="{{user.isVIP?'textDecoration':''}}" style="color:#666666;">{{item.descirption}}</view>
+            <view style="color:#666666;">{{item.descirptionVIP}}<text style="color:#C38925;">（VIP限定）</text></view>
+          </view>
+          <block>
+            <view wx:if="{{item.type == 3}}" class="cardItemBtn">去签到</view>
+            <view wx:elif="{{item.type == 4}}" class="cardItemBtn">去抽盒</view>
+            <view wx:elif="{{item.type == 5}}" class="cardItemBtn">去邀请</view>
+            <view wx:else class="cardItemBtn">去抽赏</view>
+          </block>
+        </view>
+      </block>
+      
+      
+    </view>
+    <view style="margin-top:40rpx" wx:if="{{bindIdentity.length!=0}}">
+      <text class="title">绑定信息</text>
+      <view class="cardItem">
+        <view class="cardItemTxtWrap">
+          <view>姓名：<text style="color:#666666;">{{bindIdentity.consignee}}</text></view>
+          <view>身份证号：<text style="color:#666666;">{{bindIdentity.idcard}}</text></view>
+          <view>入场日期：<text style="color:#666666;">2021.1.{{bindIdentity.date}}</text></view>
+        </view>
+        <view class="cardItemBtn">更换</view>
+      </view>
+    </view>
+  </view>
+</view>
 
 
 
@@ -10,17 +108,102 @@
 
 
 
+<view class="idCardMask" wx:if="{{isidCardMask}}" catchtouchmove="true" catchtap="toggleidCardFun">
+  <view class="idCardBoxWrap" catchtap="true">
+    <scroll-view class="idCardScroll" scroll-y>
+      <block wx:for="{{identity}}" wx:key="key" wx:for-index="idx">
+        <view class="idCardItem">
+          <view class="idCardItemBox">
+            <view>
+              <text>{{item.consignee}}</text>
+              <text>手机号：{{item.mobile}}</text>
+              <text>身份证号：{{item.idcard}}</text>
+              <text>入场日期：2021年1月{{item.date}}日</text>
+            </view>
+          </view>
+          <view class="idCardItemRadio" data-index="{{idx+1}}" data-idcard="{{item.actualidcard}}" data-date="{{item.date}}" catchtap="selectCardFun">
+            <image src=" {{1==idcardIndex?'https://cdn.51chaidan.com/images/calendar/select.png':'https://cdn.51chaidan.com/images/calendar/case.png'}}" mode="widthFix"></image>
+          </view>
+        </view>
+      </block>
+    </scroll-view>
+    <view class="bindingIdCard" catchtap="bindidCardFun">
+      <text>绑定门票</text>
+    </view>
+  </view>
+</view>
 
 
 
 
+<view class="recordMask" wx:if="{{isRecordMask}}" catchtouchmove="true" catchtap="togglerecordFun">
+  <view class="recordBoxWrap" catchtap="true">
+    <view class="recordBoxtitle">抽奖记录
+      <image catchtap="togglerecordFun" src="../../../../pages/images/forknumber.png" mode="widthFix"></image>
+    </view>
+    <scroll-view class="recordBoxScroll" scroll-y>
+      <view class="recordItem">
+        <view>
+          <text>未中奖</text>
+        </view>
+        <text>2020.12.05 10：22</text>
+      </view>
+      <view class="recordItem">
+        <view>
+          <text>未中奖</text>
+        </view>
+        <text>2020.12.05 10：22</text>
+      </view>
+      <view class="recordItem recordItemactive">
+        <view>
+          <text>恭喜您，获得</text>
+          <text>2021.1.1优先入场资格</text>
+        </view>
+        <text>2020.12.05 10：22</text>
+      </view>
+    </scroll-view>
+  </view>
+</view>
 
 
 
 
-
-
-
+<view class="awardMask" wx:if="{{isAwardMask}}" catchtouchmove="true" catchtap="toggleawardFun">
+  <view class="awardBoxWrap" catchtap="true">
+    <block>
+      <view style="overflow: hidden;">
+        <view class="awardItem">
+          <image src="https://cdn.51chaidan.com/images/calendar/luckyDraw/luckyDraw4.png?1" mode="aspectFit"></image>
+          <view>
+            <text>很遗憾，您未中奖</text>
+          </view>
+        </view>
+        <view class="awardItem active">
+          <image src="https://cdn.51chaidan.com/images/calendar/luckyDraw/luckyDraw4.png?1" mode="aspectFit"></image>
+          <view>
+            <text>恭喜您，获得</text>
+            <text>2021.1.1优先入场资格</text>
+          </view>
+        </view>
+      </view>
+      <view style="overflow: hidden;">
+        <view class="awardItem awardItemone active">
+          <image src="https://cdn.51chaidan.com/images/calendar/luckyDraw/luckyDraw4.png?1" mode="aspectFit"></image>
+          <view>
+            <!-- <text>很遗憾，您未中奖</text> -->
+            <text>恭喜您，获得</text>
+            <text>2021.1.1优先入场资格</text>
+          </view>
+        </view>
+      </view>
+    </block>
+    
+    <view class="drawBtn">
+      <view>再抽一张</view>
+      <view>再抽十张</view>
+    </view>
+  </view>
+</view>
 
 
 <tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>

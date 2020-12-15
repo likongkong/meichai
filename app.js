@@ -171,30 +171,30 @@ App({
                   _this.signindata.loginid = res.data.Info.loginid || '';
                   _this.signindata.uid = res.data.Info.uid || '';
 
-                  if(Dec.env=='online'){
-                    var num = _this.signindata.randommaximum - res.data.Info.uid%_this.signindata.randommaximum;
-                    if(num<10){
-                        num = '00'+num
-                    }else if(num>=10){
-                      num = '0'+num.toString()
-                    };       
-                    // 接口地址  
-                    _this.signindata.comurl = 'https://api-slb.51chaidan.com/'+num+'/';
-                    // 发现地址
-                    _this.signindata.clwcomurl = 'https://clw-slb.51chaidan.com/'+num+'/';
+                  // if(Dec.env=='online'){
+                  //   var num = _this.signindata.randommaximum - res.data.Info.uid%_this.signindata.randommaximum;
+                  //   if(num<10){
+                  //       num = '00'+num
+                  //   }else if(num>=10){
+                  //     num = '0'+num.toString()
+                  //   };       
+                  //   // 接口地址  
+                  //   _this.signindata.comurl = 'https://api-slb.51chaidan.com/'+num+'/';
+                  //   // 发现地址
+                  //   _this.signindata.clwcomurl = 'https://clw-slb.51chaidan.com/'+num+'/';
 
-                    // // 接口地址  208
-                    // _this.signindata.comurl = 'https://api.51chaidan.com/';
-                    // // 发现地址
-                    // _this.signindata.clwcomurl = 'https://clw.51chaidan.com/';
+                  //   // // 接口地址  208
+                  //   // _this.signindata.comurl = 'https://api.51chaidan.com/';
+                  //   // // 发现地址
+                  //   // _this.signindata.clwcomurl = 'https://clw.51chaidan.com/';
 
 
-                  }else{
-                    // 接口地址  
-                    _this.signindata.comurl = 'http://api-test.51chaidan.com/';
-                    // 发现地址
-                    _this.signindata.clwcomurl = 'http://clw-test.51chaidan.com/';
-                  };
+                  // }else{
+                  //   // 接口地址  
+                  //   _this.signindata.comurl = 'http://api-test.51chaidan.com/';
+                  //   // 发现地址
+                  //   _this.signindata.clwcomurl = 'http://clw-test.51chaidan.com/';
+                  // };
 
 
                   console.log('app===sigin',_this.signindata.comurl,_this.signindata.clwcomurl,Dec.versionnumber)
