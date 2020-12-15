@@ -496,6 +496,13 @@ Page({
               }
             };
 
+            if(res.data.Info.mobile){
+              res.data.Info.mobile = res.data.Info.mobile.replace(/^(.{3})(?:\w+)(.{3})$/, "$1*****$2");
+            };
+            if(res.data.Info.idcard){
+              res.data.Info.idcard = res.data.Info.idcard.replace(/^(.{4})(?:\w+)(.{4})$/, "$1**********$2");
+            };
+
             _this.setData({
               isShareGood:isShareGood,
               comdata: res.data.Info,
