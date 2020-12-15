@@ -15,12 +15,8 @@
     
     
     <!-- 展会活动 -->
-    <view class="calendarActivityWrap">
+    <!-- <view class="calendarActivityWrap">
       <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e1'>———— 展会活动 ————</view>
-
-
-      <!-- <view class="calendarTxt">展会限定日历,投票赢好礼</view> -->
-      <!-- 倒计时 -->
       <block>
         <view class="countdownWrap" catchtouchmove="true">
           <view style="background:#F3F4F4;"> 
@@ -79,13 +75,12 @@
                 </view>
                 <text class="swiperItemBrandName specialellipsis" style="width:400rpx">{{item.brandName}}</text>
               </view>
-              <!-- <view class="swiperItemBrandVote">{{item.vote_number}}票</view> -->
               <view class="swiperItemBrandVote">点击投票</view>
             </view>
           </view>
         </swiper-item>
       </swiper>
-    </view>
+    </view> -->
 
     
 

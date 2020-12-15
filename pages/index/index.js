@@ -230,7 +230,7 @@ Page({
 
       // url: "/page/secondpackge/pages/calendarList/calendarList"
 
-      // url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
+      url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
 
       // url: "/page/component/pages/electronicTicket/electronicTicket?oid=2314"
       
@@ -249,7 +249,7 @@ Page({
 
       // url: "/page/component/pages/iWasInvolved/iWasInvolved",
 
-      url: "/pages/detailspage/detailspage?gid=35327"
+      // url: "/pages/detailspage/detailspage?gid=35327"
 
       // url: "/pages/modifythenickname/modifythenickname?brand_id=210"
       
