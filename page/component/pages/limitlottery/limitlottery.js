@@ -44,6 +44,7 @@ Page({
     sourceLotto: "",
     listLotto: "",
     winnerLotto: "",
+    reLottoList:'', // 补抽列表
     btntext: "",
 
     // 口令
@@ -763,7 +764,9 @@ Page({
           // }
 
           console.log('res.data.Info.infoActivity.specialWay=====',res.data.Info.infoActivity.specialWay)
+
           _this.setData({
+            reLottoList:res.data.List.reLottoList || '',
             // is_brand_display:is_brand_display,
             activityDesc: res.data.Info.activityDesc || "",
             brandRule: res.data.Info.infoActivity.brandRule || "",

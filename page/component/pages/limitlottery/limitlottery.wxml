@@ -35,8 +35,15 @@
 			</block>
 
 		</view>
+		
+		
 		<view wx:if="{{infoActivity.status==3 && !isgetaward}}" class='countdown' style='font-size:30rpx;{{infoActivity.supportLogo?"float:left;":""}}'>
-			活动已结束
+				<block wx:if='{{infoActivity.isFillChance}}'>
+						还有机会，有人未领取
+				</block>
+				<block wx:else>
+						活动已结束
+				</block>	
 		</view>
 		<view wx:if="{{infoActivity.status==3 && isgetaward}}" class='countdown' style='font-size:40rpx;{{infoActivity.supportLogo?"float:left;":""}}'>
 			<text class='timetextstyle' style='margin-right:10rpx;'>领奖倒计时</text>
@@ -211,6 +218,28 @@
 		</view>
 
 		<view wx:if='{{infoActivity.status == 3}}' style="width:100%;padding-bottom:10rpx;">
+		  <block wx:if='{{reLottoList&&reLottoList.length!=0}}'>
+			    <block wx:for='{{reLottoList}}' wx:key='key'>
+              <view style="width:100%;font-size:25rpx;line-height:30rpx;text-align:center;margin:20rpx 0;">补抽名单</view>
+							<block wx:for='{{item}}' wx:key='key'>
+									<view style='font-size:30rpx;color:#1989FA;'>
+										<view style='overflow:hidden;padding:20rpx 150rpx;text-align:center;'>
+
+											<view style='float:left;width:60rpx;height:60rpx;border-radius:50%;background:#FF8080;'>
+												<image style='width:60rpx;height:60rpx;border-radius:50%;' src='{{item.headphoto}}'></image>
+											</view>
+											<view wx:for='{{item.lotto}}' wx:key='key' style='float:right;'>
+												<view style='width:30rpx;height:40rpx;float:left;border:1rpx solid #A3D0FD;margin:9rpx 0 0 15rpx;background:#fff;'>{{item}}</view>
+											</view>
+										</view>
+
+									</view>						
+							</block>
+
+					</block>
+
+		
+			</block>
 			<view style="width:100%;font-size:25rpx;line-height:30rpx;text-align:center;margin:20rpx 0;">中签名单</view>
 
 			<view style='font-size:30rpx;color:#1989FA;' wx:for='{{winnerLotto}}' wx:key='key'>
