@@ -508,7 +508,7 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
   <view class='awabg' catchtap='awatipdisnone'></view>
   <view class='awacontent'>
     <view class='awaconhead'>领奖提示</view>
-    <text class='awaconcon'>领奖专区内购买任意商品\n即可领奖成功</text>
+    <text class='awaconcon'>领奖专区内购买指定商品\n即可领奖成功</text>
     <view class='awaconbottom' catchtap='awajump'>确定</view>
   </view>
 </view>

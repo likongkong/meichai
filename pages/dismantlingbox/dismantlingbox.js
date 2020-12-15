@@ -61,7 +61,8 @@ Page({
        {"toyshowStart":{"template_id":["Q0tWM7kOihw1TilTeR3YmLzWp5tS0McgyOeJx2xX-B0","7rx-pSLTpdYH6IdOKAudkP1A0MmAzN0cOS2RXMTVyKo"], "subscribe_type":["12","12"]}},{"toyshowTicket":{"template_id":["Q0tWM7kOihw1TilTeR3YmLzWp5tS0McgyOeJx2xX-B0","7rx-pSLTpdYH6IdOKAudkP1A0MmAzN0cOS2RXMTVyKo"], "subscribe_type":["17","17"]}}
     ],
     countdown:'',
-    isAwardBox:false
+    isAwardBox:false,
+    isBuyingTickets:0
   },
   toggleAwardFun(){
     this.setData({
@@ -150,26 +151,37 @@ Page({
 
   // 跳转定位
   jumpposition:function(w){
-    var tid = w.currentTarget.dataset.tid || w.target.dataset.tid || 0;
+    var nowTime = new Date().getTime();
+    var isBuyingTickets = this.data.isBuyingTickets;
+    console.log('nowTime=====',nowTime)
+    if(isBuyingTickets && (nowTime/1000 > isBuyingTickets)){
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
+      });
+    } else {
 
-    var query = wx.createSelectorQuery();
-    query.select('#e' + tid).boundingClientRect();
-    query.selectViewport().scrollOffset();
-    query.exec(function(res) {
-      if (res && res[0] && res[1]) {
-        wx.pageScrollTo({
-           scrollTop:( res[0].top+res[1].scrollTop-app.signindata.statusBarHeightMc||90 )-85,
-           duration:300
-        })
-      }
-    });
+      var tid = w.currentTarget.dataset.tid || w.target.dataset.tid || 0;
 
-    var subscribe_data = w.currentTarget.dataset.subscribe_data;
-    console.log(subscribe_data)
-    this.setData({
-      subscribedata:subscribe_data
-    })
-    app.comsubscribe(this)
+      var query = wx.createSelectorQuery();
+      query.select('#e' + tid).boundingClientRect();
+      query.selectViewport().scrollOffset();
+      query.exec(function(res) {
+        if (res && res[0] && res[1]) {
+          wx.pageScrollTo({
+             scrollTop:( res[0].top+res[1].scrollTop-app.signindata.statusBarHeightMc||90 )-85,
+             duration:300
+          })
+        }
+      });
+
+      var subscribe_data = w.currentTarget.dataset.subscribe_data;
+      console.log(subscribe_data)
+      this.setData({
+        subscribedata:subscribe_data
+      })
+      app.comsubscribe(this)
+    }
+
 
 
   },
@@ -764,6 +776,7 @@ Page({
                 calendarList,
                 countSubsribe,
                 isMobileAuth:isMobileAuth,
+                isBuyingTickets:res.data.Info.ticketTime || 0
               });
               console.log(111111)
               // 是否是分享围观

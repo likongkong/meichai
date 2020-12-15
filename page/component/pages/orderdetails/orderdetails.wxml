@@ -17,7 +17,7 @@
          <view class="ordeQRImgBox">
             <image src="{{comdata.qrcode}}" class="ordeQRImgBoxImg"></image>
          </view>
-         <view class="ordeQRTitN" style="text-align:center;border-top:0;">需凭本人身份证线下扫码领取</view>
+         <view class="ordeQRTitN" style="text-align:center;border-top:0;">需凭本人身份证线下扫码领取{{comdata.drawDate}}</view>
      </view>
 
      <view class='orderdetcon'>         

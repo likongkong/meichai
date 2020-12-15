@@ -334,7 +334,7 @@ Page({
         
         var q = Dec.Aese('mod=operate&operation=withdraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&money=' + _this.data.putforwardnum.toFixed(2))
         wx.request({
-          url: app.signindata.comurl + 'wallet.php' + q,
+          url: Dec.comurl() + 'wallet.php' + q,
           method: 'GET',
           header: { 'Accept': 'application/json' },
           success: function (res) {
