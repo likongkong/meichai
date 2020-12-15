@@ -684,12 +684,24 @@ Page({
                   btntext: "未领取，已过期",
                   awardstatus: 3,
                 })
+                if (res.data.Info.infoActivity.isFillChance) {
+                  _this.data.timer = setInterval(function () {
+                    //将时间传如 调用 
+                    _this.dateformat(res.data.Info.infoActivity.refreshTime);
+                  }.bind(_this), 1000);
+                }
               }
             } else {
               _this.setData({
                 btntext: "没有中奖,再接再厉",
                 awardstatus: 4,
               })
+              if (res.data.Info.infoActivity.isFillChance) {
+                _this.data.timer = setInterval(function () {
+                  //将时间传如 调用 
+                  _this.dateformat(res.data.Info.infoActivity.refreshTime);
+                }.bind(_this), 1000);
+              }
             }
 
             var zlist = res.data.List.winnerLotto;

@@ -39,7 +39,15 @@
 		
 		<view wx:if="{{infoActivity.status==3 && !isgetaward}}" class='countdown' style='font-size:30rpx;{{infoActivity.supportLogo?"float:left;":""}}'>
 				<block wx:if='{{infoActivity.isFillChance}}'>
-						还有机会，有人未领取
+						还有机会，有人未领取（补抽倒计时
+						<text wx:if='{{dayStr!=0}}' style='diaplay:inline-block;'>{{dayStr}}</text>
+						<text wx:if='{{dayStr!=0}}' class='timetextstyle'>天</text>
+						<text style='diaplay:inline-block;'>{{hrStr}}</text>
+						<text class='timetextstyle'>时</text>
+						<text style='diaplay:inline-block;'>{{minStr}}</text>
+						<text class='timetextstyle'>分</text>
+						<text style='diaplay:inline-block;'>{{secStr}}</text>
+						<text class='timetextstyle'>秒</text>）
 				</block>
 				<block wx:else>
 						活动已结束
@@ -101,19 +109,19 @@
 
 	<view style="width:100%;background:white;overflow:hidden;position:relative;">
 
-     <block wx:if='{{infoActivity.status == 1}}'>
-				<view class='limsharebox' catchtap='limsavefun' wx:if='{{is_share_but}}'>
-					<image class='limshareimg' src='https://www.51chaidan.com/images/act/brand/createPoster.png'></image>
-					<view style='color:#53a5fd;font-size:22rpx;padding:3rpx 0 0 0;text-align:center;'>生成海报</view>
-				</view>
-				<view class='limsharebox' catchtap="ishowtipsfun" wx:if='{{false}}' style="left:140rpx;">
-					<image class='limshareimg' src='https://cdn.51chaidan.com/images/icon/iconBankCard.png'></image>
-					<view style='color:#53a5fd;font-size:22rpx;padding:3rpx 0 0 0;text-align:center;'>抽选卡</view>
-					<view class="tabshopimg specialellipsis" style="top:-12rpx;left:70rpx;">{{infoActivity.toyShowChance}}</view>
-				</view>	
-        <view class='takepartin' catchtap='subscrfun' style="margin:20rpx 0 20rpx 300rpx;background:#eeae19;box-shadow: 2px 2px 5rpx #ccc;">订阅提醒</view>
+		<block wx:if='{{infoActivity.status == 1}}'>
+			<view class='limsharebox' catchtap='limsavefun' wx:if='{{is_share_but}}'>
+				<image class='limshareimg' src='https://www.51chaidan.com/images/act/brand/createPoster.png'></image>
+				<view style='color:#53a5fd;font-size:22rpx;padding:3rpx 0 0 0;text-align:center;'>生成海报</view>
+			</view>
+			<view class='limsharebox' catchtap="ishowtipsfun" wx:if='{{false}}' style="left:140rpx;">
+				<image class='limshareimg' src='https://cdn.51chaidan.com/images/icon/iconBankCard.png'></image>
+				<view style='color:#53a5fd;font-size:22rpx;padding:3rpx 0 0 0;text-align:center;'>抽选卡</view>
+				<view class="tabshopimg specialellipsis" style="top:-12rpx;left:70rpx;">{{infoActivity.toyShowChance}}</view>
+			</view>	
+			<view class='takepartin' catchtap='subscrfun' style="{{!is_share_but?'margin:20rpx auto 20rpx auto;':'margin:20rpx 0 20rpx 300rpx;'}}background:#eeae19;box-shadow: 2px 2px 5rpx #ccc;">订阅提醒</view>
 
-		 </block>
+		</block>
 
 
 		<!-- 特殊付费抽签中未付费显示 -->
@@ -130,7 +138,8 @@
 		</block>		
 		<view wx:if='{{infoActivity.status == 2 && (infoActivity.joinMothed == "blindBox"|| infoActivity.joinMothed == "zone") && !infoActivity.isCanOpenLotto}}'>
 
-			<view wx:if='{{infoFragment.activitySignNumber.length == 0}}' data-i='1' class='takepartin' catchtap="joinlimitlottery">参与抽签
+			<view wx:if='{{infoFragment.activitySignNumber.length == 0}}' data-i='1' class='takepartin' catchtap="joinlimitlottery">
+				参与抽签
 				<view wx:if='{{infoActivity.joinMothed == "blindBox"}}' class="tagstyle">抽盒机专享</view>
 				<view wx:if='{{infoActivity.joinMothed == "zone"}}' class="tagstyle">抽签专区专享</view>
 			</view>
@@ -147,14 +156,16 @@
 					<view wx:for='{{infoFragment.activitySignNumber}}' wx:key='key'>签号 {{item.lotto}}</view>
 				</view>
 
-				<view style="width:60%;background:#fb595f;color:white;line-height:80rpx;border-radius:5rpx;float:right;text-align:center;position:relative;font-size:26rpx;" data-i='2' catchtap="joinlimitlottery">参与抽签
+				<view style="width:60%;background:#fb595f;color:white;line-height:80rpx;border-radius:5rpx;float:right;text-align:center;position:relative;font-size:26rpx;" data-i='2' catchtap="joinlimitlottery">
+					参与抽签
 					<view wx:if='{{infoActivity.joinMothed == "blindBox"}}' class="tagstyle">抽盒机专享</view>
 					<view wx:if='{{infoActivity.joinMothed == "zone"}}' class="tagstyle">抽签专区专享</view>
 				</view>
 			</view>
 
 		</view>
-		<view wx:elif='{{infoActivity.status == 2 && infoFragment.personalFragmentNumber == 0}}' class='takepartin' catchtap="joinlimitlottery" style="margin:20rpx 0 20rpx 300rpx;">参与抽签
+		<view wx:elif='{{infoActivity.status == 2 && infoFragment.personalFragmentNumber == 0}}' class='takepartin' catchtap="joinlimitlottery" style="{{!is_share_but?'margin:20rpx auto 20rpx auto;':'margin:20rpx 0 20rpx 300rpx;'}}">
+			参与抽签
 			<view wx:if='{{infoActivity.joinMothed == "blindBox"}}' class="tagstyle">抽盒机专享</view>
 			<view wx:if='{{infoActivity.joinMothed == "zone"}}' class="tagstyle">抽签专区专享</view>
 		</view>
@@ -219,10 +230,9 @@
 
 		<view wx:if='{{infoActivity.status == 3}}' style="width:100%;padding-bottom:10rpx;">
 		  <block wx:if='{{reLottoList&&reLottoList.length!=0}}'>
-					<view style="width:100%;font-size:25rpx;line-height:30rpx;text-align:center;margin:20rpx 0;">补抽名单</view>
+					<view style="width:100%;font-size:25rpx;line-height:30rpx;text-align:center;margin:20rpx 0;">补抽名单1</view>
 					<view style='font-size:30rpx;color:#1989FA;' wx:for='{{winnerLotto}}' wx:key='key'>
 							<view style='overflow:hidden;padding:20rpx 150rpx;text-align:center;'>
-
 								<view style='float:left;width:60rpx;height:60rpx;border-radius:50%;background:#FF8080;'>
 									<image style='width:60rpx;height:60rpx;border-radius:50%;' src='{{item.headphoto}}'></image>
 								</view>
@@ -235,7 +245,7 @@
 							<block wx:for='{{reLottoList}}' wx:key='key'>
 									<view style="width:100%;font-size:25rpx;line-height:30rpx;text-align:center;margin:20rpx 0;">
 									    <block wx:if='{{(index+1)==reLottoList.length}}'>中签名单</block>
-									    <block wx:else>补抽名单</block>
+									    <block wx:else>补抽名单2</block>
 									</view>
 									<block wx:for='{{item}}' wx:key='key'>
 											<view style='font-size:30rpx;color:#1989FA;'>
