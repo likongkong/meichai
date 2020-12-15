@@ -33,7 +33,7 @@
           <block wx:if='{{item.img}}'>
               <view class="bTEveTwo {{tabTwoId==item.type?'borderBg':''}}" catchtap="tabObtainData" data-obtain='2' data-num='{{item.type}}' data-ind='{{index}}'>
                   <image class="bTEveTwoImg"  mode='aspectFit' src="{{item.img}}"></image>
-                  <text class="specialellipsis" wx:if='{{item.subTitle}}' style="margin-left:20rpx;display:inline-block;max-width:200rpx;vertical-align:top;">{{item.subTitle}}</text>
+                  <text class="specialellipsis" wx:if='{{item.subTitle}}' style="margin-left:20rpx;display:inline-block;max-width:320rpx;vertical-align:top;">{{item.subTitle}}</text>
                   <text class="specialellipsis" style="max-width:320rpx;display:inline-block;vertical-align:top;">+{{item.title}}</text>
                   <text style="float:right;margin-right:15rpx;color:#E94F57;">￥{{item.price}}</text>
               </view>        
