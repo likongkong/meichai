@@ -39,25 +39,31 @@ page{
 
 .cardWrap{
   width: 690rpx;
-  height: 360rpx;
-  background: #666666;
+  /* height: 292rpx; */
+  /* background: #666666; */
   border-radius: 14rpx;
   margin-bottom: 15rpx;
   display: flex;
   justify-content: space-between;
+  overflow: hidden;
 }
 .cardLWrap{
   width: 490rpx;
-  height: 360rpx;
+  /* height: 292rpx; */
+}
+.cardLWrap image{
+  width: 100%;
+  height: auto;
+  display: block;
 }
 .cardRWrap{
   width: 200rpx;
-  height: 360rpx;
+  /* height: 292rpx; */
   position: relative;
 }
 .cardRT{
   position: absolute;
-  top: 20rpx;
+  top: 10rpx;
   left: 10rpx;
 }
 .cardRT text{
@@ -67,17 +73,17 @@ page{
   display: block;
 }
 .cardRC{
-  width: 150rpx;
-  height: 60rpx;
-  border-radius: 60rpx;
+  width: 130rpx;
+  height: 50rpx;
+  border-radius: 50rpx;
   color: #fff;
-  font-size: 26rpx;
-  line-height: 60rpx;
+  font-size: 24rpx;
+  line-height: 50rpx;
   text-align: center;
   position: absolute;
   top: 50%;
-  left: 0;
-  margin-top: -44rpx;
+  left: 10rpx;
+  margin-top: -38rpx;
 }
 .cardRCImg{
   width: 120rpx;
@@ -107,12 +113,12 @@ page{
 }
 .cardRB>view text:first-child{
   width: 56rpx;
-  font-size: 14rpx;
+  font-size: 13rpx;
   color: #fff;
   display: block;
 }
 .cardRB>view text:last-child{
-  font-size: 14rpx;
+  font-size: 13rpx;
   color: #fff;
   display: block;
 }

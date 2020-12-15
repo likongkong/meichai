@@ -16,24 +16,29 @@ Page({
     tgabox:false,
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
-    shareUId:'',
-    countdown:'1608102710',
+    share_uid:0,
+    countdown:'',
     percent:'',
     isRecordMask:false,
     isAwardMask:false,
     isidCardMask:false,
-    idcardIndex:1,
+    idcardIndex:0,
+    // 绑定身份证id
     bindIdcard:'',
-    bindDate:''
+    bindDate:'',
+    // 抽奖数
+    drawnum:1,
+    isShowRule:false
   },
+ 
   togglerecordFun(){
     var _this = this;
     if(!this.data.isRecordMask){
       wx.showLoading({ title: '加载中...'})
       var q = Dec.Aese('mod=prior&operation=drawRecord&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
-      console.log(app.signindata.comurl + 'toy.php?mod=prior&operation=drawRecord&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+      console.log(app.signindata.comurl + 'spread.php?mod=prior&operation=drawRecord&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
       wx.request({
-        url: app.signindata.comurl + 'toy.php'+q,
+        url: app.signindata.comurl + 'spread.php'+q,
         method: 'GET',
         header: { 'Accept': 'application/json' },
         success: function (res) {
@@ -41,7 +46,8 @@ Page({
           wx.hideLoading();
           if (res.data.ReturnCode == 200) {
             _this.setData({
-              isRecordMask:true
+              isRecordMask:true,
+              awardList:res.data.List.awardList
             })
           }else{
             app.showToastC(res.data.Msg)
@@ -53,6 +59,11 @@ Page({
         isRecordMask:false
       })
     }
+  },
+  toggleRuleFun(){
+    this.setData({
+      isShowRule:!this.data.isShowRule
+    })
   },
   toggleawardFun(){
     this.setData({
@@ -85,8 +96,8 @@ Page({
   getInfo(){
     var _this = this;
     wx.showLoading({ title: '加载中...'})
-    var q = Dec.Aese('mod=prior&operation=getInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&shareUId=' + _this.data.shareUId);
-    console.log(app.signindata.comurl + 'spread.php?mod=prior&operation=getInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&shareUId=' + _this.data.shareUId)
+    var q = Dec.Aese('mod=prior&operation=getInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&shareUId=' + _this.data.share_uid);
+    console.log(app.signindata.comurl + 'spread.php?mod=prior&operation=getInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&shareUId=' + _this.data.share_uid)
     wx.request({
       url: app.signindata.comurl + 'spread.php'+q,
       method: 'GET',
@@ -104,30 +115,45 @@ Page({
             data.List.identity[i].consignee = _this.plusXing(data.List.identity[i].consignee,1,0);
             data.List.identity[i].mobile = _this.plusXing(data.List.identity[i].mobile,3,4);
           }
-          if(data.Info.bindIdentity){
+          if(data.Info.bindIdentity != 0){
             data.Info.bindIdentity.consignee = _this.plusXing(data.Info.bindIdentity.consignee,1,0);
             data.Info.bindIdentity.idcard = _this.plusXing(data.Info.bindIdentity.idcard,4,4);
           }
-          console.log(data.List.identity,111)
           _this.setData({
+            suplusChance:data.Info.user.suplusChance,
             activity:data.Info.activity,
             bindIdentity:data.Info.bindIdentity,
             user:data.Info.user,
+            countdown:data.Info.endTime,
             totalScratch:data.Info.user.totalScratch,
             scratch:data.List.scratch,
             identity:data.List.identity,
-            bindIdcard:data.List.identity[0].actualidcard,
-            bindData:data.List.identity[0].date,
-            percent:(data.Info.user.totalScratch/data.Info.user.peakValue)*100
+            bindIdcard:data.List.identity[_this.data.idcardIndex]?data.List.identity[_this.data.idcardIndex].actualidcard:0,
+            bindDate:data.List.identity[_this.data.idcardIndex]?data.List.identity[_this.data.idcardIndex].date:0,
+            percent:(data.Info.user.totalScratch/data.Info.user.peakValue)*100,
+            explain:data.List.explain,
+            subscribedata:res.data.Info.subscribe
           })
+          _this.countdownbfun();        
         }else{
-          app.showToastC(res.data.Msg)
+          wx.showToast({
+            title: res.data.Msg,
+            icon: 'none',
+            mask:true,
+            duration:1000
+          });  
+          if(res.data.ReturnCode == 384 && _this.data.share_uid){
+            _this.data.share_uid = 0;
+            setTimeout(function(){
+              _this.getInfo()
+            },1000)
+          }
         }
       }
     }); 
   },
   bindidCardFun(e){
-    var idcard =this.data.bindIdcard;
+    var _this = this;
     var idcard =this.data.bindIdcard;
     var bindDate = this.data.bindDate;
     wx.showLoading({ title: '加载中...'})
@@ -141,8 +167,18 @@ Page({
         console.log('绑定的身份证号======',res)
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
-          app.showToastC('绑定成功')
-          _this.getInfo();
+          wx.showToast({
+            title: '绑定成功',
+            icon: 'none',
+            mask:true,
+            duration:1000
+          });  
+          _this.setData({
+            isidCardMask:false
+          })  
+          setTimeout(function(){
+            _this.getInfo();
+          },1000)
         }else{
           app.showToastC(res.data.Msg)
         }
@@ -163,7 +199,54 @@ Page({
         console.log('刮卡======',res)
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
-          
+          if(num == 1){
+            _this.setData({
+              suplusChance:_this.data.suplusChance-1,
+            })
+          }else{
+            if(_this.data.user.isVIP){
+              _this.setData({
+                suplusChance:_this.data.suplusChance-7,
+              })
+            }else{
+              _this.setData({
+                suplusChance:_this.data.suplusChance-10,
+              })
+            }
+          }
+          _this.setData({
+            drawnum:num,
+            isAwardMask:true,
+            result:res.data.List.result
+          })
+        }else{
+          app.showToastC(res.data.Msg)
+        }
+      }
+    }); 
+  },
+  getDrawFun(){
+    var _this = this;
+    wx.showLoading({ title: '加载中...'})
+    var q = Dec.Aese('mod=prior&operation=getEntrance&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&getType=1');
+    console.log(app.signindata.comurl + 'spread.php?mod=prior&operation=scratchGift&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&getType=1')
+    wx.request({
+      url: app.signindata.comurl + 'spread.php'+q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('领取投票券======',res)
+        wx.hideLoading();
+        if (res.data.ReturnCode == 200) {
+          wx.showToast({
+            title: '领取成功',
+            icon: 'none',
+            mask:true,
+            duration:1000
+          });  
+          setTimeout(function(){
+            _this.getInfo();
+          },1000)
         }else{
           app.showToastC(res.data.Msg)
         }
@@ -171,13 +254,17 @@ Page({
     }); 
   },
 
+
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     // 判断是否授权
-    this.activsign();
-    this.countdownbfun();        
+    var _this = this;
+    _this.data.share_uid = options.share_uid || 0
+    _this.activsign();
+    _this.countdownbfun();        
     // this.onLoadfun(); 
   },
   onLoadfun:function(){
@@ -313,10 +400,32 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-    var reshare = Dec.sharemc();
-    return reshare
+  // onShareAppMessage: function () {
+  //   var reshare = Dec.sharemc();
+  //   return reshare
+  // },
+
+  onShareTimeline:function(){
+    var _this = this;
+    return {
+      title: '刮刮卡',
+      query:'share_uid='+_this.data.uid,
+      imageUrl:_this.data.shareImg,
+    }
   },
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+    var _this = this;
+    return {
+      title: '刮刮卡',
+      path: '/page/secondpackge/pages/luckyDraw/luckyDraw?share_uid='+_this.data.uid,
+      imageUrl:_this.data.shareImg,
+      success: function (res) {}
+    }      
+  },
+
   // 倒计时
   countdownbfun: function () {
     var _this = this;
@@ -374,5 +483,25 @@ Page({
       clearInterval(_this.data.timer);
       _this.data.timer = setInterval(nowTime, 1000);
     };
+  },
+  // 跳转
+  jumpOtherPage:function(w){
+    var num = w.currentTarget.dataset.num || w.target.dataset.num || 100000;
+    var whref = w.currentTarget.dataset.whref || w.target.dataset.whref || 100000;
+    var title = w.currentTarget.dataset.title || w.target.dataset.title || '';
+    app.comjumpwxnav(num,whref,title);
+    if(num==9){
+      this.data.isJumpSignin = true;
+    }
+  },
+  jumpVipPage(){
+    wx.navigateTo({  
+      url: "/page/secondpackge/pages/vipPage/vipPage"
+    })
+  },
+   // 订阅授权
+   subscrfun:function(){
+    var _this = this;
+    app.comsubscribe(_this);
   },
 })
