@@ -78,10 +78,10 @@ Page({
     }); 
   },
   signup(e){
-    let id = e;
+    let id = e.currentTarget.dataset.id;
     var _this = this;
     wx.showLoading({ title: '加载中...'})
-    var q = Dec.Aese('mod=lottoPrior&operation=sign&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&ticketId=' + e)
+    var q = Dec.Aese('mod=lottoPrior&operation=sign&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&ticketId=' + id)
     wx.request({
       url: app.signindata.comurl + 'spread.php'+q,
       method: 'GET',
@@ -96,6 +96,7 @@ Page({
             showCancel: false,
             success: function (res) { }
           })
+          _this.getInfo();
         }
       }
     }); 
