@@ -87,7 +87,6 @@ Page({
     clearInterval(_this.data.timer);
     var countdown = _this.data.countdown;
     var commoddata = _this.data.commoddata;
-    console.log(2)
     function nowTime() { //时间函数
       var iftrins = true;
       // 获取现在的时间
@@ -165,8 +164,15 @@ Page({
     console.log(1)
     wx.showLoading({ title: '加载中...', }) 
     var comdata = _this.data.comdata;
+
+    if(Dec.env == 'online'){
+      var getUrl = 'http://brandentry.51chaidan.com/';
+    }else{
+      var getUrl = 'http://brandentry-test.51chaidan.com/';
+    };
+    console.log(getUrl + 'verificationcode?orderNum='+comdata.ticketQrKey)
     wx.request({
-      url: 'http://brandentry-test.51chaidan.com/verificationcode?orderNum='+comdata.ticketQrKey,
+      url:getUrl + 'verificationcode?orderNum='+comdata.ticketQrKey,
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
