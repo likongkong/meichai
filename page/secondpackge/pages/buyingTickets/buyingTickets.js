@@ -107,12 +107,12 @@ Page({
       wx.showModal({
         title: '',
         content:  '凭本人身份证现场领取'+subTitle,
-        cancelText: '取消',
-        confirmText: '确定',
+        cancelText: '确定',
+        confirmText: '取消',
         confirmColor:'#000',
         cancelColor: '#000',
         success (res) {
-          if (res.confirm) {
+          if (res.cancel) {
             _this.buyingTickPay();
           };
         }
@@ -256,7 +256,14 @@ Page({
   },
 
 
-
+  identityTipFunjump:function(){
+      wx.navigateTo({    
+          url: "/page/secondpackge/pages/idCardVerification/idCardVerification"
+      });
+      this.setData({
+        realNameSystem:false
+      })
+  },
 
   identityTipFun:function(){
      this.setData({
@@ -671,12 +678,12 @@ Page({
     wx.showModal({
       title: '身份信息确认',
       content: '姓名:'+_this.data.inputnamedata + '\n手机号:'+_this.data.contactsphone +  '\n身份证号:'+_this.data.inputidnumberdata ,
-      cancelText: '取消',
-      confirmText: '确定',
+      cancelText: '确定',
+      confirmText: '取消',
       confirmColor:'#000',
       cancelColor: '#000',
       success (res) {
-        if (res.confirm) {
+        if (res.cancel) {
             var q = Dec.Aese('mod=ticket&operation=addIdentity&consignee='+_this.data.inputnamedata+'&idcard='+_this.data.inputidnumberdata + '&uid=' + _this.data.uid+'&loginid=' + _this.data.loginid+'&mobile=' + _this.data.contactsphone)
 
             console.log('mod=ticket&operation=addIdentity&consignee='+_this.data.inputnamedata+'&idcard='+_this.data.inputidnumberdata + '&uid=' + _this.data.uid+'&loginid=' + _this.data.loginid+'&mobile=' + _this.data.contactsphone)
@@ -734,8 +741,8 @@ Page({
                 }
               }
             })
-         } else if (res.cancel) {
-           console.log('用户点击取消按钮')
+         } else if (res.confirm) {
+           
          }
        }
     })
@@ -753,12 +760,12 @@ Page({
     wx.showModal({
       title: '提示',
       content: '确定要删除此条信息吗',
-      cancelText: '取消',
-      confirmText: '确定',
+      cancelText: '确定',
+      confirmText: '取消',
       confirmColor:'#000',
       cancelColor: '#000',
       success: function (res) {
-        if (res.confirm) {
+        if (res.cancel) {
             var q = Dec.Aese('mod=ticket&operation=delIdentity&id='+ queData.id + '&uid=' + _this.data.uid+'&loginid=' + _this.data.loginid)
             console.log('mod=ticket&operation=delIdentity&id='+ queData.id + '&uid=' + _this.data.uid+'&loginid=' + _this.data.loginid)
             wx.showLoading({title: '加载中...',mask:true});

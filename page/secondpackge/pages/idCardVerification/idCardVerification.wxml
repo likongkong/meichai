@@ -1,0 +1,57 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+
+<view class="idCardBox">
+   <text class="idCardBoxTxt">展会需要实名制购票，实名制入场。\n特别提示：实名制入场需本人持购票时填写的有效证件入场。</text>
+
+   <view class="inputBox">
+       <view class="inputLeftTxt">姓名：</view>
+       <input class='idnumberboxinp' type='text' value='{{inputnamedata}}' bindinput="inputnameChange" placeholder='请填写参展人姓名'></input>
+   </view>
+   <view class="inputBox">
+       <view class="inputLeftTxt">身份证号：</view>
+       <input class='idnumberboxinp' type='text' value='{{inputidnumberdata}}' bindinput="inputidChange" placeholder='请填写参展人身份证号'></input> 
+   </view>
+   <view class="inputBox">
+       <view class="inputLeftTxt">电话号：</view>
+       <input class='idnumberboxinp' type='text' value='{{contactsphone}}' bindinput="contactsChangep" placeholder='请填写参展人手机号'></input>
+   </view>   
+
+
+   <view class="idCardAgree">点击确定表示您已阅读并同意<text catchtap="realnamenoticef" style="color:#298CF7;">《实名须知》</text></view>
+
+     
+</view>
+
+
+
+<view class="leafletBottomEve boxShadowEve" catchtap="upIdentity">确定</view>
+
+
+
+<!-- 协议弹框 -->
+<view wx:if='{{realnamenotice}}' class="wsh" catchtouchmove="true" style="z-index:99;">
+   <view class="tgimgboxgb" catchtap="realnamenoticef"></view>
+	 <view class="identityTipBox">  
+        <view class="adreshead" style="line-height:80rpx;">实名须知</view>
+        <view class="adcontxt">根据法律规定以及国内公安部门对大型活动中购票用户实名制要求，在购票时需要你的实名信息，包括（姓名、身份证号、电话号）。为方便您迅速下单，你可选择在购票前添加购票人实名信息。为保证信息的真实性和唯一性，我们会基于您所提供的信息通过征信平台或其他惯常方式进行实名验证。</view>
+
+	 </view>
+</view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>
+

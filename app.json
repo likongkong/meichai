@@ -116,6 +116,7 @@
         "pages/priorityVoting/priorityVoting",
         "pages/luckyDraw/luckyDraw",
         "pages/articleList/articleList",
+        "pages/idCardVerification/idCardVerification",
         "pages/chouxuanHomepage/chouxuanHomepage" 
       ]
     }

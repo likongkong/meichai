@@ -1252,5 +1252,5 @@ App({
 
 // priorityVoting  优先权抽选
 // luckyDraw  抽奖活动
-
+// idCardVerification 身份证验证
 
