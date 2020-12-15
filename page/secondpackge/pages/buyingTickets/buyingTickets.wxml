@@ -91,18 +91,18 @@
               <view class="bTcOHeadTip">因购票火爆，请在下单后2分钟内完成支付</view>   
               <view class="bTcOcontentTip">
                   <view class="bTcOcontentTTxt" style="font-size:28rpx;">MCTS x JSS 北京潮流艺术与手办玩具展览会</view>
-                  <view class="bTcOcontentTTxt">中国国际展览中心（静安庄馆）</view>
+                  <view class="bTcOcontentTTxt" style="color:#666;">中国国际展览中心（静安庄馆）</view>
               </view>
 
               <view class="bTcOcontentTip">
-                  <view class="bTcOcontentTTxt">
+                  <view class="bTcOcontentTTxt" style="font-size:28rpx;">
                      <block wx:for='{{ticket}}' wx:key='key' wx:if='{{tabOneId==item.day}}'>{{item.date}} {{item.timeRange}}</block>
                   </view>
-                  <view class="bTcOcontentTTxt">
+                  <view class="bTcOcontentTTxt" style="font-size:28rpx;">
                      <block wx:for='{{ticketTwo}}' wx:key='key' wx:if='{{tabTwoId==item.type}}'>{{item.title}}<block wx:if='{{item.subTitle}}'>  +  {{item.subTitle}}</block></block>
                   </view>
                   <block wx:for='{{ticketTwo}}' wx:key='key' wx:if='{{tabTwoId==item.type}}'>
-                     <view class="bTcOcontentTTxt" wx:if='{{item.subTitle}}'>{{item.subTitle}}线下展会领取</view>
+                     <view class="bTcOcontentTTxt" style="color:#666;" wx:if='{{item.subTitle}}'>{{item.subTitle}}线下展会领取</view>
                   </block>
                   
               </view>

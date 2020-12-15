@@ -35,6 +35,8 @@ page{
   width: 690rpx;
   height: 80rpx;
   margin: auto;
+  border-bottom: 2rpx solid #F7F7F7;
+  padding-top: 20rpx;
 }
 .idCardAgree{
   width: 690rpx;
@@ -46,8 +48,11 @@ page{
 }
 
 
-.idnumberboxinp{width:480rpx;height:60rpx;line-height:80rpx;font-size:28rpx;color:#999;margin:0 auto;float: left;}
+.idnumberboxinp{width:480rpx;height:60rpx;line-height:80rpx;font-size:28rpx;color:#000;margin:0 auto;float: left;}
 
+.phcolor{
+  color:#CECECE;
+}
 .leafletBottomEve{
   width:600rpx;
   height: 70rpx;

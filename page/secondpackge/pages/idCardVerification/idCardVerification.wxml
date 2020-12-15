@@ -6,16 +6,16 @@
    <text class="idCardBoxTxt">展会需要实名制购票，实名制入场。\n特别提示：实名制入场需本人持购票时填写的有效证件入场。</text>
 
    <view class="inputBox">
-       <view class="inputLeftTxt">姓名：</view>
-       <input class='idnumberboxinp' type='text' value='{{inputnamedata}}' bindinput="inputnameChange" placeholder='请填写参展人姓名'></input>
+       <text class="inputLeftTxt" decode="{{true}}" space="{{true}}">姓名：</text>
+       <input class='idnumberboxinp' type='text' placeholder-class="phcolor" value='{{inputnamedata}}' bindinput="inputnameChange" placeholder='请填写参展人姓名'></input>
    </view>
    <view class="inputBox">
-       <view class="inputLeftTxt">身份证号：</view>
-       <input class='idnumberboxinp' type='text' value='{{inputidnumberdata}}' bindinput="inputidChange" placeholder='请填写参展人身份证号'></input> 
+       <text class="inputLeftTxt" decode="{{true}}" space="{{true}}">身份证号：</text>
+       <input class='idnumberboxinp' type='text' placeholder-class="phcolor" value='{{inputidnumberdata}}' bindinput="inputidChange" placeholder='请填写参展人身份证号'></input> 
    </view>
    <view class="inputBox">
-       <view class="inputLeftTxt">电话号：</view>
-       <input class='idnumberboxinp' type='text' value='{{contactsphone}}' bindinput="contactsChangep" placeholder='请填写参展人手机号'></input>
+       <text class="inputLeftTxt" decode="{{true}}" space="{{true}}">电话号：</text>
+       <input class='idnumberboxinp' type='text' placeholder-class="phcolor" value='{{contactsphone}}' bindinput="contactsChangep" placeholder='请填写参展人手机号'></input>
    </view>   
 
 
