@@ -596,7 +596,7 @@ Page({
              if(res.data.Info.idcard){
                 res.data.Info.idcard = res.data.Info.idcard.replace(/^(.{4})(?:\w+)(.{4})$/, "$1**********$2");
              };
- 
+             res.data.Info.qrcode = '';
              _this.setData({
                isShareGood:isShareGood,
                comdata: res.data.Info,

@@ -681,7 +681,7 @@ Page({
                 }.bind(_this), 1000);
               } else {
                 _this.setData({
-                  btntext: "开奖24小时未领取，已过期",
+                  btntext: "未领取，已过期",
                   awardstatus: 3,
                 })
               }

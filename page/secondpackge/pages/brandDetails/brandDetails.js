@@ -508,7 +508,7 @@ Page({
     var _this = this
     var share = {
       title: _this.data.brandinfo.shareDesc,
-      imageUrl: _this.data.brandinfo.shareImg,
+      imageUrl: _this.data.brandinfo.shareImg || app.signindata.indexShareImg,
       path: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + _this.data.brandId + '&referee=' + _this.data.uid+"&settlement="+_this.data.settlement,
       success: function (res) { }
     }
