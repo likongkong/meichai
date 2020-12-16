@@ -244,7 +244,7 @@
     </view>
     <!-- 媒体合作与平台支持 -->
     <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;">———— 媒体合作与平台支持 ————</view>
-    <view class="ssubBrandEveWrap" style="width:100%;overflow: hidden;padding:0 40rpx;display: flex;justify-content: center;align-items: center;box-sizing: border-box;">
+    <view class="ssubBrandEveWrap" style="width:100%;overflow: hidden;padding:0 40rpx;box-sizing: border-box;">
         <view class="ssubBrandEve">
           <image class="ssubBiliimgbr" src="https://cdn.51chaidan.com/images/toyShow3/yk.jpg" mode='aspectFit'></image>
         </view>
@@ -254,17 +254,16 @@
         <view class="ssubBrandEve">
           <image class="ssubBiliimgbr" src="https://cdn.51chaidan.com/images/toyShow3/chw.jpg" mode='aspectFit'></image>
         </view>
-        <!-- <view class="ssubBrandEve">
-          <image class="ssubBiliimgbr" src="https://cdn.51chaidan.com/images/toyShow3/yk.jpg" mode='aspectFit'></image>
+        <view class="ssubBrandEve">
+          <image class="ssubBiliimgbr" src="https://cdn.51chaidan.com/images/toyShow3/look.jpg" mode='aspectFit'></image>
         </view>
         <view class="ssubBrandEve">
-          <image class="ssubBiliimgbr" src="https://cdn.51chaidan.com/images/toyShow3/kl.jpg" mode='aspectFit'></image>
+          <image class="ssubBiliimgbr" src="https://cdn.51chaidan.com/images/toyShow3/chihuo.jpg" mode='aspectFit'></image>
         </view>
         <view class="ssubBrandEve">
-          <image class="ssubBiliimgbr" src="https://cdn.51chaidan.com/images/toyShow3/chw.jpg" mode='aspectFit'></image>
-        </view> -->
+          <image class="ssubBiliimgbr" src="https://cdn.51chaidan.com/images/toyShow3/newbaby.jpg" mode='aspectFit'></image>
+        </view>
     </view>
-
     <!-- <view class="ssubBotTxt">售卖商品陆续更新,最终以展会开售为准</view> -->
 </view>
 

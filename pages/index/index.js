@@ -224,7 +224,7 @@ Page({
       // url: "/pages/dismantlingbox/dismantlingbox"
       // url: "/page/secondpackge/pages/shopsquaretrip/shopsquaretrip"
       
-      url: "/page/component/pages/limitlottery/limitlottery?id=251707&canShare=1",
+      // url: "/page/component/pages/limitlottery/limitlottery?id=251707&canShare=1",
 
       // url: "/pages/modifythenickname/modifythenickname"
 
@@ -233,7 +233,7 @@ Page({
       // url: "/page/secondpackge/pages/calendarList/calendarList"
 
       // url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
-      // url: "/page/secondpackge/pages/luckyDraw/luckyDraw"
+      url: "/page/secondpackge/pages/luckyDraw/luckyDraw"
       
       // url: "/page/secondpackge/pages/idCardVerification/idCardVerification"
 

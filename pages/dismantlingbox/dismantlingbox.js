@@ -722,23 +722,21 @@ Page({
     })
 },
 
-  brandJson:function(){
-     var _this = this;
-    //调取搜索关键词跳转对应列表数据
-    wx.request({
-      url: 'https://cdn.51chaidan.com/json/toyshowBrand.json',
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        console.log('品牌数据logo===',res)
-        _this.setData({
-          brandList:res.data || []
-        })
-      }
-    })
-
-
-  },
+// brandJson:function(){
+//      var _this = this;
+//     //调取搜索关键词跳转对应列表数据
+//     wx.request({
+//       url: 'https://cdn.51chaidan.com/json/toyshowBrand.json',
+//       method: 'GET',
+//       header: { 'Accept': 'application/json' },
+//       success: function (res) {
+//         console.log('品牌数据logo===',res)
+//         _this.setData({
+//           brandList:res.data || []
+//         })
+//       }
+//     })
+//   },
   // 品牌信息
   brandinformation:function(num){
       var _this = this
@@ -762,10 +760,11 @@ Page({
           wx.stopPullDownRefresh();
           wx.hideLoading()
           // 品牌数据
-          _this.brandJson();
+          // _this.brandJson();
           if (res.data.ReturnCode == 200) {
             if(num==1){
               var bannerList = res.data.List.bannerList || [];
+              var brandList = res.data.List.brand || [];
               var calendarList = res.data.List.calendar || [];
               var isMobileAuth = res.data.Info.isMobileAuth || false;
               var countSubsribe = res.data.Info.countSubsribe || 0;
@@ -774,11 +773,11 @@ Page({
               _this.setData({
                 bannerList:bannerList,
                 calendarList,
+                brandList,
                 countSubsribe,
                 isMobileAuth:isMobileAuth,
                 isBuyingTickets:res.data.Info.ticketTime || 0
               });
-              console.log(111111)
               // 是否是分享围观
               _this.shareReferee();
 
