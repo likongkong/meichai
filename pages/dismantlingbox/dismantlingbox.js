@@ -149,6 +149,17 @@ Page({
     })
   },
 
+  
+  jumpChouxuanHomepage(){
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/chouxuanHomepage/chouxuanHomepage"
+    });
+  },
+  jumpLuckyDraw(){
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/luckyDraw/luckyDraw"
+    });
+  },
   // 跳转定位
   jumpposition:function(w){
     // var nowTime = new Date().getTime();
