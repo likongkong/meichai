@@ -39,7 +39,7 @@ Page({
    
     banner:[],
 
-    ticket:{},
+    ticket:'',
 
     ticketTwo:[],
     ticketInstrut:false,
@@ -49,7 +49,9 @@ Page({
     realNameSystem:false,
 
     buyNowOrOppor:false,
-    isSubscribe:false
+    isSubscribe:false,
+
+    showSubscription:true
 
   },
   // 订阅授权
@@ -411,7 +413,6 @@ Page({
       success: function (res) {
         wx.hideLoading();
         wx.stopPullDownRefresh();
-        console.log('购票须知=============',res)
         _this.setData({
           ticketingInOne:res.data.rule || '',
           ticketingInTwo:res.data.tip || '',
@@ -491,7 +492,21 @@ Page({
           }else{
             _this.realNameSysfun();
           };
+
+          var nowTime = new Date().getTime();
+          var ticketTime = res.data.Info.ticketTime || 0;
+          console.log('nowTime=====',nowTime);
+
+          var showSubscription = true;
+
+          if(ticketTime && (nowTime/1000 > ticketTime)){
+            showSubscription:false
+          };
+
+          console.log('showSubscription=========',showSubscription)
+
           _this.setData({
+            showSubscription:showSubscription,
             buyNowOrOppor:buyNowOrOppor,
             banner:res.data.List.banner || [],
             ticket:ticket,
@@ -503,7 +518,7 @@ Page({
             detail:res.data.List.detail || [],
             sumPrice:sumPrice,
             seldate:seldate,
-            subscribedata:res.data.Info.subscribe,
+            subscribedata:res.data.Info.subscribe || [],
             isSubscribe:isSubscribe
             // contactsname:res.data.Info.contact || '',
             // contactsphone:res.data.Info.mobile || ''

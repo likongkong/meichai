@@ -56,14 +56,19 @@
 
 <view class="leafletBottom">
    <view class="leafletBottomTxt">门票玩具线下展会领取，购票场次时间内有效</view>
+   <block wx:if='{{ticket}}'>
+        <view wx:if="{{showSubscription}}" class="leafletBottomEve boxShadowEve" catchtap="subscrfun" style="width:400rpx;background:#eeae19;">
+                开售提醒 
+        </view>  
+        <view wx:elif='{{isSubscribe}}' catchtap="subscrfun" class="leafletBottomEve boxShadowEve" style="width:400rpx;line-height:35rpx;background:#eeae19;">
+                <text style="line-height:32rpx;display:block;padding-top:5rpx;">已售罄\n补货提醒</text>
+        </view>
+        <view wx:else class="leafletBottomEve boxShadowEve" catchtap="{{buyNowOrOppor?'':'buyabframe'}}" style="width:400rpx;{{buyNowOrOppor?'background:#ADADAD':''}}">
+                <block wx:if='{{buyNowOrOppor}}'>有订单未支付，还有机会</block>
+                <block wx:else>立即购买</block>
+        </view>   
+   </block>
 
-   <view wx:if='{{isSubscribe}}' catchtap="subscrfun" class="leafletBottomEve boxShadowEve" style="width:400rpx;line-height:35rpx;background:#eeae19;">
-        <text style="line-height:32rpx;display:block;padding-top:5rpx;">已售罄\n补货提醒</text>
-   </view>
-   <view wx:else class="leafletBottomEve boxShadowEve" catchtap="{{buyNowOrOppor?'':'buyabframe'}}" style="width:400rpx;{{buyNowOrOppor?'background:#ADADAD':''}}">
-           <block wx:if='{{buyNowOrOppor}}'>有订单未支付，还有机会</block>
-           <block wx:else>立即购买</block>
-   </view>
 </view>
 
 

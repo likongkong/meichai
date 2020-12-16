@@ -505,7 +505,7 @@ Page({
     }
   },
   onShareAppMessage: function () {
-    var _this = this
+    var _this = this;
     var indexShare = app.signindata.indexShare || [];
     var indexShareNum = Math.floor(Math.random() * indexShare.length) || 0;
     var indexShareImg = '';

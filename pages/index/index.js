@@ -226,7 +226,8 @@ Page({
       
       // url: "/page/component/pages/limitlottery/limitlottery?id=251707&canShare=1",
 
-      url: "/page/secondpackge/pages/canvasRoute/canvasRoute"
+      // 画图路径
+      // url: "/page/secondpackge/pages/canvasRoute/canvasRoute"
       
 
       // url: "/pages/modifythenickname/modifythenickname"
@@ -235,7 +236,7 @@ Page({
 
       // url: "/page/secondpackge/pages/calendarList/calendarList"
 
-      // url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
+      url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
       // url: "/page/secondpackge/pages/luckyDraw/luckyDraw"
       
       // url: "/page/secondpackge/pages/idCardVerification/idCardVerification"
