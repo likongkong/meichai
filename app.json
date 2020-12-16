@@ -117,8 +117,8 @@
         "pages/luckyDraw/luckyDraw",
         "pages/articleList/articleList",
         "pages/chouxuanHomepage/chouxuanHomepage",
-        "pages/drawHideGoods/drawHideGoods"
-        "pages/idCardVerification/idCardVerification",
+        "pages/drawHideGoods/drawHideGoods",
+        "pages/idCardVerification/idCardVerification"
       ]
     }
   ],
