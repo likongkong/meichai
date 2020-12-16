@@ -666,7 +666,7 @@ page{
   align-items: center;
 }
 .ticketInfo image{
-  width: 374rpx;
+  width: 336rpx;
   height: 200rpx;
 }
 .ticketInfoWrap{

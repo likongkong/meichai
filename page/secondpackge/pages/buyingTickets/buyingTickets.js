@@ -498,9 +498,9 @@ Page({
           console.log('nowTime=====',nowTime);
 
           var showSubscription = true;
-
+          console.log(nowTime/1000 > ticketTime)
           if(ticketTime && (nowTime/1000 > ticketTime)){
-            showSubscription:false
+            showSubscription = false
           };
 
           console.log('showSubscription=========',showSubscription)

@@ -35,7 +35,7 @@
                   <image class="bTEveTwoImg"  mode='aspectFit' src="{{item.img}}"></image>
                   <text class="specialellipsis" wx:if='{{item.subTitle}}' style="margin-left:20rpx;display:inline-block;max-width:320rpx;vertical-align:top;">{{item.subTitle}}</text>
                   <text class="specialellipsis" style="max-width:320rpx;display:inline-block;vertical-align:top;">+{{item.title}}</text>
-                  <text style="float:right;margin-right:15rpx;color:#E94F57;"><block wx:if='{{isSubscribe&&tabTwoId==item.type}}'>已售罄</block><block wx:else>￥{{item.price}}</block></text>
+                  <text style="float:right;margin-right:15rpx;color:#E94F57;"><block wx:if='{{item.stock<=0}}'>已售罄</block><block wx:else>￥{{item.price}}</block></text>
               </view>        
           </block>
           <block wx:else>
@@ -55,7 +55,7 @@
 
 
 <view class="leafletBottom">
-   <view class="leafletBottomTxt">门票玩具线下展会领取，购票场次时间内有效</view>
+   <view class="leafletBottomTxt">门票展会凭身份证领取，购票场次时间内有效</view>
    <block wx:if='{{ticket}}'>
         <view wx:if="{{showSubscription}}" class="leafletBottomEve boxShadowEve" catchtap="subscrfun" style="width:400rpx;background:#eeae19;">
                 开售提醒 

@@ -139,8 +139,8 @@
   padding-top: 20rpx;
   max-height: 66rpx;
   color: #666;
-  font-size: 24rpx;
-  width: 400rpx;
+  font-size: 22rpx;
+  width: 420rpx;
 }
 .wholeconnum{
   height: 40rpx;

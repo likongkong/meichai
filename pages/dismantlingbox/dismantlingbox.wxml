@@ -31,22 +31,22 @@
         <view class="addGoodsBottom">
           <view>
             <image src="https://cdn.51chaidan.com/images/calendar/ticketsA.jpg" mode="widthFix"></image>
-            <text class="addGoodsBottomName">门票玩具A</text>
+            <text class="addGoodsBottomName">巧克力牛奶钱多多</text>
             <text class="addGoodsBottomDy"> <block wx:if="{{isBuyingTickets}}">前往购票</block> <block wx:else>开票订阅</block></text>
           </view>
           <view>
             <image src="https://cdn.51chaidan.com/images/calendar/ticketsB.jpg" mode="widthFix"></image>
-            <text class="addGoodsBottomName">门票玩具B</text>
+            <text class="addGoodsBottomName">UMASOU！吞钱龙</text>
             <text class="addGoodsBottomDy"> <block wx:if="{{isBuyingTickets}}">前往购票</block> <block wx:else>开票订阅</block></text>
           </view>
         </view>
       </view> 
 
       <view class="ticketInfo">
-        <image src="https://cdn.51chaidan.com/data/afficheimg/2020101MCTS.jpg?imageMogr2/thumbnail/x800" mode="aspectFit"></image>
+        <image src="https://cdn.51chaidan.com/images/calendar/luckyDraw/chouxuan.png?imageMogr2/thumbnail/x800" mode="aspectFit"></image>
         <view class="ticketInfoWrap">
           <view>
-            <text class="price">￥1xx</text>
+            <text class="price">￥150</text>
             <text class="txt">单日游玩</text>
           </view>
           <view>

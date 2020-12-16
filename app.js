@@ -509,7 +509,7 @@ App({
   // 46  日历详情
   // 47  日历 我的投票
 
-  // 48 priorityVoting  优先权抽选  暂时未用
+  // 48 priorityVoting  邀请函  暂时未用
   // 49 luckyDraw  抽奖活动
 
   userstatistics: function (num) {
@@ -708,6 +708,10 @@ App({
     } else if (item_type == 9021) { 
       wx.navigateTo({
         url: "/page/secondpackge/pages/vipPage/vipPage"
+      });
+    } else if (item_type == 9022) { 
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
       });
     };
 
