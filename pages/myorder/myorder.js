@@ -585,7 +585,8 @@ Page({
         isBalances: arr[j][0].isBalances || 0,
         dateTitle: arr[j][0].dateTitle || '',
         depositOrderPayPrice: arr[j][0].depositOrderPayPrice || '',
-        isShareGood : notAllowShareGoodsId.length!=0&&notAllowShareGoodsId.indexOf(arr[j][0].gid) > -1 ? false : true
+        isShareGood : notAllowShareGoodsId.length!=0&&notAllowShareGoodsId.indexOf(arr[j][0].gid) > -1 ? false : true,
+        toyshowTips:arr[j][0].toyshowTips || ''
       })
     };   
     if (arrchil && arrchil.length != 0){

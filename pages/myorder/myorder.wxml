@@ -124,223 +124,231 @@
                       </view>
 
              </view>
-             <!--  商品状态  加不等于砍价item.order_type!=6-->
-             <block wx:if='{{!item.isToyCabinet}}'>
-                    <view class='logisticsstate' wx:if='{{item.store_id==0&&item.status!=0&&item.status!=10&&item.status!=11&&item.status!=17&&item.status!=16&&item.status!=1&&item.status!=8&&item.order_type!=6}}'>
-                        <!--  status 4,5,6 全亮  -->
-                        <view class='iftrlogisticsstate' wx:if='{{item.status==4||item.status==5||item.status==6}}'>
-                              <view class='logticstache'>
-                                  <view class='logticstachetxt' wx:if='{{item.order_type==2}}'>免单成功</view>
-                                  <view class='logticstachetxt' wx:else>支付成功</view>
-                                  <view class='logticstachetxtimg'>
-                                      <image src='../images/statemyorder1.png' class='statemyorder composition'></image>
-                                      <image src='../images/statemybottom1.png' class='statemybottom composition'></image>
-                                  </view>                     
-                              </view>
-                              <view class='logticstache'>                     
-                                  <view class='logticstachetxt'>正在备货</view>
-                                  <view class='logticstachetxtimg'>
-                                      <image src='../images/statemyorder1.png' class='statemyorder composition'></image>
-                                      <image src='../images/statemybottom1.png' class='statemybottom composition'></image>
-                                  </view>
-                              </view>
-                              <view class='logticstache'>
-                                  <view class='logticstachetxt'>等待发货</view>
-                                  <view class='logticstachetxtimg'>
-                                      <image src='../images/statemyorder1.png' class='statemyorder composition'></image>
-                                      <image src='../images/statemybottom1.png' class='statemybottom composition'></image>
-                                  </view>                     
-                              </view>
-                              <view class='logticstache'>
-                                  <view class='logticstachetxt'>商品发货</view>
-                                  <view class='logticstachetxtimg'>
-                                      <image src='../images/statemyorder1.png' class='statemyorder composition'></image>
-                                      <image src='../images/statemybottom1.png' class='statemybottom composition'></image>
-                                  </view>                     
-                              </view>                
-                        </view>
-                        <!--  status 1,,7,8 ,15,16,17 全暗  -->
-                        <view class='iftrlogisticsstate' wx:elif='{{item.store_id==0&&item.status==1||item.status==7||item.status==8||item.status==15||item.status==16||item.status==17}}'>
-                              <view class='logticstache'>
-                                  <view class='logticstachetxt' wx:if='{{item.order_type==2}}'>免单成功</view>
-                                  <view class='logticstachetxt' wx:else>支付成功</view>
-                                  <view class='logticstachetxtimg'>
-                                      <image src='../images/statemyorder0.png' class='statemyorder composition'></image>
-                                      <image src='../images/statemybottom0.png' class='statemybottom composition'></image>
-                                  </view>                     
-                              </view>
-                              <view class='logticstache'>
-                                  <view class='logticstachetxt'>正在备货</view>
-                                  <view class='logticstachetxtimg'>
-                                      <image src='../images/statemyorder0.png' class='statemyorder composition'></image>
-                                      <image src='../images/statemybottom0.png' class='statemybottom composition'></image>
-                                  </view>
-                              </view>
-                              <view class='logticstache'>
-                                  <view class='logticstachetxt'>等待发货</view>
-                                  <view class='logticstachetxtimg'>
-                                      <image src='../images/statemyorder0.png' class='statemyorder composition'></image>
-                                      <image src='../images/statemybottom0.png' class='statemybottom composition'></image>
-                                  </view>                     
-                              </view>
-                              <view class='logticstache'>
-                                  <view class='logticstachetxt'>商品发货</view>
-                                  <view class='logticstachetxtimg'>
-                                      <image src='../images/statemyorder0.png' class='statemyorder composition'></image>
-                                      <image src='../images/statemybottom0.png' class='statemybottom composition'></image>
-                                  </view>                     
-                              </view>                
-                        </view>
-                        <!--  status 2,14 亮1一个  -->
-                        <view class='iftrlogisticsstate' wx:elif='{{item.store_id==0&&item.status==2||item.status==14}}'>
-                              <view class='logticstache'>
-                                  <view class='logticstachetxt' wx:if='{{item.order_type==2&&item.status==2}}'>免单成功</view>
-                                  <view class='logticstachetxt' wx:elif='{{item.status==14}}'>下单成功</view>
-                                  <view class='logticstachetxt' wx:else>支付成功</view>
-                                  <view class='logticstachetxtimg'>
-                                      <image src='../images/statemyorder1.png' class='statemyorder composition'></image>
-                                      <image src='../images/statemybottom1.png' class='statemybottom composition'></image>
-                                  </view>                     
-                              </view>
-                              <view class='logticstache'>
-                                  <view class='logticstachetxt'>正在备货</view>
-                                  <view class='logticstachetxtimg'>
-                                      <image src='../images/statemyorder0.png' class='statemyorder composition'></image>
-                                      <image src='../images/statemybottom0.png' class='statemybottom composition'></image>
-                                  </view>
-                              </view>
-                              <view class='logticstache'>
-                                  <view class='logticstachetxt'>等待发货</view>
-                                  <view class='logticstachetxtimg'>
-                                      <image src='../images/statemyorder0.png' class='statemyorder composition'></image>
-                                      <image src='../images/statemybottom0.png' class='statemybottom composition'></image>
-                                  </view>                     
-                              </view>
-                              <view class='logticstache'>
-                                  <view class='logticstachetxt'>商品发货</view>
-                                  <view class='logticstachetxtimg'>
-                                      <image src='../images/statemyorder0.png' class='statemyorder composition'></image>
-                                      <image src='../images/statemybottom0.png' class='statemybottom composition'></image>
-                                  </view>                     
-                              </view>                
-                        </view>
-                        <!--  status 12 亮2一个  -->
-                        <view class='iftrlogisticsstate' wx:elif='{{item.store_id==0&&item.status==12}}'>
-                              <view class='logticstache'>
-                                  <view class='logticstachetxt' wx:if='{{item.order_type==2}}'>免单成功</view>
-                                  <view class='logticstachetxt' wx:else>支付成功</view>
-                                  <view class='logticstachetxtimg'>
-                                      <image src='../images/statemyorder1.png' class='statemyorder composition'></image>
-                                      <image src='../images/statemybottom1.png' class='statemybottom composition'></image>
-                                  </view>                     
-                              </view>
-                              <view class='logticstache'>
-                                  <view class='logticstachetxt'>正在备货</view>
-                                  <view class='logticstachetxtimg'>
-                                      <image src='../images/statemyorder1.png' class='statemyorder composition'></image>
-                                      <image src='../images/statemybottom1.png' class='statemybottom composition'></image>
-                                  </view>
-                              </view>
-                              <view class='logticstache'>
-                                  <view class='logticstachetxt'>等待发货</view>
-                                  <view class='logticstachetxtimg'>
-                                      <image src='../images/statemyorder0.png' class='statemyorder composition'></image>
-                                      <image src='../images/statemybottom0.png' class='statemybottom composition'></image>
-                                  </view>                     
-                              </view>
-                              <view class='logticstache'>
-                                  <view class='logticstachetxt'>商品发货</view>
-                                  <view class='logticstachetxtimg'>
-                                      <image src='../images/statemyorder0.png' class='statemyorder composition'></image>
-                                      <image src='../images/statemybottom0.png' class='statemybottom composition'></image>
-                                  </view>                     
-                              </view>                
-                        </view>
-                        <!--  status 3,13 亮3一个  -->
-                        <view class='iftrlogisticsstate' wx:elif='{{item.store_id==0&&item.status==3||item.status==13}}'>
-                              <view class='logticstache'>
-                                  <view class='logticstachetxt' wx:if='{{item.order_type==2}}'>免单成功</view>
-                                  <view class='logticstachetxt' wx:else>支付成功</view>
-                                  <view class='logticstachetxtimg'>
-                                      <image src='../images/statemyorder1.png' class='statemyorder composition'></image>
-                                      <image src='../images/statemybottom1.png' class='statemybottom composition'></image>
-                                  </view>                     
-                              </view>
-                              <view class='logticstache'>
-                                  <view class='logticstachetxt'>正在备货</view>
-                                  <view class='logticstachetxtimg'>
-                                      <image src='../images/statemyorder1.png' class='statemyorder composition'></image>
-                                      <image src='../images/statemybottom1.png' class='statemybottom composition'></image>
-                                  </view>
-                              </view>
-                              <view class='logticstache'>
-                                  <view class='logticstachetxt'>等待发货</view>
-                                  <view class='logticstachetxtimg'>
-                                      <image src='../images/statemyorder1.png' class='statemyorder composition'></image>
-                                      <image src='../images/statemybottom1.png' class='statemybottom composition'></image>
-                                  </view>                     
-                              </view>
-                              <view class='logticstache'>
-                                  <view class='logticstachetxt'>商品发货</view>
-                                  <view class='logticstachetxtimg'>
-                                      <image src='../images/statemyorder0.png' class='statemyorder composition'></image>
-                                      <image src='../images/statemybottom0.png' class='statemybottom composition'></image>
-                                  </view>                     
-                              </view>                
-                        </view>
-                        <!--  结束  -->
-                    </view> 
-                    <!-- 砍价 -->
-                <view class='logisticsstate' wx:if='{{item.order_type==6}}'>
-                    <!--  status 18 砍价中 ,17商品过期 全暗   status 0待领取  2已领取 亮1一个  status 3待发货 亮3一个  status 4,5 全亮 -->
-                    <view class='iftrlogisticsstate' >
-                          <view class='logticstache'>
-                              <view class='logticstachetxt' >砍价成功</view>
-                              <view class='logticstachetxtimg' wx:if='{{item.status==0||item.status==2||item.status==3||item.status==4||item.status==5||item.status==12}}'>
-                                    <image src='../images/statemyorder1.png' class='statemyorder composition'></image>
-                                    <image src='../images/statemybottom1.png' class='statemybottom composition'></image>
-                                </view>  
-                              <view class='logticstachetxtimg' wx:else>
-                                  <image src='../images/statemyorder0.png' class='statemyorder composition'></image>
-                                  <image src='../images/statemybottom0.png' class='statemybottom composition'></image>
-                              </view>             
-                          </view>
-                          <view class='logticstache'>
-                              <view class='logticstachetxt'>正在备货</view>
-                              <view class='logticstachetxtimg' wx:if='{{item.status==3||item.status==4||item.status==5||item.status==12}}'>
-                                    <image src='../images/statemyorder1.png' class='statemyorder composition'></image>
-                                    <image src='../images/statemybottom1.png' class='statemybottom composition'></image>
+
+             <!-- 门票不显示发货条 -->
+             <block wx:if='{{item.order_type==29 || item.toyshowTips}}'></block>
+             <block wx:else>
+                    <!--  商品状态  加不等于砍价item.order_type!=6-->
+                    <block wx:if='{{!item.isToyCabinet}}'>
+                            <view class='logisticsstate' wx:if='{{item.store_id==0&&item.status!=0&&item.status!=10&&item.status!=11&&item.status!=17&&item.status!=16&&item.status!=1&&item.status!=8&&item.order_type!=6}}'>
+                                <!--  status 4,5,6 全亮  -->
+                                <view class='iftrlogisticsstate' wx:if='{{item.status==4||item.status==5||item.status==6}}'>
+                                    <view class='logticstache'>
+                                        <view class='logticstachetxt' wx:if='{{item.order_type==2}}'>免单成功</view>
+                                        <view class='logticstachetxt' wx:else>支付成功</view>
+                                        <view class='logticstachetxtimg'>
+                                            <image src='../images/statemyorder1.png' class='statemyorder composition'></image>
+                                            <image src='../images/statemybottom1.png' class='statemybottom composition'></image>
+                                        </view>                     
+                                    </view>
+                                    <view class='logticstache'>                     
+                                        <view class='logticstachetxt'>正在备货</view>
+                                        <view class='logticstachetxtimg'>
+                                            <image src='../images/statemyorder1.png' class='statemyorder composition'></image>
+                                            <image src='../images/statemybottom1.png' class='statemybottom composition'></image>
+                                        </view>
+                                    </view>
+                                    <view class='logticstache'>
+                                        <view class='logticstachetxt'>等待发货</view>
+                                        <view class='logticstachetxtimg'>
+                                            <image src='../images/statemyorder1.png' class='statemyorder composition'></image>
+                                            <image src='../images/statemybottom1.png' class='statemybottom composition'></image>
+                                        </view>                     
+                                    </view>
+                                    <view class='logticstache'>
+                                        <view class='logticstachetxt'>商品发货</view>
+                                        <view class='logticstachetxtimg'>
+                                            <image src='../images/statemyorder1.png' class='statemyorder composition'></image>
+                                            <image src='../images/statemybottom1.png' class='statemybottom composition'></image>
+                                        </view>                     
+                                    </view>                
                                 </view>
-                              <view class='logticstachetxtimg' wx:else>
-                                  <image src='../images/statemyorder0.png' class='statemyorder composition'></image>
-                                  <image src='../images/statemybottom0.png' class='statemybottom composition'></image>
-                              </view>
-                          </view>
-                          <view class='logticstache'>
-                              <view class='logticstachetxt'>等待发货</view>
-                              <view class='logticstachetxtimg' wx:if='{{item.status==3||item.status==4||item.status==5}}'>
-                                    <image src='../images/statemyorder1.png' class='statemyorder composition'></image>
-                                    <image src='../images/statemybottom1.png' class='statemybottom composition'></image>
-                                </view> 
-                              <view class='logticstachetxtimg' wx:else>
-                                  <image src='../images/statemyorder0.png' class='statemyorder composition'></image>
-                                  <image src='../images/statemybottom0.png' class='statemybottom composition'></image>
-                              </view>                     
-                          </view>
-                          <view class='logticstache'>
-                              <view class='logticstachetxt'>商品发货</view>
-                              <view class='logticstachetxtimg' wx:if='{{item.status==4||item.status==5}}'>
-                                    <image src='../images/statemyorder1.png' class='statemyorder composition'></image>
-                                    <image src='../images/statemybottom1.png' class='statemybottom composition'></image>
-                                </view>     
-                              <view class='logticstachetxtimg' wx:else>
-                                  <image src='../images/statemyorder0.png' class='statemyorder composition'></image>
-                                  <image src='../images/statemybottom0.png' class='statemybottom composition'></image>
-                              </view>                     
-                          </view>                
-                    </view>
-                </view>            
+                                <!--  status 1,,7,8 ,15,16,17 全暗  -->
+                                <view class='iftrlogisticsstate' wx:elif='{{item.store_id==0&&item.status==1||item.status==7||item.status==8||item.status==15||item.status==16||item.status==17}}'>
+                                    <view class='logticstache'>
+                                        <view class='logticstachetxt' wx:if='{{item.order_type==2}}'>免单成功</view>
+                                        <view class='logticstachetxt' wx:else>支付成功</view>
+                                        <view class='logticstachetxtimg'>
+                                            <image src='../images/statemyorder0.png' class='statemyorder composition'></image>
+                                            <image src='../images/statemybottom0.png' class='statemybottom composition'></image>
+                                        </view>                     
+                                    </view>
+                                    <view class='logticstache'>
+                                        <view class='logticstachetxt'>正在备货</view>
+                                        <view class='logticstachetxtimg'>
+                                            <image src='../images/statemyorder0.png' class='statemyorder composition'></image>
+                                            <image src='../images/statemybottom0.png' class='statemybottom composition'></image>
+                                        </view>
+                                    </view>
+                                    <view class='logticstache'>
+                                        <view class='logticstachetxt'>等待发货</view>
+                                        <view class='logticstachetxtimg'>
+                                            <image src='../images/statemyorder0.png' class='statemyorder composition'></image>
+                                            <image src='../images/statemybottom0.png' class='statemybottom composition'></image>
+                                        </view>                     
+                                    </view>
+                                    <view class='logticstache'>
+                                        <view class='logticstachetxt'>商品发货</view>
+                                        <view class='logticstachetxtimg'>
+                                            <image src='../images/statemyorder0.png' class='statemyorder composition'></image>
+                                            <image src='../images/statemybottom0.png' class='statemybottom composition'></image>
+                                        </view>                     
+                                    </view>                
+                                </view>
+                                <!--  status 2,14 亮1一个  -->
+                                <view class='iftrlogisticsstate' wx:elif='{{item.store_id==0&&item.status==2||item.status==14}}'>
+                                    <view class='logticstache'>
+                                        <view class='logticstachetxt' wx:if='{{item.order_type==2&&item.status==2}}'>免单成功</view>
+                                        <view class='logticstachetxt' wx:elif='{{item.status==14}}'>下单成功</view>
+                                        <view class='logticstachetxt' wx:else>支付成功</view>
+                                        <view class='logticstachetxtimg'>
+                                            <image src='../images/statemyorder1.png' class='statemyorder composition'></image>
+                                            <image src='../images/statemybottom1.png' class='statemybottom composition'></image>
+                                        </view>                     
+                                    </view>
+                                    <view class='logticstache'>
+                                        <view class='logticstachetxt'>正在备货</view>
+                                        <view class='logticstachetxtimg'>
+                                            <image src='../images/statemyorder0.png' class='statemyorder composition'></image>
+                                            <image src='../images/statemybottom0.png' class='statemybottom composition'></image>
+                                        </view>
+                                    </view>
+                                    <view class='logticstache'>
+                                        <view class='logticstachetxt'>等待发货</view>
+                                        <view class='logticstachetxtimg'>
+                                            <image src='../images/statemyorder0.png' class='statemyorder composition'></image>
+                                            <image src='../images/statemybottom0.png' class='statemybottom composition'></image>
+                                        </view>                     
+                                    </view>
+                                    <view class='logticstache'>
+                                        <view class='logticstachetxt'>商品发货</view>
+                                        <view class='logticstachetxtimg'>
+                                            <image src='../images/statemyorder0.png' class='statemyorder composition'></image>
+                                            <image src='../images/statemybottom0.png' class='statemybottom composition'></image>
+                                        </view>                     
+                                    </view>                
+                                </view>
+                                <!--  status 12 亮2一个  -->
+                                <view class='iftrlogisticsstate' wx:elif='{{item.store_id==0&&item.status==12}}'>
+                                    <view class='logticstache'>
+                                        <view class='logticstachetxt' wx:if='{{item.order_type==2}}'>免单成功</view>
+                                        <view class='logticstachetxt' wx:else>支付成功</view>
+                                        <view class='logticstachetxtimg'>
+                                            <image src='../images/statemyorder1.png' class='statemyorder composition'></image>
+                                            <image src='../images/statemybottom1.png' class='statemybottom composition'></image>
+                                        </view>                     
+                                    </view>
+                                    <view class='logticstache'>
+                                        <view class='logticstachetxt'>正在备货</view>
+                                        <view class='logticstachetxtimg'>
+                                            <image src='../images/statemyorder1.png' class='statemyorder composition'></image>
+                                            <image src='../images/statemybottom1.png' class='statemybottom composition'></image>
+                                        </view>
+                                    </view>
+                                    <view class='logticstache'>
+                                        <view class='logticstachetxt'>等待发货</view>
+                                        <view class='logticstachetxtimg'>
+                                            <image src='../images/statemyorder0.png' class='statemyorder composition'></image>
+                                            <image src='../images/statemybottom0.png' class='statemybottom composition'></image>
+                                        </view>                     
+                                    </view>
+                                    <view class='logticstache'>
+                                        <view class='logticstachetxt'>商品发货</view>
+                                        <view class='logticstachetxtimg'>
+                                            <image src='../images/statemyorder0.png' class='statemyorder composition'></image>
+                                            <image src='../images/statemybottom0.png' class='statemybottom composition'></image>
+                                        </view>                     
+                                    </view>                
+                                </view>
+                                <!--  status 3,13 亮3一个  -->
+                                <view class='iftrlogisticsstate' wx:elif='{{item.store_id==0&&item.status==3||item.status==13}}'>
+                                    <view class='logticstache'>
+                                        <view class='logticstachetxt' wx:if='{{item.order_type==2}}'>免单成功</view>
+                                        <view class='logticstachetxt' wx:else>支付成功</view>
+                                        <view class='logticstachetxtimg'>
+                                            <image src='../images/statemyorder1.png' class='statemyorder composition'></image>
+                                            <image src='../images/statemybottom1.png' class='statemybottom composition'></image>
+                                        </view>                     
+                                    </view>
+                                    <view class='logticstache'>
+                                        <view class='logticstachetxt'>正在备货</view>
+                                        <view class='logticstachetxtimg'>
+                                            <image src='../images/statemyorder1.png' class='statemyorder composition'></image>
+                                            <image src='../images/statemybottom1.png' class='statemybottom composition'></image>
+                                        </view>
+                                    </view>
+                                    <view class='logticstache'>
+                                        <view class='logticstachetxt'>等待发货</view>
+                                        <view class='logticstachetxtimg'>
+                                            <image src='../images/statemyorder1.png' class='statemyorder composition'></image>
+                                            <image src='../images/statemybottom1.png' class='statemybottom composition'></image>
+                                        </view>                     
+                                    </view>
+                                    <view class='logticstache'>
+                                        <view class='logticstachetxt'>商品发货</view>
+                                        <view class='logticstachetxtimg'>
+                                            <image src='../images/statemyorder0.png' class='statemyorder composition'></image>
+                                            <image src='../images/statemybottom0.png' class='statemybottom composition'></image>
+                                        </view>                     
+                                    </view>                
+                                </view>
+                                <!--  结束  -->
+                            </view> 
+                            <!-- 砍价 -->
+                            <view class='logisticsstate' wx:if='{{item.order_type==6}}'>
+                                <!--  status 18 砍价中 ,17商品过期 全暗   status 0待领取  2已领取 亮1一个  status 3待发货 亮3一个  status 4,5 全亮 -->
+                                <view class='iftrlogisticsstate' >
+                                    <view class='logticstache'>
+                                        <view class='logticstachetxt' >砍价成功</view>
+                                        <view class='logticstachetxtimg' wx:if='{{item.status==0||item.status==2||item.status==3||item.status==4||item.status==5||item.status==12}}'>
+                                                <image src='../images/statemyorder1.png' class='statemyorder composition'></image>
+                                                <image src='../images/statemybottom1.png' class='statemybottom composition'></image>
+                                            </view>  
+                                        <view class='logticstachetxtimg' wx:else>
+                                            <image src='../images/statemyorder0.png' class='statemyorder composition'></image>
+                                            <image src='../images/statemybottom0.png' class='statemybottom composition'></image>
+                                        </view>             
+                                    </view>
+                                    <view class='logticstache'>
+                                        <view class='logticstachetxt'>正在备货</view>
+                                        <view class='logticstachetxtimg' wx:if='{{item.status==3||item.status==4||item.status==5||item.status==12}}'>
+                                                <image src='../images/statemyorder1.png' class='statemyorder composition'></image>
+                                                <image src='../images/statemybottom1.png' class='statemybottom composition'></image>
+                                            </view>
+                                        <view class='logticstachetxtimg' wx:else>
+                                            <image src='../images/statemyorder0.png' class='statemyorder composition'></image>
+                                            <image src='../images/statemybottom0.png' class='statemybottom composition'></image>
+                                        </view>
+                                    </view>
+                                    <view class='logticstache'>
+                                        <view class='logticstachetxt'>等待发货</view>
+                                        <view class='logticstachetxtimg' wx:if='{{item.status==3||item.status==4||item.status==5}}'>
+                                                <image src='../images/statemyorder1.png' class='statemyorder composition'></image>
+                                                <image src='../images/statemybottom1.png' class='statemybottom composition'></image>
+                                            </view> 
+                                        <view class='logticstachetxtimg' wx:else>
+                                            <image src='../images/statemyorder0.png' class='statemyorder composition'></image>
+                                            <image src='../images/statemybottom0.png' class='statemybottom composition'></image>
+                                        </view>                     
+                                    </view>
+                                    <view class='logticstache'>
+                                        <view class='logticstachetxt'>商品发货</view>
+                                        <view class='logticstachetxtimg' wx:if='{{item.status==4||item.status==5}}'>
+                                                <image src='../images/statemyorder1.png' class='statemyorder composition'></image>
+                                                <image src='../images/statemybottom1.png' class='statemybottom composition'></image>
+                                            </view>     
+                                        <view class='logticstachetxtimg' wx:else>
+                                            <image src='../images/statemyorder0.png' class='statemyorder composition'></image>
+                                            <image src='../images/statemybottom0.png' class='statemybottom composition'></image>
+                                        </view>                     
+                                    </view>                
+                                </view>
+                            </view>            
+                    </block>             
+             
+             
              </block>
+
 
              <view style='border-top: 1rpx solid #e5e5e5;margin:0 3%;width:94%;'></view>
              <view class='wholecon' wx:for='{{item.list}}' wx:for-index='num' wx:key='key' bindtap='dismantling' data-status='{{item.status}}' data-oid='{{item.oid}}' data-order_type='{{item.order_type}}'>
@@ -373,8 +381,12 @@
                            <view class='wholeconnumdisilin' wx:if='{{item.order_type == 12 && item.roleName!=null}}' style='color:#ff2840;'>明盒：{{item.roleName}}</view>
                            <view class='wholeconnumdisilin' wx:if='{{item.order_type == 14 && item.roleName!=null}}' style='color:#ff2840;'>在线抽盒：{{item.roleName}}</view>
                       </view>
-                      <view class='wholeconnum specialellipsis' wx:if='{{item.customer_note&&(item.status==1||item.status==12||item.status==13||item.status==2||item.status==3||item.status==4)}}'>备注:{{item.customer_note}}</view>                                       
-                      <view class='officialreply' wx:if='{{item.customer_reply&&(item.status==1||item.status==12||item.status==13||item.status==2||item.status==3||item.status==4||item.status==16)}}'>
+                      <view class='wholeconnum specialellipsis' wx:if='{{item.customer_note&&(item.status==1||item.status==12||item.status==13||item.status==2||item.status==3||item.status==4)}}'>备注:{{item.customer_note}}</view>   
+                         
+                      <view class='officialreply' wx:if='{{item.toyshowTips}}'>
+                          {{item.toyshowTips}}
+                      </view>                           
+                      <view class='officialreply' wx:elif='{{item.customer_reply&&(item.status==1||item.status==12||item.status==13||item.status==2||item.status==3||item.status==4||item.status==16)}}'>
                         <text wx:if="{{item.order_type!=22}}">回复:{{item.customer_reply}}</text>
                       </view>
                       <view class='taxrpice'>

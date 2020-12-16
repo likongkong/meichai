@@ -70,7 +70,7 @@
 
             <view style="padding:0 0 20rpx 0;background:#fff;">
                 <view class="ordeQRTitle" style="border-top: 1rpx solid #e5e5e5;">
-                    <view class="ordeQRTitN"><text style="color:#666;">配送方式：</text>线下展会扫码领取</view>
+                    <view class="ordeQRTitN"><text style="color:#666;">配送方式：</text>线下展会凭本人身份证领取</view>
                 </view>
             </view>
 

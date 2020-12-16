@@ -12,10 +12,10 @@
     <view class="ordeQRcode">
          <view class="ordeQRImgBox">
             <image src="{{comdata.qrcode}}" class="ordeQRImgBoxImg"></image>
-            <image wx:if='{{isrefresh}}' catchtap="refreshQRCode" class='bgctipref' src="https://cdn.51chaidan.com/images/calendar/luckyDraw/past_due.png"></image>
+            <view wx:if='{{isrefresh}}' catchtap="refreshQRCode" class='bgctipref'>已过期</view>
          </view>
          <view class="ordeQRTitN" style="text-align:center;border-top:0;">二维码一分钟内有效</view>
-         <view style="width:100%;height:70rpx;">
+         <view style="width:100%;height:86rpx;overflow: hidden;">
             <view wx:if='{{isrefresh}}' style="color:#ff2840;border:1rpx solid #ff2840;" class="totalmoncright" catchtap="refreshQRCode">刷新</view>
          </view>
          
@@ -66,7 +66,7 @@
 
     <view style="padding:0 20rpx 20rpx 20rpx;background:#fff;" wx:if='{{electronicInvoice}}'>
         <view class="ordeQRTitle">
-            <view class="ordeQRTitN"><text style="color:#666;">配送方式：</text>电子票(实名制参展)</view>
+            <view class="ordeQRTitN"><text style="color:#666;">配送方式：</text>电子票(实名制入场)</view>
         </view>
     </view>
 
