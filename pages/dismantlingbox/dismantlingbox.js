@@ -135,7 +135,7 @@ Page({
             isMobileAuth:true
           });
           if(_this.data.isShareOrSub){
-            _this.shareExhBen();
+            // _this.shareExhBen();
           }
           app.showToastC(res.data.Msg||'');
         }else{
@@ -1120,7 +1120,7 @@ Page({
     var giftInfo = _this.data.giftInfo || {};
     var img = 'https://cdn.51chaidan.com/images/default/toyShow/toyshowShare.jpg';
     return {
-      title:'这个展会限量版日历太好看了，快来为Ta投票免费拿' || 'Bilibiliworld x MCTS 8.7~8.9 不见不散，超多展品不要错过',
+      title:'12月18日 20:00准时开票！',
       path: "/pages/dismantlingbox/dismantlingbox?shareId=" + _this.data.giftInfo.shareId + '&referee=' + _this.data.uid,
       imageUrl:app.signindata.indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
     }    
@@ -1131,7 +1131,7 @@ Page({
     var giftInfo = _this.data.giftInfo || {};
     var img = 'https://cdn.51chaidan.com/images/default/toyShow/toyshowShare.jpg';
     return {
-      title:'这个展会限量版日历太好看了，快来为Ta投票免费拿' || 'Bilibiliworld x MCTS 8.7~8.9 不见不散，超多展品不要错过',
+      title:'12月18日 20:00准时开票！',
       imageUrl:app.signindata.indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
     }
   },  
