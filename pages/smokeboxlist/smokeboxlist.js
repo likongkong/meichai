@@ -78,7 +78,9 @@ Page({
     morebrankip:false,
     scrollleft: 1,
     jumpBulletBox:true,
-    push_id:0
+    push_id:0,
+    isBuyingTickets:false,
+    isGiveticket:false
   },
 
   // tab切换
@@ -368,9 +370,15 @@ Page({
     });
     this.getlist(0);
   },
-
+  giveticketFun(){
+    this.setData({
+      isGiveticket:true
+    })
+    this.getlist(0);
+  },
   getlist: function(pid) {
-    var _this = this
+    var _this = this;
+    var shareType = '';
     wx.showLoading({
       title: '加载中...',
     })
@@ -380,10 +388,15 @@ Page({
       })
     } 
     _this.setData({is_havedata:false})
+    if(_this.data.isGiveticket){
+      shareType = 1;
+    }else{
+      shareType = '';
+    }
 
-    console.log('mod=blindBox&operation=list&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + "&pid=" + pid+'&brandId='+_this.data.ip_brand_id+'&searchKey='+_this.data.brand_name+'&ip_id='+_this.data.ip_id+'&push_id='+_this.data.push_id)
+    console.log('mod=blindBox&operation=list&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + "&pid=" + pid+'&brandId='+_this.data.ip_brand_id+'&searchKey='+_this.data.brand_name+'&ip_id='+_this.data.ip_id+'&push_id='+_this.data.push_id+'&shareType='+ shareType)
 
-    var q1 = Dec.Aese('mod=blindBox&operation=list&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + "&pid=" + pid+'&brandId='+_this.data.ip_brand_id+'&searchKey='+_this.data.brand_name+'&ip_id='+_this.data.ip_id+'&push_id='+_this.data.push_id);
+    var q1 = Dec.Aese('mod=blindBox&operation=list&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + "&pid=" + pid+'&brandId='+_this.data.ip_brand_id+'&searchKey='+_this.data.brand_name+'&ip_id='+_this.data.ip_id+'&push_id='+_this.data.push_id+'&shareType='+shareType);
 
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q1,
@@ -415,8 +428,20 @@ Page({
                 ip_id:ip_id
               })
             };
+
+            var nowTime = new Date().getTime();
+            var isBuyingTickets = res.data.List.scratchCardStartTime;
+            console.log('nowTime=====',nowTime)
+            if(isBuyingTickets && (nowTime/1000 > isBuyingTickets)){
+            // if(isBuyingTickets && ('1608296400' > isBuyingTickets)){
+              _this.setData({
+                isBuyingTickets:true
+              })
+            }
+
             _this.setData({
               // eldataclass:eldataclass,
+              isGiveticket:false,
               brandArr:brandArr,
               ipArr:ipArr,
               specialActivity:specialActivity,

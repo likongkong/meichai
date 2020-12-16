@@ -18,8 +18,8 @@
 
     <!-- 票务信息 -->
     <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e3'>————— 票务信息 —————</view>
-    <view class="ticketWrap" catchtap="arousesubscribeFun" data-subscribe_data="{{subscribeJson[1].toyshowTicket}}">
-
+    <view class="ticketWrap" catchtap="jumpposition" data-subscribe_data="{{subscribeJson[1].toyshowTicket}}">
+      <!-- arousesubscribeFun -->
       <view class="addGoods" style="margin-bottom:20rpx;">
         <view class="addGoodsT">
           <image src="https://cdn.51chaidan.com/images/icon/iconYellowStar.png" mode="widthFix"></image>
@@ -32,12 +32,12 @@
           <view>
             <image src="https://cdn.51chaidan.com/images/calendar/ticketsA.jpg" mode="widthFix"></image>
             <text class="addGoodsBottomName">门票玩具A</text>
-            <text class="addGoodsBottomDy">开票订阅</text>
+            <text class="addGoodsBottomDy"> <block wx:if="{{isBuyingTickets}}">前往购票</block> <block wx:else>开票订阅</block></text>
           </view>
           <view>
             <image src="https://cdn.51chaidan.com/images/calendar/ticketsB.jpg" mode="widthFix"></image>
             <text class="addGoodsBottomName">门票玩具B</text>
-            <text class="addGoodsBottomDy">开票订阅</text>
+            <text class="addGoodsBottomDy"> <block wx:if="{{isBuyingTickets}}">前往购票</block> <block wx:else>开票订阅</block></text>
           </view>
         </view>
       </view> 
@@ -50,7 +50,7 @@
             <text class="txt">单日游玩</text>
           </view>
           <view>
-            <text class="subscriptionBtn">开票订阅</text>
+            <text class="subscriptionBtn"> <block wx:if="{{isBuyingTickets}}">前往购票</block> <block wx:else>开票订阅</block></text>
           </view>
         </view>
       </view>
@@ -243,25 +243,10 @@
         </view>
     </view>
     <!-- 媒体合作与平台支持 -->
-    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;">———— 媒体合作与平台支持 ————</view>
-    <view class="ssubBrandEveWrap" style="width:100%;overflow: hidden;padding:0 40rpx;box-sizing: border-box;">
-        <view class="ssubBrandEve">
-          <image class="ssubBiliimgbr" src="https://cdn.51chaidan.com/images/toyShow3/yk.jpg" mode='aspectFit'></image>
-        </view>
-        <view class="ssubBrandEve">
-          <image class="ssubBiliimgbr" src="https://cdn.51chaidan.com/images/toyShow3/kl.jpg" mode='aspectFit'></image>
-        </view>
-        <view class="ssubBrandEve">
-          <image class="ssubBiliimgbr" src="https://cdn.51chaidan.com/images/toyShow3/chw.jpg" mode='aspectFit'></image>
-        </view>
-        <view class="ssubBrandEve">
-          <image class="ssubBiliimgbr" src="https://cdn.51chaidan.com/images/toyShow3/look.jpg" mode='aspectFit'></image>
-        </view>
-        <view class="ssubBrandEve">
-          <image class="ssubBiliimgbr" src="https://cdn.51chaidan.com/images/toyShow3/chihuo.jpg" mode='aspectFit'></image>
-        </view>
-        <view class="ssubBrandEve">
-          <image class="ssubBiliimgbr" src="https://cdn.51chaidan.com/images/toyShow3/newbaby.jpg" mode='aspectFit'></image>
+    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{mediaBrandList&&mediaBrandList.length!=0}}'>———— 媒体合作与平台支持 ————</view>
+    <view class="ssubBrandEveWrap" style="width:100%;overflow: hidden;padding:0 40rpx;box-sizing: border-box;" wx:if='{{mediaBrandList&&mediaBrandList.length!=0}}'>
+        <view class="ssubBrandEve" wx:for="{{mediaBrandList}}" wx:key="key">
+           <image class="ssubBiliimgbr" src="{{item.brandLogo}}" mode='aspectFit'></image>
         </view>
     </view>
     <!-- <view class="ssubBotTxt">售卖商品陆续更新,最终以展会开售为准</view> -->

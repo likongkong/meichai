@@ -62,7 +62,7 @@ Page({
     ],
     countdown:'',
     isAwardBox:false,
-    isBuyingTickets:0
+    isBuyingTickets:false
   },
   toggleAwardFun(){
     this.setData({
@@ -151,39 +151,36 @@ Page({
 
   // 跳转定位
   jumpposition:function(w){
-    var nowTime = new Date().getTime();
-    var isBuyingTickets = this.data.isBuyingTickets;
-    console.log('nowTime=====',nowTime)
-    if(isBuyingTickets && (nowTime/1000 > isBuyingTickets)){
+    // var nowTime = new Date().getTime();
+    // var isBuyingTickets = this.data.isBuyingTickets;
+    // console.log('nowTime=====',nowTime)
+    // if(isBuyingTickets && (nowTime/1000 > isBuyingTickets)){
       wx.navigateTo({
         url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
       });
-    } else {
+    // } else {
 
-      var tid = w.currentTarget.dataset.tid || w.target.dataset.tid || 0;
+    //   var tid = w.currentTarget.dataset.tid || w.target.dataset.tid || 0;
 
-      var query = wx.createSelectorQuery();
-      query.select('#e' + tid).boundingClientRect();
-      query.selectViewport().scrollOffset();
-      query.exec(function(res) {
-        if (res && res[0] && res[1]) {
-          wx.pageScrollTo({
-             scrollTop:( res[0].top+res[1].scrollTop-app.signindata.statusBarHeightMc||90 )-85,
-             duration:300
-          })
-        }
-      });
+    //   var query = wx.createSelectorQuery();
+    //   query.select('#e' + tid).boundingClientRect();
+    //   query.selectViewport().scrollOffset();
+    //   query.exec(function(res) {
+    //     if (res && res[0] && res[1]) {
+    //       wx.pageScrollTo({
+    //          scrollTop:( res[0].top+res[1].scrollTop-app.signindata.statusBarHeightMc||90 )-85,
+    //          duration:300
+    //       })
+    //     }
+    //   });
 
-      var subscribe_data = w.currentTarget.dataset.subscribe_data;
-      console.log(subscribe_data)
-      this.setData({
-        subscribedata:subscribe_data
-      })
-      app.comsubscribe(this)
-    }
-
-
-
+    //   var subscribe_data = w.currentTarget.dataset.subscribe_data;
+    //   console.log(subscribe_data)
+    //   this.setData({
+    //     subscribedata:subscribe_data
+    //   })
+    //   app.comsubscribe(this)
+    // }
   },
   displayDetail:function(w){
     wx.showLoading({title: '加载中...',})
@@ -722,21 +719,21 @@ Page({
     })
 },
 
-// brandJson:function(){
-//      var _this = this;
-//     //调取搜索关键词跳转对应列表数据
-//     wx.request({
-//       url: 'https://cdn.51chaidan.com/json/toyshowBrand.json',
-//       method: 'GET',
-//       header: { 'Accept': 'application/json' },
-//       success: function (res) {
-//         console.log('品牌数据logo===',res)
-//         _this.setData({
-//           brandList:res.data || []
-//         })
-//       }
-//     })
-//   },
+brandJson:function(){
+     var _this = this;
+    //调取搜索关键词跳转对应列表数据
+    wx.request({
+      url: 'https://cdn.51chaidan.com/json/toyshowBrand.json',
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('媒体数据logo===',res)
+        _this.setData({
+          mediaBrandList:res.data || []
+        })
+      }
+    })
+  },
   // 品牌信息
   brandinformation:function(num){
       var _this = this
@@ -760,7 +757,7 @@ Page({
           wx.stopPullDownRefresh();
           wx.hideLoading()
           // 品牌数据
-          // _this.brandJson();
+          _this.brandJson();
           if (res.data.ReturnCode == 200) {
             if(num==1){
               var bannerList = res.data.List.bannerList || [];
@@ -775,12 +772,19 @@ Page({
                 calendarList,
                 brandList,
                 countSubsribe,
-                isMobileAuth:isMobileAuth,
-                isBuyingTickets:res.data.Info.ticketTime || 0
+                isMobileAuth:isMobileAuth
               });
               // 是否是分享围观
               _this.shareReferee();
-
+              
+              var nowTime = new Date().getTime();
+              var isBuyingTickets = res.data.Info.ticketTime;
+              console.log('nowTime=====',nowTime)
+              if(isBuyingTickets && (nowTime/1000 > isBuyingTickets)){
+                _this.setData({
+                  isBuyingTickets:true
+                })
+              }
             }else{
               var brandList = res.data.List.brandList || [];
               if(brandList&&brandList.length!=0){
