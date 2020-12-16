@@ -118,6 +118,7 @@
         "pages/articleList/articleList",
         "pages/chouxuanHomepage/chouxuanHomepage",
         "pages/drawHideGoods/drawHideGoods"
+        "pages/idCardVerification/idCardVerification",
       ]
     }
   ],

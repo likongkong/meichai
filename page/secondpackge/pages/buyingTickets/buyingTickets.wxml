@@ -35,7 +35,7 @@
                   <image class="bTEveTwoImg"  mode='aspectFit' src="{{item.img}}"></image>
                   <text class="specialellipsis" wx:if='{{item.subTitle}}' style="margin-left:20rpx;display:inline-block;max-width:320rpx;vertical-align:top;">{{item.subTitle}}</text>
                   <text class="specialellipsis" style="max-width:320rpx;display:inline-block;vertical-align:top;">+{{item.title}}</text>
-                  <text style="float:right;margin-right:15rpx;color:#E94F57;">￥{{item.price}}</text>
+                  <text style="float:right;margin-right:15rpx;color:#E94F57;"><block wx:if='{{isSubscribe&&tabTwoId==item.type}}'>已售罄</block><block wx:else>￥{{item.price}}</block></text>
               </view>        
           </block>
           <block wx:else>
@@ -74,7 +74,7 @@
         <view class="adreshead" style="line-height:80rpx;">实名制参展</view>
         <view style="width:100%;height:26rpx;"></view>
         <text class="realNtxt">1.本展会需要实名制购票及入场\n \n2.参展请本人携带购票时填写证件入场</text>
-        <view class="leafletBottomEve boxShadowEve" catchtap="identityTipFun" style="width:320rpx;height:60rpx;line-height:60rpx;">预填实名参展人</view>
+        <view class="leafletBottomEve boxShadowEve" catchtap="identityTipFunjump" style="width:320rpx;height:60rpx;line-height:60rpx;">预填实名参展人</view>
         <view class="reNaSysCen" catchtap="realNameSysfun">知道了</view>
 
 	 </view>
@@ -91,18 +91,18 @@
               <view class="bTcOHeadTip">因购票火爆，请在下单后2分钟内完成支付</view>   
               <view class="bTcOcontentTip">
                   <view class="bTcOcontentTTxt" style="font-size:28rpx;">MCTS x JSS 北京潮流艺术与手办玩具展览会</view>
-                  <view class="bTcOcontentTTxt">中国国际展览中心（静安庄馆）</view>
+                  <view class="bTcOcontentTTxt" style="color:#666;">中国国际展览中心（静安庄馆）</view>
               </view>
 
               <view class="bTcOcontentTip">
-                  <view class="bTcOcontentTTxt">
+                  <view class="bTcOcontentTTxt" style="font-size:28rpx;">
                      <block wx:for='{{ticket}}' wx:key='key' wx:if='{{tabOneId==item.day}}'>{{item.date}} {{item.timeRange}}</block>
                   </view>
-                  <view class="bTcOcontentTTxt">
+                  <view class="bTcOcontentTTxt" style="font-size:28rpx;">
                      <block wx:for='{{ticketTwo}}' wx:key='key' wx:if='{{tabTwoId==item.type}}'>{{item.title}}<block wx:if='{{item.subTitle}}'>  +  {{item.subTitle}}</block></block>
                   </view>
                   <block wx:for='{{ticketTwo}}' wx:key='key' wx:if='{{tabTwoId==item.type}}'>
-                     <view class="bTcOcontentTTxt" wx:if='{{item.subTitle}}'>{{item.subTitle}}线下展会领取</view>
+                     <view class="bTcOcontentTTxt" style="color:#666;" wx:if='{{item.subTitle}}'>{{item.subTitle}}线下展会领取</view>
                   </block>
                   
               </view>
@@ -117,7 +117,7 @@
              <view class="ididentityeve">
                  <view class="ididentityeveTit">实名制购票</view>
                  <view class="ididentityeveTit" style="color:#E94F57;">入场需携带本人身份证</view>
-                 <view class="ididentModify" catchtap="identityTipFun">新增</view>
+                 <view class="ididentModify" catchtap="identityTipFunjump">新增</view>
              </view>
 
              <block wx:for='{{identity}}' wx:key='key'>

@@ -1,0 +1,107 @@
+/* page/secondpackge//pages/aRewardDetails/aRewardDetails.wxss */
+@import "../../../../pages/signin/signin.wxss";
+@import "../../../../common/newcoupon.wxss";
+@import "../../../../common/tabbar.wxss";
+
+page{
+  background:#fff;
+  padding-bottom: 230rpx;
+}
+
+.idCardBox{
+  width: 100%;
+}
+.idCardBoxTxt{
+  width: 630rpx;
+  background: #FEF4EB;
+  border:2rpx solid #F2E3D2;
+  font-size: 24rpx;
+  color: #D3832C;
+  display: block;
+  margin:30rpx auto 30rpx;
+  border-radius: 12rpx;
+  padding: 20rpx 30rpx;
+}
+
+
+.inputLeftTxt{
+  width: 140rpx;
+  height:60rpx;
+  float: left;
+  font-size: 24rpx;
+  line-height: 60rpx;
+}
+.inputBox{
+  width: 690rpx;
+  height: 80rpx;
+  margin: auto;
+  border-bottom: 2rpx solid #F7F7F7;
+  padding-top: 20rpx;
+}
+.idCardAgree{
+  width: 690rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 24rpx;
+  color: #B4B4B9;
+  margin: auto;
+}
+
+
+.idnumberboxinp{width:480rpx;height:60rpx;line-height:80rpx;font-size:28rpx;color:#000;margin:0 auto;float: left;}
+
+.phcolor{
+  color:#CECECE;
+}
+.leafletBottomEve{
+  width:600rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  background:#E94F57;
+  border-radius: 70rpx;
+  color: #fff;
+  font-size: 24rpx;
+  text-align: center;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 100rpx;
+  margin:auto;
+  z-index: 1;
+}
+
+
+
+
+.identityTipBox{
+  width: 600rpx;
+  height: 400rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 3;
+  background: #fff;
+  border-radius: 15rpx;
+}
+
+.adcontxt{
+  font-size: 26rpx;padding: 15rpx 40rpx;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
