@@ -172,7 +172,7 @@
 
 		<view wx:elif='{{infoActivity.status == 2 && infoFragment.personalFragmentNumber != 0}}' style="width:100%;margin:20rpx 0;">
       <block wx:if='{{is_share_but}}'>
-					<block wx:if='{{is_exhibition!=1||brandId==388||(is_exhibition!=1&&brandId>0)}}'>
+					<block wx:if='{{(is_exhibition!=1||brandId==388||(is_exhibition!=1&&brandId>0)) && infoActivity.detail!=1}}'>
 							<view style="width:100%;font-size:25rpx;line-height:30rpx;text-align:center;margin:5rpx 0;">送你{{infoFragment.totalFragmentNumber}}张万能碎片，跟好友互赠100%获得缺失碎片</view>
 
 							<view id="mchip" style="width:85%;height:{{chipwidth*1.1}}px;margin:10rpx 7.5%;text-align: center;">
@@ -221,7 +221,9 @@
 				  <!-- 判断是ios 还是android  -->
 					<button wx:if='{{iftriosorand}}' style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' data-form='2' open-type="share"></button>
 					<view wx:else style="width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;" catchtap="sharefriend"></view>	
-					好友互赠,全部领取签号+1</view>
+					<block wx:if='{{infoActivity.detail!=1}}'>好友互赠,全部领取签号+1</block>
+					<block wx:else>分享给好友</block>
+					</view>
 					</block>
 				<view wx:if='{{!shareStatus}}' style="width:60%;background:gray;color:white;line-height:80rpx;border-radius:5rpx;float:right;text-align:center;position:relative;font-size:26rpx;">今日已赠完,明日再来</view>
 			</view>

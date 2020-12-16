@@ -739,20 +739,18 @@ Page({
 
 
           if (res.data.Info.infoActivity.joinMothed == "blindBox" && !res.data.Info.infoActivity.isCanOpenLotto) {
-            wx.hideShareMenu({
-              withShareTicket:false
-            });
+            wx.hideShareMenu();
           } else {
-            wx.showShareMenu();
+            wx.showShareMenu({
+              withShareTicket:true
+            });
           }
 
           // res.data.List.ShareUser && res.data.List.ShareUser.indexOf(_this.data.uid) == -1
 
           if(res.data.Info.infoActivity.detail == 1 && _this.data.canShare!=1){
             console.log('detail == 1','不能分享')
-            wx.hideShareMenu({
-              withShareTicket:false
-            });
+            wx.hideShareMenu();
             _this.setData({
               is_share_but:false
             })
