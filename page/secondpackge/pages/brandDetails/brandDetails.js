@@ -506,9 +506,16 @@ Page({
   },
   onShareAppMessage: function () {
     var _this = this
+    var indexShare = app.signindata.indexShare || [];
+    var indexShareNum = Math.floor(Math.random() * indexShare.length) || 0;
+    var indexShareImg = '';
+    if(indexShare.length!=0 && indexShare[indexShareNum]){
+      indexShareImg = indexShare[indexShareNum]+'?time=' + Date.parse(new Date());
+    };
+
     var share = {
       title: _this.data.brandinfo.shareDesc,
-      imageUrl: _this.data.brandinfo.shareImg || app.signindata.indexShareImg,
+      imageUrl: _this.data.brandinfo.shareImg || indexShareImg,
       path: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + _this.data.brandId + '&referee=' + _this.data.uid+"&settlement="+_this.data.settlement,
       success: function (res) { }
     }

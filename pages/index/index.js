@@ -226,6 +226,9 @@ Page({
       
       // url: "/page/component/pages/limitlottery/limitlottery?id=251707&canShare=1",
 
+      url: "/page/secondpackge/pages/canvasRoute/canvasRoute"
+      
+
       // url: "/pages/modifythenickname/modifythenickname"
 
       // url: "/page/secondpackge/pages/articleList/articleList"
@@ -233,7 +236,7 @@ Page({
       // url: "/page/secondpackge/pages/calendarList/calendarList"
 
       // url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
-      url: "/page/secondpackge/pages/luckyDraw/luckyDraw"
+      // url: "/page/secondpackge/pages/luckyDraw/luckyDraw"
       
       // url: "/page/secondpackge/pages/idCardVerification/idCardVerification"
 
@@ -1004,10 +1007,19 @@ Page({
    */
   onShareAppMessage: function (options) {
     var _this = this;
+
+    var indexShare = app.signindata.indexShare || [];
+    var indexShareNum = Math.floor(Math.random() * indexShare.length) || 0;
+    var indexShareImg = '';
+    if(indexShare.length!=0 && indexShare[indexShareNum]){
+      indexShareImg = indexShare[indexShareNum]+'?time=' + Date.parse(new Date());
+    };
+
+
     return {
-      title: '潮玩社交平台',
+      title: '12月18日 20:00准时开票！',
       path: 'pages/index/index',
-      imageUrl:app.signindata.indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
       success: function (res) {}
     }  
   },

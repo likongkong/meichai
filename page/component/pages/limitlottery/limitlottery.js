@@ -414,6 +414,7 @@ Page({
 
       this.setData({
         share_id: _this.getSearchString('referee', scene) || 0,
+        canShare:_this.getSearchString('canShare', scene) || 0
       })
     } else {
       console.log(2)
@@ -427,7 +428,8 @@ Page({
       _this.data.perayu = options.perayu || 0;
       this.setData({
         share_id: options.referee || 0,
-        brandId:options.brandId||''
+        brandId:options.brandId||'',
+        canShare:options.canShare || 0
       })
     };
     // 推送统计
@@ -736,7 +738,6 @@ Page({
           }
 
           console.log(chiplist)
-
 
           if (res.data.Info.infoActivity.joinMothed == "blindBox" && !res.data.Info.infoActivity.isCanOpenLotto) {
             wx.hideShareMenu();

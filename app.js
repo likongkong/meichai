@@ -1129,7 +1129,9 @@ App({
           // 首页分享图片
           var indexShare = res.data.List.indexShare || [];
           var indexShareNum = Math.floor(Math.random() * indexShare.length) || 0;
+
           if(indexShare.length!=0 && indexShare[indexShareNum]){
+            _this.signindata.indexShare = indexShare || [];
             var indexShareImg = indexShare[indexShareNum]+'?time=' + nowTime;
             _this.signindata.indexShareImg = indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg';
             console.log('_this.signindata.indexShareImg', _this.signindata.indexShareImg)
@@ -1254,3 +1256,4 @@ App({
 // luckyDraw  抽奖活动
 // idCardVerification 身份证验证
 
+// canvasRoute 路径 canvas 展会画路径
