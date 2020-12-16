@@ -139,9 +139,9 @@ page{
 .odchrhead{
   max-height: 66rpx;
   padding-top: 20rpx;
-  font-size: 24rpx;
+  font-size: 22rpx;
   color: #333;
-  width: 400rpx;
+  width: 420rpx;
 }
 .ordchcon{
   font-size: 24rpx;
