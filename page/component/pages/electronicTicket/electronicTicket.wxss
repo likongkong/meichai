@@ -12,6 +12,12 @@ page{
   top: 0;
   left: 0;
   z-index: 3;
+  background: rgba(0,0,0,.7);
+  line-height: 400rpx;
+  text-align: center;
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #fff;
 }
 /*  双行  */
 .multilineellipsis{
@@ -239,7 +245,7 @@ page{
 }
 
 .totalmoncleft{
-  float: left;
+  
   height: 58rpx;
   width: 380rpx;
   color: #999;
@@ -247,7 +253,8 @@ page{
   line-height: 58rpx;
 }
 .totalmoncright{
-  float: right;
+  
+  margin:20rpx auto 0;
   height: 56rpx;
   line-height: 56rpx;
   text-align: center;
