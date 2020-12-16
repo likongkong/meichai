@@ -739,7 +739,9 @@ Page({
 
 
           if (res.data.Info.infoActivity.joinMothed == "blindBox" && !res.data.Info.infoActivity.isCanOpenLotto) {
-            wx.hideShareMenu();
+            wx.hideShareMenu({
+              withShareTicket:false
+            });
           } else {
             wx.showShareMenu();
           }
@@ -748,7 +750,9 @@ Page({
 
           if(res.data.Info.infoActivity.detail == 1 && _this.data.canShare!=1){
             console.log('detail == 1','不能分享')
-            wx.hideShareMenu();
+            wx.hideShareMenu({
+              withShareTicket:false
+            });
             _this.setData({
               is_share_but:false
             })
