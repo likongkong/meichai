@@ -110,7 +110,7 @@
 	<view style="width:100%;background:white;overflow:hidden;position:relative;">
 
 		<block wx:if='{{infoActivity.status == 1}}'>
-			<view class='limsharebox' catchtap='limsavefun' wx:if='{{is_share_but}}'>
+			<view class='limsharebox' catchtap='limsavefun' wx:if='{{is_share_but&&canShare!=1}}'>
 				<image class='limshareimg' src='https://www.51chaidan.com/images/act/brand/createPoster.png'></image>
 				<view style='color:#53a5fd;font-size:22rpx;padding:3rpx 0 0 0;text-align:center;'>生成海报</view>
 			</view>
@@ -126,7 +126,7 @@
 
 		<!-- 特殊付费抽签中未付费显示 -->
 		<block wx:if='{{(infoActivity.status==2&& infoFragment.personalFragmentNumber==0)}}'>
-			<view class='limsharebox' catchtap='limsavefun' wx:if='{{is_share_but}}'>
+			<view class='limsharebox' catchtap='limsavefun' wx:if='{{is_share_but&&canShare!=1}}'>
 				<image class='limshareimg' src='https://www.51chaidan.com/images/act/brand/createPoster.png'></image>
 				<view style='color:#53a5fd;font-size:22rpx;padding:3rpx 0 0 0;text-align:center;'>生成海报</view>
 			</view>
@@ -146,7 +146,7 @@
 
 			<view wx:if='{{infoFragment.activitySignNumber.length > 0}}' style="width:80%;height:80rpx;margin:30rpx 10%;position:relative;">
 
-				<view class='limsharebox' wx:if='{{is_share_but}}' catchtap='limsavefun' style='top:5rpx;left:-68rpx;'>
+				<view class='limsharebox' wx:if='{{is_share_but&&canShare!=1}}' catchtap='limsavefun' style='top:5rpx;left:-68rpx;'>
 					<image class='limshareimg' src='https://www.51chaidan.com/images/act/brand/createPoster.png'></image>
 					<view style='color:#53a5fd;font-size:22rpx;padding:3rpx 0 0 0;text-align:center;'>生成海报</view>
 				</view>
@@ -188,7 +188,7 @@
 
 			<view style="width:80%;height:80rpx;margin:30rpx 10%;position:relative;">
 
-				<view class='limsharebox' wx:if='{{is_share_but}}' catchtap='limsavefun' style='top:5rpx;left:-68rpx;'>
+				<view class='limsharebox' wx:if='{{is_share_but&&canShare!=1}}' catchtap='limsavefun' style='top:5rpx;left:-68rpx;'>
 					<image class='limshareimg' src='https://www.51chaidan.com/images/act/brand/createPoster.png'></image>
 					<view style='color:#53a5fd;font-size:22rpx;padding:3rpx 0 0 0;text-align:center;'>生成海报</view>
 				</view>

@@ -1,0 +1,12 @@
+{
+  "asdfasfdflePullDownRefresh": true,
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "hidewindow": "../../../../pages/hidewindow/hidewindow",
+    "t_f": "../../../../pages/topfunction/topfunction",
+    "bnavigation": "/pages/bottomComponent/bottomComponent",
+    "poster": "/pages/wxa_plugin_canvas/poster/index",
+    "tga_c": "../../../../pages/tgacomponent/tgacomponent"
+  }
+}

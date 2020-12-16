@@ -1,0 +1,5 @@
+@import "../../../../common/tabbar.wxss";
+
+page {
+  background: #f5f6fa;
+}

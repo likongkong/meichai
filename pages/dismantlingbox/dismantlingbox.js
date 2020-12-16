@@ -92,7 +92,7 @@ Page({
   　　})
   },
   havephoneiftrfun:function(){
-    this.setData({havephoneiftr:!this.data.havephoneiftr});
+    // this.setData({havephoneiftr:!this.data.havephoneiftr});
   },
   // 获取手机号
   getPhoneNumber: function(e) {
@@ -804,10 +804,10 @@ Page({
      var _this = this;
      if(_this.data.referee&&_this.data.uid&&_this.data.referee!=_this.data.uid){
         if(_this.data.isMobileAuth){
-          _this.shareExhBen();             
+          // _this.shareExhBen();             
         }else{
           _this.data.isShareOrSub = true;
-          _this.havephoneiftrfun();
+          // _this.havephoneiftrfun();
           // 展会福利
           // _this.exhibitionBenefits();
         };
@@ -1130,9 +1130,17 @@ Page({
     var _this = this;
     var giftInfo = _this.data.giftInfo || {};
     var img = 'https://cdn.51chaidan.com/images/default/toyShow/toyshowShare.jpg';
+
+    var indexShare = app.signindata.indexShare || [];
+    var indexShareNum = Math.floor(Math.random() * indexShare.length) || 0;
+    var indexShareImg = '';
+    if(indexShare.length!=0 && indexShare[indexShareNum]){
+      indexShareImg = indexShare[indexShareNum]+'?time=' + Date.parse(new Date());
+    };
+
     return {
       title:'12月18日 20:00准时开票！',
-      imageUrl:app.signindata.indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
     }
   },  
 })
