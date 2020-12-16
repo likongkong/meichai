@@ -709,6 +709,10 @@ App({
       wx.navigateTo({
         url: "/page/secondpackge/pages/vipPage/vipPage"
       });
+    } else if (item_type == 9022) { 
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
+      });
     };
 
 
