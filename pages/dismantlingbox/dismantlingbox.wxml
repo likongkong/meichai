@@ -14,73 +14,7 @@
 
     
     
-    <!-- 展会活动 -->
-    <!-- <view class="calendarActivityWrap">
-      <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e1'>———— 展会活动 ————</view>
-      <block>
-        <view class="countdownWrap" catchtouchmove="true">
-          <view style="background:#F3F4F4;"> 
-            <view class="countdownAwardWrap" catchtouchmove="" catchtap="toggleAwardFun">
-              <view style="position:relative;float:left;">
-                <image mode="heightFix" src="https://cdn.51chaidan.com/images/calendar/calendar_gift.png"></image>
-                <text>活动奖品</text>
-              </view>
-            </view>
-            <view class="countdownNumWrap">
-              <view>
-                <view class="countdownNumTxt">
-                  <block wx:if='{{commoddata.day=="00"&&commoddata.hour=="00"&&commoddata.minute=="00"&&commoddata.second=="00"}}'>活动已结束</block>
-                  <block wx:else>距投票结束还有</block>
-                </view>
-                <view class="countdownNumTime">{{commoddata.day}}<text>天</text>{{commoddata.hour}}<text>时</text>{{commoddata.minute}}<text>分</text>{{commoddata.second}}<text>秒</text></view>
-              </view>
-            </view>
-          </view>
-        </view>
-        <view class="awardMask" catchtouchmove="true" wx:if="{{isAwardBox}}" catchtap="toggleAwardFun">
-          <view class="awardWrap" catchtap="true">
-            <view class="awardTitle">——— 奖品信息 ———</view>
-            <view class="awardBoxWrap">
-              <view class="awardBoxWrapTu">
-                <image src="https://cdn.51chaidan.com/images/calendar/calendar_gift.png?1=1" mode="widthFix"></image>
-              </view>
-              <view class="awardBoxWrapName">
-                <view>
-                  <text>MCTS x JSS 潮玩之旅 展会限定日历（非卖品）</text>
-                  <text>价值：￥199</text> 
-                </view>
-              </view>
-            </view>
-            <view class="awardTitle">——— 获取方式 ———</view>
-            <view style="padding:20rpx 30rpx 0 30rpx;box-sizing: border-box;">
-              <text class="awardBigTxt">1.通过为品牌投票获取</text>
-              <text class="awardSmallTxt">每个品牌下，为该品牌投票的用户，排名前3名可免费领取活动奖品一份</text>
-              <text class="awardBigTxt">2.通过抽选获取</text>
-              <text class="awardSmallTxt">每个品牌下，在未获得奖品的用户中，额外抽取2名幸运用户，免费领取活动奖品一份</text>
-              <text class="awardBigTxt">Ps：每人最多只可获取1份活动奖品</text>
-            </view>
-          </view>
-        </view>
-      </block>
-
-
-      <swiper class="calendarSwiper" autoplay="true" circular="true" interval="5000" indicator-dots="{{false}}" previous-margin='30px' next-margin='30px' bindchange="swiperChange" indicator-active-color="#298CF7" style="height:{{swiperH}}px;">
-        <swiper-item wx:for='{{calendarList}}' wx:key='key' catchtap="jumpCalendarList">
-          <view class="calendarSwiperItem {{nowIdx==index?'le-active':''}}">
-            <image class='le-img' bindload='getHeight' src='{{item.calendar_img}}' style='height:{{swiperH}}px;' mode="aspectFit"></image>
-            <view class="swiperItemBrandWrap">
-              <view class="swiperItemBrandInfo">
-                <view class="brandLogoBgFFF">
-                  <image class="swiperItemBrandLogo" src="{{item.brandLogo}}" mode="aspectFit"></image>
-                </view>
-                <text class="swiperItemBrandName specialellipsis" style="width:400rpx">{{item.brandName}}</text>
-              </view>
-              <view class="swiperItemBrandVote">点击投票</view>
-            </view>
-          </view>
-        </swiper-item>
-      </swiper>
-    </view> -->
+   
 
     <!-- 票务信息 -->
     <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e3'>————— 票务信息 —————</view>
@@ -151,6 +85,74 @@
                <!-- <view class="ssubBotRight" data-roomid='{{item.room_id}}' style="width:110rpx;background:#fff;"><subscribe style="width:100%;height:100%;position:absolute;right:0;top:0;bottom:0;margin:auto;z-index:1;" room-id="{{item.room_id}}"></subscribe></view> -->
            </view>
         </view>
+    </view>
+
+     <!-- 展会活动 -->
+     <view class="calendarActivityWrap">
+      <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e1'>———— 展会活动 ————</view>
+      <!-- <block>
+        <view class="countdownWrap" catchtouchmove="true">
+          <view style="background:#F3F4F4;"> 
+            <view class="countdownAwardWrap" catchtouchmove="" catchtap="toggleAwardFun">
+              <view style="position:relative;float:left;">
+                <image mode="heightFix" src="https://cdn.51chaidan.com/images/calendar/calendar_gift.png"></image>
+                <text>活动奖品</text>
+              </view>
+            </view>
+            <view class="countdownNumWrap">
+              <view>
+                <view class="countdownNumTxt">
+                  <block wx:if='{{commoddata.day=="00"&&commoddata.hour=="00"&&commoddata.minute=="00"&&commoddata.second=="00"}}'>活动已结束</block>
+                  <block wx:else>距投票结束还有</block>
+                </view>
+                <view class="countdownNumTime">{{commoddata.day}}<text>天</text>{{commoddata.hour}}<text>时</text>{{commoddata.minute}}<text>分</text>{{commoddata.second}}<text>秒</text></view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="awardMask" catchtouchmove="true" wx:if="{{isAwardBox}}" catchtap="toggleAwardFun">
+          <view class="awardWrap" catchtap="true">
+            <view class="awardTitle">——— 奖品信息 ———</view>
+            <view class="awardBoxWrap">
+              <view class="awardBoxWrapTu">
+                <image src="https://cdn.51chaidan.com/images/calendar/calendar_gift.png?1=1" mode="widthFix"></image>
+              </view>
+              <view class="awardBoxWrapName">
+                <view>
+                  <text>MCTS x JSS 潮玩之旅 展会限定日历（非卖品）</text>
+                  <text>价值：￥199</text> 
+                </view>
+              </view>
+            </view>
+            <view class="awardTitle">——— 获取方式 ———</view>
+            <view style="padding:20rpx 30rpx 0 30rpx;box-sizing: border-box;">
+              <text class="awardBigTxt">1.通过为品牌投票获取</text>
+              <text class="awardSmallTxt">每个品牌下，为该品牌投票的用户，排名前3名可免费领取活动奖品一份</text>
+              <text class="awardBigTxt">2.通过抽选获取</text>
+              <text class="awardSmallTxt">每个品牌下，在未获得奖品的用户中，额外抽取2名幸运用户，免费领取活动奖品一份</text>
+              <text class="awardBigTxt">Ps：每人最多只可获取1份活动奖品</text>
+            </view>
+          </view>
+        </view>
+      </block> -->
+
+
+      <swiper class="calendarSwiper" autoplay="true" circular="true" interval="5000" indicator-dots="{{false}}" previous-margin='30px' next-margin='30px' bindchange="swiperChange" indicator-active-color="#298CF7" style="height:{{swiperH}}px;">
+        <swiper-item wx:for='{{calendarList}}' wx:key='key' catchtap="jumpCalendarList">
+          <view class="calendarSwiperItem {{nowIdx==index?'le-active':''}}">
+            <image class='le-img' bindload='getHeight' src='{{item.calendar_img}}' style='height:{{swiperH}}px;' mode="aspectFit"></image>
+            <view class="swiperItemBrandWrap">
+              <view class="swiperItemBrandInfo">
+                <view class="brandLogoBgFFF">
+                  <image class="swiperItemBrandLogo" src="{{item.brandLogo}}" mode="aspectFit"></image>
+                </view>
+                <text class="swiperItemBrandName specialellipsis" style="width:400rpx">{{item.brandName}}</text>
+              </view>
+              <!-- <view class="swiperItemBrandVote">点击投票</view> -->
+            </view>
+          </view>
+        </swiper-item>
+      </swiper>
     </view>
 
     <!-- 展会福利 -->
@@ -226,6 +228,43 @@
            <image class="ssubBiliimgbr" src="{{item.brandLogo}}" mode='aspectFit'></image>
         </view>
     </view>
+    <!-- 主办 -->
+    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;">——————— 主办 ———————</view>
+    <view class="ssubBrandEveWrap" style="width:100%;overflow: hidden;padding:0 40rpx;box-sizing: border-box; display: flex;justify-content: center;align-items: center;">
+        <view class="ssubBrandEve1 bigLogo">
+          <image class="ssubBiliimgbr bigLogo" src="https://cdn.51chaidan.com/toyshow/upload/1600448943.jpg" mode='aspectFit'></image>
+        </view>
+    </view>
+    <!-- 承办 -->
+    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;">——————— 承办 ———————</view>
+    <view class="ssubBrandEveWrap" style="width:100%;overflow: hidden;padding:0 40rpx;box-sizing: border-box; display: flex;justify-content: center;align-items: center;">
+        <view class="ssubBrandEve1 bigLogo1">
+          <image class="ssubBiliimgbr bigLogo1" src="http://cdn.51chaidan.com/images/toyshow/sm.png" mode='aspectFit'></image>
+        </view>
+    </view>
+    <!-- 媒体合作与平台支持 -->
+    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;">———— 媒体合作与平台支持 ————</view>
+    <view class="ssubBrandEveWrap" style="width:100%;overflow: hidden;padding:0 40rpx;display: flex;justify-content: center;align-items: center;box-sizing: border-box;">
+        <view class="ssubBrandEve">
+          <image class="ssubBiliimgbr" src="https://cdn.51chaidan.com/images/toyShow3/yk.jpg" mode='aspectFit'></image>
+        </view>
+        <view class="ssubBrandEve">
+          <image class="ssubBiliimgbr" src="https://cdn.51chaidan.com/images/toyShow3/kl.jpg" mode='aspectFit'></image>
+        </view>
+        <view class="ssubBrandEve">
+          <image class="ssubBiliimgbr" src="https://cdn.51chaidan.com/images/toyShow3/chw.jpg" mode='aspectFit'></image>
+        </view>
+        <!-- <view class="ssubBrandEve">
+          <image class="ssubBiliimgbr" src="https://cdn.51chaidan.com/images/toyShow3/yk.jpg" mode='aspectFit'></image>
+        </view>
+        <view class="ssubBrandEve">
+          <image class="ssubBiliimgbr" src="https://cdn.51chaidan.com/images/toyShow3/kl.jpg" mode='aspectFit'></image>
+        </view>
+        <view class="ssubBrandEve">
+          <image class="ssubBiliimgbr" src="https://cdn.51chaidan.com/images/toyShow3/chw.jpg" mode='aspectFit'></image>
+        </view> -->
+    </view>
+
     <!-- <view class="ssubBotTxt">售卖商品陆续更新,最终以展会开售为准</view> -->
 </view>
 

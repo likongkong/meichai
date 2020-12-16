@@ -804,7 +804,7 @@ Page({
      var _this = this;
      if(_this.data.referee&&_this.data.uid&&_this.data.referee!=_this.data.uid){
         if(_this.data.isMobileAuth){
-          _this.shareExhBen();             
+          // _this.shareExhBen();             
         }else{
           _this.data.isShareOrSub = true;
           _this.havephoneiftrfun();
@@ -1123,8 +1123,7 @@ Page({
       title:'12月18日 20:00准时开票！',
       path: "/pages/dismantlingbox/dismantlingbox?shareId=" + _this.data.giftInfo.shareId + '&referee=' + _this.data.uid,
       imageUrl:app.signindata.indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
-    }    
-
+    }   
   },
   onShareTimeline:function(){
     var _this = this;

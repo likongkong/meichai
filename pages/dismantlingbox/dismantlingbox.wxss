@@ -898,3 +898,24 @@ page{
   box-sizing: border-box;
   margin-bottom: 30rpx;
 }
+
+.ssubBrandEve1{
+  display: inline-block;
+  margin: 0 20rpx;
+}
+.bigLogo{
+  width: 117rpx;
+  height: 117rpx;
+}
+.bigLogo image{
+  width: 117rpx;
+  height: 117rpx;
+}
+.bigLogo1{
+  width: 250rpx;
+  height: 117rpx;
+}
+.bigLogo1 image{
+  width: 250rpx;
+  height: 117rpx;
+}

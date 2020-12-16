@@ -201,6 +201,7 @@ Page({
     //       };
     //   }
     // })
+   
      wx.navigateTo({  
       // url: "/page/component/pages/doubleElevenexh/doubleElevenexh?specialsource=1"
       // url: "/page/component/pages/crowdfunding/crowdfunding?aid=75127"
@@ -230,7 +231,8 @@ Page({
 
       // url: "/page/secondpackge/pages/calendarList/calendarList"
 
-      url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
+      // url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
+      // url: "/page/component/pages/webview/webview?webview=http://www.51chaidan.com/notice/928tips.html"
       // url: "/page/secondpackge/pages/luckyDraw/luckyDraw"
       
       // url: "/page/secondpackge/pages/idCardVerification/idCardVerification"
