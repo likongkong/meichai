@@ -38,14 +38,15 @@
 			<swiper class="swiper_container" vertical="true" autoplay="true" circular="true" interval="2500">
 				<block wx:for="{{boastlist}}" wx:key='key'>
 					<swiper-item class='swiperiteme'>
-						<image style='width:50rpx;height:50rpx;margin:15rpx;float:left;border-radius:50%;' src='{{item.headphoto}}'></image>
+						<image style='width:50rpx;height:50rpx;margin:15rpx 15rpx 15rpx 0;float:left;border-radius:50%;' src='{{item.headphoto}}'></image>
 						<view class="swiper_item_eve specialellipsis">{{item.content}}</view>
 					</swiper-item>
 				</block>
 			</swiper>
 
 			<view style='width:100%;height:100%;position:absolute;top:0;left:0;z-index:2;'>
-			    <!-- <image src='https://www.51chaidan.com/images/toyCabinet/search.png' class='dlfheadrhimg' catchtap='elsearchfun'></image> -->
+					<!-- <image src='https://www.51chaidan.com/images/toyCabinet/search.png' class='dlfheadrhimg' catchtap='elsearchfun'></image> -->
+					<!-- <text wx:if="{{isBuyingTickets}}" catchtap="giveticketFun" style="display:block;width:100%;height:100%;line-height:88rpx;text-align:right;font-size:24rpx;color:#1890ff;">送刮刮卡</text> -->
 			</view>
 		</view>
 	</view>

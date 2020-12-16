@@ -232,7 +232,7 @@
 
 		<view wx:if='{{infoActivity.status == 3}}' style="width:100%;padding-bottom:10rpx;">
 		  <block wx:if='{{reLottoList&&reLottoList.length!=0}}'>
-					<view style="width:100%;font-size:25rpx;line-height:30rpx;text-align:center;margin:20rpx 0;">补抽名单1</view>
+					<view style="width:100%;font-size:25rpx;line-height:30rpx;text-align:center;margin:20rpx 0;">补抽名单2</view>
 					<view style='font-size:30rpx;color:#1989FA;' wx:for='{{winnerLotto}}' wx:key='key'>
 							<view style='overflow:hidden;padding:20rpx 150rpx;text-align:center;'>
 								<view style='float:left;width:60rpx;height:60rpx;border-radius:50%;background:#FF8080;'>
@@ -247,7 +247,7 @@
 							<block wx:for='{{reLottoList}}' wx:key='key'>
 									<view style="width:100%;font-size:25rpx;line-height:30rpx;text-align:center;margin:20rpx 0;">
 									    <block wx:if='{{(index+1)==reLottoList.length}}'>中签名单</block>
-									    <block wx:else>补抽名单2</block>
+									    <block wx:else>补抽名单1</block>
 									</view>
 									<block wx:for='{{item}}' wx:key='key'>
 											<view style='font-size:30rpx;color:#1989FA;'>
@@ -289,7 +289,7 @@
 
 			<view wx:if='{{!infoActivity.isWinner}}' class='takepartin' catchtap="moreaction">更多活动</view>
 
-			<view wx:if='{{infoActivity.isWinner}}' style="width:100%;">
+			<view wx:if='{{infoActivity.isWinner}}' style="width:100%; {{awardstatus == 2?'position: fixed;bottom: 124rpx;left: 0;z-index: 10;':''}}">
 				<view wx:if='{{awardstatus == 2}}' class='takepartin' style="background:#FF9800;" catchtap="winnerlogic">领取奖励</view>
 
 				<view wx:if='{{awardstatus == 1}}' style="width:100%;text-align:center;color:#FF9800;line-height:50rpx;">已领取奖励</view>

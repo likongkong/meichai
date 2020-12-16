@@ -45,10 +45,14 @@ Page({
           console.log('抽奖记录======',res)
           wx.hideLoading();
           if (res.data.ReturnCode == 200) {
-            _this.setData({
-              isRecordMask:true,
-              awardList:res.data.List.awardList
-            })
+            if(res.data.List.awardList.length != 0){
+              _this.setData({
+                isRecordMask:true,
+                awardList:res.data.List.awardList
+              })
+            }else{
+              app.showToastC('你暂时没有抽奖记录')
+            }
           }else{
             app.showToastC(res.data.Msg)
           }
