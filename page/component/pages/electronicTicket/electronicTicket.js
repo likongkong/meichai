@@ -168,11 +168,11 @@ Page({
     if(Dec.env == 'online'){
       var getUrl = 'https://brandentry.51chaidan.com/';
     }else{
-      var getUrl = 'http://brandentry-test.51chaidan.com/';
+      var getUrl = 'https://brandentry-test.51chaidan.com/';
     };
     console.log(getUrl + 'verificationcode?orderNum='+comdata.ticketQrKey)
     wx.request({
-      url:getUrl + 'verificationcode?orderNum='+comdata.ticketQrKey,
+      url:getUrl + 'verificationcode?orderNum='+comdata.ticketQrKey,  
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {

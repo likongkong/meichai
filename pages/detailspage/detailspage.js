@@ -3798,6 +3798,11 @@ Page({
       addfrindcommoni: !this.data.addfrindcommoni
     });
   },
-
+  // 跳转定位
+  jumpposition:function(w){
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
+    });
+  }
 
 })
