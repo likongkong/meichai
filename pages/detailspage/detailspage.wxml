@@ -508,6 +508,23 @@
       </view>
     </view>   
 </block>
+<!--  35422,35420,35421 去购票 -->
+<block wx:elif='{{zunmdata.gid == 35422 || zunmdata.gid == 35420 || zunmdata.gid == 35421}}'>
+    <view class="detailfooter" style='{{isIphoneX?"bottom:130rpx;":"bottom:110rpx;"}}'>
+      <view style='width:100%;min-height:98rpx;overflow:hidden;background:#f4f4f4;'>
+        <view style='height:98rpx;width:202rpx;float:left;position:relative;' wx:if='{{isCanShare}}' catchtap='displaysharefriend'>
+            <image src='https://www.51chaidan.com/images/icon/iconShareWX.png' style='width:50rpx;height:50rpx;display:block;margin:10rpx auto 0;'></image>
+            <view style='font-size:22rpx;width:100%;color:#919191;text-align:center;height:40rpx;line-height:40rpx;'>分享好友</view>
+        </view>
+        <view class="footer-child large turn" style='height:80rpx;margin-top:9rpx;border-radius:10rpx;padding:0;width:255rpx;margin-right:20rpx;background:#eeae19;'>
+          <view class='addsopcar' catchtap="jumpposition" style='position:relative;height:80rpx;'>
+            <view style='width:100%;height:80rpx;text-align:center;color:#fff;line-height:80rpx;font-size:28rpx;'>去购票</view>
+          </view>
+        </view>
+      </view>
+    </view>   
+</block>
+
 <!--  底部tab -->
 <block wx:elif='{{zunmdata.isZhongCao}}'>
     <view class="detailfooter" style='{{isIphoneX?"bottom:130rpx;":"bottom:110rpx;"}}'>
