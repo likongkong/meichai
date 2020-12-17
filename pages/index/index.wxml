@@ -36,7 +36,7 @@
 
 		<swiper bindanimationfinish="changeGoodsSwip" current="{{goodsIndex}}" class="swiper" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450" wx:if='{{!is_formaldress}}'>
 			<swiper-item wx:for="{{movies}}" wx:key="key">
-				<image src="{{item.image}}?watermark/2/text/QOe-juaLhg==/fill/IzNEM0QzRA/fontsize/20/dissolve/90/gravity/southeast/dx/20/dy/20/batch/1" class="slide-image watermark" mode="aspectFill" data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}' bindtap='jumpbanner' data-imgurl='{{item.image}}' style='position:relative;'>
+				<image src="{{item.image}}" class="slide-image" mode="aspectFill" data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}' bindtap='jumpbanner' data-imgurl='{{item.image}}' style='position:relative;'>
 				</image>
 			</swiper-item>
 		</swiper>

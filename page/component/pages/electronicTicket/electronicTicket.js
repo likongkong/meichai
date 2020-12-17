@@ -601,24 +601,21 @@ Page({
 
              
              var ticketTime = res.data.Info.ticketTime || 0;
-             console.log('nowTime=====',nowTime);
-   
-             var showSubscription = true;
-             console.log(nowTime/1000 > ticketTime)
-             if(ticketTime && (nowTime/1000 > ticketTime)){
-               showSubscription = false
-             };
-             var nowTime = new Date().getTime();
-             if(res.data.Info.ticketDisplayTime && (nowTime/1000 > res.data.Info.ticketDisplayTime)){
-                res.data.Info.qrcode = '';
-             };
 
-            // 是否过期
-            if(res.data.Info.ticketEndDisplay && (nowTime/1000 > res.data.Info.ticketEndDisplay)){
-                
-            };             
+             var showSubscription = false;
+             var nowTime = (new Date().getTime())/1000;
+
              
-
+             if(res.data.Info.ticketDisplayTime && (nowTime < res.data.Info.ticketDisplayTime)){ //  未开始 显示模糊图片
+                   console.log(1)   
+             }else if((nowTime > res.data.Info.ticketEndDisplay)){  // 过期 过期
+                   res.data.Info.isItOverdue = true;
+                   console.log(2)  
+             }else if(nowTime > res.data.Info.ticketDisplayTime && nowTime < res.data.Info.ticketEndDisplay){
+                   res.data.Info.qrcode = '';
+                   showSubscription = true;
+                   console.log(3)  
+             }; 
 
              _this.setData({
                isShareGood:isShareGood,
@@ -627,9 +624,11 @@ Page({
                subscribedata: res.data.Info.subscribe,
              })
 
-            if(res.data.Info.ticketDisplayTime && (nowTime/1000 > res.data.Info.ticketDisplayTime)){
-                _this.refreshQRCode();
-            }
+             if(showSubscription){ //  未开始 显示模糊图片
+              _this.refreshQRCode();
+             }; 
+
+             
              
              
            };
