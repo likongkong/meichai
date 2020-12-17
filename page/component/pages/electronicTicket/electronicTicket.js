@@ -596,14 +596,41 @@ Page({
              if(res.data.Info.idcard){
                 res.data.Info.idcard = res.data.Info.idcard.replace(/^(.{4})(?:\w+)(.{4})$/, "$1**********$2");
              };
-             res.data.Info.qrcode = '';
+
+             //  
+
+             
+             var ticketTime = res.data.Info.ticketTime || 0;
+             console.log('nowTime=====',nowTime);
+   
+             var showSubscription = true;
+             console.log(nowTime/1000 > ticketTime)
+             if(ticketTime && (nowTime/1000 > ticketTime)){
+               showSubscription = false
+             };
+             var nowTime = new Date().getTime();
+             if(res.data.Info.ticketDisplayTime && (nowTime/1000 > res.data.Info.ticketDisplayTime)){
+                res.data.Info.qrcode = '';
+             };
+
+            // 是否过期
+            if(res.data.Info.ticketEndDisplay && (nowTime/1000 > res.data.Info.ticketEndDisplay)){
+                
+            };             
+             
+
+
              _this.setData({
                isShareGood:isShareGood,
                comdata: res.data.Info,
                id: res.data.Info.gid,
                subscribedata: res.data.Info.subscribe,
              })
-             _this.refreshQRCode();
+
+            if(res.data.Info.ticketDisplayTime && (nowTime/1000 > res.data.Info.ticketDisplayTime)){
+                _this.refreshQRCode();
+            }
+             
              
            };
          };

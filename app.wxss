@@ -43,3 +43,16 @@
   top: -14%;
   right: -9%;
 } */
+
+.watermark:after{
+  content: '@美拆 FORTUNE TOYS';
+  position: absolute;
+  bottom: 25rpx;
+  right: 15rpx;
+  font-size: 24rpx;
+  color: #000;
+  /* transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg); */
+
+}

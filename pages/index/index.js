@@ -236,7 +236,7 @@ Page({
 
       // url: "/page/secondpackge/pages/calendarList/calendarList"
 
-      // url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
+      url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
 
       // url: "/page/secondpackge/pages/luckyDraw/luckyDraw"
       

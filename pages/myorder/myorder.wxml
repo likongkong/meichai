@@ -363,8 +363,8 @@
                  <view class='wholeconright' wx:if='{{item.order_type!=7}}'>
                       <view class='wholecontxt multilineellipsis' style='position:relative;'>
                       <block wx:if='{{item.order_type!=13}}'>
-                            <view wx:if='{{item.is_suit==1}}' style='display: inline-block;color:#ff2742;margin-right:12rpx;'>{{item.pre_name}}</view>
-                            <view wx:if='{{item.is_suit==1}}' style='display: inline-block;'>{{item.ds}}</view>  
+                           <view wx:if='{{item.is_suit==1&&item.pre_name}}' style='display: inline-block;color:#ff2742;margin-right:12rpx;'>{{item.pre_name}}</view>
+                            <view wx:if='{{item.is_suit==1&&item.ds}}' style='display: inline-block;'>{{item.ds}}</view>  
                       </block>
                       {{item.gname}}
                       </view>

@@ -11,17 +11,26 @@
  
 
  <!-- 电子 -->
-<block wx:if='{{comdata.isToyshowDrawGoods && comdata.status == 2}}'>
+<block wx:if='{{comdata.isToyshowDrawGoods}}'>
 
-     <view class="ordeQRcode">
+     <view class="ordeQRcode" wx:if='{{comdata.status == 2}}'>
          <view class="ordeQRImgBox">
             <image src="{{comdata.qrcode}}" class="ordeQRImgBoxImg"></image>
          </view> 
          <view class="ordeQRTitN" style="text-align:center;border-top:0;">需凭本人身份证线下扫码领取<text wx:if='{{comdata.drawDate}}'>2021.1.{{comdata.drawDate}}</text></view>
      </view>
 
+      <view wx:if='{{comdata.status==5}}' class='odchtead'>
+        <view style='float:left;font-size:24rpx;' >订单编号:{{comdata.order_sn}}</view>
+        <view  class='wholeconnumrrbox'>
+              <view class='wholeconnumrr'>  
+                  已完成
+              </view>
+        </view>
+      </view>
+
      <view class='orderdetcon'>         
-            <view class='odchteadcom' data-gid='{{comdata.gid}}' data-order_type='{{comdata.order_type}}' data-activity_id='{{comdata.activity_id}}' style="border-top:0;" bindtap='addressmanagement'>
+            <view class='odchteadcom' data-gid='{{comdata.gid}}' data-order_type='{{comdata.order_type}}' data-activity_id='{{comdata.activity_id}}' style="{{comdata.status==5?'border-top: 1rpx solid #e5e5e5;':'border-top:0;'}}" bindtap='addressmanagement'>
                <view class='odchcomleft'>
                    <view class='odchlefimg'>
                        <image src='{{comdata.gcover}}' bindload="imageLoadad" style='height: 100%;width:{{comdata.width||140}}rpx;margin:0 auto;display:{{comdata.width?"block":"none"}};' mode='aspectFill'></image>
