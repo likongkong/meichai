@@ -23,6 +23,7 @@ Page({
     isAwardMask:false,
     isidCardMask:false,
     idcardIndex:0,
+    selectCard:0,
     // 绑定身份证id
     bindIdcard:'',
     bindDate:'',
@@ -75,6 +76,15 @@ Page({
     })
   },
   toggleidCardFun(){
+    if(this.data.isidCardMask){
+      this.setData({
+        idcardIndex: this.data.selectCard
+      })
+    }else{
+      this.setData({
+        selectCard : this.data.idcardIndex
+      })
+    }
     this.setData({
       isidCardMask:!this.data.isidCardMask
     })

@@ -119,7 +119,7 @@
   <view class="idCardBoxWrap" catchtap="true">
     <scroll-view class="idCardScroll" scroll-y>
       <block wx:for="{{identity}}" wx:key="key" wx:for-index="idx">
-        <view class="idCardItem">
+        <view class="idCardItem" data-index="{{idx}}" data-idcard="{{item.actualidcard}}" data-date="{{item.date}}" catchtap="selectCardFun">
           <view class="idCardItemBox">
             <view>
               <text>{{item.consignee}}</text>
@@ -128,7 +128,7 @@
               <text>入场日期：2021年1月{{item.date}}日</text>
             </view>
           </view>
-          <view class="idCardItemRadio" data-index="{{idx}}" data-idcard="{{item.actualidcard}}" data-date="{{item.date}}" catchtap="selectCardFun">
+          <view class="idCardItemRadio">
             <image src=" {{idx==idcardIndex?'https://cdn.51chaidan.com/images/calendar/select.png':'https://cdn.51chaidan.com/images/calendar/case.png'}}" mode="widthFix"></image>
           </view>
         </view>
