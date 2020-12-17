@@ -4,6 +4,8 @@ var Dec = require('../../../../common/public.js'); //aes加密解密js
 const app = getApp();
 var WxParse = require('../../../../wxParse/wxParse.js');
 
+var astar = require('../../../../utils/astar.js'); 
+
 import Poster from '../../../../pages/wxa_plugin_canvas/poster/poster';
 
 Page({
@@ -30,7 +32,7 @@ Page({
     // 授权弹框
     tgabox: false,
 
-    c_title: '潮玩种草',
+    c_title: '潮玩路径',
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
@@ -48,101 +50,98 @@ Page({
    */
   onCreatePoster() {
     var that = this;
-    var userInfo = app.signindata.userInfo||{};
-    // 用户头像
-    var uidimg = app.signindata.avatarUrl || 'https://static.51chaidan.com/images/headphoto/' + that.data.uid + '.jpg';
-    if (uidimg) {
-      var tdavatar = uidimg;
-    } else if (path != null) {
-      if (path) { var tdavatar = path; } else { var tdavatar = that.data.avatarUrl; };
-    } else {
-      var tdavatar = that.data.avatarUrl;
+    
+    // 格子宽度和高度
+    var width = 80;
+    var height = 80;
+    var lineWidth = 4; // 线的宽度
+    var offset_box = (width - lineWidth) / 2;
+
+    // 偏移量
+    var offset_x = 100 + offset_box;
+    var offset_y = 100 + offset_box;
+
+    var start = '';
+    var end = '';  
+    var result = '';  
+
+    var astarVar = astar;
+    var graph = new astarVar.Graph([
+      [0,1,1,0,1,1,1,1],
+      [1,0,0,1,1,0,0,1],
+      [1,0,0,1,0,0,1,1],
+      [0,1,1,1,0,1,1,0],
+      [1,1,0,1,0,0,1,1],
+      [1,0,0,1,0,0,1,0],
+      [1,1,1,0,1,1,1,1],
+    ]);
+    console.log(graph)
+
+
+    start = graph.grid[6][7];
+    end = graph.grid[0][0];
+    result = astarVar.astar.search(graph, start, end);
+    console.log('result===',result);
+  
+    start = graph.grid[0][6];
+    end = graph.grid[6][2];
+    result = astarVar.astar.search(graph, start, end);
+    console.log('result===',result);
+
+
+    var lineArr = [];
+    for(var i=0; i< result.length; i++){
+      if(lineArr.length!=0){
+        lineArr.push({
+          startX:offset_x + result[i-1].x*width,
+          startY:offset_y + result[i-1].y*width,
+          endX:offset_x + result[i].x*width,
+          endY:offset_y + result[i].y*width,
+          width:lineWidth,
+          color:'red',
+          zIndex:2
+        })
+      }else{
+        lineArr.push({
+          startX:offset_x + result[i].x*width,
+          startY:offset_y + result[i].y*width,
+          endX:offset_x + result[i].x*width,
+          endY:offset_y + result[i].y*width,
+          width:lineWidth,
+          color:'red',
+          zIndex:2
+        })
+      };
     };
-    // 小程序码
-    var shopdetail = that.data.shopdetail;
+
+    console.log(lineArr)
+    // 终点圆形
+    var blocks = [{
+      x:lineArr[lineArr.length-1].endX-10,
+      y:lineArr[lineArr.length-1].endY-10,
+      width:20,
+      height:20,
+      backgroundColor:'red',
+      zIndex: 3,
+      borderRadius: 30,
+      boxSetShadow:{a:10,b:10,c:10,d:'#e0e0e0'}
+    }];
+
     // setData配置数据
     that.setData({
       posterConfig: {
-        width: 700,
-        height: 1000,
+        width: 1000,
+        height: 800,
         debug: false,
         // pixelRatio: 1000,
         preload: false,
         hideLoading: false,
         backgroundColor: '#fff',
-        blocks: [{
-          x: 40,
-          y: 165,
-          width: 618,
-          height: 540,
-          backgroundColor:'#fff',
-          zIndex: 1,
-          borderRadius: 20,
-          // borderColor: '#ccc',
-          // borderWidth:4,
-          boxSetShadow:{a:10,b:10,c:10,d:'#e0e0e0'}
-        }],
+        blocks: blocks,
+        lines:lineArr,
         texts: [{
-          x: 140,
-          y: 64,
-          baseLine: 'middle',
-          text:userInfo.nickName,
-          fontSize: 26,
-          textAlign: 'left',
-          color: '#000',
-          zIndex: 1,
-        },{
-          x: 140,
-          y: 106,
-          baseLine: 'middle',
-          text:'我在『美拆』发现1件新奇好物',
-          fontSize: 26,
-          textAlign: 'left',
-          color: '#7a7f85',
-          zIndex: 1,
-        },{
-          x: 80,
-          y: 541,
-          baseLine: 'middle',
-          width:530,
-          lineNum:2,
-          lineHeight:40,
-          text:shopdetail.name,
-          fontSize:30,
-          textAlign: 'left',
-          color: '#000',
-          zIndex: 2,
-          fontWeight:'bold'
-        },{
-          x: 80,
-          y: 655,
-          baseLine: 'middle',
-          text:'已预约: '+shopdetail.totalUnpack+' 人',
-          fontSize: 26,
-          textAlign: 'left',
-          color: '#000',
-          zIndex: 2,
-        },{
           x: 270,
-          y: 790,
-          baseLine: 'middle',
-          text:'长按小程序码',
-          fontSize: 30,
-          textAlign: 'left',
-          color: '#c3c3c3',
-          zIndex: 2,
-        },{
-          x: 270,
-          y: 846,
-          baseLine: 'middle',
-          text:'进入美拆',
-          fontSize: 30,
-          textAlign: 'left',
-          color: '#c3c3c3',
-          zIndex: 2,
-        },{
-          x: 270,
-          y: 900,
+          y: 100,
           baseLine: 'middle',
           text:'了解项目详情',
           fontSize: 30,
@@ -152,27 +151,12 @@ Page({
         }],
         images: [{
           x: 40,
-          y: 40,
-          url: uidimg,
-          width: 80,
-          height:80,
-          zIndex: 1,
-          borderRadius:80,
-        },{
-          x: 42,
-          y: 167,
-          url: shopdetail.cover,
-          width: 616,
-          height:313,
+          y: 10,
+          url: 'https://cdn.51chaidan.com/images/202010/thumb_img/35160_thumb_G_1603964924859.jpg',
+          width: 20,
+          height:20,
           zIndex: 2,
-        },{
-          x: 40,
-          y: 740,
-          url: shopdetail.qrcode,
-          width: 200,
-          height:200,
-          zIndex: 2,
-          borderRadius:200,
+          borderRadius:20,
         }]
       }
     }, () => {
@@ -272,6 +256,9 @@ Page({
       referee:options.referee || 0,
       sid: options.sid||0
     });
+
+
+    _this.onCreatePoster();
 
     if(app.signindata.sceneValue==1154){
       app.signindata.isProduce = true;  

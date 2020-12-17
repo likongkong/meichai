@@ -608,7 +608,7 @@ Page({
              
              if(res.data.Info.ticketDisplayTime && (nowTime < res.data.Info.ticketDisplayTime)){ //  未开始 显示模糊图片
                    console.log(1)   
-             }else if((nowTime > res.data.Info.ticketEndDisplay)){  // 过期 过期
+             }else if(nowTime > res.data.Info.ticketEndDisplay){  // 过期 过期
                    res.data.Info.isItOverdue = true;
                    console.log(2)  
              }else if(nowTime > res.data.Info.ticketDisplayTime && nowTime < res.data.Info.ticketEndDisplay){

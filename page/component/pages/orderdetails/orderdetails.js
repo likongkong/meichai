@@ -503,6 +503,14 @@ Page({
               res.data.Info.idcard = res.data.Info.idcard.replace(/^(.{4})(?:\w+)(.{4})$/, "$1**********$2");
             };
 
+            if(res.data.Info.isToyshowDrawGoods){
+              var nowTime = (new Date().getTime())/1000;
+              if(nowTime > res.data.Info.ticketEndDisplay){  // 过期 过期
+                  res.data.Info.isItOverdue = true;
+              }; 
+            };
+
+
             _this.setData({
               isShareGood:isShareGood,
               comdata: res.data.Info,
