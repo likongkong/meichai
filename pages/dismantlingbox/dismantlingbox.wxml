@@ -249,6 +249,10 @@
            <image class="ssubBiliimgbr" src="{{item.brandLogo}}" mode='aspectFit'></image>
         </view>
     </view>
+    <!-- <view>
+      <view catchtap="jumpChouxuanHomepage">优选入场资格抽选</view>
+      <view catchtap="jumpLuckyDraw">优先入场刮刮卡</view>
+    </view> -->
     <!-- <view class="ssubBotTxt">售卖商品陆续更新,最终以展会开售为准</view> -->
 </view>
 
