@@ -192,12 +192,12 @@ Page({
   jumpxinxi:function(){
     var _this = this;
 
-
+    // _this.data.id = 999999;
     // wx.requestSubscribeMessage({
-    //   tmplIds: ['Q0tWM7kOihw1TilTeR3YmLzWp5tS0McgyOeJx2xX-B0'],
+    //   tmplIds: ['xCf0OLocO-jTPwwwtNrS8O7REn0lEw1yUwim_EFdCaQ'],
     //   success(res) {
-    //       if (res['Q0tWM7kOihw1TilTeR3YmLzWp5tS0McgyOeJx2xX-B0'] == "accept") {
-    //         app.subscribefun(_this, 1, 'Q0tWM7kOihw1TilTeR3YmLzWp5tS0McgyOeJx2xX-B0', 1);
+    //       if (res['xCf0OLocO-jTPwwwtNrS8O7REn0lEw1yUwim_EFdCaQ'] == "accept") {
+    //         app.subscribefun(_this,0, 'xCf0OLocO-jTPwwwtNrS8O7REn0lEw1yUwim_EFdCaQ', 4);
     //       };
     //   }
     // })
@@ -227,7 +227,7 @@ Page({
       // url: "/page/component/pages/limitlottery/limitlottery?id=35405",
 
       // 画图路径
-      // url: "/page/secondpackge/pages/canvasRoute/canvasRoute"
+      url: "/page/secondpackge/pages/canvasRoute/canvasRoute"
       
 
       // url: "/pages/modifythenickname/modifythenickname"
@@ -236,7 +236,7 @@ Page({
 
       // url: "/page/secondpackge/pages/calendarList/calendarList"
 
-      url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
+      // url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
 
       // url: "/page/secondpackge/pages/luckyDraw/luckyDraw"
       

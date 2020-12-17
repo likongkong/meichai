@@ -4,6 +4,9 @@
 
 <poster id="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail"></poster>
 
+<view style="border:2rpx solid #000;">
+  <image style="display:block;width:100%;" mode='widthFix' src="{{savepic}}"></image>
+</view>
 
 
 
