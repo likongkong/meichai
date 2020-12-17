@@ -45,14 +45,17 @@
 } */
 
 .watermark:after{
-  content: '@美拆 FORTUNE TOYS';
+  content: '';
+  height: 35rpx;
+  width: 100rpx;
   position: absolute;
-  bottom: 25rpx;
-  right: 15rpx;
-  font-size: 24rpx;
-  color: #000;
-  /* transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -webkit-transform: rotate(45deg); */
-
+  background: url("https://cdn.51chaidan.com/images/mc.png") no-repeat;
+  background-size: 100% 100%;
+  top: 15rpx;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.boxShadowEve{
+  box-shadow: 1px 2px 6px #999999;
 }

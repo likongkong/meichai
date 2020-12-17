@@ -17,8 +17,9 @@
     <scroll-view class="bTscroll" scroll-x="true">
         <block wx:for='{{ticket}}' wx:key='key'>
             <view class="bTscrollEve {{tabOneId==item.day?'borderBg':''}}" catchtap="tabObtainData" data-obtain='1' data-num='{{item.day}}' data-ind='{{index}}'>
-                <view class="btset">{{item.date}}</view>
-                <view>{{item.timeRange}}</view>
+                <!-- <view class="btset">{{item.date}}</view>
+                <view>{{item.timeRange}}</view> -->
+                {{item.date}}
             </view>        
         </block>
     </scroll-view>
@@ -47,6 +48,16 @@
       </block>
   </view>
 
+  <view style="padding-bottom:240rpx;">
+      <image style="display:block;width:100%;" mode="widthFix" src="https://cdn.51chaidan.com/images/toyshow/toyshowDesc1.jpg"></image>
+      <image style="display:block;width:100%;" mode="widthFix" src="https://cdn.51chaidan.com/images/toyshow/toyshowDesc2.jpg"></image>
+      <image style="display:block;width:100%;" mode="widthFix" src="https://cdn.51chaidan.com/images/toyshow/toyshowDesc3.jpg"></image>
+      <image style="display:block;width:100%;" mode="widthFix" src="https://cdn.51chaidan.com/images/toyshow/toyshowDesc4.jpg"></image>
+
+  </view>
+
+
+
 
 
 
@@ -55,7 +66,7 @@
 
 
 <view class="leafletBottom">
-   <view class="leafletBottomTxt">门票玩具凭身份证领取，购票场次时间内有效</view>
+   <!-- <view class="leafletBottomTxt">门票玩具凭身份证领取，购票场次时间内有效</view> -->
    <block wx:if='{{ticket}}'>
         <view wx:if="{{showSubscription}}" class="leafletBottomEve boxShadowEve" catchtap="subscrfun" style="width:400rpx;background:#eeae19;">
                 开售提醒 

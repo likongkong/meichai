@@ -401,6 +401,7 @@ Page({
    */
   onLoad: function (options) {
     var _this = this;
+
     console.log('options========',options)
     if (options.scene) {
       let scene = decodeURIComponent(options.scene);
@@ -448,9 +449,12 @@ Page({
 
     _this.data.pushWay = options.pushWay || 0;
 
+    wx.hideShareMenu();
+
     wx.showLoading({
-      title: '加载中...',
+      title: '加载中...'
     })
+
     if(app.signindata.sceneValue==1154){
       app.signindata.isProduce = true;  
       _this.onLoadfun();

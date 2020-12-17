@@ -36,6 +36,7 @@
 .bTscrollEve{
   width: 220rpx;
   height: 80rpx;
+  line-height: 80rpx;
   background: #F3F4F4;
   margin-right: 10rpx;
   vertical-align: top;
@@ -69,7 +70,7 @@
 
 .leafletBottom{
   width: 100%;
-  height:150rpx;
+  height:100rpx;
   position: fixed;
   left: 0;
   bottom: 110rpx;

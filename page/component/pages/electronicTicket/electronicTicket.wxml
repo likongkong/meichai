@@ -12,10 +12,14 @@
     <view class="ordeQRcode">
          <view class="ordeQRImgBox">
             <image src="{{comdata.qrcode}}" class="ordeQRImgBoxImg"></image>
-            <view wx:if='{{isrefresh}}' catchtap="refreshQRCode" class='bgctipref'>已过期</view>
+            <view wx:if='{{comdata.isItOverdue}}' class='bgctipref'>已过期</view>
+            <view wx:elif='{{isrefresh}}' catchtap="refreshQRCode" class='bgctipref'>已过期</view>
          </view>
-         <view class="ordeQRTitN" style="text-align:center;border-top:0;">二维码一分钟内有效</view>
-         <view style="width:100%;height:86rpx;overflow: hidden;">
+         <view class="ordeQRTitN" style="text-align:center;border-top:0;">
+             <block wx:if='{{comdata.isItOverdue}}'>已过期</block>
+             <block wx:else>二维码一分钟内有效</block>
+         </view>
+         <view style="width:100%;height:86rpx;overflow: hidden;" wx:if='{{!comdata.isItOverdue}}'>
             <view wx:if='{{isrefresh}}' style="color:#ff2840;border:1rpx solid #ff2840;" class="totalmoncright" catchtap="refreshQRCode">刷新</view>
          </view>
          
