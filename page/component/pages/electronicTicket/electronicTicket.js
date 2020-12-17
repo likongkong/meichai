@@ -166,7 +166,7 @@ Page({
     var comdata = _this.data.comdata;
 
     if(Dec.env == 'online'){
-      var getUrl = 'http://brandentry.51chaidan.com/';
+      var getUrl = 'https://brandentry.51chaidan.com/';
     }else{
       var getUrl = 'http://brandentry-test.51chaidan.com/';
     };
@@ -597,7 +597,7 @@ Page({
                 res.data.Info.idcard = res.data.Info.idcard.replace(/^(.{4})(?:\w+)(.{4})$/, "$1**********$2");
              };
 
-             //  
+        
 
              
              var ticketTime = res.data.Info.ticketTime || 0;
@@ -622,10 +622,10 @@ Page({
                comdata: res.data.Info,
                id: res.data.Info.gid,
                subscribedata: res.data.Info.subscribe,
-             })
+             });
 
              if(showSubscription){ //  未开始 显示模糊图片
-              _this.refreshQRCode();
+                _this.refreshQRCode();
              }; 
 
              
