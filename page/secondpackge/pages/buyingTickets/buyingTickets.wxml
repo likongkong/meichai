@@ -55,7 +55,7 @@
 
 
 <view class="leafletBottom">
-   <view class="leafletBottomTxt">门票展会凭身份证领取，购票场次时间内有效</view>
+   <view class="leafletBottomTxt">门票玩具凭身份证领取，购票场次时间内有效</view>
    <block wx:if='{{ticket}}'>
         <view wx:if="{{showSubscription}}" class="leafletBottomEve boxShadowEve" catchtap="subscrfun" style="width:400rpx;background:#eeae19;">
                 开售提醒 
@@ -113,7 +113,7 @@
               </view>
 
               <view class="bTcObottTip" catchtap="ticketInstrutfun" data-ind='1'>
-                  <text>不支持退</text>
+                  <text>不支持退换</text>
                   <text style="margin-left:60rpx;">实名制购票</text>
                   <text style="float:right;">></text>
               </view>
