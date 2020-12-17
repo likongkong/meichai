@@ -23,7 +23,14 @@ Page({
     type:1,
   },
 
-
+  plusXing (str,frontLen,endLen) {
+    var len = str.length-frontLen-endLen;
+    var xing = '';
+    for (var i=0;i<len;i++) {
+    xing+='*';
+    }
+    return str.substring(0,frontLen)+xing+str.substring(str.length-endLen);
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -60,6 +67,7 @@ Page({
     var _this = this;
     wx.showLoading({ title: '加载中...'})
     var q = Dec.Aese('mod=lottoPrior&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+    console.log('mod=lottoPrior&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
     wx.request({
       url: app.signindata.comurl + 'spread.php'+q,
       method: 'GET',
@@ -70,8 +78,16 @@ Page({
         wx.stopPullDownRefresh();
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
+          var ticket = res.data.List.ticket;
+          for(var i=0;i<ticket.length;i++){
+            ticket[i].actualidcard = ticket[i].idcard;
+            ticket[i].idcard = _this.plusXing(ticket[i].idcard,4,4);
+            ticket[i].consignee = _this.plusXing(ticket[i].consignee,1,0);
+            ticket[i].mobile = _this.plusXing(ticket[i].mobile,3,4);
+          }
           _this.setData({
-            listData:res.data.List.ticket
+            subscribedata:res.data.Info.subscribe,
+            listData:ticket
           });  
         }
       }
@@ -90,13 +106,11 @@ Page({
         console.log('报名数据======',res)
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
-          wx.showModal({
-            title: '',
-            content: '报名成功',
-            showCancel: false,
-            success: function (res) { }
-          })
-          _this.getInfo();
+          app.showToastC('报名成功')
+          _this.subscrfun();
+          setTimeout(function(){
+            _this.getInfo();
+          },1500)
         }
       }
     }); 
@@ -245,5 +259,54 @@ Page({
     var reshare = Dec.sharemc();
     return reshare
   },
-  
+   // 拉起订阅
+  subscrfun: function () {
+    var num = 0;
+    var _this = this;
+    _this.data.id = 1;
+    var subscribedata = _this.data.subscribedata || '';
+    console.log('subscribedata===',subscribedata)
+    console.warn(1,subscribedata && subscribedata.template_id && app.signindata.subscribeif)
+
+    if (subscribedata && subscribedata.template_id && app.signindata.subscribeif) {
+      console.warn(2)
+      if (subscribedata.template_id instanceof Array) {
+        console.warn(3)
+        wx.requestSubscribeMessage({
+          tmplIds: subscribedata.template_id || [],
+          success(res) {
+            var is_show_modal = true;
+            console.warn(4)
+            for (var i = 0; i < subscribedata.template_id.length; i++) {
+              if (res[subscribedata.template_id[i]] == "accept") {
+                if(num == 1){
+                  app.subscribefun(_this, 1, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+                }else{
+                  app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+                };
+                
+                if (is_show_modal) {
+                  _this.subshowmodalfun();
+                  _this.subshowmodalTip();
+                  is_show_modal = false;
+                };
+              };
+            };
+          },
+          complete() { }
+        })
+      } else {
+        console.warn(5)
+        wx.requestSubscribeMessage({
+          tmplIds: [subscribedata.template_id || ''],
+          success(res) {
+            if (res[subscribedata.template_id] == "accept") {
+              app.subscribefun(_this, 0, subscribedata.template_id, subscribedata.subscribe_type);
+              _this.subshowmodalfun();
+            };
+          }
+        })
+      };
+    };
+  },
 })

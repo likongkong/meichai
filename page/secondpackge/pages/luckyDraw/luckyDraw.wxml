@@ -29,7 +29,7 @@
     <view class="drawBox">
       <view>
         <image src="https://cdn.51chaidan.com/images/calendar/luckyDraw/luckyDraw3.png" mode="widthFix"></image>
-        <text class="joinDrawPeopleNum">累计参与人数：{{activity.countJoin}}人</text>
+        <!-- <text class="joinDrawPeopleNum">累计参与人数：{{activity.countJoin}}人</text> -->
         <block>
           <block wx:if="{{isPrior}}">
             <text class="myDrewNum">恭喜您，获得优先入场资格</text>
@@ -85,7 +85,7 @@
             <view style="color:#666666;">{{item.descirptionVIP}}<text style="color:#C38925;">（VIP限定）</text></view>
           </view>
           <block>
-            <view wx:if="{{item.type == 3}}" style="{{item.type == 3 && !item.isCanReceive?'background:#ADADAD;':''}}" class="cardItemBtn" data-num='9' catchtap="{{item.type == 3 && !item.isCanReceive?'subscrfun':'jumpOtherPage'}}"> {{item.type == 3 && !item.isCanReceive?'今日已签到':'去签到'}}</view>
+            <view wx:if="{{item.type == 3}}" style="{{item.type == 3 && !item.isCanReceive?'background:#ADADAD;':''}}" class="cardItemBtn" data-num='9' catchtap="{{item.type == 3 && !item.isCanReceive?'subscrfun':'jumpOtherPage'}}"> {{item.type == 3 && !item.isCanReceive?'明日领取':'去签到'}}</view>
             <view wx:elif="{{item.type == 4}}" class="cardItemBtn" data-num='988' catchtap="jumpOtherPage">去抽盒</view>
             <view wx:elif="{{item.type == 5}}" class="cardItemBtn">去邀请<button style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' open-type="share"></button></view>
             <view wx:else class="cardItemBtn" data-num='9015' catchtap="jumpOtherPage">去抽赏</view>

@@ -60,10 +60,11 @@ page{
   box-sizing: border-box;
 }
 .tickettu{
-  width: 190rpx;
-  background: #5677FC;
-  border: 6rpx solid #5677FC;
+  width: 210rpx;
+  /* background: #5677FC; */
+  /* border: 6rpx solid #5677FC; */
   border-radius: 10rpx;
+  box-shadow: 0px 4rpx 12rpx 0px rgba(0, 0, 0, 0.4);
 }
 .tickettu image{
   width: 100%;
@@ -135,7 +136,7 @@ page{
   left: 50%;
   margin-left: -200rpx;
   z-index: 10;
-  font-size: 28rpx;
+  font-size: 26rpx;
   text-align: center;
   line-height: 60rpx;
 }

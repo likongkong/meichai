@@ -62,7 +62,12 @@ Page({
     ],
     countdown:'',
     isAwardBox:false,
-    isBuyingTickets:false
+    isBuyingTickets:false,
+    arr:[
+      {x:3,y:6},
+      {x:4,y:6},
+      {x:5,y:6},
+    ]
   },
   toggleAwardFun(){
     this.setData({
@@ -428,6 +433,20 @@ Page({
       console.log('defaultinformation=====接口')
       app.defaultinfofun(_this);
     }
+
+    
+    var ctx = wx.createCanvasContext('myCanvas');
+    var arr = this.data.arr;
+    // ctx.moveTo(120, 200)
+    // for(var i=0;i<arr.length;i++){
+    //   console.log(arr[i].x*40, arr[i].y*40)
+    //   // ctx.lineTo(arr[i].x*40, arr[i].y*40)
+    // }
+    ctx.moveTo(120, 200)
+    ctx.lineTo(40, 0)
+    ctx.stroke()
+    ctx.draw()
+    
   },
   // 分享展会福利
   shareExhBen:function(){

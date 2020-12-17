@@ -29,7 +29,8 @@ Page({
     bindDate:'',
     // 抽奖数
     drawnum:1,
-    isShowRule:false
+    isShowRule:false,
+    isPrior:false
   },
  
   togglerecordFun(){
@@ -138,6 +139,7 @@ Page({
             activity:data.Info.activity,
             bindIdentity:data.Info.bindIdentity,
             user:data.Info.user,
+            isPrior:data.Info.isPrior,
             countdown:data.Info.endTime,
             totalScratch:data.Info.user.totalScratch,
             scratch:data.List.scratch,
@@ -200,6 +202,12 @@ Page({
     }); 
   },
   drawFun(e){
+
+    if(this.data.suplusChance == 0){
+      app.showToastC('剩余刮刮卡不足')
+      return false;
+    }
+
     var num = e.currentTarget.dataset.num;
     var _this = this;
     wx.showLoading({ title: '加载中...'})

@@ -14,7 +14,7 @@
         <block wx:for="{{listData}}" wx:key="key">
           <view class="cardWrap">
             <view class="cardLWrap">
-              <image src="https://cdn.51chaidan.com/images/calendar/luckyDraw/chouxuan.png" mode="widthFix"></image>
+              <image class="cardLWrapImg" src="https://cdn.51chaidan.com/images/calendar/luckyDraw/chouxuan.png" mode="widthFix"></image>
             </view>
             <view class="cardRWrap" style="{{item.date==1?'background-image: linear-gradient(to bottom left, #F6E6E3 , #CD614B)':item.date==2?'background-image: linear-gradient(to bottom left, #F4F3E1 , #E2B327)':'background-image: linear-gradient(to bottom left, #CBDDE7 , #47ADDA)'}}" data-id="{{item.id}}" catchtap="{{item.status==0?'signup':''}}">
               <view class="cardRT">
@@ -22,7 +22,7 @@
                 <text>未开启抽选</text>
               </view>
               <block>
-                <view wx:if="{{item.status==0 || item.status==1}}" class="cardRC {{item.status==0?'red':'blue'}}" >
+                <view wx:if="{{item.status==0 || item.status==1}}" class="cardRC {{item.status==0?'red':'blue'}}" catchtap="{{item.status==0?'':'subscrfun'}}">
                   <text> {{item.status==0?'参加抽签':'等待开奖'}}</text>
                 </view>
                 <view wx:elif="{{item.status==2}}" class="cardRCImg">
