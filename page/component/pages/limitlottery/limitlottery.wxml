@@ -185,8 +185,8 @@
 							</view>			
 					</block>			
 			</block>
-
-			<view style="width:80%;height:80rpx;margin:30rpx 10%;position:relative;">
+     <!-- height:80rpx; -->
+			<view style="width:80%;margin:30rpx 10%;position:relative;overflow: hidden;">
 
 				<view class='limsharebox' wx:if='{{is_share_but&&canShare!=1}}' catchtap='limsavefun' style='top:5rpx;left:-68rpx;'>
 					<image class='limshareimg' src='https://www.51chaidan.com/images/act/brand/createPoster.png'></image>
@@ -208,10 +208,13 @@
 				<block wx:else>
 						<view wx:if='{{infoFragment.activitySignNumber.length > 0}}' style="width:100%;font-size:26rpx;color:#FE666B;overflow: hidden;">
 							<view style="height:80rpx;float:left;padding:0 40rpx;line-height:80rpx;border-right:2rpx dashed #ccc;">报名成功</view>
-							<view style="height:80rpx;float:left;padding-left:40rpx;" wx:for='{{infoFragment.activitySignNumber}}' wx:key='key'>
-							   <text style="height:80rpx;line-height:80rpx;float:left;">签号</text>
-								 <text style="font-size:40rpx;margin-left:40rpx;height:76rpx;line-height:80rpx;float:left;">{{item.lotto}}</text>
+							<view style="float:left;overflow: hidden;">
+									<view style="height:80rpx;padding-left:40rpx;" wx:for='{{infoFragment.activitySignNumber}}' wx:key='key'>
+										<text style="height:80rpx;line-height:80rpx;float:left;">签号</text>
+										<text style="font-size:40rpx;margin-left:40rpx;height:76rpx;line-height:80rpx;float:left;">{{item.lotto}}</text>
+									</view>							
 							</view>
+
 						</view>
 				</block>
 
