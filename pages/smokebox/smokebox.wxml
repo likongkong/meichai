@@ -160,7 +160,7 @@
 
 		<view wx:if='{{activity.status == 1}}' style="width:100%;color:#4c9a23;text-align:center;font-size:30rpx;">
 			<view style="width:50%;height:80rpx;position:relative;margin:0 auto;">
-				<view class='queuebtnstyle2' catchtap="subscrfun" style="background:#eeae19;color:white;float:left;line-height:42rpx;height:80rpx;">
+				<view class='queuebtnstyle2' catchtap="blindBoxsubscrfun" style="background:#eeae19;color:white;float:left;line-height:42rpx;height:80rpx;">
 					<view style="height:40rpx;line-height:50rpx;text-align:center;position:relative;">开售提醒<view class="coupposi" wx:if='{{isSubscribeCoupon}}'>订阅送优惠券</view></view>
 					<view style="text-align:center;">
 					   <block wx:if='{{newdataexh}}'>暂未开售</block>
@@ -1011,7 +1011,7 @@
 						<view style="width:100%;margin:40rpx 0 0 0;">
 
 							<block wx:if='{{activity.status == 1}}'>
-								<view class='queuebtnstyle2' catchtap="subscrfun" style="background:#eeae19;color:white;line-height:42rpx;height:80rpx;position: relative;">
+								<view class='queuebtnstyle2' catchtap="blindBoxsubscrfun" style="background:#eeae19;color:white;line-height:42rpx;height:80rpx;position: relative;">
 									<view style="height:40rpx;line-height:50rpx;text-align:center;position:relative;">开售提醒<view class="coupposi" wx:if='{{isSubscribeCoupon}}'>订阅送优惠券</view></view>
 									<view style="text-align:center;">
 										<block wx:if='{{newdataexh}}'>暂未开售</block>

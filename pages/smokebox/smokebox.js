@@ -679,7 +679,7 @@ Page({
             is_exhibition: activityData.specialWay ? activityData.specialWay : 0,
             brandId: activityData ? activityData.brandId : '',
             tipCheapForWholeBox: infoData.tipCheapForWholeBox || 0,
-            subscribedata: infoData.subscribe || '',
+            blindBoxSubscribedata: infoData.subscribe || '',
             blindBoxLucky: infoData.user.blindBoxLucky,
             exchangeLuckyCondition: infoData.user.exchangeLuckyCondition,
             wholeBoxImg: infoData.img.wholeBox ? infoData.img.wholeBox : "https://www.51chaidan.com/images/blindbox/gold_case.png",
@@ -957,7 +957,7 @@ Page({
           }
         } else if (res.data.ReturnCode == 348) {
           app.showToastC('即将开放，敬请期待');
-          _this.subscrfun();
+          _this.blindBoxsubscrfun();
         };
         if(refresh){
           _this.getInfo()
@@ -3350,9 +3350,9 @@ Page({
     });
   },
   // 拉起订阅
-  subscrfun: function () {
+  blindBoxsubscrfun: function () {
     var _this = this;
-    var subscribedata = _this.data.subscribedata || '';
+    var subscribedata = _this.data.blindBoxSubscribedata || '';
     if (subscribedata && subscribedata.template_id && app.signindata.subscribeif) {
       if (subscribedata.template_id instanceof Array) {
         wx.requestSubscribeMessage({
