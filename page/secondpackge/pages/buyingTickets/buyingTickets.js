@@ -427,8 +427,10 @@ Page({
 
   getData:function(){
     var _this = this;
-
-
+    var nowTime = new Date().getTime();
+    _this.setData({
+      nowTime:parseInt(nowTime/1000)
+    })
     var q = Dec.Aese('mod=ticket&operation=getInfo&uid=' +_this.data.uid+'&loginid='+_this.data.loginid + '&push_id='+_this.data.push_id)
 
     console.log('mod=ticket&operation=getInfo&uid=' +_this.data.uid+'&loginid='+_this.data.loginid + '&push_id='+_this.data.push_id)
