@@ -1,9 +1,9 @@
 var Aes = require('crypto-js.js');  //引用AES源码js
 
 
-// var env = 'online';   //线上
-var env = 'test';  //测试
-var versionnumber = '9.1.8';
+var env = 'online';   //线上
+// var env = 'test';  //测试
+var versionnumber = '9.2.1';
 
 
 var key = env=='online'?Aes.enc.Utf8.parse("danzhuan1chaijia"):Aes.enc.Utf8.parse("danzhuanichaijia");

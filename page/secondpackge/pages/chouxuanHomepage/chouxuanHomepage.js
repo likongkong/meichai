@@ -37,6 +37,7 @@ Page({
    */
   onLoad: function (options) {
     var _this = this;
+    _this.data.share_uid = options.share_uid || 0
     // 判断是否授权
     this.activsign();
     // 活动介绍
@@ -255,10 +256,32 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-    var reshare = Dec.sharemc();
-    return reshare
+  // onShareAppMessage: function () {
+  //   var reshare = Dec.sharemc();
+  //   return reshare
+  // },
+
+  onShareTimeline:function(){
+    var _this = this;
+    return {
+      title: '优先入场资格抽选',
+      query:'share_uid='+_this.data.uid,
+      imageUrl:_this.data.shareImg,
+    }
   },
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+    var _this = this;
+    return {
+      title: '优先入场资格抽选',
+      path: '/page/secondpackge/pages/chouxuanHomepage/chouxuanHomepage?share_uid='+_this.data.uid,
+      imageUrl:_this.data.shareImg,
+      success: function (res) {}
+    }      
+  },
+
    // 拉起订阅
   subscrfun: function () {
     var num = 0;
@@ -309,4 +332,9 @@ Page({
       };
     };
   },
+  jumpposition:function(){
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
+    });
+  }
 })

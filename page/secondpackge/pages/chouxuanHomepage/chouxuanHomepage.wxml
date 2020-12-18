@@ -6,7 +6,7 @@
 <view class="wrap"> 
   <view class="contentTopWrap">
       <block wx:if="{{listData.length==0}}">
-        <view class="buyTicketsBtn">
+        <view class="buyTicketsBtn" catchtap="jumpposition">
           还未购票？点击立即购票
         </view>
       </block>

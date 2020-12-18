@@ -432,7 +432,7 @@ Page({
             var nowTime = new Date().getTime();
             var isBuyingTickets = res.data.List.scratchCardStartTime;
             console.log('nowTime=====',nowTime)
-            if(isBuyingTickets && (nowTime/1000 > isBuyingTickets)){
+            if(isBuyingTickets && ( parseInt(nowTime/1000) >= isBuyingTickets)){
             // if(isBuyingTickets && ('1608296400' > isBuyingTickets)){
               _this.setData({
                 isBuyingTickets:true

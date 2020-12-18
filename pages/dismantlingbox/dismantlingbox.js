@@ -156,24 +156,33 @@ Page({
 
   
   jumpChouxuanHomepage(){
-    wx.navigateTo({
-      url: "/page/secondpackge/pages/chouxuanHomepage/chouxuanHomepage"
-    });
+    var isBuyingTickets = this.data.isBuyingTickets;
+    if(isBuyingTickets){
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/chouxuanHomepage/chouxuanHomepage"
+      });
+    }else{
+      app.showToastC('敬请期待');
+    }
   },
   jumpLuckyDraw(){
-    wx.navigateTo({
-      url: "/page/secondpackge/pages/luckyDraw/luckyDraw"
-    });
+    var isBuyingTickets = this.data.isBuyingTickets;
+    if(isBuyingTickets){
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/luckyDraw/luckyDraw"
+      });
+    }else{
+      app.showToastC('敬请期待');
+    }
   },
-  // 跳转定位
   jumpposition:function(w){
     // var nowTime = new Date().getTime();
-    // var isBuyingTickets = this.data.isBuyingTickets;
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
+    });
     // console.log('nowTime=====',nowTime)
     // if(isBuyingTickets && (nowTime/1000 > isBuyingTickets)){
-      wx.navigateTo({
-        url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
-      });
+      
     // } else {
 
     //   var tid = w.currentTarget.dataset.tid || w.target.dataset.tid || 0;
@@ -809,8 +818,9 @@ brandJson:function(){
               
               var nowTime = new Date().getTime();
               var isBuyingTickets = res.data.Info.ticketTime;
-              console.log('nowTime=====',nowTime)
-              if(isBuyingTickets && (nowTime/1000 > isBuyingTickets)){
+              console.log('nowTime=====',parseInt(nowTime/1000))
+              if(isBuyingTickets && (parseInt(nowTime/1000) >= isBuyingTickets)){
+              // if(isBuyingTickets && ('1608346345' >= isBuyingTickets)){
                 _this.setData({
                   isBuyingTickets:true
                 })

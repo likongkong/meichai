@@ -49,21 +49,13 @@
   </view>
 
   <view style="padding-bottom:240rpx;">
-      <image style="display:block;width:100%;" mode="widthFix" src="https://cdn.51chaidan.com/images/toyshow/toyshowDesc1.jpg"></image>
-      <image style="display:block;width:100%;" mode="widthFix" src="https://cdn.51chaidan.com/images/toyshow/toyshowDesc2.jpg"></image>
-      <image style="display:block;width:100%;" mode="widthFix" src="https://cdn.51chaidan.com/images/toyshow/toyshowDesc3.jpg"></image>
-      <image style="display:block;width:100%;" mode="widthFix" src="https://cdn.51chaidan.com/images/toyshow/toyshowDesc4.jpg"></image>
-
+      <image style="display:block;width:100%;" mode="widthFix" src="https://cdn.51chaidan.com/images/toyshow/toyshowDesc1.jpg?20201218"></image>
+      <image style="display:block;width:100%;" mode="widthFix" src="https://cdn.51chaidan.com/images/toyshow/toyshowDesc2.jpg?20201218"></image>
+      <image style="display:block;width:100%;" mode="widthFix" src="https://cdn.51chaidan.com/images/toyshow/toyshowDesc3.jpg?20201218"></image>
+      <image style="display:block;width:100%;" mode="widthFix" src="https://cdn.51chaidan.com/images/toyshow/toyshowDesc4.jpg?20201218"></image>
   </view>
 
-
-
-
-
-
 </view>
-
-
 
 <view class="leafletBottom">
    <!-- <view class="leafletBottomTxt">门票玩具凭身份证领取，购票场次时间内有效</view> -->

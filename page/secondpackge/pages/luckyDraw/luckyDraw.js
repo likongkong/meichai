@@ -77,18 +77,35 @@ Page({
     })
   },
   toggleidCardFun(){
-    if(this.data.isidCardMask){
-      this.setData({
-        idcardIndex: this.data.selectCard
+    if(this.data.identity.length == 0){
+      wx.showModal({
+        title: '提示',
+        content: '您还未购买本次展会门票，请先购买门票',
+        confirmText: '去购票',
+        success (res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
+            });
+          } else if (res.cancel) {
+
+          }
+        }
       })
     }else{
+      if(this.data.isidCardMask){
+        this.setData({
+          idcardIndex: this.data.selectCard
+        })
+      }else{
+        this.setData({
+          selectCard : this.data.idcardIndex
+        })
+      }
       this.setData({
-        selectCard : this.data.idcardIndex
+        isidCardMask:!this.data.isidCardMask
       })
     }
-    this.setData({
-      isidCardMask:!this.data.isidCardMask
-    })
   },
   selectCardFun(e){
     var index = e.currentTarget.dataset.index;
@@ -430,7 +447,7 @@ Page({
   onShareTimeline:function(){
     var _this = this;
     return {
-      title: '刮刮卡',
+      title: '优先入场资格刮刮卡',
       query:'share_uid='+_this.data.uid,
       imageUrl:_this.data.shareImg,
     }
@@ -441,7 +458,7 @@ Page({
   onShareAppMessage: function () {
     var _this = this;
     return {
-      title: '刮刮卡',
+      title: '优先入场资格刮刮卡',
       path: '/page/secondpackge/pages/luckyDraw/luckyDraw?share_uid='+_this.data.uid,
       imageUrl:_this.data.shareImg,
       success: function (res) {}

@@ -27,7 +27,7 @@
           <image src="https://cdn.51chaidan.com/images/icon/iconYellowStar.png" mode="widthFix"></image>
           <view>
             <text>门票玩具</text>
-            <text>购买后线下展会领取</text>
+            <text>购票后线下展会凭本人身份证扫码领取</text>
           </view>
         </view>
         <view class="addGoodsBottom">
@@ -57,14 +57,14 @@
         </view>
       </view>
       <view class="drawBtn">
-        <block wx:if="{{isBuyingTickets}}">
-          <view catchtap="jumpChouxuanHomepage">优先入场资格抽选</view>
-          <view catchtap="jumpLuckyDraw">优先入场资刮刮卡</view>
-        </block>
+        <!-- <block wx:if="{{isBuyingTickets}}"> -->
+        <view catchtap="jumpChouxuanHomepage">优先入场资格抽选</view>
+        <view catchtap="jumpLuckyDraw">优先入场资格刮刮卡</view>
+        <!-- </block>
         <block wx:else>
           <view>敬请期待</view>
           <view>敬请期待</view>
-        </block>
+        </block> -->
       </view>
     </view>    
 
@@ -250,7 +250,7 @@
     <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;">——————— 承办 ———————</view>
     <view class="ssubBrandEveWrap" style="width:100%;overflow: hidden;padding:0 40rpx;box-sizing: border-box; display: flex;justify-content: center;align-items: center;">
         <view class="ssubBrandEve1 bigLogo1">
-          <image class="ssubBiliimgbr bigLogo1" src="http://cdn.51chaidan.com/images/toyshow/sm.png" mode='aspectFit'></image>
+          <image class="ssubBiliimgbr bigLogo1" src="http://cdn.51chaidan.com/images/toyshow/sm.png?20201218" mode='aspectFit'></image>
         </view>
     </view>
     <!-- 媒体合作与平台支持 -->
