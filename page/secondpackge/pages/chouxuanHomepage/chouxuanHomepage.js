@@ -261,26 +261,53 @@ Page({
   //   return reshare
   // },
 
-  onShareTimeline:function(){
-    var _this = this;
-    return {
-      title: '优先入场资格抽选',
-      query:'share_uid='+_this.data.uid,
-      imageUrl:_this.data.shareImg,
-    }
-  },
-  /**
-   * 用户点击右上角分享
-   */
+  // onShareTimeline:function(){
+  //   var _this = this;
+  //   return {
+  //     title: '优先入场资格抽选',
+  //     query:'share_uid='+_this.data.uid,
+  //     imageUrl:_this.data.shareImg,
+  //   }
+  // },
+  // /**
+  //  * 用户点击右上角分享
+  //  */
+  // onShareAppMessage: function () {
+  //   var _this = this;
+  //   return {
+  //     title: '优先入场资格抽选',
+  //     path: '/page/secondpackge/pages/chouxuanHomepage/chouxuanHomepage?share_uid='+_this.data.uid,
+  //     imageUrl:_this.data.shareImg,
+  //     success: function (res) {}
+  //   }      
+  // },
+
+
   onShareAppMessage: function () {
     var _this = this;
     return {
-      title: '优先入场资格抽选',
-      path: '/page/secondpackge/pages/chouxuanHomepage/chouxuanHomepage?share_uid='+_this.data.uid,
-      imageUrl:_this.data.shareImg,
-      success: function (res) {}
-    }      
+      title:'我正在美拆参加展会优先入场资格抽选活动，快来一起观展吧',
+      path: "/page/secondpackge/pages/chouxuanHomepage/chouxuanHomepage?share_uid=" + _this.data.uid,
+      imageUrl:app.signindata.indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+    }   
   },
+  onShareTimeline:function(){
+    var _this = this;
+
+    var indexShare = app.signindata.indexShare || [];
+    var indexShareNum = Math.floor(Math.random() * indexShare.length) || 0;
+    var indexShareImg = '';
+    if(indexShare.length!=0 && indexShare[indexShareNum]){
+      indexShareImg = indexShare[indexShareNum]+'?time=' + Date.parse(new Date());;
+    };
+
+    return {
+      title:'我正在美拆参加展会优先入场资格抽选活动，快来一起观展吧',
+      query:'share_uid='+_this.data.uid,
+      imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+    }
+  },  
+
 
    // 拉起订阅
   subscrfun: function () {
@@ -309,8 +336,8 @@ Page({
                 };
                 
                 if (is_show_modal) {
-                  _this.subshowmodalfun();
-                  _this.subshowmodalTip();
+                  // _this.subshowmodalfun();
+                  // _this.subshowmodalTip();
                   is_show_modal = false;
                 };
               };
@@ -325,7 +352,7 @@ Page({
           success(res) {
             if (res[subscribedata.template_id] == "accept") {
               app.subscribefun(_this, 0, subscribedata.template_id, subscribedata.subscribe_type);
-              _this.subshowmodalfun();
+              // _this.subshowmodalfun();
             };
           }
         })

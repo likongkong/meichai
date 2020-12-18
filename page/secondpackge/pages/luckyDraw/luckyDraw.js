@@ -444,26 +444,53 @@ Page({
   //   return reshare
   // },
 
-  onShareTimeline:function(){
-    var _this = this;
-    return {
-      title: '优先入场资格刮刮卡',
-      query:'share_uid='+_this.data.uid,
-      imageUrl:_this.data.shareImg,
-    }
-  },
-  /**
-   * 用户点击右上角分享
-   */
+  // onShareTimeline:function(){
+  //   var _this = this;
+  //   return {
+  //     title: '优先入场资格刮刮卡',
+  //     query:'share_uid='+_this.data.uid,
+  //     imageUrl:_this.data.shareImg,
+  //   }
+  // },
+  // /**
+  //  * 用户点击右上角分享
+  //  */
+  // onShareAppMessage: function () {
+  //   var _this = this;
+  //   return {
+  //     title: '优先入场资格刮刮卡',
+  //     path: '/page/secondpackge/pages/luckyDraw/luckyDraw?share_uid='+_this.data.uid,
+  //     imageUrl:_this.data.shareImg,
+  //     success: function (res) {}
+  //   }      
+  // },
+
+
   onShareAppMessage: function () {
     var _this = this;
     return {
-      title: '优先入场资格刮刮卡',
-      path: '/page/secondpackge/pages/luckyDraw/luckyDraw?share_uid='+_this.data.uid,
-      imageUrl:_this.data.shareImg,
-      success: function (res) {}
-    }      
+      title:'刮刮卡:我正在美拆抽取展会优先入场资格，快来帮我助力吧',
+      path: "/page/secondpackge/pages/luckyDraw/luckyDraw?share_uid=" + _this.data.uid,
+      imageUrl:app.signindata.indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+    }   
   },
+  onShareTimeline:function(){
+    var _this = this;
+
+    var indexShare = app.signindata.indexShare || [];
+    var indexShareNum = Math.floor(Math.random() * indexShare.length) || 0;
+    var indexShareImg = '';
+    if(indexShare.length!=0 && indexShare[indexShareNum]){
+      indexShareImg = indexShare[indexShareNum]+'?time=' + Date.parse(new Date());;
+    };
+
+    return {
+      title:'刮刮卡:我正在美拆抽取展会优先入场资格，快来帮我助力吧',
+      query:'share_uid='+_this.data.uid,
+      imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+    }
+  },  
+
 
   // 倒计时
   countdownbfun: function () {
