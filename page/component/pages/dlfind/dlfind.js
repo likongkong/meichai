@@ -848,7 +848,12 @@ Page({
       wx.navigateTo({
         url: "/page/secondpackge/pages/calendarList/calendarList"
       }); 
-    } else {
+    } else if(is_calendar == 2){
+      // 展会购票
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
+      }); 
+    }else {
       wx.navigateTo({
         url: "../dlfinddetails/dlfinddetails?drying_id=" + drying_id,
       })

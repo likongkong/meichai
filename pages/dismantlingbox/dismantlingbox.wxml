@@ -13,19 +13,21 @@
     </view>	
 
     
-    
+    <!-- <view class="zhanhuiMap">
+      <canvas canvas-id='myCanvas'></canvas>
+    </view> -->
    
 
     <!-- 票务信息 -->
     <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e3'>————— 票务信息 —————</view>
-    <view class="ticketWrap" catchtap="jumpposition" data-subscribe_data="{{subscribeJson[1].toyshowTicket}}">
+    <view class="ticketWrap" data-subscribe_data="{{subscribeJson[1].toyshowTicket}}">
       <!-- arousesubscribeFun -->
-      <view class="addGoods" style="margin-bottom:20rpx;">
+      <view class="addGoods" catchtap="jumpposition" style="margin-bottom:20rpx;">
         <view class="addGoodsT">
           <image src="https://cdn.51chaidan.com/images/icon/iconYellowStar.png" mode="widthFix"></image>
           <view>
             <text>门票玩具</text>
-            <text>购买后线下展会领取</text>
+            <text>购票后线下展会凭本人身份证扫码领取</text>
           </view>
         </view>
         <view class="addGoodsBottom">
@@ -42,7 +44,7 @@
         </view>
       </view> 
 
-      <view class="ticketInfo">
+      <view class="ticketInfo" catchtap="jumpposition">
         <image src="https://cdn.51chaidan.com/images/calendar/luckyDraw/chouxuan.png?imageMogr2/thumbnail/x800" mode="aspectFit"></image>
         <view class="ticketInfoWrap">
           <view>
@@ -54,7 +56,16 @@
           </view>
         </view>
       </view>
-
+      <view class="drawBtn">
+        <!-- <block wx:if="{{isBuyingTickets}}"> -->
+        <view catchtap="jumpChouxuanHomepage">优先入场资格抽选</view>
+        <view catchtap="jumpLuckyDraw">优先入场资格刮刮卡</view>
+        <!-- </block>
+        <block wx:else>
+          <view>敬请期待</view>
+          <view>敬请期待</view>
+        </block> -->
+      </view>
     </view>    
 
     <!-- 直播间 -->
@@ -239,7 +250,7 @@
     <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;">——————— 承办 ———————</view>
     <view class="ssubBrandEveWrap" style="width:100%;overflow: hidden;padding:0 40rpx;box-sizing: border-box; display: flex;justify-content: center;align-items: center;">
         <view class="ssubBrandEve1 bigLogo1">
-          <image class="ssubBiliimgbr bigLogo1" src="http://cdn.51chaidan.com/images/toyshow/sm.png" mode='aspectFit'></image>
+          <image class="ssubBiliimgbr bigLogo1" src="http://cdn.51chaidan.com/images/toyshow/sm.png?20201218" mode='aspectFit'></image>
         </view>
     </view>
     <!-- 媒体合作与平台支持 -->
@@ -249,10 +260,7 @@
            <image class="ssubBiliimgbr" src="{{item.brandLogo}}" mode='aspectFit'></image>
         </view>
     </view>
-    <!-- <view>
-      <view catchtap="jumpChouxuanHomepage">优选入场资格抽选</view>
-      <view catchtap="jumpLuckyDraw">优先入场刮刮卡</view>
-    </view> -->
+    
     <!-- <view class="ssubBotTxt">售卖商品陆续更新,最终以展会开售为准</view> -->
 </view>
 

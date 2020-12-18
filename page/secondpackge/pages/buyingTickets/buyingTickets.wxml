@@ -36,7 +36,7 @@
                   <image class="bTEveTwoImg"  mode='aspectFit' src="{{item.img}}"></image>
                   <text class="specialellipsis" wx:if='{{item.subTitle}}' style="margin-left:20rpx;display:inline-block;max-width:320rpx;vertical-align:top;">{{item.subTitle}}</text>
                   <text class="specialellipsis" style="max-width:320rpx;display:inline-block;vertical-align:top;">+{{item.title}}</text>
-                  <text style="float:right;margin-right:15rpx;color:#E94F57;"><block wx:if='{{item.stock<=0&&!item.isFillChance}}'>已售罄</block><block wx:else>￥{{item.price}}</block></text>
+                  <text style="float:right;margin-right:15rpx;color:#E94F57;"><block wx:if='{{item.stock<=0&&!item.isFillChance}}'>已售罄</block><block wx:else>{{item.listPrice}}</block></text>
               </view>        
           </block>
           <block wx:else>
@@ -49,21 +49,13 @@
   </view>
 
   <view style="padding-bottom:240rpx;">
-      <image style="display:block;width:100%;" mode="widthFix" src="https://cdn.51chaidan.com/images/toyshow/toyshowDesc1.jpg"></image>
-      <image style="display:block;width:100%;" mode="widthFix" src="https://cdn.51chaidan.com/images/toyshow/toyshowDesc2.jpg"></image>
-      <image style="display:block;width:100%;" mode="widthFix" src="https://cdn.51chaidan.com/images/toyshow/toyshowDesc3.jpg"></image>
-      <image style="display:block;width:100%;" mode="widthFix" src="https://cdn.51chaidan.com/images/toyshow/toyshowDesc4.jpg"></image>
-
+      <image style="display:block;width:100%;" mode="widthFix" src="https://cdn.51chaidan.com/images/toyshow/toyshowDesc1.jpg?{{nowTime}}"></image>
+      <image style="display:block;width:100%;" mode="widthFix" src="https://cdn.51chaidan.com/images/toyshow/toyshowDesc2.jpg?{{nowTime}}"></image>
+      <image style="display:block;width:100%;" mode="widthFix" src="https://cdn.51chaidan.com/images/toyshow/toyshowDesc3.jpg?{{nowTime}}"></image>
+      <image style="display:block;width:100%;" mode="widthFix" src="https://cdn.51chaidan.com/images/toyshow/toyshowDesc4.jpg?{{nowTime}}"></image>
   </view>
 
-
-
-
-
-
 </view>
-
-
 
 <view class="leafletBottom">
    <!-- <view class="leafletBottomTxt">门票玩具凭身份证领取，购票场次时间内有效</view> -->
@@ -118,7 +110,7 @@
                      <block wx:for='{{ticketTwo}}' wx:key='key' wx:if='{{tabTwoId==item.type}}'>{{item.title}}<block wx:if='{{item.subTitle}}'>  +  {{item.subTitle}}</block></block>
                   </view>
                   <block wx:for='{{ticketTwo}}' wx:key='key' wx:if='{{tabTwoId==item.type}}'>
-                     <view class="bTcOcontentTTxt" style="color:#666;" wx:if='{{item.subTitle}}'>{{item.subTitle}}线下展会领取</view>
+                     <view class="bTcOcontentTTxt" style="color:#666;" wx:if='{{item.subTitle}}'>{{item.subTitle}}线下展会凭本人身份证领取</view>
                   </block>
                   
               </view>

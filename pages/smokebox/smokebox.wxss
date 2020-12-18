@@ -803,8 +803,8 @@ margin-top: 20rpx;
   margin-top: 80rpx;text-align: center;
 }
 .recycleContentStateB .recyclebtn button{
-  width: 350rpx;
-  position: absolute;left: 0;
+  /* width: 350rpx;
+  position: absolute;left: 0; */
 }
 
 

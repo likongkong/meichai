@@ -388,6 +388,8 @@ Page({
   onLoad: function (options) {
     // 判断是否授权
     this.activsign();
+    // 推送统计
+    this.data.push_id = options.push_id || 0;
   },
   onLoadfun:function(){
     var _this = this;
@@ -425,11 +427,13 @@ Page({
 
   getData:function(){
     var _this = this;
+    var nowTime = new Date().getTime();
+    _this.setData({
+      nowTime:parseInt(nowTime/1000)
+    })
+    var q = Dec.Aese('mod=ticket&operation=getInfo&uid=' +_this.data.uid+'&loginid='+_this.data.loginid + '&push_id='+_this.data.push_id)
 
-
-    var q = Dec.Aese('mod=ticket&operation=getInfo&uid=' +_this.data.uid+'&loginid='+_this.data.loginid)
-
-    console.log('mod=ticket&operation=getInfo&uid=' +_this.data.uid+'&loginid='+_this.data.loginid)
+    console.log('mod=ticket&operation=getInfo&uid=' +_this.data.uid+'&loginid='+_this.data.loginid + '&push_id='+_this.data.push_id)
 
     wx.showLoading({title: '加载中...',mask:true});
     wx.request({
@@ -437,6 +441,8 @@ Page({
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
+        _this.data.push_id =  0;
+
         wx.hideLoading();
         wx.stopPullDownRefresh();
         console.log('getData=============',res)

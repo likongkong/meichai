@@ -29,7 +29,8 @@ Page({
     bindDate:'',
     // 抽奖数
     drawnum:1,
-    isShowRule:false
+    isShowRule:false,
+    isPrior:false
   },
  
   togglerecordFun(){
@@ -76,18 +77,35 @@ Page({
     })
   },
   toggleidCardFun(){
-    if(this.data.isidCardMask){
-      this.setData({
-        idcardIndex: this.data.selectCard
+    if(this.data.identity.length == 0){
+      wx.showModal({
+        title: '提示',
+        content: '您还未购买本次展会门票，请先购买门票',
+        confirmText: '去购票',
+        success (res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
+            });
+          } else if (res.cancel) {
+
+          }
+        }
       })
     }else{
+      if(this.data.isidCardMask){
+        this.setData({
+          idcardIndex: this.data.selectCard
+        })
+      }else{
+        this.setData({
+          selectCard : this.data.idcardIndex
+        })
+      }
       this.setData({
-        selectCard : this.data.idcardIndex
+        isidCardMask:!this.data.isidCardMask
       })
     }
-    this.setData({
-      isidCardMask:!this.data.isidCardMask
-    })
   },
   selectCardFun(e){
     var index = e.currentTarget.dataset.index;
@@ -138,6 +156,7 @@ Page({
             activity:data.Info.activity,
             bindIdentity:data.Info.bindIdentity,
             user:data.Info.user,
+            isPrior:data.Info.isPrior,
             countdown:data.Info.endTime,
             totalScratch:data.Info.user.totalScratch,
             scratch:data.List.scratch,
@@ -200,6 +219,12 @@ Page({
     }); 
   },
   drawFun(e){
+
+    if(this.data.suplusChance == 0){
+      app.showToastC('剩余刮刮卡不足')
+      return false;
+    }
+
     var num = e.currentTarget.dataset.num;
     var _this = this;
     wx.showLoading({ title: '加载中...'})
@@ -419,26 +444,53 @@ Page({
   //   return reshare
   // },
 
-  onShareTimeline:function(){
-    var _this = this;
-    return {
-      title: '刮刮卡',
-      query:'share_uid='+_this.data.uid,
-      imageUrl:_this.data.shareImg,
-    }
-  },
-  /**
-   * 用户点击右上角分享
-   */
+  // onShareTimeline:function(){
+  //   var _this = this;
+  //   return {
+  //     title: '优先入场资格刮刮卡',
+  //     query:'share_uid='+_this.data.uid,
+  //     imageUrl:_this.data.shareImg,
+  //   }
+  // },
+  // /**
+  //  * 用户点击右上角分享
+  //  */
+  // onShareAppMessage: function () {
+  //   var _this = this;
+  //   return {
+  //     title: '优先入场资格刮刮卡',
+  //     path: '/page/secondpackge/pages/luckyDraw/luckyDraw?share_uid='+_this.data.uid,
+  //     imageUrl:_this.data.shareImg,
+  //     success: function (res) {}
+  //   }      
+  // },
+
+
   onShareAppMessage: function () {
     var _this = this;
     return {
-      title: '刮刮卡',
-      path: '/page/secondpackge/pages/luckyDraw/luckyDraw?share_uid='+_this.data.uid,
-      imageUrl:_this.data.shareImg,
-      success: function (res) {}
-    }      
+      title:'刮刮卡:我正在美拆抽取展会优先入场资格，快来帮我助力吧',
+      path: "/page/secondpackge/pages/luckyDraw/luckyDraw?share_uid=" + _this.data.uid,
+      imageUrl:app.signindata.indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+    }   
   },
+  onShareTimeline:function(){
+    var _this = this;
+
+    var indexShare = app.signindata.indexShare || [];
+    var indexShareNum = Math.floor(Math.random() * indexShare.length) || 0;
+    var indexShareImg = '';
+    if(indexShare.length!=0 && indexShare[indexShareNum]){
+      indexShareImg = indexShare[indexShareNum]+'?time=' + Date.parse(new Date());;
+    };
+
+    return {
+      title:'刮刮卡:我正在美拆抽取展会优先入场资格，快来帮我助力吧',
+      query:'share_uid='+_this.data.uid,
+      imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+    }
+  },  
+
 
   // 倒计时
   countdownbfun: function () {

@@ -23,13 +23,21 @@ Page({
     type:1,
   },
 
-
+  plusXing (str,frontLen,endLen) {
+    var len = str.length-frontLen-endLen;
+    var xing = '';
+    for (var i=0;i<len;i++) {
+    xing+='*';
+    }
+    return str.substring(0,frontLen)+xing+str.substring(str.length-endLen);
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     var _this = this;
+    _this.data.share_uid = options.share_uid || 0
     // 判断是否授权
     this.activsign();
     // 活动介绍
@@ -60,6 +68,7 @@ Page({
     var _this = this;
     wx.showLoading({ title: '加载中...'})
     var q = Dec.Aese('mod=lottoPrior&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+    console.log('mod=lottoPrior&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
     wx.request({
       url: app.signindata.comurl + 'spread.php'+q,
       method: 'GET',
@@ -70,8 +79,16 @@ Page({
         wx.stopPullDownRefresh();
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
+          var ticket = res.data.List.ticket;
+          for(var i=0;i<ticket.length;i++){
+            ticket[i].actualidcard = ticket[i].idcard;
+            ticket[i].idcard = _this.plusXing(ticket[i].idcard,4,4);
+            ticket[i].consignee = _this.plusXing(ticket[i].consignee,1,0);
+            ticket[i].mobile = _this.plusXing(ticket[i].mobile,3,4);
+          }
           _this.setData({
-            listData:res.data.List.ticket
+            subscribedata:res.data.Info.subscribe,
+            listData:ticket
           });  
         }
       }
@@ -90,13 +107,11 @@ Page({
         console.log('报名数据======',res)
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
-          wx.showModal({
-            title: '',
-            content: '报名成功',
-            showCancel: false,
-            success: function (res) { }
-          })
-          _this.getInfo();
+          app.showToastC('报名成功')
+          _this.subscrfun();
+          setTimeout(function(){
+            _this.getInfo();
+          },1500)
         }
       }
     }); 
@@ -241,9 +256,112 @@ Page({
   /**
    * 用户点击右上角分享
    */
+  // onShareAppMessage: function () {
+  //   var reshare = Dec.sharemc();
+  //   return reshare
+  // },
+
+  // onShareTimeline:function(){
+  //   var _this = this;
+  //   return {
+  //     title: '优先入场资格抽选',
+  //     query:'share_uid='+_this.data.uid,
+  //     imageUrl:_this.data.shareImg,
+  //   }
+  // },
+  // /**
+  //  * 用户点击右上角分享
+  //  */
+  // onShareAppMessage: function () {
+  //   var _this = this;
+  //   return {
+  //     title: '优先入场资格抽选',
+  //     path: '/page/secondpackge/pages/chouxuanHomepage/chouxuanHomepage?share_uid='+_this.data.uid,
+  //     imageUrl:_this.data.shareImg,
+  //     success: function (res) {}
+  //   }      
+  // },
+
+
   onShareAppMessage: function () {
-    var reshare = Dec.sharemc();
-    return reshare
+    var _this = this;
+    return {
+      title:'我正在美拆参加展会优先入场资格抽选活动，快来一起观展吧',
+      path: "/page/secondpackge/pages/chouxuanHomepage/chouxuanHomepage?share_uid=" + _this.data.uid,
+      imageUrl:app.signindata.indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+    }   
   },
-  
+  onShareTimeline:function(){
+    var _this = this;
+
+    var indexShare = app.signindata.indexShare || [];
+    var indexShareNum = Math.floor(Math.random() * indexShare.length) || 0;
+    var indexShareImg = '';
+    if(indexShare.length!=0 && indexShare[indexShareNum]){
+      indexShareImg = indexShare[indexShareNum]+'?time=' + Date.parse(new Date());;
+    };
+
+    return {
+      title:'我正在美拆参加展会优先入场资格抽选活动，快来一起观展吧',
+      query:'share_uid='+_this.data.uid,
+      imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+    }
+  },  
+
+
+   // 拉起订阅
+  subscrfun: function () {
+    var num = 0;
+    var _this = this;
+    _this.data.id = 1;
+    var subscribedata = _this.data.subscribedata || '';
+    console.log('subscribedata===',subscribedata)
+    console.warn(1,subscribedata && subscribedata.template_id && app.signindata.subscribeif)
+
+    if (subscribedata && subscribedata.template_id && app.signindata.subscribeif) {
+      console.warn(2)
+      if (subscribedata.template_id instanceof Array) {
+        console.warn(3)
+        wx.requestSubscribeMessage({
+          tmplIds: subscribedata.template_id || [],
+          success(res) {
+            var is_show_modal = true;
+            console.warn(4)
+            for (var i = 0; i < subscribedata.template_id.length; i++) {
+              if (res[subscribedata.template_id[i]] == "accept") {
+                if(num == 1){
+                  app.subscribefun(_this, 1, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+                }else{
+                  app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+                };
+                
+                if (is_show_modal) {
+                  // _this.subshowmodalfun();
+                  // _this.subshowmodalTip();
+                  is_show_modal = false;
+                };
+              };
+            };
+          },
+          complete() { }
+        })
+      } else {
+        console.warn(5)
+        wx.requestSubscribeMessage({
+          tmplIds: [subscribedata.template_id || ''],
+          success(res) {
+            if (res[subscribedata.template_id] == "accept") {
+              app.subscribefun(_this, 0, subscribedata.template_id, subscribedata.subscribe_type);
+              // _this.subshowmodalfun();
+            };
+          }
+        })
+      };
+    };
+  },
+  jumpposition:function(){
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
+    });
+  }
 })

@@ -62,7 +62,12 @@ Page({
     ],
     countdown:'',
     isAwardBox:false,
-    isBuyingTickets:false
+    isBuyingTickets:false,
+    arr:[
+      {x:3,y:6},
+      {x:4,y:6},
+      {x:5,y:6},
+    ]
   },
   toggleAwardFun(){
     this.setData({
@@ -151,24 +156,33 @@ Page({
 
   
   jumpChouxuanHomepage(){
-    wx.navigateTo({
-      url: "/page/secondpackge/pages/chouxuanHomepage/chouxuanHomepage"
-    });
+    var isBuyingTickets = this.data.isBuyingTickets;
+    if(isBuyingTickets){
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/chouxuanHomepage/chouxuanHomepage"
+      });
+    }else{
+      app.showToastC('敬请期待');
+    }
   },
   jumpLuckyDraw(){
-    wx.navigateTo({
-      url: "/page/secondpackge/pages/luckyDraw/luckyDraw"
-    });
+    var isBuyingTickets = this.data.isBuyingTickets;
+    if(isBuyingTickets){
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/luckyDraw/luckyDraw"
+      });
+    }else{
+      app.showToastC('敬请期待');
+    }
   },
-  // 跳转定位
   jumpposition:function(w){
     // var nowTime = new Date().getTime();
-    // var isBuyingTickets = this.data.isBuyingTickets;
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
+    });
     // console.log('nowTime=====',nowTime)
     // if(isBuyingTickets && (nowTime/1000 > isBuyingTickets)){
-      wx.navigateTo({
-        url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
-      });
+      
     // } else {
 
     //   var tid = w.currentTarget.dataset.tid || w.target.dataset.tid || 0;
@@ -428,6 +442,20 @@ Page({
       console.log('defaultinformation=====接口')
       app.defaultinfofun(_this);
     }
+
+    
+    var ctx = wx.createCanvasContext('myCanvas');
+    var arr = this.data.arr;
+    // ctx.moveTo(120, 200)
+    // for(var i=0;i<arr.length;i++){
+    //   console.log(arr[i].x*40, arr[i].y*40)
+    //   // ctx.lineTo(arr[i].x*40, arr[i].y*40)
+    // }
+    ctx.moveTo(120, 200)
+    ctx.lineTo(40, 0)
+    ctx.stroke()
+    ctx.draw()
+    
   },
   // 分享展会福利
   shareExhBen:function(){
@@ -790,8 +818,9 @@ brandJson:function(){
               
               var nowTime = new Date().getTime();
               var isBuyingTickets = res.data.Info.ticketTime;
-              console.log('nowTime=====',nowTime)
-              if(isBuyingTickets && (nowTime/1000 > isBuyingTickets)){
+              console.log('nowTime=====',parseInt(nowTime/1000))
+              if(isBuyingTickets && (parseInt(nowTime/1000) >= isBuyingTickets)){
+              // if(isBuyingTickets && ('1608346345' >= isBuyingTickets)){
                 _this.setData({
                   isBuyingTickets:true
                 })

@@ -128,3 +128,14 @@ page{
   color: #fff;
   display: block;
 }
+.cardLWrapImg{
+  position: relative;
+}
+.cardLWrapImg::after{
+  content: '防疫提示：勤洗手 戴口罩 不聚集';
+  position: absolute;
+  bottom: 10rpx;
+  right: 10rpx;
+  font-size: 22rpx;
+  color: #666;
+}
