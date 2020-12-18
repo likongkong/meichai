@@ -805,7 +805,8 @@ Page({
             payprice: res.data.Info.infoGoods.shop_price || 0,
             subscribedata: res.data.Info.subscribe || '',
             id:res.data.Info.infoActivity.id||0,
-            cashPledge:res.data.Info.cashPledge||0
+            cashPledge:res.data.Info.cashPledge||0,
+            paypriceCashPledge:parseFloat((res.data.Info.infoGoods.shop_price || 0)-(res.data.Info.cashPledge||0)).toFixed(1)
           })
           // 是否调取展会数据
           if (res.data.Info.infoActivity && res.data.Info.infoActivity.specialWay && res.data.Info.infoActivity.specialWay == 1||(res.data.Info.infoActivity.specialWay != 1&&brandid>0)) {

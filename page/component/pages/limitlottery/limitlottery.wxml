@@ -670,7 +670,7 @@
 		<view class='bbshccombot'>
 			<view class='bbshcombotleft'>应付金额</view>
 			<view class='bbshcombotright'>
-				<view class='bbshcombotpr'>￥{{payprice-cashPledge}}</view>
+				<view class='bbshcombotpr'>￥{{paypriceCashPledge}}</view>
 				<view class='bbshcombotdet' bindtap='pricedetailc'>
 					<image class='bbshdetimg' src='../../../../pages/images/tipdet.png'></image>点击查看价格明细
 				</view>
