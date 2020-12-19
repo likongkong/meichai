@@ -738,7 +738,8 @@ page{
  margin-top: 15rpx;
 }
 .addGoodsBottom>view{
-  width: 300rpx;
+  width: 100%;
+  /* width: 300rpx; */
   text-align: center;
 }
 .addGoodsBottom>view image{

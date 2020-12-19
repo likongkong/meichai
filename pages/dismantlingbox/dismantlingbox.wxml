@@ -31,11 +31,11 @@
           </view>
         </view>
         <view class="addGoodsBottom">
-          <view>
+          <!-- <view>
             <image src="https://cdn.51chaidan.com/images/calendar/ticketsA.jpg" mode="widthFix"></image>
             <text class="addGoodsBottomName">巧克力牛奶钱多多</text>
             <text class="addGoodsBottomDy"> <block wx:if="{{isBuyingTickets}}">前往购票</block> <block wx:else>开票订阅</block></text>
-          </view>
+          </view> -->
           <view>
             <image src="https://cdn.51chaidan.com/images/calendar/ticketsB.jpg" mode="widthFix"></image>
             <text class="addGoodsBottomName">UMASOU！吞钱龙</text>
