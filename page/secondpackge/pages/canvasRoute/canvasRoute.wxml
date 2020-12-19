@@ -1,19 +1,62 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
-
 <poster id="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail"></poster>
 
-<view style="border:2rpx solid #000;">
-  <image style="display:block;width:100%;" catchtap="previewImg" mode='widthFix' src="{{savepic}}"></image>
+<image class="canTopImg boxShadowEve" catchtap="previewImg" mode='widthFix' src="https://cdn.51chaidan.com/images/toyShow3/zhanhuiditu.png"></image>
+
+<view class="elsearch">
+    <view class="elsearchch">
+        <image class="elserarchimg" catchtap="jumpsearch" src="https://www.51chaidan.com/images/toyCabinet/search.png"></image>
+        <input class="elinputbut" bindfocus='onFocus' placeholder='请输入品牌名称搜索' bindinput="inputChange" bindconfirm="jumpsearch" value="{{brand_name}}"></input>
+        <view class="elserbotom" catchtap="jumpsearch">搜索</view>
+    </view>
 </view>
 
+<view class="cvBox">
+   <block wx:for='{{listdata}}' wx:key='key'>
+       <view class="cvBoxEve">
+           <view class="cvShNum">{{item.boothNumber}}</view>
+           <view class="cvShName specialellipsis">{{item.name}}</view>           
+           <image catchtap="identitysel" data-ind='{{index}}' class="ididentisel" src="{{item.isCheck?'https://cdn.51chaidan.com/images/calendar/select.png':'https://cdn.51chaidan.com/images/calendar/case.png'}}"></image>
 
+       </view>
+   </block>
+</view> 
 
-<bnavigation isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}'></bnavigation>
+<view class="cvButtom" catchtap="seltDatTipFun" wx:if='{{selectData.length>0}}'>已选{{selectData.length}}个品牌</view>
+
+<bnavigation isProduce='{{isProduce}}' isChar='{{false}}'></bnavigation>
 
 
 <!--  授权弹框  -->
 <tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
 <view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight}}px;width: 100%;z-index: 130;'  catchtap='pullupsignin'></view>
 
+<!-- 保存图片 -->
+<view class="wsh" wx:if='{{showPictures}}'>
+    <view class="tgimgboxgb" catchtap="showPicturesFun"></view>
+    <view class="cvSavePicture">
+        <image class="cvSavePicImg" mode='aspectFit' src="{{savepic}}"></image>
+        <view class="cvSavePicBut boxShadowEve" catchtap="savetoA">保存图片</view>
+    </view>
+</view>
+
+<!-- 确认选中展商 -->
+<view class="wsh" wx:if='{{selectDataTip}}'>
+    <view class="tgimgboxgb" catchtap="seltDatTipFun"></view>
+    <view class="cvShopSelData">
+        <view class="cvShSeDaHe">已选择{{selectData.length}}个品牌</view>
+        <scroll-view class="cvSavePicImg" style="height:520rpx;" scroll-y="true">
+            <view class="cvShSelDaEve" wx:for='{{selectData}}' wx:key='key'>
+                <view class="cvShNum">{{item.boothNumber}}</view>
+                <view class="cvShName specialellipsis">{{item.name}}</view>
+                <view class="cvUpGo" catchtap="downGo" data-index='{{index}}'>下移</view>   
+                <view class="cvUpGo" catchtap="upGo" data-index='{{index}}'>上移</view>
+                <image class="cvUpGoImg" catchtap="delSelData" data-ind='{{index}}' data-bid='{{item.id}}' src="https://cdn.51chaidan.com/images/toyShow3/fork.png"></image>
+            </view>
+        </scroll-view>
+        <view class="cvSavePicButcom boxShadowEve"  catchtap="seltDatTipFun" style="left:46rpx;border: 2rpx solid #BBBBBB;">返回</view>
+        <view class="cvSavePicButcom boxShadowEve" catchtap="genExPictures" style="right:46rpx;background: #E94F57;color:#fff;">生成专属地图</view>
+    </view>
+</view>
