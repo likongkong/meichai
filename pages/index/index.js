@@ -96,6 +96,12 @@ Page({
     // 审核版本 or 不是审核版本
     is_formaldress:false,
   },
+  jumpposition:function(w){
+    // var nowTime = new Date().getTime();
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
+    });
+  },
   // 临时展会授权
   togation:function(e){
     this.setData({
@@ -844,7 +850,8 @@ Page({
               classificationlist: classification||'',
               commoddata: comdataarr,
               nodataiftr: true,
-              movies: banlist||''
+              movies: banlist||'',
+              toyshowTicket:List.toyshowTicket
             });
 
         };    

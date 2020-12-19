@@ -913,3 +913,9 @@
 		<text style='display:block;text-align:center;width:110rpx;height:54rpx;line-height:27rpx;position:absolute;left:0;top:0rpx;'>点击使用\n{{percountdown}}</text>
 	</view>
 </view>
+
+<!-- 底部购票图片 -->
+<view catchtap="jumpposition" class="BottomBuyTickets" wx:if="{{toyshowTicket && toyshowTicket.isTicket}}">
+  <image src="https://cdn.51chaidan.com/images/calendar/getTicket.png" mode="widthFix"></image>
+  <text>已有{{toyshowTicket.countUser}}人想去</text>
+</view>

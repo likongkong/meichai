@@ -74,6 +74,13 @@ Page({
       isAwardBox:!this.data.isAwardBox
     })
   },
+  //跳转商品详情
+  jumpGoodsDetails(w){
+    var gid = w.currentTarget.dataset.gid || w.target.dataset.gid;
+    wx.navigateTo({
+      url: "/pages/detailspage/detailspage?gid=" + gid,
+    }) 
+  },
   // 跳转日历列表
   jumpCalendarList(){
     wx.navigateTo({ 
@@ -280,11 +287,11 @@ Page({
     var _this = this;
 
     // 是否认证手机号
-    if(!_this.data.isMobileAuth){
-      _this.data.isShareOrSub = false;
-      _this.havephoneiftrfun();
-      return false;
-    };
+    // if(!_this.data.isMobileAuth){
+    //   _this.data.isShareOrSub = false;
+    //   _this.havephoneiftrfun();
+    //   return false;
+    // };
 
 
     var eveid = w.currentTarget.dataset.eveid || w.target.dataset.eveid||1;
@@ -427,13 +434,16 @@ Page({
 
     _this.brandinformation(1);
     // // 线上
-    // _this.commodityinformation(1,1);
+    _this.commodityinformation(1,1);
     // // blibli
     // _this.commodityinformation(1,2);
     // // 直播商品
     // _this.commodityinformation(1,3);
     // // 直播列表
     // _this.liveList(1);
+
+
+    // _this.exhibitionBenefits();
 
     // //  收货地址
     // _this.nextpagediao();
@@ -760,7 +770,7 @@ Page({
 
 brandJson:function(){
      var _this = this;
-    //调取搜索关键词跳转对应列表数据
+    //媒体品牌logo数据
     wx.request({
       url: 'https://cdn.51chaidan.com/json/toyshowBrand.json',
       method: 'GET',
@@ -773,6 +783,21 @@ brandJson:function(){
       }
     })
   },
+  toyShowbrandJson:function(){
+    var _this = this;
+    // 参展品牌logo数据
+   wx.request({
+     url: 'http://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/toyshowSign.json',
+     method: 'GET',
+     header: { 'Accept': 'application/json' },
+     success: function (res) {
+       console.log('参展品牌logo===',res)
+       _this.setData({
+        brandList:res.data.List.brand || []
+       })
+     }
+   })
+ },
   // 品牌信息
   brandinformation:function(num){
       var _this = this
@@ -796,11 +821,13 @@ brandJson:function(){
           wx.stopPullDownRefresh();
           wx.hideLoading()
           // 品牌数据
+          _this.toyShowbrandJson();
           _this.brandJson();
           if (res.data.ReturnCode == 200) {
             if(num==1){
               var bannerList = res.data.List.bannerList || [];
-              var brandList = res.data.List.brand || [];
+              // var brandList = res.data.List.brand || [];
+              var goodsInfo = res.data.List.goodsInfo || [];
               var calendarList = res.data.List.calendar || [];
               var isMobileAuth = res.data.Info.isMobileAuth || false;
               var countSubsribe = res.data.Info.countSubsribe || 0;
@@ -809,7 +836,8 @@ brandJson:function(){
               _this.setData({
                 bannerList:bannerList,
                 calendarList,
-                brandList,
+                // brandList,
+                goodsInfo,
                 countSubsribe,
                 isMobileAuth:isMobileAuth
               });
@@ -881,12 +909,18 @@ brandJson:function(){
                 if(num==1){
                   var toyShowSubscribe = res.data.Info.toyShowSubscribe || {};
                   var goodsList = res.data.List.goodsList || [];
+                  var offlineGoodsList = res.data.List.offlineGoodsList || [];
                   var goodsListOne = {
                     toyShowSubscribe:toyShowSubscribe,
                     goodsList:goodsList
                   };
+                  var goodsListTwo = {
+                    toyShowSubscribe:toyShowSubscribe,
+                    goodsList:offlineGoodsList
+                  };
                   _this.setData({
-                    goodsListOne:goodsListOne
+                    goodsListOne:goodsListOne,
+                    goodsListTwo:goodsListTwo
                   })
                 }else{
                   var goodsList = res.data.List.goodsList || [];
@@ -1125,7 +1159,7 @@ brandJson:function(){
     _this.data.page = 0;
     _this.brandinformation(1);
     // // 线上
-    // _this.commodityinformation(1,1);
+    _this.commodityinformation(1,1);
     // // blibli
     // _this.commodityinformation(1,2);
     // // 直播商品

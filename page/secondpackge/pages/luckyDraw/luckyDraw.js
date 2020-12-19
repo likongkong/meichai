@@ -264,11 +264,12 @@ Page({
       }
     }); 
   },
-  getDrawFun(){
+  getDrawFun(e){
+    var type = e.currentTarget.dataset.type;
     var _this = this;
     wx.showLoading({ title: '加载中...'})
-    var q = Dec.Aese('mod=prior&operation=getEntrance&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&getType=1');
-    console.log(app.signindata.comurl + 'spread.php?mod=prior&operation=scratchGift&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&getType=1')
+    var q = Dec.Aese('mod=prior&operation=getEntrance&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&getType='+type);
+    console.log(app.signindata.comurl + 'spread.php?mod=prior&operation=scratchGift&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&getType='+type)
     wx.request({
       url: app.signindata.comurl + 'spread.php'+q,
       method: 'GET',

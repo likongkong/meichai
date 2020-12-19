@@ -230,3 +230,25 @@
   height: 120rpx;
   border-radius: 6rpx;
 }
+
+.BottomBuyTickets{
+  width: 520rpx;
+  position: fixed;
+  /* bottom: 180rpx; */
+  bottom: 116rpx;
+  left: 30rpx;
+  right: 0;
+  z-index: 11;
+}
+.BottomBuyTickets image{
+  width: 100%;
+  height: auto;
+}
+.BottomBuyTickets text{
+  width: 100%;
+  display: block;
+  position: absolute;
+  bottom: 26rpx;
+  left: 25rpx;
+  font-size: 24rpx;
+}

@@ -3803,6 +3803,8 @@ Page({
     wx.navigateTo({
       url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
     });
+  },
+  jumpMapFun(){
+    app.showToastC('敬请期待');
   }
-
 })

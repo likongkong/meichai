@@ -90,19 +90,25 @@
           <block>
             <view wx:if="{{!user.isVIP}}" class="cardVipItemBtn" catchtap="jumpVipPage">开通VIP</view>
             <view wx:elif="{{user.isVIP && !user.isVipTicket}}" class="cardVipItemBtn" style="background:#ADADAD; color:#fff;box-shadow:none;">已开通</view>
-            <view wx:else class="cardVipItemBtn" catchtap="getDrawFun">领取</view>
+            <view wx:else class="cardVipItemBtn" data-type="1" catchtap="getDrawFun">领取</view>
           </block>
         </view>
         <view class="cardItem" wx:else>
           <view class="cardItemTxtWrap">
             <view>{{item.title}}</view>
-            <view class="{{user.isVIP?'textDecoration':''}}" style="color:#666666;">{{item.descirption}}</view>
-            <view style="color:#666666;">{{item.descirptionVIP}}<text style="color:#C38925;">（VIP限定）</text></view>
+            <block wx:if="{{item.type == 7}}">
+              <view style="color:#666666;">{{item.descirption}}</view>
+            </block>
+            <block wx:else>
+              <view class="{{user.isVIP?'textDecoration':''}}" style="color:#666666;">{{item.descirption}}</view>
+              <view style="color:#666666;">{{item.descirptionVIP}}<text style="color:#C38925;">（VIP限定）</text></view>
+            </block>
           </view>
           <block>
             <view wx:if="{{item.type == 3}}" style="{{item.type == 3 && !item.isCanReceive?'background:#ADADAD;':''}}" class="cardItemBtn" data-num='9' catchtap="{{item.type == 3 && !item.isCanReceive?'subscrfun':'jumpOtherPage'}}"> {{item.type == 3 && !item.isCanReceive?'明日领取':'去签到'}}</view>
             <view wx:elif="{{item.type == 4}}" class="cardItemBtn" data-num='988' catchtap="jumpOtherPage">去抽盒</view>
             <view wx:elif="{{item.type == 5}}" class="cardItemBtn">去邀请<button style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' open-type="share"></button></view>
+            <view wx:elif="{{item.type == 7}}" class="cardItemBtn" data-type="2" data-num='9022' catchtap="{{item.type == 7 && !item.isCanReceive?'jumpOtherPage':'getDrawFun'}}">{{item.type == 7 && !item.isCanReceive?'去购票':'领取'}}</view>
             <view wx:else class="cardItemBtn" data-num='9015' catchtap="jumpOtherPage">去抽赏</view>
           </block>
         </view>

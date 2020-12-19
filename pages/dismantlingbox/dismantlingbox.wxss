@@ -147,7 +147,8 @@ page{
   height:160rpx;
   /* float: left; */
   /* margin:20rpx; */
-  
+  display: flex;
+  align-items: center;
 }
 .ssubLiveBImg{
   width: 250rpx;
@@ -653,6 +654,14 @@ page{
   font-size: 24rpx;
 }
 
+/* 场馆地图 */
+.mapimg{
+  width: 670rpx;
+  height: 670rpx;
+  border-radius: 10rpx;
+  margin: auto;
+  display: block;
+}
 
 /* 票务信息 */
 .ticketInfo{
@@ -734,12 +743,10 @@ page{
  box-sizing: border-box;
  display: flex;
  justify-content: space-between;
- align-items: center;
- margin-top: 15rpx;
+ /* align-items: center; */
+ margin-top: 30rpx;
 }
 .addGoodsBottom>view{
-  width: 100%;
-  /* width: 300rpx; */
   text-align: center;
 }
 .addGoodsBottom>view image{

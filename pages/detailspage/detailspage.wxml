@@ -595,7 +595,10 @@
       <image src='https://clw.51chaidan.com//images/goods/share3.png?' style='width:36rpx;height:36rpx;display:block;position:absolute;left:0;right:0;bottom:0;top:0;margin:auto;'></image>
       <button open-type="share" style='position: absolute;left: 0;top: 0;width: 100%; height: 100%;opacity: 0;padding:0;z-index:1;' type="default" size="mini"></button>
       </view>
-		</view>
+    </view>
+
+    <!-- 是否是展会期间线下商品-->
+    <block wx:if="{{zunmdata.sellingWay != 1}}">
     <!-- 右边按钮 -->
       <!-- 有直播间号有抽选活动：进入抽选 -->
       <block wx:if='{{is_exhibition==1&&zunmdata.liveShowRoomId&&zunmdata.isLotto}}'>
@@ -664,8 +667,16 @@
           </view>    
         </block>
       </block>
+    </block>
+    <block wx:else> 
+      <view class="footer-child large" bindtap='jumpMapFun' style='box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:400rpx;float:right;background:#32ACFB'>
+        <view style='width:100%;height:100%;text-align:center;line-height:60rpx;font-size:28rpx;color:#fff;'>定制专属地图</view>
+      </view>
+    </block>
 	</view>
 </block>
+
+
 
 <block wx:else>
     <view class="detailfooter" style='{{isIphoneX?"bottom:130rpx;":"bottom:110rpx;"}}'>
