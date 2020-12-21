@@ -364,7 +364,8 @@ Page({
     this.setData({
       ip_brand_id: id||0,
       ip_id: 0,
-      morebrankip:false
+      morebrankip:false,
+      pid:0,
     });
     this.getlist(0);
   },
@@ -382,7 +383,8 @@ Page({
     })
     if(pid==0){
       _this.setData({
-        list:[]
+        list:[],
+        pid:0
       })
     } 
     _this.setData({is_havedata:false})
@@ -534,6 +536,9 @@ Page({
               list: mlist,
             });
           } else {
+            if(mlist && mlist.length==0){
+               app.showToastC('暂无更多数据')
+            };
             _this.setData({
               pid: pid - 1,
             })

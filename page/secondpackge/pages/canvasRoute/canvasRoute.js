@@ -72,27 +72,27 @@ Page({
   // 下移
   downGo:function(w) {
     var _this = this;
-    var listdata = _this.data.listdata || [];
+    var selectData = _this.data.selectData || [];
     var index = w.currentTarget.dataset.index || 0;
-    if(index!=listdata.length-1){
-        listdata[index] = listdata.splice(index+1, 1, listdata[index])[0];
+    if(index!=selectData.length-1){
+      selectData[index] = selectData.splice(index+1, 1, selectData[index])[0];
         _this.setData({
-            listdata:listdata
+          selectData:selectData
         });
     };
   },
   // 上移
   upGo:function(w){
       var _this = this;
-      var listdata = _this.data.listdata || [];
-      var index = w.currentTarget.dataset.ind || 0;
+      var selectData = _this.data.selectData || [];
+      var index = w.currentTarget.dataset.index || 0;
+      console.log(index)
       if(index != 0){
-          listdata[index] = listdata.splice(index-1, 1, listdata[index])[0];
+        selectData[index] = selectData.splice(index-1, 1, selectData[index])[0];
           _this.setData({
-             listdata:listdata
+            selectData:selectData
           });
       };
-
   },
 
   // 删除选中数据
@@ -628,8 +628,11 @@ Page({
   onShow: function () {},
   onShareAppMessage: function (options) {
     var _this = this
-    
-    return Dec.sharemc();
+    return {
+      title: '潮玩路径',
+      imageUrl:_this.data.savepic || '',
+      success: function (res) {}
+    }  
   },
 
 

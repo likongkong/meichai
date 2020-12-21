@@ -227,7 +227,7 @@ Page({
 
     var num = e.currentTarget.dataset.num;
     var _this = this;
-    wx.showLoading({ title: '加载中...',mask: true})
+    wx.showLoading({ title: '加载中...',mask:true})
     var q = Dec.Aese('mod=prior&operation=scratchGift&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&num=' + num);
     console.log(app.signindata.comurl + 'spread.php?mod=prior&operation=scratchGift&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&num=' + num)
     wx.request({
