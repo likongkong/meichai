@@ -729,16 +729,19 @@ Page({
                     arrlist[i].List = result;
                   }else{
                     let topArrList = [];
+                    let otherArrList = [];
                     for(let j=0; j < arrlist[i].List.length; j++){
                       if(arrlist[i].List[j].isTop){
                         topArrList.push(arrlist[i].List[j]);  
-                        al.splice(j, 1);
+                        // al.splice(j, 1);
+                      }else{
+                        otherArrList.push(arrlist[i].List[j]);  
                       }
                     }
                     if(topArrList.length>=shouNum){
                       arrlist[i].List = topArrList;
                     }else{
-                      arrlist[i].List = [...topArrList,..._this.makeRandomArr(al,shouNum-topArrList.length)];
+                      arrlist[i].List = [...topArrList,..._this.makeRandomArr(otherArrList,shouNum-topArrList.length,topArrList)];
                     }
                   }
                 }
@@ -860,7 +863,7 @@ Page({
     })    
   },
   //随机取出数组中N个不重复的数据
-  makeRandomArr(arrList,num){
+  makeRandomArr(arrList,num,topArrList){
     if(num>arrList.length){
       return;
     }
