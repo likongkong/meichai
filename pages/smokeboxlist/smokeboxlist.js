@@ -193,6 +193,9 @@ Page({
     // 判断是否授权 
     var _this = this;
 
+    _this.getboast();
+
+
     if(app.signindata.sceneValue==1154){
       app.signindata.isProduce = true;  
       _this.onLoadfun();
@@ -312,19 +315,15 @@ Page({
 
     _this.getlist(0)
 
-    _this.getboast()
-
-    _this.nextpagediao();
-
     setTimeout(function() {
-      _this.getdefault()
-    }, 1000)
-
+      _this.getdefault();
+    }, 2000)
   },
 
 
   getdefault: function() {
     var _this = this;
+    _this.nextpagediao();
     // 调取晒单数量
     Dec.dryingSum(_this, app.signindata.clwcomurl);
     var qqq = Dec.Aese('operation=info&mod=info');
@@ -337,7 +336,6 @@ Page({
       },
       success: function(res) {
         if (res.data.ReturnCode == 200) {
-        
           _this.setData({
             defaultinformation: res.data.Info,
             wxnum: res.data.Info.cs.wxid || 'meichai666666',
@@ -407,13 +405,15 @@ Page({
         wx.stopPullDownRefresh();
         _this.data.push_id =  0;
         if (res.data.ReturnCode == 200) {
-          var mlist = res.data.List.activity|| [];
+          var listData = res.data.List || {};
+          var infoData = res.data.Info || {};
+          var mlist = listData.activity|| [];
           if(pid == 0 ){
             // 品牌id
             // var eldataclass = res.data.List.brand || [];
             // 品牌ip
-            var brandArr = res.data.List.brandArr || [];
-            var ipArr = res.data.List.ipArr || [];
+            var brandArr = listData.brandArr || [];
+            var ipArr = listData.ipArr || [];
             // 是否显示弹框
             if(_this.data.jumpBulletBox){
               var specialActivity = res.data.Info.specialActivity;
@@ -421,8 +421,8 @@ Page({
             }else{
               var specialActivity = false;
             };
-            var special = res.data.List.alert.special || '';
-            var ip_id = res.data.List.checkIpId || 0;
+            var special = listData.alert.special || '';
+            var ip_id = listData.checkIpId || 0;
             if(ip_id&&ip_id!=_this.data.ip_id){
               _this.setData({
                 ip_id:ip_id
@@ -430,7 +430,7 @@ Page({
             };
 
             var nowTime = new Date().getTime();
-            var isBuyingTickets = res.data.List.scratchCardStartTime;
+            var isBuyingTickets = listData.scratchCardStartTime;
             console.log('nowTime=====',nowTime)
             if(isBuyingTickets && ( parseInt(nowTime/1000) >= isBuyingTickets)){
             // if(isBuyingTickets && ('1608296400' > isBuyingTickets)){
@@ -464,14 +464,14 @@ Page({
             });
           };
           if (pid == 0 && mlist.length > 0) {
-            var listbutnum = res.data.Info.countToys || 0;
-            var festivalId = res.data.Info.festivalId || false;
-            var festivalTicket = res.data.Info.festivalTicket || "";
+            var listbutnum = infoData.countToys || 0;
+            var festivalId = infoData.festivalId || false;
+            var festivalTicket = infoData.festivalTicket || "";
 
 
 
             // 添加广告
-            var adlist = res.data.List.ads || [];
+            var adlist = listData.ads || [];
             var listdata = [];
             if(adlist&&adlist.length!=0){
               var adindex = 0;
@@ -493,22 +493,21 @@ Page({
               listdata = mlist;
             };
 
-
             _this.setData({
               // list: mlist,
               list: listdata,
-              alert: res.data.List.alert,
+              alert: listData.alert,
               listbutnum: listbutnum,
               festivalId: festivalId,
               festivalTicket: festivalTicket,
-              bannerList: res.data.List.banner || [],
+              bannerList: listData.banner || [],
               // eldataclass:eldataclass
             })
           } else if (mlist.length > 0) {
 
 
             // 添加广告
-            var adlist = res.data.List.ads || [];
+            var adlist = listData.ads || [];
             var listdata = [];
             if(adlist&&adlist.length!=0){
               var adindex = 0;
@@ -533,8 +532,7 @@ Page({
             mlist = _this.data.list.concat(listdata)
             _this.setData({
               list: mlist,
-            })
-            
+            });
           } else {
             _this.setData({
               pid: pid - 1,
@@ -649,19 +647,14 @@ Page({
 
 
   getboast: function() {
-    var _this = this
-    // wx.showLoading({
-    //   title: '加载中...',
-    // })
+    var _this = this;
     var q1 = Dec.Aese('mod=blindBox&operation=record&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
-
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q1,
       method: 'GET',
       header: {
         'Accept': 'application/json'
       },
-
       success: function(res) {
         wx.stopPullDownRefresh();
         if (res.data.ReturnCode == 200) {
@@ -669,13 +662,7 @@ Page({
             boastlist: res.data.List.record,
           })
         }
-        // wx.hideLoading()
       },
-
-      fail: function(res) {
-        // wx.hideLoading()
-      }
-
     })
   },
 
