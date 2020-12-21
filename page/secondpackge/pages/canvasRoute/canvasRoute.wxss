@@ -19,7 +19,7 @@ page {
 .cvBoxEve{
   width: 660rpx;
   height: 60rpx;
-  margin:0 auto 15rpx;
+  margin:0 auto 0;
   position: relative;
 }
 .cvShSeDaHe{
@@ -62,7 +62,8 @@ page {
   float: left;
   font-size: 24rpx;
   color:#298DF8;
-  margin-right: 30rpx;
+  margin-right: 25rpx;
+  width: 75rpx;
 }
 .cvShName{
   height: 60rpx;
@@ -160,10 +161,10 @@ page {
 
 
 .elsearch{
-  width: 100%;
+  width: 710rpx;
   height:90rpx;
   background: #f5f6fa;
-  margin:15rpx 0;
+  margin:15rpx auto;
 }
 .elsearchch{
   width: 100%;
@@ -191,9 +192,17 @@ page {
 }
 .elinputbut{
   height: 100%;
-  width: 500rpx;
+  width: 470rpx;
   float: left;
   font-size: 24rpx;
+}
+.cvBConExhibi{
+  width: 660rpx;
+  height: 46rpx;
+  line-height: 46rpx;
+  color: #298DF8;
+  font-size: 30rpx;
+  margin:0 auto;
 }
 
 
