@@ -1168,7 +1168,7 @@ brandJson:function(){
     // // 直播列表
     // _this.liveList(1);
     // // 展会福利
-    // _this.exhibitionBenefits();
+    _this.exhibitionBenefits();
 
   },
 

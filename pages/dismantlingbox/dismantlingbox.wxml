@@ -98,7 +98,7 @@
      
 
     <!-- 展会福利 -->
-    <!-- <block wx:if='{{giftList&&giftList.length!=0}}'>
+    <block wx:if='{{giftList&&giftList.length!=0}}'>
         <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e2'>———— 订阅福利 ————</view>
         <view class="punchExhben">
             <view class="punCheveSrc" wx:for='{{giftList}}' wx:key='key' style="{{index%3==2||index+1==giftList.length?'margin-right:0;':''}}">
@@ -125,7 +125,7 @@
           <image class="punchImgWxShare" src="https://cdn.51chaidan.com/images/icon/iconShareWX.png"><button open-type="share"  style='position:absolute;height:100%;width:100%;left:0;top:0;z-index:3;opacity:0;'></button></image>
            <view class="clockInIns" catchtap="mapImgDisplayfun">{{giftInfo.titleIntroduce}}</view>
         </view>
-    </block>    -->
+    </block>   
 
     <!-- 线上 -->
 		<view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}' id='e3'>————— 线上 —————</view>
