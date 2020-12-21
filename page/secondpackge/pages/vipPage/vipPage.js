@@ -151,6 +151,7 @@ paymentmony:function(cart_id){
     var _this = this;
     wx.showLoading({ title: '加载中...'})
     var q = Dec.Aese('mod=memberVip&operation=vipInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+    // console.log('mod=memberVip&operation=vipInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid +'&expiryMonth=1')
     wx.request({
       url: app.signindata.comurl + 'member.php'+q,
       method: 'GET',

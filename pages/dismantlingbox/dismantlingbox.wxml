@@ -258,16 +258,18 @@
     </view>
     <!-- 承办 -->
     <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;">——————— 承办 ———————</view>
-    <view class="ssubBrandEveWrap" style="width:100%;overflow: hidden;padding:0 40rpx;box-sizing: border-box; display: flex;justify-content: center;align-items: center;">
-        <view class="ssubBrandEve1 bigLogo1">
-          <image class="ssubBiliimgbr bigLogo1" src="https://cdn.51chaidan.com/images/toyshow/sm1.png" mode='aspectFit'></image>
+    <view class="ssubBrandEveWrap" style="width:100%;overflow: hidden;padding:0 40rpx;box-sizing: border-box;">
+        <view style="width:580rpx;overflow:hidden;margin: 0 auto;">
+          <view class="ssubBrandEve1 bigLogo1" wx:for="{{undertakeData}}" wx:key="key">
+            <image class="ssubBiliimgbr bigLogo1" src="{{item}}" mode='aspectFit'></image>
+          </view>
         </view>
     </view>
     <!-- 媒体合作与平台支持 -->
     <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{mediaBrandList&&mediaBrandList.length!=0}}'>———— 媒体合作与平台支持 ————</view>
     <view class="ssubBrandEveWrap" style="width:100%;overflow: hidden;padding:0 40rpx;box-sizing: border-box;" wx:if='{{mediaBrandList&&mediaBrandList.length!=0}}'>
         <view class="ssubBrandEve" wx:for="{{mediaBrandList}}" wx:key="key">
-           <image class="ssubBiliimgbr" src="{{item.brandLogo}}" mode='aspectFit'></image>
+           <image class="ssubBiliimgbr" src="{{item}}" mode='aspectFit'></image>
         </view>
     </view>
     

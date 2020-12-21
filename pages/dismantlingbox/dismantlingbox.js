@@ -772,13 +772,14 @@ brandJson:function(){
      var _this = this;
     //媒体品牌logo数据
     wx.request({
-      url: 'https://cdn.51chaidan.com/json/toyshowBrand.json',
+      url: 'https://cdn.51chaidan.com/json/toyShowNextData.json',
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
         console.log('媒体数据logo===',res)
         _this.setData({
-          mediaBrandList:res.data || []
+          mediaBrandList:res.data.mediaData || [],
+          undertakeData:res.data.undertakeData || [],
         })
       }
     })
@@ -787,7 +788,7 @@ brandJson:function(){
     var _this = this;
     // 参展品牌logo数据
    wx.request({
-     url: 'http://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/toyshowSign.json',
+     url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/toyshowSign.json',
      method: 'GET',
      header: { 'Accept': 'application/json' },
      success: function (res) {

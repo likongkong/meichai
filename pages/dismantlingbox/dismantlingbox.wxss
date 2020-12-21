@@ -909,9 +909,13 @@ page{
 }
 
 .ssubBrandEve1{
-  display: inline-block;
+  /* display: inline-block; */
   margin: 0 20rpx;
+  float: left;
 }
+/* .ssubBrandEve1:nth-child(2n){
+  float: right;
+} */
 .bigLogo{
   width: 117rpx;
   height: 117rpx;
