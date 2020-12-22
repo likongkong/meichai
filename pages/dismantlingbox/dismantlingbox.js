@@ -443,7 +443,7 @@ Page({
     // _this.liveList(1);
 
 
-    // _this.exhibitionBenefits();
+    _this.exhibitionBenefits();
 
     // //  收货地址
     // _this.nextpagediao();

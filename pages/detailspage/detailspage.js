@@ -3805,6 +3805,8 @@ Page({
     });
   },
   jumpMapFun(){
-    app.showToastC('敬请期待');
+    wx.navigateTo({ 
+      url: "/page/secondpackge/pages/canvasRoute/canvasRoute"
+    });
   }
 })
