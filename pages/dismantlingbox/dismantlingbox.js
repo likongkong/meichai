@@ -226,10 +226,8 @@ Page({
       this.setData({
         iftrdetailpagetwo:true
       })
-
     }
     wx.hideLoading()
-
   },
   iftrdetailpageb:function(){
     this.setData({iftrdetailpagetwo:false});
