@@ -112,7 +112,7 @@ page{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 30rpx;
+  margin: 0 22rpx;
 }
 .vipPrivilegeAwardGroup view image{
   width: 70rpx;
@@ -218,10 +218,17 @@ page{
   font-size: 30rpx;
   text-align: center;
   line-height: 70rpx;
+  margin: 15rpx auto 0 auto;
+}
+.bottomBox{
+  width: 100%;
   position: fixed;
-  bottom: 130rpx;
-  left: 50%;
-  margin-left: -225rpx;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  padding-bottom: 80rpx;
+  background: #fff;
+  padding-top: 10rpx;
 }
 
 
@@ -240,4 +247,34 @@ page{
   display: block;
   width: 100% !important;
   margin: 0 auto;
+}
+
+
+.vipTab{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background:#fff;
+}
+.vipTab view{
+  width: 40%;
+  height: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+  font-size: 28rpx;
+}
+.active{
+  color: #E94F57;
+  position: relative;
+}
+.active::after{
+  content: '';
+  width: 60%;
+  height: 4rpx;
+  background: #E94F57;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin-left: -30%;
 }

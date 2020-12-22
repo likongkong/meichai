@@ -3,6 +3,10 @@
 
 
 
+<view class="vipTab" wx:if="{{!infoData.openMember}}">
+   <view class="{{expiryMonth==12?'active':''}}" data-expiryMonth="12" catchtap="toggleTab">年卡</view>
+   <view class="{{expiryMonth==1?'active':''}} " data-expiryMonth="1" catchtap="toggleTab">月卡</view>
+</view>
 <view class="vipTop">
    <view class="vipTopDisplay">
        <!-- <view class="vipTopName">开通即享VIP特权</view>
@@ -21,12 +25,13 @@
          </view>
       </view>
       <view class="vipTopDisplayB">
-         <block wx:for="{{infoData.complimentary}}" wx:key='key' data-index="{{index}}">
+         <block wx:for="{{expiryMonth==12?infoData.complimentary:infoData.complimentaryMonth}}" wx:key='key' data-index="{{index}}">
             <view>
                <text class="giftTxt">赠送：</text>
                <text style="max-width:300rpx;" class="gift">{{item.name}}</text>
             </view>
          </block>
+
       </view>
    </view>
 </view>
@@ -40,7 +45,7 @@
          <view class="vipbeRButtom specialellipsis">价值￥1825</view>
       </view>
    </view> -->
-   <block wx:for="{{listData.prerogativeList}}" wx:key='key' data-index="{{index}}">
+   <block wx:for="{{expiryMonth==12?listData.prerogativeList:listData.prerogativeListMonth}}" wx:key='key' data-index="{{index}}">
       <view class="vipPrivilegeWrap">
          <view class="vipPrivilegeTab" data-index="{{index+1}}" catchtap="toggleShowVipPrivilegeFun">
             <view>
@@ -52,16 +57,15 @@
             </view>
          </view>
          <view class="vipPrivilegeAward" wx:if="{{tabNum == index+1}}">
-            <text class="title">{{item.headline}}</text>
-            <block>
+            <text class="title" style="{{item.subTitle?'margin-bottom:30rpx':''}}">{{item.subTitle?item.subTitle:item.headline}}</text>
+            <block wx:if="{{!item.subTitle}}">
                <image catchtap="iftrdetailpagen" wx:if="{{!item.awardInfo}}" class="vipPrivilegeAwardImg" src="{{item.img}}" mode="widthFix"></image>
                <view wx:else class="vipPrivilegeAwardGroup">
                   <block wx:for="{{item.awardInfo}}" wx:key='key' data-index="{{index}}" wx:for-item="sonItem"> 
                      <view>
                         <image src="{{sonItem.img}}" mode="widthFix"></image>
                         <view>
-                           <text>{{sonItem.name}}</text>
-                           <text>{{sonItem.number}}{{sonItem.day}}</text>
+                           <text>{{sonItem.name}}{{sonItem.number}}{{sonItem.day}}</text>
                         </view>
                      </view>
                   </block>
@@ -83,10 +87,23 @@
   
 </view>
 
+<block wx:if="{{expiryMonth==12}}">
+   <view class="bottomBox">
+      <view catchtap="jumpVipClause" style="font-size:24rpx;color:#BEBEBE;"> {{infoData.openMember?'':'点击开通视为同意'}}<text style="color:#298CF7">《美拆VIP会员服务条款》</text></view>
+      <view wx:if="{{!infoData.openMember}}" class="btn boxShadowEve" catchtap="openingVip">
+         立即开通{{infoData.vipPrice}}{{infoData.vipDay}} <text style="margin-left:15rpx;text-decoration:line-through;">{{infoData.vipOldPrice}}</text>
+      </view>
+   </view>
+</block>
+<block wx:else>
+   <view class="bottomBox">
+      <view catchtap="jumpVipClause" style="font-size:24rpx;color:#BEBEBE;">{{infoData.openMember?'':'点击开通视为同意'}} <text style="color:#298CF7">《美拆VIP会员服务条款》</text></view>
+      <view wx:if="{{!infoData.openMember}}" class="btn boxShadowEve" catchtap="openingVip">
+         立即开通{{infoData.vipPriceMonth}}{{infoData.vipDayMonth}} <text style="margin-left:15rpx;text-decoration:line-through;">{{infoData.vipOldPriceMonth}}</text>
+      </view>
+   </view>
+</block>
 
-<view wx:if="{{!infoData.openMember}}" class="btn boxShadowEve" catchtap="openingVip">
-  立即开通{{infoData.vipPrice}}{{infoData.vipDay}} <text style="margin-left:15rpx;text-decoration:line-through;">{{infoData.vipOldPrice}}</text>
-</view>
 
 
 

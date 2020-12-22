@@ -110,6 +110,7 @@
         "pages/shopsquaretrip/shopsquaretrip",
         "pages/calendarList/calendarList",
         "pages/vipPage/vipPage",
+        "pages/vipClausePage/vipClausePage",
         "pages/vipPrivilegePage/vipPrivilegePage",
         "pages/aRewardList/aRewardList",
         "pages/buyingTickets/buyingTickets",

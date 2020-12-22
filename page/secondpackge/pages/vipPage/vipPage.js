@@ -18,8 +18,14 @@ Page({
     uid: app.signindata.uid,
     tabNum:0,
     iftrdetailpagetwo: false,
+    expiryMonth:12
   },
-
+  toggleTab(e){
+    this.setData({
+      expiryMonth:e.currentTarget.dataset.expirymonth,
+      tabNum:0
+    })
+  },
   toggleShowVipPrivilegeFun(e){
     if(e.currentTarget.dataset.index == this.data.tabNum){
       this.setData({
@@ -49,9 +55,9 @@ Page({
   // return false;
   wx.showLoading({ title: '加载中...'})
   var _this = this;
-  var qqq = Dec.Aese('mod=memberVip&operation=vipPay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
+  var qqq = Dec.Aese('mod=memberVip&operation=vipPay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&expiryMonth='+_this.data.expiryMonth);
 
-  console.log(app.signindata.comurl + 'member.php?' +'mod=memberVip&operation=vipPay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+  console.log(app.signindata.comurl + 'member.php?' +'mod=memberVip&operation=vipPay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&expiryMonth='+_this.data.expiryMonth)
 
   wx.request({
     url: app.signindata.comurl + 'member.php' + qqq,
@@ -151,7 +157,7 @@ paymentmony:function(cart_id){
     var _this = this;
     wx.showLoading({ title: '加载中...'})
     var q = Dec.Aese('mod=memberVip&operation=vipInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
-    // console.log('mod=memberVip&operation=vipInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid +'&expiryMonth=1')
+    console.log('mod=memberVip&operation=vipInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
     wx.request({
       url: app.signindata.comurl + 'member.php'+q,
       method: 'GET',
@@ -167,8 +173,13 @@ paymentmony:function(cart_id){
             goodsDescDetails,
             infoData:res.data.Info,
             listData:res.data.List,
-            memberExpireTime:_this.formatTime(res.data.Info.memberExpireTime,'Y年M月D日')
+            memberExpireTime:_this.formatTime(res.data.Info.memberExpireTime,'Y年M月D日'),
           })
+          if(res.data.Info.openMember){
+            _this.setData({
+              expiryMonth:res.data.Info.VIPType
+            })
+          }
         }
       }
     }); 
@@ -315,6 +326,11 @@ paymentmony:function(cart_id){
       format = format.replace(formateArr[i], returnArr[i]);
     }
     return format;
+  },
+  jumpVipClause(){
+    wx.navigateTo({  
+      url: "/page/secondpackge/pages/vipClausePage/vipClausePage"
+    })
   }
   
 })
