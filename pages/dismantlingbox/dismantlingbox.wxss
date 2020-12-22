@@ -636,7 +636,7 @@ page{
   width: 520rpx;
   position: fixed;
   /* bottom: 180rpx; */
-  bottom: 116rpx;
+  bottom: 182rpx;
   left: 30rpx;
   right: 0;
   z-index: 11;

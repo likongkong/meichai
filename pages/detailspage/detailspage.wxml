@@ -135,7 +135,7 @@
               {{zunmdata.gname}}
             </view>
             <view class='dPrice' style="width:170rpx;float:left;padding-top:20rpx;">
-              <text style='font-size:30rpx;color:#000;font-weight:bold;color:#ff2742;'><text style='font-size:30rpx;'>￥</text>{{zunmdata.gsale}}</text>
+              <text style='font-size:30rpx;color:#000;font-weight:bold;color:#ff2742;'><text style='font-size:30rpx;'>{{zunmdata.gprice!=0?'￥':''}}</text>{{zunmdata.gprice!=0?zunmdata.gprice:'价格以线下展会为准'}}</text>
             </view>
           </view>      
       </block>
@@ -148,7 +148,7 @@
             <image wx:if='{{zunmdata.isOverAllView}}' src='https://cdn.51chaidan.com//images/sign/panorama.png' catchtap="jumpDSIE" class="detailS3Dimg"></image>
             <text wx:if='{{zunmdata.is_suit==1}}' style='color:#ff2742;font-size:24rpx;margin-right:10rpx;'>{{zunmdata.suitName}}<text style='font-size:30rpx;'>{{zunmdata.unpackUnit}}</text></text>
             <text style='font-size:30rpx;color:#000;font-weight:bold;'><text style='font-size:30rpx;'>￥</text>{{zunmdata.gsale}}</text>
-            <text wx:if='{{zunmdata.gsale!=zunmdata.gprice}}' style='color: #959595;font-size: 24rpx;text-decoration:line-through;position: relative;top:3rpx;margin-left: 10rpx;'>￥{{zunmdata.gprice}}</text>
+            <text wx:if='{{zunmdata.gsale!=zunmdata.gprice}}' style='color: #959595;font-size: 24rpx;text-decoration:line-through;position: relative;top:3rpx;margin-left: 10rpx;'>{{zunmdata.gprice!=0?'￥'+zunmdata.gprice:'价格以线下展会为准'}}</text>
           </view>
           <view class='dltityh' style='text-align:center;margin-bottom:10rpx;padding:12rpx 20rpx;position:relative;min-height:36rpx;'>
             <view class='dlyhnnimeMod' wx:for="{{zunmdata.gtag}}" wx:key="key">{{item}}</view>
@@ -165,7 +165,7 @@
         <image wx:if='{{zunmdata.isOverAllView}}' src='https://cdn.51chaidan.com//images/sign/panorama.png' catchtap="jumpDSIE" class="detailS3Dimg"></image>
         <text wx:if='{{zunmdata.is_suit==1}}' style='color:#ff2742;font-size:24rpx;margin-right:10rpx;'>{{zunmdata.suitName}}<text style='font-size:30rpx;'>{{zunmdata.unpackUnit}}</text></text>
         <text style='font-size:30rpx;color:#000;font-weight:bold;'><text style='font-size:30rpx;'>￥</text>{{zunmdata.gsale}}</text>
-        <text wx:if='{{zunmdata.gsale!=zunmdata.gprice}}' style='color: #959595;font-size: 24rpx;text-decoration:line-through;position: relative;top:3rpx;margin-left: 10rpx;'>￥{{zunmdata.gprice}}</text>
+        <text wx:if='{{zunmdata.gsale!=zunmdata.gprice}}' style='color: #959595;font-size: 24rpx;text-decoration:line-through;position: relative;top:3rpx;margin-left: 10rpx;'>{{zunmdata.gprice!=0?'￥'+zunmdata.gprice:'价格以线下展会为准'}}</text>
       </view>
       <view class='dltityh' style='text-align:center;margin-bottom:10rpx;padding:12rpx 20rpx;position:relative;min-height:36rpx;'>
         <view class='dlyhnnimeMod' wx:for="{{zunmdata.gtag}}" wx:key="key">{{item}}</view>
@@ -588,7 +588,7 @@
             <view class="footer-child large" style='box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 20rpx 0 0;padding:0;width:250rpx;float:right;{{zunmdata.status==1||zunmdata.status==3||zunmdata.status==0?"background:#999999;":""}}'>
               <view catchtap='subscrfun' class="addsopcar" style="height:60rpx;line-height:60rpx;font-size:24rpx;" wx:if='{{zunmdata.status==1}}'>
                 <block wx:if='{{newdataexh}}'>暂未开启</block>
-                <block wx:else>{{zunmdata.datatimew}}开售</block>
+                <block wx:else> {{zunmdata.specialWay == 1?'线上展会售卖':zunmdata.datatimew+'开售'}}</block>
               </view>
               <view class="addsopcar" style="height:60rpx;line-height:60rpx;" wx:elif='{{zunmdata.status==3}}'>已结束</view>
               <view class="addsopcar" style="height:60rpx;line-height:60rpx;" wx:elif='{{zunmdata.status==0}}'>已售罄</view>
@@ -743,7 +743,7 @@
             <view class="footer-child large" style='box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:300rpx;float:right;{{zunmdata.status==1||zunmdata.status==3||zunmdata.status==0?"background:#999999;":""}}'>
               <view catchtap='subscrfun' class="addsopcar" style="height:60rpx;line-height:60rpx;" wx:if='{{zunmdata.status==1}}'>
                 <block wx:if='{{newdataexh}}'>暂未开启</block>
-                <block wx:else>{{zunmdata.datatimew}}开售</block>
+                <block wx:else>{{zunmdata.specialWay == 1?'线上展会售卖':zunmdata.datatimew+'开售'}}</block>
               </view>
               <view class="addsopcar" style="height:60rpx;line-height:60rpx;" wx:elif='{{zunmdata.status==3}}'>已结束</view>
               <view class="addsopcar" style="height:60rpx;line-height:60rpx;" wx:elif='{{zunmdata.status==0}}'>已售罄</view>

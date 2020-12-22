@@ -2,24 +2,64 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 
+<view class="wrap">
+  <view class="formWrap">
+    <view class="formItemWrap">
+      <view class="title">姓名</view>
+      <view class="formItemInput">
+        <input type="text" name="" id="" placeholder="请填写参展姓名" placeholder-class="placeholderclass" value="{{inputnamedata}}" bindinput="inputnameChange"/>
+      </view>
+    </view>
+    <view class="formItemWrap">
+      <view class="title">身份证号</view>
+      <view class="formItemInput">
+        <input type="text" name="" id="" placeholder="请填写参展人身份证号" placeholder-class="placeholderclass" value="{{inputidnumberdata}}" bindinput="inputidChange"/>
+      </view>
+    </view>
+    <view class="formItemWrap">
+      <view class="title">电话号</view>
+      <view class="formItemInput">
+        <input type="text" name="" id="" placeholder="请填写参展人电话号" placeholder-class="placeholderclass" value="{{contactsphone}}" bindinput="contactsChangep"/>
+      </view>
+    </view>
+    <view class="formItemWrap">
+      <view class="title">激活码</view>
+      <view class="formItemInput">
+        <input type="text" name="" id="" placeholder="请填写激活码" placeholder-class="placeholderclass" value="{{code}}" bindinput="codeChange"/>
+      </view>
+    </view>
+    <view style="width: 100%;padding:30rpx 0;">
+      <view class="title">入场日期</view>
+      <view style="display: flex;justify-content: space-between;align-items: center;margin-top:15rpx">
+        <!-- <input type="text" name="" id="" disabled="true" placeholder="请选择入场日期" placeholder-class="placeholderclass" value="{{time}}"/> -->
+        <!-- <picker class="pickerWrap" bindchange="bindPickerChange" value="{{index}}" range-key="name" range="{{objectArray}}">
+          <view class="picker">
+            当前选择：{{objectArray[index].name}}
+          </view>
+        </picker> -->
+        <block wx:for="{{objectArray}}" wx:key="key" wx:for-index="idx">
+          <view catchtap="{{!item.disabled?'toggleTimeFun':''}}" data-id="{{item.id}}" class="formItemTime {{item.id == num?'active':''}} {{item.disabled?'disabled':''}}"> {{item.name}}</view>
+        </block>
+      </view>
+    </view>
+    
+    <!-- <view class="section">
+      <view class="section__title">普通选择器</view>
+      <picker bindchange="bindPickerChange" value="{{index}}" range-key="name" range="{{objectArray}}">
+        <view class="picker">
+          当前选择：{{objectArray[index].name}}
+        </view>
+      </picker>
+    </view> -->
+  </view>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <view class="bottomWrap">
+    <view class="bottomTxt">展会需凭本人身份证在绑定日期入场</view>
+    <view class="btn" catchtap="submit">
+      绑定
+    </view>
+  </view>
+</view>
 
 
 

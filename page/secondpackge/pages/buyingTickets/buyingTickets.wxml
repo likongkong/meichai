@@ -42,7 +42,7 @@
           <block wx:else>
               <view class="bTEveTwo {{tabTwoId==item.type?'borderBg':''}}" catchtap="tabObtainData" data-obtain='2' data-num='{{item.type}}' data-ind='{{index}}'>
                   <text style="margin-left:30rpx;">{{item.title}}</text>
-                  <text style="float:right;margin-right:15rpx;color:#E94F57;">￥{{item.price}}</text>
+                  <text style="float:right;margin-right:15rpx;color:#E94F57;"><block wx:if='{{item.stock<=0&&!item.isFillChance}}'>已售罄</block><block wx:else>￥{{item.price}}</block></text>
               </view>        
           </block>
       </block>
@@ -63,8 +63,8 @@
         <view wx:if="{{showSubscription}}" class="leafletBottomEve boxShadowEve" catchtap="subscrfun" style="width:400rpx;background:#eeae19;">
                 开售提醒 
         </view>  
-        <view wx:elif='{{isSubscribe}}' class="leafletBottomEve boxShadowEve" style="width:400rpx;line-height:35rpx;background:#ADADAD;">
-                <text style="line-height: 70rpx;display:block;padding-top:5rpx;">已售罄</text>
+        <view wx:elif='{{isSubscribe}}' class="leafletBottomEve boxShadowEve" style="width:400rpx;line-height:35rpx;{{tabTwoId==1?'background:#eeae19;':'background:#ADADAD;'}}">
+                <text style="line-height: 70rpx;display:block;padding-top:5rpx;" catchtap="{{tabTwoId==1?'subscrfun':''}}" >{{tabTwoId==1?'补票提醒':'已售罄'}}</text>
         </view>
         <view wx:else class="leafletBottomEve boxShadowEve" catchtap="{{buyNowOrOppor?'':'buyabframe'}}" style="width:400rpx;{{buyNowOrOppor?'background:#ADADAD':''}}">
                 <block wx:if='{{buyNowOrOppor}}'>有订单未支付，还有机会</block>

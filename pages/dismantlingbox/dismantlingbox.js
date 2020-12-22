@@ -43,11 +43,11 @@ Page({
     mapImgDisplay:false,
     iftrdetailpagetwo:false,
     shunButBarData:[
-      {name:'展会活动',tid:1},
-      {name:'线上潮玩展',tid:2},
-      {name:'票务信息',tid:3},
-      {name:'品牌合作',tid:4},
-      {name:'线下商品',tid:5}
+      {name:'购票',tid:1},
+      {name:'线上商品',tid:2},
+      {name:'线下商品',tid:3},
+      {name:'参展品牌',tid:4},
+      {name:'场馆地图',tid:5}
     ],
     // 获取手机号弹框
     havephoneiftr:false,
@@ -183,36 +183,30 @@ Page({
     }
   },
   jumpposition:function(w){
-    // var nowTime = new Date().getTime();
     wx.navigateTo({
       url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
     });
-    // console.log('nowTime=====',nowTime)
-    // if(isBuyingTickets && (nowTime/1000 > isBuyingTickets)){
-      
-    // } else {
+  },
+  position:function(w){
+      var tid = w.currentTarget.dataset.tid || w.target.dataset.tid || 0;
+      var query = wx.createSelectorQuery();
+      query.select('#e' + tid).boundingClientRect();
+      query.selectViewport().scrollOffset();
+      query.exec(function(res) {
+        if (res && res[0] && res[1]) {
+          wx.pageScrollTo({
+             scrollTop:( res[0].top+res[1].scrollTop-app.signindata.statusBarHeightMc||90 )-85,
+             duration:300
+          })
+        }
+      });
 
-    //   var tid = w.currentTarget.dataset.tid || w.target.dataset.tid || 0;
-
-    //   var query = wx.createSelectorQuery();
-    //   query.select('#e' + tid).boundingClientRect();
-    //   query.selectViewport().scrollOffset();
-    //   query.exec(function(res) {
-    //     if (res && res[0] && res[1]) {
-    //       wx.pageScrollTo({
-    //          scrollTop:( res[0].top+res[1].scrollTop-app.signindata.statusBarHeightMc||90 )-85,
-    //          duration:300
-    //       })
-    //     }
-    //   });
-
-    //   var subscribe_data = w.currentTarget.dataset.subscribe_data;
-    //   console.log(subscribe_data)
-    //   this.setData({
-    //     subscribedata:subscribe_data
-    //   })
-    //   app.comsubscribe(this)
-    // }
+      var subscribe_data = w.currentTarget.dataset.subscribe_data;
+      console.log(subscribe_data)
+      this.setData({
+        subscribedata:subscribe_data
+      })
+      app.comsubscribe(this)
   },
   displayDetail:function(w){
     wx.showLoading({title: '加载中...',})

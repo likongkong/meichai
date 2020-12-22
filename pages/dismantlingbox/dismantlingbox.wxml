@@ -19,7 +19,7 @@
    
 
     <!-- 票务信息 -->
-    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e3'>————— 票务信息 —————</view>
+    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e1'>————— 票务信息 —————</view>
     <view class="ticketWrap" data-subscribe_data="{{subscribeJson[1].toyshowTicket}}">
       <!-- arousesubscribeFun -->
       <view wx:if="{{goodsInfo.length!=0}}" class="addGoods" catchtap="jumpposition" style="margin-bottom:20rpx;">
@@ -128,7 +128,7 @@
     </block>   
 
     <!-- 线上 -->
-		<view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}' id='e3'>————— 线上 —————</view>
+		<view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}' id='e2'>————— 线上 —————</view>
     <view style="padding:0 15rpx 20rpx;overflow: hidden;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}'>
         <view class="ssubOnlinEve boxShadow" wx:for="{{goodsListOne.goodsList}}" wx:key="key" style="{{index%3==1?'margin:10rpx 30rpx;':''}}" >
            <image catchtap="jumpGoodsDetails" data-gid='{{item.goods_id}}' class="ssubOnliimg" src="{{item.goods_thumb}}" mode='aspectFit'></image>
@@ -154,7 +154,7 @@
 
 
     <!-- 线下 -->
-		<view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{goodsListTwo&&goodsListTwo.goodsList&&goodsListTwo.goodsList.length!=0}}' id='e5'>—————— 线下 ——————</view>
+		<view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{goodsListTwo&&goodsListTwo.goodsList&&goodsListTwo.goodsList.length!=0}}' id='e3'>—————— 线下 ——————</view>
     <view style="width:100%;overflow: hidden;" wx:if='{{goodsListTwo&&goodsListTwo.goodsList&&goodsListTwo.goodsList.length!=0}}'>
         <view class="ssubBilEve" wx:for="{{goodsListTwo.goodsList}}" wx:key="key" catchtap="jumpGoodsDetails" data-gid='{{item.goods_id}}'>
            <image class="ssubBiliimgs boxShadow" src="{{item.goods_thumb}}" mode='aspectFit'></image>
@@ -243,7 +243,7 @@
         </view>
     </view>
      <!-- 场馆地图 -->
-     <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;">—————— 场馆地图 ——————</view>
+     <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e5'>—————— 场馆地图 ——————</view>
     <view class="ssubBrandEveWrap" style="width:100%;overflow: hidden;padding:0 40rpx;box-sizing: border-box; display: flex;justify-content: center;align-items: center;">
         <view class="ssubBrandEve1">
           <image class="mapimg" src="https://cdn.51chaidan.com/images/toyShow3/siteImg.png" mode='aspectFit'></image>
@@ -383,9 +383,9 @@
 </view>
 
 <!-- 底部导航条 -->
-<!-- <view class="shunButBar">
-   <view class="shunButBarEve" wx:for='{{shunButBarData}}' wx:key='key' catchtap="jumpposition" data-tid='{{item.tid}}' style="{{index+1==shunButBarData.length?'border-right:0;':''}}">{{item.name}}</view>
-</view> -->
+<view class="shunButBar">
+   <view class="shunButBarEve" wx:for='{{shunButBarData}}' wx:key='key' catchtap="position" data-tid='{{item.tid}}' style="{{index+1==shunButBarData.length?'border-right:0;':''}}">{{item.name}}</view>
+</view>
 
 <bnavigation isChar='{{false}}' bind:run='auditversion' fashionShow='{{true}}' isProduce='{{isProduce}}'></bnavigation>
 
