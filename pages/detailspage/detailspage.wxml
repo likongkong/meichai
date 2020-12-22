@@ -135,7 +135,7 @@
               {{zunmdata.gname}}
             </view>
             <view class='dPrice' style="width:170rpx;float:left;padding-top:20rpx;">
-              <text style='font-size:30rpx;color:#000;font-weight:bold;color:#ff2742;'><text style='font-size:30rpx;'>{{zunmdata.gprice!=0?'￥':''}}</text>{{zunmdata.gprice!=0?zunmdata.gprice:'价格以线下展会为准'}}</text>
+              <text style='font-size:30rpx;color:#000;font-weight:bold;color:#ff2742;'><block wx:if='{{zunmdata.giftStock}}'>赠品</block><block wx:else><text style='font-size:30rpx;'>{{zunmdata.gprice!=0?'￥':''}}</text>{{zunmdata.gprice!=0?zunmdata.gprice:'价格以线下展会为准'}}</block></text>
             </view>
           </view>      
       </block>
@@ -148,7 +148,8 @@
             <image wx:if='{{zunmdata.isOverAllView}}' src='https://cdn.51chaidan.com//images/sign/panorama.png' catchtap="jumpDSIE" class="detailS3Dimg"></image>
             <text wx:if='{{zunmdata.is_suit==1}}' style='color:#ff2742;font-size:24rpx;margin-right:10rpx;'>{{zunmdata.suitName}}<text style='font-size:30rpx;'>{{zunmdata.unpackUnit}}</text></text>
             <text style='font-size:30rpx;color:#000;font-weight:bold;'><text style='font-size:30rpx;'>￥</text>{{zunmdata.gsale}}</text>
-            <text wx:if='{{zunmdata.gsale!=zunmdata.gprice}}' style='color: #959595;font-size: 24rpx;text-decoration:line-through;position: relative;top:3rpx;margin-left: 10rpx;'>{{zunmdata.gprice!=0?'￥'+zunmdata.gprice:'价格以线下展会为准'}}</text>
+            <text wx:if='{{zunmdata.giftStock}}'>赠品</text>
+            <text wx:elif='{{zunmdata.gsale!=zunmdata.gprice}}' style='color: #959595;font-size: 24rpx;text-decoration:line-through;position: relative;top:3rpx;margin-left: 10rpx;'>{{zunmdata.gprice!=0?'￥'+zunmdata.gprice:'价格以线下展会为准'}}</text>
           </view>
           <view class='dltityh' style='text-align:center;margin-bottom:10rpx;padding:12rpx 20rpx;position:relative;min-height:36rpx;'>
             <view class='dlyhnnimeMod' wx:for="{{zunmdata.gtag}}" wx:key="key">{{item}}</view>
@@ -165,7 +166,8 @@
         <image wx:if='{{zunmdata.isOverAllView}}' src='https://cdn.51chaidan.com//images/sign/panorama.png' catchtap="jumpDSIE" class="detailS3Dimg"></image>
         <text wx:if='{{zunmdata.is_suit==1}}' style='color:#ff2742;font-size:24rpx;margin-right:10rpx;'>{{zunmdata.suitName}}<text style='font-size:30rpx;'>{{zunmdata.unpackUnit}}</text></text>
         <text style='font-size:30rpx;color:#000;font-weight:bold;'><text style='font-size:30rpx;'>￥</text>{{zunmdata.gsale}}</text>
-        <text wx:if='{{zunmdata.gsale!=zunmdata.gprice}}' style='color: #959595;font-size: 24rpx;text-decoration:line-through;position: relative;top:3rpx;margin-left: 10rpx;'>{{zunmdata.gprice!=0?'￥'+zunmdata.gprice:'价格以线下展会为准'}}</text>
+        <text wx:if='{{zunmdata.giftStock}}'>赠品</text>
+        <text wx:elif='{{zunmdata.gsale!=zunmdata.gprice}}' style='color: #959595;font-size: 24rpx;text-decoration:line-through;position: relative;top:3rpx;margin-left: 10rpx;'>{{zunmdata.gprice!=0?'￥'+zunmdata.gprice:'价格以线下展会为准'}}</text>
       </view>
       <view class='dltityh' style='text-align:center;margin-bottom:10rpx;padding:12rpx 20rpx;position:relative;min-height:36rpx;'>
         <view class='dlyhnnimeMod' wx:for="{{zunmdata.gtag}}" wx:key="key">{{item}}</view>
@@ -223,23 +225,18 @@
 
   <!-- 线上线下 -->
   <view style="padding:34rpx 34rpx 34rpx 34rpx;box-sizing: border-box;background: #fff;margin-top:15rpx;">
-      <view style="display: flex;margin-bottom:10rpx;" wx:if="{{zunmdata.sellingWay}}"> 
-        <view style="width:140rpx;font-size:30rpx">发售方式 :</view> 
-        <view style="display: flex;align-items: center;"> 
-          <text style="font-size:30rpx"> {{zunmdata.sellingWay == 0?'线上发售':''}} {{zunmdata.sellingWay == 2?'线上发售 、展会现场发售':''}}{{zunmdata.sellingWay == 1?'展会现场发售':''}}</text>
-        </view>
-      </view>
-      <view style="display: flex;margin-bottom:10rpx;" wx:if="{{zunmdata.toyshowPositionNo}}"> sellingWay
+      <view style="display: flex;margin-bottom:10rpx;" wx:if="{{zunmdata.toyshowPositionNo}}">
         <view style="width:140rpx;font-size:30rpx">展位号 :</view> 
         <view style="display: flex;align-items: center;"> 
           <text style="font-size:30rpx">{{zunmdata.toyshowPositionNo}}</text>
         </view>
       </view>
-      <view style="display: flex;margin-bottom:10rpx;" wx:if="{{zunmdata.stockOnLine || zunmdata.stockOffLine}}"> 
+      <view style="display: flex;margin-bottom:10rpx;" wx:if="{{zunmdata.stockOnLine || zunmdata.stockOffLine || zunmdata.giftStock}}"> 
         <view style="width:140rpx;font-size:30rpx">发售数量 :</view> 
         <view style=""> 
-          <text style="display:block;font-size:30rpx" wx:if="{{zunmdata.stockOnLine}}">线上发售{{zunmdata.stockOnLine}}体</text>
-          <text style="display:block;font-size:30rpx" wx:if="{{zunmdata.stockOffLine}}">展会发售{{zunmdata.stockOffLine}}体</text>
+          <text style="display:block;font-size:30rpx" wx:if='{{zunmdata.giftStock}}'>{{zunmdata.giftStock}}</text>
+          <text style="display:block;font-size:30rpx" wx:elif="{{zunmdata.stockOnLine}}">线上展会发售{{zunmdata.stockOnLine}}体</text>
+          <text style="display:block;font-size:30rpx" wx:elif="{{zunmdata.stockOffLine}}">线下展会发售{{zunmdata.stockOffLine}}体</text>
         </view>
       </view> 
   </view>
@@ -630,12 +627,12 @@
       </block>
       
       <block wx:if="{{zunmdata.sellingWay == 2}}">
-          <view bindtap='jumpMapFun' style="width:160rpx; height:60rpx;margin-top:9rpx;padding:0;margin-right:20rpx;background:#E94F57;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;font-size: 24rpx;float:right;">专属展会地图</view>
+          <view bindtap='jumpMapFun' class="boxShadowEve" style="width:160rpx; height:60rpx;margin-top:9rpx;padding:0;margin-right:20rpx;background:#E94F57;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;font-size: 24rpx;float:right;">专属展会地图</view>
       </block>
     </block>
     <block wx:else> 
-      <view class="footer-child large" bindtap='jumpMapFun' style='box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:400rpx;float:right;background:#32ACFB'>
-        <view style='width:100%;height:100%;text-align:center;line-height:60rpx;font-size:28rpx;color:#fff;'>定制专属地图</view>
+      <view class="footer-child large boxShadowEve" bindtap='jumpMapFun' style='box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:400rpx;float:right;background:#E94F57;'>
+        <view style='width:100%;height:100%;text-align:center;line-height:60rpx;font-size:28rpx;color:#fff;'>专属展会地图</view>
       </view>
     </block>
 	</view>
