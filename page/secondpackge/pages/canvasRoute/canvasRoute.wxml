@@ -3,35 +3,35 @@
 
 <poster id="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail"></poster>
 
-<image class="canTopImg boxShadowEve" catchtap="previewImg" mode='widthFix' src="https://cdn.51chaidan.com/images/toyShow3/zhanhuiditu.png"></image>
+<image class="canTopImg boxShadowEve" mode='widthFix' src="https://cdn.51chaidan.com/images/toyShow3/zhanhuiditu.png"></image>
 
 <view class="elsearch">
     <view class="elsearchch">
         <image class="elserarchimg" catchtap="jumpsearch" src="https://www.51chaidan.com/images/toyCabinet/search.png"></image>
-        <input class="elinputbut" bindfocus='onFocus' placeholder='请输入品牌名称搜索' bindinput="inputChange" bindconfirm="jumpsearch" value="{{brand_name}}"></input>
+        <input class="elinputbut" placeholder='请输入品牌名称搜索' bindinput="inputChange" bindconfirm="jumpsearch" value="{{brand_name}}"></input>
         <view class="elserbotom" catchtap="jumpsearch">搜索</view>
     </view>
 </view>
 
 <view class="cvBox">
-   <view class="cvBConExhibi">联展区</view>
+   <!-- <view class="cvBConExhibi">联展区</view> -->
    <block wx:for='{{listdata}}' wx:key='key'>
-       <view class="cvBoxEve">
+       <view class="cvBoxEve" catchtap="identitysel" data-ind='{{index}}'>
+           <view class="cvShNum">{{item.boothNumber}}</view>
+           <view class="cvShNameLogo specialellipsis">{{item.name}}<image mode='aspectFit' class="cvShNameLogB" src="{{item.logo}}"></image></view>           
+           <image class="ididentisel" src="{{item.isCheck?'https://cdn.51chaidan.com/images/calendar/select.png':'https://cdn.51chaidan.com/images/calendar/case.png'}}"></image>
+
+       </view>
+   </block>
+   <!-- <view class="cvBConExhibi">手作区</view>
+   <block wx:for='{{listdata}}' wx:key='key'>
+       <view class="cvBoxEve" catchtap="identitysel" data-ind='{{index}}'>
            <view class="cvShNum">{{item.boothNumber}}</view>
            <view class="cvShName specialellipsis">{{item.name}}</view>           
            <image catchtap="identitysel" data-ind='{{index}}' class="ididentisel" src="{{item.isCheck?'https://cdn.51chaidan.com/images/calendar/select.png':'https://cdn.51chaidan.com/images/calendar/case.png'}}"></image>
 
        </view>
-   </block>
-   <view class="cvBConExhibi">手作区</view>
-   <block wx:for='{{listdata}}' wx:key='key'>
-       <view class="cvBoxEve">
-           <view class="cvShNum">{{item.boothNumber}}</view>
-           <view class="cvShName specialellipsis">{{item.name}}</view>           
-           <image catchtap="identitysel" data-ind='{{index}}' class="ididentisel" src="{{item.isCheck?'https://cdn.51chaidan.com/images/calendar/select.png':'https://cdn.51chaidan.com/images/calendar/case.png'}}"></image>
-
-       </view>
-   </block>
+   </block> -->
 
 </view> 
 
@@ -45,10 +45,10 @@
 <view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight}}px;width: 100%;z-index: 130;'  catchtap='pullupsignin'></view>
 
 <!-- 保存图片 -->
-<view class="wsh" wx:if='{{showPictures}}'>
+<view class="wsh" wx:if='{{showPictures}}' catchtouchmove="true">
     <view class="tgimgboxgb" catchtap="showPicturesFun"></view>
     <view class="cvSavePicture">
-        <image class="cvSavePicImg" mode='aspectFit' src="{{savepic}}"></image>
+        <image class="cvSavePicImg" mode='aspectFit' catchtap="previewImg" src="{{savepic}}"></image>
         <view class="cvSavePicButcom" style="left:16rpx;background: #E94F57;color:#fff;width: 255rpx;">分享<button style='width:100%;height:100%;position:absolute;top:0;right:0;opacity:0;' open-type='share'></button></view>
         <view class="cvSavePicButcom" style="right:16rpx;background: #E94F57;color:#fff;width: 255rpx;" catchtap="savetoA">保存地图</view>
         <!-- <view class="cvSavePicBut boxShadowEve" catchtap="savetoA">保存图片</view> -->
@@ -56,10 +56,10 @@
 </view>
 
 <!-- 确认选中展商 -->
-<view class="wsh" wx:if='{{selectDataTip}}'>
+<view class="wsh" wx:if='{{selectDataTip}}' catchtouchmove="true">
     <view class="tgimgboxgb" catchtap="seltDatTipFun"></view>
     <view class="cvShopSelData">
-        <view class="cvShSeDaHe">已选择{{selectData.length}}个品牌</view>
+        <view class="cvShSeDaHe">生成逛展专属地图 已选择{{selectData.length}}个品牌</view>
         <scroll-view class="cvSavePicImg" style="height:520rpx;" scroll-y="true">
             <view class="cvShSelDaEve" wx:for='{{selectData}}' wx:key='key'>
                 <view class="cvShNum">{{item.boothNumber}}</view>
@@ -72,6 +72,7 @@
             </view>
         </scroll-view>
         <view class="cvSavePicButcom boxShadowEve"  catchtap="seltDatTipFun" style="left:46rpx;border: 2rpx solid #BBBBBB;">返回</view>
-        <view class="cvSavePicButcom boxShadowEve" catchtap="genExPictures" style="right:46rpx;background: #E94F57;color:#fff;">生成专属地图</view>
+        <view class="cvSavePicButcom boxShadowEve" catchtap="genExPictures" style="right:46rpx;background: #E94F57;color:#fff;">生成地图(已选品牌:{{selectData.length}})</view>
+        
     </view>
 </view>

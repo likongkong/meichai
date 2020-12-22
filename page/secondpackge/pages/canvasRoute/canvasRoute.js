@@ -45,7 +45,8 @@ Page({
     selectData:[],
     selectDataTip:false,
     coordArr:[],
-    showPictures:false
+    showPictures:false,
+    brand_name:'',
   },
   showPicturesFun:function(){
     this.setData({
@@ -60,9 +61,13 @@ Page({
   },
   // input 值改变
   inputChange: function (e) {
+    console.log(e.detail.value)
     this.setData({
       brand_name: e.detail.value
     });
+    if(e.detail.value == ''){
+      this.jumpsearch();
+    }
   },
   seltDatTipFun:function(){
     this.setData({
@@ -117,32 +122,53 @@ Page({
 
     var ind = w.currentTarget.dataset.ind || 0;
     var listdata = this.data.listdata || []; 
+    var selectData = this.data.selectData;
     if(listdata[ind].isCheck){
       listdata[ind].isCheck = false;
+      for(var i=0; i<selectData.length; i++){
+        if(selectData[i].id == listdata[ind].id){
+          selectData.splice(i,1);
+        };
+     };    
     }else{
       listdata[ind].isCheck = true;
     };
-    var selectData = [];
+    
     for(var i=0; i<listdata.length; i++){
        if(listdata[i].isCheck){
-        selectData.push(listdata[i])
+         selectData.push(listdata[i])
        };
     };
+    selectData = this.distinct(selectData)
     this.setData({
       listdata:listdata,
       selectData:selectData
     });    
 
   },
-
+  //  数组去重
+  distinct:function(arr){
+    var arr = arr,i,j,len = arr.length;
+    for(i = 0; i < len; i++){
+        for(j = i + 1; j < len; j++){
+          if (arr[i].id == arr[j].id){
+              arr.splice(j,1);
+              len--;
+              j--;
+          }
+        }
+    }
+    return arr;
+  },
   dataProc:function(arr){
     var arra = [];
     for( var i=0 ; i < arr.length ; i++ ){
        if(i!=(arr.length-1)){
          arra.push({
-           'start':arr[i],
-           'end':arr[i+1]
-         })
+           'start':arr[i].arr,
+           'end':arr[i+1].arr,
+           'boothNumber':arr[i+1].boothNumber
+         });
        }
     };
     return arra;
@@ -153,9 +179,15 @@ Page({
   // 图片预览
   previewImg: function (w) {
     var _this = this;
+    var ind = w.currentTarget.dataset.ind || 0;
+    if(ind == 1){
+      var imgUrl = 'https://cdn.51chaidan.com/images/toyShow3/zhanhuiditu.png';
+    }else{
+      var imgUrl = _this.data.savepic;
+    };
     wx.previewImage({
-      current:_this.data.savepic,     //当前图片地址
-      urls: [_this.data.savepic],               //所有要预览的图片的地址集合 数组形式
+      current:imgUrl,     //当前图片地址
+      urls: [imgUrl],               //所有要预览的图片的地址集合 数组形式
       success: function (res) { },
       fail: function (res) { },
       complete: function (res) { },
@@ -167,10 +199,15 @@ Page({
      var _this = this;
      var selectData = _this.data.selectData || [];
      if(selectData && selectData.length != 0){
-        var coordArr = [[50,62]];
+        var coordArr = [{arr:[50,53],boothNumber:''}];
         //  var busCoorArr = [[50,62],[6,6],[41,27],[41,46],[30,69],[6,89],[7,116],[29,118],[8,56],[8,68]];
         for(var i=0;i<selectData.length;i++){
-            coordArr.push(selectData[i].coordinate)
+            if(selectData[i].coordinate){
+              coordArr.push({
+                arr:selectData[i].coordinate,
+                boothNumber:selectData[i].boothNumber
+              });
+            };
         };
         _this.setData({
             coordArr:coordArr
@@ -195,8 +232,8 @@ Page({
     var offset_box = (width - lineWidth) / 2;
     var lineColor = ['red'];
     // 偏移量
-    var offset_x = 610 + offset_box;
-    var offset_y = 655 + offset_box;
+    var offset_x = 812 + offset_box;
+    var offset_y = 672 + offset_box;
 
     var start = '';
     var end = '';  
@@ -208,7 +245,7 @@ Page({
     var busCoorArr = that.data.coordArr;
    
    for(var m=0;m<busCoorArr.length;m++){
-      var bcr = busCoorArr[m];
+      var bcr = busCoorArr[m].arr;
       map_data[bcr[0]][bcr[1]] = 1;
    };
 
@@ -293,8 +330,13 @@ Page({
               borderRadius: 36,
               // boxSetShadow:{a:10,b:10,c:10,d:'#e0e0e0'}
             });
+            if(a<10){
+                var left_x = lineArrEve[lineArrEve.length-1].endX-6;
+            }else{
+                var left_x = lineArrEve[lineArrEve.length-1].endX-13;
+            }
             texts.push({
-                x: lineArrEve[lineArrEve.length-1].endX-6,
+                x:left_x,
                 y: lineArrEve[lineArrEve.length-1].endY,
                 baseLine: 'middle',
                 text:a+1,
@@ -303,6 +345,7 @@ Page({
                 color: '#fff',
                 zIndex: 6,
             });
+
         };
         lineArr = lineArr.concat(lineArrEve);
     };
@@ -312,8 +355,8 @@ Page({
     // setData配置数据
     that.setData({
       posterConfig: {
-        width: 3708,
-        height: 2386,
+        width: 3758,
+        height: 2415,
         debug: false,
         // pixelRatio: 1000,
         preload: false,
@@ -325,10 +368,19 @@ Page({
         images: [{
           x:0,
           y:0,
-          url: 'https://cdn.51chaidan.com/images/toyShow3/zhanhuiditu.png',
-          width: 3708,
-          height: 2386,
+          url: 'https://cdn.51chaidan.com/images/toyShow3/zhanhuiditu.png?time=',
+          width: 3758,
+          height: 2415,
           zIndex: 1,
+          borderRadius:0,
+        },
+        {
+          x:200,
+          y:1800,
+          url: 'https://cdn.51chaidan.com/images/toyShow3/toyShowList.jpg?time=' + that.data.appNowTime,
+          width: 400,
+          height: 400,
+          zIndex: 2,
           borderRadius:0,
         }]
       }
@@ -549,9 +601,13 @@ Page({
         title: '加载中...',
         mask:true
       })
-      var qqq = Dec.Aese('mod=wtb&operation=getInfo&id=' + _this.data.id +'&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
+
+      var qqq = Dec.Aese('mod=subscription&operation=showBrandCoordinate&searchKey=' + _this.data.brand_name +'&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
+
+      console.log('mod=subscription&operation=showBrandCoordinate&searchKey=' + _this.data.brand_name +'&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+
       wx.request({
-        url: app.signindata.comurl + 'spread.php' + qqq,
+        url: app.signindata.comurl + 'toy.php' + qqq,
         method: 'GET',
         header: {'Accept': 'application/json'},
         success: function (res) {
@@ -559,9 +615,21 @@ Page({
           wx.stopPullDownRefresh();
           console.log('展会列表===',res)
           if (res.data.ReturnCode == 200) {
-            // _this.setData({
-            //     listdata:res.data.map_data || []
-            // });
+
+            var selectData = _this.data.selectData || [];
+            var listdata = res.data.List.shareInfo || [];
+            if(selectData && selectData.length !=0 && listdata && listdata.length !=0){
+              for(var i=0 ;i<selectData.length;i++){
+                 for(var j=0 ; j<listdata.length;j++){
+                   if(selectData[i].id == listdata[j].id){
+                      listdata[j].isCheck = true;
+                   };
+                 };
+              };
+            };
+            _this.setData({
+                listdata:listdata || []
+            });
           }else{
             _this.comshowmodal(res.data.Msg)
           };
@@ -573,7 +641,7 @@ Page({
     wx.showLoading({
       title: '加载中...',
       mask:true
-    })
+    });
     // 展会商家数据
     wx.request({
       url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/toyShowBoothInfo.json?time='+_this.data.appNowTime,
@@ -583,8 +651,20 @@ Page({
         wx.hideLoading();
         wx.stopPullDownRefresh();
         console.log('展会商家数据===',res)
+        var selectData = _this.data.selectData || [];
+        var listdata = res.data || [];
+        if(selectData && selectData.length !=0 && listdata && listdata.length !=0){
+          for(var i=0 ;i<selectData.length;i++){
+             for(var j=0 ; j<listdata.length;j++){
+               if(selectData[i].id == listdata[j].id){
+                  listdata[j].isCheck = true;
+               };
+             };
+          };
+        };
+
         _this.setData({
-          listdata:res.data || []
+          listdata:listdata || []
         });
       }
     });    
@@ -629,11 +709,10 @@ Page({
   onShareAppMessage: function (options) {
     var _this = this
     return {
-      title: '潮玩路径',
-      imageUrl:_this.data.savepic || '',
+      title: '我在美拆生成了专属逛展地图，你也快来生成专属于自己的逛展地图吧',
+      imageUrl:'https://cdn.51chaidan.com/images/toyShow3/mapShare.jpg',
       success: function (res) {}
     }  
   },
-
 
 })
