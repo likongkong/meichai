@@ -168,9 +168,9 @@
     </view> -->
 
 
-    <!-- 展会活动 -->
+    <!-- 展会日历 -->
     <view class="calendarActivityWrap">
-      <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e1'>———— 展会活动 ————</view>
+      <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e1'>———— 展会日历 ————</view>
       <!-- <block>
         <view class="countdownWrap" catchtouchmove="true">
           <view style="background:#F3F4F4;"> 
@@ -353,7 +353,7 @@
 </view>	
 
 <!-- 手机号授权   -->
-<!-- <view class='wsh' wx:if='{{havephoneiftr}}' style="z-index:999;" catchtouchmove="true">
+<view class='wsh' wx:if='{{havephoneiftr}}' style="z-index:999;" catchtouchmove="true">
     <view class='tgimgboxgb' catchtap="havephoneiftrfun"></view>
     <view class='awatipbox'>
         <view class='awatiphead' catchtap="awasustipimages">提示</view>
@@ -363,7 +363,7 @@
             <view class='awatipbotright' style="color:#42bd56;position:relative;"><button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" class='butgetnum'></button>确定</view>
         </view>
     </view>		
-</view>	 -->
+</view>	
 
 <!-- 商品详情 -->
 <view  class='wsh' wx:if='{{iftrdetailpagetwo}}' catchtouchmove="true">

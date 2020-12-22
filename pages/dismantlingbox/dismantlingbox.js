@@ -110,7 +110,7 @@ Page({
   　　})
   },
   havephoneiftrfun:function(){
-    // this.setData({havephoneiftr:!this.data.havephoneiftr});
+    this.setData({havephoneiftr:!this.data.havephoneiftr});
   },
   // 获取手机号
   getPhoneNumber: function(e) {
@@ -153,7 +153,7 @@ Page({
             isMobileAuth:true
           });
           if(_this.data.isShareOrSub){
-            // _this.shareExhBen();
+            _this.shareExhBen();
           }
           app.showToastC(res.data.Msg||'');
         }else{
@@ -874,16 +874,16 @@ brandJson:function(){
      var _this = this;
      if(_this.data.referee&&_this.data.uid&&_this.data.referee!=_this.data.uid){
         if(_this.data.isMobileAuth){
-          // _this.shareExhBen();             
+          _this.shareExhBen();             
         }else{
           _this.data.isShareOrSub = true;
-          // _this.havephoneiftrfun();
+          _this.havephoneiftrfun();
           // 展会福利
-          // _this.exhibitionBenefits();
+          _this.exhibitionBenefits();
         };
      }else{
         // 展会福利
-        // _this.exhibitionBenefits();
+        _this.exhibitionBenefits();
      };
   },
   // 商品信息 type 1为线上 2为blibli 3为直播
