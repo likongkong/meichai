@@ -244,11 +244,14 @@
     </view>
      <!-- 场馆地图 -->
      <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;">—————— 场馆地图 ——————</view>
-    <view class="ssubBrandEveWrap" style="width:100%;overflow: hidden;padding:0 40rpx;box-sizing: border-box; display: flex;justify-content: center;align-items: center;">
-        <view class="ssubBrandEve1">
-          <image class="mapimg" src="https://cdn.51chaidan.com/images/toyShow3/siteImg.png" mode='aspectFit'></image>
-        </view>
+     
+    <image catchtap="jumpcanvasRoute" style="width:670rpx;display:block;margin:0 auto 0;" src="https://cdn.51chaidan.com/images/toyShow3/zhanhuiditu.png" mode='widthFix'></image>
+    <view class="drawBtn">
+      <view catchtap="jumpcanvasRoute" style="width:100%;">制作观展专属地图</view>
     </view>
+
+    <image style="width:670rpx;display:block;margin:0 auto 0;" src="https://cdn.51chaidan.com/images/toyShow3/siteImg.png"  mode='widthFix'></image> 
+
     <!-- 主办 -->
     <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;">——————— 主办 ———————</view>
     <view class="ssubBrandEveWrap" style="width:100%;overflow: hidden;padding:0 40rpx;box-sizing: border-box; display: flex;justify-content: center;align-items: center;">

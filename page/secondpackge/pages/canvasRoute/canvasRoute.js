@@ -32,7 +32,7 @@ Page({
     // 授权弹框
     tgabox: false,
 
-    c_title: '潮玩路径',
+    c_title: '专属逛展地图',
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
@@ -232,8 +232,8 @@ Page({
     var offset_box = (width - lineWidth) / 2;
     var lineColor = ['red'];
     // 偏移量
-    var offset_x = 812 + offset_box;
-    var offset_y = 672 + offset_box;
+    var offset_x = 792 + offset_box;
+    var offset_y = 662 + offset_box;
 
     var start = '';
     var end = '';  
@@ -355,8 +355,8 @@ Page({
     // setData配置数据
     that.setData({
       posterConfig: {
-        width: 3758,
-        height: 2415,
+        width: 3712,
+        height: 2400,
         debug: false,
         // pixelRatio: 1000,
         preload: false,
@@ -368,9 +368,9 @@ Page({
         images: [{
           x:0,
           y:0,
-          url: 'https://cdn.51chaidan.com/images/toyShow3/zhanhuiditu.png?time=',
-          width: 3758,
-          height: 2415,
+          url: 'https://cdn.51chaidan.com/images/toyShow3/zhanhuiditu.png?time=1',
+          width: 3712,
+          height: 2400,
           zIndex: 1,
           borderRadius:0,
         },

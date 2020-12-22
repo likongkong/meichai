@@ -87,6 +87,12 @@ Page({
       url: "/page/secondpackge/pages/calendarList/calendarList"
     })
   },
+  // 跳转生成地图页面
+  jumpcanvasRoute(){
+    wx.navigateTo({ 
+      url: "/page/secondpackge/pages/canvasRoute/canvasRoute"
+    });
+  },
   //获取swiper高度
   getHeight: function (e) {
   　　var winWid = wx.getSystemInfoSync().windowWidth - 2 * 30;//获取当前屏幕的宽度
