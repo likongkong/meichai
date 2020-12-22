@@ -123,7 +123,7 @@
         </view> 
         <view style="position: relative;">
           <image class="punchImgWxShare" src="https://cdn.51chaidan.com/images/icon/iconShareWX.png"><button open-type="share"  style='position:absolute;height:100%;width:100%;left:0;top:0;z-index:3;opacity:0;'></button></image>
-           <view class="clockInIns" catchtap="mapImgDisplayfun">{{giftInfo.titleIntroduce}}</view>
+           <!-- <view class="clockInIns" catchtap="mapImgDisplayfun">{{giftInfo.titleIntroduce}}</view> -->
         </view>
     </block>   
 
