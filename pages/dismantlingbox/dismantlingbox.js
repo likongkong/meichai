@@ -220,10 +220,8 @@ Page({
       this.setData({
         iftrdetailpagetwo:true
       })
-
     }
     wx.hideLoading()
-
   },
   iftrdetailpageb:function(){
     this.setData({iftrdetailpagetwo:false});
@@ -437,7 +435,7 @@ Page({
     // _this.liveList(1);
 
 
-    // _this.exhibitionBenefits();
+    _this.exhibitionBenefits();
 
     // //  收货地址
     // _this.nextpagediao();
