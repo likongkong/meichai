@@ -235,13 +235,7 @@
         </swiper-item>
       </swiper>
     </view>
-    <!-- 品牌合作 -->
-		<view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e4' wx:if='{{brandList&&brandList.length!=0}}'>—————— 参展品牌 ——————</view>
-    <view class="ssubBrandEveWrap" style="width:100%;overflow: hidden;padding:0 40rpx;box-sizing: border-box;" wx:if='{{brandList&&brandList.length!=0}}'>
-        <view class="ssubBrandEve" wx:for="{{brandList}}" wx:key="key">
-           <image class="ssubBiliimgbr" src="{{item.brandLogo}}" mode='aspectFit'></image>
-        </view>
-    </view>
+
      <!-- 场馆地图 -->
     <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e5'>—————— 场馆地图 ——————</view>
      
@@ -249,7 +243,15 @@
     <view class="drawBtn">
       <view catchtap="jumpcanvasRoute" style="width:100%;">制作观展专属地图</view>
     </view>
-    <image style="width:670rpx;display:block;margin:0 auto 0;" src="https://cdn.51chaidan.com/images/toyShow3/siteImg.png"  mode='widthFix'></image> 
+    <image style="width:670rpx;display:block;margin:0 auto 0;" src="https://cdn.51chaidan.com/images/toyShow3/siteImg.png"  mode='widthFix'></image>
+
+    <!-- 品牌合作 -->
+		<view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e4' wx:if='{{brandList&&brandList.length!=0}}'>—————— 参展品牌 ——————</view>
+    <view class="ssubBrandEveWrap" style="width:100%;overflow: hidden;padding:0 40rpx;box-sizing: border-box;" wx:if='{{brandList&&brandList.length!=0}}'>
+        <view class="ssubBrandEve" wx:for="{{brandList}}" wx:key="key">
+           <image class="ssubBiliimgbr" src="{{item.brandLogo}}" mode='aspectFit'></image>
+        </view>
+    </view> 
 
     <!-- 主办 -->
     <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;">——————— 主办 ———————</view>
