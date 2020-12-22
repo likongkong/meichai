@@ -221,7 +221,7 @@ Page({
     var that = this;
 
     wx.showLoading({
-      title: '加载中...',
+      title: '生成中...',
       mask:true
     })
     
