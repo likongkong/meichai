@@ -63,7 +63,7 @@ page {
   font-size: 24rpx;
   color:#298DF8;
   margin-right: 25rpx;
-  width: 75rpx;
+  width: 135rpx;
 }
 .cvShName{
   height: 60rpx;
@@ -71,9 +71,28 @@ page {
   float: left;
   font-size: 24rpx;
   color:#000;
-  max-width: 280rpx;
+  max-width: 220rpx;
 }
-
+.cvShNameLogo{
+  height: 60rpx;
+  line-height: 60rpx;
+  float: left;
+  font-size: 24rpx;
+  color:#000;
+  max-width: 220rpx;
+  position: relative;
+  padding-left: 60rpx;
+}
+.cvShNameLogB{
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  left: 10rpx;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border-radius: 8rpx;
+}
 .cvSavePicture{
   width:600rpx;
   height: 700rpx;

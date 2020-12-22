@@ -66,7 +66,7 @@
 						</view>
 					</view>
 					<view style="width:100%;height:46rpx;">
-						<image class="exhshopimg" src="{{item.brandLogo}}"></image>
+						<image class="exhshopimg" mode='aspectFit' src="{{item.brandLogo}}"></image>
 						<view class="specialellipsis" style="width:160rpx;height:46rpx;line-height:46rpx;font-size:22rpx;float:left;margin-left:10rpx;">{{item.brandName}}</view>
 						<view wx:if='{{item.tags.length>0}}' class="exhshoptiright specialellipsis">{{item.tags[0]}}</view>
 					</view>
@@ -283,7 +283,7 @@
 					<view class='specialellipsis' style="width:94%;line-height:30rpx;text-align:left;font-size:26rpx;margin:0 3%;">{{item.name}}</view>
 
 					<view style="height:46rpx;padding:0rpx 10rpx;margin-top:10rpx;">
-						<image class="exhshopimg" src="{{item.brandLogo}}"></image>
+						<image class="exhshopimg" mode='aspectFit' src="{{item.brandLogo}}"></image>
 						<view class="specialellipsis" style="width:160rpx;height:46rpx;line-height:46rpx;font-size:22rpx;float:left;margin-left:10rpx;">{{item.brandName}}</view>
 						<view style="float:right;line-height:46rpx;font-size:25rpx;margin-left:10rpx;color:#d64650;">
 							<text style="font-size:20rpx;">￥</text>{{item.shopPrice}}</view>
@@ -356,7 +356,7 @@
 			<view class='specialellipsis' style="width:94%;line-height:30rpx;text-align:left;font-size:26rpx;margin:0 3%;">{{item.name}}</view>
 
 			<view style="height:46rpx;padding:0rpx 10rpx;margin-top:10rpx;">
-				<image class="exhshopimg" src="{{item.brandLogo}}"></image>
+				<image class="exhshopimg" mode='aspectFit' src="{{item.brandLogo}}"></image>
 				<view class='specialellipsis' style="width:140rpx;height:46rpx;line-height:46rpx;font-size:22rpx;float:left;margin-left:10rpx;">{{item.brandName}}</view>
 				<view wx:if='{{item.status == 1}}' style="float:right;line-height:46rpx;font-size:25rpx;margin-left:10rpx;color:#d64650;">{{item.start}}开始</view>
 				<view wx:if='{{item.status == 2 && item.isSign}}' style="float:right;line-height:46rpx;font-size:25rpx;margin-left:10rpx;color:#31b3fb;">已报名</view>
