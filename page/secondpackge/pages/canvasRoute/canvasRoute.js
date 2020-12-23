@@ -167,7 +167,7 @@ Page({
          arra.push({
            'start':arr[i].arr,
            'end':arr[i+1].arr,
-           'boothNumber':arr[i+1].boothNumber
+           'logo':arr[i+1].logo
          });
        }
     };
@@ -199,13 +199,13 @@ Page({
      var _this = this;
      var selectData = _this.data.selectData || [];
      if(selectData && selectData.length != 0){
-        var coordArr = [{arr:[50,53],boothNumber:''}];
+        var coordArr = [{arr:[50,53],logo:''}];
         //  var busCoorArr = [[50,62],[6,6],[41,27],[41,46],[30,69],[6,89],[7,116],[29,118],[8,56],[8,68]];
         for(var i=0;i<selectData.length;i++){
             if(selectData[i].coordinate){
               coordArr.push({
                 arr:selectData[i].coordinate,
-                boothNumber:selectData[i].boothNumber
+                logo:selectData[i].logo || ''
               });
             };
         };
@@ -265,7 +265,34 @@ Page({
     var lineArrEve = [];
     // 终点圆形
     var blocks = [];
-    var texts = [];
+    var texts = [{
+        x:150,
+        y:2182 ,
+        baseLine: 'middle',
+        text:'生成你的专属地图',
+        fontSize: 52,
+        textAlign: 'left',
+        color: '#fff',
+        zIndex:5,
+    }];
+    // 图片
+    var imgArr = [{
+      x:0,
+      y:0,
+      url: 'https://cdn.51chaidan.com/images/toyShow3/zhanhuiditu.png?time=1',
+      width: 3712,
+      height: 2400,
+      zIndex: 1,
+      borderRadius:0,
+    },{
+      x:152,
+      y:1732,
+      url: 'https://cdn.51chaidan.com/images/toyShow3/toyShowList.jpg?time=' + that.data.appNowTime,
+      width: 400,
+      height: 400,
+      zIndex: 2,
+      borderRadius:0,
+    }];
     for(var a=0 ; a < arrData.length ; a++){
 
         console.log([arrData[a].start[0]],[arrData[a].start[1]],[arrData[a].end[0]],[arrData[a].end[1]])
@@ -317,7 +344,9 @@ Page({
             })
           };
         };
+
         console.log(lineArrEve)
+
         if(lineArrEve&&lineArrEve.length!=0){
             // 圆球
             blocks.push({
@@ -330,7 +359,7 @@ Page({
               borderRadius: 36,
               // boxSetShadow:{a:10,b:10,c:10,d:'#e0e0e0'}
             });
-            if(a<10){
+            if((a+1)<10){
                 var left_x = lineArrEve[lineArrEve.length-1].endX-6;
             }else{
                 var left_x = lineArrEve[lineArrEve.length-1].endX-13;
@@ -343,8 +372,19 @@ Page({
                 fontSize: 24,
                 textAlign: 'left',
                 color: '#fff',
-                zIndex: 6,
+                zIndex:5,
             });
+            if(arrData[a].logo){
+              imgArr.push({
+                x:parseInt(lineArrEve[lineArrEve.length-1].endX)-51,
+                y:parseInt(lineArrEve[lineArrEve.length-1].endY)-51,
+                url: arrData[a].logo,
+                width: 40,
+                height: 40,
+                zIndex: 6,
+                borderRadius:10,
+              })
+            }
 
         };
         lineArr = lineArr.concat(lineArrEve);
@@ -365,24 +405,7 @@ Page({
         blocks: blocks,
         lines:lineArr,
         texts:texts,
-        images: [{
-          x:0,
-          y:0,
-          url: 'https://cdn.51chaidan.com/images/toyShow3/zhanhuiditu.png?time=1',
-          width: 3712,
-          height: 2400,
-          zIndex: 1,
-          borderRadius:0,
-        },
-        {
-          x:200,
-          y:1800,
-          url: 'https://cdn.51chaidan.com/images/toyShow3/toyShowList.jpg?time=' + that.data.appNowTime,
-          width: 400,
-          height: 400,
-          zIndex: 2,
-          borderRadius:0,
-        }]
+        images: imgArr
       }
     }, () => {
       Poster.create();
@@ -600,7 +623,7 @@ Page({
       wx.showLoading({
         title: '加载中...',
         mask:true
-      })
+      });
 
       var qqq = Dec.Aese('mod=subscription&operation=showBrandCoordinate&searchKey=' + _this.data.brand_name +'&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
 

@@ -178,15 +178,15 @@ App({
                     }else if(num>=10){
                       num = '0'+num.toString()
                     };       
-                    // // 接口地址  
-                    // _this.signindata.comurl = 'https://api-slb.51chaidan.com/'+num+'/';
-                    // // 发现地址
-                    // _this.signindata.clwcomurl = 'https://clw-slb.51chaidan.com/'+num+'/';
-
-                    // 接口地址  208
-                    _this.signindata.comurl = 'https://api.51chaidan.com/';
+                    // 接口地址  
+                    _this.signindata.comurl = 'https://api-slb.51chaidan.com/'+num+'/';
                     // 发现地址
-                    _this.signindata.clwcomurl = 'https://clw.51chaidan.com/';
+                    _this.signindata.clwcomurl = 'https://clw-slb.51chaidan.com/'+num+'/';
+
+                    // // 接口地址  208
+                    // _this.signindata.comurl = 'https://api.51chaidan.com/';
+                    // // 发现地址
+                    // _this.signindata.clwcomurl = 'https://clw.51chaidan.com/';
 
 
                   }else{
@@ -407,7 +407,7 @@ App({
         console.log('手机型号',res)
         let modelmes = res.model;
         if (modelmes.search('iPhone X') != -1 || modelmes.search('iPhone XR') != -1) {
-          _this.signindata.isIphoneX = true
+          _this.signindata.isIphoneX = true;
         };
         _this.signindata.modelData = res.model;
         _this.signindata.systemData = res.system;

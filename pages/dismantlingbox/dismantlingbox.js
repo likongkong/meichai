@@ -444,7 +444,7 @@ Page({
     _this.exhibitionBenefits();
 
     // //  收货地址
-    // _this.nextpagediao();
+    _this.nextpagediao();
 
     if(_this.data.defaultinformation){}else{
       console.log('defaultinformation=====接口')
