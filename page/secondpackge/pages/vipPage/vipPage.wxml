@@ -4,44 +4,8 @@
 
 
 <view class="vipTab" wx:if="{{!infoData.openMember}}">
-   <view class="vipTabTitle">VIP卡种选择</view>
-   <view class="vipTabBox"> 
-      <!-- <view class="{{expiryMonth==12?'active':''}}" data-expiryMonth="12" catchtap="toggleTab">年卡</view>
-      <view class="{{expiryMonth==1?'active':''}} " data-expiryMonth="1" catchtap="toggleTab">月卡</view> -->
-      <view class="vipItem {{expiryMonth==12?'active':''}}" data-expiryMonth="12" catchtap="toggleTab">
-         <view class="vipItemImg">
-            <view>
-               <view class="vipBiaoshiImg"><image src="https://cdn.51chaidan.com/images/calendar/crown.png" mode="widthFix"></image></view>
-               <view class="riliImg"><image src="{{infoData.vipYearGift}}" mode="widthFix"></image></view>
-            </view>
-         </view>
-         <view class="vipType">
-            VIP年卡+赠品
-         </view>
-         <view class="vipPrice">
-            <text>￥</text>{{infoData.vipPrice}}<text>{{infoData.vipDay}}</text>
-         </view>
-         <view class="vipOriginalPrice">
-            ￥{{infoData.vipOldPrice}}
-         </view>
-      </view>
-      <view class="vipItem {{expiryMonth==1?'active':''}}" data-expiryMonth="1" catchtap="toggleTab">
-         <view class="vipItemImg">
-            <view>
-               <view class="vipBiaoshiImg vipMonth"><image src="https://cdn.51chaidan.com/images/calendar/crown.png" mode="widthFix"></image></view>
-            </view>
-         </view>
-         <view class="vipType">
-            VIP月卡
-         </view>
-         <view class="vipPrice">
-            <text>￥</text>{{infoData.vipPriceMonth}}<text>{{infoData.vipDayMonth}}</text>
-         </view>
-         <view class="vipOriginalPrice">
-            ￥{{infoData.vipOldPriceMonth}}
-         </view>
-      </view>
-   </view>
+   <view class="{{expiryMonth==12?'active':''}}" data-expiryMonth="12" catchtap="toggleTab">年卡</view>
+   <view class="{{expiryMonth==1?'active':''}} " data-expiryMonth="1" catchtap="toggleTab">月卡</view>
 </view>
 <view class="vipTop">
    <view class="vipTopDisplay">
