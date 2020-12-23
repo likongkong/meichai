@@ -2,7 +2,7 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 <!-- 倒计时 -->
-<block>
+<block wx:if='{{false}}'>
   <view class="countdownWrap" catchtouchmove="true">
     <view class="boxShadowEve"> 
       <view class="countdownAwardWrap" catchtouchmove="" catchtap="toggleAwardFun">
@@ -47,6 +47,13 @@
     </view>
   </view>
 </block>
+
+
+<view class="vipbox"catchtap="jumpVipPage">
+    <text style="margin-left: 34rpx;">开通年VIP赠送展会日历+抽盒金￥1825</text>
+    <view class="vipButOpen">查看特权></view>   
+</view>
+
 
 
 <view class="swiperWrap" wx:if="{{swiperCalendrList.length!=0}}">

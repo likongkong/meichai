@@ -117,7 +117,7 @@
         <view class="shopGoodsWrap">
             <view wx:for="{{recommend}}" wx:key="index" data-itemid="{{item.itemId}}" data-idtype="gid" data-url="/pages/detailspage/detailspage" catchtap="clickJump">
                 <image src="{{item.itemCover}}" mode="widthFix"></image>
-                <text>￥{{item.itemPrice}}</text>
+                <text wx:if='{{item.itemPrice}}'>￥{{item.itemPrice}}</text>
             </view>
         </view>
     </view>
@@ -147,7 +147,7 @@
         <view class="cardBbox"> 
             <view class="title multilineellipsis">{{itemTitle}}</view>
             <view class="cardBboxPrice">
-                <view class="price">￥{{itemPrice}}</view>
+                <view class="price" wx:if='{{itemPrice}}'>￥{{itemPrice}}</view>
                 <view style="color:#9b9999;">一番赏 ></view>
             </view>
         </view>
@@ -191,7 +191,7 @@
         </view>
         <view class="cardBbox"> 
             <view class="title multilineellipsis">{{itemTitle}}</view>
-            <view class="cardBboxPrice">
+            <view class="cardBboxPrice" wx:if='{{itemPrice}}'>
                 <view class="price">￥{{itemPrice}}</view>
             </view>
         </view>
