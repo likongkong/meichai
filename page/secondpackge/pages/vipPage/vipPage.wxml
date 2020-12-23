@@ -27,7 +27,7 @@
       <view class="vipTopDisplayB">
          <block wx:for="{{expiryMonth==12?infoData.complimentary:infoData.complimentaryMonth}}" wx:key='key' data-index="{{index}}">
             <view>
-               <text class="giftTxt">赠送：</text>
+               <text class="giftTxt">{{index==0?'赠品：':'赠送：'}}</text>
                <text style="max-width:300rpx;" class="gift">{{item.name}}</text>
             </view>
          </block>

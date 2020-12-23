@@ -33,6 +33,12 @@ Page({
     // 是否显示投票
     isShowVote:(Date.parse(new Date())/1000)<=1607702399?true:false  
   },
+
+  jumpVipPage(){
+    wx.navigateTo({  
+      url: "/page/secondpackge/pages/vipPage/vipPage"
+    })
+  }, 
   toggleAwardFun(){
     this.setData({
       isAwardBox:!this.data.isAwardBox

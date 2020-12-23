@@ -32,6 +32,12 @@ Page({
       isAwardBox:!this.data.isAwardBox
     })
   },
+
+  jumpVipPage(){
+    wx.navigateTo({  
+      url: "/page/secondpackge/pages/vipPage/vipPage"
+    })
+  },   
   
   showSearchFun(){
     this.setData({

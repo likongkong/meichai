@@ -474,3 +474,44 @@ page{
   box-sizing: border-box;
   margin-bottom: 30rpx;
 }
+
+
+
+.vipbox{
+  width: 700rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  background:#E6CC8F;
+  background-image: linear-gradient(to bottom right, #FFFFDE , #FFBE3E);
+  margin: 20rpx auto 10rpx;
+  position: relative;
+  font-size: 24rpx;
+  border-radius: 70rpx;
+  color: #fff;
+}
+.vipbox text{
+  /* margin-left: 40rpx; */
+  color: #B95B06;
+}
+.vipButOpen{
+  width: 166rpx;
+  height: 46rpx;
+  line-height: 46rpx;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 20rpx;
+  margin:auto;
+  background-color: #fff;
+  color: #C38925;
+  z-index: 1;
+  border-radius: 46rpx;
+}
+.crownIcon{
+  width: 40rpx;
+  height: auto;
+  margin-left: 34rpx;
+  margin-right: 10rpx;
+}
+
