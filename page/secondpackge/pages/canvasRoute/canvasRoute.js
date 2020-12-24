@@ -200,7 +200,6 @@ Page({
      var selectData = _this.data.selectData || [];
      if(selectData && selectData.length != 0){
         var coordArr = [{arr:[50,53],logo:''}];
-        //  var busCoorArr = [[50,62],[6,6],[41,27],[41,46],[30,69],[6,89],[7,116],[29,118],[8,56],[8,68]];
         for(var i=0;i<selectData.length;i++){
             if(selectData[i].coordinate){
               coordArr.push({
@@ -232,8 +231,8 @@ Page({
     var offset_box = (width - lineWidth) / 2;
     var lineColor = ['red'];
     // 偏移量
-    var offset_x = 792 + offset_box;
-    var offset_y = 662 + offset_box;
+    var offset_x = 734 + offset_box;
+    var offset_y = 732 + offset_box;
 
     var start = '';
     var end = '';  
@@ -243,13 +242,11 @@ Page({
     var map_data = that.data.map_data || [];
 
     var busCoorArr = that.data.coordArr;
-   
-   for(var m=0;m<busCoorArr.length;m++){
-      var bcr = busCoorArr[m].arr;
-      map_data[bcr[0]][bcr[1]] = 1;
-   };
+    for(var m=0;m<busCoorArr.length;m++){
+        var bcr = busCoorArr[m].arr;
+        map_data[bcr[0]][bcr[1]] = 1;
+    };
 
-   console.log(map_data)
 
     // 1 可以走 0 不可以走 
     var graph = new astarVar.Graph(map_data);
@@ -267,7 +264,7 @@ Page({
     var blocks = [];
     var texts = [{
         x:150,
-        y:2182 ,
+        y:2203 ,
         baseLine: 'middle',
         text:'生成你的专属地图',
         fontSize: 52,
@@ -279,14 +276,15 @@ Page({
     var imgArr = [{
       x:0,
       y:0,
-      url: 'https://cdn.51chaidan.com/images/toyShow3/zhanhuiditu.png?time=1',
-      width: 3712,
-      height: 2400,
+      // url: 'https://cdn.51chaidan.com/images/toyShow3/zhanhuiditu.png?time=1',
+      url: 'https://cdn.51chaidan.com/images/toyShow3/zhanhuiditu1.png?time=3',
+      width: 3600,
+      height: 2421,
       zIndex: 1,
       borderRadius:0,
     },{
       x:152,
-      y:1732,
+      y:1753,
       url: 'https://cdn.51chaidan.com/images/toyShow3/toyShowList.jpg?time=' + that.data.appNowTime,
       width: 400,
       height: 400,
@@ -303,13 +301,21 @@ Page({
         result = astarVar.astar.search(graph, start, end);
 
         lineArrEve = [];
-
         for(var i=0; i< result.length; i++){
           if(lineArrEve.length!=0){
-            var sx = offset_x + result[i-1].y*width;
-            var sy = offset_y + result[i-1].x*width;
-            var ex = offset_x + result[i].y*width;
-            var ey = offset_y + result[i].x*width;
+           
+            if(result[i].x == 1){
+              var sx = offset_x + result[i-1].y*width + offset_box + (lineWidth/2);
+              var sy = offset_y + result[i-1].x*width;
+              var ex = offset_x + result[i].y*width + offset_box + (lineWidth/2);              
+              var ey = offset_y + result[i].x*width; 
+            }else{
+              var sx = offset_x + result[i-1].y*width;
+              var sy = offset_y + result[i-1].x*width;
+              var ex = offset_x + result[i].y*width;              
+              var ey = offset_y + result[i].x*width; 
+            };
+
             if(sx==ex){
                if(sy > ey){
                  sy = sy + lineWidth/2;
@@ -376,11 +382,11 @@ Page({
             });
             if(arrData[a].logo){
               imgArr.push({
-                x:parseInt(lineArrEve[lineArrEve.length-1].endX)-51,
-                y:parseInt(lineArrEve[lineArrEve.length-1].endY)-51,
+                x:parseInt(lineArrEve[lineArrEve.length-1].endX)-67,
+                y:parseInt(lineArrEve[lineArrEve.length-1].endY)-67,
                 url: arrData[a].logo,
-                width: 40,
-                height: 40,
+                width: 56,
+                height: 56,
                 zIndex: 6,
                 borderRadius:10,
               })
@@ -395,8 +401,8 @@ Page({
     // setData配置数据
     that.setData({
       posterConfig: {
-        width: 3712,
-        height: 2400,
+        width: 3600,
+        height: 2421,
         debug: false,
         // pixelRatio: 1000,
         preload: false,
