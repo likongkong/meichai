@@ -187,8 +187,6 @@ App({
                     // _this.signindata.comurl = 'https://api.51chaidan.com/';
                     // // 发现地址
                     // _this.signindata.clwcomurl = 'https://clw.51chaidan.com/';
-
-
                   }else{
                     // 接口地址  
                     _this.signindata.comurl = 'http://api-test.51chaidan.com/';

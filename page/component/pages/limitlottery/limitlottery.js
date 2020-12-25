@@ -970,8 +970,8 @@ Page({
   },
 
   joinDraw: function (share_uid) {
-    var _this = this;
 
+    var _this = this;
     wx.showLoading({
       title: '加载中...',
     })
