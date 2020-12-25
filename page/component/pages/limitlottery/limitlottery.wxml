@@ -708,6 +708,7 @@
 </view>
 
 <!--  收货地址  -->
+<view style="position: fixed;top:0;left:0;width:100%;height:100%;opacity:.4;z-index:999;background:#000" catchtouchmove="true" bindtap='receivingaddressfun' wx:if='{{receivingaddress}}'></view>
 <view class='receivingaddress' wx:if='{{receivingaddress}}'>
 	<view class='recgadhead'>
 		收货地址
@@ -743,7 +744,6 @@
 	<view class='recgadbot' bindtap='jumpaddress'>
 		增加新地址
 	</view>
-
 </view>
 
 <view wx:if='{{suboformola}}' style='width:100%;height:100%;background:#000;opacity: 0.4;z-index: 1999;position: fixed;top: 0;left: 0;'></view>

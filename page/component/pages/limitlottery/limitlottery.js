@@ -63,7 +63,6 @@ Page({
     tipaid: "",
     addressdata: "",
     tipaddress: "",
-    receivingaddress: "",
     desc: '',
     cart_id: '',
     isgetaward: false,
@@ -150,7 +149,8 @@ Page({
     // 太阳码参数 用户是否能分享 1 可以分享 
     canShare:0,
     addsetData:[[]],
-    scrollTopPage:0
+    scrollTopPage:0,
+    isfullPledge:false
   },
   onPageScroll: function (ev) {
     var _this = this;
@@ -850,6 +850,9 @@ Page({
             if (res.data.Info.infoActivity.status == 3 && res.data.Info.infoActivity.isWinner && !res.data.Info.infoActivity.isOrdered) {
               _this.nextpagediao()
             }
+            if(res.data.Info.infoActivity.joinMothed == 'payTicket' && res.data.Info.infoActivity.payTicketCate && res.data.Info.infoActivity.payTicketCate == 'fullPledge'){
+              _this.nextpagediao()
+            } 
             _this.getSnapshot()
           }, 1000)
 
@@ -970,15 +973,25 @@ Page({
   },
 
   joinDraw: function (share_uid) {
-
     var _this = this;
+    if(this.data.infoActivity.joinMothed == 'payTicket' && this.data.infoActivity.payTicketCate == 'fullPledge'){
+      if(this.data.isfullPledge){
+        var q1 = Dec.Aese('mod=lotto&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid=' + share_uid+'&perayu='+_this.data.perayu+'&aid='+this.data.tipaid);
+        console.log('参与抽签','mod=lotto&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid=' + share_uid+'&perayu='+_this.data.perayu+'&aid='+this.data.tipaid)
+        this.setData({isfullPledge: false})
+      }else{
+        this.setData({
+          receivingaddress: true
+        })
+        return false;
+      }
+    }else{
+      var q1 = Dec.Aese('mod=lotto&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid=' + share_uid+'&perayu='+_this.data.perayu);
+      console.log('参与抽签','mod=lotto&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid=' + share_uid+'&perayu='+_this.data.perayu)
+    }
     wx.showLoading({
       title: '加载中...',
     })
-
-    var q1 = Dec.Aese('mod=lotto&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid=' + share_uid+'&perayu='+_this.data.perayu);
-
-    console.log('朋友圈测试','mod=lotto&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid=' + share_uid+'&perayu='+_this.data.perayu)
 
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q1,
@@ -987,7 +1000,7 @@ Page({
         'Accept': 'application/json'
       },
       success: function (res) {
-        console.log('领取分享=====================',res)
+        console.log('参与抽签数据=====================',res)
         if (res.data.ReturnCode == 200) {
           _this.getinfo();
           if (share_uid != 0) {
@@ -1450,14 +1463,14 @@ Page({
   // 收货地址弹框
   seladdressfun: function () {
     this.setData({
-      receivingaddress: true,
+      receivingaddress: true
     });
   },
 
   // 隐藏收货地址弹框
   receivingaddressfun: function () {
     this.setData({
-      receivingaddress: false,
+      receivingaddress: false
     })
   },
 
@@ -1560,6 +1573,7 @@ Page({
         'Accept': 'application/json'
       },
       success: function (res) {
+        console.log('收货地址===',res)
         if (res.data.ReturnCode == 200) {
           var rdl = res.data.List;
           var tptipadi = '';
@@ -1649,6 +1663,12 @@ Page({
       tipaddress: tipadd,
       receivingaddress: false
     });
+    if(this.data.infoActivity.joinMothed == 'payTicket' && this.data.infoActivity.payTicketCate == 'fullPledge'){
+      this.setData({
+        isfullPledge:true
+      });
+      this.joinDraw(0);
+    }
   },
 
   // 买家备注
