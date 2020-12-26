@@ -169,14 +169,16 @@ Page({
 
   
   jumpChouxuanHomepage(){
-    var isBuyingTickets = this.data.isBuyingTickets;
-    if(isBuyingTickets){
-      wx.navigateTo({
-        url: "/page/secondpackge/pages/chouxuanHomepage/chouxuanHomepage"
-      });
-    }else{
-      app.showToastC('敬请期待');
-    }
+    var url = 'https://www.51chaidan.com/notice/2021MCTS.html';
+    app.comjumpwxnav(0, url);
+    // var isBuyingTickets = this.data.isBuyingTickets;
+    // if(isBuyingTickets){
+    //   wx.navigateTo({
+    //     url: "/page/secondpackge/pages/chouxuanHomepage/chouxuanHomepage"
+    //   });
+    // }else{
+    //   app.showToastC('敬请期待');
+    // }
   },
   jumpLuckyDraw(){
     var isBuyingTickets = this.data.isBuyingTickets;
@@ -438,7 +440,7 @@ Page({
     // // 直播商品
     // _this.commodityinformation(1,3);
     // // 直播列表
-    // _this.liveList(1);
+    _this.liveList(1);
 
 
     _this.exhibitionBenefits();
@@ -1164,7 +1166,7 @@ brandJson:function(){
     // // 直播商品
     // _this.commodityinformation(1,3)
     // // 直播列表
-    // _this.liveList(1);
+    _this.liveList(1);
     // // 展会福利
     _this.exhibitionBenefits();
 

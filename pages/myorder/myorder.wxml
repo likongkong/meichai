@@ -30,7 +30,7 @@
     </view>
     <!--  全部  -->
     <view class='whole'  style='position:relative;'>
-         <view class='wholecom'  wx:for='{{myordata}}' wx:key='key'>
+         <view class='wholecom' wx:for='{{myordata}}' wx:key='key'>
              <view class='wholehead'>
                   <view class='wholeheadright'>订单编号:{{item.cart_id}}</view>
                   <view class='wholeimgdel' data-oid='{{item.cart_id}}' bindtap='delwholeheadrimg' wx:if='{{item.status==8||item.status==5||item.status==10||item.status==11}}'>
@@ -698,6 +698,8 @@
                             <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
                             分享好友
                         </view>
+                        
+                  
 
                         <view wx:if='{{item.order_type==27}}'>
                             等待开奖支付尾款，未中奖原路退回
@@ -813,6 +815,7 @@
  
             </view>
           </view>
+            <view class='addressmodify' wx:if='{{item.canChangedAddress && item.status!=20}}'>注:每个订单只可修改一次收货地址<view class='modifaddclick' catchtap='modaddfun' data-cartid="{{item.cart_id}}" >修改地址</view></view>
          </view>
 
          <view  style='line-height:40rpx;color:#666;text-align:center;font-size:25rpx;margin-top:20rpx;' catchtap='jumpgoodsthings'>
@@ -959,6 +962,46 @@
      </view>
 
 </view>
+<!--  收货地址  -->
+<view class='receivingaddress' wx:if='{{receivingaddress1}}'>
+  <view class='recgadhead'>
+    收货地址
+    <image src='../images/forknumber.png' class='recgadheadimg' bindtap='receivingaddressfun'></image>
+  </view>
+  <view class='recgadcon'>
+    <view class='recgaddata' wx:for='{{addressdata}}' wx:key='key'>
+      <view class='recgaddname' data-tipaid='{{item.aid}}' data-address='{{item.address}}' data-province='{{item.province}}'  data-city='{{item.city}}' data-district='{{item.district}}' data-consignee='{{item.consignee}}' data-phone='{{item.phone}}' catchtap='revisethereceivingaddress1'>
+        <view class='recgaddnameleft'>{{item.consignee}}</view>
+        <view class='recgaddnameleft'>{{item.phone}}</view>
+      </view>
+      <view class='recgadaddress' data-tipaid='{{item.aid}}' data-address='{{item.address}}' data-province='{{item.province}}'  data-city='{{item.city}}' data-district='{{item.district}}' data-consignee='{{item.consignee}}' data-phone='{{item.phone}}' catchtap='revisethereceivingaddress1'>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
+      <view class='recgadbottom'>
+        <view class='recgadbotleft'>
+          <image class='recgadbotleftimg' hidden='{{!item.checked}}' src='../images/pressed_click.png'></image>
+           <image class='recgadbotleftimg' hidden='{{item.checked}}' src='../images/normal_click.png'></image>  
+          默认地址
+        </view>
+        <view class='recgadbotright' bindtap='deladdress' data-ind="{{item.aid}}">
+            <image src='../images/icon_delete.png' class='recgadbotleftimg'></image>
+          删除
+        </view>
+        <view class='recgadbotright' style='margin-right:50rpx;' bindtap='jumpeditaddress' data-address='{{item.address}}' data-aid='{{item.aid}}' data-city='{{item.city}}' data-consignee='{{item.consignee}}' data-district='{{item.district}}' data-phone='{{item.phone}}'
+          data-province='{{item.province}}' data-idcard='{{item.idcard}}'>
+          <image src='../images/icon_edit.png' class='recgadbotleftimg'></image>
+          编辑
+        </view>
+      </view>
+    </view>
+    <view class='recgadnodata' wx:if='{{addressdata.length==0}}'>
+        <image src='../images/recaddnodata.png' class='recgadnodataimg'></image>
+    </view>
+  </view>
+  <view class='recgadbot' bindtap='jumpaddress'>
+    增加新地址
+  </view>
+
+
+</view>
 
 <!--  首页按钮  -->
 <!-- <view class='frontpagebuttonact' catchtap='frontpagebutton' style='bottom:685rpx;' style='bottom:465rpx;'>
@@ -1090,6 +1133,23 @@
             <view style='color:#11fb3d;position:relative;width:100%;float:left;height:100rpx;line-height:100rpx;text-align:center;font-size:26rpx;' catchtap='pictboxboxfun'>
                关闭
             </view>
+        </view>
+    </view>
+</view>
+
+<!-- 确认修改地址弹框 -->
+<view class='awatip' wx:if='{{addmodtip}}' style='z-index:999;'>
+    <view class='awabg'></view>
+    <view class='addmodbox'>
+        <view class='addmodtop'>确认修改地址:</view>
+        <view class='addmodname'>{{conphone}}</view>
+        <view class='addmodnamezz'>{{addmodtxt}}</view>
+        <view class='addmodname' style='color:#ff2929;'>温馨提示:</view>
+        <view class='addmodname' style='color:#ff2929;'>收货地址只可修改一次</view>
+        <view class='addmodname' style='color:#ff2929;'>同批购买的所有商品(含奖品)收货地址同步修改</view>
+        <view class='addmodbottom'>
+            <view style='width:50%;text-align:center;height:50rpx;float:left;color:#258bfa;font-size:26rpx;position:relative;' catchtap='addmodcancel'>取消</view>
+            <view style='width:50%;text-align:center;height:50rpx;float:right;color:#258bfa;font-size:26rpx;position:relative;' catchtap='addmoddetermine1'>确定</view>
         </view>
     </view>
 </view>

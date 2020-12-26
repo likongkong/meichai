@@ -156,6 +156,9 @@ Page({
     goldtip: -1,
     sivertip: -1,
 
+    isTempTip:false, //是否显示提示卡倒计时
+    tempChanceOverTime:'',  //提示卡倒计时时间戳
+    tempChanceOverTimeCountdown:'',  //提示卡倒计时
     // 倒计时时间戳
     perspcardata: '',
     // 倒计时展示数据
@@ -706,8 +709,14 @@ Page({
             vipBlindBoxMoney:infoData.vipBlindBoxMoney,
             vipTotalBlindBoxMoney:infoData.vipTotalBlindBoxMoney,
             subscribedata:infoData.vipSubscribe,
+            isTempTip:infoData.user.isTempTip,
+            tempChanceOverTime:infoData.user.tempChanceOverTime,
           })
 
+          if(infoData.user.isTempTip){
+            _this.tempChanceCountdowntimeFun(infoData.user.tempChanceOverTime)
+          }
+          
 
           if (activityData.backgroundCode && activityData.backgroundCode != "" && activityData.backgroundCode != "#e6d4c6") {
             _this.setData({
@@ -1166,6 +1175,7 @@ Page({
     clearInterval(_this.data.timer)
     clearInterval(_this.data.atimer)
     clearInterval(this.data.countdowntime);
+    clearInterval(_this.data.tempChanceCountdowntime);
   },
 
   /**
@@ -1176,6 +1186,7 @@ Page({
     clearInterval(_this.data.timer)
     clearInterval(_this.data.atimer)
     clearInterval(this.data.countdowntime);
+    clearInterval(_this.data.tempChanceCountdowntime);
   },
 
   /**
@@ -2110,7 +2121,13 @@ Page({
               istipsure: true,
               cardImg: res.data.Info.tipImg
             })
-
+            if (_this.data.tempChanceOverTime) {
+              clearInterval(_this.data.tempChanceOverTimeCountdown);
+              _this.setData({
+                tempChanceOverTime: "",
+                isTempTip: false,
+              })
+            };
           } else if (type == "XRay") {
             _this.setData({
               isuserray: true,
@@ -3496,5 +3513,53 @@ Page({
       },
       fail: function () { }
     });
-  }
+  },
+  // 倒计时
+  tempChanceCountdowntimeFun: function (cdtime) {
+    var _this = this;
+    clearInterval(_this.data.tempChanceCountdowntime);
+    var tempChanceCountdowntime = function () {
+      var totalSecond = parseInt(cdtime) - Date.parse(new Date()) / 1000;
+      // 秒数  
+      var second = totalSecond;
+      // 天数位  
+      var day = Math.floor(second / 3600 / 24);
+      var dayStr = day.toString();
+      if (dayStr.length == 1) dayStr = '0' + dayStr;
+      // 小时位  
+      var hr = Math.floor((second - day * 3600 * 24) / 3600);
+      var hrStr = hr.toString();
+      if (hrStr.length == 1) hrStr = '0' + hrStr;
+      // 分钟位  
+      var min = Math.floor((second - day * 3600 * 24 - hr * 3600) / 60);
+      var minStr = min.toString();
+      if (minStr.length == 1) minStr = '0' + minStr;
+      // 秒位  
+      var sec = second - day * 3600 * 24 - hr * 3600 - min * 60;
+      var secStr = sec.toString();
+      if (secStr.length == 1) secStr = '0' + secStr;
+      if (dayStr == '00') {
+        _this.setData({
+          tempChanceOverTimeCountdown: hrStr + ':' + minStr + ':' + secStr,
+        });
+      } else {
+        _this.setData({
+          tempChanceOverTimeCountdown: hrStr + ':' + minStr + ':' + secStr
+        });
+      }
+      totalSecond--;
+      if (totalSecond < 0) {
+        // 从新调取数据
+        clearInterval(_this.data.tempChanceCountdowntime);
+        that.signindata.tempChanceOverTime = '';
+        _this.setData({
+          isTempTip: false
+        });
+        _this.setData({
+          tempChanceOverTimeCountdown: '00:00:00',
+        });
+      }
+    };
+    _this.data.tempChanceCountdowntime = setInterval(tempChanceCountdowntime, 1000);
+  },
 })

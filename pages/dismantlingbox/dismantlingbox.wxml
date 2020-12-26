@@ -54,19 +54,21 @@
         </view>
       </view>
       <view class="drawBtn">
-        <!-- <block wx:if="{{isBuyingTickets}}"> -->
-        <view catchtap="jumpChouxuanHomepage">优先入场资格抽选</view>
-        <view catchtap="jumpLuckyDraw">优先入场资格刮刮卡</view>
-        <!-- </block>
-        <block wx:else>
+        <block wx:if="{{isBuyingTickets}}">
+          <view catchtap="jumpChouxuanHomepage">优先入场资格抽选</view>
+          <view catchtap="jumpLuckyDraw">优先入场资格刮刮卡</view>
+        </block>
+        <!--<block wx:else>
           <view>敬请期待</view>
           <view>敬请期待</view>
         </block> -->
       </view>
     </view>    
 
+    
+    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;">————— 线上潮玩展 —————</view>
     <!-- 直播间 -->
-    <!-- <view class="ssubLiveBroadcast" wx:for="{{liveListData}}" wx:key="key" id='e1'>
+    <view class="ssubLiveBroadcast" wx:for="{{liveListData}}" wx:key="key" id='e1'>
         <navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{item.room_id}}" style='position: absolute;height:100%;width:500rpx;left:0;top:0;z-index:3;'></navigator>
         <view class="ssubLiveBroad">
             <image class="ssubLiveBImg" src="{{item.cover_img}}" mode='aspectFit'></image>
@@ -78,10 +80,8 @@
                <view class="ssubBotRight" data-roomid='{{item.room_id}}' style="width:110rpx;background:#fff;"><subscribe style="width:100%;height:100%;position:absolute;right:0;top:0;bottom:0;margin:auto;z-index:1;" room-id="{{item.room_id}}"></subscribe></view>
            </view>
         </view>
-    </view> -->
-    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;">————— 线上潮玩展 —————</view>
-    <view class="ssubLiveBroadcast" wx:key="key" id='e1' catchtap="arousesubscribeFun" data-subscribe_data="{{subscribeJson[0].toyshowStart}}">
-        <!-- <navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{item.room_id}}" style='position: absolute;height:100%;width:100%;left:0;top:0;z-index:3;'></navigator>  -->
+    </view>
+    <!-- <view class="ssubLiveBroadcast" wx:key="key" id='e1' catchtap="arousesubscribeFun" data-subscribe_data="{{subscribeJson[0].toyshowStart}}">
         <image class="ssubLiveBImg" src="https://cdn.51chaidan.com/images/toyShow3/liveshowSubscribe.jpg" mode='aspectFit'></image>
         <view class="ssubLiveBroadRig">
            <view class="ssubSSAname multilineellipsis">
@@ -90,10 +90,9 @@
             </view>
            <view class="ssubSBotTime">
                <view class="ssubSBotTimeleft">预约订阅</view>
-               <!-- <view class="ssubBotRight" data-roomid='{{item.room_id}}' style="width:110rpx;background:#fff;"><subscribe style="width:100%;height:100%;position:absolute;right:0;top:0;bottom:0;margin:auto;z-index:1;" room-id="{{item.room_id}}"></subscribe></view> -->
            </view>
         </view>
-    </view>
+    </view> -->
 
      
 
@@ -381,10 +380,10 @@
 
 
 <!-- 底部购票图片 -->
-<view class="BottomBuyTickets" catchtap="jumpposition" data-tid='3' data-subscribe_data="{{subscribeJson[0].toyshowStart}}">
+<!-- <view class="BottomBuyTickets" catchtap="jumpposition" data-tid='3' data-subscribe_data="{{subscribeJson[0].toyshowStart}}">
   <image src="https://cdn.51chaidan.com/images/calendar/getTicket.png" mode="widthFix"></image>
   <text>已有{{countSubsribe}}人想去</text>
-</view>
+</view> -->
 
 <!-- 底部导航条 -->
 <view class="shunButBar">

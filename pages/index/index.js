@@ -232,8 +232,7 @@ Page({
       
       // url: "/page/component/pages/limitlottery/limitlottery?id=35405",
 
-      // 画图路径
-      url: "/page/secondpackge/pages/priorityVoting/priorityVoting"
+      url: "/page/secondpackge/pages/draw/draw"
       
       //邀请函
       // url: "/page/secondpackge/pages/priorityVoting/priorityVoting"

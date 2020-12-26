@@ -120,7 +120,8 @@
         "pages/chouxuanHomepage/chouxuanHomepage",
         "pages/drawHideGoods/drawHideGoods",
         "pages/canvasRoute/canvasRoute",
-        "pages/idCardVerification/idCardVerification"
+        "pages/idCardVerification/idCardVerification",
+        "pages/draw/draw"
       ]
     }
   ],

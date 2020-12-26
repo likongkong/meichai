@@ -185,10 +185,10 @@ page{
   line-height:30rpx;
   color:#fff;
   float:left;
-  padding:5rpx 40rpx;
+  padding:5rpx 20rpx;
+  margin: 0 20rpx;
   border-radius:10rpx;
   background:#32ACFB;
-  
 }
 .subscribe--live-player-subscribe__btn{
   width:110rpx !important;

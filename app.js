@@ -1259,3 +1259,8 @@ App({
 // idCardVerification 身份证验证
 
 // canvasRoute 路径 canvas 展会画路径
+// draw  抽奖
+
+
+
+

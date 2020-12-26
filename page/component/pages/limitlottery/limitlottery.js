@@ -981,7 +981,7 @@ Page({
         this.setData({isfullPledge: false})
       }else{
         this.setData({
-          receivingaddress: true
+          receivingaddress:true
         })
         return false;
       }
@@ -1749,14 +1749,16 @@ Page({
                 tipbacktwo: false,
                 buybombsimmediately: false,
                 suboformola: false,
-                desc: ''
+                desc: '',
+                isfullPledge: true
               });
 
               var cart_id = _this.data.cart_id || '0';
 
               _this.getinfo()
               
-              if(e && e != "undefined"){
+
+              if(e && e != "undefined" && (this.data.infoActivity.joinMothed != 'payTicket' && this.data.infoActivity.payTicketCate != 'fullPledge')){
                 _this.joinDraw(0);
               }
 

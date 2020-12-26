@@ -306,6 +306,7 @@ Page({
       }
     });
   },
+  
   // 修改收货地址
   revisethereceivingaddress: function (w) {
     var tipaid = w.currentTarget.dataset.tipaid || w.target.dataset.tipaid;
@@ -316,7 +317,8 @@ Page({
     this.setData({
       tipnamephone: data[ind].consignee + " " + data[ind].phone,
       tipaddress: tipadd,
-      receivingaddress: false
+      receivingaddress: false,
+      tipback:false
     });
   },
   // 跳转增加新地址
@@ -349,6 +351,8 @@ Page({
   receivingaddressfun: function () {
     this.setData({
       receivingaddress: false,
+      receivingaddress1: false,
+      tipback:false
     })
   },
   // 删除地址
@@ -586,7 +590,8 @@ Page({
         dateTitle: arr[j][0].dateTitle || '',
         depositOrderPayPrice: arr[j][0].depositOrderPayPrice || '',
         isShareGood : notAllowShareGoodsId.length!=0&&notAllowShareGoodsId.indexOf(arr[j][0].gid) > -1 ? false : true,
-        toyshowTips:arr[j][0].toyshowTips || ''
+        toyshowTips:arr[j][0].toyshowTips || '',
+        canChangedAddress:arr[j][0].canChangedAddress,
       })
     };   
     if (arrchil && arrchil.length != 0){
@@ -709,12 +714,15 @@ Page({
     var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
     var _this = this;
     var arrlist = '';
-    var q = Dec.Aese('mod=getinfo&operation=orderlist&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=' + _this.data.myorhtabtr + '&blackCity=' + _this.data.blackCity)
+    var q = Dec.Aese('mod=getinfo&operation=orderlist&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=' + _this.data.myorhtabtr + '&blackCity=' + _this.data.blackCity);
+    console.log(app.signindata.comurl + 'order.php?mod=getinfo&operation=orderlist&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=' + _this.data.myorhtabtr + '&blackCity=' + _this.data.blackCity)
+
     wx.request({
       url: app.signindata.comurl + 'order.php'+q,
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
+        console.log('order====',res)
         // 刷新完自带加载样式回去
         wx.stopPullDownRefresh();
         _this.setData({headhidden: true,});   
@@ -2851,36 +2859,45 @@ Page({
     });
   },
 
+  modaddfun:function(e){
+    this.nextpagediao();
+    this.setData({
+      receivingaddress1:true,
+      tipback: true,
+      cart_id:e.currentTarget.dataset.cartid
+    });
+  },
+
     // 下一页返回调取
-    nextpagediao: function () {
-      var _this = this;
-      //  调取收货地址
-      var q = Dec.Aese('mod=address&operation=getlist&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
-      wx.request({
-        url: app.signindata.comurl + 'user.php' + q,
-        method: 'GET',
-        header: {
-          'Accept': 'application/json'
-        },
-        success: function (res) {
-          if (res.data.ReturnCode == 200) {
-            var rdl = res.data.List;
-            if (rdl.length != 0) {
-              for (var i = 0; i < rdl.length; i++) {
-                if (rdl[i].isdefault == 1) {
-                  _this.addmoddetermine(rdl[i].aid);
-                  _this.setBlindBoxDefaultAddress(rdl[i].aid);
-                  app.signindata.isBlindBoxDefaultAddress = true;
-                  _this.setData({
-                    isBlindBoxDefaultAddress: true
-                  });
-                }
-              };
-            }
-          };
-        }
-      });
-    },
+    // nextpagediao: function () {
+    //   var _this = this;
+    //   //  调取收货地址
+    //   var q = Dec.Aese('mod=address&operation=getlist&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+    //   wx.request({
+    //     url: app.signindata.comurl + 'user.php' + q,
+    //     method: 'GET',
+    //     header: {
+    //       'Accept': 'application/json'
+    //     },
+    //     success: function (res) {
+    //       if (res.data.ReturnCode == 200) {
+    //         var rdl = res.data.List;
+    //         if (rdl.length != 0) {
+    //           for (var i = 0; i < rdl.length; i++) {
+    //             if (rdl[i].isdefault == 1) {
+    //               _this.addmoddetermine(rdl[i].aid);
+    //               _this.setBlindBoxDefaultAddress(rdl[i].aid);
+    //               app.signindata.isBlindBoxDefaultAddress = true;
+    //               _this.setData({
+    //                 isBlindBoxDefaultAddress: true
+    //               });
+    //             }
+    //           };
+    //         }
+    //       };
+    //     }
+    //   });
+    // },
 
   //  添加地址
   addmoddetermine:function(aid){
@@ -2918,6 +2935,76 @@ Page({
         if (res.data.ReturnCode == 200) {
         }
       }
+    });
+  },
+  // 确定
+  addmoddetermine1:function(){
+    var _this = this;
+    var q = Dec.Aese('mod=operate&operation=changeAddress&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&aid=' + _this.data.tipaid + '&oid=' + _this.data.cart_id)
+    wx.request({
+      url: app.signindata.comurl + 'order.php' + q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        if (res.data.ReturnCode == 200) {
+          _this.setData({
+            receivingaddress1: false,
+            tipback: false,
+            addmodtip: false,
+            addmodtxt: '',
+            conphone: ''            
+          });
+          _this.onLoadfun();
+          wx.showModal({
+            content: '修改成功',
+            success: function (res) {}
+          })          
+        } else if (res.data.ReturnCode == 201){
+          _this.setData({
+            receivingaddress1: false,
+            tipback: false,
+            addmodtip: false,
+            addmodtxt: '',
+            conphone: ''
+          }); 
+          wx.showModal({
+            content: res.data.Msg || "无法修改",
+            showCancel: false,
+            success: function (res) {}
+          })
+        };
+        // 判断非200和登录
+        Dec.comiftrsign(_this, res, app);
+
+      }
+    }); 
+  },
+   // 取消
+   addmodcancel:function(){
+    this.setData({
+      addmodtip:false
+    })
+  },
+   // 修改收货地址
+   revisethereceivingaddress1: function (w) {
+    var tipaid = w.currentTarget.dataset.tipaid || w.target.dataset.tipaid || '';
+    var address = w.currentTarget.dataset.address || w.target.dataset.address || '';
+    var province = w.currentTarget.dataset.province || w.target.dataset.province || '';
+    var city = w.currentTarget.dataset.city || w.target.dataset.city || '';
+    var district = w.currentTarget.dataset.district || w.target.dataset.district || '';
+    var consignee = w.currentTarget.dataset.consignee || w.target.dataset.consignee || '';
+    var phone = w.currentTarget.dataset.phone || w.target.dataset.phone || '';
+
+    var addmodtxt = province + ' ' + city + ' ' + district + ' ' + address;
+    var conphone = consignee + ' ' + phone;
+    this.data.tipaid = tipaid;
+    this.setData({
+      tipaid: tipaid,
+      receivingaddress1: false,
+      tipback: false,
+      addmodtip:true,
+      addmodtxt: addmodtxt,
+      conphone: conphone
     });
   },
 
