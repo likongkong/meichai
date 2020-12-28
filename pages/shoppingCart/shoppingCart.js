@@ -685,7 +685,7 @@ Page({
             var awatxt = res.data.Info.notice || '';
             var overtimetop = res.data.Info.overtime || '';
             var rdjump = res.data.Info.category_info||{};
-            var msgBigShot = res.data.Info.msgBigShot ||'本周消费满5件，瓜分1000个盲盒';
+            var msgBigShot = res.data.Info.msgBigShot ||'';
             _this.setData({
               awatxt: awatxt,
               overtimetop: overtimetop,
@@ -852,7 +852,7 @@ Page({
               taxation: '0.00',
             });
             if (res.data.Info){
-              var msgBigShot = res.data.Info.msgBigShot || '本周消费满5件，瓜分1000个盲盒';
+              var msgBigShot = res.data.Info.msgBigShot || '';
               _this.setData({ msgBigShot: msgBigShot});
               var overtimetop = res.data.Info.overtime || '';
               if (overtimetop) {

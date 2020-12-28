@@ -121,6 +121,7 @@
         "pages/drawHideGoods/drawHideGoods",
         "pages/canvasRoute/canvasRoute",
         "pages/idCardVerification/idCardVerification",
+        "pages/priorityList/priorityList",
         "pages/draw/draw"
       ]
     }
