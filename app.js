@@ -1165,16 +1165,16 @@ App({
       fail: function (res) {}
     })    
   },
-// 分享
-sharemc:function(){
-  var _this = this;
-  return {
-    title:  _this.signindata.titleShare,
-    path: 'pages/index/index',
-    imageUrl: _this.signindata.indexShareImg,
-    success: function (res) {}
-  }  
-}
+  // 分享
+  sharemc:function(){
+    var _this = this;
+    return {
+      title:  _this.signindata.titleShare,
+      path: 'pages/index/index',
+      imageUrl: _this.signindata.indexShareImg,
+      success: function (res) {}
+    }  
+  }
 
 
 
