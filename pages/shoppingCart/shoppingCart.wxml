@@ -471,7 +471,7 @@
     </scroll-view>
   </view>
 
-  <view class='shoppingcartprompt specialellipsis' wx:if='{{spreadEntry}}' style='background:#FECB9C;color:#000;'>
+  <view class='shoppingcartprompt specialellipsis' wx:if='{{spreadEntry&&msgBigShot}}' style='background:#FECB9C;color:#000;'>
     <image style='width:30rpx;height:30rpx;display:inline-block;vertical-align:top;position:relative;top:15rpx;' src='https://www.51chaidan.com/images/icon/iconHorn.png'></image>
     {{msgBigShot}}</view>
   <!-- 购物车结算 -->
