@@ -67,7 +67,8 @@ Page({
       {x:3,y:6},
       {x:4,y:6},
       {x:5,y:6},
-    ]
+    ],
+    isShowDrawTxt:false
   },
   toggleAwardFun(){
     this.setData({
@@ -168,8 +169,8 @@ Page({
   },
 
   
-  jumpChouxuanHomepage(){
-    var url = 'https://www.51chaidan.com/notice/2021MCTS.html';
+  jumpChouxuanHomepage(e){
+    var url = e.currentTarget.dataset.url;
     app.comjumpwxnav(0, url);
     // var isBuyingTickets = this.data.isBuyingTickets;
     // if(isBuyingTickets){
@@ -181,13 +182,29 @@ Page({
     // }
   },
   jumpLuckyDraw(){
-    var isBuyingTickets = this.data.isBuyingTickets;
-    if(isBuyingTickets){
+    // var isBuyingTickets = this.data.isBuyingTickets;
+    // if(isBuyingTickets){
+    //   wx.navigateTo({
+    //     url: "/page/secondpackge/pages/priorityList/priorityList"
+    //   });
+    // }else{
+    //   app.showToastC('活动已结束，今晚20:00公布中奖名单');
+    // }
+
+    var nowTime = new Date().getTime();
+    console.log('nowTime=====',parseInt(nowTime/1000))
+    if( parseInt(nowTime/1000) >= '1609156800' ){
+      this.setData({
+        isShowDrawTxt:true
+      })
       wx.navigateTo({
-        url: "/page/secondpackge/pages/luckyDraw/luckyDraw"
+        url: "/page/secondpackge/pages/priorityList/priorityList"
       });
     }else{
-      app.showToastC('敬请期待');
+      this.setData({
+        isShowDrawTxt:false
+      })
+      app.showToastC('活动已结束，今晚20:00公布中奖名单');
     }
   },
   jumpposition:function(w){
@@ -836,6 +853,7 @@ brandJson:function(){
               _this.countdownbfun();
               _this.setData({
                 bannerList:bannerList,
+                urlScratch:res.data.Info.urlScratch,
                 calendarList,
                 // brandList,
                 goodsInfo,

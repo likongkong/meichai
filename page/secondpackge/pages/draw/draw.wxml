@@ -3,6 +3,74 @@
 
 
 <view class="wrap">
+  
+  <view class="banner">
+    <image src="https://cdn.51chaidan.com//data/afficheimg/1608208208923348098.png" mode="aspectFill"></image>
+  </view>
+  <view class="exchangeWrap"> 
+    <image class="exchangeBg" src="https://cdn.51chaidan.com//data/afficheimg/1608208208923348098.png" mode="aspectFill"></image>
+    <view class="exchangeInputWrap">
+      <input type="text" placeholder-class="exchangeInputBox" placeholder="请输入奖券兑换码" />
+      <view>兑换奖券</view>
+    </view>
+    <text class="ticketNum"> 剩余兑奖券：10 </text>
+    <view class="drawBtn">抽奖</view>
+  </view>
+  <view class="awardWrap">
+    <view class="TopBox">
+      <text style="color:#101010;">本期奖品</text>
+      <text style="color:#666666;">抽奖规则</text>
+    </view>
+    <view class="awardWrapBox">
+      <view>
+        <image class="awardImg" src="https://cdn.51chaidan.com//data/afficheimg/1608208208923348098.png" mode="aspectFill"></image>
+         <view>
+           <text>与你在一起系列大隐藏款-xxx</text>
+         </view> 
+      </view>
+      <view>
+        <image class="awardImg" src="https://cdn.51chaidan.com//data/afficheimg/1608208208923348098.png" mode="aspectFill"></image>
+        <view>
+          <text>抽盒机提示卡（当日有效）</text>
+        </view>
+      </view>
+      <view>
+        <image class="awardImg" src="https://cdn.51chaidan.com//data/afficheimg/1608208208923348098.png" mode="aspectFill"></image>
+        <view>
+          <text>展会限定日历</text>
+        </view>
+      </view>
+      <view>
+        <image class="awardImg" src="https://cdn.51chaidan.com//data/afficheimg/1608208208923348098.png" mode="aspectFill"></image>
+        <view>
+          <text>抽盒机提示卡（当日有效）</text>
+        </view>
+      </view>
+      <view>
+        <image class="awardImg" src="https://cdn.51chaidan.com//data/afficheimg/1608208208923348098.png" mode="aspectFill"></image>
+        <view>
+          <text>抽盒机提示卡（当日有效）</text>
+        </view>
+      </view>
+      <view>
+        <image class="awardImg" src="https://cdn.51chaidan.com//data/afficheimg/1608208208923348098.png" mode="aspectFill"></image>
+        <view>
+          <text>抽盒机提示卡（当日有效）</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="drawRecordWrap">
+    <view class="TopBox">
+      <text style="color:#101010;">抽奖记录</text>
+    </view>
+    <view class="drawRecordBox">
+
+    </view>
+    <view class="prizeBtn">
+      领奖
+    </view>
+  </view> 
 
 </view>
 

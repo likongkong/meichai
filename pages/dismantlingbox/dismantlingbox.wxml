@@ -41,7 +41,7 @@
         </view>
       </view> 
 
-      <view class="ticketInfo" catchtap="jumpposition">
+      <view class="ticketInfo" data-url="{{urlScratch}}" catchtap="jumpChouxuanHomepage">
         <image src="https://cdn.51chaidan.com/images/calendar/luckyDraw/chouxuan.png?imageMogr2/thumbnail/x800" mode="aspectFit"></image>
         <view class="ticketInfoWrap">
           <view>
@@ -55,8 +55,8 @@
       </view>
       <view class="drawBtn">
         <block wx:if="{{isBuyingTickets}}">
-          <view catchtap="jumpChouxuanHomepage">优先入场资格抽选</view>
-          <view catchtap="jumpLuckyDraw">优先入场资格刮刮卡</view>
+          <view catchtap="jumpChouxuanHomepage" data-url="{{urlScratch}}">优先入场资格抽选</view>
+          <view catchtap="jumpLuckyDraw">{{isShowDrawTxt?'优先入场资格查询':'优先入场资格刮刮卡'}}</view>
         </block>
         <!--<block wx:else>
           <view>敬请期待</view>
