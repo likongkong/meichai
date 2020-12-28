@@ -12,16 +12,14 @@
 				</swiper>
     </view>	
 
-    
     <!-- <view class="zhanhuiMap">
       <canvas canvas-id='myCanvas'></canvas>
     </view> -->
    
 
     <!-- 票务信息 -->
-    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e1'>————— 票务信息 —————</view>
+    <!-- <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e1'>————— 票务信息 —————</view>
     <view class="ticketWrap" data-subscribe_data="{{subscribeJson[1].toyshowTicket}}">
-      <!-- arousesubscribeFun -->
       <view wx:if="{{goodsInfo.length!=0}}" class="addGoods" catchtap="jumpposition" style="margin-bottom:20rpx;">
         <view class="addGoodsT">
           <image src="https://cdn.51chaidan.com/images/icon/iconYellowStar.png" mode="widthFix"></image>
@@ -58,17 +56,13 @@
           <view catchtap="jumpChouxuanHomepage" data-url="{{urlScratch}}">优先入场资格抽选</view>
           <view catchtap="jumpLuckyDraw">{{isShowDrawTxt?'优先入场资格查询':'优先入场资格刮刮卡'}}</view>
         </block>
-        <!--<block wx:else>
-          <view>敬请期待</view>
-          <view>敬请期待</view>
-        </block> -->
       </view>
-    </view>    
+    </view>     -->
 
     
-    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;">————— 线上潮玩展 —————</view>
+    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e1'>————— 线上潮玩展 —————</view>
     <!-- 直播间 -->
-    <view class="ssubLiveBroadcast" wx:for="{{liveListData}}" wx:key="key" id='e1'>
+    <view class="ssubLiveBroadcast" wx:for="{{liveListData}}" wx:key="key">
         <navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{item.room_id}}" style='position: absolute;height:100%;width:500rpx;left:0;top:0;z-index:3;'></navigator>
         <view class="ssubLiveBroad">
             <image class="ssubLiveBImg" src="{{item.cover_img}}" mode='aspectFit'></image>
@@ -153,12 +147,12 @@
 
 
     <!-- 线下 -->
-		<view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{goodsListTwo&&goodsListTwo.goodsList&&goodsListTwo.goodsList.length!=0}}' id='e3'>—————— 线下 ——————</view>
+		<!-- <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{goodsListTwo&&goodsListTwo.goodsList&&goodsListTwo.goodsList.length!=0}}' id='e3'>—————— 线下 ——————</view>
     <view style="width:100%;overflow: hidden;" wx:if='{{goodsListTwo&&goodsListTwo.goodsList&&goodsListTwo.goodsList.length!=0}}'>
         <view class="ssubBilEve" wx:for="{{goodsListTwo.goodsList}}" wx:key="key" catchtap="jumpGoodsDetails" data-gid='{{item.goods_id}}'>
            <image class="ssubBiliimgs boxShadow" src="{{item.goods_thumb}}" mode='aspectFit'></image>
         </view>
-    </view>
+    </view> -->
     <!-- <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{goodsListTwo&&goodsListTwo.goodsList&&goodsListTwo.goodsList.length!=0}}' id='e5'>—————— 线下 ——————</view>
     <view style="width:100%;overflow: hidden;" wx:if='{{goodsListTwo&&goodsListTwo.goodsList&&goodsListTwo.goodsList.length!=0}}'>
         <view class="ssubBilEve" wx:for="{{goodsListTwo.goodsList}}" wx:key="key" catchtap="evesubscrfun" data-type='2' data-eveid='{{item.goods_id}}' data-index='{{index}}'>
@@ -236,13 +230,13 @@
     </view>
 
      <!-- 场馆地图 -->
-    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e5'>—————— 场馆地图 ——————</view>
+    <!-- <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e5'>—————— 场馆地图 ——————</view>
      
     <image catchtap="jumpcanvasRoute" style="width:670rpx;display:block;margin:0 auto 0;" src="https://cdn.51chaidan.com/images/toyShow3/zhanhuiditu.png" mode='widthFix'></image>
     <view class="drawBtn">
       <view catchtap="jumpcanvasRoute" style="width:100%;">制作观展专属地图</view>
     </view>
-    <image style="width:670rpx;display:block;margin:0 auto 0;" src="https://cdn.51chaidan.com/images/toyShow3/siteImg.png"  mode='widthFix'></image>
+    <image style="width:670rpx;display:block;margin:0 auto 0;" src="https://cdn.51chaidan.com/images/toyShow3/siteImg.png"  mode='widthFix'></image> -->
 
     <!-- 品牌合作 -->
 		<view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e4' wx:if='{{brandList&&brandList.length!=0}}'>—————— 参展品牌 ——————</view>
@@ -260,14 +254,14 @@
         </view>
     </view>
     <!-- 承办 -->
-    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;">——————— 承办 ———————</view>
+    <!-- <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;">——————— 承办 ———————</view>
     <view class="ssubBrandEveWrap" style="width:100%;overflow: hidden;padding:0 40rpx;box-sizing: border-box;">
         <view style="width:580rpx;overflow:hidden;margin: 0 auto;">
           <view class="ssubBrandEve1 bigLogo1" wx:for="{{undertakeData}}" wx:key="key">
             <image class="ssubBiliimgbr bigLogo1" src="{{item}}" mode='aspectFit'></image>
           </view>
         </view>
-    </view>
+    </view> -->
     <!-- 媒体合作与平台支持 -->
     <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{mediaBrandList&&mediaBrandList.length!=0}}'>———— 媒体合作与平台支持 ————</view>
     <view class="ssubBrandEveWrap" style="width:100%;overflow: hidden;padding:0 40rpx;box-sizing: border-box;" wx:if='{{mediaBrandList&&mediaBrandList.length!=0}}'>

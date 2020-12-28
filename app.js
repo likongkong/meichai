@@ -697,7 +697,7 @@ App({
       wx.navigateTo({
         url: "/pages/dismantlingbox/dismantlingbox"
       });
-    } else if (item_type == 9019) {
+    } else if (item_type == 9019) { 
       wx.navigateTo({
         url: "/page/secondpackge/pages/articleList/articleList"
       });
