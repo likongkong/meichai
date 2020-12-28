@@ -43,10 +43,8 @@ Page({
     mapImgDisplay:false,
     iftrdetailpagetwo:false,
     shunButBarData:[
-      {name:'购票',tid:1},
+      {name:'线上潮玩展',tid:1},
       {name:'线上商品',tid:2},
-      {name:'线下商品',tid:3},
-      {name:'场馆地图',tid:5},
       {name:'参展品牌',tid:4}
     ],
     // 获取手机号弹框
