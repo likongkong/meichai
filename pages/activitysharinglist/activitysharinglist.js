@@ -466,7 +466,7 @@ Page({
     }
   },
   onShareAppMessage: function () {
-    // return Dec.sharemc() 
+    // return app.sharemc() 
     return {
       title: '免单活动列表',
       path: 'pages/activitysharinglist/activitysharinglist',

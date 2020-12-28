@@ -942,7 +942,7 @@ Page({
          }
       }
 　　}else{
-      var reshare = Dec.sharemc()
+      var reshare = app.sharemc()
       // var shareimg = _this.data.paycheadwsongimg || _this.data.paycheadwsongimgling;
       // var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
       // if (!reg.test(shareimg)) {
@@ -1021,7 +1021,7 @@ Page({
       //         success: function (res) { },
       //       };
       //     }else{
-      //       var reshare = Dec.sharemc()
+      //       var reshare = app.sharemc()
       //     }
 
       //   } 

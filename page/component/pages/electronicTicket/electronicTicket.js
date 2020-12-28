@@ -792,7 +792,7 @@ Page({
    */
   onShareAppMessage: function () {
     var _this = this;
-    var reshare = Dec.sharemc();
+    var reshare = app.sharemc();
     return reshare
   },
   // 查看物流

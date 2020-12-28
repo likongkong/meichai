@@ -115,7 +115,9 @@ App({
     notAllowShareGoodsId:'',
     // 是否是管理员  有权限进入 发放门票商品的页面
     isManager:false,
-    randommaximum:5
+    randommaximum:5,
+    // 公共分享标题
+    titleShare:''
   },
   //一番赏队列倒计时
   // yifanshangIsInQueueFun(time){
@@ -1132,6 +1134,10 @@ App({
           var indexShare = res.data.List.indexShare || [];
           var indexShareNum = Math.floor(Math.random() * indexShare.length) || 0;
 
+          var indexShare = res.data.List.indexShare || [];
+
+          _this.signindata.titleShare = res.data.Info.titleShare || '潮玩社交平台';
+          
           if(indexShare.length!=0 && indexShare[indexShareNum]){
             _this.signindata.indexShare = indexShare || [];
             var indexShareImg = indexShare[indexShareNum]+'?time=' + nowTime;
@@ -1158,7 +1164,19 @@ App({
       },
       fail: function (res) {}
     })    
-  }
+  },
+// 分享
+sharemc:function(){
+  var _this = this;
+  return {
+    title:  _this.signindata.titleShare,
+    path: 'pages/index/index',
+    imageUrl: _this.signindata.indexShareImg,
+    success: function (res) {}
+  }  
+}
+
+
 
 })
 

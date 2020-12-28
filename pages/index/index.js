@@ -1032,7 +1032,7 @@ Page({
 
 
     return {
-      title: '12月18日 20:00准时开票！',
+      title:app.signindata.titleShare ,
       path: 'pages/index/index',
       imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
       success: function (res) {}

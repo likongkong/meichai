@@ -340,7 +340,7 @@ Page({
     }
   },
   onShareAppMessage: function () {
-    return Dec.sharemc()    
+    return app.sharemc()    
   },
   iftrsearchtipfun: function () {
     this.setData({

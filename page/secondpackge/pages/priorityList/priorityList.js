@@ -18,6 +18,7 @@ Page({
     tgabox:false,
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
+    appNowTime: Date.parse(new Date()),
   },
 
   /**
@@ -35,7 +36,7 @@ Page({
       uid: app.signindata.uid,
       loginid:app.signindata.loginid
     });  
-    this.getInfo();
+    // this.getInfo();
   },
   activsign: function () {
     // 判断是否授权 
@@ -160,7 +161,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    var reshare = Dec.sharemc();
+    var reshare = app.sharemc();
     return reshare
   },
   getInfo(){
