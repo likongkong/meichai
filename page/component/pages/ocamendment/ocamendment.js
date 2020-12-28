@@ -572,7 +572,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (options) {
-    var reshare = Dec.sharemc();
+    var reshare = app.sharemc();
     return reshare
   },
   onShareTimeline:function(){

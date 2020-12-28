@@ -338,7 +338,7 @@ Page({
         success: function (res) { },
       };
     } else {
-      var reshare = Dec.sharemc();
+      var reshare = app.sharemc();
     };
     return reshare
   },

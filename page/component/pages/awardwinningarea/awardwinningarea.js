@@ -831,7 +831,7 @@ Page({
   },
 
   onShareAppMessage: function() {
-    var reshare = Dec.sharemc();
+    var reshare = app.sharemc();
     return reshare
   },
 

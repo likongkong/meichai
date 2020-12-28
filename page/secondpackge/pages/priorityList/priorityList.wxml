@@ -7,7 +7,7 @@
 由于本次展会的延迟，本次通过活动获得展会优先入场资格的用户，优先入场资格将被保留，再次购票直接获得优先入场资格。
 为保证各位粉丝的个人信息安全，我们进行了信息保护，若出现姓氏及证件号露出部分数字相同的粉丝，可联系美拆官方客服微信查询，微信号：Meichaimeichai</text>
     <view class="pLTitle">—————优先入场名单—————</view>
-    <image class="pLImg" mode='widthFix' src="http://www.51chaidan.com/images/act/a1608372885.jpg"></image>
+    <image class="pLImg" mode='widthFix' src="http://www.51chaidan.com/images/act/a1608372885.jpg?time={{appNowTime}}"></image>
 </view>
 
 

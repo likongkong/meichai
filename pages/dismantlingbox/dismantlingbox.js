@@ -1220,8 +1220,9 @@ brandJson:function(){
     if(indexShare.length!=0 && indexShare[indexShareNum]){
       indexShareImg = indexShare[indexShareNum]+'?time=' + Date.parse(new Date());
     };
+    
     return {
-      title:'12月18日 20:00准时开票！',
+      title:app.signindata.titleShare ,
       path: "/pages/dismantlingbox/dismantlingbox?shareId=" + _this.data.giftInfo.shareId + '&referee=' + _this.data.uid,
       imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
     }   
@@ -1240,7 +1241,7 @@ brandJson:function(){
     };
 
     return {
-      title:'12月18日 20:00准时开票！',
+      title:app.signindata.titleShare ,
       imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
     }
   },  

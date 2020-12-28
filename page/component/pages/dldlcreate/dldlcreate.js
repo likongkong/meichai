@@ -450,7 +450,7 @@ Page({
   onPullDownRefresh: function () {},
   onReachBottom: function () {},
   onShareAppMessage: function () {
-    var reshare = Dec.sharemc();
+    var reshare = app.sharemc();
     return reshare 
   },
   onShareTimeline:function(){

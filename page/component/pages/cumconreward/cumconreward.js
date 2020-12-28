@@ -442,7 +442,7 @@ Page({
     this.listdata(1);
   },
   onShareAppMessage: function (options) {
-    var reshare = Dec.sharemc();
+    var reshare = app.sharemc();
     return reshare
   },
   onShareTimeline:function(){
