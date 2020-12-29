@@ -219,7 +219,7 @@ Page({
       // url: "/page/component/pages/exhibitiondetail/exhibitiondetail?id=43161"
       // url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
       // url: "/page/secondpackge/pages/brandDetails/brandDetails?id=140"
-      // url: "/pages/detailspage/detailspage?gid=35843"
+      url: "/pages/detailspage/detailspage?gid=33927"
       // url: "/pages/smokebox/smokebox?gid=331671"
       // url: "/page/component/pages/playgrasslist/playgrasslist"
       // url: "/page/secondpackge/pages/detailSimgEffects/detailSimgEffects?gid=32852"
@@ -234,7 +234,7 @@ Page({
 
       // url: "/page/secondpackge/pages/draw/draw"
 
-      url: "/page/secondpackge/pages/priorityList/priorityList"
+      // url: "/page/secondpackge/pages/priorityList/priorityList"
       
       //邀请函
       // url: "/page/secondpackge/pages/priorityVoting/priorityVoting"
