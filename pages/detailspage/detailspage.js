@@ -2737,6 +2737,12 @@ Page({
             isUseBlindboxMoney:res.data.Ginfo.isDeduct?true:false,
             isDeductNum:res.data.Ginfo.isDeduct&&_this.data.blindboxMoney!=0?1:0,
             isCanShare:res.data.Ginfo.isCanShare
+          },function(){
+              // 是否播放视频
+              if(_this.data.isVideoSwiper){
+                console.log('是否播放视频')
+                _this.previewVideo();
+              };
           });
           if (_this.data.is_exhibition==1||(_this.data.is_exhibition!=1&&_this.data.brandId>0)){
             // 展会
@@ -2756,7 +2762,6 @@ Page({
             wx.hideShareMenu();
             _this.setData({isShareFun : false});
           };
-
 
 
         };
@@ -3004,6 +3009,11 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
+    var _this = this;
+    if (_this.data.isVideoSwiper) {
+      _this.data.videoContext.pause()
+      _this.data.videoContext.stop()
+    };
     clearInterval(this.data.wintheprtintervaldetail);
   },
   /**
@@ -3369,7 +3379,10 @@ Page({
   swiperchangeindex: function (detail){
     this.setData({
       detailSwiperindex: detail.detail.current
-    })
+    });
+    if(this.data.isVideoSwiper && this.data.ishowvideo && this.data.video){
+      this.closevideo();
+    }
   },
   changeGoodsSwip: function (detail) {
     if (detail.detail.source == "touch") {
