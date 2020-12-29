@@ -18,10 +18,13 @@ Page({
     tgabox:false,
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
+    pid:0,
     isShowSearch:false,
     receivingaddress:false,
     recordlistData:[],
-    inputValue:''
+    inputValue:'',
+    isWinning:false,
+    isReachBottom:true
   },
 
   /**
@@ -37,10 +40,12 @@ Page({
     var _this = this;
     _this.setData({
       uid: app.signindata.uid,
-      loginid:app.signindata.loginid
+      loginid:app.signindata.loginid,
+      isProduce: app.signindata.isProduce,
     });  
     this.getInfo();
     this.getDrawRecord();
+    this.nextpagediao();
   },
   activsign: function () {
     // 判断是否授权 
@@ -149,14 +154,23 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.getInfo()
+    this.getInfo();
+    this.getDrawRecord();
+    this.setData({
+      isReachBottom: true,
+      pid:0,
+      recordlistData:[]
+    })
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    if(this.data.isReachBottom){
+      this.data.pid = ++this.data.pid;
+      this.getDrawRecord();
+    }
   },
   clicktganone: function () {
     this.setData({ tgabox: false })
@@ -192,17 +206,22 @@ Page({
           var listData = res.data.List;
           _this.setData({
             infoData,
-            listData
+            listData,
+            chancenum:infoData.temp_chance_num,
+            isShowWill:infoData.is_show_will,
+            explain:infoData.rules || 'Hello world',
           })
         }
       }
     }); 
   },
+  // 抽奖记录
   getDrawRecord(){
     var _this = this;
+    var pid = _this.data.pid;
     wx.showLoading({ title: '加载中...'})
-    var q = Dec.Aese('mod=LuckyDraw&operation=LotteryRecordList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
-    console.log('mod=LuckyDraw&operation=LotteryRecordList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+    var q = Dec.Aese('mod=LuckyDraw&operation=LotteryRecordList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&pid=' + pid)
+    console.log('mod=LuckyDraw&operation=LotteryRecordList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&pid=' + pid)
     wx.request({
       url: app.signindata.comurl + 'spread.php'+q,
       method: 'GET',
@@ -213,9 +232,14 @@ Page({
         wx.stopPullDownRefresh();
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
+          if(res.data.List.exchange_record_list.length<40){
+            _this.setData({
+              isReachBottom:false
+            })
+          }
           for(var i = 0; i < res.data.List.exchange_record_list.length; i++){
-            res.data.List.exchange_record_list[i].yearMonthDay = _this.formatTimeTwo(res.data.List.exchange_record_list[i].create_at, 'Y年M月D日');
-            res.data.List.exchange_record_list[i].hourMinuteSecond = _this.formatTimeTwo(res.data.List.exchange_record_list[i].create_at, 'h：m');
+            res.data.List.exchange_record_list[i].yearMonthDay = _this.formatTimeTwo(res.data.List.exchange_record_list[i].update_stamp, 'Y年M月D日');
+            res.data.List.exchange_record_list[i].hourMinuteSecond = _this.formatTimeTwo(res.data.List.exchange_record_list[i].update_stamp, 'h：m');
           }
           var recordlistData = [..._this.data.recordlistData,...res.data.List.exchange_record_list];
           _this.setData({
@@ -227,11 +251,15 @@ Page({
   },
   // 兑换奖券
   getRaffleTicket(){
-    console.log(this.data.inputValue)
+    var cdkey = this.data.inputValue;
+    if(cdkey == ''){
+      app.showToastC('请输入兑换码');
+      return false;
+    }
     var _this = this;
     wx.showLoading({ title: '加载中...'})
-    var q = Dec.Aese('mod=LuckyDraw&operation=ForTickets&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
-    console.log('mod=LuckyDraw&operation=ForTickets&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+    var q = Dec.Aese('mod=LuckyDraw&operation=ForTickets&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&cdkey='+cdkey)
+    console.log('mod=LuckyDraw&operation=ForTickets&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&cdkey='+cdkey)
     wx.request({
       url: app.signindata.comurl + 'spread.php'+q,
       method: 'GET',
@@ -240,8 +268,10 @@ Page({
         console.log('获取兑奖券======',res)
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
+          app.showToastC(res.data.Msg);
           _this.setData({
-            inputValue:''
+            inputValue:'',
+            chancenum:++_this.data.chancenum
           })
         }else{
           app.showToastC(res.data.Msg);
@@ -252,6 +282,7 @@ Page({
   // 抽奖
   drawAward(){
     var _this = this;
+    _this.setData({isWinning:false})
     wx.showLoading({ title: '加载中...'})
     var q = Dec.Aese('mod=LuckyDraw&operation=PerformDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
     console.log('mod=LuckyDraw&operation=PerformDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
@@ -263,7 +294,27 @@ Page({
         console.log('抽奖======',res)
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
-         
+          var willInfo = res.data.Info.willInfo;
+          var lastone = res.data.Info.lottery_record_lastone;
+          if(willInfo.isRealGift){
+            // _this.getInfo();
+            _this.setData({isShowWill:2,})
+          }
+          lastone.yearMonthDay = _this.formatTimeTwo(lastone.update_stamp, 'Y年M月D日');
+          lastone.hourMinuteSecond = _this.formatTimeTwo(lastone.update_stamp, 'h：m');
+          _this.data.recordlistData.unshift(lastone)
+          _this.setData({
+            recordlistData:_this.data.recordlistData,
+            isWinning:true,
+            willInfo:res.data.Info.willInfo
+          })
+
+          if(_this.data.chancenum>0){
+            _this.setData({
+              chancenum:--_this.data.chancenum
+            }) 
+          }
+          // _this.getDrawRecord();
         }else{
           app.showToastC(res.data.Msg);
         }
@@ -274,8 +325,8 @@ Page({
   acceptPrize(){
     var _this = this;
     wx.showLoading({ title: '加载中...'})
-    var q = Dec.Aese('mod=LuckyDraw&operation=award&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
-    console.log('mod=LuckyDraw&operation=award&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+    var q = Dec.Aese('mod=LuckyDraw&operation=award&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&aid=' + _this.data.tipaid)
+    console.log('mod=LuckyDraw&operation=award&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&aid=' + _this.data.tipaid)
     wx.request({
       url: app.signindata.comurl + 'spread.php'+q,
       method: 'GET',
@@ -284,7 +335,13 @@ Page({
         console.log('领奖======',res)
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
-         
+          app.showToastC(res.data.Msg);
+          for(var i = 0;i<_this.data.recordlistData.length;i++){
+            _this.data.recordlistData[i].is_reply = 2
+          }
+          _this.setData({
+            recordlistData:_this.data.recordlistData
+          }) 
         }else{
           app.showToastC(res.data.Msg);
         }
@@ -298,10 +355,24 @@ Page({
     }); 
   },
 
+  toogleWinningPopup(){
+    this.setData({
+      isWinning:!this.data.isWinning,
+    }); 
+  },
+
+  receivingaddressfun(){
+    this.setData({
+      receivingaddress:false,
+    }); 
+  },
+
   // 领奖
   getAward(){
     var _this= this;
-    _this.nextpagediao();
+    _this.setData({
+      receivingaddress:true
+    })
   },
 
   // 下一页返回调取
@@ -406,12 +477,7 @@ Page({
       tipaddress: tipadd,
       receivingaddress: false
     });
-    if(this.data.infoActivity.joinMothed == 'payTicket' && this.data.infoActivity.payTicketCate == 'fullPledge'){
-      this.setData({
-        isfullPledge:true
-      });
-      this.joinDraw(0);
-    }
+    this.acceptPrize();
   },
 
   // 编辑地址
@@ -436,7 +502,13 @@ Page({
     })
   },
 
-
+  // 跳转抽盒机列表
+  jumpPage(){
+    this.setData({isWinning:false})
+    wx.navigateTo({
+      url: "/pages/smokeboxlist/smokeboxlist"
+    })
+  },
 
 
   formatNumber(n) {
@@ -454,11 +526,11 @@ Page({
     var returnArr = [];
     var date = new Date(number * 1000);
     returnArr.push(date.getFullYear());
-    returnArr.push(formatNumber(date.getMonth() + 1));
-    returnArr.push(formatNumber(date.getDate()));
-    returnArr.push(formatNumber(date.getHours()));
-    returnArr.push(formatNumber(date.getMinutes()));
-    returnArr.push(formatNumber(date.getSeconds()));
+    returnArr.push(this.formatNumber(date.getMonth() + 1));
+    returnArr.push(this.formatNumber(date.getDate()));
+    returnArr.push(this.formatNumber(date.getHours()));
+    returnArr.push(this.formatNumber(date.getMinutes()));
+    returnArr.push(this.formatNumber(date.getSeconds()));
     for (var i in returnArr) {
       format = format.replace(formateArr[i], returnArr[i]);
     }

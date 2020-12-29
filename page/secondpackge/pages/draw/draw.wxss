@@ -13,6 +13,16 @@ page{
 .banner{
   width: 100%;
   height: 200rpx;
+  position:relative;
+}
+.banner::after{
+  content:'在线抽盒机';
+  position:absolute;
+  bottom:10rpx;
+  right:30rpx;
+  font-size:28rpx;
+  color:#E94F57;
+  text-decoration:underline;
 }
 .banner image{
   width: 100%;
@@ -65,7 +75,7 @@ page{
   background: #E94F57;
   border-radius: 10rpx;
   text-align: center;
-  line-height: 55rpx;
+  line-height: 52rpx;
   font-size: 26rpx;
   color: #fff;
   margin: 0 6.5rpx;
