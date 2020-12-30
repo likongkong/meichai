@@ -74,9 +74,9 @@
  
 
 	<!--  测试  -->
-	<view style='height:220rpx;width:100%;text-align:center; display: table;position: relative;' class='rotate' catchtap='jumpxinxi'>
+	<!-- <view style='height:220rpx;width:100%;text-align:center; display: table;position: relative;' class='rotate' catchtap='jumpxinxi'>
 		<text style='display: table-cell;vertical-align:middle;text-align:center;'>测试跳转</text>
-	</view>
+	</view> -->
 
 	<!--   数据  -->
 

@@ -69,13 +69,22 @@ Page({
     countdown:'',
     isAwardBox:false,
     isBuyingTickets:false,
-    arr:[
-      {x:3,y:6},
-      {x:4,y:6},
-      {x:5,y:6},
-    ],
-    isShowDrawTxt:false
+    isShowDrawTxt:false,
+    is_show:false,
+    // 商品默认图片
+    defaultimg:'/pages/images/goods_Item_Default_Image.png',
   },
+  // 获取滚动条当前位置
+  onPageScroll: function (e) {
+    if(e.scrollTop>1100){
+      if(!this.data.is_show){
+        this.setData({
+          is_show: true
+        }); 
+      };
+    }
+  },  
+
   toggleAwardFun(){
     this.setData({
       isAwardBox:!this.data.isAwardBox
@@ -844,22 +853,21 @@ brandJson:function(){
           console.log('品牌信息=====',res)
           wx.stopPullDownRefresh();
           wx.hideLoading()
-          // 品牌数据
-          _this.toyShowbrandJson();
-          _this.brandJson();
           if (res.data.ReturnCode == 200) {
             if(num==1){
-              var bannerList = res.data.List.bannerList || [];
+              var listData = res.data.List || {};
+              var infoData = res.data.Info || {};
+              var bannerList = listData.bannerList || [];
               // var brandList = res.data.List.brand || [];
-              var goodsInfo = res.data.List.goodsInfo || [];
-              var calendarList = res.data.List.calendar || [];
-              var isMobileAuth = res.data.Info.isMobileAuth || false;
-              var countSubsribe = res.data.Info.countSubsribe || 0;
-              _this.data.countdown = res.data.Info.endTime || '';
+              var goodsInfo = listData.goodsInfo || [];
+              var calendarList = listData.calendar || [];
+              var isMobileAuth = infoData.isMobileAuth || false;
+              var countSubsribe = infoData.countSubsribe || 0;
+              _this.data.countdown = infoData.endTime || '';
               _this.countdownbfun();
               _this.setData({
                 bannerList:bannerList,
-                urlScratch:res.data.Info.urlScratch,
+                urlScratch:infoData.urlScratch,
                 calendarList,
                 // brandList,
                 goodsInfo,
@@ -892,6 +900,10 @@ brandJson:function(){
             }
 
           };
+          // 品牌数据
+          _this.toyShowbrandJson();
+          _this.brandJson();
+
         },
   
       })
