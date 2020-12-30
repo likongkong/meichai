@@ -12,10 +12,10 @@ page{
 
 .banner{
   width: 100%;
-  height: 200rpx;
+  height: 400rpx;
   position:relative;
 }
-.banner::after{
+/* .banner::after{
   content:'在线抽盒机';
   position:absolute;
   bottom:10rpx;
@@ -23,19 +23,35 @@ page{
   font-size:28rpx;
   color:#E94F57;
   text-decoration:underline;
+} */
+.banner view{
+  width: 186rpx;
+  height: 70rpx;
+  position: absolute;
+  right: 15rpx;
+  bottom: 30rpx;
+  background: url(https://cdn.51chaidan.com/images/toyShow3/goOpenBox.png)no-repeat;
+  background-size: 100% 100%;
+  text-align: center;
+  line-height: 70rpx;
+  color: #fff;
+  font-size: 30rpx;
 }
 .banner image{
   width: 100%;
-  height: 200rpx;
+  height: 400rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 .exchangeWrap{
-  width: 720rpx;
-  height: 384rpx;
-  border-radius: 5px;
+  width: 700rpx;
+  height: 65rpx;
+  /* border-radius: 5px;
   box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.4); 
-  margin: 15rpx;
   position: relative;
-  overflow: hidden;
+  overflow: hidden; */
+  margin: 25rpx 25rpx 0 25rpx;
 }
 .exchangeBg{
   width: 720rpx;
@@ -47,11 +63,11 @@ page{
   z-index: -1;
 }
 .exchangeInputWrap{
-  width: 580rpx;
-  height: 65rpx;
+  width: 100%;
+  height: 80rpx;
   background: #fff;
-  margin: 65rpx 70rpx 0;
-  border: 2rpx solid rgba(187, 187, 187, 100);
+  /* margin: 65rpx 70rpx 0; */
+  /* border: 2rpx solid rgba(187, 187, 187, 100); */
   border-radius: 10rpx;
   background: rgba(255,255,255,.7);
   display: flex;
@@ -60,8 +76,8 @@ page{
 }
 .exchangeInputWrap input{
   width: 432rpx;
-  height: 65rpx;
-  font-size: 24rpx;
+  height: 80rpx;
+  font-size: 28rpx;
   padding-left: 30rpx;
   box-sizing: border-box;
   font-weight: bold;
@@ -71,14 +87,14 @@ page{
 }
 .exchangeInputWrap view{
   width: 135rpx;
-  height: 52rpx;
+  height: 62rpx;
   background: #E94F57;
   border-radius: 10rpx;
   text-align: center;
-  line-height: 52rpx;
-  font-size: 26rpx;
+  line-height: 62rpx;
+  font-size: 28rpx;
   color: #fff;
-  margin: 0 6.5rpx;
+  margin: 0 14.5rpx;
 }
 .ticketNum{
   width: 300rpx;
