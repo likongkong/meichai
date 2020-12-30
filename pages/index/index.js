@@ -274,7 +274,6 @@ Page({
 
       // url: "/pages/modifythenickname/modifythenickname?brand_id=210"
       
-
     });
   },
   // 公共跳转

@@ -6,15 +6,16 @@
   
   <view class="banner" catchtap="jumpPage">
     <image src="{{infoData.blindBoxArr.advertising_img}}" mode="aspectFill"></image>
+    <view>去抽盒</view>
   </view>
   <view class="exchangeWrap"> 
-    <image class="exchangeBg" src="{{infoData.blindBoxArr.list_img}}" mode="aspectFill"></image>
+    <!-- <image class="exchangeBg" src="{{infoData.blindBoxArr.list_img}}" mode="aspectFill"></image> -->
     <view class="exchangeInputWrap">
       <input type="text" placeholder-class="exchangeInputBox" bindinput="bindKeyInput" placeholder="请输入奖券兑换码" value="{{inputValue}}"/>
       <view catchtap="getRaffleTicket">兑换奖券</view>
     </view>
-    <text class="ticketNum"> 剩余兑奖券：{{chancenum}} </text>
-    <view class="drawBtn1" catchtap="drawAward">抽奖</view>
+    <!-- <text class="ticketNum"> 剩余兑奖券：{{chancenum}} </text>
+    <view class="drawBtn1" catchtap="drawAward">抽奖</view> -->
   </view>
   <view class="awardWrap1">
     <view class="TopBox">

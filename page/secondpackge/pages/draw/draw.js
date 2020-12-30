@@ -268,10 +268,20 @@ Page({
         console.log('获取兑奖券======',res)
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
-          app.showToastC(res.data.Msg);
+          var willInfo = res.data.Info.willInfo;
+          var lastone = res.data.Info.lottery_record_lastone;
+          if(willInfo.isRealGift){
+            // _this.getInfo();
+            _this.setData({isShowWill:2,})
+          }
+          lastone.yearMonthDay = _this.formatTimeTwo(lastone.update_stamp, 'Y年M月D日');
+          lastone.hourMinuteSecond = _this.formatTimeTwo(lastone.update_stamp, 'h：m');
+          _this.data.recordlistData.unshift(lastone)
           _this.setData({
-            inputValue:'',
-            chancenum:++_this.data.chancenum
+            recordlistData:_this.data.recordlistData,
+            isWinning:true,
+            willInfo:res.data.Info.willInfo,
+            inputValue:''
           })
         }else{
           app.showToastC(res.data.Msg);
@@ -283,6 +293,7 @@ Page({
   drawAward(){
     var _this = this;
     _this.setData({isWinning:false})
+    return false;
     wx.showLoading({ title: '加载中...'})
     var q = Dec.Aese('mod=LuckyDraw&operation=PerformDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
     console.log('mod=LuckyDraw&operation=PerformDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
@@ -340,7 +351,9 @@ Page({
             _this.data.recordlistData[i].is_reply = 2
           }
           _this.setData({
-            recordlistData:_this.data.recordlistData
+            recordlistData:_this.data.recordlistData,
+            isWinning:false,
+            isShowWill:1
           }) 
         }else{
           app.showToastC(res.data.Msg);
