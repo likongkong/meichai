@@ -42,11 +42,19 @@ Page({
     shareShopData:'',
     mapImgDisplay:false,
     iftrdetailpagetwo:false,
+    // shunButBarData:[
+    //   {name:'线上潮玩展',tid:1},
+    //   {name:'线上商品',tid:2},
+    //   {name:'参展品牌',tid:4}
+    // ],
+
     shunButBarData:[
-      {name:'线上潮玩展',tid:1},
-      {name:'线上商品',tid:2},
+      {name:'直播间订阅',tid:1},
+      {name:'展会限定福利',tid:2},
+      {name:'展品预告',tid:3},
       {name:'参展品牌',tid:4}
     ],
+
     // 获取手机号弹框
     havephoneiftr:false,
     // 是否已认证手机号
@@ -1209,10 +1217,9 @@ brandJson:function(){
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function (options) {
     var _this = this;
     var giftInfo = _this.data.giftInfo || {};
-    var img = 'https://cdn.51chaidan.com/images/default/toyShow/toyshowShare.jpg';
 
     var indexShare = app.signindata.indexShare || [];
     var indexShareNum = Math.floor(Math.random() * indexShare.length) || 0;
@@ -1220,12 +1227,23 @@ brandJson:function(){
     if(indexShare.length!=0 && indexShare[indexShareNum]){
       indexShareImg = indexShare[indexShareNum]+'?time=' + Date.parse(new Date());
     };
-    
-    return {
-      title:app.signindata.titleShare ,
-      path: "/pages/dismantlingbox/dismantlingbox?shareId=" + _this.data.giftInfo.shareId + '&referee=' + _this.data.uid,
-      imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
-    }   
+
+    if (options.from == 'button' ){
+      return {
+        title: '我正在领展会限定福利，数量有限，先到先得' ,
+        path: "/pages/dismantlingbox/dismantlingbox?shareId=" + _this.data.giftInfo.shareId + '&referee=' + _this.data.uid,
+        imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      }
+    }else{
+
+      return {
+        title:app.signindata.titleShare ,
+        path: "/pages/dismantlingbox/dismantlingbox?shareId=" + _this.data.giftInfo.shareId + '&referee=' + _this.data.uid,
+        imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      } 
+    };
+
+  
   },
   
   onShareTimeline:function(){

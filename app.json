@@ -122,6 +122,7 @@
         "pages/canvasRoute/canvasRoute",
         "pages/idCardVerification/idCardVerification",
         "pages/priorityList/priorityList",
+        "pages/blankPage/blankPage",
         "pages/draw/draw"
       ]
     }
