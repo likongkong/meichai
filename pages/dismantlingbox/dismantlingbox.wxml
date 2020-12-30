@@ -92,7 +92,7 @@
 
     <!-- 展会福利 -->
     <block wx:if='{{giftList&&giftList.length!=0}}'>
-        <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;">———— 订阅福利 ————</view>
+        <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e2'>———— 展会限定福利 ————</view>
         <view class="punchExhben">
             <view class="punCheveSrc" wx:for='{{giftList}}' wx:key='key' style="{{index%3==2||index+1==giftList.length?'margin-right:0;':''}}">
                 <view class="punSrcImgBox boxShadow" catchtap="displayDetail" data-ind='{{index}}'>
@@ -121,7 +121,7 @@
     </block>   
 
     <!-- 线上 -->
-		<view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}' id='e2'>————— 线上 —————</view>
+		<view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}' id='e3'>————— 展品预告 —————</view>
     <view style="padding:0 15rpx 20rpx;overflow: hidden;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}'>
         <view class="ssubOnlinEve boxShadow" wx:for="{{goodsListOne.goodsList}}" wx:key="key" style="{{index%3==1?'margin:10rpx 30rpx;':''}}" >
            <image catchtap="jumpGoodsDetails" data-gid='{{item.goods_id}}' class="ssubOnliimg" src="{{item.goods_thumb}}" mode='aspectFit'></image>

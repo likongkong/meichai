@@ -1278,7 +1278,7 @@ App({
 
 // canvasRoute 路径 canvas 展会画路径
 // draw  抽奖
-
+// blankPage 展会空白页跳转
 
 
 

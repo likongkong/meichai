@@ -232,7 +232,9 @@ Page({
       
       // url: "/page/component/pages/limitlottery/limitlottery?id=35405",
 
-      url: "/page/secondpackge/pages/draw/draw"
+      // url: "/page/secondpackge/pages/draw/draw"
+
+      url: "/page/secondpackge/pages/blankPage/blankPage"
 
       // url: "/page/secondpackge/pages/priorityList/priorityList"
       

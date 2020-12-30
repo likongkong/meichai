@@ -24,7 +24,7 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": false,
+		"useCompilerModule": true,
 		"userConfirmedUseCompilerModuleSwitch": false,
 		"useMultiFrameRuntime": false,
 		"useApiHook": true,
@@ -40,6 +40,14 @@
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
 		"plugin": {
 			"list": []
 		},
@@ -58,9 +66,9 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 1,
 					"name": "一番赏列表",
-					"pathName": "page/secondpackge/pages/aRewardList/aRewardList",
+					"pathName": "page/secondpackge/pages/blankPage/blankPage",
 					"query": "",
 					"scene": null
 				},
@@ -90,65 +98,6 @@
 					"name": "商品详情",
 					"pathName": "pages/detailspage/detailspage",
 					"query": "gid=34183",
-					"scene": null
-				},
-				{
-					"name": "展会日历",
-					"pathName": "page/secondpackge/pages/calendarList/calendarList",
-					"query": "gid=33056",
-					"scene": null
-				},
-				{
-					"name": "展会",
-					"pathName": "pages/dismantlingbox/dismantlingbox",
-					"query": "",
-					"scene": null
-				},
-				{
-					"name": "page/secondpackge/pages/luckyDraw/luckyDraw",
-					"pathName": "page/secondpackge/pages/luckyDraw/luckyDraw",
-					"query": "",
-					"scene": null
-				},
-				{
-					"name": "page/secondpackge/pages/chouxuanHomepage/chouxuanHomepage",
-					"pathName": "page/secondpackge/pages/chouxuanHomepage/chouxuanHomepage",
-					"query": "",
-					"scene": null
-				},
-				{
-					"name": "page/component/pages/limitlottery/limitlottery",
-					"pathName": "page/component/pages/limitlottery/limitlottery",
-					"query": "id=268926",
-					"scene": null
-				},
-				{
-					"name": "page/secondpackge/pages/priorityVoting/priorityVoting",
-					"pathName": "page/secondpackge/pages/priorityVoting/priorityVoting",
-					"query": "",
-					"scene": null
-				},
-				{
-					"name": "page/component/pages/limitlottery/limitlottery",
-					"pathName": "page/component/pages/limitlottery/limitlottery",
-					"query": "id=268933",
-					"scene": null
-				},
-				{
-					"name": "抽奖",
-					"pathName": "page/secondpackge/pages/draw/draw",
-					"query": "",
-					"scene": null
-				},
-				{
-					"name": "pages/wode/wode",
-					"pathName": "pages/wode/wode",
-					"query": "",
-					"scene": null
-				},
-				{
-					"name": "pages/myorder/myorder",
-					"pathName": "pages/myorder/myorder",
 					"scene": null
 				}
 			]
