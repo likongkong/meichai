@@ -6,7 +6,7 @@
 
 
 page{
-  background:#f4f5f9;
+  background:#EDEDED;
   padding-bottom: 230rpx;
 }
 
@@ -75,7 +75,7 @@ page{
   align-items: center;
 }
 .exchangeInputWrap input{
-  width: 432rpx;
+  width: 400rpx;
   height: 80rpx;
   font-size: 28rpx;
   padding-left: 30rpx;
@@ -83,7 +83,7 @@ page{
   font-weight: bold;
 }
 .exchangeInputBox{
-  color: #666666;
+  color: #C7C7C7;
 }
 .exchangeInputWrap view{
   width: 135rpx;
