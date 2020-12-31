@@ -84,7 +84,6 @@ Page({
       };
     }
   },  
-
   toggleAwardFun(){
     this.setData({
       isAwardBox:!this.data.isAwardBox

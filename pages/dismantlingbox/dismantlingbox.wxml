@@ -329,7 +329,6 @@
   </view>
 </view>
 
-
 <!-- 弹框  shareShopData -->
 
 <view class='wsh' wx:if='{{shareBoxTip&&shareShopData}}'>
