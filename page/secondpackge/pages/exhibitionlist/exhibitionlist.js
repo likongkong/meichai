@@ -18,7 +18,7 @@ Page({
     uid: app.signindata.uid,
     openid: app.signindata.openid,
 
-    c_title: '展会', // -正品折扣多一点
+    c_title: 'MCTS x JSS潮玩展', // -正品折扣多一点
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
@@ -245,7 +245,7 @@ Page({
   },
   onLoadfun: function () {
     var _this = this;
-    // this.getList(1)
+    
     this.setData({
       loginid: app.signindata.loginid,
       uid: app.signindata.uid,
@@ -278,6 +278,7 @@ Page({
     };
     wx.showLoading({
       title: '加载中...',
+      mask:true
     })
     _this.setData({
       swiperdata:[],
@@ -334,6 +335,8 @@ Page({
               });
             }
           })
+
+          _this.getList(0)
 
           // if (num == 1) {
 

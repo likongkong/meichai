@@ -424,12 +424,11 @@
 
 
 
-
 </view>
 
 <view wx:if='{{pagetype==1 || pagetype==2 || pagetype==14}}' style="width:100%;height:205rpx;"></view>
 
-<view wx:if='{{pagetype==1 || pagetype==2 || pagetype==14}}' style="width:100%;height:210rpx;position:fixed;left:0;bottom:0;background:#f5f6fa;border-radius:10rpx;">
+<view wx:if='{{(pagetype==1 || pagetype==2 || pagetype==14) && adList && adList.length!=0}}' style="width:100%;height:210rpx;position:fixed;left:0;bottom:0;background:#f5f6fa;border-radius:10rpx;">
 	<swiper bindanimationfinish="changeGoodsSwip" current="{{currentIndex}}" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450" style="width:100%;height:100%;">
 		<swiper-item wx:for="{{adList}}" wx:key="key">
 			<image src="{{item.src}}" style="width:100%;height:100%;border-radius:10rpx;display:block;" catchtap="exhibitionpubjump" data-id='{{item.activity_id}}' data-type='{{item.href_type}}'></image>
