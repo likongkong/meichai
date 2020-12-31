@@ -42,11 +42,19 @@ Page({
     shareShopData:'',
     mapImgDisplay:false,
     iftrdetailpagetwo:false,
+    // shunButBarData:[
+    //   {name:'线上潮玩展',tid:1},
+    //   {name:'线上商品',tid:2},
+    //   {name:'参展品牌',tid:4}
+    // ],
+
     shunButBarData:[
-      {name:'线上潮玩展',tid:1},
-      {name:'线上商品',tid:2},
+      {name:'直播间订阅',tid:1},
+      {name:'展会限定福利',tid:2},
+      {name:'展品预告',tid:3},
       {name:'参展品牌',tid:4}
     ],
+
     // 获取手机号弹框
     havephoneiftr:false,
     // 是否已认证手机号
@@ -61,13 +69,21 @@ Page({
     countdown:'',
     isAwardBox:false,
     isBuyingTickets:false,
-    arr:[
-      {x:3,y:6},
-      {x:4,y:6},
-      {x:5,y:6},
-    ],
-    isShowDrawTxt:false
+    isShowDrawTxt:false,
+    is_show:false,
+    // 商品默认图片
+    defaultimg:'/pages/images/goods_Item_Default_Image.png',
   },
+  // 获取滚动条当前位置
+  onPageScroll: function (e) {
+    if(e.scrollTop>1100){
+      if(!this.data.is_show){
+        this.setData({
+          is_show: true
+        }); 
+      };
+    }
+  },  
   toggleAwardFun(){
     this.setData({
       isAwardBox:!this.data.isAwardBox
@@ -836,22 +852,21 @@ brandJson:function(){
           console.log('品牌信息=====',res)
           wx.stopPullDownRefresh();
           wx.hideLoading()
-          // 品牌数据
-          _this.toyShowbrandJson();
-          _this.brandJson();
           if (res.data.ReturnCode == 200) {
             if(num==1){
-              var bannerList = res.data.List.bannerList || [];
+              var listData = res.data.List || {};
+              var infoData = res.data.Info || {};
+              var bannerList = listData.bannerList || [];
               // var brandList = res.data.List.brand || [];
-              var goodsInfo = res.data.List.goodsInfo || [];
-              var calendarList = res.data.List.calendar || [];
-              var isMobileAuth = res.data.Info.isMobileAuth || false;
-              var countSubsribe = res.data.Info.countSubsribe || 0;
-              _this.data.countdown = res.data.Info.endTime || '';
+              var goodsInfo = listData.goodsInfo || [];
+              var calendarList = listData.calendar || [];
+              var isMobileAuth = infoData.isMobileAuth || false;
+              var countSubsribe = infoData.countSubsribe || 0;
+              _this.data.countdown = infoData.endTime || '';
               _this.countdownbfun();
               _this.setData({
                 bannerList:bannerList,
-                urlScratch:res.data.Info.urlScratch,
+                urlScratch:infoData.urlScratch,
                 calendarList,
                 // brandList,
                 goodsInfo,
@@ -884,6 +899,10 @@ brandJson:function(){
             }
 
           };
+          // 品牌数据
+          _this.toyShowbrandJson();
+          _this.brandJson();
+
         },
   
       })
@@ -1209,10 +1228,9 @@ brandJson:function(){
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function (options) {
     var _this = this;
     var giftInfo = _this.data.giftInfo || {};
-    var img = 'https://cdn.51chaidan.com/images/default/toyShow/toyshowShare.jpg';
 
     var indexShare = app.signindata.indexShare || [];
     var indexShareNum = Math.floor(Math.random() * indexShare.length) || 0;
@@ -1220,12 +1238,23 @@ brandJson:function(){
     if(indexShare.length!=0 && indexShare[indexShareNum]){
       indexShareImg = indexShare[indexShareNum]+'?time=' + Date.parse(new Date());
     };
-    
-    return {
-      title:app.signindata.titleShare ,
-      path: "/pages/dismantlingbox/dismantlingbox?shareId=" + _this.data.giftInfo.shareId + '&referee=' + _this.data.uid,
-      imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
-    }   
+
+    if (options.from == 'button' ){
+      return {
+        title: '我正在领展会限定福利，数量有限，先到先得' ,
+        path: "/pages/dismantlingbox/dismantlingbox?shareId=" + _this.data.giftInfo.shareId + '&referee=' + _this.data.uid,
+        imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      }
+    }else{
+
+      return {
+        title:app.signindata.titleShare ,
+        path: "/pages/dismantlingbox/dismantlingbox?shareId=" + _this.data.giftInfo.shareId + '&referee=' + _this.data.uid,
+        imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      } 
+    };
+
+  
   },
   
   onShareTimeline:function(){
