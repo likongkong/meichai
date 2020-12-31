@@ -42,19 +42,11 @@ Page({
     shareShopData:'',
     mapImgDisplay:false,
     iftrdetailpagetwo:false,
-    // shunButBarData:[
-    //   {name:'线上潮玩展',tid:1},
-    //   {name:'线上商品',tid:2},
-    //   {name:'参展品牌',tid:4}
-    // ],
-
     shunButBarData:[
-      {name:'直播间订阅',tid:1},
-      {name:'展会限定福利',tid:2},
-      {name:'展品预告',tid:3},
+      {name:'线上潮玩展',tid:1},
+      {name:'线上商品',tid:2},
       {name:'参展品牌',tid:4}
     ],
-
     // 获取手机号弹框
     havephoneiftr:false,
     // 是否已认证手机号
