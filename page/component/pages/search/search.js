@@ -335,6 +335,22 @@ Page({
       url: url+'?'+idtype+'='+e.currentTarget.dataset.itemid
     });
   },
+  clickJumpBrand(e){
+    let itemid = e.currentTarget.dataset.itemid;
+    let itemtype = e.currentTarget.dataset.itemtype;
+    let url = e.currentTarget.dataset.url;
+    let idtype = e.currentTarget.dataset.idtype;
+    if(itemtype == "store"){
+      wx.navigateTo({
+        url: url+'?'+idtype+'='+itemid +"&settlement=0"
+      });
+    }else{
+      wx.navigateTo({
+        url: url+'?'+idtype+'='+itemid +"&settlement=1"
+      });
+    }
+   
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

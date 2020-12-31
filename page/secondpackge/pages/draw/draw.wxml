@@ -26,7 +26,7 @@
       <block wx:for="{{listData.current_prizes_list}}" wx:key='key' data-index="{{index}}">
         <view data-goodsid="{{item.goods_id}}">
           <view style="height:190rpx;">
-            <image class="awardImg" src="{{item.img}}" style="{{item.type == 2?'width:70%;height:130rpx;':''}}" mode="aspectFill"></image>
+            <image class="awardImg" src="{{item.img}}" style="{{item.type == 2?'width:70%;height:130rpx;':''}}" mode="aspectFit"></image>
           </view>
           <view>
             <text>{{item.name}}</text>

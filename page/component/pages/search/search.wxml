@@ -63,7 +63,7 @@
     <view class="contentWrap" style="padding-bottom: 20rpx;box-sizing: border-box;">
         <view class='list-center' wx:for="{{listDataB}}" wx:key="index" wx:for-item="parentItem" wx:if="{{!parentItem.itemType}}">
             <block wx:for="{{parentItem}}" wx:key="index">
-                <view wx:if="{{item.itemType == 'store'}}">
+                <view wx:if="{{item.itemType == 'store' || item.itemType == 'toyshow'}}">
                     <template is="store" data="{{...item}}"></template>
                 </view>
             </block>
@@ -104,7 +104,7 @@
 
 <!-- 店铺 -->
 <template name="store">
-    <view class="entireRowWrap" data-itemid="{{infoStore.id}}" data-itemType="{{itemType}}" data-idtype="id" data-url="/page/secondpackge/pages/brandDetails/brandDetails" catchtap="clickJump">
+    <view class="entireRowWrap" data-itemid="{{infoStore.id}}" data-itemType="{{itemType}}" data-idtype="id" data-url="/page/secondpackge/pages/brandDetails/brandDetails" catchtap="clickJumpBrand">
         <view class="shopNameWdap">
             <view>
                 <image src="{{infoStore.logo}}" mode="widthFix"></image>
