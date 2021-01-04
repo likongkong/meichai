@@ -288,6 +288,11 @@ Page({
               };
               arrlist[i].start_time = _this.toDate(arrlist[i].start_time);
               arrlist[i].stop_time = _this.toDate(arrlist[i].stop_time);
+              if(arrlist[i].brand &&  arrlist[i].brand.name && arrlist[i].brand.name.indexOf("旗舰店") != -1){
+                arrlist[i].isBrandNaq = 1;
+              }else{
+                arrlist[i].isBrandNaq = 0;
+              };
             };
           };
           if (num == 1) {

@@ -166,7 +166,7 @@
       <image class='sonsoimg' catchtap='gobrandDetails' data-mid='{{userbranddata.id}}' src='{{commoddata.brand.logo}}'>
       </image>
       <view class='sonsotxt specialellipsis' catchtap='gobrandDetails' data-mid='{{userbranddata.id}}' style="width:460rpx;">
-        {{commoddata.brand.name}}旗舰店
+        <block wx:if='{{commoddata.isBrandNaq==1}}'>{{commoddata.brand.name}}</block><block wx:else>{{commoddata.brand.name}}旗舰店</block>
       </view>
       <view class='sonsoright' catchtap='sponsocopyone'>
         品牌入驻

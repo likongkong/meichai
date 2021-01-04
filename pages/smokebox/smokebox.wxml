@@ -102,6 +102,12 @@
 
 	<view style='width:500rpx;text-align:center;padding:20rpx 125rpx;line-height:35rpx;font-size:30rpx;'>{{activity.name}}</view>
 
+  <view class="boxBene" wx:if='{{(welfareTags && welfareTags.length!=0) || activity.isRecycle}}'>
+	    <view wx:if="{{activity.isRecycle}}" style="min-width:108rpx;background:#1890ff;border-radius:3px;width:60px;height:40rpx;line-height:40rpx;left:10px;font-size: 24rpx;color:#ffffff;margin: 0 10rpx;display: inline-block;" catchtap="toggleRecyclerule">{{activity.recycleRatio}}折回收</view>
+	    <view class="boxBenefits" wx:for='{{welfareTags}}' wx:key='key'>{{item}}</view>
+	</view>
+	
+
 	<view style='width:100%;position:relative;'>
 
 		<view wx:if='{{isallready && idlist.length>0}}' class='arrowParentStyle' style='left:23rpx;' catchtap='chancebox'>
@@ -148,8 +154,8 @@
 			</view>
 
 			<block>
-			<view wx:if="{{activity.isRecycle}}" style="min-width:108rpx;background:#1890ff;border-radius:3px;width:60px;left:10px;font-size: 24rpx;color:#ffffff;margin:0 60rpx;" catchtap="toggleRecyclerule">{{activity.recycleRatio}}折回收</view>
-			<view wx:elif="{{suplusTry>0}}" style="width:108rpx; height:80rpx;line-height:80rpx;display: inline-block;color: #4c9a23;font-size: 24rpx;margin:0 60rpx;"></view>
+			<!-- <view wx:if="{{activity.isRecycle}}" style="min-width:108rpx;background:#1890ff;border-radius:3px;width:60px;left:10px;font-size: 24rpx;color:#ffffff;margin:0 60rpx;" catchtap="toggleRecyclerule">{{activity.recycleRatio}}折回收</view>
+			<view wx:elif="{{suplusTry>0}}" style="width:108rpx; height:80rpx;line-height:80rpx;display: inline-block;color: #4c9a23;font-size: 24rpx;margin:0 60rpx;"></view> -->
 			</block>
 
 			<view wx:if='{{suplusTry>0}}' class='tryStyle'>

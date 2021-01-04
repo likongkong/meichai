@@ -968,6 +968,12 @@ Page({
   onShow:function(){
     Dec.shopnum(this);
     Dec.getdoubleEleven(this, app);
+
+    if (this.data.loginid != '' && this.data.uid != '') {
+      this.setData({
+        isTodaySign: app.signindata.isTodaySign
+      });
+    };
     if (this.data.commoddata.length != 0) {
       this.countdownbfun()
     };

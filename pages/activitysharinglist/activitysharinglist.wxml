@@ -32,10 +32,10 @@
             <!-- 未报名 -->
             <view class='aslbcbox' wx:for='{{commoddata}}' wx:key='key' wx:if='{{index%2==0}}' style='position: relative;width:344rpx;margin:0 0 10rpx 0;'>
               <view style="width:100%;position: relative;" catchtap='activitydetailspage' data-id='{{item.id}}' data-type='{{item.type}}'>
-
+ 
                 <view  wx:if='{{item.brand}}' style="position:absolute;left:15rpx;top:15rpx;height:36rpx;overflow:hidden;z-index:5;padding: 4rpx 8rpx;">
                     <image src='{{item.brand.logo}}' style='float:left;width:36rpx;height:36rpx;border-radius:50%;'></image>
-                    <view style='max-width:260rpx;float:left;height:36rpx;line-height:36rpx;font-size:22rpx;color:#fff;margin-left:10rpx;' class='specialellipsis'>{{item.brand.name}}旗舰店</view>
+                    <view style='max-width:260rpx;float:left;height:36rpx;line-height:36rpx;font-size:22rpx;color:#fff;margin-left:10rpx;' class='specialellipsis'><block wx:if='{{item.isBrandNaq==1}}'>{{item.brand.name}}</block><block wx:else>{{item.brand.name}}旗舰店</block></view>
                     <view style="  width: 100%;height: 100%;background: #000;opacity: 0.6;position: absolute;top: 0;left: 0;z-index: -1;border-radius: 10rpx;"></view>
                 </view>
 
@@ -110,7 +110,7 @@
 
                 <view  wx:if='{{item.brand}}' style="position:absolute;left:15rpx;top:15rpx;height:36rpx;overflow:hidden;z-index:5;padding: 4rpx 8rpx;">
                     <image src='{{item.brand.logo}}' style='float:left;width:36rpx;height:36rpx;border-radius:50%;'></image>
-                    <view style='max-width:260rpx;float:left;height:36rpx;line-height:36rpx;font-size:22rpx;color:#fff;margin-left:10rpx;' class='specialellipsis'>{{item.brand.name}}旗舰店</view>
+                    <view style='max-width:260rpx;float:left;height:36rpx;line-height:36rpx;font-size:22rpx;color:#fff;margin-left:10rpx;' class='specialellipsis'><block wx:if='{{item.isBrandNaq==1}}'>{{item.brand.name}}</block><block wx:else>{{item.brand.name}}旗舰店</block></view>
                     <view style="  width: 100%;height: 100%;background: #000;opacity: 0.6;position: absolute;top: 0;left: 0;z-index: -1;border-radius: 10rpx;"></view>
                 </view>              
                 <!-- 赞助商 -->
