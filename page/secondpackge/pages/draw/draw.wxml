@@ -6,13 +6,14 @@
   
   <view class="banner" catchtap="jumpPage">
     <image src="{{infoData.blindBoxArr.advertising_img}}" mode="aspectFill"></image>
-    <view>去抽盒</view>
+    <!-- <view>去抽盒</view> -->
   </view>
   <view class="exchangeWrap"> 
     <!-- <image class="exchangeBg" src="{{infoData.blindBoxArr.list_img}}" mode="aspectFill"></image> -->
     <view class="exchangeInputWrap">
       <input type="text" placeholder-class="exchangeInputBox" bindinput="bindKeyInput" placeholder="请输入奖券兑换码" value="{{inputValue}}"/>
       <view catchtap="getRaffleTicket">兑换奖券</view>
+      <view style="margin-left:0;background: #298DF8;" catchtap="jumpPage">去抽盒</view>
     </view>
     <!-- <text class="ticketNum"> 剩余兑奖券：{{chancenum}} </text>
     <view class="drawBtn1" catchtap="drawAward">抽奖</view> -->
@@ -43,7 +44,7 @@
       <block wx:for="{{recordlistData}}" wx:key='key' data-index="{{index}}">
         <view class="drawRecordItem">
           <view class="drawRecordItemFlex drawRecordItemT">
-            <view>奖品 <text style="color:#d48733;" wx:if="{{item.is_reply == 2}}">（已领取）</text></view>
+            <view>奖品 <text style="{{item.is_reply == 2?'color:#666666;':'color:#d48733;'}}">{{item.is_reply == 2?'（已领取）':'（未领取）'}}</text></view>
             <view>{{item.yearMonthDay}}</view>
           </view>
           <view class="drawRecordItemFlex drawRecordItemB">
@@ -54,7 +55,7 @@
       </block>
     </view>
     <view class="prizeBtn" catchtap="getAward" wx:if="{{isShowWill == 2}}">
-      领奖
+      全部领取
     </view>
   </view> 
 </view>
