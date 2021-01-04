@@ -118,10 +118,27 @@
           <image class="punchImgWxShare" src="https://cdn.51chaidan.com/images/icon/iconShareWX.png"><button open-type="share"  style='position:absolute;height:100%;width:100%;left:0;top:0;z-index:3;opacity:0;'></button></image> 
            <view class="clockInIns" catchtap="mapImgDisplayfun">{{giftInfo.titleIntroduce}}</view>
         </view>
-    </block>   
+    </block>  
+    
+    
+    <!-- 手作专区 -->
+    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}' id='e30'>
+      <image style="width:200rpx;height:auto" src="https://cdn.51chaidan.com/images/toyShow3/handmadeZone.png" mode="widthFix"></image>
+    </view>
+    <view style="padding:0 15rpx 20rpx;overflow: hidden;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}'>
+        
+    </view>
 
-    <!-- 线上 -->
-		<view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}' id='e3'>————— 展品预告 —————</view>
+    <!-- 海外专区 -->
+    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}' id='e31'>
+      <image style="width:200rpx;height:auto" src="https://cdn.51chaidan.com/images/toyShow3/overseasZone.png" mode="widthFix"></image>
+    </view>
+    <view style="padding:0 15rpx 20rpx;overflow: hidden;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}'>
+        
+    </view>
+
+    <!-- 更多展品 -->
+		<view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}' id='e32'>————— 更多展品 —————</view>
     <view style="padding:0 15rpx 20rpx;overflow: hidden;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}'>
         <view class="ssubOnlinEve boxShadow" wx:for="{{goodsListOne.goodsList}}" wx:key="key" style="{{index%3==1?'margin:10rpx 30rpx;':''}}">
            <image catchtap="jumpGoodsDetails" data-gid='{{item.goods_id}}' class="ssubOnliimg" src="{{is_show||index<20?item.goods_thumb:defaultimg}}" mode='aspectFit'></image>
@@ -391,7 +408,14 @@
 
 <!-- 底部导航条 -->
 <view class="shunButBar">
-   <view class="shunButBarEve" wx:for='{{shunButBarData}}' wx:key='key' catchtap="position" data-tid='{{item.tid}}' style="{{index+1==shunButBarData.length?'border-right:0;':''}}">{{item.name}}</view>
+   <view class="shunButBarEve" wx:for='{{shunButBarData}}' wx:key='key' catchtap="position" data-tid='{{item.tid}}' style="{{index+1==shunButBarData.length?'border-right:0;':''}}">
+     <view style="position: relative;" data-ind="{{item.tid}}" catchtap="{{item.tid == 3?'plus':''}}">
+      <text>{{item.name}}</text>
+      <view wx:if="{{item.tid == 3}}" class="drawerBox" animation="{{animation}}" >
+        <text wx:for='{{item.sonnav}}' wx:for-item="sonItem" wx:key='key' catchtap="position" data-tid='{{sonItem.tid}}'>{{sonItem.name}}</text>
+      </view>
+     </view>
+   </view>
 </view>
 
 <bnavigation isChar='{{false}}' bind:run='auditversion' fashionShow='{{true}}' isProduce='{{isProduce}}'></bnavigation>
