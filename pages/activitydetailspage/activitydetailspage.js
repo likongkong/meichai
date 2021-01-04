@@ -2005,6 +2005,13 @@ closefrindcommoni:function(){
           //   res.data.Info.specialWay = 1;
           // };
 
+          if(arrlist.brand &&  arrlist.brand.name && arrlist.brand.name.indexOf("旗舰店") != -1){
+            arrlist.isBrandNaq = 1;
+          }else{
+            arrlist.isBrandNaq = 0;
+          };
+
+
           _this.setData({
             commoddata: arrlist,
             subscribedata: res.data.Info.subscribe || '',

@@ -711,6 +711,7 @@ Page({
             subscribedata:infoData.vipSubscribe,
             isTempTip:infoData.user.isTempTip,
             tempChanceOverTime:infoData.user.tempChanceOverTime,
+            welfareTags:listDataDetail.welfareTags || []
           })
 
           if(infoData.user.isTempTip){

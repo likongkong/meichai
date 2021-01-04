@@ -151,8 +151,8 @@
               <view class='odhleft'>收货人:{{comdata.consignee}}</view>
               <view class='odhright'>{{comdata.mobile}}</view>
           </view>
-          <view class='ordaddcon'>收货地址:{{comdata.province}}  {{comdata.city}}  {{comdata.district}} {{comdata.address}}
-          </view>
+          <view class='ordaddcon'>收货地址:<block wx:if='{{comdata.province!=0 || comdata.city!=0 || comdata.district!=0 || comdata.address!=0}}'>{{comdata.province}}  {{comdata.city}}  {{comdata.district}} {{comdata.address}}</block><block wx:else>暂未填写</block></view>
+          
       </view>
     </view>
   </block>

@@ -231,14 +231,23 @@
           <text style="font-size:30rpx">{{zunmdata.toyshowPositionNo}}</text>
         </view>
       </view>
-      <view style="display: flex;margin-bottom:10rpx;" wx:if="{{zunmdata.stockOnLine || zunmdata.stockOffLine || zunmdata.giftStock}}"> 
-        <view style="width:140rpx;font-size:30rpx">发售数量 :</view> 
+      <view style="display: flex;margin-bottom:10rpx;" wx:if="{{zunmdata.tipStockOnLine || zunmdata.stockOffLine || zunmdata.giftStock}}"> 
+        <view style="width:170rpx;font-size:30rpx">发售数量 :</view> 
         <view style=""> 
           <text style="display:block;font-size:30rpx" wx:if='{{zunmdata.giftStock}}'>{{zunmdata.giftStock}}</text>
-          <text style="display:block;font-size:30rpx" wx:if="{{zunmdata.stockOnLine}}">线上展会发售{{zunmdata.stockOnLine}}体</text>
-          <text style="display:block;font-size:30rpx" wx:if="{{zunmdata.stockOffLine}}">线下展会发售{{zunmdata.stockOffLine}}体</text>
+          <text style="display:block;font-size:30rpx" wx:if="{{zunmdata.tipStockOnLine}}">{{zunmdata.tipStockOnLine}}</text>
         </view>
       </view> 
+      <view style="display: flex;margin-bottom:10rpx;" wx:if="{{zunmdata.deliver}}"> 
+        <view style="width:170rpx;font-size:30rpx">发货方式 :</view> 
+        <view style=""> 
+          <text style="display:block;font-size:30rpx">{{zunmdata.deliver}}</text>
+        </view>
+      </view> 
+
+
+
+
   </view>
 
 

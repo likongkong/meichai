@@ -2,27 +2,138 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 
+<view class="wrap">
+  
+  <view class="banner" catchtap="jumpPage">
+    <image src="{{infoData.blindBoxArr.advertising_img}}" mode="aspectFill"></image>
+    <view>去抽盒</view>
+  </view>
+  <view class="exchangeWrap"> 
+    <!-- <image class="exchangeBg" src="{{infoData.blindBoxArr.list_img}}" mode="aspectFill"></image> -->
+    <view class="exchangeInputWrap">
+      <input type="text" placeholder-class="exchangeInputBox" bindinput="bindKeyInput" placeholder="请输入奖券兑换码" value="{{inputValue}}"/>
+      <view catchtap="getRaffleTicket">兑换奖券</view>
+    </view>
+    <!-- <text class="ticketNum"> 剩余兑奖券：{{chancenum}} </text>
+    <view class="drawBtn1" catchtap="drawAward">抽奖</view> -->
+  </view>
+  <view class="awardWrap1">
+    <view class="TopBox">
+      <text style="color:#101010;">本期奖品</text>
+      <text style="color:#666666;" catchtap="showSearchFun">抽奖规则</text>
+    </view>
+    <view class="awardWrapBox">
+      <block wx:for="{{listData.current_prizes_list}}" wx:key='key' data-index="{{index}}">
+        <view data-goodsid="{{item.goods_id}}">
+          <view style="height:190rpx;">
+            <image class="awardImg" src="{{item.img}}" style="{{item.type == 2?'width:70%;height:130rpx;':''}}" mode="aspectFit"></image>
+          </view>
+          <view>
+            <text>{{item.name}}</text>
+          </view> 
+        </view>
+      </block>
+    </view>
+  </view>
+  <view class="drawRecordWrap" wx:if="{{recordlistData.length>0}}">
+    <view class="TopBox">
+      <text style="color:#101010;">抽奖记录</text>
+    </view>
+    <view class="drawRecordBox">
+      <block wx:for="{{recordlistData}}" wx:key='key' data-index="{{index}}">
+        <view class="drawRecordItem">
+          <view class="drawRecordItemFlex drawRecordItemT">
+            <view>奖品 <text style="color:#d48733;" wx:if="{{item.is_reply == 2}}">（已领取）</text></view>
+            <view>{{item.yearMonthDay}}</view>
+          </view>
+          <view class="drawRecordItemFlex drawRecordItemB">
+            <view>{{item.title}}</view>
+            <view style="color:#666;">{{item.hourMinuteSecond}}</view>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class="prizeBtn" catchtap="getAward" wx:if="{{isShowWill == 2}}">
+      领奖
+    </view>
+  </view> 
+</view>
+
+<view class="winningPopupMask" catchtap="toogleWinningPopup" catchtouchmove="true" wx:if="{{isWinning}}">
+  <view class="winningBox" catchtap="true">
+    <text class="winningBoxTitle">恭喜你，抽到了</text>
+    <view class="winningImg">
+      <image src="{{willInfo.imgUrl}}" mode="aspectFill"></image>
+    </view>
+    <view class="winningTxt">
+      <text>{{willInfo.name}}</text>
+      <text style="color:#999" wx:if="{{!willInfo.isRealGift}}">奖品已自动发放到您的账号中</text>
+    </view>
+    <view class="winningBtnWrap">
+      <text catchtap="drawAward">继续抽奖</text>
+      <block>
+        <text wx:if="{{willInfo.isRealGift}}" catchtap="getAward">去领奖</text>
+        <text wx:else catchtap="jumpPage">去使用</text>
+      </block>
+    </view>
+  </view>
+</view>
+
+<view class="popupMask" wx:if="{{isShowSearch}}" catchtouchmove="true" catchtap="showSearchFun">
+   <view class="explainBox" catchtap="true">
+      <view class="explainBoxHead">活动规则</view>
+      <scroll-view scroll-y="true" class="callscroll">
+          <text class="callscrollTxt">{{explain}}</text>
+      </scroll-view>
+   </view>
+</view>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!--  收货地址  -->
+<view style="position: fixed;top:0;left:0;width:100%;height:100%;opacity:.4;z-index:999;background:#000" catchtouchmove="true" bindtap='receivingaddressfun' wx:if='{{receivingaddress}}'></view>
+<view class='receivingaddress' wx:if='{{receivingaddress}}'>
+	<view class='recgadhead'>
+		收货地址
+		<image src='../../../../pages/images/forknumber.png' class='recgadheadimg' bindtap='receivingaddressfun'></image>
+	</view>
+	<view class='recgadcon'>
+		<view class='recgaddata' wx:for='{{addressdata}}' wx:key='key'>
+			<view class='recgaddname' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='revisethereceivingaddress'>
+				<view class='recgaddnameleft'>{{item.consignee}}</view>
+				<view class='recgaddnameleft'>{{item.phone}}</view>
+			</view>
+			<view class='recgadaddress' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='revisethereceivingaddress'>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
+			<view class='recgadbottom'>
+				<view class='recgadbotleft'>
+					<image class='recgadbotleftimg' hidden='{{!item.checked}}' src='../../../../pages/images/pressed_click.png'></image>
+					<image class='recgadbotleftimg' hidden='{{item.checked}}' src='../../../../pages/images/normal_click.png'></image>
+					默认地址
+				</view>
+				<view class='recgadbotright' bindtap='deladdress' data-ind="{{item.aid}}">
+					<image src='../../../../pages/images/icon_delete.png' class='recgadbotleftimg'></image>
+					删除
+				</view>
+				<view class='recgadbotright' style='margin-right:50rpx;' bindtap='jumpeditaddress' data-address='{{item.address}}' data-aid='{{item.aid}}' data-city='{{item.city}}' data-consignee='{{item.consignee}}' data-district='{{item.district}}' data-phone='{{item.phone}}' data-province='{{item.province}}' data-idcard='{{item.idcard}}'>
+					<image src='../../../../pages/images/icon_edit.png' class='recgadbotleftimg'></image>
+					编辑
+				</view>
+			</view>
+		</view>
+		<view class='recgadnodata' wx:if='{{addressdata.length==0}}'>
+			<image src='../../../../pages/images/recaddnodata.png' class='recgadnodataimg'></image>
+		</view>
+	</view>
+	<view class='recgadbot' bindtap='jumpaddress'>
+		增加新地址
+	</view>
+</view>
 
 
 
 <tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
 <view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>
+
+
+<bnavigation isProduce='{{isProduce}}' isChar='{{false}}'></bnavigation>
 

@@ -3241,6 +3241,7 @@ Page({
     //   complete: function (res) { },
     // })
   },
+
   // 身份证号弹框取消事件
   idnumbbcenfun:function(){
     this.setData({idnumberboxiftr: !this.data.idnumberboxiftr})
