@@ -218,7 +218,7 @@ Page({
       // url: "/page/component/pages/exhibition/exhibition"
       // url: "/page/component/pages/exhibitiondetail/exhibitiondetail?id=43161"
       // url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
-      url: "/page/secondpackge/pages/brandDetails/brandDetails?id=808&settlement=1"
+      url: "/page/secondpackge/pages/brandDetails/brandDetails?id=474&settlement=1"
       // url: "/pages/detailspage/detailspage?gid=36314"
       // url: "/pages/smokebox/smokebox?gid=331671"
       // url: "/page/component/pages/playgrasslist/playgrasslist"
