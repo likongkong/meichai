@@ -72,10 +72,9 @@
           "scene": null
         },
         {
-          "id": 3,
           "name": "一番赏详情",
           "pathName": "page/secondpackge/pages/aRewardDetails/aRewardDetails",
-          "query": "id=97052",
+          "query": "id=277760",
           "scene": null
         },
         {
@@ -95,6 +94,13 @@
         {
           "name": "pages/dismantlingbox/dismantlingbox",
           "pathName": "pages/dismantlingbox/dismantlingbox",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "一番赏列表",
+          "pathName": "page/secondpackge/pages/aRewardList/aRewardList",
+          "query": "",
           "scene": null
         }
       ]

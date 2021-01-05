@@ -1383,6 +1383,21 @@ Page({
       url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + id +"&checkOtherActivity=2"
     });
   },
+  //跳转玩具柜
+  jumpOcamcart(w){
+    var name = w.currentTarget.dataset.name || w.target.dataset.name;
+    var minprice = w.currentTarget.dataset.minprice || w.target.dataset.minprice||0;
+    var maxprice = w.currentTarget.dataset.maxprice || w.target.dataset.maxprice || 0;
+    var goods_id = w.currentTarget.dataset.goods_id || w.target.dataset.goods_id || '';
+    if (minprice == 0 && maxprice==0){
+      app.showToastC('暂无该款信息');
+      return false
+    };
+    var urlname = encodeURIComponent(name);
+    wx.navigateTo({
+      url: "/page/component/pages/ocamcart/ocamcart?name=" + urlname+"&but=shop&goods_id="+goods_id
+    });
+  },
   //关闭跳转其他一番赏弹框
   closefinishedBox(){
     this.setData({is_jump:false});

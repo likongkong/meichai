@@ -319,6 +319,7 @@ Page({
       title: '加载中...',
     })
     var exh = Dec.Aese('mod=show&operation=brandSummary&brandId=' + _this.data.brandId + '&page=' + page + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=' + _this.data.type+"&settlement="+_this.data.settlement);
+    console.log('mod=show&operation=brandSummary&brandId=' + _this.data.brandId + '&page=' + page + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=' + _this.data.type+"&settlement="+_this.data.settlement)
     wx.request({
       url: app.signindata.comurl + 'toy.php' + exh,
       method: 'GET',
