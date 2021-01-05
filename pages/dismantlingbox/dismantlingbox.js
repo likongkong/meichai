@@ -102,14 +102,23 @@ Page({
   },
   //弹出动画
   popp: function () {
+    var _this = this;
     let animationcollect = wx.createAnimation({
       duration: 200,
       timingFunction: 'ease'
     })
-    animationcollect.translateY(-148).opacity(1).step();
-    this.setData({
-      animation: animationcollect.export()
-    })
+    var query = wx.createSelectorQuery();
+    query.select('#ani').boundingClientRect();
+    query.selectViewport().scrollOffset();
+    query.exec(function(res) {
+      console.log(res)
+      if (res && res[0]) {
+        animationcollect.translateY(-(res[0].height+33)).opacity(1).step();
+        _this.setData({
+          animation: animationcollect.export()
+        })
+      }
+    });
   },
   //收回动画
   takeback: function () {
@@ -126,6 +135,7 @@ Page({
 
   // 获取滚动条当前位置
   onPageScroll: function (e) {
+    // console.log(e.scrollTop)
     if(e.scrollTop>1100){
       if(!this.data.is_show){
         this.setData({
@@ -520,9 +530,9 @@ Page({
     _this.brandinformation(1);
     // // 线上
     _this.commodityinformation(1,1);
-    // // blibli
+    // // 手作
     // _this.commodityinformation(1,2);
-    // // 直播商品
+    // // 海外
     // _this.commodityinformation(1,3);
     // // 直播列表
     _this.liveList(1);
@@ -998,22 +1008,28 @@ brandJson:function(){
              if(type==1){
                 if(num==1){
                   var toyShowSubscribe = res.data.Info.toyShowSubscribe || {};
-                  var goodsList = res.data.List.goodsList || [];
-                  var offlineGoodsList = res.data.List.offlineGoodsList || [];
+                  var goodsListOne = res.data.List.goodsListOne || [];
+                  var goodsListTwo = res.data.List.goodsListTwo || [];
+                  var goodsListThree = res.data.List.goodsListThree || [];
                   var goodsListOne = {
                     toyShowSubscribe:toyShowSubscribe,
-                    goodsList:goodsList
+                    goodsList:goodsListOne
                   };
                   var goodsListTwo = {
                     toyShowSubscribe:toyShowSubscribe,
-                    goodsList:offlineGoodsList
+                    goodsList:goodsListTwo
+                  };
+                  var goodsListThree = {
+                    toyShowSubscribe:toyShowSubscribe,
+                    goodsList:goodsListThree
                   };
                   _this.setData({
-                    goodsListOne:goodsListOne,
-                    goodsListTwo:goodsListTwo
+                    goodsListOne,
+                    goodsListTwo,
+                    goodsListThree
                   })
                 }else{
-                  var goodsList = res.data.List.goodsList || [];
+                  var goodsList = res.data.List.goodsListOne || [];
                   if(goodsList&&goodsList.length!=0){
                     var goodsListOne =  _this.data.goodsListOne;
                     var goodsListAnd = goodsListOne.goodsList.concat(goodsList);
@@ -1024,54 +1040,53 @@ brandJson:function(){
                     console.log(_this.data.goodsListOne)
                   };
                 };
-
              };
-             if(type==2){
-                if(num==1){
-                  var toyShowSubscribe = res.data.Info.toyShowSubscribe || {};
-                  var goodsList = res.data.List.goodsList || [];
-                  var goodsListTwo = {
-                    toyShowSubscribe:toyShowSubscribe,
-                    goodsList:goodsList
-                  };
-                  _this.setData({
-                    goodsListTwo:goodsListTwo
-                  })
-                }else{
-                  var goodsList = res.data.List.goodsList || [];
-                  if(goodsList&&goodsList.length!=0){
-                    var goodsListTwo =  _this.data.goodsListTwo;
-                    var goodsListAnd = goodsListTwo.goodsList.concat(goodsList);
-                    goodsListTwo.goodsList = goodsListAnd;
-                    _this.setData({
-                      goodsListTwo:goodsListTwo
-                    })
-                  };
-                };
-             };
-             if(type==3){
-                if(num==1){
-                    var toyShowSubscribe = res.data.Info.toyShowSubscribe || {};
-                    var goodsList = res.data.List.goodsList || [];
-                    var goodsListThree = {
-                      toyShowSubscribe:toyShowSubscribe,
-                      goodsList:goodsList
-                    };
-                    _this.setData({
-                      goodsListThree:goodsListThree
-                    })
-                }else{
-                    var goodsList = res.data.List.goodsList || [];
-                    if(goodsList&&goodsList.length!=0){
-                      var goodsListThree =  _this.data.goodsListTwo;
-                      var goodsListAnd = goodsListThree.goodsList.concat(goodsList);
-                      goodsListThree.goodsList = goodsListAnd;
-                      _this.setData({
-                        goodsListThree:goodsListThree
-                      })
-                    };
-                };
-             };
+            //  if(type==2){
+            //     if(num==1){
+            //       var toyShowSubscribe = res.data.Info.toyShowSubscribe || {};
+            //       var goodsList = res.data.List.goodsListTwo || [];
+            //       var goodsListTwo = {
+            //         toyShowSubscribe:toyShowSubscribe,
+            //         goodsList:goodsList
+            //       };
+            //       _this.setData({
+            //         goodsListTwo:goodsListTwo
+            //       })
+            //     }else{
+            //       var goodsList = res.data.List.goodsListTwo || [];
+            //       if(goodsList&&goodsList.length!=0){
+            //         var goodsListTwo =  _this.data.goodsListTwo;
+            //         var goodsListAnd = goodsListTwo.goodsList.concat(goodsList);
+            //         goodsListTwo.goodsList = goodsListAnd;
+            //         _this.setData({
+            //           goodsListTwo:goodsListTwo
+            //         })
+            //       };
+            //     };
+            //  };
+            //  if(type==3){
+            //     if(num==1){
+            //         var toyShowSubscribe = res.data.Info.toyShowSubscribe || {};
+            //         var goodsList = res.data.List.goodsListThree || [];
+            //         var goodsListThree = {
+            //           toyShowSubscribe:toyShowSubscribe,
+            //           goodsList:goodsList
+            //         };
+            //         _this.setData({
+            //           goodsListThree:goodsListThree
+            //         })
+            //     }else{
+            //         var goodsList = res.data.List.goodsListThree || [];
+            //         if(goodsList&&goodsList.length!=0){
+            //           var goodsListThree =  _this.data.goodsListTwo;
+            //           var goodsListAnd = goodsListThree.goodsList.concat(goodsList);
+            //           goodsListThree.goodsList = goodsListAnd;
+            //           _this.setData({
+            //             goodsListThree:goodsListThree
+            //           })
+            //         };
+            //     };
+            //  };
           };
         },
 
@@ -1250,15 +1265,14 @@ brandJson:function(){
     _this.brandinformation(1);
     // // 线上
     _this.commodityinformation(1,1);
-    // // blibli
+    // // 手作
     // _this.commodityinformation(1,2);
-    // // 直播商品
+    // // 海外
     // _this.commodityinformation(1,3)
     // // 直播列表
     _this.liveList(1);
     // // 展会福利
     _this.exhibitionBenefits();
-
   },
 
   /**
