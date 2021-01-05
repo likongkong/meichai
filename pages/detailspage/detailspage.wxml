@@ -639,14 +639,14 @@
         </block>
       </block>
       
-      <block wx:if="{{zunmdata.sellingWay == 2}}">
+      <!-- <block wx:if="{{zunmdata.sellingWay == 2}}">
           <view bindtap='jumpMapFun' class="boxShadowEve" style="width:160rpx; height:60rpx;margin-top:9rpx;padding:0;margin-right:20rpx;background:#E94F57;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;font-size: 24rpx;float:right;">专属展会地图</view>
-      </block>
+      </block> -->
     </block>
     <block wx:else> 
-      <view class="footer-child large boxShadowEve" bindtap='jumpMapFun' style='box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:400rpx;float:right;background:#E94F57;'>
+      <!-- <view class="footer-child large boxShadowEve" bindtap='jumpMapFun' style='box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:400rpx;float:right;background:#E94F57;'>
         <view style='width:100%;height:100%;text-align:center;line-height:60rpx;font-size:28rpx;color:#fff;'>专属展会地图</view>
-      </view>
+      </view> -->
     </block>
 	</view>
 </block>
