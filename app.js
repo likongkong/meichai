@@ -910,7 +910,6 @@ App({
   },
   // 云统计
   cloudstatistics: function (tablename,data){
-    console.log('云统计===',tablename,data)
     wx.cloud.init() // 引入云
     var _this = this;
     if(wx.cloud){ 
