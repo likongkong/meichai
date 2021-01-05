@@ -244,7 +244,13 @@ Page({
 
     //端盒60秒倒计时C
     dhRecycleCount:60,
-    isDhRecycleBtn:true
+    isDhRecycleBtn:true,
+    boxBenefitsSM:false
+  },
+  boxBenefitsFun(){
+    this.setData({
+      boxBenefitsSM:!this.data.boxBenefitsSM
+    });
   },
   jumpVipPage(){
     wx.navigateTo({  

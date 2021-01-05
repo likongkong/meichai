@@ -104,7 +104,7 @@
 
   <view class="boxBene" wx:if='{{(welfareTags && welfareTags.length!=0) || activity.isRecycle}}'>
 	    <view wx:if="{{activity.isRecycle}}" style="min-width:108rpx;background:#1890ff;border-radius:3px;width:60px;height:40rpx;line-height:40rpx;left:10px;font-size: 24rpx;color:#ffffff;margin: 0 10rpx;display: inline-block;" catchtap="toggleRecyclerule">{{activity.recycleRatio}}折回收</view>
-	    <view class="boxBenefits" wx:for='{{welfareTags}}' wx:key='key'>{{item}}</view>
+	    <view class="boxBenefits" catchtap="boxBenefitsFun" wx:for='{{welfareTags}}' wx:key='key'>{{item}}</view>
 	</view>
 	
 
@@ -156,6 +156,7 @@
 			<block>
 			<!-- <view wx:if="{{activity.isRecycle}}" style="min-width:108rpx;background:#1890ff;border-radius:3px;width:60px;left:10px;font-size: 24rpx;color:#ffffff;margin:0 60rpx;" catchtap="toggleRecyclerule">{{activity.recycleRatio}}折回收</view>
 			<view wx:elif="{{suplusTry>0}}" style="width:108rpx; height:80rpx;line-height:80rpx;display: inline-block;color: #4c9a23;font-size: 24rpx;margin:0 60rpx;"></view> -->
+			<view wx:if="{{suplusTry>0}}" style="width:108rpx; height:80rpx;line-height:80rpx;display: inline-block;color: #4c9a23;font-size: 24rpx;margin:0 60rpx;"></view>
 			</block>
 
 			<view wx:if='{{suplusTry>0}}' class='tryStyle'>
@@ -1377,5 +1378,16 @@
 		</view>
 		</block>
 
+	</view>
+</view>
+
+
+
+<view wx:if='{{boxBenefitsSM}}' style="width:100%;height:100%;position:fixed;top:0px;left:0;z-index:20;">
+	<view class='bgstyle' catchtouchmove="myCatchTouch" catchtap="boxBenefitsFun"></view>
+	<view style="width:80%;height:310rpx;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;background:white;border-radius:15rpx">
+		<view style="width:100%;color:black;font-size:35rpx;text-align:center;margin-top:20rpx;">温馨提示</view>
+		<view style="width:80%;margin:20rpx 10%;font-size:27rpx;color:gray;height:130rpx;"><text>抽盒每满5次，可获得一次抽奖机会（100%中奖）</text></view>
+		<view style="width:100%;color:#4c9a23;font-size:35rpx;text-align:center;" catchtap="boxBenefitsFun">确定</view>
 	</view>
 </view>
