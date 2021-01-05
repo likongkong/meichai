@@ -158,7 +158,7 @@
 <view class="wsh" style="height:{{worthSubsidiaryHeight}}px;margin-top:{{topheight}}px;"  catchtouchmove="true" wx:if='{{scrapingPur&&activity.suplusNum>0}}'>
     <view class="tgimgboxgb" catchtap="scrapingPurfun"></view>
 
-    <view catchtap="scrapingPurfun" wx:if="{{!activity.isAllHidePrice}}" style="width:100%;height:{{isDeduct && blindboxMoney!=0? worthSubsidiaryHeight-157:worthSubsidiaryHeight-117}}px;display: flex;align-items: center;justify-content: center;position:absolute;left: 0;top: 0;">
+    <view catchtap="scrapingPurfun" wx:if="{{!activity.isAllHidePrice && finalReward.isShowPrice}}" style="width:100%;height:{{isDeduct && blindboxMoney!=0? worthSubsidiaryHeight-157:worthSubsidiaryHeight-117}}px;display: flex;align-items: center;justify-content: center;position:absolute;left: 0;top: 0;">
     <view class="worthSubsidiary" style="{{!isPurchase?'height:844rpx;':isDeduct && blindboxMoney!=0?'height:844rpx;':''}}" catchtap="zhanwei">
         <view class="adcspecialPrice">
             <view>

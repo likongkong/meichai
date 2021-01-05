@@ -51,7 +51,11 @@ Page({
     shunButBarData:[
       {name:'直播间订阅',tid:1},
       {name:'展会限定福利',tid:2},
-      {name:'展品预告',tid:3},
+      {name:'展品预告',tid:3,sonnav:[
+        {name:'手作专区',tid:30},
+        {name:'海外专区',tid:31},
+        {name:'更多展品',tid:32},
+      ]},
       {name:'参展品牌',tid:4}
     ],
 
@@ -73,7 +77,53 @@ Page({
     is_show:false,
     // 商品默认图片
     defaultimg:'/pages/images/goods_Item_Default_Image.png',
+    isPopping:false
   },
+
+
+
+  //点击弹出
+  plus: function (e) {
+    let ind = e.currentTarget.dataset.ind;
+    if (!this.data.isPopping && ind == 3) {
+      //弹出
+      this.popp();
+      this.setData({
+        isPopping: true
+      })
+      }
+    else {
+      //缩回
+      this.takeback();
+      this.setData({
+        isPopping: false
+      });
+    }
+  },
+  //弹出动画
+  popp: function () {
+    let animationcollect = wx.createAnimation({
+      duration: 200,
+      timingFunction: 'ease'
+    })
+    animationcollect.translateY(-148).opacity(1).step();
+    this.setData({
+      animation: animationcollect.export()
+    })
+  },
+  //收回动画
+  takeback: function () {
+    let animationcollect = wx.createAnimation({
+      duration: 200,
+      timingFunction: 'ease'
+    })
+    animationcollect.translateY(0).opacity(0).step();
+    this.setData({
+      animation: animationcollect.export()
+    })
+  },
+
+
   // 获取滚动条当前位置
   onPageScroll: function (e) {
     if(e.scrollTop>1100){
@@ -243,8 +293,11 @@ Page({
 
       var subscribe_data = w.currentTarget.dataset.subscribe_data;
       console.log(subscribe_data)
+      //缩回
+      this.takeback();
       this.setData({
-        subscribedata:subscribe_data
+        subscribedata:subscribe_data,
+        isPopping: false
       })
       app.comsubscribe(this)
   },
