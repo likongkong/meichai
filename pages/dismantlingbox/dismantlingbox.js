@@ -102,14 +102,23 @@ Page({
   },
   //弹出动画
   popp: function () {
+    var _this = this;
     let animationcollect = wx.createAnimation({
       duration: 200,
       timingFunction: 'ease'
     })
-    animationcollect.translateY(-145).opacity(1).step();
-    this.setData({
-      animation: animationcollect.export()
-    })
+    var query = wx.createSelectorQuery();
+    query.select('#ani').boundingClientRect();
+    query.selectViewport().scrollOffset();
+    query.exec(function(res) {
+      console.log(res)
+      if (res && res[0]) {
+        animationcollect.translateY(-(res[0].height+33)).opacity(1).step();
+        _this.setData({
+          animation: animationcollect.export()
+        })
+      }
+    });
   },
   //收回动画
   takeback: function () {

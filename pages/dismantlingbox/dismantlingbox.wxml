@@ -122,7 +122,7 @@
     
     
     <!-- 手作专区 -->
-    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{goodsListTwo&&goodsListTwo.goodsList&&goodsListTwo.goodsList.length!=0}}' id='e30'>
+    <view class="punchInRewardtxt" style="margin:60rpx 0 20rpx 0;" wx:if='{{goodsListTwo&&goodsListTwo.goodsList&&goodsListTwo.goodsList.length!=0}}' id='e30'>
       <image style="width:200rpx;height:auto" src="https://cdn.51chaidan.com/images/toyShow3/handmadeZone.png" mode="widthFix"></image>
     </view>
     <view style="padding:0 15rpx 20rpx;overflow: hidden;" wx:if='{{goodsListTwo&&goodsListTwo.goodsList&&goodsListTwo.goodsList.length!=0}}'>
@@ -425,7 +425,7 @@
    <view class="shunButBarEve" wx:for='{{shunButBarData}}' wx:key='key' catchtap="position" data-tid='{{item.tid}}' style="{{index+1==shunButBarData.length?'border-right:0;':''}}">
      <view style="position: relative;" data-ind="{{item.tid}}" catchtap="{{item.tid == 3?'plus':''}}">
       <text>{{item.name}}</text>
-      <view wx:if="{{item.tid == 3}}" class="drawerBox" animation="{{animation}}" >
+      <view wx:if="{{item.tid == 3}}" id="ani" class="drawerBox" animation="{{animation}}" >
         <text wx:for='{{item.sonnav}}' wx:for-item="sonItem" wx:key='key' catchtap="position" data-tid='{{sonItem.tid}}'>{{sonItem.name}}</text>
       </view>
      </view>
