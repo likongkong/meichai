@@ -697,7 +697,7 @@
                 <view class='totalmoncon' wx:if='{{comdata.status==0 && comdata.order_type!=7}}'>
                     <!-- <view class='totalmoncleft'>拆单倒计时:{{countdown}}</view>  -->
                    <view class='totalmoncright' bindtap='payment' style='position:relative;'>我要付款</view>
-                   <view class='totalmoncrightcel' bindtap='cancellationoforder' data-oid='{{comdata.cart_id}}' style='position:relative;'>取消订单</view>
+                   <!-- <view class='totalmoncrightcel' bindtap='cancellationoforder' data-oid='{{comdata.cart_id}}' style='position:relative;'>取消订单</view> -->
                  </view> 
               
                 <!-- 0元购 status为1 进行中 -->

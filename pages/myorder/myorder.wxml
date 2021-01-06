@@ -496,7 +496,7 @@
 
                         <view class='dfkdjrleft'>{{countdown}}</view>
 
-                        <view class='dfkdjrighg' data-oid='{{item.cart_id}}' bindtap='cancellationoforder' style='position:relative;'>取消订单</view>
+                        <!-- <view class='dfkdjrighg' data-oid='{{item.cart_id}}' bindtap='cancellationoforder' style='position:relative;'>取消订单</view> -->
 
                         <view class='dfkdjrighg' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;' bindtap='payment' data-amount='{{item.amount}}' data-oid='{{item.oid}}' data-cart_id='{{item.cart_id}}' data-gcover='{{item.gcover}}' data-gid='{{item.gid}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}'  data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-order_type='{{item.order_type}}'>我要付款</view>
         
