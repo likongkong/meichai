@@ -110,7 +110,7 @@
                     </view>
                 </view>
                 <image catchtap="iftrdetailpagen" data-index='{{index}}' data-num='{{num}}' data-is_buy='{{w.is_buy}}' data-goods_id='{{w.goods_id}}' class="adcweveimg" src="{{w.img}}" mode='widthFix'></image>
-                <view class="adcwevename multilineellipsis">
+                <view class="adcwevename specialellipsis">
                     <text style="color: #ff2742;" wx:if='{{w.isShowPrice}}'>价值:￥{{w.shop_price}}</text>
                     {{w.title}}
                 </view>

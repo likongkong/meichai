@@ -52,6 +52,7 @@ Page({
       {name:'直播间订阅',tid:1},
       {name:'展会限定福利',tid:2},
       {name:'展品预告',tid:3,sonnav:[
+        {name:'热门订阅',tid:33},
         {name:'手作专区',tid:30},
         {name:'海外专区',tid:31},
         {name:'更多展品',tid:32},

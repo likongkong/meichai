@@ -235,7 +235,7 @@ page {
 .adcwevename{
   padding: 8rpx 15rpx 0 15rpx;
   width: 320rpx;
-  height:35px;
+  /* height:35px; */
   line-height: 36rpx;
   font-size: 24rpx;
 }
