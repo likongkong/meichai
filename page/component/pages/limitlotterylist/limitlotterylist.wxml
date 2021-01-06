@@ -1,6 +1,5 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
-
 <!-- 已报名 -->
 <view wx:if='{{signlist.length>0}}' class='aslbcbox'>
   <view style='padding:5rpx 13rpx 20rpx;'>
