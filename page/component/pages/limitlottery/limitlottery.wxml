@@ -201,8 +201,17 @@
 						</view>
 
 						<block wx:if='{{is_share_but}}'>
-								<view wx:if='{{infoFragment.activitySignNumber.length > 0}}' style="{{infoActivity.joinMothed == 'payTicket' && infoActivity.payTicketCate == 'fullPledge'?'width:100%':'width:30%'}};font-size:25rpx;float:left;margin:10rpx 0 10rpx 10%;color:#FE666B;">
-									<block wx:if="{{infoActivity.joinMothed == 'payTicket' && infoActivity.payTicketCate == 'fullPledge'}}">
+								<view wx:if='{{infoFragment.activitySignNumber.length > 0}}' style="{{infoActivity.joinMothed == 'payTicket' && infoActivity.payTicketCate == 'fullPledge'?'width:100%':'width:100%'}};font-size:25rpx;float:left;margin:10rpx 0 10rpx 10%;color:#FE666B;">
+
+										<view style="height:80rpx;float:left;padding:0 40rpx;line-height:80rpx;border-right:2rpx dashed #ccc;">报名成功</view>
+										<view style="float:left;overflow: hidden;">
+										<view style="height:80rpx;padding-left:30rpx;" wx:for='{{infoFragment.activitySignNumber}}' wx:key='key'>
+										<text style="height:80rpx;line-height:80rpx;float:left;">签号</text>
+										<text style="font-size:40rpx;margin-left:30rpx;height:76rpx;line-height:80rpx;float:left;">{{item.lotto}}</text>
+										</view>                                                        
+										</view>
+
+									<!-- <block wx:if="{{infoActivity.joinMothed == 'payTicket' && infoActivity.payTicketCate == 'fullPledge'}}">
 										<view style="height:80rpx;float:left;padding:0 40rpx;line-height:80rpx;border-right:2rpx dashed #ccc;">报名成功</view>
 										<view style="float:left;overflow: hidden;">
 										<view style="height:80rpx;padding-left:30rpx;" wx:for='{{infoFragment.activitySignNumber}}' wx:key='key'>
@@ -214,7 +223,7 @@
 									<block wx:else>
 										<view>报名成功</view>
 										<view wx:for='{{infoFragment.activitySignNumber}}' wx:key='key'>签号 {{item.lotto}}</view>
-									</block>
+									</block> -->
 								</view>	
 						</block>
 						<block wx:else>

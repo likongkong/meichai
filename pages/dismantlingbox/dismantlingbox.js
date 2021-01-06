@@ -26,6 +26,7 @@ Page({
     goodsListTwo:[],
     goodsListOne:[],
     liveListData:[],
+    subGoodsList:[],
     typeEve:0,
     indexEve:0,
     tipaid:'',
@@ -403,6 +404,9 @@ Page({
     }else if(type==3){
       var goodsListThree = _this.data.goodsListThree;
       subscribedata = goodsListThree.toyShowSubscribe || '';
+    }else if(type==4){
+      var subGoodsList = _this.data.subGoodsList;
+      subscribedata = subGoodsList.toyShowSubscribe || '';
     };
     _this.setData({
       subscribedata:subscribedata,
@@ -489,6 +493,11 @@ Page({
       var goodsListThree = _this.data.goodsListThree;
       _this.setData({
           ['goodsListThree.goodsList['+indexEve+'].is_subscribe']: 1
+      })
+    }else if(typeEve==4){
+      var subGoodsList = _this.data.subGoodsList;
+      _this.setData({
+          ['subGoodsList.goodsList['+indexEve+'].is_subscribe']: 1
       })
     };
   },
@@ -1012,6 +1021,7 @@ brandJson:function(){
                   var goodsListOne = res.data.List.goodsListOne || [];
                   var goodsListTwo = res.data.List.goodsListTwo || [];
                   var goodsListThree = res.data.List.goodsListThree || [];
+                  var subGoodsList = res.data.List.subscriptionGoodsList || [];
                   var goodsListOne = {
                     toyShowSubscribe:toyShowSubscribe,
                     goodsList:goodsListOne
@@ -1024,10 +1034,16 @@ brandJson:function(){
                     toyShowSubscribe:toyShowSubscribe,
                     goodsList:goodsListThree
                   };
+                  var subGoodsList = {
+                    toyShowSubscribe:toyShowSubscribe,
+                    goodsList:subGoodsList
+                  };
+
                   _this.setData({
                     goodsListOne,
                     goodsListTwo,
-                    goodsListThree
+                    goodsListThree,
+                    subGoodsList
                   })
                 }else{
                   var goodsList = res.data.List.goodsListOne || [];
