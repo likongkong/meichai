@@ -102,6 +102,12 @@
           "pathName": "page/secondpackge/pages/aRewardList/aRewardList",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "page/component/pages/limitlotterylist/limitlotterylist",
+          "pathName": "page/component/pages/limitlotterylist/limitlotterylist",
+          "query": "",
+          "scene": null
         }
       ]
     }

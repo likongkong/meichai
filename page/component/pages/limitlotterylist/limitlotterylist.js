@@ -196,6 +196,8 @@ Page({
         });
         if (res.data.ReturnCode == 200) {
           var arrlist = res.data.List.inProgree || [];
+          var signarray = res.data.List.sign || [];
+          var finishedarray = res.data.List.finished || [];
           if (arrlist && arrlist.length != 0) {
             for (var i = 0; i < arrlist.length; i++) {
               if (arrlist[i].status == 1) {
@@ -204,28 +206,42 @@ Page({
                 arrlist[i].stop_time = _this.toDate(arrlist[i].stop_time);
               };
             };
-
-            for (var i = 0; i < res.data.List.finished.length; i++) {
-              res.data.List.finished[i].cover = res.data.List.finished[i].cover+"?random="+Math.ceil(Math.random()*10000)
-            };
-
             if (num == 1) {
               var comdataarr = arrlist || [];
-              var signarray = res.data.List.sign || [];
-              var finishedarray = res.data.List.finished || [];
             } else {
               var comdataarr = _this.data.listdata.concat(arrlist);
-              var signarray = _this.data.signlist.concat(res.data.List.sign);
-              var finishedarray = _this.data.finishedlist.concat(res.data.List.finished);
             };
             _this.setData({
               listdata: comdataarr,
-              signlist: signarray,
-              finishedlist: finishedarray,
             });
           } else {
             app.showToastC('暂无更多数据');
           };
+
+          if (signarray && signarray.length != 0) {
+            if (num == 1) {
+              var signarray = signarray || [];
+            } else {
+              var signarray = _this.data.signlist.concat(signarray);
+            };
+            _this.setData({
+              signlist: signarray
+            });
+          }
+
+          if (finishedarray && finishedarray.length != 0) {
+            for (var i = 0; i < finishedarray.length; i++) {
+              finishedarray[i].cover = finishedarray[i].cover+"?random="+Math.ceil(Math.random()*10000)
+            };
+            if (num == 1) {
+              var finishedarray = finishedarray || [];
+            } else {
+              var finishedarray = _this.data.finishedlist.concat(finishedarray);
+            };
+            _this.setData({
+              finishedlist: finishedarray,
+            });
+          }
 
         };
         if (res.data.ReturnCode == 300) {
