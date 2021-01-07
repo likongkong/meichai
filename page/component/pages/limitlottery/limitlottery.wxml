@@ -120,7 +120,7 @@
 				<view style='color:#53a5fd;font-size:22rpx;padding:3rpx 0 0 0;text-align:center;'>抽选卡</view>
 				<view class="tabshopimg specialellipsis" style="top:-12rpx;left:70rpx;">{{infoActivity.toyShowChance}}</view>
 			</view>	
-			<view class='takepartin' catchtap='subscrfun' style="{{!is_share_but?'margin:20rpx auto 20rpx auto;':'margin:20rpx 0 20rpx 300rpx;'}}background:#eeae19;box-shadow: 2px 2px 5rpx #ccc;">订阅提醒</view>
+			<view class='takepartin' catchtap='subscrfun' style="{{!is_share_but?'margin:20rpx auto 20rpx auto;':'margin:20rpx 0 20rpx 300rpx;'}}background:#eeae19;box-shadow: 2px 2px 5rpx #ccc;"><block wx:if='{{infoActivity.isLiveShow && infoActivity.status==1}}'>{{infoActivity.isLiveShow_time}} 直播开启</block> 订阅提醒</view>
 
 		</block>
 
