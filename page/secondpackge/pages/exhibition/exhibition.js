@@ -157,7 +157,7 @@ Page({
       page: 0,
     });
     if (_this.data.pagetype == 4) {
-      _this.listdata(1);
+      _this.listdata(0);
     } else if (_this.data.pagetype == 11) {
       _this.getlimigGoods(0);
     } else if (_this.data.pagetype == 1) {
@@ -421,7 +421,7 @@ Page({
             };
           })
           if (_this.data.pagetype == 4) {
-            _this.listdata(1);
+            _this.listdata(0);
           } else if (_this.data.pagetype == 11) {
             _this.getlimigGoods(0);
           } else if (_this.data.pagetype == 1) {
@@ -434,27 +434,14 @@ Page({
     });
   },
 
-  listdata: function (num) {
+  listdata: function (page) {
     var _this = this;
     wx.showLoading({
       title: '加载中...',
-    })
-    if (num == 1) {
-      _this.data.page = 0;
-      _this.setData({
-        commoddata: []
-      });
-    } else {
-      var pagenum = parseInt(_this.data.page)
-      _this.data.page = ++pagenum;
-      _this.setData({
-        headhidden: false,
-        loadmoreiftr: false,
-        loadprompt: '加载更多.....'
-      });
-    };
+      mask:true
+    });
     // 展会
-    var exh = Dec.Aese('mod=show&operation=lotto&date=' + _this.data.dateKey + '&page=' + _this.data.page+ '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
+    var exh = Dec.Aese('mod=show&operation=lotto&date=' + _this.data.dateKey + '&page=' + page+ '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
     wx.request({
       url: app.signindata.comurl + 'toy.php' + exh,
       method: 'GET',
@@ -473,12 +460,24 @@ Page({
             }else{
               listdata[i].start = _this.toDatehd(listdata[i].start_time)
               listdata[i].stop = _this.toDatehd(listdata[i].stop_time)
-            }
-
+            };
           };
-          _this.setData({
-            listdata: listdata || []
-          })
+
+          if (page == 0) {
+            _this.setData({
+              listdata: listdata || [],
+            })
+          } else if (listdata.length > 0) {
+            var l = _this.data.listdata.concat(listdata);
+            _this.setData({
+              listdata: l,
+            })
+          } else {
+            app.showToastC('暂无更多数据');
+            _this.setData({
+              page: page - 1,
+            })
+          };
         } else {
         };
       },
@@ -909,7 +908,7 @@ Page({
     } else if (_this.data.pagetype == 12) {
       _this.getluckybag(0);
     } else if (_this.data.pagetype == 4){
-      _this.listdata(1);
+      _this.listdata(0);
     } else if (_this.data.pagetype == 15){
       _this.getLiveList(1)
     }else{
@@ -935,6 +934,8 @@ Page({
       _this.getfreeList(p);
     } else if (_this.data.pagetype == 12) {
       _this.getluckybag(p);
+    } else if (_this.data.pagetype == 4) {
+      _this.listdata(p);
     }
   },
 
