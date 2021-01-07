@@ -43,7 +43,7 @@ function formatTimeTwo(number, format) {
 
 // 时间转化
 //时间戳转换时间  
-function toDate(number) {
+function toDate(number,num) {
   var date = new Date(number * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
   var Y = date.getFullYear();
   var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
@@ -51,7 +51,9 @@ function toDate(number) {
   var h = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
   var m = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
   var s = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
-  if (new Date(number * 1000).toDateString() === new Date().toDateString()) {
+  if(num==1){
+    return M + '-' + D;
+  }else if (new Date(number * 1000).toDateString() === new Date().toDateString()) {
     return h + ':' + m;
   } else  {
     return M + '-' + D+' '+h+':'+m;

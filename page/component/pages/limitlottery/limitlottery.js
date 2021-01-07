@@ -648,6 +648,9 @@ Page({
                 //将时间传如 调用 
                 _this.dateformat(res.data.Info.infoActivity.start_time);
               }.bind(_this), 1000);
+              if(res.data.Info.infoActivity.isLiveShow){
+                res.data.Info.infoActivity.isLiveShow_time = time.toDate(res.data.Info.infoActivity.start_time,1);
+              };
             }
             if (res.data.Info.infoActivity.status == 2) {
               _this.data.timer = setInterval(function () {
