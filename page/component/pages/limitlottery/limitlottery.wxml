@@ -21,7 +21,7 @@
 			   <text class='timetextstyle'>当前{{infoActivity.truth_users}}人参与,满{{infoActivity.limit_users}}人开奖</text>
 			</block>
 		  <block wx:elif="{{newdataexh}}"><text class='timetextstyle'>暂未开启</text><view style="height:40rpx;width:100rpx;background:#f08080;color:#fff;text-align:center;line-height:40rpx;position:absolute;top:0;bottom:0;right:20rpx; margin:auto 0;font-size:22rpx;border-radius: 10rpx;" wx:if='{{infoActivity.goodsLimit}}'>{{infoActivity.goodsLimit}}</view></block>
-			<block wx:elif='{{infoActivity.isLiveShow}}'><text class='timetextstyle'>{{infoActivity.isLiveShow_time}} 直播开启</text></block>
+			<block wx:elif='{{infoActivity.isLiveShow && infoActivity.status==1}}'><text class='timetextstyle'>{{infoActivity.isLiveShow_time}} 直播开启</text></block>
 			<block wx:else>
 					<text wx:if='{{infoActivity.status==2}}' class='timetextstyle' style='margin-right:10rpx;'>抽签倒计时</text>
 					<text class='timetextstyle'>即将开始</text>

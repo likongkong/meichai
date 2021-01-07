@@ -201,7 +201,11 @@ Page({
           if (arrlist && arrlist.length != 0) {
             for (var i = 0; i < arrlist.length; i++) {
               if (arrlist[i].status == 1) {
-                arrlist[i].start_time = _this.toDate(arrlist[i].start_time);
+                if(arrlist[i].isLiveShow){
+                  arrlist[i].start_time = _this.toDate(arrlist[i].start_time,1);
+                }else{
+                  arrlist[i].start_time = _this.toDate(arrlist[i].start_time);
+                };
               } else if (arrlist[i].status == 2) {
                 arrlist[i].stop_time = _this.toDate(arrlist[i].stop_time);
               };
@@ -310,7 +314,7 @@ Page({
     });
   },
   //时间戳转换时间  
-  toDate: function(number) {
+  toDate: function(number,num) {
     var date = new Date(number * 1000);
     var Y = date.getFullYear();
     var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
@@ -318,7 +322,9 @@ Page({
     var h = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
     var m = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
     var s = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
-    if (new Date(number * 1000).toDateString() === new Date().toDateString()) {
+    if(num == 1){
+      return M + '月' + D + '日'
+    }else if (new Date(number * 1000).toDateString() === new Date().toDateString()) {
       return h + ':' + m + ':' + s;
     } else {
       return M + '月' + D + '日' + ' ' + h + ':' + m;
