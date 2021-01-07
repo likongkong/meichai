@@ -160,7 +160,7 @@ Page({
     if (_this.data.iftrjump){
       //获取当前时间戳  
       var timestamp = Date.parse(new Date()) / 1000; 
-      if(timestamp>=1596729599 && timestamp<1596988799){
+      if(timestamp>=1610035200 && timestamp<1610294400){
         wx.reLaunch({
           url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist",
           complete:function(){
