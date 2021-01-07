@@ -168,7 +168,7 @@
 		<view wx:if='{{activity.status == 1}}' style="width:100%;color:#4c9a23;text-align:center;font-size:30rpx;">
 			<view style="width:50%;height:80rpx;position:relative;margin:0 auto;">
 				<view class='queuebtnstyle2' catchtap="blindBoxsubscrfun" style="background:#eeae19;color:white;float:left;line-height:42rpx;height:80rpx;">
-					<view style="height:40rpx;line-height:50rpx;text-align:center;position:relative;">{{activity.isLiveShow?'直播开售时间':'开售提醒'}}<view class="coupposi" wx:if='{{isSubscribeCoupon}}'>订阅送优惠券</view></view>
+					<view style="height:40rpx;line-height:50rpx;text-align:center;position:relative;">{{activity.isLiveShow?'直播开售':'开售提醒'}}<view class="coupposi" wx:if='{{isSubscribeCoupon}}'>订阅送优惠券</view></view>
 					<view style="text-align:center;">
 					   <block wx:if='{{newdataexh}}'>暂未开售</block>
 						 <block wx:else>{{activity.start_time}}</block>
