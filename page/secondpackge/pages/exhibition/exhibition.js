@@ -924,6 +924,7 @@ Page({
     var _this = this;
     var p = _this.data.page + 1;
     _this.data.page = p;
+    console.log(_this.data.page,_this.data.pagetype)
     if (_this.data.pagetype == 14) {
       _this.getdesignerList(_this.data.nameserch, p, _this.data.mbrandId);
     } else if (_this.data.pagetype == 5) {

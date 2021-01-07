@@ -68,6 +68,18 @@
   -webkit-box-orient: vertical;
 }
 
+/*  三行  */
+
+.multilineellipsis3 {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: normal !important;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
 /* 横向纵向居中 */
 .alignclass {
   text-align: center;
