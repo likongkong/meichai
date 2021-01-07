@@ -653,7 +653,11 @@ Page({
           };
 
           if (activityData.status == 1) {
-            activityData.start_time = time.toDate(activityData.start_time);
+            if(activityData.isLiveShow){
+              activityData.start_time = time.toDate1(activityData.start_time);
+            }else{
+              activityData.start_time = time.toDate(activityData.start_time);
+            }
           }
 
 

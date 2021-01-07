@@ -112,7 +112,7 @@
   </view>
 
   <block wx:if='{{is_exhibition==1||zunmdata.status==1}}'>
-      <view style="width:100%;height:60rpx;background:#000;" wx:if='{{zunmdata.status!=0&&zunmdata.status!=3}}'>
+      <view style="width:100%;height:60rpx;background:#000;" wx:if='{{zunmdata.status!=0&&zunmdata.status!=3&&!zunmdata.saleButtonDisplay}}'>
         <view style="height:60rpx;float:left;line-height:60rpx;padding-left:20rpx;font-size:24rpx;color:#fff;">
           <block wx:if='{{zunmdata.status==2&&winningovertimedetail}}'>距离活动结束<block wx:if='{{winningovertimedetail.dayStr}}'><text style='font-size:30rpx;'>{{winningovertimedetail.dayStr}}</text>天</block><text style='font-size:30rpx;'>{{winningovertimedetail.hrStr}}</text>时<text style='font-size:30rpx;'>{{winningovertimedetail.minStr}}</text>分<text style='font-size:30rpx;'>{{winningovertimedetail.secStr}}</text>秒
           </block>
@@ -574,7 +574,7 @@
       <!-- 有直播间号有抽选活动：进入抽选 -->
       <block wx:if='{{is_exhibition==1&&zunmdata.liveShowRoomId&&zunmdata.isLotto}}'>
         <view class="footer-child large" style='box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:300rpx;float:right;background:#e47677;' data-brandid='{{zunmdata.brandId}}' data-id='{{zunmdata.gid}}' catchtap="jumpecqdetail">
-          <view class="addsopcar" style="height:60rpx;line-height:60rpx;">进入抽选</view>
+          <view class="addsopcar" style="height:60rpx;line-height:60rpx;">{{zunmdata.saleButtonDisplay?zunmdata.saleButtonDisplay+'抽选':'进入抽选'}}</view>
         </view>    
       </block>
       <!-- 无直播间号有抽选活动有库存：购买按钮 -->
@@ -617,14 +617,14 @@
       </block>
       <!-- 无直播间号有抽选活动有库存：进入抽选 -->
       <block wx:elif='{{is_exhibition==1&&!zunmdata.liveShowRoomId&&zunmdata.isLotto&&zunmdata.debuff==0}}'>
-        <view class="footer-child large" style='height:60rpx;margin-top:9rpx;padding:0;width:200rpx;margin-right:40rpx;background:#e47677;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' data-brandid='{{zunmdata.brandId}}' data-id='{{zunmdata.gid}}' catchtap="jumpecqdetail">
-          <view class="addsopcar" style="height:60rpx;line-height:60rpx;">进入抽选</view>
+        <view class="footer-child large" style='height:60rpx;margin-top:9rpx;padding:0;width:220rpx;margin-right:40rpx;background:#e47677;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' data-brandid='{{zunmdata.brandId}}' data-id='{{zunmdata.gid}}' catchtap="jumpecqdetail">
+          <view class="addsopcar" style="height:60rpx;line-height:60rpx;">{{zunmdata.saleButtonDisplay?zunmdata.saleButtonDisplay+'抽选':'进入抽选'}}</view>
         </view> 
       </block>
       <!-- 无直播间号有抽选活动无库存： 进入抽选-->
       <block wx:elif='{{is_exhibition==1&&!zunmdata.liveShowRoomId&&zunmdata.isLotto&&zunmdata.debuff!=0}}'>
-        <view class="footer-child large" style='height:60rpx;margin-top:9rpx;padding:0;width:200rpx;margin-right:40rpx;background:#e47677;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' data-brandid='{{zunmdata.brandId}}' data-id='{{zunmdata.gid}}' catchtap="jumpecqdetail">
-          <view class="addsopcar" style="height:60rpx;line-height:60rpx;">进入抽选</view>
+        <view class="footer-child large" style='height:60rpx;margin-top:9rpx;padding:0;width:220rpx;margin-right:40rpx;background:#e47677;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' data-brandid='{{zunmdata.brandId}}' data-id='{{zunmdata.gid}}' catchtap="jumpecqdetail">
+          <view class="addsopcar" style="height:60rpx;line-height:60rpx;">{{zunmdata.saleButtonDisplay?zunmdata.saleButtonDisplay+'抽选':'进入抽选'}}</view>
         </view> 
       </block>
       <block wx:else>
@@ -729,7 +729,7 @@
       <!-- 有直播间号有抽选活动：进入抽选 -->
       <block wx:if='{{is_exhibition==1&&zunmdata.liveShowRoomId&&zunmdata.isLotto}}'>
         <view class="footer-child large" style='box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:300rpx;float:right;background:#e47677;' data-brandid='{{zunmdata.brandId}}' data-id='{{zunmdata.gid}}' catchtap="jumpecqdetail">
-          <view class="addsopcar" style="height:60rpx;line-height:60rpx;">进入抽选</view>
+          <view class="addsopcar" style="height:60rpx;line-height:60rpx;">{{zunmdata.saleButtonDisplay?zunmdata.saleButtonDisplay+'抽选':'进入抽选'}}</view>
         </view>    
       </block>
       <!-- 无直播间号有抽选活动有库存：购买按钮 -->
@@ -772,14 +772,14 @@
       </block>
       <!-- 无直播间号有抽选活动有库存：进入抽选 -->
       <block wx:elif='{{is_exhibition==1&&!zunmdata.liveShowRoomId&&zunmdata.isLotto&&zunmdata.debuff==0}}'>
-        <view class="footer-child large" style='height:60rpx;margin-top:9rpx;padding:0;width:200rpx;margin-right:40rpx;background:#e47677;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' data-brandid='{{zunmdata.brandId}}' data-id='{{zunmdata.gid}}' catchtap="jumpecqdetail">
-          <view class="addsopcar" style="height:60rpx;line-height:60rpx;">进入抽选</view>
+        <view class="footer-child large" style='height:60rpx;margin-top:9rpx;padding:0;width:220rpx;margin-right:40rpx;background:#e47677;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' data-brandid='{{zunmdata.brandId}}' data-id='{{zunmdata.gid}}' catchtap="jumpecqdetail">
+          <view class="addsopcar" style="height:60rpx;line-height:60rpx;">{{zunmdata.saleButtonDisplay?zunmdata.saleButtonDisplay+'抽选':'进入抽选'}}</view>
         </view> 
       </block>
       <!-- 无直播间号有抽选活动无库存： 进入抽选-->
       <block wx:elif='{{is_exhibition==1&&!zunmdata.liveShowRoomId&&zunmdata.isLotto&&zunmdata.debuff!=0}}'>
-        <view class="footer-child large" style='height:60rpx;margin-top:9rpx;padding:0;width:200rpx;margin-right:40rpx;background:#e47677;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' data-brandid='{{zunmdata.brandId}}' data-id='{{zunmdata.gid}}' catchtap="jumpecqdetail">
-          <view class="addsopcar" style="height:60rpx;line-height:60rpx;">进入抽选</view>
+        <view class="footer-child large" style='height:60rpx;margin-top:9rpx;padding:0;width:220rpx;margin-right:40rpx;background:#e47677;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' data-brandid='{{zunmdata.brandId}}' data-id='{{zunmdata.gid}}' catchtap="jumpecqdetail">
+          <view class="addsopcar" style="height:60rpx;line-height:60rpx;">{{zunmdata.saleButtonDisplay?zunmdata.saleButtonDisplay+'抽选':'进入抽选'}}</view>
         </view> 
       </block>
       <block wx:else>
