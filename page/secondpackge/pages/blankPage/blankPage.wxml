@@ -1,32 +1,5 @@
-<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
-<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<image src="{{imgUrl}}" class="ind" bindload="imageLoad" style='width:{{imagewidth}}px;height:{{imageheight}}px;'></image>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 底部导航 -->
-<bnavigation isProduce='{{isProduce}}' isChar='{{false}}'></bnavigation>
-
-
-<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
-<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>
+<text class='jumpCountdown' catchtap='clickcountdownfun'>{{countdown}}</text>

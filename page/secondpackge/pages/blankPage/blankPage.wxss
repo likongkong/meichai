@@ -1,1 +1,28 @@
-/* page/secondpackge//pages/aRewardDetails/aRewardDetails.wxss */
+
+page {
+  width: 100%;
+  height: 100%; 
+}
+
+.ind {
+  display: block;
+  width: 100%;
+  height: 100%;  
+  margin: auto; 
+}
+.jumpCountdown{
+  position: fixed;
+  top: 230rpx;
+  right: 30rpx;
+  width: 80rpx;
+  height: 60rpx;
+  padding: 10rpx 0;
+  background: #000;
+  z-index: 99;
+  border-radius: 50%;
+  opacity: 0.5;
+  font-size: 26rpx;
+  color: #fff;
+  text-align: center;
+  
+}

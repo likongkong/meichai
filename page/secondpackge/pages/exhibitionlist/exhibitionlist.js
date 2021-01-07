@@ -272,7 +272,7 @@ Page({
       page : 0
     })
     if(Dec.env=='online'){
-      var url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/IndexToyShow.json';// 正是
+      var url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/IndexToyShow.json';// 正式
     }else{
       var url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/test/IndexToyShow.json';  // 测试 
     };

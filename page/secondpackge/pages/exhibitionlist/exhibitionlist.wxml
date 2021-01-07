@@ -37,10 +37,14 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
 							  <block wx:if='{{w.saleButtonDisplay}}'>
 										{{w.saleButtonDisplay}}
 										<view wx:if='{{w.tags.length>0}}' class="exhibitiontxt">{{w.tags[0]}}</view>								
-								</block>
+								</block> 
 								<block wx:else>
+								    <block wx:if='{{item.type==4 && w.isLiveShow}}'>
+											直播开启
+											<view wx:if='{{w.tags.length>0}}' class="exhibitiontxt">{{w.tags[0]}}</view>										
+										</block>
 										<!-- 尚未开启  -->
-										<block wx:if='{{w.status==1}}'>
+										<block wx:elif='{{w.status==1}}'>
 											{{w.start}}
 											<view wx:if='{{w.tags.length>0}}' class="exhibitiontxt">{{w.tags[0]}}</view>
 										</block>
