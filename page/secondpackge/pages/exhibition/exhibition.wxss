@@ -1,5 +1,17 @@
 @import "../../common/awardwinningarea.wxss";
 
+/*  三行  */
+
+.multilineellipsis3 {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: normal !important;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
 page {
   background: #f5f6fa;
 }
@@ -21,7 +33,7 @@ page {
 
 .exhibboxconeve {
   width: 305rpx;
-  height: 480rpx;
+  height: 500rpx;
   background: #fff;
   float: left;
   border-radius: 10rpx;
