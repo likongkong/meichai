@@ -660,6 +660,10 @@ Page({
             }
           }
 
+          // for(var i =0;i<listDataDetail.role.length;i++){
+          //   listDataDetail.role[i].img =  
+          // }
+
 
           _this.setData({
             isallready: true,
@@ -669,6 +673,7 @@ Page({
             festivalTicket: infoData.festivalTicket || false,
             inviteList: listDataDetail.invite || [],
             roleList: listDataDetail.role || [],
+            imgTopArr:infoData.imgTopArr||[],
             employList: listDataDetail.employ || [],
             retry: infoData.alert ? infoData.alert.retry : "免费重抽不支持二选一",
             multipleHide: listDataDetail.multipleHide || [],
@@ -990,11 +995,20 @@ Page({
   },
 
   selectbox: function () {
-    var _this = this
+    var _this = this;
+    var roleList = this.data.roleList;
+    var ind = 0;
+    for(var i=0;i<roleList.length;i++){
+      if(roleList[i].headphoto!=''){
+        ind = i;
+        break;
+      }
+    }
     _this.setData({
       ishowcollectchip: false,
       isUseDeduct:_this.data.isDeduct,
-      payFail:false
+      payFail:false,
+      boxSideInd:ind,
     })
     if (_this.data.activity.aheadUser == 0 && _this.data.activity.isInQueue) {
       _this.placeorder()
@@ -1850,6 +1864,12 @@ Page({
         success: function (res) {
           if (res.data.ReturnCode == 200) {
             _this.placeorder();
+            setTimeout(function(){
+              var roleList = _this.data.roleList;
+              _this.setData({
+                boxSideInd:_this.random(0,roleList.length),
+              })
+            },1500)
           } else {
             app.showToastC(res.data.Msg);
           }
@@ -1870,6 +1890,10 @@ Page({
       })
     }, 2000)
 
+  },
+
+  random(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
   },
 
   chancebox: function () {

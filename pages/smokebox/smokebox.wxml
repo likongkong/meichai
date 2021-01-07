@@ -124,7 +124,14 @@
 			<view id='boxindex' class='parentBoxStyle' style="position:relative;width:{{imgwidth}}rpx;">
 				<view wx:for='{{roleList}}' wx:key="key">
 					<view wx:if='{{!item.isSoldOut}}' data-n='{{activity.radioImgBox}}' style='width:{{boxwidth}}px;height:{{boxwidth * activity.radioImgBox}}px;border:2rpx solid #000;float:left;position:relative;' catchtap='{{activity.canOperate?"selectbox":""}}'>
-						<image style='width:100%;height:100%;' src='{{activity.imgTop}}'></image>
+						<!-- <block wx:if="{{imgTopArr&&imgTopArr.length!=0}}">
+							<image style='width:100%;height:100%;' src='{{imgTopArr[index%(imgTopArr.length)].boxCover}}'></image>
+						</block> -->
+						<!-- <block wx:else> -->
+						<image style='width:100%;height:100%;' src='{{imgTopArr&&imgTopArr.length!=0?imgTopArr[index%(imgTopArr.length)].boxCover:activity.imgTop}}'></image>
+						<!-- </block> -->
+						<!-- <image style='width:100%;height:100%;' src='{{activity.imgTop}}'></image>{{imgTopArr[index%(imgTopArr.length)]}} -->
+						
 						<image wx:if='{{item.headphoto!=""}}' style="width:{{boxwidth * activity.radioImgBox * 0.5}}px;height:{{boxwidth * activity.radioImgBox * 0.5}}px;position:absolute;left:0;top:0;bottom:0;right:0;margin:auto;border-radius:50%;" src="{{item.headphoto}}"></image>
 
 						<view wx:if='{{!activity.isInQueue}}' style='width:100%;height:100%;position:absolute;top:0;left:0;z-index:1;' catchtap='lineup'></view>
@@ -551,9 +558,8 @@
 		<view style='width:100%; height:100%;margin:260rpx 0 0 0;text-align:center;position: absolute;left: 0;top:0;'>
 			<scroll-view scroll-y="true" style="width:100%;heigth:100%">
 				<view style="width:{{iewidth}}rpx;height:{{iefheight}}rpx;margin:0 auto;">
-					<image style='width:{{iewidth}}rpx;' mode="widthFix" src='{{activity.imgBox}}' class='{{ischange?"change":""}}' bindload='imageLoadad'></image>
+					<image style='width:{{iewidth}}rpx;' mode="widthFix" src='{{imgTopArr&&imgTopArr.length!=0?imgTopArr[boxSideInd%(imgTopArr.length)].boxSide:activity.imgBox}}' class='{{ischange?"change":""}}' bindload='imageLoadad'></image>
 				</view>
-
 				<view style='width:70rpx;height:70rpx;position:absolute;top:0;right:10rpx;' catchtap='showhint' data-type='2'>
 					<image style='width:70rpx;height:70rpx;' src='https://www.51chaidan.com/images/icon/iconCardTip.png'></image>
 					<view wx:if='{{cardTip>0}}' class='tabshopimg specialellipsis {{isusertip?"graynumbg":"#rednumbg"}}'>{{cardTip}}</view>
