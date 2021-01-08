@@ -788,7 +788,7 @@ Page({
             _this.data.firstshowredpag = false
           }
 
-          if (listDataDetail.role.length == 8 || listDataDetail.role.length == 12 || listDataDetail.role.length == 7 || listDataDetail.role.length == 10 || listDataDetail.role.length == 11 || listDataDetail.role.length == 24 || listDataDetail.role.length == 18) {
+          if (listDataDetail.role.length == 8 || listDataDetail.role.length == 12 || listDataDetail.role.length == 7 || listDataDetail.role.length == 11 || listDataDetail.role.length == 24 || listDataDetail.role.length == 18) {
             _this.setData({
               linenum: 4,
             })
@@ -796,7 +796,7 @@ Page({
             _this.setData({
               linenum: 3,
             })
-          } else if (listDataDetail.role.length == 13 || listDataDetail.role.length == 14 || listDataDetail.role.length == 15) {
+          } else if (listDataDetail.role.length == 13 ||listDataDetail.role.length == 10 || listDataDetail.role.length == 14 || listDataDetail.role.length == 15) {
             _this.setData({
               linenum: 5,
             })
@@ -2778,7 +2778,6 @@ Page({
               hideBoxTip: infoData.hideBoxTip ? infoData.hideBoxTip : "随机隐藏碎片：收集20片自动合成,可到玩具柜查看",
               wholeBoxTitle:infoData.wholeBoxTitle||''
             })
-  
             _this.selectData(0);
           }
           _this.setData({
