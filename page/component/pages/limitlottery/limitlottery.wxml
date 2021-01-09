@@ -51,7 +51,12 @@
 						<text class='timetextstyle'>秒</text>）
 				</block>
 				<block wx:else>
-						很遗憾，您未中签
+				    <block wx:if='{{infoActivity.isWinner}}'>
+						    <block wx:if='{{infoActivity.isOrdered}}'>已领取成功</block>
+								<block wx:else>您已中签</block>
+						</block>
+						<block wx:elif='{{infoFragment.activitySignNumber.length > 0}}'>很遗憾，您未中签</block>
+						<block wx:else>活动已结束</block>
 				</block>	
 		</view>
 		<view wx:if="{{infoActivity.status==3 && isgetaward}}" class='countdown' style='font-size:40rpx;{{infoActivity.supportLogo?"float:left;":""}}'>

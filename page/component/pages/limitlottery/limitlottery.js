@@ -709,14 +709,16 @@ Page({
                 }
               }
             } else {
-              wx.showModal({
-                title: '',
-                content: '很遗憾，您未中签',
-                showCancel:false,
-                confirmText:'知道了',
-                success (res) {
-                }
-              })
+              if(res.data.Info.infoFragment && res.data.Info.infoFragment.activitySignNumber && res.data.Info.infoFragment.activitySignNumber.length > 0){
+                wx.showModal({
+                  title: '',
+                  content: '很遗憾，您未中签',
+                  showCancel:false,
+                  confirmText:'知道了',
+                  success (res) {
+                  }
+                })
+              };
               _this.setData({
                 btntext: "没有中奖,再接再厉",
                 awardstatus: 4,
