@@ -36,7 +36,9 @@ Page({
     pullUpData:[],
     judgeLoadData:true,
     isProduce: app.signindata.isProduce,
-    sharedata:{}
+    sharedata:{},
+    // 适配苹果X
+    isIphoneX: app.signindata.isIphoneX,
   },
 
   // 展会公共跳转
