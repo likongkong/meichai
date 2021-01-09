@@ -1761,7 +1761,7 @@ Page({
               _this.getinfo()
               
 
-              if(e && e != "undefined" && (this.data.infoActivity.joinMothed != 'payTicket' && this.data.infoActivity.payTicketCate != 'fullPledge')){
+              if(e && e != "undefined" && (_this.data.infoActivity.joinMothed != 'payTicket' && _this.data.infoActivity.payTicketCate != 'fullPledge')){
                 _this.joinDraw(0);
               }
 

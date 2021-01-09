@@ -738,7 +738,9 @@
 
                     <!--  拆单失败  -->
                     <view class='wholebottomadd' wx:if='{{item.status==7}}'>
-                        <view class='totaltittrfai'>付款将会原路返回到您的支付账号中</view>
+                        <view class='totaltittrfai'>
+                           {{item.order_type==27&&item.status==7&&item.compareTime?'您未中签，退款金额将在24小时内原路退回':'付款将会原路返回到您的支付账号中'}} 
+                        </view>
                         <view class='wholebottomaddright sharebox redborcol'  wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood}}'>
                             <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
                             分享好友

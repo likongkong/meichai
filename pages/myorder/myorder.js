@@ -1,5 +1,8 @@
 var Dec = require('../../common/public.js');//aes加密解密js
+var time = require('../../utils/util.js');
+
 const app = getApp();
+
 Page({
   /**
    * 页面的初始数据
@@ -554,6 +557,8 @@ Page({
         // express_no: arr[j][0].express_no,
         cart_id: arr[j][0].cart_id,
         ordertime: arr[j][0].ordertime,
+        payTime: arr[j][0].payTime,
+        compareTime:time.formatTimeTwo(parseInt(arr[j][0].payTime)+86400, 'Y/M/D h:m')>time.formatTimeTwo(Date.parse(new Date())/1000, 'Y/M/D h:m'),
         gid: arr[j][0].gid,
         oid: arr[j][0].oid,
         // 订单状态编号
