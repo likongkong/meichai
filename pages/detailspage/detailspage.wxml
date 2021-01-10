@@ -1106,9 +1106,16 @@
       </view>
       <view class='pricedetailo'>
         <view class='pricedetailoleft'>运费
-          <text style='padding-left:8rpx;color:#47981e;' wx:if='{{freightiftr>0}}'>(满￥{{defaultinformation.carriage.free}}包邮)</text>
+            <text style='padding-left:8rpx;color:#47981e;' wx:if='{{freightiftr>0&&is_exhibition!=1}}'>(满￥{{defaultinformation.carriage.free}}包邮)</text>
         </view>
-        <view class='pricedetailoright' style="{{zunmdata.goods_type==3?'color:#999':''}}">{{freight}}</view>
+        <view class='pricedetailoright' style="{{zunmdata.goods_type==3?'color:#999':''}}">
+          <block wx:if='{{is_exhibition==1}}'>
+             <block wx:if='{{freightiftr>0}}'>{{freight}}</block>
+             <block wx:else>{{zunmdata.deliver}}</block>
+          </block>
+          <block wx:else>{{freight}}</block>        
+        </view>
+        
       </view>
       <view class='pricedetailo' wx:if="{{isUseBlindboxMoney && blindboxMoney!=0}}">
         <view class='pricedetailoleft'>抽盒金抵扣</view>
