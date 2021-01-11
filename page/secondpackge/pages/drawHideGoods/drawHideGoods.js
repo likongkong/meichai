@@ -24,7 +24,8 @@ Page({
     recordlistData:[],
     inputValue:'',
     isWinning:false,
-    isReachBottom:true
+    isReachBottom:true,
+    is_mobile_phone:false
   },
 
   /**
@@ -210,6 +211,7 @@ Page({
             chancenum:infoData.temp_chance_num,
             isShowWill:infoData.is_show_will,
             explain:infoData.rules || 'Hello world',
+            is_mobile_phone:infoData.is_mobile_phone,
           })
         }
       }
@@ -549,5 +551,58 @@ Page({
     }
     return format;
   },
+
+
+
+  // 获取手机号
+  getPhoneNumber: function(e) {
+    var _this = this;
+    console.log(e.detail.errMsg == 'getPhoneNumber: ok' || e.detail.errMsg == "getPhoneNumber:ok");
+    if (e.detail.errMsg == 'getPhoneNumber: ok' || e.detail.errMsg == "getPhoneNumber:ok") {
+      wx.login({
+        success: function(res) {
+          if (res.code) {
+            _this.helpOther(res.code, e.detail.encryptedData, e.detail.iv)
+          };
+        }
+      });
+    } else {
+      app.showToastC('获取手机号失败！');
+      _this.setData({
+        havephoneiftr: true
+      })
+    }
+  },
+  helpOther: function(code, encryptedData, iv) {
+    var _this = this;
+    wx.showLoading({
+      title: '加载中...',
+    });
+    console.log('mod=subscription&operation=authMobile&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&iv=' + iv + '&encryptedData=' + encryptedData + '&code=' + code)
+    var q1 = Dec.Aese('mod=subscription&operation=authMobile&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&iv=' + iv + '&encryptedData=' + encryptedData + '&code=' + code);
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + q1,
+      method: 'GET',
+      header: {
+        'Accept': 'application/json'
+      },
+      success: function(res) {
+        wx.hideLoading()
+        console.log('手机号授权提交=====',res)
+        if(res.data.ReturnCode == 200){
+          _this.setData({
+            is_mobile_phone:true
+          });
+          app.showToastC('获取手机号成功');
+        }else{
+          app.showToastC(res.data.Msg||'');
+        };
+      },
+      fail: function(res) {
+        wx.hideLoading()
+      }
+    })
+  },
+
 
 })
