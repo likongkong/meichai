@@ -245,11 +245,34 @@ Page({
     //端盒60秒倒计时C
     dhRecycleCount:60,
     isDhRecycleBtn:true,
-    boxBenefitsSM:false
+    boxBenefitsSM:false,
+    labelContent:{
+      c:"抽盒每满5次，可获得一次抽奖机会（100%中奖）",
+      y:'预售商品到货后发出；具体以厂家到货时间为准；由于出厂时间不可控，不接受因此原因的投诉；',
+      j:'购买商品后，商品进入我的玩具柜，玩具柜中的商品可编辑价格在闲置潮玩中进行出售。'
+    },
+    labelContentVie:''
   },
-  boxBenefitsFun(){
+  boxBenefitsFun(event){
+    if(this.data.boxBenefitsSM){
+      this.setData({
+        boxBenefitsSM:false
+      });
+      return false;
+    };
+    var name = event.currentTarget.dataset.name || event.target.dataset.name;
+    var labelContentVie = '';
+    var labelContent = this.data.labelContent;
+    if(name=="抽盒福利"){
+      labelContentVie = labelContent.c || '';
+    }else if(name=="预售"){
+      labelContentVie = labelContent.y || '';
+    }else if(name=="进玩具柜"){
+      labelContentVie = labelContent.j || '';
+    }
     this.setData({
-      boxBenefitsSM:!this.data.boxBenefitsSM
+      boxBenefitsSM:!this.data.boxBenefitsSM,
+      labelContentVie:labelContentVie
     });
   },
   jumpVipPage(){

@@ -1,8 +1,8 @@
 <view style="width:100%;">
 
-  <view style='color:{{colortitle}};font-size:25rpx;line-height:40rpx;padding-left:10rpx;text-align:left;margin-top:5rpx;' catchtap="jumplist">在线抽盒机</view>
+  <view wx:if='{{dataList&&dataList.length!=0}}' style='color:{{colortitle}};font-size:25rpx;line-height:40rpx;padding-left:10rpx;text-align:left;margin-top:5rpx;' catchtap="jumplist">在线抽盒机</view>
 
-  <view style="width:100%;margin:5rpx 0 5rpx 0;">
+  <view style="width:100%;margin:5rpx 0 5rpx 0;" wx:if='{{dataList&&dataList.length!=0}}'>
     <scroll-view scroll-x="true" style="white-space:nowrap;">
       <view wx:for='{{dataList}}' wx:key='key' wx:for-item='w' class="itemstyle">
         <image wx:if='{{w.isNewArrival}}' class="labelstyleImg" src="https://cdn.51chaidan.com/images/icon/newArrival.png"></image>
