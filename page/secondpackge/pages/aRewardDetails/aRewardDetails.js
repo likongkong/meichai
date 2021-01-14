@@ -1243,26 +1243,32 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    clearInterval(this.data.timer)
+    clearInterval(this.data.timer);
+    // 调用重置刷新
+    app.resetdownRefresh();
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    clearInterval(this.data.timer)
+    clearInterval(this.data.timer);
+    // 调用重置刷新
+    app.resetdownRefresh();
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.selectComponent('#history')._onPullDownRefresh();
-    this.setData({
-      checkOtherActivity:''
+    app.downRefreshFun(() => {
+      this.selectComponent('#history')._onPullDownRefresh();
+      this.setData({
+        checkOtherActivity:''
+      })
+      // this.listdata();
+      this.queuefun(1,1);
     })
-    // this.listdata();
-    this.queuefun(1,1);
   },
   /**
    * 页面上拉触底事件的处理函数

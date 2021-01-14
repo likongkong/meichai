@@ -726,18 +726,27 @@ Page({
 
   onShow: function() {},
 
-  onHide: function() {},
+  onHide: function() {
+    // 调用重置刷新
+    app.resetdownRefresh();
+  },
 
-  onUnload: function() {},
+  onUnload: function() {
+    // 调用重置刷新
+    app.resetdownRefresh();
+  },
 
   onPullDownRefresh: function() {
-    if (this.data.cat_id==2) {
-      this.eldatalistfun(0);
-    } else if(this.data.cat_id == 3){
-      this.mctslistfun(0);
-    } else {
-      this.listdata(0)
-    }
+    app.downRefreshFun(() => {
+      if (this.data.cat_id==2) {
+        this.eldatalistfun(0);
+      } else if(this.data.cat_id == 3){
+        this.mctslistfun(0);
+      } else {
+        this.listdata(0)
+      }
+    })
+    
   },
 
   onReachBottom: function() {

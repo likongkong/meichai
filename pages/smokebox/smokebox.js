@@ -1224,6 +1224,8 @@ Page({
     clearInterval(_this.data.atimer)
     clearInterval(this.data.countdowntime);
     clearInterval(_this.data.tempChanceCountdowntime);
+     // 调用重置刷新
+     app.resetdownRefresh();
   },
 
   /**
@@ -1235,16 +1237,20 @@ Page({
     clearInterval(_this.data.atimer)
     clearInterval(this.data.countdowntime);
     clearInterval(_this.data.tempChanceCountdowntime);
+     // 调用重置刷新
+     app.resetdownRefresh();
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.getInfo()
-    if (this.data.is_exhibition == 1) {
-      this.exhibdatafun(1)
-    }
+    app.downRefreshFun(() => {
+      this.getInfo()
+      if (this.data.is_exhibition == 1) {
+        this.exhibdatafun(1)
+      }
+    })
   },
 
   onReachBottom: function () {

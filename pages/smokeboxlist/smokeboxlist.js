@@ -145,12 +145,16 @@ Page({
   },
   onHide: function() {
     clearInterval(this.data.countdowntime);
+    // 调用重置刷新
+    app.resetdownRefresh();
   },
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
     clearInterval(this.data.countdowntime);
+    // 调用重置刷新
+    app.resetdownRefresh();
   },
   jumpowntoy: function() {
     var _this = this;
@@ -748,10 +752,12 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-    this.setData({
-      pid: 0,
+    app.downRefreshFun(() => {
+      this.setData({
+        pid: 0,
+      })
+      this.getlist(0)
     })
-    this.getlist(0)
   },
 
   /**

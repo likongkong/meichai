@@ -296,19 +296,31 @@ Page({
       _this.nextpagediao();
     }
   },
+   /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+    // 调用重置刷新
+    app.resetdownRefresh();
+  },
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {},
+  onUnload: function() {
+    // 调用重置刷新
+    app.resetdownRefresh();
+  },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-    var _this = this
-    _this.setData({
-      pid: 0,
+    app.downRefreshFun(() => {
+      var _this = this
+      _this.setData({
+        pid: 0,
+      })
+      _this.getRecord(0);
     })
-    _this.getRecord(0);
   },
   /**
    * 页面上拉触底事件的处理函数

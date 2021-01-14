@@ -698,82 +698,90 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {},
+  onHide: function () {
+    // 调用重置刷新
+    app.resetdownRefresh();
+  },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {},
+  onUnload: function () {
+    // 调用重置刷新
+    app.resetdownRefresh();
+  },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.setData({
-      headhidden: false,
-      page:0,
-      myordata:[]
-    }); 
-    wx.showLoading({ title: '加载中...', })
-    // 调取数据
-    var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
-    var _this = this;
-    var arrlist = '';
-    var q = Dec.Aese('mod=getinfo&operation=orderlist&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=' + _this.data.myorhtabtr + '&blackCity=' + _this.data.blackCity);
-    console.log(app.signindata.comurl + 'order.php?mod=getinfo&operation=orderlist&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=' + _this.data.myorhtabtr + '&blackCity=' + _this.data.blackCity)
-
-    wx.request({
-      url: app.signindata.comurl + 'order.php'+q,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        console.log('order====',res)
-        // 刷新完自带加载样式回去
-        wx.stopPullDownRefresh();
-        _this.setData({headhidden: true,});   
-        wx.hideLoading()    
-        if (res.data.ReturnCode == 200) {
-          var arrlist = res.data.List;
-          if (arrlist.length!=0){
-              for (var i = 0; i < arrlist.length; i++) {
-                if (!reg.test(arrlist[i].gcover)) {
-                  arrlist[i].gcover = _this.data.zdyurl + arrlist[i].gcover;
+    app.downRefreshFun(() => {
+      this.setData({
+        headhidden: false,
+        page:0,
+        myordata:[]
+      }); 
+      wx.showLoading({ title: '加载中...', })
+      // 调取数据
+      var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
+      var _this = this;
+      var arrlist = '';
+      var q = Dec.Aese('mod=getinfo&operation=orderlist&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=' + _this.data.myorhtabtr + '&blackCity=' + _this.data.blackCity);
+      console.log(app.signindata.comurl + 'order.php?mod=getinfo&operation=orderlist&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=' + _this.data.myorhtabtr + '&blackCity=' + _this.data.blackCity)
+  
+      wx.request({
+        url: app.signindata.comurl + 'order.php'+q,
+        method: 'GET',
+        header: { 'Accept': 'application/json' },
+        success: function (res) {
+          console.log('order====',res)
+          // 刷新完自带加载样式回去
+          wx.stopPullDownRefresh();
+          _this.setData({headhidden: true,});   
+          wx.hideLoading()    
+          if (res.data.ReturnCode == 200) {
+            var arrlist = res.data.List;
+            if (arrlist.length!=0){
+                for (var i = 0; i < arrlist.length; i++) {
+                  if (!reg.test(arrlist[i].gcover)) {
+                    arrlist[i].gcover = _this.data.zdyurl + arrlist[i].gcover;
+                  };
+                  arrlist[i].ordertime = _this.toDate(arrlist[i].ordertime);
+                  arrlist[i].gift_time = _this.toDate(arrlist[i].gift_time, 1);
+                  if (Date.parse(new Date()) > arrlist[i].overtime * 1000 && arrlist[i].status == 0) {
+                    arrlist[i].status = 8
+                  };                
                 };
-                arrlist[i].ordertime = _this.toDate(arrlist[i].ordertime);
-                arrlist[i].gift_time = _this.toDate(arrlist[i].gift_time, 1);
-                if (Date.parse(new Date()) > arrlist[i].overtime * 1000 && arrlist[i].status == 0) {
-                  arrlist[i].status = 8
-                };                
-              };
-              if (arrlist.length != 0) {
-                var gar = parseFloat(arrlist[0].goods_amount) / parseFloat(arrlist[0].gnumber);
-                var title = '￥' + gar.toFixed(2) + "   " + arrlist[0].pre_name + "  " + arrlist[0].ds + "  " +  arrlist[0].gname
+                if (arrlist.length != 0) {
+                  var gar = parseFloat(arrlist[0].goods_amount) / parseFloat(arrlist[0].gnumber);
+                  var title = '￥' + gar.toFixed(2) + "   " + arrlist[0].pre_name + "  " + arrlist[0].ds + "  " +  arrlist[0].gname
+                  _this.setData({
+                    gid: arrlist[0].gid,
+                    title: title
+                  })
+                  _this.data.shareimg = arrlist[0].gcover;
+                } else {
+                  _this.setData({
+                    gid: '',
+                    title: ''
+                  });
+                  _this.data.shareimg = '';
+                };  
+                // 数据处理
+                var arrchil = _this.dataprocessing(arrlist);
                 _this.setData({
-                  gid: arrlist[0].gid,
-                  title: title
-                })
-                _this.data.shareimg = arrlist[0].gcover;
-              } else {
-                _this.setData({
-                  gid: '',
-                  title: ''
+                  myordata: arrchil,
+                  headhidden: true,
                 });
-                _this.data.shareimg = '';
-              };  
-              // 数据处理
-              var arrchil = _this.dataprocessing(arrlist);
-              _this.setData({
-                myordata: arrchil,
-                headhidden: true,
-              });
-            wx.hideLoading()
-          }
-        };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app); 
-
-      }
-    })          
+              wx.hideLoading()
+            }
+          };
+          // 判断非200和登录
+          Dec.comiftrsign(_this, res, app); 
+  
+        }
+      })     
+    })
   },
   //时间戳转换时间  
   toDate: function (number,num) {
