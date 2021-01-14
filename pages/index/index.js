@@ -1002,6 +1002,8 @@ Page({
   onHide: function () {
     clearInterval(this.data.timer);
     clearInterval(this.data.countdowntime);
+    // 调用重置刷新
+    app.resetdownRefresh();
   },
   /**
    * 生命周期函数--监听页面卸载
@@ -1009,13 +1011,18 @@ Page({
   onUnload: function () {
     clearInterval(this.data.timer); 
     clearInterval(this.data.countdowntime);   
+    // 调用重置刷新
+    app.resetdownRefresh();
   },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
+ 
   onPullDownRefresh: function () {
-    // 获取list数据
-    this.auditversion();   
+    app.downRefreshFun(() => {
+      //获取list数据
+      this.auditversion();
+    })
   },
   /**
    * 页面上拉触底事件的处理函数

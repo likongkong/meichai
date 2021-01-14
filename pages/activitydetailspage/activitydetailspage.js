@@ -2289,22 +2289,29 @@ closefrindcommoni:function(){
   onHide: function () {
     clearInterval(this.data.interval);
     clearInterval(this.data.countdowntime);
+    // 调用重置刷新
+    app.resetdownRefresh();
   },
   onUnload: function () {
     clearInterval(this.data.interval);
     clearInterval(this.data.countdowntime);
+    // 调用重置刷新
+    app.resetdownRefresh();
   },
   onPullDownRefresh: function () {
-    this.setData({
-      iftrtipstar:false
+    app.downRefreshFun(() => {
+      this.setData({
+        iftrtipstar:false
+      })
+      this.onLoadfun();
+      if (this.data.is_exhibition == 1) {
+        this.exhibdatafun(1)
+      } else {
+        // 刷新完自带加载样式回去
+        wx.stopPullDownRefresh()
+      } 
     })
-    this.onLoadfun();
-    if (this.data.is_exhibition == 1) {
-      this.exhibdatafun(1)
-    } else {
-      // 刷新完自带加载样式回去
-      wx.stopPullDownRefresh()
-    }
+    
   },
   onReachBottom: function () {
     if (this.data.is_exhibition == 1) {

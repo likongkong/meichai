@@ -117,7 +117,13 @@ App({
     isManager:false,
     randommaximum:5,
     // 公共分享标题
-    titleShare:''
+    titleShare:'',
+    // 下拉刷新处理  *** start ***
+    downRefreshNum:0,  
+    beforeTime:  0,
+    nowTime:  0,
+    isLimitDownRefresh: false,
+    // *** end ***
   },
   //一番赏队列倒计时
   // yifanshangIsInQueueFun(time){
@@ -1114,10 +1120,37 @@ App({
       imageUrl: _this.signindata.indexShareImg,
       success: function (res) {}
     }  
+  },
+
+  //避免多次下拉刷新
+  downRefreshFun(callback){
+    if(this.signindata.isLimitDownRefresh){
+      this.signindata.downRefreshNum = this.signindata.downRefreshNum + 1;
+      console.log('刷新次数==',this.signindata.downRefreshNum)
+      if(this.signindata.downRefreshNum>3){
+        this.signindata.nowTime = Date.parse(new Date())/1000;
+        console.log('距上次刷新时间===',this.signindata.nowTime - this.signindata.beforeTime)
+        if((this.signindata.nowTime - this.signindata.beforeTime) <= 3){
+          wx.showToast({title: '操作过于频繁',icon: 'none',duration: 1000})
+          wx.stopPullDownRefresh()
+        }else{
+          callback();
+          this.signindata.beforeTime = Date.parse(new Date())/1000;
+        }
+      }else{
+        callback();
+        this.signindata.beforeTime = Date.parse(new Date())/1000;
+      }
+    }else{
+      callback();
+    }
+  },
+  // 重置刷新次数
+  resetdownRefresh(){
+    this.signindata.downRefreshNum = 0;
+    this.signindata.nowTime = 0;
+    this.signindata.beforeTime=0;
   }
-
-
-
 })
 
 

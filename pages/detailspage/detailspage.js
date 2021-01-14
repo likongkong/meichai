@@ -3005,6 +3005,8 @@ Page({
       _this.data.videoContext.stop()
     };
     clearInterval(this.data.wintheprtintervaldetail);
+     // 调用重置刷新
+     app.resetdownRefresh();
   },
   /**
    * 生命周期函数--监听页面卸载
@@ -3016,13 +3018,17 @@ Page({
       _this.data.videoContext.stop()
     }
     clearInterval(this.data.wintheprtintervaldetail);
+     // 调用重置刷新
+     app.resetdownRefresh();
   },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    app.downRefreshFun(() => {
       // 商品详情
       this.detailfunshop();
+    })
   },
   /**
    * 页面上拉触底事件的处理函数

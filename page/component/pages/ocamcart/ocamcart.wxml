@@ -224,7 +224,7 @@
     <view class='bbshccombot'>
       <view class='bbshcombotleft'>应付金额</view>
       <view class='bbshcombotright'>
-        <view class='bbshcombotpr'>￥{{freightiftr>0?freightiftr:payprice}}</view>
+        <view class='bbshcombotpr'>￥{{originalAmountpayable}}</view>
         <view class='bbshcombotdet' bindtap='pricedetailc'>
           <image class='bbshdetimg' src='/pages/images/tipdet.png'></image>点击查看价格明细</view>
       </view>
@@ -232,7 +232,7 @@
     <view class='pricedetail' wx:if='{{pricedetailc}}'>
       <view class='pricedetailo'>
         <view class='pricedetailoleft'>商品价格</view>
-        <view class='pricedetailoright'>￥{{originalAmountpayable}}</view>
+        <view class='pricedetailoright'>￥{{payprice}}</view>
       </view>
       <view class='pricedetailo'>
         <view class='pricedetailoleft'>运费<text style='padding-left:8rpx;color:#47981e;' wx:if='{{freightiftr>0}}'>(满￥{{defaultinformation.carriage.free}}包邮)</text></view>

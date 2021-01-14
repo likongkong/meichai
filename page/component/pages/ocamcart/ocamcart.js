@@ -53,17 +53,7 @@ Page({
     this.setData({
       isUseBlindboxMoney:!this.data.isUseBlindboxMoney,
     })
-    if(this.data.freightiftr>0){
-      var tdzuncar = this.data.defaultinformation.carriage.d;
-      let freightiftr = (parseFloat(tdzuncar) + parseFloat(this.data.payprice)).toFixed(2);
-      this.setData({
-        freightiftr:this.data.isUseBlindboxMoney? freightiftr : (parseFloat(tdzuncar) + this.data.originalAmountpayable).toFixed(2),
-      })
-    }else{
-      this.setData({
-        payprice:this.data.isUseBlindboxMoney? (this.data.originalAmountpayable-this.data.useblindAmountpayable).toFixed(2):this.data.originalAmountpayable
-      })
-    }
+    this.amountcalculation();
     this.setData({
       isDeductNum:this.data.isUseBlindboxMoney?1:0
     })
@@ -412,40 +402,21 @@ Page({
             isDeductNum:res.data.Info.deduct.isDeduct&&_this.data.blindboxMoney!=0?1:0
           })
           
-          if(res.data.Info.totalAmount >= _this.data.defaultinformation.carriage.freeForAmount){
-            var payprice = res.data.Info.totalAmount;
-          }else{
-            var payprice = parseFloat(res.data.Info.totalAmount) + parseFloat(_this.data.defaultinformation.carriage.d)
-          }
-          let useblindAmountpayable = _this.data.blindboxMoney>(payprice.toFixed(2)*_this.data.deductRatio)?payprice.toFixed(2)*_this.data.deductRatio:_this.data.blindboxMoney;
-          let amountpayable = _this.data.blindboxMoney!=0? _this.data.isDeduct? _this.data.isUseBlindboxMoney? (payprice.toFixed(2)-useblindAmountpayable).toFixed(2) :payprice.toFixed(2) :payprice.toFixed(2) :payprice.toFixed(2)
-          console.log(amountpayable)
           if (request == "limit"){
             _this.setData({
               cartInfo: res.data.Info,
               cartData: res.data.List,
               conut: res.data.Info.count||0,
-              payprice: amountpayable,
-              // 原始应付金额
-              originalAmountpayable: payprice,
-              // 使用抽盒金后应付金额
-              useblindAmountpayable: parseFloat(useblindAmountpayable).toFixed(3).slice(0,-1),
+              payprice: res.data.Info.totalAmount,
             })
           }else{
             _this.setData({
               cartInfo: res.data.Info,
               listdata: res.data.List,
               conut: res.data.Info.count || 0,
-              payprice: amountpayable,
-              // 原始应付金额
-              originalAmountpayable: payprice,
-              // 使用抽盒金后应付金额
-              useblindAmountpayable: parseFloat(useblindAmountpayable).toFixed(3).slice(0,-1),
+              payprice: res.data.Info.totalAmount,
             })
-            if(_this.data.listdata.length == 0){
-              _this.setData({ islistdata : false });
-            }
-          }
+          };
         }
       },
     })
@@ -800,9 +771,26 @@ Page({
       xianshi = '￥0.00';
       freightiftr = parseFloat(tdzuncar);
     };
+
+    if(freightiftr>0){
+      console.log()
+      var payprice = parseFloat(_this.data.payprice) + parseFloat(_this.data.defaultinformation.carriage.d)
+    }else{
+      var payprice = _this.data.payprice;
+    }
+
+    let useblindAmountpayable = _this.data.blindboxMoney>(payprice.toFixed(2)*_this.data.deductRatio)?payprice.toFixed(2)*_this.data.deductRatio:_this.data.blindboxMoney;
+    let amountpayable = _this.data.blindboxMoney!=0? _this.data.isDeduct? _this.data.isUseBlindboxMoney? (payprice.toFixed(2)-useblindAmountpayable).toFixed(2) :payprice.toFixed(2) :payprice.toFixed(2) :payprice.toFixed(2)
+    console.log(amountpayable)
+
     this.setData({
       freight: xianshi,
-      freightiftr: freightiftr,
+      // freightiftr: freightiftr,
+      // originalAmountpayable:amountpayable,
+      // 应付金额
+      originalAmountpayable:amountpayable,
+      // 使用抽盒金后应付金额
+      useblindAmountpayable: parseFloat(useblindAmountpayable).toFixed(3).slice(0,-1),
     });
   },
 

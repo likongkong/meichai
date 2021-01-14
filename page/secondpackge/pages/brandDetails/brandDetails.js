@@ -466,23 +466,27 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    // 调用重置刷新
+    app.resetdownRefresh();
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    // 调用重置刷新
+    app.resetdownRefresh();
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    var _this = this;
-    _this.data.page = 0;
-    _this.getbrandDetail(_this.data.page);
+    app.downRefreshFun(() => {
+      var _this = this;
+      _this.data.page = 0;
+      _this.getbrandDetail(_this.data.page);
+    })
   },
 
   /**

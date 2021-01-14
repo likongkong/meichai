@@ -628,12 +628,22 @@ Page({
   clicktga: function () {
     app.clicktga(2)
   },
+  onHide: function() {
+    // 调用重置刷新
+    app.resetdownRefresh();
+  },
 
+  onUnload: function() {
+    // 调用重置刷新
+    app.resetdownRefresh();
+  },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.onLoadfun();
+    app.downRefreshFun(() => {
+      this.onLoadfun();
+    })
   },
   /**
    * 页面上拉触底事件的处理函数

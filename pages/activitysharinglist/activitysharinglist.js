@@ -69,12 +69,16 @@ Page({
   },
   onHide: function () {
     clearInterval(this.data.countdowntime);
+    // 调用重置刷新
+    app.resetdownRefresh();
   },
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
     clearInterval(this.data.countdowntime);
+    // 调用重置刷新
+    app.resetdownRefresh();
   },
   pullupsignin: function () {
     // // '没有授权'
@@ -419,28 +423,30 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    var _this = this;
-    wx.showLoading({ title: '加载中...', })
-    var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
-    // 商品列表
-    _this.listdata(1);
-    // 获取剩余次数 
-    var qc = Dec.Aese('mod=activity&operation=chance&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1');
-    wx.request({
-      url: app.signindata.comurl + 'spread.php' + qc,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        wx.hideLoading()
-        if (res.data.ReturnCode == 200) {
-          var countdown = res.data.Info.chance||0;
-          _this.setData({countdown: countdown})
-        };
-        if (res.data.ReturnCode == 900) {
-          app.showToastC('登陆状态有误');
-        };
-      }
-    });          
+    app.downRefreshFun(() => {
+      var _this = this;
+      wx.showLoading({ title: '加载中...', })
+      var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
+      // 商品列表
+      _this.listdata(1);
+      // 获取剩余次数 
+      var qc = Dec.Aese('mod=activity&operation=chance&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1');
+      wx.request({
+        url: app.signindata.comurl + 'spread.php' + qc,
+        method: 'GET',
+        header: { 'Accept': 'application/json' },
+        success: function (res) {
+          wx.hideLoading()
+          if (res.data.ReturnCode == 200) {
+            var countdown = res.data.Info.chance||0;
+            _this.setData({countdown: countdown})
+          };
+          if (res.data.ReturnCode == 900) {
+            app.showToastC('登陆状态有误');
+          };
+        }
+      });   
+    })
   },
   /**
    * 页面上拉触底事件的处理函数
