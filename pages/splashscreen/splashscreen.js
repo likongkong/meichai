@@ -141,19 +141,6 @@ Page({
     
     _this.countdownfun();
 
-
-    // 获取默认信息
-    var qqq = Dec.Aese('operation=info&mod=info');
-    wx.request({
-      url: app.signindata.comurl + 'general.php' + qqq,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        if (res.data.ReturnCode == 200) {
-          app.signindata.defaultinformation = res.data.Info || '';
-        };
-      }
-    })
   },
   onLoadfun:function(){
     var _this = this;

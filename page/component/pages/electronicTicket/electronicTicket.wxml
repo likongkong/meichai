@@ -95,7 +95,7 @@
             <image src='../../../../pages/images/icon_webchat.png' class='wxcusserimg'></image>
         </view>
         <view class='wxcussertbox' catchtap='copyTBL' style='position:relative;'>
-            <view class='wxcussertxt specialellipsis' style='margin-top:10rpx;'>美拆官方微信<view class='wxcussertxtwx'>{{wxnum}}</view>(点击复制)</view>
+            <view class='wxcussertxt specialellipsis' style='margin-top:10rpx;'>美拆官方微信<view class='wxcussertxtwx'>{{defaultinformation.cs.wxid}}</view>(点击复制)</view>
             <view class='wxcussertxt specialellipsis'>添加微信好友获取专属福利，更多群福利等你来拿</view>
         </view>
     </view>     

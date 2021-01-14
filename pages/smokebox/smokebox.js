@@ -897,7 +897,9 @@ Page({
             if (infoData.function.isFirstOrderActivity) {
               _this.snapshotsharefun();
             };
-            _this.nextpagediao()
+            if(_this.data.addressdata && _this.data.addressdata.length!=0){}else{
+                _this.nextpagediao()
+            };
 
           }, 500) //延迟时间 这里是1秒
 

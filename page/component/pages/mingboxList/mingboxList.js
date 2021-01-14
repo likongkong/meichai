@@ -148,32 +148,13 @@ Page({
       isProduce: app.signindata.isProduce,
       avatarUrl: app.signindata.avatarUrl,
       spreadEntry: app.signindata.spreadEntry,
+      defaultinformation:app.signindata.defaultinformation,
     });
 
-    
+    if(this.data.defaultinformation){}else{
+      app.defaultinfofun(this);
+    };
 
-    // 调取晒单数量
-    Dec.dryingSum(_this, app.signindata.clwcomurl);
-    var qqq = Dec.Aese('operation=info&mod=info');
-    // 获取默认信息
-    wx.request({
-      url: app.signindata.comurl + 'general.php' + qqq,
-      method: 'GET',
-      header: {
-        'Accept': 'application/json'
-      },
-      success: function(res) {
-        if (res.data.ReturnCode == 200) {
-          _this.setData({
-            defaultinformation: res.data.Info,
-          });
-        };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
-        // 购物车数据显示
-        Dec.shopnum(_this,app.signindata.comurl);
-      }
-    });
     _this.getlist(_this.data.pid)
 
     if (app.signindata.isAwardOrder) {

@@ -163,34 +163,16 @@ Page({
     _this.setData({
       uid: app.signindata.uid,
       isProduce: app.signindata.isProduce,
+      defaultinformation:app.signindata.defaultinformation,
       avatarUrl: app.signindata.avatarUrl,
     });
     wx.hideLoading()
 
-    _this.getinfo()
-    // 购物车数量显示
-    Dec.shopnum(_this,app.signindata.comurl);
-    // 调取晒单数量
-    Dec.dryingSum(_this, app.signindata.clwcomurl);
+    _this.getinfo();
 
-    var qqq = Dec.Aese('operation=info&mod=info');
-    // 获取默认信息
-    wx.request({
-      url: app.signindata.comurl + 'general.php' + qqq,
-      method: 'GET',
-      header: {
-        'Accept': 'application/json'
-      },
-      success: function(res) {
-        if (res.data.ReturnCode == 200) {
-          _this.setData({
-            defaultinformation: res.data.Info,
-            wxnum: res.data.Info.cs.wxid || 'meichai666666',
-          });
-          app.signindata.defaultinformation = res.data.Info || '';
-        };
-      }
-    });
+    if(this.data.defaultinformation){}else{
+      app.defaultinfofun(this);
+    };
     // 统计推送进入
     if (_this.data.pushWay > 0) {
       app.pushfun(_this);

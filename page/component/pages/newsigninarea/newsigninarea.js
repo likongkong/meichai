@@ -475,27 +475,14 @@ Page({
       defaultinformation:app.signindata.defaultinformation,
     });
 
+    if(this.data.defaultinformation){}else{
+      app.defaultinfofun(this);
+    };
 
-    // 获取默认信息
-    var qqq = Dec.Aese('operation=info&mod=info');
-    wx.request({
-      url: app.signindata.comurl + 'general.php' + qqq,
-      method: 'GET',
-      header: {
-        'Accept': 'application/json'
-      },
-      success: function(res) {
-        if (res.data.ReturnCode == 200) {
-          _this.setData({
-            defaultinformation: res.data.Info,
-            wxnum: res.data.Info.cs.wxid || 'meichai666666',
-          });
-          _this.tablist();
-        };
-      }
-    });
+    _this.tablist();
     _this.getdefultInfo();
     _this.nextpagediao();
+    
   },
 
   getdefultInfo: function() {

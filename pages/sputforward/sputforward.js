@@ -129,30 +129,40 @@ Page({
     });
     _this.listdata(1);
     // 活动提示语 
-    var qhd = Dec.Aese('operation=info&mod=info');
-    wx.request({
-      url: app.signindata.comurl + 'general.php' + qhd,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        
-        if (res.data.ReturnCode == 200) {
-          var tips = res.data.Info.store.withdrawTip;
-          if (tips){
-            tips = decodeURIComponent(tips.replace(/\+/g, ' '));
-            tips = tips.replace(/\\n/g, '\n');
-            _this.setData({
-              defaultinformation: res.data.Info,
-              tips: tips,
-              wxnum: res.data.Info.cs.wxid || 'meichai666666',
-            });
-          }
 
-        };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
-      }
-    }); 
+    if(this.data.defaultinformation){
+      var defaultinformation = this.data.defaultinformation;
+      var tips = defaultinformation.store.withdrawTip;
+      if (tips){
+        tips = decodeURIComponent(tips.replace(/\+/g, ' '));
+        tips = tips.replace(/\\n/g, '\n');
+        _this.setData({
+          tips: tips,
+          wxnum: defaultinformation.cs.wxid || 'meichai666666',
+        });
+      }      
+    }else{
+      var qhd = Dec.Aese('operation=info&mod=info');
+      wx.request({
+        url: app.signindata.comurl + 'general.php' + qhd,
+        method: 'GET',
+        header: { 'Accept': 'application/json' },
+        success: function (res) {
+          if (res.data.ReturnCode == 200) {
+            var tips = res.data.Info.store.withdrawTip;
+            if (tips){
+              tips = decodeURIComponent(tips.replace(/\+/g, ' '));
+              tips = tips.replace(/\\n/g, '\n');
+              _this.setData({
+                defaultinformation: res.data.Info,
+                tips: tips,
+                wxnum: res.data.Info.cs.wxid || 'meichai666666',
+              });
+            }
+          };
+        }
+      });
+    };
   },
   // 授权
   tograntauthorization: function () {

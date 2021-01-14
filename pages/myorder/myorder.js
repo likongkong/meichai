@@ -208,6 +208,7 @@ Page({
       spreadEntry: app.signindata.spreadEntry,
       windowHeight: app.signindata.windowHeight || 600,
       isProduce: app.signindata.isProduce,
+      defaultinformation:app.signindata.defaultinformation,
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress
     });
     // 调取数据
@@ -243,27 +244,10 @@ Page({
   
   otherdata:function(){
     var _this = this;
-    // 购物车数量
-    Dec.shopnum(_this,app.signindata.comurl);
-    // 调取晒单数量
-    Dec.dryingSum(_this, app.signindata.clwcomurl);
-    var qqq = Dec.Aese('operation=info&mod=info');
-    // 获取默认信息
-    wx.request({
-      url: app.signindata.comurl + 'general.php' + qqq,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        if (res.data.ReturnCode == 200) {
-          _this.setData({
-            defaultinformation: res.data.Info,
-            wxnum: res.data.Info.cs.wxid || 'meichai666666',
-          })
-        };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
-      }
-    });
+
+    if(this.data.defaultinformation){}else{
+      app.defaultinfofun(this);
+    };
   },
   // 下一页返回调取
   nextpagediao: function () {

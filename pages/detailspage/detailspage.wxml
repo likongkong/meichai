@@ -1138,7 +1138,7 @@
     </view>
     <view class='bbshccom'>
       <view class='bbshccomleft'>{{isShareGood?'买家留言':'品牌信息'}}</view>
-      <input wx:if='{{isShareGood}}' class='buyermessage' type='text' bindinput="inputChange" value='{{desc}}' placeholder="选填备注,或添加微信好友({{wxnum}})"></input>
+      <input wx:if='{{isShareGood}}' class='buyermessage' type='text' bindinput="inputChange" value='{{desc}}' placeholder="选填备注,或添加微信好友({{defaultinformation.cs.wxid}})"></input>
       <input wx:else class='buyermessage' type='text' bindinput="inputChange" value='{{desc}}' placeholder="请填写品牌信息及联系方式"></input>
     </view>
   </view>

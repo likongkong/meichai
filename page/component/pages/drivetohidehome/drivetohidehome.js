@@ -122,11 +122,6 @@ Page({
       isProduce: app.signindata.isProduce,
     });
     _this.listdata(0);
-    // 购物车数量
-    Dec.shopnum(_this,app.signindata.comurl);
-    var qqq = Dec.Aese('operation=info&mod=info');
-    // 调取晒单数量
-    Dec.dryingSum(_this, app.signindata.clwcomurl);
 
   },
   // 阻止蒙层冒泡

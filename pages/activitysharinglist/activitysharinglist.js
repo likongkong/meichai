@@ -134,6 +134,7 @@ Page({
       // 适配苹果X 
       isIphoneX: app.signindata.isIphoneX,
       signinlayer: true,
+      defaultinformation:app.signindata.defaultinformation,
       tgabox: false
     });
 
@@ -214,24 +215,11 @@ Page({
   },
   textfun:function(){
     var _this = this;
-    var qqq = Dec.Aese('operation=info&mod=info');
-    // 获取默认信息
-    wx.request({
-      url: app.signindata.comurl + 'general.php' + qqq,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        if (res.data.ReturnCode == 200) {
-          _this.setData({
-            defaultinformation: res.data.Info,
-            maxchange: res.data.Info.chance_max[0].miandan || 3,
-            wxnum: res.data.Info.cs.wxid || 'meichai666666',
-          })
-        };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
-      }
-    });
+
+    if(this.data.defaultinformation){}else{
+      app.defaultinfofun(this);
+    };    
+
     // 获取剩余次数 
     var qc = Dec.Aese('mod=activity&operation=chance&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1');
     wx.request({

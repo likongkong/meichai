@@ -85,6 +85,7 @@ Page({
       uid: app.signindata.uid,
       openid: app.signindata.openid,
       user_id: app.signindata.uid,
+      defaultinformation:app.signindata.defaultinformation,
       isShareFun: app.signindata.isShareFun
     });
 
@@ -96,26 +97,10 @@ Page({
   },
   otherdata:function(){
     var _this = this;
-    var qqq = Dec.Aese('operation=info&mod=info');
-    // 获取默认信息
-    wx.request({
-      url: app.signindata.comurl + 'general.php' + qqq,
-      method: 'GET',
-      header: {
-        'Accept': 'application/json'
-      },
-      success: function (res) {
-        if (res.data.ReturnCode == 200) {
-          _this.setData({
-            defaultinformation: res.data.Info,
-            wxnum: res.data.Info.cs.wxid || 'meichai666666',
-          });
-          app.signindata.defaultinformation = res.data.Info || '';
-        };
-      }
-    });
-    // 购物车数量显示
-    Dec.shopnum(_this,app.signindata.comurl);
+
+    if(this.data.defaultinformation){}else{
+      app.defaultinfofun(this);
+    };
   },
   // 晒单列表
   listdata:function(num){

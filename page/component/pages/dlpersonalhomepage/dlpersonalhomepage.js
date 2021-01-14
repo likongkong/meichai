@@ -194,29 +194,15 @@ Page({
       uid: app.signindata.uid,
       openid: app.signindata.openid,
       isProduce: app.signindata.isProduce,
+      defaultinformation:app.signindata.defaultinformation,
       isShareFun: app.signindata.isShareFun
     });
-    this.selectComponent("#hide").getappData()
-    // 购物车数量
-    Dec.shopnum(_this,app.signindata.comurl);
-    // 调取晒单数量
-    Dec.dryingSum(_this, app.signindata.clwcomurl);
-    var qqq = Dec.Aese('operation=info&mod=info');
-    // 获取默认信息
-    wx.request({
-      url: app.signindata.comurl + 'general.php' + qqq,
-      method: 'GET',
-      header: {'Accept': 'application/json'},
-      success: function (res) {
-        if (res.data.ReturnCode == 200) {
-          _this.setData({
-            defaultinformation: res.data.Info,
-            wxnum: res.data.Info.cs.wxid || 'meichai666666',
-          });
-          app.signindata.defaultinformation = res.data.Info || '';
-        };
-      }
-    });
+    this.selectComponent("#hide").getappData();
+
+    if(this.data.defaultinformation){}else{
+      app.defaultinfofun(this);
+    }
+
     // 晒单列表
     _this.listdata(0);
     // 用户数据
