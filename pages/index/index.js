@@ -1036,14 +1036,12 @@ Page({
    */
   onShareAppMessage: function (options) {
     var _this = this;
-
     var indexShare = app.signindata.indexShare || [];
     var indexShareNum = Math.floor(Math.random() * indexShare.length) || 0;
     var indexShareImg = '';
     if(indexShare.length!=0 && indexShare[indexShareNum]){
       indexShareImg = indexShare[indexShareNum]+'?time=' + Date.parse(new Date());
     };
-
 
     return {
       title:app.signindata.titleShare ,

@@ -123,7 +123,8 @@
         "pages/idCardVerification/idCardVerification",
         "pages/priorityList/priorityList",
         "pages/blankPage/blankPage",
-        "pages/draw/draw"
+        "pages/draw/draw",
+        "pages/refund/refund"
       ]
     }
   ],

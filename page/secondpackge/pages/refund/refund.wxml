@@ -1,0 +1,91 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+
+<view class="wrap">
+  <view class="goodsCardWrap">
+    <view class="title">
+      退款商品 <text>（商品退款，赠品一同退回）</text>
+    </view>
+    <view class="goodsCardContent">
+      <view style="width: 160rpx;">
+        <image src="https://cdn.51chaidan.com///images/toyShow2/brandGoodsRotation/20200802/0e57e5f94785513545f5ea8cf4022d29.jpg" mode="widthFix"></image>
+      </view>
+      <view class="goodsCardContentInfo" style="width: 470rpx;">
+        <text class="name">lulu猪 7-ELEVEN便利店系列3D款 预计21年1月发货</text>
+        <view class="fashion"><text>款式：迷你雪糕柜</text><text>已发货</text></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="refundInfoWrap">
+    <view class="title">
+      退款信息
+    </view>
+    <view class="refundReason refundflex">
+      <view>退款原因<text>*</text></view>
+      <view>请选择  ></view>
+    </view>
+    <view class="refundAmount refundflex">
+      <view>退款金额<text>*</text></view>
+      <view><text>99元</text></view>
+    </view>
+  </view>
+
+  <view class="describeWrap">
+    <view class="title">
+      补充描述
+    </view>
+    <view class="describeBox">
+      <textarea class="areas" placeholder='补充描述，有助于更好的处理您的售后问题' maxlength="{{max}}" bindinput="inputs" > 
+        <!-- <text class="hint">{{texts}}{{num}}{{textss}}</text> -->
+      </textarea>
+      <text class="currentWordNumber">{{currentWordNumber}}/{{max}}</text>
+    </view>
+  </view>
+</view>
+
+
+<view class="submit">
+  提交
+</view>
+
+
+<view wx:if="{{false}}" class="refundReasonMask" catchtouchmove="true">
+  <view class="refundReasonBox">
+    <view class="refundReasonBoxTitle"> 
+      退款原因  
+      <image src="../../../../pages/images/forknumber.png" mode="widthFix"></image>
+    </view>
+    <view class="refundReasonBoxCon">
+      <view>
+        <image src="../../../../pages/images/normal_click.png" mode="widthFix"></image>
+        <text>不想要了</text>
+      </view>
+      <view>
+        <image src="../../../../pages/images/normal_click.png" mode="widthFix"></image>
+        <text>不想要了</text>
+      </view>
+      <view>
+        <image src="../../../../pages/images/normal_click.png" mode="widthFix"></image>
+        <text>不想要了</text>
+      </view>
+      <view>
+        <image src="../../../../pages/images/normal_click.png" mode="widthFix"></image>
+        <text>不想要了</text>
+      </view>
+    </view>
+    <view class="refundReasonBoxClose">
+      <view>
+        关闭
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>
+
+<!-- <bnavigation isProduce='{{isProduce}}' isChar='{{false}}'></bnavigation> -->
+

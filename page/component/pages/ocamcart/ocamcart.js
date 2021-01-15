@@ -775,7 +775,7 @@ Page({
           freightiftr = 0;
           xianshi = '商品包邮';
         };
-      } else if (_this.data.originalAmountpayable >= tddefcarfr) {
+      } else if (_this.data.payprice >= tddefcarfr) {
         freightiftr = 0;
         xianshi = '满￥' + parseFloat(this.data.defaultinformation.carriage.free || "99").toFixed(2) + '包邮';
       } else {
@@ -802,7 +802,7 @@ Page({
 
     this.setData({
       freight: xianshi,
-      // freightiftr: freightiftr,
+      freightiftr: freightiftr,
       // originalAmountpayable:amountpayable,
       // 应付金额
       originalAmountpayable:amountpayable,
