@@ -232,32 +232,17 @@ Page({
     _this.setData({
       uid: app.signindata.uid,
       isProduce: app.signindata.isProduce,
+      defaultinformation:app.signindata.defaultinformation,
     });
 
     _this.getList(1, _this.data.refreshid);
     _this.bargainclass();
     this.selectComponent("#hide").getappData()
-    // 调取晒单数量
-    Dec.dryingSum(_this, app.signindata.clwcomurl);
-    var qqq = Dec.Aese('operation=info&mod=info');
-    // 获取默认信息
-    wx.request({
-      url: app.signindata.comurl + 'general.php' + qqq,
-      method: 'GET',
-      header: {
-        'Accept': 'application/json'
-      },
-      success: function(res) {
-        if (res.data.ReturnCode == 200) {
-          _this.setData({
-            defaultinformation: res.data.Info,
-          });
-        };
-        Dec.comiftrsign(_this, res, app);
-        // 购物车数据显示
-        Dec.shopnum(_this,app.signindata.comurl);
-      }
-    });
+
+    if(this.data.defaultinformation){}else{
+      app.defaultinfofun(this);
+    }
+
     // 统计推送进入
     if (_this.data.pushWay > 0) {
       app.pushfun(_this);

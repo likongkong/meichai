@@ -858,7 +858,7 @@ Page({
               commoddata: comdataarr,
               nodataiftr: true,
               movies: banlist||'',
-              toyshowTicket:List.toyshowTicket
+              toyshowTicket:List.toyshowTicket || ''
             });
 
         };    

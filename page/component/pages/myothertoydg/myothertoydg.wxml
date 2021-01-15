@@ -141,7 +141,7 @@
     </view>
     <view class='bbshccom'>
       <view class='bbshccomleft'>买家留言</view>
-      <input class='buyermessage' type='text' bindinput="inputChange" value='{{desc}}' placeholder='选填备注,或添加微信好友({{wxnum}})'></input>
+      <input class='buyermessage' type='text' bindinput="inputChange" value='{{desc}}' placeholder='选填备注,或添加微信好友({{defaultinformation.cs.wxid}})'></input>
     </view>
   </view>
   <view class='bbshbottom'>

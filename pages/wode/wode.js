@@ -347,7 +347,7 @@ Page({
               //vip到期时间
               vipExpiryTime:_this.formatTime(res.data.Info.vipExpiryTime,'Y年M月D日'),
               //vip可领取特权数据
-              vipPrerogativeStyle:res.data.Info.vipPrerogativeStyle,
+              vipPrerogativeStyle:res.data.Info.vipPrerogativeStyle || '',
               // 是否可领取抽盒机金
               isGetVipBlindBoxMoney:res.data.Info.isGetVipBlindBoxMoney || false,
               requestCompleted:true,
@@ -389,27 +389,12 @@ Page({
     wx.hideLoading()    
     _this.setData({ B: true, iftr_wx: true });  
     _this.listdata()
-    var qqq = Dec.Aese('operation=info&mod=info');
-    // 获取默认信息
-    wx.request({
-      url: app.signindata.comurl + 'general.php' + qqq,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        if (res.data.ReturnCode == 200) {
-          _this.setData({
-            wxnum: res.data.Info.cs.wxid || 'meichai666666',
-            notice_title: res.data.Info.notice.title || "",
-            defaultinformation: res.data.Info,
-          });
-          app.signindata.defaultinformation = res.data.Info || '';
-          _this.data.notice_type = res.data.Info.notice.type || "";
-          _this.data.notice_url = res.data.Info.notice.url || "";
-        };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
-      }
-    })    
+
+    if(this.data.defaultinformation){}else{
+      app.defaultinfofun(this);
+    };
+
+    
     // 已经授权，可以直接调用 getUserInfo 
     wx.getUserInfo({
       success: function (res) {
@@ -442,7 +427,7 @@ Page({
   copyTBL: function (e) {
     var self = this;
     wx.setClipboardData({
-      data: self.data.wxnum,
+      data: self.data.defaultinformation.cs.wxid,
       success: function (res) {
         app.showToastC('复制成功');
       }
@@ -601,14 +586,14 @@ Page({
   //公告跳转
   jumpnotice: function () {
     var _this = this
-    if (_this.data.notice_type == 1) {
-      var url = encodeURIComponent(_this.data.notice_url + "?uid=" + _this.data.uid)
+    if (_this.data.defaultinformation.notice.type == 1) {
+      var url = encodeURIComponent(_this.data.defaultinformation.notice.url + "?uid=" + _this.data.uid)
       wx.navigateTo({
         url: "/page/component/pages/webview/webview?webview=" + url
       });
     } else {
       wx.navigateTo({
-        url: "/pages/detailspage/detailspage?gid=" + _this.data.notice_url,
+        url: "/pages/detailspage/detailspage?gid=" + _this.data.defaultinformation.notice.url,
       })
     }
   }, 

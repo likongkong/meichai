@@ -1507,7 +1507,6 @@ closefrindcommoni:function(){
           });
         };
     }      
-    var qqq = Dec.Aese('operation=info&mod=info');   
     _this.otherdata();
     wx.showShareMenu({
       withShareTicket: false 

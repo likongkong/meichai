@@ -306,29 +306,15 @@ Page({
       uid: app.signindata.uid,
       isShareFun: app.signindata.isShareFun,
       isProduce: app.signindata.isProduce,
+      defaultinformation:app.signindata.defaultinformation,
     });
     _this.listdata();
-    this.selectComponent("#hide").getappData()
-    // 购物车数量
-    Dec.shopnum(_this,app.signindata.comurl);
-    var qqq = Dec.Aese('operation=info&mod=info');
-    // 调取晒单数量
-    Dec.dryingSum(_this, app.signindata.clwcomurl);
-    // 获取默认信息
-    wx.request({
-      url: app.signindata.comurl + 'general.php' + qqq,
-      method: 'GET',
-      header: {'Accept': 'application/json'},
-      success: function (res) {
-        if (res.data.ReturnCode == 200) {
-          _this.setData({
-            defaultinformation: res.data.Info,
-            wxnum: res.data.Info.cs.wxid || 'meichai666666',
-          });
-          app.signindata.defaultinformation = res.data.Info || '';
-        };
-      }
-    });
+    this.selectComponent("#hide").getappData();
+
+    if(this.data.defaultinformation){}else{
+      app.defaultinfofun(this);
+    } 
+
     // 调取收货地址
     this.nextpagediao();
   }, 

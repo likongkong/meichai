@@ -665,27 +665,15 @@ Page({
       comdata:{},
       isProduce: app.signindata.isProduce,
       isShareFun: app.signindata.isShareFun,
+      defaultinformation:app.signindata.defaultinformation,
     });
 
     _this.getData();
     
+    if(this.data.defaultinformation){}else{
+      app.defaultinfofun(this);
+    };
 
-    var qqq = Dec.Aese('operation=info&mod=info');
-    // 获取默认信息
-    wx.request({
-      url: app.signindata.comurl + 'general.php' + qqq,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        if (res.data.ReturnCode == 200) {
-          _this.setData({
-            wxnum: res.data.Info.cs.wxid || 'meichai666666',
-          })
-        };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
-      }
-    }) 
     this.otherfunsettime(); 
 
     
@@ -1048,7 +1036,7 @@ Page({
   copyTBL: function (e) {
     var self = this;
     wx.setClipboardData({
-      data: self.data.wxnum,
+      data: self.data.defaultinformation.cs.wxid,
       success: function (res) {
         app.showToastC('复制成功');
       }

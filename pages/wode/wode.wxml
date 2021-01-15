@@ -36,9 +36,9 @@
                 </view>
             </view>
             <view style="clear: both;"></view>
-            <!-- <view wx:if="{{notice_title!=''}}" style='height:50rpx;line-height:50rpx;font-size:25rpx;background:#000;opacity:0.9;border-radius:10rpx;position:absolute;left:20rpx;bottom:15rpx;color:#fff;padding:0 20rpx;' catchtap='jumpnotice'>
+            <!-- <view wx:if="{{defaultinformation.notice.title!=''}}" style='height:50rpx;line-height:50rpx;font-size:25rpx;background:#000;opacity:0.9;border-radius:10rpx;position:absolute;left:20rpx;bottom:15rpx;color:#fff;padding:0 20rpx;' catchtap='jumpnotice'>
             <image style='width:35rpx;height:35rpx;margin:8rpx 10rpx 8px 0rpx;display:inline-block;vertical-align:top;position:relative;' src='https://www.51chaidan.com/images/default/notice.png'></image>
-            {{notice_title}}>
+            {{defaultinformation.notice.title}}>
             </view> -->
         </view>
         

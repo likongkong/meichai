@@ -455,6 +455,7 @@ Page({
       comdata:{},
       isProduce: app.signindata.isProduce,
       isShareFun: app.signindata.isShareFun,
+      defaultinformation:app.signindata.defaultinformation,
     });
     var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
     var q = Dec.Aese('mod=getinfo&operation=orderdetail&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&oid=' + _this.data.oid + '&blackCity=' + _this.data.blackCity);
@@ -532,22 +533,11 @@ Page({
         // fail
       }
     });
-    var qqq = Dec.Aese('operation=info&mod=info');
-    // 获取默认信息
-    wx.request({
-      url: app.signindata.comurl + 'general.php' + qqq,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        if (res.data.ReturnCode == 200) {
-          _this.setData({
-            wxnum: res.data.Info.cs.wxid || 'meichai666666',
-          })
-        };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
-      }
-    }) 
+
+    if(this.data.defaultinformation){}else{
+      app.defaultinfofun(this);
+    }
+
     this.otherfunsettime(); 
 
     
@@ -1008,7 +998,7 @@ Page({
   copyTBL: function (e) {
     var self = this;
     wx.setClipboardData({
-      data: self.data.wxnum,
+      data: self.data.defaultinformation.cs.wxid,
       success: function (res) {
         app.showToastC('复制成功');
       }
