@@ -224,7 +224,7 @@
   </view>
 
   <!-- 线上线下 -->
-  <view style="padding:34rpx 34rpx 34rpx 34rpx;box-sizing: border-box;background: #fff;margin-top:15rpx;">
+  <view style="padding:34rpx 34rpx 34rpx 34rpx;box-sizing: border-box;background: #fff;margin-top:15rpx;" wx:if='{{zunmdata.toyshowPositionNo || zunmdata.giftStock || zunmdata.tipStockOnLine || zunmdata.deliver}}'>
       <view style="display: flex;margin-bottom:10rpx;" wx:if="{{zunmdata.toyshowPositionNo}}">
         <view style="width:140rpx;font-size:30rpx">展位号 :</view> 
         <view style="display: flex;align-items: center;"> 
@@ -244,10 +244,6 @@
           <text style="display:block;font-size:30rpx">{{zunmdata.deliver}}</text>
         </view>
       </view> 
-
-
-
-
   </view>
 
 
