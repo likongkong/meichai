@@ -251,7 +251,14 @@ Page({
       y:'预售商品到货后发出；具体以厂家到货时间为准；由于出厂时间不可控，不接受因此原因的投诉；',
       j:'购买商品后，商品进入我的玩具柜，玩具柜中的商品可编辑价格在闲置潮玩中进行出售。'
     },
-    labelContentVie:''
+    labelContentVie:'',
+    cardStyle:1, // 1  提示卡  2 透视卡  3 重抽卡 
+
+    //显示状态 1为未开通 2为待领取 3为明日领取
+    showVipStatus:1,
+    // 提示卡片弹框
+    cueCardBox:false
+
   },
   boxBenefitsFun(event){
     if(this.data.boxBenefitsSM){
@@ -563,7 +570,6 @@ Page({
         ishowcover: true,
       })
     }
-
 
 
   },
@@ -2094,10 +2100,12 @@ Page({
     } else if (type == 2) {
       _this.setData({
         hintstr: '提示卡：提示使用者，盲盒中不是那一款\n获取方式：参加免单活动，上传截图有几率获得。',
-        ishowhint: true,
+        // ishowhint: true,
         ishareguessbox: false,
-        iexpendtip: true,
+        // iexpendtip: true,
         iexpendray: false,
+        cueCardBox:true,
+        cardStyle:1
       })
     } else if (type == 3) {
       _this.setData({
@@ -2414,9 +2422,15 @@ Page({
   closexray: function () {
     this.setData({
       ishowxray: false,
+      cueCardBox:false
     })
   },
-
+  rePumping(){
+    this.setData({
+      cueCardBox:true,
+      cardStyle:3
+    })
+  },
   showxray: function (w) {
     var _this = this
     var type = w.currentTarget.dataset.type || w.target.dataset.type || 0;
@@ -2441,7 +2455,10 @@ Page({
             maxXRay: res.data.Info.maxXRay,
             updateOne: res.data.List.shareGroupImg[0] || 0,
             updateTwo: res.data.List.shareGroupImg[1] || 0,
-            ishowxray: true,
+            // ishowxray: true,
+            cueCardBox:true,
+            cardStyle:2
+
           })
           if (type == 1) {
             _this.setData({
@@ -3627,4 +3644,16 @@ Page({
     };
     _this.data.tempChanceCountdowntime = setInterval(tempChanceCountdowntime, 1000);
   },
+  jumpVipPrivilegePage(){
+    wx.navigateTo({  
+      url: "/page/secondpackge/pages/vipPrivilegePage/vipPrivilegePage?data="+JSON.stringify(this.data.vipPrerogativeStyle)
+    })
+  },
+  jumpVipPage(){
+    wx.navigateTo({  
+      url: "/page/secondpackge/pages/vipPage/vipPage"
+    })
+  },
+
+
 })
