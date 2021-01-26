@@ -35,6 +35,7 @@ page{
 }
 .goodsCardContent image{
   width: 160rpx;
+  height: auto;
   display: block;
 }
 .goodsCardContentInfo{

@@ -21,25 +21,142 @@ Page({
     texts: "至少需要15个字",
     min: 15,//最少字数
     max: 50, //最多字数 (根据自己需求改变) 
-    currentWordNumber:0
+    currentWordNumber:0,
+    currentWord:'',
+    isReasonBox:false, 
+    refundType:[],
+    checkedObj:''
   },
+  chooseReasonFun(e){
+    let index = e.currentTarget.dataset.index;
+    let refundType = this.data.refundType;
+    for(var i=0;i<refundType.length;i++){
+      if(refundType[i].checked){
+        refundType[i].checked = false;
+      }
+    }
+    refundType[index].checked = true;
+    this.setData({
+      refundType,
+      checkedObj:{id:refundType[index].type_id,name:refundType[index].type_name}
+    })
+  },
+  reasonFun(){
+    this.setData({
+      isReasonBox:!this.data.isReasonBox
+    })
+  },
+  //字数限制  
+  inputs: function (e) {
+    // 获取输入框的内容
+    var value = e.detail.value;
+    // 获取输入框内容的长度
+    var len = parseInt(value.length);
+    //最少字数限制
+    // if (len <= this.data.min)
+    //   this.setData({
+    //     texts: "至少还需要",
+    //     textss: "字",
+    //     num:this.data.min-len
+    //   })
+    // else if (len > this.data.min)
+    //   this.setData({
+    //     texts: " ",
+    //     textss: " ",
+    //     num:''
+    //   })
 
+    this.setData({
+      currentWordNumber: len, //当前字数
+      currentWord:value
+    });
+    //最多字数限制
+    if (len > this.data.max) return;
+    // 当输入框内容的长度大于最大长度限制（max)时，终止setData()的执行
+  },
+  getInfo(){
+    wx.showLoading({ title: '加载中...'})
+    var _this = this;
+    let oid = _this.data.oid;
+    var q = Dec.Aese('mod=operate&operation=applyRefundInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&oid='+oid);
+    console.log(app.signindata.comurl + 'order.php?' +'mod=operate&operation=applyRefundInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&oid='+oid)
+    wx.request({
+      url: app.signindata.comurl + 'order.php' + q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('详情数据====',res)
+        wx.stopPullDownRefresh();
+        wx.hideLoading();
+        if (res.data.ReturnCode == 200) {
+          let infoData = res.data.Info;
+          for(var i=0;i<infoData.refundType.length;i++){
+              infoData.refundType[i].checked = false;
+          }
+          _this.setData({
+            infoData,
+            refundType:infoData.refundType
+          })
+        }else{
+          app.showToastC(res.data.Msg)
+        }
+      }
+    }) 
+  },
+  submit(){
+    console.log(this.data.checkedObj,this.data.currentWord)
+    if(!this.data.checkedObj){
+      wx.showToast({
+        title: '请选择退款原因',
+        icon: 'none',
+        duration: 1000
+      })
+      return false;
+    }
+    wx.showLoading({ title: '加载中...'})
+    var _this = this;
+    var q = Dec.Aese('mod=operate&operation=submitApplyRefund&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type='+this.data.checkedObj.id+'&oid='+_this.data.oid+'&describe='+this.data.currentWord);
+    console.log(app.signindata.comurl + 'order.php?' +'mod=operate&operation=submitApplyRefund&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type='+this.data.checkedObj.id+'&oid='+_this.data.oid+'&describe='+this.data.currentWord)
+    wx.request({
+      url: app.signindata.comurl + 'order.php' + q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('提交====',res)
+        wx.hideLoading();
+        if (res.data.ReturnCode == 200) {
+          app.showToastC(res.data.Msg)
+          _this.getInfo();
+        }else{
+          app.showToastC(res.data.Msg)
+        }
+      }
+    }) 
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     var _this = this;
     _this.data.share_uid = options.share_uid || 0
+    _this.setData({
+      uid: app.signindata.uid,
+      loginid:app.signindata.loginid,
+      isProduce: app.signindata.isProduce,
+      oid: options.oid,
+    });  
+    this.getInfo();
     // 判断是否授权
     this.activsign();
   },
   onLoadfun:function(){
     var _this = this;
-    _this.setData({
-      uid: app.signindata.uid,
-      loginid:app.signindata.loginid,
-      isProduce: app.signindata.isProduce,
-    });  
+    // _this.setData({
+    //   uid: app.signindata.uid,
+    //   loginid:app.signindata.loginid,
+    //   isProduce: app.signindata.isProduce,
+    // });  
+    // this.getInfo();
   },
   activsign: function () {
     // 判断是否授权 
@@ -148,7 +265,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    
+    this.getInfo();
   },
 
   /**
@@ -167,35 +284,4 @@ Page({
     var reshare = app.sharemc();
     return reshare
   },
-
-  //字数限制  
-  inputs: function (e) {
-    // 获取输入框的内容
-    var value = e.detail.value;
-    // 获取输入框内容的长度
-    var len = parseInt(value.length);
-    console.log(len)
-    //最少字数限制
-    // if (len <= this.data.min)
-    //   this.setData({
-    //     texts: "至少还需要",
-    //     textss: "字",
-    //     num:this.data.min-len
-    //   })
-    // else if (len > this.data.min)
-    //   this.setData({
-    //     texts: " ",
-    //     textss: " ",
-    //     num:''
-    //   })
-
-    this.setData({
-      currentWordNumber: len //当前字数  
-    });
-    //最多字数限制
-    if (len > this.data.max) return;
-    // 当输入框内容的长度大于最大长度限制（max)时，终止setData()的执行
-
-    console.log(this.data)
-  }
 })

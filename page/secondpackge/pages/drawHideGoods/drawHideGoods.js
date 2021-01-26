@@ -518,11 +518,33 @@ Page({
   },
 
   // 跳转抽盒机列表
-  jumpPage(){
-    this.setData({isWinning:false})
-    wx.navigateTo({
-      url: "/pages/smokeboxlist/smokeboxlist"
-    })
+  // jumpPage(){
+  //   this.setData({isWinning:false})
+  //   wx.navigateTo({
+  //     url: "/pages/smokeboxlist/smokeboxlist"
+  //   })
+  // },
+
+   // banner 跳转
+   jumpbanner: function (w) {
+    var whref = w.currentTarget.dataset.href || w.target.dataset.href;
+    var item_type = w.currentTarget.dataset.item_type || w.target.dataset.item_type||0;
+    var imgurl = w.currentTarget.dataset.imgurl || w.target.dataset.imgurl || '';
+    var wname = w.currentTarget.dataset.title || w.target.dataset.title || ''; 
+    // 公共跳转
+    this.comjumpwxnav(item_type, whref, wname, imgurl);
+  },
+
+   // 公共跳转
+   comjumpwxnav: function (item_type, whref, wname, imgurl){
+    var imgurl = imgurl || '';
+    var _this = this;
+    _this.setData({ jumpdevanningiftr: true });
+
+    app.comjumpwxnav(item_type, whref, wname, imgurl)
+
+    _this.setData({ jumpdevanningiftr: false, indexelafra: false, index_ela_fra:false });
+    app.signindata.index_ela_fra = false;   
   },
 
 

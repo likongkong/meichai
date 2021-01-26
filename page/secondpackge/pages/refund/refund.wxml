@@ -5,30 +5,54 @@
 <view class="wrap">
   <view class="goodsCardWrap">
     <view class="title">
-      退款商品 <text>（商品退款，赠品一同退回）</text>
+      退款商品
     </view>
     <view class="goodsCardContent">
       <view style="width: 160rpx;">
-        <image src="https://cdn.51chaidan.com///images/toyShow2/brandGoodsRotation/20200802/0e57e5f94785513545f5ea8cf4022d29.jpg" mode="widthFix"></image>
+        <image src="{{infoData.gcover}}" mode="widthFix"></image>
       </view>
       <view class="goodsCardContentInfo" style="width: 470rpx;">
-        <text class="name">lulu猪 7-ELEVEN便利店系列3D款 预计21年1月发货</text>
-        <view class="fashion"><text>款式：迷你雪糕柜</text><text>已发货</text></view>
+        <text class="name">{{infoData.gname}}</text>
+        <view class="fashion"><text wx:if="{{infoData.roleName}}">款式：{{infoData.roleName}}</text></view>
       </view>
     </view>
   </view>
+  <block wx:if="{{infoData.deputyInfo}}">
+    <block wx:for="{{infoData.deputyInfo}}" wx:key='key'>
+      <view class="goodsCardWrap" style="margin-top: 15rpx;">
+        <view class="title">
+          退款商品 <text>（商品退款，赠品一同退回）</text>
+        </view>
+        <view class="goodsCardContent">
+          <view style="width: 160rpx;">
+            <image src="{{item.gcover}}" mode="widthFix"></image>
+          </view>
+          <view class="goodsCardContentInfo" style="width: 470rpx;">
+            <text class="name">{{item.gname}}</text>
+            <view class="fashion"><text wx:if="{{item.roleName}}">款式：{{item.roleName}}</text><text> {{item.orderStatus==1?'已发货':'待发货'}} </text></view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </block>
+  
 
   <view class="refundInfoWrap">
     <view class="title">
       退款信息
     </view>
-    <view class="refundReason refundflex">
+    <view class="refundReason refundflex" catchtap="{{infoData.auditRefund != 2?'reasonFun':''}}">
       <view>退款原因<text>*</text></view>
-      <view>请选择  ></view>
+      <block wx:if="{{infoData.auditRefund == 2}}">
+        <view wx:for="{{refundType}}" wx:key='key' wx:if="{{item.type_id == infoData.refund_cause}}">{{item.type_name}}</view>
+      </block>
+      <block wx:else>
+        <view> {{checkedObj?checkedObj.name:'请选择  >'}}</view>
+      </block>
     </view>
     <view class="refundAmount refundflex">
       <view>退款金额<text>*</text></view>
-      <view><text>99元</text></view>
+      <view><text>{{infoData.goods_price}}元</text></view>
     </view>
   </view>
 
@@ -37,46 +61,39 @@
       补充描述
     </view>
     <view class="describeBox">
-      <textarea class="areas" placeholder='补充描述，有助于更好的处理您的售后问题' maxlength="{{max}}" bindinput="inputs" > 
-        <!-- <text class="hint">{{texts}}{{num}}{{textss}}</text> -->
-      </textarea>
-      <text class="currentWordNumber">{{currentWordNumber}}/{{max}}</text>
+      <block wx:if="{{infoData.auditRefund == 2}}">
+        <view style="padding: 18rpx;box-sizing: border-box;height:212rpx;font-size: 28rpx;color: gray;">{{infoData.refund_describe}}</view>
+      </block>
+      <block wx:else>
+        <textarea class="areas" placeholder='补充描述，有助于更好的处理您的售后问题' maxlength="{{max}}" bindinput="inputs" > 
+          <!-- <text class="hint">{{texts}}{{num}}{{textss}}</text> -->
+        </textarea>
+        <text class="currentWordNumber">{{currentWordNumber}}/{{max}}</text>
+      </block>
     </view>
   </view>
 </view>
 
 
-<view class="submit">
+<view class="submit" catchtap="submit" wx:if="{{infoData.auditRefund != 2}}">
   提交
 </view>
 
 
-<view wx:if="{{false}}" class="refundReasonMask" catchtouchmove="true">
-  <view class="refundReasonBox">
+<view wx:if="{{isReasonBox}}" class="refundReasonMask" catchtouchmove="true" catchtap="reasonFun">
+  <view class="refundReasonBox" catchtap="true">
     <view class="refundReasonBoxTitle"> 
       退款原因  
-      <image src="../../../../pages/images/forknumber.png" mode="widthFix"></image>
+      <image catchtap="reasonFun" src="../../../../pages/images/forknumber.png" mode="widthFix"></image>
     </view>
     <view class="refundReasonBoxCon">
-      <view>
-        <image src="../../../../pages/images/normal_click.png" mode="widthFix"></image>
-        <text>不想要了</text>
-      </view>
-      <view>
-        <image src="../../../../pages/images/normal_click.png" mode="widthFix"></image>
-        <text>不想要了</text>
-      </view>
-      <view>
-        <image src="../../../../pages/images/normal_click.png" mode="widthFix"></image>
-        <text>不想要了</text>
-      </view>
-      <view>
-        <image src="../../../../pages/images/normal_click.png" mode="widthFix"></image>
-        <text>不想要了</text>
+      <view wx:for="{{refundType}}" wx:key='key' data-id="{{item.type_id}}" data-index="{{index}}" catchtap="chooseReasonFun">
+        <image src="{{item.checked?'../../../../pages/images/pressed_click.png':'../../../../pages/images/normal_click.png'}}" mode="widthFix"></image>
+        <text>{{item.type_name}}</text>
       </view>
     </view>
     <view class="refundReasonBoxClose">
-      <view>
+      <view catchtap="reasonFun">
         关闭
       </view>
     </view>

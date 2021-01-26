@@ -485,6 +485,8 @@ Page({
               res.data.Info.gcover = _this.data.zdyurl + res.data.Info.gcover;
             }
             res.data.Info.ordertime = _this.toDate(res.data.Info.ordertime||0);
+            res.data.Info.audit_time = _this.toDate(res.data.Info.audit_time||0);
+            res.data.Info.apply_time = _this.toDate(res.data.Info.apply_time||0);
             res.data.Info.gift_time = _this.toDate(res.data.Info.gift_time || 0);
             res.data.Info.receive_time = _this.toDate(res.data.Info.receive_time||0,1);
             res.data.Info.overtime = _this.toDate(res.data.Info.overtime || 0, 2);
@@ -2462,9 +2464,14 @@ Page({
       url: "../../../../pages/wode/wode"
     });
   },
+  refund: function () {
+    wx.navigateTo({
+      url: "../../../secondpackge/pages/refund/refund?oid="+this.data.oid
+    });
+  },
   wshoppingCart: function () {
     wx.reLaunch({
-      url: "../../../../pages/shoppingCart/shoppingCart"
+      url: "../../../../pages/refund/refund"
     });
   },
 
