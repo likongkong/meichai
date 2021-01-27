@@ -251,7 +251,14 @@ Page({
       y:'预售商品到货后发出；具体以厂家到货时间为准；由于出厂时间不可控，不接受因此原因的投诉；',
       j:'购买商品后，商品进入我的玩具柜，玩具柜中的商品可编辑价格在闲置潮玩中进行出售。'
     },
-    labelContentVie:''
+    labelContentVie:'',
+    cardStyle:1, // 1  提示卡  2 透视卡  3 重抽卡 
+
+    //显示状态 1为未开通 2为待领取 3为明日领取
+    showVipStatus:1,
+    // 提示卡片弹框
+    cueCardBox:false
+
   },
   boxBenefitsFun(event){
     if(this.data.boxBenefitsSM){
@@ -565,7 +572,6 @@ Page({
     }
 
 
-
   },
 
   getdefault: function () {
@@ -749,7 +755,8 @@ Page({
             subscribedata:infoData.vipSubscribe,
             isTempTip:infoData.user.isTempTip,
             tempChanceOverTime:infoData.user.tempChanceOverTime,
-            welfareTags:listDataDetail.welfareTags || []
+            welfareTags:listDataDetail.welfareTags || [],
+            toyCabinetList:listDataDetail.toyCabinetList || []
           })
 
           if(infoData.user.isTempTip){
@@ -2094,10 +2101,12 @@ Page({
     } else if (type == 2) {
       _this.setData({
         hintstr: '提示卡：提示使用者，盲盒中不是那一款\n获取方式：参加免单活动，上传截图有几率获得。',
-        ishowhint: true,
+        // ishowhint: true,
         ishareguessbox: false,
-        iexpendtip: true,
+        // iexpendtip: true,
         iexpendray: false,
+        cueCardBox:true,
+        cardStyle:1
       })
     } else if (type == 3) {
       _this.setData({
@@ -2185,6 +2194,7 @@ Page({
               cardstr: "    " + res.data.Info.tip,
               ishowcard: true,
               istipsure: true,
+              cueCardBox:false,
               cardImg: res.data.Info.tipImg
             })
             if (_this.data.tempChanceOverTime) {
@@ -2203,6 +2213,7 @@ Page({
               cardXRay: res.data.Info.cardXRay, //透视卡
               ishowcard: true,
               israysure: true,
+              cueCardBox:false,
               cardstr: "是     " + res.data.Info.roleName,
               cardImg: res.data.Info.img
             })
@@ -2414,9 +2425,68 @@ Page({
   closexray: function () {
     this.setData({
       ishowxray: false,
+      cueCardBox:false
     })
   },
+  rePumping(){
+    
+    wx.showLoading({
+      title: '加载中',
+      mask:true
+    })
+    var _this = this;
+    var q = Dec.Aese('mod=blindBox&operation=JudgeDayReceivingStatus&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id);
 
+    wx.request({
+      url: app.signindata.comurl + 'spread.php' + q,
+      method: 'GET',
+      header: {
+        'Accept': 'application/json'
+      },
+      success: function (res) {
+        console.log('是否可领取重抽卡=====',res)
+        wx.hideLoading()
+        if (res.data.ReturnCode == 200) {
+          _this.setData({
+            is_redrawCard:res.data.Info.status || false,
+            cueCardBox:true,
+            cardStyle:3
+          })
+        } else {
+          app.showToastC(res.data.Msg);
+        };
+      }
+    })
+  },
+  // 获取重抽卡
+  getRedrawCard(){
+    wx.showLoading({
+      title: '加载中',
+      mask:true
+    })
+    var _this = this;
+    var q = Dec.Aese('mod=blindBox&operation=upTodayDrawCard&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id);
+
+    wx.request({
+      url: app.signindata.comurl + 'spread.php' + q,
+      method: 'GET',
+      header: {
+        'Accept': 'application/json'
+      },
+      success: function (res) {
+        console.log('是否可领取重抽卡=====',res)
+        wx.hideLoading()
+        if (res.data.ReturnCode == 200) {
+          _this.setData({
+            is_redrawCard:false,
+          })
+          app.showToastC('领取成功');
+        } else {
+          app.showToastC(res.data.Msg);
+        };
+      }
+    })
+  },
   showxray: function (w) {
     var _this = this
     var type = w.currentTarget.dataset.type || w.target.dataset.type || 0;
@@ -2441,7 +2511,10 @@ Page({
             maxXRay: res.data.Info.maxXRay,
             updateOne: res.data.List.shareGroupImg[0] || 0,
             updateTwo: res.data.List.shareGroupImg[1] || 0,
-            ishowxray: true,
+            // ishowxray: true,
+            cueCardBox:true,
+            cardStyle:2
+
           })
           if (type == 1) {
             _this.setData({
@@ -2503,6 +2576,7 @@ Page({
         'no': no,
       },
       success: function (res) {
+        console.log('上传图片==========',res)
         wx.hideLoading()
         if (res.data) {
           if (res.data == 200) {
@@ -2537,7 +2611,9 @@ Page({
             maxXRay: res.data.Info.maxXRay,
             updateOne: res.data.List.shareGroupImg[0] || 0,
             updateTwo: res.data.List.shareGroupImg[1] || 0,
-            ishowxray: true,
+            // ishowxray: true,
+            cueCardBox:true,
+            cardStyle:2
           })
         }
       }
@@ -3481,12 +3557,13 @@ Page({
     })
   },
 
-  exchange: function () {
+  exchange: function (w) {
+    var type = w.currentTarget.dataset.type || w.target.dataset.type || 0;
     var _this = this;
     wx.showLoading({
       title: '加载中',
     })
-    var exh = Dec.Aese('mod=blindBox&operation=exchangeLuckyValue&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
+    var exh = Dec.Aese('mod=blindBox&operation=exchangeLuckyValue&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid+'&type='+type);
     wx.request({
       url: app.signindata.comurl + 'spread.php' + exh,
       method: 'GET',
@@ -3498,6 +3575,8 @@ Page({
             cardXRay: res.data.Info.user.cardXRay,
             blindBoxLucky: res.data.Info.user.blindBoxLucky,
             exchangeLuckyCondition: res.data.Info.user.exchangeLuckyCondition,
+            rollchance:res.data.Info.user.dayRetry,
+            cardTip:res.data.Info.user.cardTip
           })
           app.showToastC('兑换成功');
         } else {
@@ -3627,4 +3706,45 @@ Page({
     };
     _this.data.tempChanceCountdowntime = setInterval(tempChanceCountdowntime, 1000);
   },
+  jumpVipPrivilegePage(){
+    wx.navigateTo({  
+      url: "/page/secondpackge/pages/vipPrivilegePage/vipPrivilegePage"
+    })
+  },
+  jumpVipPage(){
+    wx.navigateTo({  
+      url: "/page/secondpackge/pages/vipPage/vipPage"
+    })
+  },
+  jumpshopbut:function(w){
+    var name = w.currentTarget.dataset.name || w.target.dataset.name;
+    var minprice = w.currentTarget.dataset.minprice || w.target.dataset.minprice||0;
+    var maxprice = w.currentTarget.dataset.maxprice || w.target.dataset.maxprice || 0;
+    var goods_id = w.currentTarget.dataset.goods_id || w.target.dataset.goods_id || '';
+    if (minprice == 0 && maxprice==0){
+      app.showToastC('暂无该款信息');
+      return false
+    };
+    var urlname = encodeURIComponent(name);
+    wx.navigateTo({
+      url: "/page/component/pages/ocamcart/ocamcart?name=" + urlname+"&but=shop&goods_id="+goods_id
+    });
+  },
+  // 图片预览
+  previewImg: function (w) {
+    var index = w.currentTarget.dataset.index || w.target.dataset.index||0;
+    var toyCabinetList = this.data.toyCabinetList;
+    var imgArr = [];
+    toyCabinetList.forEach(function(item, index){
+      imgArr.push(item.goodsImg)
+    });
+    wx.previewImage({
+      current: imgArr[index],    
+      urls: imgArr,               
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  },  
+
 })
