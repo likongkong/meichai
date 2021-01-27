@@ -276,11 +276,14 @@ Page({
       labelContentVie = labelContent.y || '';
     }else if(name=="进玩具柜"){
       labelContentVie = labelContent.j || '';
+    };
+    if(labelContentVie){
+      this.setData({
+        boxBenefitsSM:!this.data.boxBenefitsSM,
+        labelContentVie:labelContentVie
+      });
     }
-    this.setData({
-      boxBenefitsSM:!this.data.boxBenefitsSM,
-      labelContentVie:labelContentVie
-    });
+
   },
   jumpVipPage(){
     wx.navigateTo({  

@@ -37,6 +37,14 @@ page{
   color: #fff;
   font-size: 30rpx;
 }
+.banner swiper{
+  width: 100%;
+  height: 400rpx !important;
+}
+.banner swiper-item{
+  width: 100%;
+  height: 400rpx !important;
+}
 .banner image{
   width: 100%;
   height: 400rpx;
