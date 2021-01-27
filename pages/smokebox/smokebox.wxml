@@ -243,48 +243,19 @@
 
 		<!-- <view style='font-size:25rpx;margin:0rpx auto;'>{{activity.totalInvite}}/6人</view> -->
 
-    <view>
+    <view wx:if='{{toyCabinetList && toyCabinetList.length != 0}}'>
 		    <view class="singleDisplay">单款展示</view>
 				<scroll-view scroll-x="true" class="singleDisplay_scroll">
 
-            <view class="sD_s_eve">
-						    <image class="sD_s_eve_img" src="https://cdn.51chaidan.com/images/202101/thumb_img/36824_thumb_G_1611152914175.jpg"></image>
-								<view class="sD_s_eve_tit specialellipsis">迷你雪糕柜</view>
-								<view class="sD_s_eve_tit specialellipsis" style="color:#E94F57;">闲置:99~158元</view>
+            <view class="sD_s_eve" wx:for='{{toyCabinetList}}' wx:key='key'>
+						    <image class="sD_s_eve_img" data-index='{{index}}' bindtap='previewImg' src="{{item.goodsImg}}"></image>
+								<view class="sD_s_eve_tit specialellipsis" catchtap='jumpshopbut' data-name='{{item.role_name}}' data-minprice='{{item.minPrice}}' data-maxprice='{{item.maxPrice}}' data-goods_id='{{item.goods_id}}'>{{item.role_name}}</view>
+                <view class="sD_s_eve_tit specialellipsis" catchtap='jumpshopbut' data-name='{{item.role_name}}' data-minprice='{{item.minPrice}}' data-maxprice='{{item.maxPrice}}' data-goods_id='{{item.goods_id}}'  style="color:#E94F57;">
+									<block wx:if='{{item.minPrice==0&&item.maxPrice==0}}'></block>
+									<block wx:else>闲置:<block wx:if='{{item.minPrice!=item.maxPrice}}'>{{item.minPrice}}~{{item.maxPrice}}</block><block wx:else>{{item.maxPrice}}</block>元</block>
+								</view>
+
 						</view>
-            <view class="sD_s_eve">
-						    <image class="sD_s_eve_img" src="https://cdn.51chaidan.com/images/202101/thumb_img/36824_thumb_G_1611152914175.jpg"></image>
-								<view class="sD_s_eve_tit specialellipsis">迷你雪糕柜</view>
-								<view class="sD_s_eve_tit specialellipsis" style="color:#E94F57;">闲置:99~158元</view>
-						</view>
-            <view class="sD_s_eve">
-						    <image class="sD_s_eve_img" src="https://cdn.51chaidan.com/images/202101/thumb_img/36824_thumb_G_1611152914175.jpg"></image>
-								<view class="sD_s_eve_tit specialellipsis">迷你雪糕柜</view>
-								<view class="sD_s_eve_tit specialellipsis" style="color:#E94F57;">闲置:99~158元</view>
-						</view>
-            <view class="sD_s_eve">
-						    <image class="sD_s_eve_img" src="https://cdn.51chaidan.com/images/202101/thumb_img/36824_thumb_G_1611152914175.jpg"></image>
-								<view class="sD_s_eve_tit specialellipsis">迷你雪糕柜</view>
-								<view class="sD_s_eve_tit specialellipsis" style="color:#E94F57;">闲置:99~158元</view>
-						</view>
-            <view class="sD_s_eve">
-						    <image class="sD_s_eve_img" src="https://cdn.51chaidan.com/images/202101/thumb_img/36824_thumb_G_1611152914175.jpg"></image>
-								<view class="sD_s_eve_tit specialellipsis">迷你雪糕柜</view>
-								<view class="sD_s_eve_tit specialellipsis" style="color:#E94F57;">闲置:99~158元</view>
-						</view>
-            <view class="sD_s_eve">
-						    <image class="sD_s_eve_img" src="https://cdn.51chaidan.com/images/202101/thumb_img/36824_thumb_G_1611152914175.jpg"></image>
-								<view class="sD_s_eve_tit specialellipsis">迷你雪糕柜</view>
-								<view class="sD_s_eve_tit specialellipsis" style="color:#E94F57;">闲置:99~158元</view>
-						</view>
-
-
-
-
-
-
-
-
 
 				</scroll-view>			 
 		
@@ -292,7 +263,7 @@
 
 		<somke wx:if='{{is_exhibition == 0&&brandId<=0}}' colortitle='#000'></somke>
 
-		<view wx:elif='{{is_exhibition==1||(is_exhibition!=1&&brandId>0)}}' style='background:#f5f6fa;'>
+		<view wx:elif='{{is_exhibition==1||(is_exhibition!=1&&brandId>0)}}' style='background:#f5f6fa;margin-top:30rpx;'>
 			<view style="width:100%;height:80rpx;">
 				<view style="width:50%;height:100%;{{exhibdetail?'font-size:26rpx;font-weight: bold;':'font-size:24rpx;'}}text-align:center;line-height:80rpx;float:left;position:relative;" data-ind='1' catchtap="exhibdetailfun">
 					品牌专区
@@ -626,20 +597,20 @@
 					<text wx:if='{{isTempTip}}' style="color:#ff6968;font-size:18rpx;font-weight:bold;margin-bottom:10rpx;">\n{{tempChanceOverTimeCountdown}}</text>
 				</view>
 				<!-- https://www.51chaidan.com/images/icon/iconCardXRay.png -->
-				<view style='width:70rpx;height:70rpx;position:absolute;top:130rpx;right:10rpx;' catchtap='showxray' data-type='1'>
+				<view style='width:70rpx;height:70rpx;position:absolute;top:135rpx;right:10rpx;' catchtap='showxray' data-type='1'>
 					<image style='width:70rpx;height:70rpx;' src='https://cdn.51chaidan.com/images/blindBoxCard3.png'></image>
 					<view wx:if='{{cardXRay>0}}' class='tabshopimg specialellipsis {{isuserray?"graynumbg":"#rednumbg"}}'>{{cardXRay}}</view>
 					<view wx:elif='{{cardXRay==0}}' class='tabshopimg specialellipsis getnumbg'>领</view>
 				</view>
-				<view style='position:absolute;top:200rpx;right:20rpx;font-size:25rpx;text-align:center;'>透视卡
+				<view style='position:absolute;top:205rpx;right:20rpx;font-size:25rpx;text-align:center;'>透视卡
 					<text wx:if='{{perspcardiftrmin}}' style="color:#ff6968;font-size:18rpx;font-weight:bold;">\n{{percountdown}}</text>
 				</view>
 
-				<view style='width:70rpx;height:70rpx;position:absolute;top:260rpx;right:10rpx;' catchtap="rePumping">
+				<view style='width:70rpx;height:70rpx;position:absolute;top:270rpx;right:10rpx;' catchtap="rePumping">
 					<image style='width:70rpx;height:70rpx;' src='https://cdn.51chaidan.com/images/blindBoxCard1.png'></image>
-					<view wx:if='{{rollchance>0}}' class='tabshopimg specialellipsis {{isusertip?"graynumbg":"#rednumbg"}}'>{{rollchance}}</view>
+					<view wx:if='{{rollchance>0}}' class='tabshopimg specialellipsis rednumbg'>{{rollchance}}</view>
 				</view>
-				<view style='position:absolute;top:336rpx;right:20rpx;font-size:25rpx;' catchtap="rePumping">重抽卡
+				<view style='position:absolute;top:346rpx;right:20rpx;font-size:25rpx;' catchtap="rePumping">重抽卡
 				</view>
 
 
@@ -943,7 +914,7 @@
 
 <!-- 卡片提示框 -->
 <view wx:if='{{cueCardBox}}' style="width:100%;height:100%;position:fixed;top:0;left:0;z-index:99;">
-		<view class='bgstyle' style="background:#E8E8E9;opacity:1;top:{{statusBarHeightMc}}px;" catchtouchmove="myCatchTouch" catchtap="closexray"></view>
+		<view class='bgstyle' style="top:{{statusBarHeightMc}}px;" catchtouchmove="myCatchTouch" catchtap="closexray"></view>
 
 		
     <view class="cardBox" style="{{cardStyle==2?'height:1000rpx;':''}}">
@@ -958,14 +929,10 @@
 				<view class="cardBox_one">提示使用者，盲盒中不是那一款</view>	
 				<view style="margin-top:30rpx;">获取方式:</view>
 				<view class="cardBox_one_get">1.开通VIP，每日领取提示卡 x 2（当日有效）</view>
-				<view class="vipbox" catchtap="{{showVipStatus==2?'jumpVipPrivilegePage':'jumpVipPage'}}">
-						<block wx:if='{{showVipStatus != 1}}'>
-								<view style="display: flex;align-items: center;">
-										<image class="crownIcon" src="https://cdn.51chaidan.com/images/calendar/crown.png" mode="widthFix"></image>
-										<text>VIP有效期至{{vipExpiryTime}}</text>
-								</view>
-								<view class="vipButOpen" wx:if='{{showVipStatus == 2}}'>领取特权</view>
-								<view class="vipButOpen" wx:else style="background:#ffffff;color:#C38925;" catchtap="subscrfun">明日领取</view>       
+				<view class="vipbox" catchtap="{{isVip?'jumpVipPrivilegePage':'jumpVipPage'}}">
+						<block wx:if='{{isVip}}'>
+								<text style="margin-left:20rpx;">已开通VIP立即领取好礼</text>
+								<view class="vipButOpen">领取特权</view> 
 						</block>
 						<block wx:else>
 								<text style="margin-left:20rpx;">开通VIP年卡立即领取价值￥2024好礼</text>
@@ -975,9 +942,8 @@
 				<view class="cardBox_one_get">2.使用10点幸运值兑换提示卡 x 1</view>
 				<view class="cardBox_exchange">
 						<view class="cardBox_exchange_top">当前幸运值:{{blindBoxLucky}}</view>
-						<view class="cardBox_exchange_but">兑换提示卡</view>
-				</view>
-				<view class="cardBox_one_get">3.参加免单活动：参加免单活动，上传截图有几率获得</view>			
+						<view class="cardBox_exchange_but" catchtap="exchange" data-type='2'>兑换提示卡</view>
+				</view>		
 			</block>
       <!-- 2 透视卡 -->
       <block wx:if='{{cardStyle==2}}'>
@@ -985,14 +951,10 @@
 				<view class="cardBox_one">使用后可直接显示盒内款式</view>	
 				<view style="margin-top:30rpx;">获取方式:</view>
 				<view class="cardBox_one_get">1.开通VIP，每日领取透视卡 x 1（当日有效）</view>
-				<view class="vipbox" catchtap="{{showVipStatus==2?'jumpVipPrivilegePage':'jumpVipPage'}}">
-						<block wx:if='{{showVipStatus != 1}}'>
-								<view style="display: flex;align-items: center;">
-										<image class="crownIcon" src="https://cdn.51chaidan.com/images/calendar/crown.png" mode="widthFix"></image>
-										<text>VIP有效期至{{vipExpiryTime}}</text>
-								</view>
-								<view class="vipButOpen" wx:if='{{showVipStatus == 2}}'>领取特权</view>
-								<view class="vipButOpen" wx:else style="background:#ffffff;color:#C38925;" catchtap="subscrfun">明日领取</view>       
+				<view class="vipbox" catchtap="{{isVip?'jumpVipPrivilegePage':'jumpVipPage'}}">
+						<block wx:if='{{isVip}}'>
+								<text style="margin-left:20rpx;">已开通VIP立即领取好礼</text>
+								<view class="vipButOpen">领取特权</view> 
 						</block>
 						<block wx:else>
 								<text style="margin-left:20rpx;">开通VIP年卡立即领取价值￥2024好礼</text>
@@ -1003,25 +965,25 @@
 
         <block>
 				
-						<view wx:if='{{gainXRay>0}}' style="color:#FF9900;text-align:center;">今日已赠送{{gainXRay}}/{{maxXRay}}张，明日再来</view>
-						<view wx:if='{{!updateOne.isUploadEnbled || !updateTwo.isUploadEnbled}}' style="color:#FF6968;text-align:center;">未通过次数过多，明日再来</view>
-						<view wx:elif='{{updateOne.status == 3 || updateTwo.status == 3}}' style="color:#FF6968;">未通过请重新上传</view>
+						<view wx:if='{{gainXRay>0}}' style="color:#FF9900;text-align:center;padding-bottom:10rpx;">今日已赠送{{gainXRay}}/{{maxXRay}}张，明日再来</view>
+						<view wx:if='{{!updateOne.isUploadEnbled || !updateTwo.isUploadEnbled}}' style="color:#FF6968;text-align:center;padding-bottom:10rpx;">未通过次数过多，明日再来</view>
+						<view wx:elif='{{updateOne.status == 3 || updateTwo.status == 3}}' style="color:#FF6968;padding-bottom:10rpx;text-align:center;">未通过请重新上传</view>
 
 						<view style="width:100%;overflow:hidden;">
 							<view wx:if='{{updateOne.isUploadEnbled && updateTwo.isUploadEnbled}}' class="perUpImgLeft">
 								<image class="perUpImgLeft_img" src="https://cdn.51chaidan.com/images/uplod_pic.png"></image>
 								<text wx:if='{{updateOne.status==0 || updateOne.status==3}}' style="text-decoration:underline;" catchtap="upImgSernum" data-type="{{updateOne.status}}" data-no="0">上传截图1</text>
-								<text wx:elif='{{updateOne.status==1}}' style='color:#42bd56;'>审核中...</text>
-								<text wx:elif='{{updateOne.status==2}}' style='color:#42bd56;'>审核通过</text>
-								<text wx:elif='{{updateOne.status==1 && updateTwo.status!=1 && updateTwo.status!=2}}' style='color:#FF6968;'>还差一张</text>
+								<text wx:elif='{{updateOne.status==1}}' style='color:#fff;'>审核中...</text>
+								<text wx:elif='{{updateOne.status==2}}' style='color:#fff;'>审核通过</text>
+								<text wx:elif='{{updateOne.status==1 && updateTwo.status!=1 && updateTwo.status!=2}}' style='color:#fff;'>还差一张</text>
 							</view>
 
 							<view wx:if='{{updateOne.isUploadEnbled && updateTwo.isUploadEnbled}}' style="float:right;margin-right:50rpx;" class="perUpImgLeft">
 								<image class="perUpImgLeft_img" src="https://cdn.51chaidan.com/images/uplod_pic.png"></image>
 								<text wx:if='{{updateTwo.status==0 || updateTwo.status==3}}' style="text-decoration:underline;" catchtap="upImgSernum" data-type="{{updateTwo.status}}" data-no="1">上传截图2</text>
-								<text wx:elif='{{updateTwo.status==1}}' style='color:#42bd56;'>审核中...</text>
-								<text wx:elif='{{updateTwo.status==2}}' style='color:#42bd56;'>审核通过</text>
-								<text wx:elif='{{updateTwo.status==1 && updateOne.status!=1 && updateOne.status!=2 }}' style='color:#FF6968;'>还差一张</text>
+								<text wx:elif='{{updateTwo.status==1}}' style='color:#fff;'>审核中...</text>
+								<text wx:elif='{{updateTwo.status==2}}' style='color:#fff;'>审核通过</text>
+								<text wx:elif='{{updateTwo.status==1 && updateOne.status!=1 && updateOne.status!=2 }}' style='color:#fff;'>还差一张</text>
 							</view>
 
 						</view>				
@@ -1034,7 +996,7 @@
         <view class="cardBox_one_get">3.使用100点幸运值兑换透视卡 x 1</view>			
 				<view class="cardBox_exchange">
 						<view class="cardBox_exchange_top">当前幸运值:{{blindBoxLucky}}</view>
-						<view class="cardBox_exchange_but">兑换透视卡</view>
+						<view class="cardBox_exchange_but" catchtap="exchange" data-type='1'>兑换透视卡</view>
 				</view>
 				<view class="cardBox_one_get">4.分享6名新朋友围观赠送透视卡 x 1</view>	
 				<view style='width:410rpx;position:absolute:top:0;left:0;right:0;margin:0 auto;overflow:hidden;'>
@@ -1056,11 +1018,11 @@
 			</block>
       <!-- 3 重抽卡 -->
       <block wx:if='{{cardStyle==3}}'>
-				<view style="color:#FF6968;font-size:30rpx;font-weight:bold;">透视卡</view>
+				<view style="color:#FF6968;font-size:30rpx;font-weight:bold;">重抽卡</view>
 				<view class="cardBox_one">抽盒完成后可使用重抽卡进行一次免费重抽（每盒限6张）</view>	
 				<view style="margin-top:30rpx;">获取方式:</view>	
 				<view class="cardBox_one_get">1.每日领取重抽卡 x 1（当日有效）</view>
-				<view class="cardBox_exchange_but">领取</view>
+				<view class="cardBox_exchange_but" style="{{is_redrawCard?'':'background:#999;'}}" catchtap="{{is_redrawCard?'getRedrawCard':''}}">领取</view>
 				<view class="cardBox_one_get">2.每分享1名新朋友围观赠送重抽卡 x 1（每天限6张）</view>	
 				<view style='width:410rpx;position:absolute:top:0;left:0;right:0;margin:0 auto;overflow:hidden;'>
 					<view wx:for='{{inviteList}}' wx:key="key">
@@ -1073,10 +1035,10 @@
 						</view>
 					</view>
 				</view>
-        <view class="cardBox_one_get">3.使用30点幸运值兑换提示卡 x 1</view>			
+        <view class="cardBox_one_get">3.使用30点幸运值兑换重抽卡 x 1</view>			
 				<view class="cardBox_exchange">
 						<view class="cardBox_exchange_top">当前幸运值:{{blindBoxLucky}}</view>
-						<view class="cardBox_exchange_but">重抽卡</view>
+						<view class="cardBox_exchange_but" catchtap="exchange" data-type='3'>兑换重抽卡</view>
 				</view>
 
 
@@ -1085,15 +1047,15 @@
 
       <view class="cardBox_com_but">
 			   <block wx:if='{{cardStyle==1}}'>
-				    <view>使用提示卡</view>
+				    <view class="cardBox_com_beve" catchtap='usercard' data-type='tip'>使用提示卡</view>
 						<view class="digitalTips specialellipsis" wx:if='{{cardTip>0}}'>{{cardTip}}</view>	 
 				 </block>
 				 <block wx:if='{{cardStyle==2}}'>
-				    <view>使用透视卡</view>
+				    <view class="cardBox_com_beve" catchtap='usercard' data-type='XRay'>使用透视卡</view>
 						<view class="digitalTips specialellipsis" wx:if='{{cardXRay>0}}'>{{cardXRay}}</view>
 				 </block>
 				 <block wx:if='{{cardStyle==3}}'>
-				     <view>使用重抽卡</view>
+				     <view class="cardBox_com_beve" catchtap="closexray">使用重抽卡</view>
 						 <view class="digitalTips specialellipsis" wx:if='{{rollchance>0}}'>{{rollchance}}</view>
 				 </block>
 			   
