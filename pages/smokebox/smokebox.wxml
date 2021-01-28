@@ -196,9 +196,18 @@
 			</view>
 			<view style="width:50%;height:80rpx;position:relative;float:right;">
 
-				<view wx:if='{{activity.status==1}}' class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;" catchtap='lineup'>立即排队</view>
 
-				<view wx:if='{{activity.aheadUser== 0 && activity.isInQueue && activity.canOperate }}' class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;" catchtap='selectbox'>直接选盒</view>
+				<view wx:if='{{whole_boxGift}}' class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;"  catchtap="collectchip">端盒送</view>
+
+				<view wx:elif='{{isOpenLine}}' class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;"  catchtap="{{(isDirectOpenWholeBox&&!isDeduct) || (isDirectOpenWholeBox&&isDeduct&&activity.userBlindBoxAmount==0) ? 'wholebox' : 'collectchip'}}">
+				    <block wx:if='{{activity.wholeBoxTitle}}'>{{activity.wholeBoxTitle}}</block>
+						<block wx:elif='{{tipCheapForWholeBox>0||activity.wholeBoxSpecialTitle}}'>{{activity.wholeBoxSpecialTitle||'端盒立减'}}</block>
+						<block wx:else>抽整盒</block>
+				</view>
+
+				<view wx:elif='{{activity.status==1}}' class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;" catchtap='lineup'>立即排队</view>
+
+				<view wx:elif='{{activity.aheadUser== 0 && activity.isInQueue && activity.canOperate }}' class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;" catchtap='selectbox'>直接选盒</view>
 
 				<view wx:elif='{{activity.isInQueue}}' class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;">排队中</view>
 
@@ -247,10 +256,10 @@
 		    <view class="singleDisplay">单款展示</view>
 				<scroll-view scroll-x="true" class="singleDisplay_scroll">
 
-            <view class="sD_s_eve" wx:for='{{toyCabinetList}}' wx:key='key'>
-						    <image class="sD_s_eve_img" data-index='{{index}}' bindtap='previewImg' src="{{item.goodsImg}}"></image>
+            <view class="sD_s_eve" wx:for='{{toyCabinetList}}' wx:key='key' catchtap='jumpshopbut' data-name='{{item.role_name}}' data-minprice='{{item.minPrice}}' data-maxprice='{{item.maxPrice}}' data-goods_id='{{item.goods_id}}'>
+						    <image class="sD_s_eve_img" mode='widthFix' src="{{item.goodsImg}}"></image>
 								<view class="sD_s_eve_tit specialellipsis" catchtap='jumpshopbut' data-name='{{item.role_name}}' data-minprice='{{item.minPrice}}' data-maxprice='{{item.maxPrice}}' data-goods_id='{{item.goods_id}}'>{{item.role_name}}</view>
-                <view class="sD_s_eve_tit specialellipsis" catchtap='jumpshopbut' data-name='{{item.role_name}}' data-minprice='{{item.minPrice}}' data-maxprice='{{item.maxPrice}}' data-goods_id='{{item.goods_id}}'  style="color:#E94F57;">
+                <view class="sD_s_eve_tit specialellipsis">
 									<block wx:if='{{item.minPrice==0&&item.maxPrice==0}}'></block>
 									<block wx:else>闲置:<block wx:if='{{item.minPrice!=item.maxPrice}}'>{{item.minPrice}}~{{item.maxPrice}}</block><block wx:else>{{item.maxPrice}}</block>元</block>
 								</view>
@@ -590,7 +599,7 @@
 				</view>
 				<!-- https://www.51chaidan.com/images/icon/iconCardTip.png -->
 				<view style='width:70rpx;height:70rpx;position:absolute;top:0;right:10rpx;' catchtap='showhint' data-type='2'>
-					<image style='width:70rpx;height:70rpx;' src='https://cdn.51chaidan.com/images/blindBoxCard2.png'></image>
+					<image style='width:70rpx;height:70rpx;' mode='aspectFit' src='https://cdn.51chaidan.com/images/blindBoxCard2.png'></image>
 					<view wx:if='{{cardTip>0}}' class='tabshopimg specialellipsis {{isusertip?"graynumbg":"#rednumbg"}}'>{{cardTip}}</view>
 				</view>
 				<view style='position:absolute;top:70rpx;right:20rpx;font-size:25rpx;'>提示卡
@@ -598,7 +607,7 @@
 				</view>
 				<!-- https://www.51chaidan.com/images/icon/iconCardXRay.png -->
 				<view style='width:70rpx;height:70rpx;position:absolute;top:135rpx;right:10rpx;' catchtap='showxray' data-type='1'>
-					<image style='width:70rpx;height:70rpx;' src='https://cdn.51chaidan.com/images/blindBoxCard3.png'></image>
+					<image style='width:70rpx;height:70rpx;' mode='aspectFit' src='https://cdn.51chaidan.com/images/blindBoxCard3.png'></image>
 					<view wx:if='{{cardXRay>0}}' class='tabshopimg specialellipsis {{isuserray?"graynumbg":"#rednumbg"}}'>{{cardXRay}}</view>
 					<view wx:elif='{{cardXRay==0}}' class='tabshopimg specialellipsis getnumbg'>领</view>
 				</view>
@@ -607,7 +616,7 @@
 				</view>
 
 				<view style='width:70rpx;height:70rpx;position:absolute;top:270rpx;right:10rpx;' catchtap="rePumping">
-					<image style='width:70rpx;height:70rpx;' src='https://cdn.51chaidan.com/images/blindBoxCard1.png'></image>
+					<image style='width:70rpx;height:70rpx;' mode='aspectFit' src='https://cdn.51chaidan.com/images/blindBoxCard1.png'></image>
 					<view wx:if='{{rollchance>0}}' class='tabshopimg specialellipsis rednumbg'>{{rollchance}}</view>
 				</view>
 				<view style='position:absolute;top:346rpx;right:20rpx;font-size:25rpx;' catchtap="rePumping">重抽卡

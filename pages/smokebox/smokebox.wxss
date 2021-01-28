@@ -875,22 +875,20 @@ margin-top: 20rpx;
   text-align: left;
 }
 .sD_s_eve{
-  width: 180rpx;
-  height:290rpx;
-  background: #fff;
+  width: 150rpx;
+  min-height:90rpx;
   margin-right: 10rpx;
   border-radius: 15rpx;
   display: inline-block;
-
+  background: #fff;
 }
 .sD_s_eve_img{
-  width: 180rpx;
-  height: 180rpx;
+  width: 100%;
   display: block;
   border-radius: 15rpx 15rpx 0 0;
 }
 .sD_s_eve_tit{
-  font-size: 24rpx;
+  font-size: 20rpx;
   width: 100%;
   text-align: center;
   height: 50rpx;

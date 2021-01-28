@@ -219,7 +219,7 @@ Page({
     subscribedata: '',
     isSubscribeCoupon: false,
     subscribeCouponTip: '',
-    imgwidth:450,
+    imgwidth:500,
     isDirectShipping:false,
     iftrcloud: true,
     // 端盒送实物
@@ -623,18 +623,18 @@ Page({
     // _this.mAnimation() //开启动画
   },
   imageLoadhead: function (e) {
-    var _this = this;
-    var $width = e.detail.width;
-    var $height = e.detail.height;
-    var ratio = $width / $height;
-    var viewWidth = 454,
-      viewHeight = viewWidth / ratio;
-    if (viewHeight>400){
-       this.setData({
-         imgwidth:300
-       })
-    }
-    this.initview()
+    // var _this = this;
+    // var $width = e.detail.width;
+    // var $height = e.detail.height;
+    // var ratio = $width / $height;
+    // var viewWidth = 454,
+    //   viewHeight = viewWidth / ratio;
+    // if (viewHeight>400){
+    //    this.setData({
+    //      imgwidth:300
+    //    })
+    // }
+    // this.initview()
   },
 
   mAnimation: function () {
@@ -1877,6 +1877,7 @@ Page({
       _this.setData({
         remaintime: second,
       })
+      console.log(second)
       if (second == 5 && _this.data.ishowguess) {
         _this.instantopen()
       }
@@ -3732,22 +3733,6 @@ Page({
     wx.navigateTo({
       url: "/page/component/pages/ocamcart/ocamcart?name=" + urlname+"&but=shop&goods_id="+goods_id
     });
-  },
-  // 图片预览
-  previewImg: function (w) {
-    var index = w.currentTarget.dataset.index || w.target.dataset.index||0;
-    var toyCabinetList = this.data.toyCabinetList;
-    var imgArr = [];
-    toyCabinetList.forEach(function(item, index){
-      imgArr.push(item.goodsImg)
-    });
-    wx.previewImage({
-      current: imgArr[index],    
-      urls: imgArr,               
-      success: function (res) { },
-      fail: function (res) { },
-      complete: function (res) { },
-    })
-  },  
+  }, 
 
 })
