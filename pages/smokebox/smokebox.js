@@ -1877,7 +1877,7 @@ Page({
       _this.setData({
         remaintime: second,
       })
-      console.log(second)
+      // console.log(second)
       if (second == 5 && _this.data.ishowguess) {
         _this.instantopen()
       }

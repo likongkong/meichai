@@ -697,9 +697,9 @@ Page({
   },
 
   onShow: function() {
-    this.setData({
-      pid: 0,
-    })
+    // this.setData({
+    //   pid: 0,
+    // })
     var _this = this;
     _this.data.loginid = app.signindata.loginid;
     _this.data.openid = app.signindata.openid;
