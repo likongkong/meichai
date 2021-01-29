@@ -121,19 +121,19 @@ page {
 }
 
 .getnumbg {
-  left: 30rpx;
+  left: 60rpx;
   background: #ff6968;
   border: 2rpx solid #ff6968;
 }
 
 .rednumbg {
-  left: 30rpx;
+  left: 60rpx;
   background: #ff2742;
   border: 2rpx solid #ff2742;
 }
 
 .graynumbg {
-  left: 30rpx;
+  left: 60rpx;
   background: #999;
   border: 2rpx solid #999;
 }
@@ -1003,4 +1003,21 @@ margin-top: 20rpx;
 .cardBox_com_beve{
   width: 100%;
   height: 100%;
+}
+
+.cardTipBox{
+  width:110rpx;position:absolute;top:0;right:0;
+}
+.cardTipBoxImg{
+  width: 100%;
+  position: relative;
+}
+.cardTipBoxImg image{
+  width:70rpx;height:70rpx;
+  display: block;margin: auto;
+}
+.cardTipBoxTxt{
+  font-size:25rpx;
+  text-align: center;
+  padding:5rpx 0 10rpx 0;
 }

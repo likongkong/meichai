@@ -241,3 +241,16 @@ page{background:#f5f6fa;}.dlfbox{width:100%;background:#f5f6fa;}::-webkit-scroll
   text-overflow:ellipsis;
   white-space: nowrap;
 }
+.dlfchrbrightDetail{
+  width: 120rpx;
+  height: 40rpx;
+  background: #ff2742;
+  text-align: center;
+  line-height: 40rpx;
+  position: absolute;
+  right: 10rpx;
+  bottom: 10rpx;
+  border-radius: 40rpx;
+  color: #fff;
+  font-size: 22rpx;
+}
