@@ -202,9 +202,7 @@
             </view>
         </view>
 
-
-
-        <view class='odchtead' wx:if='{{comdata.order_type!=6}}'>
+        <view class='odchtead' wx:if='{{comdata.order_type!=6 && comdata.auditRefund != 2 && comdata.auditRefund != 3}}'>
             <view class='odchteadleft'>{{comdata.retailer}}</view>
             <view class='wholeimgdel' data-oid='{{comdata.cart_id}}' bindtap='delwholeheadrimg'
                 wx:if='{{comdata.status==8||comdata.status==5||comdata.status==10||comdata.status==11}}'>
@@ -361,7 +359,7 @@
         <block wx:if='{{!comdata.isToyCabinet}}'>
             <!--  商品状态  -->
             <view class='logisticsstate'
-                wx:if='{{comdata.order_type!=6&&(comdata.store_id==0&&comdata.status!=0&&comdata.status!=10&&comdata.status!=11&&comdata.status!=17&&comdata.status!=16&&comdata.status!=1&&comdata.status!=8)}}'>
+                wx:if='{{comdata.order_type!=6&&(comdata.store_id==0&&comdata.status!=0&&comdata.status!=10&&comdata.status!=11&&comdata.status!=17&&comdata.status!=16&&comdata.status!=1&&comdata.status!=8) && comdata.auditRefund != 2 && comdata.auditRefund != 3}}'>
                 <!--  status 4,5,6 全亮  -->
                 <view class='iftrlogisticsstate' wx:if='{{comdata.status==4||comdata.status==5||comdata.status==6}}'>
                     <view class='logticstache'>
@@ -862,8 +860,8 @@
                     <!--  已付款  catchtap='upImgSer'-->
                     <view class='totalmoncon' wx:if='{{comdata.status==1||comdata.status==16&&comdata.order_type!=7}}'>
 
-                        <view class='totalmoncrightcel' wx:if='{{comdata.canRefund}}' bindtap='applicationforrefund'
-                            data-oid='{{comdata.cart_id}}' style='position:relative;'>申请退款</view>
+                        <!-- <view class='totalmoncrightcel' wx:if='{{comdata.canRefund}}' bindtap='applicationforrefund'
+                            data-oid='{{comdata.cart_id}}' style='position:relative;'>申请退款</view> -->
 
                         <view wx:if='{{comdata.status==1&&comdata.isAuditPic==1&&comdata.auditPic!=2}}'
                             style='color:#fff;font-size:26rpx;width:140rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;'
@@ -954,8 +952,8 @@
 
 
 
-                        <view class='totalmoncrightcel' wx:if='{{comdata.canRefund}}' bindtap='applicationforrefund'
-                            data-oid='{{comdata.cart_id}}' style='position:relative;'>申请退款</view>
+                        <!-- <view class='totalmoncrightcel' wx:if='{{comdata.canRefund}}' bindtap='applicationforrefund'
+                            data-oid='{{comdata.cart_id}}' style='position:relative;'>申请退款</view> -->
 
 
 
@@ -1039,8 +1037,8 @@
                     </view>
                     <!--   采购商品  -->
                     <view class='totalmoncon' wx:if='{{comdata.status==12}}'>
-                        <view class='totalmoncrightcel' wx:if='{{comdata.canRefund}}' bindtap='applicationforrefund'
-                            data-oid='{{comdata.cart_id}}' style='position:relative;'>申请退款</view>
+                        <!-- <view class='totalmoncrightcel' wx:if='{{comdata.canRefund}}' bindtap='applicationforrefund'
+                            data-oid='{{comdata.cart_id}}' style='position:relative;'>申请退款</view> -->
 
                         <view
                             wx:if='{{comdata.status==12&&comdata.isShowOrder==1&&comdata.showOrder!=1&&comdata.showOrder!=2}}'
@@ -1285,23 +1283,25 @@
                     </view>
 
                 </view>
-                <!-- <view style="overflow:hidden;padding:10rpx 0;" wx:if="{{comdata.auditRefund == 1 || comdata.auditRefund == 2 || comdata.auditRefund == 3}}">
+                <view style="overflow:hidden;padding:10rpx 0;" wx:if="{{comdata.auditRefund == 1 || comdata.auditRefund == 2 || comdata.auditRefund == 3}}">
                     <view wx:if="{{comdata.auditRefund == 1}}" class="totalmoncright" style="border: 1rpx solid #8E8C8D;color: #BBBBBB;clear: both;" catchtap="refund">
                         申请退款
                     </view>
                     <view wx:elif="{{comdata.auditRefund == 2}}" style="display:block;font-size:28rpx;color:#5F5F5F;text-align:right;color: #ff2840;" catchtap="refund">退款审核中 ></view>
-                    <view wx:elif="{{comdata.auditRefund == 3}}" style="display:block;font-size:25rpx;color:#5F5F5F;text-align:right;">退款申请未通过，如有问题请联系微信：MeichaiMeichai</view>
-                </view> -->
+                    <view wx:elif="{{comdata.auditRefund == 3}}" style="display:block;font-size:25rpx;color:#5F5F5F;text-align:right;position: relative;">退款申请未通过，如有问题请联系微信客服  >
+                        <button open-type='contact' session-from='' style='width:100%;height:100%;position:absolute;top:0;left:0;opacity: 0;z-index:1;'></button>
+                    </view>
+                </view>
             </view>
         </view>
 
 
     </block>
 
-    <!-- <view wx:if="{{comdata.rejectInfo}}" class="refundFail orderbott" style="margin-bottom:10rpx;display: flex;justify-content: space-between;min-height: auto;">
+    <view wx:if="{{comdata.rejectInfo}}" class="refundFail orderbott" style="margin-bottom:10rpx;display: flex;justify-content: space-between;min-height: auto;">
         <view style="width:150rpx;color:#A7A7A8;font-size:24rpx;display:inline-block;">未通过原因：</view>
         <view style="width:560rpx;font-size:24rpx;display:inline-block;">{{comdata.rejectInfo}}</view>
-    </view> -->
+    </view>
 
     <view class='orderbott'>
         <view class='orderbottcon'>订单编号:{{comdata.order_sn}}</view>
@@ -1310,8 +1310,8 @@
             支付方式:{{comdata.payment}}支付</view>
         <!-- &&comdata.status!=16&&comdata.status!=1&&comdata.status!=8&&comdata.status!=11 -->
         <view class='orderbottcon' wx:if='{{comdata.order_type!=2}}'>下单时间:{{comdata.ordertime}}</view>
-        <!-- <view class='orderbottcon' wx:if='{{comdata.auditRefund == 2}}'>申请退款:{{comdata.apply_time}}</view>
-        <view class='orderbottcon' wx:if='{{ comdata.auditRefund == 3 }}'>申请未通过:{{comdata.audit_time}}</view> -->
+        <view class='orderbottcon' wx:if='{{comdata.auditRefund == 2}}'>申请退款:{{comdata.apply_time}}</view>
+        <view class='orderbottcon' wx:if='{{ comdata.auditRefund == 3 }}'>申请未通过:{{comdata.audit_time}}</view>
 
     </view>
     <!--  官网微信号复制  -->

@@ -21,7 +21,7 @@
     <block wx:for="{{infoData.deputyInfo}}" wx:key='key'>
       <view class="goodsCardWrap" style="margin-top: 15rpx;">
         <view class="title">
-          退款商品 <text>（商品退款，赠品一同退回）</text>
+          赠品信息 <text>（商品退款，赠品需退回）</text>
         </view>
         <view class="goodsCardContent">
           <view style="width: 160rpx;">
@@ -52,31 +52,68 @@
     </view>
     <view class="refundAmount refundflex">
       <view>退款金额<text>*</text></view>
-      <view><text>{{infoData.goods_price}}元</text></view>
+      <view> 
+        <block wx:if="{{infoData.refundPrice >= 0 }}"> <text>{{infoData.refundPrice}}元(赠品寄回退款{{infoData.amount}}元)</text> </block> <block wx:else><text>{{infoData.amount}}元</text></block>
+      </view>
     </view>
+    <block wx:if="{{infoData.auditRefund == 1}}"> 
+      <view class="refundOrderNumber refundflex" wx:if="{{infoData.refundPrice != -1}}">
+        <view>寄回快递单号</view>
+        <view> 
+            <input type="text" placeholder="商品寄回请填写快递单号" placeholder-style="color: #8E8C8D;" focus="{{refundOrderfocus}}" bindinput="bindKeyInput"/>
+        </view>
+      </view>
+    </block> 
+    <block wx:else>
+      <view class="refundOrderNumber refundflex" wx:if="{{infoData.auditRefund == 2 && infoData.giftShipping}}">
+        <view>寄回快递单号</view>
+        <view> 
+            <input type="text" placeholder="{{infoData.giftShipping}}" placeholder-style="color: #8E8C8D;" disabled="true"/> 
+        </view>
+      </view>
+    </block>
   </view>
 
-  <view class="describeWrap">
-    <view class="title">
-      补充描述
-    </view>
-    <view class="describeBox">
-      <block wx:if="{{infoData.auditRefund == 2}}">
-        <view style="padding: 18rpx;box-sizing: border-box;height:212rpx;font-size: 28rpx;color: gray;">{{infoData.refund_describe}}</view>
-      </block>
-      <block wx:else>
+  <block wx:if="{{infoData.auditRefund == 1}}">
+    <view class="describeWrap">
+      <view class="title">
+        补充描述
+      </view>
+      <view class="describeBox">
         <textarea class="areas" placeholder='补充描述，有助于更好的处理您的售后问题' maxlength="{{max}}" bindinput="inputs" > 
           <!-- <text class="hint">{{texts}}{{num}}{{textss}}</text> -->
         </textarea>
         <text class="currentWordNumber">{{currentWordNumber}}/{{max}}</text>
-      </block>
+      </view>
     </view>
-  </view>
+  </block>
+  <block wx:else> 
+    <view class="describeWrap" wx:if="{{infoData.auditRefund == 2 && infoData.refund_describe}}">
+      <view class="title">
+        补充描述
+      </view>
+      <view class="describeBox">
+        <view style="padding: 18rpx;box-sizing: border-box;height:212rpx;font-size: 28rpx;color: gray;">{{infoData.refund_describe}}</view>
+      </view>
+    </view>
+  </block>
+
 </view>
 
 
 <view class="submit" catchtap="submit" wx:if="{{infoData.auditRefund != 2}}">
   提交
+</view>
+
+<view  wx:if="{{isTwoConfirmBox}}" class="twoConfirmMask" catchtouchmove="true" catchtap="twoConfirmBoxFun"> 
+  <view class="twoConfirmBox" catchtap="true">
+    <view class="twoConfirmBoxTitle" catchtap="submit">退款确认</view>
+    <text class="twoConfirmBoxTxt">未填写退回快递单号，赠品未退回，商品退款将扣除赠送价格的金额，请确认是否继续退款？</text>
+    <view class="twoConfirmBoxBtn">
+      <text catchtap="submit">确认退款</text>
+      <text catchtap="refundOrderfocusFun">填写运单号</text>
+    </view>
+  </view>
 </view>
 
 

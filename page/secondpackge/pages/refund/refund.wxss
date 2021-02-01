@@ -74,12 +74,17 @@ page{
   padding: 0 30rpx 25rpx 30rpx;
   box-sizing: border-box;
 }
-.refundReason{
+.refundReason,.refundAmount,.refundOrderNumber{
   margin-bottom: 15rpx;
 }
-.refundReason view{
+.refundReason view,.refundAmount view,.refundOrderNumber view{
   height: 60rpx;
   line-height: 60rpx;
+}
+.refundOrderNumber input{
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: right;
 }
 .refundflex{
   display: flex;
@@ -230,4 +235,52 @@ page{
 }
 .refundReasonBoxCon view text{
   font-size: 28rpx;
+}
+
+.twoConfirmMask{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background: rgba(0,0,0,.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.twoConfirmBox{
+  width: 76%;
+  height: auto;
+  background: #fff;
+  padding: 50rpx 50rpx;
+  box-sizing: border-box;
+  border-radius: 14rpx;
+}
+.twoConfirmBoxTitle{
+  font-size: 26rpx;
+  color: #101010;
+  text-align: center;
+  margin-bottom: 35rpx;
+}
+.twoConfirmBoxTxt{
+  font-size: 26rpx;
+  color: #101010;
+}
+.twoConfirmBoxBtn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 35rpx;
+}
+.twoConfirmBoxBtn text{
+  width: 300rpx;
+  height: 60rpx;
+  background: #EB706F;
+  font-size: 26rpx;
+  color: #fff;
+  border-radius: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  margin: 0 12rpx;
 }

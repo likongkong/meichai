@@ -24,8 +24,11 @@ Page({
     currentWordNumber:0,
     currentWord:'',
     isReasonBox:false, 
+    isTwoConfirmBox:false,
     refundType:[],
-    checkedObj:''
+    checkedObj:'',
+    refundOrderfocus:false,
+    refundOrderInputValue:'',
   },
   chooseReasonFun(e){
     let index = e.currentTarget.dataset.index;
@@ -44,6 +47,22 @@ Page({
   reasonFun(){
     this.setData({
       isReasonBox:!this.data.isReasonBox
+    })
+  },
+  twoConfirmBoxFun(){
+    this.setData({
+      isTwoConfirmBox:false
+    })
+  },
+  bindKeyInput: function (e) {
+    this.setData({
+      refundOrderInputValue: e.detail.value
+    })
+  },
+  refundOrderfocusFun(){
+    this.setData({
+      refundOrderfocus:true,
+      isTwoConfirmBox:false
     })
   },
   //字数限制  
@@ -112,11 +131,16 @@ Page({
         duration: 1000
       })
       return false;
+    }else if(this.data.infoData.refundPrice >=0 && this.data.refundOrderInputValue == ''){
+      this.setData({
+        isTwoConfirmBox: true,
+      });
+      return false;
     }
     wx.showLoading({ title: '加载中...'})
     var _this = this;
-    var q = Dec.Aese('mod=operate&operation=submitApplyRefund&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type='+this.data.checkedObj.id+'&oid='+_this.data.oid+'&describe='+this.data.currentWord);
-    console.log(app.signindata.comurl + 'order.php?' +'mod=operate&operation=submitApplyRefund&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type='+this.data.checkedObj.id+'&oid='+_this.data.oid+'&describe='+this.data.currentWord)
+    var q = Dec.Aese('mod=operate&operation=submitApplyRefund&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type='+this.data.checkedObj.id+'&oid='+_this.data.oid+'&describe='+this.data.currentWord+'&giftShipping='+this.data.refundOrderInputValue);
+    console.log(app.signindata.comurl + 'order.php?' +'mod=operate&operation=submitApplyRefund&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type='+this.data.checkedObj.id+'&oid='+_this.data.oid+'&describe='+this.data.currentWord+'&giftShipping='+this.data.refundOrderInputValue)
     wx.request({
       url: app.signindata.comurl + 'order.php' + q,
       method: 'GET',
@@ -126,7 +150,9 @@ Page({
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
           app.showToastC(res.data.Msg)
-          _this.getInfo();
+          setTimeout(function(){
+            _this.getInfo();
+          },1500)
         }else{
           app.showToastC(res.data.Msg)
         }

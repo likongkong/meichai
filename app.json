@@ -116,6 +116,7 @@
         "pages/buyingTickets/buyingTickets",
         "pages/priorityVoting/priorityVoting",
         "pages/luckyDraw/luckyDraw",
+        "pages/entityLuckyDraw/entityLuckyDraw",
         "pages/articleList/articleList",
         "pages/chouxuanHomepage/chouxuanHomepage",
         "pages/drawHideGoods/drawHideGoods",
