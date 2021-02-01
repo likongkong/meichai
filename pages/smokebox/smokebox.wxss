@@ -121,19 +121,19 @@ page {
 }
 
 .getnumbg {
-  left: 30rpx;
+  left: 60rpx;
   background: #ff6968;
   border: 2rpx solid #ff6968;
 }
 
 .rednumbg {
-  left: 30rpx;
+  left: 60rpx;
   background: #ff2742;
   border: 2rpx solid #ff2742;
 }
 
 .graynumbg {
-  left: 30rpx;
+  left: 60rpx;
   background: #999;
   border: 2rpx solid #999;
 }
@@ -802,10 +802,6 @@ margin-top: 20rpx;
 .recycleContentStateB .recycletxt{
   margin-top: 80rpx;text-align: center;
 }
-.recycleContentStateB .recyclebtn button{
-  /* width: 350rpx;
-  position: absolute;left: 0; */
-}
 
 
 
@@ -864,4 +860,164 @@ margin-top: 20rpx;
   width: 500rpx;
   margin: 0 auto 20rpx;
   text-align: center;
+}
+
+.singleDisplay{
+  padding: 20rpx 20rpx 20rpx 10rpx;
+  font-size: 24rpx;
+  text-align: left;
+}
+.singleDisplay_scroll{
+  width: 100%;
+  min-height: 140rpx;
+  white-space: nowrap;
+  margin-bottom: 15rpx;
+  text-align: left;
+}
+.sD_s_eve{
+  width: 150rpx;
+  min-height:90rpx;
+  margin-right: 10rpx;
+  border-radius: 15rpx;
+  display: inline-block;
+  background: #fff;
+  vertical-align: top;
+}
+.sD_s_eve_img{
+  width: 100%;
+  display: block;
+  border-radius: 15rpx 15rpx 0 0;
+}
+.sD_s_eve_tit{
+  font-size: 20rpx;
+  width: 100%;
+  text-align: center;
+  height: 50rpx;
+  line-height: 50rpx;
+}
+
+.cardBox{
+  width:600rpx;height:800rpx;background:white;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;font-size:25rpx;padding:20rpx;border-radius:10rpx;
+}
+.cardBox_one{
+  border-bottom:2rpx solid #E8E8E8;
+  padding: 15rpx 0;
+}
+.cardBox_one_get{
+  width: 100%;
+  padding:15rpx 0;
+  font-size: 24rpx;
+}
+
+.vipbox{
+  width: 100%;
+  height: 70rpx;
+  line-height: 70rpx;
+  background:#E6CC8F;
+  background-image: linear-gradient(to bottom right, #FFFFDE , #FFBE3E);
+  position: relative;
+  font-size: 22rpx;
+  border-radius: 70rpx;
+  color: #fff;
+}
+.vipbox text{
+  /* margin-left: 40rpx; */
+  color: #B95B06;
+}
+.vipButOpen{
+  width: 166rpx;
+  height: 46rpx;
+  line-height: 46rpx;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 20rpx;
+  margin:auto;
+  background-color: #fff;
+  color: #C38925;
+  z-index: 1;
+  border-radius: 46rpx;
+}
+.crownIcon{
+  width: 40rpx;
+  height: auto;
+  margin-left: 34rpx;
+  margin-right: 10rpx;
+}
+
+.cardBox_exchange_top{
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color:#E94F57;
+}
+.cardBox_exchange_but{
+  width: 220rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  color: #fff;
+  text-align: center;
+  background:#73985A;
+  margin:10rpx auto;
+  border-radius: 60rpx;
+}
+.cardBox_com_but{
+  width: 340rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  color: #fff;
+  text-align: center;
+  background:#E94F57;
+  border-radius: 60rpx;  
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 40rpx;
+  margin: auto;
+  font-size: 26rpx;
+}
+
+.digitalTips{
+  width:30rpx;height:30rpx;border-radius:17rpx;border:2rpx solid #ff6968;position:absolute;top:-18rpx;right:-18rpx;color:#ff6968;text-align:center;line-height:30rpx;font-size:18rpx;
+}
+
+.perUpImgLeft{
+  float:left;
+  width: 220rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  color: #fff;
+  text-align: center;
+  background: #73985A;
+  margin-left:50rpx;
+  border-radius: 60rpx;
+  padding: 10rpx 0;
+
+}
+.perUpImgLeft_img{
+  width:40rpx;height:40rpx;display:inline-block;vertical-align:top;margin-right:6rpx;
+}
+
+.cardBox_com_beve{
+  width: 100%;
+  height: 100%;
+}
+
+.cardTipBox{
+  width:110rpx;position:absolute;top:0;right:0;
+}
+.cardTipBoxImg{
+  width: 100%;
+  position: relative;
+}
+.cardTipBoxImg image{
+  width:70rpx;height:70rpx;
+  display: block;margin: auto;
+}
+.cardTipBoxTxt{
+  font-size:25rpx;
+  text-align: center;
+  padding:5rpx 0 10rpx 0;
 }

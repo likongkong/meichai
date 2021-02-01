@@ -401,7 +401,12 @@ Page({
             // 品牌id
             // var eldataclass = res.data.List.brand || [];
             // 品牌ip
-            var brandArr = listData.brandArr || [];
+            if(_this.data.brandArr && _this.data.brandArr.length !=0 ){
+              var brandArr = _this.data.brandArr || [];
+            }else{
+              var brandArr = listData.brandArr || [];
+            };
+            
             var ipArr = listData.ipArr || [];
             // 是否显示弹框
             if(_this.data.jumpBulletBox){
@@ -692,9 +697,9 @@ Page({
   },
 
   onShow: function() {
-    this.setData({
-      pid: 0,
-    })
+    // this.setData({
+    //   pid: 0,
+    // })
     var _this = this;
     _this.data.loginid = app.signindata.loginid;
     _this.data.openid = app.signindata.openid;

@@ -322,13 +322,15 @@ Page({
         if (num == 0) {
           _this.setData({
             eldatalist: listdata,
-            nodataiftr: true
+            nodataiftr: true,
+            jurisdiction:res.data.Info.jurisdiction || false
           });
         } else {
           var ltlist = _this.data.eldatalist.concat(listdata);
           _this.setData({
             eldatalist: ltlist,
-            nodataiftr: true
+            nodataiftr: true,
+            jurisdiction:res.data.Info.jurisdiction || false
           });
         };
       }else{
@@ -336,7 +338,8 @@ Page({
       }
  
     });
-  },  
+  }, 
+
   // 打卡列表
   mctslistfun(num){
     var _this = this;
@@ -676,6 +679,7 @@ Page({
       cat_id: _this.data.cat_id,
       topic_id: _this.data.topic_id
     }, function(res) {
+      console.log('=======',res)
       var listdata = res.data.List || [];
       if (listdata.length != 0) {
         for (var i = 0; i < listdata.length; i++) {
@@ -706,8 +710,43 @@ Page({
           nodataiftr: true
         });
       };
+      if(res.data.Info){
+          _this.setData({
+            jurisdiction:res.data.Info.jurisdiction || false
+          })
+      }
     });
   },
+  // 删除
+  givenDetail:function(e){
+    var drying_id = e.currentTarget.dataset.drying_id;
+    var index = e.currentTarget.dataset.index || 0;
+    var _this = this;
+    wx.showModal({
+      content: '您确定要删除吗？',
+      success: function(res) {
+        if (res.confirm) {
+          Pub.postRequest(_this, 'rootdeldrying', {
+            uid: _this.data.uid,
+            loginid: _this.data.loginid,
+            drying_id: drying_id ||'',
+            vcode:app.signindata.versionnumber
+          }, function (res) {
+            console.log('删除数据===',res);
+            var listdata = _this.data.listdata || [];
+            listdata.splice(index, 1);
+            _this.setData({
+              listdata:listdata
+            });
+            app.showToastC('删除成功');
+       
+          });
+        }else{
+
+        }
+      }
+    })
+  }, 
   onReady: function() {},
 
   onShow: function() {},
