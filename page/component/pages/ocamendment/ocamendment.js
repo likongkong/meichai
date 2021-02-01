@@ -60,7 +60,8 @@ Page({
     wholedata:0,
     wholebrand:[],
     wholenewsSeries:[],
-    infodata:''
+    infodata:'',
+    timeOfDay:'time='+(new Date()).getDate()
   },
   wholeeverybodbuy:function(){
     this.setData({
