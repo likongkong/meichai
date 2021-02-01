@@ -182,9 +182,10 @@
                 </view>
             </view>
         </block>
-
-        <view class='addressmodify' wx:if='{{comdata.canChangedAddress&&comdata.status!=20}}'>注:每个订单只可修改一次收货地址<view
-                class='modifaddclick' catchtap='modaddfun'>修改地址</view>
+ 
+        <view class='addressmodify' wx:if='{{comdata.canChangedAddress&&comdata.status!=20}}'>
+            <block wx:if='{{comdata.province!=0 || comdata.city!=0 || comdata.district!=0 || comdata.address!=0}}'>注:每个订单只可修改一次收货地址<view class='modifaddclick' catchtap='modaddfun'>修改地址</view></block>
+            <block wx:else>注:每个订单只可添加一次收货地址<view class='addmodifaddclick' catchtap='modaddfun'>添加地址</view></block>
         </view>
 
         <view wx:if='{{comdata.order_type==7&&comdata.status==2}}' class='boxch'>
@@ -1561,6 +1562,7 @@
                 data-consignee='{{item.consignee}}' data-phone='{{item.phone}}' catchtap='revisethereceivingaddress'>
                 <view class='recgaddnameleft'>{{item.consignee}}</view>
                 <view class='recgaddnameleft'>{{item.phone}}</view>
+                <view class="selectAddressBut">选择该地址</view>
             </view>
             <view class='recgadaddress' data-tipaid='{{item.aid}}' data-address='{{item.address}}'
                 data-province='{{item.province}}' data-city='{{item.city}}' data-district='{{item.district}}'
