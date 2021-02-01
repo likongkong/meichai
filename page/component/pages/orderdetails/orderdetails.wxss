@@ -550,6 +550,20 @@ page{
   margin: auto 0;
   border-radius: 6rpx;
 }
+.addmodifaddclick{
+  width: 120rpx;
+  height: 46rpx;
+  line-height: 46rpx;
+  text-align: center;
+  border: 2rpx solid #ff2742;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 30rpx;
+  margin: auto 0;
+  border-radius: 6rpx;  
+  color: #ff2742;
+}
 .addmodbox{
   padding: 0 40rpx;
   width: 520rpx;
@@ -637,6 +651,20 @@ page{
   text-align: center;
   padding: 20rpx;
 }
-
+.selectAddressBut{
+  width: 160rpx;
+  height: 50rpx;
+  background: #ff2742;
+  border-radius: 50rpx;
+  color: #fff;
+  text-align: center;
+  line-height: 50rpx;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 20rpx;
+  margin: auto;
+  font-size: 24rpx;
+}
 
 

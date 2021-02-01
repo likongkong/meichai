@@ -140,7 +140,7 @@
   max-height: 66rpx;
   color: #666;
   font-size: 22rpx;
-  width: 420rpx;
+  width: 400rpx;
 }
 .wholeconnum{
   height: 40rpx;
@@ -386,6 +386,16 @@
   position: relative;
   background: #fff;
 }
+.addressmodifyTxt{
+  height: 62rpx;
+  width: 240rpx;
+  font-size: 24rpx;
+  color: #a7a6a4;
+  position: relative;
+  background: #fff; 
+  float: left;
+  line-height: 30rpx;
+}
 .modifaddclick{
   width: 140rpx;
   height: 54rpx;
@@ -440,4 +450,19 @@
   left: 0;
   bottom: 0;
   z-index: 1;
+}
+.selectAddressBut{
+  width: 160rpx;
+  height: 50rpx;
+  background: #ff2742;
+  border-radius: 50rpx;
+  color: #fff;
+  text-align: center;
+  line-height: 50rpx;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 20rpx;
+  margin: auto;
+  font-size: 24rpx;
 }

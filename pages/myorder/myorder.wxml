@@ -548,6 +548,11 @@
                         <view class='wholebottomaddright sharebox redborcol' wx:if="{{item.order_type == 14 && !item.isToyCabinet && !isBlindBoxDefaultAddress}}" style='width: 160rpx;color:#42bd56;margin-right:10rpx;border:1rpx solid #42bd56;' catchtap="goAddress">
                             填写收货地址
                         </view>   
+                        <block wx:elif='{{item.order_type == 14 && item.canChangedAddress && item.status!=20}}'>
+                            <view class='addressmodifyTxt'>注:每个订单只可添加一次收货地址</view>
+                            <view class='wholebottomaddright sharebox redborcol' data-cartid="{{item.cart_id}}" style="margin-right:10rpx;" catchtap='modaddfun' >添加地址</view>
+                        </block>
+
         
                     </view>
 
@@ -588,7 +593,12 @@
 
                         <view class='wholebottomaddright sharebox redborcol' wx:if="{{item.order_type == 14 && !item.isToyCabinet && !isBlindBoxDefaultAddress}}" style='width: 160rpx;color:#42bd56;margin-right:10rpx;border:1rpx solid #42bd56;' catchtap="goAddress">
                             填写收货地址
-                        </view>  
+                        </view>
+                        <block wx:elif='{{item.order_type == 14 && item.canChangedAddress && item.status!=20}}'>
+                            <view class='addressmodifyTxt'>注:每个订单只可添加一次收货地址</view>
+                            <view class='wholebottomaddright sharebox redborcol' data-cartid="{{item.cart_id}}" style="margin-right:10rpx;" catchtap='modaddfun' >添加地址</view>
+                        </block>                        
+                                     
                         
                     </view>
 
@@ -612,7 +622,11 @@
 
                         <view class='wholebottomaddright sharebox redborcol' wx:if="{{item.order_type == 14 && !isBlindBoxDefaultAddress}}" style='width: 160rpx;color:#42bd56;margin-right:10rpx;border:1rpx solid #42bd56;' catchtap="goAddress">
                             填写收货地址
-                        </view>                    
+                        </view>     
+                        <block wx:elif='{{item.order_type == 14 && item.canChangedAddress && item.status!=20}}'>
+                            <view class='addressmodifyTxt'>注:每个订单只可添加一次收货地址</view>
+                            <view class='wholebottomaddright sharebox redborcol' data-cartid="{{item.cart_id}}" style="margin-right:10rpx;" catchtap='modaddfun' >添加地址</view>
+                        </block>                                       
                         
                     </view>
 
@@ -647,6 +661,13 @@
                             填写收货地址
                         </view>  
 
+                        <block wx:elif='{{item.order_type == 14 && item.canChangedAddress && item.status!=20}}'>
+                            <view class='addressmodifyTxt'>注:每个订单只可添加一次收货地址</view>
+                            <view class='wholebottomaddright sharebox redborcol' data-cartid="{{item.cart_id}}" style="margin-right:10rpx;" catchtap='modaddfun' >添加地址</view>
+                        </block>
+  
+
+
                     </view>
 
                     <!-- 0元购 status为2 进行中 -->
@@ -676,6 +697,11 @@
                         <view class='wholebottomaddright sharebox redborcol' wx:if="{{item.order_type == 14 && !item.isToyCabinet && !isBlindBoxDefaultAddress}}" style='width: 160rpx;color:#42bd56;margin-right:10rpx;border:1rpx solid #42bd56;' catchtap="goAddress">
                             填写收货地址
                         </view>
+                        <block wx:elif='{{item.order_type == 14 && item.canChangedAddress && item.status!=20}}'>
+                            <view class='addressmodifyTxt'>注:每个订单只可添加一次收货地址</view>
+                            <view class='wholebottomaddright sharebox redborcol' data-cartid="{{item.cart_id}}" style="margin-right:10rpx;" catchtap='modaddfun' >添加地址</view>
+                        </block>
+
                     </view>
 
                     <!--  等待收货  --> 
@@ -788,36 +814,30 @@
          </view>
          
         <view wx:if='{{item.order_type==6}}' style='font-size:26rpx;'>
-
             <view class='wholebottomadd' wx:if='{{item.status == 18}}'>
-                
-               <view wx:if='{{item.purchase_price==item.amount}}' style='color:#fff;font-size:26rpx;width:140rpx;height:54rpx;line-height:54rpx;text-align:center;background:#67BCEB;float:right;border-radius:10rpx;margin-left:10rpx;' data-ordersn='{{item.gifts_order}}' catchtap='gobargainDetail'>
+            <view wx:if='{{item.purchase_price==item.amount}}' style='color:#fff;font-size:26rpx;width:140rpx;height:54rpx;line-height:54rpx;text-align:center;background:#67BCEB;float:right;border-radius:10rpx;margin-left:10rpx;' data-ordersn='{{item.gifts_order}}' catchtap='gobargainDetail'>
                 继续邀请
-              </view>
-              <view wx:else style='color:#fff;font-size:26rpx;width:140rpx;height:54rpx;line-height:54rpx;text-align:center;background:#F9363C;float:right;border-radius:10rpx;margin-left:10rpx;' data-ordersn='{{item.gifts_order}}' catchtap='gobargainDetail'>
+            </view>
+            <view wx:else style='color:#fff;font-size:26rpx;width:140rpx;height:54rpx;line-height:54rpx;text-align:center;background:#F9363C;float:right;border-radius:10rpx;margin-left:10rpx;' data-ordersn='{{item.gifts_order}}' catchtap='gobargainDetail'>
                 邀请砍价
-              </view>
-              <view wx:if='{{item.purchase_price==item.amount}}' style='color:#fff;font-size:26rpx;width:160rpx;height:54rpx;line-height:54rpx;text-align:center;background:#FF9900;float:right;border-radius:10rpx;margin-left:10rpx;' data-ordersn='{{item.gifts_order}}' catchtap='gobargainDetail'>
+            </view>
+            <view wx:if='{{item.purchase_price==item.amount}}' style='color:#fff;font-size:26rpx;width:160rpx;height:54rpx;line-height:54rpx;text-align:center;background:#FF9900;float:right;border-radius:10rpx;margin-left:10rpx;' data-ordersn='{{item.gifts_order}}' catchtap='gobargainDetail'>
                 ￥{{item.purchase_price}}购买
-              </view>
- 
             </view>
-
+            </view>
             <view class='wholebottomadd' wx:if='{{item.status == 0}}'>
-                
-              <view style='color:#fff;font-size:26rpx;width:160rpx;height:54rpx;line-height:54rpx;text-align:center;background:#F9363C;float:right;border-radius:10rpx;margin-left:10rpx;' data-ordersn='{{item.gifts_order}}' catchtap='gobargainDetail'>
+            <view style='color:#fff;font-size:26rpx;width:160rpx;height:54rpx;line-height:54rpx;text-align:center;background:#F9363C;float:right;border-radius:10rpx;margin-left:10rpx;' data-ordersn='{{item.gifts_order}}' catchtap='gobargainDetail'>
                 ￥{{item.amount}}领取
-              </view>
- 
             </view>
-
+            </view>
             <view class='wholebottomadd' wx:if='{{item.status == 4 || item.status == 5}}'>
-                
-              <view class='wholebottomaddright' style='margin-right:20rpx;position: relative;' data-oid='{{item.oid}}' data-gcover='{{item.gcover}}' bindtap='lookatthelogistics'>查看物流</view>
- 
+            <view class='wholebottomaddright' style='margin-right:20rpx;position: relative;' data-oid='{{item.oid}}' data-gcover='{{item.gcover}}' bindtap='lookatthelogistics'>查看物流</view>
             </view>
-          </view>
-            <view class='addressmodify' wx:if='{{item.canChangedAddress && item.status!=20}}'>注:每个订单只可修改一次收货地址<view class='modifaddclick' catchtap='modaddfun' data-cartid="{{item.cart_id}}" >修改地址</view></view>
+        </view>
+
+
+
+        <!-- <view class='addressmodify' wx:if='{{item.canChangedAddress && item.status!=20}}'>注:每个订单只可添加一次收货地址<view class='modifaddclick' catchtap='modaddfun' style="border:1rpx solid #ff2840;color:#ff2840;" data-cartid="{{item.cart_id}}" >添加地址</view></view> -->
          </view>
 
          <view  style='line-height:40rpx;color:#666;text-align:center;font-size:25rpx;margin-top:20rpx;' catchtap='jumpgoodsthings'>
@@ -975,6 +995,7 @@
       <view class='recgaddname' data-tipaid='{{item.aid}}' data-address='{{item.address}}' data-province='{{item.province}}'  data-city='{{item.city}}' data-district='{{item.district}}' data-consignee='{{item.consignee}}' data-phone='{{item.phone}}' catchtap='revisethereceivingaddress1'>
         <view class='recgaddnameleft'>{{item.consignee}}</view>
         <view class='recgaddnameleft'>{{item.phone}}</view>
+        <view class="selectAddressBut">选择该地址</view>
       </view>
       <view class='recgadaddress' data-tipaid='{{item.aid}}' data-address='{{item.address}}' data-province='{{item.province}}'  data-city='{{item.city}}' data-district='{{item.district}}' data-consignee='{{item.consignee}}' data-phone='{{item.phone}}' catchtap='revisethereceivingaddress1'>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
       <view class='recgadbottom'>
