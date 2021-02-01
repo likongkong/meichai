@@ -150,8 +150,11 @@ Page({
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
           app.showToastC(res.data.Msg)
+          var pages = getCurrentPages();
+          var prevPage = pages[pages.length - 2]; //上一个页面
+          prevPage.onLoadfun();
           setTimeout(function(){
-            _this.getInfo();
+            wx.navigateBack()
           },1500)
         }else{
           app.showToastC(res.data.Msg)
