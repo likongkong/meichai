@@ -131,7 +131,7 @@ Page({
         duration: 1000
       })
       return false;
-    }else if(this.data.infoData.refundPrice >=0 && this.data.refundOrderInputValue == ''){
+    }else if(!this.data.isTwoConfirmBox && this.data.infoData.refundPrice >=0 && this.data.refundOrderInputValue == ''){
       this.setData({
         isTwoConfirmBox: true,
       });
@@ -149,6 +149,9 @@ Page({
         console.log('提交====',res)
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
+          _this.setData({
+            isTwoConfirmBox: false,
+          });
           app.showToastC(res.data.Msg)
           var pages = getCurrentPages();
           var prevPage = pages[pages.length - 2]; //上一个页面
