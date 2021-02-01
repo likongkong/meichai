@@ -42,33 +42,34 @@
       退款信息
     </view>
     <view class="refundReason refundflex" catchtap="{{infoData.auditRefund != 2?'reasonFun':''}}">
-      <view style="width:180rpx;">退款原因<text>*</text></view>
+      <view style="width:200rpx;">退款原因<text>*</text></view>
       <block wx:if="{{infoData.auditRefund == 2}}">
-        <view wx:for="{{refundType}}" wx:key='key' wx:if="{{item.type_id == infoData.refund_cause}}">{{item.type_name}}</view>
+        <view style="color:#000;" wx:for="{{refundType}}" wx:key='key' wx:if="{{item.type_id == infoData.refund_cause}}">{{item.type_name}}</view>
       </block>
       <block wx:else>
         <view style="{{checkedObj?'color:#000;':''}}"> {{checkedObj?checkedObj.name:'请选择  >'}}</view>
       </block>
     </view>
     <view class="refundAmount refundflex">
-      <view style="width:180rpx;">退款金额<text>*</text></view>
+      <view style="width:200rpx;">退款金额<text>*</text></view>
       <view> 
         <block wx:if="{{infoData.refundPrice >= 0 }}"> <text>{{infoData.refundPrice}}元(赠品寄回退款{{infoData.amount}}元)</text> </block> <block wx:else><text>{{infoData.amount}}元</text></block>
       </view>
     </view>
+
     <block wx:if="{{infoData.auditRefund == 1}}"> 
       <view class="refundOrderNumber refundflex" wx:if="{{infoData.refundPrice != -1}}">
-        <view style="width:180rpx;">寄回快递单号</view>
+        <view style="width:200rpx;">寄回快递单号</view>
         <view> 
             <input type="text" placeholder="商品寄回请填写快递单号" placeholder-style="color: #8E8C8D;" focus="{{refundOrderfocus}}" bindinput="bindKeyInput"/>
         </view>
       </view>
     </block> 
     <block wx:else>
-      <view class="refundOrderNumber refundflex" wx:if="{{infoData.auditRefund == 2 && infoData.giftShipping}}">
-        <view>寄回快递单号</view>
+      <view class="refundOrderNumber refundflex">
+        <view style="width:200rpx;">寄回快递单号</view>
         <view> 
-            <input type="text" placeholder="{{infoData.giftShipping}}" placeholder-style="color: #000;" disabled="true"/> 
+            <input type="text" placeholder="{{infoData.giftShipping?infoData.giftShipping:'未填写'}}" placeholder-style="color: #000;" disabled="true"/> 
         </view>
       </view>
     </block>
