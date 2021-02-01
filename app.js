@@ -1247,6 +1247,7 @@ App({
 
 // priorityVoting  优先权抽选
 // luckyDraw  抽奖活动
+// entityLuckyDraw  实物刮刮卡
 // idCardVerification 身份证验证
 
 // canvasRoute 路径 canvas 展会画路径
