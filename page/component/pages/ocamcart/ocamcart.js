@@ -244,7 +244,9 @@ Page({
               shopdetail = res.data.Info.role || ''
             };
             _this.setData({
-              shopdetail: shopdetail
+              shopdetail: shopdetail,
+              skipNeedId:res.data.Info.skipNeedId || 0,
+              skipType:res.data.Info.skipType || 0
             });
           };
           
@@ -1064,6 +1066,26 @@ Page({
     wx.navigateTo({
       url: "/page/component/pages/myothertoydg/myothertoydg?ownerId=" + ownerid
     });
+  },
+  jumpAreward:function(){
+    // 跳转类型 0不显示 1抽盒机 2一番赏
+    var _this = this;
+    var skipType = _this.data.skipType || 0;
+    var skipNeedId = _this.data.skipNeedId || 0;
+    if(skipType == 1){
+        if(skipNeedId !=0 ){
+           app.comjumpwxnav(9005,skipNeedId,'','')
+        }else{
+           app.comjumpwxnav(988,'','','')
+        };
+    }else if(skipType == 2){
+        if(skipNeedId !=0 ){
+          app.comjumpwxnav(9016,skipNeedId,'','')
+        }else{
+          app.comjumpwxnav(9015,'','','')
+        };
+    }
+
   }
 
 

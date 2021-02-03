@@ -342,7 +342,7 @@ page{
   top: 0;
   left: 0;
   background: #101010;
-  z-index: 100;
+  z-index: 20;
   opacity: 0;
 }
 .getPhoneNumberMask button{

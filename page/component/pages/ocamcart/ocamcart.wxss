@@ -44,7 +44,14 @@ page{
   display: inline-block;
   line-height: 40rpx;
 }
-
+.jumpAreward{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height:60rpx;line-height:60rpx;
+  font-size:24rpx;
+  color:#1890ff;
+}
 
 
 

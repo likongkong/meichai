@@ -216,14 +216,17 @@ App({
                   // 是否能进入一番赏
                   _this.signindata.isYiFanShang = res.data.Info.function?res.data.Info.function.isYiFanShang:false;                  
                   // 透视卡倒计时
-                  _this.signindata.perspcardata = res.data.Info.tempChance.length != 0 ? res.data.Info.tempChance[0].over_time || '' : '';
+                  if(res.data.Info.tempChance){
+                      _this.signindata.perspcardata = res.data.Info.tempChance.length != 0 ? res.data.Info.tempChance[0].over_time || '' : '';
+                  };
 
                   _this.signindata.automat = res.data.Info.automat ? res.data.Info.automat : { isOpen: false, times: 0, title: "" };
                   _this.signindata.automattitle = res.data.Info.automat ? res.data.Info.automat.title : '';
 
                   _this.signindata.notAllowShareGoodsId = res.data.Info.notAllowShareGoodsId || [];
-                  
-                  _this.signindata.isBlindBoxDefaultAddress = res.data.Info.address.isBlindBoxDefaultAddress || false;
+                  if(res.data.Info.address){
+                    _this.signindata.isBlindBoxDefaultAddress = res.data.Info.address.isBlindBoxDefaultAddress || false;
+                  };
 
                   if (res.data.Info.store) {
                     _this.signindata.store_id = res.data.Info.store.store_id || 0;

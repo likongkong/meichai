@@ -77,7 +77,7 @@ Page({
     isweekend:false,
     isweekendtip:false,
     businesscooperation:false,
-    cliptxt:'zhangjing@51chaidan.com',
+    cliptxt:'pili@51chaidan.com',
     awasustipimages:false,
     luckyValue:0,
     // 抽盒金

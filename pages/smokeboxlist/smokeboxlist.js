@@ -594,7 +594,7 @@ Page({
             isnoautomat:false,
             is_isdirectshipping:false
           })
-        }
+        } 
       }else if(isnoautomat){
           this.setData({
             gid: gid,
@@ -657,6 +657,7 @@ Page({
         if (res.data.ReturnCode == 200) {
           _this.setData({
             boastlist: res.data.List.record,
+            // isRedPackage:res.data.Info.isRedPackage || false
           })
         }
       },
