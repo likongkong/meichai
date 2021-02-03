@@ -617,7 +617,9 @@ Page({
           });
           app.showToastC('获取手机号成功');
         }else{
-          app.showToastC(res.data.Msg||'');
+          if(res.data.Msg){
+            app.showToastC(res.data.Msg||'');
+          };
         };
       },
       fail: function(res) {

@@ -71,14 +71,16 @@
 
 	</view>
 
+<view class="topShareBox" style="top:{{hideheight+100}}rpx;"><image class="topShareBoxImg" src="https://cdn.51chaidan.com/images/spread/blindBoxShare.png"></image><button style='width:100%;height:100%;position:absolute;top:0;left:0;opacity:0;' open-type='share'></button>分享</view>
+
   <block>
-			<view wx:if='{{whole_boxGift}}' style="width:95rpx;position:absolute;top:{{hideheight+100}}rpx;right:10rpx;z-index:1;" catchtap="collectchip">
+			<view wx:if='{{whole_boxGift}}' style="width:95rpx;position:absolute;top:{{hideheight+160}}rpx;right:10rpx;z-index:1;" catchtap="collectchip">
 				<view style="position:relative;">
 					<image style="width:75rpx;width:75rpx;margin-left:10rpx;display: block;border-radius:6rpx;" mode="widthFix" src='{{wholeBoxGiftImg}}'></image>
 				</view>
 				<view style="color:#FF9800;text-align:center;font-size:20rpx;font-weight:bold;"><text>端盒送</text></view>
 			</view>
-			<view wx:elif='{{isOpenLine}}' style="width:95rpx;position:absolute;top:{{hideheight+100}}rpx;right:10rpx;z-index:1;" catchtap="{{(isDirectOpenWholeBox&&!isDeduct) || (isDirectOpenWholeBox&&isDeduct&&activity.userBlindBoxAmount==0) ? 'wholebox' : 'collectchip'}}">
+			<view wx:elif='{{isOpenLine}}' style="width:95rpx;position:absolute;top:{{hideheight+160}}rpx;right:10rpx;z-index:1;" catchtap="{{(isDirectOpenWholeBox&&!isDeduct) || (isDirectOpenWholeBox&&isDeduct&&activity.userBlindBoxAmount==0) ? 'wholebox' : 'collectchip'}}">
 				<image style="width:75rpx;width:75rpx;margin-left:10rpx;border-radius:6rpx;" mode="widthFix" src='{{activity.wholeBoxTitle?definePicture.wholeBoxImg:wholeBoxImg}}'></image>
 				<view style="color:#FF9800;text-align:center;font-size:20rpx;font-weight:bold;">
 				  <text wx:if='{{activity.wholeBoxTitle}}'>{{activity.wholeBoxTitle}}</text>
@@ -87,7 +89,8 @@
 			</view>	
 	</block>
 
-	<view wx:if='{{welfare.length > 0}}' catchtap="{{welfare[0].welfareType == 2?'hidepackage':'showBlindboxPacket'}}" style='width:95rpx;position:absolute;right:5rpx;top:{{hideheight+240}}rpx;z-index:9;'>
+
+	<view wx:if='{{welfare.length > 0}}' catchtap="{{welfare[0].welfareType == 2?'hidepackage':'showBlindboxPacket'}}" style='width:95rpx;position:absolute;right:5rpx;top:{{hideheight+310}}rpx;z-index:9;'>
 		<block wx:if="{{welfare[0].welfareType == 2}}">
 			<view class="tabshopimg specialellipsis" style="top:-8rpx;left:56rpx;" wx:if='{{welfare&&welfare.length!=0&&welfare.length!=1}}'>{{welfare.length}}</view>
 			<image src='http://www.51chaidan.com/images/blindBox/doublePackage.png' style='width:75rpx;height:75rpx;display:block;git margin-left:10rpx;'></image>

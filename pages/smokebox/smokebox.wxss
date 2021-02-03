@@ -1022,7 +1022,6 @@ margin-top: 20rpx;
   padding:5rpx 0 10rpx 0;
 }
 
-
 .blindboxPacket .txt1{
   position:absolute;
   text-align:center;
@@ -1067,4 +1066,27 @@ margin-top: 20rpx;
   bottom: 50rpx;
   font-size:28rpx;
   color: #F2B95F;
+}
+.topShareBox{
+  width: 57rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  padding-left: 50rpx;
+  background: rgba(0,0,0,.5);
+  position: absolute;
+  right: 0;
+  border-radius: 50rpx 0 0 50rpx;
+  z-index: 3;
+  font-size: 24rpx;
+  color: #fff;
+}
+
+.topShareBoxImg{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 10rpx;
+  margin: auto;
+  width: 36rpx;
+  height: 36rpx;
 }

@@ -185,4 +185,4 @@
 <view wx:if='{{suboformola}}' style='width:100%;height:100%;background:#000;opacity: 0;z-index: 1999;position: fixed;top: 0;left: 0;'></view>
 <!--  授权弹框  -->
 <tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
-<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight}}px;width: 100%;z-index: 30;' catchtap='pullupsignin'></view>
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight}}px;width: 100%;z-index: 300;' catchtap='pullupsignin'></view>

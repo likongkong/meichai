@@ -138,8 +138,8 @@
 	</view>
 </view>
 
-
-<view class="getPhoneNumberMask" catchtouchmove="true" wx:if="{{!is_mobile_phone}}">
+ 
+<view class="getPhoneNumberMask" style="top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;" catchtouchmove="true" wx:if="{{!is_mobile_phone}}">
   <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"></button>
 </view>
 
