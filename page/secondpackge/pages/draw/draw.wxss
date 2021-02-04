@@ -10,20 +10,15 @@ page{
   padding-bottom: 230rpx;
 }
 
+.drawTop{
+  width: 100%;
+}
 .banner{
   width: 100%;
   height: 400rpx;
   position:relative;
+  background: #fff;
 }
-/* .banner::after{
-  content:'在线抽盒机';
-  position:absolute;
-  bottom:10rpx;
-  right:30rpx;
-  font-size:28rpx;
-  color:#E94F57;
-  text-decoration:underline;
-} */
 .banner view{
   width: 186rpx;
   height: 70rpx;
@@ -37,6 +32,14 @@ page{
   color: #fff;
   font-size: 30rpx;
 }
+.banner swiper{
+  width: 100%;
+  height: 400rpx !important;
+}
+.banner swiper-item{
+  width: 100%;
+  height: 400rpx !important;
+}
 .banner image{
   width: 100%;
   height: 400rpx;
@@ -44,283 +47,41 @@ page{
   top: 0;
   left: 0;
 }
-.exchangeWrap{
-  width: 700rpx;
-  height: 65rpx;
-  /* border-radius: 5px;
-  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.4); 
+.dTTxtBox{
+  padding: 20rpx 20rpx 10rpx 20rpx;
+  background: #fff;
+}
+.dTTxtBox>view{
+  width: 100%;
+  font-size: 26rpx;
+  padding-bottom: 15rpx;
+}
+.dTImgBox{
+  width:100%;
+  margin: auto;
+}
+.dTImgBox image{
+  display: inline-block;
+  width:170rpx;
+  height:170rpx;
+  vertical-align: top;
   position: relative;
-  overflow: hidden; */
-  margin: 25rpx 25rpx 0 25rpx;
 }
-.exchangeBg{
-  width: 720rpx;
-  height: 384rpx;
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: .4;
-  z-index: -1;
-}
-.exchangeInputWrap{
-  width: 100%;
-  height: 80rpx;
-  background: #fff;
-  /* margin: 65rpx 70rpx 0; */
-  /* border: 2rpx solid rgba(187, 187, 187, 100); */
-  border-radius: 10rpx;
-  background: rgba(255,255,255,.7);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.exchangeInputWrap input{
-  width: 400rpx;
-  height: 80rpx;
-  font-size: 28rpx;
-  padding-left: 30rpx;
-  box-sizing: border-box;
-  font-weight: bold;
-}
-.exchangeInputBox{
-  color: #C7C7C7;
-}
-.exchangeInputWrap view{
-  width: 135rpx;
-  height: 62rpx;
+
+.cvSavePicButcom{
+  width: 470rpx;
+  height: 70rpx;
+  line-height: 70rpx;
   background: #E94F57;
-  border-radius: 10rpx;
-  text-align: center;
-  line-height: 62rpx;
-  font-size: 28rpx;
-  color: #fff;
-  margin: 0 14.5rpx;
-}
-.ticketNum{
-  width: 300rpx;
-  height: 55rpx;
-  background: #E8E8E8;
-  border-radius: 55rpx;
-  color: #666666;
-  font-size: 26rpx;
-  text-align: center;
-  line-height: 55rpx;
-  display: block;
-  margin: 20rpx auto 0;
-}
-.drawBtn1{
-  width: 580rpx;
-  height: 65rpx;
-  background: #E94F57;
-  border-radius: 10rpx;
-  text-align: center;
-  line-height: 65rpx;
-  font-size: 26rpx;
-  color: #fff;
-  margin: 65rpx auto 0;
-}
-.awardWrap1{
-  width: 690rpx;
-  margin: 0 30rpx;
-}
-.TopBox{
-  width: 100%;
-  height: 60rpx;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  border-radius: 70rpx;
+  color: #000;
   font-size: 24rpx;
-  margin-top: 40rpx;
-}
-.TopBox text{
-  height: 60rpx;
-  display: inline-block;
-  line-height: 60rpx;
-}
-.awardWrapBox{
-  width: 620rpx;
-  margin: 20rpx auto 0;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap:wrap;
-}
-.awardWrapBox>view{
-  width: 190rpx;
-  box-shadow: 0px 4rpx 12rpx 0px rgba(0, 0, 0, 0.4);
-  display: inline-block;
-  border-radius: 10rpx;
-  margin-bottom: 15rpx;
-  overflow: hidden;
-}
-.awardImg{
-  width: 100%;
-  height: 190rpx;
-  border-bottom-right-radius: 10rpx;
-  border-bottom-left-radius: 10rpx;
-  display: block;
-}
-.awardWrapBox>view view{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80rpx;
-}
-.awardWrapBox>view view text{
-  color: #101010;
-  font-size: 22rpx;
-  padding: 0 10rpx;
-  box-sizing: border-box;
   text-align: center;
-}
-.drawRecordWrap{
-  width: 690rpx;
-  margin: 0 30rpx;
-}
-.drawRecordItem{
-  border-bottom: 2rpx solid #E8E8E8;
-  padding: 20rpx 0;
-}
-.drawRecordItem:last-child{
-  border-bottom: none;
-}
-.drawRecordItemFlex{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.drawRecordItemT{
-  margin-bottom: 10rpx;
-}
-.drawRecordItemT view{
-  color: #666;
-  font-size: 22rpx;
-}
-.drawRecordItemB view{
-  font-size: 22rpx;
-  color: #101010;
-}
-
-.prizeBtn{
   position: fixed;
-  left: 50%;
-  bottom: 120rpx;
-  margin-left: -295rpx;
-  width: 580rpx;
-  height: 65rpx;
-  background: #E94F57;
-  border-radius: 65rpx;
-  text-align: center;
-  line-height: 65rpx;
-  font-size: 26rpx;
-  color: #fff;
-}
-
-
-
-.winningPopupMask{
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,.5);
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 12;
-}
-.winningBox{
-  width: 550rpx;
-  margin:auto;
-  z-index: 3;
-  background: #fff;
-  border-radius: 15rpx;
-  padding-bottom: 45rpx;
-}
-.winningBoxTitle{
-  display: block;
-  text-align: center;
-  color: #101010;
-  font-size: 26rpx;
-  margin-top: 54rpx;
-}
-.winningImg{
-  width: 170rpx;
-  height: 170rpx;
-  border-radius: 10rpx;
-  overflow: hidden;
-  margin: 23rpx auto 0;
-}
-.winningImg image{
-  width: 170rpx;
-  height: 170rpx;
-}
-.winningTxt{
-  margin-top: 33rpx;
-}
-.winningTxt text{
-  color: #101010;
-  font-size: 26rpx;
-  display: block;
-  text-align: center;
-  margin-bottom: 10rpx;
-}
-.winningBtnWrap{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 40rpx;
-}
-.winningBtnWrap text{
-  width: 230rpx;
-  height: 65rpx;
-  background: #E94F57;
-  text-align: center;
-  line-height: 65rpx;
-  font-size: 28rpx;
-  border-radius: 65rpx;
-  color: #fff;
-  margin: 0 10rpx;
-}
-
-.popupMask{
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,.5);
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 12;
-}
-.explainBox{
-  width: 600rpx;
-  height: 700rpx;
-  position: absolute;
-  top: 0;
+  bottom:120rpx;
   left: 0;
   right: 0;
-  bottom: 0;
-  margin:auto;
-  z-index: 3;
-  background: #fff;
-  border-radius: 15rpx;
-}
-.explainBoxHead{
-  width: 100%;
-  font-size: 26rpx;
-  padding-top: 40rpx;
-  height: 50rpx;
-  text-align: center;
-}
-.callscroll{
-  width: 100%;
-  height: 570rpx;
-}
-.callscrollTxt{
-  padding:0 40rpx;
-  font-size: 24rpx;
-  display: block;
+  margin: auto;
+  z-index: 3;  
+  color:#fff;
 }

@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '抽奖', 
+    c_title: '福袋', 
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
@@ -22,9 +22,9 @@ Page({
     isShowSearch:false,
     receivingaddress:false,
     recordlistData:[],
-    inputValue:'',
     isWinning:false,
-    isReachBottom:true
+    isReachBottom:true,
+    list:['','','','','','','','','','','','','','','','','','',]
   },
 
   /**
@@ -44,7 +44,6 @@ Page({
       isProduce: app.signindata.isProduce,
     });  
     this.getInfo();
-    this.getDrawRecord();
     this.nextpagediao();
   },
   activsign: function () {
@@ -82,7 +81,7 @@ Page({
           })
           console.log()
           // '没有授权 统计'
-          app.userstatistics(48);
+          app.userstatistics(51);
           _this.onLoadfun();
         }
       }
@@ -155,7 +154,6 @@ Page({
    */
   onPullDownRefresh: function () {
     this.getInfo();
-    this.getDrawRecord();
     this.setData({
       isReachBottom: true,
       pid:0,
@@ -167,10 +165,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    if(this.data.isReachBottom){
-      this.data.pid = ++this.data.pid;
-      this.getDrawRecord();
-    }
+
   },
   clicktganone: function () {
     this.setData({ tgabox: false })
@@ -181,11 +176,6 @@ Page({
   onShareAppMessage: function () {
     var reshare = app.sharemc();
     return reshare
-  },
-  bindKeyInput: function (e) {
-    this.setData({
-      inputValue: e.detail.value
-    })
   },
   getInfo(){
     var _this = this;
@@ -215,178 +205,7 @@ Page({
       }
     }); 
   },
-  // 抽奖记录
-  getDrawRecord(){
-    var _this = this;
-    var pid = _this.data.pid;
-    wx.showLoading({ title: '加载中...'})
-    var q = Dec.Aese('mod=LuckyDraw&operation=LotteryRecordList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&pid=' + pid)
-    console.log('mod=LuckyDraw&operation=LotteryRecordList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&pid=' + pid)
-    wx.request({
-      url: app.signindata.comurl + 'spread.php'+q,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        console.log('抽奖记录======',res)
-        // 刷新完自带加载样式回去
-        wx.stopPullDownRefresh();
-        wx.hideLoading();
-        if (res.data.ReturnCode == 200) {
-          if(res.data.List.exchange_record_list.length<40){
-            _this.setData({
-              isReachBottom:false
-            })
-          }
-          for(var i = 0; i < res.data.List.exchange_record_list.length; i++){
-            res.data.List.exchange_record_list[i].yearMonthDay = _this.formatTimeTwo(res.data.List.exchange_record_list[i].update_stamp, 'Y年M月D日');
-            res.data.List.exchange_record_list[i].hourMinuteSecond = _this.formatTimeTwo(res.data.List.exchange_record_list[i].update_stamp, 'h：m');
-          }
-          var recordlistData = [..._this.data.recordlistData,...res.data.List.exchange_record_list];
-          _this.setData({
-            recordlistData
-          })
-        }
-      }
-    }); 
-  },
-  // 兑换奖券
-  getRaffleTicket(){
-    var cdkey = this.data.inputValue;
-    if(cdkey == ''){
-      app.showToastC('请输入兑换码');
-      return false;
-    }
-    var _this = this;
-    wx.showLoading({ title: '加载中...'})
-    var q = Dec.Aese('mod=LuckyDraw&operation=ForTickets&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&cdkey='+cdkey)
-    console.log('mod=LuckyDraw&operation=ForTickets&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&cdkey='+cdkey)
-    wx.request({
-      url: app.signindata.comurl + 'spread.php'+q,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        console.log('获取兑奖券======',res)
-        wx.hideLoading();
-        if (res.data.ReturnCode == 200) {
-          var willInfo = res.data.Info.willInfo;
-          var lastone = res.data.Info.lottery_record_lastone;
-          if(willInfo.isRealGift){
-            // _this.getInfo();
-            _this.setData({isShowWill:2,})
-          }
-          lastone.yearMonthDay = _this.formatTimeTwo(lastone.update_stamp, 'Y年M月D日');
-          lastone.hourMinuteSecond = _this.formatTimeTwo(lastone.update_stamp, 'h：m');
-          _this.data.recordlistData.unshift(lastone)
-          _this.setData({
-            recordlistData:_this.data.recordlistData,
-            isWinning:true,
-            willInfo:res.data.Info.willInfo,
-            inputValue:''
-          })
-        }else{
-          app.showToastC(res.data.Msg);
-        }
-      }
-    }); 
-  },
-  // 抽奖
-  drawAward(){
-    var _this = this;
-    _this.setData({isWinning:false})
-    return false;
-    wx.showLoading({ title: '加载中...'})
-    var q = Dec.Aese('mod=LuckyDraw&operation=PerformDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
-    console.log('mod=LuckyDraw&operation=PerformDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
-    wx.request({
-      url: app.signindata.comurl + 'spread.php'+q,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        console.log('抽奖======',res)
-        wx.hideLoading();
-        if (res.data.ReturnCode == 200) {
-          var willInfo = res.data.Info.willInfo;
-          var lastone = res.data.Info.lottery_record_lastone;
-          if(willInfo.isRealGift){
-            // _this.getInfo();
-            _this.setData({isShowWill:2,})
-          }
-          lastone.yearMonthDay = _this.formatTimeTwo(lastone.update_stamp, 'Y年M月D日');
-          lastone.hourMinuteSecond = _this.formatTimeTwo(lastone.update_stamp, 'h：m');
-          _this.data.recordlistData.unshift(lastone)
-          _this.setData({
-            recordlistData:_this.data.recordlistData,
-            isWinning:true,
-            willInfo:res.data.Info.willInfo
-          })
 
-          if(_this.data.chancenum>0){
-            _this.setData({
-              chancenum:--_this.data.chancenum
-            }) 
-          }
-          // _this.getDrawRecord();
-        }else{
-          app.showToastC(res.data.Msg);
-        }
-      }
-    }); 
-  },
-  // 领奖
-  acceptPrize(){
-    var _this = this;
-    wx.showLoading({ title: '加载中...'})
-    var q = Dec.Aese('mod=LuckyDraw&operation=award&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&aid=' + _this.data.tipaid)
-    console.log('mod=LuckyDraw&operation=award&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&aid=' + _this.data.tipaid)
-    wx.request({
-      url: app.signindata.comurl + 'spread.php'+q,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        console.log('领奖======',res)
-        wx.hideLoading();
-        if (res.data.ReturnCode == 200) {
-          app.showToastC(res.data.Msg);
-          for(var i = 0;i<_this.data.recordlistData.length;i++){
-            _this.data.recordlistData[i].is_reply = 2
-          }
-          _this.setData({
-            recordlistData:_this.data.recordlistData,
-            isWinning:false,
-            isShowWill:1
-          }) 
-        }else{
-          app.showToastC(res.data.Msg);
-        }
-      }
-    }); 
-  }, 
-  
-  showSearchFun(){
-    this.setData({
-      isShowSearch:!this.data.isShowSearch,
-    }); 
-  },
-
-  toogleWinningPopup(){
-    this.setData({
-      isWinning:!this.data.isWinning,
-    }); 
-  },
-
-  receivingaddressfun(){
-    this.setData({
-      receivingaddress:false,
-    }); 
-  },
-
-  // 领奖
-  getAward(){
-    var _this= this;
-    _this.setData({
-      receivingaddress:true
-    })
-  },
 
   // 下一页返回调取
   nextpagediao: function () {
@@ -515,39 +334,5 @@ Page({
     })
   },
 
-  // 跳转抽盒机列表
-  jumpPage(){
-    this.setData({isWinning:false})
-    wx.navigateTo({
-      url: "/pages/smokeboxlist/smokeboxlist"
-    })
-  },
-
-
-  formatNumber(n) {
-    n = n.toString()
-    return n[1] ? n : '0' + n
-  },
-  
-  /** 
-   * 时间戳转化为年 月 日 时 分 秒 
-   * number: 传入时间戳 
-   * format：返回格式，支持自定义，但参数必须与formateArr里保持一致 
-  */
-  formatTimeTwo(number, format) {
-    var formateArr = ['Y', 'M', 'D', 'h', 'm', 's'];
-    var returnArr = [];
-    var date = new Date(number * 1000);
-    returnArr.push(date.getFullYear());
-    returnArr.push(this.formatNumber(date.getMonth() + 1));
-    returnArr.push(this.formatNumber(date.getDate()));
-    returnArr.push(this.formatNumber(date.getHours()));
-    returnArr.push(this.formatNumber(date.getMinutes()));
-    returnArr.push(this.formatNumber(date.getSeconds()));
-    for (var i in returnArr) {
-      format = format.replace(formateArr[i], returnArr[i]);
-    }
-    return format;
-  },
 
 })

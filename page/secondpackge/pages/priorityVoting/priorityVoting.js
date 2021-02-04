@@ -202,7 +202,7 @@ Page({
           })
           console.log()
           // '没有授权 统计'
-          app.userstatistics(48);
+          app.userstatistics(50);
           _this.onLoadfun();
         }
       }
