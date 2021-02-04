@@ -26,18 +26,21 @@
     </block>
   </view> -->
   <view class="activityCountdown">
-    <view class="drawRule">抽奖规则</view>
+    <view class="drawRule" catchtap="toggleRuleFun">抽奖规则</view>
     <view class="drawCountdown">距离活动结束：{{commoddata.day}}<text>天</text>{{commoddata.hour}}<text>时</text>{{commoddata.minute}}<text>分</text>{{commoddata.second}}<text>秒</text></view>
-    <image src="https://clw.51chaidan.com//images/goods/share3.png" mode="widthFix"></image>
+    <view class="shareImg">
+      <image src="https://clw.51chaidan.com//images/goods/share3.png" mode="widthFix"></image>
+      <button style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' open-type="share"></button>
+    </view>
   </view>
 
   <view class="goodsInfo">
     <image class="goodsImg" src="https://clw.51chaidan.com//images/goods/share3.png" mode="widthFix"></image>
-    <view><text class="goodsName">labubu Swaver购买权</text></view> 
+    <view><text class="goodsName">{{goodsList.name}}</text></view> 
     <view><text class="goodsPrice">￥1599</text></view> 
-    <view><text class="goodsNum">剩余：1</text></view> 
-    <view><text class="drawNum">剩余刮刮卡：5（当日有效）</text></view> 
+    <view><text class="goodsNum">剩余：{{goodsList.name}}</text></view> 
   </view>
+  <view style="display: flex;justify-content: center;"><text class="drawNum">剩余刮刮卡：{{user.totalScratch}}（当日有效）</text></view> 
 
   <view class="drawWrap">
     <!-- <text class="drawCountdown"> 距离活动结束：{{commoddata.day}}<text>天</text>{{commoddata.hour}}<text>时</text>{{commoddata.minute}}<text>分</text>{{commoddata.second}}<text>秒</text> </text> -->
@@ -132,7 +135,7 @@
       
       
     </view>
-    <view style="margin-top:40rpx" wx:if="{{bindIdentity.length!=0}}">
+    <!-- <view style="margin-top:40rpx" wx:if="{{bindIdentity.length!=0}}">
       <text class="title">绑定信息</text>
       <view class="cardItem">
         <view class="cardItemTxtWrap">
@@ -142,7 +145,7 @@
         </view>
         <view class="cardItemBtn" catchtap="toggleidCardFun">更换</view>
       </view>
-    </view>
+    </view> -->
   </view>
 </view>
 
@@ -152,7 +155,7 @@
 
 
 
-<view class="idCardMask" wx:if="{{isidCardMask}}" catchtouchmove="true" catchtap="toggleidCardFun">
+<!-- <view class="idCardMask" wx:if="{{isidCardMask}}" catchtouchmove="true" catchtap="toggleidCardFun">
   <view class="idCardBoxWrap" catchtap="true">
     <scroll-view class="idCardScroll" scroll-y>
       <block wx:for="{{identity}}" wx:key="key" wx:for-index="idx">
@@ -175,7 +178,7 @@
       <text>绑定门票</text>
     </view>
   </view>
-</view>
+</view> -->
 
 
 

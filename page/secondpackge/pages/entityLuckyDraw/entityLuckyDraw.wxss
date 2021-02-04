@@ -647,12 +647,16 @@ page{
   display: inline-block;
   padding-left: 36rpx;
 }
-.activityCountdown image{
+.activityCountdown .shareImg{
   width: 44rpx;
   height: auto;
   position: absolute;
   top: 28rpx;
   right: 20rpx;
+}
+.shareImg image{
+  width: 100%;
+  height: auto;
 }
 .goodsInfo view{
   display: flex;

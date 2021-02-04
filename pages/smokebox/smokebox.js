@@ -257,7 +257,11 @@ Page({
     //显示状态 1为未开通 2为待领取 3为明日领取
     showVipStatus:1,
     // 提示卡片弹框
-    cueCardBox:false
+    cueCardBox:false,
+
+    // 抽盒金红包
+    isBlindboxPacketOne:false,
+    isBlindboxPacketTwo:false
 
   },
   boxBenefitsFun(event){
@@ -655,7 +659,7 @@ Page({
       title: '加载中...',
     })
     var q1 = Dec.Aese('mod=blindBox&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&gid=' + _this.data.gid+ '&push_id='+_this.data.push_id);
-
+    console.log('mod=blindBox&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&gid=' + _this.data.gid+ '&push_id='+_this.data.push_id)
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q1,
       method: 'GET',
@@ -982,8 +986,13 @@ Page({
 
   lineup: function () {
     var _this = this;
-    console.log(1111111111)
-    _this.queueup(1, 0)
+    if(this.data.activity.status == 1){
+      app.showToastC('活动暂未开启');
+    }else if(this.data.activity.status == 2){
+      _this.queueup(1, 0)
+    }else if(this.data.activity.status == 3){
+      app.showToastC('活动已结束');
+    }
   },
 
   // continuType  1是跳详情    2选择一个盲盒   3再来一个  4分享   5跳转新增地址  6支付成功  7重roll
@@ -3101,6 +3110,7 @@ Page({
     });
   },
 
+  // 幸运值红包
   hidepackage: function () {
     var _this = this;
     if (!_this.data.ishowredpackage) {
@@ -3110,6 +3120,19 @@ Page({
     }
     _this.setData({
       ishowredpackage: !_this.data.ishowredpackage,
+      isharepag: false,
+    })
+  },
+  // 抽盒金红包
+  showBlindboxPacket(){
+    var _this = this;
+    if (!_this.data.isBlindboxPacketOne) {
+      _this.setData({
+        redpagList: _this.data.welfare,
+      })
+    }
+    _this.setData({
+      isBlindboxPacketOne: !_this.data.isBlindboxPacketOne,
       isharepag: false,
     })
   },
@@ -3134,7 +3157,6 @@ Page({
         redpagind: ind,
       })
     }
-
   },
 
   openredpackage: function (welfareId) {

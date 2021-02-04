@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '刮刮卡', 
+    c_title: '实物刮刮卡', 
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
@@ -128,8 +128,8 @@ Page({
   getInfo(){
     var _this = this;
     wx.showLoading({ title: '加载中...'})
-    var q = Dec.Aese('mod=prior&operation=getInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&shareUId=' + _this.data.share_uid);
-    console.log(app.signindata.comurl + 'spread.php?mod=prior&operation=getInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&shareUId=' + _this.data.share_uid)
+    var q = Dec.Aese('mod=scratchCard&operation=info&id=289526&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&shareUId=' + _this.data.share_uid);
+    console.log(app.signindata.comurl + 'spread.php?mod=scratchCard&operation=info&id=289526&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&shareUId=' + _this.data.share_uid)
     wx.request({
       url: app.signindata.comurl + 'spread.php'+q,
       method: 'GET',
@@ -141,30 +141,13 @@ Page({
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
           let data = res.data;
-          for(var i=0;i<data.List.identity.length;i++){
-            data.List.identity[i].actualidcard = data.List.identity[i].idcard;
-            data.List.identity[i].idcard = _this.plusXing(data.List.identity[i].idcard,4,4);
-            data.List.identity[i].consignee = _this.plusXing(data.List.identity[i].consignee,1,0);
-            data.List.identity[i].mobile = _this.plusXing(data.List.identity[i].mobile,3,4);
-          }
-          if(data.Info.bindIdentity != 0){
-            data.Info.bindIdentity.consignee = _this.plusXing(data.Info.bindIdentity.consignee,1,0);
-            data.Info.bindIdentity.idcard = _this.plusXing(data.Info.bindIdentity.idcard,4,4);
-          }
+         
           _this.setData({
-            suplusChance:data.Info.user.suplusChance,
-            activity:data.Info.activity,
-            bindIdentity:data.Info.bindIdentity,
-            user:data.Info.user,
-            isPrior:data.Info.isPrior,
             countdown:data.Info.endTime,
-            totalScratch:data.Info.user.totalScratch,
+            goodsList:data.List.goodsList,
             scratch:data.List.scratch,
-            identity:data.List.identity,
-            bindIdcard:data.List.identity[_this.data.idcardIndex]?data.List.identity[_this.data.idcardIndex].actualidcard:0,
-            bindDate:data.List.identity[_this.data.idcardIndex]?data.List.identity[_this.data.idcardIndex].date:0,
-            percent:(data.Info.user.totalScratch/data.Info.user.peakValue)*100,
-            explain:data.List.explain,
+            explain:data.Info.explain,
+            user:data.Info.user,
             subscribedata:res.data.Info.subscribe
           })
           _this.countdownbfun();        
@@ -175,12 +158,12 @@ Page({
             mask:true,
             duration:1000
           });  
-          if(res.data.ReturnCode == 384 && _this.data.share_uid){
-            _this.data.share_uid = 0;
-            setTimeout(function(){
-              _this.getInfo()
-            },1000)
-          }
+          // if(res.data.ReturnCode == 384 && _this.data.share_uid){
+          //   _this.data.share_uid = 0;
+          //   setTimeout(function(){
+          //     _this.getInfo()
+          //   },1000)
+          // }
         }
       }
     }); 
