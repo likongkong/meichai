@@ -457,9 +457,10 @@ App({
   // 45  日历列表
   // 46  日历详情
   // 47  日历 我的投票
-
-  // 48 priorityVoting  邀请函  暂时未用
-  // 49 luckyDraw  抽奖活动
+  // 48  drawHideGoods  抽隐藏
+  // 49  luckyDraw  抽奖活动
+  // 50  priorityVoting  邀请函 
+  // 51  draw  春节活动  福袋
 
   userstatistics: function (num) {
     var _this = this;
