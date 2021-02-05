@@ -291,7 +291,8 @@
               <block wx:if='{{item.video_path}}'>
                 <view style='width:360rpx;position:relative;max-height:340rpx;overflow: hidden;' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>
                   <view class='dlfchrbright' wx:if='{{item.topic_name}}'>{{item.topic_name}}</view>
-                  <view class='dlfchrbrightDetail' catchtap="givenDetail" data-index='{{index}}' data-drying_id='{{item.id}}' wx:if='{{jurisdiction}}'>删除</view>
+                  <view class='dlfchrbrightDetail' catchtap="givenDetail" data-index='{{index}}' data-drying_id='{{item.id}}' wx:if='{{jurisdiction && item.brand_id==0}}'>删除</view>
+                  <view class='dlfchrbrightDetail' style="left:10rpx;" catchtap="givenDetail" data-type='1' data-index='{{index}}' data-uid='{{item.uid}}' wx:if='{{jurisdiction && item.brand_id==0}}'>禁止发帖</view>
                   <block wx:if='{{item.video_img}}'>
                     <image wx:if='{{!item.iftrvideo}}' mode='widthFix' style='width:360rpx;margin:0 auto;min-height:80rpx;display:block;border-radius:10rpx 10rpx 0 0;' src='{{item.video_img}}?imageMogr2/thumbnail/720x'></image>
                     <image wx:if='{{!item.iftrvideo&&item.video_img}}' style='width:70rpx;height:70rpx;position:absolute;bottom:0;left:0;right:0;top:0;margin:auto;' src='https://www.51chaidan.com/images/icon/iconPlayVideo.png'></image>
@@ -300,7 +301,8 @@
               </block>
               <block wx:else>
                 <view style='width:360rpx;margin:auto;position:relative;max-height:340rpx;overflow: hidden;' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>
-                  <view class='dlfchrbrightDetail' catchtap="givenDetail" data-index='{{index}}' data-drying_id='{{item.id}}' wx:if='{{jurisdiction}}'>删除</view>
+                  <view class='dlfchrbrightDetail' catchtap="givenDetail" data-index='{{index}}' data-drying_id='{{item.id}}' wx:if='{{jurisdiction && item.brand_id==0}}'>删除</view>
+                  <view class='dlfchrbrightDetail' style="left:10rpx;" catchtap="givenDetail" data-type='1' data-index='{{index}}' data-uid='{{item.uid}}' wx:if='{{jurisdiction && item.brand_id==0}}'>禁止发帖</view>
                   <view class='dlfchrbright' wx:if='{{item.topic_name}}'>{{item.topic_name}}</view>
                   <image data-ind='{{index}}' style='width:360rpx;margin:auto;display:block;border-radius:10rpx 10rpx 0 0;' mode='widthFix' src='{{item.img_extend[0].img}}?imageMogr2/thumbnail/720x'></image>
                 </view>
@@ -328,7 +330,8 @@
               <block wx:if='{{item.video_path}}'>
                 <view style='width:360rpx;position:relative;max-height:340rpx;overflow:hidden;' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>
                   <view class='dlfchrbright' wx:if='{{item.topic_name}}'>{{item.topic_name}}</view>
-                  <view class='dlfchrbrightDetail' catchtap="givenDetail" data-index='{{index}}' data-drying_id='{{item.id}}' wx:if='{{jurisdiction}}'>删除</view>
+                  <view class='dlfchrbrightDetail' catchtap="givenDetail" data-index='{{index}}' data-drying_id='{{item.id}}' wx:if='{{jurisdiction && item.brand_id==0}}'>删除</view>
+                  <view class='dlfchrbrightDetail' style="left:10rpx;" catchtap="givenDetail" data-type='1' data-index='{{index}}' data-uid='{{item.uid}}' wx:if='{{jurisdiction && item.brand_id==0}}'>禁止发帖</view>
                   <block wx:if='{{item.video_img}}'>
                     <image wx:if='{{!item.iftrvideo}}' mode='widthFix' style='width:360rpx;margin:0 auto;min-height:80rpx;display:block;border-radius:10rpx 10rpx 0 0;' src='{{item.video_img}}?imageMogr2/thumbnail/720x'></image>
                     <image wx:if='{{!item.iftrvideo&&item.video_img}}' style='width:70rpx;height:70rpx;position:absolute;bottom:0;left:0;right:0;top:0;margin:auto;' src='https://www.51chaidan.com/images/icon/iconPlayVideo.png'></image>
@@ -338,7 +341,8 @@
               <block wx:else>
                 <view style='width:360rpx;margin:auto;position:relative;max-height:340rpx;overflow:hidden;' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>
                   <view class='dlfchrbright' wx:if='{{item.topic_name}}'>{{item.topic_name}}</view>
-                  <view class='dlfchrbrightDetail' catchtap="givenDetail" data-index='{{index}}' data-drying_id='{{item.id}}' wx:if='{{jurisdiction}}'>删除</view>
+                  <view class='dlfchrbrightDetail' catchtap="givenDetail" data-index='{{index}}' data-drying_id='{{item.id}}' wx:if='{{jurisdiction && item.brand_id==0}}'>删除</view>
+                  <view class='dlfchrbrightDetail' style="left:10rpx;" catchtap="givenDetail" data-type='1' data-index='{{index}}' data-uid='{{item.uid}}' wx:if='{{jurisdiction && item.brand_id==0}}'>禁止发帖</view>
                   <image data-ind='{{index}}' style='width:360rpx;margin:auto;display:block;border-radius:10rpx 10rpx 0 0;' mode='widthFix' src='{{item.img_extend[0].img}}?imageMogr2/thumbnail/720x'></image>
                 </view>
               </block>
