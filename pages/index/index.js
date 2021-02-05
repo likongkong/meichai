@@ -95,6 +95,7 @@ Page({
     islive:false,
     // 审核版本 or 不是审核版本
     is_formaldress:false,
+    animation:''
   },
   jumpposition:function(w){
     // var nowTime = new Date().getTime();
@@ -552,8 +553,32 @@ Page({
       _this.setData({ isAwardOrder: app.signindata.isAwardOrder, awardOrder: app.signindata.awardOrder || false });
       app.winningtheprizetime(_this);
     };
+    
+    // this.animation = wx.createAnimation({
+    //   // 动画持续时间，单位ms，默认值 400
+    //   duration: 300,
+    //   timingFunction: 'linear',
+    //   // 延迟多长时间开始
+    //   delay: 0,
+    //   transformOrigin: 'center center 0',
+    //   success: function(res) {}
+    // })
+    // this.mAnimation();
 
   },
+
+  // mAnimation: function() {
+  //   clearInterval(this.data.atimer)
+  //   this.data.atimer = setInterval(function() {
+  //     this.animation.translate(0, -13).step().translate(0, 0).step().translate(0, -5).step().translate(0, 0).step()
+  //     this.setData({
+  //       //输出动画
+  //       animation: this.animation.export(),
+  //     })
+  //   }.bind(this), 1350)
+
+  // },
+
   jumporder: function () {
     var _this = this;
     app.jumporder(_this);

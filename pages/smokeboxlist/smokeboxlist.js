@@ -657,7 +657,7 @@ Page({
         if (res.data.ReturnCode == 200) {
           _this.setData({
             boastlist: res.data.List.record,
-            // isRedPackage:res.data.Info.isRedPackage || false
+            isRedPackage:res.data.Info.isRedPackage || false
           })
         }
       },

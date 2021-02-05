@@ -93,3 +93,12 @@ page{
   top: 0;
   z-index: 3;
 } 
+.blessingBag{
+  width: 100%;
+  margin-bottom: 18rpx;
+  background: #fff;
+}
+.blessingBag image{
+  width: 100%;
+  display: block;
+}

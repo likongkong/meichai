@@ -4,9 +4,15 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
       <view class='box'>
-       
+        <block wx:if='{{category_id == 26}}'>
+            <block wx:for='{{commoddata}}' wx:key='key'>
+                <view class="blessingBag">
+                    <image src="{{item.gcover}}" mode='widthFix'></image>
+                </view>
+            </block>
+        </block>
         <!--   信息流  -->
-        <block wx:if='{{ifOrWf==1}}'>
+        <block wx:elif='{{ifOrWf==1}}'>
             <view class='comboxw'  wx:for="{{commoddata}}" wx:key="key">
                     <!--  普通商品  -->
                     <view class='bchar' data-gid="{{item.gid}}" bindtap='addressmanagement' style='position:relative;'>    
@@ -45,7 +51,7 @@
             </view>        
         </block>
 
-        <block wx:if='{{ifOrWf==2}}'>
+        <block wx:elif='{{ifOrWf==2}}'>
         <!-- 瀑布流 -->
             <view style='overflow:hidden;background:#f4f5f9;padding-top:16rpx;'>
 

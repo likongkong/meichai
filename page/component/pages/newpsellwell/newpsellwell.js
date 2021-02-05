@@ -76,6 +76,7 @@ Page({
     this.listdata(1);
   },
   onLoad: function (w) {
+    console.log('=========',w)
     var _this = this;
     _this.setData({
       loginid: app.signindata.loginid,
