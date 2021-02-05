@@ -518,12 +518,12 @@ Page({
   },
 
   // 跳转抽盒机列表
-  // jumpPage(){
-  //   this.setData({isWinning:false})
-  //   wx.navigateTo({
-  //     url: "/pages/smokeboxlist/smokeboxlist"
-  //   })
-  // },
+  jumpPage(){
+    this.setData({isWinning:false})
+    wx.navigateTo({
+      url: "/pages/smokeboxlist/smokeboxlist"
+    })
+  },
 
    // banner 跳转
    jumpbanner: function (w) {

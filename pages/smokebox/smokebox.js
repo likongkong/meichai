@@ -249,7 +249,8 @@ Page({
     labelContent:{
       c:"抽盒每满5次，可获得一次抽奖机会（100%中奖）",
       y:'预售商品到货后发出；具体以厂家到货时间为准；由于出厂时间不可控，不接受因此原因的投诉；',
-      j:'购买商品后，商品进入我的玩具柜，玩具柜中的商品可编辑价格在闲置潮玩中进行出售。'
+      j:'购买商品后，商品进入我的玩具柜，玩具柜中的商品可编辑价格在闲置潮玩中进行出售。',
+      r:'如何获得抽盒金红包？\n购买在线抽盒机中带有“抽盒机红包”的商品可获得抽盒金红包\n红包可以分享好友多人领取，每人领取一定范围内随机金额领完为止\n抽盒金红包当日24:00过期\n红包中的抽盒金是否有时效性？\n在抽盒金红包中获得的抽盒金永久有效并可以叠加使用\n抽盒金可以购买哪些商品？\n 在美拆小程序中购买商品，抽盒，抽一番赏等均可使用抽盒金，抽盒金最多可抵扣60%的现金使用(活动期间可能相应提高抵扣比例)'
     },
     labelContentVie:'',
     cardStyle:1, // 1  提示卡  2 透视卡  3 重抽卡 
@@ -274,17 +275,22 @@ Page({
     var name = event.currentTarget.dataset.name || event.target.dataset.name;
     var labelContentVie = '';
     var labelContent = this.data.labelContent;
+    var boxBenefitsHeight = '';
     if(name=="抽盒福利"){
       labelContentVie = labelContent.c || '';
     }else if(name=="预售"){
       labelContentVie = labelContent.y || '';
     }else if(name=="进玩具柜"){
       labelContentVie = labelContent.j || '';
+    }else if(name=="抽盒金红包"){
+      labelContentVie = labelContent.r || '';
+      boxBenefitsHeight = 670
     };
     if(labelContentVie){
       this.setData({
         boxBenefitsSM:!this.data.boxBenefitsSM,
-        labelContentVie:labelContentVie
+        labelContentVie:labelContentVie,
+        boxBenefitsHeight:boxBenefitsHeight || ''
       });
     }
 
@@ -816,7 +822,12 @@ Page({
 
 
           if (_this.data.firstshowredpag && infoData.welfare.length > 0 && infoData.welfare[0].currentAmount == 0 && _this.data.isredpag != 1) {
-            _this.hidepackage()
+            console.log(infoData.welfare[0].welfareType,'福利类型')
+            if(infoData.welfare[0].welfareType == 2){
+              _this.hidepackage();
+            }else if(infoData.welfare[0].welfareType == 3){
+              _this.toggleBlindboxPacket();
+            }
             _this.setData({
               redpagList: infoData.welfare || [],
               firstshowredpag: false,
@@ -986,6 +997,7 @@ Page({
 
   lineup: function () {
     var _this = this;
+    console.log('抽盒机状态===',this.data.activity.status)
     if(this.data.activity.status == 1){
       app.showToastC('活动暂未开启');
     }else if(this.data.activity.status == 2){
@@ -1296,17 +1308,23 @@ Page({
   },
   onShareAppMessage: function () {
     var _this = this
-    if (_this.data.ishowpagInfo) {
+    if (_this.data.ishowpagInfo || _this.data.isBlindboxPacketTwo) {
       var info = _this.data.redpagList[_this.data.redpagind]
       var xilie = _this.data.activity.seriesName != "" ? "-" : ""
       var title = ""
       if(info.welfareType == 1){
         title = "我抽到了" + _this.data.activity.seriesName + xilie + info.roleName + "，隐藏红包送给你们。"
-      } else {
+      } else if(info.welfareType == 2){
         if (info.userId && info.userId != _this.data.uid) {
           title = info.nick + "抽到了" + _this.data.activity.seriesName + xilie + info.roleName + "，幸运值红包送给你们。"
         } else {
           title = "我抽到了" + _this.data.activity.seriesName + xilie + info.roleName + "，幸运值红包送给你们。"
+        }
+      }else if(info.welfareType == 3){
+        if (info.userId && info.userId != _this.data.uid) {
+          title = info.nick + "抽到了" + _this.data.activity.seriesName + xilie + info.roleName + "，抽盒金红包送给你们。"
+        } else {
+          title = "我抽到了" + _this.data.activity.seriesName + xilie + info.roleName + "，抽盒金红包送给你们。"
         }
       }
       var share = {
@@ -3124,7 +3142,7 @@ Page({
     })
   },
   // 抽盒金红包
-  showBlindboxPacket(){
+  toggleBlindboxPacket(){
     var _this = this;
     if (!_this.data.isBlindboxPacketOne) {
       _this.setData({
@@ -3181,9 +3199,16 @@ Page({
             _this.redpagInfo(welfareId)
           } else {
             app.showToastC(res.data.Msg);
-            _this.setData({
-              ishowredpackage: false,
-            })
+            console.log()
+            if(_this.data.welfare[0].welfareType == 2){
+              _this.setData({
+                ishowredpackage: false,
+              })
+            }else if(_this.data.welfare[0].welfareType == 3){
+              _this.setData({
+                isBlindboxPacketOne: false,
+              })
+            }
           }
         }
       });
@@ -3205,9 +3230,18 @@ Page({
       success: function (res) {
         wx.hideLoading()
         if (res.data.ReturnCode == 200) {
+          if(res.data.Info.welfare.welfareType == 2){
+            _this.setData({
+              ishowredpackage: false,
+              ishowpagInfo: true,
+            })
+          }else if(res.data.Info.welfare.welfareType == 3){
+            _this.setData({
+              isBlindboxPacketOne: false,
+              isBlindboxPacketTwo: true,
+            })
+          }
           _this.setData({
-            ishowredpackage: false,
-            ishowpagInfo: true,
             welfareInfo: res.data.Info.welfare,
             welfareList: res.data.List.welfare,
           })
@@ -3218,6 +3252,13 @@ Page({
     });
   },
 
+  blindboxClosepagInfo: function () {
+    var _this = this
+    _this.setData({
+      isBlindboxPacketTwo: false,
+    })
+    this.getInfo();
+  },
   closepagInfo: function () {
     var _this = this
     _this.setData({
@@ -3228,18 +3269,28 @@ Page({
   shareopen: function (welfareId) {
     var _this = this;
     var q = Dec.Aese('mod=blindBox&operation=getWelfareInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&welfareId=' + welfareId)
+
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q,
       method: 'GET',
       header: {'Accept': 'application/json'},
       success: function (res) {
+        console.log(res,"1111")
         wx.hideLoading()
         if (res.data.ReturnCode == 200) {
           _this.setData({
             redpagList: res.data.Info.welfare || [],
-            ishowredpackage: true,
             isharepag: true,
           })
+          if(res.data.Info.welfare[0].welfareType == 2){
+            _this.setData({
+              ishowredpackage: true,
+            })
+          }else if(res.data.Info.welfare[0].welfareType == 3){
+            _this.setData({
+              isBlindboxPacketOne:true,
+            })
+          }
         } else {
           app.showToastC(res.data.Msg);
         }
@@ -3281,11 +3332,16 @@ Page({
               ctxt.fillText(parseInt(info.limitAmount) + "元", 177, 90);
               ctxt.fillText("隐藏红包", 165, 60.5);
               ctxt.fillText(parseInt(info.limitAmount) + "元", 177.5, 90);
-            } else {
+            } else if (info.welfareType == 2)  {
               ctxt.fillText("幸运值红包", 145, 60);
               ctxt.fillText(parseInt(info.limitAmount) + "点", 170, 90);
               ctxt.fillText("幸运值红包", 145, 60.5);
               ctxt.fillText(parseInt(info.limitAmount) + "点", 170.5, 90);
+            } else if (info.welfareType == 3)  {
+              ctxt.fillText("抽盒金红包", 145, 60);
+              ctxt.fillText(parseInt(info.limitAmount) + "元", 170, 90);
+              ctxt.fillText("抽盒金红包", 145, 60.5);
+              ctxt.fillText(parseInt(info.limitAmount) + "元", 170.5, 90);
             }
             ctxt.draw(true, setTimeout(function () {
               wx.canvasToTempFilePath({
@@ -3740,6 +3796,11 @@ Page({
   jumpVipPage(){
     wx.navigateTo({  
       url: "/page/secondpackge/pages/vipPage/vipPage"
+    })
+  },
+  goSmokeboxlist(){
+    wx.navigateTo({  
+      url: "/pages/smokeboxlist/smokeboxlist"
     })
   },
   jumpshopbut:function(w){
