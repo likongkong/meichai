@@ -528,7 +528,15 @@ Page({
   jumpshopdetail:function(w){
     var goods_id = w.currentTarget.dataset.goods_id || w.target.dataset.goods_id || 0;
     var isblindbox = w.currentTarget.dataset.isblindbox || 0;
-    if(isblindbox){
+    var skiptype = w.currentTarget.dataset.skiptype || 0;
+    if(skiptype == 3){
+      var skipid = w.currentTarget.dataset.skipid || 0;
+      if(skipid){
+         app.comjumpwxnav(9016,skipid,'','')
+      }else{
+         app.comjumpwxnav(9015,'','','')
+      };
+    }else if(isblindbox){
       wx.navigateTo({
         url: "/pages/smokebox/smokebox?gid=" + goods_id,
       });
