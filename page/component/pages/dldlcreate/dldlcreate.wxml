@@ -18,8 +18,9 @@
              <view class='creatPrize'>有奖</view>
              <image src='https://clw.51chaidan.com//images/goods/video.png' class='dldlupcomimg'></image>
              <view class='dldlupcomtxt'>+视频</view>
-          </view>
-          <view class='dldlupimg' style='margin-left:18rpx;' wx:if='{{videolist.length==0||hiddenreturn}}' catchtap='hidechooseVideo'>
+          </view> 
+          <!-- videolist.length==0||hiddenreturn -->
+          <view class='dldlupimg' style='margin-left:18rpx;' wx:if='{{false}}' catchtap='hidechooseVideo'>
              <view class='creatPrize'>隐藏返现</view>
              <image src='https://clw.51chaidan.com//images/goods/video.png' class='dldlupcomimg'></image>
              <view class='dldlupcomtxt'>+视频</view>
