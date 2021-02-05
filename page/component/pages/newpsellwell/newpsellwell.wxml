@@ -4,9 +4,9 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
       <view class='box'>
-        <block wx:if='{{category_id == 26}}'>
+        <block wx:if='{{category_id == "G26"}}'>
             <block wx:for='{{commoddata}}' wx:key='key'>
-                <view class="blessingBag">
+                <view class="blessingBag" data-gid='{{item.gid}}' catchtap='addressmanagement'>
                     <image src="{{item.gcover}}" mode='widthFix'></image>
                 </view>
             </block>

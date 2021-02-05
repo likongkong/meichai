@@ -576,7 +576,6 @@ Page({
   //       animation: this.animation.export(),
   //     })
   //   }.bind(this), 1350)
-
   // },
 
   jumporder: function () {
