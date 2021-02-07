@@ -40,6 +40,14 @@
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
 		"plugin": {
 			"list": []
 		},
@@ -52,10 +60,11 @@
 		"miniprogram": {
 			"list": [
 				{
-					"id": -1,
-					"name": "更新提示测试",
-					"pathName": "pages/storehomepage/storehomepage",
-					"query": ""
+					"id": 0,
+					"name": "签到新年活动",
+					"pathName": "page/component/pages/newsignin/newsignin",
+					"query": "",
+					"scene": null
 				},
 				{
 					"id": 1,
@@ -72,12 +81,6 @@
 					"scene": null
 				},
 				{
-					"name": "一番赏详情",
-					"pathName": "page/secondpackge/pages/aRewardDetails/aRewardDetails",
-					"query": "id=277760",
-					"scene": null
-				},
-				{
 					"id": -1,
 					"name": "抽盒机列表",
 					"pathName": "pages/smokeboxlist/smokeboxlist",
@@ -89,35 +92,6 @@
 					"name": "商品详情",
 					"pathName": "pages/detailspage/detailspage",
 					"query": "gid=34183",
-					"scene": null
-				},
-				{
-					"name": "pages/dismantlingbox/dismantlingbox",
-					"pathName": "pages/dismantlingbox/dismantlingbox",
-					"query": "",
-					"scene": null
-				},
-				{
-					"name": "一番赏列表",
-					"pathName": "page/secondpackge/pages/aRewardList/aRewardList",
-					"query": "",
-					"scene": null
-				},
-				{
-					"name": "page/component/pages/limitlotterylist/limitlotterylist",
-					"pathName": "page/component/pages/limitlotterylist/limitlotterylist",
-					"query": "",
-					"scene": null
-				},
-				{
-					"name": "page/secondpackge/pages/refund/refund",
-					"pathName": "page/secondpackge/pages/refund/refund",
-					"query": "",
-					"scene": null
-				},
-				{
-					"name": "pages/splashscreen/splashscreen",
-					"pathName": "pages/splashscreen/splashscreen",
 					"scene": null
 				}
 			]

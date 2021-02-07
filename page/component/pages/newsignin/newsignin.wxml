@@ -9,7 +9,9 @@
 <view style="width:100%;overflow:hidden;">
 
   <view style="width:65%;float:left;text-align:center;margin-left:30rpx;">
-    <text style="line-height:40rpx;font-size:25rpx;display:inline-block;">每周\n更新倒计时</text>
+
+    <view wx:if='{{isFukaActivities}}' style='font-size:27rpx;display:inline-block;font-size:25rpx;vertical-align:top;padding-top:22rpx;'>活动倒计时</view>
+    <text wx:else style="line-height:40rpx;font-size:25rpx;display:inline-block;">每周\n更新倒计时</text>
 
     <view wx:if='{{isresponse}}' style='color:white;font-size:27rpx;display:inline-block;margin:15rpx 20rpx;'>
       <view wx:if='{{dayStr!=0}}' class='alignclass timestyle'>{{dayStr}}</view>
@@ -23,7 +25,10 @@
     </view>
   </view>
 
-  <view wx:if='{{isSwitch}}' style="width:22%;height:50rpx;float:right;background:#E94F57;margin:15rpx 30rpx 15rpx 10rpx;border-radius:5rpx;" catchtap="switchclick">
+
+  <view wx:if='{{isFukaActivities}}' style="width:22%;height:50rpx;float:right;background:#E94F57;margin:15rpx 30rpx 15rpx 10rpx;border-radius:5rpx;text-align: center;font-size:27rpx;line-height:50rpx;color:white;" catchtap="switchclick">规则</view>
+
+  <view wx:elif='{{isSwitch}}' style="width:22%;height:50rpx;float:right;background:#E94F57;margin:15rpx 30rpx 15rpx 10rpx;border-radius:5rpx;" catchtap="switchclick">
     <image style="width:30rpx;height:30rpx;margin:10rpx;float:left;" src="https://www.51chaidan.com/images/sign/tms_switch.png"></image>
     <view style="font-size:27rpx;line-height:50rpx;color:white;float:left;">切换福利</view>
   </view>
@@ -38,90 +43,118 @@
 
 <view style="width:690rpx;margin:0 30rpx;padding:20rpx 0;overflow:hidden;background:white;">
   <view wx:for='{{cardList}}' wx:key='key' style="width:{{singlewidth}}rpx;height:{{cardHeight}}rpx;float:left;margin:15rpx 9rpx;position:relative;">
-    <image style="width:{{singlewidth}}rpx;border-radius:5rpx;opacity:{{item.num>0?'1':'0.5'}}" mode="widthFix" src="{{item.img}}?imageMogr2/thumbnail/{{singlewidth*2}}x" bindload='imageLoad' data-type='1' catchtap="lookbigimg" data-url='{{item.img}}' data-ind='{{index}}'></image>
-
-    <view wx:if='{{item.isone && isRetroactive}}' class="retriactiveStyle" catchtap="closeRorto">补签</view>
-    <view wx:else class="numstyle">{{item.num}}</view>
-
+    <block wx:if='{{isFukaActivities}}'>
+      <image style="width:{{singlewidth}}rpx;border-radius:5rpx;opacity:{{item.num>0?'1':'0.5'}}" mode="widthFix" src="{{item.img}}?imageMogr2/thumbnail/{{singlewidth*2}}x" bindload='imageLoad' data-type='1' data-url='{{item.img}}' data-ind='{{index}}'></image>     
+    </block>
+    <block wx:else>
+      <image style="width:{{singlewidth}}rpx;border-radius:5rpx;opacity:{{item.num>0?'1':'0.5'}}" mode="widthFix" src="{{item.img}}?imageMogr2/thumbnail/{{singlewidth*2}}x" bindload='imageLoad' data-type='1' catchtap="lookbigimg" data-url='{{item.img}}' data-ind='{{index}}'></image>    
+      <view wx:if='{{item.isone && isRetroactive}}' class="retriactiveStyle" catchtap="closeRorto">补签</view>
+      <view wx:else class="numstyle">{{item.num}}</view>    
+    </block>
   </view>
 </view>
 
 <view style="width:100%;position:relative;">
+  <block wx:if='{{isFukaActivities}}'>
+      <view class="signinbtnstyle" style="margin:40rpx 175rpx 20rpx;position: relative;" catchtap="signin">集福卡<view class="digitalTips specialellipsis" wx:if='{{signinfo.getSignNumber>0}}'>{{signinfo.getSignNumber}}</view></view>
 
-  <view wx:if='{{drawBoxGoodsInfo!="" && drawBoxStatus != 2}}' style="width:60rpx;height:{{60/cardratio}}rpx;position:absolute;right:60rpx;top:-20rpx;" catchtap="{{isRetroactive?'closeRorto':'closegetcard'}}" class="change">
-    <image style="width:60rpx;border-radius:10rpx;" mode="widthFix" src="{{drawBoxGoodsInfo.img}}"> </image>
-    <view class="sharenum" style="width:26rpx;line-height:26rpx;color:#d64650;font-size:20rpx;text-align:center;border:3rpx solid #d64650;">领</view>
-  </view>
+      <view class="signinbtnstyle" style="margin:0 175rpx 40rpx;display:flex;flex-flow:row nowrap;justify-content: space-between;background:#fff;">
+        <view class="newYearABut">赠送</view>
+        <view class="newYearABut" catchtap="toggleDrawMask">获取</view>
+      </view>  
+  </block>
+  <block wx:else>
+      <view wx:if='{{drawBoxGoodsInfo!="" && drawBoxStatus != 2}}' style="width:60rpx;height:{{60/cardratio}}rpx;position:absolute;right:60rpx;top:-20rpx;" catchtap="{{isRetroactive?'closeRorto':'closegetcard'}}" class="change">
+          <image style="width:60rpx;border-radius:10rpx;" mode="widthFix" src="{{drawBoxGoodsInfo.img}}"> </image>
+          <view class="sharenum" style="width:26rpx;line-height:26rpx;color:#d64650;font-size:20rpx;text-align:center;border:3rpx solid #d64650;">领</view>
+        </view>
 
-  <view wx:if='{{signinfo.orderStatus == 6 && !signinfo.todayReceive}}' class="signinbtnstyle" catchtap="signin">签到</view>
+        <view wx:if='{{signinfo.orderStatus == 6 && !signinfo.todayReceive}}' class="signinbtnstyle" catchtap="signin">签到</view>
 
-  <view wx:if='{{signinfo.orderStatus == 6 && signinfo.todayReceive}}' style="text-align:center;color:#8abe39;font-size:25rpx;line-height:40rpx;margin-top:40rpx;">签到成功，额外送你3张随机卡片(当日有效)</view>
-  <view wx:if='{{signinfo.orderStatus == 6 && signinfo.todayReceive}}' class="signinbtnstyle" style="position:relative;background:#8abe39;margin:10rpx 175rpx 40rpx 175rpx;">好友互赠
-    <button open-type="share" style='opacity: 0;position:absolute;top:0;left:0;height:100%;width:100%;'></button>
-    <view wx:if='{{signinfo.notReceiveNum}}' class="questionstyle" style="width:30rpx;height:48rpx;line-height:48rpx;position:absolute;top:9rpx;left:20rpx;font-weight:bold;background:white;">?
-      <view class="sharenum">{{signinfo.notReceiveNum}}</view>
-    </view>
-  </view>
-
-  <view wx:if='{{signinfo.orderStatus == 0 || signinfo.orderStatus == 3 || signinfo.orderStatus == 1 || signinfo.orderStatus == 2}}' style="text-align:center;color:#FF9800;font-size:25rpx;line-height:40rpx;margin-top:40rpx;">恭喜您，收集完成可领取该系列盲盒×1(当日24点前有效)</view>
-  <view wx:if='{{signinfo.orderStatus == 0 || signinfo.orderStatus == 3}}' class="signinbtnstyle" style="background:#FF9800;margin:10rpx 175rpx 40rpx 175rpx;" catchtap="winaward">晒单领奖</view>
-  <view wx:if='{{signinfo.orderStatus == 1}}' class="signinbtnstyle" style="background:#FF9800;margin:10rpx 175rpx 40rpx 175rpx;">审核中</view>
-  <view wx:if='{{signinfo.orderStatus == 2}}' class="signinbtnstyle" style="background:#FF9800;margin:10rpx 175rpx 40rpx 175rpx;" catchtap="getaward">领取奖励</view>
-
-</view>
-
-
-
-<view style="width:690rpx;display:flex;margin:0 30rpx 0rpx 30rpx;">
-  <view wx:for='{{daysList}}' wx:key='key' wx:index style="flex:1;margin:5rpx;background:{{item.isSign?'#FFd1a4':'#EAEAEA'}};position:relative;" catchtap="showhint" data-ind="{{index}}">
-
-    <view wx:if='{{index==hintindex}}' data-m="{{hintindex}}" style='width:230rpx;height:50rpx;position:absolute;top:-50rpx;{{index==6?"right:0rpx;":"left:0rpx;"}}z-index:10;'>
-      <view style='position:absolute;bottom:0;right:0;overflow:hidden;'>
-        <view style='line-height:30rpx;color:white;font-size:25rpx;text-align:center;border-radius:10rpx;background:#404040;position:relative;padding:5rpx;'>
-          <view wx:for='{{item.giftInfo}}' wx:key='key' style='text-align:left;'>
-            <text wx:if='{{item.type == 1}}'>车票:开车送隐藏活动创建车队可用\n</text>
-            <!-- <text wx:if='{{item.type == 2}}'>免单卡:报名免单活动可用\n</text> -->
-            <text wx:if='{{item.type == 3}}'>透视卡:抽盒机可用(仅限当日使用)\n</text>
+        <view wx:if='{{signinfo.orderStatus == 6 && signinfo.todayReceive}}' style="text-align:center;color:#8abe39;font-size:25rpx;line-height:40rpx;margin-top:40rpx;">签到成功，额外送你3张随机卡片(当日有效)</view>
+        <view wx:if='{{signinfo.orderStatus == 6 && signinfo.todayReceive}}' class="signinbtnstyle" style="position:relative;background:#8abe39;margin:10rpx 175rpx 40rpx 175rpx;">好友互赠
+          <button open-type="share" style='opacity: 0;position:absolute;top:0;left:0;height:100%;width:100%;'></button>
+          <view wx:if='{{signinfo.notReceiveNum}}' class="questionstyle" style="width:30rpx;height:48rpx;line-height:48rpx;position:absolute;top:9rpx;left:20rpx;font-weight:bold;background:white;">?
+            <view class="sharenum">{{signinfo.notReceiveNum}}</view>
           </view>
         </view>
-        <view style='width:100%;height:10rpx;position:relative;'>
-          <image style='width:20rpx;height:10rpx;position:absolute;top:0;{{index==6?"right:20rpx;":"left:20rpx;"}}' src='https://clw.51chaidan.com/images/goods/black_arrow.png'></image>
+
+        <view wx:if='{{signinfo.orderStatus == 0 || signinfo.orderStatus == 3 || signinfo.orderStatus == 1 || signinfo.orderStatus == 2}}' style="text-align:center;color:#FF9800;font-size:25rpx;line-height:40rpx;margin-top:40rpx;">恭喜您，收集完成可领取该系列盲盒×1(当日24点前有效)</view>
+        <view wx:if='{{signinfo.orderStatus == 0 || signinfo.orderStatus == 3}}' class="signinbtnstyle" style="background:#FF9800;margin:10rpx 175rpx 40rpx 175rpx;" catchtap="winaward">晒单领奖</view>
+        <view wx:if='{{signinfo.orderStatus == 1}}' class="signinbtnstyle" style="background:#FF9800;margin:10rpx 175rpx 40rpx 175rpx;">审核中</view>
+        <view wx:if='{{signinfo.orderStatus == 2}}' class="signinbtnstyle" style="background:#FF9800;margin:10rpx 175rpx 40rpx 175rpx;" catchtap="getaward">领取奖励</view>  
+  </block>
+
+  
+
+</view>
+
+
+<block  wx:if='{{!isFukaActivities}}'>
+  <view style="width:690rpx;display:flex;margin:0 30rpx 0rpx 30rpx;">
+    <view wx:for='{{daysList}}' wx:key='key' wx:index style="flex:1;margin:5rpx;background:{{item.isSign?'#FFd1a4':'#EAEAEA'}};position:relative;" catchtap="showhint" data-ind="{{index}}">
+
+      <view wx:if='{{index==hintindex}}' data-m="{{hintindex}}" style='width:230rpx;height:50rpx;position:absolute;top:-50rpx;{{index==6?"right:0rpx;":"left:0rpx;"}}z-index:10;'>
+        <view style='position:absolute;bottom:0;right:0;overflow:hidden;'>
+          <view style='line-height:30rpx;color:white;font-size:25rpx;text-align:center;border-radius:10rpx;background:#404040;position:relative;padding:5rpx;'>
+            <view wx:for='{{item.giftInfo}}' wx:key='key' style='text-align:left;'>
+              <text wx:if='{{item.type == 1}}'>车票:开车送隐藏活动创建车队可用\n</text>
+              <!-- <text wx:if='{{item.type == 2}}'>免单卡:报名免单活动可用\n</text> -->
+              <text wx:if='{{item.type == 3}}'>透视卡:抽盒机可用(仅限当日使用)\n</text>
+            </view>
+          </view>
+          <view style='width:100%;height:10rpx;position:relative;'>
+            <image style='width:20rpx;height:10rpx;position:absolute;top:0;{{index==6?"right:20rpx;":"left:20rpx;"}}' src='https://clw.51chaidan.com/images/goods/black_arrow.png'></image>
+          </view>
         </view>
       </view>
-    </view>
 
-    <view style="text-align:center;font-size:25rpx;margin-top:10rpx;">{{item.name}}</view>
-    <view style="width:100%;height:30rpx;line-height:30rpx;color:#FB595F;font-size:30rpx;text-align:center;font-weight:bold;">
-      <image wx:if='{{item.isSign}}' src="https://www.51chaidan.com/images/turntable/red_check_mark.png" style="width:43rpx;height:30rpx;margin:0 auto;"></image>
-    </view>
-    <view style="width:100%;text-align:center;margin-bottom:10rpx;">
-      <view wx:for='{{item.giftInfo}}' wx:key='key' wx:for-index='{{mindex}}' wx:for-item="mitem" style="display:inline-block;vertical-align:top;">
-      <!-- index==6?'ticketstyle':'twoticketstyle' -->
-        <view wx:if='{{mitem.type == 1}}'  class="{{item.giftInfo.length>1?'ticketstyle':'twoticketstyle'}}" style="width:{{item.giftInfo.length>1?'40rpx':'56rpx'}};overflow:hidden;">
-          <image class="{{item.giftInfo.length>1?'smallticket':'bigticket'}}" style="margin:auto 0;" src="https://www.51chaidan.com/images/turntable/ticket.png"></image>
-        </view>
-        <!-- <view wx:if='{{item.type == 2}}' class="{{index==6?'ticketstyle':'twoticketstyle'}} mianstyle">免</view> -->
-        <view wx:if='{{mitem.type == 3}}' class="{{item.giftInfo.length>1?'ticketstyle':'twoticketstyle'}} threestyle" style="position:relative;">
-          <image class="{{item.giftInfo.length>1?'eyestyle':'bigeyestyle'}}" src="https://www.51chaidan.com/images/driveCar/show.png"></image>
+      <view style="text-align:center;font-size:25rpx;margin-top:10rpx;">{{item.name}}</view>
+      <view style="width:100%;height:30rpx;line-height:30rpx;color:#FB595F;font-size:30rpx;text-align:center;font-weight:bold;">
+        <image wx:if='{{item.isSign}}' src="https://www.51chaidan.com/images/turntable/red_check_mark.png" style="width:43rpx;height:30rpx;margin:0 auto;"></image>
+      </view>
+      <view style="width:100%;text-align:center;margin-bottom:10rpx;">
+        <view wx:for='{{item.giftInfo}}' wx:key='key' wx:for-index='{{mindex}}' wx:for-item="mitem" style="display:inline-block;vertical-align:top;">
+        <!-- index==6?'ticketstyle':'twoticketstyle' -->
+          <view wx:if='{{mitem.type == 1}}'  class="{{item.giftInfo.length>1?'ticketstyle':'twoticketstyle'}}" style="width:{{item.giftInfo.length>1?'40rpx':'56rpx'}};overflow:hidden;">
+            <image class="{{item.giftInfo.length>1?'smallticket':'bigticket'}}" style="margin:auto 0;" src="https://www.51chaidan.com/images/turntable/ticket.png"></image>
+          </view>
+          <!-- <view wx:if='{{item.type == 2}}' class="{{index==6?'ticketstyle':'twoticketstyle'}} mianstyle">免</view> -->
+          <view wx:if='{{mitem.type == 3}}' class="{{item.giftInfo.length>1?'ticketstyle':'twoticketstyle'}} threestyle" style="position:relative;">
+            <image class="{{item.giftInfo.length>1?'eyestyle':'bigeyestyle'}}" src="https://www.51chaidan.com/images/driveCar/show.png"></image>
+          </view>
         </view>
       </view>
     </view>
   </view>
-</view>
-<view style="width:100%;font-size:20rpx;line-height:20rpx;color:gray;text-align:center;margin-bottom:20rpx;">签到随机获得多种奖励其中之一</view>
+  <view style="width:100%;font-size:20rpx;line-height:20rpx;color:gray;text-align:center;margin-bottom:20rpx;">签到随机获得多种奖励其中之一</view>
+</block>
+
 
 <view style="width:740rpx;">
   <somke colortitle='#000'></somke>
 </view>
 
-<view style="margin:20rpx 30rpx;">
-  <view style="width:100%;line-height:40rpx;background:#EAEAEA;padding:20rpx 0;">
-    <view style='width:100%;text-align:center;font-size:30rpx;'>签到规则</view>
-    <view style="margin-left:40rpx;font-size:25rpx;">
-      <text>{{signinfo.explain}}</text>
+<block wx:if='{{isFukaActivities}}'>
+    <view style="margin:20rpx 30rpx;" id='rule'>
+      <view style="width:100%;line-height:40rpx;background:#EAEAEA;padding:20rpx 0;">
+        <view style='width:100%;text-align:center;font-size:30rpx;'>集福卡规则</view>
+        <view style="margin-left:40rpx;font-size:25rpx;">
+          <text>{{signinfo.explain}}</text>
+        </view>
+      </view>
     </view>
-  </view>
-</view>
+</block>
+<block wx:else>
+    <view style="margin:20rpx 30rpx;">
+      <view style="width:100%;line-height:40rpx;background:#EAEAEA;padding:20rpx 0;">
+        <view style='width:100%;text-align:center;font-size:30rpx;'>签到规则</view>
+        <view style="margin-left:40rpx;font-size:25rpx;">
+          <text>{{signinfo.explain}}</text>
+        </view>
+      </view>
+    </view>
+</block>
 
 <view style="width:100%;height:130rpx;"></view>
 
@@ -178,14 +211,17 @@
 <view wx:if='{{ishowsignin}}' style="width:100%;height:100%;position:fixed;top:0;left:0;z-index:199999;">
   <view class='bgstyle' catchtap='closesignin' catchtouchmove="myCatchTouch"></view>
 
-  <view style="width:740rpx;position:absolute;left:0;top:{{statusBarHeightMc}}px;z-index:11;">
+  <view wx:if='{{!isFukaActivities}}' style="width:740rpx;position:absolute;left:0;top:{{statusBarHeightMc}}px;z-index:11;">
     <somke colortitle='white'></somke>
   </view>
 
-  <view style="width:100%;height:100%;position:absolute;left:0;top:{{statusBarHeightMc+30}}px;z-index:10;" catchtap='closesignin' catchtouchmove="myCatchTouch">
+  <view style="width:100%;height:100%;position:absolute;left:0;top:{{isFukaActivities?'0':statusBarHeightMc+30}}px;z-index:10;" catchtap='closesignin' catchtouchmove="myCatchTouch">
 
-    <view style="width:500rpx;height:720rpx;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;z-index:9;background:white;border-radius:10rpx;" catchtouchmove="myCatchTouch">
-      <view style="width:100%;font-size:35rpx;text-align:center;margin-top:20rpx;line-height:40rpx;">签到成功</view>
+    <view style="{{isFukaActivities?'width:500rpx;height:360rpx;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;z-index:9;background:white;border-radius:10rpx;':'width:500rpx;height:720rpx;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;z-index:9;background:white;border-radius:10rpx;'}}" catchtouchmove="myCatchTouch">
+      <view style="width:100%;font-size:35rpx;text-align:center;margin-top:20rpx;line-height:40rpx;">
+          <block wx:if='{{isFukaActivities}}'>获取成功</block>
+          <block wx:else>签到成功</block>
+      </view>
 
       <view style="width:100%;height:200rpx;display:table;">
         <image style="width:100rpx;height:200rpx;margin-left:50rpx;float:left;" mode="aspectFit" src="{{goodsGift.role_img}}"></image>
@@ -208,14 +244,16 @@
           <text style="display:table-cell;vertical-align:middle;">{{item.name}}</text>
         </view>
       </view>
+      <block wx:if='{{!isFukaActivities}}'>
+          <view wx:if='{{isRetroactive}}' class="signinbtnstyle" style="margin:50rpx;position:absolute;left:0;bottom:0rpx;" catchtap="closeRorto">补签卡片
+            <view class="tipstyle">缺失卡片</view>
+          </view>
 
-      <view wx:if='{{isRetroactive}}' class="signinbtnstyle" style="margin:50rpx;position:absolute;left:0;bottom:0rpx;" catchtap="closeRorto">补签卡片
-        <view class="tipstyle">缺失卡片</view>
-      </view>
+          <view wx:else class="signinbtnstyle" style="background:#8abe39;margin:50rpx;position:absolute;left:0;bottom:0rpx;">好友互赠
+            <button open-type="share" style='opacity: 0;position:absolute;top:0;left:0;height:100%;width:100%;'></button>
+          </view>     
+      </block>
 
-      <view wx:else class="signinbtnstyle" style="background:#8abe39;margin:50rpx;position:absolute;left:0;bottom:0rpx;">好友互赠
-        <button open-type="share" style='opacity: 0;position:absolute;top:0;left:0;height:100%;width:100%;'></button>
-      </view>
 
     </view>
 
@@ -392,5 +430,67 @@
 
 
     <image src='../../../../pages/images/icon_close3.png' class='usericonclose' catchtap='closeupserimg'></image>
+  </view>
+</view>
+
+<view wx:if="{{isGetDrawMask}}" class="getDrawMask" catchtouchmove="true" catchtap="toggleDrawMask">
+  <view class="getDrawBox" catchtap="true">
+    <view class="getDrawNumCard">
+      <view>
+        <text class="bigtxt txt">新用户分享赠送机会x1</text>
+        <view class="avatarBox">
+          <block wx:for='{{virtualData}}' wx:key='key'>
+            <block wx:if='{{inviteData.newer[index]}}'>
+                <image src="{{inviteData.newer[index].photo}}"></image>
+            </block>
+            <text wx:else></text>
+          </block>
+        </view>
+      </view>
+      <view class="btn">去邀请</view>
+      <button style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' open-type="share"></button>
+    </view>
+    <view class="getDrawNumCard">
+      <view>
+        <text class="bigtxt txt">老用户分享赠送机会x1</text>
+        <view class="avatarBox">
+          <block wx:for='{{virtualData}}' wx:key='key'>
+            <block wx:if='{{inviteData.older[index]}}'>
+                <image src="{{inviteData.older[index].photo}}"></image>
+            </block>
+            <text wx:else></text>
+          </block>
+        </view>
+      </view>
+      <view class="btn">
+        去邀请
+      </view>
+      <button style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' open-type="share"></button>
+    </view>
+    <view class="getDrawNumCard">
+      <view>
+        <text class="bigtxt txt">抽盒机赠送机会</text>
+        <text class="smalltxt txt">抽奖机会x1</text>
+      </view>
+      <view class="btn" data-num='988' catchtap="jumpOtherPage">
+        去抽盒
+      </view>
+    </view>
+    <view class="getDrawNumCard">
+      <view>
+        <text class="bigtxt txt">一番赏赠送机会</text>
+        <text class="smalltxt txt">抽奖机会x1</text>
+      </view>
+      <view class="btn" data-num='9015' catchtap="jumpOtherPage">
+        去抽赏
+      </view>
+    </view>
+    <view class="getDrawNumCard">
+      <view>
+        <text class="bigtxt txt">每天登录领取</text>
+        <text class="smalltxt txt">抽奖机会x1</text>
+      </view>
+      <view class="btn" catchtap="{{signinfo.isTodayGainChance?'getTheChance':''}}" style="{{signinfo.isTodayGainChance?'':'background:#999;'}}">领取</view>
+    </view>
   </view>
 </view>

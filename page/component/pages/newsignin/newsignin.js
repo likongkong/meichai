@@ -79,8 +79,24 @@ Page({
     subscribedata: "",
     // 订阅判断
     subscribeif: app.signindata.subscribeif,
-    limaid:0
+    limaid:0,
+    isGetDrawMask:false,
+    // 是否是集福卡活动
+    isFukaActivities:true,
+    virtualData:[0,1,2,3,4]
   },
+  toggleDrawMask(){
+    this.setData({
+      isGetDrawMask:!this.data.isGetDrawMask
+    })
+  },
+  // 跳转
+  jumpOtherPage:function(w){
+    var num = w.currentTarget.dataset.num || w.target.dataset.num || 100000;
+    var whref = w.currentTarget.dataset.whref || w.target.dataset.whref || 100000;
+    var title = w.currentTarget.dataset.title || w.target.dataset.title || '';
+    app.comjumpwxnav(num,whref,title);
+  },  
   // 授权点击统计
   clicktga: function () {
     app.clicktga(2)
@@ -234,77 +250,217 @@ Page({
 
   getInfo: function () {
     var _this = this;
-    var qqq = Dec.Aese('mod=Obtain&operation=list&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
-    wx.request({
-      url: app.signindata.comurl + 'sign.php' + qqq,
-      method: 'GET',
-      header: {
-        'Accept': 'application/json'
-      },
-      success: function (res) {
-        if (res.data.ReturnCode == 200) {
-
-          var cardlist = res.data.List.cardList || [];
-          var isone = true;
-          if (res.data.Info.makeUpNumber > 0) {
-            for (var i = 0; i < cardlist.length; i++) {
-              if (cardlist[i].num == 0 && isone) {
-                cardlist[i].isone = true;
-                isone = false;
-              } else {
-                cardlist[i].isone = false;
+    if(this.data.isFukaActivities){
+      var qqq = Dec.Aese('mod=cow&operation=list&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
+      wx.request({
+        url: app.signindata.comurl + 'sign.php' + qqq,
+        method: 'GET',
+        header: {
+          'Accept': 'application/json'
+        },
+        success: function (res) {
+          console.log('福卡======',res)
+          if (res.data.ReturnCode == 200) {
+            var cardlist = res.data.List.cardList || [];
+            var isone = true;
+            if (res.data.Info.makeUpNumber > 0) {
+              for (var i = 0; i < cardlist.length; i++) {
+                if (cardlist[i].num == 0 && isone) {
+                  cardlist[i].isone = true;
+                  isone = false;
+                } else {
+                  cardlist[i].isone = false;
+                }
               }
             }
-          }
-
-          _this.setData({
-            isresponse: true,
-            signinfo: res.data.Info,
-            id: res.data.Info.aid,
-            cardList: cardlist,
-            daysList: res.data.List.daysList,
-            linenum: Math.ceil(res.data.List.cardList.length / 2),
-            singlewidth: 690 / Math.ceil(res.data.List.cardList.length / 2) - 18,
-            share_id: res.data.Info.share_id ? res.data.Info.share_id : 0,
-            drawBoxGoodsInfo: res.data.Info.drawBoxGoodsInfo ? res.data.Info.drawBoxGoodsInfo : "",
-            drawBoxStatus: res.data.Info.drawBoxStatus,
-            isRetroactive: res.data.Info.makeUpNumber > 0 ? true : false,
-            receiveMakeUp: res.data.Info.receiveMakeUp,
-            selectaid: res.data.Info.aid,
-            isSwitch: res.data.Info.isSwitch || false,
-          })
-
-          // 商品详情 
-          if (res.data.Info && res.data.Info.desc) {
-            WxParse.wxParse('article', 'html', res.data.Info.desc, _this, 0);
+  
             _this.setData({
-              isdesc: true,
-            });
-          } else {
+              isresponse: true,
+              signinfo: res.data.Info,
+              id: res.data.Info.aid,
+              cardList: cardlist,
+              daysList: res.data.List.daysList || '',
+              linenum: Math.ceil(res.data.List.cardList.length / 2),
+              singlewidth: 690 / Math.ceil(res.data.List.cardList.length / 2) - 18,
+              share_id: res.data.Info.share_id ? res.data.Info.share_id : 0,
+              drawBoxGoodsInfo: res.data.Info.drawBoxGoodsInfo ? res.data.Info.drawBoxGoodsInfo : "",
+              drawBoxStatus: res.data.Info.drawBoxStatus,
+              isRetroactive: res.data.Info.makeUpNumber > 0 ? true : false,
+              receiveMakeUp: res.data.Info.receiveMakeUp,
+              selectaid: res.data.Info.aid,
+              isSwitch: res.data.Info.isSwitch || false,
+              inviteData:res.data.List.invite || {newer:[],older:[]}
+            })
+  
+            // 商品详情 
+            if (res.data.Info && res.data.Info.desc) {
+              WxParse.wxParse('article', 'html', res.data.Info.desc, _this, 0);
+              _this.setData({
+                isdesc: true,
+              });
+            } else {
+              _this.setData({
+                isdesc: false
+              });
+            };
+  
+            if (res.data.Info.over_time) {
+              _this.data.timer = setInterval(function () {
+                _this.dateformat(res.data.Info.over_time);
+              }.bind(_this), 1000);
+            }
+  
+            // _this.giftrecord();
+  
+          } else { }
+        }
+      });
+    }else{
+      var qqq = Dec.Aese('mod=Obtain&operation=list&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
+      wx.request({
+        url: app.signindata.comurl + 'sign.php' + qqq,
+        method: 'GET',
+        header: {
+          'Accept': 'application/json'
+        },
+        success: function (res) {
+          if (res.data.ReturnCode == 200) {
+  
+            var cardlist = res.data.List.cardList || [];
+            var isone = true;
+            if (res.data.Info.makeUpNumber > 0) {
+              for (var i = 0; i < cardlist.length; i++) {
+                if (cardlist[i].num == 0 && isone) {
+                  cardlist[i].isone = true;
+                  isone = false;
+                } else {
+                  cardlist[i].isone = false;
+                }
+              }
+            }
+  
             _this.setData({
-              isdesc: false
-            });
-          };
-
-          if (res.data.Info.over_time) {
-            _this.data.timer = setInterval(function () {
-              _this.dateformat(res.data.Info.over_time);
-            }.bind(_this), 1000);
-          }
-
-          // _this.giftrecord();
-
-        } else { }
-      }
-    });
+              isresponse: true,
+              signinfo: res.data.Info,
+              id: res.data.Info.aid,
+              cardList: cardlist,
+              daysList: res.data.List.daysList,
+              linenum: Math.ceil(res.data.List.cardList.length / 2),
+              singlewidth: 690 / Math.ceil(res.data.List.cardList.length / 2) - 18,
+              share_id: res.data.Info.share_id ? res.data.Info.share_id : 0,
+              drawBoxGoodsInfo: res.data.Info.drawBoxGoodsInfo ? res.data.Info.drawBoxGoodsInfo : "",
+              drawBoxStatus: res.data.Info.drawBoxStatus,
+              isRetroactive: res.data.Info.makeUpNumber > 0 ? true : false,
+              receiveMakeUp: res.data.Info.receiveMakeUp,
+              selectaid: res.data.Info.aid,
+              isSwitch: res.data.Info.isSwitch || false,
+            })
+  
+            // 商品详情 
+            if (res.data.Info && res.data.Info.desc) {
+              WxParse.wxParse('article', 'html', res.data.Info.desc, _this, 0);
+              _this.setData({
+                isdesc: true,
+              });
+            } else {
+              _this.setData({
+                isdesc: false
+              });
+            };
+  
+            if (res.data.Info.over_time) {
+              _this.data.timer = setInterval(function () {
+                _this.dateformat(res.data.Info.over_time);
+              }.bind(_this), 1000);
+            }
+  
+            // _this.giftrecord();
+  
+          } else { }
+        }
+      });      
+    }
   },
 
   signin: function () {
     var _this = this;
-    var qqq = Dec.Aese('mod=Obtain&operation=todaySign&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&lottoActivityId='+_this.data.limaid);
-    _this.setData({
-      ishowrecord: false,
-    })
+
+    if(this.data.isFukaActivities){
+      
+        var qqq = Dec.Aese('mod=cow&operation=todaySign&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&share_uid='+_this.data.referee);
+        wx.showLoading({
+          title: '加载中...',
+          mask: true
+        })
+        wx.request({
+          url: app.signindata.comurl + 'sign.php' + qqq,
+          method: 'GET',
+          header: {'Accept': 'application/json'},
+          success: function (res) {
+            if (res.data.ReturnCode == 200) {
+              wx.hideLoading();
+              // app.showToastC('获取成功');
+              _this.setData({
+                goodsGift: res.data.Info.receiveGiftInfo.goodsGift,
+                gift: res.data.Info.receiveGiftInfo.gift,
+                ishowsignin: true,
+                share_id: res.data.Info.share_id ? res.data.Info.share_id : 0,
+                subscribedata: res.data.Info.subscribe,
+              })
+              // _this.subscrfun();
+              // setTimeout(function(){
+                app.signindata.isTodaySign = true;
+                _this.getInfo();
+              // },2000);
+            } else {
+              app.showToastC(res.data.Msg);
+            };
+          }
+        });
+    }else{
+        var qqq = Dec.Aese('mod=Obtain&operation=todaySign&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&lottoActivityId='+_this.data.limaid);
+        _this.setData({
+          ishowrecord: false,
+        })
+    
+        wx.showLoading({
+          title: '加载中...',
+          mask: true
+        })
+        wx.request({
+          url: app.signindata.comurl + 'sign.php' + qqq,
+          method: 'GET',
+          header: {
+            'Accept': 'application/json'
+          },
+          success: function (res) {
+            if (res.data.ReturnCode == 200) {
+              wx.hideLoading();
+    
+              _this.setData({
+                goodsGift: res.data.Info.receiveGiftInfo.goodsGift,
+                gift: res.data.Info.receiveGiftInfo.gift,
+                ishowsignin: true,
+                share_id: res.data.Info.share_id ? res.data.Info.share_id : 0,
+                subscribedata: res.data.Info.subscribe,
+              })
+              // _this.subscrfun();
+              app.signindata.isTodaySign = true;
+              _this.getInfo();
+    
+            } else {
+              app.showToastC(res.data.Msg);
+            }
+          }
+        });
+    }
+    
+  },
+  // 领取机会
+  getTheChance: function () {
+    var _this = this;
+
+    var qqq = Dec.Aese('mod=cow&operation=todayChance&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
 
     wx.showLoading({
       title: '加载中...',
@@ -313,31 +469,23 @@ Page({
     wx.request({
       url: app.signindata.comurl + 'sign.php' + qqq,
       method: 'GET',
-      header: {
-        'Accept': 'application/json'
-      },
+      header: {'Accept': 'application/json'},
       success: function (res) {
         if (res.data.ReturnCode == 200) {
+          app.showToastC('领取成功');
           wx.hideLoading();
-
+          var signinfo = _this.data.signinfo || {};
+          signinfo.isTodayGainChance = false ;
+          signinfo.getSignNumber = parseInt(signinfo.getSignNumber) + 1;
           _this.setData({
-            goodsGift: res.data.Info.receiveGiftInfo.goodsGift,
-            gift: res.data.Info.receiveGiftInfo.gift,
-            ishowsignin: true,
-            share_id: res.data.Info.share_id ? res.data.Info.share_id : 0,
-            subscribedata: res.data.Info.subscribe,
+            signinfo:signinfo
           })
-          // _this.subscrfun();
-          app.signindata.isTodaySign = true;
-          _this.getInfo();
-
         } else {
           app.showToastC(res.data.Msg);
         }
       }
     });
   },
-
   // 拉起订阅
   subscrfun: function () {
     var _this = this;
@@ -900,12 +1048,26 @@ Page({
 
   switchclick: function () {
     var _this = this;
-    if (!_this.data.ishowSwitch) {
-      _this.switchList();
-    } else {
-      _this.setData({
-        ishowSwitch: !_this.data.ishowSwitch,
-      })
+    if(this.data.isFukaActivities){
+      var query = wx.createSelectorQuery();
+      query.select('#rule').boundingClientRect();
+      query.selectViewport().scrollOffset();
+      query.exec(function(res) {
+        if (res && res[0] && res[1]) {
+          wx.pageScrollTo({
+             scrollTop:( res[0].top+res[1].scrollTop-app.signindata.statusBarHeightMc||90 )-85,
+             duration:300
+          })
+        }
+      });
+    }else{
+      if (!_this.data.ishowSwitch) {
+        _this.switchList();
+      } else {
+        _this.setData({
+          ishowSwitch: !_this.data.ishowSwitch,
+        })
+      }
     }
   },
 

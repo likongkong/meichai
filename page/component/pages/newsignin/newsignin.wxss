@@ -315,3 +315,127 @@
   text-align: center;
   border-radius: 5rpx;
 }
+
+.switchbtnstyle {
+  width: 400rpx;
+  color: white;
+  position: absolute;
+  left: 100rpx;
+  bottom: 50rpx;
+  font-size: 30rpx;
+  line-height: 80rpx;
+  background: #8abe39;
+  text-align: center;
+  border-radius: 5rpx;
+}
+
+.newYearABut{
+  width:180rpx;
+  height:60rpx;
+  line-height:60rpx;
+  background:#1890ff;
+  border-radius:7rpx;
+  font-size: 26rpx;
+}
+.digitalTips{
+  width: 30rpx;
+  height: 30rpx;
+  border-radius: 17rpx;
+  border: 2rpx solid #ff6968;
+  position: absolute;
+  top: -18rpx;
+  right: -18rpx;
+  color: #ff6968;
+  text-align: center;
+  line-height: 30rpx;
+  font-size: 18rpx;
+  z-index: 3;
+}
+
+.getDrawMask{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,.5);
+  z-index: 13;
+  display: flex;
+  align-items: flex-end;
+}
+.getDrawBox{
+  width: 100%;
+  height: auto;
+  border-top-right-radius: 20rpx;
+  border-top-left-radius: 20rpx;
+  background: #f2f2f2;
+  padding: 35rpx 0;
+}
+.getDrawNumCard:last-child{
+  margin-bottom: 0;
+}
+.getDrawNumCard{
+  width: 690rpx;
+  padding: 35rpx 28rpx;
+  margin-left: 30rpx;
+  border-radius: 12rpx;
+  background: #fff;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+  position: relative;
+}
+.getDrawNumCard .txt{
+  display: block;
+}
+.getDrawNumCard .bigtxt{
+  font-size: 30rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+.getDrawNumCard .smalltxt{
+  font-size: 26rpx;
+  color: #333333;
+}
+.avatarBox{
+  display: flex;
+}
+.avatarBox text{
+  display: inline-block;
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 60rpx;
+  background: #999;
+  margin-right: 10rpx;
+  vertical-align: top;
+}
+.avatarBox image{
+  display: inline-block;
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 60rpx;
+  background: #999;
+  margin-right: 10rpx;
+  vertical-align: top;
+}
+.avatarBox text:last-child{
+  margin-right: 0;
+}
+.avatarBox image:last-child{
+  margin-right: 0;
+}
+.getDrawNumCard .btn{
+  width: 160rpx;
+  height: 60rpx;
+  background: #E94F57;
+  border-radius: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  color: #fff;
+  font-size: 26rpx;
+  position: relative;
+  box-shadow: 0px 4rpx 12rpx 0px rgba(0, 0, 0, 0.4);
+}
+  
