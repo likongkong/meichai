@@ -82,8 +82,20 @@ Page({
     limaid:0,
     isGetDrawMask:false,
     // 是否是集福卡活动
-    isFukaActivities:true,
-    virtualData:[0,1,2,3,4]
+    isFukaActivities:false,
+    virtualData:[0,1,2,3,4],
+    recordList:[],
+    pId:0,
+    nowIdx: 0,//当前swiper索引
+    shareFuka:false,
+    shareCardReceive:false,
+    firstShareTip:true,
+    ruleClick:true
+  },
+  shareCardReceiveFun:function(){
+     this.setData({
+      shareCardReceive:false
+     })
   },
   toggleDrawMask(){
     this.setData({
@@ -154,6 +166,10 @@ Page({
    */
   onLoad: function (options) {
     var _this = this;
+
+    // 是否是集福卡活动
+    var isFukaActivities = Date.parse(new Date())/1000>1612972800 && Date.parse(new Date())/1000<1613577600?true:false;
+
     if (options.scene) {
       let scene = decodeURIComponent(options.scene);
       app.signindata.referee = _this.getSearchString('referee', scene) || 0;
@@ -169,6 +185,9 @@ Page({
         id: _this.getSearchString('id', scene) || 0,
         referee: _this.getSearchString('referee', scene) || 0,
         mshareId: _this.getSearchString('share_id', scene) || 0,
+        isFukaActivities:isFukaActivities,
+        c_title:isFukaActivities?'春节集福利':'签到领福利',
+        cd:_this.getSearchString('cd', scene) || 0,
       });
     } else {
       app.signindata.referee = options.referee || 0;
@@ -180,14 +199,18 @@ Page({
         uid: app.signindata.uid,
         isShareFun: app.signindata.isShareFun,
         id: options.id || 0,
+        cd: options.cd || 0,
         referee: options.referee || 0,
         mshareId: options.share_id || 0,
+        isFukaActivities:isFukaActivities,
+        c_title:isFukaActivities?'春节集福利':'签到领福利'
       });
     }
 
     wx.showLoading({
       title: '加载中...',
     })
+
     if(app.signindata.sceneValue==1154){
       app.signindata.isProduce = true;  
       _this.onLoadfun();
@@ -237,8 +260,12 @@ Page({
 
     this.getInfo();
 
+    this.recordListFun(1)
+
     if (_this.data.id != 0 && _this.data.referee != 0 && _this.data.referee != _this.data.uid && _this.data.mshareId != 0) {
-      _this.giftrecord();
+      if(!this.data.isFukaActivities){
+        _this.giftrecord();
+      };
     }
 
     // 购物车数量
@@ -251,7 +278,7 @@ Page({
   getInfo: function () {
     var _this = this;
     if(this.data.isFukaActivities){
-      var qqq = Dec.Aese('mod=cow&operation=list&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
+      var qqq = Dec.Aese('mod=cow&operation=list&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&card_id=' + _this.data.cd+'&share_uid=' + _this.data.referee);
       wx.request({
         url: app.signindata.comurl + 'sign.php' + qqq,
         method: 'GET',
@@ -273,8 +300,15 @@ Page({
                 }
               }
             }
+
+            if(_this.data.firstShareTip && _this.data.cd && _this.data.referee && res.data.List.donateCardInfo){
+              _this.data.firstShareTip = false;
+              _this.setData({
+                shareCardReceive:true,
+              })
+            };
   
-            _this.setData({
+            _this.setData({       
               isresponse: true,
               signinfo: res.data.Info,
               id: res.data.Info.aid,
@@ -289,7 +323,8 @@ Page({
               receiveMakeUp: res.data.Info.receiveMakeUp,
               selectaid: res.data.Info.aid,
               isSwitch: res.data.Info.isSwitch || false,
-              inviteData:res.data.List.invite || {newer:[],older:[]}
+              inviteData:res.data.List.invite || {newer:[],older:[]},
+              donateCardInfo:res.data.List.donateCardInfo || {}
             })
   
             // 商品详情 
@@ -312,7 +347,7 @@ Page({
   
             // _this.giftrecord();
   
-          } else { }
+          } else {app.showToastC(res.data.Msg); }
         }
       });
     }else{
@@ -376,7 +411,7 @@ Page({
   
             // _this.giftrecord();
   
-          } else { }
+          } else {app.showToastC(res.data.Msg); }
         }
       });      
     }
@@ -386,7 +421,10 @@ Page({
     var _this = this;
 
     if(this.data.isFukaActivities){
-      
+        if(this.data.signinfo.getSignNumber<=0){
+          app.showToastC('机会不足');
+          return false;
+        }
         var qqq = Dec.Aese('mod=cow&operation=todaySign&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&share_uid='+_this.data.referee);
         wx.showLoading({
           title: '加载中...',
@@ -397,8 +435,8 @@ Page({
           method: 'GET',
           header: {'Accept': 'application/json'},
           success: function (res) {
+            wx.hideLoading();
             if (res.data.ReturnCode == 200) {
-              wx.hideLoading();
               // app.showToastC('获取成功');
               _this.setData({
                 goodsGift: res.data.Info.receiveGiftInfo.goodsGift,
@@ -434,9 +472,8 @@ Page({
             'Accept': 'application/json'
           },
           success: function (res) {
+            wx.hideLoading();
             if (res.data.ReturnCode == 200) {
-              wx.hideLoading();
-    
               _this.setData({
                 goodsGift: res.data.Info.receiveGiftInfo.goodsGift,
                 gift: res.data.Info.receiveGiftInfo.gift,
@@ -471,9 +508,9 @@ Page({
       method: 'GET',
       header: {'Accept': 'application/json'},
       success: function (res) {
+        wx.hideLoading();
         if (res.data.ReturnCode == 200) {
           app.showToastC('领取成功');
-          wx.hideLoading();
           var signinfo = _this.data.signinfo || {};
           signinfo.isTodayGainChance = false ;
           signinfo.getSignNumber = parseInt(signinfo.getSignNumber) + 1;
@@ -533,8 +570,8 @@ Page({
         'Accept': 'application/json'
       },
       success: function (res) {
+        wx.hideLoading();
         if (res.data.ReturnCode == 200) {
-          wx.hideLoading();
           if (res.data.Info.receiveUserInfo && res.data.Info.receiveUserInfo.length < 3) {
             var num = 3 - parseInt(res.data.Info.receiveUserInfo.length);
             for (var j = 0; j < num; j++) {
@@ -578,10 +615,43 @@ Page({
 
   //领取奖励
   getaward: function () {
-    var cart_id = this.data.signinfo.cart_id || '';
-    wx.navigateTo({
-      url: "/page/component/pages/awardwinningarea/awardwinningarea?cart_id=" + cart_id,
-    });
+    if(this.data.isFukaActivities){
+      var _this = this;
+      var role_id = _this.data.drawBoxGoodsInfo.role_id || 0;
+  
+      var qqq = Dec.Aese('mod=cow&operation=payCard&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
+  
+      wx.showLoading({
+        title: '加载中...',
+        mask: true
+      })
+      wx.request({
+        url: app.signindata.comurl + 'sign.php' + qqq,
+        method: 'GET',
+        header: {'Accept': 'application/json'},
+        success: function (res) {
+          wx.hideLoading()
+          if (res.data.ReturnCode == 200) {
+
+            wx.showModal({
+              content: res.data.Msg || '',
+              showCancel: false,
+              success: function (res) {}
+            })
+
+            _this.getInfo();
+          } else {
+            app.showToastC(res.data.Msg);
+          }
+        }
+      })
+    }else{
+      var cart_id = this.data.signinfo.cart_id || '';
+      wx.navigateTo({
+        url: "/page/component/pages/awardwinningarea/awardwinningarea?cart_id=" + cart_id,
+      });
+    }
+
   },
 
   closegetcard: function () {
@@ -608,12 +678,16 @@ Page({
         'Accept': 'application/json'
       },
       success: function (res) {
+        wx.hideLoading()
         if (res.data.ReturnCode == 200) {
           app.showToastC('领取成功');
           _this.setData({
             ishowgetcard: false,
           })
-          _this.getInfo();
+          setTimeout(function(){
+            _this.getInfo();
+          },2000)
+          
         } else {
           app.showToastC(res.data.Msg);
         }
@@ -674,26 +748,92 @@ Page({
   onPullDownRefresh: function () {
     this.getInfo();
   },
-
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+    // 获取list数据
+    if(this.data.ruleClick && this.data.isFukaActivities){
+      this.recordListFun(2);    
+    };
+  },
   /**
    * 用户点击右上角分享
    */
   onShareTimeline:function(){
     var _this = this;
+    if(this.data.isFukaActivities){
+      var shareTitle = this.data.signinfo.shareTitle || '美拆';
+    }else{
+      var shareTitle = "我在签到领盲盒,送你们随机款式x3,一起互换卡片吧。";
+    };
+
     return {
-      title:'我在签到领盲盒，送你们随机款式x3，一起互换卡片吧',
+      title:shareTitle,
       query:{},
       imageUrl:_this.data.signinfo.goods_share 
     }
   },
-  onShareAppMessage: function () {
-    var _this = this
-    var share = {
-      title: "我在签到领盲盒,送你们随机款式x3,一起互换卡片吧。",
-      imageUrl: _this.data.signinfo.goods_share,
-      path: "/page/component/pages/newsignin/newsignin?id=" + _this.data.signinfo.aid + '&referee=' + _this.data.uid + '&share_id=' + _this.data.share_id,
-      success: function (res) { }
+  onShareAppMessage: function (ops) {
+    var _this = this;
+
+    if(this.data.isFukaActivities){
+      var shareTitle = this.data.signinfo.shareTitle || '美拆';
+    }else{
+      var shareTitle = "我在签到领盲盒,送你们随机款式x3,一起互换卡片吧。";
+    };
+
+    if(ops.from == 'button' && this.data.isFukaActivities){
+       var index = ops.target.dataset.index || 0;
+       if(index == 9999999){
+          var share = {
+            title: shareTitle,
+            imageUrl: _this.data.signinfo.goods_share,
+            path: "/page/component/pages/newsignin/newsignin?id=" + _this.data.signinfo.aid + '&referee=' + _this.data.uid + '&share_id=' + _this.data.share_id,
+            success: function (res) { }
+          }
+       }else{
+          var giftCardList = _this.data.giftCardList || [];
+          var cd = '';
+          var shareIdArr = [];
+          if(giftCardList && giftCardList.length != 0){
+            shareIdArr = giftCardList[index].roleInfo.shareIdArr || '';
+            if(shareIdArr && shareIdArr.length != 0){
+              cd = shareIdArr.splice(0,1)[0];
+              giftCardList[index].roleInfo.shareIdArr = shareIdArr;
+              _this.setData({
+                giftCardList:giftCardList
+              });
+              var qqq = Dec.Aese('mod=cow&operation=setCardTime&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&card_id=' + cd);
+              wx.request({
+                url: app.signindata.comurl + 'sign.php' + qqq,
+                method: 'GET',
+                header: {'Accept': 'application/json'},
+                success: function (res) {},
+                fail: function (res) {}
+              })
+  
+            };
+          };
+          console.log("/page/component/pages/newsignin/newsignin?id=" + _this.data.signinfo.aid + '&referee=' + _this.data.uid + '&cd=' + cd)
+          var share = {
+            title: shareTitle,
+            imageUrl: _this.data.signinfo.goods_share,
+            path: "/page/component/pages/newsignin/newsignin?id=" + _this.data.signinfo.aid + '&referee=' + _this.data.uid + '&cd=' + cd,
+            success: function (res) { }
+          } 
+       }
+      
+    }else{
+
+      var share = {
+        title: shareTitle,
+        imageUrl: _this.data.signinfo.goods_share,
+        path: "/page/component/pages/newsignin/newsignin?id=" + _this.data.signinfo.aid + '&referee=' + _this.data.uid + '&share_id=' + _this.data.share_id,
+        success: function (res) { }
+      }
     }
+
     return share;
   },
 
@@ -1049,6 +1189,7 @@ Page({
   switchclick: function () {
     var _this = this;
     if(this.data.isFukaActivities){
+      _this.data.ruleClick = false;
       var query = wx.createSelectorQuery();
       query.select('#rule').boundingClientRect();
       query.selectViewport().scrollOffset();
@@ -1058,6 +1199,9 @@ Page({
              scrollTop:( res[0].top+res[1].scrollTop-app.signindata.statusBarHeightMc||90 )-85,
              duration:300
           })
+          setTimeout(function(){
+            _this.data.ruleClick = true;
+          },500)
         }
       });
     }else{
@@ -1124,5 +1268,120 @@ Page({
     _this.setData({
       isjumpshow: !_this.data.isjumpshow,
     })
+  },
+  givefun(){
+    var _this = this;
+    if(this.data.shareFuka){
+      this.setData({
+        shareFuka:!this.data.shareFuka
+      });
+    }else{
+      var qqq = Dec.Aese('mod=cow&operation=giveCard&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
+      wx.request({
+        url: app.signindata.comurl + 'sign.php' + qqq,
+        method: 'GET',
+        header: {'Accept': 'application/json'},
+        success: function (res) {
+          wx.hideLoading();
+          console.log('分享福卡图片=====',res)
+          if (res.data.ReturnCode == 200) {
+            var giftCardList = res.data.List.roleList || [];
+            _this.setData({
+              giftCardList: giftCardList,
+              shareFuka:true
+            });
+          } else {
+            app.showToastC(res.data.Msg);
+          }
+        }
+      })      
+
+    }
+
+  },
+  recordListFun(num){
+    var _this = this;
+    wx.showLoading({
+      title: '加载中',
+      mask:true
+    });
+    if(num == 1){
+      _this.data.pId = 0;
+    }else{
+      var pagenum = parseInt(_this.data.pId)
+      _this.data.pId = ++pagenum;
+    };
+
+    console.log('mod=cow&operation=receiveLog&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&pId=' + _this.data.pId)
+
+    var qqq = Dec.Aese('mod=cow&operation=receiveLog&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&pId=' + _this.data.pId);
+
+    wx.request({
+      url: app.signindata.comurl + 'sign.php' + qqq,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        console.log('开奖中奖列表=====',res)
+        wx.hideLoading();
+        if (res.data.ReturnCode == 200) {
+          var recordList = res.data.List.logList || [];
+          if(num == 1){
+            _this.setData({
+              recordList: recordList,
+            })
+          }else if (num != 1) {
+            if(recordList && recordList.length != 0){
+              var listdata = [..._this.data.recordList,...recordList];
+              _this.setData({
+                recordList: listdata,
+              })
+            }else{
+              app.showToastC('暂无更多数据');
+            };
+          };
+
+        } else {
+          app.showToastC(res.data.Msg);
+        }
+      }
+    })    
+  },
+  //swiper滑动事件
+  swiperChange: function (e) {
+  　　this.setData({
+  　　　　nowIdx: e.detail.current
+  　　})
+  },
+  // 领取分享人福卡
+  shareCardReceiveQ(){
+    var _this = this;
+
+    wx.showLoading({
+      title: '加载中',
+      mask:true
+    });
+
+    var qqq = Dec.Aese('mod=cow&operation=getShareCard&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&share_uid=' + _this.data.referee + '&card_id=' + _this.data.cd);
+
+    wx.request({
+      url: app.signindata.comurl + 'sign.php' + qqq,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        wx.hideLoading();
+        if (res.data.ReturnCode == 200) {
+          app.showModalC('领取成功')
+          _this.setData({
+            shareCardReceive:false
+          });
+          _this.getInfo();
+        } else {
+          app.showModalC(res.data.Msg)
+          _this.setData({
+            shareCardReceive:false
+          });
+        }
+      }
+    })    
   }
 })

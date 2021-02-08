@@ -1046,6 +1046,15 @@ App({
       duration:2000
     });    
   },
+  showModalC:function(content,title){
+    var title = title || '提示';
+    wx.showModal({
+      title: title,
+      content: content,
+      showCancel: false,
+      success: function (res) { }
+    })    
+  },
   // 基础数据
   defaultinfofun:function(_this){
       var _this = _this;

@@ -35,7 +35,7 @@
 
 </view>
 
-<swiper class="nsswiperdetail" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
+<swiper wx:if='{{signinfo.banner && signinfo.banner.length != 0}}' class="nsswiperdetail" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
   <swiper-item wx:for="{{signinfo.banner}}" wx:key="key">
     <image src="{{item}}?imageMogr2/thumbnail/x736" class="dhhsimg" style="width:100%;height:368rpx;border-radius:20rpx;" catchtap="showDetail"></image>
   </swiper-item>
@@ -43,28 +43,33 @@
 
 <view style="width:690rpx;margin:0 30rpx;padding:20rpx 0;overflow:hidden;background:white;">
   <view wx:for='{{cardList}}' wx:key='key' style="width:{{singlewidth}}rpx;height:{{cardHeight}}rpx;float:left;margin:15rpx 9rpx;position:relative;">
-    <block wx:if='{{isFukaActivities}}'>
-      <image style="width:{{singlewidth}}rpx;border-radius:5rpx;opacity:{{item.num>0?'1':'0.5'}}" mode="widthFix" src="{{item.img}}?imageMogr2/thumbnail/{{singlewidth*2}}x" bindload='imageLoad' data-type='1' data-url='{{item.img}}' data-ind='{{index}}'></image>     
-    </block>
-    <block wx:else>
-      <image style="width:{{singlewidth}}rpx;border-radius:5rpx;opacity:{{item.num>0?'1':'0.5'}}" mode="widthFix" src="{{item.img}}?imageMogr2/thumbnail/{{singlewidth*2}}x" bindload='imageLoad' data-type='1' catchtap="lookbigimg" data-url='{{item.img}}' data-ind='{{index}}'></image>    
-      <view wx:if='{{item.isone && isRetroactive}}' class="retriactiveStyle" catchtap="closeRorto">补签</view>
-      <view wx:else class="numstyle">{{item.num}}</view>    
-    </block>
+      <image style="width:{{singlewidth}}rpx;border-radius:5rpx;opacity:{{item.num>0?'1':'0.5'}}" mode="widthFix" src="{{item.img}}?imageMogr2/thumbnail/{{singlewidth*2}}x" bindload='imageLoad' data-type='1' catchtap="lookbigimg" data-url='{{item.img}}' data-ind='{{index}}'></image>  
+      <block wx:if='{{isFukaActivities}}'>  
+        <view class="numstyle">{{item.num}}</view>  
+      </block>
+      <block wx:else>
+        <view wx:if='{{item.isone && isRetroactive}}' class="retriactiveStyle" catchtap="closeRorto">补签</view>
+        <view wx:else class="numstyle">{{item.num}}</view>              
+      </block>
   </view>
 </view>
 
 <view style="width:100%;position:relative;">
   <block wx:if='{{isFukaActivities}}'>
-      <view class="signinbtnstyle" style="margin:40rpx 175rpx 20rpx;position: relative;" catchtap="signin">集福卡<view class="digitalTips specialellipsis" wx:if='{{signinfo.getSignNumber>0}}'>{{signinfo.getSignNumber}}</view></view>
+      <view wx:if='{{signinfo.orderStatus == 6}}' class="signinbtnstyle" style="margin:40rpx 175rpx 20rpx;position: relative;" catchtap="signin">集福卡<view class="digitalTips specialellipsis" wx:if='{{signinfo.getSignNumber>0}}'>{{signinfo.getSignNumber}}</view></view>
+
+      <view wx:if='{{signinfo.orderStatus == 0 || signinfo.orderStatus == 3 || signinfo.orderStatus == 1 || signinfo.orderStatus == 2}}' style="text-align:center;color:#FF9800;font-size:25rpx;line-height:40rpx;margin-top:40rpx;">恭喜您，集福完成</view>
+      <view wx:if='{{signinfo.orderStatus == 0 || signinfo.orderStatus == 3}}' class="signinbtnstyle" style="background:#FF9800;margin:10rpx 175rpx 40rpx 175rpx;" catchtap="winaward">晒单领奖</view>
+      <view wx:if='{{signinfo.orderStatus == 1}}' class="signinbtnstyle" style="background:#FF9800;margin:10rpx 175rpx 40rpx 175rpx;">审核中</view>
+      <view wx:if='{{signinfo.orderStatus == 2}}' class="signinbtnstyle" style="background:#FF9800;margin:10rpx 175rpx 40rpx 175rpx;" catchtap="getaward">领取奖励</view>
 
       <view class="signinbtnstyle" style="margin:0 175rpx 40rpx;display:flex;flex-flow:row nowrap;justify-content: space-between;background:#fff;">
-        <view class="newYearABut">赠送</view>
+        <view class="newYearABut" catchtap="givefun">赠送</view>
         <view class="newYearABut" catchtap="toggleDrawMask">获取</view>
       </view>  
   </block>
   <block wx:else>
-      <view wx:if='{{drawBoxGoodsInfo!="" && drawBoxStatus != 2}}' style="width:60rpx;height:{{60/cardratio}}rpx;position:absolute;right:60rpx;top:-20rpx;" catchtap="{{isRetroactive?'closeRorto':'closegetcard'}}" class="change">
+        <view wx:if='{{drawBoxGoodsInfo!="" && drawBoxStatus != 2}}' style="width:60rpx;height:{{60/cardratio}}rpx;position:absolute;right:60rpx;top:-20rpx;" catchtap="{{isRetroactive?'closeRorto':'closegetcard'}}" class="change">
           <image style="width:60rpx;border-radius:10rpx;" mode="widthFix" src="{{drawBoxGoodsInfo.img}}"> </image>
           <view class="sharenum" style="width:26rpx;line-height:26rpx;color:#d64650;font-size:20rpx;text-align:center;border:3rpx solid #d64650;">领</view>
         </view>
@@ -82,7 +87,8 @@
         <view wx:if='{{signinfo.orderStatus == 0 || signinfo.orderStatus == 3 || signinfo.orderStatus == 1 || signinfo.orderStatus == 2}}' style="text-align:center;color:#FF9800;font-size:25rpx;line-height:40rpx;margin-top:40rpx;">恭喜您，收集完成可领取该系列盲盒×1(当日24点前有效)</view>
         <view wx:if='{{signinfo.orderStatus == 0 || signinfo.orderStatus == 3}}' class="signinbtnstyle" style="background:#FF9800;margin:10rpx 175rpx 40rpx 175rpx;" catchtap="winaward">晒单领奖</view>
         <view wx:if='{{signinfo.orderStatus == 1}}' class="signinbtnstyle" style="background:#FF9800;margin:10rpx 175rpx 40rpx 175rpx;">审核中</view>
-        <view wx:if='{{signinfo.orderStatus == 2}}' class="signinbtnstyle" style="background:#FF9800;margin:10rpx 175rpx 40rpx 175rpx;" catchtap="getaward">领取奖励</view>  
+        <view wx:if='{{signinfo.orderStatus == 2}}' class="signinbtnstyle" style="background:#FF9800;margin:10rpx 175rpx 40rpx 175rpx;" catchtap="getaward">领取奖励</view>
+
   </block>
 
   
@@ -131,15 +137,32 @@
 </block>
 
 
-<view style="width:740rpx;">
+<view style="width:740rpx;" wx:if='{{!isFukaActivities}}'>
   <somke colortitle='#000'></somke>
 </view>
 
 <block wx:if='{{isFukaActivities}}'>
+    <view style="width: 600rpx;margin: 20rpx auto;height:60rpx;line-height:60rpx;border-radius:60rpx;font-size:28rpx;text-align:center;" wx:if='{{recordList.length != 0}}'>领奖记录</view>
+    <view class="main" wx:if='{{recordList.length != 0}}'> 
+      <view class="record">
+        <block wx:for="{{recordList}}" wx:key='key' wx:for-item="item">
+          <view class="recordbox">
+            <image class="avatar" src="{{item.headPhoto}}" mode="widthFix"></image>
+            <view class="gear" style="color:{{item.color?item.color:'#000000'}}"> 
+              {{item.tip}}
+            </view>  
+            <view class="time">
+              <text style="color:#000000;">{{item.get_time}}</text>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+
     <view style="margin:20rpx 30rpx;" id='rule'>
       <view style="width:100%;line-height:40rpx;background:#EAEAEA;padding:20rpx 0;">
         <view style='width:100%;text-align:center;font-size:30rpx;'>集福卡规则</view>
-        <view style="margin-left:40rpx;font-size:25rpx;">
+        <view style="margin:0 40rpx;font-size:25rpx;">
           <text>{{signinfo.explain}}</text>
         </view>
       </view>
@@ -217,7 +240,7 @@
 
   <view style="width:100%;height:100%;position:absolute;left:0;top:{{isFukaActivities?'0':statusBarHeightMc+30}}px;z-index:10;" catchtap='closesignin' catchtouchmove="myCatchTouch">
 
-    <view style="{{isFukaActivities?'width:500rpx;height:360rpx;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;z-index:9;background:white;border-radius:10rpx;':'width:500rpx;height:720rpx;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;z-index:9;background:white;border-radius:10rpx;'}}" catchtouchmove="myCatchTouch">
+    <view style="{{isFukaActivities?'width:500rpx;height:400rpx;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;z-index:9;background:white;border-radius:10rpx;':'width:500rpx;height:720rpx;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;z-index:9;background:white;border-radius:10rpx;'}}" catchtouchmove="myCatchTouch">
       <view style="width:100%;font-size:35rpx;text-align:center;margin-top:20rpx;line-height:40rpx;">
           <block wx:if='{{isFukaActivities}}'>获取成功</block>
           <block wx:else>签到成功</block>
@@ -437,40 +460,40 @@
   <view class="getDrawBox" catchtap="true">
     <view class="getDrawNumCard">
       <view>
-        <text class="bigtxt txt">新用户分享赠送机会x1</text>
+        <text class="bigtxt txt">邀请新用户赠送集福机会x2</text>
         <view class="avatarBox">
           <block wx:for='{{virtualData}}' wx:key='key'>
             <block wx:if='{{inviteData.newer[index]}}'>
                 <image src="{{inviteData.newer[index].photo}}"></image>
             </block>
-            <text wx:else></text>
+            <text wx:else>+</text>
           </block>
         </view>
       </view>
       <view class="btn">去邀请</view>
-      <button style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' open-type="share"></button>
+      <button data-index='9999999' style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' open-type="share"></button>
     </view>
     <view class="getDrawNumCard">
       <view>
-        <text class="bigtxt txt">老用户分享赠送机会x1</text>
+        <text class="bigtxt txt">邀请老用户赠送集福机会x1</text>
         <view class="avatarBox">
           <block wx:for='{{virtualData}}' wx:key='key'>
             <block wx:if='{{inviteData.older[index]}}'>
                 <image src="{{inviteData.older[index].photo}}"></image>
             </block>
-            <text wx:else></text>
+            <text wx:else>+</text>
           </block>
         </view>
       </view>
       <view class="btn">
         去邀请
       </view>
-      <button style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' open-type="share"></button>
+      <button data-index='9999999' style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' open-type="share"></button>
     </view>
     <view class="getDrawNumCard">
       <view>
-        <text class="bigtxt txt">抽盒机赠送机会</text>
-        <text class="smalltxt txt">抽奖机会x1</text>
+        <text class="bigtxt txt">抽盒机赠送集福机会x1</text>
+        <text class="smalltxt txt">在线抽盒中每抽一盒可领取福卡 x 1</text>
       </view>
       <view class="btn" data-num='988' catchtap="jumpOtherPage">
         去抽盒
@@ -478,8 +501,8 @@
     </view>
     <view class="getDrawNumCard">
       <view>
-        <text class="bigtxt txt">一番赏赠送机会</text>
-        <text class="smalltxt txt">抽奖机会x1</text>
+        <text class="bigtxt txt">一番赏赠送集福机会x1</text>
+        <text class="smalltxt txt">在一番赏中每刮一赏可领取福卡 x 1</text>
       </view>
       <view class="btn" data-num='9015' catchtap="jumpOtherPage">
         去抽赏
@@ -487,10 +510,38 @@
     </view>
     <view class="getDrawNumCard">
       <view>
-        <text class="bigtxt txt">每天登录领取</text>
-        <text class="smalltxt txt">抽奖机会x1</text>
+        <text class="bigtxt txt">每天登录领取集福机会x1</text>
+        <text class="smalltxt txt">每日登录美拆小程序可领取福卡 x 1</text>
       </view>
       <view class="btn" catchtap="{{signinfo.isTodayGainChance?'getTheChance':''}}" style="{{signinfo.isTodayGainChance?'':'background:#999;'}}">领取</view>
     </view>
   </view>
+</view>
+
+
+
+<view wx:if='{{shareFuka}}' catchtouchmove="true" catchtap="givefun" class="getDrawMask">
+  <view class="calendarSwiperBox" catchtap="true">
+    <swiper class="calendarSwiper" autoplay="{{false}}" circular="true" indicator-dots="{{false}}" previous-margin='30px' next-margin='30px' bindchange="swiperChange" indicator-active-color="#298CF7" style="height:600rpx;">
+      <swiper-item wx:for='{{giftCardList}}' wx:key='key'>
+        <view class="calendarSwiperItem {{nowIdx==index?'le-active':''}}">
+          <image class='le-img' src='{{item.roleImg}}' style='height:500rpx;opacity:{{item.roleInfo.totalNumber>0?"1":"0.5"}}' mode="aspectFit"></image>
+          <view class="numstyleSHawer">{{item.roleInfo.totalNumber}}</view>
+          <view class="swiperItemBrandWrap" style="{{item.roleInfo.shareIdArr.length>0?'':'background:#999;'}}"><button open-type="share" data-index='{{index}}' wx:if='{{item.roleInfo.shareIdArr.length>0}}' style='opacity: 0;position:absolute;top:0;left:0;height:100%;width:100%;'></button>分享给朋友</view>
+        </view>
+      </swiper-item>
+    </swiper>   
+  </view>
+</view>
+
+<!-- 分享福卡弹框 -->
+<view class="getDrawMask" wx:if='{{shareCardReceive}}' catchtouchmove="true" catchtap="shareCardReceiveFun">
+   <view class="shareCarDispay" catchtap="true">
+       <view class="scdTopTit">{{donateCardInfo.name}}</view>
+       <image class="scdTopImg" mode="aspectFit" src="{{donateCardInfo.img}}"></image>
+       <view class="signinbtnstyle" style="margin:20rpx auto 0;display:flex;flex-flow:row nowrap;justify-content: space-between;background:#fff;">
+          <view class="newYearABut" catchtap="shareCardReceiveFun">取消</view>
+          <view class="newYearABut" catchtap="shareCardReceiveQ">确定</view>
+       </view> 
+   </view>
 </view>
