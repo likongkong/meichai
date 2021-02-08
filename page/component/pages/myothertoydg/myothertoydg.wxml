@@ -309,7 +309,7 @@
       <view style='width:360rpx;height:70rpx;float:left;'>
         <view style='width:356rpx;border:2rpx solid #59b11e;height:66rpx;line-height:66rpx;font-size:26rpx;color:#59b11e;padding-left:15rpx;margin-left:15rpx;border-radius: 8rpx;'>
           <text style='display: inline-block;height:66rpx;vertical-align: top;'>￥</text>
-          <input class='mtrindheadinpw' style='color:#59b11e;' bindinput="combinahangeprice" type='number' value='{{combinationprice}}'></input>
+          <input class='mtrindheadinpw' style='color:#59b11e;width:320rpx;' bindinput="combinahangeprice" type='number' value='{{combinationprice}}'></input>
         </view>
       </view>
     </view>    
