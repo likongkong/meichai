@@ -3,13 +3,18 @@
 
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
-      <view class='box'>
+      <view class='box' style="background:{{category_id == 'G26'?'#FFD3D5':''}}">
         <block wx:if='{{category_id == "G26"}}'>
-            <block wx:for='{{commoddata}}' wx:key='key'>
-                <view class="blessingBag" data-gid='{{item.gid}}' catchtap='addressmanagement'>
-                    <image src="{{item.gcover}}" mode='widthFix'></image>
-                </view>
-            </block>
+            <image style="width:100%;" src="https://cdn.51chaidan.com/images/202102/thumb_img/cattle/spring_festival_one.png" mode='widthFix'></image>
+        </block>
+        <block wx:if='{{category_id == "G26"}}'>
+            <view class="blessingBagWrap">
+                <block wx:for='{{commoddata}}' wx:key='key'>
+                    <view class="blessingBag" data-gid='{{item.gid}}' catchtap='addressmanagement'>
+                        <image src="{{item.gcover}}" mode='widthFix'></image>
+                    </view>
+                </block>
+            </view>
         </block>
         <!--   信息流  -->
         <block wx:elif='{{ifOrWf==1}}'>
