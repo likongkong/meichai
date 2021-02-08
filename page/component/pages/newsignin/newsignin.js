@@ -301,7 +301,7 @@ Page({
               }
             }
 
-            if(_this.data.firstShareTip && _this.data.cd && _this.data.referee && res.data.List.donateCardInfo){
+            if(_this.data.firstShareTip && _this.data.cd && _this.data.referee && res.data.List.donateCardInfo && _this.data.referee != _this.data.uid){
               _this.data.firstShareTip = false;
               _this.setData({
                 shareCardReceive:true,
