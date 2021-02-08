@@ -93,12 +93,19 @@ page{
   top: 0;
   z-index: 3;
 } 
+.blessingBagWrap{
+  text-align: center;
+  padding-bottom: 50rpx;
+}
 .blessingBag{
-  width: 100%;
   margin-bottom: 18rpx;
-  background: #fff;
+  display: inline-block;
+  background: transparent;
+  margin: 0 12rpx;
 }
 .blessingBag image{
-  width: 100%;
+  width: 340rpx;
+  border-radius: 20rpx;
   display: block;
+  margin-bottom: 25rpx;
 }
