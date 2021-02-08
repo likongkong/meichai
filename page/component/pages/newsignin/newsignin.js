@@ -347,7 +347,7 @@ Page({
   
             // _this.giftrecord();
   
-          } else {app.showToastC(res.data.Msg); }
+          } else {app.showModalC(res.data.Msg); }
         }
       });
     }else{
@@ -411,7 +411,20 @@ Page({
   
             // _this.giftrecord();
   
-          } else {app.showToastC(res.data.Msg); }
+          } else {
+            if(_this.data.firstShareTip){
+              _this.data.firstShareTip = false;
+              wx.showModal({
+                content: res.data.Msg,
+                showCancel: false,
+                success: function (res) { 
+                  app.comjumpwxnav(998,'','','');
+                  _this.data.firstShareTip = true;
+                }
+              }) 
+            }
+             
+          }
         }
       });      
     }
