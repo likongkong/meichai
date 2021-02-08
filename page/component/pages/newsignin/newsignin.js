@@ -628,8 +628,9 @@ Page({
 
   //领取奖励
   getaward: function () {
+    var _this = this;
     if(this.data.isFukaActivities){
-      var _this = this;
+      
       var role_id = _this.data.drawBoxGoodsInfo.role_id || 0;
   
       var qqq = Dec.Aese('mod=cow&operation=payCard&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
@@ -653,6 +654,7 @@ Page({
             })
 
             _this.getInfo();
+            _this.recordListFun(1); 
           } else {
             app.showToastC(res.data.Msg);
           }
