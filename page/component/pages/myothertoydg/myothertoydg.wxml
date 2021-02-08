@@ -241,7 +241,7 @@
 <!-- 单个商品商品弹框 -->
 <view class='comtip' wx:if='{{pricemod}}'>
   <view class='comtipback' catchtap='pricemodfun'></view>
-  <view class='mtotipshop'>
+  <view class='mtotipshop' style="height:{{tipCharge && tipCharge!=''?'760rpx':'720rpx'}}">
     <view class='mtotipshead'>
       <image src='../../../../pages/images/forknumber.png' class='mtoheimg' catchtap='pricemodfun'></image>
     </view>
@@ -264,7 +264,10 @@
         <view style='width:235rpx;border:2rpx solid #59b11e;height:66rpx;line-height:66rpx;font-size:26rpx;color:#59b11e;margin-left:15rpx;border-radius: 8rpx;text-align:center;' catchtap='manydispalyfun'>添加商品</view>
       </view>
     </view>    
-    <view style='width:400rpx;height:66rpx;text-align:center;line-height:66rpx;color:#1989fa;font-size:26rpx;border:2rpx solid #a3d0fd;border-radius:8rpx;background:#e6f1fc;margin:26rpx auto 0;position:relative;' catchtap='modprice'>确定</view>
+    <view wx:if="{{tipCharge && tipCharge!=''}}" style="text-align:center;font-size:22rpx;margin-top: 16rpx;">
+      {{tipCharge}}
+    </view>
+    <view style='width:400rpx;height:66rpx;text-align:center;line-height:66rpx;color:#1989fa;font-size:26rpx;border:2rpx solid #a3d0fd;border-radius:8rpx;background:#e6f1fc;margin:20rpx auto 0;position:relative;' catchtap='modprice'>确定</view>
   </view>
 </view>
 

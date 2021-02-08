@@ -613,13 +613,14 @@ Page({
             };
              
             _this.setData({
-              listdataown: listdata
+              listdataown: listdata,
+              tipCharge:res.data.Info.tipCharge,
             });
             _this.getimginfolist();
           } else {
             var ltlist = _this.data.listdataown.concat(listdata);
             _this.setData({
-              listdataown: ltlist
+              listdataown: ltlist,
             });
           };
         };
@@ -1056,6 +1057,7 @@ Page({
             _this.setData({
               listdata: listdata,
               userInfo: userInfo,
+              tipCharge:res.data.Info.tipCharge,
               deductRatio:res.data.Info.deduct.deductRatio,
               isDeduct:res.data.Info.deduct.isDeduct,
               isUseBlindboxMoney:res.data.Info.deduct.isDeduct?true:false,
