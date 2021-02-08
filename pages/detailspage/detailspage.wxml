@@ -956,14 +956,16 @@
     </image>
   </view>
   <view class='dsbfcontent'>
-    <view class='purchasequantity' wx:if='{{!zunmdata.wholeBox}}'>
-      <view class='purchasequantityleft'>购买数量</view>
-      <view class='purchasequantityright' wx:if='{{zunmdata.is_suit!=1}}'>
-        <view class='pchriadaredleft pcridarcom' style='position: relative;' bindtap='clicksub'>-</view>
-        <view class='pchriadaredcon pcridarcom'>{{numberofdismantling}}</view>
-        <view class='pchriadaredright pcridarcom' style='position: relative;' bindtap='clickadd'>+</view>
-      </view>
-    </view>
+    <block wx:if='{{zunmdata.status != 1}}'>
+      <view class='purchasequantity' wx:if='{{!zunmdata.wholeBox}}'>
+        <view class='purchasequantityleft'>购买数量</view>
+        <view class='purchasequantityright' wx:if='{{zunmdata.is_suit!=1}}'>
+          <view class='pchriadaredleft pcridarcom' style='position: relative;' bindtap='clicksub'>-</view>
+          <view class='pchriadaredcon pcridarcom'>{{numberofdismantling}}</view>
+          <view class='pchriadaredright pcridarcom' style='position: relative;' bindtap='clickadd'>+</view>
+        </view>
+      </view>    
+    </block>
     <view class='coloseltit' wx:if='{{zunmdata.wholeBox&&zunmdata.is_suit==1}}'>购买规格</view>
     <view class='comcolor'>
       <block wx:if='{{zunmdata.wholeBox&&zunmdata.is_suit==1}}'>
@@ -1018,25 +1020,28 @@
       </view>
     </view>
   </view>
-  <view class='dsbfbottom'>
-    <view class='taxvalue' wx:if='{{zunmdata.is_tax==1}}'>
-      <view class='taxvalueleft'>另附商品税费</view>
-      <view class='taxvalueright'>{{zunmdata.munit}}{{taxation}}</view>
-    </view>
-    <view class='dsbfbauto'>
-      <block wx:if='{{quantityofgoods==0}}'>
-        <view class='dsbbbutclick' style='float:left;background:#999;'>加入购物车</view>
-        <view class='dsbbbutclick' style='float:right;background:#999;'>库存不足</view>      
-      </block>
-      <block wx:else>
-        <view class='dsbbbutclick' style='float:left;position:relative;{{awa==1?"width:100%;":""}}' wx:if='{{quantityofgoods!=0&&zunmdata.limitBuy<=0&&room_id<=0&&is_exhibition!=1&&zunmdata.goods_type!=3&&isShareGood}}' bindtap='addtocart'>加入购物车</view>
-        <view class='dsbbbutclick' style='float:right;position:relative;{{zunmdata.limitBuy>0||room_id>0||is_exhibition==1||zunmdata.goods_type==3||!isShareGood?"width:100%;":""}}' wx:if='{{quantityofgoods!=0&&awa!=1}}' bindtap="{{zunmdata.orderSn?'paythebalance':'dsbbbutclickt'}}">
-          立即购买
-        </view>      
-      </block>
+  <block wx:if='{{zunmdata.status != 1}}'>
+      <view class='dsbfbottom'>
+        <view class='taxvalue' wx:if='{{zunmdata.is_tax==1}}'>
+          <view class='taxvalueleft'>另附商品税费</view>
+          <view class='taxvalueright'>{{zunmdata.munit}}{{taxation}}</view>
+        </view>
+        <view class='dsbfbauto'>
+          <block wx:if='{{quantityofgoods==0}}'>
+            <view class='dsbbbutclick' style='float:left;background:#999;'>加入购物车</view>
+            <view class='dsbbbutclick' style='float:right;background:#999;'>库存不足</view>      
+          </block>
+          <block wx:else>
+            <view class='dsbbbutclick' style='float:left;position:relative;{{awa==1?"width:100%;":""}}' wx:if='{{quantityofgoods!=0&&zunmdata.limitBuy<=0&&room_id<=0&&is_exhibition!=1&&zunmdata.goods_type!=3&&isShareGood}}' bindtap='addtocart'>加入购物车</view>
+            <view class='dsbbbutclick' style='float:right;position:relative;{{zunmdata.limitBuy>0||room_id>0||is_exhibition==1||zunmdata.goods_type==3||!isShareGood?"width:100%;":""}}' wx:if='{{quantityofgoods!=0&&awa!=1}}' bindtap="{{zunmdata.orderSn?'paythebalance':'dsbbbutclickt'}}">
+              立即购买
+            </view>      
+          </block>
 
-    </view>
-  </view>
+        </view>
+      </view>  
+  </block>
+
 </view>
 
 <!--  二级背景  -->

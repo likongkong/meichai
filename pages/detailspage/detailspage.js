@@ -363,7 +363,7 @@ Page({
         wx.requestSubscribeMessage({
           tmplIds: subscribedata.template_id || [],
           success(res) {
-            var is_show_modal = _this.data.zunmdata.goods_type==3?false:true;
+            var is_show_modal = true;
             for (var i = 0; i < subscribedata.template_id.length; i++) {
               if (res[subscribedata.template_id[i]] == "accept") {
                 app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
@@ -388,6 +388,16 @@ Page({
         })
       };
     };
+
+    var zunmdata = this.data.zunmdata || {};
+    if(zunmdata.arrSeries && zunmdata.arrSeries.length!=0 && zunmdata.status==1){
+      this.setData({
+        tipback: true,
+        dsbframeiftr: true,
+        judgmentactivity: 1,
+      });
+    }
+
   },
   subshowmodalfun: function () {
     var _this = this;
