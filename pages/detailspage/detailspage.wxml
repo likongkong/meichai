@@ -933,7 +933,7 @@
           </block>
       </view>
       <block wx:if='{{zunmdata.goods_type==3}}'>
-          <view style='height:50rpx;line-height:50rpx;font-size:30rpx;color:#f3223f;width:100%;' class='specialellipsis'>定金 ￥{{zunmdata.promote_price}}</view>      
+          <view style='height:50rpx;line-height:50rpx;font-size:30rpx;color:#f3223f;width:100%;' class='specialellipsis'>定金 ￥{{zunmdata.promote_price*numberofdismantling}}</view>      
       </block>
       <block wx:else>
           <block wx:if='{{zunmdata.wholeBox}}'>
@@ -1094,7 +1094,7 @@
       <!-- 定金 -->
       <view class='pricedetailo' wx:if='{{zunmdata.goods_type==3}}'>
         <view class='pricedetailoleft'>尾款</view>
-        <view class='pricedetailorightcol'>{{zunmdata.munit}}{{zunmdata.end_price}}</view>
+        <view class='pricedetailorightcol'>{{zunmdata.munit}}{{zunmdata.end_price * numberofdismantling}}</view>
       </view>
 
       <view class='pricedetailo'>

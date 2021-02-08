@@ -1176,7 +1176,7 @@ Page({
 
     // 定金
     if(zunmdata.goods_type==3){
-      ap = parseFloat(zunmdata.promote_price) || 0;
+      ap = parseFloat(zunmdata.promote_price) * parseFloat(this.data.numberofdismantling) || 0;
       xianshi = '￥0.00';
       freightiftr = 0;
       txton = 0.00;
@@ -3114,12 +3114,17 @@ Page({
           success: function (res) {},
         };
       } else{
-      var reshare = {
-        title: '￥'+_this.data.zunmdata.gsale + '  ' + _this.data.zunmdata.gname,
-        path: '/pages/detailspage/detailspage?gid=' + _this.data.gid + '&store_id=0&referee='+_this.data.uid,
-        imageUrl: _this.data.snapshot,
-        success: function (res) {},
-      };
+        if(_this.data.zunmdata.goods_type==3){
+          var title = '定金￥'+_this.data.zunmdata.promote_price + '  ' + _this.data.zunmdata.gname;
+        } else {
+          var title = '￥'+_this.data.zunmdata.gsale + '  ' + _this.data.zunmdata.gname;
+        } 
+        var reshare = {
+          title:title ,
+          path: '/pages/detailspage/detailspage?gid=' + _this.data.gid + '&store_id=0&referee='+_this.data.uid,
+          imageUrl: _this.data.snapshot,
+          success: function (res) {},
+        };
       };
       var q = Dec.Aese('mod=share&operation=goods&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&gid=' + _this.data.gid)
       wx.request({
