@@ -99,8 +99,19 @@
               {{zunmdata.finalDepositTime}}         
           </view>          
           <block wx:elif='{{zunmdata.status==2}}'>
-            <view class="deDepossttime" style="padding: 18rpx 0 10rpx 0;">距离预定结束:</view>
-            <view class="deDepossttime"><block wx:if='{{winningovertimedetail.dayStr}}'>{{winningovertimedetail.dayStr}}天</block>  {{winningovertimedetail.hrStr}}:{{winningovertimedetail.minStr}}:{{winningovertimedetail.secStr}}</view>          
+            <block wx:if="{{zunmdata.gid == 36875 || zunmdata.gid == 36876 || zunmdata.gid == 36877}}">
+              <block wx:if="{{nowTime < 1613318400}}">
+                <view class="deDepossttime" style="padding: 18rpx 0 10rpx 0;">距离预定结束:</view>
+                <view class="deDepossttime"><block wx:if='{{winningovertimedetail.dayStr}}'>{{winningovertimedetail.dayStr}}天</block>  {{winningovertimedetail.hrStr}}:{{winningovertimedetail.minStr}}:{{winningovertimedetail.secStr}}</view>  
+              </block>
+              <block wx:else>
+                <view style="width:300rpx;height:110rpx;line-height:110rpx;margin-left:20rpx" class="deDepossttime">{{zunmdata.tipFinalPayment}}</view>
+              </block>
+            </block>
+            <block wx:else>
+              <view class="deDepossttime" style="padding: 18rpx 0 10rpx 0;">距离预定结束:</view>
+              <view class="deDepossttime"><block wx:if='{{winningovertimedetail.dayStr}}'>{{winningovertimedetail.dayStr}}天</block>  {{winningovertimedetail.hrStr}}:{{winningovertimedetail.minStr}}:{{winningovertimedetail.secStr}}</view>  
+            </block>
           </block>
           <view wx:else style="width:100%;height:110rpx;text-align:center;line-height:110rpx;font-size:24rpx;color:#EA4F57;">
               <block wx:if='{{zunmdata.status==3}}'>预定结束</block>
@@ -679,9 +690,20 @@
         </view>
         <block wx:if='{{zunmdata.status==2}}'>
             <block wx:if='{{zunmdata.isDisplayDeposit}}'>
-                <view class="footer-child large sale" style='height:80rpx;margin-top:9rpx;border-radius:10rpx;padding:0;width:255rpx;margin-right:20rpx;' bindtap="dsbffunblock">
+                <view class="footer-child large sale" style='height:80rpx;margin-top:9rpx;border-radius:10rpx;padding:0;width:255rpx;margin-right:20rpx;' bindtap="{{(zunmdata.gid == 36875 || zunmdata.gid == 36876 || zunmdata.gid == 36877) && nowTime < 1613318400?'dsbffunblock':''}}">
+                  <block wx:if="{{zunmdata.gid == 36875 || zunmdata.gid == 36876 || zunmdata.gid == 36877}}">
+                    <block wx:if="{{nowTime < 1613318400}}">
+                      <view class="money" style='font-size:28rpx;'>支付定金</view>
+                      <view class="money" style='font-size:28rpx;'>￥{{zunmdata.promote_price}}</view>
+                    </block>
+                    <block wx:else>
+                      <view style="width:255rpx;height:80rpx;line-height:80rpx;font-size:20rpx;color:#fff;">{{zunmdata.tipFinalPayment}}</view>
+                    </block>
+                  </block>
+                  <block wx:else>
                     <view class="money" style='font-size:28rpx;'>支付定金</view>
                     <view class="money" style='font-size:28rpx;'>￥{{zunmdata.promote_price}}</view>
+                  </block>
                 </view> 
             </block>
             <block wx:else>
