@@ -301,7 +301,7 @@ Page({
               }
             }
 
-            if(_this.data.firstShareTip && _this.data.cd && _this.data.referee && res.data.List.donateCardInfo){
+            if(_this.data.firstShareTip && _this.data.cd && _this.data.referee && res.data.List.donateCardInfo && _this.data.referee != _this.data.uid){
               _this.data.firstShareTip = false;
               _this.setData({
                 shareCardReceive:true,
@@ -347,7 +347,7 @@ Page({
   
             // _this.giftrecord();
   
-          } else {app.showToastC(res.data.Msg); }
+          } else {app.showModalC(res.data.Msg); }
         }
       });
     }else{
@@ -411,7 +411,20 @@ Page({
   
             // _this.giftrecord();
   
-          } else {app.showToastC(res.data.Msg); }
+          } else {
+            if(_this.data.firstShareTip){
+              _this.data.firstShareTip = false;
+              wx.showModal({
+                content: res.data.Msg,
+                showCancel: false,
+                success: function (res) { 
+                  app.comjumpwxnav(998,'','','');
+                  _this.data.firstShareTip = true;
+                }
+              }) 
+            }
+             
+          }
         }
       });      
     }
@@ -615,8 +628,9 @@ Page({
 
   //领取奖励
   getaward: function () {
+    var _this = this;
     if(this.data.isFukaActivities){
-      var _this = this;
+      
       var role_id = _this.data.drawBoxGoodsInfo.role_id || 0;
   
       var qqq = Dec.Aese('mod=cow&operation=payCard&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
@@ -640,6 +654,7 @@ Page({
             })
 
             _this.getInfo();
+            _this.recordListFun(1); 
           } else {
             app.showToastC(res.data.Msg);
           }
