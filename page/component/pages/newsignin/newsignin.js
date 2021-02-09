@@ -259,8 +259,10 @@ Page({
     wx.hideLoading()
 
     this.getInfo();
-
-    this.recordListFun(1)
+    if(this.data.isFukaActivities){
+      this.recordListFun(1)
+    }
+    
 
     if (_this.data.id != 0 && _this.data.referee != 0 && _this.data.referee != _this.data.uid && _this.data.mshareId != 0) {
       if(!this.data.isFukaActivities){
