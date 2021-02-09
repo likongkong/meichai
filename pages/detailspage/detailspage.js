@@ -2715,11 +2715,14 @@ Page({
               _this.winningtheprizetimedetail(redauin.endTime);
             };
           };
+          if(res.data.Ginfo.gid == 36875 || res.data.Ginfo.gid == 36876 || res.data.Ginfo.gid == 36877){
+            clearInterval(_this.data.wintheprtintervaldetail);
+            _this.winningtheprizetimedetail(1613318400);
+          }
           
           // if(res.data.Ginfo&&res.data.Ginfo.brandId>0){
           //   res.data.Ginfo.specialWay = 1;
           // };
-
           _this.setData({
             movies: res.data.Ginfo.gimages,
             zunmdata: redauin,
@@ -2736,7 +2739,8 @@ Page({
             isDeduct:res.data.Ginfo.isDeduct,
             isUseBlindboxMoney:res.data.Ginfo.isDeduct?true:false,
             isDeductNum:res.data.Ginfo.isDeduct&&_this.data.blindboxMoney!=0?1:0,
-            isCanShare:res.data.Ginfo.isCanShare
+            isCanShare:res.data.Ginfo.isCanShar,
+            nowTime : Date.parse(new Date())/1000,//当前时间戳
           },function(){
               // 是否播放视频
               if(_this.data.isVideoSwiper){
