@@ -522,15 +522,16 @@
 
 <view wx:if='{{shareFuka}}' catchtouchmove="true" catchtap="givefun" class="getDrawMask">
   <view class="calendarSwiperBox" catchtap="true">
-    <swiper class="calendarSwiper" autoplay="{{false}}" circular="true" indicator-dots="{{false}}" previous-margin='30px' next-margin='30px' bindchange="swiperChange" indicator-active-color="#298CF7" style="height:600rpx;">
+    <swiper class="calendarSwiper" autoplay="{{false}}" circular="true" indicator-dots="{{false}}" previous-margin='117.5rpx' next-margin='117.5rpx' bindchange="swiperChange" indicator-active-color="#298CF7">
       <swiper-item wx:for='{{giftCardList}}' wx:key='key'>
         <view class="calendarSwiperItem {{nowIdx==index?'le-active':''}}">
-          <image class='le-img' src='{{item.roleImg}}' style='height:500rpx;opacity:{{item.roleInfo.totalNumber>0?"1":"0.5"}}' mode="aspectFit"></image>
+          <image class='le-img' src='{{item.roleImg}}' style='height:600rpx;opacity:{{item.roleInfo.totalNumber>0?"1":"0.5"}}' mode="aspectFit"></image>
           <view class="numstyleSHawer">{{item.roleInfo.totalNumber}}</view>
           <view class="swiperItemBrandWrap" style="{{item.roleInfo.shareIdArr.length>0?'':'background:#999;'}}"><button open-type="share" data-index='{{index}}' wx:if='{{item.roleInfo.shareIdArr.length>0}}' style='opacity: 0;position:absolute;top:0;left:0;height:100%;width:100%;'></button>分享给朋友</view>
         </view>
       </swiper-item>
-    </swiper>   
+    </swiper>  
+    <image  catchtap="givefun" class="indexelafracondisnoneS" src="https://www.51chaidan.com/images/spread/dial/fork.png"></image> 
   </view>
 </view>
 

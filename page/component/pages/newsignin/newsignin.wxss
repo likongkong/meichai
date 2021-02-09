@@ -564,7 +564,7 @@
 
 .calendarSwiperBox{
   width: 100%;
-  height:600rpx;
+  height:760rpx;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -573,9 +573,8 @@
   margin: auto;
 }
 .calendarSwiper {
-  height: 412.375rpx;
+  height: 760rpx;
   width: 100%;
-
 }
 .calendarSwiper swiper-item{
   position: relative;
@@ -583,10 +582,12 @@
 .calendarSwiperItem{
   transform: scale(0.9);
   transition: all 0.3s ease;
-  background: #fff;
   padding: 15rpx 0;
   border-radius: 15rpx;
   position: relative;
+  background: #fff;
+  width:460rpx;
+  margin: auto;
 }
 .numstyleSHawer{
   width: 50rpx;
@@ -595,7 +596,7 @@
   background: #000;
   position: absolute;
   right: 15rpx;
-  bottom: 15rpx;
+  top: 15rpx;
   margin: 0 auto;
   opacity: 0.7;
   text-align: center;
@@ -613,8 +614,11 @@
   font-size: 28rpx;
   color: #fff;
   text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -121rpx;
   margin: auto;
-  position: relative;
 }
 .swiperItemBrandVote{
   font-size: 28rpx;
@@ -656,7 +660,17 @@
   height:360rpx;
   display: block;
 }
-
+.indexelafracondisnoneS{
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -100rpx;
+  margin: auto;
+}
 
 
 

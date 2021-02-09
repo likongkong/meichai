@@ -1293,6 +1293,9 @@ Page({
         shareFuka:!this.data.shareFuka
       });
     }else{
+      _this.setData({
+        giftCardList:[]
+      })
       var qqq = Dec.Aese('mod=cow&operation=giveCard&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
       wx.request({
         url: app.signindata.comurl + 'sign.php' + qqq,
@@ -1305,7 +1308,8 @@ Page({
             var giftCardList = res.data.List.roleList || [];
             _this.setData({
               giftCardList: giftCardList,
-              shareFuka:true
+              shareFuka:true,
+              nowIdx:0
             });
           } else {
             app.showToastC(res.data.Msg);
