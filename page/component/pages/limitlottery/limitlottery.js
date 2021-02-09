@@ -749,9 +749,10 @@ Page({
           if (res.data.Info.infoActivity.joinMothed == "blindBox" && !res.data.Info.infoActivity.isCanOpenLotto) {
             wx.hideShareMenu();
           } else {
-            wx.showShareMenu({
-              withShareTicket:true
-            });
+            // wx.showShareMenu({
+            //   withShareTicket:true
+            // });
+            wx.showShareMenu();
           }
 
           // res.data.List.ShareUser && res.data.List.ShareUser.indexOf(_this.data.uid) == -1
