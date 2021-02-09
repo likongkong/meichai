@@ -222,7 +222,7 @@
         </view>
         <view style="text-align:center;color:white;font-size:30rpx;line-height:40rpx;">为你点亮了此款卡片</view>
       </view>
-      <view class="gosmokestylem" catchtap="gosmokelist">{{signinfo.existenceDrawBox ? "去抽盒机" : "直接购买"}}</view>
+      <view class="gosmokestylem" wx:if='{{!isFukaActivities}}' catchtap="gosmokelist">{{signinfo.existenceDrawBox ? "去抽盒机" : "直接购买"}}</view>
     </view>
 
 

@@ -310,6 +310,13 @@ Page({
               })
             };
   
+            
+            if(_this.data.isFukaActivities){
+              var singlewidth = 690 / Math.ceil(res.data.List.cardList.length / 3) - 18
+            } else {
+              var singlewidth = 690 / Math.ceil(res.data.List.cardList.length / 2) - 18
+            };
+
             _this.setData({       
               isresponse: true,
               signinfo: res.data.Info,
@@ -317,7 +324,7 @@ Page({
               cardList: cardlist,
               daysList: res.data.List.daysList || '',
               linenum: Math.ceil(res.data.List.cardList.length / 2),
-              singlewidth: 690 / Math.ceil(res.data.List.cardList.length / 2) - 18,
+              singlewidth:singlewidth ,
               share_id: res.data.Info.share_id ? res.data.Info.share_id : 0,
               drawBoxGoodsInfo: res.data.Info.drawBoxGoodsInfo ? res.data.Info.drawBoxGoodsInfo : "",
               drawBoxStatus: res.data.Info.drawBoxStatus,
