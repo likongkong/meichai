@@ -26,7 +26,7 @@
   </view>
 
 
-  <view wx:if='{{isFukaActivities}}' style="width:22%;height:50rpx;float:right;background:#E94F57;margin:15rpx 30rpx 15rpx 10rpx;border-radius:5rpx;text-align: center;font-size:27rpx;line-height:50rpx;color:white;" catchtap="switchclick">规则</view>
+  <view wx:if='{{isFukaActivities}}' style="width:22%;height:50rpx;float:right;color:#E94F57;margin:15rpx 30rpx 15rpx 10rpx;border-radius:5rpx;text-align: center;font-size:27rpx;line-height:50rpx;text-decoration:underline;" catchtap="switchclick">活动规则</view>
 
   <view wx:elif='{{isSwitch}}' style="width:22%;height:50rpx;float:right;background:#E94F57;margin:15rpx 30rpx 15rpx 10rpx;border-radius:5rpx;" catchtap="switchclick">
     <image style="width:30rpx;height:30rpx;margin:10rpx;float:left;" src="https://www.51chaidan.com/images/sign/tms_switch.png"></image>
@@ -56,7 +56,7 @@
 
 <view style="width:100%;position:relative;">
   <block wx:if='{{isFukaActivities}}'>
-      <view wx:if='{{signinfo.orderStatus == 6}}' class="signinbtnstyle" style="margin:40rpx 175rpx 20rpx;position: relative;" catchtap="signin">集福卡<view class="digitalTips specialellipsis" wx:if='{{signinfo.getSignNumber>0}}'>{{signinfo.getSignNumber}}</view></view>
+      <view wx:if='{{signinfo.orderStatus == 6}}' class="signinbtnstyle" style="margin:40rpx 175rpx 20rpx;position: relative;" catchtap="signin">集福卡<view class="digitalTips specialellipsis" wx:if='{{signinfo.getSignNumber>=0}}'>{{signinfo.getSignNumber}}</view></view>
 
       <view wx:if='{{signinfo.orderStatus == 0 || signinfo.orderStatus == 3 || signinfo.orderStatus == 1 || signinfo.orderStatus == 2}}' style="text-align:center;color:#FF9800;font-size:25rpx;line-height:40rpx;margin-top:40rpx;">恭喜您，集福完成</view>
       <view wx:if='{{signinfo.orderStatus == 0 || signinfo.orderStatus == 3}}' class="signinbtnstyle" style="background:#FF9800;margin:10rpx 175rpx 40rpx 175rpx;" catchtap="winaward">晒单领奖</view>
@@ -65,7 +65,7 @@
 
       <view class="signinbtnstyle" style="margin:0 175rpx 40rpx;display:flex;flex-flow:row nowrap;justify-content: space-between;background:#fff;">
         <view class="newYearABut" catchtap="givefun">赠送</view>
-        <view class="newYearABut" catchtap="toggleDrawMask">获取</view>
+        <view class="newYearABut" catchtap="toggleDrawMask">获取机会</view>
       </view>  
   </block>
   <block wx:else>
@@ -161,7 +161,7 @@
 
     <view style="margin:20rpx 30rpx;" id='rule'>
       <view style="width:100%;line-height:40rpx;background:#EAEAEA;padding:20rpx 0;">
-        <view style='width:100%;text-align:center;font-size:30rpx;'>集福卡规则</view>
+        <view style='width:100%;text-align:center;font-size:30rpx;'>活动规则</view>
         <view style="margin:0 40rpx;font-size:25rpx;">
           <text>{{signinfo.explain}}</text>
         </view>
@@ -538,6 +538,11 @@
 <!-- 分享福卡弹框 -->
 <view class="getDrawMask" wx:if='{{shareCardReceive}}' catchtouchmove="true" catchtap="shareCardReceiveFun">
    <view class="shareCarDispay" catchtap="true">
+       <view class="shareCarUserBox">
+          <image class="shareCarUserBoxImg" src="{{donateCardInfo.photo}}"></image>
+          <view class="shareCarUserBoxTxt specialellipsis">赠送</view>
+          <!-- {{donateCardInfo.nick}} -->
+       </view>
        <view class="scdTopTit">{{donateCardInfo.name}}</view>
        <image class="scdTopImg" mode="aspectFit" src="{{donateCardInfo.img}}"></image>
        <view class="signinbtnstyle" style="margin:20rpx auto 0;display:flex;flex-flow:row nowrap;justify-content: space-between;background:#fff;">

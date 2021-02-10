@@ -115,6 +115,7 @@ page{
   padding:0 20rpx 0 0;
   display: inline-block;
   font-size: 24rpx;
+  vertical-align: top;
 }
 .ocabrandtxt{
   height: 60rpx;

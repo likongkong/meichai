@@ -448,8 +448,8 @@ Page({
     });
 
     _this.data.pushWay = options.pushWay || 0;
-
-    wx.hideShareMenu();
+    // 单独商家分享
+    // wx.hideShareMenu();
 
     wx.showLoading({
       title: '加载中...'

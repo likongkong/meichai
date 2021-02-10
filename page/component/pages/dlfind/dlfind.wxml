@@ -110,7 +110,6 @@
                               <view class="ocamenswevename specialellipsis" style="{{w.id==brand_id?'color:#f19207;':''}}">{{w.name}}</view>
                           </view>                      
                       </block>
-                
                 </scroll-view>
             </view>
         </view>  

@@ -820,10 +820,12 @@ Page({
           var giftCardList = _this.data.giftCardList || [];
           var cd = '';
           var shareIdArr = [];
+          var imageUrl = 1;
           if(giftCardList && giftCardList.length != 0){
             shareIdArr = giftCardList[index].roleInfo.shareIdArr || '';
             if(shareIdArr && shareIdArr.length != 0){
               cd = shareIdArr.splice(0,1)[0];
+              imageUrl = giftCardList[index].roleId;
               giftCardList[index].roleInfo.shareIdArr = shareIdArr;
               _this.setData({
                 giftCardList:giftCardList
@@ -839,10 +841,12 @@ Page({
   
             };
           };
-          console.log("/page/component/pages/newsignin/newsignin?id=" + _this.data.signinfo.aid + '&referee=' + _this.data.uid + '&cd=' + cd)
+
+          console.log("/page/component/pages/newsignin/newsignin?id=" + _this.data.signinfo.aid + '&referee=' + _this.data.uid + '&cd=' + cd,imageUrl)
+          var name = app.signindata.userInfo.nickName + '赠送了你一张福卡，' || '';
           var share = {
-            title: shareTitle,
-            imageUrl: _this.data.signinfo.goods_share,
+            title:name + shareTitle,
+            imageUrl:'https://cdn.51chaidan.com/images/background/fuka/fuka_share_'+ imageUrl +'.jpg',
             path: "/page/component/pages/newsignin/newsignin?id=" + _this.data.signinfo.aid + '&referee=' + _this.data.uid + '&cd=' + cd,
             success: function (res) { }
           } 
