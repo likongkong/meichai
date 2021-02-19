@@ -1485,6 +1485,7 @@ Page({
 
   // 立即购买弹框
   dsbbbutclickt: function () {
+    var _this = this;
     var oIds = [];
     var listdata = this.data.listdata || [];
     for (var i = 0; i < listdata.length; i++) {
@@ -1496,11 +1497,21 @@ Page({
       app.showToastC('请选中商品');
       return false;
     };
-    this.setData({
-      tipbacktwo: true,
-      buybombsimmediately: true
+
+    wx.showModal({
+      title:'温馨提示',
+      content: '闲置商品不支持退款，请确认后购买',
+      success: function(res) {
+        if (res.confirm) {
+          _this.setData({
+            tipbacktwo: true,
+            buybombsimmediately: true
+          });
+          _this.amountcalculation()
+        }
+      }
     });
-    this.amountcalculation()
+
   },
 
   tipbacktwo: function () {

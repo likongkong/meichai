@@ -177,7 +177,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var _this = this
+    var _this = this;
     _this.data.loginid = app.signindata.loginid;
     _this.data.openid = app.signindata.openid;
 
@@ -195,8 +195,6 @@ Page({
     })
 
     // 判断是否授权 
-    var _this = this;
-
     _this.getboast();
 
 

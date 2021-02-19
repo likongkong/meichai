@@ -680,12 +680,24 @@ Page({
 
   // 立即购买弹框
   dsbbbutclickt: function () {
-    this.setData({
-      tipbacktwo: true,
-      buybombsimmediately: true,
-      ishowwholebox: false,
-    });
-    this.amountcalculation()
+    var _this = this;
+
+    wx.showModal({
+      title:'温馨提示',
+      content: '闲置商品不支持退款，请确认后购买',
+      success: function(res) {
+        if (res.confirm) {
+          _this.setData({
+            tipbacktwo: true,
+            buybombsimmediately: true,
+            ishowwholebox: false,
+          });
+          _this.amountcalculation()
+        }
+      }
+    })
+
+
   },
 
   tipbacktwo: function () {
