@@ -260,7 +260,7 @@ Page({
       // url: "/pages/giftCollection/giftCollection?oid="
 
       // url: "/page/secondpackge/pages/drawHideGoods/drawHideGoods"
-      url: "/pages/fortuneToys/fortuneToys"
+      url: "/page/secondpackge/pages/fortuneToys/fortuneToys"
 
       // url: "/page/secondpackge/pages/priorityVoting/priorityVoting"
 
