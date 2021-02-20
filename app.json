@@ -125,7 +125,8 @@
         "pages/priorityList/priorityList",
         "pages/blankPage/blankPage",
         "pages/draw/draw",
-        "pages/refund/refund"
+        "pages/refund/refund",
+        "pages/fortuneToys/fortuneToys"
       ]
     }
   ],

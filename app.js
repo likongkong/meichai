@@ -190,6 +190,10 @@ App({
                   _this.signindata.isShareFun = res.data.Info.isShareFun;
 
                   _this.signindata.isTodaySign = res.data.Info.isTodaySign;
+
+                  // 用户手机号
+                  _this.signindata.mobile = res.data.Info.mobile;
+                  
                   // VIP
                   _this.signindata.isVip = res.data.Info.isVip || 0;
                   // 抽盒金
