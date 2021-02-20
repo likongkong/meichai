@@ -65,6 +65,9 @@
       </view>
    </view>
    <view class="adheadutnum" style="text-align:center;">{{activity.shopPrice}}元随机获得一款限定周边(最终赏除外)</view>
+   <image wx:if='{{!gotTBBMBS8}}' style="width:100%;display:block;margin:15rpx 0;" catchtap="officialAccount" mode='widthFix' src="http://cdn.51chaidan.com/images/sign/activity/attentionGZH.png"></image>
+
+
    <view class="adcspecial">
       <view class="adcweve" id='evepos0' style="height:520rpx;border-top: 4rpx dashed #000;">
           <view class="adcspezzs">

@@ -103,8 +103,14 @@ Page({
      // 提交订单时是否使用抽盒金抵扣
      isDeductNum:1,
      //抽盒金抵扣使用规则
-     isBlindboxRuleMask:false
+     isBlindboxRuleMask:false,
+     gotTBBMBS8:true
   },
+  // 跳转公众号文章
+  officialAccount(){
+    app.comjumpwxnav(0,'https://mp.weixin.qq.com/s?__biz=MzUyNzMyNTg4Ng==&mid=100000975&idx=1&sn=ef370685e8a3c081684671ae961d16a7&chksm=7a000b1e4d77820819a1b4a07cc00432f987b0f79b798cef886ecdb4fffbd07ce2054c6689b1#rd','','')
+  },
+
   useBlindboxMoneyFun(){
     this.setData({
       isUseBlindboxMoney:!this.data.isUseBlindboxMoney,
@@ -653,7 +659,8 @@ Page({
       isProduce: app.signindata.isProduce,
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
       ishowdealoradd:ishowdealoradd,
-      blindboxMoney:app.signindata.blindboxMoney
+      blindboxMoney:app.signindata.blindboxMoney,
+      gotTBBMBS8:app.signindata.gotTBBMBS8
     });
 
     // this.listdata();
