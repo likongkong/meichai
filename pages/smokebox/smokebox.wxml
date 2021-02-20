@@ -1371,7 +1371,7 @@
 							</block>
 						</view>
 						</view>
-
+            <image wx:if='{{!gotTBBMBS8}}' style="width: 650rpx;display:block;margin:15rpx auto;" catchtap="officialAccount" mode='widthFix' src="http://cdn.51chaidan.com/images/sign/activity/attentionGZH.png"></image>
 			  	</scroll-view>
 				</view>
 

@@ -237,7 +237,8 @@ Page({
     // 是否使用抽盒金抵扣
     isUseBlindboxMoney:true,
     // 提交订单时是否使用抽盒金抵扣
-    isDeductNum:1
+    isDeductNum:1,
+    gotTBBMBS8:true
   },
   useBlindboxMoneyFun(){
     this.setData({
@@ -2463,7 +2464,8 @@ Page({
       isShareFun: app.signindata.isShareFun,
       defaultinformation:app.signindata.defaultinformation,
       signinlayer: true,
-      tgabox: false
+      tgabox: false,
+      gotTBBMBS8:app.signindata.gotTBBMBS8
     });
     var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
     // 商品详情
@@ -3837,5 +3839,9 @@ Page({
     wx.navigateTo({ 
       url: "/page/secondpackge/pages/canvasRoute/canvasRoute"
     });
+  },
+  // 跳转公众号文章
+  officialAccount(){
+    app.comjumpwxnav(0,'https://mp.weixin.qq.com/s?__biz=MzUyNzMyNTg4Ng==&mid=100000975&idx=1&sn=ef370685e8a3c081684671ae961d16a7&chksm=7a000b1e4d77820819a1b4a07cc00432f987b0f79b798cef886ecdb4fffbd07ce2054c6689b1#rd','','')
   }
 })

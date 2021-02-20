@@ -262,9 +262,14 @@ Page({
 
     // 抽盒金红包
     isBlindboxPacketOne:false,
-    isBlindboxPacketTwo:false
+    isBlindboxPacketTwo:false,
+    gotTBBMBS8:true
 
   },
+  // 跳转公众号文章
+  officialAccount(){
+    app.comjumpwxnav(0,'https://mp.weixin.qq.com/s?__biz=MzUyNzMyNTg4Ng==&mid=100000975&idx=1&sn=ef370685e8a3c081684671ae961d16a7&chksm=7a000b1e4d77820819a1b4a07cc00432f987b0f79b798cef886ecdb4fffbd07ce2054c6689b1#rd','','')
+  },  
   boxBenefitsFun(event){
     if(this.data.boxBenefitsSM){
       this.setData({
@@ -560,6 +565,7 @@ Page({
       automatTimes: app.signindata.automat.times,
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
       defaultinformation:app.signindata.defaultinformation,
+      gotTBBMBS8:app.signindata.gotTBBMBS8
     });
     if (_this.data.isredpag == 1) {
       this.shareopen(_this.data.welfareid)
