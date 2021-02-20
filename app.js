@@ -1275,4 +1275,6 @@ App({
 // blankPage 展会空白页跳转
 // drawHideGoods 抽隐藏
 
+//fortuneToys  关注公众号小号赠送限时抽盒金
+
 

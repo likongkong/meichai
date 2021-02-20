@@ -62,7 +62,7 @@ Page({
               }
             }
           })
-        }else if(res.data.ReturnCode == 200){
+        }else if(res.data.ReturnCode == 351){
           wx.showModal({
             title: '您已经领过券了',
             content: '不能重复领取',
@@ -248,7 +248,7 @@ Page({
         if(res.data.ReturnCode == 200){
           _this.setData({
             is_mobile_phone:true,
-            mobile:phoneNumber
+            mobile:res.data.List.phoneNumber
           });
           app.showToastC('获取手机号成功');
         }else{
