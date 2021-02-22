@@ -670,10 +670,11 @@
 						<view wx:else class="vipBoxBtn">明日领取</view>
 					</block>
 				</view>
-				
+				<image wx:if='{{!gotTBBMBS8}}' style="width: 650rpx;display:block;margin:15rpx auto;" catchtap="officialAccount" mode='widthFix' src="http://cdn.51chaidan.com/images/sign/activity/attentionGZH.png"></image>
 				<view style='width:100%;height:100rpx;font-size:25rpx;text-align:center;color:gray;margin-top: 64rpx;'>
 						盲盒类商品拆盒后(含在线拆盒)不支持7天无理由退换
 				</view>
+
 			</scroll-view>
 		</view>
 	</view>
