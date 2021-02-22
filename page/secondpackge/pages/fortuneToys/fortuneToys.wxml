@@ -15,6 +15,9 @@
     <image class="FORTUNEGzhFloor_4" src="https://cdn.51chaidan.com/images/sign/activity/FORTUNEGzhFloor_4.png" mode="widthFix"></image>
     <image class="FORTUNEGzhFloor_2" src="https://cdn.51chaidan.com/images/sign/activity/FORTUNEGzhFloor_2.png" mode="widthFix"></image>
     <image class="FORTUNEGzhFloor_3" src="https://cdn.51chaidan.com/images/sign/activity/FORTUNEGzhFloor_3.png" mode="widthFix"></image>
+    <view class="FORTUNEGzhFloor_5_wrap">
+      当日有效
+    </view> 
   </view>
 </view>
 
