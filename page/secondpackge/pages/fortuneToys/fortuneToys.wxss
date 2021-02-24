@@ -76,3 +76,15 @@ page{
   top: -4rpx;
   left: 0;
 }
+.FORTUNEGzhFloor_5_wrap{
+  width: 100%;
+  height: auto;
+  position: absolute;
+  z-index: 10;
+  top: 252rpx;
+  left: 0;
+  text-align:center;
+  color: #fff6ed;
+  font-size: 24rpx;
+  /* font-weight: bold; */
+}
