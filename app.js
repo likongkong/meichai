@@ -469,6 +469,7 @@ App({
   // 50  priorityVoting  邀请函 
   // 51  draw  春节活动  福袋
 
+
   userstatistics: function (num) {
     var _this = this;
     var num = num || 0
@@ -1054,7 +1055,7 @@ App({
     });    
   },
   showModalC:function(content,title){
-    var title = title || '提示';
+    var title = title || '';
     wx.showModal({
       title: title,
       content: content,
@@ -1277,4 +1278,4 @@ App({
 
 //fortuneToys  关注公众号小号赠送限时抽盒金
 
-
+// mobileShellDetail 手机壳详情页
