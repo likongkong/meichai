@@ -35,7 +35,7 @@
         </swiper>  
         
         <view wx:if="{{!activity.isFlagship}}" style="position:absolute;right:-4rpx;top:16rpx;width:50%;height:40rpx;">
-            <view style="padding: 0 10rpx;line-height: 40rpx;border-radius: 3px;display: inline-block;font-size: 24rpx;background: #e94f57;color: #fff;margin: 0 10rpx;float: right;">进入玩具柜</view>
+            <view style="padding: 0 10rpx;line-height: 40rpx;border-radius: 3px;display: inline-block;font-size: 24rpx;background: #e94f57;color: #fff;margin: 0 10rpx;float: right;">进玩具柜</view>
         </view>
 
         <view wx:if="{{activity.isFlagship && activity.flagshipArr}}" style="position:absolute;left:6rpx;bottom:{{activity.isCheckOther==2 && (activity.status!=3||activity.suplusNum>0)?'54rpx':'6rpx'}};height:30rpx;overflow:hidden;z-index:5;padding: 4rpx 8rpx;">
