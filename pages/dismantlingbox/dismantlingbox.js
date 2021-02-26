@@ -355,10 +355,23 @@ Page({
   },
   // banner 跳转
   jumpbanner: function (w) {
+
     var whref = w.currentTarget.dataset.href || w.target.dataset.href;
     var item_type = w.currentTarget.dataset.item_type || w.target.dataset.item_type||0;
     var imgurl = w.currentTarget.dataset.imgurl || w.target.dataset.imgurl || '';
     var wname = w.currentTarget.dataset.title || w.target.dataset.title || '美拆'; 
+
+    if(whref == ''){
+      var _this = this;
+      var subscribe_data = _this.data.subscribeJson[0].toyshowStart;
+      console.log(subscribe_data)
+      this.setData({
+        subscribedata:subscribe_data
+      });
+      _this.subscrfun(1);
+      return false;
+    }
+
     // 公共跳转
     app.comjumpwxnav(item_type, whref, wname, imgurl);
 

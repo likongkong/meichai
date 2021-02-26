@@ -1,107 +1,104 @@
 {
-	"description": "项目配置文件。",
-	"setting": {
-		"urlCheck": false,
-		"es6": true,
-		"enhance": false,
-		"postcss": true,
-		"preloadBackgroundData": false,
-		"minified": true,
-		"newFeature": true,
-		"coverView": true,
-		"nodeModules": false,
-		"autoAudits": false,
-		"showShadowRootInWxmlPanel": true,
-		"scopeDataCheck": false,
-		"uglifyFileName": false,
-		"checkInvalidKey": true,
-		"checkSiteMap": true,
-		"uploadWithSourceMap": true,
-		"compileHotReLoad": false,
-		"babelSetting": {
-			"ignore": [],
-			"disablePlugins": [],
-			"outputPath": ""
-		},
-		"useIsolateContext": true,
-		"useCompilerModule": false,
-		"userConfirmedUseCompilerModuleSwitch": false,
-		"useMultiFrameRuntime": false,
-		"useApiHook": true,
-		"packNpmManually": false,
-		"packNpmRelationList": [],
-		"minifyWXSS": true
-	},
-	"compileType": "miniprogram",
-	"libVersion": "2.14.0",
-	"appid": "wxb41da0ebe032a6f5",
-	"projectname": "meichai",
-	"isGameTourist": false,
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
-	"condition": {
-		"search": {
-			"current": -1,
-			"list": []
-		},
-		"conversation": {
-			"current": -1,
-			"list": []
-		},
-		"plugin": {
-			"list": []
-		},
-		"game": {
-			"list": []
-		},
-		"gamePlugin": {
-			"list": []
-		},
-		"miniprogram": {
-			"list": [
-				{
-					"id": 0,
-					"name": "签到新年活动",
-					"pathName": "page/component/pages/newsignin/newsignin",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 1,
-					"name": "一番赏列表",
-					"pathName": "page/secondpackge/pages/blankPage/blankPage",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "首页",
-					"pathName": "pages/index/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "抽盒机列表",
-					"pathName": "pages/smokeboxlist/smokeboxlist",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 5,
-					"name": "商品详情",
-					"pathName": "pages/detailspage/detailspage",
-					"query": "gid=34183",
-					"scene": null
-				},
-				{
-					"id": 5,
-					"name": "手机壳",
-					"pathName": "page/secondpackge/pages/mobileShellDetail/mobileShellDetail",
-					"query": "",
-					"scene": null
-				}
-			]
-		}
-	}
+  "description": "项目配置文件。",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": false,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "nodeModules": false,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "uglifyFileName": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "useIsolateContext": true,
+    "useCompilerModule": false,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "useMultiFrameRuntime": false,
+    "useApiHook": true,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true
+  },
+  "compileType": "miniprogram",
+  "libVersion": "2.14.0",
+  "appid": "wxb41da0ebe032a6f5",
+  "projectname": "meichai",
+  "isGameTourist": false,
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "id": 0,
+          "name": "签到新年活动",
+          "pathName": "page/component/pages/newsignin/newsignin",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "一番赏列表",
+          "pathName": "page/secondpackge/pages/aRewardList/aRewardList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "首页",
+          "pathName": "pages/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "抽盒机列表",
+          "pathName": "pages/smokeboxlist/smokeboxlist",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 5,
+          "name": "商品详情",
+          "pathName": "pages/detailspage/detailspage",
+          "query": "gid=34183",
+          "scene": null
+        },
+        {
+          "id": 5,
+          "name": "手机壳",
+          "pathName": "page/secondpackge/pages/mobileShellDetail/mobileShellDetail",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "展会订阅页",
+          "pathName": "pages/dismantlingbox/dismantlingbox",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
 }
