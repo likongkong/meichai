@@ -1,0 +1,68 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class='dlhead' style='height:570rpx;position:relative;background:#fff;'>
+    <!-- 不带视频 -->
+    <swiper bindchange='swiperchangeindex' bindanimationfinish="changeGoodsSwip" class="swiper" indicator-color="#fff" indicator-active-color="#ff2742" indicator-dots="{{false}}" circular="true" autoplay="true" interval="4000" duration="450" style='height:500rpx;'>
+      <block wx:for="{{movies}}" wx:key="key">
+        <swiper-item>
+          <image class="slide-image watermark" src='{{item.url}}' style="height:100%;width:100%;display:block;" data-index='{{index}}' bindtap='previewImg' mode='aspectFit'></image>
+        </swiper-item>
+      </block>
+    </swiper>
+    <!-- 下标 -->
+    <view class="detailswipernumM">
+        <block wx:for='{{movies}}' wx:key='key'>
+          <view class="detailswnuMeve {{detailSwiperindex==index?'borderClass':''}}"></view>
+        </block>
+    </view>
+</view>
+<view class="mobShellcontent">
+    <view class='dltitle' style='text-align:center;padding:20rpx 40rpx;font-size:32rpx;'>《燃烧吧人生》30CM「和你在一起」盲盒番外篇 预计3月发货</view>
+    <view class="mscColorSel">颜色:浅紫色</view>
+    <view class="mscColorBox">
+        <block wx:for='{{bgColor}}' wx:key='key'>
+            <view class="mscColorBoxeve {{detailSwiperindex==index?'ColorClass':''}}" style="background:{{item}};"></view>
+        </block>        
+    </view>
+    <view class="mscColorSel">$55 USD－ 全球免費付運</view>
+    <view class="mscColorSel"></view>
+    <view class="mscModel">选择型号:</view>
+    <picker class="p" bindchange="bindPickerChange" value="{{modelSelInde}}" range="{{modelArray}}" custom-item="请选择">
+        <view class="mscModelEve">{{modelSel}}</view>
+    </picker>
+    <view class="mscModel">Compostable Case</view>
+    <view class="mscModelImgBox">
+        <view class="mscModelImgEve">
+            <image class="mscModelImg" src="https://cdn.51chaidan.com//images/toyShow3/brandGoodsRotation/20210109/7b69de7f20fdd34c68ca139cb15c1454.png" mode='aspectFit'></image>
+            <view class="mscModelName">$55 USD</view>
+        </view>
+    </view>
+    <view class="butPay">直接购买</view>
+    <view class="butPay">加入购物车</view>
+    <view class="detailDetails">
+       <rich-text wx:if='{{detailDetails}}' style="font-size:0;" nodes="{{detailDetails}}"></rich-text>
+    </view>
+		
+</view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>
+
