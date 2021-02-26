@@ -545,7 +545,7 @@ Page({
     // // 海外
     // _this.commodityinformation(1,3);
     // // 直播列表
-    // _this.liveList(1);
+    _this.liveList(1);
 
     //展会福利
     // _this.exhibitionBenefits();
@@ -1287,7 +1287,7 @@ brandJson:function(){
     // // 海外
     // _this.commodityinformation(1,3)
     // // 直播列表
-    // _this.liveList(1);
+    _this.liveList(1);
     // // 展会福利
     // _this.exhibitionBenefits();
   },

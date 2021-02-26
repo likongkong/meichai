@@ -769,6 +769,12 @@ Page({
             //     });
             //   }
             // });
+            // if(activity.isCheckOther==2){
+            //   let id = activity.id;
+            //   wx.redirectTo({   
+            //     url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + id +"&checkOtherActivity=2"
+            //   });
+            // }
           }
           // if(activity.status==2&&activity.suplusNum>0&&_this.data.uid){
           //     _this.queuefun(1,1);
