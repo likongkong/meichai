@@ -1,0 +1,149 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+
+
+<view class="relHead">
+    <view class="{{headSel==1?'relHeadColor':''}}" catchtap="headSelFun" data-index='1'>幸运值红包</view>
+    <view class="{{headSel==2?'relHeadColor':''}}" catchtap="headSelFun" data-index='2'>抽盒金红包</view>
+</view>
+<view class="relTip">红包当日24时过期</view>
+<view class="relContent">
+    <block wx:for='{{listdata}}' wx:key='key'>
+        <view class="{{headSel==1?'relRedEveOne':'relRedEveTwo'}}" style="{{index%2==1?'opacity:0.6;':''}}">
+            <view class="eveClick"></view>
+            <view class="relRedEveComplete">已领完</view>
+            <view class="relRedEveTop">
+                <image class="relRedEveTopImg" mode='aspectFit' src="{{headSel==1?'https://cdn.51chaidan.com/images/sign/activity/redEnvelopeOne.png':'https://cdn.51chaidan.com/images/sign/activity/redEnvelopeTwo.png'}}"></image>
+                <view class="relRedEveTopRight">
+                    <view class="rretrTop">分享娃友瓜分红包</view>
+                    <view class="rretrCont">
+                        <block wx:if='{{headSel==1}}'>红包总幸运值50，已领取25</block>
+                        <block wx:else>红包总额￥8，已领取￥1</block>
+                    </view>
+                </view>
+            </view>
+            <view class="relRedEveBottom">
+                <view style="padding-left:30rpx;">{{headSel==1?'幸运值红包':'抽盒金红包'}}</view>
+                <view style="padding-right:15rpx;">大美术馆和你在一起系列</view>
+            </view>
+        </view>
+    </block>
+    <view class="redListNoData">您还没有{{headSel==1?'幸运值':'抽盒金'}}红包哦~</view>
+</view>
+
+
+
+
+<!-- 幸运值红包打开状态 -->
+<view wx:if='{{ishowpagInfo}}' style="width:100%;height:100%;position:fixed;top:0px;left:0;z-index:13;">
+	<view class='bgstyle' style="background:white" catchtouchmove="myCatchTouch" catchtap="closepagInfo"></view>
+	<view class="redbg">
+		<view style="width:100%;height:370rpx;background:#d14e46;border-radius:20rpx;">
+    <!-- wx:if='{{welfareInfo.userId == uid}}' -->
+			<image  class="pagshare" src="http://www.51chaidan.com/images/blindBox/redPackageShare.png"><button style='width:100%;height:100%;position:absolute;top:0;right:0;opacity:0;' open-type='share'></button></image>
+			<view style="width:100%;text-align:center;padding-top:20rpx;">
+				<image class="headsty" src="{{welfareInfo.headphoto}}"></image>
+				<view wx:if='{{welfareInfo.welfareType == 1}}' class="imgtextstyle">{{welfareInfo.nick}} 的隐藏红包</view>
+				<view wx:elif='{{welfareInfo.welfareType == 2}}' class="imgtextstyle">{{welfareInfo.nick}} 的幸运值红包</view>
+			</view>
+			<image style="width:120rpx;height:160rpx;margin:10rpx 240rpx;" mode="aspectFit" src="{{welfareInfo.roleImg}}"></image>
+
+			<view wx:if='{{welfareInfo.welfareType == 1}}' style="width:100%;text-align:center;font-size:28rpx;" catchtap="closepagInfo">￥<text style="font-size:50rpx;">{{welfareInfo.userAmount}}</text> 已放入抽盒机可以直接使用></view>
+			<view wx:elif='{{welfareInfo.welfareType == 2}}' style="width:100%;text-align:center;font-size:28rpx;" catchtap="closepagInfo"><text style="font-size:50rpx;">{{welfareInfo.userAmount}}</text> 点幸运值可用于兑换透视卡></view>
+		</view>
+
+		<view class="getpagbtm">
+			<view wx:if='{{welfareInfo.welfareType == 1}}' class="alreadyget">已领取{{welfareInfo.totalUser}}个,共{{welfareInfo.totalAmount}}/{{welfareInfo.limitAmount}}元</view>
+			<view wx:elif='{{welfareInfo.welfareType == 2}}' class="alreadyget">已领取{{welfareInfo.totalUser}}个,共{{welfareInfo.totalAmount}}/{{welfareInfo.limitAmount}}点</view>
+			
+			<view style="overflow:scroll;width:100%;height:460rpx;">
+				<view wx:for='{{welfareList}}' wx:key='key' style="width:100%;height:100rpx;">
+					<image style="margin:15rpx;width:70rpx;height:70rpx;display:inline-block;border-radius:5rpx;" src="{{item.headphoto}}"></image>
+					<view class="pagitem">
+						<view style="height:100%;float:left;color:#333;text-align:left;">
+							<view class="specialellipsis" style="margin-top:20rpx;width:230rpx;">{{item.nick}}</view>
+							<view>{{item.insert_time}}</view>
+						</view>
+						<view wx:if='{{welfareInfo.welfareType == 1}}' style="height:100%;float:right;text-align:right;color:#fb595f;margin-right:15rpx;">
+							<view style="margin-top:20rpx;">{{item.amount}}元</view>
+							<view>抽盒立减券(当日有效)</view>
+						</view>
+						<view  wx:elif='{{welfareInfo.welfareType == 2}}' style="height:100%;float:right;text-align:right;color:#fb595f;margin-right:15rpx;">
+							<view style="margin-top:20rpx;color:{{welfareInfo.userId == item.userId?'#FF9800':''}};">{{item.amount}}点幸运值</view>
+							<view wx:if='{{welfareInfo.userId == item.userId}}' style="color:#FF9800;">全部领光，奖励翻倍</view>
+							<view wx:elif='{{welfareInfo.userId != item.userId}}'>兑换抽盒机透视卡</view>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view class="sharebtn">全部领光奖励翻倍,快去分享!<button style='width:100%;height:100%;position:absolute;top:0;right:0;opacity:0;' open-type='share'></button></view>
+			<view class="stoptime">领取时间截止当日24:00</view>
+
+		</view>
+	</view>
+
+</view>
+
+<!-- 抽盒金红包打开状态 -->
+<view wx:if="{{isBlindboxPacketTwo}}" style="width:100%;height:100%;position:fixed;top:0px;left:0;z-index:13;">
+	<view class='bgstyle' style="background:white" catchtouchmove="myCatchTouch" catchtap="blindboxClosepagInfo"></view>
+	<view class="redbg">
+		<view style="width:100%;height:370rpx;background:#d14e46;border-radius:20rpx;">
+    <!-- wx:if='{{welfareInfo.userId == uid}}' -->
+			<image  class="pagshare" src="http://www.51chaidan.com/images/blindBox/redPackageShare.png"><button style='width:100%;height:100%;position:absolute;top:0;right:0;opacity:0;' open-type='share'></button></image>
+			<view style="width:100%;text-align:center;padding-top:20rpx;">
+				<image class="headsty" src="{{welfareInfo.headphoto}}"></image>
+				<view wx:if='{{welfareInfo.welfareType == 3}}' class="imgtextstyle">{{welfareInfo.nick}} 的抽盒金红包</view>
+			</view>
+			<!-- <image style="width:120rpx;height:160rpx;margin:10rpx 240rpx;" mode="aspectFit" src="{{welfareInfo.roleImg}}"></image> -->
+			<view class="blindboxNumSmall">
+				<text>￥</text>{{welfareInfo.limitAmount}}
+			</view>
+
+			<view wx:if='{{welfareInfo.welfareType == 3}}' style="width:100%;text-align:center;font-size:28rpx;position: absolute;top: 264rpx;" catchtap="goSmokeboxlist">抽盒金￥<text style="font-size:50rpx;">{{welfareInfo.userAmount}}</text>可用于购买潮玩商品 ></view>
+		</view>
+
+		<view class="getpagbtm">
+			<view wx:if='{{welfareInfo.welfareType == 3}}' class="alreadyget">已领取{{welfareInfo.totalUser}}个,共{{welfareInfo.totalAmount}}/{{welfareInfo.limitAmount}}元</view>
+			
+			<view style="overflow:scroll;width:100%;height:460rpx;">
+				<view wx:for='{{welfareList}}' wx:key='key' style="width:100%;height:100rpx;">
+					<image style="margin:15rpx;width:70rpx;height:70rpx;display:inline-block;border-radius:5rpx;" src="{{item.headphoto}}"></image>
+					<view class="pagitem">
+						<view style="height:100%;float:left;color:#333;text-align:left;">
+							<view class="specialellipsis" style="margin-top:20rpx;width:230rpx;">{{item.nick}}</view>
+							<view>{{item.insert_time}}</view>
+						</view>
+						<view wx:if='{{welfareInfo.welfareType == 3}}' style="height:100%;float:right;text-align:right;color:#fb595f;margin-right:15rpx;">
+							<view style="margin-top:20rpx;color:#F2B95F;">￥{{item.amount}}抽盒金</view>
+							<view style="color:#8E8C8D;">可累计，永久有效</view>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view class="sharebtn">分享娃友瓜分红包<button style='width:100%;height:100%;position:absolute;top:0;right:0;opacity:0;' open-type='share'></button></view>
+			<view class="stoptime">领取时间截止当日24:00</view>
+
+		</view>
+	</view>
+
+</view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>
+

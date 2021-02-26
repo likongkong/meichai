@@ -1279,3 +1279,5 @@ App({
 //fortuneToys  关注公众号小号赠送限时抽盒金
 
 // mobileShellDetail 手机壳详情页
+
+// redEnvelopeList 红包列表

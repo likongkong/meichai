@@ -68,8 +68,8 @@
 				},
 				{
 					"id": 1,
-					"name": "一番赏列表",
-					"pathName": "page/secondpackge/pages/blankPage/blankPage",
+					"name": "红包列表",
+					"pathName": "page/secondpackge/pages/redEnvelopeList/redEnvelopeList",
 					"query": "",
 					"scene": null
 				},

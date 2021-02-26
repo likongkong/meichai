@@ -127,6 +127,7 @@
         "pages/draw/draw",
         "pages/refund/refund",
         "pages/mobileShellDetail/mobileShellDetail",
+        "pages/redEnvelopeList/redEnvelopeList",
         "pages/fortuneToys/fortuneToys"
       ]
     }
