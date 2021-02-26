@@ -238,8 +238,53 @@ Page({
     isUseBlindboxMoney:true,
     // 提交订单时是否使用抽盒金抵扣
     isDeductNum:1,
-    gotTBBMBS8:true
+    // 关注公众号标签
+    gotTBBMBS8:true,
+    // 手机壳样式
+    specialGoods:1,
+
+    modelSelInde:0,
+
+    detailColorIndex:0,
+    selectShell:{}
+
+
   },
+  dSCfun(event){
+    var index = event.currentTarget.dataset.index || event.target.dataset.index || 0;
+
+    var detailSpecModel = this.data.detailSpecModel || [];
+    var detailSpecColor = this.data.detailSpecColor || [];
+    var listSpec = this.data.listSpec;
+    var modelColor = detailSpecModel[this.data.modelSelInde].name+'-'+detailSpecColor[index].name;
+    if( listSpec[modelColor] && listSpec[modelColor].stock > 0 ){
+      this.setData({
+        detailColorIndex:index,
+        selectShell:listSpec[modelColor]
+      })
+    }else{
+      app.showToastC('暂无库存')
+    };
+  },
+  //分类选择
+  bindPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+
+    var detailSpecModel = this.data.detailSpecModel || [];
+    var detailSpecColor = this.data.detailSpecColor || [];
+    var listSpec = this.data.listSpec;
+    var modelColor = detailSpecModel[e.detail.value].name+'-'+detailSpecColor[this.data.detailColorIndex].name;
+    if( listSpec[modelColor] && listSpec[modelColor].stock > 0 ){
+      this.setData({
+        modelSelInde:e.detail.value,
+        selectShell:listSpec[modelColor]
+      })
+    }else{
+      app.showToastC('暂无库存')
+    };
+
+  },
+
   useBlindboxMoneyFun(){
     this.setData({
       isUseBlindboxMoney:!this.data.isUseBlindboxMoney,
@@ -705,13 +750,13 @@ Page({
         
         console.log(11,count,_this.data.numberofdismantling,_this.data.isBlindBoxNum,'isWholeSuit=='+isWholeSuit)
 
-        var ginfo = [{ gid: gid, color: color, size: size, count: count,isWholeSuit:isWholeSuit, rec_goods_id: (_this.data.rec_goods_id || 0), rec_cart_id: (_this.data.rec_cart_id || 0), 'referee': _this.data.referee }];
+        var ginfo = [{ gid: gid, color: color, size: size, count: count,isWholeSuit:isWholeSuit, rec_goods_id: (_this.data.rec_goods_id || 0), rec_cart_id: (_this.data.rec_cart_id || 0), 'referee': _this.data.referee,specRoleId:_this.data.selectShell.roleId ||'' }];
 
       }else{
         var count = _this.data.numberofdismantling;
         console.log(22,count)
 
-        var ginfo = [{ gid: gid, color: color, size: size, count: count, rec_goods_id: (_this.data.rec_goods_id || 0), rec_cart_id: (_this.data.rec_cart_id || 0), 'referee': _this.data.referee }];
+        var ginfo = [{ gid: gid, color: color, size: size, count: count, rec_goods_id: (_this.data.rec_goods_id || 0), rec_cart_id: (_this.data.rec_cart_id || 0), 'referee': _this.data.referee ,specRoleId:_this.data.selectShell.roleId ||''}];
 
       };
 
@@ -722,7 +767,7 @@ Page({
       var ginfo = [];
       for (var i = 0; i < zunmdata.length; i++) {
         if (zunmdata[i].imgiftr) {
-          ginfo.push({ gid: zunmdata[i].goods_id, color: zunmdata[i].colorid || 0, size: zunmdata[i].sizeid || 0, count: zunmdata[i].numberofdismantling, store_id: zunmdata[i].store_id || 0, 'group_id': _this.data.href });
+          ginfo.push({ gid: zunmdata[i].goods_id, color: zunmdata[i].colorid || 0, size: zunmdata[i].sizeid || 0, count: zunmdata[i].numberofdismantling, store_id: zunmdata[i].store_id || 0, 'group_id': _this.data.href ,specRoleId:_this.data.selectShell.roleId ||''});
         };
       };
       var gcount = zunmdata.length;
@@ -738,7 +783,7 @@ Page({
       suboformola:true
     });
 
-     
+   
 
     var q = Dec.Aese('mod=order&operation=carorder&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&gcount=1&aid=' + aid + '&cid=' + cid + '&ginfo=' + ginfo + '&desc=' + _this.data.desc + '&gdt_vid=' + _this.data.gdt_vid + '&weixinadinfo=' + _this.data.weixinadinfo + '&roomId=' + _this.data.room_id+'&command='+_this.data.descpassword+'&isDeduct='+_this.data.isDeductNum);
 
@@ -2109,7 +2154,14 @@ Page({
     var res = this.data.zunmdata;
     var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
     var iftrnum = true;
-    if (res.selected_spec){}else{
+    if(_this.data.specialGoods == 1){
+      var stock = _this.data.selectShell.stock || 0;
+      _this.setData({
+        sizeid: 0,
+        colorid: 0,
+        quantityofgoods: stock
+      });
+    } else if (res.selected_spec){}else{
         for (var js in res.extends) {
           if (iftrnum) {
             _this.setData({
@@ -2576,7 +2628,13 @@ Page({
         // 刷新完自带加载样式回去
         wx.stopPullDownRefresh()
         if (res.data.ReturnCode == 200) {
-          _this.setData({welvalue:true})
+          var dataGinfo = res.data.Ginfo;
+          _this.setData({
+            welvalue:true,
+            specialGoods:dataGinfo.specialGoods // 特殊商品  手机壳
+          })
+
+
           if (!reg.test(res.data.Ginfo.goods_thumb)) {
             res.data.Ginfo.goods_thumb = _this.data.zdyurl + res.data.Ginfo.goods_thumb;
           };
@@ -2750,6 +2808,46 @@ Page({
                 _this.previewVideo();
               };
           });
+
+          if(res.data.Ginfo.specialGoods && res.data.Ginfo.specialGoods == 1){
+            var infoSpecial = dataGinfo.infoSpecial;
+            console.log(infoSpecial.detailSpec[infoSpecial.specCate[0]],infoSpecial.detailSpec[infoSpecial.specCate[1]])
+            var detailSpecColor = infoSpecial.detailSpec[infoSpecial.specCate[1]] || [];
+            var detailSpecModel = infoSpecial.detailSpec[infoSpecial.specCate[0]] || [];
+            var listSpec = infoSpecial.listSpec;
+            var detailColorIndex = 0;
+            var modelSelInde = 0;
+            var selectShell = {};
+            outSide:for( var i = 0 ; i < detailSpecColor.length ; i++ ){
+              for( var j = 0 ; j < detailSpecModel.length ; j++ ){
+                    var modelColor = detailSpecModel[j].name+'-'+detailSpecColor[i].name;
+                    if( listSpec[modelColor] && listSpec[modelColor].stock > 0 ){
+                      detailColorIndex = j;
+                      modelSelInde = i;
+                      selectShell = listSpec[modelColor];
+                      break outSide;
+                    };
+                };
+            };  
+
+            _this.setData({
+              listSpec,
+              specCate:infoSpecial.specCate,
+              detailSpecColor,
+              detailSpecModel,
+              detailColorIndex,
+              modelSelInde,
+              selectShell
+            })
+            
+            // specialGoods=1是特殊的商品，走手机壳逻辑
+            // Ginfo.infoSpecial.listSpec   对应关系
+            // Ginfo.infoSpecial.specCate        属性列表
+            // Ginfo.infoSpecial.detailSpec        属性明细            
+          }
+
+
+
           if (_this.data.is_exhibition==1||(_this.data.is_exhibition!=1&&_this.data.brandId>0)){
             // 展会
             _this.exhibdatafun(1);

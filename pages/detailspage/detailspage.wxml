@@ -34,22 +34,7 @@
 
 
 <view class='boxdetail {{tipback?"tripList_root":""}}' style="{{!headhidden||newcoupon?'position:fixed;top:0;left:0;right:0;bottom:0;':''}}">
-  <view class='dlhead' style='height:500rpx;position:relative;'>
-    <!-- 下标 -->
-    <view class="detailswipernum">
-      <view class="detailswinbg"></view>
-      <view class="detailswnu">
-        <block wx:if='{{isVideoSwiper}}'>
-          <block wx:if='{{zunmdata.firstCover}}'>{{detailSwiperindex+1}}/{{movies.length+2}}</block>
-          <block wx:else>{{detailSwiperindex+1}}/{{movies.length+1}}</block>
-        </block>
-        <block wx:else>
-          <block wx:if='{{zunmdata.firstCover}}'>{{detailSwiperindex+1}}/{{movies.length+1}}</block>
-          <block wx:else>{{detailSwiperindex+1}}/{{movies.length}}</block>
-        </block>
-      </view>
-    </view>
-
+  <view class='dlhead' style='height:{{specialGoods==1?"570":"500"}}rpx;position:relative;background:#fff;'>
     <!-- 带视频 -->
     <swiper bindchange='swiperchangeindex' bindanimationfinish="changeGoodsSwip" current="{{goodsIndex}}" wx:if='{{isVideoSwiper}}' class="swiper" indicator-color="#fff" indicator-active-color="#ff2742" indicator-dots="{{false}}" circular="true" autoplay="{{isVideoSwiper?false:true}}"
       interval="15000" duration="450" style='height:500rpx;'>
@@ -86,8 +71,32 @@
         </swiper-item>
       </block>
     </swiper>
-  </view>
+    <!-- 下标 -->
+    <block wx:if='{{specialGoods==1}}'>
+      <view class="detailswipernumM">
+          <block wx:for='{{movies}}' wx:key='key'>
+            <view class="detailswnuMeve {{detailSwiperindex==index?'borderClass':''}}"></view>
+          </block>
+      </view>
+    </block>
+    <block wx:else>
+        <view class="detailswipernum">
+          <view class="detailswinbg"></view>
+          <view class="detailswnu">
+            <block wx:if='{{isVideoSwiper}}'>
+              <block wx:if='{{zunmdata.firstCover}}'>{{detailSwiperindex+1}}/{{movies.length+2}}</block>
+              <block wx:else>{{detailSwiperindex+1}}/{{movies.length+1}}</block>
+            </block>
+            <block wx:else>
+              <block wx:if='{{zunmdata.firstCover}}'>{{detailSwiperindex+1}}/{{movies.length+1}}</block>
+              <block wx:else>{{detailSwiperindex+1}}/{{movies.length}}</block>
+            </block>
+          </view>
+        </view>    
+    </block>
 
+
+  </view>
   <!-- 定金 -->
   <view class="detailDeposit" wx:if='{{zunmdata.goods_type==3&&zunmdata.status!=3}}'>
       <view class="deDeposleft">
@@ -184,6 +193,32 @@
         <view class='dlyhnnimeMod' wx:for="{{zunmdata.gtag}}" wx:key="key">{{item}}</view>
       </view>  
   </block>
+  <!-- 手机壳样式 -->
+  <view wx:if='{{specialGoods==1}}' style="background:#fff;padding:20rpx 0;">
+    <view class="mscColorSel">{{specCate[1]}}:{{detailSpecColor[detailColorIndex].name}}</view>
+    <view class="mscColorBox">
+        <block wx:for='{{detailSpecColor}}' wx:key='key'>
+            <view class="mscColorBoxeve {{detailColorIndex==index?'ColorClass':''}}" catchtap="dSCfun" data-index='{{index}}'>
+               <image mode='aspectFit' src="{{item.roleImg}}"></image>
+            </view>
+        </block>        
+    </view>  
+    <view class="mscModel">选择{{specCate[0]}}:</view>
+    <picker class="p" bindchange="bindPickerChange" value="{{modelSelInde}}" range="{{detailSpecModel}}" range-key="name">
+        <view class="mscModelEve">{{detailSpecModel[modelSelInde].name}}</view>
+    </picker>
+    <!-- <view class="mscModel">Compostable Case</view>
+    <view class="mscModelImgBox">
+        <view class="mscModelImgEve">
+            <image class="mscModelImg" src="https://cdn.51chaidan.com//images/toyShow3/brandGoodsRotation/20210109/7b69de7f20fdd34c68ca139cb15c1454.png" mode='aspectFit'></image>
+            <view class="mscModelName">$55 USD</view>
+        </view>
+    </view> -->
+
+
+
+
+  </view>
 
   <!-- 定金 -->
   <view class="dDepositconcent" wx:if='{{zunmdata.goods_type==3}}'>

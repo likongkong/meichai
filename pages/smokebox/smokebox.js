@@ -1333,6 +1333,7 @@ Page({
           title = "我抽到了" + _this.data.activity.seriesName + xilie + info.roleName + "，抽盒金红包送给你们。"
         }
       }
+      console.log('1===',_this.data.redpagshareimg)
       var share = {
         title: title,
         imageUrl: _this.data.redpagshareimg,
@@ -1340,6 +1341,7 @@ Page({
         success: function (res) {}
       }
     } else {
+      console.log('2===',_this.data.snapshotshare,"https://www.51chaidan.com/images/blindbox/" + _this.data.id + ".jpg")
       var share = {
         title: "我正在在线抽盲盒，免费重抽！免费重抽！免费重抽！",
         imageUrl: _this.data.snapshotshare || "https://www.51chaidan.com/images/blindbox/" + _this.data.id + ".jpg",
