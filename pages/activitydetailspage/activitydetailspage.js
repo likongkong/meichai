@@ -309,7 +309,7 @@ Page({
     saveimgurlfrpb: '',
 
     pictboxbox: false,
-    cliptxt:'zhangjing@51chaidan.com',
+    cliptxt:'pili@51chaidan.com',
     addsetData:[[]]
   },
   pictboxboxfun: function () {

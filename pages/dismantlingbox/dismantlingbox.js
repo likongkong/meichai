@@ -76,7 +76,7 @@ Page({
     isAwardBox:false,
     isBuyingTickets:false,
     isShowDrawTxt:false,
-    is_show:false,
+    is_show:true,
     // 商品默认图片
     defaultimg:'/pages/images/goods_Item_Default_Image.png',
     isPopping:false
@@ -539,16 +539,16 @@ Page({
 
     _this.brandinformation(1);
     // // 线上
-    _this.commodityinformation(1,1);
+    // _this.commodityinformation(1,1);
     // // 手作
     // _this.commodityinformation(1,2);
     // // 海外
     // _this.commodityinformation(1,3);
     // // 直播列表
-    _this.liveList(1);
+    // _this.liveList(1);
 
-
-    _this.exhibitionBenefits();
+    //展会福利
+    // _this.exhibitionBenefits();
 
     // //  收货地址
     _this.nextpagediao();
@@ -931,7 +931,7 @@ brandJson:function(){
               var listData = res.data.List || {};
               var infoData = res.data.Info || {};
               var bannerList = listData.bannerList || [];
-              // var brandList = res.data.List.brand || [];
+              var brandList = res.data.List.brand || [];
               var goodsInfo = listData.goodsInfo || [];
               var calendarList = listData.calendar || [];
               var isMobileAuth = infoData.isMobileAuth || false;
@@ -942,7 +942,7 @@ brandJson:function(){
                 bannerList:bannerList,
                 urlScratch:infoData.urlScratch,
                 calendarList,
-                // brandList,
+                brandList,
                 goodsInfo,
                 countSubsribe,
                 isMobileAuth:isMobileAuth
@@ -974,7 +974,7 @@ brandJson:function(){
 
           };
           // 品牌数据
-          _this.toyShowbrandJson();
+          // _this.toyShowbrandJson();
           _this.brandJson();
 
         },
@@ -1281,15 +1281,15 @@ brandJson:function(){
     _this.data.page = 0;
     _this.brandinformation(1);
     // // 线上
-    _this.commodityinformation(1,1);
+    // _this.commodityinformation(1,1);
     // // 手作
     // _this.commodityinformation(1,2);
     // // 海外
     // _this.commodityinformation(1,3)
     // // 直播列表
-    _this.liveList(1);
+    // _this.liveList(1);
     // // 展会福利
-    _this.exhibitionBenefits();
+    // _this.exhibitionBenefits();
   },
 
   /**

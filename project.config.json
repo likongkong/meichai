@@ -91,6 +91,17 @@
           "pathName": "page/secondpackge/pages/fortuneToys/fortuneToys",
           "query": "gid=34183",
           "scene": null
+        },
+        {
+          "name": "page/secondpackge/pages/mobileShellList/mobileShellList",
+          "pathName": "page/secondpackge/pages/mobileShellList/mobileShellList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/dismantlingbox/dismantlingbox",
+          "pathName": "pages/dismantlingbox/dismantlingbox",
+          "scene": null
         }
       ]
     }

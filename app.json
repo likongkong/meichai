@@ -126,7 +126,8 @@
         "pages/blankPage/blankPage",
         "pages/draw/draw",
         "pages/refund/refund",
-        "pages/fortuneToys/fortuneToys"
+        "pages/fortuneToys/fortuneToys",
+        "pages/mobileShellList/mobileShellList"
       ]
     }
   ],

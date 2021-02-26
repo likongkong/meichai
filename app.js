@@ -124,7 +124,9 @@ App({
     nowTime:  0,
     isLimitDownRefresh: false,
     // 是否已领取过现实抽盒金(关注公众号小号赠送)  默认已领取
-    gotTBBMBS8:true
+    gotTBBMBS8:true,
+    // 是否已领取过现实抽盒金(关注公众号大号赠送)  默认已领取
+    gotTBBMBS9:true
     // *** end ***
   },
   //一番赏队列倒计时
@@ -215,7 +217,9 @@ App({
                   _this.signindata.isAuthMobile = res.data.Info.isAuthMobile;
                   // 是否已领取过现实抽盒金(关注公众号小号赠送) 新用户
                   _this.signindata.gotTBBMBS8 = res.data.Info.welfare ? res.data.Info.welfare.gotTBBMBS8 : true;
-                  
+                  // 是否已领取过现实抽盒金(关注公众号大号赠送) 新用户
+                  _this.signindata.gotTBBMBS9 = res.data.Info.welfare ? res.data.Info.welfare.gotTBBMBS9 : true;
+
                   // 是否是地域黑模式
                   _this.signindata.isHellBlackUser = res.data.Info.isHellBlackUser || false;
                   // 是否开启展会 
@@ -1276,5 +1280,7 @@ App({
 // drawHideGoods 抽隐藏
 
 //fortuneToys  关注公众号小号赠送限时抽盒金
+
+//mobileShellList  手机壳列表
 
 
