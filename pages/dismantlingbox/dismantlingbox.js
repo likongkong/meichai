@@ -961,7 +961,7 @@ brandJson:function(){
                 isMobileAuth:isMobileAuth
               });
               // 是否是分享围观
-              _this.shareReferee();
+              // _this.shareReferee();
               
               var nowTime = new Date().getTime();
               var isBuyingTickets = res.data.Info.ticketTime;
