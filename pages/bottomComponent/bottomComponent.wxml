@@ -36,27 +36,27 @@
 
 	<!-- 潮玩展 -->
 	 <!-- wx:if='{{isProduce}}' -->
-	<!-- <view class='comNavigationEve'>
+	<view class='comNavigationEve'>
 		<view style='width:100%;height:100%;position:relative;' bindtap='fashionShow'>
 			<view class='navigationltop'>
-          <image src='https://cdn.51chaidan.com/images/calendar/logo.jpg?' mode="widthFix" style="width:120rpx;height:60rpx;position:absolute;bottom:5rpx;right:0;left:0;margin:0 auto;"></image>
+          <image src='https://cdn.51chaidan.com/images/sign/activity/logoFour.png?' mode="widthFix" style="width:120rpx;height:auto;position:absolute;bottom:14rpx;right:0;left:0;margin:0 auto;"></image>
 			</view>
 			<view wx:if='{{isChar}}' class='navigationlcon' style="font-weight:bold;font-size:30rpx;">
 				<text style="color:#f93f45">潮</text>
 				<text style="color:#FFCC00">玩</text>
 				<text style="color:#31b3fb">展</text></view>
 		</view>
-	</view> -->
+	</view>
 
 <!-- 一番赏 -->
-<view wx:if='{{isProduce}}' class='comNavigationEve'>
+<!-- <view wx:if='{{isProduce}}' class='comNavigationEve'>
 	<view style='width:100%;height:100%;position:relative;' bindtap='wnews'>
 		<view class='navigationltop'>
 			<image src='https://cdn.51chaidan.com//images/sign/yifanshang.png' class='navigationltopimg'></image>
 		</view>
 		<view wx:if='{{isChar}}' class='navigationlcon' style='{{wnews?"color:#fd2844":""}};'>一番赏</view>
 	</view>
-</view>
+</view> -->
 
 
 	<!-- 闲置 -->

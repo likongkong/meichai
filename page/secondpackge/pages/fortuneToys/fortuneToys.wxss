@@ -5,7 +5,7 @@
 
 page{
   background:#f4f5f9;
-  padding-bottom: 230rpx;
+  /* padding-bottom: 230rpx; */
 }
 
 .wrap{
@@ -87,4 +87,48 @@ page{
   color: #fff6ed;
   font-size: 24rpx;
   /* font-weight: bold; */
+}
+
+
+.s9{
+  position: relative;
+}
+.s9getAward{
+  width: 100%;
+  height: 90rpx;
+  position: absolute;
+  bottom: 258rpx;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background: #000; */
+}
+.s9getAward button{
+  width: 624rpx;
+  height: 90rpx;
+  background: transparent;
+}
+.mobileWrap{
+  width: 100%;
+  height: 90rpx;
+  position: absolute;
+  bottom: 368rpx;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mobileWrap input{
+  width: 624rpx;
+  height: 90rpx;
+  background: transparent;
+  color: #fff;
+  padding: 0 14rpx;
+  box-sizing: border-box;
+  text-align: center;
+}
+.LargeDrainage{
+  width: 100%;
+  height: auto;
 }

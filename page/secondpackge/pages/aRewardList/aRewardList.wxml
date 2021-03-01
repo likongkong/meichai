@@ -8,7 +8,7 @@
         <block wx:for="{{rewardswiperData}}" wx:key='key' wx:for-item="item">
           <swiper-item>
             <view class="card" data-id="{{item.id}}" bindtap="toaRewarddeyails">
-              <view class="cardTbox">
+              <view class="cardTbox" style="position:relative;">
                 <text class="serialnum">Vol.{{item.id}}</text>
                 <text class="serialnum" wx:if='{{item.isScratch}}' style="left:160rpx;">送刮刮卡</text>
                 <image class="pic" src="{{item.cover}}" mode="aspectFill"></image>
@@ -17,6 +17,11 @@
                     <text wx:if="{{itemgear.gear == 'A' || itemgear.gear == 'B' || itemgear.gear == 'C' || itemgear.gear == 'D'}}">{{itemgear.gear}}赏 {{itemgear.suplus}}/{{itemgear.limit}}</text>
                   </block>
                 </view>
+                <view wx:if="{{item.isFlagship && item.flagshipArr}}" style="position:absolute;left:6rpx;bottom:6rpx;height:30rpx;overflow:hidden;z-index:5;padding: 4rpx 8rpx;">
+                    <image src='{{item.flagshipArr.logo}}' style='float:left;width:30rpx;height:30rpx;border-radius:50%;' mode="widthFix"></image>
+                    <view style='float:left;height:30rpx;line-height:30rpx;font-size:20rpx;color:#fff;margin-left:10rpx;max-width:200rpx;' class='specialellipsis'>{{item.flagshipArr.name}}旗舰店</view>
+                    <view style="  width: 100%;height: 100%;background: #000;opacity: 0.6;position: absolute;top: 0;left: 0;z-index: -1;border-radius: 10rpx;"></view>
+                </view>		
               </view>
               <view class="progress-box">
                 <progress percent="{{(item.suplusGoods/item.limitGoods)*100}}" color="{{(item.suplusGoods/item.limitGoods)*100 === 100?'#6FBE0D':(item.suplusGoods/item.limitGoods)*100 < 100 && (item.suplusGoods/item.limitGoods)*100 > 50?'#FEB51D':'#ff2742'}}" backgroundColor="#cccccc" stroke-width='12' active duration="5" />
@@ -56,7 +61,7 @@
       <swiper autoplay="{{true}}" circular="true" interval="3000" style="height:174rpx">
         <block wx:for="{{item.list_arr}}" wx:key='key' wx:for-item="sonitem">
           <swiper-item data-id="{{sonitem.id}}" bindtap="toaRewarddeyails">
-              <view class="cardTbox">
+              <view class="cardTbox" style="position:relative;">
                 <text class="serialnum">Vol.{{sonitem.id}}</text>
                 <text class="serialnum" wx:if='{{sonitem.isScratch}}' style="left:110rpx;">送刮刮卡</text>
                 <image class="pic" src="{{sonitem.cover}}" mode="aspectFill"></image>
@@ -65,6 +70,11 @@
                     <text wx:if="{{itemgear.gear == 'A' || itemgear.gear == 'B' || itemgear.gear == 'C' || itemgear.gear == 'D'}}">{{itemgear.gear}}赏 {{itemgear.suplus}}/{{itemgear.limit}}</text>
                   </block>
                 </view>
+                <view wx:if="{{item.isFlagship && item.flagshipArr}}" style="position:absolute;left:6rpx;bottom:6rpx;height:30rpx;overflow:hidden;z-index:5;padding: 4rpx 8rpx;">
+                    <image src='{{item.flagshipArr.logo}}' style='float:left;width:30rpx;height:30rpx;border-radius:50%;' mode="widthFix"></image>
+                    <view style='float:left;height:30rpx;line-height:30rpx;font-size:20rpx;color:#fff;margin-left:10rpx;max-width:200rpx;' class='specialellipsis'>{{item.flagshipArr.name}}旗舰店</view>
+                    <view style="  width: 100%;height: 100%;background: #000;opacity: 0.6;position: absolute;top: 0;left: 0;z-index: -1;border-radius: 10rpx;"></view>
+                </view>		
               </view>
               <view class="progress-box">
                 <progress percent="{{(sonitem.suplusGoods/sonitem.limitGoods)*100}}" color="{{(sonitem.suplusGoods/sonitem.limitGoods)*100 === 100?'#6FBE0D':(sonitem.suplusGoods/sonitem.limitGoods)*100 < 100 && (sonitem.suplusGoods/sonitem.limitGoods)*100 > 50?'#FEB51D':'#ff2742'}}" backgroundColor="#cccccc" stroke-width='12' active duration="5"/>

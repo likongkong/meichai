@@ -257,7 +257,7 @@
       </view> 
   </view>
 
-<image wx:if='{{!gotTBBMBS8}}' style="width:720rpx;display:block;margin:15rpx auto;" catchtap="officialAccount" mode='widthFix' src="http://cdn.51chaidan.com/images/sign/activity/attentionGZH.png"></image>
+<image wx:if='{{!gotTBBMBS8 || !gotTBBMBS9}}' style="width:720rpx;height:auto; display:block;margin:15rpx auto;" catchtap="officialAccount" mode='widthFix' src="{{!gotTBBMBS8?'http://cdn.51chaidan.com/images/sign/activity/attentionGZH.png':'https://cdn.51chaidan.com/images/sign/activity/bigAttention1.png'}}"></image>
 
   <block wx:if='{{is_exhibition==1||(is_exhibition!=1&&brandId>0)}}'>
       <view style="width:100%;height:80rpx;">

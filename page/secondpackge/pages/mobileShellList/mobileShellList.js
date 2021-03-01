@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '领取抽盒金', 
+    c_title: '列表', 
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
@@ -16,8 +16,10 @@ Page({
     tgabox:false,
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
-    is_mobile_phone:false,
-    gain_source:8
+    classifyIndex:0,
+    scrollleft:0,
+    classifyArr:[{name:'Pangram'},{name:'Keigo'},{name:'Agathe Sorlet'},{name:'Sue Tsai'},{name:'Ingrid Ching'},{name:'the Unsent Project'},{name:'Kunel Gaur'}],
+    artworkArr:[{img:'https://cdn-image02.casetify.com/usr/13600/2323600/~v70/5057523_iphone12-pro-max__color_silver_16001666.png.350x350-w.m80.jpg',productdesc:'iPhone 12 Pro Max Ultra Impact',artworkdesc:'Pink Sharks',colordesc:'15 款顏色',price:'$70 USD'},{img:'https://cdn-image02.casetify.com/usr/24206/2784206/~v111/4473988_iphone12-pro-max__color_silver_16001665.png.350x350-w.m80.jpg',productdesc:'iPhone 12 Pro Max Ultra Impact',artworkdesc:'Wild Meadow',colordesc:'15 款顏色',price:'$70 USD'},{img:'https://cdn-image02.casetify.com/usr/11624/1511624/~v46/6182791_iphone12-pro-max__color_silver_16001665.png.350x350-w.m80.jpg',productdesc:'iPhone 12 Pro Max Ultra Impact',artworkdesc:'Bed of Tulips (Clear)',colordesc:'15 款顏色',price:'$70 USD'},{img:'https://cdn-image02.casetify.com/usr/11321/2561321/~v2/12547183_iphone12-pro-max__color_silver_16001571.png.350x350-w.m80.jpg',productdesc:'iPhone 12 Pro Max Ultra Impact',artworkdesc:'Poodle coffee clear phone case for unique dog breed lovers',colordesc:'15 款顏色',price:'$70 USD'}]
   },
   /**
    * 生命周期函数--监听页面加载
@@ -28,61 +30,11 @@ Page({
     // this.data.listData = data;
     // 判断是否授权
     this.activsign();
-    wx.hideShareMenu() // 禁止页面转发
   },
   onLoadfun:function(){
     this.setData({
       uid: app.signindata.uid,
       loginid:app.signindata.loginid,
-      is_mobile_phone:app.signindata.mobile?true:false,
-      mobile:app.signindata.mobile,
-      gain_source:!app.signindata.gotTBBMBS8?8:!app.signindata.gotTBBMBS9?9:0
-    }); 
-  },
-  getAward(){
-    var _this = this;
-    wx.showLoading({ title: '加载中...'})
-    var gain_source = !app.signindata.gotTBBMBS8?8:!app.signindata.gotTBBMBS9?9:'';
-    var q = Dec.Aese('mod=LuckyDraw&operation=getCashOnly&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&gain_source=' + gain_source)
-    console.log('mod=LuckyDraw&operation=getCashOnly&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&gain_source=' + gain_source)
-    wx.request({
-      url: app.signindata.comurl + 'spread.php'+q,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        console.log('领取抽盒福利======',res)
-        wx.hideLoading();
-        if (res.data.ReturnCode == 200) {
-          if(gain_source == 8){
-            app.signindata.gotTBBMBS8 = true;
-          }else if(gain_source == 9){
-            app.signindata.gotTBBMBS9 = true;
-          }
-          wx.showModal({
-            title: '领取成功！',
-            content: '快去抽盒吧，祝您欧气爆棚',
-            confirmText:'立即抽盒',
-            showCancel:false,
-            success (res) {
-              if (res.confirm) {
-                _this.jumpsmokeboxlistPage();
-              }
-            }
-          })
-        }else if(res.data.ReturnCode == 351){
-          wx.showModal({
-            title: '您已经领过券了',
-            content: '不能重复领取',
-            confirmText:'立即抽盒',
-            showCancel:false,
-            success (res) {
-              if (res.confirm) {
-                _this.jumpsmokeboxlistPage();
-              }
-            }
-          })
-        }
-      }
     }); 
   },
   activsign: function () {
@@ -161,6 +113,58 @@ Page({
     this.setData({
       tgabox: true
     });
+  },
+
+  getInfo(){
+    var _this = this;
+    wx.showLoading({ title: '加载中...'})
+    var q = Dec.Aese('mod=memberVip&operation=vipPrivilegeInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+    console.log('vip特权领取数据请求======','mod=memberVip&operation=vipPrivilegeInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+    wx.request({
+      url: app.signindata.comurl + 'member.php'+q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('vip特权领取数据======',res)
+        // 刷新完自带加载样式回去
+        wx.stopPullDownRefresh();
+        wx.hideLoading();
+        if (res.data.ReturnCode == 200) {
+          _this.setData({
+            listData:res.data.List.vipPrerogativeStyle,
+            subscribedata:res.data.Info.subscribe
+          })
+        }else if(res.data.ReturnCode == 201){
+          wx.navigateTo({ 
+            url: "/pages/wode/wode"
+          }) 
+        }
+      }
+    });
+  },
+
+  classifyChange(e){
+    let that = this;
+    let index = e.currentTarget.dataset.index;
+    let name = e.currentTarget.dataset.name;
+    let ele = '#ele' + index;
+    that.setData({
+      classifyIndex:index,
+      classifyName:index != 0?name:'',
+      loadprompt:false
+    })
+    //创建节点选择器
+    var query = wx.createSelectorQuery();
+    //选择id
+    query.select(ele).boundingClientRect();
+    query.exec(function(res) {
+      console.log(res[0])
+      that.setData({
+        scrollleft:e.currentTarget.offsetLeft - wx.getSystemInfoSync().windowWidth/2 + (res[0].width/2)
+      })
+
+      // that.animationFun(that,e.currentTarget.offsetLeft,res[0].width);
+    })
   },
 
   /**

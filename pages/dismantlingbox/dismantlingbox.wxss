@@ -182,7 +182,7 @@ page{
 }
 .ssubSBotTimeleft{
   font-size:25rpx;
-  line-height:30rpx;
+  /* line-height:30rpx; */
   color:#fff;
   float:left;
   padding:5rpx 20rpx;

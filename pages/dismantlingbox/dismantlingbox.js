@@ -76,7 +76,7 @@ Page({
     isAwardBox:false,
     isBuyingTickets:false,
     isShowDrawTxt:false,
-    is_show:false,
+    is_show:true,
     // 商品默认图片
     defaultimg:'/pages/images/goods_Item_Default_Image.png',
     isPopping:false
@@ -355,10 +355,23 @@ Page({
   },
   // banner 跳转
   jumpbanner: function (w) {
+
     var whref = w.currentTarget.dataset.href || w.target.dataset.href;
     var item_type = w.currentTarget.dataset.item_type || w.target.dataset.item_type||0;
     var imgurl = w.currentTarget.dataset.imgurl || w.target.dataset.imgurl || '';
     var wname = w.currentTarget.dataset.title || w.target.dataset.title || '美拆'; 
+
+    if(whref == ''){
+      var _this = this;
+      var subscribe_data = _this.data.subscribeJson[0].toyshowStart;
+      console.log(subscribe_data)
+      this.setData({
+        subscribedata:subscribe_data
+      });
+      _this.subscrfun(1);
+      return false;
+    }
+
     // 公共跳转
     app.comjumpwxnav(item_type, whref, wname, imgurl);
 
@@ -539,7 +552,7 @@ Page({
 
     _this.brandinformation(1);
     // // 线上
-    _this.commodityinformation(1,1);
+    // _this.commodityinformation(1,1);
     // // 手作
     // _this.commodityinformation(1,2);
     // // 海外
@@ -547,8 +560,8 @@ Page({
     // // 直播列表
     _this.liveList(1);
 
-
-    _this.exhibitionBenefits();
+    //展会福利
+    // _this.exhibitionBenefits();
 
     // //  收货地址
     _this.nextpagediao();
@@ -931,7 +944,7 @@ brandJson:function(){
               var listData = res.data.List || {};
               var infoData = res.data.Info || {};
               var bannerList = listData.bannerList || [];
-              // var brandList = res.data.List.brand || [];
+              var brandList = res.data.List.brand || [];
               var goodsInfo = listData.goodsInfo || [];
               var calendarList = listData.calendar || [];
               var isMobileAuth = infoData.isMobileAuth || false;
@@ -942,13 +955,13 @@ brandJson:function(){
                 bannerList:bannerList,
                 urlScratch:infoData.urlScratch,
                 calendarList,
-                // brandList,
+                brandList,
                 goodsInfo,
                 countSubsribe,
                 isMobileAuth:isMobileAuth
               });
               // 是否是分享围观
-              _this.shareReferee();
+              // _this.shareReferee();
               
               var nowTime = new Date().getTime();
               var isBuyingTickets = res.data.Info.ticketTime;
@@ -974,7 +987,7 @@ brandJson:function(){
 
           };
           // 品牌数据
-          _this.toyShowbrandJson();
+          // _this.toyShowbrandJson();
           _this.brandJson();
 
         },
@@ -1281,7 +1294,7 @@ brandJson:function(){
     _this.data.page = 0;
     _this.brandinformation(1);
     // // 线上
-    _this.commodityinformation(1,1);
+    // _this.commodityinformation(1,1);
     // // 手作
     // _this.commodityinformation(1,2);
     // // 海外
@@ -1289,7 +1302,7 @@ brandJson:function(){
     // // 直播列表
     _this.liveList(1);
     // // 展会福利
-    _this.exhibitionBenefits();
+    // _this.exhibitionBenefits();
   },
 
   /**
