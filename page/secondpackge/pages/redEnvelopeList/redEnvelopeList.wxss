@@ -1,8 +1,9 @@
 /* page/secondpackge//pages/aRewardDetails/aRewardDetails.wxss */
 @import "../../../../pages/signin/signin.wxss";
+@import "../../../../pages/smokebox/smokebox.wxss";
 @import "../../../../common/newcoupon.wxss";
 @import "../../../../common/tabbar.wxss";
-@import "../../../../pages/smokebox/smokebox.wxss";
+
 
 page{
   background:#FEEEDF;
@@ -54,6 +55,7 @@ page{
 }
 .relContent{
   width: 100%;
+  padding-bottom: 50rpx;
 }
 .relRedEveOne{
   width: 650rpx;
@@ -105,7 +107,7 @@ page{
   height: 60rpx;
   line-height: 60rpx;
   color: #fff;
-  font-size: 34rpx;
+  font-size: 30rpx;
   margin-top: 33rpx;
 }
 .rretrCont{
