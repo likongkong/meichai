@@ -128,7 +128,9 @@
         "pages/refund/refund",
         "pages/fortuneToys/fortuneToys",
         "pages/mobileShellList/mobileShellList",
-        "pages/mobileShellDetail/mobileShellDetail"
+        "pages/mobileShellDetail/mobileShellDetail",
+        "pages/auctionList/auctionList",
+        "pages/myAuctionList/myAuctionList"
       ]
     }
   ],

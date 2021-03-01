@@ -1287,3 +1287,7 @@ App({
 
 
 // mobileShellDetail 手机壳详情页
+
+
+//auctionList 拍卖列表
+//myAuctionList 我的拍卖列表
