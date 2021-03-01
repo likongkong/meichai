@@ -1,7 +1,7 @@
 // 阿拉丁
 const ald = require('./utils/ald-stat.js');
 // talkingdata
-// var tdweapp = require('./utils/tdweapp.js');
+// var tdweapp = require('./utils/tdweapp.js'); 
 //aes加密解密js
 var Dec = require('common/public.js');
 App({
@@ -1291,3 +1291,6 @@ App({
 
 //auctionList 拍卖列表
 //myAuctionList 我的拍卖列表
+
+// redEnvelopeList 红包列表
+

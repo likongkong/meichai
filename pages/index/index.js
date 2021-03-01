@@ -261,7 +261,7 @@ Page({
 
       // url: "/page/secondpackge/pages/drawHideGoods/drawHideGoods"
       url: "/page/secondpackge/pages/fortuneToys/fortuneToys"
-
+      // url: "/page/secondpackge/pages/redEnvelopeList/redEnvelopeList"
       // url: "/page/secondpackge/pages/priorityVoting/priorityVoting"
 
       // url: "/page/secondpackge/pages/luckyDraw/luckyDraw"
