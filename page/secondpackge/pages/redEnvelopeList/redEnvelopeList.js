@@ -73,19 +73,22 @@ Page({
     var isget = w.currentTarget.dataset.isget;
     var samount = w.currentTarget.dataset.samount;
     var ind = w.currentTarget.dataset.ind;
-
-    _this.drawredpagshare(ind)
+    var gid = w.currentTarget.dataset.gid;
     if (!isget || (samount && samount == 0)) {
       _this.openredpackage(id)
       _this.setData({
         welfareid: id,
         redpagind: ind,
+        isget,
+        gid
       })
     } else {
       _this.redpagInfo(id)
       _this.setData({
         welfareid: id,
         redpagind: ind,
+        isget,
+        gid
       })
     }
   },
@@ -162,6 +165,7 @@ Page({
             welfareInfo: res.data.Info.welfare,
             welfareList: res.data.List.welfare,
           })
+          _this.drawredpagshare(_this.data.redpagind)
         } else {
           app.showToastC(res.data.Msg);
         }
@@ -177,7 +181,7 @@ Page({
         const ctxt = wx.createCanvasContext('redpagshare');
         ctxt.drawImage(res.path, 0, 0, 300, 240)
         wx.getImageInfo({
-          src: info.roleImg,
+          src: _this.data.welfareInfo.roleImg,
           success: function (res) {
             var radio = res.width / res.height;
             var width = 80 * radio;
@@ -269,7 +273,10 @@ Page({
     _this.setData({
       ishowpagInfo: false,
     })
-    this.getInfo();
+    if(!this.data.isget){
+      this.getInfo();
+    };
+    
   },
   //获取用户信息
   getUserInfo(){
@@ -407,26 +414,35 @@ Page({
   clicktganone: function () {
     this.setData({ tgabox: false })
   }, 
+  blindboxClosepagInfo: function () {
+    var _this = this
+    _this.setData({
+      isBlindboxPacketTwo: false,
+    })
+    if(!this.data.isget){
+      this.getInfo();
+    };
+  },  
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    var _this = this;
+    var _this = this
     if (_this.data.ishowpagInfo || _this.data.isBlindboxPacketTwo) {
       var info = _this.data.listdata[_this.data.redpagind]
-      var xilie = info.seriesName != "" ? "-" : ""
+      var xilie = _this.data.welfareInfo.roleName || "";
       var title = ""
       if(info.welfareType == 1){
         title = "我抽到了" + xilie + "，隐藏红包送给你们。"
       } else if(info.welfareType == 2){
         if (info.userId && info.userId != _this.data.uid) {
-          title = info.nick + "抽到了" + xilie + "，幸运值红包送给你们。"
+          title = info.nick + "抽到了" + xilie +  "，幸运值红包送给你们。"
         } else {
-          title = "我抽到了" + xilie + "，幸运值红包送给你们。"
+          title = "我抽到了" + xilie +  "，幸运值红包送给你们。"
         }
       }else if(info.welfareType == 3){
         if (info.userId && info.userId != _this.data.uid) {
-          title = info.nick + "抽到了" + xilie + "，抽盒金红包送给你们。"
+          title = info.nick + "抽到了" + xilie +  "，抽盒金红包送给你们。"
         } else {
           title = "我抽到了" + xilie + "，抽盒金红包送给你们。"
         }
@@ -438,10 +454,8 @@ Page({
         success: function (res) {}
       }
     } else {
-      var reshare = Dec.sharemc();
-    }
-
-    
+      var reshare = app.sharemc();
+    }  
     return reshare
   },
   

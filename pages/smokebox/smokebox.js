@@ -3144,7 +3144,7 @@ Page({
       var ind = w.currentTarget.dataset.ind;
       wx.navigateTo({   
         url: "/page/secondpackge/pages/redEnvelopeList/redEnvelopeList?hs=" + ind
-      }); 
+      });
   },
 
   // 幸运值红包
@@ -3181,13 +3181,16 @@ Page({
     var samount = w.currentTarget.dataset.samount;
     var ind = w.currentTarget.dataset.ind;
     
-    var url = "/page/secondpackge/pages/redEnvelopeList/redEnvelopeList?hs=" + String(_this.data.welfare[0].welfareType==2?1:2);
-    console.log(url)
-    wx.navigateTo({   
-      url: url
-    });
-    this.hidepackage()
-    return false;
+    if( this.data.isredpag != 1 ){
+        var url = "/page/secondpackge/pages/redEnvelopeList/redEnvelopeList?hs=" + String(_this.data.welfare[0].welfareType==2?1:2);
+        console.log(url)
+        wx.navigateTo({   
+          url: url
+        });
+        this.hidepackage()
+        return false;
+    }
+
 
     _this.drawredpagshare(ind)
     if (!isget || (samount && samount == 0)) {
