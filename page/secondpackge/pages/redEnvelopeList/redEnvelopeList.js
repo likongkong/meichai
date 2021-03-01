@@ -65,10 +65,72 @@ Page({
 
     })
   },
-  // 抽红包 幸运值
-  redpagInfo: function (event) {
+
+
+  openpackage: function (w) {
     var _this = this;
-    var welfareId = event.currentTarget.dataset.wid || event.target.dataset.wid || 1;
+    var id = w.currentTarget.dataset.mid;
+    var isget = w.currentTarget.dataset.isget;
+    var samount = w.currentTarget.dataset.samount;
+    var ind = w.currentTarget.dataset.ind;
+
+    _this.drawredpagshare(ind)
+    if (!isget || (samount && samount == 0)) {
+      _this.openredpackage(id)
+      _this.setData({
+        welfareid: id,
+        redpagind: ind,
+      })
+    } else {
+      _this.redpagInfo(id)
+      _this.setData({
+        welfareid: id,
+        redpagind: ind,
+      })
+    }
+  },
+
+  openredpackage: function (welfareId) {
+    var _this = this;
+
+    wx.showLoading({
+      title: '开启中...',
+      mask:true
+    })
+    
+    var q = Dec.Aese('mod=blindBox&operation=receiveWelfare&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&welfareId=' + welfareId)
+    wx.request({
+      url: app.signindata.comurl + 'spread.php' + q,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        wx.hideLoading()
+        _this.data.pmc = true;
+        if (res.data.ReturnCode == 200) {
+          app.showToastC('领取成功');
+          _this.redpagInfo(welfareId)
+        } else {
+          app.showToastC(res.data.Msg);
+          console.log()
+          if(_this.data.welfare[0].welfareType == 2){
+            _this.setData({
+              ishowredpackage: false,
+            })
+          }else if(_this.data.welfare[0].welfareType == 3){
+            _this.setData({
+              isBlindboxPacketOne: false,
+            })
+          }
+        }
+      }
+    });
+
+  },
+
+  // 抽红包 幸运值
+  redpagInfo: function (welfareId) {
+    var _this = this;
+    var welfareId = welfareId;
     wx.showLoading({
       title: '加载中...',
       mask:true
@@ -106,7 +168,62 @@ Page({
       }
     });
   },
+  drawredpagshare: function (ind) {
+    var _this = this
+    var info = _this.data.listdata[ind]
+    wx.getImageInfo({
+      src: "https://www.51chaidan.com/images/blindBox/halfPackage.jpg",
+      success: function (res) {
+        const ctxt = wx.createCanvasContext('redpagshare');
+        ctxt.drawImage(res.path, 0, 0, 300, 240)
+        wx.getImageInfo({
+          src: info.roleImg,
+          success: function (res) {
+            var radio = res.width / res.height;
+            var width = 80 * radio;
+            if(width>110){
+              var widthOther = 60 * radio;
+              ctxt.drawImage(res.path, 25, 25, widthOther, 60)
+            }else{
+              ctxt.drawImage(res.path, 25, 25, width, 80)
+            };
+            
+            ctxt.setFontSize(25);
+            ctxt.setFillStyle('#f0ca97');
+            if (info.welfareType == 1) {
+              ctxt.fillText("隐藏红包", 165, 60);
+              ctxt.fillText(parseInt(info.limitAmount) + "元", 177, 90);
+              ctxt.fillText("隐藏红包", 165, 60.5);
+              ctxt.fillText(parseInt(info.limitAmount) + "元", 177.5, 90);
+            } else if (info.welfareType == 2)  {
+              ctxt.fillText("幸运值红包", 145, 60);
+              ctxt.fillText(parseInt(info.limitAmount) + "点", 170, 90);
+              ctxt.fillText("幸运值红包", 145, 60.5);
+              ctxt.fillText(parseInt(info.limitAmount) + "点", 170.5, 90);
+            } else if (info.welfareType == 3)  {
+              ctxt.fillText("抽盒金红包", 145, 60);
+              ctxt.fillText(parseInt(info.limitAmount) + "元", 170, 90);
+              ctxt.fillText("抽盒金红包", 145, 60.5);
+              ctxt.fillText(parseInt(info.limitAmount) + "元", 170.5, 90);
+            }
+            ctxt.draw(true, setTimeout(function () {
+              wx.canvasToTempFilePath({
+                canvasId: 'redpagshare',
+                success: function (res) {
+                  _this.setData({
+                    redpagshareimg: res.tempFilePath
+                  })
+                },
+                fail: function (res) {},
+              });
+            }, 300));
 
+          }
+        })
+
+      }
+    })
+  },
   headSelFun(event){
     var index = event.currentTarget.dataset.index || event.target.dataset.index || 1;
 
@@ -127,8 +244,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      headSel:options.hs || 1
+    })
     // 判断是否授权
     this.activsign();
+    
   },
   onLoadfun:function(){
     var _this = this;
@@ -290,7 +411,37 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    var reshare = Dec.sharemc();
+    var _this = this;
+    if (_this.data.ishowpagInfo || _this.data.isBlindboxPacketTwo) {
+      var info = _this.data.listdata[_this.data.redpagind]
+      var xilie = info.seriesName != "" ? "-" : ""
+      var title = ""
+      if(info.welfareType == 1){
+        title = "我抽到了" + xilie + "，隐藏红包送给你们。"
+      } else if(info.welfareType == 2){
+        if (info.userId && info.userId != _this.data.uid) {
+          title = info.nick + "抽到了" + xilie + "，幸运值红包送给你们。"
+        } else {
+          title = "我抽到了" + xilie + "，幸运值红包送给你们。"
+        }
+      }else if(info.welfareType == 3){
+        if (info.userId && info.userId != _this.data.uid) {
+          title = info.nick + "抽到了" + xilie + "，抽盒金红包送给你们。"
+        } else {
+          title = "我抽到了" + xilie + "，抽盒金红包送给你们。"
+        }
+      }
+      var reshare = {
+        title: title,
+        imageUrl: _this.data.redpagshareimg,
+        path: "/pages/smokebox/smokebox?id=" + _this.data.id + '&referee=' + _this.data.uid + '&gid=' + _this.data.gid + '&welfareid=' + _this.data.welfareid + '&isredpag=1',
+        success: function (res) {}
+      }
+    } else {
+      var reshare = Dec.sharemc();
+    }
+
+    
     return reshare
   },
   

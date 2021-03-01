@@ -11,7 +11,7 @@
 <view class="relContent">
     <block wx:for='{{listdata}}' wx:key='key'>
         <view class="{{headSel==1?'relRedEveOne':'relRedEveTwo'}}" style="{{item.isReceive || item.limitAmount==item.truthAmount?'opacity:0.6;':''}}">
-            <view class="eveClick" catchtap="redpagInfo" wx:if='{{!item.isReceive || item.limitAmount!=item.truthAmount}}' data-wid='{{item.welfareId}}'></view>
+            <view class="eveClick"  catchtap="openpackage" data-isget="{{item.isReceive}}" data-mid="{{item.welfareId}}" data-ind="{{index}}" data-samount="{{item.suplusAmount}}" data-wid='{{item.welfareId}}'></view>
             <view class="relRedEveComplete" wx:if='{{item.isReceive || item.limitAmount==item.truthAmount}}'>
 						   <block wx:if='{{item.isReceive}}'>已领取</block>
 							 <block wx:if='{{item.limitAmount==item.truthAmount}}'>已领完</block>
@@ -32,7 +32,7 @@
             </view>
         </view>
     </block>
-    <!-- <view class="redListNoData" wx:if='{{}}'>您还没有{{headSel==1?'幸运值':'抽盒金'}}红包哦~</view> -->
+    <view class="redListNoData" wx:if='{{listdata && listdata.length == 0}}'>您还没有{{headSel==1?'幸运值':'抽盒金'}}红包哦~</view>
 </view>
 
 
@@ -138,7 +138,7 @@
 
 
 
-
+<canvas canvas-id='redpagshare' class='snapshotshareclass'></canvas>
 
 
 
