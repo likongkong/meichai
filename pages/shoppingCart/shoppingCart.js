@@ -630,6 +630,7 @@ Page({
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
+        console.log('购物车数据',res)
         // 刷新完自带加载样式回去
         _this.setData({
           nodataiftr: true,
@@ -718,11 +719,11 @@ Page({
           if (rdw) {
             if (rdw.length != 0) {
               for (var i = 0; i < rdw.length; i++) {
-                rdw[i].numberofdismantling = rdw[i].count;
+                rdw[i].numberofdismantling = parseInt(rdw[i].count);
                 rdw[i].gid = rdw[i].goods_id;
                 rdw[i].gsale = parseFloat(rdw[i].gsale).toFixed(2);
 
-                if (rdw[i].count > rdw[i].stock){
+                if (parseInt(rdw[i].count) > rdw[i].stock){
                   rdw[i].iftrcheck = false;
                 }else{
                   if (rdw[i].selected == 1) {
@@ -1283,7 +1284,7 @@ Page({
         cart_id.push(zunmdata[i].cart_id);
         if (zunmdata[i].color.no) { var color = zunmdata[i].color.no; } else { var color = 0; };
         if (zunmdata[i].size.no) { var size = zunmdata[i].size.no; } else { var size = 0; };
-        ginfo.push({ gid: zunmdata[i].gid, color: color || 0, size: size || 0, count: zunmdata[i].numberofdismantling, store_id: zunmdata[i].store_id, rec_goods_id: zunmdata[i].rec_goods_id || 0, rec_cart_id: zunmdata[i].rec_cart_id || 0, group_id: zunmdata[i].group_id || 0, referee: zunmdata[i].referee||0 });
+        ginfo.push({ gid: zunmdata[i].gid, color: color || 0, size: size || 0, count: zunmdata[i].numberofdismantling, store_id: zunmdata[i].store_id, rec_goods_id: zunmdata[i].rec_goods_id || 0, rec_cart_id: zunmdata[i].rec_cart_id || 0, group_id: zunmdata[i].group_id || 0, referee: zunmdata[i].referee||0,specRoleId:zunmdata[i].specRoleId || ''});
       };
     };
     var gcount = ginfo.length;

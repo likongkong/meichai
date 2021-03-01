@@ -2210,7 +2210,15 @@ Page({
     var res = this.data.zunmdata;
     var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
     var iftrnum = true;
-    if (res.selected_spec){}else{
+
+    if(_this.data.specialGoods == 1){
+      var stock = _this.data.selectShell.stock || 0;
+      _this.setData({
+        sizeid: 0,
+        colorid: 0,
+        quantityofgoods: stock
+      });
+    } else if (res.selected_spec){}else{
         for (var js in res.extends) {
           if (iftrnum) {
             _this.setData({
@@ -2242,15 +2250,15 @@ Page({
           zunmdata:res
         }); 
     };   
-      var _this = this;
-      if (_this.data.zunmdata.color.length != 0 || _this.data.zunmdata.size.length != 0){
-        _this.setData({
-          tipback: true,
-          dsbframeiftr: true,
-        });           
-      }else{
-        _this.addtocart();
-      }
+    var _this = this;
+    if (_this.data.zunmdata.color.length != 0 || _this.data.zunmdata.size.length != 0){
+      _this.setData({
+        tipback: true,
+        dsbframeiftr: true,
+      });           
+    }else{
+      _this.addtocart();
+    }
   },
   addtocart: function () {  // 加入购物车
     var _this = this;
@@ -2262,7 +2270,7 @@ Page({
     }else{
       var count = _this.data.numberofdismantling
     }
-    var adtocar = [{ 'goods_id': _this.data.gid, 'color_id': _this.data.colorid || 0, 'size_id': _this.data.sizeid || 0, 'count':count , rec_goods_id: (_this.data.rec_goods_id || 0), rec_cart_id: (_this.data.rec_cart_id || 0), 'referee': _this.data.referee||0}];
+    var adtocar = [{ 'goods_id': _this.data.gid, 'color_id': _this.data.colorid || 0, 'size_id': _this.data.sizeid || 0, 'count':count , rec_goods_id: (_this.data.rec_goods_id || 0), rec_cart_id: (_this.data.rec_cart_id || 0), 'referee': _this.data.referee||0,specRoleId:_this.data.selectShell.roleId ||'' }];
 
     console.log(adtocar)
 

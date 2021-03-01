@@ -54,7 +54,7 @@
         </view>
       </view>
     </view>
-
+ 
   </view>
   <!-- 购物车数据 -->
   <view class="shoppingCart" wx:for="{{zunmdata}}" wx:key='key' style='{{item.displayGroupId&&(item.groupData.postion!=-1&&item.groupData.postion!=item.position)?"margin-bottom:0;":""}}'>
