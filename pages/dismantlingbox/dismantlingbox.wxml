@@ -61,7 +61,7 @@
 
     <!-- 直播间 -->
     <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e1'>————— 线上潮玩展 —————</view>
-    <!-- <view class="ssubLiveBroadcast" wx:for="{{liveListData}}" wx:key="key" style="position: relative;">
+    <view class="ssubLiveBroadcast" wx:for="{{liveListData}}" wx:key="key" style="position: relative;">
         <navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{item.room_id}}" style='position: absolute;height:100%;width:500rpx;left:0;top:0;z-index:3;'></navigator>
         <view class="ssubLiveBroad">
             <image class="ssubLiveBImg" src="{{item.cover_img}}" mode='aspectFit'></image>
@@ -76,10 +76,10 @@
         <view class="position: absolute;top: 0; left: 0;width: 100%;height: 100%;z-index: 11;">
 
         </view>
-    </view>  -->
+    </view> 
 
 
-    <view class="ssubLiveBroadcast" wx:key="key" id='e1' catchtap="arousesubscribeFun" data-subscribe_data="{{subscribeJson[0].toyshowStart}}">
+    <!-- <view class="ssubLiveBroadcast" wx:key="key" id='e1' catchtap="arousesubscribeFun" data-subscribe_data="{{subscribeJson[0].toyshowStart}}">
         <image class="ssubLiveBImg" src="https://www.51chaidan.com/images/sign/activity/banner4.jpg?imageMogr2/thumbnail/x800" mode='aspectFit'></image>
         <view class="ssubLiveBroadRig">
            <view class="ssubSSAname multilineellipsis">
@@ -90,7 +90,7 @@
                <view class="ssubSBotTimeleft">预约订阅</view>
            </view>
         </view>
-    </view>
+    </view> -->
 
      
 
