@@ -181,11 +181,12 @@ page{
   justify-content: center;
 }
 .ssubSBotTimeleft{
+  height: 40rpx;
   font-size:25rpx;
-  /* line-height:30rpx; */
+  line-height:40rpx;
   color:#fff;
   float:left;
-  padding:5rpx 20rpx;
+  padding:0 20rpx;
   margin: 0 20rpx;
   border-radius:10rpx;
   background:#32ACFB;
