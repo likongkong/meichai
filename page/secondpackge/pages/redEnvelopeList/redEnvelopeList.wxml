@@ -10,16 +10,13 @@
 <view class="relTip">红包当日24时过期</view>
 <view class="relContent">
     <block wx:for='{{listdata}}' wx:key='key'>
-        <view class="{{headSel==1?'relRedEveOne':'relRedEveTwo'}}" style="{{item.isReceive || item.limitAmount==item.truthAmount?'opacity:0.6;':''}}">
-            <view class="eveClick" catchtap="redpagInfo" wx:if='{{!item.isReceive || item.limitAmount!=item.truthAmount}}' data-wid='{{item.welfareId}}'></view>
-            <view class="relRedEveComplete" wx:if='{{item.isReceive || item.limitAmount==item.truthAmount}}'>
-						   <block wx:if='{{item.isReceive}}'>已领取</block>
-							 <block wx:if='{{item.limitAmount==item.truthAmount}}'>已领完</block>
-						</view>
+        <view class="{{headSel==1?'relRedEveOne':'relRedEveTwo'}}" style="{{item.limitAmount==item.truthAmount?'opacity:0.6;':''}}">
+            <view class="eveClick"  catchtap="openpackage" data-isget="{{item.isReceive}}" data-mid="{{item.welfareId}}" data-ind="{{index}}" data-samount="{{item.suplusAmount}}" data-wid='{{item.welfareId}}' data-gid='{{item.goodsId}}'></view>
+            <view class="relRedEveComplete" wx:if='{{item.limitAmount==item.truthAmount}}'>已领完</view>
             <view class="relRedEveTop">
                 <image class="relRedEveTopImg" mode='aspectFit' src="{{headSel==1?'https://cdn.51chaidan.com/images/sign/activity/redEnvelopeOne.png':'https://cdn.51chaidan.com/images/sign/activity/redEnvelopeTwo.png'}}"></image>
                 <view class="relRedEveTopRight">
-                    <view class="rretrTop specialellipsis">{{item.seriesName}}</view>
+                    <view class="rretrTop specialellipsis">分享娃友瓜分红包</view>
                     <view class="rretrCont">
                         <block wx:if='{{headSel==1}}'>红包总幸运值{{item.limitAmount}}，已领取{{item.truthAmount}}</block>
                         <block wx:else>红包总额￥{{item.limitAmount}}，已领取￥{{item.truthAmount}}</block>
@@ -32,7 +29,7 @@
             </view>
         </view>
     </block>
-    <!-- <view class="redListNoData" wx:if='{{}}'>您还没有{{headSel==1?'幸运值':'抽盒金'}}红包哦~</view> -->
+    <view class="redListNoData" wx:if='{{listdata && listdata.length == 0}}'>您还没有{{headSel==1?'幸运值':'抽盒金'}}红包哦~</view>
 </view>
 
 
@@ -138,7 +135,7 @@
 
 
 
-
+<canvas canvas-id='redpagshare' class='snapshotshareclass'></canvas>
 
 
 

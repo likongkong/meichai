@@ -96,7 +96,7 @@ page{
 .relRedEveTop{
   height: 180rpx;
   width: 100%;
-  border-bottom: 2rpx solid #fff;
+  border-bottom: 2rpx solid #F9A951;
 }
 .relRedEveTopRight{
   float: right;

@@ -3140,6 +3140,13 @@ Page({
     });
   },
 
+  jumpRedList(w){
+      var ind = w.currentTarget.dataset.ind;
+      wx.navigateTo({   
+        url: "/page/secondpackge/pages/redEnvelopeList/redEnvelopeList?hs=" + ind
+      });
+  },
+
   // 幸运值红包
   hidepackage: function () {
     var _this = this;
@@ -3173,6 +3180,18 @@ Page({
     var isget = w.currentTarget.dataset.isget;
     var samount = w.currentTarget.dataset.samount;
     var ind = w.currentTarget.dataset.ind;
+    
+    if( this.data.isredpag != 1 ){
+        var url = "/page/secondpackge/pages/redEnvelopeList/redEnvelopeList?hs=" + String(_this.data.welfare[0].welfareType==2?1:2);
+        console.log(url)
+        wx.navigateTo({   
+          url: url
+        });
+        this.hidepackage()
+        return false;
+    }
+
+
     _this.drawredpagshare(ind)
     if (!isget || (samount && samount == 0)) {
       _this.openredpackage(id)
