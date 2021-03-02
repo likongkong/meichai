@@ -1,0 +1,9 @@
+/* page/secondpackge//pages/aRewardDetails/aRewardDetails.wxss */
+@import "../../../../pages/signin/signin.wxss";
+@import "../../../../common/newcoupon.wxss";
+@import "../../../../common/tabbar.wxss";
+
+page{
+  background:#f4f5f9;
+  padding-bottom: 230rpx;
+}

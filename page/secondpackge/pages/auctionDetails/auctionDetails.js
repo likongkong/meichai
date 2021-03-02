@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '拍卖列表', 
+    c_title: '拍卖详情', 
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
@@ -16,10 +16,6 @@ Page({
     tgabox:false,
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
-    tabbarAll:[
-      '我参与的','拍卖领先','拍卖出局','我的订阅','拍卖结束'
-    ],
-    currentNum:0,
   },
   /**
    * 生命周期函数--监听页面加载

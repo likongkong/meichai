@@ -16,10 +16,6 @@ Page({
     tgabox:false,
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
-    tabbarAll:[
-      '我参与的','拍卖领先','拍卖出局','我的订阅','拍卖结束'
-    ],
-    currentNum:0,
   },
   /**
    * 生命周期函数--监听页面加载
@@ -36,9 +32,6 @@ Page({
     this.setData({
       uid: app.signindata.uid,
       loginid:app.signindata.loginid,
-      is_mobile_phone:app.signindata.mobile?true:false,
-      mobile:app.signindata.mobile,
-      gain_source:!app.signindata.gotTBBMBS8?8:!app.signindata.gotTBBMBS9?9:0
     }); 
   },
   activsign: function () {
