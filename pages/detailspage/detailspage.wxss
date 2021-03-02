@@ -481,7 +481,7 @@
   width: 100%;
   font-size:30rpx;
   text-align: center;
-  margin-bottom: 20rpx;
+  margin-bottom: 50rpx;
 }
 .mscColorBox{
   width: 100%;

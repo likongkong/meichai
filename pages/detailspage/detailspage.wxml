@@ -34,10 +34,10 @@
 
 
 <view class='boxdetail {{tipback?"tripList_root":""}}' style="{{!headhidden||newcoupon?'position:fixed;top:0;left:0;right:0;bottom:0;':''}}">
-  <view class='dlhead' style='height:{{specialGoods==1?"570":"500"}}rpx;position:relative;background:#fff;'>
+  <view class='dlhead' style='height:{{specialGoods==1?"820":"500"}}rpx;position:relative;background:#fff;'>
     <!-- 带视频 -->
     <swiper bindchange='swiperchangeindex' bindanimationfinish="changeGoodsSwip" current="{{goodsIndex}}" wx:if='{{isVideoSwiper}}' class="swiper" indicator-color="#fff" indicator-active-color="#ff2742" indicator-dots="{{false}}" circular="true" autoplay="{{isVideoSwiper?false:true}}"
-      interval="15000" duration="450" style='height:500rpx;'>
+      interval="15000" duration="450" style='height:{{specialGoods==1?"750":"500"}}rpx;'>
       <swiper-item wx:if='{{isVideoSwiper}}'>
         <view style="width:100%;height:100%;">
           <image class="slide-image watermark" src="{{movies[0].url}}" style="width:100%;height:100%;display:block;" mode='aspectFit'></image>
@@ -58,7 +58,7 @@
       </block>
     </swiper>
     <!-- 不带视频 -->
-    <swiper bindchange='swiperchangeindex' bindanimationfinish="changeGoodsSwip" wx:else class="swiper" indicator-color="#fff" indicator-active-color="#ff2742" indicator-dots="{{false}}" circular="true" autoplay="true" interval="4000" duration="450" style='height:500rpx;'>
+    <swiper bindchange='swiperchangeindex' bindanimationfinish="changeGoodsSwip" wx:else class="swiper" indicator-color="#fff" indicator-active-color="#ff2742" indicator-dots="{{false}}" circular="true" autoplay="true" interval="4000" duration="450" style='height:{{specialGoods==1?"750":"500"}}rpx;'>
       <swiper-item wx:if='{{zunmdata.firstCover}}'>
         <image src="{{zunmdata.firstCover}}" style="width:100%;height:100%;position:absolute;top:0;bottom:0;right:0;left:0;margin:auto;" mode='aspectFit' class="watermark" data-index='{{index}}' bindtap='previewImg' mode='aspectFit'></image>
       </swiper-item>
@@ -178,9 +178,30 @@
   
   </block>
   <block wx:else>
-      <view class='dltitle' style='text-align:center;padding:20rpx 40rpx;font-size:32rpx;'>
+      <view class='dltitle' style='text-align:center;padding:20rpx 40rpx;font-size:32rpx;font-weight: bold;'>
         {{zunmdata.gname}}
       </view>
+
+      <!-- 手机壳样式 -->
+      <view wx:if='{{specialGoods==1}}' style="background:#fff;padding:20rpx 0;">
+        <view class="mscColorSel">{{specCate[1]}}<block wx:if='{{specCate[1]}}'>:</block>{{detailSpecColor[detailColorIndex].name}}</view>
+        <view class="mscColorBox">
+            <block wx:for='{{detailSpecColor}}' wx:key='key'>
+                <view class="mscColorBoxeve {{detailColorIndex==index?'ColorClass':''}}" catchtap="dSCfun" data-index='{{index}}'>
+                  <image mode='aspectFit' src="{{item.roleImg}}"></image>
+                </view>
+            </block>        
+        </view>  
+
+        <!-- <view class="mscModel">Compostable Case</view>
+        <view class="mscModelImgBox">
+            <view class="mscModelImgEve">
+                <image class="mscModelImg" src="https://cdn.51chaidan.com//images/toyShow3/brandGoodsRotation/20210109/7b69de7f20fdd34c68ca139cb15c1454.png" mode='aspectFit'></image>
+                <view class="mscModelName">$55 USD</view>
+            </view>
+        </view> -->
+      </view>
+
       <view class='dPrice'>
         <!-- 3D图片显示 -->
         <image wx:if='{{zunmdata.isOverAllView}}' src='https://cdn.51chaidan.com//images/sign/panorama.png' catchtap="jumpDSIE" class="detailS3Dimg"></image>
@@ -189,36 +210,19 @@
         <text wx:if='{{zunmdata.giftStock}}'>赠品</text>
         <text wx:elif='{{zunmdata.gsale!=zunmdata.gprice}}' style='color: #959595;font-size: 24rpx;text-decoration:line-through;position: relative;top:3rpx;margin-left: 10rpx;'>{{zunmdata.gprice!=0?'￥'+zunmdata.gprice:'价格以线下展会为准'}}</text>
       </view>
-      <view class='dltityh' style='text-align:center;margin-bottom:10rpx;padding:12rpx 20rpx;position:relative;min-height:36rpx;'>
+      <view class='dltityh' wx:if='{{specialGoods!=1}}' style='text-align:center;margin-bottom:10rpx;padding:12rpx 20rpx;position:relative;min-height:36rpx;'>
         <view class='dlyhnnimeMod' wx:for="{{zunmdata.gtag}}" wx:key="key">{{item}}</view>
-      </view>  
+      </view>
+
+     <view wx:if='{{specialGoods==1}}' style="background:#fff;padding:15rpx 0;">
+        <view class="mscModel">选择{{specCate[0]}}:</view>
+        <picker class="p" bindchange="bindPickerChange" value="{{modelSelInde}}" range="{{detailSpecModel}}" range-key="name">
+            <view class="mscModelEve">{{detailSpecModel[modelSelInde].name}}</view>
+        </picker> 
+     </view>
+
+
   </block>
-  <!-- 手机壳样式 -->
-  <view wx:if='{{specialGoods==1}}' style="background:#fff;padding:20rpx 0;">
-    <view class="mscColorSel">{{specCate[1]}}<block wx:if='{{specCate[1]}}'>:</block>{{detailSpecColor[detailColorIndex].name}}</view>
-    <view class="mscColorBox">
-        <block wx:for='{{detailSpecColor}}' wx:key='key'>
-            <view class="mscColorBoxeve {{detailColorIndex==index?'ColorClass':''}}" catchtap="dSCfun" data-index='{{index}}'>
-               <image mode='aspectFit' src="{{item.roleImg}}"></image>
-            </view>
-        </block>        
-    </view>  
-    <view class="mscModel">选择{{specCate[0]}}:</view>
-    <picker class="p" bindchange="bindPickerChange" value="{{modelSelInde}}" range="{{detailSpecModel}}" range-key="name">
-        <view class="mscModelEve">{{detailSpecModel[modelSelInde].name}}</view>
-    </picker>
-    <!-- <view class="mscModel">Compostable Case</view>
-    <view class="mscModelImgBox">
-        <view class="mscModelImgEve">
-            <image class="mscModelImg" src="https://cdn.51chaidan.com//images/toyShow3/brandGoodsRotation/20210109/7b69de7f20fdd34c68ca139cb15c1454.png" mode='aspectFit'></image>
-            <view class="mscModelName">$55 USD</view>
-        </view>
-    </view> -->
-
-
-
-
-  </view>
 
   <!-- 定金 -->
   <view class="dDepositconcent" wx:if='{{zunmdata.goods_type==3}}'>
@@ -309,7 +313,7 @@
       </view>  
 
   </block>
-  <block wx:else>
+  <block wx:elif='{{specialGoods!=1}}'>
      <somke colortitle='#000'></somke>
   </block>
   <block>
