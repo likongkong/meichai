@@ -107,8 +107,15 @@
           </view>
           <image class="delete" src="img/delete-img.png" data-index='{{index}}' data-cart_id='{{item.cart_id}}' data-store_id='{{item.store_id}}' bindtap="deleteData"></image>
           <view class='numcolsi specialellipsis' style='font-size:26rpx;'>
-            <view class="number" style='margin:0 13rpx 0 0;display: inline-block;' wx:if='{{item.color.no!=0}}' data-is_store='{{item.is_store}}' data-gid='{{item.goods_id}}' data-store_id='{{item.store_id}}' bindtap='addressmanagement'>{{item.color.property}}</view>
-            <view class="number" style='display: inline-block;' wx:if='{{item.size.no!=0}}' data-is_store='{{item.is_store}}' data-gid='{{item.goods_id}}' data-store_id='{{item.store_id}}' bindtap='addressmanagement'>{{item.size.property}}</view>
+            <block wx:if='{{item.specRoleId && item.specRoleId != 0}}'>
+              <view class="number" style='margin:0 13rpx 0 0;display: inline-block;' data-is_store='{{item.is_store}}' data-gid='{{item.goods_id}}' data-store_id='{{item.store_id}}' bindtap='addressmanagement'>{{item.arrSpec['机型']}}</view>
+              <view class="number" style='display: inline-block;' data-is_store='{{item.is_store}}' data-gid='{{item.goods_id}}' data-store_id='{{item.store_id}}' bindtap='addressmanagement'>{{item.arrSpec['颜色']}}</view>            
+            </block>
+            <block wx:else>
+              <view class="number" style='margin:0 13rpx 0 0;display: inline-block;' wx:if='{{item.color.no!=0}}' data-is_store='{{item.is_store}}' data-gid='{{item.goods_id}}' data-store_id='{{item.store_id}}' bindtap='addressmanagement'>{{item.color.property}}</view>
+              <view class="number" style='display: inline-block;' wx:if='{{item.size.no!=0}}' data-is_store='{{item.is_store}}' data-gid='{{item.goods_id}}' data-store_id='{{item.store_id}}' bindtap='addressmanagement'>{{item.size.property}}</view>            
+            </block>
+
           </view>
         </view>
         <view class="pageRight bottom" style='position:relative;'>

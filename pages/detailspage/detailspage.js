@@ -258,12 +258,25 @@ Page({
     var listSpec = this.data.listSpec;
     var modelColor = detailSpecModel[this.data.modelSelInde].name+'-'+detailSpecColor[index].name;
     if( listSpec[modelColor] && listSpec[modelColor].stock > 0 ){
+      var zunmdata = this.data.zunmdata; 
+      zunmdata.gsale = listSpec[modelColor].price || 0;
+      zunmdata.gprice = listSpec[modelColor].price || 0;
+      zunmdata.debuff = 0; 
+      zunmdata.goods_thumb = listSpec[modelColor].roleImg;
       this.setData({
         detailColorIndex:index,
-        selectShell:listSpec[modelColor]
+        selectShell:listSpec[modelColor],
+        zunmdata:zunmdata
       })
     }else{
-      app.showToastC('暂无库存')
+      var zunmdata = this.data.zunmdata; 
+      zunmdata.debuff = 3; 
+      this.setData({
+        detailColorIndex:index,
+        selectShell:{},
+        zunmdata,
+      })
+
     };
   },
   //分类选择
@@ -275,12 +288,25 @@ Page({
     var listSpec = this.data.listSpec;
     var modelColor = detailSpecModel[e.detail.value].name+'-'+detailSpecColor[this.data.detailColorIndex].name;
     if( listSpec[modelColor] && listSpec[modelColor].stock > 0 ){
+      var zunmdata = this.data.zunmdata; 
+      zunmdata.gsale = listSpec[modelColor].price || 0;
+      zunmdata.gprice = listSpec[modelColor].price || 0;
+      zunmdata.debuff = 0;
+      zunmdata.goods_thumb = listSpec[modelColor].roleImg;
       this.setData({
         modelSelInde:e.detail.value,
-        selectShell:listSpec[modelColor]
+        selectShell:listSpec[modelColor],
+        zunmdata:zunmdata
       })
     }else{
-      app.showToastC('暂无库存')
+      var zunmdata = this.data.zunmdata; 
+      zunmdata.debuff = 3;
+      this.setData({
+        modelSelInde:e.detail.value,
+        selectShell:{},
+        zunmdata,
+      })
+
     };
 
   },
@@ -2262,9 +2288,15 @@ Page({
   },
   addtocart: function () {  // 加入购物车
     var _this = this;
+    if(_this.data.quantityofgoods == 0){
+      app.showToastC('库存不足');
+      return false;
+    };
+
     _this.setData({
       suboformola: true
     });
+
     if(_this.data.zunmdata.isBlindBox){
        var count = parseFloat(_this.data.numberofdismantling) * parseFloat(_this.data.isBlindBoxNum);
     }else{
@@ -2807,7 +2839,7 @@ Page({
             isDeduct:res.data.Ginfo.isDeduct,
             isUseBlindboxMoney:res.data.Ginfo.isDeduct?true:false,
             isDeductNum:res.data.Ginfo.isDeduct&&_this.data.blindboxMoney!=0?1:0,
-            isCanShare:res.data.Ginfo.isCanShar,
+            isCanShare:res.data.Ginfo.isCanShare,
             nowTime : Date.parse(new Date())/1000,//当前时间戳
           },function(){
               // 是否播放视频
@@ -2819,13 +2851,13 @@ Page({
 
           if(res.data.Ginfo.specialGoods && res.data.Ginfo.specialGoods == 1){
             var infoSpecial = dataGinfo.infoSpecial;
-            console.log(infoSpecial.detailSpec[infoSpecial.specCate[0]],infoSpecial.detailSpec[infoSpecial.specCate[1]])
             var detailSpecColor = infoSpecial.detailSpec[infoSpecial.specCate[1]] || [];
             var detailSpecModel = infoSpecial.detailSpec[infoSpecial.specCate[0]] || [];
             var listSpec = infoSpecial.listSpec;
             var detailColorIndex = 0;
             var modelSelInde = 0;
             var selectShell = {};
+            var spgsale = 0;
             outSide:for( var i = 0 ; i < detailSpecColor.length ; i++ ){
               for( var j = 0 ; j < detailSpecModel.length ; j++ ){
                     var modelColor = detailSpecModel[j].name+'-'+detailSpecColor[i].name;
@@ -2833,12 +2865,15 @@ Page({
                       detailColorIndex = j;
                       modelSelInde = i;
                       selectShell = listSpec[modelColor];
+                      spgsale = listSpec[modelColor].price;
                       break outSide;
                     };
                 };
             };  
-
+            redauin.gsale = spgsale;
+            redauin.gprice = spgsale;
             _this.setData({
+              zunmdata:redauin,
               listSpec,
               specCate:infoSpecial.specCate,
               detailSpecColor,
