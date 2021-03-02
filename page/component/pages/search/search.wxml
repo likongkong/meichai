@@ -188,11 +188,17 @@
             <view class="sellOut" wx:if="{{stock<=0}}">
                 <image src="http://www.51chaidan.com/images/sign/2020wsj/finish.png" mode="widthFix"></image>
             </view>
+            <view class='shopsellout' wx:if='{{goods_type==3}}' style='line-height:32rpx;background:#298DF8;position: absolute;top:10rpx;right: 10rpx;color: #fff;font-size: 24rpx;border-radius: 6rpx;z-index: 3;padding: 5rpx 8rpx;'>定金</view>
         </view>
         <view class="cardBbox"> 
             <view class="title multilineellipsis">{{itemTitle}}</view>
             <view class="cardBboxPrice" wx:if='{{itemPrice}}'>
-                <view class="price">￥{{itemPrice}}</view>
+                <block wx:if='{{goods_type==3}}'>
+                    <view class="price">定金￥{{promote_price}}</view>
+                </block>
+                <block wx:else>
+                    <view class="price">￥{{itemPrice}}</view>
+                </block>
             </view>
         </view>
         <view class="shopNameWrap" wx:if="{{store}}">
