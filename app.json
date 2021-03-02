@@ -131,7 +131,9 @@
         "pages/mobileShellList/mobileShellList",
         "pages/mobileShellDetail/mobileShellDetail",
         "pages/auctionList/auctionList",
-        "pages/myAuctionList/myAuctionList"
+        "pages/myAuctionList/myAuctionList",
+        "pages/auctionDetails/auctionDetails",
+        "pages/auctionRecord/auctionRecord"
       ]
     }
   ],

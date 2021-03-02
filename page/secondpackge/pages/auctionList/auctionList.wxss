@@ -1,1 +1,112 @@
-/* page/secondpackge//pages/auctionList/auctionList.wxss */
+/* page/secondpackge//pages/aRewardDetails/aRewardDetails.wxss */
+@import "../../../../pages/signin/signin.wxss";
+@import "../../../../common/newcoupon.wxss";
+@import "../../../../common/tabbar.wxss";
+
+page{
+  background:#f4f5f9;
+  padding-bottom: 230rpx;
+}
+
+
+.tabbarWrap{
+  width: 100%;
+  height: 88rpx;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  background:#fff;
+}
+.tabbarWrap view{
+  height: 88rpx;
+  font-size: 26rpx;
+  color: #A7A7A8;
+  line-height: 88rpx;
+}
+.active{
+  color: #298DF8 !important;
+}
+
+.contentWrap{
+  margin-top: 20rpx;
+}
+.card{
+  width: 100%;
+  padding: 35rpx 30rpx;
+  box-sizing: border-box;
+  background:#fff;
+  display: flex;
+  justify-content: space-between;
+}
+.cardLeft{
+  width: 240rpx;
+}
+.cardLeft image{
+  width: 240rpx;
+  height: auto;
+  border-radius: 10rpx;
+  display: block;
+}
+.cardRight{
+  width: 450rpx;
+  padding: 0 10rpx 0 30rpx;
+  box-sizing: border-box;
+}
+.card_title{
+  display: block;
+  height: 68rpx;
+  color:#101010;
+  font-size: 26rpx;
+}
+.card_label{
+  margin-top: 6rpx;
+}
+.lableItem{
+  height: 28rpx;
+  line-height: 28rpx;
+  display: inline-block;
+  padding: 6rpx 10rpx;
+  font-size: 28rpx;
+  color:#ffffff;
+  background:#FC585F;
+  border-radius: 10rpx;
+  margin-right: 10rpx;
+}
+.red{
+  background:#FC585F;
+}
+.blue{
+  background:#298DF8;
+}
+.card_user,.card_sponsor{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 14rpx;
+}
+.card_user_left,.card_user_right,.card_sponsor_left,.card_sponsor_right{
+  display: flex;
+  align-items: center;
+}
+.card_user_left image,.card_sponsor_left image{
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  display: block;
+}
+.card_user_left text{
+  font-size: 26rpx;
+  margin-left: 10rpx;
+}
+.card_user_right text{ 
+  font-size: 26rpx;
+}
+.card_sponsor_left text{
+  font-size: 26rpx;
+  color:#A7A7A8;
+  margin-left: 10rpx;
+}
+.card_sponsor_right{
+  font-size: 26rpx;
+  color:#A7A7A8;
+}

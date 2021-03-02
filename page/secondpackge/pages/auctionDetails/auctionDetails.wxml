@@ -1,0 +1,140 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+
+<view class="wrap">
+  <view class="bannerWrap">
+    <image src="https://cdn.51chaidan.com/images/toyShow3/brandGoodsRotation/20210109/20a758966d18f609bf1154f869a20168.png" mode="widthFix"></image>
+  </view>
+  <view class="contentWrap">
+    <view class="auctionStatusWrap">
+      <view class="auctionStatusWrapLeft">
+        <view>
+          <text class="priceTxt">当前价格</text>
+          <text class="price">￥1280</text>
+        </view>
+      </view>
+      <view class="auctionStatusWrapRight">
+        <view class="auctionTimeWrap">
+          <view>
+            <text class="auctionTimeTxt">距 拍 卖 结 束</text>
+            <view class="auctionTimeNum">
+              <text class="num">05</text>时<text class="num">23</text>分<text class="num">05</text>秒
+            </view>
+          </view>
+        </view>
+        <view class="auctionShare">
+          <image src="http://www.51chaidan.com/images/background/fenxiang.png" mode="widthFix"></image>
+        </view>
+      </view>
+    </view>
+    <view class="auctionInfoWrap">
+      <text class="auctionGoodsName">幽灵多多妹</text>
+      <view class="auctionBidUserInfoWrap">
+        <view class="auctionBidUserWrap"> 
+          <!-- 出价人卡片 -->
+          <view class="auctionBidUserItem pinkBG">
+            <view class="auctionBidUserItemLeft">
+              <view style="display: flex;">
+                <image src="https://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eojibhxVrOhDfJWbANZlQr3MI5RUMibcl3mnibnTHhpLkVcQt8NoicqlAQACmrd6V7yapm3cx2umucB9w/132" mode="widthFix"></image>
+                <view class="auctionBidUserItemName">
+                  <view>
+                    <text class="bidUserName">哩哩啦</text>
+                    <text class="bidTime">01-12 12:52:12</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="auctionBidUserItemRight">
+              <view>领先</view>
+              <view>￥1280</view>
+            </view>
+          </view>
+          <view class="auctionBidUserItem">
+            <view class="auctionBidUserItemLeft">
+              <view style="display: flex;">
+                <image src="https://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eojibhxVrOhDfJWbANZlQr3MI5RUMibcl3mnibnTHhpLkVcQt8NoicqlAQACmrd6V7yapm3cx2umucB9w/132" mode="widthFix"></image>
+                <view class="auctionBidUserItemName">
+                  <view>
+                    <text class="bidUserName">哩哩啦</text>
+                    <text class="bidTime">01-12 12:52:12</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="auctionBidUserItemRight">
+              <view>出局</view>
+              <view>￥1280</view>
+            </view>
+          </view>
+          <view class="auctionBidUserItem ">
+            <view class="auctionBidUserItemLeft">
+              <view style="display: flex;">
+                <image src="https://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eojibhxVrOhDfJWbANZlQr3MI5RUMibcl3mnibnTHhpLkVcQt8NoicqlAQACmrd6V7yapm3cx2umucB9w/132" mode="widthFix"></image>
+                <view class="auctionBidUserItemName">
+                  <view>
+                    <text class="bidUserName">哩哩啦</text>
+                    <text class="bidTime">01-12 12:52:12</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="auctionBidUserItemRight">
+              <view>出局</view>
+              <view>￥1280</view>
+            </view>
+          </view>
+
+        </view>
+        <view class="bidTxt">
+          <view>
+            <text> <text style="color:#101010;margin:0;">112</text> 次出价</text> <text>查看出价记录 ></text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="auctionRule">
+      <text class="title">竞拍规则</text>
+      <view class="txt">竞拍结束后，出价最高者竞拍成功</view>
+      <view class="auctionRuleInfo">
+        <text>起拍价:￥460</text>
+        <text>加价幅度:￥10</text>
+        <text>保证金:￥100</text>
+        <text>拍卖限次：不限</text>
+        <text>结束时间:01-20 21:00</text>
+      </view>
+    </view>
+    <view class="auctionGoodsInfo">
+      <view class="auctionGoodsInfoTxt">商品详情</view>
+      <view class="auctionGoodsTuWrap"> 
+        <image src="https://cdn.51chaidan.com/images/toyShow3/brandGoodsRotation/20210109/20a758966d18f609bf1154f869a20168.png" mode="widthFix"></image>
+      </view>
+    </view>
+  </view>
+  <view class="footerWrap">
+    <view class="footerLeft">
+      <view class="notice">
+        <image src="../../../../pages/images/explain.png" mode="widthFix"></image>
+        <text>竞拍须知</text>
+      </view>
+      <view class="share">
+        <image src="http://www.51chaidan.com/images/background/fenxiang.png" mode="widthFix"></image>
+        <text>分享</text>
+      </view>
+    </view>
+    <view class="footerRight">
+      <text class="myAuction">我的拍卖</text>
+      <text class="joinAuction blue">立即参拍</text>
+    </view>
+  </view>
+</view>
+
+
+
+<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>
+
+
+

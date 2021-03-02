@@ -1291,6 +1291,7 @@ App({
 
 //auctionList 拍卖列表
 //myAuctionList 我的拍卖列表
+//auctionRecord 拍卖出价记录
 
 // redEnvelopeList 红包列表
 
