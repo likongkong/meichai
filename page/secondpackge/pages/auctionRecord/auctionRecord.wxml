@@ -3,7 +3,40 @@
 
 
 <view class="wrap">
-
+  <view class="auctionBidUserItem pinkBG">
+    <view class="auctionBidUserItemLeft">
+      <view style="display: flex;">
+        <image src="https://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eojibhxVrOhDfJWbANZlQr3MI5RUMibcl3mnibnTHhpLkVcQt8NoicqlAQACmrd6V7yapm3cx2umucB9w/132" mode="widthFix"></image>
+        <view class="auctionBidUserItemName">
+          <view>
+            <text class="bidUserName">哩哩啦</text>
+            <text class="bidTime">01-12 12:52:12</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="auctionBidUserItemRight">
+      <view>￥120</view>
+      <view>领先</view>
+    </view>
+  </view>
+  <view class="auctionBidUserItem">
+    <view class="auctionBidUserItemLeft">
+      <view style="display: flex;">
+        <image src="https://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eojibhxVrOhDfJWbANZlQr3MI5RUMibcl3mnibnTHhpLkVcQt8NoicqlAQACmrd6V7yapm3cx2umucB9w/132" mode="widthFix"></image>
+        <view class="auctionBidUserItemName">
+          <view>
+            <text class="bidUserName">哩哩啦</text>
+            <text class="bidTime">01-12 12:52:12</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="auctionBidUserItemRight">
+      <view>￥120</view>
+      <view>领先</view>
+    </view>
+  </view>
 </view>
 
 

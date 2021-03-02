@@ -116,6 +116,25 @@
         {
           "name": "page/secondpackge/pages/mobileShellList/mobileShellList",
           "pathName": "page/secondpackge/pages/mobileShellList/mobileShellList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "出价记录",
+          "pathName": "page/secondpackge/pages/auctionRecord/auctionRecord",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "page/secondpackge/pages/mobileShellList/mobileShellList",
+          "pathName": "page/secondpackge/pages/mobileShellList/mobileShellList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/detailspage/detailspage",
+          "pathName": "pages/detailspage/detailspage",
+          "query": "gid=36923",
           "scene": null
         }
       ]
