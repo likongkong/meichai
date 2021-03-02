@@ -527,7 +527,16 @@
   font-size: 24rpx;
   padding-left: 25rpx;
 }
-
+.mscModelEveDown{
+  width: 30rpx;
+  height: 30rpx;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 20rpx;
+  margin: auto;
+  z-index: 1;
+}
 .picker{
   text-align: center;
   background-color: red;

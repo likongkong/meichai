@@ -217,7 +217,7 @@
      <view wx:if='{{specialGoods==1}}' style="background:#fff;padding:15rpx 0;">
         <view class="mscModel">选择{{specCate[0]}}:</view>
         <picker class="p" bindchange="bindPickerChange" value="{{modelSelInde}}" range="{{detailSpecModel}}" range-key="name">
-            <view class="mscModelEve">{{detailSpecModel[modelSelInde].name}}</view>
+            <view class="mscModelEve">{{detailSpecModel[modelSelInde].name}}<image src="https://cdn.51chaidan.com/images/sign/activity/dropDown.png" mode='aspectFit' class="mscModelEveDown"></image></view>
         </picker> 
      </view>
 
@@ -296,7 +296,7 @@
       </view> 
   </view>
 
-<image wx:if='{{!gotTBBMBS8}}' style="width:720rpx;display:block;margin:15rpx auto;" catchtap="officialAccount" mode='widthFix' src="http://cdn.51chaidan.com/images/sign/activity/attentionGZH.png"></image>
+<image wx:if='{{!gotTBBMBS8}}' style="width:720rpx;display:block;margin:15rpx auto;height:auto;" catchtap="officialAccount" mode='widthFix' src="http://cdn.51chaidan.com/images/sign/activity/attentionGZH.png"></image>
 
   <block wx:if='{{is_exhibition==1||(is_exhibition!=1&&brandId>0)}}'>
       <view style="width:100%;height:80rpx;">
