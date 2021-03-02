@@ -2743,7 +2743,7 @@ Page({
             isDeduct:res.data.Ginfo.isDeduct,
             isUseBlindboxMoney:res.data.Ginfo.isDeduct?true:false,
             isDeductNum:res.data.Ginfo.isDeduct&&_this.data.blindboxMoney!=0?1:0,
-            isCanShare:res.data.Ginfo.isCanShar,
+            isCanShare:res.data.Ginfo.isCanShare,
             nowTime : Date.parse(new Date())/1000,//当前时间戳
           },function(){
               // 是否播放视频
