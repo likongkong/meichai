@@ -2912,6 +2912,7 @@ Page({
             var modelSelInde = 0;
             var selectShell = {};
             var spgsale = 0;
+            var minImg = '';
             outSide:for( var j = 0 ; j < detailSpecModel.length ; j++ ){
                 var ifAdopt = false;
                 var assignment = true
@@ -2925,7 +2926,7 @@ Page({
                         detailColorIndex = i;
                         modelSelInde = j;
                         selectShell = listSpec[modelColor];
-                        spgsale = listSpec[modelColor].price;                      
+                        spgsale = listSpec[modelColor].price;                     
                       }
                     } else {
                       detailSpecColor[i].select = false;
@@ -2938,7 +2939,7 @@ Page({
 
             redauin.gsale = spgsale;
             redauin.gprice = spgsale;
-
+            redauin.goods_thumb = selectShell.roleImg;
             console.log('detailSpecColor==========',detailSpecColor)
 
             _this.setData({
