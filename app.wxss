@@ -59,3 +59,23 @@
 .boxShadowEve{
   box-shadow: 1px 2px 6px #999999;
 }
+
+.dsbfcontent::-webkit-scrollbar{
+  width: 0;
+  height: 0;
+  color: transparent;
+  }
+.bbsheadcon::-webkit-scrollbar{
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+.dsbfcontent::-webkit-scrollbar {
+  display: none;
+}
+.bbsheadcon::-webkit-scrollbar {
+  display: none;
+}
