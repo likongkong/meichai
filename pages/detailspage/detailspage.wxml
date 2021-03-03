@@ -186,12 +186,12 @@
       <view wx:if='{{specialGoods==1}}' style="background:#fff;padding:20rpx 0;">
         <view class="mscColorSel">{{specCate[1]}}<block wx:if='{{specCate[1]}}'>:</block>{{detailSpecColor[detailColorIndex].name}}</view>
         <view class="mscColorBox">
-            <block wx:for='{{detailSpecColor}}' wx:key='key'>
-                <view class="mscColorBoxeve {{detailColorIndex==index?'ColorClass':''}}" catchtap="dSCfun" data-index='{{index}}'>
+            <block wx:for='{{detailSpecColor}}' wx:key='key' wx:if='{{item.select}}'>
+                <view class="mscColorBoxeve {{detailColorIndex==index?'ColorClass':''}} boxShadowEve" catchtap="dSCfun" data-index='{{index}}'>
                   <image mode='aspectFit' src="{{item.roleImg}}"></image>
                 </view>
             </block>        
-        </view>  
+        </view>
 
         <!-- <view class="mscModel">Compostable Case</view>
         <view class="mscModelImgBox">

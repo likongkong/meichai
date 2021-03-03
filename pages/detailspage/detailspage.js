@@ -286,17 +286,45 @@ Page({
     var detailSpecModel = this.data.detailSpecModel || [];
     var detailSpecColor = this.data.detailSpecColor || [];
     var listSpec = this.data.listSpec;
-    var modelColor = detailSpecModel[e.detail.value].name+'-'+detailSpecColor[this.data.detailColorIndex].name;
-    if( listSpec[modelColor] && listSpec[modelColor].stock > 0 ){
+
+    var ifAdopt = false;
+    var assignment = true;
+    var detailColorIndex = 0;
+    var selectShell = {};
+    for( var i = 0 ; i < detailSpecColor.length ; i++ ){
+        var modelColor = detailSpecModel[e.detail.value].name+'-'+detailSpecColor[i].name;
+        
+        if(listSpec[modelColor]){
+          console.log(modelColor,listSpec[modelColor])
+          detailSpecColor[i].select = true;
+          ifAdopt = true;
+          if(assignment){
+            assignment = false;
+            detailColorIndex = i;
+            selectShell = listSpec[modelColor];                    
+          }
+        } else {
+          detailSpecColor[i].select = false;
+        };
+    }; 
+
+    if(ifAdopt){
       var zunmdata = this.data.zunmdata; 
-      zunmdata.gsale = listSpec[modelColor].price || 0;
-      zunmdata.gprice = listSpec[modelColor].price || 0;
+      zunmdata.gsale = selectShell.price || 0;
+      zunmdata.gprice = selectShell.price || 0;
       zunmdata.debuff = 0;
-      zunmdata.goods_thumb = listSpec[modelColor].roleImg;
+      zunmdata.goods_thumb = selectShell.roleImg;
+      
+      if( selectShell.stock < 0 ){
+        zunmdata.debuff = 3;
+      };
+
       this.setData({
         modelSelInde:e.detail.value,
-        selectShell:listSpec[modelColor],
-        zunmdata:zunmdata
+        selectShell,
+        zunmdata:zunmdata,
+        detailColorIndex,
+        detailSpecColor
       })
     }else{
       var zunmdata = this.data.zunmdata; 
@@ -305,9 +333,35 @@ Page({
         modelSelInde:e.detail.value,
         selectShell:{},
         zunmdata,
+        detailSpecColor
       })
 
     };
+
+
+
+    // var modelColor = detailSpecModel[e.detail.value].name+'-'+detailSpecColor[this.data.detailColorIndex].name;
+    // if( listSpec[modelColor] && listSpec[modelColor].stock > 0 ){
+    //   var zunmdata = this.data.zunmdata; 
+    //   zunmdata.gsale = listSpec[modelColor].price || 0;
+    //   zunmdata.gprice = listSpec[modelColor].price || 0;
+    //   zunmdata.debuff = 0;
+    //   zunmdata.goods_thumb = listSpec[modelColor].roleImg;
+    //   this.setData({
+    //     modelSelInde:e.detail.value,
+    //     selectShell:listSpec[modelColor],
+    //     zunmdata:zunmdata
+    //   })
+    // }else{
+    //   var zunmdata = this.data.zunmdata; 
+    //   zunmdata.debuff = 3;
+    //   this.setData({
+    //     modelSelInde:e.detail.value,
+    //     selectShell:{},
+    //     zunmdata,
+    //   })
+
+    // };
 
   },
 
@@ -2858,20 +2912,35 @@ Page({
             var modelSelInde = 0;
             var selectShell = {};
             var spgsale = 0;
-            outSide:for( var i = 0 ; i < detailSpecColor.length ; i++ ){
-              for( var j = 0 ; j < detailSpecModel.length ; j++ ){
+            outSide:for( var j = 0 ; j < detailSpecModel.length ; j++ ){
+                var ifAdopt = false;
+                var assignment = true
+                for( var i = 0 ; i < detailSpecColor.length ; i++ ){
                     var modelColor = detailSpecModel[j].name+'-'+detailSpecColor[i].name;
-                    if( listSpec[modelColor] && listSpec[modelColor].stock > 0 ){
-                      detailColorIndex = j;
-                      modelSelInde = i;
-                      selectShell = listSpec[modelColor];
-                      spgsale = listSpec[modelColor].price;
-                      break outSide;
+                    if(listSpec[modelColor]){
+                      detailSpecColor[i].select = true;
+                      ifAdopt = true;
+                      if(assignment){
+                        assignment = false;
+                        detailColorIndex = i;
+                        modelSelInde = j;
+                        selectShell = listSpec[modelColor];
+                        spgsale = listSpec[modelColor].price;                      
+                      }
+                    } else {
+                      detailSpecColor[i].select = false;
                     };
                 };
-            };  
+                if(ifAdopt){
+                  break outSide;
+                }
+            }; 
+
             redauin.gsale = spgsale;
             redauin.gprice = spgsale;
+
+            console.log('detailSpecColor==========',detailSpecColor)
+
             _this.setData({
               zunmdata:redauin,
               listSpec,
