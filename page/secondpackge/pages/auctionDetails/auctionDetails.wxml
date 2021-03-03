@@ -4,91 +4,117 @@
 
 <view class="wrap">
   <view class="bannerWrap">
-    <image src="https://cdn.51chaidan.com/images/toyShow3/brandGoodsRotation/20210109/20a758966d18f609bf1154f869a20168.png" mode="widthFix"></image>
+    <swiper interval="3000" style="height:750rpx;">
+        <block wx:for="{{dataInfo.cover}}" wx:key='key' data-index="{{index}}">
+          <swiper-item>
+            <image src="{{item}}" mode="widthFix"></image>
+          </swiper-item>
+        </block>
+      </swiper>
   </view>
   <view class="contentWrap">
     <view class="auctionStatusWrap">
       <view class="auctionStatusWrapLeft">
         <view>
           <text class="priceTxt">当前价格</text>
-          <text class="price">￥1280</text>
+          <text class="price">￥{{dataInfo.currentPrice}}</text>
         </view>
       </view>
       <view class="auctionStatusWrapRight">
         <view class="auctionTimeWrap">
-          <view>
-            <text class="auctionTimeTxt">距 拍 卖 结 束</text>
-            <view class="auctionTimeNum">
-              <text class="num">05</text>时<text class="num">23</text>分<text class="num">05</text>秒
+
+          <!-- status == 1为拍卖未开始 -->
+          <block wx:if="{{dataInfo.status == 1}}">
+            <view>
+              <text class="auctionTimeTxt">距 拍 卖 开 始</text>
+              <view class="auctionTimeNum">
+                <text class="num">05</text>时<text class="num">23</text>分<text class="num">05</text>秒
+              </view>
             </view>
-          </view>
+          </block>
+          <!-- status == 2为拍卖已开始 -->
+          <block wx:elif="{{dataInfo.status == 2}}">
+            <!-- （status == 2 && dataInfo.showTime == 0）为暂无出价 -->
+            <block wx:if="{{dataInfo.showTime == 0}}">
+              <view>
+                <text class="auctionTimeTxt">暂 无 出 价</text>
+              </view>
+            </block>
+            <!-- （status == 2 && dataInfo.showTime != 0）为有用户出价 -->
+            <block wx:else>
+              <!-- status == 2且中奖显示支付倒计时  -->
+              <block wx:if="{{dataInfo.isVictory}}">
+                <view>
+                  <text class="auctionTimeTxt">支 付 倒 计 时</text>
+                  <view class="auctionTimeNum">
+                    <text class="num">05</text>时<text class="num">23</text>分<text class="num">05</text>秒
+                  </view>
+                </view>
+              </block>
+              <!-- status == 2且未中奖  -->
+              <block wx:else>
+                <!-- status == 2且未中奖 活动类型未1的话为限时拍卖  -->
+                <block wx:if="{{dataInfo.auction_type == 1}}">
+                  <view>
+                    <text class="auctionTimeTxt">距 拍 卖 结 束</text>
+                    <view class="auctionTimeNum">
+                      <text class="num">05</text>时<text class="num">23</text>分<text class="num">05</text>秒
+                    </view>
+                  </view>
+                </block>
+                <!-- status == 2且未中奖 活动类型未2的话为限次拍卖  -->
+                <block wx:elif="{{dataInfo.auction_type == 2}}">
+                  <view>
+                    <view class="auctionTimeNum">
+                      <text class="num">23</text>分<text class="num">05</text>秒   后成交
+                    </view>
+                  </view>
+                </block>
+              </block>
+            </block>
+          </block>
+          <!-- status == 3为拍卖已结束 -->
+          <block wx:elif="{{dataInfo.status == 3}}">
+            <view>
+              <text class="auctionTimeTxt">拍 卖 已 结 束</text>
+            </view>
+          </block>
+
         </view>
-        <view class="auctionShare">
+        <view class="auctionShare" style="position:relative;">
+			  	<button style='width:55rpx;height:55rpx;position:absolute;top:0;right:0;opacity:0;' open-type='share'></button>
           <image src="http://www.51chaidan.com/images/background/fenxiang.png" mode="widthFix"></image>
         </view>
       </view>
     </view>
     <view class="auctionInfoWrap">
-      <text class="auctionGoodsName">幽灵多多妹</text>
+      <text class="auctionGoodsName">{{dataInfo.activityName}}</text>
       <view class="auctionBidUserInfoWrap">
         <view class="auctionBidUserWrap"> 
-          <!-- 出价人卡片 -->
-          <view class="auctionBidUserItem pinkBG">
-            <view class="auctionBidUserItemLeft">
-              <view style="display: flex;">
-                <image src="https://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eojibhxVrOhDfJWbANZlQr3MI5RUMibcl3mnibnTHhpLkVcQt8NoicqlAQACmrd6V7yapm3cx2umucB9w/132" mode="widthFix"></image>
-                <view class="auctionBidUserItemName">
-                  <view>
-                    <text class="bidUserName">哩哩啦</text>
-                    <text class="bidTime">01-12 12:52:12</text>
+          <block wx:for="{{dataInfo.showAuctionRecordList}}" wx:key='key' data-index="{{index}}">
+            <!-- 出价人卡片 -->
+            <view class="auctionBidUserItem {{item.isLead?'pinkBG':''}}">
+              <view class="auctionBidUserItemLeft">
+                <view style="display: flex;">
+                  <image src="{{item.litpic}}" mode="widthFix"></image>
+                  <view class="auctionBidUserItemName">
+                    <view>
+                      <text class="bidUserName">{{item.nick}}</text>
+                      <text class="bidTime">{{item.insert_time}}</text>
+                    </view>
                   </view>
                 </view>
               </view>
-            </view>
-            <view class="auctionBidUserItemRight">
-              <view>领先</view>
-              <view>￥1280</view>
-            </view>
-          </view>
-          <view class="auctionBidUserItem">
-            <view class="auctionBidUserItemLeft">
-              <view style="display: flex;">
-                <image src="https://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eojibhxVrOhDfJWbANZlQr3MI5RUMibcl3mnibnTHhpLkVcQt8NoicqlAQACmrd6V7yapm3cx2umucB9w/132" mode="widthFix"></image>
-                <view class="auctionBidUserItemName">
-                  <view>
-                    <text class="bidUserName">哩哩啦</text>
-                    <text class="bidTime">01-12 12:52:12</text>
-                  </view>
-                </view>
+              <view class="auctionBidUserItemRight">
+                <view>{{item.isLead?'领先':'出局'}}</view>
+                <view>￥{{item.offer_price}}</view>
               </view>
             </view>
-            <view class="auctionBidUserItemRight">
-              <view>出局</view>
-              <view>￥1280</view>
-            </view>
-          </view>
-          <view class="auctionBidUserItem ">
-            <view class="auctionBidUserItemLeft">
-              <view style="display: flex;">
-                <image src="https://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eojibhxVrOhDfJWbANZlQr3MI5RUMibcl3mnibnTHhpLkVcQt8NoicqlAQACmrd6V7yapm3cx2umucB9w/132" mode="widthFix"></image>
-                <view class="auctionBidUserItemName">
-                  <view>
-                    <text class="bidUserName">哩哩啦</text>
-                    <text class="bidTime">01-12 12:52:12</text>
-                  </view>
-                </view>
-              </view>
-            </view>
-            <view class="auctionBidUserItemRight">
-              <view>出局</view>
-              <view>￥1280</view>
-            </view>
-          </view>
-
+          </block>
         </view>
         <view class="bidTxt">
           <view>
-            <text> <text style="color:#101010;margin:0;">112</text> 次出价</text> <text>查看出价记录 ></text>
+            <text> <text style="color:#101010;margin:0;">{{dataInfo.totalAuctionTimes}}</text> 次出价</text> <text>查看出价记录 ></text>
           </view>
         </view>
       </view>
@@ -97,52 +123,53 @@
       <text class="title">竞拍规则</text>
       <view class="txt">竞拍结束后，出价最高者竞拍成功</view>
       <view class="auctionRuleInfo">
-        <text>起拍价:￥460</text>
-        <text>加价幅度:￥10</text>
-        <text>保证金:￥100</text>
-        <text>拍卖限次：不限</text>
-        <text>结束时间:01-20 21:00</text>
+        <text>起拍价:￥{{dataInfo.auctionRule.startPrice}}</text>
+        <text>加价幅度:￥{{dataInfo.auctionRule.bid_increment}}</text>
+        <text>保证金:￥{{dataInfo.auctionRule.deposit}}</text>
+        <text>拍卖限次：{{dataInfo.auctionRule.limit_number}}</text>
+        <text>结束时间:</text>
       </view>
     </view>
     <view class="auctionGoodsInfo">
       <view class="auctionGoodsInfoTxt">商品详情</view>
       <view class="auctionGoodsTuWrap"> 
-        <image src="https://cdn.51chaidan.com/images/toyShow3/brandGoodsRotation/20210109/20a758966d18f609bf1154f869a20168.png" mode="widthFix"></image>
+        <rich-text style="font-size:0;" nodes="{{goodsDescDetails}}"></rich-text>
       </view>
     </view>
   </view>
   <view class="footerWrap">
     <view class="footerLeft">
-      <view class="notice">
+      <view class="notice" catchtap="noticePopShow">
         <image src="../../../../pages/images/explain.png" mode="widthFix"></image>
         <text>竞拍须知</text>
       </view>
-      <view class="share">
+      <view class="share" style="position:relative;">
+        <button style='width:55rpx;height:55rpx;position:absolute;top:0;right:0;opacity:0;' open-type='share'></button>
         <image src="http://www.51chaidan.com/images/background/fenxiang.png" mode="widthFix"></image>
         <text>分享</text>
       </view>
     </view>
     <view class="footerRight">
-      <text class="myAuction">我的拍卖</text>
-      <text class="joinAuction blue">立即参拍</text>
+      <text class="myAuction" catchtap="jumpMyAuctionList">我的拍卖</text>
+      <text class="joinAuction blue" catchtap="joinAuctionFun">立即参拍</text>
     </view>
   </view>
 </view>
 
 
 <!-- 支付保证金 -->
-<view class="depositPopMask mask" catchtouchmove="true" wx:if="{{false}}">
+<view class="depositPopMask mask" catchtouchmove="true" wx:if="{{depositPopMask}}" catchtap="hideMask">
   <view class="depositPop" catchtap="true">
     <text class="depositPop_title">支付保证金</text>
-    <text class="depositPop_txt">参与该拍卖需交纳活动保证金，当前拍卖结束后会退回您的余额。如您竞拍成功后，由于您的原因导致订单取消，您将被扣除该活动保证金。</text>
-    <text class="depositPop_price">保证金：￥100</text>
-    <text class="depositPop_paybtn">确认支付</text>
+    <text class="depositPop_txt">{{dataInfo.earnestMoneyHint}}</text>
+    <text class="depositPop_price">保证金：￥{{dataInfo.auctionRule.deposit}}</text>
+    <text class="depositPop_paybtn" catchtap="depositPay">确认支付</text>
   </view>
 </view>
 <!-- 出价竞拍 -->
-<view class="bidPopMask mask" catchtouchmove="true" wx:if="{{false}}">
+<view class="bidPopMask mask" catchtouchmove="true" wx:if="{{bidPopMask}}">
   <view class="bidPop" catchtap="true">
-    <view class="autoWrap">
+    <!-- <view class="autoWrap">
       <view class="autoTopWrap">
         <view class="autoTopLeft">
           <image src="../../../../pages/images/statemyorder1.png" mode="widthFix"></image>
@@ -156,23 +183,24 @@
       <view class="autoBottomWrap">
         需高于当前出价且为10的倍数
       </view>
-    </view> 
+    </view>  -->
     <view class="bidPriceWrap">
       <view class="bidPrice">
         <view style="display:flex;justify-content: center;align-items: center;">
-          <view class="minus">-</view>
-          <view class="bidPriceNum">￥1290</view>
-          <view class="add">+</view>
+          <view class="minus" catchtap="minusPriceFun">-</view>
+          <!-- <view class="bidPriceNum">￥<input type="text" value="{{currentBidPrice}}"/></view> -->
+          <view class="bidPriceNum">￥{{currentBidPrice}}</view>
+          <view class="add" catchtap="addPriceFun">+</view>
         </view>
       </view>
-      <view class="bidBtn">
+      <view class="bidBtn" catchtap="bidBtnFun">
         出价竞拍
       </view>
     </view>
   </view>
 </view>
 <!-- 出价成功 -->
-<view class="bidSucceedPopMask mask" catchtouchmove="true" wx:if="{{false}}">
+<view class="bidSucceedPopMask mask" catchtouchmove="true" wx:if="{{bidSucceedPopMask}}">
   <view class="bidSucceedPop" catchtap="true">
     <text class="bidSucceedTxt">恭喜您，拍卖出价成功</text>
     <text class="bidSucceedPrice">出价:￥1290</text>
@@ -183,7 +211,7 @@
   </view>
 </view>
 <!-- 邀请好友 -->
-<view class="inviteFriendsPopMask mask" catchtouchmove="true" wx:if="{{false}}">
+<view class="inviteFriendsPopMask mask" catchtouchmove="true" wx:if="{{inviteFriendsPopMask}}">
   <view class="inviteFriendsPop" catchtap="true">
     <text class="inviteFriendsTxt">出价机会不足</text>
     <text class="inviteFriendsTxt1">每邀请3名好友围观拍卖获得1次出价机会（每人限3次）</text>
@@ -191,7 +219,7 @@
   </view>
 </view>
 <!-- 拍卖胜出/拍卖过期 -->
-<view class="auctionResultPopMask mask" catchtouchmove="true" wx:if="{{true}}">
+<view class="auctionResultPopMask mask" catchtouchmove="true" wx:if="{{auctionResultPopMask}}">
   <view class="auctionResultPop" catchtap="true">
     <text class="auctionResultTitle">恭喜！拍卖胜出</text>
     <text class="auctionResultTxt">拍卖已过期</text>
@@ -200,6 +228,15 @@
     <text class="auctionResultBtn">查看更多拍卖商品</text>
   </view>
 </view>
+<!-- 竞拍须知 -->
+<view class="noticePopMask mask" catchtouchmove="true" wx:if="{{noticePopMask}}" catchtap="hideMask">
+  <view class="noticePop" catchtap="true">
+    <text class="noticePop_title">竞拍须知</text>
+    <text class="noticePop_txt">{{dataInfo.auctionNotice}}</text>
+  </view>
+</view>
+
+
 
 
 <bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>

@@ -781,7 +781,7 @@ Page({
   },
 
 
-  // 时间格式化输出，将时间戳转为 倒计时时间
+  // 时间格式化输出，将时间戳转为 倒计时时间 
   dateformat: function(micro_second) {
     var _this = this
     var timestamp = Date.parse(new Date())

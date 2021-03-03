@@ -15,7 +15,7 @@
 
 page{
   background:#FEEEDF;
-  padding-bottom: 122rpx;
+  padding-bottom: 184rpx;
 }
 .pinkBG{
   background: #F7B8AF;
@@ -41,7 +41,7 @@ page{
   border-top-left-radius: 20rpx;
   overflow: hidden;
   position: relative;
-  top: -80rpx;
+  top: -20rpx;
 }
 .auctionStatusWrap{
   background:#FFECBF;
@@ -384,10 +384,13 @@ page{
   bottom: 0;
   left: 0;
   background: #fff;
-  padding: 60rpx 70rpx 26rpx 70rpx;
+  padding: 60rpx 70rpx 62rpx 70rpx;
   box-sizing: border-box;
 }
-.autoWrap{}
+.autoWrap{
+  border-bottom: 1rpx solid #F5F5F5;
+  padding-bottom: 25rpx;
+}
 .autoTopWrap{
   display: flex;
   justify-content: space-between;
@@ -449,9 +452,7 @@ page{
   margin-top: 12rpx;
 }
 .bidPriceWrap{
-  border-top: 1rpx solid #F5F5F5;
   margin-top: 40rpx;
-  padding-top: 25rpx;
 }
 .bidPrice{
   display: flex;
@@ -471,6 +472,10 @@ page{
   margin: 0 24rpx;
   font-size: 50rpx;
   color: #101010;
+}
+.bidPriceNum input{
+  display: inline-block;
+
 }
 .bidBtn{
   display: block;
@@ -608,4 +613,29 @@ page{
   background: #E95159;
   border-radius: 85rpx;
   margin: 0 auto;
+}
+
+
+.noticePop{
+  width: 600rpx;
+  height: auto;
+  border-radius: 8rpx;
+  background: #fff;
+  padding-bottom: 40rpx;
+}
+.noticePop text{
+  display: block;
+}
+.noticePop_title{
+  font-size: 26rpx;
+  color: #101010;
+  text-align: center;
+  margin: 24rpx 0 34rpx 0;
+}
+.noticePop_txt{
+  color: #8E8C8D;
+  font-size: 26rpx;
+  padding: 0 53rpx;
+  box-sizing: border-box;
+  line-height: 46rpx;
 }

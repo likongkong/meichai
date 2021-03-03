@@ -38,6 +38,7 @@ page{
   background:#fff;
   display: flex;
   justify-content: space-between;
+  margin-top: 20rpx;
 }
 .cardLeft{
   width: 240rpx;

@@ -552,7 +552,7 @@ Page({
 
     _this.brandinformation(1);
     // // 线上
-    // _this.commodityinformation(1,1);
+    _this.commodityinformation(1,1);
     // // 手作
     // _this.commodityinformation(1,2);
     // // 海外
@@ -1294,7 +1294,7 @@ brandJson:function(){
     _this.data.page = 0;
     _this.brandinformation(1);
     // // 线上
-    // _this.commodityinformation(1,1);
+    _this.commodityinformation(1,1);
     // // 手作
     // _this.commodityinformation(1,2);
     // // 海外

@@ -16,10 +16,12 @@ Page({
     tgabox:false,
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
+    pid:0,
     tabbarAll:[
       '最近结拍','最多竞拍','最多竞拍','最低价格','即将开始'
     ],
-    currentNum:0,
+    currentNum:1,
+    dataList:[]
   },
   /**
    * 生命周期函数--监听页面加载
@@ -30,16 +32,13 @@ Page({
     // this.data.listData = data;
     // 判断是否授权
     this.activsign();
-    wx.hideShareMenu() // 禁止页面转发
   },
   onLoadfun:function(){
     this.setData({
       uid: app.signindata.uid,
       loginid:app.signindata.loginid,
-      is_mobile_phone:app.signindata.mobile?true:false,
-      mobile:app.signindata.mobile,
-      gain_source:!app.signindata.gotTBBMBS8?8:!app.signindata.gotTBBMBS9?9:0
     }); 
+    this.getInfo();
   },
   activsign: function () {
     // 判断是否授权 
@@ -123,6 +122,46 @@ Page({
     this.setData({
       currentNum: e.currentTarget.dataset.ind
     })
+    this.reset();
+    this.getInfo();
+  },
+
+
+  getInfo(){
+    var _this = this;
+    wx.showLoading({ title: '加载中...'})
+    var q = Dec.Aese('mod=auction&operation=list&showType=' + _this.data.currentNum + '&pid=' + _this.data.pid)
+    console.log('拍卖列表请求数据===','mod=auction&operation=list&showType=' + _this.data.currentNum + '&pid=' + _this.data.pid)
+    wx.request({
+      url: app.signindata.comurl + 'spread.php'+q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('拍卖列表数据======',res)
+        // 刷新完自带加载样式回去
+        wx.stopPullDownRefresh();
+        wx.hideLoading();
+        if (res.data.ReturnCode == 200) {
+          if(res.data.List.activity.length == 0 && _this.data.pid == 0){
+            _this.setData({ nodata : true})
+          }else{
+            if(res.data.List.activity.length == 0 && _this.data.pid != 0){
+              wx.showToast({
+                title: '没有更多数据了',
+                icon: 'none',
+                duration: 1000
+              })
+              _this.setData({loadprompt : true })
+            }else{
+              let dataList = [..._this.data.dataList,...res.data.List.activity];
+              _this.setData({dataList})
+            }
+          }
+        } else {
+          app.showToastC(res.data.msg);
+        }
+      }
+    });
   },
 
 
@@ -153,18 +192,25 @@ Page({
   onUnload: function () {
 
   },
-
+  reset(){
+    this.setData({pid:0,dataList:[],loadprompt:false,nodata:false})
+  },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    this.reset();
+    this.getInfo();
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    if(this.data.loadprompt == false){
+      this.setData({page:++this.data.page})
+    }
+    this._gitList();
   },
   /**
    * 用户点击右上角分享

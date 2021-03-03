@@ -136,6 +136,12 @@
           "pathName": "pages/detailspage/detailspage",
           "query": "gid=36923",
           "scene": null
+        },
+        {
+          "name": "pages/dismantlingbox/dismantlingbox",
+          "pathName": "pages/dismantlingbox/dismantlingbox",
+          "query": "gid=36923",
+          "scene": null
         }
       ]
     }
