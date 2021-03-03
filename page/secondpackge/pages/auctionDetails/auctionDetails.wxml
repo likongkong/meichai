@@ -130,6 +130,77 @@
 </view>
 
 
+<!-- 支付保证金 -->
+<view class="depositPopMask mask" catchtouchmove="true" wx:if="{{false}}">
+  <view class="depositPop" catchtap="true">
+    <text class="depositPop_title">支付保证金</text>
+    <text class="depositPop_txt">参与该拍卖需交纳活动保证金，当前拍卖结束后会退回您的余额。如您竞拍成功后，由于您的原因导致订单取消，您将被扣除该活动保证金。</text>
+    <text class="depositPop_price">保证金：￥100</text>
+    <text class="depositPop_paybtn">确认支付</text>
+  </view>
+</view>
+<!-- 出价竞拍 -->
+<view class="bidPopMask mask" catchtouchmove="true" wx:if="{{false}}">
+  <view class="bidPop" catchtap="true">
+    <view class="autoWrap">
+      <view class="autoTopWrap">
+        <view class="autoTopLeft">
+          <image src="../../../../pages/images/statemyorder1.png" mode="widthFix"></image>
+          <text>自动出价</text>
+        </view>
+        <view class="autoTopRight">
+          <text>最高</text>
+          <input type="text" />
+        </view>
+      </view>
+      <view class="autoBottomWrap">
+        需高于当前出价且为10的倍数
+      </view>
+    </view> 
+    <view class="bidPriceWrap">
+      <view class="bidPrice">
+        <view style="display:flex;justify-content: center;align-items: center;">
+          <view class="minus">-</view>
+          <view class="bidPriceNum">￥1290</view>
+          <view class="add">+</view>
+        </view>
+      </view>
+      <view class="bidBtn">
+        出价竞拍
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 出价成功 -->
+<view class="bidSucceedPopMask mask" catchtouchmove="true" wx:if="{{false}}">
+  <view class="bidSucceedPop" catchtap="true">
+    <text class="bidSucceedTxt">恭喜您，拍卖出价成功</text>
+    <text class="bidSucceedPrice">出价:￥1290</text>
+    <view class="bidSucceedBtnWrap">
+      <text style="background: #FFECBF;color: #C9823B;">我的拍卖</text>
+      <text style="background: #E95159;color: #ffffff;">查看更多</text>
+    </view>
+  </view>
+</view>
+<!-- 邀请好友 -->
+<view class="inviteFriendsPopMask mask" catchtouchmove="true" wx:if="{{false}}">
+  <view class="inviteFriendsPop" catchtap="true">
+    <text class="inviteFriendsTxt">出价机会不足</text>
+    <text class="inviteFriendsTxt1">每邀请3名好友围观拍卖获得1次出价机会（每人限3次）</text>
+    <text class="inviteFriendsBtn">邀请好友</text>
+  </view>
+</view>
+<!-- 拍卖胜出/拍卖过期 -->
+<view class="auctionResultPopMask mask" catchtouchmove="true" wx:if="{{true}}">
+  <view class="auctionResultPop" catchtap="true">
+    <text class="auctionResultTitle">恭喜！拍卖胜出</text>
+    <text class="auctionResultTxt">拍卖已过期</text>
+    <image class="auctionResultGoodsTu" src="https://cdn.51chaidan.com/images/toyShow3/brandGoodsRotation/20210109/20a758966d18f609bf1154f869a20168.png" mode="widthFix"></image>
+    <text class="auctionResultGoodsName">mooroo展会限定-鱼骨</text>
+    <text class="auctionResultBtn">查看更多拍卖商品</text>
+  </view>
+</view>
+
 
 <bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
 

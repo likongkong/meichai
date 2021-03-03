@@ -233,9 +233,9 @@ page {
   border-radius: 10rpx;
 }
 .adcwevename{
-  padding: 8rpx 15rpx 0 15rpx;
+  margin: 8rpx 15rpx 8rpx 15rpx;
   width: 320rpx;
-  /* height:35px; */
+  height:35px;
   line-height: 36rpx;
   font-size: 24rpx;
 }
@@ -1068,6 +1068,7 @@ page {
   font-size: 24rpx;
   color: #101010;
   text-align: center;
+  color: #FF2742;
 }
 .leaveunused text{
   color: #FF2742;
