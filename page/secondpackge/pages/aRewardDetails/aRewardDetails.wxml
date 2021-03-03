@@ -75,7 +75,7 @@
       </view>
    </view>
    <view class="adheadutnum" style="text-align:center;">{{activity.shopPrice}}元随机获得一款限定周边(最终赏除外)</view>
-   <image wx:if='{{!gotTBBMBS8 || !gotTBBMBS9}}' style="width:720rpx;height:auto; display:block;margin:15rpx auto;" catchtap="officialAccount" mode='widthFix' src="{{!gotTBBMBS8?'http://cdn.51chaidan.com/images/sign/activity/attentionGZH.png':'https://cdn.51chaidan.com/images/sign/activity/bigAttention1.png'}}"></image>
+   <image wx:if='{{!gotTBBMBS8 || !gotTBBMBS9}}' style="width:710rpx;height:auto; display:block;margin:15rpx auto;" catchtap="officialAccount" mode='widthFix' src="{{!gotTBBMBS8?'http://cdn.51chaidan.com/images/sign/activity/attentionGZH.png':'https://cdn.51chaidan.com/images/sign/activity/bigAttention1.png'}}"></image>
 
 
    <view class="adcspecial">
@@ -92,8 +92,8 @@
              <block wx:else>超稀有!</block>
           </view>
           <view class="adcspenum">买走最后一个周边立即拥有</view>
-          <view class="leaveunused" wx:if="{{activity.isOfficial==2 && (finalReward.cabinetMaxPrice!=0 || finalReward.cabinetMinPrice!=0)}}" catchtap="jumpOcamcart" data-name='{{finalReward.title}}' data-minprice='{{finalReward.cabinetMinPrice}}' data-maxprice='{{finalReward.cabinetMaxPrice}}' data-goods_id='{{finalReward.goods_id}}'>
-              闲置交易：<text wx:if="{{finalReward.cabinetMinPrice!=0}}">￥{{finalReward.cabinetMinPrice}}</text><text wx:if="{{finalReward.cabinetMaxPrice!=0 && finalReward.cabinetMinPrice!=0}}">-</text><text wx:if="{{finalReward.cabinetMaxPrice!=0}}">￥{{finalReward.cabinetMaxPrice}}</text>
+          <view class="leaveunused" wx:if="{{activity.isOfficial==2 && (finalReward.cabinetMaxPrice!=0 || finalReward.cabinetMinPrice!=0)}}" catchtap="jumpOcamcart" data-name='{{finalReward.title_idle}}' data-minprice='{{finalReward.cabinetMinPrice}}' data-maxprice='{{finalReward.cabinetMaxPrice}}' data-goods_id='{{finalReward.goods_id}}'>
+              闲置：<text wx:if="{{finalReward.cabinetMinPrice!=0}}">￥{{finalReward.cabinetMinPrice}}</text><text wx:if="{{finalReward.cabinetMaxPrice!=0 && finalReward.cabinetMinPrice!=0}}">-</text><text wx:if="{{finalReward.cabinetMaxPrice!=0}}">￥{{finalReward.cabinetMaxPrice}}</text>
           </view>
       </view>   
       <view class="adcweve" style="border-left: 4rpx dashed #f5f6fa;height:{{finalReward.height<500?520:finalReward.height}}rpx;border-top: 4rpx dashed #000;">
@@ -123,17 +123,22 @@
                     </view>
                 </view>
                 <image catchtap="iftrdetailpagen" data-index='{{index}}' data-num='{{num}}' data-is_buy='{{w.is_buy}}' data-goods_id='{{w.goods_id}}' class="adcweveimg" src="{{w.img}}" mode='widthFix'></image>
-                <view class="adcwevename specialellipsis">
+                <view class="adcwevename multilineellipsis">
                     <text style="color: #ff2742;" wx:if='{{w.isShowPrice}}'>价值:￥{{w.shop_price}}</text>
+                    <block wx:if="{{w.img && activity.isOfficial==2}}">
+                            <view wx:if="{{w.cabinetMaxPrice!=0 || w.cabinetMinPrice!=0}}" class="leaveunused" style="text-align:left;padding:0 0 0 {{w.isShowPrice?'15':'0'}}rpx;box-sizing:border-box;display: inline-block;color: #ff2742;" catchtap="jumpOcamcart" data-name='{{w.title_idle}}' data-minprice='{{w.cabinetMinPrice}}' data-maxprice='{{w.cabinetMaxPrice}}' data-goods_id='{{w.goods_id}}'>
+                                闲置:<text wx:if="{{w.cabinetMinPrice!=0}}">￥{{w.cabinetMinPrice}}</text><text wx:if="{{w.cabinetMaxPrice!=0 && w.cabinetMinPrice!=0}}">-</text><text wx:if="{{w.cabinetMaxPrice!=0}}">￥{{w.cabinetMaxPrice}}</text>
+                            </view>
+                    </block>
                     {{w.title}}
                 </view>
-                <block wx:if="{{w.img}}">
+                <!-- <block wx:if="{{w.img}}">
                     <view wx:if="{{activity.isOfficial==2}}" style="height:40rpx">
                         <view wx:if="{{w.cabinetMaxPrice!=0 || w.cabinetMinPrice!=0}}" class="leaveunused" style="text-align:left;padding:0 0 0 15rpx;box-sizing:border-box;" catchtap="jumpOcamcart" data-name='{{w.title}}' data-minprice='{{w.cabinetMinPrice}}' data-maxprice='{{w.cabinetMaxPrice}}' data-goods_id='{{w.goods_id}}'>
                             闲置交易：<text wx:if="{{w.cabinetMinPrice!=0}}">￥{{w.cabinetMinPrice}}</text><text wx:if="{{w.cabinetMaxPrice!=0 && w.cabinetMinPrice!=0}}">-</text><text wx:if="{{w.cabinetMaxPrice!=0}}">￥{{w.cabinetMaxPrice}}</text>
                         </view>
                     </view>
-                </block>
+                </block> -->
             </view>
         </view>
 
