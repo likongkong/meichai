@@ -420,6 +420,9 @@ Page({
     }else if(type==4){
       var subGoodsList = _this.data.subGoodsList;
       subscribedata = subGoodsList.toyShowSubscribe || '';
+    }else if(type==5){
+      var goodsListNew = _this.data.goodsListNew;
+      subscribedata = goodsListNew.toyShowSubscribe || '';
     };
     _this.setData({
       subscribedata:subscribedata,
@@ -511,6 +514,11 @@ Page({
       var subGoodsList = _this.data.subGoodsList;
       _this.setData({
           ['subGoodsList.goodsList['+indexEve+'].is_subscribe']: 1
+      })
+    }else if(typeEve==5){
+      var goodsListNew = _this.data.goodsListNew;
+      _this.setData({
+          ['goodsListNew.goodsList['+indexEve+'].is_subscribe']: 1
       })
     };
   },
@@ -1034,6 +1042,7 @@ brandJson:function(){
                   var goodsListOne = res.data.List.goodsListOne || [];
                   var goodsListTwo = res.data.List.goodsListTwo || [];
                   var goodsListThree = res.data.List.goodsListThree || [];
+                  var goodsListNew = res.data.List.goodsListNew || [];
                   var subGoodsList = res.data.List.subscriptionGoodsList || [];
                   var goodsListOne = {
                     toyShowSubscribe:toyShowSubscribe,
@@ -1047,6 +1056,10 @@ brandJson:function(){
                     toyShowSubscribe:toyShowSubscribe,
                     goodsList:goodsListThree
                   };
+                  var goodsListNew = {
+                    toyShowSubscribe:toyShowSubscribe,
+                    goodsList:goodsListNew
+                  };
                   var subGoodsList = {
                     toyShowSubscribe:toyShowSubscribe,
                     goodsList:subGoodsList
@@ -1056,6 +1069,7 @@ brandJson:function(){
                     goodsListOne,
                     goodsListTwo,
                     goodsListThree,
+                    goodsListNew,
                     subGoodsList
                   })
                 }else{
