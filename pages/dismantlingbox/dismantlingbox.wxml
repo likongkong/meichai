@@ -145,16 +145,16 @@
 
 
     <!-- 独家首发 -->
-    <view class="punchInRewardtxt" style="margin:60rpx 0 20rpx 0;" wx:if='{{subGoodsList&&subGoodsList.goodsList&&subGoodsList.goodsList.length!=0}}' id='e33'>
-      <image style="width:200rpx;height:auto" src="https://cdn.51chaidan.com/images/toyShow3/rmdy.png" mode="widthFix"></image>
+    <view class="punchInRewardtxt" style="margin:60rpx 0 20rpx 0;" wx:if='{{goodsListNew&&goodsListNew.goodsList&&goodsListNew.goodsList.length!=0}}' id='e33'>
+      <image style="width:200rpx;height:auto" src="https://cdn.51chaidan.com/images/toyShow3/djsf.png" mode="widthFix"></image>
     </view>
-    <view style="padding:0 15rpx 20rpx;overflow: hidden;" wx:if='{{subGoodsList&&subGoodsList.goodsList&&subGoodsList.goodsList.length!=0}}'>
-      <view class="ssubOnlinEve boxShadow" wx:for="{{subGoodsList.goodsList}}" wx:key="key" style="{{index%3==1?'margin:10rpx 30rpx;':''}}">
-           <image catchtap="evesubscrfun" data-type='4' data-eveid='{{item.goods_id}}' data-index='{{index}}' class="ssubOnliimg" src="{{item.goods_thumb}}" mode='aspectFit'></image>
-           <view catchtap="evesubscrfun" data-type='4' data-eveid='{{item.goods_id}}' data-index='{{index}}' class="SSAname multilineellipsis">{{item.goods_name}}</view>
+    <view style="padding:0 15rpx 20rpx;overflow: hidden;" wx:if='{{goodsListNew&&goodsListNew.goodsList&&goodsListNew.goodsList.length!=0}}'>
+      <view class="ssubOnlinEve boxShadow" wx:for="{{goodsListNew.goodsList}}" wx:key="key" style="{{index%3==1?'margin:10rpx 30rpx;':''}}">
+           <image catchtap="evesubscrfun" data-type='5' data-eveid='{{item.goods_id}}' data-index='{{index}}' class="ssubOnliimg" src="{{item.goods_thumb}}" mode='aspectFit'></image>
+           <view catchtap="evesubscrfun" data-type='5' data-eveid='{{item.goods_id}}' data-index='{{index}}' class="SSAname multilineellipsis">{{item.goods_name}}</view>
            <!-- <image catchtap="jumpGoodsDetails" data-gid='{{item.goods_id}}' class="ssubOnliimg" src="{{item.goods_thumb}}" mode='aspectFit'></image>
            <view catchtap="jumpGoodsDetails" data-gid='{{item.goods_id}}' class="SSAname multilineellipsis">{{item.goods_name}}</view> -->
-           <view class="ssubBotbox" catchtap="evesubscrfun" data-type='4' data-eveid='{{item.goods_id}}' data-index='{{index}}'>
+           <view class="ssubBotbox" catchtap="evesubscrfun" data-type='5' data-eveid='{{item.goods_id}}' data-index='{{index}}'>
               <view class="ssubBotbLeft specialellipsis" wx:if='{{item.shop_price}}'>￥{{item.shop_price}}</view>
               <view class="ssubBotRight" style="{{item.is_subscribe==1?'background:#fff;color:#32ACFB;':''}}">{{item.is_subscribe==1?'已订阅':'订阅'}}</view>
            </view>
@@ -192,7 +192,9 @@
     </view> -->
 
     <!-- 更多展品 -->
-		<view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}' id='e32'>————— 更多展品 —————</view>
+		<view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}' id='e32'>
+      <image style="width:200rpx;height:auto" src="https://cdn.51chaidan.com/images/toyShow3/gdzp.png" mode="widthFix"></image>
+    </view>
     <view style="padding:0 15rpx 20rpx;overflow: hidden;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}'>
         <view class="ssubOnlinEve boxShadow" wx:for="{{goodsListOne.goodsList}}" wx:key="key" style="{{index%3==1?'margin:10rpx 30rpx;':''}}">
            <image catchtap="evesubscrfun" data-type='1' data-eveid='{{item.goods_id}}' data-index='{{index}}' class="ssubOnliimg" src="{{is_show||index<20?item.goods_thumb:defaultimg}}" mode='aspectFit'></image>
