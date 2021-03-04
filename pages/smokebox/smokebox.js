@@ -782,7 +782,7 @@ Page({
             tempChanceOverTime:infoData.user.tempChanceOverTime,
             welfareTags:listDataDetail.welfareTags || [],
             toyCabinetList:listDataDetail.toyCabinetList || [],
-            isAboveQuota:infoData.isAboveQuota,  // 是否超出限购限额  true 是
+            isAboveQuota:infoData.isAboveQuota || false,  // 是否超出限购限额  true 是
             limitBuy:activityData.limitBuy || 0
           })
 
@@ -883,14 +883,12 @@ Page({
             _this.reset()
           }
 
-          if (activityData.aheadUser == 0 && !_this.data.activity.isInQueue && activityData.status == 2 && _this.data.isqueue) {
-            if(!infoData.isAboveQuota){
+          if (activityData.aheadUser == 0 && !_this.data.activity.isInQueue && activityData.status == 2 && _this.data.isqueue && !infoData.isAboveQuota) {
               _this.queueup(1, 0) //排队 
               _this.setData({
                 isqueue: false,
-              })
-            };
-          }
+              });
+          };
           
           
           if (activityData.refreshTime) {

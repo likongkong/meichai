@@ -217,20 +217,43 @@
 				<!-- <view wx:elif='{{activity.status==1}}' class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;" catchtap='lineup'>立即排队</view> -->
 
 				<view wx:elif='{{activity.status==1}}' class='queuebtnstyle2' style="background:{{isAboveQuota?'#ccc':'#e94f57'}};color:white;float:left;" catchtap='{{isAboveQuota?"":"lineup"}}'>
+
+						<block wx:if='{{limitBuy && limitBuy != 0}}'>
 						<view style="height:40rpx;line-height:50rpx;text-align:center;position:relative;">{{isAboveQuota?"今日已抽完":"立即排队"}}</view>
-						<view style="height:40rpx;text-align:center;line-height:32rpx;">({{limitBuy}}个/人/天)</view>					
+						<view style="height:40rpx;text-align:center;line-height:32rpx;">({{limitBuy}}个/人/天)</view>						
+						</block>
+						<block wx:else>立即排队</block>							
+
 				</view>
 
 				<view wx:elif='{{activity.aheadUser== 0 && activity.isInQueue && activity.canOperate }}' class='queuebtnstyle2' style="background:{{isAboveQuota?'#ccc':'#e94f57'}};color:white;float:left;" catchtap='{{isAboveQuota?"":"selectbox"}}'>
-						<view style="height:40rpx;line-height:50rpx;text-align:center;position:relative;">{{isAboveQuota?"今日已抽完":"直接选盒"}}</view>
-						<view style="height:40rpx;text-align:center;line-height:32rpx;">({{limitBuy}}个/人/天)</view>					
+
+						<block wx:if='{{limitBuy && limitBuy != 0}}'>
+							<view style="height:40rpx;line-height:50rpx;text-align:center;position:relative;">{{isAboveQuota?"今日已抽完":"直接选盒"}}</view>
+							<view style="height:40rpx;text-align:center;line-height:32rpx;">({{limitBuy}}个/人/天)</view>						
+						</block>
+						<block wx:else>直接选盒</block>						
+
 				</view>
 
-				<view wx:elif='{{activity.isInQueue}}' class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;">排队中</view>
+				<view wx:elif='{{activity.isInQueue}}' class='queuebtnstyle2' style="background:{{isAboveQuota?'#ccc':'#e94f57'}};color:white;float:left;">
+
+				  <block wx:if='{{limitBuy && limitBuy != 0}}'>
+						<view style="height:40rpx;line-height:50rpx;text-align:center;position:relative;">{{isAboveQuota?"今日已抽完":"排队中"}}</view>
+						<view style="height:40rpx;text-align:center;line-height:32rpx;">({{limitBuy}}个/人/天)</view>						
+					</block>
+			    <block wx:else>排队中</block>
+
+
+
+				</view>
 
 				<view wx:else class='queuebtnstyle2' style="background:{{isAboveQuota?'#ccc':'#e94f57'}};color:white;float:left;" catchtap='{{isAboveQuota?"":"lineup"}}'>
-					<view style="height:40rpx;line-height:50rpx;text-align:center;position:relative;">{{isAboveQuota?"今日已抽完":"立即排队"}}</view>
-					<view style="height:40rpx;text-align:center;line-height:32rpx;">({{limitBuy}}个/人/天)</view>				
+				  <block wx:if='{{limitBuy && limitBuy != 0}}'>
+						<view style="height:40rpx;line-height:50rpx;text-align:center;position:relative;">{{isAboveQuota?"今日已抽完":"立即排队"}}</view>
+						<view style="height:40rpx;text-align:center;line-height:32rpx;">({{limitBuy}}个/人/天)</view>						
+					</block>
+			    <block wx:else>立即排队</block>
 				</view>
 
 				<!-- <view wx:else class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;" catchtap='lineup'>立即排队</view> -->
@@ -660,8 +683,11 @@
 								<view style="height:40rpx;text-align:center;line-height:32rpx;">({{limitBuy}}个/人/天)</view>						
 						</view>
 						<view wx:else class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;" catchtap='{{isusedWelfare ? "showsurebuy" : "updateadd"}}'>
-								<view style="height:40rpx;line-height:50rpx;text-align:center;position:relative;">就买它</view>
-								<view style="height:40rpx;text-align:center;line-height:32rpx;">({{limitBuy}}个/人/天)</view>						
+								<block wx:if='{{limitBuy && limitBuy != 0}}'>
+									<view style="height:40rpx;line-height:50rpx;text-align:center;position:relative;">就买它</view>
+									<view style="height:40rpx;text-align:center;line-height:32rpx;">({{limitBuy}}个/人/天)</view>					
+								</block>
+								<block wx:else>就买它</block>	
 						</view>
 					</view>
 
