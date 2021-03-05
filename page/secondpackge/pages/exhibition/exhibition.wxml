@@ -44,9 +44,9 @@
 			<block wx:if='{{item.activityType!=0}}'>
 				<view class="exhibboxconeve" style="margin-left:20rpx;" catchtap="jumpexhdetail" data-brandid='{{item.brandId}}' data-id='{{item.id}}'>
 					<image class="exhibboxeveimg" mode='aspectFit' src="{{item.images}}"></image>
-					<view class="dismtbcctxthead multilineellipsis3" style="width:100%;height: 88rpx;font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.goodsName}}</view>
+					<view class="dismtbcctxthead multilineellipsis" style="width:100%;padding:5rpx 0;text-align:left;color:black;">{{item.goodsName}}</view>
 					<view style="width:100%;height:40rpx;padding:10rpx 0;">
-						<view wx:if='{{item.shopPrice && item.shopPrice!=""}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#ff2742;float:left;">￥{{item.shopPrice}}</view>
+						<view wx:if='{{item.shopPrice && item.shopPrice!=""}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#ff2742;float:left;font-weight: bold;">￥{{item.shopPrice}}</view>
 						<view wx:if='{{pagetype == 4}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;">
 							<block wx:if="{{item.isLiveShow}}">
 								直播抽选
