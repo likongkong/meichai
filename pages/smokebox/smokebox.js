@@ -3420,6 +3420,7 @@ Page({
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
+        console.log('品牌专区=====',res)
         // 刷新完自带加载样式回去
         wx.stopPullDownRefresh()
         if (res.data.ReturnCode == 200) {
