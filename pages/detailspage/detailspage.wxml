@@ -820,7 +820,14 @@
       </block>
       <!-- 可订阅时显示：xxxx直播 -->
       <block wx:else>
-        <block wx:if='{{zunmdata.saleButtonDisplay}}'>
+
+        <block wx:if='{{zunmdata.gid == 37092}}'>
+            <view class="footer-child large" style='box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:300rpx;float:right;background:#e47677;' catchtap="addresssmokebox" data-gid='{{zunmdata.gid}}'>
+              <view class="addsopcar" style="height:60rpx;line-height:60rpx;">{{zunmdata.saleButtonDisplay}}抽盒</view>
+            </view>    
+        </block>
+
+        <block wx:elif='{{zunmdata.saleButtonDisplay}}'>
             <view class="footer-child large" style='box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:300rpx;float:right;background:#999999;'>
               <view class="addsopcar" style="height:60rpx;line-height:60rpx;">{{zunmdata.saleButtonDisplay}}</view>
             </view>    
@@ -868,7 +875,7 @@
         <block wx:if='{{zunmdata.liveShowRoomId&&zunmdata.status!=1}}'>
           <view class="footer-child large turn" style='height:60rpx;margin-top:9rpx;padding:0;width:200rpx;margin-right:40rpx;background:#f8b21d;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' catchtap="livebroadcast">返回直播间</view>
         </block>
-        <block wx:else>
+        <block  wx:elif='{{zunmdata.gid != 37092}}'>
           <view class="footer-child large turn" style='height:60rpx;margin-top:9rpx;padding:0;width:200rpx;margin-right:40rpx;background:#f8b21d;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' wx:if='{{zunmdata.status==1&&subscribedata}}' catchtap='subscrfun'>
             开售提醒<view class="coupposi" wx:if='{{isSubscribeCoupon}}'>订阅送优惠券</view>
           </view>    
