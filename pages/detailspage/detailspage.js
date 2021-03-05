@@ -239,8 +239,132 @@ Page({
     // 提交订单时是否使用抽盒金抵扣
     isDeductNum:1,
     gotTBBMBS8:true,
-    gotTBBMBS9:true
+    gotTBBMBS9:true,
+    // 关注公众号标签
+    // 手机壳样式
+    specialGoods:0,
+
+    modelSelInde:0,
+
+    detailColorIndex:0,
+    selectShell:{}
+
+
   },
+  dSCfun(event){
+    var index = event.currentTarget.dataset.index || event.target.dataset.index || 0;
+
+    var detailSpecModel = this.data.detailSpecModel || [];
+    var detailSpecColor = this.data.detailSpecColor || [];
+    var listSpec = this.data.listSpec;
+    var modelColor = detailSpecModel[this.data.modelSelInde].name+'-'+detailSpecColor[index].name;
+    if( listSpec[modelColor] && listSpec[modelColor].stock > 0 ){
+      var zunmdata = this.data.zunmdata; 
+      zunmdata.gsale = listSpec[modelColor].price || 0;
+      zunmdata.gprice = listSpec[modelColor].price || 0;
+      zunmdata.debuff = 0; 
+      zunmdata.goods_thumb = listSpec[modelColor].roleImg;
+      this.setData({
+        detailColorIndex:index,
+        selectShell:listSpec[modelColor],
+        zunmdata:zunmdata
+      })
+    }else{
+      var zunmdata = this.data.zunmdata; 
+      zunmdata.debuff = 3; 
+      this.setData({
+        detailColorIndex:index,
+        selectShell:{},
+        zunmdata,
+      })
+
+    };
+  },
+  //分类选择
+  bindPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+
+    var detailSpecModel = this.data.detailSpecModel || [];
+    var detailSpecColor = this.data.detailSpecColor || [];
+    var listSpec = this.data.listSpec;
+
+    var ifAdopt = false;
+    var assignment = true;
+    var detailColorIndex = 0;
+    var selectShell = {};
+    for( var i = 0 ; i < detailSpecColor.length ; i++ ){
+        var modelColor = detailSpecModel[e.detail.value].name+'-'+detailSpecColor[i].name;
+        
+        if(listSpec[modelColor]){
+          console.log(modelColor,listSpec[modelColor])
+          detailSpecColor[i].select = true;
+          ifAdopt = true;
+          if(assignment){
+            assignment = false;
+            detailColorIndex = i;
+            selectShell = listSpec[modelColor];                    
+          }
+        } else {
+          detailSpecColor[i].select = false;
+        };
+    }; 
+
+    if(ifAdopt){
+      var zunmdata = this.data.zunmdata; 
+      zunmdata.gsale = selectShell.price || 0;
+      zunmdata.gprice = selectShell.price || 0;
+      zunmdata.debuff = 0;
+      zunmdata.goods_thumb = selectShell.roleImg;
+      
+      if( selectShell.stock < 0 ){
+        zunmdata.debuff = 3;
+      };
+
+      this.setData({
+        modelSelInde:e.detail.value,
+        selectShell,
+        zunmdata:zunmdata,
+        detailColorIndex,
+        detailSpecColor
+      })
+    }else{
+      var zunmdata = this.data.zunmdata; 
+      zunmdata.debuff = 3;
+      this.setData({
+        modelSelInde:e.detail.value,
+        selectShell:{},
+        zunmdata,
+        detailSpecColor
+      })
+
+    };
+
+
+
+    // var modelColor = detailSpecModel[e.detail.value].name+'-'+detailSpecColor[this.data.detailColorIndex].name;
+    // if( listSpec[modelColor] && listSpec[modelColor].stock > 0 ){
+    //   var zunmdata = this.data.zunmdata; 
+    //   zunmdata.gsale = listSpec[modelColor].price || 0;
+    //   zunmdata.gprice = listSpec[modelColor].price || 0;
+    //   zunmdata.debuff = 0;
+    //   zunmdata.goods_thumb = listSpec[modelColor].roleImg;
+    //   this.setData({
+    //     modelSelInde:e.detail.value,
+    //     selectShell:listSpec[modelColor],
+    //     zunmdata:zunmdata
+    //   })
+    // }else{
+    //   var zunmdata = this.data.zunmdata; 
+    //   zunmdata.debuff = 3;
+    //   this.setData({
+    //     modelSelInde:e.detail.value,
+    //     selectShell:{},
+    //     zunmdata,
+    //   })
+
+    // };
+  },
+
   useBlindboxMoneyFun(){
     this.setData({
       isUseBlindboxMoney:!this.data.isUseBlindboxMoney,
@@ -706,13 +830,13 @@ Page({
         
         console.log(11,count,_this.data.numberofdismantling,_this.data.isBlindBoxNum,'isWholeSuit=='+isWholeSuit)
 
-        var ginfo = [{ gid: gid, color: color, size: size, count: count,isWholeSuit:isWholeSuit, rec_goods_id: (_this.data.rec_goods_id || 0), rec_cart_id: (_this.data.rec_cart_id || 0), 'referee': _this.data.referee }];
+        var ginfo = [{ gid: gid, color: color, size: size, count: count,isWholeSuit:isWholeSuit, rec_goods_id: (_this.data.rec_goods_id || 0), rec_cart_id: (_this.data.rec_cart_id || 0), 'referee': _this.data.referee,specRoleId:_this.data.selectShell.roleId ||'' }];
 
       }else{
         var count = _this.data.numberofdismantling;
         console.log(22,count)
 
-        var ginfo = [{ gid: gid, color: color, size: size, count: count, rec_goods_id: (_this.data.rec_goods_id || 0), rec_cart_id: (_this.data.rec_cart_id || 0), 'referee': _this.data.referee }];
+        var ginfo = [{ gid: gid, color: color, size: size, count: count, rec_goods_id: (_this.data.rec_goods_id || 0), rec_cart_id: (_this.data.rec_cart_id || 0), 'referee': _this.data.referee ,specRoleId:_this.data.selectShell.roleId ||''}];
 
       };
 
@@ -723,7 +847,7 @@ Page({
       var ginfo = [];
       for (var i = 0; i < zunmdata.length; i++) {
         if (zunmdata[i].imgiftr) {
-          ginfo.push({ gid: zunmdata[i].goods_id, color: zunmdata[i].colorid || 0, size: zunmdata[i].sizeid || 0, count: zunmdata[i].numberofdismantling, store_id: zunmdata[i].store_id || 0, 'group_id': _this.data.href });
+          ginfo.push({ gid: zunmdata[i].goods_id, color: zunmdata[i].colorid || 0, size: zunmdata[i].sizeid || 0, count: zunmdata[i].numberofdismantling, store_id: zunmdata[i].store_id || 0, 'group_id': _this.data.href ,specRoleId:_this.data.selectShell.roleId ||''});
         };
       };
       var gcount = zunmdata.length;
@@ -739,7 +863,7 @@ Page({
       suboformola:true
     });
 
-     
+   
 
     var q = Dec.Aese('mod=order&operation=carorder&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&gcount=1&aid=' + aid + '&cid=' + cid + '&ginfo=' + ginfo + '&desc=' + _this.data.desc + '&gdt_vid=' + _this.data.gdt_vid + '&weixinadinfo=' + _this.data.weixinadinfo + '&roomId=' + _this.data.room_id+'&command='+_this.data.descpassword+'&isDeduct='+_this.data.isDeductNum);
 
@@ -2110,7 +2234,14 @@ Page({
     var res = this.data.zunmdata;
     var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
     var iftrnum = true;
-    if (res.selected_spec){}else{
+    if(_this.data.specialGoods == 1){
+      var stock = _this.data.selectShell.stock || 0;
+      _this.setData({
+        sizeid: 0,
+        colorid: 0,
+        quantityofgoods: stock
+      });
+    } else if (res.selected_spec){}else{
         for (var js in res.extends) {
           if (iftrnum) {
             _this.setData({
@@ -2159,7 +2290,15 @@ Page({
     var res = this.data.zunmdata;
     var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
     var iftrnum = true;
-    if (res.selected_spec){}else{
+
+    if(_this.data.specialGoods == 1){
+      var stock = _this.data.selectShell.stock || 0;
+      _this.setData({
+        sizeid: 0,
+        colorid: 0,
+        quantityofgoods: stock
+      });
+    } else if (res.selected_spec){}else{
         for (var js in res.extends) {
           if (iftrnum) {
             _this.setData({
@@ -2191,27 +2330,33 @@ Page({
           zunmdata:res
         }); 
     };   
-      var _this = this;
-      if (_this.data.zunmdata.color.length != 0 || _this.data.zunmdata.size.length != 0){
-        _this.setData({
-          tipback: true,
-          dsbframeiftr: true,
-        });           
-      }else{
-        _this.addtocart();
-      }
+    var _this = this;
+    if (_this.data.zunmdata.color.length != 0 || _this.data.zunmdata.size.length != 0){
+      _this.setData({
+        tipback: true,
+        dsbframeiftr: true,
+      });           
+    }else{
+      _this.addtocart();
+    }
   },
   addtocart: function () {  // 加入购物车
     var _this = this;
+    if(_this.data.quantityofgoods == 0){
+      app.showToastC('库存不足');
+      return false;
+    };
+
     _this.setData({
       suboformola: true
     });
+
     if(_this.data.zunmdata.isBlindBox){
        var count = parseFloat(_this.data.numberofdismantling) * parseFloat(_this.data.isBlindBoxNum);
     }else{
       var count = _this.data.numberofdismantling
     }
-    var adtocar = [{ 'goods_id': _this.data.gid, 'color_id': _this.data.colorid || 0, 'size_id': _this.data.sizeid || 0, 'count':count , rec_goods_id: (_this.data.rec_goods_id || 0), rec_cart_id: (_this.data.rec_cart_id || 0), 'referee': _this.data.referee||0}];
+    var adtocar = [{ 'goods_id': _this.data.gid, 'color_id': _this.data.colorid || 0, 'size_id': _this.data.sizeid || 0, 'count':count , rec_goods_id: (_this.data.rec_goods_id || 0), rec_cart_id: (_this.data.rec_cart_id || 0), 'referee': _this.data.referee||0,specRoleId:_this.data.selectShell.roleId ||'' }];
 
     console.log(adtocar)
 
@@ -2578,7 +2723,13 @@ Page({
         // 刷新完自带加载样式回去
         wx.stopPullDownRefresh()
         if (res.data.ReturnCode == 200) {
-          _this.setData({welvalue:true})
+          var dataGinfo = res.data.Ginfo;
+          _this.setData({
+            welvalue:true,
+            specialGoods:dataGinfo.specialGoods // 特殊商品  手机壳
+          })
+
+
           if (!reg.test(res.data.Ginfo.goods_thumb)) {
             res.data.Ginfo.goods_thumb = _this.data.zdyurl + res.data.Ginfo.goods_thumb;
           };
@@ -2752,6 +2903,65 @@ Page({
                 _this.previewVideo();
               };
           });
+
+          if(res.data.Ginfo.specialGoods && res.data.Ginfo.specialGoods == 1){
+            var infoSpecial = dataGinfo.infoSpecial;
+            var detailSpecColor = infoSpecial.detailSpec[infoSpecial.specCate[1]] || [];
+            var detailSpecModel = infoSpecial.detailSpec[infoSpecial.specCate[0]] || [];
+            var listSpec = infoSpecial.listSpec;
+            var detailColorIndex = 0;
+            var modelSelInde = 0;
+            var selectShell = {};
+            var spgsale = 0;
+            var minImg = '';
+            outSide:for( var j = 0 ; j < detailSpecModel.length ; j++ ){
+                var ifAdopt = false;
+                var assignment = true
+                for( var i = 0 ; i < detailSpecColor.length ; i++ ){
+                    var modelColor = detailSpecModel[j].name+'-'+detailSpecColor[i].name;
+                    if(listSpec[modelColor]){
+                      detailSpecColor[i].select = true;
+                      ifAdopt = true;
+                      if(assignment){
+                        assignment = false;
+                        detailColorIndex = i;
+                        modelSelInde = j;
+                        selectShell = listSpec[modelColor];
+                        spgsale = listSpec[modelColor].price;                     
+                      }
+                    } else {
+                      detailSpecColor[i].select = false;
+                    };
+                };
+                if(ifAdopt){
+                  break outSide;
+                }
+            }; 
+
+            redauin.gsale = spgsale;
+            redauin.gprice = spgsale;
+            redauin.goods_thumb = selectShell.roleImg;
+            console.log('detailSpecColor==========',detailSpecColor)
+
+            _this.setData({
+              zunmdata:redauin,
+              listSpec,
+              specCate:infoSpecial.specCate,
+              detailSpecColor,
+              detailSpecModel,
+              detailColorIndex,
+              modelSelInde,
+              selectShell
+            })
+            
+            // specialGoods=1是特殊的商品，走手机壳逻辑
+            // Ginfo.infoSpecial.listSpec   对应关系
+            // Ginfo.infoSpecial.specCate        属性列表
+            // Ginfo.infoSpecial.detailSpec        属性明细            
+          }
+
+
+
           if (_this.data.is_exhibition==1||(_this.data.is_exhibition!=1&&_this.data.brandId>0)){
             // 展会
             _this.exhibdatafun(1);

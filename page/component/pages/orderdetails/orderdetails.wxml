@@ -682,7 +682,7 @@
                         <view class='wholeconnumdisilin' wx:if='{{comdata.order_type==12 &&comdata.roleName!=null}}'
                             style='color:#ff2840;'>明盒：{{comdata.roleName}}</view>
                         <view class='wholeconnumdisilin' wx:if='{{comdata.order_type==14 &&comdata.roleName!=null}}'
-                            style='color:#ff2840;'>在线抽盒：{{comdata.roleName}}</view>
+                            style='color:#ff2840;'>在线抽盒</view>
                     </view>
                     <view class='wholeconnum specialellipsis'
                         wx:if='{{comdata.customer_note&&(comdata.status==1||comdata.status==2||comdata.status==12||comdata.status==13||comdata.status==3||comdata.status==4)}}'>

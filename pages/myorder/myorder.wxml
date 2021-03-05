@@ -379,7 +379,7 @@
                            <view class='wholeconnumdisilin' wx:if='{{item.size}}'>尺寸:{{item.size}}</view>
                            <view class='wholeconnumdisilin' wx:if='{{item.color}}'>颜色:{{item.color}}</view>
                            <view class='wholeconnumdisilin' wx:if='{{item.order_type == 12 && item.roleName!=null}}' style='color:#ff2840;'>明盒：{{item.roleName}}</view>
-                           <view class='wholeconnumdisilin' wx:if='{{item.order_type == 14 && item.roleName!=null}}' style='color:#ff2840;'>在线抽盒：{{item.roleName}}</view>
+                           <view class='wholeconnumdisilin' wx:if='{{item.order_type == 14 && item.roleName!=null}}' style='color:#ff2840;'>在线抽盒</view>
                       </view>
                       <view class='wholeconnum specialellipsis' wx:if='{{item.customer_note&&(item.status==1||item.status==12||item.status==13||item.status==2||item.status==3||item.status==4)}}'>备注:{{item.customer_note}}</view>   
                          
@@ -406,8 +406,8 @@
                               </block>
                               
                           </view>
-                      <view wx:if='{{item.tax!=0.00}}' style='margin-left:10rpx;color:#999;' class='taxpricleft'>税费:￥{{item.tax}}</view>
-                      </view>
+                          <view wx:if='{{item.tax!=0.00}}' style='margin-left:10rpx;color:#999;' class='taxpricleft'>税费:￥{{item.tax}}</view>
+                    </view>
                       
                  </view>
 
