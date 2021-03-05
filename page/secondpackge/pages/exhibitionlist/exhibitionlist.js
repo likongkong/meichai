@@ -522,7 +522,7 @@ Page({
       if (num==1){
         return M + '.' + D + ' ' + h + ':' + m;
       }else{
-        return M + '.' + D;
+        return M + '' + D;
       };
     };
   },
