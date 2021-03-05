@@ -182,11 +182,13 @@ App({
 
                   _this.signindata.loginid = res.data.Info.loginid || '';
                   _this.signindata.uid = res.data.Info.uid || '';
-                  
+
                   if(Dec.env=='online'){
+
                     var uid = res.data.Info.uid.toString();
                     var laststring = uid.substring(uid.length-1);
                     console.log(uid,laststring,parseInt(laststring))
+
                     var num = _this.signindata.randommaximum - parseInt(laststring) % _this.signindata.randommaximum;
                     if(num<10){
                         num = '00'+num

@@ -781,7 +781,9 @@ Page({
             isTempTip:infoData.user.isTempTip,
             tempChanceOverTime:infoData.user.tempChanceOverTime,
             welfareTags:listDataDetail.welfareTags || [],
-            toyCabinetList:listDataDetail.toyCabinetList || []
+            toyCabinetList:listDataDetail.toyCabinetList || [],
+            isAboveQuota:infoData.isAboveQuota || false,  // 是否超出限购限额  true 是
+            limitBuy:activityData.limitBuy || 0
           })
 
           if(infoData.user.isTempTip){
@@ -881,12 +883,12 @@ Page({
             _this.reset()
           }
 
-          if (activityData.aheadUser == 0 && !_this.data.activity.isInQueue && activityData.status == 2 && _this.data.isqueue) {
-            _this.queueup(1, 0) //排队 
-            _this.setData({
-              isqueue: false,
-            })
-          }
+          if (activityData.aheadUser == 0 && !_this.data.activity.isInQueue && activityData.status == 2 && _this.data.isqueue && !infoData.isAboveQuota) {
+              _this.queueup(1, 0) //排队 
+              _this.setData({
+                isqueue: false,
+              });
+          };
           
           
           if (activityData.refreshTime) {
@@ -1013,7 +1015,11 @@ Page({
     if(this.data.activity.status == 1){
       app.showToastC('活动暂未开启');
     }else if(this.data.activity.status == 2){
-      _this.queueup(1, 0)
+      if(this.data.isAboveQuota){
+        app.showToastC('已经超出('+this.data.limitBuy+'个/人/天)限额');
+      }else{
+        _this.queueup(1, 0)
+      };
     }else if(this.data.activity.status == 3){
       app.showToastC('活动已结束');
     }
@@ -1339,6 +1345,7 @@ Page({
           title = "我抽到了" + _this.data.activity.seriesName + xilie + info.roleName + "，抽盒金红包送给你们。"
         }
       }
+      console.log('1===',_this.data.redpagshareimg)
       var share = {
         title: title,
         imageUrl: _this.data.redpagshareimg,
@@ -1346,6 +1353,7 @@ Page({
         success: function (res) {}
       }
     } else {
+      console.log('2===',_this.data.snapshotshare,"https://www.51chaidan.com/images/blindbox/" + _this.data.id + ".jpg")
       var share = {
         title: "我正在在线抽盲盒，免费重抽！免费重抽！免费重抽！",
         imageUrl: _this.data.snapshotshare || "https://www.51chaidan.com/images/blindbox/" + _this.data.id + ".jpg",
@@ -2341,10 +2349,10 @@ Page({
   wholebox: function () {
     var _this = this;
 
-    // if (this.data.tipaid == '') {
-    //   app.showToastC('请选择地址');
-    //   return false;
-    // };
+    if (this.data.isAboveQuota) {
+      app.showToastC('已经超出限额了');
+      return false;
+    };
 
     wx.showLoading({
       title: '加载中',
