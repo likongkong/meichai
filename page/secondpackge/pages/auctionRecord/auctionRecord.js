@@ -16,17 +16,18 @@ Page({
     tgabox:false,
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
+    pid:0,
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // var data = JSON.parse(options.data)
-    // console.log(data)
-    // this.data.listData = data;
+    var _this = this;
+    this.setData({
+      id: options.id || 0
+    }); 
     // 判断是否授权
     this.activsign();
-    wx.hideShareMenu() // 禁止页面转发
   },
   onLoadfun:function(){
     this.setData({
@@ -119,6 +120,45 @@ Page({
   },
 
 
+
+  getInfo(){
+    var _this = this;
+    wx.showLoading({ title: '加载中...'})
+    var q = Dec.Aese('mod=auction&operation=auctionRecord&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&pid='+_this.data.pid)
+    console.log('拍卖记录请求数据===','mod=auction&operation=auctionRecord&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&pid='+_this.data.pid)
+    wx.request({
+      url: app.signindata.comurl + 'spread.php'+q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('拍卖记录数据======',res)
+        // 刷新完自带加载样式回去
+        wx.stopPullDownRefresh();
+        wx.hideLoading();
+        if (res.data.ReturnCode == 200) {
+          if(res.data.List.length == 0 && _this.data.pid == 0){
+            _this.setData({ nodata : true})
+          }else{
+            if(res.data.List.length == 0 && _this.data.pid != 0){
+              wx.showToast({
+                title: '没有更多数据了',
+                icon: 'none',
+                duration: 1000
+              })
+              _this.setData({loadprompt : true })
+            }else{
+              let dataList = [..._this.data.dataList,...res.data.List];
+              _this.setData({dataList})
+            }
+          }
+        } else {
+          app.showToastC(res.data.msg);
+        }
+      }
+    });
+  },
+
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -157,7 +197,10 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    if(this.data.loadprompt == false){
+      this.setData({pid:++this.data.pid})
+    }
+    this.getInfo();
   },
   /**
    * 用户点击右上角分享

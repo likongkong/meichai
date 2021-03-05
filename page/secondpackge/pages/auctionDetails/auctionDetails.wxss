@@ -6,10 +6,10 @@
 .blue{
   background: #298DF8;
 }
-.yellow{
+.red{
   background: #FF2742;
 }
-.red{
+.yellow{
   background: #F8B21D;
 }
 
@@ -128,7 +128,7 @@ page{
   text-align: center;
   font-size: 26rpx;
   color: #CD8233;
-  padding: 40rpx 0 20rpx 0;
+  padding: 40rpx 0 30rpx 0;
 }
 .auctionBidUserInfoWrap{
   width: 650rpx;
@@ -234,15 +234,15 @@ page{
 }
 .auctionRuleInfo text{
   display: inline-block;
-  width: 50%;
+  width: 65%;
   font-size: 24rpx;
   color: #C9823B;
   margin: 14rpx 0;
 }
 .auctionRuleInfo text:nth-child(2n){
   text-align: right;
+  width: 35%;
 }
-
 .auctionGoodsInfo{
   margin-top: 20rpx;
 }

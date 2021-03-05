@@ -16,6 +16,7 @@ Page({
     tgabox:false,
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
+    id:0,
     subscribedata:'',
     bidRange:0,
     lastBidPrice:0,
@@ -33,6 +34,10 @@ Page({
   onLoad: function (options) {
     var _this = this;
     _this.data.share_uid = options.share_uid || 0
+    // _this.data.id = options.id || 0
+    this.setData({
+      id: options.id || 0
+    }); 
     // 判断是否授权
     this.activsign();
     this.getInfo();
@@ -172,8 +177,16 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    var reshare = app.sharemc();
-    return reshare
+    var _this = this
+    var share = {
+      title:  app.signindata.titleShare,
+      path: 'page/secondpackge/pages/auctionDetails/auctionDetails?share_uid=' + _this.data.uid,
+      imageUrl: app.signindata.indexShareImg,
+      success: function(res) {
+
+      }
+    }
+    return share
   },
    /**
    * 用户点击右上角分享朋友圈
@@ -192,13 +205,26 @@ Page({
       url: "../myAuctionList/myAuctionList"
     })
   },
+  //跳转出价记录
+  jumpAuctionRecord(e){
+    var _this = this;
+    // wx.navigateTo({  
+    //   url: "../auctionRecord/auctionRecord",
+    //   success: function(res) {
+    //     // 通过eventChannel向被打开页面传送数据
+    //     res.eventChannel.emit('acceptDataFromOpenerPage', { data: _this.data.dataInfo.showAuctionRecordList })
+    //   }
+    // })
+    wx.navigateTo({  
+      url: `../auctionRecord/auctionRecord?id=${e.currentTarget.dataset.id}`
+    })
+  },
 
   getInfo(){
     var _this = this;
-    var id = 318834;
     wx.showLoading({ title: '加载中...'})
-    var q = Dec.Aese('mod=auction&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + id + '&share_uid='+_this.data.share_uid)
-    console.log('拍卖详情请求数据===','mod=auction&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + id + '&share_uid='+_this.data.share_uid)
+    var q = Dec.Aese('mod=auction&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid='+_this.data.share_uid)
+    console.log('拍卖详情请求数据===','mod=auction&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid='+_this.data.share_uid)
     wx.request({
       url: app.signindata.comurl + 'spread.php'+q,
       method: 'GET',
@@ -251,8 +277,26 @@ Page({
 
   //支付保证金
   depositPay(){
-
+    var _this = this;
+    wx.showLoading({ title: '加载中...'})
+    var q = Dec.Aese('mod=auction&operation=deposit&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id)
+    console.log('保证金下单请求数据===','mod=auction&operation=deposit&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id)
+    wx.request({
+      url: app.signindata.comurl + 'spread.php'+q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('保证金下单数据======',res)
+        wx.hideLoading();
+        if (res.data.ReturnCode == 200) {
+          
+        } else {
+          app.showToastC(res.data.msg);
+        }
+      }
+    });
   },
+
   // 微信支付
   paymentmony: function () {
     var _this = this;
@@ -329,7 +373,12 @@ Page({
   // 出价竞拍
   bidBtnFun(){
     var _this = this;
-    var id = 318834;
+    if(_this.data.dataInfo.cashPledge && _this.data.dataInfo.suplusChance == 0 ){
+      _this.setData({
+        inviteFriendsPopMask:true
+      })
+      return false;
+    }
     if( (_this.data.currentBidPrice%_this.data.bidRange) != 0 || _this.data.currentBidPrice <= _this.data.lastBidPrice){
       wx.showToast({
         title: `出价金额需高于当前出价且为 ${_this.data.bidRange} 的倍数`,
@@ -339,8 +388,8 @@ Page({
       return false;
     }
     wx.showLoading({ title: '加载中...'})
-    var q = Dec.Aese('mod=auction&operation=offer&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + id + '&lastOffer='+ _this.data.lastBidPrice + '&offerPrice='+_this.data.currentBidPrice)
-    console.log('mod=auction&operation=offer&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + id + '&lastOffer='+ _this.data.lastBidPrice + '&offerPrice='+_this.data.currentBidPrice)
+    var q = Dec.Aese('mod=auction&operation=offer&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&lastOffer='+ _this.data.lastBidPrice + '&offerPrice='+_this.data.currentBidPrice)
+    console.log('mod=auction&operation=offer&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&lastOffer='+ _this.data.lastBidPrice + '&offerPrice='+_this.data.currentBidPrice)
     wx.request({
       url: app.signindata.comurl + 'spread.php'+q,
       method: 'GET',
@@ -390,6 +439,59 @@ Page({
         })
       };
     };
+  },
+  // 时间格式化输出，将时间戳转为 倒计时时间
+  dateformat: function (micro_second) {
+    var _this = this
+    var timestamp = Date.parse(new Date())
+    //总的秒数 
+    var second = micro_second - (timestamp / 1000);
+    if (second > 0) {
+      // 天位    
+      var day = Math.floor(second / 3600 / 24);
+      var dayStr = day.toString();
+      if (dayStr.length == 1) dayStr = '0' + dayStr;
+
+      // 小时位 
+      var hr = Math.floor(second / 3600 % 24);
+      // var hr = Math.floor(second / 3600); //直接转为小时 没有天 超过1天为24小时以上
+      var hrStr = hr.toString();
+      if (hrStr.length == 1) hrStr = '0' + hrStr;
+
+      // 分钟位  
+      var min = Math.floor(second / 60 % 60);
+      var minStr = min.toString();
+      if (minStr.length == 1) minStr = '0' + minStr;
+
+      // 秒位  
+      var sec = Math.floor(second % 60);
+      var secStr = sec.toString();
+      if (secStr.length == 1) secStr = '0' + secStr;
+      if (day == 0) {
+        //   return hrStr + ":" + minStr + ":" + secStr;
+        _this.setData({
+          dayStr: 0,
+          hrStr: hrStr,
+          minStr: minStr,
+          secStr: secStr,
+        })
+      } else {
+        _this.setData({
+          dayStr: dayStr,
+          hrStr: hrStr,
+          minStr: minStr,
+          secStr: secStr,
+        })
+        //   return dayStr + "天" + hrStr + ":" + minStr + ":" + secStr;
+      }
+    } else {
+      _this.setData({
+        dayStr: 0,
+        hrStr: "00",
+        minStr: "00",
+        secStr: "00",
+      })
+    }
   },
 
 })

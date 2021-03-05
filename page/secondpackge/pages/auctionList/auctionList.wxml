@@ -10,7 +10,7 @@
   </view>
   <view class="contentWrap"> 
     <block wx:for="{{dataList}}" wx:key='key' data-index="{{index}}">
-      <view class="card" data-id="{{item.id}}">
+      <view class="card" data-id="{{item.id}}" catchtap="jumpAuctionDetails">
         <view class="cardLeft">
           <image src="{{item.cover}}" mode="widthFix"></image>
         </view>

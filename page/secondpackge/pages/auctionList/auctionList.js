@@ -210,7 +210,7 @@ Page({
     if(this.data.loadprompt == false){
       this.setData({page:++this.data.page})
     }
-    this._gitList();
+    this.getInfo();
   },
   /**
    * 用户点击右上角分享
@@ -230,10 +230,64 @@ Page({
     }
   },
 
-  jumpsmokeboxlistPage(){
+  jumpAuctionDetails(e){
     wx.navigateTo({  
-      url: "/pages/smokeboxlist/smokeboxlist"
+      url: `../auctionDetails/auctionDetails?id=${e.currentTarget.dataset.id}`
     })
+  },
+
+  // 时间格式化输出，将时间戳转为 倒计时时间
+  dateformat: function (micro_second) {
+    var _this = this
+    var timestamp = Date.parse(new Date())
+    //总的秒数 
+    var second = micro_second - (timestamp / 1000);
+    if (second > 0) {
+      // 天位    
+      var day = Math.floor(second / 3600 / 24);
+      var dayStr = day.toString();
+      if (dayStr.length == 1) dayStr = '0' + dayStr;
+
+      // 小时位 
+      var hr = Math.floor(second / 3600 % 24);
+      // var hr = Math.floor(second / 3600); //直接转为小时 没有天 超过1天为24小时以上
+      var hrStr = hr.toString();
+      if (hrStr.length == 1) hrStr = '0' + hrStr;
+
+      // 分钟位  
+      var min = Math.floor(second / 60 % 60);
+      var minStr = min.toString();
+      if (minStr.length == 1) minStr = '0' + minStr;
+
+      // 秒位  
+      var sec = Math.floor(second % 60);
+      var secStr = sec.toString();
+      if (secStr.length == 1) secStr = '0' + secStr;
+      if (day == 0) {
+        //   return hrStr + ":" + minStr + ":" + secStr;
+        _this.setData({
+          dayStr: 0,
+          hrStr: hrStr,
+          minStr: minStr,
+          secStr: secStr,
+        })
+      } else {
+        _this.setData({
+          dayStr: dayStr,
+          hrStr: hrStr,
+          minStr: minStr,
+          secStr: secStr,
+        })
+        //   return dayStr + "天" + hrStr + ":" + minStr + ":" + secStr;
+      }
+    } else {
+      _this.setData({
+        dayStr: 0,
+        hrStr: "00",
+        minStr: "00",
+        secStr: "00",
+      })
+    }
   },
 
 })

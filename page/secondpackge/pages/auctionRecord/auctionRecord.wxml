@@ -3,40 +3,28 @@
 
 
 <view class="wrap">
-  <view class="auctionBidUserItem pinkBG">
-    <view class="auctionBidUserItemLeft">
-      <view style="display: flex;">
-        <image src="https://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eojibhxVrOhDfJWbANZlQr3MI5RUMibcl3mnibnTHhpLkVcQt8NoicqlAQACmrd6V7yapm3cx2umucB9w/132" mode="widthFix"></image>
-        <view class="auctionBidUserItemName">
-          <view>
-            <text class="bidUserName">哩哩啦</text>
-            <text class="bidTime">01-12 12:52:12</text>
+
+  <block wx:for="{{dataList}}" wx:key='key' data-index="{{index}}">
+    <!-- 出价人卡片 -->
+    <view class="auctionBidUserItem {{item.isLead?'pinkBG':''}}">
+      <view class="auctionBidUserItemLeft">
+        <view style="display: flex;">
+          <image src="{{item.litpic}}" mode="widthFix"></image>
+          <view class="auctionBidUserItemName">
+            <view>
+              <text class="bidUserName">{{item.nick}}</text>
+              <text class="bidTime">{{item.insert_time}}</text>
+            </view>
           </view>
         </view>
       </view>
-    </view>
-    <view class="auctionBidUserItemRight">
-      <view>￥120</view>
-      <view>领先</view>
-    </view>
-  </view>
-  <view class="auctionBidUserItem">
-    <view class="auctionBidUserItemLeft">
-      <view style="display: flex;">
-        <image src="https://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83eojibhxVrOhDfJWbANZlQr3MI5RUMibcl3mnibnTHhpLkVcQt8NoicqlAQACmrd6V7yapm3cx2umucB9w/132" mode="widthFix"></image>
-        <view class="auctionBidUserItemName">
-          <view>
-            <text class="bidUserName">哩哩啦</text>
-            <text class="bidTime">01-12 12:52:12</text>
-          </view>
-        </view>
+      <view class="auctionBidUserItemRight">
+        <view>{{item.isLead?'领先':'出局'}}</view>
+        <view>￥{{item.offer_price}}</view>
       </view>
     </view>
-    <view class="auctionBidUserItemRight">
-      <view>￥120</view>
-      <view>领先</view>
-    </view>
-  </view>
+  </block>
+
 </view>
 
 
