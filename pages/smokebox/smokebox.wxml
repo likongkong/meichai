@@ -196,7 +196,7 @@
 
 		</view>
 
-		<view wx:if='{{activity.status == 2}}' style='width:100%;height:80rpx;position:relative;margin-top:30rpx;'>
+		<view wx:elif='{{activity.status == 2}}' style='width:100%;height:80rpx;position:relative;margin-top:30rpx;'>
 
 			<view style="width:50%;height:80rpx;position:relative;float:left;">
 				<view wx:if='{{idlist.length>0}}' class='queuebtnstyle2' style="background:white;float:left;" catchtap='chancebox'>换一盒</view>
@@ -265,7 +265,19 @@
 			</view>
 
 		</view>
+		<view wx:elif='{{activity.status == 3}}' style="width:100%;color:#4c9a23;text-align:center;font-size:30rpx;">
+			<view style="width:50%;height:80rpx;position:relative;margin:0 auto;">
+			  <block wx:if='{{activity.supplyStockTip}}'>
+					  <view class='queuebtnstyle2' catchtap="blindBoxsubscrfun" style="background:#eeae19;color:white;float:left;line-height:80rpx;height:80rpx;">补货提醒</view>				
+				</block>
+			  <block wx:else>
+				    <view class='queuebtnstyle2' style="background:#ccc;color:white;float:left;line-height:80rpx;height:80rpx;">已结束</view>	
+				</block>
 
+
+			</view>
+
+		</view>
 		<!-- <view style='width:100%;margin-top:40rpx;font-size:25rpx;'>本盒免费重抽次数：{{rollchance!=null?rollchance : 0}} （分享1位新朋友围观=重抽次数+1）</view> -->
 
 		<!-- <view style='width:100%;position:relative;'>
