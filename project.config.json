@@ -25,7 +25,7 @@
 		},
 		"bundle": false,
 		"useIsolateContext": true,
-		"useCompilerModule": false,
+		"useCompilerModule": true,
 		"userConfirmedUseCompilerModuleSwitch": false,
 		"useMultiFrameRuntime": false,
 		"useApiHook": true,
@@ -42,6 +42,14 @@
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
 		"plugin": {
 			"list": []
 		},
@@ -82,10 +90,10 @@
 					"scene": null
 				},
 				{
-					"id": 5,
+					"id": 4,
 					"name": "商品详情",
 					"pathName": "pages/detailspage/detailspage",
-					"query": "gid=34183",
+					"query": "gid=36999",
 					"scene": null
 				},
 				{
@@ -93,54 +101,6 @@
 					"name": "手机壳",
 					"pathName": "page/secondpackge/pages/mobileShellDetail/mobileShellDetail",
 					"query": "",
-					"scene": null
-				},
-				{
-					"name": "拍卖列表",
-					"pathName": "page/secondpackge/pages/auctionList/auctionList",
-					"query": "",
-					"scene": null
-				},
-				{
-					"name": "我的拍卖列表",
-					"pathName": "page/secondpackge/pages/myAuctionList/myAuctionList",
-					"query": "",
-					"scene": null
-				},
-				{
-					"name": "拍卖详情",
-					"pathName": "page/secondpackge/pages/auctionDetails/auctionDetails",
-					"query": "",
-					"scene": null
-				},
-				{
-					"name": "page/secondpackge/pages/mobileShellList/mobileShellList",
-					"pathName": "page/secondpackge/pages/mobileShellList/mobileShellList",
-					"query": "",
-					"scene": null
-				},
-				{
-					"name": "出价记录",
-					"pathName": "page/secondpackge/pages/auctionRecord/auctionRecord",
-					"query": "",
-					"scene": null
-				},
-				{
-					"name": "page/secondpackge/pages/mobileShellList/mobileShellList",
-					"pathName": "page/secondpackge/pages/mobileShellList/mobileShellList",
-					"query": "",
-					"scene": null
-				},
-				{
-					"name": "pages/detailspage/detailspage",
-					"pathName": "pages/detailspage/detailspage",
-					"query": "gid=36923",
-					"scene": null
-				},
-				{
-					"name": "pages/dismantlingbox/dismantlingbox",
-					"pathName": "pages/dismantlingbox/dismantlingbox",
-					"query": "gid=36923",
 					"scene": null
 				}
 			]

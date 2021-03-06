@@ -793,6 +793,12 @@
 
 <block wx:elif='{{is_exhibition==1||zunmdata.status==1}}'>
 	<view style='width:100%;height:79rpx;position:fixed;left:0;bottom:{{isIphoneX?"130rpx":"110rpx"}};z-index:5;padding-top:6rpx;'>
+
+    <view class="detailbottomtip" wx:if='{{zunmdata.isSuplusChance}}'>
+        <view class="detailbottomtipbg"></view>
+        <view class="detailbottomtiptxt">还有机会,有买家拍下还未付款,2分钟内将解除订单</view>
+    </view>
+
 		<view style='height:69rpx;width:152rpx;float:left;position:relative;'>
       <view style='width:60rpx;height:60rpx;border-radius: 50%;margin:9rpx auto 0;background:#fff;position:relative;box-shadow:2px 2px 5rpx #ccc;'>
       <image src='https://clw.51chaidan.com//images/goods/share3.png?' style='width:36rpx;height:36rpx;display:block;position:absolute;left:0;right:0;bottom:0;top:0;margin:auto;'></image>
