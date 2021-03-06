@@ -122,7 +122,7 @@ App({
     downRefreshNum:0,  
     beforeTime:  0,
     nowTime:  0,
-    isLimitDownRefresh: false,
+    isLimitDownRefresh: true,
     // 是否已领取过现实抽盒金(关注公众号小号赠送)  默认已领取
     gotTBBMBS8:true,
     // 是否已领取过现实抽盒金(关注公众号大号赠送)  默认已领取
