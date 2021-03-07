@@ -99,7 +99,7 @@ Page({
     wx.showLoading({
       title: '开启中...',
       mask:true
-    })
+    }) 
     
     var q = Dec.Aese('mod=blindBox&operation=receiveWelfare&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&welfareId=' + welfareId)
     wx.request({
@@ -114,16 +114,16 @@ Page({
           _this.redpagInfo(welfareId)
         } else {
           app.showToastC(res.data.Msg);
-          console.log()
-          if(_this.data.welfare[0].welfareType == 2){
-            _this.setData({
-              ishowredpackage: false,
-            })
-          }else if(_this.data.welfare[0].welfareType == 3){
-            _this.setData({
-              isBlindboxPacketOne: false,
-            })
-          }
+          // console.log()
+          // if(_this.data.welfare[0].welfareType == 2){
+          //   _this.setData({
+          //     ishowredpackage: false,
+          //   })
+          // }else if(_this.data.welfare[0].welfareType == 3){
+          //   _this.setData({
+          //     isBlindboxPacketOne: false,
+          //   })
+          // }
         }
       }
     });

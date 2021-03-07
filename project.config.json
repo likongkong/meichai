@@ -23,10 +23,10 @@
 			"disablePlugins": [],
 			"outputPath": ""
 		},
-		"bundle": false,
 		"useIsolateContext": true,
-		"useCompilerModule": true,
+		"useCompilerModule": false,
 		"userConfirmedUseCompilerModuleSwitch": false,
+		"bundle": false,
 		"useMultiFrameRuntime": false,
 		"useApiHook": true,
 		"userConfirmedBundleSwitch": false,
