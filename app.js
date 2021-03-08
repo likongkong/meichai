@@ -126,8 +126,12 @@ App({
     // 是否已领取过现实抽盒金(关注公众号小号赠送)  默认已领取
     gotTBBMBS8:true,
     // 是否已领取过现实抽盒金(关注公众号大号赠送)  默认已领取
-    gotTBBMBS9:true
+    gotTBBMBS9:true,
     // *** end ***
+    // 频繁进入页面处理
+    enterPageNum:0,
+    beforePage:'',
+    firstTime:0
   },
   //一番赏队列倒计时
   // yifanshangIsInQueueFun(time){
@@ -195,15 +199,15 @@ App({
                     }else if(num>=10){
                       num = '0'+num.toString()
                     };       
-                    // 接口地址  
-                    _this.signindata.comurl = 'https://api-slb.51chaidan.com/'+num+'/';
-                    // 发现地址
-                    _this.signindata.clwcomurl = 'https://clw-slb.51chaidan.com/'+num+'/';
-
-                    // // 接口地址  208
-                    // _this.signindata.comurl = 'https://api.51chaidan.com/';
+                    // // 接口地址  
+                    // _this.signindata.comurl = 'https://api-slb.51chaidan.com/'+num+'/';
                     // // 发现地址
-                    // _this.signindata.clwcomurl = 'https://clw.51chaidan.com/';
+                    // _this.signindata.clwcomurl = 'https://clw-slb.51chaidan.com/'+num+'/';
+
+                    // 接口地址  208
+                    _this.signindata.comurl = 'https://api.51chaidan.com/';
+                    // 发现地址
+                    _this.signindata.clwcomurl = 'https://clw.51chaidan.com/';
                   }else{
                     // 接口地址  
                     _this.signindata.comurl = 'http://api-test.51chaidan.com/';
@@ -1237,7 +1241,52 @@ App({
     this.signindata.downRefreshNum = 0;
     this.signindata.nowTime = 0;
     this.signindata.beforeTime=0;
-  }
+  },
+
+  
+
+  
+  //避免多次下拉刷新
+  enterPageNumFun(callback){
+    const pages = getCurrentPages();
+    const currentPage = pages[pages.length - 1];
+    const url = `/${currentPage.route}`;
+    console.log(url,this.signindata.beforePage)
+    // if(this.signindata.isLimitDownRefresh){
+      if(!this.signindata.beforePage || url == this.signindata.beforePage){
+        this.signindata.enterPageNum = this.signindata.enterPageNum + 1;
+        console.log('进入当前页面次数==',this.signindata.enterPageNum)
+        if(this.signindata.enterPageNum == 1){
+          this.signindata.firstTime = Date.parse(new Date())/1000;
+          callback();
+        }
+        if(this.signindata.enterPageNum > 5 ){
+          var nowTime = Date.parse(new Date())/1000;
+          console.log('相差值',nowTime - this.signindata.firstTime)
+          if((nowTime - this.signindata.firstTime) <= 10 ){
+            wx.showToast({title: '操作过于频繁',icon: 'none',duration: 1000})
+          }else{
+            this.signindata.enterPageNum = 0;
+            callback();
+          }
+        }else{
+          callback();
+        }
+      }else{
+        this.signindata.beforePage = '';
+        this.signindata.enterPageNum = 0;
+        callback();
+      }
+    // }
+  },
+  // 获取当前页面路径
+  currentPageFun(){
+    const pages = getCurrentPages();
+    const currentPage = pages[pages.length - 1];
+    const url = `/${currentPage.route}`;
+    this.signindata.beforePage  = url;
+  },
+
 })
 
 

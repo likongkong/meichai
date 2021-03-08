@@ -22,6 +22,7 @@
       </view>
       <view class="auctionStatusWrapRight">
         <view class="auctionTimeWrap">
+          <text class="num">{{hrStr}}</text>时<text class="num">{{minStr}}</text>分<text class="num">{{secStr}}</text>秒
 
           <!-- status == 1为拍卖未开始 -->
           <block wx:if="{{dataInfo.status == 1}}">
@@ -42,7 +43,7 @@
             </block>
             <!-- （status == 2 && dataInfo.showTime != 0）为有用户出价 -->
             <block wx:else>
-              <!-- status == 2且未中奖 活动类型未1的话为限时拍卖  -->
+              <!-- status == 2 且 活动类型未1的话为限时拍卖  -->
               <block wx:if="{{dataInfo.auction_type == 1}}">
                 <view>
                   <text class="auctionTimeTxt">距 拍 卖 结 束</text>
@@ -51,7 +52,7 @@
                   </view>
                 </view>
               </block>
-              <!-- status == 2且未中奖 活动类型未2的话为限次拍卖  -->
+              <!-- status == 2 且 活动类型未2的话为限次拍卖  -->
               <block wx:elif="{{dataInfo.auction_type == 2}}">
                 <view>
                   <view class="auctionTimeNum">
@@ -79,6 +80,7 @@
               </view>
             </block>
           </block>
+
         </view>
         <view class="auctionShare" style="position:relative;">
 			  	<button style='width:55rpx;height:55rpx;position:absolute;top:0;right:0;opacity:0;' open-type='share'></button>
@@ -251,6 +253,67 @@
     <image class="auctionResultGoodsTu" src="https://cdn.51chaidan.com/images/toyShow3/brandGoodsRotation/20210109/20a758966d18f609bf1154f869a20168.png" mode="widthFix"></image>
     <text class="auctionResultGoodsName">mooroo展会限定-鱼骨</text>
     <text class="auctionResultBtn">查看更多拍卖商品</text>
+  </view>
+</view>
+<!-- 拍卖失败 -->
+<view class="auctionFailPopMask mask" catchtouchmove="true" wx:if="{{auctionFailPopMask}}" catchtap="hideMask">
+  <view class="auctionFailPop" catchtap="true">
+    <view class="auctionFailTitle">很遗憾，您未拍到该商品</view>
+    <view class="auctionFailTitleTxt">为您推荐</view>
+    <view class="auctionRecommendWrap">
+      <!-- 推荐拍卖商品card -->
+      <!-- <block wx:for="{{dataList}}" wx:key='key' data-index="{{index}}">
+        <view class="card" data-id="{{item.id}}" catchtap="jumpAuctionDetails">
+          <view class="cardLeft">
+            <image src="{{item.cover}}" mode="widthFix"></image>
+          </view>
+          <view class="cardRight">
+            <text class="card_title">{{item.name}}</text>
+            <view class="card_label"> 
+              <block wx:if="{{item.activityType == 2}}">
+                <block wx:for="{{item.tags}}" wx:key='key' wx:for-item="i">
+                  <view class="lableItem red">{{i}}</view>
+                </block>
+              </block>
+              <block wx:else>
+                <block wx:for="{{item.tags}}" wx:key='key' wx:for-item="i">
+                  <view class="lableItem blue">{{i}}</view>
+                </block>
+              </block>
+            </view>
+            <view class="card_user">
+              <view class="card_user_left">
+                <block wx:if="{{item.activityType == 2}}">
+                  <image src="{{item.infoOffer.headphoto}}" mode="widthFix"></image>
+                  <text style="color:#A7A7A8;">{{item.infoOffer.nick}}</text>
+                </block>
+                <block wx:else>
+                  <text style="color:#FF2742;margin-left:0;">当前￥{{item.currentPrice}}</text>
+                </block>
+              </view>
+              <view class="card_user_right">
+                <block wx:if="{{item.activityType == 2}}">
+                  <text style="color:#FF2742;">出价￥{{item.currentPrice}}</text>
+                </block>
+                <block wx:else>
+                  <text style="color:#A7A7A8;">{{item.totalAuctionTimes}}次出价</text>
+                </block>
+              </view>
+            </view>
+            <view class="card_sponsor">
+              <view class="card_sponsor_left">
+                <image src="{{item.infoBrand.brandLogo}}" mode="widthFix"></image>
+                <text>{{item.infoBrand.brandName}}</text>
+              </view>
+              <view class="card_sponsor_right">
+                剩5分23秒
+              </view>
+            </view>
+          </view>
+        </view>
+      </block> -->
+    </view>
+    <view class="auctionFailBtn">查看更多拍卖商品</view>
   </view>
 </view>
 <!-- 竞拍须知 -->

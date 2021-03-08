@@ -454,6 +454,7 @@ Page({
       })
     }
 
+
     // 推送统计
     _this.data.push_id = options.push_id || 0;
     _this.data.loginid = app.signindata.loginid;
@@ -576,7 +577,10 @@ Page({
     if (_this.data.isredpag == 1) {
       this.shareopen(_this.data.welfareid)
     }
-    this.getInfo()
+
+    app.enterPageNumFun(() => {
+      this.getInfo()
+    })
 
     setTimeout(function () {
       _this.getdefault();
@@ -1277,6 +1281,7 @@ Page({
     clearInterval(_this.data.tempChanceCountdowntime);
      // 调用重置刷新
      app.resetdownRefresh();
+     app.currentPageFun();
   },
 
   /**
@@ -1290,6 +1295,7 @@ Page({
     clearInterval(_this.data.tempChanceCountdowntime);
      // 调用重置刷新
      app.resetdownRefresh();
+     app.currentPageFun();
   },
 
   /**
