@@ -18,7 +18,7 @@ Page({
     uid: app.signindata.uid,
     openid: app.signindata.openid,
 
-    c_title: 'MCTS x JSS潮玩展', // -正品折扣多一点
+    c_title: '', // -正品折扣多一点
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
