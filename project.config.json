@@ -18,30 +18,37 @@
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
+    "useMultiFrameRuntime": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
     },
+    "bundle": false,
     "useIsolateContext": true,
     "useCompilerModule": false,
     "userConfirmedUseCompilerModuleSwitch": false,
-    "bundle": false,
-    "useMultiFrameRuntime": false,
-    "useApiHook": true,
     "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "minifyWXSS": true
+    "minifyWXSS": true,
+    "useApiHook": true,
+    "useApiHostProcess": true
   },
   "compileType": "miniprogram",
-  "libVersion": "2.14.0",
+  "libVersion": "2.15.0",
   "appid": "wxb41da0ebe032a6f5",
   "projectname": "meichai",
   "isGameTourist": false,
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "condition": {
+    "search": {
+      "list": []
+    },
+    "conversation": {
+      "list": []
+    },
     "plugin": {
       "list": []
     },
@@ -93,17 +100,6 @@
           "name": "手机壳",
           "pathName": "page/secondpackge/pages/mobileShellDetail/mobileShellDetail",
           "query": "",
-          "scene": null
-        },
-        {
-          "name": "拍卖列表",
-          "pathName": "page/secondpackge/pages/auctionList/auctionList",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "拍卖详情",
-          "pathName": "page/secondpackge/pages/auctionDetails/auctionDetails",
           "scene": null
         }
       ]

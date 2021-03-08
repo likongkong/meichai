@@ -115,7 +115,7 @@ App({
     notAllowShareGoodsId:'',
     // 是否是管理员  有权限进入 发放门票商品的页面
     isManager:false,
-    randommaximum:3,
+    randommaximum:2,
     // 公共分享标题
     titleShare:'',
     // 下拉刷新处理  *** start ***
@@ -156,6 +156,9 @@ App({
     var _this = this;
     wx.login({
       success: function (res) {
+ 
+        console.log('wx.login=====',res)
+
         var code = res.code;
         wx.getUserInfo({
           success: function (res) {
@@ -1222,7 +1225,7 @@ App({
         this.signindata.nowTime = Date.parse(new Date())/1000;
         console.log('距上次刷新时间===',this.signindata.nowTime - this.signindata.beforeTime)
         if((this.signindata.nowTime - this.signindata.beforeTime) <= 3){
-          wx.showToast({title: '操作过于频繁',icon: 'none',duration: 1000})
+          wx.showToast({title: '操作过于频繁',icon: 'none',duration: 1000});
           wx.stopPullDownRefresh()
         }else{
           callback();

@@ -91,7 +91,7 @@
         <view style='width:100%;overflow: hidden;'>
             <view style='width:25%;height:303rpx;float:left;' wx:for='{{brandlist}}' wx:key='key' catchtap='jumpshopbut' data-name='{{item.role_name}}' data-minprice='{{item.minPrice}}' data-maxprice='{{item.maxPrice}}' data-goods_id='{{item.goods_id}}'>
                 <view style='width:100%;height:220rpx;position:relative;'>
-                    <image class='eveimgrange'  style='height:200rpx;width:96%;' mode='aspectFit' src='{{item.img}}?{{timeOfDay}}'></image>
+                    <image class='eveimgrange' style='height:200rpx;width:96%;' mode='aspectFit' src='{{item.img}}?{{timeOfDay}}'></image>
                 </view>
                 <view class='specialellipsis' style='width:170rpx;height:40rpx;text-align:center;font-size:24rpx;color:#000;margin:0 auto;'>{{item.role_name}}</view>
                 <block wx:if='{{item.minPrice==0&&item.maxPrice==0}}'>

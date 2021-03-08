@@ -283,14 +283,14 @@
 <tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
 
 <!-- 双十一 入口 -->
-<view wx:if='{{automat.isOpen}}' catchtap='doubleEleven' style='width:95rpx;position:fixed;right:10rpx;top:{{statusBarHeightMc + 10}}px;z-index:9;'>
+<!-- <view wx:if='{{automat.isOpen}}' catchtap='doubleEleven' style='width:95rpx;position:fixed;right:10rpx;top:{{statusBarHeightMc + 10}}px;z-index:9;'>
 	<image src='https://www.51chaidan.com/images/turntable/turntable_colour.png' style='width:75rpx;height:75rpx;display:block;margin-left:10rpx;'></image>
 	<view wx:if='{{automatTimes>0}}' class='tabshopimg specialellipsis' style='top:-10rpx;;left:50rpx;'>{{automatTimes}}</view>
 	<view style="width:95rpx;height:30rpx;position:relative;font-size:22rpx;">
 		<view style="width:95rpx;height:30rpx;background:#000;position:absolute;top:0;left:0;opacity:0.2;border-radius:5rpx;"></view>
 		<view style="width:95rpx;height:30rpx;position:absolute;top:0;left:0;color:#e94f57;text-align:center;font-weight:bold;">{{automattitle}}</view>
 	</view>
-</view>
+</view> -->
 
 <!-- 透视卡 小悬浮 -->
 <view wx:elif='{{perspcardiftrmin}}' style='width:110rpx;height:170rpx;position:fixed;right:20rpx;bottom:260rpx;z-index:9;'>
