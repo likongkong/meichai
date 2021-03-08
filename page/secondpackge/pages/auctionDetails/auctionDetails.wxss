@@ -639,3 +639,120 @@ page{
   box-sizing: border-box;
   line-height: 46rpx;
 }
+
+
+.auctionFailPop{
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  border-top-right-radius: 60rpx;
+  border-top-left-radius: 60rpx;
+  background: #ffffff;
+  padding: 50rpx 30rpx;
+  box-sizing: border-box;
+}
+.auctionFailTitle{
+  font-size: 38rpx;
+  color: #8A8A8A;
+  padding: 0 10rpx;
+  box-sizing: border-box;
+}
+.auctionFailTitleTxt{
+  font-size: 24rpx;
+  color: #101010;
+  padding: 0 10rpx;
+  box-sizing: border-box;
+  margin: 20rpx 0 30rpx 0;
+}
+.auctionFailBtn{
+  width: 650rpx;
+  height: 85rpx;
+  text-align: center;
+  line-height: 85rpx;
+  font-size: 28rpx;
+  color: #fff;
+  background: #E95159;
+  border-radius: 85rpx;
+  margin: 0 auto;
+}
+.card{
+  width: 100%;
+  padding: 35rpx 30rpx;
+  box-sizing: border-box;
+  background:#fff;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20rpx;
+}
+.cardLeft{
+  width: 240rpx;
+}
+.cardLeft image{
+  width: 240rpx;
+  height: auto;
+  border-radius: 10rpx;
+  display: block;
+}
+.cardRight{
+  width: 450rpx;
+  padding: 0 10rpx 0 30rpx;
+  box-sizing: border-box;
+}
+.card_title{
+  display: block;
+  height: 68rpx;
+  color:#101010;
+  font-size: 26rpx;
+}
+.card_label{
+  margin-top: 6rpx;
+}
+.lableItem{
+  height: 28rpx;
+  line-height: 28rpx;
+  display: inline-block;
+  padding: 6rpx 10rpx;
+  font-size: 28rpx;
+  color:#ffffff;
+  background:#FC585F;
+  border-radius: 10rpx;
+  margin-right: 10rpx;
+}
+.red{
+  background:#FC585F;
+}
+.blue{
+  background:#298DF8;
+}
+.card_user,.card_sponsor{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 14rpx;
+}
+.card_user_left,.card_user_right,.card_sponsor_left,.card_sponsor_right{
+  display: flex;
+  align-items: center;
+}
+.card_user_left image,.card_sponsor_left image{
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  display: block;
+}
+.card_user_left text{
+  font-size: 26rpx;
+  margin-left: 10rpx;
+}
+.card_user_right text{ 
+  font-size: 26rpx;
+}
+.card_sponsor_left text{
+  font-size: 26rpx;
+  color:#A7A7A8;
+  margin-left: 10rpx;
+}
+.card_sponsor_right{
+  font-size: 26rpx;
+  color:#A7A7A8;
+}

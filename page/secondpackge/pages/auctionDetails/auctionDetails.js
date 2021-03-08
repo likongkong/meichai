@@ -27,6 +27,8 @@ Page({
     inviteFriendsPopMask:false,
     auctionResultPopMask:false,
     noticePopMask:false,
+    auctionFailPopMask:false,
+    timer:''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -40,7 +42,12 @@ Page({
     }); 
     // 判断是否授权
     this.activsign();
-    this.getInfo();
+    // this.getInfo();
+    _this.data.timer = setInterval(function () {
+      //将时间传如 调用 
+      _this.dateformat(1615195204);
+    }.bind(_this), 1000);
+
   },
   onLoadfun:function(){
     this.setData({
