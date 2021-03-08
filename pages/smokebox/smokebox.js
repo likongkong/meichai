@@ -1264,7 +1264,7 @@ Page({
       console.log('onshow=================111111')
       _this.getInfo();
     };
-    Dec.getdoubleEleven(this, app);
+    // Dec.getdoubleEleven(this, app);
   },
   /**
    * 生命周期函数--监听页面隐藏

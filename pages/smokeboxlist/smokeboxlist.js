@@ -724,7 +724,7 @@ Page({
         perspcardiftrmin: false
       });
     };
-    Dec.getdoubleEleven(this, app);
+    // Dec.getdoubleEleven(this, app);
 
     if (_this.data.loginid != '' && _this.data.uid != '' && !_this.data.isBlindBoxDefaultAddress) {
       _this.setData({

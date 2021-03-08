@@ -229,6 +229,7 @@ Page({
               if(tabselid==''){
                 tabselid = listdata[0].id
               }
+              _this.brandscrollfun(tabselid);
              _this.setData({
                brandscroll: listdata,
                tabselid: tabselid
@@ -249,7 +250,7 @@ Page({
                   });
                };
              });
-             _this.brandscrollfun(tabselid);
+             
           } else {
             app.showToastC('暂无更多数据');
           };
