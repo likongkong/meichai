@@ -188,7 +188,7 @@ Page({
         if (10 > tipsellist[i].shop_price || tipsellist[i].shop_price==''){
           iftrtipx = true;
         };
-        if (tipsellist[i].shop_price > 999){
+        if (tipsellist[i].shop_price > 9999){
           iftrtipd = true;
         };
       };
@@ -197,7 +197,7 @@ Page({
         return false;
       };
       if (iftrtipd){
-        app.showToastC('单个商品价格不能大于999');
+        app.showToastC('单个商品价格不能大于9999');
         return false;        
       }
     };
@@ -206,8 +206,8 @@ Page({
       app.showToastC('组合价格不能为空');
       return false;
     };
-    if (this.data.combinationprice > 999) {
-      app.showToastC('组合价格不能大于999');
+    if (this.data.combinationprice > 9999) {
+      app.showToastC('组合价格不能大于9999');
       return false;
     };
     if (this.data.combinationprice<10){
@@ -656,8 +656,8 @@ Page({
               return false;
             };
           }else{
-            if (parseFloat(_this.data.inputdataprice) > 999) {
-              app.showToastC('价格修改不能大于999');
+            if (parseFloat(_this.data.inputdataprice) > 9999) {
+              app.showToastC('价格修改不能大于9999');
               return false;
             };
           }
