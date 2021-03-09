@@ -149,6 +149,9 @@
     </view>
   </view>
   <view class="footerWrap">
+
+    <!-- <view class="invitetip">每邀请3名好友围观拍卖获得1次出价机会（每人限3次）</view> -->
+
     <view class="footerLeft">
       <view class="notice" catchtap="noticePopShow">
         <image src="../../../../pages/images/explain.png" mode="widthFix"></image>
@@ -169,7 +172,14 @@
       <block wx:else>
         <!-- cashPledge为true不需要支付押金 -->
         <block wx:if="{{dataInfo.cashPledge}}">
-          <text class="joinAuction red" catchtap="bidBtnFun">出价竞拍({{dataInfo.suplusChance}})</text>
+          <!-- auction_type == 1为限时拍卖 -->
+          <block wx:if="{{dataInfo.auction_type == 1}}">
+            <text class="joinAuction red" catchtap="bidBtnFun">出价竞拍</text>
+          </block>
+          <!-- auction_type == 2为限次拍卖 -->
+          <block>
+            <text class="joinAuction red" catchtap="bidBtnFun">出价竞拍({{dataInfo.suplusChance}})</text>
+          </block>
         </block>
         <!-- cashPledge为false需要支付押金 -->
         <block wx:else>

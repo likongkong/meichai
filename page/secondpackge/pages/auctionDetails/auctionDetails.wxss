@@ -273,6 +273,18 @@ page{
   display: flex;
   align-items: center;
 }
+.invitetip{
+  width: 100%;
+  height: 50rpx;
+  background: #FFECBF;
+  color: #C9823B;
+  font-size: 24rpx;
+  text-align: center;
+  line-height: 50rpx;
+  position: absolute;
+  top: -50rpx;
+  left: 0;
+}
 .footerLeft{
   width: 190rpx;
   display: flex;
