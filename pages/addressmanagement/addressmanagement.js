@@ -203,6 +203,8 @@ Page({
           _this.setData({
             addmandata: rdl
           })
+
+          app.signindata.receivingAddress = rdl;
         };
         if (res.data.ReturnCode == 900) {
           app.showToastC('登陆状态有误');
@@ -236,6 +238,9 @@ Page({
             _this.setData({
               addmandata: rdl,
             })
+
+            app.signindata.receivingAddress = rdl;
+
           } else {
             _this.setData({
               addmandata: [],

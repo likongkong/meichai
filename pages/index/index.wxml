@@ -497,9 +497,10 @@
 				<view class='disanumofgoods_box' wx:if='{{item.List.length!=0}}'>
 					<view class='disanum_scr'>
 						<scroll-view scroll-x="true" class="disanum_tab_comtainer">
-							<view class='disanum_scr_box' wx:for='{{item.List}}' wx:key='key' wx:for-item='w' style='height:134rpx;width:{{w.width||160}}rpx;' wx:for-index='num'>
-								<view class='disanum_simgbox' catchtap='myordertoyind' data-gid='{{w.owner_id}}' style='height:100rpx;width:{{w.width||200}}rpx;'>
-									<image class='disanum_simg' src='{{w.cover}}' style='height:100rpx;width:{{w.width||200}}rpx;' bindload="imageLoadad" data-indexnum='3' data-num='{{num}}' data-ind='{{index}}'></image>
+							<view class='disanum_scr_box' wx:for='{{item.List}}' wx:key='key' wx:for-item='w' style='height:234rpx;width:auto;' wx:for-index='num'>
+								<view class='disanum_simgbox' catchtap='myordertoyind' data-gid='{{w.owner_id}}' style='height:200rpx;width:auto;'>
+									<image class='disanum_simg' src='{{w.cover}}'  mode='heightFix' style='height:200rpx;width:auto;position: relative;' ></image>
+									<!-- bindload="imageLoadad" data-indexnum='3' data-num='{{num}}' data-ind='{{index}}' {{w.width||200}}rpx -->
 								</view>
 								<view style='height:30rpx;padding-top:4rpx;text-align:center;font-size:24rpx;color:#ff2742;'>￥{{w.shop_price}}</view>
 							</view>

@@ -281,6 +281,7 @@ Page({
               tipnamephone: tipnamephone,
               tipaddress: tptipadd
             })
+            app.signindata.receivingAddress = rdl;
           } else {
             _this.setData({
               addressdata: [],
@@ -368,6 +369,7 @@ Page({
                 _this.setData({
                   addressdata: dat
                 });
+                app.signindata.receivingAddress = dat;
               };
               if (res.data.ReturnCode == 908) {
                 app.showToastC('aid和uid不匹配');

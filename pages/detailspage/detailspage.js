@@ -2064,6 +2064,7 @@ Page({
                 _this.setData({
                   addressdata: dat
                 });
+                app.signindata.receivingAddress = dat;
               };
               if (res.data.ReturnCode == 908) {
                 app.showToastC('aid和uid不匹配');
@@ -2665,8 +2666,33 @@ Page({
     Dec.dryingSum(_this, app.signindata.clwcomurl);
     // 购物车数据显示
     Dec.shopnum(_this,app.signindata.comurl);
+
+    if(app.signindata.receivingAddress && app.signindata.receivingAddress.length != 0){
+      var rdl = app.signindata.receivingAddress;
+      var tptipadi = '';
+      var tptipadd = '';
+      var tipnamephone = '';
+      for (var i = 0; i < rdl.length; i++) {
+        if (rdl[i].isdefault == 1) {
+          rdl[i].checked = false;
+          tptipadi = rdl[i].aid;
+          tptipadd = rdl[i].address;
+          tipnamephone = rdl[i].consignee + " " + rdl[i].phone;
+        } else {
+          rdl[i].checked = false;
+        }
+      };
+      _this.data.tipaid = tptipadi;
+      _this.setData({
+        addressdata: rdl,
+        tipnamephone: tipnamephone,
+        tipaddress: tptipadd
+      })
+      console.log('地址=======onloadfun====',_this.data.addressdata)
+  };
+
     //  收货地址
-    _this.nextpagediao();
+    // _this.nextpagediao();
 
 
     // 评论数据
@@ -3111,6 +3137,7 @@ Page({
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
+        console.log('收货地址======nextpagediao=======',res)
         if (res.data.ReturnCode == 200){
           var rdl = res.data.List;
           var tptipadi = '';
@@ -3133,6 +3160,9 @@ Page({
               tipnamephone: tipnamephone,
               tipaddress: tptipadd
             })
+
+            app.signindata.receivingAddress = rdl;
+
           } else {
             _this.setData({
               addressdata: [],
