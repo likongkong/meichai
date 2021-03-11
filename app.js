@@ -131,7 +131,9 @@ App({
     // 频繁进入页面处理
     enterPageNum:0,
     beforePage:'',
-    firstTime:0
+    firstTime:0,
+    // 收货地址
+    receivingAddress:[]
   },
   //一番赏队列倒计时
   // yifanshangIsInQueueFun(time){
@@ -201,16 +203,17 @@ App({
                         num = '00'+num
                     }else if(num>=10){
                       num = '0'+num.toString()
-                    };     
-                    // // 接口地址  
-                    // _this.signindata.comurl = 'https://api-slb.51chaidan.com/'+num+'/';
-                    // // 发现地址
-                    // _this.signindata.clwcomurl = 'https://clw-slb.51chaidan.com/'+num+'/';
-
-                    // 接口地址  208
-                    _this.signindata.comurl = 'https://api.51chaidan.com/';
+                    };    
+                    // 接口地址  
+                    _this.signindata.comurl = 'https://api-slb.51chaidan.com/'+num+'/';
                     // 发现地址
-                    _this.signindata.clwcomurl = 'https://clw.51chaidan.com/';
+                    _this.signindata.clwcomurl = 'https://clw-slb.51chaidan.com/'+num+'/';
+
+                    // // 接口地址  208
+                    // _this.signindata.comurl = 'https://api.51chaidan.com/';
+                    // // 发现地址
+                    // _this.signindata.clwcomurl = 'https://clw.51chaidan.com/';                 
+                    
                   }else{
                     // 接口地址  
                     _this.signindata.comurl = 'http://api-test.51chaidan.com/';
@@ -283,6 +286,10 @@ App({
                   var uid = res.data.Info.uid || '';
                   wx.setStorage({ key: 'signin', data: { openid: openid, loginid: loginid, uid: uid } });
                   callback.onLoadfun();
+
+                  // 调取收货地址
+                  _this.nextpagediao();
+
                   if (res.data.Info.user) {
                     var photoheadphoto = res.data.Info.user.headphoto || '';
                     var namenick = res.data.Info.user.nick || '';
@@ -743,10 +750,6 @@ App({
     } else if (item_type == 9022) { 
       wx.navigateTo({
         url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
-      });
-    } else if (item_type == 9023) { 
-      wx.navigateTo({
-        url: "/page/secondpackge/pages/entityLuckyDraw/entityLuckyDraw"
       });
     };
 
@@ -1293,6 +1296,30 @@ App({
     const url = `/${currentPage.route}`;
     this.signindata.beforePage  = url;
   },
+
+  // 下一页返回调取
+  nextpagediao: function () {
+    var _this = this;
+    //  调取收货地址
+    var q = Dec.Aese('mod=address&operation=getlist&uid=' + _this.signindata.uid + '&loginid=' + _this.signindata.loginid)
+    wx.request({
+      url: _this.signindata.comurl + 'user.php' + q,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        if (res.data.ReturnCode == 200) {
+          console.log('app===========地址',res)
+          var receivingAddress = res.data.List || [];
+          if (receivingAddress && receivingAddress.length != 0) {
+            _this.signindata.receivingAddress = receivingAddress;
+          } else {
+            _this.signindata.receivingAddress = [];
+          };
+        };
+      }
+    });
+  },
+
 
 })
 

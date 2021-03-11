@@ -348,11 +348,21 @@
 							<block wx:else>￥{{infoGoods.shopPrice}}</block>
 							<text style='font-size:22rpx;color:#fff;margin-left:15rpx;background:#1890ff;border-radius:7rpx;position:relative;top:-2rpx;padding:3rpx 6rpx;' wx:if='{{infoGoods.is_blind_box&&infoGoods.isRecycle&&infoGoods.recycleRatio}}'>{{infoGoods.recycleRatio}}折回收</text>
 						</view>
-						<view style='width:130rpx;height:46rpx;background:#ff2742;font-size:24rpx;color:#fff;text-align:center;line-height:46rpx;border-radius:10rpx;position:absolute;top:0;bottom:0;right:0;margin:auto 0;z-index:1;'>
-							<block wx:if='{{infoGoods.isShowBox}}'>原价拼明盒</block>
-							<block wx:elif='{{infoGoods.is_blind_box}}'>在线抽盒机</block>
-							<block wx:else>直接购买</block>
-						</view>
+
+						<block wx:if='{{promote_start_date}}'>
+								 <view style='width:130rpx;height:46rpx;background:#eeae19;font-size:24rpx;color:#fff;text-align:center;line-height:46rpx;border-radius:10rpx;position:absolute;top:0;bottom:0;right:10rpx;margin:auto 0;z-index:1;'>{{subscribeOrNot?"订阅成功":"订阅提醒"}}</view>
+						</block>
+						<block wx:else>
+
+								<view style='width:130rpx;height:46rpx;background:#ff2742;font-size:24rpx;color:#fff;text-align:center;line-height:46rpx;border-radius:10rpx;position:absolute;top:0;bottom:0;right:10rpx;margin:auto 0;z-index:1;'>
+									<block wx:if='{{infoGoods.isShowBox}}'>原价拼明盒</block>
+									<block wx:elif='{{infoGoods.is_blind_box}}'>在线抽盒机</block>
+									<block wx:else>直接购买</block>
+								</view>
+
+						</block>
+
+
 					</view>
 				</view>		
 		</view>
@@ -383,6 +393,8 @@
 					</view>
 				</view>
 			</view>
+
+			<image wx:if='{{isScrapingCard}}' style="width:100%;height:auto;display:block;margin:0 0 20rpx 0;" catchtap="jumpScrapingCard" mode='widthFix' src="https://cdn.51chaidan.com/images/scratchCardActivity/cardEntrance.jpg"></image>
 
 			<!-- infoActivity.isApply -->
 			<view class='clickrelease' wx:if='{{false}}' catchtap='limitlotterypublish'>
@@ -657,11 +669,24 @@
 						<block wx:else>￥{{infoGoods.shopPrice}}</block>
 						<text style='font-size:22rpx;color:#fff;margin-left:15rpx;background:#1890ff;border-radius:7rpx;position:relative;top:-2rpx;padding:3rpx 6rpx;' wx:if='{{infoGoods.is_blind_box&&infoGoods.isRecycle&&infoGoods.recycleRatio}}'>{{infoGoods.recycleRatio}}折回收</text>
 					</view>
-					<view style='width:130rpx;height:46rpx;background:#ff2742;font-size:24rpx;color:#fff;text-align:center;line-height:46rpx;border-radius:10rpx;position:absolute;top:0;bottom:0;right:10rpx;margin:auto 0;z-index:1;'>
-						<block wx:if='{{infoGoods.isShowBox}}'>原价拼明盒</block>
-						<block wx:elif='{{infoGoods.is_blind_box}}'>在线抽盒机</block>
-						<block wx:else>直接购买</block>
-					</view>
+					
+          <block wx:if='{{promote_start_date}}'>
+
+							<view style='width:130rpx;height:46rpx;background:#eeae19;font-size:24rpx;color:#fff;text-align:center;line-height:46rpx;border-radius:10rpx;position:absolute;top:0;bottom:0;right:10rpx;margin:auto 0;z-index:1;'>{{subscribeOrNot?"订阅成功":"订阅提醒"}}</view>
+
+					</block>
+					<block wx:else>
+
+						<view style='width:130rpx;height:46rpx;background:#ff2742;font-size:24rpx;color:#fff;text-align:center;line-height:46rpx;border-radius:10rpx;position:absolute;top:0;bottom:0;right:10rpx;margin:auto 0;z-index:1;'>
+							<block wx:if='{{infoGoods.isShowBox}}'>原价拼明盒</block>
+							<block wx:elif='{{infoGoods.is_blind_box}}'>在线抽盒机</block>
+							<block wx:else>直接购买</block>
+						</view>
+
+					</block>
+
+
+
 				</view>
 			</view>	
 	</block>

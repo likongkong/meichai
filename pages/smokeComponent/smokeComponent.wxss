@@ -53,5 +53,5 @@
   right: 0;
   width:60rpx;
   height:60rpx;
-  z-index: 10;
+  z-index: 8;
 }

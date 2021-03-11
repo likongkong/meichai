@@ -425,6 +425,7 @@ Page({
               tipnamephone: tipnamephone,
               tipaddress: tptipadd
             })
+            app.signindata.receivingAddress = rdl;
           } else {
             _this.setData({
               addressdata: [],

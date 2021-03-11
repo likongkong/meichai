@@ -736,14 +736,14 @@
         </view>
         <block wx:if='{{zunmdata.status==2}}'>
             <block wx:if='{{zunmdata.isDisplayDeposit}}'>
-                <view wx:if='{{(zunmdata.gid == 36875 || zunmdata.gid == 36876 || zunmdata.gid == 36877)}}' class="footer-child large sale" style='height:80rpx;margin-top:9rpx;border-radius:10rpx;padding:0;width:255rpx;margin-right:20rpx;' bindtap="{{(zunmdata.gid == 36875 || zunmdata.gid == 36876 || zunmdata.gid == 36877) && nowTime < 1613318400?'dsbffunblock':''}}">
+                <view wx:if='{{(zunmdata.gid == 36875 || zunmdata.gid == 36876 || zunmdata.gid == 36877)}}' class="footer-child large sale" style='height:80rpx;margin-top:9rpx;border-radius:10rpx;padding:0;width:{{zunmdata.tipFinalPayment?"360":"255"}}rpx;margin-right:20rpx;' bindtap="{{(zunmdata.gid == 36875 || zunmdata.gid == 36876 || zunmdata.gid == 36877) && nowTime < 1613318400?'dsbffunblock':''}}">
                   <block wx:if="{{zunmdata.gid == 36875 || zunmdata.gid == 36876 || zunmdata.gid == 36877}}">
                     <block wx:if="{{nowTime < 1613318400}}">
                       <view class="money" style='font-size:28rpx;'>支付定金</view>
                       <view class="money" style='font-size:28rpx;'>￥{{zunmdata.promote_price}}</view>
                     </block>
                     <block wx:else>
-                      <view style="width:255rpx;height:80rpx;line-height:80rpx;font-size:20rpx;color:#fff;">{{zunmdata.tipFinalPayment}}</view>
+                      <view style="width:360rpx;height:80rpx;line-height:80rpx;font-size:28rpx;color:#fff;text-align:center;">{{zunmdata.tipFinalPayment}}</view>
                     </block>
                   </block>
                   <block wx:else>

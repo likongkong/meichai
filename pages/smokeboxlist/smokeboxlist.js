@@ -848,6 +848,7 @@ Page({
             _this.setData({
               addressdata: rdl,
             })
+            app.signindata.receivingAddress = rdl;
           } else {
             _this.setData({
               addressdata: [],

@@ -260,7 +260,9 @@ Page({
       // url: "/pages/giftCollection/giftCollection?oid="
 
       // url: "/page/secondpackge/pages/drawHideGoods/drawHideGoods"
+      // url: "/page/secondpackge/pages/auctionDetails/auctionDetails"
       url: "/page/secondpackge/pages/entityLuckyDraw/entityLuckyDraw"
+      
       // url: "/page/secondpackge/pages/redEnvelopeList/redEnvelopeList"
       // url: "/page/secondpackge/pages/priorityVoting/priorityVoting"
 
@@ -709,7 +711,7 @@ Page({
         var url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/Index.json';  // 未审核
       };
     }else{
-      var url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/test/Index.json';  // 测试 
+      var url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/test/Index.json?3';  // 测试 
     };
     wx.request({
       url: url,
@@ -1071,12 +1073,13 @@ Page({
     };
 
     return {
-      title:app.signindata.titleShare ,
+      title:app.signindata.titleShare?app.signindata.titleShare:'你喜欢的潮玩都在这里！',
       path: 'pages/index/index',
       imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
       success: function (res) {}
     }  
   },
+
   scroll:function(){},  
   whomepage:function(){
     wx.pageScrollTo({
