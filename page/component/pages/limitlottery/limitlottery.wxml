@@ -394,6 +394,8 @@
 				</view>
 			</view>
 
+			<image wx:if='{{isScrapingCard}}' style="width:100%;height:auto;display:block;margin:0 0 20rpx 0;" catchtap="jumpScrapingCard" mode='widthFix' src="https://cdn.51chaidan.com/images/scratchCardActivity/cardEntrance.jpg"></image>
+
 			<!-- infoActivity.isApply -->
 			<view class='clickrelease' wx:if='{{false}}' catchtap='limitlotterypublish'>
 				<view class='clickrelleft'>潮玩设计师&品牌发布专区</view>

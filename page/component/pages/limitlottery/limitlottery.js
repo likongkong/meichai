@@ -153,7 +153,13 @@ Page({
     isfullPledge:false,
     promote_start_date:false,
     // 是否订阅
-    subscribeOrNot:false
+    subscribeOrNot:false,
+    // 刮刮卡入口
+    isScrapingCard:false  
+  },
+  // 跳转刮刮卡
+  jumpScrapingCard(){
+    app.comjumpwxnav(9023,'','','')
   },
   onPageScroll: function (ev) {
     var _this = this;
@@ -592,6 +598,18 @@ Page({
     } else {
       app.activityblindboxfun(_this);
     };
+    // 刮刮卡入口
+    wx.request({
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/cardOpenStatus.txt',
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('刮刮卡入口',res)
+        _this.setData({isScrapingCard:res.data || false})
+      },
+      fail: function (res) {}
+    })
+
 
   },
 
