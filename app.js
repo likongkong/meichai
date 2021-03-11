@@ -751,6 +751,10 @@ App({
       wx.navigateTo({
         url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
       });
+    } else if (item_type == 9023) { 
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/entityLuckyDraw/entityLuckyDraw"
+      });
     };
 
 
