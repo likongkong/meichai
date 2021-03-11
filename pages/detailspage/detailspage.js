@@ -2154,6 +2154,12 @@ Page({
     if(this.data.zunmdata.goods_type!=3){
       this.comcouponprfun();   
     };
+
+    if(this.data.addressdata && this.data.addressdata.length != 0){}else{
+      this.nextpagediao();
+    };
+
+
   },
   // 协议radio
   radioagreement:function(){
@@ -2568,7 +2574,7 @@ Page({
               ctx.drawImage(res.path,32,marginRpx,dw,imgHeight);
             }else{
               let marginRpx = (310 - scaleO*246) / 2;
-              ctx.drawImage(res.path,marginRpx,40,imgWith,dh);
+              ctx.drawImage(res.path,marginRpx,40,imgWidth,dh);
             };
 
             // ctx.drawImage(res.path,32,40,246,246);
