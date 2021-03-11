@@ -2557,11 +2557,11 @@ Page({
 
             let dw = 246;
             let dh = 246;
-            var width = res.width
-            var height = res.height
-            var scaleO = width / height;
-            var imgWidth = scaleO*246;
-            var imgHeight = 246/scaleO;
+            let width = res.width;
+            let height = res.height;
+            let scaleO = width / height;
+            let imgWidth = scaleO*246;
+            let imgHeight = 246/scaleO;
 
             if( imgWidth >= 246 ){
               let marginRpx = ((246 - imgHeight) / 2) + 40;
