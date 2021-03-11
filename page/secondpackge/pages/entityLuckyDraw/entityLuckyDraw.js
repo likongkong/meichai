@@ -16,6 +16,7 @@ Page({
     tgabox:false,
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
+    id:'331834',
     share_uid:0,
     countdown:'',
     percent:'',
@@ -30,7 +31,8 @@ Page({
     // 抽奖数
     drawnum:1,
     isShowRule:false,
-    isPrior:false
+    isPrior:false,
+    isWinner:false
   },
  
   togglerecordFun(){
@@ -128,8 +130,8 @@ Page({
   getInfo(){
     var _this = this;
     wx.showLoading({ title: '加载中...'})
-    var q = Dec.Aese('mod=scratchCard&operation=info&id=289526&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&shareUId=' + _this.data.share_uid);
-    console.log(app.signindata.comurl + 'spread.php?mod=scratchCard&operation=info&id=289526&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&shareUId=' + _this.data.share_uid)
+    var q = Dec.Aese('mod=scratchCard&operation=info&id='+ _this.data.id +'&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&shareUId=' + _this.data.share_uid);
+    console.log(app.signindata.comurl + 'spread.php?mod=scratchCard&operation=info&id='+ _this.data.id +'&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&shareUId=' + _this.data.share_uid)
     wx.request({
       url: app.signindata.comurl + 'spread.php'+q,
       method: 'GET',
@@ -141,15 +143,20 @@ Page({
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
           let data = res.data;
-         
+          let nowTime = Date.parse(new Date())/1000;
           _this.setData({
-            countdown:data.Info.endTime,
+            shareTitle:data.Info.shareTitle,
+            shareImg:data.Info.shareImg,
+            countdown:data.List.goodsList.stop_time,
             goodsList:data.List.goodsList,
             scratch:data.List.scratch,
             explain:data.Info.explain,
             user:data.Info.user,
-            subscribedata:res.data.Info.subscribe
+            subscribedata:res.data.Info.subscribe,
+            suplusChance:data.Info.user.suplusChance,
+            isDrawBtn:nowTime>=parseInt(data.List.goodsList.start_time) && nowTime<=parseInt(data.List.goodsList.stop_time)?true:false
           })
+          
           _this.countdownbfun();        
         }else{
           wx.showToast({
@@ -211,8 +218,8 @@ Page({
     var num = e.currentTarget.dataset.num;
     var _this = this;
     wx.showLoading({ title: '加载中...',mask:true})
-    var q = Dec.Aese('mod=prior&operation=scratchGift&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&num=' + num);
-    console.log(app.signindata.comurl + 'spread.php?mod=prior&operation=scratchGift&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&num=' + num)
+    var q = Dec.Aese('mod=scratchCard&operation=scratchGift&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&num=' + num+'&id='+_this.data.id);
+    console.log(app.signindata.comurl + 'spread.php?mod=scratchCard&operation=scratchGift&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&num=' + num+'&id='+_this.data.id)
     wx.request({
       url: app.signindata.comurl + 'spread.php'+q,
       method: 'GET',
@@ -239,7 +246,8 @@ Page({
           _this.setData({
             drawnum:num,
             isAwardMask:true,
-            result:res.data.List.result
+            result:res.data.List.result,
+            isWinner:res.data.Info.isWinner
           })
         }else{
           app.showToastC(res.data.Msg)
@@ -247,18 +255,19 @@ Page({
       }
     }); 
   },
+  //领取刮刮卡次数
   getDrawFun(e){
     var type = e.currentTarget.dataset.type;
     var _this = this;
     wx.showLoading({ title: '加载中...'})
-    var q = Dec.Aese('mod=prior&operation=getEntrance&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&getType='+type);
-    console.log(app.signindata.comurl + 'spread.php?mod=prior&operation=scratchGift&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&getType='+type)
+    var q = Dec.Aese('mod=scratchCard&operation=getEntrance&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&getType='+type+'&id='+_this.data.id);
+    console.log(app.signindata.comurl + 'spread.php?mod=prior&operation=scratchGift&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&getType='+type+'&id='+_this.data.id)
     wx.request({
       url: app.signindata.comurl + 'spread.php'+q,
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
-        console.log('领取投票券======',res)
+        console.log('领取刮刮======',res)
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
           wx.showToast({
@@ -277,7 +286,35 @@ Page({
     }); 
   },
 
-
+  getAward(){
+    var type = e.currentTarget.dataset.type;
+    var _this = this;
+    wx.showLoading({ title: '加载中...'})
+    var q = Dec.Aese('mod=scratchCard&operation=getEntrance&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&getType='+type+'&id='+_this.data.id);
+    console.log(app.signindata.comurl + 'spread.php?mod=prior&operation=scratchGift&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&getType='+type+'&id='+_this.data.id)
+    wx.request({
+      url: app.signindata.comurl + 'spread.php'+q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('领取刮刮======',res)
+        wx.hideLoading();
+        if (res.data.ReturnCode == 200) {
+          wx.showToast({
+            title: '领取成功',
+            icon: 'none',
+            mask:true,
+            duration:1000
+          });  
+          setTimeout(function(){
+            _this.getInfo();
+          },1000)
+        }else{
+          app.showToastC(res.data.Msg)
+        }
+      }
+    }); 
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -327,7 +364,6 @@ Page({
             app.signin(_this);
           }
         } else {
-          console.log(11111111111111111111111111111)
           _this.setData({
             tgabox: false,
             signinlayer: false
@@ -453,9 +489,9 @@ Page({
   onShareAppMessage: function () {
     var _this = this;
     return {
-      title:'刮刮卡:我正在美拆抽取展会优先入场资格，快来帮我助力吧',
-      path: "/page/secondpackge/pages/luckyDraw/luckyDraw?share_uid=" + _this.data.uid,
-      imageUrl:app.signindata.indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      title:_this.data.shareTitle,
+      path: "/page/secondpackge/pages/entityLuckyDraw/entityLuckyDraw?share_uid=" + _this.data.uid,
+      imageUrl:_this.data.shareImg  || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
     }   
   },
   onShareTimeline:function(){
@@ -469,9 +505,9 @@ Page({
     };
 
     return {
-      title:'刮刮卡:我正在美拆抽取展会优先入场资格，快来帮我助力吧',
+      title:_this.data.shareTitle,
       query:'share_uid='+_this.data.uid,
-      imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      imageUrl:_this.data.shareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
     }
   },  
 
@@ -528,6 +564,7 @@ Page({
         clearInterval(_this.data.timer);
       };
     }
+
     if (countdown) {
       nowTime();
       clearInterval(_this.data.timer);

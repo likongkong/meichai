@@ -9,50 +9,56 @@
     </block>
   </view>
   <view class="contentWrap"> 
-    <view class="card">
-      <view class="cardLeft">
-        <image src="https://cdn.51chaidan.com/images/toyShow3/brandGoodsRotation/20210109/20a758966d18f609bf1154f869a20168.png" mode="widthFix"></image>
-      </view>
-      <view class="cardRight">
-        <text class="card_title">美拆x大美术馆 和你在一起系列盲盒-隐藏款宇宙男孩</text>
-        <view class="card_label"> 
-          <block wx:if="{{true}}">
-            <view class="lableItem red">限次出价</view>
-          </block>
-          <block wx:else>
-            <view class="lableItem blue">限次出价</view>
-          </block>
+    <block wx:for="{{dataList}}" wx:key='key' data-index="{{index}}">
+      <view class="card" data-id="{{item.id}}" catchtap="jumpAuctionDetails">
+        <view class="cardLeft">
+          <image src="{{item.cover}}" mode="widthFix"></image>
         </view>
-        <view class="card_user">
-          <view class="card_user_left">
-            <block wx:if="{{true}}">
-              <image src="https://thirdwx.qlogo.cn/mmopen/vi_32/8nHwuWOmqwVwf9XD2VBiapX59YKnoOd6GgmZnDCj3Or0JzN5C0tiaK3lKH5wYiaEnWApGBdZX0CFbuWM1Cc0PcVkQ/132" mode="widthFix"></image>
-              <text style="color:#A7A7A8;">用户昵称</text>
+        <view class="cardRight">
+          <text class="card_title">{{item.name}}</text>
+          <view class="card_label"> 
+            <block wx:if="{{item.activityType == 2}}">
+              <block wx:for="{{item.tags}}" wx:key='key' wx:for-item="i">
+                <view class="lableItem red">{{i}}</view>
+              </block>
             </block>
             <block wx:else>
-              <text style="color:#FF2742;margin-left:0;">当前￥1280</text>
+              <block wx:for="{{item.tags}}" wx:key='key' wx:for-item="i">
+                <view class="lableItem blue">{{i}}</view>
+              </block>
             </block>
           </view>
-          <view class="card_user_right">
-            <block wx:if="{{true}}">
-              <text style="color:#FF2742;">出价￥288</text>
-            </block>
-            <block wx:else>
-              <text style="color:#A7A7A8;">112次出价</text>
-            </block>
+          <view class="card_user">
+            <view class="card_user_left">
+              <block wx:if="{{item.activityType == 2}}">
+                <image src="{{item.infoOffer.headphoto}}" mode="widthFix"></image>
+                <text style="color:#A7A7A8;">{{item.infoOffer.nick}}</text>
+              </block>
+              <block wx:else>
+                <text style="color:#FF2742;margin-left:0;">当前￥{{item.currentPrice}}</text>
+              </block>
+            </view>
+            <view class="card_user_right">
+              <block wx:if="{{item.activityType == 2}}">
+                <text style="color:#FF2742;">出价￥{{item.currentPrice}}</text>
+              </block>
+              <block wx:else>
+                <text style="color:#A7A7A8;">{{item.totalAuctionTimes}}次出价</text>
+              </block>
+            </view>
           </view>
-        </view>
-        <view class="card_sponsor">
-          <view class="card_sponsor_left">
-            <image src="https://thirdwx.qlogo.cn/mmopen/vi_32/8nHwuWOmqwVwf9XD2VBiapX59YKnoOd6GgmZnDCj3Or0JzN5C0tiaK3lKH5wYiaEnWApGBdZX0CFbuWM1Cc0PcVkQ/132" mode="widthFix"></image>
-            <text>美拆发起</text>
-          </view>
-          <view class="card_sponsor_right">
-            剩5分23秒
+          <view class="card_sponsor">
+            <view class="card_sponsor_left">
+              <image src="{{item.infoBrand.brandLogo}}" mode="widthFix"></image>
+              <text>{{item.infoBrand.brandName}}</text>
+            </view>
+            <view class="card_sponsor_right">
+              剩5分23秒
+            </view>
           </view>
         </view>
       </view>
-    </view>
+    </block>
   </view>
 </view>
 

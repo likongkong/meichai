@@ -130,6 +130,18 @@ page{
   color: #CD8233;
   padding: 40rpx 0 30rpx 0;
 }
+.auctionCapPrice{
+  width: 610rpx;
+  height: 75rpx;
+  background: #FFECBF;
+  font-size: 26rpx;
+  color: #C9823B;
+  text-align: center;
+  line-height: 75rpx;
+  margin: 0 auto;
+  border-radius: 75rpx;
+  margin-bottom: 25rpx;
+}
 .auctionBidUserInfoWrap{
   width: 650rpx;
   margin: 0 auto;

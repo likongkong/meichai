@@ -4,9 +4,22 @@
 @import "../../../../common/tabbar.wxss";
 
 page{
-  background:url(https://cdn.51chaidan.com/images/webp1.png)no-repeat;
+  background:url(https://cdn.51chaidan.com/images/webp1.png);
   background-size: 100%;
   /* padding-bottom: 230rpx; */
+}
+.jqqd{
+  width: 600rpx;
+  height: 70rpx;
+  background: #ADADAD;
+  border-radius: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  color: #fff;
+  font-size: 26rpx;
+  position: relative;
+  box-shadow: 0px 4rpx 12rpx 0px rgba(0, 0, 0, 0.4);
+  margin: 40rpx auto;
 }
 .textDecoration{
   text-decoration:line-through;
@@ -260,7 +273,7 @@ page{
 }
 .title{
   font-size: 28rpx;
-  color: #fff;
+  color: #101010;
 }
 .cardVipItem{
   width: 100%;
@@ -293,7 +306,7 @@ page{
 .cardItem{
   width: 100%;
   height:180rpx;
-  border: 1rpx solid #5677FC;
+  /* border: 1rpx solid #5677FC; */
   background: #fff;
   border-radius: 14rpx;
   margin-top: 10rpx;
@@ -666,14 +679,16 @@ page{
   display: inline-block;
 }
 .goodsImg{
-  width: 200rpx;
+  width: 720rpx;
   height: auto;
   display: block;
-  margin: 0 auto;
+  margin: 0 auto 25rpx auto;
+  border-radius: 12rpx;
 }
 .goodsName{
   font-size: 28rpx;
-  color: #FFFFFF;
+  color: #101010;
+  text-align: center;
 }
 .goodsPrice{
   font-size: 24rpx;
@@ -688,7 +703,7 @@ page{
   color: #FFFFFF;
   line-height: 40rpx;
   padding: 0 45rpx;
-  margin-top: 8rpx;
+  margin-top: 15rpx;
 }
 .drawNum{
   width: 600rpx;
@@ -699,5 +714,5 @@ page{
   color: #000;
   line-height: 60rpx;
   text-align: center;
-  margin-top: 45rpx;
+  margin-top: 25rpx;
 }

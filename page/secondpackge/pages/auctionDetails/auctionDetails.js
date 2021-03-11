@@ -16,6 +16,7 @@ Page({
     tgabox:false,
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
+    cart_id:'',
     id:0,
     subscribedata:'',
     bidRange:0,
@@ -42,18 +43,13 @@ Page({
     }); 
     // 判断是否授权
     this.activsign();
-    // this.getInfo();
-    _this.data.timer = setInterval(function () {
-      //将时间传如 调用 
-      _this.dateformat(1615195204);
-    }.bind(_this), 1000);
-
   },
   onLoadfun:function(){
     this.setData({
       uid: app.signindata.uid,
       loginid:app.signindata.loginid,
     }); 
+    this.getInfo();
   },
   activsign: function () {
     // 判断是否授权 
@@ -157,20 +153,21 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    this.data.timer = '';
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    this.data.timer = '';
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    this.data.timer = '';
     this.getInfo();
   },
 
@@ -205,7 +202,12 @@ Page({
       query:{}    
     }
   },
-
+  //跳转拍卖列表
+  jumpAuctionListPage(){
+    wx.navigateTo({  
+      url: "../auctionList/auctionList"
+    })
+  },
   //跳转我的拍卖
   jumpMyAuctionList(){
     wx.navigateTo({  
@@ -251,6 +253,26 @@ Page({
             currentBidPrice:res.data.Info.currentPrice,
             subscribedata:res.data.subscribe || ''
           })
+          
+          _this.data.timer = setInterval(function () {
+            //将时间传如 调用 
+            _this.dateformat(res.data.Info.showTime);
+          }.bind(_this), 1000);
+
+          //status=3 且 showTime>0 为已中奖
+          if(res.data.Info.status == 3 && res.data.Info.showTime > 0){
+            if(res.data.Info.isVictory == 1 || res.data.Info.isVictory == 3){
+              _this.setData({
+                auctionResultPopMask:true
+              })
+            }else if(res.data.Info.isVictory == 2){
+              _this.setData({
+                auctionFailPopMask:true
+              })
+            }
+            
+          }
+
         } else {
           app.showToastC(res.data.msg);
         }
@@ -295,8 +317,32 @@ Page({
       success: function (res) {
         console.log('保证金下单数据======',res)
         wx.hideLoading();
+        if (res.data.ReturnCode == 358) {
+          _this.data.cart_id=res.data.Info.cart_id;
+          _this.paymentmony()
+        } else {
+          app.showToastC(res.data.msg);
+        }
+      }
+    });
+  },
+
+  // 立即支付
+  payNow(){
+    var _this = this;
+    wx.showLoading({ title: '加载中...'})
+    var q = Dec.Aese('mod=auction&operation=buyGoods&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id)
+    console.log('立即支付下单请求数据===','mod=auction&operation=buyGoods&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id)
+    wx.request({
+      url: app.signindata.comurl + 'spread.php'+q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('立即支付下单数据======',res)
+        wx.hideLoading();
         if (res.data.ReturnCode == 200) {
-          
+          _this.data.cart_id=res.data.Info.cart_id;
+          _this.paymentmony()
         } else {
           app.showToastC(res.data.msg);
         }
@@ -308,6 +354,7 @@ Page({
   paymentmony: function () {
     var _this = this;
     var q = Dec.Aese('mod=operate&operation=prepay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1&oid=' + _this.data.cart_id + '&xcx=1' + '&openid=' + _this.data.openid)
+    console.log('预支付数据===','mod=operate&operation=prepay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1&oid=' + _this.data.cart_id + '&xcx=1' + '&openid=' + _this.data.openid)
     wx.request({
       url: app.signindata.comurl + 'order.php' + q,
       method: 'GET',
@@ -317,7 +364,8 @@ Page({
       success: function (res) {
         if (res.data.ReturnCode == 200) {
           // 支付完成弹框显示数据
-          var payinfo = res.data.Info;
+          console.log('预支付数据===',res)
+          // var payinfo = res.data.Info;
           wx.requestPayment({
             'timeStamp': res.data.Info.timeStamp.toString(),
             'nonceStr': res.data.Info.nonceStr,
@@ -325,7 +373,7 @@ Page({
             'signType': 'MD5',
             'paySign': res.data.Info.paySign,
             'success': function (res) {
-
+              _this.hideMask();
             },
             'fail': function (res) {
             },
@@ -377,16 +425,28 @@ Page({
       })
     }
   },
-  // 出价竞拍
+  // 底部出价竞拍
+  footerbidBtnFun(){
+    var _this = this;
+    // auction_type 1为限时 2为限次
+    if(_this.data.dataInfo.auction_type == 1){
+      _this.setData({
+        bidPopMask:true
+      })
+    }else{
+      if(_this.data.dataInfo.suplusChance == 0 ){
+        _this.setData({
+          inviteFriendsPopMask:true
+        })
+      }else{
+
+      }
+    }
+  },
+  // 弹层出价竞拍
   bidBtnFun(){
     var _this = this;
-    if(_this.data.dataInfo.cashPledge && _this.data.dataInfo.suplusChance == 0 ){
-      _this.setData({
-        inviteFriendsPopMask:true
-      })
-      return false;
-    }
-    if( (_this.data.currentBidPrice%_this.data.bidRange) != 0 || _this.data.currentBidPrice <= _this.data.lastBidPrice){
+    if( ((_this.data.currentBidPrice-_this.data.lastBidPrice)%_this.data.bidRange) != 0 || _this.data.currentBidPrice <= _this.data.lastBidPrice){
       wx.showToast({
         title: `出价金额需高于当前出价且为 ${_this.data.bidRange} 的倍数`,
         icon: 'none',
@@ -405,7 +465,12 @@ Page({
         console.log('出价竞拍======',res)
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
-          app.showToastC(res.data.Msg);
+          _this.getInfo();
+          _this.hideMask();
+          _this.setData({
+            bidSucceedPopMask:true,
+            currentBidPrice:_this.data.currentBidPrice
+          })
         }else{
           app.showToastC(res.data.Msg);
         }
