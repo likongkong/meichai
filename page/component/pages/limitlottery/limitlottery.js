@@ -150,7 +150,10 @@ Page({
     canShare:0,
     addsetData:[[]],
     scrollTopPage:0,
-    isfullPledge:false
+    isfullPledge:false,
+    promote_start_date:false,
+    // 是否订阅
+    subscribeOrNot:false
   },
   onPageScroll: function (ev) {
     var _this = this;
@@ -196,9 +199,10 @@ Page({
     })
   },
     // 拉起订阅
-    subscrfun: function () {
+    subscrfun: function (num) {
       var _this = this;
       var subscribedata = _this.data.subscribedata || '';
+      var infoActivity = _this.data.infoActivity || {};
       if (subscribedata && subscribedata.template_id && app.signindata.subscribeif) {
         if (subscribedata.template_id instanceof Array) {
           wx.requestSubscribeMessage({
@@ -207,13 +211,26 @@ Page({
               var is_show_modal = true;
               for (var i = 0; i < subscribedata.template_id.length; i++) {
                 if (res[subscribedata.template_id[i]] == "accept") {
+                  if(num == 1){
+                    _this.data.id = infoActivity.goods_id || '';
+                  }else{
+                    _this.data.id = infoActivity.id || '';
+                  };
                   app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
                   if (is_show_modal) {
                     _this.subshowmodalfun();
                     is_show_modal = false;
+                    if(_this.data.promote_start_date){
+                      _this.setData({
+                        subscribeOrNot:true
+                      })
+                    };
                   };
                 };
               };
+
+              _this.data.id = infoActivity.id || '';
+              
             },
             complete() { }
           })
@@ -787,8 +804,17 @@ Page({
           // }
 
           console.log('res.data.Info.infoActivity.specialWay=====',res.data.Info.infoActivity.specialWay)
+          
+          var promote_start_date = false;
+          if(res.data.Info.infoGoods && res.data.Info.infoGoods.promote_start_date){
+            var timestamp = Date.parse(new Date()) / 1000; 
+            if(res.data.Info.infoGoods.promote_start_date > timestamp){
+              promote_start_date = true;
+            };
+          };
 
           _this.setData({
+            promote_start_date:promote_start_date,
             reLottoList:res.data.List.reLottoList || '',
             // is_brand_display:is_brand_display,
             activityDesc: res.data.Info.activityDesc || "",
@@ -961,7 +987,9 @@ Page({
   },
   joinlimitlottery: function () {
     var _this = this;
-    if (_this.data.infoActivity.joinMothed == "blindBox" && !_this.data.infoActivity.isCanOpenLotto) {
+    if(_this.data.promote_start_date && !_this.data.subscribeOrNot){
+      _this.subscrfun(1);
+    }else if (_this.data.infoActivity.joinMothed == "blindBox" && !_this.data.infoActivity.isCanOpenLotto) {
       wx.navigateTo({
         url: "/pages/smokeboxlist/smokeboxlist",
       });
@@ -1951,7 +1979,9 @@ Page({
   jumpdetail:function(w){
     var _this = this;
     var is_blind_box = w.currentTarget.dataset.is_blind_box || w.target.dataset.is_blind_box || 0;
-    if(_this.data.infoGoods.isShowBox){
+    if(_this.data.promote_start_date){
+       _this.subscrfun(1);
+    }else if(_this.data.infoGoods.isShowBox){
       wx.navigateTo({
         url: "/page/component/pages/mingboxList/mingboxList",
       });

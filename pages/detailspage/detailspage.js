@@ -2555,7 +2555,24 @@ Page({
           },
           success: function (res) {
 
-            ctx.drawImage(res.path,32,40,246,246);
+            let dw = 246;
+            let dh = 246;
+            var width = res.width
+            var height = res.height
+            var scaleO = width / height;
+            var imgWidth = scaleO*246;
+            var imgHeight = 246/scaleO;
+
+            if( imgWidth >= 246 ){
+              let marginRpx = ((246 - imgHeight) / 2) + 40;
+              ctx.drawImage(res.path,32,marginRpx,dw,imgHeight);
+            }else{
+              let marginRpx = (310 - scaleO*246) / 2;
+              ctx.drawImage(res.path,marginRpx,40,imgWith,dh);
+            };
+
+            // ctx.drawImage(res.path,32,40,246,246);
+
             ctx.draw(true);
             // 二维码
             console.log(_this.data.zunmdata.qrcode,2222222)
@@ -3318,7 +3335,7 @@ Page({
       var reshare = {
         title: '￥' + _this.data.zunmdata.gsale + '  ' + _this.data.zunmdata.gname,
         path: '/pages/detailspage/detailspage?gid=' + _this.data.gid + '&store_id=0&referee='+_this.data.uid,
-        imageUrl: _this.data.snapshot,
+        imageUrl: 'https://cdn.51chaidan.com/'+_this.data.zunmdata.goods_share ,
         success: function (res) {}, 
       };
       var q = Dec.Aese('mod=share&operation=order&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&oid=' + _this.data.cart_id)
@@ -3370,7 +3387,7 @@ Page({
         var reshare = {
           title:title ,
           path: '/pages/detailspage/detailspage?gid=' + _this.data.gid + '&store_id=0&referee='+_this.data.uid,
-          imageUrl: _this.data.snapshot,
+          imageUrl: 'https://cdn.51chaidan.com/'+_this.data.zunmdata.goods_share ,
           success: function (res) {},
         };
       };
