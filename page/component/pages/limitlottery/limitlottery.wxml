@@ -384,6 +384,7 @@
 
 	<block wx:if='{{is_exhibition!=1&&brandId<=0}}'>
 		<view style='width:100%;overflow:hidden;'>
+			<image wx:if='{{isScrapingCard}}' style="width:100%;height:auto;display:block;margin:20rpx 0 0 0;" catchtap="jumpScrapingCard" mode='widthFix' src="https://cdn.51chaidan.com/images/scratchCardActivity/cardEntrance.jpg"></image>
 
 			<view style="margin:20rpx 30rpx;">
 				<view style="width:100%;line-height:40rpx;padding:20rpx 0;">
@@ -403,7 +404,7 @@
 
 			<!-- <view wx:if='{{infoGoods.goods_name}}' style="margin:20rpx;font-size:27rpx;">{{infoGoods.goods_name}}</view> -->
 
-			<image wx:if='{{isScrapingCard}}' style="width:100%;height:auto;display:block;margin:0 0 20rpx 0;" catchtap="jumpScrapingCard" mode='widthFix' src="https://cdn.51chaidan.com/images/scratchCardActivity/cardEntrance.jpg"></image>
+
 
 			<somke colortitle='#000'></somke>
 
