@@ -399,11 +399,13 @@
 				<view class='clickrelleft'>潮玩设计师&品牌发布专区</view>
 				<view class='clickrelrigh'>点击发布</view>
 			</view>
-			<somke colortitle='#000'></somke>
+			
 
 			<!-- <view wx:if='{{infoGoods.goods_name}}' style="margin:20rpx;font-size:27rpx;">{{infoGoods.goods_name}}</view> -->
 
 			<image wx:if='{{isScrapingCard}}' style="width:100%;height:auto;display:block;margin:0 0 20rpx 0;" catchtap="jumpScrapingCard" mode='widthFix' src="https://cdn.51chaidan.com/images/scratchCardActivity/cardEntrance.jpg"></image>
+
+			<somke colortitle='#000'></somke>
 
 			<view class='dltittheme'>
 				<view class='dlttemelef'>商品详情</view>
