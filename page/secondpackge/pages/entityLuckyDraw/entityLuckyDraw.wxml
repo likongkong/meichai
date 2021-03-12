@@ -29,18 +29,18 @@
   <view style="display: flex;justify-content: center;"><text class="drawNum">剩余刮刮卡：{{suplusChance}}</text></view> 
 
   <view class="drawWrap">
-    <view class="jqqd">
+    <!-- <view class="jqqd">
       敬请期待
-    </view>
-    <!-- <view class="drawBtn" wx:if="{{isDrawBtn}}">
+    </view> -->
+    <view class="drawBtn1" wx:if="{{isDrawBtn}}">
       <view data-num="1" style="{{isPrior?'background:#ADADAD':''}}" catchtap="{{isPrior?'':'drawFun'}}">刮一张</view>
       <view data-num="10" style="{{isPrior?'background:#ADADAD':''}}" catchtap="{{isPrior?'':'drawFun'}}" class="drawBtnAfter">
-        <text class="txt">刮十张</text>  
+        <text class="txtten">刮十张</text>  
         <view class="tips" wx:if="{{!isPrior}}">VIP刮十张送三张刮刮卡
           <view><image src="https://cdn.51chaidan.com/images/calendar/luckyDraw/xiajiantou.png"></image></view>  
         </view>
       </view>
-    </view> -->
+    </view>
   </view>
   <view class="cardWrap">
     <view>
@@ -79,7 +79,7 @@
             <view wx:elif="{{item.type == 7}}" class="cardItemBtn" data-type="2" data-num='9022' catchtap="{{item.type == 7 && item.isCanReceive==0?'jumpOtherPage':'getDrawFun'}}">{{item.type == 7 && item.isCanReceive==0?'去购票':'领取'}}</view>
             <view
               wx:elif="{{item.type == 8}}"
-              style="{{item.isCanReceive==2?'background:#ADADAD;':''}}"
+              style="{{item.isCanReceive==2?'background:#ADADAD;':''}}{{item.isCanReceive==1?'background:#1890ff;':''}}"
               class="cardItemBtn" 
               data-num='1' 
               data-whref="{{item.goodsId}}" 
@@ -90,7 +90,7 @@
             </view>
             <view 
               wx:elif="{{item.type == 9}}" 
-              style="{{item.isCanReceive==2?'background:#ADADAD;':''}}" 
+              style="{{item.isCanReceive==2?'background:#ADADAD;':''}}{{item.isCanReceive==1?'background:#1890ff;':''}}" 
               class="cardItemBtn" 
               data-num='1' 
               data-whref="{{item.goodsId}}" 
@@ -117,17 +117,29 @@
     </view>
     <scroll-view class="recordBoxScroll" scroll-y>
       <block wx:for="{{awardList}}" wx:key="key" wx:for-index="idx">
-        <view class="recordItem {{item.status==1?'recordItemactive':''}}">
+        <view class="recordItem {{item.result==1?'recordItemactive':''}}">
           <view>
-            <block wx:if="{{item.status==1}}">
-              <text>恭喜您，获得</text>
-              <text>{{item.frontTime}}</text>
+            <block wx:if="{{item.result==0}}">
+              <view class="recordItemBox">
+                <text>未中奖</text>
+                <view>{{item.insert_time}}</view>
+              </view>
+            </block>
+            <block wx:elif="{{item.result==1}}">
+              <text>恭喜您，获得{{goodsList.listGoods[0].goods_name}}</text>
+              <view class="recordItemBox" style="margin-top:20rpx;">
+                <text class="lingqu" catchtap="seladdressfun" data-id="{{item.id}}">领取</text>
+                <view>{{item.insert_time}}</view>
+              </view>
             </block>
             <block wx:else>
-              <text>未中奖</text>
+              <text>恭喜您，获得{{goodsList.listGoods[0].goods_name}}</text>
+              <view class="recordItemBox" style="margin-top:20rpx;">
+                <text class="lingqu" style="background:#ADADAD;">已领取</text>
+                <view>{{item.insert_time}}</view>
+              </view>
             </block>
           </view>
-          <text>{{item.insert_time}}</text>
         </view>
       </block>
     </scroll-view>
@@ -136,9 +148,50 @@
 
 
 
+<!--  收货地址  -->
+<view class='tipback' wx:if='{{tipback}}' catchtouchmove="preventD"></view>
+<view class='receivingaddress' wx:if='{{receivingaddress}}'>
+  <view class='recgadhead'>
+    收货地址
+    <image src='../../../../pages/images/forknumber.png' class='recgadheadimg' bindtap='receivingaddressfun'></image>
+  </view>
+  <view class='recgadcon'>
+    <view class='recgaddata' wx:for='{{addressdata}}' wx:key='key'>
+      <view class='recgaddname' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='revisethereceivingaddress'>
+        <view class='recgaddnameleft'>{{item.consignee}}</view>
+        <view class='recgaddnameleft'>{{item.phone}}</view>
+        <view class="selectAddressBut">选择该地址</view>
+      </view>
+      <view class='recgadaddress' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='revisethereceivingaddress'>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
+      <view class='recgadbottom'>
+        <view class='recgadbotleft'>
+          <image class='recgadbotleftimg' hidden='{{!item.checked}}' src='../../../../pages/images/pressed_click.png'></image>
+          <image class='recgadbotleftimg' hidden='{{item.checked}}' src='../../../../pages/images/normal_click.png'></image>
+          默认地址
+        </view>
+        <view class='recgadbotright' bindtap='deladdress' data-ind="{{item.aid}}">
+          <image src='../../../../pages/images/icon_delete.png' class='recgadbotleftimg'></image>
+          删除
+        </view>
+        <view class='recgadbotright' style='margin-right:50rpx;' bindtap='jumpeditaddress' data-address='{{item.address}}' data-aid='{{item.aid}}' data-city='{{item.city}}' data-consignee='{{item.consignee}}' data-district='{{item.district}}' data-phone='{{item.phone}}'
+          data-province='{{item.province}}' data-idcard='{{item.idcard}}'>
+          <image src='../../../../pages/images/icon_edit.png' class='recgadbotleftimg'></image>
+          编辑
+        </view>
+      </view>
+    </view>
+    <view class='recgadnodata' wx:if='{{addressdata.length==0}}'>
+      <image src='../../../../pages/images/recaddnodata.png' class='recgadnodataimg'></image>
+    </view>
+  </view>
+  <view class='recgadbot' bindtap='jumpaddress'>
+    增加新地址
+  </view>
+</view>
 
-<view class="awardMask" wx:if="{{isAwardMask}}" catchtouchmove="true" catchtap="toggleawardFun">
-  <view class="awardBoxWrap" catchtap="true">
+
+<view class="awardMask1" wx:if="{{isAwardMask}}" catchtouchmove="true" catchtap="toggleawardFun">
+  <view class="awardBoxWrap1" catchtap="true">
     <block>
       <view wx:if="{{drawnum!=1}}" style="overflow: hidden;">
         <block wx:for="{{result}}" wx:key="key" wx:for-index="idx">
@@ -174,14 +227,14 @@
       </view>
     </block>
     
-    <view class="drawBtn">
+    <view class="drawBtn1">
       <block wx:if="{{isWinner}}">
-        <view style="width:400rpx;margin:0 auto;" catchtap="getAward">领取奖励</view>
+        <view style="width:400rpx;margin:0 auto;" catchtap="seladdressfun" data-id="0">领取奖励</view>
       </block>
       <block wx:else>
         <view data-num="1" catchtap="drawFun">再刮一张</view>
         <view data-num="10" catchtap="drawFun" class="drawBtnAfter">
-          <text class="txt">再刮十张</text>  
+          <text class="txt1">再刮十张</text>  
             <view class="tips">VIP刮十张送三张刮刮卡
               <view><image src="https://cdn.51chaidan.com/images/calendar/luckyDraw/xiajiantou.png"></image></view>  
             </view>

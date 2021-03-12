@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '实物刮刮卡', 
+    c_title: '刮刮卡', 
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
@@ -32,15 +32,24 @@ Page({
     drawnum:1,
     isShowRule:false,
     isPrior:false,
-    isWinner:false
+    isWinner:false,
+     // 收货地址
+    receivingaddress:false,
+    tipback:false,
+    // 收货地址数据
+    addressdata:[],
+    // 收货地址显示 请选择收货地址
+    tipaddress:'请选择收货地址',
+    tipaid:'',
+    awardId:0
   },
  
   togglerecordFun(){
     var _this = this;
     if(!this.data.isRecordMask){
       wx.showLoading({ title: '加载中...'})
-      var q = Dec.Aese('mod=prior&operation=drawRecord&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
-      console.log(app.signindata.comurl + 'spread.php?mod=prior&operation=drawRecord&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+      var q = Dec.Aese('mod=scratchCard&operation=drawRecord&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid+'&id='+ _this.data.id);
+      console.log(app.signindata.comurl + 'spread.php?mod=scratchCard&operation=drawRecord&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid+'&id='+ _this.data.id)
       wx.request({
         url: app.signindata.comurl + 'spread.php'+q,
         method: 'GET',
@@ -158,6 +167,9 @@ Page({
           })
           
           _this.countdownbfun();        
+          if(_this.data.addressdata && _this.data.addressdata.length != 0){}else{
+            _this.nextpagediao();
+          };
         }else{
           wx.showToast({
             title: res.data.Msg,
@@ -261,7 +273,7 @@ Page({
     var _this = this;
     wx.showLoading({ title: '加载中...'})
     var q = Dec.Aese('mod=scratchCard&operation=getEntrance&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&getType='+type+'&id='+_this.data.id);
-    console.log(app.signindata.comurl + 'spread.php?mod=prior&operation=scratchGift&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&getType='+type+'&id='+_this.data.id)
+    console.log(app.signindata.comurl + 'spread.php?mod=scratchCard&operation=getEntrance&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&getType='+type+'&id='+_this.data.id)
     wx.request({
       url: app.signindata.comurl + 'spread.php'+q,
       method: 'GET',
@@ -274,11 +286,11 @@ Page({
             title: '领取成功',
             icon: 'none',
             mask:true,
-            duration:1000
+            duration:2000
           });  
           setTimeout(function(){
             _this.getInfo();
-          },1000)
+          },2000)
         }else{
           app.showToastC(res.data.Msg)
         }
@@ -287,33 +299,165 @@ Page({
   },
 
   getAward(){
-    var type = e.currentTarget.dataset.type;
     var _this = this;
     wx.showLoading({ title: '加载中...'})
-    var q = Dec.Aese('mod=scratchCard&operation=getEntrance&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&getType='+type+'&id='+_this.data.id);
-    console.log(app.signindata.comurl + 'spread.php?mod=prior&operation=scratchGift&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&getType='+type+'&id='+_this.data.id)
+    var q = Dec.Aese('mod=scratchCard&operation=getAward&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&aid='+_this.data.tipaid + '&id='+_this.data.awardId);
+    console.log(app.signindata.comurl + 'spread.php?mod=scratchCard&operation=getAward&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&aid='+_this.data.tipaid + '&id='+_this.data.awardId)
     wx.request({
       url: app.signindata.comurl + 'spread.php'+q,
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
-        console.log('领取刮刮======',res)
+        console.log('领取奖励======',res)
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
-          wx.showToast({
-            title: '领取成功',
-            icon: 'none',
-            mask:true,
-            duration:1000
-          });  
-          setTimeout(function(){
-            _this.getInfo();
-          },1000)
+          app.showToastC(res.data.Msg)
         }else{
           app.showToastC(res.data.Msg)
         }
       }
     }); 
+  },
+
+
+   // 下一页返回调取
+  nextpagediao:function(){
+    var _this = this;
+    //  调取收货地址
+    var q = Dec.Aese('mod=address&operation=getlist&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+    wx.request({
+      url: app.signindata.comurl + 'user.php'+q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('收货地址======nextpagediao=======',res)
+        if (res.data.ReturnCode == 200){
+          var rdl = res.data.List;
+          var tptipadi = '';
+          var tptipadd = '';
+          var tipnamephone = '';
+          if (rdl.length != 0) {
+            for (var i = 0; i < rdl.length; i++) {
+              if (rdl[i].isdefault == 1) {
+                rdl[i].checked = true;
+                tptipadi = rdl[i].aid;
+                tptipadd = rdl[i].address;
+                tipnamephone = rdl[i].consignee + " " + rdl[i].phone;
+              } else {
+                rdl[i].checked = false;
+              }
+            };
+            _this.data.tipaid = tptipadi;
+            _this.setData({
+              addressdata: rdl,
+              tipnamephone: tipnamephone,
+              tipaddress: tptipadd
+            })
+
+            app.signindata.receivingAddress = rdl;
+
+          } else {
+            _this.setData({
+              addressdata: [],
+            })
+          };
+        };
+        // 判断非200和登录
+        Dec.comiftrsign(_this, res, app);         
+      }
+    });
+  },
+   // 收货地址弹框
+  seladdressfun:function(e){
+    this.setData({
+      receivingaddress:true,
+      tipback:true,
+      isAwardMask:false,
+      isRecordMask:false,
+      awardId:e.currentTarget.dataset.id
+    });
+  },
+  // 删除地址
+  deladdress: function (event){
+    var _this = this;
+    var dat = this.data.addressdata;
+    var indid = event.target.dataset.ind;
+    var num = '';
+    var iftrdefault = false;
+    for (var i = 0; i < dat.length; i++) {
+      if (dat[i].aid == indid) {
+        num = i;
+        if (dat[i].isdefault == 1) {
+          iftrdefault = true;
+        }
+      }
+    };
+    if (iftrdefault) {
+      app.showToastC('默认地址不能删除');
+      return false;
+    };
+    wx.showModal({
+      content: '您确定要删除这个地址吗？',
+      success: function (res) {
+        if (res.confirm) {
+          var q = Dec.Aese('mod=address&operation=delete&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&aid=' + indid)
+          wx.request({
+            url: app.signindata.comurl + 'user.php'+q,
+            method: 'GET',
+            header: { 'Accept': 'application/json' },
+            success: function (res) {
+              if (res.data.ReturnCode == 200){
+                dat.splice(num, 1);
+                _this.setData({
+                  addressdata: dat
+                });
+                app.signindata.receivingAddress = dat;
+              };
+              if (res.data.ReturnCode == 908) {
+                app.showToastC('aid和uid不匹配');
+              };              
+              // 判断非200和登录
+              Dec.comiftrsign(_this, res, app);              
+            }
+          })
+        }
+      }
+    })
+  },
+  // 编辑地址
+  jumpeditaddress: function (event) {
+    var aid = event.target.dataset.aid || event.currentTarget.dataset.aid;
+    var address = event.target.dataset.address || event.currentTarget.dataset.address;
+    var city = event.target.dataset.city || event.currentTarget.dataset.city;
+    var consignee = event.target.dataset.consignee || event.currentTarget.dataset.consignee;
+    var district = event.target.dataset.district || event.currentTarget.dataset.district;
+    var idcard = event.target.dataset.idcard || event.currentTarget.dataset.idcard;
+    var phone = event.target.dataset.phone || event.currentTarget.dataset.phone;
+    var province = event.target.dataset.province || event.currentTarget.dataset.province;
+    wx.navigateTo({
+      url: "/pages/shippingAddress/shippingAddress?aid=" + aid + '&address=' + address + '&city=' + city + '&consignee=' + consignee + '&district=' + district + '&idcard=' + idcard + '&phone=' + phone + '&province=' + province
+    })
+  },
+  // 跳转增加新地址
+  jumpaddress: function () {
+    wx.navigateTo({
+      url: "/pages/newreceivingaddress/newreceivingaddress"
+    })
+  },
+  // 修改收货地址
+  revisethereceivingaddress: function (w) {
+    var tipaid = w.currentTarget.dataset.tipaid || w.target.dataset.tipaid;
+    var tipadd = w.currentTarget.dataset.tipadd || w.target.dataset.tipadd;
+    var ind = w.currentTarget.dataset.ind || w.target.dataset.ind||0;
+    this.data.tipaid = tipaid;
+    var data = this.data.addressdata;
+    this.setData({
+      tipnamephone: data[ind].consignee + " " + data[ind].phone,
+      tipaddress: tipadd,
+      receivingaddress: false,
+      tipback:false
+    });
+    this.getAward();
   },
 
   /**
@@ -334,6 +478,29 @@ Page({
       loginid: app.signindata.loginid,
     });  
     _this.getInfo();
+    if(app.signindata.receivingAddress && app.signindata.receivingAddress.length != 0){
+      var rdl = app.signindata.receivingAddress;
+      var tptipadi = '';
+      var tptipadd = '';
+      var tipnamephone = '';
+      for (var i = 0; i < rdl.length; i++) {
+        if (rdl[i].isdefault == 1) {
+          rdl[i].checked = false;
+          tptipadi = rdl[i].aid;
+          tptipadd = rdl[i].address;
+          tipnamephone = rdl[i].consignee + " " + rdl[i].phone;
+        } else {
+          rdl[i].checked = false;
+        }
+      };
+      _this.data.tipaid = tptipadi;
+      _this.setData({
+        addressdata: rdl,
+        tipnamephone: tipnamephone,
+        tipaddress: tptipadd
+      })
+      console.log('地址=======onloadfun====',_this.data.addressdata)
+  };
   },
   activsign: function () {
     // 判断是否授权 

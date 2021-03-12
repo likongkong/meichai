@@ -2923,6 +2923,10 @@ Page({
             clearInterval(_this.data.wintheprtintervaldetail);
             _this.winningtheprizetimedetail(1613318400);
           }
+           if(res.data.Ginfo.gid == 37197){
+            clearInterval(_this.data.wintheprtintervaldetail);
+            _this.winningtheprizetimedetail(1615737600);
+          }
           
           // if(res.data.Ginfo&&res.data.Ginfo.brandId>0){
           //   res.data.Ginfo.specialWay = 1;
