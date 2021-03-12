@@ -306,6 +306,8 @@
         </view>
       </view> 
   </view>
+  
+<image wx:if='{{isScrapingCard}}' style="width:100%;height:auto;display:block;margin:0 0 20rpx 0;" catchtap="jumpScrapingCard" mode='widthFix' src="https://cdn.51chaidan.com/images/scratchCardActivity/cardEntrance.jpg"></image>
 
 <image wx:if='{{!gotTBBMBS8 || !gotTBBMBS9}}' style="width:720rpx;height:auto; display:block;margin:15rpx auto;" catchtap="officialAccount" mode='widthFix' src="{{!gotTBBMBS8?'http://cdn.51chaidan.com/images/sign/activity/attentionGZH.png':'https://cdn.51chaidan.com/images/sign/activity/bigAttention1.png'}}"></image>
 
