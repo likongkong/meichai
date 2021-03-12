@@ -150,7 +150,7 @@ Page({
         // 刷新完自带加载样式回去
         wx.stopPullDownRefresh();
         wx.hideLoading();
-        if (res.data.ReturnCode == 200) {
+        if (res.data.ReturnCode == 200 || res.data.ReturnCode == 384) {
           let data = res.data;
           let nowTime = Date.parse(new Date())/1000;
           _this.setData({
@@ -165,11 +165,19 @@ Page({
             suplusChance:data.Info.user.suplusChance,
             isDrawBtn:nowTime>=parseInt(data.List.goodsList.start_time) && nowTime<=parseInt(data.List.goodsList.stop_time)?true:false
           })
-          
           _this.countdownbfun();        
           if(_this.data.addressdata && _this.data.addressdata.length != 0){}else{
             _this.nextpagediao();
           };
+          if(res.data.ReturnCode == 384){
+            wx.showToast({
+              title: res.data.Msg,
+              icon: 'none',
+              mask:true,
+              duration:1500
+            });  
+            _this.data.share_uid = 0;
+          }
         }else{
           wx.showToast({
             title: res.data.Msg,
