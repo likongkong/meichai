@@ -71,6 +71,7 @@
                             <block wx:elif='{{comdata.order_type==3}}'>拆币兑换</block>
                             <block wx:elif='{{comdata.order_type==4}}'>邀请奖励</block>
                             <block wx:elif='{{comdata.order_type==2||comdata.order_type==9}}'>免费</block>
+                            <block wx:elif='{{comdata.order_type==33&&comdata.amount==0}}'>免费</block>
                             <block
                                 wx:elif='{{comdata.order_type==1&&comdata.suitPrice&&comdata.suitName&&comdata.suitNumber}}'>
                                 ￥{{comdata.suitPrice}}</block>
@@ -696,6 +697,7 @@
                             <block wx:elif='{{comdata.order_type==3}}'>拆币兑换</block>
                             <block wx:elif='{{comdata.order_type==4}}'>邀请奖励</block>
                             <block wx:elif='{{comdata.order_type==2||comdata.order_type==9}}'>免费</block>
+                            <block wx:elif='{{comdata.order_type==33&&comdata.amount==0}}'>免费</block>
                             <block
                                 wx:elif='{{comdata.order_type==1&&comdata.suitPrice&&comdata.suitName&&comdata.suitNumber}}'>
                                 ￥{{comdata.suitPrice}}</block>

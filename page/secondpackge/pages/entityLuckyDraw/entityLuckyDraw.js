@@ -367,6 +367,13 @@ Page({
       }
     });
   },
+    // 隐藏收货地址弹框
+  receivingaddressfun:function(){
+    this.setData({
+      receivingaddress: false,
+      tipback:false,
+    })
+  },
    // 收货地址弹框
   seladdressfun:function(e){
     this.setData({
