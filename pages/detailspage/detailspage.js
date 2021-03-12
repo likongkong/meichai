@@ -247,10 +247,18 @@ Page({
     modelSelInde:0,
 
     detailColorIndex:0,
-    selectShell:{}
+    selectShell:{},
+    // 刮刮卡入口
+    isScrapingCard:false  
+
 
 
   },
+  // 跳转刮刮卡
+  jumpScrapingCard(){
+    app.comjumpwxnav(9023,'','','')
+  },
+
   dSCfun(event){
     var index = event.currentTarget.dataset.index || event.target.dataset.index || 0;
 
@@ -2673,6 +2681,19 @@ Page({
       _this.setData({ isAwardOrder: app.signindata.isAwardOrder, awardOrder: app.signindata.awardOrder || false });
       app.winningtheprizetime(_this);
     };
+
+    // 刮刮卡入口
+    wx.request({
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/cardOpenStatus.txt',
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('刮刮卡入口',res)
+        _this.setData({isScrapingCard:res.data || false})
+      },
+      fail: function (res) {}
+    }) 
+
   },
   jumporder: function () {
     var _this = this;
