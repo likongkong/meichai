@@ -63,7 +63,7 @@
         <view class="cardItem" wx:else>
           <view class="cardItemTxtWrap">
             <view>{{item.title}}</view>
-            <block wx:if="{{item.type == 7 || item.type == 8 || item.type == 9}}">
+            <block wx:if="{{item.type == 7 || item.type == 8 || item.type == 9 || item.type == 5}}">
               <view style="color:#666666;">{{item.descirption}}</view>
             </block>
             <block wx:else>
@@ -74,7 +74,16 @@
           <block>
             <view wx:if="{{item.type == 3}}" style="{{item.type == 3 && item.isCanReceive==0?'background:#ADADAD;':''}}" class="cardItemBtn" data-num='9' catchtap="{{item.type == 3 && item.isCanReceive==0?'subscrfun':'jumpOtherPage'}}"> {{item.type == 3 && item.isCanReceive==0?'明日领取':'去签到'}}</view>
             <view wx:elif="{{item.type == 4}}" class="cardItemBtn" data-num='988' catchtap="jumpOtherPage">去抽盒</view>
-            <view wx:elif="{{item.type == 5}}" class="cardItemBtn">去邀请<button style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' open-type="share"></button></view>
+            <view 
+              wx:elif="{{item.type == 5}}" 
+              class="cardItemBtn" 
+              data-type="5"
+              style="{{item.isCanReceive==2?'background:#ADADAD;':''}}{{item.isCanReceive==1?'background:#1890ff;':''}}" 
+              catchtap="{{item.isCanReceive==1?'getDrawFun':''}}"
+            >
+              <button wx:if="{{item.isCanReceive ==0}}" style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' open-type="share"></button>
+              {{item.isCanReceive ==0?'去邀请':item.isCanReceive ==1?'领取':'已领取'}}
+            </view>
             <view wx:elif="{{item.type == 6}}" class="cardItemBtn" data-num='9015' catchtap="jumpOtherPage">去抽赏</view>
             <view wx:elif="{{item.type == 7}}" class="cardItemBtn" data-type="2" data-num='9022' catchtap="{{item.type == 7 && item.isCanReceive==0?'jumpOtherPage':'getDrawFun'}}">{{item.type == 7 && item.isCanReceive==0?'去购票':'领取'}}</view>
             <view
