@@ -872,21 +872,56 @@ App({
   activityblindboxfun: function (_this) {
     var _this = _this;
     var app = this;
-    var sharedata = Dec.Aese('mod=spread&operation=getActivity&type=2');
+    // var sharedata = Dec.Aese('mod=spread&operation=getActivity&type=2');
+    // wx.request({
+    //   url: app.signindata.comurl + 'model.php' + sharedata,
+    //   method: 'GET',
+    //   header: { 'Accept': 'application/json' },
+    //   success: function (res) {
+    //     console.log('免单分享图片=====',res)
+    //     if (res.data.ReturnCode == 200) {
+    //       if (res.data.List && res.data.List.activity && res.data.List.activity.blindbox) {
+    //         _this.data.activityblindbox = res.data.List.activity.blindbox;
+    //         app.signindata.activityblindbox = res.data.List.activity.blindbox
+    //       };
+    //     };
+    //   }
+    // });
     wx.request({
-      url: app.signindata.comurl + 'model.php' + sharedata,
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/mergePic.json',
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
+        console.log('免单分享图片=====Json',res)
         if (res.data.ReturnCode == 200) {
-          if (res.data.List && res.data.List.activity && res.data.List.activity.blindbox) {
-            _this.data.activityblindbox = res.data.List.activity.blindbox;
-            app.signindata.activityblindbox = res.data.List.activity.blindbox
+          if (res.data.List && res.data.List.activity) {
+            var actArr = res.data.List.activity || [];
+            if(actArr && actArr.length <= 4){
+              _this.data.activityblindbox = actArr;
+              app.signindata.activityblindbox = actArr;
+            } else {
+              var returnData = app.getRandomArrayElements(actArr,4);
+              _this.data.activityblindbox = returnData;
+              app.signindata.activityblindbox = returnData;
+            };
+
           };
         };
       }
     });
+
   },
+  getRandomArrayElements:function (arr, count) {
+    var shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
+    while (i-- > min) {
+        index = Math.floor((i + 1) * Math.random());
+        temp = shuffled[index];
+        shuffled[index] = shuffled[i];
+        shuffled[i] = temp;
+    }
+    return shuffled.slice(min);
+  },
+
   // 云统计
   cloudstatistics: function (tablename,data){
     // wx.cloud.init() // 引入云
