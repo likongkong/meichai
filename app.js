@@ -534,7 +534,7 @@ App({
       });
     } else if (item_type == 9003) {
       wx.navigateTo({    // 抽签详情页
-        url: "/page/component/pages/limitlottery/limitlottery?gid=" + whref
+        url: "/page/component/pages/limitlottery/limitlottery?list=1&gid=" + whref
       });
     } else if (item_type == 9004) {
       wx.navigateTo({    // 拆明盒详情页
