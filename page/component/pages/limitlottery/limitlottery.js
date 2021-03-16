@@ -155,7 +155,10 @@ Page({
     // 是否订阅
     subscribeOrNot:false,
     // 刮刮卡入口
-    isScrapingCard:false  
+    isScrapingCard:false,
+    // 是否从列表进入
+    isList:0,
+    listTipImg:false
   },
   // 跳转刮刮卡
   jumpScrapingCard(){
@@ -435,7 +438,8 @@ Page({
       _this.data.gid = _this.getSearchString('gid', scene) || 0;
       // 用户是否能分享
       _this.data.canShare = _this.getSearchString('canShare', scene) || 0;
-
+      // 是否从列表进入
+      _this.data.isList = _this.getSearchString('list', scene) || 0;
       this.setData({
         share_id: _this.getSearchString('referee', scene) || 0,
         canShare:_this.getSearchString('canShare', scene) || 0
@@ -450,12 +454,18 @@ Page({
       _this.data.canShare = options.canShare || 0;
       // 是否是朋友圈进入
       _this.data.perayu = options.perayu || 0;
+      // 是否从列表进入
+      _this.data.isList = options.list || 0;
+
       this.setData({
         share_id: options.referee || 0,
         brandId:options.brandId||'',
         canShare:options.canShare || 0
       })
     };
+
+    console.log('isList========',_this.data.isList)
+
     // 推送统计
     _this.data.push_id = options.push_id || 0;
 
@@ -896,10 +906,10 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
 
           setTimeout(function () {
             if (res.data.Info.infoActivity.status == 3 && res.data.Info.infoActivity.isWinner && !res.data.Info.infoActivity.isOrdered) {
-              _this.nextpagediao()
+              _this.addressCom();
             }
             if(res.data.Info.infoActivity.joinMothed == 'payTicket' && res.data.Info.infoActivity.payTicketCate && res.data.Info.infoActivity.payTicketCate == 'fullPledge'){
-              _this.nextpagediao()
+              _this.addressCom();
             } 
             _this.getSnapshot()
           }, 1000)
@@ -920,6 +930,34 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
       }
 
     })
+  },
+  addressCom:function(){
+      var _this = this;
+      if(app.signindata.receivingAddress && app.signindata.receivingAddress.length != 0){
+        var rdl = app.signindata.receivingAddress;
+        var tptipadi = '';
+        var tptipadd = '';
+        var tipnamephone = '';
+        for (var i = 0; i < rdl.length; i++) {
+          if (rdl[i].isdefault == 1) {
+            rdl[i].checked = false;
+            tptipadi = rdl[i].aid;
+            tptipadd = rdl[i].address;
+            tipnamephone = rdl[i].consignee + " " + rdl[i].phone;
+          } else {
+            rdl[i].checked = false;
+          }
+        };
+        _this.data.tipaid = tptipadi;
+        _this.setData({
+          addressdata: rdl,
+          tipnamephone: tipnamephone,
+          tipaddress: tptipadd
+        })
+        console.log('地址=======onloadfun====',_this.data.addressdata)
+      }else{
+        _this.nextpagediao()
+      };
   },
   // 调取展会品牌数据
   exhibdatafun: function (num) {
@@ -1003,9 +1041,15 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
       fail: function () { }
     });
   },
+  listTipImg(){
+    this.setData({listTipImg:!this.data.listTipImg});
+  },
   joinlimitlottery: function () {
     var _this = this;
-    if(_this.data.promote_start_date && !_this.data.subscribeOrNot){
+
+    if(_this.data.infoActivity.premiseForJoin && _this.data.isList == 1){
+       _this.listTipImg();
+    }else if(_this.data.promote_start_date && !_this.data.subscribeOrNot){
       _this.subscrfun(1);
     }else if (_this.data.infoActivity.joinMothed == "blindBox" && !_this.data.infoActivity.isCanOpenLotto) {
       wx.navigateTo({
@@ -1338,8 +1382,15 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
     _this.setData({
       shareFriendBox:false
     })
+    
+    if(_this.data.infoActivity.lottoPrice){
+      var shareName = _this.data.infoActivity.lottoPrice +'元购 '+ _this.data.infoActivity.name;
+    }else{
+      var shareName = _this.data.infoGoods.shop_price +'元购 '+ _this.data.infoActivity.name;
+    };
+    
     return {
-      title: _this.data.infoGoods.shop_price +'元 限定原价购 '+ _this.data.infoActivity.name +'，一起互换碎片！',
+      title:shareName ,
       query:'id='+_this.data.infoActivity.id+'&gid='+_this.data.gid+ '&referee=' + _this.data.uid+'&perayu=1',
 
       // query:{
@@ -1360,8 +1411,15 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
     }else{
       var urlpath = "/page/component/pages/limitlottery/limitlottery?id=" + _this.data.infoActivity.id + '&referee=' + _this.data.uid + '&gid=' + _this.data.gid;
     };
+
+    if(_this.data.infoActivity.lottoPrice){
+      var shareName = _this.data.infoActivity.lottoPrice + "元购 " + _this.data.infoActivity.name; 
+    }else{
+      var shareName = _this.data.infoGoods.shop_price + "元购 " + _this.data.infoActivity.name;
+    };
+
     var share = {
-      title: _this.data.infoGoods.shop_price + "元 限定原价购 " + _this.data.infoActivity.name + ",一起互换碎片!",
+      title:shareName ,
       imageUrl: _this.data.snapshotlim,
       path:urlpath ,
       success: function (res) {}
@@ -1771,11 +1829,17 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
           // 微信支付
           _this.paymentmony()
         } else {
-          // 提交订单蒙层
-          _this.setData({
-            suboformola: false
-          });
-          app.showToastC(res.data.Msg);
+          if(res.data.ReturnCode == 900){
+            app.showModalC(res.data.Msg);
+            _this.getinfo()
+          }else{
+            // 提交订单蒙层
+            _this.setData({
+              suboformola: false
+            });
+            app.showToastC(res.data.Msg);            
+          }
+
         };
       }
     })
@@ -1927,11 +1991,12 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
     });
   },
   // 保存图片
-  sharesavethepicture: function () {
+  sharesavethepicture: function (event) {
     var _this = this;
+    var ind = event.currentTarget.dataset.ind || event.target.dataset.ind || 0;
     var imgSrc = '';
     wx.getImageInfo({
-      src: _this.data.saveimgurl || '',
+      src: ind==1 ? _this.data.infoActivity.premiseForJoin : _this.data.saveimgurl || '',
       fail: function (res) {
       },
       success: function (res) {
@@ -1948,20 +2013,23 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
                     success() {
                       app.showToastC('保存成功');
                       _this.setData({
-                        limsaveiftr: false
+                        limsaveiftr: false,
+                        listTipImg:false
                       });
                     },
                     fail() {
                       app.showToastC('保存失败');
                       _this.setData({
-                        limsaveiftr: false
+                        limsaveiftr: false,
+                        listTipImg:false
                       });
                     }
                   })
                 },
                 fail() {
                   _this.setData({
-                    limsaveiftr: false
+                    limsaveiftr: false,
+                    listTipImg:false
                   });
                 }
               })
@@ -1972,13 +2040,15 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
                 success(res) {
                   app.showToastC('保存成功');
                   _this.setData({
-                    limsaveiftr: false
+                    limsaveiftr: false,
+                    listTipImg:false
                   });
                 },
                 fail(res) {
                   app.showToastC('保存失败');
                   _this.setData({
-                    limsaveiftr: false
+                    limsaveiftr: false,
+                    listTipImg:false
                   });
                 }
               })

@@ -397,6 +397,7 @@
                               <block wx:elif='{{item.order_type==6}}'>原价：￥{{item.goods_amount}}</block>
                               <block wx:elif='{{item.order_type==2||item.order_type==9}}'>免费</block>
                               <block wx:elif='{{item.order_type==33&&item.amount==0}}'>免费</block>
+                              <block wx:elif='{{item.amount==0}}'>免费</block>
                               <block wx:elif='{{item.order_type==1&&item.suitPrice&&item.suitName&&item.suitNumber}}'>￥{{item.suitPrice}}</block>
                               <block wx:else>￥{{item.goods_price}}</block>
                               <block wx:if='{{item.order_type!=13}}'>
