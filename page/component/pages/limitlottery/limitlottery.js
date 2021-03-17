@@ -801,8 +801,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
           }
 
           // res.data.List.ShareUser && res.data.List.ShareUser.indexOf(_this.data.uid) == -1
-
-          if(res.data.Info.infoActivity.detail == 1 && _this.data.canShare!=1){
+          if(res.data.Info.infoActivity.detail == 1 && _this.data.canShare!=1 && _this.data.isList != 1){
             console.log('detail == 1','不能分享')
             wx.hideShareMenu();
             _this.setData({
@@ -1391,7 +1390,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
     
     return {
       title:shareName ,
-      query:'id='+_this.data.infoActivity.id+'&gid='+_this.data.gid+ '&referee=' + _this.data.uid+'&perayu=1',
+      query:'id='+_this.data.infoActivity.id+'&gid='+_this.data.gid+ '&referee=' + _this.data.uid+'&perayu=1&list='+_this.data.isList,
 
       // query:{
       //   'id': _this.data.infoActivity.id,
@@ -1407,9 +1406,9 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
     })
 
     if(_this.data.infoActivity.isShareBrandId){
-      var urlpath = "/page/component/pages/limitlottery/limitlottery?id=" + _this.data.infoActivity.id + '&referee=' + _this.data.uid + '&gid=' + _this.data.gid+'&brandId='+_this.data.brandId||'';
+      var urlpath = "/page/component/pages/limitlottery/limitlottery?id=" + _this.data.infoActivity.id + '&referee=' + _this.data.uid + '&gid=' + _this.data.gid+'&brandId='+_this.data.brandId||'' + '&list='+_this.data.isList;
     }else{
-      var urlpath = "/page/component/pages/limitlottery/limitlottery?id=" + _this.data.infoActivity.id + '&referee=' + _this.data.uid + '&gid=' + _this.data.gid;
+      var urlpath = "/page/component/pages/limitlottery/limitlottery?id=" + _this.data.infoActivity.id + '&referee=' + _this.data.uid + '&gid=' + _this.data.gid + '&list='+_this.data.isList;
     };
 
     if(_this.data.infoActivity.lottoPrice){

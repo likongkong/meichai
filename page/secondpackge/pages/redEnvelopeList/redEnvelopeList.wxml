@@ -25,7 +25,7 @@
             </view>
             <view class="relRedEveBottom">
                 <view style="padding-left:30rpx;">{{headSel==1?'幸运值红包':'抽盒金红包'}}</view>
-                <view style="padding-right:15rpx;">大美术馆和你在一起系列</view>
+                <view style="padding-right:15rpx;">{{item.seriesName}}</view>
             </view>
         </view>
     </block>
