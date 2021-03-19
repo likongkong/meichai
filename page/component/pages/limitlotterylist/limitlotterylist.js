@@ -384,7 +384,7 @@ Page({
   limitlotteryd: function(w) {
     var id = w.currentTarget.dataset.gid || w.target.dataset.gid;
     wx.navigateTo({
-      url: "/page/component/pages/limitlottery/limitlottery?id=" + id
+      url: "/page/component/pages/limitlottery/limitlottery?list=1&id=" + id
     });
   },
   // 计算图片大小

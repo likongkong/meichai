@@ -72,6 +72,7 @@
                             <block wx:elif='{{comdata.order_type==4}}'>邀请奖励</block>
                             <block wx:elif='{{comdata.order_type==2||comdata.order_type==9}}'>免费</block>
                             <block wx:elif='{{comdata.order_type==33&&comdata.amount==0}}'>免费</block>
+                            <block wx:elif='{{comdata.amount==0}}'>免费</block>
                             <block
                                 wx:elif='{{comdata.order_type==1&&comdata.suitPrice&&comdata.suitName&&comdata.suitNumber}}'>
                                 ￥{{comdata.suitPrice}}</block>
@@ -698,6 +699,7 @@
                             <block wx:elif='{{comdata.order_type==4}}'>邀请奖励</block>
                             <block wx:elif='{{comdata.order_type==2||comdata.order_type==9}}'>免费</block>
                             <block wx:elif='{{comdata.order_type==33&&comdata.amount==0}}'>免费</block>
+                            <block wx:elif='{{comdata.amount==0}}'>免费</block>
                             <block
                                 wx:elif='{{comdata.order_type==1&&comdata.suitPrice&&comdata.suitName&&comdata.suitNumber}}'>
                                 ￥{{comdata.suitPrice}}</block>
@@ -1309,7 +1311,7 @@
     <view class='orderbott'>
         <view class='orderbottcon'>订单编号:{{comdata.order_sn}}</view>
         <view class='orderbottcon'
-            wx:if='{{comdata.status!=0&&comdata.status!=16&&comdata.status!=1&&comdata.status!=8&&comdata.status!=11}}'>
+            wx:if='{{comdata.status!=0&&comdata.status!=16&&comdata.status!=1&&comdata.status!=8&&comdata.status!=11&&comdata.amount!=0}}'>
             支付方式:{{comdata.payment}}支付</view>
         <!-- &&comdata.status!=16&&comdata.status!=1&&comdata.status!=8&&comdata.status!=11 -->
         <view class='orderbottcon' wx:if='{{comdata.order_type!=2}}'>下单时间:{{comdata.ordertime}}</view>

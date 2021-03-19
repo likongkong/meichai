@@ -30,23 +30,53 @@ Component({
       var _this = this;
       setTimeout(function(){
           var q1 = Dec.Aese('mod=spread&operation=getActivity&type=1');
+          // wx.request({
+          //   url: app.signindata.comurl + 'model.php' + q1,
+          //   method: 'GET',
+          //   header: {'Accept': 'application/json'},
+          //   success: function(res) {
+          //     if(res.data.ReturnCode == 200){
+          //       console.log('smokeComponent=============',res)
+          //       if(res.data.List){
+          //         if(res.data.List.activity){
+          //           _this.setData({
+          //             dataList: res.data.List.activity.blindbox||[],
+          //           })
+          //         }
+          //     }
+          //     }
+          //   }
+          // });
+
           wx.request({
-            url: app.signindata.comurl + 'model.php' + q1,
+            url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/recommedBlindbox.json',
             method: 'GET',
             header: {'Accept': 'application/json'},
             success: function(res) {
               if(res.data.ReturnCode == 200){
-                console.log('smokeComponent=============',res)
+                console.log('smokeComponent=============Json',res)
                 if(res.data.List){
                   if(res.data.List.activity){
-                    _this.setData({
-                      dataList: res.data.List.activity.blindbox||[],
-                    })
+                    var actArr = res.data.List.activity || [];
+                    if(actArr && actArr.length !=0){
+                      if(actArr.length <= 5){
+                        _this.setData({
+                          dataList:actArr,
+                        });
+                      }else{
+                        _this.setData({
+                          dataList: app.getRandomArrayElements(actArr,4) || [],
+                        });
+                      };
+                    };
                   }
-              }
+                }
               }
             }
           });
+
+
+
       },500);
 
     },

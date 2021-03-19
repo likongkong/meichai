@@ -199,6 +199,7 @@ Page({
   jumpxinxi:function(){
     var _this = this;
 
+    
     // _this.data.id = 999999;
     // wx.requestSubscribeMessage({
     //   tmplIds: ['xCf0OLocO-jTPwwwtNrS8O7REn0lEw1yUwim_EFdCaQ'],
@@ -1593,7 +1594,7 @@ Page({
     var _this = this;
     _this.setData({ jumpdevanningiftr: true });
     wx.navigateTo({
-      url: "/page/component/pages/limitlottery/limitlottery?id=" + id,
+      url: "/page/component/pages/limitlottery/limitlottery?list=1&id=" + id,
       complete: function () {_this.setData({ jumpdevanningiftr: false });}
     });   
   },

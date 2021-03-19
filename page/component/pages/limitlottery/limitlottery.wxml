@@ -24,7 +24,7 @@
 			<block wx:elif='{{infoActivity.isLiveShow && infoActivity.status==1}}'><text class='timetextstyle'>{{infoActivity.isLiveShow_time}} 直播开启</text></block>
 			<block wx:else>
 					<text wx:if='{{infoActivity.status==2}}' class='timetextstyle' style='margin-right:10rpx;'>抽签倒计时</text>
-					<text class='timetextstyle'>即将开始</text>
+					<text wx:if='{{infoActivity.status==1}}' class='timetextstyle'>即将开始</text>
 					<text wx:if='{{dayStr!=0}}' style='diaplay:inline-block;'>{{dayStr}}</text>
 					<text wx:if='{{dayStr!=0}}' class='timetextstyle'>天</text>
 					<text style='diaplay:inline-block;'>{{hrStr}}</text>
@@ -98,16 +98,16 @@
 	</view>
 
 	<block>
-		<view wx:if="{{infoActivity.joinMothed == 'payTicket'}}" style="width:100%;font-size:27rpx;margin-bottom:20rpx;display: flex;justify-content: space-between;align-items: center;">
+		<view wx:if="{{infoActivity.joinMothed == 'payTicket'}}" style="width:100%;font-size:27rpx;margin-bottom:20rpx;display: flex;justify-content: space-between;align-items: center;overflow: hidden;">
 			<view style="width:65%;padding:0 20rpx;">Vol.{{infoActivity.id}} {{infoActivity.name}}</view>
 			<view style="width:25%;padding:0 20rpx;text-align: right;">
 				<text style="color:#298DF8;display: inline-block;">押金 ￥{{cashPledge}}</text>
-				<text style="color:#BEC2C9;display: inline-block;">抽签价 ￥{{infoGoods.shop_price}}</text>
+				<text style="color:#BEC2C9;display: inline-block;">抽签价 ￥<block wx:if='{{infoActivity.lottoPrice}}'>{{infoActivity.lottoPrice}}</block><block wx:else>{{infoGoods.shop_price}}</block></text>
 			</view>
 		</view>
-		<view wx:else style="width:100%;font-size:27rpx;margin-bottom:20rpx;">
+		<view wx:else style="width:100%;font-size:27rpx;margin-bottom:20rpx;overflow: hidden;">
 			<view style="width:70%;padding:0 20rpx;float:left;">Vol.{{infoActivity.id}} {{infoActivity.name}}</view>
-			<view style="width:15%;padding:0 20rpx;color:#FE666B;text-align:right;float:right;">￥{{infoGoods.shop_price}}</view>
+			<view style="width:15%;padding:0 20rpx;color:#FE666B;text-align:right;float:right;">￥<block wx:if='{{infoActivity.lottoPrice}}'>{{infoActivity.lottoPrice}}</block><block wx:else>{{infoGoods.shop_price}}</block></view> 
 		</view>
 	
 	</block>
@@ -234,7 +234,7 @@
 						</block>
 						<block wx:else>
 								<view wx:if='{{infoFragment.activitySignNumber.length > 0}}' style="width:100%;font-size:26rpx;color:#FE666B;overflow: hidden;">
-									<view style="height:80rpx;float:left;padding:0 40rpx;line-height:80rpx;border-right:2rpx dashed #ccc;">报名成功1</view>
+									<view style="height:80rpx;float:left;padding:0 40rpx;line-height:80rpx;border-right:2rpx dashed #ccc;">报名成功</view>
 									<view style="float:left;overflow: hidden;">
 											<view style="height:80rpx;padding-left:40rpx;" wx:for='{{infoFragment.activitySignNumber}}' wx:key='key'>
 												<text style="height:80rpx;line-height:80rpx;float:left;">签号</text>
@@ -848,6 +848,16 @@
 	<view class='limsavebox'>
 		<image class='limsavbimg' mode='aspectFit' src='{{saveimgurl}}'></image>
 		<view class='limsavebuttom' catchtap='sharesavethepicture'>保存图片</view>
+	</view>
+
+</view>
+
+<!-- 从列表进入并且报名谈提示 -->
+<view class='newcoupon' wx:if='{{listTipImg}}'>
+	<view class='swfback' catchtouchmove="preventD" catchtap='listTipImg'></view>
+	<view class='limsavebox'>
+		<image class='limsavbimg' mode='aspectFit' src='{{infoActivity.premiseForJoin}}'></image>
+		<view class='limsavebuttom' catchtap='sharesavethepicture' data-ind='1'>保存图片</view>
 	</view>
 
 </view>
