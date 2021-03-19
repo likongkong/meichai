@@ -4,13 +4,13 @@
 
 <view class="wrap">
   <view class="bannerWrap">
-    <swiper interval="3000" style="height:750rpx;">
-        <block wx:for="{{dataInfo.cover}}" wx:key='key' data-index="{{index}}">
-          <swiper-item>
-            <image src="{{item}}" mode="widthFix"></image>
-          </swiper-item>
-        </block>
-      </swiper>
+    <!-- <swiper interval="3000" style="height:750rpx;">
+      <block wx:for="{{dataInfo.cover}}" wx:key='key' data-index="{{index}}">
+        <swiper-item> -->
+          <image src="{{dataInfo.cover[0]}}" mode="widthFix"></image>
+        <!-- </swiper-item>
+      </block>
+    </swiper> -->
   </view>
   <view class="contentWrap">
     <view class="auctionStatusWrap">
@@ -78,19 +78,27 @@
           </block>
           <!-- status == 3为拍卖已结束 -->
           <block wx:elif="{{dataInfo.status == 3}}">
-            <!-- status == 3且中奖显示支付倒计时 -->
-            <block wx:if="{{dataInfo.isVictory}}">
-              <view>
-                <text class="auctionTimeTxt">支 付 倒 计 时</text>
-                <view class="auctionTimeNum">
-                  <block wx:if="{{dayStr!=0}}">
-                    <text class="num">{{dayStr}}</text>天<text class="num">{{hrStr}}</text>时<text class="num">{{minStr}}</text>分
-                  </block>
-                  <block wx:else>
-                    <text class="num">{{hrStr}}</text>时<text class="num">{{minStr}}</text>分<text class="num">{{secStr}}</text>秒
-                  </block>
+            <!-- status == 3且 isVictory为1时显示支付倒计时 -->
+            <block wx:if="{{dataInfo.isVictory == 1}}">
+              <!-- showTime==0为拍卖已结束 -->
+              <block wx:if="{{dataInfo.showTime == 0}}">
+                <view>
+                  <text class="auctionTimeTxt">拍 卖 已 结 束</text>
                 </view>
-              </view>
+              </block>
+              <block wx:else>
+                 <view>
+                  <text class="auctionTimeTxt">支 付 倒 计 时</text>
+                  <view class="auctionTimeNum">
+                    <block wx:if="{{dayStr!=0}}">
+                      <text class="num">{{dayStr}}</text>天<text class="num">{{hrStr}}</text>时<text class="num">{{minStr}}</text>分
+                    </block>
+                    <block wx:else>
+                      <text class="num">{{hrStr}}</text>时<text class="num">{{minStr}}</text>分<text class="num">{{secStr}}</text>秒
+                    </block>
+                  </view>
+                </view>
+              </block>
             </block>
             <!-- status == 3且未中奖显示拍卖已结束 -->
             <block wx:else>
@@ -112,7 +120,7 @@
       <view class="auctionCapPrice" wx:if="{{dataInfo.auctionRule.capPrice != 0}}">
         封顶价:￥{{dataInfo.auctionRule.capPrice}}
       </view>
-      <view class="auctionBidUserInfoWrap" wx:if="{{dataInfo.showAuctionRecordList}}">
+      <view class="auctionBidUserInfoWrap" wx:if="{{dataInfo.totalAuctionTimes!=0}}">
         <view class="auctionBidUserWrap"> 
           <block wx:for="{{dataInfo.showAuctionRecordList}}" wx:key='key' data-index="{{index}}">
             <!-- 出价人卡片 -->
@@ -133,11 +141,12 @@
                 <view>￥{{item.offer_price}}</view>
               </view>
             </view>
+            
           </block>
         </view>
-        <view class="bidTxt" data-id="{{id}}" catchtap="jumpAuctionRecord">
+        <view class="bidTxt" data-id="{{dataInfo.id}}" catchtap="{{dataInfo.totalAuctionTimes>0?'jumpAuctionRecord':''}}">
           <view>
-            <text> <text style="color:#101010;margin:0;">{{dataInfo.totalAuctionTimes}}</text> 次出价</text> <text>查看出价记录 ></text>
+            <text> <text style="color:#101010;margin:0;">{{dataInfo.totalAuctionTimes}}</text> 次出价</text> <text wx:if="{{dataInfo.totalAuctionTimes>0}}">查看出价记录 ></text>
           </view>
         </view>
       </view>
@@ -189,7 +198,7 @@
       <text class="myAuction" catchtap="jumpMyAuctionList">我的拍卖</text>
       <!-- status == 1为拍卖未开始 -->
       <block wx:if="{{dataInfo.status == 1}}">
-        <text class="joinAuction yellow" catchtap="joinAuctionFun">1月31日 21:00 开拍</text>
+        <text class="joinAuction yellow" catchtap="subscrfun">{{notStartedTime}} 开拍</text>
       </block>
       <!-- status == 2为进行中 -->
       <block wx:elif="{{dataInfo.status == 2}}">
@@ -211,6 +220,7 @@
       </block>
       <!-- status == 3为已结束 -->
       <block wx:else>
+        <!-- showTime==0为拍卖已结束 -->
         <block wx:if="{{dataInfo.showTime == 0}}">
           <text class="joinAuction red" catchtap="jumpAuctionListPage">查看更多拍卖商品</text>
         </block>
@@ -280,7 +290,7 @@
 <view class="inviteFriendsPopMask mask" catchtouchmove="true" wx:if="{{inviteFriendsPopMask}}" catchtap="hideMask">
   <view class="inviteFriendsPop" catchtap="true">
     <text class="inviteFriendsTxt">出价机会不足</text>
-    <text class="inviteFriendsTxt1">每邀请3名好友围观拍卖获得1次出价机会（每人限3次）</text>
+    <text class="inviteFriendsTxt1">每邀请{{dataInfo.auctionRule.invite_friends}}名好友围观拍卖获得1次出价机会（每人限{{dataInfo.auctionRule.limit_number}}次）</text>
     <view class="inviteFriendsBtn" style="position:relative;">
       <button style='width:100%;height:100%;position:absolute;top:0;right:0;opacity:0;' open-type='share'></button>
       邀请好友
@@ -292,12 +302,12 @@
   <view class="auctionResultPop" catchtap="true">
     <text class="auctionResultTitle">恭喜！拍卖胜出</text>
     <block wx:if="{{dataInfo.isVictory == 1}}">
-      <text class="auctionResultTxt">请在30分钟内支付</text>
+      <text class="auctionResultTxt">请在{{payFinishTime}}前支付</text>
     </block>
     <block wx:elif="{{dataInfo.isVictory == 3}}">
       <text class="auctionResultTxt">拍卖已过期</text>
     </block>
-    <image class="auctionResultGoodsTu" src="https://cdn.51chaidan.com/images/toyShow3/brandGoodsRotation/20210109/20a758966d18f609bf1154f869a20168.png" mode="widthFix"></image>
+    <image class="auctionResultGoodsTu" src="{{dataInfo.cover[0]}}" mode="widthFix"></image>
     <text class="auctionResultGoodsName">{{dataInfo.activityName}}</text>
     <block wx:if="{{dataInfo.isVictory == 1}}">
       <text class="auctionResultBtn" catchtap="payNow">立即支付</text>
@@ -314,8 +324,8 @@
     <view class="auctionFailTitleTxt">为您推荐</view>
     <view class="auctionRecommendWrap">
       <!-- 推荐拍卖商品card -->
-      <!-- <block wx:for="{{dataList}}" wx:key='key' data-index="{{index}}">
-        <view class="card" data-id="{{item.id}}" catchtap="jumpAuctionDetails">
+      <block wx:for="{{ListInfo}}" wx:key='key' data-index="{{index}}">
+        <view wx:if="{{index<=1}}" class="card" data-id="{{item.id}}" catchtap="jumpAuctionDetails">
           <view class="cardLeft">
             <image src="{{item.cover}}" mode="widthFix"></image>
           </view>
@@ -358,12 +368,20 @@
                 <text>{{item.infoBrand.brandName}}</text>
               </view>
               <view class="card_sponsor_right">
-                剩5分23秒
+                <block wx:if="{{item.status==1}}">
+                  暂未开始
+                </block>
+                <block wx:elif="{{item.status==2 && item.stop_time==0}}">
+                  暂无出价
+                </block>
+                <block wx:else>
+                  {{item.difftime}}
+                </block>
               </view>
             </view>
           </view>
         </view>
-      </block> -->
+      </block>
     </view>
     <view class="auctionFailBtn" catchtap="jumpAuctionListPage">查看更多拍卖商品</view>
   </view>

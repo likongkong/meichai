@@ -18,7 +18,8 @@
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
-    "useMultiFrameRuntime": true,
+    "useMultiFrameRuntime": false,
+    "useApiHook": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -31,9 +32,7 @@
     "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "minifyWXSS": true,
-    "useApiHook": true,
-    "useApiHostProcess": true
+    "minifyWXSS": true
   },
   "compileType": "miniprogram",
   "libVersion": "2.15.0",
@@ -43,12 +42,6 @@
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "condition": {
-    "search": {
-      "list": []
-    },
-    "conversation": {
-      "list": []
-    },
     "plugin": {
       "list": []
     },
@@ -100,6 +93,17 @@
           "name": "手机壳",
           "pathName": "page/secondpackge/pages/mobileShellDetail/mobileShellDetail",
           "query": "",
+          "scene": null
+        },
+        {
+          "name": "拍卖列表",
+          "pathName": "page/secondpackge/pages/auctionList/auctionList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "我的拍卖列表",
+          "pathName": "page/secondpackge/pages/myAuctionList/myAuctionList",
           "scene": null
         }
       ]

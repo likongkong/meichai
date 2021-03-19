@@ -18,12 +18,14 @@ Page({
     uid: app.signindata.uid,
     pid:0,
     dataList:[],
+    loadprompt:false
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     var _this = this;
+    console.log(options)
     this.setData({
       id: options.id || 0
     }); 
@@ -160,6 +162,9 @@ Page({
     });
   },
 
+  reset(){
+    this.setData({pid:0,dataList:[],loadprompt:false,nodata:false})
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -193,7 +198,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.setData({pid:0})
+    this.reset()
     this.getInfo();
   },
 

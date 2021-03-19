@@ -18,10 +18,12 @@ Page({
     uid: app.signindata.uid,
     pid:0,
     tabbarAll:[
-      '最近结拍','最多竞拍','最多竞拍','最低价格','即将开始'
+      '最近结拍','最多竞拍','最新发布','最低价格','即将开始'
     ],
     currentNum:1,
-    dataList:[]
+    dataList:[],
+    timer:'',
+    loadprompt:false
   },
   /**
    * 生命周期函数--监听页面加载
@@ -61,7 +63,7 @@ Page({
             isProduce: app.signindata.isProduce,
             signinlayer: true,
             tgabox: false
-          });
+          }); 
           // 判断是否登录
           if (_this.data.loginid != '' && _this.data.uid != '') {
             _this.onLoadfun();
@@ -142,10 +144,16 @@ Page({
         wx.stopPullDownRefresh();
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
-          if(res.data.List.activity.length == 0 && _this.data.pid == 0){
+          let activity = res.data.List.activity;
+          if(activity.length == 0 && _this.data.pid == 0){
             _this.setData({ nodata : true})
+            wx.showToast({
+              title: '暂无数据',
+              icon: 'none',
+              duration: 1000
+            })
           }else{
-            if(res.data.List.activity.length == 0 && _this.data.pid != 0){
+            if(activity.length == 0 && _this.data.pid != 0){
               wx.showToast({
                 title: '没有更多数据了',
                 icon: 'none',
@@ -153,8 +161,12 @@ Page({
               })
               _this.setData({loadprompt : true })
             }else{
-              let dataList = [..._this.data.dataList,...res.data.List.activity];
+              // for(var i =0;i<res.data.List.activity.length;i++){
+              //   activity[0].stop_time = 1615887060;
+              // }
+              let dataList = [..._this.data.dataList,...activity];
               _this.setData({dataList})
+              _this.dateformat(_this,activity);
             }
           }
         } else {
@@ -183,17 +195,18 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    clearInterval(this.data.timer); 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    clearInterval(this.data.timer); 
   },
   reset(){
     this.setData({pid:0,dataList:[],loadprompt:false,nodata:false})
+    clearInterval(this.data.timer); 
   },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
@@ -208,7 +221,7 @@ Page({
    */
   onReachBottom: function () {
     if(this.data.loadprompt == false){
-      this.setData({page:++this.data.page})
+      this.setData({pid:++this.data.pid})
     }
     this.getInfo();
   },
@@ -236,58 +249,52 @@ Page({
     })
   },
 
+  jumpAuctionList(e){
+    wx.navigateTo({  
+      url: `../myAuctionList/myAuctionList`
+    })
+  },
+
   // 时间格式化输出，将时间戳转为 倒计时时间
-  dateformat: function (micro_second) {
-    var _this = this
-    var timestamp = Date.parse(new Date())
-    //总的秒数 
-    var second = micro_second - (timestamp / 1000);
-    if (second > 0) {
-      // 天位    
-      var day = Math.floor(second / 3600 / 24);
-      var dayStr = day.toString();
-      if (dayStr.length == 1) dayStr = '0' + dayStr;
-
-      // 小时位 
-      var hr = Math.floor(second / 3600 % 24);
-      // var hr = Math.floor(second / 3600); //直接转为小时 没有天 超过1天为24小时以上
-      var hrStr = hr.toString();
-      if (hrStr.length == 1) hrStr = '0' + hrStr;
-
-      // 分钟位  
-      var min = Math.floor(second / 60 % 60);
-      var minStr = min.toString();
-      if (minStr.length == 1) minStr = '0' + minStr;
-
-      // 秒位  
-      var sec = Math.floor(second % 60);
-      var secStr = sec.toString();
-      if (secStr.length == 1) secStr = '0' + secStr;
-      if (day == 0) {
-        //   return hrStr + ":" + minStr + ":" + secStr;
-        _this.setData({
-          dayStr: 0,
-          hrStr: hrStr,
-          minStr: minStr,
-          secStr: secStr,
-        })
-      } else {
-        _this.setData({
-          dayStr: dayStr,
-          hrStr: hrStr,
-          minStr: minStr,
-          secStr: secStr,
-        })
-        //   return dayStr + "天" + hrStr + ":" + minStr + ":" + secStr;
+  dateformat(_this,activity) {
+    let len=activity.length;//时间数据长度
+    function nowTime() {//时间函数
+      for (var i = 0; i < len; i++) {
+      var intDiff = activity[i].stop_time - Date.parse(new Date())/1000;
+      var day=0, hour=0, minute=0, second=0;  
+      var str = '';
+      if(intDiff > 0){//转换时间
+        day = Math.floor(intDiff / (60 * 60 * 24));
+        hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
+        minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+        second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+        // if(hour <=9) hour = '0' + hour;
+        // if (minute <= 9) minute = '0' + minute;
+        if (second <= 9) second = '0' + second;
+        activity[i].stop_time = activity[i].stop_time--;
+        if(day>0){
+          str='剩'+day+'天'+hour+'时' 
+        }else if(day==0 && hour>0){
+          str='剩'+hour+'时'+minute+'分' 
+        }else if(day==0 && hour==0 && minute>0){
+          str='剩'+minute+'分'+second+'秒' 
+        }else{
+          str='剩'+minute+'分'+second+'秒' 
+        }
+        // console.log(str) 
+      }else{
+        str = "已结束";
+        clearInterval(_this.data.timer); 
       }
-    } else {
+      // console.log(str);
+      activity[i].difftime = str;//在数据中添加difftime参数名，把时间放进去
+      }
       _this.setData({
-        dayStr: 0,
-        hrStr: "00",
-        minStr: "00",
-        secStr: "00",
+        dataList: activity
       })
     }
-  },
+    nowTime();
+    _this.data.timer = setInterval(nowTime, 1000);
+  }
 
 })

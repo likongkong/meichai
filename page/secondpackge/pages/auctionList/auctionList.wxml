@@ -3,7 +3,7 @@
 
 
 <view class="wrap">
-  <view class="tabbarWrap">
+  <view class="tabbarWrap" style="top:{{statusBarHeightMc}}px">
     <block wx:for="{{tabbarAll}}" wx:key='key' data-index="{{index}}">
       <view class="{{index+1 == currentNum?'active':''}}" data-ind="{{index+1}}" catchtap="changetabbar">{{item}}</view>
     </block>
@@ -43,7 +43,12 @@
                 <text style="color:#FF2742;">出价￥{{item.currentPrice}}</text>
               </block>
               <block wx:else>
-                <text style="color:#A7A7A8;">{{item.totalAuctionTimes}}次出价</text>
+                <block wx:if="{{item.totalAuctionTimes == 0}}">
+                  <text style="color:#A7A7A8;">暂无出价</text>
+                </block>
+                <block wx:else>
+                  <text style="color:#A7A7A8;">{{item.totalAuctionTimes}}次出价</text>
+                </block>
               </block>
             </view>
           </view>
@@ -53,12 +58,23 @@
               <text>{{item.infoBrand.brandName}}</text>
             </view>
             <view class="card_sponsor_right">
-              剩5分23秒
+              <block wx:if="{{item.status==1}}">
+                暂未开始
+              </block>
+              <block wx:elif="{{item.status==2 && item.stop_time==0}}">
+                暂无出价
+              </block>
+              <block wx:else>
+                {{item.difftime}}
+              </block>
             </view>
           </view>
         </view>
       </view>
     </block>
+  </view>
+  <view class="auctionListWrap">
+    <view class="auctionListBtn" catchtap="jumpAuctionList">我的拍卖</view>
   </view>
 </view>
 

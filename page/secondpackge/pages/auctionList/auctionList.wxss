@@ -17,6 +17,8 @@ page{
   padding: 0 30rpx;
   box-sizing: border-box;
   background:#fff;
+  position: fixed;
+  z-index: 11;
 }
 .tabbarWrap view{
   height: 88rpx;
@@ -30,6 +32,7 @@ page{
 
 .contentWrap{
   margin-top: 20rpx;
+  padding-top: 70rpx;
 }
 .card{
   width: 100%;
@@ -39,6 +42,7 @@ page{
   display: flex;
   justify-content: space-between;
   margin-top: 20rpx;
+  position: relative;
 }
 .cardLeft{
   width: 240rpx;
@@ -53,6 +57,14 @@ page{
   width: 450rpx;
   padding: 0 10rpx 0 30rpx;
   box-sizing: border-box;
+}
+.cardimg{
+  width: 160rpx;
+  height: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
 }
 .card_title{
   display: block;
@@ -110,4 +122,26 @@ page{
 .card_sponsor_right{
   font-size: 26rpx;
   color:#A7A7A8;
+}
+
+.auctionListWrap{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 80rpx;
+  left: 0;
+}
+.auctionListBtn{
+  width: 400rpx;
+  color:#fff;
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.4);
+  background: #FC585F;
+  display: block;
+  border-radius: 70rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  font-size: 26rpx;
 }
