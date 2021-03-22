@@ -197,7 +197,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoadfun: function () {
-    console.log(111111,app.signindata.isBlindBoxDefaultAddress)
     var _this = this;
     _this.setData({
       loginid: app.signindata.loginid,

@@ -185,7 +185,7 @@ Page({
       var iftrtipx= false;
       var iftrtipd = false;
       for (var i = 0; i < tipsellist.length;i++){
-        if (10 > tipsellist[i].shop_price || tipsellist[i].shop_price==''){
+        if (1 > tipsellist[i].shop_price || tipsellist[i].shop_price==''){
           iftrtipx = true;
         };
         if (tipsellist[i].shop_price > 9999){
@@ -193,7 +193,7 @@ Page({
         };
       };
       if (iftrtipx) {
-        app.showToastC('单个商品价格不能小于10');
+        app.showToastC('单个商品价格不能小于1');
         return false;
       };
       if (iftrtipd){
@@ -210,8 +210,8 @@ Page({
       app.showToastC('组合价格不能大于9999');
       return false;
     };
-    if (this.data.combinationprice<10){
-      app.showToastC('组合价不能小于10');
+    if (this.data.combinationprice<1){
+      app.showToastC('组合价不能小于1');
       return false;
     };
     wx.showModal({
@@ -646,8 +646,8 @@ Page({
             app.showToastC('价格修改不能为空');
             return false;
           };
-          if (parseFloat(_this.data.inputdataprice) < 10) {
-            app.showToastC('价格修改不能小于10');
+          if (parseFloat(_this.data.inputdataprice) < 1) {
+            app.showToastC('价格修改不能小于1');
             return false;
           };
           if(_this.data.goods_name == 'BE@RBRICK'){

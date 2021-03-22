@@ -7,18 +7,21 @@
         <view style="position: relative;margin-bottom: 20rpx;">
             <view class='personalhomepage' catchtap='personalhomepage'>个人主页</view>
             <view class='wdhl'>
-            <view class='wdhlimg' bindtap="personaldata">
+                <!-- bindtap="personaldata" -->
+            <view class='wdhlimg'>
+                <button class='tgaboxtgawchbochlibutboxtwo' type='primary' bindtap="getUserProfile"></button>
                 <image src='{{avatarUrl}}' class='wdhlimgimg' style='position: relative;'></image>
                 <view wx:if="{{showVipStatus != 1}}" class='vipBG'><image src='https://cdn.51chaidan.com/images/calendar/VipCase.png' style='position: relative;'></image></view>
-                <!-- <image src='../images/icon_man2.png' hidden='{{icon_sex==2}}' class='icwoam'></image>
-                <image src='../images/icon_woman2.png' hidden='{{icon_sex==1}}' class='icwoam'></image>                         -->
+                <!-- <image src='../images/icon_man2.png' hidden='{{gender==2}}' class='icwoam'></image>
+                <image src='../images/icon_woman2.png' hidden='{{gender==1}}' class='icwoam'></image>                         -->
             </view>
             </view>
             <view class='wdhr'>
                 <view class='wdhrtit' hidden='{{istit}}'>
-                    <view class='wdhrtitdz' bindtap='wxjurisdiction'>登录</view> 
+                    <button class='tgaboxtgawchbochlibutboxtwo' type='primary' bindtap="getUserProfile"></button>
+                    <view class='wdhrtitdz'>登录</view> 
                 </view>
-                <view class='wdhrtitname specialellipsis' hidden='{{istitnex}}' style='margin-top:20rpx;'>{{nickName}}</view>
+                <view class='wdhrtitname specialellipsis' hidden='{{istitnex}}' style='margin-top:20rpx;'><button class='tgaboxtgawchbochlibutboxtwo' type='primary' bindtap="getUserProfile"></button>{{nickName}}</view>
                 <!-- 幸运值 -->
                 <view catchtap="awasustipimages" style="width:100%;font-size:24rpx;color:#fff;height:40rpx;vertical-align: middle;" hidden='{{istitnex}}'>
                     幸运值:{{luckyValue}}
