@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '拍卖列表', 
+    c_title: '我的拍卖', 
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
@@ -19,9 +19,11 @@ Page({
     tabbarAll:[
       '我参与的','拍卖领先','拍卖出局','我的订阅','拍卖结束'
     ],
-    currentNum:0,
+    currentNum:1,
     pid:0,
-    dataList:[]
+    dataList:[],
+    timer:'',
+    loadprompt:false
   },
   /**
    * 生命周期函数--监听页面加载
@@ -130,22 +132,28 @@ Page({
   getInfo(){
     var _this = this;
     wx.showLoading({ title: '加载中...'})
-    var q = Dec.Aese('mod=auction&operation=record&showType=' + _this.data.currentNum + '&pid=' + _this.data.pid)
-    console.log('我的拍卖列表请求数据===','mod=auction&operation=list&showType=' + _this.data.currentNum + '&pid=' + _this.data.pid)
+    var q = Dec.Aese('mod=auction&operation=record&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&showType=' + _this.data.currentNum + '&pid=' + _this.data.pid)
+    console.log('我的拍卖列表请求数据===','mod=auction&operation=list&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&showType=' + _this.data.currentNum + '&pid=' + _this.data.pid)
     wx.request({
       url: app.signindata.comurl + 'spread.php'+q,
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
-        console.log('我的拍卖列表数据======',res)
+        console.log('拍卖列表数据======',res)
         // 刷新完自带加载样式回去
         wx.stopPullDownRefresh();
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
-          if(res.data.List.record.length == 0 && _this.data.pid == 0){
+          let record = res.data.List.record;
+          if(record.length == 0 && _this.data.pid == 0){
             _this.setData({ nodata : true})
+            wx.showToast({
+              title: '暂无数据',
+              icon: 'none',
+              duration: 1000
+            })
           }else{
-            if(res.data.List.record.length == 0 && _this.data.pid != 0){
+            if(record.length == 0 && _this.data.pid != 0){
               wx.showToast({
                 title: '没有更多数据了',
                 icon: 'none',
@@ -153,8 +161,12 @@ Page({
               })
               _this.setData({loadprompt : true })
             }else{
-              let dataList = [..._this.data.dataList,...res.data.List.record];
+              // for(var i =0;i<res.data.List.record.length;i++){
+              //   record[0].stop_time = 1615887060;
+              // }
+              let dataList = [..._this.data.dataList,...record];
               _this.setData({dataList})
+              _this.dateformat(_this,record);
             }
           }
         } else {
@@ -166,6 +178,13 @@ Page({
 
   reset(){
     this.setData({pid:0,dataList:[],loadprompt:false,nodata:false})
+    clearInterval(this.data.timer); 
+  },
+
+  jumpAuctionDetails(e){
+    wx.navigateTo({  
+      url: `../auctionDetails/auctionDetails?id=${e.currentTarget.dataset.id}`
+    })
   },
 
   /**
@@ -186,14 +205,14 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    clearInterval(this.data.timer); 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    clearInterval(this.data.timer); 
   },
 
   /**
@@ -209,7 +228,7 @@ Page({
    */
   onReachBottom: function () {
     if(this.data.loadprompt == false){
-      this.setData({page:++this.data.page})
+      this.setData({pid:++this.data.pid})
     }
     this.getInfo();
   },
@@ -237,4 +256,52 @@ Page({
     })
   },
 
+  jumpAuctionList(){
+    wx.navigateTo({  
+      url: "../auctionList/auctionList"
+    })
+  },
+
+
+  // 时间格式化输出，将时间戳转为 倒计时时间
+  dateformat(_this,record) {
+    let len=record.length;//时间数据长度
+    function nowTime() {//时间函数
+      for (var i = 0; i < len; i++) {
+      var intDiff = record[i].stop_time - Date.parse(new Date())/1000;
+      var day=0, hour=0, minute=0, second=0;  
+      var str = '';
+      if(intDiff > 0){//转换时间
+        day = Math.floor(intDiff / (60 * 60 * 24));
+        hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
+        minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+        second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+        // if(hour <=9) hour = '0' + hour;
+        // if (minute <= 9) minute = '0' + minute;
+        if (second <= 9) second = '0' + second;
+        record[i].stop_time = record[i].stop_time--;
+        if(day>0){
+          str='剩'+day+'天'+hour+'时' 
+        }else if(day==0 && hour>0){
+          str='剩'+hour+'时'+minute+'分' 
+        }else if(day==0 && hour==0 && minute>0){
+          str='剩'+minute+'分'+second+'秒' 
+        }else{
+          str='剩'+minute+'分'+second+'秒' 
+        }
+        // console.log(str) 
+      }else{
+        str = "已结束";
+        clearInterval(_this.data.timer); 
+      }
+      // console.log(str);
+      record[i].difftime = str;//在数据中添加difftime参数名，把时间放进去
+      }
+      _this.setData({
+        dataList: record
+      })
+    }
+    nowTime();
+    _this.data.timer = setInterval(nowTime, 1000);
+  }
 })

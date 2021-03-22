@@ -41,7 +41,7 @@ page{
   border-top-left-radius: 20rpx;
   overflow: hidden;
   position: relative;
-  top: -20rpx;
+  top: -16rpx;
 }
 .auctionStatusWrap{
   background:#FFECBF;
