@@ -1287,6 +1287,19 @@ App({
       }
     // }
   },
+
+  getSearchString: function (key, Url) {
+    // 获取URL中?之后的字符
+    var str = Url;
+    var arr = str.split("&");
+    var obj = new Object();
+    for (var i = 0; i < arr.length; i++) {
+      var tmp_arr = arr[i].split("=");
+      obj[decodeURIComponent(tmp_arr[0])] = decodeURIComponent(tmp_arr[1]);
+    }
+    return obj[key];
+  },
+
   // 获取当前页面路径
   currentPageFun(){
     const pages = getCurrentPages();
