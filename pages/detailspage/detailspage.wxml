@@ -159,14 +159,15 @@
           <block wx:elif='{{zunmdata.status==0}}'>已售罄</block>
         </view>
         <view style="height:40rpx;width:100rpx;background:#f08080;color:#fff;text-align:center;line-height:40rpx;float:right;margin:10rpx 20rpx 0 0;font-size:22rpx;border-radius: 10rpx;" wx:if='{{zunmdata.goodsLimit}}'>{{zunmdata.goodsLimit}}</view>
-      </view> -->
+      </view> --> 
       <block wx:if='{{is_exhibition==1}}'>
           <view style="width:100%;overflow:hidden;background:#fff;">
             <view class='dltitle' style='width:540rpx;font-size:32rpx;padding:20rpx 20rpx 20rpx 20rpx;float:left;'>
               {{zunmdata.gname}}
             </view>
             <view class='dPrice' style="width:170rpx;float:left;padding-top:20rpx;">
-              <text style='font-size:30rpx;color:#000;font-weight:bold;color:#ff2742;'><block wx:if='{{zunmdata.giftStock}}'>赠品</block><block wx:else><text style='font-size:30rpx;'>{{zunmdata.gprice!=0?'￥':''}}</text>{{zunmdata.gprice!=0?zunmdata.gprice:'价格以线下展会为准'}}</block></text>
+              <text style='font-size:30rpx;color:#000;font-weight:bold;color:#ff2742;'><block wx:if='{{zunmdata.giftStock}}'>赠品</block><block wx:else><text style='font-size:30rpx;'>{{zunmdata.gprice!=0?'￥':''}}</text><block wx:if='{{is_exhibition==1}}'>{{zunmdata.gprice!=0?zunmdata.gprice:'价格以线下展会为准'}}</block>
+              <block wx:else>{{zunmdata.gprice!=0?zunmdata.gprice:''}}</block></block></text>
             </view>
           </view>      
       </block>
@@ -180,7 +181,7 @@
             <text wx:if='{{zunmdata.is_suit==1}}' style='color:#ff2742;font-size:24rpx;margin-right:10rpx;'>{{zunmdata.suitName}}<text style='font-size:30rpx;'>{{zunmdata.unpackUnit}}</text></text>
             <text style='font-size:30rpx;color:#000;font-weight:bold;'><text style='font-size:30rpx;'>￥</text>{{zunmdata.gsale}}</text>
             <text wx:if='{{zunmdata.giftStock}}'>赠品</text>
-            <text wx:elif='{{zunmdata.gsale!=zunmdata.gprice}}' style='color: #959595;font-size: 24rpx;text-decoration:line-through;position: relative;top:3rpx;margin-left: 10rpx;'>{{zunmdata.gprice!=0?'￥'+zunmdata.gprice:'价格以线下展会为准'}}</text>
+            <text wx:elif='{{zunmdata.gsale!=zunmdata.gprice}}' style='color: #959595;font-size: 24rpx;text-decoration:line-through;position: relative;top:3rpx;margin-left: 10rpx;'><block wx:if='{{is_exhibition==1}}'>{{zunmdata.gprice!=0?zunmdata.gprice:'价格以线下展会为准'}}</block><block wx:else>{{zunmdata.gprice!=0?zunmdata.gprice:''}}</block></text>
           </view>
           <view class='dltityh' style='text-align:center;margin-bottom:10rpx;padding:12rpx 20rpx;position:relative;min-height:36rpx;'>
             <view class='dlyhnnimeMod' wx:for="{{zunmdata.gtag}}" wx:key="key">{{item}}</view>
@@ -219,7 +220,7 @@
         <text wx:if='{{zunmdata.is_suit==1}}' style='color:#ff2742;font-size:24rpx;margin-right:10rpx;'>{{zunmdata.suitName}}<text style='font-size:30rpx;'>{{zunmdata.unpackUnit}}</text></text>
         <text style='font-size:30rpx;color:#000;font-weight:bold;'><text style='font-size:30rpx;'>￥</text>{{zunmdata.gsale}}</text>
         <text wx:if='{{zunmdata.giftStock}}'>赠品</text>
-        <text wx:elif='{{zunmdata.gsale!=zunmdata.gprice}}' style='color: #959595;font-size: 24rpx;text-decoration:line-through;position: relative;top:3rpx;margin-left: 10rpx;'>{{zunmdata.gprice!=0?'￥'+zunmdata.gprice:'价格以线下展会为准'}}</text>
+        <text wx:elif='{{zunmdata.gsale!=zunmdata.gprice}}' style='color: #959595;font-size: 24rpx;text-decoration:line-through;position: relative;top:3rpx;margin-left: 10rpx;'><block wx:if='{{is_exhibition==1}}'>{{zunmdata.gprice!=0?zunmdata.gprice:'价格以线下展会为准'}}</block><block wx:else>{{zunmdata.gprice!=0?zunmdata.gprice:''}}</block></text>
       </view>
       <view class='dltityh' wx:if='{{specialGoods!=1}}' style='text-align:center;margin-bottom:10rpx;padding:12rpx 20rpx;position:relative;min-height:36rpx;'>
         <view class='dlyhnnimeMod' wx:for="{{zunmdata.gtag}}" wx:key="key">{{item}}</view>

@@ -17,7 +17,7 @@ Page({
     store_id: '',
     istit:false,
     istitnex:true,
-    icon_sex:0,
+    gender:0,
     // 用户图片
     avatarUrl:'../images/pic_head.png',
     // 用户名称
@@ -232,25 +232,6 @@ Page({
     })
 
   },
-  wxjurisdiction:function(){
-      var _this = this;
-      // 获取用户信息
-      wx.login({
-        success:function(){
-          wx.getUserInfo({
-            success: function (res) {
-              _this.setData({
-                avatarUrl: res.userInfo.avatarUrl,
-                nickName: res.userInfo.nickName,
-                icon_sex: res.userInfo.gender,
-                istitnex: false,
-                istit: true,
-              })
-            }
-          });
-        }
-      });
-  },
   // 我的订单
   myorderfun:function(e){
     var num = e.currentTarget.dataset.tabnum;
@@ -287,7 +268,6 @@ Page({
    */
 
   onLoad: function (options) {
-
 
     this.isWeekEnd();
 
@@ -394,19 +374,18 @@ Page({
       app.defaultinfofun(this);
     };
 
-    
-    // 已经授权，可以直接调用 getUserInfo 
-    wx.getUserInfo({
-      success: function (res) {
-        _this.setData({
-          avatarUrl: res.userInfo.avatarUrl,
-          nickName: res.userInfo.nickName,
-          icon_sex: res.userInfo.gender,
-          istitnex: false,
-          istit: true,
-        })
-      }
-    }); 
+    // 已经授权，可以直接调用
+    if(app.signindata.userInfo && app.signindata.userInfo.avatarUrl){
+      var userInfo = app.signindata.userInfo || {};
+      _this.setData({
+        avatarUrl: userInfo.avatarUrl,
+        nickName: userInfo.nickName,
+        gender: userInfo.gender,
+        istitnex: false,
+        istit: true,
+      })
+    };
+
     // 购物车数据显示
     Dec.shopnum(_this,app.signindata.comurl);  
     // 调取晒单数量
@@ -700,6 +679,54 @@ Page({
       format = format.replace(formateArr[i], returnArr[i]);
     }
     return format;
+  },
+  // 获取用户头像名称授权
+  getUserProfile(){
+    var _this = this;
+    console.log(wx.canIUse('getUserProfile'),wx.canIUse('getUserProfile'))
+
+    wx.getUserProfile({
+        lang: 'zh_CN',
+        desc:'获取标识信息',
+        success(res){
+          console.log(res)
+
+          var userInfo = res.userInfo || {};
+
+          console.log('mod=userinfo&operation=setinfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&nick=' + userInfo.nickName + '&gender=' + userInfo.gender + '&headphoto=' + userInfo.avatarUrl + '&nick=' + encodeURIComponent(userInfo.nickName))
+
+          var qq = Dec.Aese('mod=userinfo&operation=setinfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&nick=' + userInfo.nickName + '&gender=' + userInfo.gender + '&headphoto=' + userInfo.avatarUrl + '&nick=' + encodeURIComponent(userInfo.nickName) );
+
+          wx.request({
+            url: app.signindata.comurl + 'user.php' + qq,
+            method: 'GET',
+            header: { 'Accept': 'application/json' },
+            success: function (res) {
+              console.log('设置头像名称=====',res)
+              if (res.data.ReturnCode == 200) {
+                 
+                 _this.setData({
+                  avatarUrl: userInfo.avatarUrl,
+                  nickName: userInfo.nickName,
+                  gender: userInfo.gender,
+                  istitnex: false,
+                  istit: true,
+                });
+
+                app.signindata.avatarUrl = userInfo.avatarUrl;
+                app.signindata.nickName = userInfo.nickName;
+                app.signindata.userInfo = userInfo || {};
+
+              };
+            }
+          }) 
+
+
+        },
+        fail(res){
+          console.log(res)
+        }
+    })
   }
 
 })

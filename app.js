@@ -164,15 +164,10 @@ App({
         var code = res.code;
         wx.getUserInfo({
           success: function (res) {
+            console.log('wx.getUserInfo========',res)
             var resiv = res.iv;
-            var avaurl = res.userInfo.avatarUrl;
-            _this.signindata.avatarUrl = res.userInfo.avatarUrl;
-            wx.setStorageSync('image_cache', '')
-            var nicname = res.userInfo.nickName;
-            _this.signindata.nickName = res.userInfo.nickName;
-            var iconsex = res.userInfo.gender;
+            
             var encryptedData = res.encryptedData;
-            _this.signindata.userInfo = res.userInfo;
 
             if (BSkipData && typeof (BSkipData) != "undefined") { //如果B端过来需要额外传递数据
               var q = Dec.Aese('operation=xcx&mod=login&code=' + code + '&iv=' + resiv + '&encryptedData=' + encryptedData + '&referee=' + _this.signindata.referee + '&activity_id=' + _this.signindata.activity_id + '&channel=' + _this.signindata.channel + '&last_store_id=' + _this.signindata.global_store_id + '&token=' + _this.signindata.token + '&share_source=' + _this.signindata.share_source + '&tid=' + _this.signindata.tid + "&isBusinessSkip=" + BSkipData.isBusinessSkip + "&businessClientUserId=" + BSkipData.businessClientUserId +
@@ -256,18 +251,34 @@ App({
                   var loginid = res.data.Info.loginid || '';
                   var uid = res.data.Info.uid || '';
                   wx.setStorage({ key: 'signin', data: { openid: openid, loginid: loginid, uid: uid } });
+
+
+                  _this.signindata.userInfo = res.data.Info.user || {};
+
+                  if (res.data.Info.user) {
+
+                    var userinfo = res.data.Info.user;
+                    userinfo.avatarUrl = userinfo.headphoto;
+                    userinfo.nickName = userinfo.nick;
+                    userinfo.gender = userinfo.gender;
+
+                    _this.signindata.userInfo = userinfo || {};
+                    _this.signindata.avatarUrl = userinfo.headphoto;
+                    _this.signindata.nickName = userinfo.nick;
+
+                    console.log('_this.signindata.userInfo====',_this.signindata.userInfo)
+                    // var photoheadphoto = res.data.Info.user.headphoto || '';
+                    // var namenick = res.data.Info.user.nick || '';
+                    // if (photoheadphoto != avaurl || namenick != nicname) {
+                    //   _this.logindata(nicname, iconsex, avaurl);
+                    // };
+                  };
+
                   callback.onLoadfun();
 
                   // 调取收货地址
                   _this.nextpagediao();
 
-                  if (res.data.Info.user) {
-                    var photoheadphoto = res.data.Info.user.headphoto || '';
-                    var namenick = res.data.Info.user.nick || '';
-                    if (photoheadphoto != avaurl || namenick != nicname) {
-                      _this.logindata(nicname, iconsex, avaurl);
-                    };
-                  };
                   var qiftr = Dec.Aese('mod=check&operation=city&uid=' + _this.signindata.uid + '&loginid=' + _this.signindata.loginid);
                   wx.request({
                     url: _this.signindata.comurl + 'auth.php' + qiftr,
@@ -284,10 +295,10 @@ App({
                     }
                   })
                 };
-                if (res.data.ReturnCode == 201) {
-                  var ennicname = encodeURIComponent(nicname)
-                  _this.logindata(ennicname, iconsex, avaurl);
-                };
+                // if (res.data.ReturnCode == 201) {
+                //   var ennicname = encodeURIComponent(nicname)
+                //   _this.logindata(ennicname, iconsex, avaurl);
+                // };
               }
             })
           }
