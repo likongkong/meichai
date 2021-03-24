@@ -614,14 +614,14 @@ Page({
     if (options.scene) {
       // '&welfareid=' + _this.data.welfareid + '&isredpag=1'
       let scene = decodeURIComponent(options.scene);
-      app.signindata.referee = _this.getSearchString('referee', scene) || 0;
-      app.signindata.activity_id = _this.getSearchString('id', scene) || 0;
-      _this.data.id = _this.getSearchString('id', scene) || 0;
-      _this.data.gid = _this.getSearchString('gid', scene) || 0;
-      _this.data.welfareid = _this.getSearchString('welfareid', scene) || 0;
-      _this.data.isredpag = _this.getSearchString('isredpag', scene) || 0;
+      app.signindata.referee = app.getSearchString('referee', scene) || 0;
+      app.signindata.activity_id = app.getSearchString('id', scene) || 0;
+      _this.data.id = app.getSearchString('id', scene) || 0;
+      _this.data.gid = app.getSearchString('gid', scene) || 0;
+      _this.data.welfareid = app.getSearchString('welfareid', scene) || 0;
+      _this.data.isredpag = app.getSearchString('isredpag', scene) || 0;
       _this.setData({
-        is_share: _this.getSearchString('referee', scene) || 0 ? true : false
+        is_share: app.getSearchString('referee', scene) || 0 ? true : false
       })
     } else {
       app.signindata.referee = options.referee || 0;
