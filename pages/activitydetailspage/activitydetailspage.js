@@ -2250,7 +2250,7 @@ closefrindcommoni:function(){
           app.cloudstatistics('activityStatistics', clouddata)
 
           // 助力
-          if (arrlist.status == 2 && arrlist.is_join == 1 &&_this.data.shareUId && _this.data.shareUId!=_this.data.uid) {
+          if (arrlist.status == 2 &&_this.data.shareUId && _this.data.shareUId!=_this.data.uid) {
             _this.powerInterface();
           };
           // 调取推荐活动
