@@ -43,7 +43,7 @@ Page({
     // 拆单用户数据
     uinfodata: {},
     // 倒计时
-    countdown: '',
+    countdown: 30,
     // 倒计时判断
     iftrcountdown:true,
     // 弹框背景
@@ -310,7 +310,124 @@ Page({
 
     pictboxbox: false,
     cliptxt:'pili@51chaidan.com',
-    addsetData:[[]]
+    addsetData:[[]],
+    mySignatureNumber:false,
+    signatureList:false,
+    winningProbability:false,
+    // 是否中奖
+    wonOrNot:false,
+    sigListdata:[],
+    rLUserLotto:{},
+    muSnData:[],
+    multipleDisplay:''
+  },
+  wonOrNot(){
+    this.setData({wonOrNot:!this.data.wonOrNot})
+  },
+  winProbility(w){
+    var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
+    if(ind == 9999){
+      this.setData({
+        winningProbability:!this.data.winningProbability
+      })
+    }else{
+      if(ind == 999){
+        var multipleDisplay = this.data.rLUserLotto
+      }else{
+        var multipleDisplay = this.data.sigListdata[ind];
+      };
+      this.setData({
+        winningProbability:!this.data.winningProbability,
+        multipleDisplay:multipleDisplay
+      })      
+    };
+
+  },
+  mySignatureNum(){
+    var _this = this;
+    if(_this.data.muSnData.length == 0){
+
+      var qhd = Dec.Aese('mod=miandan&operation=mylotto&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id);
+      wx.showLoading({ title: '加载中...', mask: true })
+      wx.request({
+        url: app.signindata.comurl + 'spread.php' + qhd,
+        method: 'GET',
+        header: { 'Accept': 'application/json' },
+        success: function (res) {
+          console.log('签号列表================',res)
+          wx.hideLoading();
+          if (res.data.ReturnCode == 200) {
+            var muSnData = res.data.List.lotto || [];
+            if(muSnData.length != 0){
+              muSnData.map(function(item){
+                if(item.nick){
+                  item.nick =  _this.plusXing(item.nick,1,0);
+                };
+                return item;
+              })
+            };
+            _this.setData({
+              muSnData:muSnData || []
+            });
+            _this.setData({mySignatureNumber:!_this.data.mySignatureNumber})
+          } else {
+            app.showModalC(res.data.Msg)
+          };
+        }
+      }); 
+    }else{
+      this.setData({mySignatureNumber:!this.data.mySignatureNumber})
+    };
+
+    
+  },
+  plusXing (str,frontLen,endLen) {
+    var len = str.length-frontLen-endLen;
+    var xing = '';
+    for (var i=0;i<len;i++) {
+    xing+='*';
+    }
+    return str.substring(0,frontLen)+xing+str.substring(str.length-endLen);
+  },
+
+  sigListFun(){
+    var _this = this;
+    if(_this.data.sigListdata.length == 0){
+      var qhd = Dec.Aese('mod=miandan&operation=lottoTop&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id);
+      wx.showLoading({ title: '加载中...', mask: true })
+      wx.request({
+        url: app.signindata.comurl + 'spread.php' + qhd,
+        method: 'GET',
+        header: { 'Accept': 'application/json' },
+        success: function (res) {
+          console.log('列表排行================',res)
+          wx.hideLoading();
+          if (res.data.ReturnCode == 200) {
+            var sigListdata = res.data.List.lotto || [];
+            if(sigListdata.length != 0){
+              sigListdata.map(function(item){
+                if(item.nick){
+                  item.nick = _this.plusXing(item.nick,1,0);
+                };
+                return item;
+              })
+            };
+
+            _this.setData({
+              sigListdata:sigListdata || [],
+              rLUserLotto:res.data.Info.userLotto || {}
+            })
+            _this.setData({signatureList:!_this.data.signatureList})
+          } else {
+            app.showModalC(res.data.Msg)
+          };
+        }
+      }); 
+    }else{
+      this.setData({signatureList:!this.data.signatureList})
+    };
+
+    
   },
   pictboxboxfun: function () {
     this.setData({ pictboxbox: false });
@@ -596,7 +713,7 @@ closefrindcommoni:function(){
            iftrmoneySymbol:false
          })
       };
-      if (swiperarr.iftrtask==1){
+      if (detalNum == 1){
          this.setData({
            taskOrUserImg:false
          });
@@ -1395,50 +1512,25 @@ closefrindcommoni:function(){
   cdtime: function (cdtime) {
     var _this = this;
     clearInterval(_this.data.interval);
+    var totalSecond = 30;
     var interval =function () {
-      var totalSecond = parseInt(cdtime) - Date.parse(new Date()) / 1000;
       var second = totalSecond;// 秒数  
-      // 天数位  
-      var day = Math.floor(second / 3600 / 24);
-      var dayStr = day.toString();
-      if (dayStr.length == 1) dayStr = '0' + dayStr;
-      // 小时位  
-      var hr = Math.floor((second - day * 3600 * 24) / 3600);
-      var hrStr = hr.toString();
-      if (hrStr.length == 1) hrStr = '0' + hrStr;
-      // 分钟位  
-      var min = Math.floor((second - day * 3600 * 24 - hr * 3600) / 60);
-      var minStr = min.toString();
-      if (minStr.length == 1) minStr = '0' + minStr;
       // 秒位  
-      var sec = second - day * 3600 * 24 - hr * 3600 - min * 60;
+      var sec = second;
       var secStr = sec.toString();
       if (secStr.length == 1) secStr = '0' + secStr;
-      if (dayStr == '00') {
-        _this.setData({
-          countdown: { dayStr: dayStr,  hrStr: hrStr, minStr: minStr, secStr: secStr } ,
-        });
-      } else {
-        _this.setData({
-          countdown: { dayStr: dayStr, hrStr: hrStr, minStr: minStr, secStr: secStr},
-        });
-      }
+      console.log(secStr)
+      _this.setData({
+        countdown: secStr,
+      });
+
       totalSecond--;
       if (totalSecond < 0) {
         // 从新调取数据
         clearInterval(_this.data.interval);
-        if (_this.data.iftrcountdown){
-          _this.onLoadfun();
-          _this.setData({
-            iftrcountdown:false
-          });
-        };
-        _this.setData({
-          countdown: '00:00:00',
-        });
       }
     };
-      _this.data.interval=setInterval(interval, 1000);
+    _this.data.interval=setInterval(interval, 1000);
   },
   /**
    * 生命周期函数--监听页面加载
@@ -1527,6 +1619,12 @@ closefrindcommoni:function(){
     };
     // 分享获取碎片
   },
+  // 订阅完成隐藏 开启后隐藏按钮
+  hiddenButTip(){
+    var commoddata = this.data.commoddata;
+    commoddata.isSubscribed = true;
+    this.setData({commoddata:commoddata}) 
+  },
   // 拉起订阅
   subscrfunstar: function () {
     var _this = this;
@@ -1536,9 +1634,14 @@ closefrindcommoni:function(){
         wx.requestSubscribeMessage({
           tmplIds: subscribedata.template_id || [],
           success(res) {
+            var is_show_modal = true;
             for (var i = 0; i < subscribedata.template_id.length; i++) {
               if (res[subscribedata.template_id[i]] == "accept") {
                 app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+                if (is_show_modal) {
+                  _this.hiddenButTip()
+                  is_show_modal = false;
+                };
               };
             };
           },
@@ -1547,11 +1650,15 @@ closefrindcommoni:function(){
         wx.requestSubscribeMessage({
           tmplIds: [subscribedata.template_id || ''],
           success(res) {
+            var is_show_modal = true;
             if (res[subscribedata.template_id] == "accept") {
               app.subscribefun(_this, 0, subscribedata.template_id, subscribedata.subscribe_type);
+              if (is_show_modal) {
+                _this.hiddenButTip()
+                is_show_modal = false;
+              };
             };
-          },
-          complete() {}
+          }
         })
       };
     };
@@ -1559,11 +1666,9 @@ closefrindcommoni:function(){
   // 分享接口
   sharerequier:function(num){
     var _this = this;
-    if(num==1){
-      var qhd = Dec.Aese('mod=activity&operation=drawPatch&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&shareUId=' + _this.data.shareUId);
-    }else{
-      var qhd = Dec.Aese('mod=activity&operation=drawPatch&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&shareUId=0');
-    };
+
+    var qhd = Dec.Aese('mod=miandan&operation=signActivity&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id);
+
     wx.showLoading({ title: '加载中...', mask: true })
     wx.request({
       url: app.signindata.comurl + 'spread.php' + qhd,
@@ -1572,49 +1677,74 @@ closefrindcommoni:function(){
       success: function (res) {
         console.log('报名================',res)
         wx.hideLoading();
-        if (num == 1){
-          if (res.data.ReturnCode == 200) {
-            var totalPatch = _this.data.totalPatch || 0;
-            _this.setData({
-              ishowgetchip: true,
-              totalPatch: totalPatch,
-              isshowusertip: res.data.Msg,
-              otherimgarr: res.data.List.patchReceive || [],
-              fragreturnCode:200
-            });
+        if (res.data.ReturnCode == 200) {
+          setTimeout(function () {
             _this.detailfun();
-          } else if (res.data.ReturnCode == 100) {
-            _this.setData({ ishowgetchip: true, otherimgarr: res.data.List.patchReceive || [], isshowusertip: res.data.Msg, fragreturnCode: 100 });
-          } else if (res.data.ReturnCode == 201) {
-            _this.setData({ ishowgetchip: true, otherimgarr: res.data.List.patchReceive || [], isshowusertip: res.data.Msg, fragreturnCode: 201 });
-          } else if (res.data.ReturnCode == 202) {
-            _this.placeorder();
-            _this.data.shareUId = 0;
-            setTimeout(function () {
-              _this.detailfun();
-            }, 500);
-          } else if (res.data.ReturnCode == 203) {
-            _this.setData({ ishowgetchip: true, otherimgarr: res.data.List.patchReceive || [], isshowusertip: res.data.Msg, fragreturnCode: 203 });
-          };
-          _this.data.shareUId = 0;
-        }else{
-          if (res.data.ReturnCode == 200) {
-            app.showToastC(res.data.Msg);
-            _this.detailfun();
-            _this.subscrfunstar();
-          } else if (res.data.ReturnCode == 100 || res.data.ReturnCode == 201 || res.data.ReturnCode == 203) {
-            app.showToastC(res.data.Msg);
-          } else if (res.data.ReturnCode == 202) {
-            _this.placeorder();
-            _this.data.shareUId = 0;
-            setTimeout(function () {
-              _this.detailfun();
-            }, 500);
-          };
-          _this.data.shareUId = 0;          
-        }
+          }, 1000);
+          _this.cdtime();
+          _this.subscrfunstar();
+        } else {
+          app.showModalC(res.data.Msg)
+        };
       }
     }); 
+
+    // if(num==1){
+    //   var qhd = Dec.Aese('mod=activity&operation=drawPatch&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&shareUId=' + _this.data.shareUId);
+    // }else{
+    //   var qhd = Dec.Aese('mod=activity&operation=drawPatch&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&shareUId=0');
+    // };
+    // wx.showLoading({ title: '加载中...', mask: true })
+    // wx.request({
+    //   url: app.signindata.comurl + 'spread.php' + qhd,
+    //   method: 'GET',
+    //   header: { 'Accept': 'application/json' },
+    //   success: function (res) {
+    //     console.log('报名================',res)
+    //     wx.hideLoading();
+    //     if (num == 1){
+    //       if (res.data.ReturnCode == 200) {
+    //         var totalPatch = _this.data.totalPatch || 0;
+    //         _this.setData({
+    //           ishowgetchip: true,
+    //           totalPatch: totalPatch,
+    //           isshowusertip: res.data.Msg,
+    //           otherimgarr: res.data.List.patchReceive || [],
+    //           fragreturnCode:200
+    //         });
+    //         _this.detailfun();
+    //       } else if (res.data.ReturnCode == 100) {
+    //         _this.setData({ ishowgetchip: true, otherimgarr: res.data.List.patchReceive || [], isshowusertip: res.data.Msg, fragreturnCode: 100 });
+    //       } else if (res.data.ReturnCode == 201) {
+    //         _this.setData({ ishowgetchip: true, otherimgarr: res.data.List.patchReceive || [], isshowusertip: res.data.Msg, fragreturnCode: 201 });
+    //       } else if (res.data.ReturnCode == 202) {
+    //         _this.placeorder();
+    //         _this.data.shareUId = 0;
+    //         setTimeout(function () {
+    //           _this.detailfun();
+    //         }, 500);
+    //       } else if (res.data.ReturnCode == 203) {
+    //         _this.setData({ ishowgetchip: true, otherimgarr: res.data.List.patchReceive || [], isshowusertip: res.data.Msg, fragreturnCode: 203 });
+    //       };
+    //       _this.data.shareUId = 0;
+    //     }else{
+    //       if (res.data.ReturnCode == 200) {
+    //         app.showToastC(res.data.Msg);
+    //         _this.detailfun();
+    //         _this.subscrfunstar();
+    //       } else if (res.data.ReturnCode == 100 || res.data.ReturnCode == 201 || res.data.ReturnCode == 203) {
+    //         app.showToastC(res.data.Msg);
+    //       } else if (res.data.ReturnCode == 202) {
+    //         _this.placeorder();
+    //         _this.data.shareUId = 0;
+    //         setTimeout(function () {
+    //           _this.detailfun();
+    //         }, 500);
+    //       };
+    //       _this.data.shareUId = 0;          
+    //     }
+    //   }
+    // }); 
   },
   jumporder: function () {
     var _this = this;
@@ -1623,12 +1753,33 @@ closefrindcommoni:function(){
   otherdata:function(){
     var _this = this;
     setTimeout(function(){
-      // 购物车数据显示
-      Dec.shopnum(_this,app.signindata.comurl);
-      // 调取晒单数量
-      Dec.dryingSum(_this, app.signindata.clwcomurl);
       // 调取收货地址
-      _this.nextpagediao();
+      if(app.signindata.receivingAddress && app.signindata.receivingAddress.length != 0){
+        var rdl = app.signindata.receivingAddress;
+        var tptipadi = '';
+        var tptipadd = '';
+        var tipnamephone = '';
+        for (var i = 0; i < rdl.length; i++) {
+          if (rdl[i].isdefault == 1) {
+            rdl[i].checked = false;
+            tptipadi = rdl[i].aid;
+            tptipadd = rdl[i].address;
+            tipnamephone = rdl[i].consignee + " " + rdl[i].phone;
+          } else {
+            rdl[i].checked = false;
+          }
+        };
+        _this.data.tipaid = tptipadi;
+        _this.setData({
+          addressdata: rdl,
+          tipnamephone: tipnamephone,
+          tipaddress: tptipadd
+        })
+        console.log('地址=======onloadfun====',_this.data.addressdata)
+      }else{
+        _this.nextpagediao();
+      };
+      
       // 分享和生成图片底部广告
       app.indexShareBanner();
     },1000);
@@ -1643,7 +1794,9 @@ closefrindcommoni:function(){
     var h = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
     var m = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
     var s = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
-    if (num==1){
+    if (num==2){
+      return Y + '年' + M + '月' + D + '日' + h + ':' + m;
+    }else if (num==1){
       return Y + '-' + M + '-' + D + ' ' + h + ':' + m;
     }else if (new Date(number * 1000).toDateString() === new Date().toDateString()) {
       return h + ':' + m;
@@ -1651,6 +1804,30 @@ closefrindcommoni:function(){
       return M + '-' + D + ' ' + h + ':' + m;
     }
   },
+
+  powerInterface:function(num){
+    var _this = this;
+    var diffTime = Date.parse(new Date())/1000 - _this.data.sharetime;
+    var qhd = Dec.Aese('mod=miandan&operation=signActivity&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&shareUId=' + _this.data.shareUId +'&diffTime=' +diffTime);
+
+    wx.showLoading({ title: '加载中...', mask: true })
+    wx.request({
+      url: app.signindata.comurl + 'spread.php' + qhd,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('助力================',res)
+        wx.hideLoading();
+        if (res.data.ReturnCode == 200) {
+          app.showModalC(res.data.Msg);
+        } else {
+          app.showModalC(res.data.Msg)
+        };
+      }
+    }); 
+
+  },
+
   // 商品详情
   detailfun:function(){
     var _this = this;
@@ -1662,7 +1839,7 @@ closefrindcommoni:function(){
       listBlindBox: [],
       listShowBox : []
     });
-    clearInterval(this.data.interval);
+    // clearInterval(this.data.interval);
     var newDate = new Date();
     var m = newDate.getMinutes();
     var s = newDate.getSeconds();
@@ -1744,7 +1921,7 @@ closefrindcommoni:function(){
           _this.setData({
             patchReceive: patchReceive,
             totalPatch: totalPatch,
-            fragmentTotalNumber: infoshow.fragmentTotalNumber || 2 //碎片显示个数 
+            // fragmentTotalNumber: infoshow.fragmentTotalNumber || 2 //碎片显示个数 
           });
           var signtask = res.data.Info.task||'';
           _this.setData({ signtask: signtask});
@@ -1885,48 +2062,48 @@ closefrindcommoni:function(){
           arrlist.is_xcxiftr = false;
           var share_desc = arrlist.share_desc.replace(/\\n/g, '\n');
           var swiperarr = [];
-          if (arrlist.is_limit != 1) {
-            if (arrlist.status == 1) {
-              if (arrlist.start_time == 0){
-                _this.setData({ iftrTimeCd: false })
-              }else{
-                _this.setData({ iftrTimeCd: true })
-                _this.cdtime(arrlist.start_time);
-              };
-              _this.setData({
-                toDateTime: _this.toDatehd(arrlist.start_time) || ''
-              });
-            } else if (arrlist.status == 2 && arrlist.is_limit != 1) {
-              _this.setData({
-                toDateTime: _this.toDatehd(arrlist.stop_time) || ''
-              });
-              if (arrlist.is_join == 1){
-                if (arrlist.stop_time == 0) {
-                  _this.setData({ iftrTimeCd:false})
-                } else {
-                  _this.setData({ iftrTimeCd: true })
-                  _this.cdtime(arrlist.stop_time);
-                }
-              };
-            }; 
-          };
+          // if (arrlist.is_limit != 1) {
+          //   if (arrlist.status == 1) {
+          //     if (arrlist.start_time == 0){
+          //       _this.setData({ iftrTimeCd: false })
+          //     }else{
+          //       _this.setData({ iftrTimeCd: true })
+          //       _this.cdtime(arrlist.start_time);
+          //     };
+          //     _this.setData({
+          //       toDateTime: _this.toDatehd(arrlist.start_time) || ''
+          //     });
+          //   } else if (arrlist.status == 2 && arrlist.is_limit != 1) {
+          //     _this.setData({
+          //       toDateTime: _this.toDatehd(arrlist.stop_time) || ''
+          //     });
+          //     if (arrlist.is_join == 1){
+          //       if (arrlist.stop_time == 0) {
+          //         _this.setData({ iftrTimeCd:false})
+          //       } else {
+          //         _this.setData({ iftrTimeCd: true })
+          //         _this.cdtime(arrlist.stop_time);
+          //       }
+          //     };
+          //   }; 
+          // };
           //  stynum 1 没有副标题 2有副标题 3 三行
           //  ifshare 是否分享
           //  iftrtask 1 显示任务块
           var isGainPatchBySelf = arrlist.isGainPatchBySelf;
           var aeve = true;
           var videoOpportunity = true;
-          if (isGainPatchBySelf){
-            videoOpportunity = false;
-            if (arrlist.is_join == 1){
-              aeve = true;
-            }else{
-              aeve = false;
-            }
-          }else{
-            aeve=true;
-          };
-          
+          // if (isGainPatchBySelf){
+          //   videoOpportunity = false;
+          //   if (arrlist.is_join == 1){
+          //     aeve = true;
+          //   }else{
+          //     aeve = false;
+          //   }
+          // }else{
+          //   aeve=true;
+          // };
+
           if (aeve){
                 if (arrlist.is_receive == 2) {
                   swiperarr.push({ name: '已领取', subname: '', abcircular: '#F9DCB1', witcircular: '#f18f00', stynum: 1, sizeColor: '#FFF1F1', clickiftr: 8 });
@@ -1968,18 +2145,29 @@ closefrindcommoni:function(){
                   swiperarr.push({ name: '领取奖励', subname: '4.晒单成功', abcircular: '#F9DCB1', witcircular: '#f18f00', stynum: 2, sizeColor: '#FFF1F1', clickiftr: 4, jumpclass: 1 });
                 } else if (arrlist.status == 2 && arrlist.is_join == 1 && arrlist.auditPic != 2) {
                   // swiperarr.push({ name: '上传截图', subname: '', clickiftr: 2, abcircular: '#8BC34A', witcircular: '#259B24', stynum: 1, sizeColor: '#FFF1F1' });
+                  swiperarr.push({ name: '待开奖', subname: '', clickiftr: 2, abcircular: '#FBD6D8', witcircular: '#F93F45', stynum: 1, sizeColor: '#F9DCDC' });
                   // 是否上传过截图
-                  if (arrlist.auditPic == 0 || arrlist.auditPic == 3) {
-                    swiperarr.push({ name: '报名未完成', subname: '1', abcircular: '#FBD6D8', witcircular: '#F09D9F', stynum: 3, clickiftr: 2 });
-                  } else {
-                    swiperarr.push({ name: '等待开奖', subname: '1', abcircular: '#FBD6D8', witcircular: '#F09D9F', stynum: 3, clickiftr: 2 });
-                  };
+                  // if (arrlist.auditPic == 0 || arrlist.auditPic == 3) {
+                  //   swiperarr.push({ name: '报名未完成', subname: '1', abcircular: '#FBD6D8', witcircular: '#F09D9F', stynum: 3, clickiftr: 2 });
+                  // } else {
+                  //   swiperarr.push({ name: '等待开奖', subname: '1', abcircular: '#FBD6D8', witcircular: '#F09D9F', stynum: 3, clickiftr: 2 });
+                  // };
+                  swiperarr.push({ name: '继续邀请', subname: '好友助力', abcircular: '#FBD6D8', witcircular: '#F93F45', stynum: 3, clickiftr: 5 });
                   _this.setData({
-                    goodsIndex: 0,
+                    goodsIndex: 1,
+                    taskOrUserImg:false,
                     swiperIndex: 1
                   });
                 } else if (arrlist.status == 2 && arrlist.is_join == 1 && arrlist.auditPic == 2) {
-                  swiperarr.push({ name: '等待开奖', subname: '1', abcircular: '#f5d1d4', witcircular: '#e39397', stynum: 3 });
+                  // swiperarr.push({ name: '等待开奖', subname: '1', abcircular: '#f5d1d4', witcircular: '#e39397', stynum: 3 });
+                  swiperarr.push({ name: '待开奖', subname: '', clickiftr: 2, abcircular: '#FBD6D8', witcircular: '#F93F45', stynum: 1, sizeColor: '#F9DCDC' });
+                  swiperarr.push({ name: '继续邀请', subname: '好友助力', abcircular: '#FBD6D8', witcircular: '#F93F45', stynum: 3, clickiftr: 5 });
+                  _this.setData({
+                    goodsIndex: 1,
+                    taskOrUserImg:false,
+                    swiperIndex: 1
+                  });
+
                 } else if (arrlist.status == 2 && (arrlist.is_limit == 1 && arrlist.is_full == 1)) {
                   swiperarr.push({ name: '开奖中', abcircular: '#FBD6D8', witcircular: '#F93F45', stynum: 1 });
                 } else if (arrlist.status == 3 && arrlist.is_receive == 3) {
@@ -1988,6 +2176,15 @@ closefrindcommoni:function(){
                   swiperarr.push({name:'已开奖',subname:'重在参与',abcircular:'#E6E6E6',witcircular:'#8A8888',stynum:2});
                 };
           }
+
+          if(arrlist.status == 3){
+            _this.wonOrNot();
+            if(arrlist.is_receive == 1){
+              arrlist.receiveTxt ='请于' + _this.toDatehd(arrlist.receiveTime,2) + '前领取'; 
+            };
+          };
+
+
           var actrecactnum = 1;
           if (arrlist.is_pay==1){
             actrecactnum = 2;
@@ -2009,7 +2206,15 @@ closefrindcommoni:function(){
           }else{
             arrlist.isBrandNaq = 0;
           };
-
+          
+          if(arrlist.status == 2 && arrlist.is_join == 1 && arrlist.signTime){
+             var timeDifference = Date.parse(new Date())/1000 - arrlist.signTime;
+             if(timeDifference > 30){
+               _this.setData({
+                countdown:0
+               })
+             };
+          };
 
           _this.setData({
             commoddata: arrlist,
@@ -2032,19 +2237,21 @@ closefrindcommoni:function(){
             brandId:res.data.Info.brandId || '',
           });
           // 是否调取展会数据
-          if (res.data.Info.specialWay && res.data.Info.specialWay == 1||(res.data.Info.specialWay!=1&&_this.data.brandId>0)) {
+          if (res.data.Info.specialWay && res.data.Info.specialWay == 1 || (res.data.Info.specialWay!=1&&_this.data.brandId>0)) {
             //  wx.hideShareMenu();
             _this.exhibdatafun(1)
-            app.livebroadcast(_this, res.data.Info.brandId)  // 直播数据
-          }
+            if(res.data.Info.specialWay == 1){
+              app.livebroadcast(_this, res.data.Info.brandId)  // 直播数据
+            };
+          };
 
           // 云统计
           var clouddata = { act_id: _this.data.id, type: res.data.Info.specialWay || 0 };
           app.cloudstatistics('activityStatistics', clouddata)
 
-          // 调取碎片
-          if (arrlist.is_join != 1&&_this.data.shareUId && _this.data.shareUId!=_this.data.uid) {
-            _this.sharerequier(1);
+          // 助力
+          if (arrlist.status == 2 && arrlist.is_join == 1 &&_this.data.shareUId && _this.data.shareUId!=_this.data.uid) {
+            _this.powerInterface();
           };
           // 调取推荐活动
           _this.actrecactlist(1);
@@ -2094,6 +2301,7 @@ closefrindcommoni:function(){
     _this.data.loginid = app.signindata.loginid;
     _this.data.openid = app.signindata.openid;
     _this.data.pushWay = options.pushWay||0;
+    _this.data.sharetime = options.sharetime || 0;
     _this.setData({
       uid: app.signindata.uid,
       avatarUrl: app.signindata.avatarUrl,
@@ -2265,29 +2473,29 @@ closefrindcommoni:function(){
   onShow: function () {
      var _this = this;
      var commoddata = _this.data.commoddata;
-     if (commoddata.is_limit != 1){
-       if (commoddata.is_limit != 1) {
-         if (commoddata.status == 1) {
-           if (commoddata.start_time==0){
-             _this.setData({ iftrTimeCd: false })
-           }else{
-             _this.setData({ iftrTimeCd: true })
-             _this.cdtime(commoddata.start_time);
-           };
-         } else if (commoddata.status == 2 && commoddata.is_limit != 1 && commoddata.is_join == 1) {
-           if (commoddata.stop_time == 0) {
-             _this.setData({ iftrTimeCd: false })
-           } else {
-             _this.setData({ iftrTimeCd: true })
-             _this.cdtime(commoddata.stop_time);
-           };
-         };
-       };
-     };
+    //  if (commoddata.is_limit != 1){
+    //    if (commoddata.is_limit != 1) {
+    //      if (commoddata.status == 1) {
+    //        if (commoddata.start_time==0){
+    //          _this.setData({ iftrTimeCd: false })
+    //        }else{
+    //          _this.setData({ iftrTimeCd: true })
+    //          _this.cdtime(commoddata.start_time);
+    //        };
+    //      } else if (commoddata.status == 2 && commoddata.is_limit != 1 && commoddata.is_join == 1) {
+    //        if (commoddata.stop_time == 0) {
+    //          _this.setData({ iftrTimeCd: false })
+    //        } else {
+    //          _this.setData({ iftrTimeCd: true })
+    //          _this.cdtime(commoddata.stop_time);
+    //        };
+    //      };
+    //    };
+    //  };
    
   },
   onHide: function () {
-    clearInterval(this.data.interval);
+    // clearInterval(this.data.interval);
     clearInterval(this.data.countdowntime);
     // 调用重置刷新
     app.resetdownRefresh();
@@ -2342,7 +2550,7 @@ closefrindcommoni:function(){
       _this.paymentcompletionwimg();
       var reshare = {
         title: name,
-        path: '/pages/activitydetailspage/activitydetailspage?id=' + _this.data.id +'&referee='+_this.data.uid+'&cs=1',
+        path: '/pages/activitydetailspage/activitydetailspage?id=' + _this.data.id +'&referee='+_this.data.uid+'&cs=1&sharetime='+ _this.data.commoddata.signTime || Date.parse(new Date())/1000,
         imageUrl: _this.data.snapshot,
         success: function (res) {},
       };
@@ -2358,7 +2566,7 @@ closefrindcommoni:function(){
     } else {
       var reshare = {
         title: name,
-        path: '/pages/activitydetailspage/activitydetailspage?id=' + _this.data.id + '&referee=' + _this.data.uid + '&cs=1',
+        path: '/pages/activitydetailspage/activitydetailspage?id=' + _this.data.id + '&referee=' + _this.data.uid + '&cs=1&sharetime='+ _this.data.commoddata.signTime || Date.parse(new Date())/1000,
         imageUrl: _this.data.snapshot,
         success: function (res) {},
       };
@@ -2817,21 +3025,31 @@ closefrindcommoni:function(){
         wx.requestSubscribeMessage({
           tmplIds: subscribedata.template_id||[],
           success(res) {
+            var is_show_modal = true;
             for (var i = 0; i < subscribedata.template_id.length;i++){
               if (res[subscribedata.template_id[i]] == "accept") {
                 app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+                if (is_show_modal) {
+                  _this.hiddenButTip()
+                  is_show_modal = false;
+                };                
               };
             };
-          },
+          }
         })
       }else{
         wx.requestSubscribeMessage({
           tmplIds: [subscribedata.template_id || ''],
           success(res) {
+            var is_show_modal = true;
             if (res[subscribedata.template_id] == "accept") {
               app.subscribefun(_this, 0, subscribedata.template_id, subscribedata.subscribe_type);
+              if (is_show_modal) {
+                _this.hiddenButTip()
+                is_show_modal = false;
+              };
             };
-          },
+          }
         })        
       };
     };
@@ -2846,25 +3064,35 @@ closefrindcommoni:function(){
         wx.requestSubscribeMessage({
           tmplIds: subscribedata.template_id||[],
           success(res) {
+            var is_show_modal = true;
             for (var i = 0; i < subscribedata.template_id.length;i++){
               if (res[subscribedata.template_id[i]] == "accept") {
                 app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+                if (is_show_modal) {
+                  _this.hiddenButTip()
+                  is_show_modal = false;
+                };               
               };
             };
             _this.data.subscribeifstat = false;
           },
-          complete() { _this.sucfulregfun(); }
+          complete() { _this.sucfulregfun();}
         })
       }else{
         wx.requestSubscribeMessage({
           tmplIds: [subscribedata.template_id || ''],
           success(res) {
+            var is_show_modal = true;
             if (res[subscribedata.template_id] == "accept") {
               app.subscribefun(_this, 0, subscribedata.template_id, subscribedata.subscribe_type);
               _this.data.subscribeifstat = false;
+              if (is_show_modal) {
+                _this.hiddenButTip()
+                is_show_modal = false;
+              };
             };
           },
-          complete() { _this.sucfulregfun(); }
+          complete() { _this.sucfulregfun();}
         })        
       };
     } else {
@@ -2888,6 +3116,7 @@ closefrindcommoni:function(){
               url: "/pages/activitysharinglist/activitysharinglist"
             });
           };
+
           _this.setData({
             tipback: false,
             tipbox: false,
@@ -3745,25 +3974,35 @@ closefrindcommoni:function(){
         wx.requestSubscribeMessage({
           tmplIds: subscribedata.template_id || [],
           success(res) {
+            var is_show_modal = true;
             for (var i = 0; i < subscribedata.template_id.length; i++) {
               if (res[subscribedata.template_id[i]] == "accept") {
                 app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+                if (is_show_modal) {
+                  _this.hiddenButTip()
+                  is_show_modal = false;
+                };
               };
             };
             _this.data.subscribeifstat = false;
           },
-          complete() { _this.sucfulregfun(); }
+          complete() { _this.sucfulregfun();}
         })
       } else {
         wx.requestSubscribeMessage({
           tmplIds: [subscribedata.template_id || ''],
           success(res) {
+            var is_show_modal = true;
             if (res[subscribedata.template_id] == "accept") {
               app.subscribefun(_this, 0, subscribedata.template_id, subscribedata.subscribe_type);
               _this.data.subscribeifstat = false;
+              if (is_show_modal) {
+                _this.hiddenButTip()
+                is_show_modal = false;
+              };
             };
           },
-          complete() { _this.sucfulregfun(); }
+          complete() { _this.sucfulregfun();}
         })
       };
     } else {

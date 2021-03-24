@@ -79,3 +79,15 @@
 .bbsheadcon::-webkit-scrollbar {
   display: none;
 }
+
+.clickButton{
+  margin:auto;
+  border-radius: 70rpx;
+  height:70rpx;
+  text-align:center;
+  line-height:70rpx;
+  color: #fff;
+  font-size: 24rpx;
+  width: 600rpx;
+  background: #fb595f;
+}

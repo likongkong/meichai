@@ -610,13 +610,13 @@ Page({
           };
 
           if (res.data.Info.order_type==2 && !app.signindata.isHellBlackUser){
-                  if (_this.data.defaultinformation.function.buySthToCabinet){
-                     _this.setData({
-                       ishelladdtoy:true
-                     })
-                  }else{
-                     _this.getCartInfo();
-                  }
+              if (_this.data.defaultinformation.function.buySthToCabinet){
+                  _this.setData({
+                    ishelladdtoy:true
+                  })
+              }else{
+                  _this.getCartInfo();
+              }
           }else{
              _this.getCartInfo();
           };
@@ -640,28 +640,68 @@ Page({
       defaultinformation:app.signindata.defaultinformation,
     });
 
-    // 获取默认信息
-    var qqq = Dec.Aese('operation=info&mod=info');
-    wx.request({
-      url: app.signindata.comurl + 'general.php' + qqq,
-      method: 'GET',
-      header: {
-        'Accept': 'application/json'
-      },
-      success: function (res) {
-        if (res.data.ReturnCode == 200) {
-          _this.setData({
-            defaultinformation: res.data.Info,
-            wxnum: res.data.Info.cs.wxid || 'meichai666666',
-            buySthToCabinet: res.data.Info.function.buySthToCabinet || false,//是否显示提示弹框
-            isFreeCostmony: res.data.Info.carriage.free||59
-          });
-          _this.tablist();
-        };
-      }
-    });
+    // 活动提示语 
+    if (app.signindata.defaultinformation == '') {
+        // 获取默认信息
+        var qqq = Dec.Aese('operation=info&mod=info');
+        wx.request({
+          url: app.signindata.comurl + 'general.php' + qqq,
+          method: 'GET',
+          header: {
+            'Accept': 'application/json'
+          },
+          success: function (res) {
+            if (res.data.ReturnCode == 200) {
+              _this.setData({
+                defaultinformation: res.data.Info,
+                wxnum: res.data.Info.cs.wxid || 'meichai666666',
+                buySthToCabinet: res.data.Info.function.buySthToCabinet || false,//是否显示提示弹框
+                isFreeCostmony: res.data.Info.carriage.free||59
+              });
+              _this.tablist();
+            };
+          }
+        });
+    }else{
+      var thdadefau = app.signindata.defaultinformation;
+      if (thdadefau){
+        _this.setData({
+          defaultinformation:thdadefau,
+          wxnum: thdadefau.cs.wxid || 'meichai666666',
+          buySthToCabinet: thdadefau.function.buySthToCabinet || false,//是否显示提示弹框
+          isFreeCostmony: thdadefau.carriage.free||59
+        });
+      };
+      _this.tablist();
+    };      
+    
     _this.getdefultInfo();
-    _this.nextpagediao()
+
+    if(app.signindata.receivingAddress && app.signindata.receivingAddress.length != 0){
+      var rdl = app.signindata.receivingAddress;
+      var tptipadi = '';
+      var tptipadd = '';
+      var tipnamephone = '';
+      for (var i = 0; i < rdl.length; i++) {
+        if (rdl[i].isdefault == 1) {
+          rdl[i].checked = false;
+          tptipadi = rdl[i].aid;
+          tptipadd = rdl[i].address;
+          tipnamephone = rdl[i].consignee + " " + rdl[i].phone;
+        } else {
+          rdl[i].checked = false;
+        }
+      };
+      _this.data.tipaid = tptipadi;
+      _this.setData({
+        addressdata: rdl,
+        tipnamephone: tipnamephone,
+        tipaddress: tptipadd
+      })
+      console.log('地址=======onloadfun====',_this.data.addressdata)
+    }else{
+      _this.nextpagediao();
+    };
   },
 
   getdefultInfo: function() {
