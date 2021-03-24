@@ -271,7 +271,6 @@ App({
                         _this.signindata.avatarUrl = userinfo.headphoto;
                         _this.signindata.nickName = userinfo.nick;
 
-                        console.log('_this.signindata.userInfo====',_this.signindata.userInfo)
                         // var photoheadphoto = res.data.Info.user.headphoto || '';
                         // var namenick = res.data.Info.user.nick || '';
                         // if (photoheadphoto != avaurl || namenick != nicname) {
