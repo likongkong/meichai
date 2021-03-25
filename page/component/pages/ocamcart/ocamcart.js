@@ -196,6 +196,7 @@ Page({
 
 
   },
+ 
   rolenamefun:function(num){
     var _this = this;
     if (num == 0) {
@@ -224,10 +225,20 @@ Page({
         wx.stopPullDownRefresh()
         if (res.data.ReturnCode == 200) {
           var shopdetaillist = res.data.List.goods||[];
+          var skiplist = res.data.List.skip||[];
+          for(var i=0;i<shopdetaillist.length;i++){
+            if(shopdetaillist[i].user.nick != undefined){
+              shopdetaillist[i].user.nick =  _this.plusXing(shopdetaillist[i].user.nick,2,0);
+            }else{
+              shopdetaillist[i].user.nick = '星星星'
+              shopdetaillist[i].user.nick =  _this.plusXing(shopdetaillist[i].user.nick,0,0);
+            }
+          }
           if (shopdetaillist.length!=0){
             if (num == 0) {
               _this.setData({
                 shopdetaillist: shopdetaillist,
+                skiplist
               });
             } else {
               var ltlist = _this.data.shopdetaillist.concat(shopdetaillist);
@@ -1081,11 +1092,11 @@ Page({
       url: "/page/component/pages/myothertoydg/myothertoydg?ownerId=" + ownerid
     });
   },
-  jumpAreward:function(){
+  jumpAreward:function(e){
     // 跳转类型 0不显示 1抽盒机 2一番赏
     var _this = this;
-    var skipType = _this.data.skipType || 0;
-    var skipNeedId = _this.data.skipNeedId || 0;
+    var skipType = e.currentTarget.dataset.skiptype || 0;
+    var skipNeedId = e.currentTarget.dataset.skipid || 0;
     if(skipType == 1){
         if(skipNeedId !=0 ){
            app.comjumpwxnav(9005,skipNeedId,'','')
@@ -1098,9 +1109,24 @@ Page({
         }else{
           app.comjumpwxnav(9015,'','','')
         };
+    }else if(skipType == 3){
+      if(skipNeedId !=0 ){
+        app.comjumpwxnav(9004,skipNeedId,'','')
+      }else{
+        app.comjumpwxnav(990,'','','')
+      };
     }
 
-  }
+  },
+  plusXing (str,frontLen,endLen) {
+    var len = str.length-frontLen-endLen;
+    console.log(len)
+    var xing = '**';
+    // for (var i=0;i<len;i++) {
+    // xing+='*';
+    // }
+    return str.substring(0,frontLen)+xing+str.substring(str.length-endLen);
+  },
 
 
 
