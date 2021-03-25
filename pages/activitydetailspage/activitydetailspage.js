@@ -1804,7 +1804,7 @@ closefrindcommoni:function(){
       return M + '-' + D + ' ' + h + ':' + m;
     }
   },
-
+  // 助力接口
   powerInterface:function(num){
     var _this = this;
     var diffTime = Date.parse(new Date())/1000 - _this.data.sharetime;
@@ -1818,6 +1818,7 @@ closefrindcommoni:function(){
       success: function (res) {
         console.log('助力================',res)
         wx.hideLoading();
+        _this.data.shareUId = 0;
         if (res.data.ReturnCode == 200) {
           app.showModalC(res.data.Msg);
         } else {
@@ -2062,31 +2063,31 @@ closefrindcommoni:function(){
           arrlist.is_xcxiftr = false;
           var share_desc = arrlist.share_desc.replace(/\\n/g, '\n');
           var swiperarr = [];
-          // if (arrlist.is_limit != 1) {
-          //   if (arrlist.status == 1) {
-          //     if (arrlist.start_time == 0){
-          //       _this.setData({ iftrTimeCd: false })
-          //     }else{
-          //       _this.setData({ iftrTimeCd: true })
-          //       _this.cdtime(arrlist.start_time);
-          //     };
-          //     _this.setData({
-          //       toDateTime: _this.toDatehd(arrlist.start_time) || ''
-          //     });
-          //   } else if (arrlist.status == 2 && arrlist.is_limit != 1) {
-          //     _this.setData({
-          //       toDateTime: _this.toDatehd(arrlist.stop_time) || ''
-          //     });
-          //     if (arrlist.is_join == 1){
-          //       if (arrlist.stop_time == 0) {
-          //         _this.setData({ iftrTimeCd:false})
-          //       } else {
-          //         _this.setData({ iftrTimeCd: true })
-          //         _this.cdtime(arrlist.stop_time);
-          //       }
-          //     };
-          //   }; 
-          // };
+          if (arrlist.is_limit != 1) {
+            if (arrlist.status == 1) {
+              // if (arrlist.start_time == 0){
+              //   _this.setData({ iftrTimeCd: false })
+              // }else{
+              //   _this.setData({ iftrTimeCd: true })
+              //   _this.cdtime(arrlist.start_time);
+              // };
+              _this.setData({
+                toDateTime: _this.toDatehd(arrlist.start_time) || ''
+              });
+            } else if (arrlist.status == 2 && arrlist.is_limit != 1) {
+              _this.setData({
+                toDateTime: _this.toDatehd(arrlist.stop_time) || ''
+              });
+              if (arrlist.is_join == 1){
+                // if (arrlist.stop_time == 0) {
+                //   _this.setData({ iftrTimeCd:false})
+                // } else {
+                //   _this.setData({ iftrTimeCd: true })
+                //   _this.cdtime(arrlist.stop_time);
+                // }
+              };
+            }; 
+          };
           //  stynum 1 没有副标题 2有副标题 3 三行
           //  ifshare 是否分享
           //  iftrtask 1 显示任务块
