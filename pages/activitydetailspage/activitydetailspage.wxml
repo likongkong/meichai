@@ -99,7 +99,7 @@
       <swiper-item>
         <view class="slide-image">
           <image src="{{commoddata.cover}}" mode="aspectFill" data-index='{{index}}' bindtap='previewImg' bindload="imageLoadmon" style='width:100%;height:386rpx;'></image>
-          <view class='slide-image-box'>
+          <!-- <view class='slide-image-box'>
             <block wx:if='{{fragmentTotalNumber==4}}'>
               <view class='sibeve' wx:for='{{[1,2,3,4]}}' wx:key='key'>
                 <image class='sibeveimg' wx:if='{{item<=totalPatch}}' src='https://www.51chaidan.com/images/turntable/red_check_mark.png'></image>
@@ -118,7 +118,7 @@
                 <view class='sibevebg' wx:else style='height:378rpx;'></view>
               </view>
             </block>
-          </view>
+          </view> -->
         </view>
       </swiper-item>
       <block wx:for="{{movies}}" wx:key="key">
@@ -202,7 +202,7 @@
   </view>
 
   <!-- 碎片 -->
-  <view style="width:100%;background:white;overflow:hidden;margin:10rpx 0;" wx:if='{{!isGainPatchBySelf}}'>
+  <!-- <view style="width:100%;background:white;overflow:hidden;margin:10rpx 0;" wx:if='{{!isGainPatchBySelf}}'>
     <view style="width:100%;margin:20rpx 0;">
       <view style="width:100%;font-size:25rpx;line-height:30rpx;text-align:center;margin:5rpx 0;">送你4张万能碎片，跟好友互赠100%获得缺失碎片</view>
       <view style="width:100%;height:100rpx;margin:10rpx 0;text-align:center;padding-top:10rpx;">
@@ -221,9 +221,13 @@
       </view>
     </view>
 
-  </view>
+  </view> -->
+  <!-- wx:if='{{isGainPatchBySelf}}' -->
+  <view class='actDetailSignUp' style='{{!videoOpportunity?"margin-top:10rpx;":""}}'>
+    <view class="actDetailPShare boxShadowEve" wx:if='{{isShareFun}}'>分享免单<button open-type="share" style='z-index:3;position: absolute;left: 0;top: 0;width: 100%; height: 100%;opacity: 0;' type="default" size="mini"></button></view>
 
-  <view class='actDetailSignUp' wx:if='{{isGainPatchBySelf}}' style='{{!videoOpportunity?"margin-top:10rpx;":""}}'>
+    <view class="lotteryNotice boxShadowEve" wx:if='{{commoddata.is_join == 1 && !commoddata.isSubscribed && commoddata.status == 2}}' catchtap="subscrfunsoon">开启开奖通知</view>
+
     <swiper autoplay="{{false}}" bindanimationfinish="changeGoodsSwip" current="{{goodsIndex}}" indicator-color="#a39f99" indicator-active-color="#f49641" indicator-dots="{{false}}" previous-margin="170rpx" next-margin="170rpx" bindchange="bindchange" style='height:300rpx;'>
       <block wx:for='{{swiperarr}}' wx:key='key'>
         <swiper-item>
@@ -231,7 +235,7 @@
 
             <block wx:if='{{swiperarr.length==2}}'>
               <image src='http://www.51chaidan.com//images/default/lefttoright.png' wx:if='{{index==0}}' class='lefttorightimg'></image>
-              <image wx:if='{{index==0}}' src='https://www.51chaidan.com/images/default/left_slide.png' class='gestureImg'></image>
+              <!-- <image wx:if='{{index==0}}' src='https://www.51chaidan.com/images/default/left_slide.png' class='gestureImg'></image> -->
             </block>
             <block wx:elif='{{swiperarr.length==3}}'>
               <image src='http://www.51chaidan.com//images/default/lefttoright.png' wx:if='{{index==1}}' class='lefttorightimg'></image>
@@ -254,7 +258,7 @@
                     <text class='countDownSwiper' style='color:{{item.witcircular}};'>{{countdown.secStr}}</text>
                   </view>
                   <view class='clickRcont' style='{{item.stynum==3?"padding-top:17rpx;":""}}color:{{item.sizeColor}};{{item.needChance==1?"font-size:22rpx;color:#fff;":""}}' wx:elif='{{item.subname!=1}}'>{{item.subname}}</view>
-                  <view class='moneySymbol' style='background:{{item.witcircular}}' wx:if='{{swiperarr.length==2&&index==1&&iftrmoneySymbol&&!blackCity}}'>￥</view>
+                  <!-- <view class='moneySymbol' style='background:{{item.witcircular}}' wx:if='{{swiperarr.length==2&&index==1&&iftrmoneySymbol&&!blackCity}}'>￥</view> -->
 
                   <!-- 分享 -->
                   <view wx:if='{{item.ifshare==1}}' style='width:100%;height:100%;position: absolute;left:0;top:0;z-index:3;'>
@@ -307,25 +311,13 @@
       </block>
     </swiper>
 
-    <view class='actDetailCon' wx:if='{{signtask.length!=0}}' wx:if='{{!taskOrUserImg}}'>
-      <block wx:for='{{signtask}}' wx:key='key'>
-        <block wx:if='{{item.type=="invite"}}'>
-          <view style='width:100%;height:60rpx;text-align:center;font-size:26rpx;line-height:60rpx;' catchtap='invitingfriends'>
-            {{item.name}}
-            <text style='color:#f93f45;'>{{item.special}}</text>
-            <image src='../images/comtriangle.png' catchtap='discomtip' wx:if='{{item.desc!=""&&item.desc}}' data-desc='{{item.desc}}' style='width:30rpx;height:18rpx;position:relative;top:0;'>
-            </image>
-          </view>
-        </block>
-        <block wx:else>
-          <view style='width:100%;height:60rpx;text-align:center;font-size:26rpx;line-height:60rpx;'>
-            {{item.name}}
-            <text style='color:#f93f45;'>{{item.special}}</text>
-            <image src='../images/comtriangle.png' catchtap='discomtip' wx:if='{{item.desc!=""&&item.desc}}' data-desc='{{item.desc}}' style='width:30rpx;height:18rpx;position:relative;top:0;'>
-            </image>
-          </view>
-        </block>
-      </block>
+    <view class='actDetailCon' wx:if='{{!taskOrUserImg}}'>
+        <view class="actDetailTxt" wx:if='{{countdown>0}}'>限时 <text style="color:#f93f45;">{{countdown}}s</text> 内助力，免单券翻倍</view>
+        <view class="actDetailTxt" wx:else>邀请好友助力提升中奖率</view>
+        <view class="actDetailTxt" style="padding-top:20rpx;height:60rpx;">
+             <view class="actDetailEve" catchtap="mySignatureNum">获得免单券<text style="color:#f93f45;"> {{commoddata.countLotto}}</text></view>
+             <view class="actDetailEve" catchtap="sigListFun" style="margin-left:20rpx">免单券排行</view>
+        </view>
     </view>
 
     <view class='aDetSigImgBox' wx:if='{{commoddata.actor.length!=0&&taskOrUserImg}}'>
@@ -1011,7 +1003,6 @@
       <view class='recgadaddress' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' catchtap='revisethereceivingaddress'>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
       <view class='recgadbottom'>
         <view class='recgadbotleft'>
-          <!-- <image src='../images/normal_click.png' class='recgadbotleftimg'></image> -->
           <image class='recgadbotleftimg' hidden='{{!item.checked}}' src='../images/pressed_click.png'></image>
           <image class='recgadbotleftimg' hidden='{{item.checked}}' src='../images/normal_click.png'></image>
           默认地址
@@ -1431,22 +1422,22 @@
 </view>
 
 <!-- 透视卡 -->
-<view class='awatip' wx:if='{{perspcardiftrmax}}' style='z-index:999;'>
+<!-- <view class='awatip' wx:if='{{perspcardiftrmax}}' style='z-index:999;'>
   <view class='awabg' catchtap='perspcarfun'></view>
   <view class='perspcard'>
     <image src='http://www.51chaidan.com/images/icon/alertTempXRay.jpg' style='display:block;width:100%;height:100%;border-radius:30rpx;'></image>
     <text class='perspcardtxt' catchtap='bblistfun'>立即使用\n(当日有效)</text>
   </view>
-</view>
+</view> -->
 
 <!-- 透视卡 小悬浮 -->
-<view wx:if='{{perspcardiftrmin}}' catchtap='bblistfun' style='width:110rpx;height:170rpx;position:fixed;right:20rpx;bottom:260rpx;z-index:9;'>
+<!-- <view wx:if='{{perspcardiftrmin}}' catchtap='bblistfun' style='width:110rpx;height:170rpx;position:fixed;right:20rpx;bottom:260rpx;z-index:9;'>
   <image src='http://www.51chaidan.com/images/icon/iconTempXRay.jpg' style='width:110rpx;height:110rpx;display:block;border-radius:50%;'></image>
   <view style="width:110rpx;height:54rpx;font-size:22rpx;color:#ffffff;position:relative;">
     <view style="width:110rpx;height:54rpx;background:#cb6a15;opacity:0.8;border-radius:10rpx;"></view>
     <text style='display:block;text-align:center;width:110rpx;height:54rpx;line-height:27rpx;position:absolute;left:0;top:0rpx;'>点击使用\n{{percountdown}}</text>
   </view>
-</view>
+</view> -->
 
 
 <!-- 领奖截图提示 -->
@@ -1460,7 +1451,7 @@
 </view>
 
 <!-- ishowgetchip  -->
-<view wx:if='{{ishowgetchip}}' style="width:100%;height:100%;position:fixed;top:0;left:0;z-index:199999;">
+<!-- <view wx:if='{{ishowgetchip}}' style="width:100%;height:100%;position:fixed;top:0;left:0;z-index:199999;">
   <view class='awabg' catchtap='closegetchip' catchtouchmove="myCatchTouch"></view>
 
   <view style="width:740rpx;position:absolute;left:0;top:{{statusBarHeightMc}}px;z-index:11;">
@@ -1523,7 +1514,7 @@
     </view>
   </view>
 
-</view>
+</view> -->
 
 <view class='newcoupon' wx:if='{{limsaveiftr}}'>
   <view class='swfback' catchtouchmove="preventD" catchtap='limsavefun'></view>
@@ -1551,3 +1542,121 @@
     </view>
   </view>
 </view>
+
+<!-- 我的签号 -->
+<view wx:if='{{mySignatureNumber}}' catchtouchmove="true" style='z-index:999;width:100%;height:100%;position:fixed;top:0;left:0;'>
+  <view style='width:100%;height:100%;background:#000;opacity:.5;' catchtap="mySignatureNum"></view>
+  <view style='width:500rpx;height:700rpx;background:#fff;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;border-radius:16rpx;'>
+      <image src='../images/forknumber.png' style="top:15rpx;right:15rpx;" catchtap="mySignatureNum"  class='recgadheadimg'></image>
+      <view class="signatureTip">已获得{{commoddata.countLotto}}张免单券</view>
+      <scroll-view class="signatureScrol" scroll-y="true">
+         <view class="signaturesEve" wx:for='{{muSnData}}' wx:key='key'>
+            <view class="signaturesImgBox">
+                <image class="signaturesImg" mode="aspectFit" wx:if='{{item.nick}}' src="{{item.headphoto}}"></image>
+                <block wx:if='{{item.nick}}'>{{item.nick}}的助力</block>
+                <block wx:else>{{item.operate}}</block>
+            </view>
+            <view class="signaturesImgBox" style="color:#298DF8;font-size:22rpx;">+{{item.count}}</view>
+         </view>
+      </scroll-view>
+  </view>
+</view>
+
+<!-- 抽签排行榜 -->
+<view wx:if='{{signatureList}}' catchtouchmove="true" style='z-index:999;width:100%;height:100%;position:fixed;top:0;left:0;'>
+  <view style='width:100%;height:100%;background:#000;opacity:.5;' catchtap="sigListFun"></view>
+  <view style='width:100%;height:1200rpx;background:#fff;position:absolute;bottom:0;border-radius:16rpx 16rpx 0 0;'>
+      
+      <view class="sListHeadB">
+          <view class="sListHeadEve sListHeadEF">排名</view>
+          <view class="sListHeadEve" style="flex:2;">参与者</view>
+          <view class="sListHeadEve sListHeadEF">免单券</view>
+          <view class="sListHeadEve sListHeadEF">中奖概率</view>
+      </view>
+      <scroll-view class="sListScrol" scroll-y="true">
+         <view class="sListHead" wx:for='{{sigListdata}}' wx:key='key'>
+            <view class="sListHeadEve sListHeadEF">{{item.id}}</view>
+            <view class="sListHeadEve specialellipsis" style="flex:2;text-align:left;"><image class="signaturesImg" mode="aspectFit" src="{{item.headphoto}}"></image>{{item.nick}}</view>
+            <view class="sListHeadEve sListHeadEF">{{item.count}}张</view>
+            <view class="sListHeadEve sListHeadEF" data-ind='{{index}}' catchtap="winProbility">
+                <text wx:if='{{item.ratioName == "高"}}' style="color:#F93E45;">高</text>
+                <text wx:elif='{{item.ratioName == "中"}}' style="color:#CD8336;">中</text>
+                <text wx:elif='{{item.ratioName == "低"}}' style="color:#58995C;">低</text>
+            </view>
+         </view>
+         <view class="sListBottom">
+            <view class="sListHeadEve sListHeadEF">{{rLUserLotto.id}}</view>
+            <view class="sListHeadEve specialellipsis" style="flex:2;text-align:left;"><image class="signaturesImg" mode="aspectFit" src="{{rLUserLotto.headphoto}}"></image>{{rLUserLotto.nick}}</view>
+            <view class="sListHeadEve sListHeadEF">{{rLUserLotto.count}}张</view>
+            <view class="sListHeadEve sListHeadEF" data-ind='999' catchtap="winProbility">
+                <text wx:if='{{rLUserLotto.ratioName == "高"}}' style="color:#F93E45;">高</text>
+                <text wx:elif='{{rLUserLotto.ratioName == "中"}}' style="color:#CD8336;">中</text>
+                <text wx:elif='{{rLUserLotto.ratioName == "低"}}' style="color:#58995C;">低</text>
+            </view>
+         </view>
+         <view class="taggingTip">注:该榜单每小时更新1次数据</view>
+
+      </scroll-view>
+  </view>
+</view>
+
+<!-- 中奖概率  -->
+<view wx:if='{{winningProbability}}' catchtouchmove="true" style='z-index:99999;width:100%;height:100%;position:fixed;top:0;left:0;'>
+  <view style='width:100%;height:100%;background:#000;opacity:.5;' data-ind='9999' catchtap="winProbility"></view>
+  <view style='width:500rpx;height:430rpx;background:#fff;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;border-radius:16rpx;'>
+    <image src='../images/forknumber.png' style="top:15rpx;right:15rpx;" data-ind='9999' catchtap="winProbility"  class='recgadheadimg'></image>
+    <view class="wPhead">
+       <view class="wPheadtop">
+           <text wx:if='{{multipleDisplay.ratio > rLUserLotto.argvAward}}' style="color:#F93E45;">当前中奖概率高于平均值</text>
+           <text wx:elif='{{multipleDisplay.ratio == rLUserLotto.argvAward}}' style="color:#CD8336;">当前中奖概率等于平均值</text>
+           <text wx:else style="color:#58995C;">当前中奖概率低于平均值</text>
+       </view>
+       <view class="wPheadmultiple">
+           <block wx:if='{{multipleDisplay.batch > 1}}'>
+              <text wx:if='{{multipleDisplay.ratio > rLUserLotto.argvAward}}' style="color:#F93E45;">{{multipleDisplay.batch}}倍</text>
+              <text wx:else style="color:#58995C;">{{multipleDisplay.batch}}倍</text>
+           </block>
+
+       </view>
+       <view class="wPheadTxt">注：当前中奖率约为{{multipleDisplay.ratio}}%，平均中奖率约为{{rLUserLotto.argvAward}}%，再接再厉</view>
+    </view>
+    <view class="wPBottom">
+        <view><text style="color:#F93E45;">高</text>:高于平均值</view><view><text style="color:#CD8336;">中</text>:等于平均值</view>
+    </view>
+    <view class="wPBottom"><view><text style="color:#58995C;">低</text>:低于平均值</view></view>
+  </view>
+</view>
+
+<!-- 中奖提示 -->
+<view wx:if='{{wonOrNot}}' catchtouchmove="true" style='z-index:999;width:100%;height:100%;position:fixed;top:0;left:0;'>
+  <view style='width:100%;height:100%;background:#000;opacity:.5;' catchtap="wonOrNot"></view>
+  <view style='width:100%;height:820rpx;background:#fff;position:absolute;bottom:0;border-radius:16rpx 16rpx 0 0;'>
+      <block wx:if='{{commoddata.is_receive == 1}}'>
+          <view class="winningTips">恭喜！中奖了</view>
+          <view class="winningTipsTxt">{{commoddata.receiveTxt}}</view>
+          <image class="winningTipsImg" mode="aspectFit" src="{{commoddata.gcover}}"></image>
+          <view class="winningTipsName">{{commoddata.awarder.champion.prize}}</view>
+          <view class="clickButton" catchtap="wonOrNot">领取奖品</view>
+      </block>
+      <block wx:else>
+          <view class="winningTips" style="color:#8A8A8A;height:100rpx;line-height:100rpx;">很遗憾，您未中奖</view>
+          <view class="notWinTipsTxt">为您推荐</view>
+          <view class="notWinTipsRec">
+            <view class='scractrecacteve' wx:for='{{actrecactlist}}' wx:key='key' catchtap='actexempfun' data-gid="{{item.id}}" wx:if='{{item.status!=3 && index<=3}}' style="margin-bottom:10rpx;width:320rpx;height:257rpx;{{index%2==1?'margin-right:0;':''}}">
+                <image class='actrecimg' mode="aspectFit" src='{{item.cover}}' style="width:320rpx;height:171rpx;"></image>
+                <view class='bctitle multilineellipsis' style='font-size:22rpx;padding:0;width:100%;height:76rpx;'>
+                  <block wx:if='{{item.status==1||item.status==0}}'>报名时间 {{item.start_time}}</block>
+                  <block wx:if='{{item.status==3}}'>已开奖</block>
+                  <block wx:elif='{{item.is_limit==1}}'>人满开奖 {{item.truth_users}}/{{item.limit_users}}</block>
+                  <block wx:elif='{{item.status==2}}'>{{item.stop_time}} 自动开奖</block>
+                  {{item.goods_name}}
+                </view>
+              </view>
+
+          </view>
+          <view class="clickButton" catchtap="acetlistfun">查看更多免单商品</view>
+      </block>
+  </view>
+</view>
+
+

@@ -133,7 +133,9 @@ App({
     beforePage:'',
     firstTime:0,
     // 收货地址
-    receivingAddress:[]
+    receivingAddress:[],
+    // 防着多次登录
+    is_sigin:true
   },
   //一番赏队列倒计时
   // yifanshangIsInQueueFun(time){
@@ -156,156 +158,164 @@ App({
     // 获取id    
     var callback = callback || { onLoadfun: function () {  } };
     var _this = this;
-    wx.login({
-      success: function (res) {
- 
-        console.log('wx.login=====',res)
+    if(_this.signindata.is_sigin){
 
-        var code = res.code;
-        wx.getUserInfo({
+        _this.signindata.is_sigin = false;
+    
+        wx.login({
           success: function (res) {
-            console.log('wx.getUserInfo========',res)
-            var resiv = res.iv;
-            
-            var encryptedData = res.encryptedData;
-
-            if (BSkipData && typeof (BSkipData) != "undefined") { //如果B端过来需要额外传递数据
-              var q = Dec.Aese('operation=xcx&mod=login&code=' + code + '&iv=' + resiv + '&encryptedData=' + encryptedData + '&referee=' + _this.signindata.referee + '&activity_id=' + _this.signindata.activity_id + '&channel=' + _this.signindata.channel + '&last_store_id=' + _this.signindata.global_store_id + '&token=' + _this.signindata.token + '&share_source=' + _this.signindata.share_source + '&tid=' + _this.signindata.tid + "&isBusinessSkip=" + BSkipData.isBusinessSkip + "&businessClientUserId=" + BSkipData.businessClientUserId +
-                "&isMergedUserInfo=" + BSkipData.isMergedUserInfo + '&activity_type=' + _this.signindata.activity_type);
-            } else {
-              var q = Dec.Aese('operation=xcx&mod=login&code=' + code + '&iv=' + resiv + '&encryptedData=' + encryptedData + '&referee=' + _this.signindata.referee + '&activity_id=' + _this.signindata.activity_id + '&channel=' + _this.signindata.channel + '&last_store_id=' + _this.signindata.global_store_id + '&token=' + _this.signindata.token + '&share_source=' + _this.signindata.share_source + '&tid=' + _this.signindata.tid + '&activity_type=' + _this.signindata.activity_type);
-            }
-
-            wx.request({
-              url: Dec.comurl() + 'user.php' + q,
-              method: 'GET',
+            console.log('wx.login=====',res)
+            var code = res.code;
+            wx.getUserInfo({
               success: function (res) {
-                console.log('app', res);
-                if (res.data.ReturnCode == 200 || res.data.ReturnCode == 201) {
-                  _this.signindata.openid = res.data.Info.openid || '';
+                console.log('wx.getUserInfo========',res)
+                var resiv = res.iv;
+                
+                var encryptedData = res.encryptedData;
 
-                  _this.signindata.loginid = res.data.Info.loginid || '';
-                  _this.signindata.uid = res.data.Info.uid || '';
+                if (BSkipData && typeof (BSkipData) != "undefined") { //如果B端过来需要额外传递数据
+                  var q = Dec.Aese('operation=xcx&mod=login&code=' + code + '&iv=' + resiv + '&encryptedData=' + encryptedData + '&referee=' + _this.signindata.referee + '&activity_id=' + _this.signindata.activity_id + '&channel=' + _this.signindata.channel + '&last_store_id=' + _this.signindata.global_store_id + '&token=' + _this.signindata.token + '&share_source=' + _this.signindata.share_source + '&tid=' + _this.signindata.tid + "&isBusinessSkip=" + BSkipData.isBusinessSkip + "&businessClientUserId=" + BSkipData.businessClientUserId +
+                    "&isMergedUserInfo=" + BSkipData.isMergedUserInfo + '&activity_type=' + _this.signindata.activity_type);
+                } else {
+                  var q = Dec.Aese('operation=xcx&mod=login&code=' + code + '&iv=' + resiv + '&encryptedData=' + encryptedData + '&referee=' + _this.signindata.referee + '&activity_id=' + _this.signindata.activity_id + '&channel=' + _this.signindata.channel + '&last_store_id=' + _this.signindata.global_store_id + '&token=' + _this.signindata.token + '&share_source=' + _this.signindata.share_source + '&tid=' + _this.signindata.tid + '&activity_type=' + _this.signindata.activity_type);
+                }
 
-                  console.log('app===sigin',_this.signindata.comurl,_this.signindata.clwcomurl,Dec.versionnumber)
+                wx.request({
+                  url: Dec.comurl() + 'user.php' + q,
+                  method: 'GET',
+                  success: function (res) {
+                    _this.signindata.is_sigin = true;
+                    console.log('app', res);
+                    if (res.data.ReturnCode == 200 || res.data.ReturnCode == 201) {
+                      _this.signindata.openid = res.data.Info.openid || '';
 
-                  _this.signindata.isNewer = res.data.Info.isNewer || false;
-                  _this.signindata.token = '';
-                  _this.signindata.freeOvertime = res.data.Info.freeOrder.Info.overtime || 0;
-                  _this.signindata.isAwardOrder = res.data.Info.isAwardOrder || false;
-                  _this.signindata.awardOrder = res.data.Info.awardOrder || { Info: { cover: "", isAwardOrder: false, overtime: 0, url: "", } };
+                      _this.signindata.loginid = res.data.Info.loginid || '';
+                      _this.signindata.uid = res.data.Info.uid || '';
 
-                  _this.signindata.isShareFun = res.data.Info.isShareFun;
+                      console.log('app===sigin',_this.signindata.comurl,_this.signindata.clwcomurl,Dec.versionnumber)
 
-                  _this.signindata.isTodaySign = res.data.Info.isTodaySign;
+                      _this.signindata.isNewer = res.data.Info.isNewer || false;
+                      _this.signindata.token = '';
+                      _this.signindata.freeOvertime = res.data.Info.freeOrder.Info.overtime || 0;
+                      _this.signindata.isAwardOrder = res.data.Info.isAwardOrder || false;
+                      _this.signindata.awardOrder = res.data.Info.awardOrder || { Info: { cover: "", isAwardOrder: false, overtime: 0, url: "", } };
 
-                  // 用户手机号
-                  _this.signindata.mobile = res.data.Info.mobile;
-                  
-                  // VIP
-                  _this.signindata.isVip = res.data.Info.isVip || 0;
-                  // 抽盒金
-                  _this.signindata.blindboxMoney = res.data.Info.blindboxMoney || 0;
-                  // 限时抽盒金
-                  _this.signindata.tempBlindboxMoney = res.data.Info.tempBlindboxMoney || 0;
-                  // 是否是管理员  有权限进入 发放门票商品的页面
-                  _this.signindata.isManager = res.data.Info.isManager || false;
+                      _this.signindata.isShareFun = res.data.Info.isShareFun;
 
-                  _this.signindata.spreadEntry = res.data.List ? res.data.List.spreadEntry : false || false;
-                  // _this.signindata.index_ela_fra = true;
-                  _this.signindata.isProduce = res.data.Info.isProduce || false;
+                      _this.signindata.isTodaySign = res.data.Info.isTodaySign;
 
-                  // 万圣节南瓜个数
-                  _this.signindata.halloweenScore = res.data.Info.score || 0;
-                  // 万圣节南瓜个数
-                  _this.signindata.isAuthMobile = res.data.Info.isAuthMobile;
-                  // 是否已领取过现实抽盒金(关注公众号小号赠送) 新用户
-                  _this.signindata.gotTBBMBS8 = res.data.Info.welfare ? res.data.Info.welfare.gotTBBMBS8 : true;
-                  // 是否已领取过现实抽盒金(关注公众号大号赠送) 新用户
-                  _this.signindata.gotTBBMBS9 = res.data.Info.welfare ? res.data.Info.welfare.gotTBBMBS9 : true;
+                      // 用户手机号
+                      _this.signindata.mobile = res.data.Info.mobile;
+                      
+                      // VIP
+                      _this.signindata.isVip = res.data.Info.isVip || 0;
+                      // 抽盒金
+                      _this.signindata.blindboxMoney = res.data.Info.blindboxMoney || 0;
+                      // 限时抽盒金
+                      _this.signindata.tempBlindboxMoney = res.data.Info.tempBlindboxMoney || 0;
+                      // 是否是管理员  有权限进入 发放门票商品的页面
+                      _this.signindata.isManager = res.data.Info.isManager || false;
 
-                  // 是否是地域黑模式
-                  _this.signindata.isHellBlackUser = res.data.Info.isHellBlackUser || false;
-                  // 是否开启展会 
-                  _this.signindata.isOpenToyShow = res.data.Info.isOpenToyShow || false;
-                  // 是否能进入一番赏
-                  _this.signindata.isYiFanShang = res.data.Info.function?res.data.Info.function.isYiFanShang:false;                  
-                  // 透视卡倒计时
-                  if(res.data.Info.tempChance){
-                      _this.signindata.perspcardata = res.data.Info.tempChance.length != 0 ? res.data.Info.tempChance[0].over_time || '' : '';
-                  };
+                      _this.signindata.spreadEntry = res.data.List ? res.data.List.spreadEntry : false || false;
+                      // _this.signindata.index_ela_fra = true;
+                      _this.signindata.isProduce = res.data.Info.isProduce || false;
 
-                  _this.signindata.automat = res.data.Info.automat ? res.data.Info.automat : { isOpen: false, times: 0, title: "" };
-                  _this.signindata.automattitle = res.data.Info.automat ? res.data.Info.automat.title : '';
+                      // 万圣节南瓜个数
+                      _this.signindata.halloweenScore = res.data.Info.score || 0;
+                      // 万圣节南瓜个数
+                      _this.signindata.isAuthMobile = res.data.Info.isAuthMobile;
+                      // 是否已领取过现实抽盒金(关注公众号小号赠送) 新用户
+                      _this.signindata.gotTBBMBS8 = res.data.Info.welfare ? res.data.Info.welfare.gotTBBMBS8 : true;
+                      // 是否已领取过现实抽盒金(关注公众号大号赠送) 新用户
+                      _this.signindata.gotTBBMBS9 = res.data.Info.welfare ? res.data.Info.welfare.gotTBBMBS9 : true;
 
-                  _this.signindata.notAllowShareGoodsId = res.data.Info.notAllowShareGoodsId || [];
-                  if(res.data.Info.address){
-                    _this.signindata.isBlindBoxDefaultAddress = res.data.Info.address.isBlindBoxDefaultAddress || false;
-                  };
-
-                  if (res.data.Info.store) {
-                    _this.signindata.store_id = res.data.Info.store.store_id || 0;
-                    _this.signindata.last_store_id = res.data.Info.store.last_store_id || 0;
-                  };
-                  var openid = res.data.Info.openid || '';
-                  var loginid = res.data.Info.loginid || '';
-                  var uid = res.data.Info.uid || '';
-                  wx.setStorage({ key: 'signin', data: { openid: openid, loginid: loginid, uid: uid } });
-
-
-                  _this.signindata.userInfo = res.data.Info.user || {};
-
-                  if (res.data.Info.user) {
-
-                    var userinfo = res.data.Info.user;
-                    userinfo.avatarUrl = userinfo.headphoto;
-                    userinfo.nickName = userinfo.nick;
-                    userinfo.gender = userinfo.gender;
-
-                    _this.signindata.userInfo = userinfo || {};
-                    _this.signindata.avatarUrl = userinfo.headphoto;
-                    _this.signindata.nickName = userinfo.nick;
-
-                    console.log('_this.signindata.userInfo====',_this.signindata.userInfo)
-                    // var photoheadphoto = res.data.Info.user.headphoto || '';
-                    // var namenick = res.data.Info.user.nick || '';
-                    // if (photoheadphoto != avaurl || namenick != nicname) {
-                    //   _this.logindata(nicname, iconsex, avaurl);
-                    // };
-                  };
-
-                  callback.onLoadfun();
-
-                  // 调取收货地址
-                  _this.nextpagediao();
-
-                  var qiftr = Dec.Aese('mod=check&operation=city&uid=' + _this.signindata.uid + '&loginid=' + _this.signindata.loginid);
-                  wx.request({
-                    url: _this.signindata.comurl + 'auth.php' + qiftr,
-                    method: 'GET',
-                    success: function (res) {
-                      if (res.data.ReturnCode == 200) {
-                        if (res.data.Info) {
-                          _this.signindata.blackCity = res.data.Info.flag;
-                          if (res.data.Info.flag) {
-                            callback.onLoadfun();
-                          };
-                        };
+                      // 是否是地域黑模式
+                      _this.signindata.isHellBlackUser = res.data.Info.isHellBlackUser || false;
+                      // 是否开启展会 
+                      _this.signindata.isOpenToyShow = res.data.Info.isOpenToyShow || false;
+                      // 是否能进入一番赏
+                      _this.signindata.isYiFanShang = res.data.Info.function?res.data.Info.function.isYiFanShang:false;                  
+                      // 透视卡倒计时
+                      if(res.data.Info.tempChance){
+                          _this.signindata.perspcardata = res.data.Info.tempChance.length != 0 ? res.data.Info.tempChance[0].over_time || '' : '';
                       };
-                    }
-                  })
-                };
-                // if (res.data.ReturnCode == 201) {
-                //   var ennicname = encodeURIComponent(nicname)
-                //   _this.logindata(ennicname, iconsex, avaurl);
-                // };
+
+                      _this.signindata.automat = res.data.Info.automat ? res.data.Info.automat : { isOpen: false, times: 0, title: "" };
+                      _this.signindata.automattitle = res.data.Info.automat ? res.data.Info.automat.title : '';
+
+                      _this.signindata.notAllowShareGoodsId = res.data.Info.notAllowShareGoodsId || [];
+                      if(res.data.Info.address){
+                        _this.signindata.isBlindBoxDefaultAddress = res.data.Info.address.isBlindBoxDefaultAddress || false;
+                      };
+
+                      if (res.data.Info.store) {
+                        _this.signindata.store_id = res.data.Info.store.store_id || 0;
+                        _this.signindata.last_store_id = res.data.Info.store.last_store_id || 0;
+                      };
+                      var openid = res.data.Info.openid || '';
+                      var loginid = res.data.Info.loginid || '';
+                      var uid = res.data.Info.uid || '';
+                      wx.setStorage({ key: 'signin', data: { openid: openid, loginid: loginid, uid: uid } });
+
+
+                      _this.signindata.userInfo = res.data.Info.user || {};
+
+                      if (res.data.Info.user) {
+
+                        var userinfo = res.data.Info.user;
+                        userinfo.avatarUrl = userinfo.headphoto;
+                        userinfo.nickName = userinfo.nick;
+                        userinfo.gender = userinfo.gender;
+
+                        _this.signindata.userInfo = userinfo || {};
+                        _this.signindata.avatarUrl = userinfo.headphoto;
+                        _this.signindata.nickName = userinfo.nick;
+
+                        // var photoheadphoto = res.data.Info.user.headphoto || '';
+                        // var namenick = res.data.Info.user.nick || '';
+                        // if (photoheadphoto != avaurl || namenick != nicname) {
+                        //   _this.logindata(nicname, iconsex, avaurl);
+                        // };
+                      };
+
+                      callback.onLoadfun();
+
+                      // 调取收货地址
+                      _this.nextpagediao();
+
+                      var qiftr = Dec.Aese('mod=check&operation=city&uid=' + _this.signindata.uid + '&loginid=' + _this.signindata.loginid);
+                      wx.request({
+                        url: _this.signindata.comurl + 'auth.php' + qiftr,
+                        method: 'GET',
+                        success: function (res) {
+                          if (res.data.ReturnCode == 200) {
+                            if (res.data.Info) {
+                              _this.signindata.blackCity = res.data.Info.flag;
+                              if (res.data.Info.flag) {
+                                callback.onLoadfun();
+                              };
+                            };
+                          };
+                        }
+                      })
+                    };
+                    // if (res.data.ReturnCode == 201) {
+                    //   var ennicname = encodeURIComponent(nicname)
+                    //   _this.logindata(ennicname, iconsex, avaurl);
+                    // };
+                  }
+                })
+              },
+              fail: function(){
+                _this.signindata.is_sigin = true;
               }
             })
+          },
+          fail: function(){
+            _this.signindata.is_sigin = true;
           }
-        })
-      }
-    });
-
+        });
+    }
   },
   logindata: function (nicname, iconsex, avaurl) {
     var _this = this;

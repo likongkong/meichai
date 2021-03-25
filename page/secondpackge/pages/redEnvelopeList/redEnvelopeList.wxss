@@ -1,4 +1,3 @@
-/* page/secondpackge//pages/aRewardDetails/aRewardDetails.wxss */
 @import "../../../../pages/signin/signin.wxss";
 @import "../../../../pages/smokebox/smokebox.wxss";
 @import "../../../../common/newcoupon.wxss";

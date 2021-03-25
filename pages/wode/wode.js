@@ -712,6 +712,8 @@ Page({
                   istitnex: false,
                   istit: true,
                 });
+                
+                app.showToastC('设置成功')
 
                 app.signindata.avatarUrl = userInfo.avatarUrl;
                 app.signindata.nickName = userInfo.nickName;
