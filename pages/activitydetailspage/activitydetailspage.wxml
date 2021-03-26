@@ -226,6 +226,8 @@
   <view class='actDetailSignUp' style='{{!videoOpportunity?"margin-top:10rpx;":""}}'>
     <view class="actDetailPShare boxShadowEve" wx:if='{{isShareFun}}'>分享免单<button open-type="share" style='z-index:3;position: absolute;left: 0;top: 0;width: 100%; height: 100%;opacity: 0;' type="default" size="mini"></button></view>
 
+    <view class="actDetailExplain boxShadowEve" style="top:70rpx;" catchtap='jumppicture'>活动说明</view>
+
     <view class="lotteryNotice boxShadowEve" wx:if='{{commoddata.is_join == 1 && !commoddata.isSubscribed && commoddata.status == 2}}' catchtap="subscrfunsoon">开启开奖通知</view>
 
     <swiper autoplay="{{false}}" bindanimationfinish="changeGoodsSwip" current="{{goodsIndex}}" indicator-color="#a39f99" indicator-active-color="#f49641" indicator-dots="{{false}}" previous-margin="170rpx" next-margin="170rpx" bindchange="bindchange" style='height:300rpx;'>
@@ -343,11 +345,11 @@
         <view class='dopTabDeta doptrpdcom' style='border-left:0;{{tabdopnum==2?"background:#919191;color:#fff;":""}}' data-tabdopnum='2' catchtap='tabdopnum'>
           商品详情
         </view>
-        <view class='dopPosRight' catchtap='jumppicture'>
+        <!-- <view class='dopPosRight' catchtap='jumppicture'>
             <view style='height:50rpx;line-height:50rpx;text-align:right;font-size:24rpx;color:#919191;'>
               <image src='../images/explain.png' class='explainDpop'></image>说明
             </view>
-        </view>
+        </view> -->
       </view>
       <!-- 奖品介绍 -->
       <view class='dopPrizeBox' wx:if='{{tabdopnum==1}}'>

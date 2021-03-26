@@ -4,9 +4,8 @@
 @import "../../../../pages/detailspage/detailspage.wxss"; 
 @import "../../pages/awardwinningarea/awardwinningarea.wxss";
 page{
-  background: #fff;
+  background: #f5f6fa;
   width:100%;
-  
 }
 
 .fragment{
@@ -55,4 +54,69 @@ page{
 
 
 
+.oca_goodsDetailsWrap{
+  display: flex;
+}
+.oca_goodsDetailsLift{
+  width: 260rpx;
+  padding-left:90rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+.oca_goodsDetailsLift image{
+  width: 120rpx;
+  height: auto;
+  border-radius: 12rpx;
+  display: block;
+}
+.oca_goodsDetailsRight{
+  width: 490rpx;
+  padding-right: 35rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+.oca_goodsDetailsRight_txt{
+  color: #101010;
+  font-size: 28rpx;
+  display: block;
+  margin: 14rpx 0;
+}
+.oca_goodsDetailsRight_type text{
+  padding: 6rpx 14rpx;
+  font-size: 26rpx;
+  color: #298DF8;
+  border-radius: 10rpx;
+  border: 1rpx solid #298DF8;
+  margin: 0 6rpx;
+}
 
+.oca_explainWrap{
+  width: 100%;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  margin: 15rpx 0;
+  padding: 20rpx 35rpx;
+  box-sizing: border-box;
+}
+.oca_explainWrap view image{
+  width: 40rpx;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+.oca_explainWrap view text{
+  display: block;
+  text-align: center;
+}
+.oca_explainWrap view .txt1{
+  color: #101010;
+  font-size: 24rpx;
+  margin: 0 0 8rpx 0;
+}
+.oca_explainWrap view .txt2{
+  color: #8A8A8A;
+  font-size: 22rpx;
+}

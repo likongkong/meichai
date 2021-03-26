@@ -8,10 +8,10 @@
 
 
 <view style='width:100%;padding-bottom:260rpx;' wx:if='{{shopdetail}}'>
-  <view style='width:100%;overflow:hidden;padding:50rpx 0;'>
-    <view style='width:300rpx;float:left;height:200rpx;position:relative;'>
+  <view style='width:100%;overflow:hidden;padding:50rpx 0;background: #ffffff;'>
+    <!-- <view style='width:300rpx;float:left;height:200rpx;position:relative;'>
       <image style='width:200rpx;height:200rpx;display:block;float:right;' mode='aspectFit' src='{{shopdetail.roleImg}}'></image>
-                  <!-- 碎片 -->
+                  碎片 
       <view wx:if='{{shopdetail.channelId==3}}' class='fragment' style='width:{{shopimgtop}}rpx;right:0;bottom:0;'>
          <view class='fragmentbg'></view>
          <view class='fragmenttxt'><image class='fragmentimg' src='https://www.51chaidan.com/images/toyCabinet/toyFragment.png'></image><text class='fragmentfont'>碎片</text></view>
@@ -27,42 +27,86 @@
          <block wx:if='{{skipType==1}}'>去抽盒></block>
          <block wx:elif='{{skipType==2}}'>去抽赏></block>
       </view>
+    </view> -->
+    <view class="oca_goodsDetailsWrap">
+      <view class="oca_goodsDetailsLift">
+        <image src="{{shopdetail.roleImg}}" mode="widthFix"></image>
+      </view>
+      <view class="oca_goodsDetailsRight" style="">
+        <view>
+          <text class="oca_goodsDetailsRight_name oca_goodsDetailsRight_txt">{{shopdetail.goods_name}}</text>
+          <text class="oca_goodsDetailsRight_style oca_goodsDetailsRight_txt">款式:{{shopdetail.role_name}}</text>
+          <view class="oca_goodsDetailsRight_type oca_goodsDetailsRight_txt" wx:if="{{skiplist.length != 0}}">
+            获取：
+            <block wx:for='{{skiplist}}' wx:key='key'>
+              <block wx:if="{{item.skipType == 1}}">
+                <text data-skipId="{{item.skipId}}" data-skipType="{{item.skipType}}" catchtap="jumpAreward">抽盒机 ></text>
+              </block>
+              <block wx:elif="{{item.skipType == 2}}">
+                <text data-skipId="{{item.skipId}}" data-skipType="{{item.skipType}}" catchtap="jumpAreward">一番赏 ></text>
+              </block>
+              <block wx:else>
+                <text data-skipId="{{item.skipId}}" data-skipType="{{item.skipType}}" catchtap="jumpAreward">拆明盒 ></text>
+              </block>
+            </block>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="oca_explainWrap">
+    <view>
+      <image src="https://cdn.51chaidan.com/images/toyCabinet/qualityGoods.png" mode="widthFix"></image>
+      <text class="txt1">正品保障</text>
+      <text class="txt2">平台直发一手潮玩</text>
+    </view>
+    <view>
+      <image src="https://cdn.51chaidan.com/images/toyCabinet/freeOfFee.png" mode="widthFix"></image>
+      <text class="txt1">免手续费</text>
+      <text class="txt2">累计交易小于1千元免手续费</text>
+    </view>
+    <view>
+      <image src="https://cdn.51chaidan.com/images/toyCabinet/sfLogo.png" mode="widthFix"></image>
+      <text class="txt1">顺丰包邮</text>
+      <text class="txt2">三件发货顺丰包邮</text>
     </view>
   </view>
   <block wx:if='{{shopdetaillist.length!=0}}'>
-  <view style='width:700rpx;margin:0 auto;' wx:for='{{shopdetaillist}}' wx:key='key'>
-    <view style='width:100%;height:120rpx;border-bottom:2rpx solid #e4e4e4;'>
-      <view style='position:relative;width:80rpx;height:100%;float:left;' catchtap='jumpmyo' data-ownerid='{{item.ownerId}}'>
-        <image style='width:80rpx;height:80rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;' src='{{item.user.headphoto}}'></image>
-      </view>
-      <view style='width:160rpx;height:100%;position:relative;float:left;margin-left:15rpx;'>
-        <view wx:if='{{item.toyType==1}}' style='width:100%;height:40rpx;font-size:24rpx;color:#fff;line-height:40rpx;text-align:center;background:#f18f00;border-radius:40rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;'>抽盒机</view>
-        <view wx:elif='{{item.toyType==2}}' style='width:100%;height:40rpx;font-size:24rpx;color:#fff;line-height:40rpx;text-align:center;background:#f18f00;border-radius:40rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;'>一番赏</view>
-        <view wx:elif='{{item.toyType==3}}' style='width:100%;height:40rpx;font-size:24rpx;color:#fff;line-height:40rpx;text-align:center;background:#f18f00;border-radius:40rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;'>{{shopdetail.goods_name}}</view>
-        <view wx:elif='{{item.toyType==4}}' style='width:100%;height:40rpx;font-size:24rpx;color:#fff;line-height:40rpx;text-align:center;background:#f18f00;border-radius:40rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;'>拼明盒</view>
-      </view>
-      <view style='width:246rpx;float:left;margin-left:15rpx;height:100%;'>
-        <scroll-view scroll-x="true" class="disanum_tab_comtainer" style='width:600rpx;' style='width:100%;'>
-          <view wx:for='{{item.role}}' wx:key='key' wx:for-index='wn' wx:for-item='w' style='width:{{w.width||100}}rpx;height:120rpx;position:relative;margin-right:30rpx;display:inline-block;'>
-            <image bindload="imageLoad" data-eve='5' data-ind='{{index}}' mode='aspectFit' data-num='{{wn}}' style='width:{{w.width||100}}rpx;height:100rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;' src='{{w.roleImg}}'></image>
-            <view wx:if='{{(wn+1)!=item.role.length}}' style='width:30rpx;height:120rpx;position:absolute;top:0;right:-30rpx;line-height:120rpx;color:#ef767c;text-align:center;'>+</view>
-                              <!-- 碎片 -->
-            <view wx:if='{{w.channelId==3}}' class='fragment' style='width:{{w.width||100}}rpx;left:0;bottom:10rpx;'>
-              <view class='fragmentbg'></view>
-              <view class='fragmenttxt'><image class='fragmentimg' src='https://www.51chaidan.com/images/toyCabinet/toyFragment.png'></image><text class='fragmentfont'>碎片</text></view>
+    <view style='width:720rpx;margin:0 auto 10rpx auto;padding:40rpx 0;background:#fff;border-radius:12rpx;' wx:for='{{shopdetaillist}}' wx:key='key'>
+      <view style='width:100%;height:120rpx;padding:0 15rpx 0 35rpx;box-sizing: border-box;'>
+        <view style='position:relative;width:80rpx;height:100%;float:left;' catchtap='jumpmyo' data-ownerid='{{item.ownerId}}'>
+          <image style='width:80rpx;height:80rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;' src='{{item.user.headphoto}}'></image>
+        </view>
+        <view style='width:160rpx;height:100%;position:relative;float:left;margin-left:15rpx;font-size:24rpx;color:#8A8A8A;text-align:center;line-height:120rpx;overflow: hidden;white-space:nowrap;text-overflow: ellipsis;'>
+          <!-- <view wx:if='{{item.toyType==1}}' style='width:100%;height:40rpx;font-size:24rpx;color:#fff;line-height:40rpx;text-align:center;background:#f18f00;border-radius:40rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;'>抽盒机</view>
+          <view wx:elif='{{item.toyType==2}}' style='width:100%;height:40rpx;font-size:24rpx;color:#fff;line-height:40rpx;text-align:center;background:#f18f00;border-radius:40rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;'>一番赏</view>
+          <view wx:elif='{{item.toyType==3}}' style='width:100%;height:40rpx;font-size:24rpx;color:#fff;line-height:40rpx;text-align:center;background:#f18f00;border-radius:40rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;'>{{shopdetail.goods_name}}</view>
+          <view wx:elif='{{item.toyType==4}}' style='width:100%;height:40rpx;font-size:24rpx;color:#fff;line-height:40rpx;text-align:center;background:#f18f00;border-radius:40rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;'>拼明盒</view> -->
+          {{item.user.nick}}
+        </view>
+        <view style='width:210rpx;float:left;margin-left:15rpx;height:100%;'>
+          <scroll-view scroll-x="true" class="disanum_tab_comtainer" style='width:600rpx;' style='width:100%;'>
+            <view wx:for='{{item.role}}' wx:key='key' wx:for-index='wn' wx:for-item='w' style='width:{{w.width||100}}rpx;height:120rpx;position:relative;margin-right:30rpx;display:inline-block;'>
+              <image bindload="imageLoad" data-eve='5' data-ind='{{index}}' mode='aspectFit' data-num='{{wn}}' style='width:{{w.width||100}}rpx;height:100rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;' src='{{w.roleImg}}'></image>
+              <view wx:if='{{(wn+1)!=item.role.length}}' style='width:30rpx;height:120rpx;position:absolute;top:0;right:-30rpx;line-height:120rpx;color:#ef767c;text-align:center;'>+</view>
+                                <!-- 碎片 -->
+              <view wx:if='{{w.channelId==3}}' class='fragment' style='width:{{w.width||100}}rpx;left:0;bottom:10rpx;'>
+                <view class='fragmentbg'></view>
+                <view class='fragmenttxt'><image class='fragmentimg' src='https://www.51chaidan.com/images/toyCabinet/toyFragment.png'></image><text class='fragmentfont'>碎片</text></view>
+              </view>
             </view>
-          </view>
-        </scroll-view>
-      </view>
-      <!--  -->
-      <view style='width:50rpx;float:right;margin-left:15rpx;height:100%;position:relative;' catchtap='addCartdata' data-groupid='{{item.groupId}}' data-toytype='{{item.toyType}}' data-price='{{item.price}}' data-ownerid='{{item.ownerId}}' data-toyids='{{item.toyIds}}'>
-        <image style='width:50rpx;height:50rpx;position:absolute;top:0;bottom:0;right:0;margin:auto 0;' src='../../../../pages/images/shoppingCarNotImage@2x.png'></image>
-      </view>
-      <view class='specialellipsis' style='width:100rpx;line-height:120rpx;float:right;height:100%;font-size:24rpx;color:#ef767c;text-align:center;'>
-        ￥{{item.price}}
+          </scroll-view>
+        </view>
+        <!--  -->
+        <view style='width:72rpx;float:right;margin-left:15rpx;height:100%;position:relative;display:flex;align-items: center;' catchtap='addCartdata' data-groupid='{{item.groupId}}' data-toytype='{{item.toyType}}' data-price='{{item.price}}' data-ownerid='{{item.ownerId}}' data-toyids='{{item.toyIds}}'>
+          <!-- <image style='width:50rpx;height:50rpx;position:absolute;top:0;bottom:0;right:0;margin:auto 0;' src='../../../../pages/images/shoppingCarNotImage@2x.png'></image> -->
+          <text style="padding:4rpx 12rpx;border-radius:34rpx;font-size:24rpx;color:#fff;background:#F3783E;height:34rpx;line-height:34rpx;">购买</text> 
+        </view>
+        <view class='specialellipsis' style='width:100rpx;line-height:120rpx;float:right;height:100%;font-size:24rpx;color:#ef767c;text-align:center;'>
+          ￥{{item.price}}
+        </view>
       </view>
     </view>
-  </view>
   </block>
 </view>
  
