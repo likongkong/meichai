@@ -270,7 +270,6 @@ App({
                         _this.signindata.userInfo = userinfo || {};
                         _this.signindata.avatarUrl = userinfo.headphoto;
                         _this.signindata.nickName = userinfo.nick;
-
                         // var photoheadphoto = res.data.Info.user.headphoto || '';
                         // var namenick = res.data.Info.user.nick || '';
                         // if (photoheadphoto != avaurl || namenick != nicname) {
