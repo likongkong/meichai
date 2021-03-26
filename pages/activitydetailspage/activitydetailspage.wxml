@@ -228,7 +228,7 @@
 
     <view class="actDetailExplain boxShadowEve" style="top:70rpx;" catchtap='jumppicture'>活动说明</view>
 
-    <view class="lotteryNotice boxShadowEve" wx:if='{{commoddata.is_join == 1 && !commoddata.isSubscribed && commoddata.status == 2}}' catchtap="subscrfunsoon">开启开奖通知</view>
+    <view class="lotteryNotice boxShadowEve" style="top:129rpx;" wx:if='{{commoddata.is_join == 1 && !commoddata.isSubscribed && commoddata.status == 2}}' catchtap="subscrfunsoon">开启开奖通知</view>
 
     <swiper autoplay="{{false}}" bindanimationfinish="changeGoodsSwip" current="{{goodsIndex}}" indicator-color="#a39f99" indicator-active-color="#f49641" indicator-dots="{{false}}" previous-margin="170rpx" next-margin="170rpx" bindchange="bindchange" style='height:300rpx;'>
       <block wx:for='{{swiperarr}}' wx:key='key'>
