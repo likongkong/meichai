@@ -1165,7 +1165,7 @@ App({
   indexShareBanner:function(){
     var _this = this;
     wx.request({
-      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/indexResource.json',
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/indexResource.json?time='+Date.parse(new Date()),
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
