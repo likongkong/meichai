@@ -1400,6 +1400,7 @@ App({
 //  initiateopenboxeslist 发起拆明盒列表
 //  initiateopenboxes 发起拆明盒详情
 //  ocamendment 闲置潮玩列表修改
+//  ocamgoodsseries 闲置商品系列
 //  ocamcart  闲置潮玩列表购物车
 //  drivetohidehome 开车送隐藏主页
 //  drivetohide 开车送隐藏详情页

@@ -9,187 +9,140 @@
 
 
 <view class='ocabox'>
-  
-    <!--  最新上架  -->
-    <view class='disanumofgoods' style='margin-bottom:0;'>
-        <!--  列表标题  -->
-        <view class='disantitle' style='padding:0 20rpx 0;'>
-          <image src='https://cdn.51chaidan.com/images/icon/iconNew.png' mode="aspectFit" style='width:36rpx;' class='ocaleftimgtit'></image><text style='height:100%;float:left;'>最新上架</text>
-        </view> 
-        <!--  列表  -->
-        <view class='disanumofgoods_box'>
-            <view style="position:relative;height:300rpx;">
-              <swiper bindanimationfinish="changeGoodsSwip" indicator-dots="{{false}}" class="ocamenswiper" circular="true" autoplay="{{false}}" interval="3000" duration="450">
-                <swiper-item wx:for='{{brandseries.series}}' wx:key='key'>
-                  <view class="ocamenswipervie">
-                      <view class="ocamensweve" wx:for='{{item}}' wx:key='key' wx:for-item='w'  catchtap='brandfun' data-bid='{{w.id}}' data-isbs='1'>
-                          <image class="ocamensweveimg" mode="aspectFit" style="{{w.id==brandid?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{w.thumb}}?{{timeOfDay}}"></image>
-                          <view class="ocamenswevename specialellipsis" style="{{w.id==brandid?'color:#f19207;':''}}">{{w.name}}</view>
-                      </view>
-                  </view>
-                </swiper-item>
-              </swiper>
-              <!--重置小圆点的样式 -->
-              <view class="dots" style="bottom:0;"> 
-                <block wx:for="{{brandseries.series}}" wx:key='key'> 
-                  <view class="dot{{index == currentSwiper ? ' activeindex' : ''}}"></view> 
-                </block> 
-              </view>             
-            </view>
 
-
+    <view class="idle_topwrap" style="top:{{statusBarHeightMc}}px;">
+      <!-- 顶部tab栏 -->
+      <view class="idle_tabbarWrap">
+        <block wx:for="{{tabbarAll}}" wx:key='key' data-index="{{index}}">
+          <text class="{{index == currentNum?'active':''}}" data-ind="{{index}}" data-type="{{item.type}}" catchtap="changetabbar">{{item.name}}</text>
+        </block>
+        <image class="idle_search" src="/pages/images/search.png" mode="widthFix" catchtap="showSearchInput"></image>
+        <view class="idle_searchInputWrap" wx:if="{{isSearchInput}}">
+          <input type="text" bindinput="bindKeyInput" focus="{{searchInputFocus}}" confirm-type="search" bindblur="bindInputblur" bindconfirm="searchFun"/>
+          <text catchtap="searchFun">搜索</text>
         </view>
-    </view> 
-
-    <view style='width:100%;height:10rpx;background:#dcdcdc;'></view>  
-
-
-
-    <!-- 全部 -->
-    <view style="width:100%;" wx:if='{{wholedata==1||wholedata==2}}'>
-        <view style='width:700rpx;height:60rpx;margin:0 auto;'>
-           <scroll-view scroll-x="true" class='ocascroview' scroll-with-animation="true" bindscroll='scrollleftf' scroll-left='{{scrollleft}}'>
-               <view class='ocastev' wx:key='key' catchtap='wholedata' data-whole='1' style='{{wholedata==1?"color:#f29a19;text-decoration:underline;":""}}'>潮玩品牌</view>
-               <view class='ocastev' catchtap='wholedata' data-whole='2' style='{{wholedata==2?"color:#f29a19;text-decoration:underline;":""}}'>潮玩系列</view>
-           </scroll-view>
-           <view class='ocascrtxt' catchtap='wholeeverybodbuy'>收起》</view>
-        </view>   
-        <!-- 潮玩品牌 -->
-        <view wx:if='{{wholedata==1}}' style="width:100%;">
-            <view style="width:720rpx;margin:auto;overflow:hidden;">
-                <view class="ocamensweve" wx:for='{{wholebrand}}' wx:key='key' wx:for-item='w'  catchtap='brandfun' data-bid='{{w.id}}' data-isbs='2'>
-                    <image class="ocamensweveimg" src="{{w.thumb}}?{{timeOfDay}}"></image>
-                    <view class="ocamenswevename specialellipsis">{{w.name}}</view>
-                </view>
-            </view>        
-        
-        </view>     
-        <!-- 潮玩系列 -->
-        <view wx:if='{{wholedata==2}}' style="width:710rpx;margin:auto;">
-            <view style="width:345rpx;float:left;height:224rpx;margin-right:{{index%2==1?0:'20rpx'}};border-radius: 15rpx;background:#f5f6fa;margin-bottom:20rpx;" wx:for='{{wholenewsSeries}}' wx:key='key' catchtap='brandfun' data-bid='{{item.id}}' data-isbs='1'>
-                <image style="width:100%;display:block;height:184rpx;border-radius: 15rpx;" src="{{item.large_diagram}}" mode='aspectFit'></image>
-                <view class="specialellipsis" style="width:95%;height:40rpx;margin:auto;line-height:40rpx;font-size:22rpx;">{{item.name}}</view>
-            </view>  
-        
-        </view>    
-    </view>
-
-
-
-
-    <!-- 大家都在买  -->
-    <view style='width:100%;' wx:if='{{brand}}'>
-        <view style='width:700rpx;height:60rpx;margin:0 auto;'>
-           <scroll-view scroll-x="true" class='ocascroview' scroll-with-animation="true" bindscroll='scrollleftf' scroll-left='{{scrollleft}}'>
-               <view class='ocastev' wx:for='{{brandscroll}}' wx:key='key' id='q{{item.id}}' data-c_id='{{item.id}}' catchtap='tabbotdata' style='{{tabselid==item.id?"color:#f29a19;text-decoration:underline;":""}}'>{{item.name}}</view>
-           </scroll-view>
-           <view class='ocascrtxt' style="color:#ff2742;" catchtap='everybodbuy' wx:if='{{infodata.activityType!=0}}'>
-              <block wx:if='{{infodata.activityType==6}}'>拼明盒》</block>
-              <block wx:else>{{infodata.activityType==10?'一番赏》':'去抽盒》'}}</block>
-           </view>
-        </view>
-        <view style='width:100%;overflow: hidden;'>
-            <view style='width:25%;height:303rpx;float:left;' wx:for='{{brandlist}}' wx:key='key' catchtap='jumpshopbut' data-name='{{item.role_name}}' data-minprice='{{item.minPrice}}' data-maxprice='{{item.maxPrice}}' data-goods_id='{{item.goods_id}}'>
-                <view style='width:100%;height:220rpx;position:relative;'>
-                    <image class='eveimgrange' style='height:200rpx;width:96%;' mode='aspectFit' src='{{item.img}}?{{timeOfDay}}'></image>
-                </view>
-                <view class='specialellipsis' style='width:170rpx;height:40rpx;text-align:center;font-size:24rpx;color:#000;margin:0 auto;'>{{item.role_name}}</view>
-                <block wx:if='{{item.minPrice==0&&item.maxPrice==0}}'>
-                    <view class='specialellipsis' style='width:170rpx;height:40rpx;text-align:center;font-size:24rpx;color:#ec656c;margin:0 auto;'>暂无报价</view>
-                </block>
-                <block wx:else>
-                    <view class='specialellipsis' style='width:170rpx;height:40rpx;text-align:center;font-size:24rpx;color:#ec656c;margin:0 auto;'>
-                        <block wx:if='{{item.minPrice!=item.maxPrice}}'>{{item.minPrice}}~{{item.maxPrice}}元</block>
-                        <block wx:else>{{item.maxPrice}}元</block>
-                    </view>
-                </block>
-                
-            </view>
-        </view>
-    </view>
-
-    <view style='width:100%;padding-top:200rpx;' wx:if='{{brandlist.length==0&&iftrnodatabr&&brand}}'>
-        <image src='../../../../pages/images/default_BG_Image@3x.png' style='width:414rpx;height:255rpx;display:block;margin:0 auto;'></image>
-    </view>
-
-   
-    <view class='letters' style='height:{{lettersheight}}rpx;' wx:if='{{series}}'>
-      <scroll-view  scroll-y="true" style='width:100%;height:100%;'>
-          <text wx:for="{{letter}}" wx:key='key' bindtap='chooseLetter' data-letter="{{item}}">{{item}}</text>
-      </scroll-view>
-    </view>
-
-
-    <view style='width:100%;height:10rpx;background:#dcdcdc;' wx:if='{{series||brand}}'></view>  
-
-    <!-- 搜索 -->
-    <view class='sousuo' style='margin:10rpx 0;'>
-      <view style='height:60rpx;float:left;font-size:26rpx;line-height:60rpx;margin-right:15rpx;'>大家都在买</view>
-      <!-- bcbbbc -->
-      <view style='float:left;width:420rpx;background:#DDDDDD;border-radius:10rpx;'>
-         <image src='https://cdn.51chaidan.com/images/toyCabinet/search.png' class='sousoo' bindtap='jumpsoousuo'></image>
-         <input class='mIndheadinp' style='width:280rpx;padding-left:0;float:left;background:#DDDDDD;color:#595858;font-size:24rpx;' type='text' bindinput="inputChange" value='{{inputdata}}' placeholder-class="phcolor" bindconfirm="jumpsoousuo" placeholder='请输入系列、款式名称'></input>
-         <image style='margin:0 0 0 20rpx;' catchtap='wholefun' src='https://cdn.51chaidan.com/images/toyCabinet/Close.png' class='sousoo'></image>
       </view>
-      <view class='clicksousuo' bindtap='jumpsoousuo' style='position: relative;'>
-        <view style='width:100%;height:60rpx;line-height:60rpx;font-size:26rpx;color:#333;'>搜索</view>
-      </view>      
-    </view>
-
-
-    <!-- 推荐  -->
-    <view style='width:100%;overflow: hidden;padding-bottom:210rpx;'>
-        <view style='width:25%;height:303rpx;float:left;' wx:for='{{listdata}}' wx:key='key' catchtap='jumpshopbut' data-name='{{item.role_name}}' data-minprice='{{item.minPrice}}' data-maxprice='{{item.maxPrice}}' data-goods_id='{{item.goods_id}}'>
-            <view style='width:100%;height:220rpx;position:relative;'>
-                <image class='eveimgrange'  style='height:200rpx;width:96%' mode='aspectFit' src='{{item.img}}?{{timeOfDay}}'></image>
-            </view>
-            <view class='specialellipsis' style='width:170rpx;height:40rpx;text-align:center;font-size:24rpx;color:#000;'>{{item.role_name}}</view>
-            <block wx:if='{{item.minPrice==0&&item.maxPrice==0}}'>
-                <view class='specialellipsis' style='width:170rpx;height:40rpx;text-align:center;font-size:24rpx;color:#ec656c;margin:0 auto;'>暂无报价</view>
-            </block>
-            <block wx:else>
-                <view class='specialellipsis' style='width:170rpx;height:40rpx;text-align:center;font-size:24rpx;color:#ec656c;margin:0 auto;'>
-                        <block wx:if='{{item.minPrice!=item.maxPrice}}'>{{item.minPrice}}~{{item.maxPrice}}元</block>
-                        <block wx:else>{{item.maxPrice}}元</block>
+      <!-- IP -->
+      <view class="idle_IPWrap">
+        <scroll-view class="idle_IPScroll" scroll-x>
+          <view class="idle_IPBox" catchtap="toggleIpPopMask">
+              <view class="idle_allIcon">
+                <view>
+                  <text>ALL</text>
+                  <text>全部</text>
                 </view>
+              </view>
+              <text class="idle_IPName">全部IP</text>
+          </view>
+            <block wx:if="{{currentNum == 0}}">
+              <block wx:for="{{allIpData}}" wx:key='key' data-index="{{index}}">
+                <view class="idle_IPBox {{ipcurrentNum==item.ipId?'active':''}}" data-ind="{{item.ipId}}" wx:if="{{index<20}}" data-ipid="{{item.ipId}}" catchtap="brandfun">
+                    <image src="{{item.ipImg}}" mode="aspectFit"></image>
+                    <text class="idle_IPName">{{item.ipName}}</text>
+                </view>
+              </block>
             </block>
-            
-        </view>
+            <block wx:elif="{{currentNum == 1}}">
+              <block wx:for="{{blindboxIpData}}" wx:key='key' data-index="{{index}}">
+                <view class="idle_IPBox {{ipcurrentNum==item.ipId?'active':''}}" data-ind="{{item.ipId}}" wx:if="{{index<20}}" data-ipid="{{item.ipId}}" catchtap="brandfun">
+                    <image src="{{item.ipImg}}" mode="aspectFit"></image>
+                    <text class="idle_IPName">{{item.ipName}}</text>
+                </view>
+              </block>
+            </block>
+            <block wx:elif="{{currentNum == 2}}">
+              <block wx:for="{{yifanshangIpData}}" wx:key='key' data-index="{{index}}">
+                <view class="idle_IPBox {{ipcurrentNum==item.ipId?'active':''}}" data-ind="{{item.ipId}}" wx:if="{{index<20}}" data-ipid="{{item.ipId}}" catchtap="brandfun">
+                    <image src="{{item.ipImg}}" mode="aspectFit"></image>
+                    <text class="idle_IPName">{{item.ipName}}</text>
+                </view>
+              </block>
+            </block>
+        </scroll-view>
+      </view>
     </view>
- 
+    <view class="idle_content">
 
-
+      <!-- <view class="idle_otherWrap">
+        <view class="idle_jianlou idle_otherFlex">
+          <view class="idle_otherLeft">
+            <view>
+              <text>捡漏</text>
+              <text>专区</text>
+            </view>
+          </view>
+          <view class="idle_otherRight">
+            <image src="https://cdn.51chaidan.com/images/202103/thumb_img/37205_thumb_G_1615387693839.jpg" mode="widthFix"></image>
+            <text>￥185</text>
+          </view>
+        </view>
+        <view class="idle_hot idle_otherFlex">
+          <view class="idle_otherLeft">
+            <view>
+              <text>热门</text>
+              <text>专区</text>
+            </view>
+          </view>
+          <view class="idle_otherRight">
+            <image src="https://cdn.51chaidan.com/images/202103/thumb_img/37205_thumb_G_1615387693839.jpg" mode="widthFix"></image>
+            <text>￥185</text>
+          </view>
+        </view>
+      </view> -->
+    
+      <view class="idle_listWrap">
+        <block wx:for="{{dataList}}" wx:key='key' wx:if="{{index%2 == 0}}">
+          <view class="idle_listItem" data-id="{{item.seriesId}}" data-minprice="{{item.minPrice}}" catchtap="jumpshopbut">
+            <template is="card" data="{{...item}}"></template>
+          </view>
+        </block>
+        <block wx:for="{{dataList}}" wx:key='key' wx:if="{{index%2 != 0}}">
+          <view class="idle_listItem" data-id="{{item.seriesId}}" data-minprice="{{item.minPrice}}" catchtap="jumpshopbut">
+            <template is="card" data="{{...item}}"></template>
+          </view>
+        </block>
+      </view>
+    </view>
 </view>
 
+<!-- <template name="ip">
+  <view class="idle_IPBox {{ipcurrentNum==index?'active':''}}" data-ind="{{index}}" wx:if="{{index<20}}" data-ipid="{{item.ipId}}" catchtap="brandfun">
+    <image src="{{item.ipImg}}" mode="aspectFit"></image>
+    <text class="idle_IPName">{{item.ipName}}</text>
+  </view>
+</template> -->
 
 
 
-    <view style='width:100%;padding-top:200rpx;' wx:if='{{listdata.length==0&&iftrnodata}}'>
-        <image src='../../../../pages/images/default_BG_Image@3x.png' style='width:414rpx;height:255rpx;display:block;margin:0 auto;'></image>
+<template name="card">
+  <view style="position:relative;">
+    <image src="{{seriesImg}}" mode="widthFix"></image>
+    <view  wx:if='{{belongs == 1}}' style="position:absolute;left:6rpx;bottom:6rpx;height:30rpx;overflow:hidden;z-index:5;padding: 4rpx 8rpx;">
+        <image src='{{brandLogo}}' style='float:left;width:30rpx;height:30rpx;border-radius:50%;'></image>
+        <view style='float:left;height:30rpx;line-height:30rpx;font-size:20rpx;color:#fff;margin-left:10rpx;max-width:200rpx;' class='specialellipsis'>{{brandName}}旗舰店</view>
+        <view style="width: 100%;height: 100%;background: #000;opacity: 0.6;position: absolute;top: 0;left: 0;z-index: -1;border-radius: 10rpx;"></view>
+    </view>		
+  </view>
+  <view style="padding:10rpx 10rpx 16rpx 10rpx;">
+    <text class="idle_listItemName">{{seriesName}}</text>
+    <view class="idle_listItemBox">
+      <text class="idle_listItemTxt">{{click}}人喜欢</text>
+      <block wx:if="{{minPrice}}">
+        <text class="idle_listItemPrice">￥{{minPrice}}~￥{{maxPrice}}</text>
+      </block>
+      <block wx:else>
+        <text class="idle_listItemPrice">暂无报价</text>
+      </block>
     </view>
+  </view>
+</template>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<view style='width:100%;padding-top:200rpx;' wx:if='{{listdata.length==0&&iftrnodata}}'>
+    <image src='../../../../pages/images/default_BG_Image@3x.png' style='width:414rpx;height:255rpx;display:block;margin:0 auto;'></image>
+</view>
 
 <bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
-
-
-
-
 
 
 <!--  授权弹框  -->
@@ -252,7 +205,22 @@
   </view>
 </view>
 
-
+<view class="ipPopMask" catchtouchmove="true" wx:if="{{isipPopMask}}">
+  <view class="ipPopTop" style="top:{{statusBarHeightMc}}px;">
+    <text>全部IP</text>
+    <image src="/pages/images/forknumber.png" mode="widthFix" catchtap="toggleIpPopMask"></image>
+  </view>
+  <view class="ipPopBox" style="margin-top: {{statusBarHeightMc*2+80}}rpx;">
+    <scroll-view scroll-y="true" style='width:100%;height:{{windowHeight*2-80}}rpx;'>
+      <block wx:for="{{allIpData}}" wx:key='key' data-index="{{index}}">
+        <view class="idle_IPBox1" data-ipid="{{item.ipId}}" data-ind="{{item.ipId}}" catchtap="brandfun">
+          <image src="{{item.ipImg}}" mode="aspectFit"></image>
+          <text class="idle_IPName">{{item.ipName}}</text>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+</view>
 
 
 
