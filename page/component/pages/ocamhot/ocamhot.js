@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '闲置交易', 
+    c_title: '', 
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
@@ -18,11 +18,9 @@ Page({
     uid: app.signindata.uid,
     isProduce: app.signindata.isProduce,
     pid:0,
-    currentNum:1,
+    limit:20,
     dataList:[],
-    skiplistL:[],
-    loadprompt:false,
-    seriesId:''
+    loadprompt:true,
   },
   /**
    * 生命周期函数--监听页面加载
@@ -123,41 +121,63 @@ Page({
     });
   },
 
-  changetabbar(e){
-    this.setData({
-      currentNum: e.currentTarget.dataset.ind
-    })
-    this.reset();
-    this.getInfo();
-  },
-
 
   getInfo(){
     var _this = this;
     wx.showLoading({ title: '加载中...'})
-    var q = Dec.Aese('mod=cabinet&operation=detailSeries&seriesId=' + this.data.seriesId)
-    console.log('请求数据===','mod=cabinet&operation=detailSeries&seriesId=' + this.data.seriesId)
     wx.request({
-      url: app.signindata.comurl + 'toy.php'+q,
+      url:'http://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/toyCabinetChearperZone.json',
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
-        console.log('商品系列数据======',res)
+        console.log('专区数据======',res)
         // 刷新完自带加载样式回去
         wx.stopPullDownRefresh();
         wx.hideLoading();
-        if (res.data.ReturnCode == 200) {
-          _this.setData({
-            dataInfo:res.data.Info,
-            dataList:res.data.List.goods,
-            skiplist:res.data.List.skip
-          })
-        } else {
-          app.showToastC(res.data.msg);
-        }
+        _this.data.allData = res.data.List.role;
+        _this.data.processingData = _this.data.allData;
+        // 处理数据分页        
+        _this.processingDataPaging();
       }
     });
   },
+
+    // 处理列表数据分页
+    processingDataPaging(){
+      let _this = this;
+      let pid = _this.data.pid;
+      let limit = _this.data.limit;
+      let dataList = _this.data.processingData;
+      let data = [];
+      if(pid == 0){
+        for (let i=0; i < limit; i++) {
+          if(dataList[i]!=undefined){
+            data.push(dataList[i])
+          }else{
+            _this.data.loadprompt = false;
+          }
+        }
+      }else{
+        let num = Number(pid*limit);
+        let len = Number(num+limit);
+        for (let i=num; i < len; i++) {
+          if(dataList[i]!=undefined){
+            data.push(dataList[i])
+          }else{
+            _this.data.loadprompt = false;
+          }
+        }
+      }
+      console.log(data,pid)
+      setTimeout(function(){
+        // 刷新完自带加载样式回去
+        wx.stopPullDownRefresh();
+        wx.hideLoading();
+      },500)
+      _this.setData({
+        dataList: [..._this.data.dataList,...data]
+      })
+    },
 
   jumpAreward:function(e){
     // 跳转类型 0不显示 1抽盒机 2一番赏
@@ -227,14 +247,13 @@ Page({
   onUnload: function () {
   },
   reset(){
-    this.setData({pid:0,dataList:[],loadprompt:false,nodata:false})
-    clearInterval(this.data.timer); 
+    this.setData({pid:0,dataList:[],loadprompt:true,nodata:false})
   },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    // this.reset();
+    this.reset();
     this.getInfo();
   },
 
@@ -242,7 +261,18 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    
+    if(this.data.loadprompt){
+      this.data.pid = ++this.data.pid;
+      // 处理数据分页    
+      wx.showLoading({ title: '加载中...'})    
+      this.processingDataPaging();
+    }else{
+      wx.showToast({
+        title: '没有更多数据了',
+        icon: 'none',
+        duration: 2000
+      })
+    }
   },
   /**
    * 用户点击右上角分享

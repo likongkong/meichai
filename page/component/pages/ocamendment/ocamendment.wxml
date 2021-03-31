@@ -91,16 +91,21 @@
       </view> -->
     
       <view class="idle_listWrap">
-        <block wx:for="{{dataList}}" wx:key='key' wx:if="{{index%2 == 0}}">
-          <view class="idle_listItem" data-id="{{item.seriesId}}" data-minprice="{{item.minPrice}}" catchtap="jumpshopbut">
-            <template is="card" data="{{...item}}"></template>
-          </view>
-        </block>
-        <block wx:for="{{dataList}}" wx:key='key' wx:if="{{index%2 != 0}}">
-          <view class="idle_listItem" data-id="{{item.seriesId}}" data-minprice="{{item.minPrice}}" catchtap="jumpshopbut">
-            <template is="card" data="{{...item}}"></template>
-          </view>
-        </block>
+        <view class="idle_listBox">
+          <block wx:for="{{dataList}}" wx:key='key' wx:if="{{index%2 == 0}}">
+            <view class="idle_listItem" data-id="{{item.seriesId}}" data-minprice="{{item.minPrice}}" catchtap="jumpshopbut">
+              <template is="card" data="{{...item}}"></template>
+            </view>
+          </block>        
+        </view>
+       <view class="idle_listBox">
+          <block wx:for="{{dataList}}" wx:key='key' wx:if="{{index%2 != 0}}">
+            <view class="idle_listItem" data-id="{{item.seriesId}}" data-minprice="{{item.minPrice}}" catchtap="jumpshopbut">
+              <template is="card" data="{{...item}}"></template>
+            </view>
+          </block>
+        </view>
+
       </view>
     </view>
 </view>
@@ -143,7 +148,6 @@
 </view>
 
 <bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
-
 
 <!--  授权弹框  -->
 <tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
@@ -205,13 +209,13 @@
   </view>
 </view>
 
-<view class="ipPopMask" catchtouchmove="true" wx:if="{{isipPopMask}}">
+<view class="ipPopMask" catchtouchmove="preventD" wx:if="{{isipPopMask}}">
   <view class="ipPopTop" style="top:{{statusBarHeightMc}}px;">
     <text>全部IP</text>
     <image src="/pages/images/forknumber.png" mode="widthFix" catchtap="toggleIpPopMask"></image>
   </view>
   <view class="ipPopBox" style="margin-top: {{statusBarHeightMc*2+80}}rpx;">
-    <scroll-view scroll-y="true" style='width:100%;height:{{windowHeight*2-80}}rpx;'>
+    <scroll-view scroll-y="true" style='width:100%;height:{{windowHeight-45}}px;padding: 0 30rpx;box-sizing: border-box;'>
       <block wx:for="{{allIpData}}" wx:key='key' data-index="{{index}}">
         <view class="idle_IPBox1" data-ipid="{{item.ipId}}" data-ind="{{item.ipId}}" catchtap="brandfun">
           <image src="{{item.ipImg}}" mode="aspectFit"></image>

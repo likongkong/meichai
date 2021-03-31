@@ -16,6 +16,7 @@ Page({
     tgabox:false,
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
+    isProduce: app.signindata.isProduce,
     pid:0,
     limit:20,
     tabbarAll:[
@@ -48,6 +49,13 @@ Page({
     // var data = JSON.parse(options.data)
     // console.log(data)
     // this.data.listData = data;
+
+    this.setData({
+      uid: app.signindata.uid,
+      loginid:app.signindata.loginid,
+      isProduce: app.signindata.isProduce,
+    });
+    this.getInfo();
     // 判断是否授权
     this.activsign();
   },
@@ -55,8 +63,8 @@ Page({
     this.setData({
       uid: app.signindata.uid,
       loginid:app.signindata.loginid,
+      isProduce: app.signindata.isProduce,
     }); 
-    this.getInfo();
     this.brandseries();
   },
   activsign: function () {
@@ -154,16 +162,19 @@ Page({
 
   brandfun(e){
     this.reset();
+    this.setData({
+      currentNum: 0
+    })
     let ipid = e.currentTarget.dataset.ipid;
     let ind = e.currentTarget.dataset.ind;
     let dataList,ipdataList=[];
-    if(this.data.currentNum==0){
+    // if(this.data.currentNum==0){
       dataList = this.data.allSeriesData;
-    }else if(this.data.currentNum==1){
-      dataList = this.data.blindboxData;
-    }else if(this.data.currentNum==2){
-      dataList = this.data.yifanshangData;
-    }
+    // }else if(this.data.currentNum==1){
+    //   dataList = this.data.blindboxData;
+    // }else if(this.data.currentNum==2){
+    //   dataList = this.data.yifanshangData;
+    // }
     for (let i=0; i < dataList.length; i++) {
       if(dataList[i].ipId == ipid){
         ipdataList.push(dataList[i])
@@ -422,6 +433,7 @@ Page({
       query:{}    
     }
   },
-
+  // 阻止蒙层冒泡
+  preventD() { },
 
 })

@@ -95,7 +95,8 @@
         "pages/limitlotterypublish/limitlotterypublish",
         "pages/doubleElevenexh/doubleElevenexh",
         "pages/electronicTicket/electronicTicket",
-        "pages/ocamcart/ocamcart"
+        "pages/ocamcart/ocamcart",
+        "pages/ocamhot/ocamhot"
       ]
     },
     {

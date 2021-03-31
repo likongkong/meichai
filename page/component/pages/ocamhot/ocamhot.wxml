@@ -1,0 +1,45 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+
+
+<view class="wrap">
+
+  <block wx:for="{{dataList}}" wx:key='key'>
+    <view style='width:100%;overflow:hidden;padding:35rpx 0;background: #ffffff;margin-bottom:15rpx;'>
+      <view class="oca_goodsDetailsWrap">
+        <view class="oca_goodsDetailsLift">
+          <image src="{{item.series.thumb}}" mode="widthFix"></image>
+        </view>
+        <view class="oca_goodsDetailsRight" style="">
+          <view style="{{item.skip.length == 0?'display: flex;':''}}">
+            <text class="oca_goodsDetailsRight_name oca_goodsDetailsRight_txt">{{item.goodsName}}</text>
+            <text class="oca_goodsDetailsRight_style oca_goodsDetailsRight_txt">款式:{{item.roleName}}</text>
+            <view class="oca_goodsDetailsRight_type oca_goodsDetailsRight_txt" wx:if="{{item.skip.length != 0}}">
+              获取：
+              <block wx:for='{{item.skip}}' wx:key='key' wx:for-item="skipItem">
+                <block wx:if="{{skipItem.skipType == 1}}">
+                  <text data-skipId="{{skipItem.skipId}}" data-skipType="{{skipItem.skipType}}" catchtap="jumpAreward">抽盒机 ></text>
+                </block>
+                <block wx:elif="{{skipItem.skipType == 2}}">
+                  <text data-skipId="{{skipItem.skipId}}" data-skipType="{{skipItem.skipType}}" catchtap="jumpAreward">一番赏 ></text>
+                </block>
+                <block wx:else>
+                  <text data-skipId="{{skipItem.skipId}}" data-skipType="{{skipItem.skipType}}" catchtap="jumpAreward">拆明盒 ></text>
+                </block>
+              </block>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+
+</view>
+
+
+
+<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+<!--  授权弹框  -->
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight}}px;width: 100%;z-index: 300;' catchtap='pullupsignin'></view>

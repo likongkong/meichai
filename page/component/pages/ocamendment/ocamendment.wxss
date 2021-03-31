@@ -342,7 +342,14 @@ page{
   padding: 0 30rpx;
   box-sizing: border-box;
   margin-top: 35rpx;
-  column-count: 2;
+  /* column-count: 2; */
+  overflow:hidden;
+  display:flex;
+  justify-content: space-between;
+}
+.idle_listBox{
+  float:left;
+  width:335rpx;
 }
 .idle_listItem{
   width: 335rpx;
@@ -350,15 +357,15 @@ page{
   overflow: hidden;
   background:#fff;
   margin-bottom: 10rpx;
-  display: inline-block;
-  margin-right: 20rpx;
+  /* display: inline-block; */
+  /* margin-right: 20rpx; */
 }
 .idle_listItem:nth-child(2n){
   margin-right: 0;
 }
 .idle_listItem image{
   width: 100%;
-  min-height: 142rpx;
+  height: auto;
   display:block;
 }
 .idle_listItem text{
@@ -416,8 +423,8 @@ page{
 }
 .ipPopBox{
   margin-top: 80rpx;
-  padding: 0 30rpx;
-  box-sizing: border-box;
+  /* padding: 0 30rpx;
+  box-sizing: border-box; */
 }
 .idle_IPBox1{
   width: 120rpx;

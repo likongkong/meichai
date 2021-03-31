@@ -1,0 +1,50 @@
+@import "../../../../pages/signin/signin.wxss";
+@import "../../../../common/newcoupon.wxss";
+@import "../../../../common/tabbar.wxss";
+
+page{
+  background: #f5f6fa;
+  width:100%;
+  padding-bottom: 104rpx;
+}
+
+
+
+.oca_goodsDetailsWrap{
+  display: flex;
+}
+.oca_goodsDetailsLift{
+  width: 260rpx;
+  padding-left:35rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+.oca_goodsDetailsLift image{
+  width: 160rpx;
+  height: auto;
+  border-radius: 8rpx;
+  display: block;
+}
+.oca_goodsDetailsRight{
+  width: 490rpx;
+  padding-right: 35rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+.oca_goodsDetailsRight_txt{
+  height: 40rpx;
+  color: #101010;
+  font-size: 28rpx;
+  display: block;
+  margin: 14rpx 0;
+}
+.oca_goodsDetailsRight_type text{
+  padding: 6rpx 14rpx;
+  font-size: 26rpx;
+  color: #298DF8;
+  border-radius: 10rpx;
+  border: 1rpx solid #298DF8;
+  margin: 0 6rpx;
+}
