@@ -33,9 +33,9 @@
 			{{notice_title}}>
 		</view>
 
-		<swiper bindanimationfinish="changeGoodsSwip" current="{{goodsIndex}}" class="swiper {{movies.length !=0 && movies ?'bgImgUrl' : ''}}" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450" wx:if='{{!is_formaldress}}' style="height:400rpx;">
-			<swiper-item wx:for="{{movies}}" wx:key="key">
-				<image src="{{item.image}}" class="slide-image bgImgUrl" mode="widthFix" data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}' bindtap='jumpbanner' data-imgurl='{{item.image}}' style='position:relative;'>
+		<swiper bindanimationfinish="changeGoodsSwip" current="{{goodsIndex}}" class="swiper" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450" wx:if='{{!is_formaldress}}' style="height:400rpx;">
+			<swiper-item wx:for="{{movies}}" wx:key="key" class="{{item.item_type == 9015 || item.item_type == 9016 ?'bgImgUrl' : ''}}">
+				<image src="{{item.image}}" class="slide-image" mode="widthFix" data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}' bindtap='jumpbanner' data-imgurl='{{item.image}}' style='position:relative;'>
 				</image>
 			</swiper-item>
 		</swiper>
