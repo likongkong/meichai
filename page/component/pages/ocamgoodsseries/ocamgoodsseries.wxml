@@ -43,7 +43,7 @@
     <block wx:for="{{dataList}}" wx:key='key' data-index="{{index}}">
       <view class="ogs_listitem" catchtap="{{item.isBlindBox?'resetpage':'jumpshopbut'}}" data-seriesid="{{item.seriesId}}" data-name='{{item.name}}' data-minprice='{{item.minPrice}}' data-maxprice='{{item.maxPrice}}' data-goods_id='{{item.goods_id}}'>
         <image src="{{item.img}}" mode="aspectFit"></image>
-        <text class="ogs_listitemName">{{item.isBlindBox?item.name:item.title}}</text>
+        <text class="ogs_listitemName">{{item.name}}</text>
         <block wx:if="{{item.minPrice}}">
           <block wx:if="{{item.minPrice == item.maxPrice}}">
             <text class="ogs_listitemPrice">￥{{item.minPrice}}</text>
