@@ -210,7 +210,9 @@ Page({
         _this.setData({
           allIpData:res.data.List.ip,
           blindboxIpData,
-          yifanshangIpData
+          yifanshangIpData,
+          cheaper:res.data.List.cheaper,
+          hot:res.data.List.hot,
         })
         _this.data.allSeriesData = res.data.List.series;
         _this.data.blindboxData = res.data.List.blindbox;
@@ -360,6 +362,17 @@ Page({
   jumpcartbut:function(){
     wx.navigateTo({
       url: "/page/component/pages/ocamcart/ocamcart?but=cart"
+    });
+  },
+
+  jumpcheaper(){
+    wx.navigateTo({
+      url: "/page/component/pages/ocamhot/ocamhot?pageid=0"
+    });
+  },
+  jumphot(){
+    wx.navigateTo({
+      url: "/page/component/pages/ocamhot/ocamhot?pageid=1"
     });
   },
 

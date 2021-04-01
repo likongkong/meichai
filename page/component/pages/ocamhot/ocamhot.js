@@ -27,6 +27,12 @@ Page({
    */
   onLoad: function (options) {
     this.data.seriesId = options.seriesId;
+    this.data.pageid = options.pageid;
+    if(options.pageid == 0){
+      this.setData({c_title:'捡漏专区'})
+    }else{
+      this.setData({c_title:'热门专区'})
+    }
     this.setData({
       uid: app.signindata.uid,
       loginid:app.signindata.loginid,
@@ -124,9 +130,15 @@ Page({
 
   getInfo(){
     var _this = this;
+    let url = '';
     wx.showLoading({ title: '加载中...'})
+    if(this.data.pageid == 0){
+      url = 'http://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/toyCabinetChearperZone.json'
+    }else{
+      url = 'http://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/toyCabinetHotZone.json'
+    }
     wx.request({
-      url:'http://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/toyCabinetChearperZone.json',
+      url:url,
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {

@@ -6,28 +6,39 @@
 <view class="wrap">
 
   <block wx:for="{{dataList}}" wx:key='key'>
-    <view style='width:100%;overflow:hidden;padding:35rpx 0;background: #ffffff;margin-bottom:15rpx;'>
+    <view style='width:100%;overflow:hidden;padding:35rpx 0;background: #ffffff;margin-bottom:15rpx;' catchtap="jumpshopbut" data-name='{{item.roleName}}' data-minprice='{{item.minPrice}}' data-maxprice='{{item.maxPrice}}' data-goods_id='{{item.goodsId}}'>
       <view class="oca_goodsDetailsWrap">
         <view class="oca_goodsDetailsLift">
-          <image src="{{item.series.thumb}}" mode="widthFix"></image>
+          <image src="{{item.roleImg}}" mode="aspectFit"></image>
         </view>
         <view class="oca_goodsDetailsRight" style="">
-          <view style="{{item.skip.length == 0?'display: flex;':''}}">
+          <view style="width:100%;{{item.skip.length == 0?'display: flex;':''}}">
             <text class="oca_goodsDetailsRight_name oca_goodsDetailsRight_txt">{{item.goodsName}}</text>
-            <text class="oca_goodsDetailsRight_style oca_goodsDetailsRight_txt">款式:{{item.roleName}}</text>
+            <view class="oca_goodsDetailsRight_style oca_goodsDetailsRight_txt" wx:if="{{item.roleName}}">
+              <view style="width: {{item.ratio?75:100}}%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">款式:{{item.roleName}}</view>
+              <view class="flex" wx:if="{{item.ratio}}">
+                <image src="https://cdn.51chaidan.com/images/sign/activity/xiajiang.png" mode="widthFix"></image>
+                <text>{{item.ratio}}%</text>
+              </view>
+            </view>
             <view class="oca_goodsDetailsRight_type oca_goodsDetailsRight_txt" wx:if="{{item.skip.length != 0}}">
-              获取：
-              <block wx:for='{{item.skip}}' wx:key='key' wx:for-item="skipItem">
-                <block wx:if="{{skipItem.skipType == 1}}">
-                  <text data-skipId="{{skipItem.skipId}}" data-skipType="{{skipItem.skipType}}" catchtap="jumpAreward">抽盒机 ></text>
+              <view>
+                获取:
+                <block wx:for='{{item.skip}}' wx:key='key' wx:for-item="skipItem">
+                  <block wx:if="{{skipItem.skipType == 1}}">
+                    <text data-skipId="{{skipItem.skipId}}" data-skipType="{{skipItem.skipType}}" catchtap="jumpAreward">抽盒机 ></text>
+                  </block>
+                  <block wx:elif="{{skipItem.skipType == 2}}">
+                    <text data-skipId="{{skipItem.skipId}}" data-skipType="{{skipItem.skipType}}" catchtap="jumpAreward">一番赏 ></text>
+                  </block>
+                  <block wx:else>
+                    <text data-skipId="{{skipItem.skipId}}" data-skipType="{{skipItem.skipType}}" catchtap="jumpAreward">拆明盒 ></text>
+                  </block>
                 </block>
-                <block wx:elif="{{skipItem.skipType == 2}}">
-                  <text data-skipId="{{skipItem.skipId}}" data-skipType="{{skipItem.skipType}}" catchtap="jumpAreward">一番赏 ></text>
-                </block>
-                <block wx:else>
-                  <text data-skipId="{{skipItem.skipId}}" data-skipType="{{skipItem.skipType}}" catchtap="jumpAreward">拆明盒 ></text>
-                </block>
-              </block>
+              </view>
+              <view style="width:114rpx;font-size:24rpx;color:#FF2742;text-align: right;">
+                ￥{{item.minPrice}}起
+              </view>
             </view>
           </view>
         </view>

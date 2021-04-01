@@ -330,7 +330,7 @@ page{
 }
 .idle_otherRight image{
   width: 90rpx;
-  height: auto;
+  height: 104rpx;
 }
 .idle_otherRight text{
   display: block;

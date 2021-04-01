@@ -18,7 +18,7 @@ Page({
     uid: app.signindata.uid,
     isProduce: app.signindata.isProduce,
     pid:0,
-    currentNum:1,
+    currentNum:0,
     dataList:[],
     skiplistL:[],
     loadprompt:false,
@@ -124,13 +124,25 @@ Page({
   },
 
   changetabbar(e){
-    this.setData({
-      currentNum: e.currentTarget.dataset.ind
-    })
+    if(e.currentTarget.dataset.ind != 0){
+      wx.showToast({
+        title: '敬请期待',
+        icon: 'none',
+        duration: 1500
+      })
+    }
+    // this.setData({
+    //   currentNum: e.currentTarget.dataset.ind
+    // })
+    // this.reset();
+    // this.getInfo();
+  },
+
+  resetpage(e){
+    this.data.seriesId = e.currentTarget.dataset.seriesid;
     this.reset();
     this.getInfo();
   },
-
 
   getInfo(){
     var _this = this;

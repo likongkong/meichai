@@ -63,8 +63,8 @@
     </view>
     <view class="idle_content">
 
-      <!-- <view class="idle_otherWrap">
-        <view class="idle_jianlou idle_otherFlex">
+      <view class="idle_otherWrap">
+        <view class="idle_jianlou idle_otherFlex" catchtap="jumpcheaper">
           <view class="idle_otherLeft">
             <view>
               <text>捡漏</text>
@@ -72,11 +72,11 @@
             </view>
           </view>
           <view class="idle_otherRight">
-            <image src="https://cdn.51chaidan.com/images/202103/thumb_img/37205_thumb_G_1615387693839.jpg" mode="widthFix"></image>
-            <text>￥185</text>
+            <image src="{{cheaper.thumb}}" mode="aspectFit"></image>
+            <text>￥{{cheaper.minPrice}}</text>
           </view>
         </view>
-        <view class="idle_hot idle_otherFlex">
+        <view class="idle_hot idle_otherFlex" catchtap="jumphot">
           <view class="idle_otherLeft">
             <view>
               <text>热门</text>
@@ -84,11 +84,11 @@
             </view>
           </view>
           <view class="idle_otherRight">
-            <image src="https://cdn.51chaidan.com/images/202103/thumb_img/37205_thumb_G_1615387693839.jpg" mode="widthFix"></image>
-            <text>￥185</text>
+            <image src="{{hot.thumb}}" mode="aspectFit"></image>
+            <text>￥{{hot.minPrice}}</text>
           </view>
         </view>
-      </view> -->
+      </view>
     
       <view class="idle_listWrap">
         <view class="idle_listBox">
@@ -133,7 +133,12 @@
     <view class="idle_listItemBox">
       <text class="idle_listItemTxt">{{click}}人喜欢</text>
       <block wx:if="{{minPrice}}">
-        <text class="idle_listItemPrice">￥{{minPrice}}~￥{{maxPrice}}</text>
+        <block wx:if="{{minPrice == maxPrice}}">
+          <text class="idle_listItemPrice">￥{{minPrice}}</text>
+        </block>
+        <block wx:else>
+          <text class="idle_listItemPrice">￥{{minPrice}}~￥{{maxPrice}}</text>
+        </block>
       </block>
       <block wx:else>
         <text class="idle_listItemPrice">暂无报价</text>

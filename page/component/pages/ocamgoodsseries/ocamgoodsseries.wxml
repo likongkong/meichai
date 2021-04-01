@@ -34,18 +34,23 @@
   </view>
 
   <view class="idle_tabbarWrap">
-    <text class="active">款式</text>
-    <!-- <text>资料</text>
-    <text>相册</text> -->
+    <text class="active" data-ind="0" catchtap="changetabbar">款式</text>
+    <text data-ind="1" catchtap="changetabbar">资料</text>
+    <text data-ind="2" catchtap="changetabbar">相册</text>
   </view>
 
   <view class="ogs_content">
     <block wx:for="{{dataList}}" wx:key='key' data-index="{{index}}">
-      <view class="ogs_listitem" catchtap='jumpshopbut' data-name='{{item.role_name}}' data-minprice='{{item.minPrice}}' data-maxprice='{{item.maxPrice}}' data-goods_id='{{item.goods_id}}'>
-        <image src="{{item.img}}" mode="widthFix"></image>
-        <text class="ogs_listitemName">{{item.name}}</text>
+      <view class="ogs_listitem" catchtap="{{item.isBlindBox?'resetpage':'jumpshopbut'}}" data-seriesid="{{item.seriesId}}" data-name='{{item.name}}' data-minprice='{{item.minPrice}}' data-maxprice='{{item.maxPrice}}' data-goods_id='{{item.goods_id}}'>
+        <image src="{{item.img}}" mode="aspectFit"></image>
+        <text class="ogs_listitemName">{{item.isBlindBox?item.name:item.title}}</text>
         <block wx:if="{{item.minPrice}}">
-          <text class="ogs_listitemPrice">￥{{item.minPrice}}~￥{{item.maxPrice}}</text>
+          <block wx:if="{{item.minPrice == item.maxPrice}}">
+            <text class="ogs_listitemPrice">￥{{item.minPrice}}</text>
+          </block>
+          <block wx:else>
+            <text class="ogs_listitemPrice">￥{{item.minPrice}}~￥{{item.maxPrice}}</text>
+          </block>
         </block>
         <block wx:else>
           <text class="ogs_listitemPrice">暂无报价</text>
