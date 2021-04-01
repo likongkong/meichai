@@ -55,15 +55,15 @@ Page({
       mtdlocation:false
     });
     this.listdata(0);
-    let pages = getCurrentPages();
-    let prevpage = pages[pages.length - 2];
-    if (prevpage) {
-      wx.navigateBack();
-    } else {
-      wx.redirectTo({
-        url: "/page/component/pages/myothertoydg/myothertoydg?ownerId=" + _this.data.uid
-      });
-    };
+    // let pages = getCurrentPages();
+    // let prevpage = pages[pages.length - 2];
+    // if (prevpage) {
+    //   wx.navigateBack();
+    // } else {
+    //   wx.redirectTo({
+    //     url: "/page/component/pages/myothertoydg/myothertoydg?ownerId=" + _this.data.uid
+    //   });
+    // };
   },
   immeddelfunone:function(){
     var _this = this;
@@ -174,6 +174,11 @@ Page({
             'signType': 'MD5',
             'paySign': res.data.Info.paySign,
             'success': function(res) {
+              wx.showModal({
+                title: '',
+                content:'发货成功',
+                success(res) {}
+              })
               _this.setData({
                 mtdlocation: false,
                 immdevery: false,
@@ -181,10 +186,9 @@ Page({
                 receivingaddress: false,
                 buybombsimmediately: false
               })
+              _this.listdata(0);
             },
-            'fail': function(res) {
-
-            },
+            'fail': function(res) {},
             'complete': function(res) {}
           })
         } else {
@@ -420,10 +424,10 @@ Page({
             };
           };
           if (num == 0) {
-            _this.setData({ listdata: listdata });
+            _this.setData({ listdata: listdata , comcheck:true});
           } else {
             var ltlist = _this.data.listdata.concat(listdata);
-            _this.setData({ listdata: ltlist });
+            _this.setData({ listdata: ltlist ,comcheck:true });
           };
         };
       }
