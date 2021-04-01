@@ -37,7 +37,7 @@
           <text class="oca_goodsDetailsRight_name oca_goodsDetailsRight_txt">{{shopdetail.goods_name}}</text>
           <text class="oca_goodsDetailsRight_style oca_goodsDetailsRight_txt">款式:{{shopdetail.role_name}}</text>
           <view class="oca_goodsDetailsRight_type oca_goodsDetailsRight_txt" wx:if="{{skiplist.length != 0}}">
-            获取：
+            获取:
             <block wx:for='{{skiplist}}' wx:key='key'>
               <block wx:if="{{item.skipType == 1}}">
                 <text data-skipId="{{item.skipId}}" data-skipType="{{item.skipType}}" catchtap="jumpAreward">抽盒机 ></text>
@@ -54,7 +54,7 @@
       </view>
     </view>
   </view>
-  <view class="oca_explainWrap" wx:if='{{false}}'>
+  <view class="oca_explainWrap">
     <view>
       <image src="https://cdn.51chaidan.com/images/toyCabinet/qualityGoods.png" mode="widthFix"></image>
       <text class="txt1">正品保障</text>
