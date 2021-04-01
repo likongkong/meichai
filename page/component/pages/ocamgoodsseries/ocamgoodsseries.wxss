@@ -1,0 +1,123 @@
+@import "../../../../pages/signin/signin.wxss";
+@import "../../../../common/newcoupon.wxss";
+@import "../../../../common/tabbar.wxss";
+
+page{
+  background: #f5f6fa;
+  width:100%;
+  padding-bottom: 104rpx;
+}
+
+
+
+.oca_goodsDetailsWrap{
+  display: flex;
+}
+.oca_goodsDetailsLift{
+  width: 260rpx;
+  padding-left:35rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+.oca_goodsDetailsLift image{
+  width: 160rpx;
+  height: auto;
+  border-radius: 8rpx;
+  display: block;
+}
+.oca_goodsDetailsRight{
+  width: 490rpx;
+  padding-right: 35rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+.oca_goodsDetailsRight_txt{
+  height: 40rpx;
+  color: #101010;
+  font-size: 28rpx;
+  display: block;
+  margin: 14rpx 0;
+}
+.oca_goodsDetailsRight_type text{
+  padding: 6rpx 14rpx;
+  font-size: 26rpx;
+  color: #298DF8;
+  border-radius: 10rpx;
+  border: 1rpx solid #298DF8;
+  margin: 0 6rpx;
+}
+
+.idle_tabbarWrap{
+  width: 100%;
+  height: 90rpx;
+  background: #fff;
+  display: flex;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  margin-bottom: 10rpx;
+}
+.idle_tabbarWrap text{
+  width: 96rpx;
+  height: 90rpx;
+  display: block;
+  text-align: center;
+  line-height: 90rpx;
+  font-size: 26rpx;
+  color: #020202;
+  margin-right: 35rpx;
+  position: relative;
+}
+.idle_tabbarWrap .active{
+  color:#298DF8;
+}
+.idle_tabbarWrap .active::after{
+  content: '';
+  width: 80%;
+  height: 6rpx;
+  background:#298DF8;
+  position: absolute;
+  left: 50%;
+  margin-left: -40%;
+  bottom: 6rpx;
+}
+
+.ogs_content{
+  background:#fff;
+  padding: 20rpx 10rpx;
+  box-sizing: border-box;
+}
+.ogs_listitem{
+  width: 160rpx;
+  margin-bottom: 16rpx;
+  display:inline-block;
+  margin-right: 30rpx;
+}
+.ogs_listitem:nth-child(4n){
+  margin-right: 0;
+}
+.ogs_listitem image{
+  width: 120rpx;
+  height:120rpx;
+  border-radius: 12rpx;
+  display: block;
+  margin: 0 auto;
+}
+.ogs_listitem text{
+  width: 160rpx;
+  display: block;
+  font-size: 24rpx;
+  text-align: center;
+}
+.ogs_listitemName{
+  color: #101010;
+  margin-top: 4rpx;
+  margin-bottom: 6rpx;
+  white-space: nowrap;     
+  overflow: hidden;        
+  text-overflow: ellipsis;
+}
+.ogs_listitemPrice{
+  color: #FF2742;
+}

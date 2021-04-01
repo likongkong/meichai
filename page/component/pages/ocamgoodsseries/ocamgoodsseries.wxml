@@ -1,0 +1,78 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+
+
+<view class="wrap">
+
+  <view style='width:100%;overflow:hidden;padding:35rpx 0;background: #ffffff;margin-bottom:15rpx;'>
+    <view class="oca_goodsDetailsWrap">
+      <view class="oca_goodsDetailsLift">
+        <image src="{{dataInfo.series.thumb}}" mode="widthFix"></image>
+      </view>
+      <view class="oca_goodsDetailsRight" style="">
+        <view style="{{skiplist.length == 0?'display: flex;':''}}">
+          <text class="oca_goodsDetailsRight_name oca_goodsDetailsRight_txt">{{dataInfo.series.name}}</text>
+          <text class="oca_goodsDetailsRight_style oca_goodsDetailsRight_txt">  </text>
+          <view class="oca_goodsDetailsRight_type oca_goodsDetailsRight_txt" wx:if="{{skiplist.length != 0}}">
+            获取：
+            <block wx:for='{{skiplist}}' wx:key='key'>
+              <block wx:if="{{item.skipType == 1}}">
+                <text data-skipId="{{item.skipId}}" data-skipType="{{item.skipType}}" catchtap="jumpAreward">抽盒机 ></text>
+              </block>
+              <block wx:elif="{{item.skipType == 2}}">
+                <text data-skipId="{{item.skipId}}" data-skipType="{{item.skipType}}" catchtap="jumpAreward">一番赏 ></text>
+              </block>
+              <block wx:else>
+                <text data-skipId="{{item.skipId}}" data-skipType="{{item.skipType}}" catchtap="jumpAreward">拆明盒 ></text>
+              </block>
+            </block>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="idle_tabbarWrap">
+    <text class="active" data-ind="0" catchtap="changetabbar">款式</text>
+    <text data-ind="1" catchtap="changetabbar">资料</text>
+    <text data-ind="2" catchtap="changetabbar">相册</text>
+  </view>
+
+  <view class="ogs_content">
+    <block wx:for="{{dataList}}" wx:key='key' data-index="{{index}}">
+      <view class="ogs_listitem" catchtap="{{item.isBlindBox?'resetpage':'jumpshopbut'}}" data-seriesid="{{item.seriesId}}" data-name='{{item.name}}' data-minprice='{{item.minPrice}}' data-maxprice='{{item.maxPrice}}' data-goods_id='{{item.goods_id}}'>
+        <image src="{{item.img}}" mode="aspectFit"></image>
+        <text class="ogs_listitemName">{{item.isBlindBox?item.name:item.title}}</text>
+        <block wx:if="{{item.minPrice}}">
+          <block wx:if="{{item.minPrice == item.maxPrice}}">
+            <text class="ogs_listitemPrice">￥{{item.minPrice}}</text>
+          </block>
+          <block wx:else>
+            <text class="ogs_listitemPrice">￥{{item.minPrice}}~￥{{item.maxPrice}}</text>
+          </block>
+        </block>
+        <block wx:else>
+          <text class="ogs_listitemPrice">暂无报价</text>
+        </block>
+      </view>
+    </block>
+  </view>
+
+</view>
+
+
+
+
+
+
+
+
+
+
+<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+
+<!--  授权弹框  -->
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight}}px;width: 100%;z-index: 300;' catchtap='pullupsignin'></view>

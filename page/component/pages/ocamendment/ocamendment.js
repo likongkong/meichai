@@ -1,415 +1,320 @@
-var Pub = require('../../common/mPublic.js'); //aes加密解密js
 var Dec = require('../../../../common/public.js'); //aes加密解密js
+var Pub = require('../../common/mPublic.js'); //aes加密解密js
 const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
-  data: { 
-    // 接口地址
-    comurl: app.signindata.comurl,
-    loginid: app.signindata.loginid,
-    uid: app.signindata.uid,
-    openid: app.signindata.openid,
-    appNowTime: Date.parse(new Date()),
-    // 适配苹果X 
-    isIphoneX: app.signindata.isIphoneX,
-    isProduce: app.signindata.isProduce,
-    // 数据 
-    listdata: [],
-    headhidden:false,
-    shopnum:0,
-    dryinglistnum:0,
-
-    c_title: '闲置潮玩',
+  data: {
+    c_title: '闲置交易', 
     c_arrow: true,
     c_backcolor: '#ff2742',
-    page:0,
-    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
-    iftrnodata:false,
-    inputdata: '',
-    searchorwhole:true,
-    windowHeight: app.signindata.windowHeight - 65 - wx.getStorageSync('statusBarHeightMc') || 0,
-    signinlayer: false,
-    scrollleft: 1,
-    tabselid:0,
-    // 字母显示
-    letter: [],
-    serieslist:{},
-    // 最新和热门
-    brandseries:{},
-    // 最新上架
-    brand:false,
-    // 热门品牌
-    series:false,
-    // 最新热门id
-    brandid:'',
-    brandscroll:[],
-    brandlist:[],
-    iftrnodatabr:false,
-    lettersheight:700,
-    ishowdealoradd: false,
-    ishowdeal: true,
-    ishowadd: false,
-    addressdata: [],
-    isBlindBoxDefaultAddress: false,
-    maddid: '',
-    ishowcover: false,
-    currentSwiper: 0,
-    wholedata:0,
-    wholebrand:[],
-    wholenewsSeries:[],
-    infodata:'',
-    timeOfDay:'time='+(new Date()).getDate()
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
+    windowHeight: app.signindata.windowHeight - wx.getStorageSync('statusBarHeightMc')||0,
+    signinlayer: true,
+    tgabox:false,
+    loginid: app.signindata.loginid,
+    uid: app.signindata.uid,
+    isProduce: app.signindata.isProduce,
+    pid:0,
+    limit:20,
+    tabbarAll:[
+      {name:'全部',type:0},
+      {name:'盲盒',type:1},
+      {name:'一番赏',type:2}
+    ],
+    currentNum:0,
+    ipcurrentNum:-1,
+    dataList:[],
+    allSeriesData:[],
+    blindboxData:[],
+    yifanshangData:[],
+    allIpData:[],
+    blindboxIpData:[],
+    yifanshangIpData:[],
+    ipData:[],
+    processingData:[],
+    loadprompt:true,
+    isipPopMask:false,
+    inputValue:'',
+    isSearchInput:false,
+    searchInputFocus:false
   },
-  wholeeverybodbuy:function(){
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    // var data = JSON.parse(options.data)
+    // console.log(data)
+    // this.data.listData = data;
+
     this.setData({
-      wholedata: 0,
-      brandid:''
-    })
+      uid: app.signindata.uid,
+      loginid:app.signindata.loginid,
+      isProduce: app.signindata.isProduce,
+    });
+    this.getInfo();
+    // 判断是否授权
+    this.activsign();
   },
-  // 查看全部
-  wholedata:function(e){
-    var _this = this;
-    var whole = e.currentTarget.dataset.whole || e.target.dataset.whole || 0;
-    _this.setData({
-      wholedata:whole
-    })
-  },
-  changeGoodsSwip: function (detail) {
+  onLoadfun:function(){
     this.setData({
-      currentSwiper: detail.detail.current
-    })
+      uid: app.signindata.uid,
+      loginid:app.signindata.loginid,
+      isProduce: app.signindata.isProduce,
+    }); 
+    this.brandseries();
   },
-
-  everybodbuy:function(){
-    // this.setData({
-    //   brandid: '',
-    //   // 最新上架
-    //   brand: false,
-    //   // 热门品牌
-    //   series: false,
-    // });
-    var infodata = this.data.infodata||{};
-    if(infodata.activityType==10){
-      if (infodata&&infodata.yifanshang && infodata.activity_id){
-        wx.navigateTo({
-          url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + infodata.activity_id
-        });
-      }else{
-        wx.navigateTo({
-          url: "/page/secondpackge/pages/aRewardList/aRewardList"
-        });
-      }
-    }else if(infodata.activityType == 6){
-      wx.navigateTo({
-        url: "/page/component/pages/mingboxList/mingboxList"
-      });
-    }else{
-      if (infodata&&infodata.drawBox && infodata.goods_id){
-        wx.navigateTo({
-          url: "/pages/smokebox/smokebox?gid=" + infodata.goods_id,
-        });
-      }else{
-        wx.navigateTo({
-          url: "/pages/smokeboxlist/smokeboxlist"
-        });
-      }
-    };
-
-    
-  },
-  // 热门品牌显示
-  seriesfun:function(){
-    var _this = this;
-    this.setData({
-      // 最新上架
-      brand: false,
-      // 热门品牌
-      series: true,
-    });
-    var qqq = Dec.Aese('mod=cabinet&operation=indexBrand');
-    wx.showLoading({
-      title: '加载中...',
-      mask: true
-    });
-    wx.request({
-      url: app.signindata.comurl + 'toy.php' + qqq,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        wx.hideLoading();
-        _this.setData({ iftrnodata: true });
-        if (res.data.ReturnCode == 200) {
-          var listdata = res.data.List.brand || {};
-          var letter = [];
-          for(var i in listdata){
-              letter.push(i);
-          };
-          var lettersheight = 0;
-          if (letter.length*60>700){
-            lettersheight = 700;
-          }else{
-            lettersheight = letter.length*60;
-          };
-          _this.setData({
-            letter: letter,
-            serieslist:listdata,
-            lettersheight: lettersheight
-          });
-
-        } else {
-          app.showToastC(res.data.Msg);
-        };
-      }
-    });
-
-
-
-
-  },
-  // 最新上架点击请求二级数据
-  brandfun:function(e){
-    var _this = this;
-    var bid = e.currentTarget.dataset.bid || e.target.dataset.bid || 0;
-    var isbs = e.currentTarget.dataset.isbs || e.target.dataset.isbs || 0;
-    var topdata = e.currentTarget.dataset.topdata || e.target.dataset.topdata || 0;
-    if (bid==0){
-       this.setData({
-         wholedata:1,
-         brand: false, 
-         brandid: bid
-       })
-       return false;
-    }else{
-      this.setData({
-        wholedata: 0
-      })      
-    };
-    if (topdata==1){
-      wx.pageScrollTo({
-        scrollTop: 0,
-        duration: 300
-      })
-    };
-    this.setData({
-      brandid: bid,
-      brand:true,
-      series:false,
-      brandscroll:[],
-      tabselid: ''
-    });
-    if (isbs==1){
-      var qqq = Dec.Aese('mod=cabinet&operation=listSeries&seriesId=' + bid);
-    }else{
-      var qqq = Dec.Aese('mod=cabinet&operation=listSeries&brandId=' + bid);
-    };
-    wx.showLoading({
-      title: '加载中...',
-      mask: true
-    })
-    wx.request({
-      url: app.signindata.comurl + 'toy.php' + qqq,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        console.log('tab切换二级数据=======',res)
-        wx.hideLoading();
-        _this.setData({ iftrnodata: true });
-        if (res.data.ReturnCode == 200) {
-          var listdata = res.data.List.series || [];
-          if (listdata.length != 0) {
-              var tabselid = '';
-              for(var i=0;i<listdata.length;i++){
-                if(listdata[i].id == bid){
-                  tabselid = listdata[i].id || '';
-                };
-              };
-              if(tabselid==''){
-                tabselid = listdata[0].id
-              }
-              _this.brandscrollfun(tabselid);
-             _this.setData({
-               brandscroll: listdata,
-               tabselid: tabselid
-             },function(){
-               if(tabselid!=listdata[0].id){
-                  var query = wx.createSelectorQuery();
-                  //选择id
-                  query.select('#q' + tabselid).boundingClientRect();
-                  query.exec(function (res) {
-                    console.log(res)
-                    if (res && res[0]) {
-                      if (res[0].width) {
-                        _this.setData({
-                          scrollleft: res[0].left - wx.getSystemInfoSync().windowWidth / 2 + 70 + (res[0].width / 2)
-                        });
-                      };
-                    }
-                  });
-               };
-             });
-             
-          } else {
-            app.showToastC('暂无更多数据');
-          };
-
-        } else {
-          app.showToastC(res.data.Msg);
-        };
-      }
-    });
-
-  },
-  //最新上架 scroll 请求三级数据
-  brandscrollfun:function(num){
-    var _this = this;
-    var qqq = Dec.Aese('mod=cabinet&operation=detailSeries&seriesId=' + num);
-    wx.showLoading({
-      title: '加载中...',
-      mask: true
-    });
-    _this.setData({
-      brandlist:[],
-      iftrnodatabr:false
-    });
-    wx.request({
-      url: app.signindata.comurl + 'toy.php' + qqq,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        console.log('tab三级数据=====',res)
-        wx.hideLoading();
-        _this.setData({ iftrnodatabr: true });
-        if (res.data.ReturnCode == 200) {
-          var listdata = res.data.List.goods || [];
-          var infodata = res.data.Info||{};
-          _this.setData({infodata: infodata})
-          if (listdata.length != 0) {
-            _this.setData({
-              brandlist: listdata,
-            })
-          } else {
-            app.showToastC('暂无更多数据');
-          };
-
-        } else {
-          app.showToastC(res.data.Msg);
-          _this.setData({ infodata:res.data.Info || { drawBox:false} })
-        };
-      }
-    });
-  }, 
-
-  // input 值改变
-  inputChange: function (e) {
-    this.setData({
-      inputdata: e.detail.value
-    });
-  },
-  wholefun:function(){
-    this.setData({
-      inputdata: ''
-    })
-    // 获取list数据
-    this.listdata(0);
-  },
-  // 搜索
-  jumpsoousuo: function () {
-    if (this.data.inputdata==''){
-      app.showToastC('输入框不能为空！');
-      return false;
-    };
-    // 获取list数据
-    this.listdata(0);
-  },
-
-  
-  // 授权
-  clicktga: function () {
-    app.clicktga(2)
-  },
-  clicktganone: function () {
-    this.setData({ tgabox: false })
-  },
-  userInfoHandler: function (e) {
+  activsign: function () {
     // 判断是否授权 
     var _this = this;
+    // 判断是否登录
+    if (_this.data.loginid != '' && _this.data.uid != '') {
+      _this.onLoadfun();
+      return false;
+    };    
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
-          // 确认授权用户统计
-          app.clicktga(4);
-          _this.setData({
-            tgabox: false,
-            signinlayer: true,
-          });
           // '已经授权'
-          _this.data.loginid = app.signindata.loginid,
-            _this.data.openid = app.signindata.openid,
-            _this.data.isNewer = app.signindata.isNewer;
-
           _this.setData({
+            loginid: app.signindata.loginid,
             uid: app.signindata.uid,
+            openid: app.signindata.openid,
             avatarUrl: app.signindata.avatarUrl,
+            isShareFun: app.signindata.isShareFun,
             isProduce: app.signindata.isProduce,
-            isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
-          });
+            signinlayer: true,
+            tgabox: false
+          }); 
           // 判断是否登录
           if (_this.data.loginid != '' && _this.data.uid != '') {
             _this.onLoadfun();
           } else {
             app.signin(_this);
-          };
+          }
         } else {
           _this.setData({
-            tgabox: true
+            tgabox: true,
+            signinlayer: false
+          })
+          console.log()
+          // '没有授权 统计'
+          app.userstatistics(42);
+          _this.onLoadfun();
+        }
+      }
+    });      
+  },
+  // 授权点击统计
+  clicktga: function () {
+    app.clicktga(2)
+  },
+  clicktganone: function () {
+    this.setData({ tgabox: false })
+    wx.navigateTo({ 
+      url: "/pages/wode/wode"
+    }) 
+  },
+  // 点击登录获取权限
+  userInfoHandler: function (e) {
+    var _this = this;
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userInfo']) {
+          _this.setData({
+            signinlayer: true,
+            tgabox: false
           });
+          _this.activsign();
+          // 确认授权用户统计
+          app.clicktga(4);          
         }
       }
     });
     if (e.detail.detail.userInfo) { } else {
-      app.clicktga(8) //用户按了拒绝按钮
+      app.clicktga(8)  //用户按了拒绝按钮
     };
+  },
+  pullupsignin: function () {
+    // // '没有授权'
+    this.setData({
+      tgabox: true
+    });
+  },
+
+  toggleIpPopMask(){
+    this.setData({
+      isipPopMask: !this.data.isipPopMask
+    })
+  },
+
+  changetabbar(e){
+    let type = e.currentTarget.dataset.type;
+    this.setData({
+      currentNum: e.currentTarget.dataset.ind
+    })
+    this.reset();
+    this.getInfo();
+  },
+
+  brandfun(e){
+    this.reset();
+    this.setData({
+      currentNum: 0
+    })
+    let ipid = e.currentTarget.dataset.ipid;
+    let ind = e.currentTarget.dataset.ind;
+    let dataList,ipdataList=[];
+    // if(this.data.currentNum==0){
+      dataList = this.data.allSeriesData;
+    // }else if(this.data.currentNum==1){
+    //   dataList = this.data.blindboxData;
+    // }else if(this.data.currentNum==2){
+    //   dataList = this.data.yifanshangData;
+    // }
+    for (let i=0; i < dataList.length; i++) {
+      if(dataList[i].ipId == ipid){
+        ipdataList.push(dataList[i])
+      }
+    }
+    this.setData({
+      ipcurrentNum:ind,
+      isipPopMask: false
+    })
+    this.data.processingData = ipdataList;
+    this.processingDataPaging();
   },
 
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoadfun: function () {
+  getInfo(){
     var _this = this;
-    _this.data.loginid = app.signindata.loginid;
-    _this.data.openid = app.signindata.openid;
-    _this.setData({
-      uid: app.signindata.uid,
-      isProduce: app.signindata.isProduce,
-      isShareFun: app.signindata.isShareFun,
-      isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
-      defaultinformation:app.signindata.defaultinformation,
+    wx.showLoading({ title: '加载中...'})
+    wx.request({
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/toyCabinet.json',
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('闲置列表数据======',res)
+        let ip = res.data.List.ip;
+        let blindboxIpData = [],yifanshangIpData = [];
+        for (let i=0; i < ip.length; i++) {
+          if(ip[i].isBlindBox){
+            blindboxIpData.push(ip[i])
+          }else if(ip[i].isYifanshang){
+            yifanshangIpData.push(ip[i])
+          }
+        }
+        _this.setData({
+          allIpData:res.data.List.ip,
+          blindboxIpData,
+          yifanshangIpData,
+          cheaper:res.data.List.cheaper,
+          hot:res.data.List.hot,
+        })
+        _this.data.allSeriesData = res.data.List.series;
+        _this.data.blindboxData = res.data.List.blindbox;
+        _this.data.yifanshangData = res.data.List.yifanshang;
+        _this.data.processingData = _this.data.currentNum==0?_this.data.allSeriesData: _this.data.currentNum==1?_this.data.blindboxData:_this.data.yifanshangData;
+        // 处理数据分页        
+        _this.processingDataPaging();
+      }
     });
-    _this.listdata(0);
-    this.selectComponent("#hide").getappData()
+  },
 
-    if(this.data.defaultinformation){}else{
-      app.defaultinfofun(this);
-    };
-
-    // 最新和热门
-    this.brandseries();
-
-    if (_this.data.loginid != '' && _this.data.uid != '' && !_this.data.isBlindBoxDefaultAddress) {
-      _this.setData({
-        ishowdealoradd: true,
-        ishowcover: true,
+  showSearchInput(){
+    this.setData({
+      isSearchInput: true,
+      searchInputFocus:true
+    })
+  },
+  bindKeyInput: function (e) {
+    this.setData({
+      inputValue: e.detail.value.replace(/\s+/g, '')
+    })
+  },
+  bindInputblur(){
+    this.setData({
+      isSearchInput: false
+    })
+  },
+  searchFun(){
+    var _this = this;
+    if(this.data.inputValue==''){
+      wx.showToast({
+        title: '请输入搜索内容',
+        icon: 'none',
+        duration: 1000
       })
-
-      _this.nextpagediao();
+      return false;
     }
+    wx.showLoading({ title: '加载中...'})
+    var q = Dec.Aese('mod=cabinet&operation=search&searchKey=' + this.data.inputValue)
+    console.log('搜索请求数据===','mod=cabinet&operation=search&searchKey=' + this.data.inputValue)
+    wx.request({
+      url: app.signindata.comurl + 'toy.php'+q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('搜索数据======',res)
+        // 刷新完自带加载样式回去
+        wx.stopPullDownRefresh();
+        wx.hideLoading();
+        if (res.data.ReturnCode == 200) {
+          _this.reset();
+          _this.setData({
+            currentNum:0
+          })
+          _this.data.allSeriesData = res.data.List.series;
+          _this.data.processingData = _this.data.allSeriesData;
+          // 处理数据分页        
+          _this.processingDataPaging();
+        } else {
+          app.showToastC(res.data.Msg);
+        }
+      }
+    });
+  },
 
-  }, 
-  // 最新和热门
+  // 处理列表数据分页
+  processingDataPaging(){
+    let _this = this;
+    let pid = _this.data.pid;
+    let limit = _this.data.limit;
+    let dataList = _this.data.processingData;
+    let data = [];
+    if(pid == 0){
+      for (let i=0; i < limit; i++) {
+        if(dataList[i]!=undefined){
+          data.push(dataList[i])
+        }else{
+          _this.data.loadprompt = false;
+        }
+      }
+    }else{
+      let num = Number(pid*limit);
+      let len = Number(num+limit);
+      for (let i=num; i < len; i++) {
+        if(dataList[i]!=undefined){
+          data.push(dataList[i])
+        }else{
+          _this.data.loadprompt = false;
+        }
+      }
+    }
+    console.log(data,pid)
+    setTimeout(function(){
+      // 刷新完自带加载样式回去
+      wx.stopPullDownRefresh();
+      wx.hideLoading();
+    },500)
+    _this.setData({
+      dataList: [..._this.data.dataList,...data]
+    })
+  },
+
   brandseries:function(){
      var _this = this;
     // 发现详情
@@ -433,361 +338,20 @@ Page({
       }
     });     
   },
-  // 阻止蒙层冒泡
-  preventD() { },
-  onLoad: function (options) {
- 
-    // 购物车数据显示
-    var _this = this;
-    _this.data.loginid = app.signindata.loginid;
-    _this.data.openid = app.signindata.openid;
-    _this.setData({
-      drying_id: options.drying_id||'',
-      uid: app.signindata.uid,
-      isProduce: app.signindata.isProduce,
-      isShareFun: app.signindata.isShareFun,
-      isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
-    });
-    if(app.signindata.sceneValue==1154){
-      app.signindata.isProduce = true;  
-      _this.onLoadfun();
-    }else{
-      wx.getSetting({
-        success: res => {
-          if (res.authSetting['scope.userInfo']) {
-            // '已经授权'
-            _this.data.loginid = app.signindata.loginid;
-            _this.data.openid = app.signindata.openid;
-            _this.setData({
-              signinlayer: true,
-              uid: app.signindata.uid,
-              isProduce: app.signindata.isProduce,
-              isShareFun: app.signindata.isShareFun,
-              isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
-            });
-            // 判断是否登录
-            if (_this.data.loginid != '' && _this.data.uid != '') {
-              _this.onLoadfun();
-            } else {
-              app.signin(_this)
-            }
-          } else {
-            _this.onLoadfun();
-            this.setData({
-              signinlayer: false,
-            })
-          }
-        }
-      });
-    };
-
-  },
-  listdata: function (num){
-    var _this = this;
-    if (num == 0) {
-      _this.data.page = 0;
-      _this.setData({ listdata: [], iftrnodata:false });
-    } else {
-      var pagenum = parseInt(_this.data.page)
-      _this.data.page = ++pagenum;
-    };
-    // 发现详情
-    var qqq = Dec.Aese('mod=cabinet&operation=listSquare&pid=' + _this.data.page + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&searchKey=' + _this.data.inputdata);
-    wx.showLoading({
-      title: '加载中...',
-      mask: true
-    })
-    wx.request({
-      url: app.signindata.comurl + 'toy.php' + qqq,
-      method: 'GET',
-      header: {'Accept': 'application/json'},
-      success: function (res) {
-        wx.hideLoading();
-        wx.stopPullDownRefresh();
-        _this.setData({ iftrnodata:true});
-        if (res.data.ReturnCode == 200) {
-          var listdata = res.data.List.goods || [];
-          if (listdata.length!=0){
-            if (num == 0) {
-              _this.setData({ listdata: listdata });
-            } else {
-              var ltlist = _this.data.listdata.concat(listdata);
-              _this.setData({ listdata: ltlist });
-            };
-          }else{
-            app.showToastC('暂无更多数据');
-          };
-
-        }else{
-          app.showToastC(res.data.Msg);          
-        };
-      }
-    });     
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {},
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {},
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-     // 调用重置刷新
-     app.resetdownRefresh();
-  },
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-     // 调用重置刷新
-     app.resetdownRefresh();
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-    app.downRefreshFun(() => {
-      this.listdata(0);
-    })
-  },
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-    this.listdata(1);
-  },
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function (options) {
-    var reshare = app.sharemc();
-    return reshare
-  },
-  onShareTimeline:function(){
-    var _this = this;
-    return {
-      title:_this.data.c_title || '潮玩社交平台',
-      query:{}    
-    }
-  },
-  dlfindfun: function () {
-    wx.reLaunch({
-      url: "/page/component/pages/dlfind/dlfind",
-    })
-  },
-  // 导航跳转
-  whomepage: function () {
-    wx.reLaunch({
-      url: "../../../../pages/index/index?judgeprof=2"
-    })
-  },
-  wmy: function () {
-    wx.reLaunch({
-      url: "../../../../pages/wode/wode"
-    });
-  },
-  wshoppingCart: function () {
-    wx.reLaunch({
-      url: "../../../../pages/shoppingCart/shoppingCart"
-    });
-  },
-
-  imageLoadtd:function(e){
-    var ind = parseInt(e.currentTarget.dataset.ind || e.target.dataset.ind || 0);
-    var latter = e.currentTarget.dataset.latter || e.target.dataset.latter || 0;
-    var $width = e.detail.width,    //获取图片真实宽度
-      $height = e.detail.height,
-      ratio = $width / $height;
-    var serieslist = this.data.serieslist;
-    var viewHeight = 150,           //设置图片显示宽度，
-      viewWidth = 150 * ratio;
-    if (viewWidth > 150) {
-      viewWidth = 150;
-    };
-    if (serieslist[latter] && serieslist[latter].brand && serieslist[latter].brand[ind]) {
-      serieslist[latter].brand[ind].width = viewWidth;
-      _this.setData({
-        brandseries: brandseries
-      })
-    };
-
-  },
-
-  // 计算图片大小
-  imageLoad: function (e) {
-    var _this = this;
-    var ind = parseInt(e.currentTarget.dataset.ind || e.target.dataset.ind || 0);
-    var eve = parseInt(e.currentTarget.dataset.eve || e.target.dataset.eve || 0);
-    var $width = e.detail.width,    //获取图片真实宽度
-      $height = e.detail.height,
-      ratio = $width / $height;
-    if (eve==1){
-      var viewHeight = 100,           //设置图片显示宽度，
-        viewWidth = 100 * ratio;
-      var brandseries = this.data.brandseries;
-      if (viewWidth > 100) {
-        viewWidth = 100;
-      };
-      
-      if (brandseries.brand && brandseries.brand[ind]) {
-        brandseries.brand[ind].width = viewWidth;
-        _this.setData({
-          brandseries: brandseries
-        })
-      };
-    } else if (eve==2){
-      var viewHeight = 100,           //设置图片显示宽度，
-        viewWidth = 100 * ratio;
-      var brandseries = this.data.brandseries;
-      if (viewWidth > 100) {
-        viewWidth = 100;
-      };
-      
-      if (brandseries.series && brandseries.series[ind]) {
-        brandseries.series[ind].width = viewWidth;
-        _this.setData({
-          brandseries: brandseries
-        })
-      };
-    } else if (eve==3){
-      var viewHeight = 200,           //设置图片显示宽度，
-        viewWidth = 200 * ratio;
-      var brandlist = this.data.brandlist;
-      if (viewWidth > 170) {
-        viewWidth = 170;
-      };
-      if (brandlist[ind]) {
-        brandlist[ind].evewidth = viewWidth;
-        _this.setData({
-          brandlist: brandlist
-        })
-      };
-    } else if (eve == 4) {
-      var viewHeight = 200,           //设置图片显示宽度，
-        viewWidth = 200 * ratio;
-      var listdata = this.data.listdata||[];
-      if (viewWidth > 170) {
-        viewWidth = 170;
-      };
-      if (listdata[ind]) {
-        listdata[ind].evewidth = viewWidth;
-        _this.setData({
-          listdata: listdata
-        })
-      };
-    }
-
-  },
 
 
-  owneridfun: function (event) {
-    var id = event.currentTarget.dataset.ownerid || event.target.dataset.ownerid||'';
-    var _this = this;
-    wx.navigateTo({
-      url: "/page/component/pages/myothertoydg/myothertoydg?ownerId=" + id,
-    });
-  },
-  jumpsmokelist:function(){
-    wx.navigateTo({
-      url: "/pages/smokeboxlist/smokeboxlist"
-    });
-  },
-  // 导航跳转 
-  wnews: function () {
-    var _this = this;
-    // setTimeout(function () {
-      // app.limitlottery(_this);
-    // }, 100);
-  },
-
-  pullupsignin: function () {
-    // // '没有授权'
-    this.setData({
-      tgabox: true
-    });
-  },
-
-  // tab切换
-  tabbotdata: function (w) {
-    var _this = this;
-    var value = w.currentTarget.dataset.c_id || w.target.dataset.c_id || 0;
-    var tablist = _this.data.tablist || [];
-
-    _this.setData({
-      tabselid: value
-    });
-    _this.brandscrollfun(value)
-    // 获取list数据
-    // this.listdata(0);
-    //创建节点选择器
-    var query = wx.createSelectorQuery();
-    //选择id
-    query.select('#q' + value).boundingClientRect();
-    query.exec(function (res) {
-      if (res && res[0]) {
-        if (res[0].width) {
-          _this.setData({
-            scrollleft: w.currentTarget.offsetLeft - wx.getSystemInfoSync().windowWidth / 2 + 70 + (res[0].width / 2)
-          });
-        };
-      }
-    });
-  },
-  //  获取滚动条位置
-  scrollleftf: function (event) {
-    this.data.scrollwidth = event.detail.scrollwidth;
-  },
-
-
-  chooseLetter(e) {
-    this.setData({
-      curLetter: null
-    });
-    var letter = e.currentTarget.dataset.letter;
-
-    // 查找对应的id
-    var id = "#letter" + letter;
-    const query = wx.createSelectorQuery()
-    query.select(id).boundingClientRect()
-    query.selectViewport().scrollOffset()
-    query.exec(function (res) {
-      wx.pageScrollTo({
-        scrollTop: res[0].top + res[1].scrollTop-320,
-        duration: 300
-      })
-    })
-  },
-
-  jumpchj:function(){
-    wx.navigateTo({
-      url: "/pages/smokeboxlist/smokeboxlist"
-    });
-  },
-  jumpcartbut:function(){
-    wx.navigateTo({
-      url: "/page/component/pages/ocamcart/ocamcart?but=cart"
-    });
-  },
   jumpshopbut:function(w){
-    var name = w.currentTarget.dataset.name || w.target.dataset.name;
     var minprice = w.currentTarget.dataset.minprice || w.target.dataset.minprice||0;
-    var maxprice = w.currentTarget.dataset.maxprice || w.target.dataset.maxprice || 0;
-    var goods_id = w.currentTarget.dataset.goods_id || w.target.dataset.goods_id || '';
-    if (minprice == 0 && maxprice==0){
+    var id = w.currentTarget.dataset.id || w.target.dataset.id || '';
+    if (minprice == 0){
       app.showToastC('暂无该款信息');
       return false
     };
-    var urlname = encodeURIComponent(name);
     wx.navigateTo({
-      url: "/page/component/pages/ocamcart/ocamcart?name=" + urlname+"&but=shop&goods_id="+goods_id
+      url: "/page/component/pages/ocamgoodsseries/ocamgoodsseries?seriesId="+id
     });
   },
+
   jumpmyo:function(){
     var _this = this;
     wx.navigateTo({
@@ -795,139 +359,94 @@ Page({
     });
   },
 
-
-
-  agreeset: function () {
-    var _this = this;
-    _this.setData({
-      ishowdeal: false,
-      ishowadd: true,
-    })
-  },
-
-  closedealoradd: function () {
-    var _this = this;
-    if (!_this.data.ishowdealoradd) {
-      _this.setData({
-        ishowdealoradd: true,
-      })
-    } else {
-      if (_this.data.ishowadd) {
-        _this.setData({
-          ishowdeal: true,
-          ishowadd: false,
-        })
-      } else {
-        _this.setData({
-          ishowdealoradd: false,
-        })
-      }
-    }
-  },
-
-  showdealoradd: function () {
-    var _this = this;
-    _this.setData({
-      ishowdealoradd: !_this.data.ishowdealoradd,
-    })
-  },
-
-  // 跳转增加新地址
-  jumpaddress: function () {
-    var _this = this;
+  jumpcartbut:function(){
     wx.navigateTo({
-      url: "/pages/newreceivingaddress/newreceivingaddress"
-    })
-  },
-
-  // 下一页返回调取
-  nextpagediao: function () {
-    var _this = this;
-    //  调取收货地址
-    var q = Dec.Aese('mod=address&operation=getlist&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
-    wx.request({
-      url: app.signindata.comurl + 'user.php' + q,
-      method: 'GET',
-      header: {
-        'Accept': 'application/json'
-      },
-      success: function (res) {
-        if (res.data.ReturnCode == 200) {
-          var rdl = res.data.List;
-          if (rdl.length != 0) {
-            for (var i = 0; i < rdl.length; i++) {
-              rdl[i].checked = false;
-            };
-            _this.setData({
-              addressdata: rdl,
-            })
-          } else {
-            _this.setData({
-              addressdata: [],
-            })
-          };
-        };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
-      }
+      url: "/page/component/pages/ocamcart/ocamcart?but=cart"
     });
   },
 
-  selectdefult: function (w) {
-    var _this = this;
-    var ind = w.currentTarget.dataset.ind;
-    var addressdata = _this.data.addressdata;
-    for (var i = 0; i < addressdata.length; i++) {
-      if (i != ind) {
-        addressdata[i].checked = false;
-      }
-    }
-    if (!addressdata[ind].checked) {
-      addressdata[ind].checked = !addressdata[ind].checked;
-      _this.setData({
-        addressdata: addressdata,
-        maddid: addressdata[ind].aid,
-      })
-    } else {
-      addressdata[ind].checked = !addressdata[ind].checked;
-      _this.setData({
-        addressdata: addressdata,
-        maddid: '',
-      })
-    }
+  jumpcheaper(){
+    wx.navigateTo({
+      url: "/page/component/pages/ocamhot/ocamhot?pageid=0"
+    });
+  },
+  jumphot(){
+    wx.navigateTo({
+      url: "/page/component/pages/ocamhot/ocamhot?pageid=1"
+    });
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
 
   },
 
-  setdefultadd: function () {
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+  },
+  reset(){
+    this.setData({pid:0,dataList:[],loadprompt:true,nodata:false,ipcurrentNum:-1})
+  },
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+    this.reset();
+    this.getInfo();
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+    if(this.data.loadprompt){
+      this.data.pid = ++this.data.pid;
+      // 处理数据分页    
+      wx.showLoading({ title: '加载中...'})    
+      this.processingDataPaging();
+    }else{
+      wx.showToast({
+        title: '没有更多数据了',
+        icon: 'none',
+        duration: 2000
+      })
+    }
+  },
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+    var reshare = app.sharemc();
+    return reshare
+  },
+   /**
+   * 用户点击右上角分享朋友圈
+   */
+  onShareTimeline:function(){
     var _this = this;
-    //  调取收货地址
-    var q = Dec.Aese('mod=address&operation=setBlindBoxDefaultAddress&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&aid=' + _this.data.maddid)
-
-    wx.request({
-      url: app.signindata.comurl + 'user.php' + q,
-      method: 'GET',
-      header: {
-        'Accept': 'application/json'
-      },
-      success: function (res) {
-        if (res.data.ReturnCode == 200) {
-          _this.setData({
-            ishowdealoradd: false,
-            isBlindBoxDefaultAddress: true,
-            ishowcover: false,
-          })
-          app.signindata.isBlindBoxDefaultAddress = true;
-        }
-      }
-    });
-  }
-
-
-
-
-
-
-
-
+    return {
+      title:_this.data.c_title || '潮玩社交平台',
+      query:{}    
+    }
+  },
+  // 阻止蒙层冒泡
+  preventD() { },
 
 })

@@ -406,6 +406,7 @@ App({
         _this.signindata.systemData = res.system;
         _this.signindata.platformData = res.platform;
         _this.signindata.windowHeight = res.windowHeight;
+        console.log()
         // 获取顶部高度
         wx.setStorageSync('statusBarHeightMc', res.statusBarHeight + 44 || 90);
         _this.signindata.statusBarHeightMc = res.statusBarHeight + 44 || 90
@@ -1399,7 +1400,9 @@ App({
 //  initiateopenboxeslist 发起拆明盒列表
 //  initiateopenboxes 发起拆明盒详情
 //  ocamendment 闲置潮玩列表修改
+//  ocamgoodsseries 闲置商品系列
 //  ocamcart  闲置潮玩列表购物车
+//  ocamhot  闲置捡漏热门
 //  drivetohidehome 开车送隐藏主页
 //  drivetohide 开车送隐藏详情页
 //  drivetohidelist 开车送隐藏中奖列表

@@ -5,8 +5,9 @@
 @import "../../pages/awardwinningarea/awardwinningarea.wxss";
 @import "/pages/smokeboxlist/smokeboxlist.wxss";
 page{
-  background: #fff;
+  background: #F5F5F5;
   width:100%;
+  padding-bottom: 210rpx;
 }
 
 .dots {
@@ -149,4 +150,308 @@ page{
 }
 .phcolor{
   color: #595858;
+}
+
+
+.idle_topwrap{
+  width: 100%;
+  position: fixed;
+  left: 0;
+  background: #F5F5F5;
+  z-index:10;
+}
+.idle_tabbarWrap{
+  width: 100%;
+  height: 90rpx;
+  background: #fff;
+  display: flex;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 10;
+}
+.idle_tabbarWrap text{
+  width: 120rpx;
+  height: 90rpx;
+  display: block;
+  text-align: center;
+  line-height: 90rpx;
+  font-size: 26rpx;
+  color: #020202;
+  margin-right: 15rpx;
+  position: relative;
+}
+.idle_tabbarWrap .active{
+  color:#298DF8;
+}
+.idle_tabbarWrap .active::after{
+  content: '';
+  width: 80%;
+  height: 8rpx;
+  background:#298DF8;
+  position: absolute;
+  left: 50%;
+  margin-left: -40%;
+  bottom: 6rpx;
+}
+.idle_search{
+  width: 50rpx;
+  height: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 20rpx;
+}
+.idle_searchInputWrap{
+  width: 100%;
+  height: 90rpx;
+  background: #fff;
+  position: absolute;
+  top: 90rpx;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.idle_searchInputWrap input{
+  width: 690rpx;
+  height: 60rpx;
+  background: #F5F5F5;
+  border-radius: 10rpx;
+  padding-right: 110rpx;
+  padding-left: 20rpx;
+  box-sizing: border-box;
+}
+.idle_searchInputWrap text{
+  font-size: 26rpx;
+  color: #101010;
+  position: absolute;
+  top:0;
+  right: 0;
+  z-index: 10;
+}
+
+.idle_IPWrap{
+  width: 100%;
+  height: 240rpx;
+  white-space:nowrap;
+}
+.idle_IPScroll{
+  height: 240rpx;
+  padding: 0 0 0 30rpx;
+  box-sizing: border-box;
+}
+.idle_IPBox{
+  width: 120rpx;
+  height: 240rpx;
+  display: inline-block;
+  margin-right: 20rpx;
+  padding-top: 32rpx;
+  box-sizing: border-box;
+}
+.idle_IPBox:last-child{
+  margin-right: 30rpx;
+}
+.idle_IPBox image{
+  width: 120rpx;
+  height: 120rpx;
+  display: block;
+  border-radius: 120rpx;
+  background:#fff;
+  border: 2rpx solid transparent;
+}
+.idle_IPScroll .active image{
+  border: 2rpx solid #f19207;
+}
+.idle_IPScroll .active text{
+  color: #f19207;
+}
+.idle_allIcon{
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 120rpx;
+  background:#FFECBF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.idle_allIcon view{
+  display: inline-block;
+}
+.idle_allIcon text{
+  font-size: 24rpx;
+  color: #CD8336 ;
+  display: block;
+}
+.idle_IPBox .idle_IPName{
+  width: 120rpx;
+  font-size: 24rpx;
+  color: #020202;
+  display: block;
+  text-align: center;
+  margin-top: 15rpx;
+  white-space: nowrap;     
+  overflow: hidden;        
+  text-overflow: ellipsis;
+}
+.idle_content{
+  margin-top: 330rpx;
+}
+.idle_otherWrap{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+}
+.idle_otherFlex{
+  width: 49%;
+  height: 120rpx;
+  background:#fff;
+  border-radius: 12rpx;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 40rpx 0 30rpx;
+  box-sizing: border-box;
+}
+.idle_otherLeft{
+  display: flex;
+  align-items: center;
+}
+.idle_otherLeft text{
+  font-size: 26rpx;
+  color: #020202;
+  display: block;
+}
+.idle_otherRight{
+  display: flex;
+  align-items: center;
+}
+.idle_otherRight image{
+  width: 90rpx;
+  height: 104rpx;
+}
+.idle_otherRight text{
+  display: block;
+  color: #FF2742;
+  font-size: 24rpx;
+  margin-left: 20rpx;
+}
+.idle_listWrap{
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  margin-top: 35rpx;
+  /* column-count: 2; */
+  overflow:hidden;
+  display:flex;
+  justify-content: space-between;
+}
+.idle_listBox{
+  float:left;
+  width:335rpx;
+}
+.idle_listItem{
+  width: 335rpx;
+  border-radius: 12rpx;
+  overflow: hidden;
+  background:#fff;
+  margin-bottom: 10rpx;
+  /* display: inline-block; */
+  /* margin-right: 20rpx; */
+}
+.idle_listItem:nth-child(2n){
+  margin-right: 0;
+}
+.idle_listItem image{
+  width: 100%;
+  height: auto;
+  display:block;
+}
+.idle_listItem text{
+  display: block;
+  font-size: 24rpx;
+}
+.idle_listItemName{
+  color: #101010;
+  margin-bottom: 6rpx;
+  white-space: nowrap;     
+  overflow: hidden;        
+  text-overflow: ellipsis;
+}
+.idle_listItemBox{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.idle_listItemTxt{
+  color: #8A8A8A;
+}
+.idle_listItemPrice{
+  color: #FC585F;
+}
+
+
+.ipPopMask{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #fff;
+  z-index: 20;
+}
+.ipPopTop{
+  width: 100%;
+  height: 80rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  background: #fff;
+}
+.ipPopTop text{
+  font-size: 24rpx;
+  color: #101010;
+  padding-left: 30rpx;
+}
+.ipPopTop image{
+  padding: 25rpx 30rpx 25rpx 25rpx;
+  width: 28rpx;
+  height: auto;
+}
+.ipPopBox{
+  margin-top: 80rpx;
+  /* padding: 0 30rpx;
+  box-sizing: border-box; */
+}
+.idle_IPBox1{
+  width: 120rpx;
+  height: 194rpx;
+  display: inline-block;
+  margin-right: 22rpx;
+  /* padding-top: 32rpx; */
+  box-sizing: border-box;
+}
+.idle_IPBox1:nth-child(5n){
+  margin-right: 0;
+}
+.idle_IPBox1 image{
+  width: 120rpx;
+  height: 120rpx;
+  display: block;
+  border-radius: 120rpx;
+  background:#fff;
+}
+.idle_IPBox1 .idle_IPName{
+  width: 120rpx;
+  font-size: 24rpx;
+  color: #020202;
+  display: block;
+  text-align: center;
+  margin-top: 15rpx;
+  white-space: nowrap;     
+  overflow: hidden;        
+  text-overflow: ellipsis;
 }
