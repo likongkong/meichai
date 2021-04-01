@@ -888,7 +888,7 @@ Page({
               classificationlist: classification||'',
               commoddata: comdataarr,
               nodataiftr: true,
-              movies: banlist||'',
+              movies: banlist||[],
               toyshowTicket:List.toyshowTicket || ''
             });
 

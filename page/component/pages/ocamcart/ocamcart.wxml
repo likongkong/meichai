@@ -282,7 +282,7 @@
         <view class='pricedetailoleft'>商品价格</view>
         <view class='pricedetailoright'>￥{{payprice}}</view>
       </view>
-      <view class='pricedetailo'>
+      <view class='pricedetailo' wx:if='{{false}}'>
         <view class='pricedetailoleft'>运费<text style='padding-left:8rpx;color:#47981e;' wx:if='{{freightiftr>0}}'>(满￥{{defaultinformation.carriage.free}}包邮)</text></view>
         <view class='pricedetailoright'>{{freight}}</view>
       </view>

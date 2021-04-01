@@ -1597,8 +1597,10 @@ Page({
     //   };
     // };
 
-
-    if ((this.data.defaultinformation.carriage.free || "99") != '-1') {
+    if(true){
+      freightiftr = 0;
+      xianshi = '商品包邮';
+    }else if ((this.data.defaultinformation.carriage.free || "99") != '-1') {
       var tddefcarfr = parseFloat(this.data.defaultinformation.carriage.free || "99");
       if (mcnum >= parseFloat(this.data.defaultinformation.carriage.freeMCPieces)) {
         if (this.data.defaultinformation.carriage.freeMCPieces == 1) {

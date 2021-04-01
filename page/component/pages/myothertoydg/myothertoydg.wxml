@@ -130,7 +130,7 @@
         <view class='pricedetailoright'>￥{{goodsAmount}}</view>
       </view>
 
-      <view class='pricedetailo'>
+      <view class='pricedetailo' wx:if='{{false}}'>
         <view class='pricedetailoleft'>运费<text style='padding-left:8rpx;color:#47981e;' wx:if='{{freightiftr>0}}'>(满￥{{defaultinformation.carriage.free}}包邮)</text></view>
         <view class='pricedetailoright'>{{freight}}</view>
       </view>
@@ -500,7 +500,6 @@
   <image class='tipimgurl' src='{{tipimgurl}}' mode="widthFix"></image>
 </view>
 
-<!-- isdelivergoods -->
 <view wx:if='{{isdelivergoods}}' style='width: 100%;height: 100%;position: fixed;top: 0;left: 0;z-index: 199999;'>
   <view class='bgstyle' catchtouchmove="myCatchTouch"></view>
 
@@ -508,14 +507,14 @@
 
     <view style='font-size:30rpx;margin:20rpx;line-height:60rpx;text-align:left;'>
       <view>放入玩具柜：可到抽盒机列表进入玩具柜再次交易</view>
-      <view>次日发货：现货次日发货，预售到货发出</view>
+      <view>发货时间：现货次日发货，预售到货发出</view>
     </view>
 
     <view style='height:80rpx;font-size:30rpx;margin:20rpx;text-align:center;display:flex;'>
+      <!-- flex: 1; -->
+      <view style='line-height:80rpx;color:#1989FA;float:left;z-index:1;position:relative;width:100%;' catchtap="enterinto">放入玩具柜</view>
 
-      <view style='line-height:80rpx;color:#1989FA;float:left;z-index:1;flex: 1;position:relative;' catchtap="enterinto">放入玩具柜</view>
-
-      <view style='line-height:80rpx;color:#1989FA;float:left;z-index:1;flex: 1;position:relative;' catchtap="delivergoods">次日发货</view>
+      <!-- <view style='line-height:80rpx;color:#1989FA;float:left;z-index:1;flex: 1;position:relative;' catchtap="delivergoods">次日发货</view> -->
     </view>
   </view>
 

@@ -132,6 +132,17 @@ Page({
              receivingaddress: false,
              buybombsimmediately: false
            });
+        }else if(res.data.ReturnCode == 201){
+          _this.data.cart_id = res.data.Info.cart_id || '';
+          wx.showModal({
+            title: '',
+            content: res.data.Msg,
+            success(res) {
+              if (res.confirm) {
+                _this.paymentmony()
+              }
+            }
+          })          
         }else{
           _this.setData({
             mtdtiploctxt: res.data.Msg,
@@ -145,6 +156,67 @@ Page({
       }
     });
   },
+
+  // 微信支付
+  paymentmony: function() {
+    var _this = this;
+    var q = Dec.Aese('mod=operate&operation=prepay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1&oid=' + _this.data.cart_id + '&xcx=1' + '&openid=' + app.signindata.openid)
+    wx.request({
+      url: app.signindata.comurl + 'order.php' + q,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function(res) {
+        if (res.data.ReturnCode == 200) {
+          wx.requestPayment({
+            'timeStamp': res.data.Info.timeStamp.toString(),
+            'nonceStr': res.data.Info.nonceStr,
+            'package': res.data.Info.package,
+            'signType': 'MD5',
+            'paySign': res.data.Info.paySign,
+            'success': function(res) {
+              _this.setData({
+                mtdlocation: false,
+                immdevery: false,
+                tipback: false,
+                receivingaddress: false,
+                buybombsimmediately: false
+              })
+            },
+            'fail': function(res) {
+
+            },
+            'complete': function(res) {}
+          })
+        } else {
+          // 提交订单蒙层
+          _this.setData({
+            suboformola: false
+          });
+          if (res.data.ReturnCode == 800) {
+            app.showToastC('非该用户订单');
+          };
+          if (res.data.ReturnCode == 815) {
+            app.showToastC('订单状态错误');
+          };
+          if (res.data.ReturnCode == 816) {
+            app.showToastC('不支持的支付类型');
+          };
+          if (res.data.ReturnCode == 817) {
+            app.showToastC('付款明细已生成');
+          };
+          if (res.data.ReturnCode == 201) {
+            app.showToastC('微信预支付失败');
+          };
+          if (res.data.ReturnCode == 805) {
+            app.showToastC('剩余库存不足');
+          };
+          // 判断非200和登录
+          Dec.comiftrsign(_this, res, app);
+        };
+      }
+    })
+  },
+
   // 选中 未选中
   iftrcheckfun:function(w){
     var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
