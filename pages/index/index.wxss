@@ -252,7 +252,6 @@
   left: 25rpx;
   font-size: 24rpx;
 }
-
 .bgImgUrl{
   background:url(https://cdn.51chaidan.com/images/auctionActivity/whiteBackground.jpg) no-repeat;
   background-size: 750rpx 400rpx;
