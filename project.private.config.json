@@ -1,0 +1,64 @@
+{
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "id": 0,
+          "name": "签到新年活动",
+          "pathName": "page/component/pages/newsignin/newsignin",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 1,
+          "name": "红包列表",
+          "pathName": "page/secondpackge/pages/redEnvelopeList/redEnvelopeList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "首页",
+          "pathName": "pages/index/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "抽盒机列表",
+          "pathName": "pages/smokeboxlist/smokeboxlist",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 4,
+          "name": "商品详情",
+          "pathName": "pages/detailspage/detailspage",
+          "query": "gid=36999",
+          "scene": null
+        },
+        {
+          "id": 5,
+          "name": "手机壳",
+          "pathName": "page/secondpackge/pages/mobileShellDetail/mobileShellDetail",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "page/secondpackge/pages/auctionList/auctionList",
+          "pathName": "page/secondpackge/pages/auctionList/auctionList",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

@@ -263,10 +263,10 @@ Page({
             dataInfo:res.data.Info,
             bidRange:res.data.Info.auctionRule.bid_increment,
             lastBidPrice:res.data.Info.currentPrice,
+            firstBidPrice:Number(res.data.Info.auctionRule.bid_increment)+Number(res.data.Info.currentPrice),
             currentBidPrice:res.data.Info.currentPrice,
             subscribedata:res.data.Info.subscribe || ''
           })
-          
           _this.data.timer = setInterval(function () {
             //将时间传如 调用 
             _this.dateformat(res.data.Info.showTime);
