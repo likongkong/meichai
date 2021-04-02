@@ -133,9 +133,9 @@ Page({
     let url = '';
     wx.showLoading({ title: '加载中...'})
     if(this.data.pageid == 0){
-      url = 'http://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/toyCabinetChearperZone.json'
+      url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/toyCabinetChearperZone.json'
     }else{
-      url = 'http://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/toyCabinetHotZone.json'
+      url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/toyCabinetHotZone.json'
     }
     wx.request({
       url:url,
