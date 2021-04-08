@@ -271,6 +271,8 @@
                 <text wx:if="{{isUseBlindboxMoney && blindboxMoney!=0}}">抵扣￥{{oneDeductMoney}}</text>
             </view>
         </view>
+
+        <text wx:if="{{isFlagship}}" class="nottip">注:此一番赏不进入玩具柜，不参加其他促销活动</text>
    </view>
 </view>
 

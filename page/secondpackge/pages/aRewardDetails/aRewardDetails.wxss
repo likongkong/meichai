@@ -1073,3 +1073,12 @@ page {
 .leaveunused text{
   color: #FF2742;
 }
+
+
+.nottip{
+  position: absolute;
+  bottom: 6rpx;
+  left: 28rpx;
+  font-size: 20rpx;
+  color: #101010;
+}
