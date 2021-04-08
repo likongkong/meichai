@@ -299,7 +299,7 @@ page {
 }
 .scrapingPurchase{
   width: 100%;
-  height: 190rpx;
+  height: 222rpx;
   background: #fff;
   position: absolute;
   left: 0;
@@ -1077,7 +1077,7 @@ page {
 
 .nottip{
   position: absolute;
-  bottom: 6rpx;
+  bottom: 36rpx;
   left: 28rpx;
   font-size: 20rpx;
   color: #101010;

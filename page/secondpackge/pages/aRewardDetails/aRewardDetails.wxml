@@ -39,7 +39,7 @@
         </view>
 
         <view wx:if="{{isFlagship && activity.flagshipArr}}" style="position:absolute;left:6rpx;bottom:{{activity.isCheckOther==2 && (activity.status!=3||activity.suplusNum>0)?'54rpx':'6rpx'}};height:30rpx;overflow:hidden;z-index:5;padding: 4rpx 8rpx;">
-            <image src='{{activity.flagshipArr.logo}}' style='float:left;width:30rpx;height:30rpx;border-radius:50%;' mode="widthFix"></image>
+            <image src='{{activity.flagshipArr.logo}}' style='float:left;width:30rpx;height:30rpx;border-radius:50%;' mode="aspectFit"></image>
             <view style='float:left;height:30rpx;line-height:30rpx;font-size:20rpx;color:#fff;margin-left:10rpx;max-width:200rpx;' class='specialellipsis'>{{activity.flagshipArr.name}}旗舰店</view>
             <view style="  width: 100%;height: 100%;background: #000;opacity: 0.6;position: absolute;top: 0;left: 0;z-index: -1;border-radius: 10rpx;"></view>
         </view>		
@@ -186,8 +186,9 @@
 <view class="wsh" style="height:{{worthSubsidiaryHeight}}px;margin-top:{{topheight}}px;"  catchtouchmove="true" wx:if='{{scrapingPur&&activity.suplusNum>0}}'>
     <view class="tgimgboxgb" catchtap="scrapingPurfun"></view>
 
-    <view catchtap="scrapingPurfun" wx:if="{{!activity.isAllHidePrice && finalReward.isShowPrice}}" style="width:100%;height:{{isDeduct && blindboxMoney!=0? worthSubsidiaryHeight-157:worthSubsidiaryHeight-117}}px;display: flex;align-items: center;justify-content: center;position:absolute;left: 0;top: 0;">
-    <view class="worthSubsidiary" style="{{!isPurchase?'height:844rpx;':isDeduct && blindboxMoney!=0?'height:844rpx;':''}}" catchtap="zhanwei">
+    <view catchtap="scrapingPurfun" wx:if="{{!activity.isAllHidePrice && finalReward.isShowPrice}}" style="width:100%;height:{{isDeduct && blindboxMoney!=0? worthSubsidiaryHeight-172:worthSubsidiaryHeight-117}}px;display: flex;align-items: center;justify-content: center;position:absolute;left: 0;top: 0;">
+        
+    <view class="worthSubsidiary" style="{{!isPurchase?'height:832rpx;':isDeduct && blindboxMoney!=0?'height:832rpx;':''}}" catchtap="zhanwei">
         <view class="adcspecialPrice">
             <view>
                 <image src="{{finalReward.img}}" mode="aspectFill" mode='aspectFit'></image>
@@ -226,12 +227,12 @@
         </view>
     </view>
     </view>
-    <view catchtap="scrapingPurfun" wx:if="{{isBlindboxRuleMask}}" style="width:100%;height:{{worthSubsidiaryHeight-117}}px;display: flex;align-items: center;justify-content: center;position:absolute;left: 0;top: 0;z-index:10">
+    <view catchtap="scrapingPurfun" wx:if="{{isBlindboxRuleMask}}" style="width:100%;height:{{worthSubsidiaryHeight-101}}px;display: flex;align-items: center;justify-content: center;position:absolute;left: 0;top: 0;z-index:10">
         <view class="useBlindboxRuleMask">
 			<template is="wxParse" data="{{wxParseData:article.nodes}}"/>
         </view>
     </view>
-
+<view>
     <view wx:if="{{isPurchase}}" class="scrapingPurchase">
         <!-- <view class="scrapPurtime">刮卡剩余时间:{{remaintime}}s</view> -->
         <view class="deduct" wx:if="{{isDeduct && blindboxMoney!=0}}">
@@ -271,9 +272,9 @@
                 <text wx:if="{{isUseBlindboxMoney && blindboxMoney!=0}}">抵扣￥{{oneDeductMoney}}</text>
             </view>
         </view>
-
-        <text wx:if="{{isFlagship}}" class="nottip">注:此一番赏不进入玩具柜，不参加其他促销活动</text>
+        <text wx:if="{{isFlagship}}" class="nottip">注:此一番赏不进入玩具柜，不参加其他促销活动，韵达包邮</text>
    </view>
+</view>
 </view>
 
 <!-- 刮奖 -->
