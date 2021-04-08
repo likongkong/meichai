@@ -105,7 +105,8 @@ Page({
      //抽盒金抵扣使用规则
      isBlindboxRuleMask:false,
      gotTBBMBS8:true,
-     gotTBBMBS9:true
+     gotTBBMBS9:true,
+     isFlagship:true
   },
   // 跳转公众号文章
    officialAccount(){
@@ -827,6 +828,7 @@ Page({
             userimg:userimg,
             goodsdata:goodsdata,
             activity:activity,
+            isFlagship:activity.isFlagship,
             otherActivity:otherActivity,
             finalReward:finalReward,
             goodsExhibition:newarr,
