@@ -186,7 +186,7 @@
 <view class="wsh" style="height:{{worthSubsidiaryHeight}}px;margin-top:{{topheight}}px;"  catchtouchmove="true" wx:if='{{scrapingPur&&activity.suplusNum>0}}'>
     <view class="tgimgboxgb" catchtap="scrapingPurfun"></view>
 
-    <view catchtap="scrapingPurfun" wx:if="{{!activity.isAllHidePrice && finalReward.isShowPrice}}" style="width:100%;height:{{isDeduct && blindboxMoney!=0? worthSubsidiaryHeight-172:worthSubsidiaryHeight-117}}px;display: flex;align-items: center;justify-content: center;position:absolute;left: 0;top: 0;">
+    <view catchtap="scrapingPurfun" wx:if="{{!activity.isAllHidePrice && finalReward.isShowPrice}}" style="width:100%;height:{{isDeduct && blindboxMoney!=0? worthSubsidiaryHeight-164:worthSubsidiaryHeight-109}}px;display: flex;align-items: center;justify-content: center;position:absolute;left: 0;top: 0;">
         
     <view class="worthSubsidiary" style="{{!isPurchase?'height:832rpx;':isDeduct && blindboxMoney!=0?'height:832rpx;':''}}" catchtap="zhanwei">
         <view class="adcspecialPrice">
@@ -227,7 +227,7 @@
         </view>
     </view>
     </view>
-    <view catchtap="scrapingPurfun" wx:if="{{isBlindboxRuleMask}}" style="width:100%;height:{{worthSubsidiaryHeight-101}}px;display: flex;align-items: center;justify-content: center;position:absolute;left: 0;top: 0;z-index:10">
+    <view catchtap="scrapingPurfun" wx:if="{{isBlindboxRuleMask}}" style="width:100%;height:{{worthSubsidiaryHeight-109}}px;display: flex;align-items: center;justify-content: center;position:absolute;left: 0;top: 0;z-index:10">
         <view class="useBlindboxRuleMask">
 			<template is="wxParse" data="{{wxParseData:article.nodes}}"/>
         </view>
@@ -272,7 +272,7 @@
                 <text wx:if="{{isUseBlindboxMoney && blindboxMoney!=0}}">抵扣￥{{oneDeductMoney}}</text>
             </view>
         </view>
-        <text wx:if="{{isFlagship}}" class="nottip">注:此一番赏不进入玩具柜，不参加其他促销活动，韵达包邮</text>
+        <text wx:if="{{isFlagship}}" class="nottip">注:此一番赏不进入玩具柜，不参加其他促销活动，商品直接发到默认收货地址，无法更改，请确认后购买，韵达包邮</text>
    </view>
 </view>
 </view>

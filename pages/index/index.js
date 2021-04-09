@@ -1619,5 +1619,8 @@ Page({
     wx.navigateTo({
       url: "/page/component/pages/myothertoydg/myothertoydg?ownerId=" + id,
     });  
-  }
+  },
+  catchTouchMove:function(res){
+    return false
+   }
 })

@@ -761,24 +761,7 @@ Page({
 
 
 
-          if ( activity.status==3 || activity.suplusNum<=0 ) {
-            // wx.showModal({
-            //   title: '提示',
-            //   content: '活动已结束',
-            //   showCancel: false,
-            //   success: function (res) {
-            //     wx.reLaunch({
-            //       url: "/page/secondpackge/pages/aRewardList/aRewardList"
-            //     });
-            //   }
-            // });
-            // if(activity.isCheckOther==2){
-            //   let id = activity.id;
-            //   wx.redirectTo({   
-            //     url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + id +"&checkOtherActivity=2"
-            //   });
-            // }
-          }
+          
           // if(activity.status==2&&activity.suplusNum>0&&_this.data.uid){
           //     _this.queuefun(1,1);
           // };
@@ -849,15 +832,28 @@ Page({
             threeDeductMoney:threeDeductMoney>_this.data.blindboxMoney?_this.data.blindboxMoney:threeDeductMoney,
             oneDeductMoney:oneDeductMoney>_this.data.blindboxMoney?_this.data.blindboxMoney:oneDeductMoney,
           })
+
+          if(res.data.Info.newActivityId){
+            if (activity.status==3 || activity.suplusNum<=0) {
+              wx.showToast({
+                title: '该一番赏已结束，即将为您跳转到新的一番赏',
+                icon: 'none',
+                duration: 3000
+              })
+              setTimeout(function(){
+                wx.redirectTo({   
+                  url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + res.data.Info.newActivityId
+                });
+              },3000)
+            }
+          }
+
         }else{
           app.showToastC(res.data.Msg);
         }
       },
       fail: function () { }
     });
-
-    
-
   },
   // 排队
   // type 排队类型(1正常排队， 2延长排队时间)

@@ -36,14 +36,14 @@ Component({
     _gitList(){
       var _this = this;
       var exh = Dec.Aese('mod=yifanshang&operation=history&id='+this.data.activityid+'&pid='+this.data.page)
-      wx.showLoading({title: '加载中...',})
+      // wx.showLoading({title: '加载中...',})
       console.log("一番赏历史记录接口地址 ===== "+app.signindata.comurl + 'mod=yifanshang&operation=history&id='+this.data.activityid+'&pid='+this.data.page)
       wx.request({
         url: app.signindata.comurl + 'spread.php' + exh,
         method: 'GET',
         header: {'Accept': 'application/json'},
         success: function (res) {
-          wx.hideLoading();
+          // wx.hideLoading();
           wx.stopPullDownRefresh();
           console.log('一番赏历史记录 =========== ',res)
           if ( res.data.ReturnCode == 200 ) {
