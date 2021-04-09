@@ -50,6 +50,7 @@
   display: block;
   float: left;
   border-radius: 10rpx;
+  background: #fff;
 }
 
 .exhibdetxt {

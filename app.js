@@ -1086,6 +1086,10 @@ App({
       wx.navigateTo({
         url: "/page/secondpackge/pages/exhibitionwelfare/exhibitionwelfare",
       });
+    } else if (mtype == 10) {
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + id,
+      });
     }
   },
   // 直播

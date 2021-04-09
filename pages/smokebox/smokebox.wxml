@@ -411,7 +411,7 @@
 					<view class="exhibboxcon">
 						<view style="float:left;margin-left:20rpx;">
 							<view class="mexhibboxconeve {{gid == 33115 ? 'cardmm' : ''}}" wx:for='{{exhdata}}' wx:key='key' wx:if='{{index%2==0}}' catchtap="jumpexhdetail" data-brandid='{{item.brandId}}' data-id='{{item.id}}' data-mtype="{{item.type}}" data-gid='{{item.goodsId}}'>
-								<block wx:if='{{item.type == 4 || item.type == 11|| item.type == 12 || item.type == 1 || item.type == 5|| item.type == 8|| item.type == 9}}'>
+								<block wx:if='{{item.type == 4 || item.type == 11|| item.type == 12 || item.type == 1 || item.type == 5|| item.type == 8|| item.type == 9|| item.type == 10}}'>
 									<image class="exhibboxeveimg" mode='widthFix' src="{{item.images}}"></image>
 									<view wx:if='{{item.type != 11 && item.type != 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.name}}</view>
 									<view wx:elif='{{item.type == 11 || item.type == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.goodsName}}</view>
@@ -463,7 +463,7 @@
 
 						<view style="float:left;margin-left:20rpx;">
 							<view class="mexhibboxconeve {{gid == 33115 ? 'cardmm' : ''}}" wx:for='{{exhdata}}' wx:key='key' wx:if='{{index%2==1}}' catchtap="jumpexhdetail" data-brandid='{{item.brandId}}' data-id='{{item.id}}' data-mtype="{{item.type}}" data-gid='{{item.goodsId}}'>
-								<block wx:if='{{item.type == 4 || item.type == 11|| item.type == 12 || item.type == 1 || item.type == 5|| item.type == 8|| item.type == 9}}'>
+								<block wx:if='{{item.type == 4 || item.type == 11|| item.type == 12 || item.type == 1 || item.type == 5|| item.type == 8|| item.type == 9|| item.type == 10}}'>
 									<image class="exhibboxeveimg" mode='widthFix' src="{{item.images}}"></image>
 									<view wx:if='{{item.type != 11 && item.type != 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.name}}</view>
 									<view wx:elif='{{item.type == 11 || item.type == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.goodsName}}</view>
