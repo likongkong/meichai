@@ -59,13 +59,13 @@ page{
 }
 .oca_goodsDetailsLift{
   width: 260rpx;
-  padding-left:90rpx;
+  padding-left:60rpx;
   box-sizing: border-box;
   display: flex;
   align-items: center;
 }
 .oca_goodsDetailsLift image{
-  width: 120rpx;
+  width: 160rpx;
   height: auto;
   border-radius: 12rpx;
   display: block;

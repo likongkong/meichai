@@ -39,7 +39,8 @@ Page({
     isipPopMask:false,
     inputValue:'',
     isSearchInput:false,
-    searchInputFocus:false
+    searchInputFocus:false,
+    pageid:0
   },
 
   /**
@@ -250,6 +251,28 @@ Page({
       })
       return false;
     }
+
+    let str = this.data.inputValue;
+    if(str.indexOf("碎片") != -1){
+      this.data.pageid = 2;
+      this.jumpzhuanqu();
+      return false;
+    }else if(str == "盲盒"){
+      this.setData({
+        currentNum: 1
+      })
+      this.reset();
+      this.getInfo();
+      return false;
+    }else if(str == "一番赏"){
+      this.setData({
+        currentNum: 2
+      })
+      this.reset();
+      this.getInfo();
+      return false;
+    }
+
     wx.showLoading({ title: '加载中...'})
     var q = Dec.Aese('mod=cabinet&operation=search&searchKey=' + this.data.inputValue)
     console.log('搜索请求数据===','mod=cabinet&operation=search&searchKey=' + this.data.inputValue)
@@ -365,14 +388,10 @@ Page({
     });
   },
 
-  jumpcheaper(){
+  
+  jumpzhuanqu(){
     wx.navigateTo({
-      url: "/page/component/pages/ocamhot/ocamhot?pageid=0"
-    });
-  },
-  jumphot(){
-    wx.navigateTo({
-      url: "/page/component/pages/ocamhot/ocamhot?pageid=1"
+      url: "/page/component/pages/ocamhot/ocamhot?pageid="+this.data.pageid
     });
   },
 
