@@ -389,7 +389,10 @@ Page({
   },
 
   
-  jumpzhuanqu(){
+  jumpzhuanqu(e){
+    if(e){
+      this.data.pageid = e.currentTarget.dataset.pageid;
+    }
     wx.navigateTo({
       url: "/page/component/pages/ocamhot/ocamhot?pageid="+this.data.pageid
     });

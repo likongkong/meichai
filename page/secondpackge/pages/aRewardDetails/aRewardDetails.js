@@ -835,16 +835,31 @@ Page({
 
           if(res.data.Info.newActivityId){
             if (activity.status==3 || activity.suplusNum<=0) {
-              wx.showToast({
-                title: '该一番赏已结束，即将为您跳转到新的一番赏',
-                icon: 'none',
-                duration: 3000
+              // wx.showToast({
+              //   title: '该一番赏已结束，即将为您跳转到新的一番赏',
+              //   icon: 'none',
+              //   duration: 3000
+              // })
+              // setTimeout(function(){
+              //   wx.redirectTo({   
+              //     url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + res.data.Info.newActivityId
+              //   });
+              // },3000)
+              wx.showModal({
+                title: '提示',
+                content: '该一番赏已结束，是否为您跳转到新的一番赏',
+                success (res1) {
+                  if (res1.confirm) {
+                    wx.redirectTo({   
+                      url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + res.data.Info.newActivityId
+                    });
+                  } else if (res1.cancel) {
+                    console.log('用户点击取消')
+                  }
+                }
               })
-              setTimeout(function(){
-                wx.redirectTo({   
-                  url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + res.data.Info.newActivityId
-                });
-              },3000)
+
+
             }
           }
 
