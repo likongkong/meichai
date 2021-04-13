@@ -154,6 +154,7 @@ Page({
   },
   //跳转商品详情
   jumpGoodsDetails(w){
+    return false;
     var gid = w.currentTarget.dataset.gid || w.target.dataset.gid;
     wx.navigateTo({
       url: "/pages/detailspage/detailspage?gid=" + gid,
@@ -560,7 +561,7 @@ Page({
 
     _this.brandinformation(1);
     // // 线上
-    // _this.commodityinformation(1,1);
+    _this.commodityinformation(1,1);
     // // 手作
     // _this.commodityinformation(1,2);
     // // 海外
@@ -1148,7 +1149,7 @@ brandJson:function(){
     };    
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           // '已经授权'
           _this.setData({
             loginid: app.signindata.loginid,
@@ -1191,7 +1192,7 @@ brandJson:function(){
     var _this = this;
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           _this.setData({
             signinlayer: true,
             tgabox: false
@@ -1309,7 +1310,7 @@ brandJson:function(){
     _this.data.page = 0;
     _this.brandinformation(1);
     // // 线上
-    // _this.commodityinformation(1,1);
+    _this.commodityinformation(1,1);
     // // 手作
     // _this.commodityinformation(1,2);
     // // 海外

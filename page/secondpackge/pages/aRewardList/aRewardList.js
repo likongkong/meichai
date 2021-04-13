@@ -29,14 +29,33 @@ Page({
     classifyName:'',
     classifyArr:[],
     ClassifyTabW:0, //分类tab宽
-    animationData:{}
+    animationData:{},
+    scene:''
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options) {
+      this.setData({
+        scene:options,
+      })
+    } 
     this.gitList();
   },
+
+  getWelfare(e){
+    this.setData({
+      welfare:e.detail.welfare
+    })
+  },
+  redpagshareimage(e){
+    console.log(e.detail,"111111")
+    this.setData({
+      redpagshareimg:e.detail
+    })
+  },
+
   gitList(){
     var _this = this;
     wx.showLoading({title: '加载中...',})
@@ -59,7 +78,7 @@ Page({
           }else{
             let alldata = [..._this.data.datalist,...res.data.List.activity];
             // console.log(alldata)
-            _this.setData({datalist : alldata,rewardswiperData:res.data.List.topicActivity,consumemessageData:res.data.List.record,classifyArr:res.data.List.classifyList})
+            _this.setData({datalist : alldata,rewardswiperData:res.data.List.topicActivity,consumemessageData:res.data.List.record,classifyArr:res.data.List.classifyList,countWelfare:res.data.Info.countWelfare})
             //创建节点选择器
             // var query = wx.createSelectorQuery();
             // query.select('#ele'+_this.data.classifyIndex).boundingClientRect();
@@ -140,11 +159,38 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function(options ) {
     var _this = this
     var share = {
       imageUrl:  "https://cdn.51chaidan.com/images/sign/yifanshangLisSharet.jpg"
     }
+    if( options.from == 'button' ){
+      var info = _this.data.welfare
+      var xilie = _this.data.welfare.roleName != "" ? "-" : ""
+      var title = ""
+      if(info.welfareType == 1){
+        title = "我抽到了"+ xilie + info.roleName + "，隐藏红包送给你们。"
+      } else if(info.welfareType == 2){
+        if (info.userId && info.userId != _this.data.uid) {
+          title = info.nick + "抽到了"+ xilie + info.roleName + "，幸运值红包送给你们。"
+        } else {
+          title = "我抽到了"+ xilie + info.roleName + "，幸运值红包送给你们。"
+        }
+      }else if(info.welfareType == 3){
+        if (info.userId && info.userId != _this.data.uid) {
+          title = info.nick + "抽到了"+ xilie + info.roleName + "，抽盒金红包送给你们。"
+        } else {
+          title = "我抽到了"+ xilie + info.roleName + "，抽盒金红包送给你们。"
+        }
+      }
+      var share = {
+        title: title,
+        imageUrl: _this.data.redpagshareimg,
+        path: "/page/secondpackge/pages/aRewardList/aRewardList?id=" + _this.data.scene.id + '&referee=' + _this.data.uid + '&gid=' + _this.data.scene.gid + '&welfareid=' + _this.data.scene.welfareid + '&isredpag=1',
+        success: function (res) {}
+      }
+    }
+
     return share;
   },
   onShareTimeline:function(){

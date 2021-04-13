@@ -51,8 +51,12 @@ scroll-view ::-webkit-scrollbar {
 .consumemessage{
   width: 720rpx;
   margin: 0 15rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .consumemessage swiper{
+  width: 80%;
   height: 80rpx;
 }
 .consumemessage .swiper-item>view{

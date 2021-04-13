@@ -173,6 +173,7 @@ Page({
     });
   },
   drawredpagshare: function (ind) {
+
     var _this = this
     var info = _this.data.listdata[ind]
     wx.getImageInfo({
@@ -180,9 +181,13 @@ Page({
       success: function (res) {
         const ctxt = wx.createCanvasContext('redpagshare');
         ctxt.drawImage(res.path, 0, 0, 300, 240)
+        console.log(444,_this.data.welfareInfo.roleImg)
+
         wx.getImageInfo({
           src: _this.data.welfareInfo.roleImg,
           success: function (res) {
+            console.log(555)
+
             var radio = res.width / res.height;
             var width = 80 * radio;
             if(width>110){
@@ -248,8 +253,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options,66666)
     this.setData({
-      headSel:options.hs || 1
+      headSel:options.hs || 1,
+      sourcePage:options.sourcePage || 0,
     })
     // 判断是否授权
     this.activsign();
@@ -304,7 +311,7 @@ Page({
     };    
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           // '已经授权'
           _this.setData({
             loginid: app.signindata.loginid,
@@ -348,7 +355,7 @@ Page({
     var _this = this;
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           _this.setData({
             signinlayer: true,
             tgabox: false
@@ -447,11 +454,22 @@ Page({
           title = "我抽到了" + xilie + "，抽盒金红包送给你们。"
         }
       }
-      var reshare = {
-        title: title,
-        imageUrl: _this.data.redpagshareimg,
-        path: "/pages/smokebox/smokebox?id=" + _this.data.id + '&referee=' + _this.data.uid + '&gid=' + _this.data.gid + '&welfareid=' + _this.data.welfareid + '&isredpag=1',
-        success: function (res) {}
+       
+      console.log(_this.data.redpagshareimg,'2222222')
+      if(this.data.sourcePage == 0){
+        var reshare = {
+          title: title,
+          imageUrl: _this.data.redpagshareimg,
+          path: "/pages/smokebox/smokebox?id=" + _this.data.id + '&referee=' + _this.data.uid + '&gid=' + _this.data.gid + '&welfareid=' + _this.data.welfareid + '&isredpag=1',
+          success: function (res) {}
+        }
+      }else if(this.data.sourcePage == 1){
+        var reshare = {
+          title: title,
+          imageUrl: _this.data.redpagshareimg,
+          path: "/page/secondpackge/pages/aRewardList/aRewardList?id=" + _this.data.id + '&referee=' + _this.data.uid + '&gid=' + _this.data.gid + '&welfareid=' + _this.data.welfareid + '&isredpag=1',
+          success: function (res) {}
+        }
       }
     } else {
       var reshare = app.sharemc();

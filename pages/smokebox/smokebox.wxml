@@ -90,7 +90,7 @@
 	</block>
 
 <!--   catchtap="{{welfare[0].welfareType == 2?'hidepackage':'toggleBlindboxPacket'}}"  -->
-	<view wx:if='{{welfare.length > 0}}' catchtap="jumpRedList" data-ind="{{welfare[0].welfareType == 2?'1':'2'}}" style='width:95rpx;position:absolute;right:5rpx;top:{{hideheight+310}}rpx;z-index:9;'>
+	<view wx:if='{{welfare.length > 0}}' catchtap="jumpRedList" data-sourcepage="0" data-ind="{{welfare[0].welfareType == 2?'1':'2'}}" style='width:95rpx;position:absolute;right:5rpx;top:{{hideheight+310}}rpx;z-index:9;'>
 		<block wx:if="{{welfare[0].welfareType == 2}}">
 			<view class="tabshopimg specialellipsis" style="top:-8rpx;left:56rpx;" wx:if='{{welfare&&welfare.length!=0&&welfare.length!=1}}'>{{welfare.length}}</view>
 			<image src='http://www.51chaidan.com/images/blindBox/doublePackage.png' style='width:75rpx;height:75rpx;display:block;git margin-left:10rpx;'></image>

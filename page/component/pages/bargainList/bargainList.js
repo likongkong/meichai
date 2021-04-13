@@ -62,7 +62,7 @@ Page({
     var _this = this
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           var tag = w.currentTarget.dataset.tag || w.target.dataset.tag;
           this.setData({
             isbargain: tag,
@@ -194,7 +194,7 @@ Page({
     var _this = this;
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           // 确认授权用户统计
           app.clicktga(4);
           _this.setData({
@@ -271,7 +271,7 @@ Page({
     var _this = this
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           //已经授权
           var id = w.currentTarget.dataset.id || w.target.dataset.id;
           var ishare = w.currentTarget.dataset.ishare || w.target.dataset.ishare;

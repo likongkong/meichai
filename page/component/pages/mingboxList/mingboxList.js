@@ -63,7 +63,7 @@ Page({
 
       wx.getSetting({
         success: res => {
-          if (res.authSetting['scope.userInfo']) {
+          if (true) {
             // '已经授权'
             _this.data.loginid = app.signindata.loginid;
             _this.data.openid = app.signindata.openid;
@@ -103,7 +103,7 @@ Page({
     var _this = this;
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           // 确认授权用户统计
           app.clicktga(4);
           _this.setData({
@@ -225,7 +225,7 @@ Page({
     var id = w.currentTarget.dataset.id || w.target.dataset.id||0;
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           wx.navigateTo({
             url: "/page/component/pages/mingbox/mingbox?gid=" + gid + '&id=' + id,
           });
@@ -322,7 +322,7 @@ Page({
     var path = w.currentTarget.dataset.path || w.target.dataset.path || '';
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           wx.navigateTo({
             url: path
           });
@@ -339,7 +339,7 @@ Page({
   jumpinitiateopenboxes:function(){
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           wx.navigateTo({
             url: "/page/component/pages/initiateopenboxeslist/initiateopenboxeslist",
           });   

@@ -314,8 +314,8 @@ Page({
       isharepag: false,
     })
   },
-  
   // 幸运值
+
   /**
    * 用户点击右上角分享
    */
@@ -686,6 +686,7 @@ Page({
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
+        console.log(res)
         WxParse.wxParse('article', 'html', res.data.tip, _this,5);
       }
     })
@@ -797,16 +798,16 @@ Page({
           // }
 
           // 幸运值
-
-          if (_this.data.firstshowredpag && res.data.List.welfare.length > 0 && res.data.List.welfare[0].currentAmount == 0 && _this.data.isredpag != 1) {
-            _this.hidepackage()
-            _this.setData({
-              redpagList: res.data.List.welfare || [],
-              firstshowredpag: false,
-            })
-          } else if (_this.data.firstshowredpag) {
-            _this.data.firstshowredpag = false
-          }
+          // if (_this.data.firstshowredpag && res.data.List.welfare.length > 0 && res.data.List.welfare[0].currentAmount == 0 && _this.data.isredpag != 1) {
+          //   _this.hidepackage()
+          //   _this.setData({
+          //     redpagList: res.data.List.welfare || [],
+          //     firstshowredpag: false,
+          //   })
+          // } else if (_this.data.firstshowredpag) {
+          //   _this.data.firstshowredpag = false
+          // }
+          
           _this.setData({
             userimg:userimg,
             goodsdata:goodsdata,
@@ -1201,7 +1202,7 @@ Page({
     }else{
       wx.getSetting({
         success: res => {
-          if (res.authSetting['scope.userInfo']) {
+          if (true) {
             // '已经授权'
             _this.setData({
               loginid: app.signindata.loginid,
@@ -1244,7 +1245,7 @@ Page({
     var _this = this;
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           _this.setData({
             signinlayer: true,
             tgabox: false
@@ -1436,6 +1437,12 @@ Page({
     var urlname = encodeURIComponent(name);
     wx.navigateTo({
       url: "/page/component/pages/ocamcart/ocamcart?name=" + urlname+"&but=shop&goods_id="+goods_id
+    });
+  },
+  jumpRedList(w){
+    var ind = w.currentTarget.dataset.ind;
+    wx.navigateTo({   
+      url: "/page/secondpackge/pages/redEnvelopeList/redEnvelopeList?hs=" + ind
     });
   },
   //关闭跳转其他一番赏弹框

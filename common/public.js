@@ -123,7 +123,7 @@ function comiftrsign(_this,res,app) {
     });
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           // '已经授权'
           app.signin(_this);
         } else {
