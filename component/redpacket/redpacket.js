@@ -323,8 +323,7 @@ Component({
     wx.getImageInfo({
       src: "https://www.51chaidan.com/images/blindBox/halfPackage.jpg",
       success: function (res) {
-        
-        const ctxt = wx.createCanvasContext('redpagshare');
+        const ctxt = wx.createCanvasContext('redpagshare',_this);
         ctxt.drawImage(res.path, 0, 0, 300, 240)
         wx.getImageInfo({
           src: info.roleImg,
@@ -364,7 +363,6 @@ Component({
                   _this.setData({
                     redpagshareimg: res.tempFilePath
                   })
-                  console.log('分享图====',res.tempFilePath)
                   _this.triggerEvent('redpagshareimage',res.tempFilePath)
                 },
                 fail: function (res) {},
