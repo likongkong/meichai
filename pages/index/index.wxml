@@ -102,10 +102,8 @@
 				<view class='disanumofgoods_box' wx:if='{{item.List.length!=0}}'>
 					<view class='disanum_scr'>
 						<scroll-view scroll-x="true" class="disanum_tab_comtainer">
-							<view class='disanum_scr_box' wx:for='{{item.List}}' wx:key='key' wx:for-item='w' style='height:119rpx;width:222rpx;'>
-								<view class='disanum_simgbox' catchtap='activitydetailspage' data-id='{{w.id}}' style='height:119rpx;width:222rpx;'>
-									<image class='disanum_simg' src='{{w.cover}}' style='height:119rpx;width:222rpx;'></image>
-								</view>
+							<view wx:for='{{item.List}}' wx:key='key' wx:for-item='w' style='height:119rpx;display: inline-block;vertical-align: top;margin-right: 20rpx;' catchtap='activitydetailspage' data-id='{{w.id}}'>
+								<image mode="heightFix" src='{{w.cover}}' style='border-radius:10rpx;height:119rpx;width:auto;display:block;'></image>
 							</view>
 							<view class='disanum_scr_box' style='height:118rpx;' wx:if='{{item.List.length>=4&&item.item_type}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}' catchtap='imgcomindellistjump'>
 									<view class='disanum_stxt' style='top:0;width:118rpx;height:118rpx;'>

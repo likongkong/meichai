@@ -433,7 +433,7 @@
           <view class='actrecactcont' wx:if='{{actrecactlist.length!=0}}'>
             <scroll-view scroll-x="true" bindscrolltolower='loaddataright' class="scractrecactcont" scroll-with-animation="true" scroll-left='{{actscrollleft}}'>
               <view class='scractrecacteve' wx:for='{{actrecactlist}}' wx:key='key' catchtap='actexempfun' data-gid="{{item.id}}" wx:if='{{item.status!=3}}'>
-                <image class='actrecimg' src='{{item.cover}}'></image>
+                <image class='actrecimg' mode="aspectFit" src='{{item.cover}}'></image>
                 <view class='bctitle multilineellipsis' style='font-size:22rpx;padding:0;width:100%;height:76rpx;'>
                   <block wx:if='{{item.status==1||item.status==0}}'>报名时间 {{item.start_time}}</block>
                   <block wx:if='{{item.status==3}}'>已开奖</block>
@@ -824,12 +824,18 @@
                 <view class='dpImGLeft'>
                   <view class='duIgLefH multilineellipsis'>{{item.goods_name}}</view>
                   <view style='width:100%;height:40rpx;line-height:40rpx;text-align:left;'>
-                    <text style='font-size:30rpx;color:#000;font-weight:bold;height:40rpx;'>￥{{item.gsales}}{{item.gsale_suit}}</text>
+                    <text style='font-size:30rpx;color:#000;font-weight:bold;height:40rpx;'><block wx:if='{{item.goods_type==3}}'>定金</block>￥{{item.gsales}}{{item.gsale_suit}}</text>
                     <text style='font-size:22rpx;color:#fff;margin-left:15rpx;background:#1890ff;border-radius:7rpx;position:relative;top:-2rpx;padding:3rpx 6rpx;' wx:if='{{item.type==5&&item.isRecycle&&item.recycleRatio}}'>{{item.recycleRatio}}折回收</text>
                   </view>
                 </view>
-              <view class='Directmay'>
-                  <block wx:if='{{item.type==3}}'>
+              <view class='Directmay' style="{{item.promote_start_date&&item.promote_start_date>timestamp?'background:#eeae19;border: 1rpx solid #eeae19;color:#fff;':''}}">
+                  <block wx:if='{{item.promote_start_date && item.promote_start_date>timestamp}}'>
+                      <view style='height:22px;line-height:22px;font-size:12px;' catchtap='addressmanagement' data-gid='{{item.goods_id}}'>
+                        <block wx:if='{{item.goods_type==3}}'>定金订阅</block>
+                        <block wx:else>订阅提醒</block>                        
+                      </view>
+                  </block>
+                  <block wx:elif='{{item.type==3}}'>
                     <view style='color:#F93F45;height:22px;line-height:22px;font-size:12px;' catchtap='showboxlistfun' data-id='{{item.goods_id}}'>原价拼明盒</view>
                   </block>
                   <block wx:elif='{{item.type==5}}'>

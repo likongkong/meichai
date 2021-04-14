@@ -319,7 +319,8 @@ Page({
     sigListdata:[],
     rLUserLotto:{},
     muSnData:[],
-    multipleDisplay:''
+    multipleDisplay:'',
+    timestamp:Date.parse(new Date()) / 1000
   },
   wonOrNot(){
     this.setData({wonOrNot:!this.data.wonOrNot})
