@@ -670,8 +670,12 @@
 
 <view style='width:100%;position:fixed;left:0;bottom:0;border-top:1px solid #e5e5e5;background:#fff;z-index:5;'>
   <block wx:if='{{scrollTopPage>windowHeight}}'>
-			<view style='width:100%;height:130rpx;background:#fff;border-bottom:1px solid #f9f7f7;' wx:if='{{infoGoods.is_on_sale==1||infoGoods.isShowBox}}' catchtap='jumpdetail' data-is_blind_box='{{infoGoods.is_blind_box}}'>
+			<view style='width:100%;height:130rpx;background:#fff;border-bottom:1px solid #f9f7f7;position:relative;' wx:if='{{infoGoods.is_on_sale==1||infoGoods.isShowBox}}' catchtap='jumpdetail' data-is_blind_box='{{infoGoods.is_blind_box}}'>
+				
+				<view class="DirectpurchaseClick" catchtap='jumpdetail' data-ind='1' data-is_blind_box='{{infoGoods.is_blind_box}}'></view>
+				
 				<image src='{{infoGoods.goods_thumb}}' style='display:block;width:110rpx;height:110rpx;float:left;margin:15rpx;' mode='aspectFit'></image>
+
 				<view style='width:600rpx;height:110rpx;float:left;position:relative;margin-top:10rpx;'>
 					<view class='multilineellipsis' style='height:58rpx;width:450rpx;font-size:28rpx;color:#666;line-height:30rpx;'>{{infoGoods.goods_name}}</view>
 					<view style='width:100%;height:40rpx;line-height:40rpx;font-size:28rpx;margin-top:10rpx;'>
