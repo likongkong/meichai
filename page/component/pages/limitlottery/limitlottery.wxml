@@ -350,7 +350,11 @@
 						</view>
 
 						<block wx:if='{{promote_start_date}}'>
-								 <view style='width:130rpx;height:46rpx;background:#eeae19;font-size:24rpx;color:#fff;text-align:center;line-height:46rpx;border-radius:10rpx;position:absolute;top:0;bottom:0;right:10rpx;margin:auto 0;z-index:1;'>{{subscribeOrNot?"订阅成功":"订阅提醒"}}</view>
+								 <view style='width:130rpx;height:46rpx;background:#eeae19;font-size:24rpx;color:#fff;text-align:center;line-height:46rpx;border-radius:10rpx;position:absolute;top:0;bottom:0;right:10rpx;margin:auto 0;z-index:1;'>
+										<block wx:if='{{subscribeOrNot}}'>订阅成功</block>
+										<block wx:elif='{{infoGoods.goods_type==3}}'>定金订阅</block>
+										<block wx:else>订阅提醒</block>
+								 </view>
 						</block>
 						<block wx:else>
 
@@ -675,7 +679,11 @@
 					
           <block wx:if='{{promote_start_date}}'>
 
-							<view style='width:130rpx;height:46rpx;background:#eeae19;font-size:24rpx;color:#fff;text-align:center;line-height:46rpx;border-radius:10rpx;position:absolute;top:0;bottom:0;right:10rpx;margin:auto 0;z-index:1;'>{{subscribeOrNot?"订阅成功":"订阅提醒"}}</view>
+							<view style='width:130rpx;height:46rpx;background:#eeae19;font-size:24rpx;color:#fff;text-align:center;line-height:46rpx;border-radius:10rpx;position:absolute;top:0;bottom:0;right:10rpx;margin:auto 0;z-index:1;'>
+								<block wx:if='{{subscribeOrNot}}'>订阅成功</block>
+								<block wx:elif='{{infoGoods.goods_type==3}}'>定金订阅</block>
+								<block wx:else>订阅提醒</block>
+							</view>
 
 					</block>
 					<block wx:else>
