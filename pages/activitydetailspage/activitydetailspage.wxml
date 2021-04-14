@@ -830,7 +830,7 @@
                 </view>
               <view class='Directmay' style="{{item.promote_start_date&&item.promote_start_date>timestamp?'background:#eeae19;border: 1rpx solid #eeae19;color:#fff;':''}}">
                   <block wx:if='{{item.promote_start_date && item.promote_start_date>timestamp}}'>
-                      <view style='height:22px;line-height:22px;font-size:12px;' catchtap='addressmanagement' data-gid='{{item.goods_id}}'>
+                      <view style='height:22px;line-height:22px;font-size:12px;' catchtap='subscrfunstar' data-gid='{{item.goods_id}}'>
                         <block wx:if='{{item.goods_type==3}}'>定金订阅</block>
                         <block wx:else>订阅提醒</block>                        
                       </view>
