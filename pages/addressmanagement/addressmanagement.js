@@ -44,7 +44,8 @@ Page({
             header: { 'Accept': 'application/json' },
             success: function (res) {
               if (res.data.ReturnCode == 200) {
-                app.showToastC('设置成功');
+                // app.showToastC('设置成功');
+                app.showModalC('默认地址更新成功，您再次购买自动发货商品将为您发到此地址')
               }else if (res.data.ReturnCode == 900) {
                 app.showToastC('登陆状态有误');
               }else if (res.data.ReturnCode == 908) {
