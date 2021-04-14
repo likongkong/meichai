@@ -154,7 +154,6 @@ Page({
   },
   //跳转商品详情
   jumpGoodsDetails(w){
-    return false;
     var gid = w.currentTarget.dataset.gid || w.target.dataset.gid;
     wx.navigateTo({
       url: "/pages/detailspage/detailspage?gid=" + gid,
