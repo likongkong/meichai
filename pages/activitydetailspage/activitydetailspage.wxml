@@ -820,6 +820,19 @@
         <block wx:if='{{commoddata.isDirect}}'>
           <swiper-item wx:for='{{commoddata.arrDirect}}' wx:key='key'>
             <view class='Directpurchase'>
+                  <block wx:if='{{item.promote_start_date && item.promote_start_date>timestamp}}'>
+                      <view class="DirectpurchaseClick" catchtap='addressmanagement' data-gid='{{item.goods_id}}'></view>
+                  </block>
+                  <block wx:elif='{{item.type==3}}'>
+                    <view class="DirectpurchaseClick" catchtap='showboxlistfun' data-id='{{item.goods_id}}'></view>
+                  </block>
+                  <block wx:elif='{{item.type==5}}'>
+                    <view class="DirectpurchaseClick" catchtap='addresssmokebox' data-gid='{{item.goods_id}}'></view>
+                  </block>
+                  <block wx:else>
+                    <view class="DirectpurchaseClick" catchtap='addressmanagement' data-gid='{{item.goods_id}}'></view>
+                  </block>
+
                 <image src='{{item.gcover}}' class='dpImG'></image>
                 <view class='dpImGLeft'>
                   <view class='duIgLefH multilineellipsis'>{{item.goods_name}}</view>

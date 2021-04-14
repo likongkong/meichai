@@ -2067,7 +2067,14 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
     var _this = this;
     var is_blind_box = w.currentTarget.dataset.is_blind_box || w.target.dataset.is_blind_box || 0;
     if(_this.data.promote_start_date){
-       _this.subscrfun(1);
+      var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
+      if(ind == 1){
+        wx.navigateTo({
+          url: "/pages/detailspage/detailspage?gid=" + _this.data.infoActivity.goods_id||'',
+        });
+      }else{
+        _this.subscrfun(1);
+      };
     }else if(_this.data.infoGoods.isShowBox){
       wx.navigateTo({
         url: "/page/component/pages/mingboxList/mingboxList",
