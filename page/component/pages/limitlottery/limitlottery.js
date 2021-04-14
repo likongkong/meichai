@@ -1411,7 +1411,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
       var urlpath = "/page/component/pages/limitlottery/limitlottery?id=" + _this.data.infoActivity.id + '&referee=' + _this.data.uid + '&gid=' + _this.data.gid + '&list='+_this.data.isList;
     };
 
-    if(_this.data.infoActivity.lottoPrice){
+    if(_this.data.infoActivity.lottoPrice>=0){
       var shareName = _this.data.infoActivity.lottoPrice + "元购 " + _this.data.infoActivity.name; 
     }else{
       var shareName = _this.data.infoGoods.shop_price + "元购 " + _this.data.infoActivity.name;

@@ -2944,9 +2944,9 @@ Page({
             clearInterval(_this.data.wintheprtintervaldetail);
             _this.winningtheprizetimedetail(1613318400);
           }
-           if(res.data.Ginfo.gid == 37197){
+           if(res.data.Ginfo.gid == 37490){
             clearInterval(_this.data.wintheprtintervaldetail);
-            _this.winningtheprizetimedetail(1615737600);
+            _this.winningtheprizetimedetail(1618675200);
           }
           
           // if(res.data.Ginfo&&res.data.Ginfo.brandId>0){

@@ -107,7 +107,7 @@
 		</view>
 		<view wx:else style="width:100%;font-size:27rpx;margin-bottom:20rpx;overflow: hidden;">
 			<view style="width:70%;padding:0 20rpx;float:left;">Vol.{{infoActivity.id}} {{infoActivity.name}}</view>
-			<view style="width:15%;padding:0 20rpx;color:#FE666B;text-align:right;float:right;">￥<block wx:if='{{infoActivity.lottoPrice}}'>{{infoActivity.lottoPrice}}</block><block wx:else>{{infoGoods.shop_price}}</block></view> 
+			<view style="width:15%;padding:0 20rpx;color:#FE666B;text-align:right;float:right;">￥<block wx:if='{{infoActivity.lottoPrice>=0}}'>{{infoActivity.lottoPrice}}</block><block wx:else>{{infoGoods.shop_price}}</block></view> 
 		</view>
 	
 	</block>
