@@ -4162,6 +4162,16 @@ closefrindcommoni:function(){
       }
     })
   },
+
+  // 更新用户信息
+  getUserProfile(w){
+    app.getUserProfile((res,userInfo) => {
+        this.data.avatarUrl=userInfo.avatarUrl;
+        this.data.nickName=userInfo.nickName;
+        this.data.gender=userInfo.gender;
+      this.upserimgboxiftrWinningtheprize(w)
+    })
+  },
   //  晒单
   upserimgboxiftrWinningtheprize: function (w) {
     var qrcode = w.currentTarget.dataset.qrcode || w.target.dataset.qrcode;  // 太阳码

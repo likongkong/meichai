@@ -1571,19 +1571,22 @@ Page({
     var _this = this;
     _this.setData({ headhidden: false, actimgshare: ''});
     wx.showLoading({ title: '加载中...', })
+
     var ctxt = wx.createCanvasContext('myordercanimgser' + cart_idsave)
     var generatePicturesimg = _this.data.generatePicturesimg||{};
     if (generatePicturesimg['myordercanimgser' + cart_idsave]){
     }else{
     }
-    if (generatePicturesimg['myordercanimgser' + cart_idsave]){
-      _this.setData({
-        actimgshare: generatePicturesimg['myordercanimgser' + cart_idsave],
-        headhidden: true,
-      });
-      wx.hideLoading()
-      return false;
-    };
+    // if (generatePicturesimg['myordercanimgser' + cart_idsave]){
+    //   _this.setData({
+    //     actimgshare: generatePicturesimg['myordercanimgser' + cart_idsave],
+    //     headhidden: true,
+    //   });
+    //   wx.hideLoading()
+    // console.log(121212,generatePicturesimg)
+
+    //   return false;
+    // };
     if (order_type==10){
       _this.generatePicturesbs(cart_idsave);
       return false;
@@ -1591,10 +1594,11 @@ Page({
 
     const path = wx.getStorageSync('image_cache')
     var uidimg = app.signindata.avatarUrl || 'https://static.51chaidan.com/images/headphoto/' + _this.data.uid + '.jpg';
+
     if (uidimg) {
       var tdavatar = uidimg;
     } else if (path != null) {
-      if (path) { var tdavatar = path; } else { var tdavatar = _this.data.avatarUrl; };
+      if (path) { var tdavatar = path; console.log(55555555555)} else { var tdavatar = _this.data.avatarUrl; console.log(66666666666)};
     } else {
       var tdavatar = _this.data.avatarUrl;
     };
@@ -2406,6 +2410,15 @@ Page({
   // 关闭保存图片上传图片
   closeupserimg: function () {
     this.setData({ upserimgbox: false, actimgshare: '' });
+  },
+  // 更新用户信息
+  getUserProfile(w){
+    app.getUserProfile((res,userInfo) => {
+        this.data.avatarUrl=userInfo.avatarUrl;
+        this.data.nickName=userInfo.nickName;
+        this.data.gender=userInfo.gender;
+      this.upserimgboxiftr(w)
+    })
   },
   upserimgboxiftr: function (w) {
     var _this = this;

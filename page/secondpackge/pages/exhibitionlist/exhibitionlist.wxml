@@ -84,9 +84,9 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
 			<view class='disanumofgoods_box' wx:if='{{item.detail.length!=0}}'>
 				<view class='disanum_scr'>
 					<scroll-view scroll-x="true" class="disanum_tab_comtainer">
-						<view wx:for='{{item.detail}}' wx:key='key' wx:for-item='w' class='cardstyle' style='width:250rpx;'>
+						<view wx:for='{{item.detail}}' wx:key='key' wx:for-item='w' wx:for-index="idx" class='cardstyle' style='width:250rpx;'>
 							<view class='disanum_simgbox' catchtap='jumpexhdetail' data-brandid='{{item.brandId}}' data-id='{{w.id}}' data-type='{{item.type}}' style='height:134rpx;width:250rpx;'>
-								<image class='disanum_simg' src='{{w.images}}?imageMogr2/thumbnail/x238' style='height:134rpx;width:250rpx;'></image>
+								<image class='disanum_simg' src='{{w.images}}?imageMogr2/thumbnail/x238' data-idx='{{idx}}' data-ind='{{index}}' data-height='134' style='height:134rpx;width:{{w.width || 134}}rpx;'></image>
 							</view>
 							<view class="exibactna specialellipsis">{{w.name}}</view>
 						</view>

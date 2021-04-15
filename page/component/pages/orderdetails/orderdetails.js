@@ -1818,6 +1818,15 @@ Page({
   closeupserimg: function () {
     this.setData({ upserimgbox: false, actimgshare: '' });
   },
+  // 更新用户信息
+  getUserProfile(w){
+    app.getUserProfile((res,userInfo) => {
+      this.data.avatarUrl=userInfo.avatarUrl;
+      this.data.nickName=userInfo.nickName;
+      this.data.gender=userInfo.gender;
+      this.upserimgboxiftr(w)
+    })
+  },
   upserimgboxiftr: function (w) {
     var _this = this;
     var qrcode = w.currentTarget.dataset.qrcode || w.target.dataset.qrcode;  // 太阳码

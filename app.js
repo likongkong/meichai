@@ -166,6 +166,7 @@ App({
           success: function (res) {
             console.log('wx.login=====',res)
             var code = res.code;
+            console.log('code====',code)
             // console.log('wx.getUserInfo',wx.canIUse('getUserInfo'))
             // wx.getUserInfo({
             //   success: function (res) {
@@ -1339,6 +1340,56 @@ App({
       }
     });
   },
+  // 获取用户头像名称授权
+  getUserProfile(successCallback, errorCallback){
+    var _this = this;
+    console.log(wx.canIUse('getUserProfile'),wx.canIUse('getUserProfile'))
+    // 请选择与登录信息相同账号，头像昵称不同会导致审核不通过
+    wx.getUserProfile({
+        lang: 'zh_CN',
+        desc:'获取你的昵称、头像、地区及性别',
+        success(res){
+          console.log(res)
+
+          var userInfo = res.userInfo || {};
+
+          console.log('mod=userinfo&operation=setinfo&uid=' + _this.signindata.uid + '&loginid=' + _this.signindata.loginid + '&nick=' + userInfo.nickName + '&gender=' + userInfo.gender + '&headphoto=' + userInfo.avatarUrl + '&nick=' + encodeURIComponent(userInfo.nickName))
+
+          var qq = Dec.Aese('mod=userinfo&operation=setinfo&uid=' + _this.signindata.uid + '&loginid=' + _this.signindata.loginid + '&nick=' + userInfo.nickName + '&gender=' + userInfo.gender + '&headphoto=' + userInfo.avatarUrl + '&nick=' + encodeURIComponent(userInfo.nickName) );
+
+          wx.request({
+            url: _this.signindata.comurl + 'user.php' + qq,
+            method: 'GET',
+            header: { 'Accept': 'application/json' },
+            success: function (res) {
+              console.log('设置头像名称=====',res)
+              if (res.data.ReturnCode == 200) {
+                _this.signindata.avatarUrl = userInfo.avatarUrl;
+                _this.signindata.nickName = userInfo.nickName;
+                _this.signindata.userInfo = userInfo || {};
+                wx.showToast({
+                  title: '设置成功',
+                  icon: 'none',
+                  mask:true,
+                  duration:1500
+                });   
+                setTimeout(function(){
+                  successCallback(res,userInfo);
+                },1500)
+              };
+            },
+            fail(res){
+              errorCallback(res)
+            }
+          }) 
+
+
+        },
+        fail(res){
+          console.log(res)
+        }
+    })
+  }
 
 
 })

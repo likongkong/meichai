@@ -94,7 +94,7 @@ Component({
         return;
       }; 
       // app.signindata.isOpenToyShow
-      if(false){
+      if(true){
         wx.navigateTo({
           url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
         });

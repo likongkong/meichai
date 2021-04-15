@@ -273,9 +273,9 @@
                       <view style='width:100%;height:100%;'></view>
                   </view>
                   <!-- clickiftr 3 上传晒单截图 -->
-                  <view wx:if='{{item.clickiftr==3}}' data-qrcode='{{commoddata.qrcode}}' data-awardinfo='{{commoddata.award_info}}' data-cover='{{commoddata.cover}}' data-showorder='{{commoddata.showOrder}}' data-cart_id='{{commoddata.cart_id}}' catchtap='upserimgboxiftrWinningtheprize'
-                    style='width:100%;height:100%;position: absolute;left:0;top:0;z-index:3;'>
+                  <view wx:if='{{item.clickiftr==3}}' style='width:100%;height:100%;position: absolute;left:0;top:0;z-index:3;'>
                       <view style='width:100%;height:100%;'></view>
+                      <button class='tgaboxtgawchbochlibutboxtwo' type='primary' bindtap="getUserProfile" data-qrcode='{{commoddata.qrcode}}' data-awardinfo='{{commoddata.award_info}}' data-cover='{{commoddata.cover}}' data-showorder='{{commoddata.showOrder}}' data-cart_id='{{commoddata.cart_id}}'></button>
                   </view>
                   <!-- clickiftr 4 领取奖励 -->
                   <view wx:if='{{item.clickiftr==4}}' catchtap='clicktocollect' style='width:100%;height:100%;position: absolute;left:0;top:0;z-index:3;'>
