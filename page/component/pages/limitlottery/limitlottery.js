@@ -427,7 +427,7 @@ Page({
    */
   onLoad: function (options) {
     var _this = this;
-
+    app.signindata.suap = 20;
     console.log('options========',options)
     if (options.scene) {
       let scene = decodeURIComponent(options.scene);

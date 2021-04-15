@@ -227,6 +227,7 @@ Page({
   onLoad: function (options) {
     // wx.hideShareMenu();
     var _this = this;
+    app.signindata.suap = 11;
     if (options.scene) {
       let scene = decodeURIComponent(options.scene);
       app.signindata.referee = _this.getSearchString('referee', scene) || 0;

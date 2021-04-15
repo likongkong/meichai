@@ -2297,7 +2297,7 @@ closefrindcommoni:function(){
   },
   onLoad: function (options) {
     console.log('options======',options)
-
+    app.signindata.suap = 10;
     var _this = this;
     this.data.ctxt = wx.createCanvasContext('myordercanimgser');
     _this.data.loginid = app.signindata.loginid;

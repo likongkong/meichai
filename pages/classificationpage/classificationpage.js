@@ -99,6 +99,7 @@ Page({
       loginid: app.signindata.loginid,
       uid: app.signindata.uid
     }); 
+    app.signindata.suap = 8;
     var mername = w.wname || '每日一拆';
     var wcate = w.cate ||'';
     var wcate_id = w.cate_id || '';

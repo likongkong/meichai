@@ -3097,7 +3097,7 @@ Page({
   onLoad: function (options) { 
 
 
-
+    app.signindata.suap = 7;
     console.log(options)
     this.data.gdt_vid = options.gdt_vid||'';
     this.data.weixinadinfo = options.weixinadinfo||'';

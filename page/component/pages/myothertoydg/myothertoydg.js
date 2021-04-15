@@ -807,6 +807,7 @@ Page({
   onLoad: function (options) {
     // 判断是否授权  
     var _this = this;
+    app.signindata.suap = 17;
     if (options.scene) {
       let scene = decodeURIComponent(options.scene);
       _this.data.ownerId = _this.getSearchString('ownerId', scene) || 0;

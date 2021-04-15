@@ -192,7 +192,7 @@ Page({
   onLoad: function (options) {
     // wx.hideShareMenu();
     var _this = this;
-
+    app.signindata.suap = 12;
     // 判断是否授权
     this.activsign();
 

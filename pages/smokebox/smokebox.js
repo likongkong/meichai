@@ -459,7 +459,7 @@ Page({
         is_share: options.referee ? true : false
       })
     }
-
+    app.signindata.suap = 3;
 
     // 推送统计
     _this.data.push_id = options.push_id || 0;

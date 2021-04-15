@@ -41,6 +41,7 @@ Page({
         scene:options,
       })
     } 
+    app.signindata.suap = 14;
     this.gitList();
   },
 

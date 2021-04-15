@@ -603,6 +603,7 @@ Page({
   onLoad: function (options) {
     console.log('onload=============',options)
     var _this = this;
+    app.signindata.suap = 15;
     wx.getSystemInfo({
       success: function (res) {
         _this.setData({

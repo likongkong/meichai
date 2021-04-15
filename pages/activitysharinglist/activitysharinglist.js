@@ -338,7 +338,7 @@ Page({
       // 适配苹果X 
       isIphoneX: app.signindata.isIphoneX
     });
-
+    app.signindata.suap = 9;
     if(app.signindata.sceneValue==1154){
       app.signindata.isProduce = true;
       _this.setData({isProduce:true}); 

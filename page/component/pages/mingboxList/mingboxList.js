@@ -43,6 +43,7 @@ Page({
     var _this = this;
     _this.data.loginid = app.signindata.loginid;
     _this.data.openid = app.signindata.openid;
+    app.signindata.suap = 18;
     _this.setData({
       uid: app.signindata.uid,
       isProduce: app.signindata.isProduce,

@@ -230,7 +230,7 @@ Page({
     var _this = this;
     app.signindata.referee = options.referee || 0;
     app.signindata.activity_id = options.id || 0;
-
+    app.signindata.suap = 19;
 
     _this.data.loginid = app.signindata.loginid;
     _this.data.openid = app.signindata.openid;

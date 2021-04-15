@@ -531,7 +531,7 @@ Page({
       shareId:options.shareId||'',
       referee:options.referee||''
     })
-
+    app.signindata.suap = 6;
     // 推送统计
     this.data.push_id = options.push_id || 0;
 
