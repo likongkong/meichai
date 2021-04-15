@@ -42,7 +42,96 @@ Page({
       })
     } 
     app.signindata.suap = 14;
+    // 判断是否授权
+    this.activsign();
+  },
+  onLoadfun:function(){
+    this.setData({
+      loginid: app.signindata.loginid,
+      uid: app.signindata.uid,
+      openid: app.signindata.openid,
+      isProduce: app.signindata.isProduce
+    });
     this.gitList();
+  },
+  activsign: function () {
+    // 判断是否授权 
+    var _this = this;
+    // 判断是否登录
+    if (_this.data.loginid != '' && _this.data.uid != '') {
+      _this.onLoadfun();
+      return false;
+    };    
+
+    if(app.signindata.sceneValue==1154){
+      app.signindata.isProduce = true;  
+      _this.onLoadfun();
+    }else{
+      wx.getSetting({
+        success: res => {
+          if (true) {
+            // '已经授权'
+            _this.setData({
+              loginid: app.signindata.loginid,
+              uid: app.signindata.uid,
+              openid: app.signindata.openid,
+              avatarUrl: app.signindata.avatarUrl,
+              isShareFun: app.signindata.isShareFun,
+              isProduce: app.signindata.isProduce,
+              signinlayer: true,
+              tgabox: false
+            });
+            // 判断是否登录
+            if (_this.data.loginid != '' && _this.data.uid != '') {
+              _this.onLoadfun();
+            } else {
+              app.signin(_this);
+            }
+          } else {
+            _this.setData({
+              tgabox: false,
+              signinlayer: false
+            })
+            // '没有授权 统计'
+            app.userstatistics(43);
+            _this.onLoadfun();
+          }
+        }
+      });  
+    };    
+  },
+  // 授权点击统计
+  clicktga: function () {
+    app.clicktga(2)
+  },
+  clicktganone: function () {
+    this.setData({ tgabox: false })
+  },
+  // 点击登录获取权限
+  userInfoHandler: function (e) {
+    var _this = this;
+    wx.getSetting({
+      success: res => {
+        if (true) {
+          _this.setData({
+            signinlayer: true,
+            tgabox: false
+          });
+          _this.activsign();
+          // 确认授权用户统计
+          app.clicktga(4);          
+        }
+      }
+    });
+    if (e.detail.detail.userInfo) { } else {
+      app.clicktga(8)  //用户按了拒绝按钮
+    };
+  },
+  pullupsignin: function () {
+    // // '没有授权'
+    this.setData({
+      tgabox: true
+    });
   },
 
   getWelfare(e){

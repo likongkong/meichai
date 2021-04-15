@@ -78,9 +78,24 @@ Component({
     framtop: (app.signindata.windowHeight - 400) / 2,
     pmc:true,
   },
-
-  attached: function () {
-   
+  lifetimes: {
+    attached: function() {
+      // 在组件实例进入页面节点树时执行
+      this.setData({
+        loginid: app.signindata.loginid,
+        uid: app.signindata.uid,
+      });
+    },
+    ready: function() {
+      this.setData({
+        loginid: app.signindata.loginid,
+        uid: app.signindata.uid,
+      });
+    },
+    detached: function() {
+      // 在组件实例被从页面节点树移除时执行
+    },
+    
   },
   /**
    * 组件的方法列表
@@ -153,7 +168,6 @@ Component({
     wx.showLoading({
       title: '开启中...',
     })
-    
     if(_this.data.pmc){
       console.log('_this.data.pmc========',_this.data.pmc)
       _this.data.pmc = false;
@@ -163,13 +177,24 @@ Component({
         method: 'GET',
         header: {'Accept': 'application/json'},
         success: function (res) {
+          console.log('开启红包======',res)
           wx.hideLoading()
           _this.data.pmc = true;
           if (res.data.ReturnCode == 200) {
-            app.showToastC('领取成功');
+            wx.showToast({
+              title: '领取成功',
+              icon: 'none',
+              mask:true,
+              duration:1500
+            }); 
             _this.redpagInfo(welfareId)
           } else {
-            app.showToastC(res.data.Msg);
+            wx.showToast({
+              title: res.data.Msg,
+              icon: 'none',
+              mask:true,
+              duration:1500
+            }); 
             if(_this.data.welfare && _this.data.welfare.length != 0 && _this.data.welfare[0]){
               if(_this.data.welfare[0].welfareType == 2){
                 _this.setData({
@@ -259,7 +284,12 @@ Component({
           _this.triggerEvent('getWelfare',getWelfaredada)
 
         } else {
-          app.showToastC(res.data.Msg);
+          wx.showToast({
+            title: res.data.Msg,
+            icon: 'none',
+            mask:true,
+            duration:1500
+          }); 
         }
       }
     });
@@ -304,7 +334,12 @@ Component({
             })
           }
         } else {
-          app.showToastC(res.data.Msg);
+          wx.showToast({
+            title: res.data.Msg,
+            icon: 'none',
+            mask:true,
+            duration:1500
+          }); 
         }
       }
     });
