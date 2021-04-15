@@ -166,6 +166,7 @@ App({
           success: function (res) {
             console.log('wx.login=====',res)
             var code = res.code;
+            console.log('wx.getUserInfo',wx.canIUse('getUserInfo'))
             wx.getUserInfo({
               success: function (res) {
                 console.log('wx.getUserInfo========',res)
@@ -305,8 +306,13 @@ App({
                   }
                 })
               },
-              fail: function(){
+              fail: function(res){
+                console.log('wx.getUserInfo失败',res)
                 _this.signindata.is_sigin = true;
+              },
+              complete(res){
+                console.log('complete====',res)
+
               }
             })
           },
