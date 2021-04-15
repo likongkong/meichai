@@ -166,14 +166,14 @@ App({
           success: function (res) {
             console.log('wx.login=====',res)
             var code = res.code;
-            console.log('wx.getUserInfo',wx.canIUse('getUserInfo'))
-            wx.getUserInfo({
-              success: function (res) {
-                console.log('wx.getUserInfo========',res)
-                var resiv = res.iv;
-                
-                var encryptedData = res.encryptedData;
+            // console.log('wx.getUserInfo',wx.canIUse('getUserInfo'))
+            // wx.getUserInfo({
+            //   success: function (res) {
+                // console.log('wx.getUserInfo========',res)
 
+
+                var resiv ='';
+                var encryptedData = '';
                 if (BSkipData && typeof (BSkipData) != "undefined") { //如果B端过来需要额外传递数据
                   var q = Dec.Aese('operation=xcx&mod=login&code=' + code + '&iv=' + resiv + '&encryptedData=' + encryptedData + '&referee=' + _this.signindata.referee + '&activity_id=' + _this.signindata.activity_id + '&channel=' + _this.signindata.channel + '&last_store_id=' + _this.signindata.global_store_id + '&token=' + _this.signindata.token + '&share_source=' + _this.signindata.share_source + '&tid=' + _this.signindata.tid + "&isBusinessSkip=" + BSkipData.isBusinessSkip + "&businessClientUserId=" + BSkipData.businessClientUserId +
                     "&isMergedUserInfo=" + BSkipData.isMergedUserInfo + '&activity_type=' + _this.signindata.activity_type);
@@ -305,16 +305,16 @@ App({
                     // };
                   }
                 })
-              },
-              fail: function(res){
-                console.log('wx.getUserInfo失败',res)
-                _this.signindata.is_sigin = true;
-              },
-              complete(res){
-                console.log('complete====',res)
+            //   },
+            //   fail: function(res){
+            //     console.log('wx.getUserInfo失败',res)
+            //     _this.signindata.is_sigin = true;
+            //   },
+            //   complete(res){
+            //     console.log('complete====',res)
 
-              }
-            })
+            //   }
+            // })
           },
           fail: function(){
             _this.signindata.is_sigin = true;

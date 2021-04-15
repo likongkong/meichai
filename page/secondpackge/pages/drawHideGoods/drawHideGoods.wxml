@@ -143,8 +143,8 @@
   <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"></button>
 </view>
 
-
-<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler' bind:userProfile="userProfile"></tga_c>
+<!-- bind:userProfile="userProfile" -->
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler' ></tga_c>
 <view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>
 
 

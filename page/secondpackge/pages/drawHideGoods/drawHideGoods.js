@@ -58,7 +58,7 @@ Page({
     };    
     wx.getSetting({
       success: res => {
-        if (_this.data.loginid != '' && _this.data.uid != '') {
+        if (true) {
           console.log(1111111111)
           // '已经授权'
           _this.setData({
@@ -103,23 +103,13 @@ Page({
     wx.getSetting({
       success: res => {
         if (true) {
-          // '已经授权'
           _this.setData({
-            loginid: app.signindata.loginid,
-            uid: app.signindata.uid,
-            openid: app.signindata.openid,
-            avatarUrl: app.signindata.avatarUrl,
-            isShareFun: app.signindata.isShareFun,
-            isProduce: app.signindata.isProduce,
             signinlayer: true,
             tgabox: false
           });
-          // 判断是否登录
-          if (_this.data.loginid != '' && _this.data.uid != '') {
-            _this.onLoadfun();
-          } else {
-            app.signin(_this);
-          }      
+          _this.activsign();
+          // 确认授权用户统计
+          app.clicktga(4);          
         }
       }
     });
