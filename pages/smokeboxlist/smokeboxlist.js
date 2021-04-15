@@ -183,7 +183,7 @@ Page({
 
     // 推送统计
     _this.data.push_id = options.push_id || 0;
-
+    app.signindata.suap = 5;
     _this.setData({
       uid: app.signindata.uid,
       isProduce: app.signindata.isProduce,

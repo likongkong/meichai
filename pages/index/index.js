@@ -926,6 +926,7 @@ Page({
     wx.showLoading({ title: '加载中...',mask:true })
     _this.data.loginid = app.signindata.loginid;
     _this.data.openid = app.signindata.openid;
+    app.signindata.suap = 1;
     this.setData({
       judgeprof: options.judgeprof||1,
       uid: app.signindata.uid,
@@ -941,7 +942,7 @@ Page({
     };
     // 判断是否通过扫码进入
     app.signindata.channel = options.channel || '';
-
+    
     // 调取数据
     _this.obtaintabfun();    
 

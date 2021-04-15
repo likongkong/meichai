@@ -115,7 +115,7 @@ App({
     notAllowShareGoodsId:'',
     // 是否是管理员  有权限进入 发放门票商品的页面
     isManager:false,
-    randommaximum:2,
+    randommaximum:5,  // 分服务器的个数
     // 公共分享标题
     titleShare:'',
     // 下拉刷新处理  *** start ***
@@ -135,7 +135,8 @@ App({
     // 收货地址
     receivingAddress:[],
     // 防着多次登录
-    is_sigin:true
+    is_sigin:true,
+    suap:1, // 统计用户从哪个页面进入  
   },
   //一番赏队列倒计时
   // yifanshangIsInQueueFun(time){
@@ -166,20 +167,21 @@ App({
           success: function (res) {
             console.log('wx.login=====',res)
             var code = res.code;
-            // console.log('wx.getUserInfo',wx.canIUse('getUserInfo'))
+            console.log(code)
             // wx.getUserInfo({
             //   success: function (res) {
                 // console.log('wx.getUserInfo========',res)
-
 
                 var resiv ='';
                 var encryptedData = '';
                 if (BSkipData && typeof (BSkipData) != "undefined") { //如果B端过来需要额外传递数据
                   var q = Dec.Aese('operation=xcx&mod=login&code=' + code + '&iv=' + resiv + '&encryptedData=' + encryptedData + '&referee=' + _this.signindata.referee + '&activity_id=' + _this.signindata.activity_id + '&channel=' + _this.signindata.channel + '&last_store_id=' + _this.signindata.global_store_id + '&token=' + _this.signindata.token + '&share_source=' + _this.signindata.share_source + '&tid=' + _this.signindata.tid + "&isBusinessSkip=" + BSkipData.isBusinessSkip + "&businessClientUserId=" + BSkipData.businessClientUserId +
-                    "&isMergedUserInfo=" + BSkipData.isMergedUserInfo + '&activity_type=' + _this.signindata.activity_type);
+                    "&isMergedUserInfo=" + BSkipData.isMergedUserInfo + '&activity_type=' + _this.signindata.activity_type+'&suap='+_this.signindata.suap);
                 } else {
-                  var q = Dec.Aese('operation=xcx&mod=login&code=' + code + '&iv=' + resiv + '&encryptedData=' + encryptedData + '&referee=' + _this.signindata.referee + '&activity_id=' + _this.signindata.activity_id + '&channel=' + _this.signindata.channel + '&last_store_id=' + _this.signindata.global_store_id + '&token=' + _this.signindata.token + '&share_source=' + _this.signindata.share_source + '&tid=' + _this.signindata.tid + '&activity_type=' + _this.signindata.activity_type);
+                  var q = Dec.Aese('operation=xcx&mod=login&code=' + code + '&iv=' + resiv + '&encryptedData=' + encryptedData + '&referee=' + _this.signindata.referee + '&activity_id=' + _this.signindata.activity_id + '&channel=' + _this.signindata.channel + '&last_store_id=' + _this.signindata.global_store_id + '&token=' + _this.signindata.token + '&share_source=' + _this.signindata.share_source + '&tid=' + _this.signindata.tid + '&activity_type=' + _this.signindata.activity_type+'&suap='+_this.signindata.suap);
                 }
+
+                console.log('登录========','operation=xcx&mod=login&code=' + code + '&iv=' + resiv + '&encryptedData=' + encryptedData + '&referee=' + _this.signindata.referee + '&activity_id=' + _this.signindata.activity_id + '&channel=' + _this.signindata.channel + '&last_store_id=' + _this.signindata.global_store_id + '&token=' + _this.signindata.token + '&share_source=' + _this.signindata.share_source + '&tid=' + _this.signindata.tid + '&activity_type=' + _this.signindata.activity_type+'&suap='+_this.signindata.suap)
 
                 wx.request({
                   url: Dec.comurl() + 'user.php' + q,
@@ -192,6 +194,29 @@ App({
 
                       _this.signindata.loginid = res.data.Info.loginid || '';
                       _this.signindata.uid = res.data.Info.uid || '';
+
+                      // if(Dec.env=='online'){
+                      //   var num = _this.signindata.randommaximum - res.data.Info.uid%_this.signindata.randommaximum;
+                      //   if(num<10){
+                      //       num = '00'+num
+                      //   }else if(num>=10){
+                      //     num = '0'+num.toString()
+                      //   };       
+                      //   // 接口地址  
+                      //   _this.signindata.comurl = 'https://api-slb.51chaidan.com/'+num+'/';
+                      //   // 发现地址
+                      //   _this.signindata.clwcomurl = 'https://clw-slb.51chaidan.com/'+num+'/';
+    
+                      //   // // 接口地址  208
+                      //   // _this.signindata.comurl = 'https://api.51chaidan.com/';
+                      //   // // 发现地址
+                      //   // _this.signindata.clwcomurl = 'https://clw.51chaidan.com/';
+                      // }else{
+                      //   // 接口地址  
+                      //   _this.signindata.comurl = 'http://api-test.51chaidan.com/';
+                      //   // 发现地址
+                      //   _this.signindata.clwcomurl = 'http://clw-test.51chaidan.com/';
+                      // };
 
                       console.log('app===sigin',_this.signindata.comurl,_this.signindata.clwcomurl,Dec.versionnumber)
 
@@ -357,6 +382,40 @@ App({
   },
   onLaunch: function (options) {
     var _this = this;
+
+    // wx.request({
+    //   url: 'https://cdn.51chaidan.com/produce/serverDetail.txt',
+    //   method: 'GET',
+    //   header: { 'Accept': 'application/json' },
+    //   success: function (res) {
+    //     console.log(res.data)
+    //     if(_this.signindata.loginid!=''&&_this.signindata.uid!=''){
+    //       _this.signindata.randommaximum = res.data;
+    //     }else{
+    //       var num = Math.floor(Math.random() * res.data || _this.signindata.randommaximum)+1 || 0;
+    //       _this.signindata.randommaximum = res.data;
+    //       if(num<10){
+    //          num = '00'+num
+    //       }else if(num>=10){
+    //         num = '0'+num.toString()
+    //       };
+    //       if(Dec.env=='online'){
+    //         // 接口地址  
+    //         _this.signindata.comurl = 'https://api-slb.51chaidan.com/'+num+'/';
+    //         // 发现地址
+    //         _this.signindata.clwcomurl = 'https://clw-slb.51chaidan.com/'+num+'/';
+    //       }else{
+    //         // 接口地址  
+    //         _this.signindata.comurl = 'http://api-test.51chaidan.com/';
+    //         // 发现地址
+    //         _this.signindata.clwcomurl = 'http://clw-test.51chaidan.com/';
+    //       };
+    //       console.log(_this.signindata.comurl,_this.signindata.clwcomurl,_this.signindata.randommaximum)
+    //     }
+    //     console.log('num===================',num)
+    //   },
+    //   fail: function (res) {}
+    // }); 
 
     // 基础数据
     _this.defaultinfofun()

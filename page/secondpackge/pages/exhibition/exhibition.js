@@ -183,6 +183,7 @@ Page({
   onLoad: function (options) {
     var _this = this;
     console.log(options)
+    app.signindata.suap = 13;
     // wx.hideShareMenu();
     _this.setData({
       pagetype: options.type || 0,

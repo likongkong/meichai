@@ -33,7 +33,8 @@ Page({
    */
   onLoad: function (options) {
     var _this = this;
-    _this.data.share_uid = options.share_uid || 0
+    _this.data.share_uid = options.share_uid || 0;
+    app.signindata.suap = 22;
     // 判断是否授权
     this.activsign();
   },

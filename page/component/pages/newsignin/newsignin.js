@@ -166,7 +166,7 @@ Page({
    */
   onLoad: function (options) {
     var _this = this;
-
+    app.signindata.suap = 16;
     // 是否是集福卡活动
     var isFukaActivities = Date.parse(new Date())/1000>1612972800 && Date.parse(new Date())/1000<1613577600?true:false;
 

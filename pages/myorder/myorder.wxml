@@ -518,7 +518,7 @@
                         <view style='position:relative;height:54rpx;width:240rpx;line-height:54rpx;margin-left:20rpx;float:right;'   catchtap='clicktocollect' data-sorder='{{item.showOrder}}' data-order_type='{{item.order_type}}' data-cart_id='{{item.cart_id}}'  wx:if='{{item.is_receive==1&&(item.isShowOrder==0||item.showOrder==2||item.showOrder==1)&&item.order_type!=9&&item.order_type!=10&&item.order_type!=11}}'>
                                 <view class='awardrrbutposi' data-cart_id='{{item.cart_id}}' style='right:0;height:54rpx;width:240rpx;line-height:54rpx;'>中奖了! 点击领奖</view>
                         </view>
-
+ 
                         <view wx:if='{{item.status==16&&item.isShowOrder==1&&item.showOrder!=1&&item.showOrder!=2}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
                             <view style='width:100%;height:100%;position: relative;' wx:if='{{item.showOrder==0}}' data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
                             <view style='width:100%;height:100%;' wx:if='{{item.showOrder==1}}' data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>等待审核</view>
