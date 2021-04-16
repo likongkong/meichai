@@ -155,9 +155,18 @@ Page({
   //跳转商品详情
   jumpGoodsDetails(w){
     var gid = w.currentTarget.dataset.gid || w.target.dataset.gid;
-    wx.navigateTo({
-      url: "/pages/detailspage/detailspage?gid=" + gid,
-    }) 
+    var islotto = w.currentTarget.dataset.islotto || w.target.dataset.islotto || false;
+    var isblindbox = w.currentTarget.dataset.isblindbox || w.target.dataset.isblindbox || false;
+    if(islotto){
+       app.comjumpwxnav(9003,gid,'','');
+    } else if(isblindbox){
+      app.comjumpwxnav(9005,gid,'','');
+    }else{
+      wx.navigateTo({
+        url: "/pages/detailspage/detailspage?gid=" + gid,
+      })
+    }
+ 
   },
   // 跳转日历列表
   jumpCalendarList(){

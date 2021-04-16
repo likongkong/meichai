@@ -50,7 +50,7 @@
             </swiper-item>
           </block>
         </swiper>
-        <redpacket bindgetWelfare="getWelfare" bindredpagshareimage="redpagshareimage" scene="{{scene}}" countWelfare="{{countWelfare}}" sourcePage="1"/>
+        <redpacket bindgetWelfare="getWelfare" bindredpagshareimage="redpagshareimage" scene="{{scene}}" countWelfare="{{countWelfare}}" sourcePage="1" wx:if='{{isredpacket}}' />
     </view>
   </view>
 
