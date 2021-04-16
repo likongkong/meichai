@@ -138,6 +138,10 @@ Page({
       wx.navigateTo({
         url: "/page/component/pages/playgrasslist/playgrasslist"
       })
+    } else if (type == 999) { //限时不限量 
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/exhibition/exhibition?type=999"
+      })
     };
   },
 

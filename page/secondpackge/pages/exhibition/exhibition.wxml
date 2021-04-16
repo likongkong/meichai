@@ -1,7 +1,7 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 <!-- pagetype != 2 -->
-<view wx:if='{{pagetype == 4 || pagetype == 11|| pagetype == 12}}' class="exhibbox">
+<view wx:if='{{pagetype == 4 || pagetype == 11|| pagetype == 12|| pagetype == 999}}' class="exhibbox">
 	<view wx:if='{{pagetype != 12  && timedata.length > 1}}' class="exhibboxtop">
 		<scroll-view scroll-x="true" class="today_disanum_tab_comtainer" scroll-with-animation="true" bindscroll='scrollleftf' scroll-left='{{scrollleft}}'>
 			<view class='tdscrchbut specialellipsis' wx:for='{{timedata}}' id='q{{item.dateKey}}' wx:key='key' data-datekey='{{item.dateKey}}' catchtap='tabbotdata' style='{{dateKey==item.dateKey?"color:#000;font-size:26rpx;font-weight: bold;":"font-size:24rpx;color:#333;"}}width:27%;'>
@@ -59,7 +59,7 @@
 								<block wx:elif='{{item.status==3}}'>已开奖</block>
 							</block>
 						</view>
-						<view wx:elif='{{pagetype == 11 || pagetype == 12}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;">
+						<view wx:elif='{{pagetype == 11 || pagetype == 12 || pagetype == 999}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;">
 						  <block wx:if='{{item.saleButtonDisplay}}'>
 							    <view style='color:#6aca6b;'>{{item.saleButtonDisplay}}</view>
 							</block>

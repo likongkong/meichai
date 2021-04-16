@@ -25,7 +25,7 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
 		</view>
 		<!--  列表  -->
 		<!-- 限量抽签4  限时抢购11 -->
-		<block wx:if='{{item.type==4||item.type==11}}'>
+		<block wx:if='{{item.type==4||item.type==11||item.type==999}}'>
 			<view class='disanumofgoods_box' wx:if='{{item.detail.length!=0}}'>
 				<view class='disanum_scr'>
 					<scroll-view scroll-x="true" class="disanum_tab_comtainer">
