@@ -61,7 +61,7 @@ Page({
       wx.navigateTo({
         url: "/page/component/pages/limitlottery/limitlottery?id=" + id+'&brandId='+brandid,
       });
-    } else if (type == 11 || type == 12) {
+    } else if (type == 11 || type == 12  || type == 999) {
       var id = w.currentTarget.dataset.id || w.target.dataset.id || '';
       wx.navigateTo({
         url: "/pages/detailspage/detailspage?gid=" + id
