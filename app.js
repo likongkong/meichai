@@ -195,6 +195,29 @@ App({
                       _this.signindata.loginid = res.data.Info.loginid || '';
                       _this.signindata.uid = res.data.Info.uid || '';
 
+                      if(Dec.env=='online'){
+                        var num = _this.signindata.randommaximum - res.data.Info.uid%_this.signindata.randommaximum;
+                        if(num<10){
+                            num = '00'+num
+                        }else if(num>=10){
+                          num = '0'+num.toString()
+                        };       
+                        // 接口地址  
+                        _this.signindata.comurl = 'https://api-slb.51chaidan.com/'+num+'/';
+                        // 发现地址
+                        _this.signindata.clwcomurl = 'https://clw-slb.51chaidan.com/'+num+'/';
+    
+                        // // 接口地址  208
+                        // _this.signindata.comurl = 'https://api.51chaidan.com/';
+                        // // 发现地址
+                        // _this.signindata.clwcomurl = 'https://clw.51chaidan.com/';
+                      }else{
+                        // 接口地址  
+                        _this.signindata.comurl = 'http://api-test.51chaidan.com/';
+                        // 发现地址
+                        _this.signindata.clwcomurl = 'http://clw-test.51chaidan.com/';
+                      };
+
                       console.log('app===sigin',_this.signindata.comurl,_this.signindata.clwcomurl,Dec.versionnumber)
 
                       _this.signindata.isNewer = res.data.Info.isNewer || false;
@@ -359,9 +382,44 @@ App({
   },
   onLaunch: function (options) {
     var _this = this;
+
+    wx.request({
+      url: 'https://cdn.51chaidan.com/produce/serverDetail.txt',
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log(res.data)
+        if(_this.signindata.loginid!=''&&_this.signindata.uid!=''){
+          _this.signindata.randommaximum = res.data;
+        }else{
+          var num = Math.floor(Math.random() * res.data || _this.signindata.randommaximum)+1 || 0;
+          _this.signindata.randommaximum = res.data;
+          if(num<10){
+             num = '00'+num
+          }else if(num>=10){
+            num = '0'+num.toString()
+          };
+          if(Dec.env=='online'){
+            // 接口地址  
+            _this.signindata.comurl = 'https://api-slb.51chaidan.com/'+num+'/';
+            // 发现地址
+            _this.signindata.clwcomurl = 'https://clw-slb.51chaidan.com/'+num+'/';
+          }else{
+            // 接口地址  
+            _this.signindata.comurl = 'http://api-test.51chaidan.com/';
+            // 发现地址
+            _this.signindata.clwcomurl = 'http://clw-test.51chaidan.com/';
+          };
+          console.log(_this.signindata.comurl,_this.signindata.clwcomurl,_this.signindata.randommaximum)
+        }
+        console.log('num===================',num)
+      },
+      fail: function (res) {}
+    }); 
+
+
     // 基础数据
     _this.defaultinfofun()
-
     console.log('场景值=====',options.scene)
     _this.signindata.sceneValue = options.scene || 0;
     // 朋友圈分享不显示地址弹框
@@ -1340,7 +1398,56 @@ App({
       }
     });
   },
+  // 获取用户头像名称授权
+  getUserProfile(successCallback, errorCallback){
+    var _this = this;
+    console.log(wx.canIUse('getUserProfile'),wx.canIUse('getUserProfile'))
+    // 请选择与登录信息相同账号，头像昵称不同会导致审核不通过
+    wx.getUserProfile({
+        lang: 'zh_CN',
+        desc:'获取你的昵称、头像、地区及性别',
+        success(res){
+          console.log(res)
 
+          var userInfo = res.userInfo || {};
+
+          console.log('mod=userinfo&operation=setinfo&uid=' + _this.signindata.uid + '&loginid=' + _this.signindata.loginid + '&nick=' + userInfo.nickName + '&gender=' + userInfo.gender + '&headphoto=' + userInfo.avatarUrl + '&nick=' + encodeURIComponent(userInfo.nickName))
+
+          var qq = Dec.Aese('mod=userinfo&operation=setinfo&uid=' + _this.signindata.uid + '&loginid=' + _this.signindata.loginid + '&nick=' + userInfo.nickName + '&gender=' + userInfo.gender + '&headphoto=' + userInfo.avatarUrl + '&nick=' + encodeURIComponent(userInfo.nickName) );
+
+          wx.request({
+            url: _this.signindata.comurl + 'user.php' + qq,
+            method: 'GET',
+            header: { 'Accept': 'application/json' },
+            success: function (res) {
+              console.log('设置头像名称=====',res)
+              if (res.data.ReturnCode == 200) {
+                _this.signindata.avatarUrl = userInfo.avatarUrl;
+                _this.signindata.nickName = userInfo.nickName;
+                _this.signindata.userInfo = userInfo || {};
+                wx.showToast({
+                  title: '设置成功',
+                  icon: 'none',
+                  mask:true,
+                  duration:1500
+                });   
+                setTimeout(function(){
+                  successCallback(res,userInfo);
+                },1500)
+              };
+            },
+            fail(res){
+              errorCallback(res)
+            }
+          }) 
+
+
+        },
+        fail(res){
+          console.log(res)
+        }
+    })
+  }
 
 })
 

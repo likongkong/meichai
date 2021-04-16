@@ -30,7 +30,8 @@ Page({
     classifyArr:[],
     ClassifyTabW:0, //分类tab宽
     animationData:{},
-    scene:''
+    scene:'',
+    isredpacket:false
   },
   /**
    * 生命周期函数--监听页面加载
@@ -169,6 +170,9 @@ Page({
             let alldata = [..._this.data.datalist,...res.data.List.activity];
             // console.log(alldata)
             _this.setData({datalist : alldata,rewardswiperData:res.data.List.topicActivity,consumemessageData:res.data.List.record,classifyArr:res.data.List.classifyList,countWelfare:res.data.Info.countWelfare})
+            _this.setData({
+              isredpacket:true
+            })
             //创建节点选择器
             // var query = wx.createSelectorQuery();
             // query.select('#ele'+_this.data.classifyIndex).boundingClientRect();
