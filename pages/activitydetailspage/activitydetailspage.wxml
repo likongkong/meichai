@@ -335,6 +335,8 @@
       </view>
     </view>
   </view>
+  
+  <image wx:if='{{isScrapingCard}}' class="rotate" style="width:100%;height:auto;display:block;margin:30rpx 0 20rpx 0;" catchtap="jumpScrapingCard" mode='widthFix' src="{{goodsInfoAds}}"></image>
 
   <block wx:if='{{is_exhibition!=1&&brandId<=0}}'>
     <view class='detalOrPrize'>
