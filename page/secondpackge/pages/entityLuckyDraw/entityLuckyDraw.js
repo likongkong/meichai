@@ -192,7 +192,7 @@ Page({
             user:data.Info.user,
             subscribedata:res.data.Info.subscribe,
             suplusChance:data.Info.user.suplusChance,
-            isDrawBtn:nowTime>=parseInt(data.List.goodsList.start_time) && nowTime<=parseInt(data.List.goodsList.stop_time)?true:false
+            isDrawBtn:nowTime>=parseInt(data.List.activity[0].start_time) && nowTime<=parseInt(data.List.activity[0].stop_time)?true:false
           })
           _this.countdownbfun();        
           if(_this.data.addressdata && _this.data.addressdata.length != 0){}else{

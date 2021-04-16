@@ -20,7 +20,7 @@
           <!-- <image class="goodsImg" src="{{item.img}}" mode="widthFix"></image> -->
           <swiper previous-margin='100rpx' next-margin='100rpx' bindchange="swiperChange" style='height:{{swiperH}};'>
             <swiper-item wx:for='{{activity}}' wx:key='*this'>
-              <view class='le-img {{nowIdx==index?"le-active":""}}' style='height:{{swiperH}};' catchtap="{{item.status ==1?'showtoast':''}}">
+              <view class='le-img {{nowIdx==index?"le-active":""}}' style='height:{{swiperH}};overflow:hidden;' catchtap="{{item.status ==1?'showtoast':''}}">
                 <block wx:if="{{item.status ==2}}">
                   <view class="typeBtn bgBlue">
                     进行中
