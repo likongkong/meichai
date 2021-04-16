@@ -1113,6 +1113,10 @@ App({
       wx.navigateTo({
         url: "/pages/detailspage/detailspage?gid=" + jumpid
       });
+    } else if (item_type == 9023) { 
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/entityLuckyDraw/entityLuckyDraw"
+      });
     };
   },
 

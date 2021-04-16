@@ -313,7 +313,8 @@
 
 		<!-- <view style='font-size:25rpx;margin:0rpx auto;'>{{activity.totalInvite}}/6人</view> -->
    
-	  <image wx:if='{{isScrapingCard}}' style="width:100%;height:auto;display:block;margin:30rpx 0 0 0;" catchtap="jumpScrapingCard" mode='widthFix' src="https://cdn.51chaidan.com/images/scratchCardActivity/cardEntrance.jpg"></image>
+<!-- 
+		<image wx:if='{{isScrapingCard}}' class="rotate" style="width:100%;height:auto;display:block;margin:0 0 20rpx 0;" catchtap="jumpScrapingCard" mode='widthFix' src="{{goodsInfoAds}}"></image> -->
 
     <view wx:if='{{toyCabinetList && toyCabinetList.length != 0}}'>
 		    <view class="singleDisplay">单款展示</view>

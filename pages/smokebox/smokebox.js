@@ -632,12 +632,12 @@ Page({
 
     // 刮刮卡入口
     wx.request({
-      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/cardOpenStatus.txt',
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/cardOpenStatus.txt?202104161826',
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
         console.log('刮刮卡入口',res)
-        _this.setData({isScrapingCard:res.data || false})
+        _this.setData({isScrapingCard:res.data.open || false,goodsInfoAds:res.data.goodsInfoAds})
       },
       fail: function (res) {}
     })  
