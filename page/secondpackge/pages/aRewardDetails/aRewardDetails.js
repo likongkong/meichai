@@ -116,7 +116,15 @@ Page({
       app.comjumpwxnav(0,'https://mp.weixin.qq.com/s?__biz=MzI2Mzg4MDYzNQ==&mid=100013809&idx=1&sn=9c8be56959fe9d2ddb799b216b58d38e&chksm=6ab79c255dc015334675ddb87776de7962ed72ff69b57e0570d09dcfd8226663172d00a040bf#rd','','')
     };
   },
-
+  getUserProfile(w){
+    var _this = this;
+    var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
+    app.getUserProfile((res)=>{
+       _this.setData({
+        ['userimg[' + ind + '].headphoto']:app.signindata.avatarUrl
+       })
+    });
+  },
   useBlindboxMoneyFun(){
     this.setData({
       isUseBlindboxMoney:!this.data.isUseBlindboxMoney,

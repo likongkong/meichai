@@ -70,6 +70,9 @@ Page({
     // 判断是否授权
     this.tograntauthorization();
   },
+  getUserProfile(){
+    app.getUserProfile(this.onLoadfun)
+  },
   onLoadfun:function(){
     //  我的订单数据
     var _this = this;

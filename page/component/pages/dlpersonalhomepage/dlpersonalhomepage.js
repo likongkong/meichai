@@ -207,7 +207,16 @@ Page({
     _this.listdata(0);
     // 用户数据
     _this.userdata();
-  }, 
+  },
+  getUserProfile(){
+    var _this = this;
+    app.getUserProfile(()=>{
+      // 晒单列表
+      _this.listdata(0);
+      // 用户数据
+      _this.userdata();      
+    })
+  },
   // 晒单列表
   listdata: function (num) {
     var _this = this;
