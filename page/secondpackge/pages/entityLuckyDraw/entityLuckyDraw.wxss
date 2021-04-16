@@ -24,9 +24,6 @@ page{
 .textDecoration{
   text-decoration:line-through;
 }
-.wrap{
-
-}
 .luckyDrawTimeWrap{
   position: relative;
   padding: 15rpx 0 25rpx 0;
@@ -121,8 +118,6 @@ page{
   font-size: 26rpx;
   margin: 30rpx 0;
   text-align: center  ;
-}
-.drawBox{
 }
 .drawBox>view{
   width: 650rpx;
@@ -447,9 +442,6 @@ page{
   box-sizing: border-box;
   margin-bottom: 25rpx;
 }
-.recordItem:last-child{
-  /* margin-bottom: 0; */
-}
 .recordItem text{
   font-size: 26rpx;
   display: block;
@@ -686,10 +678,7 @@ page{
   width: 100%;
   height: auto;
 }
-.goodsInfo view{
-  /* display: flex; */
-  /* justify-content: center; */
-}
+
 .goodsInfo text{
   display: inline-block;
 }
