@@ -16,7 +16,7 @@ Page({
     tgabox:false,
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
-    id:'331834',
+    id:'353009',
     share_uid:0,
     countdown:'',
     percent:'',
@@ -41,7 +41,35 @@ Page({
     // 收货地址显示 请选择收货地址
     tipaddress:'请选择收货地址',
     tipaid:'',
-    awardId:0
+    awardId:0,
+    swiperH: '',//swiper高度
+　　nowIdx: 0,//当前swiper索引
+　　activity:[]
+  },
+  showtoast(){
+    wx.showToast({
+      title: '上一个奖励抽完后将自动开启当前奖励',
+      icon: 'none',
+      mask:true,
+      duration:2000
+    }); 
+  },
+  //获取swiper高度
+  getHeight: function (e) {
+  　　var winWid = wx.getSystemInfoSync().windowWidth - 2 * 50;//获取当前屏幕的宽度
+  　　var imgh = e.detail.height;//图片高度
+  　　var imgw = e.detail.width;
+  　　var sH = winWid * imgh / imgw + "px"
+  　　this.setData({
+  　　　　swiperH: sH//设置高度
+  　　})
+  },
+  //swiper滑动事件
+  swiperChange: function (e) {
+    this.setData({
+      nowIdx: e.detail.current,
+      id:this.data.activity[e.detail.current].id
+    })
   },
  
   togglerecordFun(){
@@ -156,8 +184,9 @@ Page({
           _this.setData({
             shareTitle:data.Info.shareTitle,
             shareImg:data.Info.shareImg,
-            countdown:data.List.goodsList.stop_time,
+            countdown:data.List.activity[0].stop_time,
             goodsList:data.List.goodsList,
+            activity:data.List.activity,
             scratch:data.List.scratch,
             explain:data.Info.explain,
             user:data.Info.user,
