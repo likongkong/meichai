@@ -20,6 +20,9 @@ Page({
     iftrdetailpagetwo: false,
     expiryMonth:12
   },
+  getUserProfile(){
+    app.getUserProfile(this.getUserInfo)
+  },
   toggleTab(e){
     this.setData({
       expiryMonth:e.currentTarget.dataset.expirymonth,
@@ -140,18 +143,10 @@ paymentmony:function(cart_id){
   //获取用户信息
   getUserInfo(){
     var _this = this;
-    wx.login({
-      success:function(){
-        wx.getUserInfo({
-          success: function (res) {
-            _this.setData({
-              avatarUrl: res.userInfo.avatarUrl,
-              nickName: res.userInfo.nickName
-            })
-          }
-        });
-      }
-    });
+    _this.setData({
+      avatarUrl: app.signindata.userInfo.avatarUrl,
+      nickName: app.signindata.userInfo.nickName
+    })
   },
   getInfo(){
     var _this = this;

@@ -8,6 +8,7 @@
     <view class="adhead">
     <scroll-view scroll-x="true" class="adhleft">
         <view class="adhleftItem" style='width:80rpx;height:80rpx;border-radius:50%;position: relative;margin-right: 20rpx;margin-top: 25rpx;display: inline-block;' wx:for='{{userimg}}' wx:key='key'>
+            <button class='tgaboxtgawchbochlibutboxtwo' wx:if='{{item.user_id == uid}}' type='primary' data-ind='{{index}}' bindtap="getUserProfile"></button>
             <image src="{{item.headphoto}}" class="adhlimg" mode="widthFix"></image>
             <view wx:if="{{item.isVip}}" class='vipBG'><image src='https://cdn.51chaidan.com/images/calendar/VipCase.png' style='position: relative;'></image></view>
         </view>
