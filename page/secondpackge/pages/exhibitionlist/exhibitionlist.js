@@ -269,6 +269,40 @@ Page({
     app.cloudstatistics('exhibitionList', clouddata)
 
   },
+  // 随机数
+  ranomNumber(sposition){
+    if(sposition.length>=8){
+      var count = 8;
+    }else{
+      var count = sposition.length;
+    };
+    var randomArr = new Array; //随机数组 
+    var returnArr = new Array; //返回数组
+    var sposition = sposition || [];
+    // 给原数组Arr赋值 
+    var nArr = [];
+    for (var i = 0; i < sposition.length; i++) {
+      if(sposition[i].isTop){
+        returnArr.push(sposition[i]);
+      }else{
+        nArr.push(sposition[i]);
+      };
+    };
+    for (var i = 0; i < nArr.length ; i++) {
+      randomArr.push(i);
+    };
+
+    randomArr.sort(function () { return 0.5 - Math.random();});
+    var n = count-returnArr.length;
+    if(returnArr.length < count){
+       for(var i = 0; i < n ; i++){
+          returnArr.push(nArr[randomArr[i]]);
+       };
+    };
+
+    return returnArr;
+
+  },
 
   // 数据请求
   auditversion:function(){
@@ -300,6 +334,9 @@ Page({
           var listdata = res.data.List.model || [];
           var brandll = 0;
           for (var i = 0; i < listdata.length; i++) {
+            if(listdata[i].type == 4 || listdata[i].type == 2 || listdata[i].type == 11 || listdata[i].type == 999){
+              listdata[i].detail = _this.ranomNumber(listdata[i].detail);
+            };
             if (listdata[i].type != 14) {
               for (var j = 0; j < listdata[i].detail.length; j++) {
                 if(_this.data.newdataexh){
