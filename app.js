@@ -192,11 +192,8 @@ App({
                     if (res.data.ReturnCode == 200 || res.data.ReturnCode == 201) {
                       _this.signindata.openid = res.data.Info.openid || '';
 
-                      // _this.signindata.loginid = res.data.Info.loginid || '';
-                      // _this.signindata.uid = res.data.Info.uid || '';
-
-                      _this.signindata.loginid = 'e29c13b8e91cf22f75b180990a4a0535' || '';
-                      _this.signindata.uid = 752792 || '';
+                      _this.signindata.loginid = res.data.Info.loginid || '';
+                      _this.signindata.uid = res.data.Info.uid || '';
 
                       // if(Dec.env=='online'){
                       //   var num = _this.signindata.randommaximum - res.data.Info.uid%_this.signindata.randommaximum;
