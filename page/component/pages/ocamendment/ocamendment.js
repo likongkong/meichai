@@ -194,7 +194,7 @@ Page({
     var _this = this;
     wx.showLoading({ title: '加载中...'})
     wx.request({
-      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/toyCabinet.json',
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/toyCabinet.json?time='+app.signindata.appNowTime,
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {

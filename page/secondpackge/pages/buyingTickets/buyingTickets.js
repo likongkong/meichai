@@ -409,7 +409,7 @@ Page({
     var _this = this;
 
     wx.request({
-      url: 'https://cdn.51chaidan.com/produce/toyshowTicket.json',
+      url: 'https://cdn.51chaidan.com/produce/toyshowTicket.json?time='+app.signindata.appNowTime,
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {

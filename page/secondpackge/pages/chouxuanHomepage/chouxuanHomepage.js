@@ -42,7 +42,7 @@ Page({
     this.activsign();
     // 活动介绍
     wx.request({
-      url: 'https://www.51chaidan.com/produce/lottoPrior.json',
+      url: 'https://www.51chaidan.com/produce/lottoPrior.json?time='+app.signindata.appNowTime,
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
