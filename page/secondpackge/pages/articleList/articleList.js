@@ -129,7 +129,7 @@ Page({
     wx.showLoading({ title: '加载中...', }) 
 
     wx.request({
-      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/articleList.json',
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/articleList.json?time='+app.signindata.appNowTime,
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) { 

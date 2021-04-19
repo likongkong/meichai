@@ -650,7 +650,7 @@ Page({
     })
     //调取热门搜索关键词
     wx.request({
-      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/searchPlaceholder.json',
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/searchPlaceholder.json?time='+app.signindata.appNowTime,
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {

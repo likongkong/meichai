@@ -691,7 +691,7 @@ Page({
     }
 
     wx.request({
-      url: 'https://cdn.51chaidan.com/produce/tipDeductForYifanshang.json',
+      url: 'https://cdn.51chaidan.com/produce/tipDeductForYifanshang.json?time='+app.signindata.appNowTime,
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {

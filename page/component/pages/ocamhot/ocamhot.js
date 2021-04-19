@@ -135,11 +135,11 @@ Page({
     let url = '';
     wx.showLoading({ title: '加载中...'})
     if(this.data.pageid == 0){
-      url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/toyCabinetChearperZone.json'
+      url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/toyCabinetChearperZone.json?time='+app.signindata.appNowTime
     }else if(this.data.pageid == 1){
-      url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/toyCabinetHotZone.json'
+      url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/toyCabinetHotZone.json?time='+app.signindata.appNowTime
     }else if(this.data.pageid == 2){
-      url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/toyCabinetPatchZone.json'
+      url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/toyCabinetPatchZone.json?time='+app.signindata.appNowTime
     }
     wx.request({
       url:url,

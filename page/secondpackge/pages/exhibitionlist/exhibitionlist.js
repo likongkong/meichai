@@ -322,9 +322,9 @@ Page({
       page : 0
     })
     if(Dec.env=='online'){
-      var url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/IndexToyShow.json';// 正式
+      var url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/IndexToyShow.json?time='+app.signindata.appNowTime;// 正式
     }else{
-      var url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/test/IndexToyShow.json';  // 测试 
+      var url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/test/IndexToyShow.json?time='+app.signindata.appNowTime;  // 测试 
     };
     wx.showLoading({
       title: '加载中...',

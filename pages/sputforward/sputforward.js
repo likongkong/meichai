@@ -246,7 +246,7 @@ Page({
     var _this = this;
     if (ops.from === 'button') {
       return {
-        title: '开一家自己的解优杂货铺吧，分享赚钱，限时免费。',
+        title: '',
         path: 'pages/storehomepage/storehomepage?referee=' + _this.data.store_id,
         success: function (res) {
 
