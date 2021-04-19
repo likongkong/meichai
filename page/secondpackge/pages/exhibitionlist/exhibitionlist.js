@@ -18,6 +18,10 @@ Page({
     uid: app.signindata.uid,
     openid: app.signindata.openid,
 
+    // 分享信息
+    shareTitle:'',
+    shareImageUrl:'',
+
     c_title: '', // -正品折扣多一点
     c_arrow: true,
     c_backcolor: '#ff2742',
@@ -39,6 +43,7 @@ Page({
     sharedata:{},
     // 适配苹果X
     isIphoneX: app.signindata.isIphoneX,
+    
   },
 
   // 展会公共跳转
@@ -289,6 +294,8 @@ Page({
       };
     };
     for (var i = 0; i < nArr.length ; i++) {
+
+      console.log(i)
       randomArr.push(i);
     };
 
@@ -368,6 +375,8 @@ Page({
           // mlist.push(d);
           var liveBroad = res.data.Info;
           _this.setData({
+            shareTitle:res.data.Info.share.title,
+            shareImageUrl:res.data.Info.share.imgUrl,
             c_title: res.data.Info.show.title || '',
             swiperdata: res.data.List.banner || [],
             exhibdata: listdata || []
@@ -644,8 +653,8 @@ Page({
   onShareAppMessage: function () {
     var _this = this;
     var share = {
-      title: "MCTS潮玩展，每小时送隐藏",
-      imageUrl:'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      title: this.data.shareTitle,
+      imageUrl: this.data.shareImageUrl,
       success: function (res) { }
     };
     return share;
