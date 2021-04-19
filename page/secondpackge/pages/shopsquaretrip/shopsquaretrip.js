@@ -536,7 +536,7 @@ Page({
         img = movies[0].image || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
       }
       return {
-        title: 'Bilibiliworld x MCTS 8.7~8.9 不见不散，打卡送超多奖励',
+        title: '',
         imageUrl: img
       }    
   },
