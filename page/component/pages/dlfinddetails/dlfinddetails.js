@@ -317,6 +317,10 @@ Page({
 
     // 调取收货地址
     this.nextpagediao();
+
+    setTimeout(function(){
+      app.indexShareBanner();
+    },1000);
   }, 
   // 阻止蒙层冒泡
   preventD() { },
@@ -492,9 +496,9 @@ Page({
       var shareimg = _this.data.listdata.shareImg || '';
     };
     var reshare = {
-      title: title || '我在美拆发现一个优质话题，你也快来看看吧!',
+      title: title || app.signindata.communityTitleShare,
       path: 'page/component/pages/dlfinddetails/dlfinddetails?drying_id=' + _this.data.drying_id,
-      imageUrl: shareimg || Pub.dryinglistshare(),
+      imageUrl: shareimg || app.signindata.communityShareImg,
       success: function (res) { },
     };
     return reshare

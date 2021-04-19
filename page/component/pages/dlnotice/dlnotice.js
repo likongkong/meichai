@@ -169,14 +169,8 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (options) {
-    // 发现详情
-    // var reshare = {
-    //   title: '我在美拆发现一个优质话题，你也快来看看吧!',
-    //   path: 'page/component/pages/dlfind/dlfind',
-    //   imageUrl: Pub.dryinglistshare(),
-    //   success: function (res) { },
-    // };
-    // return reshare 
+    var reshare = app.sharemc();
+    return reshare 
   },
   // 导航跳转 
   wnews: function () {

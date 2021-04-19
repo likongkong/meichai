@@ -95,9 +95,15 @@ App({
     sceneValue:0,
     yifanshangIsInQueue:false,
     timer:'',
+    // 公共分享标题
+    titleShare:'',
+    toyShowTitleShare:'',
+    communityTitleShare:'',
     // 活动分享朋友圈底部是否显示广告
     is_eveShareAdver:false,
     indexShareImg:'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+    toyShowShareImg:'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+    communityShareImg:'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
     mergePicImg:'',
     // 抽盒金
     blindboxMoney:0,
@@ -116,8 +122,6 @@ App({
     // 是否是管理员  有权限进入 发放门票商品的页面
     isManager:false,
     randommaximum:5,  // 分服务器的个数
-    // 公共分享标题
-    titleShare:'',
     // 下拉刷新处理  *** start ***
     downRefreshNum:0,  
     beforeTime:  0,
@@ -1249,12 +1253,19 @@ App({
           var nowTime = Date.parse(new Date());//当前时间戳
           // 首页分享图片
           var indexShare = res.data.List.indexShare || [];
+          var toyShowShare = res.data.List.toyShowShare || [];
+          var communityShare = res.data.List.communityShare || [];
           var indexShareNum = Math.floor(Math.random() * indexShare.length) || 0;
+          var toyShowShareNum = Math.floor(Math.random() * toyShowShare.length) || 0;
+          var communityShareNum = Math.floor(Math.random() * communityShare.length) || 0;
 
           var indexShare = res.data.List.indexShare || [];
 
           _this.signindata.titleShare = res.data.Info.titleShare || '潮玩社交平台';
+          _this.signindata.toyShowTitleShare = toyShowShare[toyShowShareNum].title || '潮玩社交平台';
+          _this.signindata.communityTitleShare = communityShare[communityShareNum].title || '潮玩社交平台';
           
+          // 首页分享
           if(indexShare.length!=0 && indexShare[indexShareNum]){
             _this.signindata.indexShare = indexShare || [];
             var indexShareImg = indexShare[indexShareNum]+'?time=' + nowTime;
@@ -1262,6 +1273,28 @@ App({
             console.log('_this.signindata.indexShareImg', _this.signindata.indexShareImg)
           }else{
             _this.signindata.indexShareImg = 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
+          };
+
+          // 展会分享
+          if(toyShowShare.length!=0 && toyShowShare[toyShowShareNum]){
+            _this.signindata.toyShowShare = toyShowShare || [];
+            var toyShowShareImg = toyShowShare[toyShowShareNum].img+'?time=' + nowTime;
+            _this.signindata.toyShowShareImg = toyShowShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg';
+            console.log('_this.signindata.toyShowShareImg', _this.signindata.toyShowShareImg)
+            console.log('_this.signindata.toyShowTitleShare', _this.signindata.toyShowTitleShare)
+          }else{
+            _this.signindata.toyShowShareImg = 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
+          };
+
+          // 发现分享
+          if(communityShare.length!=0 && communityShare[communityShareNum]){
+            _this.signindata.communityShare = communityShare || [];
+            var communityShareImg = communityShare[communityShareNum].img+'?time=' + nowTime;
+            _this.signindata.communityShareImg = communityShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg';
+            console.log('_this.signindata.communityShareImg', _this.signindata.communityShareImg)
+            console.log('_this.signindata.communityTitleShare', _this.signindata.communityTitleShare)
+          }else{
+            _this.signindata.communityShareImg = 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
           };
 
           // 合成图片的banner图

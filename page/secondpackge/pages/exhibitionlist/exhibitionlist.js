@@ -204,7 +204,6 @@ Page({
     app.signindata.suap = 12;
     // 判断是否授权
     this.activsign();
-
   },
   activsign: function () {
     // 判断是否授权 
@@ -273,6 +272,10 @@ Page({
     var clouddata = { type: 0 };
     app.cloudstatistics('exhibitionList', clouddata)
 
+
+    setTimeout(function(){
+      app.indexShareBanner();
+    },1000);
   },
   // 随机数
   ranomNumber(sposition){
@@ -375,8 +378,8 @@ Page({
           // mlist.push(d);
           var liveBroad = res.data.Info;
           _this.setData({
-            shareTitle:res.data.Info.share.title,
-            shareImageUrl:res.data.Info.share.imgUrl,
+            // shareTitle:res.data.Info.share.title,
+            // shareImageUrl:res.data.Info.share.imgUrl,
             c_title: res.data.Info.show.title || '',
             swiperdata: res.data.List.banner || [],
             exhibdata: listdata || []
@@ -653,8 +656,8 @@ Page({
   onShareAppMessage: function () {
     var _this = this;
     var share = {
-      title: this.data.shareTitle,
-      imageUrl: this.data.shareImageUrl,
+      title: app.signindata.toyShowTitleShare,
+      imageUrl: app.signindata.toyShowShareImg,
       success: function (res) { }
     };
     return share;

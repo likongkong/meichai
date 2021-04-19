@@ -329,6 +329,12 @@ Page({
       _this.getLiveList(1)
     }
     app.livebroadcast(_this, 0)  // 直播数据
+
+
+    setTimeout(function(){
+      app.indexShareBanner();
+    },1000);
+
   },
   getLiveList:function(num){
     var _this = this;
@@ -1008,9 +1014,9 @@ Page({
   onShareAppMessage: function () {
     var _this = this;
     var share = {
-      title: "MCTS潮玩展，每小时送隐藏",
+      title: app.signindata.toyShowTitleShare,
       path: "/page/secondpackge/pages/exhibition/exhibition?type="+_this.data.pagetype||0,
-      imageUrl:'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      imageUrl:app.signindata.toyShowShareImg,
       success: function (res) { }
     };
     return share;
