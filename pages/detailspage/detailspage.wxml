@@ -308,6 +308,31 @@
       </view> 
   </view>
 
+<!-- 赠送 -->
+<block wx:if='{{zunmdata.isGiveGoodsStatus == 2 || zunmdata.isGiveGoodsStatus == 1}}'>
+  <view class="purchaseGift" wx:if='{{zunmdata.isGiveGoodsStatus == 2 || zunmdata.isGiveGoodsStatus == 1}}'>
+    <view class="purGiftLeft">购买赠送</view>
+    <view class="purGiftRight">
+        <block wx:if='{{zunmdata.isGiveGoodsStatus == 2}}'>距结束:<text class="purGiftRTxt">00</text>:<text class="purGiftRTxt">00</text>:<text class="purGiftRTxt">00</text></block>
+        <block wx:elif='{{zunmdata.isGiveGoodsStatus == 1}}'>活动时间:{{zunmdata.giftEndTime}}</block>
+    </view>
+  </view>
+
+  <view class="purGiftShop" wx:for='{{zunmdata.giveGoodsList}}' wx:key='key'>
+    <view class="purGiftTop" catchtap="addressmanagement" data-gid='{{item.giveGoodsId}}'>
+      <image mode='aspectFit' src="{{item.giveGoodsImg}}"></image>
+      <view class="purGiftTopName">
+          <view class="purGTNT"><text>赠品</text>{{item.giveGoodsName}}</view>
+          <view class="purGTNT">{{item.giveGoodsNumber}}</view>
+      </view>
+    </view>
+    <view class="purGiftTip">{{item.giveGoodsCondition}}</view>
+  </view>
+
+  <view class="purGiftTipCom">{{zunmdata.giveGoodsAttention}}</view>
+  
+</block>
+
 <image wx:if='{{isScrapingCard}}' class="rotate" style="width:100%;height:auto;display:block;margin:0 0 20rpx 0;" catchtap="jumpScrapingCard" mode='widthFix' src="{{goodsInfoAds}}"></image>
 
 <image wx:if='{{!gotTBBMBS8 || !gotTBBMBS9}}' style="width:720rpx;height:auto; display:block;margin:15rpx auto;" catchtap="officialAccount" mode='widthFix' src="{{!gotTBBMBS8?'http://cdn.51chaidan.com/images/sign/activity/attentionGZH.png':'https://cdn.51chaidan.com/images/sign/activity/bigAttention1.png'}}"></image>
