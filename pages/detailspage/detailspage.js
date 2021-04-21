@@ -827,7 +827,7 @@ Page({
       if (_this.data.coudata1cid != '') { cid.push(_this.data.coudata1cid); };
       if (_this.data.coudata2cid != '') { cid.push(_this.data.coudata2cid); };
       var cid = cid.join();
-      if(_this.data.zunmdata.isBlindBox){
+      if(_this.data.zunmdata.wholeBox&&_this.data.zunmdata.is_suit==1){
         var count = _this.data.numberofdismantling*_this.data.isBlindBoxNum;
         
         if(_this.data.isBlindBoxNum>1){
@@ -2944,9 +2944,9 @@ Page({
             clearInterval(_this.data.wintheprtintervaldetail);
             _this.winningtheprizetimedetail(1613318400);
           }
-           if(res.data.Ginfo.gid == 37490){
+           if(res.data.Ginfo.gid == 37568 || res.data.Ginfo.gid == 37569 || res.data.Ginfo.gid == 37573){
             clearInterval(_this.data.wintheprtintervaldetail);
-            _this.winningtheprizetimedetail(1618675200);
+            _this.winningtheprizetimedetail(1619193600);
           }
           
           // if(res.data.Ginfo&&res.data.Ginfo.brandId>0){
