@@ -488,6 +488,60 @@ Page({
       };
     }.bind(_this), 1000);
   },
+
+
+  // 中奖提示倒计时
+  countdownOfGifts: function (clock) {
+    var _this = this;
+    var clock = clock;
+    _this.data.countdownofgifts = setInterval(function () {
+      //将时间传如 调用 
+      var timestamp = Date.parse(new Date())
+      //总的秒数 
+      var second = clock - (timestamp / 1000);
+      if (second > 0) {
+        // 天位    
+        var day = Math.floor(second / 3600 / 24);
+        var dayStr = day.toString();
+        if (dayStr.length == 1) dayStr = '0' + dayStr;
+        // 小时位 
+        var hr = Math.floor(second / 3600 % 24);
+        var hrStr = hr.toString();
+        if (hrStr.length == 1) hrStr = '0' + hrStr;
+        // 分钟位  
+        var min = Math.floor(second / 60 % 60);
+        var minStr = min.toString();
+        if (minStr.length == 1) minStr = '0' + minStr;
+        // 秒位  
+        var sec = Math.floor(second % 60);
+        var secStr = sec.toString();
+        if (secStr.length == 1) secStr = '0' + secStr;
+        if (day == 0) {
+          var h = {
+            dayStr: 0,
+            hrStr: hrStr,
+            minStr: minStr,
+            secStr: secStr,
+          }
+        } else {
+          var h = {
+            dayStr: dayStr,
+            hrStr: hrStr,
+            minStr: minStr,
+            secStr: secStr,
+          }
+        }
+        _this.setData({ //正常倒计时        
+          cog: h
+        });
+      } else {
+        clearInterval(_this.data.countdownofgifts);
+        _this.detailfunshop();
+      };
+    }.bind(_this), 1000);
+  },
+
+
   // 拉起订阅
   subscrfun: function () {
     var _this = this;
@@ -2978,6 +3032,11 @@ Page({
               };
           });
 
+          // 赠品倒计时
+          if(redauin.isGiveGoodsStatus == 2){
+            console.log('redauin.isGiveGoodsStatus == 2 redauin.giftEndTime',redauin.giftEndTime)
+            _this.countdownOfGifts(redauin.giftEndTime)
+          }
           if(res.data.Ginfo.specialGoods && res.data.Ginfo.specialGoods == 1){
             var infoSpecial = dataGinfo.infoSpecial;
             var detailSpecColor = infoSpecial.detailSpec[infoSpecial.specCate[1]] || [];
@@ -3311,6 +3370,7 @@ Page({
       _this.data.videoContext.stop()
     };
     clearInterval(this.data.wintheprtintervaldetail);
+    clearInterval(_this.data.countdownofgifts);
      // 调用重置刷新
      app.resetdownRefresh();
   },
@@ -3324,6 +3384,7 @@ Page({
       _this.data.videoContext.stop()
     }
     clearInterval(this.data.wintheprtintervaldetail);
+    clearInterval(_this.data.countdownofgifts);
      // 调用重置刷新
      app.resetdownRefresh();
   },
