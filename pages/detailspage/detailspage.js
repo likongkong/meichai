@@ -827,7 +827,7 @@ Page({
       if (_this.data.coudata1cid != '') { cid.push(_this.data.coudata1cid); };
       if (_this.data.coudata2cid != '') { cid.push(_this.data.coudata2cid); };
       var cid = cid.join();
-      if(_this.data.zunmdata.isBlindBox){
+      if(_this.data.zunmdata.wholeBox&&_this.data.zunmdata.is_suit==1){
         var count = _this.data.numberofdismantling*_this.data.isBlindBoxNum;
         
         if(_this.data.isBlindBoxNum>1){
