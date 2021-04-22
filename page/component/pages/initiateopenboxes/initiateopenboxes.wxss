@@ -19,7 +19,7 @@ page{
 }
 
 .timetextstyle {
-  diaplay: inline-block;
+  display: inline-block;
   font-size: 25rpx;
 }
 
@@ -45,7 +45,7 @@ page{
 }
 
 .singletag {
-  diaplay: inline-block;
+  display: inline-block;
   flex: 1;
 }
 
