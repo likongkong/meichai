@@ -5,6 +5,11 @@
 @import "../../../../pages/detailspage/detailspage.wxss";
 
 
+page{
+  padding-bottom: 380rpx;
+}
+
+
 .countdown {
   background: #000;
   color: #fff;
@@ -125,4 +130,74 @@
   left: 0;
   z-index: 3;
   opacity: 0;
+}
+
+
+
+
+.forterTab{
+  width: 100%;
+  height: 100rpx;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 35rpx;
+  box-sizing: border-box;
+}
+.paddingLR{
+  padding: 0 100rpx !important;
+}
+.forterTab text{
+  height: 100rpx;
+  display: block;
+  font-size: 26rpx;
+  color: rgba(96, 97, 99, 100);
+  position: relative;
+  line-height: 100rpx;
+}
+.forterTabActive{
+  color: rgba(16, 16, 16, 100) !important;
+}
+.forterTabActive::after{
+  content: '';
+  position: absolute;
+  bottom: 18rpx;
+  left: 50%;
+  margin-left: -50%;
+  width: 100%;
+  height: 6rpx;
+  background: #101010;
+}
+.dltittheme{height:80rpx;width:100%;background:#fff;border-bottom:1rpx solid #e5e5e5;}
+.dttemeimg{height:100%;width:7rpx;float:left;}
+.dlttemelef{height:80rpx;line-height:80rpx;font-size:30rpx;color:#333;float:left;margin-left:30rpx;}
+.goodsDetailseTu image{
+  width: 100%;
+  display: block;
+}
+
+.topShareBox{
+  width: 57rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  padding-left: 50rpx;
+  background: rgba(0,0,0,.5);
+  position: fixed;
+  top:250rpx;
+  right: 0;
+  border-radius: 50rpx 0 0 50rpx;
+  z-index: 3;
+  font-size: 24rpx;
+  color: #fff;
+}
+
+.topShareBoxImg{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 10rpx;
+  margin: auto;
+  width: 36rpx;
+  height: 36rpx;
 }
