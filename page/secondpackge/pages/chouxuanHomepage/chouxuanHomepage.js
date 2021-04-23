@@ -42,7 +42,7 @@ Page({
     this.activsign();
     // 活动介绍
     wx.request({
-      url: 'https://www.51chaidan.com/produce/lottoPrior.json',
+      url: 'https://www.51chaidan.com/produce/lottoPrior.json?time='+app.signindata.appNowTime,
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
@@ -143,7 +143,7 @@ Page({
     };    
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           // '已经授权'
           _this.setData({
             loginid: app.signindata.loginid,
@@ -187,7 +187,7 @@ Page({
     var _this = this;
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           _this.setData({
             signinlayer: true,
             tgabox: false

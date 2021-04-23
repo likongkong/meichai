@@ -104,7 +104,7 @@ Page({
       wx.navigateTo({
         url: "/page/component/pages/limitlottery/limitlottery?id=" + id+'&brandId='+brandid,
       });
-    } else if (type == 11 || type == 12) {
+    } else if (type == 11 || type == 12 || type == 999) {
       var id = w.currentTarget.dataset.id || w.target.dataset.id || '';
       wx.navigateTo({
         url: "/pages/detailspage/detailspage?gid=" + id
@@ -183,6 +183,7 @@ Page({
   onLoad: function (options) {
     var _this = this;
     console.log(options)
+    app.signindata.suap = 13;
     // wx.hideShareMenu();
     _this.setData({
       pagetype: options.type || 0,
@@ -195,7 +196,7 @@ Page({
     var _this = this;
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           _this.setData({
             signinlayer: true,
             tgabox: false
@@ -241,7 +242,7 @@ Page({
 
       wx.getSetting({
         success: res => {
-          if (res.authSetting['scope.userInfo']) {
+          if (true) {
             // '已经授权'
             _this.setData({
               loginid: app.signindata.loginid,
@@ -313,8 +314,12 @@ Page({
       _this.setData({
         c_title: "直播间列表",
       })
+    } else if (_this.data.pagetype == 999) {
+      _this.setData({
+        c_title: "限时不限量",
+      })
     };
-    if (_this.data.pagetype == 4 || _this.data.pagetype == 11 || _this.data.pagetype == 1) {
+    if (_this.data.pagetype == 4 || _this.data.pagetype == 11 || _this.data.pagetype == 1 || _this.data.pagetype == 999) {
       _this.getDate();
     }
     if (_this.data.pagetype == 2 || _this.data.pagetype == 14 || _this.data.pagetype == 1) {
@@ -324,6 +329,12 @@ Page({
       _this.getLiveList(1)
     }
     app.livebroadcast(_this, 0)  // 直播数据
+
+
+    setTimeout(function(){
+      app.indexShareBanner();
+    },1000);
+
   },
   getLiveList:function(num){
     var _this = this;
@@ -376,13 +387,6 @@ Page({
         fail: function () { }
       });
 
-
-
-
-
-
-
-
   },
   getDate: function () {
     var _this = this;
@@ -420,12 +424,15 @@ Page({
               });
             };
           })
+          console.log(_this.data.pagetype)
           if (_this.data.pagetype == 4) {
             _this.listdata(0);
           } else if (_this.data.pagetype == 11) {
             _this.getlimigGoods(0);
           } else if (_this.data.pagetype == 1) {
             _this.getfreeList(0);
+          } else if (_this.data.pagetype == 999) {
+            _this.getnolimigGoods(0);
           }
         } else {
         };
@@ -500,6 +507,59 @@ Page({
       },
       success: function (res) {
         console.log('限时抢购================',res)
+        wx.hideLoading()
+        wx.stopPullDownRefresh();
+        if (res.data.ReturnCode == 200) {
+          var listdata = res.data.List.activity || [];
+          for (var i = 0; i < listdata.length; i++) {
+            if(_this.data.newdataexh){
+              listdata[i].start =  '暂未';
+              listdata[i].stop = _this.toDatehd(listdata[i].stop_time)
+            }else{
+              listdata[i].start = _this.toDatehd(listdata[i].start_time)
+              listdata[i].stop = _this.toDatehd(listdata[i].stop_time)
+            }
+
+          };
+          if (page == 0) {
+            _this.setData({
+              listdata: listdata || [],
+              currentIndex: 0,
+            })
+          } else if (listdata.length > 0) {
+            var l = _this.data.listdata.concat(listdata);
+            _this.setData({
+              listdata: l,
+            })
+          } else {
+            app.showToastC('暂无更多数据');
+            _this.setData({
+              page: page - 1,
+            })
+          }
+        } else { };
+      },
+      fail: function () { }
+    });
+  },
+
+  //限时不限量
+  getnolimigGoods: function (page) {
+    var _this = this;
+    wx.showLoading({
+      title: '加载中...',
+    })
+    console.log('unlimitGoods')
+    var exh = Dec.Aese('mod=show&operation=unlimitGoods&date=' + _this.data.dateKey + '&page=' + page+ '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
+    console.log('mod=show&operation=unlimitGoods&date=' + _this.data.dateKey + '&page=' + page+ '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + exh,
+      method: 'GET',
+      header: {
+        'Accept': 'application/json'
+      },
+      success: function (res) {
+        console.log('限时不限量================',res)
         wx.hideLoading()
         wx.stopPullDownRefresh();
         if (res.data.ReturnCode == 200) {
@@ -903,6 +963,8 @@ Page({
       _this.getSmokeboxList(_this.data.nameserch, 0);
     } else if (_this.data.pagetype == 11) {
       _this.getlimigGoods(0);
+    } else if (_this.data.pagetype == 999) {
+      _this.getnolimigGoods(0);
     } else if (_this.data.pagetype == 1) {
       _this.getfreeList(0);
     } else if (_this.data.pagetype == 12) {
@@ -952,9 +1014,9 @@ Page({
   onShareAppMessage: function () {
     var _this = this;
     var share = {
-      title: "MCTS潮玩展，每小时送隐藏",
+      title: app.signindata.toyShowTitleShare,
       path: "/page/secondpackge/pages/exhibition/exhibition?type="+_this.data.pagetype||0,
-      imageUrl:'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      imageUrl:app.signindata.toyShowShareImg,
       success: function (res) { }
     };
     return share;

@@ -37,6 +37,7 @@ Page({
   onLoad: function(options) {
     // 判断是否授权 
     var _this = this;
+    app.signindata.suap = 21;
     _this.setData({
       loginid: app.signindata.loginid,
       uid: app.signindata.uid,
@@ -51,7 +52,7 @@ Page({
       }else{
         wx.getSetting({
           success: res => {
-            if (res.authSetting['scope.userInfo']) {
+            if (true) {
               // '已经授权'
               _this.setData({
                 loginid: app.signindata.loginid,
@@ -120,7 +121,7 @@ Page({
     var _this = this;
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           // 确认授权用户统计
           app.clicktga(4);
           _this.setData({

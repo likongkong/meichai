@@ -342,7 +342,7 @@ Page({
     var _this = this;
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           // 确认授权用户统计
           app.clicktga(4);
           _this.setData({
@@ -579,7 +579,7 @@ Page({
     }else{
       wx.getSetting({
         success: res => {
-          if (res.authSetting['scope.userInfo']) {
+          if (true) {
             // '已经授权'
             _this.setData({
               loginid: app.signindata.loginid,
@@ -1817,6 +1817,15 @@ Page({
   // 关闭保存图片上传图片
   closeupserimg: function () {
     this.setData({ upserimgbox: false, actimgshare: '' });
+  },
+  // 更新用户信息
+  getUserProfile(w){
+    app.getUserProfile((res,userInfo) => {
+      this.data.avatarUrl=userInfo.avatarUrl;
+      this.data.nickName=userInfo.nickName;
+      this.data.gender=userInfo.gender;
+      this.upserimgboxiftr(w)
+    })
   },
   upserimgboxiftr: function (w) {
     var _this = this;

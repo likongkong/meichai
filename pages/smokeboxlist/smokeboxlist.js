@@ -160,7 +160,7 @@ Page({
     var _this = this;
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           wx.navigateTo({
             url: "/page/component/pages/myothertoydg/myothertoydg?ownerId=" + _this.data.uid
           })
@@ -183,7 +183,7 @@ Page({
 
     // 推送统计
     _this.data.push_id = options.push_id || 0;
-
+    app.signindata.suap = 5;
     _this.setData({
       uid: app.signindata.uid,
       isProduce: app.signindata.isProduce,
@@ -204,7 +204,7 @@ Page({
     }else{
       wx.getSetting({
         success: res => {
-          if (res.authSetting['scope.userInfo']) {
+          if (true) {
             // '已经授权'
             _this.data.loginid = app.signindata.loginid;
             _this.data.openid = app.signindata.openid;
@@ -245,7 +245,7 @@ Page({
     var _this = this;
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           // 确认授权用户统计
           app.clicktga(4);
           _this.setData({

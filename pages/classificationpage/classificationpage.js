@@ -99,6 +99,7 @@ Page({
       loginid: app.signindata.loginid,
       uid: app.signindata.uid
     }); 
+    app.signindata.suap = 8;
     var mername = w.wname || '每日一拆';
     var wcate = w.cate ||'';
     var wcate_id = w.cate_id || '';
@@ -123,7 +124,7 @@ Page({
     // 判断是否授权 
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           // '已经授权'
           _this.setData({
             loginid: app.signindata.loginid,

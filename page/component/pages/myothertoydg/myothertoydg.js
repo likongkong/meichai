@@ -807,6 +807,7 @@ Page({
   onLoad: function (options) {
     // 判断是否授权  
     var _this = this;
+    app.signindata.suap = 17;
     if (options.scene) {
       let scene = decodeURIComponent(options.scene);
       _this.data.ownerId = _this.getSearchString('ownerId', scene) || 0;
@@ -838,7 +839,7 @@ Page({
     }else{
       wx.getSetting({
         success: res => {
-          if (res.authSetting['scope.userInfo']) {
+          if (true) {
             // '已经授权'
             _this.data.loginid = app.signindata.loginid;
             _this.data.openid = app.signindata.openid;
@@ -898,7 +899,7 @@ Page({
     var _this = this;
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           // 确认授权用户统计
           app.clicktga(4);
           _this.setData({

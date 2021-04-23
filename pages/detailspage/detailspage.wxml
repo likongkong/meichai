@@ -118,8 +118,8 @@
                 <view style="width:300rpx;height:110rpx;line-height:110rpx;margin-left:20rpx" class="deDepossttime">{{zunmdata.tipFinalPayment}}</view>
               </block>
             </block>
-            <block wx:elif="{{zunmdata.gid == 37197}}">
-              <block wx:if="{{nowTime < 1615737600}}">
+            <block wx:elif="{{zunmdata.gid == 37568 || zunmdata.gid == 37569 || zunmdata.gid == 37573}}">
+              <block wx:if="{{nowTime < 1619193600}}">
                 <view class="deDepossttime" style="padding: 18rpx 0 10rpx 0;">距离预定结束:</view>
                 <view class="deDepossttime"><block wx:if='{{winningovertimedetail.dayStr}}'>{{winningovertimedetail.dayStr}}天</block>  {{winningovertimedetail.hrStr}}:{{winningovertimedetail.minStr}}:{{winningovertimedetail.secStr}}</view>  
               </block>
@@ -166,7 +166,7 @@
               {{zunmdata.gname}}
             </view>
             <view class='dPrice' style="width:170rpx;float:left;padding-top:20rpx;">
-              <text style='font-size:30rpx;color:#000;font-weight:bold;color:#ff2742;'><block wx:if='{{zunmdata.giftStock}}'>赠品</block><block wx:else><text style='font-size:30rpx;'>{{zunmdata.gprice!=0?'￥':''}}</text><block wx:if='{{is_exhibition==1}}'>{{zunmdata.gprice!=0?zunmdata.gprice:'价格以线下展会为准'}}</block>
+              <text style='font-size:30rpx;color:#000;font-weight:bold;color:#ff2742;'><block wx:if='{{zunmdata.giftStock || zunmdata.isGiftGoods}}'>赠品</block><block wx:else><text style='font-size:30rpx;'>{{zunmdata.gprice!=0?'￥':''}}</text><block wx:if='{{is_exhibition==1}}'>{{zunmdata.gprice!=0?zunmdata.gprice:'价格以线下展会为准'}}</block>
               <block wx:else>{{zunmdata.gprice!=0?zunmdata.gprice:''}}</block></block></text>
             </view>
           </view>      
@@ -179,8 +179,9 @@
             <!-- 3D图片显示 -->
             <image wx:if='{{zunmdata.isOverAllView}}' src='https://cdn.51chaidan.com//images/sign/panorama.png' catchtap="jumpDSIE" class="detailS3Dimg"></image>
             <text wx:if='{{zunmdata.is_suit==1}}' style='color:#ff2742;font-size:24rpx;margin-right:10rpx;'>{{zunmdata.suitName}}<text style='font-size:30rpx;'>{{zunmdata.unpackUnit}}</text></text>
-            <text style='font-size:30rpx;color:#000;font-weight:bold;'><text style='font-size:30rpx;'>￥</text>{{zunmdata.gsale}}</text>
-            <text wx:if='{{zunmdata.giftStock}}'>赠品</text>
+            
+            <text wx:if='{{zunmdata.giftStock || zunmdata.isGiftGoods}}'>赠品</text>
+            <text wx:elif='{{zunmdata.gsale}}' style='font-size:30rpx;color:#000;font-weight:bold;'><text style='font-size:30rpx;'>￥</text>{{zunmdata.gsale}}</text>
             <text wx:elif='{{zunmdata.gsale!=zunmdata.gprice}}' style='color: #959595;font-size: 24rpx;text-decoration:line-through;position: relative;top:3rpx;margin-left: 10rpx;'><block wx:if='{{is_exhibition==1}}'>{{zunmdata.gprice!=0?zunmdata.gprice:'价格以线下展会为准'}}</block><block wx:else>{{zunmdata.gprice!=0?zunmdata.gprice:''}}</block></text>
           </view>
           <view class='dltityh' style='text-align:center;margin-bottom:10rpx;padding:12rpx 20rpx;position:relative;min-height:36rpx;'>
@@ -218,8 +219,9 @@
         <!-- 3D图片显示 -->
         <image wx:if='{{zunmdata.isOverAllView}}' src='https://cdn.51chaidan.com//images/sign/panorama.png' catchtap="jumpDSIE" class="detailS3Dimg"></image>
         <text wx:if='{{zunmdata.is_suit==1}}' style='color:#ff2742;font-size:24rpx;margin-right:10rpx;'>{{zunmdata.suitName}}<text style='font-size:30rpx;'>{{zunmdata.unpackUnit}}</text></text>
-        <text style='font-size:30rpx;color:#000;font-weight:bold;'><text style='font-size:30rpx;'>￥</text>{{zunmdata.gsale}}</text>
-        <text wx:if='{{zunmdata.giftStock}}'>赠品</text>
+        
+        <text wx:if='{{zunmdata.giftStock || zunmdata.isGiftGoods}}'>赠品</text>
+        <text wx:elif='{{zunmdata.gsale}}' style='font-size:30rpx;color:#000;font-weight:bold;'><text style='font-size:30rpx;'>￥</text>{{zunmdata.gsale}}</text>
         <text wx:elif='{{zunmdata.gsale!=zunmdata.gprice}}' style='color: #959595;font-size: 24rpx;text-decoration:line-through;position: relative;top:3rpx;margin-left: 10rpx;'><block wx:if='{{is_exhibition==1}}'>{{zunmdata.gprice!=0?zunmdata.gprice:'价格以线下展会为准'}}</block><block wx:else>{{zunmdata.gprice!=0?zunmdata.gprice:''}}</block></text>
       </view>
       <view class='dltityh' wx:if='{{specialGoods!=1}}' style='text-align:center;margin-bottom:10rpx;padding:12rpx 20rpx;position:relative;min-height:36rpx;'>
@@ -307,8 +309,33 @@
         </view>
       </view> 
   </view>
+
+<!-- 赠送 -->
+<block wx:if='{{zunmdata.isGiveGoodsStatus == 2 || zunmdata.isGiveGoodsStatus == 1}}'>
+  <view class="purchaseGift" wx:if='{{zunmdata.isGiveGoodsStatus == 2 || zunmdata.isGiveGoodsStatus == 1}}'>
+    <view class="purGiftLeft">购买赠送</view>
+    <view class="purGiftRight">
+        <block wx:if='{{zunmdata.isGiveGoodsStatus == 2}}'>距结束:<text class="purGiftRTxt" wx:if='{{cog.hrStr}}'>{{cog.hrStr}}</text>:<text class="purGiftRTxt" wx:if='{{cog.minStr}}'>{{cog.minStr}}</text>:<text class="purGiftRTxt" wx:if='{{cog.secStr}}'>{{cog.secStr}}</text></block>
+        <block wx:elif='{{zunmdata.isGiveGoodsStatus == 1}}'>活动时间:{{zunmdata.giftEndTime}}</block>
+    </view>
+  </view>
+
+  <view class="purGiftShop" wx:for='{{zunmdata.giveGoodsList}}' wx:key='key'>
+    <view class="purGiftTop" catchtap="addressmanagement" data-gid='{{item.giveGoodsId}}'>
+      <image mode='aspectFit' src="{{item.giveGoodsImg}}"></image>
+      <view class="purGiftTopName">
+          <view class="purGTNT"><text>赠品</text>{{item.giveGoodsName}}</view>
+          <view class="purGTNT">{{item.giveGoodsNumber}}</view>
+      </view>
+    </view>
+    <view class="purGiftTip">{{item.giveGoodsCondition}}</view>
+  </view>
+
+  <view class="purGiftTipCom">{{zunmdata.giveGoodsAttention}}</view>
   
-<image wx:if='{{isScrapingCard}}' style="width:100%;height:auto;display:block;margin:0 0 20rpx 0;" catchtap="jumpScrapingCard" mode='widthFix' src="https://cdn.51chaidan.com/images/scratchCardActivity/cardEntrance.jpg"></image>
+</block>
+
+<image wx:if='{{isScrapingCard}}' class="rotate" style="width:100%;height:auto;display:block;margin:0 0 20rpx 0;" catchtap="jumpScrapingCard" mode='widthFix' src="{{goodsInfoAds}}"></image>
 
 <image wx:if='{{!gotTBBMBS8 || !gotTBBMBS9}}' style="width:720rpx;height:auto; display:block;margin:15rpx auto;" catchtap="officialAccount" mode='widthFix' src="{{!gotTBBMBS8?'http://cdn.51chaidan.com/images/sign/activity/attentionGZH.png':'https://cdn.51chaidan.com/images/sign/activity/bigAttention1.png'}}"></image>
 
@@ -460,7 +487,7 @@
           <view class="exhibboxcon">
             <view style="float:left;margin-left:20rpx;">
               <view class="mexhibboxconeve" wx:for='{{exhdata}}' wx:key='key' wx:if='{{index%2==0}}' catchtap="jumpexhdetail" data-id='{{item.id}}' data-brandid='{{item.brandId}}' data-mtype="{{item.type}}" data-gid='{{item.goodsId}}'>
-                <block wx:if='{{item.type == 4 || item.type == 11|| item.type == 12 || item.type == 1 || item.type == 5|| item.type == 8|| item.type == 9}}'>
+                <block wx:if='{{item.type == 4 || item.type == 11|| item.type == 12 || item.type == 1 || item.type == 5|| item.type == 8|| item.type == 9|| item.type == 10}}'>
                   <image class="exhibboxeveimg" mode='widthFix' src="{{item.images}}"></image>
                   <view wx:if='{{item.type != 11 && item.type != 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.name}}</view>
                   <view wx:elif='{{item.type == 11 || item.type == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.goodsName}}</view>
@@ -512,7 +539,7 @@
             </view>
             <view style="float:left;margin-left:20rpx;">
               <view class="mexhibboxconeve" wx:for='{{exhdata}}' wx:key='key' wx:if='{{index%2==1}}' catchtap="jumpexhdetail" data-id='{{item.id}}' data-brandid='{{item.brandId}}' data-mtype="{{item.type}}" data-gid='{{item.goodsId}}'>
-                <block wx:if='{{item.type == 4 || item.type == 11|| item.type == 12 || item.type == 1 || item.type == 5|| item.type == 8|| item.type == 9}}'>
+                <block wx:if='{{item.type == 4 || item.type == 11|| item.type == 12 || item.type == 1 || item.type == 5|| item.type == 8|| item.type == 9|| item.type == 10}}'>
                   <image class="exhibboxeveimg" mode='widthFix' src="{{item.images}}"></image>
                   <view wx:if='{{item.type != 11 && item.type != 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.name}}</view>
                   <view wx:elif='{{item.type == 11 || item.type == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.goodsName}}</view>
@@ -723,6 +750,22 @@
 	</view>
 </block>
 
+<!--  底部tab 赠送商品 -->
+<block wx:elif='{{zunmdata.isGiftGoods}}'>
+    <view class="detailfooter" style='{{isIphoneX?"bottom:130rpx;":"bottom:110rpx;"}}'>
+      <view style='width:100%;min-height:98rpx;overflow:hidden;background:#f4f4f4;'>
+        <view style='height:98rpx;width:202rpx;float:left;position:relative;' wx:if='{{isCanShare}}' catchtap='displaysharefriend'>
+            <image src='https://www.51chaidan.com/images/icon/iconShareWX.png' style='width:50rpx;height:50rpx;display:block;margin:10rpx auto 0;'></image>
+            <view style='font-size:22rpx;width:100%;color:#919191;text-align:center;height:40rpx;line-height:40rpx;'>分享好友</view>
+        </view>
+        <view class="footer-child large turn" style='height:80rpx;margin-top:9rpx;border-radius:10rpx;padding:0;width:255rpx;margin-right:20rpx;background:#EBB01D;'>
+          <view class='addsopcar' bindtap='addressmanagement' data-gid='{{zunmdata.skipGoodsId}}' style='position:relative;height:80rpx;'>
+            <view style='width:100%;height:80rpx;text-align:center;color:#fff;line-height:80rpx;font-size:28rpx;'>购买指定商品赠送</view>
+          </view>
+        </view>
+      </view>
+    </view>   
+</block>
 
 <!--  底部tab -->
 <block wx:elif='{{zunmdata.isZhongCao}}'>
@@ -766,9 +809,9 @@
                     <view class="money" style='font-size:28rpx;'>￥{{zunmdata.promote_price}}</view>
                   </block>
                 </view> 
-                <view wx:elif='{{zunmdata.gid == 37197}}' class="footer-child large sale" style='height:80rpx;margin-top:9rpx;border-radius:10rpx;padding:0;width:{{zunmdata.tipFinalPayment && !zunmdata.isDepositSubscribe?"360":"255"}}rpx;margin-right:20rpx;' bindtap="{{zunmdata.gid == 37197 && nowTime < 1615737600?'dsbffunblock':''}}">
-                  <block wx:if="{{zunmdata.gid == 37197}}">
-                    <block wx:if="{{nowTime < 1615737600}}">
+                <view wx:elif='{{zunmdata.gid == 37568 || zunmdata.gid == 37569 || zunmdata.gid == 37573}}' class="footer-child large sale" style='height:80rpx;margin-top:9rpx;border-radius:10rpx;padding:0;width:{{zunmdata.tipFinalPayment && !zunmdata.isDepositSubscribe?"360":"255"}}rpx;margin-right:20rpx;' bindtap="{{zunmdata.gid == 37568 || zunmdata.gid == 37569 || zunmdata.gid == 37573 && nowTime < 1619193600?'dsbffunblock':''}}">
+                  <block wx:if="{{zunmdata.gid == 37568 || zunmdata.gid == 37569 || zunmdata.gid == 37573}}">
+                    <block wx:if="{{nowTime < 1619193600}}">
                       <view class="money" style='font-size:28rpx;'>支付定金</view>
                       <view class="money" style='font-size:28rpx;'>￥{{zunmdata.promote_price}}</view>
                     </block>
@@ -824,7 +867,7 @@
 
     <view class="detailbottomtip" wx:if='{{zunmdata.isSuplusChance}}'>
         <view class="detailbottomtipbg"></view>
-        <view class="detailbottomtiptxt">还有机会,有买家拍下还未付款,2分钟内将解除订单</view>
+        <view class="detailbottomtiptxt">还有机会,有买家拍下还未付款,1分钟内将解除订单</view>
     </view>
 
 		<view style='height:69rpx;width:152rpx;float:left;position:relative;'>
@@ -924,7 +967,7 @@
     <view class="detailfooter" style='{{isIphoneX?"bottom:130rpx;":"bottom:110rpx;"}}'>
       <view class="detailbottomtip" wx:if='{{zunmdata.isSuplusChance}}'>
          <view class="detailbottomtipbg"></view>
-         <view class="detailbottomtiptxt">还有机会,有买家拍下还未付款,2分钟内将解除订单</view>
+         <view class="detailbottomtiptxt">还有机会,有买家拍下还未付款,1分钟内将解除订单</view>
       </view>
       <view style='width:100%;min-height:98rpx;overflow:hidden;background:#f4f4f4;' wx:if='{{zunmdata.is_suit==0}}'>
         <view style='height:98rpx;width:202rpx;float:left;position:relative;' wx:if='{{isCanShare}}' catchtap='displaysharefriend'>

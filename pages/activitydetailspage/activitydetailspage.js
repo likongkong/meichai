@@ -319,8 +319,16 @@ Page({
     sigListdata:[],
     rLUserLotto:{},
     muSnData:[],
-    multipleDisplay:''
+    multipleDisplay:'',
+    timestamp:Date.parse(new Date()) / 1000,
+    // 刮刮卡入口
+    isScrapingCard:false,
   },
+  // 跳转刮刮卡
+  jumpScrapingCard(){
+    app.comjumpwxnav(9023,'','','')
+  },
+
   wonOrNot(){
     this.setData({wonOrNot:!this.data.wonOrNot})
   },
@@ -1556,6 +1564,19 @@ closefrindcommoni:function(){
       windowHeight: app.signindata.windowHeight || 600,
     });
     _this.detailfun();
+
+    // 刮刮卡入口
+    wx.request({
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/cardOpenStatus.txt?202104161826',
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('刮刮卡入口',res)
+        _this.setData({isScrapingCard:res.data.open || false,goodsInfoAds:res.data.goodsInfoAds})
+      },
+      fail: function (res) {}
+    })
+
     // 活动提示语 
     if (_this.data.defaultinformation == '') {
         var qhd = Dec.Aese('operation=info&mod=info');
@@ -2296,7 +2317,7 @@ closefrindcommoni:function(){
   },
   onLoad: function (options) {
     console.log('options======',options)
-
+    app.signindata.suap = 10;
     var _this = this;
     this.data.ctxt = wx.createCanvasContext('myordercanimgser');
     _this.data.loginid = app.signindata.loginid;
@@ -2382,7 +2403,7 @@ closefrindcommoni:function(){
     }else{
       wx.getSetting({
         success: res => {
-          if (res.authSetting['scope.userInfo']) {
+          if (true) {
             // '已经授权'
             _this.data.loginid = app.signindata.loginid;
             _this.data.openid = app.signindata.openid;
@@ -2453,7 +2474,7 @@ closefrindcommoni:function(){
     };
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           _this.setData({
             tgabox: false
           });
@@ -4159,6 +4180,16 @@ closefrindcommoni:function(){
         wx.hideToast();
         app.showToastC('上传失败');
       }
+    })
+  },
+
+  // 更新用户信息
+  getUserProfile(w){
+    app.getUserProfile((res,userInfo) => {
+        this.data.avatarUrl=userInfo.avatarUrl;
+        this.data.nickName=userInfo.nickName;
+        this.data.gender=userInfo.gender;
+      this.upserimgboxiftrWinningtheprize(w)
     })
   },
   //  晒单

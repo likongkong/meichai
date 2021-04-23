@@ -892,10 +892,7 @@
                             wx:if='{{comdata.status==16&&comdata.isShowOrder==1&&comdata.showOrder!=1&&comdata.showOrder!=2}}'
                             class='wholebottomaddright sharebox'
                             style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
-                            <view style='width:100%;height:100%;position: relative;' wx:if='{{comdata.showOrder==0}}'
-                                data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}'
-                                data-cover='{{comdata.cover}}' data-showorder='{{comdata.showOrder}}'
-                                data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
+                            <view style='width:100%;height:100%;position: relative;' wx:if='{{comdata.showOrder==0}}'>晒单领奖<button class='tgaboxtgawchbochlibutboxtwo' type='primary' bindtap="getUserProfile" data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}' data-cover='{{comdata.cover}}' data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}'></button></view>
                             <view style='width:100%;height:100%;' wx:if='{{comdata.showOrder==1}}'
                                 data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}'
                                 data-cover='{{comdata.cover}}' data-showorder='{{comdata.showOrder}}'
@@ -920,11 +917,10 @@
                             wx:if='{{comdata.status==16&&comdata.order_type==10&&(comdata.showOrder==0||comdata.showOrder==3||comdata.showOrder==4)}}'
                             class='wholebottomaddright sharebox'
                             style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
-                            <view style='width:100%;height:100%;position: relative;' data-qrcode='{{comdata.qrcode}}'
+                            <view style='width:100%;height:100%;position: relative;'>晒单领奖<button class='tgaboxtgawchbochlibutboxtwo' type='primary' bindtap="getUserProfile" data-qrcode='{{comdata.qrcode}}'
                                 data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具'
                                 data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png'
-                                data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}'
-                                catchtap='upserimgboxiftr'>晒单领奖</view>
+                                data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}'></button></view>
 
                         </view>
 
@@ -968,9 +964,9 @@
                             class='wholebottomaddright sharebox'
                             style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
                             <view style='width:100%;height:100%;position: relative;' wx:if='{{comdata.showOrder==0}}'
-                                data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}'
+                                >晒单领奖<button class='tgaboxtgawchbochlibutboxtwo' type='primary' bindtap="getUserProfile" data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}'
                                 data-cover='{{comdata.cover}}' data-showorder='{{comdata.showOrder}}'
-                                data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
+                                data-cart_id='{{comdata.cart_id}}'></button></view>
                             <view style='width:100%;height:100%;' wx:if='{{comdata.showOrder==1}}'
                                 data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}'
                                 data-cover='{{comdata.cover}}' data-showorder='{{comdata.showOrder}}'
@@ -986,11 +982,10 @@
                             wx:if='{{comdata.status==2&&comdata.order_type==10&&(comdata.showOrder==0||comdata.showOrder==3||comdata.showOrder==4)}}'
                             class='wholebottomaddright sharebox'
                             style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
-                            <view style='width:100%;height:100%;position: relative;' data-qrcode='{{comdata.qrcode}}'
+                            <view style='width:100%;height:100%;position: relative;'>晒单领奖<button class='tgaboxtgawchbochlibutboxtwo' type='primary' bindtap="getUserProfile" data-qrcode='{{comdata.qrcode}}'
                                 data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具'
                                 data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png'
-                                data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}'
-                                catchtap='upserimgboxiftr'>晒单领奖</view>
+                                data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}'></button></view>
                         </view>
 
                         <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0&&isShareGood}}'>
@@ -1025,11 +1020,10 @@
                             wx:if='{{comdata.status==3&&comdata.order_type==10&&(comdata.showOrder==0||comdata.showOrder==3||comdata.showOrder==4)}}'
                             class='wholebottomaddright sharebox'
                             style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
-                            <view style='width:100%;height:100%;position: relative;' data-qrcode='{{comdata.qrcode}}'
+                            <view style='width:100%;height:100%;position: relative;'>晒单领奖<button class='tgaboxtgawchbochlibutboxtwo' type='primary' bindtap="getUserProfile" data-qrcode='{{comdata.qrcode}}'
                                 data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具'
                                 data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png'
-                                data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}'
-                                catchtap='upserimgboxiftr'>晒单领奖</view>
+                                data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}'></button></view>
                         </view>
 
                         <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0&&isShareGood}}'>
@@ -1049,10 +1043,9 @@
                             wx:if='{{comdata.status==12&&comdata.isShowOrder==1&&comdata.showOrder!=1&&comdata.showOrder!=2}}'
                             class='wholebottomaddright sharebox'
                             style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
-                            <view style='width:100%;height:100%;position: relative;' wx:if='{{comdata.showOrder==0}}'
-                                data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}'
+                            <view style='width:100%;height:100%;position: relative;' wx:if='{{comdata.showOrder==0}}'>晒单领奖<button class='tgaboxtgawchbochlibutboxtwo' type='primary' bindtap="getUserProfile" data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}'
                                 data-cover='{{comdata.cover}}' data-showorder='{{comdata.showOrder}}'
-                                data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
+                                data-cart_id='{{comdata.cart_id}}'></button></view>
                             <view style='width:100%;height:100%;' wx:if='{{comdata.showOrder==1}}'
                                 data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}'
                                 data-cover='{{comdata.cover}}' data-showorder='{{comdata.showOrder}}'
@@ -1068,11 +1061,10 @@
                             wx:if='{{comdata.status==12&&comdata.order_type==10&&(comdata.showOrder==0||comdata.showOrder==3||comdata.showOrder==4)}}'
                             class='wholebottomaddright sharebox'
                             style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
-                            <view style='width:100%;height:100%;position: relative;' data-qrcode='{{comdata.qrcode}}'
+                            <view style='width:100%;height:100%;position: relative;'>晒单领奖<button class='tgaboxtgawchbochlibutboxtwo' type='primary' bindtap="getUserProfile" data-qrcode='{{comdata.qrcode}}'
                                 data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具'
                                 data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png'
-                                data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}'
-                                catchtap='upserimgboxiftr'>晒单领奖</view>
+                                data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}'></button></view>
                         </view>
 
                         <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0&&isShareGood}}'>
@@ -1094,10 +1086,9 @@
                             wx:if='{{comdata.status==13&&comdata.isShowOrder==1&&comdata.showOrder!=1&&comdata.showOrder!=2}}'
                             class='wholebottomaddright sharebox'
                             style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
-                            <view style='width:100%;height:100%;position: relative;' wx:if='{{comdata.showOrder==0}}'
-                                data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}'
+                            <view style='width:100%;height:100%;position: relative;' wx:if='{{comdata.showOrder==0}}'>晒单领奖<button class='tgaboxtgawchbochlibutboxtwo' type='primary' bindtap="getUserProfile" data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}'
                                 data-cover='{{comdata.cover}}' data-showorder='{{comdata.showOrder}}'
-                                data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
+                                data-cart_id='{{comdata.cart_id}}'></button></view>
                             <view style='width:100%;height:100%;' wx:if='{{comdata.showOrder==1}}'
                                 data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}'
                                 data-cover='{{comdata.cover}}' data-showorder='{{comdata.showOrder}}'
@@ -1126,9 +1117,9 @@
                             class='wholebottomaddright sharebox'
                             style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:8rpx;position:relative;border:0;'>
                             <view style='width:100%;height:100%;position: relative;' wx:if='{{comdata.showOrder==0}}'
-                                data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}'
+                                >晒单领奖<button class='tgaboxtgawchbochlibutboxtwo' type='primary' bindtap="getUserProfile" data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}'
                                 data-cover='{{comdata.cover}}' data-showorder='{{comdata.showOrder}}'
-                                data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>晒单领奖</view>
+                                data-cart_id='{{comdata.cart_id}}'></button></view>
                             <view style='width:100%;height:100%;' wx:if='{{comdata.showOrder==1}}'
                                 data-qrcode='{{comdata.qrcode}}' data-awardinfo='{{comdata.award_info}}'
                                 data-cover='{{comdata.cover}}' data-showorder='{{comdata.showOrder}}'
@@ -1144,11 +1135,10 @@
                             wx:if='{{comdata.status==4&&comdata.order_type==10&&(comdata.showOrder==0||comdata.showOrder==3||comdata.showOrder==4)}}'
                             class='wholebottomaddright sharebox'
                             style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
-                            <view style='width:100%;height:100%;position: relative;' data-qrcode='{{comdata.qrcode}}'
+                            <view style='width:100%;height:100%;position: relative;'>晒单领奖<button class='tgaboxtgawchbochlibutboxtwo' type='primary' bindtap="getUserProfile" data-qrcode='{{comdata.qrcode}}'
                                 data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具'
                                 data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png'
-                                data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}'
-                                catchtap='upserimgboxiftr'>晒单领奖</view>
+                                data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}'></button></view>
                         </view>
 
                         <view class='totalmoncrightcel' data-oid='{{comdata.oid}}' bindtap='confirmationofreceipt'>确认收货
@@ -1178,11 +1168,10 @@
                             wx:if='{{comdata.status==5&&comdata.order_type==10&&(comdata.showOrder==0||comdata.showOrder==3||comdata.showOrder==4)}}'
                             class='wholebottomaddright sharebox'
                             style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
-                            <view style='width:100%;height:100%;position: relative;' data-qrcode='{{comdata.qrcode}}'
+                            <view style='width:100%;height:100%;position: relative;'>晒单领奖<button class='tgaboxtgawchbochlibutboxtwo' type='primary' bindtap="getUserProfile" data-qrcode='{{comdata.qrcode}}'
                                 data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具'
                                 data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png'
-                                data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}'
-                                catchtap='upserimgboxiftr'>晒单领奖</view>
+                                data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}'></button></view>
                         </view>
 
                         <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0&&isShareGood}}'>

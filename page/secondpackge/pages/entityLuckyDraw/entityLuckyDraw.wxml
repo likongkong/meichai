@@ -15,26 +15,51 @@
 
   <view class="goodsInfo">
     <!-- <swiper indicator-dots="{{false}}" style="height:370rpx;"> -->
-      <block wx:for="{{goodsList.listGoods}}" wx:key="*this">
+      <!-- <block wx:for="{{activity}}" wx:key="*this"> -->
         <!-- <swiper-item> -->
-          <image class="goodsImg" src="{{item.img}}" mode="widthFix"></image>
-          <view><text class="goodsName">{{item.goods_name}}</text></view> 
+          <!-- <image class="goodsImg" src="{{item.img}}" mode="widthFix"></image> -->
+          <swiper previous-margin='100rpx' next-margin='100rpx' bindchange="swiperChange" style='height:{{swiperH}};'>
+            <swiper-item wx:for='{{activity}}' wx:key='*this'>
+              <view class='le-img {{nowIdx==index?"le-active":""}}' style='height:{{swiperH}};overflow:hidden;' catchtap="{{item.status ==1?'showtoast':''}}">
+                <block wx:if="{{item.status ==2}}">
+                  <view class="typeBtn bgBlue">
+                    进行中
+                  </view>
+                </block>
+                <block wx:elif="{{item.status ==1}}">
+                  <view class="typeBtn bghui">
+                    未开启
+                  </view>
+                </block>
+                <block wx:elif="{{item.status ==3}}">
+                  <view class="typeBtn bghui">
+                    已结束
+                  </view>
+                </block>
+                <image bindload='getHeight' src='{{item.images}}' style='height:{{swiperH}};'></image>
+                <view class="goodsInfoa">
+                  <view class="goodsNamea">{{item.name}}</view>
+                  <view class="goodsNuma">剩余：<text style="font-weight: bold;">{{item.limit_users - item.truth_users}}</text></view>
+                </view>
+              </view>
+            </swiper-item>
+          </swiper>
+          <!-- <view><text class="goodsName">{{item.goods_name}}</text></view> 
           <view><text class="goodsPrice" wx:if="{{item.price!=0}}">￥{{item.price}}</text></view> 
-          <view><text class="goodsNum">剩余：{{goodsList.limit_users - goodsList.truth_users}}</text></view> 
+          <view><text class="goodsNum">剩余：{{goodsList.limit_users - goodsList.truth_users}}</text></view>  -->
         <!-- </swiper-item> -->
-      </block>
+      <!-- </block> -->
     <!-- </swiper> -->
-    
   </view>
   <view style="display: flex;justify-content: center;"><text class="drawNum">剩余刮刮卡：{{suplusChance}}</text></view> 
 
-  <view class="drawWrap">
+  <view class="drawWrap" wx:if="{{activity[nowIdx].status !=3}}">
     <!-- <view class="jqqd">
       敬请期待
     </view> -->
     <view class="drawBtn1" wx:if="{{isDrawBtn}}">
-      <view data-num="1" style="{{isPrior?'background:#ADADAD':''}}" catchtap="{{isPrior?'':'drawFun'}}">刮一张</view>
-      <view data-num="10" style="{{isPrior?'background:#ADADAD':''}}" catchtap="{{isPrior?'':'drawFun'}}" class="drawBtnAfter">
+      <view data-num="1" style="{{isPrior?'background:#ADADAD':''}}" catchtap="{{activity[nowIdx].status ==1?'showtoast':isPrior?'':'drawFun'}}">刮一张</view>
+      <view data-num="10" style="{{isPrior?'background:#ADADAD':''}}" catchtap="{{activity[nowIdx].status ==1?'showtoast':isPrior?'':'drawFun'}}" class="drawBtnAfter">
         <text class="txtten">刮十张</text>  
         <view class="tips" wx:if="{{!isPrior}}">VIP刮十张送三张刮刮卡
           <view><image src="https://cdn.51chaidan.com/images/calendar/luckyDraw/xiajiantou.png"></image></view>  

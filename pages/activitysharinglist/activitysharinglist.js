@@ -338,7 +338,7 @@ Page({
       // 适配苹果X 
       isIphoneX: app.signindata.isIphoneX
     });
-
+    app.signindata.suap = 9;
     if(app.signindata.sceneValue==1154){
       app.signindata.isProduce = true;
       _this.setData({isProduce:true}); 
@@ -346,7 +346,7 @@ Page({
     }else{
       wx.getSetting({
         success: res => {
-          if (res.authSetting['scope.userInfo']) {
+          if (true) {
             // '已经授权'
             _this.setData({
               loginid: app.signindata.loginid,
@@ -384,7 +384,7 @@ Page({
     var _this = this;
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           _this.setData({
             tgabox: false,
             signinlayer: true

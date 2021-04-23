@@ -105,7 +105,8 @@ Page({
      //抽盒金抵扣使用规则
      isBlindboxRuleMask:false,
      gotTBBMBS8:true,
-     gotTBBMBS9:true
+     gotTBBMBS9:true,
+     isFlagship:true
   },
   // 跳转公众号文章
    officialAccount(){
@@ -115,7 +116,15 @@ Page({
       app.comjumpwxnav(0,'https://mp.weixin.qq.com/s?__biz=MzI2Mzg4MDYzNQ==&mid=100013809&idx=1&sn=9c8be56959fe9d2ddb799b216b58d38e&chksm=6ab79c255dc015334675ddb87776de7962ed72ff69b57e0570d09dcfd8226663172d00a040bf#rd','','')
     };
   },
-
+  getUserProfile(w){
+    var _this = this;
+    var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
+    app.getUserProfile((res)=>{
+       _this.setData({
+        ['userimg[' + ind + '].headphoto']:app.signindata.avatarUrl
+       })
+    });
+  },
   useBlindboxMoneyFun(){
     this.setData({
       isUseBlindboxMoney:!this.data.isUseBlindboxMoney,
@@ -313,8 +322,8 @@ Page({
       isharepag: false,
     })
   },
-  
   // 幸运值
+
   /**
    * 用户点击右上角分享
    */
@@ -602,6 +611,7 @@ Page({
   onLoad: function (options) {
     console.log('onload=============',options)
     var _this = this;
+    app.signindata.suap = 15;
     wx.getSystemInfo({
       success: function (res) {
         _this.setData({
@@ -681,10 +691,11 @@ Page({
     }
 
     wx.request({
-      url: 'https://cdn.51chaidan.com/produce/tipDeductForYifanshang.json',
+      url: 'https://cdn.51chaidan.com/produce/tipDeductForYifanshang.json?time='+app.signindata.appNowTime,
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
+        console.log(res)
         WxParse.wxParse('article', 'html', res.data.tip, _this,5);
       }
     })
@@ -760,24 +771,7 @@ Page({
 
 
 
-          if ( activity.status==3 || activity.suplusNum<=0 ) {
-            // wx.showModal({
-            //   title: '提示',
-            //   content: '活动已结束',
-            //   showCancel: false,
-            //   success: function (res) {
-            //     wx.reLaunch({
-            //       url: "/page/secondpackge/pages/aRewardList/aRewardList"
-            //     });
-            //   }
-            // });
-            // if(activity.isCheckOther==2){
-            //   let id = activity.id;
-            //   wx.redirectTo({   
-            //     url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + id +"&checkOtherActivity=2"
-            //   });
-            // }
-          }
+          
           // if(activity.status==2&&activity.suplusNum>0&&_this.data.uid){
           //     _this.queuefun(1,1);
           // };
@@ -813,20 +807,21 @@ Page({
           // }
 
           // 幸运值
-
-          if (_this.data.firstshowredpag && res.data.List.welfare.length > 0 && res.data.List.welfare[0].currentAmount == 0 && _this.data.isredpag != 1) {
-            _this.hidepackage()
-            _this.setData({
-              redpagList: res.data.List.welfare || [],
-              firstshowredpag: false,
-            })
-          } else if (_this.data.firstshowredpag) {
-            _this.data.firstshowredpag = false
-          }
+          // if (_this.data.firstshowredpag && res.data.List.welfare.length > 0 && res.data.List.welfare[0].currentAmount == 0 && _this.data.isredpag != 1) {
+          //   _this.hidepackage()
+          //   _this.setData({
+          //     redpagList: res.data.List.welfare || [],
+          //     firstshowredpag: false,
+          //   })
+          // } else if (_this.data.firstshowredpag) {
+          //   _this.data.firstshowredpag = false
+          // }
+          
           _this.setData({
             userimg:userimg,
             goodsdata:goodsdata,
             activity:activity,
+            isFlagship:activity.isFlagship,
             otherActivity:otherActivity,
             finalReward:finalReward,
             goodsExhibition:newarr,
@@ -847,15 +842,43 @@ Page({
             threeDeductMoney:threeDeductMoney>_this.data.blindboxMoney?_this.data.blindboxMoney:threeDeductMoney,
             oneDeductMoney:oneDeductMoney>_this.data.blindboxMoney?_this.data.blindboxMoney:oneDeductMoney,
           })
+
+          if(res.data.Info.newActivityId){
+            if (activity.status==3 || activity.suplusNum<=0) {
+              // wx.showToast({
+              //   title: '该一番赏已结束，即将为您跳转到新的一番赏',
+              //   icon: 'none',
+              //   duration: 3000
+              // })
+              // setTimeout(function(){
+              //   wx.redirectTo({   
+              //     url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + res.data.Info.newActivityId
+              //   });
+              // },3000)
+              wx.showModal({
+                title: '提示',
+                content: '该一番赏已结束，是否为您跳转到新的一番赏',
+                success (res1) {
+                  if (res1.confirm) {
+                    wx.redirectTo({   
+                      url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + res.data.Info.newActivityId
+                    });
+                  } else if (res1.cancel) {
+                    console.log('用户点击取消')
+                  }
+                }
+              })
+
+
+            }
+          }
+
         }else{
           app.showToastC(res.data.Msg);
         }
       },
       fail: function () { }
     });
-
-    
-
   },
   // 排队
   // type 排队类型(1正常排队， 2延长排队时间)
@@ -1188,7 +1211,7 @@ Page({
     }else{
       wx.getSetting({
         success: res => {
-          if (res.authSetting['scope.userInfo']) {
+          if (true) {
             // '已经授权'
             _this.setData({
               loginid: app.signindata.loginid,
@@ -1231,7 +1254,7 @@ Page({
     var _this = this;
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           _this.setData({
             signinlayer: true,
             tgabox: false
@@ -1423,6 +1446,12 @@ Page({
     var urlname = encodeURIComponent(name);
     wx.navigateTo({
       url: "/page/component/pages/ocamcart/ocamcart?name=" + urlname+"&but=shop&goods_id="+goods_id
+    });
+  },
+  jumpRedList(w){
+    var ind = w.currentTarget.dataset.ind;
+    wx.navigateTo({   
+      url: "/page/secondpackge/pages/redEnvelopeList/redEnvelopeList?hs=" + ind
     });
   },
   //关闭跳转其他一番赏弹框

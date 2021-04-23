@@ -13,15 +13,34 @@
         </view>
         <view class="oca_goodsDetailsRight" style="">
           <view style="width:100%;{{item.skip.length == 0?'display: flex;':''}}">
-            <text class="oca_goodsDetailsRight_name oca_goodsDetailsRight_txt">{{item.goodsName}}</text>
-            <view class="oca_goodsDetailsRight_style oca_goodsDetailsRight_txt" wx:if="{{item.roleName}}">
-              <view style="width: {{item.ratio?75:100}}%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">款式:{{item.roleName}}</view>
-              <view class="flex" wx:if="{{item.ratio}}">
-                <image src="https://cdn.51chaidan.com/images/sign/activity/xiajiang.png" mode="widthFix"></image>
-                <text>{{item.ratio}}%</text>
+            <text wx:if="{{pageid !=2 }}" class="oca_goodsDetailsRight_name oca_goodsDetailsRight_txt">{{item.goodsName}}</text>
+
+            <!-- 其他商品 -->
+            <block wx:if="{{pageid !=2 }}">
+              <view class="oca_goodsDetailsRight_style oca_goodsDetailsRight_txt" wx:if="{{item.roleName}}">
+                <view style="width: {{item.ratio?75:100}}%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">款式:{{item.roleName}}</view>
+                <view class="flex" wx:if="{{item.ratio}}">
+                  <image src="https://cdn.51chaidan.com/images/sign/activity/xiajiang.png" mode="widthFix"></image>
+                  <text>{{item.ratio}}%</text>
+                </view>
               </view>
-            </view>
-            <view class="oca_goodsDetailsRight_type oca_goodsDetailsRight_txt" wx:if="{{item.skip.length != 0}}">
+            </block>
+            <!-- 碎片商品 -->
+            <block wx:else>   
+              <view class="oca_goodsDetailsRight_style oca_goodsDetailsRight_txt" wx:if="{{item.roleName}}">
+                <view style="width:75%;">款式:{{item.roleName}}</view>
+                <view class="flex">
+                  <block wx:if="{{item.minPrice == item.maxPrice}}">
+                    <text class="idle_listItemPrice" style="font-size:24rpx;color:#FF2742;">￥{{item.minPrice}}</text>
+                  </block>
+                  <block wx:else>
+                    <text class="idle_listItemPrice" style="font-size:24rpx;color:#FF2742;">￥{{item.minPrice}}~￥{{item.maxPrice}}</text>
+                  </block>
+                </view>
+              </view>
+            </block>
+
+            <view class="oca_goodsDetailsRight_type oca_goodsDetailsRight_txt" wx:if="{{pageid !=2 && item.skip.length != 0}}">
               <view>
                 获取:
                 <block wx:for='{{item.skip}}' wx:key='key' wx:for-item="skipItem">

@@ -29,14 +29,124 @@ Page({
     classifyName:'',
     classifyArr:[],
     ClassifyTabW:0, //分类tab宽
-    animationData:{}
+    animationData:{},
+    scene:'',
+    isredpacket:false
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options) {
+      this.setData({
+        scene:options,
+      })
+    } 
+    app.signindata.suap = 14;
+    // 判断是否授权
+    this.activsign();
+  },
+  onLoadfun:function(){
+    this.setData({
+      loginid: app.signindata.loginid,
+      uid: app.signindata.uid,
+      openid: app.signindata.openid,
+      isProduce: app.signindata.isProduce
+    });
     this.gitList();
   },
+  activsign: function () {
+    // 判断是否授权 
+    var _this = this;
+    // 判断是否登录
+    if (_this.data.loginid != '' && _this.data.uid != '') {
+      _this.onLoadfun();
+      return false;
+    };    
+
+    if(app.signindata.sceneValue==1154){
+      app.signindata.isProduce = true;  
+      _this.onLoadfun();
+    }else{
+      wx.getSetting({
+        success: res => {
+          if (true) {
+            // '已经授权'
+            _this.setData({
+              loginid: app.signindata.loginid,
+              uid: app.signindata.uid,
+              openid: app.signindata.openid,
+              avatarUrl: app.signindata.avatarUrl,
+              isShareFun: app.signindata.isShareFun,
+              isProduce: app.signindata.isProduce,
+              signinlayer: true,
+              tgabox: false
+            });
+            // 判断是否登录
+            if (_this.data.loginid != '' && _this.data.uid != '') {
+              _this.onLoadfun();
+            } else {
+              app.signin(_this);
+            }
+          } else {
+            _this.setData({
+              tgabox: false,
+              signinlayer: false
+            })
+            // '没有授权 统计'
+            app.userstatistics(43);
+            _this.onLoadfun();
+          }
+        }
+      });  
+    };    
+  },
+  // 授权点击统计
+  clicktga: function () {
+    app.clicktga(2)
+  },
+  clicktganone: function () {
+    this.setData({ tgabox: false })
+  },
+  // 点击登录获取权限
+  userInfoHandler: function (e) {
+    var _this = this;
+    wx.getSetting({
+      success: res => {
+        if (true) {
+          _this.setData({
+            signinlayer: true,
+            tgabox: false
+          });
+          _this.activsign();
+          // 确认授权用户统计
+          app.clicktga(4);          
+        }
+      }
+    });
+    if (e.detail.detail.userInfo) { } else {
+      app.clicktga(8)  //用户按了拒绝按钮
+    };
+  },
+  pullupsignin: function () {
+    // // '没有授权'
+    this.setData({
+      tgabox: true
+    });
+  },
+
+  getWelfare(e){
+    this.setData({
+      welfare:e.detail.welfare
+    })
+  },
+  redpagshareimage(e){
+    console.log(e.detail,"111111")
+    this.setData({
+      redpagshareimg:e.detail
+    })
+  },
+
   gitList(){
     var _this = this;
     wx.showLoading({title: '加载中...',})
@@ -59,7 +169,10 @@ Page({
           }else{
             let alldata = [..._this.data.datalist,...res.data.List.activity];
             // console.log(alldata)
-            _this.setData({datalist : alldata,rewardswiperData:res.data.List.topicActivity,consumemessageData:res.data.List.record,classifyArr:res.data.List.classifyList})
+            _this.setData({datalist : alldata,rewardswiperData:res.data.List.topicActivity,consumemessageData:res.data.List.record,classifyArr:res.data.List.classifyList,countWelfare:res.data.Info.countWelfare})
+            _this.setData({
+              isredpacket:true
+            })
             //创建节点选择器
             // var query = wx.createSelectorQuery();
             // query.select('#ele'+_this.data.classifyIndex).boundingClientRect();
@@ -140,11 +253,38 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function(options ) {
     var _this = this
     var share = {
       imageUrl:  "https://cdn.51chaidan.com/images/sign/yifanshangLisSharet.jpg"
     }
+    if( options.from == 'button' ){
+      var info = _this.data.welfare
+      var xilie = _this.data.welfare.roleName != "" ? "-" : ""
+      var title = ""
+      if(info.welfareType == 1){
+        title = "我抽到了"+ xilie + info.roleName + "，隐藏红包送给你们。"
+      } else if(info.welfareType == 2){
+        if (info.userId && info.userId != _this.data.uid) {
+          title = info.nick + "抽到了"+ xilie + info.roleName + "，幸运值红包送给你们。"
+        } else {
+          title = "我抽到了"+ xilie + info.roleName + "，幸运值红包送给你们。"
+        }
+      }else if(info.welfareType == 3){
+        if (info.userId && info.userId != _this.data.uid) {
+          title = info.nick + "抽到了"+ xilie + info.roleName + "，抽盒金红包送给你们。"
+        } else {
+          title = "我抽到了"+ xilie + info.roleName + "，抽盒金红包送给你们。"
+        }
+      }
+      var share = {
+        title: title,
+        imageUrl: _this.data.redpagshareimg,
+        path: "/page/secondpackge/pages/aRewardList/aRewardList?id=" + _this.data.scene.id + '&referee=' + _this.data.uid + '&gid=' + _this.data.scene.gid + '&welfareid=' + _this.data.scene.welfareid + '&isredpag=1',
+        success: function (res) {}
+      }
+    }
+
     return share;
   },
   onShareTimeline:function(){

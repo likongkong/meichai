@@ -1,5 +1,6 @@
 // page/component//pages/mingbox/mingbox.js
 var Dec = require('../../../../common/public.js'); //aes加密解密js
+var WxParse = require('../../../../wxParse/wxParse.js');
 const app = getApp();
 
 Page({
@@ -131,6 +132,11 @@ Page({
     isUseBlindboxMoney:true,
     // 提交订单时是否使用抽盒金抵扣
     isDeductNum:1,
+    isSmokebox:false,
+    current:1,
+    t1:0,
+    t2:0,
+    t3:0,
   },
   useBlindboxMoneyFun(){
     this.setData({
@@ -248,7 +254,7 @@ Page({
     var _this = this;
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           // '已经授权'
           _this.data.loginid = app.signindata.loginid;
           _this.data.openid = app.signindata.openid;
@@ -285,7 +291,7 @@ Page({
     var _this = this;
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           // 确认授权用户统计
           app.clicktga(4);
           _this.setData({
@@ -373,9 +379,16 @@ Page({
       },
 
       success: function(res) {
+
+        console.log('getinfo====',res)
+
         wx.stopPullDownRefresh();
         wx.stopPullDownRefresh()
         if (res.data.ReturnCode == 200) {
+
+          if(res.data.Info.infoGoods.goods_desc && res.data.Info.infoGoods.goods_desc!=''){
+            WxParse.wxParse('article', 'html', res.data.Info.infoGoods.goods_desc, _this, 0);
+          }
 
           clearInterval(_this.data.timer)
           clearTimeout(_this.data.timout)
@@ -409,6 +422,7 @@ Page({
             };
           };
           _this.setData({
+            infodata:res.data.Info,
             id: res.data.Info.infoActivity.id,
             infoActivity: res.data.Info.infoActivity,
             infoGoods: res.data.Info.infoGoods,
@@ -435,6 +449,25 @@ Page({
             _this.getimginfolist()
 
           }, 500) //延迟时间 这里是1秒
+
+          var query = wx.createSelectorQuery();
+          query.select('#t1').boundingClientRect();
+          query.selectViewport().scrollOffset();
+          query.exec(function (res) {
+            _this.setData({
+              t1:res[0].top
+            })
+          })
+          if(res.data.Info.infoGoods.goods_desc && res.data.Info.infoGoods.goods_desc!=''){
+            var query = wx.createSelectorQuery();
+            query.select('#t2').boundingClientRect();
+            query.selectViewport().scrollOffset();
+            query.exec(function (res) {
+              _this.setData({
+                t2:res[0].top
+              })
+            })
+          }
         }
         // wx.hideLoading()
       },
@@ -564,15 +597,44 @@ Page({
   },
 
   onPageScroll(e) {
-    var space = this.data.bottomtop - this.data.navbtn
+
+    let scrollTop = e.scrollTop;
+
+    if(scrollTop > this.data.t1){
+      this.setData({
+        isSmokebox:true
+      })
+    }else{
+      this.setData({
+        isSmokebox:false
+      })
+    }
+
+    if(scrollTop<this.data.t2){
+      this.setData({
+        current: 1
+      })
+    }
+    // else if(scrollTop>this.data.t2 && scrollTop<this.data.t3){
+    //   this.setData({
+    //     current: 2
+    //   })
+    // }else if(scrollTop>this.data.t3){
+    //   this.setData({
+    //     current: 3
+    //   })
+    // }
+
+    var space = this.data.bottomtop
+    // var space = this.data.bottomtop - this.data.navbtn
 
     if (e.scrollTop > space) {
       this.setData({
-        ishowsusp: false
+        ishowsusp: true
       })
     } else {
       this.setData({
-        ishowsusp: true
+        ishowsusp: false
       })
     }
   },
@@ -1510,6 +1572,19 @@ Page({
               pid: pid - 1,
             })
           }
+
+          if(mlist&&mlist.length!=0){
+            var query = wx.createSelectorQuery();
+            query.select('#t3').boundingClientRect();
+            query.selectViewport().scrollOffset();
+            query.exec(function (res) {
+              _this.setData({
+                t3:res[0].top
+              })
+            })
+          }
+         
+
         }
         wx.hideLoading()
       },
@@ -1520,6 +1595,42 @@ Page({
       }
 
     })
+  },
+
+  jumpdetail: function(w) {
+    var gid = w.currentTarget.dataset.gid;
+    var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
+    wx.redirectTo({
+      url: "/page/component/pages/mingbox/mingbox?gid=" + gid + '&id=' + id,
+    });
+  },
+
+
+  position:function(w){
+    var tid = w.currentTarget.dataset.tid || w.target.dataset.tid || 0;
+    var query = wx.createSelectorQuery();
+    query.select('#t' + tid).boundingClientRect();
+    query.selectViewport().scrollOffset();
+    query.exec(function(res) {
+      if (res && res[0] && res[1]) {
+        wx.pageScrollTo({
+           scrollTop:( res[0].top+res[1].scrollTop-app.signindata.statusBarHeightMc||90 )-85,
+           duration:300
+        })
+      }
+    });
+
+    this.setData({
+      current:tid
+    })
+  },
+
+  jumpSmokeboxdetail: function(w) {
+    var _this = this;
+    var gid = w.currentTarget.dataset.gid;
+    wx.navigateTo({
+      url: "/pages/smokebox/smokebox?gid=" + gid
+    });
   },
 
   jumpdetail: function(w) {

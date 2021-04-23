@@ -1,3 +1,5 @@
+<import src="../../../../wxParse/wxParse.wxml" />
+
 <view style='width:0;height:0;overflow:hidden;position:absolute;top:-1000px;'>
   <!-- <view style='width:100%;height:240px;background:#888;display:flex;justify-content:center;align-items:center;position:absolute;z-index:100;'> -->
   <canvas canvas-id='snapshot' style='width:300px;height:240px;'></canvas>
@@ -154,11 +156,13 @@
   </view>
 
 
-
-  <view style='font-size:25rpx;padding:20rpx 50rpx;line-height:40rpx;background:#E5E7EA;'>
-
+  <view class="forterTab {{recommendlist&&recommendlist.length!=0?'':'paddingLR'}}">
+    <text class="{{current == 1?'forterTabActive':''}}" catchtap="position" data-tid='1'>活动规则</text>
+    <text wx:if="{{infoGoods.goods_desc && infoGoods.goods_desc!=''}}" class="{{current == 2?'forterTabActive':''}}" catchtap="position" data-tid='2'>商品详情</text>
+    <text wx:if="{{recommendlist&&recommendlist.length!=0}}" class="{{current == 3?'forterTabActive':''}}" catchtap="position" data-tid='3'>活动推荐</text>
+  </view>
+  <view style='font-size:25rpx;padding:20rpx 50rpx;line-height:40rpx;background:#E5E7EA;' id="t1">
     <view style='text-align:center;font-size:30rpx;margin-top:20rpx;line-height:50rpx;'>活动规则</view>
- 
     <view style='margin-top:30rpx;'>一.发起明盒</view>
     <view>·支付成功后发起明盒</view>
     <view>·发起后2小时内无朋友拆盒则自动失败</view>
@@ -183,13 +187,24 @@
 
     <view style='margin:30rpx 0;position:relative;' catchtap='showrule'>详细规则></view>
     <view style='height:50rpx;'></view>
-
   </view>
 
-  <view style='width:100%;color:#333;font-size:26rpx;height:73rpx;line-height:73rpx;text-align:center;'>活动推荐</view>
+  <view id="t2" wx:if="{{infoGoods.goods_desc && infoGoods.goods_desc!=''}}">
+    <view class='dltittheme'>
+      <image class='dttemeimg' src='/pages/images/rad_left.png'></image>
+      <view class='dlttemelef'>
+        商品详情 
+      </view>
+    </view>
+    <view class="goodsDetailseTu">
+      <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+    </view>
+  </view>
+
+  <view style='width:100%;color:#333;font-size:26rpx;height:73rpx;line-height:73rpx;text-align:center;' wx:if="{{recommendlist&&recommendlist.length!=0}}">活动推荐</view>
 
   <!-- 推荐列表 -->
-  <view style='width:100%;overflow:hidden;'>
+  <view wx:if="{{recommendlist&&recommendlist.length!=0}}" style='width:100%;overflow:hidden;' id="t3">
 
     <view style='width:50%;float:left;'>
       <view wx:for='{{recommendlist}}' wx:key='key'>
@@ -235,19 +250,28 @@
 
   </view>
 
-  <view style='width:100%;{{isIphoneX?"height:200rpx;":"height:180rpx;"}}'></view>
+  <!-- <view style='width:100%;{{isIphoneX?"height:200rpx;":"height:180rpx;"}}'></view> -->
 
 </view>
 
-<view style='position:fixed;right:0;bottom:220rpx;color:#FD434C;text-decoration:underline;font-size:30rpx;margin:20rpx;z-index:49;'>
+<!-- <view style='position:fixed;right:0;bottom:220rpx;color:#FD434C;text-decoration:underline;font-size:30rpx;margin:20rpx;z-index:49;'>
   <view wx:if='{{infoActivity.unpackRole==0}}' style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;' catchtap='ispaysharedis'></view>
   <button wx:else style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;' data-form='2' open-type="share"></button>
   
   分享给好友
+</view> -->
+
+<view class="topShareBox">
+  <view wx:if='{{infoActivity.unpackRole==0}}' style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;' catchtap='ispaysharedis'></view>
+  <image class="topShareBoxImg" src="https://cdn.51chaidan.com/images/spread/blindBoxShare.png"></image>
+  <button style='width:100%;height:100%;position:absolute;top:0;left:0;opacity:0;' data-form='2' open-type='share'></button>
+  分享
 </view>
 
-<view style='width:100%; position:fixed; left:0; bottom:0; border-top:1px solid #e5e5e5;background: #fff;z-index: 11;'>
 
+
+
+<view style="width:100%; position:fixed; {{isIphoneX?'bottom:130rpx;':'bottom:110rpx;'}}z-index: 20; border-top:1px solid #e5e5e5;background: #fff;z-index: 11;">
   <view wx:if='{{ishowsusp && infoActivity.status!=3}}' style='width:100%;font-size:30rpx;' animation="{{animation}}">
     <view wx:if='{{!isorder}}' style='background:#E6F1FC;border: 1rpx solid #A3D0FD;color:#1989FA;text-align:center;line-height:80rpx;position:relative;' catchtap='rollgoods'>{{bottomtext}}</view>
     <view wx:if='{{isorder}}' style='background:#E6F1FC;background:#FE666B;color:#fff;text-align:center;line-height:80rpx;overflow:hidden;position:relative;' catchtap='dsbbbutclickt'>
@@ -255,14 +279,29 @@
       <view style='float:right;margin-right:20rpx;'>选好了，立即购买</view>
     </view>
   </view>
-
-  <view style='{{isIphoneX?"height:130rpx;":"height:110rpx;"}}width:100%;position:relative;'>
-    <bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
-  </view>
-
-
-
+  <block wx:if="{{isSmokebox}}">
+      <view style="width:100%;height:130rpx;background:#fff;border-bottom:1px solid #f9f7f7;" wx:if="{{infodata.is_blind_box}}" data-gid="{{infoGoods.goods_id}}" catchtap='jumpSmokeboxdetail'>
+      <!-- <view class="DirectpurchaseClick" catchtap='jumpdetail'></view> -->
+      <image src='{{infodata.blind_box_img}}' style='display:block;width:110rpx;height:110rpx;float:left;margin:15rpx;' mode='aspectFit'></image>
+      <view style='width:600rpx;height:110rpx;float:left;position:relative;margin-top:10rpx;'>
+        <view class='multilineellipsis' style='height:58rpx;width:450rpx;font-size:28rpx;color:#666;line-height:30rpx;'>{{infodata.blind_box_name}}</view>
+        <view style='width:100%;height:40rpx;line-height:40rpx;font-size:28rpx;margin-top:10rpx;'>
+          <block>￥{{infodata.blind_box_shop_price}}</block>
+        </view>
+        <view style='width:130rpx;height:46rpx;background:#ff2742;font-size:24rpx;color:#fff;text-align:center;line-height:46rpx;border-radius:10rpx;position:absolute;top:0;bottom:0;right:10rpx;margin:auto 0;z-index:1;'>
+          在线抽盒机
+        </view>
+      </view>
+    </view>	
+  </block>
 </view>
+
+
+<!-- <view id="navbtn" style='{{isIphoneX?"height:130rpx;":"height:110rpx;"}}width:100%;position:relative;'> -->
+<view id="navbtn">
+  <bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+</view>
+
 
 <!--  授权弹框  -->
 <view class='tgaboxtwo' wx:if='{{tgabox}}' catchtap='clicktga'>

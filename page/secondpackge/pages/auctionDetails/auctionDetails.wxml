@@ -263,7 +263,7 @@
     <view class="bidPriceWrap">
       <view class="bidPrice">
         <view style="display:flex;justify-content: center;align-items: center;">
-          <view class="minus" catchtap="minusPriceFun">-</view>
+          <view class="minus" style="color:{{currentBidPrice==firstBidPrice?'#666':''}};" catchtap="{{currentBidPrice==firstBidPrice?'':'minusPriceFun'}}">-</view>
           <!-- <view class="bidPriceNum">￥<input type="text" value="{{currentBidPrice}}"/></view> -->
           <view class="bidPriceNum">￥{{currentBidPrice}}</view>
           <view class="add" catchtap="addPriceFun">+</view>
@@ -390,7 +390,8 @@
 <view class="noticePopMask mask" catchtouchmove="true" wx:if="{{noticePopMask}}" catchtap="hideMask">
   <view class="noticePop" catchtap="true">
     <text class="noticePop_title">竞拍须知</text>
-    <text class="noticePop_txt">{{dataInfo.auctionNotice}}</text>
+    <!-- <text class="noticePop_txt">{{dataInfo.auctionNotice}}</text> -->
+    <scroll-view scroll-y class="noticePop_txt" style="height:500rpx;"><text>{{dataInfo.auctionNotice}}</text></scroll-view>
   </view>
 </view>
 

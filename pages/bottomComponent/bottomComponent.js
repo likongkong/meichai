@@ -93,7 +93,13 @@ Component({
         this.triggerEvent("run");
         return;
       }; 
+
+      var timestamp = Date.parse(new Date()) / 1000;
       if(app.signindata.isOpenToyShow){
+        wx.navigateTo({
+          url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
+        });
+      }else if(timestamp>=1618588800){
         wx.navigateTo({
           url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
         });

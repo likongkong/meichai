@@ -288,6 +288,7 @@ view.puformonnumeveback{
   float: left;
   margin-right:12rpx; 
   border-radius: 50%;
+  position: relative;
 }
 .fwdecheadtxt{
   float: left;

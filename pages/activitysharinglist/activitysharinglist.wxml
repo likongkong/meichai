@@ -188,8 +188,8 @@
            <view style='width:100%;height:60rpx;line-height:60rpx;font-size:24rpx;'>已报名免单</view>
            <view style='width:100%;height:140rpx;'>
               <scroll-view scroll-x="true" style='width:100%;white-space:nowrap;height:100%;'>
-                  <view wx:for='{{signlist}}' wx:key='key' catchtap='activitydetailspage' data-id='{{item.id}}' style='vertical-align: top;position: relative;width:262rpx;height:100%;margin-right:20rpx;display:inline-block;'>
-                       <image style='display:block;width:100%;height:100%;border-radius:6rpx;' src='{{item.cover}}'></image>
+                  <view wx:for='{{signlist}}' wx:key='key' catchtap='activitydetailspage' data-id='{{item.id}}' style='vertical-align: top;position: relative;height:100%;margin-right:20rpx;display:inline-block;'>
+                       <image mode="heightFix" style='display:block;width:auto;height:100%;border-radius:6rpx;' src='{{item.cover}}'></image>
                   </view>
               </scroll-view>            
            </view>
@@ -202,8 +202,8 @@
            <view style='width:100%;height:60rpx;line-height:60rpx;font-size:24rpx;'>已完成免单</view>
            <view style='width:100%;height:140rpx;'>
               <scroll-view scroll-x="true" style='width:100%;white-space:nowrap;height:100%;'>
-                  <view wx:for='{{finishedlist}}' wx:key='key' catchtap='activitydetailspage' data-id='{{item.id}}' style='vertical-align: top;position: relative;width:262rpx;height:100%;margin-right:20rpx;display: inline-block;'>
-                       <image style='display:block;width:100%;height:100%;border-radius:6rpx;' src='{{item.cover}}'></image>                      
+                  <view wx:for='{{finishedlist}}' wx:key='key' catchtap='activitydetailspage' data-id='{{item.id}}' style='vertical-align: top;position: relative;height:100%;margin-right:20rpx;display: inline-block;'>
+                       <image mode="heightFix" style='display:block;width:auto;height:100%;border-radius:6rpx;' src='{{item.cover}}'></image>                      
                   </view>
               </scroll-view>            
            </view>

@@ -33,7 +33,8 @@ Page({
    */
   onLoad: function (options) {
     var _this = this;
-    _this.data.share_uid = options.share_uid || 0
+    _this.data.share_uid = options.share_uid || 0;
+    app.signindata.suap = 22;
     // 判断是否授权
     this.activsign();
   },
@@ -58,7 +59,8 @@ Page({
     };    
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
+          console.log(1111111111)
           // '已经授权'
           _this.setData({
             loginid: app.signindata.loginid,
@@ -101,7 +103,7 @@ Page({
     var _this = this;
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           _this.setData({
             signinlayer: true,
             tgabox: false
@@ -115,6 +117,15 @@ Page({
     if (e.detail.detail.userInfo) { } else {
       app.clicktga(8)  //用户按了拒绝按钮
     };
+  },
+  userProfile(){
+    _this.setData({
+      signinlayer: true,
+      tgabox: false
+    });
+    _this.activsign();
+    // 确认授权用户统计
+    app.clicktga(4);
   },
   pullupsignin: function () {
     // // '没有授权'

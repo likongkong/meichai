@@ -488,6 +488,60 @@ Page({
       };
     }.bind(_this), 1000);
   },
+
+
+  // 中奖提示倒计时
+  countdownOfGifts: function (clock) {
+    var _this = this;
+    var clock = clock;
+    _this.data.countdownofgifts = setInterval(function () {
+      //将时间传如 调用 
+      var timestamp = Date.parse(new Date())
+      //总的秒数 
+      var second = clock - (timestamp / 1000);
+      if (second > 0) {
+        // 天位    
+        var day = Math.floor(second / 3600 / 24);
+        var dayStr = day.toString();
+        if (dayStr.length == 1) dayStr = '0' + dayStr;
+        // 小时位 
+        var hr = Math.floor(second / 3600 % 24);
+        var hrStr = hr.toString();
+        if (hrStr.length == 1) hrStr = '0' + hrStr;
+        // 分钟位  
+        var min = Math.floor(second / 60 % 60);
+        var minStr = min.toString();
+        if (minStr.length == 1) minStr = '0' + minStr;
+        // 秒位  
+        var sec = Math.floor(second % 60);
+        var secStr = sec.toString();
+        if (secStr.length == 1) secStr = '0' + secStr;
+        if (day == 0) {
+          var h = {
+            dayStr: 0,
+            hrStr: hrStr,
+            minStr: minStr,
+            secStr: secStr,
+          }
+        } else {
+          var h = {
+            dayStr: dayStr,
+            hrStr: hrStr,
+            minStr: minStr,
+            secStr: secStr,
+          }
+        }
+        _this.setData({ //正常倒计时        
+          cog: h
+        });
+      } else {
+        clearInterval(_this.data.countdownofgifts);
+        _this.detailfunshop();
+      };
+    }.bind(_this), 1000);
+  },
+
+
   // 拉起订阅
   subscrfun: function () {
     var _this = this;
@@ -827,7 +881,7 @@ Page({
       if (_this.data.coudata1cid != '') { cid.push(_this.data.coudata1cid); };
       if (_this.data.coudata2cid != '') { cid.push(_this.data.coudata2cid); };
       var cid = cid.join();
-      if(_this.data.zunmdata.isBlindBox){
+      if(_this.data.zunmdata.wholeBox&&_this.data.zunmdata.is_suit==1){
         var count = _this.data.numberofdismantling*_this.data.isBlindBoxNum;
         
         if(_this.data.isBlindBoxNum>1){
@@ -2684,12 +2738,12 @@ Page({
 
     // 刮刮卡入口
     wx.request({
-      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/cardOpenStatus.txt',
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/cardOpenStatus.txt?202104161826',
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
         console.log('刮刮卡入口',res)
-        _this.setData({isScrapingCard:res.data || false})
+        _this.setData({isScrapingCard:res.data.open || false,goodsInfoAds:res.data.goodsInfoAds})
       },
       fail: function (res) {}
     }) 
@@ -2944,9 +2998,9 @@ Page({
             clearInterval(_this.data.wintheprtintervaldetail);
             _this.winningtheprizetimedetail(1613318400);
           }
-           if(res.data.Ginfo.gid == 37197){
+           if(res.data.Ginfo.gid == 37568 || res.data.Ginfo.gid == 37569 || res.data.Ginfo.gid == 37573){
             clearInterval(_this.data.wintheprtintervaldetail);
-            _this.winningtheprizetimedetail(1615737600);
+            _this.winningtheprizetimedetail(1619193600);
           }
           
           // if(res.data.Ginfo&&res.data.Ginfo.brandId>0){
@@ -2978,6 +3032,11 @@ Page({
               };
           });
 
+          // 赠品倒计时
+          if(redauin.isGiveGoodsStatus == 2){
+            console.log('redauin.isGiveGoodsStatus == 2 redauin.giftEndTime',redauin.giftEndTime)
+            _this.countdownOfGifts(redauin.giftEndTime)
+          }
           if(res.data.Ginfo.specialGoods && res.data.Ginfo.specialGoods == 1){
             var infoSpecial = dataGinfo.infoSpecial;
             var detailSpecColor = infoSpecial.detailSpec[infoSpecial.specCate[1]] || [];
@@ -3097,7 +3156,7 @@ Page({
   onLoad: function (options) { 
 
 
-
+    app.signindata.suap = 7;
     console.log(options)
     this.data.gdt_vid = options.gdt_vid||'';
     this.data.weixinadinfo = options.weixinadinfo||'';
@@ -3311,6 +3370,7 @@ Page({
       _this.data.videoContext.stop()
     };
     clearInterval(this.data.wintheprtintervaldetail);
+    clearInterval(_this.data.countdownofgifts);
      // 调用重置刷新
      app.resetdownRefresh();
   },
@@ -3324,6 +3384,7 @@ Page({
       _this.data.videoContext.stop()
     }
     clearInterval(this.data.wintheprtintervaldetail);
+    clearInterval(_this.data.countdownofgifts);
      // 调用重置刷新
      app.resetdownRefresh();
   },
@@ -3447,7 +3508,7 @@ Page({
       
       wx.getSetting({
         success: res => {
-          if (res.authSetting['scope.userInfo']) {
+          if (true) {
             // '已经授权'
             _this.setData({
               loginid: app.signindata.loginid,
@@ -3490,7 +3551,7 @@ Page({
     var _this = this;
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           _this.setData({
             signinlayer: true,
             tgabox: false

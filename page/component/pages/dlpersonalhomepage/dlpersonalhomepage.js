@@ -163,7 +163,7 @@ Page({
     }else{
       wx.getSetting({
         success: res => {
-          if (res.authSetting['scope.userInfo']) {
+          if (true) {
             // '已经授权'
             _this.setData({
               loginid: app.signindata.loginid,
@@ -207,7 +207,16 @@ Page({
     _this.listdata(0);
     // 用户数据
     _this.userdata();
-  }, 
+  },
+  getUserProfile(){
+    var _this = this;
+    app.getUserProfile(()=>{
+      // 晒单列表
+      _this.listdata(0);
+      // 用户数据
+      _this.userdata();      
+    })
+  },
   // 晒单列表
   listdata: function (num) {
     var _this = this;
@@ -354,7 +363,7 @@ Page({
   onShareAppMessage: function (options) {
     // 发现详情
     var _this = this;
-    if (options.from == 'button') {
+    if (false) {
       var drying_id = options.target.dataset.drying_id;
       var title = options.target.dataset.title||'';
       var shareimg = options.target.dataset.shareimg || '';
@@ -369,9 +378,9 @@ Page({
       };
       Pub.postRequest(_this, 'dryingshare', { uid: _this.data.uid, loginid: _this.data.loginid, drying_id: drying_id }, function (res) { });
       var reshare = {
-        title: title || '我在美拆发现一个优质话题，你也快来看看吧!',
+        title: title,
         path: 'page/component/pages/dlfinddetails/dlfinddetails?drying_id=' + drying_id,
-        imageUrl: Pub.dryinglistshare(),
+        imageUrl: shareimg,
         success: function (res) { },
       };
     } else {

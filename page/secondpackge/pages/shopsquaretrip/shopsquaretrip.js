@@ -421,7 +421,7 @@ Page({
     var _this = this;
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           _this.setData({
             signinlayer: true,
             tgabox: false
@@ -452,7 +452,7 @@ Page({
     };    
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           // '已经授权'
           _this.setData({
             loginid: app.signindata.loginid,
@@ -536,7 +536,7 @@ Page({
         img = movies[0].image || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
       }
       return {
-        title: 'Bilibiliworld x MCTS 8.7~8.9 不见不散，打卡送超多奖励',
+        title: '',
         imageUrl: img
       }    
   },

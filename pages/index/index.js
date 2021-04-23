@@ -222,7 +222,7 @@ Page({
       // url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
       // url: "/page/secondpackge/pages/brandDetails/brandDetails?id=481&settlement=1"
       // url: "/pages/detailspage/detailspage?gid=36358"
-      url: "/pages/smokebox/smokebox?id=311513"
+      // url: "/pages/smokebox/smokebox?gid=331671"
       // url: "/page/component/pages/playgrasslist/playgrasslist"
       // url: "/page/secondpackge/pages/detailSimgEffects/detailSimgEffects?gid=32852"
       // url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=105883"
@@ -263,7 +263,7 @@ Page({
       // url: "/page/secondpackge/pages/drawHideGoods/drawHideGoods"
       // url: "/page/secondpackge/pages/auctionDetails/auctionDetails"
       // url: "/page/secondpackge/pages/auctionList/auctionList" 
-      // url: "/page/secondpackge/pages/entityLuckyDraw/entityLuckyDraw"
+      url: "/page/secondpackge/pages/entityLuckyDraw/entityLuckyDraw"
       
       // url: "/page/secondpackge/pages/redEnvelopeList/redEnvelopeList"
       // url: "/page/secondpackge/pages/priorityVoting/priorityVoting"
@@ -650,7 +650,7 @@ Page({
     })
     //调取热门搜索关键词
     wx.request({
-      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/searchPlaceholder.json',
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/searchPlaceholder.json?time='+app.signindata.appNowTime,
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
@@ -926,6 +926,7 @@ Page({
     wx.showLoading({ title: '加载中...',mask:true })
     _this.data.loginid = app.signindata.loginid;
     _this.data.openid = app.signindata.openid;
+    app.signindata.suap = 1;
     this.setData({
       judgeprof: options.judgeprof||1,
       uid: app.signindata.uid,
@@ -941,7 +942,7 @@ Page({
     };
     // 判断是否通过扫码进入
     app.signindata.channel = options.channel || '';
-
+    
     // 调取数据
     _this.obtaintabfun();    
 
@@ -961,7 +962,7 @@ Page({
     }else{
       wx.getSetting({
         success: res => {
-          if (res.authSetting['scope.userInfo']) {
+          if (true) {
             // '已经授权'
             _this.data.loginid = app.signindata.loginid;
             _this.data.openid = app.signindata.openid;
@@ -1122,7 +1123,7 @@ Page({
     wx.getSetting({
       success: res => {
         console.log(res)
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           // 确认授权用户统计
           app.clicktga(4);     
           // '已经授权'
@@ -1619,5 +1620,8 @@ Page({
     wx.navigateTo({
       url: "/page/component/pages/myothertoydg/myothertoydg?ownerId=" + id,
     });  
-  }
+  },
+  catchTouchMove:function(res){
+    return false
+   }
 })

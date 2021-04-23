@@ -64,7 +64,7 @@
     <view class="idle_content">
 
       <view class="idle_otherWrap">
-        <view class="idle_jianlou idle_otherFlex" catchtap="jumpcheaper">
+        <view class="idle_jianlou idle_otherFlex" data-pageid="0" catchtap="jumpzhuanqu">
           <view class="idle_otherLeft">
             <view>
               <text>捡漏</text>
@@ -76,7 +76,7 @@
             <text>￥{{cheaper.minPrice}}</text>
           </view>
         </view>
-        <view class="idle_hot idle_otherFlex" catchtap="jumphot">
+        <view class="idle_hot idle_otherFlex" data-pageid="1" catchtap="jumpzhuanqu">
           <view class="idle_otherLeft">
             <view>
               <text>热门</text>

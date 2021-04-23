@@ -75,7 +75,7 @@
     <view style='width:720rpx;margin:0 auto 10rpx auto;padding:40rpx 0;background:#fff;border-radius:12rpx;' wx:for='{{shopdetaillist}}' wx:key='key'>
       <view style='width:100%;height:120rpx;padding:0 15rpx 0 35rpx;box-sizing: border-box;'>
         <view style='position:relative;width:80rpx;height:100%;float:left;' catchtap='jumpmyo' data-ownerid='{{item.ownerId}}'>
-          <image style='width:80rpx;height:80rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;' src='{{item.user.headphoto}}'></image>
+          <image style='width:80rpx;height:80rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;border-radius:6rpx;' src='{{item.user.headphoto}}'></image>
         </view>
         <view style='width:160rpx;height:100%;position:relative;float:left;margin-left:15rpx;font-size:24rpx;color:#8A8A8A;text-align:center;line-height:120rpx;overflow: hidden;white-space:nowrap;text-overflow: ellipsis;'>
           <!-- <view wx:if='{{item.toyType==1}}' style='width:100%;height:40rpx;font-size:24rpx;color:#fff;line-height:40rpx;text-align:center;background:#f18f00;border-radius:40rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;'>抽盒机</view>
@@ -159,7 +159,7 @@
 </view>
 
 
-<view style='width:100%;position:fixed;left:0;background:#fff;bottom:{{isIphoneX?"130":"110"}}rpx;z-index:11;'>
+<view style='width:100%;position:fixed;left:0;bottom:{{isIphoneX?"130":"110"}}rpx;z-index:11;'>
 
   <view style="width:100%;height:134rpx;background:#5C5B5B;border-radius:60rpx;color:#fff;" catchtap="showCart">
 

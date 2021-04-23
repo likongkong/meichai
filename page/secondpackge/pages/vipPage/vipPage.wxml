@@ -2,8 +2,8 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 
-
-<view class="vipTab" wx:if="{{!infoData.openMember}}">
+<!-- wx:if="{{!infoData.openMember}}" -->
+<view class="vipTab">
    <view class="{{expiryMonth==12?'active':''}}" data-expiryMonth="12" catchtap="toggleTab">年卡</view>
    <view class="{{expiryMonth==1?'active':''}} " data-expiryMonth="1" catchtap="toggleTab">月卡</view>
 </view>
@@ -13,16 +13,25 @@
        <view class="vipTopTitle" style="color: #E94F57;">2021MCTS展会限量台历+1825元豪华礼包</view>
        <view class="vipTopTitle" style="color: #101010;">VIP会员总价值￥2024</view> -->
       <view class="vipTopDisplayT">
-         <view class="vipUserWrap">
-         <image class="vipAvatar" src="{{avatarUrl}}" mode="widthFix"></image>
+         <view class="vipUserWrap" style="position:relative;">
+            <button class='tgaboxtgawchbochlibutboxtwo' type='primary' bindtap="getUserProfile"></button>
+            <image class="vipAvatar" src="{{avatarUrl}}" mode="widthFix"></image>
          <view>
             <text class="name">{{nickName}}</text>
             <text class="vipType">{{infoData.openMember?"VIP有效期至"+memberExpireTime:"未开通"}}</text>
          </view>
          </view>
-         <view wx:if="{{!infoData.openMember}}" class="openVip" catchtap="openingVip">
-         开通VIP
-         </view>
+         <block wx:if="{{!infoData.openMember}}">
+            <view class="openVip" catchtap="openingVip">
+               开通VIP
+            </view>
+         </block>
+         <block wx:else>
+            <view class="openVip" catchtap="openingVip">
+               立即续费
+            </view>
+         </block>
+         
       </view>
       <view class="vipTopDisplayB">
          <block wx:for="{{expiryMonth==12?infoData.complimentary:infoData.complimentaryMonth}}" wx:key='key' data-index="{{index}}">

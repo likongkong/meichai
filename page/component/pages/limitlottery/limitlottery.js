@@ -427,7 +427,7 @@ Page({
    */
   onLoad: function (options) {
     var _this = this;
-
+    app.signindata.suap = 20;
     console.log('options========',options)
     if (options.scene) {
       let scene = decodeURIComponent(options.scene);
@@ -494,7 +494,7 @@ Page({
     }else{
       wx.getSetting({
         success: res => {
-          if (res.authSetting['scope.userInfo']) {
+          if (true) {
 
             // '已经授权'
             _this.data.loginid = app.signindata.loginid;
@@ -540,7 +540,7 @@ Page({
     var _this = this;
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           // 确认授权用户统计
           app.clicktga(4);
           _this.setData({
@@ -610,12 +610,12 @@ Page({
     };
     // 刮刮卡入口
     wx.request({
-      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/cardOpenStatus.txt',
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/cardOpenStatus.txt?202104161826',
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
         console.log('刮刮卡入口',res)
-        _this.setData({isScrapingCard:res.data || false})
+        _this.setData({isScrapingCard:res.data.open || false,goodsInfoAds:res.data.goodsInfoAds})
       },
       fail: function (res) {}
     })
@@ -1411,7 +1411,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
       var urlpath = "/page/component/pages/limitlottery/limitlottery?id=" + _this.data.infoActivity.id + '&referee=' + _this.data.uid + '&gid=' + _this.data.gid + '&list='+_this.data.isList;
     };
 
-    if(_this.data.infoActivity.lottoPrice){
+    if(_this.data.infoActivity.lottoPrice>=0){
       var shareName = _this.data.infoActivity.lottoPrice + "元购 " + _this.data.infoActivity.name; 
     }else{
       var shareName = _this.data.infoGoods.shop_price + "元购 " + _this.data.infoActivity.name;
@@ -2067,7 +2067,14 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
     var _this = this;
     var is_blind_box = w.currentTarget.dataset.is_blind_box || w.target.dataset.is_blind_box || 0;
     if(_this.data.promote_start_date){
-       _this.subscrfun(1);
+      var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
+      if(ind == 1){
+        wx.navigateTo({
+          url: "/pages/detailspage/detailspage?gid=" + _this.data.infoActivity.goods_id||'',
+        });
+      }else{
+        _this.subscrfun(1);
+      };
     }else if(_this.data.infoGoods.isShowBox){
       wx.navigateTo({
         url: "/page/component/pages/mingboxList/mingboxList",

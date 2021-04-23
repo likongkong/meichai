@@ -155,9 +155,18 @@ Page({
   //跳转商品详情
   jumpGoodsDetails(w){
     var gid = w.currentTarget.dataset.gid || w.target.dataset.gid;
-    wx.navigateTo({
-      url: "/pages/detailspage/detailspage?gid=" + gid,
-    }) 
+    var islotto = w.currentTarget.dataset.islotto || w.target.dataset.islotto || false;
+    var isblindbox = w.currentTarget.dataset.isblindbox || w.target.dataset.isblindbox || false;
+    if(islotto){
+       app.comjumpwxnav(9003,gid,'','');
+    } else if(isblindbox){
+      app.comjumpwxnav(9005,gid,'','');
+    }else{
+      wx.navigateTo({
+        url: "/pages/detailspage/detailspage?gid=" + gid,
+      })
+    }
+ 
   },
   // 跳转日历列表
   jumpCalendarList(){
@@ -531,7 +540,7 @@ Page({
       shareId:options.shareId||'',
       referee:options.referee||''
     })
-
+    app.signindata.suap = 6;
     // 推送统计
     this.data.push_id = options.push_id || 0;
 
@@ -899,7 +908,7 @@ brandJson:function(){
      var _this = this;
     //媒体品牌logo数据
     wx.request({
-      url: 'https://cdn.51chaidan.com/json/toyShowNextData.json',
+      url: 'https://cdn.51chaidan.com/json/toyShowNextData.json?time='+app.signindata.appNowTime,
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
@@ -915,7 +924,7 @@ brandJson:function(){
     var _this = this;
     // 参展品牌logo数据
    wx.request({
-     url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/toyshowSign.json',
+     url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/toyshowSign.json?time='+app.signindata.appNowTime,
      method: 'GET',
      header: { 'Accept': 'application/json' },
      success: function (res) {
@@ -1148,7 +1157,7 @@ brandJson:function(){
     };    
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           // '已经授权'
           _this.setData({
             loginid: app.signindata.loginid,
@@ -1191,7 +1200,7 @@ brandJson:function(){
     var _this = this;
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           _this.setData({
             signinlayer: true,
             tgabox: false

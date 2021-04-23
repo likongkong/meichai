@@ -491,4 +491,11 @@ page{
   border-top: 4rpx solid #f4f5f9;
 }
 
-
+.DirectpurchaseClick{
+  position: absolute;
+  top:0;
+  left:0;
+  height: 100%;
+  width:550rpx;
+  z-index: 3;
+}

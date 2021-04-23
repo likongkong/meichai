@@ -409,7 +409,7 @@ Page({
     var _this = this;
 
     wx.request({
-      url: 'https://cdn.51chaidan.com/produce/toyshowTicket.json',
+      url: 'https://cdn.51chaidan.com/produce/toyshowTicket.json?time='+app.signindata.appNowTime,
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
@@ -553,7 +553,7 @@ Page({
     };    
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           // '已经授权'
           _this.setData({
             loginid: app.signindata.loginid,
@@ -596,7 +596,7 @@ Page({
     var _this = this;
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           _this.setData({
             signinlayer: true,
             tgabox: false

@@ -273,9 +273,9 @@
                       <view style='width:100%;height:100%;'></view>
                   </view>
                   <!-- clickiftr 3 上传晒单截图 -->
-                  <view wx:if='{{item.clickiftr==3}}' data-qrcode='{{commoddata.qrcode}}' data-awardinfo='{{commoddata.award_info}}' data-cover='{{commoddata.cover}}' data-showorder='{{commoddata.showOrder}}' data-cart_id='{{commoddata.cart_id}}' catchtap='upserimgboxiftrWinningtheprize'
-                    style='width:100%;height:100%;position: absolute;left:0;top:0;z-index:3;'>
+                  <view wx:if='{{item.clickiftr==3}}' style='width:100%;height:100%;position: absolute;left:0;top:0;z-index:3;'>
                       <view style='width:100%;height:100%;'></view>
+                      <button class='tgaboxtgawchbochlibutboxtwo' type='primary' bindtap="getUserProfile" data-qrcode='{{commoddata.qrcode}}' data-awardinfo='{{commoddata.award_info}}' data-cover='{{commoddata.cover}}' data-showorder='{{commoddata.showOrder}}' data-cart_id='{{commoddata.cart_id}}'></button>
                   </view>
                   <!-- clickiftr 4 领取奖励 -->
                   <view wx:if='{{item.clickiftr==4}}' catchtap='clicktocollect' style='width:100%;height:100%;position: absolute;left:0;top:0;z-index:3;'>
@@ -335,6 +335,8 @@
       </view>
     </view>
   </view>
+  
+  <image wx:if='{{isScrapingCard}}' class="rotate" style="width:100%;height:auto;display:block;margin:30rpx 0 20rpx 0;" catchtap="jumpScrapingCard" mode='widthFix' src="{{goodsInfoAds}}"></image>
 
   <block wx:if='{{is_exhibition!=1&&brandId<=0}}'>
     <view class='detalOrPrize'>
@@ -433,7 +435,7 @@
           <view class='actrecactcont' wx:if='{{actrecactlist.length!=0}}'>
             <scroll-view scroll-x="true" bindscrolltolower='loaddataright' class="scractrecactcont" scroll-with-animation="true" scroll-left='{{actscrollleft}}'>
               <view class='scractrecacteve' wx:for='{{actrecactlist}}' wx:key='key' catchtap='actexempfun' data-gid="{{item.id}}" wx:if='{{item.status!=3}}'>
-                <image class='actrecimg' src='{{item.cover}}'></image>
+                <image class='actrecimg' mode="aspectFit" src='{{item.cover}}'></image>
                 <view class='bctitle multilineellipsis' style='font-size:22rpx;padding:0;width:100%;height:76rpx;'>
                   <block wx:if='{{item.status==1||item.status==0}}'>报名时间 {{item.start_time}}</block>
                   <block wx:if='{{item.status==3}}'>已开奖</block>
@@ -654,7 +656,7 @@
 
           <view style="float:left;margin-left:20rpx;">
             <view class="mexhibboxconeve" wx:for='{{exhdata}}' wx:key='key' wx:if='{{index%2==0}}' catchtap="jumpexhdetail" data-id='{{item.id}}' data-brandid='{{item.brandId}}' data-mtype="{{item.type}}" data-gid='{{item.goodsId}}'>
-              <block wx:if='{{item.type == 4 || item.type == 11|| item.type == 12 || item.type == 1 || item.type == 5|| item.type == 8|| item.type == 9}}'>
+              <block wx:if='{{item.type == 4 || item.type == 11|| item.type == 12 || item.type == 1 || item.type == 5|| item.type == 8|| item.type == 9|| item.type == 10}}'>
                 <image class="exhibboxeveimg" mode='widthFix' src="{{item.images}}"></image>
                 <view wx:if='{{item.type != 11 && item.type != 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.name}}</view>
                 <view wx:elif='{{item.type == 11 || item.type == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.goodsName}}</view>
@@ -706,7 +708,7 @@
 
           <view style="float:left;margin-left:20rpx;">
             <view class="mexhibboxconeve" wx:for='{{exhdata}}' wx:key='key' wx:if='{{index%2==1}}' catchtap="jumpexhdetail" data-id='{{item.id}}' data-brandid='{{item.brandId}}' data-mtype="{{item.type}}" data-gid='{{item.goodsId}}'>
-              <block wx:if='{{item.type == 4 || item.type == 11|| item.type == 12 || item.type == 1 || item.type == 5|| item.type == 8|| item.type == 9}}'>
+              <block wx:if='{{item.type == 4 || item.type == 11|| item.type == 12 || item.type == 1 || item.type == 5|| item.type == 8|| item.type == 9|| item.type == 10}}'>
                 <image class="exhibboxeveimg" mode='widthFix' src="{{item.images}}"></image>
                 <view wx:if='{{item.type != 11 && item.type != 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.name}}</view>
                 <view wx:elif='{{item.type == 11 || item.type == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.goodsName}}</view>
@@ -820,16 +822,35 @@
         <block wx:if='{{commoddata.isDirect}}'>
           <swiper-item wx:for='{{commoddata.arrDirect}}' wx:key='key'>
             <view class='Directpurchase'>
+                  <block wx:if='{{item.promote_start_date && item.promote_start_date>timestamp}}'>
+                      <view class="DirectpurchaseClick" catchtap='addressmanagement' data-gid='{{item.goods_id}}'></view>
+                  </block>
+                  <block wx:elif='{{item.type==3}}'>
+                    <view class="DirectpurchaseClick" catchtap='showboxlistfun' data-id='{{item.goods_id}}'></view>
+                  </block>
+                  <block wx:elif='{{item.type==5}}'>
+                    <view class="DirectpurchaseClick" catchtap='addresssmokebox' data-gid='{{item.goods_id}}'></view>
+                  </block>
+                  <block wx:else>
+                    <view class="DirectpurchaseClick" catchtap='addressmanagement' data-gid='{{item.goods_id}}'></view>
+                  </block>
+
                 <image src='{{item.gcover}}' class='dpImG'></image>
                 <view class='dpImGLeft'>
                   <view class='duIgLefH multilineellipsis'>{{item.goods_name}}</view>
                   <view style='width:100%;height:40rpx;line-height:40rpx;text-align:left;'>
-                    <text style='font-size:30rpx;color:#000;font-weight:bold;height:40rpx;'>￥{{item.gsales}}{{item.gsale_suit}}</text>
+                    <text style='font-size:30rpx;color:#000;font-weight:bold;height:40rpx;'><block wx:if='{{item.goods_type==3}}'>定金￥{{item.promote_price}}</block><block wx:else>￥{{item.gsales}}{{item.gsale_suit}}</block></text>
                     <text style='font-size:22rpx;color:#fff;margin-left:15rpx;background:#1890ff;border-radius:7rpx;position:relative;top:-2rpx;padding:3rpx 6rpx;' wx:if='{{item.type==5&&item.isRecycle&&item.recycleRatio}}'>{{item.recycleRatio}}折回收</text>
                   </view>
                 </view>
-              <view class='Directmay'>
-                  <block wx:if='{{item.type==3}}'>
+              <view class='Directmay' style="{{item.promote_start_date&&item.promote_start_date>timestamp?'background:#eeae19;border: 1rpx solid #eeae19;color:#fff;':''}}">
+                  <block wx:if='{{item.promote_start_date && item.promote_start_date>timestamp}}'>
+                      <view style='height:22px;line-height:22px;font-size:12px;' catchtap='subscrfunstar' data-gid='{{item.goods_id}}'>
+                        <block wx:if='{{item.goods_type==3}}'>定金订阅</block>
+                        <block wx:else>订阅提醒</block>                        
+                      </view>
+                  </block>
+                  <block wx:elif='{{item.type==3}}'>
                     <view style='color:#F93F45;height:22px;line-height:22px;font-size:12px;' catchtap='showboxlistfun' data-id='{{item.goods_id}}'>原价拼明盒</view>
                   </block>
                   <block wx:elif='{{item.type==5}}'>

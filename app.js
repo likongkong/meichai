@@ -95,9 +95,15 @@ App({
     sceneValue:0,
     yifanshangIsInQueue:false,
     timer:'',
+    // 公共分享标题
+    titleShare:'',
+    toyShowTitleShare:'',
+    communityTitleShare:'',
     // 活动分享朋友圈底部是否显示广告
     is_eveShareAdver:false,
     indexShareImg:'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+    toyShowShareImg:'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+    communityShareImg:'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
     mergePicImg:'',
     // 抽盒金
     blindboxMoney:0,
@@ -115,9 +121,7 @@ App({
     notAllowShareGoodsId:'',
     // 是否是管理员  有权限进入 发放门票商品的页面
     isManager:false,
-    randommaximum:2,
-    // 公共分享标题
-    titleShare:'',
+    randommaximum:5,  // 分服务器的个数
     // 下拉刷新处理  *** start ***
     downRefreshNum:0,  
     beforeTime:  0,
@@ -135,7 +139,8 @@ App({
     // 收货地址
     receivingAddress:[],
     // 防着多次登录
-    is_sigin:true
+    is_sigin:true,
+    suap:1, // 统计用户从哪个页面进入  
   },
   //一番赏队列倒计时
   // yifanshangIsInQueueFun(time){
@@ -166,19 +171,21 @@ App({
           success: function (res) {
             console.log('wx.login=====',res)
             var code = res.code;
-            wx.getUserInfo({
-              success: function (res) {
-                console.log('wx.getUserInfo========',res)
-                var resiv = res.iv;
-                
-                var encryptedData = res.encryptedData;
+            console.log(code)
+            // wx.getUserInfo({
+            //   success: function (res) {
+                // console.log('wx.getUserInfo========',res)
 
+                var resiv ='';
+                var encryptedData = '';
                 if (BSkipData && typeof (BSkipData) != "undefined") { //如果B端过来需要额外传递数据
                   var q = Dec.Aese('operation=xcx&mod=login&code=' + code + '&iv=' + resiv + '&encryptedData=' + encryptedData + '&referee=' + _this.signindata.referee + '&activity_id=' + _this.signindata.activity_id + '&channel=' + _this.signindata.channel + '&last_store_id=' + _this.signindata.global_store_id + '&token=' + _this.signindata.token + '&share_source=' + _this.signindata.share_source + '&tid=' + _this.signindata.tid + "&isBusinessSkip=" + BSkipData.isBusinessSkip + "&businessClientUserId=" + BSkipData.businessClientUserId +
-                    "&isMergedUserInfo=" + BSkipData.isMergedUserInfo + '&activity_type=' + _this.signindata.activity_type);
+                    "&isMergedUserInfo=" + BSkipData.isMergedUserInfo + '&activity_type=' + _this.signindata.activity_type+'&suap='+_this.signindata.suap);
                 } else {
-                  var q = Dec.Aese('operation=xcx&mod=login&code=' + code + '&iv=' + resiv + '&encryptedData=' + encryptedData + '&referee=' + _this.signindata.referee + '&activity_id=' + _this.signindata.activity_id + '&channel=' + _this.signindata.channel + '&last_store_id=' + _this.signindata.global_store_id + '&token=' + _this.signindata.token + '&share_source=' + _this.signindata.share_source + '&tid=' + _this.signindata.tid + '&activity_type=' + _this.signindata.activity_type);
+                  var q = Dec.Aese('operation=xcx&mod=login&code=' + code + '&iv=' + resiv + '&encryptedData=' + encryptedData + '&referee=' + _this.signindata.referee + '&activity_id=' + _this.signindata.activity_id + '&channel=' + _this.signindata.channel + '&last_store_id=' + _this.signindata.global_store_id + '&token=' + _this.signindata.token + '&share_source=' + _this.signindata.share_source + '&tid=' + _this.signindata.tid + '&activity_type=' + _this.signindata.activity_type+'&suap='+_this.signindata.suap);
                 }
+
+                console.log('登录========','operation=xcx&mod=login&code=' + code + '&iv=' + resiv + '&encryptedData=' + encryptedData + '&referee=' + _this.signindata.referee + '&activity_id=' + _this.signindata.activity_id + '&channel=' + _this.signindata.channel + '&last_store_id=' + _this.signindata.global_store_id + '&token=' + _this.signindata.token + '&share_source=' + _this.signindata.share_source + '&tid=' + _this.signindata.tid + '&activity_type=' + _this.signindata.activity_type+'&suap='+_this.signindata.suap)
 
                 wx.request({
                   url: Dec.comurl() + 'user.php' + q,
@@ -191,6 +198,29 @@ App({
 
                       _this.signindata.loginid = res.data.Info.loginid || '';
                       _this.signindata.uid = res.data.Info.uid || '';
+
+                      // if(Dec.env=='online'){
+                      //   var num = _this.signindata.randommaximum - res.data.Info.uid%_this.signindata.randommaximum;
+                      //   if(num<10){
+                      //       num = '00'+num
+                      //   }else if(num>=10){
+                      //     num = '0'+num.toString()
+                      //   };       
+                      //   // 接口地址  
+                      //   _this.signindata.comurl = 'https://api-slb.51chaidan.com/'+num+'/';
+                      //   // 发现地址
+                      //   _this.signindata.clwcomurl = 'https://clw-slb.51chaidan.com/'+num+'/';
+    
+                      //   // // 接口地址  208
+                      //   // _this.signindata.comurl = 'https://api.51chaidan.com/';
+                      //   // // 发现地址
+                      //   // _this.signindata.clwcomurl = 'https://clw.51chaidan.com/';
+                      // }else{
+                      //   // 接口地址  
+                      //   _this.signindata.comurl = 'http://api-test.51chaidan.com/';
+                      //   // 发现地址
+                      //   _this.signindata.clwcomurl = 'http://clw-test.51chaidan.com/';
+                      // };
 
                       console.log('app===sigin',_this.signindata.comurl,_this.signindata.clwcomurl,Dec.versionnumber)
 
@@ -304,11 +334,16 @@ App({
                     // };
                   }
                 })
-              },
-              fail: function(){
-                _this.signindata.is_sigin = true;
-              }
-            })
+            //   },
+            //   fail: function(res){
+            //     console.log('wx.getUserInfo失败',res)
+            //     _this.signindata.is_sigin = true;
+            //   },
+            //   complete(res){
+            //     console.log('complete====',res)
+
+            //   }
+            // })
           },
           fail: function(){
             _this.signindata.is_sigin = true;
@@ -352,9 +387,43 @@ App({
   onLaunch: function (options) {
     var _this = this;
 
+    // wx.request({
+    //   url: 'https://cdn.51chaidan.com/produce/serverDetail.txt',
+    //   method: 'GET',
+    //   header: { 'Accept': 'application/json' },
+    //   success: function (res) {
+    //     console.log(res.data)
+    //     if(_this.signindata.loginid!=''&&_this.signindata.uid!=''){
+    //       _this.signindata.randommaximum = res.data;
+    //     }else{
+    //       var num = Math.floor(Math.random() * res.data || _this.signindata.randommaximum)+1 || 0;
+    //       _this.signindata.randommaximum = res.data;
+    //       if(num<10){
+    //          num = '00'+num
+    //       }else if(num>=10){
+    //         num = '0'+num.toString()
+    //       };
+    //       if(Dec.env=='online'){
+    //         // 接口地址  
+    //         _this.signindata.comurl = 'https://api-slb.51chaidan.com/'+num+'/';
+    //         // 发现地址
+    //         _this.signindata.clwcomurl = 'https://clw-slb.51chaidan.com/'+num+'/';
+    //       }else{
+    //         // 接口地址  
+    //         _this.signindata.comurl = 'http://api-test.51chaidan.com/';
+    //         // 发现地址
+    //         _this.signindata.clwcomurl = 'http://clw-test.51chaidan.com/';
+    //       };
+    //       console.log(_this.signindata.comurl,_this.signindata.clwcomurl,_this.signindata.randommaximum)
+    //     }
+    //     console.log('num===================',num)
+    //   },
+    //   fail: function (res) {}
+    // }); 
+
+
     // 基础数据
     _this.defaultinfofun()
-
     console.log('场景值=====',options.scene)
     _this.signindata.sceneValue = options.scene || 0;
     // 朋友圈分享不显示地址弹框
@@ -1048,6 +1117,10 @@ App({
       wx.navigateTo({
         url: "/pages/detailspage/detailspage?gid=" + jumpid
       });
+    } else if (item_type == 9023) { 
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/entityLuckyDraw/entityLuckyDraw"
+      });
     };
   },
 
@@ -1085,6 +1158,10 @@ App({
     } else if (mtype == 9) {
       wx.navigateTo({
         url: "/page/secondpackge/pages/exhibitionwelfare/exhibitionwelfare",
+      });
+    } else if (mtype == 10) {
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + id,
       });
     }
   },
@@ -1176,12 +1253,19 @@ App({
           var nowTime = Date.parse(new Date());//当前时间戳
           // 首页分享图片
           var indexShare = res.data.List.indexShare || [];
+          var toyShowShare = res.data.List.toyShowShare || [];
+          var communityShare = res.data.List.communityShare || [];
           var indexShareNum = Math.floor(Math.random() * indexShare.length) || 0;
+          var toyShowShareNum = Math.floor(Math.random() * toyShowShare.length) || 0;
+          var communityShareNum = Math.floor(Math.random() * communityShare.length) || 0;
 
           var indexShare = res.data.List.indexShare || [];
 
           _this.signindata.titleShare = res.data.Info.titleShare || '潮玩社交平台';
+          _this.signindata.toyShowTitleShare = toyShowShare[toyShowShareNum].title || '潮玩社交平台';
+          _this.signindata.communityTitleShare = communityShare[communityShareNum].title || '潮玩社交平台';
           
+          // 首页分享
           if(indexShare.length!=0 && indexShare[indexShareNum]){
             _this.signindata.indexShare = indexShare || [];
             var indexShareImg = indexShare[indexShareNum]+'?time=' + nowTime;
@@ -1189,6 +1273,28 @@ App({
             console.log('_this.signindata.indexShareImg', _this.signindata.indexShareImg)
           }else{
             _this.signindata.indexShareImg = 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
+          };
+
+          // 展会分享
+          if(toyShowShare.length!=0 && toyShowShare[toyShowShareNum]){
+            _this.signindata.toyShowShare = toyShowShare || [];
+            var toyShowShareImg = toyShowShare[toyShowShareNum].img+'?time=' + nowTime;
+            _this.signindata.toyShowShareImg = toyShowShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg';
+            console.log('_this.signindata.toyShowShareImg', _this.signindata.toyShowShareImg)
+            console.log('_this.signindata.toyShowTitleShare', _this.signindata.toyShowTitleShare)
+          }else{
+            _this.signindata.toyShowShareImg = 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
+          };
+
+          // 发现分享
+          if(communityShare.length!=0 && communityShare[communityShareNum]){
+            _this.signindata.communityShare = communityShare || [];
+            var communityShareImg = communityShare[communityShareNum].img+'?time=' + nowTime;
+            _this.signindata.communityShareImg = communityShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg';
+            console.log('_this.signindata.communityShareImg', _this.signindata.communityShareImg)
+            console.log('_this.signindata.communityTitleShare', _this.signindata.communityTitleShare)
+          }else{
+            _this.signindata.communityShareImg = 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
           };
 
           // 合成图片的banner图
@@ -1329,7 +1435,56 @@ App({
       }
     });
   },
+  // 获取用户头像名称授权
+  getUserProfile(successCallback, errorCallback){
+    var _this = this;
+    console.log(wx.canIUse('getUserProfile'),wx.canIUse('getUserProfile'))
+    // 请选择与登录信息相同账号，头像昵称不同会导致审核不通过
+    wx.getUserProfile({
+        lang: 'zh_CN',
+        desc:'获取你的昵称、头像、地区及性别',
+        success(res){
+          console.log(res)
 
+          var userInfo = res.userInfo || {};
+
+          console.log('mod=userinfo&operation=setinfo&uid=' + _this.signindata.uid + '&loginid=' + _this.signindata.loginid + '&nick=' + userInfo.nickName + '&gender=' + userInfo.gender + '&headphoto=' + userInfo.avatarUrl + '&nick=' + encodeURIComponent(userInfo.nickName))
+
+          var qq = Dec.Aese('mod=userinfo&operation=setinfo&uid=' + _this.signindata.uid + '&loginid=' + _this.signindata.loginid + '&nick=' + userInfo.nickName + '&gender=' + userInfo.gender + '&headphoto=' + userInfo.avatarUrl + '&nick=' + encodeURIComponent(userInfo.nickName) );
+
+          wx.request({
+            url: _this.signindata.comurl + 'user.php' + qq,
+            method: 'GET',
+            header: { 'Accept': 'application/json' },
+            success: function (res) {
+              console.log('设置头像名称=====',res)
+              if (res.data.ReturnCode == 200) {
+                _this.signindata.avatarUrl = userInfo.avatarUrl;
+                _this.signindata.nickName = userInfo.nickName;
+                _this.signindata.userInfo = userInfo || {};
+                wx.showToast({
+                  title: '设置成功',
+                  icon: 'none',
+                  mask:true,
+                  duration:1500
+                });   
+                setTimeout(function(){
+                  successCallback(res,userInfo);
+                },1500)
+              };
+            },
+            fail(res){
+              errorCallback(res)
+            }
+          }) 
+
+
+        },
+        fail(res){
+          console.log(res)
+        }
+    })
+  }
 
 })
 

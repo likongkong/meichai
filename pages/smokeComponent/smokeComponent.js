@@ -49,7 +49,7 @@ Component({
           // });
 
           wx.request({
-            url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/recommedBlindbox.json',
+            url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/recommedBlindbox.json?time='+app.signindata.appNowTime,
             method: 'GET',
             header: {'Accept': 'application/json'},
             success: function(res) {

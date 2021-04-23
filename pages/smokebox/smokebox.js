@@ -459,7 +459,7 @@ Page({
         is_share: options.referee ? true : false
       })
     }
-
+    app.signindata.suap = 3;
 
     // 推送统计
     _this.data.push_id = options.push_id || 0;
@@ -480,7 +480,7 @@ Page({
     }else{
       wx.getSetting({
         success: res => {
-          if (res.authSetting['scope.userInfo']) {
+          if (true) {
             // '已经授权'
             _this.data.loginid = app.signindata.loginid;
             _this.data.openid = app.signindata.openid;
@@ -528,7 +528,7 @@ Page({
     var _this = this;
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           // 确认授权用户统计
           app.clicktga(4);
           _this.setData({
@@ -632,12 +632,12 @@ Page({
 
     // 刮刮卡入口
     wx.request({
-      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/cardOpenStatus.txt',
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/cardOpenStatus.txt?202104161826',
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
         console.log('刮刮卡入口',res)
-        _this.setData({isScrapingCard:res.data || false})
+        _this.setData({isScrapingCard:res.data.open || false,goodsInfoAds:res.data.goodsInfoAds})
       },
       fail: function (res) {}
     })  
@@ -3408,8 +3408,9 @@ Page({
 
   jumpRedList(w){
       var ind = w.currentTarget.dataset.ind;
+      var sourcepage = w.currentTarget.dataset.sourcepage;
       wx.navigateTo({   
-        url: "/page/secondpackge/pages/redEnvelopeList/redEnvelopeList?hs=" + ind
+        url: "/page/secondpackge/pages/redEnvelopeList/redEnvelopeList?hs=" + ind + "&sourcePage="+sourcepage
       });
   },
 

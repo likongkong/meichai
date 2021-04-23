@@ -126,7 +126,7 @@ Page({
     })
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           // 确认授权用户统计
           app.clicktga(4);
           _this.setData({
@@ -166,7 +166,7 @@ Page({
    */
   onLoad: function (options) {
     var _this = this;
-
+    app.signindata.suap = 16;
     // 是否是集福卡活动
     var isFukaActivities = Date.parse(new Date())/1000>1612972800 && Date.parse(new Date())/1000<1613577600?true:false;
 
@@ -217,7 +217,7 @@ Page({
     }else{
       wx.getSetting({
         success: res => {
-          if (res.authSetting['scope.userInfo']) {
+          if (true) {
             // '已经授权'
             _this.data.loginid = app.signindata.loginid;
             _this.data.openid = app.signindata.openid;

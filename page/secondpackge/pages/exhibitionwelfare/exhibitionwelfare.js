@@ -227,6 +227,7 @@ Page({
   onLoad: function (options) {
     // wx.hideShareMenu();
     var _this = this;
+    app.signindata.suap = 11;
     if (options.scene) {
       let scene = decodeURIComponent(options.scene);
       app.signindata.referee = _this.getSearchString('referee', scene) || 0;
@@ -255,7 +256,7 @@ Page({
     }else{
       wx.getSetting({
         success: res => {
-          if (res.authSetting['scope.userInfo']) {
+          if (true) {
             // '已经授权'
             _this.data.loginid = app.signindata.loginid;
             _this.data.openid = app.signindata.openid;
@@ -301,7 +302,7 @@ Page({
     var _this = this;
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           // 确认授权用户统计
           app.clicktga(4);
           _this.setData({

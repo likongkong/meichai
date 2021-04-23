@@ -124,7 +124,7 @@
                   </view>
                   <view class='fwdetailevecon'>
                       <view class='fwdechead'>
-                         <image class='fwdecheadimg' src='{{item.user_headphoto}}'></image>
+                         <image class='fwdecheadimg' src='{{item.user_headphoto}}'><button class='tgaboxtgawchbochlibutboxtwo' type='primary' bindtap="getUserProfile"></button></image>
                          <view class='fwdecheadtxt'>
                              <text>{{item.record_content}}</text>
                          </view>                         

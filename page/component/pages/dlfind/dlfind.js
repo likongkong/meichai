@@ -476,7 +476,7 @@ Page({
     }else{
       wx.getSetting({
         success: res => {
-          if (res.authSetting['scope.userInfo']) {
+          if (true) {
             _this.setData({
               signinlayer: true,
               loginid: app.signindata.loginid,
@@ -511,7 +511,7 @@ Page({
     var _this = this;
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           // 确认授权用户统计
           app.clicktga(4);
           _this.setData({
@@ -620,6 +620,11 @@ Page({
     
     this.selectComponent("#hide").getappData();
     _this.otherdata();
+
+    
+    setTimeout(function(){
+      app.indexShareBanner();
+    },1000);
 
   },
   otherdata: function() {
@@ -855,21 +860,22 @@ Page({
         };
       };
       var reshare = {
-        title: title || '我在美拆发现一个优质话题，你也快来看看吧!',
+        title: title || app.signindata.communityTitleShare,
         path: pathUrl,
-        imageUrl: shareimg || Pub.dryinglistshare(),
+        imageUrl: shareimg || app.signindata.communityShareImg,
         success: function(res) {},
       };
     } else {
       var reshare = {
-        title: '我在美拆发现一个优质话题，你也快来看看吧!',
+        title: app.signindata.communityTitleShare,
         path: 'page/component/pages/dlfind/dlfind',
-        imageUrl: Pub.dryinglistshare(),
+        imageUrl: app.signindata.communityShareImg,
         success: function(res) {},
       };
     };
     return reshare
   },
+
   // 导航跳转 
   wnews: function() {
     var _this = this

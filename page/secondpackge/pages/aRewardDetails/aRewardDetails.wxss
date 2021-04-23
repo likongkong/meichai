@@ -299,7 +299,7 @@ page {
 }
 .scrapingPurchase{
   width: 100%;
-  height: 190rpx;
+  height: 230rpx;
   background: #fff;
   position: absolute;
   left: 0;
@@ -1072,4 +1072,14 @@ page {
 }
 .leaveunused text{
   color: #FF2742;
+}
+
+
+.nottip{
+  position: absolute;
+  bottom: 22rpx;
+  left: 28rpx;
+  right: 28rpx;
+  font-size: 20rpx;
+  color: #101010;
 }

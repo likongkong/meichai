@@ -27,16 +27,18 @@ Page({
    */
   onLoad: function (options) {
     this.data.seriesId = options.seriesId;
-    this.data.pageid = options.pageid;
     if(options.pageid == 0){
       this.setData({c_title:'捡漏专区'})
-    }else{
+    }else if(options.pageid == 1){
       this.setData({c_title:'热门专区'})
+    }else if(options.pageid == 2){
+      this.setData({c_title:'碎片专区'})
     }
     this.setData({
       uid: app.signindata.uid,
       loginid:app.signindata.loginid,
       isProduce: app.signindata.isProduce,
+      pageid:options.pageid
     });
     // 判断是否授权
     this.activsign();
@@ -59,7 +61,7 @@ Page({
     };    
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           // '已经授权'
           _this.setData({
             loginid: app.signindata.loginid,
@@ -105,7 +107,7 @@ Page({
     var _this = this;
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           _this.setData({
             signinlayer: true,
             tgabox: false
@@ -133,9 +135,11 @@ Page({
     let url = '';
     wx.showLoading({ title: '加载中...'})
     if(this.data.pageid == 0){
-      url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/toyCabinetChearperZone.json'
-    }else{
-      url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/toyCabinetHotZone.json'
+      url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/toyCabinetChearperZone.json?time='+app.signindata.appNowTime
+    }else if(this.data.pageid == 1){
+      url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/toyCabinetHotZone.json?time='+app.signindata.appNowTime
+    }else if(this.data.pageid == 2){
+      url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/toyCabinetPatchZone.json?time='+app.signindata.appNowTime
     }
     wx.request({
       url:url,

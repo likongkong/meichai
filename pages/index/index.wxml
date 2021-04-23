@@ -73,9 +73,9 @@
  
 
 	<!--  测试  -->
-	<view style='height:220rpx;width:100%;text-align:center; display: table;position: relative;' class='rotate' catchtap='jumpxinxi'>
+	<!-- <view style='height:220rpx;width:100%;text-align:center; display: table;position: relative;' class='rotate' catchtap='jumpxinxi'>
 		<text style='display: table-cell;vertical-align:middle;text-align:center;'>测试跳转</text>
-	</view>
+	</view> -->
 
 	<!--   数据  -->
 
@@ -102,10 +102,8 @@
 				<view class='disanumofgoods_box' wx:if='{{item.List.length!=0}}'>
 					<view class='disanum_scr'>
 						<scroll-view scroll-x="true" class="disanum_tab_comtainer">
-							<view class='disanum_scr_box' wx:for='{{item.List}}' wx:key='key' wx:for-item='w' style='height:119rpx;width:222rpx;'>
-								<view class='disanum_simgbox' catchtap='activitydetailspage' data-id='{{w.id}}' style='height:119rpx;width:222rpx;'>
-									<image class='disanum_simg' src='{{w.cover}}' style='height:119rpx;width:222rpx;'></image>
-								</view>
+							<view wx:for='{{item.List}}' wx:key='key' wx:for-item='w' style='height:119rpx;display: inline-block;vertical-align: top;margin-right: 20rpx;' catchtap='activitydetailspage' data-id='{{w.id}}'>
+								<image mode="heightFix" src='{{w.cover}}' style='border-radius:10rpx;height:119rpx;width:auto;display:block;'></image>
 							</view>
 							<view class='disanum_scr_box' style='height:118rpx;' wx:if='{{item.List.length>=4&&item.item_type}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}' catchtap='imgcomindellistjump'>
 									<view class='disanum_stxt' style='top:0;width:118rpx;height:118rpx;'>
@@ -168,7 +166,7 @@
 				</view>
 				<view style='min-height:104rpx;padding:0 20rpx 0;' wx:if='{{item.List.length!=0}}'>
 					<swiper style='width:100%;height:304rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450">
-						<swiper-item wx:for="{{item.List}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
+						<swiper-item wx:for="{{item.List}}" wx:key="key" wx:for-item='w' wx:for-index='num' catchtouchmove='catchTouchMove'>
 						  <view style="position: relative;">
 								<image src="{{w.cover}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.id}}' catchtap='imgcomindellistjump' style='width:100%;height:303rpx;display:block;border-radius: 10rpx;'>
 								</image>		

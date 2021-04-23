@@ -80,7 +80,7 @@
 				</view>
 				<view style="color:#FF9800;text-align:center;font-size:20rpx;font-weight:bold;"><text>端盒送</text></view>
 			</view>
-			<view wx:elif='{{isOpenLine}}' style="width:95rpx;position:absolute;top:{{hideheight+160}}rpx;right:10rpx;z-index:1;" catchtap="{{(isDirectOpenWholeBox&&!isDeduct) || (isDirectOpenWholeBox&&isDeduct&&activity.userBlindBoxAmount==0) ? 'wholebox' : 'collectchip'}}">
+			<view wx:elif='{{isOpenLine && activity.status == 2}}' style="width:95rpx;position:absolute;top:{{hideheight+160}}rpx;right:10rpx;z-index:1;" catchtap="{{(isDirectOpenWholeBox&&!isDeduct) || (isDirectOpenWholeBox&&isDeduct&&activity.userBlindBoxAmount==0) ? 'wholebox' : 'collectchip'}}">
 				<image style="width:75rpx;width:75rpx;margin-left:10rpx;border-radius:6rpx;" mode="widthFix" src='{{activity.wholeBoxTitle?definePicture.wholeBoxImg:wholeBoxImg}}'></image>
 				<view style="color:#FF9800;text-align:center;font-size:20rpx;font-weight:bold;">
 				  <text wx:if='{{activity.wholeBoxTitle}}'>{{activity.wholeBoxTitle}}</text>
@@ -90,7 +90,7 @@
 	</block>
 
 <!--   catchtap="{{welfare[0].welfareType == 2?'hidepackage':'toggleBlindboxPacket'}}"  -->
-	<view wx:if='{{welfare.length > 0}}' catchtap="jumpRedList" data-ind="{{welfare[0].welfareType == 2?'1':'2'}}" style='width:95rpx;position:absolute;right:5rpx;top:{{hideheight+310}}rpx;z-index:9;'>
+	<view wx:if='{{welfare.length > 0}}' catchtap="jumpRedList" data-sourcepage="0" data-ind="{{welfare[0].welfareType == 2?'1':'2'}}" style='width:95rpx;position:absolute;right:5rpx;top:{{hideheight+310}}rpx;z-index:9;'>
 		<block wx:if="{{welfare[0].welfareType == 2}}">
 			<view class="tabshopimg specialellipsis" style="top:-8rpx;left:56rpx;" wx:if='{{welfare&&welfare.length!=0&&welfare.length!=1}}'>{{welfare.length}}</view>
 			<image src='http://www.51chaidan.com/images/blindBox/doublePackage.png' style='width:75rpx;height:75rpx;display:block;git margin-left:10rpx;'></image>
@@ -208,7 +208,7 @@
 
 				<view wx:if='{{whole_boxGift}}' class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;"  catchtap="collectchip">端盒送</view>
 
-				<view wx:elif='{{isOpenLine}}' class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;"  catchtap="{{(isDirectOpenWholeBox&&!isDeduct) || (isDirectOpenWholeBox&&isDeduct&&activity.userBlindBoxAmount==0) ? 'wholebox' : 'collectchip'}}">
+				<view wx:elif='{{isOpenLine && activity.status == 2}}' class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;"  catchtap="{{(isDirectOpenWholeBox&&!isDeduct) || (isDirectOpenWholeBox&&isDeduct&&activity.userBlindBoxAmount==0) ? 'wholebox' : 'collectchip'}}">
 				    <block wx:if='{{activity.wholeBoxTitle}}'>{{activity.wholeBoxTitle}}</block>
 						<block wx:elif='{{tipCheapForWholeBox>0||activity.wholeBoxSpecialTitle}}'>{{activity.wholeBoxSpecialTitle||'端盒立减'}}</block>
 						<block wx:else>抽整盒</block>
@@ -313,7 +313,8 @@
 
 		<!-- <view style='font-size:25rpx;margin:0rpx auto;'>{{activity.totalInvite}}/6人</view> -->
    
-	  <image wx:if='{{isScrapingCard}}' style="width:100%;height:auto;display:block;margin:30rpx 0 0 0;" catchtap="jumpScrapingCard" mode='widthFix' src="https://cdn.51chaidan.com/images/scratchCardActivity/cardEntrance.jpg"></image>
+<!-- 
+		<image wx:if='{{isScrapingCard}}' class="rotate" style="width:100%;height:auto;display:block;margin:0 0 20rpx 0;" catchtap="jumpScrapingCard" mode='widthFix' src="{{goodsInfoAds}}"></image> -->
 
     <view wx:if='{{toyCabinetList && toyCabinetList.length != 0}}'>
 		    <view class="singleDisplay">单款展示</view>
@@ -411,7 +412,7 @@
 					<view class="exhibboxcon">
 						<view style="float:left;margin-left:20rpx;">
 							<view class="mexhibboxconeve {{gid == 33115 ? 'cardmm' : ''}}" wx:for='{{exhdata}}' wx:key='key' wx:if='{{index%2==0}}' catchtap="jumpexhdetail" data-brandid='{{item.brandId}}' data-id='{{item.id}}' data-mtype="{{item.type}}" data-gid='{{item.goodsId}}'>
-								<block wx:if='{{item.type == 4 || item.type == 11|| item.type == 12 || item.type == 1 || item.type == 5|| item.type == 8|| item.type == 9}}'>
+								<block wx:if='{{item.type == 4 || item.type == 11|| item.type == 12 || item.type == 1 || item.type == 5|| item.type == 8|| item.type == 9|| item.type == 10}}'>
 									<image class="exhibboxeveimg" mode='widthFix' src="{{item.images}}"></image>
 									<view wx:if='{{item.type != 11 && item.type != 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.name}}</view>
 									<view wx:elif='{{item.type == 11 || item.type == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.goodsName}}</view>
@@ -463,7 +464,7 @@
 
 						<view style="float:left;margin-left:20rpx;">
 							<view class="mexhibboxconeve {{gid == 33115 ? 'cardmm' : ''}}" wx:for='{{exhdata}}' wx:key='key' wx:if='{{index%2==1}}' catchtap="jumpexhdetail" data-brandid='{{item.brandId}}' data-id='{{item.id}}' data-mtype="{{item.type}}" data-gid='{{item.goodsId}}'>
-								<block wx:if='{{item.type == 4 || item.type == 11|| item.type == 12 || item.type == 1 || item.type == 5|| item.type == 8|| item.type == 9}}'>
+								<block wx:if='{{item.type == 4 || item.type == 11|| item.type == 12 || item.type == 1 || item.type == 5|| item.type == 8|| item.type == 9|| item.type == 10}}'>
 									<image class="exhibboxeveimg" mode='widthFix' src="{{item.images}}"></image>
 									<view wx:if='{{item.type != 11 && item.type != 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.name}}</view>
 									<view wx:elif='{{item.type == 11 || item.type == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.goodsName}}</view>

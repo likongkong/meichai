@@ -140,7 +140,7 @@ Page({
     }else{
       wx.getSetting({
         success: res => {
-          if (res.authSetting['scope.userInfo']) {
+          if (true) {
             // '已经授权'
             _this.data.loginid = app.signindata.loginid;
             _this.setData({
@@ -253,7 +253,7 @@ Page({
       // 商品列表
       // var q = Dec.Aese('mod=search&operation=search&key=Mix&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&pid='+_this.data.pid)
       var q = Dec.Aese('mod=search&operation=search&key='+ _this.data.inputdata +'&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&pid='+_this.data.pid)
-      console.log('https://api.51chaidan.com/search.php?mod=search&operation=search&key='+ _this.data.inputdata +'&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&pid='+_this.data.pid)
+      console.log(app.signindata.comurl + "search.php?" + 'mod=search&operation=search&key='+ _this.data.inputdata +'&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&pid='+_this.data.pid)
       wx.request({
         url: app.signindata.comurl + 'search.php' + q,
         method: 'GET',

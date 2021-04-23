@@ -47,10 +47,6 @@ Page({
       isProduce: app.signindata.isProduce,
     });
     _this.listdata(0);
-    // 购物车数量
-    Dec.shopnum(_this,app.signindata.comurl);
-    // 调取晒单数量
-    Dec.dryingSum(_this, app.signindata.clwcomurl);
 
   },
   // 阻止蒙层冒泡
@@ -85,6 +81,7 @@ Page({
       title: '加载中...',
       mask: true
     })
+    console.log(app.signindata.comurl + 'spread.php' + qqq)
     wx.request({
       url: app.signindata.comurl + 'spread.php' + qqq,
       method: 'GET',

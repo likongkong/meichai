@@ -18,6 +18,10 @@ Page({
     uid: app.signindata.uid,
     openid: app.signindata.openid,
 
+    // 分享信息
+    shareTitle:'',
+    shareImageUrl:'',
+
     c_title: '', // -正品折扣多一点
     c_arrow: true,
     c_backcolor: '#ff2742',
@@ -39,6 +43,7 @@ Page({
     sharedata:{},
     // 适配苹果X
     isIphoneX: app.signindata.isIphoneX,
+    
   },
 
   // 展会公共跳转
@@ -61,7 +66,7 @@ Page({
       wx.navigateTo({
         url: "/page/component/pages/limitlottery/limitlottery?id=" + id+'&brandId='+brandid,
       });
-    } else if (type == 11 || type == 12) {
+    } else if (type == 11 || type == 12  || type == 999) {
       var id = w.currentTarget.dataset.id || w.target.dataset.id || '';
       wx.navigateTo({
         url: "/pages/detailspage/detailspage?gid=" + id
@@ -138,6 +143,10 @@ Page({
       wx.navigateTo({
         url: "/page/component/pages/playgrasslist/playgrasslist"
       })
+    } else if (type == 999) { //限时不限量 
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/exhibition/exhibition?type=999"
+      })
     };
   },
 
@@ -192,10 +201,9 @@ Page({
   onLoad: function (options) {
     // wx.hideShareMenu();
     var _this = this;
-
+    app.signindata.suap = 12;
     // 判断是否授权
     this.activsign();
-
   },
   activsign: function () {
     // 判断是否授权 
@@ -212,7 +220,7 @@ Page({
     }else{
       wx.getSetting({
         success: res => {
-          if (res.authSetting['scope.userInfo']) {
+          if (true) {
             // '已经授权'
             _this.setData({
               loginid: app.signindata.loginid,
@@ -264,6 +272,46 @@ Page({
     var clouddata = { type: 0 };
     app.cloudstatistics('exhibitionList', clouddata)
 
+
+    setTimeout(function(){
+      app.indexShareBanner();
+    },1000);
+  },
+  // 随机数
+  ranomNumber(sposition){
+    if(sposition.length>=8){
+      var count = 8;
+    }else{
+      var count = sposition.length;
+    };
+    var randomArr = new Array; //随机数组 
+    var returnArr = new Array; //返回数组
+    var sposition = sposition || [];
+    // 给原数组Arr赋值 
+    var nArr = [];
+    for (var i = 0; i < sposition.length; i++) {
+      if(sposition[i].isTop){
+        returnArr.push(sposition[i]);
+      }else{
+        nArr.push(sposition[i]);
+      };
+    };
+    for (var i = 0; i < nArr.length ; i++) {
+
+      console.log(i)
+      randomArr.push(i);
+    };
+
+    randomArr.sort(function () { return 0.5 - Math.random();});
+    var n = count-returnArr.length;
+    if(returnArr.length < count){
+       for(var i = 0; i < n ; i++){
+          returnArr.push(nArr[randomArr[i]]);
+       };
+    };
+
+    return returnArr;
+
   },
 
   // 数据请求
@@ -274,9 +322,9 @@ Page({
       page : 0
     })
     if(Dec.env=='online'){
-      var url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/IndexToyShow.json';// 正式
+      var url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/IndexToyShow.json?time='+app.signindata.appNowTime;// 正式
     }else{
-      var url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/test/IndexToyShow.json';  // 测试 
+      var url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/test/IndexToyShow.json?time='+app.signindata.appNowTime;  // 测试 
     };
     wx.showLoading({
       title: '加载中...',
@@ -296,6 +344,9 @@ Page({
           var listdata = res.data.List.model || [];
           var brandll = 0;
           for (var i = 0; i < listdata.length; i++) {
+            if(listdata[i].type == 4 || listdata[i].type == 2 || listdata[i].type == 11 || listdata[i].type == 999){
+              listdata[i].detail = _this.ranomNumber(listdata[i].detail);
+            };
             if (listdata[i].type != 14) {
               for (var j = 0; j < listdata[i].detail.length; j++) {
                 if(_this.data.newdataexh){
@@ -327,6 +378,8 @@ Page({
           // mlist.push(d);
           var liveBroad = res.data.Info;
           _this.setData({
+            // shareTitle:res.data.Info.share.title,
+            // shareImageUrl:res.data.Info.share.imgUrl,
             c_title: res.data.Info.show.title || '',
             swiperdata: res.data.List.banner || [],
             exhibdata: listdata || []
@@ -603,8 +656,8 @@ Page({
   onShareAppMessage: function () {
     var _this = this;
     var share = {
-      title: "MCTS潮玩展，每小时送隐藏",
-      imageUrl:'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      title: app.signindata.toyShowTitleShare,
+      imageUrl: app.signindata.toyShowShareImg,
       success: function (res) { }
     };
     return share;
@@ -628,7 +681,7 @@ Page({
     var _this = this;
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           _this.setData({
             signinlayer: true,
             tgabox: false

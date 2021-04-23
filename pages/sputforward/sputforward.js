@@ -70,6 +70,9 @@ Page({
     // 判断是否授权
     this.tograntauthorization();
   },
+  getUserProfile(){
+    app.getUserProfile(this.onLoadfun)
+  },
   onLoadfun:function(){
     //  我的订单数据
     var _this = this;
@@ -170,7 +173,7 @@ Page({
     var _this = this;
     wx.getSetting({
       success: res => {
-        if (res.authSetting['scope.userInfo']) {
+        if (true) {
           _this.setData({ tgabox: false });
           // '已经授权'
           _this.data.loginid = app.signindata.loginid;
@@ -243,7 +246,7 @@ Page({
     var _this = this;
     if (ops.from === 'button') {
       return {
-        title: '开一家自己的解优杂货铺吧，分享赚钱，限时免费。',
+        title: '',
         path: 'pages/storehomepage/storehomepage?referee=' + _this.data.store_id,
         success: function (res) {
 

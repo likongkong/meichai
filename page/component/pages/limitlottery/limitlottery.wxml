@@ -107,7 +107,7 @@
 		</view>
 		<view wx:else style="width:100%;font-size:27rpx;margin-bottom:20rpx;overflow: hidden;">
 			<view style="width:70%;padding:0 20rpx;float:left;">Vol.{{infoActivity.id}} {{infoActivity.name}}</view>
-			<view style="width:15%;padding:0 20rpx;color:#FE666B;text-align:right;float:right;">￥<block wx:if='{{infoActivity.lottoPrice}}'>{{infoActivity.lottoPrice}}</block><block wx:else>{{infoGoods.shop_price}}</block></view> 
+			<view style="width:15%;padding:0 20rpx;color:#FE666B;text-align:right;float:right;">￥<block wx:if='{{infoActivity.lottoPrice>=0}}'>{{infoActivity.lottoPrice}}</block><block wx:else>{{infoGoods.shop_price}}</block></view> 
 		</view>
 	
 	</block>
@@ -339,7 +339,10 @@
 	</view>
 
     <view style="background:#fff;">
-				<view style='width:710rpx;height:130rpx;background:#fff;border-bottom:1px solid #f9f7f7;margin:20rpx auto 0;' wx:if='{{infoGoods.is_on_sale==1||infoGoods.isShowBox}}' catchtap='jumpdetail' data-is_blind_box='{{infoGoods.is_blind_box}}'>
+				<view style='width:710rpx;height:130rpx;background:#fff;border-bottom:1px solid #f9f7f7;margin:20rpx auto 0;position:relative;' wx:if='{{infoGoods.is_on_sale==1||infoGoods.isShowBox}}' catchtap='jumpdetail' data-is_blind_box='{{infoGoods.is_blind_box}}'>
+
+					<view class="DirectpurchaseClick" catchtap='jumpdetail' data-ind='1' data-is_blind_box='{{infoGoods.is_blind_box}}'></view>
+					
 					<image src='{{infoGoods.goods_thumb}}' style='display:block;width:110rpx;height:110rpx;float:left;margin:11rpx;' mode='aspectFit'></image>
 					<view style='width:575rpx;height:110rpx;float:left;position:relative;margin-top:10rpx;'>
 						<view class='multilineellipsis' style='height:58rpx;width:425rpx;font-size:28rpx;color:#666;line-height:30rpx;'>{{infoGoods.goods_name}}</view>
@@ -350,7 +353,11 @@
 						</view>
 
 						<block wx:if='{{promote_start_date}}'>
-								 <view style='width:130rpx;height:46rpx;background:#eeae19;font-size:24rpx;color:#fff;text-align:center;line-height:46rpx;border-radius:10rpx;position:absolute;top:0;bottom:0;right:10rpx;margin:auto 0;z-index:1;'>{{subscribeOrNot?"订阅成功":"订阅提醒"}}</view>
+								 <view style='width:130rpx;height:46rpx;background:#eeae19;font-size:24rpx;color:#fff;text-align:center;line-height:46rpx;border-radius:10rpx;position:absolute;top:0;bottom:0;right:10rpx;margin:auto 0;z-index:1;'>
+										<block wx:if='{{subscribeOrNot}}'>订阅成功</block>
+										<block wx:elif='{{infoGoods.goods_type==3}}'>定金订阅</block>
+										<block wx:else>订阅提醒</block>
+								 </view>
 						</block>
 						<block wx:else>
 
@@ -384,7 +391,6 @@
 
 	<block wx:if='{{is_exhibition!=1&&brandId<=0}}'>
 		<view style='width:100%;overflow:hidden;'>
-			<image wx:if='{{isScrapingCard}}' style="width:100%;height:auto;display:block;margin:20rpx 0 0 0;" catchtap="jumpScrapingCard" mode='widthFix' src="https://cdn.51chaidan.com/images/scratchCardActivity/cardEntrance.jpg"></image>
 
 			<view style="margin:20rpx 30rpx;">
 				<view style="width:100%;line-height:40rpx;padding:20rpx 0;">
@@ -403,7 +409,8 @@
 			
 
 			<!-- <view wx:if='{{infoGoods.goods_name}}' style="margin:20rpx;font-size:27rpx;">{{infoGoods.goods_name}}</view> -->
-
+			
+			<image wx:if='{{isScrapingCard}}' class="rotate" style="width:100%;height:auto;display:block;margin:30rpx 0 20rpx 0;" catchtap="jumpScrapingCard" mode='widthFix' src="{{goodsInfoAds}}"></image>
 
 
 			<somke colortitle='#000'></somke>
@@ -495,7 +502,7 @@
 
 					<view style="float:left;margin-left:20rpx;">
 						<view class="mexhibboxconeve" wx:for='{{exhdata}}' wx:key='key' wx:if='{{index%2==0}}' catchtap="jumpexhdetail" data-id='{{item.id}}' data-brandid='{{item.brandId}}' data-mtype="{{item.type}}" data-gid='{{item.goodsId}}'>
-							<block wx:if='{{item.type == 4 || item.type == 11|| item.type == 12 || item.type == 1 || item.type == 5|| item.type == 8|| item.type == 9}}'>
+							<block wx:if='{{item.type == 4 || item.type == 11|| item.type == 12 || item.type == 1 || item.type == 5|| item.type == 8|| item.type == 9|| item.type == 10}}'>
 								<image class="exhibboxeveimg" mode='widthFix' src="{{item.images}}"></image>
 								<view wx:if='{{item.type != 11 && item.type != 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.name}}</view>
 								<view wx:elif='{{item.type == 11 || item.type == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.goodsName}}</view>
@@ -547,7 +554,7 @@
 
 					<view style="float:left;margin-left:20rpx;">
 						<view class="mexhibboxconeve" wx:for='{{exhdata}}' wx:key='key' wx:if='{{index%2==1}}' catchtap="jumpexhdetail" data-id='{{item.id}}' data-brandid='{{item.brandId}}' data-mtype="{{item.type}}" data-gid='{{item.goodsId}}'>
-							<block wx:if='{{item.type == 4 || item.type == 11|| item.type == 12 || item.type == 1 || item.type == 5|| item.type == 8|| item.type == 9}}'>
+							<block wx:if='{{item.type == 4 || item.type == 11|| item.type == 12 || item.type == 1 || item.type == 5|| item.type == 8|| item.type == 9|| item.type == 10}}'>
 								<image class="exhibboxeveimg" mode='widthFix' src="{{item.images}}"></image>
 								<view wx:if='{{item.type != 11 && item.type != 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.name}}</view>
 								<view wx:elif='{{item.type == 11 || item.type == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.goodsName}}</view>
@@ -663,8 +670,12 @@
 
 <view style='width:100%;position:fixed;left:0;bottom:0;border-top:1px solid #e5e5e5;background:#fff;z-index:5;'>
   <block wx:if='{{scrollTopPage>windowHeight}}'>
-			<view style='width:100%;height:130rpx;background:#fff;border-bottom:1px solid #f9f7f7;' wx:if='{{infoGoods.is_on_sale==1||infoGoods.isShowBox}}' catchtap='jumpdetail' data-is_blind_box='{{infoGoods.is_blind_box}}'>
+			<view style='width:100%;height:130rpx;background:#fff;border-bottom:1px solid #f9f7f7;position:relative;' wx:if='{{infoGoods.is_on_sale==1||infoGoods.isShowBox}}' catchtap='jumpdetail' data-is_blind_box='{{infoGoods.is_blind_box}}'>
+				
+				<view class="DirectpurchaseClick" catchtap='jumpdetail' data-ind='1' data-is_blind_box='{{infoGoods.is_blind_box}}'></view>
+				
 				<image src='{{infoGoods.goods_thumb}}' style='display:block;width:110rpx;height:110rpx;float:left;margin:15rpx;' mode='aspectFit'></image>
+
 				<view style='width:600rpx;height:110rpx;float:left;position:relative;margin-top:10rpx;'>
 					<view class='multilineellipsis' style='height:58rpx;width:450rpx;font-size:28rpx;color:#666;line-height:30rpx;'>{{infoGoods.goods_name}}</view>
 					<view style='width:100%;height:40rpx;line-height:40rpx;font-size:28rpx;margin-top:10rpx;'>
@@ -675,7 +686,11 @@
 					
           <block wx:if='{{promote_start_date}}'>
 
-							<view style='width:130rpx;height:46rpx;background:#eeae19;font-size:24rpx;color:#fff;text-align:center;line-height:46rpx;border-radius:10rpx;position:absolute;top:0;bottom:0;right:10rpx;margin:auto 0;z-index:1;'>{{subscribeOrNot?"订阅成功":"订阅提醒"}}</view>
+							<view style='width:130rpx;height:46rpx;background:#eeae19;font-size:24rpx;color:#fff;text-align:center;line-height:46rpx;border-radius:10rpx;position:absolute;top:0;bottom:0;right:10rpx;margin:auto 0;z-index:1;'>
+								<block wx:if='{{subscribeOrNot}}'>订阅成功</block>
+								<block wx:elif='{{infoGoods.goods_type==3}}'>定金订阅</block>
+								<block wx:else>订阅提醒</block>
+							</view>
 
 					</block>
 					<block wx:else>

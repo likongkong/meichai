@@ -7,7 +7,7 @@ Component({
   ready:function(){
     var _this = this;
     wx.request({
-      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/openScreen.json',
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/openScreen.json?time='+app.signindata.appNowTime,
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
@@ -36,11 +36,18 @@ Component({
       const myEventDetail = e;
       this.triggerEvent("userinfo", myEventDetail);
     },
+    userProfile:function(e){
+      const myEventDetail = e;
+      wx.getUserProfile({
+        desc: '获取你的昵称、头像、地区及性别', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+        success: (res) => {
+           this.triggerEvent("userProfile", myEventDetail);
+        }
+      })
+
+    },
     tgatipnone:function(){
       this.triggerEvent("tgnone");
     }
   },
-
-
-
 })
