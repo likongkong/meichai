@@ -1,0 +1,132 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+
+
+<view class="wrap">
+  <view class="banner">
+      <image src="https://cdn.51chaidan.com//data/afficheimg/chunyou.jpg" mode="widthFix"></image>
+  </view>
+  <view class="consumemessageWrap">
+    <view class="consumemessage">
+      <swiper vertical="true" autoplay="true" circular="true" interval="2500">
+        <!-- <block wx:for="{{consumemessageData}}" wx:key='key'> -->
+          <swiper-item class="swiper-item" data-id="{{item.activity_id}}" bindtap="toaRewarddeyails">
+            <image style='width:50rpx;height:50rpx;margin:15rpx;float:left;border-radius:50%;' src='https://thirdwx.qlogo.cn/mmopen/vi_32/PiajxSqBRaEI3q2FaMIf2CXibrTjFW3nPPuz131oiabcibcjDxHsXMVvjboVp1R58OFKUZxs1oTichowC3smOKsodmg/132'></image>
+            <view style="color:#000000">海贼王宝藏巡航-橡胶挂件（全8种）</view>
+          </swiper-item>
+        <!-- </block> -->
+      </swiper>
+      <!-- <redpacket bindgetWelfare="getWelfare" bindredpagshareimage="redpagshareimage" scene="{{scene}}" countWelfare="{{countWelfare}}" sourcePage="1" wx:if='{{isredpacket}}' /> -->
+    </view>
+  </view>
+  <view class="content">
+    <view class="card"> 
+      <view class="cardBox">
+        <view class="fukubukuroPic">
+          <image src="https://cdn.51chaidan.com/images/202103/thumb_img/37205_thumb_G_1615387693839.jpg" mode="widthFix"></image>
+        </view>
+        <view class="pricePic">
+          <image src="https://cdn.51chaidan.com/images/luckBag/luck_bag_promptly.png" mode="widthFix"></image>
+          <view class="priceTxt"> 
+            <text class="priceTxt1">价值≥68元</text>
+            <text class="priceTxt2">有几率掉落隐藏或吊卡或大体</text>
+            <text class="priceTxt3">福袋包含2件商品</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="card"> 
+      <!-- <image class="cardBg" src="https://cdn.51chaidan.com/images/luckBag/luck_bag_backdrop.png" mode="widthFix"></image> -->
+    </view>
+  </view>
+
+</view>
+
+
+<view class="awardMask" style='padding-top:{{statusBarHeightMc}}px;' wx:if="{{isawardMask}}">
+  <view class="awardListWrap">
+    <view>
+      <image src="https://cdn.51chaidan.com/images/202103/thumb_img/37205_thumb_G_1615387693839.jpg" mode="aspectFit"></image>
+      <text>表情巧克力限定款</text>
+    </view>
+    <view>
+      <image src="https://cdn.51chaidan.com/images/202103/thumb_img/37205_thumb_G_1615387693839.jpg" mode="aspectFit"></image>
+      <text>表情巧克力限定款</text>
+    </view>
+    <view>
+      <image src="https://cdn.51chaidan.com/images/202103/thumb_img/37205_thumb_G_1615387693839.jpg" mode="aspectFit"></image>
+      <text>表情巧克力限定款</text>
+    </view>
+    <view>
+      <image src="https://cdn.51chaidan.com/images/202103/thumb_img/37205_thumb_G_1615387693839.jpg" mode="aspectFit"></image>
+      <text>表情巧克力限定款</text>
+    </view>
+    <view>
+      <image src="https://cdn.51chaidan.com/images/202103/thumb_img/37205_thumb_G_1615387693839.jpg" mode="aspectFit"></image>
+      <text>表情巧克力限定款</text>
+    </view>
+    <view>
+      <image src="https://cdn.51chaidan.com/images/202103/thumb_img/37205_thumb_G_1615387693839.jpg" mode="aspectFit"></image>
+      <text>表情巧克力限定款</text>
+    </view>
+    <view>
+      <image src="https://cdn.51chaidan.com/images/202103/thumb_img/37205_thumb_G_1615387693839.jpg" mode="aspectFit"></image>
+      <text>表情巧克力限定款</text>
+    </view>
+  </view>
+  <view class="awardFoter">
+    <view style="color:#CD8336;background:#F7E9AA;" catchtap="jumpowntoy">进入玩具柜</view>
+    <view style="color:#ffffff;background:#EF6769;" catchtap="hideAwardMask">继续开福袋</view>
+  </view>
+</view>
+
+
+<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' 
+dryinglistnum='{{dryinglistnum}}'></bnavigation>
+
+
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;width: 100%;z-index: 300;'  catchtap='pullupsignin'></view>
+
+
+<!--  收货地址  -->
+<view class='tipback' wx:if='{{tipback}}' catchtouchmove="preventD"></view>
+<view class='receivingaddress' wx:if='{{receivingaddress}}'>
+  <view class='recgadhead'>
+    收货地址
+    <image src='../../../../pages/images/forknumber.png' class='recgadheadimg' bindtap='receivingaddressfun'></image>
+  </view>
+  <view class='recgadcon'>
+    <view class='recgaddata' wx:for='{{addressdata}}' wx:key='key'>
+      <view class='recgaddname' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='revisethereceivingaddress'>
+        <view class='recgaddnameleft'>{{item.consignee}}</view>
+        <view class='recgaddnameleft'>{{item.phone}}</view>
+        <view class="selectAddressBut">选择该地址</view>
+      </view>
+      <view class='recgadaddress' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='revisethereceivingaddress'>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
+      <view class='recgadbottom'>
+        <view class='recgadbotleft'>
+          <image class='recgadbotleftimg' hidden='{{!item.checked}}' src='../../../../pages/images/pressed_click.png'></image>
+          <image class='recgadbotleftimg' hidden='{{item.checked}}' src='../../../../pages/images/normal_click.png'></image>
+          默认地址
+        </view>
+        <view class='recgadbotright' bindtap='deladdress' data-ind="{{item.aid}}">
+          <image src='../../../../pages/images/icon_delete.png' class='recgadbotleftimg'></image>
+          删除
+        </view>
+        <view class='recgadbotright' style='margin-right:50rpx;' bindtap='jumpeditaddress' data-address='{{item.address}}' data-aid='{{item.aid}}' data-city='{{item.city}}' data-consignee='{{item.consignee}}' data-district='{{item.district}}' data-phone='{{item.phone}}'
+          data-province='{{item.province}}' data-idcard='{{item.idcard}}'>
+          <image src='../../../../pages/images/icon_edit.png' class='recgadbotleftimg'></image>
+          编辑
+        </view>
+      </view>
+    </view>
+    <view class='recgadnodata' wx:if='{{addressdata.length==0}}'>
+      <image src='../../../../pages/images/recaddnodata.png' class='recgadnodataimg'></image>
+    </view>
+  </view>
+  <view class='recgadbot' bindtap='jumpaddress'>
+    增加新地址
+  </view>
+</view>
