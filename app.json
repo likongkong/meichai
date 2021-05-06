@@ -135,7 +135,8 @@
         "pages/auctionList/auctionList",
         "pages/myAuctionList/myAuctionList",
         "pages/auctionDetails/auctionDetails",
-        "pages/auctionRecord/auctionRecord"
+        "pages/auctionRecord/auctionRecord",
+        "pages/onlineFukubukuro/onlineFukubukuro"
       ]
     }
   ],
