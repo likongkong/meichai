@@ -1243,11 +1243,17 @@ Page({
             };
           };
 
+          if (activity.aheadUser == 0 && !activity.isInQueue) {
+            _this.reset()
+          };
+
           _this.setData({
             roleList:roleList,
             queueList: l,
             employList: listData.employ || [],
-            activity:activity
+            activity:activity,
+            //刷新关闭弹框
+            ishowcollectchip: false,
           })
 
         } else if (res.data.ReturnCode == 348) {
@@ -2178,7 +2184,7 @@ Page({
       if (second == 5 && _this.data.ishowguess) {
         _this.instantopen()
       }
-    } else if (second == 0) {
+    } else if (second <= 0) {
       // console.log('定时器======1111111111111')
       clearInterval(_this.data.timer)
       console.log('延迟1.5秒请求===========')
