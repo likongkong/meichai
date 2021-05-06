@@ -705,6 +705,39 @@ Page({
     // this.initview()
   },
 
+  // 随机数
+  ranomNumber(arrLength,ranomValue,sposition){
+    var count = arrLength;
+    var randomArr = new Array; //随机数组 
+    var returnArr = new Array; //返回数组
+    var sposition = sposition || [];
+    var ranomValue = parseInt(ranomValue || 0) + sposition.length;
+    // 给原数组Arr赋值 
+    
+    for (var i = 0; i < count; i++) {
+      randomArr.push(i);
+      returnArr.push({isSoldOut:false})
+    };
+
+    randomArr.sort(function () { return 0.5 - Math.random();});
+   
+    console.log(randomArr);
+
+    var selectArr = randomArr.slice(0,ranomValue);
+    if(selectArr && selectArr.length != 0){
+      for(var j=0; j<selectArr.length ;j++){
+        if( j < sposition.length){
+          returnArr[selectArr[j]].headphoto = sposition[j].headphoto;
+        }else{
+          returnArr[selectArr[j]].isSoldOut = true;
+        };
+      };
+    };
+
+    return returnArr;
+
+  },
+
   mAnimation: function () {
     var _this = this
     clearInterval(this.data.atimer)
@@ -722,8 +755,10 @@ Page({
     wx.showLoading({
       title: '加载中...',
     })
+
     var q1 = Dec.Aese('mod=blindBox&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&gid=' + _this.data.gid+ '&push_id='+_this.data.push_id);
     console.log('mod=blindBox&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&gid=' + _this.data.gid+ '&push_id='+_this.data.push_id)
+
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q1,
       method: 'GET',
@@ -743,9 +778,38 @@ Page({
           var activityData = infoData.activity;
 
           var l = (listDataDetail.employ || []).concat(listDataDetail.queue || []);
+          var is_queue = false;
           if(l&&l.length!=0){
             l = _this.distinct(l)
+            l.forEach((item,index) => {
+              if(item.userId == _this.data.uid){
+                is_queue = true;
+              };
+           });
+
           };
+          
+
+          if (is_queue) {
+            activityData.isInQueue = is_queue;   
+          }else{
+            activityData.isInQueue = is_queue;
+          };
+          var is_Box_selection = false;
+          if(listDataDetail.employ && listDataDetail.employ.length != 0){
+            listDataDetail.employ.forEach((item,index) => {
+              if(item.userId == _this.data.uid){
+                is_Box_selection = true;
+              };
+            });
+          };
+
+
+          activityData.canOperate = is_Box_selection;
+
+          activityData.aheadUser = (listDataDetail.queue || []).length > 0 ? (listDataDetail.queue || []).length - 1 : 0;
+          console.log(activityData.aheadUser,activityData.isInQueue,activityData.canOperate,'=========')
+
 
           // 是否有便宜价格
           if(activityData.cheaperPrice){
@@ -763,7 +827,37 @@ Page({
           // for(var i =0;i<listDataDetail.role.length;i++){
           //   listDataDetail.role[i].img =  
           // }
+          // 
 
+
+          // countPayBox 已卖出
+          // limit_users 总数
+
+          listDataDetail.role = _this.ranomNumber(activityData.limit_users,activityData.countPayBox,listDataDetail.employ);
+
+          var is_user = false;
+          if(listDataDetail.employ && listDataDetail.employ.length !=0){
+            listDataDetail.employ.forEach((item) => {
+              if(item.userId == _this.data.uid){
+               is_user = true;
+              }
+            });
+          }
+
+
+          console.log('是否重选',is_user , infoData.isNeedEmploy)
+
+          if(is_user && infoData.isNeedEmploy){
+             _this.changeone(1);
+          };
+
+          if(is_Box_selection){
+            activityData.refreshTime = parseInt(listDataDetail.employ[0].over_time);
+          }else{
+            activityData.refreshTime = Date.parse(new Date()) / 1000 + 30;
+          };
+
+          var infoFuntion = infoData.function || {};
 
           _this.setData({
             isallready: true,
@@ -786,9 +880,9 @@ Page({
             cardTip: infoData.user.cardTip,
             cardXRay: infoData.user.cardXRay,
             isOpenWholeBox: activityData.isOpenWholeBox||'',
-            isRepeatOpenWholeBox: infoData.function.isRepeatOpenWholeBox || true,
-            isFirstOrder: infoData.function.isFirstOrder || false,
-            firstOrderDiscount: infoData.function.firstOrderDiscount || 0,
+            isRepeatOpenWholeBox: infoFuntion.isRepeatOpenWholeBox || true,
+            isFirstOrder: infoFuntion.isFirstOrder || false,
+            firstOrderDiscount: infoFuntion.firstOrderDiscount || 0,
             countLine: infoData.countLine,
             countRole: infoData.countRole,
             isOpenLine: infoData.isOpenLine,
@@ -836,13 +930,11 @@ Page({
             _this.tempChanceCountdowntimeFun(infoData.user.tempChanceOverTime)
           }
           
-
           if (activityData.backgroundCode && activityData.backgroundCode != "" && activityData.backgroundCode != "#e6d4c6") {
             _this.setData({
               pageBg: activityData.backgroundCode
             })
           };
-
 
           if(recycle){
             _this.setData({
@@ -896,6 +988,8 @@ Page({
             _this.data.firstshowredpag = false
           }
 
+          // countPayBox 已卖出
+          // limit_users 总数
           if (listDataDetail.role.length == 8 || listDataDetail.role.length == 12 || listDataDetail.role.length == 7 || listDataDetail.role.length == 11 || listDataDetail.role.length == 24 || listDataDetail.role.length == 18) {
             _this.setData({
               linenum: 4,
@@ -935,22 +1029,21 @@ Page({
                 isqueue: false,
               });
           };
-          
-          
-          if (activityData.refreshTime) {
+        
+
+          if (activityData.refreshTime && activityData.status == 2) {
             if (_this.data.recordtime == 0 || activityData.refreshTime >= _this.data.recordtime) {
               _this.setData({
                 recordtime: activityData.refreshTime + (parseInt(activityData.aheadUser) * 2)
               })
             }
-
             var timestamp = Date.parse(new Date()) / 1000
             if (activityData.refreshTime > timestamp) {
               _this.countdown()
             } else if (!activityData.canOperate) {
               _this.reset()
             }
-          }
+          };
 
           if (listDataDetail.hideRole.length > 0) {
             for (var i = 0; i < listDataDetail.hideRole.length; i++) {
@@ -979,7 +1072,7 @@ Page({
           setTimeout(function () {
             
             // 生成图片
-            if (infoData.function.isFirstOrderActivity) {
+            if (infoFuntion.isFirstOrderActivity) {
               _this.snapshotsharefun();
             };
             if(_this.data.addressdata && _this.data.addressdata.length!=0){}else{
@@ -1070,7 +1163,109 @@ Page({
       app.showToastC('活动已结束');
     }
   },
+  // 抽盒机详情页 获取排队信息接口 
+  queueInfo: function () {
+    var _this = this;
+    
+    wx.showLoading({
+      title: '加载中...',
+    })
 
+    var q1 = Dec.Aese('mod=blindBox&operation=queueInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id);
+
+    wx.request({
+      url: app.signindata.comurl + 'spread.php' + q1,
+      method: 'GET',
+      header: {
+        'Accept': 'application/json'
+      },
+
+      success: function (res) {
+        wx.hideLoading();
+        wx.stopPullDownRefresh();
+
+        if (res.data.ReturnCode == 200) {
+          console.log('获取队列信息接口',res)
+          var activityData = res.data.Info.activity;
+          var listData = res.data.List; 
+          var activity = _this.data.activity;
+          console.log(activity.limit_users,activityData.countPayBox,listData.employ)
+          var roleList = _this.ranomNumber(activity.limit_users,activityData.countPayBox,listData.employ);
+
+          var l = (listData.employ || []).concat(listData.queue || []);
+          if(l&&l.length!=0){
+            l = _this.distinct(l)
+          };
+
+          var is_queue = false;
+          if(l && l.length != 0){
+            l.forEach((item,index) => {
+              if(item.userId == _this.data.uid){
+                is_queue = true;
+              };
+           });
+          }
+
+          var is_Box_selection = false;
+          if(listData.employ && listData.employ.length != 0){
+            listData.employ.forEach((item,index) => {
+              if(item.userId == _this.data.uid){
+                is_Box_selection = true;
+              };
+            });
+          }
+
+          if (is_queue) {
+            activity.isInQueue = is_queue;   
+          }else{
+            activity.isInQueue = is_queue;
+          };
+          activity.canOperate = is_Box_selection;
+          activity.aheadUser = (listData.queue || []).length > 0 ? (listData.queue || []).length -1 : 0;
+
+          var timestamp = Date.parse(new Date()) / 1000;
+
+          if(is_Box_selection){
+            activity.refreshTime = listData.employ[0].over_time;
+          }else{
+            activity.refreshTime = timestamp + 30;
+          };
+
+          if (activity.refreshTime) {
+            if (_this.data.recordtime == 0 || activity.refreshTime >= _this.data.recordtime) {
+              _this.setData({
+                recordtime: parseInt(activity.refreshTime) + (parseInt(activity.aheadUser) * 2)
+              })
+            };
+            if (activity.refreshTime > timestamp) {
+              console.log(activity.refreshTime , timestamp ,activity.refreshTime - timestamp - 30)
+              _this.countdown()
+            };
+          };
+
+          if (activity.aheadUser == 0 && !activity.isInQueue) {
+            _this.reset()
+          };
+
+          _this.setData({
+            roleList:roleList,
+            queueList: l,
+            employList: listData.employ || [],
+            activity:activity,
+            //刷新关闭弹框
+            ishowcollectchip: false,
+          })
+
+        } else if (res.data.ReturnCode == 348) {
+          app.showToastC('即将开放，敬请期待');
+        }else{
+          if(res.data.Msg){
+            app.showToastC(res.data.Msg);
+          };
+        };
+      }
+    })
+  },
   // continuType  1是跳详情    2选择一个盲盒   3再来一个  4分享   5跳转新增地址  6支付成功  7重roll
   // type 1是排队  2是延时
   queueup: function (type, continuType,refresh) {
@@ -1089,9 +1284,10 @@ Page({
       },
 
       success: function (res) {
+        console.log('排队返回数据',res)
         if (res.data.ReturnCode == 200) {
           if (type == 1) {
-            _this.getInfo()
+            _this.queueInfo()
           } else {
             var timestamp = Date.parse(new Date()) / 1000
             if (res.data.Info.newOverTime > timestamp) {
@@ -1345,7 +1541,8 @@ Page({
    */
   onPullDownRefresh: function () {
     app.downRefreshFun(() => {
-      this.getInfo()
+      // this.getInfo()
+      this.queueInfo();
       if (this.data.is_exhibition == 1) {
         this.exhibdatafun(1)
       }
@@ -1769,6 +1966,11 @@ Page({
             callback();
           }
 
+        } else if(res.data.ReturnCode == 359){
+          app.showToastC(res.data.Msg);
+          setTimeout(()=>{
+            _this.queueInfo()
+          },2000)
         } else {
           // 提交订单蒙层
           _this.setData({
@@ -1972,7 +2174,8 @@ Page({
     var _this = this
     var timestamp = Date.parse(new Date())
     //总的秒数 
-    var second = micro_second - (timestamp / 1000);
+    var second = parseInt(micro_second) - (timestamp / 1000);
+    console.log('second=====',micro_second,(timestamp / 1000),second)
     if (second > 0) {
       _this.setData({
         remaintime: second,
@@ -1981,40 +2184,48 @@ Page({
       if (second == 5 && _this.data.ishowguess) {
         _this.instantopen()
       }
-    } else if (second == 0) {
+    } else if (second <= 0) {
       // console.log('定时器======1111111111111')
       clearInterval(_this.data.timer)
-      _this.getInfo()
+      console.log('延迟1.5秒请求===========')
+      setTimeout(()=>{
+        _this.queueInfo()
+      },1500)
+      
     }
   },
 
-  changeone: function () {
+  changeone: function (num) {
     var _this = this
-    if (_this.data.boxnum < 2) {
+    if (_this.data.boxnum < 2 && num != 1) {
       app.showToastC('已经是最后一盒了，不能换了哟');
       return;
     }
-    if (_this.data.ischange) {
-      return
-    }
+    // if (_this.data.ischange) {
+    //   return
+    // }
     if (true) {
+      console.log('重选=======11111')
       var exh = Dec.Aese('mod=blindBox&operation=changeRole&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id);
       wx.request({
         url: app.signindata.comurl + 'spread.php' + exh,
         method: 'GET',
         header: { 'Accept': 'application/json' },
         success: function (res) {
-          if (res.data.ReturnCode == 200) {
-            _this.placeorder();
-            setTimeout(function(){
-              var roleList = _this.data.roleList;
-              _this.setData({
-                boxSideInd:_this.random(0,roleList.length),
-              })
-            },1500)
-          } else {
-            app.showToastC(res.data.Msg);
-          }
+          if(num != 1){
+            if (res.data.ReturnCode == 200) {
+              _this.placeorder();
+              setTimeout(function(){
+                var roleList = _this.data.roleList;
+                _this.setData({
+                  boxSideInd:_this.random(0,roleList.length),
+                })
+              },1500)
+            } else {
+              app.showToastC(res.data.Msg);
+            }
+          };
+
         },
         fail: function () { }
       });
