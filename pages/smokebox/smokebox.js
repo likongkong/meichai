@@ -836,10 +836,12 @@ Page({
           listDataDetail.role = _this.ranomNumber(activityData.limit_users,activityData.countPayBox,listDataDetail.employ);
 
           var is_user = false;
+          var queue_over_time = 0;
           if(listDataDetail.employ && listDataDetail.employ.length !=0){
             listDataDetail.employ.forEach((item) => {
               if(item.userId == _this.data.uid){
                is_user = true;
+               queue_over_time = item.over_time;
               }
             });
           }
@@ -852,9 +854,21 @@ Page({
           };
 
           if(is_Box_selection){
-            activityData.refreshTime = parseInt(listDataDetail.employ[0].over_time);
+            activityData.refreshTime = queue_over_time || Date.parse(new Date()) / 1000;
           }else{
-            activityData.refreshTime = Date.parse(new Date()) / 1000 + 30;
+            var addtimestamp = Date.parse(new Date()) / 1000 + 30;
+            if(is_queue){
+              var evetime = 0;
+              listDataDetail.queue.forEach((item,index) => {
+                if(item.userId == _this.data.uid){
+                  evetime = index * 2;
+                };
+              });
+              activityData.refreshTime = (listDataDetail.employ[0]?listDataDetail.employ[0].over_time + evetime : addtimestamp) || addtimestamp
+            }else{
+              activityData.refreshTime = Date.parse(new Date()) / 1000 + 30;
+            };
+            
           };
 
           var infoFuntion = infoData.function || {};
@@ -1207,10 +1221,12 @@ Page({
           }
 
           var is_Box_selection = false;
+          var queue_over_time = 0;
           if(listData.employ && listData.employ.length != 0){
             listData.employ.forEach((item,index) => {
               if(item.userId == _this.data.uid){
                 is_Box_selection = true;
+                queue_over_time = item.over_time;
               };
             });
           }
@@ -1226,20 +1242,38 @@ Page({
           var timestamp = Date.parse(new Date()) / 1000;
 
           if(is_Box_selection){
-            activity.refreshTime = listData.employ[0].over_time;
+            activity.refreshTime = queue_over_time || timestamp;
+            console.log('queue_over_time', queue_over_time ,queue_over_time - timestamp )
           }else{
-            activity.refreshTime = timestamp + 30;
+            var addtimestamp = timestamp + 30;
+            if(is_queue){
+              var evetime = 0;
+              listData.queue.forEach((item,index) => {
+                if(item.userId == _this.data.uid){
+                  evetime = index * 2;
+                };
+              });
+              activity.refreshTime = (listData.employ[0]?listData.employ[0].over_time + evetime : addtimestamp) || addtimestamp;
+              console.log('activity.refreshTime',activity.refreshTime)
+            }else{
+              activity.refreshTime = addtimestamp;
+            };
+            
           };
+          
+          
 
           if (activity.refreshTime) {
+            console.log(_this.data.recordtime , activity.refreshTime >= _this.data.recordtime,activity.refreshTime , _this.data.recordtime)
             if (_this.data.recordtime == 0 || activity.refreshTime >= _this.data.recordtime) {
               _this.setData({
                 recordtime: parseInt(activity.refreshTime) + (parseInt(activity.aheadUser) * 2)
-              })
+              });
             };
+            console.log(activity.refreshTime > timestamp)
             if (activity.refreshTime > timestamp) {
-              console.log(activity.refreshTime , timestamp ,activity.refreshTime - timestamp - 30)
-              _this.countdown()
+              console.log(activity.refreshTime , timestamp ,activity.refreshTime - timestamp)
+              _this.countdown();
             };
           };
 
