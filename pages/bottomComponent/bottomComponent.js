@@ -95,11 +95,13 @@ Component({
       }; 
 
       var timestamp = Date.parse(new Date()) / 1000;
-      if(app.signindata.isOpenToyShow){
+      // app.signindata.isOpenToyShow
+      if(false){
         wx.navigateTo({
           url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
         });
-      }else if(timestamp>=1618588800){
+        // timestamp>=1618588800
+      }else if(false){
         wx.navigateTo({
           url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
         });

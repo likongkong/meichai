@@ -1,3 +1,5 @@
+<import src="../../../../wxParse/wxParse.wxml" />
+
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
@@ -5,81 +7,122 @@
 
 <view class="wrap">
   <view class="banner">
-      <image src="https://cdn.51chaidan.com//data/afficheimg/chunyou.jpg" mode="widthFix"></image>
+      <image src="{{bannerImg[0].img}}" mode="widthFix" data-item_type='{{bannerImg[0].item_type}}' data-href='{{bannerImg[0].href}}' data-title='{{bannerImg[0].title}}' bindtap='jumpbanner' data-imgurl='{{bannerImg[0].img}}'></image>
   </view>
-  <view class="consumemessageWrap">
+  <view class="consumemessageWrap" wx:if="{{recordList.length != 0}}">
     <view class="consumemessage">
       <swiper vertical="true" autoplay="true" circular="true" interval="2500">
-        <!-- <block wx:for="{{consumemessageData}}" wx:key='key'> -->
-          <swiper-item class="swiper-item" data-id="{{item.activity_id}}" bindtap="toaRewarddeyails">
-            <image style='width:50rpx;height:50rpx;margin:15rpx;float:left;border-radius:50%;' src='https://thirdwx.qlogo.cn/mmopen/vi_32/PiajxSqBRaEI3q2FaMIf2CXibrTjFW3nPPuz131oiabcibcjDxHsXMVvjboVp1R58OFKUZxs1oTichowC3smOKsodmg/132'></image>
-            <view style="color:#000000">海贼王宝藏巡航-橡胶挂件（全8种）</view>
+        <block wx:for="{{recordList}}" wx:key='key'>
+          <!-- <swiper-item class="swiper-item" data-id="{{item.activity_id}}" bindtap="toaRewarddeyails"> -->
+          <swiper-item class="swiper-item">
+            <image style='width:50rpx;height:50rpx;margin:15rpx;float:left;border-radius:50%;' src='{{item.user_img}}'></image>
+            <view style="color:#000000">{{item.title}}</view>
           </swiper-item>
-        <!-- </block> -->
+        </block>
       </swiper>
       <!-- <redpacket bindgetWelfare="getWelfare" bindredpagshareimage="redpagshareimage" scene="{{scene}}" countWelfare="{{countWelfare}}" sourcePage="1" wx:if='{{isredpacket}}' /> -->
     </view>
   </view>
   <view class="content">
-    <view class="card"> 
-      <view class="cardBox">
-        <view class="fukubukuroPic">
-          <image src="https://cdn.51chaidan.com/images/202103/thumb_img/37205_thumb_G_1615387693839.jpg" mode="widthFix"></image>
-        </view>
-        <view class="pricePic">
-          <image src="https://cdn.51chaidan.com/images/luckBag/luck_bag_promptly.png" mode="widthFix"></image>
-          <view class="priceTxt"> 
-            <text class="priceTxt1">价值≥68元</text>
-            <text class="priceTxt2">有几率掉落隐藏或吊卡或大体</text>
-            <text class="priceTxt3">福袋包含2件商品</text>
+    <block wx:for="{{goodsList}}" wx:key='key'>
+      <view class="card" data-type="{{item.type}}" data-price="{{item.price}}" catchtap="showbuybombsimmediately"> 
+        <view class="cardBox">
+          <view class="fukubukuroPic">
+            <image src="{{item.goods_img}}" mode="widthFix"></image>
+          </view>
+          <view class="pricePic">
+            <image src="https://cdn.51chaidan.com/images/luckBag/luck_bag_promptly.png" mode="widthFix"></image>
+            <view class="priceTxt"> 
+              <text class="priceTxt1">价值≥{{item.showPrice}}元</text>
+              <text class="priceTxt2">{{item.explain1}}</text>
+              <text class="priceTxt3">{{item.explain2}}</text>
+            </view>
           </view>
         </view>
       </view>
+    </block>
+  </view>
+  <view class="tabWrap">
+    <view class="tabBtnWrap">
+      <view class="{{current == 0?'active':''}}" data-ind="0" catchtap="tabChangeFun">商品预览</view>
+      <view class="{{current == 1?'active':''}}" data-ind="1" catchtap="tabChangeFun">活动规则</view>
     </view>
-    <view class="card"> 
-      <!-- <image class="cardBg" src="https://cdn.51chaidan.com/images/luckBag/luck_bag_backdrop.png" mode="widthFix"></image> -->
+    <view>
+      <block wx:if="{{current==0}}">
+        <view>
+          <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+        </view>
+      </block>
+      <block wx:else>
+        <view style="padding:0 35rpx;box-sizing: border-box;">
+          <template is="wxParse" data="{{wxParseData:article1.nodes}}" />
+        </view>
+      </block>
     </view>
   </view>
-
 </view>
 
 
-<view class="awardMask" style='padding-top:{{statusBarHeightMc}}px;' wx:if="{{isawardMask}}">
+
+<view class="olfAwardMask" style='padding-top:{{statusBarHeightMc}}px;' wx:if="{{isawardMask}}" catchtouchmove="true">
   <view class="awardListWrap">
-    <view>
-      <image src="https://cdn.51chaidan.com/images/202103/thumb_img/37205_thumb_G_1615387693839.jpg" mode="aspectFit"></image>
-      <text>表情巧克力限定款</text>
-    </view>
-    <view>
-      <image src="https://cdn.51chaidan.com/images/202103/thumb_img/37205_thumb_G_1615387693839.jpg" mode="aspectFit"></image>
-      <text>表情巧克力限定款</text>
-    </view>
-    <view>
-      <image src="https://cdn.51chaidan.com/images/202103/thumb_img/37205_thumb_G_1615387693839.jpg" mode="aspectFit"></image>
-      <text>表情巧克力限定款</text>
-    </view>
-    <view>
-      <image src="https://cdn.51chaidan.com/images/202103/thumb_img/37205_thumb_G_1615387693839.jpg" mode="aspectFit"></image>
-      <text>表情巧克力限定款</text>
-    </view>
-    <view>
-      <image src="https://cdn.51chaidan.com/images/202103/thumb_img/37205_thumb_G_1615387693839.jpg" mode="aspectFit"></image>
-      <text>表情巧克力限定款</text>
-    </view>
-    <view>
-      <image src="https://cdn.51chaidan.com/images/202103/thumb_img/37205_thumb_G_1615387693839.jpg" mode="aspectFit"></image>
-      <text>表情巧克力限定款</text>
-    </view>
-    <view>
-      <image src="https://cdn.51chaidan.com/images/202103/thumb_img/37205_thumb_G_1615387693839.jpg" mode="aspectFit"></image>
-      <text>表情巧克力限定款</text>
-    </view>
+    <block wx:for="{{orderRoleList}}" wx:key="key">
+      <view>
+        <image src="{{item.goods_img}}" mode="aspectFit"></image>
+        <text>{{item.goods_name}}</text>
+      </view>
+    </block>
   </view>
   <view class="awardFoter">
     <view style="color:#CD8336;background:#F7E9AA;" catchtap="jumpowntoy">进入玩具柜</view>
     <view style="color:#ffffff;background:#EF6769;" catchtap="hideAwardMask">继续开福袋</view>
   </view>
 </view>
+
+<!--  二级背景  -->
+<view class='tipbacktwo' wx:if='{{tipbacktwo}}' catchtouchmove="preventD" bindtap='tipbacktwo'></view>
+<!--  立即购买弹框  -->
+<view class='buybombsimmediately' style="height:546rpx;" wx:if='{{buybombsimmediately}}' catchtouchmove="true">
+  <view class='bbsheadcon'>
+    <view class='bbshccom' bindtap='seladdressfun' style='position: relative;'>
+      <view class='bbshccomleft'>收货地址</view>
+      <image class='bbshccomimg' src='/pages/images/icon_in.png'></image>
+      <block wx:if="{{addressdata.length!=0}}"> 
+        <view class='bbshccomright'>
+          <view style="width:100%;line-height:57rpx;text-align:right;" class="specialellipsis">{{tipnamephone}}</view>
+          <view style="width:100%;line-height:57rpx;text-align:right;" class="specialellipsis">{{tipaddress}}</view>
+        </view>
+      </block>
+      <block wx:else>
+        <view class='bbshccomright'>
+          <view style="width:100%;line-height:57rpx;text-align:right;" class="specialellipsis">{{tipaddress}}</view>
+        </view>
+      </block>
+    </view>
+    <view class="blindboxMoneyWrap" wx:if="{{isDeduct && blindboxMoney!=0}}" catchtap="useBlindboxMoneyFun">
+        <view class='blindboxMoneyleft'>使用抽盒金抵扣 <text style="color: #f42251;">￥{{useblindAmountpayable}}</text> <text style="font-size:24rpx;"> (剩余抽盒金</text> <text style="font-size:24rpx;color: #f42251;">￥{{blindboxMoney}})</text> </view>
+        <block>
+          <image wx:if="{{isUseBlindboxMoney}}" style="width:40rpx;height:auto" src="https://www.51chaidan.com/images/sign/order/xuanzhong.png" mode="widthFix"></image>
+          <image wx:else style="width:40rpx;height:auto" src="https://www.51chaidan.com/images/sign/order/weixuanzhong.png" mode="widthFix"></image>
+        </block>
+    </view>
+    <view class='bbshccombot'>
+      <view class='bbshcombotleft' style="line-height:120rpx">应付金额</view>
+      <view class='bbshcombotright'>
+        <view class='bbshcombotpr' style="height:120rpx; line-height:120rpx">￥{{amountpayable}}</view>
+      </view>
+    </view>
+
+    <view class='bbshbottom'>
+      <view class='bbshbottomhead'>
+      </view>
+      <view class='bbshbottombut' bindtap='placeAnOrder' style='position: relative;'>提交订单
+      </view>
+    </view>
+
+  </view>
+</view>
+
 
 
 <bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' 
@@ -91,13 +134,13 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
 
 
 <!--  收货地址  -->
-<view class='tipback' wx:if='{{tipback}}' catchtouchmove="preventD"></view>
-<view class='receivingaddress' wx:if='{{receivingaddress}}'>
+<!-- <view class='tipback' wx:if='{{tipback}}' catchtouchmove="preventD"></view> -->
+<view class='receivingaddress' wx:if='{{receivingaddress}}' catchtouchmove="true">
   <view class='recgadhead'>
     收货地址
     <image src='../../../../pages/images/forknumber.png' class='recgadheadimg' bindtap='receivingaddressfun'></image>
   </view>
-  <view class='recgadcon'>
+  <scroll-view scroll-y class='recgadcon'>
     <view class='recgaddata' wx:for='{{addressdata}}' wx:key='key'>
       <view class='recgaddname' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='revisethereceivingaddress'>
         <view class='recgaddnameleft'>{{item.consignee}}</view>
@@ -125,7 +168,7 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
     <view class='recgadnodata' wx:if='{{addressdata.length==0}}'>
       <image src='../../../../pages/images/recaddnodata.png' class='recgadnodataimg'></image>
     </view>
-  </view>
+  </scroll-view>
   <view class='recgadbot' bindtap='jumpaddress'>
     增加新地址
   </view>

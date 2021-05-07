@@ -1,5 +1,6 @@
 var Dec = require('../../../../common/public.js'); //aes加密解密js
 var Pub = require('../../common/mPublic.js'); //aes加密解密js
+var WxParse = require('../../../../wxParse/wxParse.js');
 const app = getApp();
 Page({
 
@@ -24,14 +25,31 @@ Page({
     isawardMask:false,
     recordList:[],
     goodsList:[],
-     // 收货地址
-     receivingaddress:false,
-     tipback:false,
-     // 收货地址数据
-     addressdata:[],
-     // 收货地址显示 请选择收货地址
-     tipaddress:'请选择收货地址',
-     tipaid:'',
+    // 收货地址
+    receivingaddress:false,
+    tipback:false,
+    // 收货地址数据
+    addressdata:[],
+    // 收货地址显示 请选择收货地址
+    tipaddress:'请选择收货地址',
+    tipaid:'',
+    current:0,
+    //我的抽盒金
+    blindboxMoney:'',
+    // 使用抽盒金比率
+    deductRatio:0.6,
+    // 此商品是否可以使用抽盒金抵扣
+    isDeduct:true,
+    // 是否使用抽盒金抵扣
+    isUseBlindboxMoney:true,
+    // 提交订单时是否使用抽盒金抵扣
+    isDeductNum:1,
+    // 下单type
+    placeAnOrderType:0,
+    // 订单信息
+    order:'',
+    // 福袋内容
+    orderRoleList:[],
   },
   /**
    * 生命周期函数--监听页面加载
@@ -51,8 +69,11 @@ Page({
       loginid: app.signindata.loginid,
       uid: app.signindata.uid,
       openid: app.signindata.openid,
-      isProduce: app.signindata.isProduce
+      isProduce: app.signindata.isProduce,
+      blindboxMoney:app.signindata.blindboxMoney
+      // blindboxMoney:100
     });
+    console.log(app.signindata.blindboxMoney)
     this.gitList();
   },
   activsign: function () {
@@ -135,6 +156,12 @@ Page({
     });
   },
 
+  tabChangeFun(e){
+    this.setData({
+      current: e.currentTarget.dataset.ind
+    });
+  },
+
   hideAwardMask(){
     this.setData({
       isawardMask:false
@@ -168,11 +195,17 @@ Page({
         wx.stopPullDownRefresh();
         console.log('福袋详情 =========== ',res)
         if (res.data.ReturnCode == 200) {
-
+          
+          WxParse.wxParse('article', 'html', res.data.Info.goods_desc, _this, 0);
+          WxParse.wxParse('article1', 'html', res.data.Info.rule, _this, 0);
           _this.setData({
             bannerImg:res.data.List.bannerImg,
             recordList:res.data.List.recordList,
             goodsList:res.data.List.goodsList,
+            deductRatio:res.data.Info.normalDeductRatio,
+            isDeduct:res.data.Info.isDeduct,
+            isUseBlindboxMoney:res.data.Info.isDeduct?true:false,
+            isDeductNum:res.data.Info.isDeduct&&_this.data.blindboxMoney!=0?1:0,
           })
           
         } else {
@@ -182,7 +215,47 @@ Page({
       fail: function () { }
     });
   },
+  useBlindboxMoneyFun(){
+    this.setData({
+      isUseBlindboxMoney:!this.data.isUseBlindboxMoney,
+    })
+    this.setData({
+      amountpayable:this.data.isUseBlindboxMoney? (this.data.originalAmountpayable-this.data.useblindAmountpayable).toFixed(2):this.data.originalAmountpayable,
+      isDeductNum:this.data.isUseBlindboxMoney?1:0
+    })
+  },
+  showbuybombsimmediately(e){
+    let price =  e.currentTarget.dataset.price;
+    this.setData({
+      isUseBlindboxMoney:true
+    })
+    let useblindAmountpayable = this.data.blindboxMoney>(price.toFixed(2)*this.data.deductRatio)?price.toFixed(2)*this.data.deductRatio:this.data.blindboxMoney;
+    let amountpayable = this.data.blindboxMoney!=0? this.data.isDeduct? this.data.isUseBlindboxMoney? (price.toFixed(2)-useblindAmountpayable).toFixed(2) :price.toFixed(2) :price.toFixed(2) :price.toFixed(2)
+    this.setData({
+      placeAnOrderType: e.currentTarget.dataset.type,
+      // 应付金额
+      amountpayable:amountpayable,
+      // 原始应付金额
+      originalAmountpayable: price.toFixed(2),
+      // 使用抽盒金后应付金额
+      useblindAmountpayable: parseFloat(useblindAmountpayable).toFixed(3).slice(0,-1),
+    })
+    
+    this.nextpagediao();
+    this.setData({
+      tipbacktwo: true,
+      buybombsimmediately: true
+    });
+  },
 
+  // 二级背景函数
+  tipbacktwo:function(){
+    this.setData({
+      tipbacktwo: false,
+      buybombsimmediately: false,
+      receivingaddress: false,
+    })
+  },
 
   // 下单
   placeAnOrder:function(w){
@@ -193,20 +266,20 @@ Page({
 
     if (this.data.tipaid == '') {
       app.showToastC('请选择地址');
-      _this.setData({ishowdealoradd:true})
       return false;
     };
 
-    var exh = Dec.Aese('mod=yifanshang&operation=order&id='+_this.data.id+'&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&number='+number+'&aid=' + _this.data.tipaid+'&isDeduct='+_this.data.isDeductNum);
 
-    console.log('下单=========',app.signindata.comurl + 'spread.php?mod=yifanshang&operation=order&id='+_this.data.id+'&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&number='+number+'&aid=' + _this.data.tipaid+'&isDeduct='+_this.data.isDeductNum)
+    var exh = Dec.Aese('mod=luckbag&operation=payOrder&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&type='+this.data.placeAnOrderType+'&aid=' + _this.data.tipaid+'&isDeduct='+_this.data.isDeductNum);
+
+    console.log('下单=========',app.signindata.comurl + 'goods.php?mod=luckbag&operation=payOrder&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&type='+this.data.placeAnOrderType+'&aid=' + _this.data.tipaid+'&isDeduct='+_this.data.isDeductNum)
 
     wx.request({
-      url: app.signindata.comurl + 'spread.php' + exh,
+      url: app.signindata.comurl + 'goods.php' + exh,
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
-        // wx.hideLoading()
+        wx.hideLoading()
         console.log('placeAnOrder=====',res)
         if (res.data.ReturnCode == 200) {
            _this.data.order = res.data.Info.order;
@@ -219,12 +292,6 @@ Page({
           //  _this.countdown();
 
            _this.paymentmony();
-        } else if(res.data.ReturnCode == 341){
-          wx.hideLoading()
-          if(res.data.Info.is_jump && res.data.Info.is_jump==2){
-            var otherActivity = res.data.Info.otherActivity ||{};
-            _this.setData({ is_jump: true ,otherActivity:otherActivity,isPurchase:false,scrapingPur:!_this.data.scrapingPur});  
-          }
         } else {
           wx.hideLoading()
           app.showToastC(res.data.Msg);
@@ -256,16 +323,7 @@ Page({
                   'signType': 'MD5',
                   'paySign': res.data.Info.paySign,
                   'success': function (res) { 
-                    // var pages = getCurrentPages();
-                    // var prevPage = pages[pages.length - 2];  //上一个页面
-                    // prevPage.reset();
-                    // prevPage.gitList();
-                    // _this.scrapingboxfunlit();
-                    _this.getOrderRecord();
-                    _this.queuefun(2,4)
-                    // 订阅授权
-                    // app.comsubscribe(_this);
-
+                    _this.awardList();
                     // 更新抽盒金
                     if(_this.data.isDeduct && _this.data.isUseBlindboxMoney){
                       var gbm = Dec.Aese('mod=blindBox&operation=getBlindboxMoney&uid='+_this.data.uid);
@@ -291,10 +349,6 @@ Page({
                   'complete': function (res) {}
                 })
         }else{
-          // 提交订单蒙层
-          _this.setData({
-            suboformola: false
-          });        
           if (res.data.ReturnCode == 800) {
             app.showToastC('非该用户订单');
           };
@@ -319,6 +373,34 @@ Page({
         };   
       }
     })
+  },
+
+
+  awardList(){
+    var _this = this;
+    wx.showLoading({title: '加载中...',})
+    var exh = Dec.Aese('mod=luckbag&operation=orderInfo&uid='+app.signindata.uid+'&loginid='+app.signindata.loginid+'&cart_id=' + _this.data.order.cart_id)
+    console.log("福袋内容详情 ===== "+app.signindata.comurl + 'mod=luckbag&operation=orderInfo&uid='+app.signindata.uid+'&loginid='+app.signindata.loginid+'&cart_id=' + _this.data.order.cart_id)
+    wx.request({
+      url: app.signindata.comurl + 'goods.php' + exh,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        wx.hideLoading();
+        console.log('福袋内容详情 =========== ',res)
+        if (res.data.ReturnCode == 200) {
+          _this.setData({
+            isawardMask:true,
+            tipbacktwo: false,
+            buybombsimmediately: false,
+            orderRoleList:res.data.List.orderRoleList,
+          })
+        } else {
+          app.showToastC(res.data.msg);
+        }
+      },
+      fail: function () { }
+    });
   },
 
 
@@ -466,7 +548,6 @@ Page({
       receivingaddress: false,
       tipback:false
     });
-    this.getAward();
   },
 
 
@@ -510,7 +591,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    
+    this.gitList();
   },
 
   /**
@@ -549,7 +630,7 @@ Page({
       var share = {
         title: title,
         imageUrl: _this.data.redpagshareimg,
-        path: "/page/secondpackge/pages/aRewardList/aRewardList?id=" + _this.data.scene.id + '&referee=' + _this.data.uid + '&gid=' + _this.data.scene.gid + '&welfareid=' + _this.data.scene.welfareid + '&isredpag=1',
+        path: "/page/secondpackge/pages/onlineFukubukuro/onlineFukubukuro",
         success: function (res) {}
       }
     }
@@ -568,5 +649,27 @@ Page({
     wx.navigateTo({
       url: "/page/component/pages/myothertoydg/myothertoydg?ownerId=" + this.data.uid
     })
+  },
+   // banner 跳转
+   jumpbanner: function (w) {
+    var whref = w.currentTarget.dataset.href || w.target.dataset.href;
+    var item_type = w.currentTarget.dataset.item_type || w.target.dataset.item_type;
+    var imgurl = w.currentTarget.dataset.imgurl || w.target.dataset.imgurl || '';
+    var wname = w.currentTarget.dataset.title || w.target.dataset.title || '美拆'; 
+
+    if(whref == ''){
+      var _this = this;
+      var subscribe_data = _this.data.subscribeJson[0].toyshowStart;
+      console.log(subscribe_data)
+      this.setData({
+        subscribedata:subscribe_data
+      });
+      _this.subscrfun(1);
+      return false;
+    }
+
+    // 公共跳转
+    app.comjumpwxnav(item_type, whref, wname, imgurl);
+
   },
 })

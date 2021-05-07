@@ -1,30 +1,39 @@
+@import "/pages/detailspage/detailspage.wxss";
+
+
 page {
   background-color: #FDD7D6 !important;
 }
-.wrap{
+
+.wrap {
   padding-bottom: 200rpx;
 }
-.banner image{
+
+.banner image {
   width: 100%;
   height: auto;
   display: block;
 }
-.consumemessageWrap{
+
+.consumemessageWrap {
   width: 100%;
   background: #fff;
 }
-.consumemessage{
+
+.consumemessage {
   width: 720rpx;
   margin: 0 15rpx;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.consumemessage swiper{
+
+.consumemessage swiper {
   width: 80%;
   height: 80rpx;
 }
-.consumemessage .swiper-item>view{
+
+.consumemessage .swiper-item>view {
   height: 80rpx;
   line-height: 80rpx;
   font-size: 24rpx;
@@ -34,12 +43,13 @@ page {
   white-space: nowrap;
 }
 
-.content{
+.content {
   width: 100%;
   height: 100%;
   margin-top: 30rpx;
 }
-.card{
+
+.card {
   position: relative;
   width: 92%;
   height: 410rpx;
@@ -47,7 +57,8 @@ page {
   background-image: url(https://cdn.51chaidan.com/images/luckBag/luck_bag_backdrop.png);
   background-size: 100% 100%;
 }
-.cardBox{
+
+.cardBox {
   width: 91.5%;
   height: 314rpx;
   /* background: #000; */
@@ -57,7 +68,8 @@ page {
   /* display: flex; */
   /* justify-content: space-between; */
 }
-.fukubukuroPic{
+
+.fukubukuroPic {
   width: 50%;
   /* padding-left: 20rpx; */
   /* box-sizing: border-box; */
@@ -65,13 +77,15 @@ page {
   top: 0;
   left: 34rpx;
 }
-.fukubukuroPic image{
+
+.fukubukuroPic image {
   width: 100%;
   height: auto;
   display: block;
   border-radius: 10rpx;
 }
-.pricePic{
+
+.pricePic {
   width: 45%;
   position: absolute;
   top: 0;
@@ -79,13 +93,15 @@ page {
   /* padding-right: 20rpx;
   box-sizing: border-box; */
 }
-.pricePic image{
+
+.pricePic image {
   width: 100%;
   height: auto;
   display: block;
   position: absolute;
 }
-.priceTxt{
+
+.priceTxt {
   width: 100%;
   height: 314rpx;
   position: absolute;
@@ -95,24 +111,29 @@ page {
   padding-left: 50rpx;
   box-sizing: border-box;
 }
-.priceTxt text{
+
+.priceTxt text {
   color: #fff;
   display: block;
+  width: 95%;
 }
-.priceTxt1{
+
+.priceTxt1 {
   font-size: 34rpx;
-  margin-top:24rpx;
+  margin-top: 24rpx;
 }
-.priceTxt2{
+
+.priceTxt2 {
   font-size: 22rpx;
   margin-top: 24rpx;
 }
-.priceTxt3{
+
+.priceTxt3 {
   font-size: 22rpx;
   margin-top: 28rpx;
 }
 
-.awardMask{
+.olfAwardMask {
   width: 100%;
   height: 100%;
   position: fixed;
@@ -122,7 +143,8 @@ page {
   background: #fff;
   z-index: 100;
 }
-.awardFoter{
+
+.awardFoter {
   position: absolute;
   bottom: 200rpx;
   left: 0;
@@ -132,7 +154,8 @@ page {
   justify-content: center;
   align-items: center;
 }
-.awardFoter view{
+
+.awardFoter view {
   width: 300rpx;
   height: 65rpx;
   text-align: center;
@@ -142,27 +165,83 @@ page {
   margin: 0 20rpx;
   border-radius: 10rpx;
 }
-.awardListWrap{
+
+.awardListWrap {
   padding: 0 35rpx;
   box-sizing: border-box;
   padding-top: 50rpx;
 }
-.awardListWrap view{
+
+.awardListWrap view {
   width: 200rpx;
   margin-bottom: 60rpx;
   display: inline-block;
   margin-right: 42rpx;
 }
-.awardListWrap view:nth-child(3n){
+
+.awardListWrap view:nth-child(3n) {
   margin-right: 0;
 }
-.awardListWrap view image{
+
+.awardListWrap view image {
   width: 200rpx;
   height: 200rpx;
 }
-.awardListWrap view text{
+
+.awardListWrap view text {
   font-size: 24rpx;
   display: block;
   margin-top: 10rpx;
   text-align: center;
 }
+
+.tabBtnWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40rpx 0 30rpx 0;
+}
+
+.tabBtnWrap view {
+  margin: 0 40rpx;
+  font-size: 30rpx;
+  color: #101010;
+}
+
+.active {
+  font-weight: bold;
+  color: #101010;
+  position: relative;
+}
+
+.active::after {
+  content: '';
+  position: absolute;
+  bottom: -8rpx;
+  left: 0;
+  width: 100%;
+  height: 4rpx;
+  background: #101010;
+}
+
+.selectAddressBut {
+  width: 160rpx;
+  height: 50rpx;
+  background: #ff2742;
+  border-radius: 50rpx;
+  color: #fff;
+  text-align: center;
+  line-height: 50rpx;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 20rpx;
+  margin: auto;
+  font-size: 24rpx;
+}
+
+
+
+
+
+
