@@ -6,7 +6,20 @@
 <view class="relHead">
     <view class="{{headSel==1?'relHeadColor':''}}" catchtap="headSelFun" data-index='1'>幸运值红包</view>
     <view class="{{headSel==2?'relHeadColor':''}}" catchtap="headSelFun" data-index='2'>抽盒金红包</view>
+		<image class="hbShuom" src="/pages/images/explain.png" mode="widthFix" catchtap="toggleShoumFun"></image>
 </view>
+
+<view class="wsh" catchtouchmove="true" wx:if='{{isShuom}}'>
+   <view class="tgimgboxgb" catchtap="toggleShoumFun"></view>
+   <view class="howToPlay">
+       <view class="howToPlayHead">红包说明</view>
+       <scroll-view scroll-y="true" class="howToPlayScroll">
+          <text class="howToPlayTxt">{{explain}}</text>
+       </scroll-view>
+   </view>
+</view>
+
+
 <view class="relTip">红包当日24时过期</view>
 <view class="relContent">
     <block wx:for='{{listdata}}' wx:key='key'>
@@ -112,12 +125,12 @@
 					<image style="margin:15rpx;width:70rpx;height:70rpx;display:inline-block;border-radius:5rpx;" src="{{item.headphoto}}"></image>
 					<view class="pagitem">
 						<view style="height:100%;float:left;color:#333;text-align:left;">
-							<view class="specialellipsis" style="margin-top:20rpx;width:230rpx;">{{item.nick}}</view>
+							<view class="specialellipsis" style="margin-top:20rpx;width:180rpx;">{{item.nick}}</view>
 							<view>{{item.insert_time}}</view>
 						</view>
 						<view wx:if='{{welfareInfo.welfareType == 3}}' style="height:100%;float:right;text-align:right;color:#fb595f;margin-right:15rpx;">
 							<view style="margin-top:20rpx;color:#F2B95F;">￥{{item.amount}}抽盒金</view>
-							<view style="color:#8E8C8D;">可累计，永久有效</view>
+							<view style="color:#8E8C8D;">红包金额全部瓜分即可获得</view>
 						</view>
 					</view>
 				</view>

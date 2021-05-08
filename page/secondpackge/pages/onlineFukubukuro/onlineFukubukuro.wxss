@@ -177,13 +177,24 @@ page {
   margin-bottom: 60rpx;
   display: inline-block;
   margin-right: 42rpx;
+  position: relative;
+}
+
+.awardListWrap view .bgimg {
+  width: 200rpx;
+  height: 200rpx;
+  transform: scale(1.6);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 
 .awardListWrap view:nth-child(3n) {
   margin-right: 0;
 }
 
-.awardListWrap view image {
+.awardListWrap view .goodsimg {
   width: 200rpx;
   height: 200rpx;
 }
@@ -240,7 +251,10 @@ page {
   font-size: 24rpx;
 }
 
-
+.wxParse-img{
+  width: 100%;
+  display: block;
+}
 
 
 

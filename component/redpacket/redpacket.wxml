@@ -175,12 +175,12 @@
 					<image style="margin:15rpx;width:70rpx;height:70rpx;display:inline-block;border-radius:5rpx;" src="{{item.headphoto}}"></image>
 					<view class="pagitem">
 						<view style="height:100%;float:left;color:#333;text-align:left;">
-							<view class="specialellipsis" style="margin-top:20rpx;width:230rpx;">{{item.nick}}</view>
+							<view class="specialellipsis" style="margin-top:20rpx;width:180rpx;">{{item.nick}}</view>
 							<view>{{item.insert_time}}</view>
 						</view>
 						<view wx:if='{{welfareInfo.welfareType == 3}}' style="height:100%;float:right;text-align:right;color:#fb595f;margin-right:15rpx;">
 							<view style="margin-top:20rpx;color:#F2B95F;">￥{{item.amount}}抽盒金</view>
-							<view style="color:#8E8C8D;">可累计，永久有效</view>
+							<view style="color:#8E8C8D;">红包金额全部瓜分即可获得</view>
 						</view>
 					</view>
 				</view>

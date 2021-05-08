@@ -20,7 +20,7 @@
           </swiper-item>
         </block>
       </swiper>
-      <!-- <redpacket bindgetWelfare="getWelfare" bindredpagshareimage="redpagshareimage" scene="{{scene}}" countWelfare="{{countWelfare}}" sourcePage="1" wx:if='{{isredpacket}}' /> -->
+      <redpacket bindgetWelfare="getWelfare" bindredpagshareimage="redpagshareimage" scene="{{scene}}" countWelfare="{{countWelfare}}" sourcePage="2" wx:if='{{isredpacket}}' />
     </view>
   </view>
   <view class="content">
@@ -55,7 +55,8 @@
       </block>
       <block wx:else>
         <view style="padding:0 35rpx;box-sizing: border-box;">
-          <template is="wxParse" data="{{wxParseData:article1.nodes}}" />
+          <text>{{explain}}</text>
+          <text style="display:block;text-align:center;margin-top:160rpx;">本活动最终解释权归美拆所有</text>
         </view>
       </block>
     </view>
@@ -68,7 +69,8 @@
   <view class="awardListWrap">
     <block wx:for="{{orderRoleList}}" wx:key="key">
       <view>
-        <image src="{{item.goods_img}}" mode="aspectFit"></image>
+        <image wx:if="{{item.isBAigPrize}}" class="bgimg" src="https://cdn.51chaidan.com/images/luckBag/bigPrizeBackdrop.png" mode="aspectFit"></image>
+        <image class="goodsimg" src="{{item.goods_img}}" mode="aspectFit"></image>
         <text>{{item.goods_name}}</text>
       </view>
     </block>

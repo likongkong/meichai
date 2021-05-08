@@ -50,6 +50,7 @@ Page({
     order:'',
     // 福袋内容
     orderRoleList:[],
+    isredpacket:false
   },
   /**
    * 生命周期函数--监听页面加载
@@ -197,7 +198,6 @@ Page({
         if (res.data.ReturnCode == 200) {
           
           WxParse.wxParse('article', 'html', res.data.Info.goods_desc, _this, 0);
-          WxParse.wxParse('article1', 'html', res.data.Info.rule, _this, 0);
           _this.setData({
             bannerImg:res.data.List.bannerImg,
             recordList:res.data.List.recordList,
@@ -206,6 +206,12 @@ Page({
             isDeduct:res.data.Info.isDeduct,
             isUseBlindboxMoney:res.data.Info.isDeduct?true:false,
             isDeductNum:res.data.Info.isDeduct&&_this.data.blindboxMoney!=0?1:0,
+            countWelfare:res.data.Info.countWelfare,
+            explain:res.data.Info.rule
+          })
+
+          _this.setData({
+            isredpacket:true
           })
           
         } else {
@@ -395,6 +401,7 @@ Page({
             buybombsimmediately: false,
             orderRoleList:res.data.List.orderRoleList,
           })
+          
         } else {
           app.showToastC(res.data.msg);
         }
@@ -630,7 +637,7 @@ Page({
       var share = {
         title: title,
         imageUrl: _this.data.redpagshareimg,
-        path: "/page/secondpackge/pages/onlineFukubukuro/onlineFukubukuro",
+        path: "/page/secondpackge/pages/onlineFukubukuro/onlineFukubukuro?referee=" + _this.data.uid + '&welfareid=' + _this.data.scene.welfareid + '&isredpag=1',
         success: function (res) {}
       }
     }

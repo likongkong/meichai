@@ -18,7 +18,8 @@ Page({
     uid: app.signindata.uid,
 
     headSel:1,
-    listdata:[]
+    listdata:[],
+    isShuom:false
   },
   getInfo: function (recycle = true) {
     var _this = this;
@@ -52,7 +53,8 @@ Page({
           _this.setData({
              blindboxMoney: listData.blindboxMoney || [], // 是抽盒金的
              luckyValue: listData.luckyValue || [],  // 是幸运值的
-             listdata
+             listdata,
+             explain:res.data.Info.explain
           });
         }
         
@@ -247,6 +249,13 @@ Page({
       listdata
     })
   },
+
+
+  toggleShoumFun:function(){
+    this.setData({
+      isShuom:!this.data.isShuom
+    })
+ },
 
 
   /**
@@ -468,6 +477,13 @@ Page({
           title: title,
           imageUrl: _this.data.redpagshareimg,
           path: "/page/secondpackge/pages/aRewardList/aRewardList?id=" + _this.data.id + '&referee=' + _this.data.uid + '&gid=' + _this.data.gid + '&welfareid=' + _this.data.welfareid + '&isredpag=1',
+          success: function (res) {}
+        }
+      }else if(this.data.sourcePage == 2){
+        var reshare = {
+          title: title,
+          imageUrl: _this.data.redpagshareimg,
+          path: "/page/secondpackge/pages/onlineFukubukuro/onlineFukubukuro?referee=" + _this.data.uid + '&welfareid=' + _this.data.welfareid + '&isredpag=1',
           success: function (res) {}
         }
       }
