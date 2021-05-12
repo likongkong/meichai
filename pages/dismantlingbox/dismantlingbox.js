@@ -154,6 +154,9 @@ Page({
   },
   //跳转商品详情
   jumpGoodsDetails(w){
+
+    return false;
+
     var gid = w.currentTarget.dataset.gid || w.target.dataset.gid;
     var islotto = w.currentTarget.dataset.islotto || w.target.dataset.islotto || false;
     var isblindbox = w.currentTarget.dataset.isblindbox || w.target.dataset.isblindbox || false;
@@ -569,7 +572,7 @@ Page({
 
     _this.brandinformation(1);
     // // 线上
-    // _this.commodityinformation(1,1);
+    _this.commodityinformation(1,1);
     // // 手作
     // _this.commodityinformation(1,2);
     // // 海外
@@ -1318,7 +1321,7 @@ brandJson:function(){
     _this.data.page = 0;
     _this.brandinformation(1);
     // // 线上
-    // _this.commodityinformation(1,1);
+    _this.commodityinformation(1,1);
     // // 手作
     // _this.commodityinformation(1,2);
     // // 海外
