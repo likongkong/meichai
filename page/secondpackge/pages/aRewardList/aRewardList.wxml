@@ -35,12 +35,14 @@
         </block>
       </swiper>
     </view>
-    <view class="classifyTab">
-      <scroll-view scroll-x="true" style="width: 100%;height: 100%;white-space: nowrap;" scroll-with-animation="true" scroll-left='{{scrollleft}}'>
-        <view wx:for="{{classifyArr}}" wx:key='key' wx:for-item="item" id="ele{{index}}" class="classifyItem {{classifyIndex == index?'active':''}}" data-index="{{index}}" data-name="{{item.name}}" catchtap="classifyChange">{{item.name}}</view>
-        <!-- <view style="width:0px; height: 8rpx;background: #1E88E5;position: relative;z-index:10;bottom:12rpx;px" animation='{{animationData}}' class="classifyTabBar"></view> -->
-      </scroll-view>
-    </view>
+    <block wx:if='{{scene.its != 1}}'>
+        <view class="classifyTab">
+          <scroll-view scroll-x="true" style="width: 100%;height: 100%;white-space: nowrap;" scroll-with-animation="true" scroll-left='{{scrollleft}}'>
+            <view wx:for="{{classifyArr}}" wx:key='key' wx:for-item="item" id="ele{{index}}" class="classifyItem {{classifyIndex == index?'active':''}}" data-index="{{index}}" data-name="{{item.name}}" catchtap="classifyChange">{{item.name}}</view>
+            <!-- <view style="width:0px; height: 8rpx;background: #1E88E5;position: relative;z-index:10;bottom:12rpx;px" animation='{{animationData}}' class="classifyTabBar"></view> -->
+          </scroll-view>
+        </view>
+    </block>
     <view class="consumemessage">
         <swiper vertical="true" autoplay="true" circular="true" interval="2500">
           <block wx:for="{{consumemessageData}}" wx:key='key'>
@@ -52,6 +54,7 @@
         </swiper>
         <redpacket bindgetWelfare="getWelfare" bindredpagshareimage="redpagshareimage" scene="{{scene}}" countWelfare="{{countWelfare}}" sourcePage="1" wx:if='{{isredpacket}}' />
     </view>
+    
   </view>
 
   <view class="content" style='{{isIphoneX?"padding:0 0 210rpx 0;":"padding:0 0 180rpx 0;"}}'>

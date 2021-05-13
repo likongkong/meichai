@@ -39,7 +39,7 @@ Page({
   onLoad: function (options) {
     if (options) {
       this.setData({
-        scene:options,
+        scene:options
       })
     } 
     console.log(options)
@@ -156,7 +156,7 @@ Page({
     };
     var isToyShow = this.data.scene.its?1:0;
     var exh = Dec.Aese('mod=yifanshang&operation=list&pid='+_this.data.page+'&uid='+app.signindata.uid+'&loginid='+app.signindata.loginid+'&isToyShow='+isToyShow)
-    console.log("一番赏活动列表接口地址 ===== "+app.signindata.comurl + 'mod=yifanshang&operation=list&pid='+_this.data.page+'&uid='+app.signindata.uid+'&loginid='+app.signindata.loginid)
+    console.log("一番赏活动列表接口地址 ===== "+app.signindata.comurl + 'mod=yifanshang&operation=list&pid='+_this.data.page+'&uid='+app.signindata.uid+'&loginid='+app.signindata.loginid+'&isToyShow='+isToyShow)
     wx.request({
       url: app.signindata.comurl + 'spread.php' + exh,
       method: 'GET',
@@ -258,7 +258,8 @@ Page({
   onShareAppMessage: function(options ) {
     var _this = this
     var share = {
-      imageUrl:  "https://cdn.51chaidan.com/images/sign/yifanshangLisSharet.jpg"
+      imageUrl:  "https://cdn.51chaidan.com/images/sign/yifanshangLisSharet.jpg",
+      path: "/page/secondpackge/pages/aRewardList/aRewardList?its=" + _this.data.scene.its || 0,
     }
     if( options.from == 'button' ){
       var info = _this.data.welfare
@@ -282,7 +283,7 @@ Page({
       var share = {
         title: title,
         imageUrl: _this.data.redpagshareimg,
-        path: "/page/secondpackge/pages/aRewardList/aRewardList?id=" + _this.data.scene.id + '&referee=' + _this.data.uid + '&gid=' + _this.data.scene.gid + '&welfareid=' + _this.data.scene.welfareid + '&isredpag=1',
+        path: "/page/secondpackge/pages/aRewardList/aRewardList?id=" + _this.data.scene.id + '&referee=' + _this.data.uid + '&gid=' + _this.data.scene.gid + '&welfareid=' + _this.data.scene.welfareid + '&isredpag=1'+ "&its=" + _this.data.scene.its || 0,
         success: function (res) {}
       }
     }
