@@ -143,6 +143,10 @@ Page({
       wx.navigateTo({
         url: "/page/component/pages/playgrasslist/playgrasslist"
       })
+    } else if (type == 10) { //一番赏 
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/aRewardList/aRewardList?its=1"
+      })
     } else if (type == 999) { //限时不限量 
       wx.navigateTo({
         url: "/page/secondpackge/pages/exhibition/exhibition?type=999"
@@ -297,8 +301,6 @@ Page({
       };
     };
     for (var i = 0; i < nArr.length ; i++) {
-
-      console.log(i)
       randomArr.push(i);
     };
 
@@ -702,7 +704,13 @@ Page({
       tgabox: true
     });
   },
-
+  // 跳转一番赏列表
+  toaRewarddeyails(e){
+    let id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/aRewardList/aRewardList?its=1"
+    })
+  },
 
 
 })
