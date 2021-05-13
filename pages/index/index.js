@@ -263,8 +263,8 @@ Page({
       // url: "/page/secondpackge/pages/drawHideGoods/drawHideGoods"
       // url: "/page/secondpackge/pages/auctionDetails/auctionDetails"
       // url: "/page/secondpackge/pages/auctionList/auctionList" 
-      // url: "/page/secondpackge/pages/entityLuckyDraw/entityLuckyDraw"
-      url: "/page/secondpackge/pages/onlineFukubukuro/onlineFukubukuro"
+      url: "/page/secondpackge/pages/entityLuckyDraw/entityLuckyDraw"
+      // url: "/page/secondpackge/pages/onlineFukubukuro/onlineFukubukuro"
       
       // url: "/page/secondpackge/pages/redEnvelopeList/redEnvelopeList"
       // url: "/page/secondpackge/pages/priorityVoting/priorityVoting"

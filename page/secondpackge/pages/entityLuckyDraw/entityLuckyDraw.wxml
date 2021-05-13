@@ -81,7 +81,7 @@
           </view>
           <block>
             <view wx:if="{{!user.isVIP}}" class="cardVipItemBtn" catchtap="jumpVipPage">开通VIP</view>
-            <view wx:elif="{{user.isVIP && !user.isVipTicket}}" class="cardVipItemBtn" style="background:#ADADAD; color:#fff;box-shadow:none;">已开通</view>
+            <view wx:elif="{{user.isVIP && !user.isVipTicket}}" class="cardVipItemBtn" catchtap="jumpVipPage">续费</view>
             <view wx:else class="cardVipItemBtn" data-type="1" catchtap="getDrawFun">领取</view>
           </block>
         </view>
