@@ -42,6 +42,7 @@ Page({
         scene:options,
       })
     } 
+    console.log(options)
     app.signindata.suap = 14;
     // 判断是否授权
     this.activsign();
@@ -153,7 +154,8 @@ Page({
     if(_this.data.page ==0){
       this.setData({datalist:[]})
     };
-    var exh = Dec.Aese('mod=yifanshang&operation=list&pid='+_this.data.page+'&uid='+app.signindata.uid+'&loginid='+app.signindata.loginid)
+    var isToyShow = this.data.scene.its?1:0;
+    var exh = Dec.Aese('mod=yifanshang&operation=list&pid='+_this.data.page+'&uid='+app.signindata.uid+'&loginid='+app.signindata.loginid+'&isToyShow='+isToyShow)
     console.log("一番赏活动列表接口地址 ===== "+app.signindata.comurl + 'mod=yifanshang&operation=list&pid='+_this.data.page+'&uid='+app.signindata.uid+'&loginid='+app.signindata.loginid)
     wx.request({
       url: app.signindata.comurl + 'spread.php' + exh,

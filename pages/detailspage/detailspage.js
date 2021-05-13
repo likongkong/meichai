@@ -2998,9 +2998,13 @@ Page({
             clearInterval(_this.data.wintheprtintervaldetail);
             _this.winningtheprizetimedetail(1613318400);
           }
-           if(res.data.Ginfo.gid == 37568 || res.data.Ginfo.gid == 37569 || res.data.Ginfo.gid == 37573){
+          if(res.data.Ginfo.gid == 37568 || res.data.Ginfo.gid == 37569 || res.data.Ginfo.gid == 37573){
             clearInterval(_this.data.wintheprtintervaldetail);
             _this.winningtheprizetimedetail(1619193600);
+          }
+          if(res.data.Ginfo.gid == 37700){
+            clearInterval(_this.data.wintheprtintervaldetail);
+            _this.winningtheprizetimedetail(1621094400);
           }
           
           // if(res.data.Ginfo&&res.data.Ginfo.brandId>0){
