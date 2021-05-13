@@ -999,3 +999,17 @@ page{
 .drawerBox text:last-child{
   border: none;
 }
+.progress-box{
+  overflow:hidden;position:absolute;bottom:0;left:0;width:100%;
+  border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;
+}
+.progress-box text {
+  display: inline-block;
+  height: 24rpx;
+  line-height: 24rpx;
+  position: absolute;
+  top: 0;
+  font-size: 20rpx;
+  color: #fff;
+  padding-left:15rpx;
+}

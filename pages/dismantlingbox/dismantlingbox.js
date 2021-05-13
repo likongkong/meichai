@@ -890,8 +890,10 @@ Page({
         if (res.data.ReturnCode == 200) {
           if(num==1){
             var liveListData = res.data.List.liveList || [];
+            var rewardList = res.data.List.rewardList || [];
             _this.setData({
-              liveListData:liveListData
+              liveListData:liveListData,
+              rewardList:rewardList
             })
           }else{
             var liveList = res.data.List.liveList || [];
@@ -1399,4 +1401,13 @@ brandJson:function(){
       imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
     }
   },  
+  // 跳转一番赏列表
+  toaRewarddeyails(e){
+    let id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/aRewardList/aRewardList?its=1"
+    })
+  },
+
+
 })

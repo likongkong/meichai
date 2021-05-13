@@ -95,7 +95,7 @@ Component({
       }; 
 
       var timestamp = Date.parse(new Date()) / 1000;
-   
+
       if(app.signindata.isOpenToyShow){
         wx.navigateTo({
           url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
