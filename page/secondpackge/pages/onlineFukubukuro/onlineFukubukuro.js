@@ -164,6 +164,7 @@ Page({
   },
 
   hideAwardMask(){
+    this.gitList();
     this.setData({
       isawardMask:false
     })
