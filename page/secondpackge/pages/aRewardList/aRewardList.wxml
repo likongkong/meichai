@@ -2,7 +2,7 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 <view class="main">
   <view class="head">
-    <view class="rewardswiper">
+    <view class="rewardswiper" wx:if="{{rewardswiperData.length!=0}}">
       <swiper autoplay="{{true}}" circular="true" interval="3000">
         <block wx:for="{{rewardswiperData}}" wx:key='key' wx:for-item="item">
           <swiper-item>
