@@ -1084,6 +1084,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
     }
     wx.showLoading({
       title: '加载中...',
+      mask:true
     })
 
     wx.request({
