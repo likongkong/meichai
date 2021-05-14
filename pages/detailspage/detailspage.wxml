@@ -698,6 +698,11 @@
             </view>    
         </block>
         <block wx:else>
+
+          <block wx:if="{{zunmdata.isSmokeBox}}">
+            <view class="addsopcar boxShadowEve" wx:if='{{is_exhibition==1 && zunmdata.isBlindBox}}' bindtap='addresssmokebox' data-gid='{{zunmdata.gid}}' style="box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:300rpx;float:right;background:#32ACFB;line-height:60rpx;">在线抽盒机</view> 
+          </block>
+          <block wx:else>
             <view class="footer-child large" style='box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 20rpx 0 0;padding:0;width:250rpx;float:right;{{zunmdata.status==1||zunmdata.status==3||zunmdata.status==0?"background:#999999;":""}}'>
               <view catchtap='subscrfun' class="addsopcar" style="height:60rpx;line-height:60rpx;font-size:24rpx;" wx:if='{{zunmdata.status==1}}'>
                 <block wx:if='{{newdataexh}}'>暂未开启</block>
@@ -705,15 +710,13 @@
               </view>
               <view class="addsopcar" style="height:60rpx;line-height:60rpx;" wx:elif='{{zunmdata.status==3}}'>已结束</view>
               <view class="addsopcar" style="height:60rpx;line-height:60rpx;" wx:elif='{{zunmdata.status==0}}'>已售罄</view>
-
               <text class="addsopcar money" style="height:60rpx;{{zunmdata.limitBuy>0?'line-height:30rpx;font-size:22rpx;':'line-height:60rpx;font-size:30rpx;'}}{{zunmdata.status==2?'background:#FB595F;':''}}border-radius:60rpx;margin-top:0;display:block;" wx:elif='{{zunmdata.status==2}}' bindtap='dsbffunblock'>
                   <block wx:if='{{zunmdata.limitBuy>0}}'>立即购买\n(限购{{zunmdata.limitBuy}}体/人)</block>
                   <block wx:else>立即购买</block>
               </text>
-
             </view> 
-
             <view class="addsopcar boxShadowEve" wx:if='{{zunmdata.status==2 && is_exhibition==1 && zunmdata.isBlindBox}}' bindtap='addresssmokebox' data-gid='{{zunmdata.gid}}' style="box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 20rpx 0 0;padding:0;width:250rpx;float:right;background:#32ACFB;line-height:60rpx;">在线抽盒机</view>             
+          </block>
 
         </block>
       </block>
@@ -934,7 +937,12 @@
             </view>    
         </block>
         <block wx:else>
-            <view class="footer-child large" style='box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:300rpx;float:right;{{zunmdata.status==1||zunmdata.status==3||zunmdata.status==0?"background:#999999;":""}}'>
+
+          <block wx:if="{{zunmdata.isSmokeBox}}">
+            <view class="addsopcar boxShadowEve" wx:if='{{is_exhibition==1 && zunmdata.isBlindBox}}' bindtap='addresssmokebox' data-gid='{{zunmdata.gid}}' style="box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:300rpx;float:right;background:#32ACFB;line-height:60rpx;">在线抽盒机</view> 
+          </block>
+          <block wx:else>
+            <view class="footer-child large" style='box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:250rpx;float:right;{{zunmdata.status==1||zunmdata.status==3||zunmdata.status==0?"background:#999999;":""}}'>
               <view catchtap='subscrfun' class="addsopcar" style="height:60rpx;line-height:60rpx;" wx:if='{{zunmdata.status==1}}'>
                 <block wx:if='{{newdataexh}}'>暂未开启</block>
                 <block wx:else>{{zunmdata.specialWay == 1?'线上展会售卖':zunmdata.datatimew+'开售'}}</block>
@@ -948,8 +956,8 @@
               </text>
             </view>
 
-            <view class="addsopcar boxShadowEve" wx:if='{{zunmdata.status==2 && is_exhibition==1 && zunmdata.isBlindBox}}' bindtap='addresssmokebox' data-gid='{{zunmdata.gid}}' style="box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:300rpx;float:right;background:#32ACFB;line-height:60rpx;">在线抽盒机</view> 
-
+            <view class="addsopcar boxShadowEve" wx:if='{{zunmdata.status==2 && is_exhibition==1 && zunmdata.isBlindBox}}' bindtap='addresssmokebox' data-gid='{{zunmdata.gid}}' style="box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:250rpx;float:right;background:#32ACFB;line-height:60rpx;">在线抽盒机</view> 
+          </block>
 
         </block>
       </block>
