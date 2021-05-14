@@ -1567,7 +1567,7 @@ closefrindcommoni:function(){
 
     // 刮刮卡入口
     wx.request({
-      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/cardOpenStatus.txt?202104161826',
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/cardOpenStatus.txt?time='+Date.parse(new Date()),
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
