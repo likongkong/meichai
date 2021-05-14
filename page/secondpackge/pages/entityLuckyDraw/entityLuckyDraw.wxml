@@ -53,19 +53,30 @@
   </view>
   <view style="display: flex;justify-content: center;"><text class="drawNum">剩余刮刮卡：{{suplusChance}}</text></view> 
 
-  <view class="drawWrap" wx:if="{{activity[nowIdx].status !=3}}">
+  <view class="drawWrap" >
     <!-- <view class="jqqd">
       敬请期待
     </view> -->
-    <view class="drawBtn1" wx:if="{{isDrawBtn}}">
-      <view data-num="1" style="{{isPrior?'background:#ADADAD':''}}" catchtap="{{activity[nowIdx].status ==1?'showtoast':isPrior?'':'drawFun'}}">刮一张</view>
-      <view data-num="10" style="{{isPrior?'background:#ADADAD':''}}" catchtap="{{activity[nowIdx].status ==1?'showtoast':isPrior?'':'drawFun'}}" class="drawBtnAfter">
-        <text class="txtten">刮十张</text>  
-        <view class="tips" wx:if="{{!isPrior}}">VIP刮十张送三张刮刮卡
-          <view><image src="https://cdn.51chaidan.com/images/calendar/luckyDraw/xiajiantou.png"></image></view>  
+    <block wx:if="{{activity[nowIdx].status ==3 }}">
+      <view class="drawBtn1" wx:if="{{isDrawBtn}}">
+        <view data-num="1" style="background:#ADADAD">刮一张</view>
+        <view data-num="10" style="background:#ADADAD" class="drawBtnAfter">
+          <text class="txtten">刮十张</text>  
         </view>
       </view>
-    </view>
+    </block>
+    <block wx:else>
+      <view class="drawBtn1" wx:if="{{isDrawBtn}}">
+        <view data-num="1" style="{{isPrior?'background:#ADADAD':''}}" catchtap="{{activity[nowIdx].status ==1?'showtoast':isPrior?'':'drawFun'}}">刮一张</view>
+        <view data-num="10" style="{{isPrior?'background:#ADADAD':''}}" catchtap="{{activity[nowIdx].status ==1?'showtoast':isPrior?'':'drawFun'}}" class="drawBtnAfter">
+          <text class="txtten">刮十张</text>  
+          <view class="tips" wx:if="{{!isPrior}}">VIP刮十张送三张刮刮卡
+            <view><image src="https://cdn.51chaidan.com/images/calendar/luckyDraw/xiajiantou.png"></image></view>  
+          </view>
+        </view>
+      </view>
+    </block>
+    
   </view>
   <view class="cardWrap">
     <view>
