@@ -158,7 +158,7 @@
     <view wx:if='{{activity.isCheckOther==2}}' class="ardbottomeve ardbmeleftbottom" data-id="{{activity.id}}" catchtap="changeRewarddeyails">换一套({{activity.otherNowNum}}/{{activity.otherAllNum}})</view>
     </block>
     
-    <view wx:if='{{activity.status==1}}' class="ardbottomeve ardbmerightbottom">暂未开始 {{activity.start_time}}</view>
+    <view wx:if='{{activity.status==1}}' class="ardbottomeve ardbmerightbottom" catchtap='subscrfun'>暂未开始 {{activity.start_time}}</view>
     <view wx:elif='{{activity.status==3||activity.suplusNum<=0}}' class="ardbottomeve ardbmerightbottom" catchtap="jumpaRewardList">已结束</view>
     <view wx:elif='{{activity.isInQueue}}' class="ardbottomeve ardbmerightbottom" catchtap="scrapingPurfun">我要刮卡</view>
     <!-- <view wx:elif='{{activity.aheadUser&&activity.isInQueue}}' class="ardbottomeve ardbmerightbottom" catchtap="scrapingPurfun">我要刮卡({{remaintime}}s)</view> -->

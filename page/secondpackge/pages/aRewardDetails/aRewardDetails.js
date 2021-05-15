@@ -106,7 +106,9 @@ Page({
      isBlindboxRuleMask:false,
      gotTBBMBS8:true,
      gotTBBMBS9:true,
-     isFlagship:true
+     isFlagship:true,
+    //  订阅数据
+     subscribedata:''
   },
   // 跳转公众号文章
    officialAccount(){
@@ -830,7 +832,8 @@ Page({
             deductRatio:res.data.Info.deduct.deductRatio,
             isDeduct:res.data.Info.deduct.isDeduct,
             isUseBlindboxMoney:res.data.Info.deduct.isDeduct?true:false,
-            isDeductNum:res.data.Info.deduct.isDeduct&&_this.data.blindboxMoney!=0?1:0
+            isDeductNum:res.data.Info.deduct.isDeduct&&_this.data.blindboxMoney!=0?1:0,
+            subscribedata: res.data.Info.subscribe
           })
           var allDeductMoney = Number(parseFloat((activity.suplusNum*activity.shopPrice)*_this.data.deductRatio).toFixed(3).slice(0,-1));
           var tenDeductMoney = Number(parseFloat((10*activity.shopPrice)*_this.data.deductRatio).toFixed(3).slice(0,-1));
@@ -1459,6 +1462,56 @@ Page({
     this.setData({is_jump:false});
     this.queuefun(1,1);
   },
-  zhanwei(){}
+  zhanwei(){},
+
+  // 拉起订阅
+  subscrfun: function () {
+    var _this = this;
+    var subscribedata = _this.data.subscribedata || '';
+    if (subscribedata && subscribedata.template_id && app.signindata.subscribeif) {
+      if (subscribedata.template_id instanceof Array) {
+        wx.requestSubscribeMessage({
+          tmplIds: subscribedata.template_id || [],
+          success(res) {
+            var is_show_modal = true;
+            for (var i = 0; i < subscribedata.template_id.length; i++) {
+              if (res[subscribedata.template_id[i]] == "accept") {
+                app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+                if (is_show_modal) {
+                  _this.subshowmodalfun();
+                  is_show_modal = false;
+                };
+              };
+            };
+          },
+          complete() { }
+        })
+      } else {
+        wx.requestSubscribeMessage({
+          tmplIds: [subscribedata.template_id || ''],
+          success(res) {
+            if (res[subscribedata.template_id] == "accept") {
+              app.subscribefun(_this, 0, subscribedata.template_id, subscribedata.subscribe_type);
+              _this.subshowmodalfun();
+            };
+          }
+        })
+      };
+    };
+  },
+  subshowmodalfun: function () {
+    var _this = this;
+    wx.showModal({
+      title: '提示',
+      content: _this.data.subscribeCouponTip || '订阅成功,开售前通过微信发送提醒',
+      showCancel: false,
+      success: function (res) {
+        _this.setData({
+          subscribeCouponTip:'',
+          isSubscribeCoupon:false
+        })
+        }
+    })
+  },
 
 })
