@@ -1318,7 +1318,7 @@ Page({
       },
 
       success: function (res) {
-        console.log('排队返回数据',res)
+        console.log('排队返回数据',res,type)
         if (res.data.ReturnCode == 200) {
           if (type == 1) {
             _this.queueInfo()
@@ -2209,7 +2209,7 @@ Page({
     var timestamp = Date.parse(new Date())
     //总的秒数 
     var second = parseInt(micro_second) - (timestamp / 1000);
-    console.log('second=====',micro_second,(timestamp / 1000),second)
+    // console.log('second=====',micro_second,(timestamp / 1000),second)
     if (second > 0) {
       _this.setData({
         remaintime: second,
@@ -3223,7 +3223,7 @@ Page({
             }
   
             _this.setData({
-              tricklinelist: res.data.List.line,
+              tricklinelist: res.data.List.line || [],
               chiplist: res.data.List.role,
               patchList: res.data.List.patch,
               chiprule: infoData.rule,
@@ -3234,7 +3234,7 @@ Page({
               hideBoxTip: infoData.hideBoxTip ? infoData.hideBoxTip : "随机隐藏碎片：收集20片自动合成,可到玩具柜查看",
               wholeBoxTitle:infoData.wholeBoxTitle||''
             })
-            _this.selectData(0);
+            // _this.selectData(0);
           }
           _this.setData({
             ishowcollectchip: !_this.data.ishowcollectchip,
@@ -3268,11 +3268,14 @@ Page({
   selectData: function (id) {
     var _this = this;
     var tricklinelist = _this.data.tricklinelist;
-    var lightRole = tricklinelist[id].lightRole;
-    var role = _this.data.chiplist;
+
     if (tricklinelist && tricklinelist.length > 0) { } else {
       return;
     }
+
+    var lightRole = tricklinelist[id].lightRole;
+    var role = _this.data.chiplist;
+
     if (lightRole && lightRole.length > 0) { //将需要点亮的数据加到数组中
       var mMap = new Map();
       for (var i = 0; i < lightRole.length; i++) {
