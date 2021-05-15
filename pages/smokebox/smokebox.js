@@ -2209,7 +2209,7 @@ Page({
     var timestamp = Date.parse(new Date())
     //总的秒数 
     var second = parseInt(micro_second) - (timestamp / 1000);
-    console.log('second=====',micro_second,(timestamp / 1000),second)
+    // console.log('second=====',micro_second,(timestamp / 1000),second)
     if (second > 0) {
       _this.setData({
         remaintime: second,

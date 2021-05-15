@@ -3396,10 +3396,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    app.downRefreshFun(() => {
-      // 商品详情
-      this.detailfunshop();
-    })
+    if(this.data.is_exhibition == 1){
+      wx.stopPullDownRefresh()
+    }else{
+      app.downRefreshFun(() => {
+        // 商品详情
+        this.detailfunshop();
+      })
+    }
   },
   /**
    * 页面上拉触底事件的处理函数
