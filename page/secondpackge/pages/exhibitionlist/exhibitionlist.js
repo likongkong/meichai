@@ -711,6 +711,8 @@ Page({
       url: "/page/secondpackge/pages/aRewardList/aRewardList?its=1"
     })
   },
-
+  catchTouchMove:function(res){
+    return false
+   }
 
 })

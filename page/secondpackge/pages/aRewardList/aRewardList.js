@@ -332,5 +332,8 @@ Page({
     that.setData({
       animationData: animation.export()
     })
-  }
+  },
+  catchTouchMove:function(res){
+    return false
+   }
 })
