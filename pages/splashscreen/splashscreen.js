@@ -147,7 +147,8 @@ Page({
     if (_this.data.iftrjump){
       //获取当前时间戳  
       var timestamp = Date.parse(new Date()) / 1000; 
-      if(timestamp>=1621008000){
+      // timestamp>=1621008000
+      if(false){
         wx.reLaunch({
           url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist",
           complete:function(){

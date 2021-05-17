@@ -582,6 +582,7 @@ Page({
         isShareGood : notAllowShareGoodsId.length!=0&&notAllowShareGoodsId.indexOf(arr[j][0].gid) > -1 ? false : true,
         toyshowTips:arr[j][0].toyshowTips || '',
         canChangedAddress:arr[j][0].canChangedAddress,
+        status_detail:arr[j][0].status_detail || 0
       })
     };   
     if (arrchil && arrchil.length != 0){

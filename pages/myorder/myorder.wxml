@@ -67,7 +67,10 @@
                                 <view class='wholeconnumrr' wx:if='{{item.status==4}}'>等待收货</view>
                                 <view class='wholeconnumrr' wx:if='{{item.status==5}}'>已完成</view>
                                 <view class='wholeconnumrr' wx:if='{{item.status==6}}'>售后</view>
-                                <view class='wholeconnumrr' wx:if='{{item.status==7}}'>已退款</view>
+                                <view class='wholeconnumrr' wx:if='{{item.status==7}}'>
+                                    <block wx:if='{{item.status_detail == 2}}'>支付逾期</block>
+                                    <block wx:else>已退款</block>
+                                </view>
                                 <view class='wholeconnumrr' wx:if='{{item.status==8 && item.order_type!=7}}'>取消未付款</view>
                                 <view class='wholeconnumrr' style='color:#7D7D7D;' wx:if='{{item.status==8 && item.order_type==7}}'>  
                                     活动结束，订单关闭
@@ -126,7 +129,7 @@
              </view>
 
              <!-- 门票不显示发货条 -->
-             <block wx:if='{{item.order_type==29 || item.toyshowTips}}'></block>
+             <block wx:if='{{item.order_type==29 || item.toyshowTips || item.status==7}}'></block>
              <block wx:else>
                     <!--  商品状态  加不等于砍价item.order_type!=6-->
                     <block wx:if='{{!item.isToyCabinet}}'>
@@ -765,11 +768,12 @@
               <!--  已完成  -->
 
                     <!--  拆单失败  -->
-                    <view class='wholebottomadd' wx:if='{{item.status==7}}'>
-                        <view class='totaltittrfai'>
-                           {{item.order_type==27&&item.status==7&&item.compareTime?'您未中签，退款金额将在24小时内原路退回':'付款将会原路返回到您的支付账号中'}} 
+                    <view class='wholebottomaddFail' wx:if='{{item.status==7}}'>
+                        <view class='totaltittrfai' style="{{item.status_detail==2?'line-height: 40rpx;':''}}">
+                            <block wx:if='{{item.status_detail == 2}}'>支付时间超过1分钟，支付金额会原路返回到您的支付账号中</block>
+                            <block wx:else>{{item.order_type==27&&item.status==7&&item.compareTime?'您未中签，退款金额将在24小时内原路退回':'付款将会原路返回到您的支付账号中'}}</block>
                         </view>
-                        <view class='wholebottomaddright sharebox redborcol'  wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood}}'>
+                        <view class='wholebottomaddright sharebox redborcol' style="{{item.status_detail==2?'margin-top:16rpx;':''}}" wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood}}'>
                             <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
                             分享好友
                         </view> 

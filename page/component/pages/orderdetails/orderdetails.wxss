@@ -348,8 +348,9 @@ page{
 .paycheadwconbottonl{width: 258rpx;height: 78rpx;border:1rpx solid #999999;border-radius: 10rpx;float: left;line-height: 78rpx;text-align: center;}
 .paycheadwconbottonr{width: 258rpx;height: 78rpx;border:1rpx solid #999999;border-radius: 10rpx;float: right;line-height: 78rpx;text-align: center;} */
 .totaltittrfai{
-  height:88rpx;
-  line-height:66rpx;
+  width: 540rpx;
+  /* height:88rpx; */
+  line-height:60rpx;
   font-size:28rpx;
   color:#666;
   float:left;

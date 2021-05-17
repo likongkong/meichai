@@ -168,6 +168,12 @@
   color: #333;
   text-align: right;
 }
+.wholebottomaddFail{
+  min-height: 78rpx;
+  width: 94%;
+  padding: 0 3% 10rpx;
+  overflow:hidden;
+}
 .wholebottomadd{
   min-height: 78rpx;
   width: 94%;
@@ -186,8 +192,9 @@
   border-radius: 10rpx;
 }
 .totaltittrfai{
-  height:88rpx;
-  line-height: 66rpx;
+  width: 540rpx;
+  /* height:88rpx; */
+  line-height: 60rpx;
   font-size: 28rpx;
   color: #666;
   float: left; 
