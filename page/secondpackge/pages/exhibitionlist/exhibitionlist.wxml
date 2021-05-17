@@ -291,7 +291,7 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
 
           <view style="float:left;margin-left:20rpx;">
             <view class="mexhibboxconeve" wx:for='{{item.detail}}' wx:key='key' wx:if='{{index%2==0}}' catchtap="jumpexhdetail" data-id='{{item.id}}' data-brandid='{{item.brandId}}' data-type="{{item.activityType}}" data-gid='{{item.goodsId}}'>
-              <block wx:if='{{item.activityType == 4 || item.activityType == 11|| item.activityType == 12 || item.activityType == 1 || item.activityType == 5|| item.activityType == 8|| item.activityType == 9}}'>
+              <block wx:if='{{item.activityType == 4 || item.activityType == 11|| item.activityType == 12 || item.activityType == 1 || item.activityType == 5|| item.activityType == 8|| item.activityType == 9 || item.activityType == 10}}'>
 								<image class="exhibboxeveimg" mode='widthFix' src="{{item.images}}"></image>
                 <view wx:if='{{item.activityType != 11 && item.activityType != 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.name}}</view>
                 <view wx:elif='{{item.activityType == 11 || item.activityType == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.goodsName}}</view>
@@ -311,7 +311,7 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
 										</block>
                     <block wx:elif='{{item.status==3}}'>已开奖</block>
                   </view>
-                  <view wx:elif='{{item.activityType == 11 || item.activityType == 12}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;">
+                  <view wx:elif='{{item.activityType == 11 || item.activityType == 12 || item.activityType == 10}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;">
 									  <view wx:if='{{item.saleButtonDisplay}}' style='color:#6aca6b;'>{{item.saleButtonDisplay}}</view>
                     <view wx:elif='{{item.status==1}}' style='color:#6aca6b;'>{{item.start_time}}开售</view>
 										<view wx:elif='{{item.activityType == 11 && item.status==2}}' style='color:#6aca6b;'>展会限定</view>
@@ -346,7 +346,7 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
 
           <view style="float:left;margin-left:20rpx;">
             <view class="mexhibboxconeve" wx:for='{{item.detail}}' wx:key='key' wx:if='{{index%2==1}}' catchtap="jumpexhdetail" data-id='{{item.id}}' data-brandid='{{item.brandId}}' data-type="{{item.activityType}}" data-gid='{{item.goodsId}}'>
-              <block wx:if='{{item.activityType == 4 || item.activityType == 11|| item.activityType == 12 || item.activityType == 1 || item.activityType == 5|| item.activityType == 8|| item.activityType == 9}}'>
+              <block wx:if='{{item.activityType == 4 || item.activityType == 11|| item.activityType == 12 || item.activityType == 1 || item.activityType == 5|| item.activityType == 8|| item.activityType == 9 || item.activityType == 10}}'>
                 <image class="exhibboxeveimg" mode='widthFix' src="{{item.images}}"></image>
                 <view wx:if='{{item.activityType != 11 && item.activityType != 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.name}}</view>
                 <view wx:elif='{{item.activityType == 11 || item.activityType == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.goodsName}}</view>
@@ -364,7 +364,7 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
 										</block>
                     <block wx:elif='{{item.status==3}}'>已开奖</block>
                   </view>
-                  <view wx:elif='{{item.activityType == 11 || item.activityType == 12}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;">
+                  <view wx:elif='{{item.activityType == 11 || item.activityType == 12 || item.activityType == 10}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;">
 										<view wx:if='{{item.saleButtonDisplay}}' style='color:#6aca6b;'>{{item.saleButtonDisplay}}</view>
                     <view wx:elif='{{item.status==1}}' style='color:#6aca6b;'>{{item.start_time}}开售</view>
 										<view wx:elif='{{item.activityType == 11 && item.status==2}}' style='color:#6aca6b;'>展会限定</view>

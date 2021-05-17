@@ -2,7 +2,7 @@ var Aes = require('crypto-js.js');  //引用AES源码js
 
 var env = 'online';   //线上
 // var env = 'test';  //测试
-var versionnumber = '11.4.2';
+var versionnumber = '11.4.3';
 
 var key = env=='online'?Aes.enc.Utf8.parse("danzhuan1chaijia"):Aes.enc.Utf8.parse("danzhuanichaijia");
 // 公共地址 接口

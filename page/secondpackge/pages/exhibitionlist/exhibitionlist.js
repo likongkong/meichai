@@ -100,6 +100,11 @@ Page({
       wx.navigateTo({
         url: "/page/secondpackge/pages/exhibitionwelfare/exhibitionwelfare",
       });
+    } else if (type == 10) {
+      var id = w.currentTarget.dataset.id || w.target.dataset.id || '';
+      wx.navigateTo({   
+        url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + id
+      });
     }
 
 
