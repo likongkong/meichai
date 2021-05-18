@@ -1,6 +1,6 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
-
+<import src="../../../../wxParse/wxParse.wxml" />
 
 <view class="wrap">
   <view class="countdownWrap" style='background:#000;height:68rpx;padding:0 20rpx;text-align: center;line-height: 68rpx;font-size: 40rpx;color: #fff;'>
@@ -96,7 +96,7 @@
               <view class="actDetailEve" catchtap="sigListFun" style="margin-left:20rpx">幸运值排行</view>
           </view>
       </view>
-      <view style="text-align:center;font-size:26rpx;color:#8A8A8A;">点击参加抽选视为同意 <text style="color:#298DF8;">《订票服务条款》</text></view>
+      <view style="text-align:center;font-size:26rpx;color:#8A8A8A;" catchtap="displayToBSfun">点击参加抽选视为同意 <text style="color:#298DF8;">《订票服务条款》</text></view>
     </view>
   </view>
   <view class="tabWrap">
@@ -112,7 +112,7 @@
       </block>
       <block wx:else>
         <view style="padding:0 35rpx;box-sizing: border-box;">
-          <text style="font-size:24rpx;color:#8A8A8A;">{{explain}}</text>
+          <text style="font-size:24rpx;color:#8A8A8A;">{{dataInfo.actionRule}}</text>
         </view>
       </block>
     </view>
@@ -137,7 +137,7 @@
   <view style='width:100%;height:100%;background:#000;opacity:.5;' catchtap="mySignatureNum"></view>
   <view style='width:500rpx;height:700rpx;background:#fff;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;border-radius:16rpx;'>
       <image src='../../../../pages/images/forknumber.png' style="top:15rpx;right:15rpx;" catchtap="mySignatureNum"  class='recgadheadimg'></image>
-      <view class="signatureTip">已获得{{commoddata.countLotto}}点幸运值</view>
+      <view class="signatureTip">已获得{{totalLotto}}点幸运值</view>
       <scroll-view class="signatureScrol" scroll-y="true">
          <view class="signaturesEve" wx:for='{{muSnData}}' wx:key='key'>
             <view class="signaturesImgBox">
@@ -192,7 +192,7 @@
 <view wx:if='{{winningProbability}}' catchtouchmove="true" style='z-index:99999;width:100%;height:100%;position:fixed;top:0;left:0;'>
   <view style='width:100%;height:100%;background:#000;opacity:.5;' data-ind='9999' catchtap="winProbility"></view>
   <view style='width:500rpx;height:430rpx;background:#fff;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;border-radius:16rpx;'>
-    <image src='../images/forknumber.png' style="top:15rpx;right:15rpx;" data-ind='9999' catchtap="winProbility"  class='recgadheadimg'></image>
+    <image src='../../../../pages/images/forknumber.png' style="top:15rpx;right:15rpx;" data-ind='9999' catchtap="winProbility"  class='recgadheadimg'></image>
     <view class="wPhead">
        <view class="wPheadtop">
            <text wx:if='{{multipleDisplay.ratio > rLUserLotto.argvAward}}' style="color:#F93E45;">当前中奖概率高于平均值</text>
@@ -215,17 +215,17 @@
   </view>
 </view>
 
-<!-- 已中签和未中签提示   -->
+<!-- 已中签 和 未中签 提示   -->
 <view wx:if='{{wonOrNot}}' catchtouchmove="true" style='z-index:999;width:100%;height:100%;position:fixed;top:0;left:0;'>
   <view style='width:100%;height:100%;background:#000;opacity:.5;' catchtap="wonOrNot"></view>
   <view style='width:100%;height:820rpx;background:#fff;position:absolute;bottom:0;border-radius:16rpx 16rpx 0 0;'>
 
-      <block wx:if='{{commoddata.is_receive == 1}}'>  
+      <block wx:if='{{dataInfo.isWinner}}'>  
           <view class="winningTips">恭喜您！获得6月12日展会VIP</view>
           <view class="winningTipsTxt">激活码请于2021年6月10日 21:00前使用</view>
-          <image class="winningTipsImg" mode="aspectFit" src="https://cdn.51chaidan.com/images/202010/thumb_img/35160_thumb_G_1603964924859.jpg"></image>
-          <view class="winningTipsName" style="padding:20rpx 0 0 0;font-size:30rpx;position: relative;width:430rpx;">激活码:<block wx:if='{{displayClearText}}'>0123456789123456</block><block wx:else>****************</block><image class="displayClearTextImg" catchtap="is_dct" mode="aspectFit" src="{{displayClearText?'http://cdn.51chaidan.com/images/sign/show.png':'http://cdn.51chaidan.com/images/sign/hide.png'}}"></image></view>
-          <view class="winningTipsName" style="padding:20rpx 0 15rpx 0;">第<text style="color:#E95159;font-size:50rpx;">10</text>位入场</view>
+          <image class="winningTipsImg" mode="aspectFit" src="{{dataInfo.imgAward}}"></image>
+          <view class="winningTipsName" style="padding:20rpx 0 0 0;font-size:30rpx;position: relative;width:430rpx;">激活码:<block wx:if='{{displayClearText}}'>{{dataInfo.cdkey}}</block><block wx:else>****************</block><image class="displayClearTextImg" catchtap="is_dct" mode="aspectFit" src="{{displayClearText?'http://cdn.51chaidan.com/images/sign/show.png':'http://cdn.51chaidan.com/images/sign/hide.png'}}"></image></view>
+          <view class="winningTipsName" style="padding:15rpx 0 20rpx 0;">第<text style="color:#E95159;font-size:50rpx;">{{dataInfo.sort}}</text>位入场</view>
           
           <view class="clickButton" style="background:#fff;">
             <view class="clickButtonEve" catchtap="copyTBL" style="background:#FCA700;float:left;">复制激活码</view>
@@ -235,9 +235,19 @@
       <block wx:else>
           <view class="winningTips" style="color:#8A8A8A;height:100rpx;line-height:100rpx;">很遗憾，您未中签</view>
           <view class="notWinTipsTxt">您还可以购买其他门票哦，快去订阅吧</view>
-          <image class="winningTipsImg" style="width:420rpx;height:420rpx;margin-top:16rpx;" mode="aspectFit" src="https://cdn.51chaidan.com/images/202010/thumb_img/35160_thumb_G_1603964924859.jpg"></image>
+          <image class="winningTipsImg" style="width:420rpx;height:420rpx;margin-top:16rpx;" mode="aspectFit" src="{{dataInfo.imgAward}}"></image>
           <view class="winningTipsName">门票玩具</view>
           <view class="clickButton" catchtap="acetlistfun">去订阅门票</view>
       </block>
   </view>
+</view>
+
+<!-- 购票须知 -->
+<view wx:if='{{displayToBS}}' class="wsh" catchtouchmove="true" style="z-index:120;">
+   <view class="tgimgboxgb" catchtap="displayToBSfun"></view>
+	 <view class="ticketInstrutc" style="height:{{windowHeight-130}}px;">
+        <scroll-view class="confirmOrderScroll" style="height:{{windowHeight-160}}px;margin-top:10px;" scroll-y="true">
+            <text style="padding:30rpx;display:block;font-size:24rpx;">{{termsOfBookingService}}</text>    
+        </scroll-view>
+	 </view>
 </view>

@@ -1,5 +1,6 @@
 var Dec = require('../../../../common/public.js'); //aes加密解密js
 var Pub = require('../../common/mPublic.js'); //aes加密解密js
+var WxParse = require('../../../../wxParse/wxParse.js');
 const app = getApp();
 Page({
 
@@ -45,9 +46,16 @@ Page({
 
     id:'374855',
     current:0,
-    commoddata:{}
+    commoddata:{},
+    // 订票服务条款
+    displayToBS:false,
+    termsOfBookingService:''
   },
-
+  displayToBSfun(){
+     this.setData({
+      displayToBS:!this.data.displayToBS
+     })
+  },
   tabChangeFun(e){
     this.setData({
       current: e.currentTarget.dataset.ind
@@ -85,7 +93,13 @@ Page({
             dataInfo,
             priority: res.data.List.priority,
             countdown: dataInfo.status==1?res.data.Info.start_time:dataInfo.status==2?res.data.Info.stop_time:0,
-          });  
+          }); 
+          // 商品详情 
+          WxParse.wxParse('article', 'html', dataInfo.actionDetails, _this, 0);
+          // 活动结束 显示中奖未中奖弹框
+          if(dataInfo.status == 3){
+            _this.wonOrNot()
+          }
           _this.countdownbfun();        
         }else{
           wx.showToast({
@@ -118,6 +132,19 @@ Page({
       loginid: app.signindata.loginid,
     });  
     _this.getInfo();
+
+    wx.request({
+      url: 'https://cdn.51chaidan.com/produce/ticketsLotto.json?time='+app.signindata.appNowTime,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('规则==========',res)
+        _this.setData({
+          termsOfBookingService:res.data.clause || ''
+        });
+      }
+    })
+
   },
   activsign: function () {
     // 判断是否授权 
@@ -400,7 +427,8 @@ Page({
               })
             };
             _this.setData({
-              muSnData:muSnData || []
+              muSnData:muSnData || [],
+              totalLotto:res.data.Info.totalLotto
             });
             _this.setData({mySignatureNumber:!_this.data.mySignatureNumber})
           } else {
@@ -456,7 +484,7 @@ Page({
   copyTBL: function (e) {
     var _this = this;
     wx.setClipboardData({
-      data: '123456',
+      data: _this.data.dataInfo.cdkey || '',
       success: function (res) {
         app.showToastC('复制成功');
       }
@@ -472,6 +500,12 @@ Page({
   // 去激活
   deactivation(){
     app.showToastC('暂未开放');
+  },
+  // 跳转展会门票
+  acetlistfun(){
+    wx.navigateTo({  
+      url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
+    })
   }
 
 

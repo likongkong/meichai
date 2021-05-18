@@ -39,12 +39,14 @@
 .tabWrap{
   width: 100%;
   background: #fff;
+  padding: 24rpx 0;
   margin-top: 24rpx;
 }
 .tabBtnWrap {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-bottom: 24rpx;
 }
 
 .tabBtnWrap view {
@@ -136,4 +138,16 @@
   top: 20rpx;
   right: -50rpx;
   z-index: 1;
+}
+.ticketInstrutc{
+  position: absolute;
+  z-index: 3;
+  border-radius: 15rpx 15rpx 0 0;
+  background:#fff;
+  left:0;
+  bottom: 0;
+  width: 100%;
+}
+.confirmOrderScroll{
+  width: 100%;
 }
