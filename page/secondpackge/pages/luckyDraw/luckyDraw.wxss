@@ -3,569 +3,69 @@
 @import "../../../../common/tabbar.wxss";
 @import "../../../../pages/activitydetailspage/activitydetailspage.wxss";
 
-page{
-  background:url(https://cdn.51chaidan.com/images/calendar/luckyDraw/luckyDraw1.png)no-repeat;
-  background-size: 100%;
-  /* padding-bottom: 230rpx; */
-}
+
 .textDecoration{
   text-decoration:line-through;
 }
-.wrap{
-
-}
-.luckyDrawTimeWrap{
-  position: relative;
-  padding: 15rpx 0 25rpx 0;
-}
-.luckyDrawTimetu{
-  width: 460rpx;
-  height: auto;
-  margin: 0 auto;
-  display: block;
-}
-.luckyDrawRule{
-  width: 140rpx;
-  height: 40rpx;
-  background: #F4E9BB;
-  position: absolute;
-  top: 40rpx;
-  left: -14rpx;
-  display: block;
-  text-align: center;
-  border-radius: 40rpx;
-  line-height: 40rpx;
-  font-size: 24rpx;
-}
-.luckyDrawShare{
-  position: absolute;
-  right: 30rpx;
-  top: 40rpx;
-  font-size: 26rpx;
-  color: #535353;
-}
-.luckyDrawShare image{
-  width: 56rpx;
-  height: auto;
-  display: block;
-}
-.luckyDrawShare text{
-  display: inline-block;
-}
-.aheadTicketWrap{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 40rpx;
-  box-sizing: border-box;
-}
-.tickettu{
-  width: 210rpx;
-  /* background: #5677FC; */
-  /* border: 6rpx solid #5677FC; */
-  border-radius: 10rpx;
-  box-shadow: 0px 4rpx 12rpx 0px rgba(0, 0, 0, 0.4);
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-.tickettuItemImg{
-  width: 100%;
-  height: auto;
-  border-radius: 10rpx;
-  display: block;
-}
-.zhongqianImg{
-  width: 90rpx;
-  height: auto;
-  position: absolute;
-  left: 30rpx;
-  z-index: 10;
-  background:url(https://cdn.51chaidan.com/images/calendar/zhongqian.png)no-repeat;
-  background-size: 100% 100%;
-}
-.aheadTime{
-  font-size: 26rpx;
-  display: block;
-  text-align: center;
-  margin: 20rpx 0 15rpx 0;
-  font-weight: bold;
-}
-.surplusAheadNum{
+.timetextstyle{
   font-size: 26rpx;
   color: #fff;
-  width: 190rpx;
-  height: 45rpx;
-  line-height: 45rpx;
-  border-radius: 45rpx;
-  background: #E94F57;
-  display: block;
-  text-align: center;
-  margin: 0 auto;
 }
-.drawCountdown{
-  display: block;
-  font-size: 26rpx;
-  margin: 30rpx 0;
-  text-align: center  ;
-}
-.drawBox{
-}
-.drawBox>view{
-  width: 650rpx;
-  height: auto;
-  margin: 0 auto;
-  position: relative;
-}
-.drawBox image{
+.ticketsWrap{
   width: 100%;
-  height: auto;
-  /* position: absolute;
-  top: 0;
-  left: 0; */
-}
-.joinDrawPeopleNum{
-  display: inline-block;
-  width: 400rpx;
-  height: 60rpx;
-  background: #FBE37F;
-  position: absolute;
-  top: 34rpx;
-  left: 50%;
-  margin-left: -200rpx;
-  z-index: 10;
-  font-size: 28rpx;
-  text-align: center;
-  line-height: 60rpx;
-}
-.myDrewNum{
-  display: inline-block;
-  width: 400rpx;
-  height: 60rpx;
-  /* background: #FBE37F; */
-  position: absolute;
-  bottom: 68rpx;
-  left: 50%;
-  margin-left: -200rpx;
-  z-index: 10;
-  font-size: 28rpx;
-  text-align: center;
-  line-height: 60rpx;
-}
-.XinYunZhiWrap{
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 30rpx 34rpx 0 34rpx;
-  box-sizing: border-box;
-  position: relative;
+  justify-content: center;
+  padding: 24rpx 0;
 }
-.XinYunZhiNum{
-  font-size: 28rpx;
+.ticketsItem{
+  width: 216rpx;
+  background: #fff;
+  border-radius: 12rpx;
+  margin: 0 10rpx;
+  padding: 40rpx 0; 
 }
-.XinYunZhiNum text{
+.ticketsItem text{
   display: block;
+  width: 100%;
   text-align: center;
 }
-.drawRecord{
+.takepartWrap{
+  padding: 0 0 10rpx 0;
+  background: #fff;
+  width: 100%;
+}
+
+.tabWrap{
+  width: 100%;
+  background: #fff;
+  margin-top: 24rpx;
+}
+.tabBtnWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tabBtnWrap view {
   font-size: 30rpx;
-  color: #E94F57;
-}
-.XinYunZhiProgress{
-  width: 60%;
-  border-radius: 20rpx;
-  /* overflow: hidden; */
-  border: 2rpx solid #5677FC;
-}
-.XinYunZhiWrap::after{
-  content: '幸运值越高中奖几率越高~';
-  position: absolute;
-  bottom: -10rpx;
-  left: 0;
-  font-size: 24rpx;
-  color: #9B9999;
-  display: block;
-  text-align: center;
-  width: 100%;
-}
-.drawBtn{
-  display:flex;
-  justify-content: center;
-  align-items: center;
-  padding: 66rpx 34rpx 0 34rpx;
-  box-sizing: border-box;
-}
-.drawBtn>view{
-  width: 260rpx;
-  height: 70rpx;
-  background: #E94F57;
-  border-radius: 70rpx;
-  line-height: 70rpx;
-  text-align: center;
-  color: #fff;
-  font-size: 26rpx;
-  margin: 0 30rpx;
-  position: relative;
-  box-shadow: 0px 4rpx 12rpx 0px rgba(0, 0, 0, 0.4);
-}
-.drawBtnAfter{
-  position: relative;
-}
-.drawBtnAfter .txt{
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-.drawBtnAfter .tips{
-  height: 20rpx;
-  display: inline-block;
-  position: absolute;
-  top: -44rpx;
-  right: -25%;
-  font-size: 18rpx;
-  border-radius: 20rpx;
-  border: 2rpx solid #E94F57;
-  background: #fff;
-  color: #E94F57;
-  line-height: 20rpx;
-  padding: 4rpx 10rpx;
-}
-.drawBtnAfter .tips view{
-   position: relative;
-}
-.drawBtnAfter .tips view image{
-  position: absolute;
-  top: -2rpx;
-  left: 50%;
-  margin-left: -12.5%;
-  width: 25%;
-  height: 22rpx;
-  z-index: -1;
-}
-/* .drawBtnAfter::after{
-  content: 'VIP抽十张送三张抽选券';
-  position: absolute;
-  bottom: -56rpx;
-  left: 0;
-  font-size: 24rpx;
-  display: block;
-  width: 100%;
-  text-align: center;
-  color: #000;
-} */
-
-.cardWrap{
-  padding: 40rpx 34rpx;
-  box-sizing: border-box;
-}
-.title{
-  font-size: 28rpx;
   color: #101010;
-  margin-left: -10rpx;
-}
-.cardVipItem{
-  width: 100%;
-  height: 150rpx;
-  border-radius: 14rpx;
-  background-image: linear-gradient(to bottom right, #FFFFDE , #FFBE3E);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 25rpx 0 40rpx;
-  box-sizing: border-box;
-  margin-top: 20rpx;
-}
-.cardVipItem view{
-  font-size: 28rpx;
-  margin: 28rpx 0;
-}
-.cardVipItemBtn{
-  width: 160rpx;
-  height: 60rpx;
-  background: #fff;
-  border-radius: 60rpx;
-  line-height: 60rpx;
-  text-align: center;
-  color: #C38925;
-  font-size: 26rpx;
-  position: relative;
-  box-shadow: 0px 4rpx 12rpx 0px rgba(0, 0, 0, 0.4);
-}
-.cardItem{
-  width: 100%;
-  height:180rpx;
-  border: 1rpx solid #5677FC;
-  background: #fff;
-  border-radius: 14rpx;
-  margin-top: 10rpx;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 25rpx;
-  box-sizing: border-box;
-}
-.cardItemTxtWrap view{
-  font-size: 26rpx;
-  margin: 18rpx 0;
-}
-.cardItemTxtWrap text{
-  display: inline-block;
-}
-.cardItemBtn{
-  width: 160rpx;
-  height: 60rpx;
-  background: #E94F57;
-  border-radius: 60rpx;
-  line-height: 60rpx;
-  text-align: center;
-  color: #fff;
-  font-size: 26rpx;
-  position: relative;
-  box-shadow: 0px 4rpx 12rpx 0px rgba(0, 0, 0, 0.4);
-}
-
-
-
-
-
-.awardMask{
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.awardBoxWrap{
-  width: 100%;
-  padding: 0 34rpx;
-  box-sizing: border-box;
-}
-.awardItem{
-  position: relative;
-  width: 330rpx;
-  height: 140rpx;
-  /* background: url(https://cdn.51chaidan.com/images/calendar/luckyDraw/luckyDraw4.png)no-repeat;
-  background-size: 100% 100%; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #101010;
-  float: left;
-  margin-bottom: 22rpx;
-}
-.awardItem image{
-  width: 100%;
-  height: 140rpx;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  display: block;
-}
-.awardItem:nth-child(2n){
-  float: right;
-}
-.awardItem view text{
-  display: block;
-  text-align: center;
-  font-size: 28rpx;
-}
-.active text{
-  color: #E94F57;
-}
-.awardItemone{
-  width: 90%;
-  height: 300rpx;
-  margin: 0 5%;
-}
-.awardItemone image{
-  width: 100%;
-  height: 300rpx;
-}
-
-
-.recordMask{
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  background: rgba(0, 0, 0, 0.6);
-}
-.recordBoxWrap{
-  width: 100%;
-  height: 68%;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  background: #fff;
-  border-radius: 8rpx;
-}
-.recordBoxtitle{
-  width: 100%;
-  height: 13%;
-  font-size: 28rpx;
-  text-align: center;
-  line-height: 100rpx;
-  position: relative;
-}
-.recordBoxtitle image{
-  position:absolute;
-  top: 0;
-  right: 0;
-  width: 36rpx;
-  height: auto;
-  padding: 30rpx;
-}
-.recordBoxScroll{
-  width: 100%;
-  height: 87%;
-}
-.recordItem{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 40rpx;
-  box-sizing: border-box;
-  margin-bottom: 25rpx;
-}
-.recordItem:last-child{
-  /* margin-bottom: 0; */
-}
-.recordItem text{
-  font-size: 26rpx;
-  display: block;
-}
-.recordItemactive view text{
-  color: #E94F57;
-}
-
-
-
-.idCardMask{
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.idCardBoxWrap{
-  width: 590rpx;
-  height: 766rpx;
-  background: #fff;
-  border-radius: 10rpx;
-}
-.idCardScroll{
-  width: 100%;
-  height: 82%;
-}
-.bindingIdCard{
-  width: 100%;
-  height: 18%;
-  padding-right: 26rpx;
-  box-sizing: border-box;
-}
-.bindingIdCard text{
-  width: 300rpx;
-  height: 60rpx;
-  border-radius: 60rpx;
-  line-height: 60rpx;
-  text-align: center;
-  background: #E94F57;
-  font-size: 26rpx;
-  color: #fff;
-  display: block;
-  margin: 30rpx auto 0;
-}
-.idCardBoxWrap{
-  padding: 30rpx 0 0 26rpx;
-}
-.idCardItem{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15rpx;
-}
-.idCardItem:last-child{
-  margin-bottom: 0;
-}
-.idCardItemBox{
-  width: 85%;
-  height: 200rpx;
-  border: 2rpx solid rgba(187, 187, 187, 100);
-  border-radius: 10rpx;
-  padding: 0 28rpx;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-}
-.idCardItemBox text{
-  display: block;
-  font-size: 26rpx;
-  color:#101010;
-  margin: 10rpx 0;
-}
-.idCardItemRadio{
-  width: 15%;
-  height: 100%;
-}
-.idCardItemRadio image{
-  width: 36rpx;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-}
-
-.popupMask{
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,.5);
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
-}
-.explainBox{
-  width: 600rpx;
-  height: 700rpx;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin:auto;
-  z-index: 3;
-  background: #fff;
-  border-radius: 15rpx;
-}
-.explainBoxHead{
-  width: 100%;
-  font-size: 26rpx;
-  padding-top: 40rpx;
+  border:2rpx solid  #8A8A8A;
+  width:180rpx;
   height: 50rpx;
+  line-height: 50rpx;
   text-align: center;
-}
-.callscroll{
-  width: 100%;
-  height: 570rpx;
-}
-.callscrollTxt{
-  padding:0 40rpx;
   font-size: 24rpx;
+}
+
+.active1 {
+  color: #fff !important;
+  background: #8A8A8A;
+}
+
+
+.wxParse-img{
+  width: 100%;
   display: block;
 }
 
