@@ -30,7 +30,18 @@ Page({
     // 抽奖数
     drawnum:1,
     isShowRule:false,
-    isPrior:false
+    isPrior:false,
+    // 弹框数据
+    mySignatureNumber:false,
+    signatureList:false,
+    winningProbability:false,
+    // 是否中奖
+    wonOrNot:false,
+    sigListdata:[],
+    rLUserLotto:{},
+    muSnData:[],
+    multipleDisplay:'',
+    displayClearText:false
   },
  
   togglerecordFun(){
@@ -571,4 +582,127 @@ Page({
     var _this = this;
     app.comsubscribe(_this);
   },
+  // 中奖概率 弹框
+  winProbility(w){
+    var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
+    if(ind == 9999){
+      this.setData({
+        winningProbability:!this.data.winningProbability
+      })
+    }else{
+      if(ind == 999){
+        var multipleDisplay = this.data.rLUserLotto
+      }else{
+        var multipleDisplay = this.data.sigListdata[ind];
+      };
+      this.setData({
+        winningProbability:!this.data.winningProbability,
+        multipleDisplay:multipleDisplay
+      })      
+    };
+
+  },
+  wonOrNot(){
+    this.setData({wonOrNot:!this.data.wonOrNot})
+  },
+  // 已获得幸运值
+  mySignatureNum(){
+    var _this = this;
+    if(_this.data.muSnData.length == 0){
+
+      var qhd = Dec.Aese('mod=miandan&operation=mylotto&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id);
+      wx.showLoading({ title: '加载中...', mask: true })
+      wx.request({
+        url: app.signindata.comurl + 'spread.php' + qhd,
+        method: 'GET',
+        header: { 'Accept': 'application/json' },
+        success: function (res) {
+          console.log('签号列表================',res)
+          wx.hideLoading();
+          if (res.data.ReturnCode == 200) {
+            var muSnData = res.data.List.lotto || [];
+            if(muSnData.length != 0){
+              muSnData.map(function(item){
+                if(item.nick){
+                  item.nick =  _this.plusXing(item.nick,1,0);
+                };
+                return item;
+              })
+            };
+            _this.setData({
+              muSnData:muSnData || []
+            });
+            _this.setData({mySignatureNumber:!_this.data.mySignatureNumber})
+          } else {
+            app.showModalC(res.data.Msg)
+          };
+        }
+      }); 
+    }else{
+      this.setData({mySignatureNumber:!this.data.mySignatureNumber})
+    };
+  },
+  // 排行榜
+  sigListFun(){
+    var _this = this;
+    if(_this.data.sigListdata.length == 0){
+      var qhd = Dec.Aese('mod=miandan&operation=lottoTop&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id);
+      wx.showLoading({ title: '加载中...', mask: true })
+      wx.request({
+        url: app.signindata.comurl + 'spread.php' + qhd,
+        method: 'GET',
+        header: { 'Accept': 'application/json' },
+        success: function (res) {
+          console.log('列表排行================',res)
+          wx.hideLoading();
+          if (res.data.ReturnCode == 200) {
+            var sigListdata = res.data.List.lotto || [];
+            if(sigListdata.length != 0){
+              sigListdata.map(function(item){
+                if(item.nick){
+                  item.nick = _this.plusXing(item.nick,1,0);
+                };
+                return item;
+              })
+            };
+
+            _this.setData({
+              sigListdata:sigListdata || [],
+              rLUserLotto:res.data.Info.userLotto || {}
+            })
+            _this.setData({signatureList:!_this.data.signatureList})
+          } else {
+            app.showModalC(res.data.Msg)
+          };
+        }
+      }); 
+    }else{
+      this.setData({signatureList:!this.data.signatureList})
+    };
+
+    
+  },
+  //  复制内容到粘贴板
+  copyTBL: function (e) {
+    var _this = this;
+    wx.setClipboardData({
+      data: '123456',
+      success: function (res) {
+        app.showToastC('复制成功');
+      }
+    });
+
+  },  
+  // 激活码 是否明文 切换
+  is_dct:function(){
+    this.setData({
+      displayClearText:!this.data.displayClearText
+    })
+  },
+  // 去激活
+  deactivation(){
+    app.showToastC('暂未开放');
+  }
+
+
 })

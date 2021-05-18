@@ -1,6 +1,7 @@
 @import "../../../../pages/signin/signin.wxss";
 @import "../../../../common/newcoupon.wxss";
 @import "../../../../common/tabbar.wxss";
+@import "../../../../pages/activitydetailspage/activitydetailspage.wxss";
 
 page{
   background:url(https://cdn.51chaidan.com/images/calendar/luckyDraw/luckyDraw1.png)no-repeat;
@@ -619,4 +620,20 @@ page{
   left: 50%;
   margin-left: -20%;
   display: block;
+}
+.clickButtonEve{
+  height: 70rpx;
+  width: 280rpx;
+  border-radius: 70rpx;
+  font-size: 24rpx;
+  color: #fff;
+  
+}
+.displayClearTextImg{
+  width: 35rpx;
+  height: 35rpx;
+  position: absolute;
+  top: 20rpx;
+  right: -50rpx;
+  z-index: 1;
 }

@@ -1,4 +1,5 @@
 {
+  "setting": {},
   "condition": {
     "plugin": {
       "list": []
@@ -56,6 +57,12 @@
         {
           "name": "page/secondpackge/pages/auctionList/auctionList",
           "pathName": "page/secondpackge/pages/auctionList/auctionList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "page/secondpackge/pages/luckyDraw/luckyDraw",
+          "pathName": "page/secondpackge/pages/luckyDraw/luckyDraw",
           "scene": null
         }
       ]
