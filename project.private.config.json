@@ -1,4 +1,5 @@
 {
+  "setting": {},
   "condition": {
     "plugin": {
       "list": []
@@ -56,6 +57,25 @@
         {
           "name": "page/secondpackge/pages/auctionList/auctionList",
           "pathName": "page/secondpackge/pages/auctionList/auctionList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "page/secondpackge/pages/luckyDraw/luckyDraw",
+          "pathName": "page/secondpackge/pages/luckyDraw/luckyDraw",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "page/component/pages/limitlottery/limitlottery",
+          "pathName": "page/component/pages/limitlottery/limitlottery",
+          "query": "id=374858",
+          "scene": null
+        },
+        {
+          "name": "page/secondpackge/pages/onlineFukubukuro/onlineFukubukuro",
+          "pathName": "page/secondpackge/pages/onlineFukubukuro/onlineFukubukuro",
+          "query": "id=374858",
           "scene": null
         }
       ]

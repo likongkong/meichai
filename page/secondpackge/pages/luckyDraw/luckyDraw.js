@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '优先入场资格抽奖', 
+    c_title: '展会VIP抽选', 
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
@@ -18,104 +18,15 @@ Page({
     uid: app.signindata.uid,
     share_uid:0,
     countdown:'',
-    percent:'',
-    isRecordMask:false,
-    isAwardMask:false,
-    isidCardMask:false,
-    idcardIndex:0,
-    selectCard:0,
-    // 绑定身份证id
-    bindIdcard:'',
-    bindDate:'',
-    // 抽奖数
-    drawnum:1,
-    isShowRule:false,
-    isPrior:false
+    id:'374855',
+    current:0,
+    commoddata:{}
   },
- 
-  togglerecordFun(){
-    var _this = this;
-    if(!this.data.isRecordMask){
-      wx.showLoading({ title: '加载中...'})
-      var q = Dec.Aese('mod=prior&operation=drawRecord&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
-      console.log(app.signindata.comurl + 'spread.php?mod=prior&operation=drawRecord&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
-      wx.request({
-        url: app.signindata.comurl + 'spread.php'+q,
-        method: 'GET',
-        header: { 'Accept': 'application/json' },
-        success: function (res) {
-          console.log('抽奖记录======',res)
-          wx.hideLoading();
-          if (res.data.ReturnCode == 200) {
-            if(res.data.List.awardList.length != 0){
-              _this.setData({
-                isRecordMask:true,
-                awardList:res.data.List.awardList
-              })
-            }else{
-              app.showToastC('你暂时没有抽奖记录')
-            }
-          }else{
-            app.showToastC(res.data.Msg)
-          }
-        }
-      }); 
-    }else{
-      _this.setData({
-        isRecordMask:false
-      })
-    }
-  },
-  toggleRuleFun(){
-    this.setData({
-      isShowRule:!this.data.isShowRule
-    })
-  },
-  toggleawardFun(){
-    this.setData({
-      isAwardMask:!this.data.isAwardMask
-    })
-  },
-  toggleidCardFun(){
-    if(this.data.identity.length == 0){
-      wx.showModal({
-        title: '提示',
-        content: '您还未购买本次展会门票，请先购买门票',
-        confirmText: '去购票',
-        success (res) {
-          if (res.confirm) {
-            wx.navigateTo({
-              url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
-            });
-          } else if (res.cancel) {
 
-          }
-        }
-      })
-    }else{
-      if(this.data.isidCardMask){
-        this.setData({
-          idcardIndex: this.data.selectCard
-        })
-      }else{
-        this.setData({
-          selectCard : this.data.idcardIndex
-        })
-      }
-      this.setData({
-        isidCardMask:!this.data.isidCardMask
-      })
-    }
-  },
-  selectCardFun(e){
-    var index = e.currentTarget.dataset.index;
-    var idcard = e.currentTarget.dataset.idcard;
-    var date = e.currentTarget.dataset.date;
+  tabChangeFun(e){
     this.setData({
-      idcardIndex:index,
-      bindIdcard:idcard,
-      bindDate:date
-    })
+      current: e.currentTarget.dataset.ind
+    });
   },
   plusXing (str,frontLen,endLen) {
     var len = str.length-frontLen-endLen;
@@ -128,45 +39,28 @@ Page({
   getInfo(){
     var _this = this;
     wx.showLoading({ title: '加载中...'})
-    var q = Dec.Aese('mod=prior&operation=getInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&shareUId=' + _this.data.share_uid);
-    console.log(app.signindata.comurl + 'spread.php?mod=prior&operation=getInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&shareUId=' + _this.data.share_uid)
+
+    var q = Dec.Aese('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&isNewer=' + _this.data.isNewer + '&gid=' + _this.data.gid + '&push_id='+_this.data.push_id);
+    console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&isNewer=' + _this.data.isNewer + '&gid=' + _this.data.gid + '&push_id='+_this.data.push_id)
+
     wx.request({
-      url: app.signindata.comurl + 'spread.php'+q,
+      url: app.signindata.comurl + 'spread.php' + q,
       method: 'GET',
-      header: { 'Accept': 'application/json' },
+      header: {
+        'Accept': 'application/json'
+      },
       success: function (res) {
         console.log('数据======',res)
         // 刷新完自带加载样式回去
         wx.stopPullDownRefresh();
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
-          let data = res.data;
-          for(var i=0;i<data.List.identity.length;i++){
-            data.List.identity[i].actualidcard = data.List.identity[i].idcard;
-            data.List.identity[i].idcard = _this.plusXing(data.List.identity[i].idcard,4,4);
-            data.List.identity[i].consignee = _this.plusXing(data.List.identity[i].consignee,1,0);
-            data.List.identity[i].mobile = _this.plusXing(data.List.identity[i].mobile,3,4);
-          }
-          if(data.Info.bindIdentity != 0){
-            data.Info.bindIdentity.consignee = _this.plusXing(data.Info.bindIdentity.consignee,1,0);
-            data.Info.bindIdentity.idcard = _this.plusXing(data.Info.bindIdentity.idcard,4,4);
-          }
+          let dataInfo = res.data.Info;
           _this.setData({
-            suplusChance:data.Info.user.suplusChance,
-            activity:data.Info.activity,
-            bindIdentity:data.Info.bindIdentity,
-            user:data.Info.user,
-            isPrior:data.Info.isPrior,
-            countdown:data.Info.endTime,
-            totalScratch:data.Info.user.totalScratch,
-            scratch:data.List.scratch,
-            identity:data.List.identity,
-            bindIdcard:data.List.identity[_this.data.idcardIndex]?data.List.identity[_this.data.idcardIndex].actualidcard:0,
-            bindDate:data.List.identity[_this.data.idcardIndex]?data.List.identity[_this.data.idcardIndex].date:0,
-            percent:(data.Info.user.totalScratch/data.Info.user.peakValue)*100,
-            explain:data.List.explain,
-            subscribedata:res.data.Info.subscribe
-          })
+            dataInfo,
+            priority: res.data.List.priority,
+            countdown: dataInfo.status==1?res.data.Info.start_time:dataInfo.status==2?res.data.Info.stop_time:0,
+          });  
           _this.countdownbfun();        
         }else{
           wx.showToast({
@@ -175,126 +69,11 @@ Page({
             mask:true,
             duration:1000
           });  
-          if(res.data.ReturnCode == 384 && _this.data.share_uid){
-            _this.data.share_uid = 0;
-            setTimeout(function(){
-              _this.getInfo()
-            },1000)
-          }
         }
       }
     }); 
   },
-  bindidCardFun(e){
-    var _this = this;
-    var idcard =this.data.bindIdcard;
-    var bindDate = this.data.bindDate;
-    wx.showLoading({ title: '加载中...'})
-    var q = Dec.Aese('mod=prior&operation=bindIdentity&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&idcard=' + idcard + '&date='+bindDate);
-    console.log(app.signindata.comurl + 'spread.php?mod=prior&operation=bindIdentity&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&idcard=' + idcard + '&date=' + bindDate)
-    wx.request({
-      url: app.signindata.comurl + 'spread.php'+q,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        console.log('绑定的身份证号======',res)
-        wx.hideLoading();
-        if (res.data.ReturnCode == 200) {
-          wx.showToast({
-            title: '绑定成功',
-            icon: 'none',
-            mask:true,
-            duration:1000
-          });  
-          _this.setData({
-            isidCardMask:false
-          })  
-          setTimeout(function(){
-            _this.getInfo();
-          },1000)
-        }else{
-          app.showToastC(res.data.Msg)
-        }
-      }
-    }); 
-  },
-  drawFun(e){
-
-    if(this.data.suplusChance == 0){
-      app.showToastC('剩余刮刮卡不足')
-      return false;
-    }
-
-    var num = e.currentTarget.dataset.num;
-    var _this = this;
-    wx.showLoading({ title: '加载中...',mask:true})
-    var q = Dec.Aese('mod=prior&operation=scratchGift&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&num=' + num);
-    console.log(app.signindata.comurl + 'spread.php?mod=prior&operation=scratchGift&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&num=' + num)
-    wx.request({
-      url: app.signindata.comurl + 'spread.php'+q,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        console.log('刮卡======',res)
-        wx.hideLoading();
-        if (res.data.ReturnCode == 200) {
-          if(num == 1){
-            _this.setData({
-              suplusChance:_this.data.suplusChance-1,
-            })
-          }else{
-            if(_this.data.user.isVIP){
-              _this.setData({
-                suplusChance:_this.data.suplusChance-7,
-              })
-            }else{
-              _this.setData({
-                suplusChance:_this.data.suplusChance-10,
-              })
-            }
-          }
-          _this.setData({
-            drawnum:num,
-            isAwardMask:true,
-            result:res.data.List.result
-          })
-        }else{
-          app.showToastC(res.data.Msg)
-        }
-      }
-    }); 
-  },
-  getDrawFun(e){
-    var type = e.currentTarget.dataset.type;
-    var _this = this;
-    wx.showLoading({ title: '加载中...'})
-    var q = Dec.Aese('mod=prior&operation=getEntrance&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&getType='+type);
-    console.log(app.signindata.comurl + 'spread.php?mod=prior&operation=scratchGift&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&getType='+type)
-    wx.request({
-      url: app.signindata.comurl + 'spread.php'+q,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        console.log('领取投票券======',res)
-        wx.hideLoading();
-        if (res.data.ReturnCode == 200) {
-          wx.showToast({
-            title: '领取成功',
-            icon: 'none',
-            mask:true,
-            duration:1000
-          });  
-          setTimeout(function(){
-            _this.getInfo();
-          },1000)
-        }else{
-          app.showToastC(res.data.Msg)
-        }
-      }
-    }); 
-  },
-
-
+  
 
   /**
    * 生命周期函数--监听页面加载
@@ -434,39 +213,10 @@ Page({
   onReachBottom: function () {
 
   },
-  clicktganone: function () {
-    this.setData({ tgabox: false })
-  }, 
+
   /**
    * 用户点击右上角分享
    */
-  // onShareAppMessage: function () {
-  //   var reshare = app.sharemc();
-  //   return reshare
-  // },
-
-  // onShareTimeline:function(){
-  //   var _this = this;
-  //   return {
-  //     title: '优先入场资格刮刮卡',
-  //     query:'share_uid='+_this.data.uid,
-  //     imageUrl:_this.data.shareImg,
-  //   }
-  // },
-  // /**
-  //  * 用户点击右上角分享
-  //  */
-  // onShareAppMessage: function () {
-  //   var _this = this;
-  //   return {
-  //     title: '优先入场资格刮刮卡',
-  //     path: '/page/secondpackge/pages/luckyDraw/luckyDraw?share_uid='+_this.data.uid,
-  //     imageUrl:_this.data.shareImg,
-  //     success: function (res) {}
-  //   }      
-  // },
-
-
   onShareAppMessage: function () {
     var _this = this;
     return {
@@ -475,6 +225,9 @@ Page({
       imageUrl:app.signindata.indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
     }   
   },
+  // /**
+  //  * 用户点击右上角分享
+  //  */
   onShareTimeline:function(){
     var _this = this;
 
@@ -538,7 +291,10 @@ Page({
         iftrins = false;
       };
       _this.setData({
-        commoddata: commoddata
+        dayStr:commoddata.day,
+        hrStr:commoddata.hour,
+        minStr:commoddata.minute,
+        secStr:commoddata.second,
       });
       
       if (iftrins) {
