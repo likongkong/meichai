@@ -1,5 +1,6 @@
 var Dec = require('../../../../common/public.js'); //aes加密解密js
 var Pub = require('../../common/mPublic.js'); //aes加密解密js
+var WxParse = require('../../../../wxParse/wxParse.js');
 const app = getApp();
 
 Page({
@@ -20,6 +21,30 @@ Page({
     share_time:0,
     share_uid:0,
     countdown:'',
+    percent:'',
+    isRecordMask:false,
+    isAwardMask:false,
+    isidCardMask:false,
+    idcardIndex:0,
+    selectCard:0,
+    // 绑定身份证id
+    bindIdcard:'',
+    bindDate:'',
+    // 抽奖数
+    drawnum:1,
+    isShowRule:false,
+    isPrior:false,
+    // 弹框数据
+    mySignatureNumber:false,
+    signatureList:false,
+    winningProbability:false,
+    // 是否中奖弹框
+    wonOrNot:false,
+    sigListdata:[],
+    rLUserLotto:{},
+    muSnData:[],
+    multipleDisplay:'',
+    displayClearText:false,
     id:'374855',
     current:0,
     commoddata:{},
@@ -35,8 +60,15 @@ Page({
     tipaid:'',
     // 订单信息
     order:'',
+    // 订票服务条款
+    displayToBS:false,
+    termsOfBookingService:''
   },
-
+  displayToBSfun(){
+     this.setData({
+      displayToBS:!this.data.displayToBS
+     })
+  },
   tabChangeFun(e){
     this.setData({
       current: e.currentTarget.dataset.ind
@@ -84,6 +116,12 @@ Page({
             subscribedata:res.data.Info.subscribe,
             signTime:dataInfo.pay_time,
           });  
+          // 商品详情 
+          WxParse.wxParse('article', 'html', dataInfo.actionDetails, _this, 0);
+          // 活动结束 显示中奖未中奖弹框
+          if(dataInfo.status == 3){
+            _this.wonOrNot()
+          }
           _this.countdownbfun();        
         }else{
           wx.showToast({
@@ -232,6 +270,17 @@ Page({
     });  
     _this.getInfo();
     _this.nextpagediao();
+    wx.request({
+      url: 'https://cdn.51chaidan.com/produce/ticketsLotto.json?time='+app.signindata.appNowTime,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('规则==========',res)
+        _this.setData({
+          termsOfBookingService:res.data.clause || ''
+        });
+      }
+    })
   },
   activsign: function () {
     // 判断是否授权 
@@ -621,5 +670,134 @@ Page({
       tipback:false
     });
   },
+  // 中奖概率 弹框
+  winProbility(w){
+    var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
+    if(ind == 9999){
+      this.setData({
+        winningProbability:!this.data.winningProbability
+      })
+    }else{
+      if(ind == 999){
+        var multipleDisplay = this.data.rLUserLotto
+      }else{
+        var multipleDisplay = this.data.sigListdata[ind];
+      };
+      this.setData({
+        winningProbability:!this.data.winningProbability,
+        multipleDisplay:multipleDisplay
+      })      
+    };
+
+  },
+  wonOrNot(){
+    this.setData({wonOrNot:!this.data.wonOrNot})
+  },
+  // 已获得幸运值
+  mySignatureNum(){
+    var _this = this;
+    if(_this.data.muSnData.length == 0){
+
+      var qhd = Dec.Aese('mod=miandan&operation=mylotto&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id);
+      wx.showLoading({ title: '加载中...', mask: true })
+      wx.request({
+        url: app.signindata.comurl + 'spread.php' + qhd,
+        method: 'GET',
+        header: { 'Accept': 'application/json' },
+        success: function (res) {
+          console.log('签号列表================',res)
+          wx.hideLoading();
+          if (res.data.ReturnCode == 200) {
+            var muSnData = res.data.List.lotto || [];
+            if(muSnData.length != 0){
+              muSnData.map(function(item){
+                if(item.nick){
+                  item.nick =  _this.plusXing(item.nick,1,0);
+                };
+                return item;
+              })
+            };
+            _this.setData({
+              muSnData:muSnData || [],
+              totalLotto:res.data.Info.totalLotto
+            });
+            _this.setData({mySignatureNumber:!_this.data.mySignatureNumber})
+          } else {
+            app.showModalC(res.data.Msg)
+          };
+        }
+      }); 
+    }else{
+      this.setData({mySignatureNumber:!this.data.mySignatureNumber})
+    };
+  },
+  // 排行榜
+  sigListFun(){
+    var _this = this;
+    if(_this.data.sigListdata.length == 0){
+      var qhd = Dec.Aese('mod=miandan&operation=lottoTop&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id);
+      wx.showLoading({ title: '加载中...', mask: true })
+      wx.request({
+        url: app.signindata.comurl + 'spread.php' + qhd,
+        method: 'GET',
+        header: { 'Accept': 'application/json' },
+        success: function (res) {
+          console.log('列表排行================',res)
+          wx.hideLoading();
+          if (res.data.ReturnCode == 200) {
+            var sigListdata = res.data.List.lotto || [];
+            if(sigListdata.length != 0){
+              sigListdata.map(function(item){
+                if(item.nick){
+                  item.nick = _this.plusXing(item.nick,1,0);
+                };
+                return item;
+              })
+            };
+
+            _this.setData({
+              sigListdata:sigListdata || [],
+              rLUserLotto:res.data.Info.userLotto || {}
+            })
+            _this.setData({signatureList:!_this.data.signatureList})
+          } else {
+            app.showModalC(res.data.Msg)
+          };
+        }
+      }); 
+    }else{
+      this.setData({signatureList:!this.data.signatureList})
+    };
+
+    
+  },
+  //  复制内容到粘贴板
+  copyTBL: function (e) {
+    var _this = this;
+    wx.setClipboardData({
+      data: _this.data.dataInfo.cdkey || '',
+      success: function (res) {
+        app.showToastC('复制成功');
+      }
+    });
+
+  },  
+  // 激活码 是否明文 切换
+  is_dct:function(){
+    this.setData({
+      displayClearText:!this.data.displayClearText
+    })
+  },
+  // 去激活
+  deactivation(){
+    app.showToastC('暂未开放');
+  },
+  // 跳转展会门票
+  acetlistfun(){
+    wx.navigateTo({  
+      url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
+    })
+  }
+
 
 })
