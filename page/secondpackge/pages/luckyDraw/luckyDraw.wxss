@@ -2,6 +2,7 @@
 @import "../../../../common/newcoupon.wxss";
 @import "../../../../common/tabbar.wxss";
 @import "../../../../pages/activitydetailspage/activitydetailspage.wxss";
+@import "/pages/detailspage/detailspage.wxss";
 
 page{
   /* padding-bottom: 230rpx; */
@@ -23,13 +24,31 @@ page{
   justify-content: center;
   padding: 24rpx 0;
 }
+.ticketsItemactive{
+  position: relative;
+}
+.ticketsItemactive::after{
+  content: '';
+  width: 210rpx;
+  height: 260rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 6rpx solid rgba(205, 131, 54, 100);
+  border-radius: 12rpx;
+  box-shadow: 0px 4rpx 12rpx 0px rgba(0, 0, 0, 0.4);
+
+}
 .ticketsItem{
   width: 216rpx;
+  height: 266rpx;
   background: #fff;
   border-radius: 12rpx;
   margin: 0 10rpx;
   padding: 40rpx 0; 
+  box-sizing: border-box;
 }
+
 .ticketsItem text{
   display: block;
   width: 100%;

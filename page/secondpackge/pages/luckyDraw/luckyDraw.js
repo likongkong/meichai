@@ -1,6 +1,7 @@
 var Dec = require('../../../../common/public.js'); //aes加密解密js
 var Pub = require('../../common/mPublic.js'); //aes加密解密js
 const app = getApp();
+
 Page({
 
   /**
@@ -16,11 +17,24 @@ Page({
     tgabox:false,
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
+    share_time:0,
     share_uid:0,
     countdown:'',
     id:'374855',
     current:0,
-    commoddata:{}
+    commoddata:{},
+    // 倒计时
+    askcountdown: 30,
+    // 收货地址
+    receivingaddress:false,
+    tipback:false,
+    // 收货地址数据
+    addressdata:[],
+    // 收货地址显示 请选择收货地址
+    tipaddress:'请选择收货地址',
+    tipaid:'',
+    // 订单信息
+    order:'',
   },
 
   tabChangeFun(e){
@@ -36,12 +50,19 @@ Page({
     }
     return str.substring(0,frontLen)+xing+str.substring(str.length-endLen);
   },
+  changeTickets(e){
+    this.setData({
+      id: e.currentTarget.dataset.id
+    });
+    this.getInfo();
+  },
   getInfo(){
     var _this = this;
     wx.showLoading({ title: '加载中...'})
-
-    var q = Dec.Aese('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&isNewer=' + _this.data.isNewer + '&gid=' + _this.data.gid + '&push_id='+_this.data.push_id);
-    console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&isNewer=' + _this.data.isNewer + '&gid=' + _this.data.gid + '&push_id='+_this.data.push_id)
+    var diffTime = Date.parse(new Date())/1000 - _this.data.sharetime;
+    console.log('diffTime===',diffTime)
+    var q = Dec.Aese('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&isNewer=' + _this.data.isNewer + '&gid=' + _this.data.gid + '&push_id='+_this.data.push_id + '&shareUId=' + _this.data.share_uid +'&diffTime='+diffTime);
+    console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&isNewer=' + _this.data.isNewer + '&gid=' + _this.data.gid + '&push_id='+_this.data.push_id + '&shareUId=' + _this.data.share_uid +'&diffTime='+diffTime)
 
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q,
@@ -60,6 +81,8 @@ Page({
             dataInfo,
             priority: res.data.List.priority,
             countdown: dataInfo.status==1?res.data.Info.start_time:dataInfo.status==2?res.data.Info.stop_time:0,
+            subscribedata:res.data.Info.subscribe,
+            signTime:dataInfo.pay_time,
           });  
           _this.countdownbfun();        
         }else{
@@ -73,6 +96,120 @@ Page({
       }
     }); 
   },
+
+  joinDraw(){
+    var _this = this;
+    wx.showLoading({title: '加载中...',mask:true});
+
+    if (this.data.tipaid == '') {
+      app.showToastC('请选择地址');
+      _this.setData({
+        receivingaddress:true
+      })
+      return false;
+    };
+
+    var q1 = Dec.Aese('mod=lotto&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&aid='+this.data.tipaid);
+    console.log('参与抽签','mod=lotto&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&aid='+this.data.tipaid)
+    wx.request({
+      url: app.signindata.comurl + 'spread.php' + q1,
+      method: 'GET',
+      header: {
+        'Accept': 'application/json'
+      },
+      success: function (res) {
+        wx.hideLoading()
+        console.log('参与抽签数据=====================',res)
+        if (res.data.ReturnCode == 358) {
+          _this.data.order = res.data.Info;
+          _this.paymentmony();
+        }else{
+          app.showToastC(res.data.msg);
+        }
+      }
+    })
+  },
+  // 微信支付
+  paymentmony:function(){
+    var _this = this; 
+    var q = Dec.Aese('mod=operate&operation=prepay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1&oid=' + _this.data.order.cart_id + '&xcx=1' + '&openid=' + app.signindata.openid)
+
+    console.log('支付=====',app.signindata.comurl + 'order.php?mod=operate&operation=prepay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1&oid=' + _this.data.order.cart_id + '&xcx=1' + '&openid=' + app.signindata.openid)
+
+    wx.request({
+      url: app.signindata.comurl + 'order.php'+q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        if (res.data.ReturnCode == 200) {
+          wx.hideLoading();
+          var payinfo = res.data.Info;
+          _this.data.subscribedata = res.data.Info.subscribe || ''  // 订阅信息
+          wx.requestPayment({
+              'timeStamp': res.data.Info.timeStamp.toString(),
+              'nonceStr': res.data.Info.nonceStr,
+              'package': res.data.Info.package,
+              'signType': 'MD5',
+              'paySign': res.data.Info.paySign,
+              'success': function (res) { 
+
+                _this.getInfo();
+                _this.cdtime();
+              },
+              'fail':function(res){},
+              'complete': function (res) {}
+            })
+        }else{
+          if (res.data.ReturnCode == 800) {
+            app.showToastC('非该用户订单');
+          };
+          if (res.data.ReturnCode == 815) {
+            app.showToastC('订单状态错误');
+          };
+          if (res.data.ReturnCode == 816) {
+            app.showToastC('不支持的支付类型');
+          };
+          if (res.data.ReturnCode == 817) {
+            app.showToastC('付款明细已生成');
+          };
+          if (res.data.ReturnCode == 201) {
+            app.showToastC('微信预支付失败');
+          }; 
+          if (res.data.ReturnCode == 805) {
+            app.showToastC('剩余库存不足');
+          }; 
+               
+          // 判断非200和登录
+          Dec.comiftrsign(_this, res, app);     
+        };   
+      }
+    })
+  },
+
+  // 邀请倒计时
+  cdtime: function (cdtime) {
+    var _this = this;
+    clearInterval(_this.data.interval);
+    var totalSecond = 30;
+    var interval =function () {
+      var second = totalSecond;// 秒数  
+      // 秒位  
+      var sec = second;
+      var secStr = sec.toString();
+      if (secStr.length == 1) secStr = '0' + secStr;
+      console.log(secStr)
+      _this.setData({
+        askcountdown: secStr,
+      });
+
+      totalSecond--;
+      if (totalSecond < 0) {
+        // 从新调取数据
+        clearInterval(_this.data.interval);
+      }
+    };
+    _this.data.interval=setInterval(interval, 1000);
+  },
   
 
   /**
@@ -81,7 +218,8 @@ Page({
   onLoad: function (options) {
     // 判断是否授权
     var _this = this;
-    _this.data.share_uid = options.share_uid || 0
+    _this.data.share_uid = options.share_uid || 0;
+    _this.data.share_time = options.share_time || 0;
     _this.activsign();
     _this.countdownbfun();        
     // this.onLoadfun(); 
@@ -93,6 +231,7 @@ Page({
       loginid: app.signindata.loginid,
     });  
     _this.getInfo();
+    _this.nextpagediao();
   },
   activsign: function () {
     // 判断是否授权 
@@ -219,11 +358,20 @@ Page({
    */
   onShareAppMessage: function () {
     var _this = this;
-    return {
-      title:'刮刮卡:我正在美拆抽取展会优先入场资格，快来帮我助力吧',
-      path: "/page/secondpackge/pages/luckyDraw/luckyDraw?share_uid=" + _this.data.uid,
-      imageUrl:app.signindata.indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
-    }   
+    if(this.data.dataInfo.countLotto == 0){
+      return {
+        title:'我正在美拆抽取展会优先入场资格，快来一起参与吧',
+        path: "/page/secondpackge/pages/luckyDraw/luckyDraw",
+        imageUrl:app.signindata.indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      }   
+    }else{
+      return {
+        title:'我正在美拆抽取展会优先入场资格，快来帮我助力吧',
+        path: "/page/secondpackge/pages/luckyDraw/luckyDraw?share_uid=" + _this.data.uid + "&share_time=" + _this.data.signTime,
+        imageUrl:app.signindata.indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      }  
+    }
+     
   },
   // /**
   //  * 用户点击右上角分享
@@ -327,4 +475,151 @@ Page({
     var _this = this;
     app.comsubscribe(_this);
   },
+
+   // 下一页返回调取
+   nextpagediao:function(){
+    var _this = this;
+    //  调取收货地址
+    var q = Dec.Aese('mod=address&operation=getlist&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+    wx.request({
+      url: app.signindata.comurl + 'user.php'+q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('收货地址======nextpagediao=======',res)
+        if (res.data.ReturnCode == 200){
+          var rdl = res.data.List;
+          var tptipadi = '';
+          var tptipadd = '';
+          var tipnamephone = '';
+          if (rdl.length != 0) {
+            for (var i = 0; i < rdl.length; i++) {
+              if (rdl[i].isdefault == 1) {
+                rdl[i].checked = true;
+                tptipadi = rdl[i].aid;
+                tptipadd = rdl[i].address;
+                tipnamephone = rdl[i].consignee + " " + rdl[i].phone;
+              } else {
+                rdl[i].checked = false;
+              }
+            };
+            _this.data.tipaid = tptipadi;
+            _this.setData({
+              addressdata: rdl,
+              tipnamephone: tipnamephone,
+              tipaddress: tptipadd
+            })
+
+            app.signindata.receivingAddress = rdl;
+
+          } else {
+            _this.setData({
+              addressdata: [],
+            })
+          };
+        };
+        // 判断非200和登录
+        Dec.comiftrsign(_this, res, app);         
+      }
+    });
+  },
+    // 隐藏收货地址弹框
+  receivingaddressfun:function(){
+    this.setData({
+      receivingaddress: false,
+      tipback:false,
+    })
+  },
+   // 收货地址弹框
+  seladdressfun:function(e){
+    this.setData({
+      receivingaddress:true,
+      tipback:true,
+      isAwardMask:false,
+      isRecordMask:false,
+      awardId:e.currentTarget.dataset.id
+    });
+  },
+  // 删除地址
+  deladdress: function (event){
+    var _this = this;
+    var dat = this.data.addressdata;
+    var indid = event.target.dataset.ind;
+    var num = '';
+    var iftrdefault = false;
+    for (var i = 0; i < dat.length; i++) {
+      if (dat[i].aid == indid) {
+        num = i;
+        if (dat[i].isdefault == 1) {
+          iftrdefault = true;
+        }
+      }
+    };
+    if (iftrdefault) {
+      app.showToastC('默认地址不能删除');
+      return false;
+    };
+    wx.showModal({
+      content: '您确定要删除这个地址吗？',
+      success: function (res) {
+        if (res.confirm) {
+          var q = Dec.Aese('mod=address&operation=delete&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&aid=' + indid)
+          wx.request({
+            url: app.signindata.comurl + 'user.php'+q,
+            method: 'GET',
+            header: { 'Accept': 'application/json' },
+            success: function (res) {
+              if (res.data.ReturnCode == 200){
+                dat.splice(num, 1);
+                _this.setData({
+                  addressdata: dat
+                });
+                app.signindata.receivingAddress = dat;
+              };
+              if (res.data.ReturnCode == 908) {
+                app.showToastC('aid和uid不匹配');
+              };              
+              // 判断非200和登录
+              Dec.comiftrsign(_this, res, app);              
+            }
+          })
+        }
+      }
+    })
+  },
+  // 编辑地址
+  jumpeditaddress: function (event) {
+    var aid = event.target.dataset.aid || event.currentTarget.dataset.aid;
+    var address = event.target.dataset.address || event.currentTarget.dataset.address;
+    var city = event.target.dataset.city || event.currentTarget.dataset.city;
+    var consignee = event.target.dataset.consignee || event.currentTarget.dataset.consignee;
+    var district = event.target.dataset.district || event.currentTarget.dataset.district;
+    var idcard = event.target.dataset.idcard || event.currentTarget.dataset.idcard;
+    var phone = event.target.dataset.phone || event.currentTarget.dataset.phone;
+    var province = event.target.dataset.province || event.currentTarget.dataset.province;
+    wx.navigateTo({
+      url: "/pages/shippingAddress/shippingAddress?aid=" + aid + '&address=' + address + '&city=' + city + '&consignee=' + consignee + '&district=' + district + '&idcard=' + idcard + '&phone=' + phone + '&province=' + province
+    })
+  },
+  // 跳转增加新地址
+  jumpaddress: function () {
+    wx.navigateTo({
+      url: "/pages/newreceivingaddress/newreceivingaddress"
+    })
+  },
+  // 修改收货地址
+  revisethereceivingaddress: function (w) {
+    var tipaid = w.currentTarget.dataset.tipaid || w.target.dataset.tipaid;
+    var tipadd = w.currentTarget.dataset.tipadd || w.target.dataset.tipadd;
+    var ind = w.currentTarget.dataset.ind || w.target.dataset.ind||0;
+    this.data.tipaid = tipaid;
+    var data = this.data.addressdata;
+    this.setData({
+      tipnamephone: data[ind].consignee + " " + data[ind].phone,
+      tipaddress: tipadd,
+      receivingaddress: false,
+      tipback:false
+    });
+  },
+
 })
