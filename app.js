@@ -1587,7 +1587,9 @@ App({
 // electronicTicket 电子票详情
 
 // priorityVoting  优先权抽选
-// luckyDraw  抽奖活动
+// luckyDraw  展会VIP抽签
+// bindTicket  绑定展会门票
+// ticketRcSort  门票入场顺序
 // entityLuckyDraw  实物刮刮卡
 // idCardVerification 身份证验证
 
@@ -1597,7 +1599,6 @@ App({
 // drawHideGoods 抽隐藏
 
 //fortuneToys  关注公众号小号赠送限时抽盒金
-
 
 //mobileShellList  手机壳列表
 

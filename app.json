@@ -118,6 +118,8 @@
         "pages/buyingTickets/buyingTickets",
         "pages/priorityVoting/priorityVoting",
         "pages/luckyDraw/luckyDraw",
+        "pages/bindTicket/bindTicket",
+        "pages/ticketRcSort/ticketRcSort",
         "pages/entityLuckyDraw/entityLuckyDraw",
         "pages/articleList/articleList",
         "pages/chouxuanHomepage/chouxuanHomepage",

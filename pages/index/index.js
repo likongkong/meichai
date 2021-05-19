@@ -252,6 +252,7 @@ Page({
       // url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
 
       // url: "/page/secondpackge/pages/luckyDraw/luckyDraw"
+      url: "/page/secondpackge/pages/bindTicket/bindTicket"
       
       // url: "/page/secondpackge/pages/idCardVerification/idCardVerification"
 
@@ -264,7 +265,7 @@ Page({
       // url: "/page/secondpackge/pages/auctionDetails/auctionDetails"
       // url: "/page/secondpackge/pages/auctionList/auctionList" 
       // url: "/page/secondpackge/pages/entityLuckyDraw/entityLuckyDraw"
-      url: "/page/secondpackge/pages/onlineFukubukuro/onlineFukubukuro"
+      // url: "/page/secondpackge/pages/onlineFukubukuro/onlineFukubukuro"
       
       // url: "/page/secondpackge/pages/redEnvelopeList/redEnvelopeList"
       // url: "/page/secondpackge/pages/priorityVoting/priorityVoting"

@@ -1,0 +1,55 @@
+@import "../../../../pages/signin/signin.wxss";
+@import "../../../../common/newcoupon.wxss";
+@import "../../../../common/tabbar.wxss";
+
+
+page{
+  background: #f4f5f9;
+}
+
+.infoBox{
+  padding: 60rpx 35rpx;
+  box-sizing: border-box;
+  background: #fff;
+  margin-bottom: 25rpx;
+  font-size: 52rpx;
+}
+
+.grayWrap{
+  background: #8A8A8A;
+  font-size: 26rpx;
+  color: #fff;
+  padding: 0 35rpx;
+  box-sizing: border-box;
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+}
+.rcUserInfo{
+  padding: 60rpx 35rpx;
+  box-sizing: border-box;
+  background: #fff;
+  /* margin-bottom: 25rpx; */
+}
+.rcUserInfo view{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 100rpx;
+}
+.rcUserInfo view:last-child{
+  margin-bottom: 0;
+}
+.rcUserInfo view text{
+  display: block;
+}
+.rcUserInfo view text:first-child{
+  color: #8A8A8A;
+  font-size: 32rpx;
+  width: 30%;
+}
+.rcUserInfo view text:last-child{
+  width: 70%;
+  font-size: 32rpx;
+  color: #101010;
+}
