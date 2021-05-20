@@ -64,7 +64,7 @@ Page({
             dataInfo:res.data.Info,
             priority:res.data.List.priority,
            })
-          WxParse.wxParse('article', 'html', dataInfo.actionDetails, _this, 0);
+          WxParse.wxParse('article', 'html', res.data.Info.actionDetails, _this, 0);
         }else{
           wx.showToast({
             title: res.data.Msg,
