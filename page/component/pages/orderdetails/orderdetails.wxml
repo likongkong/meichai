@@ -20,7 +20,7 @@
                 <view wx:if='{{comdata.isItOverdue}}' class='bgctipref'>已过期</view>
             </view>
             <view class="ordeQRTitN" style="text-align:center;border-top:0;">需凭本人身份证线下扫码领取<text
-                    wx:if='{{comdata.drawDate}}'>2021.1.{{comdata.drawDate}}</text></view>
+                    wx:if='{{comdata.drawDate}}'>{{comdata.drawDate}}</text></view>
         </view>
 
         <view wx:if='{{comdata.status==5}}' class='odchtead'>
