@@ -22,19 +22,21 @@
     <view class="ticketWrap">
 
       <view class="addGoods" style="margin-bottom:20rpx;padding:0 0 25rpx 0;">
-          <view style="position:relative;" data-id='{{drawInfo.activity_id}}' catchtap="jumpluckyDraw">
+          <view style="position:relative;" data-id='{{drawInfo.activity_id}}' catchtap="{{drawInfo.status==2?'jumpluckyDraw':''}}">
               <image class="addGoodsImg" mode='widthFix' src="{{drawInfo.cover}}"></image>
               <view class="addGoodsIBoxTxt addGIBPosition">
                  <view>￥{{drawInfo.shop_price}}</view>
                  <view>
-                    <block wx:if='{{drawInfo.status == 3}}'>活动已结束</block>
-                    <block wx:else>距离结束: {{commoddata.day}}<text>天</text>{{commoddata.hour}}<text>时</text>{{commoddata.minute}}<text>分</text>{{commoddata.second}}<text>秒</text></block>
+                    <block wx:if='{{commoddata.day=="00"&&commoddata.hour=="00"&&commoddata.minute=="00"&&commoddata.second=="00"}}'></block>
+                    <block wx:elif='{{drawInfo.status == 1}}'>距离开始: {{commoddata.day}}<text>天</text>{{commoddata.hour}}<text>时</text>{{commoddata.minute}}<text>分</text>{{commoddata.second}}<text>秒</text></block>
+                    <block wx:elif='{{drawInfo.status == 3}}'>活动已结束</block>
+                    <block wx:elif='{{drawInfo.status == 2}}'>距离结束: {{commoddata.day}}<text>天</text>{{commoddata.hour}}<text>时</text>{{commoddata.minute}}<text>分</text>{{commoddata.second}}<text>秒</text></block>
                 </view>
               </view>
           </view>
           <view class="addGoodsPrivilege" style="color:#8A8A8A;">展会VIP门票特权</view>
 
-          <view class="addGoodsPrivilege" wx:for='{{drawInfo.description}}' wx:key='key'>{{item.privilege}}<image class="privilegeImage" wx:if='{{item.img}}' src="{{item.img}}"></image> {{item.txt}}</view>
+          <view class="addGoodsPrivilege" data-id='{{drawInfo.activity_id}}' catchtap="{{drawInfo.status==2?'jumpluckyDraw':''}}" wx:for='{{drawInfo.description}}' wx:key='key'>{{item.privilege}}<image class="privilegeImage" wx:if='{{item.img}}' src="{{item.img}}"></image> {{item.txt}}</view>
 
           <view class="drawBtn" style="width: 96%;margin-left:0;padding:0 2%;">
             <block>
@@ -53,7 +55,7 @@
       </view>
 
       <view class="addGoods" wx:if='{{goodsInfo&&goodsInfo.length!=0}}'>
-         <scroll-view class="buyingTScroll" scroll-x="true" data-id='{{drawInfo.activity_id}}' catchtap="jumpluckyDraw">
+         <scroll-view class="buyingTScroll" scroll-x="true" data-id='{{drawInfo.activity_id}}'  catchtap="{{drawInfo.status==2?'jumpluckyDraw':''}}">
             <view class="buyingTScrEve" wx:for='{{goodsInfo}}' wx:key='key'>
                  <view class="oneDayTour" wx:if='{{item.singleDayJudgment}}'>单日游玩</view>
                  <image mode="heightFix" class="buyingTScrImg" src="{{item.goods_img}}"></image>
@@ -124,9 +126,11 @@
 
 
 
+
     <!-- 线上潮玩展 -->
+
     <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e4'>————— 线上潮玩展 —————</view>
-    <view class="ssubLiveBroadcast" wx:for="{{liveListData}}" wx:key="key" style="position: relative;">
+    <!-- <view class="ssubLiveBroadcast" wx:for="{{liveListData}}" wx:key="key" style="position: relative;">
         <navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{item.room_id}}" style='position: absolute;height:100%;width:500rpx;left:0;top:0;z-index:3;'></navigator>
         <view class="ssubLiveBroad">
             <image class="ssubLiveBImg" src="{{item.cover_img}}" mode='aspectFit'></image>
@@ -141,7 +145,21 @@
         <view class="position: absolute;top: 0; left: 0;width: 100%;height: 100%;z-index: 11;">
 
         </view>
-    </view> 
+    </view>  -->
+
+    <view class="ssubLiveBroadcast" wx:key="key" id='e1' catchtap="arousesubscribeFun" data-subscribe_data="{{subscribeJson[0].toyshowStart}}">
+        <image class="ssubLiveBImg" src="https://cdn.51chaidan.com/data/afficheimg/1621087021755892088.jpg" mode='aspectFit'></image>
+        <view class="ssubLiveBroadRig">
+           <view class="ssubSSAname multilineellipsis">
+            <text>MCTS 6月睡衣派对</text> 
+            <text>线上潮玩展</text> 
+            </view>
+           <view class="ssubSBotTime">
+               <view class="ssubSBotTimeleft">预约订阅</view>
+           </view>
+        </view>
+    </view>
+
 
     <block wx:if='{{rewardList && rewardList.length != 0}}'>
         <!-- 一番赏 -->

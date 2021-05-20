@@ -916,8 +916,11 @@ Page({
             var rewardList = res.data.List.rewardList || [];
             var drawInfo = res.data.List.drawInfo || [];
 
-            if(parseInt(drawInfo.status) != 3){
+            if(parseInt(drawInfo.status) == 2){
               _this.data.countdown = parseInt(drawInfo.stop_time) || '';
+              _this.countdownbfun();
+            }else if(parseInt(drawInfo.status) == 1){
+              _this.data.countdown = parseInt(drawInfo.start_time) || '';
               _this.countdownbfun();
             };
 
