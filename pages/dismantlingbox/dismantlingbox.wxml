@@ -34,7 +34,7 @@
           </view>
           <view class="addGoodsPrivilege" style="color:#8A8A8A;">展会VIP门票特权</view>
 
-          <view class="addGoodsPrivilege" wx:for='{{drawInfo.description}}' wx:key='key'>{{item.privilege}}：<image class="privilegeImage" wx:if='{{item.img}}' src="{{item.img}}"></image> {{item.txt}}</view>
+          <view class="addGoodsPrivilege" wx:for='{{drawInfo.description}}' wx:key='key'>{{item.privilege}}<image class="privilegeImage" wx:if='{{item.img}}' src="{{item.img}}"></image> {{item.txt}}</view>
 
           <view class="drawBtn" style="width: 96%;margin-left:0;padding:0 2%;">
             <block>
@@ -543,13 +543,13 @@
 
 
 <!-- 底部购票图片 -->
-<view class="BottomBuyTickets" catchtap="jumpposition" data-tid='3' data-subscribe_data="{{subscribeJson[0].toyshowStart}}">
+<!-- <view class="BottomBuyTickets" catchtap="jumpposition" data-tid='3' data-subscribe_data="{{subscribeJson[0].toyshowStart}}">
   <image src="https://cdn.51chaidan.com/images/calendar/getTicket.png" mode="widthFix"></image>
   <text>已有{{countSubsribe}}人想去</text>
-</view>
+</view> -->
 
 <!-- 底部导航条 -->
-<view class="shunButBar">
+<!-- <view class="shunButBar">
    <view class="shunButBarEve" wx:for='{{shunButBarData}}' wx:key='key' catchtap="position" data-tid='{{item.tid}}' style="{{index+1==shunButBarData.length?'border-right:0;':''}}">
      <view style="position: relative;" data-ind="{{item.tid}}" catchtap="{{item.tid == 3?'plus':''}}">
       <text>{{item.name}}</text>
@@ -558,7 +558,7 @@
       </view>
      </view>
    </view>
-</view>
+</view> -->
 
 <bnavigation isChar='{{false}}' bind:run='auditversion' fashionShow='{{true}}' isProduce='{{isProduce}}'></bnavigation>
 
