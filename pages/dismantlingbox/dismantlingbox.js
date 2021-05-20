@@ -916,7 +916,7 @@ Page({
             var rewardList = res.data.List.rewardList || [];
             var drawInfo = res.data.List.drawInfo || [];
 
-            if(drawInfo.status != 3){
+            if(parseInt(drawInfo.status) != 3){
               _this.data.countdown = parseInt(drawInfo.stop_time) || '';
               _this.countdownbfun();
             };
@@ -1006,9 +1006,9 @@ brandJson:function(){
               var featuredBrands = listData.featuredBrands || [];
               var DayJudSubscribe = listData.toyShowSubscribe || [];
 
-              _this.data.countdown = infoData.endTime || '';
+              // _this.data.countdown = infoData.endTime || '';
 
-              _this.countdownbfun();
+              // _this.countdownbfun();
               _this.setData({
                 bannerList:bannerList,
                 urlScratch:infoData.urlScratch,
@@ -1301,7 +1301,7 @@ brandJson:function(){
     clearInterval(_this.data.timer);
     var countdown = _this.data.countdown || '';
     var commoddata = _this.data.commoddata||{};
-
+    console.log('倒计时======',countdown)
     function nowTime() { //时间函数
       var iftrins = true;
       // 获取现在的时间
