@@ -47,7 +47,7 @@ Page({
     multipleDisplay:'',
     displayClearText:false,
     id:'',
-    current:1,
+    current:0,
     commoddata:{},
     // 邀请倒计时
     askcountdown: 0,

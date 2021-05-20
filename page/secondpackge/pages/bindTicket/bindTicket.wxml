@@ -32,11 +32,11 @@
   </view>
   <view class="tabWrap">
     <view class="tabBtnWrap">
-      <view class="{{current == 0?'active1':''}}" data-ind="0" catchtap="tabChangeFun">详情</view>
-      <view class="{{current == 1?'active1':''}}" data-ind="1" catchtap="tabChangeFun">活动规则</view>
+      <view class="{{current == 0?'active1':''}}" data-ind="0" catchtap="tabChangeFun">活动规则</view>
+      <view class="{{current == 1?'active1':''}}" data-ind="1" catchtap="tabChangeFun">详情</view>
     </view>
     <view>
-      <block wx:if="{{current==0}}">
+      <block wx:if="{{current==1}}">
         <view>
           <template is="wxParse" data="{{wxParseData:article.nodes}}" />
         </view>
