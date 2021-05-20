@@ -5,6 +5,7 @@ page{background:#f4f5f9}.box{width:100%}.specialellipsis{overflow:hidden;text-ov
 
 page{
   background: #fff;
+  padding-bottom: 230rpx;
 }
 
 /*  展会订阅 */
@@ -1012,4 +1013,112 @@ page{
   font-size: 20rpx;
   color: #fff;
   padding-left:15rpx;
+}
+.addGoodsImg{
+  border-radius:10rpx 10rpx 0 0;
+  display:block;
+  width: 100%;
+}
+  
+.addGIBPosition{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+}
+.addGoodsIBoxTxt{
+  width: 100%;
+  height: 60rpx;
+  background: rgba(0,0,0,.7);
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+.addGoodsIBoxTxt view{
+  padding: 0 20rpx;
+  font-size:24rpx;
+  color:#fff;
+  line-height: 60rpx;
+}
+.addGoodsPrivilege{
+  margin-top: 15rpx;
+  padding: 0 20rpx 0 20rpx;
+  font-size: 24rpx;
+  height: 40rpx;
+  display: flex;
+  align-items: center;
+}
+.privilegeImage{
+  display: inline-block;
+  width: 40rpx;
+  height: 40rpx;
+  margin-right:6rpx;
+}
+.buyingTScroll{
+  width:100%;
+  white-space: nowrap;
+}
+.buyingTScrEve{
+  display: inline-block;
+  margin-right:20rpx;
+  position: relative;
+}
+.buyingTScrImg{
+  display: block;
+  height: 220rpx;
+  border-radius: 10rpx;
+  margin:auto;
+}
+.billingSubscr{
+  background:#FCA700;
+  width: 48%;
+  height: 70rpx;
+  border-radius: 70rpx;
+  font-size: 24rpx;
+  line-height: 70rpx;
+  text-align: center;
+  box-shadow: 0px 4rpx 12rpx 0px rgba(0, 0, 0, 0.4);
+  color: #fff;  
+  margin:20rpx auto 20rpx;
+}
+.selectedBrands{
+  display:inline-block;
+  width: 120rpx;
+  height: 180rpx;
+  border: 4rpx solid #000;
+  border-radius: 8rpx;
+  margin-right: 20rpx;
+  vertical-align: top;
+}
+.selectedBrands image{
+  width: 100%;
+  height: 120rpx;
+  display:block;
+  border-radius: 8rpx 8rpx 0 0;
+}
+.selectedBrands view{
+  width: 100%;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  font-size: 24rpx;
+  display: block;
+}
+.oneDayTour{
+  background: rgba(0,0,0,.7);
+  padding: 10rpx 20rpx;
+  border-radius: 0 10rpx 0 10rpx;
+  font-size: 24rpx;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.selectedwhole{
+  width: 100%;
+  font-size: 24rpx;
+  text-align: center;
+  padding-top: 60rpx;
+  line-height: 30rpx;
+  display: block;
 }

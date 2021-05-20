@@ -18,9 +18,55 @@
    
 
     <!-- 票务信息 -->
-    <!-- <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e1'>————— 票务信息 —————</view>
-    <view class="ticketWrap" data-subscribe_data="{{subscribeJson[1].toyshowTicket}}">
-      <view wx:if="{{goodsInfo.length!=0}}" class="addGoods" catchtap="jumpposition" style="margin-bottom:20rpx;">
+    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e1' wx:if='{{drawInfo}}'>————— 票务信息 —————</view>
+    <view class="ticketWrap">
+
+      <view class="addGoods" style="margin-bottom:20rpx;padding:0 0 25rpx 0;">
+          <view style="position:relative;">
+              <image class="addGoodsImg" mode='widthFix' src="{{drawInfo.cover}}"></image>
+              <view class="addGoodsIBoxTxt addGIBPosition">
+                 <view>￥{{drawInfo.shop_price}}</view>
+                 <view>
+                    <block wx:if='{{drawInfo.status == 3}}'>活动已结束</block>
+                    <block wx:else>距离结束: {{commoddata.day}}<text>天</text>{{commoddata.hour}}<text>时</text>{{commoddata.minute}}<text>分</text>{{commoddata.second}}<text>秒</text></block>
+                </view>
+              </view>
+          </view>
+          <view class="addGoodsPrivilege" style="color:#8A8A8A;">展会VIP门票特权</view>
+
+          <view class="addGoodsPrivilege" wx:for='{{drawInfo.description}}' wx:key='key'>{{item.privilege}}：<image class="privilegeImage" wx:if='{{item.img}}' src="{{item.img}}"></image> {{item.txt}}</view>
+
+          <view class="drawBtn" style="width: 96%;margin-left:0;padding:0 2%;">
+            <block>
+              <view wx:if='{{drawInfo.status==1}}' style="background:#FCA700;" data-eveid='{{drawInfo.activity_id}}' data-type='6' catchtap="evesubscrfun">活动开始提醒</view>
+              <view wx:else style="background:#F8657C;" data-id='{{drawInfo.activity_id}}' catchtap="jumpluckyDraw">展会VIP门票抽选</view>
+
+              <view style="background:#1684FC;" catchtap="jumpbindTicket">展会VIP门票激活</view>
+            </block>
+          </view>
+
+
+
+
+
+
+      </view>
+
+      <view class="addGoods" wx:if='{{goodsInfo&&goodsInfo.length!=0}}'>
+         <scroll-view class="buyingTScroll" scroll-x="true">
+            <view class="buyingTScrEve" wx:for='{{goodsInfo}}' wx:key='key'>
+                 <view class="oneDayTour" wx:if='{{item.singleDayJudgment}}'>单日游玩</view>
+                 <image mode="heightFix" class="buyingTScrImg" src="{{item.goods_img}}"></image>
+                 <view class="addGoodsIBoxTxt" style="background:#fff;">
+                    <view style="color:#101010;">{{item.goods_name}}</view>
+                    <view style="color:#F8657C;">￥{{item.price}}</view>
+                 </view>
+            </view>
+         </scroll-view>
+         <view class="billingSubscr" data-type='7' catchtap="evesubscrfun">开票订阅</view>
+      </view>
+
+      <!-- <view wx:if="{{goodsInfo.length!=0}}" class="addGoods" catchtap="jumpposition" style="margin-bottom:20rpx;">
         <view class="addGoodsT">
           <image src="https://cdn.51chaidan.com/images/icon/iconYellowStar.png" mode="widthFix"></image>
           <view>
@@ -56,11 +102,30 @@
           <view catchtap="jumpChouxuanHomepage" data-url="{{urlScratch}}">优先入场资格抽选</view>
           <view catchtap="jumpLuckyDraw">{{isShowDrawTxt?'优先入场资格查询':'优先入场资格刮刮卡'}}</view>
         </block>
-      </view>
-    </view>     -->
+      </view> -->
+    </view>    
 
-    <!-- 直播间 -->
-    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e1'>————— 线上潮玩展 —————</view>
+    <block wx:if='{{featuredBrands&&featuredBrands.length!=0}}'>
+      <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e2'>————— 精选品牌 —————</view>
+      <view style="padding:0 15rpx 20rpx;overflow: hidden;">
+        <scroll-view class="buyingTScroll" scroll-x="true">
+            <view class="selectedBrands boxShadow" wx:for='{{featuredBrands}}' wx:key='key' catchtap="jumpbrandD" data-id='{{item.id}}'>
+              <image mode="aspectFit" class="" src="{{item.logo}}"></image>
+              <view class="specialellipsis">{{item.booth_number}}</view>
+            </view>
+            <view class="selectedBrands boxShadow" catchtap="jumpbindexhibi">
+              <text class="selectedwhole">查  看\n全  部</text>
+            </view>
+        </scroll-view>
+      </view>
+
+    </block>
+
+
+
+
+    <!-- 线上潮玩展 -->
+    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e4'>————— 线上潮玩展 —————</view>
     <view class="ssubLiveBroadcast" wx:for="{{liveListData}}" wx:key="key" style="position: relative;">
         <navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{item.room_id}}" style='position: absolute;height:100%;width:500rpx;left:0;top:0;z-index:3;'></navigator>
         <view class="ssubLiveBroad">
@@ -246,12 +311,12 @@
            <image class="ssubBiliimgs boxShadow" src="{{item.goods_thumb}}" mode='aspectFit'></image>
         </view>
     </view> -->
-    <!-- <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{goodsListTwo&&goodsListTwo.goodsList&&goodsListTwo.goodsList.length!=0}}' id='e5'>—————— 线下 ——————</view>
-    <view style="width:100%;overflow: hidden;" wx:if='{{goodsListTwo&&goodsListTwo.goodsList&&goodsListTwo.goodsList.length!=0}}'>
-        <view class="ssubBilEve" wx:for="{{goodsListTwo.goodsList}}" wx:key="key" catchtap="evesubscrfun" data-type='2' data-eveid='{{item.goods_id}}' data-index='{{index}}'>
+    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{offlineGoodsList&&offlineGoodsList.length!=0}}' id='e32'>—————— 线下潮玩展 ——————</view>
+    <view style="width:100%;overflow: hidden;" wx:if='{{offlineGoodsList&&offlineGoodsList.length!=0}}'>
+        <view class="ssubBilEve" wx:for="{{offlineGoodsList}}" wx:key="key" catchtap="evesubscrfun" data-type='2' data-eveid='{{item.goods_id}}' data-index='{{index}}'>
            <image class="ssubBiliimgs boxShadow" src="{{item.goods_thumb}}" mode='aspectFit'></image>
         </view>
-    </view> -->
+    </view>
 
 
     <!-- 展会日历 -->
@@ -326,13 +391,13 @@
     <!-- </view> -->
 
      <!-- 场馆地图 -->
-    <!-- <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e5'>—————— 场馆地图 ——————</view>
+    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e5'>—————— 场馆地图 ——————</view>
      
     <image catchtap="jumpcanvasRoute" style="width:670rpx;display:block;margin:0 auto 0;" src="https://cdn.51chaidan.com/images/toyShow3/zhanhuiditu.png" mode='widthFix'></image>
     <view class="drawBtn">
       <view catchtap="jumpcanvasRoute" style="width:100%;">制作观展专属地图</view>
     </view>
-    <image style="width:670rpx;display:block;margin:0 auto 0;" src="https://cdn.51chaidan.com/images/toyShow3/siteImg.png"  mode='widthFix'></image> -->
+    <image style="width:670rpx;display:block;margin:0 auto 0;" src="https://cdn.51chaidan.com/images/toyShow3/siteImg.png"  mode='widthFix'></image>
 
     <!-- 品牌合作 -->
 		<view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e4' wx:if='{{brandList&&brandList.length!=0}}'>—————— 参展品牌 ——————</view>
@@ -351,12 +416,12 @@
       </view>
 
       <!-- 媒体合作与平台支持 -->
-      <!-- <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{mediaBrandList&&mediaBrandList.length!=0}}'>———— 媒体合作与平台支持 ————</view>
+      <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{mediaBrandList&&mediaBrandList.length!=0}}'>———— 媒体合作与平台支持 ————</view>
       <view class="ssubBrandEveWrap" style="width:100%;overflow: hidden;padding:0 40rpx;box-sizing: border-box;" wx:if='{{mediaBrandList&&mediaBrandList.length!=0}}'>
           <view class="ssubBrandEve" wx:for="{{mediaBrandList}}" wx:key="key">
             <image class="ssubBiliimgbr" src="{{item}}" mode='aspectFit'></image>
           </view>
-      </view> -->
+      </view>
 
     </block>
  
@@ -364,14 +429,14 @@
 
 
     <!-- 承办 -->
-    <!-- <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;">——————— 承办 ———————</view>
+    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;">——————— 承办 ———————</view>
     <view class="ssubBrandEveWrap" style="width:100%;overflow: hidden;padding:0 40rpx;box-sizing: border-box;">
         <view style="width:580rpx;overflow:hidden;margin: 0 auto;">
           <view class="ssubBrandEve1 bigLogo1" wx:for="{{undertakeData}}" wx:key="key">
             <image class="ssubBiliimgbr bigLogo1" src="{{item}}" mode='aspectFit'></image>
           </view>
         </view>
-    </view> -->
+    </view>
 
     
     <!-- <view class="ssubBotTxt">售卖商品陆续更新,最终以展会开售为准</view> -->
@@ -477,13 +542,13 @@
 
 
 <!-- 底部购票图片 -->
-<!-- <view class="BottomBuyTickets" catchtap="jumpposition" data-tid='3' data-subscribe_data="{{subscribeJson[0].toyshowStart}}">
+<view class="BottomBuyTickets" catchtap="jumpposition" data-tid='3' data-subscribe_data="{{subscribeJson[0].toyshowStart}}">
   <image src="https://cdn.51chaidan.com/images/calendar/getTicket.png" mode="widthFix"></image>
   <text>已有{{countSubsribe}}人想去</text>
-</view> -->
+</view>
 
 <!-- 底部导航条 -->
-<!-- <view class="shunButBar">
+<view class="shunButBar">
    <view class="shunButBarEve" wx:for='{{shunButBarData}}' wx:key='key' catchtap="position" data-tid='{{item.tid}}' style="{{index+1==shunButBarData.length?'border-right:0;':''}}">
      <view style="position: relative;" data-ind="{{item.tid}}" catchtap="{{item.tid == 3?'plus':''}}">
       <text>{{item.name}}</text>
@@ -492,7 +557,7 @@
       </view>
      </view>
    </view>
-</view> -->
+</view>
 
 <bnavigation isChar='{{false}}' bind:run='auditversion' fashionShow='{{true}}' isProduce='{{isProduce}}'></bnavigation>
 

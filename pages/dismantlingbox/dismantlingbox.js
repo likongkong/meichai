@@ -50,15 +50,28 @@ Page({
     // ],
 
     shunButBarData:[
-      {name:'直播间订阅',tid:1},
-      {name:'展会限定福利',tid:2},
+
+      {name:'票务信息',tid:1},
+      {name:'精选品牌',tid:2},
+      {name:'线上潮玩展',tid:4},
       {name:'展品预告',tid:3,sonnav:[
         {name:'热门订阅',tid:33},
         {name:'手作专区',tid:30},
         {name:'海外专区',tid:31},
         {name:'更多展品',tid:32},
+        {name:'线下潮玩展',tid:32},
       ]},
-      {name:'参展品牌',tid:4}
+      
+
+      // {name:'直播间订阅',tid:1},
+      // {name:'展会限定福利',tid:2},
+      // {name:'展品预告',tid:3,sonnav:[
+      //   {name:'热门订阅',tid:33},
+      //   {name:'手作专区',tid:30},
+      //   {name:'海外专区',tid:31},
+      //   {name:'更多展品',tid:32},
+      // ]},
+      // {name:'参展品牌',tid:4}
     ],
 
     // 获取手机号弹框
@@ -282,7 +295,7 @@ Page({
 
     var nowTime = new Date().getTime();
     console.log('nowTime=====',parseInt(nowTime/1000))
-    if( parseInt(nowTime/1000) >= '1609156800' ){
+    if( parseInt(nowTime/1000) >= '1621492396' ){
       this.setData({
         isShowDrawTxt:true
       })
@@ -435,6 +448,11 @@ Page({
     }else if(type==5){
       var goodsListNew = _this.data.goodsListNew;
       subscribedata = goodsListNew.toyShowSubscribe || '';
+    }else if(type==6){
+      var drawInfo = _this.data.drawInfo;
+      subscribedata = drawInfo.toyShowSubscribe || '';
+    }else if(type==7){
+      subscribedata = _this.data.DayJudSubscribe || '';
     };
     _this.setData({
       subscribedata:subscribedata,
@@ -442,7 +460,12 @@ Page({
       typeEve:type,
       indexEve:index
     });
-    _this.subscrfun();
+    if(type==7){
+      _this.subscrfun(1);
+    }else{
+      _this.subscrfun();
+    }
+    
   },
   // 拉起订阅
   subscrfun: function (num) {
@@ -891,9 +914,17 @@ Page({
           if(num==1){
             var liveListData = res.data.List.liveList || [];
             var rewardList = res.data.List.rewardList || [];
+            var drawInfo = res.data.List.drawInfo || [];
+
+            if(drawInfo.status != 3){
+              _this.data.countdown = parseInt(drawInfo.stop_time) || '';
+              _this.countdownbfun();
+            };
+
             _this.setData({
               liveListData:liveListData,
-              rewardList:rewardList
+              rewardList:rewardList,
+              drawInfo:drawInfo
             })
           }else{
             var liveList = res.data.List.liveList || [];
@@ -972,7 +1003,11 @@ brandJson:function(){
               var calendarList = listData.calendar || [];
               var isMobileAuth = infoData.isMobileAuth || false;
               var countSubsribe = infoData.countSubsribe || 0;
+              var featuredBrands = listData.featuredBrands || [];
+              var DayJudSubscribe = listData.toyShowSubscribe || [];
+
               _this.data.countdown = infoData.endTime || '';
+
               _this.countdownbfun();
               _this.setData({
                 bannerList:bannerList,
@@ -981,7 +1016,9 @@ brandJson:function(){
                 brandList,
                 goodsInfo,
                 countSubsribe,
-                isMobileAuth:isMobileAuth
+                isMobileAuth:isMobileAuth,
+                featuredBrands:featuredBrands,
+                DayJudSubscribe:DayJudSubscribe
               });
               // 是否是分享围观
               // _this.shareReferee();
@@ -1059,6 +1096,7 @@ brandJson:function(){
                   var goodsListThree = res.data.List.goodsListThree || [];
                   var goodsListNew = res.data.List.goodsListNew || [];
                   var subGoodsList = res.data.List.subscriptionGoodsList || [];
+                  var offlineGoodsList = res.data.List.offlineGoodsList || [];
                   var goodsListOne = {
                     toyShowSubscribe:toyShowSubscribe,
                     goodsList:goodsListOne
@@ -1085,7 +1123,8 @@ brandJson:function(){
                     goodsListTwo,
                     goodsListThree,
                     goodsListNew,
-                    subGoodsList
+                    subGoodsList,
+                    offlineGoodsList
                   })
                 }else{
                   var goodsList = res.data.List.goodsListOne || [];
@@ -1408,6 +1447,33 @@ brandJson:function(){
       url: "/page/secondpackge/pages/aRewardList/aRewardList?its=1"
     })
   },
+  // 跳转门票抽选
+  jumpluckyDraw(e){
+    let id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/luckyDraw/luckyDraw"
+    })    
+  },
+  // 跳转门票激活码
+  jumpbindTicket(e){
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/bindTicket/bindTicket"
+    })   
+    
+  },
+  // 跳转品牌专区
+  jumpbindexhibi(e){
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/exhibition/exhibition?type=2"
+    })   
+  },
+  jumpbrandD(w){
+    var id = w.currentTarget.dataset.id || w.target.dataset.id || '';
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + id + "&settlement=1"
+    });
+  }
+
 
 
 })
