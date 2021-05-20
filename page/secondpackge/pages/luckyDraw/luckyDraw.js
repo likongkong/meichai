@@ -47,7 +47,7 @@ Page({
     multipleDisplay:'',
     displayClearText:false,
     id:'',
-    current:0,
+    current:1,
     commoddata:{},
     // 邀请倒计时
     askcountdown: 0,
@@ -113,6 +113,16 @@ Page({
         wx.hideLoading();
         if (res.data.ReturnCode == 200 || res.data.ReturnCode == 201 || res.data.ReturnCode == 202) {
           let dataInfo = res.data.Info;
+
+          if(dataInfo.sort){
+            if(parseInt(dataInfo.sort) < 10){
+              dataInfo.sort = '00'+dataInfo.sort
+            }else if(dataInfo.sort.length == 2){
+              dataInfo.sort = '0'+ dataInfo.sort.toString()
+            }; 
+          };
+
+
           _this.setData({
             dataInfo,
             priority: res.data.List.priority,
@@ -876,13 +886,20 @@ Page({
   },
   // 去激活
   deactivation(){
-    app.showToastC('暂未开放');
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/bindTicket/bindTicket"
+    })  
   },
   // 跳转展会门票
   acetlistfun(){
     wx.navigateTo({  
       url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
     })
+  },
+  jumpWinningResult(){
+    // wx.navigateTo({  
+    //   url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
+    // })
   }
 
 

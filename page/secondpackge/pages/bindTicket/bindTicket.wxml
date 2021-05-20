@@ -11,12 +11,13 @@
   </view>
   <view class="ticketsWrap">
     <block wx:for="{{priority}}" wx:key="index">
-      <view class="ticketsItem {{item.sort?'ticketsItemactive':''}} " data-keyday="{{item.keyDay}}" catchtap="{{item.sort?'jumpTicketRcSort':''}}">
+      <view class="ticketsItem {{item.sort?'ticketsItemactive':''}} " data-keyday="{{item.keyDay}}">
+        <!-- catchtap="{{item.sort?'jumpTicketRcSort':''}}" -->
         <text style="color:#CD8336;font-size:24rpx;">{{item.name}}</text>
         <text style="color:#CD8336;font-size:26rpx;margin-top:10rpx;">优先入场</text>
         <block wx:if="{{item.sort}}">
           <view style="color:#101010;font-size:26rpx;margin-top:16rpx;text-align:center;">第<text style="display:inline;color:#F8657C;font-size:56rpx;">{{item.sort}}</text>位</view>
-          <text style="color:#8A8A8A;font-size:26rpx;height:50rpx;line-height:50rpx;">点击查看</text>
+          <!-- <text style="color:#8A8A8A;font-size:26rpx;height:50rpx;line-height:50rpx;">点击查看</text> -->
         </block>
         <block wx:else>
           <text style="color:#8A8A8A;font-size:26rpx;height:140rpx;line-height:140rpx;">尚未激活</text>
@@ -31,13 +32,13 @@
     <view class="activateBtn" catchtap="activateBtnFun">去激活</view>
   </view>
   <view class="tabWrap">
-    <view class="tabBtnWrap">
+    <!-- <view class="tabBtnWrap">
       <view class="{{current == 0?'active1':''}}" data-ind="0" catchtap="tabChangeFun">活动规则</view>
       <view class="{{current == 1?'active1':''}}" data-ind="1" catchtap="tabChangeFun">详情</view>
-    </view>
+    </view> -->
     <view>
       <block wx:if="{{current==1}}">
-        <view>
+        <view class="detailimg" style="padding:20rpx;">
           <template is="wxParse" data="{{wxParseData:article.nodes}}" />
         </view>
       </block>

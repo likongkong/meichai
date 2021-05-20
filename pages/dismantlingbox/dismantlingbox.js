@@ -919,10 +919,11 @@ Page({
             if(parseInt(drawInfo.status) == 2){
               _this.data.countdown = parseInt(drawInfo.stop_time) || '';
               _this.countdownbfun();
-            }else if(parseInt(drawInfo.status) == 1){
-              _this.data.countdown = parseInt(drawInfo.start_time) || '';
-              _this.countdownbfun();
-            };
+            }
+            // else if(parseInt(drawInfo.status) == 1){
+            //   _this.data.countdown = parseInt(drawInfo.start_time) || '';
+            //   _this.countdownbfun();
+            // };
 
             _this.setData({
               liveListData:liveListData,

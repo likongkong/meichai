@@ -912,9 +912,9 @@ page{
 }
 
 .ssubBrandEve1{
-  /* display: inline-block; */
+  display: inline-block;
   margin: 0 20rpx;
-  float: left;
+  /* float: left; */
 }
 /* .ssubBrandEve1:nth-child(2n){
   float: right;
@@ -1123,3 +1123,12 @@ page{
   line-height: 30rpx;
   display: block;
 }
+.privilegeImageOne{
+  width: 150rpx;
+  height: 150rpx;
+  display: inline-block;
+  margin: 0 10rpx;
+  border-radius: 10rpx;
+}
+
+

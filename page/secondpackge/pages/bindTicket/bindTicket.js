@@ -18,7 +18,7 @@ Page({
     tgabox:false,
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
-    current:0,
+    current:1,
     isBindBox:false,
     cdKeyinputValue:'',
     rccdkey:'',

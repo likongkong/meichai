@@ -24,26 +24,31 @@
       <view class="addGoods" style="margin-bottom:20rpx;padding:0 0 25rpx 0;">
           <view style="position:relative;" data-eveid='{{drawInfo.activity_id}}' data-type='6' data-id='{{drawInfo.activity_id}}' catchtap="{{drawInfo.status==2?'jumpluckyDraw':'evesubscrfun'}}">
               <image class="addGoodsImg" mode='widthFix' src="{{drawInfo.cover}}"></image>
-              <view class="addGoodsIBoxTxt addGIBPosition">
+              <view class="addGoodsIBoxTxt">
                  <view>￥{{drawInfo.shop_price}}</view>
                  <view>
                     <block wx:if='{{commoddata.day=="00"&&commoddata.hour=="00"&&commoddata.minute=="00"&&commoddata.second=="00"}}'></block>
-                    <block wx:elif='{{drawInfo.status == 1}}'>距离开始: {{commoddata.day}}<text>天</text>{{commoddata.hour}}<text>时</text>{{commoddata.minute}}<text>分</text>{{commoddata.second}}<text>秒</text></block>
+                    <block wx:elif='{{drawInfo.status == 1}}'>敬请期待</block>
+                    <!-- <block wx:elif='{{drawInfo.status == 1}}'>距离开始: {{commoddata.day}}<text>天</text>{{commoddata.hour}}<text>时</text>{{commoddata.minute}}<text>分</text>{{commoddata.second}}<text>秒</text></block> -->
                     <block wx:elif='{{drawInfo.status == 3}}'>活动已结束</block>
                     <block wx:elif='{{drawInfo.status == 2}}'>距离结束: {{commoddata.day}}<text>天</text>{{commoddata.hour}}<text>时</text>{{commoddata.minute}}<text>分</text>{{commoddata.second}}<text>秒</text></block>
                 </view>
               </view>
           </view>
-          <view class="addGoodsPrivilege" data-eveid='{{drawInfo.activity_id}}' data-type='6' data-id='{{drawInfo.activity_id}}' catchtap="{{drawInfo.status==2?'jumpluckyDraw':'evesubscrfun'}}" style="color:#8A8A8A;">展会VIP门票特权</view>
+          <view class="addGoodsPrivilege" data-eveid='{{drawInfo.activity_id}}' data-type='6' data-id='{{drawInfo.activity_id}}' catchtap="{{drawInfo.status==2?'jumpluckyDraw':'evesubscrfun'}}" style="color:#8A8A8A;">展会VIP优先入场特权抽选</view>
 
-          <view class="addGoodsPrivilege" data-eveid='{{drawInfo.activity_id}}' data-type='6' data-id='{{drawInfo.activity_id}}' catchtap="{{drawInfo.status==2?'jumpluckyDraw':'evesubscrfun'}}" wx:for='{{drawInfo.description}}' wx:key='key'>{{item.privilege}}<image class="privilegeImage" wx:if='{{item.img}}' src="{{item.img}}"></image> {{item.txt}}</view>
+          <view class="addGoodsPrivilege" data-eveid='{{drawInfo.activity_id}}' data-type='6' data-id='{{drawInfo.activity_id}}' catchtap="{{drawInfo.status==2?'jumpluckyDraw':'evesubscrfun'}}" wx:for='{{drawInfo.description}}' wx:key='key'>{{item.privilege}}<image mode="aspectFit" class="privilegeImage" wx:for='{{item.img}}' wx:key='key' wx:if='{{item}}' src="{{item}}"></image> {{item.txt}}</view>
+
+          <view class="addGoodsPrivilege" style="height:150rpx;text-align:center;" wx:if='{{drawInfo.imgUrlOneArr && drawInfo.imgUrlOneArr.length != 0}}' data-eveid='{{drawInfo.activity_id}}' data-type='6' data-id='{{drawInfo.activity_id}}' catchtap="{{drawInfo.status==2?'jumpluckyDraw':'evesubscrfun'}}">
+              <image class="privilegeImageOne"  mode="aspectFit" wx:for='{{drawInfo.imgUrlOneArr}}' wx:key='key' wx:if='{{item}}' src="{{item}}"></image>
+          </view>
 
           <view class="drawBtn" style="width: 96%;margin-left:0;padding:0 2%;">
             <block>
               <view wx:if='{{drawInfo.status==1}}' style="background:#FCA700;" data-eveid='{{drawInfo.activity_id}}' data-type='6' catchtap="evesubscrfun">活动开始提醒</view>
               <view wx:else style="background:#F8657C;" data-id='{{drawInfo.activity_id}}' catchtap="jumpluckyDraw">展会VIP门票抽选</view>
 
-              <view style="background:#1684FC;" catchtap="jumpbindTicket">展会VIP门票激活</view>
+              <view style="background:#1684FC;" data-eveid='{{drawInfo.activity_id}}' data-type='6' data-id='{{drawInfo.activity_id}}' catchtap="{{drawInfo.status==2?'jumpbindTicket':'evesubscrfun'}}">展会VIP门票激活</view>
             </block>
           </view>
 
@@ -55,9 +60,9 @@
       </view>
 
       <view class="addGoods" wx:if='{{goodsInfo&&goodsInfo.length!=0}}'>
-         <scroll-view class="buyingTScroll" scroll-x="true" data-id='{{drawInfo.activity_id}}'  catchtap="{{drawInfo.status==2?'jumpluckyDraw':''}}">
+         <scroll-view class="buyingTScroll" scroll-x="true" data-eveid='{{drawInfo.activity_id}}' data-type='6' data-id='{{drawInfo.activity_id}}'  catchtap="{{drawInfo.status==1 || drawInfo.status==2?'evesubscrfun':''}}">
             <view class="buyingTScrEve" wx:for='{{goodsInfo}}' wx:key='key'>
-                 <view class="oneDayTour" wx:if='{{item.singleDayJudgment}}'>单日游玩</view>
+                 <!-- <view class="oneDayTour" wx:if='{{item.singleDayJudgment}}'>单日游玩</view> -->
                  <image mode="heightFix" class="buyingTScrImg" src="{{item.goods_img}}"></image>
                  <view class="addGoodsIBoxTxt" style="background:#fff;">
                     <view style="color:#101010;">{{item.goods_name}}</view>
@@ -130,7 +135,7 @@
     <!-- 线上潮玩展 -->
 
     <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e4'>————— 线上潮玩展 —————</view>
-    <!-- <view class="ssubLiveBroadcast" wx:for="{{liveListData}}" wx:key="key" style="position: relative;">
+    <view class="ssubLiveBroadcast" wx:for="{{liveListData}}" wx:key="key" style="position: relative;">
         <navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{item.room_id}}" style='position: absolute;height:100%;width:500rpx;left:0;top:0;z-index:3;'></navigator>
         <view class="ssubLiveBroad">
             <image class="ssubLiveBImg" src="{{item.cover_img}}" mode='aspectFit'></image>
@@ -145,9 +150,9 @@
         <view class="position: absolute;top: 0; left: 0;width: 100%;height: 100%;z-index: 11;">
 
         </view>
-    </view>  -->
+    </view> 
 
-    <view class="ssubLiveBroadcast" wx:key="key" id='e1' catchtap="arousesubscribeFun" data-subscribe_data="{{subscribeJson[0].toyshowStart}}">
+    <!-- <view class="ssubLiveBroadcast" wx:key="key" id='e1' catchtap="arousesubscribeFun" data-subscribe_data="{{subscribeJson[0].toyshowStart}}">
         <image class="ssubLiveBImg" src="https://cdn.51chaidan.com/data/afficheimg/1621087021755892088.jpg" mode='aspectFit'></image>
         <view class="ssubLiveBroadRig">
            <view class="ssubSSAname multilineellipsis">
@@ -158,7 +163,7 @@
                <view class="ssubSBotTimeleft">预约订阅</view>
            </view>
         </view>
-    </view>
+    </view> -->
 
 
     <block wx:if='{{rewardList && rewardList.length != 0}}'>
@@ -412,10 +417,10 @@
      <!-- 场馆地图 -->
     <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e5'>—————— 场馆地图 ——————</view>
      
-    <image catchtap="jumpcanvasRoute" style="width:670rpx;display:block;margin:0 auto 0;" src="https://cdn.51chaidan.com/images/toyShow3/zhanhuiditu.png" mode='widthFix'></image>
+    <!-- <image catchtap="jumpcanvasRoute" style="width:670rpx;display:block;margin:0 auto 0;" src="https://cdn.51chaidan.com/images/toyShow3/zhanhuiditu.png" mode='widthFix'></image>
     <view class="drawBtn">
       <view catchtap="jumpcanvasRoute" style="width:100%;">制作观展专属地图</view>
-    </view>
+    </view> -->
     <image style="width:670rpx;display:block;margin:0 auto 0;" src="https://cdn.51chaidan.com/images/toyShow3/siteImg.png"  mode='widthFix'></image>
 
     <!-- 品牌合作 -->
@@ -450,7 +455,7 @@
     <!-- 承办 -->
     <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;">——————— 承办 ———————</view>
     <view class="ssubBrandEveWrap" style="width:100%;overflow: hidden;padding:0 40rpx;box-sizing: border-box;">
-        <view style="width:580rpx;overflow:hidden;margin: 0 auto;">
+        <view style="width:580rpx;overflow:hidden;margin: 0 auto;text-align: center;">
           <view class="ssubBrandEve1 bigLogo1" wx:for="{{undertakeData}}" wx:key="key">
             <image class="ssubBiliimgbr bigLogo1" src="{{item}}" mode='aspectFit'></image>
           </view>

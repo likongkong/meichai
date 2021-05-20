@@ -170,3 +170,7 @@
 .confirmOrderScroll{
   width: 100%;
 }
+.detailimg image {
+  display: block;
+  width: 100%!important;
+}

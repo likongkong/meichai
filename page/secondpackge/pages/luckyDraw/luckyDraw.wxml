@@ -3,7 +3,7 @@
 <import src="../../../../wxParse/wxParse.wxml" />
 
 <view class="wrap">
-  <view class="countdownWrap" style='background:#000;height:68rpx;padding:0 20rpx;text-align: center;line-height: 68rpx;font-size: 40rpx;color: #fff;'>
+  <view class="countdownWrap" style='background:#000;height:68rpx;padding:0 20rpx;text-align: center;line-height: 68rpx;font-size: 40rpx;color: #fff;' catchtap="{{dataInfo.status==3?'wonOrNot':''}}">
     <!-- status==1 未开始 -->
     <block wx:if="{{dataInfo.status == 1}}">
       <text class='timetextstyle' style='margin-right:10rpx;'>距报名开始:</text>
@@ -115,11 +115,11 @@
       </block>
       <!-- status==3 已结束 -->
       <block wx:elif="{{dataInfo.status == 3}}">
-        <view class="slide-image active" style="width:410rpx;height:300rpx;" catchtap="wonOrNot">
+        <view class="slide-image active" style="width:410rpx;height:300rpx;" catchtap="jumpWinningResult">
           <view class="clickRedCir" style="width:224rpx;height:224rpx;background:#FBD6D8;background:#fff;border:6rpx solid #FCA700;">
             <view class="clickRedch" style="background:#FCA700; display: flex;align-items: center;justify-content: center;">
               <view style="display: inline-block;">
-                <view class="clickRtitle" style="padding-top:0; font-size:32rpx;">查看状态</view>
+                <view class="clickRtitle" style="padding-top:0; font-size:32rpx;">中奖名单</view>
               </view>
             </view>
           </view>
@@ -127,7 +127,7 @@
       </block>
 
       <view wx:if="{{dataInfo.status == 2 && dataInfo.countLotto!=0}}" class='actDetailCon'>
-        <view class="actDetailTxt" wx:if='{{askcountdown>0}}'>限时 <text style="color:#f93f45;">{{askcountdown}}s</text> 内助力，免单券翻倍</view>
+        <view class="actDetailTxt" wx:if='{{askcountdown>0}}'>限时 <text style="color:#f93f45;">{{askcountdown}}s</text> 内助力，幸运值翻倍</view>
         <view class="actDetailTxt" wx:else>邀请好友助力提升中奖率</view>
         <view class="actDetailTxt" style="padding-top:20rpx;height:60rpx;">
             <view class="actDetailEve" catchtap="mySignatureNum">获得幸运值<text style="color:#f93f45;">{{dataInfo.countLotto}}</text></view>
@@ -147,13 +147,13 @@
     </view>
   </view>
   <view class="tabWrap">
-    <view class="tabBtnWrap">
+    <!-- <view class="tabBtnWrap">
       <view class="{{current == 0?'active1':''}}" data-ind="0" catchtap="tabChangeFun">活动规则</view>
       <view class="{{current == 1?'active1':''}}" data-ind="1" catchtap="tabChangeFun">详情</view>
-    </view>
+    </view> -->
     <view>
       <block wx:if="{{current==1}}">
-        <view>
+        <view class="detailimg" style="padding:20rpx;">
           <template is="wxParse" data="{{wxParseData:article.nodes}}" />
         </view>
       </block>
@@ -305,11 +305,11 @@
   <view style='width:100%;height:820rpx;background:#fff;position:absolute;bottom:0;border-radius:16rpx 16rpx 0 0;'>
 
       <block wx:if='{{dataInfo.isWinner}}'>  
-          <view class="winningTips">恭喜您！获得6月12日展会VIP</view>
+          <view class="winningTips" style="font-size:36rpx;text-align:center;">恭喜您！获得{{dataInfo.date}}VIP优先入场资格</view>
           <view class="winningTipsTxt">激活码请于2021年6月10日 21:00前使用</view>
           <image class="winningTipsImg" mode="aspectFit" src="{{dataInfo.imgAward}}"></image>
-          <view class="winningTipsName" style="padding:20rpx 0 0 0;font-size:30rpx;position: relative;width:430rpx;">激活码:<block wx:if='{{displayClearText}}'>{{dataInfo.cdkey}}</block><block wx:else>****************</block><image class="displayClearTextImg" catchtap="is_dct" mode="aspectFit" src="{{displayClearText?'http://cdn.51chaidan.com/images/sign/show.png':'http://cdn.51chaidan.com/images/sign/hide.png'}}"></image></view>
-          <view class="winningTipsName" style="padding:15rpx 0 20rpx 0;">第<text style="color:#E95159;font-size:50rpx;">{{dataInfo.sort}}</text>位入场</view>
+          <view class="winningTipsName" style="padding:20rpx 0 0 0;font-size:30rpx;position: relative;width:430rpx;">激活码 <block wx:if='{{displayClearText}}'>{{dataInfo.cdkey}}</block><block wx:else>****************</block><image class="displayClearTextImg" catchtap="is_dct" mode="aspectFit" src="{{displayClearText?'http://cdn.51chaidan.com/images/sign/show.png':'http://cdn.51chaidan.com/images/sign/hide.png'}}"></image></view>
+          <view class="winningTipsName" style="padding:15rpx 0 20rpx 0;font-size:30rpx;">入场顺序 <text style="color:#E95159;font-size:50rpx;">NO.{{dataInfo.sort}}</text></view>
           
           <view class="clickButton" style="background:#fff;">
             <view class="clickButtonEve" catchtap="copyTBL" style="background:#FCA700;float:left;">复制激活码</view>
