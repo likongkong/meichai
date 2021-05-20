@@ -1,4 +1,5 @@
 {
+  "setting": {},
   "condition": {
     "plugin": {
       "list": []
@@ -56,6 +57,19 @@
         {
           "name": "VIP抽签",
           "pathName": "page/secondpackge/pages/luckyDraw/luckyDraw",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "展会VIP激活",
+          "pathName": "page/secondpackge/pages/bindTicket/bindTicket",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "邀请函",
+          "pathName": "page/secondpackge/pages/priorityVoting/priorityVoting",
+          "query": "",
           "scene": null
         }
       ]

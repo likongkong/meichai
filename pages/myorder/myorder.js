@@ -922,6 +922,13 @@ Page({
             imageUrl: gcover,
             success: function (res) { },
           };
+         } else if (order_type==29){
+          var reshare = {
+            title: gname+ ' 来看我一发入魂',
+            path: "/page/secondpackge/pages/buyingTickets/buyingTickets",
+            imageUrl: gcover,
+            success: function (res) { },
+          };
          }else{
             var reshare = {
               title: couponvalue ? '我刚买了这个商品，一起下单各领￥' + couponvalue + '立减金' : '￥' + goods_price + "  " + pre_name + "  " + ds + "  " + gname,

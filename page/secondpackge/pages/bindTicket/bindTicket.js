@@ -64,6 +64,7 @@ Page({
             dataInfo:res.data.Info,
             priority:res.data.List.priority,
            })
+          // WxParse.wxParse('article', 'html', dataInfo.actionDetails, _this, 0);
         }else{
           wx.showToast({
             title: res.data.Msg,
@@ -258,6 +259,7 @@ Page({
     var _this = this;
     _this.activsign();
     // this.onLoadfun(); 
+
   },
   onLoadfun:function(){
     var _this = this;
@@ -274,7 +276,8 @@ Page({
       success: function (res) {
         console.log('规则==========',res)
         _this.setData({
-          termsOfBookingService:res.data.clause || ''
+          termsOfBookingService:res.data.clause || '',
+          bindingRule:res.data.bindingRule || ''
         });
       }
     })
@@ -440,7 +443,6 @@ Page({
     var h = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
     var m = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
     var s = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
- 
     return Y + '年' + M + '月' + D + '日';
     
   },

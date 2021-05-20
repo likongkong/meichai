@@ -43,7 +43,7 @@
       </block>
       <block wx:else>
         <view style="padding:0 35rpx;box-sizing: border-box;">
-          <text style="font-size:24rpx;color:#8A8A8A;">{{dataInfo.actionRule}}</text>
+          <text style="font-size:24rpx;color:#8A8A8A;">{{bindingRule}}</text>
         </view>
       </block>
     </view>
