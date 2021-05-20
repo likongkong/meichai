@@ -22,7 +22,7 @@
     <view class="ticketWrap">
 
       <view class="addGoods" style="margin-bottom:20rpx;padding:0 0 25rpx 0;">
-          <view style="position:relative;" data-id='{{drawInfo.activity_id}}' catchtap="{{drawInfo.status==2?'jumpluckyDraw':''}}">
+          <view style="position:relative;" data-eveid='{{drawInfo.activity_id}}' data-type='6' data-id='{{drawInfo.activity_id}}' catchtap="{{drawInfo.status==2?'jumpluckyDraw':'evesubscrfun'}}">
               <image class="addGoodsImg" mode='widthFix' src="{{drawInfo.cover}}"></image>
               <view class="addGoodsIBoxTxt addGIBPosition">
                  <view>￥{{drawInfo.shop_price}}</view>
@@ -34,9 +34,9 @@
                 </view>
               </view>
           </view>
-          <view class="addGoodsPrivilege" style="color:#8A8A8A;">展会VIP门票特权</view>
+          <view class="addGoodsPrivilege" data-eveid='{{drawInfo.activity_id}}' data-type='6' data-id='{{drawInfo.activity_id}}' catchtap="{{drawInfo.status==2?'jumpluckyDraw':'evesubscrfun'}}" style="color:#8A8A8A;">展会VIP门票特权</view>
 
-          <view class="addGoodsPrivilege" data-id='{{drawInfo.activity_id}}' catchtap="{{drawInfo.status==2?'jumpluckyDraw':''}}" wx:for='{{drawInfo.description}}' wx:key='key'>{{item.privilege}}<image class="privilegeImage" wx:if='{{item.img}}' src="{{item.img}}"></image> {{item.txt}}</view>
+          <view class="addGoodsPrivilege" data-eveid='{{drawInfo.activity_id}}' data-type='6' data-id='{{drawInfo.activity_id}}' catchtap="{{drawInfo.status==2?'jumpluckyDraw':'evesubscrfun'}}" wx:for='{{drawInfo.description}}' wx:key='key'>{{item.privilege}}<image class="privilegeImage" wx:if='{{item.img}}' src="{{item.img}}"></image> {{item.txt}}</view>
 
           <view class="drawBtn" style="width: 96%;margin-left:0;padding:0 2%;">
             <block>
