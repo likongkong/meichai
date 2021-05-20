@@ -1,0 +1,83 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+<import src="../../../../wxParse/wxParse.wxml" />
+
+<view class="wrap">
+  <view class="countdownWrap" style='background:#000;height:68rpx;padding:0 20rpx;text-align: center;line-height: 68rpx;font-size: 40rpx;color: #fff;'>
+    <text class='timetextstyle' style="display:block;font-size:24rpx;">激活码请在{{dataInfo.stopTime}}24点前使用</text>
+  </view>
+  <view class="banner">
+    <image src="{{dataInfo.banner}}" mode="aspectFill" style='width:100%;height:400rpx;display:block'></image>
+  </view>
+  <view class="ticketsWrap">
+    <block wx:for="{{priority}}" wx:key="index">
+      <view class="ticketsItem {{item.sort?'ticketsItemactive':''}} " data-keyday="{{item.keyDay}}" catchtap="{{item.sort?'jumpTicketRcSort':''}}">
+        <text style="color:#CD8336;font-size:24rpx;">{{item.name}}</text>
+        <text style="color:#CD8336;font-size:26rpx;margin-top:10rpx;">优先入场</text>
+        <block wx:if="{{item.sort}}">
+          <view style="color:#101010;font-size:26rpx;margin-top:16rpx;text-align:center;">第<text style="display:inline;color:#F8657C;font-size:56rpx;">{{item.sort}}</text>位</view>
+          <text style="color:#8A8A8A;font-size:26rpx;height:50rpx;line-height:50rpx;">点击查看</text>
+        </block>
+        <block wx:else>
+          <text style="color:#8A8A8A;font-size:26rpx;height:140rpx;line-height:140rpx;">尚未激活</text>
+        </block>
+      </view>
+    </block>
+  </view>
+  <view class="takepartWrap">
+    <view class="inputWrap">
+      <input type="text" placeholder="请输入激活码" bindinput="bindCdkeyInput" value=""/>
+    </view>
+    <view class="activateBtn" catchtap="activateBtnFun">去激活</view>
+  </view>
+  <view class="tabWrap">
+    <view class="tabBtnWrap">
+      <view class="{{current == 0?'active1':''}}" data-ind="0" catchtap="tabChangeFun">详情</view>
+      <view class="{{current == 1?'active1':''}}" data-ind="1" catchtap="tabChangeFun">活动规则</view>
+    </view>
+    <view>
+      <block wx:if="{{current==0}}">
+        <view>
+          <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+        </view>
+      </block>
+      <block wx:else>
+        <view style="padding:0 35rpx;box-sizing: border-box;">
+          <text style="font-size:24rpx;color:#8A8A8A;">{{bindingRule}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
+
+
+
+
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>
+
+<view class="bindUserInfoWrap" wx:if="{{isBindBox}}" catchtouchmove="true"> 
+  <view class="bindUserInfoBox">
+    <view class="rucInfo">
+      <text style="font-size:26rpx;color:#101010;">您激活的展会VIP优先入场日期为:</text>
+      <text style="font-size:34rpx;color:#F8657C;margin-top:20rpx;">{{rcdate}}</text>
+      <text style="font-size:26rpx;color:#101010;margin-top:44rpx;">优先入场顺序为:</text>
+      <text style="font-size:34rpx;color:#F8657C;margin-top:20rpx;">第{{rcsort}}位</text>
+    </view>
+    <view class="userInfoWrap">
+      <view class="userInfoInput">
+        <text decode="true">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</text>
+        <input type="text" value="" data-type="1" bindinput="bindUserInput"/>
+      </view>
+      <view class="userInfoInput">
+        <text decode="true">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话</text>
+        <input type="text" value="" data-type="2" bindinput="bindUserInput"/>
+      </view>
+      <view class="userInfoInput">
+        <text decode="true">身份证号</text>
+        <input type="text" value="" data-type="3" bindinput="bindUserInput"/>
+      </view>
+    </view>
+    <view class="bindUserTicket" catchtap="bindUserTicket">激活</view>
+  </view>
+</view>

@@ -18,6 +18,7 @@ Page({
     tgabox:false,
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
+    perayu:0, // 0正常分享  1朋友圈
     share_time:0,
     share_uid:0,
     countdown:'',
@@ -45,11 +46,11 @@ Page({
     muSnData:[],
     multipleDisplay:'',
     displayClearText:false,
-    id:'374855',
+    id:'',
     current:0,
     commoddata:{},
-    // 倒计时
-    askcountdown: 30,
+    // 邀请倒计时
+    askcountdown: 0,
     // 收货地址
     receivingaddress:false,
     tipback:false,
@@ -84,14 +85,16 @@ Page({
   },
   changeTickets(e){
     this.setData({
-      id: e.currentTarget.dataset.id
+      id: e.currentTarget.dataset.id,
+      sigListdata:[],
+      muSnData:[]
     });
     this.getInfo();
   },
   getInfo(){
     var _this = this;
     wx.showLoading({ title: '加载中...'})
-    var diffTime = Date.parse(new Date())/1000 - _this.data.sharetime;
+    var diffTime = Date.parse(new Date())/1000 - _this.data.share_time;
     console.log('diffTime===',diffTime)
     var q = Dec.Aese('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&isNewer=' + _this.data.isNewer + '&gid=' + _this.data.gid + '&push_id='+_this.data.push_id + '&shareUId=' + _this.data.share_uid +'&diffTime='+diffTime);
     console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&isNewer=' + _this.data.isNewer + '&gid=' + _this.data.gid + '&push_id='+_this.data.push_id + '&shareUId=' + _this.data.share_uid +'&diffTime='+diffTime)
@@ -103,11 +106,12 @@ Page({
         'Accept': 'application/json'
       },
       success: function (res) {
+        _this.data.push_id = 0;
         console.log('数据======',res)
         // 刷新完自带加载样式回去
         wx.stopPullDownRefresh();
         wx.hideLoading();
-        if (res.data.ReturnCode == 200) {
+        if (res.data.ReturnCode == 200 || res.data.ReturnCode == 201 || res.data.ReturnCode == 202) {
           let dataInfo = res.data.Info;
           _this.setData({
             dataInfo,
@@ -123,7 +127,8 @@ Page({
             _this.wonOrNot()
           }
           _this.countdownbfun();        
-        }else{
+        };
+        if(res.data.ReturnCode != 200){
           wx.showToast({
             title: res.data.Msg,
             icon: 'none',
@@ -131,6 +136,7 @@ Page({
             duration:1000
           });  
         }
+
       }
     }); 
   },
@@ -235,7 +241,6 @@ Page({
       var sec = second;
       var secStr = sec.toString();
       if (secStr.length == 1) secStr = '0' + secStr;
-      console.log(secStr)
       _this.setData({
         askcountdown: secStr,
       });
@@ -256,8 +261,15 @@ Page({
   onLoad: function (options) {
     // 判断是否授权
     var _this = this;
+    _this.setData({
+      id: options.id || 374855
+    });
     _this.data.share_uid = options.share_uid || 0;
     _this.data.share_time = options.share_time || 0;
+    // 是否是朋友圈进入
+    _this.data.perayu = options.perayu || 0;
+    // 推送统计
+    _this.data.push_id = options.push_id || 0;
     _this.activsign();
     _this.countdownbfun();        
     // this.onLoadfun(); 
@@ -268,6 +280,8 @@ Page({
       uid: app.signindata.uid,
       loginid: app.signindata.loginid,
     });  
+    _this.data.isNewer = app.signindata.isNewer;
+    
     _this.getInfo();
     _this.nextpagediao();
     wx.request({
@@ -392,6 +406,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    this.data.share_uid = 0;
     this.getInfo();
   },
 
@@ -407,16 +422,16 @@ Page({
    */
   onShareAppMessage: function () {
     var _this = this;
-    if(this.data.dataInfo.countLotto == 0){
+    if(this.data.dataInfo.countLotto == 0 || this.data.dataInfo.status == 3 || this.data.dataInfo.status == 1){
       return {
         title:'我正在美拆抽取展会优先入场资格，快来一起参与吧',
-        path: "/page/secondpackge/pages/luckyDraw/luckyDraw",
+        path: "/page/secondpackge/pages/luckyDraw/luckyDraw?id="+_this.data.id,
         imageUrl:app.signindata.indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
       }   
     }else{
       return {
         title:'我正在美拆抽取展会优先入场资格，快来帮我助力吧',
-        path: "/page/secondpackge/pages/luckyDraw/luckyDraw?share_uid=" + _this.data.uid + "&share_time=" + _this.data.signTime,
+        path: "/page/secondpackge/pages/luckyDraw/luckyDraw?share_uid=" + _this.data.uid + "&share_time=" + _this.data.signTime +'&id='+_this.data.id,
         imageUrl:app.signindata.indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
       }  
     }
@@ -427,19 +442,26 @@ Page({
   //  */
   onShareTimeline:function(){
     var _this = this;
-
     var indexShare = app.signindata.indexShare || [];
     var indexShareNum = Math.floor(Math.random() * indexShare.length) || 0;
     var indexShareImg = '';
     if(indexShare.length!=0 && indexShare[indexShareNum]){
       indexShareImg = indexShare[indexShareNum]+'?time=' + Date.parse(new Date());;
     };
-
-    return {
-      title:'刮刮卡:我正在美拆抽取展会优先入场资格，快来帮我助力吧',
-      query:'share_uid='+_this.data.uid,
-      imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+    if(this.data.dataInfo.countLotto == 0){
+      return {
+        title:'我正在美拆抽取展会优先入场资格，快来一起参与吧',
+        query:'perayu=1&id='+_this.data.id,
+        imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      } 
+    }else{
+      return {
+        title:'我正在美拆抽取展会优先入场资格，快来帮我助力吧',
+        query:'share_uid='+_this.data.uid+'&share_time=' + _this.data.signTime+'&perayu=1&id='+_this.data.id,
+        imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      }
     }
+  
   },  
 
 
@@ -519,10 +541,55 @@ Page({
       url: "/page/secondpackge/pages/vipPage/vipPage"
     })
   },
-   // 订阅授权
-   subscrfun:function(){
+
+  // 拉起订阅
+  subscrfun: function () {
     var _this = this;
-    app.comsubscribe(_this);
+    var subscribedata = _this.data.subscribedata || '';
+    if (subscribedata && subscribedata.template_id && app.signindata.subscribeif) {
+      if (subscribedata.template_id instanceof Array) {
+        wx.requestSubscribeMessage({
+          tmplIds: subscribedata.template_id || [],
+          success(res) {
+            var is_show_modal = true;
+            for (var i = 0; i < subscribedata.template_id.length; i++) {
+              if (res[subscribedata.template_id[i]] == "accept") {
+                app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+                if (is_show_modal) {
+                  _this.subshowmodalfun();
+                  is_show_modal = false;
+                };
+              };
+            };
+          },
+          complete() { }
+        })
+      } else {
+        wx.requestSubscribeMessage({
+          tmplIds: [subscribedata.template_id || ''],
+          success(res) {
+            if (res[subscribedata.template_id] == "accept") {
+              app.subscribefun(_this, 0, subscribedata.template_id, subscribedata.subscribe_type);
+              _this.subshowmodalfun();
+            };
+          }
+        })
+      };
+    };
+  },
+  subshowmodalfun: function () {
+    var _this = this;
+    wx.showModal({
+      title: '提示',
+      content: _this.data.subscribeCouponTip || '订阅成功,开售前通过微信发送提醒',
+      showCancel: false,
+      success: function (res) {
+        _this.setData({
+          subscribeCouponTip:'',
+          isSubscribeCoupon:false
+        })
+        }
+    })
   },
 
    // 下一页返回调取
@@ -735,6 +802,7 @@ Page({
   sigListFun(){
     var _this = this;
     if(_this.data.sigListdata.length == 0){
+      console.log(_this.data.id)
       var qhd = Dec.Aese('mod=miandan&operation=lottoTop&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id);
       wx.showLoading({ title: '加载中...', mask: true })
       wx.request({

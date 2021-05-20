@@ -87,7 +87,7 @@
          
          <!-- &&comdata.status!=16&&comdata.status!=1&&comdata.status!=8&&comdata.status!=11 -->
          <view class='orderbottcon' wx:if='{{comdata.order_type!=2}}'>下单时间:{{comdata.ordertime}}</view>
-         <view class='orderbottcon'>支付流水号:{{comdata.transaction_id}}</view>
+         <view class='orderbottcon' wx:if="{{comdata.transaction_id}}">支付流水号:{{comdata.transaction_id}}</view>
      </view>
      <!--  官网微信号复制  -->
     <view class='wxcusser'>

@@ -252,6 +252,7 @@ Page({
       url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
 
       // url: "/page/secondpackge/pages/luckyDraw/luckyDraw"
+      // url: "/page/secondpackge/pages/bindTicket/bindTicket"
       
       // url: "/page/secondpackge/pages/idCardVerification/idCardVerification"
 

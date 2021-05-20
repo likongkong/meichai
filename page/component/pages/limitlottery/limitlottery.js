@@ -650,7 +650,6 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
       header: {
         'Accept': 'application/json'
       },
-
       success: function (res) {
         _this.data.push_id =  0;
 

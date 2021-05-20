@@ -17,21 +17,21 @@ Page({
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
     time:'',
-    num:1,
+    num:4,
     objectArray: [
       {
-        id: 1,
-        name: '2021-01-01',
+        id: 4,
+        name: '2021-06-12',
         disabled:false
       },
       {
-        id: 2,
-        name: '2021-01-02',
+        id: 5,
+        name: '2021-06-13',
         disabled:false
       },
       {
-        id: 3,
-        name: '2021-01-03',
+        id: 6,
+        name: '2021-06-14',
         disabled:false
       }
     ],
@@ -47,6 +47,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.hideShareMenu();
     wx.showLoading({ title: '加载中...'})
     // 判断是否授权
     this.activsign();
@@ -278,8 +279,8 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    var reshare = app.sharemc();
-    return reshare
+    // var reshare = app.sharemc();
+    // return reshare
   },
 
   bindPickerChange: function(e) {
@@ -297,35 +298,48 @@ Page({
   },
   dateFun(){
     var nowTime = new Date().getTime();
-    var time31 = '1609387200000';
-    var time01 = '1609473600000';
-    var time02 = '1609560000000';
-    var time03 = '1609646400000';
-    if(nowTime>time03){
+    var time11 = '1623384000000';
+    var time12 = '1623470400000';
+    var time13 = '1623556800000';
+    var time14 = '1623643200000';
+
+    if(nowTime>'1623340800000'){
       this.data.objectArray[0].disabled = true;
       this.data.objectArray[1].disabled = true;
       this.data.objectArray[2].disabled = true;
-      this.setData({num:0})
+      this.setData({num:3})
     }else{
-      if(nowTime >= time31 && nowTime < time01){
-        this.data.objectArray[0].disabled = true;
-        this.setData({num:2})
-      }else if(nowTime >= time01 && nowTime < time02){
-        this.data.objectArray[0].disabled = true;
-        this.data.objectArray[1].disabled = true;
-        this.setData({num:3})
-      }else if(nowTime >= time02 || nowTime >= time03){
-        this.data.objectArray[0].disabled = true;
-        this.data.objectArray[1].disabled = true;
-        this.data.objectArray[2].disabled = true;
-        this.setData({num:0})
-      }else{
-        this.data.objectArray[0].disabled = false;
-        this.data.objectArray[1].disabled = false;
-        this.data.objectArray[2].disabled = false;
-        this.setData({num:1})
-      }
+      this.data.objectArray[0].disabled = false;
+      this.data.objectArray[1].disabled = false;
+      this.data.objectArray[2].disabled = false;
+      this.setData({num:4})
     }
+
+    // if(nowTime>time14){
+    //   this.data.objectArray[0].disabled = true;
+    //   this.data.objectArray[1].disabled = true;
+    //   this.data.objectArray[2].disabled = true;
+    //   this.setData({num:3})
+    // }else{
+    //   if(nowTime >= time11 && nowTime < time12){
+    //     this.data.objectArray[0].disabled = true;
+    //     this.setData({num:5})
+    //   }else if(nowTime >= time12 && nowTime < time13){
+    //     this.data.objectArray[0].disabled = true;
+    //     this.data.objectArray[1].disabled = true;
+    //     this.setData({num:6})
+    //   }else if(nowTime >= time13 || nowTime >= time14){
+    //     this.data.objectArray[0].disabled = true;
+    //     this.data.objectArray[1].disabled = true;
+    //     this.data.objectArray[2].disabled = true;
+    //     this.setData({num:3})
+    //   }else{
+    //     this.data.objectArray[0].disabled = false;
+    //     this.data.objectArray[1].disabled = false;
+    //     this.data.objectArray[2].disabled = false;
+    //     this.setData({num:4})
+    //   }
+    // }
     this.setData({
       objectArray:this.data.objectArray
     })

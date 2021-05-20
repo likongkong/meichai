@@ -4,7 +4,7 @@
 
 page{
   /* background:#f4f5f9; */
-  padding-bottom: 230rpx;
+  padding-bottom: 260rpx;
 }
 
 .formWrap{
@@ -76,7 +76,7 @@ page{
   bottom: 0;
   left: 0;
   text-align: center;
-  padding: 20rpx 55rpx 100rpx 55rpx; 
+  padding: 20rpx 55rpx 74rpx 55rpx; 
   box-sizing: border-box;
   background: #fff;
 }

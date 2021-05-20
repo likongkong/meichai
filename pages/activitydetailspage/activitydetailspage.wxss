@@ -287,7 +287,7 @@ page{
   z-index: 3;
   font-size:22rpx;
   color:#58995C;
-  background:url(https://clw.51chaidan.com//images/goods/share3.png) no-repeat;
+  background:#fff url(https://clw.51chaidan.com//images/goods/share3.png) no-repeat;
   background-position:14rpx 8rpx;
   background-size: 30rpx 30rpx;
   text-align: center;
@@ -323,7 +323,7 @@ page{
   z-index: 3;
   font-size:22rpx;
   color:#CD8336;
-  background:url(https://cdn.51chaidan.com/images/auctionActivity/inform.png) no-repeat;
+  background:#fff url(https://cdn.51chaidan.com/images/auctionActivity/inform.png) no-repeat;
   background-position:10rpx 4rpx;
   background-size: 30rpx 30rpx;
   text-align: center;
