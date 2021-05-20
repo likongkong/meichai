@@ -125,6 +125,7 @@
           </view>
         </view>
       </block>
+
       <view wx:if="{{dataInfo.status == 2 && dataInfo.countLotto!=0}}" class='actDetailCon'>
         <view class="actDetailTxt" wx:if='{{askcountdown>0}}'>限时 <text style="color:#f93f45;">{{askcountdown}}s</text> 内助力，免单券翻倍</view>
         <view class="actDetailTxt" wx:else>邀请好友助力提升中奖率</view>
@@ -133,6 +134,7 @@
             <view class="actDetailEve" catchtap="sigListFun" style="margin-left:20rpx">幸运值排行</view>
         </view>
       </view>
+
       <!-- （status==1）或者（status==2 && dataInfo.countLotto==0）为未开始或者未参与抽签-->
       <block wx:if="{{(dataInfo.status == 1)||(dataInfo.status == 2 && dataInfo.countLotto==0)}}">
         <view style="text-align:center;font-size:26rpx;color:#8A8A8A;" catchtap="displayToBSfun">点击参加抽选视为同意 <text style="color:#298DF8;">《订票服务条款》</text></view>
@@ -141,6 +143,7 @@
       <block wx:else>
         <view style="text-align:center;font-size:26rpx;color:#8A8A8A;" catchtap="displayToBSfun">点击查看 <text style="color:#298DF8;">《订票服务条款》</text></view>
       </block>
+      
     </view>
   </view>
   <view class="tabWrap">

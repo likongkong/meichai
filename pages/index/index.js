@@ -1596,10 +1596,16 @@ Page({
     var id = event.currentTarget.dataset.id || event.target.dataset.id;
     var _this = this;
     _this.setData({ jumpdevanningiftr: true });
-    wx.navigateTo({
-      url: "/page/component/pages/limitlottery/limitlottery?list=1&id=" + id,
-      complete: function () {_this.setData({ jumpdevanningiftr: false });}
-    });   
+    if(id=='374855' || id=='374856' || id=='374857'){
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/luckyDraw/luckyDraw?id=" + id
+      });
+    }else{
+      wx.navigateTo({
+        url: "/page/component/pages/limitlottery/limitlottery?list=1&id=" + id,
+        complete: function () {_this.setData({ jumpdevanningiftr: false });}
+      }); 
+    }
   },
   // 在线抽盒机
   bbevebox: function (event) {

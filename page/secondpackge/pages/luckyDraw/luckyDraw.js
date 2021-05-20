@@ -120,6 +120,24 @@ Page({
             subscribedata:res.data.Info.subscribe,
             signTime:dataInfo.pay_time,
           });  
+
+          if(dataInfo.status == 2 && dataInfo.countLotto!=0){
+            let diffTime = (Date.parse(new Date())/1000) - dataInfo.pay_time;
+            if(diffTime<30){
+              _this.cdtime(30-diffTime);
+            }else{
+              _this.setData({
+                askcountdown:0
+              })
+              clearInterval(_this.data.interval);
+            }
+          }else{
+            _this.setData({
+              askcountdown:0
+            })
+            clearInterval(_this.data.interval);
+          }
+
           // 商品详情 
           WxParse.wxParse('article', 'html', dataInfo.actionDetails, _this, 0);
           // 活动结束 显示中奖未中奖弹框
@@ -198,7 +216,7 @@ Page({
               'success': function (res) { 
 
                 _this.getInfo();
-                _this.cdtime();
+                _this.cdtime(30);
               },
               'fail':function(res){},
               'complete': function (res) {}
@@ -234,7 +252,7 @@ Page({
   cdtime: function (cdtime) {
     var _this = this;
     clearInterval(_this.data.interval);
-    var totalSecond = 30;
+    var totalSecond = cdtime;
     var interval =function () {
       var second = totalSecond;// 秒数  
       // 秒位  

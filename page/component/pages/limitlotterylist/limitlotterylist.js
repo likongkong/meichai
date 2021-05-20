@@ -384,9 +384,15 @@ Page({
   // 跳转抽签详情
   limitlotteryd: function(w) {
     var id = w.currentTarget.dataset.gid || w.target.dataset.gid;
-    wx.navigateTo({
-      url: "/page/component/pages/limitlottery/limitlottery?list=1&id=" + id
-    });
+    if(id=='374855' || id=='374856' || id=='374857'){
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/luckyDraw/luckyDraw?id=" + id
+      });
+    }else{
+      wx.navigateTo({
+        url: "/page/component/pages/limitlottery/limitlottery?list=1&id=" + id
+      });
+    }
   },
   // 计算图片大小
   // imageLoadad: function(e) {
