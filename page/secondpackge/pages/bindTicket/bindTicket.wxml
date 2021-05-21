@@ -56,7 +56,6 @@
 
 <tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
 <view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>
-
 <view class="bindUserInfoWrap" wx:if="{{isBindBox}}" catchtouchmove="true"> 
   <view class="bindUserInfoBox">
     <view class="rucInfo">
@@ -64,6 +63,10 @@
       <text style="font-size:34rpx;color:#F8657C;margin-top:20rpx;">{{rcdate}}</text>
       <text style="font-size:26rpx;color:#101010;margin-top:44rpx;">优先入场顺序为:</text>
       <text style="font-size:34rpx;color:#F8657C;margin-top:20rpx;">第{{rcsort}}位</text>
+    </view>
+    <view style="margin-top:35rpx;">
+      <text style="font-size:26rpx;color:#101010;display:block;margin-bottom:10rpx;">注意事项:</text>
+      <text style="font-size:26rpx;color:#101010;display:block;">VIP用户需持本人身份证早上10:00开始验证资格并发放对应号码牌，10:30停止身份核验并开始按顺序入场进入展厅，严禁夜排</text>
     </view>
     <view class="userInfoWrap">
       <view class="userInfoInput">

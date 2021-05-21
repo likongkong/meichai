@@ -87,7 +87,8 @@ Page({
     this.setData({
       id: e.currentTarget.dataset.id,
       sigListdata:[],
-      muSnData:[]
+      muSnData:[],
+      share_uid:0
     });
     this.getInfo();
   },
@@ -452,15 +453,15 @@ Page({
     var _this = this;
     if(this.data.dataInfo.countLotto == 0 || this.data.dataInfo.status == 3 || this.data.dataInfo.status == 1){
       return {
-        title:'我正在美拆抽取展会优先入场资格，快来一起参与吧',
+        title:this.data.dataInfo.shareTitle,
         path: "/page/secondpackge/pages/luckyDraw/luckyDraw?id="+_this.data.id,
-        imageUrl:app.signindata.indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+        imageUrl:this.data.dataInfo.shareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
       }   
     }else{
       return {
-        title:'我正在美拆抽取展会优先入场资格，快来帮我助力吧',
+        title:this.data.dataInfo.shareTitle,
         path: "/page/secondpackge/pages/luckyDraw/luckyDraw?share_uid=" + _this.data.uid + "&share_time=" + _this.data.signTime +'&id='+_this.data.id,
-        imageUrl:app.signindata.indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+        imageUrl:this.data.dataInfo.shareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
       }  
     }
      
@@ -478,15 +479,15 @@ Page({
     };
     if(this.data.dataInfo.countLotto == 0){
       return {
-        title:'我正在美拆抽取展会优先入场资格，快来一起参与吧',
+        title:this.data.dataInfo.shareTitle,
         query:'perayu=1&id='+_this.data.id,
-        imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+        imageUrl:this.data.dataInfo.shareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
       } 
     }else{
       return {
-        title:'我正在美拆抽取展会优先入场资格，快来帮我助力吧',
+        title:this.data.dataInfo.shareTitle,
         query:'share_uid='+_this.data.uid+'&share_time=' + _this.data.signTime+'&perayu=1&id='+_this.data.id,
-        imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+        imageUrl:this.data.dataInfo.shareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
       }
     }
   
@@ -897,10 +898,8 @@ Page({
     })
   },
   jumpWinningResult(){
-    // wx.navigateTo({  
-    //   url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
-    // })
+    wx.navigateTo({  
+      url: "/page/secondpackge/pages/winningResult/winningResult"
+    })
   }
-
-
 })

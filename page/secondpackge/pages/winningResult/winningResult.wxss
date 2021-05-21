@@ -1,0 +1,83 @@
+@import "../../../../pages/signin/signin.wxss";
+@import "../../../../common/newcoupon.wxss";
+@import "../../../../common/tabbar.wxss";
+
+
+page{
+  background: #fff;
+}
+
+.txt{
+  padding: 35rpx 50rpx 0;
+  box-sizing: border-box;
+}
+.txt text{
+  display: block;
+  font-size: 26rpx;
+  color: #666666;
+  margin-bottom: 10rpx;
+  line-height: 34rpx;
+}
+
+.title{
+  font-size: 24rpx;
+  color: #101010;
+  display: block;
+  text-align: center;
+  margin-bottom: 30rpx;
+  margin-top: 40rpx;
+}
+.table{
+  width: 100%;
+  height: 70rpx;
+  background: #E8E8E8;
+  display: flex;
+}
+.table text{
+  display: block;
+  font-size: 24rpx;
+  line-height: 70rpx;
+  text-align: center;
+}
+.table text:first-child{
+  width: 25%;
+  height: 70rpx;
+}
+.table text:nth-child(2){
+  width: 25%;
+  height: 70rpx;
+}
+.table text:last-child{
+  width: 50%;
+  height: 70rpx;
+}
+.tableB{
+  background: #fff;
+  border-bottom: 2rpx solid #E8E8E8;
+}
+.tableB view{
+  display: block;
+  font-size: 24rpx;
+  line-height: 70rpx;
+  text-align: center;
+}
+.tableB view:first-child{
+  width: 25%;
+  height: 70rpx;
+}
+.tableB view:nth-child(2){
+  width: 25%;
+  height: 70rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tableB view:nth-child(2) image{
+  width: 54rpx;
+  height: auto;
+  border-radius: 100%;
+}
+.tableB view:last-child{
+  width: 50%;
+  height: 70rpx;
+}

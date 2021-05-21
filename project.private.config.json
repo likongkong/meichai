@@ -55,26 +55,20 @@
           "scene": null
         },
         {
-          "name": "VIP抽签",
+          "name": "展会vip激活",
           "pathName": "page/secondpackge/pages/luckyDraw/luckyDraw",
           "query": "",
           "scene": null
         },
         {
-<<<<<<< HEAD
-          "name": "展会订阅页",
-          "pathName": "pages/dismantlingbox/dismantlingbox",
-=======
-          "name": "展会VIP激活",
+          "name": "绑定VIP",
           "pathName": "page/secondpackge/pages/bindTicket/bindTicket",
           "query": "",
           "scene": null
         },
         {
-          "name": "邀请函",
-          "pathName": "page/secondpackge/pages/priorityVoting/priorityVoting",
-          "query": "",
->>>>>>> 5de098f465df57bae0407f14b016d2f7fb31f943
+          "name": "中奖名单",
+          "pathName": "page/secondpackge/pages/winningResult/winningResult",
           "scene": null
         }
       ]

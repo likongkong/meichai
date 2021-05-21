@@ -118,6 +118,7 @@
         "pages/buyingTickets/buyingTickets",
         "pages/priorityVoting/priorityVoting",
         "pages/luckyDraw/luckyDraw",
+        "pages/winningResult/winningResult",
         "pages/bindTicket/bindTicket",
         "pages/ticketRcSort/ticketRcSort",
         "pages/entityLuckyDraw/entityLuckyDraw",

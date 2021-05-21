@@ -1,0 +1,48 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+<import src="../../../../wxParse/wxParse.wxml" />
+
+<view class="wrap">
+  <view class="txt">
+    <text>MCTS睡衣派对VIP门票中奖名单公布啦！本门票包含展会入场顺序，本次中奖结果将以激活码的形式发放，请于6月10日24点前进行绑定，优先入场需出示绑定信息的身份证且扫码出示入场序号进行排队入场。</text>
+    <text>为保证各位粉丝的个人信息安全，我们进行了信息保护，若出现头像及昵称露出部分数字相同的粉丝，可联系美拆官方客服微信查询，微信号：Meichaimeichai</text>
+  </view>
+  <view class="itemsWrap">
+    <view>
+      <text class="title">6月12日</text>
+      <view class="table">
+        <text>入场顺序</text>
+        <text>头像</text>
+        <text>昵称</text>
+      </view>
+      <view class="table tableB">
+        <view>1</view>
+        <view>
+           <image src="https://thirdwx.qlogo.cn/mmopen/vi_32/CXACVCdsAddnGHQZneON0gNAq9LCJjA7b1q60kLXtDLOmYMtOQlK5s2DB2FmehvQJiawT0Iv5KZdfFzPUlxeYJg/132" mode="widthFix"></image>
+        </view>
+        <view>贾超</view>
+      </view>
+    </view>
+    <view>
+      <text class="title">6月12日</text>
+      <view class="table">
+        <text>入场顺序</text>
+        <text>头像</text>
+        <text>昵称</text>
+      </view>
+      <view class="table tableB">
+        <view>1</view>
+        <view>
+           <image src="https://thirdwx.qlogo.cn/mmopen/vi_32/CXACVCdsAddnGHQZneON0gNAq9LCJjA7b1q60kLXtDLOmYMtOQlK5s2DB2FmehvQJiawT0Iv5KZdfFzPUlxeYJg/132" mode="widthFix"></image>
+        </view>
+        <view>贾超</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+
+
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;width: 100%;z-index: 30;' catchtap='pullupsignin'></view>
