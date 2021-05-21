@@ -174,3 +174,32 @@
   display: block;
   width: 100%!important;
 }
+.addGoodsIBoxTxt{
+  width: 100%;
+  height: 60rpx;
+  background: rgba(0,0,0,.7);
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+.addGoodsIBoxTxt view{
+  padding: 0 20rpx;
+  font-size:24rpx;
+  color:#fff;
+  line-height: 60rpx;
+}
+.buyingTScroll{
+  width:100%;
+  white-space: nowrap;
+}
+.buyingTScrEve{
+  display: inline-block;
+  margin-left:18rpx;
+  position: relative;
+}
+.buyingTScrImg{
+  display: block;
+  height: 220rpx;
+  border-radius: 10rpx;
+  margin:auto;
+}

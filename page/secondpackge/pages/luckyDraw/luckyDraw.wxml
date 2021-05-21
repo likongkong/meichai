@@ -302,7 +302,8 @@
 <!-- 已中签 和 未中签 提示   -->
 <view wx:if='{{wonOrNot}}' catchtouchmove="true" style='z-index:999;width:100%;height:100%;position:fixed;top:0;left:0;'>
   <view style='width:100%;height:100%;background:#000;opacity:.5;' catchtap="wonOrNot"></view>
-  <view style='width:100%;height:820rpx;background:#fff;position:absolute;bottom:0;border-radius:16rpx 16rpx 0 0;'>
+  <!-- height:820rpx; -->
+  <view style='width:100%;background:#fff;position:absolute;bottom:0;border-radius:16rpx 16rpx 0 0;padding-bottom: 60rpx;'>
 
       <block wx:if='{{dataInfo.isWinner}}'>  
           <view class="winningTips" style="font-size:36rpx;text-align:center;">恭喜您！获得{{dataInfo.date}}VIP优先入场资格</view>
@@ -311,17 +312,33 @@
           <view class="winningTipsName" style="padding:20rpx 0 0 0;font-size:30rpx;position: relative;width:430rpx;">激活码 <block wx:if='{{displayClearText}}'>{{dataInfo.cdkey}}</block><block wx:else>****************</block><image class="displayClearTextImg" catchtap="is_dct" mode="aspectFit" src="{{displayClearText?'http://cdn.51chaidan.com/images/sign/show.png':'http://cdn.51chaidan.com/images/sign/hide.png'}}"></image></view>
           <view class="winningTipsName" style="padding:15rpx 0 20rpx 0;font-size:30rpx;">入场顺序 <text style="color:#E95159;font-size:50rpx;">NO.{{dataInfo.sort}}</text></view>
           
-          <view class="clickButton" style="background:#fff;">
-            <view class="clickButtonEve" catchtap="copyTBL" style="background:#FCA700;float:left;">复制激活码</view>
-            <view class="clickButtonEve" catchtap="deactivation" style="background:#F8657C;float:right;">去激活</view>
+          <view class="clickButton" style="background:#fff;width:700rpx;display: flex;justify-content: space-between;align-items: center;">
+            <view class="clickButtonEve" catchtap="jumpWinningResult" style="width: 220rpx;background:#FCA700;">中奖名单</view>
+            <view class="clickButtonEve" catchtap="copyTBL" style="width: 220rpx;background:#FCA700;">复制激活码</view>
+            <view class="clickButtonEve" catchtap="deactivation" style="width: 220rpx;background:#F8657C;">去激活</view>
           </view>
       </block>
       <block wx:else>
-          <view class="winningTips" style="color:#8A8A8A;height:100rpx;line-height:100rpx;">很遗憾，您未中签</view>
-          <view class="notWinTipsTxt">您还可以购买其他门票哦，快去购买吧</view>
-          <image class="winningTipsImg" style="width:420rpx;height:420rpx;margin-top:16rpx;" mode="aspectFit" src="{{dataInfo.imgAward}}"></image>
-          <view class="winningTipsName">门票玩具</view>
-          <view class="clickButton" catchtap="acetlistfun">去购买门票</view>
+          <view class="winningTips" style="color:#8A8A8A;font-size:36rpx;text-align:center;">很遗憾，您未中签</view>
+          <view class="winningTipsTxt">您还可以购买其他门票哦，快去购买吧</view>
+          <!-- <image class="winningTipsImg" style="width:420rpx;height:420rpx;margin-top:16rpx;" mode="aspectFit" src="{{dataInfo.imgAward}}"></image>
+          <view class="winningTipsName">门票玩具</view> -->
+          <view style="width: 700rpx;margin: 0 auto 50rpx;">
+            <scroll-view class="buyingTScroll" scroll-x="true">
+              <view class="buyingTScrEve" wx:for='{{dataInfo.goodsInfo}}' wx:key='key'>
+                  <!-- <view class="oneDayTour" wx:if='{{item.singleDayJudgment}}'>单日游玩</view> -->
+                  <image mode="heightFix" class="buyingTScrImg" src="{{item.goods_img}}"></image>
+                  <view class="addGoodsIBoxTxt" style="background:#fff;">
+                      <view style="color:#101010;">{{item.goods_name}}</view>
+                      <view style="color:#F8657C;">￥{{item.price}}</view>
+                  </view>
+              </view>
+            </scroll-view>
+          </view>
+          <view class="clickButton" style="background:#fff;">
+            <view class="clickButtonEve" catchtap="jumpWinningResult" style="background:#FCA700;float:left;">中奖名单</view>
+            <view class="clickButtonEve" catchtap="acetlistfun" style="background:#F8657C;float:right;">去购买门票</view>
+          </view>
       </block>
   </view>
 </view>
