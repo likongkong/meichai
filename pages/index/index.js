@@ -1598,7 +1598,8 @@ Page({
     _this.setData({ jumpdevanningiftr: true });
     if(id=='374855' || id=='374856' || id=='374857'){
       wx.navigateTo({
-        url: "/page/secondpackge/pages/luckyDraw/luckyDraw?id=" + id
+        url: "/page/secondpackge/pages/luckyDraw/luckyDraw?id=" + id,
+        complete: function () {_this.setData({ jumpdevanningiftr: false });}
       });
     }else{
       wx.navigateTo({
