@@ -60,7 +60,7 @@
       </view>
 
       <view class="addGoods" wx:if='{{goodsInfo&&goodsInfo.length!=0}}'>
-         <scroll-view class="buyingTScroll" scroll-x="true" data-eveid='{{drawInfo.activity_id}}' data-type='6' data-id='{{drawInfo.activity_id}}'  catchtap="{{drawInfo.status==1 || drawInfo.status==2?'evesubscrfun':''}}">
+         <scroll-view class="buyingTScroll" scroll-x="true" data-eveid='{{drawInfo.activity_id}}' data-type='7' data-id='{{drawInfo.activity_id}}'  catchtap="{{drawInfo.status==1 || drawInfo.status==2?'evesubscrfun':''}}">
             <view class="buyingTScrEve" wx:for='{{goodsInfo}}' wx:key='key'>
                  <!-- <view class="oneDayTour" wx:if='{{item.singleDayJudgment}}'>单日游玩</view> -->
                  <image mode="heightFix" class="buyingTScrImg" src="{{item.goods_img}}"></image>
