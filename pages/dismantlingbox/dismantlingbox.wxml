@@ -60,7 +60,7 @@
       </view>
 
       <view class="addGoods" wx:if='{{goodsInfo&&goodsInfo.length!=0}}'>
-         <scroll-view class="buyingTScroll" scroll-x="true" data-eveid='{{drawInfo.activity_id}}' data-type='7' data-id='{{drawInfo.activity_id}}'  catchtap="{{drawInfo.status==1 || drawInfo.status==2?'evesubscrfun':''}}">
+         <scroll-view class="buyingTScroll" scroll-x="true" data-eveid='{{drawInfo.activity_id}}' data-type='7' data-id='{{drawInfo.activity_id}}'  catchtap="{{drawInfo.isBuyTickets?'jumpposition':'evesubscrfun'}}">
             <view class="buyingTScrEve" wx:for='{{goodsInfo}}' wx:key='key'>
                  <!-- <view class="oneDayTour" wx:if='{{item.singleDayJudgment}}'>单日游玩</view> -->
                  <image mode="heightFix" class="buyingTScrImg" src="{{item.goods_img}}"></image>
@@ -70,7 +70,9 @@
                  </view>
             </view>
          </scroll-view>
-         <view class="billingSubscr" data-type='7' catchtap="evesubscrfun">开票订阅</view>
+         <view class="billingSubscr" wx:if='{{drawInfo.isBuyTickets}}' data-type='7' style="background:#F8657C;" catchtap="jumpposition">去购票</view>
+         <view class="billingSubscr" wx:else data-type='7' catchtap="evesubscrfun">开票订阅</view>
+         
       </view>
 
       <!-- <view wx:if="{{goodsInfo.length!=0}}" class="addGoods" catchtap="jumpposition" style="margin-bottom:20rpx;">
