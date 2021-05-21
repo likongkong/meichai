@@ -47,11 +47,25 @@ Page({
         wx.stopPullDownRefresh();
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
-           res.data.Info.priorify.tel =  _this.plusXing(res.data.Info.priorify.tel,4,3)
-           res.data.Info.priorify.idcard =  _this.plusXing(res.data.Info.priorify.idcard,6,4)
-           _this.setData({
-            priorify:res.data.Info.priorify
-           })
+          if(res.data.Info.priorify.length == 0){
+            wx.showToast({
+              title: '暂无优先入场资格',
+              icon: 'none',
+              mask:true,
+              duration:3000
+            });  
+            setTimeout(function(){
+              wx.navigateTo({  
+                url: "/pages/dismantlingbox/dismantlingbox"
+              })
+            },3000)
+          }else{
+            res.data.Info.priorify.tel =  _this.plusXing(res.data.Info.priorify.tel,4,3)
+            res.data.Info.priorify.idcard =  _this.plusXing(res.data.Info.priorify.idcard,6,4)
+            _this.setData({
+             priorify:res.data.Info.priorify
+            })
+          }
         }else{
           wx.showToast({
             title: res.data.Msg,
@@ -83,7 +97,6 @@ Page({
       loginid: app.signindata.loginid,
     });  
     _this.getInfo();
-    
   },
   activsign: function () {
     // 判断是否授权 
