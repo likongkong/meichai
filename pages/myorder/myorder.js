@@ -535,6 +535,7 @@ Page({
         ds: arr[j][0].ds||'',
         // 判断是否是活动
         order_type:arr[j][0].order_type,
+        isFullTicket:!arr[j][0].isFullTicket,
         gcover: arr[j][0].gcover,
         goods_price: parseFloat(arr[j][0].goods_amount)/parseFloat(arr[j][0].gnumber),
         gname: arr[j][0].gname||'',
@@ -582,7 +583,7 @@ Page({
         isShareGood : notAllowShareGoodsId.length!=0&&notAllowShareGoodsId.indexOf(arr[j][0].gid) > -1 ? false : true,
         toyshowTips:arr[j][0].toyshowTips || '',
         canChangedAddress:arr[j][0].canChangedAddress,
-        status_detail:arr[j][0].status_detail || 0
+        status_detail:arr[j][0].status_detail || 0,
       })
     };   
     if (arrchil && arrchil.length != 0){
