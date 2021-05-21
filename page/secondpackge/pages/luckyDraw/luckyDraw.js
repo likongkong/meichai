@@ -868,6 +868,9 @@ Page({
 
     
   },
+  sigListFuntip(){
+    this.setData({signatureList:!this.data.signatureList})
+  },
   //  复制内容到粘贴板
   copyTBL: function (e) {
     var _this = this;
