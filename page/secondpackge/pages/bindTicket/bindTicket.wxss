@@ -178,3 +178,5 @@ page{
   display: block;
   width: 100%!important;
 }
+
+.wxParse-inline{font-size:30rpx;}
