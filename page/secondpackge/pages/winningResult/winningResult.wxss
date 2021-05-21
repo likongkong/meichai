@@ -81,3 +81,27 @@ page{
   width: 50%;
   height: 70rpx;
 }
+
+.tabWrap{
+  width: 600rpx;
+  margin: 60rpx auto 35rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.tabWrap view{
+  width: 200rpx;
+  height: 60rpx;
+  font-size: 26rpx;
+  text-align: center;
+  line-height: 60rpx;
+  border: 2rpx solid #E8E8E8;
+}
+.tabWrap view:nth-child(2){
+  border-left: none;
+  border-right: none;
+}
+.active{
+  background: #666666;
+  color: #fff;
+}

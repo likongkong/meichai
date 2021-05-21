@@ -18,8 +18,35 @@ Page({
     tgabox:false,
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
+    current:0,
+    // 上拉加载数据
+    pid: 0,
+    limit:20,
+    loadprompt:true,
+    processingData:[],
+    dataList:[]
   },
 
+  tabqh(e){
+    this.setData({
+      current: e.currentTarget.dataset.ind
+    }); 
+    if(this.data.current==0){
+      this.setData({
+        processingData:this.data.twelve
+      }); 
+    }else if(this.data.current==1){
+      this.setData({
+        processingData:this.data.thirteen
+      }); 
+    }else{
+      this.setData({
+        processingData:this.data.fourteen
+      }); 
+    }
+    this.reset();
+    this.processingDataPaging()
+  },
 
   plusXing (str,frontLen,endLen) {
     var len = str.length-frontLen-endLen;
@@ -33,11 +60,11 @@ Page({
   getInfo(){
     var _this = this;
     wx.showLoading({ title: '加载中...'})
-    var q = Dec.Aese('mod=bind&operation=index&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
-    console.log('mod=bind&operation=index&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+    var q = Dec.Aese('mod=lotto&operation=priorityAwardList');
+    console.log('mod=lotto&operation=priorityAwardList')
 
     wx.request({
-      url: app.signindata.comurl + 'toy.php' + q,
+      url: app.signindata.comurl + 'spread.php' + q,
       method: 'GET',
       header: {
         'Accept': 'application/json'
@@ -48,12 +75,22 @@ Page({
         wx.stopPullDownRefresh();
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
-          res.data.Info.stopTime = _this.toDatehd(res.data.Info.stopTime);
            _this.setData({
             dataInfo:res.data.Info,
-            priority:res.data.List.priority,
+            // twelve:res.data.List.listOfWinningResults.twelve,
+            // thirteen:res.data.List.listOfWinningResults.thirteen,
+            // fourteen:res.data.List.listOfWinningResults.fourteen,
+            // twelve:res.data.List.listOfWinningResults.fourteen,
+            // thirteen:res.data.List.listOfWinningResults.fourteen,
+            // fourteen:res.data.List.listOfWinningResults.fourteen,
            })
-          WxParse.wxParse('article', 'html', res.data.Info.actionDetails, _this, 0);
+
+           _this.data.twelve = res.data.List.listOfWinningResults.twelve;
+           _this.data.thirteen = res.data.List.listOfWinningResults.thirteen;
+           _this.data.fourteen = res.data.List.listOfWinningResults.fourteen;
+
+           _this.data.processingData = res.data.List.listOfWinningResults.twelve;
+           _this.processingDataPaging()
         }else{
           wx.showToast({
             title: res.data.Msg,
@@ -64,6 +101,58 @@ Page({
         }
       }
     }); 
+  },
+
+   // 处理列表数据分页
+   processingDataPaging(){
+    let _this = this;
+    let pid = _this.data.pid;
+    let limit = _this.data.limit;
+    let dataList = _this.data.processingData;
+    console.log(dataList)
+    if(dataList.length == 0){
+      wx.showToast({
+        title: '暂无数据',
+        icon: 'none',
+        mask:true,
+        duration:1000
+      });  
+      return false;
+    }
+
+    let data = [];
+    if(pid == 0){
+      for (let i=0; i < limit; i++) {
+        if(dataList[i]!=undefined){
+          data.push(dataList[i])
+        }else{
+          _this.data.loadprompt = false;
+        }
+      }
+    }else{
+      let num = Number(pid*limit);
+      let len = Number(num+limit);
+      for (let i=num; i < len; i++) {
+        if(dataList[i]!=undefined){
+          data.push(dataList[i])
+        }else{
+          _this.data.loadprompt = false;
+        }
+      }
+    }
+    console.log(data,pid)
+    setTimeout(function(){
+      // 刷新完自带加载样式回去
+      wx.stopPullDownRefresh();
+      wx.hideLoading();
+    },500)
+    _this.setData({
+      dataList: [..._this.data.dataList,...data]
+    })
+  },
+
+  reset(){
+    this.setData({pid:0,dataList:[],loadprompt:true,nodata:false})
   },
 
   /**
@@ -202,6 +291,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    this.reset();
     this.getInfo();
   },
 
@@ -209,7 +299,18 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    if(this.data.loadprompt){
+      this.data.pid = ++this.data.pid;
+      // 处理数据分页    
+      wx.showLoading({ title: '加载中...'})    
+      this.processingDataPaging();
+    }else{
+      wx.showToast({
+        title: '没有更多数据了',
+        icon: 'none',
+        duration: 2000
+      })
+    }
   },
 
   /**

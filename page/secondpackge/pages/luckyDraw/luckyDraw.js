@@ -162,7 +162,7 @@ Page({
             title: res.data.Msg,
             icon: 'none',
             mask:true,
-            duration:1000
+            duration:2000
           });  
         }
 
