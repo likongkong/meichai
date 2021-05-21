@@ -417,11 +417,24 @@ Page({
         wx.stopPullDownRefresh();
         _this.setData({
           ticketingInOne:res.data.rule || '',
-          ticketingInTwo:res.data.tip || '',
-          agreement:res.data.agreement || ''
+          ticketingInTwo:res.data.tip || ''
         });
       }
     })
+
+    wx.request({
+      url: 'https://cdn.51chaidan.com/produce/ticketsLotto.json?time='+app.signindata.appNowTime,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('规则==========',res)
+        _this.setData({
+          agreement:res.data.clause || ''
+        });
+      }
+    })
+
+
   },
 
 
