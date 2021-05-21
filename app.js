@@ -1588,6 +1588,7 @@ App({
 
 // priorityVoting  优先权抽选
 // luckyDraw  展会VIP抽签
+// winningResult  展会抽签中奖名单
 // bindTicket  绑定展会门票
 // ticketRcSort  门票入场顺序
 // entityLuckyDraw  实物刮刮卡
