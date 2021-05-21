@@ -32,8 +32,8 @@ Page({
   getInfo(){
     var _this = this;
     wx.showLoading({ title: '加载中...'})
-    var q = Dec.Aese('mod=bind&operation=detail&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&keyDay=' + _this.data.keyDay);
-    console.log('mod=bind&operation=detail&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&keyDay=' + _this.data.keyDay)
+    var q = Dec.Aese('mod=bind&operation=detail&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
+    console.log('mod=bind&operation=detail&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
 
     wx.request({
       url: app.signindata.comurl + 'toy.php' + q,
@@ -71,9 +71,10 @@ Page({
   onLoad: function (options) {
     // 判断是否授权
     var _this = this;
-    _this.data.keyDay = options.keyDay;
+    // _this.data.keyDay = options.keyDay;
     _this.activsign();
     // this.onLoadfun(); 
+    wx.hideShareMenu();
   },
   onLoadfun:function(){
     var _this = this;

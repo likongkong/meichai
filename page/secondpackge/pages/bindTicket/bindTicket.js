@@ -403,29 +403,19 @@ Page({
    */
   onShareAppMessage: function () {
     var _this = this;
-    return {
-      title:'我正在美拆抽取展会优先入场资格，快来一起参与吧',
-      path: "/page/secondpackge/pages/luckyDraw/luckyDraw?id="+_this.data.id,
-      imageUrl:app.signindata.indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
-    } 
-  },
-  // /**
-  //  * 用户点击右上角分享
-  //  */
-  onShareTimeline:function(){
-    var _this = this;
     var indexShare = app.signindata.indexShare || [];
     var indexShareNum = Math.floor(Math.random() * indexShare.length) || 0;
     var indexShareImg = '';
     if(indexShare.length!=0 && indexShare[indexShareNum]){
-      indexShareImg = indexShare[indexShareNum]+'?time=' + Date.parse(new Date());;
+      indexShareImg = indexShare[indexShareNum]+'?time=' + Date.parse(new Date());
     };
     return {
-      title:'我正在美拆抽取展会优先入场资格，快来一起参与吧',
-      query:'perayu=1&id='+_this.data.id,
+      title:app.signindata.titleShare ,
+      path: "/pages/dismantlingbox/dismantlingbox",
       imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
     } 
-  },  
+  },
+
 
   // 跳转入场顺序
   jumpTicketRcSort(e){
