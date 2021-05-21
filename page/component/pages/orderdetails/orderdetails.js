@@ -408,6 +408,10 @@ Page({
       wx.navigateTo({   
         url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + activity_id
       });
+    } else if(order_type == 27){
+      wx.navigateTo({   
+        url: "/page/secondpackge/pages/luckyDraw/luckyDraw?id=" + activity_id
+      });
     } else{
       wx.navigateTo({    
         url: "../../../../pages/detailspage/detailspage?gid=" + gid
