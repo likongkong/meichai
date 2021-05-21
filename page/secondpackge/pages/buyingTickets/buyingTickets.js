@@ -51,7 +51,8 @@ Page({
     buyNowOrOppor:false,
     isSubscribe:false,
 
-    showSubscription:true
+    showSubscription:true,
+    cartId:''
 
   },
   // 订阅授权
@@ -85,7 +86,8 @@ Page({
     identity[ind].isCheck = true;
     this.setData({
       identity:identity,
-      iid:identity[ind].id || ''
+      iid:identity[ind].id || '',
+      cartId:''
     });
 
   },
@@ -135,6 +137,9 @@ Page({
     } else if(this.data.tabTwoId == ''){
       app.showToastC('请选择票档')
       return false;
+    }else if(this.data.cartId){
+      this.paymentmony(this.data.cartId)
+      return false;
     };  
 
 
@@ -169,7 +174,9 @@ Page({
         wx.hideLoading()
         console.log('提交订单',res)
         if (res.data.ReturnCode == 200) {
-
+           _this.setData({
+             cartId:res.data.Info.cartId
+           });
            _this.paymentmony(res.data.Info.cartId)
         }else{
           if(res.data.Msg){
@@ -263,7 +270,8 @@ Page({
           url: "/page/secondpackge/pages/idCardVerification/idCardVerification"
       });
       this.setData({
-        realNameSystem:false
+        realNameSystem:false,
+        cartId:''
       })
   },
 
@@ -280,7 +288,10 @@ Page({
       app.showToastC('请选择票档')
       return false;
     };
-    this.setData({buyabulletframe:!this.data.buyabulletframe})
+    this.setData({
+      buyabulletframe:!this.data.buyabulletframe,
+      cartId:''
+    })
   },
   priceBreakBoxFun:function(){
     this.setData({
@@ -816,7 +827,10 @@ Page({
                     title: '删除成功',
                     icon: 'none',
                     duration: 1500
-                  })        
+                  })    
+                  _this.setData({
+                    cartId:''
+                  })    
                   if(queData.isCheck){
                     identity.splice(ind,1);
                     var iid = '';
