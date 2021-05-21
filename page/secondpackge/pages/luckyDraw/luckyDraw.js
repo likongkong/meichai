@@ -610,7 +610,7 @@ Page({
     var _this = this;
     wx.showModal({
       title: '提示',
-      content: _this.data.subscribeCouponTip || '订阅成功,开售前通过微信发送提醒',
+      content: _this.data.subscribeCouponTip || '订阅成功',
       showCancel: false,
       success: function (res) {
         _this.setData({
