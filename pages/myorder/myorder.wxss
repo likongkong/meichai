@@ -175,9 +175,13 @@
   overflow:hidden;
 }
 .wholebottomadd{
-  min-height: 78rpx;
+  min-height: 2rpx;
   width: 94%;
-  padding: 0 3% 10rpx;
+  padding: 0 3% 20rpx;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
   /* overflow:hidden; */
 }
 .wholebottomaddright{
@@ -472,4 +476,10 @@
   right: 20rpx;
   margin: auto;
   font-size: 24rpx;
+}
+.wholebottomadd view{
+   margin:0 20rpx 0 0 !important;
+}
+.wholebottomadd view:last-child{
+  margin:0 0 0 0 !important;
 }
