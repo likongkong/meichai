@@ -237,7 +237,7 @@
 
 <!-- 抽签排行榜  -->
 <view wx:if='{{signatureList}}' catchtouchmove="true" style='z-index:999;width:100%;height:100%;position:fixed;top:0;left:0;'>
-  <view style='width:100%;height:100%;background:#000;opacity:.5;' catchtap="sigListFun"></view>
+  <view style='width:100%;height:100%;background:#000;opacity:.5;' catchtap="sigListFuntip"></view>
   <view style='width:100%;height:1200rpx;background:#fff;position:absolute;bottom:0;border-radius:16rpx 16rpx 0 0;'>
       
       <view class="sListHeadB">
