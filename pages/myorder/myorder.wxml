@@ -542,8 +542,8 @@
                             分享好友
                         </view>
 
-                        <view wx:if='{{item.order_type==27 && item.isFullTicket}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
-                            等待开奖支付尾款，未中奖原路退回
+                        <view wx:if='{{item.order_type==27}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
+                            等待开奖<block wx:if='{{item.isFullTicket}}'>支付尾款</block>，未中奖原路退回
                         </view>
 
                         <view class='wholebottomaddright sharebox redborcol' style='background:#42bd56;color:#fff;margin-right:10rpx;border:1rpx solid #fff;' wx:if='{{item.isToyCabinet}}' catchtap='jumpowntoy'>
@@ -588,8 +588,8 @@
                             分享好友
                         </view>     
 
-                        <view wx:if='{{item.order_type==27 && item.isFullTicket}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
-                            等待开奖支付尾款，未中奖原路退回
+                        <view wx:if='{{item.order_type==27}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
+                            等待开奖<block wx:if='{{item.isFullTicket}}'>支付尾款</block>，未中奖原路退回
                         </view>             
 
                         <view class='wholebottomaddright sharebox redborcol' style='background:#42bd56;color:#fff;margin-right:10rpx;border:1rpx solid #fff;' wx:if='{{item.isToyCabinet}}' catchtap='jumpowntoy'>
@@ -621,8 +621,8 @@
                             分享好友
                         </view> 
 
-                        <view wx:if='{{item.order_type==27 && item.isFullTicket}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
-                            等待开奖支付尾款，未中奖原路退回
+                        <view wx:if='{{item.order_type==27}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
+                            等待开奖<block wx:if='{{item.isFullTicket}}'>支付尾款</block>，未中奖原路退回
                         </view> 
 
                         <view class='wholebottomaddright sharebox redborcol' wx:if="{{item.order_type == 14 && !isBlindBoxDefaultAddress}}" style='width: 160rpx;color:#42bd56;margin-right:10rpx;border:1rpx solid #42bd56;' catchtap="goAddress">
@@ -654,8 +654,8 @@
                             分享好友
                         </view> 
 
-                        <view wx:if='{{item.order_type==27 && item.isFullTicket}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
-                            等待开奖支付尾款，未中奖原路退回
+                        <view wx:if='{{item.order_type==27}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
+                            等待开奖<block wx:if='{{item.isFullTicket}}'>支付尾款</block>，未中奖原路退回
                         </view>                
                         
                         <view class='wholebottomaddright sharebox redborcol' style='background:#42bd56;color:#fff;margin-right:10rpx;border:1rpx solid #fff;' wx:if='{{item.isToyCabinet}}' catchtap='jumpowntoy'>
@@ -695,8 +695,8 @@
                             分享好友
                         </view>   
 
-                        <view wx:if='{{item.order_type==27 && item.isFullTicket}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
-                            等待开奖支付尾款，未中奖原路退回
+                        <view wx:if='{{item.order_type==27}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
+                            等待开奖<block wx:if='{{item.isFullTicket}}'>支付尾款</block>，未中奖原路退回
                         </view>
                         
                         <view class='wholebottomaddright sharebox redborcol' wx:if="{{item.order_type == 14 && !item.isToyCabinet && !isBlindBoxDefaultAddress}}" style='width: 160rpx;color:#42bd56;margin-right:10rpx;border:1rpx solid #42bd56;' catchtap="goAddress">
@@ -732,8 +732,8 @@
                         
                   
 
-                        <view wx:if='{{item.order_type==27 && item.isFullTicket}}'>
-                            等待开奖支付尾款，未中奖原路退回
+                        <view wx:if='{{item.order_type==27}}'>
+                            等待开奖<block wx:if='{{item.isFullTicket}}'>支付尾款</block>，未中奖原路退回
                         </view>
                         
                 <view class='wholebottomaddright' wx:if='{{item.order_type==1}}' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;margin-right:10rpx;' data-ind='{{index}}' bindtap='personalhomepage'>
@@ -753,8 +753,8 @@
                             分享好友
                         </view> 
 
-                        <view wx:if='{{item.order_type==27 && item.isFullTicket}}'>
-                            等待开奖支付尾款，未中奖原路退回
+                        <view wx:if='{{item.order_type==27}}'>
+                            等待开奖<block wx:if='{{item.isFullTicket}}'>支付尾款</block>，未中奖原路退回
                         </view>
                     
                         <view class='wholebottomaddright' style='margin-right:20rpx;position: relative;' data-oid='{{item.oid}}' data-gcover='{{item.gcover}}' bindtap='lookatthelogistics'>查看物流</view> 
@@ -778,8 +778,8 @@
                             分享好友
                         </view> 
 
-                        <!-- <view wx:if='{{item.order_type==27 && item.isFullTicket}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
-                            等待开奖支付尾款，未中奖原路退回
+                        <!-- <view wx:if='{{item.order_type==27}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
+                            等待开奖<block wx:if='{{item.isFullTicket}}'>支付尾款</block>，未中奖原路退回
                         </view>    -->
                                 
                     </view>
@@ -791,8 +791,8 @@
                             分享好友
                         </view>    
 
-                        <view wx:if='{{item.order_type==27 && item.isFullTicket}}'>
-                            等待开奖支付尾款，未中奖原路退回
+                        <view wx:if='{{item.order_type==27}}'>
+                            等待开奖<block wx:if='{{item.isFullTicket}}'>支付尾款</block>，未中奖原路退回
                         </view>
 
                                         
@@ -812,8 +812,8 @@
                             分享好友
                         </view>    
 
-                        <view wx:if='{{item.order_type==27 && item.isFullTicket}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
-                            等待开奖支付尾款，未中奖原路退回
+                        <view wx:if='{{item.order_type==27}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
+                            等待开奖<block wx:if='{{item.isFullTicket}}'>支付尾款</block>，未中奖原路退回
                         </view>  
 
                     </view>  
