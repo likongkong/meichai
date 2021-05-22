@@ -180,3 +180,44 @@ page{
 }
 
 .wxParse-inline{font-size:30rpx;}
+
+
+.twiceConfirmMask{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.twiceConfirmBox{
+  width: 424rpx;
+  background: #fff;
+  border-radius: 10rpx;
+  padding: 35rpx 35rpx;
+  box-sizing: border-box;
+}
+.twiceConfirmBox text{
+  display: block;
+  font-size:24rpx;
+  color:#101010;
+}
+.twiceConfirmBox text:first-child{
+  text-align: center;
+  margin-bottom: 35rpx;
+}
+.confirm{
+  width: 250rpx;
+  height: 50rpx;
+  font-size: 22rpx;
+  color: #fff;
+  line-height: 50rpx;
+  text-align: center;
+  background: #F8657C;
+  border-radius: 10rpx;
+  margin: 35rpx auto 0;
+}

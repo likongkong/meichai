@@ -24,7 +24,8 @@ Page({
     rccdkey:'',
     consignee:'',
     mobile:'',
-    idcard:''
+    idcard:'',
+    isTwiceConfirmMask:false
   },
 
   tabChangeFun(e){
@@ -154,10 +155,9 @@ Page({
     }
   },
 
-  bindUserTicket(){
-    var _this = this;
 
-    console.log(this.data.consignee,this.data.mobile,this.data.idcard)
+  twiceConfirm(){
+    var _this = this;
     if(this.data.consignee==''){
       wx.showToast({
         title: '请输入姓名',
@@ -212,6 +212,26 @@ Page({
       return false;
     }
 
+    this.setData({
+      isTwiceConfirmMask: true,
+    })
+  },
+
+  hideBindBox(){
+    this.setData({
+      isBindBox: false,
+    })
+  },
+
+  hideTwiceConfirmMask(){
+    this.setData({
+      isTwiceConfirmMask: false,
+    })
+  },
+
+  bindUserTicket(){
+    var _this = this;
+    console.log(this.data.consignee,this.data.mobile,this.data.idcard)
     wx.showLoading({ title: '加载中...'})
     var q = Dec.Aese('mod=bind&operation=bindCDKEY&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&cdkey=' +_this.data.rccdkey + '&consignee=' +_this.data.consignee + '&mobile=' +_this.data.mobile + '&idcard=' +_this.data.idcard);
     console.log('绑定用户信息======','mod=bind&operation=checkCDKEY&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&cdkey=' +_this.data.cdKeyinputValue)
@@ -235,6 +255,8 @@ Page({
           setTimeout(function(){
             _this.setData({
               isBindBox: false,
+              isTwiceConfirmMask: false,
+              cdKeyinputValue:''
             })
             _this.getInfo();
           },1500)
