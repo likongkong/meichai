@@ -2,7 +2,7 @@ var Aes = require('crypto-js.js');  //引用AES源码js
 
 var env = 'online';   //线上
 // var env = 'test';  //测试
-var versionnumber = '11.5.4';
+var versionnumber = '11.5.7';
 
 var key = env=='online'?Aes.enc.Utf8.parse("danzhuan1chaijia"):Aes.enc.Utf8.parse("danzhuanichaijia");
 // 公共地址 接口
@@ -164,6 +164,8 @@ function getdoubleEleven(_this, app) {
     });
   };
 }
+
+console.log('envVersion',__wxConfig.envVersion);
 
 module.exports.getdoubleEleven = getdoubleEleven;
 module.exports.comurl = comurl;
