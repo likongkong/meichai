@@ -42,9 +42,10 @@ Page({
             content: '领取成功',
             showCancel: false,
             success: function (res) {
-              wx.redirectTo({
-                url: "/pages/index/index"
-              });
+              // wx.redirectTo({
+              //   url: "/pages/index/index"
+              // });
+              this.getData()
             }
           });
          }else{
