@@ -71,11 +71,10 @@
 		<image class='winningthepimg' src='http://www.51chaidan.com/images/FreeSheet/WinningThePrize.png'></image>
 	</view>
  
-
 	<!--  测试  -->
-	<view style='height:220rpx;width:100%;text-align:center; display: table;position: relative;' class='rotate' catchtap='jumpxinxi'>
+	<!-- <view style='height:220rpx;width:100%;text-align:center; display: table;position: relative;' class='rotate' catchtap='jumpxinxi'>
 		<text style='display: table-cell;vertical-align:middle;text-align:center;'>测试跳转</text>
-	</view>
+	</view> -->
 
 	<!--   数据  -->
 
@@ -292,6 +291,22 @@
 					</block>
      
       </view>	
+			<!-- 门票 -->
+			<view  wx:elif='{{item.show_type==120}}' style="background:#fff;">
+					<view class="addGoods" wx:if='{{item.List&&item.List.length!=0}}' style="margin-bottom:20rpx;background:#fff;">
+							<scroll-view class="buyingTScroll" scroll-x="true" data-eveid='{{drawInfo.activity_id}}' data-type='7' data-id='{{drawInfo.activity_id}}' data-subscribe='{{item.toyShowSubscribe}}' data-item_type='9022' catchtap="{{item.isBuyTickets?'imgcomindellistjump':'subscribefun'}}">
+									<view class="buyingTScrEve" wx:for='{{item.List}}' wx:key='key'>
+											<image mode="heightFix" class="buyingTScrImg" src="{{item.goods_img}}"></image>
+											<view class="addGoodsIBoxTxt" style="background:#fff;">
+													<view style="color:#101010;">{{item.goods_name}}</view>
+													<view style="color:#F8657C;">￥{{item.price}}</view>
+											</view>
+									</view>
+							</scroll-view>
+							<view class="billingSubscr" wx:if='{{item.isBuyTickets}}' data-type='7' style="background:#F8657C;"  data-item_type='9022' data-href='{{item.href}}' data-title='{{item.title}}' catchtap='imgcomindellistjump'>去购票</view>
+							<view class="billingSubscr" wx:else data-subscribe='{{item.toyShowSubscribe}}' catchtap="subscribefun">开票订阅</view>
+					</view>
+			</view>
 
 			<!--  在线抽盒机  -->
 			<view class='disanumofgoods' wx:elif='{{item.show_type==113}}' style='{{item.isHideBreakLine?"margin-bottom:0rpx;":""}}'>

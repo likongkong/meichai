@@ -95,7 +95,7 @@ Page({
     islive:false,
     // 审核版本 or 不是审核版本
     is_formaldress:false,
-    animation:''
+    animation:'',
   },
   jumpposition:function(w){
     // var nowTime = new Date().getTime();
@@ -1632,5 +1632,69 @@ Page({
   },
   catchTouchMove:function(res){
     return false
-   }
+  }, 
+  // 订阅
+  subscribefun(w){
+    var subscribe = w.currentTarget.dataset.subscribe || w.target.dataset.subscribe;
+    this.data.subscribedata = subscribe
+    this.subscrfun(1);
+  },
+  // 拉起订阅
+  subscrfun: function (num) {
+    var _this = this;
+    var subscribedata = _this.data.subscribedata || '';
+    console.log('subscribedata===',subscribedata)
+    console.warn(1,subscribedata && subscribedata.template_id && app.signindata.subscribeif)
+
+    if (subscribedata && subscribedata.template_id && app.signindata.subscribeif) {
+      console.warn(2)
+      if (subscribedata.template_id instanceof Array) {
+        console.warn(3)
+        wx.requestSubscribeMessage({
+          tmplIds: subscribedata.template_id || [],
+          success(res) {
+            var is_show_modal = true;
+            console.warn(4)
+            for (var i = 0; i < subscribedata.template_id.length; i++) {
+              if (res[subscribedata.template_id[i]] == "accept") {
+                if(num == 1){
+                  app.subscribefun(_this, 1, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+                }else{
+                  app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+                };
+                
+                if (is_show_modal) {
+                  _this.subshowmodalTip();
+                  is_show_modal = false;
+                };
+              };
+            };
+          },
+          complete() { }
+        })
+      } else {
+        console.warn(5)
+        wx.requestSubscribeMessage({
+          tmplIds: [subscribedata.template_id || ''],
+          success(res) {
+            if (res[subscribedata.template_id] == "accept") {
+              app.subscribefun(_this, 0, subscribedata.template_id, subscribedata.subscribe_type);
+              _this.subshowmodalfun();
+            };
+          }
+        })
+      };
+    };
+  },
+  subshowmodalTip: function () {
+    var _this = this;
+    wx.showModal({
+      title: '提示',
+      content: '订阅成功',
+      showCancel: false,
+      success: function (res) {}
+    })
+  },
+
+
 })
