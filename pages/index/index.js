@@ -710,12 +710,12 @@ Page({
     _this.setData({ loadprompt: '加载更多.....', commoddata: [], nodataiftr:false,page: 0});
     if(Dec.env=='online'){
       if(_this.data.is_formaldress){
-        var url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/index.json'; // 审核 
+        var url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/index.json?time='+app.signindata.appNowTime; // 审核 
       }else{
-        var url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/Index.json';  // 未审核
+        var url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/Index.json?time='+app.signindata.appNowTime;  // 未审核
       };
     }else{
-      var url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/test/Index.json';  // 测试 
+      var url = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/test/Index.json?time='+app.signindata.appNowTime;  // 测试 
     };
     wx.request({
       url: url,

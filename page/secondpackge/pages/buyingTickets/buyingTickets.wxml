@@ -60,7 +60,9 @@
 <view class="leafletBottom">
    <!-- <view class="leafletBottomTxt">门票玩具凭身份证领取，购票场次时间内有效</view> -->
    <block wx:if='{{ticket}}'>
-        <view wx:if="{{showSubscription}}" class="leafletBottomEve boxShadowEve" catchtap="subscrfun" style="width:400rpx;background:#eeae19;">
+
+        <view wx:if='{{is_buy_place}}' class="leafletBottomEve boxShadowEve" style="width:400rpx;background:#ADADAD;">立即购买</view> 
+        <view wx:elif="{{showSubscription}}" class="leafletBottomEve boxShadowEve" catchtap="subscrfun" style="width:400rpx;background:#eeae19;">
                 开售提醒 
         </view>  
         <view wx:elif='{{isSubscribe}}' class="leafletBottomEve boxShadowEve" style="width:400rpx;line-height:35rpx;{{tabTwoId==1?'background:#eeae19;':'background:#ADADAD;'}}">

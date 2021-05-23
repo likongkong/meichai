@@ -84,10 +84,10 @@ Page({
         identity[i].isCheck = false;
     };
     identity[ind].isCheck = true;
+    clearInterval(this.data.timer)  
     this.setData({
       identity:identity,
       iid:identity[ind].id || '',
-      cartId:''
     });
 
   },
@@ -135,16 +135,7 @@ Page({
     // 联系人 名字好手机号
 
     var _this = this;
-    if(this.data.tabOneId == ''){
-      app.showToastC('请选择场次')
-      return false;
-    } else if(this.data.tabTwoId == ''){
-      app.showToastC('请选择票档')
-      return false;
-    }else if(this.data.cartId){
-      this.paymentmony(this.data.cartId)
-      return false;
-    };  
+
 
 
     var identity = _this.data.identity || [];
@@ -155,6 +146,7 @@ Page({
       if(identity[i].isCheck){
         consignee = identity[i].consignee;
         idcard = identity[i].idcard;
+        _this.data.idcard = identity[i].idcard
         mobile = identity[i].mobile;
         break;
       }
@@ -163,6 +155,33 @@ Page({
       app.showToastC('请填写身份证')
       return false;
     };
+
+
+    if(this.data.tabOneId == ''){
+      app.showToastC('请选择场次')
+      return false;
+    } else if(this.data.tabTwoId == ''){
+      app.showToastC('请选择票档')
+      return false;
+    } 
+    console.log(app.signindata.placeAnOrderOne,app.signindata.placeAnOrderTwo)
+    if(_this.data.tabTwoId == 1){
+
+      console.log(app.signindata.placeAnOrderOne , app.signindata.placeAnOrderOne.cartId , app.signindata.placeAnOrderOne.tabTwoId , _this.data.tabTwoId , app.signindata.placeAnOrderOne.tabOneId , _this.data.tabOneId , app.signindata.placeAnOrderOne.idcard , _this.data.idcard)
+
+      if(app.signindata.placeAnOrderOne && app.signindata.placeAnOrderOne.cartId && app.signindata.placeAnOrderOne.tabTwoId == _this.data.tabTwoId && app.signindata.placeAnOrderOne.tabOneId == _this.data.tabOneId && app.signindata.placeAnOrderOne.idcard == _this.data.idcard){
+        this.paymentmony(app.signindata.placeAnOrderOne.cartId)
+        return false;
+      };  
+    }else{
+
+      console.log(app.signindata.placeAnOrderTwo , app.signindata.placeAnOrderTwo.cartId , app.signindata.placeAnOrderTwo.tabTwoId , _this.data.tabTwoId , app.signindata.placeAnOrderTwo.tabOneId , _this.data.tabOneId , app.signindata.placeAnOrderTwo.idcard , _this.data.idcard)
+
+      if(app.signindata.placeAnOrderTwo && app.signindata.placeAnOrderTwo.cartId && app.signindata.placeAnOrderTwo.tabTwoId == _this.data.tabTwoId && app.signindata.placeAnOrderTwo.tabOneId == _this.data.tabOneId && app.signindata.placeAnOrderTwo.idcard == _this.data.idcard){
+        this.paymentmony(app.signindata.placeAnOrderTwo.cartId)
+        return false;
+      }
+    }; 
 
     var tabTwoId = _this.data.tabTwoId;
     var question = _this.data.QA[tabTwoId];
@@ -214,10 +233,27 @@ Page({
         wx.hideLoading()
         console.log('提交订单',res)
         if (res.data.ReturnCode == 200) {
-           _this.setData({
-             cartId:res.data.Info.cartId
-           });
-           _this.paymentmony(res.data.Info.cartId)
+          if(_this.data.tabTwoId == 1){
+            app.signindata.placeAnOrderOne = {
+                cartId:res.data.Info.cartId,
+                idcard:idcard,
+                time:Date.parse(new Date()) / 1000,
+                tabOneId:_this.data.tabOneId,
+                tabTwoId:_this.data.tabTwoId
+            };
+          }else{
+            app.signindata.placeAnOrderTwo = {
+                cartId:res.data.Info.cartId,
+                idcard:idcard,
+                time:Date.parse(new Date()) / 1000,
+                tabOneId:_this.data.tabOneId,
+                tabTwoId:_this.data.tabTwoId
+            };
+          };
+
+
+          _this.paymentmony(res.data.Info.cartId)
+
         }else{
           if(res.data.Msg){
             wx.showModal({
@@ -278,7 +314,10 @@ Page({
                       })
 
                    },
-                  'fail':function(res){},
+                  'fail':function(res){
+                     
+                      _this.dateformat()
+                  },
                   'complete': function (res) {}
                 })
         }else{       
@@ -311,8 +350,7 @@ Page({
           url: "/page/secondpackge/pages/idCardVerification/idCardVerification"
       });
       this.setData({
-        realNameSystem:false,
-        cartId:''
+        realNameSystem:false
       })
   },
 
@@ -331,7 +369,6 @@ Page({
     };
     this.setData({
       buyabulletframe:!this.data.buyabulletframe,
-      cartId:''
     })
   },
   priceBreakBoxFun:function(){
@@ -396,11 +433,24 @@ Page({
       //   buyNowOrOppor = true;
       // };
 
+      console.log(app.signindata.placeAnOrderTwo)
+
+      // 条件不成立
+      var is_buy_place = false;
+      if(app.signindata.placeAnOrderTwo && num == 2 && app.signindata.placeAnOrderTwo.tabTwoId == 2 && app.signindata.placeAnOrderTwo.tabOneId != _this.data.tabOneId){
+        is_buy_place = true;
+      };
+
+      buyNowOrOppor
       if(ticketTwo[ind].stock>0){
         buyNowOrOppor = false;
         isSubscribe = false;
       }else if(ticketTwo[ind].isFillChance){
-        buyNowOrOppor = true;
+        if(app.signindata.placeAnOrderTwo && num == 2 && app.signindata.placeAnOrderTwo.tabTwoId == 2 && app.signindata.placeAnOrderTwo.tabOneId == _this.data.tabOneId){
+          buyNowOrOppor = false;
+        }else{
+          buyNowOrOppor = true;
+        };
         isSubscribe = false;
       }else{
         isSubscribe = true;
@@ -410,7 +460,8 @@ Page({
         tabTwoId:num,
         sumPrice:ticketTwo[ind].price || 0,
         buyNowOrOppor:buyNowOrOppor,
-        isSubscribe:isSubscribe
+        isSubscribe:isSubscribe,
+        is_buy_place:is_buy_place
       });
 
     };
@@ -442,6 +493,7 @@ Page({
     this.activsign();
     // 推送统计
     this.data.push_id = options.push_id || 0;
+
   },
   onLoadfun:function(){
     var _this = this;
@@ -591,7 +643,8 @@ Page({
             sumPrice:sumPrice,
             seldate:seldate,
             subscribedata:res.data.Info.subscribe || [],
-            isSubscribe:isSubscribe
+            isSubscribe:isSubscribe,
+
             // contactsname:res.data.Info.contact || '',
             // contactsphone:res.data.Info.mobile || ''
           });
@@ -915,7 +968,29 @@ Page({
 
 
 
-  }
+  },
+  // 时间格式化输出，将时间戳转为 倒计时时间
+  dateformat: function (micro_second) {
+    var _this = this;
+    clearInterval(_this.data.timer)
+    //总的秒数 
+    var second = 60;
+    _this.data.timer = setInterval(function () {
+        if (second > 0) {
+          second --;
+          console.log(second)
+        } else if (second <= 0) {
+          
+          clearInterval(_this.data.timer) 
+          app.signindata.placeAnOrderOne = '';
+          app.signindata.placeAnOrderTwo = '';
+          setTimeout(()=>{
+            _this.getData();
+          },150)
+          
+        }
+    }.bind(_this), 1000);
+  },
 
 
 
