@@ -293,6 +293,8 @@ Page({
     _this.setData({
       id: options.id || 374855
     });
+    app.signindata.referee = options.referee || 0;
+    app.signindata.activity_id = options.id || 374855;
     _this.data.share_uid = options.share_uid || 0;
     _this.data.share_time = options.share_time || 0;
     // 是否是朋友圈进入
@@ -454,13 +456,13 @@ Page({
     if(this.data.dataInfo.countLotto == 0 || this.data.dataInfo.status == 3 || this.data.dataInfo.status == 1){
       return {
         title:this.data.dataInfo.shareTitle,
-        path: "/page/secondpackge/pages/luckyDraw/luckyDraw?id="+_this.data.id,
+        path: "/page/secondpackge/pages/luckyDraw/luckyDraw?id="+_this.data.id+'&referee=' + _this.data.uid,
         imageUrl:this.data.dataInfo.shareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
       }   
     }else{
       return {
         title:this.data.dataInfo.shareTitle,
-        path: "/page/secondpackge/pages/luckyDraw/luckyDraw?share_uid=" + _this.data.uid + "&share_time=" + _this.data.signTime +'&id='+_this.data.id,
+        path: "/page/secondpackge/pages/luckyDraw/luckyDraw?share_uid=" + _this.data.uid + "&share_time=" + _this.data.signTime +'&id='+_this.data.id +'&referee=' + _this.data.uid,
         imageUrl:this.data.dataInfo.shareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
       }  
     }

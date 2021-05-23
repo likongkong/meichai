@@ -755,15 +755,24 @@ Page({
             if (arrlist.length != 0) {
               for (var i = 0; i < arrlist.length; i++) {
                 if (arrlist[i].item_type == 9014 || arrlist[i].item_type == 989 || arrlist[i].item_type == 9017) {
-                  var shouNum = arrlist[i].item_type == 9014||9017?10:6
+                  var shouNum = arrlist[i].item_type == (9014||9017)?10:6
                   let al = [...arrlist[i].List];
                   if(al.length<=shouNum){
                     let result = [];
-                    while (al.length > 0) {
-                      let randomIndex = Math.floor(Math.random() * (al.length))
-                      result.push(al.splice(randomIndex, 1)[0])
+                    let topArrList = [];
+                    let otherArrList = [];
+                    for(let j=0; j < arrlist[i].List.length; j++){
+                      if(arrlist[i].List[j].isTop){
+                        topArrList.push(arrlist[i].List[j]);  
+                      }else{
+                        otherArrList.push(arrlist[i].List[j]);  
+                      }
                     }
-                    arrlist[i].List = result;
+                    while (otherArrList.length > 0) {
+                      let randomIndex = Math.floor(Math.random() * (otherArrList.length))
+                      result.push(otherArrList.splice(randomIndex, 1)[0])
+                    }
+                    arrlist[i].List = [...topArrList,...result];
                   }else{
                     let topArrList = [];
                     let otherArrList = [];

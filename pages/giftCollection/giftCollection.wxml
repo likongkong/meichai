@@ -7,9 +7,10 @@
    <view class="giftBoxEve">电话：{{giftData.tel}}</view>
    <view class="giftBoxEve">身份证号：{{giftData.idcard}}</view>
    <view class="giftBoxEve">商品名称：{{giftData.goods_name}}</view>
+   <view class="giftBoxEve">领取日期：{{giftData.date}}</view>
    <view class="giftBoxEve">是否领取：
       <block wx:if='{{giftData.pay_status==2}}'>未领取</block>
-      <block wx:elif='{{giftData.pay_status==5}}'>已领取</block>
+      <block wx:elif='{{giftData.pay_status==5}}'>已领取（{{giftData.shipping_time}}）</block>
    </view>
 </view>
 

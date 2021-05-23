@@ -748,6 +748,19 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+      var nowData = Date.parse(new Date()) / 1000;
+      if(app.signindata.placeAnOrderTwo && app.signindata.placeAnOrderTwo.time){
+         if(nowData-app.signindata.placeAnOrderTwo.time > 60){
+          app.signindata.placeAnOrderTwo = '';
+          clearInterval(this.data.timer) 
+         };
+      };
+      if(app.signindata.placeAnOrderOne && app.signindata.placeAnOrderOne.time){
+          if(nowData - app.signindata.placeAnOrderOne.time > 60){
+            app.signindata.placeAnOrderOne = '';
+            clearInterval(this.data.timer) 
+          };
+      };
 
   },
 
