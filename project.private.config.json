@@ -69,6 +69,12 @@
         {
           "name": "中奖名单",
           "pathName": "page/secondpackge/pages/winningResult/winningResult",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "展会入场顺序",
+          "pathName": "page/secondpackge/pages/ticketRcSort/ticketRcSort",
           "scene": null
         }
       ]

@@ -77,19 +77,21 @@ Page({
         if (res.data.ReturnCode == 200) {
            _this.setData({
             dataInfo:res.data.Info,
-            // twelve:res.data.List.listOfWinningResults.twelve,
-            // thirteen:res.data.List.listOfWinningResults.thirteen,
-            // fourteen:res.data.List.listOfWinningResults.fourteen,
-            // twelve:res.data.List.listOfWinningResults.fourteen,
-            // thirteen:res.data.List.listOfWinningResults.fourteen,
-            // fourteen:res.data.List.listOfWinningResults.fourteen,
            })
+           var twelve = res.data.List.listOfWinningResults.twelve;
+           var thirteen = res.data.List.listOfWinningResults.thirteen;
+           var fourteen = res.data.List.listOfWinningResults.fourteen;
+           _this.data.twelve = twelve;
+           _this.data.thirteen = thirteen;
+           _this.data.fourteen = fourteen;
 
-           _this.data.twelve = res.data.List.listOfWinningResults.twelve;
-           _this.data.thirteen = res.data.List.listOfWinningResults.thirteen;
-           _this.data.fourteen = res.data.List.listOfWinningResults.fourteen;
-
-           _this.data.processingData = res.data.List.listOfWinningResults.twelve;
+           if(_this.data.current == 0){
+            _this.data.processingData = twelve;
+           }else if(_this.data.current == 1){
+            _this.data.processingData = thirteen;
+           }else{
+            _this.data.processingData = fourteen;
+           }
            _this.processingDataPaging()
         }else{
           wx.showToast({

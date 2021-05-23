@@ -27,7 +27,7 @@
   </view>
   <view class="takepartWrap">
     <view class="inputWrap">
-      <input type="text" placeholder="请输入激活码" bindinput="bindCdkeyInput" value=""/>
+      <input type="text" placeholder="请输入激活码" bindinput="bindCdkeyInput" value="{{cdKeyinputValue}}"/>
     </view>
     <view class="activateBtn" catchtap="activateBtnFun">去激活</view>
   </view>
@@ -56,8 +56,8 @@
 
 <tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
 <view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>
-<view class="bindUserInfoWrap" wx:if="{{isBindBox}}" catchtouchmove="true"> 
-  <view class="bindUserInfoBox">
+<view class="bindUserInfoWrap" wx:if="{{isBindBox}}" catchtap="hideBindBox"  catchtouchmove="true"> 
+  <view class="bindUserInfoBox" catchtap="true">
     <view class="rucInfo">
       <text style="font-size:26rpx;color:#101010;">您激活的展会VIP优先入场日期为:</text>
       <text style="font-size:34rpx;color:#F8657C;margin-top:20rpx;">{{rcdate}}</text>
@@ -82,6 +82,17 @@
         <input type="text" value="" data-type="3" bindinput="bindUserInput"/>
       </view>
     </view>
-    <view class="bindUserTicket" catchtap="bindUserTicket">激活</view>
+    <view class="bindUserTicket" catchtap="twiceConfirm">激活</view>
+  </view>
+</view>
+
+
+<view class="twiceConfirmMask" catchtap="hideTwiceConfirmMask" wx:if="{{isTwiceConfirmMask}}">
+  <view class="twiceConfirmBox" catchtap="true">
+    <text>温馨提示</text>
+    <text>该激活码一经使用，绑定入场人员身份信息无法更改，每个激活码只可使用一次，请仔细核对绑定信息及注意事项，确认无误后点击确认完成激活</text>
+    <view class="confirm" catchtap="bindUserTicket">
+      确认
+    </view>
   </view>
 </view>
