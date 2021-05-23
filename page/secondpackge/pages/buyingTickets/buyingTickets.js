@@ -26,7 +26,7 @@ Page({
     // 身份id
     iid:'',
     // tab one
-    tabOneId:1,
+    tabOneId:'',
     // tab two
     tabTwoId:'',
 
@@ -84,7 +84,7 @@ Page({
         identity[i].isCheck = false;
     };
     identity[ind].isCheck = true;
-    clearInterval(this.data.timer)  
+    // clearInterval(this.data.timer)  
     this.setData({
       identity:identity,
       iid:identity[ind].id || '',
@@ -311,7 +311,12 @@ Page({
                               });
                           }
                         }
-                      })
+                      });
+                      if(_this.data.tabTwoId == 1){
+                          app.signindata.placeAnOrderOne = '';
+                      }else{
+                          app.signindata.placeAnOrderTwo = '';
+                      };
 
                    },
                   'fail':function(res){
@@ -421,7 +426,8 @@ Page({
         seldate:ticket[ind].date || '',
         sumPrice:sumPrice,
         buyNowOrOppor:buyNowOrOppor,
-        isSubscribe:isSubscribe
+        isSubscribe:isSubscribe,
+        is_buy_place:false
       })
     }else if(obtain == 2){ // tab two
       var ticketTwo = _this.data.ticketTwo || [];
@@ -573,23 +579,67 @@ Page({
           var sumPrice = 0;
           var buyNowOrOppor = false;
           var isSubscribe = false;
+          var is_buy_place = false;
           if(ticket && ticket.length != 0){
-            tabOneId = ticket[0].day || '';
-            seldate = ticket[0].date || '';
-            ticketTwo = ticket[0].listTicket || [];
+            console.log(_this.data.tabOneId)
+            if(_this.data.tabOneId){
 
-            tabTwoId = ticketTwo[0].type || '';
-            sumPrice = ticketTwo[0].price || 0;
+              for(var i=0; i< ticket.length;i++){
+                 if(_this.data.tabOneId == ticket[i].day){
+                    tabOneId = ticket[i].day || '';
+                    seldate = ticket[i].date || '';
+                    ticketTwo = ticket[i].listTicket || [];
+                 };
+              };
 
-            if(ticketTwo[0].stock>0){
-              buyNowOrOppor = false;
-              isSubscribe = false;
-            }else if(ticketTwo[0].isFillChance){
-              buyNowOrOppor = true;
-              isSubscribe = false;
+              var ind = 0;
+              for(var j=0;j<ticketTwo.length;j++){
+                  if(_this.data.tabTwoId == ticketTwo[j].type){
+                    tabTwoId = ticketTwo[j].type || '';
+                    sumPrice = ticketTwo[j].price || 0;
+                    ind = j;
+                  };
+              };
+
+
+              if(app.signindata.placeAnOrderTwo && _this.data.tabTwoId == 2 && app.signindata.placeAnOrderTwo.tabTwoId == 2 && app.signindata.placeAnOrderTwo.tabOneId != _this.data.tabOneId){
+                is_buy_place = true;
+              };
+  
+              if(ticketTwo[ind].stock>0){
+                buyNowOrOppor = false;
+                isSubscribe = false;
+              }else if(ticketTwo[ind].isFillChance){
+                // 条件不成立
+                if(app.signindata.placeAnOrderTwo && _this.data.tabTwoId == 2 && app.signindata.placeAnOrderTwo.tabTwoId == 2 && app.signindata.placeAnOrderTwo.tabOneId == _this.data.tabOneId){
+                  buyNowOrOppor = false;
+                }else{
+                  buyNowOrOppor = true;
+                };
+                // buyNowOrOppor = true;
+                isSubscribe = false;
+              }else{
+                isSubscribe = true;
+              };
             }else{
-              isSubscribe = true;
-            };
+              tabOneId = ticket[0].day || '';
+              seldate = ticket[0].date || '';
+              ticketTwo = ticket[0].listTicket || [];
+  
+              tabTwoId = ticketTwo[0].type || '';
+              sumPrice = ticketTwo[0].price || 0;
+  
+              if(ticketTwo[0].stock>0){
+                buyNowOrOppor = false;
+                isSubscribe = false;
+              }else if(ticketTwo[0].isFillChance){
+                buyNowOrOppor = true;
+                isSubscribe = false;
+              }else{
+                isSubscribe = true;
+              };
+            }
+
 
             // for(var i=0 ; i< ticketTwo.length ; i++){
             //    if(ticketTwo[i].stock>0 || ticketTwo[i].isFillChance){
@@ -626,7 +676,7 @@ Page({
             showSubscription = false
           };
 
-          console.log('showSubscription=========',showSubscription)
+          console.log('showSubscription=========',tabOneId,seldate)
 
           _this.setData({
             showSubscription:showSubscription,
@@ -644,6 +694,7 @@ Page({
             seldate:seldate,
             subscribedata:res.data.Info.subscribe || [],
             isSubscribe:isSubscribe,
+            is_buy_place:is_buy_place
 
             // contactsname:res.data.Info.contact || '',
             // contactsphone:res.data.Info.mobile || ''
