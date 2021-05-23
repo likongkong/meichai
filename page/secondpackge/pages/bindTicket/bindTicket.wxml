@@ -65,8 +65,9 @@
       <text style="font-size:34rpx;color:#F8657C;margin-top:20rpx;">第{{rcsort}}位</text>
     </view>
     <view style="margin-top:35rpx;">
-      <text style="font-size:26rpx;color:#101010;display:block;margin-bottom:10rpx;">注意事项:</text>
-      <text style="font-size:26rpx;color:#101010;display:block;">VIP用户需持本人身份证早上10:00开始验证资格并发放对应号码牌，10:30停止身份核验并开始按顺序入场进入展厅，严禁夜排</text>
+      <text style="font-size:22rpx;color:#101010;display:block;">10:00 验证资格并发放对应号码牌（无需夜排）</text>
+      <text style="font-size:22rpx;color:#101010;display:block;">10:30 VIP按入场顺序优先进场</text>
+      <text style="font-size:22rpx;color:#101010;display:block;">注意事项：现场需持本人身份证核对VIP入场顺序页面</text>
     </view>
     <view class="userInfoWrap">
       <view class="userInfoInput">
@@ -85,7 +86,6 @@
     <view class="bindUserTicket" catchtap="twiceConfirm">激活</view>
   </view>
 </view>
-
 
 <view class="twiceConfirmMask" catchtap="hideTwiceConfirmMask" wx:if="{{isTwiceConfirmMask}}">
   <view class="twiceConfirmBox" catchtap="true">

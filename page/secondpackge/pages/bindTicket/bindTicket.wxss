@@ -138,7 +138,7 @@ page{
 }
 .userInfoWrap{
   border-top: 2rpx solid #F4F4F4;
-  margin-top: 14rpx;
+  margin-top: 30rpx;
   padding: 35rpx 0;
 }
 .userInfoInput{
@@ -195,7 +195,7 @@ page{
   align-items: center;
 }
 .twiceConfirmBox{
-  width: 424rpx;
+  width: 478rpx;
   background: #fff;
   border-radius: 10rpx;
   padding: 35rpx 35rpx;
@@ -203,7 +203,7 @@ page{
 }
 .twiceConfirmBox text{
   display: block;
-  font-size:24rpx;
+  font-size:26rpx;
   color:#101010;
 }
 .twiceConfirmBox text:first-child{
@@ -211,13 +211,13 @@ page{
   margin-bottom: 35rpx;
 }
 .confirm{
-  width: 250rpx;
-  height: 50rpx;
-  font-size: 22rpx;
+  width: 266rpx;
+  height: 66rpx;
+  font-size: 26rpx;
   color: #fff;
-  line-height: 50rpx;
+  line-height: 66rpx;
   text-align: center;
   background: #F8657C;
   border-radius: 10rpx;
-  margin: 35rpx auto 0;
+  margin: 50rpx auto 0;
 }
