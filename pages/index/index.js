@@ -215,7 +215,7 @@ Page({
       // url: "/page/component/pages/drivetohidelist/drivetohidelist"
       // url: "/pages/activitydetailspage/activitydetailspage?id=18376"
       // url: "/pages/activitydetailspage/activitydetailspage?id=18185"
-      // url: "/page/component/pages/limitlottery/limitlottery?id=201425",
+      url: "/page/component/pages/limitlottery/limitlottery?id=382533",
       // url: "/page/component/pages/drivetohidehome/drivetohidehome"
       // url: "/page/component/pages/exhibition/exhibition"
       // url: "/page/component/pages/exhibitiondetail/exhibitiondetail?id=43161"
@@ -249,7 +249,7 @@ Page({
 
       // url: "/page/secondpackge/pages/calendarList/calendarList"
 
-      url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
+      // url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
 
       // url: "/page/secondpackge/pages/luckyDraw/luckyDraw"
       // url: "/page/secondpackge/pages/bindTicket/bindTicket"
