@@ -298,48 +298,49 @@ Page({
   },
   dateFun(){
     var nowTime = new Date().getTime();
+    // var nowTime = '1623301200000';
     var time11 = '1623384000000';
     var time12 = '1623470400000';
     var time13 = '1623556800000';
     var time14 = '1623643200000';
 
-    if(nowTime>'1623340800000'){
-      this.data.objectArray[0].disabled = true;
-      this.data.objectArray[1].disabled = true;
-      this.data.objectArray[2].disabled = true;
-      this.setData({num:3})
-    }else{
-      this.data.objectArray[0].disabled = false;
-      this.data.objectArray[1].disabled = false;
-      this.data.objectArray[2].disabled = false;
-      this.setData({num:4})
-    }
-
-    // if(nowTime>time14){
+    // if(nowTime>'1623340800000'){
     //   this.data.objectArray[0].disabled = true;
     //   this.data.objectArray[1].disabled = true;
     //   this.data.objectArray[2].disabled = true;
     //   this.setData({num:3})
     // }else{
-    //   if(nowTime >= time11 && nowTime < time12){
-    //     this.data.objectArray[0].disabled = true;
-    //     this.setData({num:5})
-    //   }else if(nowTime >= time12 && nowTime < time13){
-    //     this.data.objectArray[0].disabled = true;
-    //     this.data.objectArray[1].disabled = true;
-    //     this.setData({num:6})
-    //   }else if(nowTime >= time13 || nowTime >= time14){
-    //     this.data.objectArray[0].disabled = true;
-    //     this.data.objectArray[1].disabled = true;
-    //     this.data.objectArray[2].disabled = true;
-    //     this.setData({num:3})
-    //   }else{
-    //     this.data.objectArray[0].disabled = false;
-    //     this.data.objectArray[1].disabled = false;
-    //     this.data.objectArray[2].disabled = false;
-    //     this.setData({num:4})
-    //   }
+    //   this.data.objectArray[0].disabled = false;
+    //   this.data.objectArray[1].disabled = false;
+    //   this.data.objectArray[2].disabled = false;
+    //   this.setData({num:4})
     // }
+
+    if(nowTime>time14){
+      this.data.objectArray[0].disabled = true;
+      this.data.objectArray[1].disabled = true;
+      this.data.objectArray[2].disabled = true;
+      this.setData({num:3})
+    }else{
+      if(nowTime >= time11 && nowTime < time12){
+        this.data.objectArray[0].disabled = true;
+        this.setData({num:5})
+      }else if(nowTime >= time12 && nowTime < time13){
+        this.data.objectArray[0].disabled = true;
+        this.data.objectArray[1].disabled = true;
+        this.setData({num:6})
+      }else if(nowTime >= time13 || nowTime >= time14){
+        this.data.objectArray[0].disabled = true;
+        this.data.objectArray[1].disabled = true;
+        this.data.objectArray[2].disabled = true;
+        this.setData({num:3})
+      }else{
+        this.data.objectArray[0].disabled = false;
+        this.data.objectArray[1].disabled = false;
+        this.data.objectArray[2].disabled = false;
+        this.setData({num:4})
+      }
+    }
     this.setData({
       objectArray:this.data.objectArray
     })

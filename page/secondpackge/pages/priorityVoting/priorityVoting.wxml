@@ -32,7 +32,7 @@
       </view>
     </view>
     <view style="width: 100%;padding:30rpx 0;">
-      <view class="title" style="width:100%">入场日期 <text  style="font-size:22rpx;color:#999">（需在2021年06月10日24点前绑定）</text> </view>
+      <view class="title" style="width:100%">入场日期 <text  style="font-size:22rpx;color:#999">（需在{{num==4?'2021年06月11日':num==5?'2021年06月12日':'2021年06月13日'}}12点前绑定）</text> </view>
       <view style="display: flex;justify-content: space-between;align-items: center;margin-top:15rpx">
         <!-- <input type="text" name="" id="" disabled="true" placeholder="请选择入场日期" placeholder-class="placeholderclass" value="{{time}}"/> -->
         <!-- <picker class="pickerWrap" bindchange="bindPickerChange" value="{{index}}" range-key="name" range="{{objectArray}}">

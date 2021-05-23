@@ -124,6 +124,10 @@ Page({
     }
   },
   
+  randomsort(a, b) {
+    return Math.random()>.5 ? -1 : 1;
+    //用Math.random()函数生成0~1之间的随机数与0.5比较，返回-1或1
+  },
 
   // 
   buyingTickPay:function(){
@@ -160,12 +164,47 @@ Page({
       return false;
     };
 
+    var tabTwoId = _this.data.tabTwoId;
+    var question = _this.data.QA[tabTwoId];
+    if(question != undefined){
+      var randomQuestion = question[Math.floor((Math.random()*question.length))];
+      randomQuestion.option.sort(_this.randomsort);
+      console.log('正确答案==',randomQuestion.answer)
+      wx.showModal({
+        title: '限购答题',
+        content: randomQuestion.question,
+        cancelText: randomQuestion.option[0].toString(),
+        confirmText: randomQuestion.option[1].toString(),
+        confirmColor:'#000',
+        cancelColor: '#000',
+        success: function (res) {
+          if (res.confirm) {
+            if (randomQuestion.option[1] == randomQuestion.answer){
+              _this.buyingTickPayTwo(consignee,idcard,mobile);
+            }else{
+              app.showToastC('回答错误');
+              return false;
+            }
+          }else{
+            if (randomQuestion.option[0] == randomQuestion.answer) {
+              _this.buyingTickPayTwo(consignee,idcard,mobile);
+            }else{
+              app.showToastC('回答错误');
+              return false;
+            }            
+          }
+        }
+      })
+    }else{
+      _this.buyingTickPayTwo(consignee,idcard,mobile);
+    }
+  },
+
+  buyingTickPayTwo(consignee,idcard,mobile){
+    console.log(consignee,idcard,mobile)
     var qqq = Dec.Aese('mod=ticket&operation=buyTicket&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&consignee=' + consignee + '&idcard=' + idcard + '&date=' + _this.data.tabOneId + '&type=' + _this.data.tabTwoId +'&mobile=' + mobile);
-
     console.log('mod=ticket&operation=buyTicket&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&consignee=' + consignee + '&idcard=' + idcard + '&date=' + _this.data.tabOneId + '&type=' + _this.data.tabTwoId +'&mobile=' + mobile)
-
     wx.showLoading({ title: '加载中...',mask:true }) 
-
     wx.request({
       url: app.signindata.comurl + 'toy.php' + qqq,
       method: 'GET',
@@ -191,6 +230,7 @@ Page({
       }
     }) 
   },
+
   // 微信支付
   paymentmony:function(cart_id){
     var _this = this; 
@@ -540,6 +580,7 @@ Page({
             buyNowOrOppor:buyNowOrOppor,
             banner:res.data.List.banner || [],
             ticket:ticket,
+            QA:res.data.List.QA,
             identity:identity,
             ticketTwo:ticketTwo,
             tabOneId:tabOneId,
