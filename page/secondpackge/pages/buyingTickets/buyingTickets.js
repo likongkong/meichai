@@ -201,6 +201,7 @@ Page({
   },
 
   buyingTickPayTwo(consignee,idcard,mobile){
+    var _this = this;
     console.log(consignee,idcard,mobile)
     var qqq = Dec.Aese('mod=ticket&operation=buyTicket&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&consignee=' + consignee + '&idcard=' + idcard + '&date=' + _this.data.tabOneId + '&type=' + _this.data.tabTwoId +'&mobile=' + mobile);
     console.log('mod=ticket&operation=buyTicket&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&consignee=' + consignee + '&idcard=' + idcard + '&date=' + _this.data.tabOneId + '&type=' + _this.data.tabTwoId +'&mobile=' + mobile)
@@ -715,7 +716,12 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.getData();
+    app.downRefreshFun(() => {
+      // 商品详情
+      this.getData();
+    })
+
+
   },
 
   /**
