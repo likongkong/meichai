@@ -54,8 +54,14 @@ Page({
 
     showSubscription:true,
     cartId:'',
-    is_subscribe:false
+    is_subscribe:false,
+    pfiii:false
 
+  },
+  pfiiifun:function(){
+    this.setData({
+      pfiii:!this.data.pfiii
+    })
   },
   // 订阅授权
   subscrfun:function(){

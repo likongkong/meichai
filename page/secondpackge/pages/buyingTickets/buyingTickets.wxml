@@ -73,21 +73,30 @@
   </view>
 
 </view>
-
+ 
 <view class="leafletBottom">
    <!-- <view class="leafletBottomTxt">门票玩具凭身份证领取，购票场次时间内有效</view> -->
    <block wx:if='{{ticket}}'>
 
-        <view wx:if='{{is_buy_place}}' class="leafletBottomEve boxShadowEve" style="width:400rpx;background:#ADADAD;">立即购买</view> 
-        <view wx:elif="{{showSubscription}}" class="leafletBottomEve boxShadowEve" style="width:400rpx;{{is_subscribe?'background:#ADADAD;':'background:#eeae19;'}};">
+        <view wx:if='{{is_buy_place}}' class="leafletBottomEveOne boxShadowEve" style="width:400rpx;background:#ADADAD;">立即购买</view> 
+
+        <view wx:elif="{{showSubscription}}" class="pfiiibox">
+            <view class="leafletBottomfiii boxShadowEve" catchtap="pfiiifun" style="margin-right:40rpx;">预填身份信息</view>
+            <view class="leafletBottomfiii boxShadowEve" style="{{is_subscribe?'background:#ADADAD;':'background:#eeae19;'}};">{{is_subscribe?'已订阅':'开售提醒'}}
+                <button wx:if='{{isNeedUserInfo}}' style="width:100%;height:100%;position:absolute;top:0;left:0;z-index:2;opacity:0;" type='primary' bindtap="getUserProfile"></button>
+                <view wx:else style="width:100%;height:100%;position:absolute;top:0;left:0;z-index:2;opacity:0;"  catchtap="subscrfun"></view>
+            </view>
+        </view>
+
+        <!-- <view wx:elif="{{showSubscription}}" class="leafletBottomEveOne boxShadowEve" style="width:400rpx;{{is_subscribe?'background:#ADADAD;':'background:#eeae19;'}};">
             <button wx:if='{{isNeedUserInfo}}' style="width:100%;height:100%;position:absolute;top:0;left:0;z-index:2;opacity:0;" type='primary' bindtap="getUserProfile"></button>
             <view wx:else style="width:100%;height:100%;position:absolute;top:0;left:0;z-index:2;opacity:0;"  catchtap="subscrfun"></view>
                 {{is_subscribe?'已订阅':'开售提醒'}}
-        </view>  
-        <view wx:elif='{{isSubscribe}}' class="leafletBottomEve boxShadowEve" style="width:400rpx;line-height:35rpx;{{tabTwoId==1?'background:#eeae19;':'background:#ADADAD;'}}">
+        </view>   -->
+        <view wx:elif='{{isSubscribe}}' class="leafletBottomEveOne boxShadowEve" style="width:400rpx;line-height:35rpx;{{tabTwoId==1?'background:#eeae19;':'background:#ADADAD;'}}">
                 <text style="line-height: 70rpx;display:block;padding-top:5rpx;" catchtap="{{tabTwoId==1?'subscrfun':''}}" >{{tabTwoId==1?'补票提醒':'已售罄'}}</text>
         </view>
-        <view wx:else class="leafletBottomEve boxShadowEve" style="width:400rpx;{{buyNowOrOppor?'background:#ADADAD':''}}">
+        <view wx:else class="leafletBottomEveOne boxShadowEve" style="width:400rpx;{{buyNowOrOppor?'background:#ADADAD':''}}">
                 <block wx:if='{{buyNowOrOppor}}'>有订单未支付，还有机会</block>
                 <block wx:else>立即购买</block>
 
@@ -113,7 +122,34 @@
 	 </view>
 </view>
 
+<!-- 预填身份信息 -->
+<view class="wsh" catchtouchmove="true" wx:if='{{pfiii}}'>
+    <view class="tgimgboxgb" catchtap="buyabframe" catchtap="pfiiifun"></view>
+    <view class="confirmOrder" style="height:800rpx;">
+        <scroll-view class="confirmOrderScroll" style="height:800rpx;" scroll-y="true">
+          <view class="ididentity">
+             <view class="ididentityeve">
+                 <view class="ididentityeveTit">实名制购票</view>
+                 <view class="ididentityeveTit" style="color:#E94F57;">入场需携带本人身份证</view>
+                 <view class="ididentModify" catchtap="identityTipFunjump">新增</view>
+             </view>
 
+             <block wx:for='{{identity}}' wx:key='key'>
+                 <view class="ididentityinf">
+                    <view style="position: relative;"><text style="display: inline-block;width:100rpx;vertical-align:top;">{{item.consignee}}</text><text style="color:#BEBEBE;margin-left:20rpx;">身份证   {{item.idcarddis}}</text><image style="right:10rpx;" src='../../../../pages/images/forknumber.png' catchtap="deleteIdent" class='recgadheadimg' data-ind='{{index}}'></image></view>
+                    <view class="ididentiphone">{{item.mobiledis}}</view>
+                 </view>             
+             </block>
+
+             
+          </view>
+
+
+        </scroll-view>
+
+    </view>
+    
+</view>
 
 <!-- 购买弹框 -->
 <view wx:if='{{buyabulletframe}}' class="wsh" catchtouchmove="true">
