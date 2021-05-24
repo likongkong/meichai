@@ -718,7 +718,7 @@ Page({
                 app.signindata.avatarUrl = userInfo.avatarUrl;
                 app.signindata.nickName = userInfo.nickName;
                 app.signindata.userInfo = userInfo || {};
-
+                app.signindata.isNeedUserInfo = false; 
               };
             }
           }) 

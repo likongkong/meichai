@@ -584,6 +584,7 @@ Page({
         toyshowTips:arr[j][0].toyshowTips || '',
         canChangedAddress:arr[j][0].canChangedAddress,
         status_detail:arr[j][0].status_detail || 0,
+        isToyShowTicket:arr[j][0].isToyShowTicket || false,
       })
     };   
     if (arrchil && arrchil.length != 0){

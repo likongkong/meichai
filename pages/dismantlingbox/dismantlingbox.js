@@ -92,7 +92,8 @@ Page({
     is_show:true,
     // 商品默认图片
     defaultimg:'/pages/images/goods_Item_Default_Image.png',
-    isPopping:false
+    isPopping:false,
+    nowAdmissionTime:Date.parse(new Date()) / 1000
   },
 
 
@@ -974,7 +975,7 @@ brandJson:function(){
        })
      }
    })
- },
+  },
   // 品牌信息
   brandinformation:function(num){
       var _this = this
@@ -1281,6 +1282,11 @@ brandJson:function(){
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    
+    this.setData({
+      nowAdmissionTime:Date.parse(new Date()) / 1000
+    })
+
     if (this.data.countdown) {
       this.countdownbfun();
     };

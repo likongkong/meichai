@@ -74,7 +74,7 @@
                  </view>
             </view>
          </scroll-view>
-         <view class="billingSubscr" wx:if='{{drawInfo.isBuyTickets}}' data-type='7' style="background:#F8657C;" catchtap="jumpposition">去购票</view>
+         <view class="billingSubscr" wx:if='{{nowAdmissionTime > drawInfo.ticketTime}}' data-type='7' style="background:#F8657C;" catchtap="jumpposition">去购票</view>
          <view class="billingSubscr" wx:else data-type='7' catchtap="evesubscrfun">开票订阅</view>
          
       </view>

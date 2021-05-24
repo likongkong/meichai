@@ -96,6 +96,7 @@ Page({
     // 审核版本 or 不是审核版本
     is_formaldress:false,
     animation:'',
+    nowAdmissionTime:Date.parse(new Date()) / 1000
   },
   jumpposition:function(w){
     // var nowTime = new Date().getTime();
@@ -203,7 +204,7 @@ Page({
     // _this.data.id = 999999;
     // wx.requestSubscribeMessage({
     //   tmplIds: ['xCf0OLocO-jTPwwwtNrS8O7REn0lEw1yUwim_EFdCaQ'],
-    //   success(res) {
+    //   success(res)  {
     //       if (res['xCf0OLocO-jTPwwwtNrS8O7REn0lEw1yUwim_EFdCaQ'] == "accept") {
     //         app.subscribefun(_this,0, 'xCf0OLocO-jTPwwwtNrS8O7REn0lEw1yUwim_EFdCaQ', 4);
     //       };
@@ -221,7 +222,7 @@ Page({
       // url: "/page/component/pages/exhibitiondetail/exhibitiondetail?id=43161"
       // url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
       // url: "/page/secondpackge/pages/brandDetails/brandDetails?id=481&settlement=1"
-      // url: "/pages/detailspage/detailspage?gid=36358"
+      // url: "/pages/detailspage/detailspage?gid=35837"
       // url: "/pages/smokebox/smokebox?gid=331671"
       // url: "/page/component/pages/playgrasslist/playgrasslist"
       // url: "/page/secondpackge/pages/detailSimgEffects/detailSimgEffects?gid=32852"
@@ -689,7 +690,7 @@ Page({
     var _this = this;
     // 判断是正是版本还是审核版本
     wx.request({
-      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/verifyVersion.conf',
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/verifyVersion.conf?time='+app.signindata.appNowTime,
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
@@ -1011,6 +1012,10 @@ Page({
   onShow:function(){
     Dec.shopnum(this);
     Dec.getdoubleEleven(this, app);
+
+    this.setData({
+      nowAdmissionTime:Date.parse(new Date()) / 1000
+    })
 
     if (this.data.loginid != '' && this.data.uid != '') {
       this.setData({

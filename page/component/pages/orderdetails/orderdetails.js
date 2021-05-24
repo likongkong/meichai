@@ -386,7 +386,11 @@ Page({
     var order_type = event.currentTarget.dataset.order_type || event.target.dataset.order_type;
     var activity_id = event.currentTarget.dataset.activity_id || event.target.dataset.activity_id || 0;
     var _this = this;
-    if (order_type == 3) {
+    if(_this.data.comdata.isToyshowDrawGoods){
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
+      });
+    }else if (order_type == 3) {
       wx.navigateTo({
         url: "/page/component/pages/imdetailspage/imdetailspage?goods_id=" + gid
       });

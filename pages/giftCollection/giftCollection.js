@@ -45,7 +45,7 @@ Page({
               // wx.redirectTo({
               //   url: "/pages/index/index"
               // });
-              this.getData()
+              _this.getData()
             }
           });
          }else{

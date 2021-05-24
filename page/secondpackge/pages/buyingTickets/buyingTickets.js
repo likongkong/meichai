@@ -1,6 +1,7 @@
 var Dec = require('../../../../common/public.js'); //aes加密解密js
 var Pub = require('../../common/mPublic.js'); //aes加密解密js
 const app = getApp();
+var WxParse = require('../../../../wxParse/wxParse.js');
 Page({
 
   /**
@@ -52,14 +53,77 @@ Page({
     isSubscribe:false,
 
     showSubscription:true,
-    cartId:''
+    cartId:'',
+    is_subscribe:false
 
   },
   // 订阅授权
   subscrfun:function(){
     var _this = this;
-    app.comsubscribe(_this);
+    _this.subscrfuna(1);
   },
+
+  // 拉起订阅
+  subscrfuna: function (num) {
+    var _this = this;
+    var subscribedata = _this.data.subscribedata || '';
+    console.log('subscribedata===',subscribedata)
+    console.warn(1,subscribedata && subscribedata.template_id && app.signindata.subscribeif)
+
+    if (subscribedata && subscribedata.template_id && app.signindata.subscribeif) {
+      console.warn(2)
+      if (subscribedata.template_id instanceof Array) {
+        console.warn(3)
+        wx.requestSubscribeMessage({
+          tmplIds: subscribedata.template_id || [],
+          success(res) {
+            var is_show_modal = true;
+            console.warn(4)
+            for (var i = 0; i < subscribedata.template_id.length; i++) {
+              if (res[subscribedata.template_id[i]] == "accept") {
+                _this.setData({
+                  is_subscribe:true
+                });
+                console.log(1111)
+                if(num == 1){
+                  app.subscribefun(_this, 1, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+                }else{
+                  app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+                };
+                
+                if (is_show_modal) {
+                  // _this.subshowmodalTip();
+                  is_show_modal = false;
+                };
+              };
+            };
+          },
+          complete() { }
+        })
+      } else {
+        console.warn(5)
+        wx.requestSubscribeMessage({
+          tmplIds: [subscribedata.template_id || ''],
+          success(res) {
+            if (res[subscribedata.template_id] == "accept") {
+              app.subscribefun(_this, 0, subscribedata.template_id, subscribedata.subscribe_type);
+              _this.subshowmodalfun();
+            };
+          }
+        })
+      };
+    };
+  },
+  subshowmodalTip: function () {
+    var _this = this;
+    wx.showModal({
+      title: '提示',
+      content: '订阅成功',
+      showCancel: false,
+      success: function (res) {}
+    })
+  },
+
 
   realNameSysfun:function(){
     this.setData({
@@ -427,7 +491,8 @@ Page({
         sumPrice:sumPrice,
         buyNowOrOppor:buyNowOrOppor,
         isSubscribe:isSubscribe,
-        is_buy_place:false
+        is_buy_place:false,
+        is_subscribe:false
       })
     }else if(obtain == 2){ // tab two
       var ticketTwo = _this.data.ticketTwo || [];
@@ -467,7 +532,8 @@ Page({
         sumPrice:ticketTwo[ind].price || 0,
         buyNowOrOppor:buyNowOrOppor,
         isSubscribe:isSubscribe,
-        is_buy_place:is_buy_place
+        is_buy_place:is_buy_place,
+        is_subscribe:false
       });
 
     };
@@ -508,12 +574,28 @@ Page({
       loginid: app.signindata.loginid,
       isProduce: app.signindata.isProduce,
       defaultinformation:app.signindata.defaultinformation||'',
+      isNeedUserInfo:app.signindata.isNeedUserInfo
     }); 
 
     _this.getData();
     _this.tigetData();
+    _this.toyShowbrandJson();
   },
-
+  toyShowbrandJson:function(){
+    var _this = this;
+    // 参展品牌logo数据
+   wx.request({
+     url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/toyshowSign.json?time='+app.signindata.appNowTime,
+     method: 'GET',
+     header: { 'Accept': 'application/json' },
+     success: function (res) {
+       console.log('参展品牌logo===',res)
+       _this.setData({
+        brandList:res.data.List.brand || []
+       })
+     }
+   })
+  },
   tigetData:function(){
 
     var _this = this;
@@ -678,7 +760,9 @@ Page({
 
           console.log('showSubscription=========',tabOneId,seldate)
 
+          var goods_desc_poster = res.data.List.goods_desc_poster || [];
           _this.setData({
+            goods_desc_poster:goods_desc_poster,
             showSubscription:showSubscription,
             buyNowOrOppor:buyNowOrOppor,
             banner:res.data.List.banner || [],
@@ -699,6 +783,13 @@ Page({
             // contactsname:res.data.Info.contact || '',
             // contactsphone:res.data.Info.mobile || ''
           });
+
+          // 商品详情 
+          if(res.data.Info.goods_desc){
+            WxParse.wxParse('article', 'html', decodeURIComponent(res.data.Info.goods_desc.replace(/\+/g, ' ')), _this, 0);
+          };
+          
+          
 
         } else {
           if(res.data.Msg){
@@ -1055,7 +1146,17 @@ Page({
         }
     }.bind(_this), 1000);
   },
-
+  // 更新用户信息
+  getUserProfile(w){
+    var _this = this;
+    console.log(1111111)
+    app.getUserProfile((res,userInfo) => {
+       _this.setData({
+          isNeedUserInfo:false
+       });
+       app.signindata.isNeedUserInfo = false; 
+    });
+  },
 
 
 })

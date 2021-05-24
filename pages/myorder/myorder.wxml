@@ -129,7 +129,7 @@
              </view>
 
              <!-- 门票不显示发货条 -->
-             <block wx:if='{{item.order_type==29 || item.toyshowTips || item.status==7}}'></block>
+             <block wx:if='{{item.order_type==29 || item.toyshowTips || item.status==7 || item.isToyShowTicket}}'></block>
              <block wx:else>
                     <!--  商品状态  加不等于砍价item.order_type!=6-->
                     <block wx:if='{{!item.isToyCabinet}}'>

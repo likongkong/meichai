@@ -142,7 +142,8 @@ App({
     is_sigin:true,
     suap:1, // 统计用户从哪个页面进入  
     placeAnOrderOne:'', // 购票页 下单数据
-    placeAnOrderTwo:''
+    placeAnOrderTwo:'',
+    isNeedUserInfo:false
   },
   //一番赏队列倒计时
   // yifanshangIsInQueueFun(time){
@@ -289,7 +290,7 @@ App({
                       var uid = res.data.Info.uid || '';
                       wx.setStorage({ key: 'signin', data: { openid: openid, loginid: loginid, uid: uid } });
 
-
+                      _this.signindata.isNeedUserInfo = res.data.Info.isNeedUserInfo;   // 新用户需要上传用户信息
                       _this.signindata.userInfo = res.data.Info.user || {};
 
                       if (res.data.Info.user) {
