@@ -50,12 +50,15 @@
 
   <view style="padding-bottom:240rpx;">
 
-        <view class="anPos {{is_anPos_position?'isanPosposition':''}}">
-            <view class="anPosEve {{tid==1?'anPosEveA':''}}" data-tid='1' catchtap="position">参展品牌</view>
-            <view class="anPosEve {{tid==2?'anPosEveA':''}}" data-tid='2' catchtap="position">品牌信息</view>
-            <view class="anPosEve {{tid==3?'anPosEveA':''}}" data-tid='3' catchtap="position">规则说明</view>
+        <!-- <view class="anPosWrap" style="top:{{statusBarHeightMc}}px"> -->
+        <view class="{{isanPosTop?'anPosWrap':''}}" style="top:{{isanPosTop?statusBarHeightMc:''}}px" id="anPos">
+            <view class="anPos {{is_anPos_position?'isanPosposition':''}}">
+                <view class="anPosEve {{tid==1?'anPosEveA':''}}" data-tid='1' catchtap="position">参展品牌</view>
+                <view class="anPosEve {{tid==2?'anPosEveA':''}}" data-tid='2' catchtap="position">品牌信息</view>
+                <view class="anPosEve {{tid==3?'anPosEveA':''}}" data-tid='3' catchtap="position">规则说明</view>
+            </view>
         </view>
-
+        
         <view style="padding:40rpx 20rpx 0;" wx:if='{{goods_desc_poster&&goods_desc_poster.length!=0}}'>
             <image style="display:block;width:100%;" wx:for='{{goods_desc_poster}}' wx:key='key' mode="widthFix" src="{{item}}?{{nowTime}}"></image>
         </view>

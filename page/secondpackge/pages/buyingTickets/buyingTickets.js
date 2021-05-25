@@ -58,19 +58,21 @@ Page({
     pfiii:false,
     tid:1,
     is_gdbp_display:false,
-    is_anPos_position:false
+    is_anPos_position:false,
+    isanPosTop:false
 
   },
   onPageScroll(e) {
-
     let scrollTop = e.scrollTop;
-
-    console.log(scrollTop)
-
-    if(scrollTop>200 && !this.data.is_gdbp_display){
+    if(scrollTop>this.data.anPosTop){
        this.setData({
-          is_gdbp_display:true
+          is_gdbp_display:true,
+          isanPosTop:true,
        })
+    }else{
+      this.setData({
+        isanPosTop:false,
+     })
     };
     if(scrollTop < 600 && this.data.tid !=1){
        this.setData({
@@ -868,6 +870,13 @@ Page({
           if(res.data.Info.goods_desc){
             WxParse.wxParse('article', 'html', decodeURIComponent(res.data.Info.goods_desc.replace(/\+/g, ' ')), _this, 0);
           };
+
+
+          wx.createSelectorQuery().select('#anPos').boundingClientRect(function(rect){
+            _this.setData({
+              anPosTop:rect.top
+            })
+          }).exec()
           
           
 

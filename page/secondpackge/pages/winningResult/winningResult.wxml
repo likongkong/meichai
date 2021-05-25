@@ -14,7 +14,7 @@
     <view class="{{current == 3?'active':''}}" data-ind="3" catchtap="tabqh">补抽名单</view>
   </view>
 
-  <text wx:if="{{current == 3}}" style="display:block;color:#1684FC;font-size:24rpx;width:100%;text-align:center;margin:-16rpx 0 20rpx 0;">注：未成功补发的优先入场权将通过其他活动放出，敬请期待...</text>
+  <text wx:if="{{current == 3}}" style="display:block;color:#1684FC;font-size:24rpx;width:100%;margin:-16rpx 0 20rpx 0;padding:0 35rpx;box-sizing:border-box;">注：所有用户已沟通报名事宜，自动放弃优先入场权的名额将通过其他活动放出，敬请期待。</text>
 
   <view class="itemsWrap">
     <block wx:if="{{current == 3}}">
@@ -27,7 +27,12 @@
         </view>
         <block wx:for="{{dataList}}" wx:key="index">
           <view class="table tableB">
-            <view style="width:28%">{{item.date}}{{item.sort}}</view>
+            <block wx:if="{{item.sort}}">
+              <view style="width:28%">{{item.date}}{{item.sort}}</view>
+            </block>
+            <block wx:else>
+              <view style="width:28%">{{item.date}}</view>
+            </block>
             <view style="width:16%">{{item.name[0]}}**</view>
             <view style="width:21%">{{item.tel}}</view>
             <view style="width:35%">{{item.card}}</view>
