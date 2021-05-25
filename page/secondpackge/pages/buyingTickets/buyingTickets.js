@@ -55,9 +55,80 @@ Page({
     showSubscription:true,
     cartId:'',
     is_subscribe:false,
-    pfiii:false
+    pfiii:false,
+    tid:1,
+    is_gdbp_display:false,
+    is_anPos_position:false
 
   },
+  onPageScroll(e) {
+
+    let scrollTop = e.scrollTop;
+
+    console.log(scrollTop)
+
+    if(scrollTop>200 && !this.data.is_gdbp_display){
+       this.setData({
+          is_gdbp_display:true
+       })
+    };
+    if(scrollTop < 600 && this.data.tid !=1){
+       this.setData({
+          tid:1
+       })
+    }
+    // var space = this.data.bottomtop - this.data.navbtn
+
+    // if (e.scrollTop > space) {
+    //   this.setData({
+    //     ishowsusp: true
+    //   })
+    // } else {
+    //   this.setData({
+    //     ishowsusp: false
+    //   })
+    // }
+
+  },
+  // 锚点定位
+  position:function(w){
+    var tid = w.currentTarget.dataset.tid || w.target.dataset.tid || 0;
+    this.setData({tid:tid})
+    if(tid == 3 && !this.data.is_gdbp_display){
+      this.setData({
+        is_gdbp_display:true
+      });
+      setTimeout(()=>{
+        var query = wx.createSelectorQuery();
+        query.select('#e' + tid).boundingClientRect();
+        query.selectViewport().scrollOffset();
+        query.exec(function(res) {
+          if (res && res[0] && res[1]) {
+            wx.pageScrollTo({
+               scrollTop:( res[0].top+res[1].scrollTop-app.signindata.statusBarHeightMc||90 )-85,
+               duration:300
+            })
+          }
+        });
+      },500)
+    }else{
+      var query = wx.createSelectorQuery();
+      query.select('#e' + tid).boundingClientRect();
+      query.selectViewport().scrollOffset();
+      query.exec(function(res) {
+        if (res && res[0] && res[1]) {
+          wx.pageScrollTo({
+             scrollTop:( res[0].top+res[1].scrollTop-app.signindata.statusBarHeightMc||90 )-85,
+             duration:300
+          })
+        }
+      });
+    };
+
+
+},
+
+  // 预填信息 弹框
   pfiiifun:function(){
     this.setData({
       pfiii:!this.data.pfiii
@@ -768,7 +839,9 @@ Page({
           console.log('showSubscription=========',tabOneId,seldate)
 
           var goods_desc_poster = res.data.List.goods_desc_poster || [];
+          var goods_desc_brand_poster = res.data.List.goods_desc_brand_poster || [];
           _this.setData({
+            goods_desc_brand_poster:goods_desc_brand_poster,
             goods_desc_poster:goods_desc_poster,
             showSubscription:showSubscription,
             buyNowOrOppor:buyNowOrOppor,
