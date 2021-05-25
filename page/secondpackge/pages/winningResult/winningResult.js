@@ -85,7 +85,7 @@ Page({
            if(res.data.List.makeUpList && res.data.List.makeUpList.length!=0){
             for(var i=0;i<res.data.List.makeUpList.length;i++){
               res.data.List.makeUpList[i].tel = _this.plusXing(res.data.List.makeUpList[i].tel,3,3)
-              res.data.List.makeUpList[i].card = _this.plusXing(res.data.List.makeUpList[i].card,3,4)
+              res.data.List.makeUpList[i].card = _this.plusXing(res.data.List.makeUpList[i].card,4,5)
              }
            }
            var twelve = res.data.List.listOfWinningResults.twelve;
