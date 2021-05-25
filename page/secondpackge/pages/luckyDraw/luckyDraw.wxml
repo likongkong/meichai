@@ -307,7 +307,7 @@
 
       <block wx:if='{{dataInfo.isWinner}}'>  
           <view class="winningTips" style="font-size:36rpx;text-align:center;">恭喜您！获得{{dataInfo.date}}VIP优先入场资格</view>
-          <view class="winningTipsTxt">激活码请于2021年6月10日 21:00前使用</view>
+          <view class="winningTipsTxt">激活码请于2021年6月10日 24:00前使用</view>
           <image class="winningTipsImg" mode="aspectFit" src="{{dataInfo.imgAward}}"></image>
           <view class="winningTipsName" style="padding:20rpx 0 0 0;font-size:30rpx;position: relative;width:430rpx;">激活码 <block wx:if='{{displayClearText}}'>{{dataInfo.cdkey}}</block><block wx:else>****************</block><image class="displayClearTextImg" catchtap="is_dct" mode="aspectFit" src="{{displayClearText?'http://cdn.51chaidan.com/images/sign/show.png':'http://cdn.51chaidan.com/images/sign/hide.png'}}"></image></view>
           <view class="winningTipsName" style="padding:15rpx 0 20rpx 0;font-size:30rpx;">入场顺序 <text style="color:#E95159;font-size:50rpx;">NO.{{dataInfo.sort}}</text></view>

@@ -661,7 +661,11 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
           app.signindata.isNewer = false;
           _this.data.isNewer = false;
           _this.data.isonshow = true;
-          res.data.Info.infoGoods.goods_desc = decodeURIComponent(res.data.Info.infoGoods.goods_desc.replace(/\+/g, ' '));
+          
+          if(res.data.Info.infoGoods && res.data.Info.infoGoods.goods_desc){
+              res.data.Info.infoGoods.goods_desc = decodeURIComponent(res.data.Info.infoGoods.goods_desc.replace(/\+/g, ' '));
+          };
+          
           WxParse.wxParse('article', 'html', res.data.Info.infoGoods.goods_desc, _this, 0);
           clearInterval(_this.data.timer)
 
