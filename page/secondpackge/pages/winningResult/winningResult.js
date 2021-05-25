@@ -39,9 +39,13 @@ Page({
       this.setData({
         processingData:this.data.thirteen
       }); 
-    }else{
+    }else if(this.data.current==2){
       this.setData({
         processingData:this.data.fourteen
+      }); 
+    }else if(this.data.current==3){
+      this.setData({
+        processingData:this.data.makeUpList
       }); 
     }
     this.reset();
@@ -78,19 +82,29 @@ Page({
            _this.setData({
             dataInfo:res.data.Info,
            })
+           if(res.data.List.makeUpList && res.data.List.makeUpList.length!=0){
+            for(var i=0;i<res.data.List.makeUpList.length;i++){
+              res.data.List.makeUpList[i].tel = _this.plusXing(res.data.List.makeUpList[i].tel,3,3)
+              res.data.List.makeUpList[i].card = _this.plusXing(res.data.List.makeUpList[i].card,4,5)
+             }
+           }
            var twelve = res.data.List.listOfWinningResults.twelve;
            var thirteen = res.data.List.listOfWinningResults.thirteen;
            var fourteen = res.data.List.listOfWinningResults.fourteen;
+           var makeUpList = res.data.List.makeUpList;
            _this.data.twelve = twelve;
            _this.data.thirteen = thirteen;
            _this.data.fourteen = fourteen;
+           _this.data.makeUpList = makeUpList;
 
            if(_this.data.current == 0){
             _this.data.processingData = twelve;
            }else if(_this.data.current == 1){
             _this.data.processingData = thirteen;
-           }else{
+           }else if(_this.data.current == 2){
             _this.data.processingData = fourteen;
+           }else if(_this.data.current == 3){
+            _this.data.processingData = makeUpList;
            }
            _this.processingDataPaging()
         }else{
@@ -110,7 +124,7 @@ Page({
     let _this = this;
     let pid = _this.data.pid;
     let limit = _this.data.limit;
-    let dataList = _this.data.processingData;
+    let dataList = _this.data.processingData || [];
     console.log(dataList)
     if(dataList.length == 0){
       wx.showToast({

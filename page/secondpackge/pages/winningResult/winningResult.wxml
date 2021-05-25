@@ -11,25 +11,48 @@
     <view class="{{current == 0?'active':''}}" data-ind="0" catchtap="tabqh">6月12日</view>
     <view class="{{current == 1?'active':''}}" data-ind="1" catchtap="tabqh">6月13日</view>
     <view class="{{current == 2?'active':''}}" data-ind="2" catchtap="tabqh">6月14日</view>
+    <view class="{{current == 3?'active':''}}" data-ind="3" catchtap="tabqh">补抽名单</view>
   </view>
 
+  <text wx:if="{{current == 3}}" style="display:block;color:#1684FC;font-size:24rpx;width:100%;text-align:center;margin:-16rpx 0 20rpx 0;">注：未成功补发的优先入场权将通过其他活动放出，敬请期待...</text>
+
   <view class="itemsWrap">
-    <view>
-      <view class="table">
-        <text>入场顺序</text>
-        <text>头像</text>
-        <text>昵称</text>
-      </view>
-      <block wx:for="{{dataList}}" wx:key="index">
-        <view class="table tableB">
-          <view>{{item.sort}}</view>
-          <view>
-            <image src="{{item.litpic}}" mode="widthFix"></image>
-          </view>
-          <view>{{item.nick[0]}}******</view>
+    <block wx:if="{{current == 3}}">
+      <view>
+        <view class="table">
+          <text style="width:28%">入场顺序</text>
+          <text style="width:16%">姓名</text>
+          <text style="width:21%">电话号码</text>
+          <text style="width:35%">身份证号</text>
         </view>
-      </block>
-    </view>
+        <block wx:for="{{dataList}}" wx:key="index">
+          <view class="table tableB">
+            <view style="width:28%">{{item.date}}{{item.sort}}</view>
+            <view style="width:16%">{{item.name[0]}}**</view>
+            <view style="width:21%">{{item.tel}}</view>
+            <view style="width:35%">{{item.card}}</view>
+          </view>
+        </block>
+      </view>
+    </block>
+    <block wx:else>
+      <view>
+        <view class="table">
+          <text>入场顺序</text>
+          <text>头像</text>
+          <text>昵称</text>
+        </view>
+        <block wx:for="{{dataList}}" wx:key="index">
+          <view class="table tableB">
+            <view>{{item.sort}}</view>
+            <view>
+              <image src="{{item.litpic}}" mode="aspectFit"></image>
+            </view>
+            <view>{{item.nick[0]}}******</view>
+          </view>
+        </block>
+      </view>
+    </block>
   </view>
 </view>
 
