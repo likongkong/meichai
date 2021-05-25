@@ -76,10 +76,10 @@
             <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e4'>—————— 品牌信息 ——————</view>
             <view class="gdbpbox" wx:if='{{is_gdbp_display}}'>
                 <view class="gdbp" style="margin-right:30rpx;">
-                    <image class="gdbpimg" wx:for="{{goods_desc_brand_poster}}" wx:key="key" src="{{item}}" mode='widthFix' wx:if='{{index%2==0}}'></image>
+                    <image class="gdbpimg" wx:for="{{goods_desc_brand_poster}}" wx:key="key" src="{{item}}" mode='widthFix' wx:if='{{index%2==0}}' data-url='{{item}}' catchtap="isziaprtpfun"></image>
                 </view>
                 <view class="gdbp">
-                    <image class="gdbpimg" wx:for="{{goods_desc_brand_poster}}" wx:key="key" src="{{item}}" mode='widthFix' wx:if='{{index%2==1}}'></image>
+                    <image class="gdbpimg" wx:for="{{goods_desc_brand_poster}}" wx:key="key" src="{{item}}" mode='widthFix' wx:if='{{index%2==1}}' data-url='{{item}}' catchtap="isziaprtpfun"></image>
                 </view>
                 <!-- <view class="ssubBrandEve" wx:for="{{goods_desc_brand_poster}}" wx:key="key">
                     <image class="ssubBiliimgbr" wx:for="{{goods_desc_brand_poster}}" wx:key="key" src="{{item}}" mode='aspectFit'></image>
@@ -96,6 +96,11 @@
 
 </view>
  
+<!-- 放大预览图片 -->
+<view class="ziaprtp" wx:if='{{is_ziaprtp}}' catchtap="isziaprtpfun" catchtouchmove="true">
+    <image class="ziaprtpImg" mode='aspectFit' src="{{ziaprtp_url}}"></image>
+</view>
+
 <view class="leafletBottom">
    <!-- <view class="leafletBottomTxt">门票玩具凭身份证领取，购票场次时间内有效</view> -->
    <block wx:if='{{ticket}}'>
