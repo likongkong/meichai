@@ -98,7 +98,7 @@
  
 <!-- 放大预览图片 -->
 <view class="ziaprtp" wx:if='{{is_ziaprtp}}' catchtap="isziaprtpfun" catchtouchmove="true">
-    <image class="ziaprtpImg" mode='widthFix' src="{{ziaprtp_url}}"></image>
+    <image class="ziaprtpImg" mode='aspectFit' src="{{ziaprtp_url}}"></image>
 </view>
 
 <view class="leafletBottom">
