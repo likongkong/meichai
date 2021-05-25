@@ -3,7 +3,7 @@
 <import src="../../../../wxParse/wxParse.wxml" />
 
 <view class="wrap">
-  <view class="countdownWrap" style='background:#000;height:68rpx;padding:0 20rpx;text-align: center;line-height: 68rpx;font-size: 40rpx;color: #fff;' catchtap="{{dataInfo.status==3?'wonOrNot':''}}">
+  <view class="countdownWrap" style='background:#000;height:68rpx;padding:0 20rpx;text-align: center;line-height: 68rpx;font-size: 40rpx;color: #fff;' catchtap="{{dataInfo.status==3&&dataInfo.pay_time?'wonOrNot':''}}">
     <!-- status==1 未开始 -->
     <block wx:if="{{dataInfo.status == 1}}">
       <text class='timetextstyle' style='margin-right:10rpx;'>距报名开始:</text>
@@ -30,12 +30,17 @@
     </block>
     <!-- status==3 已结束 -->
     <block wx:elif="{{dataInfo.status == 3}}">
-      <!-- isWinner==true为中奖  -->
-      <block wx:if="{{dataInfo.isWinner}}">
-        <text class='timetextstyle'>恭喜您已中签</text>
+      <block wx:if="{{dataInfo.pay_time}}">
+        <!-- isWinner==true为中奖  -->  
+        <block wx:if="{{dataInfo.isWinner}}">
+          <text class='timetextstyle'>恭喜您已中签</text>
+        </block>
+        <block wx:else>
+          <text class='timetextstyle'>很遗憾，您未中签</text>
+        </block>
       </block>
       <block wx:else>
-        <text class='timetextstyle'>很遗憾，您未中签</text>
+        <text class='timetextstyle'>已结束</text>
       </block>
     </block>
   </view>
