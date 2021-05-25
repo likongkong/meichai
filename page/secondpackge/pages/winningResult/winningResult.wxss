@@ -74,7 +74,7 @@ page{
 }
 .tableB view:nth-child(2) image{
   width: 54rpx;
-  height: auto;
+  height: 54rpx;
   border-radius: 100%;
 }
 .tableB view:last-child{
@@ -99,6 +99,9 @@ page{
 }
 .tabWrap view:nth-child(2){
   border-left: none;
+  border-right: none;
+}
+.tabWrap view:nth-child(3){
   border-right: none;
 }
 .active{
