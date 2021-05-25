@@ -386,7 +386,12 @@ Page({
     var order_type = event.currentTarget.dataset.order_type || event.target.dataset.order_type;
     var activity_id = event.currentTarget.dataset.activity_id || event.target.dataset.activity_id || 0;
     var _this = this;
-    if(_this.data.comdata.isToyshowDrawGoods){
+
+    if(activity_id == 374856 || activity_id ==  374855 || activity_id == 374857){
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/luckyDraw/luckyDraw"
+      })  
+    }else if(_this.data.comdata.isToyshowDrawGoods){
       wx.navigateTo({
         url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
       });
@@ -405,7 +410,7 @@ Page({
         url: "/page/component/pages/crowdfunding/crowdfunding?aid=" + activity_id
       })
     } else if(order_type == 13){
-      wx.navigateTo({   
+      wx.navigateTo({    
         url: "/page/component/pages/limitlottery/limitlottery?id=" + activity_id
       });
     } else if(order_type == 21){
@@ -413,8 +418,8 @@ Page({
         url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + activity_id
       });
     } else if(order_type == 27){
-      wx.navigateTo({   
-        url: "/page/secondpackge/pages/luckyDraw/luckyDraw?id=" + activity_id
+      wx.navigateTo({    
+        url: "/page/component/pages/limitlottery/limitlottery?id=" + activity_id
       });
     } else{
       wx.navigateTo({    

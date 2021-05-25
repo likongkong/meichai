@@ -284,32 +284,32 @@ Page({
     //   app.showToastC('敬请期待');
     // }
   },
-  jumpLuckyDraw(){
-    // var isBuyingTickets = this.data.isBuyingTickets;
-    // if(isBuyingTickets){
-    //   wx.navigateTo({
-    //     url: "/page/secondpackge/pages/priorityList/priorityList"
-    //   });
-    // }else{
-    //   app.showToastC('活动已结束，今晚20:00公布中奖名单');
-    // }
+  // jumpLuckyDraw(){
+  //   // var isBuyingTickets = this.data.isBuyingTickets;
+  //   // if(isBuyingTickets){
+  //   //   wx.navigateTo({
+  //   //     url: "/page/secondpackge/pages/priorityList/priorityList"
+  //   //   });
+  //   // }else{
+  //   //   app.showToastC('活动已结束，今晚20:00公布中奖名单');
+  //   // }
 
-    var nowTime = new Date().getTime();
-    console.log('nowTime=====',parseInt(nowTime/1000))
-    if( parseInt(nowTime/1000) >= '1621492396' ){
-      this.setData({
-        isShowDrawTxt:true
-      })
-      wx.navigateTo({
-        url: "/page/secondpackge/pages/priorityList/priorityList"
-      });
-    }else{
-      this.setData({
-        isShowDrawTxt:false
-      })
-      app.showToastC('活动已结束，今晚20:00公布中奖名单');
-    }
-  },
+  //   var nowTime = new Date().getTime();
+  //   console.log('nowTime=====',parseInt(nowTime/1000))
+  //   if( parseInt(nowTime/1000) >= '1621492396' ){
+  //     this.setData({
+  //       isShowDrawTxt:true
+  //     })
+  //     wx.navigateTo({
+  //       url: "/page/secondpackge/pages/priorityList/priorityList"
+  //     });
+  //   }else{
+  //     this.setData({
+  //       isShowDrawTxt:false
+  //     })
+  //     app.showToastC('活动已结束，今晚20:00公布中奖名单');
+  //   }
+  // },
   jumpposition:function(w){
     wx.navigateTo({
       url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
