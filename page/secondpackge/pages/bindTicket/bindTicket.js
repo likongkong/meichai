@@ -25,9 +25,25 @@ Page({
     consignee:'',
     mobile:'',
     idcard:'',
-    isTwiceConfirmMask:false
+    isTwiceConfirmMask:false,
+    isChBindInfoMask:false,
+    priority:[]
   },
 
+  toggleChBindInfo(e){
+    var ind = e.currentTarget.dataset.ind;
+    this.data.priority[ind].tel = this.plusXing(this.data.priority[ind].tel,3,3);
+    this.data.priority[ind].idcard = this.plusXing(this.data.priority[ind].idcard,4,5);
+    this.setData({
+      chBindInfo: this.data.priority[ind],
+      isChBindInfoMask: true
+    });
+  },
+  hideChBindInfo(){
+    this.setData({
+      isChBindInfoMask: false
+    });
+  },
   tabChangeFun(e){
     this.setData({
       current: e.currentTarget.dataset.ind

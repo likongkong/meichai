@@ -221,3 +221,55 @@ page{
   border-radius: 10rpx;
   margin: 50rpx auto 0;
 }
+
+
+.chBindInfoMask{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.chBindInfoBox{
+  width: 478rpx;
+  background: #fff;
+  border-radius: 10rpx;
+  padding: 35rpx 35rpx;
+  box-sizing: border-box;
+}
+.chBindInfoTitle{
+  font-size: 24rpx;
+  color: #101010;
+}
+.chBindInfoCard{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 30rpx 0;
+}
+.chBindInfoCard text:first-child{
+  width: 35%;
+  font-size: 24rpx;
+  color: #101010;
+}
+.chBindInfoCard text:last-child{
+  width: 65%;
+  font-size: 24rpx;
+  color: #8A8A8A;
+}
+.chBindInfoMaskGB{
+  width: 80%;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 60rpx;
+  background: #1890ff;
+  text-align: center;
+  color: #fff;
+  font-size: 26rpx;
+  margin: 44rpx auto 0;
+}
