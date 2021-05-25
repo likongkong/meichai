@@ -492,3 +492,50 @@
   font-size: 34rpx;
   font-weight: bold;
 }
+
+.anPos{
+  width: 100%;
+  height: 80rpx;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+}
+.anPosEve{
+  position: relative;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  padding:0 60rpx;
+  font-size:24rpx;
+}
+.anPosEveA{
+  color: #1684FC;
+}
+.anPosEveA::after{
+  content: ' ';
+  width: 100rpx;
+  height: 10rpx;
+  background:#1684FC;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin:auto;
+}
+.gdbpbox{
+  padding: 0 30rpx 0;
+}
+.gdbp{
+  display: inline-block;
+  width: 330rpx;
+  vertical-align: top;
+}
+.gdbpimg{
+  width: 100%;
+  height: auto;
+  margin-bottom: 20rpx;
+}
+.is_anPos_position{
+  position: fixed;
+  left: 0;
+}

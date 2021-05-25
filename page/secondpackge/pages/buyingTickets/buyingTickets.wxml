@@ -50,26 +50,45 @@
 
   <view style="padding-bottom:240rpx;">
 
+        <view class="anPos {{is_anPos_position?'isanPosposition':''}}">
+            <view class="anPosEve {{tid==1?'anPosEveA':''}}" data-tid='1' catchtap="position">参展品牌</view>
+            <view class="anPosEve {{tid==2?'anPosEveA':''}}" data-tid='2' catchtap="position">品牌信息</view>
+            <view class="anPosEve {{tid==3?'anPosEveA':''}}" data-tid='3' catchtap="position">规则说明</view>
+        </view>
+
         <view style="padding:40rpx 20rpx 0;" wx:if='{{goods_desc_poster&&goods_desc_poster.length!=0}}'>
             <image style="display:block;width:100%;" wx:for='{{goods_desc_poster}}' wx:key='key' mode="widthFix" src="{{item}}?{{nowTime}}"></image>
         </view>
-        <block wx:if='{{brandList&&brandList.length!=0}}'>
-            <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e4' wx:if='{{brandList&&brandList.length!=0}}'>—————— 参展品牌 ——————</view>
+
+        <view wx:if='{{brandList&&brandList.length!=0}}' id='e1'>
+            <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e1' wx:if='{{brandList&&brandList.length!=0}}'>—————— 参展品牌 ——————</view>
             <view style="width:100%;overflow: hidden;padding:0 40rpx;box-sizing: border-box;">
                 <view class="ssubBrandEve" wx:for="{{brandList}}" wx:key="key">
                     <image class="ssubBiliimgbr" src="{{item.brandLogo}}" mode='aspectFit'></image>
                 </view>
             </view> 
-        </block>
-       
+        </view>        
 
-        <view class="detailimg" style="padding:20rpx;">
+        <view wx:if='{{goods_desc_brand_poster&&goods_desc_brand_poster.length!=0}}' id='e2'>
+            <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e4'>—————— 品牌信息 ——————</view>
+            <view class="gdbpbox" wx:if='{{is_gdbp_display}}'>
+                <view class="gdbp" style="margin-right:30rpx;">
+                    <image class="gdbpimg" wx:for="{{goods_desc_brand_poster}}" wx:key="key" src="{{item}}" mode='widthFix' wx:if='{{index%2==0}}'></image>
+                </view>
+                <view class="gdbp">
+                    <image class="gdbpimg" wx:for="{{goods_desc_brand_poster}}" wx:key="key" src="{{item}}" mode='widthFix' wx:if='{{index%2==1}}'></image>
+                </view>
+                <!-- <view class="ssubBrandEve" wx:for="{{goods_desc_brand_poster}}" wx:key="key">
+                    <image class="ssubBiliimgbr" wx:for="{{goods_desc_brand_poster}}" wx:key="key" src="{{item}}" mode='aspectFit'></image>
+                </view> -->
+            </view> 
+        </view>
+
+       
+        <view class="detailimg" style="padding:20rpx;" id='e3'>
             <template is="wxParse" data="{{wxParseData:article.nodes}}" />
         </view>
-      <!-- <image style="display:block;width:100%;" mode="widthFix" src="https://cdn.51chaidan.com/images/toyshow/toyshowDesc1.jpg?{{nowTime}}"></image>
-      <image style="display:block;width:100%;" mode="widthFix" src="https://cdn.51chaidan.com/images/toyshow/toyshowDesc2.jpg?{{nowTime}}"></image>
-      <image style="display:block;width:100%;" mode="widthFix" src="https://cdn.51chaidan.com/images/toyshow/toyshowDesc3.jpg?{{nowTime}}"></image>
-      <image style="display:block;width:100%;" mode="widthFix" src="https://cdn.51chaidan.com/images/toyshow/toyshowDesc4.jpg?{{nowTime}}"></image> -->
+
   </view>
 
 </view>
