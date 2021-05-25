@@ -152,7 +152,7 @@ Page({
           // 商品详情 
           WxParse.wxParse('article', 'html', dataInfo.actionDetails, _this, 0);
           // 活动结束 显示中奖未中奖弹框
-          if(dataInfo.status == 3){
+          if(dataInfo.status == 3 && dataInfo.pay_time){
             _this.wonOrNot()
           }
           _this.countdownbfun();        
