@@ -58,8 +58,18 @@ Page({
     pfiii:false,
     tid:1,
     is_gdbp_display:false,
-    is_anPos_position:false
+    is_anPos_position:false,
+    is_ziaprtp:false,
+    ziaprtp_url:'',
 
+
+  },
+  isziaprtpfun(w){
+    var url = w.currentTarget.dataset.url || w.target.dataset.url||0;
+    this.setData({
+      is_ziaprtp:!this.data.is_ziaprtp,
+      ziaprtp_url:url
+    })
   },
   onPageScroll(e) {
 
@@ -76,7 +86,14 @@ Page({
        this.setData({
           tid:1
        })
-    }
+    };
+
+    console.log(scrollTop,this.data.windowHeight - 53,scrollTop > this.data.windowHeight - 53)
+    if(scrollTop > this.data.windowHeight - 53){
+      this.setData({is_anPos_position:true})
+    }else{
+      this.setData({is_anPos_position:false})
+    };
     // var space = this.data.bottomtop - this.data.navbtn
 
     // if (e.scrollTop > space) {

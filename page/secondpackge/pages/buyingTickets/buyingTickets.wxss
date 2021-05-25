@@ -539,3 +539,19 @@
   position: fixed;
   left: 0;
 }
+.ziaprtp{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 3333;
+  background:#000;
+  display: flex;
+  align-items:center;
+}
+.ziaprtpImg{
+  width: 100%;
+  height: auto;
+  display: block;
+}
