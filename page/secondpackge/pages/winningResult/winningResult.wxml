@@ -35,6 +35,26 @@
         </block>
       </view>
     </block>
+    <!-- <block wx:if="{{current == 3}}">
+      <view>
+        <view class="table">
+          <text style="width:16%">入场顺序</text>
+          <text style="width:18%">姓名</text>
+          <text style="width:14%">uid</text>
+          <text style="width:20%">电话号码</text>
+          <text style="width:33%">身份证号</text>
+        </view>
+        <block wx:for="{{dataList}}" wx:key="index">
+          <view class="table tableB">
+            <view style="width:16%">{{item.date}}</view>
+            <view style="width:18%">{{item.name}}</view>
+            <view style="width:14%">{{item.user_id}}</view>
+            <view style="width:20%">{{item.tel}}</view>
+            <view style="width:33%">{{item.card}}</view>
+          </view>
+        </block>
+      </view>
+    </block> -->
     <block wx:else>
       <view>
         <view class="table">
