@@ -61,7 +61,7 @@ Page({
     is_anPos_position:false,
     is_ziaprtp:false,
     ziaprtp_url:'',
-
+    isanPosTop:false
 
   },
   isziaprtpfun(w){
@@ -72,15 +72,16 @@ Page({
     })
   },
   onPageScroll(e) {
-
     let scrollTop = e.scrollTop;
-
-    console.log(scrollTop)
-
-    if(scrollTop>200 && !this.data.is_gdbp_display){
+    if(scrollTop>this.data.anPosTop){
        this.setData({
-          is_gdbp_display:true
+          is_gdbp_display:true,
+          isanPosTop:true,
        })
+    }else{
+      this.setData({
+        isanPosTop:false,
+     })
     };
     if(scrollTop < 600 && this.data.tid !=1){
        this.setData({
@@ -88,7 +89,6 @@ Page({
        })
     };
 
-    console.log(scrollTop,this.data.windowHeight - 53,scrollTop > this.data.windowHeight - 53)
     if(scrollTop > this.data.windowHeight - 53){
       this.setData({is_anPos_position:true})
     }else{
@@ -885,6 +885,13 @@ Page({
           if(res.data.Info.goods_desc){
             WxParse.wxParse('article', 'html', decodeURIComponent(res.data.Info.goods_desc.replace(/\+/g, ' ')), _this, 0);
           };
+
+
+          wx.createSelectorQuery().select('#anPos').boundingClientRect(function(rect){
+            _this.setData({
+              anPosTop:rect.top
+            })
+          }).exec()
           
           
 
