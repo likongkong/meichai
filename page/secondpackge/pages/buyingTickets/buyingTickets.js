@@ -66,7 +66,8 @@ Page({
   // 订阅授权
   subscrfun:function(){
     var _this = this;
-    _this.subscrfuna(1);
+    _this.data.id = _this.data.tabOneId;
+    _this.subscrfuna();
   },
 
   // 拉起订阅
