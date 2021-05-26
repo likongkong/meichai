@@ -76,11 +76,35 @@ Page({
     pictboxbox:false,
     electronicInvoice:true,
     isrefresh :false,
-    commoddata:{}
+    commoddata:{},
 
+    is_ActivationCode:false,
+    displayClearText:false
+  },
+  // 去激活
+  deactivation(){
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/bindTicket/bindTicket"
+    })  
   },
 
+  //  复制内容到粘贴板
+  copyTBLac: function (e) {
+    var _this = this;
+    wx.setClipboardData({
+      data: _this.data.comdata.activationCode || '',
+      success: function (res) {
+        app.showToastC('复制成功');
+      }
+    });
 
+  },  
+  // 激活码 是否明文 切换
+  is_dct:function(){
+    this.setData({
+      displayClearText:!this.data.displayClearText
+    })
+  },
   // 倒计时
   countdownbfun: function() {
     var _this = this;
@@ -497,9 +521,14 @@ Page({
     var activity_id = event.currentTarget.dataset.activity_id || event.target.dataset.activity_id || 0;
     var _this = this;
 
-    wx.navigateTo({
-      url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
-    });
+    if(this.data.is_ActivationCode){
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
+      });
+    }else{
+      this.deactivation()
+    }
+
     return false;
 
     if (order_type == 3) {
@@ -623,7 +652,13 @@ Page({
                    console.log(3)  
              }; 
 
+             var is_ActivationCode = true;
+             if(res.data.Info && res.data.Info.entryOrder){
+                is_ActivationCode = false
+             };
+
              _this.setData({
+               is_ActivationCode:is_ActivationCode,
                isShareGood:isShareGood,
                comdata: res.data.Info,
                id: res.data.Info.gid,
@@ -927,12 +962,6 @@ Page({
                 suboformola: false
               });
 
-              //跳转0元购
-              if (payinfo.isFreeBuyOrder) {
-                wx.navigateTo({
-                  url: "/page/component/pages/hidefun/hidefun?type=1&cart_id=" + _this.data.comdata.cart_id
-                });
-              }
               _this.onLoadfun();
               // 订阅授权
               app.comsubscribe(_this);

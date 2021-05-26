@@ -637,6 +637,27 @@ page{
   text-align: center;
   padding: 20rpx;
 }
-
+.displayClearTextImg{
+  width: 35rpx;
+  height: 35rpx;
+  position: absolute;
+  top: 0;
+  right: -50rpx;
+  z-index: 1;
+}
+.actcodcl{
+  display: inline-block;
+  position: relative;
+  padding-right: 20rpx;
+}
+.clickButtonEve{
+  height: 60rpx;
+  line-height: 60rpx;
+  width: 300rpx;
+  border-radius: 60rpx;
+  font-size: 24rpx;
+  color: #fff;
+  text-align: center;
+}
 
 

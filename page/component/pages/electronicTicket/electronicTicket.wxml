@@ -9,7 +9,7 @@
  
 <view class='box' style="{{upserimgbox||upserimgboxact?'position:fixed;top:0;left:0;right:0;bottom:0;':''}}padding-bottom:110rpx;">
  
-    <view class="ordeQRcode">
+    <view class="ordeQRcode" wx:if='{{is_ActivationCode}}'>
          <view class="ordeQRImgBox">
             <image src="{{comdata.qrcode}}" class="ordeQRImgBoxImg"></image>
             <view wx:if='{{comdata.isItOverdue}}' class='bgctipref'>已过期</view>
@@ -25,6 +25,18 @@
          
     </view> 
 
+    <block wx:else>
+
+        <view class='rdhead' wx:if='{{comdata.status==2}}'>
+                支付成功
+                <image class='rdheadimg' src='../../../../pages/images/icon_clock2.png'></image>
+        </view>
+        <view class='rdheadback' wx:if='{{comdata.status==0&&comdata.order_type!=7}}'>
+            等待付款
+            <image class='rdheadimg' src='../../../../pages/images/icon_wallet2.png'></image>
+        </view>
+
+    </block>
 
     <view style="padding:0 20rpx 20rpx 20rpx;background:#fff;" wx:if='{{electronicInvoice}}'>
         <view class="ordeQRTitle" style="border-bottom: 2rpx solid #fff;">
@@ -59,7 +71,10 @@
                     <view class='totalmonnum'>
                             合计:￥{{comdata.amount}}
                     </view>
-
+                    <!--  等待付款  -->
+                    <view class='totalmoncon' wx:if='{{comdata.status==0 && comdata.order_type!=7}}' style="display:flex;justify-content:flex-end;">
+                        <view class='totalmoncright' bindtap='payment' style='position:relative;margin:0;'>我要付款</view>
+                    </view>
 
               </view> 
 
@@ -68,18 +83,39 @@
           </view>
      </view>
 
-    <view style="padding:0 20rpx 20rpx 20rpx;background:#fff;" wx:if='{{electronicInvoice}}'>
-        <view class="ordeQRTitle">
-            <view class="ordeQRTitN"><text style="color:#666;">配送方式：</text>电子票(实名制入场)</view>
+    <block wx:if='{{is_ActivationCode}}'>
+        <view style="padding:0 20rpx 20rpx 20rpx;background:#fff;" wx:if='{{electronicInvoice}}'>
+            <view class="ordeQRTitle">
+                <view class="ordeQRTitN"><text style="color:#666;">配送方式：</text>电子票(实名制入场)</view>
+            </view>
         </view>
+        <view style="padding:0 20rpx 20rpx 20rpx;background:#fff;" wx:if='{{electronicInvoice}}'>
+            <view class="ordeQRTitle">
+                <view class="ordeQRTitN"><text style="color:#666;display:inline-block;vertical-align:top;width:120rpx;">参展人：</text>{{comdata.consignee}} {{comdata.mobile}}</view>
+                <view class="ordeQRTitN"><text style="color:#666;display:inline-block;vertical-align:top;width:120rpx;"></text>身份证 {{comdata.idcard}}</view>
+            </view>
+        </view>
+
+    </block>
+
+    <view wx:else style="padding:0 20rpx 0 20rpx;background:#fff;margin-bottom: 20rpx;">
+        <view class="ordeQRTitle" style="border-bottom: 2rpx solid #fff;">
+            <view class="ordeQRTitN">入场日期：{{comdata.dateOfAdmission}}</view>
+            <view class="ordeQRTitN">入场顺序：第{{comdata.entryOrder}}位</view>
+            <block  wx:if='{{comdata.status==2}}'>
+                <view class="ordeQRTitN">
+                  <view class="actcodcl">激活码：<block wx:if='{{displayClearText}}'>{{comdata.activationCode}}</block><block wx:else>****************</block><image class="displayClearTextImg" catchtap="is_dct" mode="aspectFit" src="{{displayClearText?'http://cdn.51chaidan.com/images/sign/show.png':'http://cdn.51chaidan.com/images/sign/hide.png'}}"></image></view>
+                </view>
+
+                <view style="background:#fff;width:660rpx;display: flex;justify-content: space-between;align-items: center;margin:30rpx auto 0;">
+                    <view class="clickButtonEve" catchtap="copyTBLac" style="background:#FCA700;">复制激活码</view>
+                    <view class="clickButtonEve" catchtap="deactivation" style="background:#1684FC;">去激活</view>
+                </view>
+            </block>
+        </view>
+        
     </view>
 
-    <view style="padding:0 20rpx 20rpx 20rpx;background:#fff;" wx:if='{{electronicInvoice}}'>
-        <view class="ordeQRTitle">
-            <view class="ordeQRTitN"><text style="color:#666;display:inline-block;vertical-align:top;width:120rpx;">参展人：</text>{{comdata.consignee}} {{comdata.mobile}}</view>
-            <view class="ordeQRTitN"><text style="color:#666;display:inline-block;vertical-align:top;width:120rpx;"></text>身份证 {{comdata.idcard}}</view>
-        </view>
-    </view>
 
      <view class='orderbott'>
          <view class='orderbottcon'>订单编号:{{comdata.order_sn}}</view>
@@ -104,21 +140,7 @@
  
 <!--  背景颜色  -->
 <view class='tipback' wx:if='{{tipback}}' catchtouchmove="preventD"></view>
-<!--  支付订单  -->
-<view class='paymentorderbombbox' wx:if='{{paymentiftr}}'>
-    <view class='paymentboxhead'>
-        支付订单
-        <image src='../../../../pages/images/forknumber.png' class='paymentboxheadimg' bindtap='paymentboxheadfun'></image>
-    </view>
-    <view class='paymenttxt' style='color:#333;padding-top:30rpx;'>请在1小时之内完成支付:￥{{comdata.amount}}元</view>
-    <view class='paymenttxt' style='color:#22ce2a;'>付款成功后才可以拆单成功</view>
-    <view class='paymenwexinzf'>
-       <image src='../../../../pages/images/icon_webchat.png' class='paymenwexinzfimg'></image>
-       <view class='paymenwexinzftxt'>微信支付</view>
-       <image src='../../../../pages/images/icon_check.png' class='paymenwexiftrimg'></image>
-    </view>
-    <view class='payment' bindtap='paymentmony'>确认支付</view>
-</view>
+
 
  
  
