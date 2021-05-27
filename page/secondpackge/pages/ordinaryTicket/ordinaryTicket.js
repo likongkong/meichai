@@ -166,7 +166,7 @@ Page({
     if (options.scene) {
       let scene = decodeURIComponent(options.scene);
       console.log('options.scene========',scene)
-      _this.data.oid = _this.getSearchString('oid', scene) || 0;
+      _this.data.oid = _this.getCaption(scene) || 0;
     } else {
       _this.data.oid = options.oid || 0;
     };
@@ -188,20 +188,18 @@ Page({
       _this.setData({
         is_bg:false
       })
-
       wx.showToast({
-        title: '你无权访问该页面',
+        title: '此页面为工作人员核验入场信息使用，3秒后会自动返回展会首页',
         icon: 'none',
         mask:true,
-        duration:1500
+        duration:3000
       });  
       setTimeout(() => {
-        wx.reLaunch({
-          url: "/pages/index/index"
+        wx.redirectTo({
+          url: "/pages/dismantlingbox/dismantlingbox"
         })
-      }, 1500);
+      }, 3000);
     }
-
   },
   activsign: function () {
     // 判断是否授权 

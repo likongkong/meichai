@@ -182,15 +182,19 @@ Page({
         is_bg:false
       })
 
-      wx.showModal({
-        content: '暂无权限访问该页面',
-        showCancel:false,
-        success: function (res) {
-          wx.redirectTo({
-            url: "/pages/index/index"
-          });
-        }
-      })  
+      wx.showToast({
+        title: '此页面为工作人员核验入场信息使用，3秒后会自动返回展会首页',
+        icon: 'none',
+        mask:true,
+        duration:3000
+      });  
+      setTimeout(() => {
+        wx.redirectTo({
+          url: "/pages/dismantlingbox/dismantlingbox"
+        })
+      }, 3000);
+
+
     }else{
       _this.setData({
         is_bg:true

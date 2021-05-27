@@ -63,6 +63,7 @@ Page({
  
   getInfo(){
     var _this = this;
+    console.log('targetUId========',this.data.targetUId)
     wx.showLoading({ title: '加载中...'})
     var q = Dec.Aese('mod=bind&operation=detail&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid +'&targetUId=' + this.data.targetUId);
     console.log('详情======'+'mod=bind&operation=detail&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid +'&targetUId=' + this.data.targetUId)
@@ -181,7 +182,9 @@ Page({
     if (options.scene) {
       let scene = decodeURIComponent(options.scene);
       console.log('options.scene========',scene)
-      _this.data.targetUId = _this.getSearchString('targetUId', scene) || 0;
+      _this.data.targetUId = _this.getCaption(scene) || 0;
+      console.log('targetUId========111',_this.getCaption(scene))
+
     } else {
       _this.data.targetUId = options.targetuid || 0;
     };
@@ -198,24 +201,22 @@ Page({
       _this.setData({
         is_bg:true
       })
-
       _this.getInfo();
     }else{
       _this.setData({
         is_bg:false
       })
-
       wx.showToast({
-        title: '你无权访问该页面',
+        title: '此页面为工作人员核验入场信息使用，3秒后会自动返回展会首页',
         icon: 'none',
         mask:true,
-        duration:1500
+        duration:3000
       });  
       setTimeout(() => {
-        wx.reLaunch({
-          url: "/pages/index/index"
+        wx.redirectTo({
+          url: "/pages/dismantlingbox/dismantlingbox"
         })
-      }, 1500);
+      }, 3000);
     }
   },
   activsign: function () {
