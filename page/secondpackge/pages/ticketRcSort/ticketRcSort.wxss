@@ -7,7 +7,15 @@ page{
   background: #f4f5f9;
   padding-bottom: 200rpx;
 }
-
+.red{
+  background:linear-gradient(to right,#f9657d,#fe2842)
+}
+.blue{
+  background:linear-gradient(to right,#75d0e3,#388ab2)
+}
+.yellow{
+  background:linear-gradient(to right,#f3eca3,#f2d53a)
+}
 .infoBox{
   padding: 60rpx 35rpx;
   box-sizing: border-box;
@@ -17,7 +25,6 @@ page{
 }
 
 .grayWrap{
-  background: #F8657C;
   font-size: 26rpx;
   color: #fff;
   padding: 0 35rpx;
