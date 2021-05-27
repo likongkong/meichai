@@ -10,18 +10,23 @@
 <view class='box' style="{{upserimgbox||upserimgboxact?'position:fixed;top:0;left:0;right:0;bottom:0;':''}}padding-bottom:110rpx;">
  
     <view class="ordeQRcode" wx:if='{{is_ActivationCode}}'>
-         <view class="ordeQRImgBox">
-            <image src="{{comdata.qrcode}}" class="ordeQRImgBoxImg"></image>
-            <view wx:if='{{comdata.isItOverdue}}' class='bgctipref'>已过期</view>
-            <view wx:elif='{{isrefresh}}' catchtap="refreshQRCode" class='bgctipref'>已过期</view>
-         </view>
-         <view class="ordeQRTitN" style="text-align:center;border-top:0;">
-             <block wx:if='{{comdata.isItOverdue}}'>已过期</block>
-             <block wx:else>二维码一分钟内有效</block>
-         </view>
-         <view style="width:100%;height:86rpx;overflow: hidden;" wx:if='{{!comdata.isItOverdue}}'>
-            <view wx:if='{{isrefresh}}' style="color:#ff2840;border:1rpx solid #ff2840;" class="totalmoncright" catchtap="refreshQRCode">刷新</view>
-         </view>
+        <block wx:if='{{!comdata.isItOverdue}}'>
+            <view class="ordeQRImgBox">
+                <!-- <image src="https://cdn.51chaidan.com/images/qrcode/toyshowTicket/4465040.png" class="ordeQRImgBoxImg"></image> -->
+                <image src="{{comdata.qrcode}}" class="ordeQRImgBoxImg"></image>
+                <!-- <view wx:if='{{comdata.isItOverdue}}' class='bgctipref'>已过期</view>
+                <view wx:elif='{{isrefresh}}' catchtap="refreshQRCode" class='bgctipref'>已过期</view> -->
+            </view>
+            <view class="ordeQRTitN" wx:if='{{false}}' style="text-align:center;border-top:0;">
+                <block wx:if='{{comdata.isItOverdue}}'>已过期</block>
+                <block wx:else>二维码一分钟内有效</block>
+            </view>
+            <!-- !comdata.isItOverdue -->
+            <view style="width:100%;height:86rpx;overflow: hidden;" wx:if='{{false}}'>
+                <view wx:if='{{isrefresh}}' style="color:#ff2840;border:1rpx solid #ff2840;" class="totalmoncright" catchtap="refreshQRCode">刷新</view>
+            </view>
+        </block> 
+
          
     </view> 
 
