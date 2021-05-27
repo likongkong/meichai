@@ -637,20 +637,30 @@ Page({
              
              var ticketTime = res.data.Info.ticketTime || 0;
 
-             var showSubscription = false;
+            //  var showSubscription = false;
              var nowTime = (new Date().getTime())/1000;
-
-             
              if(res.data.Info.ticketDisplayTime && (nowTime < res.data.Info.ticketDisplayTime)){ //  未开始 显示模糊图片
-                   console.log(1)   
+                  res.data.Info.isItOverdue = false; 
+                  console.log(1) 
              }else if(nowTime > res.data.Info.ticketEndDisplay){  // 过期 过期
-                   res.data.Info.isItOverdue = true;
-                   console.log(2)  
+                  res.data.Info.isItOverdue = true;
+                  console.log(2)  
              }else if(nowTime > res.data.Info.ticketDisplayTime && nowTime < res.data.Info.ticketEndDisplay){
-                   res.data.Info.qrcode = '';
-                   showSubscription = true;
-                   console.log(3)  
-             }; 
+                  res.data.Info.isItOverdue = false; 
+                  res.data.Info.qrcode = 'https://cdn.51chaidan.com/images/qrcode/toyshowTicket/'+ res.data.Info.oid +'.png';
+                  console.log(3,res.data.Info.qrcode)
+             };             
+
+            //  if(res.data.Info.ticketDisplayTime && (nowTime < res.data.Info.ticketDisplayTime)){ //  未开始 显示模糊图片
+            //        console.log(1)   
+            //  }else if(nowTime > res.data.Info.ticketEndDisplay){  // 过期 过期
+            //        res.data.Info.isItOverdue = true;
+            //        console.log(2)  
+            //  }else if(nowTime > res.data.Info.ticketDisplayTime && nowTime < res.data.Info.ticketEndDisplay){
+            //        res.data.Info.qrcode = '';
+            //        showSubscription = true;
+            //        console.log(3)  
+            //  }; 
 
              var is_ActivationCode = true;
              if(res.data.Info && res.data.Info.entryOrder){
@@ -665,9 +675,9 @@ Page({
                subscribedata: res.data.Info.subscribe,
              });
 
-             if(showSubscription){ //  未开始 显示模糊图片
-                _this.refreshQRCode();
-             }; 
+            //  if(showSubscription){ //  未开始 显示模糊图片
+            //     _this.refreshQRCode();
+            //  }; 
 
              
              
