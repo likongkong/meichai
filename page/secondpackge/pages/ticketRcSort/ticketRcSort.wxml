@@ -2,11 +2,11 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 <view class="wrap">
- <view class="grayWrap">入场日期</view>
+ <view class="grayWrap {{priorify.day==4?'red':priorify.day==5?'blue':'yellow'}}">入场日期</view>
  <view class="rcdate infoBox">{{priorify.name}}</view>
- <view class="grayWrap">入场顺序</view>
+ <view class="grayWrap {{priorify.day==4?'red':priorify.day==5?'blue':'yellow'}}">入场顺序</view>
  <view class="rcsort infoBox">第  {{priorify.sort}}  位</view>
- <view class="grayWrap">入场人员信息</view>
+ <view class="grayWrap {{priorify.day==4?'red':priorify.day==5?'blue':'yellow'}}">入场人员信息</view>
  <view class="rcUserInfo">
    <view>
       <text decode="true">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</text>
@@ -21,7 +21,12 @@
       <text>{{priorify.idcard}}</text>
    </view>
  </view>
- <view style="width:100%;text-align: center;margin-top: 80rpx;">请按入场顺序排队入场</view>
+ <block wx:if="{{priorify.ticketStatus ==0}}">
+  <view class="hyBtn" catchtap="setTicketInfo">核验</view>
+ </block>
+ <block wx:elif="{{priorify.ticketStatus ==1}}">
+  <view class="hyBtn" style="background:#8a8a8a;">已核验</view>
+ </block>
 </view>
 
 <tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>

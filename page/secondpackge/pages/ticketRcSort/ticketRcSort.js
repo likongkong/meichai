@@ -18,6 +18,7 @@ Page({
     tgabox:false,
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
+    targetUId:0
   },
 
   plusXing (str,frontLen,endLen) {
@@ -28,12 +29,42 @@ Page({
     }
     return str.substring(0,frontLen)+xing+str.substring(str.length-endLen);
   },
+
+  GetRequest(url) {  
+    var url = url;
+    var temp1 = url.split('?');
+    var pram = temp1[1];
+    var keyValue = pram.split('&');
+    var obj = {};
+    for (var i = 0; i<keyValue.length; i++){
+        var item = keyValue[i].split('=');
+        var key = item[0];
+        var value = item[1];
+        obj[key] = value;
+    }
+    return obj
+ },
+
+  //key(需要检错的键） url（传入的需要分割的url地址）
+  getSearchString: function (key, Url) {
+    // 获取URL中?之后的字符
+    var str = Url;
+    var arr = str.split("&");
+    var obj = new Object();
+
+    // 将每一个数组元素以=分隔并赋给obj对象 
+    for (var i = 0; i < arr.length; i++) {
+      var tmp_arr = arr[i].split("=");
+      obj[decodeURIComponent(tmp_arr[0])] = decodeURIComponent(tmp_arr[1]);
+    }
+    return obj[key];
+  },
  
   getInfo(){
     var _this = this;
     wx.showLoading({ title: '加载中...'})
-    var q = Dec.Aese('mod=bind&operation=detail&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
-    console.log('mod=bind&operation=detail&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+    var q = Dec.Aese('mod=bind&operation=detail&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid +'&targetUId=' + this.data.targetUId);
+    console.log('详情======'+'mod=bind&operation=detail&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid +'&targetUId=' + this.data.targetUId)
 
     wx.request({
       url: app.signindata.comurl + 'toy.php' + q,
@@ -78,16 +109,76 @@ Page({
     }); 
   },
 
+  setTicketInfo(){
+    var _this = this;
+    wx.showLoading({ title: '加载中...'})
+    var q = Dec.Aese('mod=bind&operation=verifyVipTicket&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid +'&id=' + this.data.priorify.id);
+    console.log('核验======'+'mod=bind&operation=verifyVipTicket&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid +'&id=' + this.data.priorify.id)
+
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + q,
+      method: 'GET',
+      header: {
+        'Accept': 'application/json'
+      },
+      success: function (res) {
+        console.log('核验结果======',res)
+        // 刷新完自带加载样式回去
+        wx.stopPullDownRefresh();
+        wx.hideLoading();
+        if (res.data.ReturnCode == 200) {
+          wx.showModal({
+            title: '提示',
+            content: res.data.Msg,
+            cancelText:'关闭',
+            confirmText:'继续核验',
+            success (res) {
+              if (res.confirm) {
+                wx.scanCode({
+                  success (res) {
+                    console.log('扫码结果===',res)
+                    var a = _this.GetRequest(res.path)
+                    var targetUId=_this.getSearchString('targetUId', decodeURIComponent(a.scene))
+                    console.log('targetUId===',targetUId)
+                    wx.redirectTo({
+                      url: '/page/secondpackge/pages/ticketRcSort/ticketRcSort?targetUId='+targetUId
+                    })
+                  }
+                })
+              } else if (res.cancel) {
+                console.log('用户点击取消')
+                _this.getInfo();
+              }
+            }
+          })
+        }else{
+          wx.showToast({
+            title: res.data.Msg,
+            icon: 'none',
+            mask:true,
+            duration:1000
+          });  
+        }
+      }
+    }); 
+  },
+
  
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     // 判断是否授权
+    console.log('options========',options)
     var _this = this;
-    // _this.data.keyDay = options.keyDay;
+    if (options.scene) {
+      let scene = decodeURIComponent(options.scene);
+      console.log('options.scene========',scene)
+      _this.data.targetUId = _this.getSearchString('oid', scene) || 0;
+    } else {
+      _this.data.targetUId = options.targetuid || 231618;
+    };
     _this.activsign();
-    // this.onLoadfun(); 
     wx.hideShareMenu();
   },
   onLoadfun:function(){
@@ -96,7 +187,21 @@ Page({
       uid: app.signindata.uid,
       loginid: app.signindata.loginid,
     });  
-    _this.getInfo();
+    if(app.signindata.isManager){
+      _this.getInfo();
+    }else{
+      wx.showToast({
+        title: '你无权访问该页面',
+        icon: 'none',
+        mask:true,
+        duration:1500
+      });  
+      setTimeout(() => {
+        wx.reLaunch({
+          url: "/pages/index/index"
+        })
+      }, 1500);
+    }
   },
   activsign: function () {
     // 判断是否授权 

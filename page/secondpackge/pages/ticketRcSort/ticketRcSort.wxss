@@ -5,6 +5,7 @@
 
 page{
   background: #f4f5f9;
+  padding-bottom: 200rpx;
 }
 
 .infoBox{
@@ -52,4 +53,21 @@ page{
   width: 70%;
   font-size: 32rpx;
   color: #101010;
+}
+
+.hyBtn{
+  width: 90%;
+  height: 80rpx;
+  /* position: fixed;
+  bottom: 100rpx;
+  left: 50%; */
+  background: #F8657C;
+  font-size: 30rpx;
+  color:#fff;
+  border-radius: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+  /* margin-left: -45%; */
+  box-shadow: 0px 4rpx 12rpx 0px rgba(0, 0, 0, 0.4);
+  margin: 100rpx auto 0;
 }

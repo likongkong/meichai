@@ -68,7 +68,7 @@ Page({
     var _this = this;
     wx.showLoading({ title: '加载中...'})
     var q = Dec.Aese('mod=getinfo&operation=setTicketInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&oid=' + this.data.oid);
-    console.log('mod=getinfo&operation=setTicketInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&oid=' + this.data.oid)
+    console.log('核验======','mod=getinfo&operation=setTicketInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&oid=' + this.data.oid)
     wx.request({
       url: app.signindata.comurl + 'order.php' + q,
       method: 'GET',
@@ -76,20 +76,35 @@ Page({
         'Accept': 'application/json'
       },
       success: function (res) {
-        console.log('核验======',res)
+        console.log('核验结果======',res)
         // 刷新完自带加载样式回去
         wx.stopPullDownRefresh();
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            mask:true,
-            duration:2000
-          });
-          setTimeout(() => {
-            _this.getInfo();
-          }, 2000);
+          wx.showModal({
+            title: '提示',
+            content: res.data.Msg,
+            cancelText:'关闭',
+            confirmText:'继续核验',
+            success (res) {
+              if (res.confirm) {
+                wx.scanCode({
+                  success (res) {
+                    console.log('扫码结果===',res)
+                    var a = _this.GetRequest(res.path)
+                    var oid=_this.getSearchString('oid', decodeURIComponent(a.scene))
+                    console.log('oid===',oid)
+                    wx.redirectTo({
+                      url: '/page/secondpackge/pages/ordinaryTicket/ordinaryTicket?oid='+oid
+                    })
+                  }
+                })
+              } else if (res.cancel) {
+                console.log('用户点击取消')
+                _this.getInfo();
+              }
+            }
+          })
         }else{
           wx.showToast({
             title: res.data.Msg,
@@ -118,15 +133,18 @@ Page({
   },
 
   GetRequest(url) {  
-    var theRequest = new Object();  
-    if (url.indexOf("?") != -1) {  
-       var str = url.substr(1);  
-       strs = str.split("&");  
-       for(var i = 0; i < strs.length; i ++) {  
-          theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);  
-       }  
-    }  
-    return theRequest;  
+    var url = url;
+    var temp1 = url.split('?');
+    var pram = temp1[1];
+    var keyValue = pram.split('&');
+    var obj = {};
+    for (var i = 0; i<keyValue.length; i++){
+        var item = keyValue[i].split('=');
+        var key = item[0];
+        var value = item[1];
+        obj[key] = value;
+    }
+    return obj
  },
  
   /**
@@ -134,13 +152,14 @@ Page({
    */
   onLoad: function (options) {
     // 判断是否授权
+    console.log('options========',options)
     var _this = this;
     if (options.scene) {
       let scene = decodeURIComponent(options.scene);
-      console.log('options========',scene)
+      console.log('options.scene========',scene)
       _this.data.oid = _this.getSearchString('oid', scene) || 0;
     } else {
-      _this.data.oid = options.oid || 10907;
+      _this.data.oid = options.oid || 0;
     };
     _this.activsign();
     wx.hideShareMenu();
@@ -151,32 +170,6 @@ Page({
       uid: app.signindata.uid,
       loginid: app.signindata.loginid,
     });  
-
-    // wx.showModal({
-    //   title: '提示',
-    //   content: '这是一个模态弹窗',
-    //   success (res) {
-    //     if (res.confirm) {
-          wx.scanCode({
-            success (res) {
-              // res.path = decodeURIComponent(res.path);
-              console.log(res,111111111)
-              var a = _this.GetRequest(res.path)
-              console.log(a,2222222)
-              // var b =_this.getSearchString('oid', a)
-              // console.log(res,11111111111,_this.getSearchString('scene', res.path),a,b)
-              // wx.redirectTo({
-              //   url: '/'+res.path
-              // })
-            }
-          })
-    //     } else if (res.cancel) {
-    //       console.log('用户点击取消')
-    //     }
-    //   }
-    // })
-    
-
     if(app.signindata.isManager){
       _this.getInfo();
     }else{
