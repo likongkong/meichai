@@ -15,7 +15,8 @@ Page({
     tgabox:false,
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
-    oid:''
+    oid:'',
+    is_bg:false
 
   },
 
@@ -165,6 +166,7 @@ Page({
     };
   },
   onLoadfun:function(){
+    var _this = this;
     // '已经授权'
     this.setData({
       loginid: app.signindata.loginid,
@@ -175,6 +177,11 @@ Page({
     });
 
     if(!app.signindata.isManager){
+
+      _this.setData({
+        is_bg:false
+      })
+
       wx.showModal({
         content: '暂无权限访问该页面',
         showCancel:false,
@@ -185,6 +192,9 @@ Page({
         }
       })  
     }else{
+      _this.setData({
+        is_bg:true
+      })
       this.getData()
     };
 
