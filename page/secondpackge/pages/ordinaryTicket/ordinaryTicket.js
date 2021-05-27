@@ -92,7 +92,8 @@ Page({
                   success (res) {
                     console.log('扫码结果===',res)
                     var a = _this.GetRequest(res.path)
-                    var oid=_this.getSearchString('oid', decodeURIComponent(a.scene))
+                    console.log('scene===',decodeURIComponent(a.scene))
+                    var oid=_this.getCaption(decodeURIComponent(a.scene))
                     console.log('oid===',oid)
                     wx.redirectTo({
                       url: '/page/secondpackge/pages/ordinaryTicket/ordinaryTicket?oid='+oid
@@ -146,6 +147,13 @@ Page({
     }
     return obj
  },
+
+ 
+ getCaption(obj){
+  var index=obj.lastIndexOf("\=");
+  obj=obj.substring(index+1,obj.length);
+  return obj;
+},
  
   /**
    * 生命周期函数--监听页面加载

@@ -138,7 +138,8 @@ Page({
                   success (res) {
                     console.log('扫码结果===',res)
                     var a = _this.GetRequest(res.path)
-                    var targetUId=_this.getSearchString('targetUId', decodeURIComponent(a.scene))
+                    console.log('scene===',decodeURIComponent(a.scene))
+                    var targetUId=_this.getCaption(decodeURIComponent(a.scene))
                     console.log('targetUId===',targetUId)
                     wx.redirectTo({
                       url: '/page/secondpackge/pages/ticketRcSort/ticketRcSort?targetUId='+targetUId
@@ -163,6 +164,11 @@ Page({
     }); 
   },
 
+  getCaption(obj){
+      var index=obj.lastIndexOf("\=");
+      obj=obj.substring(index+1,obj.length);
+      return obj;
+  },
  
   /**
    * 生命周期函数--监听页面加载
@@ -174,9 +180,9 @@ Page({
     if (options.scene) {
       let scene = decodeURIComponent(options.scene);
       console.log('options.scene========',scene)
-      _this.data.targetUId = _this.getSearchString('oid', scene) || 0;
+      _this.data.targetUId = _this.getSearchString('targetUId', scene) || 0;
     } else {
-      _this.data.targetUId = options.targetuid || 231618;
+      _this.data.targetUId = options.targetuid || 0;
     };
     _this.activsign();
     wx.hideShareMenu();
