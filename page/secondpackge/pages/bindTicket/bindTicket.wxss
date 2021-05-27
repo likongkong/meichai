@@ -236,7 +236,7 @@ page{
   align-items: center;
 }
 .chBindInfoBox{
-  width: 478rpx;
+  width: 500rpx;
   background: #fff;
   border-radius: 10rpx;
   padding: 35rpx 35rpx;
@@ -272,4 +272,22 @@ page{
   color: #fff;
   font-size: 26rpx;
   margin: 44rpx auto 0;
+}
+.chImagebox{
+  width: 300rpx;
+  height: 300rpx;
+  margin:30rpx auto;
+  display: block;
+}
+.chBindInfoTest{
+  width: 100%;
+  font-size: 30rpx;
+  text-align: center;
+  padding: 0 0 20rpx 0;
+}
+.chBindInfoTOne{
+  width: 100%;
+  font-size: 22rpx;
+  text-align: center;
+  padding: 0 0 20rpx 0;
 }

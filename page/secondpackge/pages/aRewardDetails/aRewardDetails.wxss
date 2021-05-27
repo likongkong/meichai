@@ -106,8 +106,8 @@ page {
   width: 55rpx;
   height: 55rpx;
   position: absolute;
-  top: 13rpx;
-  left: 13rpx;
+  top: 0;
+  left: 0;
   z-index: 1;
   background:#ff2742;
   color: #fff;
