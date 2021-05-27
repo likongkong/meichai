@@ -75,6 +75,19 @@
         {
           "name": "展会入场顺序",
           "pathName": "page/secondpackge/pages/ticketRcSort/ticketRcSort",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "入场顺序",
+          "pathName": "page/secondpackge/pages/ticketRcSort/ticketRcSort",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "普通票",
+          "pathName": "page/secondpackge/pages/ordinaryTicket/ordinaryTicket",
+          "query": "",
           "scene": null
         }
       ]

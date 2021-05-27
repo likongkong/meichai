@@ -139,7 +139,8 @@
         "pages/myAuctionList/myAuctionList",
         "pages/auctionDetails/auctionDetails",
         "pages/auctionRecord/auctionRecord",
-        "pages/onlineFukubukuro/onlineFukubukuro"
+        "pages/onlineFukubukuro/onlineFukubukuro",
+        "pages/ordinaryTicket/ordinaryTicket"
       ]
     }
   ],
