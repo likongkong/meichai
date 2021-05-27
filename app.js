@@ -1594,6 +1594,7 @@ App({
 // winningResult  展会抽签中奖名单
 // bindTicket  绑定展会门票
 // ticketRcSort  门票入场顺序
+// ordinaryTicket  普通门票
 // entityLuckyDraw  实物刮刮卡
 // idCardVerification 身份证验证
 
