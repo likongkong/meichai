@@ -18,7 +18,8 @@ Page({
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
     oid:0,
-    day:4
+    day:4,
+    is_bg:false
   },
 
   plusXing (str,frontLen,endLen) {
@@ -171,8 +172,15 @@ Page({
       loginid: app.signindata.loginid,
     });  
     if(app.signindata.isManager){
+      _this.setData({
+        is_bg:true
+      })
       _this.getInfo();
     }else{
+      _this.setData({
+        is_bg:false
+      })
+
       wx.showToast({
         title: '你无权访问该页面',
         icon: 'none',
