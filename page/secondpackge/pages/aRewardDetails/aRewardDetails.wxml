@@ -55,7 +55,7 @@
             </block>
             <view class="progress-box">
                 <progress percent="{{(activity.suplusNum/activity.limit_users)*100}}" color="{{(activity.suplusNum/activity.limit_users)*100 === 100?'#6FBE0D':(activity.suplusNum/activity.limit_users)*100 < 100 && (activity.suplusNum/activity.limit_users)*100 > 50?'#FEB51D':'#ff2742'}}" backgroundColor="#cccccc" stroke-width='12' active duration="5" />
-                <text style="padding-left:15rpx;">剩余：{{activity.suplusNum}}</text>
+                <text style="padding-left:15rpx;" wx:if='{{activity.status != 1}}'>剩余：{{activity.suplusNum}}</text>
             </view>
         </view>
 
@@ -68,7 +68,7 @@
             </swiper-item>
           </swiper>          
           <view class="adhclet">{{item.gear}}</view>
-          <view class="adhcnum">
+          <view class="adhcnum" wx:if='{{activity.status != 1}}'>
               <view class="adhcnumbg"></view>
               <view class="adhcnumtxt">{{item.suplus}}/{{item.limit}}</view>
           </view>
@@ -158,7 +158,10 @@
     <view wx:if='{{activity.isCheckOther==2}}' class="ardbottomeve ardbmeleftbottom" data-id="{{activity.id}}" catchtap="changeRewarddeyails">换一套({{activity.otherNowNum}}/{{activity.otherAllNum}})</view>
     </block>
     
-    <view wx:if='{{activity.status==1}}' class="ardbottomeve ardbmerightbottom" style="background: #eeae19;color: white;" catchtap='subscrfun'>直播开售</view>
+    <view wx:if='{{activity.status==1}}' class="ardbottomeve ardbmerightbottom" style="background: #eeae19;color: white;" catchtap='subscrfun'>
+        <block wx:if='{{activity.liveOpenActivity}}'>直播开售</block>
+        <block wx:else>开售提醒</block>
+    </view>
     <view wx:elif='{{activity.status==3||activity.suplusNum<=0}}' class="ardbottomeve ardbmerightbottom" catchtap="jumpaRewardList">已结束</view>
     <view wx:elif='{{activity.isInQueue}}' class="ardbottomeve ardbmerightbottom" catchtap="scrapingPurfun">我要刮卡</view>
     <!-- <view wx:elif='{{activity.aheadUser&&activity.isInQueue}}' class="ardbottomeve ardbmerightbottom" catchtap="scrapingPurfun">我要刮卡({{remaintime}}s)</view> -->
