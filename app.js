@@ -209,15 +209,15 @@ App({
                         }else if(num>=10){
                           num = '0'+num.toString()
                         };       
-                        // // 接口地址  
-                        // _this.signindata.comurl = 'https://api-slb.51chaidan.com/'+num+'/';
-                        // // 发现地址
-                        // _this.signindata.clwcomurl = 'https://clw-slb.51chaidan.com/'+num+'/';
-    
-                        // 接口地址  208
-                        _this.signindata.comurl = 'https://api.51chaidan.com/';
+                        // 接口地址  
+                        _this.signindata.comurl = 'https://api-slb.51chaidan.com/'+num+'/';
                         // 发现地址
-                        _this.signindata.clwcomurl = 'https://clw.51chaidan.com/';
+                        _this.signindata.clwcomurl = 'https://clw-slb.51chaidan.com/'+num+'/';
+    
+                        // // 接口地址  208
+                        // _this.signindata.comurl = 'https://api.51chaidan.com/';
+                        // // 发现地址
+                        // _this.signindata.clwcomurl = 'https://clw.51chaidan.com/';
                       }else{
                         // 接口地址  
                         _this.signindata.comurl = 'http://api-test.51chaidan.com/';
