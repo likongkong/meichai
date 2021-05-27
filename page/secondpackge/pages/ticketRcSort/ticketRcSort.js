@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '入场顺序', 
+    c_title: '入场核验', 
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
