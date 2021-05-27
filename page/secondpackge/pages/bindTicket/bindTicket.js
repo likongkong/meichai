@@ -31,13 +31,53 @@ Page({
   },
 
   toggleChBindInfo(e){
+
+    var _this = this;
+
     var ind = e.currentTarget.dataset.ind;
-    this.data.priority[ind].tel = this.plusXing(this.data.priority[ind].tel,3,3);
-    this.data.priority[ind].idcard = this.plusXing(this.data.priority[ind].idcard,4,5);
-    this.setData({
-      chBindInfo: this.data.priority[ind],
-      isChBindInfoMask: true
-    });
+
+    var keyDay = this.data.priority[ind].keyDay ;
+
+
+    wx.showLoading({ title: '加载中...',mask:true})
+
+    var q = Dec.Aese('mod=bind&operation=detail&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&keyDay=' + keyDay);
+
+    console.log('详情======'+'mod=bind&operation=detail&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&keyDay=' + keyDay)
+
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + q,
+      method: 'GET',
+      header: {
+        'Accept': 'application/json'
+      },
+      success: function (res) {
+        console.log('绑定用户信息======',res)
+        wx.hideLoading();
+        if (res.data.ReturnCode == 200) {
+          
+          var priorify = res.data.Info.priorify || {};
+          priorify.tel = _this.plusXing(priorify.tel,3,3);
+          priorify.idcard = _this.plusXing(priorify.idcard,4,5);
+
+          _this.setData({
+            chBindInfo: priorify,
+            isChBindInfoMask: true
+          });
+
+        }else{
+         wx.showToast({
+           title: res.data.Msg,
+           icon: 'none',
+           mask:true,
+           duration:1000
+         });  
+        }
+      }
+    })
+
+
+
   },
   hideChBindInfo(){
     this.setData({
