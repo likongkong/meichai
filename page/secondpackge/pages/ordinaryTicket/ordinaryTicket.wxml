@@ -28,6 +28,9 @@
    </block>
    </view>
 </block>
+<block wx:else>
+   <image style="display:block;width:100%;height:auto;" mode='widthFix' src="{{imgUrl}}"></image>
+</block>
 <tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
 <view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>
 

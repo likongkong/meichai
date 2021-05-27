@@ -165,6 +165,31 @@ Page({
       this.activsign();
     };
   },
+  indexpic(){
+    var _this = this;
+    wx.request({
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/openScreen.json?time='+app.signindata.appNowTime,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        if(res.data && res.data.List && res.data.List.openscreen){
+          var openscreen = res.data.List.openscreen || [];
+          var imgnum = Math.floor(Math.random() * openscreen.length) || 0;
+          var nowTime = Date.parse(new Date());//当前时间戳
+          if(openscreen[imgnum]){
+            var imgUrl = openscreen[imgnum]+'?time=' + nowTime;
+            app.signindata.tgaimg = imgUrl;
+            console.log('首页开机图片===========', res,imgnum,imgUrl)
+            _this.setData({
+              imgUrl: imgUrl
+            });
+          }
+        };    
+      },
+      fail: function (res) {}
+    }) 
+  },
+
   onLoadfun:function(){
     var _this = this;
     // '已经授权'
@@ -177,22 +202,33 @@ Page({
     });
 
     if(!app.signindata.isManager){
-
+      _this.indexpic()
       _this.setData({
         is_bg:false
       })
 
-      wx.showToast({
-        title: '此页面为工作人员核验入场信息使用，3秒后会自动返回展会首页',
-        icon: 'none',
-        mask:true,
-        duration:3000
-      });  
-      setTimeout(() => {
-        wx.redirectTo({
-          url: "/pages/dismantlingbox/dismantlingbox"
-        })
-      }, 3000);
+      wx.showModal({ 
+        content: '此页面为工作人员核验入场信息使用，暂时无法查看',
+        showCancel:false,
+        confirmText:'返回首页',
+        success: function (res) {
+          wx.redirectTo({
+            url: "/pages/dismantlingbox/dismantlingbox",
+          });
+        }
+      });
+
+      // wx.showToast({
+      //   title: '此页面为工作人员核验入场信息使用，3秒后会自动返回展会首页',
+      //   icon: 'none',
+      //   mask:true,
+      //   duration:5000
+      // });  
+      // setTimeout(() => {
+      //   wx.redirectTo({
+      //     url: "/pages/dismantlingbox/dismantlingbox"
+      //   })
+      // }, 5000);
 
 
     }else{

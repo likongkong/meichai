@@ -14,6 +14,9 @@
       </view>
    </view>
 </block>
+<block wx:else>
+   <image style="display:block;width:100%;height:auto;" mode='widthFix' src="{{imgUrl}}"></image>
+</block>
 
 
 
