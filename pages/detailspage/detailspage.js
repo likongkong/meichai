@@ -330,6 +330,7 @@ Page({
 
       this.setData({
         modelSelInde:e.detail.value,
+        numberofdismantling:1,
         selectShell,
         zunmdata:zunmdata,
         detailColorIndex,
@@ -342,7 +343,8 @@ Page({
         modelSelInde:e.detail.value,
         selectShell:{},
         zunmdata,
-        detailSpecColor
+        detailSpecColor,
+        numberofdismantling:1
       })
 
     };
