@@ -24,7 +24,7 @@
               </view>
               <view class="progress-box">
                 <progress percent="{{(item.suplusGoods/item.limitGoods)*100}}" color="{{(item.suplusGoods/item.limitGoods)*100 === 100?'#6FBE0D':(item.suplusGoods/item.limitGoods)*100 < 100 && (item.suplusGoods/item.limitGoods)*100 > 50?'#FEB51D':'#ff2742'}}" backgroundColor="#cccccc" stroke-width='12' active duration="5" />
-                <text style="padding-left:15rpx;" wx:if='{{item.status != 1}}'>剩余：{{item.suplusGoods}}</text>
+                <text style="padding-left:15rpx;"><block wx:if='{{item.status != 1}}'>剩余：{{item.suplusGoods}}</block><block wx:elif='{{item.nameSuffix}}'>{{item.nameSuffix}}</block></text>
               </view>
               <view class="cardBbox"> 
                 <view class="title">{{item.name}}</view>
@@ -81,13 +81,13 @@
               </view>
               <view class="progress-box">
                 <progress percent="{{(sonitem.suplusGoods/sonitem.limitGoods)*100}}" color="{{(sonitem.suplusGoods/sonitem.limitGoods)*100 === 100?'#6FBE0D':(sonitem.suplusGoods/sonitem.limitGoods)*100 < 100 && (sonitem.suplusGoods/sonitem.limitGoods)*100 > 50?'#FEB51D':'#ff2742'}}" backgroundColor="#cccccc" stroke-width='12' active duration="5"/>
-                <text style="padding-left:15rpx;" wx:if='{{sonitem.status != 1}}'>剩余：{{sonitem.suplusGoods}}</text>
+                <text style="padding-left:15rpx;"><block wx:if='{{sonitem.status != 1}}'>剩余：{{sonitem.suplusGoods}}</block><block wx:elif='{{sonitem.nameSuffix}}'>{{sonitem.nameSuffix}}</block></text>
               </view>
             </swiper-item>
           </block>
         </swiper>
         <view class="cardBbox"> 
-          <view class="price"><text>￥</text>{{item.shopPrice}}</view>
+          <view class="price"><text>￥</text>{{item.shopPrice}}<view wx:if='{{item.list_arr[0].status == 1}}' class="subList" catchtap="subfuncap">订阅提醒</view></view>
           <view class="title">{{item.name}}</view>
         </view>
       </view>

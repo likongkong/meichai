@@ -198,3 +198,13 @@ scroll-view ::-webkit-scrollbar {
   height: 32rpx;
   line-height: 32rpx;
 }
+.cardBbox .subList{
+  padding:0 30rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  border-radius: 70rpx;
+  color:#fff;
+  font-size:24rpx;
+  background:#eeae19;
+  float: right;
+}

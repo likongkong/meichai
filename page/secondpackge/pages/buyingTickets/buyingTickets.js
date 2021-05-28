@@ -73,6 +73,7 @@ Page({
   },
   onPageScroll(e) {
     let scrollTop = e.scrollTop;
+
     if(scrollTop>this.data.anPosTop){
        this.setData({
           is_gdbp_display:true,
@@ -81,9 +82,10 @@ Page({
     }else{
       this.setData({
         isanPosTop:false,
-     })
+      })
     };
-    if(scrollTop < 600 && this.data.tid !=1){
+    
+    if(scrollTop <= 0 && this.data.tid !=1){
        this.setData({
           tid:1
        })
@@ -94,6 +96,9 @@ Page({
     }else{
       this.setData({is_anPos_position:false})
     };
+
+
+
     // var space = this.data.bottomtop - this.data.navbtn
 
     // if (e.scrollTop > space) {

@@ -31,7 +31,13 @@ Page({
     ClassifyTabW:0, //分类tab宽
     animationData:{},
     scene:'',
-    isredpacket:false
+    isredpacket:false,
+    //  订阅数据
+    subscribedata:{
+        "template_id":["Q0tWM7kOihw1TilTeR3YmLzWp5tS0McgyOeJx2xX-B0"],
+        "subscribe_type":[21]
+    }
+
   },
   /**
    * 生命周期函数--监听页面加载
@@ -335,5 +341,61 @@ Page({
   },
   catchTouchMove:function(res){
     return false
-   }
+  },
+  subfuncap(w){
+    let id = w.currentTarget.dataset.id;
+    this.data.id = id;
+    this.subscrfun();
+  },
+  // 拉起订阅
+  subscrfun: function () {
+    var _this = this;
+    var subscribedata = _this.data.subscribedata || '';
+    if (subscribedata && subscribedata.template_id && app.signindata.subscribeif) {
+      if (subscribedata.template_id instanceof Array) {
+        wx.requestSubscribeMessage({
+          tmplIds: subscribedata.template_id || [],
+          success(res) {
+            var is_show_modal = true;
+            for (var i = 0; i < subscribedata.template_id.length; i++) {
+              if (res[subscribedata.template_id[i]] == "accept") {
+                app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+                if (is_show_modal) {
+                  _this.subshowmodalfun();
+                  is_show_modal = false;
+                };
+              };
+            };
+          },
+          complete() { }
+        })
+      } else {
+        wx.requestSubscribeMessage({
+          tmplIds: [subscribedata.template_id || ''],
+          success(res) {
+            if (res[subscribedata.template_id] == "accept") {
+              app.subscribefun(_this, 0, subscribedata.template_id, subscribedata.subscribe_type);
+              _this.subshowmodalfun();
+            };
+          }
+        })
+      };
+    };
+  },
+  subshowmodalfun: function () {
+    var _this = this;
+    wx.showModal({
+      title: '提示',
+      content: _this.data.subscribeCouponTip || '订阅成功,开售前通过微信发送提醒',
+      showCancel: false,
+      success: function (res) {
+        _this.setData({
+          subscribeCouponTip:'',
+          isSubscribeCoupon:false
+        })
+        }
+    })
+  },
+
+
 })

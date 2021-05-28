@@ -2281,7 +2281,7 @@ Page({
       numbadd = 99;
     };
     if (parseInt(_this.data.quantityofgoods) < numbadd){
-      app.showToastC('改成该商品最多不能超过剩余库存');
+      app.showToastC('该商品最多不能超过剩余库存');
       numbadd = _this.data.quantityofgoods;
     };    
     var taxation = parseFloat(numbadd) * parseFloat(_this.data.zunmdata.tax||0);

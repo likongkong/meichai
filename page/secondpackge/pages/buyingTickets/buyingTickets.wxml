@@ -89,7 +89,9 @@
 
        
         <view class="detailimg" style="padding:20rpx;" id='e3'>
-            <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+            <block wx:if='{{is_gdbp_display}}'>
+                <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+            </block>
         </view>
 
   </view>

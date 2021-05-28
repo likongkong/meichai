@@ -55,7 +55,7 @@
             </block>
             <view class="progress-box">
                 <progress percent="{{(activity.suplusNum/activity.limit_users)*100}}" color="{{(activity.suplusNum/activity.limit_users)*100 === 100?'#6FBE0D':(activity.suplusNum/activity.limit_users)*100 < 100 && (activity.suplusNum/activity.limit_users)*100 > 50?'#FEB51D':'#ff2742'}}" backgroundColor="#cccccc" stroke-width='12' active duration="5" />
-                <text style="padding-left:15rpx;" wx:if='{{activity.status != 1}}'>剩余：{{activity.suplusNum}}</text>
+                <text style="padding-left:15rpx;"><block wx:if='{{activity.status != 1}}'>剩余：{{activity.suplusNum}}</block><block wx:elif='{{activity.nameSuffix}}'>{{activity.nameSuffix}}</block></text>
             </view>
         </view>
 
