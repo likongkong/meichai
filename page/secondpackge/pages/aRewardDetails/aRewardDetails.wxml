@@ -24,7 +24,7 @@
             <text>玩法\n说明</text>
         </view>
     </view>
-    <view class="adheadutnum">{{activity.queueNum}}人正在刮奖券</view>
+    <view class="adheadutnum" wx:if='{{activity.status != 1}}'>{{activity.queueNum}}人正在刮奖券</view>
 </view>
 <view class="ardbox">
     <view class="adhbanner" style="position:relative;">

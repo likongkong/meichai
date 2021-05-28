@@ -87,7 +87,7 @@
           </block>
         </swiper>
         <view class="cardBbox"> 
-          <view class="price"><text>￥</text>{{item.shopPrice}}<view wx:if='{{item.list_arr[0].status == 1}}' class="subList" catchtap="subfuncap">开售提醒</view></view>
+          <view class="price"><text>￥</text>{{item.shopPrice}}<view wx:if='{{item.list_arr[0].status == 1}}' class="subList" catchtap="subfuncap" data-id='{{item.list_arr[0].id}}'>开售提醒</view></view>
           <view class="title">{{item.name}}</view>
         </view>
       </view>
