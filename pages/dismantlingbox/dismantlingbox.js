@@ -89,14 +89,12 @@ Page({
     isAwardBox:false,
     isBuyingTickets:false,
     isShowDrawTxt:false,
-    is_show:true,
+    is_show:false,
     // 商品默认图片
     defaultimg:'/pages/images/goods_Item_Default_Image.png',
     isPopping:false,
-    nowAdmissionTime:Date.parse(new Date()) / 1000
+    nowAdmissionTime:Date.parse(new Date()) / 1000,
   },
-
-
 
   //点击弹出
   plus: function (e) {
@@ -148,16 +146,13 @@ Page({
     })
   },
 
-
   // 获取滚动条当前位置
   onPageScroll: function (e) {
     // console.log(e.scrollTop)
-    if(e.scrollTop>1100){
-      if(!this.data.is_show){
-        this.setData({
-          is_show: true
-        }); 
-      };
+    if(e.scrollTop>600 && !this.data.is_show){
+      this.setData({
+        is_show: true
+      }); 
     }
   },  
   
