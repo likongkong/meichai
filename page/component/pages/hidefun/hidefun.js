@@ -118,7 +118,18 @@ Page({
       newcoupon: true,
     })
   },
-
+  // 更新用户信息
+  getUserProfile(w){
+    var _this = this;
+    console.log(1111111)
+    app.getUserProfile((res,userInfo) => {
+        _this.setData({
+          ishowaffirm: false,
+          newcoupon: true,
+        })
+       app.signindata.isNeedUserInfo = false; 
+    });
+  },
   help: function() {
     var _this = this;
     _this.setData({
@@ -259,6 +270,7 @@ Page({
       avatarUrl: app.signindata.avatarUrl,
       defaultinformation:app.signindata.defaultinformation,
       headhidden: false,
+      isNeedUserInfo:app.signindata.isNeedUserInfo
     });
     if (app.signindata.isNewer) {
       _this.setData({

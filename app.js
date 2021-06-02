@@ -201,7 +201,7 @@ App({
 
                       _this.signindata.loginid = res.data.Info.loginid || '';
                       _this.signindata.uid = res.data.Info.uid || '';
- 
+
                       if(Dec.env=='online'){
                         var num = _this.signindata.randommaximum - res.data.Info.uid%_this.signindata.randommaximum;
                         if(num<10){
