@@ -99,8 +99,8 @@
 <view class="chBindInfoMask" wx:if="{{isChBindInfoMask}}" catchtap="hideChBindInfo">
   <view class="chBindInfoBox" catchtap="true">
     <view class="chBindInfoTitle" style="color:#101010;">核验码<text style="color:#8A8A8A;">（入场前请出示核验码核验身份）</text></view>
-    <!-- <image class="chImagebox" mode='aspectFit' src="https://cdn.51chaidan.com/images/qrcode/toyshowVIP/{{uid}}.png"></image> -->
-    <image class="chImagebox" mode='aspectFit' src="https://cdn.51chaidan.com/data/afficheimg/dim.png"></image>
+    <image wx:if='{{chBindInfo.isShowQR_code}}' class="chImagebox" mode='aspectFit' src="https://cdn.51chaidan.com/images/qrcode/toyshowVIP/{{uid}}.png"></image>
+    <image wx:else class="chImagebox" mode='aspectFit' src="https://cdn.51chaidan.com/data/afficheimg/dim.png"></image>
     <view class="chBindInfoTest"><text style="color:#428633;" wx:if='{{chBindInfo.ticketStatus==1}}'>已核验</text><text wx:else style="color:#FF2742;">未核验</text></view>
     <view class="chBindInfoTOne" wx:if='{{chBindInfo.ticketStatus==1}}'>{{chBindInfo.audit_time}}</view>
     <view class="chBindInfoTitle">绑定信息查看</view>
