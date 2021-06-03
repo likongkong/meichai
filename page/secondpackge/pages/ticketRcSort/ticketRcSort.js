@@ -81,17 +81,27 @@ Page({
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
           if(res.data.Info.priorify.length == 0){
-            wx.showToast({
-              title: '暂无优先入场资格',
-              icon: 'none',
-              mask:true,
-              duration:3000
-            });  
-            setTimeout(function(){
-              wx.navigateTo({  
-                url: "/pages/dismantlingbox/dismantlingbox"
-              })
-            },3000)
+            // wx.showToast({
+            //   title: '暂无优先入场资格',
+            //   icon: 'none',
+            //   mask:true,
+            //   duration:3000
+            // });  
+            // setTimeout(function(){
+            //   wx.navigateTo({  
+            //     url: "/pages/dismantlingbox/dismantlingbox"
+            //   })
+            // },3000)
+            wx.showModal({ 
+              content: '暂无优先入场资格',
+              showCancel:false,
+              confirmText:'返回首页',
+              success: function (res) {
+                wx.redirectTo({
+                  url: "/pages/dismantlingbox/dismantlingbox",
+                });
+              }
+            });
           }else{
             res.data.Info.priorify.tel =  _this.plusXing(res.data.Info.priorify.tel,4,3)
             res.data.Info.priorify.idcard =  _this.plusXing(res.data.Info.priorify.idcard,6,4)
@@ -184,9 +194,9 @@ Page({
       console.log('options.scene========',scene)
       _this.data.targetUId = _this.getCaption(scene) || 0;
       console.log('targetUId========111',_this.getCaption(scene))
-
     } else {
-      _this.data.targetUId = options.targetuid || 0;
+      console.log('targetUId========222',options.targetUId)
+      _this.data.targetUId = options.targetUId || 0;
     };
     _this.activsign();
     wx.hideShareMenu();
