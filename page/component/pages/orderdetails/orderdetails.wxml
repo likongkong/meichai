@@ -1302,7 +1302,7 @@
     <view class='orderbott'>
         <view class='orderbottcon'>订单编号:{{comdata.order_sn}}</view>
         <view class='orderbottcon'
-            wx:if='{{comdata.status!=0&&comdata.status!=16&&comdata.status!=1&&comdata.status!=8&&comdata.status!=11&&comdata.amount!=0}}'>
+            wx:if='{{comdata.status!=0&&comdata.status!=16&&comdata.status!=1&&comdata.status!=8&&comdata.status!=11&&comdata.amount!=0&&comdata.payment}}'>
             支付方式:{{comdata.payment}}支付</view>
         <!-- &&comdata.status!=16&&comdata.status!=1&&comdata.status!=8&&comdata.status!=11 -->
         <view class='orderbottcon' wx:if='{{comdata.order_type!=2}}'>下单时间:{{comdata.ordertime}}</view>
