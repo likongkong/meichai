@@ -1640,7 +1640,10 @@ Page({
         success: function (res) {}
       }
     }
-    _this.queueup(2, 4)
+    if(_this.data.activity.status == 2){
+      _this.queueup(2, 4)
+    };
+    
     return share;
   },
   // 分享图生成
