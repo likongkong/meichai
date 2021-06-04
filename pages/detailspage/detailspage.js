@@ -270,7 +270,21 @@ Page({
       var zunmdata = this.data.zunmdata; 
       zunmdata.gsale = listSpec[modelColor].price || 0;
       zunmdata.gprice = listSpec[modelColor].price || 0;
-      zunmdata.debuff = 0; 
+
+      if(zunmdata.totalSpecStock && listSpec[modelColor].stock > zunmdata.totalSpecStock){
+        zunmdata.limitBuy = zunmdata.totalSpecStock;
+      }else{
+        zunmdata.limitBuy = selectShell.stock;
+      };
+
+      // 手机壳 并且 isSpecSoldOut 为 true 全部卖完
+      if(zunmdata.isSpecSoldOut){
+          zunmdata.status = 0; 
+          zunmdata.debuff = 3; 
+      }else{
+          zunmdata.debuff = 0; 
+      };
+
       zunmdata.goods_thumb = listSpec[modelColor].roleImg;
       this.setData({
         detailColorIndex:index,
@@ -323,10 +337,18 @@ Page({
       zunmdata.gprice = selectShell.price || 0;
       zunmdata.debuff = 0;
       zunmdata.goods_thumb = selectShell.roleImg;
-      
-      if( selectShell.stock < 0 ){
+      // 手机壳 并且 isSpecSoldOut 为 true 全部卖完
+      if( selectShell.stock < 0 || zunmdata.isSpecSoldOut){
         zunmdata.debuff = 3;
+        zunmdata.status = 0; 
       };
+
+      if(zunmdata.totalSpecStock && selectShell.stock > zunmdata.totalSpecStock){
+        zunmdata.limitBuy = zunmdata.totalSpecStock;
+      }else{
+        zunmdata.limitBuy = selectShell.stock;
+      };
+      
 
       this.setData({
         modelSelInde:e.detail.value,
@@ -3066,7 +3088,17 @@ Page({
                         detailColorIndex = i;
                         modelSelInde = j;
                         selectShell = listSpec[modelColor];
-                        spgsale = listSpec[modelColor].price;                     
+                        spgsale = listSpec[modelColor].price; 
+                        if( listSpec[modelColor] && listSpec[modelColor].stock > 0 ){
+                          redauin.debuff = 0; 
+                        }else{
+                          redauin.debuff = 3; 
+                        };
+                        if(res.data.Ginfo.totalSpecStock && listSpec[modelColor].stock > res.data.Ginfo.totalSpecStock){
+                          res.data.Ginfo.limitBuy = res.data.Ginfo.totalSpecStock;
+                        }else{
+                          res.data.Ginfo.limitBuy = listSpec[modelColor].stock;
+                        };
                       }
                     } else {
                       detailSpecColor[i].select = false;
@@ -3081,6 +3113,12 @@ Page({
             redauin.gprice = spgsale;
             redauin.goods_thumb = selectShell.roleImg;
             console.log('detailSpecColor==========',detailSpecColor)
+
+            // 手机壳 并且 isSpecSoldOut 为 true 全部卖完
+            if(res.data.Ginfo.isSpecSoldOut){
+                redauin.debuff = 3; 
+                redauin.status = 0;
+            };
 
             _this.setData({
               zunmdata:redauin,
@@ -3097,8 +3135,7 @@ Page({
             // Ginfo.infoSpecial.listSpec   对应关系
             // Ginfo.infoSpecial.specCate        属性列表
             // Ginfo.infoSpecial.detailSpec        属性明细            
-          }
-
+          };
 
 
           if (_this.data.is_exhibition==1||(_this.data.is_exhibition!=1&&_this.data.brandId>0)){
