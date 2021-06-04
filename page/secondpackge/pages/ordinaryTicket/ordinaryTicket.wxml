@@ -3,9 +3,9 @@
 
 <block wx:if='{{is_bg}}'>
    <view class="wrap">
-   <view class="grayWrap {{priorify.day==4?'red':priorify.day==5?'blue':'yellow'}}">入场日期</view>
+   <view class="grayWrap {{priorifyDay==4?'red':priorifyDay==5?'blue':'yellow'}}">入场日期</view>
    <view class="rcdate infoBox">{{priorify.ticketDate}}</view>
-   <view class="grayWrap {{priorify.day==4?'red':priorify.day==5?'blue':'yellow'}}">入场人员信息</view>
+   <view class="grayWrap {{priorifyDay==4?'red':priorifyDay==5?'blue':'yellow'}}">入场人员信息</view>
    <view class="rcUserInfo">
       <view>
          <text decode="true">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</text>
