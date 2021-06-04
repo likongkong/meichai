@@ -166,6 +166,11 @@ Page({
     // })
   },
 
+  jumpOrderPage(){
+    wx.navigateTo({
+      url: "/pages/myorder/myorder?tabnum=" + 1
+    });
+  },
 
   activsign: function () {
     // 判断是否授权 

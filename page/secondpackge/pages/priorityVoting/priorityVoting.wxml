@@ -58,8 +58,13 @@
 
   <view class="bottomWrap">
     <view class="bottomTxt">展会需凭本人身份证在绑定日期入场</view>
-    <view class="btn" catchtap="submit">
-      绑定
+    <view class="btnWrap">
+      <view class="btn" style="background:#FCA700;" catchtap="jumpOrderPage">
+        查看绑定信息
+      </view>
+      <view class="btn" catchtap="submit">
+        立即绑定
+      </view>
     </view>
   </view>
 </view>

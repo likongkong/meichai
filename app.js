@@ -1589,7 +1589,7 @@ App({
 // giftCollection 领取礼物
 // electronicTicket 电子票详情
 
-// priorityVoting  优先权抽选
+// priorityVoting  邀请函
 // luckyDraw  展会VIP抽签
 // winningResult  展会抽签中奖名单
 // bindTicket  绑定展会门票
