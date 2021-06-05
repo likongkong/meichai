@@ -19,7 +19,8 @@ Page({
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
     targetUId:0,
-    is_bg:false
+    is_bg:false,
+    priorifyDay:4
   },
 
   plusXing (str,frontLen,endLen) {
@@ -106,7 +107,8 @@ Page({
             res.data.Info.priorify.tel =  _this.plusXing(res.data.Info.priorify.tel,4,3)
             res.data.Info.priorify.idcard =  _this.plusXing(res.data.Info.priorify.idcard,6,4)
             _this.setData({
-             priorify:res.data.Info.priorify
+             priorify:res.data.Info.priorify,
+             priorifyDay:res.data.Info.priorify.day
             })
           }
         }else{

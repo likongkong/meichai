@@ -18,7 +18,7 @@ Page({
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
     oid:0,
-    day:4,
+    priorifyDay:4,
     is_bg:false
   },
 
@@ -51,7 +51,8 @@ Page({
           res.data.Info.tel = _this.plusXing(res.data.Info.tel,4,3)
           res.data.Info.idcard = _this.plusXing(res.data.Info.idcard,6,4)
           _this.setData({
-            priorify:res.data.Info
+            priorify:res.data.Info,
+            priorifyDay:res.data.Info.day
           })
         }else{
           wx.showToast({
