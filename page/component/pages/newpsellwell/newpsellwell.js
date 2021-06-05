@@ -137,6 +137,7 @@ Page({
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
+        console.log('数据',res)
         _this.data.push_id =  0;
         // 刷新完自带加载样式回去
         wx.stopPullDownRefresh()

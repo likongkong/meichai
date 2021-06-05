@@ -249,10 +249,15 @@ Page({
     detailColorIndex:0,
     selectShell:{},
     // 刮刮卡入口
-    isScrapingCard:false  
+    isScrapingCard:false,
+    mpmBulletFrame:false  
 
 
-
+  },
+  mpmBullFrame(){
+     this.setData({
+       mpmBulletFrame:!this.data.mpmBulletFrame
+     })
   },
   // 跳转刮刮卡
   jumpScrapingCard(){
@@ -303,9 +308,10 @@ Page({
     };
   },
   //分类选择
-  bindPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-
+  bindPickerChange: function (w) {
+    
+    var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
+    console.log('picker发送选择改变，携带值为',ind)
     var detailSpecModel = this.data.detailSpecModel || [];
     var detailSpecColor = this.data.detailSpecColor || [];
     var listSpec = this.data.listSpec;
@@ -315,7 +321,7 @@ Page({
     var detailColorIndex = 0;
     var selectShell = {};
     for( var i = 0 ; i < detailSpecColor.length ; i++ ){
-        var modelColor = detailSpecModel[e.detail.value].name+'-'+detailSpecColor[i].name;
+        var modelColor = detailSpecModel[ind].name+'-'+detailSpecColor[i].name;
         
         if(listSpec[modelColor]){
           console.log(modelColor,listSpec[modelColor])
@@ -351,7 +357,7 @@ Page({
       
 
       this.setData({
-        modelSelInde:e.detail.value,
+        modelSelInde:ind,
         numberofdismantling:1,
         selectShell,
         zunmdata:zunmdata,
@@ -362,7 +368,7 @@ Page({
       var zunmdata = this.data.zunmdata; 
       zunmdata.debuff = 3;
       this.setData({
-        modelSelInde:e.detail.value,
+        modelSelInde:ind,
         selectShell:{},
         zunmdata,
         detailSpecColor,
@@ -564,12 +570,15 @@ Page({
       };
     }.bind(_this), 1000);
   },
-
-
   // 拉起订阅
   subscrfun: function () {
     var _this = this;
-    var subscribedata = _this.data.subscribedata || '';
+    if(_this.data.specialGoods == 1 && _this.data.zunmdata.status==0){
+      var subscribedata = _this.data.specSubscribe || '';
+    }else{
+      var subscribedata = _this.data.subscribedata || '';
+    };
+    
     if (subscribedata && subscribedata.template_id && app.signindata.subscribeif) {
       if (subscribedata.template_id instanceof Array) {
         wx.requestSubscribeMessage({
@@ -578,7 +587,12 @@ Page({
             var is_show_modal = true;
             for (var i = 0; i < subscribedata.template_id.length; i++) {
               if (res[subscribedata.template_id[i]] == "accept") {
-                app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+                if(_this.data.specialGoods == 1 && _this.data.zunmdata.status == 0){  // 手机壳 要传订阅的是哪款
+                  app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i],_this.data.selectShell.roleId ||'');
+                }else{
+                  app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+                }
+                
                 if (is_show_modal) {
                   _this.subshowmodalfun();
                   is_show_modal = false;
@@ -615,7 +629,7 @@ Page({
     var _this = this;
     wx.showModal({
       title: '提示',
-      content: _this.data.subscribeCouponTip|| '订阅成功,开售前通过微信发送提醒',
+      content: '订阅成功',
       showCancel: false,
       success: function (res) {
         _this.setData({
@@ -3038,6 +3052,7 @@ Page({
             movies: res.data.Ginfo.gimages,
             zunmdata: redauin,
             subscribedata: res.data.toyShowSubscribe || '',
+            specSubscribe: res.data.specSubscribe || '',
             taxation: redauin.tax || 0,
             isVideoSwiper: res.data.Ginfo.videoBanner||false,
             is_exhibition: res.data.Ginfo.specialWay || 0,
