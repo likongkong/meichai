@@ -665,9 +665,9 @@
 
 .mscModelBox{
   padding: 0 16rpx 0;
-  display: flex;
+  /* display: flex;
   justify-content:space-between;
-  flex-wrap:wrap;
+  flex-wrap:wrap; */
 }
 .mscModelBoxeve{
   width:150rpx;height:220rpx;
@@ -681,5 +681,18 @@
 .mscModelBoxeve.ColorClass{
   border: 4rpx solid #ff2742;
 }
-
+.mscModelBoxOne{
+  padding: 0 22rpx;
+  font-size:24rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  border-radius: 50rpx;
+  margin:0 20rpx 20rpx 0;
+  display:inline-block;
+  background: #F1F1F1;
+}
+.mscModelBoxOne.addColorClass{
+  background: #FBECE9;
+  color: #BD5944;
+}
 

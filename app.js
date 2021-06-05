@@ -878,7 +878,7 @@ App({
     } else {
       var subscribe_id = _this.data.id
     };
-    var specRoleId = specRoleId || '';
+    var specRoleId = specRoleId || 0;
     var q1 = Dec.Aese('mod=subscribe&operation=accept&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&subscribe_type=' + subscribe_type + '&template_id=' + template_id + '&subscribe_id=' + subscribe_id + '&specRoleId=' + specRoleId);
     console.log('mod=subscribe&operation=accept&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&subscribe_type=' + subscribe_type + '&template_id=' + template_id + '&subscribe_id=' + subscribe_id + '&specRoleId=' + specRoleId)
     wx.request({

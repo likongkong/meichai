@@ -277,9 +277,9 @@ Page({
       zunmdata.gprice = listSpec[modelColor].price || 0;
 
       if(zunmdata.totalSpecStock && listSpec[modelColor].stock > zunmdata.totalSpecStock){
-        zunmdata.limitBuy = zunmdata.totalSpecStock;
+         this.data.totalSpecStock = zunmdata.totalSpecStock;
       }else{
-        zunmdata.limitBuy = selectShell.stock;
+         this.data.totalSpecStock = selectShell.stock;
       };
 
       // 手机壳 并且 isSpecSoldOut 为 true 全部卖完
@@ -350,11 +350,16 @@ Page({
       };
 
       if(zunmdata.totalSpecStock && selectShell.stock > zunmdata.totalSpecStock){
-        zunmdata.limitBuy = zunmdata.totalSpecStock;
+        this.data.totalSpecStock = zunmdata.totalSpecStock;
       }else{
-        zunmdata.limitBuy = selectShell.stock;
+        this.data.totalSpecStock = selectShell.stock;
       };
       
+      if(zunmdata.depositInfo[selectShell.roleId]){
+        zunmdata.isDepositSubscribe = zunmdata.depositInfo[selectShell.roleId].isDepositSubscribe
+      }else{
+        zunmdata.isDepositSubscribe = false;
+      }
 
       this.setData({
         modelSelInde:ind,
@@ -1435,6 +1440,12 @@ Page({
     var index = w.currentTarget.dataset.no || w.target.dataset.no;
     var taxation = parseFloat(index) * parseFloat(this.data.zunmdata.tax||0);  
     var zunmdata = this.data.zunmdata;
+
+    if (this.data.totalSpecStock && this.data.totalSpecStock > index) {
+        app.showToastC('该商品最多购买' + this.data.totalSpecStock + '件');
+        return false;
+    };
+
     if (zunmdata.limitBuy > 0) {
       if (index > zunmdata.limitBuy) {
         app.showToastC('该商品最多一次性购买' + zunmdata.limitBuy + '件');
@@ -3067,6 +3078,7 @@ Page({
             isDeductNum:res.data.Ginfo.isDeduct&&_this.data.blindboxMoney!=0?1:0,
             isCanShare:res.data.Ginfo.isCanShare,
             nowTime : Date.parse(new Date())/1000,//当前时间戳
+            totalSpecStock:res.data.Ginfo.totalSpecStock || 0
           },function(){
               // 是否播放视频
               if(_this.data.isVideoSwiper){
@@ -3110,9 +3122,9 @@ Page({
                           redauin.debuff = 3; 
                         };
                         if(res.data.Ginfo.totalSpecStock && listSpec[modelColor].stock > res.data.Ginfo.totalSpecStock){
-                          res.data.Ginfo.limitBuy = res.data.Ginfo.totalSpecStock;
+                          _this.data.totalSpecStock = res.data.Ginfo.totalSpecStock;
                         }else{
-                          res.data.Ginfo.limitBuy = listSpec[modelColor].stock;
+                          _this.data.totalSpecStock = listSpec[modelColor].stock;
                         };
                       }
                     } else {

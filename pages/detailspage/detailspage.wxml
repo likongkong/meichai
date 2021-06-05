@@ -101,7 +101,8 @@
   <view class="detailDeposit" wx:if='{{zunmdata.goods_type==3&&zunmdata.status!=3}}'>
       <view class="deDeposleft">
           <view class="deDeposst">定金 ￥{{zunmdata.promote_price}}</view>
-          <view class="deDepPresale">预售价 ￥{{zunmdata.gsale}}</view>
+          <!-- <view class="deDepPresale">预售价 ￥{{zunmdata.gsale}}</view> -->
+          <view class="deDepPresale">尾款 ￥{{zunmdata.end_price}}</view>
       </view>
       <view class="deDeposright">
           <view wx:if='{{zunmdata.finalDepositTime}}' class="specialellipsis" style="width:100%;height:110rpx;text-align:center;line-height:110rpx;font-size:24rpx;color:#EA4F57;">
@@ -244,10 +245,15 @@
             <view class="mscModelEve" catchtap="mpmBullFrame">{{detailSpecModel[modelSelInde].name}}<image src="https://cdn.51chaidan.com/images/sign/activity/dropDown.png" mode='aspectFit' class="mscModelEveDown"></image></view>
         </picker>  -->
         <view class="mscModelBox">
-            <view class="mscModelBoxeve {{modelSelInde==index?'ColorClass':''}} boxShadowEve" wx:for='{{detailSpecModel}}' catchtap="bindPickerChange" data-ind='{{index}}' wx:key='key'>
+
+          <view class="mscModelBoxOne {{modelSelInde==index?'addColorClass':''}} boxShadowEve" wx:for='{{detailSpecModel}}' catchtap="bindPickerChange" data-ind='{{index}}' wx:key='key'>{{item.name}}</view>
+
+
+
+            <!-- <view class="mscModelBoxeve {{modelSelInde==index?'ColorClass':''}} boxShadowEve" wx:for='{{detailSpecModel}}' catchtap="bindPickerChange" data-ind='{{index}}' wx:key='key'>
                 <image src="{{item.roleImg}}" mode='aspectFit' class="modModeImg" alt=""></image>
                 <view class="disanum_sb_txtone multilineellipsis" style="color:#666;max-height:70rpx;line-height: 32rpx;">{{item.name}}</view>
-            </view>
+            </view> -->
 
         </view>
 
@@ -634,7 +640,7 @@
 <!--  35327 开通vip -->
 <block wx:if='{{zunmdata.gid == 35327}}'>
     <view class="detailfooter" style='{{isIphoneX?"bottom:130rpx;":"bottom:110rpx;"}}'>
-      <view style='width:100%;min-height:98rpx;overflow:hidden;background:#f4f4f4;'>
+      <view style='width:100%;min-height:98rpx;overflow:hidden;background:#ffffff;'>
         <view style='height:98rpx;width:202rpx;float:left;position:relative;' wx:if='{{isCanShare}}' catchtap='displaysharefriend'>
             <image src='https://www.51chaidan.com/images/icon/iconShareWX.png' style='width:50rpx;height:50rpx;display:block;margin:10rpx auto 0;'></image>
             <view style='font-size:22rpx;width:100%;color:#919191;text-align:center;height:40rpx;line-height:40rpx;'>分享好友</view>
@@ -650,7 +656,7 @@
 <!--  35422,35420,35421 去购票 -->
 <block wx:elif='{{zunmdata.gid == 35422 || zunmdata.gid == 35420 || zunmdata.gid == 35421}}'>
     <view class="detailfooter" style='{{isIphoneX?"bottom:130rpx;":"bottom:110rpx;"}}'>
-      <view style='width:100%;min-height:98rpx;overflow:hidden;background:#f4f4f4;'>
+      <view style='width:100%;min-height:98rpx;overflow:hidden;background:#ffffff;'>
         <view style='height:98rpx;width:202rpx;float:left;position:relative;' wx:if='{{isCanShare}}' catchtap='displaysharefriend'>
             <image src='https://www.51chaidan.com/images/icon/iconShareWX.png' style='width:50rpx;height:50rpx;display:block;margin:10rpx auto 0;'></image>
             <view style='font-size:22rpx;width:100%;color:#919191;text-align:center;height:40rpx;line-height:40rpx;'>分享好友</view>
@@ -775,7 +781,7 @@
 <!--  底部tab 赠送商品 -->
 <block wx:elif='{{zunmdata.isGiftGoods}}'>
     <view class="detailfooter" style='{{isIphoneX?"bottom:130rpx;":"bottom:110rpx;"}}'>
-      <view style='width:100%;min-height:98rpx;overflow:hidden;background:#f4f4f4;'>
+      <view style='width:100%;min-height:98rpx;overflow:hidden;background:#ffffff;'>
         <view style='height:98rpx;width:202rpx;float:left;position:relative;' wx:if='{{isCanShare}}' catchtap='displaysharefriend'>
             <image src='https://www.51chaidan.com/images/icon/iconShareWX.png' style='width:50rpx;height:50rpx;display:block;margin:10rpx auto 0;'></image>
             <view style='font-size:22rpx;width:100%;color:#919191;text-align:center;height:40rpx;line-height:40rpx;'>分享好友</view>
@@ -792,7 +798,7 @@
 <!--  底部tab -->
 <block wx:elif='{{zunmdata.isZhongCao}}'>
     <view class="detailfooter" style='{{isIphoneX?"bottom:130rpx;":"bottom:110rpx;"}}'>
-      <view style='width:100%;min-height:98rpx;overflow:hidden;background:#f4f4f4;'>
+      <view style='width:100%;min-height:98rpx;overflow:hidden;background:#ffffff;'>
         <view style='height:98rpx;width:202rpx;float:left;position:relative;' wx:if='{{isCanShare}}' catchtap='displaysharefriend'>
             <image src='https://www.51chaidan.com/images/icon/iconShareWX.png' style='width:50rpx;height:50rpx;display:block;margin:10rpx auto 0;'></image>
             <view style='font-size:22rpx;width:100%;color:#919191;text-align:center;height:40rpx;line-height:40rpx;'>分享好友</view>
@@ -808,7 +814,7 @@
 <!--  底部定金tab -->
 <block wx:elif='{{zunmdata.goods_type==3}}'>
     <view class="detailfooter" style='{{isIphoneX?"bottom:130rpx;":"bottom:110rpx;"}}'>
-      <view style='width:100%;min-height:98rpx;overflow:hidden;background:#f4f4f4;'>
+      <view style='width:100%;min-height:98rpx;overflow:hidden;background:#ffffff;'>
         <view style='height:98rpx;width:202rpx;float:left;position:relative;' wx:if='{{isCanShare}}' catchtap='displaysharefriend'>
             <image src='https://www.51chaidan.com/images/icon/iconShareWX.png' style='width:50rpx;height:50rpx;display:block;margin:10rpx auto 0;'></image>
             <view style='font-size:22rpx;width:100%;color:#919191;text-align:center;height:40rpx;line-height:40rpx;'>分享好友</view>
@@ -887,7 +893,7 @@
           </view>        
         </block>
         <block wx:else>
-          <view class="footer-child large sale" style='height:80rpx;margin-top:9rpx;border-radius:10rpx;padding:0;width:255rpx;margin-right:20rpx;{{zunmdata.status==3?"background:#999999;":""}}' catchtap="{{zunmdata.status == 1 || zunmdata.status == 0?'subscrfun':''}}">
+          <view class="footer-child large sale" style='height:80rpx;margin-top:9rpx;border-radius:10rpx;padding:0;width:255rpx;margin-right:20rpx;{{zunmdata.status==3?"background:#999999;":""}}{{zunmdata.status==0?"background:#FCA700;":""}} ' catchtap="{{zunmdata.status == 1 || zunmdata.status == 0?'subscrfun':''}}">
               <view style='width:100%;height:80rpx;text-align:center;color:#fff;line-height:80rpx;font-size:28rpx;'>
                     <block wx:if='{{zunmdata.status==3}}'>已结束</block>
                     <block wx:elif='{{zunmdata.status==0}}'>补货提醒</block>
@@ -897,7 +903,8 @@
         </block>
 
         <view wx:if='{{zunmdata.status==1 || (zunmdata.isDepositSubscribe && zunmdata.status==2)}}' class="footer-child large turn" style='height:80rpx;margin-top:9rpx;padding:0;width:200rpx;margin-right:40rpx;background:#f8b21d;text-align:center;line-height:80rpx;color:#fff;border-radius:10rpx;float:right;position: relative;' catchtap='subscrfun'>
-              订阅提醒
+              <block wx:if='{{zunmdata.status==1}}'>开售订阅提醒</block>
+              <block wx:else>尾款订阅提醒</block>
         </view>
 
       </view>
@@ -1016,7 +1023,7 @@
          <view class="detailbottomtipbg"></view>
          <view class="detailbottomtiptxt">还有机会,有买家拍下还未付款,1分钟内将解除订单</view>
       </view>
-      <view style='width:100%;min-height:98rpx;overflow:hidden;background:#f4f4f4;' wx:if='{{zunmdata.is_suit==0}}'>
+      <view style='width:100%;min-height:98rpx;overflow:hidden;background:#ffffff;' wx:if='{{zunmdata.is_suit==0}}'>
         <view style='height:98rpx;width:202rpx;float:left;position:relative;' wx:if='{{isCanShare}}' catchtap='displaysharefriend'>
             <image src='https://www.51chaidan.com/images/icon/iconShareWX.png' style='width:50rpx;height:50rpx;display:block;margin:10rpx auto 0;'></image>
             <view style='font-size:22rpx;width:100%;color:#919191;text-align:center;height:40rpx;line-height:40rpx;'>分享好友</view>
@@ -1035,7 +1042,7 @@
           <view class="addsopcar" wx:if='{{zunmdata.debuff==2}}'>商品已售罄</view>
           <view class="addsopcar" wx:if='{{zunmdata.debuff==3}}'>暂无库存,补货中</view>
         </view>
-        <view class="footer-child large turn" wx:if='{{zunmdata.debuff==0}}' style='height:80rpx;margin-top:9rpx;border-radius:10rpx;padding:0;width:255rpx;margin-right:20rpx;background:{{(zunmdata.limitBuy<=0&&room_id<=0&&is_exhibition!=1&&isShareGood)||zunmdata.isBlindBox?"#e47677":"#f4f4f4"}};'>
+        <view class="footer-child large turn" wx:if='{{zunmdata.debuff==0}}' style='height:80rpx;margin-top:9rpx;border-radius:10rpx;padding:0;width:255rpx;margin-right:20rpx;background:{{(zunmdata.limitBuy<=0&&room_id<=0&&is_exhibition!=1&&isShareGood)||zunmdata.isBlindBox?"#e47677":"#ffffff"}};'>
           <view wx:if='{{zunmdata.isBlindBox}}' class='addsopcar' bindtap='addresssmokebox' data-gid='{{zunmdata.gid}}' style='position:relative;height:80rpx;'>
             <view style='width:100%;height:80rpx;text-align:center;color:#fff;line-height:80rpx;font-size:28rpx;'>在线抽盒机</view>
           </view>
@@ -1059,7 +1066,7 @@
           </block>
         </view>
       </view>
-      <view style='width:100%;min-height:98rpx;overflow:hidden;background:#f4f4f4;' wx:if='{{zunmdata.is_suit==1}}'>
+      <view style='width:100%;min-height:98rpx;overflow:hidden;background:#ffffff;' wx:if='{{zunmdata.is_suit==1}}'>
         <view style='height:98rpx;width:202rpx;float:left;position:relative;' wx:if='{{isCanShare}}' catchtap='displaysharefriend'>
             <image src='https://www.51chaidan.com/images/icon/iconShareWX.png' style='width:50rpx;height:50rpx;display:block;margin:10rpx auto 0;'></image>
             <view style='font-size:22rpx;width:100%;color:#919191;text-align:center;height:40rpx;line-height:40rpx;'>分享好友</view>
