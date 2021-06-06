@@ -265,12 +265,18 @@ Page({
   },
 
   dSCfun(event){
+    var _this = this;
     var index = event.currentTarget.dataset.index || event.target.dataset.index || 0;
 
     var detailSpecModel = this.data.detailSpecModel || [];
     var detailSpecColor = this.data.detailSpecColor || [];
+    _this.setData({
+      movies: detailSpecColor[index].listImg || _this.data.zunmdata.gimages || [],
+      goodsIndex:0
+    })
     var listSpec = this.data.listSpec;
     var modelColor = detailSpecModel[this.data.modelSelInde].name+'-'+detailSpecColor[index].name;
+    console.log(listSpec[modelColor])
     if( listSpec[modelColor] && listSpec[modelColor].stock > 0 ){
       var zunmdata = this.data.zunmdata; 
       zunmdata.gsale = listSpec[modelColor].price || 0;
@@ -279,13 +285,13 @@ Page({
       if(zunmdata.totalSpecStock && listSpec[modelColor].stock > zunmdata.totalSpecStock){
          this.data.totalSpecStock = zunmdata.totalSpecStock;
       }else{
-         this.data.totalSpecStock = selectShell.stock;
+         this.data.totalSpecStock = listSpec[modelColor].stock;
       };
       if(zunmdata.status == 2){
-        if(zunmdata.depositInfo && zunmdata.depositInfo[selectShell.roleId]){
-          zunmdata.isDepositSubscribe = zunmdata.depositInfo[selectShell.roleId].isDepositSubscribe;
-          if(zunmdata.depositInfo[selectShell.roleId].orderSn){
-            zunmdata.orderSn = zunmdata.depositInfo[selectShell.roleId].orderSn;
+        if(zunmdata.depositInfo && zunmdata.depositInfo[listSpec[modelColor].roleId]){
+          zunmdata.isDepositSubscribe = zunmdata.depositInfo[listSpec[modelColor].roleId].isDepositSubscribe;
+          if(zunmdata.depositInfo[listSpec[modelColor].roleId].orderSn){
+            zunmdata.orderSn = zunmdata.depositInfo[listSpec[modelColor].roleId].orderSn;
             zunmdata.isDisplayDeposit = true;
           }else{
             zunmdata.isDisplayDeposit = false;
@@ -312,6 +318,10 @@ Page({
       })
     }else{
       var zunmdata = this.data.zunmdata; 
+      if(zunmdata.status == 2){
+        zunmdata.isDepositSubscribe = false;
+        zunmdata.isDisplayDeposit = true;
+      };
       zunmdata.debuff = 3; 
       this.setData({
         detailColorIndex:index,
@@ -323,7 +333,7 @@ Page({
   },
   //分类选择
   bindPickerChange: function (w) {
-    
+    var _this = this;
     var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
     console.log('picker发送选择改变，携带值为',ind)
     var detailSpecModel = this.data.detailSpecModel || [];
@@ -332,24 +342,32 @@ Page({
 
     var ifAdopt = false;
     var assignment = true;
-    var detailColorIndex = 0;
+    var detailColorIndex = _this.data.detailColorIndex || 0;
     var selectShell = {};
-    for( var i = 0 ; i < detailSpecColor.length ; i++ ){
-        var modelColor = detailSpecModel[ind].name+'-'+detailSpecColor[i].name;
+
+    var modelColor = detailSpecModel[ind].name+'-'+detailSpecColor[detailColorIndex].name;
         
-        if(listSpec[modelColor]){
-          console.log(modelColor,listSpec[modelColor])
-          detailSpecColor[i].select = true;
-          ifAdopt = true;
-          if(assignment){
-            assignment = false;
-            detailColorIndex = i;
-            selectShell = listSpec[modelColor];                    
-          }
-        } else {
-          detailSpecColor[i].select = false;
-        };
-    }; 
+    if(listSpec[modelColor]){
+      selectShell = listSpec[modelColor]; 
+      ifAdopt = true; 
+    };
+
+    // for( var i = 0 ; i < detailSpecColor.length ; i++ ){
+    //     var modelColor = detailSpecModel[ind].name+'-'+detailSpecColor[i].name;
+        
+    //     if(listSpec[modelColor]){
+    //       console.log(modelColor,listSpec[modelColor])
+    //       detailSpecColor[i].select = true;
+    //       ifAdopt = true;
+    //       if(assignment){
+    //         assignment = false;
+    //         detailColorIndex = i;
+    //         selectShell = listSpec[modelColor];                    
+    //       }
+    //     } else {
+    //       detailSpecColor[i].select = false;
+    //     };
+    // }; 
 
     if(ifAdopt){
       var zunmdata = this.data.zunmdata; 
@@ -398,6 +416,10 @@ Page({
       console.log(zunmdata)
     }else{
       var zunmdata = this.data.zunmdata; 
+      if(zunmdata.status == 2){
+        zunmdata.isDepositSubscribe = false;
+        zunmdata.isDisplayDeposit = true;
+      };
       zunmdata.debuff = 3;
       this.setData({
         modelSelInde:ind,
@@ -1475,7 +1497,7 @@ Page({
 
     if (zunmdata.limitBuy > 0) {
       if (index > zunmdata.limitBuy) {
-        app.showToastC('该商品最多一次性购买' + zunmdata.limitBuy + '件');
+        app.showToastC('该商品限购' + zunmdata.limitBuy + '件');
         return false;
       };
     };
@@ -2348,12 +2370,12 @@ Page({
     var zunmdata = this.data.zunmdata;
     if (zunmdata.limitBuy > 0) {
       if (numbadd > zunmdata.limitBuy) {
-        app.showToastC('该商品最多一次性购买' + zunmdata.limitBuy + '件');
+        app.showToastC('该商品限购' + zunmdata.limitBuy + '件');
         numbadd = zunmdata.limitBuy;
       };
     };
     if (numbadd>99){
-      app.showToastC('该商品最多一次性购买99件');      
+      app.showToastC('该商品限购99件');      
       numbadd = 99;
     };
     if (parseInt(_this.data.quantityofgoods) < numbadd){
@@ -3121,52 +3143,88 @@ Page({
             var selectShell = {};
             var spgsale = 0;
             var minImg = '';
-            outSide:for( var j = 0 ; j < detailSpecModel.length ; j++ ){
-                var ifAdopt = false;
-                var assignment = true
-                for( var i = 0 ; i < detailSpecColor.length ; i++ ){
-                    var modelColor = detailSpecModel[j].name+'-'+detailSpecColor[i].name;
-                    if(listSpec[modelColor]){
-                      detailSpecColor[i].select = true;
-                      ifAdopt = true;
-                      if(assignment){
-                        assignment = false;
-                        detailColorIndex = i;
-                        modelSelInde = j;
-                        selectShell = listSpec[modelColor];
-                        spgsale = listSpec[modelColor].price; 
-                        if( listSpec[modelColor] && listSpec[modelColor].stock > 0 ){
-                          redauin.debuff = 0; 
-                        }else{
-                          redauin.debuff = 3; 
-                        };
-                        if(res.data.Ginfo.totalSpecStock && listSpec[modelColor].stock > res.data.Ginfo.totalSpecStock){
-                          _this.data.totalSpecStock = res.data.Ginfo.totalSpecStock;
-                        }else{
-                          _this.data.totalSpecStock = listSpec[modelColor].stock;
-                        };
-
-                        if(res.data.Ginfo.depositInfo && res.data.Ginfo.depositInfo[selectShell.roleId]){
-                          res.data.Ginfo.isDepositSubscribe = res.data.Ginfo.depositInfo[selectShell.roleId].isDepositSubscribe;
-                          if(res.data.Ginfo.depositInfo[selectShell.roleId].orderSn){
-                            res.data.Ginfo.orderSn = res.data.Ginfo.depositInfo[selectShell.roleId].orderSn;
-                            res.data.Ginfo.isDisplayDeposit = true;
-                          };
-                          res.data.Ginfo.isDisplayDeposit = false;
-                        }else{
-                          res.data.Ginfo.isDepositSubscribe = false;
-                          res.data.Ginfo.isDisplayDeposit = true;
-                        };
-
-                      }
-                    } else {
-                      detailSpecColor[i].select = false;
+            if(_this.data.selectShell.roleId){
+                detailColorIndex = _this.data.detailColorIndex || 0;
+                modelSelInde = _this.data.modelSelInde || 0;
+                var modelColor = detailSpecModel[modelSelInde].name+'-'+detailSpecColor[detailColorIndex].name;
+                if(listSpec[modelColor]){
+                    selectShell = listSpec[modelColor];
+                    spgsale = listSpec[modelColor].price; 
+                    if( listSpec[modelColor] && listSpec[modelColor].stock > 0 ){
+                      redauin.debuff = 0; 
+                    }else{
+                      redauin.debuff = 3; 
                     };
+                    if(res.data.Ginfo.totalSpecStock && listSpec[modelColor].stock > res.data.Ginfo.totalSpecStock){
+                      _this.data.totalSpecStock = res.data.Ginfo.totalSpecStock;
+                    }else{
+                      _this.data.totalSpecStock = listSpec[modelColor].stock;
+                    };
+                    if(res.data.Ginfo.depositInfo && res.data.Ginfo.depositInfo[selectShell.roleId]){
+                      res.data.Ginfo.isDepositSubscribe = res.data.Ginfo.depositInfo[selectShell.roleId].isDepositSubscribe;
+                      if(res.data.Ginfo.depositInfo[selectShell.roleId].orderSn){
+                        res.data.Ginfo.orderSn = res.data.Ginfo.depositInfo[selectShell.roleId].orderSn;
+                        res.data.Ginfo.isDisplayDeposit = true;
+                      };
+                      res.data.Ginfo.isDisplayDeposit = false;
+                    }else{
+                      res.data.Ginfo.isDepositSubscribe = false;
+                      res.data.Ginfo.isDisplayDeposit = true;
+                    };
+                    _this.setData({
+                      movies: detailSpecColor[detailColorIndex].listImg || res.data.Ginfo.gimages || [],
+                      goodsIndex:0
+                    })
                 };
-                if(ifAdopt){
-                  break outSide;
-                }
-            }; 
+            }else{
+                outSide:for( var j = 0 ; j < detailSpecModel.length ; j++ ){
+                    var ifAdopt = false;
+                    var assignment = true
+                    for( var i = 0 ; i < detailSpecColor.length ; i++ ){
+                        var modelColor = detailSpecModel[j].name+'-'+detailSpecColor[i].name;
+                        if(listSpec[modelColor]){
+                          detailSpecColor[i].select = true;
+                          ifAdopt = true;
+                          if(assignment){
+                            assignment = false;
+                            detailColorIndex = i;
+                            modelSelInde = j;
+                            selectShell = listSpec[modelColor];
+                            spgsale = listSpec[modelColor].price; 
+                            if( listSpec[modelColor] && listSpec[modelColor].stock > 0 ){
+                              redauin.debuff = 0; 
+                            }else{
+                              redauin.debuff = 3; 
+                            };
+                            if(res.data.Ginfo.totalSpecStock && listSpec[modelColor].stock > res.data.Ginfo.totalSpecStock){
+                              _this.data.totalSpecStock = res.data.Ginfo.totalSpecStock;
+                            }else{
+                              _this.data.totalSpecStock = listSpec[modelColor].stock;
+                            };
+
+                            if(res.data.Ginfo.depositInfo && res.data.Ginfo.depositInfo[selectShell.roleId]){
+                              res.data.Ginfo.isDepositSubscribe = res.data.Ginfo.depositInfo[selectShell.roleId].isDepositSubscribe;
+                              if(res.data.Ginfo.depositInfo[selectShell.roleId].orderSn){
+                                res.data.Ginfo.orderSn = res.data.Ginfo.depositInfo[selectShell.roleId].orderSn;
+                                res.data.Ginfo.isDisplayDeposit = true;
+                              };
+                              res.data.Ginfo.isDisplayDeposit = false;
+                            }else{
+                              res.data.Ginfo.isDepositSubscribe = false;
+                              res.data.Ginfo.isDisplayDeposit = true;
+                            };
+
+                          }
+                        } else {
+                          detailSpecColor[i].select = false;
+                        };
+                    };
+                    if(ifAdopt){
+                      break outSide;
+                    }
+                }; 
+            }
+
 
             redauin.gsale = spgsale;
             redauin.gprice = spgsale;

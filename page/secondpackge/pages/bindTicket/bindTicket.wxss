@@ -291,3 +291,9 @@ page{
   text-align: center;
   padding: 0 0 20rpx 0;
 }
+.wiewWinning{
+  color:#1684FC;
+  font-size: 24rpx;
+  padding: 20rpx 0 35rpx 0;
+  text-align: center;
+}
