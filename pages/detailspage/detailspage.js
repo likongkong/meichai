@@ -281,10 +281,24 @@ Page({
       }else{
          this.data.totalSpecStock = selectShell.stock;
       };
+      if(zunmdata.status == 2){
+        if(zunmdata.depositInfo && zunmdata.depositInfo[selectShell.roleId]){
+          zunmdata.isDepositSubscribe = zunmdata.depositInfo[selectShell.roleId].isDepositSubscribe;
+          if(zunmdata.depositInfo[selectShell.roleId].orderSn){
+            zunmdata.orderSn = zunmdata.depositInfo[selectShell.roleId].orderSn;
+            zunmdata.isDisplayDeposit = true;
+          }else{
+            zunmdata.isDisplayDeposit = false;
+          };
+        }else{
+          zunmdata.isDepositSubscribe = false;
+          zunmdata.isDisplayDeposit = true;
+        };
+      }
+
 
       // 手机壳 并且 isSpecSoldOut 为 true 全部卖完
       if(zunmdata.isSpecSoldOut){
-          zunmdata.status = 0; 
           zunmdata.debuff = 3; 
       }else{
           zunmdata.debuff = 0; 
@@ -344,9 +358,8 @@ Page({
       zunmdata.debuff = 0;
       zunmdata.goods_thumb = selectShell.roleImg;
       // 手机壳 并且 isSpecSoldOut 为 true 全部卖完
-      if( selectShell.stock < 0 || zunmdata.isSpecSoldOut){
+      if( selectShell.stock <= 0 || zunmdata.isSpecSoldOut){
         zunmdata.debuff = 3;
-        zunmdata.status = 0; 
       };
 
       if(zunmdata.totalSpecStock && selectShell.stock > zunmdata.totalSpecStock){
@@ -354,12 +367,25 @@ Page({
       }else{
         this.data.totalSpecStock = selectShell.stock;
       };
-      
-      if(zunmdata.depositInfo[selectShell.roleId]){
-        zunmdata.isDepositSubscribe = zunmdata.depositInfo[selectShell.roleId].isDepositSubscribe
-      }else{
-        zunmdata.isDepositSubscribe = false;
+
+      if(zunmdata.status == 2){
+        if(zunmdata.depositInfo && zunmdata.depositInfo[selectShell.roleId]){
+          zunmdata.isDepositSubscribe = zunmdata.depositInfo[selectShell.roleId].isDepositSubscribe;
+          console.log(zunmdata.isDepositSubscribe,zunmdata.depositInfo[selectShell.roleId].isDepositSubscribe)
+          if(zunmdata.depositInfo[selectShell.roleId].orderSn){
+            zunmdata.orderSn = zunmdata.depositInfo[selectShell.roleId].orderSn;
+            zunmdata.isDisplayDeposit = true;
+          }else{
+            zunmdata.isDisplayDeposit = false;
+          };
+        }else{
+          zunmdata.isDepositSubscribe = false;
+          zunmdata.isDisplayDeposit = true;
+        };
       }
+      
+
+
 
       this.setData({
         modelSelInde:ind,
@@ -369,6 +395,7 @@ Page({
         detailColorIndex,
         detailSpecColor
       })
+      console.log(zunmdata)
     }else{
       var zunmdata = this.data.zunmdata; 
       zunmdata.debuff = 3;
@@ -578,7 +605,7 @@ Page({
   // 拉起订阅
   subscrfun: function () {
     var _this = this;
-    if(_this.data.specialGoods == 1 && _this.data.zunmdata.status==0){
+    if(_this.data.specialGoods == 1 && _this.data.zunmdata.debuff==3){
       var subscribedata = _this.data.specSubscribe || '';
     }else{
       var subscribedata = _this.data.subscribedata || '';
@@ -592,7 +619,7 @@ Page({
             var is_show_modal = true;
             for (var i = 0; i < subscribedata.template_id.length; i++) {
               if (res[subscribedata.template_id[i]] == "accept") {
-                if(_this.data.specialGoods == 1 && _this.data.zunmdata.status == 0){  // 手机壳 要传订阅的是哪款
+                if(_this.data.specialGoods == 1 && _this.data.zunmdata.debuff == 3){  // 手机壳 要传订阅的是哪款
                   app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i],_this.data.selectShell.roleId ||'');
                 }else{
                   app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
@@ -2843,40 +2870,40 @@ Page({
 
 
     // 评论数据
-    var qq = Dec.Aese('mod=comment&operation=getgoodcomment&gid=' + _this.data.gid + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
-    wx.request({
-      url: app.signindata.comurl + 'user.php' + qq,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        if (res.data.ReturnCode == 200) {
-          var arrlist = res.data.List || [];
-          if (arrlist.length != 0) {
-            for (var i = 0; i < arrlist.length; i++) {
-              if (!app.signindata.reg.test(arrlist[i].headphoto)) {
-                arrlist[i].headphoto = _this.data.zdyurl + arrlist[i].headphoto;
-              }
-              arrlist[i].time = _this.toDate(arrlist[i].time);
-            };
-            // 点赞降序排列
-            arrlist.sort(_this.compare('praise', false))
-            _this.setData({
-              allcomlist: arrlist
-            })
-          }
-        } else {
-          _this.setData({
-            allcomlist: [],
-          })
-        };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
-      }
-    });
-    if (_this.data.isProduce){
-      // 晒单数据
-      _this.delpostdata(0);
-    };
+    // var qq = Dec.Aese('mod=comment&operation=getgoodcomment&gid=' + _this.data.gid + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+    // wx.request({
+    //   url: app.signindata.comurl + 'user.php' + qq,
+    //   method: 'GET',
+    //   header: { 'Accept': 'application/json' },
+    //   success: function (res) {
+    //     if (res.data.ReturnCode == 200) {
+    //       var arrlist = res.data.List || [];
+    //       if (arrlist.length != 0) {
+    //         for (var i = 0; i < arrlist.length; i++) {
+    //           if (!app.signindata.reg.test(arrlist[i].headphoto)) {
+    //             arrlist[i].headphoto = _this.data.zdyurl + arrlist[i].headphoto;
+    //           }
+    //           arrlist[i].time = _this.toDate(arrlist[i].time);
+    //         };
+    //         // 点赞降序排列
+    //         arrlist.sort(_this.compare('praise', false))
+    //         _this.setData({
+    //           allcomlist: arrlist
+    //         })
+    //       }
+    //     } else {
+    //       _this.setData({
+    //         allcomlist: [],
+    //       })
+    //     };
+    //     // 判断非200和登录
+    //     Dec.comiftrsign(_this, res, app);
+    //   }
+    // });
+    // if (_this.data.isProduce){
+    //   // 晒单数据
+    //   _this.delpostdata(0);
+    // };
   },
   detailfunshop:function(){
     var _this = this;
@@ -3043,18 +3070,10 @@ Page({
               _this.winningtheprizetimedetail(redauin.endTime);
             };
           };
-          if(res.data.Ginfo.gid == 36875 || res.data.Ginfo.gid == 36876 || res.data.Ginfo.gid == 36877){
-            clearInterval(_this.data.wintheprtintervaldetail);
-            _this.winningtheprizetimedetail(1613318400);
-          }
-          if(res.data.Ginfo.gid == 37568 || res.data.Ginfo.gid == 37569 || res.data.Ginfo.gid == 37573){
-            clearInterval(_this.data.wintheprtintervaldetail);
-            _this.winningtheprizetimedetail(1619193600);
-          }
-          if(res.data.Ginfo.gid == 37700){
+          if(res.data.Ginfo.gid == 36875 || res.data.Ginfo.gid == 36876 || res.data.Ginfo.gid == 36877 ||res.data.Ginfo.gid == 37568 || res.data.Ginfo.gid == 37569 || res.data.Ginfo.gid == 37573 ||res.data.Ginfo.gid == 37700){
             clearInterval(_this.data.wintheprtintervaldetail);
             _this.winningtheprizetimedetail(1621094400);
-          }
+          };
           
           // if(res.data.Ginfo&&res.data.Ginfo.brandId>0){
           //   res.data.Ginfo.specialWay = 1;
@@ -3126,6 +3145,19 @@ Page({
                         }else{
                           _this.data.totalSpecStock = listSpec[modelColor].stock;
                         };
+
+                        if(res.data.Ginfo.depositInfo && res.data.Ginfo.depositInfo[selectShell.roleId]){
+                          res.data.Ginfo.isDepositSubscribe = res.data.Ginfo.depositInfo[selectShell.roleId].isDepositSubscribe;
+                          if(res.data.Ginfo.depositInfo[selectShell.roleId].orderSn){
+                            res.data.Ginfo.orderSn = res.data.Ginfo.depositInfo[selectShell.roleId].orderSn;
+                            res.data.Ginfo.isDisplayDeposit = true;
+                          };
+                          res.data.Ginfo.isDisplayDeposit = false;
+                        }else{
+                          res.data.Ginfo.isDepositSubscribe = false;
+                          res.data.Ginfo.isDisplayDeposit = true;
+                        };
+
                       }
                     } else {
                       detailSpecColor[i].select = false;
@@ -3144,7 +3176,6 @@ Page({
             // 手机壳 并且 isSpecSoldOut 为 true 全部卖完
             if(res.data.Ginfo.isSpecSoldOut){
                 redauin.debuff = 3; 
-                redauin.status = 0;
             };
 
             _this.setData({

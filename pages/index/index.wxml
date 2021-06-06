@@ -172,7 +172,10 @@
 								</image>		
 								<view style="padding:12rpx 8rpx;font-size:24rpx;box-sizing: border-box;color:#000;position: absolute;top: 0;left: 0;width: 100%;background: rgba(0,0,0,.6);border-top-left-radius: 10rpx;border-top-right-radius: 10rpx;" >
 								  <view style="color: #fff;float: left;" class="specialellipsis">{{w.name}}</view>
-									<view style="color: #fff;float: right;">￥{{w.shopPrice}}</view>
+									<view style="color: #fff;float: right;">
+											<block wx:if='{{item.href == "category_id=c501"}}'>定金￥{{w.promote_price}}</block>
+											<block wx:else>￥{{w.shopPrice}}</block>
+									</view>
 								</view>
 								<view class="progress-box" wx:if='{{item.href != "category_id=c501"}}'>
 									<progress percent="{{(w.suplusGoods/w.limitGoods)*100}}" color="{{(w.suplusGoods/w.limitGoods)*100 === 100?'#6FBE0D':(w.suplusGoods/w.limitGoods)*100 < 100 && (w.suplusGoods/w.limitGoods)*100 > 50?'#FEB51D':'#ff2742'}}" backgroundColor="#cccccc" stroke-width='12' active duration="5" />
