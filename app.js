@@ -869,7 +869,7 @@ App({
     });
   },
   // 订阅统计
-  subscribefun: function (_this, num, template_id, subscribe_type) {
+  subscribefun: function (_this, num, template_id, subscribe_type , specRoleId) {
     var _this = _this;
     var app = this;
     var subscribedata = _this.data.subscribedata || '';
@@ -878,7 +878,9 @@ App({
     } else {
       var subscribe_id = _this.data.id
     };
-    var q1 = Dec.Aese('mod=subscribe&operation=accept&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&subscribe_type=' + subscribe_type + '&template_id=' + template_id + '&subscribe_id=' + subscribe_id);
+    var specRoleId = specRoleId || 0;
+    var q1 = Dec.Aese('mod=subscribe&operation=accept&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&subscribe_type=' + subscribe_type + '&template_id=' + template_id + '&subscribe_id=' + subscribe_id + '&specRoleId=' + specRoleId);
+    console.log('mod=subscribe&operation=accept&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&subscribe_type=' + subscribe_type + '&template_id=' + template_id + '&subscribe_id=' + subscribe_id + '&specRoleId=' + specRoleId)
     wx.request({
       url: app.signindata.comurl + 'statistics.php' + q1,
       method: 'GET',

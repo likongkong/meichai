@@ -16,6 +16,23 @@
                 </block>
             </view>
         </block>
+        <!-- 手机壳 -->
+        <block wx:elif='{{category_id == "c501"}}'>
+            <view class="mobilePhoneShell">
+                <block wx:for='{{commoddata}}' wx:key='key'>
+                    <view class="mobilePhoneShellEve" data-gid='{{item.gid}}' catchtap='addressmanagement'>
+                        <image src="{{item.salesImg?item.salesImg:item.gcover}}" mode='widthFix'></image>
+                        <view class="mpsName">{{item.gname}}</view>
+                        <view class="mpsName" wx:if='{{item.goods_type==3}}'>
+                            <view class="mpsNameeve" style="color:#fff;background:#1684FC;">定金</view>
+                            <view class="mpsNameeve" wx:if='{{item.goods_type==3}}' style="color:#101010;background:#F4F4F4;margin-left:20rpx;">预售</view>
+                        </view>
+                        <view class="mpsName" style="color:#FF2742;">￥{{item.promote_price}}</view>
+                    </view>
+                </block>
+            </view>
+        </block>
+
         <!--   信息流  -->
         <block wx:elif='{{ifOrWf==1}}'>
             <view class='comboxw'  wx:for="{{commoddata}}" wx:key="key">

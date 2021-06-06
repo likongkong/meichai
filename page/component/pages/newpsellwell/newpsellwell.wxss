@@ -109,3 +109,28 @@ page{
   display: block;
   margin-bottom: 25rpx;
 }
+.mobilePhoneShell{
+  padding-top: 30rpx;
+}
+.mobilePhoneShellEve{
+  width: 700rpx;
+  margin: 0 auto 30rpx;
+  border-radius: 20rpx;
+  background: #fff;
+  padding-bottom: 10rpx;
+}
+.mobilePhoneShellEve image{
+  width: 100%;
+  display: block;
+  border-radius: 20rpx 20rpx 0 0;
+}
+.mpsName{
+  font-size: 24rpx;
+  padding: 10rpx 20rpx;
+}
+.mpsNameeve{
+  padding: 4rpx 20rpx;
+  font-size:24rpx;
+  border-radius: 20rpx;
+  display: inline-block;
+}
