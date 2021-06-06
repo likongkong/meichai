@@ -168,7 +168,7 @@ Page({
 
   jumpOrderPage(){
     wx.navigateTo({
-      url: "/pages/myorder/myorder?tabnum=" + 1
+      url: "/pages/myorder/myorder?tabnum=" + 3
     });
   },
 
