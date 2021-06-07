@@ -134,3 +134,41 @@ page {
   color: #333;
   float: right;
 }
+.punchInRewardtxt{
+  width: 100%;
+  height: 60rpx;
+  text-align: center;
+  line-height: 60rpx;
+  font-size: 34rpx;
+  font-weight: bold;
+}
+.gdbpbox{
+  padding: 0 30rpx 0;
+}
+.gdbp{
+  display: inline-block;
+  width: 330rpx;
+  vertical-align: top;
+}
+.gdbpimg{
+  width: 100%;
+  height: auto;
+  margin-bottom: 20rpx;
+}
+.ziaprtp{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 3333;
+  background:rgb(0, 0, 0,0.6);
+  display: flex;
+  align-items:center;
+  justify-content:center;
+}
+.ziaprtpImg{
+  width: 690rpx;
+  height: 690rpx;
+  display: block;
+}

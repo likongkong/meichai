@@ -322,10 +322,17 @@ Page({
         zunmdata.isDepositSubscribe = false;
         zunmdata.isDisplayDeposit = true;
       };
+      if(zunmdata.status == 3 && listSpec[modelColor] && zunmdata.depositInfo){
+        if(zunmdata.depositInfo[listSpec[modelColor].roleId] && zunmdata.depositInfo[listSpec[modelColor].roleId].balanceOrderSn){
+          zunmdata.orderSn = zunmdata.depositInfo[listSpec[modelColor].roleId].balanceOrderSn;
+        }else{
+          zunmdata.orderSn = ''
+        };
+      };
       zunmdata.debuff = 3; 
       this.setData({
         detailColorIndex:index,
-        selectShell:{},
+        selectShell:listSpec[modelColor],
         zunmdata,
       })
 
@@ -402,7 +409,13 @@ Page({
         };
       }
       
-
+      if(zunmdata.status == 3 && selectShell && zunmdata.depositInfo){
+        if(zunmdata.depositInfo[selectShell.roleId] && zunmdata.depositInfo[selectShell.roleId].balanceOrderSn){
+          zunmdata.orderSn = zunmdata.depositInfo[selectShell.roleId].balanceOrderSn;
+        }else{
+          zunmdata.orderSn = ''
+        };
+      };
 
 
       this.setData({
@@ -420,6 +433,15 @@ Page({
         zunmdata.isDepositSubscribe = false;
         zunmdata.isDisplayDeposit = true;
       };
+
+      if(zunmdata.status == 3 && zunmdata.depositInfo && selectShell.roleId){
+        if(zunmdata.depositInfo[selectShell.roleId] && zunmdata.depositInfo[selectShell.roleId].balanceOrderSn){
+          zunmdata.orderSn = zunmdata.depositInfo[selectShell.roleId].balanceOrderSn;
+        }else{
+          zunmdata.orderSn = ''
+        };
+      };
+
       zunmdata.debuff = 3;
       this.setData({
         modelSelInde:ind,
@@ -3088,7 +3110,11 @@ Page({
             redauin.datatimew = _this.toDatehd(redauin.datatimew);
             if ((res.data.Ginfo.specialWay && res.data.Ginfo.specialWay==1)){
               _this.winningtheprizetimedetail(redauin.endTime);
+            }else if(res.data.Ginfo.depositEndTime && Date.parse(new Date())/1000 < res.data.Ginfo.depositEndTime){
+              clearInterval(_this.data.wintheprtintervaldetail);
+              _this.winningtheprizetimedetail(res.data.Ginfo.depositEndTime);
             }else if(redauin.finalDepositTime){}else if(redauin.goods_type==3){
+              console.log(111111111,redauin.endTime)
               _this.winningtheprizetimedetail(redauin.endTime);
             };
           };
@@ -3167,6 +3193,14 @@ Page({
                         res.data.Ginfo.isDisplayDeposit = true;
                       };
                       res.data.Ginfo.isDisplayDeposit = false;
+
+                      if(res.data.Ginfo.status == 3){
+                        if(res.data.Ginfo.depositInfo[selectShell.roleId].balanceOrderSn){
+                          res.data.Ginfo.orderSn = res.data.Ginfo.depositInfo[selectShell.roleId].balanceOrderSn;
+                        }else{
+                          res.data.Ginfo.orderSn = ''
+                        };
+                      };
                     }else{
                       res.data.Ginfo.isDepositSubscribe = false;
                       res.data.Ginfo.isDisplayDeposit = true;
@@ -3177,52 +3211,87 @@ Page({
                     })
                 };
             }else{
-                outSide:for( var j = 0 ; j < detailSpecModel.length ; j++ ){
-                    var ifAdopt = false;
-                    var assignment = true
-                    for( var i = 0 ; i < detailSpecColor.length ; i++ ){
-                        var modelColor = detailSpecModel[j].name+'-'+detailSpecColor[i].name;
-                        if(listSpec[modelColor]){
-                          detailSpecColor[i].select = true;
-                          ifAdopt = true;
-                          if(assignment){
-                            assignment = false;
-                            detailColorIndex = i;
-                            modelSelInde = j;
-                            selectShell = listSpec[modelColor];
-                            spgsale = listSpec[modelColor].price; 
-                            if( listSpec[modelColor] && listSpec[modelColor].stock > 0 ){
-                              redauin.debuff = 0; 
-                            }else{
-                              redauin.debuff = 3; 
-                            };
-                            if(res.data.Ginfo.totalSpecStock && listSpec[modelColor].stock > res.data.Ginfo.totalSpecStock){
-                              _this.data.totalSpecStock = res.data.Ginfo.totalSpecStock;
-                            }else{
-                              _this.data.totalSpecStock = listSpec[modelColor].stock;
-                            };
-
-                            if(res.data.Ginfo.depositInfo && res.data.Ginfo.depositInfo[selectShell.roleId]){
-                              res.data.Ginfo.isDepositSubscribe = res.data.Ginfo.depositInfo[selectShell.roleId].isDepositSubscribe;
-                              if(res.data.Ginfo.depositInfo[selectShell.roleId].orderSn){
-                                res.data.Ginfo.orderSn = res.data.Ginfo.depositInfo[selectShell.roleId].orderSn;
-                                res.data.Ginfo.isDisplayDeposit = true;
+                if(res.data.Ginfo.status == 3 && res.data.Ginfo.depositInfo){
+                      outSide:for( var j = 0 ; j < detailSpecModel.length ; j++ ){
+                          var ifAdopt = false;
+                          var assignment = true
+                          for( var i = 0 ; i < detailSpecColor.length ; i++ ){
+                              var modelColor = detailSpecModel[j].name+'-'+detailSpecColor[i].name;
+                              if(listSpec[modelColor] && res.data.Ginfo.depositInfo[listSpec[modelColor].roleId]){
+                                detailSpecColor[i].select = true;
+                                ifAdopt = true;
+                                if(assignment){
+                                  assignment = false;
+                                  detailColorIndex = i;
+                                  modelSelInde = j;
+                                  selectShell = listSpec[modelColor];
+                                  spgsale = listSpec[modelColor].price; 
+                                  if(res.data.Ginfo.depositInfo && res.data.Ginfo.depositInfo[selectShell.roleId]){
+                                    if(res.data.Ginfo.depositInfo[selectShell.roleId].balanceOrderSn){
+                                      res.data.Ginfo.orderSn = res.data.Ginfo.depositInfo[selectShell.roleId].balanceOrderSn;
+                                    }else{
+                                      res.data.Ginfo.orderSn = '';
+                                    };
+                                  };
+                                  break;
+                                }
+                              } else {
+                                detailSpecColor[i].select = false;
                               };
-                              res.data.Ginfo.isDisplayDeposit = false;
-                            }else{
-                              res.data.Ginfo.isDepositSubscribe = false;
-                              res.data.Ginfo.isDisplayDeposit = true;
-                            };
-
+                          };
+                          if(ifAdopt){
+                            break outSide;
                           }
-                        } else {
-                          detailSpecColor[i].select = false;
+                      }; 
+                }else{
+                    outSide:for( var j = 0 ; j < detailSpecModel.length ; j++ ){
+                        var ifAdopt = false;
+                        var assignment = true
+                        for( var i = 0 ; i < detailSpecColor.length ; i++ ){
+                            var modelColor = detailSpecModel[j].name+'-'+detailSpecColor[i].name;
+                            if(listSpec[modelColor]){
+                              detailSpecColor[i].select = true;
+                              ifAdopt = true;
+                              if(assignment){
+                                assignment = false;
+                                detailColorIndex = i;
+                                modelSelInde = j;
+                                selectShell = listSpec[modelColor];
+                                spgsale = listSpec[modelColor].price; 
+                                if( listSpec[modelColor] && listSpec[modelColor].stock > 0 ){
+                                  redauin.debuff = 0; 
+                                }else{
+                                  redauin.debuff = 3; 
+                                };
+                                if(res.data.Ginfo.totalSpecStock && listSpec[modelColor].stock > res.data.Ginfo.totalSpecStock){
+                                  _this.data.totalSpecStock = res.data.Ginfo.totalSpecStock;
+                                }else{
+                                  _this.data.totalSpecStock = listSpec[modelColor].stock;
+                                };
+
+                                if(res.data.Ginfo.depositInfo && res.data.Ginfo.depositInfo[selectShell.roleId]){
+                                  res.data.Ginfo.isDepositSubscribe = res.data.Ginfo.depositInfo[selectShell.roleId].isDepositSubscribe;
+                                  if(res.data.Ginfo.depositInfo[selectShell.roleId].orderSn){
+                                    res.data.Ginfo.orderSn = res.data.Ginfo.depositInfo[selectShell.roleId].orderSn;
+                                    res.data.Ginfo.isDisplayDeposit = true;
+                                  };
+                                  res.data.Ginfo.isDisplayDeposit = false;
+                                }else{
+                                  res.data.Ginfo.isDepositSubscribe = false;
+                                  res.data.Ginfo.isDisplayDeposit = true;
+                                };
+
+                              }
+                            } else {
+                              detailSpecColor[i].select = false;
+                            };
                         };
-                    };
-                    if(ifAdopt){
-                      break outSide;
-                    }
-                }; 
+                        if(ifAdopt){
+                          break outSide;
+                        }
+                    }; 
+                }
+
             }
 
 

@@ -327,7 +327,7 @@ Page({
       success: function (res) {
         wx.hideLoading()
         wx.stopPullDownRefresh();
-        console.log(res)
+        console.log(res) 
         if (res.data.ReturnCode == 200) {
           var brandList = res.data.List.activity || [];
           for (var r = 0; r < brandList.length; r++) {
@@ -525,5 +525,13 @@ Page({
       success: function (res) { }
     }
     return share;
-  }
+  },
+  isziaprtpfun(w){
+    var url = w.currentTarget.dataset.url || w.target.dataset.url||0;
+    this.setData({
+      is_ziaprtp:!this.data.is_ziaprtp,
+      ziaprtp_url:url
+    })
+  },
+
 })

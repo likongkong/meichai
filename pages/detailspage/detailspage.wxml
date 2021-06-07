@@ -138,8 +138,19 @@
               </block>
             </block>
             <block wx:else>
-              <view class="deDepossttime" style="padding: 18rpx 0 10rpx 0;">距离预定结束:</view>
-              <view class="deDepossttime"><block wx:if='{{winningovertimedetail.dayStr}}'>{{winningovertimedetail.dayStr}}天</block>  {{winningovertimedetail.hrStr}}:{{winningovertimedetail.minStr}}:{{winningovertimedetail.secStr}}</view>  
+              <block wx:if='{{zunmdata.depositEndTime}}'>
+                  <block wx:if='{{nowTime < zunmdata.depositEndTime}}'>
+                    <view class="deDepossttime" style="padding: 18rpx 0 10rpx 0;">距离预定结束:</view>
+                    <view class="deDepossttime"><block wx:if='{{winningovertimedetail.dayStr}}'>{{winningovertimedetail.dayStr}}天</block>  {{winningovertimedetail.hrStr}}:{{winningovertimedetail.minStr}}:{{winningovertimedetail.secStr}}</view>  
+                  </block>
+                  <block wx:else>
+                    <view style="width:300rpx;height:110rpx;line-height:110rpx;margin-left:20rpx" class="deDepossttime">{{zunmdata.tipFinalPayment}}</view>
+                  </block>
+              </block>
+              <block wx:else>
+                  <view class="deDepossttime" style="padding: 18rpx 0 10rpx 0;">距离预定结束:</view>
+                  <view class="deDepossttime"><block wx:if='{{winningovertimedetail.dayStr}}'>{{winningovertimedetail.dayStr}}天</block>  {{winningovertimedetail.hrStr}}:{{winningovertimedetail.minStr}}:{{winningovertimedetail.secStr}}</view>
+              </block>
             </block>
 
           </block>
@@ -175,6 +186,29 @@
             <view class='dltitle' style='width:540rpx;font-size:32rpx;padding:20rpx 20rpx 20rpx 20rpx;float:left;'>
               {{zunmdata.gname}}
             </view>
+            <!-- 手机壳样式 -->
+            <view wx:if='{{specialGoods==1 && detailSpecColor.length > 1}}' style="background:#fff;padding:20rpx 0;">
+              <view class="mscColorSel">{{specCate[1]}}<block wx:if='{{specCate[1]}}'>:</block>{{detailSpecColor[detailColorIndex].name}}</view>
+              <view class="mscColorBox">
+                <!-- wx:if='{{item.select}}' -->
+                  <block wx:for='{{detailSpecColor}}' wx:key='key'>
+                      <view class="mscColorBoxeve {{detailColorIndex==index?'ColorClass':''}} boxShadowEve" catchtap="dSCfun" data-index='{{index}}'>
+                        <image mode='aspectFit' src="{{item.roleImg}}"></image>
+                      </view>
+                  </block>        
+              </view>
+
+              <!-- <view class="mscModel">Compostable Case</view>
+              <view class="mscModelImgBox">
+                  <view class="mscModelImgEve">
+                      <image class="mscModelImg" src="https://cdn.51chaidan.com//images/toyShow3/brandGoodsRotation/20210109/7b69de7f20fdd34c68ca139cb15c1454.png" mode='aspectFit'></image>
+                      <view class="mscModelName">$55 USD</view>
+                  </view>
+              </view> -->
+            </view>
+
+
+
             <view class='dPrice' style="width:170rpx;float:left;padding-top:20rpx;">
               <text style='font-size:30rpx;color:#000;font-weight:bold;color:#ff2742;'><block wx:if='{{zunmdata.giftStock || zunmdata.isGiftGoods}}'>赠品</block><block wx:else><text style='font-size:30rpx;'>{{zunmdata.gprice!=0?'￥':''}}</text><block wx:if='{{is_exhibition==1}}'>{{zunmdata.gprice!=0?zunmdata.gprice:'价格以线下展会为准'}}</block>
               <block wx:else>{{zunmdata.gprice!=0?zunmdata.gprice:''}}</block></block></text>
@@ -185,6 +219,28 @@
           <view class='dltitle' style='text-align:center;padding:20rpx 40rpx;font-size:32rpx;'>
             {{zunmdata.gname}}
           </view>
+
+          <!-- 手机壳样式 -->
+          <view wx:if='{{specialGoods==1 && detailSpecColor.length > 1}}' style="background:#fff;padding:20rpx 0;">
+            <view class="mscColorSel">{{specCate[1]}}<block wx:if='{{specCate[1]}}'>:</block>{{detailSpecColor[detailColorIndex].name}}</view>
+            <view class="mscColorBox">
+              <!-- wx:if='{{item.select}}' -->
+                <block wx:for='{{detailSpecColor}}' wx:key='key'>
+                    <view class="mscColorBoxeve {{detailColorIndex==index?'ColorClass':''}} boxShadowEve" catchtap="dSCfun" data-index='{{index}}'>
+                      <image mode='aspectFit' src="{{item.roleImg}}"></image>
+                    </view>
+                </block>        
+            </view>
+
+            <!-- <view class="mscModel">Compostable Case</view>
+            <view class="mscModelImgBox">
+                <view class="mscModelImgEve">
+                    <image class="mscModelImg" src="https://cdn.51chaidan.com//images/toyShow3/brandGoodsRotation/20210109/7b69de7f20fdd34c68ca139cb15c1454.png" mode='aspectFit'></image>
+                    <view class="mscModelName">$55 USD</view>
+                </view>
+            </view> -->
+          </view>
+          
           <view class='dPrice'>
             <!-- 3D图片显示 -->
             <image wx:if='{{zunmdata.isOverAllView}}' src='https://cdn.51chaidan.com//images/sign/panorama.png' catchtap="jumpDSIE" class="detailS3Dimg"></image>
@@ -239,6 +295,10 @@
         <view class='dlyhnnimeMod' wx:for="{{zunmdata.gtag}}" wx:key="key">{{item}}</view>
       </view>
 
+
+
+
+  </block>
      <view wx:if='{{specialGoods==1}}' style="background:#fff;padding:15rpx 0;">
         <view class="mscModel">选择{{specCate[0]}}:</view>
         <!-- <picker class="p" bindchange="bindPickerChange" value="{{modelSelInde}}" range="{{detailSpecModel}}" range-key="name">
@@ -259,10 +319,6 @@
 
 
      </view>
-
-
-  </block>
-
   <!-- 定金 -->
   <view class="dDepositconcent" wx:if='{{zunmdata.goods_type==3}}'>
      <view class="dDepositcontop">
