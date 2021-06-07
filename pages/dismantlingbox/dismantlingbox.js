@@ -52,15 +52,17 @@ Page({
     shunButBarData:[
 
       {name:'票务信息',tid:1},
-      {name:'精选品牌',tid:2},
-      {name:'线上潮玩展',tid:4},
-      {name:'展品预告',tid:3,sonnav:[
-        {name:'热门订阅',tid:33},
-        {name:'手作专区',tid:30},
-        {name:'海外专区',tid:31},
-        {name:'更多展品',tid:32},
-        {name:'线下潮玩展',tid:32},
-      ]},
+      {name:'线上展会',tid:2},
+      {name:'海报展示',tid:6},
+      {name:'场馆地图',tid:5},
+      {name:'参展品牌',tid:4},
+      // {name:'展品预告',tid:3,sonnav:[
+      //   {name:'热门订阅',tid:33},
+      //   {name:'手作专区',tid:30},
+      //   {name:'海外专区',tid:31},
+      //   {name:'更多展品',tid:32},
+      //   {name:'线下潮玩展',tid:32},
+      // ]},
       
 
       // {name:'直播间订阅',tid:1},
@@ -1077,7 +1079,7 @@ brandJson:function(){
         title: '加载中...',
       })
       var q1 = Dec.Aese('mod=subscription&operation=goodsList&type=' + type + "&pid=" + _this.data.page + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid );
-      console.log('mod=subscription&operation=goodsList&type=' + type + "&pid=" + _this.data.page)
+      console.log('mod=subscription&operation=goodsList&type=' + type + "&pid=" + _this.data.page + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid )
       wx.request({
         url: app.signindata.comurl + 'toy.php' + q1,
         method: 'GET',

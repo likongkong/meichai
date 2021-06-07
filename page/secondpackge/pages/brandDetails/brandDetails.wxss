@@ -46,7 +46,7 @@ page {
 
 .exhibdxtxttitle {
   height: 50rpx;
-  width: 400rpx;
+  width: 100%;
   font-size: 28rpx;
   line-height: 50rpx;
   font-weight: bold;
@@ -57,7 +57,7 @@ page {
   height: 80rpx;
   position: absolute;
   right: 13rpx;
-  top: 45rpx;
+  top: 66rpx;
   box-shadow: 2px 2px 5rpx #ccc;
   background: white;
   border-radius: 40rpx;

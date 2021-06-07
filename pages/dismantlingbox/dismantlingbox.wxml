@@ -120,7 +120,7 @@
     </view>    
 
     <block wx:if='{{featuredBrands&&featuredBrands.length!=0}}'>
-      <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e2'>————— 精选品牌 —————</view>
+      <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e8'>————— 精选品牌 —————</view>
       <view style="padding:0 15rpx 20rpx;overflow: hidden;">
         <scroll-view class="buyingTScroll" scroll-x="true">
             <view class="selectedBrands boxShadow" wx:for='{{featuredBrands}}' wx:key='key' catchtap="jumpbrandD" data-id='{{item.id}}'>
@@ -141,7 +141,7 @@
 
     <!-- 线上潮玩展 -->
 
-    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e4'>————— 线上潮玩展 —————</view>
+    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e2'>————— 线上展会 —————</view>
     <view class="ssubLiveBroadcast" wx:for="{{liveListData}}" wx:key="key" style="position: relative;">
         <navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{item.room_id}}" style='position: absolute;height:100%;width:500rpx;left:0;top:0;z-index:3;'></navigator>
         <view class="ssubLiveBroad">
@@ -175,7 +175,7 @@
 
     <block wx:if='{{rewardList && rewardList.length != 0}}'>
         <!-- 一番赏 -->
-        <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" bindtap="toaRewarddeyails" id='e1'>————— 林川一目 一番赏 —————</view>
+        <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" bindtap="toaRewarddeyails">————— 林川一目 一番赏 —————</view>
         <view style='min-height:104rpx;padding:0 20rpx 0;position: relative;' bindtap="toaRewarddeyails">
 					  <view style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;z-index: 10;"></view>
             <swiper style='width:100%;height:304rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450">
@@ -348,7 +348,7 @@
            <image class="ssubBiliimgs boxShadow" src="{{item.goods_thumb}}" mode='aspectFit'></image>
         </view>
     </view> -->
-    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{offlineGoodsList&&offlineGoodsList.length!=0}}' id='e32'>—————— 海报展示 ——————</view>
+    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{offlineGoodsList&&offlineGoodsList.length!=0}}' id='e6'>—————— 海报展示 ——————</view>
     <view style="width:100%;overflow: hidden;padding:0 15rpx 0 15rpx;box-sizing: border-box;" wx:if='{{offlineGoodsList&&offlineGoodsList.length!=0}}'>
         <view class="ssubBilEve1" wx:for="{{offlineGoodsList}}" wx:key="key" catchtap="jumpbrandD" data-id='{{item.brand_id}}' data-index='{{index}}'>
            <image class="ssubBiliimgs1" lazy-load="true" src="{{item.goods_img}}" mode='widthFix'></image>
@@ -586,7 +586,7 @@
 </view> -->
 
 <!-- 底部导航条 -->
-<!-- <view class="shunButBar">
+<view class="shunButBar">
    <view class="shunButBarEve" wx:for='{{shunButBarData}}' wx:key='key' catchtap="position" data-tid='{{item.tid}}' style="{{index+1==shunButBarData.length?'border-right:0;':''}}">
      <view style="position: relative;" data-ind="{{item.tid}}" catchtap="{{item.tid == 3?'plus':''}}">
       <text>{{item.name}}</text>
@@ -595,7 +595,7 @@
       </view>
      </view>
    </view>
-</view> -->
+</view>
 
 <bnavigation isChar='{{false}}' bind:run='auditversion' fashionShow='{{true}}' isProduce='{{isProduce}}'></bnavigation>
 
