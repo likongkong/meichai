@@ -24,7 +24,7 @@
 		<image class="exhibdeimg" src="{{brandinfo.logo}}" mode="aspectFit"></image>
 		<view style="overflow:hidden;">
 				<view class="exhibdetxt">
-					<view class="exhibdxtxttitle specialellipsis" style="padding:10rpx 0 16rpx 0;"><block wx:if='{{brandinfo.boothNumber}}'><text style="color:#ff2742;">{{brandinfo.boothNumber}}</text> | </block>{{brandinfo.brandName}}</view>
+					<view class="exhibdxtxttitle specialellipsis" style="padding:10rpx 0 16rpx 0;"><block wx:if='{{brandinfo.boothNumber}}'><text style="color:#31b3fb;">展位:{{brandinfo.boothNumber}}</text> | </block>{{brandinfo.brandName}}</view>
 					<view style="width:100%;overflow:hidden;margin-top:20rpx;">
 						<view class="exhibdxtxtadd" style="background:#6aca6b;margin-right:15rpx;" catchtap="addfrindcommonifun" data-url="{{brandinfo.picFriend}}" data-name="{{brandinfo.brandName}}">添加好友</view>
 						<view class="exhibdxtxtadd" style="background:#31b3fb;" catchtap="addfrindcommonifun" data-name="{{brandinfo.brandName}}" data-url="{{brandinfo.picPublic}}">关注公众号</view>
@@ -32,7 +32,7 @@
 				</view>		
 		</view>
 
-		<view style="width:100%;font-size:26rpx;color:#333;padding-top:30rpx;">简介：{{brandinfo.bradDesc}}</view>
+		<view style="width:100%;font-size:26rpx;color:#333;padding-top:40rpx;">简介：{{brandinfo.bradDesc}}</view>
 		<view class="exhibdeshare">
 			<button style='width:100%;height:100%;position:absolute;top:0;right:0;opacity:0;' open-type='share'></button>
 			<image style="width:40rpx;height:40rpx;margin:20rpx;" src="https://clw.51chaidan.com//images/goods/share3.png?"></image>
