@@ -84,6 +84,21 @@ page{
   border-radius: 6rpx;
   overflow: hidden;
 } */
+.ssubBilEve1{
+  overflow: hidden;
+  display: inline-block;
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+}
+.ssubBilEve1:nth-child(4n){
+  margin-right: 0;
+}
+.ssubBiliimgs1{
+  width:165rpx;
+  height: auto;
+  margin: auto;
+  display: block;
+}
 .ssubBilEve{
   width:20%;
   height:150rpx;
