@@ -348,7 +348,7 @@
            <image class="ssubBiliimgs boxShadow" src="{{item.goods_thumb}}" mode='aspectFit'></image>
         </view>
     </view> -->
-    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{offlineGoodsList&&offlineGoodsList.length!=0}}' id='e32'>—————— 线下潮玩展 ——————</view>
+    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{offlineGoodsList&&offlineGoodsList.length!=0}}' id='e32'>—————— 海报展示 ——————</view>
     <view style="width:100%;overflow: hidden;padding:0 15rpx 0 15rpx;box-sizing: border-box;" wx:if='{{offlineGoodsList&&offlineGoodsList.length!=0}}'>
         <view class="ssubBilEve1" wx:for="{{offlineGoodsList}}" wx:key="key" catchtap="jumpbrandD" data-id='{{item.brand_id}}' data-index='{{index}}'>
            <image class="ssubBiliimgs1" lazy-load="true" src="{{item.goods_img}}" mode='widthFix'></image>
