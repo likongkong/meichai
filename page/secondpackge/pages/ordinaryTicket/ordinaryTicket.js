@@ -93,12 +93,20 @@ Page({
                 wx.scanCode({
                   success (res) {
                     console.log('扫码结果===',res)
-                    var a = _this.GetRequest(res.path)
-                    console.log('scene===',decodeURIComponent(a.scene))
-                    var oid=_this.getCaption(decodeURIComponent(a.scene))
-                    console.log('oid===',oid)
+                    var path = res.path; 
+                    path = res.path.split('?');
+                    var opScene = path[1];
+                    const oldscene = decodeURIComponent(opScene);
+                    var scene = oldscene.substring(6,oldscene.length);
+                    let obj = {}
+                    var arrPara = scene.split("&");
+                    for (let i = 0; i < arrPara.length; i++) {
+                      let arr_params = arrPara[i].split('=')
+                      obj[arr_params[0]] = arr_params[1]
+                    }
+                    console.log(obj,'obj')
                     wx.redirectTo({
-                      url: '/page/secondpackge/pages/ordinaryTicket/ordinaryTicket?oid='+oid
+                      url: '/page/secondpackge/pages/ordinaryTicket/ordinaryTicket?oid='+obj.oid
                     })
                   }
                 })

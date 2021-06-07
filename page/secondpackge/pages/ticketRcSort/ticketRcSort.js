@@ -151,12 +151,20 @@ Page({
                 wx.scanCode({
                   success (res) {
                     console.log('扫码结果===',res)
-                    var a = _this.GetRequest(res.path)
-                    console.log('scene===',decodeURIComponent(a.scene))
-                    var targetUId=_this.getCaption(decodeURIComponent(a.scene))
-                    console.log('targetUId===',targetUId)
+                    var path = res.path; 
+                    path = res.path.split('?');
+                    var opScene = path[1];
+                    const oldscene = decodeURIComponent(opScene);
+                    var scene = oldscene.substring(6,oldscene.length);
+                    let obj = {}
+                    var arrPara = scene.split("&");
+                    for (let i = 0; i < arrPara.length; i++) {
+                      let arr_params = arrPara[i].split('=')
+                      obj[arr_params[0]] = arr_params[1]
+                    }
+                    console.log(obj,'obj')
                     wx.redirectTo({
-                      url: '/page/secondpackge/pages/ticketRcSort/ticketRcSort?targetUId='+targetUId
+                      url: '/page/secondpackge/pages/ticketRcSort/ticketRcSort?uid='+obj.uid
                     })
                   }
                 })
@@ -197,8 +205,8 @@ Page({
       _this.data.targetUId = _this.getCaption(scene) || 0;
       console.log('targetUId========111',_this.getCaption(scene))
     } else {
-      console.log('targetUId========222',options.targetUId)
-      _this.data.targetUId = options.targetUId || 0;
+      console.log('targetUId========222',options.uid)
+      _this.data.targetUId = options.uid || 0;
     };
     _this.activsign();
     wx.hideShareMenu();
