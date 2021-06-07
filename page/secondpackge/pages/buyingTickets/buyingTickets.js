@@ -804,10 +804,24 @@ Page({
                 isSubscribe = true;
               };
             }else{
-              tabOneId = ticket[0].day || '';
-              seldate = ticket[0].date || '';
-              ticketTwo = ticket[0].listTicket || [];
-  
+
+              var is_value = true;
+              for(var i=0; i< ticket.length;i++){
+                  if(ticket[i].listTicket && ticket[i].listTicket[0] && ticket[i].listTicket[0].stock > 0){
+                      tabOneId = ticket[i].day || '';
+                      seldate = ticket[i].date || '';
+                      ticketTwo = ticket[i].listTicket || [];
+                      is_value = false;
+                      break;
+                  };
+              };
+
+              if(is_value){
+                tabOneId = ticket[0].day || '';
+                seldate = ticket[0].date || '';
+                ticketTwo = ticket[0].listTicket || [];
+              };
+
               tabTwoId = ticketTwo[0].type || '';
               sumPrice = ticketTwo[0].price || 0;
   

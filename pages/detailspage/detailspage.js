@@ -377,6 +377,7 @@ Page({
     // }; 
 
     if(ifAdopt){
+      console.log(1)
       var zunmdata = this.data.zunmdata; 
       zunmdata.gsale = selectShell.price || 0;
       zunmdata.gprice = selectShell.price || 0;
@@ -410,6 +411,8 @@ Page({
       }
       
       if(zunmdata.status == 3 && selectShell && zunmdata.depositInfo){
+        console.log(3,selectShell)
+        console.log(selectShell,zunmdata.depositInfo[selectShell.roleId])
         if(zunmdata.depositInfo[selectShell.roleId] && zunmdata.depositInfo[selectShell.roleId].balanceOrderSn){
           zunmdata.orderSn = zunmdata.depositInfo[selectShell.roleId].balanceOrderSn;
         }else{
@@ -428,6 +431,7 @@ Page({
       })
       console.log(zunmdata)
     }else{
+      console.log(2)
       var zunmdata = this.data.zunmdata; 
       if(zunmdata.status == 2){
         zunmdata.isDepositSubscribe = false;
@@ -435,6 +439,7 @@ Page({
       };
 
       if(zunmdata.status == 3 && zunmdata.depositInfo && selectShell.roleId){
+        console.log(zunmdata.depositInfo[selectShell.roleId] , zunmdata.depositInfo[selectShell.roleId].balanceOrderSn)
         if(zunmdata.depositInfo[selectShell.roleId] && zunmdata.depositInfo[selectShell.roleId].balanceOrderSn){
           zunmdata.orderSn = zunmdata.depositInfo[selectShell.roleId].balanceOrderSn;
         }else{
@@ -2966,6 +2971,7 @@ Page({
         wx.hideLoading();
         // 刷新完自带加载样式回去
         wx.stopPullDownRefresh()
+        clearInterval(_this.data.wintheprtintervaldetail);
         if (res.data.ReturnCode == 200) {
           var dataGinfo = res.data.Ginfo;
           _this.setData({
