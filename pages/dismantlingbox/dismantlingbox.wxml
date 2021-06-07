@@ -11,6 +11,7 @@
 					</swiper-item>
 				</swiper>
     </view>	
+  
 
     <!-- <view class="zhanhuiMap">
       <canvas canvas-id='myCanvas'></canvas>
@@ -251,7 +252,7 @@
     </view>
     <view style="padding:0 15rpx 20rpx;overflow: hidden;" wx:if='{{subGoodsList&&subGoodsList.goodsList&&subGoodsList.goodsList.length!=0}}'>
       <view class="ssubOnlinEve boxShadow" wx:for="{{subGoodsList.goodsList}}" wx:key="key" style="{{index%3==1?'margin:10rpx 30rpx;':''}}">
-           <image catchtap="jumpGoodsDetails" data-islotto='{{item.isLotto}}' data-isblindbox='{{item.isBlindBox}}' data-gid='{{item.goods_id}}' class="ssubOnliimg" src="{{item.goods_thumb}}" mode='aspectFit'></image>
+           <image catchtap="jumpGoodsDetails" lazy-load="true" data-islotto='{{item.isLotto}}' data-isblindbox='{{item.isBlindBox}}' data-gid='{{item.goods_id}}' class="ssubOnliimg" src="{{item.goods_thumb}}" mode='aspectFit'></image>
            <view catchtap="jumpGoodsDetails" data-islotto='{{item.isLotto}}' data-isblindbox='{{item.isBlindBox}}'  data-gid='{{item.goods_id}}' class="SSAname multilineellipsis">{{item.goods_name}}</view>
            <view class="ssubBotbox" catchtap="evesubscrfun" data-type='4' data-eveid='{{item.goods_id}}' data-index='{{index}}'>
               <view class="ssubBotbLeft specialellipsis" wx:if='{{item.shop_price}}'>￥{{item.shop_price}}</view>
@@ -267,7 +268,7 @@
     </view>
     <view style="padding:0 15rpx 20rpx;overflow: hidden;" wx:if='{{goodsListNew&&goodsListNew.goodsList&&goodsListNew.goodsList.length!=0}}'>
       <view class="ssubOnlinEve boxShadow" wx:for="{{goodsListNew.goodsList}}" wx:key="key" style="{{index%3==1?'margin:10rpx 30rpx;':''}}">
-           <image catchtap="jumpGoodsDetails" data-islotto='{{item.isLotto}}' data-isblindbox='{{item.isBlindBox}}'  data-gid='{{item.goods_id}}' class="ssubOnliimg" src="{{item.goods_thumb}}" mode='aspectFit'></image>
+           <image catchtap="jumpGoodsDetails" data-islotto='{{item.isLotto}}' data-isblindbox='{{item.isBlindBox}}'  data-gid='{{item.goods_id}}' lazy-load="true" class="ssubOnliimg" src="{{item.goods_thumb}}" mode='aspectFit'></image>
            <view catchtap="jumpGoodsDetails" data-islotto='{{item.isLotto}}' data-isblindbox='{{item.isBlindBox}}'  data-gid='{{item.goods_id}}' class="SSAname multilineellipsis">{{item.goods_name}}</view>
            <view class="ssubBotbox" catchtap="evesubscrfun" data-type='5' data-eveid='{{item.goods_id}}' data-index='{{index}}'>
               <view class="ssubBotbLeft specialellipsis" wx:if='{{item.shop_price}}'>￥{{item.shop_price}}</view>
@@ -312,7 +313,7 @@
     </view>
     <view style="padding:0 15rpx 20rpx;overflow: hidden;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}'>
         <view class="ssubOnlinEve boxShadow" wx:for="{{goodsListOne.goodsList}}" wx:key="key" style="{{index%3==1?'margin:10rpx 30rpx;':''}}">
-           <image catchtap="jumpGoodsDetails" data-islotto='{{item.isLotto}}' data-isblindbox='{{item.isBlindBox}}'  data-gid='{{item.goods_id}}' class="ssubOnliimg" src="{{is_show||index<20?item.goods_thumb:defaultimg}}" mode='aspectFit'></image>
+           <image catchtap="jumpGoodsDetails" data-islotto='{{item.isLotto}}' data-isblindbox='{{item.isBlindBox}}'  data-gid='{{item.goods_id}}' lazy-load="true" class="ssubOnliimg" src="{{is_show||index<20?item.goods_thumb:defaultimg}}" mode='aspectFit'></image>
            <view catchtap="jumpGoodsDetails" data-islotto='{{item.isLotto}}' data-isblindbox='{{item.isBlindBox}}'  data-gid='{{item.goods_id}}' class="SSAname multilineellipsis">{{item.goods_name}}</view>
            <view class="ssubBotbox" catchtap="evesubscrfun" data-type='1' data-eveid='{{item.goods_id}}' data-index='{{index}}'>
               <view class="ssubBotbLeft specialellipsis" wx:if='{{item.shop_price}}'>￥{{item.shop_price}}</view>
@@ -341,10 +342,16 @@
            <image class="ssubBiliimgs boxShadow" src="{{item.goods_thumb}}" mode='aspectFit'></image>
         </view>
     </view> -->
-    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{offlineGoodsList&&offlineGoodsList.length!=0}}' id='e32'>—————— 线下潮玩展 ——————</view>
+    <!-- <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{offlineGoodsList&&offlineGoodsList.length!=0}}' id='e32'>—————— 线下潮玩展 ——————</view>
     <view style="width:100%;overflow: hidden;" wx:if='{{offlineGoodsList&&offlineGoodsList.length!=0}}'>
         <view class="ssubBilEve" wx:for="{{offlineGoodsList}}" wx:key="key" catchtap="evesubscrfun" data-type='2' data-eveid='{{item.goods_id}}' data-index='{{index}}'>
            <image class="ssubBiliimgs boxShadow" src="{{item.goods_thumb}}" mode='aspectFit'></image>
+        </view>
+    </view> -->
+    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{offlineGoodsList&&offlineGoodsList.length!=0}}' id='e32'>—————— 线下潮玩展 ——————</view>
+    <view style="width:100%;overflow: hidden;padding:0 15rpx 0 15rpx;box-sizing: border-box;" wx:if='{{offlineGoodsList&&offlineGoodsList.length!=0}}'>
+        <view class="ssubBilEve1" wx:for="{{offlineGoodsList}}" wx:key="key" catchtap="jumpbrandD" data-id='{{item.brand_id}}' data-index='{{index}}'>
+           <image class="ssubBiliimgs1" lazy-load="true" src="{{item.goods_img}}" mode='widthFix'></image>
         </view>
     </view>
 
@@ -435,14 +442,14 @@
     <block wx:if='{{is_show}}'>
       <view class="ssubBrandEveWrap" style="width:100%;overflow: hidden;padding:0 40rpx;box-sizing: border-box;" wx:if='{{brandList&&brandList.length!=0}}'>
           <view class="ssubBrandEve" wx:for="{{brandList}}" wx:key="key">
-            <image class="ssubBiliimgbr" src="{{item.brandLogo}}" mode='aspectFit'></image>
+            <image class="ssubBiliimgbr" lazy-load="true" src="{{item.brandLogo}}" mode='aspectFit'></image>
           </view>
       </view>  
       <!-- 主办 -->
       <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;">——————— 主办 ———————</view>
       <view class="ssubBrandEveWrap" style="width:100%;overflow: hidden;padding:0 40rpx;box-sizing: border-box; display: flex;justify-content: center;align-items: center;">
           <view class="ssubBrandEve1 bigLogo">
-            <image class="ssubBiliimgbr bigLogo" src="https://cdn.51chaidan.com/toyshow/upload/1600448943.jpg" mode='aspectFit'></image>
+            <image class="ssubBiliimgbr bigLogo" lazy-load="true" src="https://cdn.51chaidan.com/toyshow/upload/1600448943.jpg" mode='aspectFit'></image>
           </view>
       </view>
 
@@ -450,7 +457,7 @@
       <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{mediaBrandList&&mediaBrandList.length!=0}}'>———— 媒体合作与平台支持 ————</view>
       <view class="ssubBrandEveWrap" style="width:100%;overflow: hidden;padding:0 40rpx;box-sizing: border-box;" wx:if='{{mediaBrandList&&mediaBrandList.length!=0}}'>
           <view class="ssubBrandEve" wx:for="{{mediaBrandList}}" wx:key="key">
-            <image class="ssubBiliimgbr" src="{{item}}" mode='aspectFit'></image>
+            <image class="ssubBiliimgbr" lazy-load="true" src="{{item}}" mode='aspectFit'></image>
           </view>
       </view>
 
