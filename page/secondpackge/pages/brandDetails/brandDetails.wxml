@@ -166,7 +166,7 @@
 
 	</view>
 
-	<view style="width:100%;font-size:30rpx;text-align:center;margin-top:20rpx;font-weight:bold;">海报展示</view>
+	<view wx:if='{{brandinfo.offlineGoodsList&&brandinfo.offlineGoodsList.length!=0}}' style="width:100%;font-size:30rpx;text-align:center;margin-top:20rpx;font-weight:bold;">海报展示</view>
 	<view wx:if='{{brandinfo.offlineGoodsList&&brandinfo.offlineGoodsList.length!=0}}' style="margin-top:20rpx;">
 			<view class="gdbpbox">
 					<view class="gdbp" style="margin-right:30rpx;">
