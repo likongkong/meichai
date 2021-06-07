@@ -427,6 +427,7 @@
     <view class="drawBtn">
       <view catchtap="jumpcanvasRoute" style="width:100%;">制作观展专属地图</view>
     </view> -->
+    <image style="width:670rpx;display:block;margin:0 auto 20rpx;" src="https://cdn.51chaidan.com/images/toyShow3/The_venue_map.jpg"  mode='widthFix'></image>
     <image style="width:670rpx;display:block;margin:0 auto 0;" src="https://cdn.51chaidan.com/images/toyShow3/siteImg.png"  mode='widthFix'></image>
 
     <!-- 品牌合作 -->
