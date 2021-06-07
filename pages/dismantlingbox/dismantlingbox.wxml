@@ -254,7 +254,7 @@
       <view class="ssubOnlinEve boxShadow" wx:for="{{subGoodsList.goodsList}}" wx:key="key" style="{{index%3==1?'margin:10rpx 30rpx;':''}}">
            <image catchtap="jumpGoodsDetails" lazy-load="true" data-islotto='{{item.isLotto}}' data-isblindbox='{{item.isBlindBox}}' data-gid='{{item.goods_id}}' class="ssubOnliimg" src="{{item.goods_thumb}}" mode='aspectFit'></image>
            <view catchtap="jumpGoodsDetails" data-islotto='{{item.isLotto}}' data-isblindbox='{{item.isBlindBox}}'  data-gid='{{item.goods_id}}' class="SSAname multilineellipsis">{{item.goods_name}}</view>
-           <view class="ssubBotbox" catchtap="evesubscrfun" data-type='4' data-eveid='{{item.goods_id}}' data-index='{{index}}'>
+           <view class="ssubBotbox" catchtap="evesubscrfun" data-type='4' data-eveid='{{item.goods_id}}' data-activityid='{{item.activityId}}' data-islotto='{{item.isLotto}}' data-isblindbox='{{item.isBlindBox}}' data-index='{{index}}'>
               <view class="ssubBotbLeft specialellipsis" wx:if='{{item.shop_price}}'>￥{{item.shop_price}}</view>
               <view class="ssubBotRight" style="{{item.is_subscribe==1?'background:#fff;color:#32ACFB;':''}}">{{item.is_subscribe==1?'已订阅':'订阅'}}</view>
            </view>
@@ -270,7 +270,7 @@
       <view class="ssubOnlinEve boxShadow" wx:for="{{goodsListNew.goodsList}}" wx:key="key" style="{{index%3==1?'margin:10rpx 30rpx;':''}}">
            <image catchtap="jumpGoodsDetails" data-islotto='{{item.isLotto}}' data-isblindbox='{{item.isBlindBox}}'  data-gid='{{item.goods_id}}' lazy-load="true" class="ssubOnliimg" src="{{item.goods_thumb}}" mode='aspectFit'></image>
            <view catchtap="jumpGoodsDetails" data-islotto='{{item.isLotto}}' data-isblindbox='{{item.isBlindBox}}'  data-gid='{{item.goods_id}}' class="SSAname multilineellipsis">{{item.goods_name}}</view>
-           <view class="ssubBotbox" catchtap="evesubscrfun" data-type='5' data-eveid='{{item.goods_id}}' data-index='{{index}}'>
+           <view class="ssubBotbox" catchtap="evesubscrfun" data-type='5' data-eveid='{{item.goods_id}}' data-activityid='{{item.activityId}}' data-islotto='{{item.isLotto}}' data-isblindbox='{{item.isBlindBox}}' data-index='{{index}}'>
               <view class="ssubBotbLeft specialellipsis" wx:if='{{item.shop_price}}'>￥{{item.shop_price}}</view>
               <view class="ssubBotRight" style="{{item.is_subscribe==1?'background:#fff;color:#32ACFB;':''}}">{{item.is_subscribe==1?'已订阅':'订阅'}}</view>
            </view>
@@ -315,7 +315,7 @@
         <view class="ssubOnlinEve boxShadow" wx:for="{{goodsListOne.goodsList}}" wx:key="key" style="{{index%3==1?'margin:10rpx 30rpx;':''}}">
            <image catchtap="jumpGoodsDetails" data-islotto='{{item.isLotto}}' data-isblindbox='{{item.isBlindBox}}'  data-gid='{{item.goods_id}}' lazy-load="true" class="ssubOnliimg" src="{{is_show||index<20?item.goods_thumb:defaultimg}}" mode='aspectFit'></image>
            <view catchtap="jumpGoodsDetails" data-islotto='{{item.isLotto}}' data-isblindbox='{{item.isBlindBox}}'  data-gid='{{item.goods_id}}' class="SSAname multilineellipsis">{{item.goods_name}}</view>
-           <view class="ssubBotbox" catchtap="evesubscrfun" data-type='1' data-eveid='{{item.goods_id}}' data-index='{{index}}'>
+           <view class="ssubBotbox" catchtap="evesubscrfun" data-type='1' data-eveid='{{item.goods_id}}' data-activityid='{{item.activityId}}' data-islotto='{{item.isLotto}}' data-isblindbox='{{item.isBlindBox}}' data-index='{{index}}'>
               <view class="ssubBotbLeft specialellipsis" wx:if='{{item.shop_price}}'>￥{{item.shop_price}}</view>
               <view class="ssubBotRight" style="{{item.is_subscribe==1?'background:#fff;color:#32ACFB;':''}}">{{item.is_subscribe==1?'已订阅':'订阅'}}</view>
            </view>
