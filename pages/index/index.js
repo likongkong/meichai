@@ -1709,6 +1709,12 @@ Page({
       success: function (res) {}
     })
   },
-
+  // 跳转门票激活码
+  jumpbindTicket(e){
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/bindTicket/bindTicket"
+    })   
+    
+  },
 
 })

@@ -30,6 +30,7 @@
     </view>
     <view class="activateBtn" catchtap="activateBtnFun">去激活</view>
   </view>
+  <view class="wiewWinning" catchtap="jumpluckyDraw">查看中奖信息 ></view>
   <view class="tabWrap">
     <!-- <view class="tabBtnWrap">
       <view class="{{current == 0?'active1':''}}" data-ind="0" catchtap="tabChangeFun">活动规则</view>

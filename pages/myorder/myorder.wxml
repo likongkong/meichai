@@ -462,7 +462,10 @@
                     <view class='daifukuan'>
                         商品总额:￥{{item.goods_amount}}-定金￥{{item.depositOrderPayPrice}}+运费￥{{item.carriage}}
                     </view>  
-                    <view class='wholebottom'>合计:￥{{item.amount}}</view>  
+                    <view class='wholebottom'>
+                        <block wx:if='{{item.order_type==24}}'>尾款:￥{{item.amount}}</block>
+                        <block wx:else>合计:￥{{item.amount}}</block>
+                    </view>  
 
                     <view class='daifukuandianji' wx:if='{{item.status==0}}'>
                         <view class='dfkdjrighg' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;margin-left:20rpx;' bindtap='payment' data-amount='{{item.amount}}' data-oid='{{item.oid}}' data-cart_id='{{item.cart_id}}' data-gcover='{{item.gcover}}' data-gid='{{item.gid}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}'  data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-order_type='{{item.order_type}}'>支付尾款</view>
@@ -480,7 +483,10 @@
                     <view class='daifukuan'>
                         商品总额:￥{{item.goods_amount}}-定金￥{{item.depositOrderPayPrice}}+运费￥{{item.carriage}}
                     </view>  
-                    <view class='wholebottom'>合计:￥{{item.amount}}</view>  
+                    <view class='wholebottom'>
+                        <block wx:if='{{item.order_type==24}}'>尾款:￥{{item.amount}}</block>
+                        <block wx:else>合计:￥{{item.amount}}</block>                        
+                    </view>  
 
                     <view class='daifukuandianji' wx:if='{{item.status==0}}'>
                         <view class='dfkdjrleft' style="height:54rpx;line-height:54rpx;">{{item.dateTitle}}</view>

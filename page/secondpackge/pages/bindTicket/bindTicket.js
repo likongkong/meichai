@@ -514,4 +514,12 @@ Page({
     return Y + '年' + M + '月' + D + '日';
     
   },
+  // 跳转门票抽选
+  jumpluckyDraw(e){
+    let id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/luckyDraw/luckyDraw"
+    })    
+  },
+
 })

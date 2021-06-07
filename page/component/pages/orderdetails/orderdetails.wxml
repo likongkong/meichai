@@ -797,7 +797,8 @@
                         商品总额:￥{{comdata.goods_amount}}-定金{{comdata.depositOrderPayPrice}}+运费￥{{comdata.carriage}}
                     </view>
                     <view class='totalmonnum'>
-                        合计:￥{{comdata.amount}}
+                        <block wx:if='{{comdata.order_type==24}}'>尾款:￥{{comdata.amount}}</block>
+                        <block wx:else>合计:￥{{comdata.amount}}</block>
                     </view>
 
                     <!--  等待付款  -->
@@ -822,7 +823,8 @@
                         商品总额:￥{{comdata.goods_amount}}-定金{{comdata.depositOrderPayPrice}}+运费￥{{comdata.carriage}}
                     </view>
                     <view class='totalmonnum'>
-                        合计:￥{{comdata.amount}}
+                        <block wx:if='{{comdata.order_type==24}}'>尾款:￥{{comdata.amount}}</block>
+                        <block wx:else>合计:￥{{comdata.amount}}</block>
                     </view>
 
                     <!--  等待付款  -->

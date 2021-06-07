@@ -21,7 +21,7 @@
     <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e1' wx:if='{{drawInfo}}'>————— 票务信息 —————</view>
     <view class="ticketWrap">
 
-      <view class="addGoods" style="margin-bottom:20rpx;padding:0 0 25rpx 0;">
+      <view class="addGoods" style="margin-bottom:20rpx;padding:0 0 25rpx 0;" wx:if='{{false}}'>
           <view style="position:relative;" data-eveid='{{drawInfo.activity_id}}' data-type='6' data-id='{{drawInfo.activity_id}}' catchtap="{{drawInfo.status==2?'jumpluckyDraw':'evesubscrfun'}}">
               <image class="addGoodsImg" mode='widthFix' src="{{drawInfo.cover}}"></image>
               <view class="addGoodsIBoxTxt">
@@ -606,7 +606,7 @@
 
 
 
-
+<image style="position:fixed;bottom:440rpx;right:15rpx;width:100rpx;height:100rpx;z-index:6;" src="https://cdn.51chaidan.com/images/sign/jihuo.png" mode="aspectFit" catchtap="jumpbindTicket"></image>
 
 
 

@@ -939,3 +939,5 @@
 
 <!-- 福袋 -->
 <!-- <view animation="{{animation}}" style='width:110rpx;height:110rpx;position:fixed;right:20rpx;bottom:0;top:0;margin:auto;z-index:9;background:#000;'></view> -->
+
+<image style="position:fixed;bottom:440rpx;right:15rpx;width:100rpx;height:100rpx;z-index:6;" src="https://cdn.51chaidan.com/images/sign/jihuo.png" mode="aspectFit" catchtap="jumpbindTicket"></image>
