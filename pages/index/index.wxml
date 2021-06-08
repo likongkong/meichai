@@ -934,7 +934,7 @@
 <!-- 底部购票图片 -->
 <view catchtap="jumpposition" class="BottomBuyTickets" wx:if="{{toyshowTicket && toyshowTicket.isTicket}}">
   <image src="https://cdn.51chaidan.com/images/calendar/getTicket.png" mode="widthFix"></image>
-  <text>已有{{toyshowTicket.countUser}}人想去</text>
+  <!-- <text>已有{{toyshowTicket.countUser}}人想去</text> -->
 </view>
 
 <!-- 福袋 -->
