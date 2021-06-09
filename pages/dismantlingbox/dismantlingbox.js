@@ -418,7 +418,7 @@ Page({
   // 每一个拉起订阅
   evesubscrfun:function(w){
     var _this = this;
-
+    console.log(w)
     // 是否认证手机号
     // if(!_this.data.isMobileAuth){
     //   _this.data.isShareOrSub = false;
@@ -426,35 +426,73 @@ Page({
     //   return false;
     // };
 
-
-    var eveid = w.currentTarget.dataset.eveid || w.target.dataset.eveid||1;
+    var id = 0;
+    // var activityid = w.currentTarget.dataset.activityid || w.target.dataset.activityid||1;
+    // var eveid = w.currentTarget.dataset.eveid || w.target.dataset.eveid||1;
     var type = w.currentTarget.dataset.type || w.target.dataset.type||1;
     var index = w.currentTarget.dataset.index || w.target.dataset.index||0;
+    var islotto = w.currentTarget.dataset.islotto || w.target.dataset.islotto||false;
     var subscribedata = '';
     if(type==1){
-       var goodsListOne = _this.data.goodsListOne;
-       subscribedata = goodsListOne.toyShowSubscribe || '';
+      var goodsListOne = _this.data.goodsListOne;
+      if(islotto){  //是否是抽签活动 true  订阅抽签
+        subscribedata = goodsListOne.lottoSubscribe || '';
+        id = w.currentTarget.dataset.activityid || w.target.dataset.activityid||1;
+      }else{
+        subscribedata = goodsListOne.toyShowSubscribe || '';
+        id = w.currentTarget.dataset.eveid || w.target.dataset.eveid||1;
+      }
     }else if(type==2){
       var goodsListTwo = _this.data.goodsListTwo;
-      subscribedata = goodsListTwo.toyShowSubscribe || '';
+      if(islotto){  //是否是抽签活动 true  订阅抽签
+        subscribedata = goodsListTwo.lottoSubscribe || '';
+        id = w.currentTarget.dataset.activityid || w.target.dataset.activityid||1;
+      }else{
+        subscribedata = goodsListTwo.toyShowSubscribe || '';
+        id = w.currentTarget.dataset.eveid || w.target.dataset.eveid||1;
+      }
     }else if(type==3){
       var goodsListThree = _this.data.goodsListThree;
-      subscribedata = goodsListThree.toyShowSubscribe || '';
+      if(islotto){  //是否是抽签活动 true  订阅抽签
+        subscribedata = goodsListThree.lottoSubscribe || '';
+        id = w.currentTarget.dataset.activityid || w.target.dataset.activityid||1;
+      }else{
+        subscribedata = goodsListThree.toyShowSubscribe || '';
+        id = w.currentTarget.dataset.eveid || w.target.dataset.eveid||1;
+      }
     }else if(type==4){
       var subGoodsList = _this.data.subGoodsList;
-      subscribedata = subGoodsList.toyShowSubscribe || '';
+      if(islotto){  //是否是抽签活动 true  订阅抽签
+        subscribedata = subGoodsList.lottoSubscribe || '';
+        id = w.currentTarget.dataset.activityid || w.target.dataset.activityid||1;
+      }else{
+        subscribedata = subGoodsList.toyShowSubscribe || '';
+        id = w.currentTarget.dataset.eveid || w.target.dataset.eveid||1;
+      }
     }else if(type==5){
       var goodsListNew = _this.data.goodsListNew;
-      subscribedata = goodsListNew.toyShowSubscribe || '';
+      if(islotto){  //是否是抽签活动 true  订阅抽签
+        subscribedata = goodsListNew.lottoSubscribe || '';
+        id = w.currentTarget.dataset.activityid || w.target.dataset.activityid||1;
+      }else{
+        subscribedata = goodsListNew.toyShowSubscribe || '';
+        id = w.currentTarget.dataset.eveid || w.target.dataset.eveid||1;
+      }
     }else if(type==6){
       var drawInfo = _this.data.drawInfo;
-      subscribedata = drawInfo.toyShowSubscribe || '';
+      if(islotto){  //是否是抽签活动 true  订阅抽签
+        subscribedata = drawInfo.lottoSubscribe || '';
+        id = w.currentTarget.dataset.activityid || w.target.dataset.activityid||1;
+      }else{
+        subscribedata = drawInfo.toyShowSubscribe || '';
+        id = w.currentTarget.dataset.eveid || w.target.dataset.eveid||1;
+      }
     }else if(type==7){
       subscribedata = _this.data.DayJudSubscribe || '';
     };
     _this.setData({
       subscribedata:subscribedata,
-      id:eveid,
+      id:id,
       typeEve:type,
       indexEve:index
     });
@@ -1093,6 +1131,7 @@ brandJson:function(){
              if(type==1){
                 if(num==1){
                   var toyShowSubscribe = res.data.Info.toyShowSubscribe || {};
+                  var lottoSubscribe = res.data.Info.lottoSubscribe || {};
                   var goodsListOne = res.data.List.goodsListOne || [];
                   var goodsListTwo = res.data.List.goodsListTwo || [];
                   var goodsListThree = res.data.List.goodsListThree || [];
@@ -1100,23 +1139,28 @@ brandJson:function(){
                   var subGoodsList = res.data.List.subscriptionGoodsList || [];
                   var offlineGoodsList = res.data.List.offlineGoodsList || [];
                   var goodsListOne = {
-                    toyShowSubscribe:toyShowSubscribe,
+                    lottoSubscribe,
+                    toyShowSubscribe,
                     goodsList:goodsListOne
                   };
                   var goodsListTwo = {
-                    toyShowSubscribe:toyShowSubscribe,
+                    lottoSubscribe,
+                    toyShowSubscribe,
                     goodsList:goodsListTwo
                   };
                   var goodsListThree = {
-                    toyShowSubscribe:toyShowSubscribe,
+                    lottoSubscribe,
+                    toyShowSubscribe,
                     goodsList:goodsListThree
                   };
                   var goodsListNew = {
-                    toyShowSubscribe:toyShowSubscribe,
+                    lottoSubscribe,
+                    toyShowSubscribe,
                     goodsList:goodsListNew
                   };
                   var subGoodsList = {
-                    toyShowSubscribe:toyShowSubscribe,
+                    lottoSubscribe,
+                    toyShowSubscribe,
                     goodsList:subGoodsList
                   };
 

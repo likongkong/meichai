@@ -192,7 +192,7 @@ Page({
                 };
                 
                 if (is_show_modal) {
-                  // _this.subshowmodalTip();
+                  _this.subshowmodalTip();
                   is_show_modal = false;
                 };
               };
