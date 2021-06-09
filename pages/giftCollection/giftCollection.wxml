@@ -18,10 +18,10 @@
    <image style="display:block;width:100%;height:auto;" mode='widthFix' src="{{imgUrl}}"></image>
 </block>
 
-
-
-<view class="leafletBottomEve boxShadowEve" wx:if='{{giftData.pay_status==2}}' catchtap="getItNow">立即领取</view>
-
+<view class="leafletBottomWrap">
+   <view class="leafletBottomEve boxShadowEve" wx:if='{{giftData.pay_status==2}}' catchtap="getItNow">立即领取</view>
+   <view class="leafletBottomEve boxShadowEve" style="background:#FCA700;" catchtap="continueCheck">继续核验</view>
+</view>
 
 
 
