@@ -141,6 +141,7 @@ Page({
         wx.stopPullDownRefresh();
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
+          _this.getInfo();
           wx.showModal({
             title: '提示',
             content: res.data.Msg,
