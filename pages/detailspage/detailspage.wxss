@@ -507,7 +507,7 @@
   border-radius: 6rpx;
 }
 .mscColorBoxeve.ColorClass{
-  border: 4rpx solid #ff2742;
+  border: 4rpx solid #000000;
 }
 .star-rating{
   margin: 0 5rpx;
