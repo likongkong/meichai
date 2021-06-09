@@ -319,14 +319,30 @@ Page({
     }else{
       var zunmdata = this.data.zunmdata; 
       if(zunmdata.status == 2){
-        zunmdata.isDepositSubscribe = false;
-        zunmdata.isDisplayDeposit = true;
+        // zunmdata.isDepositSubscribe = false;
+        // zunmdata.isDisplayDeposit = true;
+        if(zunmdata.status == 2){
+          if(zunmdata.depositInfo && zunmdata.depositInfo[listSpec[modelColor].roleId]){
+            zunmdata.isDepositSubscribe = zunmdata.depositInfo[listSpec[modelColor].roleId].isDepositSubscribe;
+            if(zunmdata.depositInfo[listSpec[modelColor].roleId].orderSn){
+              zunmdata.orderSn = zunmdata.depositInfo[listSpec[modelColor].roleId].orderSn;
+              zunmdata.isDisplayDeposit = true;
+            }else{
+              zunmdata.isDisplayDeposit = false;
+            };
+          }else{
+            zunmdata.isDepositSubscribe = false;
+            zunmdata.isDisplayDeposit = true;
+          };
+        };
       };
       if(zunmdata.status == 3 && listSpec[modelColor] && zunmdata.depositInfo){
         if(zunmdata.depositInfo[listSpec[modelColor].roleId] && zunmdata.depositInfo[listSpec[modelColor].roleId].balanceOrderSn){
           zunmdata.orderSn = zunmdata.depositInfo[listSpec[modelColor].roleId].balanceOrderSn;
+          zunmdata.orderAmount = zunmdata.depositInfo[listSpec[modelColor].roleId].orderAmount;
         }else{
-          zunmdata.orderSn = ''
+          zunmdata.orderSn = '';
+          zunmdata.orderAmount = '';
         };
       };
       zunmdata.debuff = 3; 
@@ -383,16 +399,6 @@ Page({
       zunmdata.gprice = selectShell.price || 0;
       zunmdata.debuff = 0;
       zunmdata.goods_thumb = selectShell.roleImg;
-      // 手机壳 并且 isSpecSoldOut 为 true 全部卖完
-      if( selectShell.stock <= 0 || zunmdata.isSpecSoldOut){
-        zunmdata.debuff = 3;
-      };
-
-      if(zunmdata.totalSpecStock && selectShell.stock > zunmdata.totalSpecStock){
-        this.data.totalSpecStock = zunmdata.totalSpecStock;
-      }else{
-        this.data.totalSpecStock = selectShell.stock;
-      };
 
       if(zunmdata.status == 2){
         if(zunmdata.depositInfo && zunmdata.depositInfo[selectShell.roleId]){
@@ -409,14 +415,31 @@ Page({
           zunmdata.isDisplayDeposit = true;
         };
       }
+      console.log('zunmdata.isDisplayDeposit',zunmdata.isDisplayDeposit)
+      if(zunmdata.isDisplayDeposit){
+        // 手机壳 并且 isSpecSoldOut 为 true 全部卖完
+        if( selectShell.stock <= 0 || zunmdata.isSpecSoldOut){
+          zunmdata.debuff = 3;
+        };
+        if(zunmdata.totalSpecStock && selectShell.stock > zunmdata.totalSpecStock){
+          this.data.totalSpecStock = zunmdata.totalSpecStock;
+        }else{
+          this.data.totalSpecStock = selectShell.stock;
+        };
+
+      };
+
+
       
       if(zunmdata.status == 3 && selectShell && zunmdata.depositInfo){
         console.log(3,selectShell)
         console.log(selectShell,zunmdata.depositInfo[selectShell.roleId])
         if(zunmdata.depositInfo[selectShell.roleId] && zunmdata.depositInfo[selectShell.roleId].balanceOrderSn){
           zunmdata.orderSn = zunmdata.depositInfo[selectShell.roleId].balanceOrderSn;
+          zunmdata.orderAmount = zunmdata.depositInfo[selectShell.roleId].orderAmount;
         }else{
-          zunmdata.orderSn = ''
+          zunmdata.orderSn = '';
+          zunmdata.orderAmount = ''
         };
       };
 
@@ -442,8 +465,10 @@ Page({
         console.log(zunmdata.depositInfo[selectShell.roleId] , zunmdata.depositInfo[selectShell.roleId].balanceOrderSn)
         if(zunmdata.depositInfo[selectShell.roleId] && zunmdata.depositInfo[selectShell.roleId].balanceOrderSn){
           zunmdata.orderSn = zunmdata.depositInfo[selectShell.roleId].balanceOrderSn;
+          zunmdata.orderAmount = zunmdata.depositInfo[selectShell.roleId].orderAmount;
         }else{
-          zunmdata.orderSn = ''
+          zunmdata.orderSn = '';
+          zunmdata.orderAmount = '';
         };
       };
 
@@ -652,9 +677,15 @@ Page({
     }.bind(_this), 1000);
   },
   // 拉起订阅
-  subscrfun: function () {
+  subscrfun: function (w) {
     var _this = this;
-    if(_this.data.specialGoods == 1 && _this.data.zunmdata.debuff==3){
+    console.log(w)
+    var ind = 0;
+    if(w && w.currentTarget && w.currentTarget.dataset && w.currentTarget.dataset.ind){
+      ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
+    }
+
+    if(_this.data.specialGoods == 1 && (_this.data.zunmdata.debuff==3 || ind ==1 )){
       var subscribedata = _this.data.specSubscribe || '';
     }else{
       var subscribedata = _this.data.subscribedata || '';
@@ -2290,6 +2321,11 @@ Page({
   },
   // 二级背景函数
   tipbacktwo:function(){
+    if(this.data.specialGoods==1){
+      this.setData({
+        tipback: false
+      })
+    };
     if (this.data.receivingaddress){
       this.setData({
         receivingaddress: false,
@@ -2329,6 +2365,7 @@ Page({
   dsbbbutclickt:function(){
     
     this.setData({
+      tipback: true,
       tipbacktwo: true,
       buybombsimmediately: true
     });
@@ -2428,6 +2465,10 @@ Page({
     var res = this.data.zunmdata;
     var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
     var iftrnum = true;
+    if(_this.data.specialGoods == 1){
+      _this.dsbbbutclickt()
+      return false;
+    };
     if(_this.data.specialGoods == 1){
       var stock = _this.data.selectShell.stock || 0;
       _this.setData({
@@ -3203,8 +3244,10 @@ Page({
                       if(res.data.Ginfo.status == 3){
                         if(res.data.Ginfo.depositInfo[selectShell.roleId].balanceOrderSn){
                           res.data.Ginfo.orderSn = res.data.Ginfo.depositInfo[selectShell.roleId].balanceOrderSn;
+                          res.data.Ginfo.orderAmount = res.data.Ginfo.depositInfo[selectShell.roleId].orderAmount;
                         }else{
-                          res.data.Ginfo.orderSn = ''
+                          res.data.Ginfo.orderSn = '';
+                          res.data.Ginfo.orderAmount = ''
                         };
                       };
                     }else{
@@ -3235,8 +3278,10 @@ Page({
                                   if(res.data.Ginfo.depositInfo && res.data.Ginfo.depositInfo[selectShell.roleId]){
                                     if(res.data.Ginfo.depositInfo[selectShell.roleId].balanceOrderSn){
                                       res.data.Ginfo.orderSn = res.data.Ginfo.depositInfo[selectShell.roleId].balanceOrderSn;
+                                      res.data.Ginfo.orderAmount = res.data.Ginfo.depositInfo[selectShell.roleId].orderAmount;
                                     }else{
                                       res.data.Ginfo.orderSn = '';
+                                      res.data.Ginfo.orderAmount = '';
                                     };
                                   };
                                   break;

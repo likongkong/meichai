@@ -112,7 +112,7 @@
 
             <block wx:if="{{zunmdata.gid == 36875 || zunmdata.gid == 36876 || zunmdata.gid == 36877}}">
               <block wx:if="{{nowTime < 1621094400}}">
-                <view class="deDepossttime" style="padding: 18rpx 0 10rpx 0;">距离预定结束:</view>
+                <view class="deDepossttime" style="padding: 18rpx 0 10rpx 0;">距离预售结束:</view>
                 <view class="deDepossttime"><block wx:if='{{winningovertimedetail.dayStr}}'>{{winningovertimedetail.dayStr}}天</block>  {{winningovertimedetail.hrStr}}:{{winningovertimedetail.minStr}}:{{winningovertimedetail.secStr}}</view>  
               </block>
               <block wx:else>
@@ -121,7 +121,7 @@
             </block>
             <block wx:elif="{{zunmdata.gid == 37568 || zunmdata.gid == 37569 || zunmdata.gid == 37573}}">
               <block wx:if="{{nowTime < 1621094400}}">
-                <view class="deDepossttime" style="padding: 18rpx 0 10rpx 0;">距离预定结束:</view>
+                <view class="deDepossttime" style="padding: 18rpx 0 10rpx 0;">距离预售结束:</view>
                 <view class="deDepossttime"><block wx:if='{{winningovertimedetail.dayStr}}'>{{winningovertimedetail.dayStr}}天</block>  {{winningovertimedetail.hrStr}}:{{winningovertimedetail.minStr}}:{{winningovertimedetail.secStr}}</view>  
               </block>
               <block wx:else>
@@ -130,7 +130,7 @@
             </block>
             <block wx:elif="{{zunmdata.gid == 37700}}">
               <block wx:if="{{nowTime < 1621094400}}">
-                <view class="deDepossttime" style="padding: 18rpx 0 10rpx 0;">距离预定结束:</view>
+                <view class="deDepossttime" style="padding: 18rpx 0 10rpx 0;">距离预售结束:</view>
                 <view class="deDepossttime"><block wx:if='{{winningovertimedetail.dayStr}}'>{{winningovertimedetail.dayStr}}天</block>  {{winningovertimedetail.hrStr}}:{{winningovertimedetail.minStr}}:{{winningovertimedetail.secStr}}</view>  
               </block>
               <block wx:else>
@@ -140,7 +140,7 @@
             <block wx:else>
               <block wx:if='{{zunmdata.depositEndTime}}'>
                   <block wx:if='{{nowTime < zunmdata.depositEndTime}}'>
-                    <view class="deDepossttime" style="padding: 18rpx 0 10rpx 0;">距离预定结束:</view>
+                    <view class="deDepossttime" style="padding: 18rpx 0 10rpx 0;">距离预售结束:</view>
                     <view class="deDepossttime"><block wx:if='{{winningovertimedetail.dayStr}}'>{{winningovertimedetail.dayStr}}天</block>  {{winningovertimedetail.hrStr}}:{{winningovertimedetail.minStr}}:{{winningovertimedetail.secStr}}</view>  
                   </block>
                   <block wx:else>
@@ -148,14 +148,14 @@
                   </block>
               </block>
               <block wx:else>
-                  <view class="deDepossttime" style="padding: 18rpx 0 10rpx 0;">距离预定结束:</view>
+                  <view class="deDepossttime" style="padding: 18rpx 0 10rpx 0;">距离预售结束:</view>
                   <view class="deDepossttime"><block wx:if='{{winningovertimedetail.dayStr}}'>{{winningovertimedetail.dayStr}}天</block>  {{winningovertimedetail.hrStr}}:{{winningovertimedetail.minStr}}:{{winningovertimedetail.secStr}}</view>
               </block>
             </block>
 
           </block>
           <view wx:else style="width:100%;height:110rpx;text-align:center;line-height:110rpx;font-size:24rpx;color:#EA4F57;">
-              <block wx:if='{{zunmdata.status==3}}'>预定结束</block>
+              <block wx:if='{{zunmdata.status==3}}'>预售结束</block>
               <block wx:elif='{{zunmdata.status==1}}'>{{zunmdata.datatimew}}开售</block>  
               <block wx:elif='{{zunmdata.status==0}}'>已售罄</block>         
           </view>
@@ -192,7 +192,7 @@
               <view class="mscColorBox">
                 <!-- wx:if='{{item.select}}' -->
                   <block wx:for='{{detailSpecColor}}' wx:key='key'>
-                      <view class="mscColorBoxeve {{detailColorIndex==index?'ColorClass':''}} boxShadowEve" catchtap="dSCfun" data-index='{{index}}'>
+                      <view class="mscColorBoxeve {{detailColorIndex==index?'ColorClass':''}}" catchtap="dSCfun" data-index='{{index}}'>
                         <image mode='aspectFit' src="{{item.roleImg}}"></image>
                       </view>
                   </block>        
@@ -226,7 +226,7 @@
             <view class="mscColorBox">
               <!-- wx:if='{{item.select}}' -->
                 <block wx:for='{{detailSpecColor}}' wx:key='key'>
-                    <view class="mscColorBoxeve {{detailColorIndex==index?'ColorClass':''}} boxShadowEve" catchtap="dSCfun" data-index='{{index}}'>
+                    <view class="mscColorBoxeve {{detailColorIndex==index?'ColorClass':''}}" catchtap="dSCfun" data-index='{{index}}'>
                       <image mode='aspectFit' src="{{item.roleImg}}"></image>
                     </view>
                 </block>        
@@ -267,7 +267,7 @@
         <view class="mscColorBox">
           <!-- wx:if='{{item.select}}' -->
             <block wx:for='{{detailSpecColor}}' wx:key='key'>
-                <view class="mscColorBoxeve {{detailColorIndex==index?'ColorClass':''}} boxShadowEve" catchtap="dSCfun" data-index='{{index}}'>
+                <view class="mscColorBoxeve {{detailColorIndex==index?'ColorClass':''}}" catchtap="dSCfun" data-index='{{index}}'>
                   <image mode='aspectFit' src="{{item.roleImg}}"></image>
                 </view>
             </block>        
@@ -929,17 +929,23 @@
                 </view> -->
                 <block wx:elif='{{zunmdata.debuff == 3}}'>
                     <view class="footer-child large sale" style='height:80rpx;margin-top:9rpx;border-radius:10rpx;padding:0;width:255rpx;margin-right:20rpx;background:#FCA700;' catchtap="subscrfun">
-                        <view style='width:100%;height:80rpx;text-align:center;color:#fff;line-height:80rpx;font-size:28rpx;'>补货提醒</view>
+                        <view style='width:100%;height:80rpx;text-align:center;color:#fff;line-height:80rpx;font-size:24rpx;'>补货提醒</view>
                     </view>              
                 </block>
-                <view wx:else class="footer-child large sale" style='height:80rpx;margin-top:9rpx;border-radius:10rpx;padding:0;{{zunmdata.isDepositSubscribe?"width:255rpx;":"width:360rpx;"}}margin-right:20rpx;'>
+                <view wx:else class="footer-child large sale" style='height:80rpx;margin-top:9rpx;border-radius:10rpx;padding:0;width:255rpx;margin-right:20rpx;{{nowTime < zunmdata.depositEndTime?"":";background:#FCA700;"}}'>
                     <block wx:if="{{zunmdata.depositEndTime}}">
                       <block wx:if="{{nowTime < zunmdata.depositEndTime}}">
                         <view class="money" bindtap="dsbffunblock" style='font-size:28rpx;'>支付定金</view>
                         <view class="money" bindtap="dsbffunblock" style='font-size:28rpx;'>￥{{zunmdata.promote_price}}</view>
-                      </block>
+                      </block> 
                       <block wx:else>
-                        <view style="{{zunmdata.isDepositSubscribe?'width:255rpx;font-size:20rpx;':'width:360rpx;font-size:28rpx;'}} height:80rpx;line-height:80rpx;color:#fff;text-align:center;">{{zunmdata.tipFinalPayment}}</view>
+                          <block wx:if='{{specialGoods == 1}}'>
+                            <view style="width:255rpx;font-size:24rpx;height:80rpx;line-height:80rpx;color:#fff;text-align:center;" data-ind='{{specialGoods==1?"1":""}}' catchtap="subscrfun">补货提醒</view>
+                          </block>
+                          <block wx:else>
+                            <view style="width:255rpx;font-size:24rpx; height:80rpx;line-height:80rpx;color:#fff;text-align:center;">{{zunmdata.tipFinalPayment}}</view>
+                          </block>
+                        
                       </block>
                     </block>
                     <block wx:else>
@@ -950,11 +956,25 @@
 
             </block>
             <block wx:else>
-                <view class="footer-child large sale" style='height:80rpx;margin-top:9rpx;border-radius:10rpx;padding:0;width:255rpx;margin-right:20rpx;background:#999999;' catchtap='subscrfun'>
+
+                <block wx:if="{{specialGoods == 1 && zunmdata.depositEndTime}}">
+                    <view class="footer-child large sale" style='height:80rpx;margin-top:9rpx;border-radius:10rpx;padding:0;{{zunmdata.isDepositSubscribe?"width:255rpx;":"width:360rpx;"}}margin-right:20rpx;'>
+                        <view style="{{zunmdata.isDepositSubscribe?'width:255rpx;font-size:24rpx;':'width:360rpx;font-size:28rpx;'}} height:80rpx;line-height:80rpx;color:#fff;text-align:center;"  catchtap='subscrfun'>{{zunmdata.tipFinalPayment}}</view>
+                    </view>
+                </block>
+                <block wx:else>
+                    <view class="footer-child large sale" style='height:80rpx;margin-top:9rpx;border-radius:10rpx;padding:0;width:255rpx;margin-right:20rpx;background:#999999;' catchtap='subscrfun'>
+                        <view style='width:100%;height:80rpx;text-align:center;color:#fff;line-height:80rpx;font-size:28rpx;'>
+                              支付尾款
+                        </view>
+                    </view>
+                </block>
+
+                <!-- <view class="footer-child large sale" style='height:80rpx;margin-top:9rpx;border-radius:10rpx;padding:0;width:255rpx;margin-right:20rpx;background:#999999;' catchtap='subscrfun'>
                     <view style='width:100%;height:80rpx;text-align:center;color:#fff;line-height:80rpx;font-size:28rpx;'>
                           支付尾款
                     </view>
-                </view>
+                </view> -->
             </block>
 
         </block>
@@ -966,7 +986,7 @@
         </block>
         <block wx:else>
           <view class="footer-child large sale" style='height:80rpx;margin-top:9rpx;border-radius:10rpx;padding:0;width:255rpx;margin-right:20rpx;{{zunmdata.status==3?"background:#999999;":""}}{{zunmdata.status==0?"background:#FCA700;":""}} ' catchtap="{{zunmdata.status == 1 || zunmdata.status == 0?'subscrfun':''}}">
-              <view style='width:100%;height:80rpx;text-align:center;color:#fff;line-height:80rpx;font-size:28rpx;'>
+              <view style='width:100%;height:80rpx;text-align:center;color:#fff;line-height:80rpx;font-size:24rpx;'>
                     <block wx:if='{{zunmdata.status==3}}'>已结束</block>
                     <block wx:elif='{{zunmdata.status==0}}'>补货提醒</block>
                     <block wx:elif='{{zunmdata.status==1}}'>{{zunmdata.datatimew}}开售</block>
@@ -974,7 +994,7 @@
           </view>        
         </block>
 
-        <view wx:if='{{zunmdata.status==1 || (zunmdata.isDepositSubscribe && zunmdata.status==2)}}' class="footer-child large turn" style='height:80rpx;margin-top:9rpx;padding:0;width:200rpx;margin-right:40rpx;background:#f8b21d;text-align:center;line-height:80rpx;color:#fff;border-radius:10rpx;float:right;position: relative;' catchtap='subscrfun'>
+        <view wx:if='{{zunmdata.status==1 || (zunmdata.isDepositSubscribe && zunmdata.status==2)}}' class="footer-child large turn" style='height:80rpx;margin-top:9rpx;padding:0;width:200rpx;margin-right:40rpx;background:#f8b21d;text-align:center;line-height:80rpx;color:#fff;border-radius:10rpx;float:right;position: relative;font-size:24rpx;' catchtap='subscrfun'>
               <block wx:if='{{zunmdata.status==1}}'>开售订阅提醒</block>
               <block wx:else>尾款订阅提醒</block>
         </view>
