@@ -293,19 +293,19 @@
     </view> -->
 
     <!-- 海外专区 -->
-    <!-- <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{goodsListThree&&goodsListThree.goodsList&&goodsListThree.goodsList.length!=0}}' id='e31'>
+    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{goodsListThree&&goodsListThree.goodsList&&goodsListThree.goodsList.length!=0}}' id='e31'>
       <image style="width:200rpx;height:auto" src="https://cdn.51chaidan.com/images/toyShow3/overseasZone.png" mode="widthFix"></image>
     </view>
     <view style="padding:0 15rpx 20rpx;overflow: hidden;" wx:if='{{goodsListThree&&goodsListThree.goodsList&&goodsListThree.goodsList.length!=0}}'>
       <view class="ssubOnlinEve boxShadow" wx:for="{{goodsListThree.goodsList}}" wx:key="key" style="{{index%3==1?'margin:10rpx 30rpx;':''}}">
            <image catchtap="jumpGoodsDetails" data-islotto='{{item.isLotto}}' data-isblindbox='{{item.isBlindBox}}'  data-gid='{{item.goods_id}}' class="ssubOnliimg" src="{{is_show||index<20?item.goods_thumb:defaultimg}}" mode='aspectFit'></image>
            <view catchtap="jumpGoodsDetails" data-islotto='{{item.isLotto}}' data-isblindbox='{{item.isBlindBox}}'  data-gid='{{item.goods_id}}' class="SSAname multilineellipsis">{{item.goods_name}}</view>
-           <view class="ssubBotbox" catchtap="evesubscrfun" data-type='3' data-eveid='{{item.goods_id}}' data-index='{{index}}'>
+           <view class="ssubBotbox" catchtap="evesubscrfun" data-type='3' data-eveid='{{item.goods_id}}' data-activityid='{{item.activityId}}' data-islotto='{{item.isLotto}}' data-isblindbox='{{item.isBlindBox}}' data-index='{{index}}'>
               <view class="ssubBotbLeft specialellipsis" wx:if='{{item.shop_price}}'>￥{{item.shop_price}}</view>
               <view class="ssubBotRight" style="{{item.is_subscribe==1?'background:#fff;color:#32ACFB;':''}}">{{item.is_subscribe==1?'已订阅':'订阅'}}</view>
            </view>
         </view>
-    </view> -->
+    </view>
 
     <!-- 更多展品 -->
 		<view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{goodsListOne&&goodsListOne.goodsList&&goodsListOne.goodsList.length!=0}}' id='e32'>
