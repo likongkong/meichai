@@ -96,6 +96,7 @@ Page({
     defaultimg:'/pages/images/goods_Item_Default_Image.png',
     isPopping:false,
     nowAdmissionTime:Date.parse(new Date()) / 1000,
+    is_formaldress:false
   },
 
   //点击弹出
@@ -613,9 +614,28 @@ Page({
     }else{
       // 判断是否授权
       this.activsign();
-    }
-
+    };
+    this.obtaintabfun();
   },
+  // 判断是否是审核版本
+  obtaintabfun:function(){
+    var _this = this;
+    // 判断是正是版本还是审核版本
+    wx.request({
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/verifyVersion.conf?time='+app.signindata.appNowTime,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        if (res.data.WeChat == app.signindata.versionnumber) {
+             _this.setData({is_formaldress : true})
+        } else {
+             _this.setData({is_formaldress : false})
+        };
+      },
+      fail: function (res) {}
+    });
+  },
+
   onLoadfun:function(){
     console.log('123')
     var _this = this;
