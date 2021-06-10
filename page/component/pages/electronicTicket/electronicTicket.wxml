@@ -11,7 +11,7 @@
  
     <view class="ordeQRcode" wx:if='{{is_ActivationCode}}'>
         <block wx:if='{{!comdata.isItOverdue}}'>
-            <view class="ordeQRImgBox">
+            <view class="ordeQRImgBox" wx:if='{{comdata.status != 5}}'>
                 <!-- <image src="https://cdn.51chaidan.com/images/qrcode/toyshowTicket/4465040.png" class="ordeQRImgBoxImg"></image> -->
                 <image src="{{comdata.qrcode}}" class="ordeQRImgBoxImg"></image>
                 <!-- <view wx:if='{{comdata.isItOverdue}}' class='bgctipref'>已过期</view>
