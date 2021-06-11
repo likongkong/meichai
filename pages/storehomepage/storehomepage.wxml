@@ -1,0 +1,31 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}' is_share='{{is_share}}'></t_f> 
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+
+<view class="is_vip_box" style="{{is_vip == 1?'background:#F1D63F;':''}}{{is_vip == 2?'background:#fff;':''}}">
+    <view class="is_vip_h" style="{{is_vip == 1?'height:120rpx;':''}}"></view>
+    <!-- vip 门票 -->
+    <block wx:if='{{is_vip == 1}}'>
+       <view class="is_vip_txt" style="color:{{txtColor}};">VIP门票</view>
+       <view class="is_vip_txt" style="color:{{txtColor}};">{{info.date}}</view>
+       <view class="is_vip_txt" style="color:{{txtColor}};">排序:{{info.sort}}</view>
+       <image class="chImagebox" mode='aspectFit' src="https://cdn.51chaidan.com/images/qrcode/toyshowVIP/{{uid}}.png"></image>
+       <view class="chBindInfoTest"><text style="color:#428633;" wx:if='{{info.audit_status==1}}'>已核验</text><text wx:else style="color:#FF2742;">未核验</text></view>
+
+    </block>
+    <!-- 非 vip 门票 -->
+    <block wx:elif='{{is_vip == 2}}'>
+       <view class="is_vip_txt" style="color:{{txtColor}};">普通门票</view>
+       <view class="is_vip_txt" style="color:{{txtColor}};">{{info.date}}</view>
+    </block>
+    
+</view>
+
+
+<view wx:if='{{is_vip == 2}}' class="goToCheckIn" catchtap="myorderfun">去验票</view>
+
+<!-- <bnavigation isChar='{{false}}' isProduce='{{isProduce}}'></bnavigation> -->
+
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>

@@ -547,7 +547,6 @@ App({
   // 11  redenvelopes   红包页面
   // 12  redenvelopesdetails 红包详情页
   // 14  signin 登录页面
-  // 16  storehomepage 店铺页面
   // 17  streasurylist 金库排行榜
   // 19  getjigsaw 拼图
   // 20  bargainDetail 砍价
@@ -1531,7 +1530,6 @@ App({
 //  combinationdetail 组合详情页
 //  savethepicture 保存图片
 //  imdetailspage 拆币兑换详情页
-//  storehomepage 店主首页  XXX的解优杂货铺  小C
 //  sputforward 我的小金库 提现
 //  sbestpartner 最佳合伙人
 //  streasurylist  金库排行榜
@@ -1610,7 +1608,8 @@ App({
 //mobileShellList  手机壳列表
 
 
-// mobileShellDetail 手机壳详情页
+// isItaVIPTicket 暂时没用到 
+// storehomepage  是否是vip页面
 
 
 //auctionList 拍卖列表
