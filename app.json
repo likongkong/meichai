@@ -141,6 +141,7 @@
         "pages/auctionRecord/auctionRecord",
         "pages/onlineFukubukuro/onlineFukubukuro",
         "pages/ordinaryTicket/ordinaryTicket",
+        "pages/duoduomone/duoduomone",
         "pages/payee/payee"
       ]
     }
