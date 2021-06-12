@@ -32,6 +32,7 @@
     "pages/shopsquare/shopsquare",
     "pages/halloweenparty/halloweenparty",
     "pages/giftCollection/giftCollection",
+    "pages/towAAddB/towAAddB",
     "pages/smokeComponent/smokeComponent"
   ],
   "subPackages": [

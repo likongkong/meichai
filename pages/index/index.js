@@ -232,7 +232,7 @@ Page({
       // url: "/pages/shopsquare/shopsquare"
       // url: "/pages/dismantlingbox/dismantlingbox"
       // url: "/page/secondpackge/pages/shopsquaretrip/shopsquaretrip"
-      url: "/pages/storehomepage/storehomepage"
+      // url: "/pages/storehomepage/storehomepage"
       
       // url: "/page/component/pages/limitlottery/limitlottery?id=35405",
 
@@ -244,6 +244,8 @@ Page({
       
       //邀请函
       // url: "/page/secondpackge/pages/priorityVoting/priorityVoting"
+      url: "/pages/towAAddB/towAAddB"
+      
 
       // url: "/pages/modifythenickname/modifythenickname"
 
