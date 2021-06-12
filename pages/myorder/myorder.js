@@ -1097,6 +1097,7 @@ Page({
   },
   // 微信支付
   paymentmony: function () {
+
     var _this = this;
     var q = Dec.Aese('mod=operate&operation=prepay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1' + '&oid=' + _this.data.cart_id + '&xcx=1' + '&openid=' + _this.data.openid)
     wx.request({
@@ -1179,7 +1180,10 @@ Page({
           }; 
           if (res.data.ReturnCode == 805) {
             app.showToastC('剩余库存不足');
-          };           
+          };   
+          if (res.data.ReturnCode == 820) {
+            app.showToastC('支付时间已过');
+          };    
           // 判断非200和登录
           Dec.comiftrsign(_this, res, app); 
         };               

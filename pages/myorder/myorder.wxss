@@ -17,6 +17,15 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp:2; 
 }
+.multilineellipsis4{
+  max-height:130rpx;
+  display: -webkit-box;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp:4; 
+}
 .box{
   width: 100%;
   padding-bottom: 200rpx;

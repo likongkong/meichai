@@ -244,7 +244,8 @@ Page({
       
       //邀请函
       // url: "/page/secondpackge/pages/priorityVoting/priorityVoting"
-      url: "/pages/towAAddB/towAAddB"
+      // url: "/page/secondpackge/pages/duoduomone/duoduomone"
+      // url: "/pages/towAAddB/towAAddB"
       
 
       // url: "/pages/modifythenickname/modifythenickname"

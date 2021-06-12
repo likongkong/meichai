@@ -8,11 +8,12 @@
    <view style="width:100%;">
 
    <view class='disanum_scr_box {{ww.checked?"borderClass":""}}' wx:for='{{zoneA}}' wx:for-item='ww' wx:key='key' data-ind="{{index}}" catchtap='addressmanagementA' data-ch = '{{ww.checked}}' style='width:20%;margin:0 10rpx 20rpx 10rpx;border:8rpx solid #fff;'>
+      <view class='' wx:if='{{inventory==1?ww.stock<=0:ww.stock<5}}' style='width:100%;height:100%;position: absolute;top: 0;right: 0;background: rgba(0,0,0,.5);z-index:10'></view>
       <view class='disanum_simgbox' style='width:100%;padding-top:100%;height:1rpx;'>
          <image class='disanum_simg' mode='aspectFit' src='{{ww.thumb}}' style='border-radius: 10rpx;'></image>
          <!-- <view class='shopselloutOut' wx:if='{{ww.stock<=0}}' style='line-height:32rpx;left:0;'>售罄</view>
          <view class='shopsellout' style='line-height:32rpx;background:#298DF8;'>{{ww.stock}}</view> -->
-         <view class='shopsellout' wx:if='{{ww.stock<=0}}' style='line-height:32rpx;background:#298DF8;'>售罄</view>
+         <view class='shopsellout' wx:if='{{inventory==1?ww.stock<=0:ww.stock<5}}' style='line-height:32rpx;background:#298DF8;'>售罄</view>
 
       </view>
       <view class='disanum_sb_txtone  multilineellipsis' style='color:#666;height:70rpx;'>{{ww.name}}</view>
@@ -33,11 +34,12 @@
 
 
    <view class='disanum_scr_box {{ww.checked?"borderClass":""}}' wx:for='{{zoneB}}' wx:for-item='ww' wx:key='key' data-ind="{{index}}" catchtap='addressmanagementB' data-ch = '{{ww.checked}}' style='width:20%;margin:0 10rpx 20rpx 10rpx;border:8rpx solid #fff;'>
+      <view class='' wx:if='{{inventory==1?ww.stock<=0:ww.stock<5}}' style='width:100%;height:100%;position: absolute;top: 0;right: 0;background: rgba(0,0,0,.5);z-index:10'></view>
       <view class='disanum_simgbox' style='width:100%;padding-top:100%;height:1rpx;'>
          <image class='disanum_simg' mode='aspectFit' src='{{ww.thumb}}' style='border-radius: 10rpx;'></image>
          <!-- <view class='shopselloutOut' wx:if='{{ww.stock<=0}}' style='line-height:32rpx;left:0;'>售罄</view>
          <view class='shopsellout' style='line-height:32rpx;background:#298DF8;'>{{ww.stock}}</view> -->
-         <view class='shopsellout' wx:if='{{ww.stock<=0}}' style='line-height:32rpx;background:#298DF8;'>售罄</view>
+         <view class='shopsellout' wx:if='{{inventory==1?ww.stock<=0:ww.stock<5}}' style='line-height:32rpx;background:#298DF8;'>售罄</view>
       </view>
       <view class='disanum_sb_txtone  multilineellipsis' style='color:#666;height:70rpx;'>{{ww.name}}</view>
       <view class='disanum_sb_txt specialellipsis'>

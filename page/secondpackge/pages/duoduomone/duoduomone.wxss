@@ -29,8 +29,5 @@ page{
   font-size: 36rpx;
   color: #fff;
   border-radius: 10rpx;
-  position: fixed;
-  bottom: 300rpx;
-  left: 50%;
-  margin-left: -25%;
+  margin-top: 100rpx;
 }

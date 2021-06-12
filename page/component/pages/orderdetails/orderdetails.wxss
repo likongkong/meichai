@@ -5,6 +5,15 @@
 page{
   background: #f4f5f9;
 }
+.multilineellipsis4{
+  max-height:130rpx;
+  display: -webkit-box;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp:4; 
+}
 .bgctipref{
   width: 100%;
   height: 100%;

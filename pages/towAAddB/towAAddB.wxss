@@ -43,6 +43,7 @@ page{
   left: 20rpx;
   background:#F8627B;
   border-radius: 70rpx;
+  z-index: 100;
 }
 .goToCheckInUP{
   height: 80rpx;
@@ -56,4 +57,5 @@ page{
   right: 20rpx;
   background:#F8627B;
   border-radius: 70rpx;
+  z-index: 100;
 }

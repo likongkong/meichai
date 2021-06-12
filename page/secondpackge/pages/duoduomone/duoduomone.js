@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '入场核验', 
+    c_title: '', 
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
@@ -18,7 +18,8 @@ Page({
     tgabox:false,
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
-    code:''
+    code:'',
+    inventory:1
   },
 
   
@@ -85,8 +86,8 @@ Page({
         wx.stopPullDownRefresh();
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
-          wx.navigateTo({
-            url: "/pages/myorder/myorder?inventory=" + _this.data.inventory
+          wx.redirectTo({
+            url: "/pages/towAAddB/towAAddB?inventory=" + _this.data.inventory
           });
         }else{
           wx.showToast({
@@ -120,7 +121,7 @@ Page({
       console.log('inventory========111',_this.getCaption(scene))
     } else {
       console.log('inventory========222',options.inventory)
-      _this.data.inventory = options.inventory || 0;
+      _this.data.inventory = options.inventory || 1;
     };
     _this.activsign();
     wx.hideShareMenu();

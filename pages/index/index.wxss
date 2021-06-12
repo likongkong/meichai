@@ -119,7 +119,7 @@
   background: #a8a8a8;
   font-size: 24rpx;
   border-radius: 6rpx;
-  z-index: 3;
+  z-index: 13;
   padding:5rpx 8rpx;
   
 }

@@ -38,7 +38,7 @@ Page({
    */
 
   onLoad: function (options) {
-
+    console.log('inventory====',options.inventory)
     wx.hideShareMenu()
     var dateTime = new Date();
     var day = dateTime.getDate();
@@ -52,7 +52,8 @@ Page({
       var txtColor = '#F8627B';
     };
     this.setData({
-      txtColor:txtColor
+      txtColor:txtColor,
+      inventory:options.inventory || 1
     })
     console.log(day,txtColor)
 
@@ -548,6 +549,11 @@ deladdress: function (event){
       })
     }
   },
+  receivingaddressfun(){
+    this.setData({
+      receivingaddress: false,
+    })    
+  },
   // 二级背景函数
   tipbacktwo:function(){
     if(this.data.specialGoods==1){
@@ -615,7 +621,7 @@ deladdress: function (event){
         console.log('提交订单====',res)
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
-          wx.navigateTo({    
+          wx.redirectTo({    
             url: "/page/component/pages/orderdetails/orderdetails?oid="+res.data.Info.orderId
           })
         }else{
