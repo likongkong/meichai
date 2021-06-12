@@ -1,0 +1,148 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}' is_share='{{is_share}}'></t_f> 
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+
+<view class="is_vip_box" style="{{is_vip == 1?'background:#F1D63F;':''}}{{is_vip == 2?'background:#fff;':''}}">
+
+   <view class="is_ab_tit">A</view>
+   <view style="width:100%;">
+
+   <view class='disanum_scr_box {{ww.checked?"borderClass":""}}' wx:for='{{zoneA}}' wx:for-item='ww' wx:key='key' data-ind="{{index}}" catchtap='addressmanagementA' data-ch = '{{ww.checked}}' style='width:20%;margin:0 10rpx 20rpx 10rpx;border:8rpx solid #fff;'>
+      <view class='disanum_simgbox' style='width:100%;padding-top:100%;height:1rpx;'>
+         <image class='disanum_simg' mode='aspectFit' src='{{ww.thumb}}' style='border-radius: 10rpx;'></image>
+         <!-- <view class='shopselloutOut' wx:if='{{ww.stock<=0}}' style='line-height:32rpx;left:0;'>售罄</view>
+         <view class='shopsellout' style='line-height:32rpx;background:#298DF8;'>{{ww.stock}}</view> -->
+         <view class='shopsellout' wx:if='{{ww.stock<=0}}' style='line-height:32rpx;background:#298DF8;'>售罄</view>
+
+      </view>
+      <view class='disanum_sb_txtone  multilineellipsis' style='color:#666;height:70rpx;'>{{ww.name}}</view>
+      <view class='disanum_sb_txt specialellipsis'>
+         {{ww.displayPrice}}
+      </view>
+   </view>
+
+
+   
+   </view>
+
+
+
+   <view class="is_ab_tit">B</view>
+    
+   <view style="width:100%;">
+
+
+   <view class='disanum_scr_box {{ww.checked?"borderClass":""}}' wx:for='{{zoneB}}' wx:for-item='ww' wx:key='key' data-ind="{{index}}" catchtap='addressmanagementB' data-ch = '{{ww.checked}}' style='width:20%;margin:0 10rpx 20rpx 10rpx;border:8rpx solid #fff;'>
+      <view class='disanum_simgbox' style='width:100%;padding-top:100%;height:1rpx;'>
+         <image class='disanum_simg' mode='aspectFit' src='{{ww.thumb}}' style='border-radius: 10rpx;'></image>
+         <!-- <view class='shopselloutOut' wx:if='{{ww.stock<=0}}' style='line-height:32rpx;left:0;'>售罄</view>
+         <view class='shopsellout' style='line-height:32rpx;background:#298DF8;'>{{ww.stock}}</view> -->
+         <view class='shopsellout' wx:if='{{ww.stock<=0}}' style='line-height:32rpx;background:#298DF8;'>售罄</view>
+      </view>
+      <view class='disanum_sb_txtone  multilineellipsis' style='color:#666;height:70rpx;'>{{ww.name}}</view>
+      <view class='disanum_sb_txt specialellipsis'>
+         {{ww.displayPrice}}
+      </view>
+   </view>
+
+
+
+
+   </view>
+
+
+</view>
+
+
+<view class="goToCheckIn" catchtap="listdata">刷新</view>
+
+<view class="goToCheckInUP" wx:if='{{is_upup}}' catchtap="dsbbbutclickt">提交</view>
+<view class="goToCheckInUP" wx:else style="background:#ccc;">提交</view>
+
+<!-- <bnavigation isChar='{{false}}' isProduce='{{isProduce}}'></bnavigation> -->
+
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>
+
+<!--  背景颜色  -->
+<view class='tipback' wx:if='{{tipback}}' catchtouchmove="preventD"></view>
+<!--  二级背景  -->
+<view class='tipbacktwo' wx:if='{{tipbacktwo}}' catchtouchmove="preventD" bindtap='tipbacktwo' style='opacity:0;'></view>
+<!--  立即购买弹框  -->
+
+<view class='buybombsimmediately' wx:if='{{buybombsimmediately}}'>
+  <view class='bbsheadcon'>
+    <view class='bbshccom' style='position: relative;'>
+      <view class='bbshccomleft'>数量</view>
+      <image class='bbshccomimg' src='../images/icon_in.png'></image>
+      <view class='bbshccomright'>{{arrId.length}}</view>
+    </view>
+    <view class='bbshccom' bindtap='seladdressfun' style='position: relative;'>
+      <view class='bbshccomleft'>收货地址</view>
+      <image class='bbshccomimg' src='../images/icon_in.png'></image>
+      <view class='bbshccomright '>
+        <view style="width:100%;line-height:57rpx;text-align:right;" class="specialellipsis">{{tipnamephone}}</view>
+        <view style="width:100%;line-height:57rpx;text-align:right;" class="specialellipsis">{{tipaddress}}</view>
+      </view>
+    </view>
+    <view class='bbshccombot'>
+      <view class='bbshcombotleft'>应付金额</view>
+      <view class='bbshcombotright'>
+        <view class='bbshcombotpr'>￥{{commonPrice}}</view>
+        </view>
+    </view>
+
+    <!-- <view class='bbshccom'>
+      <view class='bbshccomleft'>{{isShareGood?'买家留言':'品牌信息'}}</view>
+      <input wx:if='{{isShareGood}}' class='buyermessage' type='text' bindinput="inputChange" value='{{desc}}' placeholder="选填备注,或添加微信好友({{defaultinformation.cs.wxid}})"></input>
+      <input wx:else class='buyermessage' type='text' bindinput="inputChange" value='{{desc}}' placeholder="请填写品牌信息及联系方式"></input>
+    </view> -->
+  </view>
+  <view class='bbshbottom'>
+    <view class='bbshbottomhead'>
+    </view>
+    <view class='bbshbottombut' bindtap='qandanswerquestions' style='position: relative;'>提交订单
+    </view>
+  </view>
+
+</view>
+
+<!--  收货地址  -->
+<view class='receivingaddress' wx:if='{{receivingaddress}}'>
+  <view class='recgadhead'>
+    收货地址
+    <image src='../images/forknumber.png' class='recgadheadimg' bindtap='receivingaddressfun'></image>
+  </view>
+  <view class='recgadcon'>
+    <view class='recgaddata' wx:for='{{addressdata}}' wx:key='key'>
+      <view class='recgaddname' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='revisethereceivingaddress'>
+        <view class='recgaddnameleft'>{{item.consignee}}</view>
+        <view class='recgaddnameleft'>{{item.phone}}</view>
+      </view>
+      <view class='recgadaddress' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='revisethereceivingaddress'>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
+      <view class='recgadbottom'>
+        <!-- <view class='recgadbotleft'>
+          <image class='recgadbotleftimg' hidden='{{!item.checked}}' src='../images/pressed_click.png'></image>
+          <image class='recgadbotleftimg' hidden='{{item.checked}}' src='../images/normal_click.png'></image>
+          默认地址
+        </view> -->
+        <view class='recgadbotright' bindtap='deladdress' data-ind="{{item.aid}}">
+          <image src='../images/icon_delete.png' class='recgadbotleftimg'></image>
+          删除
+        </view>
+        <view class='recgadbotright' style='margin-right:50rpx;' bindtap='jumpeditaddress' data-address='{{item.address}}' data-aid='{{item.aid}}' data-city='{{item.city}}' data-consignee='{{item.consignee}}' data-district='{{item.district}}' data-phone='{{item.phone}}'
+          data-province='{{item.province}}' data-idcard='{{item.idcard}}'>
+          <image src='../images/icon_edit.png' class='recgadbotleftimg'></image>
+          编辑
+        </view>
+      </view>
+    </view>
+    <view class='recgadnodata' wx:if='{{addressdata.length==0}}'>
+      <image src='../images/recaddnodata.png' class='recgadnodataimg'></image>
+    </view>
+  </view>
+  <view class='recgadbot' bindtap='jumpaddress'>
+    增加新地址
+  </view>
+</view>
