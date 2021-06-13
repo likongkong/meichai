@@ -143,6 +143,7 @@
         "pages/onlineFukubukuro/onlineFukubukuro",
         "pages/ordinaryTicket/ordinaryTicket",
         "pages/duoduomone/duoduomone",
+        "pages/chaKanuid/chaKanuid",
         "pages/payee/payee"
       ]
     }
