@@ -198,12 +198,41 @@ Page({
 
   },
   dsbbbutclickt(){
-    this.setData({
-      tipback: true,
-      tipbacktwo: true,
-      buybombsimmediately: true
-    });
-    
+    var _this = this;
+    var zone = [...this.data.zoneA,...this.data.zoneB];
+    var zone1=[];
+    for(var i =0;i<this.data.arrId.length;i++){
+        for(var j =0;j<zone.length;j++){
+          if(this.data.arrId[i] == zone[j].id){
+            zone1.push(zone[j].zone)
+          }
+        }
+    }
+    if(zone1.indexOf('B') != 0){
+      console.log('没有选B');
+      wx.showModal({
+        title: '提示',
+        content: '您没有选B区商品，是否确认下单',
+        success (res) {
+          if (res.confirm) {
+            _this.setData({
+              tipback: true,
+              tipbacktwo: true,
+              buybombsimmediately: true
+            });
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+    }else{
+      this.setData({
+        tipback: true,
+        tipbacktwo: true,
+        buybombsimmediately: true
+      });
+    }
+   
   },
   // 下一页返回调取
   nextpagediao:function(){
