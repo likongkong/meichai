@@ -21,7 +21,14 @@
 			   <text class='timetextstyle'>当前{{infoActivity.truth_users}}人参与,满{{infoActivity.limit_users}}人开奖</text>
 			</block>
 		  <block wx:elif="{{newdataexh}}"><text class='timetextstyle'>暂未开启</text><view style="height:40rpx;width:100rpx;background:#f08080;color:#fff;text-align:center;line-height:40rpx;position:absolute;top:0;bottom:0;right:20rpx; margin:auto 0;font-size:22rpx;border-radius: 10rpx;" wx:if='{{infoActivity.goodsLimit}}'>{{infoActivity.goodsLimit}}</view></block>
-			<block wx:elif='{{infoActivity.isLiveShow && infoActivity.status==1}}'><text class='timetextstyle'>{{infoActivity.isLiveShow_time}} 直播开启</text></block>
+			<block wx:elif='{{infoActivity.isLiveShow && infoActivity.status==1}}'>
+				<block wx:if="{{infoActivity.specialDisplay}}">
+					<text class='timetextstyle'>{{infoActivity.specialDisplay}}</text>
+				</block>
+				<block wx:else>
+					<text class='timetextstyle'>{{infoActivity.isLiveShow_time}} 直播开启</text>
+				</block>
+			</block>
 			<block wx:else>
 					<text wx:if='{{infoActivity.status==2}}' class='timetextstyle' style='margin-right:10rpx;'>抽签倒计时</text>
 					<text wx:if='{{infoActivity.status==1}}' class='timetextstyle'>即将开始</text>
@@ -125,8 +132,18 @@
 				<view style='color:#53a5fd;font-size:22rpx;padding:3rpx 0 0 0;text-align:center;'>抽选卡</view>
 				<view class="tabshopimg specialellipsis" style="top:-12rpx;left:70rpx;">{{infoActivity.toyShowChance}}</view>
 			</view>	
-			<view class='takepartin' catchtap='subscrfun' style="{{!is_share_but?'margin:20rpx auto 20rpx auto;':'margin:20rpx 0 20rpx 300rpx;'}}background:#eeae19;box-shadow: 2px 2px 5rpx #ccc;"><block wx:if='{{infoActivity.isLiveShow && infoActivity.status==1}}'>{{infoActivity.isLiveShow_time}} 直播开启</block> 订阅提醒</view>
-
+			<view class='takepartin' catchtap='subscrfun' style="{{!is_share_but?'margin:20rpx auto 20rpx auto;':'margin:20rpx 0 20rpx 300rpx;'}}background:#eeae19;box-shadow: 2px 2px 5rpx #ccc;">
+		
+			<block wx:if='{{infoActivity.isLiveShow && infoActivity.status==1}}'>
+				<block wx:if="{{infoActivity.specialDisplay}}">
+					{{infoActivity.specialDisplay}}
+				</block> 
+				<block wx:else>
+					{{infoActivity.isLiveShow_time}} 直播开启
+				</block> 
+				</block> 
+				订阅提醒
+			</view>
 		</block>
 
 

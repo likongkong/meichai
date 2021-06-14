@@ -31,7 +31,14 @@
           </block>
           <view class='limievetxttime specialellipsis' wx:if='{{item.status==1}}'>
              <block wx:if='{{item.is_limit==1}}'>满{{item.limit_users}}人开奖</block>
-             <block wx:else>{{item.start_time}} <block wx:if='{{item.isLiveShow}}'>直播</block>开启</block>          
+             <block wx:else>
+              <block wx:if="{{item.specialDisplay}}"> 
+              {{item.specialDisplay}}
+              </block>
+              <block wx:else>
+                {{item.start_time}} <block wx:if='{{item.isLiveShow}}'>直播</block>开启
+              </block>
+             </block>          
           </view>
           <view class='limievetxttime specialellipsis' wx:if='{{item.status==2}}'>
              <block wx:if='{{item.is_limit==1}}'>满{{item.limit_users}}人开奖</block>
@@ -62,7 +69,14 @@
           </block>
           <view class='limievetxttime specialellipsis' wx:if='{{item.status==1}}'>
              <block wx:if='{{item.is_limit==1}}'>满{{item.limit_users}}人开奖</block>
-             <block wx:else>{{item.start_time}} <block wx:if='{{item.isLiveShow}}'>直播</block>开启</block>
+             <block wx:else>
+              <block wx:if="{{item.specialDisplay}}"> 
+              {{item.specialDisplay}}
+              </block>
+              <block wx:else>
+                {{item.start_time}} <block wx:if='{{item.isLiveShow}}'>直播</block>开启
+              </block>
+             </block>
           </view>
           <view class='limievetxttime specialellipsis' wx:if='{{item.status==2}}'>
              <block wx:if='{{item.is_limit==1}}'>满{{item.limit_users}}人开奖</block>
