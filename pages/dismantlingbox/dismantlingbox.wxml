@@ -19,7 +19,7 @@
    
 
     <!-- 票务信息 -->
-    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e1' wx:if='{{!is_formaldress}}'>————— 票务信息 —————</view>
+    <!-- <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e1' wx:if='{{!is_formaldress}}'>————— 票务信息 —————</view> -->
     <view class="ticketWrap">
 
       <view class="addGoods" style="margin-bottom:20rpx;padding:0 0 25rpx 0;" wx:if='{{false}}'>
