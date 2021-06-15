@@ -305,10 +305,8 @@
             <view class="mscModelEve" catchtap="mpmBullFrame">{{detailSpecModel[modelSelInde].name}}<image src="https://cdn.51chaidan.com/images/sign/activity/dropDown.png" mode='aspectFit' class="mscModelEveDown"></image></view>
         </picker>  -->
         <view class="mscModelBox">
-
-          <view class="mscModelBoxOne {{modelSelInde==index?'addColorClass':''}}" wx:for='{{detailSpecModel}}' catchtap="bindPickerChange" data-ind='{{index}}' wx:key='key'>{{item.name}}</view>
-
-
+          <!-- {{item.realStock<5?'background:#F0E2BB;':''}}  style="color:#1684FC;" -->
+          <view class="mscModelBoxOne {{modelSelInde==index?'addColorClass':''}}" style="{{modelSelInde==index&&item.realStock<5?'color:#1684FC !important;background:#D8EBFF !important;':''}}" wx:for='{{detailSpecModel}}' catchtap="bindPickerChange" data-ind='{{index}}' wx:key='key'>{{item.name}}<block wx:if='{{item.realStock<5}}'><text>(预售)</text></block><block wx:else>(现货)</block> </view>
 
             <!-- <view class="mscModelBoxeve {{modelSelInde==index?'ColorClass':''}}" wx:for='{{detailSpecModel}}' catchtap="bindPickerChange" data-ind='{{index}}' wx:key='key'>
                 <image src="{{item.roleImg}}" mode='aspectFit' class="modModeImg" alt=""></image>
@@ -1244,7 +1242,7 @@
       <block wx:else>
 
           <block wx:if='{{specialGoods == 1}}'>
-              <view style='height:50rpx;line-height:50rpx;font-size:30rpx;color:#999;width:100%;' class='specialellipsis'>已选择：<text style='display: inline-block;'>{{detailSpecModel[modelSelInde].name}}-{{detailSpecColor[detailColorIndex].name}}</text>
+              <view style='height:50rpx;line-height:50rpx;font-size:22rpx;color:#999;width:100%;' class='specialellipsis'>已选择：<text style='display: inline-block;'>{{detailSpecModel[modelSelInde].name}}-{{detailSpecColor[detailColorIndex].name}}</text>
               </view>         
           </block>
 

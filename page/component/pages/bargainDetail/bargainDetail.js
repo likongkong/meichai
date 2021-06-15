@@ -322,6 +322,8 @@ Page({
       return false;
     } else {};
 
+    
+
     wx.showLoading({
       title: '加载中...',
     })

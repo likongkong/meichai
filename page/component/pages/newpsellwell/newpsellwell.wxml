@@ -27,7 +27,10 @@
                             <view class="mpsNameeve" style="color:#fff;background:#1684FC;">定金</view>
                             <view class="mpsNameeve" wx:if='{{item.goods_type==3}}' style="color:#101010;background:#F4F4F4;margin-left:20rpx;">预售</view>
                         </view>
-                        <view class="mpsName" style="color:#FF2742;">￥{{item.promote_price}}</view>
+                        <view class="mpsName" style="color:#FF2742;">
+                            <block wx:if='{{item.goods_type==3}}'>￥{{item.promote_price}}</block>
+                            <block wx:else>￥{{item.gsale}}</block>
+                        </view>
                     </view>
                 </block>
             </view>

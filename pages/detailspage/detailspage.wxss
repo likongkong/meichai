@@ -692,7 +692,7 @@
   background: #F1F1F1;
 }
 .mscModelBoxOne.addColorClass{
-  background: #FBECE9;
-  color: #BD5944;
+  background: #FBECE9 !important;
+  color: #BD5944 !important;
 }
 

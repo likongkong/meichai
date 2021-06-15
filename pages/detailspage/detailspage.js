@@ -2465,10 +2465,10 @@ Page({
     var res = this.data.zunmdata;
     var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
     var iftrnum = true;
-    if(_this.data.specialGoods == 1){
-      _this.dsbbbutclickt()
-      return false;
-    };
+    // if(_this.data.specialGoods == 1){
+    //   _this.dsbbbutclickt()
+    //   return false;
+    // };
     if(_this.data.specialGoods == 1){
       var stock = _this.data.selectShell.stock || 0;
       _this.setData({
@@ -3254,6 +3254,7 @@ Page({
                       res.data.Ginfo.isDepositSubscribe = false;
                       res.data.Ginfo.isDisplayDeposit = true;
                     };
+                    console.log(1,detailSpecColor,detailColorIndex,detailSpecColor[detailColorIndex].listImg)
                     _this.setData({
                       movies: detailSpecColor[detailColorIndex].listImg || res.data.Ginfo.gimages || [],
                       goodsIndex:0

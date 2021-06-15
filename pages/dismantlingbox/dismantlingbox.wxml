@@ -613,7 +613,7 @@
 
 
 
-<image style="position:fixed;bottom:440rpx;right:15rpx;width:100rpx;height:100rpx;z-index:6;" src="https://cdn.51chaidan.com/images/sign/jihuo.png" mode="aspectFit" catchtap="jumpbindTicket"></image>
+<!-- <image style="position:fixed;bottom:440rpx;right:15rpx;width:100rpx;height:100rpx;z-index:6;" src="https://cdn.51chaidan.com/images/sign/jihuo.png" mode="aspectFit" catchtap="jumpbindTicket"></image> -->
 
 
 
