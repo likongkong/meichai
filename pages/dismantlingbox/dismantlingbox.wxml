@@ -141,7 +141,7 @@
 
     <!-- 线上潮玩展 -->
 
-    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e2'>————— 线上展会 —————</view>
+    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e2' wx:if='{{liveListData&&liveListData.length!=0}}'>————— 线上展会 —————</view>
     <view class="ssubLiveBroadcast" wx:for="{{liveListData}}" wx:key="key" style="position: relative;">
         <navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{item.room_id}}" style='position: absolute;height:100%;width:500rpx;left:0;top:0;z-index:3;'></navigator>
         <view class="ssubLiveBroad">
@@ -580,13 +580,13 @@
 
 
 <!-- 底部购票图片 -->
-<view class="BottomBuyTickets" catchtap="jumpposition" data-tid='3' data-subscribe_data="{{subscribeJson[0].toyshowStart}}">
+<!-- <view class="BottomBuyTickets" catchtap="jumpposition" data-tid='3' data-subscribe_data="{{subscribeJson[0].toyshowStart}}">
   <image src="https://cdn.51chaidan.com/images/calendar/getTicket.png" mode="widthFix"></image>
-  <!-- <text>已有{{countSubsribe}}人想去</text> -->
-</view>
+  <text>已有{{countSubsribe}}人想去</text>
+</view> -->
 
 <!-- 底部导航条 -->
-<view class="shunButBar">
+<!-- <view class="shunButBar">
    <view class="shunButBarEve" wx:for='{{shunButBarData}}' wx:key='key' catchtap="position" data-tid='{{item.tid}}' style="{{index+1==shunButBarData.length?'border-right:0;':''}}">
      <view style="position: relative;" data-ind="{{item.tid}}" catchtap="{{item.tid == 3?'plus':''}}">
       <text>{{item.name}}</text>
@@ -595,7 +595,7 @@
       </view>
      </view>
    </view>
-</view>
+</view> -->
 
 <bnavigation isChar='{{false}}' bind:run='auditversion' fashionShow='{{true}}' isProduce='{{isProduce}}'></bnavigation>
 
