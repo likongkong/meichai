@@ -229,9 +229,9 @@ Page({
         if (res.cancel) {
           wx.showLoading({ title: '加载中...', mask:true })
 
-          var q = Dec.Aese('mod=bind&operation=addTicketsUserInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&add_type=' + _this.data.is_vip + '&consignee='+ _this.data.name + '&idcard=' + _this.data.idnumber + '&mobile=' + _this.data.tel + '&vipNumber=' + _this.data.orderNumber)
+          var q = Dec.Aese('mod=bind&operation=addTicketsUserInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&add_type=' + _this.data.is_vip + '&consignee='+ _this.data.name + '&idcard=' + _this.data.idnumber + '&mobile=' + _this.data.tel + '&vipNumber=' + _this.data.orderNumber + '&new=1')
       
-          console.log('mod=bind&operation=addTicketsUserInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&add_type=' + _this.data.is_vip + '&consignee='+ _this.data.name + '&idcard=' + _this.data.idnumber + '&mobile=' + _this.data.tel + '&vipNumber=' + _this.data.orderNumber)
+          console.log('mod=bind&operation=addTicketsUserInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&add_type=' + _this.data.is_vip + '&consignee='+ _this.data.name + '&idcard=' + _this.data.idnumber + '&mobile=' + _this.data.tel + '&vipNumber=' + _this.data.orderNumber + '&new=1')
       
           wx.request({
             url: app.signindata.comurl + 'toy.php'+q,
@@ -349,7 +349,7 @@ Page({
     var _this = this;
     return {
       title:  'MCTS 展会信息核验',
-      path: '/pages/vipOrTicket/vipOrTicket?isv=' + _this.data.is_vip,
+      path: '/pages/vipOrTicketNew/vipOrTicketNew?isv=' + _this.data.is_vip,
       imageUrl: 'https://www.51chaidan.com/images/shareImg/ddm_heyan.jpg',
       success: function (res) {}
     }   

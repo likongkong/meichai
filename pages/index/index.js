@@ -234,7 +234,8 @@ Page({
       // url: "/page/secondpackge/pages/shopsquaretrip/shopsquaretrip"
       // url: "/pages/storehomepage/storehomepage"
 
-      url: "/pages/vipOrTicket/vipOrTicket?isv=1"
+      // url: "/pages/vipOrTicket/vipOrTicket?isv=1"
+      url: "/pages/vipOrTicketNew/vipOrTicketNew?isv=1"
 
       // url: "/page/component/pages/limitlottery/limitlottery?id=35405",
 
