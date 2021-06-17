@@ -110,7 +110,8 @@ Page({
     screenshottipsiftr: false,
     tgaimg: app.signindata.tgaimg || 'https://www.51chaidan.com/images/default/openscreen.jpg',
     pictboxbox: false,
-    subscribedata:''
+    subscribedata:'',
+    vipOrOrderTip:false
   },
   pictboxboxfun: function () {
     this.setData({ pictboxbox: false });
@@ -585,6 +586,11 @@ Page({
         canChangedAddress:arr[j][0].canChangedAddress,
         status_detail:arr[j][0].status_detail || 0,
         isToyShowTicket:arr[j][0].isToyShowTicket || false,
+        needVerifyTicket:arr[j][0].needVerifyTicket || '',
+        ticketType:arr[j][0].ticketType || '',
+        ticketIdentify:arr[j][0].ticketIdentify || '',
+        keyDay:arr[j][0].keyDay || '0',
+        isReceive:arr[j][0].isReceive || false,
       })
     };   
     if (arrchil && arrchil.length != 0){
@@ -1063,8 +1069,71 @@ Page({
       }
     })
   },  
+  // 不检验
+  vipOrOrdercancel(){
+    this.setData({
+      vipOrOrderTip:false
+    })
+  },
+  // 检验
+  vipOrOrdermine1(){
+     var _this = this;
+     wx.showLoading({ title: '加载中...', mask:true })
+  
+     var q = Dec.Aese('mod=bind&operation=verifyTicket&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&ticketType=' + _this.data.ticketType + '&ticketIdentify='+ _this.data.ticketIdentify + '&keyDay=' + (_this.data.keyDay || ''))
+ 
+     console.log('mod=bind&operation=verifyTicket&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&ticketType=' + _this.data.ticketType + '&ticketIdentify='+ _this.data.ticketIdentify + '&keyDay=' + (_this.data.keyDay || ''))
+ 
+     wx.request({
+       url: app.signindata.comurl + 'toy.php'+q,
+       method: 'GET',
+       header: { 'Accept': 'application/json' },
+       success: function (res) {
+         console.log('票务信息统计===',res)
+         // 刷新完自带加载样式回去
+         wx.stopPullDownRefresh();
+         wx.hideLoading()
+         if (res.data.ReturnCode == 200){
+             if(_this.data.isReceive){
+               if(_this.data.ticketType == "vip" ){
+                 wx.navigateTo({ 
+                   url: "/pages/collectGiftBag/collectGiftBag?isv=1&oid="+_this.data.oid
+                 });
+               }else{
+                 wx.navigateTo({ 
+                   url: "/pages/collectGiftBag/collectGiftBag?isv=2&oid="+_this.data.oid
+                 });
+               };
+               _this.setData({
+                 vipOrOrderTip:false
+               })
+
+             }else{
+              _this.setData({
+                suboformola: true,
+                vipOrOrderTip:false
+              })
+
+               // 直接支付
+               _this.paymentmony(); 
+             };
+         }else{
+             wx.showModal({
+               title: '提示',
+               content: res.data.Msg || res.data.msg,
+               showCancel: false,
+               success: function (res) {}
+             })          
+         };
+ 
+       }
+     }); 
+
+
+  },
   // 付款
   payment: function (event) {
+    var _this = this;
     var oid = event.currentTarget.dataset.oid || event.target.dataset.oid;
     var amount = event.currentTarget.dataset.amount || event.target.dataset.amount;
     var cart_id = event.currentTarget.dataset.cart_id || event.target.dataset.cart_id;
@@ -1082,18 +1151,86 @@ Page({
     }else{
       var title = '￥' + goods_price + "  " + pre_name + "  " + ds + "  " + gname;
     };
-    this.setData({
-       oid: oid,
-       gid: gid,
-       title: title,
-       amount: amount,
-       cart_id:cart_id,
-       paycheadwsongimgling: gcover,
-       suboformola: true
-     })
-    this.data.shareimg = gcover;
-    // 直接支付
-    this.paymentmony();   
+
+    var needVerifyTicket = event.currentTarget.dataset.needverifyticket || event.target.dataset.needverifyticket || '';
+    var ticketType = event.currentTarget.dataset.tickettype || event.target.dataset.tickettype || '';
+    var ticketIdentify = event.currentTarget.dataset.ticketidentify || event.target.dataset.ticketidentify || '';
+    var keyDay = event.currentTarget.dataset.keyday || event.target.dataset.keyday || '';
+    var isReceive = event.currentTarget.dataset.isreceive || event.target.dataset.isreceive || false;
+
+
+    _this.data.shareimg = gcover;
+
+    if(needVerifyTicket){
+
+      if(isReceive){
+      // <text style="color:#FF0000;"></text>
+        var txttxt = ticketType == "vip" ? 1 :2;
+      }else{
+        var txttxt = 3;
+      }
+      
+
+      _this.setData({
+          oid: oid,
+          gid: gid,
+          title: title,
+          amount: amount,
+          cart_id:cart_id,
+          paycheadwsongimgling: gcover,
+          vipOrOrder:txttxt,
+          vipOrOrderTip:true,
+          needVerifyTicket : needVerifyTicket,
+          ticketType : ticketType,
+          ticketIdentify : ticketIdentify,
+          keyDay : keyDay,
+          isReceive : isReceive,
+          
+      })
+
+      // wx.showModal({
+      //   content:txttxt,
+      //   cancelText: '核验',
+      //   confirmText: '不核验',
+      //   confirmColor:'#000',
+      //   cancelColor: '#000',
+      //   success (res) {
+      //     if (res.cancel) {
+                        
+      //      } else if (res.confirm) {
+             
+      //      }
+      //    }
+      // })
+    }else{
+      if(isReceive){
+        if(ticketType == "vip" ){
+          wx.navigateTo({ 
+            url: "/pages/collectGiftBag/collectGiftBag?isv=1&oid="+oid 
+          });
+        }else{
+          wx.navigateTo({ 
+            url: "/pages/collectGiftBag/collectGiftBag?isv=2&oid="+oid
+          });
+        };        
+      }else{
+        this.setData({
+          oid: oid,
+          gid: gid,
+          title: title,
+          amount: amount,
+          cart_id:cart_id,
+          paycheadwsongimgling: gcover,
+          suboformola: true
+        })
+        this.data.shareimg = gcover;
+        // 直接支付
+        this.paymentmony();
+      };
+
+    };
+
+  
   },
   // 微信支付
   paymentmony: function () {
@@ -1131,7 +1268,8 @@ Page({
                 paymentiftr: false,
                 paymentcompletionwiftr: true,
                 payiftr: true,
-                suboformola: false
+                suboformola: false,
+                vipOrOrderTip:false
               });
               // 跳转红包页面
               // wx.navigateTo({
@@ -1155,7 +1293,10 @@ Page({
                 paymentcompletionwiftr: false,
                 payiftr: false,
                 suboformola: false
-              });              
+              }); 
+              // 调取数据
+              _this.datatransfer();
+              
             },
             'complete': function (res) {}
           })

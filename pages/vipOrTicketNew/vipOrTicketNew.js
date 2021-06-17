@@ -62,7 +62,7 @@ Page({
         var c_title = (_this.getSearchString('isv', scene) || 2) == 1 ? 'VIP票信息核实' : '普通票信息核实';
         var inputtxt5 = (_this.getSearchString('isv', scene) || 2) == 1 ? 'VIP序号' : '订单号';
         this.setData({
-          is_vip:options.isv || 2,
+          is_vip:_this.getSearchString('isv', scene) || 2,
           c_title:c_title,
           inputtxt5:inputtxt5
         });

@@ -44,7 +44,10 @@
                                         <block wx:if='{{item.status==0&&(item.isBalances==1||item.isBalances==2)}}'>已付定金</block>
                                         <block  wx:elif='{{item.status==8&&item.isBalances==3}}'>奖品过期已取消</block>  
                                      </block>
-                                     <block wx:else>未付款</block>
+                                     <block wx:else>
+                                        <block wx:if='{{item.isReceive}}'>我要领取</block>
+                                        <block wx:else>未付款</block>
+                                     </block>
                                 </view>
                                 <view class='wholeconnumrr' style='color:#259B24;' wx:if='{{item.status==0 && item.order_type==7}}'>
                                     结束时间:{{item.surtime}}
@@ -516,7 +519,14 @@
 
                         <!-- <view class='dfkdjrighg' data-oid='{{item.cart_id}}' bindtap='cancellationoforder' style='position:relative;'>取消订单</view> -->
 
-                        <view class='dfkdjrighg' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;' bindtap='payment' data-amount='{{item.amount}}' data-oid='{{item.oid}}' data-cart_id='{{item.cart_id}}' data-gcover='{{item.gcover}}' data-gid='{{item.gid}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}'  data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-order_type='{{item.order_type}}'>我要付款</view>
+                        <view class='dfkdjrighg' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;' bindtap='payment' data-amount='{{item.amount}}' data-oid='{{item.oid}}' data-cart_id='{{item.cart_id}}' data-gcover='{{item.gcover}}' data-gid='{{item.gid}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}'  data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-order_type='{{item.order_type}}' data-needverifyticket='{{item.needVerifyTicket}}' data-tickettype='{{item.ticketType}}' data-ticketidentify='{{item.ticketIdentify}}' data-isreceive='{{item.isReceive}}' data-keyday='{{item.keyDay}}'>
+                            <block wx:if='{{item.needVerifyTicket}}'>
+                                <block wx:if='{{item.isReceive}}'>核销领取</block>
+                                <block wx:else>核验支付</block>
+                            </block>
+                            <block wx:elif='{{item.isReceive}}'>我要领取</block>
+                            <block wx:else>我要付款</block>
+                        </view>
         
                     </view>
 
@@ -1192,6 +1202,24 @@
         <view class='addmodbottom'>
             <view style='width:50%;text-align:center;height:50rpx;float:left;color:#258bfa;font-size:26rpx;position:relative;' catchtap='addmodcancel'>取消</view>
             <view style='width:50%;text-align:center;height:50rpx;float:right;color:#258bfa;font-size:26rpx;position:relative;' catchtap='addmoddetermine1'>确定</view>
+        </view>
+    </view>
+</view>
+
+<!-- 核销提示框 -->
+<view class='awatip' wx:if='{{vipOrOrderTip}}' style='z-index:999;'>
+    <view class='awabg' catchtap="vipOrOrdercancel"></view>
+    <view class='addmodbox' style="height:380rpx;">
+        <view style="width:100%;height:230rpx;padding-top:40rpx;overflow:scroll;">
+            <text style="color:#000;display:block;font-size:26rpx;">
+                <block wx:if='{{vipOrOrder==1}}'>检测到您的VIP门票未核销，核销之后才可以领取vip礼包！\n<text style="color:#FF0000;">（1.核销之后，无法进行退票处理\n2.想要退票的用户不要点击“核销”按钮，退款金额将会在7个工作日内自动原路返回，退票的用户无法获取任何补偿商品。）</text></block>
+                <block wx:elif='{{vipOrOrder==2}}'>检测到您的普通门票未核销，核销之后才可以领取补偿商品！\n<text style="color:#FF0000;">（1.核销之后，无法进行退票处理\n2.想要退票的用户不要点击“核销”按钮，退款金额将会在7个工作日内自动原路返回，退票的用户无法获取任何补偿商品。）</text></block>
+                <block wx:else>检测到您的VIP门票未核销，核销之后才可以享受购买权<text style="color:#FF0000;">（1.核销之后，无法进行退票处理，请知晓。2.想要退票用户不要点击“核销”按钮，退款金额将会在线上直播结束三个工作日内自动原路返回，退票的用户无法参加任何补偿活动，请知晓。）</text></block>
+            </text>
+        </view>
+        <view class='addmodbottom'>
+            <view style='width:50%;text-align:center;height:50rpx;float:left;font-size:30rpx;position:relative;' catchtap='vipOrOrdermine1'>核验</view>
+            <view style='width:50%;text-align:center;height:50rpx;float:right;font-size:30rpx;position:relative;' catchtap='vipOrOrdercancel'>不核验</view>
         </view>
     </view>
 </view>

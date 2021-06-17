@@ -1,0 +1,105 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}' is_share='{{is_share}}'></t_f> 
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+
+<view class="is_vip_box">
+    <!-- <view class="is_vip_h" style="height:30rpx;background:#fff;"></view> -->
+    <!-- vip 用户 礼包 -->
+    <block wx:if='{{is_vip == 1}}'>
+        <view class="viptxtshopname">礼包包含商品（共四件）</view>
+        <view class="imgbox">
+           <image class="imgsize" mode='widthFix' src="https://cdn.51chaidan.com/images/toyShow3/vip/vipGiftBag.png"></image>
+        </view>    
+        <view class="viptxtshopname">衣服尺码<text style="color:#FF0000;">（根据下单的时间顺序进行发货，若发货时尺码库
+存不足，将随机发货）</text></view>
+         <view class="sizeSelc">
+             <view class="sizeSelcEve {{selSize==item?'ssizeColor':''}}" catchtap="selSizefun" wx:for='{{sizeArr}}' data-ss='{{item}}' wx:key='key'>{{item}}</view>
+         </view>
+         <view class='saveData' wx:if='{{is_updata}}' bindtap='updata'>提交</view>
+         <view class='saveData' wx:else style="background:#959595;">您已领取补偿商品</view>
+
+    </block>
+    <!-- 非 vip 用户 礼包 -->
+    <block wx:elif='{{is_vip == 2}}'>
+      <view class="viptxtshopname">礼包包含商品（共两件）</view>
+        <view class="imgbox">
+           <image class="imgsize" mode='widthFix' src="https://cdn.51chaidan.com/images/toyShow3/vip/vipGiftBagXia.png"></image>
+        </view>    
+        <view class="viptxtshopname">衣服尺码<text style="color:#FF0000;">（根据下单的时间顺序进行发货，若发货时尺码库
+存不足，将随机发货）</text></view>
+         <view class="sizeSelc">
+             <view class="sizeSelcEve {{selSize==item?'ssizeColor':''}}" catchtap="selSizefun" wx:for='{{sizeArrOr}}' data-ss='{{item}}' wx:key='key'>{{item}}</view>
+         </view>
+         <view class='saveData' wx:if='{{is_updata}}' bindtap='updata'>提交</view>
+         <view class='saveData' wx:else style="background:#959595;">您已领取补偿商品</view>
+    </block>
+    
+</view>
+
+
+<!-- <bnavigation isChar='{{false}}' isProduce='{{isProduce}}'></bnavigation> -->
+
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>
+
+
+<!--  二级背景  -->
+<view class='tipbacktwo' wx:if='{{tipbacktwo}}' catchtap="tiphidfun" catchtouchmove="preventD"></view>
+<!--  立即购买弹框   -->
+
+<view class='buybombsimmediately' wx:if='{{buybombsimmediately}}' style="height:500rpx;">
+  <view class='bbsheadcon' style="height:276rpx;">
+    <view class='bbshccom' style='position: relative;'>
+      <view class='bbshccomleft'>数量</view>
+      <image class='bbshccomimg' src='../images/icon_in.png'></image>
+      <view class='bbshccomright'>1</view>
+    </view>
+    <view class='bbshccom' bindtap='seladdressfun' style='position: relative;'>
+      <view class='bbshccomleft'>收货地址</view>
+      <image class='bbshccomimg' src='../images/icon_in.png'></image>
+      <view class='bbshccomright '>
+        <view style="width:100%;line-height:57rpx;text-align:right;" class="specialellipsis">{{tipnamephone}}</view>
+        <view style="width:100%;line-height:57rpx;text-align:right;" class="specialellipsis">{{tipaddress}}</view>
+      </view>
+    </view>
+  </view>
+  <view class='bbshbottom'>
+    <view class='bbshbottomhead'>
+    </view>
+    <view class='bbshbottombut' bindtap='listdata' style='position: relative;background:#F56C6C;'>提交订单
+    </view>
+  </view>
+
+</view>
+
+
+
+<!--  收货地址  -->
+<view class='receivingaddress' wx:if='{{receivingaddress}}'>
+  <view class='recgadhead'>
+    收货地址
+    <image src='../images/forknumber.png' class='recgadheadimg' bindtap='receivingaddressfun'></image>
+  </view>
+  <view class='recgadcon'>
+    <view class='recgaddata' wx:for='{{addressdata}}' wx:key='key'>
+      <view class='recgaddname' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='revisethereceivingaddress'>
+        <view class='recgaddnameleft'>{{item.consignee}}</view>
+        <view class='recgaddnameleft'>{{item.phone}}</view>
+      </view>
+      <view class='recgadaddress' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='revisethereceivingaddress'>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
+      <view class='recgadbottom'>
+        <view class='recgadbotright' bindtap='deladdress' data-ind="{{item.aid}}">
+          <image src='../images/icon_delete.png' class='recgadbotleftimg'></image>
+          删除
+        </view>
+      </view>
+    </view>
+    <view class='recgadnodata' wx:if='{{addressdata.length==0}}'>
+      <image src='../images/recaddnodata.png' class='recgadnodataimg'></image>
+    </view>
+  </view>
+  <view class='recgadbot' bindtap='jumpaddress'>
+    增加新地址
+  </view>
+</view>

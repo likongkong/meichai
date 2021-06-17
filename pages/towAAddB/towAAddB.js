@@ -39,7 +39,7 @@ Page({
 
   onLoad: function (options) {
     console.log('inventory====',options.inventory)
-    wx.hideShareMenu()
+
     var dateTime = new Date();
     var day = dateTime.getDate();
     if(day == 12){
@@ -373,6 +373,12 @@ console.log(app.signindata.comurl + 'toy.php'+q)
   onLoadfun:function(){
     //  我的订单数据
     var _this = this;
+
+    // 是否可以分享 
+    if(app.signindata.isManager){wx.showShareMenu({ withShareTicket: true})}else{
+      wx.hideShareMenu();
+    };
+
     _this.data.loginid = app.signindata.loginid;
     _this.setData({
       uid: app.signindata.uid,
@@ -712,13 +718,13 @@ deladdress: function (event){
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    return app.sharemc()    
-  },
-  onShareTimeline:function(){
+    var _this = this;
     return {
-      title:'潮玩社交平台',
-      query:{}
-    }
+      title:  '商品选购',
+      path: '/pages/towAAddB/towAAddB',
+      imageUrl: 'https://cdn.51chaidan.com/images/202106/thumb_img/38363_thumb_G_1623517190198.png',
+      success: function (res) {}
+    }  
   },
 
   // 导航跳转

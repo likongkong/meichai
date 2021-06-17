@@ -33,8 +33,8 @@
     "pages/halloweenparty/halloweenparty",
     "pages/giftCollection/giftCollection",
     "pages/towAAddB/towAAddB",
-    "pages/vipOrTicket/vipOrTicket",
     "pages/vipOrTicketNew/vipOrTicketNew",
+    "pages/collectGiftBag/collectGiftBag",
     "pages/smokeComponent/smokeComponent"
   ],
   "subPackages": [

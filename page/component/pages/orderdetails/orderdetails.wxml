@@ -129,7 +129,10 @@
         <view wx:if='{{comdata.order_type!=6}}'>
             <view class='rdheadback' wx:if='{{comdata.status==0&&comdata.order_type!=7}}'>
                 <block wx:if='{{comdata.order_type==24&&(comdata.isBalances==1||comdata.isBalances==2)}}'>已付定金</block>
-                <block wx:else>等待付款</block>
+                <block wx:else>
+                    <block wx:if='{{comdata.isReceive}}'>等待领取</block>
+                    <block wx:else>等待付款</block> 
+                </block>
                 <image class='rdheadimg' src='../../../../pages/images/icon_wallet2.png'></image>
             </view>
             <view class='rdheadback' wx:if='{{comdata.status==0&&comdata.order_type==7}}'>
@@ -224,7 +227,10 @@
                         </block>
                         <block wx:elif='{{comdata.status==8&&comdata.isBalances==3}}'>奖品过期已取消</block>
                     </block>
-                    <block wx:else>未付款</block>
+                    <block wx:else>
+                        <block wx:if='{{comdata.isReceive}}'>我要领取</block>
+                        <block wx:else>未付款</block>                        
+                    </block>
                 </view>
                 <view class='wholeconnumrr' style='color:#259B24;'
                     wx:if='{{comdata.status==0 && comdata.order_type==7}}'>
@@ -858,7 +864,16 @@
                     <!--  等待付款  -->
                     <view class='totalmoncon' wx:if='{{comdata.status==0 && comdata.order_type!=7}}'>
                         <!-- <view class='totalmoncleft'>拆单倒计时:{{countdown}}</view>  -->
-                        <view class='totalmoncright' bindtap='payment' style='position:relative;'>我要付款</view>
+                        <view class='totalmoncright' bindtap='payment' style='position:relative;'>
+                            <block wx:if='{{comdata.needVerifyTicket}}'>
+                                <block wx:if='{{comdata.isReceive}}'>核销领取</block>
+                                <block wx:else>核验支付</block>
+                            </block>
+                            <block wx:elif='{{comdata.isReceive}}'>我要领取</block>
+                            <block wx:else>我要付款</block>
+
+
+                        </view>
                         <!-- <view class='totalmoncrightcel' bindtap='cancellationoforder' data-oid='{{comdata.cart_id}}' style='position:relative;'>取消订单</view> -->
                     </view>
 
@@ -1695,6 +1710,24 @@
                 catchtap='pictboxboxfun'>
                 关闭
             </view>
+        </view>
+    </view>
+</view>
+
+<!-- 核销提示框 -->
+<view class='awatip' wx:if='{{vipOrOrderTip}}' style='z-index:999;'>
+    <view class='awabg' catchtap="vipOrOrdercancel"></view>
+    <view class='addmodbox' style="height:380rpx;">
+        <view style="width:100%;height:230rpx;padding-top:40rpx;overflow:scroll;">
+            <text style="color:#000;display:block;font-size:26rpx;">
+                <block wx:if='{{vipOrOrder==1}}'>检测到您的VIP门票未核销，核销之后才可以领取vip礼包！\n<text style="color:#FF0000;">（1.核销之后，无法进行退票处理\n2.想要退票的用户不要点击“核销”按钮，退款金额将会在7个工作日内自动原路返回，退票的用户无法获取任何补偿商品。）</text></block>
+                <block wx:elif='{{vipOrOrder==2}}'>检测到您的普通门票未核销，核销之后才可以领取补偿商品！\n<text style="color:#FF0000;">（1.核销之后，无法进行退票处理\n2.想要退票的用户不要点击“核销”按钮，退款金额将会在7个工作日内自动原路返回，退票的用户无法获取任何补偿商品。）</text></block>
+                <block wx:else>检测到您的VIP门票未核销，核销之后才可以享受购买权<text style="color:#FF0000;">（1.核销之后，无法进行退票处理，请知晓。2.想要退票用户不要点击“核销”按钮，退款金额将会在线上直播结束三个工作日内自动原路返回，退票的用户无法参加任何补偿活动，请知晓。）</text></block>
+            </text>
+        </view>
+        <view class='addmodbottom'>
+            <view style='width:50%;text-align:center;height:50rpx;float:left;font-size:30rpx;position:relative;' catchtap='vipOrOrdermine1'>核验</view>
+            <view style='width:50%;text-align:center;height:50rpx;float:right;font-size:30rpx;position:relative;' catchtap='vipOrOrdercancel'>不核验</view>
         </view>
     </view>
 </view>

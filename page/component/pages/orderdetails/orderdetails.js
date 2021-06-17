@@ -76,7 +76,8 @@ Page({
     pictboxbox:false,
 
     // 电子票
-    electronicTicket:true
+    electronicTicket:true,
+    vipOrOrderTip:false
   },
   pictboxboxfun:function(){
     this.setData({ pictboxbox:false});
@@ -850,15 +851,128 @@ Page({
       }
     })
   },  
+// 不检验
+vipOrOrdercancel(){
+  this.setData({
+    vipOrOrderTip:false
+  })
+},
+// 检验
+vipOrOrdermine1(){
+  var _this = this;
+  var comdata = _this.data.comdata;
+  wx.showLoading({ title: '加载中...', mask:true })
+  
+  var q = Dec.Aese('mod=bind&operation=verifyTicket&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&ticketType=' + _this.data.comdata.ticketType + '&ticketIdentify='+ _this.data.comdata.ticketIdentify + '&keyDay=' + (_this.data.comdata.keyDay || ''))
+
+  console.log('mod=bind&operation=verifyTicket&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&ticketType=' + _this.data.comdata.ticketType + '&ticketIdentify='+ _this.data.comdata.ticketIdentify + '&keyDay=' + (_this.data.comdata.keyDay || ''))
+
+  wx.request({
+    url: app.signindata.comurl + 'toy.php'+q,
+    method: 'GET',
+    header: { 'Accept': 'application/json' },
+    success: function (res) {
+      console.log('票务信息统计===',res)
+      // 刷新完自带加载样式回去
+      wx.stopPullDownRefresh();
+      wx.hideLoading()
+      if (res.data.ReturnCode == 200){
+          if(_this.data.comdata.isReceive){
+            if(_this.data.comdata.ticketType == "vip" ){
+              wx.navigateTo({ 
+                url: "/pages/collectGiftBag/collectGiftBag?isv=1&oid="+comdata.oid 
+              });
+            }else{
+              wx.navigateTo({ 
+                url: "/pages/collectGiftBag/collectGiftBag?isv=2&oid="+comdata.oid 
+              });
+            };
+
+          }else{
+            // 提交订单蒙层
+            _this.setData({
+              suboformola: true
+            });    
+            // 直接支付
+            _this.paymentmony(); 
+          };
+      }else{
+          wx.showModal({
+            title: '提示',
+            content: res.data.Msg || res.data.msg,
+            showCancel: false,
+            success: function (res) {}
+          })          
+      };
+
+
+    }
+  });
+
+
+},
+
   // 付款
   payment: function () {
+    var _this = this;
+    var comdata = _this.data.comdata;
 
-    // 提交订单蒙层
-    this.setData({
-      suboformola: true
-    });    
-    // 直接支付
-    this.paymentmony();
+    if(comdata.needVerifyTicket){
+
+      if(_this.data.comdata.isReceive){
+        var txttxt = ticketType == "vip" ? 1 :2;
+      }else{
+        var txttxt = 3;
+      }
+
+      _this.setData({
+          vipOrOrder:txttxt,
+          vipOrOrderTip:true,
+      })
+
+
+      // wx.showModal({
+      //   content:txttxt,
+      //   cancelText: '核验',
+      //   confirmText: '不核验',
+      //   confirmColor:'#000',
+      //   cancelColor: '#000',
+      //   success (res) {
+      //     if (res.cancel) {
+                         
+      //      } else if (res.confirm) {
+             
+      //      }
+      //    }
+      // })
+
+      
+
+      
+           
+    }else{
+      if(comdata.isReceive){
+        if(comdata.ticketType == "vip" ){
+          wx.navigateTo({ 
+            url: "/pages/collectGiftBag/collectGiftBag?isv=1&oid="+comdata.oid  
+          });
+        }else{
+          wx.navigateTo({ 
+            url: "/pages/collectGiftBag/collectGiftBag?isv=2&oid="+comdata.oid
+          });
+        };        
+      }else{
+        // 提交订单蒙层
+        this.setData({
+          suboformola: true
+        });    
+        // 直接支付
+        this.paymentmony();
+      };
+
+    };
+
+
     
   },
   // 微信支付
@@ -897,7 +1011,8 @@ Page({
                 paymentiftr: false,
                 paymentcompletionwiftr: true,
                 payiftr: true,
-                suboformola: false
+                suboformola: false,
+                vipOrOrderTip:false
               });
 
               //跳转0元购
@@ -918,7 +1033,8 @@ Page({
                 paymentcompletionwiftr: false,
                 payiftr: false,
                 suboformola: false
-              });              
+              }); 
+              _this.onLoadfun();             
              },
             'complete': function (res) { }
           })
