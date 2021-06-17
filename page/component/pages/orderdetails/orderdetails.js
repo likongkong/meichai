@@ -1032,7 +1032,8 @@ vipOrOrdermine1(){
                 paymentiftr: false,
                 paymentcompletionwiftr: false,
                 payiftr: false,
-                suboformola: false
+                suboformola: false,
+                vipOrOrderTip:false
               }); 
               _this.onLoadfun();             
              },

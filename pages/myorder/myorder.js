@@ -1292,7 +1292,8 @@ Page({
                 paymentiftr: false,
                 paymentcompletionwiftr: false,
                 payiftr: false,
-                suboformola: false
+                suboformola: false,
+                vipOrOrderTip:false
               }); 
               // 调取数据
               _this.datatransfer();
