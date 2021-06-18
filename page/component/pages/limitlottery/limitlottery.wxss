@@ -611,3 +611,52 @@
   width:550rpx;
   z-index: 3;
 }
+
+/* 签号兑换 */
+.signatureExchange{
+  width: 100%;
+  height: 800rpx;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background:#f4f5f9;
+  z-index: 1;
+}
+.seTopTitle{
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size:28rpx;
+}
+.seTopTitleDate{
+  padding:20rpx;
+  font-size:26rpx;
+}
+.seTopTitleData{
+  padding:26rpx 30rpx;
+  width: 650rpx;
+  margin: 0 auto 20rpx;
+  background:#fff;
+  border-radius: 15rpx;
+  position: relative;
+}
+.seCenterEve{
+  padding-bottom: 15rpx;
+  font-size: 26rpx;
+}
+.seTopTitleDState{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  right: 20rpx;
+  font-size:24rpx;
+  width: 130rpx;
+  height: 50rpx;
+  text-align: center;
+  line-height: 50rpx;
+  color: #fff;
+  border-radius: 10rpx;
+  z-index: 3;
+}

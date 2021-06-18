@@ -920,7 +920,7 @@ vipOrOrdermine1(){
     if(comdata.needVerifyTicket){
 
       if(_this.data.comdata.isReceive){
-        var txttxt = ticketType == "vip" ? 1 :2;
+        var txttxt = _this.data.comdata.ticketType == "vip" ? 1 :2;
       }else{
         var txttxt = 3;
       }

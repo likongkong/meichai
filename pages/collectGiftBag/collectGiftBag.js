@@ -156,15 +156,16 @@ Page({
             title: '提示',
             content: '领取成功',
             showCancel: false,
-            success: function (res) {}
+            success: function (res) {
+              wx.redirectTo({    
+                url: "/page/component/pages/orderdetails/orderdetails?oid=" + _this.data.oid
+              })
+            }
           }) 
           _this.setData({
             tipbacktwo:false,
             buybombsimmediately:false,
             is_updata:false
-          })
-          wx.redirectTo({    
-            url: "/page/component/pages/orderdetails/orderdetails?oid=" + oid
           })
 
         }else{

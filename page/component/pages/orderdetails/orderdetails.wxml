@@ -228,7 +228,7 @@
                         <block wx:elif='{{comdata.status==8&&comdata.isBalances==3}}'>奖品过期已取消</block>
                     </block>
                     <block wx:else>
-                        <block wx:if='{{comdata.isReceive}}'>我要领取</block>
+                        <block wx:if='{{comdata.isReceive}}'>待领取</block>
                         <block wx:else>未付款</block>                        
                     </block>
                 </view>
@@ -1715,14 +1715,14 @@
 </view>
 
 <!-- 核销提示框 -->
-<view class='awatip' wx:if='{{vipOrOrderTip}}' style='z-index:999;'>
+<view class='awatip' wx:if='{{vipOrOrderTip}}' style='z-index:999;' catchtouchmove="true">
     <view class='awabg' catchtap="vipOrOrdercancel"></view>
-    <view class='addmodbox' style="height:380rpx;">
-        <view style="width:100%;height:230rpx;padding-top:40rpx;overflow:scroll;">
+    <view class='addmodbox' style="height:450rpx;">
+        <view style="width:100%;height:300rpx;padding-top:40rpx;overflow:scroll;">
             <text style="color:#000;display:block;font-size:26rpx;">
-                <block wx:if='{{vipOrOrder==1}}'>检测到您的VIP门票未核销，核销之后才可以领取vip礼包！\n<text style="color:#FF0000;">（1.核销之后，无法进行退票处理\n2.想要退票的用户不要点击“核销”按钮，退款金额将会在7个工作日内自动原路返回，退票的用户无法获取任何补偿商品。）</text></block>
-                <block wx:elif='{{vipOrOrder==2}}'>检测到您的普通门票未核销，核销之后才可以领取补偿商品！\n<text style="color:#FF0000;">（1.核销之后，无法进行退票处理\n2.想要退票的用户不要点击“核销”按钮，退款金额将会在7个工作日内自动原路返回，退票的用户无法获取任何补偿商品。）</text></block>
-                <block wx:else>检测到您的VIP门票未核销，核销之后才可以享受购买权<text style="color:#FF0000;">（1.核销之后，无法进行退票处理，请知晓。2.想要退票用户不要点击“核销”按钮，退款金额将会在线上直播结束三个工作日内自动原路返回，退票的用户无法参加任何补偿活动，请知晓。）</text></block>
+                <block wx:if='{{vipOrOrder==1}}'>检测到您的VIP未核验，请确认是否核验。\n<text style="color:#FF0000;">(★核验后可获取以下权益:\n1.领取VIP礼包;\n2.拥有MTFU[小怪兽+鸭梨（颜色随机）]的订单购买权;\n3.获得“恐龙睡衣多多妹”购买权。\n★如需退票，并不享受以上权益，请点击“不核验”即可。)</text></block>
+                <block wx:elif='{{vipOrOrder==2}}'>检测到您的普通门票未核验，请确认是否核验。\n<text style="color:#FF0000;">(★核验后可获取以下权益:\n1.领取补偿商品，一个展会限定背包+一件L码T恤;\n2.若普通门票带有门票礼并且现场未领取苹果头多多妹，可在小程序内填写收货地址，进行邮寄处理;\n3.获得“恐龙睡衣多多妹”购买抽选权。\n★如需退票，并不享受以上权益，请点击“不核验”即可。)</text></block>
+                <block wx:else>检测到您的VIP未核验，请确认是否核验。\n<text style="color:#FF0000;">(★核验后可获取以下权益:\n1.领取VIP礼包;\n2.拥有MTFU[小怪兽+鸭梨（颜色随机）]的订单购买权;\n3.获得“恐龙睡衣多多妹”购买权。\n★如需退票，并不享受以上权益，请点击“不核验”即可。)</text></block>
             </text>
         </view>
         <view class='addmodbottom'>

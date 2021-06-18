@@ -962,3 +962,31 @@
 		</view>
 	</view>
 </view>
+
+<!-- 展会身份弹框 -->
+<view wx:if="{{false}}" style="width:100%;height:100%;position:fixed;top:0;left:0;z-index:199999;">
+	<view class='bgstyle'></view>
+  <view class="signatureExchange" style="height:{{windowHeight}}px;">
+			<view class="seTopTitle">签号兑换</view>
+			<view class="seTopTitleDate">12号门票</view>
+			<view class="seTopTitleData">
+				  <view class="seCenterEve">
+						  <text decode="true">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:</text>
+					</view>
+				  <view class="seCenterEve">
+						  <text decode="true">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话:</text>
+					</view>
+				  <view class="seCenterEve">
+						  <text decode="true">身份证号:</text>
+					</view>
+				  <view class="seCenterEve" style="padding-bottom: 0;">
+						  <text decode="true">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态:</text>
+					</view>
+					<!-- 状态 -->
+					<view wx:if='{{true}}' class="seTopTitleDState" style="color:#299331;">已兑换</view>
+					<view wx:elif='{{false}}' class="seTopTitleDState" style="background:#F2B40C;">去验票</view>
+					<view wx:elif='{{false}}' class="seTopTitleDState" style="background:#F8627B;">兑换签号</view>
+			</view>
+
+	</view>
+</view>
