@@ -285,7 +285,7 @@ Page({
     var _this = this;
     return {
       title:  'MCTS 展会信息核验',
-      path: '/pages/vipOrTicket/vipOrTicket?isv=' + _this.data.is_vip,
+      path: '/pages/vipOrTicket/vipOrTicket?isv=' + _this.data.is_vip + '&oid='+_this.data.oid,
       imageUrl: 'https://www.51chaidan.com/images/shareImg/ddm_heyan.jpg',
       success: function (res) {}
     }   
