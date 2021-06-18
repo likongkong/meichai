@@ -25,8 +25,7 @@
         <view class="imgbox">
            <image class="imgsize" mode='widthFix' src="https://cdn.51chaidan.com/images/toyShow3/vip/vipGiftBagXia.png"></image>
         </view>    
-        <view class="viptxtshopname">衣服尺码<text style="color:#FF0000;">（根据下单的时间顺序进行发货，若发货时尺码库
-存不足，将随机发货）</text></view>
+        <view class="viptxtshopname">衣服尺码<text style="color:#FF0000;">（所有用户统一发L码T恤）</text></view>
          <view class="sizeSelc">
              <view class="sizeSelcEve {{selSize==item?'ssizeColor':''}}" catchtap="selSizefun" wx:for='{{sizeArrOr}}' data-ss='{{item}}' wx:key='key'>{{item}}</view>
          </view>

@@ -1209,11 +1209,11 @@
 <!-- 核销提示框 -->
 <view class='awatip' wx:if='{{vipOrOrderTip}}' style='z-index:999;' catchtouchmove="true">
     <view class='awabg' catchtap="vipOrOrdercancel"></view>
-    <view class='addmodbox' style="height:450rpx;">
-        <view style="width:100%;height:300rpx;padding-top:40rpx;overflow:scroll;">
+    <view class='addmodbox' style="height:550rpx;">
+        <view style="width:100%;height:400rpx;padding-top:40rpx;overflow:scroll;">
             <text style="color:#000;display:block;font-size:26rpx;">
                 <block wx:if='{{vipOrOrder==1}}'>检测到您的VIP未核验，请确认是否核验。\n<text style="color:#FF0000;">(★核验后可获取以下权益:\n1.领取VIP礼包;\n2.拥有MTFU[小怪兽+鸭梨（颜色随机）]的订单购买权;\n3.获得“恐龙睡衣多多妹”购买权。\n★如需退票，并不享受以上权益，请点击“不核验”即可。)</text></block>
-                <block wx:elif='{{vipOrOrder==2}}'>检测到您的普通门票未核验，请确认是否核验。\n<text style="color:#FF0000;">(★核验后可获取以下权益:\n1.领取补偿商品，一个展会限定背包+一件L码T恤;\n2.若普通门票带有门票礼并且现场未领取苹果头多多妹，可在小程序内填写收货地址，进行邮寄处理;\n3.获得“恐龙睡衣多多妹”购买抽选权。\n★如需退票，并不享受以上权益，请点击“不核验”即可。)</text></block>
+                <block wx:elif='{{vipOrOrder==2}}'>检测到您的普通门票未核验，请确认是否核验。\n<text style="color:#FF0000;">(★核验后可获取以下权益:\n1.领取补偿商品，一个展会限定背包+一件L码T恤;\n2.若有门票礼并且现场未领取苹果头多多妹，可在小程序内填写收货地址，进行邮寄处理;\n3.获得“恐龙睡衣多多妹”购买抽选权。\n★如需退票，并不享受以上权益，请点击“不核验”即可。)</text></block>
                 <block wx:else>检测到您的VIP未核验，请确认是否核验。\n<text style="color:#FF0000;">(★核验后可获取以下权益:\n1.领取VIP礼包;\n2.拥有MTFU[小怪兽+鸭梨（颜色随机）]的订单购买权;\n3.获得“恐龙睡衣多多妹”购买权。\n★如需退票，并不享受以上权益，请点击“不核验”即可。)</text></block>
             </text>
         </view>
