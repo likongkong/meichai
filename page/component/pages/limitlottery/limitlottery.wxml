@@ -185,13 +185,31 @@
 					<view wx:if='{{infoActivity.joinMothed == "zone"}}' class="tagstyle">抽签专区专享</view>
 				</view>
 			</view>
+		</view>
 
+		<view wx:elif='{{infoActivity.status == 2 && infoFragment.personalFragmentNumber == 0}}'>
+			<view wx:if='{{is_ordinary_ticket_user && infoFragment.activitySignNumber != 0}}'>
+				<view class='takepartin' catchtap="joinlimitlottery" style="{{!is_share_but?'margin:20rpx auto 20rpx auto;':'margin:20rpx 0 20rpx 300rpx;'}}">
+					兑换签号
+					<view wx:if='{{infoActivity.joinMothed == "blindBox"}}' class="tagstyle">抽盒机专享</view>
+					<view wx:if='{{infoActivity.joinMothed == "zone"}}' class="tagstyle">抽签专区专享</view>
+				</view>
+				<view style="display: flex;justify-content: space-between;padding:30rpx 0;">
+					<view style="width:40%;font-size:28rpx;padding-left:25rpx;box-sizing:box-sizing;">我的签号</view>
+					<view style="width:60%">
+						<block wx:for="{{infoFragment.activitySignNumber}}" wx:key="key">
+							<text style="display:block;color:#F8627B;font-size:26rpx;margin-bottom:15rpx;">{{item.lotto}}</text>
+						</block>
+					</view>
+				</view>
+			</view>
+			<view class='takepartin' catchtap="joinlimitlottery" style="{{!is_share_but?'margin:20rpx auto 20rpx auto;':'margin:20rpx 0 20rpx 300rpx;'}}" wx:else>
+				参与抽签
+					<view wx:if='{{infoActivity.joinMothed == "blindBox"}}' class="tagstyle">抽盒机专享</view>
+					<view wx:if='{{infoActivity.joinMothed == "zone"}}' class="tagstyle">抽签专区专享</view>
+			</view>
 		</view>
-		<view wx:elif='{{infoActivity.status == 2 && infoFragment.personalFragmentNumber == 0}}' class='takepartin' catchtap="joinlimitlottery" style="{{!is_share_but?'margin:20rpx auto 20rpx auto;':'margin:20rpx 0 20rpx 300rpx;'}}">
-			参与抽签
-			<view wx:if='{{infoActivity.joinMothed == "blindBox"}}' class="tagstyle">抽盒机专享</view>
-			<view wx:if='{{infoActivity.joinMothed == "zone"}}' class="tagstyle">抽签专区专享</view>
-		</view>
+	
 
 		<view wx:elif='{{infoActivity.status == 2 && infoFragment.personalFragmentNumber != 0}}' style="width:100%;margin:20rpx 0;">
       <block wx:if='{{is_share_but}}'>
@@ -964,29 +982,50 @@
 </view>
 
 <!-- 展会身份弹框 -->
-<view wx:if="{{false}}" style="width:100%;height:100%;position:fixed;top:0;left:0;z-index:199999;">
-	<view class='bgstyle'></view>
+<view wx:if="{{ordinaryTicketUser}}" catchtouchmove="true" style="width:100%;height:100%;position:fixed;top:0;left:0;z-index:998;">
+	<view class='bgstyle' catchtap="hideOrdinaryTicketUser"></view>
   <view class="signatureExchange" style="height:{{windowHeight}}px;">
 			<view class="seTopTitle">签号兑换</view>
-			<view class="seTopTitleDate">12号门票</view>
-			<view class="seTopTitleData">
-				  <view class="seCenterEve">
-						  <text decode="true">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:</text>
+			<scroll-view style="height:{{windowHeight-40}}px;" scroll-y>
+				<block wx:for="{{ticketListDate}}" wx:key='key' wx:for-index='index'>
+					<view class="seTopTitleDate">{{item[0].day}}</view>
+					<block wx:for="{{item}}" wx:key='key' wx:for-item="sonitem" wx:for-index='sonindex'>
+					<view class="seTopTitleData">
+							<view class="seCenterEve">
+									<text decode="true">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名: &nbsp;{{sonitem.consignee}}</text>
+							</view>
+							<view class="seCenterEve">
+									<text decode="true">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话: &nbsp;{{sonitem.tel}}</text>
+							</view>
+							<view class="seCenterEve">
+									<text decode="true">身份证号: &nbsp;{{sonitem.idcard}}</text>
+							</view>
+							<view class="seCenterEve" style="padding-bottom: 0;">
+								<text decode="true">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态:	</text><text style="color:{{sonitem.status == 1 || sonitem.status == 2?'#101010':'#F8627B'}};" decode="true"> &nbsp;{{sonitem.status == 1 || sonitem.status == 2?'已验票':'未验票'}}</text>
+							</view>
+							<!-- 状态 -->
+							<view wx:if='{{sonitem.status == 2}}' class="seTopTitleDState" style="color:#299331;">已兑换</view>
+							<view wx:elif='{{sonitem.status == 0}}' class="seTopTitleDState" style="background:#F2B40C;" data-orderid="{{sonitem.order_id}}" data-index="{{index}}" data-sonindex="{{sonindex}}" catchtap="twoAffirm">去验票</view>
+							<view wx:elif='{{sonitem.status == 1}}' data-infoactivityid="{{infoActivity.id}}" data-ticketid="{{sonitem.id}}" class="seTopTitleDState" style="background:#F8627B;" catchtap="exchangesign">兑换签号</view>
 					</view>
-				  <view class="seCenterEve">
-						  <text decode="true">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话:</text>
-					</view>
-				  <view class="seCenterEve">
-						  <text decode="true">身份证号:</text>
-					</view>
-				  <view class="seCenterEve" style="padding-bottom: 0;">
-						  <text decode="true">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态:</text>
-					</view>
-					<!-- 状态 -->
-					<view wx:if='{{true}}' class="seTopTitleDState" style="color:#299331;">已兑换</view>
-					<view wx:elif='{{false}}' class="seTopTitleDState" style="background:#F2B40C;">去验票</view>
-					<view wx:elif='{{false}}' class="seTopTitleDState" style="background:#F8627B;">兑换签号</view>
-			</view>
-
+					</block>
+				</block>
+			</scroll-view>
 	</view>
+</view>
+
+<!-- 核销提示框 -->
+<view class='awatip' wx:if='{{twoAffirmBox}}' style='z-index:999;' catchtouchmove="true">
+    <view class='awabg' catchtap="vipOrOrdercancel"></view>
+    <view class='addmodbox' style="height:550rpx;">
+        <view style="width:100%;height:400rpx;padding-top:40rpx;overflow:scroll;">
+            <text style="color:#000;display:block;font-size:26rpx;">
+                检测到您的普通门票未核验，请确认是否核验。\n<text style="color:#FF0000;">(★核验后可获取以下权益:\n1.领取补偿商品，一个展会限定背包+一件L码T恤;\n2.若有门票礼并且现场未领取苹果头多多妹，可在小程序内填写收货地址，进行邮寄处理;\n3.获得“恐龙睡衣多多妹”购买抽选权。\n★如需退票，并不享受以上权益，请点击“不核验”即可。)</text>
+            </text>
+        </view>
+        <view class='addmodbottom'>
+            <view style='width:50%;text-align:center;height:50rpx;float:left;font-size:30rpx;position:relative;' catchtap='vipOrOrdermine1'>核验</view>
+            <view style='width:50%;text-align:center;height:50rpx;float:right;font-size:30rpx;position:relative;' catchtap='vipOrOrdercancel'>不核验</view>
+        </view>
+    </view>
 </view>

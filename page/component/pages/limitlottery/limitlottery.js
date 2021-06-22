@@ -158,7 +158,9 @@ Page({
     isScrapingCard:false,
     // 是否从列表进入
     isList:0,
-    listTipImg:false
+    listTipImg:false,
+    ordinaryTicketUser:false,
+    twoAffirmBox:false
   },
   // 跳转刮刮卡
   jumpScrapingCard(){
@@ -845,6 +847,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
           };
 
           _this.setData({
+            is_ordinary_ticket_user: res.data.Info.is_ordinary_ticket_user,
             promote_start_date:promote_start_date,
             reLottoList:res.data.List.reLottoList || '',
             // is_brand_display:is_brand_display,
@@ -869,6 +872,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
             cashPledge:res.data.Info.cashPledge||0,
             paypriceCashPledge:parseFloat((res.data.Info.infoGoods.shop_price || 0)-(res.data.Info.cashPledge||0)).toFixed(1)
           })
+          console.log(_this.data.is_ordinary_ticket_user,'是否是普票用户')
           // 是否调取展会数据
           if (res.data.Info.infoActivity && res.data.Info.infoActivity.specialWay && res.data.Info.infoActivity.specialWay == 1||(res.data.Info.infoActivity.specialWay != 1&&brandid>0)) {
             _this.exhibdatafun(1)
@@ -1050,25 +1054,176 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
   joinlimitlottery: function () {
     var _this = this;
 
-    if(_this.data.infoActivity.premiseForJoin && _this.data.isList == 1){
-       _this.listTipImg();
-    }else if(_this.data.promote_start_date && !_this.data.subscribeOrNot){
-      _this.subscrfun(1);
-    }else if (_this.data.infoActivity.joinMothed == "blindBox" && !_this.data.infoActivity.isCanOpenLotto) {
-      wx.navigateTo({
-        url: "/pages/smokeboxlist/smokeboxlist",
-      });
-    } else if (_this.data.infoActivity.joinMothed == "zone" && !_this.data.infoActivity.isCanOpenLotto) {
-      wx.navigateTo({
-        url: "/page/component/pages/newsigninarea/newsigninarea?type=3",
-      });
-    }  else if (_this.data.infoActivity.isCommandActivity) {
-        this.redpinputdataiftr();
-    } else {
-      this.joinDraw(0);
+    // is_ordinary_ticket_user存在且为true === 普通票用户
+    if(_this.data.is_ordinary_ticket_user != undefined && _this.data.is_ordinary_ticket_user){
+      this.ticketList();
+    }else if(_this.data.is_ordinary_ticket_user != undefined && !_this.data.is_ordinary_ticket_user){
+      wx.showToast({
+        title: '未检测到您的购票信息，请参加其他抽签活动',
+        icon: 'none',
+        mask:true,
+        duration:2000
+      });  
+    }else{
+      if(_this.data.infoActivity.premiseForJoin && _this.data.isList == 1){
+          _this.listTipImg();
+      }else if(_this.data.promote_start_date && !_this.data.subscribeOrNot){
+        _this.subscrfun(1);
+      }else if (_this.data.infoActivity.joinMothed == "blindBox" && !_this.data.infoActivity.isCanOpenLotto) {
+        wx.navigateTo({
+          url: "/pages/smokeboxlist/smokeboxlist",
+        });
+      } else if (_this.data.infoActivity.joinMothed == "zone" && !_this.data.infoActivity.isCanOpenLotto) {
+        wx.navigateTo({
+          url: "/page/component/pages/newsigninarea/newsigninarea?type=3",
+        });
+      }  else if (_this.data.infoActivity.isCommandActivity) {
+          this.redpinputdataiftr();
+      } else {
+        this.joinDraw(0);
+      }
     }
   },
 
+
+  plusXing (str,frontLen,endLen) {
+    var len = str.length-frontLen-endLen;
+    var xing = '';
+    for (var i=0;i<len;i++) {
+    xing+='*';
+    }
+    return str.substring(0,frontLen)+xing+str.substring(str.length-endLen);
+  },
+
+  ticketList(){
+    var _this = this;
+    wx.showLoading({ title: '加载中...'})
+    var q = Dec.Aese('mod=lotto&operation=showOrdinaryTicketInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
+    console.log('普票列表请求======'+'mod=bind&operation=verifyVipTicket&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+    wx.request({
+      url: app.signindata.comurl + 'spread.php' + q,
+      method: 'GET',
+      header: {
+        'Accept': 'application/json'
+      },
+      success: function (res) {
+        console.log('普票列表======',res)
+        // 刷新完自带加载样式回去
+        wx.stopPullDownRefresh();
+        wx.hideLoading();
+        if (res.data.ReturnCode == 200) {
+          var ticketList = res.data.List.ticketList;
+          for(var i=0;i<ticketList.length;i++){
+            for(var j=0;j<ticketList[i].length;j++){
+              res.data.List.ticketList[i][j].consignee =  _this.plusXing(res.data.List.ticketList[i][j].consignee,1,0)
+              res.data.List.ticketList[i][j].idcard =  _this.plusXing(res.data.List.ticketList[i][j].idcard,4,5)
+              res.data.List.ticketList[i][j].tel =  _this.plusXing(res.data.List.ticketList[i][j].tel,3,3)
+            }
+          }
+          _this.setData({
+            ordinaryTicketUser:true,
+            ticketListDate:res.data.List.ticketList
+          })
+        }else{
+          wx.showToast({
+            title: res.data.Msg,
+            icon: 'none',
+            mask:true,
+            duration:2000
+          });  
+        }
+      }
+    }); 
+  },
+  hideOrdinaryTicketUser(){
+    this.setData({
+      ordinaryTicketUser:false
+    })
+  },
+  twoAffirm(e){
+    this.setData({
+      twoAffirmBox:true,
+      ticketorderid:e.currentTarget.dataset.orderid,
+      ticketindex:e.currentTarget.dataset.index,
+      ticketsonindex:e.currentTarget.dataset.sonindex,
+    })
+  },
+  // 不检验
+  vipOrOrdercancel(){
+    this.setData({
+      twoAffirmBox:false
+    })
+  },
+  // 检验
+  vipOrOrdermine1(){
+    var _this = this;
+    wx.showLoading({ title: '加载中...', mask:true })
+    var q = Dec.Aese('mod=bind&operation=verifyTicket&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&ticketType=normal&ticketIdentify='+ _this.data.ticketorderid)
+    console.log('验票请求==','mod=bind&operation=verifyTicket&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&ticketType=normal&ticketIdentify='+ _this.data.ticketorderid)
+    wx.request({
+      url: app.signindata.comurl + 'toy.php'+q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('验票结果===',res)
+        wx.hideLoading()
+        if (res.data.ReturnCode == 200){
+          _this.ticketList();
+          // var ticketobj = "ticketListDate["+_this.data.ticketindex+"]["+_this.data.ticketsonindex+"].status";
+          _this.setData({
+            twoAffirmBox:false,
+            // [ticketobj]:1
+          })
+        }else{
+            wx.showModal({
+              title: '提示',
+              content: res.data.Msg || res.data.msg,
+              showCancel: false,
+              success: function (res) {}
+            })          
+        };
+      }
+    });
+  },
+  exchangesign(e){
+    console.log(e);
+    var aid = e.currentTarget.dataset.infoactivityid;
+    var id = e.currentTarget.dataset.ticketid;
+    var _this = this;
+    wx.showLoading({ title: '加载中...', mask:true })
+    var q = Dec.Aese('mod=lotto&operation=convertOrdinaryLotto&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id='+ id +'&aid='+aid)
+    console.log('兑换签号请求==','mod=bind&operation=verifyTicket&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id='+ id +'&aid='+aid)
+    wx.request({
+      url: app.signindata.comurl + 'spread.php'+q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('兑换签号结果===',res)
+        wx.hideLoading()
+        if (res.data.ReturnCode == 200){
+          wx.showToast({
+            title: res.data.Msg,
+            icon: 'none',
+            mask:true,
+            duration:2000
+          });  
+          setTimeout(function(){
+            _this.setData({
+              ordinaryTicketUser:false
+            })
+            _this.getinfo();
+          },2000)
+        }else{
+            wx.showModal({
+              title: '提示',
+              content: res.data.Msg || res.data.msg,
+              showCancel: false,
+              success: function (res) {}
+            })          
+        };
+      }
+    });
+  },
   joinDraw: function (share_uid) {
     var _this = this;
     if(this.data.infoActivity.joinMothed == 'payTicket' && this.data.infoActivity.payTicketCate == 'fullPledge'){
