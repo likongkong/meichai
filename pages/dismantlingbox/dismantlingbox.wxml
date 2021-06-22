@@ -428,14 +428,15 @@
     <!-- </view> -->
 
      <!-- 场馆地图 -->
-    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e5'>—————— 场馆地图 ——————</view>
+    <!-- <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e5'>—————— 场馆地图 ——————</view> -->
      
     <!-- <image catchtap="jumpcanvasRoute" style="width:670rpx;display:block;margin:0 auto 0;" src="https://cdn.51chaidan.com/images/toyShow3/zhanhuiditu.png" mode='widthFix'></image>
     <view class="drawBtn">
       <view catchtap="jumpcanvasRoute" style="width:100%;">制作观展专属地图</view>
     </view> -->
-    <image style="width:670rpx;display:block;margin:0 auto 20rpx;" src="https://cdn.51chaidan.com/images/toyShow3/The_venue_map.jpg"  mode='widthFix'></image>
-    <image style="width:670rpx;display:block;margin:0 auto 0;" src="https://cdn.51chaidan.com/images/toyShow3/siteImg.png"  mode='widthFix'></image>
+    <!-- <image style="width:670rpx;display:block;margin:0 auto 20rpx;" src="https://cdn.51chaidan.com/images/toyShow3/The_venue_map.jpg"  mode='widthFix'></image>
+    <image style="width:670rpx;display:block;margin:0 auto 0;" src="https://cdn.51chaidan.com/images/toyShow3/siteImg.png"  mode='widthFix'></image> -->
+
 
     <!-- 品牌合作 -->
 		<view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e4' wx:if='{{brandList&&brandList.length!=0}}'>—————— 参展品牌 ——————</view>
@@ -446,20 +447,20 @@
           </view>
       </view>  
       <!-- 主办 -->
-      <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;">——————— 主办 ———————</view>
+      <!-- <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;">——————— 主办 ———————</view>
       <view class="ssubBrandEveWrap" style="width:100%;overflow: hidden;padding:0 40rpx;box-sizing: border-box; display: flex;justify-content: center;align-items: center;">
           <view class="ssubBrandEve1 bigLogo">
             <image class="ssubBiliimgbr bigLogo" lazy-load="true" src="https://cdn.51chaidan.com/toyshow/upload/1600448943.jpg" mode='aspectFit'></image>
           </view>
-      </view>
+      </view> -->
 
       <!-- 媒体合作与平台支持 -->
-      <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{mediaBrandList&&mediaBrandList.length!=0}}'>———— 媒体合作与平台支持 ————</view>
+      <!-- <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{mediaBrandList&&mediaBrandList.length!=0}}'>———— 媒体合作与平台支持 ————</view>
       <view class="ssubBrandEveWrap" style="width:100%;overflow: hidden;padding:0 40rpx;box-sizing: border-box;" wx:if='{{mediaBrandList&&mediaBrandList.length!=0}}'>
           <view class="ssubBrandEve" wx:for="{{mediaBrandList}}" wx:key="key">
             <image class="ssubBiliimgbr" lazy-load="true" src="{{item}}" mode='aspectFit'></image>
           </view>
-      </view>
+      </view> -->
 
     </block>
  
@@ -467,14 +468,14 @@
 
 
     <!-- 承办 -->
-    <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;">——————— 承办 ———————</view>
+    <!-- <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;">——————— 承办 ———————</view>
     <view class="ssubBrandEveWrap" style="width:100%;overflow: hidden;padding:0 40rpx;box-sizing: border-box;">
         <view style="width:580rpx;overflow:hidden;margin: 0 auto;text-align: center;">
           <view class="ssubBrandEve1 bigLogo1" wx:for="{{undertakeData}}" wx:key="key">
             <image class="ssubBiliimgbr bigLogo1" src="{{item}}" mode='aspectFit'></image>
           </view>
         </view>
-    </view>
+    </view> -->
 
     
     <!-- <view class="ssubBotTxt">售卖商品陆续更新,最终以展会开售为准</view> -->
