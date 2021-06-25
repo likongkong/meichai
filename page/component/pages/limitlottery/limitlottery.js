@@ -160,7 +160,9 @@ Page({
     isList:0,
     listTipImg:false,
     ordinaryTicketUser:false,
-    twoAffirmBox:false
+    twoAffirmBox:false,
+    lottoid:0,
+    isOtherLimitlotteryPop:false
   },
   // 跳转刮刮卡
   jumpScrapingCard(){
@@ -866,6 +868,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
             infoGoods: res.data.Info.infoGoods,
             listLotto: res.data.List.listLotto || "",
             winnerLotto: res.data.List.winnerLotto || "",
+            winnerUnclaimedLotto: res.data.List.winnerUnclaimedLotto || "",
             payprice: res.data.Info.infoGoods.shop_price || 0,
             subscribedata: res.data.Info.subscribe || '',
             id:res.data.Info.infoActivity.id||0,
@@ -873,6 +876,12 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
             paypriceCashPledge:parseFloat((res.data.Info.infoGoods.shop_price || 0)-(res.data.Info.cashPledge||0)).toFixed(1)
           })
           console.log(_this.data.is_ordinary_ticket_user,'是否是普票用户')
+          if(res.data.Info.is_ordinary_ticket_user == undefined){
+            _this.setData({
+              isOtherLimitlotteryPop:true
+            })
+          }
+
           // 是否调取展会数据
           if (res.data.Info.infoActivity && res.data.Info.infoActivity.specialWay && res.data.Info.infoActivity.specialWay == 1||(res.data.Info.infoActivity.specialWay != 1&&brandid>0)) {
             _this.exhibdatafun(1)
@@ -1703,8 +1712,9 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
 
   },
 
-  winnerlogic: function () {
-    var _this = this
+  winnerlogic: function (e) {
+    var _this = this;
+    this.data.lottoid = e.currentTarget.dataset.lottoid;
     var infoActivity = _this.data.infoActivity
     if (infoActivity.isWinner) {
       if (infoActivity.isOrdered) { //购买完成
@@ -1970,7 +1980,8 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
     _this.setData({
       suboformola: true
     });
-    var q = Dec.Aese('mod=lotto&operation=order&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + id + '&aid=' + aid + '&desc=' + _this.data.desc);
+    var q = Dec.Aese('mod=lotto&operation=order&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + id + '&aid=' + aid + '&desc=' + _this.data.desc + '&lotto_id=' + _this.data.lottoid);
+    console.log('提交订单==','mod=lotto&operation=order&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + id + '&aid=' + aid + '&desc=' + _this.data.desc + '&lotto_id=' + _this.data.lottoid)
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q,
       method: 'GET',
@@ -2217,6 +2228,18 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
       }
     })
 
+  },
+  // 查看订单
+  viewtheorder: function (e) {
+    var _this = this;
+    wx.navigateTo({    
+      url: "/page/component/pages/orderdetails/orderdetails?oid=" + e.currentTarget.dataset.oid
+    })
+  },
+  jumpballotList(){
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/ballotList/ballotList?id=" + this.data.infoActivity.id
+    })
   },
   limitlotterypublish: function () {
     wx.navigateTo({

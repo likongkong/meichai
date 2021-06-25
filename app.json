@@ -146,6 +146,7 @@
         "pages/ordinaryTicket/ordinaryTicket",
         "pages/duoduomone/duoduomone",
         "pages/chaKanuid/chaKanuid",
+        "pages/ballotList/ballotList",
         "pages/payee/payee"
       ]
     }

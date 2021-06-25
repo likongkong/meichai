@@ -100,8 +100,8 @@ Component({
         wx.navigateTo({
           url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
         });
-        // timestamp>=1621008000
-      }else if(false){
+        // timestamp>=1624896000
+      }else if(timestamp>=1624896000){
         wx.navigateTo({
           url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
         });

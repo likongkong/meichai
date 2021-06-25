@@ -1,0 +1,41 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+
+<view class="wrap">
+  <view class="mysignInfo">
+    <view class="mysignTableWrap">
+      <view class="mysignHTable">
+        <text class="htableBox" style="width:23%;">日期</text>
+        <text class="htableBox" style="width:27%;">手机号</text>
+        <text class="htableBox" style="width:50%;">身份证号</text>
+      </view>
+      <view class="mysignBTableWrap">
+        <block wx:for="{{dataList}}" wx:key="key">
+          <view class="mysignBTable">
+            <text class="btableBox colorblue" style="width:23%;">{{item.day}}</text>
+            <text class="btableBox colorblue" style="width:27%;">{{item.tel}}</text>
+            <text class="btableBox colorblue" style="width:50%;">{{item.lotto}}</text>
+          </view>
+        </block>
+      </view>
+    </view>
+    <block wx:if="{{ismore}}"> 
+      <view class="more">
+        上拉加载更多
+      </view>
+    </block>
+    <block wx:if="{{!loadprompt}}">
+      <view class="more">
+        没有更多数据了
+      </view>
+    </block>
+  </view>
+</view>
+
+
+
+
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>
+

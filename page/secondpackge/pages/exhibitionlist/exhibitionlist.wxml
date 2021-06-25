@@ -21,7 +21,7 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
 		<!--  列表标题  -->
 		<view wx:if='{{item.type!=99&&item.title}}' class='disantitle' data-type='{{item.type}}' catchtap='exhlistjump'>
 			{{item.title}}
-			<view class='disantitletitright' wx:if='{{item.type}}' data-type='{{item.type}}' catchtap='exhlistjump' style='font-weight:normal;position:relative;color:#31b3fb;'>查看更多</view>
+			<view class='disantitletitright' wx:if='{{item.type && item.type != 15}}' data-type='{{item.type}}' catchtap='exhlistjump' style='font-weight:normal;position:relative;color:#31b3fb;'>查看更多</view>
 		</view>
 		<!--  列表  -->
     <!-- 一番赏 -->

@@ -8,7 +8,9 @@
 .buttonArter::after{
   border: none;
 }
-
+.colorblue{
+  color: #1684FC !important;
+}
 .bgstyle {
   width: 100%;
   height: 100%;
@@ -663,8 +665,8 @@
 
 .addmodbox{
   padding: 0 40rpx;
-  width: 520rpx;
-  height: 480rpx;
+  width: 450rpx;
+  height: 314rpx;
   border-radius: 10rpx;
   background: #fff;
   position: absolute;
@@ -695,8 +697,132 @@
 .addmodbottom{
   width: 100%;
   height: 75rpx;
-  position: absolute;
-  left: 0;
+  margin-top: 35rpx;
+}
+
+/* 我的签号 */
+.mysign{
+  width: 100%;
+  padding: 50rpx 30rpx 10rpx;
+  box-sizing: border-box;
+  /* display: flex;
+  justify-content: space-between;
+  box-sizing: border-box; */
+}
+.mysignInfo{
+  width: 100%;
+  padding: 10rpx 30rpx 10rpx;
+  box-sizing: border-box;
+}
+.mysignTopWrap{
+  width: 100%;
+  font-size: 26rpx;
+  margin-bottom: 20rpx;
+}
+.mysignTableWrap{
+  width: 100%;
+  border-top: 2rpx solid #dbdbdb;
+  border-left: 2rpx solid #dbdbdb;
+  border-right: 2rpx solid #dbdbdb;
+}
+/* .tableBox:first-child{
+  border-left: 0;
+} */
+.mysignHTable{
+  display: flex;
+}
+.htableBox{
+  display: inline-block;
+  text-align: center;
+  font-size: 26rpx;
+  background: #e8e8e8;
+  height: 50rpx;
+  line-height: 50rpx;
+  border-right: 2rpx solid #dbdbdb;
+  border-bottom: 2rpx solid #dbdbdb;
+}
+.htableBox:last-child{
+  border-right: 0;
+}
+.mysignBTable{
+  display: flex;
+}
+.btableBox{
+  display: inline-block;
+  text-align: center;
+  font-size: 24rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  border-right: 2rpx solid #dbdbdb;
+  border-bottom: 2rpx solid #dbdbdb;
+  color: #F8627B;
+}
+.btableBox1{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24rpx;
+  border-bottom: 2rpx solid #dbdbdb;
+  padding: 0 15rpx;
+  box-sizing: border-box;
+}
+.btableBox:last-child{
+  border-right: 0;
+}
+.btableBox1 .yiget{
+  font-size: 24rpx;
+  color: #299331;
+  padding-right: 10rpx;
+}
+.btableBox1 .get{
+  height: 42rpx;
+  display: inline-block;
+  padding: 0 16rpx;
+  font-size: 22rpx;
+  color: #ffffff;
+  background: #F8627B;
+  line-height: 42rpx;
+  border-radius: 42rpx;
+}
+.btableBox1 .yipast{
+  font-size: 24rpx;
+  color: gray;
+}
+
+/* 跳转其他抽签弹框 */
+.otherLimitlotteryPop{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
   bottom: 0;
-  z-index: 1;
+  left: 0;
+  z-index: 20;
+  background: rgba(0,0,0,.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.otherLimitlotteryPopBox{
+  width: 500rpx;
+  background: #fff;
+  border-radius: 10rpx;
+  padding: 60rpx 50rpx 50rpx 40rpx;
+  box-sizing: border-box;
+}
+.otherLimitlotteryPopBox text{
+  font-size: 28rpx;
+  line-height: 56rpx;
+}
+.otherLimitlotteryPopBox view{
+  width: 100%;
+  height: 70rpx;
+  border-radius: 70rpx;
+  font-size: 26rpx;
+  color: #fff;
+  line-height: 70rpx;
+  text-align: center;
+  background: #F8627B;
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.4);
+  margin-top: 30rpx;
 }

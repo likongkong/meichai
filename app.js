@@ -1621,3 +1621,6 @@ App({
 // payee  收款
 
 // "pages/vipOrTicket/vipOrTicket",  
+
+
+// ballotList  抽签中签名单
