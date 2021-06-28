@@ -391,7 +391,7 @@ App({
     var _this = this;
 
     wx.request({
-      url: 'https://cdn.51chaidan.com/produce/serverDetail.txt',
+      url: 'https://cdn.51chaidan.com/produce/serverDetail.txt?time=' + Date.parse(new Date()),
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
