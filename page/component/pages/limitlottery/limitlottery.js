@@ -876,7 +876,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
             paypriceCashPledge:parseFloat((res.data.Info.infoGoods.shop_price || 0)-(res.data.Info.cashPledge||0)).toFixed(1)
           })
           console.log(_this.data.is_ordinary_ticket_user,'是否是普票用户')
-          if(res.data.Info.is_ordinary_ticket_user == undefined){
+          if(res.data.Info.is_ordinary_ticket_user != undefined && !res.data.Info.is_ordinary_ticket_user){
             _this.setData({
               isOtherLimitlotteryPop:true
             })
