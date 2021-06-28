@@ -162,7 +162,8 @@ Page({
     ordinaryTicketUser:false,
     twoAffirmBox:false,
     lottoid:0,
-    isOtherLimitlotteryPop:false
+    isOtherLimitlotteryPop:false,
+    isPopNum:0
   },
   // 跳转刮刮卡
   jumpScrapingCard(){
@@ -656,7 +657,6 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
       },
       success: function (res) {
         _this.data.push_id =  0;
-
         console.log(res)
         wx.stopPullDownRefresh();
         wx.stopPullDownRefresh()
@@ -715,14 +715,19 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
                   _this.dateformat(res.data.Info.infoActivity.overtime);
                 }.bind(_this), 1000);
               } else if (res.data.Info.infoActivity.nextOrder) { // 中奖了
-                wx.showModal({
-                  title: '',
-                  content: '恭喜，您已中签',
-                  showCancel:false,
-                  confirmText:'知道了',
-                  success (res) {
-                  }
-                })
+                if(_this.data.isPopNum == 0){
+                  wx.showModal({
+                    title: '',
+                    content: '恭喜，您已中签',
+                    showCancel:false,
+                    confirmText:'知道了',
+                    success (res) {
+                    }
+                  })
+                  _this.setData({
+                    isPopNum: 1
+                  })
+                }
                 _this.setData({
                   awardstatus: 2,
                   isgetaward:true
@@ -745,14 +750,19 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
               }
             } else {
               if(res.data.Info.infoFragment && res.data.Info.infoFragment.activitySignNumber && res.data.Info.infoFragment.activitySignNumber.length > 0){
-                wx.showModal({
-                  title: '',
-                  content: '很遗憾，您未中签',
-                  showCancel:false,
-                  confirmText:'知道了',
-                  success (res) {
-                  }
-                })
+                if(_this.data.isPopNum == 0){
+                  wx.showModal({
+                    title: '',
+                    content: '很遗憾，您未中签',
+                    showCancel:false,
+                    confirmText:'知道了',
+                    success (res) {
+                    }
+                  })
+                  _this.setData({
+                    isPopNum: 1
+                  })
+                }
               };
               _this.setData({
                 btntext: "没有中奖,再接再厉",

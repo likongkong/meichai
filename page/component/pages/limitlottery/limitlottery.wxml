@@ -362,7 +362,7 @@
 							</view>
 							<view class="mysignBTableWrap">
 								<block wx:for="{{winnerUnclaimedLotto}}" wx:key="key" wx:if="{{item.status != 0}}">
-									<view class="mysignBTable" catchtap="{{item.status == 2?'viewtheorder':''}}">
+									<view class="mysignBTable" catchtap="{{item.status == 1?'winnerlogic':item.status == 2?'viewtheorder':''}}">
 										<text class="btableBox" style="width:12%;">{{item.sort}}</text>
 										<text class="btableBox" style="width:15%;">{{item.day}}</text>
 										<text class="btableBox" style="width:23%;">{{item.tel}}</text>

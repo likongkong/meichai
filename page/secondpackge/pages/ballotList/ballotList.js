@@ -267,15 +267,17 @@ Page({
       wx.stopPullDownRefresh();
       wx.hideLoading();
     },500)
-    _this.setData({
-      ismore:false,
-      dataList: [..._this.data.dataList,...data]
-    })
-    if(_this.data.dataList.length < 20){
+    // setTimeout(function() {
       _this.setData({
-        loadprompt : false
+        ismore:false,
+        dataList: [..._this.data.dataList,...data]
       })
-    }
+      if(_this.data.dataList.length < 20){
+        _this.setData({
+          loadprompt : false
+        })
+      }
+    // },2000)
 
   },
 
