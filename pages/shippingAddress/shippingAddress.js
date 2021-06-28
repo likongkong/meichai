@@ -42,7 +42,7 @@ Page({
     inputtxt1: '收货人姓名（请填写真实姓名）',
     inputtxt2: '手机号',
     inputtxt3: '详细地址',
-    inputtxt4: '身份证号码（选填，海外购产品清关需要）',
+    inputtxt4: '身份证号码（选填）',
     c_title: '收货地址',
     c_arrow: true,
     c_backcolor: '#ff2742',
@@ -86,7 +86,7 @@ Page({
       });
     } else if (inp == 4) {
       this.setData({
-        inputtxt4: "身份证号码（选填，海外购产品清关需要）"
+        inputtxt4: "身份证号码（选填）"
       });
     };
   }, 
@@ -215,7 +215,8 @@ Page({
       tel:options.phone,
       province:options.province,
       loginid: app.signindata.loginid,
-      uid: app.signindata.uid      
+      uid: app.signindata.uid,
+      lim: options.lim || 0      
     });
 
     // 省市联动

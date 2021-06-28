@@ -1770,9 +1770,24 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
     var idcard = event.target.dataset.idcard || event.currentTarget.dataset.idcard;
     var phone = event.target.dataset.phone || event.currentTarget.dataset.phone;
     var province = event.target.dataset.province || event.currentTarget.dataset.province;
-    wx.navigateTo({
-      url: "/pages/shippingAddress/shippingAddress?aid=" + aid + '&address=' + address + '&city=' + city + '&consignee=' + consignee + '&district=' + district + '&idcard=' + idcard + '&phone=' + phone + '&province=' + province
-    })
+    var idctrue = event.target.dataset.idctrue || event.currentTarget.dataset.idctrue || false;
+    if(idctrue){
+      wx.showModal({
+        content:'该抽选需要实名制参加，请填写身份证号码',
+        success: function (res) {
+          if(res.confirm){
+            wx.navigateTo({
+              url: "/pages/shippingAddress/shippingAddress?lim=1&aid=" + aid + '&address=' + address + '&city=' + city + '&consignee=' + consignee + '&district=' + district + '&idcard=' + idcard + '&phone=' + phone + '&province=' + province
+            })
+          }
+        }
+      })
+    }else{
+      wx.navigateTo({
+        url: "/pages/shippingAddress/shippingAddress?aid=" + aid + '&address=' + address + '&city=' + city + '&consignee=' + consignee + '&district=' + district + '&idcard=' + idcard + '&phone=' + phone + '&province=' + province
+      })
+    }
+
   },
 
   // 跳转增加新地址

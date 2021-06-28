@@ -1099,6 +1099,37 @@ Page({
           });
           // 微信支付
           _this.paymentmony()
+        }else if(res.data.ReturnCode == 400){
+          _this.setData({
+            tipbacktwo: false,
+            buybombsimmediately: false,                        
+            tipback: false,
+            dsbframeiftr: false,
+            paymentiftr: false, 
+            // 优惠券清空
+            tipcoupon: '请选择优惠券',
+            coudata1cid: '',
+            coudata1mon:'0.00',
+            coudata2cid: '',
+            coudata2mon:'0.00', 
+            //  分享判断是否支付成功
+            payiftr:true,
+            numberofdismantling:1,
+            isBlindBoxNum:1,
+            //  活动支付完成隐藏弹框
+            suboformola: false,
+            desc: '',
+            descpassword:''                       
+          }); 
+          wx.showModal({
+            content: res.data.Msg || res.data.msg,
+            showCancel:false,
+            success: function (res) {
+              wx.navigateTo({  
+                url: "/pages/myorder/myorder?tabnum=0"
+              });
+            }
+          })          
         }else{
           // 提交订单蒙层
           _this.setData({
@@ -1878,6 +1909,7 @@ Page({
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
+        console.log('优惠券=====',res)
         var screeningavailable1 = [];
         var screeningavailable2 = [];
         // 不可用优惠券
@@ -2321,11 +2353,11 @@ Page({
   },
   // 二级背景函数
   tipbacktwo:function(){
-    if(this.data.specialGoods==1){
-      this.setData({
-        tipback: false
-      })
-    };
+    // if(this.data.specialGoods==1){
+    //   this.setData({
+    //     tipback: false
+    //   })
+    // };
     if (this.data.receivingaddress){
       this.setData({
         receivingaddress: false,

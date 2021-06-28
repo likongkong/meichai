@@ -890,11 +890,11 @@
 	</view>
 	<view class='recgadcon'>
 		<view class='recgaddata' wx:for='{{addressdata}}' wx:key='key'>
-			<view class='recgaddname' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='revisethereceivingaddress'>
+			<view class='recgaddname' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='{{item.idcard?"revisethereceivingaddress":"jumpeditaddress"}}' data-address='{{item.address}}' data-aid='{{item.aid}}' data-city='{{item.city}}' data-consignee='{{item.consignee}}' data-district='{{item.district}}' data-phone='{{item.phone}}' data-province='{{item.province}}' data-idcard='{{item.idcard}}' data-idctrue='true'>
 				<view class='recgaddnameleft'>{{item.consignee}}</view>
 				<view class='recgaddnameleft'>{{item.phone}}</view>
 			</view>
-			<view class='recgadaddress' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='revisethereceivingaddress'>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
+			<view class='recgadaddress' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='{{item.idcard?"revisethereceivingaddress":"jumpeditaddress"}}' data-address='{{item.address}}' data-aid='{{item.aid}}' data-city='{{item.city}}' data-consignee='{{item.consignee}}' data-district='{{item.district}}' data-phone='{{item.phone}}' data-province='{{item.province}}' data-idcard='{{item.idcard}}' data-idctrue='true'>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
 			<view class='recgadbottom'>
 				<view class='recgadbotleft'>
 					<image class='recgadbotleftimg' hidden='{{!item.checked}}' src='../../../../pages/images/pressed_click.png'></image>
