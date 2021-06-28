@@ -1726,8 +1726,8 @@
             </text>
         </view>
         <view class='addmodbottom'>
-            <view style='width:50%;text-align:center;height:50rpx;float:left;font-size:30rpx;position:relative;' catchtap='vipOrOrdermine1'>核验</view>
-            <view style='width:50%;text-align:center;height:50rpx;float:right;font-size:30rpx;position:relative;' catchtap='vipOrOrdercancel'>不核验</view>
+            <view style='width:50%;text-align:center;height:50rpx;float:right;font-size:30rpx;position:relative;' catchtap='vipOrOrdermine1'>核验</view>
+            <view style='width:50%;text-align:center;height:50rpx;float:left;font-size:30rpx;position:relative;' catchtap='vipOrOrdercancel'>不核验</view>
         </view>
     </view>
 </view>

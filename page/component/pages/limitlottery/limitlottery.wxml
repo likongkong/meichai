@@ -148,7 +148,7 @@
 
 
 		<!-- 特殊付费抽签中未付费显示 -->
-		<block wx:if='{{(infoActivity.status==2&& infoFragment.personalFragmentNumber==0)}}'>
+		<block wx:if='{{(infoActivity.status==2 && infoFragment.personalFragmentNumber==0 && infoFragment.activitySignNumber.length == 0)}}'>
 			<view class='limsharebox' catchtap='limsavefun' wx:if='{{is_share_but&&canShare!=1}}'>
 				<image class='limshareimg' src='https://www.51chaidan.com/images/act/brand/createPoster.png'></image>
 				<view style='color:#53a5fd;font-size:22rpx;padding:3rpx 0 0 0;text-align:center;'>生成海报</view>
@@ -187,6 +187,8 @@
 			</view>
 		</view>
 
+    
+
 		<view wx:elif='{{infoActivity.status == 2 && infoFragment.personalFragmentNumber == 0}}'>
 			<view wx:if='{{is_ordinary_ticket_user && infoFragment.activitySignNumber != 0}}'>
 				<view class='takepartin' catchtap="joinlimitlottery" style="{{!is_share_but?'margin:20rpx auto 20rpx auto;':'margin:20rpx 0 20rpx 300rpx;'}}">
@@ -218,6 +220,28 @@
 					</view>
 				</view>
 			</view>
+
+			<block wx:elif="{{infoActivity.status==2 && infoActivity.joinMothed == 'payTicket' && infoFragment.activitySignNumber != 0}}">
+					<view class="mysign">
+						<view class="mysignTopWrap"><text>报名成功</text> 我的抽签信息</view>
+						<view class="mysignTableWrap">
+								<view class="mysignHTable">
+												<text class="htableBox" style="width:40%;">手机号</text>
+												<text class="htableBox" style="width:60%;">身份证号</text>
+								</view>
+								<view class="mysignBTableWrap">
+												<block wx:for="{{infoFragment.activitySignNumber}}" wx:key="key" wx:if="{{item.status != 0}}">
+																<view class="mysignBTable">
+																				<text class="btableBox" style="width:40%;color:#1684FC;">{{item.tel}}</text>
+																				<text class="btableBox" style="width:60%;color:#1684FC;">{{item.lotto}}</text>
+																</view>
+												</block>
+								</view>
+							</view>
+					</view>
+
+			</block>
+
 			<view class='takepartin' catchtap="joinlimitlottery" style="{{!is_share_but?'margin:20rpx auto 20rpx auto;':'margin:20rpx 0 20rpx 300rpx;'}}" wx:else>
 				参与抽签
 					<view wx:if='{{infoActivity.joinMothed == "blindBox"}}' class="tagstyle">抽盒机专享</view>
@@ -225,6 +249,25 @@
 			</view>
 		</view>
 	
+		<block wx:elif='{{infoActivity.status==2 && infoActivity.joinMothed == "payTicket" && infoFragment.activitySignNumber.length > 0}}'>
+					<view class="mysign">
+						<view class="mysignTopWrap"><text>报名成功</text> 我的抽签信息</view>
+						<view class="mysignTableWrap">
+								<view class="mysignHTable">
+												<text class="htableBox" style="width:40%;">手机号</text>
+												<text class="htableBox" style="width:60%;">身份证号</text>
+								</view>
+								<view class="mysignBTableWrap">
+												<block wx:for="{{infoFragment.activitySignNumber}}" wx:key="key" wx:if="{{item.status != 0}}">
+																<view class="mysignBTable">
+																				<text class="btableBox" style="width:40%;color:#1684FC;">{{item.tel}}</text>
+																				<text class="btableBox" style="width:60%;color:#1684FC;">{{item.lotto}}</text>
+																</view>
+												</block>
+								</view>
+							</view>
+					</view>			
+		</block>
 
 		<view wx:elif='{{infoActivity.status == 2 && infoFragment.personalFragmentNumber != 0}}' style="width:100%;margin:20rpx 0;">
       <block wx:if='{{is_share_but}}'>
@@ -407,6 +450,37 @@
 						</view>
 					</view>
 				</block>
+				<block wx:elif='{{infoActivity.joinMothed == "payTicket"}}'>
+						<block wx:if="{{infoFragment.activitySignNumber && infoFragment.activitySignNumber.length != 0}}">
+
+
+							<view class="mysignInfo">
+									<view class="mysignTopWrap">
+									  	<block wx:if='{{infoActivity.isWinner}}'><text style="color:#F8627B;">恭喜您已中签</text> 我的中签信息</block>
+									    <block wx:else>很遗憾您未中签 我的抽签信息</block>
+									</view>
+									<view class="mysignTableWrap">
+										<view class="mysignHTable">
+														<text class="htableBox" style="width:40%;">手机号</text>
+														<text class="htableBox" style="width:60%;">身份证号</text>
+										</view>
+										<view class="mysignBTableWrap">
+													<block wx:for="{{infoFragment.activitySignNumber}}" wx:key="key" wx:if="{{item.status != 0}}">
+																	<view class="mysignBTable">
+																					<text class="btableBox" style="width:40%;{{infoActivity.isWinner?'':'color:#1684FC;'}}">{{item.tel}}</text>
+																					<text class="btableBox" style="width:60%;{{infoActivity.isWinner?'':'color:#1684FC;'}}">{{item.lotto}}</text>
+																	</view>
+													</block>
+										</view>
+									</view>
+								</view>
+
+								<view style="width:100%;text-align:center;color:gray;line-height:50rpx;font-size:26rpx;" catchtap="jumpballotList">查看所有中签号></view>
+
+						</block>
+
+
+				</block>
 				<block wx:else>
 					<view style="width:100%;font-size:25rpx;line-height:30rpx;text-align:center;margin:20rpx 0;">中签名单</view>
 					<view style='font-size:30rpx;color:#1989FA;' wx:for='{{winnerLotto}}' wx:key='key'>
@@ -430,7 +504,7 @@
 				</block>
 				<block wx:else>
 					<view wx:if='{{awardstatus == 2}}' class='takepartin' style="background:#FF9800;" catchtap="winnerlogic">领取奖励</view>
-					<view wx:if='{{awardstatus == 1}}' style="width:100%;text-align:center;color:#FF9800;line-height:50rpx;">已领取奖励</view>
+					<view wx:if='{{awardstatus == 1}}' catchtap="{{infoActivity.joinMothed == 'payTicket'?'viewtheorder':''}}" data-oid='{{infoActivity.cart_id}}' style="width:100%;text-align:center;color:#FF9800;line-height:50rpx;">已领取奖励</view>
 					<!-- 开奖24小时未领取，已过期 -->
 					<view wx:if='{{awardstatus == 3}}' style="width:100%;text-align:center;color:gray;line-height:50rpx;">未领取，已过期</view>
 					<view wx:if='{{awardstatus == 4}}' style="width:100%;text-align:center;color:gray;line-height:50rpx;">没有中奖,再接再厉</view>
@@ -635,7 +709,7 @@
 								</view>
 								<view style="width:100%;height:46rpx;">
 									<image class="exhshopimg" mode='aspectFit' src="{{item.brandLogo}}"></image>
-									<view  class="specialellipsis" style="width:160rpx;height:46rpx;line-height:46rpx;font-size:22rpx;float:left;margin-left:3rpx;">{{item.brandName}}</view>
+									<view  class="specialellipsis" style="width:150rpx;height:46rpx;line-height:46rpx;font-size:22rpx;float:left;margin-left:3rpx;">{{item.brandName}}</view>
 									<view wx:if='{{item.tags.length>0 && item.type != 5}}' class="exhshoptiright specialellipsis">{{item.tags[0]}}</view>
 								</view>
 							</block>
@@ -687,7 +761,7 @@
 								</view>
 								<view style="width:100%;height:46rpx;">
 									<image class="exhshopimg" mode='aspectFit' src="{{item.brandLogo}}"></image>
-									<view  class="specialellipsis" style="width:160rpx;height:46rpx;line-height:46rpx;font-size:22rpx;float:left;margin-left:3rpx;">{{item.brandName}}</view>
+									<view  class="specialellipsis" style="width:150rpx;height:46rpx;line-height:46rpx;font-size:22rpx;float:left;margin-left:3rpx;">{{item.brandName}}</view>
 									<view wx:if='{{item.tags.length>0 && item.type != 5}}' class="exhshoptiright specialellipsis">{{item.tags[0]}}</view>
 								</view>
 							</block>
@@ -890,11 +964,11 @@
 	</view>
 	<view class='recgadcon'>
 		<view class='recgaddata' wx:for='{{addressdata}}' wx:key='key'>
-			<view class='recgaddname' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='{{item.idcard?"revisethereceivingaddress":"jumpeditaddress"}}' data-address='{{item.address}}' data-aid='{{item.aid}}' data-city='{{item.city}}' data-consignee='{{item.consignee}}' data-district='{{item.district}}' data-phone='{{item.phone}}' data-province='{{item.province}}' data-idcard='{{item.idcard}}' data-idctrue='true'>
+			<view class='recgaddname' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='{{infoActivity.status == 2 && !item.idcard?"jumpeditaddress":"revisethereceivingaddress"}}' data-address='{{item.address}}' data-aid='{{item.aid}}' data-city='{{item.city}}' data-consignee='{{item.consignee}}' data-district='{{item.district}}' data-phone='{{item.phone}}' data-province='{{item.province}}' data-idcard='{{item.idcard}}' data-idctrue='true'>
 				<view class='recgaddnameleft'>{{item.consignee}}</view>
 				<view class='recgaddnameleft'>{{item.phone}}</view>
 			</view>
-			<view class='recgadaddress' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='{{item.idcard?"revisethereceivingaddress":"jumpeditaddress"}}' data-address='{{item.address}}' data-aid='{{item.aid}}' data-city='{{item.city}}' data-consignee='{{item.consignee}}' data-district='{{item.district}}' data-phone='{{item.phone}}' data-province='{{item.province}}' data-idcard='{{item.idcard}}' data-idctrue='true'>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
+			<view class='recgadaddress' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='{{infoActivity.status == 2 && !item.idcard?"jumpeditaddress":"revisethereceivingaddress"}}' data-address='{{item.address}}' data-aid='{{item.aid}}' data-city='{{item.city}}' data-consignee='{{item.consignee}}' data-district='{{item.district}}' data-phone='{{item.phone}}' data-province='{{item.province}}' data-idcard='{{item.idcard}}' data-idctrue='true'>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
 			<view class='recgadbottom'>
 				<view class='recgadbotleft'>
 					<image class='recgadbotleftimg' hidden='{{!item.checked}}' src='../../../../pages/images/pressed_click.png'></image>

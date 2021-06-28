@@ -81,7 +81,7 @@ page {
   border-radius: 5rpx;
   color: #fff;
   margin-top: 3rpx;
-  max-width: 60rpx;
+  max-width: 70rpx;
 }
 
 .indheadinp {

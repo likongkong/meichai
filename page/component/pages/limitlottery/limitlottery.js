@@ -934,7 +934,8 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
             if (res.data.Info.infoActivity.status == 3 && res.data.Info.infoActivity.isWinner && !res.data.Info.infoActivity.isOrdered) {
               _this.addressCom();
             }
-            if(res.data.Info.infoActivity.joinMothed == 'payTicket' && res.data.Info.infoActivity.payTicketCate && res.data.Info.infoActivity.payTicketCate == 'fullPledge'){
+            // && res.data.Info.infoActivity.payTicketCate && res.data.Info.infoActivity.payTicketCate == 'fullPledge'
+            if(res.data.Info.infoActivity.joinMothed == 'payTicket'){
               _this.addressCom();
             } 
             _this.getSnapshot()
@@ -1245,7 +1246,9 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
   },
   joinDraw: function (share_uid) {
     var _this = this;
-    if(this.data.infoActivity.joinMothed == 'payTicket' && this.data.infoActivity.payTicketCate == 'fullPledge'){
+    // && this.data.infoActivity.payTicketCate == 'fullPledge'
+    if(this.data.infoActivity.joinMothed == 'payTicket'){
+      console.log(1)
       if(this.data.isfullPledge){
         var q1 = Dec.Aese('mod=lotto&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid=' + share_uid+'&perayu='+_this.data.perayu+'&aid='+this.data.tipaid);
         console.log('参与抽签','mod=lotto&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid=' + share_uid+'&perayu='+_this.data.perayu+'&aid='+this.data.tipaid)
@@ -1257,6 +1260,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
         return false;
       }
     }else{
+      console.log(2)
       var q1 = Dec.Aese('mod=lotto&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid=' + share_uid+'&perayu='+_this.data.perayu);
       console.log('参与抽签','mod=lotto&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid=' + share_uid+'&perayu='+_this.data.perayu)
     }
@@ -1976,7 +1980,8 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
       tipaddress: tipadd,
       receivingaddress: false
     });
-    if(this.data.infoActivity.joinMothed == 'payTicket' && this.data.infoActivity.payTicketCate == 'fullPledge'){
+    //  && this.data.infoActivity.payTicketCate == 'fullPledge'
+    if(this.data.infoActivity.joinMothed == 'payTicket' && this.data.infoActivity.status == 2){
       this.setData({
         isfullPledge:true
       });
@@ -1994,10 +1999,10 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
   // 提交订单
   placeorder: function () {
     var _this = this;
-    if (this.data.tipaid == '') {
-      app.showToastC('请选择地址');
-      return false;
-    };
+    // if (this.data.tipaid == '') {
+    //   app.showToastC('请选择地址');
+    //   return false;
+    // };
 
     var id = _this.data.infoActivity.id
     var aid = _this.data.tipaid;
@@ -2005,8 +2010,11 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
     _this.setData({
       suboformola: true
     });
+
     var q = Dec.Aese('mod=lotto&operation=order&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + id + '&aid=' + aid + '&desc=' + _this.data.desc + '&lotto_id=' + _this.data.lottoid);
+
     console.log('提交订单==','mod=lotto&operation=order&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + id + '&aid=' + aid + '&desc=' + _this.data.desc + '&lotto_id=' + _this.data.lottoid)
+
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q,
       method: 'GET',

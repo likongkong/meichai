@@ -22,7 +22,7 @@ Page({
     pid:0,
     dataList:[],
     processingData:[],
-    limit:40,
+    limit:17,
     loadprompt:true,
     ismore:false
   },
@@ -36,6 +36,18 @@ Page({
     // 判断是否授权
     this.activsign();
     console.log(_this.data.limit)
+
+    let that = this;
+    // 获取系统信息
+    wx.getSystemInfo({
+      success: function (res) {
+        _this.setData({
+          worthSubsidiaryHeight:((res.windowHeight - (res.statusBarHeight+44))/20)-1,
+          moreH:((res.windowHeight - (res.statusBarHeight+44))/20)*2
+        });
+        console.log(res.windowHeight - (res.statusBarHeight+44))
+      }
+    });
   },
   onLoadfun:function(){
     var _this = this;
@@ -152,14 +164,16 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.reset();
-    this.getInfo();
+    // this.reset();
+    // this.getInfo();
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+  },
+  nextpage(){
     if(this.data.loadprompt){
       this.data.pid = ++this.data.pid;
       // 处理数据分页    
@@ -201,6 +215,9 @@ Page({
         if (res.data.ReturnCode == 200) {
         
           _this.data.processingData = res.data.List.winnerLotto;
+          _this.setData({
+            isShowDay:res.data.List.isShowDay || false
+          })
           _this.processingDataPaging();
 
           // var ticket = res.data.List.ticket;
@@ -228,9 +245,9 @@ Page({
       }
     }); 
   },
-  reset(){
-    this.setData({pid:0,dataList:[],loadprompt:true,nodata:false})
-  },
+  // reset(){
+  //   this.setData({pid:0,dataList:[],loadprompt:true,nodata:false})
+  // },
   // 处理列表数据分页
   processingDataPaging(){
     let _this = this;
@@ -238,9 +255,9 @@ Page({
     let limit = _this.data.limit;
     let dataList = _this.data.processingData;
     console.log(dataList,pid)
-    _this.setData({
-      ismore:true
-    });  
+    // _this.setData({
+    //   ismore:true
+    // });  
     let data = [];
     if(pid == 0){
       for (let i=0; i < limit; i++) {
@@ -269,10 +286,10 @@ Page({
     },500)
     // setTimeout(function() {
       _this.setData({
-        ismore:false,
-        dataList: [..._this.data.dataList,...data]
+        // ismore:false,
+        dataList: data
       })
-      if(_this.data.dataList.length < 20){
+      if(_this.data.dataList.length < _this.data.limit){
         _this.setData({
           loadprompt : false
         })
