@@ -191,10 +191,8 @@
 
 		<view wx:elif='{{infoActivity.status == 2 && infoFragment.personalFragmentNumber == 0}}'>
 			<view wx:if='{{is_ordinary_ticket_user && infoFragment.activitySignNumber != 0}}'>
-				<view class='takepartin' catchtap="joinlimitlottery" style="{{!is_share_but?'margin:20rpx auto 20rpx auto;':'margin:20rpx 0 20rpx 300rpx;'}}">
+				<view class='takepartin' catchtap="joinlimitlottery">
 					购票信息
-					<view wx:if='{{infoActivity.joinMothed == "blindBox"}}' class="tagstyle">抽盒机专享</view>
-					<view wx:if='{{infoActivity.joinMothed == "zone"}}' class="tagstyle">抽签专区专享</view>
 				</view>
 				<view style="display: flex;justify-content: space-between;padding:30rpx 0;" wx:if="{{infoFragment.activitySignNumber && infoFragment.activitySignNumber.length != 0}}">
 					<view class="mysignInfo">
@@ -405,7 +403,7 @@
 							</view>
 							<view class="mysignBTableWrap">
 								<block wx:for="{{winnerUnclaimedLotto}}" wx:key="key" wx:if="{{item.status != 0}}">
-									<view class="mysignBTable" catchtap="{{item.status == 1?'winnerlogic':item.status == 2?'viewtheorder':''}}">
+									<view class="mysignBTable" data-oid="{{item.order_id}}" catchtap="{{item.status == 1?'winnerlogic':item.status == 2?'viewtheorder':''}}">
 										<text class="btableBox" style="width:12%;">{{item.sort}}</text>
 										<text class="btableBox" style="width:15%;">{{item.day}}</text>
 										<text class="btableBox" style="width:23%;">{{item.tel}}</text>
@@ -427,7 +425,7 @@
 							</view>
 						</view>
 					</view>
-					<view style="width:100%;text-align:center;color:gray;line-height:50rpx;font-size:26rpx;" catchtap="jumpballotList">查看所有中签号></view>
+					<view style="width:100%;text-align:center;color:gray;line-height:50rpx;font-size:26rpx;margin-top:25rpx;" catchtap="jumpballotList">查看所有中签号></view>
 					<view class="mysignInfo" wx:if="{{winnerLotto && winnerLotto.length != 0}}">
 						<view class="mysignTopWrap">我的抽签信息</view>
 						<view class="mysignTableWrap">
@@ -964,11 +962,11 @@
 	</view>
 	<view class='recgadcon'>
 		<view class='recgaddata' wx:for='{{addressdata}}' wx:key='key'>
-			<view class='recgaddname' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='{{infoActivity.status == 2 && !item.idcard?"jumpeditaddress":"revisethereceivingaddress"}}' data-address='{{item.address}}' data-aid='{{item.aid}}' data-city='{{item.city}}' data-consignee='{{item.consignee}}' data-district='{{item.district}}' data-phone='{{item.phone}}' data-province='{{item.province}}' data-idcard='{{item.idcard}}' data-idctrue='true'>
+			<view class='recgaddname' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='{{infoActivity.status == 2 && !item.idcard && !is_ordinary_ticket_user?"jumpeditaddress":"revisethereceivingaddress"}}' data-address='{{item.address}}' data-aid='{{item.aid}}' data-city='{{item.city}}' data-consignee='{{item.consignee}}' data-district='{{item.district}}' data-phone='{{item.phone}}' data-province='{{item.province}}' data-idcard='{{item.idcard}}' data-idctrue='true'>
 				<view class='recgaddnameleft'>{{item.consignee}}</view>
 				<view class='recgaddnameleft'>{{item.phone}}</view>
 			</view>
-			<view class='recgadaddress' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='{{infoActivity.status == 2 && !item.idcard?"jumpeditaddress":"revisethereceivingaddress"}}' data-address='{{item.address}}' data-aid='{{item.aid}}' data-city='{{item.city}}' data-consignee='{{item.consignee}}' data-district='{{item.district}}' data-phone='{{item.phone}}' data-province='{{item.province}}' data-idcard='{{item.idcard}}' data-idctrue='true'>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
+			<view class='recgadaddress' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='{{infoActivity.status == 2 && !item.idcard && !is_ordinary_ticket_user?"jumpeditaddress":"revisethereceivingaddress"}}' data-address='{{item.address}}' data-aid='{{item.aid}}' data-city='{{item.city}}' data-consignee='{{item.consignee}}' data-district='{{item.district}}' data-phone='{{item.phone}}' data-province='{{item.province}}' data-idcard='{{item.idcard}}' data-idctrue='true'>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
 			<view class='recgadbottom'>
 				<view class='recgadbotleft'>
 					<image class='recgadbotleftimg' hidden='{{!item.checked}}' src='../../../../pages/images/pressed_click.png'></image>
@@ -1124,7 +1122,7 @@
 </view>
 
 <!-- 展会身份弹框 -->
-<view wx:if="{{ordinaryTicketUser}}" catchtouchmove="true" style="width:100%;height:100%;position:fixed;top:0;left:0;z-index:998;">
+<view wx:if="{{ordinaryTicketUser}}" catchtouchmove="true" style="width:100%;height:100%;position:fixed;top:0;left:0;z-index:800;">
 	<view class='bgstyle' catchtap="hideOrdinaryTicketUser"></view>
   <view class="signatureExchange" style="height:{{windowHeight}}px;">
 			<view class="seTopTitle">签号兑换</view>
@@ -1148,7 +1146,9 @@
 							<!-- 状态 -->
 							<view wx:if='{{sonitem.status == 2}}' class="seTopTitleDState" style="color:#299331;">已参加</view>
 							<view wx:elif='{{sonitem.status == 0}}' class="seTopTitleDState" style="background:#F2B40C;" data-orderid="{{sonitem.order_id}}" data-index="{{index}}" data-sonindex="{{sonindex}}" catchtap="twoAffirm">去验票</view>
-							<view wx:elif='{{sonitem.status == 1}}' data-infoactivityid="{{infoActivity.id}}" data-ticketid="{{sonitem.id}}" class="seTopTitleDState" style="background:#F8627B;" catchtap="exchangesign">参加抽签</view>
+							<!-- <view wx:elif='{{sonitem.status == 1}}' data-infoactivityid="{{infoActivity.id}}" data-ticketid="{{sonitem.id}}" class="seTopTitleDState" style="background:#F8627B;" catchtap="exchangesign">参加抽签</view> -->
+							<view wx:elif='{{sonitem.status == 1}}' data-infoactivityid="{{infoActivity.id}}" data-ticketid="{{sonitem.id}}" class="seTopTitleDState" style="background:#F8627B;" data-lottoid="{{sonitem.id}}" catchtap="winnerlogic">参加抽签</view>
+							
 					</view>
 					</block>
 				</block>

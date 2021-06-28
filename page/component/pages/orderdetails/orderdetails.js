@@ -475,6 +475,7 @@ Page({
     });
     var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
     var q = Dec.Aese('mod=getinfo&operation=orderdetail&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&oid=' + _this.data.oid + '&blackCity=' + _this.data.blackCity);
+    console.log('订单详情请求===','mod=getinfo&operation=orderdetail&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&oid=' + _this.data.oid + '&blackCity=' + _this.data.blackCity)
 
     wx.request({
       url: app.signindata.comurl + 'order.php' + q,

@@ -883,14 +883,24 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
             subscribedata: res.data.Info.subscribe || '',
             id:res.data.Info.infoActivity.id||0,
             cashPledge:res.data.Info.cashPledge||0,
-            paypriceCashPledge:parseFloat((res.data.Info.infoGoods.shop_price || 0)-(res.data.Info.cashPledge||0)).toFixed(1)
           })
-          console.log(_this.data.is_ordinary_ticket_user,'是否是普票用户')
-          if(res.data.Info.is_ordinary_ticket_user != undefined && !res.data.Info.is_ordinary_ticket_user){
+
+          if(res.data.Info.is_ordinary_ticket_user!=undefined&&res.data.Info.is_ordinary_ticket_user){
             _this.setData({
-              isOtherLimitlotteryPop:true
+              paypriceCashPledge:parseFloat(res.data.Info.infoGoods.shop_price || 0).toFixed(1)
+            })
+          }else{
+            _this.setData({
+              paypriceCashPledge:parseFloat((res.data.Info.infoGoods.shop_price || 0)-(res.data.Info.cashPledge||0)).toFixed(1)
             })
           }
+
+          console.log(_this.data.is_ordinary_ticket_user,'是否是普票用户')
+          // if(res.data.Info.is_ordinary_ticket_user != undefined && !res.data.Info.is_ordinary_ticket_user){
+          //   _this.setData({
+          //     isOtherLimitlotteryPop:true
+          //   })
+          // }
 
           // 是否调取展会数据
           if (res.data.Info.infoActivity && res.data.Info.infoActivity.specialWay && res.data.Info.infoActivity.specialWay == 1||(res.data.Info.infoActivity.specialWay != 1&&brandid>0)) {
@@ -935,9 +945,10 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
               _this.addressCom();
             }
             // && res.data.Info.infoActivity.payTicketCate && res.data.Info.infoActivity.payTicketCate == 'fullPledge'
-            if(res.data.Info.infoActivity.joinMothed == 'payTicket'){
+            if(res.data.Info.infoActivity.joinMothed == 'payTicket' || (res.data.Info.is_ordinary_ticket_user!=undefined&&res.data.Info.is_ordinary_ticket_user)){
               _this.addressCom();
             } 
+            
             _this.getSnapshot()
           }, 1000)
 
@@ -1078,12 +1089,15 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
     if(_this.data.is_ordinary_ticket_user != undefined && _this.data.is_ordinary_ticket_user){
       this.ticketList();
     }else if(_this.data.is_ordinary_ticket_user != undefined && !_this.data.is_ordinary_ticket_user){
-      wx.showToast({
-        title: '未检测到您的购票信息，请参加其他抽签活动',
-        icon: 'none',
-        mask:true,
-        duration:2000
-      });  
+      // wx.showToast({
+      //   title: '未检测到您的购票信息，请参加其他抽签活动',
+      //   icon: 'none',
+      //   mask:true,
+      //   duration:2000
+      // });  
+      _this.setData({
+        isOtherLimitlotteryPop:true
+      })
     }else{
       if(_this.data.infoActivity.premiseForJoin && _this.data.isList == 1){
           _this.listTipImg();
@@ -1730,6 +1744,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
     var _this = this;
     this.data.lottoid = e.currentTarget.dataset.lottoid;
     var infoActivity = _this.data.infoActivity
+    console.log(111)
     if (infoActivity.isWinner) {
       if (infoActivity.isOrdered) { //购买完成
       } else if (infoActivity.nextPay) { // 直接吊起预支付
@@ -1739,7 +1754,9 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
         _this.dsbbbutclickt()
       } else { }
     } else { //没有中奖,再接再厉
-
+      if(_this.data.is_ordinary_ticket_user){
+        _this.dsbbbutclickt()
+      }
     }
   },
 
@@ -2011,9 +2028,9 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
       suboformola: true
     });
 
-    var q = Dec.Aese('mod=lotto&operation=order&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + id + '&aid=' + aid + '&desc=' + _this.data.desc + '&lotto_id=' + _this.data.lottoid);
+    var q = Dec.Aese('mod=lotto&operation=order&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + id + '&aid=' + aid + '&desc=' + _this.data.desc + '&ticket_id=' + _this.data.lottoid);
 
-    console.log('提交订单==','mod=lotto&operation=order&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + id + '&aid=' + aid + '&desc=' + _this.data.desc + '&lotto_id=' + _this.data.lottoid)
+    console.log('提交订单==','mod=lotto&operation=order&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + id + '&aid=' + aid + '&desc=' + _this.data.desc + '&ticket_id=' + _this.data.lottoid)
 
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q,
@@ -2086,6 +2103,9 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
 
               _this.getinfo()
               
+              if(_this.data.is_ordinary_ticket_user){
+                _this.ticketList();
+              }
 
               if(e && e != "undefined" && (_this.data.infoActivity.joinMothed != 'payTicket' && _this.data.infoActivity.payTicketCate != 'fullPledge')){
                 _this.joinDraw(0);
@@ -2096,7 +2116,9 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
                   url: "/page/component/pages/hidefun/hidefun?type=1&cart_id=" + _this.data.cart_id
                 });
               } else {
-                app.showToastC('购买成功');
+                if(!_this.data.is_ordinary_ticket_user){
+                  app.showToastC('购买成功');
+                }
               }
 
             },
