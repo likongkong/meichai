@@ -26,7 +26,8 @@ Page({
     timer:'',
     imagewidth: 0,//缩放后的宽
     imageheight: 0,//缩放后的高 
-    is_jump_index:false
+    is_jump_index:false,
+    isInToToyShow:false
   },
   imageLoad: function (e) {
     var imageSize = this.imageUtil(e)
@@ -110,6 +111,10 @@ Page({
       success: function (res) {
         if(res.data && res.data.List && res.data.List.openscreen){
           var openscreen = res.data.List.openscreen || [];
+          var isInToToyShow = res.data.Info.isInToToyShow || false;
+          _this.setData({
+            isInToToyShow:isInToToyShow
+          })
           var imgnum = Math.floor(Math.random() * openscreen.length) || 0;
           var nowTime = Date.parse(new Date());//当前时间戳
           if(openscreen[imgnum]){
@@ -147,8 +152,8 @@ Page({
     if (_this.data.iftrjump){
       //获取当前时间戳  
       var timestamp = Date.parse(new Date()) / 1000; 
-      // timestamp>=1621008000
-      if(false){
+      // timestamp>=1624903821
+      if(_this.data.isInToToyShow){
         wx.reLaunch({
           url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist",
           complete:function(){
