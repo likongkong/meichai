@@ -718,6 +718,40 @@ Page({
   },
   catchTouchMove:function(res){
     return false
-   }
+  },
+   // 公共跳转
+   comjumpwxnav: function (item_type, whref, wname, imgurl){
+    var imgurl = imgurl || '';
+    var _this = this;
+    console.log(whref,wname)
+
+    _this.setData({ jumpdevanningiftr: true });
+
+    app.comjumpwxnav(item_type, whref, wname, imgurl)
+
+    _this.setData({ jumpdevanningiftr: false, indexelafra: false, index_ela_fra:false });
+    app.signindata.index_ela_fra = false;   
+  },
+  // 大图+列表
+  imgcomindellistjump:function(w){ 
+    var item_type = w.currentTarget.dataset.item_type || w.target.dataset.item_type || 0;
+    var whref = w.currentTarget.dataset.href || w.target.dataset.href;  
+    var wname = w.currentTarget.dataset.title || w.target.dataset.title || '美拆'; 
+    var imgurl = w.currentTarget.dataset.imgurl || w.target.dataset.imgurl || ''; 
+    // 公共跳转
+    this.comjumpwxnav(item_type, whref, wname, imgurl);
+  },
+  // 跳转详情页 
+  addressmanagement: function (event) {
+    var gid = event.currentTarget.dataset.gid || event.target.dataset.gid;
+    var _this = this;
+    _this.setData({ jumpdevanningiftr: true });
+    wx.navigateTo({
+      url: "/pages/detailspage/detailspage?gid=" + gid,
+      complete: function () {
+        _this.setData({ jumpdevanningiftr: false });
+      }
+    }) 
+  },
 
 })

@@ -91,22 +91,23 @@ Page({
     if (this.data.inputbranddata == '') {
       app.showToastC('品牌名称不能为空');
       return false;
-    } else if (this.data.inputidnumberdata == '') {
-      app.showToastC('身份证号不能为空');
-      return false;
-    } else if (!regIdCard.test(this.data.inputidnumberdata)){
-      app.showToastC('身份证号格式不正确');
-      return false;
-    } else if (this.data.inputidnumberdata.length!=18){
-      app.showToastC('身份证号位数不正确');
-      return false;
-    } else if (this.data.inputcreditnamedata==''){
+    }else if (this.data.inputcreditnamedata==''){
       app.showToastC('银行名称不能为空');
       return false;
     } else if (this.data.inputcreditnumberdata.length==''){
       app.showToastC('银行卡号不能为空');
       return false;
     }else{}; 
+    //  else if (this.data.inputidnumberdata == '') {
+    //   app.showToastC('身份证号不能为空');
+    //   return false;
+    // } else if (!regIdCard.test(this.data.inputidnumberdata)){
+    //   app.showToastC('身份证号格式不正确');
+    //   return false;
+    // } else if (this.data.inputidnumberdata.length!=18){
+    //   app.showToastC('身份证号位数不正确');
+    //   return false;
+    // } 
 
     // wx.showModal({
     //   title: '身份信息确认',

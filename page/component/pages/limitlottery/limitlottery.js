@@ -1999,6 +1999,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
         'Accept': 'application/json'
       },
       success: function (res) {
+        console.log('提交订单结果==',res)
         if (res.data.ReturnCode == 200) {
           _this.setData({
             tipbacktwo: true,

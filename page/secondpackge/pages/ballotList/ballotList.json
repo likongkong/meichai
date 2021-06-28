@@ -1,6 +1,6 @@
 {
   "asdfasfdflePullDownRefresh": true,
-  "enablePullDownRefresh": true,
+  "enablePullDownRefresh": false,
   "usingComponents": {
     "t_f": "../../../../pages/topfunction/topfunction",
     "bnavigation": "/pages/bottomComponent/bottomComponent",
