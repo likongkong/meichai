@@ -215,6 +215,9 @@ Page({
         if (res.data.ReturnCode == 200) {
         
           _this.data.processingData = res.data.List.winnerLotto;
+          _this.setData({
+            isShowDay:res.data.List.isShowDay || false
+          })
           _this.processingDataPaging();
 
           // var ticket = res.data.List.ticket;

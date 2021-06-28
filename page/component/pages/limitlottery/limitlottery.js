@@ -934,7 +934,8 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
             if (res.data.Info.infoActivity.status == 3 && res.data.Info.infoActivity.isWinner && !res.data.Info.infoActivity.isOrdered) {
               _this.addressCom();
             }
-            if(res.data.Info.infoActivity.joinMothed == 'payTicket' && res.data.Info.infoActivity.payTicketCate && res.data.Info.infoActivity.payTicketCate == 'fullPledge'){
+            // && res.data.Info.infoActivity.payTicketCate && res.data.Info.infoActivity.payTicketCate == 'fullPledge'
+            if(res.data.Info.infoActivity.joinMothed == 'payTicket'){
               _this.addressCom();
             } 
             _this.getSnapshot()
@@ -1245,7 +1246,9 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
   },
   joinDraw: function (share_uid) {
     var _this = this;
-    if(this.data.infoActivity.joinMothed == 'payTicket' && this.data.infoActivity.payTicketCate == 'fullPledge'){
+    // && this.data.infoActivity.payTicketCate == 'fullPledge'
+    if(this.data.infoActivity.joinMothed == 'payTicket'){
+      console.log(1)
       if(this.data.isfullPledge){
         var q1 = Dec.Aese('mod=lotto&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid=' + share_uid+'&perayu='+_this.data.perayu+'&aid='+this.data.tipaid);
         console.log('参与抽签','mod=lotto&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid=' + share_uid+'&perayu='+_this.data.perayu+'&aid='+this.data.tipaid)
@@ -1257,6 +1260,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
         return false;
       }
     }else{
+      console.log(2)
       var q1 = Dec.Aese('mod=lotto&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid=' + share_uid+'&perayu='+_this.data.perayu);
       console.log('参与抽签','mod=lotto&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid=' + share_uid+'&perayu='+_this.data.perayu)
     }
@@ -1780,9 +1784,24 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
     var idcard = event.target.dataset.idcard || event.currentTarget.dataset.idcard;
     var phone = event.target.dataset.phone || event.currentTarget.dataset.phone;
     var province = event.target.dataset.province || event.currentTarget.dataset.province;
-    wx.navigateTo({
-      url: "/pages/shippingAddress/shippingAddress?aid=" + aid + '&address=' + address + '&city=' + city + '&consignee=' + consignee + '&district=' + district + '&idcard=' + idcard + '&phone=' + phone + '&province=' + province
-    })
+    var idctrue = event.target.dataset.idctrue || event.currentTarget.dataset.idctrue || false;
+    if(idctrue){
+      wx.showModal({
+        content:'该抽选需要实名制参加，请填写身份证号码',
+        success: function (res) {
+          if(res.confirm){
+            wx.navigateTo({
+              url: "/pages/shippingAddress/shippingAddress?lim=1&aid=" + aid + '&address=' + address + '&city=' + city + '&consignee=' + consignee + '&district=' + district + '&idcard=' + idcard + '&phone=' + phone + '&province=' + province
+            })
+          }
+        }
+      })
+    }else{
+      wx.navigateTo({
+        url: "/pages/shippingAddress/shippingAddress?aid=" + aid + '&address=' + address + '&city=' + city + '&consignee=' + consignee + '&district=' + district + '&idcard=' + idcard + '&phone=' + phone + '&province=' + province
+      })
+    }
+
   },
 
   // 跳转增加新地址
@@ -1961,7 +1980,8 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
       tipaddress: tipadd,
       receivingaddress: false
     });
-    if(this.data.infoActivity.joinMothed == 'payTicket' && this.data.infoActivity.payTicketCate == 'fullPledge'){
+    //  && this.data.infoActivity.payTicketCate == 'fullPledge'
+    if(this.data.infoActivity.joinMothed == 'payTicket' && this.data.infoActivity.status == 2){
       this.setData({
         isfullPledge:true
       });
@@ -1979,10 +1999,10 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
   // 提交订单
   placeorder: function () {
     var _this = this;
-    if (this.data.tipaid == '') {
-      app.showToastC('请选择地址');
-      return false;
-    };
+    // if (this.data.tipaid == '') {
+    //   app.showToastC('请选择地址');
+    //   return false;
+    // };
 
     var id = _this.data.infoActivity.id
     var aid = _this.data.tipaid;
@@ -1990,8 +2010,11 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
     _this.setData({
       suboformola: true
     });
+
     var q = Dec.Aese('mod=lotto&operation=order&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + id + '&aid=' + aid + '&desc=' + _this.data.desc + '&lotto_id=' + _this.data.lottoid);
+
     console.log('提交订单==','mod=lotto&operation=order&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + id + '&aid=' + aid + '&desc=' + _this.data.desc + '&lotto_id=' + _this.data.lottoid)
+
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q,
       method: 'GET',

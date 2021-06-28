@@ -18,7 +18,7 @@
    <view class="addressPage name">
        <input class='indheadinp' type='text' value='{{idnumber}}' bindinput='idnumberfun' placeholder='{{inputtxt4}}' bindfocus='onFocus' bindblur='onBlur' data-inp='4'></input>
    </view>
-  <view class='txt'>
+  <view class='txt' wx:if='{{lim != 1}}'>
        <view class='txtcon'>1、海关政策要求，身份信息仅用于海关清关，加密保存；</view>
        <view class='txtcon'>2、收货人真实姓名与身份证信息一致才可通关。</view>
    </view>

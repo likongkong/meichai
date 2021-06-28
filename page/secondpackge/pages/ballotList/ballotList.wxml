@@ -2,7 +2,7 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 
-<view class="wrap">
+<view class="wrap" wx:if='{{isShowDay}}'>
   <view class="mysignInfo">
     <view class="mysignTableWrap">
       <view class="mysignHTable">
@@ -25,21 +25,53 @@
         上拉加载更多
       </view>
     </block> -->
-    <block wx:if="{{ismore}}">
-      <block wx:if="{{loadprompt}}">
-        <view class="more" style="height:{{moreH}}px;line-height:{{moreH}}px;" catchtap="nextpage">
-          下一页
-        </view>
-      </block>
-      <block wx:elif="{{!loadprompt}}">
-        <view class="more">
-          没有更多数据了
-        </view>
-      </block>
+
+    <block wx:if="{{loadprompt}}">
+      <view class="more" style="height:{{moreH}}px;line-height:{{moreH}}px;" catchtap="nextpage">
+        下一页
+      </view>
+    </block>
+    <block wx:elif="{{!loadprompt}}">
+      <view class="more">
+        没有更多数据了
+      </view>
     </block>
   </view>
 </view>
-
+  
+<view class="wrap" wx:else>
+  <view class="mysignInfo">
+    <view class="mysignTableWrap">
+      <view class="mysignHTable">
+        <text class="htableBox" style="width:40%;height:{{worthSubsidiaryHeight}}px;line-height:{{worthSubsidiaryHeight}}px;">手机号</text>
+        <text class="htableBox" style="width:60%;height:{{worthSubsidiaryHeight}}px;line-height:{{worthSubsidiaryHeight}}px;">身份证号</text>
+      </view>
+      <view class="mysignBTableWrap">
+        <block wx:for="{{dataList}}" wx:key="key">
+          <view class="mysignBTable">
+            <text class="btableBox colorblue" style="width:40%;height:{{worthSubsidiaryHeight}}px;line-height:{{worthSubsidiaryHeight}}px;">{{item.tel}}</text>
+            <text class="btableBox colorblue" style="width:60%;height:{{worthSubsidiaryHeight}}px;line-height:{{worthSubsidiaryHeight}}px;">{{item.lotto}}</text>
+          </view>
+        </block>
+      </view>
+    </view>
+    <!-- <block wx:if="{{ismore}}"> 
+      <view class="more">
+        上拉加载更多
+      </view>
+    </block> -->
+    <block wx:if="{{loadprompt}}">
+      <view class="more" style="height:{{moreH}}px;line-height:{{moreH}}px;" catchtap="nextpage">
+        下一页
+      </view>
+    </block>
+    <block wx:elif="{{!loadprompt}}">
+      <view class="more">
+        没有更多数据了
+      </view>
+    </block>
+  </view>
+</view>
 
 
 

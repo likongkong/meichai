@@ -87,7 +87,7 @@ Page({
       });
     } else if (inp == 4) {
       this.setData({
-        inputtxt4: "身份证号码（选填，海外购产品清关需要）"
+        inputtxt4: "身份证号码（选填）"
       });
     };
   },  
