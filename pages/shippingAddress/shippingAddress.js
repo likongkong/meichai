@@ -128,7 +128,7 @@ Page({
       app.showToastC('姓名不能为空');
       return false;
     };
-    var myreg = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57]|19[0-9]|16[0-9])[0-9]{8}$/;
+    var myreg = /^[1][3,4,5,7,8,9][0-9]{9}$/;
     if (this.data.tel.length == 0) {
       app.showToastC('输入的手机号为空')
       return false;
