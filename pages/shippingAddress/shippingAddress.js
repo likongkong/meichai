@@ -42,7 +42,7 @@ Page({
     inputtxt1: '收货人姓名（请填写真实姓名）',
     inputtxt2: '手机号',
     inputtxt3: '详细地址',
-    inputtxt4: '身份证号码（选填）',
+    inputtxt4: '身份证号码',
     c_title: '收货地址',
     c_arrow: true,
     c_backcolor: '#ff2742',
