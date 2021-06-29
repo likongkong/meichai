@@ -1099,10 +1099,11 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
         isOtherLimitlotteryPop:true
       })
     }else{
+      // if(_this.data.promote_start_date && !_this.data.subscribeOrNot){
+      //   _this.subscrfun(1);
+      // }else
       if(_this.data.infoActivity.premiseForJoin && _this.data.isList == 1){
           _this.listTipImg();
-      }else if(_this.data.promote_start_date && !_this.data.subscribeOrNot){
-        _this.subscrfun(1);
       }else if (_this.data.infoActivity.joinMothed == "blindBox" && !_this.data.infoActivity.isCanOpenLotto) {
         wx.navigateTo({
           url: "/pages/smokeboxlist/smokeboxlist",

@@ -18,11 +18,14 @@
    <view class="addressPage name">
        <input class='indheadinp' type='text' value='{{idnumber}}' bindinput='idnumberfun' placeholder='{{inputtxt4}}' bindfocus='onFocus' bindblur='onBlur' data-inp='4'></input>
    </view>
-  <view class='txt' wx:if='{{lim != 1}}'>
+  <view class='txt' wx:if='{{lim == 1}}'>
+       <view class='txtcon'>1、该抽选需要实名制参加，请填写身份证号码</view>
+       <view class='txtcon'>2、收货人的真实姓名要与身份证上的信息保持一致，否则无法正常参加抽选活动</view>
+  </view>
+  <view class='txt' wx:else>
        <view class='txtcon'>1、海关政策要求，身份信息仅用于海关清关，加密保存；</view>
        <view class='txtcon'>2、收货人真实姓名与身份证信息一致才可通关。</view>
-   </view>
-
+  </view>
    <view class='saveData' bindtap='submissionofdata'>保存</view>
 </view>
 
