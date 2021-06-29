@@ -1295,8 +1295,9 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
         if (res.data.ReturnCode == 200) {
           _this.getinfo();
           if (share_uid != 0) {
+ 
             _this.setData({
-              ishowgetchip: !_this.data.ishowgetchip,
+              // ishowgetchip: !_this.data.ishowgetchip,
               ranking: res.data.Info.ranking,
               brightNumber:res.data.Info.brightNumber
             })
@@ -2073,6 +2074,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
   paymentmony: function (e) {
     var _this = this;
     var q = Dec.Aese('mod=operate&operation=prepay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1&oid=' + _this.data.cart_id + '&xcx=1' + '&openid=' + _this.data.openid)
+    wx.showLoading({ title: '加载中...', mask:true})
     wx.request({
       url: app.signindata.comurl + 'order.php' + q,
       method: 'GET',
@@ -2080,6 +2082,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
         'Accept': 'application/json'
       },
       success: function (res) {
+        wx.hideLoading(); 
         if (res.data.ReturnCode == 200) {
           // 支付完成弹框显示数据
           var payinfo = res.data.Info;
@@ -2162,7 +2165,8 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
           // 判断非200和登录
           Dec.comiftrsign(_this, res, app);
         };
-      }
+      },
+      complete() {wx.hideLoading()}
     })
   },
 
