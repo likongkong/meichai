@@ -3706,6 +3706,11 @@ Page({
   onPullDownRefresh: function () {
     if(this.data.is_exhibition == 1){
       wx.stopPullDownRefresh()
+      wx.showToast({
+        title: '重新进入商品详情可刷新库存状态',
+        icon: 'none',
+        duration: 2000
+      })
     }else{
       app.downRefreshFun(() => {
         // 商品详情
