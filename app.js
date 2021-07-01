@@ -257,10 +257,10 @@ App({
                       _this.signindata.halloweenScore = res.data.Info.score || 0;
                       // 万圣节南瓜个数
                       _this.signindata.isAuthMobile = res.data.Info.isAuthMobile;
-                      // 是否已领取过现实抽盒金(关注公众号小号赠送) 新用户
-                      _this.signindata.gotTBBMBS8 = res.data.Info.welfare ? res.data.Info.welfare.gotTBBMBS8 : true;
-                      // 是否已领取过现实抽盒金(关注公众号大号赠送) 新用户
-                      _this.signindata.gotTBBMBS9 = res.data.Info.welfare ? res.data.Info.welfare.gotTBBMBS9 : true;
+                      // // 是否已领取过现实抽盒金(关注公众号小号赠送) 新用户
+                      // _this.signindata.gotTBBMBS8 = res.data.Info.welfare ? res.data.Info.welfare.gotTBBMBS8 : true;
+                      // // 是否已领取过现实抽盒金(关注公众号大号赠送) 新用户
+                      // _this.signindata.gotTBBMBS9 = res.data.Info.welfare ? res.data.Info.welfare.gotTBBMBS9 : true;
 
                       // 是否是地域黑模式
                       _this.signindata.isHellBlackUser = res.data.Info.isHellBlackUser || false;
