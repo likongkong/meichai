@@ -177,4 +177,9 @@ page{
   position: relative;
   background: #fff;  
 }
-
+.couimg{
+  width: 110rpx;
+  height: 110rpx;
+  display: block;
+  margin: 0 auto;
+}

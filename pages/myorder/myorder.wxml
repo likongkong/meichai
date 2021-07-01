@@ -72,7 +72,10 @@
                                 <view class='wholeconnumrr' wx:if='{{item.status==6}}'>售后</view>
                                 <view class='wholeconnumrr' wx:if='{{item.status==7}}'>
                                     <block wx:if='{{item.status_detail == 2}}'>支付逾期</block>
-                                    <block wx:else>已退款</block>
+                                    <block wx:else>
+                                        <block wx:if='{{myOrderNowTime - item.payTime < (86400 * 7)}}'>退款中</block>
+                                        <block wx:else>已退款</block>
+                                    </block>
                                 </view>
                                 <view class='wholeconnumrr' wx:if='{{item.status==8 && item.order_type!=7}}'>取消未付款</view>
                                 <view class='wholeconnumrr' style='color:#7D7D7D;' wx:if='{{item.status==8 && item.order_type==7}}'>  
@@ -565,7 +568,7 @@
                             分享好友
                         </view>
 
-                        <view wx:if='{{item.order_type==27}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
+                        <view wx:if='{{item.order_type==27 && item.status !=8}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
                             等待开奖<block wx:if='{{item.isFullTicket}}'>支付尾款</block>，未中奖原路退回
                         </view>
 
@@ -611,7 +614,7 @@
                             分享好友
                         </view>     
 
-                        <view wx:if='{{item.order_type==27}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
+                        <view wx:if='{{item.order_type==27 && item.status !=8}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
                             等待开奖<block wx:if='{{item.isFullTicket}}'>支付尾款</block>，未中奖原路退回
                         </view>             
 
@@ -644,7 +647,7 @@
                             分享好友
                         </view> 
 
-                        <view wx:if='{{item.order_type==27}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
+                        <view wx:if='{{item.order_type==27 && item.status !=8}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
                             等待开奖<block wx:if='{{item.isFullTicket}}'>支付尾款</block>，未中奖原路退回
                         </view> 
 
@@ -677,7 +680,7 @@
                             分享好友
                         </view> 
 
-                        <view wx:if='{{item.order_type==27}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
+                        <view wx:if='{{item.order_type==27 && item.status !=8}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
                             等待开奖<block wx:if='{{item.isFullTicket}}'>支付尾款</block>，未中奖原路退回
                         </view>                
                         
@@ -718,7 +721,7 @@
                             分享好友
                         </view>   
 
-                        <view wx:if='{{item.order_type==27}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
+                        <view wx:if='{{item.order_type==27 && item.status !=8}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
                             等待开奖<block wx:if='{{item.isFullTicket}}'>支付尾款</block>，未中奖原路退回
                         </view>
                         
@@ -755,7 +758,7 @@
                         
                   
 
-                        <view wx:if='{{item.order_type==27}}'>
+                        <view wx:if='{{item.order_type==27 && item.status !=8}}'>
                             等待开奖<block wx:if='{{item.isFullTicket}}'>支付尾款</block>，未中奖原路退回
                         </view>
                         
@@ -776,7 +779,7 @@
                             分享好友
                         </view> 
 
-                        <view wx:if='{{item.order_type==27}}'>
+                        <view wx:if='{{item.order_type==27 && item.status !=8}}'>
                             等待开奖<block wx:if='{{item.isFullTicket}}'>支付尾款</block>，未中奖原路退回
                         </view>
                     
@@ -794,7 +797,7 @@
                     <view class='wholebottomaddFail' wx:if='{{item.status==7}}'>
                         <view class='totaltittrfai' style="{{item.status_detail==2?'line-height: 40rpx;':''}}">
                             <block wx:if='{{item.status_detail == 2}}'>支付时间超过1分钟，支付金额会原路返回到您的支付账号中</block>
-                            <block wx:else>{{item.order_type==27&&item.status==7&&item.compareTime?'您未中签，退款金额将在24小时内原路退回':'付款将会原路返回到您的支付账号中'}}</block>
+                            <block wx:else>{{item.order_type==27&&item.status==7&&item.compareTime?'您未中签，退款金额将在48小时内原路退回':'付款将会原路返回到您的支付账号中'}}</block>
                         </view>
                         <view class='wholebottomaddright sharebox redborcol' style="{{item.status_detail==2?'margin-top:16rpx;':''}}" wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood}}'>
                             <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
@@ -814,7 +817,7 @@
                             分享好友
                         </view>    
 
-                        <view wx:if='{{item.order_type==27}}'>
+                        <view wx:if='{{item.order_type==27 && item.status !=8}}' style="font-size:24rpx;">
                             等待开奖<block wx:if='{{item.isFullTicket}}'>支付尾款</block>，未中奖原路退回
                         </view>
 
@@ -835,7 +838,7 @@
                             分享好友
                         </view>    
 
-                        <view wx:if='{{item.order_type==27}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
+                        <view wx:if='{{item.order_type==27 && item.status !=8}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
                             等待开奖<block wx:if='{{item.isFullTicket}}'>支付尾款</block>，未中奖原路退回
                         </view>  
 

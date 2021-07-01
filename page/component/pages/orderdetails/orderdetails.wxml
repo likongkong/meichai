@@ -140,7 +140,12 @@
                 <image class='rdheadimg' src='../../../../pages/images/icon_wallet2.png'></image>
             </view>
             <view class='rdhead' wx:if='{{comdata.status==2}}'>
-                支付成功
+                <block wx:if='{{comdata.order_type==27}}'>
+                    已付押金
+                </block>
+                <block wx:else>
+                    支付成功
+                </block>
                 <image class='rdheadimg' src='../../../../pages/images/icon_clock2.png'></image>
             </view>
             <view class='rdhead' wx:if='{{comdata.status==3}}'>
@@ -157,7 +162,8 @@
                 <image class='rdheadimg' src='../../../../pages/images/icon_complete.png'></image>
             </view>
             <view class='rdheadback' wx:if='{{comdata.status==7}}'>
-                已退款
+                <block wx:if='{{myOrderNowTime - comdata.payTime < (86400 * 7)}}'>退款中</block>
+                <block wx:else>已退款</block>                
                 <image class='rdheadimg' src='../../../../pages/images/icon_failed.png'></image>
             </view>
             <view class='rdheadback' wx:if='{{comdata.status==8}}'>
@@ -271,7 +277,10 @@
                 </view>
                 <view class='wholeconnumrr' wx:if='{{comdata.status==7}}'>
                     <block wx:if='{{comdata.status_detail == 2}}'>支付逾期</block>
-                    <block wx:else>已退款</block>
+                    <block wx:else>
+                        <block wx:if='{{myOrderNowTime - comdata.payTime < (86400 * 7)}}'>退款中</block>
+                        <block wx:else>已退款</block>                         
+                    </block>
                 </view>
                 <view class='wholeconnumrr' wx:if='{{comdata.status==8 && comdata.order_type!=7}}'>
                     取消未付款
@@ -657,7 +666,7 @@
 
         <view class='orderdetcon'>
             <view class='odchteadcom' data-gid='{{comdata.gid}}' data-order_type='{{comdata.order_type}}'
-                data-activity_id='{{comdata.activity_id}}' bindtap='{{comdata.gid != 38363?addressmanagement:""}}'>
+                data-activity_id='{{comdata.activity_id}}' bindtap='{{comdata.gid != 38363?"addressmanagement":""}}'>
                 <view class='odchcomleft'>
                     <view class='odchlefimg'>
                         <image src='{{comdata.gcover}}' bindload="imageLoadad"

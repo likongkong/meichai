@@ -1926,7 +1926,11 @@ Page({
               checktwo2[0].imgcheck = true;
               coupon_type = 2;
             } else {
-              txt2 = checktwo2[0].name + checktwo2[0].unit + parseFloat(checktwo2[0].value).toFixed(2);
+              if(checktwo2[0].coupon_id == 1001){
+                txt2 = checktwo2[0].name;
+              }else{
+                txt2 = checktwo2[0].name + checktwo2[0].unit + parseFloat(checktwo2[0].value).toFixed(2);
+              }
               check2cid = checktwo2[0].cid;
               check2mon = checktwo2[0].value;
               checktwo2[0].imgcheck = true;
@@ -1946,7 +1950,11 @@ Page({
           var txt1 = '', check1cid = '', check1mon = '0.00';
           if (checktwo1.length != 0 && _this.data.freightiftr > 0) {
             checktwo1.sort(_this.compare('value', false));
-            txt1 = checktwo1[0].name + checktwo1[0].unit + parseFloat(checktwo1[0].value).toFixed(2);
+            if(checktwo1[0].coupon_id == 1001){
+              txt1 = checktwo1[0].name + checktwo1[0].unit + parseFloat(checktwo1[0].value).toFixed(2);
+            }else{
+              txt1 = checktwo1[0].name;
+            };
             check1cid = checktwo1[0].cid;
             check1mon = checktwo1[0].value;
             checktwo1[0].imgcheck = true;
@@ -2074,7 +2082,11 @@ Page({
     var txt1 = '', check1cid = '', check1mon = '0.00';
     for (var i = 0; i < checktwo1.length; i++) {
       if (checktwo1[i].imgcheck) {
-        txt1 = checktwo1[i].name + checktwo1[i].unit + parseFloat(checktwo1[i].value).toFixed(2);
+        if(checktwo1[i].coupon_id == 1001){
+          txt1 = checktwo1[i].name;
+        }else{
+          txt1 = checktwo1[i].name + checktwo1[i].unit + parseFloat(checktwo1[i].value).toFixed(2);
+        };
         check1cid = checktwo1[i].cid;
         check1mon = checktwo1[i].value;
       }
@@ -2085,7 +2097,11 @@ Page({
     for (var i = 0; i < checktwo2.length; i++) {
       if (checktwo2[i].imgcheck) {
         if (checktwo2[i].coupon_type == 1) {
-          txt2 = checktwo2[i].name + checktwo2[i].unit + parseFloat(checktwo2[i].value).toFixed(2);
+          if(checktwo2[i].coupon_id == 1001){
+            txt2 = checktwo2[i].name;
+          }else{
+            txt2 = checktwo2[i].name + checktwo2[i].unit + parseFloat(checktwo2[i].value).toFixed(2);
+          };
           check2cid = checktwo2[i].cid;
           check2mon = checktwo2[i].value;
           coupon_type = checktwo2[i].coupon_type || 1;
