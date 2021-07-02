@@ -1293,11 +1293,12 @@ Page({
             } else {
               if(checktwo2[0].coupon_id == 1001){
                 txt2 = checktwo2[0].name;
+                check2mon = 89;
               }else{
                 txt2 = checktwo2[0].name + checktwo2[0].unit + parseFloat(checktwo2[0].value).toFixed(2);
+                check2mon = checktwo2[0].value;
               }
               check2cid = checktwo2[0].cid;
-              check2mon = checktwo2[0].value;
               checktwo2[0].imgcheck = true;
               coupon_type = 1;
             }
