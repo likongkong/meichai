@@ -273,9 +273,10 @@
 }
 .noticeBox{
   width: 680rpx;
-  height: 750rpx;
+  /* height: 750rpx; */
   /* background-color: #fff; */
   position: relative;
+
 }
 .noticeguanbi{
   width: 100%;
@@ -295,12 +296,12 @@
   /* border: 16rpx solid #FFB413; */
   border-radius: 10rpx;
   background: #fff;
+  padding-bottom: 35rpx;
+  box-sizing: border-box;
 }
 .noticeContent scroll-view{
   width: 100%;
-  height: 670rpx;
-  padding-bottom: 35rpx;
-  box-sizing: border-box;
+  max-height: 670rpx;
 }
 .noticeTitle{
   height: 70rpx;
