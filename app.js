@@ -1270,8 +1270,8 @@ App({
           var indexShare = res.data.List.indexShare || [];
 
           _this.signindata.titleShare = res.data.Info.titleShare || '潮玩社交平台';
-          _this.signindata.toyShowTitleShare = toyShowShare[toyShowShareNum].title || '潮玩社交平台';
-          _this.signindata.communityTitleShare = communityShare[communityShareNum].title || '潮玩社交平台';
+          _this.signindata.toyShowTitleShare = toyShowShare[toyShowShareNum]?toyShowShare[toyShowShareNum].title : '潮玩社交平台';
+          _this.signindata.communityTitleShare = communityShare[communityShareNum]?communityShare[communityShareNum].title : '潮玩社交平台';
           
           // 首页分享
           if(indexShare.length!=0 && indexShare[indexShareNum]){

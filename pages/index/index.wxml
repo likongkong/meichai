@@ -2,6 +2,7 @@
 <add-tips duration="5" ftop='{{statusBarHeightMc-10}}' />
 <!-- 授权弹框 -->
 <tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+<import src="../../wxParse/wxParse.wxml"/>
 
 <!-- 商品弹框 --> 
 <view class='indexelafra' wx:if='{{indexelafra&&index_ela_fra&&elafradata.src}}' catchtouchmove="true">
@@ -15,6 +16,24 @@
 	</view>
 </view>
 
+<!-- 公告 -->
+<view class="noticeWrap" catchtouchmove="true" wx:if="{{isNoticeMask}}">
+	<view class="noticeBox">
+		<view class="noticeContent">
+			<text class="noticeTitle">{{indexInform.title}}</text>
+				<scroll-view scroll-y>
+					<view style="padding: 38rpx 32rpx 0 32rpx;box-sizing: border-box;">
+						<!-- <rich-text class="noticeTxt" nodes="{{indexInform.content}}"></rich-text> -->
+						<template is="wxParse" data="{{wxParseData:article.nodes}}" />
+						<text class="noticeFoter">发布时间：{{indexInform.issue_time}}</text>
+					</view>
+				</scroll-view>
+		</view>
+		<view class="noticeguanbi" catchtap="hideNoticeMask">
+			<image src='https://www.51chaidan.com/images/spread/dial/fork.png'></image>
+		</view>
+	</view>
+</view>
 <!-- 搜索 -->
 <view style='position:fixed;left:0;top:{{statusBarHeightMc}}px;z-index:16;width:100%;'>
 	<view class='headss'>

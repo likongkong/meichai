@@ -1,5 +1,6 @@
 var Dec = require('../../common/public.js');//aes加密解密js
 const app = getApp();
+var WxParse = require('../../wxParse/wxParse.js');
 
 Page({
   /**
@@ -96,7 +97,14 @@ Page({
     // 审核版本 or 不是审核版本
     is_formaldress:false,
     animation:'',
-    nowAdmissionTime:Date.parse(new Date()) / 1000
+    nowAdmissionTime:Date.parse(new Date()) / 1000,
+    isNoticeMask:false,
+    isPulldown:false
+  },
+  hideNoticeMask(){
+    this.setData({
+      isNoticeMask:false
+    })
   },
   jumpposition:function(w){
     // var nowTime = new Date().getTime();
@@ -742,6 +750,15 @@ Page({
             var zdyurl = _this.data.zdyurl || '';
             var regData = app.signindata.reg || /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/ ;
 
+            // 公告通知
+            if(!_this.data.isPulldown && List.indexInform && List.indexInform.length!=0){
+              _this.setData({
+                isNoticeMask:true,
+                indexInform:List.indexInform[0]
+              });
+               WxParse.wxParse('article', 'html', List.indexInform[0].content, _this,0);
+            }
+
             // 分类 首页弹框
             if ( List.indexSpread && List.indexSpread.length != 0 ) {
               var indexnum = Math.floor(Math.random() * List.indexSpread.length) || 0;
@@ -909,7 +926,7 @@ Page({
               commoddata: comdataarr,
               nodataiftr: true,
               movies: banlist||[],
-              toyshowTicket:List.toyshowTicket || ''
+              toyshowTicket:List.toyshowTicket || '',
             });
 
         };    
@@ -1075,6 +1092,9 @@ Page({
    */
  
   onPullDownRefresh: function () {
+    this.setData({
+      isPulldown:true
+    })
     app.downRefreshFun(() => {
       //获取list数据
       this.auditversion();

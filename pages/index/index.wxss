@@ -252,8 +252,82 @@
   left: 25rpx;
   font-size: 24rpx;
 }
-
 .bgImgUrl{
   background:url(https://cdn.51chaidan.com/images/auctionActivity/whiteBackground.jpg) no-repeat;
   background-size: 750rpx 400rpx;
+}
+
+/* 公告通知 */
+.noticeWrap{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(0,0,0,.4);
+  z-index: 200;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.noticeBox{
+  width: 680rpx;
+  height: 750rpx;
+  /* background-color: #fff; */
+  position: relative;
+}
+.noticeguanbi{
+  width: 100%;
+  position: absolute;
+  bottom: -90rpx;
+  left: 0;
+}
+.noticeguanbi image{
+  width: 70rpx;
+  height: 70rpx;
+  margin: 0 auto;
+  display: block;
+}
+.noticeContent{
+  /* width: 100%; */
+  /* height: 100%; */
+  /* border: 16rpx solid #FFB413; */
+  border-radius: 10rpx;
+  background: #fff;
+}
+.noticeContent scroll-view{
+  width: 100%;
+  height: 670rpx;
+  padding-bottom: 35rpx;
+  box-sizing: border-box;
+}
+.noticeTitle{
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 28rpx;
+  color: #fff;
+  display: block;
+  text-align: center;
+  /* margin-bottom: 18rpx; */
+  background: #5E6FBF;
+  border-top-left-radius: 10rpx;
+  border-top-right-radius: 10rpx;
+}
+.noticeContent .wxParse-p {
+  margin-bottom: 20rpx;
+}
+.noticeContent .wxParse-p .WxEmojiView{
+  font-size: 26rpx;
+  color: #101010;
+  display: block;
+  line-height: 46rpx;
+  text-indent:25rpx;
+}
+.noticeFoter{
+  width: 100%;
+  font-size: 26rpx;
+  color: #101010;
+  text-align: right;
+  display: block;
 }
