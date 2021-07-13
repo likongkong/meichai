@@ -1,4 +1,4 @@
-// /pages/smokebox/smokebox.js
+
 var Dec = require('../../common/public.js'); //aes加密解密js
 var time = require('../../utils/util.js');
 // var WxParse = require('../../wxParse/wxParse.js');
@@ -338,10 +338,6 @@ Page({
           app.showToastC(res.data.Msg);
           _this.getInfo();
           _this.placeorder();
-          // let change = "listData["+ index +"].status";
-          // _this.setData({
-          //   [change]: false,
-          // })
         }
       }
     }); 
