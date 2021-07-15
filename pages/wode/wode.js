@@ -334,6 +334,7 @@ Page({
               subscribedata:res.data.Info.subscribe,
 
             });
+            app.signindata.blindboxMoney = res.data.Info.blindbox_money||0,
             app.signindata.tempBlindboxMoney = res.data.Info.tempBlindboxMoney||0;
             _this.data.after_sale = res.data.Info.after_sale || 0;// 售后数
           };
