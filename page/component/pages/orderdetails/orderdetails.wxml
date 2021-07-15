@@ -1334,7 +1334,7 @@
     </view>
 
     <view class='orderbott'>
-        <view class='orderbottcon'>订单编号:{{comdata.order_sn}}</view>
+        <view class='orderbottcon'>订单编号:{{comdata.order_sn}}<view class="copyCart" catchtap="copyCart" data-cart='{{comdata.order_sn}}'>复制</view></view>
         <view class='orderbottcon'
             wx:if='{{comdata.status!=0&&comdata.status!=16&&comdata.status!=1&&comdata.status!=8&&comdata.status!=11&&comdata.amount!=0&&comdata.payment}}'>
             支付方式:{{comdata.payment}}支付</view>
@@ -1342,6 +1342,7 @@
         <view class='orderbottcon' wx:if='{{comdata.order_type!=2}}'>下单时间:{{comdata.ordertime}}</view>
         <view class='orderbottcon' wx:if='{{comdata.auditRefund == 2}}'>申请退款:{{comdata.apply_time}}</view>
         <view class='orderbottcon' wx:if='{{ comdata.auditRefund == 3 }}'>申请未通过:{{comdata.audit_time}}</view>
+        <view class='orderbottcon' wx:if='{{ comdata.payTime }}'>支付时间:{{comdata.payTime}}</view>
 
     </view>
     <!--  官网微信号复制  -->

@@ -80,6 +80,17 @@ Page({
     vipOrOrderTip:false,
     myOrderNowTime: Date.parse(new Date()) / 1000,
   },
+  // 复制单号
+  copyCart(w){
+    var cart = w.currentTarget.dataset.cart || w.target.dataset.cart || '';
+    var _this = this;
+    wx.setClipboardData({
+      data: cart || '',
+      success: function (res) {
+        app.showToastC('复制成功');
+      }
+    });
+  },
   pictboxboxfun:function(){
     this.setData({ pictboxbox:false});
     this.subscrfunstar();
@@ -509,6 +520,7 @@ Page({
             res.data.Info.gift_time = _this.toDate(res.data.Info.gift_time || 0);
             res.data.Info.receive_time = _this.toDate(res.data.Info.receive_time||0,1);
             res.data.Info.overtime = _this.toDate(res.data.Info.overtime || 0, 2);
+            res.data.Info.payTime = _this.toDate(res.data.Info.payTime||0);
 
             var isShareGood = true;
             if(app.signindata.notAllowShareGoodsId&&app.signindata.notAllowShareGoodsId.length!=0){
