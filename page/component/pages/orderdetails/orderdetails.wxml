@@ -879,6 +879,7 @@
                                 <block wx:else>核验支付</block>
                             </block>
                             <block wx:elif='{{comdata.isReceive}}'>我要领取</block>
+                            <block wx:elif='{{item.order_type == 23}}'>支付定金</block>
                             <block wx:else>我要付款</block>
 
 
@@ -1342,7 +1343,7 @@
         <view class='orderbottcon' wx:if='{{comdata.order_type!=2}}'>下单时间:{{comdata.ordertime}}</view>
         <view class='orderbottcon' wx:if='{{comdata.auditRefund == 2}}'>申请退款:{{comdata.apply_time}}</view>
         <view class='orderbottcon' wx:if='{{ comdata.auditRefund == 3 }}'>申请未通过:{{comdata.audit_time}}</view>
-        <view class='orderbottcon' wx:if='{{ comdata.payTime }}'>支付时间:{{comdata.payTime}}</view>
+        <view class='orderbottcon' wx:if='{{ comdata.payTime && comdata.payTime!=0 }}'>支付时间:{{comdata.payTime}}</view>
 
     </view>
     <!--  官网微信号复制  -->
