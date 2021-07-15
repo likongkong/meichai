@@ -61,7 +61,7 @@ Page({
       }
     });
   },
-  getAward(e){
+  getAward(e){ 
     var index = e.currentTarget.dataset.index;
     var type = e.currentTarget.dataset.type;
     var _this = this;
@@ -79,7 +79,21 @@ Page({
           let change = "listData["+ index +"].status";
           _this.setData({
             [change]: false,
+          });
+          var gbm = Dec.Aese('mod=blindBox&operation=getBlindboxMoney&uid='+_this.data.uid);
+          wx.request({
+            url: app.signindata.comurl + 'spread.php' + gbm,
+            method: 'GET',
+            header: { 'Accept': 'application/json' },
+            success: function (res) {
+              if (res.data.ReturnCode == 200) {
+                console.log('更新抽盒金=====',res)
+                app.signindata.blindboxMoney = res.data.Info.blindbox_money || "";
+                app.signindata.tempBlindboxMoney = res.data.Info.tempBlindboxMoney || "";
+              };
+            }
           })
+
         }
       }
     }); 
