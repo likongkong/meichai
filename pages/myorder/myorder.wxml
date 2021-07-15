@@ -30,7 +30,7 @@
     <view class='whole'  style='position:relative;'>
          <view class='wholecom' wx:for='{{myordata}}' wx:key='key'>
              <view class='wholehead'>
-                  <view class='wholeheadright'>订单编号:{{item.cart_id}}</view>
+                  <view class='wholeheadright'>订单编号:{{item.cart_id}}<view class="copyCart" catchtap="copyCart" data-cart='{{item.cart_id}}'>复制</view></view>
                   <view class='wholeimgdel' data-oid='{{item.cart_id}}' bindtap='delwholeheadrimg' wx:if='{{item.status==8||item.status==5||item.status==10||item.status==11}}'>
                       <image src='../images/icon_delete.png' class='wholeheadrimg'></image> 
                   </view>
