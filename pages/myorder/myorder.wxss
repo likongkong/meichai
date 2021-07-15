@@ -87,6 +87,7 @@
   float: left;
   /* margin-left: 13rpx; */
   color: #666;
+  vertical-align: top;
 }
 .wholeheadrimg{
   width: 34rpx;
@@ -491,4 +492,16 @@
 }
 .wholebottomadd view:last-child{
   margin:0 0 0 0 !important;
+}
+.copyCart{
+  display:inline-block;
+  background:#F4F4F4;
+  font-size: 24rpx;
+  margin-left: 10rpx;
+  color: #000;
+  height: 40rpx;
+  line-height: 40rpx;
+  width: 60rpx;
+  text-align: center;
+  border-radius:6rpx;
 }

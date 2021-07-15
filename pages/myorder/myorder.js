@@ -3353,7 +3353,17 @@ Page({
       conphone: conphone
     });
   },
-
+  // 复制单号
+  copyCart(w){
+    var cart = w.currentTarget.dataset.cart || w.target.dataset.cart || '';
+    var _this = this;
+    wx.setClipboardData({
+      data: cart || '',
+      success: function (res) {
+        app.showToastC('复制成功');
+      }
+    });
+  }
 })
 
 
