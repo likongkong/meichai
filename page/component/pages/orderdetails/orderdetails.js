@@ -520,7 +520,9 @@ Page({
             res.data.Info.gift_time = _this.toDate(res.data.Info.gift_time || 0);
             res.data.Info.receive_time = _this.toDate(res.data.Info.receive_time||0,1);
             res.data.Info.overtime = _this.toDate(res.data.Info.overtime || 0, 2);
-            res.data.Info.payTime = _this.toDate(res.data.Info.payTime||0);
+            if(res.data.Info.payTime && res.data.Info.payTime!=0){
+              res.data.Info.payTime = _this.toDate(res.data.Info.payTime||0);
+            }
 
             var isShareGood = true;
             if(app.signindata.notAllowShareGoodsId&&app.signindata.notAllowShareGoodsId.length!=0){

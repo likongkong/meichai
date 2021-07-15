@@ -1,7 +1,5 @@
-
-    <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
-    <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
-
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 <canvas wx:for='{{myordata}}' wx:key='key' canvas-id='canimgser{{item.cart_id}}' class='canimgsernew'></canvas>
 <canvas wx:for='{{myordata}}' wx:key='key' canvas-id='myordercanimgser{{item.cart_id}}' style='{{item.order_type==10?"width:375px;height:788px;":""}}' class='myordercanimgsernew'></canvas>
 
@@ -528,6 +526,7 @@
                                 <block wx:else>核验支付</block>
                             </block>
                             <block wx:elif='{{item.isReceive}}'>我要领取</block>
+                            <block wx:elif='{{item.order_type == 23}}'>支付定金</block>
                             <block wx:else>我要付款</block>
                         </view>
         
