@@ -240,11 +240,11 @@ Page({
       // url: "/pages/shopsquare/shopsquare"
       // url: "/pages/dismantlingbox/dismantlingbox"
       // url: "/page/secondpackge/pages/shopsquaretrip/shopsquaretrip"
-      // url: "/pages/storehomepage/storehomepage"
+      url: "/pages/personaldata/personaldata"
 
       // url: "/pages/vipOrTicket/vipOrTicket?isv=1"
       // url: "/pages/vipOrTicketNew/vipOrTicketNew?isv=1"
-      url: "/pages/collectGiftBag/collectGiftBag?isv=1" 
+      // url: "/pages/collectGiftBag/collectGiftBag?isv=1" 
 
       // url: "/page/component/pages/limitlottery/limitlottery?id=35405",
 

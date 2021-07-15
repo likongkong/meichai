@@ -616,11 +616,14 @@ Page({
           winningovertimedetail: h
         });
       } else {
-        clearInterval(_this.data.wintheprtintervaldetail);
-        if (_this.data.iftrrefresh){
-          _this.detailfunshop();
-          _this.setData({iftrrefresh:false});
-        };
+        setTimeout(()=>{
+          clearInterval(_this.data.wintheprtintervaldetail);
+          if (_this.data.iftrrefresh){
+            _this.detailfunshop();
+            _this.setData({iftrrefresh:false});
+          };
+        },1000)
+
       };
     }.bind(_this), 1000);
   },
