@@ -380,7 +380,7 @@
                       </view>
 
                       <view class='wholeconnum specialellipsis' wx:if='{{item.prize}}' style='padding-top:10rpx;'>奖品:{{item.prize}}</view>
-                      <view class='wholeconnum specialellipsis'>
+                      <view class='wholeconnum'>
                            <view class='wholeconnumdisilin'>
                               <block wx:if='{{item.order_type==1&&item.suitName&&item.suitNumber}}'>
                                  {{item.suitName}}x{{item.suitNumber}}

@@ -690,7 +690,7 @@
                     </view>
                     <view class='wholeconnum specialellipsis' wx:if='{{comdata.prize}}' style='padding-top:10rpx;'>
                         奖品:{{comdata.prize}}</view>
-                    <view class='wholeconnum specialellipsis'>
+                    <view class='wholeconnum'>
                         <view class='wholeconnumdisilin'>
                             <block wx:if='{{comdata.order_type==1&&comdata.suitName&&comdata.suitNumber}}'>
                                 {{comdata.suitName}}x{{comdata.suitNumber}}
