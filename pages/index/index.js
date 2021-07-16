@@ -240,7 +240,7 @@ Page({
       // url: "/pages/shopsquare/shopsquare"
       // url: "/pages/dismantlingbox/dismantlingbox"
       // url: "/page/secondpackge/pages/shopsquaretrip/shopsquaretrip"
-      url: "/pages/personaldata/personaldata"
+      url: "/pages/topfunction/topfunction"
 
       // url: "/pages/vipOrTicket/vipOrTicket?isv=1"
       // url: "/pages/vipOrTicketNew/vipOrTicketNew?isv=1"

@@ -1380,8 +1380,7 @@ App({
         if(this.signindata.enterPageNum == 1){
           this.signindata.firstTime = Date.parse(new Date())/1000;
           callback();
-        }
-        if(this.signindata.enterPageNum > 5 ){
+        }else if(this.signindata.enterPageNum > 5 ){
           var nowTime = Date.parse(new Date())/1000;
           console.log('相差值',nowTime - this.signindata.firstTime)
           if((nowTime - this.signindata.firstTime) <= 10 ){

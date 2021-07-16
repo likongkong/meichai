@@ -604,9 +604,7 @@ Page({
         console.log('地址=======onloadfun====',_this.data.addressdata)
     };
 
-    app.enterPageNumFun(() => {
-      this.getInfo()
-    })
+    this.getInfo()
 
     setTimeout(function () {
       _this.getdefault();
