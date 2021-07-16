@@ -879,7 +879,7 @@
                                 <block wx:else>核验支付</block>
                             </block>
                             <block wx:elif='{{comdata.isReceive}}'>我要领取</block>
-                            <block wx:elif='{{item.order_type == 23}}'>支付定金</block>
+                            <block wx:elif='{{comdata.order_type == 23}}'>支付定金</block>
                             <block wx:else>我要付款</block>
 
 
