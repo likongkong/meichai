@@ -87,8 +87,8 @@
             <image wx:if='{{item.select==1}}' class='alreadyimg' style='bottom:10%;' src='{{avatarUrl}}'></image>
 
           </view>
-
-          <view class='multilineellipsis' style='width:{{imgw}}px;text-align:center;font-weight:bold;font-size:25rpx;margin-top:17rpx;line-height:40rpx;'>{{item.name}}</view>
+ 
+          <view class='specialellipsis' style='width:{{imgw}}px;text-align:center;font-weight:bold;font-size:25rpx;margin-top:17rpx;line-height:40rpx;'>{{item.name}}</view>
 
         </view>
 

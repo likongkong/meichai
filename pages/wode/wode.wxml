@@ -231,7 +231,7 @@
     <view class='ngbackground' catchtap='isweekendfun'></view>
     <view class='picbox' style='height:280rpx;width:440rpx;'>
         <view style='height:80rpx;text-align:center;line-height:90rpx;color:#333;font-size:28rpx;'>提示</view>
-            <text style='padding:0 20rpx 20rpx 20rpx;display:block;height:80rpx;text-align:center;line-height:40rpx;color:#333;font-size:26rpx;border-bottom:1rpx solid #e5e5e5'>非工作时间可以留言\n周一10:00后依次回复!</text>
+            <text style='padding:0 20rpx 20rpx 20rpx;display:block;height:80rpx;text-align:center;line-height:40rpx;color:#333;font-size:26rpx;border-bottom:1rpx solid #e5e5e5'>非工作时间可以留言\n周一10:00后依次回复</text>
         <view class='picboxcon' style='line-height:100rpx;text-align:center;color:#0fbe0e;font-size:28rpx;position:relative;' catchtap='isweekendfun'>
             确定
             <button open-type='contact' session-from='' style='width:100%;height:100%;position:absolute;top:0;left:0;opacity: 0;z-index:1;'></button>
