@@ -2,6 +2,7 @@ import { apiResquest } from './http.js'
 
 //POST 请求案例
 
+// ---------------------------------------- 公共-----------------------------------------
 // 登录
 export const login = (query) => {
 	return apiResquest.post({
@@ -9,6 +10,19 @@ export const login = (query) => {
     query: {...query}
 	})
 }
+
+
+// ---------------------------------------- index页面-----------------------------------------
+
+
+
+
+
+
+
+
+
+
 
 // login(data).then(res => {
 //   console.log(res)
