@@ -416,7 +416,7 @@ Page({
       wx.navigateTo({    
         url: "../../../../pages/activitydetailspage/activitydetailspage?id=" + activity_id
       })
-    } else if (order_type == 16){
+    } else if (order_type == 16 || !_this.data.comdata.skipGoodsDesc){
       return;
     } else if (order_type == 17) {
       wx.navigateTo({

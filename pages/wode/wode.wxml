@@ -56,7 +56,7 @@
             </block>
             <block wx:else>
                 <view catchtap="jumpVipPage">
-                    <text style="margin-left: 34rpx;">开通VIP年卡立即领取价值￥2024好礼</text>
+                    <text style="margin-left: 34rpx;">{{vipAdvertising}}</text>
                     <view class="vipButOpen">查看特权></view>      
                 </view>
             </block>
