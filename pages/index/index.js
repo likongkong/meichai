@@ -240,7 +240,7 @@ Page({
       // url: "/pages/shopsquare/shopsquare"
       // url: "/pages/dismantlingbox/dismantlingbox"
       // url: "/page/secondpackge/pages/shopsquaretrip/shopsquaretrip"
-      url: "/pages/topfunction/topfunction"
+      // url: "/pages/topfunction/topfunction"
 
       // url: "/pages/vipOrTicket/vipOrTicket?isv=1"
       // url: "/pages/vipOrTicketNew/vipOrTicketNew?isv=1"
@@ -297,7 +297,7 @@ Page({
 
       // url: "/page/component/pages/iWasInvolved/iWasInvolved",
 
-      // url: "/pages/detailspage/detailspage?gid=35327"
+      url: "/pages/detailspage/detailspage?gid=38364"
 
       // url: "/pages/modifythenickname/modifythenickname?brand_id=210"
       

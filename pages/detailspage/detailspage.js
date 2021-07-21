@@ -418,7 +418,9 @@ Page({
       console.log('zunmdata.isDisplayDeposit',zunmdata.isDisplayDeposit)
       if(zunmdata.isDisplayDeposit){
         // 手机壳 并且 isSpecSoldOut 为 true 全部卖完
-        if( selectShell.stock <= 0 || zunmdata.isSpecSoldOut){
+        if(selectShell.salesStatus == 1 && selectShell.realStock <= 0){
+          zunmdata.debuff = 2;
+        }else if( selectShell.stock <= 0 || zunmdata.isSpecSoldOut){
           zunmdata.debuff = 3;
         };
         if(zunmdata.totalSpecStock && selectShell.stock > zunmdata.totalSpecStock){
@@ -2486,6 +2488,13 @@ Page({
     var _this = this;
     var numbadd = ++this.data.numberofdismantling;
     var zunmdata = this.data.zunmdata;
+    var selectShell = this.data.selectShell || '';
+    if(this.data.specialGoods==1 && selectShell && selectShell.salesStatus==1){
+      if(parseInt(numbadd) > parseInt(selectShell.realStock)){
+        app.showToastC('该商品限购' + selectShell.realStock + '件');
+        numbadd = selectShell.realStock;
+      };
+    };
     if (zunmdata.limitBuy > 0) {
       if (numbadd > zunmdata.limitBuy) {
         app.showToastC('该商品限购' + zunmdata.limitBuy + '件');
@@ -3277,7 +3286,9 @@ Page({
                 if(listSpec[modelColor]){
                     selectShell = listSpec[modelColor];
                     spgsale = listSpec[modelColor].price; 
-                    if( listSpec[modelColor] && listSpec[modelColor].stock > 0 ){
+                    if(listSpec[modelColor].salesStatus == 1 && listSpec[modelColor].realStock <= 0){
+                      redauin.debuff = 2; 
+                    }else if( listSpec[modelColor] && listSpec[modelColor].stock > 0 ){
                       redauin.debuff = 0; 
                     }else{
                       redauin.debuff = 3; 
@@ -3364,7 +3375,9 @@ Page({
                                 modelSelInde = j;
                                 selectShell = listSpec[modelColor];
                                 spgsale = listSpec[modelColor].price; 
-                                if( listSpec[modelColor] && listSpec[modelColor].stock > 0 ){
+                                if( listSpec[modelColor] && listSpec[modelColor].salesStatus == 1 && listSpec[modelColor].realStock <= 0){
+                                  redauin.debuff = 2; 
+                                }else if( listSpec[modelColor] && listSpec[modelColor].stock > 0 ){
                                   redauin.debuff = 0; 
                                 }else{
                                   redauin.debuff = 3; 
@@ -3404,11 +3417,14 @@ Page({
             redauin.gsale = spgsale;
             redauin.gprice = spgsale;
             redauin.goods_thumb = selectShell.roleImg;
-            console.log('detailSpecColor==========',detailSpecColor)
 
             // 手机壳 并且 isSpecSoldOut 为 true 全部卖完
             if(res.data.Ginfo.isSpecSoldOut){
+              if(selectShell.salesStatus == 1){
+                redauin.debuff = 2; 
+              }else{
                 redauin.debuff = 3; 
+              };
             };
 
             _this.setData({

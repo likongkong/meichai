@@ -296,22 +296,16 @@
       </view>
 
 
-
-
   </block>
      <view wx:if='{{specialGoods==1}}' style="background:#fff;padding:15rpx 0;">
         <view class="mscModel">选择{{specCate[0]}}:</view>
-        <!-- <picker class="p" bindchange="bindPickerChange" value="{{modelSelInde}}" range="{{detailSpecModel}}" range-key="name">
-            <view class="mscModelEve" catchtap="mpmBullFrame">{{detailSpecModel[modelSelInde].name}}<image src="https://cdn.51chaidan.com/images/sign/activity/dropDown.png" mode='aspectFit' class="mscModelEveDown"></image></view>
-        </picker>  -->
         <view class="mscModelBox">
           <!-- {{item.realStock<5?'background:#F0E2BB;':''}}  style="color:#1684FC;" -->
-          <view class="mscModelBoxOne {{modelSelInde==index?'addColorClass':''}}" style="{{modelSelInde==index&&item.realStock<5?'color:#1684FC !important;background:#D8EBFF !important;':''}}" wx:for='{{detailSpecModel}}' catchtap="bindPickerChange" data-ind='{{index}}' wx:key='key'>{{item.name}}<block wx:if='{{item.realStock<5}}'><text>(预售)</text></block><block wx:else>(现货)</block> </view>
-
-            <!-- <view class="mscModelBoxeve {{modelSelInde==index?'ColorClass':''}}" wx:for='{{detailSpecModel}}' catchtap="bindPickerChange" data-ind='{{index}}' wx:key='key'>
-                <image src="{{item.roleImg}}" mode='aspectFit' class="modModeImg" alt=""></image>
-                <view class="disanum_sb_txtone multilineellipsis" style="color:#666;max-height:70rpx;line-height: 32rpx;">{{item.name}}</view>
-            </view> -->
+          <view class="mscModelBoxOne {{modelSelInde==index?'addColorClass':''}}" style="{{modelSelInde==index&&item.realStock<5?'color:#1684FC !important;background:#D8EBFF !important;':''}}{{item.salesStatus==1&&item.realStock<=0?'text-decoration:line-through;':''}}" wx:for='{{detailSpecModel}}' catchtap="bindPickerChange" data-ind='{{index}}' wx:key='key'>{{item.name}}
+            <block wx:if='{{item.realStock <=0 && item.salesStatus==1}}'>(售罄)</block>
+            <block wx:elif='{{item.realStock<5}}'><text>(预售)</text></block>
+            <block wx:else>(现货)</block>
+          </view>
 
         </view>
 

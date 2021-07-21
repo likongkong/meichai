@@ -104,31 +104,6 @@ Page({
   },
   onLoad: function (options) {
     var _this = this;
-    wx.request({
-      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/openScreen.json?time='+app.signindata.appNowTime,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        if(res.data && res.data.List && res.data.List.openscreen){
-          var openscreen = res.data.List.openscreen || [];
-          var isInToToyShow = res.data.Info.isInToToyShow || false;
-          _this.setData({
-            isInToToyShow:isInToToyShow
-          })
-          var imgnum = Math.floor(Math.random() * openscreen.length) || 0;
-          var nowTime = Date.parse(new Date());//当前时间戳
-          if(openscreen[imgnum]){
-            var imgUrl = openscreen[imgnum]+'?time=' + nowTime;
-            app.signindata.tgaimg = imgUrl;
-            console.log('首页开机图片===========', res,imgnum,imgUrl)
-            _this.setData({
-              imgUrl: imgUrl
-            });
-          }
-        };    
-      },
-      fail: function (res) {}
-    }) 
 
     if (options.scene) {
       let scene = decodeURIComponent(options.scene);
@@ -143,8 +118,39 @@ Page({
      } else {
       _this.setData({ iftrjump: true });
      };
+
+    wx.request({
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/openScreen.json?time='+app.signindata.appNowTime,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        if(res.data && res.data.List && res.data.List.openscreen){
+          var openscreen = res.data.List.openscreen || [];
+          var isInToToyShow = res.data.Info.isInToToyShow || false;
+          _this.setData({
+            isInToToyShow:isInToToyShow
+          });
+          var imgnum = Math.floor(Math.random() * openscreen.length) || 0;
+          var nowTime = Date.parse(new Date());//当前时间戳
+          if(openscreen[imgnum]){
+            var imgUrl = openscreen[imgnum]+'?time=' + nowTime;
+            app.signindata.tgaimg = imgUrl;
+            console.log('首页开机图片===========', res,imgnum,imgUrl)
+            _this.setData({
+              imgUrl: imgUrl
+            });
+          }
+          if(openscreen.length != 0){
+            _this.countdownfun();
+          }else{
+            _this.clickcountdownfun();
+          };
+          
+        };    
+      },
+      fail: function (res) {}
+    }) 
     
-    _this.countdownfun();
 
   },
   onLoadfun:function(){
