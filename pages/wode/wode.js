@@ -304,6 +304,7 @@ Page({
         if (res.data.Message != "Empty info") {
           if (res.data.ReturnCode == 200){
             _this.setData({
+              vipAdvertising: res.data.Info.vipAdvertising||'',
               // 待付款
               nonpayment: res.data.Info.non_payment||0,
               // 待拆单数
