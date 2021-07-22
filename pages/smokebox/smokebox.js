@@ -399,7 +399,7 @@ Page({
     var _this = this
 
     wx.navigateTo({
-      url: "/page/component/pages/webview/webview?webview=https://www.51chaidan.com/notice/strategyBlindBox.html",
+      url: "/page/component/pages/webview/webview?webview=https://www.51chaidan.com/notice/20210722_strategyBlindBox.html",
     });
   },
 
