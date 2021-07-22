@@ -208,7 +208,7 @@
 
 				<view wx:if='{{whole_boxGift}}' class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;"  catchtap="collectchip">端盒送</view>
 
-				<view wx:elif='{{isOpenLine && activity.status == 2}}' class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;"  catchtap="{{(isDirectOpenWholeBox&&!isDeduct) || (isDirectOpenWholeBox&&isDeduct&&activity.userBlindBoxAmount==0) ? 'wholebox' : 'collectchip'}}">
+				<view wx:elif='{{isOpenWholeBox && activity.status == 2}}' class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;"  catchtap="{{(isDirectOpenWholeBox&&!isDeduct) || (isDirectOpenWholeBox&&isDeduct&&activity.userBlindBoxAmount==0) ? 'wholebox' : 'collectchip'}}">
 				    <block wx:if='{{activity.wholeBoxTitle}}'>{{activity.wholeBoxTitle}}</block>
 						<block wx:elif='{{tipCheapForWholeBox>0||activity.wholeBoxSpecialTitle}}'>{{activity.wholeBoxSpecialTitle||'端盒立减'}}</block>
 						<block wx:else>抽整盒</block>

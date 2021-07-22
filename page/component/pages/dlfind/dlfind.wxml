@@ -20,9 +20,12 @@
       </block>
       <block wx:else>
           <block wx:if='{{cat_id==2}}'><image src='https://www.51chaidan.com/images/toyCabinet/search.png' class='dlfheadrhimg' catchtap='elsearchfun'></image></block>
-          <block wx:else><image src='../../../../pages/images/explain.png' class='dlfheadrhimg' catchtap='dlhintfun'></image></block>
+          <block wx:else>
+          <!-- <image src='../../../../pages/images/explain.png' class='dlfheadrhimg' catchtap='dlhintfun'></image> -->
+          </block>
           
-          <view class='dlfheadrhimg' style='right:120rpx;' catchtap='jumpdlnotice' wx:if='{{cat_id!=2}}'>
+          <!-- right:120rpx; -->
+          <view class='dlfheadrhimg' style='right:20rpx;' catchtap='jumpdlnotice' wx:if='{{cat_id!=2}}'>
             <image style='display:block;width:100%;height:100%;' src='https://clw.51chaidan.com/images/goods/remind.png'></image>
             <view style='width:30rpx;height:30rpx;line-height:30rpx;position:absolute;top:-15rpx;right:-10rpx;border:2rpx solid #ff0000;border-radius:50%;background:#fff;font-size:24rpx;color:#ff0000;text-align:center;' wx:if='{{commentNumber&&commentNumber!=0}}'>{{commentNumber}}</view>
           </view>      

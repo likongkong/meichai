@@ -1,0 +1,9 @@
+/* page/secondpackge//pages/gbaPage/gbaPage.wxss */
+.wrap{
+  padding: 30rpx 20rpx;
+  box-sizing: border-box;
+}
+.wxParse-img{
+  width: 100% !important;
+  display: block;
+}
