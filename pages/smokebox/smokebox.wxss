@@ -742,7 +742,7 @@ margin-top: 20rpx;
 }
 
 .ch_integralWrap{
-  width: 650rpx; height: 140rpx; background: #fff;border: 2rpx solid gray;border-radius: 10rpx;margin: 60rpx auto 0 auto;display: flex;align-items: center;justify-content: space-between;overflow: hidden;position: relative;
+  width: 650rpx; height: 140rpx; background: #fff;border: 2rpx solid gray;border-radius: 10rpx;margin: 0 auto 40rpx auto;display: flex;align-items: center;justify-content: space-between;overflow: hidden;position: relative;
 }
 .ch_cornerMask{
   width: 50rpx; height: 50rpx; position: absolute;bottom: 0;right: 0;
@@ -808,7 +808,7 @@ margin-top: 20rpx;
 .vipBox{
   width: 650rpx;
   height: 140rpx;
-  margin: 40rpx auto 0 auto;
+  margin: 0 auto 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;

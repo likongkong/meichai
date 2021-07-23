@@ -933,7 +933,7 @@ Page({
             welfareTags:listDataDetail.welfareTags || [],
             toyCabinetList:listDataDetail.toyCabinetList || [],
             isAboveQuota:infoData.isAboveQuota || false,  // 是否超出限购限额  true 是
-            limitBuy:activityData.limitBuy || 0
+            returnBlindBoxMoney:activityData.vip_discount * activityData.limit_users
           })
 
           if(infoData.user.isTempTip){
