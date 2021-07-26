@@ -207,7 +207,7 @@
 									<block wx:if='{{item.cheaperPrice}}'><text style="font-size:20rpx;">￥</text>{{item.cheaperPrice}}<text style="font-size:20rpx;color:#7b7b7b;text-decoration:line-through;margin-left:10rpx;">￥{{item.price}}</text></block>
 									<block wx:else><text style="font-size:20rpx;">￥</text>{{item.price}}</block>
 								</view>
-								<view wx:if='{{item.vip_special_offer==1}}' class="vipReappearance">VIP返抽盒金<text style="font-size:22rpx">x</text><text style='font-size:23rpx;'>{{item.vip_discount}}</text></view>
+								<view wx:if='{{item.vip_special_offer==1}}' class="vipReappearance">VIP返抽盒金<text style="font-size:20rpx">x</text>{{item.vip_discount}}</view>
 								<!-- <view class="vipImage" wx:if='{{item.vip_special_offer==1 && isVip}}'>
 									  <view class="vipImageNum"><text style="font-size:20rpx">x</text>{{item.vip_discount}}</view>
 										<image mode='widthFix' src="http://www.51chaidan.com/images/sign/vip_give_blindBox_gold.png"></image> 
