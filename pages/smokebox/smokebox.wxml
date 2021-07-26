@@ -113,7 +113,7 @@
 	<view style='width:500rpx;text-align:center;padding:20rpx 125rpx;line-height:35rpx;font-size:30rpx;'>{{activity.name}}</view>
 
   <view class="boxBene" style="{{welfareTags.length>=4?'':'text-align: center;'}}" wx:if='{{(welfareTags && welfareTags.length!=0) || activity.isRecycle}}'>
-			<view wx:if="{{activity.vip_special_offer == 1}}" style="background-image: linear-gradient(to bottom right, #FFFFDE , #FFBE3E);border-radius:3px;height:40rpx;line-height:40rpx;left:10px;font-size: 22rpx;color:#CC911C;margin: 0 10rpx;display: inline-block;text-align: center;padding: 0 10rpx;" catchtap="">VIP返抽盒金x{{activity.vip_discount}}</view>
+			<view wx:if="{{activity.vip_special_offer == 1}}" style="background-image: linear-gradient(to bottom right, #FFFFDE , #FFBE3E);border-radius:3px;height:40rpx;line-height:40rpx;left:10px;font-size: 22rpx;color:#CC911C;margin: 0 10rpx;display: inline-block;text-align: center;padding: 0 10rpx;" catchtap="jumpVipPage">VIP返抽盒金x{{activity.vip_discount}}</view>
 
 	    <view wx:if="{{activity.isRecycle}}" style="min-width:108rpx;background:#1890ff;border-radius:3px;width:60px;height:40rpx;line-height:40rpx;left:10px;font-size: 24rpx;color:#ffffff;margin: 0 10rpx;display: inline-block;text-align: center;" catchtap="toggleRecyclerule">{{activity.recycleRatio}}折回收</view>
 
@@ -207,10 +207,15 @@
 			</view>
 			<view style="width:50%;height:80rpx;position:relative;float:right;">
 
-				<view wx:if="{{activity.vip_special_offer == 1}}" style="width:208rpx;position:absolute;top: -24rpx;right: 16rpx;z-index: 10;">
+				<!-- <view wx:if="{{activity.vip_special_offer == 1}}" style="width:208rpx;position:absolute;top: -24rpx;right: 16rpx;z-index: 10;">
 					<image style="width:100%;height:auto;display:block;" src="http://www.51chaidan.com/images/sign/vip_give_blindBox_gold.png" mode="widthFix"></image>
-					<text style="position:absolute;right:6rpx;bottom:0;color:#fff;font-size:24rpx;">x{{returnBlindBoxMoney}}</text>
-				</view>
+					<block wx:if='{{whole_boxGift || (isOpenWholeBox && activity.status == 2)}}'>
+						<text style="position:absolute;right:6rpx;bottom:0;color:#fff;font-size:24rpx;">x{{returnBlindBoxMoney}}</text>
+					</block>
+					<block wx:else>
+						<text style="position:absolute;right:6rpx;bottom:0;color:#fff;font-size:24rpx;">x{{activity.vip_discount}}</text>
+					</block>
+				</view> -->
 
 				<view wx:if='{{whole_boxGift}}' class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;"  catchtap="collectchip">端盒送</view>
 
@@ -652,6 +657,14 @@
 		</view>
 
 		<view style='width:100%; height:100%;margin:{{statusBarHeightMc+50}}px 0 0 0;text-align:center;position: absolute;left: 0;top:0;' catchtap='closeselect'>
+			<view class="boxBene" style="{{welfareTags.length>=4?'':'text-align: center;'}}" wx:if='{{(welfareTags && welfareTags.length!=0) || activity.isRecycle}}'>
+					<view wx:if="{{activity.vip_special_offer == 1}}" style="background-image: linear-gradient(to bottom right, #FFFFDE , #FFBE3E);border-radius:3px;height:40rpx;line-height:40rpx;left:10px;font-size: 22rpx;color:#CC911C;margin: 0 10rpx;display: inline-block;text-align: center;padding: 0 10rpx;" catchtap="jumpVipPage">VIP返抽盒金x{{activity.vip_discount}}</view>
+
+					<view wx:if="{{activity.isRecycle}}" style="min-width:108rpx;background:#1890ff;border-radius:3px;width:60px;height:40rpx;line-height:40rpx;left:10px;font-size: 24rpx;color:#ffffff;margin: 0 10rpx;display: inline-block;text-align: center;" catchtap="toggleRecyclerule">{{activity.recycleRatio}}折回收</view>
+
+					<view class="boxBenefits" wx:for='{{welfareTags}}' wx:key='key' catchtap="boxBenefitsFun" data-name='{{item}}'>{{item}}</view>
+			</view>
+
 			<scroll-view scroll-y="true" style="width:100%;heigth:100%">
 
 				<view style="width:{{iewidth}}rpx;height:{{iefheight}}rpx;margin:0 auto;">
@@ -707,10 +720,10 @@
 								</block>
 								<block wx:else>就买它</block>	
 						</view>
-						<view wx:if="{{activity.vip_special_offer == 1}}" style="width:208rpx;position:absolute;top: -24rpx;right: 16rpx;z-index: 10;">
+						<!-- <view wx:if="{{activity.vip_special_offer == 1}}" style="width:208rpx;position:absolute;top: -24rpx;right: 16rpx;z-index: 10;">
 							<image style="width:100%;height:auto;display:block;" src="http://www.51chaidan.com/images/sign/vip_give_blindBox_gold.png" mode="widthFix"></image>
 							<text style="position:absolute;right:6rpx;bottom:0;color:#fff;font-size:24rpx;">x{{activity.vip_discount}}</text>
-						</view>
+						</view> -->
 
 					</view>
 
@@ -1430,10 +1443,10 @@
 								<!-- <view wx:elif='{{!isDirectOpenWholeBox}}' style="width:130rpx;line-height:30rpx;position:absolute;top:-15rpx;right:-30rpx;background:#FE666B;color:white;font-size:20rpx;border-radius:10rpx;text-align:center;">领取全部奖励</view> -->
 								{{wholeBoxTitle?wholeBoxTitle:'端整盒'}}
 							</view>
-							<view style="width:208rpx;position:absolute;top: -24rpx;right: 140rpx;z-index: 10;">
+							<!-- <view style="width:208rpx;position:absolute;top: -24rpx;right: 140rpx;z-index: 10;">
 								<image style="width:100%;height:auto;display:block;" src="http://www.51chaidan.com/images/sign/vip_give_blindBox_gold.png" mode="widthFix"></image>
 								<text style="position:absolute;right:6rpx;bottom:0;color:#fff;font-size:24rpx;">x{{returnBlindBoxMoney}}</text>
-							</view>
+							</view> -->
 						</view>
 						<view wx:if='{{activity.displayTotal}}' style="width:100%;font-size:22rpx;text-align:center;color:#4c9a23;margin-top:40rpx;">抽盒机抽整盒为拆盒确认款,有几率获得隐藏款替换任意一款</view>
 						<!-- 我的抽盒金 -->
