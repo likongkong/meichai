@@ -401,10 +401,11 @@ page {
   border-radius: 7rpx;
   padding: 0 8rpx;
   background:linear-gradient(to right,#FFFDDA,#FDC352);
-  display:inline-block;
-  margin:0 5rpx 5rpx 0;
   height: 30rpx;
   line-height: 30rpx;
+  font-size:20rpx;
+  float: right;
+  margin:2rpx 10rpx 0 0;
 }
 .vipImage{
   width: 200rpx;
