@@ -297,7 +297,8 @@ Page({
       },
       automatTimes: app.signindata.automat.times,
       defaultinformation:app.signindata.defaultinformation,
-      automattitle: app.signindata.automattitle || ''
+      automattitle: app.signindata.automattitle || '',
+      isVip:app.signindata.isVip 
     });
 
 

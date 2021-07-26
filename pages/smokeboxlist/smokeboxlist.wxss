@@ -397,15 +397,14 @@ page {
 }
 
 .vipReappearance{
-  line-height: 30rpx;
   color: #CC911C;
   border-radius: 7rpx;
-  font-size: 24rpx;
-  text-align: center;
   padding: 0 8rpx;
   background:linear-gradient(to right,#FFFDDA,#FDC352);
   display:inline-block;
   margin:0 5rpx 5rpx 0;
+  height: 30rpx;
+  line-height: 30rpx;
 }
 .vipImage{
   width: 200rpx;
@@ -421,6 +420,10 @@ page {
   position: absolute;
   top: 6rpx;
   left: 136rpx;
-  font-size: 22rpx;
+  font-size: 24rpx;
   color: #fff;
+}
+
+.tipComStyle{
+  border-radius:7rpx;display:inline-block;padding:0 8rpx;margin:0 5rpx 5rpx 0;height: 30rpx;line-height: 30rpx;
 }
