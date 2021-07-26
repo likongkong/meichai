@@ -1101,3 +1101,38 @@ margin-top: 20rpx;
   width: 36rpx;
   height: 36rpx;
 }
+
+.prizetitle{
+  display: block;
+  font-size: 24rpx;
+  color: #101010;
+  margin-bottom: 20rpx;
+}
+.prizepic{
+  width: 100%;
+}
+.bigprize{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.prizepic view{
+  width: 162rpx;
+  height: 162rpx;
+  background: #fff;
+  border-radius: 10rpx;
+  display: inline-block;
+  margin-right: 18rpx;
+  margin-bottom: 18rpx;
+}
+.bigprize view{
+  margin: 0 9rpx;
+}
+.prizepic view:nth-child(4n){
+  margin-right: 0;
+}
+.prizepic view image{
+  width: 162rpx;
+  height: 162rpx;
+  display: block;
+}
