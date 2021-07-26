@@ -188,7 +188,7 @@
 								
 							<image wx:if='{{item.isNewArrival}}' class="labelstyleImg" src="https://cdn.51chaidan.com/images/icon/newArrival.png"></image>
 							<view class='labelstyle' style="{{item.isNewArrival?'right:48rpx;':'right:20rpx;'}}">
-								<view  wx:if='{{item.vip_special_offer==1}}' class="vipReappearance">VIP特权<text style="font-size:22rpx">x</text>{{item.vip_discount}}</view>
+								<view  wx:if='{{item.vip_special_offer==1}}' class="vipReappearance">VIP返抽盒金<text style="font-size:22rpx">x</text>{{item.vip_discount}}</view>
 
 							  <view wx:if='{{item.isRecycle}}' style='background:#1890ff;border-radius:7rpx;display:inline-block;padding:0 8rpx;margin:0 5rpx 5rpx 0;'>{{item.recycleRatio}}折回收</view>
 								<view wx:if='{{item.isScratch}}' style='background:#FB595F;border-radius:7rpx;display:inline-block;padding:0 8rpx;margin:0 5rpx 5rpx 0;'>送刮刮卡</view>

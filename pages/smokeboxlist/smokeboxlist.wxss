@@ -398,10 +398,6 @@ page {
 
 .vipReappearance{
   line-height: 30rpx;
-  opacity: 0.9;
-  /* position: absolute;
-  top: 10rpx;
-  left: 6rpx; */
   color: #CC911C;
   border-radius: 7rpx;
   font-size: 24rpx;
