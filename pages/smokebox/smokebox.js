@@ -311,11 +311,6 @@ Page({
     }
 
   },
-  jumpVipPage(){
-    wx.navigateTo({  
-      url: "/page/secondpackge/pages/vipPage/vipPage"
-    })
-  },
   // 订阅授权
   subscrfun:function(){
     var _this = this;
