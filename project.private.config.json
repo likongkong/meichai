@@ -107,6 +107,12 @@
           "pathName": "page/secondpackge/pages/ticketRcSort/ticketRcSort",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/smokeboxlist/smokeboxlist",
+          "pathName": "pages/smokeboxlist/smokeboxlist",
+          "query": "",
+          "scene": null
         }
       ]
     }
