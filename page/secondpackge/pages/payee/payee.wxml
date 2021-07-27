@@ -16,12 +16,12 @@
         <input type="text" name="" id="" placeholder="请填写品牌名称" placeholder-class="placeholderclass" value="{{inputbranddata}}" bindinput="inputbrandChange"/>
       </view>
     </view>
-    <view class="formItemWrap">
+    <!-- <view class="formItemWrap">
       <view class="title">身份证号</view>
       <view class="formItemInput">
         <input type="text" name="" id="" placeholder="请填写身份证号" placeholder-class="placeholderclass" value="{{inputidnumberdata}}" bindinput="inputidChange"/>
       </view>
-    </view>
+    </view> -->
     <view class="formItemWrap">
       <view class="title">银行名称</view>
       <view class="formItemInput">

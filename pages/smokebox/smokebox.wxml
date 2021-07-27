@@ -113,7 +113,7 @@
 	<view style='width:500rpx;text-align:center;padding:20rpx 125rpx;line-height:35rpx;font-size:30rpx;'>{{activity.name}}</view>
 
   <view class="boxBene" style="{{welfareTags.length>=4?'':'text-align: center;'}}" wx:if='{{(welfareTags && welfareTags.length!=0) || activity.isRecycle}}'>
-			<view wx:if="{{activity.vip_special_offer == 1}}" style="background-image: linear-gradient(to bottom right, #FFFFDE , #FFBE3E);border-radius:3px;height:40rpx;line-height:40rpx;left:10px;font-size: 22rpx;color:#CC911C;margin: 0 10rpx;display: inline-block;text-align: center;padding: 0 10rpx;" catchtap="jumpVipPage">VIP返抽盒金x{{activity.vip_discount}}</view>
+			<view wx:if="{{activity.vip_special_offer == 1}}" style="background-image: linear-gradient(to bottom right, #FFFFDE , #FFBE3E);border-radius:3px;height:40rpx;line-height:40rpx;left:10px;font-size: 24rpx;color:#CC911C;margin: 0 10rpx;display: inline-block;text-align: center;padding: 0 10rpx;" catchtap="jumpVipPage">VIP返抽盒金x{{activity.vip_discount}}</view>
 
 	    <view wx:if="{{activity.isRecycle}}" style="min-width:108rpx;background:#1890ff;border-radius:3px;width:60px;height:40rpx;line-height:40rpx;left:10px;font-size: 24rpx;color:#ffffff;margin: 0 10rpx;display: inline-block;text-align: center;" catchtap="toggleRecyclerule">{{activity.recycleRatio}}折回收</view>
 
@@ -658,7 +658,7 @@
 
 		<view style='width:100%; height:100%;margin:{{statusBarHeightMc+50}}px 0 0 0;text-align:center;position: absolute;left: 0;top:0;' catchtap='closeselect'>
 			<view class="boxBene" style="{{welfareTags.length>=4?'':'text-align: center;'}}" wx:if='{{(welfareTags && welfareTags.length!=0) || activity.isRecycle}}'>
-					<view wx:if="{{activity.vip_special_offer == 1}}" style="background-image: linear-gradient(to bottom right, #FFFFDE , #FFBE3E);border-radius:3px;height:40rpx;line-height:40rpx;left:10px;font-size: 22rpx;color:#CC911C;margin: 0 10rpx;display: inline-block;text-align: center;padding: 0 10rpx;" catchtap="jumpVipPage">VIP返抽盒金x{{activity.vip_discount}}</view>
+					<view wx:if="{{activity.vip_special_offer == 1}}" style="background-image: linear-gradient(to bottom right, #FFFFDE , #FFBE3E);border-radius:3px;height:40rpx;line-height:40rpx;left:10px;font-size: 24rpx;color:#CC911C;margin: 0 10rpx;display: inline-block;text-align: center;padding: 0 10rpx;" catchtap="jumpVipPage">VIP返抽盒金x{{activity.vip_discount}}</view>
 
 					<view wx:if="{{activity.isRecycle}}" style="min-width:108rpx;background:#1890ff;border-radius:3px;width:60px;height:40rpx;line-height:40rpx;left:10px;font-size: 24rpx;color:#ffffff;margin: 0 10rpx;display: inline-block;text-align: center;" catchtap="toggleRecyclerule">{{activity.recycleRatio}}折回收</view>
 
