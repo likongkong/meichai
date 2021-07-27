@@ -405,7 +405,7 @@ page {
   line-height: 30rpx;
   font-size:20rpx;
   float: right;
-  margin:2rpx 10rpx 0 0;
+  margin:12rpx 10rpx 0 0;
 }
 .vipImage{
   width: 200rpx;

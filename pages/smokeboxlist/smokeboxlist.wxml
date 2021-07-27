@@ -10,7 +10,7 @@
 
 <view  style='width:100%;'>
 
-	<view style="width:100%;position:relative;background: white;">
+	<view style="width:100%;position:relative;background: white;" wx:if='{{bannerList && bannerList.length != 0}}'>
 		<swiper class="nsswiperdetail" bindchange="swiperChange" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
 			<swiper-item wx:for="{{bannerList}}" wx:key="key">
 				<image src="{{item.src}}?imageMogr2/thumbnail/x400" style="width:100%;height:200rpx;" catchtap='topjumpdetail' data-gid="{{item.gid}}"></image>
