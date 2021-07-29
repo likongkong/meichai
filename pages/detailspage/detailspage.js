@@ -290,16 +290,16 @@ Page({
 
     //多款式默认选择第一个 start
     // if(detailSpecColor.length > 1){
-      var indnum = 0;
-      for(var i=0 ; i < detailSpecModel.length ; i++){
-         if(detailSpecModel[i].arrCloseSpec[detailSpecColor[index].name]){
-            indnum = i;
-            break;
-         };
-      };
-      _this.setData({
-        modelSelInde:indnum
-      })
+      // var indnum = 0;
+      // for(var i=0 ; i < detailSpecModel.length ; i++){
+      //    if(detailSpecModel[i].arrCloseSpec[detailSpecColor[index].name]){
+      //       indnum = i;
+      //       break;
+      //    };
+      // };
+      // _this.setData({
+      //   modelSelInde:indnum
+      // })
     // }
     //多款式默认选择第一个 end
    
