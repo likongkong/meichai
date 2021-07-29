@@ -331,8 +331,10 @@ page {
 }
 .sblipseve{
   width: 112rpx;
+  position: relative;
   display: inline-block;
   margin:0 0 20rpx 0 ;
+  vertical-align: top;
 }
 .sblipseveimg{
   width: 80rpx;

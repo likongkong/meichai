@@ -17,7 +17,7 @@ Page({
     uid: app.signindata.uid,
     openid: app.signindata.openid,
 
-    c_title: '', // -正品折扣多一点
+    c_title: '品牌专区', // -正品折扣多一点
     c_arrow: true,
     c_backcolor: '',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
@@ -38,9 +38,15 @@ Page({
     signinlayer: true,
     windowHeight: app.signindata.windowHeight,
     type:'',
-    settlement:0
+    settlement:0,
+    morebrankip:false,
+    brandArr:[]
   },
-
+  morebranfun:function(){
+    this.setData({
+      morebrankip:!this.data.morebrankip
+    })
+  },
   // 展会公共跳转
   exhibitionpubjump: function (w) {
     var type = w.currentTarget.dataset.type || w.target.dataset.type || '';
@@ -312,7 +318,16 @@ Page({
 
     _this.data.videoContext = wx.createVideoContext('myVideo')//初始化视频组件
   },
-
+  // ip 的品牌
+  jumpsouchtemip:function(w){
+    var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
+    this.setData({
+      brandId: id||0,
+      morebrankip:false,
+    });
+    this.data.page = 0;
+    this.getbrandDetail(this.data.page);
+  },
   getbrandDetail: function (page) {
     var _this = this;
     wx.showLoading({
@@ -330,6 +345,7 @@ Page({
         console.log(res) 
         if (res.data.ReturnCode == 200) {
           var brandList = res.data.List.activity || [];
+          var brandArr = res.data.List.brandList || [];
           for (var r = 0; r < brandList.length; r++) {
             brandList[r].start_time = time.toDate(brandList[r].start_time);
             brandList[r].stop_time = time.toDate(brandList[r].stop_time);
@@ -340,6 +356,7 @@ Page({
             founder: res.data.List.founder,
             isVideo: res.data.Info.isVideo,
             video: res.data.List.video,
+            brandArr,
           })
           if (page == 0) {
             _this.setData({

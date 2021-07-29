@@ -248,6 +248,7 @@ page{
   margin-right: 20rpx;
   padding-top: 32rpx;
   box-sizing: border-box;
+  vertical-align: top;
 }
 .idle_IPBox:last-child{
   margin-right: 30rpx;
