@@ -267,7 +267,19 @@ Page({
   dSCfun(event){
     var _this = this;
     var index = event.currentTarget.dataset.index || event.target.dataset.index || 0;
-
+    // var name = this.data.detailSpecColor[index].name;
+    // var arr = [];
+    // console.log(this.data.detailSpecModel)
+    // console.log(this.data.detailSpecColor[index].name)
+    // for(var i = 0; i<this.data.detailSpecModel.length;i++){
+    //   if(this.data.detailSpecModel[i].arrCloseSpec.indexOf(name) != -1){
+    //     arr.push(this.data.detailSpecModel[i])
+    //   }
+    // }
+    // this.setData({
+    //   detailSpecModel:arr
+    // })
+    
     var detailSpecModel = this.data.detailSpecModel || [];
     var detailSpecColor = this.data.detailSpecColor || [];
     _this.setData({
@@ -275,8 +287,24 @@ Page({
       goodsIndex:0
     })
     var listSpec = this.data.listSpec;
+
+    //多款式默认选择第一个 start
+    // if(detailSpecColor.length > 1){
+      var indnum = 0;
+      for(var i=0 ; i < detailSpecModel.length ; i++){
+         if(detailSpecModel[i].arrCloseSpec[detailSpecColor[index].name]){
+            indnum = i;
+            break;
+         };
+      };
+      _this.setData({
+        modelSelInde:indnum
+      })
+    // }
+    //多款式默认选择第一个 end
+   
     var modelColor = detailSpecModel[this.data.modelSelInde].name+'-'+detailSpecColor[index].name;
-    console.log(listSpec[modelColor])
+    // console.log(listSpec[modelColor])
     if( listSpec[modelColor] && listSpec[modelColor].stock > 0 ){
       var zunmdata = this.data.zunmdata; 
       zunmdata.gsale = listSpec[modelColor].price || 0;

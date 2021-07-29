@@ -1428,8 +1428,8 @@
 											<image src="{{item.img}}" mode="aspectFit"></image>
 										</view>
 									</view>
-									<text class="prizetitle">隐藏款（有几率获得，随机替换一款基础款）</text>
-									<view class="prizepic bigprize">
+									<text class="prizetitle" wx:if="{{hideList && hideList.length != 0}}">隐藏款（有几率获得，随机替换一款基础款）</text>
+									<view class="prizepic bigprize" wx:if="{{hideList && hideList.length != 0}}">
 										<view wx:for='{{hideList}}' wx:key='key'>
 											<image src="{{item.img}}" mode="aspectFit"></image>
 										</view>
