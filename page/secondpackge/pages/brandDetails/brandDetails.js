@@ -19,7 +19,7 @@ Page({
 
     c_title: '品牌专区', // -正品折扣多一点
     c_arrow: true,
-    c_backcolor: '',
+    c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
 
     brandId: 0,
@@ -74,16 +74,59 @@ Page({
   addfrindcommonifun: function (w) {
     var _this = this;
     var url = w.currentTarget.dataset.url || w.target.dataset.url || 0;
-    var name = w.currentTarget.dataset.name || w.target.dataset.name || 0;
     if (url && url != "") {
       this.setData({
         showimg: url != "" ? url : "https://cdn.51chaidan.com/images/act/1577083808.jpg",
         addfrindcommoni: !this.data.addfrindcommoni
       });
     } else {
-      app.showToastC(name + '未提供此方式');
+      app.showToastC((_this.data.brandinfo.brandName || '') + '未提供此方式');
     }
   },
+  noClickTip(w){
+    var identif = w.currentTarget.dataset.identif || w.target.dataset.identif || 0;
+    switch(parseInt(identif)){
+      case 1: var txt = '微信'; break;
+      case 2: var txt = '公众号'; break;
+      case 3: var txt = '微博'; break;
+      case 4: var txt = '小红书'; break;
+      case 5: var txt = '抖音'; break;
+      default: var txt = '';
+    };
+    app.showToastC('暂未设置'+ txt +'信息');
+  },
+  jumpxcx(w){
+    var type = w.currentTarget.dataset.type || w.target.dataset.type || 0;
+    var path = w.currentTarget.dataset.path || w.target.dataset.path || '';
+    var appId = '';
+    if(type == 1){
+      appId = 'wx9074de28009e1111';
+    }else if(type == 2){
+      appId = 'wxb296433268a1c654';
+    }
+    wx.navigateToMiniProgram({
+         appId: appId,
+         path: path,
+         envVersion: 'release',// 打开正式版
+         success(res) {},
+         fail: function (err) {
+            console.log(err);
+          }
+    })
+  },
+  //  复制内容到粘贴板
+  copyTBL: function (e) {
+    var _this = this;
+    var txt = e.currentTarget.dataset.txt || e.target.dataset.txt || '';
+    wx.setClipboardData({
+      data: txt,
+      success: function (res) {
+        app.showToastC('复制成功');
+      }
+    });
+
+  }, 
+
   closefrindcommoni:function(){
     this.setData({
       addfrindcommoni: !this.data.addfrindcommoni

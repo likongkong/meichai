@@ -8,11 +8,18 @@
 page {
   background: #f5f6fa;
 }
+.briefIntroduction{
+  width:670rpx;font-size:26rpx;color:#333;margin:15rpx auto 0;
+  background:#fff;
+  border-radius: 10rpx;
+  padding:20rpx;
+}
 .bdaiBoxImg{
   width:55rpx;
   height: 55rpx;
   display: block;
   margin:auto;
+  border-radius: 50%;
 }
 .bdaiBoxTxt{
   width: 100%;
@@ -22,7 +29,7 @@ page {
   text-align: center;
 }
 .bDappIcomBox{
-  width: 650rpx;
+  width:710rpx;
   padding-top: 15rpx;
   height: 100rpx;
   margin:20rpx auto 40rpx;
@@ -84,15 +91,28 @@ page {
   font-weight: bold;
 }
 
-.exhibdeshare {
-  width: 80rpx;
-  height: 80rpx;
+.topShareBox{
+  width: 57rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  padding-left: 50rpx;
+  background: rgba(0,0,0,.5);
+  position: fixed;
+  right: 0;
+  border-radius: 50rpx 0 0 50rpx;
+  z-index: 3;
+  font-size: 24rpx;
+  color: #fff;
+}
+
+.topShareBoxImg{
   position: absolute;
-  right: 13rpx;
-  top: 7rpx;
-  box-shadow: 2px 2px 5rpx #ccc;
-  background: white;
-  border-radius: 40rpx;
+  top: 0;
+  bottom: 0;
+  left: 10rpx;
+  margin: auto;
+  width: 36rpx;
+  height: 36rpx;
 }
 
 .exhibdxtxtadd {
@@ -214,7 +234,7 @@ page {
 }
 
 .brandDSwiper{
-  width:700rpx;height:375rpx;margin:auto;
+  width:710rpx;height:380rpx;margin:auto;
   /* position:absolute;
   top: 0;
   left: 0;

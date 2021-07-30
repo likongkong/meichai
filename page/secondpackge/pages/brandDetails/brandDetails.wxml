@@ -1,25 +1,24 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
-<view style='width:100%;height:{{statusBarHeightMc-44}}px;'></view>
-<view style='width:100%;height:{{statusBarHeightMc}}px;background:#ff2742;position:fixed;top:0;left:0;z-index:100;'></view>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 <view style='width:100%;overflow:hidden;'>
 
   <view class="bdsbox">
       
 			<!-- 品牌 ip -->
-			<view style="min-height:80rpx;padding-top:{{statusBarHeightMc-30}}px;" wx:if='{{brandArr&&brandArr.length!=0}}'>
-					<view style="position:relative;height:150rpx;width:730rpx;margin:auto;">
+			<view style="min-height:80rpx;padding-top:30rpx;" wx:if='{{brandArr&&brandArr.length!=0}}'>
+					<view style="position:relative;height:150rpx;width:100%;">
 							<view style="width:110rpx;height:140rpx;float:left;">
 									<view class="sblipseve" catchtap="morebranfun">
 											<image class="sblipseveimg" style="{{brandArr[0].id==brandId?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{brandArr[0].logo}}"></image>
 											<view class="ocamenswevename specialellipsis" style="{{brandArr[0].id==brandId?'color:#f19207;':''}}">{{brandArr[0].name}}</view>
 									</view>                 
 							</view> 
-							<scroll-view scroll-x="true" style="width:588rpx;white-space: nowrap;height:150rpx;float:left;">
+							<scroll-view scroll-x="true" style="width:616rpx;white-space: nowrap;height:150rpx;float:left;">
 									<block wx:for='{{brandArr}}' wx:key='key' wx:for-item='w' wx:if='{{index<11&&w.id!=0}}'>
 											<view class="sblipseve" catchtap="jumpsouchtemip" data-id='{{w.id}}'>
 													<view style="position: relative;">
-														<image style="{{w.id==brandId?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" class="sblipseveimg boxShadowEve" mode='aspectFill' src="{{w.logo}}"></image>
+														<image style="{{w.id==brandId?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" class="sblipseveimg" mode='aspectFill' src="{{w.logo}}"></image>
 														<view class="flagshipStoreB" wx:if='{{w.isFlagship}}'>旗舰店</view>
 													</view>
 													<view class="ocamenswevename specialellipsis" style="{{w.id==brandId?'color:#f19207;':''}}">{{w.name}}</view>
@@ -33,7 +32,7 @@
 
 
 	</view>
-  <view style="position:relative;height:375rpx;">
+  <view style="position:relative;height:380rpx;">
 		  <!-- <view class="brandDSwiperBg"></view> -->
 			<swiper class="brandDSwiper" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
 				<swiper-item wx:if='{{isVideo}}'>
@@ -66,12 +65,10 @@
 				</view>		
 		</view>
 
-		<view style="width:650rpx;font-size:26rpx;color:#333;padding-top:20rpx;margin:auto;">简介：{{brandinfo.bradDesc}}</view>
-		<view class="exhibdeshare">
-			<button style='width:100%;height:100%;position:absolute;top:0;right:0;opacity:0;' open-type='share'></button>
-			<image style="width:40rpx;height:40rpx;margin:20rpx;" src="https://clw.51chaidan.com//images/goods/share3.png?"></image>
-		</view>
+		<view class="briefIntroduction">简介：{{brandinfo.bradDesc}}</view>
 	</view>
+
+	<view class="topShareBox" style="top:400rpx;"><image class="topShareBoxImg" src="https://cdn.51chaidan.com/images/spread/blindBoxShare.png"></image><button style='width:100%;height:100%;position:absolute;top:0;left:0;opacity:0;' open-type='share'></button>分享</view>
 
 	<block wx:if='{{founder && founder.length>0}}'>
 			<view style="width:100%;font-size:30rpx;text-align:center;margin:20rpx 0;font-weight:bold;">团队介绍</view>
@@ -87,41 +84,52 @@
 	</block>
 
 
-  <view class="bDappIcomBox boxShadowEve" wx:if='{{false}}'>
-		  <view catchtap="addfrindcommonifun" data-url="{{brandinfo.picFriend}}" data-name="{{brandinfo.brandName}}">
-					<image class="bdaiBoxImg" src="https://www.51chaidan.com/images/icon/iconShareWX.png"></image>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <view class="bDappIcomBox">
+		  <view catchtap="{{brandinfo.picFriend?'addfrindcommonifun':'noClickTip'}}" data-identif='1' data-url="{{brandinfo.picFriend}}">
+					<image class="bdaiBoxImg" src="{{brandinfo.picFriend?'https://cdn.51chaidan.com/images/brandInfoIcon/wxOpen.png':'https://cdn.51chaidan.com/images/brandInfoIcon/wxClose.png'}}"></image>
 					<view class="bdaiBoxTxt">微信</view>
 			</view>
-			<view catchtap="addfrindcommonifun" data-name="{{brandinfo.brandName}}" data-url="{{brandinfo.picPublic}}">
-					<image class="bdaiBoxImg" src="https://www.51chaidan.com/images/icon/iconShareWX.png"></image>
+		  <!-- <view>
+					<image class="bdaiBoxImg" src="{{brandinfo.wxGroup?'https://cdn.51chaidan.com/images/brandInfoIcon/qlOpen.jpg':'https://cdn.51chaidan.com/images/brandInfoIcon/qlClose.jpg'}}"></image>
+					<view class="bdaiBoxTxt">微信群</view>
+			</view> -->
+
+			<view catchtap="{{brandinfo.picPublic?'addfrindcommonifun':'noClickTip'}}" data-identif='2' data-url="{{brandinfo.picPublic}}">
+					<image class="bdaiBoxImg" src="{{brandinfo.picPublic?'https://cdn.51chaidan.com/images/brandInfoIcon/gzhOpen.jpg':'https://cdn.51chaidan.com/images/brandInfoIcon/gzhClose.jpg'}}"></image>
 					<view class="bdaiBoxTxt">公众号</view>
 			</view>
-		  <view>
-					<image class="bdaiBoxImg" src="https://www.51chaidan.com/images/icon/iconShareWX.png"></image>
-					<view class="bdaiBoxTxt">微信</view>
+
+		  <view catchtap="{{brandinfo.microblog?'jumpxcx':'noClickTip'}}" data-identif='3' data-type='1' data-path='{{brandinfo.microblog}}'>
+					<image class="bdaiBoxImg" src="{{brandinfo.microblog?'https://cdn.51chaidan.com/images/brandInfoIcon/wbOpen.png':'https://cdn.51chaidan.com/images/brandInfoIcon/wbClose.png'}}"></image>
+					<view class="bdaiBoxTxt">微博</view>
 			</view>
-		  <view>
-					<image class="bdaiBoxImg" src="https://www.51chaidan.com/images/icon/iconShareWX.png"></image>
-					<view class="bdaiBoxTxt">微信</view>
+		  <view catchtap="{{brandinfo.redBook?'jumpxcx':'noClickTip'}}" data-identif='4' data-type='2' data-path='{{brandinfo.redBook}}'>
+					<image class="bdaiBoxImg" src="{{brandinfo.redBook?'https://cdn.51chaidan.com/images/brandInfoIcon/xhsOpen.jpg':'https://cdn.51chaidan.com/images/brandInfoIcon/xhsClose.jpg'}}"></image>
+					<view class="bdaiBoxTxt">小红书</view>
 			</view>
-		  <view>
-					<image class="bdaiBoxImg" src="https://www.51chaidan.com/images/icon/iconShareWX.png"></image>
-					<view class="bdaiBoxTxt">微信</view>
+		  <view catchtap="{{brandinfo.trill?'copyTBL':'noClickTip'}}" data-identif='5' data-txt='{{brandinfo.trill}}'>
+					<image class="bdaiBoxImg" src="{{brandinfo.trill?'https://cdn.51chaidan.com/images/brandInfoIcon/dyOpen.jpg':'https://cdn.51chaidan.com/images/brandInfoIcon/dyClose.jpg'}}"></image>
+					<view class="bdaiBoxTxt">抖音</view>
 			</view>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	</view>
