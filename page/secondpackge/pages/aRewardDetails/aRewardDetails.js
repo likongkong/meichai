@@ -108,7 +108,9 @@ Page({
      gotTBBMBS9:true,
      isFlagship:true,
     //  订阅数据
-     subscribedata:''
+     subscribedata:'',
+     // 是否显示订单确认弹框
+     isOrderMask:false 
   },
   // 跳转公众号文章
    officialAccount(){
@@ -926,12 +928,29 @@ Page({
       fail: function () { }
     });
   },
+  hideOrderMask(){
+    this.setData({
+      isOrderMask:false
+    })
+  },
   // 下单
   placeAnOrder:function(w){
+    var number = w.currentTarget.dataset.number || w.target.dataset.number || 0;
+    if(number == 0 || number == 10){
+      this.setData({
+        isOrderMask:true,
+        quantity:number
+      })
+    }else{
+      this.placeAnOrderTow(w);
+    }
+  },
+
+  placeAnOrderTow(w){
+    
+    var number = w.currentTarget.dataset.number || w.target.dataset.number || 0;
     var _this = this;
     wx.showLoading({title: '加载中...',mask:true});
-
-    var number = w.currentTarget.dataset.number || w.target.dataset.number || 0;
 
     if (this.data.tipaid == '') {
       app.showToastC('请选择地址');
@@ -975,6 +994,7 @@ Page({
       fail: function () { }
     });
   },
+
   // 微信支付
   paymentmony:function(){
     var _this = this; 
@@ -1007,6 +1027,10 @@ Page({
                     _this.queuefun(2,4)
                     // 订阅授权
                     // app.comsubscribe(_this);
+
+                    _this.setData({
+                      isOrderMask:false
+                    })
 
                     // 更新抽盒金
                     if(_this.data.isDeduct && _this.data.isUseBlindboxMoney){

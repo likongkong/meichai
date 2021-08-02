@@ -55,7 +55,6 @@ App({
     // 基础数据
     defaultinformation: '',
     isNewer: false,
-    freeOvertime: 0,
     tid: 0,
     // 是否开启了分享功能
     isShareFun: true,
@@ -227,7 +226,6 @@ App({
 
                       _this.signindata.isNewer = res.data.Info.isNewer || false;
                       _this.signindata.token = '';
-                      _this.signindata.freeOvertime = res.data.Info.freeOrder.Info.overtime || 0;
                       _this.signindata.isAwardOrder = res.data.Info.isAwardOrder || false;
                       _this.signindata.awardOrder = res.data.Info.awardOrder || { Info: { cover: "", isAwardOrder: false, overtime: 0, url: "", } };
 

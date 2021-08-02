@@ -1083,3 +1083,66 @@ page {
   font-size: 20rpx;
   color: #101010;
 }
+
+
+.orderMask{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.orderMaskBox{
+  width: 70%;
+  height: auto;
+  background-color: #fff;
+  border-radius: 10rpx;
+}
+.orderMaskBoxTitle{
+  text-align: center;
+  font-size: 30rpx;
+  font-weight: bold;
+  display: block;
+  margin: 35rpx 0;
+}
+.orderBoxContent{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 94rpx;
+  box-sizing: border-box;
+  margin-bottom: 10rpx;
+}
+.orderBoxContent text:first-child{
+  font-size: 28rpx;
+  color: #999999;
+}
+.orderBoxContent text:last-child{
+  font-size: 28rpx;
+  color: #000;
+}
+.orderBoxBtn{
+  border-top: 1rpx solid #EEEEEE;
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+  margin-top: 40rpx;
+}
+.orderBoxBtn text{
+  display: block;
+  width: 50%;
+  font-size: 30rpx;
+  text-align: center;
+  height: 90rpx;
+  line-height: 90rpx;
+}
+.orderBoxBtn text:last-child{
+  color: #61749C;
+  border-left: 1rpx solid #EEEEEE;
+}

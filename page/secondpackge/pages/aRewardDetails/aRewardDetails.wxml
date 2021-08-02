@@ -249,14 +249,14 @@
                 </view>
             </view>
         </view>
-        <view class="scrPurEve" catchtap="{{!is_finish?'placeAnOrder':''}}" data-number='0'><view class="adhcevehbg" wx:if='{{is_finish}}'></view>
+        <view class="scrPurEve" catchtap="{{!is_finish?'placeAnOrder':''}}" data-number='0' ><view class="adhcevehbg" wx:if='{{is_finish}}'></view>
             <view class="scrOutBox">
                 <text style="margin-bottom:8rpx;">￥{{activity.suplusNum*activity.shopPrice}}</text>
                 <text style="margin-bottom:8rpx;">全收</text>
                 <text wx:if="{{isUseBlindboxMoney && blindboxMoney!=0}}">抵扣￥{{allDeductMoney}}</text>
             </view>
         </view>
-        <view class="scrPurEve" catchtap="{{activity.suplusNum>=10?'placeAnOrder':''}}" data-number='10'><view class="adhcevehbg" wx:if='{{activity.suplusNum<10}}'></view>
+        <view class="scrPurEve" catchtap="{{activity.suplusNum>=10?'placeAnOrder':''}}" data-number='10' ><view class="adhcevehbg" wx:if='{{activity.suplusNum<10}}'></view>
             <view class="scrOutBox">
                 <text style="margin-bottom:8rpx;">￥{{10*activity.shopPrice}}</text>
                 <text style="margin-bottom:8rpx;">刮10张</text>
@@ -525,6 +525,29 @@
                 <text style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{otherActivity.name}}</text>
                 <text style="width:160rpx;text-align: right;">点击进入</text>
             </view> 
+        </view>
+    </view>
+</view>
+
+
+<view class="orderMask" wx:if="{{isOrderMask}}">
+    <view class="orderMaskBox">
+        <text class="orderMaskBoxTitle">订单确认</text>
+        <view class="orderBoxContent">
+            <text>购买数量：</text>
+            <text>{{quantity==0?activity.suplusNum:10}}抽</text>
+        </view>
+        <view class="orderBoxContent">
+            <text>订单金额：</text>
+            <text>{{quantity==0?activity.suplusNum*activity.shopPrice:10*activity.shopPrice}}元</text>
+        </view>
+        <view class="orderBoxContent" wx:if="{{isUseBlindboxMoney && blindboxMoney!=0}}">
+            <text>抽盒金抵扣：</text>
+            <text>{{quantity==0?allDeductMoney:tenDeductMoney}}元</text>
+        </view>
+        <view class="orderBoxBtn">
+            <text catchtap="hideOrderMask">取消</text>
+            <text data-number="{{quantity==0?0:10}}" catchtap="placeAnOrderTow">确认</text>
         </view>
     </view>
 </view>

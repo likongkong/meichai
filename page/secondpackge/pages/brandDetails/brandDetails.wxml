@@ -146,12 +146,16 @@
 		<view style="float:left;margin-left:20rpx;">
 			<view class="mexhibboxconeve" wx:for='{{brandList}}' wx:key='key' wx:if='{{index%2==0}}' catchtap="jumpexhdetail" data-id='{{item.id}}' data-brandid='{{item.brandId}}' data-mtype="{{item.type}}" data-gid='{{item.goodsId}}'>
 				<block wx:if='{{item.type == 4 || item.type == 11|| item.type == 12 || item.type == 1 || item.type == 5|| item.type == 8 || item.type == 9 || item.type == 10}}'>
+
+					<view class='shopsellout' wx:if='{{item.debuff==2}}' style="top:20rpx;right:20rpx;">售罄</view>
+          <view class='shopsellout' wx:elif='{{item.goods_type==3}}' style='top:20rpx;right:20rpx;line-height:32rpx;background:#298DF8;'>定金</view>
+
 					<image class="exhibboxeveimg" mode='widthFix' src="{{item.images}}"></image>
 					<view wx:if='{{item.type != 11 && item.type != 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.name}}</view>
 					<view wx:elif='{{item.type == 11 || item.type == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.goodsName}}</view>
 					<view wx:if='{{item.type == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:#666;">{{item.content}}</view>
 					<view style="width:100%;padding:10rpx 0;overflow:hidden;">
-						<view wx:if='{{item.shopPrice && item.shopPrice!="" && item.type != 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#ff2742;float:left;">￥{{item.shopPrice}}</view>
+						<view wx:if='{{item.shopPrice && item.shopPrice!="" && item.type != 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#ff2742;float:left;"><block wx:if='{{item.goods_type==3}}'>定金</block>￥{{item.shopPrice}}</view>
 						<view wx:elif='{{item.type == 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#ff2742;float:left;">免单活动</view>
 						<view wx:if='{{item.type == 4 || item.type == 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;">
 						  <view wx:if='{{item.saleButtonDisplay}}' style='color:#6aca6b;'>{{item.saleButtonDisplay}}</view>
@@ -198,12 +202,16 @@
 		<view style="float:left;margin-left:20rpx;">
 			<view class="mexhibboxconeve" wx:for='{{brandList}}' wx:key='key' wx:if='{{index%2==1}}' catchtap="jumpexhdetail" data-id='{{item.id}}' data-brandid='{{item.brandId}}' data-mtype="{{item.type}}" data-gid='{{item.goodsId}}'>
 				<block wx:if='{{item.type == 4 || item.type == 11|| item.type == 12 || item.type == 1 || item.type == 5 || item.type == 8 || item.type == 9 || item.type == 10}}'>
+
+					<view class='shopsellout' wx:if='{{item.debuff==2}}' style="top:20rpx;right:20rpx;">售罄</view>
+          <view class='shopsellout' wx:elif='{{item.goods_type==3}}' style='top:20rpx;right:20rpx;line-height:32rpx;background:#298DF8;'>定金</view>
+
 					<image class="exhibboxeveimg" mode='widthFix' src="{{item.images}}"></image>
 					<view wx:if='{{item.type != 11 && item.type != 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.name}}</view>
 					<view wx:elif='{{item.type == 11 || item.type == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.goodsName}}</view>
 					<view wx:if='{{item.type == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:#666;">{{item.content}}</view>
 					<view style="width:100%;padding:10rpx 0;overflow:hidden;">
-						<view wx:if='{{item.shopPrice && item.shopPrice!="" && item.type != 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#ff2742;float:left;">￥{{item.shopPrice}}</view>
+						<view wx:if='{{item.shopPrice && item.shopPrice!="" && item.type != 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#ff2742;float:left;"><block wx:if='{{item.goods_type==3}}'>定金</block>￥{{item.shopPrice}}</view>
 						<view wx:elif='{{item.type == 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#ff2742;float:left;">免单活动</view>
 						<view wx:if='{{item.type == 4 || item.type == 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;">
 						  <view wx:if='{{item.saleButtonDisplay}}' style='color:#6aca6b;'>{{item.saleButtonDisplay}}</view>

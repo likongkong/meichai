@@ -167,6 +167,7 @@ page {
   margin-bottom: 20rpx;
   padding: 20rpx;
   box-shadow: 2px 2px 5rpx #ccc;
+  position: relative;
 }
 
 .mdismtbcctxthead {
