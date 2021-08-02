@@ -602,7 +602,7 @@
 				<view class='dlttemelef'>商品详情</view>
 			</view>
 			<!--  商品详情图片 转换HTML标签  -->
-			<view class='detailimg'>
+			<view class='detailimg' style="padding-bottom:16rpx;">
 				<template is="wxParse" data="{{wxParseData:article.nodes}}" />
 			</view>
 
@@ -816,8 +816,8 @@
 
 	</block>
 
-	<view wx:if='{{infoGoods.is_on_sale==1}}' style='width:100%;{{isIphoneX?"height:260rpx;":"height:240rpx;"}}'></view>
-	<view wx:else style='width:100%;{{isIphoneX?"height:130rpx;":"height:110rpx;"}}'></view>
+	<view wx:if='{{false}}' style='width:100%;{{isIphoneX?"height:260rpx;":"height:240rpx;"}}'></view>
+	<view wx:elif='{{infoGoods.is_on_sale==1}}' style='width:100%;height:140rpx;'></view>
 
 </view>
 <!-- ishowgetchip -->

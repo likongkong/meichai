@@ -5,6 +5,9 @@
 @import "../../../../common/newcoupon.wxss";
 @import "../../common/exhibition.wxss";
 
+page{
+  padding-bottom: 130rpx;
+}
 .buttonArter::after{
   border: none;
 }
