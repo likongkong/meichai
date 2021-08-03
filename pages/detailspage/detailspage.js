@@ -291,20 +291,34 @@ Page({
     //多款式默认选择第一个 start
     // if(detailSpecColor.length > 1){
       var indnum = 0;
+      var realityStock = '';  //真实库存数据
+      var istrue = true;
+      var styleName = detailSpecColor[index].name;  //当前款式名字
       for(var i=0 ; i < detailSpecModel.length ; i++){
-         if(detailSpecModel[i].arrCloseSpec[detailSpecColor[index].name]){
-            indnum = i;
-            break;
+         if(istrue){
+            if(detailSpecModel[i].arrCloseSpec[styleName]){
+              indnum = i;
+              istrue = false;
+            };
          };
+         realityStock = listSpec[detailSpecModel[i].name.toString()+ '-' + styleName.toString()];
+         if(realityStock){
+            detailSpecModel[i].stock = realityStock.stock
+            detailSpecModel[i].salesStatus = realityStock.salesStatus
+            detailSpecModel[i].realStock = realityStock.realStock
+         }
+
       };
+      console.log()
       _this.setData({
-        modelSelInde:indnum
+        modelSelInde:indnum,
+        detailSpecModel
       })
     // }
     //多款式默认选择第一个 end
    
     var modelColor = detailSpecModel[this.data.modelSelInde].name+'-'+detailSpecColor[index].name;
-    // console.log(listSpec[modelColor])
+    console.log(listSpec[modelColor])
     if( listSpec[modelColor] && listSpec[modelColor].stock > 0 ){
       var zunmdata = this.data.zunmdata; 
       zunmdata.gsale = listSpec[modelColor].price || 0;
@@ -329,8 +343,6 @@ Page({
           zunmdata.isDisplayDeposit = true;
         };
       }
-
-
       // 手机壳 并且 isSpecSoldOut 为 true 全部卖完
       if(zunmdata.isSpecSoldOut){
           zunmdata.debuff = 3; 
@@ -339,6 +351,8 @@ Page({
       };
 
       zunmdata.goods_thumb = listSpec[modelColor].roleImg;
+      console.log(zunmdata)
+
       this.setData({
         detailColorIndex:index,
         selectShell:listSpec[modelColor],
@@ -346,6 +360,9 @@ Page({
       })
     }else{
       var zunmdata = this.data.zunmdata; 
+      zunmdata.gsale = listSpec[modelColor].price || 0;
+      zunmdata.gprice = listSpec[modelColor].price || 0;
+
       if(zunmdata.status == 2){
         // zunmdata.isDepositSubscribe = false;
         // zunmdata.isDisplayDeposit = true;
@@ -373,7 +390,12 @@ Page({
           zunmdata.orderAmount = '';
         };
       };
-      zunmdata.debuff = 3; 
+      if(listSpec[modelColor].realStock<=0 && listSpec[modelColor].stock<=0){
+        zunmdata.debuff = 2; 
+      }else if(listSpec[modelColor].realStock<=0 && listSpec[modelColor].stock>0){
+        zunmdata.debuff = 3; 
+      }
+      console.log(zunmdata)
       this.setData({
         detailColorIndex:index,
         selectShell:listSpec[modelColor],
