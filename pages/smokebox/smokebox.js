@@ -3168,7 +3168,6 @@ Page({
       mask: true,
     })
     var q = Dec.Aese('mod=blindBox&operation=getLineData' + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + "&gid=" + _this.data.gid);
-    // var q = Dec.Aese('mod=blindBox&operation=getLineData' + '&uid=853' + '&loginid=833fd30ef03cf5510d22fee4a0e4b29c' + '&id=' + _this.data.id + "&gid=" + _this.data.gid);
 
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q,
