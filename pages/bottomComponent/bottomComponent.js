@@ -144,14 +144,9 @@ Component({
         this.triggerEvent("run");
         return;
       }
-
-      if(app.signindata.isYiFanShang){
-        wx.redirectTo({  // 一番赏
-          url: "/page/secondpackge/pages/aRewardList/aRewardList"
-        });
-      }else{
-        app.showToastC('暂未开放敬请期待');
-      }      
+      wx.redirectTo({  // 一番赏
+        url: "/page/secondpackge/pages/aRewardList/aRewardList"
+      });    
       
     },
     wshoppingCart: function () {

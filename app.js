@@ -55,7 +55,6 @@ App({
     // 基础数据
     defaultinformation: '',
     isNewer: false,
-    freeOvertime: 0,
     tid: 0,
     // 是否开启了分享功能
     isShareFun: true,
@@ -89,8 +88,6 @@ App({
     // 是否能进入展会
     isOpenToyShow:false, // 是否开启展会
     statusBarHeightMc:0,
-    // 是否开启一番赏
-    isYiFanShang:false,
     // 场景值
     sceneValue:0,
     yifanshangIsInQueue:false,
@@ -229,7 +226,6 @@ App({
 
                       _this.signindata.isNewer = res.data.Info.isNewer || false;
                       _this.signindata.token = '';
-                      _this.signindata.freeOvertime = res.data.Info.freeOrder.Info.overtime || 0;
                       _this.signindata.isAwardOrder = res.data.Info.isAwardOrder || false;
                       _this.signindata.awardOrder = res.data.Info.awardOrder || { Info: { cover: "", isAwardOrder: false, overtime: 0, url: "", } };
 
@@ -265,9 +261,7 @@ App({
                       // 是否是地域黑模式
                       _this.signindata.isHellBlackUser = res.data.Info.isHellBlackUser || false;
                       // 是否开启展会 
-                      _this.signindata.isOpenToyShow = res.data.Info.isOpenToyShow || false;
-                      // 是否能进入一番赏
-                      _this.signindata.isYiFanShang = res.data.Info.function?res.data.Info.function.isYiFanShang:false;                  
+                      _this.signindata.isOpenToyShow = res.data.Info.isOpenToyShow || false;               
                       // 透视卡倒计时
                       if(res.data.Info.tempChance){
                           _this.signindata.perspcardata = res.data.Info.tempChance.length != 0 ? res.data.Info.tempChance[0].over_time || '' : '';

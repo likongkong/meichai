@@ -17,9 +17,9 @@ Page({
     uid: app.signindata.uid,
     openid: app.signindata.openid,
 
-    c_title: '', // -正品折扣多一点
+    c_title: '品牌专区', // -正品折扣多一点
     c_arrow: true,
-    c_backcolor: '',
+    c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
 
     brandId: 0,
@@ -38,9 +38,15 @@ Page({
     signinlayer: true,
     windowHeight: app.signindata.windowHeight,
     type:'',
-    settlement:0
+    settlement:0,
+    morebrankip:false,
+    brandArr:[]
   },
-
+  morebranfun:function(){
+    this.setData({
+      morebrankip:!this.data.morebrankip
+    })
+  },
   // 展会公共跳转
   exhibitionpubjump: function (w) {
     var type = w.currentTarget.dataset.type || w.target.dataset.type || '';
@@ -68,16 +74,59 @@ Page({
   addfrindcommonifun: function (w) {
     var _this = this;
     var url = w.currentTarget.dataset.url || w.target.dataset.url || 0;
-    var name = w.currentTarget.dataset.name || w.target.dataset.name || 0;
     if (url && url != "") {
       this.setData({
         showimg: url != "" ? url : "https://cdn.51chaidan.com/images/act/1577083808.jpg",
         addfrindcommoni: !this.data.addfrindcommoni
       });
     } else {
-      app.showToastC(name + '未提供此方式');
+      app.showToastC((_this.data.brandinfo.brandName || '') + '未提供此方式');
     }
   },
+  noClickTip(w){
+    var identif = w.currentTarget.dataset.identif || w.target.dataset.identif || 0;
+    switch(parseInt(identif)){
+      case 1: var txt = '微信'; break;
+      case 2: var txt = '公众号'; break;
+      case 3: var txt = '微博'; break;
+      case 4: var txt = '小红书'; break;
+      case 5: var txt = '抖音'; break;
+      default: var txt = '';
+    };
+    app.showToastC('暂未设置'+ txt +'信息');
+  },
+  jumpxcx(w){
+    var type = w.currentTarget.dataset.type || w.target.dataset.type || 0;
+    var path = w.currentTarget.dataset.path || w.target.dataset.path || '';
+    var appId = '';
+    if(type == 1){
+      appId = 'wx9074de28009e1111';
+    }else if(type == 2){
+      appId = 'wxb296433268a1c654';
+    }
+    wx.navigateToMiniProgram({
+         appId: appId,
+         path: path,
+         envVersion: 'release',// 打开正式版
+         success(res) {},
+         fail: function (err) {
+            console.log(err);
+          }
+    })
+  },
+  //  复制内容到粘贴板
+  copyTBL: function (e) {
+    var _this = this;
+    var txt = e.currentTarget.dataset.txt || e.target.dataset.txt || '';
+    wx.setClipboardData({
+      data: txt,
+      success: function (res) {
+        app.showToastC('复制成功');
+      }
+    });
+
+  }, 
+
   closefrindcommoni:function(){
     this.setData({
       addfrindcommoni: !this.data.addfrindcommoni
@@ -312,7 +361,16 @@ Page({
 
     _this.data.videoContext = wx.createVideoContext('myVideo')//初始化视频组件
   },
-
+  // ip 的品牌
+  jumpsouchtemip:function(w){
+    var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
+    this.setData({
+      brandId: id||0,
+      morebrankip:false,
+    });
+    this.data.page = 0;
+    this.getbrandDetail(this.data.page);
+  },
   getbrandDetail: function (page) {
     var _this = this;
     wx.showLoading({
@@ -330,6 +388,7 @@ Page({
         console.log(res) 
         if (res.data.ReturnCode == 200) {
           var brandList = res.data.List.activity || [];
+          var brandArr = res.data.List.brandList || [];
           for (var r = 0; r < brandList.length; r++) {
             brandList[r].start_time = time.toDate(brandList[r].start_time);
             brandList[r].stop_time = time.toDate(brandList[r].stop_time);
@@ -340,6 +399,7 @@ Page({
             founder: res.data.List.founder,
             isVideo: res.data.Info.isVideo,
             video: res.data.List.video,
+            brandArr,
           })
           if (page == 0) {
             _this.setData({

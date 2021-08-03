@@ -14,7 +14,7 @@
 		<swiper class="nsswiperdetail" bindchange="swiperChange" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
 			<swiper-item wx:for="{{bannerList}}" wx:key="key">
 				<image src="{{item.src}}?imageMogr2/thumbnail/x400" style="width:100%;height:200rpx;" catchtap='topjumpdetail' data-gid="{{item.gid}}"></image>
-				<view class='labelstyle' wx:if='{{item.isRecycle}}' style='background:#1890ff;border-radius:7rpx;width:120rpx;left:0;top:0;'>{{item.recycleRatio}}折回收</view>
+				<view class='labelstyle' wx:if='{{item.isRecycle}}' style='background:#1890ff;border-radius:7rpx;width:120rpx;left:0;top:0;text-align:center;'>{{item.recycleRatio}}折回收</view>
 			</swiper-item>
 		</swiper>
 		<!--重置小圆点的样式 -->
@@ -212,8 +212,8 @@
 									  <view class="vipImageNum"><text style="font-size:20rpx">x</text>{{item.vip_discount}}</view>
 										<image mode='widthFix' src="http://www.51chaidan.com/images/sign/vip_give_blindBox_gold.png"></image> 
 								</view>-->
-								<view wx:elif="{{item.tip!='' && !item.isBusinessActivity}}" style="float:right;font-size:20rpx;line-height:30rpx;border:3rpx solid #d64650;border-radius:7rpx;margin:8rpx 10rpx 0 0;">{{item.tip}}</view>
-								<view wx:elif="{{item.tip!='' && item.isBusinessActivity}}" style="float:right;font-size:20rpx;line-height:30rpx;border:3rpx solid #4c9a23;border-radius:7rpx;margin:2rpx 10rpx 0 0;color:#4c9a23">{{item.tip}}</view>
+								<view wx:elif="{{item.tip!='' && !item.isBusinessActivity}}" style="float:right;font-size:20rpx;line-height:30rpx;border:3rpx solid #d64650;border-radius:7rpx;margin:8rpx 10rpx 0 0;max-width: 59%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{item.tip}}</view>
+								<view wx:elif="{{item.tip!='' && item.isBusinessActivity}}" style="float:right;font-size:20rpx;line-height:30rpx;border:3rpx solid #4c9a23;border-radius:7rpx;margin:2rpx 10rpx 0 0;color:#4c9a23;max-width: 59%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{item.tip}}</view>
 							</view>
 							<view class='specialellipsis' style="width:94%;line-height:30rpx;text-align:left;font-size:26rpx;margin:0 3%;">{{item.title}}</view>
 						</view>
