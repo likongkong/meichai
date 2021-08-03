@@ -668,7 +668,7 @@
 					<!--  列表标题  -->
 					<view class='disantitle' catchtap='newpsellwellfun' data-item_type='9014' data-title='{{w.title}}' data-href='{{w.href}}'>
 						{{w.title}}
-						<view class='disantitletitright' catchtap='newpsellwellfun' data-item_type='9014' data-title='{{w.title}}' data-href='{{w.href}}' style='font-weight:normal;position:relative;color:#31b3fb;'>查看更多
+						<view class='disantitletitright' wx:if='{{w.href}}' catchtap='newpsellwellfun' data-item_type='9014' data-title='{{w.title}}' data-href='{{w.href}}' style='font-weight:normal;position:relative;color:#31b3fb;'>查看更多
 						</view>
 					</view>
 					<!--  列表  -->
@@ -688,7 +688,7 @@
 												<block wx:else>￥{{ww.shop_price}}{{ww.gsale_unit}}</block>	
 											</view>
 									</view>
-									<view class='disanum_scr_box' style='height:200rpx;' data-item_type='9014' catchtap='newpsellwellfun' data-href='{{w.href}}' data-title='{{w.title}}'>
+									<view class='disanum_scr_box' style='height:200rpx;' data-item_type='9014' catchtap='newpsellwellfun' data-href='{{w.href}}' wx:if='{{w.href}}' data-title='{{w.title}}'>
 											<view class='disanum_stxt'>
 												<view class='disanum_stxtd' style='line-height:120rpx;'>查 看</view>
 												<view class='disanum_stxtd' style='line-height:40rpx;'>全 部</view>
@@ -721,7 +721,7 @@
 					<!--  列表标题  -->
 					<view class='disantitle' catchtap='newpsellwellfun' data-item_type='9014' data-title='{{w.title}}' data-href='{{w.href}}'>
 						{{w.title}}
-						<view class='disantitletitright' catchtap='newpsellwellfun' data-item_type='9014' data-title='{{w.title}}' data-href='{{w.href}}' style='font-weight:normal;position:relative;color:#31b3fb;'>查看更多
+						<view class='disantitletitright' wx:if='{{w.href}}' catchtap='newpsellwellfun' data-item_type='9014' data-title='{{w.title}}' data-href='{{w.href}}' style='font-weight:normal;position:relative;color:#31b3fb;'>查看更多
 						</view>
 					</view>
 					<!--  列表  -->
@@ -741,7 +741,7 @@
 												<block wx:else>￥{{ww.shop_price}}{{ww.gsale_unit}}</block>
 										</view>
 									</view>
-									<view class='disanum_scr_box' style='height:200rpx;' catchtap='newpsellwellfun' data-item_type='9014' data-href='{{w.href}}' data-title='{{w.title}}'>
+									<view class='disanum_scr_box' style='height:200rpx;' catchtap='newpsellwellfun' data-item_type='9014' data-href='{{w.href}}' wx:if='{{w.href}}' data-title='{{w.title}}'>
 											<view class='disanum_stxt'>
 												<view class='disanum_stxtd' style='line-height:120rpx;'>查 看</view>
 												<view class='disanum_stxtd' style='line-height:40rpx;'>全 部</view>
