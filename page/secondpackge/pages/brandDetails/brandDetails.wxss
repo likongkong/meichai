@@ -100,7 +100,7 @@ page {
   position: fixed;
   right: 0;
   border-radius: 50rpx 0 0 50rpx;
-  z-index: 3;
+  z-index: 13;
   font-size: 24rpx;
   color: #fff;
 }
