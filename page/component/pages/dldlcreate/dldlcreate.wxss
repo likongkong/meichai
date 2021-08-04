@@ -232,18 +232,6 @@ page{
   border-radius:80rpx;
 }
 
-.creatPrize{
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 30rpx;
-  line-height: 30rpx;
-  font-size: 20rpx;
-  color: #fff;
-  padding: 0 10rpx;
-  background: #ff3624;
-}
-
 /*   单行  */
 .specialellipsis{
   overflow:hidden;
