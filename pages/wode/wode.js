@@ -316,7 +316,7 @@ Page({
               // 我的钱包数据
               point: res.data.Info.point || 0,
               // 提现金额
-              putforwardmoney: res.data.Info.money || "0.00",
+              putforwardmoney: res.data.Info.money || "0",
               // 幸运值
               luckyValue: res.data.Info.blindbox_lucky||0,
               // 抽盒金
