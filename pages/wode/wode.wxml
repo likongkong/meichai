@@ -124,7 +124,7 @@
         </view>
     </view>
     <view class='whwdddw'>
-        <view class='whwddd' catchtap='putforward'>
+        <view class='whwddd' catchtap='putforward' wx:if="{{putforwardmoney>0}}">
             我的小金库<view style="height: 97rpx;line-height:98rpx;color:#ff3c4d;position:absolute;top:0;left:180rpx">￥{{putforwardmoney}}</view>
             <view class='whbocndr' style='height:80rpx;line-height:80rpx;color:#ff3c4d;padding:0 30rpx 0 70rpx;font-size:28rpx;'>
                提现
