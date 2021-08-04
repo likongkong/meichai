@@ -22,7 +22,7 @@ Page({
     pid:0,
     dataList:[],
     processingData:[],
-    limit:17,
+    limit:15,
     loadprompt:true,
     ismore:false
   },
@@ -42,8 +42,8 @@ Page({
     wx.getSystemInfo({
       success: function (res) {
         _this.setData({
-          worthSubsidiaryHeight:((res.windowHeight - (res.statusBarHeight+44))/20)-1,
-          moreH:((res.windowHeight - (res.statusBarHeight+44))/20)*2
+          worthSubsidiaryHeight:((res.windowHeight - (res.statusBarHeight+44))/18)-1,
+          moreH:((res.windowHeight - (res.statusBarHeight+44))/18)*2
         });
         console.log(res.windowHeight - (res.statusBarHeight+44))
       }
