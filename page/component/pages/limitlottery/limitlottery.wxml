@@ -108,7 +108,7 @@
 		<view wx:if="{{infoActivity.joinMothed == 'payTicket'}}" style="width:100%;font-size:27rpx;margin-bottom:20rpx;display: flex;justify-content: space-between;align-items: center;overflow: hidden;">
 			<view style="width:65%;padding:0 20rpx;">Vol.{{infoActivity.id}} {{infoActivity.name}}</view>
 			<view style="width:25%;padding:0 20rpx;text-align: right;">
-				<text style="color:#298DF8;display: inline-block;">押金 ￥{{cashPledge}}</text>
+				<text style="color:#298DF8;display: inline-block;">定金 ￥{{cashPledge}}</text>
 				<text style="color:#BEC2C9;display: inline-block;">抽签价 ￥<block wx:if='{{infoActivity.lottoPrice}}'>{{infoActivity.lottoPrice}}</block><block wx:else>{{infoGoods.shop_price}}</block></text>
 			</view>
 		</view>
@@ -1122,8 +1122,8 @@
 	<view class='bgstyle'></view>
 	<view style="width:100%;height:100%;position:absolute;left:0;z-index:10;" catchtap="tigglePayMask">
 		<view style="width:500rpx;height:320rpx;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;z-index:9;background:white;border-radius:10rpx;text-align: center;" catchtap="emptyFun">
-			<text style="display: block;color: #000;font-size: 24rpx;margin-top: 70rpx;">参与该抽签需支付押金￥{{cashPledge}}</text>
-			<text style="display: block;color: #BEC2C9;font-size: 24rpx;margin-top: 30rpx;">(如未中签则押金原路返回)</text>
+			<text style="display: block;color: #000;font-size: 24rpx;margin-top: 70rpx;">参与该抽签需支付定金￥{{cashPledge}}</text>
+			<text style="display: block;color: #BEC2C9;font-size: 24rpx;margin-top: 30rpx;">(如未中签则定金原路返回)</text>
 			<button class="buttonArter" style="width: 300rpx;height: 60rpx;line-height: 60rpx;font-size: 28rpx;text-align: center;border: none;background:#8abe39;color:#fff;margin-top: 70rpx;" catchtap="paymentmony">参与抽签</button>
 		</view>
 	</view>
