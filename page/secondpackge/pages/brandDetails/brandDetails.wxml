@@ -68,7 +68,7 @@
 		<view class="briefIntroduction">简介：{{brandinfo.bradDesc}}</view>
 	</view>
 
-	<view class="topShareBox" style="top:400rpx;"><image class="topShareBoxImg" src="https://cdn.51chaidan.com/images/spread/blindBoxShare.png"></image><button style='width:100%;height:100%;position:absolute;top:0;left:0;opacity:0;' open-type='share'></button>分享</view>
+	<view class="topShareBox" style="top:750rpx;"><image class="topShareBoxImg" src="https://cdn.51chaidan.com/images/spread/blindBoxShare.png"></image><button style='width:100%;height:100%;position:absolute;top:0;left:0;opacity:0;' open-type='share'></button>分享</view>
 
 	<block wx:if='{{founder && founder.length>0}}'>
 			<view style="width:100%;font-size:30rpx;text-align:center;margin:20rpx 0;font-weight:bold;">团队介绍</view>
