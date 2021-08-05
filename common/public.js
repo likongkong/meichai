@@ -14,7 +14,7 @@ function clwcomurl(){
   return env=='online'?'https://clw.51chaidan.com/':'http://clw-test.51chaidan.com/'
 }
 // 公共地址 图片
-function zdyurl() {0 
+function zdyurl() {
   // 测试
   // return 'http://test.51chaidan.com/';
   // 线上  

@@ -2175,7 +2175,7 @@ closefrindcommoni:function(){
                   swiperarr.push({ name: '领取奖励', subname: '4.晒单成功', abcircular: '#F9DCB1', witcircular: '#f18f00', stynum: 2, sizeColor: '#FFF1F1', clickiftr: 4, jumpclass: 1 });
                 } else if (arrlist.status == 2 && arrlist.is_join == 1 && arrlist.auditPic != 2) {
                   // swiperarr.push({ name: '上传截图', subname: '', clickiftr: 2, abcircular: '#8BC34A', witcircular: '#259B24', stynum: 1, sizeColor: '#FFF1F1' });
-                  swiperarr.push({ name: '待开奖', subname: '', clickiftr: 2, abcircular: '#FBD6D8', witcircular: '#F93F45', stynum: 1, sizeColor: '#F9DCDC' });
+                  swiperarr.push({ name: '待开奖', subname: '已报名', clickiftr: 2, abcircular: '#FBD6D8', witcircular: '#F93F45', stynum: 2, sizeColor: '#F9DCDC' });
                   // 是否上传过截图
                   // if (arrlist.auditPic == 0 || arrlist.auditPic == 3) {
                   //   swiperarr.push({ name: '报名未完成', subname: '1', abcircular: '#FBD6D8', witcircular: '#F09D9F', stynum: 3, clickiftr: 2 });
@@ -2190,7 +2190,7 @@ closefrindcommoni:function(){
                   });
                 } else if (arrlist.status == 2 && arrlist.is_join == 1 && arrlist.auditPic == 2) {
                   // swiperarr.push({ name: '等待开奖', subname: '1', abcircular: '#f5d1d4', witcircular: '#e39397', stynum: 3 });
-                  swiperarr.push({ name: '待开奖', subname: '', clickiftr: 2, abcircular: '#FBD6D8', witcircular: '#F93F45', stynum: 1, sizeColor: '#F9DCDC' });
+                  swiperarr.push({ name: '待开奖', subname: '已报名', clickiftr: 2, abcircular: '#FBD6D8', witcircular: '#F93F45', stynum: 3, sizeColor: '#F9DCDC' });
                   swiperarr.push({ name: '继续邀请', subname: '好友助力', abcircular: '#FBD6D8', witcircular: '#F93F45', stynum: 3, clickiftr: 5 });
                   _this.setData({
                     goodsIndex: 1,

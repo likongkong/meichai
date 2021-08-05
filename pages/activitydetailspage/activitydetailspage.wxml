@@ -143,7 +143,8 @@
       </view>
       <view class='mebchright' wx:elif='{{commoddata.status==2}}'>
         <view wx:if='{{commoddata.is_full==1&&commoddata.is_limit==1}}'>开奖中</view>
-        <view wx:elif='{{commoddata.is_join==1}}'>已报名</view>
+        <!-- <view wx:elif='{{commoddata.is_join==1}}'>已报名</view> -->
+        <view wx:elif='{{commoddata.is_join==1}}'>{{toDateTime}} 开奖</view>
         <view wx:elif='{{commoddata.is_full==1}}'>距离开奖 {{countdown}}</view>
         <view wx:elif='{{commoddata.is_limit==1}}'>人满开奖 {{commoddata.truth_users}}/{{commoddata.limit_users}}</view>
         <view wx:elif='{{commoddata.is_full==0}}'>{{toDateTime}} 开奖</view>
@@ -783,10 +784,7 @@
         <template is="wxParse" data="{{wxParseData:article.nodes}}" />
       </view>
     </view>
-    <view style="width:100%;height:140rpx;"></view>
   </block>
-
-  <view style='width:100%;height:130rpx;' wx:if='{{commoddata.is_on_sale==1}}'></view>
 
   <!-- 底部导航 -->
   <view style='width:100%;position:fixed;left:0;{{isIphoneX?"bottom:130rpx;":"bottom:110rpx;"}}background:#fff;z-index:10;'>
