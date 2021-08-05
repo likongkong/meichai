@@ -141,7 +141,7 @@
             </view>
             <view class='rdhead' wx:if='{{comdata.status==2}}'>
                 <block wx:if='{{comdata.order_type==27}}'>
-                    已付押金
+                    已付定金
                 </block>
                 <block wx:else>
                     支付成功

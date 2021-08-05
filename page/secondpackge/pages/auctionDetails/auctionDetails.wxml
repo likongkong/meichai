@@ -202,7 +202,7 @@
       </block>
       <!-- status == 2为进行中 -->
       <block wx:elif="{{dataInfo.status == 2}}">
-        <!-- cashPledge为true不需要支付押金 -->
+        <!-- cashPledge为true不需要支付定金 -->
         <block wx:if="{{dataInfo.cashPledge}}">
           <!-- auction_type == 1为限时拍卖 -->
           <block wx:if="{{dataInfo.auction_type == 1}}">
@@ -213,7 +213,7 @@
             <text class="joinAuction red" catchtap="footerbidBtnFun">出价竞拍({{dataInfo.suplusChance}})</text>
           </block>
         </block>
-        <!-- cashPledge为false需要支付押金 -->
+        <!-- cashPledge为false需要支付定金 -->
         <block wx:else>
           <text class="joinAuction blue" catchtap="joinAuctionFun">立即参拍</text>
         </block>

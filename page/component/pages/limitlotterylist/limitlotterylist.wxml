@@ -26,7 +26,7 @@
           </view>
           <image class='limieveimg' src='{{item.cover}}' mode='widthFix'></image>
           <block>
-            <view wx:if="{{item.joinMothed == 'payTicket'}}" class='limievetxtname multilineellipsis'><text style='color:#298DF8;'>押金￥{{item.cashPledge}} </text>{{item.name}}</view>
+            <view wx:if="{{item.joinMothed == 'payTicket'}}" class='limievetxtname multilineellipsis'><text style='color:#298DF8;'>定金￥{{item.cashPledge}} </text>{{item.name}}</view>
             <view wx:else class='limievetxtname multilineellipsis'><text style='color:#fd434c;'>抽签价￥{{item.shop_price}} </text>{{item.name}}</view>
           </block>
           <view class='limievetxttime specialellipsis' wx:if='{{item.status==1}}'>
@@ -64,7 +64,7 @@
 
           <image class='limieveimg' src='{{item.cover}}' mode='widthFix'></image>
           <block>
-             <view wx:if="{{item.joinMothed == 'payTicket'}}" class='limievetxtname multilineellipsis'><text style='color:#298DF8;'>押金￥{{item.cashPledge}} </text>{{item.name}}</view>
+             <view wx:if="{{item.joinMothed == 'payTicket'}}" class='limievetxtname multilineellipsis'><text style='color:#298DF8;'>定金￥{{item.cashPledge}} </text>{{item.name}}</view>
             <view wx:else class='limievetxtname multilineellipsis'><text style='color:#fd434c;'>抽签价￥{{item.shop_price}} </text>{{item.name}}</view>
           </block>
           <view class='limievetxttime specialellipsis' wx:if='{{item.status==1}}'>
