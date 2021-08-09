@@ -126,10 +126,6 @@
 					<image class="bdaiBoxImg" src="{{brandinfo.redBook?'https://cdn.51chaidan.com/images/brandInfoIcon/xhsOpen.jpg':'https://cdn.51chaidan.com/images/brandInfoIcon/xhsClose.jpg'}}"></image>
 					<view class="bdaiBoxTxt">小红书</view>
 			</view>
-		  <view catchtap="{{brandinfo.trill?'copyTBL':'noClickTip'}}" data-identif='5' data-txt='{{brandinfo.trill}}'>
-					<image class="bdaiBoxImg" src="{{brandinfo.trill?'https://cdn.51chaidan.com/images/brandInfoIcon/dyOpen.jpg':'https://cdn.51chaidan.com/images/brandInfoIcon/dyClose.jpg'}}"></image>
-					<view class="bdaiBoxTxt">抖音</view>
-			</view>
 
 
 	</view>
