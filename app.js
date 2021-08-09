@@ -4,6 +4,8 @@ const ald = require('./utils/ald-stat.js');
 // var tdweapp = require('./utils/tdweapp.js'); 
 //aes加密解密js
 var Dec = require('common/public.js');
+const api = require('./utils/api.js');
+
 App({
   signindata: {
     env:Dec.env, //环境
@@ -172,25 +174,51 @@ App({
             console.log('wx.login=====',res)
             var code = res.code;
             console.log(code)
-            // wx.getUserInfo({
-            //   success: function (res) {
-                // console.log('wx.getUserInfo========',res)
 
                 var resiv ='';
                 var encryptedData = '';
+                var loginData = '';
                 if (BSkipData && typeof (BSkipData) != "undefined") { //如果B端过来需要额外传递数据
-                  var q = Dec.Aese('operation=xcx&mod=login&code=' + code + '&iv=' + resiv + '&encryptedData=' + encryptedData + '&referee=' + _this.signindata.referee + '&activity_id=' + _this.signindata.activity_id + '&channel=' + _this.signindata.channel + '&last_store_id=' + _this.signindata.global_store_id + '&token=' + _this.signindata.token + '&share_source=' + _this.signindata.share_source + '&tid=' + _this.signindata.tid + "&isBusinessSkip=" + BSkipData.isBusinessSkip + "&businessClientUserId=" + BSkipData.businessClientUserId +
-                    "&isMergedUserInfo=" + BSkipData.isMergedUserInfo + '&activity_type=' + _this.signindata.activity_type+'&suap='+_this.signindata.suap);
+                  // var q = Dec.Aese('operation=xcx&mod=login&code=' + code + '&iv=' + resiv + '&encryptedData=' + encryptedData + '&referee=' + _this.signindata.referee + '&activity_id=' + _this.signindata.activity_id + '&channel=' + _this.signindata.channel + '&last_store_id=' + _this.signindata.global_store_id + '&token=' + _this.signindata.token + '&share_source=' + _this.signindata.share_source + '&tid=' + _this.signindata.tid + "&isBusinessSkip=" + BSkipData.isBusinessSkip + "&businessClientUserId=" + BSkipData.businessClientUserId +
+                  //   "&isMergedUserInfo=" + BSkipData.isMergedUserInfo + '&activity_type=' + _this.signindata.activity_type+'&suap='+_this.signindata.suap);
+
+                    loginData = {
+                        code :res.code,
+                        referee:_this.signindata.referee,
+                        activity_id:_this.signindata.activity_id,
+                        channel:_this.signindata.channel,
+                        last_store_id:_this.signindata.global_store_id,
+                        token:_this.signindata.token,
+                        share_source:_this.signindata.share_source,
+                        tid:_this.signindata.tid,
+                        isBusinessSkip:BSkipData.isBusinessSkip,
+                        businessClientUserId:BSkipData.businessClientUserId,
+                        isMergedUserInfo:BSkipData.isMergedUserInfo,
+                        activity_type:_this.signindata.activity_type,
+                        suap:_this.signindata.suap
+                    };
                 } else {
-                  var q = Dec.Aese('operation=xcx&mod=login&code=' + code + '&iv=' + resiv + '&encryptedData=' + encryptedData + '&referee=' + _this.signindata.referee + '&activity_id=' + _this.signindata.activity_id + '&channel=' + _this.signindata.channel + '&last_store_id=' + _this.signindata.global_store_id + '&token=' + _this.signindata.token + '&share_source=' + _this.signindata.share_source + '&tid=' + _this.signindata.tid + '&activity_type=' + _this.signindata.activity_type+'&suap='+_this.signindata.suap);
+                  // var q = Dec.Aese('operation=xcx&mod=login&code=' + code + '&iv=' + resiv + '&encryptedData=' + encryptedData + '&referee=' + _this.signindata.referee + '&activity_id=' + _this.signindata.activity_id + '&channel=' + _this.signindata.channel + '&last_store_id=' + _this.signindata.global_store_id + '&token=' + _this.signindata.token + '&share_source=' + _this.signindata.share_source + '&tid=' + _this.signindata.tid + '&activity_type=' + _this.signindata.activity_type+'&suap='+_this.signindata.suap);
+
+                    loginData = {
+                        code :res.code,
+                        referee:_this.signindata.referee,
+                        activity_id:_this.signindata.activity_id,
+                        channel:_this.signindata.channel,
+                        last_store_id:_this.signindata.global_store_id,
+                        token:_this.signindata.token,
+                        share_source:_this.signindata.share_source,
+                        tid:_this.signindata.tid,
+                        activity_type:_this.signindata.activity_type,
+                        suap:_this.signindata.suap
+                    };
+
                 }
 
-                console.log('登录========','operation=xcx&mod=login&code=' + code + '&iv=' + resiv + '&encryptedData=' + encryptedData + '&referee=' + _this.signindata.referee + '&activity_id=' + _this.signindata.activity_id + '&channel=' + _this.signindata.channel + '&last_store_id=' + _this.signindata.global_store_id + '&token=' + _this.signindata.token + '&share_source=' + _this.signindata.share_source + '&tid=' + _this.signindata.tid + '&activity_type=' + _this.signindata.activity_type+'&suap='+_this.signindata.suap)
-
-                wx.request({
-                  url: Dec.comurl() + 'user.php' + q,
-                  method: 'GET',
-                  success: function (res) {
+                console.log(loginData)
+                console.log('api',api)
+                api.login(loginData).then(res => {
+                    
                     _this.signindata.is_sigin = true;
                     console.log('app', res);
                     if (res.data.ReturnCode == 200 || res.data.ReturnCode == 201) {
@@ -329,18 +357,10 @@ App({
                     //   var ennicname = encodeURIComponent(nicname)
                     //   _this.logindata(ennicname, iconsex, avaurl);
                     // };
-                  }
+                }).catch(err => {
+                  _this.showToastC(err,1500);
+                  console.log(err)
                 })
-            //   },
-            //   fail: function(res){
-            //     console.log('wx.getUserInfo失败',res)
-            //     _this.signindata.is_sigin = true;
-            //   },
-            //   complete(res){
-            //     console.log('complete====',res)
-
-            //   }
-            // })
           },
           fail: function(){
             _this.signindata.is_sigin = true;
@@ -1202,12 +1222,12 @@ App({
       return M + '.' + D + ' ' + h + ':' + m;
     }
   },
-  showToastC:function(title){
+  showToastC:function(title,duration){
     wx.showToast({
       title: title,
       icon: 'none',
       mask:true,
-      duration:2000
+      duration:duration || 2000
     });    
   },
   showModalC:function(content,title){

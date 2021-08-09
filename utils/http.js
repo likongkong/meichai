@@ -18,7 +18,7 @@ const request = (url, options) => {
               wx.hideLoading();
               console.log(request);
               // resolve(request)
-              if (request.data.code == 0) {
+              if (request.data.status_code == 200) {
                   resolve(request)
               } else {
                   reject(request)
@@ -63,5 +63,5 @@ module.exports = {
     post,
     put,
     remove,
-    postObj,
+    postObj
 }

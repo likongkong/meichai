@@ -74,18 +74,10 @@ function toDate1(number) {
   return M + '-' + D;
 }
 
-function showToast (title,duration,icon = 'none') {
-	wx.showToast({
-	  title: title,
-		duration: duration,
-		icon:icon,
-	});
-}
 
 module.exports = {
   formatTime: formatTime,
   formatTimeTwo: formatTimeTwo,
   toDate: toDate,
   toDate1:toDate1,
-  showToast
 }
