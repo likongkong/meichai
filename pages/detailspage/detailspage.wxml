@@ -295,7 +295,6 @@
         <view class='dlyhnnimeMod' wx:for="{{zunmdata.gtag}}" wx:key="key">{{item}}</view>
       </view>
 
-
   </block>
      <view wx:if='{{specialGoods==1}}' style="background:#fff;padding:15rpx 0;">
         <view class="mscModel">选择{{specCate[0]}}:</view>
