@@ -6,7 +6,7 @@
       <swiper autoplay="{{true}}" circular="true" interval="3000">
         <block wx:for="{{rewardswiperData}}" wx:key='key' wx:for-item="item">
           <swiper-item>
-            <view class="card" data-id="{{item.id}}" bindtap="toaRewarddeyails">
+            <view class="card" data-id="{{item.id}}" data-shopdata='{{item}}'  bindtap="toaRewarddeyails">
               <view class="cardTbox" style="position:relative;">
                 <text class="serialnum">Vol.{{item.id}}</text>
                 <text class="serialnum" wx:if='{{item.isScratch}}' style="left:160rpx;">送刮刮卡</text>
@@ -46,7 +46,7 @@
     <view class="consumemessage">
         <swiper vertical="true" autoplay="true" circular="true" interval="2500">
           <block wx:for="{{consumemessageData}}" wx:key='key'>
-            <swiper-item catchtouchmove='catchTouchMove' class="swiper-item" data-id="{{item.activity_id}}" bindtap="toaRewarddeyails">
+            <swiper-item catchtouchmove='catchTouchMove' class="swiper-item" data-id="{{item.activity_id}}" bindtap="broadcast">
               <image style='width:50rpx;height:50rpx;margin:15rpx;float:left;border-radius:50%;' src='{{item.headphoto}}'></image>
               <view style="color:{{item.color?item.color:'#000000'}}">{{item.name}}</view>
             </swiper-item>
@@ -63,7 +63,7 @@
       <view wx:if="{{classifyName == '' || item.classifyName == classifyName}}" class="card specialCard">
       <swiper autoplay="{{true}}" circular="true" interval="3000" style="height:174rpx">
         <block wx:for="{{item.list_arr}}" wx:key='key' wx:for-item="sonitem">
-          <swiper-item data-id="{{sonitem.id}}" bindtap="toaRewarddeyails">
+          <swiper-item data-id="{{sonitem.id}}" bindtap="toaRewarddeyails" data-shopdata='{{sonitem}}'>
               <view class="cardTbox" style="position:relative;">
                 <text class="serialnum">Vol.{{sonitem.id}}</text>
                 <text class="serialnum" wx:if='{{sonitem.isScratch}}' style="left:110rpx;">送刮刮卡</text>
@@ -87,7 +87,7 @@
           </block>
         </swiper>
         <view class="cardBbox"> 
-          <view class="price"><text>￥</text>{{item.shopPrice}}<view wx:if='{{item.list_arr[0].status == 1}}' class="subList" catchtap="subfuncap" data-id='{{item.list_arr[0].id}}'>开售提醒</view></view>
+          <view class="price"><text>￥</text>{{item.shopPrice}}<view wx:if='{{item.list_arr[0].status == 1}}' class="subList" catchtap="subfuncap" data-id='{{item.list_arr[0].id}}'>开售订阅</view></view>
           <view class="title">{{item.name}}</view>
         </view>
       </view>
@@ -107,7 +107,17 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
 </view>
 
 
-
+<view class="wsh" style="z-index:101;" wx:if='{{ishavedata}}' catchtouchmove="true">
+    <view class="tgimgboxgb" catchtap="exhtipIsHave"></view>
+		<view style="width:560rpx;height:520rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;background:#fff;border-radius:10rpx;">
+        <image src="{{shopdata.cover}}" mode='aspectFit' style="width:100%;height:240rpx;border-radius:10rpx 10rpx 0 0;display:block;"></image>
+        <text class="specialellipsis" style="display:block;padding:20rpx 20rpx 0 20rpx;text-align:center;color:#000;font-size:24rpx;">{{shopdata.name}}</text>
+        <text style="display:block;padding:15rpx 20rpx 0 20rpx;text-align:center;color:#000;font-size:24rpx;">暂未公布奖赏</text>	
+        <text style="display:block;padding:15rpx 20rpx 0 20rpx;text-align:center;color:#000;font-size:24rpx;">{{shopdata.nameSuffix}}</text>	 
+				<view style="width:300rpx;height:60rpx;line-height:60rpx;background:#e0b033;text-align:center;color:#fff;font-size:26rpx;position:absolute;left:0;right:0;bottom:40rpx;margin:0 auto;border-radius:50rpx;" catchtap="subfuncap" data-id='{{shopdata.id || shopdata.activity_id}}'>开售订阅</view> 
+				<!-- <view style="width:160rpx;border-radius:8rpx;text-align:center;background:#fb595f;font-size:22rpx;color:#fff;position: absolute;top:-12rpx;right:-130rpx;height:40rpx;line-height:40rpx;">首次送优惠券</view>   -->
+		</view>
+</view>
 
 
 

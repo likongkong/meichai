@@ -300,7 +300,7 @@
         <view class="mscModel">选择{{specCate[0]}}:</view>
         <view class="mscModelBox">
           <!-- {{item.realStock<5?'background:#F0E2BB;':''}}  style="color:#1684FC;" -->
-          <view class="mscModelBoxOne {{modelSelInde==index?'addColorClass':''}}" style="{{modelSelInde==index&&item.realStock<5?'color:#1684FC !important;background:#D8EBFF !important;':''}}{{item.salesStatus==1&&item.realStock<=0?'text-decoration:line-through;':''}}" wx:for='{{detailSpecModel}}' catchtap="bindPickerChange" data-ind='{{index}}' wx:key='key'>
+          <view class="mscModelBoxOne {{modelSelInde==index?'addColorClass':''}}" style="{{modelSelInde==index&&item.realStock<5?'color:#1684FC !important;background:#D8EBFF !important;':''}}{{item.salesStatus==1&&item.realStock<=0?'text-decoration:line-through;':''}}" wx:for='{{detailSpecModel}}' catchtap="bindPickerChange" data-ind='{{index}}' wx:key='key' wx:if='{{item.arrCloseSpec[detailSpecColor[detailColorIndex].name]}}'>
               {{item.name}}
               <block wx:if='{{item.realStock <=0 && item.salesStatus==1}}'>(售罄)</block>
               <block wx:elif='{{item.realStock<5}}'><text>(预售)</text></block>

@@ -306,7 +306,7 @@ page{
   /* height: 70rpx;
   line-height: 70rpx; */
   color: #333;
-  font-size: 24rpx;
+  font-size: 22rpx;
   /* margin-top: 10rpx; */
 }
 .specialCard .cardBbox{
@@ -405,7 +405,7 @@ page{
   border-radius: 6rpx;
   font-size: 22rpx;
   color: #d64650;
-  margin-left: 15rpx;
+  margin-left: 9rpx;
 }
 
 /* 商品 */

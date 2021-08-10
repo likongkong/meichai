@@ -1,3 +1,4 @@
+@import "../../../../common/tabbar.wxss";
 .specialellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -207,4 +208,10 @@ scroll-view ::-webkit-scrollbar {
   font-size:24rpx;
   background:#eeae19;
   float: right;
+}
+/*   单行  */
+.specialellipsis{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;  
 }

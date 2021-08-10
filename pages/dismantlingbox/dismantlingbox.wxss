@@ -708,7 +708,7 @@ page{
 }
 
 .price{
-  font-size: 30rpx;
+  font-size:28rpx;
   font-weight: bold;
   display: block;
 }

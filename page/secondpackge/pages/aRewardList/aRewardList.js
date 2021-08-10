@@ -36,7 +36,9 @@ Page({
     subscribedata:{
         "template_id":["Q0tWM7kOihw1TilTeR3YmLzWp5tS0McgyOeJx2xX-B0"],
         "subscribe_type":[21]
-    }
+    },
+    ishavedata:false,
+    havedataid:''
 
   },
   /**
@@ -201,6 +203,23 @@ Page({
   //跳转详情
   toaRewarddeyails(e){
     let id = e.currentTarget.dataset.id;
+    let shopdata = e.currentTarget.dataset.shopdata;
+    console.log(shopdata)
+
+    if(shopdata.haveData){
+      wx.navigateTo({   
+        url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + id
+      });
+    }else{
+      this.setData({
+        ishavedata:true,
+        shopdata:shopdata
+      })
+    }
+
+  },
+  broadcast(e){
+    let id = e.currentTarget.dataset.id;
     wx.navigateTo({   
       url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + id
     });
@@ -346,6 +365,14 @@ Page({
     let id = w.currentTarget.dataset.id;
     this.data.id = id;
     this.subscrfun();
+    this.setData({
+      ishavedata:false
+    })
+  },
+  exhtipIsHave(){
+    this.setData({
+      ishavedata:false
+    })
   },
   // 拉起订阅
   subscrfun: function () {

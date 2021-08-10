@@ -139,7 +139,7 @@
                 </view>
                 <view class="progress-box">
                     <progress percent="{{(suplusUsers/limitUsers)*100}}" color="{{(suplusUsers/limitUsers)*100 === 100?'#6FBE0D':(suplusUsers/limitUsers)*100 < 100 && (suplusUsers/limitUsers)*100 > 50?'#FEB51D':'#ff2742'}}" backgroundColor="#cccccc" stroke-width='12' active duration="5"/>
-                    <text style="padding-left:15rpx;">剩余：{{suplusUsers}}</text>
+                    <text style="padding-left:15rpx;"><block wx:if='{{status != 1}}'>剩余：{{suplusUsers}}</block><block wx:elif='{{nameSuffix}}'>{{nameSuffix}}</block></text>
                 </view>
                 </swiper-item>
             <!-- </block> -->
