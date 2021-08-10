@@ -1602,7 +1602,7 @@ App({
 
 
 // isItaVIPTicket 暂时没用到 
-// storehomepage  是否是vip页面
+// storehomepage  申请入驻
 
 
 //auctionList 拍卖列表

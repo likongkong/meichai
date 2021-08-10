@@ -20,9 +20,8 @@
           "scene": null
         },
         {
-          "id": 1,
-          "name": "红包列表",
-          "pathName": "page/secondpackge/pages/redEnvelopeList/redEnvelopeList",
+          "name": "申请入驻",
+          "pathName": "pages/storehomepage/storehomepage",
           "query": "",
           "scene": null
         },
