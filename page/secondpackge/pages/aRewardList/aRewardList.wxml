@@ -110,7 +110,7 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
 <view class="wsh" style="z-index:101;" wx:if='{{ishavedata}}' catchtouchmove="true">
     <view class="tgimgboxgb" catchtap="exhtipIsHave"></view>
 		<view style="width:560rpx;height:520rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;background:#fff;border-radius:10rpx;">
-        <image src="{{shopdata.cover}}" mode='aspectFit' style="width:100%;height:240rpx;border-radius:10rpx 10rpx 0 0;display:block;"></image>
+        <image src="{{shopdata.cover}}" mode='widthFix' style="width:100%;border-radius:10rpx 10rpx 0 0;display:block;"></image>
         <text class="specialellipsis" style="display:block;padding:20rpx 20rpx 0 20rpx;text-align:center;color:#000;font-size:24rpx;">{{shopdata.name}}</text>
         <text style="display:block;padding:15rpx 20rpx 0 20rpx;text-align:center;color:#000;font-size:24rpx;">暂未公布奖赏</text>	
         <text style="display:block;padding:15rpx 20rpx 0 20rpx;text-align:center;color:#000;font-size:24rpx;">{{shopdata.nameSuffix}}</text>	 
