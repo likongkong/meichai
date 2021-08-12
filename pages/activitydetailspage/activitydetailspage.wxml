@@ -44,14 +44,6 @@
   </view>
 </view>
 
-<!-- 生成图片 -->
-<view class='tgimgbox' wx:if='{{tgimgbox}}'>
-  <view class='tgimgboxgb' catchtap='tgimgbg'></view>
-  <view class='tgimgbcon'>
-    <image class='tgimcimg' src='{{commoddata.supportUrl}}' style='width:560rpx;height:{{imageLoadSponsorheight}}rpx;' bindload="imageLoadSponsor"></image>
-    <view class='tgimcimgbut' catchtap='savethepicture'>保存图片</view>
-  </view>
-</view>
 
 <!-- 保存图片  -->
 <view class='tgimgbox' wx:if='{{tgfrShareIftr}}'>
@@ -161,45 +153,12 @@
   </view>
 
   <!-- 赞助商 -->
-  <view class='sponsor' wx:if='{{commoddata.supportName}}' style='margin:10rpx 0 4rpx 0;' wx:if='{{videoOpportunity}}'>
-
-    <view class='sponsorone' wx:if='{{commoddata.brand}}' style='position:relative;'>
-      <image class='sonsoimg' catchtap='gobrandDetails' data-mid='{{userbranddata.id}}' src='{{commoddata.brand.logo}}'>
-      </image>
-      <view class='sonsotxt specialellipsis' catchtap='gobrandDetails' data-mid='{{userbranddata.id}}' style="width:460rpx;">
-        <block wx:if='{{commoddata.isBrandNaq==1}}'>{{commoddata.brand.name}}</block><block wx:else>{{commoddata.brand.name}}旗舰店</block>
-      </view>
-      <view class='sonsoright' catchtap='sponsocopyone'>
-        品牌入驻
-      </view>
-
-    </view>  
-    <view class='sponsorone' wx:elif='{{commoddata.supportImg==1}}' style='position:relative;'>
-      <image class='sonsoimg' src='{{commoddata.supportLogo}}' catchtap='sponsofun'>
-      </image>
-      <view class='sonsotxt specialellipsis' catchtap='sponsofun'>
-        {{commoddata.supportName}}
-      </view>
-      <view class='sonsoright' catchtap='sponsofun'>
-        赞助
-      </view>
-      <view wx:if='{{uidid}}' class='sonsoright' style='color:rgba(147, 146, 146, 1);font-size:20rpx;margin-right:26rpx;text-decoration:none;' catchtap='sponsofun'>
-        {{uidid}}人浏览了该商品
-      </view>
-    </view>
-    <view wx:else class='sponsorone' style='position:relative;'>
-      <image class='sonsoimg' src='{{commoddata.supportLogo}}' catchtap='sponsocopyone'>
-      </image>
-      <view class='sonsotxt specialellipsis' catchtap='sponsocopyone'>
-        {{commoddata.supportName}}
-      </view>
-      <view class='sonsoright' wx:if='{{commoddata.supportLogo}}' catchtap='sponsocopyone'>
-        我要赞助
-      </view>
-      <view wx:if='{{uidid}}' class='sonsoright' style='color:rgba(147, 146, 146, 1);font-size:20rpx;margin-right:26rpx;text-decoration:none;' catchtap='sponsocopyone'>
-        {{uidid}}人浏览了该商品
-      </view>
-    </view>
+  <view class='sponsor' style='margin:10rpx 0 4rpx 0;'>
+    <!-- !isFocusPublic -->
+    <view class='sponsorone' wx:if='{{false}}' catchtap="jumpWebview" data-url="http://mp.weixin.qq.com/s?__biz=MzUyNzMyNTg4Ng==&mid=100000975&idx=1&sn=ef370685e8a3c081684671ae961d16a7&chksm=7a000b1e4d77820819a1b4a07cc00432f987b0f79b798cef886ecdb4fffbd07ce2054c6689b1#rd" >
+       <text style="padding-left:50rpx;">关注美拆公众号及时获取中奖信息</text>
+       <view class="sponsoroneButton">关注</view>
+    </view> 
   </view>
 
   <!-- 碎片 -->

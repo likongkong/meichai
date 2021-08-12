@@ -140,7 +140,8 @@ App({
     suap:1, // 统计用户从哪个页面进入  
     placeAnOrderOne:'', // 购票页 下单数据
     placeAnOrderTwo:'',
-    isNeedUserInfo:false
+    isNeedUserInfo:false,
+    isFocusPublic:false // 是否关注公众号
   },
   //一番赏队列倒计时
   // yifanshangIsInQueueFun(time){
@@ -235,7 +236,8 @@ App({
 
                       // 用户手机号
                       _this.signindata.mobile = res.data.Info.mobile;
-                      
+                      // 是否关注公众号
+                      _this.signindata.isFocusPublic = res.data.Info.isFocusPublic || false;
                       // VIP
                       _this.signindata.isVip = res.data.Info.isVip || 0;
                       // 抽盒金
@@ -421,7 +423,6 @@ App({
 
     // 基础数据
     _this.defaultinfofun()
-    console.log('场景值=====',options.scene)
     _this.signindata.sceneValue = options.scene || 0;
     // 朋友圈分享不显示地址弹框
     if(options.scene==1154){
@@ -489,7 +490,6 @@ App({
         } else if (res.platform == "android") {
           _this.signindata.iftriosorand = false;
         }
-        console.log('判断是ios还是Android',_this.signindata.iftriosorand)
       }
     });
 
@@ -782,6 +782,22 @@ App({
       wx.navigateTo({
         url: "/page/secondpackge/pages/onlineFukubukuro/onlineFukubukuro"
       });
+    } else if (item_type == 9025) { 
+      if(whref.appid){
+        wx.navigateToMiniProgram({
+          appId: whref.appid,
+          path: whref.path,
+          envVersion: 'release',// 打开正式版
+          success(res) {},
+          fail: function (err) {
+             console.log(err);
+           }
+        })
+      }else{
+        wx.navigateTo({
+          url: whref
+        });
+      };
     };
 
 

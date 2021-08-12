@@ -324,6 +324,15 @@ Page({
     // 刮刮卡入口
     isScrapingCard:false,
   },
+  jumpWebview(e){
+    let url = e.currentTarget.dataset.url;
+    app.comjumpwxnav(0,url,'','');
+    this.setData({
+      isFocusPublic:true
+    })
+    app.signindata.isFocusPublic = true;
+  },
+
   // 跳转刮刮卡
   jumpScrapingCard(){
     app.comjumpwxnav(9023,'','','')
@@ -1048,12 +1057,7 @@ closefrindcommoni:function(){
       }
     });
   },
-  // 我要赞助
-  sponsofun:function(){
-    this.setData({
-      tgimgbox:true
-    });
-  }, 
+
   // 保存图片
   savethepicture: function () {
     var _this = this;
@@ -1570,6 +1574,7 @@ closefrindcommoni:function(){
       isProduce: app.signindata.isProduce,
       isShareFun: app.signindata.isShareFun,
       windowHeight: app.signindata.windowHeight || 600,
+      isFocusPublic: app.signindata.isFocusPublic
     });
     _this.detailfun();
 
