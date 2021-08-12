@@ -221,14 +221,17 @@ App({
                     
                     _this.signindata.is_sigin = true;
                     console.log('app', res);
-                    if (res.data.ReturnCode == 200 || res.data.ReturnCode == 201) {
-                      _this.signindata.openid = res.data.Info.openid || '';
+                    if (res.data.status_code == 200 || res.data.status_code == 201) {
 
-                      _this.signindata.loginid = res.data.Info.loginid || '';
-                      _this.signindata.uid = res.data.Info.uid || '';
+                      var login_info = res.data.login_info || {};
+                      var token_arr = res.data.token_arr || {};
+                      _this.signindata.openid = login_info.openid || '';
+
+                      _this.signindata.loginid = login_info.loginid || '';
+                      _this.signindata.uid = login_info.uid || '';
 
                       // if(Dec.env=='online'){
-                      //   var num = _this.signindata.randommaximum - res.data.Info.uid%_this.signindata.randommaximum;
+                      //   var num = _this.signindata.randommaximum - login_info.uid%_this.signindata.randommaximum;
                       //   if(num<10){
                       //       num = '00'+num
                       //   }else if(num>=10){
@@ -252,72 +255,72 @@ App({
 
                       console.log('app===sigin',_this.signindata.comurl,_this.signindata.clwcomurl,Dec.versionnumber)
 
-                      _this.signindata.isNewer = res.data.Info.isNewer || false;
+                      _this.signindata.isNewer = login_info.isNewer || false;
                       _this.signindata.token = '';
-                      _this.signindata.isAwardOrder = res.data.Info.isAwardOrder || false;
-                      _this.signindata.awardOrder = res.data.Info.awardOrder || { Info: { cover: "", isAwardOrder: false, overtime: 0, url: "", } };
+                      _this.signindata.isAwardOrder = login_info.isAwardOrder || false;
+                      _this.signindata.awardOrder = login_info.awardOrder || { Info: { cover: "", isAwardOrder: false, overtime: 0, url: "", } };
 
-                      _this.signindata.isShareFun = res.data.Info.isShareFun;
+                      _this.signindata.isShareFun = login_info.isShareFun;
 
-                      _this.signindata.isTodaySign = res.data.Info.isTodaySign;
+                      _this.signindata.isTodaySign = login_info.isTodaySign;
 
                       // 用户手机号
-                      _this.signindata.mobile = res.data.Info.mobile;
+                      _this.signindata.mobile = login_info.mobile;
                       
                       // VIP
-                      _this.signindata.isVip = res.data.Info.isVip || 0;
+                      _this.signindata.isVip = login_info.isVip || 0;
                       // 抽盒金
-                      _this.signindata.blindboxMoney = res.data.Info.blindboxMoney || 0;
+                      _this.signindata.blindboxMoney = login_info.blindboxMoney || 0;
                       // 限时抽盒金
-                      _this.signindata.tempBlindboxMoney = res.data.Info.tempBlindboxMoney || 0;
+                      _this.signindata.tempBlindboxMoney = login_info.tempBlindboxMoney || 0;
                       // 是否是管理员  有权限进入 发放门票商品的页面
-                      _this.signindata.isManager = res.data.Info.isManager || false;
+                      _this.signindata.isManager = login_info.isManager || false;
 
                       _this.signindata.spreadEntry = res.data.List ? res.data.List.spreadEntry : false || false;
                       // _this.signindata.index_ela_fra = true;
-                      _this.signindata.isProduce = res.data.Info.isProduce || false;
+                      _this.signindata.isProduce = login_info.isProduce || false;
 
                       // 万圣节南瓜个数
-                      _this.signindata.halloweenScore = res.data.Info.score || 0;
+                      _this.signindata.halloweenScore = login_info.score || 0;
                       // 万圣节南瓜个数
-                      _this.signindata.isAuthMobile = res.data.Info.isAuthMobile;
+                      _this.signindata.isAuthMobile = login_info.isAuthMobile;
                       // // 是否已领取过现实抽盒金(关注公众号小号赠送) 新用户
-                      // _this.signindata.gotTBBMBS8 = res.data.Info.welfare ? res.data.Info.welfare.gotTBBMBS8 : true;
+                      // _this.signindata.gotTBBMBS8 = login_info.welfare ? login_info.welfare.gotTBBMBS8 : true;
                       // // 是否已领取过现实抽盒金(关注公众号大号赠送) 新用户
-                      // _this.signindata.gotTBBMBS9 = res.data.Info.welfare ? res.data.Info.welfare.gotTBBMBS9 : true;
+                      // _this.signindata.gotTBBMBS9 = login_info.welfare ? login_info.welfare.gotTBBMBS9 : true;
 
                       // 是否是地域黑模式
-                      _this.signindata.isHellBlackUser = res.data.Info.isHellBlackUser || false;
+                      _this.signindata.isHellBlackUser = login_info.isHellBlackUser || false;
                       // 是否开启展会 
-                      _this.signindata.isOpenToyShow = res.data.Info.isOpenToyShow || false;               
+                      _this.signindata.isOpenToyShow = login_info.isOpenToyShow || false;               
                       // 透视卡倒计时
-                      if(res.data.Info.tempChance){
-                          _this.signindata.perspcardata = res.data.Info.tempChance.length != 0 ? res.data.Info.tempChance[0].over_time || '' : '';
+                      if(login_info.tempChance){
+                          _this.signindata.perspcardata = login_info.tempChance.length != 0 ? login_info.tempChance[0].over_time || '' : '';
                       };
 
-                      _this.signindata.automat = res.data.Info.automat ? res.data.Info.automat : { isOpen: false, times: 0, title: "" };
-                      _this.signindata.automattitle = res.data.Info.automat ? res.data.Info.automat.title : '';
+                      _this.signindata.automat = login_info.automat ? login_info.automat : { isOpen: false, times: 0, title: "" };
+                      _this.signindata.automattitle = login_info.automat ? login_info.automat.title : '';
 
-                      _this.signindata.notAllowShareGoodsId = res.data.Info.notAllowShareGoodsId || [];
-                      if(res.data.Info.address){
-                        _this.signindata.isBlindBoxDefaultAddress = res.data.Info.address.isBlindBoxDefaultAddress || false;
+                      _this.signindata.notAllowShareGoodsId = login_info.notAllowShareGoodsId || [];
+                      if(login_info.address){
+                        _this.signindata.isBlindBoxDefaultAddress = login_info.address.isBlindBoxDefaultAddress || false;
                       };
 
-                      if (res.data.Info.store) {
-                        _this.signindata.store_id = res.data.Info.store.store_id || 0;
-                        _this.signindata.last_store_id = res.data.Info.store.last_store_id || 0;
+                      if (login_info.store) {
+                        _this.signindata.store_id = login_info.store.store_id || 0;
+                        _this.signindata.last_store_id = login_info.store.last_store_id || 0;
                       };
-                      var openid = res.data.Info.openid || '';
-                      var loginid = res.data.Info.loginid || '';
-                      var uid = res.data.Info.uid || '';
+                      var openid = login_info.openid || '';
+                      var loginid = login_info.loginid || '';
+                      var uid = login_info.uid || '';
                       wx.setStorage({ key: 'signin', data: { openid: openid, loginid: loginid, uid: uid } });
 
-                      _this.signindata.isNeedUserInfo = res.data.Info.isNeedUserInfo;   // 新用户需要上传用户信息
-                      _this.signindata.userInfo = res.data.Info.user || {};
+                      _this.signindata.isNeedUserInfo = login_info.isNeedUserInfo;   // 新用户需要上传用户信息
+                      _this.signindata.userInfo = login_info.user || {};
 
-                      if (res.data.Info.user) {
+                      if (login_info.user) {
 
-                        var userinfo = res.data.Info.user;
+                        var userinfo = login_info.user;
                         userinfo.avatarUrl = userinfo.headphoto;
                         userinfo.nickName = userinfo.nick;
                         userinfo.gender = userinfo.gender;
@@ -325,8 +328,8 @@ App({
                         _this.signindata.userInfo = userinfo || {};
                         _this.signindata.avatarUrl = userinfo.headphoto;
                         _this.signindata.nickName = userinfo.nick;
-                        // var photoheadphoto = res.data.Info.user.headphoto || '';
-                        // var namenick = res.data.Info.user.nick || '';
+                        // var photoheadphoto = login_info.user.headphoto || '';
+                        // var namenick = login_info.user.nick || '';
                         // if (photoheadphoto != avaurl || namenick != nicname) {
                         //   _this.logindata(nicname, iconsex, avaurl);
                         // };

@@ -7,12 +7,15 @@ var versionnumber = '12.6.7';
 var key = env=='online'?Aes.enc.Utf8.parse("danzhuan1chaijia"):Aes.enc.Utf8.parse("danzhuanichaijia");
 // 公共地址 接口
 function comurl() {
-  // return env=='online'?'https://api.51chaidan.com/':'http://api-test.51chaidan.com/' 
-  return env=='online'?'http://api-api.51chaidan.com/api/':'http://api-test.51chaidan.com/' 
+  return env=='online'?'https://api.51chaidan.com/':'http://api-test.51chaidan.com/';
 }
+// 公共地址 接口
+function comUrlNew() {
+  return env=='online'?'http://api-api.51chaidan.com/api/':'http://api-test.51chaidan.com/'; 
+} 
 //拼图 公共地址 接口
 function clwcomurl(){  
-  return env=='online'?'https://clw.51chaidan.com/':'http://clw-test.51chaidan.com/'
+  return env=='online'?'https://clw.51chaidan.com/':'http://clw-test.51chaidan.com/';
 }
 // 公共地址 图片
 function zdyurl() {
@@ -182,3 +185,4 @@ module.exports.env = env;
 module.exports.versionnumber = versionnumber;
 module.exports.clwcomurl = clwcomurl;
 module.exports.shareWechatMoments = shareWechatMoments;
+module.exports.comUrlNew = comUrlNew;

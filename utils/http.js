@@ -1,4 +1,4 @@
-var Dec = require('../common/public');
+var Dec = require('../common/public.js');
 
  
 const request = (url, options) => {
@@ -7,7 +7,7 @@ const request = (url, options) => {
             title: '加载中',
         })
         wx.request({
-            url: `${Dec.comurl()}${url}`,
+            url: `${Dec.comUrlNew()}${url}`,
             method: options.method,
             data: options.data,
             header: {
