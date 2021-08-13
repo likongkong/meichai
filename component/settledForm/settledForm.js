@@ -19,6 +19,12 @@ Component({
         console.log(newVal)
       }
     },
+    isEdit:{
+      type: Boolean,
+      observer(newVal){
+        console.log(newVal)
+      }
+    },
     brandInfo: {
       type: Object,
       observer(newVal){
@@ -59,13 +65,16 @@ Component({
         SecretId: 'AKIDmY0RxErYIm2TfkckG8mEYbcNA4wYsPbe',
         SecretKey: '4WkpgJ5bJlU4B6wNuCG4EDyVnGWUFhw1',
       });
-  
+      
       // 先选择文件，得到临时路径
       wx.chooseImage({
         count: 1, // 默认9
         sizeType: ['compressed'], // 可以指定是原图original还是压缩图compressed，默认用原图
-        sourceType: ['camera'], // 'album'相册  camera 相机
+        sourceType: ['camera','album'], // 'album'相册  camera 相机
         success: (res) => {
+          wx.showLoading({
+            title: '上传中...',
+          })
           var filePath = res.tempFiles[0].path;
           //获取最后一个.的位置
           var index= filePath.lastIndexOf(".");
@@ -81,8 +90,9 @@ Component({
                     // console.log(JSON.stringify(info));
                 }
               },(err, data) => {
+                wx.hideLoading()
                 let src = `list[${ind}].src`;
-                this.setData({[src]: data.Location})
+                this.setData({[src]: `https://${data.Location}`})
                 this.triggerEvent("bindchange", {value:data.Location,name:name});
               }
           );

@@ -511,3 +511,24 @@ page{
   margin-right: 10rpx;
 }
 
+.settled{
+  
+}
+.settledImgWrap{
+  width: 96%;
+  margin: 0 auto;
+  position: relative;
+}
+.settledImg{
+  width: 100%;
+  height: auto;
+  margin-top: 20rpx;
+}
+.closeImg{
+  width: 40rpx;
+  height: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 8rpx;
+}

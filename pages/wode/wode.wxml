@@ -114,6 +114,26 @@
                </view>
            </view>
     </view>
+
+    <!-- 品牌入驻 -->
+    <view wx:if="{{!dataInfo.brandSettledLimit}}" class="whwdddw settled">
+        <block wx:if="{{isSettledImg}}">
+            <view class="settledImgWrap" data-type="{{dataInfo.brandSettledInfo.brandSettledStatus!=3?'9027':'9028'}}" data-whref="id={{dataInfo.brandSettledInfo.brandSettledId}}&num={{dataInfo.brandSettledInfo.brandSettledStatus}}&msg={{dataInfo.brandSettledInfo.brandSettledReturnMsg}}" catchtap="comjumpwxnav">
+                <image class="settledImg" src="https://cdn.51chaidan.com/images/brandSettledIcon/audit{{dataInfo.brandSettledInfo.brandSettledStatus==1?'0':dataInfo.brandSettledInfo.brandSettledStatus==2?'1':dataInfo.brandSettledInfo.brandSettledStatus==3?'3':'2'}}.png" mode="widthFix"></image>
+                <image class="closeImg" src="https://cdn.51chaidan.com/images/brandSettledIcon/closeImg.png" mode="widthFix" catchtap="closeSettledImg"></image>
+            </view>
+        </block>
+        <block wx:else>
+            <view class='whwddd' data-type="{{dataInfo.brandSettledInfo.brandSettledStatus!=3?'9027':'9028'}}" data-whref="id={{dataInfo.brandSettledInfo.brandSettledId}}&num={{dataInfo.brandSettledInfo.brandSettledStatus}}&msg={{dataInfo.brandSettledInfo.brandSettledReturnMsg}}" catchtap="comjumpwxnav">
+                品牌入驻
+                <view class='whbocndr'>
+                {{dataInfo.brandSettledInfo.brandSettledStatus==1?'立即入驻':dataInfo.brandSettledInfo.brandSettledStatus==2?'查看进度':dataInfo.brandSettledInfo.brandSettledStatus==3?'完善信息':'查看原因'}}
+                <image class='whwddimgtit' src='../images/icon_in.png'></image>
+                </view>                   
+            </view>
+        </block>
+    </view>
+
     <view class='whwdddw' bindtap='jumpowntoy'>
         <view class='whwddd'>
             玩具柜

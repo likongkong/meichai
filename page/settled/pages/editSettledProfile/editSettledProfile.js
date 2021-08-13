@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '申请入驻',
+    c_title: '修改资料',
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
@@ -79,7 +79,6 @@ Page({
     ],
     obj:{},
     num:1,  //进度
-    id:0,
     brandInfo:{}, //品牌信息
   },
 
@@ -93,14 +92,7 @@ Page({
       num:options.num,
       id:options.id || 0
     })
-    if(options.num==2 || options.num==4){
-      this.getBrandInfo()
-    }
-    if(options.num==4){
-      this.setData({
-        brandSettledReturnMsg:options.msg
-      })
-    }
+    this.getBrandInfo()
   },
 
   /**
@@ -135,9 +127,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    if(this.data.num==2 || this.data.num==4){
-      this.getBrandInfo()
-    }
+    
   },
 
   /**
@@ -161,8 +151,7 @@ Page({
   comjumpwxnav(e){
     let type = e.currentTarget.dataset.type;
     let num = e.currentTarget.dataset.num;
-    let whref = `id=${this.data.id}&num=${num}`
-    app.comjumpwxnav(type,whref)
+    app.comjumpwxnav(type,num)
   },
   // 获取表单数据
   bindchange(e){
@@ -184,7 +173,6 @@ Page({
       header: { 'Accept': 'application/json' },
       success: (res) => { 
         console.log('品牌信息====',res)
-       
         if(res.data.ReturnCode == 200){
           let brandInfo = res.data.Info;
           this.data.obj = {
@@ -209,6 +197,7 @@ Page({
             [`enterpriseData[7].src`]:brandInfo.ip_img,
             [`enterpriseData[8].value`]:brandInfo.ip_introduce,
           })
+
         }else{
           app.showToastC(res.data.Msg,2000);
         }
@@ -282,6 +271,9 @@ Page({
             success (res) {
               if (res.confirm) {
                 console.log('用户点击确定')
+                let pages = getCurrentPages();
+                let prevPage = pages[pages.length -2];//上一页
+                prevPage.getBrandInfo();
                 wx.navigateBack({
                   delta: 1
                 })

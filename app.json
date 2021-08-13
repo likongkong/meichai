@@ -157,7 +157,9 @@
       "pages": [
         "pages/applySettled/applySettled",
         "pages/orderManagement/orderManagement",
-        "pages/businessOrderDetails/businessOrderDetails"
+        "pages/businessOrderDetails/businessOrderDetails",
+        "pages/editSettledProfile/editSettledProfile",
+        "pages/perfectSettledProfile/perfectSettledProfile"
       ]
     }
   ],

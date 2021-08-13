@@ -1,20 +1,25 @@
 <view>
   <view class="listWrap">
     <block wx:for="{{list}}" wx:key='key'>
-      <view wx:if="{{item.type == 'text'}}" class="{{num==1?'columnWrap':'rowWrap'}} {{item.borderbottom1?'':'borderbottom1'}}">
+      <view wx:if="{{item.type == 'text'}}" class="{{num==1?'columnWrap':'rowWrap'}} {{item.borderbottom1?'':'borderbottom1'}} {{item.paddingL80?'paddingL80':''}}">
         <view class="cEveTitle"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
         <input class="cEveInput" disabled="{{num==2?true:flase}}" data-name="{{item.name}}" placeholder="{{item.placeholder}}" type="text" value="{{item.value}}" bindinput="onKeyInput"></input>
-        <image wx:if="{{num==3}}" class="editIcon" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="widthFix"></image>
+        <image wx:if="{{item.isEdit?false:isEdit}}" class="editIcon" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="widthFix"></image>
       </view>
-      <view wx:if="{{item.type == 'uploadImg'}}" class="columnWrap {{item.borderbottom1?'':'borderbottom1'}}" data-storagelocation="{{item.storagelocation}}" data-name="{{item.name}}" data-index="{{index}}" catchtap="{{num==2?'':'uploadImage'}}">
+      <view wx:if="{{item.type == 'title'}}" class="{{num==1?'columnWrap':'rowWrap'}} {{item.borderbottom1?'':'borderbottom1'}}">
+        <view class="cEveTitle" style="height:60rpx"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
+      </view>
+      <view wx:if="{{item.type == 'uploadImg'}}" class="columnWrap {{item.borderbottom1?'':'borderbottom1'}} {{item.paddingL80?'paddingL80':''}}" data-storagelocation="{{item.storagelocation}}" data-name="{{item.name}}" data-index="{{index}}" catchtap="{{num==2?'':'uploadImage'}}">
         <view class="cEveTitle"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
         <block>
-          <image 
-            wx:if="{{item.src != ''}}" 
-            class="tupian {{item.name == 'businessLicense'?'businessLicense':item.name == 'ipLogo'?'ipLogo':'ipImage'}}" 
-            src="{{item.src}}" 
-            mode="widthFix">
-          </image>
+          <view wx:if="{{item.src != ''}}" class="flex marginTB25">
+            <image 
+              class="tupian {{item.name == 'businessLicense'?'businessLicense':item.name == 'ipLogo'?'ipLogo':'ipImage'}}" 
+              src="{{item.src}}" 
+              mode="widthFix">
+            </image>
+            <text wx:if="{{item.isEdit?false:isEdit}}" class="uploadAgainText">重新上传</text>
+          </view>
           <view wx:else class="uploadWrap">
             <view class="placeholderBox">
               <image src="../../pages/images/jiahao.png" mode="widthFix"></image>
