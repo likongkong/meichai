@@ -20,8 +20,8 @@
           "scene": null
         },
         {
-          "name": "申请入驻",
-          "pathName": "pages/storehomepage/storehomepage",
+          "name": "订单管理",
+          "pathName": "page/settled/pages/orderManagement/orderManagement",
           "query": "",
           "scene": null
         },
@@ -33,9 +33,8 @@
           "scene": null
         },
         {
-          "id": -1,
-          "name": "抽盒机列表",
-          "pathName": "pages/smokeboxlist/smokeboxlist",
+          "name": "商家订单详情",
+          "pathName": "page/settled/pages/businessOrderDetails/businessOrderDetails",
           "query": "",
           "scene": null
         },

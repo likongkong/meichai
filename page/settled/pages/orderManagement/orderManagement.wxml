@@ -1,0 +1,188 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class="omBox">
+    <scroll-view class="marginAuto scrollViewTop" scroll-x="true" scroll-with-animation="true" scroll-left='{{scrollleftTop}}'>
+        <view wx:for="{{testArr}}" wx:key='key' class="scrollViewTopEve {{topIndex == index?'selectTop':''}}" data-index="{{index}}" id="top{{index}}" catchtap="scrollViewTop">{{item}}</view>
+    </scroll-view>
+	<view class="elsearch marginAuto">
+        <image class="elserarchimg" catchtap="jumpsearch" src="https://www.51chaidan.com/images/toyCabinet/search.png"></image>
+        <view class="elsearchch">
+            <input class="elinputbut" bindfocus='onFocus' placeholder='订单号/收货人/收货人手机号/商品名称' bindinput="inputChange" bindconfirm="jumpsearch" value="{{ordername}}"></input>
+        </view>
+        <view class="elserbotom" catchtap="jumpsearch">搜索</view>
+	</view>
+
+    <scroll-view class="marginAuto scrollViewTop" scroll-x="true" scroll-with-animation="true" scroll-left='{{scrollleft}}' style="height:80rpx;">
+         <view wx:for="{{testArr}}" wx:key='key' id="ele{{index}}" class="classifyItem {{centerIndex == index?'active':''}}" data-index="{{index}}" data-name="{{item.name}}" catchtap="classifyChange">{{item}}</view>
+    </scroll-view>
+
+    <view class="marginAuto centerTxt" wx:for='{{testArr}}' wx:key='key'>
+        <template is="orderCommon" data="{{item}}"></template>
+    </view>
+    <view class="orderBottomNavigation">
+        <view class="orderBottomNavEve" catchtap="commonBulletFrameFun" data-index='4'>批量导出订单</view>
+        <view class="orderBottomNavEve" catchtap="commonBulletFrameFun" data-index='5'>批量导入运单</view>
+    </view>
+</view>
+
+<template name='orderCommon'>
+   <view class="orderBox">
+       <view catchtap="jumpBusOrderDetails">
+            <view class="orderBoxTop">
+                <view>订单编号:2021121255669987</view>
+                <view style="color:#90D2D6;">待发货</view>
+            </view>
+            <view class="orderBoxTop" style="border-bottom: 2rpx solid #ECECEC;margin-bottom:20rpx;padding-bottom:20rpx;">
+                <view class="userImgName">
+                    <image class="userImg" src="https://cdn.51chaidan.com/images/202108/thumb_img/38671_thumb_G_1628511508234.jpg" mode="aspectFit"></image>
+                    <text class="userName specialellipsis">张三张三张三张三张三张三张三</text>
+                </view>
+                <view>2021/01/01 12:00:00支付 </view>
+            </view>
+            <view class="orderBoxContent">
+                <image class="orderBoxContentImg" src="https://cdn.51chaidan.com/images/202108/thumb_img/38671_thumb_G_1628511508234.jpg" mode="aspectFit"></image>
+                <view class="orderBoxContentRight">
+                    <view class="obcrTop">
+                        <view style="padding-right:10rpx;">婚礼濑濑婚礼濑濑婚礼濑濑婚礼濑濑婚礼濑濑婚礼濑濑婚礼濑濑</view>
+                        
+                    </view>
+                    <view class="obcrBottom obcrTop">
+                        <view>数量x1</view>
+                        <view>实收￥199.00</view>
+                    </view>
+                </view>
+            </view>
+            <view class="orderAddress">
+                <view class="orderAddressEve">
+                    <view>收货人:张三</view>
+                    <view>收货手机号:18840645566</view>
+                </view>
+                <view class="orderAddressEve">
+                    <view>收货地址:中国北京市朝阳区东四环小武基北路</view>
+                </view>    
+                <view class="orderAddressEve">
+                    <view>买家留言:无</view>
+                </view>                    
+            </view>
+       </view>
+
+       <view class="orderBottom">
+           <block wx:if='{{false}}'>
+               <view class="orderBoxTop">运单号:SF5497531479</view>
+           </block>
+           <block wx:else>
+               <view class="orderBottomOrderNumber">
+                   <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-index='3'>添加物流</view>
+                   <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-index='2'>退款</view>
+                   <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-index='1'>修改收货地址</view>
+               </view>
+           </block>
+       </view>
+   </view>
+
+</template>
+
+<!-- 弹框  1 修改 2 退款 3 物流 4 批量导出订单-->
+<view class="wshNew" catchtouchmove="true" wx:if='{{commonBulletFrame}}' catchtap="closeCommonTip">
+    <view class="orderMangAddress" catchtap="true">
+        <view class="orderMangTipTop">
+            <block wx:if='{{logisticsRefundModify == 1}}'>修改收货地址</block>
+            <block wx:elif='{{logisticsRefundModify == 2}}'>退款</block>
+            <block wx:elif='{{logisticsRefundModify == 3}}'>添加物流</block>
+            <block wx:elif='{{logisticsRefundModify == 4}}'>批量导出订单</block>
+            <block wx:elif='{{logisticsRefundModify == 5}}'>批量导入运单</block>
+        </view>
+        <!-- 修改地址 -->
+        <block wx:if='{{logisticsRefundModify == 1}}'>
+            <view class="orderMangTipCenter">
+                <view class="orderMangTipCenterEve">
+                    <view class="leftEveheight">收货人</view>
+                    <view>
+                        <input class="addressModifyInput" type="text" value="18840645566"></input>
+                        <image class="addressMoImg" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="aspectFit"></image>
+                    </view>
+                </view>
+                <view class="orderMangTipCenterEve">
+                    <view class="leftEveheight">收货手机号</view>
+                    <view>
+                        <input class="addressModifyInput" type="text" value="18840645566"></input>
+                        <image class="addressMoImg" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="aspectFit"></image>
+                    </view>
+                    
+                </view>
+                <view class="orderMangTipCenterEve" style="height:110rpx;">
+                    <view class="leftEveheight">收货地址</view>
+                    <view>
+                        <textarea class="addressModifytTa" value="中国北京市朝阳区东四环小武基北路二楼201室" name='address'></textarea>
+                        <image class="addressMoImg" style="margin:0 0 0 10rpx;" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="aspectFit"></image>
+                    </view>
+
+                </view>
+            </view>            
+        </block>
+        <!-- 退款 -->
+        <block wx:elif='{{logisticsRefundModify == 2}}'>
+            <view class="refundTxt">确认退款之后将关闭订单，订单金额将在72小时之内原路返回到支付账户上</view>          
+        </block>
+        <!-- 添加物流 -->
+        <block wx:elif='{{logisticsRefundModify == 3}}'>
+            <view class="orderMangTipCenter">
+                <view class="orderMangTipCenterEve">
+                    <view>商品名称</view>
+                    <view>婚礼濑濑</view>
+                </view>
+                <view class="orderMangTipCenterEve">
+                    <view>购买数量</view>
+                    <view>1件</view>
+                </view>
+                <view class="addLogisticsTxt">
+                    <view class="orderMangTipCenterEve">
+                        <view>收货人</view>
+                        <view>张三</view>
+                    </view>
+                    <view class="orderMangTipCenterEve">
+                        <view>收货人手机号</view>
+                        <view>13845759874</view>
+                    </view>
+                    <view class="orderMangTipCenterEve">
+                        <view>收货地址</view>
+                        <view style="width:380rpx;text-align:right;">中国北京市朝阳区东四环小武基北路</view>
+                    </view>                    
+                </view>
+                <view class="orderMangTipCenterEve" style="padding:30rpx 0;">
+                    <view>请输入快递公司及运单号</view>
+                </view>
+                <view class="orderMangTipCenterEve">
+                    <input class="addWaybillNumber" type="text" placeholder="快递公司" value=""></input>
+                </view>
+                <view class="orderMangTipCenterEve">
+                    <input class="addWaybillNumber" type="text" placeholder="快递运单号" value="{{scanCodeMsg}}"></input>
+                    <image class="scanCode" bindtap='scanCode' src="https://cdn.51chaidan.com/images/brandSettledIcon/scan.png" mode="aspectFit"></image>
+                </view>       
+            </view>
+        </block>
+        <!-- 批量导出订单 -->
+        <block wx:elif='{{logisticsRefundModify == 4}}'>
+            <text class="batchExportOrder">导出订单步骤：
+            第一步：点击“复制下载链接”。
+            第二步：在手机/电脑浏览器输入复制的下载链接，开始下载。
+            第三步：下载完成，打开文件，进行编辑。
+            </text>          
+        </block>
+        <view class="orderMangTipCenterEve" style="width:610rpx;margin:auto;">
+            <block wx:if='{{logisticsRefundModify == 4}}'>
+                <view class="oAMaBConfirm">关闭</view>
+                <view class="oAMaBCancel">复制下载链接</view> 
+            </block>
+            <block wx:else>
+                <view class="oAMaBConfirm">取消</view>
+                <view class="oAMaBCancel">确定</view>               
+            </block>
+        </view>
+    </view>
+
+
+
+
+</view>

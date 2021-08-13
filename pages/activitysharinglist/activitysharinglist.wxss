@@ -3,6 +3,22 @@
 page{
   background:#f5f6fa;
 }
+.sponsorone{width:100%;height:100rpx;position:relative;line-height: 100rpx;font-size: 28rpx;}
+.sponsoroneButton{
+  width: 116rpx;
+  height: 46rpx;
+  color: #fff;
+  text-align: center;
+  line-height: 46rpx;
+  font-size: 28rpx;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 50rpx;
+  margin: auto;
+  background: #178FF8;
+  border-radius: 10rpx;
+}
 /*  双行  */
 .multilineellipsis{ 
     display: -webkit-box;

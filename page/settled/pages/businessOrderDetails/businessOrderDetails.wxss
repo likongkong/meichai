@@ -1,0 +1,15 @@
+@import "/page/settled/pages/orderManagement/orderManagement.wxss";
+.centerTxtOrderDeatail{
+  width: 660rpx;
+  background: #fff;
+  border-radius: 15rpx;
+  padding:0 25rpx 10rpx;
+  margin: 0 auto 20rpx;
+  font-size: 24rpx;
+}
+.comPaddingTop{
+  padding-top: 20rpx;
+}
+.bottomButComWidth{
+  width: 200rpx !important;
+}

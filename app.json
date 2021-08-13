@@ -155,7 +155,9 @@
     {
       "root": "page/settled/",
       "pages": [
-        "pages/applySettled/applySettled"
+        "pages/applySettled/applySettled",
+        "pages/orderManagement/orderManagement",
+        "pages/businessOrderDetails/businessOrderDetails"
       ]
     }
   ],

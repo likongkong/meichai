@@ -67,6 +67,15 @@ Page({
     countdowntime: '',
     perspcardiftrmin:false
   },
+  jumpWebview(e){
+    let url = e.currentTarget.dataset.url;
+    app.comjumpwxnav(0,url,'','');
+    this.setData({
+      isFocusPublic:true
+    })
+    app.signindata.isFocusPublic = true;
+  },
+
   onHide: function () {
     clearInterval(this.data.countdowntime);
     // 调用重置刷新
@@ -139,6 +148,7 @@ Page({
       isIphoneX: app.signindata.isIphoneX,
       signinlayer: true,
       defaultinformation:app.signindata.defaultinformation,
+      isFocusPublic: app.signindata.isFocusPublic,
       tgabox: false
     });
 

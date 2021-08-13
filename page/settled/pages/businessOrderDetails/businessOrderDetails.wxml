@@ -1,0 +1,62 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class="omBox">
+    <view class="centerTxtOrderDeatail">
+            <view class="orderBoxTop">
+                <view>订单编号:2021121255669987</view>
+                <view style="color:#90D2D6;">待发货</view>
+            </view>
+            <view class="orderBoxContent" style="border-bottom:0;">
+                <image class="orderBoxContentImg" src="https://cdn.51chaidan.com/images/202108/thumb_img/38671_thumb_G_1628511508234.jpg" mode="aspectFit"></image>
+                <view class="orderBoxContentRight">
+                    <view class="obcrTop">
+                        <view style="padding-right:10rpx;">婚礼濑濑婚礼濑濑婚礼濑濑婚礼濑濑婚礼濑濑婚礼濑濑婚礼濑濑</view>
+                        <view></view>
+                    </view>
+                    <view class="obcrBottom obcrTop">
+                        <view></view>
+                        <view style="font-size:30rpx">付款金额￥199.00</view>
+                    </view>
+                </view>
+            </view>
+    </view>
+
+    <view class="centerTxtOrderDeatail comPaddingTop">
+        <view class="orderAddressEve">收货人:张三</view>
+        <view class="orderAddressEve">收货手机号：18840645566</view>  
+        <view class="orderAddressEve">收货地址：中国北京市朝阳区东四环小武基北路中国北京市朝阳区东四环小武基北路</view>     
+        <view class="orderAddressEve">备注：</view>                   
+    </view>
+
+    <view class="centerTxtOrderDeatail comPaddingTop">
+        <view class="orderAddressEve">下单时间：2021/01/01 12:00:00</view>
+        <view class="orderAddressEve">支付时间：2021/01/01 12:00:00</view>                   
+    </view>
+
+    <view class="centerTxtOrderDeatail comPaddingTop">
+        <view class="orderAddressEve">发货形式：预售</view>
+        <view class="orderAddressEve">预计发货日期：2021/01/01 12:00:00</view> 
+        <view class="orderAddressEve">邮寄形式：包邮</view>
+        <view class="orderAddressEve">是否保价：是</view>
+
+    </view>
+
+    <view class="centerTxtOrderDeatail comPaddingTop">
+        <view class="orderAddressEve">实际发货日期：2021/01/01 12:00:00</view>
+        <view class="orderAddressEve">快递公司：顺丰</view> 
+        <view class="orderAddressEve">运单号：SH753951554</view>
+    </view>
+
+
+    <view class="orderBottomNavigation">
+        <view class="orderBottomNavEve bottomButComWidth">添加物流</view>
+        <view class="orderBottomNavEve bottomButComWidth">退款</view>
+        <view class="orderBottomNavEve bottomButComWidth">修改收货地址</view>
+    </view>
+
+
+
+</view>
+
+
