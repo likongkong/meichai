@@ -2,6 +2,7 @@ var Dec = require('../common/public');
 
  
 const request = (url, options) => {
+    console.log(url,options)
     return new Promise((resolve, reject) => {
         wx.showLoading({
             title: '加载中',

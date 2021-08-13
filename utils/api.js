@@ -1,20 +1,19 @@
-import { apiResquest } from './http.js'
+import  apiResquest  from './http.js'
 
-//POST 请求案例
-
-// ---------------------------------------- 公共-----------------------------------------
 // 登录
 export const login = (query) => {
-	return apiResquest.post({
-    url: 'login/aaa',
-    query: {...query}
-	})
+    return apiResquest.post(
+        url='login/aaa',
+        {query: {...query}}
+    )
 }
-
-
-// ---------------------------------------- index页面-----------------------------------------
-
-
+//申请入驻提交审核
+export const brandCertification = (query) => {
+    return apiResquest.postObj(
+        'toy.php',
+        query
+    )
+}
 
 
 

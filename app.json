@@ -35,7 +35,9 @@
     "pages/towAAddB/towAAddB",
     "pages/vipOrTicketNew/vipOrTicketNew",
     "pages/collectGiftBag/collectGiftBag",
-    "pages/smokeComponent/smokeComponent"
+    "pages/smokeComponent/smokeComponent",
+    "component/settledForm/settledForm",
+    "component/settledProgress/settledProgress"
   ],
   "subPackages": [
     {
@@ -146,8 +148,14 @@
         "pages/duoduomone/duoduomone",
         "pages/chaKanuid/chaKanuid",
         "pages/ballotList/ballotList",
-        "pages/payee/payee", 
+        "pages/payee/payee",
         "pages/gbaPage/gbaPage"
+      ]
+    },
+    {
+      "root": "page/settled/",
+      "pages": [
+        "pages/applySettled/applySettled"
       ]
     }
   ],

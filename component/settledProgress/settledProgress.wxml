@@ -1,0 +1,39 @@
+<!-- <view wx:if="{{num>0}}" class="afoHead">
+  <view class="{{num>0?'sel':''}}">
+      <view class="bdaiBoxImg">1<view class="markingLine"><view class="speedOfProgress" style="width:{{num>1?'100%':'50%'}};"></view></view></view>
+      <view class="bdaiBoxTxt">填写资料</view>
+  </view>
+  <view class="{{num>1?'sel':''}}">
+      <view class="bdaiBoxImg">2<view class="markingLine"><view wx:if="{{num>1}}" class="speedOfProgress" style="width:{{num>2?'100%':'50%'}};"></view></view></view>
+      <view class="bdaiBoxTxt">平台审核</view>
+  </view>
+  <view class="{{num>2?'sel':''}}">
+      <view class="bdaiBoxImg">3<view class="markingLine"><view wx:if="{{num>2}}" class="speedOfProgress" style="width:{{num>3?'100%':'50%'}};"></view></view></view>
+      <view class="bdaiBoxTxt">审核通过</view>
+  </view>
+  <view class="{{num>3?'sel':''}}">
+      <view class="bdaiBoxImg">4</view>
+      <view class="bdaiBoxTxt">领取补贴</view>
+  </view>
+</view> -->
+
+
+
+<view wx:if="{{num>0}}" class="afoHead">
+  <view class="{{num>0?'sel':''}}">
+      <view class="bdaiBoxImg">1<view class="markingLine"><view class="speedOfProgress" style="width:{{num>1?'100%':'50%'}};"></view></view></view>
+      <view class="bdaiBoxTxt">填写资料</view>
+  </view>
+  <view class="{{num>1?'sel':''}}">
+      <view class="bdaiBoxImg">2<view class="markingLine"><view wx:if="{{num>1}}" class="speedOfProgress" style="width:50%;"></view></view></view>
+      <view class="bdaiBoxTxt">平台审核</view>
+  </view>
+  <view>
+      <view class="bdaiBoxImg">3<view class="markingLine"></view></view>
+      <view class="bdaiBoxTxt">审核通过</view>
+  </view>
+  <view>
+      <view class="bdaiBoxImg">4</view>
+      <view class="bdaiBoxTxt">领取补贴</view>
+  </view>
+</view>

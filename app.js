@@ -1202,12 +1202,12 @@ App({
       return M + '.' + D + ' ' + h + ':' + m;
     }
   },
-  showToastC:function(title){
+  showToastC:function(title,duration=1500){
     wx.showToast({
       title: title,
       icon: 'none',
       mask:true,
-      duration:2000
+      duration:duration
     });    
   },
   showModalC:function(content,title){

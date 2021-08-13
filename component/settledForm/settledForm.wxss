@@ -1,0 +1,107 @@
+.borderbottom1{
+  border-bottom:2rpx solid #EEEDED;
+}
+/* 行样式 */
+.rowWrap{    
+  width: 100%;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.rowWrap .cEveTitle{
+  width: 40%;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 28rpx;
+}
+.rowWrap .cEveInput{
+  width: 60%;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 24rpx;
+  color: #777777;
+  padding-left: 12rpx;
+  box-sizing: border-box;
+  text-align: right;
+}
+.editIcon{
+  width: 40rpx;
+  height: auto;
+}
+/* 列样式 */
+.columnWrap{
+  width: 100%;
+  padding: 24rpx 20rpx 0 20rpx;
+  box-sizing: border-box;
+}
+.columnWrap .cEveTitle{
+  font-size: 28rpx;
+}
+.columnWrap .cEveInput{
+  height: 75rpx;
+  font-size: 22rpx;
+  color: #777777;
+  padding-left: 12rpx;
+  box-sizing: border-box;
+}
+
+
+.uploadWrap{
+  width: 140rpx;
+  height: 140rpx;
+  margin: 18rpx 0;
+  background: #F4F3F8;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.placeholderBox{
+  width: 100rpx;
+  height: 80rpx;
+  position: relative;
+  text-align: center;
+  padding-top: 20rpx;
+  box-sizing: border-box;
+}
+.placeholderBox image{
+  width: 34rpx;
+  height: auto;
+}
+.placeholderBox::after{
+  content: '添加';
+  width: 60rpx;
+  position: absolute;
+  top: 55rpx;
+  left: 50%;
+  margin-left: -30rpx;
+  font-size: 20rpx;
+  color: #A2A19F;
+}
+.textarea{
+  width: 100%;
+  font-size: 22rpx;
+  color: #777777;
+  min-height: 200rpx;
+  background-color: #F4F3F8;
+  margin: 18rpx 0;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+.tupian{
+  display: block;
+}
+.businessLicense{
+  width: 345rpx;
+  height: auto;
+}
+.ipLogo{
+  width: 140rpx;
+  height: auto;
+}
+.ipImage{
+  width: 320rpx;
+  height: auto;
+}

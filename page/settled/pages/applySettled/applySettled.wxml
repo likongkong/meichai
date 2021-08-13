@@ -1,0 +1,38 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class="applyForOccupancy">
+    <settledProgress num="{{num}}"></settledProgress>
+    <block wx:if="{{num == 1}}">
+        <view class="aFoCenter boxShadowEve">
+            <settledForm 
+            list="{{enterpriseData}}"
+            bind:bindchange="bindchange"
+            num="{{num}}"
+            brandInfo="{{brandInfo}}">
+            </settledForm>
+            <button class="submit" catchtap="submitAudit"> 提交审核 </button>
+        </view>
+    </block>
+    <block wx:elif="{{num == 2 || num == 3}}">
+        <view wx:if="{{num == 3}}" class="failCause">
+            您的营业执照照片不清晰，请重新上传。
+        </view>
+        <settledForm 
+            list="{{enterpriseData}}"
+            bind:bindchange="bindchange"
+            num="{{num}}"
+            brandInfo="{{brandInfo}}">
+        </settledForm>
+        <block>
+            <view wx:if="{{num == 2}}" class="footerAuditWrap">
+                <view>返回</view>
+                <view>修改资料</view>
+            </view>
+            <view wx:else class="footerFailWrap">
+                <view>返回</view>
+                <view>修改资料</view>
+            </view>
+        </block>
+    </block>
+</view>
