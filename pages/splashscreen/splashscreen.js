@@ -27,7 +27,9 @@ Page({
     imagewidth: 0,//缩放后的宽
     imageheight: 0,//缩放后的高 
     is_jump_index:false,
-    isInToToyShow:false
+    isInToToyShow:false,
+    selectedData:'',
+    num:2
   },
   imageLoad: function (e) {
     var imageSize = this.imageUtil(e)
@@ -39,7 +41,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-
+ 
   imageUtil: function (e) {
     var imageSize = {};
     var originalWidth = e.detail.width;//图片原始宽
@@ -82,11 +84,12 @@ Page({
   // 倒计时
   countdownfun:function(){
       var _this = this;
-      var num = 2;
+      var num = this.data.num;
       _this.data.timer = setInterval(function(){
         num--;
         _this.setData({
-          countdown:'跳过\n'+num+'s'
+          countdown:'跳过\n'+num+'s',
+          num:num
         });
         if (num <= 0) {
           clearInterval(_this.data.timer);
@@ -102,9 +105,18 @@ Page({
     clearInterval(this.data.timer);
     this.onLoadfun();
   },
+  jumpActivity(){   // 跳转活动
+    var selectedData = this.data.selectedData || {};
+    if(selectedData.item_type){
+      if(selectedData.item_type != 9025){
+        clearInterval(this.data.timer);
+      };
+      app.comjumpwxnav(selectedData.item_type, selectedData.href || '', selectedData.name || '', '')
+    };
+  },
   onLoad: function (options) {
     var _this = this;
-
+    console.log('onLoad======onLoad')
     if (options.scene) {
       let scene = decodeURIComponent(options.scene);
       app.signindata.referee = _this.getSearchString('referee', scene) || 0;
@@ -124,23 +136,28 @@ Page({
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
-        if(res.data && res.data.List && res.data.List.openscreen){
-          var openscreen = res.data.List.openscreen || [];
+        console.log('开机屏===',res)
+
+        if(res.data.Info){
           var isInToToyShow = res.data.Info.isInToToyShow || false;
           _this.setData({
             isInToToyShow:isInToToyShow
           });
-          var imgnum = Math.floor(Math.random() * openscreen.length) || 0;
+        };
+        if(res.data && res.data.List && res.data.List.openScreen){
+          var openScreen = res.data.List.openScreen || [];
+          var imgnum = Math.floor(Math.random() * openScreen.length) || 0;
           var nowTime = Date.parse(new Date());//当前时间戳
-          if(openscreen[imgnum]){
-            var imgUrl = openscreen[imgnum]+'?time=' + nowTime;
+          if(openScreen[imgnum]){
+            var imgUrl = openScreen[imgnum].litpic+'?time=' + nowTime;
             app.signindata.tgaimg = imgUrl;
             console.log('首页开机图片===========', res,imgnum,imgUrl)
             _this.setData({
-              imgUrl: imgUrl
+              imgUrl: imgUrl,
+              selectedData:openScreen[imgnum]
             });
           }
-          if(openscreen.length != 0){
+          if(openScreen.length != 0){
             _this.countdownfun();
           }else{
             _this.clickcountdownfun();
@@ -250,7 +267,12 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {},
+  onShow: function () {
+     console.log('onShow=====',this.data.selectedData)
+     if(this.data.selectedData && this.data.selectedData.item_type == 9025){
+       this.countdownfun();
+     }
+  },
 
   /**
    * 生命周期函数--监听页面隐藏
