@@ -116,7 +116,7 @@
     </view>
 
     <!-- 品牌入驻 -->
-    <view wx:if="{{!dataInfo.brandSettledLimit}}" class="whwdddw settled">
+    <!-- <view wx:if="{{!dataInfo.brandSettledLimit}}" class="whwdddw settled">
         <block wx:if="{{isSettledImg}}">
             <view class="settledImgWrap" data-type="{{dataInfo.brandSettledInfo.brandSettledStatus!=3?'9027':'9028'}}" data-whref="id={{dataInfo.brandSettledInfo.brandSettledId}}&num={{dataInfo.brandSettledInfo.brandSettledStatus}}&msg={{dataInfo.brandSettledInfo.brandSettledReturnMsg}}" catchtap="comjumpwxnav">
                 <image class="settledImg" src="https://cdn.51chaidan.com/images/brandSettledIcon/audit{{dataInfo.brandSettledInfo.brandSettledStatus==1?'0':dataInfo.brandSettledInfo.brandSettledStatus==2?'1':dataInfo.brandSettledInfo.brandSettledStatus==3?'3':'2'}}.png" mode="widthFix"></image>
@@ -132,7 +132,7 @@
                 </view>                   
             </view>
         </block>
-    </view>
+    </view> -->
 
     <view class='whwdddw' bindtap='jumpowntoy'>
         <view class='whwddd'>

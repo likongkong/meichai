@@ -22,8 +22,7 @@
 </view>
 
 <view class='sponsor' style='margin:10rpx 0 4rpx 0;'>
-  <!-- !isFocusPublic -->
-  <view class='sponsorone' wx:if='{{false}}' catchtap="jumpWebview" data-url="http://mp.weixin.qq.com/s?__biz=MzUyNzMyNTg4Ng==&mid=100000975&idx=1&sn=ef370685e8a3c081684671ae961d16a7&chksm=7a000b1e4d77820819a1b4a07cc00432f987b0f79b798cef886ecdb4fffbd07ce2054c6689b1#rd" >
+  <view class='sponsorone' wx:if='{{!isFocusPublic}}' catchtap="jumpWebview" data-url="https://mp.weixin.qq.com/s?__biz=MzI2Mzg4MDYzNQ==&mid=100025691&idx=1&sn=2cd79db528e41d2f4a3923216551608a&chksm=6ab7cf8f5dc04699ddecac22a744ac2f3029302d18a823c97e2497807295252418e9a29fb896#rd" >
       <text style="padding-left:50rpx;">关注美拆公众号及时获取中奖信息</text>
       <view class="sponsoroneButton">关注</view>
   </view> 
