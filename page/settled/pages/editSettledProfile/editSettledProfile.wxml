@@ -1,0 +1,20 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class="applyForOccupancy">
+    <block wx:if="{{num == 4}}">
+        <settledForm 
+            list="{{enterpriseData}}"
+            bind:bindchange="bindchange"
+            num="{{num}}"
+            isEdit="true"
+            brandInfo="{{brandInfo}}">
+        </settledForm>
+        <block>
+            <view class="footerFailWrap">
+                <view data-num="1" catchtap="navigateBack">返回</view>
+                <view catchtap="submitAudit">提交</view>
+            </view>
+        </block>
+    </block>
+</view>

@@ -1,6 +1,17 @@
 .borderbottom1{
   border-bottom:2rpx solid #EEEDED;
 }
+.flex{
+  display: flex;
+  align-items: flex-end;
+}
+.marginTB25{
+  margin: 25rpx 0;
+}
+.paddingL80{
+  padding-left: 80rpx !important;
+  box-sizing: border-box;
+}
 /* 行样式 */
 .rowWrap{    
   width: 100%;
@@ -41,7 +52,7 @@
 }
 .columnWrap .cEveInput{
   height: 75rpx;
-  font-size: 22rpx;
+  font-size: 24rpx;
   color: #777777;
   padding-left: 12rpx;
   box-sizing: border-box;
@@ -104,4 +115,13 @@
 .ipImage{
   width: 320rpx;
   height: auto;
+}
+.uploadAgainText{
+  background:#8BCFFD;
+  display: inline-block;
+  font-size: 26rpx;
+  border-radius: 6rpx;
+  color: #ffffff;
+  padding: 6rpx 10rpx;
+  margin-left: 20rpx;
 }

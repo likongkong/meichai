@@ -241,7 +241,7 @@ Page({
       // url: "/pages/dismantlingbox/dismantlingbox"
       // url: "/page/secondpackge/pages/shopsquaretrip/shopsquaretrip"
       // url: "/pages/topfunction/topfunction"
-      url: "/page/settled/pages/applySettled/applySettled?num=3"
+      url: "/page/settled/pages/perfectSettledProfile/perfectSettledProfile"
       // url: "/pages/vipOrTicket/vipOrTicket?isv=1"
       // url: "/pages/vipOrTicketNew/vipOrTicketNew?isv=1"
       // url: "/pages/collectGiftBag/collectGiftBag?isv=1" 

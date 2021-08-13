@@ -798,9 +798,19 @@ App({
           url: whref
         });
       };
-    };
-
-
+    } else if (item_type == 9026) { 
+      wx.navigateTo({
+        url: `/page/settled/pages/editSettledProfile/editSettledProfile?${whref}`
+      });
+    } else if (item_type == 9027) { 
+      wx.navigateTo({
+        url: `/page/settled/pages/applySettled/applySettled?${whref}`
+      });
+    } else if (item_type == 9028) { 
+      wx.navigateTo({
+        url: `/page/settled/pages/perfectSettledProfile/perfectSettledProfile?${whref}`
+      });
+    }
   },
   // 中奖提示倒计时
   winningtheprizetime: function (_this) {
@@ -1217,6 +1227,12 @@ App({
     } else {
       return M + '.' + D + ' ' + h + ':' + m;
     }
+  },
+  // 返回n页
+  navigateBack(num){
+    wx.navigateBack({
+      delta: num
+    })
   },
   showToastC:function(title,duration=1500){
     wx.showToast({

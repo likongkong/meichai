@@ -84,7 +84,19 @@ Page({
     blindbox_money:0,
     // 是否请求完成
     requestCompleted:false,
-    showVipStatus:1
+    showVipStatus:1,
+    isSettledImg:true
+  },
+  closeSettledImg(){
+    this.setData({
+      isSettledImg: false
+    })
+  },
+  comjumpwxnav(e){
+    console.log(e)
+    let type = e.currentTarget.dataset.type;
+    let whref = e.currentTarget.dataset.whref;
+    app.comjumpwxnav(type,whref)
   },
   jumpVipPrivilegePage(){
     wx.navigateTo({  
@@ -174,10 +186,6 @@ Page({
       }
     })
   },
-
-
-
-
   wodesblist:function(){
     app.comjumpwxnav(988,'','','')
   },
@@ -304,6 +312,7 @@ Page({
         if (res.data.Message != "Empty info") {
           if (res.data.ReturnCode == 200){
             _this.setData({
+              dataInfo: res.data.Info,
               vipAdvertising: res.data.Info.vipAdvertising||'',
               // 待付款
               nonpayment: res.data.Info.non_payment||0,
@@ -338,6 +347,24 @@ Page({
             app.signindata.blindboxMoney = res.data.Info.blindbox_money||0,
             app.signindata.tempBlindboxMoney = res.data.Info.tempBlindboxMoney||0;
             _this.data.after_sale = res.data.Info.after_sale || 0;// 售后数
+
+            let info = res.data.Info;
+            if(info.brandSettledInfo && info.brandSettledInfo.brandSettledStatus == 3){
+              wx.showModal({
+                title: '审核通过',
+                content: '需要您完善IP基本信息，小程序才可进行展示您的IP。',
+                cancelText:'关闭',
+                confirmText:'完善信息',
+                confirmColor:'#02BB00',
+                success (res) {
+                  if (res.confirm) {
+                    console.log('用户点击确定')
+                    let whref = `id=${info.brandSettledInfo.brandSettledId}&num=${info.brandSettledInfo.brandSettledStatus}`;
+                    app.comjumpwxnav(9028,whref)
+                  }
+                }
+              })
+            }
           };
         // 判断非200和登录
         Dec.comiftrsign(_this, res, app);            
