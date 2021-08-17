@@ -10,6 +10,7 @@ Page({
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
+    windowHeight: app.signindata.windowHeight - wx.getStorageSync('statusBarHeightMc')||0,
     enterpriseData:[
       {
         isRequired:true,
@@ -101,6 +102,14 @@ Page({
         brandSettledReturnMsg:options.msg
       })
     }
+    // 获取系统信息
+    wx.getSystemInfo({
+      success: (res) => {
+        this.setData({
+          contentHeight:(res.windowHeight - this.data.statusBarHeightMc)-85,
+        });
+      }
+    });
   },
 
   /**
@@ -137,6 +146,8 @@ Page({
   onPullDownRefresh: function () {
     if(this.data.num==2 || this.data.num==4){
       this.getBrandInfo()
+    }else{
+      wx.stopPullDownRefresh();
     }
   },
 
@@ -249,7 +260,7 @@ Page({
       return false;
     }
     if(!obj.ipName || obj.ipName == ''){
-      app.showToastC('请输入IP联系人',1500);
+      app.showToastC('请输入IP名称',1500);
       return false;
     }
     if(!obj.ipLogo || obj.ipLogo == ''){

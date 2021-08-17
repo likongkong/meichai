@@ -14,7 +14,7 @@
     </settledForm>
   </view>
   <block>
-      <view class="footerFailWrap">
+      <view class="footerWrap">
           <!-- <view data-num="1" catchtap="navigateBack">返回</view> -->
           <view catchtap="submitAudit">提交</view>
           <text data-num="1" catchtap="navigateBack">暂不填写</text>

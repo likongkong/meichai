@@ -1,12 +1,12 @@
 .applyForOccupancy{
-  padding-bottom: 50rpx; 
+  /* padding-bottom: 210rpx;  */
 }
 .aFoCenter{
   width: 690rpx;
   margin: auto;
   background:#fff;
   border-radius: 15rpx;
-  padding-bottom: 40rpx;
+  padding-bottom: 20rpx;
 }
 .failCause{
   width: 100%;
@@ -18,26 +18,41 @@
   padding-left: 20rpx;
   box-sizing: border-box;
 }
+.submitWrap{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 190rpx;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  z-index: 100;
+}
 .submit{
-  width: 90%;
+  width: 84%;
   height: 90rpx;
   line-height: 90rpx;
   background: #90D2D6;
   border-radius: 14rpx;
   color: #fff;
   font-size: 26rpx;
-  margin-top: 60rpx;
 }
 .submit::after{
   border: none;
 }
 
 .footerAuditWrap,.footerFailWrap{
-  padding: 0 35rpx;
+  padding: 20rpx 35rpx 40rpx 35rpx;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
-  margin-top: 34rpx;
+  position:fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  z-index: 100;
 }
 .footerAuditWrap view{
   width: 48%;

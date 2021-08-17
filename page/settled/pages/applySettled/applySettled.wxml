@@ -1,10 +1,11 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
-<view class="applyForOccupancy">
+<view class="applyForOccupancy" style="padding-bottom: {{num!=1?'150':'210'}}rpx;">
     <settledProgress num="{{num}}"></settledProgress>
     <block wx:if="{{num == 1}}">
         <view class="aFoCenter boxShadowEve">
+        <!-- <scroll-view scroll-y style="height:{{contentHeight-105}}px;"> -->
             <settledForm 
             list="{{enterpriseData}}"
             bind:bindchange="bindchange"
@@ -12,6 +13,9 @@
             isEdit="{{false}}"
             brandInfo="{{brandInfo}}">
             </settledForm>
+        <!-- </scroll-view> -->
+        </view>
+        <view class="submitWrap">
             <button class="submit" catchtap="submitAudit"> 提交审核 </button>
         </view>
     </block>

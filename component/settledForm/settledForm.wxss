@@ -52,7 +52,7 @@
 }
 .columnWrap .cEveInput{
   height: 75rpx;
-  font-size: 24rpx;
+  font-size: 26rpx;
   color: #777777;
   padding-left: 12rpx;
   box-sizing: border-box;
@@ -105,7 +105,7 @@
   display: block;
 }
 .businessLicense{
-  width: 345rpx;
+  width: 140rpx;
   height: auto;
 }
 .ipLogo{
@@ -113,7 +113,7 @@
   height: auto;
 }
 .ipImage{
-  width: 320rpx;
+  width: 140rpx;
   height: auto;
 }
 .uploadAgainText{
