@@ -1,5 +1,6 @@
 
 var Dec = require('../../../../common/public');//aes加密解密js
+var tcity = require("../../../../common/citys.js");
 const app = getApp();
 Page({
   /**
@@ -13,7 +14,7 @@ Page({
     uid:'',
     loginid:'',
     testArr:[1111,22222,33333,44444,555555,66666,1111,22222,33333,44444,555555,66666],
-    topIndex:0,
+    brandid:0,
     ordername:'',
     centerIndex:0,
     scrollleft:0,
@@ -21,6 +22,118 @@ Page({
     logisticsRefundModify:4, // 1 修改 2 退款 3 物流 4批量导出订单
     scanCodeMsg: "",
     commonBulletFrame:false, // 公共弹框
+    // 省市联动数据
+    provinces: [],
+    province: "",
+    citys: [],
+    city: "",
+    countys: [],
+    county: '',
+    value: [0, 0, 0],
+    values: [0, 0, 0],
+    condition: false,
+    cityback:false, 
+    brand:[
+      {
+        "brandId": 569,
+        "brandName": "SOUR LEMON-CLUB",
+        "brandLogo": "https://cdn.51chaidan.com/images/toyShow2/logo/20200730/e16e884b941e1eb262c26463dbd3cde0.jpg"
+      },
+      {
+        "brandId": 570,
+        "brandName": "怪猴子（Super Monkey）",
+        "brandLogo": "https://cdn.51chaidan.com/images/toyShow3/logo/20210104/45db5c3f5351e32701ac832cba819667.jpg"
+      }
+    ] 
+  },
+  open: function (options) {
+    // 省市联动
+    var _this = this;
+    tcity.init(_this);
+    var cityData = _this.data.cityData;
+    const provinces = [];
+    const citys = [];
+    const countys = [];
+    for (let i = 0; i < cityData.length; i++) {
+      provinces.push(cityData[i].name);
+    }
+    for (let i = 0; i < cityData[0].sub.length; i++) {
+      citys.push(cityData[0].sub[i].name)
+    }
+    for (let i = 0; i < cityData[0].sub[0].sub.length; i++) {
+      countys.push(cityData[0].sub[0].sub[i].name)
+    }
+    _this.setData({
+      'provinces': provinces,
+      'citys': citys,
+      'countys': countys,
+      'province': options.province || '天津市',
+      'city': options.city || '天津市',
+      'county': options.district || '河东区'
+    })
+    setTimeout(() => {
+      this.setData({
+        condition: !this.data.condition,
+        cityback: !this.data.cityback
+      }) 
+    }, 2000);
+
+  },  
+  // 省市联动
+  bindChange: function (e) {
+    var val = e.detail.value
+    var t = this.data.values;
+    var cityData = this.data.cityData||[];
+
+    if (val[0] != t[0]) {
+      const citys = [];
+      const countys = [];
+
+      for (let i = 0; i < cityData[val[0]].sub.length; i++) {
+        citys.push(cityData[val[0]].sub[i].name)
+      }
+      for (let i = 0; i < cityData[val[0]].sub[0].sub.length; i++) {
+        countys.push(cityData[val[0]].sub[0].sub[i].name)
+      }
+
+      this.setData({
+        province: this.data.provinces[val[0]],
+        city: cityData[val[0]].sub[0].name,
+        citys: citys,
+        county: cityData[val[0]].sub[0].sub[0].name,
+        countys: countys,
+        values: val,
+        value: [val[0], 0, 0]
+      })
+
+      return;
+    }
+    if (val[1] != t[1]) {
+      const countys = [];
+
+      for (let i = 0; i < cityData[val[0]].sub[val[1]].sub.length; i++) {
+        countys.push(cityData[val[0]].sub[val[1]].sub[i].name)
+      }
+
+      this.setData({
+        city: this.data.citys[val[1]],
+        county: cityData[val[0]].sub[val[1]].sub[0].name,
+        countys: countys,
+        values: val,
+        value: [val[0], val[1], 0]
+      })
+      return;
+    }
+    if (val[2] != t[2]) {
+      this.setData({
+        county: this.data.countys[val[2]],
+        values: val,
+        value: val
+      })
+      return;
+    }
+
+
   },
   // 跳转详情
   jumpBusOrderDetails(){
@@ -92,12 +205,12 @@ Page({
   },  
 
   scrollViewTop(e){
-    var index = e.currentTarget.dataset.index;
+    var brandid = e.currentTarget.dataset.brandid;
     this.setData({
-      topIndex:index
+      brandid:brandid
     });
     let that = this;
-    let top = '#top' + index;
+    let top = '#top' + brandid;
     //创建节点选择器
     var query = wx.createSelectorQuery();
     //选择id
@@ -125,7 +238,9 @@ Page({
       _this.onLoadfun();
     } else {
       app.signin(_this)
-    }
+    };
+
+
   },
   onLoadfun(){
     var _this = this;
@@ -137,6 +252,10 @@ Page({
       isProduce: app.signindata.isProduce,
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
     });
+  },
+  // 获取数据
+  getData(){
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
