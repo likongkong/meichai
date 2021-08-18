@@ -1,17 +1,21 @@
 var Aes = require('crypto-js.js');  //引用AES源码js
 
-var env = 'online';   //线上
-// var env = 'test';  //测试
+// var env = 'online';   //线上
+var env = 'test';  //测试
 var versionnumber = '12.7.1';
 
 var key = env=='online'?Aes.enc.Utf8.parse("danzhuan1chaijia"):Aes.enc.Utf8.parse("danzhuanichaijia");
 // 公共地址 接口
 function comurl() {
-  return env=='online'?'https://api.51chaidan.com/':'http://api-test.51chaidan.com/' 
+  return env=='online'?'https://api.51chaidan.com/':'http://api-test.51chaidan.com/';
 }
+// 公共地址 接口
+function comUrlNew() {
+  return env=='online'?'https://api-api.51chaidan.com/':'https://api.mwdphp.cn/'; 
+} 
 //拼图 公共地址 接口
 function clwcomurl(){  
-  return env=='online'?'https://clw.51chaidan.com/':'http://clw-test.51chaidan.com/'
+  return env=='online'?'https://clw.51chaidan.com/':'http://clw-test.51chaidan.com/';
 }
 // 公共地址 图片
 function zdyurl() {
@@ -181,3 +185,4 @@ module.exports.env = env;
 module.exports.versionnumber = versionnumber;
 module.exports.clwcomurl = clwcomurl;
 module.exports.shareWechatMoments = shareWechatMoments;
+module.exports.comUrlNew = comUrlNew;

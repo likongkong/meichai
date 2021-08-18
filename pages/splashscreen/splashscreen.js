@@ -163,6 +163,8 @@ Page({
             _this.clickcountdownfun();
           };
           
+        }else{
+          _this.clickcountdownfun();
         };    
       },
       fail: function (res) {}

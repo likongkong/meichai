@@ -4,59 +4,190 @@
 <view class="omBox">
     <view class="centerTxtOrderDeatail">
             <view class="orderBoxTop">
-                <view>订单编号:2021121255669987</view>
-                <view style="color:#90D2D6;">待发货</view>
+                <view>订单编号:{{detailData.order.orderSN}}</view>
+                <view style="color:#90D2D6;">{{detailData.order.payStatusName}}</view>
             </view>
             <view class="orderBoxContent" style="border-bottom:0;">
-                <image class="orderBoxContentImg" src="https://cdn.51chaidan.com/images/202108/thumb_img/38671_thumb_G_1628511508234.jpg" mode="aspectFit"></image>
+                <image class="orderBoxContentImg" src="{{detailData.goods.goodsThumb}}" mode="aspectFit"></image>
                 <view class="orderBoxContentRight">
                     <view class="obcrTop">
-                        <view style="padding-right:10rpx;">婚礼濑濑婚礼濑濑婚礼濑濑婚礼濑濑婚礼濑濑婚礼濑濑婚礼濑濑</view>
+                        <view style="padding-right:10rpx;">{{detailData.goods.goodsName}}</view>
                         <view></view>
                     </view>
                     <view class="obcrBottom obcrTop">
                         <view></view>
-                        <view style="font-size:30rpx">付款金额￥199.00</view>
+                        <view style="font-size:30rpx">付款金额￥{{detailData.order.orderAmount}}</view>
                     </view>
                 </view>
             </view>
     </view>
 
     <view class="centerTxtOrderDeatail comPaddingTop">
-        <view class="orderAddressEve">收货人:张三</view>
-        <view class="orderAddressEve">收货手机号：18840645566</view>  
-        <view class="orderAddressEve">收货地址：中国北京市朝阳区东四环小武基北路中国北京市朝阳区东四环小武基北路</view>     
-        <view class="orderAddressEve">备注：</view>                   
+        <view class="orderAddressEve">收货人：{{detailData.receipt.consignee}}</view>
+        <view class="orderAddressEve">收货手机号：{{detailData.receipt.mobile}}</view>  
+        <view class="orderAddressEve">收货地址：{{detailData.receipt.address}}</view>     
+        <view class="orderAddressEve">备注：{{detailData.order.customerMessage}}</view>                   
     </view>
 
     <view class="centerTxtOrderDeatail comPaddingTop">
-        <view class="orderAddressEve">下单时间：2021/01/01 12:00:00</view>
-        <view class="orderAddressEve">支付时间：2021/01/01 12:00:00</view>                   
+        <view class="orderAddressEve">下单时间：{{detailData.order.addTimeTrans}}</view>
+        <view class="orderAddressEve">支付时间：{{detailData.order.payTimeTrans}}</view>                   
     </view>
 
     <view class="centerTxtOrderDeatail comPaddingTop">
-        <view class="orderAddressEve">发货形式：预售</view>
-        <view class="orderAddressEve">预计发货日期：2021/01/01 12:00:00</view> 
-        <view class="orderAddressEve">邮寄形式：包邮</view>
-        <view class="orderAddressEve">是否保价：是</view>
+        <view class="orderAddressEve" wx:if='{{detailData.goods.isBooking}}'>发货形式：预售</view>
+        <view class="orderAddressEve" wx:if='{{detailData.goods.deliverTimeTrans}}'>预计发货日期：{{detailData.goods.deliverTimeTrans}}</view> 
+        <view class="orderAddressEve">邮寄形式：{{detailData.goods.shippingFeeName}}</view>
 
     </view>
 
     <view class="centerTxtOrderDeatail comPaddingTop">
-        <view class="orderAddressEve">实际发货日期：2021/01/01 12:00:00</view>
-        <view class="orderAddressEve">快递公司：顺丰</view> 
-        <view class="orderAddressEve">运单号：SH753951554</view>
+        <view class="orderAddressEve">实际发货日期：{{detailData.order.shippingTimeTrans}}</view>
+        <view class="orderAddressEve">快递公司：{{detailData.order.shippingName}}</view> 
+        <view class="orderAddressEve">运单号：{{detailData.order.shippingCode}}</view>
     </view>
 
 
     <view class="orderBottomNavigation">
-        <view class="orderBottomNavEve bottomButComWidth">添加物流</view>
-        <view class="orderBottomNavEve bottomButComWidth">退款</view>
-        <view class="orderBottomNavEve bottomButComWidth">修改收货地址</view>
+        <view class="orderBottomNavEve bottomButComWidth" catchtap="commonBulletFrameFun" data-index='3'>添加物流</view>
+        <view class="orderBottomNavEve bottomButComWidth" catchtap="commonBulletFrameFun" data-index='2'>退款</view>
+        <view class="orderBottomNavEve bottomButComWidth" catchtap="commonBulletFrameFun" data-index='1'>修改收货地址</view>
     </view>
 
 
 
 </view>
 
+
+
+<!-- 弹框  1 修改 2 退款 3 物流 4 批量导出订单-->
+<view class="wshNew" catchtouchmove="true" wx:if='{{commonBulletFrame}}' catchtap="closeCommonTip">
+    <view class="orderMangAddress" catchtap="true">
+        <view class="orderMangTipTop">
+            <block wx:if='{{logisticsRefundModify == 1}}'>修改收货地址</block>
+            <block wx:elif='{{logisticsRefundModify == 2}}'>退款</block>
+            <block wx:elif='{{logisticsRefundModify == 3}}'>添加物流</block>
+            <block wx:elif='{{logisticsRefundModify == 4}}'>批量导出订单</block>
+            <block wx:elif='{{logisticsRefundModify == 5}}'>批量导入运单</block>
+        </view>
+        <!-- 修改地址 -->
+        <block wx:if='{{logisticsRefundModify == 1}}'>
+            <view class="orderMangTipCenter">
+                <view class="orderMangTipCenterEve">
+                    <view class="leftEveheight">收货人</view>
+                    <view>
+                        <input class="addressModifyInput" bindinput='namefun' type='text' value='{{modifyName}}' type="text"></input>
+                        <image class="addressMoImg" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="aspectFit"></image>
+                    </view>
+                </view>
+                <view class="orderMangTipCenterEve">
+                    <view class="leftEveheight">收货手机号</view>
+                    <view>
+                        <input class="addressModifyInput" type="text" value='{{modifyMobile}}' bindinput='telfun'></input>
+                        <image class="addressMoImg" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="aspectFit"></image>
+                    </view>
+                </view>
+                <view class="orderMangTipCenterEve">
+                    <view class="leftEveheight">所在地区</view>
+                    <view>
+                        <view catchtap='open' class="addressModifyInput">{{province}}-{{city}}-{{county}}</view>
+                        <image class="addressMoImg" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="aspectFit"></image>
+                    </view>
+                </view>
+
+                <view class="orderMangTipCenterEve" style="height:110rpx;">
+                    <view class="leftEveheight">收货地址</view>
+                    <view>
+                        <textarea class="addressModifytTa" value='{{deladdress}}' bindinput='deladdressfun' name='address'></textarea>
+                        <image class="addressMoImg" style="margin:0 0 0 10rpx;" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="aspectFit"></image>
+                    </view>
+
+                </view>
+            </view>            
+        </block>
+        <!-- 退款 -->
+        <block wx:elif='{{logisticsRefundModify == 2}}'>
+            <view class="refundTxt">确认退款之后将关闭订单，订单金额将在72小时之内原路返回到支付账户上</view>          
+        </block>
+        <!-- 添加物流 -->
+        <block wx:elif='{{logisticsRefundModify == 3}}'>
+            <view class="orderMangTipCenter">
+                <view class="orderMangTipCenterEve">
+                    <view>商品名称</view>
+                    <view>{{selectData.goods.goodsName}}</view>
+                </view>
+                <view class="orderMangTipCenterEve">
+                    <view>购买数量</view>
+                    <view>{{selectData.order.goodsNumber}}件</view>
+                </view>
+                <view class="addLogisticsTxt">
+                    <view class="orderMangTipCenterEve">
+                        <view>收货人</view>
+                        <view>{{selectData.receipt.consignee}}</view>
+                    </view>
+                    <view class="orderMangTipCenterEve">
+                        <view>收货人手机号</view>
+                        <view>{{selectData.receipt.mobile}}</view>
+                    </view>
+                    <view class="orderMangTipCenterEve">
+                        <view>收货地址</view>
+                        <view style="width:380rpx;text-align:right;">{{selectData.receipt.address}}</view>
+                    </view>                    
+                </view>
+                <view class="orderMangTipCenterEve" style="padding:30rpx 0;">
+                    <view>请输入快递公司及运单号</view>
+                </view>
+                <view class="orderMangTipCenterEve">
+                    <input class="addWaybillNumber" type="text" value='{{csc}}' bindinput='cscfun' placeholder="快递公司" ></input>
+                </view>
+                <view class="orderMangTipCenterEve">
+                    <input class="addWaybillNumber" type="text" placeholder="快递运单号" bindinput='scancodefun' value="{{scanCodeMsg}}"></input>
+                    <image class="scanCode" bindtap='scanCode' src="https://cdn.51chaidan.com/images/brandSettledIcon/scan.png" mode="aspectFit"></image>
+                </view>       
+            </view>
+        </block>
+        <!-- 批量导出订单 -->
+        <block wx:elif='{{logisticsRefundModify == 4}}'>
+            <text class="batchExportOrder">导出订单步骤：
+            第一步：点击“复制下载链接”。
+            第二步：在手机/电脑浏览器输入复制的下载链接，开始下载。
+            第三步：下载完成，打开文件，进行编辑。
+            </text>          
+        </block>
+        <view class="orderMangTipCenterEve" style="width:610rpx;margin:auto;">
+            <block wx:if='{{logisticsRefundModify == 4}}'>
+                <view class="oAMaBConfirm" catchtap="closeCommonTip">关闭</view>
+                <view class="oAMaBCancel">复制下载链接</view> 
+            </block>
+            <block wx:else>
+                <view class="oAMaBConfirm" catchtap="closeCommonTip">取消</view>
+                <view class="oAMaBCancel" catchtap="confirmCommonTip">确定</view>               
+            </block>
+        </view>
+    </view>
+
+
+
+
+</view>
+
+<!--  省市联动  -->
+<view class='citybackg' wx:if='{{cityback}}'></view>
+<view wx:if="{{condition}}" class="citypicker">
+  <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange" class="citybody">
+    <view class="cityheader">
+      <view bindtap="open" class="city-cancel">取消</view>
+      <view bindtap="open" class="city-true">确定</view>
+    </view>
+    <picker-view-column>
+      <view wx:for="{{provinces}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{citys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{countys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item}}</view>
+    </picker-view-column>
+  </picker-view>
+</view>
 
