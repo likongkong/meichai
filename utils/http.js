@@ -26,7 +26,7 @@ const request = (url, options) => {
                 var currPage = pages[pages.length - 1];
                 console.log('============pages',pages)
                 wx.removeStorageSync('access_token') // 同步删除缓存
-                currPage.onLoad();
+                currPage.onLoadfun();
               } else if(request.data.status_code == 200){
                 resolve(request);
                 if(request.header.Authorization){
