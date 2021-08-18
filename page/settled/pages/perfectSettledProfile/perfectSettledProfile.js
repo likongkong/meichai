@@ -36,7 +36,7 @@ Page({
         isRequired:true,
         type:'textarea',
         subtitle:'IP介绍',
-        placeholder:'请输入专区介绍',
+        placeholder:'请输入IP介绍',
         value:'',
         name:'introduce',
       },{
@@ -89,6 +89,14 @@ Page({
     obj:{},
     num:4,
     brandInfo:{}, //品牌信息
+    isSampleGraphMask:false
+  },
+
+  toggleSampleGraphMask(){
+    console.log(11111)
+    this.setData({
+      isSampleGraphMask:!this.data.isSampleGraphMask
+    })
   },
 
   /**

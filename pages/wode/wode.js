@@ -93,10 +93,14 @@ Page({
     })
   },
   comjumpwxnav(e){
-    console.log(e)
     let type = e.currentTarget.dataset.type;
+    let num = e.currentTarget.dataset.num;
     let whref = e.currentTarget.dataset.whref;
-    app.comjumpwxnav(type,whref)
+    if(num == 1){
+      app.comjumpwxnav('9029',whref)
+    }else{
+      app.comjumpwxnav(type,whref)
+    }
   },
   jumpVipPrivilegePage(){
     wx.navigateTo({  

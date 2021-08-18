@@ -14,8 +14,8 @@
         <block>
           <view wx:if="{{item.src != ''}}" class="flex marginTB25">
             <image 
-              class="tupian {{item.name == 'businessLicense'?'businessLicense':item.name == 'ipLogo'?'ipLogo':'ipImage'}}" 
-              src="{{item.src}}?imageMogr2/crop/140x140/gravity/cente" 
+              class="tupian" 
+              src="{{item.src}}?imageMogr2/crop/168x168/gravity/cente" 
               mode="widthFix">
             </image>
             <text wx:if="{{item.isEdit?false:isEdit}}" class="uploadAgainText">重新上传</text>

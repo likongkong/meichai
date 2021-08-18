@@ -71,7 +71,7 @@ Page({
         isRequired:false,
         type:'textarea',
         subtitle:'IP介绍',
-        placeholder:'请输入专区介绍',
+        placeholder:'请输入IP介绍',
         value:'',
         name:'introduce',
         borderbottom1:'hide'
