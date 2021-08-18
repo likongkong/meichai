@@ -5,119 +5,82 @@
 <view class='dlfbox' style="{{dlhintiftr?'position:fixed;top:0;left:0;right:0;bottom:0;':''}}">
   <view class='dlfhead'>
 
-    <view class="elsearch" wx:if='{{cat_id==2&&elsearch}}'>
-       <view class="elsearchch">
-           <image class="elserarchimg" catchtap="jumpsearch" src="https://www.51chaidan.com/images/toyCabinet/search.png"></image>
-           <input class="elinputbut" bindfocus='onFocus' placeholder='请输入品牌名称搜索' bindinput="inputChange" bindconfirm="jumpsearch" value="{{brand_name}}"></input>
-           <view class="elserbotom" catchtap="jumpsearch">搜索</view>
-       </view>
-    </view>
-
-    <view class='dlfheadtab'>
-
-      <block wx:if='{{cat_id==3&&isPunchTheClock}}'>
-          <view class='dlfheadrhimg' style='right:20rpx;color:#ff2742;font-size:24rpx;text-decoration:underline;width:130rpx;line-height:50rpx;text-align:center;font-weight:bold;' catchtap='jumpshopqueque'>我要打卡</view>      
-      </block>
-      <block wx:else>
-          <block wx:if='{{cat_id==2}}'><image src='https://www.51chaidan.com/images/toyCabinet/search.png' class='dlfheadrhimg' catchtap='elsearchfun'></image></block>
-          <block wx:else>
-          <!-- <image src='../../../../pages/images/explain.png' class='dlfheadrhimg' catchtap='dlhintfun'></image> -->
-          </block>
-          
-          <!-- right:120rpx; -->
-          <view class='dlfheadrhimg' style='right:20rpx;' catchtap='jumpdlnotice' wx:if='{{cat_id!=2}}'>
-            <image style='display:block;width:100%;height:100%;' src='https://clw.51chaidan.com/images/goods/remind.png'></image>
-            <view style='width:30rpx;height:30rpx;line-height:30rpx;position:absolute;top:-15rpx;right:-10rpx;border:2rpx solid #ff0000;border-radius:50%;background:#fff;font-size:24rpx;color:#ff0000;text-align:center;' wx:if='{{commentNumber&&commentNumber!=0}}'>{{commentNumber}}</view>
-          </view>      
-      </block>
-
-
-      <view class='dlfhlrcom' wx:if='{{isOpenToyShow&&false}}' style='{{cat_id==3?"font-size:36rpx;":""}}' data-tab='3' catchtap='daltabhfun'>
-        MCTS
-        <view wx:if='{{cat_id==3}}' class='dlfhrcombot'></view>
-      </view>
-      <view class='dlfhlrcom' style='{{cat_id==2?"font-size:36rpx;":""}}' data-tab='2' catchtap='daltabhfun'>
-        最新
-        <view wx:if='{{cat_id==2}}' class='dlfhrcombot'></view>
-      </view>
-      <view class='dlfhlrcom' style='{{cat_id==0?"font-size:36rpx;":""}}' data-tab='0' catchtap='daltabhfun'>
-        分享
-        <view wx:if='{{cat_id==0}}' class='dlfhrcombot'></view>
-      </view>
-      <view class='dlfhlrcom' style='{{cat_id==1?"font-size:36rpx;":""}}' data-tab='1' catchtap='daltabhfun'>
-        关注
-        <view wx:if='{{cat_id==1}}' class='dlfhrcombot'></view>
-      </view>
-    </view>
-
-    <block wx:if='{{cat_id==3}}'>
-      <view class="main" style="{{mctslist.length==0&&nodataiftr?'padding: 0 30rpx 0 30rpx':''}}">
-        <!-- 左边 -->
-        <view style="float: left;">
-          <block wx:for='{{mctslist}}' wx:key='key' wx:if="{{index%2==0}}">
-            <view class="item" style="{{item.finishLoadFlag?'':'height:326rpx'}}">
-              <image bindload="finishLoad" data-ind='{{index}}' class="itemImg" src="{{item.clockin_img}}" mode="widthFix"></image>
-              <view class="itemBox">
-                <view class="">
-                  <image class="avatar" src="{{item.litpic}}"></image>
-                  <text class="userName">{{item.nick}}</text>
-                </view>
-                <view catchtap="likeClick" data-id="{{item.id}}" data-index="{{index}}" data-support="{{item.is_support}}">
-                  <text class="likenum">{{item.support_num>0?item.support_num:''}}</text>
-                  <image class="like" src="{{item.is_support==1?'https://www.51chaidan.com/images/brand/black_heart.png':'https://www.51chaidan.com/images/brand/red_heart.png'}}"></image>
-                </view>
-              </view>
-            </view>
-          </block>
-        </view>
-        <!-- 右边 -->
-        <view style="float: right;">
-          <block wx:for='{{mctslist}}' wx:key='key' wx:if="{{index%2==1}}">
-            <view class="item" style="{{item.finishLoadFlag?'':'height:326rpx'}}">
-              <image bindload="finishLoad" data-ind='{{index}}' class="itemImg" src="{{item.clockin_img}}" mode="widthFix"></image>
-              <view class="itemBox">
-                <view class="">
-                  <image class="avatar" src="{{item.litpic}}"></image>
-                  <text class="userName">{{item.nick}}</text>
-                </view>
-                <view catchtap="likeClick" data-id="{{item.id}}" data-index="{{index}}" data-support="{{item.is_support}}">
-                  <text class="likenum">{{item.support_num>0?item.support_num:''}}</text>
-                  <image class="like" src="{{item.is_support==1?'https://www.51chaidan.com/images/brand/black_heart.png':'https://www.51chaidan.com/images/brand/red_heart.png'}}"></image>
-                </view>
-              </view>
-            </view>
-          </block>
-        </view>
-      </view>
-      <!--  暂无数据  -->
-        <view class='goodstobereceived' wx:if='{{mctslist.length==0&&nodataiftr}}'>
-          <view class='nodata' style='height:900rpx;width:100%;position:relative;'>
-            <image src='../../../../pages/images/nodata.png' class='nodataimg' style='width:280rpx;height:300rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;'></image>
+        <!-- <view class="elsearch" wx:if='{{false}}'>
+          <view class="elsearchch">
+              <image class="elserarchimg" catchtap="jumpsearch" src="https://www.51chaidan.com/images/toyCabinet/search.png"></image>
+              <input class="elinputbut" bindfocus='onFocus' placeholder='请输入品牌名称搜索' bindinput="inputChange" bindconfirm="jumpsearch" value="{{brand_name}}"></input>
+              <view class="elserbotom" catchtap="jumpsearch">搜索</view>
           </view>
-        </view>     
-    </block>
+        </view> -->
 
-    <block wx:elif='{{cat_id==2}}'>
-        <view style="width:100%;min-height:80rpx;background:#fff;margin-bottom:15rpx;">
-            <view style="position:relative;height:150rpx;">
-                <view style="width:100rpx;height:140rpx;margin: 0 10rpx;float:left;">
-                    <view class="ocamensweve" catchtap="jumpsouchtem" data-id='{{eldataclass[0][0].id}}'>
-                        <image class="ocamensweveimg" style="{{eldataclass[0][0].id==brand_id?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{eldataclass[0][0].logo}}"></image>
-                        <view class="ocamenswevename specialellipsis" style="{{eldataclass[0][0].id==brand_id?'color:#f19207;':''}}">{{eldataclass[0][0].name}}</view>
-                    </view>                 
-                </view>
-                <scroll-view scroll-x="true" style="width:630rpx;white-space: nowrap;height:150rpx;float:left;">
-                      <block wx:for='{{eldataclass}}' wx:key='key'>
-                          <view class="ocamensweve" wx:for='{{item}}' wx:key='key' wx:for-item='w' catchtap="jumpsouchtem" data-id='{{w.id}}' wx:if='{{w.id!=0}}'>
-                              <image class="ocamensweveimg" style="{{w.id==brand_id?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{w.logo}}"></image>
-                              <view class="ocamenswevename specialellipsis" style="{{w.id==brand_id?'color:#f19207;':''}}">{{w.name}}</view>
-                          </view>                      
-                      </block>
-                </scroll-view>
+
+    <view style="background:#fff;">
+            <view class='dlfindToptitle'>最近浏览</view>
+            <view style="width:100%;min-height:80rpx;background:#fff;">
+                <view style="position:relative;height:150rpx;">
+                    <scroll-view scroll-x="true" style="width:710rpx;white-space: nowrap;height:150rpx;margin:auto;">
+                          <block wx:for='{{eldataclass}}' wx:key='key'>
+                              <view class="ocamensweve" wx:for='{{item}}' wx:key='key' wx:for-item='w' catchtap="jumpsouchtem" data-id='{{w.id}}' wx:if='{{w.id!=0}}'>
+                                  <image class="ocamensweveimg" style="{{w.id==brand_id?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{w.logo}}"></image>
+                                  <view class="ocamenswevename specialellipsis" style="{{w.id==brand_id?'color:#f19207;':''}}">{{w.name}}</view>
+                              </view>                      
+                          </block>
+                    </scroll-view>
+                </view>   
             </view>
-        </view>  
+
+            <view class='dlfindToptitle'>推荐IP</view>
+            <view style="width:100%;min-height:80rpx;background:#fff;margin-bottom:15rpx;">
+                <view style="position:relative;height:150rpx;">
+                    <view style="width:100rpx;height:140rpx;margin: 0 10rpx;float:left;">
+                        <view class="ocamensweve" catchtap="jumpsouchtem" data-id='{{eldataclass[0][0].id}}'>
+                            <image class="ocamensweveimg" style="{{eldataclass[0][0].id==brand_id?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{eldataclass[0][0].logo}}"></image>
+                            <view class="ocamenswevename specialellipsis" style="{{eldataclass[0][0].id==brand_id?'color:#f19207;':''}}">{{eldataclass[0][0].name}}</view>
+                        </view>                 
+                    </view>
+                    <scroll-view scroll-x="true" style="width:630rpx;white-space: nowrap;height:150rpx;float:left;">
+                          <block wx:for='{{eldataclass}}' wx:key='key'>
+                              <view class="ocamensweve" wx:for='{{item}}' wx:key='key' wx:for-item='w' catchtap="jumpsouchtem" data-id='{{w.id}}' wx:if='{{w.id!=0}}'>
+                                  <image class="ocamensweveimg" style="{{w.id==brand_id?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{w.logo}}"></image>
+                                  <view class="ocamenswevename specialellipsis" style="{{w.id==brand_id?'color:#f19207;':''}}">{{w.name}}</view>
+                              </view>                      
+                          </block>
+                    </scroll-view>
+                </view>
+            </view>
+
+    </view>
+
+    <view class="offeringCalendar">
+        <swiper class="ocswiper" vertical="true" autoplay="true" circular="true" interval="2500">
+          <block wx:for="{{testArr}}" wx:key='key'>
+            <swiper-item catchtouchmove='catchTouchMove' class="swiper-item" data-id="{{item.activity_id}}" bindtap="broadcast">
+              <image class="ocswiperImg" src='{{item.i}}'></image>
+            </swiper-item>
+          </block>
+        </swiper>
+        <view class="occoneter">
+            <view class="ocNameTop specialellipsis">贪玩猪可可盲盒</view>
+            <view class="ocNameBottom specialellipsis">2021年8月15日发售</view>
+        </view>   
+        <view class="occoneterText"><text>发售\n日历</text></view>
+        
+    </view>
+
+    <!-- tab标签切换 -->
+    <view class='dlfheadtab' style="margin-bottom:20rpx;">
+
+          <scroll-view class="marginAuto scrollViewTop" scroll-x="true" scroll-with-animation="true" scroll-left='{{scrollleft}}' style="height:70rpx;">
+            <view wx:for="{{payStatus}}" wx:key='key' id="ele{{item.num}}" class="classifyItem {{centerIndex == item.num?'active':''}}" data-index="{{item.num}}" catchtap="classifyChange">{{item.name}}</view>
+          </scroll-view>         
+          <image class="wOriTab" catchtap="wOriTab" mode="aspectFit" src='{{wOri==1?"https://cdn.51chaidan.com/images/brandSettledIcon/class2.png":"https://cdn.51chaidan.com/images/brandSettledIcon/class1.png"}}'></image>
+    </view>
+
+  
 
 
+    <!-- 信息流 -->
+    <block wx:if='{{wOri==1}}'>
         <view class="emlist" wx:for='{{eldatalist}}' wx:key='key'>
             <view class="emlhead">
                 <view class="emlhleft">
@@ -171,10 +134,6 @@
                     </view>
                 </view>
             </view>
-
-
-
-
         </view> 
         <!--  暂无数据  -->
         <view class='goodstobereceived' wx:if='{{eldatalist.length==0&&nodataiftr}}'>
@@ -185,105 +144,8 @@
         <view style="width:100%;height:110rpx;"></view>
 
     </block>
-
+    <!-- 瀑布流 -->
     <block wx:else>
-      <!-- 分类 -->
-      <view class='dlfhbot' wx:if='{{dlfhboteve.length!=0}}'>
-        <view class='dlfhboteve' wx:for='{{dlfhboteve}}' wx:key='key' data-topic_id='{{item.topic_id}}' catchtap='topicidfun'>
-          <image src='{{item.topic_img}}?imageMogr2/thumbnail/x140' class='dlfhbimg'></image>
-          <view class='dlfhbeboxtxt specialellipsis' style='{{topic_id==item.topic_id?"color:#ff2742;":""}}'>
-            <text class='dlfhbetxt' style='{{topic_id==item.topic_id?"color:#ff2742;background:#FFB4B4;":""}}'>{{item.topic_name}}</text>
-          </view>
-        </view>
-      </view>    
-    
-      <!--  官方拆盒  -->
-      <view class='disanumofgoods' style='margin-bottom:15rpx;' wx:if='{{qudrying.length!=0&&topic_id==0}}'>
-        <view style='width:100%;height:104rpx;padding-top:20rpx;' wx:if='{{adbanner.length!=0}}'>
-          <swiper style='width:688rpx;height:104rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="3000" duration="450">
-            <swiper-item wx:for="{{adbanner}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
-              <image src="{{w.Picture_path}}" data-topic_id='{{w.topicId}}' catchtap='topicidfun' style='width:{{w.width||688}}rpx;height:104rpx;margin:0 auto;display:block;position: relative;' bindload="imageLoadad" data-num='{{num}}'></image>
-            </swiper-item>
-          </swiper>
-        </view>
-        <!--  列表标题  -->
-        <view class='currenhead'>
-          <view class='currenheadleft currenheadcom'>官方拆盒</view>
-          <view class='currenheadright currenheadcom' data-topic_id='6' catchtap='topicidfun'>查看更多</view>
-        </view>
-        <!--  列表  -->
-        <view class='disanumofgoods_box'>
-          <view class='disanum_scr'>
-            <scroll-view scroll-x="true" class="disanum_tab_comtainer">
-              <view class='disanum_scr_box' wx:for='{{qudrying}}' wx:key='key' style='height:210rpx;width:299rpx;'>
-                <view class='disanum_simgbox' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail' style='height:160rpx;width:299rpx;'>
-                  <block wx:if='{{item.video_img}}'>
-                    <image class='disanum_simg' src='{{item.video_img}}?imageMogr2/thumbnail/x320' style='height:160rpx;width:299rpx;'></image>
-                    <image src='https://www.51chaidan.com/images/icon/iconPlayVideo.png' style='width:30px;height:30px;position:absolute;bottom:0;left:0;right:0;top:0;margin:auto;'></image>
-                  </block>
-                  <block wx:else>
-                    <image class='disanum_simg' src='{{item.img_extend}}?imageMogr2/thumbnail/x320' style='height:160rpx;width:299rpx;'></image>
-                  </block>
-                </view>
-                <view style='width:100%;height:40rpx;padding-top:10rpx;font-size:24rpx;' class='specialellipsis'>
-                  <image class='curdlscroevetxtimg' wx:if='{{item.litpic}}' src='{{item.litpic}}' style='margin-right:10rpx;'></image>{{item.title}}
-                </view>
-              </view>
-
-            </scroll-view>
-          </view>
-        </view>
-      </view>
-      <!--  隐藏返现  -->
-      <view class='disanumofgoods' style='margin-bottom:15rpx;' wx:if='{{moneyback.length!=0&&topic_id==0}}'>
-        <!--  列表标题  -->
-        <view class='currenhead'>
-          <view class='currenheadleft currenheadcom'>隐藏返现</view>
-          <view class='currenheadright currenheadcom' data-topic_id='9' catchtap='topicidfun'>查看更多</view>
-        </view>
-        <!--  列表  -->
-        <view class='disanumofgoods_box'>
-          <view class='disanum_scr'>
-            <scroll-view scroll-x="true" class="disanum_tab_comtainer">
-              <view class='disanum_scr_box' wx:for='{{moneyback}}' wx:key='key' style='height:210rpx;width:299rpx;'>
-                <view class='disanum_simgbox' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail' style='height:160rpx;width:299rpx;'>
-                  <block wx:if='{{item.video_img}}'>
-                    <image class='disanum_simg' src='{{item.video_img}}?imageMogr2/thumbnail/x320' style='height:160rpx;width:299rpx;'></image>
-                    <image src='https://www.51chaidan.com/images/icon/iconPlayVideo.png' style='width:30px;height:30px;position:absolute;bottom:0;left:0;right:0;top:0;margin:auto;'></image>
-                  </block>
-                  <block wx:else>
-                    <image class='disanum_simg' src='{{item.img_extend}}?imageMogr2/thumbnail/x320' style='height:160rpx;width:299rpx;'></image>
-                  </block>
-                </view>
-                <view style='width:100%;height:40rpx;padding-top:10rpx;font-size:24rpx;' class='specialellipsis'>
-                  <image class='curdlscroevetxtimg' wx:if='{{item.litpic}}' src='{{item.litpic}}' style='margin-right:10rpx;'></image>{{item.title}}
-                </view>
-              </view>
-
-            </scroll-view>
-          </view>
-        </view>
-      </view>
-
-      <!-- 拆币兑换 -->
-      <view class='currenexch' wx:if='{{currencyList.length!=0&&topic_id==0}}'>
-        <view class='currenhead'>
-          <view class='currenheadleft currenheadcom'>拆币兑换</view>
-          <view class='currenheadright currenheadcom' data-topic_id='8' catchtap='topicidfun'>查看更多</view>
-        </view>
-        <view class='currenhcon'>
-          <scroll-view scroll-x="true" class="head_comtainer">
-            <view class='curdlscroeve' wx:for='{{currencyList}}' wx:key='key' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>
-              <view class='curdlscroeveg' wx:if='{{item.Official==1}}'>官方</view>
-              <image wx:else class='curdlscroeveuserim' src='{{item.litpic}}'></image>
-              <image class='curdlscroeveimg' src='{{item.goods_img}}'></image>
-              <view class='curdlscroevetxt specialellipsis'>
-                <image src='../../../../pages/images/cgoldcoin1.png' class='curdlscroevetxtimg'></image>{{item.currency_sum}}
-              </view>
-            </view>
-          </scroll-view>
-        </view>
-      </view>
 
       <view style='width:100%;overflow:hidden;'>
         <!-- 左边 -->
@@ -386,7 +248,7 @@
 <bnavigation isProduce='{{isProduce}}' dlfind='{{true}}' isIphoneX='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
 
 <!-- 领奖提示 -->
-<view style='position:fixed;width:100%;height:100%;top:0;left:0;z-index:9999;' wx:if='{{dlhintiftr}}'>
+<view style='position:fixed;width:100%;height:100%;top:0;left:0;z-index:9999;' wx:if='{{false}}'>
   <view style='width:100%;height:100%;background:#000;opacity: 0.5;' catchtap='dlhintfun'></view>
   <view style='width:540rpx;height:860rpx;position:absolute;top:0;left:0;bottom:0;right:0;margin:auto;z-index:2;border-radius:10rpx;'>
     <view style='height:100rpx;width:100%;line-height:100rpx;text-align:center;font-weight: bold;font-size:30rpx;background:#fff;'>说明</view>

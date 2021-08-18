@@ -71,8 +71,77 @@ Page({
     id:'',
     subscribedata:[],
     isOpenToyShow:false,
-    isPunchTheClock:1596729599<Date.parse(new Date())/1000&&Date.parse(new Date())/1000<1596988799?true:false
+    isPunchTheClock:1596729599<Date.parse(new Date())/1000&&Date.parse(new Date())/1000<1596988799?true:false,
+    wOri:1 , // 1 瀑布流 2 信息流
+    testArr:[
+      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
+      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
+      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
+      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
+      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
+      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
+      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
+      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
+      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
+      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
+      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
+      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
+      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
+      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
+      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
+      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
+    ],
+    payStatus:[
+      {name:'推荐',num:'-1'},
+      {name:'我的关注',num:'0'},
+      {name:'秒杀',num:'2'},
+      {name:'抽选',num:'4'},
+      {name:'动态',num:'3'},
+      {name:'分享',num:'14'},
+      {name:'动态',num:'5'},
+      {name:'分享',num:'6'},
+      {name:'动态',num:'7'},
+      {name:'分享',num:'8'},
+      {name:'签到',num:'9'}
+    ], // 支付状态 
+    centerIndex:-1
   },
+  catchTouchMove:function(res){
+    return false
+  },
+  // 瀑布流信息流切换
+  wOriTab(){
+    this.setData({
+      wOri:(this.data.wOri == 1)?2:1
+    })
+
+    if (this.data.wOri==1){
+      this.eldatalistfun(0);
+      this.eldataclassfun();
+    }else{
+      this.listdata(0);
+    }
+
+  },
+
+  classifyChange(e){
+    let that = this;
+    let index = e.currentTarget.dataset.index || 0;
+    let ele = '#ele' + index;
+    that.setData({
+      centerIndex:index,
+    })
+    //创建节点选择器
+    var query = wx.createSelectorQuery();
+    //选择id
+    query.select(ele).boundingClientRect();
+    query.exec(function(res) {
+      that.setData({
+        scrollleft:e.currentTarget.offsetLeft - wx.getSystemInfoSync().windowWidth/2 + (res[0].width/2)
+      })
+    })
+  }, 
+
   jumpVipPage(){
     wx.navigateTo({  
       url: "/page/secondpackge/pages/vipPage/vipPage"
@@ -84,12 +153,7 @@ Page({
       ['mctslist[' + ind + '].finishLoadFlag']: true
     })
   },
-  // 跳转打卡
-  jumpshopqueque:function(){
-    wx.navigateTo({
-      url: "../../../../pages/shopsquare/shopsquare",
-    }); 
-  },
+
   // 跳转商品详情
   jumpshopdetail:function(w){
     var goods_id = w.currentTarget.dataset.goods_id || 0;
