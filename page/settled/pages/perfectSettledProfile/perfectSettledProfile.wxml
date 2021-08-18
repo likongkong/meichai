@@ -3,7 +3,7 @@
 
 <view class="applyForOccupancy">
   <view class="size26"> 完善信息之后，您的IP就可以在小程序内展示啦 </view>
-  <view class="size26"> <text style="text-decoration:underline;color:#8BCFFD;">点击示例</text>，可查看您的品牌专区浏览样式</view>
+  <view class="size26"> <text style="text-decoration:underline;color:#8BCFFD;" catchtap="toggleSampleGraphMask">点击示例</text>，可查看您的品牌专区浏览样式</view>
   <view style="border-top: 2rpx solid #EEEDED;margin-top:30rpx;">
     <settledForm 
       list="{{enterpriseData}}"
@@ -14,10 +14,19 @@
     </settledForm>
   </view>
   <block>
-      <view class="footerWrap">
+      <view class="footerFailWrap">
           <!-- <view data-num="1" catchtap="navigateBack">返回</view> -->
           <view catchtap="submitAudit">提交</view>
           <text data-num="1" catchtap="navigateBack">暂不填写</text>
       </view>
   </block>
+</view>
+
+
+<view wx:if="{{isSampleGraphMask}}" class="sampleGraphMask" catchtouchmove="true" catchtap="toggleSampleGraphMask">
+  <view class="sampleGraphBox" catchtap="true">
+    <text>示例样式</text>
+    <image src="https://cdn.51chaidan.com/images/brandSettledIcon/sample_graph.png" mode="widthFix"></image>
+    <button catchtap="toggleSampleGraphMask">关闭</button>
+  </view>
 </view>

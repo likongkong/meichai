@@ -1,0 +1,87 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+<view class="wrap">
+  <view class="headWrap">
+    <view class="card">
+      <image catchtap="clickme" src="https://cdn.51chaidan.com/images/brandSettledIcon/set.png" mode="widthFix"></image>
+      <view>
+        <text class="amount">￥0.00</text>
+        <text class="amountTxt">钱包余额</text>
+        <view class="withdrawBtn">立即提现</view>
+        <text class="withdrawTxt">每天可提现一次</text>
+      </view>
+    </view>
+    <view class="filterWrap">
+      <view class="filterItem"> <view><text>全部日期</text><image src="/pages/images/comtriangle.png" mode="widthFix"></image></view> </view>
+      <view class="filterItem"> <view><text>全部交易类型</text><image src="/pages/images/comtriangle.png" mode="widthFix"></image></view> </view>
+    </view>
+  </view>
+  <view class="content">
+    <view class="orderItem">
+      <view class="orderItemL">
+        <image src="https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJZMPzEm1ibLhPGyic11ViagbFKa3Bkdialthkbu1iaKOwLASqD5IMHm7ibicFCB60nRtHO4x0CKHBia22elQ/132" mode="widthFix"></image>
+      </view>
+      <view class="orderItemR">
+        <view>
+          <text class="color101010">订单退款--海濑先生</text>
+          <text class="colorFFB730">+159.00</text>
+        </view>
+        <view>
+          <text class="colorA2A2A2">8月14日 12:00:00</text>
+          <text class="colorA2A2A2">余额 159.00</text>
+        </view>
+      </view>
+    </view>
+    <view class="orderItem">
+      <view class="orderItemL">
+        <image src="https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJZMPzEm1ibLhPGyic11ViagbFKa3Bkdialthkbu1iaKOwLASqD5IMHm7ibicFCB60nRtHO4x0CKHBia22elQ/132" mode="widthFix"></image>
+      </view>
+      <view class="orderItemR">
+        <view>
+          <text class="color101010">订单退款--海濑先生</text>
+          <text class="colorFFB730">+159.00</text>
+        </view>
+        <view>
+          <text class="colorA2A2A2">8月14日 12:00:00</text>
+          <text class="colorA2A2A2">余额 159.00</text>
+        </view>
+      </view>
+    </view>
+    <!-- <view class="noData">
+      <image src="https://cdn.51chaidan.com/images/brandSettledIcon/deal.png" mode="widthFix"></image>
+      暂无交易记录
+    </view> -->
+  </view>
+</view>
+
+
+
+
+
+<view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
+<!--弹出框  -->
+<view animation="{{animationData}}" class="commodity_attr_box" style="height:{{popHeight}}rpx" wx:if="{{showModalStatus}}">
+  <text class="popTitle">首次提现请先绑定提现账户类型</text>
+  <view class="popContentWrap">
+    <block wx:for="{{account}}" wx:key="index">
+      <view class="popContentItem" data-ind="{{index}}" catchtap="chooseAccount">
+        <view class="accountTitle">
+          <text>{{item.title}}</text> 
+          <image src="https://cdn.51chaidan.com/images/brandSettledIcon/wenhao.png" mode="widthFix"></image>
+        </view>
+        <view class="quotaWrap">
+          单日提现限额￥{{item.quotaNum}}
+          <image wx:if="{{index == accountNum}}" src="https://cdn.51chaidan.com/images/brandSettledIcon/duihao.png" mode="widthFix"></image>
+        </view>
+      </view>
+    </block>
+    <view wx:if="{{accountNum == 1}}" class="merchantNoInput">
+      <text>请输入商户号</text>
+      <input type="text" value="" />
+    </view>
+  </view>
+  <view class="footerWrap">
+      <view data-num="1" catchtap="navigateBack">关闭</view>
+      <view catchtap="submitAudit">确认</view>
+  </view>
+</view>

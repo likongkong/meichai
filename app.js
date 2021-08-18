@@ -1026,6 +1026,10 @@ App({
       wx.navigateTo({
         url: `/page/settled/pages/perfectSettledProfile/perfectSettledProfile?${whref}`
       });
+    } else if (item_type == 9029) { 
+      wx.navigateTo({
+        url: `/page/settled/pages/settledIntroduce/settledIntroduce`
+      });
     }
   },
   // 中奖提示倒计时

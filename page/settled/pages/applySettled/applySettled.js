@@ -72,7 +72,7 @@ Page({
         isRequired:false,
         type:'textarea',
         subtitle:'IP介绍',
-        placeholder:'请输入专区介绍',
+        placeholder:'请输入IP介绍',
         value:'',
         name:'introduce',
         borderbottom1:'hide'
@@ -273,15 +273,15 @@ Page({
     if(!obj.introduce || obj.introduce == ''){
       obj.introduce = ''
     }
-
-    let data = `mod=brandCertification&operation=initial&uid=${this.data.uid}&loginid=${this.data.loginid}&firm_name=${obj.enterpriseName}&firm_linkman=${obj.enterpriseContact}&firm_tel=${obj.enterprisePhone}&wechat_number=${obj.wechatID}&certificate_img=${obj.businessLicense}&ip_name=${obj.ipName}&ip_logo=${obj.ipLogo}&ip_img=${obj.ipImage}&ip_introduce=${obj.introduce}&id=${this.data.id}`
+    let id = this.data.id;
+    let data = `mod=brandCertification&operation=initial&uid=${this.data.uid}&loginid=${this.data.loginid}&firm_name=${obj.enterpriseName}&firm_linkman=${obj.enterpriseContact}&firm_tel=${obj.enterprisePhone}&wechat_number=${obj.wechatID}&certificate_img=${obj.businessLicense}&ip_name=${obj.ipName}&ip_logo=${obj.ipLogo}&ip_img=${obj.ipImage}&ip_introduce=${obj.introduce}&id=${id}`
     var q = Dec.Aese(data);
     console.log(`${app.signindata.comurl}?${data}`)
     wx.request({
       url: app.signindata.comurl + 'toy.php' + q,
       method: 'GET',
       header: { 'Accept': 'application/json' },
-      success: function (res) { 
+      success: (res) => { 
         console.log('提交审核====',res)
         if(res.data.ReturnCode == 200){
           wx.showModal({
@@ -293,9 +293,15 @@ Page({
             success (res) {
               if (res.confirm) {
                 console.log('用户点击确定')
-                wx.navigateBack({
-                  delta: 1
-                })
+                if(id == 0){
+                  wx.navigateBack({
+                    delta: 2
+                  })
+                }else{
+                  wx.navigateBack({
+                    delta: 1
+                  })
+                }
               }
             }
           })

@@ -1,5 +1,5 @@
 .borderbottom1{
-  border-bottom:2rpx solid #EEEDED;
+  border-bottom:2rpx solid #F5F5F5;
 }
 .flex{
   display: flex;
@@ -60,8 +60,8 @@
 
 
 .uploadWrap{
-  width: 140rpx;
-  height: 140rpx;
+  width: 168rpx;
+  height: 168rpx;
   margin: 18rpx 0;
   background: #F4F3F8;
   position: relative;
@@ -85,7 +85,7 @@
   content: '添加';
   width: 60rpx;
   position: absolute;
-  top: 55rpx;
+  top: 70rpx;
   left: 50%;
   margin-left: -30rpx;
   font-size: 20rpx;
@@ -93,7 +93,7 @@
 }
 .textarea{
   width: 100%;
-  font-size: 22rpx;
+  font-size: 24rpx;
   color: #777777;
   min-height: 200rpx;
   background-color: #F4F3F8;
@@ -103,17 +103,7 @@
 }
 .tupian{
   display: block;
-}
-.businessLicense{
-  width: 140rpx;
-  height: auto;
-}
-.ipLogo{
-  width: 140rpx;
-  height: auto;
-}
-.ipImage{
-  width: 140rpx;
+  width: 168rpx;
   height: auto;
 }
 .uploadAgainText{

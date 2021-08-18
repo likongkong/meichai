@@ -156,10 +156,12 @@
       "root": "page/settled/",
       "pages": [
         "pages/applySettled/applySettled",
+        "pages/settledIntroduce/settledIntroduce",
         "pages/orderManagement/orderManagement",
         "pages/businessOrderDetails/businessOrderDetails",
         "pages/editSettledProfile/editSettledProfile",
-        "pages/perfectSettledProfile/perfectSettledProfile"
+        "pages/perfectSettledProfile/perfectSettledProfile",
+        "pages/myWallet/myWallet"
       ]
     }
   ],

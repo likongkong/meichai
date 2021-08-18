@@ -89,26 +89,8 @@
           "scene": null
         },
         {
-          "name": "page/secondpackge/pages/priorityVoting/priorityVoting",
-          "pathName": "page/secondpackge/pages/priorityVoting/priorityVoting",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "page/secondpackge/pages/duoduomone/duoduomone",
-          "pathName": "page/secondpackge/pages/duoduomone/duoduomone",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "page/secondpackge/pages/ticketRcSort/ticketRcSort",
-          "pathName": "page/secondpackge/pages/ticketRcSort/ticketRcSort",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/smokeboxlist/smokeboxlist",
-          "pathName": "pages/smokeboxlist/smokeboxlist",
+          "name": "我的钱包",
+          "pathName": "page/settled/pages/myWallet/myWallet",
           "query": "",
           "scene": null
         }
