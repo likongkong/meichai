@@ -1,11 +1,10 @@
-import  apiResquest  from './http.js'
+import apiResquest from './http.js'
+//POST 请求案例
 
+// ---------------------------------------- 公共-----------------------------------------
 // 登录
 export const login = (query) => {
-    return apiResquest.post(
-        url='login/aaa',
-        {query: {...query}}
-    )
+	return apiResquest.post('login',query)
 }
 //申请入驻提交审核
 export const brandCertification = (query) => {
@@ -15,10 +14,23 @@ export const brandCertification = (query) => {
     )
 }
 
-
-
-
-
+// ---------------------------------------- 订单管理 -----------------------------------------
+// 获取收据
+export const oMgetData = (query) => {
+    return apiResquest.get('brand/orderlist',query)
+}
+// 修改地址
+export const modifyAddress = (url,query) => {
+    return apiResquest.post('brand/changeAddress/' + url,query)
+}
+// 添加物流
+export const addLogistics = (url,query) => {
+    return apiResquest.post('brand/delivery/' + url,query)
+}
+// ---------------------------------------- 订单详情 -----------------------------------------
+export const oMbrandInfo = (url,query) => {
+    return apiResquest.get('brand/info/' + url,query)
+}
 
 
 

@@ -4,6 +4,8 @@ const ald = require('./utils/ald-stat.js');
 // var tdweapp = require('./utils/tdweapp.js'); 
 //aes加密解密js
 var Dec = require('common/public.js');
+const api = require('./utils/api.js');
+
 App({
   signindata: {
     env:Dec.env, //环境
@@ -143,23 +145,28 @@ App({
     isNeedUserInfo:false,
     isFocusPublic:false // 是否关注公众号
   },
-  //一番赏队列倒计时
-  // yifanshangIsInQueueFun(time){
-  //   var _this = this
-  //   console.log('yifanshangIsInQueue====',_this.signindata.yifanshangIsInQueue)
-  //   var timestamp = Date.parse(new Date())
-  //   var num = time - (timestamp / 1000);
-  //   _this.signindata.timer = setInterval(function(){
-  //     num--;
-  //     console.log('倒计时====',num)
-  //     if (num <= 0) {
-  //       clearInterval(_this.signindata.timer);
-  //       _this.signindata.yifanshangIsInQueue = false;
-  //       console.log('yifanshangIsInQueue====',_this.signindata.yifanshangIsInQueue)
-  //     }
-  //   },1000);
-  // },
-  // 登录
+
+  getAccessToken(callback){
+    wx.login({
+      success: function (res) {
+        var loginData = {
+            'code' :res.code
+        };        
+        wx.removeStorageSync('access_token') // 同步删除缓存
+        api.login(loginData).then(res => {
+            console.log('新接口token===', res);
+            if (res.data.status_code == 200 || res.data.status_code == 201) {
+              var token_arr = res.data.data.token_arr || {};
+              console.log('access_token', token_arr.access_token)
+              wx.setStorageSync('access_token', token_arr.access_token);
+              callback();
+            }  
+        })
+      }
+    })
+      
+  },
+
   signin: function (callback, BSkipData) {
     // 获取id    
     var callback = callback || { onLoadfun: function () {  } };
@@ -350,6 +357,215 @@ App({
         });
     }
   },
+
+
+  
+  //一番赏队列倒计时
+  // yifanshangIsInQueueFun(time){
+  //   var _this = this
+  //   console.log('yifanshangIsInQueue====',_this.signindata.yifanshangIsInQueue)
+  //   var timestamp = Date.parse(new Date())
+  //   var num = time - (timestamp / 1000);
+  //   _this.signindata.timer = setInterval(function(){
+  //     num--;
+  //     console.log('倒计时====',num)
+  //     if (num <= 0) {
+  //       clearInterval(_this.signindata.timer);
+  //       _this.signindata.yifanshangIsInQueue = false;
+  //       console.log('yifanshangIsInQueue====',_this.signindata.yifanshangIsInQueue)
+  //     }
+  //   },1000);
+  // },
+  // 登录
+  // signin: function (callback, BSkipData) {
+  //   // 获取id    
+  //   var callback = callback || { onLoadfun: function () {  } };
+  //   var _this = this;
+  //   if(_this.signindata.is_sigin){
+
+  //       _this.signindata.is_sigin = false;
+    
+  //       wx.login({
+  //         success: function (res) {
+  //           console.log('wx.login=====',res)
+  //           var code = res.code;
+  //           console.log(code)
+
+  //               var resiv ='';
+  //               var encryptedData = '';
+  //               var loginData = '';
+  //               if (BSkipData && typeof (BSkipData) != "undefined") { //如果B端过来需要额外传递数据
+  //                 // var q = Dec.Aese('operation=xcx&mod=login&code=' + code + '&iv=' + resiv + '&encryptedData=' + encryptedData + '&referee=' + _this.signindata.referee + '&activity_id=' + _this.signindata.activity_id + '&channel=' + _this.signindata.channel + '&last_store_id=' + _this.signindata.global_store_id + '&token=' + _this.signindata.token + '&share_source=' + _this.signindata.share_source + '&tid=' + _this.signindata.tid + "&isBusinessSkip=" + BSkipData.isBusinessSkip + "&businessClientUserId=" + BSkipData.businessClientUserId +
+  //                 //   "&isMergedUserInfo=" + BSkipData.isMergedUserInfo + '&activity_type=' + _this.signindata.activity_type+'&suap='+_this.signindata.suap);
+
+  //                   loginData = {
+  //                       code :res.code,
+  //                       referee:_this.signindata.referee,
+  //                       activity_id:_this.signindata.activity_id,
+  //                       channel:_this.signindata.channel,
+  //                       last_store_id:_this.signindata.global_store_id,
+  //                       token:_this.signindata.token,
+  //                       share_source:_this.signindata.share_source,
+  //                       tid:_this.signindata.tid,
+  //                       isBusinessSkip:BSkipData.isBusinessSkip,
+  //                       businessClientUserId:BSkipData.businessClientUserId,
+  //                       isMergedUserInfo:BSkipData.isMergedUserInfo,
+  //                       activity_type:_this.signindata.activity_type,
+  //                       suap:_this.signindata.suap
+  //                   };
+  //               } else {
+  //                 // var q = Dec.Aese('operation=xcx&mod=login&code=' + code + '&iv=' + resiv + '&encryptedData=' + encryptedData + '&referee=' + _this.signindata.referee + '&activity_id=' + _this.signindata.activity_id + '&channel=' + _this.signindata.channel + '&last_store_id=' + _this.signindata.global_store_id + '&token=' + _this.signindata.token + '&share_source=' + _this.signindata.share_source + '&tid=' + _this.signindata.tid + '&activity_type=' + _this.signindata.activity_type+'&suap='+_this.signindata.suap);
+
+  //                   loginData = {
+  //                       code :res.code,
+  //                       referee:_this.signindata.referee,
+  //                       activity_id:_this.signindata.activity_id,
+  //                       channel:_this.signindata.channel,
+  //                       last_store_id:_this.signindata.global_store_id,
+  //                       token:_this.signindata.token,
+  //                       share_source:_this.signindata.share_source,
+  //                       tid:_this.signindata.tid,
+  //                       activity_type:_this.signindata.activity_type,
+  //                       suap:_this.signindata.suap
+  //                   };
+
+  //               }
+
+  //               console.log(loginData)
+  //               console.log('api',api)
+
+  //               wx.removeStorageSync('access_token') // 同步删除缓存
+
+  //               api.login(loginData).then(res => {
+                    
+  //                   _this.signindata.is_sigin = true;
+  //                   console.log('app', res);
+  //                   if (res.data.status_code == 200 || res.data.status_code == 201) {
+
+  //                     var login_info = res.data.data.login_info || {};
+  //                     var token_arr = res.data.data.token_arr || {};
+  //                     console.log('access_token', token_arr.access_token)
+  //                     wx.setStorageSync('access_token', token_arr.access_token);
+
+  //                     _this.signindata.openid = login_info.openid || '';
+
+  //                     _this.signindata.loginid = login_info.loginid || '';
+  //                     _this.signindata.uid = login_info.uid || '';
+
+  //                     console.log('app===sigin',_this.signindata.comurl,_this.signindata.clwcomurl,Dec.versionnumber)
+
+  //                     _this.signindata.isNewer = login_info.isNewer || false;
+  //                     _this.signindata.token = '';
+  //                     _this.signindata.isAwardOrder = login_info.isAwardOrder || false;
+  //                     _this.signindata.awardOrder = login_info.awardOrder || { Info: { cover: "", isAwardOrder: false, overtime: 0, url: "", } };
+
+  //                     _this.signindata.isShareFun = login_info.isShareFun;
+
+  //                     _this.signindata.isTodaySign = login_info.isTodaySign;
+
+  //                     // 用户手机号
+  //                     _this.signindata.mobile = login_info.mobile;
+  //                     // 是否关注公众号
+  //                     _this.signindata.isFocusPublic = login_info.isFocusPublic || false;
+  //                     // VIP
+  //                     _this.signindata.isVip = login_info.isVip || 0;
+  //                     // 抽盒金
+  //                     _this.signindata.blindboxMoney = login_info.blindboxMoney || 0;
+  //                     // 限时抽盒金
+  //                     _this.signindata.tempBlindboxMoney = login_info.tempBlindboxMoney || 0;
+  //                     // 是否是管理员  有权限进入 发放门票商品的页面
+  //                     _this.signindata.isManager = login_info.isManager || false;
+
+  //                     _this.signindata.spreadEntry = res.data.List ? res.data.List.spreadEntry : false || false;
+  //                     // _this.signindata.index_ela_fra = true;
+  //                     _this.signindata.isProduce = login_info.isProduce || false;
+
+  //                     // 万圣节南瓜个数
+  //                     _this.signindata.halloweenScore = login_info.score || 0;
+  //                     // 万圣节南瓜个数
+  //                     _this.signindata.isAuthMobile = login_info.isAuthMobile;
+  //                     // // 是否已领取过现实抽盒金(关注公众号小号赠送) 新用户
+  //                     // _this.signindata.gotTBBMBS8 = login_info.welfare ? login_info.welfare.gotTBBMBS8 : true;
+  //                     // // 是否已领取过现实抽盒金(关注公众号大号赠送) 新用户
+  //                     // _this.signindata.gotTBBMBS9 = login_info.welfare ? login_info.welfare.gotTBBMBS9 : true;
+
+  //                     // 是否是地域黑模式
+  //                     _this.signindata.isHellBlackUser = login_info.isHellBlackUser || false;
+  //                     // 是否开启展会 
+  //                     _this.signindata.isOpenToyShow = login_info.isOpenToyShow || false;               
+  //                     // 透视卡倒计时
+  //                     if(login_info.tempChance){
+  //                         _this.signindata.perspcardata = login_info.tempChance.length != 0 ? login_info.tempChance[0].over_time || '' : '';
+  //                     };
+
+  //                     _this.signindata.automat = login_info.automat ? login_info.automat : { isOpen: false, times: 0, title: "" };
+  //                     _this.signindata.automattitle = login_info.automat ? login_info.automat.title : '';
+
+  //                     _this.signindata.notAllowShareGoodsId = login_info.notAllowShareGoodsId || [];
+  //                     if(login_info.address){
+  //                       _this.signindata.isBlindBoxDefaultAddress = login_info.address.isBlindBoxDefaultAddress || false;
+  //                     };
+
+  //                     if (login_info.store) {
+  //                       _this.signindata.store_id = login_info.store.store_id || 0;
+  //                       _this.signindata.last_store_id = login_info.store.last_store_id || 0;
+  //                     };
+  //                     var openid = login_info.openid || '';
+  //                     var loginid = login_info.loginid || '';
+  //                     var uid = login_info.uid || '';
+  //                     wx.setStorage({ key: 'signin', data: { openid: openid, loginid: loginid, uid: uid } });
+
+  //                     _this.signindata.isNeedUserInfo = login_info.isNeedUserInfo;   // 新用户需要上传用户信息
+  //                     _this.signindata.userInfo = login_info.user || {};
+
+  //                     if (login_info.user) {
+
+  //                       var userinfo = login_info.user;
+  //                       userinfo.avatarUrl = userinfo.headphoto;
+  //                       userinfo.nickName = userinfo.nick;
+  //                       userinfo.gender = userinfo.gender;
+
+  //                       _this.signindata.userInfo = userinfo || {};
+  //                       _this.signindata.avatarUrl = userinfo.headphoto;
+  //                       _this.signindata.nickName = userinfo.nick;
+  //                     };
+
+  //                     callback.onLoadfun();
+
+  //                     // 调取收货地址
+  //                     _this.nextpagediao();
+
+  //                     var qiftr = Dec.Aese('mod=check&operation=city&uid=' + _this.signindata.uid + '&loginid=' + _this.signindata.loginid);
+  //                     wx.request({
+  //                       url: _this.signindata.comurl + 'auth.php' + qiftr,
+  //                       method: 'GET',
+  //                       success: function (res) {
+  //                         if (res.data.ReturnCode == 200) {
+  //                           if (res.data.Info) {
+  //                             _this.signindata.blackCity = res.data.Info.flag;
+  //                             if (res.data.Info.flag) {
+  //                               callback.onLoadfun();
+  //                             };
+  //                           };
+  //                         };
+  //                       }
+  //                     })
+  //                   };
+  //                   // if (res.data.ReturnCode == 201) {
+  //                   //   var ennicname = encodeURIComponent(nicname)
+  //                   //   _this.logindata(ennicname, iconsex, avaurl);
+  //                   // };
+  //               }).catch(err => {
+  //                 _this.showToastC(err,1500);
+  //                 console.log(err)
+  //               })
+  //         },
+  //         fail: function(){
+  //           _this.signindata.is_sigin = true;
+  //         }
+  //       });
+  //   }
+  // },
   logindata: function (nicname, iconsex, avaurl) {
     var _this = this;
     var qsign = Dec.Aese('mod=info&operation=tpinfo&uid=' + _this.signindata.uid + '&loginid=' + _this.signindata.loginid + '&type=1&nick=' + nicname + '&gender=' + iconsex + '&headphoto=' + avaurl);
@@ -1243,7 +1459,7 @@ App({
       title: title,
       icon: 'none',
       mask:true,
-      duration:duration
+      duration:duration || 2000
     });    
   },
   showModalC:function(content,title){
@@ -1461,7 +1677,6 @@ App({
       header: {'Accept': 'application/json'},
       success: function (res) {
         if (res.data.ReturnCode == 200) {
-          console.log('app===========地址',res)
           var receivingAddress = res.data.List || [];
           if (receivingAddress && receivingAddress.length != 0) {
             _this.signindata.receivingAddress = receivingAddress;

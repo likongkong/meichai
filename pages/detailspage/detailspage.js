@@ -288,6 +288,7 @@ Page({
     })
     var listSpec = this.data.listSpec;
 
+
     //多款式默认选择第一个 start
     // if(detailSpecColor.length > 1){
       var indnum = 0;
@@ -329,8 +330,15 @@ Page({
    
     var modelColor = detailSpecModel[this.data.modelSelInde].name+'-'+detailSpecColor[index].name;
     console.log(listSpec[modelColor])
+
+    var zunmdata = this.data.zunmdata; 
+
+    if(detailSpecColor[index] && detailSpecColor[index].tipStockOnLine){
+      zunmdata.tipStockOnLine = detailSpecColor[index].tipStockOnLine
+    };
+
     if( listSpec[modelColor] && listSpec[modelColor].stock > 0 ){
-      var zunmdata = this.data.zunmdata; 
+
       zunmdata.gsale = listSpec[modelColor].price || 0;
       zunmdata.gprice = listSpec[modelColor].price || 0;
 
@@ -368,8 +376,7 @@ Page({
         selectShell:listSpec[modelColor],
         zunmdata:zunmdata
       })
-    }else{
-      var zunmdata = this.data.zunmdata; 
+    }else{ 
       zunmdata.gsale = listSpec[modelColor].price || 0;
       zunmdata.gprice = listSpec[modelColor].price || 0;
 
@@ -3332,6 +3339,8 @@ Page({
           if(res.data.Ginfo.specialGoods && res.data.Ginfo.specialGoods == 1){
             var infoSpecial = dataGinfo.infoSpecial;
             var detailSpecColor = infoSpecial.detailSpec[infoSpecial.specCate[1]] || [];
+
+
             var detailSpecModel = infoSpecial.detailSpec[infoSpecial.specCate[0]] || [];
             var listSpec = infoSpecial.listSpec;
             var detailColorIndex = 0;
@@ -3343,6 +3352,9 @@ Page({
                 detailColorIndex = _this.data.detailColorIndex || 0;
                 modelSelInde = _this.data.modelSelInde || 0;
                 var modelColor = detailSpecModel[modelSelInde].name+'-'+detailSpecColor[detailColorIndex].name;
+                if(detailSpecModel[modelSelInde].tipStockOnLine){
+                  res.data.Ginfo.tipStockOnLine = detailSpecModel[modelSelInde].tipStockOnLine;
+                };
                 if(listSpec[modelColor]){
                     selectShell = listSpec[modelColor];
                     spgsale = listSpec[modelColor].price; 
@@ -3394,6 +3406,9 @@ Page({
                               var modelColor = detailSpecModel[j].name+'-'+detailSpecColor[i].name;
                               if(listSpec[modelColor] && res.data.Ginfo.depositInfo[listSpec[modelColor].roleId]){
                                 detailSpecColor[i].select = true;
+                                if(detailSpecColor[i].tipStockOnLine){
+                                  res.data.Ginfo.tipStockOnLine = detailSpecColor[i].tipStockOnLine;
+                                };
                                 ifAdopt = true;
                                 if(assignment){
                                   assignment = false;
@@ -3428,6 +3443,10 @@ Page({
                             var modelColor = detailSpecModel[j].name+'-'+detailSpecColor[i].name;
                             if(listSpec[modelColor]){
                               detailSpecColor[i].select = true;
+                              if(detailSpecColor[i].tipStockOnLine){
+                                res.data.Ginfo.tipStockOnLine = detailSpecColor[i].tipStockOnLine;
+                              };
+
                               ifAdopt = true;
                               if(assignment){
                                 assignment = false;

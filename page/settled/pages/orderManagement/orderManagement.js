@@ -1,6 +1,7 @@
 
 var Dec = require('../../../../common/public');//aes加密解密js
 var tcity = require("../../../../common/citys.js");
+var api = require("../../../../utils/api.js");
 const app = getApp();
 Page({
   /**
@@ -13,14 +14,14 @@ Page({
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     uid:'',
     loginid:'',
-    testArr:[1111,22222,33333,44444,555555,66666,1111,22222,33333,44444,555555,66666],
     brandid:0,
     ordername:'',
-    centerIndex:0,
+    centerIndex:'-1',
     scrollleft:0,
     scrollleftTop:0,
     logisticsRefundModify:4, // 1 修改 2 退款 3 物流 4批量导出订单
     scanCodeMsg: "",
+    csc:'',
     commonBulletFrame:false, // 公共弹框
     // 省市联动数据
     provinces: [],
@@ -33,18 +34,14 @@ Page({
     values: [0, 0, 0],
     condition: false,
     cityback:false, 
-    brand:[
-      {
-        "brandId": 569,
-        "brandName": "SOUR LEMON-CLUB",
-        "brandLogo": "https://cdn.51chaidan.com/images/toyShow2/logo/20200730/e16e884b941e1eb262c26463dbd3cde0.jpg"
-      },
-      {
-        "brandId": 570,
-        "brandName": "怪猴子（Super Monkey）",
-        "brandLogo": "https://cdn.51chaidan.com/images/toyShow3/logo/20210104/45db5c3f5351e32701ac832cba819667.jpg"
-      }
-    ] 
+    brand:[],
+    order:{},
+    payStatus:[
+      {name:'全部',num:'-1'},
+      {name:'待支付',num:'0'},
+      {name:'待发货',num:'2'},
+      {name:'已发货',num:'4'}
+    ], // 支付状态 
   },
   open: function (options) {
     // 省市联动
@@ -67,16 +64,14 @@ Page({
       'provinces': provinces,
       'citys': citys,
       'countys': countys,
-      'province': options.province || '天津市',
-      'city': options.city || '天津市',
-      'county': options.district || '河东区'
+      'province': _this.data.province,
+      'city': _this.data.city,
+      'county': _this.data.county
     })
-    setTimeout(() => {
-      this.setData({
-        condition: !this.data.condition,
-        cityback: !this.data.cityback
-      }) 
-    }, 2000);
+    this.setData({
+      condition: !this.data.condition,
+      cityback: !this.data.cityback
+    }) 
 
   },  
   // 省市联动
@@ -136,9 +131,10 @@ Page({
 
   },
   // 跳转详情
-  jumpBusOrderDetails(){
+  jumpBusOrderDetails(w){
+    let orderid = w.currentTarget.dataset.orderid;
     wx.navigateTo({
-      url: "/page/settled/pages/businessOrderDetails/businessOrderDetails"
+      url: "/page/settled/pages/businessOrderDetails/businessOrderDetails?orderid="+orderid
     });
   },
   closeCommonTip(){
@@ -146,13 +142,140 @@ Page({
       commonBulletFrame:false,
     })
   },
-  commonBulletFrameFun(e){
-    let index = e.currentTarget.dataset.index;
+  // 修改地址名字
+  namefun:function(e){
+    this.data.modifyName = e.detail.value;
+  },
+  // 修改地址手机号
+  telfun: function (e) { 
+    this.data.modifyMobile = e.detail.value
+  },
+  // 修改地址 地址详情
+  deladdressfun: function (e) {
     this.setData({
-      commonBulletFrame:true,
-      logisticsRefundModify:index
+      deladdress: e.detail.value
     })
   },
+  // 快递公司名称 Courier Services Company
+  cscfun: function (e) {
+    this.setData({
+      csc: e.detail.value
+    })
+  },
+  // 订单号 
+  scancodefun(e){
+    this.setData({
+      scanCodeMsg: e.detail.value
+    })
+  },
+  commonBulletFrameFun(e){
+    let index = e.currentTarget.dataset.index;
+    let num = e.currentTarget.dataset.num || 0; // 订单标识
+    var _this = this;
+    var order = _this.data.order || [];
+    var selectData = order[num] || {};
+    if(index == 1){ // 1 修改地址 2 退款 3 物流
+      var receipt = order[num].receipt || {};
+      _this.setData({
+        modifyName:receipt.consignee,
+        modifyMobile:receipt.mobile,
+        deladdress:receipt.address,
+        province:receipt.province,
+        city:receipt.city,
+        county:receipt.district
+      })
+    } else if(index == 2){
+
+    } else if(index == 3){
+
+
+    }
+    this.setData({
+      commonBulletFrame:true,
+      logisticsRefundModify:index,
+      orderNum:num,
+      selectData
+    })
+  },
+  // 弹框确认按钮    1 修改收货地址 2 退款 3 物流 4批量导出订单
+  confirmCommonTip(){ 
+    var _this = this;
+    var logisticsRefundModify = _this.data.logisticsRefundModify;
+    var selectData = _this.data.selectData || {};
+    console.log(logisticsRefundModify)
+    if(logisticsRefundModify == 1){
+
+          if (_this.data.modifyName == ''){
+            app.showToastC('姓名不能为空');
+            return false;
+          };
+          if (_this.data.modifyMobile.length == 0) {
+            app.showToastC('输入的手机号为空')
+            return false;
+          } else if (_this.data.modifyMobile.length < 11) {
+            app.showToastC('手机号长度有误！')
+            return false;
+          } else if (_this.data.modifyMobile && _this.data.modifyMobile[0]!=1) {
+            app.showToastC('手机号有误！')
+            return false;
+          };
+
+        api.modifyAddress(selectData.order.orderId,{
+            orderId:selectData.order.orderId,// 订单id 对内唯一标识
+            customerId:selectData.order.userId, //	Number对应订单的用户id
+            province:_this.data.province, //	String收件地省份
+            city:_this.data.city, //	String	收件地城市
+            distirct:_this.data.county, //	String	收件地区县
+            address:_this.data.deladdress, //	String	 收件地具体地址
+            consignee:_this.data.modifyName, //	String	 收件人姓名
+            mobile:_this.data.modifyMobile, //		String	收件人手机号
+            idcard:''
+        }).then(res => {
+          if (res.data.status_code == 200) {
+              app.showToastC('添加成功')
+              var orderNum = _this.data.orderNum || 0;
+              var receipt = _this.data.order[orderNum].receipt || [];
+              receipt.consignee = _this.data.modifyName;
+              receipt.mobile = _this.data.modifyMobile;
+              receipt.address = _this.data.deladdress;
+              receipt.province = _this.data.province;
+              receipt.city = _this.data.city;
+              receipt.district = _this.data.county;
+              _this.setData({
+                commonBulletFrame:false,
+                ['order[' + orderNum + '].receipt'] : receipt
+              });
+          }else{
+            if(res.data && res.data.message){
+              app.showModalC(res.data.message); 
+            };        
+          }          
+        })
+    }else if(logisticsRefundModify == 3){
+        if (_this.data.scanCodeMsg == "") {
+          app.showToastC('快递单号不能为空')
+          return false;
+        } else if (_this.data.csc == "") {
+          app.showToastC('快递公司名称不能为空')
+          return false;
+        };
+        api.addLogistics(selectData.order.orderId,{
+            orderId:selectData.order.orderId,	// Number订单id 对内唯一标识
+            customerId:selectData.order.userId, // 	Number对应订单的用户id
+            shippingCode:_this.data.scanCodeMsg	,// 	String快递单号
+            shippingName:_this.data.csc	// 	String快递公司名称
+        }).then(res => {
+          if (res.data.status_code == 200) {
+              app.showToastC('添加成功')
+          }else{
+            if(res.data && res.data.message){
+              app.showModalC(res.data.message); 
+            };        
+          }          
+        })
+    }
+  },
+
   scanCode: function() {
     var that = this;
     wx.scanCode({ //扫描API
@@ -171,18 +294,17 @@ Page({
 
   classifyChange(e){
     let that = this;
-    let index = e.currentTarget.dataset.index;
-    let name = e.currentTarget.dataset.name;
+    let index = e.currentTarget.dataset.index || 0;
     let ele = '#ele' + index;
     that.setData({
       centerIndex:index,
     })
+    this.getData();
     //创建节点选择器
     var query = wx.createSelectorQuery();
     //选择id
     query.select(ele).boundingClientRect();
     query.exec(function(res) {
-      console.log(res[0])
       that.setData({
         scrollleft:e.currentTarget.offsetLeft - wx.getSystemInfoSync().windowWidth/2 + (res[0].width/2)
       })
@@ -196,7 +318,7 @@ Page({
   },
   jumpsearch:function(){
     // this.eldatalistfun(0);
-    this.getlist(0);
+    this.getData();
   },
   onFocus: function (w) {
     this.setData({
@@ -205,10 +327,11 @@ Page({
   },  
 
   scrollViewTop(e){
-    var brandid = e.currentTarget.dataset.brandid;
+    var brandid = e.currentTarget.dataset.brandid || 0;
     this.setData({
       brandid:brandid
     });
+    this.getData();
     let that = this;
     let top = '#top' + brandid;
     //创建节点选择器
@@ -216,7 +339,6 @@ Page({
     //选择id
     query.select(top).boundingClientRect();
     query.exec(function(res) {
-      console.log(res[0])
       that.setData({
         scrollleftTop:e.currentTarget.offsetLeft - wx.getSystemInfoSync().windowWidth/2 + (res[0].width/2)
       })
@@ -252,10 +374,57 @@ Page({
       isProduce: app.signindata.isProduce,
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
     });
+
+    if(wx.getStorageSync('access_token')){
+      this.getData();
+    }else{
+      app.getAccessToken(_this.getData)
+    };
+    
   },
   // 获取数据
   getData(){
+     var _this = this;
+     console.log('=========================')
+     api.oMgetData({
+       'searchValue':_this.data.ordername,
+       'payStatus':_this.data.centerIndex,
+       'brandId':_this.data.brandid || 0
+     }).then((res) => {
+      if (res.data.status_code == 200) {
+          var brand = res.data.data.List.brand || [];
+          var order = res.data.data.List.order || [];
+          if(order && order.length != 0){
+            order.forEach(element => {
+               if(element.order.payTime){
+                  element.order.payTimeTrans = _this.toDate(element.order.payTime);
+               };
+            });
+          };
+          console.log(order)
+          _this.setData({
+            brand,
+            order
+          })
+      }else{
+        if(res.data && res.data.message){
+          app.showModalC(res.data.message); 
+        };        
+      }
 
+        console.log(res)
+     })
+  },
+
+  toDate(number,num) {
+    var date = new Date(number * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+    var Y = date.getFullYear();
+    var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
+    var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+    var h = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
+    var m = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+    var s = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
+    return Y + '/' + M + '/' + D +' ' + h + ':' + m + ':' +s;
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -289,7 +458,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    
+    this.getData()
   },
 
   /**
