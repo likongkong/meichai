@@ -7,6 +7,8 @@ const request = (url, options) => {
         wx.showLoading({
             title: '加载中',
         })
+        console.log( `${Dec.comUrlNew()}${url}`)
+        console.log(options.data)
         wx.request({
             url: `${Dec.comUrlNew()}${url}`,
             method: options.method,
@@ -21,6 +23,8 @@ const request = (url, options) => {
             },
             success(request) {
               wx.hideLoading();
+              wx.stopPullDownRefresh();
+              console.log('请求接口===========',request)
               if(request.statusCode == 401){  // access_token 过期 重新登陆
                 let pages = getCurrentPages();
                 var currPage = pages[pages.length - 1];
@@ -43,10 +47,6 @@ const request = (url, options) => {
             },
             fail(error) {
               console.log(error);
-              if(error){      
-                let pages = getCurrentPages();
-                console.log('============pages',pages)
-              }
               reject(error.data)
               wx.hideLoading();
             }, complete: () => {

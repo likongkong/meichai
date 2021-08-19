@@ -663,7 +663,32 @@ Page({
     // _this.exhibitionBenefits();
 
     // //  收货地址
-    _this.nextpagediao();
+    if(app.signindata.receivingAddress && app.signindata.receivingAddress.length != 0){
+      var rdl = app.signindata.receivingAddress;
+      var tptipadi = '';
+      var tptipadd = '';
+      var tipnamephone = '';
+      for (var i = 0; i < rdl.length; i++) {
+        if (rdl[i].isdefault == 1) {
+          rdl[i].checked = false;
+          tptipadi = rdl[i].aid;
+          tptipadd = rdl[i].address;
+          tipnamephone = rdl[i].consignee + " " + rdl[i].phone;
+        } else {
+          rdl[i].checked = false;
+        }
+      };
+      _this.data.tipaid = tptipadi;
+      _this.setData({
+        addressdata: rdl,
+        tipnamephone: tipnamephone,
+        tipaddress: tptipadd
+      })
+      console.log('地址=======onloadfun====',_this.data.addressdata)
+    }else{
+      _this.nextpagediao();
+    };
+    
 
     if(_this.data.defaultinformation){}else{
       console.log('defaultinformation=====接口')

@@ -189,8 +189,8 @@
         <view class="orderMangTipCenterEve" style="width:610rpx;margin:auto;">
             <block wx:if='{{logisticsRefundModify == 4 || logisticsRefundModify == 5}}'>
                 <view class="oAMaBConfirm" catchtap="closeCommonTip">关闭</view>
-                <view class="oAMaBCancel"  wx:if='{{logisticsRefundModify == 4}}'>复制下载链接</view> 
-                <view class="oAMaBCancel"  wx:elif='{{logisticsRefundModify == 5}}'>选择微信聊天</view>
+                <view class="oAMaBCancel" catchtap="confirmCommonTip"  wx:if='{{logisticsRefundModify == 4}}'>复制下载链接</view> 
+                <view class="oAMaBCancel" catchtap="confirmCommonTip"  wx:elif='{{logisticsRefundModify == 5}}'>选择微信聊天</view>
             </block>
             <block wx:else>
                 <view class="oAMaBConfirm" catchtap="closeCommonTip">取消</view>

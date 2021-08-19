@@ -1037,7 +1037,6 @@ Page({
    */
   onShow:function(){
     Dec.shopnum(this);
-    Dec.getdoubleEleven(this, app);
 
     this.setData({
       nowAdmissionTime:Date.parse(new Date()) / 1000

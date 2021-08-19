@@ -2,6 +2,7 @@
 var Dec = require('../../../../common/public');//aes加密解密js
 var tcity = require("../../../../common/citys.js");
 var api = require("../../../../utils/api.js");
+var COS = require("../../../../common/cos-wx-sdk-v5.js")
 const app = getApp();
 Page({
   /**
@@ -188,7 +189,48 @@ Page({
 
     } else if(index == 3){
 
+    }else if(index == 4){
+      var access_token = wx.getStorageSync('access_token') || '';
+      wx.downloadFile({
+        url: `${Dec.comUrlNew()}brand/exportorder`,
+        header: {
+          'app-version': Dec.versionnumber,
+          'Accept': 'application/x.mcts.v1+json',
+          'app-source':3,
+          'Authorization': 'Bearer ' + access_token          
+        },
+        success: function(res) {
+            var filePath = res.tempFilePath;
+            console.log(filePath);
+            wx.openDocument({
+                filePath: filePath,
+                success: function(res) {
+                    console.log('打开文档成功')
+                },
+                fail: function(res) {
+                    console.log(res);
+                },
+                complete: function(res) {
+                    console.log(res);
+                }
+            })
+        },
+        fail: function(res) {
+            console.log('文件下载失败');
+        },
+        complete: function(res) {},
+    })
 
+      // api.exportOrder({}).then((res)=>{
+      //   console.log('导出订单=======',res)
+      //  if (res.data.status_code == 200) {
+      //      app.showToastC('添加成功')
+      //  }else{
+      //    if(res.data && res.data.message){
+      //      app.showModalC(res.data.message); 
+      //    };        
+      //  }
+      // });
     }
     this.setData({
       commonBulletFrame:true,
@@ -251,6 +293,20 @@ Page({
             };        
           }          
         })
+    }else if(logisticsRefundModify == 2){
+        api.brandRefund({
+            orderId:selectData.order.orderId,	// Number订单id 对内唯一标识
+            customerId:selectData.order.userId // 	Number对应订单的用户id
+        }).then(res => {
+          if (res.data.status_code == 200) {
+              app.showToastC('退款成功')
+              _this.getData();
+          }else{
+            if(res.data && res.data.message){
+              app.showModalC(res.data.message); 
+            };        
+          }          
+        })
     }else if(logisticsRefundModify == 3){
         if (_this.data.scanCodeMsg == "") {
           app.showToastC('快递单号不能为空')
@@ -267,13 +323,77 @@ Page({
         }).then(res => {
           if (res.data.status_code == 200) {
               app.showToastC('添加成功')
+              _this.getData();
           }else{
             if(res.data && res.data.message){
               app.showModalC(res.data.message); 
             };        
           }          
         })
+    }else if(logisticsRefundModify == 4){
+
+    }else if(logisticsRefundModify == 5){
+      var cos = new COS({
+        SecretId: 'AKIDmY0RxErYIm2TfkckG8mEYbcNA4wYsPbe',
+        SecretKey: '4WkpgJ5bJlU4B6wNuCG4EDyVnGWUFhw1',
+      });
+
+      wx.chooseMessageFile({
+        count: 1,
+        type: 'file',
+        success (res) {
+          console.log('上传文件',res)
+          // tempFilePath可以作为img标签的src属性显示图片
+          const tempFilePaths = res.tempFiles;
+          if(tempFilePaths && tempFilePaths.length != 0){
+              var iftr = true;
+              tempFilePaths.forEach(element => {
+                  console.log(element)
+                  var filePath = element.path;
+                  //获取最后一个.的位置
+                  var index= filePath.lastIndexOf(".");
+                  //获取后缀
+                  var ext = filePath.substr(index+1);
+                  var fileName =  `${app.signindata.uid}_${new Date().getTime()}.${ext}`;
+                  cos.postObject({
+                        Bucket: 'brand-settled-info-1300990269',
+                        Region: 'ap-beijing',
+                        Key: `excel/${fileName}`,
+                        FilePath: filePath,
+                        onProgress: function (info) {  //上传进度
+                            console.log('进度条',JSON.stringify(info));
+                        }
+                      },(err, data) => {
+                        console.log(err,data)
+                        if(data){
+                          api.brandImport({
+                            fileName:fileName
+                          }).then((res)=>{
+                            if (res.data.status_code == 200) {
+                              app.showToastC('上传成功')
+                              _this.getData();
+                            }else{
+                              if(res.data && res.data.message){
+                                app.showModalC(res.data.message); 
+                              };        
+                            };
+                          })
+                        }else if(err){
+                          app.showToastC('上传失败')
+                        };
+
+                      }
+                  );
+              });
+          };
+
+        }
+      })
     }
+    _this.setData({
+      commonBulletFrame:false
+    });
+
   },
 
   scanCode: function() {
@@ -391,6 +511,7 @@ Page({
        'payStatus':_this.data.centerIndex,
        'brandId':_this.data.brandid || 0
      }).then((res) => {
+      console.log('列表数据=======',res)
       if (res.data.status_code == 200) {
           var brand = res.data.data.List.brand || [];
           var order = res.data.data.List.order || [];
@@ -410,9 +531,7 @@ Page({
         if(res.data && res.data.message){
           app.showModalC(res.data.message); 
         };        
-      }
-
-        console.log(res)
+      };
      })
   },
 

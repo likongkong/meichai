@@ -225,8 +225,8 @@ Page({
     var _this = this;
     var logisticsRefundModify = _this.data.logisticsRefundModify;
     console.log(logisticsRefundModify)
+    var selectData = _this.data.detailData;
     if(logisticsRefundModify == 1){
-       var selectData = _this.data.detailData;
         if (_this.data.modifyName == ''){
           app.showToastC('姓名不能为空');
           return false;
@@ -261,7 +261,6 @@ Page({
               receipt.city = _this.data.city;
               receipt.district = _this.data.county;
               _this.setData({
-                commonBulletFrame:false,
                 ['detailData.receipt'] : receipt
               })
           }else{
@@ -270,29 +269,47 @@ Page({
             };        
           }          
         })
-    }else if(logisticsRefundModify == 3){
-      if (_this.data.scanCodeMsg == "") {
-        app.showToastC('快递单号不能为空')
-        return false;
-      } else if (_this.data.csc == "") {
-        app.showToastC('快递公司名称不能为空')
-        return false;
-      };
-      api.addLogistics(selectData.order.orderId,{
+    }else if(logisticsRefundModify == 2){
+      api.brandRefund({
           orderId:selectData.order.orderId,	// Number订单id 对内唯一标识
-          customerId:selectData.order.userId, // 	Number对应订单的用户id
-          shippingCode:_this.data.scanCodeMsg	,// 	String快递单号
-          shippingName:_this.data.csc	// 	String快递公司名称
+          customerId:selectData.order.userId // 	Number对应订单的用户id
       }).then(res => {
         if (res.data.status_code == 200) {
-            app.showToastC('添加成功')
+            app.showToastC('退款成功')
+            _this.getData();
         }else{
           if(res.data && res.data.message){
             app.showModalC(res.data.message); 
           };        
         }          
       })
-  }
+    }else if(logisticsRefundModify == 3){
+        if (_this.data.scanCodeMsg == "") {
+          app.showToastC('快递单号不能为空')
+          return false;
+        } else if (_this.data.csc == "") {
+          app.showToastC('快递公司名称不能为空')
+          return false;
+        };
+        api.addLogistics(selectData.order.orderId,{
+            orderId:selectData.order.orderId,	// Number订单id 对内唯一标识
+            customerId:selectData.order.userId, // 	Number对应订单的用户id
+            shippingCode:_this.data.scanCodeMsg	,// 	String快递单号
+            shippingName:_this.data.csc	// 	String快递公司名称
+        }).then(res => {
+          if (res.data.status_code == 200) {
+              app.showToastC('添加成功')
+              _this.getData();
+          }else{
+            if(res.data && res.data.message){
+              app.showModalC(res.data.message); 
+            };        
+          }          
+        })
+    }
+    _this.setData({
+      commonBulletFrame:false
+    })
   },
 
   scanCode: function() {

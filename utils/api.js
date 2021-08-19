@@ -27,6 +27,18 @@ export const modifyAddress = (url,query) => {
 export const addLogistics = (url,query) => {
     return apiResquest.post('brand/delivery/' + url,query)
 }
+// 导入信息
+export const brandImport = (query) => {
+    return apiResquest.post('brand/syncShippingCode',query)
+}
+// 导出信息
+export const exportOrder = (query) => {
+    return apiResquest.get('brand/exportorder',query)
+}
+// 退款
+export const brandRefund = (query) => {
+    return apiResquest.post('brand/acceptRefund',query)
+}
 // ---------------------------------------- 订单详情 -----------------------------------------
 export const oMbrandInfo = (url,query) => {
     return apiResquest.get('brand/info/' + url,query)
