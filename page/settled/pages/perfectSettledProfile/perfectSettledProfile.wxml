@@ -5,7 +5,9 @@
   <view class="size26"> 完善信息之后，您的IP信息将展示在发现广场 </view>
   <view class="size26"> <text style="text-decoration:underline;color:#8BCFFD;" catchtap="toggleSampleGraphMask">点击示例</text>，查看IP浏览样式</view>
   <view style="border-top: 2rpx solid #EEEDED;margin-top:30rpx;">
-    <settledForm 
+    <settledForm
+      id="settledForm"
+      statusBarHeightMc="{{statusBarHeightMc}}"
       list="{{enterpriseData}}"
       bind:bindchange="bindchange"
       num="{{num}}"

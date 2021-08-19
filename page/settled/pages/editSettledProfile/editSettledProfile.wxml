@@ -5,11 +5,13 @@
     <block wx:if="{{num == 4}}">
         <settledForm 
             id="settledForm"
+            statusBarHeightMc="{{statusBarHeightMc}}"
             list="{{enterpriseData}}"
             bind:bindchange="bindchange"
             num="{{num}}"
             isEdit="true"
-            brandInfo="{{brandInfo}}">
+            brandInfo="{{brandInfo}}"
+            >
         </settledForm>
         <block>
             <view class="footerWrap">

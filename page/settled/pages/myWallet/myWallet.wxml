@@ -29,21 +29,24 @@
     </view>
   </view>
   <view class="content">
-    <view class="orderItem">
-      <view class="orderItemL">
-        <image src="https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJZMPzEm1ibLhPGyic11ViagbFKa3Bkdialthkbu1iaKOwLASqD5IMHm7ibicFCB60nRtHO4x0CKHBia22elQ/132" mode="widthFix"></image>
-      </view>
-      <view class="orderItemR">
-        <view>
-          <text class="color101010">订单退款--海濑先生</text>
-          <text class="colorFFB730">+159.00</text>
+    <block wx:for="{{orderData}}" wx:key="{{index}}">
+      <view class="orderItem">
+        <view class="orderItemL">
+          <image src="https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJZMPzEm1ibLhPGyic11ViagbFKa3Bkdialthkbu1iaKOwLASqD5IMHm7ibicFCB60nRtHO4x0CKHBia22elQ/132" mode="widthFix"></image>
         </view>
-        <view>
-          <text class="colorA2A2A2">8月14日 12:00:00</text>
-          <text class="colorA2A2A2">余额 159.00</text>
+        <view class="orderItemR">
+          <view>
+            <text class="color101010">{{item.title}}</text>
+            <text class="colorFFB730">+{{item.cart_amount}}</text>
+          </view>
+          <view>
+            <text class="colorA2A2A2">{{item.insert_time_date}}</text>
+            <text class="colorA2A2A2">余额 {{item.overage}}</text>
+          </view>
         </view>
       </view>
-    </view>
+    </block>
+   
    
     <!-- <view class="noData">
       <image src="https://cdn.51chaidan.com/images/brandSettledIcon/deal.png" mode="widthFix"></image>

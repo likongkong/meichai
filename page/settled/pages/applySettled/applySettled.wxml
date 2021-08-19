@@ -7,6 +7,8 @@
         <view class="aFoCenter boxShadowEve">
         <!-- <scroll-view scroll-y style="height:{{contentHeight-105}}px;"> -->
             <settledForm 
+            id="settledForm"
+            statusBarHeightMc="{{statusBarHeightMc}}"
             list="{{enterpriseData}}"
             bind:bindchange="bindchange"
             num="{{num}}"
@@ -24,6 +26,8 @@
             {{brandSettledReturnMsg}}
         </view>
         <settledForm 
+            id="settledForm"
+            statusBarHeightMc="{{statusBarHeightMc}}"
             list="{{enterpriseData}}"
             bind:bindchange="bindchange"
             num="{{num}}"

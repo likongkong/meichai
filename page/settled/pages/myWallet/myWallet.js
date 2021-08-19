@@ -1,6 +1,7 @@
 
 var Dec = require('../../../../common/public');//aes加密解密js
 var tcity = require("../../../../common/citys.js");
+var api = require("../../../../utils/api.js");
 const app = getApp();
 Page({
   /**
@@ -47,6 +48,8 @@ Page({
         name: '日本'
       }
     ],
+    limitprame:1,  //当前页码
+    perPage:20  //每页多少条
   },
   /**
    * 生命周期函数--监听页面加载
@@ -66,6 +69,12 @@ Page({
   onLoadfun(){
     this.data.loginid = app.signindata.loginid;
     this.data.uid = app.signindata.uid;
+    if(wx.getStorageSync('access_token')){
+      this.getListData();
+    }else{
+      app.getAccessToken(this.onLoadfun)
+    };
+    
 
     // wx.showModal({
     //   title: '',
@@ -93,6 +102,20 @@ Page({
     //   }
     // })
 
+  },
+  getListData(){
+    let data = {
+      limitprame:this.data.limitprame,
+      perPage:this.data.perPage,
+    }
+    api.settledWithCashList(data).then((res) => {
+      console.log(res)
+      this.setData({
+        orderData:res.data.data.list
+      })
+    }).catch((err)=>{
+      console.log(err)
+    })
   },
   bindDateChange(e) {
     this.setData({
@@ -199,7 +222,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    
+    this.getListData()
   },
 
   /**

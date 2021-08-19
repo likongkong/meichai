@@ -161,7 +161,8 @@
         "pages/businessOrderDetails/businessOrderDetails",
         "pages/editSettledProfile/editSettledProfile",
         "pages/perfectSettledProfile/perfectSettledProfile",
-        "pages/myWallet/myWallet"
+        "pages/myWallet/myWallet",
+        "pages/incomingsOutgoingsDetail/incomingsOutgoingsDetail"
       ]
     }
   ],

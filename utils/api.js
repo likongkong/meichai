@@ -14,6 +14,11 @@ export const brandCertification = (query) => {
     )
 }
 
+//---------------------------------------- 我的钱包 ----------------------------------
+// 获取订单列表
+export const settledWithCashList = (query) => {
+    return apiResquest.get('brand/settled_with/settled_with_cash/list',query)
+}
 // ---------------------------------------- 订单管理 -----------------------------------------
 // 获取收据
 export const oMgetData = (query) => {
