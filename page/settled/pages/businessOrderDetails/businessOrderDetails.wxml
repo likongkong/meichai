@@ -50,7 +50,7 @@
 
     <view class="orderBottomNavigation">
         <view class="orderBottomNavEve bottomButComWidth" catchtap="commonBulletFrameFun" data-index='3'>添加物流</view>
-        <view class="orderBottomNavEve bottomButComWidth" catchtap="commonBulletFrameFun" data-index='2'>退款</view>
+        <view class="orderBottomNavEve bottomButComWidth" style="margin:0 37rpx;" catchtap="commonBulletFrameFun" data-index='2'>退款</view>
         <view class="orderBottomNavEve bottomButComWidth" catchtap="commonBulletFrameFun" data-index='1'>修改收货地址</view>
     </view>
 
@@ -154,10 +154,20 @@
             第三步：下载完成，打开文件，进行编辑。
             </text>          
         </block>
+        <!-- 批量导入订单 -->
+        <block wx:elif='{{logisticsRefundModify == 5}}'>
+            <text class="batchExportOrder">导入运单步骤：
+        第一步：点击“选择微信聊天文件”。
+        第二步：选择包含导入文件的微信聊天。
+        第三步：选择需要导入的文件，文件格式为excel。
+        第四步：上传成功。</text>          
+        </block>
+
         <view class="orderMangTipCenterEve" style="width:610rpx;margin:auto;">
-            <block wx:if='{{logisticsRefundModify == 4}}'>
+            <block wx:if='{{logisticsRefundModify == 4 || logisticsRefundModify == 5}}'>
                 <view class="oAMaBConfirm" catchtap="closeCommonTip">关闭</view>
-                <view class="oAMaBCancel">复制下载链接</view> 
+                <view class="oAMaBCancel"  wx:if='{{logisticsRefundModify == 4}}'>复制下载链接</view> 
+                <view class="oAMaBCancel"  wx:elif='{{logisticsRefundModify == 5}}'>选择微信聊天</view>
             </block>
             <block wx:else>
                 <view class="oAMaBConfirm" catchtap="closeCommonTip">取消</view>

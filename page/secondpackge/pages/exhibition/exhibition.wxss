@@ -76,12 +76,12 @@ page {
   height: 40rpx;
   line-height: 40rpx;
   text-align: center;
-  padding: 0 8rpx;
+  padding: 0 2rpx;
   float: right;
   border-radius: 5rpx;
   color: #fff;
   margin-top: 3rpx;
-  max-width: 70rpx;
+  max-width: 90rpx;
 }
 
 .indheadinp {

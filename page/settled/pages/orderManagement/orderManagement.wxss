@@ -197,7 +197,7 @@ page{
 .orderBottomNavigation{
   width: 100%;
   display: flex;
-  justify-content:space-around;
+  justify-content:center;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -206,7 +206,7 @@ page{
 }
 
 .orderBottomNavEve{
-  width: 280rpx;
+  width: 300rpx;
   height: 68rpx;
   line-height: 68rpx;
   text-align: center;
@@ -274,7 +274,7 @@ page{
 }
 
 .oAMaBConfirm{
-  width: 170rpx;
+  width: 200rpx;
   height: 64rpx;
   line-height: 64rpx;
   text-align: center;

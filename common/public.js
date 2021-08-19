@@ -145,33 +145,10 @@ function comiftrsign(_this,res,app) {
     });
   };
 }
-function getdoubleEleven(_this, app) {
-  var _this = _this;
-  if (_this.data.uid && _this.data.loginid) {
-    var qq = Aese('mod=automat&operation=getChance&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
-    wx.request({
-      url: app.signindata.comurl + 'spread.php' + qq,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        if (res.data.ReturnCode == 200) {
-          _this.setData({
-            automatTimes: res.data.Info.currenChance,
-          });
-          app.signindata.automat = { isOpen: app.signindata.automat.isOpen, times: res.data.Info.currenChance }
-        };
-      }
-    })
-  } else {
-    _this.setData({
-      automatTimes: 0
-    });
-  };
-}
+
 
 console.log('envVersion',__wxConfig.envVersion);
 
-module.exports.getdoubleEleven = getdoubleEleven;
 module.exports.comurl = comurl;
 module.exports.zdyurl = zdyurl;
 module.exports.sharemc = sharemc; 
