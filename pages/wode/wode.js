@@ -85,7 +85,9 @@ Page({
     // 是否请求完成
     requestCompleted:false,
     showVipStatus:1,
-    isSettledImg:true
+    isSettledImg:true,
+    // 审核状态
+    brandSettledStatus:1
   },
   closeSettledImg(){
     this.setData({
@@ -317,6 +319,7 @@ Page({
           if (res.data.ReturnCode == 200){
             _this.setData({
               dataInfo: res.data.Info,
+              brandSettledStatus: res.data.Info.brandSettledInfo.brandSettledStatus,
               vipAdvertising: res.data.Info.vipAdvertising||'',
               // 待付款
               nonpayment: res.data.Info.non_payment||0,

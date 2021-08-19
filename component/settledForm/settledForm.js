@@ -99,6 +99,21 @@ Component({
         }
       });
     },
+    scrollto(e){
+      console.log(e)
+      const query = wx.createSelectorQuery();
+      query.select("#enterpriseContact").boundingClientRect();
+      query.selectViewport().scrollOffset();
+      query.exec((res)=>{
+        console.log(res);
+        if(res[0] && res[1]){
+          wx.pageScrollTo({
+            scrollTop:res[0].top + res[1].scrollTop,
+            duration:200
+          })
+        }
+      })
+    }
   }
    
 })

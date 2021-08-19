@@ -286,7 +286,7 @@ Page({
         if(res.data.ReturnCode == 200){
           wx.showModal({
             title: '提交成功',
-            content: '24小时之内会有工作人员加您微信，请耐心等待。',
+            content: id == 0?'24小时之内会有工作人员加您微信，请留意您的微信消息。':'24小时之内会有工作人员和您联系，请留意您的微信消息。',
             showCancel:false,
             confirmText:'关闭',
             confirmColor:'#02BB00',

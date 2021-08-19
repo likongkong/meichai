@@ -113,19 +113,22 @@
   width: 612rpx;
   padding-left: 14rpx;
   box-sizing: border-box;
-  display: flex;
+  /* display: flex;
   align-content:space-between;
-  flex-wrap: wrap;
+  flex-wrap: wrap; */
 }
 .orderItemR view{
   width: 100%;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 18rpx;
+}
+.orderItemR view:last-child{
+  margin-bottom: 0;
 }
 .orderItemR view text{
   font-size: 28rpx;
 }
-
 .noData{
   font-size: 28rpx;
   display: block;
@@ -149,7 +152,7 @@
   background: #000;
   opacity: 0.4;
   overflow: hidden;
-  z-index: 1000;
+  z-index:90;
   color: #fff;
 }
 /*对话框 */
@@ -159,7 +162,7 @@
   position: fixed;
   bottom: 0;
   left: 0;
-  z-index: 2000;
+  z-index: 91;
   background: #fff;
   padding-top: 32rpx;
 }
@@ -226,17 +229,20 @@
   box-sizing: border-box;
   font-size: 28rpx;
 }
-.footerWrap{
+.setfooter{
+  width: 100%;
   padding: 20rpx 70rpx 40rpx 70rpx;
   box-sizing: border-box;
-  display: flex;
-  justify-content: space-between;
   position: absolute;
   bottom: 0;
   left: 0;
+  z-index: 90;
+}
+.footerWrap{
+  display: flex;
+  justify-content: space-between;
   width: 100%;
   background-color: #ffffff;
-  z-index: 100;
 }
 .footerWrap view{
   height: 80rpx;
@@ -255,4 +261,69 @@
   height: 84rpx;
   background: #90D2D6;
   color: #ffffff;
+}
+
+
+.mask{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,.4);
+  z-index: 92;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.descriptionWrap,.authenticationWrap{
+  width: 88%;
+  border-radius: 14rpx;
+  background-color: #fff;
+  padding: 0 46rpx;
+  box-sizing: border-box;
+}
+.descriptionWrap text{
+  display: block;
+  text-align: center;
+  color: #101010;
+  font-size: 28rpx;
+  margin: 26rpx 0 20rpx 0;
+}
+.descriptionWrap button{
+  width: 160rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color:#fff;
+  border: 2rpx solid #90D2D6;
+  font-size: 26rpx;
+  color: #90D2D6;
+  margin: 50rpx auto 50rpx; 
+}
+.descriptionWrap button::after{
+  border:none;
+}
+
+.authenticationWrap{
+  padding-bottom: 54rpx;
+}
+.authenticationWrap text{
+  display: block;
+  text-align: center;
+  font-size: 32rpx;
+}
+.authenticationWrap .title{
+  font-size: 32rpx;
+  color: #000;
+  margin-top: 18rpx;
+}
+.authenticationInfo{
+  margin: 58rpx 0 54rpx 0;
+}
+.authenticationInfo text{
+  font-size: 28rpx;
+  margin-bottom: 20rpx;
+}
+.authenticationInfo text:last-child{
+  margin-bottom: 0;
 }

@@ -4,6 +4,7 @@
 <view class="applyForOccupancy">
     <block wx:if="{{num == 4}}">
         <settledForm 
+            id="settledForm"
             list="{{enterpriseData}}"
             bind:bindchange="bindchange"
             num="{{num}}"

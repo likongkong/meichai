@@ -1,7 +1,7 @@
 <view>
   <view class="listWrap">
     <block wx:for="{{list}}" wx:key='key'>
-      <view wx:if="{{item.type == 'text'}}" class="{{num==1?'columnWrap':'rowWrap'}} {{item.borderbottom1?'':'borderbottom1'}} {{item.paddingL80?'paddingL80':''}}">
+      <view wx:if="{{item.type == 'text'}}" id="{{item.name}}" class="{{num==1?'columnWrap':'rowWrap'}} {{item.borderbottom1?'':'borderbottom1'}} {{item.paddingL80?'paddingL80':''}}">
         <view class="cEveTitle"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
         <input class="cEveInput" disabled="{{num==2?true:flase}}" data-name="{{item.name}}" placeholder="{{item.placeholder}}" type="text" value="{{item.value}}" bindinput="onKeyInput"></input>
         <image wx:if="{{item.isEdit?false:isEdit}}" class="editIcon" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="widthFix"></image>
@@ -9,7 +9,7 @@
       <view wx:if="{{item.type == 'title'}}" class="{{num==1?'columnWrap':'rowWrap'}} {{item.borderbottom1?'':'borderbottom1'}}">
         <view class="cEveTitle" style="height:60rpx"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
       </view>
-      <view wx:if="{{item.type == 'uploadImg'}}" class="columnWrap {{item.borderbottom1?'':'borderbottom1'}} {{item.paddingL80?'paddingL80':''}}" data-storagelocation="{{item.storagelocation}}" data-name="{{item.name}}" data-index="{{index}}" catchtap="{{num==2?'':'uploadImage'}}">
+      <view wx:if="{{item.type == 'uploadImg'}}" id="{{item.name}}" class="columnWrap {{item.borderbottom1?'':'borderbottom1'}} {{item.paddingL80?'paddingL80':''}}" data-storagelocation="{{item.storagelocation}}" data-name="{{item.name}}" data-index="{{index}}" catchtap="{{num==2?'':'uploadImage'}}">
         <view class="cEveTitle"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
         <block>
           <view wx:if="{{item.src != ''}}" class="flex marginTB25">
@@ -27,7 +27,7 @@
           </view>
         </block>
       </view>
-      <view wx:if="{{item.type == 'textarea'}}" class="columnWrap {{item.borderbottom1?'':'borderbottom1'}}">
+      <view wx:if="{{item.type == 'textarea'}}" id="{{item.name}}" class="columnWrap {{item.borderbottom1?'':'borderbottom1'}}">
         <view class="cEveTitle"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
         <!-- <input class="cEveInput" data-name="enterpriseName" placeholder="{{item.placeholder}}" value="" type="text"></input> -->
         <textarea class="textarea" disabled="{{num==2?true:flase}}" data-name="{{item.name}}" auto-height placeholder="{{item.placeholder}}" value="{{item.value}}" bindinput="onKeyInput"/>

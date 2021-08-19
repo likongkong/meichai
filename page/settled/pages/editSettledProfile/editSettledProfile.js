@@ -215,10 +215,12 @@ Page({
     let phoneNum = /^1[3456789]\d{9}$/;
 
     if(!obj.enterpriseName || obj.enterpriseName == ''){
+      this.selectComponent('#settledForm').scrollto('enterpriseName');
       app.showToastC('请输入企业名称',1500);
       return false;
     }
     if(!obj.enterpriseContact || obj.enterpriseContact == ''){
+      this.selectComponent('#settledForm').scrollto('enterpriseContact');
       app.showToastC('请输入企业联系人',1500);
       return false;
     }
@@ -261,10 +263,11 @@ Page({
       header: { 'Accept': 'application/json' },
       success: function (res) { 
         console.log('提交审核====',res)
+        wx.hideLoading()
         if(res.data.ReturnCode == 200){
           wx.showModal({
-            title: '提交成功',
-            content: '24小时之内会有工作人员加您微信，请耐心等待。',
+            title: '修改成功',
+            content: '24小时之内会通知您审核结果，请耐心等待',
             showCancel:false,
             confirmText:'关闭',
             confirmColor:'#02BB00',
@@ -283,11 +286,9 @@ Page({
         }else{
           app.showToastC(res.data.Msg,2000);
         }
-       
       },
       fail: function () {},
       complete:function(){
-        wx.hideLoading()
       }
     });
   }
