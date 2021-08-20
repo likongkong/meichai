@@ -356,7 +356,7 @@ page{background:#f5f6fa;}.dlfbox{width:100%;background:#f5f6fa;}::-webkit-scroll
 }
 
 .dlevegttu{
-  float:right;max-width:50rpx;padding:0 13rpx 0 50rpx;height:55rpx;line-height:55rpx;display:inline-block;position:relative;vertical-align:top;font-size:24rpx;position:relative;text-align:right;
+  max-width:50rpx;padding:0 13rpx 0 50rpx;height:55rpx;line-height:55rpx;position:relative;vertical-align:top;font-size:24rpx;float: right;
 }
 
 

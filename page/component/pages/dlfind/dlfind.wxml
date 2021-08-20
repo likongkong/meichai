@@ -183,6 +183,7 @@
                 </view>
             </view>
             <view class='dlfhtitlenew' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail' wx:if='{{item.title}}'>{{item.title}}</view>
+            <view class='dlfhtitlenew'>签到赢积分</view>
             <view class='dlfhpbox'>
               <view style='width:40rpx;height:40rpx;border-radius:50%;float:left;margin:8rpx 8rpx 0 8rpx;position: relative;' catchtap='jumpdlfchlimgdetail' data-nick='{{item.nick}}' data-uid='{{item.uid}}'>
                 <image src='{{item.litpic}}' style="width:100%;height:100%;border-radius:50%;"></image>
