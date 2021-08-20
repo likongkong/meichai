@@ -1,0 +1,80 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class="atlas">
+    <swiper class="atlasswiper" indicator-color="#fff" indicator-active-color="#ccc" indicator-dots="{{true}}" circular="true" autoplay="true" interval="4000" duration="450">
+        <swiper-item wx:for="{{movies}}" wx:key="key">
+                <image class="atlasswiperimage" src='{{item}}' style="height:100%;width:100%;display:block;" data-index='{{index}}' bindtap='previewImg' mode='aspectFit'></image>
+        </swiper-item>
+    </swiper> 
+    <view class="atlasIwant">
+         <view class="atlasIwantEve" style="margin-right:30rpx;">
+            <view class="atlasIwantETop"><image class="emlplefimgshare" src="https://www.51chaidan.com/images/brand/red_heart.png"></image>我有同款</view>
+            <view class="atlasIwantEb">
+                <image wx:for="{{movies}}" wx:key="key" class="atlasIwantEbImg" src='{{item}}' style="z-index:{{index+1}};left:{{index*15}}rpx;" data-index='{{index}}' bindtap='previewImg' mode='aspectFit'></image>
+                785人有同款
+            </view>
+         </view>
+         <view class="atlasIwantEve">
+            <view class="atlasIwantETop"><image class="emlplefimgshare" src="https://www.51chaidan.com/images/brand/red_heart.png"></image>我想要</view>
+            <view class="atlasIwantEb">
+                <image wx:for="{{movies}}" wx:key="key" class="atlasIwantEbImg" src='{{item}}' style="z-index:{{index+1}};left:{{index*15}}rpx;" data-index='{{index}}' bindtap='previewImg' mode='aspectFit'></image>
+                785人想要
+            </view>
+         </view>
+    </view>
+    <view class="atlasCenter">
+       <view class="atlasCName">航海王 Anniversary</view>
+       <view class="atlasCNChild">发售信息</view>
+       <view class="atlasCNChildEve">
+           <view class="atlasCNChildETop">
+               <view>2021/08/15 20:00发售</view>
+               <view style="color:#4C9D49;">进行中</view>
+           </view>
+           <view class="atlasCNChildETop">
+               <view style="color:#929292;">来自美拆发售</view>
+           </view>
+           <view class="atlasCNChildETop" style="margin-bottom:0;">
+               <view></view>
+               <view class="startSubscription" style="background:#EC817C;">去购买</view>
+           </view>
+       </view>
+
+       <view class="atlasCNChildEve">
+           <view class="atlasCNChildETop">
+               <view>2021/08/15 20:00发售</view>
+               <view style="color:#4C9D49;">进行中</view>
+           </view>
+           <view class="atlasCNChildETop">
+               <view style="color:#929292;">来自美拆发售</view>
+           </view>
+           <view class="atlasCNChildETop" style="margin-bottom:0;">
+               <view></view>
+               <view class="startSubscription" style="background:#FF890B;">开售订阅</view>
+           </view>
+       </view>
+
+       <view class="atlasCNChildEve">
+           <view class="atlasCNChildETop">
+               <view>2021/08/15 20:00发售</view>
+               <view style="color:#4C9D49;">进行中</view>
+           </view>
+           <view class="atlasCNChildETop">
+               <view style="color:#929292;">来自美拆发售</view>
+           </view>
+           <view class="atlasCNChildETop" style="margin-bottom:0;">
+               <view></view>
+               <view class="startSubscription" style="background:#1296DB;" >开售订阅</view>
+           </view>
+       </view>
+
+       <view class="atlasCNChild">产品信息</view>
+       <view class="atlasCNChild">品      牌：万代南梦宫></view>
+       <view class="atlasCNChild">价      格：109元/体</view>
+       <view class="atlasCNChild">数      量：500体</view>
+       <view class="atlasCNChild">发售方式：美拆线上抽选发售方式：美拆线上抽选</view>
+       <view class="atlasCNChild">简      介：正版授权航海王 Anniversary航海王 AnnivAnniversary航海王</view>
+
+
+    </view>   
+</view>
