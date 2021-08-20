@@ -9,6 +9,12 @@ Component({
       observer(newVal){
         console.log(newVal)
       }
+    },
+    intact:{
+      type: String,
+      observer(newVal){
+        console.log(newVal)
+      }
     }
   },
   lifetimes: {

@@ -14,6 +14,7 @@ Page({
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     uid:'',
     loginid:'',
+    num:1
   },
   /**
    * 生命周期函数--监听页面加载

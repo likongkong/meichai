@@ -87,7 +87,7 @@ Page({
     showVipStatus:1,
     isSettledImg:true,
     // 审核状态
-    brandSettledStatus:1
+    brandSettledStatus:0
   },
   hideBrandSettledSuccessMask(){
     this.setData({

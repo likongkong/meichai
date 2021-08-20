@@ -3,6 +3,8 @@
 
 <view class="wrap">
 
+  <settledProgress num="{{num}}" intact="show"></settledProgress>
+
   
   <view class="incomeWrap">
     <view class="incomeBox">

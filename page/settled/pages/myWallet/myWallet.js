@@ -30,6 +30,8 @@ Page({
     isAuthenticationMask:false,  //提现认证弹框
     date:'',
     transactionType:0,
+    orderData:[],  //列表数据
+    noData:false,
     transactionTypeArray: [
       {
         id: '',
@@ -53,6 +55,7 @@ Page({
     year:'',  //年
     month:'',   //月
     status_type:'',  //交易类型
+    loadprompt:false
   },
   /**
    * 生命周期函数--监听页面加载
@@ -106,7 +109,13 @@ Page({
     // })
 
   },
+  reset(){
+    this.setData({limitprame:1,orderData:[],loadprompt:false})
+  },
   getListData(){
+    wx.showLoading({
+      title: '加载中',
+    })
     let data = {
       limitprame:this.data.limitprame,
       perPage:this.data.perPage,
@@ -115,10 +124,23 @@ Page({
       month:this.data.month,
     }
     api.settledWithCashList(data).then((res) => {
-      console.log(res)
-      this.setData({
-        orderData:res.data.data.list
-      })
+      wx.hideLoading();
+      wx.stopPullDownRefresh();
+      let list = res.data.data.list;
+      if(this.data.limitprame==1 && list.length == 0){
+        this.setData({
+          noData:true
+        })
+      }else if(this.data.limitprame!=1 && list.length == 0){
+        this.setData({
+          loadprompt:true
+        })
+        app.showToastC('暂无更多数据了',1500);
+      }else{
+        this.setData({
+          orderData:[...this.data.orderData,...res.data.data.list]
+        })
+      }
     }).catch((err)=>{
       console.log(err)
     })
@@ -131,6 +153,7 @@ Page({
       year:value[0],
       month:value[1],
     })
+    this.reset();
     this.getListData();
   },
   bindPickerChange: function(e) {
@@ -139,6 +162,7 @@ Page({
       transactionType: e.detail.value,
       status_type:this.data.transactionTypeArray[e.detail.value].id
     })
+    this.reset();
     this.getListData();
   },
   //说明弹框显示隐藏
@@ -242,7 +266,12 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    
+    if(this.data.loadprompt == false){
+      this.setData({limitprame:++this.data.limitprame})
+      this.getListData();
+    }else{
+      app.showToastC('暂无更多数据了',1500);
+    }
   },
 
   /**
