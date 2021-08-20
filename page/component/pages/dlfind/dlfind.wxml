@@ -5,15 +5,6 @@
 <view class='dlfbox' style="{{dlhintiftr?'position:fixed;top:0;left:0;right:0;bottom:0;':''}}">
   <view class='dlfhead'>
 
-        <!-- <view class="elsearch" wx:if='{{false}}'>
-          <view class="elsearchch">
-              <image class="elserarchimg" catchtap="jumpsearch" src="https://www.51chaidan.com/images/toyCabinet/search.png"></image>
-              <input class="elinputbut" bindfocus='onFocus' placeholder='请输入品牌名称搜索' bindinput="inputChange" bindconfirm="jumpsearch" value="{{brand_name}}"></input>
-              <view class="elserbotom" catchtap="jumpsearch">搜索</view>
-          </view>
-        </view> -->
-
-
     <view style="background:#fff;">
             <view class='dlfindToptitle'>最近浏览</view>
             <view style="width:100%;min-height:80rpx;background:#fff;">
@@ -87,21 +78,57 @@
                     <image class='emlhlimg' src="{{item.brand_img}}" mode='aspectFit'></image>
                     <view class="emlhltxt">
                           <view class="emlhlttop specialellipsis">{{item.brand_name}}</view>
-                          <view class="emlhltbottom specialellipsis">{{item.insert_time}}<text style="margin-left:20rpx;">{{item.user_position}}</text></view>
+                          <view class="emlhltbottom specialellipsis">{{item.insert_time}}<text class="stateBg" style="background:#ABC7F7;">动态</text><text class="stateBg" style="background:#F5B1AE;">秒杀</text><text class="stateBg" style="background:#A9E6BA;">签到</text></view>
                     </view>
                 </view>
-                <view wx:if='{{item.is_follow==1}}' class="emlhright">已关注</view>
-                <view wx:else class="emlhright" style=" border:2rpx solid #ff2742;color:#ff2742;" data-drying_id='{{item.uid}}' data-is_follow='{{item.is_follow}}' data-ind='{{index}}' catchtap='followfun'>关注</view>
+                <view class="emlhright" data-drying_id='{{item.uid}}' data-is_follow='{{item.is_follow}}' data-ind='{{index}}' catchtap='followfun'>关注</view>
             </view>
+            <view style="padding:20rpx;font-size:24rpx;" wx:if='{{item.title}}'><text style="color:#50a3fd;margin-right:5rpx;"></text>{{item.title}}</view>
             <view class="emlcontent" data-drying_id='{{item.id}}' catchtap='jumpdlfdetail' data-is_calendar='{{item.is_calendar}}'>
-                <image wx:if='{{item.video_img}}' style='width:70rpx;height:70rpx;position:absolute;bottom:0;left:0;right:0;top:0;margin:auto;z-index:1;' src='https://www.51chaidan.com/images/icon/iconPlayVideo.png'></image>
-                <image class="emlcontentimg" src="{{item.video_img?item.video_img:item.img_extend[0].img}}" mode="widthFix"></image>
+                <!-- 动态固定大小 -->
+                <block>
+                    <view class="dynamicBox">
+                        <image class="emlcontentimg" style="width:100%;height:100%;" src="{{item.video_img?item.video_img:item.img_extend[0].img}}" mode="aspectFill"></image>
+                    </view>
+                </block>
+                <block> 
+                  <!-- 非动态单个图片 -->
+                   <block>
+                       <image class="emlcontentimg" src="{{item.video_img?item.video_img:item.img_extend[0].img}}" mode="widthFix"></image>
+                   </block>
+                   <!-- 非动态多个图片 -->
+                   <block>
+                        <view  class="dynamicBoxEve" wx:for='{{[1,2,3,4,5,6]}}'  wx:for-item='w' style="{{index%3==2?'margin-right:0;':''}}">
+                            <image class="emlcontentimg" style="width:100%;height:100%;" src="{{item.video_img?item.video_img:item.img_extend[0].img}}" mode="aspectFill"></image>
+                        </view>
+                   </block>
+                </block>
+                
+                <view class="signInNowCl" style="background:#ECCA1E;">立即签到</view>
             </view>
 
+            <view class='dlfhtitlenew' style="overflow:hidden;padding:0 20rpx;font-size:24rpx;">
+                <!-- 左边 -->
+                <block>
+                   <view style="float:left;color:#4CC148;">已发售</view>
+                   <view class='dlfhtitlenew' style="color:#FF2742;">￥109<text style="color:#000;"> +积分80</text></view>
+                   <view class='dlfhtitlenew' style="color:#FF2742;">￥0<text style="color:#000;">抽选价</text></view>
+                </block>
+                <block>
+                  <view style="float:right;color:#999495;">已售：564体</view>
+                  <view class='dlfhtitlenew' style="color:#178FF8;float:right;">2021/08/15 20:00发售</view>
+                </block>
+                
+            </view>
+
+            <view class="boxAtlas" style="width:500rpx;margin:20rpx;">
+                <view class="boxAtlasLeft">图鉴</view>
+                <view class="boxAtlasName specialellipsis">蕾姆</view>
+                <view class="boxAtlasRight">点击查看</view>
+            </view>
             <!-- bottom -->
             <view style="min-height:40rpx;padding: 20rpx;position: relative;">
                 <view style="width:100%;min-height:40rpx;">
-                      <view class="emlhlttop specialellipsis" wx:if='{{item.title}}'><text style="color:#50a3fd;margin-right:5rpx;"></text>{{item.title}}</view>
                       <view class="emlhltbottom" style="font-size:24rpx;height:40rpx;line-height:40rpx;">
                         <text class="emlplefttxt" data-drying_id='{{item.id}}' wx:if='{{item.comment_count}}' catchtap='jumpdlfdetail'>评论({{item.comment_count?item.comment_count:'0'}})</text>
                         <image class="emlplefimgshare" src="https://clw.51chaidan.com//images/goods/share3.png">
@@ -114,26 +141,6 @@
             </view>
 
 
-             <!--  -->
-            <view style='width:100%;height:160rpx;position:relative;margin-bottom:15rpx;' data-index='{{index}}' wx:for="{{item.goodsInfo}}" wx:key="key" wx:for-item='w' wx:for-index='num' data-num='{{num}}' data-goods_id='{{w.goods_id}}' catchtap='jumpshopdetail' data-is_calendar='{{item.is_calendar}}' data-isblindbox='{{w.isBlindBox}}' data-openMember="{{item.openMember}}">
-                <view style="width:200rpx;height:100%;position:relative;float:left;">
-                    <image style="width:140rpx;height:140rpx;position:absolute;left:0;top:0;bottom:0;right:0;margin:auto;" src='{{w.goods_thumb}}'></image>
-                </view>
-                <view style="width:510rpx;height:100%;float:left;">
-                    <view style='height:15rpx;widht:100%;'></view>
-                    <view class='multilineellipsis' style="width:100%;min-height:70rpx;font-size:28rpx;color:#333;line-height:36rpx;">
-                         {{w.goods_name}}
-                    </view>
-                    <view style='width:100%;height:60rpx;position:relative;'>
-                        <view style="height: 60rpx;line-height: 60rpx;float: left;font-size: 26rpx;color: #ff6967;"><text wx:if='{{item.is_calendar!=1}}'>￥</text>{{w.price}}</view>
-                        <view>
-                           <block wx:if='{{item.is_calendar && item.is_calendar ==1}}'> <view wx:if="{{!item.openMember}}" style="width:220rpx;height:56rpx;line-height:56rpx;text-align:center;position:absolute;right:0;top:0;bottom:0;margin:auto 0;border-radius:8rpx;font-size:26rpx;color:#fff;background:#ff6968;">开通VIP免费获取</view></block>
-                           <block wx:elif='{{w.isBlindBox}}'><view style="width:144rpx;height:56rpx;line-height:56rpx;text-align:center;position:absolute;right:0;top:0;bottom:0;margin:auto 0;border-radius:8rpx;font-size:26rpx;color:#fff;background:#ff6968;">去抽盒</view></block>
-                           <block wx:else> <view style="width:144rpx;height:56rpx;line-height:56rpx;text-align:center;position:absolute;right:0;top:0;bottom:0;margin:auto 0;border-radius:8rpx;font-size:26rpx;color:#fff;background:#ff6968;">{{w.isSubscribe?'订阅':'购买'}}</view></block>
-                        </view>
-                    </view>
-                </view>
-            </view>
         </view> 
         <!--  暂无数据  -->
         <view class='goodstobereceived' wx:if='{{eldatalist.length==0&&nodataiftr}}'>
@@ -157,7 +164,19 @@
                   <image data-ind='{{index}}' style='width:360rpx;margin:auto;display:block;border-radius:10rpx 10rpx 0 0;' mode='widthFix' src='{{item.img_extend[0].img}}?imageMogr2/thumbnail/720x'></image>
                 </view>
             </view>
-            <view class='dlfhtitlenew' wx:if='{{item.title}}' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>{{item.title}}</view>
+            <view class='dlfhtitlenew' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail' wx:if='{{item.title}}'>{{item.title}}</view>
+            <view class='dlfhtitlenew'>签到赢积分</view>
+            <view class='dlfhtitlenew' style="color:#178FF8;">2021/08/15 20:00发售</view>
+            <view class='dlfhtitlenew' style="color:#FF2742;">￥109<text style="color:#000;"> +积分80</text></view>
+            <view class='dlfhtitlenew' style="overflow:hidden;">
+                <view style="float:left;color:#4CC148;">已发售</view>
+                <view style="float:right;color:#999495;">已售：564体</view>
+            </view>
+            <view class="boxAtlas">
+                <view class="boxAtlasLeft">图鉴</view>
+                <view class="boxAtlasName specialellipsis">蕾姆</view>
+                <view class="boxAtlasRight">点击查看</view>
+            </view>
             <view class='dlfhpbox'>
               <view style='width:40rpx;height:40rpx;border-radius:50%;float:left;margin:8rpx 8rpx 0 8rpx;position: relative;' catchtap='jumpdlfchlimgdetail' data-nick='{{item.nick}}' data-uid='{{item.uid}}'>
                 <image src='{{item.litpic}}' style="width:100%;height:100%;border-radius:50%;"></image>
@@ -178,12 +197,25 @@
           <view class='dlfeveright' wx:for='{{listdata}}' wx:key='key' wx:if='{{index%2==1}}'>
             <view style='position:relative;margin-bottom:10rpx;'>
                 <view style='width:360rpx;margin:auto;position:relative;max-height:340rpx;overflow:hidden;' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>
-                  <view class='dlfchrbright'>删除</view>
+                  <view class='dlfchrbright'>动态</view>
+                  <view class='dlfchrbright' style="background:#F5B1AE;">秒杀</view>
+                  <view class='dlfchrbright' style="background:#9BE2F8;">抽选</view>
                   <image data-ind='{{index}}' style='width:360rpx;margin:auto;display:block;border-radius:10rpx 10rpx 0 0;' mode='widthFix' src='{{item.img_extend[0].img}}?imageMogr2/thumbnail/720x'></image>
                 </view>
             </view>
             <view class='dlfhtitlenew' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail' wx:if='{{item.title}}'>{{item.title}}</view>
             <view class='dlfhtitlenew'>签到赢积分</view>
+            <view class='dlfhtitlenew' style="color:#178FF8;">2021/08/15 20:00发售</view>
+            <view class='dlfhtitlenew' style="color:#FF2742;">￥109<text style="color:#000;"> +积分80</text></view>
+            <view class='dlfhtitlenew' style="overflow:hidden;">
+                <view style="float:left;color:#4CC148;">已发售</view>
+                <view style="float:right;color:#999495;">已售：564体</view>
+            </view>
+            <view class="boxAtlas">
+                <view class="boxAtlasLeft">图鉴</view>
+                <view class="boxAtlasName specialellipsis">蕾姆</view>
+                <view class="boxAtlasRight">点击查看</view>
+            </view>
             <view class='dlfhpbox'>
               <view style='width:40rpx;height:40rpx;border-radius:50%;float:left;margin:8rpx 8rpx 0 8rpx;position: relative;' catchtap='jumpdlfchlimgdetail' data-nick='{{item.nick}}' data-uid='{{item.uid}}'>
                 <image src='{{item.litpic}}' style="width:100%;height:100%;border-radius:50%;"></image>
@@ -219,15 +251,32 @@
 
 <bnavigation isProduce='{{isProduce}}' dlfind='{{true}}' isIphoneX='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
 
+
+<!-- <image src='https://www.51chaidan.com/images/spread/dial/fork.png' style='display:block;width:50rpx;height:50rpx;margin:49rpx auto 0;position: relative;' catchtap='dlhintfun'></image> -->
 <!-- 领奖提示 -->
 <view style='position:fixed;width:100%;height:100%;top:0;left:0;z-index:9999;' wx:if='{{false}}'>
   <view style='width:100%;height:100%;background:#000;opacity: 0.5;' catchtap='dlhintfun'></view>
-  <view style='width:540rpx;height:860rpx;position:absolute;top:0;left:0;bottom:0;right:0;margin:auto;z-index:2;border-radius:10rpx;'>
-    <view style='height:100rpx;width:100%;line-height:100rpx;text-align:center;font-weight: bold;font-size:30rpx;background:#fff;'>说明</view>
-    <view style='width:100%;height:600rpx;background:#fff;padding-bottom:20rpx;'>
-      <text style='width:88%;height:590rpx;margin:0 auto;font-size:26rpx;color:#000;display:block;line-height:40rpx;overflow: scroll;'>{{hinttxt}}</text>
-    </view>
-    <image src='https://www.51chaidan.com/images/spread/dial/fork.png' style='display:block;width:50rpx;height:50rpx;margin:49rpx auto 0;position: relative;' catchtap='dlhintfun'></image>
+  <view style='width:100%;height:1060rpx;position:absolute;left:0;bottom:0;z-index:2;border-radius:10rpx;background:#fff;'>
+      <scroll-view scroll-y="true" class="dlfindIpscroll">
+        <view class="elsearch">
+          <view class="elsearchch">
+              <image class="elserarchimg" catchtap="jumpsearch" src="https://www.51chaidan.com/images/toyCabinet/search.png"></image>
+              <input class="elinputbut" bindfocus='onFocus' placeholder='请输入品牌名称搜索' bindinput="inputChange" bindconfirm="jumpsearch" value="{{brand_name}}"></input>
+              <view class="elserbotom" catchtap="jumpsearch">搜索</view>
+          </view>
+        </view>
+        <view class="dlfindIpEveLetter">A</view>
+        <view class="dlfindIpEveBox">
+            <block wx:for='{{eldataclass}}' wx:key='key'>
+                <view class="ocamensweve" wx:for='{{item}}' wx:key='key' wx:for-item='w' catchtap="jumpsouchtem" data-id='{{w.id}}' wx:if='{{w.id!=0}}'>
+                    <image class="ocamensweveimg" style="{{w.id==brand_id?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{w.logo}}"></image>
+                    <view class="ocamenswevename specialellipsis" style="{{w.id==brand_id?'color:#f19207;':''}}">{{w.name}}</view>
+                </view>                      
+            </block>
+        </view>
+      </scroll-view>
+    
+    
   </view>
 </view>
 
