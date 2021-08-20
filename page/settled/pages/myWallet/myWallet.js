@@ -32,24 +32,27 @@ Page({
     transactionType:0,
     transactionTypeArray: [
       {
-        id: 0,
+        id: '',
         name: '全部交易类型'
       },
       {
         id: 1,
-        name: '中国'
-      },
-      {
-        id: 2,
-        name: '巴西'
+        name: '订单收入'
       },
       {
         id: 3,
-        name: '日本'
+        name: '订单退款'
+      },
+      {
+        id: 2,
+        name: '提现'
       }
     ],
     limitprame:1,  //当前页码
-    perPage:20  //每页多少条
+    perPage:20,  //每页多少条
+    year:'',  //年
+    month:'',   //月
+    status_type:'',  //交易类型
   },
   /**
    * 生命周期函数--监听页面加载
@@ -107,6 +110,9 @@ Page({
     let data = {
       limitprame:this.data.limitprame,
       perPage:this.data.perPage,
+      status_type:this.data.status_type,
+      year:this.data.year,
+      month:this.data.month,
     }
     api.settledWithCashList(data).then((res) => {
       console.log(res)
@@ -118,15 +124,22 @@ Page({
     })
   },
   bindDateChange(e) {
+    console.log(e.detail.value.split('-'))
+    let value = e.detail.value.split('-');
     this.setData({
-      date: e.detail.value
+      date: e.detail.value,
+      year:value[0],
+      month:value[1],
     })
+    this.getListData();
   },
   bindPickerChange: function(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+    console.log('picker发送选择改变，携带值为', e.detail.value,this.data.transactionTypeArray[e.detail.value].id)
     this.setData({
-      transactionType: e.detail.value
+      transactionType: e.detail.value,
+      status_type:this.data.transactionTypeArray[e.detail.value].id
     })
+    this.getListData();
   },
   //说明弹框显示隐藏
   toggleDescriptionMask(){

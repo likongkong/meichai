@@ -89,6 +89,11 @@ Page({
     // 审核状态
     brandSettledStatus:1
   },
+  hideBrandSettledSuccessMask(){
+    this.setData({
+      brandSettledStatus: 5
+    })
+  },
   closeSettledImg(){
     this.setData({
       isSettledImg: false
