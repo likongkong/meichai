@@ -1454,7 +1454,7 @@ App({
       delta: num
     })
   },
-  showToastC:function(title,duration=1500){
+  showToastC:function(title,duration=2000){
     wx.showToast({
       title: title,
       icon: 'none',

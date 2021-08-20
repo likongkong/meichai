@@ -288,8 +288,10 @@ Page({
             customerId:selectData.order.userId // 	Number对应订单的用户id
         }).then(res => {
           if (res.data.status_code == 200) {
-              app.showToastC('退款成功，退款金额将在72小时之内原路返回到支付账户上。')
-              _this.getData();
+              app.showToastC('退款成功，退款金额将在72小时之内原路返回到支付账户上。');
+              setTimeout(()=>{
+                _this.getData();
+              },2000);
           }else if(res.data.status_code == 410004){
               var infoData = res.data.data.Info || {};
               var q = Dec.Aese('mod=operate&operation=prepay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1&oid=' + infoData.order.cartId + '&xcx=1' + '&openid=' + app.signindata.openid)
@@ -313,8 +315,10 @@ Page({
                                       customerId:selectData.order.userId // 	Number对应订单的用户id
                                   }).then(res => {
                                     if (res.data.status_code == 200) {
-                                        app.showToastC('退款成功，退款金额将在72小时之内原路返回到支付账户上。')
-                                        _this.getData();
+                                        app.showToastC('退款成功，退款金额将在72小时之内原路返回到支付账户上。');
+                                        setTimeout(()=>{
+                                          _this.getData();
+                                        })
                                     }else{
                                       if(res.data && res.data.message){
                                         app.showModalC(res.data.message); 
@@ -351,7 +355,9 @@ Page({
         }).then(res => {
           if (res.data.status_code == 200) {
               app.showToastC('添加成功')
-              _this.getData();
+              setTimeout(()=>{
+                _this.getData();
+              },2000)
           }else{
             if(res.data && res.data.message){
               app.showModalC(res.data.message); 
@@ -438,8 +444,11 @@ Page({
                             fileName:fileName
                           }).then((res)=>{
                             if (res.data.status_code == 200) {
-                              app.showToastC('上传成功')
-                              _this.getData();
+                              app.showToastC('上传成功');
+                              setTimeout(()=>{
+                                _this.getData();
+                              },2000)
+                              
                             }else{
                               if(res.data && res.data.message){
                                 app.showModalC(res.data.message); 
