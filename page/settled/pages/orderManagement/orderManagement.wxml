@@ -54,7 +54,7 @@
                     </view>
                     <view class="obcrBottom obcrTop">
                         <view>数量x{{order.goodsNumber}}</view>
-                        <view>实收￥{{order.goodsAmount}}</view>
+                        <view>订单金额￥{{order.goodsAmount}}</view>
                     </view>
                 </view>
             </view>

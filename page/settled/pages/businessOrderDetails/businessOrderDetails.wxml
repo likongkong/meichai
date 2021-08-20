@@ -15,8 +15,8 @@
                         <view></view>
                     </view>
                     <view class="obcrBottom obcrTop">
-                        <view></view>
-                        <view style="font-size:30rpx">付款金额￥{{detailData.order.orderAmount}}</view>
+                        <view>数量x{{detailData.order.goodsNumber}}</view>
+                        <view>订单金额￥{{detailData.order.goodsAmount}}</view>
                     </view>
                 </view>
             </view>
