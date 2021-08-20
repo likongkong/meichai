@@ -74,7 +74,7 @@
        <view class="orderBottom" wx:if='{{order.shippingCode}}' style="padding-top:0;">
             <view class="orderBoxTop">运单号:{{order.shippingCode}}</view>
        </view>
-       <view class="orderBottom" wx:if='{{order.payStatus != 0}}'> <!-- 未支付 -->
+       <view class="orderBottom" wx:if='{{order.payStatus != 0 && order.payStatus != 7}}'> <!-- 未支付 -->
                <view class="orderBottomOrderNumber">
                    <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='3'>
                        <block wx:if='{{order.shippingCode}}'>修改物流</block>

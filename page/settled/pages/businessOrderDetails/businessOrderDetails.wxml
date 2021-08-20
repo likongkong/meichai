@@ -48,7 +48,7 @@
     </view>
 
 
-    <view class="orderBottomNavigation">
+    <view class="orderBottomNavigation" wx:if='{{detailData.order.payStatus != 0 && detailData.order.payStatus != 7}}'>
         <view class="orderBottomNavEve bottomButComWidth" catchtap="commonBulletFrameFun" data-index='3'>
             <block wx:if='{{detailData.order.shippingCode}}'>修改物流</block>
             <block wx:else>添加物流</block>
@@ -69,7 +69,7 @@
         <view class="orderMangTipTop">
             <block wx:if='{{logisticsRefundModify == 1}}'>修改收货地址</block>
             <block wx:elif='{{logisticsRefundModify == 2}}'>退款</block>
-            <block wx:elif='{{logisticsRefundModify == 3}}'>添加物流</block>
+            <block wx:elif='{{logisticsRefundModify == 3}}'><block wx:if='{{detailData.order.shippingCode}}'>修改</block><block wx:else>添加</block>物流</block>
             <block wx:elif='{{logisticsRefundModify == 4}}'>批量导出订单</block>
             <block wx:elif='{{logisticsRefundModify == 5}}'>批量导入运单</block>
         </view>
