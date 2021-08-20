@@ -30,21 +30,57 @@
   </view>
   <view class="content">
     <block wx:for="{{orderData}}" wx:key="{{index}}">
+      <block wx:if="{{item.type == 1}}">
+        <view class="orderItem">
+          <view class="orderItemL">
+            <image src="https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJZMPzEm1ibLhPGyic11ViagbFKa3Bkdialthkbu1iaKOwLASqD5IMHm7ibicFCB60nRtHO4x0CKHBia22elQ/132" mode="widthFix"></image>
+          </view>
+          <view class="orderItemR">
+            <view>
+              <text class="color101010">{{item.title}}</text>
+              <block wx:if="{{item.status_type == 1 || item.status_type == 2}}">
+                <text class="colorFFB730">+{{item.cart_amount}}</text>
+              </block>
+              <block wx:else>
+                <text class="color101010">-{{item.cart_amount}}</text>
+              </block>
+            </view>
+            <view>
+              <text class="colorA2A2A2">{{item.insert_time_date}}</text>
+              <text class="colorA2A2A2">余额 {{item.overage}}</text>
+            </view>
+          </view>
+        </view>
+      </block>
+     <block wx:else>
       <view class="orderItem">
-        <view class="orderItemL">
-          <image src="https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJZMPzEm1ibLhPGyic11ViagbFKa3Bkdialthkbu1iaKOwLASqD5IMHm7ibicFCB60nRtHO4x0CKHBia22elQ/132" mode="widthFix"></image>
-        </view>
-        <view class="orderItemR">
-          <view>
-            <text class="color101010">{{item.title}}</text>
-            <text class="colorFFB730">+{{item.cart_amount}}</text>
+          <view class="orderItemL">
+            <image src="https://cdn.51chaidan.com/images/brandSettledIcon/orderIcon/withdraw.png" mode="widthFix"></image>
           </view>
-          <view>
-            <text class="colorA2A2A2">{{item.insert_time_date}}</text>
-            <text class="colorA2A2A2">余额 {{item.overage}}</text>
+          <view class="orderItemR">
+            <view>
+              <text class="color101010">{{item.title}}</text>
+              <text class="color101010">-{{item.cart_amount}}</text>
+            </view>
+            <block wx:if="{{item.order_amount != ''}}">
+              <view>
+                <text class="colorA2A2A2">{{item.insert_time_date}}</text>
+                <text class="colorFF2742">提现失败(￥{{item.order_amount}})</text>
+              </view>
+              <view>
+                <text class="colorA2A2A2"></text>
+                <text class="colorA2A2A2">余额 {{item.overage}}</text>
+              </view>
+            </block>
+            <block wx:else>
+              <view>
+                <text class="colorA2A2A2">{{item.insert_time_date}}</text>
+                <text class="colorFF2742">余额 {{item.overage}}</text>
+              </view>
+            </block>
           </view>
         </view>
-      </view>
+     </block>
     </block>
    
    

@@ -120,7 +120,12 @@
 
     <!-- 品牌入驻 -->
     <view wx:if="{{!dataInfo.brandSettledLimit}}" class="whwdddw settled">
-        <block wx:if="{{brandSettledStatus == 5}}">
+        <block wx:if="{{brandSettledStatus == 5 || brandSettledStatus == 6}}">
+            <block wx:if="{{brandSettledStatus == 6}}">
+                <view class="brandSettledSuccessMask" catchtouchmove="true" catchtap="hideBrandSettledSuccessMask">
+                    <image src="https://cdn.51chaidan.com/images/brandSettledIcon/orderPopout.png" mode="widthFix"></image>
+                </view>
+            </block>
             <view class="brandManageWrap">
                 <text class="brandManageTitle">管理后台</text>
                 <view class="assetWrap">
