@@ -38,11 +38,14 @@ Page({
     brand:[],
     order:{},
     payStatus:[
+      {name:'全部',num:'-1'},
       {name:'待支付',num:'0'},
       {name:'待发货',num:'2'},
       {name:'已发货',num:'4'}
     ], // 支付状态 
     subLedger: 0 , // 1 已分账 2 未分账
+    countOrder:0,
+    nodataiftr:false
   },
   open: function (options) {
     // 省市联动
@@ -74,7 +77,13 @@ Page({
       cityback: !this.data.cityback
     }) 
 
-  },  
+  }, 
+  conditionfun(){
+    this.setData({
+      condition: false,
+      cityback:false
+    }) 
+  }, 
   // 省市联动
   bindChange: function (e) {
     var val = e.detail.value
@@ -214,7 +223,10 @@ Page({
           }          
         })
     } else if(index == 3){
-
+      _this.setData({
+        csc:'',
+        scanCodeMsg:''
+      })
     }else if(index == 4){
 
     };
@@ -233,6 +245,7 @@ Page({
     var _this = this;
     var logisticsRefundModify = _this.data.logisticsRefundModify;
     var selectData = _this.data.selectData || {};
+    var orderNum = _this.data.orderNum || 0;
     console.log(logisticsRefundModify)
     if(logisticsRefundModify == 1){
 
@@ -256,15 +269,14 @@ Page({
             customerId:selectData.order.userId, //	Number对应订单的用户id
             province:_this.data.province, //	String收件地省份
             city:_this.data.city, //	String	收件地城市
-            distirct:_this.data.county, //	String	收件地区县
+            district:_this.data.county, //	String	收件地区县
             address:_this.data.deladdress, //	String	 收件地具体地址
             consignee:_this.data.modifyName, //	String	 收件人姓名
             mobile:_this.data.modifyMobile, //		String	收件人手机号
             idcard:''
         }).then(res => {
           if (res.data.status_code == 200) {
-              app.showToastC('添加成功')
-              var orderNum = _this.data.orderNum || 0;
+              app.showToastC('添加成功');
               var receipt = _this.data.order[orderNum].receipt || [];
               receipt.consignee = _this.data.modifyName;
               receipt.mobile = _this.data.modifyMobile;
@@ -354,10 +366,11 @@ Page({
             shippingName:_this.data.csc	// 	String快递公司名称
         }).then(res => {
           if (res.data.status_code == 200) {
-              app.showToastC('添加成功')
-              setTimeout(()=>{
-                _this.getData();
-              },2000)
+              app.showToastC('添加成功');
+              _this.setData({
+                commonBulletFrame:false,
+                ['order[' + orderNum + '].order.shippingCode'] : _this.data.scanCodeMsg
+              });
           }else{
             if(res.data && res.data.message){
               app.showModalC(res.data.message); 
@@ -592,7 +605,7 @@ Page({
   getData(num=1){
      var _this = this;
     if (num==1){
-      _this.data.page = 0;
+      _this.setData({countOrder:0,page : 1,nodataiftr:false});
     }else{
       var pagenum = _this.data.page;
       _this.data.page = ++pagenum;
@@ -604,6 +617,7 @@ Page({
        'pageId':_this.data.page
      }).then((res) => {
       console.log('列表数据=======',res)
+      _this.setData({nodataiftr:true})
       if (res.data.status_code == 200) {
           var order = res.data.data.List.order || [];
           if(order && order.length != 0){

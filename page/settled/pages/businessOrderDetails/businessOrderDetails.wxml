@@ -25,7 +25,7 @@
     <view class="centerTxtOrderDeatail comPaddingTop">
         <view class="orderAddressEve">收货人：{{detailData.receipt.consignee}}</view>
         <view class="orderAddressEve">收货手机号：{{detailData.receipt.mobile}}</view>  
-        <view class="orderAddressEve">收货地址：{{detailData.receipt.address}}</view>     
+        <view class="orderAddressEve">收货地址：{{detailData.receipt.province}}{{detailData.receipt.city}}{{detailData.receipt.district}}{{detailData.receipt.address}}</view>     
         <view class="orderAddressEve">备注：{{detailData.order.customerMessage}}</view>                   
     </view>
 
@@ -49,8 +49,11 @@
 
 
     <view class="orderBottomNavigation">
-        <view class="orderBottomNavEve bottomButComWidth" catchtap="commonBulletFrameFun" data-index='3'>添加物流</view>
-        <view class="orderBottomNavEve bottomButComWidth" style="margin:0 37rpx;" catchtap="commonBulletFrameFun" data-index='2'>退款</view>
+        <view class="orderBottomNavEve bottomButComWidth" catchtap="commonBulletFrameFun" data-index='3'>
+            <block wx:if='{{detailData.order.shippingCode}}'>修改物流</block>
+            <block wx:else>添加物流</block>
+        </view>
+        <view class="orderBottomNavEve bottomButComWidth" catchtap="commonBulletFrameFun" data-index='2' wx:if='{{detailData.order.payStatus!=7 && detailData.order.payTime>0}}'>退款</view>
         <view class="orderBottomNavEve bottomButComWidth" catchtap="commonBulletFrameFun" data-index='1'>修改收货地址</view>
     </view>
 
@@ -217,7 +220,7 @@
 </view>
 
 <!--  省市联动  -->
-<view class='citybackg' wx:if='{{cityback}}'></view>
+<view class='citybackg' catchtap="conditionfun" wx:if='{{cityback}}'></view>
 <view wx:if="{{condition}}" class="citypicker">
   <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange" class="citybody">
     <view class="cityheader">

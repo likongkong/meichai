@@ -16,7 +16,18 @@ Page({
     loginid:'',
     detailData:{},
     scanCodeMsg:'',
-    csc:''
+    csc:'',
+    // 省市联动数据
+    provinces: [],
+    province: "",
+    citys: [],
+    city: "",
+    countys: [],
+    county: '',
+    value: [0, 0, 0],
+    values: [0, 0, 0],
+    condition: false,
+    cityback:false,     
   },  
 
   /**
@@ -236,7 +247,10 @@ Page({
           }          
         })
     } else if(index == 3){
-
+      _this.setData({
+        csc:'',
+        scanCodeMsg:''
+      })
 
     };
 
@@ -275,7 +289,7 @@ Page({
             customerId:selectData.order.userId, //	Number对应订单的用户id
             province:_this.data.province, //	String收件地省份
             city:_this.data.city, //	String	收件地城市
-            distirct:_this.data.county, //	String	收件地区县
+            district:_this.data.county, //	String	收件地区县
             address:_this.data.deladdress, //	String	 收件地具体地址
             consignee:_this.data.modifyName, //	String	 收件人姓名
             mobile:_this.data.modifyMobile, //		String	收件人手机号
@@ -378,7 +392,12 @@ Page({
       commonBulletFrame:false
     })
   },
-
+  conditionfun(){
+    this.setData({
+      condition: false,
+      cityback:false
+    }) 
+  }, 
   scanCode: function() {
     var that = this;
     wx.scanCode({ //扫描API

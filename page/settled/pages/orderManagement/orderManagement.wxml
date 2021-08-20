@@ -15,13 +15,17 @@
 	</view>
 
     <scroll-view class="marginAuto scrollViewTop" scroll-x="true" scroll-with-animation="true" scroll-left='{{scrollleft}}' style="height:80rpx;">
-         <view id="ele-1" class="classifyItem {{centerIndex == -1?'active':''}}" data-index="-1" catchtap="classifyChange">全部<text wx:if='{{countOrder>0}}'>({{countOrder}})</text></view>
-         <view wx:for="{{payStatus}}" wx:key='key' id="ele{{item.num}}" class="classifyItem {{centerIndex == item.num?'active':''}}" data-index="{{item.num}}" catchtap="classifyChange">{{item.name}}</view>
+         <view wx:for="{{payStatus}}" wx:key='key' id="ele{{item.num}}" class="classifyItem {{centerIndex == item.num?'active':''}}" data-index="{{item.num}}" catchtap="classifyChange">{{item.name}}<text wx:if='{{centerIndex == item.num && nodataiftr}}'>({{countOrder}})</text></view>
     </scroll-view>
 
     <view class="marginAuto centerTxt" wx:for='{{order}}' wx:key='key'>
         <template is="orderCommon" data="{{...item,num:index}}"></template>
     </view>
+    <!--  暂无数据  -->
+    <view class='nodata' wx:if='{{order.length==0&&nodataiftr}}' style='height: 600rpx;width: 100%;position: relative;'>
+        <image src='../../../../pages/images/nodata.png' class='nodataimg' style='width: 280rpx;height: 300rpx;position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;'></image>
+    </view>
+
     <view class="orderBottomNavigation">
         <view class="orderBottomNavEve" catchtap="commonBulletFrameFun" data-index='4'>批量导出订单</view>
         <view class="orderBottomNavEve" style="margin-left:50rpx;" catchtap="commonBulletFrameFun" data-index='5'>批量导入运单</view>
@@ -50,7 +54,7 @@
                     </view>
                     <view class="obcrBottom obcrTop">
                         <view>数量x{{order.goodsNumber}}</view>
-                        <view>实收￥{{order.orderAmount}}</view>
+                        <view>实收￥{{order.goodsAmount}}</view>
                     </view>
                 </view>
             </view>
@@ -60,25 +64,25 @@
                     <view>收货手机号:{{receipt.mobile}}</view>
                 </view>
                 <view class="orderAddressEve">
-                    <view>收货地址:{{receipt.address}}</view>
+                    <view>收货地址:{{receipt.province}}{{receipt.city}}{{receipt.district}}{{receipt.address}}</view>
                 </view>    
                 <view class="orderAddressEve" wx:if='{{order.customerMessage}}'>
                     <view>买家留言:{{order.customerMessage}}</view>
                 </view>                    
             </view>
        </view>
-
+       <view class="orderBottom" wx:if='{{order.shippingCode}}' style="padding-top:0;">
+            <view class="orderBoxTop">运单号:{{order.shippingCode}}</view>
+       </view>
        <view class="orderBottom" wx:if='{{order.payStatus != 0}}'> <!-- 未支付 -->
-           <block wx:if='{{order.payStatus == 4}}'>   <!-- 已发货 -->
-               <view class="orderBoxTop">运单号:{{order.shippingCode}}</view>
-           </block>
-           <block wx:elif='{{order.payStatus == 2}}'> <!-- 待发货 -->
                <view class="orderBottomOrderNumber">
-                   <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='3'>添加物流</view>
-                   <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='2'>退款</view>
+                   <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='3'>
+                       <block wx:if='{{order.shippingCode}}'>修改物流</block>
+                       <block wx:else>添加物流</block>
+                    </view>
+                   <view class="orderBottomButton" wx:if='{{order.payStatus!=7 && order.payTime>0}}' catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='2'>退款</view>
                    <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='1'>修改收货地址</view>
                </view>
-           </block>
        </view>
    </view>
 
@@ -90,7 +94,7 @@
         <view class="orderMangTipTop">
             <block wx:if='{{logisticsRefundModify == 1}}'>修改收货地址</block>
             <block wx:elif='{{logisticsRefundModify == 2}}'>退款</block>
-            <block wx:elif='{{logisticsRefundModify == 3}}'>添加物流</block>
+            <block wx:elif='{{logisticsRefundModify == 3}}'><block wx:if='{{selectData.order.shippingCode}}'>修改</block><block wx:else>添加</block>物流</block>
             <block wx:elif='{{logisticsRefundModify == 4}}'>批量导出订单</block>
             <block wx:elif='{{logisticsRefundModify == 5}}'>批量导入运单</block>
         </view>
@@ -134,7 +138,7 @@
             <!--  subLedger 1 已分账 2 未分账-->
             <block wx:if='{{subLedger==1}}'>
                 <view class="orderMangTipCenter">
-                    <view class="orderMangTipCenterEve">
+                    <view class="orderMangTipCenterEve" style="padding-bottom: 15rpx;margin-bottom:15rpx;border-bottom: 1px solid #ECECEC;">
                         <view>商品名称：{{selectData.goods.goodsName}}</view>
                     </view>
                     <view class="orderMangTipCenterEve">
@@ -146,9 +150,12 @@
                     <view class="orderMangTipCenterEve">
                         <view>平台抽成：{{payInfoData.order.percentage}}</view>
                     </view>                    
-                    <view class="orderMangTipCenterEve">
+                    <view class="orderMangTipCenterEve" style="padding-bottom: 15rpx;margin-bottom:15rpx;border-bottom: 1px solid #ECECEC;">
                         <view>订单收入：{{payInfoData.order.profitAmount}}</view>
-                    </view>                    
+                    </view>   
+                    <view class="orderMangTipCenterEve">
+                        <view>退款金额</view>
+                    </view>                 
                     <view class="orderMangTipCenterEve">
                         <view>商家实际退款金额：{{payInfoData.order.profitAmount}}</view>
                     </view>
@@ -241,7 +248,7 @@
 </view>
 
 <!--  省市联动  -->
-<view class='citybackg' wx:if='{{cityback}}'></view>
+<view class='citybackg' catchtap="conditionfun" wx:if='{{cityback}}'></view>
 <view wx:if="{{condition}}" class="citypicker">
   <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange" class="citybody">
     <view class="cityheader">
