@@ -15,8 +15,8 @@
                         <view></view>
                     </view>
                     <view class="obcrBottom obcrTop">
-                        <view></view>
-                        <view style="font-size:30rpx">付款金额￥{{detailData.order.orderAmount}}</view>
+                        <view>数量x{{detailData.order.goodsNumber}}</view>
+                        <view>订单金额￥{{detailData.order.goodsAmount}}</view>
                     </view>
                 </view>
             </view>
@@ -25,7 +25,7 @@
     <view class="centerTxtOrderDeatail comPaddingTop">
         <view class="orderAddressEve">收货人：{{detailData.receipt.consignee}}</view>
         <view class="orderAddressEve">收货手机号：{{detailData.receipt.mobile}}</view>  
-        <view class="orderAddressEve">收货地址：{{detailData.receipt.address}}</view>     
+        <view class="orderAddressEve">收货地址：{{detailData.receipt.province}}{{detailData.receipt.city}}{{detailData.receipt.district}}{{detailData.receipt.address}}</view>     
         <view class="orderAddressEve">备注：{{detailData.order.customerMessage}}</view>                   
     </view>
 
@@ -48,9 +48,12 @@
     </view>
 
 
-    <view class="orderBottomNavigation">
-        <view class="orderBottomNavEve bottomButComWidth" catchtap="commonBulletFrameFun" data-index='3'>添加物流</view>
-        <view class="orderBottomNavEve bottomButComWidth" style="margin:0 37rpx;" catchtap="commonBulletFrameFun" data-index='2'>退款</view>
+    <view class="orderBottomNavigation" wx:if='{{detailData.order.payStatus != 0 && detailData.order.payStatus != 7}}'>
+        <view class="orderBottomNavEve bottomButComWidth" catchtap="commonBulletFrameFun" data-index='3'>
+            <block wx:if='{{detailData.order.shippingCode}}'>修改物流</block>
+            <block wx:else>添加物流</block>
+        </view>
+        <view class="orderBottomNavEve bottomButComWidth" catchtap="commonBulletFrameFun" data-index='2' wx:if='{{detailData.order.payStatus!=7 && detailData.order.payTime>0}}'>退款</view>
         <view class="orderBottomNavEve bottomButComWidth" catchtap="commonBulletFrameFun" data-index='1'>修改收货地址</view>
     </view>
 
@@ -66,7 +69,7 @@
         <view class="orderMangTipTop">
             <block wx:if='{{logisticsRefundModify == 1}}'>修改收货地址</block>
             <block wx:elif='{{logisticsRefundModify == 2}}'>退款</block>
-            <block wx:elif='{{logisticsRefundModify == 3}}'>添加物流</block>
+            <block wx:elif='{{logisticsRefundModify == 3}}'><block wx:if='{{detailData.order.shippingCode}}'>修改</block><block wx:else>添加</block>物流</block>
             <block wx:elif='{{logisticsRefundModify == 4}}'>批量导出订单</block>
             <block wx:elif='{{logisticsRefundModify == 5}}'>批量导入运单</block>
         </view>
@@ -107,7 +110,40 @@
         </block>
         <!-- 退款 -->
         <block wx:elif='{{logisticsRefundModify == 2}}'>
-            <view class="refundTxt">确认退款之后将关闭订单，订单金额将在72小时之内原路返回到支付账户上</view>          
+            <!--  subLedger 1 已分账 2 未分账-->
+            <block wx:if='{{subLedger==1}}'>
+                <view class="orderMangTipCenter">
+                    <view class="orderMangTipCenterEve">
+                        <view>商品名称：{{selectData.goods.goodsName}}</view>
+                    </view>
+                    <view class="orderMangTipCenterEve">
+                        <view>退款明细</view>
+                    </view>
+                    <view class="orderMangTipCenterEve">
+                        <view>商品售价：{{selectData.order.orderAmount}}</view>
+                    </view>
+                    <view class="orderMangTipCenterEve">
+                        <view>平台抽成：{{payInfoData.order.percentage}}</view>
+                    </view>                    
+                    <view class="orderMangTipCenterEve">
+                        <view>订单收入：{{payInfoData.order.profitAmount}}</view>
+                    </view>                    
+                    <view class="orderMangTipCenterEve">
+                        <view>商家实际退款金额：{{payInfoData.order.profitAmount}}</view>
+                    </view>
+                    <view class="orderMangTipCenterEve">
+                        <view>平台实际退款金额：{{payInfoData.order.percentage}}</view>
+                    </view>
+                    <view class="orderMangTipCenterEve">
+                        <view>该订单已分账，需要您支付分账金额￥{{payInfoData.order.percentage}}。支付完成之后代表同意退款。</view>
+                    </view>
+
+                </view>                
+            </block>
+            <block wx:elif='{{subLedger==2}}'>
+                <view class="refundTxt">退款之后不可撤销，确认退款请点击立即退款。</view>    
+            </block>
+                  
         </block>
         <!-- 添加物流 -->
         <block wx:elif='{{logisticsRefundModify == 3}}'>
@@ -171,7 +207,9 @@
             </block>
             <block wx:else>
                 <view class="oAMaBConfirm" catchtap="closeCommonTip">取消</view>
-                <view class="oAMaBCancel" catchtap="confirmCommonTip">确定</view>               
+                <view class="oAMaBCancel" catchtap="confirmCommonTip" wx:if='{{logisticsRefundModify == 2 && subLedger==1}}'>立即支付￥{{payInfoData.order.percentage}}</view> 
+                <view class="oAMaBCancel" catchtap="confirmCommonTip" wx:elif='{{logisticsRefundModify == 2 && subLedger==2}}'>立即退款</view> 
+                <view class="oAMaBCancel" catchtap="confirmCommonTip" wx:else>确定</view>               
             </block>
         </view>
     </view>
@@ -182,7 +220,7 @@
 </view>
 
 <!--  省市联动  -->
-<view class='citybackg' wx:if='{{cityback}}'></view>
+<view class='citybackg' catchtap="conditionfun" wx:if='{{cityback}}'></view>
 <view wx:if="{{condition}}" class="citypicker">
   <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange" class="citybody">
     <view class="cityheader">

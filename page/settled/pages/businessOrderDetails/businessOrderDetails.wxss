@@ -12,4 +12,5 @@
 }
 .bottomButComWidth{
   width: 200rpx !important;
+  margin: 0 20rpx;
 }

@@ -16,7 +16,18 @@ Page({
     loginid:'',
     detailData:{},
     scanCodeMsg:'',
-    csc:''
+    csc:'',
+    // 省市联动数据
+    provinces: [],
+    province: "",
+    citys: [],
+    city: "",
+    countys: [],
+    county: '',
+    value: [0, 0, 0],
+    values: [0, 0, 0],
+    condition: false,
+    cityback:false,     
   },  
 
   /**
@@ -198,7 +209,7 @@ Page({
   commonBulletFrameFun(e){
     let index = e.currentTarget.dataset.index;
     var _this = this;
-    var detailData = _this.data.detailData || [];
+    var detailData = _this.data.detailData || {};
     if(index == 1){ // 1 修改地址 2 退款 3 物流
       var receipt = detailData.receipt || {};
       _this.setData({
@@ -210,15 +221,47 @@ Page({
         county:receipt.district
       })
     } else if(index == 2){
-
+        api.checkOrderRefund({
+            orderId:detailData.order.orderId,	// Number订单id 对内唯一标识
+            customerId:detailData.order.userId // 	Number对应订单的用户id
+        }).then(res => {
+          console.log('查询是否分账',res)
+          if (res.data.status_code == 200) {
+              var payInfoData = res.data.data.Info;
+              var subLedger = 1;
+              if(payInfoData.isProfit){
+                subLedger = 1;
+              }else{
+                subLedger = 2;
+              };
+              _this.setData({
+                subLedger:subLedger,
+                payInfoData:payInfoData,
+                commonBulletFrame:true,
+                logisticsRefundModify:index,
+              })
+          }else{
+            if(res.data && res.data.message){
+              app.showModalC(res.data.message); 
+            };        
+          }          
+        })
     } else if(index == 3){
+      _this.setData({
+        csc:'',
+        scanCodeMsg:''
+      })
 
+    };
 
+    if(index != 2){
+      this.setData({
+        commonBulletFrame:true,
+        logisticsRefundModify:index,
+      })
     }
-    this.setData({
-      commonBulletFrame:true,
-      logisticsRefundModify:index,
-    })
+
+
   },
   // 弹框确认按钮    1 修改收货地址 2 退款 3 物流 4批量导出订单
   confirmCommonTip(){ 
@@ -246,7 +289,7 @@ Page({
             customerId:selectData.order.userId, //	Number对应订单的用户id
             province:_this.data.province, //	String收件地省份
             city:_this.data.city, //	String	收件地城市
-            distirct:_this.data.county, //	String	收件地区县
+            district:_this.data.county, //	String	收件地区县
             address:_this.data.deladdress, //	String	 收件地具体地址
             consignee:_this.data.modifyName, //	String	 收件人姓名
             mobile:_this.data.modifyMobile, //		String	收件人手机号
@@ -270,19 +313,57 @@ Page({
           }          
         })
     }else if(logisticsRefundModify == 2){
-      api.brandRefund({
-          orderId:selectData.order.orderId,	// Number订单id 对内唯一标识
-          customerId:selectData.order.userId // 	Number对应订单的用户id
-      }).then(res => {
-        if (res.data.status_code == 200) {
-            app.showToastC('退款成功')
-            _this.getData();
-        }else{
-          if(res.data && res.data.message){
-            app.showModalC(res.data.message); 
-          };        
-        }          
-      })
+          api.brandRefund({
+              orderId:selectData.order.orderId,	// Number订单id 对内唯一标识
+              customerId:selectData.order.userId // 	Number对应订单的用户id
+          }).then(res => {
+            if (res.data.status_code == 200) {
+                app.showToastC('退款成功，退款金额将在72小时之内原路返回到支付账户上。')
+                _this.getData();
+            }else if(res.data.status_code == 410004){
+                var infoData = res.data.data.Info || {};
+                var q = Dec.Aese('mod=operate&operation=prepay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1&oid=' + infoData.order.cartId + '&xcx=1' + '&openid=' + app.signindata.openid)
+                console.log('mod=operate&operation=prepay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1&oid=' + infoData.order.cartId + '&xcx=1' + '&openid=' + app.signindata.openid)
+                wx.request({
+                  url: app.signindata.comurl + 'order.php'+q,
+                  method: 'GET',
+                  header: { 'Accept': 'application/json' },
+                  success: function (res) {
+                    if (res.data.ReturnCode == 200) {
+                          wx.requestPayment({
+                              'timeStamp': res.data.Info.timeStamp.toString(),
+                              'nonceStr': res.data.Info.nonceStr,
+                              'package': res.data.Info.package,
+                              'signType': 'MD5',
+                              'paySign': res.data.Info.paySign,
+                              'success': function (res) { 
+                                    // 成功之后在调取一下退款接口
+                                    api.brandRefund({
+                                        orderId:selectData.order.orderId,	// Number订单id 对内唯一标识
+                                        customerId:selectData.order.userId // 	Number对应订单的用户id
+                                    }).then(res => {
+                                      if (res.data.status_code == 200) {
+                                          app.showToastC('退款成功，退款金额将在72小时之内原路返回到支付账户上。')
+                                          _this.getData();
+                                      }else{
+                                        if(res.data && res.data.message){
+                                          app.showModalC(res.data.message); 
+                                        };
+                                      }          
+                                    })                              
+                              },
+                              'fail':function(res){},
+                              'complete': function (res) {}
+                            })
+                    };   
+                  }
+                })       
+            }else{
+              if(res.data && res.data.message){
+                app.showModalC(res.data.message); 
+              };
+            }          
+          })
     }else if(logisticsRefundModify == 3){
         if (_this.data.scanCodeMsg == "") {
           app.showToastC('快递单号不能为空')
@@ -311,7 +392,12 @@ Page({
       commonBulletFrame:false
     })
   },
-
+  conditionfun(){
+    this.setData({
+      condition: false,
+      cityback:false
+    }) 
+  }, 
   scanCode: function() {
     var that = this;
     wx.scanCode({ //扫描API
@@ -369,7 +455,9 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    
+    app.downRefreshFun(() => {
+      this.getData()
+    })  
   },
 
   /**

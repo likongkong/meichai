@@ -24,7 +24,6 @@ const request = (url, options) => {
             success(request) {
               wx.hideLoading();
               wx.stopPullDownRefresh();
-              console.log('请求接口===========',request)
               if(request.statusCode == 401){  // access_token 过期 重新登陆
                 let pages = getCurrentPages();
                 var currPage = pages[pages.length - 1];

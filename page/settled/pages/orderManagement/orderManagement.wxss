@@ -267,7 +267,7 @@ page{
 }
 .addressModifytTa{
   color:#AAAAAA;
-  text-align: left;
+  text-align: right;
   width: 360rpx;
   height: 110rpx;  
   display: inline-block;

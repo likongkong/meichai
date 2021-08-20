@@ -44,6 +44,10 @@ export const exportOrder = (query) => {
 export const brandRefund = (query) => {
     return apiResquest.post('brand/acceptRefund',query)
 }
+// 查询时候分账
+export const checkOrderRefund = (query) => {
+    return apiResquest.post('brand/checkOrderRefund',query)
+}
 // ---------------------------------------- 订单详情 -----------------------------------------
 export const oMbrandInfo = (url,query) => {
     return apiResquest.get('brand/info/' + url,query)

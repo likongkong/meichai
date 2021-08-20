@@ -11,7 +11,7 @@ function comurl() {
 }
 // 公共地址 接口
 function comUrlNew() {
-  return env=='online'?'https://api-api.51chaidan.com/':'https://api.mwdphp.cn/'; 
+  return env=='online'?'https://api-api.51chaidan.com/':'http://api.mwdphp.cn/'; 
 } 
 //拼图 公共地址 接口
 function clwcomurl(){  
