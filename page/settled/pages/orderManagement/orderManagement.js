@@ -38,11 +38,11 @@ Page({
     brand:[],
     order:{},
     payStatus:[
-      {name:'全部',num:'-1'},
       {name:'待支付',num:'0'},
       {name:'待发货',num:'2'},
       {name:'已发货',num:'4'}
     ], // 支付状态 
+    subLedger: 0 , // 1 已分账 2 未分账
   },
   open: function (options) {
     // 省市联动
@@ -185,59 +185,48 @@ Page({
         city:receipt.city,
         county:receipt.district
       })
-    } else if(index == 2){
-
+    } else if(index == 2){      
+        api.checkOrderRefund({
+            orderId:selectData.order.orderId,	// Number订单id 对内唯一标识
+            customerId:selectData.order.userId // 	Number对应订单的用户id
+        }).then(res => {
+          console.log('查询是否分账',res)
+          if (res.data.status_code == 200) {
+              var payInfoData = res.data.data.Info;
+              var subLedger = 1;
+              if(payInfoData.isProfit){
+                subLedger = 1;
+              }else{
+                subLedger = 2;
+              };
+              _this.setData({
+                subLedger:subLedger,
+                payInfoData:payInfoData,
+                commonBulletFrame:true,
+                logisticsRefundModify:index,
+                orderNum:num,
+                selectData
+              })
+          }else{
+            if(res.data && res.data.message){
+              app.showModalC(res.data.message); 
+            };        
+          }          
+        })
     } else if(index == 3){
 
     }else if(index == 4){
-      var access_token = wx.getStorageSync('access_token') || '';
-      wx.downloadFile({
-        url: `${Dec.comUrlNew()}brand/exportorder`,
-        header: {
-          'app-version': Dec.versionnumber,
-          'Accept': 'application/x.mcts.v1+json',
-          'app-source':3,
-          'Authorization': 'Bearer ' + access_token          
-        },
-        success: function(res) {
-            var filePath = res.tempFilePath;
-            console.log(filePath);
-            wx.openDocument({
-                filePath: filePath,
-                success: function(res) {
-                    console.log('打开文档成功')
-                },
-                fail: function(res) {
-                    console.log(res);
-                },
-                complete: function(res) {
-                    console.log(res);
-                }
-            })
-        },
-        fail: function(res) {
-            console.log('文件下载失败');
-        },
-        complete: function(res) {},
-    })
 
-      // api.exportOrder({}).then((res)=>{
-      //   console.log('导出订单=======',res)
-      //  if (res.data.status_code == 200) {
-      //      app.showToastC('添加成功')
-      //  }else{
-      //    if(res.data && res.data.message){
-      //      app.showModalC(res.data.message); 
-      //    };        
-      //  }
-      // });
+    };
+    if(index != 2){
+      this.setData({
+        commonBulletFrame:true,
+        logisticsRefundModify:index,
+        orderNum:num,
+        selectData
+      })
     }
-    this.setData({
-      commonBulletFrame:true,
-      logisticsRefundModify:index,
-      orderNum:num,
-      selectData
-    })
+
   },
   // 弹框确认按钮    1 修改收货地址 2 退款 3 物流 4批量导出订单
   confirmCommonTip(){ 
@@ -299,14 +288,53 @@ Page({
             customerId:selectData.order.userId // 	Number对应订单的用户id
         }).then(res => {
           if (res.data.status_code == 200) {
-              app.showToastC('退款成功')
+              app.showToastC('退款成功，退款金额将在72小时之内原路返回到支付账户上。')
               _this.getData();
+          }else if(res.data.status_code == 410004){
+              var infoData = res.data.data.Info || {};
+              var q = Dec.Aese('mod=operate&operation=prepay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1&oid=' + infoData.order.cartId + '&xcx=1' + '&openid=' + app.signindata.openid)
+              console.log('mod=operate&operation=prepay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1&oid=' + infoData.order.cartId + '&xcx=1' + '&openid=' + app.signindata.openid)
+              wx.request({
+                url: app.signindata.comurl + 'order.php'+q,
+                method: 'GET',
+                header: { 'Accept': 'application/json' },
+                success: function (res) {
+                  if (res.data.ReturnCode == 200) {
+                        wx.requestPayment({
+                            'timeStamp': res.data.Info.timeStamp.toString(),
+                            'nonceStr': res.data.Info.nonceStr,
+                            'package': res.data.Info.package,
+                            'signType': 'MD5',
+                            'paySign': res.data.Info.paySign,
+                            'success': function (res) { 
+                                  // 成功之后在调取一下退款接口
+                                  api.brandRefund({
+                                      orderId:selectData.order.orderId,	// Number订单id 对内唯一标识
+                                      customerId:selectData.order.userId // 	Number对应订单的用户id
+                                  }).then(res => {
+                                    if (res.data.status_code == 200) {
+                                        app.showToastC('退款成功，退款金额将在72小时之内原路返回到支付账户上。')
+                                        _this.getData();
+                                    }else{
+                                      if(res.data && res.data.message){
+                                        app.showModalC(res.data.message); 
+                                      };
+                                    }          
+                                  })                              
+                             },
+                            'fail':function(res){},
+                            'complete': function (res) {}
+                          })
+                  };   
+                }
+              })       
           }else{
             if(res.data && res.data.message){
               app.showModalC(res.data.message); 
-            };        
+            };
           }          
         })
+
     }else if(logisticsRefundModify == 3){
         if (_this.data.scanCodeMsg == "") {
           app.showToastC('快递单号不能为空')
@@ -331,7 +359,47 @@ Page({
           }          
         })
     }else if(logisticsRefundModify == 4){
+    //   var access_token = wx.getStorageSync('access_token') || '';
+    //   wx.downloadFile({
+    //     url: `${Dec.comUrlNew()}brand/exportorder`,
+    //     header: {
+    //       'app-version': Dec.versionnumber,
+    //       'Accept': 'application/x.mcts.v1+json',
+    //       'app-source':3,
+    //       'Authorization': 'Bearer ' + access_token          
+    //     },
+    //     success: function(res) {
+    //         var filePath = res.tempFilePath;
+    //         console.log(filePath);
+    //         wx.openDocument({
+    //             filePath: filePath,
+    //             success: function(res) {
+    //                 console.log('打开文档成功')
+    //             },
+    //             fail: function(res) {
+    //                 console.log(res);
+    //             },
+    //             complete: function(res) {
+    //                 console.log(res);
+    //             }
+    //         })
+    //     },
+    //     fail: function(res) {
+    //         console.log('文件下载失败');
+    //     },
+    //     complete: function(res) {},
+    // })
 
+        api.exportOrder({}).then((res)=>{
+          console.log('导出订单=======',res)
+        if (res.data.status_code == 200) {
+            _this.copyTBL(res.data.data.Info.file.path || '')
+        }else{
+          if(res.data && res.data.message){
+            app.showModalC(res.data.message); 
+          };        
+        }
+        });
     }else if(logisticsRefundModify == 5){
       var cos = new COS({
         SecretId: 'AKIDmY0RxErYIm2TfkckG8mEYbcNA4wYsPbe',
@@ -396,6 +464,15 @@ Page({
 
   },
 
+  //  复制内容到粘贴板
+  copyTBL: function (title) {
+    wx.setClipboardData({
+      data: title,
+      success: function (res) {
+        app.showToastC('复制成功');
+      }
+    });
+  },   
   scanCode: function() {
     var that = this;
     wx.scanCode({ //扫描API
@@ -503,17 +580,22 @@ Page({
     
   },
   // 获取数据
-  getData(){
+  getData(num=1){
      var _this = this;
-     console.log('=========================')
+    if (num==1){
+      _this.data.page = 0;
+    }else{
+      var pagenum = _this.data.page;
+      _this.data.page = ++pagenum;
+    };
      api.oMgetData({
        'searchValue':_this.data.ordername,
        'payStatus':_this.data.centerIndex,
-       'brandId':_this.data.brandid || 0
+       'brandId':_this.data.brandid || 0,
+       'pageId':_this.data.page
      }).then((res) => {
       console.log('列表数据=======',res)
       if (res.data.status_code == 200) {
-          var brand = res.data.data.List.brand || [];
           var order = res.data.data.List.order || [];
           if(order && order.length != 0){
             order.forEach(element => {
@@ -523,10 +605,21 @@ Page({
             });
           };
           console.log(order)
-          _this.setData({
-            brand,
-            order
-          })
+
+          if (num==1){
+              var countOrder =  res.data.data.Info.order.count || 0;
+              var brand = res.data.data.List.brand || [];
+              _this.setData({
+                countOrder,
+                brand,
+                order
+              });
+          }else{
+            var orderData = [..._this.data.order,...order]
+            _this.setData({
+              order:orderData
+            });
+          };
       }else{
         if(res.data && res.data.message){
           app.showModalC(res.data.message); 
@@ -584,7 +677,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    
+    this.getData(2)
   },
 
   /**
