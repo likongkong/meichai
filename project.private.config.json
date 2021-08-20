@@ -13,9 +13,8 @@
     "miniprogram": {
       "list": [
         {
-          "id": 0,
-          "name": "签到新年活动",
-          "pathName": "page/component/pages/newsignin/newsignin",
+          "name": "图鉴",
+          "pathName": "page/settled/pages/atlas/atlas",
           "query": "",
           "scene": null
         },

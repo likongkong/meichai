@@ -162,6 +162,7 @@
         "pages/editSettledProfile/editSettledProfile",
         "pages/perfectSettledProfile/perfectSettledProfile",
         "pages/myWallet/myWallet",
+        "pages/atlas/atlas",
         "pages/incomingsOutgoingsDetail/incomingsOutgoingsDetail"
       ]
     }
