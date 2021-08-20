@@ -25,6 +25,7 @@ Component({
         console.log(newVal)
       }
     },
+    statusBarHeightMc:{type: Number},
     brandInfo: {
       type: Object,
       observer(newVal){
@@ -46,6 +47,7 @@ Component({
    * 页面的初始数据
    */
   data: {
+    errorDom:''
   },
    /**
    * 组件的方法列表
@@ -55,6 +57,7 @@ Component({
       let obj = {};
       obj.name = e.currentTarget.dataset.name;
       obj.value = e.detail.value.trim();
+      this.setData({errorDom:''});
       this.triggerEvent("bindchange",obj)
     },
     uploadImage(e){
@@ -99,6 +102,23 @@ Component({
         }
       });
     },
+    scrollto(e){
+      const query = this.createSelectorQuery();
+      query.select(`#${e}`).boundingClientRect();
+      query.selectViewport().scrollOffset();
+      query.exec((res)=>{
+        console.log(res);
+        if(res[0] && res[1]){
+          this.setData({
+            errorDom:e
+          })
+          wx.pageScrollTo({
+            scrollTop: res[0].top + res[1].scrollTop - this.data.statusBarHeightMc,
+            duration:200
+          })
+        }
+      })
+    }
   }
    
 })

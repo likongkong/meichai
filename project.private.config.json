@@ -93,6 +93,18 @@
           "pathName": "page/settled/pages/myWallet/myWallet",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "我的",
+          "pathName": "pages/wode/wode",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "收入支出明细",
+          "pathName": "page/settled/pages/incomingsOutgoingsDetail/incomingsOutgoingsDetail",
+          "query": "",
+          "scene": null
         }
       ]
     }

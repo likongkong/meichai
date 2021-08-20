@@ -93,7 +93,6 @@ Page({
   },
 
   toggleSampleGraphMask(){
-    console.log(11111)
     this.setData({
       isSampleGraphMask:!this.data.isSampleGraphMask
     })
@@ -105,6 +104,7 @@ Page({
   onLoad: function (options) {
     this.data.uid = app.signindata.uid;
     this.data.loginid = app.signindata.loginid;
+    console.log(options)
     this.setData({
       num:options.num,
       id:options.id || 0
@@ -219,18 +219,22 @@ Page({
   submitAudit(){
     let obj = this.data.obj;
     if(!obj.ipName || obj.ipName == ''){
+      this.selectComponent('#settledForm').scrollto('ipName');
       app.showToastC('请输入IP名称',1500);
       return false;
     }
     if(!obj.ipLogo || obj.ipLogo == ''){
+      this.selectComponent('#settledForm').scrollto('ipLogo');
       app.showToastC('请上传IP LOGO',1500);
       return false;
     }
     if(!obj.ipImage || obj.ipImage == ''){
+      this.selectComponent('#settledForm').scrollto('ipImage');
       app.showToastC('请上传IP 形象图',1500);
       return false;
     }
     if(!obj.introduce || obj.introduce == ''){
+      this.selectComponent('#settledForm').scrollto('introduce');
       app.showToastC('请输入IP 介绍',1500);
       return false;
     }
@@ -255,10 +259,11 @@ Page({
       header: { 'Accept': 'application/json' },
       success: function (res) { 
         console.log('提交审核====',res)
+        wx.hideLoading()
         if(res.data.ReturnCode == 200){
           wx.showModal({
             title: '提交成功',
-            content: '恭喜您，您的品牌专区已完成基本信息的填写，现在已经小程序内已经生成您的品牌专区，快去入驻管理后台里面上传自己的商品吧。',
+            content: '恭喜您，您的IP信息已经展示在发现广场内，您可以通过小程序内的管理后台创建活动，发布商品啦，还有更多活动补贴等你来拿。',
             showCancel:false,
             confirmText:'确认',
             confirmColor:'#02BB00',
@@ -278,7 +283,6 @@ Page({
       },
       fail: function () {},
       complete:function(){
-        wx.hideLoading()
       }
     });
   }

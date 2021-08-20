@@ -237,33 +237,41 @@ Page({
     let phoneNum = /^1[3456789]\d{9}$/;
 
     if(!obj.enterpriseName || obj.enterpriseName == ''){
+      this.selectComponent('#settledForm').scrollto('enterpriseName');
       app.showToastC('请输入企业名称',1500);
       return false;
     }
     if(!obj.enterpriseContact || obj.enterpriseContact == ''){
+      this.selectComponent('#settledForm').scrollto('enterpriseContact');
       app.showToastC('请输入企业联系人',1500);
       return false;
     }
     if(!obj.enterprisePhone || obj.enterprisePhone == ''){
+      this.selectComponent('#settledForm').scrollto('enterprisePhone');
       app.showToastC('请输入联系方式',1500);
       return false;
     }else if(!phoneNum.test(obj.enterprisePhone)){
-      app.showToastC('手机号有误请重新填写',2000);
+      this.selectComponent('#settledForm').scrollto('enterprisePhone');
+      app.showToastC('联系方式有误请重新填写',2000);
       return false;
     }
     if(!obj.wechatID || obj.wechatID == ''){
+      this.selectComponent('#settledForm').scrollto('wechatID');
       app.showToastC('请输入微信号',1500);
       return false;
     }
     if(!obj.businessLicense || obj.businessLicense == ''){
+      this.selectComponent('#settledForm').scrollto('businessLicense');
       app.showToastC('请上传企业营业执照或与IP相关凭证',1500);
       return false;
     }
     if(!obj.ipName || obj.ipName == ''){
+      this.selectComponent('#settledForm').scrollto('ipName');
       app.showToastC('请输入IP名称',1500);
       return false;
     }
     if(!obj.ipLogo || obj.ipLogo == ''){
+      this.selectComponent('#settledForm').scrollto('ipLogo');
       app.showToastC('请上传IP LOGO',1500);
       return false;
     }
@@ -283,10 +291,11 @@ Page({
       header: { 'Accept': 'application/json' },
       success: (res) => { 
         console.log('提交审核====',res)
+        wx.hideLoading()
         if(res.data.ReturnCode == 200){
           wx.showModal({
             title: '提交成功',
-            content: '24小时之内会有工作人员加您微信，请耐心等待。',
+            content: id == 0?'24小时之内会有工作人员加您微信，请留意您的微信消息。':'24小时之内会有工作人员和您联系，请留意您的微信消息。',
             showCancel:false,
             confirmText:'关闭',
             confirmColor:'#02BB00',
@@ -312,7 +321,6 @@ Page({
       },
       fail: function () {},
       complete:function(){
-        wx.hideLoading()
       }
     });
   }

@@ -1,6 +1,7 @@
 
 var Dec = require('../../../../common/public');//aes加密解密js
 var tcity = require("../../../../common/citys.js");
+var api = require("../../../../utils/api.js");
 const app = getApp();
 Page({
   /**
@@ -24,7 +25,31 @@ Page({
       quotaNum:'50000.00',
       id:2
     }],
-    accountNum:0
+    accountNum:0,
+    isDescriptionMask:false,  //说明弹框
+    isAuthenticationMask:false,  //提现认证弹框
+    date:'',
+    transactionType:0,
+    transactionTypeArray: [
+      {
+        id: 0,
+        name: '全部交易类型'
+      },
+      {
+        id: 1,
+        name: '中国'
+      },
+      {
+        id: 2,
+        name: '巴西'
+      },
+      {
+        id: 3,
+        name: '日本'
+      }
+    ],
+    limitprame:1,  //当前页码
+    perPage:20  //每页多少条
   },
   /**
    * 生命周期函数--监听页面加载
@@ -44,6 +69,12 @@ Page({
   onLoadfun(){
     this.data.loginid = app.signindata.loginid;
     this.data.uid = app.signindata.uid;
+    if(wx.getStorageSync('access_token')){
+      this.getListData();
+    }else{
+      app.getAccessToken(this.onLoadfun)
+    };
+    
 
     // wx.showModal({
     //   title: '',
@@ -58,7 +89,58 @@ Page({
     //   }
     // })
 
+    // wx.showModal({
+    //   title: '',
+    //   content: '今日已申请过提现，注意每天仅可申请一次提现，请明天再来提现吧',
+    //   showCancel:false,
+    //   confirmText:'关闭',
+    //   confirmColor:'#02BB00',
+    //   success (res) {
+    //     if (res.confirm) {
+          
+    //     }
+    //   }
+    // })
+
   },
+  getListData(){
+    let data = {
+      limitprame:this.data.limitprame,
+      perPage:this.data.perPage,
+    }
+    api.settledWithCashList(data).then((res) => {
+      console.log(res)
+      this.setData({
+        orderData:res.data.data.list
+      })
+    }).catch((err)=>{
+      console.log(err)
+    })
+  },
+  bindDateChange(e) {
+    this.setData({
+      date: e.detail.value
+    })
+  },
+  bindPickerChange: function(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      transactionType: e.detail.value
+    })
+  },
+  //说明弹框显示隐藏
+  toggleDescriptionMask(){
+    this.setData({
+      isDescriptionMask:!this.data.isDescriptionMask
+    })
+  },
+  //认证弹框显示隐藏
+  toggleAuthenticationMask(){
+    this.setData({
+      isAuthenticationMask:!this.data.isAuthenticationMask
+    })
+  },
+  //切换收款账号
   chooseAccount(e){
     this.setData({
       accountNum:e.currentTarget.dataset.ind
@@ -140,7 +222,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    
+    this.getListData()
   },
 
   /**

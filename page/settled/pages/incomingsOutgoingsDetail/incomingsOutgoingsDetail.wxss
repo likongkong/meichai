@@ -1,0 +1,27 @@
+page{
+  background:#f4f5f9;
+}
+.incomeWrap{
+  padding: 20rpx 10rpx 0 10rpx;
+  box-sizing: border-box;
+}
+.incomeBox{
+  width: 100%;
+  height: auto;
+  border-radius: 14rpx;
+  background: #fff;
+  padding: 0 34rpx 16rpx 34rpx;
+  box-sizing: border-box;
+}
+.incomeItem{
+  padding-top: 26rpx;
+  border-bottom: 2rpx solid #F5F5F5;
+}
+.incomeItem:last-child{
+  border-bottom:0;
+}
+.incomeItem view{
+  font-size: 28rpx;
+  color: #101010;
+  margin-bottom: 24rpx;
+}

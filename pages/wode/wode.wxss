@@ -532,3 +532,102 @@ page{
   right: 0;
   padding: 8rpx;
 }
+
+.brandManageWrap{
+  background: #fff;
+  padding: 32rpx 0 42rpx 0;
+  border-bottom: 2rpx solid rgba(229, 229, 229, 100);
+}
+.brandManageTitle{
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  display: block;
+  font-size: 30rpx;
+}
+.assetWrap{
+  width: 100%;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+.assetWrap>view{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2rpx solid rgba(229, 229, 229, 100);
+  padding: 34rpx 0;
+}
+.assetL{
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 34rpx;
+  box-sizing: border-box;
+}
+.assetL text{
+  display: block;
+  text-align: center;
+}
+.assetL view text:first-child{
+  font-size: 32rpx;
+  font-weight: bold;
+}
+.assetL view text:last-child{
+  font-size: 24rpx;
+}
+.assetR{
+  width: 20%;
+  border-left: 2rpx solid rgba(229, 229, 229, 100);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.assetR image{
+  width: 50rpx;
+  height: auto;
+  display: block;
+}
+.assetR text{
+  font-size: 24rpx;
+  display: block;
+  text-align: center;
+}
+.brandManageMenu{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 48rpx;
+  box-sizing: border-box;
+}
+.brandManageItem{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.brandManageItem view{
+  padding-top: 30rpx;
+}
+.brandManageItem image{
+  width: 50rpx;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+.brandManageItem text{
+  font-size: 24rpx;
+  display: block;
+  text-align: center;
+  margin-top: 6rpx;
+}
+.brandManageWrap button{
+  width: 400rpx;
+  height: 60rpx;
+  background: #90D2D6;
+  font-size: 28rpx;
+  color: #fff;
+  line-height: 60rpx;
+  margin-top: 30rpx;
+}
+.brandManageWrap button::after{
+  border: none;
+}
