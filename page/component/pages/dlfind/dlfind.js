@@ -786,63 +786,6 @@ Page({
       }
     });
   },
-  // 删除
-  givenDetail:function(e){
-    var type = e.currentTarget.dataset.type || 0;
-    var drying_id = e.currentTarget.dataset.drying_id;
-    var index = e.currentTarget.dataset.index || 0;
-    var _this = this;
-    if(type == 1){
-      var uid = e.currentTarget.dataset.uid;
-      wx.showModal({
-        content: '您确定要禁止该用户发帖吗？',
-        success: function(res) {
-          if (res.confirm) {
-            Pub.postRequest(_this, 'rootdeldrying', {
-              uid: _this.data.uid,
-              loginid: _this.data.loginid,
-              banUid: uid ||'',
-              type:1,
-              vcode:app.signindata.versionnumber
-            }, function (res) {
-              console.log('禁止数据===',res);
-              var listdata = _this.data.listdata || [];
-              listdata.splice(index, 1);
-              _this.setData({
-                listdata:listdata
-              });
-              app.showToastC('禁止成功');
-         
-            });
-          }
-        }
-      })      
-    }else{
-      wx.showModal({
-        content: '您确定要删除吗？',
-        success: function(res) {
-          if (res.confirm) {
-            Pub.postRequest(_this, 'rootdeldrying', {
-              uid: _this.data.uid,
-              loginid: _this.data.loginid,
-              drying_id: drying_id ||'',
-              vcode:app.signindata.versionnumber
-            }, function (res) {
-              console.log('删除数据===',res);
-              var listdata = _this.data.listdata || [];
-              listdata.splice(index, 1);
-              _this.setData({
-                listdata:listdata
-              });
-              app.showToastC('删除成功');
-         
-            });
-          }
-        }
-      })
-    }
-
-  }, 
   onReady: function() {},
 
   onShow: function() {},

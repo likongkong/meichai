@@ -152,25 +152,10 @@
         <view class='dlfevecom' style='float:left;'>
           <view class='dlfeveleft' wx:for='{{listdata}}' wx:key='key' wx:if='{{index%2==0}}'>
             <view style='position:relative;margin-bottom:10rpx;'>
-              <block wx:if='{{item.video_path}}'>
-                <view style='width:360rpx;position:relative;max-height:340rpx;overflow: hidden;' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>
-                  <view class='dlfchrbright' wx:if='{{item.topic_name}}'>{{item.topic_name}}</view>
-                  <view class='dlfchrbrightDetail' catchtap="givenDetail" data-index='{{index}}' data-drying_id='{{item.id}}' wx:if='{{jurisdiction && item.brand_id==0}}'>删除</view>
-                  <view class='dlfchrbrightDetail' style="left:10rpx;" catchtap="givenDetail" data-type='1' data-index='{{index}}' data-uid='{{item.uid}}' wx:if='{{jurisdiction && item.brand_id==0}}'>禁止发帖</view>
-                  <block wx:if='{{item.video_img}}'>
-                    <image wx:if='{{!item.iftrvideo}}' mode='widthFix' style='width:360rpx;margin:0 auto;min-height:80rpx;display:block;border-radius:10rpx 10rpx 0 0;' src='{{item.video_img}}?imageMogr2/thumbnail/720x'></image>
-                    <image wx:if='{{!item.iftrvideo&&item.video_img}}' style='width:70rpx;height:70rpx;position:absolute;bottom:0;left:0;right:0;top:0;margin:auto;' src='https://www.51chaidan.com/images/icon/iconPlayVideo.png'></image>
-                  </block>
-                </view>
-              </block>
-              <block wx:else>
                 <view style='width:360rpx;margin:auto;position:relative;max-height:340rpx;overflow: hidden;' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>
-                  <view class='dlfchrbrightDetail' catchtap="givenDetail" data-index='{{index}}' data-drying_id='{{item.id}}' wx:if='{{jurisdiction && item.brand_id==0}}'>删除</view>
-                  <view class='dlfchrbrightDetail' style="left:10rpx;" catchtap="givenDetail" data-type='1' data-index='{{index}}' data-uid='{{item.uid}}' wx:if='{{jurisdiction && item.brand_id==0}}'>禁止发帖</view>
-                  <view class='dlfchrbright' wx:if='{{item.topic_name}}'>{{item.topic_name}}</view>
+                  <view class='dlfchrbright'>动态</view>
                   <image data-ind='{{index}}' style='width:360rpx;margin:auto;display:block;border-radius:10rpx 10rpx 0 0;' mode='widthFix' src='{{item.img_extend[0].img}}?imageMogr2/thumbnail/720x'></image>
                 </view>
-              </block>
             </view>
             <view class='dlfhtitlenew' wx:if='{{item.title}}' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>{{item.title}}</view>
             <view class='dlfhpbox'>
@@ -181,8 +166,9 @@
               <view class='dlfhpbtxt specialellipsis' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>{{item.nick}}
                 <image wx:if='{{item.is_authentication==1}}' class='dlfchrtopimgnew' src='https://clw.51chaidan.com/images/goods/authentication1.png'></image>
               </view>
-              <view class="specialellipsis" style="float:right;width:63rpx;padding-right:50rpx;height:55rpx;line-height:55rpx;display:inline-block;position:relative;vertical-align:top;font-size:24rpx;position:relative;text-align:right;">{{item.praise_sum>0?item.praise_sum:''}}<image style="float:right;margin-top:6rpx;" class='dlfcbeveimgnewone' wx:if='{{item.is_praise==0}}' data-lid='{{item.id}}' data-is_praise='{{item.is_praise}}' catchtap='ispraisefun' data-ind='{{index}}' src='https://www.51chaidan.com/images/brand/black_heart.png?'></image>
-                <image style="float:right;" class='dlfcbeveimgnewone' wx:if='{{item.is_praise==1}}' data-lid='{{item.id}}' data-is_praise='{{item.is_praise}}' catchtap='ispraisefun' data-ind='{{index}}' src='https://www.51chaidan.com/images/brand/red_heart.png?'></image>
+              <view class="specialellipsis dlevegttu">
+                {{item.praise_sum>0?item.praise_sum:''}}
+                <image style="float:right;margin-top:6rpx;" class='dlfcbeveimgnewone' data-lid='{{item.id}}' data-is_praise='{{item.is_praise}}' catchtap='ispraisefun' data-ind='{{index}}' src='{{item.is_praise==0?"https://www.51chaidan.com/images/brand/black_heart.png":"https://www.51chaidan.com/images/brand/red_heart.png"}}'></image>
               </view>
             </view>
           </view>
@@ -191,28 +177,12 @@
         <view class='dlfevecom' style='float:right;'>
           <view class='dlfeveright' wx:for='{{listdata}}' wx:key='key' wx:if='{{index%2==1}}'>
             <view style='position:relative;margin-bottom:10rpx;'>
-              <block wx:if='{{item.video_path}}'>
-                <view style='width:360rpx;position:relative;max-height:340rpx;overflow:hidden;' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>
-                  <view class='dlfchrbright' wx:if='{{item.topic_name}}'>{{item.topic_name}}</view>
-                  <view class='dlfchrbrightDetail' catchtap="givenDetail" data-index='{{index}}' data-drying_id='{{item.id}}' wx:if='{{jurisdiction && item.brand_id==0}}'>删除</view>
-                  <view class='dlfchrbrightDetail' style="left:10rpx;" catchtap="givenDetail" data-type='1' data-index='{{index}}' data-uid='{{item.uid}}' wx:if='{{jurisdiction && item.brand_id==0}}'>禁止发帖</view>
-                  <block wx:if='{{item.video_img}}'>
-                    <image wx:if='{{!item.iftrvideo}}' mode='widthFix' style='width:360rpx;margin:0 auto;min-height:80rpx;display:block;border-radius:10rpx 10rpx 0 0;' src='{{item.video_img}}?imageMogr2/thumbnail/720x'></image>
-                    <image wx:if='{{!item.iftrvideo&&item.video_img}}' style='width:70rpx;height:70rpx;position:absolute;bottom:0;left:0;right:0;top:0;margin:auto;' src='https://www.51chaidan.com/images/icon/iconPlayVideo.png'></image>
-                  </block>
-                </view>
-              </block>
-              <block wx:else>
                 <view style='width:360rpx;margin:auto;position:relative;max-height:340rpx;overflow:hidden;' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>
-                  <view class='dlfchrbright' wx:if='{{item.topic_name}}'>{{item.topic_name}}</view>
-                  <view class='dlfchrbrightDetail' catchtap="givenDetail" data-index='{{index}}' data-drying_id='{{item.id}}' wx:if='{{jurisdiction && item.brand_id==0}}'>删除</view>
-                  <view class='dlfchrbrightDetail' style="left:10rpx;" catchtap="givenDetail" data-type='1' data-index='{{index}}' data-uid='{{item.uid}}' wx:if='{{jurisdiction && item.brand_id==0}}'>禁止发帖</view>
+                  <view class='dlfchrbright'>删除</view>
                   <image data-ind='{{index}}' style='width:360rpx;margin:auto;display:block;border-radius:10rpx 10rpx 0 0;' mode='widthFix' src='{{item.img_extend[0].img}}?imageMogr2/thumbnail/720x'></image>
                 </view>
-              </block>
             </view>
             <view class='dlfhtitlenew' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail' wx:if='{{item.title}}'>{{item.title}}</view>
-
             <view class='dlfhpbox'>
               <view style='width:40rpx;height:40rpx;border-radius:50%;float:left;margin:8rpx 8rpx 0 8rpx;position: relative;' catchtap='jumpdlfchlimgdetail' data-nick='{{item.nick}}' data-uid='{{item.uid}}'>
                 <image src='{{item.litpic}}' style="width:100%;height:100%;border-radius:50%;"></image>
@@ -221,8 +191,9 @@
               <view class='dlfhpbtxt specialellipsis' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>{{item.nick}}
                 <image wx:if='{{item.is_authentication==1}}' class='dlfchrtopimgnew' src='https://clw.51chaidan.com/images/goods/authentication1.png'></image>
               </view>
-              <view class="specialellipsis" style="float:right;width:63rpx;padding-right:50rpx;height:55rpx;line-height:55rpx;display:inline-block;position:relative;vertical-align:top;font-size:24rpx;position:relative;text-align:right;">{{item.praise_sum>0?item.praise_sum:''}}<image style="float:right;margin-top:6rpx;" class='dlfcbeveimgnewone' wx:if='{{item.is_praise==0}}' data-lid='{{item.id}}' data-is_praise='{{item.is_praise}}' catchtap='ispraisefun' data-ind='{{index}}' src='https://www.51chaidan.com/images/brand/black_heart.png?'></image>
-                <image style="float:right;" class='dlfcbeveimgnewone' wx:if='{{item.is_praise==1}}' data-lid='{{item.id}}' data-is_praise='{{item.is_praise}}' catchtap='ispraisefun' data-ind='{{index}}' src='https://www.51chaidan.com/images/brand/red_heart.png?'></image>
+              <view class="specialellipsis dlevegttu">
+                {{item.praise_sum>0?item.praise_sum:''}}
+                <image style="float:right;margin-top:6rpx;" class='dlfcbeveimgnewone' data-lid='{{item.id}}' data-is_praise='{{item.is_praise}}' catchtap='ispraisefun' data-ind='{{index}}' src='{{item.is_praise==0?"https://www.51chaidan.com/images/brand/black_heart.png":"https://www.51chaidan.com/images/brand/red_heart.png"}}'></image>
               </view>
             </view>
           </view>
