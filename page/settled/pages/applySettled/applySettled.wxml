@@ -2,7 +2,7 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 <view class="applyForOccupancy" style="padding-bottom: {{num!=1?'150':'210'}}rpx;">
-    <settledProgress num="{{num}}"></settledProgress>
+    <settledProgress num="{{num}}" intact="hide"></settledProgress>
     <block wx:if="{{num == 1}}">
         <view class="aFoCenter boxShadowEve">
         <!-- <scroll-view scroll-y style="height:{{contentHeight-105}}px;"> -->
