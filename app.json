@@ -163,6 +163,7 @@
         "pages/perfectSettledProfile/perfectSettledProfile",
         "pages/myWallet/myWallet",
         "pages/atlas/atlas",
+        "pages/offeringCalendar/offeringCalendar",
         "pages/incomingsOutgoingsDetail/incomingsOutgoingsDetail"
       ]
     }

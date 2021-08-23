@@ -1,0 +1,123 @@
+
+@import "/common/tabbar.wxss";
+page{
+  background:#f4f5f9;
+}
+.ocbox{
+  width: 100%;
+}
+.marginAuto{
+  width:100%;
+  margin:auto;
+  height: 80rpx;
+  white-space: nowrap;  
+  background:#fff;
+  color: #fff;
+}
+.scrollViewTopEve{
+  display: inline-block;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 24rpx;
+  color: #000;
+  background:#fff;
+  border-radius: 15rpx;  
+  padding:0 30rpx;
+  margin-right: 20rpx;
+}
+.scrollViewTopEve .selectTop{
+  font-size: 34rpx !important;
+}
+.ocDateBox{
+  width: 700rpx;
+  margin:0 auto;
+}
+.ocDateEveTop{
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 24rpx;
+}
+.ocDateEve{
+  width: 100%;
+  border-radius: 15rpx;
+  background:#fff;
+  padding-bottom: 10rpx;
+}
+.ocDateINBox{
+  padding:20rpx;
+  height: 180rpx;
+}
+.ocDateEImg{
+  width: 180rpx;
+  height: 180rpx;
+  float: left;
+  border-radius: 10rpx;
+}
+.ocDateContent{
+  width: 460rpx;
+  height: 180rpx;
+  float: right;
+}
+.ocDateENum{
+  padding-top: 18rpx;
+  display: flex;
+  justify-content: space-between;
+  font-size:22rpx
+}
+.buttonPay{
+  width: 160rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color:#EC817C;
+  border:2rpx solid #EC817C;
+  border-radius: 10rpx;
+}
+.userBox{
+  height: 70rpx;
+  line-height: 70rpx;
+  padding: 0 20rpx;
+  font-size: 24rpx;
+  position: relative;
+}
+.atlasIwantEbImgBox{
+  height: 70rpx;
+  width: 50rpx;
+  position: relative ;
+  margin-right: 20rpx;
+  float: left;
+}
+.atlasIwantEbImg{
+  width: 50rpx;
+  height: 50rpx;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  border-radius: 50%;
+}
+.userBoxName{
+  height: 70rpx;
+  line-height: 70rpx;
+  width: 500rpx;
+}
+.whwddimgtit{
+  position: absolute;
+  right: 20rpx;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  width: 15rpx;
+  height: 26rpx;
+}
+
+
+
+
+
+
+
+
