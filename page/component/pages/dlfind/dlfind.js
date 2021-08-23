@@ -1,5 +1,6 @@
 var Pub = require('../../common/mPublic.js'); //aes加密解密js
 var Dec = require('../../../../common/public.js'); //aes加密解密js
+var api = require("../../../../utils/api.js");
 const app = getApp();
 Page({
 
@@ -21,7 +22,7 @@ Page({
     topic_id: 0,
     dlfhboteve: [],
     listdata: [],
-    page: 1, 
+    page: 0, 
     // 加载提示
     loadprompt: '加载更多.....',
     // 公共默认信息
@@ -92,19 +93,47 @@ Page({
       {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
     ],
     payStatus:[
-      {name:'推荐',num:'-1'},
-      {name:'我的关注',num:'0'},
+      {name:'推荐',num:'0'},
+      {name:'我的关注',num:'1'},
       {name:'秒杀',num:'2'},
-      {name:'抽选',num:'4'},
-      {name:'动态',num:'3'},
-      {name:'分享',num:'14'},
-      {name:'动态',num:'5'},
-      {name:'分享',num:'6'},
-      {name:'动态',num:'7'},
-      {name:'分享',num:'8'},
-      {name:'签到',num:'9'}
+      {name:'抽选',num:'3'},
+      {name:'动态',num:'4'},
+      {name:'分享',num:'5'},
+      {name:'动态',num:'6'}
     ], // 支付状态 
-    centerIndex:-1
+    centerIndex:0,
+    brandWhole:false
+  },
+  // 全部品牌
+  brandWholeFun(){
+    var _this = this;
+    if(!this.data.brandWhole){
+      this.brandWholeSeach()  
+    };
+    this.setData({brandWhole:!this.data.brandWhole});
+     
+  },
+  brandWholeSeach(){
+    var _this = this;
+    var qqq = Dec.Aese('mod=community&operation=allIps&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&searchValue='+_this.data.brand_name||'');
+    wx.showLoading({
+      title: '加载中...',
+      mask:true
+    })
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + qqq,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        wx.hideLoading()
+        console.log('全部品牌信息=====',res)
+        if (res.data.ReturnCode == 200) {
+          _this.setData({
+            brandwhole:res.data.List.brand || [], 
+          });
+        };
+      }
+    });
   },
   catchTouchMove:function(res){
     return false
@@ -131,6 +160,7 @@ Page({
     that.setData({
       centerIndex:index,
     })
+    that.eldatalistfun(0)
     //创建节点选择器
     var query = wx.createSelectorQuery();
     //选择id
@@ -235,10 +265,13 @@ Page({
   },
   jumpsouchtem:function(w){
     var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
-    this.setData({
-      brand_id: id||0,
-    })
-    this.jumpsearch();
+    // this.setData({
+    //   brand_id: id||0,
+    // })
+    // this.jumpsearch();
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + id +"&settlement=1"
+    });
   },
   elsearchfun:function(){
     this.setData({ elsearch: !this.data.elsearch});
@@ -249,7 +282,7 @@ Page({
     });
   },
   jumpsearch:function(){
-    this.eldatalistfun(0);
+    this.brandWholeSeach();
   },
   // input 值改变
   inputChange: function (e) {
@@ -339,28 +372,42 @@ Page({
   // 品牌列表
   eldataclassfun:function(){
     var _this = this;
-    var qqq = Dec.Aese('mod=Obtain&operation=brandList&type=1');
+    var qqq = Dec.Aese('mod=community&operation=topInfo&uid='+_this.data.uid+'&loginid='+_this.data.loginid);
     wx.request({
-      url: app.signindata.comurl + 'brandDrying.php' + qqq,
+      url: app.signindata.comurl + 'toy.php' + qqq,
       method: 'GET',
       header: {'Accept': 'application/json'},
       success: function (res) {
+        console.log('新品牌信息=====',res)
         if (res.data.ReturnCode == 200) {
           _this.setData({
-            eldataclass: res.data.List.brandList
+            visitHistory:res.data.List.visitHistory || [], // 最近访问的品牌信息
+            salesCalendar:res.data.List.salesCalendar || [], // 日历信息
+            recommendIps:res.data.List.recommendIps || [] // 品牌
           });
         };
       }
     });
   },
+  toDate(number,num) {
+    var date = new Date(number * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+    var Y = date.getFullYear();
+    var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
+    var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+    var h = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
+    var m = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+    var s = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
+    return Y + '/' + M + '/' + D +' ' + h + ':' + m + ':' +s;
+  },
+
   // 品牌社区列表
   eldatalistfun: function (num) {
     var _this = this;
     if (num == 0) {
-      _this.data.page = 1;
+      _this.data.page = 0;
       _this.setData({
         loadprompt: '加载更多.....',
-        eldatalist: [],
+        communityList: [],
         nodataiftr: false
       });
     } else {
@@ -371,36 +418,42 @@ Page({
         nodataiftr: false,
       });
     };
-    Pub.postRequest(_this, 'dryinglist', {
-      uid: _this.data.uid,
-      loginid: _this.data.loginid,
-      cat_id: _this.data.cat_id,
-      brand_name: _this.data.brand_name||'',
-      brand_id: _this.data.brand_id || 0,
-      page: _this.data.page,
-      vcode:app.signindata.versionnumber
-    }, function (res) {
-      console.log('数据===',res);
-      var listdata = res.data.List|| [];
-      if(listdata.length!=0){
-        if (num == 0) {
-          _this.setData({
-            eldatalist: listdata,
-            nodataiftr: true,
-            jurisdiction:res.data.Info.jurisdiction || false
-          });
-        } else {
-          var ltlist = _this.data.eldatalist.concat(listdata);
-          _this.setData({
-            eldatalist: ltlist,
-            nodataiftr: true,
-            jurisdiction:res.data.Info.jurisdiction || false
-          });
+    wx.showLoading({
+      title: '加载中...',
+      mask:true
+    })
+
+    var qqq = Dec.Aese('mod=community&operation=info&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&showType='+_this.data.centerIndex+'&pid='+ _this.data.page);
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + qqq,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        wx.hideLoading()
+        console.log('动态瀑布流数据=====',res)
+        if (res.data.ReturnCode == 200) {
+          var communityList = res.data.List.communityList || [];
+          if(communityList.length != 0){
+             communityList.forEach(element => {
+                element.add_time = _this.toDate(element.add_time || 0);
+                element.start_time = _this.toDate(element.start_time || 0);
+                element.end_time = _this.toDate(element.end_time || 0);
+             });
+          }
+          if (num == 0) {
+            _this.setData({
+              communityList,
+              nodataiftr:true
+            });
+          } else {
+            var ltlist = [..._this.data.communityList,...communityList];
+            _this.setData({
+              communityList: ltlist,
+              nodataiftr:true
+            });
+          };
         };
-      }else{
-        app.showToastC('暂无更多数据');
       }
- 
     });
   }, 
 
@@ -672,10 +725,15 @@ Page({
     //   })
     // });
 
+
+
+    _this.eldataclassfun();
+    _this.eldatalistfun(0);
+
     // 晒单列表
     if (this.data.cat_id == 2) {
-      _this.eldatalistfun(0);
-      _this.eldataclassfun();
+      
+
     }else if(this.data.cat_id == 3) {
       _this.mctslistfun(0);
     } else {
@@ -685,7 +743,6 @@ Page({
     this.selectComponent("#hide").getappData();
     _this.otherdata();
 
-    
     setTimeout(function(){
       app.indexShareBanner();
     },1000);
