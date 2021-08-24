@@ -23,6 +23,64 @@ Page({
     ],
     illustrated_id:''
   },  
+  jumpdetail(w){
+    var id = w.currentTarget.dataset.id || w.target.dataset.id || '';
+    var type = w.currentTarget.dataset.type || w.target.dataset.type || '';
+    if(type == 1){
+      var item_type = 1;
+      var whref = id;
+    }else if(type == 2){
+      var item_type = 9003;
+      var whref = id;
+    }
+    app.comjumpwxnav(item_type, whref, wname, imgurl)
+
+  },
+
+  subscrfundom:function(w){
+    var _this = this;
+    var sellList = _this.data.sellList;
+    var index = w.currentTarget.dataset.index || w.target.dataset.index || 0;
+
+    if(sellList&&sellList[index]&&sellList[index].subscribeList){
+      _this.setData({
+        id:sellList[index].id,
+        subscribedata:sellList[index].subscribeList
+      })
+      _this.subscrfunstar()
+    }
+
+  },
+  // 拉起订阅
+  subscrfunstar: function () {
+    var _this = this;
+    console.log(2,subscribedata)
+    var subscribedata = _this.data.subscribedata || '';
+    if (subscribedata && subscribedata.template_id && app.signindata.subscribeif) {
+      if (subscribedata.template_id instanceof Array) {
+        wx.requestSubscribeMessage({
+          tmplIds: subscribedata.template_id || [],
+          success(res) {
+            for (var i = 0; i < subscribedata.template_id.length; i++) {
+              if (res[subscribedata.template_id[i]] == "accept") {
+                app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+              };
+            };
+          },
+        })
+      } else {
+        wx.requestSubscribeMessage({
+          tmplIds: [subscribedata.template_id || ''],
+          success(res) {
+            if (res[subscribedata.template_id] == "accept") {
+              app.subscribefun(_this, 0, subscribedata.template_id, subscribedata.subscribe_type);
+            };
+          },
+          complete() {}
+        })
+      };
+    };
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -91,7 +149,33 @@ Page({
 
     })
  },  
-
+ // 关注 和 点赞 函数
+ followfun: function(w) {
+    var _this = this;
+    var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
+    var type = w.currentTarget.dataset.type || w.target.dataset.type || 0;
+    console.log('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id)
+    var qqq = Dec.Aese('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id);
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + qqq,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        console.log('同款想要=====',res)
+        if (res.data.ReturnCode == 200) {
+            _this.getData();
+        }else{
+          if(res.data.Msg){
+            wx.showModal({
+              content: res.data.Msg || '',
+              showCancel: false,
+              success: function(res) {}
+            });
+          };
+        };
+      }
+    });
+  },
 
   toDate(number,num) {
     var date = new Date(number * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
