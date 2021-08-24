@@ -439,6 +439,8 @@ Page({
                 element.start_time = _this.toDate(element.start_time || 0);
                 element.end_time = _this.toDate(element.end_time || 0);
              });
+          }else{
+            app.showToastC('暂无更多数据')
           }
           if (num == 0) {
             _this.setData({
@@ -545,31 +547,43 @@ Page({
   },
 
 
-  // 关注函数
+  // 关注 和 点赞 函数
   followfun: function(w) {
-    var drying_id = w.currentTarget.dataset.drying_id || w.target.dataset.drying_id || 0;
-    var is_follow = w.currentTarget.dataset.is_follow || w.target.dataset.is_follow || 0;
-    var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
     var _this = this;
-    Pub.postRequest(_this, 'focuonusers', {
-      uid: _this.data.uid,
-      loginid: _this.data.loginid,
-      drying_uid: drying_id,
-      is_follow: is_follow
-    }, function(res) {
-      app.showToastC('关注成功');
-      if (_this.data.cat_id == 2) {
-        var eldatalist = _this.data.eldatalist;
-        eldatalist[ind].is_follow = 1;
-        _this.setData({
-          eldatalist: eldatalist
-        })
-      } else {
-        var listdata = _this.data.listdata;
-        listdata[ind].is_follow = 1;
-        _this.setData({
-          listdata: listdata
-        });
+    var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
+    var type = w.currentTarget.dataset.type || w.target.dataset.type || 0;
+    var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
+    var communityList = _this.data.communityList || [];
+    console.log('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id)
+    var qqq = Dec.Aese('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id);
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + qqq,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        console.log('新品牌信息=====',res)
+        if (res.data.ReturnCode == 200) {
+          if(type == 0){
+            _this.setData({
+              ['communityList['+ind+'].brandInfo.is_attention']:true
+            }); 
+          }else{
+            
+            if(communityList[ind].is_like){
+              var like_number = parseInt(communityList[ind].like_number) - 1  
+            }else{
+              var like_number = parseInt(communityList[ind].like_number) + 1 
+            };
+            if(like_number<0){
+              like_number = 0;
+            };
+            _this.setData({
+              ['communityList['+ind+'].like_number']:like_number,
+              ['communityList['+ind+'].is_like']:!communityList[ind].is_like
+            });
+          }
+
+        };
       }
     });
   },
@@ -682,31 +696,31 @@ Page({
     };
 
     // 晒单分类
-    Pub.postRequest(_this, 'topicclass', {
-      uid: _this.data.uid,
-      loginid: _this.data.loginid
-    }, function(res) {
-      var dlfhboteve = res.data.List || [];
-      var dlinfo = res.data.Info.Explain || '';
-      var userhead = res.data.Info.UserHead || app.signindata.avatarUrl || 'https://static.51chaidan.com/images/headphoto/' + _this.data.uid + '.jpg';
-      if (res.data.Info) {
-        var currency_sum = res.data.Info.currency_sum || 0;
-        var isExchange = res.data.Info.isExchange;
-        var exchangeTips = res.data.Info.exchangeTips || '';
-        var commentNumber = res.data.Info.commentNumber || 0;
-        _this.setData({
-          currency_sum: currency_sum,
-          isExchange: isExchange,
-          exchangeTips: exchangeTips,
-          commentNumber: commentNumber
-        });
-      };
-      _this.setData({
-        dlfhboteve: dlfhboteve,
-        hinttxt: dlinfo,
-        userhead: userhead
-      })
-    });
+    // Pub.postRequest(_this, 'topicclass', {
+    //   uid: _this.data.uid,
+    //   loginid: _this.data.loginid
+    // }, function(res) {
+    //   var dlfhboteve = res.data.List || [];
+    //   var dlinfo = res.data.Info.Explain || '';
+    //   var userhead = res.data.Info.UserHead || app.signindata.avatarUrl || 'https://static.51chaidan.com/images/headphoto/' + _this.data.uid + '.jpg';
+    //   if (res.data.Info) {
+    //     var currency_sum = res.data.Info.currency_sum || 0;
+    //     var isExchange = res.data.Info.isExchange;
+    //     var exchangeTips = res.data.Info.exchangeTips || '';
+    //     var commentNumber = res.data.Info.commentNumber || 0;
+    //     _this.setData({
+    //       currency_sum: currency_sum,
+    //       isExchange: isExchange,
+    //       exchangeTips: exchangeTips,
+    //       commentNumber: commentNumber
+    //     });
+    //   };
+    //   _this.setData({
+    //     dlfhboteve: dlfhboteve,
+    //     hinttxt: dlinfo,
+    //     userhead: userhead
+    //   })
+    // });
 
     // 官方推荐
     // Pub.postRequest(_this, 'currencyExchange', {
@@ -731,52 +745,22 @@ Page({
     _this.eldatalistfun(0);
 
     // 晒单列表
-    if (this.data.cat_id == 2) {
+    // if (this.data.cat_id == 2) {
       
 
-    }else if(this.data.cat_id == 3) {
-      _this.mctslistfun(0);
-    } else {
-      _this.listdata(0);
-    }
+    // }else if(this.data.cat_id == 3) {
+    //   _this.mctslistfun(0);
+    // } else {
+    //   _this.listdata(0);
+    // }
     
-    this.selectComponent("#hide").getappData();
-    _this.otherdata();
+    // this.selectComponent("#hide").getappData();
+    // _this.otherdata();
 
     setTimeout(function(){
       app.indexShareBanner();
     },1000);
 
-  },
-  otherdata: function() {
-    var _this = this;
-
-    if(this.data.defaultinformation){}else{
-      app.defaultinfofun(this);
-    }
-
-    setTimeout(function() {
-      wx.getUserInfo({
-        success: function(res) {
-          // 下载用户头像
-          wx.downloadFile({
-            url: res.userInfo.avatarUrl,
-            success(res) {
-              const fs = wx.getFileSystemManager();
-              fs.saveFile({
-                tempFilePath: res.tempFilePath,
-                success(res) {
-                  wx.setStorageSync('image_cache', res.savedFilePath)
-                }
-              });
-            },
-            fail: function(err) {
-              wx.setStorageSync('image_cache', '')
-            }
-          });
-        }
-      });
-    }, 1000)
   },
   // 晒单列表
   listdata: function(num) {
@@ -859,25 +843,13 @@ Page({
 
   onPullDownRefresh: function() {
     app.downRefreshFun(() => {
-      if (this.data.cat_id==2) {
-        this.eldatalistfun(0);
-      } else if(this.data.cat_id == 3){
-        this.mctslistfun(0);
-      } else {
-        this.listdata(0)
-      }
+      this.eldatalistfun(0);
     })
     
   },
 
   onReachBottom: function() {
-    if (this.data.cat_id == 2){
-      this.eldatalistfun(1);
-    }else if(this.data.cat_id == 3){
-      this.mctslistfun(1);
-    }else{
-      this.listdata(1)
-    };
+    this.eldatalistfun(1);
   },
   onShareTimeline:function(){
     var _this = this;
@@ -992,50 +964,7 @@ Page({
 
 
   },
-  // 点赞
-  ispraisefun: function(w) {
-    var _this = this;
-    var is_praise = w.currentTarget.dataset.is_praise || w.target.dataset.is_praise || 0;
-    var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
-    var lid = w.currentTarget.dataset.lid || w.target.dataset.lid || 0;
-    if (_this.data.iftrputfor) {
-      _this.data.iftrputfor = false;
-      Pub.postRequest(_this, 'praiseDrying', {
-        uid: _this.data.uid,
-        loginid: _this.data.loginid,
-        drying_id: lid,
-        is_praise: is_praise
-      }, function(res) {
-        _this.data.iftrputfor = true;
-        if (_this.data.cat_id==2){
-          var eldatalist = _this.data.eldatalist;
-          if (is_praise == 0) {
-            eldatalist[ind].is_praise = 1;
-            eldatalist[ind].praise_sum = parseInt(eldatalist[ind].praise_sum) + 1;
-          } else {
-            eldatalist[ind].is_praise = 0;
-            eldatalist[ind].praise_sum = parseInt(eldatalist[ind].praise_sum) - 1;
-          };          
-          _this.setData({
-            eldatalist: eldatalist
-          })
-        }else{
-          var listdata = _this.data.listdata;
-          if (is_praise == 0) {
-            listdata[ind].is_praise = 1;
-            listdata[ind].praise_sum = parseInt(listdata[ind].praise_sum) + 1;
-          } else {
-            listdata[ind].is_praise = 0;
-            listdata[ind].praise_sum = parseInt(listdata[ind].praise_sum) - 1;
-          };
-          _this.setData({
-            listdata: listdata
-          });
-        }
 
-      });
-    }
-  },
   jumpdldlvreate: function() {
     wx.navigateTo({
       url: "../dldlcreate/dldlcreate",

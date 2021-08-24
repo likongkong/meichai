@@ -470,7 +470,14 @@ page{background:#f5f6fa;}.dlfbox{width:100%;background:#f5f6fa;}::-webkit-scroll
 }
 
 
-
+.statusImgBox{
+  width: 70rpx;
+  height: 70rpx;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
 
 
 

@@ -17,9 +17,9 @@ Page({
     uid: app.signindata.uid,
     openid: app.signindata.openid,
 
-    c_title: '品牌专区', // -正品折扣多一点
+    c_title: '', // -正品折扣多一点
     c_arrow: true,
-    c_backcolor: '#ff2742',
+    c_backcolor: '',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
 
     brandId: 0,
@@ -40,8 +40,47 @@ Page({
     type:'',
     settlement:0,
     morebrankip:false,
-    brandArr:[]
+    brandArr:[],
+
+    payStatus:[
+      {name:'全部',num:'0'},
+      {name:'秒杀',num:'2'},
+      {name:'抽选',num:'3'},
+      {name:'动态',num:'4'},
+      {name:'分享',num:'5'},
+      {name:'动态',num:'6'}
+    ], // 支付状态 
+    centerIndex:0,
+    wOri:1 , // 1 瀑布流 2 信息流
+
   },
+
+  // 瀑布流信息流切换
+  wOriTab(){
+    this.setData({
+      wOri:(this.data.wOri == 1)?2:1
+    });
+
+  },
+  classifyChange(e){
+    let that = this;
+    let index = e.currentTarget.dataset.index || 0;
+    let ele = '#ele' + index;
+    that.setData({
+      centerIndex:index,
+    })
+    that.eldatalistfun(0)
+    //创建节点选择器
+    var query = wx.createSelectorQuery();
+    //选择id
+    query.select(ele).boundingClientRect();
+    query.exec(function(res) {
+      that.setData({
+        scrollleft:e.currentTarget.offsetLeft - wx.getSystemInfoSync().windowWidth/2 + (res[0].width/2)
+      })
+    })
+  }, 
+
   morebranfun:function(){
     this.setData({
       morebrankip:!this.data.morebrankip
@@ -359,8 +398,70 @@ Page({
     _this.getbrandDetail(_this.data.page);
     _this.getADList();
 
-    _this.data.videoContext = wx.createVideoContext('myVideo')//初始化视频组件
+    _this.eldatalistfun(0)
   },
+
+  // 品牌社区列表
+  eldatalistfun: function (num) {
+    var _this = this;
+    if (num == 0) {
+      _this.data.page = 0;
+      _this.setData({
+        loadprompt: '加载更多.....',
+        communityList: [],
+        nodataiftr: false
+      });
+    } else {
+      var pagenum = parseInt(_this.data.page)
+      _this.data.page = ++pagenum;
+      _this.setData({
+        loadprompt: '加载更多.....',
+        nodataiftr: false,
+      });
+    };
+    wx.showLoading({
+      title: '加载中...',
+      mask:true
+    })
+
+    var qqq = Dec.Aese('mod=community&operation=info&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&showType='+_this.data.centerIndex+'&pid='+ _this.data.page + '&brand_id='+_this.data.brandId);
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + qqq,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        wx.hideLoading()
+        console.log('动态瀑布流数据=====',res)
+        if (res.data.ReturnCode == 200) {
+          var communityList = res.data.List.communityList || [];
+          if(communityList.length != 0){
+             communityList.forEach(element => {
+                element.add_time = _this.toDate(element.add_time || 0);
+                element.start_time = _this.toDate(element.start_time || 0);
+                element.end_time = _this.toDate(element.end_time || 0);
+             });
+          }else{
+            app.showToastC('暂无更多数据')
+          }
+          if (num == 0) {
+            _this.setData({
+              communityList,
+              nodataiftr:true
+            });
+          } else {
+            var ltlist = [..._this.data.communityList,...communityList];
+            _this.setData({
+              communityList: ltlist,
+              nodataiftr:true
+            });
+          };
+        };
+      }
+    });
+  }, 
+
+
+
   // ip 的品牌
   jumpsouchtemip:function(w){
     var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
@@ -460,30 +561,30 @@ Page({
 
   // 点赞
   ispraisefun: function (w) {
-    var _this = this;
-    var is_praise = w.currentTarget.dataset.is_praise || w.target.dataset.is_praise || 0;
-    var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
-    var lid = w.currentTarget.dataset.lid || w.target.dataset.lid || 0;
-    var brandList = _this.data.brandList;
-    if (_this.data.loginid != '' && _this.data.uid != '') {
-      Pub.postRequest(_this, 'praiseDrying', {
-        uid: _this.data.uid,
-        loginid: _this.data.loginid,
-        drying_id: lid,
-        is_praise: is_praise
-      }, function (res) {
-        if (is_praise == 0) {
-          brandList[ind].is_praise = 1;
-          brandList[ind].praise_sum = parseInt(brandList[ind].praise_sum) + 1;
-        } else {
-          brandList[ind].is_praise = 0;
-          brandList[ind].praise_sum = parseInt(brandList[ind].praise_sum) - 1;
-        };
-        _this.setData({
-          brandList: brandList
-        });
-      });
-    }
+    // var _this = this;
+    // var is_praise = w.currentTarget.dataset.is_praise || w.target.dataset.is_praise || 0;
+    // var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
+    // var lid = w.currentTarget.dataset.lid || w.target.dataset.lid || 0;
+    // var brandList = _this.data.brandList;
+    // if (_this.data.loginid != '' && _this.data.uid != '') {
+    //   Pub.postRequest(_this, 'praiseDrying', {
+    //     uid: _this.data.uid,
+    //     loginid: _this.data.loginid,
+    //     drying_id: lid,
+    //     is_praise: is_praise
+    //   }, function (res) {
+    //     if (is_praise == 0) {
+    //       brandList[ind].is_praise = 1;
+    //       brandList[ind].praise_sum = parseInt(brandList[ind].praise_sum) + 1;
+    //     } else {
+    //       brandList[ind].is_praise = 0;
+    //       brandList[ind].praise_sum = parseInt(brandList[ind].praise_sum) - 1;
+    //     };
+    //     _this.setData({
+    //       brandList: brandList
+    //     });
+    //   });
+    // }
   },
 
   // 图片预览
@@ -545,7 +646,8 @@ Page({
     app.downRefreshFun(() => {
       var _this = this;
       _this.data.page = 0;
-      _this.getbrandDetail(_this.data.page);
+      // _this.getbrandDetail(_this.data.page);
+      _this.eldatalistfun(0)
     })
   },
 
@@ -556,7 +658,8 @@ Page({
     var _this = this
     var p = _this.data.page + 1;
     _this.data.page = p;
-    _this.getbrandDetail(p);
+    // _this.getbrandDetail(p);
+    _this.eldatalistfun(1)
   },
 
   /**
@@ -593,5 +696,56 @@ Page({
       ziaprtp_url:url
     })
   },
+  toDate(number,num) {
+    var date = new Date(number * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+    var Y = date.getFullYear();
+    var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
+    var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+    var h = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
+    var m = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+    var s = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
+    return Y + '/' + M + '/' + D +' ' + h + ':' + m + ':' +s;
+  },
+
+  // 关注 和 点赞 函数
+  followfun: function(w) {
+    var _this = this;
+    var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
+    var type = w.currentTarget.dataset.type || w.target.dataset.type || 0;
+    var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
+    var communityList = _this.data.communityList || [];
+    console.log('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id)
+    var qqq = Dec.Aese('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id);
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + qqq,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        console.log('关注=====',res)
+        if (res.data.ReturnCode == 200) {
+
+          if(type == 0){
+            _this.data.page = 0;
+            _this.getbrandDetail(_this.data.page);
+          }else{
+            if(communityList[ind].is_like){
+              var like_number = parseInt(communityList[ind].like_number) - 1  
+            }else{
+              var like_number = parseInt(communityList[ind].like_number) + 1 
+            };
+            if(like_number<0){
+              like_number = 0;
+            };
+            _this.setData({
+              ['communityList['+ind+'].like_number']:like_number,
+              ['communityList['+ind+'].is_like']:!communityList[ind].is_like
+            });
+          }
+
+        };
+      }
+    });
+  },
+
 
 })

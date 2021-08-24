@@ -13,7 +13,7 @@
                         <scroll-view scroll-x="true" style="width:710rpx;white-space: nowrap;height:150rpx;margin:auto;">
                               <block wx:for='{{visitHistory}}' wx:key='key'>
                                   <view class="ocamensweve" catchtap="jumpsouchtem" data-id='{{item.brandId}}' wx:if='{{item.brandId!=0}}'>
-                                      <image class="ocamensweveimg" style="{{item.brandId==brand_id?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{item.brandLogo}}"></image>
+                                      <image class="ocamensweveimg" mode='aspectFit' style="{{item.brandId==brand_id?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{item.brandLogo}}"></image>
                                       <view class="ocamenswevename specialellipsis" style="{{item.brandId==brand_id?'color:#f19207;':''}}">{{item.brandName}}</view>
                                   </view>                      
                               </block>
@@ -95,7 +95,7 @@
                           </view>
                     </view>
                 </view>
-                <view class="emlhright" data-drying_id='{{item.uid}}' data-is_follow='{{item.is_follow}}' data-ind='{{index}}' catchtap='followfun' wx:if='{{!is_attention}}'>关注</view>
+                <view class="emlhright" data-type='0' data-id='{{item.brandInfo.brand_id}}' data-ind='{{index}}' catchtap='followfun' wx:if='{{!item.brandInfo.is_attention}}'>关注</view>
             </view>
             <view style="padding:20rpx;font-size:24rpx;" wx:if='{{item.title}}'>{{item.title}}</view>
             <view class="emlcontent" data-drying_id='{{item.id}}' catchtap='jumpdlfdetail' data-is_calendar='{{item.is_calendar}}'>
@@ -108,7 +108,13 @@
                 <block wx:else> 
                   <!-- 非动态单个图片 -->
                    <block wx:if='{{item.imgArr && item.imgArr.length ==1}}'>
-                       <image class="emlcontentimg" src="{{item.imgArr[0]}}" mode="widthFix"></image>
+                       <image class="emlcontentimg" style="height:399rpx;" src="{{item.imgArr[0]}}" mode="aspectFill"></image>
+                       <!-- 未开始 -->
+                       <image wx:if='{{item.status==1}}' class="statusImgBox" src="https://cdn.51chaidan.com/images/brandSettledIcon/NotStarted.png" mode="aspectFit"></image>
+                       <!-- 已结束 -->
+                       <image wx:elif='{{item.status==3}}' class="statusImgBox" src="https://cdn.51chaidan.com/images/brandSettledIcon/finished.png" mode="aspectFit"></image>
+                       <!-- 进行中 -->
+                       <image wx:elif='{{item.status==2}}' class="statusImgBox" src="https://cdn.51chaidan.com/images/brandSettledIcon/underway.png" mode="aspectFit"></image>
                    </block>
                    <!-- 非动态多个图片 -->
                    <block wx:else>
@@ -152,11 +158,11 @@
 
 
                         <text style="float:right;margin-right:10rpx;">{{item.like_number>0?item.like_number:''}}</text>
-                        <image style="margin:0 15rpx;" class="emlplefimgshare" src="{{item.is_like?'https://www.51chaidan.com/images/brand/red_heart.png':'https://www.51chaidan.com/images/brand/black_heart.png'}}" data-lid='{{item.id}}' data-is_like='{{item.is_like}}' catchtap='ispraisefun' data-ind='{{index}}' ></image>
+                        <image style="margin:0 15rpx;" class="emlplefimgshare" src="{{item.is_like?'https://www.51chaidan.com/images/brand/red_heart.png':'https://www.51chaidan.com/images/brand/black_heart.png'}}"    data-type='{{item.type}}' data-ind='{{index}}' catchtap='followfun' data-id='{{item.id}}'></image>
                         
                         
-                        <text class="emlplefttxt" data-drying_id='{{item.id}}' wx:if='{{item.comment_count}}' catchtap='jumpdlfdetail'>{{item.commentNumber?item.commentNumber:'0'}}</text>
-                        <image class="emlplefimgshare" src="https://cdn.51chaidan.com/images/brandSettledIcon/comment.png" data-lid='{{item.id}}' data-is_like='{{item.is_like}}' catchtap='ispraisefun' data-ind='{{index}}' ></image>
+                        <!-- <text class="emlplefttxt" data-drying_id='{{item.id}}' wx:if='{{item.comment_count}}' catchtap='jumpdlfdetail'>{{item.commentNumber?item.commentNumber:'0'}}</text>
+                        <image class="emlplefimgshare" src="https://cdn.51chaidan.com/images/brandSettledIcon/comment.png" data-lid='{{item.id}}' data-is_like='{{item.is_like}}' catchtap='ispraisefun' data-ind='{{index}}' ></image> -->
 
 
                       </view>
@@ -342,9 +348,9 @@
 
 </view>
 
-<view class='dldConpoisthree' wx:if='{{cat_id!=3}}'>
+<!-- <view class='dldConpoisthree' wx:if='{{cat_id!=3}}'>
   <view class='dldConpoisthreeeve' style='width:310rpx;top:0;left:0;bottom:0;right:0;margin:auto;' catchtap='jumpdldlvreate'>我要发帖</view>
-</view>
+</view> -->
 
 <bnavigation isProduce='{{isProduce}}' dlfind='{{true}}' isIphoneX='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
 
