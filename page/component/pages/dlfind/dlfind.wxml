@@ -131,22 +131,22 @@
                 <!-- 秒杀 -->
                 <block wx:if='{{item.type==1}}'> 
                     <view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
-                    <view class='dlfhtitlenew' style="color:#178FF8;" wx:if='{{item.status==1}}'>{{item.start_time}}发售</view>
-                    <view class='dlfhtitlenew' style="color:#999495;" wx:elif='{{item.status==2}}'>已售：{{item.sellNumber}}体</view>
-                    <view class='dlfhtitlenew' style="color:#999495;" wx:elif='{{item.status==3}}'>已结束</view>
+                    <view class='dlfhtitlenew' style="color:#178FF8;font-size:24rpx;" wx:if='{{item.status==1}}'>{{item.start_time}}发售</view>
+                    <view class='dlfhtitlenew' style="color:#999495;font-size:24rpx;" wx:elif='{{item.status==2}}'>已售：{{item.sellNumber}}体</view>
+                    <view class='dlfhtitlenew' style="color:#999495;font-size:24rpx;" wx:elif='{{item.status==3}}'>已结束</view>
                 </block>
                 <!-- 抽选 -->
                 <block wx:elif='{{item.type==2}}'>
-                    <view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}<text style="color:#000;">抽选价</text></view>
-                    <view class='dlfhtitlenew' style="color:#178FF8;" wx:if='{{item.status==1}}'>{{item.start_time}}抽选</view>
-                    <view class='dlfhtitlenew' style="color:#4CC148;" wx:elif='{{item.status==2}}'>{{item.sellNumber}}人参加</view>
-                    <view class='dlfhtitlenew' style="color:#999495;" wx:elif='{{item.status==3}}'>已结束</view>
+                    <view class='dlfhtitlenew' style="color:#FF2742;font-size:24rpx;">￥{{item.price}}<text style="color:#000;">抽选价</text></view>
+                    <view class='dlfhtitlenew' style="color:#178FF8;font-size:24rpx;" wx:if='{{item.status==1}}'>{{item.start_time}}抽选</view>
+                    <view class='dlfhtitlenew' style="color:#4CC148;font-size:24rpx;" wx:elif='{{item.status==2}}'>{{item.sellNumber}}人参加</view>
+                    <view class='dlfhtitlenew' style="color:#999495;font-size:24rpx;" wx:elif='{{item.status==3}}'>已结束</view>
                 </block>
 
                 
             </view>
 
-            <view class="boxAtlas" style="width:500rpx;margin:20rpx;" wx:if='{{item.illustratedInfo}}'>
+            <view class="boxAtlas" style="width:500rpx;margin:20rpx;font-size:24rpx;" wx:if='{{item.illustratedInfo}}'>
                 <view class="boxAtlasLeft">图鉴</view>
                 <view class="boxAtlasName specialellipsis">{{item.illustratedInfo.name}}</view>
                 <view class="boxAtlasRight">点击查看</view>
