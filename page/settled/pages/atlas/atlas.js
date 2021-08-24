@@ -20,7 +20,8 @@ Page({
       'https://cdn.51chaidan.com/images/202106/source_img/38364_P_1624887986197.jpg',
       'https://cdn.51chaidan.com/images/202106/source_img/38364_P_1624887986516.jpg',
       'https://cdn.51chaidan.com/images/202106/source_img/38364_P_1624887986766.jpg'
-    ]
+    ],
+    illustrated_id:''
   },  
 
   /**
@@ -33,7 +34,8 @@ Page({
     // '已经授权'
     _this.data.loginid = app.signindata.loginid;
     _this.data.uid = app.signindata.uid;
-    _this.data.orderid = options.orderid
+    _this.data.orderid = options.orderid,
+    _this.data.illustrated_id = options.id || ''
     // 判断是否登录
     if (_this.data.loginid != '' && _this.data.uid != '') {
       _this.onLoadfun();
@@ -51,34 +53,33 @@ Page({
       isProduce: app.signindata.isProduce,
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
     });
-    if(wx.getStorageSync('access_token')){
-      this.getData();
-    }else{
-      app.getAccessToken(_this.getData)
-    };
+    this.getData();
   },
   // 获取数据
   getData(){
     var _this = this;
-    console.log('=========================')
-    // api.oMbrandInfo(_this.data.orderid,{}).then((res) => {
-    //   console.log('订单详情=======',res)
-    //  if (res.data.status_code == 200) {
-    //      var detailData = res.data.data.Info.order;
-    //      detailData.order.payTimeTrans = _this.toDate(detailData.order.payTime);
-    //      detailData.order.addTimeTrans = _this.toDate(detailData.order.addTime);
-    //      detailData.order.deliverTimeTrans = _this.toDate(detailData.order.deliverTime);
-    //      detailData.order.shippingTimeTrans = _this.toDate(detailData.order.shippingTime);
-    //      _this.setData({
-    //        detailData:res.data.data.Info.order || {}
-    //      })
+    var q1 = Dec.Aese('mod=community&operation=showIllustratedInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&illustrated_id='+_this.data.illustrated_id);
+    wx.showLoading({title: '加载中...',mask:true})
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + q1,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function(res) {
+        console.log('图鉴详情=====',res)
+        wx.stopPullDownRefresh();
+        wx.hideLoading();
+        if (res.data.ReturnCode == 200) {
 
-    //  }else{
-    //    if(res.data && res.data.message){
-    //      app.showModalC(res.data.message); 
-    //    };        
-    //  }
-    // })
+        }else{
+          wx.showModal({
+            content: res.data.Msg || res.data.msg,
+            showCancel:false,
+            success: function (res) {}
+          });          
+        };
+      },
+
+    })
  },  
 
 

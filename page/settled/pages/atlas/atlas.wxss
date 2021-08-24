@@ -34,12 +34,13 @@ page{
   border-radius: 12rpx;
 }
 .atlasIwantEb{
-  width: 100%;
+  width: 240rpx;
   height: 70rpx;
   line-height: 70rpx;
   font-size: 24rpx;
   text-align: right;
   position: relative;
+  margin:auto;
 }
 .emlplefimgshare{
   width: 36rpx;
