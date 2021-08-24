@@ -3,40 +3,62 @@
 
 <view class="atlas">
     <swiper class="atlasswiper" indicator-color="#fff" indicator-active-color="#ccc" indicator-dots="{{true}}" circular="true" autoplay="true" interval="4000" duration="450">
-        <swiper-item wx:for="{{movies}}" wx:key="key">
+        <swiper-item wx:for="{{dataDetail.imgArr}}" wx:key="key">
                 <image class="atlasswiperimage" src='{{item}}' style="height:100%;width:100%;display:block;" data-index='{{index}}' bindtap='previewImg' mode='aspectFit'></image>
         </swiper-item>
     </swiper> 
     <view class="atlasIwant">
          <view class="atlasIwantEve" style="margin-right:30rpx;">
-            <view class="atlasIwantETop"><image class="emlplefimgshare" src="https://www.51chaidan.com/images/brand/red_heart.png"></image>我有同款</view>
-            <view class="atlasIwantEb">
-                <image wx:for="{{movies}}" wx:key="key" class="atlasIwantEbImg" src='{{item}}' style="z-index:{{index+1}};left:{{index*15}}rpx;" data-index='{{index}}' bindtap='previewImg' mode='aspectFit'></image>
-                785人有同款
+            <view class="atlasIwantETop"><image class="emlplefimgshare" src="https://cdn.51chaidan.com/images/brandSettledIcon/same.png"></image>我有同款</view>
+            <view class="atlasIwantEb" wx:if='{{dataDetail.sameInfo.sameNumber>0}}'>
+                <image wx:for="{{dataDetail.sameInfo.sameUserImg}}" wx:key="key" class="atlasIwantEbImg" src='{{item}}' style="z-index:{{index+1}};left:{{index*15}}rpx;" wx:if='{{index<5}}' data-index='{{index}}' bindtap='previewImg' mode='aspectFit'></image>
+                {{dataDetail.sameInfo.sameNumber}}人有同款
             </view>
          </view>
          <view class="atlasIwantEve">
-            <view class="atlasIwantETop"><image class="emlplefimgshare" src="https://www.51chaidan.com/images/brand/red_heart.png"></image>我想要</view>
-            <view class="atlasIwantEb">
-                <image wx:for="{{movies}}" wx:key="key" class="atlasIwantEbImg" src='{{item}}' style="z-index:{{index+1}};left:{{index*15}}rpx;" data-index='{{index}}' bindtap='previewImg' mode='aspectFit'></image>
-                785人想要
+            <view class="atlasIwantETop"><image class="emlplefimgshare" src="https://cdn.51chaidan.com/images/brandSettledIcon/like.png"></image>我想要</view>
+            <view class="atlasIwantEb" wx:if='{{dataDetail.wantInfo.wantNumber>0}}'>
+                <image wx:for="{{dataDetail.wantInfo.wantUserImg}}" wx:key="key" class="atlasIwantEbImg" src='{{item}}' style="z-index:{{index+1}};left:{{index*15}}rpx;" wx:if='{{index<5}}' data-index='{{index}}' bindtap='previewImg' mode='aspectFit'></image>
+                {{dataDetail.wantInfo.wantNumber}}人想要
             </view>
          </view>
     </view>
     <view class="atlasCenter">
-       <view class="atlasCName">航海王 Anniversary</view>
+       <view class="atlasCName">{{dataDetail.title}}</view>
        <view class="atlasCNChild">发售信息</view>
-       <view class="atlasCNChildEve">
+       <view class="atlasCNChildEve" wx:for='{{sellList}}' wx:key='key'>
            <view class="atlasCNChildETop">
-               <view>2021/08/15 20:00发售</view>
-               <view style="color:#4C9D49;">进行中</view>
+               <view>{{item.start_time}}发售</view>
+
+               <block wx:if='{{item.status==1}}'>
+                   <view style="color:#1296DB;">未开始</view>
+               </block>
+               <block wx:if='{{item.status==2}}'>
+                   <view style="color:#4C9D49;">进行中</view>
+               </block>
+               <block wx:if='{{item.status==3}}'>
+                   <view style="color:#929292;">已结束</view>
+               </block>
+
+               
            </view>
            <view class="atlasCNChildETop">
                <view style="color:#929292;">来自美拆发售</view>
            </view>
            <view class="atlasCNChildETop" style="margin-bottom:0;">
                <view></view>
-               <view class="startSubscription" style="background:#EC817C;">去购买</view>
+
+               <block wx:if='{{item.status==1}}'>
+                   <view class="startSubscription" style="background:#FF890B;">开售订阅</view>
+               </block>
+               <block wx:if='{{item.status==2}}'>
+                   <view class="startSubscription" style="background:#EC817C;">去购买</view>
+               </block>
+               <block wx:if='{{item.status==3}}'>
+                   <view class="startSubscription" style="background:#1296DB;">查看抽选</view>
+               </block>
+
+               
            </view>
        </view>
 
@@ -69,11 +91,11 @@
        </view>
 
        <view class="atlasCNChild">产品信息</view>
-       <view class="atlasCNChild">品      牌：万代南梦宫></view>
-       <view class="atlasCNChild">价      格：109元/体</view>
-       <view class="atlasCNChild">数      量：500体</view>
-       <view class="atlasCNChild">发售方式：美拆线上抽选发售方式：美拆线上抽选</view>
-       <view class="atlasCNChild">简      介：正版授权航海王 Anniversary航海王 AnnivAnniversary航海王</view>
+       <view class="atlasCNChild" wx:if='{{dataDetail.brandName}}'>品      牌：{{dataDetail.brandName}}></view>
+       <view class="atlasCNChild" wx:if='{{dataDetail.price}}'>价      格：{{dataDetail.price}}</view>
+       <view class="atlasCNChild" wx:if='{{dataDetail.number}}'>数      量：{{dataDetail.number}}</view>
+       <view class="atlasCNChild" wx:if='{{dataDetail.sell_way}}'>发售方式：{{dataDetail.sell_way}}</view>
+       <view class="atlasCNChild" wx:if='{{dataDetail.description}}'>简      介：{{dataDetail.description}}</view>
 
 
     </view>   

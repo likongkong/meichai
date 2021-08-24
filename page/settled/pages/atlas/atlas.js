@@ -35,7 +35,7 @@ Page({
     _this.data.loginid = app.signindata.loginid;
     _this.data.uid = app.signindata.uid;
     _this.data.orderid = options.orderid,
-    _this.data.illustrated_id = options.id || ''
+    _this.data.illustrated_id = options.id || 1
     // 判断是否登录
     if (_this.data.loginid != '' && _this.data.uid != '') {
       _this.onLoadfun();
@@ -58,6 +58,7 @@ Page({
   // 获取数据
   getData(){
     var _this = this;
+    console.log('mod=community&operation=showIllustratedInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&illustrated_id='+_this.data.illustrated_id)
     var q1 = Dec.Aese('mod=community&operation=showIllustratedInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&illustrated_id='+_this.data.illustrated_id);
     wx.showLoading({title: '加载中...',mask:true})
     wx.request({
@@ -69,7 +70,16 @@ Page({
         wx.stopPullDownRefresh();
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
-
+          var sellList = res.data.List.sellList || [];
+          if(sellList.length != 0){
+              sellList.forEach(element => {
+                  element.start_time = _this.toDate(element.start_time)
+              });
+          };
+           _this.setData({
+             dataDetail:res.data.Info,
+             sellList:sellList
+           })
         }else{
           wx.showModal({
             content: res.data.Msg || res.data.msg,
