@@ -12,6 +12,12 @@
   padding-left: 80rpx !important;
   box-sizing: border-box;
 }
+.paddingBottom12{
+  padding-bottom: 12rpx !important;
+}
+.paddingBottom20{
+  padding-bottom: 20rpx !important;
+}
 /* 行样式 */
 .rowWrap{    
   width: 100%;
@@ -49,6 +55,14 @@
 }
 .columnWrap .cEveTitle{
   font-size: 28rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.columnWrap .cEveTitle image{
+  width: 28rpx;
+  height: auto;
+  margin-left: 12rpx;
 }
 .columnWrap .cEveInput{
   height: 75rpx;
@@ -57,7 +71,27 @@
   padding-left: 12rpx;
   box-sizing: border-box;
 }
-
+/* 发布样式 */
+.card{
+  background: #ffffff;
+  border-radius: 20rpx;
+  margin-top: 24rpx;
+}
+.actionSheetIcon{
+  width: 20rpx;
+  height: auto;
+  margin-left: 6rpx;
+}
+.activityimageWrap{
+  overflow: hidden;
+}
+.activityimageWrap .itemImage{
+  float: left;
+  margin: 18rpx 12.6rpx 18rpx 0;
+}
+.activityimageWrap .itemImage:nth-child(4n){
+  margin-right: 0;
+}
 
 .uploadWrap{
   width: 168rpx;
@@ -65,7 +99,15 @@
   margin: 18rpx 0;
   background: #F4F3F8;
   position: relative;
-  display: flex;
+  display: flex ;
+  justify-content: center;
+  align-items: center;
+}
+.uploadBox{
+  width: 168rpx;
+  height: 168rpx;
+  background: #F4F3F8;
+  display: flex ;
   justify-content: center;
   align-items: center;
 }
@@ -114,4 +156,27 @@
   color: #ffffff;
   padding: 6rpx 10rpx;
   margin-left: 20rpx;
+}
+.radioWrap view{
+  display: flex;
+  align-items: center;
+  margin-top: 14rpx;
+}
+.itemName{
+  font-size: 28rpx;
+  margin-left: 20rpx;
+}
+.radioChecked{
+  width: 8rpx;
+  height: 8rpx;
+  border: 10rpx solid #101010;
+  border-radius: 100%;
+  display: block;
+}
+.radioUnchecked{
+  width: 24rpx;
+  height: 24rpx;
+  display: block;
+  border: 2rpx solid #101010;
+  border-radius: 100%;
 }

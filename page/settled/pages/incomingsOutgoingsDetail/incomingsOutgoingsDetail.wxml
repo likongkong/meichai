@@ -2,27 +2,53 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 <view class="wrap">
-
-  <settledProgress num="{{num}}" intact="show"></settledProgress>
-
-  
-  <view class="incomeWrap">
-    <view class="incomeBox">
-      <view class="incomeItem">
-        <view>商品名称：婚礼濑濑</view>
-        <view>关联订单号： 159357456</view>
-      </view>
-      <view class="incomeItem">
-        <view>流 水 号：15673435</view>
-        <view>交易时间：2121/02/02  12:00:00</view>
-      </view>
-      <view class="incomeItem">
-        <view>商品售价：￥189.00</view>
-        <view>平台分成：￥20.00</view>
-        <view>实际收入：￥159.00</view>
+  <settledProgress wx:if="{{type == 2}}" num="{{num}}" intact="show"></settledProgress>
+  <block wx:if="{{type == 1}}">
+    <view class="incomeWrap">
+      <view class="incomeBox">
+        <view class="incomeItem">
+          <view>商品名称：{{info.goods_name}}</view>
+          <view>关联订单号：{{info.order_sn}}</view>
+        </view>
+        <view class="incomeItem">
+          <view>商品售价：￥{{info.shop_price}}</view>
+          <view>平台分成：￥{{info.divided_into}}</view>
+          <view>实际收入：￥{{info.actual_income}}</view>
+          <view>交易时间：{{info.pay_time}}</view>
+        </view>
       </view>
     </view>
-  </view>
+  </block>
+  <block wx:if="{{type == 2}}">
+    <view class="incomeWrap">
+      <view class="incomeBox">
+        <view class="incomeItem">
+          <view>提现金额：{{info.share_amount}}</view>
+        </view>
+        <view class="incomeItem">
+          <view>交易时间：{{info.share_time}}</view>
+          <view>提现状态：{{status==1?'提现到账':status==2?'审核失败':'审核中'}}</view>
+          <view>预计到账时间：{{info.expected_account_time}}</view>
+        </view>
+      </view>
+    </view>
+  </block>
+  <block wx:if="{{type == 3}}">
+    <view class="incomeWrap">
+      <view class="incomeBox">
+        <view class="incomeItem">
+          <view>商品名称：{{info.goods_name}}</view>
+          <view>关联订单号：{{info.order_sn}}</view>
+        </view>
+        <view class="incomeItem">
+          <view>商品售价：￥{{info.shop_price}}</view>
+          <view>平台分成：￥{{info.divided_into}}</view>
+          <view>实际收入：￥{{info.actual_income}}</view>
+          <view>交易时间：{{info.pay_time}}</view>
+        </view>
+      </view>
+    </view>
+  </block>
 
 
 

@@ -1,0 +1,213 @@
+
+var Dec = require('../../../../common/public');//aes加密解密js
+var tcity = require("../../../../common/citys.js");
+var api = require("../../../../utils/api.js");
+const util = require('../../../../utils/util');
+const app = getApp();
+Page({
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    c_title: '发布动态',
+    c_arrow: true,
+    c_backcolor: '#ff2742',
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
+    uid:'',
+    loginid:'',
+    dynamicData:[
+      {
+        isRequired:false,
+        type:'actionSheet',
+        groups:[{name:'1111',id:1},{name:'2222',id:2}],
+        subtitle:'关联IP',
+        value:'点击关联',
+        name:'associationIp'
+      },{
+        isRequired:true,
+        type:'textarea',
+        subtitle:'动态内容',
+        placeholder:'请输入动态内容',
+        value:'',
+        name:'dynamicContent'
+      },{
+        isRequired:false,
+        type:'uploadImg',
+        subtitle:'添加图片（最多上传九张，建议上传比例1:1)',
+        name:'dynamicPic',
+        imageList:[],
+        storagelocation:'brandinfo/voucher'
+      },{
+        isRequired:false,
+        type:'actionSheet',
+        subtitle:'关联活动/图鉴',
+        value:'点击关联',
+        name:'associationActivity'
+      },{
+        isRequired:false,
+        type:'radio',
+        subtitle:'允许评论对象',
+        radioArr:['所有人可评论','指定群评论'],
+        value:'0',
+        name:'associationActivity'
+      },
+    ],
+    obj:{},
+
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+   /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    // 判断是否授权
+    this.activsign();
+  },
+  onLoadfun:function(){
+    this.setData({
+      loginid: app.signindata.loginid,
+      uid: app.signindata.uid
+    });
+  },
+  activsign: function () {
+    // 判断是否授权 
+    var _this = this;
+    // 判断是否登录
+    if (_this.data.loginid != '' && _this.data.uid != '') {
+      _this.onLoadfun();
+      return false;
+    };    
+
+    if(app.signindata.sceneValue==1154){
+      app.signindata.isProduce = true;  
+      _this.onLoadfun();
+    }else{
+      wx.getSetting({
+        success: res => {
+          if (true) {
+            // '已经授权'
+            _this.setData({
+              loginid: app.signindata.loginid,
+              uid: app.signindata.uid,
+              openid: app.signindata.openid,
+              avatarUrl: app.signindata.avatarUrl,
+              isShareFun: app.signindata.isShareFun,
+              isProduce: app.signindata.isProduce,
+              signinlayer: true,
+              tgabox: false
+            });
+            // 判断是否登录
+            if (_this.data.loginid != '' && _this.data.uid != '') {
+              _this.onLoadfun();
+            } else {
+              app.signin(_this);
+            }
+          } else {
+            _this.setData({
+              tgabox: false,
+              signinlayer: false
+            })
+            // '没有授权 统计'
+            app.userstatistics(43);
+            _this.onLoadfun();
+          }
+        }
+      });  
+    };    
+  },
+  // 授权点击统计
+  clicktga: function () {
+    app.clicktga(2)
+  },
+  clicktganone: function () {
+    this.setData({ tgabox: false })
+  },
+  // 点击登录获取权限
+  userInfoHandler: function (e) {
+    var _this = this;
+    wx.getSetting({
+      success: res => {
+        if (true) {
+          _this.setData({
+            signinlayer: true,
+            tgabox: false
+          });
+          _this.activsign();
+          // 确认授权用户统计
+          app.clicktga(4);          
+        }
+      }
+    });
+    if (e.detail.detail.userInfo) { } else {
+      app.clicktga(8)  //用户按了拒绝按钮
+    };
+  },
+  pullupsignin: function () {
+    // // '没有授权'
+    this.setData({
+      tgabox: true
+    });
+  },
+
+
+  // 获取表单数据
+  bindchange(e){
+    let key=e.detail.name;
+    this.data.obj[key]=e.detail.value;
+    console.log(this.data.obj)
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+    
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+    
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+    
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+    
+  },
+  comjumpwxnav(e){
+    let type = e.currentTarget.dataset.type;
+    let whref = e.currentTarget.dataset.whref;
+    app.comjumpwxnav(type,whref)
+  },
+})

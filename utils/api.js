@@ -19,6 +19,26 @@ export const brandCertification = (query) => {
 export const settledWithCashList = (query) => {
     return apiResquest.get('brand/settled_with/settled_with_cash/list',query)
 }
+// 获取账号列表
+export const getAccountNumberList = (query) => {
+    return apiResquest.get('brand/settled_with/settled_with_cash/get_account_number_list',query)
+}
+// 设置默认账号
+export const setDefaultAccount = (url,query) => {
+    return apiResquest.get(`brand/settled_with/settled_with_cash/set_default_account/${url}`,query)
+}
+// 申请提现
+export const executionApplicationWithdrawal = (query) => {
+    return apiResquest.get(`brand/settled_with/settled_with_cash/execution_application_withdrawal`,query)
+}
+// 钱包余额、提现判断
+export const getLumpsumAndWithdraw = (query) => {
+    return apiResquest.get('brand/settled_with/settled_with_cash/get_lumpsum_and_withdraw',query)
+}
+// 订单详情
+export const settledWithCashDetail = (url,query) => {
+    return apiResquest.get(`brand/settled_with/settled_with_cash/detail/${url.id}/${url.type}`,query)
+}
 // ---------------------------------------- 订单管理 -----------------------------------------
 // 获取收据
 export const oMgetData = (query) => {

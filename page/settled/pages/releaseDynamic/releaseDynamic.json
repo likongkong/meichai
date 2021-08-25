@@ -1,0 +1,9 @@
+{
+  "backgroundColor": "#ffffff",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "t_f": "/pages/topfunction/topfunction",
+    "settledForm":"/component/settledForm/settledForm",
+    "bnavigation": "/pages/bottomComponent/bottomComponent"
+  }
+}

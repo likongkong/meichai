@@ -1030,7 +1030,24 @@ App({
       wx.navigateTo({
         url: `/page/settled/pages/settledIntroduce/settledIntroduce`
       });
+    } else if (item_type == 9030) { 
+      wx.navigateTo({
+        url: `/page/settled/pages/myWallet/myWallet`
+      });
+    } else if (item_type == 9031) { 
+      wx.navigateTo({
+        url: `/page/settled/pages/incomingsOutgoingsDetail/incomingsOutgoingsDetail?${whref}`
+      });
+    } else if (item_type == 9032) { 
+      wx.navigateTo({
+        url: `/page/settled/pages/releaseDynamic/releaseDynamic`
+      });
+    } else if (item_type == 9033) { 
+      wx.navigateTo({
+        url: `/page/settled/pages/releaseFieldGuide/releaseFieldGuide`
+      });
     }
+    
   },
   // 中奖提示倒计时
   winningtheprizetime: function (_this) {

@@ -5,15 +5,15 @@
     <view class="card">
       <image catchtap="clickme" src="https://cdn.51chaidan.com/images/brandSettledIcon/set.png" mode="widthFix"></image>
       <view>
-        <text class="amount">￥0.00</text>
+        <text class="amount">￥{{info.lumpSum}}</text>
         <text class="amountTxt">钱包余额</text>
-        <view class="withdrawBtn" catchtap="toggleAuthenticationMask">立即提现</view>
+        <view class="withdrawBtn" catchtap="bideWithdraw">立即提现</view>
         <text class="withdrawTxt">每天可提现一次</text>
       </view>
     </view>
     <view class="filterWrap">
       <view class="filterItem"> 
-        <picker mode="date" value="{{date}}" fields='month' bindchange="bindDateChange">
+        <picker mode="date" value="{{date}}" fields='month' end="{{endTime}}" bindchange="bindDateChange">
           <view class="picker">
             <view><text>{{date!=''?date:'全部日期'}}</text><image src="/pages/images/comtriangle.png" mode="widthFix"></image></view> 
           </view>
@@ -31,18 +31,18 @@
   <view class="content">
     <block wx:for="{{orderData}}" wx:key="{{index}}">
       <block wx:if="{{item.type == 1}}">
-        <view class="orderItem">
+        <view class="orderItem" data-type="9031" data-whref="id={{item.id}}&statustype={{item.status_type}}" catchtap="comjumpwxnav">
           <view class="orderItemL">
-            <image src="https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJZMPzEm1ibLhPGyic11ViagbFKa3Bkdialthkbu1iaKOwLASqD5IMHm7ibicFCB60nRtHO4x0CKHBia22elQ/132" mode="widthFix"></image>
+            <image src="{{item.litpic}}" mode="widthFix"></image>
           </view>
           <view class="orderItemR">
             <view>
               <text class="color101010">{{item.title}}</text>
               <block wx:if="{{item.status_type == 1 || item.status_type == 2}}">
-                <text class="colorFFB730">+{{item.cart_amount}}</text>
+                <text class="colorFFB730">+{{item.order_amount}}</text>
               </block>
               <block wx:else>
-                <text class="color101010">-{{item.cart_amount}}</text>
+                <text class="color101010">-{{item.order_amount}}</text>
               </block>
             </view>
             <view>
@@ -53,30 +53,32 @@
         </view>
       </block>
      <block wx:else>
-      <view class="orderItem">
+      <view class="orderItem" data-type="9031" data-whref="id={{item.id}}&statustype={{item.status_type}}" catchtap="comjumpwxnav">
           <view class="orderItemL">
             <image src="https://cdn.51chaidan.com/images/brandSettledIcon/orderIcon/withdraw.png" mode="widthFix"></image>
           </view>
-          <view class="orderItemR">
+          <view class="orderItemR" style="{{item.status == 3?'display: flex;align-items: center;':''}}">
             <view>
               <text class="color101010">{{item.title}}</text>
-              <text class="color101010">-{{item.cart_amount}}</text>
+              <text class="color101010">-{{item.share_amount}}</text>
             </view>
-            <block wx:if="{{item.order_amount != ''}}">
-              <view>
-                <text class="colorA2A2A2">{{item.insert_time_date}}</text>
-                <text class="colorFF2742">提现失败(￥{{item.order_amount}})</text>
-              </view>
-              <view>
-                <text class="colorA2A2A2"></text>
-                <text class="colorA2A2A2">余额 {{item.overage}}</text>
-              </view>
-            </block>
-            <block wx:else>
-              <view>
-                <text class="colorA2A2A2">{{item.insert_time_date}}</text>
-                <text class="colorFF2742">余额 {{item.overage}}</text>
-              </view>
+            <block wx:if="{{item.status != 3}}">
+              <block wx:if="{{item.order_amount != 0 && item.status == 1}}">
+                <view>
+                  <text class="colorA2A2A2">{{item.insert_time_date}}</text>
+                  <text class="colorFF2742">提现失败(￥{{item.order_amount}})</text>
+                </view>
+                <view>
+                  <text class="colorA2A2A2"></text>
+                  <text class="colorA2A2A2">余额 {{item.overage}}</text>
+                </view>
+              </block>
+              <block wx:else>
+                <view>
+                  <text class="colorA2A2A2">{{item.insert_time_date}}</text>
+                  <text class="colorA2A2A2">余额 {{item.overage}}</text>
+                </view>
+              </block>
             </block>
           </view>
         </view>
@@ -96,23 +98,24 @@
 <!--设置弹出框  -->
 <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
 <view animation="{{animationData}}" class="commodity_attr_box" style="height:{{popHeight}}rpx" wx:if="{{showModalStatus}}">
-  <text class="popTitle">首次提现请先绑定提现账户类型</text>
+  <text class="popTitle">{{currentAccount?'修改绑定账户':'首次提现请先绑定提现账户类型'}}</text>
   <view class="popContentWrap">
-    <block wx:for="{{account}}" wx:key="index">
+    <block wx:for="{{accountList}}" wx:key="index">
       <view class="popContentItem" data-ind="{{index}}" catchtap="chooseAccount">
-        <view class="accountTitle" catchtap="toggleDescriptionMask">
+        <view class="accountTitle" data-type="{{item.account_type}}" catchtap="toggleDescriptionMask">
           <text>{{item.title}}</text> 
           <image src="https://cdn.51chaidan.com/images/brandSettledIcon/wenhao.png" mode="widthFix"></image>
         </view>
         <view class="quotaWrap">
-          单日提现限额￥{{item.quotaNum}}
-          <image wx:if="{{index == accountNum}}" src="https://cdn.51chaidan.com/images/brandSettledIcon/duihao.png" mode="widthFix"></image>
+          <view>{{item.remark}}</view>
+          <text wx:if="{{currentAccount.account_type == item.account_type}}">当前提现账户</text>
+          <image wx:if="{{item.isdefault}}" src="https://cdn.51chaidan.com/images/brandSettledIcon/duihao.png" mode="widthFix"></image>
         </view>
       </view>
     </block>
-    <view wx:if="{{accountNum == 1}}" class="merchantNoInput">
+    <view wx:if="{{withdrawAccount.account_type == 1}}" class="merchantNoInput">
       <text>请输入商户号</text>
-      <input type="text" value="" />
+      <input type="text" bindinput="bindKeyInput" value="{{withdrawAccount.account}}" />
     </view>
   </view>
   <view class="setfooter">
@@ -127,26 +130,8 @@
 <!-- 说明弹框 -->
 <view class="mask" wx:if="{{isDescriptionMask}}" catchtouchmove="true" catchtap="toggleDescriptionMask">
   <view class="descriptionWrap" catchtap="true">
-    <text>商户账号</text>
-    <view>
-      1.什么是商户账号？
-        微信商户号是商家入驻微信支付时,微信支付平
-      台分配的一个数字ID,又叫微信商户ID,是商户的
-      收款账号。
-      2.商户账号单日提现限额是多少？
-        5000。
-      3.如何获取商户账号？
-        在腾讯公众号平台申请注册，有公众号的商务
-      号需要到的主体资料是一致的，申请的服务号的
-      也是一致的。选择商户号的类型，当中需要提交
-      相关的特殊经营范围资质，同时选择归属的类型
-      ，符合营业执照上面规定的范围，以免被驳回。
-      4.如何绑定个人账号？
-      在绑定账号页面→选择商户账号→填写商户号
-      →提交，绑定完成。
-      5.绑定商户号对我的资金有没有影响？
-      没有影响
-    </view>
+    <text class="explainTitle">{{clickType==1?'商户账号':'个人账号'}}</text>
+    <text class="explain">{{explain}}</text>
     <button catchtap="toggleDescriptionMask">关闭</button>
   </view>
 </view>
@@ -157,13 +142,13 @@
     <text class="title">提现认证</text>
 
     <view class="authenticationInfo">
-      <text>提现金额：59.00</text>
-      <text>商户号：1234*****459</text>
+      <text>提现金额：{{info.lumpSum}}</text>
+      <text>商户号：{{merchantNo}}</text>
     </view>
 
     <view class="footerWrap">
         <view catchtap="toggleAuthenticationMask">取消</view>
-        <view catchtap="">确认</view>
+        <view catchtap="confirmWithdrawal">确认</view>
     </view>
   </view>
 </view>

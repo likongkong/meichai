@@ -104,6 +104,12 @@
           "pathName": "page/settled/pages/incomingsOutgoingsDetail/incomingsOutgoingsDetail",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "发布动态",
+          "pathName": "page/settled/pages/releaseDynamic/releaseDynamic",
+          "query": "",
+          "scene": null
         }
       ]
     }

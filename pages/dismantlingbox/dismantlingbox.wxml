@@ -440,8 +440,8 @@
 
     <!-- 品牌合作 -->
 		<view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e4' wx:if='{{brandList&&brandList.length!=0}}'>—————— 参展品牌 ——————</view>
-    <!-- <block wx:if='{{is_show}}'> -->
-    <block>
+    <block wx:if='{{is_show}}'>
+    <!-- <block> -->
       <view class="ssubBrandEveWrap" style="width:100%;overflow: hidden;padding:0 40rpx;box-sizing: border-box;" wx:if='{{brandList&&brandList.length!=0}}'>
           <view class="ssubBrandEve" wx:for="{{brandList}}" wx:key="key">
             <image class="ssubBiliimgbr" lazy-load="true" src="{{item.brandLogo}}" mode='aspectFit'></image>

@@ -87,7 +87,13 @@ Page({
     showVipStatus:1,
     isSettledImg:true,
     // 审核状态
-    brandSettledStatus:0
+    brandSettledStatus:0,
+    isAddNewEventMask:false
+  },
+  toggleAddNewEventMask(){
+    this.setData({
+      isAddNewEventMask: !this.data.isAddNewEventMask
+    })
   },
   hideBrandSettledSuccessMask(){
     this.setData({

@@ -2,19 +2,19 @@
 var Dec = require('../../../../common/public');//aes加密解密js
 var tcity = require("../../../../common/citys.js");
 var api = require("../../../../utils/api.js");
+const util = require('../../../../utils/util');
 const app = getApp();
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    c_title: '',
+    c_title: '发布动态',
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     uid:'',
     loginid:'',
-    num:1
   },
   /**
    * 生命周期函数--监听页面加载
@@ -24,12 +24,6 @@ Page({
     // '已经授权'
     this.data.loginid = app.signindata.loginid;
     this.data.uid = app.signindata.uid;
-    console.log(options)
-    this.setData({
-      id:options.id,
-      type:options.statustype,
-      c_title:options.statustype==1?'收入明细':options.statustype==2?'提现明细':'退款明细'
-    })
     // 判断是否登录
     if (this.data.loginid != '' && this.data.uid != '') {
       this.onLoadfun();
@@ -41,38 +35,12 @@ Page({
     this.data.loginid = app.signindata.loginid;
     this.data.uid = app.signindata.uid;
     if(wx.getStorageSync('access_token')){
-      this.getData();
+      // this.getListData();
     }else{
       app.getAccessToken(this.onLoadfun)
     };
   },
-  
-  getData(){
-    let url={
-      id:this.data.id,
-      type:this.data.type
-    }
-    api.settledWithCashDetail(url).then((res) => {
-      console.log(res)
-      let info = res.data.data.info;
-      let num;
-      if(this.data.type == 2){
-        if(info.status == 3) num=2
-        else if(info.status == 1) num=4
-        else if(info.status == 2) num=2;
 
-        this.setData({
-          status:info.status,
-          num
-        })
-      }
-      this.setData({
-        info:res.data.data.info
-      })
-    }).catch((err)=>{
-      console.log(err)
-    })
-  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -105,14 +73,12 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.getListData()
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    
   },
 
   /**
@@ -121,5 +87,9 @@ Page({
   onShareAppMessage: function () {
     
   },
-
+  comjumpwxnav(e){
+    let type = e.currentTarget.dataset.type;
+    let whref = e.currentTarget.dataset.whref;
+    app.comjumpwxnav(type,whref)
+  },
 })
