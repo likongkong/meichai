@@ -164,7 +164,8 @@
         "pages/myWallet/myWallet",
         "pages/atlas/atlas",
         "pages/offeringCalendar/offeringCalendar",
-        "pages/incomingsOutgoingsDetail/incomingsOutgoingsDetail"
+        "pages/incomingsOutgoingsDetail/incomingsOutgoingsDetail",
+        "pages/dynamicDetails/dynamicDetails"
       ]
     }
   ],
