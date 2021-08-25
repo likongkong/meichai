@@ -165,7 +165,8 @@
         "pages/atlas/atlas",
         "pages/incomingsOutgoingsDetail/incomingsOutgoingsDetail",
         "pages/releaseDynamic/releaseDynamic",
-        "pages/releaseFieldGuide/releaseFieldGuide"
+        "pages/releaseFieldGuide/releaseFieldGuide",
+        "pages/offeringCalendar/offeringCalendar"
       ]
     }
   ],

@@ -20,8 +20,67 @@ Page({
       'https://cdn.51chaidan.com/images/202106/source_img/38364_P_1624887986197.jpg',
       'https://cdn.51chaidan.com/images/202106/source_img/38364_P_1624887986516.jpg',
       'https://cdn.51chaidan.com/images/202106/source_img/38364_P_1624887986766.jpg'
-    ]
+    ],
+    illustrated_id:''
   },  
+  jumpdetail(w){
+    var id = w.currentTarget.dataset.id || w.target.dataset.id || '';
+    var type = w.currentTarget.dataset.type || w.target.dataset.type || '';
+    if(type == 1){
+      var item_type = 1;
+      var whref = id;
+    }else if(type == 2){
+      var item_type = 9003;
+      var whref = id;
+    }
+    app.comjumpwxnav(item_type, whref, wname, imgurl)
+
+  },
+
+  subscrfundom:function(w){
+    var _this = this;
+    var sellList = _this.data.sellList;
+    var index = w.currentTarget.dataset.index || w.target.dataset.index || 0;
+
+    if(sellList&&sellList[index]&&sellList[index].subscribeList){
+      _this.setData({
+        id:sellList[index].id,
+        subscribedata:sellList[index].subscribeList
+      })
+      _this.subscrfunstar()
+    }
+
+  },
+  // 拉起订阅
+  subscrfunstar: function () {
+    var _this = this;
+    console.log(2,subscribedata)
+    var subscribedata = _this.data.subscribedata || '';
+    if (subscribedata && subscribedata.template_id && app.signindata.subscribeif) {
+      if (subscribedata.template_id instanceof Array) {
+        wx.requestSubscribeMessage({
+          tmplIds: subscribedata.template_id || [],
+          success(res) {
+            for (var i = 0; i < subscribedata.template_id.length; i++) {
+              if (res[subscribedata.template_id[i]] == "accept") {
+                app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+              };
+            };
+          },
+        })
+      } else {
+        wx.requestSubscribeMessage({
+          tmplIds: [subscribedata.template_id || ''],
+          success(res) {
+            if (res[subscribedata.template_id] == "accept") {
+              app.subscribefun(_this, 0, subscribedata.template_id, subscribedata.subscribe_type);
+            };
+          },
+          complete() {}
+        })
+      };
+    };
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -33,7 +92,8 @@ Page({
     // '已经授权'
     _this.data.loginid = app.signindata.loginid;
     _this.data.uid = app.signindata.uid;
-    _this.data.orderid = options.orderid
+    _this.data.orderid = options.orderid,
+    _this.data.illustrated_id = options.id || 1
     // 判断是否登录
     if (_this.data.loginid != '' && _this.data.uid != '') {
       _this.onLoadfun();
@@ -51,36 +111,71 @@ Page({
       isProduce: app.signindata.isProduce,
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
     });
-    if(wx.getStorageSync('access_token')){
-      this.getData();
-    }else{
-      app.getAccessToken(_this.getData)
-    };
+    this.getData();
   },
   // 获取数据
   getData(){
     var _this = this;
-    console.log('=========================')
-    // api.oMbrandInfo(_this.data.orderid,{}).then((res) => {
-    //   console.log('订单详情=======',res)
-    //  if (res.data.status_code == 200) {
-    //      var detailData = res.data.data.Info.order;
-    //      detailData.order.payTimeTrans = _this.toDate(detailData.order.payTime);
-    //      detailData.order.addTimeTrans = _this.toDate(detailData.order.addTime);
-    //      detailData.order.deliverTimeTrans = _this.toDate(detailData.order.deliverTime);
-    //      detailData.order.shippingTimeTrans = _this.toDate(detailData.order.shippingTime);
-    //      _this.setData({
-    //        detailData:res.data.data.Info.order || {}
-    //      })
+    console.log('mod=community&operation=showIllustratedInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&illustrated_id='+_this.data.illustrated_id)
+    var q1 = Dec.Aese('mod=community&operation=showIllustratedInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&illustrated_id='+_this.data.illustrated_id);
+    wx.showLoading({title: '加载中...',mask:true})
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + q1,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function(res) {
+        console.log('图鉴详情=====',res)
+        wx.stopPullDownRefresh();
+        wx.hideLoading();
+        if (res.data.ReturnCode == 200) {
+          var sellList = res.data.List.sellList || [];
+          if(sellList.length != 0){
+              sellList.forEach(element => {
+                  element.start_time = _this.toDate(element.start_time)
+              });
+          };
+           _this.setData({
+             dataDetail:res.data.Info,
+             sellList:sellList
+           })
+        }else{
+          wx.showModal({
+            content: res.data.Msg || res.data.msg,
+            showCancel:false,
+            success: function (res) {}
+          });          
+        };
+      },
 
-    //  }else{
-    //    if(res.data && res.data.message){
-    //      app.showModalC(res.data.message); 
-    //    };        
-    //  }
-    // })
+    })
  },  
-
+ // 关注 和 点赞 函数
+ followfun: function(w) {
+    var _this = this;
+    var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
+    var type = w.currentTarget.dataset.type || w.target.dataset.type || 0;
+    console.log('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id)
+    var qqq = Dec.Aese('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id);
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + qqq,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        console.log('同款想要=====',res)
+        if (res.data.ReturnCode == 200) {
+            _this.getData();
+        }else{
+          if(res.data.Msg){
+            wx.showModal({
+              content: res.data.Msg || '',
+              showCancel: false,
+              success: function(res) {}
+            });
+          };
+        };
+      }
+    });
+  },
 
   toDate(number,num) {
     var date = new Date(number * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000

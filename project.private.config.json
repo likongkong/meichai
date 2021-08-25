@@ -45,9 +45,8 @@
           "scene": null
         },
         {
-          "id": 5,
-          "name": "手机壳",
-          "pathName": "page/secondpackge/pages/isItaVIPTicket/isItaVIPTicket",
+          "name": "发售日历",
+          "pathName": "page/settled/pages/offeringCalendar/offeringCalendar",
           "query": "",
           "scene": null
         },

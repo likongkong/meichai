@@ -1,0 +1,38 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class="ocbox">
+    <scroll-view class="marginAuto scrollViewTop" scroll-x="true" scroll-with-animation="true" scroll-left='{{scrollleftTop}}' wx:if='{{testArr.length>0}}'>
+        <view wx:for="{{testArr}}" wx:key='key' class="scrollViewTopEve" data-dateid="{{item.id}}" id="top{{item.id}}" catchtap="scrollViewTop"><text class="{{dateid == item.id?'selectTop':''}}">{{item.id}}</text>月</view>
+    </scroll-view>
+    <view class="ocDateBox">
+        <block wx:for='{{movies}}' wx:key='key'>
+            <view class="ocDateEveTop"><text style="font-size:34rpx;">17</text>/8月（今天）</view>
+            <view class="ocDateEve">
+                <view class="ocDateINBox">
+                    <image class="ocDateEImg" src="https://cdn.51chaidan.com//images/brandEntry/abbreviation/20210427/c5c973878e92d0d231d8f1036327162e.png" mode="aspectFit"></image>
+                    <view class="ocDateContent">
+                        <view class='disanum_sb_txtone multilineellipsis' style='color:#666;height:70rpx;text-align:left;'>TakiToys 梦想新大陆联名恐龙蛋手办潮流玩具大娃 捣蛋鬼想新大陆联名恐龙蛋手办潮流玩具大娃 捣蛋鬼想新大陆联名恐龙蛋手办潮流玩具大娃 捣蛋鬼</view>
+                        <view class="ocDateENum">
+                            <view style="color:#929292;">限量80体 发售</view>
+                            <view style="color:#1296DB;">20:00开售</view>
+                        </view>
+                        <view class="ocDateENum">
+                            <view style="height:40rpx;line-height:40rpx;">￥<text style="font-size:28rpx;">58</text></view>
+                            <view class="buttonPay">20:00开售</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="userBox">
+                    <view class="atlasIwantEbImgBox">
+                        <image class="atlasIwantEbImg" src='https://cdn.51chaidan.com//images/brandEntry/abbreviation/20210427/c5c973878e92d0d231d8f1036327162e.png' mode='aspectFit'></image>
+                    </view>
+                    <view class="userBoxName specialellipsis">夏目友人帐</view>
+                    <image class="whwddimgtit" src="../../../../pages/images/icon_in.png"></image>
+                </view>
+            </view>
+        </block>
+        
+    </view>
+    
+</view>
