@@ -1,37 +1,94 @@
 <view>
-  <view class="listWrap">
-    <block wx:for="{{list}}" wx:key='key'>
-      <view wx:if="{{item.type == 'text'}}" id="{{item.name}}" class="{{num==1?'columnWrap':'rowWrap'}} {{item.borderbottom1?'':'borderbottom1'}} {{item.paddingL80?'paddingL80':''}}">
-        <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
-        <input class="cEveInput" disabled="{{num==2?true:flase}}" data-name="{{item.name}}" placeholder="{{item.placeholder}}" type="text" value="{{item.value}}" bindinput="onKeyInput"></input>
-        <image wx:if="{{item.isEdit?false:isEdit}}" class="editIcon" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="widthFix"></image>
-      </view>
-      <view wx:if="{{item.type == 'title'}}" class="{{num==1?'columnWrap':'rowWrap'}} {{item.borderbottom1?'':'borderbottom1'}}">
-        <view class="cEveTitle" style="height:60rpx"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
-      </view>
-      <view wx:if="{{item.type == 'uploadImg'}}" id="{{item.name}}" class="columnWrap {{item.borderbottom1?'':'borderbottom1'}} {{item.paddingL80?'paddingL80':''}}" data-storagelocation="{{item.storagelocation}}" data-name="{{item.name}}" data-index="{{index}}" catchtap="{{num==2?'':'uploadImage'}}">
-        <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
-        <block>
-          <view wx:if="{{item.src != ''}}" class="flex marginTB25">
-            <image 
-              class="tupian" 
-              src="{{item.src}}?imageMogr2/crop/168x168/gravity/cente" 
-              mode="widthFix">
-            </image>
-            <text wx:if="{{item.isEdit?false:isEdit}}" class="uploadAgainText">重新上传</text>
-          </view>
-          <view wx:else class="uploadWrap">
-            <view class="placeholderBox">
-              <image src="../../pages/images/jiahao.png" mode="widthFix"></image>
+  <block wx:if="{{form == 'settled'}}">
+    <view class="listWrap">
+      <block wx:for="{{list}}" wx:key='key'>
+        <view wx:if="{{item.type == 'text'}}" id="{{item.name}}" class="{{num==1?'columnWrap':'rowWrap'}} {{item.borderbottom1?'':'borderbottom1'}} {{item.paddingL80?'paddingL80':''}}">
+          <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
+          <input class="cEveInput" disabled="{{num==2?true:flase}}" data-name="{{item.name}}" placeholder="{{item.placeholder}}" type="text" value="{{item.value}}" bindinput="onKeyInput"></input>
+          <image wx:if="{{item.isEdit?false:isEdit}}" class="editIcon" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="widthFix"></image>
+        </view>
+        <view wx:if="{{item.type == 'title'}}" class="{{num==1?'columnWrap':'rowWrap'}} {{item.borderbottom1?'':'borderbottom1'}}">
+          <view class="cEveTitle" style="height:60rpx"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
+        </view>
+        <view wx:if="{{item.type == 'uploadImg'}}" id="{{item.name}}" class="columnWrap {{item.borderbottom1?'':'borderbottom1'}} {{item.paddingL80?'paddingL80':''}}" data-storagelocation="{{item.storagelocation}}" data-name="{{item.name}}" data-index="{{index}}" catchtap="{{num==2?'':'uploadImage'}}">
+          <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
+          <block>
+            <view wx:if="{{item.src != ''}}" class="flex marginTB25">
+              <image 
+                class="tupian" 
+                src="{{item.src}}?imageMogr2/crop/168x168/gravity/cente" 
+                mode="widthFix">
+              </image>
+              <text wx:if="{{item.isEdit?false:isEdit}}" class="uploadAgainText">重新上传</text>
             </view>
+            <view wx:else class="uploadWrap">
+              <view class="placeholderBox">
+                <image src="../../pages/images/jiahao.png" mode="widthFix"></image>
+              </view>
+            </view>
+          </block>
+        </view>
+        <view wx:if="{{item.type == 'textarea'}}" id="{{item.name}}" class="columnWrap {{item.borderbottom1?'':'borderbottom1'}}">
+          <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
+          <!-- <input class="cEveInput" data-name="enterpriseName" placeholder="{{item.placeholder}}" value="" type="text"></input> -->
+          <textarea class="textarea" disabled="{{num==2?true:flase}}" data-name="{{item.name}}" auto-height placeholder="{{item.placeholder}}" value="{{item.value}}" bindinput="onKeyInput"/>
+        </view>
+      </block>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="listWrap">
+      <block wx:for="{{list}}" wx:key='key'>
+        <view wx:if="{{item.type == 'actionSheet'}}" id="{{item.name}}" class="rowWrap card" catchtap="actionSheet">
+          <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
+          <input class="cEveInput" disabled="true" data-name="{{item.name}}" placeholder="{{item.placeholder}}" type="text" value="{{item.value}}" bindinput="onKeyInput"></input>
+          <image class="actionSheetIcon" src="../../pages/images/icon_in.png" mode="widthFix"></image>
+        </view>
+        <view wx:if="{{item.type == 'textarea'}}" id="{{item.name}}" class="columnWrap card paddingBottom12">
+          <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
+          <!-- <input class="cEveInput" data-name="enterpriseName" placeholder="{{item.placeholder}}" value="" type="text"></input> -->
+          <textarea class="textarea" disabled="{{num==2?true:flase}}" data-name="{{item.name}}" auto-height placeholder="{{item.placeholder}}" value="{{item.value}}" bindinput="onKeyInput"/>
+        </view>
+        <view wx:if="{{item.type == 'uploadImg'}}" id="{{item.name}}" class="columnWrap card paddingBottom12" data-storagelocation="{{item.storagelocation}}" data-name="{{item.name}}" data-index="{{index}}" data-form="{{form}}" catchtap="uploadImage">
+          <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
+          <block>
+            <view class="activityimageWrap">
+              <block wx:for="{{item.imageList}}" wx:key='key'>
+                <view class="itemImage">
+                  <image 
+                    class="tupian" 
+                    src="{{item}}?imageMogr2/crop/168x168/gravity/cente" 
+                    mode="widthFix">
+                  </image>
+                </view>
+              </block>
+              <view class="itemImage">
+                <view class="uploadBox">
+                  <view class="placeholderBox">
+                    <image src="../../pages/images/jiahao.png" mode="widthFix"></image>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </block>
+        </view>
+        <view wx:if="{{item.type == 'radio'}}" id="{{item.name}}" class="columnWrap card paddingBottom20">
+          <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}">
+            <text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>
+            {{item.subtitle}}
+            <image src="https://cdn.51chaidan.com/images/brandSettledIcon/wenhao.png" mode="widthFix"></image>
           </view>
-        </block>
-      </view>
-      <view wx:if="{{item.type == 'textarea'}}" id="{{item.name}}" class="columnWrap {{item.borderbottom1?'':'borderbottom1'}}">
-        <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
-        <!-- <input class="cEveInput" data-name="enterpriseName" placeholder="{{item.placeholder}}" value="" type="text"></input> -->
-        <textarea class="textarea" disabled="{{num==2?true:flase}}" data-name="{{item.name}}" auto-height placeholder="{{item.placeholder}}" value="{{item.value}}" bindinput="onKeyInput"/>
-      </view>
-    </block>
-  </view>
+          <view class="radioWrap">
+            <block wx:for="{{item.radioArr}}" wx:key='key' wx:for-index="idx" wx:for-item="sonItem">
+              <view data-index="{{index}}" data-sonindex="{{idx}}" data-name="{{item.name}}" catchtap="bindRadioChange">
+                <text class="{{item.value == idx?'radioChecked':'radioUnchecked'}}"></text>
+                <text class="itemName">{{sonItem}}</text>
+              </view>
+            </block>
+          </view>
+        </view>
+      </block>
+    </view>
+  </block>
 </view>
+

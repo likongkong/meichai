@@ -10,6 +10,13 @@ Component({
     list: {
       type: Array,
       observer(newVal){
+        // console.log(newVal)
+      }
+    },
+    form: {
+      type: String,
+      value:'settled',
+      observer(newVal){
         console.log(newVal)
       }
     },
@@ -60,7 +67,16 @@ Component({
       this.setData({errorDom:''});
       this.triggerEvent("bindchange",obj)
     },
+    bindRadioChange(e){
+      let index = e.currentTarget.dataset.index;
+      let name = e.currentTarget.dataset.name;
+      let sonindex = e.currentTarget.dataset.sonindex;
+      let value = `list[${index}].value`;
+      this.setData({[value]:sonindex})
+      this.triggerEvent("bindchange", {value:sonindex,name:name});
+    },
     uploadImage(e){
+      let form = e.currentTarget.dataset.form;
       let storagelocation = e.currentTarget.dataset.storagelocation;
       let name = e.currentTarget.dataset.name;
       let ind = e.currentTarget.dataset.index;
@@ -71,13 +87,67 @@ Component({
       
       // 先选择文件，得到临时路径
       wx.chooseImage({
-        count: 1, // 默认9
+        count: form=='dynamicContent'?9:1, // 默认9
         sizeType: ['compressed'], // 可以指定是原图original还是压缩图compressed，默认用原图
         sourceType: ['camera','album'], // 'album'相册  camera 相机
         success: (res) => {
           wx.showLoading({
             title: '上传中...',
           })
+          console.log(res)
+          let imageList = res.tempFiles;
+          let promiseList=[];
+          imageList.forEach(item => {
+            // console.log(item.path)
+            var filePath = item.path;
+            //获取最后一个.的位置
+            var index= filePath.lastIndexOf(".");
+            //获取后缀
+            var ext = filePath.substr(index+1);
+            var filename = filePath.substr(filePath.lastIndexOf('/') + 1);
+            promiseList.push( 
+              new Promise((resolve, reject)=>{
+                cos.postObject({
+                  Bucket: 'brand-settled-info-1300990269',
+                  Region: 'ap-beijing',
+                  Key: `${storagelocation}/${new Date().getTime()}_${app.signindata.uid}.${ext}`,
+                  FilePath: filePath,
+                  onProgress: function (info) {  //上传进度
+                      // console.log(JSON.stringify(info));
+                  }
+                  },(err, data) => {
+                    resolve('https://'+data.Location)
+                  }
+                );
+              })
+            )
+          })
+          // 使用Promise.all进行多图上传
+          Promise.all(promiseList).then(res => {
+            wx.hideLoading()
+            // console.log(res)     
+            if(form=='dynamicContent'){
+              let imageList=`list[${ind}].imageList`;
+              this.setData({[imageList]: [...this.data.list[ind].imageList,...res]})
+              this.triggerEvent("bindchange", {value:this.data.list[ind].imageList,name:name});
+            }else{
+              let src = `list[${ind}].src`;
+              this.setData({[src]: `https://${res[0]}`})
+              this.triggerEvent("bindchange", {value:res[0],name:name});
+            }
+          }).catch((error) => {
+            wx.hideLoading()
+            wx.showToast({
+              title:'上传失败请重试',
+              icon:'none'
+            })
+            console.log(error);
+          });
+
+          return false;
+          
+
+         
           var filePath = res.tempFiles[0].path;
           //获取最后一个.的位置
           var index= filePath.lastIndexOf(".");
@@ -94,11 +164,13 @@ Component({
                 }
               },(err, data) => {
                 wx.hideLoading()
+                console.log(data)
                 let src = `list[${ind}].src`;
                 this.setData({[src]: `https://${data.Location}`})
                 this.triggerEvent("bindchange", {value:data.Location,name:name});
               }
           );
+
         }
       });
     },

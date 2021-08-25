@@ -116,10 +116,25 @@
     </view>
 
 
-   
-
+    <!-- 选择发布/发售类型弹框-->
+    <!-- <view class="popMask" catchtouchmove="true" catchtap="toggleAddNewEventMask" wx:if="{{isAddNewEventMask}}">
+        <view class="addNewEventBox" catchtap="true">
+            <text class="addNewEventTitle">选择发布/发售类型</text> 
+            <view class="addNewEventContent">
+                <view class="createItem" data-type="9032" catchtap="comjumpwxnav" style="background-image: linear-gradient(to top right, #0d9fc3, #e2ee66);">
+                    <view>动态</view>
+                    <view>让内容和用户连接</view>
+                </view>
+                <view class="createItem" data-type="9033" catchtap="comjumpwxnav" style="background-image: linear-gradient(to top right, #7E2A52, #FDA486);">
+                    <view>图鉴</view>
+                    <view>开启图鉴介绍</view>
+                </view>
+            </view>
+            <button catchtap="toggleAddNewEventMask">关闭</button>
+        </view>
+    </view> -->
     <!-- 品牌入驻 -->
-    <block wx:if="{{brandSettledStatus!=0}}">
+    <!-- <block wx:if="{{brandSettledStatus!=0}}">
         <view wx:if="{{!dataInfo.brandSettledLimit}}" class="whwdddw settled">
             <block wx:if="{{brandSettledStatus == 5 || brandSettledStatus == 6}}">
                 <block wx:if="{{brandSettledStatus == 6}}">
@@ -145,7 +160,7 @@
                                     <text>银币</text>
                                 </view>
                             </view>
-                            <view class="assetR">
+                            <view class="assetR" data-type="9030" catchtap="comjumpwxnav">
                                 <view>
                                     <image src='https://cdn.51chaidan.com/images/brandSettledIcon/orderIcon/wallet.png' mode="widthFix"></image>
                                     <text>钱包</text>
@@ -185,7 +200,7 @@
                             </view>
                         </view>
                     </view>
-                    <button>发布/发售</button>
+                    <button catchtap="toggleAddNewEventMask">发布/发售</button>
                 </view>
             </block>
             <block wx:else>
@@ -207,7 +222,7 @@
             </block>
         </view>
     </block>
-    
+     -->
 
     <view class='whwdddw' bindtap='jumpowntoy'>
         <view class='whwddd'>

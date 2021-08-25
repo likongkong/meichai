@@ -163,9 +163,11 @@
         "pages/perfectSettledProfile/perfectSettledProfile",
         "pages/myWallet/myWallet",
         "pages/atlas/atlas",
-        "pages/offeringCalendar/offeringCalendar",
         "pages/incomingsOutgoingsDetail/incomingsOutgoingsDetail",
-        "pages/dynamicDetails/dynamicDetails"
+        "pages/dynamicDetails/dynamicDetails",
+        "pages/releaseDynamic/releaseDynamic",
+        "pages/releaseFieldGuide/releaseFieldGuide",
+        "pages/offeringCalendar/offeringCalendar"
       ]
     }
   ],
