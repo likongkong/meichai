@@ -1046,6 +1046,18 @@ App({
       wx.navigateTo({
         url: `/page/settled/pages/releaseFieldGuide/releaseFieldGuide`
       });
+    } else if (item_type == 9034) {  // 日历详情
+      wx.navigateTo({
+        url: `/page/settled/pages/offeringCalendar/offeringCalendar`
+      });
+    } else if (item_type == 9035) {  // 图鉴详情
+      wx.navigateTo({
+        url: `/page/settled/pages/atlas/atlas?iid=${whref}`
+      });
+    } else if (item_type == 9036) {  // 动态详情
+      wx.navigateTo({
+        url: `/page/settled/pages/dynamicDetails/dynamicDetails?did=${whref}`
+      });
     }
     
   },

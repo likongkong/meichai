@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '图鉴',
+    c_title: '动态',
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
@@ -17,6 +17,7 @@ Page({
     detailData:{},
     illustrated_id:''
   },  
+
   jumpdetail(w){
     var id = w.currentTarget.dataset.id || w.target.dataset.id || '';
     var type = w.currentTarget.dataset.type || w.target.dataset.type || '';
@@ -87,7 +88,7 @@ Page({
     _this.data.loginid = app.signindata.loginid;
     _this.data.uid = app.signindata.uid;
     _this.data.orderid = options.orderid,
-    _this.data.illustrated_id = options.iid || 1
+    _this.data.drying_id = options.did || 0
     // 判断是否登录
     if (_this.data.loginid != '' && _this.data.uid != '') {
       _this.onLoadfun();
@@ -110,27 +111,22 @@ Page({
   // 获取数据
   getData(){
     var _this = this;
-    console.log('mod=community&operation=showIllustratedInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&illustrated_id='+_this.data.illustrated_id)
-    var q1 = Dec.Aese('mod=community&operation=showIllustratedInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&illustrated_id='+_this.data.illustrated_id);
+
+    var q1 = Dec.Aese('mod=community&operation=showDynamicInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&drying_id='+_this.data.drying_id);
+
     wx.showLoading({title: '加载中...',mask:true})
     wx.request({
       url: app.signindata.comurl + 'toy.php' + q1,
       method: 'GET',
       header: {'Accept': 'application/json'},
       success: function(res) {
-        console.log('图鉴详情=====',res)
+        console.log('动态详情=====',res)
         wx.stopPullDownRefresh();
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
-          var sellList = res.data.List.sellList || [];
-          if(sellList.length != 0){
-              sellList.forEach(element => {
-                  element.start_time = _this.toDate(element.start_time)
-              });
-          };
            _this.setData({
-             dataDetail:res.data.Info,
-             sellList:sellList
+             dataInfo:res.data.Info,
+             illustratedInfo:res.data.List.illustratedInfo
            })
         }else{
           wx.showModal({
@@ -229,7 +225,27 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    
+    var _this = this;
+    var reshare = {
+      title: _this.data.dataInfo.shareData.name,
+      path: 'page/settled/pages/dynamicDetails/dynamicDetails?did='+_this.data.drying_id,
+      imageUrl: _this.data.dataInfo.shareData.shareImg,
+      success: function(res) {},
+    };
+    return reshare
   },
-
+  // 跳转日历
+  jumpoffering(w){
+    var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
+    var type = w.currentTarget.dataset.type || w.target.dataset.type || 0;
+    var istype = w.currentTarget.dataset.istype || w.target.dataset.istype || 0;
+    if(istype == 1){ // 秒杀
+      type = 1;
+    }else if(istype == 2){ // 抽选
+      type = 9003;
+    }else if(istype == 3){ // 动态
+      type = 9036;
+    }
+    app.comjumpwxnav(type,id,'','')
+  } 
 })

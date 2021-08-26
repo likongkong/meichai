@@ -14,9 +14,9 @@
             <view class="ocDateEveTop"><text style="font-size:34rpx;">{{item.day}}</text>/{{item.month}}月<text wx:if="{{item.dayName}}">（{{item.dayName}}）</text></view>
             <view class="ocDateEve" wx:for='{{item.listItem}}' wx:key='key' wx:for-item='w'>
                 <view class="ocDateINBox">
-                    <image class="ocDateEImg" src="{{w.itemImg}}" mode="aspectFit"></image>
+                    <image class="ocDateEImg" catchtap="details" data-id='{{w.itemId}}' data-type='{{w.itemType}}' src="{{w.itemImg}}" mode="aspectFit"></image>
                     <view class="ocDateContent">
-                        <view class='disanum_sb_txtone multilineellipsis' style='color:#666;height:70rpx;text-align:left;'>{{w.itemName}}</view>
+                        <view catchtap="details" data-id='{{w.itemId}}' data-type='{{w.itemType}}' class='disanum_sb_txtone multilineellipsis' style='color:#666;height:68rpx;text-align:left;'>{{w.itemName}}</view>
                         <view class="ocDateENum">
                             <view style="color:#929292;">{{w.subTitle}}{{w.salesName}}</view>
                             <view style="color:#929292;" wx:if='{{w.itemStatus==3}}'>{{w.salesTimeName}}</view>
@@ -34,7 +34,7 @@
                                     参加抽选
                                 </block>                                
                             </view>
-                            <view class="buttonPay" catchtap="jumpAtlas" data-id='{{w.itemId}}' wx:elif='{{w.itemStatus==3}}' style="color:#000000;border:2rpx solid #000000;">查看图鉴</view>
+                            <view class="buttonPay" catchtap="details" data-id='{{w.itemId}}' data-type='9035' wx:elif='{{w.itemStatus==3}}' style="color:#000000;border:2rpx solid #000000;">查看图鉴</view>
                             
                         </view>
                     </view>

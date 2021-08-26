@@ -151,6 +151,58 @@ page{
   background:#34A9ED;
   color: #fff;
 }
-
-
+.boxAtlas{
+  border: 2rpx solid #34A9ED;
+  overflow: hidden;
+  margin: 10rpx;
+  font-size: 20rpx;
+  line-height: 30rpx;
+  border-radius: 6rpx;
+  padding: 10rpx;
+}
+.boxAtlasLeft{
+  float: left;
+  height: 30rpx;
+  padding: 0 10rpx;
+  color: #fff;
+  background:#FF890B;
+  border-radius: 6rpx;
+}
+.boxAtlasName{
+  width: 140rpx;
+  height: 30rpx;
+  float: left;
+  margin-left: 10rpx;
+}
+.boxAtlasRight{
+  float: right;
+  height: 30rpx;
+  color: #34A9ED;
+  text-decoration:underline;
+}
+.wxIcon{
+  width: 60rpx;
+  height: 60rpx;
+  float: left;
+  margin-right: 50rpx;
+  border-radius: 50%;
+  position: relative;
+}
+.dyDetheat{
+  height: 60rpx;
+  line-height: 60rpx;
+  float: right;
+  font-size:24rpx;
+  padding-left: 50rpx;
+  position: relative;
+}
+.emlplefimgimg{
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+}
 
