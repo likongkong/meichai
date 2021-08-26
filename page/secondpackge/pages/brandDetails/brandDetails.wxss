@@ -7,6 +7,7 @@
 
 page {
   background: #f5f6fa;
+  padding-bottom: 30rpx;
 }
 .briefIntroduction{
   width:670rpx;font-size:26rpx;color:#333;margin:15rpx auto 0;
@@ -293,12 +294,26 @@ page {
   background:#34A9ED;
   margin-left: 15rpx;
 }
+.emlhrightNo{
+  width:90rpx;
+  height: 36rpx;
+  text-align: center;
+  line-height: 36rpx;
+  color: #34A9ED;
+  display: inline-block;
+  font-size: 24rpx;
+  border-radius: 4rpx;
+  border:2rpx solid #34A9ED;
+  margin-left: 15rpx;
+}
 .brandSwiperImgNew{
   width: 100%;
   height: auto;
   display: block;
 }
-
+.barndStatus{
+  overflow:hidden;padding:20rpx;font-size:24rpx;display:flex;display:flex;justify-content:space-between;
+}
 
 .emlist{
   width:100%;

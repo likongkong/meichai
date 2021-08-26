@@ -167,7 +167,8 @@
         "pages/dynamicDetails/dynamicDetails",
         "pages/releaseDynamic/releaseDynamic",
         "pages/releaseFieldGuide/releaseFieldGuide",
-        "pages/offeringCalendar/offeringCalendar"
+        "pages/offeringCalendar/offeringCalendar",
+        "pages/fieldGuideList/fieldGuideList"
       ]
     }
   ],

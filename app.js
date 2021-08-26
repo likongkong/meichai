@@ -1046,10 +1046,10 @@ App({
       wx.navigateTo({
         url: `/page/settled/pages/releaseFieldGuide/releaseFieldGuide`
       });
-    } else if (item_type == 9034) {  // 日历详情
+    } else if (item_type == 9034) {  
       wx.navigateTo({
-        url: `/page/settled/pages/offeringCalendar/offeringCalendar`
-      });
+        url: `/page/settled/pages/fieldGuideList/fieldGuideList?${whref}`
+      });      
     } else if (item_type == 9035) {  // 图鉴详情
       wx.navigateTo({
         url: `/page/settled/pages/atlas/atlas?iid=${whref}`
@@ -1057,6 +1057,14 @@ App({
     } else if (item_type == 9036) {  // 动态详情
       wx.navigateTo({
         url: `/page/settled/pages/dynamicDetails/dynamicDetails?did=${whref}`
+      });
+    } else if (item_type == 9037) {  // 日历详情
+      wx.navigateTo({
+        url: `/page/settled/pages/offeringCalendar/offeringCalendar`
+      });
+    } else if (item_type == 9038) { // 订单管理
+      wx.navigateTo({
+        url: `/page/settled/pages/orderManagement/orderManagement`
       });
     }
     

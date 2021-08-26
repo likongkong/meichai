@@ -14,6 +14,35 @@ page{background:#f5f6fa;}.dlfbox{width:100%;background:#f5f6fa;}::-webkit-scroll
   z-index: 1;
 }
 
+.dlfchrtopimgip{
+  width: 28rpx;
+  height: 28rpx;
+  position: absolute;
+  top: 68rpx;
+  right: 3rpx;
+}
+.dlfchrtopimgipList{
+  width: 28rpx;
+  height: 28rpx;
+  position: absolute;
+  top: 42rpx;
+  left: 42rpx;
+}
+.dlfchrtopimgipListp{
+  width: 18rpx;
+  height: 18rpx;
+  position: absolute;
+  top: 22rpx;
+  left: 22rpx;
+}
+.dlfchrtopimgipNew{
+  width: 50rpx;
+  height: 28rpx;
+  position: absolute;
+  top: 0rpx;
+  right: -17rpx;
+}
+
 .dlfchrbright{color:#fff;font-size:24rpx;position:absolute;top:15rpx;left:15rpx;z-index:2;padding:3rpx 13rpx;border-radius:5rpx;background:#ABC7F7;}
 
 .emlist{
@@ -30,11 +59,13 @@ page{background:#f5f6fa;}.dlfbox{width:100%;background:#f5f6fa;}::-webkit-scroll
   width:500rpx;
   height: 100%;
   float: left; 
+  position: relative;
 }
 .emlhlimg{
   width: 70rpx;
   height: 70rpx;
   float: left;
+  border-radius: 50%;
 }
 .emlhltxt{
   width: 395rpx;
@@ -172,6 +203,7 @@ page{background:#f5f6fa;}.dlfbox{width:100%;background:#f5f6fa;}::-webkit-scroll
   margin: 0 10rpx;
   display: inline-block;
   vertical-align: top;
+  position: relative;
 }
 .ocamensweveimg{
   height: 96rpx;

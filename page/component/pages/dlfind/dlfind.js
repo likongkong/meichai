@@ -574,7 +574,7 @@ Page({
         if (res.data.ReturnCode == 200) {
           if(type == 0){
             _this.setData({
-              ['communityList['+ind+'].brandInfo.is_attention']:true
+              ['communityList['+ind+'].is_attention']:true
             }); 
           }else{
             

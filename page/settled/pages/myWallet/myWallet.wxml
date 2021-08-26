@@ -47,7 +47,7 @@
             </view>
             <view>
               <text class="colorA2A2A2">{{item.insert_time_date}}</text>
-              <text class="colorA2A2A2">余额 {{item.overage}}</text>
+              <!-- <text class="colorA2A2A2">余额 {{item.overage}}</text> -->
             </view>
           </view>
         </view>

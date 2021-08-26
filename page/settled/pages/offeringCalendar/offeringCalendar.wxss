@@ -115,7 +115,13 @@ page{
   width: 15rpx;
   height: 26rpx;
 }
-
+.dlfchrtopimgipList{
+  width: 24rpx;
+  height: 24rpx;
+  position: absolute;
+  top: 38rpx;
+  left: 30rpx;
+}
 
 
 

@@ -28,7 +28,7 @@
             </view>
           </block>
         </view>
-        <view wx:if="{{item.type == 'textarea'}}" id="{{item.name}}" class="columnWrap {{item.borderbottom1?'':'borderbottom1'}}">
+        <view wx:if="{{item.type == 'textarea'}}" id="{{item.name}}" class="columnWrap {{item.paddingBottom12?'paddingBottom12':''}} {{item.borderbottom1?'':'borderbottom1'}}">
           <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
           <!-- <input class="cEveInput" data-name="enterpriseName" placeholder="{{item.placeholder}}" value="" type="text"></input> -->
           <textarea class="textarea" disabled="{{num==2?true:flase}}" data-name="{{item.name}}" auto-height placeholder="{{item.placeholder}}" value="{{item.value}}" bindinput="onKeyInput"/>
@@ -39,7 +39,17 @@
   <block wx:else>
     <view class="listWrap">
       <block wx:for="{{list}}" wx:key='key'>
-        <view wx:if="{{item.type == 'actionSheet'}}" id="{{item.name}}" class="rowWrap card" catchtap="actionSheet">
+        <view wx:if="{{item.type == 'text'}}" id="{{item.name}}" class="rowWrap {{item.borderbottom1?'':'borderbottom1'}} {{item.paddingL80?'paddingL80':''}}">
+          <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
+          <input class="cEveInput" disabled="{{num==2?true:flase}}" data-name="{{item.name}}" placeholder="{{item.placeholder}}" type="text" value="{{item.value}}" bindinput="onKeyInput"></input>
+          <image wx:if="{{item.isEdit?false:isEdit}}" class="editIcon" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="widthFix"></image>
+        </view>
+        <view wx:if="{{item.type == 'actionSheet'}}" id="{{item.name}}" class="rowWrap card" data-groups="{{item.groups}}" data-index="{{index}}" catchtap="showActionSheet">
+          <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
+          <input class="cEveInput" disabled="true" data-name="{{item.name}}" placeholder="{{item.placeholder}}" type="text" value="{{item.value}}" bindinput="onKeyInput"></input>
+          <image class="actionSheetIcon" src="../../pages/images/icon_in.png" mode="widthFix"></image>
+        </view>
+        <view wx:if="{{item.type == 'link'}}" id="{{item.name}}" class="rowWrap card" data-groups="{{item.groups}}" data-index="{{index}}" data-itemtype="{{item.item_type}}" data-whref="index={{index}}" catchtap="comjumpwxnav">
           <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
           <input class="cEveInput" disabled="true" data-name="{{item.name}}" placeholder="{{item.placeholder}}" type="text" value="{{item.value}}" bindinput="onKeyInput"></input>
           <image class="actionSheetIcon" src="../../pages/images/icon_in.png" mode="widthFix"></image>
@@ -49,17 +59,23 @@
           <!-- <input class="cEveInput" data-name="enterpriseName" placeholder="{{item.placeholder}}" value="" type="text"></input> -->
           <textarea class="textarea" disabled="{{num==2?true:flase}}" data-name="{{item.name}}" auto-height placeholder="{{item.placeholder}}" value="{{item.value}}" bindinput="onKeyInput"/>
         </view>
-        <view wx:if="{{item.type == 'uploadImg'}}" id="{{item.name}}" class="columnWrap card paddingBottom12" data-storagelocation="{{item.storagelocation}}" data-name="{{item.name}}" data-index="{{index}}" data-form="{{form}}" catchtap="uploadImage">
+        <view wx:if="{{item.type == 'uploadImg'}}" id="{{item.name}}" class="columnWrap card paddingBottom12 {{item.margintop0?'margintop0':''}}" data-storagelocation="{{item.storagelocation}}" data-name="{{item.name}}" data-index="{{index}}" data-form="{{form}}" catchtap="uploadImage">
           <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
           <block>
             <view class="activityimageWrap">
-              <block wx:for="{{item.imageList}}" wx:key='key'>
+              <block wx:for="{{item.imageList}}" wx:for-index="idx" wx:for-item="sonitem" wx:key='key'>
                 <view class="itemImage">
                   <image 
                     class="tupian" 
-                    src="{{item}}?imageMogr2/crop/168x168/gravity/cente" 
+                    src="{{sonitem}}?imageMogr2/crop/168x168/gravity/cente" 
                     mode="widthFix">
                   </image>
+                  <view class="delete" data-ind="{{idx}}" data-index="{{index}}" data-name="{{item.name}}" catchtap="deleteitemImage">
+                    <image  
+                      src="https://cdn.51chaidan.com/images/brandSettledIcon/delete.png" 
+                      mode="widthFix">
+                    </image>
+                  </view>
                 </view>
               </block>
               <view class="itemImage">

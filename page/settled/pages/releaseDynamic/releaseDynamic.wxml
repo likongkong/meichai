@@ -6,7 +6,8 @@
   form="dynamicContent"
   statusBarHeightMc="{{statusBarHeightMc}}"
   list="{{dynamicData}}"
-  bind:bindchange="bindchange">
+  bind:bindchange="bindchange"
+  bind:showActionSheet="showActionSheet">
   </settledForm>
   <view class="footerWrap">
       <view data-num="1" catchtap="navigateBack">返回</view>

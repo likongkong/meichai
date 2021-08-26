@@ -2,7 +2,7 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 <view class="omBox">
-    <scroll-view class="marginAuto scrollViewTop" scroll-x="true" scroll-with-animation="true" scroll-left='{{scrollleftTop}}' wx:if='{{brand.length>0}}'>
+    <scroll-view class="marginAuto scrollViewTop" scroll-x="true" scroll-with-animation="true" scroll-left='{{scrollleftTop}}' wx:if='{{brand.length>1}}'>
         <view class="scrollViewTopEve {{brandid == 0?'selectTop':''}}" data-brandid="0" id="top0" catchtap="scrollViewTop">全部IP</view>
         <view wx:for="{{brand}}" wx:key='key' class="scrollViewTopEve {{brandid == item.brandId?'selectTop':''}}" data-brandid="{{item.brandId}}" id="top{{item.brandId}}" catchtap="scrollViewTop">{{item.brandName}}</view>
     </scroll-view>

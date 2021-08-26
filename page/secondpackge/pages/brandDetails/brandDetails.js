@@ -396,7 +396,7 @@ Page({
 
     _this.data.page = 0;
     _this.getbrandDetail(_this.data.page);
-    _this.getADList();
+    // _this.getADList();
 
     _this.eldatalistfun(0)
   },
@@ -539,26 +539,26 @@ Page({
     }
   },
 
-  getADList: function () {
-    var _this = this;
-    var exh = Dec.Aese('mod=info&operation=toyShow&type=2');
-    wx.request({
-      url: app.signindata.comurl + 'ads.php' + exh,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        console.log('广告=============',res)
-        if (res.data.ReturnCode == 200) {
-          _this.setData({
-            adList: res.data.banner[0],
-          })
-        } else {
+  // getADList: function () {
+  //   var _this = this;
+  //   var exh = Dec.Aese('mod=info&operation=toyShow&type=2');
+  //   wx.request({
+  //     url: app.signindata.comurl + 'ads.php' + exh,
+  //     method: 'GET',
+  //     header: { 'Accept': 'application/json' },
+  //     success: function (res) {
+  //       console.log('广告=============',res)
+  //       if (res.data.ReturnCode == 200) {
+  //         _this.setData({
+  //           adList: res.data.banner[0],
+  //         })
+  //       } else {
 
-        };
-      },
-      fail: function () { }
-    });
-  },
+  //       };
+  //     },
+  //     fail: function () { }
+  //   });
+  // },
 
   // 点赞
   ispraisefun: function (w) {

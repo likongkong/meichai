@@ -109,6 +109,18 @@
           "pathName": "page/settled/pages/releaseDynamic/releaseDynamic",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "图鉴列表",
+          "pathName": "page/settled/pages/fieldGuideList/fieldGuideList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "发布图鉴",
+          "pathName": "page/settled/pages/releaseFieldGuide/releaseFieldGuide",
+          "query": "",
+          "scene": null
         }
       ]
     }

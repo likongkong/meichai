@@ -11,15 +11,20 @@
     <view class="emlhead">
         <view class="emlhleft">
             <image class='emlhlimg' src="{{dataInfo.brandLogo}}" mode='aspectFit'></image>
+
+            <image class='dlfchrtopimgipList' wx:if='{{dataInfo.isAuth}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/approveIcon.png'></image>
             <view class="emlhltxt">
                     <view class="emlhlttop specialellipsis">{{dataInfo.brandName}}</view>
                     <view class="emlhltbottom specialellipsis">123456<text style="margin-left:20rpx;">123456</text></view>
             </view>
         </view>
-        <view class="emlhright" wx:if='{{!dataInfo.is_attention}}' data-id='{{dataInfo.id}}' data-type='0' catchtap='followfun'>关注</view>
+        <view class="{{!dataInfo.is_attention?'emlhright':'emlhrightNo'}}" data-id='{{dataInfo.brand_id}}' data-type='0' catchtap='followfun'>
+            <block wx:if='{{!dataInfo.is_attention}}'>关注</block>
+            <block wx:else>已关注</block>
+        </view>
     </view> 
 
-    <view style="margin:20rpx;font-size:26rpx;"><text>{{dataInfo.title}}</text></view>  
+    <view style="padding:20rpx;font-size:26rpx;margin-bottom:2rpx;background:#fff;"><text>{{dataInfo.title}}</text></view>  
 
     <view class="boxAtlas" style="width:500rpx;margin:20rpx;font-size:24rpx;" wx:if='{{illustratedInfo}}'  catchtap="jumpoffering" data-id="{{illustratedInfo.id}}" data-type='9035'>
         <view class="boxAtlasLeft">图鉴</view>

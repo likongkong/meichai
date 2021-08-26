@@ -9,52 +9,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '发布动态',
+    c_title: '关联图鉴',
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     uid:'',
     loginid:'',
-    dynamicData:[
-      {
-        isRequired:false,
-        type:'actionSheet',
-        groups:[],
-        subtitle:'关联IP',
-        value:'点击关联',
-        name:'associationIp'
-      },{
-        isRequired:true,
-        type:'textarea',
-        subtitle:'动态内容',
-        placeholder:'请输入动态内容',
-        value:'',
-        name:'dynamicContent'
-      },{
-        isRequired:true,
-        type:'uploadImg',
-        subtitle:'添加图片（最多上传九张，建议上传比例1:1)',
-        name:'dynamicPic',
-        imageList:[],
-        storagelocation:'brandinfo/dynamic'
-      },{
-        isRequired:false,
-        type:'link',
-        item_type:9034,
-        subtitle:'关联图鉴',
-        value:'点击关联',
-        name:'associationActivity',
-      },{
-        isRequired:false,
-        type:'radio',
-        subtitle:'允许评论对象',
-        radioArr:['所有人可评论','指定群评论'],
-        value:'0',
-        name:'allowComment'
-      },
-    ],
-    obj:{},
-
+    pid:0,
+    dataList:[],
+    listIndex:0,
+    loadprompt:false
   },
   /**
    * 生命周期函数--监听页面加载
@@ -63,6 +27,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.data.listIndex = options.index;
     // 判断是否授权
     this.activsign();
   },
@@ -71,7 +36,7 @@ Page({
       loginid: app.signindata.loginid,
       uid: app.signindata.uid
     });
-    this.getIp();
+    this.getData();
   },
   activsign: function () {
     // 判断是否授权 
@@ -152,12 +117,16 @@ Page({
       tgabox: true
     });
   },
-  // 获取用户下所有的品牌id
-  getIp(){
+  reset(){
+    this.setData({pid:0,dataList:[],loadprompt:false})
+  },
+  // 获取图鉴列表
+  getData(){
     wx.showLoading({
       title: '加载中',
     })
-    let data = `mod=community&operation=showIp&uid=${this.data.uid}&loginid=${this.data.loginid}`
+    let that = this;
+    let data = `mod=community&operation=showActivityIllustrated&uid=${this.data.uid}&loginid=${this.data.loginid}&showType=2&pid=${this.data.pid}`
     var q = Dec.Aese(data);
     console.log(`${app.signindata.comurl}?${data}`)
     wx.request({
@@ -167,12 +136,21 @@ Page({
       success: (res) => { 
         console.log(res);
         if(res.data.ReturnCode == 200){
-          let groups = `dynamicData[0].groups`;
-          this.setData({
-            [groups]:res.data.List.brandInfoList,
-            [`dynamicData[0].value`]:res.data.List.brandInfoList[0].name
-          })
-          this.data.obj.associationIp = res.data.List.brandInfoList[0].brand_id;
+          let List =res.data.List;
+          if(that.data.pid==0 && List.length == 0){
+            that.setData({
+              noData:true
+            })
+          }else if(that.data.pid!=0 && List.length == 0){
+            that.setData({
+              loadprompt:true
+            })
+            app.showToastC('暂无更多数据了',1500);
+          }else{
+            that.setData({
+              dataList:[...that.data.dataList,...List]
+            })
+          }
         }else{
           app.showToastC(res.data.Msg,2000);
         }
@@ -184,79 +162,20 @@ Page({
       }
     });
   },
-  // 发布
-  submitAudit(){
-    let obj = this.data.obj;
-    if(!obj.dynamicContent || obj.dynamicContent == ''){
-      this.selectComponent('#settledForm').scrollto('dynamicContent');
-      app.showToastC('请输入动态内容',1500);
-      return false;
-    }
-    if(!obj.dynamicPic || obj.dynamicPic.length == 0){
-      this.selectComponent('#settledForm').scrollto('dynamicPic');
-      app.showToastC('请添加图片',1500);
-      return false;
-    }
-    if(!obj.allowComment){
-      obj.allowComment = 0
-    }
-    wx.showLoading({
-      title: '加载中',
+  chooseFieldGuide(e){
+    let brandname = e.currentTarget.dataset.brandname;
+    let id = e.currentTarget.dataset.id;
+    let pages = getCurrentPages();    //获取当前页面信息栈
+    let prevPage = pages[pages.length-2];
+    prevPage.setData({
+      [`dynamicData[${this.data.listIndex}].value`]:brandname
     })
-    console.log(obj)
-    let data = `mod=community&operation=establish&uid=${this.data.uid}&loginid=${this.data.loginid}&brand_id=${obj.associationIp}&title=${obj.dynamicContent}&illustrated_id=${obj.fieldGuideId?obj.fieldGuideId:''}&imgArr=${obj.dynamicPic}&allowComment=${obj.allowComment}`
-    var q = Dec.Aese(data);
-    console.log(`${app.signindata.comurl}?${data}`)
-    wx.request({
-      url: app.signindata.comurl + 'toy.php' + q,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: (res) => { 
-        console.log(res);
-        wx.hideLoading()
-        wx.stopPullDownRefresh();
-        if(res.data.ReturnCode == 200){
-          app.showToastC('发布成功',2000);
-        }else{
-          app.showToastC(res.data.Msg,2000);
-        }
-      },
-      fail: function () {
-        wx.hideLoading()
-        wx.stopPullDownRefresh();
-      },
-      complete:function(){
-      }
-    });
-
-  },
-  // 获取表单数据
-  bindchange(e){
-    let key=e.detail.name;
-    this.data.obj[key]=e.detail.value;
-    console.log(this.data.obj)
-  },
-  // 修改IP数据
-  showActionSheet(e){
-    let that= this;
-    let index = e.detail.index;
-    let groups = this.data.dynamicData[index].groups;
-    let arr = [];
-    for(var i=0;i<groups.length;i++){
-      arr.push(groups[i].name);
-    }
-    wx.showActionSheet({
-      itemList: arr,
-      success (res) {
-        that.setData({
-          [`dynamicData[${index}].value`]:groups[res.tapIndex].name
-        })
-        that.data.obj.associationIp = groups[res.tapIndex].brand_id;
-        console.log(that.data.obj)
-      },
-      fail (res) {
-        console.log(res.errMsg)
-      }
+    prevPage.data.dynamicData[this.data.listIndex].value=brandname;
+    prevPage.data.obj.fieldGuideName=brandname;
+    prevPage.data.obj.fieldGuideId=id;
+    console.log(prevPage.data.obj)
+    wx.navigateBack({
+      delta: 1
     })
   },
 
@@ -292,12 +211,20 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    this.reset();
+    this.getData();
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    if(this.data.loadprompt == false){
+      this.setData({limitprame:++this.data.pid})
+      this.getData();
+    }else{
+      app.showToastC('暂无更多数据了',1500);
+    }
   },
 
   /**
@@ -305,11 +232,6 @@ Page({
    */
   onShareAppMessage: function () {
     
-  },
-  navigateBack(){
-    wx.navigateBack({
-      delta: 1
-    })  
   },
   comjumpwxnav(e){
     let type = e.currentTarget.dataset.type;

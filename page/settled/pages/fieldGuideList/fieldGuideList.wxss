@@ -1,0 +1,55 @@
+page{
+  padding-bottom: 150rpx;
+}
+.wrap{
+  padding: 0 15rpx;
+  box-sizing: border-box;
+}
+.fieldGuideWrap{
+  margin-top: 32rpx;
+}
+.fieldGuideWrap .title{
+  width: 224rpx;
+  height: 46rpx;
+  display: block;
+  background: #D98177;
+  border-radius: 8rpx;
+  text-align: center;
+  line-height: 46rpx;
+  color: #fff;
+  font-size: 28rpx;
+}
+.fieldGuideWrap .box{
+  border-radius: 8rpx;
+  background-image: linear-gradient(to top right, #FDA486, #7F2B52);
+  padding:15rpx 24rpx;
+  box-sizing: border-box;
+}
+.typeName{
+  display: block;
+  color: #fff;
+  font-size: 28rpx;
+}
+.brandName{
+  display: block;
+  color: #fff;
+  font-size: 32rpx;
+}
+.fieldGuidePicWrap{
+  width: 100%;
+  /* height: 180rpx; */
+  margin: 20rpx 0;
+}
+.fieldGuidePicWrap scroll-view{
+  width: 100%;
+  white-space:nowrap;
+}
+.fieldGuidePicWrap image{
+  width: 180rpx;
+  height: auto;
+  margin-right: 20rpx;
+  display: block;
+}
+.fieldGuidePicWrap image:last-child{
+  margin-right: 0;
+}

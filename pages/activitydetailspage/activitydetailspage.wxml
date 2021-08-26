@@ -91,26 +91,7 @@
       <swiper-item>
         <view class="slide-image">
           <image src="{{commoddata.cover}}" mode="aspectFill" data-index='{{index}}' bindtap='previewImg' bindload="imageLoadmon" style='width:100%;height:386rpx;'></image>
-          <!-- <view class='slide-image-box'>
-            <block wx:if='{{fragmentTotalNumber==4}}'>
-              <view class='sibeve' wx:for='{{[1,2,3,4]}}' wx:key='key'>
-                <image class='sibeveimg' wx:if='{{item<=totalPatch}}' src='https://www.51chaidan.com/images/turntable/red_check_mark.png'></image>
-                <view class='sibevebg' wx:else></view>
-              </view>
-            </block>
-            <block wx:if='{{fragmentTotalNumber==3}}'>
-              <view class='sibeve' wx:for='{{[1,2,3]}}' wx:key='key' style='height:386rpx;width:250rpx;'>
-                <image class='sibeveimg' wx:if='{{item<=totalPatch}}' src='https://www.51chaidan.com/images/turntable/red_check_mark.png'></image>
-                <view class='sibevebg' wx:else style='height:378rpx;width:240rpx;'></view>
-              </view>
-            </block>
-            <block wx:if='{{fragmentTotalNumber==2}}'>
-              <view class='sibeve' wx:for='{{[1,2]}}' wx:key='key' style='height:386rpx;'>
-                <image class='sibeveimg' wx:if='{{item<=totalPatch}}' src='https://www.51chaidan.com/images/turntable/red_check_mark.png'></image>
-                <view class='sibevebg' wx:else style='height:378rpx;'></view>
-              </view>
-            </block>
-          </view> -->
+         
         </view>
       </swiper-item>
       <block wx:for="{{movies}}" wx:key="key">
@@ -160,27 +141,7 @@
     </view> 
   </view>
 
-  <!-- 碎片 -->
-  <!-- <view style="width:100%;background:white;overflow:hidden;margin:10rpx 0;" wx:if='{{!isGainPatchBySelf}}'>
-    <view style="width:100%;margin:20rpx 0;">
-      <view style="width:100%;font-size:25rpx;line-height:30rpx;text-align:center;margin:5rpx 0;">送你4张万能碎片，跟好友互赠100%获得缺失碎片</view>
-      <view style="width:100%;height:100rpx;margin:10rpx 0;text-align:center;padding-top:10rpx;">
-        <view wx:for='{{patchReceive}}' wx:key='key' style='border:6rpx solid #FF9800;height:85rpx;border-radius:10rpx;margin:0 15rpx;display:inline-block;position:relative;width:50rpx;'>
-          <image class='fragmentkey' src='https://www.51chaidan.com/images/turntable/drawKey.png'></image>
-          <image class='fragmentuser' src='{{item.src}}'></image>
-        </view>
-      </view>
-      <view style="width:80%;height:80rpx;margin:30rpx 10%;">
-        <view style="width:40%;font-size:25rpx;float:left;margin-top:10rpx;">
-          <view style="color:#8abe39;">已点亮碎片×{{totalPatch}}</view>
-          <view style="color:#FE666B;">还需要碎片×{{fragmentTotalNumber-totalPatch}}</view>
-        </view>
-        <view style="width:60%;background:#8abe39;color:white;line-height:80rpx;border-radius:5rpx;float:right;text-align:center;position:relative;font-size:26rpx;">
-          <button style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;' data-form='2' open-type="share"></button>好友互赠,全部点亮报名成功</view>
-      </view>
-    </view>
 
-  </view> -->
   <!-- wx:if='{{isGainPatchBySelf}}' -->
   <view class='actDetailSignUp' style='{{!videoOpportunity?"margin-top:10rpx;":""}}'>
     <view class="actDetailPShare boxShadowEve" wx:if='{{isShareFun}}'>分享免单<button open-type="share" style='z-index:3;position: absolute;left: 0;top: 0;width: 100%; height: 100%;opacity: 0;' type="default" size="mini"></button></view>
@@ -306,11 +267,7 @@
         <view class='dopTabDeta doptrpdcom' style='border-left:0;{{tabdopnum==2?"background:#919191;color:#fff;":""}}' data-tabdopnum='2' catchtap='tabdopnum'>
           商品详情
         </view>
-        <!-- <view class='dopPosRight' catchtap='jumppicture'>
-            <view style='height:50rpx;line-height:50rpx;text-align:right;font-size:24rpx;color:#919191;'>
-              <image src='../images/explain.png' class='explainDpop'></image>说明
-            </view>
-        </view> -->
+
       </view>
       <!-- 奖品介绍 -->
       <view class='dopPrizeBox' wx:if='{{tabdopnum==1}}'>
@@ -439,24 +396,7 @@
         </view>
 
         <view style='width:100%;height:10rpx;background:#f4f5f9;' wx:if='{{listBlindBox.length!=0}}'></view>
-        <!-- 在线抽盒机 -->
-        <!-- <view class='actrecact' wx:if='{{listBlindBox.length!=0}}'>
-          <view class='dopTab'>
-            <view class='dopright' catchtap='bblistfun'>全部></view>
-            <view style='width:100%;color:#333;font-size:26rpx;height:73rpx;line-height:73rpx;text-align:center;'>在线抽盒机</view>
-          </view>
-          <view class='actrecactcont' wx:if='{{listBlindBox.length!=0}}' style='height:217rpx;'>
-            <scroll-view scroll-x="true" class="scractrecactcont" scroll-with-animation="true">
-              <view class='scractrecacteve' wx:for='{{listBlindBox}}' wx:key='key' catchtap='bbevebox' data-gid="{{item.id}}" style='height:217rpx;width:{{item.width||480}}rpx;'>
-                <image class='actrecimg' src='{{item.cover}}' bindload="imageLoadad" data-indexnum='1' data-num='{{index}}' style='width:{{item.width||480}}rpx;height:177rpx;'></image>
-                <view class='bctitle specialellipsis' style='font-size:26rpx;padding:0;width:100%;height:36rpx;text-align:center;'>
-                  {{item.name}}
-                </view>
-              </view> 
-            </scroll-view>
-          </view>
-        </view> -->
-
+      
         <somke colortitle='#000'></somke>
 
         <view style='width:100%;height:10rpx;background:#f4f5f9;' wx:if='{{listShowBox.length!=0}}'></view>
@@ -1421,23 +1361,6 @@
   </view>
 </view>
 
-<!-- 透视卡 -->
-<!-- <view class='awatip' wx:if='{{perspcardiftrmax}}' style='z-index:999;'>
-  <view class='awabg' catchtap='perspcarfun'></view>
-  <view class='perspcard'>
-    <image src='http://www.51chaidan.com/images/icon/alertTempXRay.jpg' style='display:block;width:100%;height:100%;border-radius:30rpx;'></image>
-    <text class='perspcardtxt' catchtap='bblistfun'>立即使用\n(当日有效)</text>
-  </view>
-</view> -->
-
-<!-- 透视卡 小悬浮 -->
-<!-- <view wx:if='{{perspcardiftrmin}}' catchtap='bblistfun' style='width:110rpx;height:170rpx;position:fixed;right:20rpx;bottom:260rpx;z-index:9;'>
-  <image src='http://www.51chaidan.com/images/icon/iconTempXRay.jpg' style='width:110rpx;height:110rpx;display:block;border-radius:50%;'></image>
-  <view style="width:110rpx;height:54rpx;font-size:22rpx;color:#ffffff;position:relative;">
-    <view style="width:110rpx;height:54rpx;background:#cb6a15;opacity:0.8;border-radius:10rpx;"></view>
-    <text style='display:block;text-align:center;width:110rpx;height:54rpx;line-height:27rpx;position:absolute;left:0;top:0rpx;'>点击使用\n{{percountdown}}</text>
-  </view>
-</view> -->
 
 
 <!-- 领奖截图提示 -->
@@ -1450,71 +1373,6 @@
   </view>
 </view>
 
-<!-- ishowgetchip  -->
-<!-- <view wx:if='{{ishowgetchip}}' style="width:100%;height:100%;position:fixed;top:0;left:0;z-index:199999;">
-  <view class='awabg' catchtap='closegetchip' catchtouchmove="myCatchTouch"></view>
-
-  <view style="width:740rpx;position:absolute;left:0;top:{{statusBarHeightMc}}px;z-index:11;">
-    <somke colortitle='white'></somke>
-  </view>
-
-  <view style="width:100%;height:100%;position:absolute;left:0;top:{{statusBarHeightMc-20}}px;z-index:10;" catchtap='closegetchip' catchtouchmove="myCatchTouch">
-
-    <view style="width:600rpx;height:{{otherimgarr.length!=0?515:460}}rpx;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;z-index:9;background:white;border-radius:10rpx;" catchtouchmove="myCatchTouch" catchtap="myCatchTouch">
-      <view style="width:100%;font-size:30rpx;text-align:center;margin-top:20rpx;line-height:40rpx;height:40rpx;">{{isshowusertip}}</view>
-      <view class='isshowuserbox' wx:if='{{otherimgarr.length!=0}}'>
-        <image class='isshowuserbimg' wx:for='{{otherimgarr}}' wx:key='key' src='{{item.src}}'></image>
-      </view>
-      <view style='width:100%;position:relative;'>
-        <image src="{{commoddata.cover}}" style="width:500rpx;margin:20rpx 50rpx;border-radius:10rpx;height:267rpx;" mode="widthFix" />
-        <view style="width:500rpx;height:267rpx;position:absolute;top:20rpx;left:50rpx;">
-          <block wx:if='{{fragreturnCode==200}}'>
-            <block wx:if='{{fragmentTotalNumber==4}}'>
-              <view class='sibeve' wx:for='{{[1,2,3,4]}}' wx:key='key' style='height:133.5rpx;'>
-                <image class='sibeveimg' wx:if='{{item==totalPatch}}' src='https://www.51chaidan.com/images/turntable/red_check_mark.png'></image>
-                <view class='sibevebg' wx:else style='height:129rpx;'></view>
-              </view>
-            </block>
-            <block wx:if='{{fragmentTotalNumber==3}}'>
-              <view class='sibeve' wx:for='{{[1,2,3]}}' wx:key='key' style='height:267rpx;width:166rpx;'>
-                <image class='sibeveimg' wx:if='{{item==totalPatch}}' src='https://www.51chaidan.com/images/turntable/red_check_mark.png'></image>
-                <view class='sibevebg' wx:else style='height:257rpx;width:156rpx;'></view>
-              </view>
-            </block>
-            <block wx:if='{{fragmentTotalNumber==2}}'>
-              <view class='sibeve' wx:for='{{[1,2]}}' wx:key='key' style='height:267rpx;width:250rpx;'>
-                <image class='sibeveimg' wx:if='{{item==totalPatch}}' src='https://www.51chaidan.com/images/turntable/red_check_mark.png'></image>
-                <view class='sibevebg' wx:else style='height:257rpx;width:240rpx;'></view>
-              </view>
-            </block>
-          </block>
-          <block wx:else>
-            <block wx:if='{{fragmentTotalNumber==4}}'>
-              <view class='sibeve' wx:for='{{[1,2,3,4]}}' wx:key='key' style='height:133.5rpx;'>
-                <image class='sibeveimg' wx:if='{{item<=otherimgarr.length}}' src='https://www.51chaidan.com/images/turntable/red_check_mark.png'></image>
-                <view class='sibevebg' wx:else style='height:129rpx;'></view>
-              </view>
-            </block>
-            <block wx:if='{{fragmentTotalNumber==3}}'>
-              <view class='sibeve' wx:for='{{[1,2,3]}}' wx:key='key' style='height:267rpx;width:166rpx;'>
-                <image class='sibeveimg' wx:if='{{item<=otherimgarr.length}}' src='https://www.51chaidan.com/images/turntable/red_check_mark.png'></image>
-                <view class='sibevebg' wx:else style='height:257rpx;width:156rpx;'></view>
-              </view>
-            </block>
-            <block wx:if='{{fragmentTotalNumber==2}}'>
-              <view class='sibeve' wx:for='{{[1,2]}}' wx:key='key' style='height:267rpx;width:250rpx;'>
-                <image class='sibeveimg' wx:if='{{item<=otherimgarr.length}}' src='https://www.51chaidan.com/images/turntable/red_check_mark.png'></image>
-                <view class='sibevebg' wx:else style='height:257rpx;width:240rpx;'></view>
-              </view>
-            </block>
-          </block>
-        </view>
-      </view>
-      <view class='wowantfree' catchtap='closegetchip' catchtouchmove="myCatchTouch">我要免单</view>
-    </view>
-  </view>
-
-</view> -->
 
 <view class='newcoupon' wx:if='{{limsaveiftr}}'>
   <view class='swfback' catchtouchmove="preventD" catchtap='limsavefun'></view>

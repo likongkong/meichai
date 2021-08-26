@@ -117,7 +117,7 @@
 
 
     <!-- 选择发布/发售类型弹框-->
-    <!-- <view class="popMask" catchtouchmove="true" catchtap="toggleAddNewEventMask" wx:if="{{isAddNewEventMask}}">
+    <view class="popMask" catchtouchmove="true" catchtap="toggleAddNewEventMask" wx:if="{{isAddNewEventMask}}">
         <view class="addNewEventBox" catchtap="true">
             <text class="addNewEventTitle">选择发布/发售类型</text> 
             <view class="addNewEventContent">
@@ -132,9 +132,9 @@
             </view>
             <button catchtap="toggleAddNewEventMask">关闭</button>
         </view>
-    </view> -->
+    </view>
     <!-- 品牌入驻 -->
-    <!-- <block wx:if="{{brandSettledStatus!=0}}">
+    <block wx:if="{{brandSettledStatus!=0}}">
         <view wx:if="{{!dataInfo.brandSettledLimit}}" class="whwdddw settled">
             <block wx:if="{{brandSettledStatus == 5 || brandSettledStatus == 6}}">
                 <block wx:if="{{brandSettledStatus == 6}}">
@@ -169,7 +169,7 @@
                         </view>
                     </view>
                     <view class="brandManageMenu">
-                        <view class="brandManageItem">
+                        <view class="brandManageItem" data-type="9038" catchtap="comjumpwxnav">
                             <view>
                                 <image src='https://cdn.51chaidan.com/images/brandSettledIcon/orderIcon/order.png' mode="widthFix"></image>
                                 <text>订单管理</text>
@@ -222,7 +222,7 @@
             </block>
         </view>
     </block>
-     -->
+    
 
     <view class='whwdddw' bindtap='jumpowntoy'>
         <view class='whwddd'>

@@ -42,6 +42,7 @@
                 <view class="userBox" catchtap="jumpexhdetail" data-id='{{w.brand.brandId}}'>
                     <view class="atlasIwantEbImgBox">
                         <image class="atlasIwantEbImg" src='{{w.brand.brandLogo}}' mode='aspectFit'></image>
+                        <image class='dlfchrtopimgipList' wx:if='{{w.brand.isAuth}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/approveIcon.png'></image>
                     </view>
                     <view class="userBoxName specialellipsis">{{w.brand.brandName}}</view>
                     <image class="whwddimgtit" src="../../../../pages/images/icon_in.png"></image>

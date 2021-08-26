@@ -14,6 +14,8 @@
                               <block wx:for='{{visitHistory}}' wx:key='key'>
                                   <view class="ocamensweve" catchtap="jumpsouchtem" data-id='{{item.brandId}}' wx:if='{{item.brandId!=0}}'>
                                       <image class="ocamensweveimg" mode='aspectFit' style="{{item.brandId==brand_id?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{item.brandLogo}}"></image>
+                                      <image class='dlfchrtopimgipNew' wx:if='{{item.isNewBrand}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/newIcon.png'></image>
+                                      <image class='dlfchrtopimgip' wx:if='{{item.isAuth}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/approveIcon.png'></image>
                                       <view class="ocamenswevename specialellipsis" style="{{item.brandId==brand_id?'color:#f19207;':''}}">{{item.brandName}}</view>
                                   </view>                      
                               </block>
@@ -36,6 +38,9 @@
                               <block wx:for='{{recommendIps}}' wx:key='key'>
                                   <view class="ocamensweve" catchtap="jumpsouchtem" data-id='{{item.brandId}}'>
                                       <image class="ocamensweveimg" mode='aspectFit' style="{{item.brandId==brand_id?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{item.brandLogo}}"></image>
+                                      <!-- wx:if='{{item.is_authentication==1}}' -->
+                                      <image class='dlfchrtopimgipNew' wx:if='{{item.isNewBrand}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/newIcon.png'></image>
+                                      <image class='dlfchrtopimgip' wx:if='{{item.isAuth}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/approveIcon.png'></image>
                                       <view class="ocamenswevename specialellipsis" style="{{item.brandId==brand_id?'color:#f19207;':''}}">{{item.brandName}}</view>
                                   </view>                      
                               </block>
@@ -63,7 +68,7 @@
             </swiper-item>
           </block>
         </swiper>
-        <view class="occoneterText" catchtap="jumpoffering" data-id="{{item.id}}" data-type='9034'><text>发售\n日历</text></view>
+        <view class="occoneterText" catchtap="jumpoffering" data-id="{{item.id}}" data-type='9037'><text>发售\n日历</text></view>
     </view>
 
     <!-- tab标签切换 -->
@@ -84,6 +89,9 @@
             <view class="emlhead">
                 <view class="emlhleft" data-id='{{item.brandInfo.brand_id}}' catchtap="jumpexhdetail">
                     <image class='emlhlimg' src="{{item.brandInfo.brand_logo}}" mode='aspectFit'></image>
+
+                    <image class='dlfchrtopimgipList' wx:if='{{item.brandInfo.isAuth}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/approveIcon.png'></image>
+
                     <view class="emlhltxt">
                           <view class="emlhlttop specialellipsis">{{item.brandInfo.brand_name}}</view>
                           <view class="emlhltbottom specialellipsis">{{item.add_time}}
@@ -129,7 +137,8 @@
             </view>
             
             <view class="multilineellipsisFive" style="margin:20rpx;font-size:26rpx;" wx:if='{{item.title && (item.type==1 || item.type==2)}}' catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}'><text>{{item.title}}</text></view>
-            <view style="overflow:hidden;padding:20rpx;font-size:24rpx;display:flex;display:flex;justify-content:space-between;">
+
+            <view style="overflow:hidden;padding:20rpx;font-size:24rpx;display:flex;display:flex;justify-content:space-between;" wx:if='{{item.type==1 || item.type==2}}'>
                 <!-- 秒杀 -->
                 <block wx:if='{{item.type==1}}'> 
                     <view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
@@ -175,7 +184,7 @@
         </view> 
         <!--  暂无数据  -->
         <view class='goodstobereceived' wx:if='{{communityList.length==0&&nodataiftr}}'>
-          <view class='nodata' style='height:900rpx;width:100%;position:relative;'>
+          <view class='nodata' style='height:700rpx;width:100%;position:relative;'>
             <image src='../../../../pages/images/nodata.png' class='nodataimg' style='width:280rpx;height:300rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;'></image>
           </view>
         </view>        
@@ -250,13 +259,15 @@
               <view style='width:40rpx;height:40rpx;border-radius:50%;float:left;margin:8rpx 8rpx 0 8rpx;position: relative;'  data-id='{{item.brandInfo.brand_id}}' catchtap="jumpexhdetail">
                 <image src='{{item.brandInfo.brand_logo}}' style="width:100%;height:100%;border-radius:50%;"></image>
                 <view wx:if="{{item.isVip}}" class='vipBG'><image src='https://cdn.51chaidan.com/images/calendar/VipCase.png' style='position: relative;'></image></view>
+
+                <image class='dlfchrtopimgipListp' wx:if='{{item.brandInfo.isAuth}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/approveIcon.png'></image>
               </view>
               <view class='dlfhpbtxt specialellipsis' data-id='{{item.brandInfo.brand_id}}' catchtap="jumpexhdetail">{{item.brandInfo.brand_name}}
                 <image wx:if='{{item.is_authentication==1}}' class='dlfchrtopimgnew' src='https://clw.51chaidan.com/images/goods/authentication1.png'></image>
               </view>
               <view class="specialellipsis dlevegttu">
-                {{item.is_like>0?item.is_like:''}}
-                <image style="float:right;margin-top:6rpx;" class='dlfcbeveimgnewone' data-lid='{{item.id}}' data-is_like='{{item.is_like}}' catchtap='ispraisefun' data-ind='{{index}}' src='{{item.is_like?"https://www.51chaidan.com/images/brand/red_heart.png":"https://www.51chaidan.com/images/brand/black_heart.png"}}'></image>
+                {{item.like_number>0?item.like_number:''}}
+                <image style="float:right;margin-top:6rpx;" class='dlfcbeveimgnewone'data-type='{{item.type}}' data-ind='{{index}}' catchtap='followfun' data-id='{{item.id}}' src='{{item.is_like?"https://www.51chaidan.com/images/brand/red_heart.png":"https://www.51chaidan.com/images/brand/black_heart.png"}}'></image>
               </view>
             </view>
           </view>
@@ -325,13 +336,14 @@
               <view style='width:40rpx;height:40rpx;border-radius:50%;float:left;margin:8rpx 8rpx 0 8rpx;position: relative;'  data-id='{{item.brandInfo.brand_id}}' catchtap="jumpexhdetail">
                 <image src='{{item.brandInfo.brand_logo}}' style="width:100%;height:100%;border-radius:50%;"></image>
                 <view wx:if="{{item.isVip}}" class='vipBG'><image src='https://cdn.51chaidan.com/images/calendar/VipCase.png' style='position: relative;'></image></view>
+                <image class='dlfchrtopimgipListp' wx:if='{{item.brandInfo.isAuth}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/approveIcon.png'></image>
               </view>
               <view class='dlfhpbtxt specialellipsis' data-id='{{item.brandInfo.brand_id}}' catchtap="jumpexhdetail">{{item.brandInfo.brand_name}}
                 <image wx:if='{{item.is_authentication==1}}' class='dlfchrtopimgnew' src='https://clw.51chaidan.com/images/goods/authentication1.png'></image>
               </view>
               <view class="specialellipsis dlevegttu">
-                {{item.is_like>0?item.is_like:''}}
-                <image style="float:right;margin-top:6rpx;" class='dlfcbeveimgnewone' data-lid='{{item.id}}' data-is_like='{{item.is_like}}' catchtap='ispraisefun' data-ind='{{index}}' src='{{item.is_like?"https://www.51chaidan.com/images/brand/red_heart.png":"https://www.51chaidan.com/images/brand/black_heart.png"}}'></image>
+                {{item.like_number>0?item.like_number:''}}
+                <image style="float:right;margin-top:6rpx;" class='dlfcbeveimgnewone'data-type='{{item.type}}' data-ind='{{index}}' catchtap='followfun' data-id='{{item.id}}' src='{{item.is_like?"https://www.51chaidan.com/images/brand/red_heart.png":"https://www.51chaidan.com/images/brand/black_heart.png"}}'></image>
               </view>
             </view>
           </view>
@@ -375,6 +387,8 @@
           <view class="dlfindIpEveBox">
               <view class="ocamensweve" wx:for='{{item.listBrand}}' wx:key='key' wx:for-item='w' catchtap="jumpsouchtem" data-id='{{w.brandId}}'>
                   <image class="ocamensweveimg" style="{{w.brandId==brand_id?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{w.brandLogo}}"></image>
+                  <image class='dlfchrtopimgipNew' wx:if='{{w.isNewBrand}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/newIcon.png'></image>
+                  <image class='dlfchrtopimgip' wx:if='{{w.isAuth}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/approveIcon.png'></image>
                   <view class="ocamenswevename specialellipsis" style="{{w.brandId==brand_id?'color:#f19207;':''}}">{{w.brandName}}</view>
               </view>  
           </view>

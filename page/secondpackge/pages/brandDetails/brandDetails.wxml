@@ -12,7 +12,10 @@
 					 <view class="exhibdeimgBRTop specialellipsis">
 								<block wx:if='{{brandinfo.boothNumber}}'><text style="color:#31b3fb;">展位:{{brandinfo.boothNumber}}</text> | </block>{{brandinfo.brandName}}
 								<image class="questionMark" wx:if='{{brandinfo.isAuth}}' style="width:100rpx;" src="https://cdn.51chaidan.com/images/brandSettledIcon/AuthenticationOk.png" mode="aspectFit"></image>
-								<view class="emlhright" data-type='0' data-id='{{brandinfo.id}}' wx:if='{{!brandinfo.isAttention}}' catchtap='followfun'>关注</view>
+								<view class="{{!brandinfo.isAttention?'emlhright':'emlhrightNo'}}" data-type='0' data-id='{{brandinfo.id}}'  catchtap='followfun'>
+										<block wx:if='{{!brandinfo.isAttention}}'>关注</block>
+										<block wx:else>已关注</block>
+								</view>
 					</view>
 					 <view class="exhibdeimgBRTop" wx:if='{{brandinfo.integral>0}}' style="color:#999495;">我的积分：{{brandinfo.integral}} <image class="questionMark" src="https://cdn.51chaidan.com/images/brandSettledIcon/wenhao.png" mode="aspectFit"></image></view>
 				</view>
@@ -128,7 +131,7 @@
 
 						
 
-            <view style="overflow:hidden;padding:20rpx;font-size:24rpx;display:flex;display:flex;justify-content:space-between;">
+            <view class="barndStatus" wx:if='{{item.type==1 || item.type==2}}'>
                 <!-- 秒杀 -->
                 <block wx:if='{{item.type==1}}'> 
                     <view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
@@ -178,7 +181,7 @@
             <image src='../../../../pages/images/nodata.png' class='nodataimg' style='width:280rpx;height:300rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;'></image>
           </view>
         </view>        
-        <view style="width:100%;height:110rpx;"></view>
+
 
     </block>
     <!-- 瀑布流 -->
@@ -358,13 +361,13 @@
 			</view> 
 	</view>
 
-	<view style="width:100%;height:210rpx;position:fixed;left:0;bottom:0;" wx:if='{{settlement==1}}'>
+	<!-- <view style="width:100%;height:210rpx;position:fixed;left:0;bottom:0;" wx:if='{{settlement==1}}'>
 		<swiper current="{{currentIndex}}" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450" style="height:100%;width:100%;height:100%;">
 			<swiper-item wx:for="{{adList}}" wx:key="key">
 				<image src="{{item.src}}" style="width:100%;height:100%;border-radius:20rpx;display:block;" catchtap="exhibitionpubjump" data-id='{{item.activity_id}}' data-type='{{item.href_type}}' mode='aspectFit'></image>
 			</swiper-item>
 		</swiper>
-	</view>
+	</view> -->
 
 </view>
 
