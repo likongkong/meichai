@@ -51,8 +51,8 @@
           "scene": null
         },
         {
-          "name": "展会vip激活",
-          "pathName": "page/secondpackge/pages/luckyDraw/luckyDraw",
+          "name": "动态详情",
+          "pathName": "page/settled/pages/dynamicDetails/dynamicDetails",
           "query": "",
           "scene": null
         },

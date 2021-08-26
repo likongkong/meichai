@@ -1,0 +1,22 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class="atlas">
+    <swiper class="atlasswiper" indicator-color="#fff" indicator-active-color="#ccc" indicator-dots="{{true}}" circular="true" autoplay="true" interval="4000" duration="450">
+        <swiper-item wx:for="{{dataDetail.imgArr}}" wx:key="key">
+                <image class="atlasswiperimage" src='{{item}}' style="height:100%;width:100%;display:block;" data-index='{{index}}' bindtap='previewImg' mode='aspectFit'></image>
+        </swiper-item>
+    </swiper> 
+
+    <view class="emlhead">
+        <view class="emlhleft">
+            <image class='emlhlimg' src="http://wx4.sinaimg.cn/mw690/007VyV1kly1ge2op2sth0j32qu29d4qq.jpg" mode='aspectFit'></image>
+            <view class="emlhltxt">
+                    <view class="emlhlttop specialellipsis">MapleLab枫糖工作室</view>
+                    <view class="emlhltbottom specialellipsis">123456<text style="margin-left:20rpx;">123456</text></view>
+            </view>
+        </view>
+        <view class="emlhright" catchtap='followfun'>关注</view>
+    </view>   
+      
+</view>

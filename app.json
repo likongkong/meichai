@@ -164,6 +164,7 @@
         "pages/myWallet/myWallet",
         "pages/atlas/atlas",
         "pages/incomingsOutgoingsDetail/incomingsOutgoingsDetail",
+        "pages/dynamicDetails/dynamicDetails",
         "pages/releaseDynamic/releaseDynamic",
         "pages/releaseFieldGuide/releaseFieldGuide",
         "pages/offeringCalendar/offeringCalendar",

@@ -1894,3 +1894,4 @@ App({
 // atlas 图鉴
 // orderManagement 订单管理
 // businessOrderDetails  订单详情
+// dynamicDetails 动态详情
