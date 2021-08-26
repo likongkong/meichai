@@ -89,7 +89,9 @@ Page({
     _this.data.loginid = app.signindata.loginid;
     _this.data.uid = app.signindata.uid;
     _this.data.orderid = options.orderid,
-    _this.data.drying_id = options.did || 0
+    _this.setData({
+      drying_id:options.did || 0
+    })
     // 判断是否登录
     if (_this.data.loginid != '' && _this.data.uid != '') {
       _this.onLoadfun();
