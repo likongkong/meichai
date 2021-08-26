@@ -54,7 +54,7 @@ page{
   width: 180rpx;
   height: auto;
   margin-right: 20rpx;
-  display: block;
+  /* display: block; */
 }
 .fieldGuidePicWrap image:last-child{
   margin-right: 0;

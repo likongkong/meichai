@@ -1,4 +1,5 @@
 var Dec = require('../../common/public.js');//aes加密解密js
+var api = require("../../utils/api.js");
 const app = getApp();
 Page({
   /**
@@ -328,6 +329,17 @@ Page({
         wx.hideLoading();
         if (res.data.Message != "Empty info") {
           if (res.data.ReturnCode == 200){
+            // 获取钱包余额
+            if(!res.data.Info.brandSettledLimit){
+              api.getLumpsumAndWithdraw({}).then((res) => {
+                console.log('withdrawInfo',res)
+                _this.setData({
+                  withdrawInfo:res.data.data
+                })
+              }).catch((err)=>{
+                console.log(err)
+              })
+            }
             _this.setData({
               dataInfo: res.data.Info,
               brandSettledStatus: res.data.Info.brandSettledInfo.brandSettledStatus,
@@ -416,7 +428,9 @@ Page({
     wx.hideLoading()    
     _this.setData({ B: true, iftr_wx: true });  
     _this.listdata()
-
+    if(!wx.getStorageSync('access_token')){
+      app.getAccessToken(_this.getData)
+    }
     if(this.data.defaultinformation){}else{
       app.defaultinfofun(this);
     };

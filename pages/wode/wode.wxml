@@ -148,15 +148,15 @@
                         <view>
                             <view class="assetL">
                                 <view>
-                                    <text>￥{{dataInfo.brandSettledInfo.remaining}}</text>
+                                    <text>￥{{withdrawInfo.lumpSum}}</text>
                                     <text>余额</text>
                                 </view>
                                 <view>
-                                    <text>{{dataInfo.brandSettledInfo.gold}}</text>
+                                    <text>{{withdrawInfo.gold}}</text>
                                     <text>金币</text>
                                 </view>
                                 <view>
-                                    <text>{{dataInfo.brandSettledInfo.silver}}</text>
+                                    <text>{{withdrawInfo.silver}}</text>
                                     <text>银币</text>
                                 </view>
                             </view>
