@@ -209,6 +209,7 @@ Page({
   },
   // 发布
   submitAudit(){
+    let that = this;
     let obj = this.data.obj;
     if(!obj.fieldGuideTitle || obj.fieldGuideTitle == ''){
       this.selectComponent('#settledForm1').scrollto('fieldGuideTitle');
@@ -246,7 +247,10 @@ Page({
         wx.hideLoading()
         wx.stopPullDownRefresh();
         if(res.data.ReturnCode == 200){
-          app.showToastC('发布成功',2000);
+          app.showToastC('发布成功',1500);
+          setTimeout(function(){
+            that.navigateBack();
+          },1000)
         }else{
           app.showToastC(res.data.Msg,2000);
         }

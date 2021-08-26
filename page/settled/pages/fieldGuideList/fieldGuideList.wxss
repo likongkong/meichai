@@ -1,6 +1,12 @@
 page{
   padding-bottom: 150rpx;
 }
+.nodatatu{
+  width: 50%;
+  height: auto;
+  margin: 300rpx auto;
+  display: block;
+}
 .wrap{
   padding: 0 15rpx;
   box-sizing: border-box;

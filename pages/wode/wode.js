@@ -109,11 +109,11 @@ Page({
     let type = e.currentTarget.dataset.type;
     let num = e.currentTarget.dataset.num;
     let whref = e.currentTarget.dataset.whref;
-    if(num == 1){
-      app.comjumpwxnav('9029',whref)
-    }else{
+    // if(num == 1){
+    //   app.comjumpwxnav('9029',whref)
+    // }else{
       app.comjumpwxnav(type,whref)
-    }
+    // }
   },
   jumpVipPrivilegePage(){
     wx.navigateTo({  
@@ -474,7 +474,7 @@ Page({
     });
   },
   onShow: function () {   
-    wx.showLoading({ title: '加载中...', mask:true  }) 
+    // wx.showLoading({ title: '加载中...', mask:true  }) 
     // 判断是否授权 
     var _this = this;
     if(app.signindata.sceneValue==1154){
