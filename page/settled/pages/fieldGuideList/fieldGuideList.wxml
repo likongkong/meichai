@@ -11,7 +11,7 @@
           <view class="fieldGuidePicWrap">
             <scroll-view scroll-x>  
               <block wx:for="{{item.imgArr}}" wx:key='key' wx:for-item="sonItem">
-                <image src="{{sonItem}}" mode="widthFix"></image>
+                <image src="{{sonItem}}" mode="aspectFill"></image>
               </block>
             </scroll-view>
           </view>
@@ -20,7 +20,7 @@
       </view>
     </block>
   </block>
-  <block wx:else>
+  <block wx:if="{{noData}}">
     <image class="nodatatu" src="../../../../pages/images/recaddnodata.png" mode="widthFix"></image>
   </block>
 </view> 
