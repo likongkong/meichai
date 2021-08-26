@@ -3,11 +3,11 @@
 
 
 <view style='width:100%;overflow:hidden;'>
-  <image src="{{banner[0].src}}" mode='widthFix' class="brandSwiperImgNew"></image>
+  <image src="{{banner[0].src}}?imageMogr2/crop/750x750/gravity/cente" mode='widthFix' class="brandSwiperImgNew"></image>
 
 	<view style="padding:0 20rpx 0 20rpx;position:relative;">
 		<view class="exhibdeimgBox">
-				<image class="exhibdeimgNewNew" src="{{brandinfo.logo}}" mode="aspectFit"></image>
+				<image class="exhibdeimgNewNew" src="{{brandinfo.logo}}" mode="aspectFill"></image>
 				<view class="exhibdeimgBRight">
 					 <view class="exhibdeimgBRTop specialellipsis">
 								<block wx:if='{{brandinfo.boothNumber}}'><text style="color:#31b3fb;">展位:{{brandinfo.boothNumber}}</text> | </block>{{brandinfo.brandName}}

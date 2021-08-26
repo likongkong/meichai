@@ -135,7 +135,7 @@
                         <view>平台实际退款金额：{{payInfoData.order.percentage}}</view>
                     </view>
                     <view class="orderMangTipCenterEve">
-                        <view>该订单已分账，需要您支付分账金额￥{{payInfoData.order.percentage}}。支付完成之后代表同意退款。</view>
+                        <view>该订单已分账，需要您支付分账金额￥{{payInfoData.order.profitAmount}}。支付完成之后代表同意退款。</view>
                     </view>
 
                 </view>                
@@ -207,7 +207,7 @@
             </block>
             <block wx:else>
                 <view class="oAMaBConfirm" catchtap="closeCommonTip">取消</view>
-                <view class="oAMaBCancel" catchtap="confirmCommonTip" wx:if='{{logisticsRefundModify == 2 && subLedger==1}}'>立即支付￥{{payInfoData.order.percentage}}</view> 
+                <view class="oAMaBCancel" catchtap="confirmCommonTip" wx:if='{{logisticsRefundModify == 2 && subLedger==1}}'>立即支付￥{{payInfoData.order.profitAmount}}</view> 
                 <view class="oAMaBCancel" catchtap="confirmCommonTip" wx:elif='{{logisticsRefundModify == 2 && subLedger==2}}'>立即退款</view> 
                 <view class="oAMaBCancel" catchtap="confirmCommonTip" wx:else>确定</view>               
             </block>
