@@ -26,6 +26,9 @@ Page({
       var item_type = 9003;
     }else if(type == 3){
       var item_type = 9017
+    }else if(type == 4){
+      var item_type = 9028;
+      id = 'id='+id
     }
     app.comjumpwxnav(item_type, id, '', '')
 
@@ -87,7 +90,9 @@ Page({
     _this.data.loginid = app.signindata.loginid;
     _this.data.uid = app.signindata.uid;
     _this.data.orderid = options.orderid,
-    _this.data.illustrated_id = options.iid || 0
+    _this.setData({
+      illustrated_id : options.iid || 0
+    });
     // 判断是否登录
     if (_this.data.loginid != '' && _this.data.uid != '') {
       _this.onLoadfun();
@@ -251,5 +256,4 @@ Page({
       success: function (res) {}
     }    
   },
-
 })

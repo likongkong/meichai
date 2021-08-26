@@ -312,7 +312,7 @@ page {
   display: block;
 }
 .barndStatus{
-  overflow:hidden;padding:20rpx;font-size:24rpx;display:flex;display:flex;justify-content:space-between;
+  overflow:hidden;padding:0 20rpx 0;font-size:24rpx;display:flex;display:flex;justify-content:space-between;
 }
 
 .emlist{

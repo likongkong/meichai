@@ -81,7 +81,7 @@
                        <block wx:else>添加物流</block>
                     </view>
                    <view class="orderBottomButton" wx:if='{{order.payStatus!=7 && order.payTime>0}}' catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='2'>退款</view>
-                   <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='1'>修改收货地址</view>
+                   <view class="orderBottomButton" wx:if='{{}}' catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='1'>修改收货地址</view>
                </view>
        </view>
    </view>

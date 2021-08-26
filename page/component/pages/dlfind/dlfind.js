@@ -574,8 +574,14 @@ Page({
         console.log('新品牌信息=====',res)
         if (res.data.ReturnCode == 200) {
           if(type == 0){
+            communityList.forEach(element => {
+                if(element.brandInfo.brand_id == id){
+                  element.is_attention = true;
+                }
+            });
             _this.setData({
-              ['communityList['+ind+'].is_attention']:true
+              // ['communityList['+ind+'].is_attention']:true
+              communityList:communityList
             }); 
           }else{
             

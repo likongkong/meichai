@@ -71,3 +71,9 @@
 
     </view>   
 </view>
+
+<!-- 编辑 -->
+<view class="editButtom" wx:if='{{dataDetail.isOneselfBrand}}' catchtap="jumpdetail" data-type='4' data-id='{{illustrated_id}}'>
+    <image mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/compile.png'></image>
+    <view>编辑</view>
+</view>
