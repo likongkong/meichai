@@ -262,6 +262,9 @@ Page({
         console.log('提交审核====',res)
         wx.hideLoading()
         if(res.data.ReturnCode == 200){
+          let pages = getCurrentPages();    //获取当前页面信息栈
+          let prevPage = pages[pages.length-2];
+          prevPage.onLoadfun();
           wx.showModal({
             title: '提交成功',
             content: '恭喜您，您的IP信息已经展示在发现广场内，您可以通过小程序内的管理后台创建活动，发布商品啦，还有更多活动补贴等你来拿。',

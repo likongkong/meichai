@@ -110,6 +110,9 @@ Page({
     let type = e.currentTarget.dataset.type;
     let num = e.currentTarget.dataset.num;
     let whref = e.currentTarget.dataset.whref;
+    this.setData({
+      isAddNewEventMask:false
+    })
     // if(num == 1){
     //   app.comjumpwxnav('9029',whref)
     // }else{

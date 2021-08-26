@@ -269,7 +269,14 @@ Page({
         wx.hideLoading()
         wx.stopPullDownRefresh();
         if(res.data.ReturnCode == 200){
-          app.showToastC('发布成功',1500);
+          if(this.data.id!=0){
+            app.showToastC('修改成功',1500);
+            let pages = getCurrentPages();    //获取当前页面信息栈
+            let prevPage = pages[pages.length-2];
+            prevPage.getData();
+          }else{
+            app.showToastC('发布成功',1500);
+          }
           setTimeout(function(){
             that.navigateBack();
           },1000)
