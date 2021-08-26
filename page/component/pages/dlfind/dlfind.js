@@ -1075,6 +1075,12 @@ Page({
       type = 9036;
     }
     app.comjumpwxnav(type,id,'','')
-  } 
+  },
+  toggleAddNewEventMask(){
+    this.setData({
+      isAddNewEventMask: !this.data.isAddNewEventMask
+    })
+  },
+  
 
 })

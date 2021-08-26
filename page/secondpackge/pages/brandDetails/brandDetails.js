@@ -54,7 +54,11 @@ Page({
     wOri:1 , // 1 瀑布流 2 信息流
 
   },
-
+  toggleAddNewEventMask(){
+    this.setData({
+      isAddNewEventMask: !this.data.isAddNewEventMask
+    })
+  },
   // 瀑布流信息流切换
   wOriTab(){
     this.setData({

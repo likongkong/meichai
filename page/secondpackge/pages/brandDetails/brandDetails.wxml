@@ -81,7 +81,10 @@
         <view class="emlist" wx:for='{{communityList}}' wx:key='key'>
             <view class="emlhead">
                 <view class="emlhleft">
-                    <image class='emlhlimg' src="{{item.brandInfo.brand_logo}}" mode='aspectFit'></image>
+										<image class='emlhlimg' src="{{item.brandInfo.brand_logo}}" mode='aspectFit'></image>
+
+										<image class='dlfchrtopimgipList' wx:if='{{item.brandInfo.isAuth}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/approveIcon.png'></image>
+
                     <view class="emlhltxt">
                           <view class="emlhlttop specialellipsis">{{item.brandInfo.brand_name}}</view>
                           <view class="emlhltbottom specialellipsis">{{item.add_time}}
@@ -136,14 +139,14 @@
                 <block wx:if='{{item.type==1}}'> 
                     <view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
                     <view class='dlfhtitlenew' style="color:#178FF8;" wx:if='{{item.status==1}}'>{{item.start_time}}发售</view>
-                    <view class='dlfhtitlenew' style="color:#999495;" wx:elif='{{item.status==2}}'>已售：{{item.sellNumber}}体</view>
+                    <view class='dlfhtitlenew' style="color:#999495;" wx:elif='{{item.status==2&&item.sellNumber>0}}'>已售：{{item.sellNumber}}体</view>
                     <view class='dlfhtitlenew' style="color:#999495;" wx:elif='{{item.status==3}}'>已结束</view>
                 </block>
                 <!-- 抽选 -->
                 <block wx:elif='{{item.type==2}}'>
                     <view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}<text style="color:#000;">抽选价</text></view>
                     <view class='dlfhtitlenew' style="color:#178FF8;" wx:if='{{item.status==1}}'>{{item.start_time}}抽选</view>
-                    <view class='dlfhtitlenew' style="color:#4CC148;" wx:elif='{{item.status==2}}'>{{item.sellNumber}}人参加</view>
+                    <view class='dlfhtitlenew' style="color:#4CC148;" wx:elif='{{item.status==2&&item.sellNumber>0}}'>{{item.sellNumber}}人参加</view>
                     <view class='dlfhtitlenew' style="color:#999495;" wx:elif='{{item.status==3}}'>已结束</view>
                 </block>
 
@@ -218,7 +221,7 @@
                         <block wx:if='{{item.status==3}}'>
                             <view style="float:left;color:#999495;">已结束</view>
                         </block>
-                        <view style="float:right;color:#999495;">已售：{{item.sellNumber}}体</view>
+                        <view style="float:right;color:#999495;" wx:if='{{item.sellNumber>0}}'>已售：{{item.sellNumber}}体</view>
                     </view>
                 </block>
 
@@ -237,7 +240,7 @@
                         <block wx:if='{{item.status==3}}'>
                             <view style="float:left;color:#999495;">已结束</view>
                         </block>
-                        <view style="float:right;color:#999495;">已售：{{item.sellNumber}}体</view>
+                        <view style="float:right;color:#999495;" wx:if='{{item.sellNumber>0}}'>已售：{{item.sellNumber}}体</view>
                     </view>
                 </block>
             </block>
@@ -251,7 +254,9 @@
             <view class='dlfhpbox'>
               <view style='width:40rpx;height:40rpx;border-radius:50%;float:left;margin:8rpx 8rpx 0 8rpx;position: relative;' catchtap='jumpdlfchlimgdetail' data-nick='{{item.nick}}' data-uid='{{item.uid}}'>
                 <image src='{{item.brandInfo.brand_logo}}' style="width:100%;height:100%;border-radius:50%;"></image>
-                <view wx:if="{{item.isVip}}" class='vipBG'><image src='https://cdn.51chaidan.com/images/calendar/VipCase.png' style='position: relative;'></image></view>
+								<view wx:if="{{item.isVip}}" class='vipBG'><image src='https://cdn.51chaidan.com/images/calendar/VipCase.png' style='position: relative;'></image></view>
+
+								<image class='dlfchrtopimgipListp' wx:if='{{item.brandInfo.isAuth}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/approveIcon.png'></image>
               </view>
               <view class='dlfhpbtxt specialellipsis' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>{{item.brandInfo.brand_name}}
                 <image wx:if='{{item.is_authentication==1}}' class='dlfchrtopimgnew' src='https://clw.51chaidan.com/images/goods/authentication1.png'></image>
@@ -293,7 +298,7 @@
                         <block wx:if='{{item.status==3}}'>
                             <view style="float:left;color:#999495;">已结束</view>
                         </block>
-                        <view style="float:right;color:#999495;">已售：{{item.sellNumber}}体</view>
+                        <view style="float:right;color:#999495;" wx:if='{{item.sellNumber>0}}'>已售：{{item.sellNumber}}体</view>
                     </view>
                 </block>
 
@@ -312,7 +317,7 @@
                         <block wx:if='{{item.status==3}}'>
                             <view style="float:left;color:#999495;">已结束</view>
                         </block>
-                        <view style="float:right;color:#999495;">已售：{{item.sellNumber}}体</view>
+                        <view style="float:right;color:#999495;" wx:if='{{item.sellNumber>0}}'>已售：{{item.sellNumber}}体</view>
                     </view>
                 </block>
             </block>
@@ -326,7 +331,9 @@
             <view class='dlfhpbox'>
               <view style='width:40rpx;height:40rpx;border-radius:50%;float:left;margin:8rpx 8rpx 0 8rpx;position: relative;' catchtap='jumpdlfchlimgdetail' data-nick='{{item.nick}}' data-uid='{{item.uid}}'>
                 <image src='{{item.brandInfo.brand_logo}}' style="width:100%;height:100%;border-radius:50%;"></image>
-                <view wx:if="{{item.isVip}}" class='vipBG'><image src='https://cdn.51chaidan.com/images/calendar/VipCase.png' style='position: relative;'></image></view>
+								<view wx:if="{{item.isVip}}" class='vipBG'><image src='https://cdn.51chaidan.com/images/calendar/VipCase.png' style='position: relative;'></image></view>
+
+								<image class='dlfchrtopimgipListp' wx:if='{{item.brandInfo.isAuth}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/approveIcon.png'></image>
               </view>
               <view class='dlfhpbtxt specialellipsis' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>{{item.brandInfo.brand_name}}
                 <image wx:if='{{item.is_authentication==1}}' class='dlfchrtopimgnew' src='https://clw.51chaidan.com/images/goods/authentication1.png'></image>
@@ -728,4 +735,23 @@
 			 </scroll-view>
 		</view>	
 	</view>
+</view>
+
+<view class="brandManageWrapButton" catchtap="toggleAddNewEventMask">发布/发售</view>
+<!-- 选择发布/发售类型弹框-->
+<view class="popMask" catchtouchmove="true" catchtap="toggleAddNewEventMask" wx:if="{{isAddNewEventMask}}">
+    <view class="addNewEventBox" catchtap="true">
+        <text class="addNewEventTitle">选择发布/发售类型</text> 
+        <view class="addNewEventContent">
+            <view class="createItem" data-type="9032" catchtap="jumpoffering" style="background-image: linear-gradient(to top right, #0d9fc3, #e2ee66);">
+                <view>动态</view>
+                <view>让内容和用户连接</view>
+            </view>
+            <view class="createItem" data-type="9033" catchtap="jumpoffering" style="background-image: linear-gradient(to top right, #7E2A52, #FDA486);">
+                <view>图鉴</view>
+                <view>开启图鉴介绍</view>
+            </view>
+        </view>
+        <button catchtap="toggleAddNewEventMask">关闭</button>
+    </view>
 </view>

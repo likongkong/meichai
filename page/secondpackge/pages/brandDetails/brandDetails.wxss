@@ -328,12 +328,14 @@ page {
 .emlhleft{
   width:500rpx;
   height: 100%;
-  float: left; 
+  float: left;
+  position:relative; 
 }
 .emlhlimg{
   width: 70rpx;
   height: 70rpx;
   float: left;
+  border-radius: 50%;
 }
 .emlhltxt{
   width: 395rpx;
@@ -765,6 +767,116 @@ page {
   right: 0;
   z-index: 1;
 }
+
+.dlfchrtopimgipList{
+  width: 28rpx;
+  height: 28rpx;
+  position: absolute;
+  top: 42rpx;
+  left: 42rpx;
+}
+.dlfchrtopimgipListp{
+  width: 18rpx;
+  height: 18rpx;
+  position: absolute;
+  top: 22rpx;
+  left: 22rpx;
+}
+/* 发布/发售 */
+.brandManageWrapButton {
+  width: 400rpx;
+  height: 60rpx;
+  background: #90D2D6;
+  font-size: 28rpx;
+  color: #fff;
+  line-height: 60rpx;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 150rpx;
+  z-index: 3;
+  margin: auto;
+  text-align: center;
+  border-radius: 10rpx;
+}
+.popMask{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,.4);
+  z-index: 90;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.addNewEventBox{
+  width: 90%;
+  border-radius: 10rpx;
+  background: #fff;
+}
+.addNewEventTitle{
+  display: block;
+  text-align: center;
+  font-size: 36rpx;
+  color: #101010;
+  margin-top: 16rpx;
+}
+.addNewEventBox button{
+  width: 160rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  background-color:#fff;
+  border: 2rpx solid #90D2D6;
+  font-size: 26rpx;
+  color: #90D2D6;
+  margin: 50rpx auto 40rpx; 
+}
+.addNewEventBox button::after{
+  border:none;
+}
+.addNewEventContent{
+  margin-top: 40rpx;
+}
+.createItem{
+  width: 90%;
+  height: 72rpx;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  margin-bottom: 32rpx;
+}
+.createItem:last-child{
+  margin-bottom: 0;
+}
+.createItem view{
+  font-size: 28rpx;
+  color: #fff;
+}
+.createItem view:first-child{
+  width: 120rpx;
+  height: 30rpx;
+  text-align: center;
+  line-height: 30rpx;
+  position: relative;
+  margin-right: 28rpx;
+}
+.createItem view:first-child::after{
+  content:'';
+  width: 4rpx;
+  height: 30rpx;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #fff;
+}
+
+
+
+
+
 
 
 
