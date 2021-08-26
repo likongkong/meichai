@@ -306,15 +306,19 @@ Page({
         if(res.data.ReturnCode == 200){
           if(this.data.id!=0){
             app.showToastC('修改成功',1500);
-            let pages = getCurrentPages();    //获取当前页面信息栈
-            let prevPage = pages[pages.length-2];
-            prevPage.getData();
+            setTimeout(function(){
+              let pages = getCurrentPages();    //获取当前页面信息栈
+              let prevPage = pages[pages.length-2];
+              prevPage.getData();
+              that.navigateBack();
+            },1000)
           }else{
             app.showToastC('发布成功',1500);
+            setTimeout(function(){
+              that.navigateBack();
+            },1000)
           }
-          setTimeout(function(){
-            that.navigateBack();
-          },1000)
+          
         }else{
           app.showToastC(res.data.Msg,2000);
         }
