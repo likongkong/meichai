@@ -507,8 +507,7 @@ Page({
             video: res.data.List.video,
             brandArr,
             brandSettledLimit:res.data.Info.brandSettledLimit || false,
-            // isOneselfBrand:res.data.Info.isOneselfBrand || false // 用户是否是当前品牌管理者
-            isOneselfBrand:true || false // 用户是否是当前品牌管理者
+            isOneselfBrand:res.data.Info.isOneselfBrand || false // 用户是否是当前品牌管理者
 
           })
           if (page == 0) {

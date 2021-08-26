@@ -153,7 +153,7 @@
                 
             </view>
 
-            <view class="boxAtlas" style="width:500rpx;margin:20rpx;" wx:if='{{item.illustratedInfo}}'  catchtap="jumpoffering" data-id="{{item.id}}" data-type='9035'>
+            <view class="boxAtlas" style="width:500rpx;margin:20rpx;" wx:if='{{item.illustratedInfo}}'  catchtap="jumpoffering" data-id="{{item.illustratedInfo.id}}" data-type='9035'>
                 <view class="boxAtlasLeft">图鉴</view>
                 <view class="boxAtlasName specialellipsis" style="width:288rpx;font-size:26rpx;">{{item.illustratedInfo.title}}</view>
                 <view class="boxAtlasRight">点击查看</view>
@@ -246,7 +246,7 @@
             </block>
             <!-- 签到 -->
             <block wx:elif='{{item.type==4}}'></block>
-            <view class="boxAtlas" wx:if='{{item.illustratedInfo}}' catchtap="jumpoffering" data-id="{{item.id}}" data-type='9035'>
+            <view class="boxAtlas" wx:if='{{item.illustratedInfo}}' catchtap="jumpoffering" data-id="{{item.illustratedInfo.id}}" data-type='9035'>
                 <view class="boxAtlasLeft">图鉴</view>
                 <view class="boxAtlasName specialellipsis">{{item.illustratedInfo.title}}</view>
                 <view class="boxAtlasRight">点击查看</view>
@@ -323,7 +323,7 @@
             </block>
             <!-- 签到 -->
             <block wx:elif='{{item.type==4}}'></block>
-            <view class="boxAtlas" wx:if='{{item.illustratedInfo}}' catchtap="jumpoffering" data-id="{{item.id}}" data-type='9035'>
+            <view class="boxAtlas" wx:if='{{item.illustratedInfo}}' catchtap="jumpoffering" data-id="{{item.illustratedInfo.id}}" data-type='9035'>
                 <view class="boxAtlasLeft">图鉴</view>
                 <view class="boxAtlasName specialellipsis">{{item.illustratedInfo.title}}</view>
                 <view class="boxAtlasRight">点击查看</view>

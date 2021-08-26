@@ -26,7 +26,7 @@ Page({
     }else if(type == 2){
       var item_type = 9003;
     }else if(type == 4){
-      var item_type = 9028;
+      var item_type = 9032;
       id = 'id='+id
     }
     app.comjumpwxnav(item_type, id, '', '')

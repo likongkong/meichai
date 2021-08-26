@@ -49,12 +49,12 @@
 
 
     <view class="orderBottomNavigation" wx:if='{{detailData.order.payStatus != 0 && detailData.order.payStatus != 7}}'>
-        <view class="orderBottomNavEve bottomButComWidth" catchtap="commonBulletFrameFun" data-index='3'>
+        <view class="orderBottomNavEve bottomButComWidth" wx:if="{{detailData.order.payStatus != 5}}" catchtap="commonBulletFrameFun" data-index='3'>
             <block wx:if='{{detailData.order.shippingCode}}'>修改物流</block>
             <block wx:else>添加物流</block>
         </view>
         <view class="orderBottomNavEve bottomButComWidth" catchtap="commonBulletFrameFun" data-index='2' wx:if='{{detailData.order.payStatus!=7 && detailData.order.payTime>0}}'>退款</view>
-        <view class="orderBottomNavEve bottomButComWidth" catchtap="commonBulletFrameFun" data-index='1'>修改收货地址</view>
+        <view class="orderBottomNavEve bottomButComWidth" wx:if='{{detailData.order.payStatus !=4 && detailData.order.payStatus != 5}}' catchtap="commonBulletFrameFun" data-index='1'>修改收货地址</view>
     </view>
 
 
