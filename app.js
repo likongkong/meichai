@@ -1040,11 +1040,11 @@ App({
       });
     } else if (item_type == 9032) { 
       wx.navigateTo({
-        url: `/page/settled/pages/releaseDynamic/releaseDynamic`
+        url: `/page/settled/pages/releaseDynamic/releaseDynamic?${whref}`
       });
     } else if (item_type == 9033) { 
       wx.navigateTo({
-        url: `/page/settled/pages/releaseFieldGuide/releaseFieldGuide`
+        url: `/page/settled/pages/releaseFieldGuide/releaseFieldGuide?${whref}`
       });
     } else if (item_type == 9034) {  
       wx.navigateTo({
