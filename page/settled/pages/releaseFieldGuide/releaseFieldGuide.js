@@ -45,14 +45,14 @@ Page({
     ],
     fieldGuideData1:[
       {
-        isRequired:true,
+        isRequired:false,
         type:'text',
         subtitle:'价格',
         placeholder:'请输入商品价格',
         value:'',
         name:'goodsPrice'
       },{
-        isRequired:true,
+        isRequired:false,
         type:'text',
         subtitle:'数量',
         placeholder:'请输入商品数量',
@@ -222,14 +222,16 @@ Page({
       return false;
     }
     if(!obj.goodsPrice || obj.goodsPrice == ''){
-      this.selectComponent('#settledForm2').scrollto('goodsPrice');
-      app.showToastC('请输入价格',1500);
-      return false;
+      obj.goodsPrice = "";
     }
     if(!obj.goodsNum || obj.goodsNum == ''){
-      this.selectComponent('#settledForm2').scrollto('goodsNum');
-      app.showToastC('请输入数量',1500);
-      return false;
+      obj.goodsNum = "";
+    }
+    if(!obj.sellingway || obj.sellingway == ''){
+      obj.sellingway = "";
+    }
+    if(!obj.fieldGuideDescription || obj.fieldGuideDescription == ''){
+      obj.fieldGuideDescription = "";
     }
     wx.showLoading({
       title: '加载中',
