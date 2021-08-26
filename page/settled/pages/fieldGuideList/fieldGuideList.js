@@ -164,12 +164,19 @@ Page({
     });
   },
   chooseFieldGuide(e){
-    let brandname = e.currentTarget.dataset.brandname;
+    let title = e.currentTarget.dataset.title;
     let id = e.currentTarget.dataset.id;
     let pages = getCurrentPages();    //获取当前页面信息栈
     let prevPage = pages[pages.length-2];
+
+    console.log(prevPage.data.obj);
+    console.log(prevPage.data.dynamicData);
+    // return false;
     prevPage.setData({
-      [`dynamicData[${this.data.listIndex}].value`]:brandname
+      [`dynamicData[1].value`]:prevPage.data.obj.dynamicContent,
+      [`dynamicData[2].imageList`]:prevPage.data.obj.dynamicPic,
+      [`dynamicData[${this.data.listIndex}].value`]:title,
+      [`dynamicData[4].value`]:prevPage.data.obj.allowComment,
     })
     prevPage.data.dynamicData[this.data.listIndex].value=title;
     prevPage.data.obj.fieldGuideName=title;

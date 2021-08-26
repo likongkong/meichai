@@ -130,14 +130,15 @@ Component({
         sizeType: ['compressed'], // 可以指定是原图original还是压缩图compressed，默认用原图
         sourceType: ['camera','album'], // 'album'相册  camera 相机
         success: (res) => {
-          if ((this.data.list[ind].imageList.length + res.tempFilePaths.length) > 9) {
-            wx.showToast({
-                title: "最多只能上传9张",
-                icon: 'none'
-             })
-            return;
+          if(form=='dynamicContent'){
+            if ((this.data.list[ind].imageList.length + res.tempFilePaths.length) > 9) {
+              wx.showToast({
+                  title: "最多只能上传9张",
+                  icon: 'none'
+               })
+              return;
+            }
           }
-          
           wx.showLoading({
             title: '上传中...',
           })

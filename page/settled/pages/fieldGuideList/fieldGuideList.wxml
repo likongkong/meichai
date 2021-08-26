@@ -4,7 +4,7 @@
 <view class="wrap">
   <block wx:if="{{dataList.length!=0}}">
     <block wx:for="{{dataList}}" wx:key='key'>
-      <view class="fieldGuideWrap" data-brandname="{{item.brandName}}" data-id="{{item.id}}" catchtap="chooseFieldGuide">
+      <view class="fieldGuideWrap" data-title="{{item.title}}" data-id="{{item.id}}" catchtap="chooseFieldGuide">
         <text class="title">{{item.brandName}}</text>
         <view class="box">
           <text class="typeName">图鉴</text>
