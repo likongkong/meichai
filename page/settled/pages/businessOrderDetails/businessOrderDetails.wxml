@@ -7,7 +7,7 @@
                 <view>订单编号:{{detailData.order.orderSN}}</view>
                 <view style="color:#90D2D6;">{{detailData.order.payStatusName}}</view>
             </view>
-            <view class="orderBoxContent" style="border-bottom:0;">
+            <view class="orderBoxContent" style="border-bottom:0;" catchtap="jump">
                 <image class="orderBoxContentImg" src="{{detailData.goods.goodsThumb}}" mode="aspectFit"></image>
                 <view class="orderBoxContentRight">
                     <view class="obcrTop">

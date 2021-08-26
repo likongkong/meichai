@@ -488,5 +488,37 @@ Page({
       success: function (res) {}
     } 
   },
+  jump(){
+    var _this = this;
+    var detailData = _this.data.detailData;
+
+    if(detailData.order.orderType == 1){ // 普通订单
+      app.comjumpwxnav(1,detailData.goods.goodsId,'','')
+    }else if(detailData.order.orderType == 13){ // 限定抽签
+      app.comjumpwxnav(9003,detailData.order.activityId,'','')
+    }else if(detailData.order.orderType == 14){ // 抽盲盒
+      app.comjumpwxnav(9005,detailData.order.activityId,'','')
+    }else if(detailData.order.orderType == 2){ // 免单活动订单
+      app.comjumpwxnav(8,detailData.order.activityId,'','')
+    }else if(detailData.order.orderType == 21){ // 一番赏
+      app.comjumpwxnav(9016,detailData.order.activityId,'','')
+    }else if(detailData.order.orderType == 12){
+      app.comjumpwxnav(9004,detailData.order.activityId,'','')
+    }
+    // else if(detailData.order.orderType == ){
+    //   app.comjumpwxnav('','','','')
+    // }else if(detailData.order.orderType == ){
+    //   app.comjumpwxnav('','','','')
+    // }else if(detailData.order.orderType == ){
+    //   app.comjumpwxnav('','','','')
+    // }else if(detailData.order.orderType == ){
+    //   app.comjumpwxnav('','','','')
+    // }else if(detailData.order.orderType == ){
+    //   app.comjumpwxnav('','','','')
+    // }else if(detailData.order.orderType == ){
+    //   app.comjumpwxnav('','','','')
+    // }
+    
+  }
 
 })
