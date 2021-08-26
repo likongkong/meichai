@@ -341,6 +341,7 @@ Page({
               })
             }
             _this.setData({
+              isAddNewEventMask:false,
               dataInfo: res.data.Info,
               brandSettledStatus: res.data.Info.brandSettledInfo.brandSettledStatus,
               vipAdvertising: res.data.Info.vipAdvertising||'',
