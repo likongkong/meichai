@@ -203,6 +203,7 @@ Page({
             [`enterpriseData[1].src`]:brandInfo.ip_logo,
             [`enterpriseData[2].src`]:brandInfo.ip_img,
             [`enterpriseData[3].value`]:brandInfo.ip_introduce,
+            id:brandInfo.id
           })
 
         }else{
