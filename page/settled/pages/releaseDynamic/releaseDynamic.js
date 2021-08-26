@@ -65,6 +65,9 @@ Page({
   onLoad: function (options) {
     // 判断是否授权
     this.activsign();
+    this.setData({
+      id:options.id||0
+    })
   },
   onLoadfun:function(){
     this.setData({
@@ -170,9 +173,58 @@ Page({
           let groups = `dynamicData[0].groups`;
           this.setData({
             [groups]:res.data.List.brandInfoList,
-            [`dynamicData[0].value`]:res.data.List.brandInfoList[0].name
           })
-          this.data.obj.associationIp = res.data.List.brandInfoList[0].brand_id;
+          if(this.data.id!=0){
+            this.getData();
+          }else{
+            wx.hideLoading()
+            wx.stopPullDownRefresh();
+            this.setData({
+              [`dynamicData[0].value`]:res.data.List.brandInfoList[0].name
+            })
+            this.data.obj.associationIp = res.data.List.brandInfoList[0].brand_id;
+          }
+        }else{
+          wx.hideLoading()
+          wx.stopPullDownRefresh();
+          app.showToastC(res.data.Msg,2000);
+        }
+      },
+      fail: function () {},
+      complete:function(){
+        
+      }
+    });
+  },
+  getData(){
+    let data = `mod=community&operation=showDynamicInfo&uid=${this.data.uid}&loginid=${this.data.loginid}&drying_id=${this.data.id}`
+    var q = Dec.Aese(data);
+    console.log(`${app.signindata.comurl}?${data}`)
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: (res) => { 
+        console.log(res);
+        wx.hideLoading()
+        wx.stopPullDownRefresh();
+        if(res.data.ReturnCode == 200){
+          let info = res.data.Info;
+          let List = res.data.List;
+          let obj = this.data.obj;
+          this.setData({
+            [`dynamicData[0].value`]:info.brandName,
+            [`dynamicData[1].value`]:info.title,
+            [`dynamicData[2].imageList`]:info.imgArr,
+            [`dynamicData[3].value`]:List.illustratedInfo.title,
+            [`dynamicData[4].value`]:info.allow_comment_type,
+            
+          })
+          obj.associationIp = info.brand_id;
+          obj.dynamicContent = info.title;
+          obj.dynamicPic = info.imgArr;
+          obj.fieldGuideId = List.illustratedInfo.id;
+          obj.allowComment = info.allow_comment_type;
         }else{
           app.showToastC(res.data.Msg,2000);
         }
@@ -205,7 +257,7 @@ Page({
       title: '加载中',
     })
     console.log(obj)
-    let data = `mod=community&operation=establish&uid=${this.data.uid}&loginid=${this.data.loginid}&brand_id=${obj.associationIp}&title=${obj.dynamicContent}&illustrated_id=${obj.fieldGuideId?obj.fieldGuideId:''}&imgArr=${obj.dynamicPic}&allowComment=${obj.allowComment}`
+    let data = `mod=community&operation=establish&uid=${this.data.uid}&loginid=${this.data.loginid}&brand_id=${obj.associationIp}&title=${obj.dynamicContent}&illustrated_id=${obj.fieldGuideId?obj.fieldGuideId:''}&imgArr=${obj.dynamicPic}&allowComment=${obj.allowComment}&id=${this.data.id}`
     var q = Dec.Aese(data);
     console.log(`${app.signindata.comurl}?${data}`)
     wx.request({

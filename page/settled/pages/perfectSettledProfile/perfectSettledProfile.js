@@ -107,7 +107,7 @@ Page({
     console.log(options)
     this.setData({
       // num:options.num,
-      id:options.id || 0
+      barnd_id:options.id || 0
     })
     this.getBrandInfo()
   },
@@ -181,7 +181,7 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    let data = `mod=brandCertification&operation=info&uid=${this.data.uid}&loginid=${this.data.loginid}&showType=1&id=${this.data.id}`
+    let data = `mod=brandCertification&operation=info&uid=${this.data.uid}&loginid=${this.data.loginid}&showType=2&brand_id=${this.data.barnd_id}`
     var q = Dec.Aese(data);
     console.log(`${app.signindata.comurl}?${data}`)
     wx.request({
@@ -250,7 +250,7 @@ Page({
     if(!obj.microblog || obj.microblog == ''){
       obj.microblog=''
     }
-    let data = `mod=brandCertification&operation=perfect&uid=${this.data.uid}&loginid=${this.data.loginid}&ip_name=${obj.ipName}&ip_logo=${obj.ipLogo}&ip_img=${obj.ipImage}&ip_introduce=${obj.introduce}&helper_wechat_number=${obj.WeChatCode}&official_accounts=${obj.officialAccounts}&red_book_id=${obj.redBookId}&microblog=${obj.microblog}&id=${this.data.id}`
+    let data = `mod=brandCertification&operation=perfect&uid=${this.data.uid}&loginid=${this.data.loginid}&ip_name=${obj.ipName}&ip_logo=${obj.ipLogo}&ip_img=${obj.ipImage}&ip_introduce=${obj.introduce}&helper_wechat_number=${obj.WeChatCode}&official_accounts=${obj.officialAccounts}&red_book_id=${obj.redBookId}&microblog=${obj.microblog}&id=${this.data.id}&brand_id=${this.data.barnd_id}`
     var q = Dec.Aese(data);
     console.log(`${app.signindata.comurl}?${data}`)
     wx.request({
