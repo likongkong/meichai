@@ -506,6 +506,10 @@ Page({
             isVideo: res.data.Info.isVideo,
             video: res.data.List.video,
             brandArr,
+            brandSettledLimit:res.data.Info.brandSettledLimit || false,
+            // isOneselfBrand:res.data.Info.isOneselfBrand || false // 用户是否是当前品牌管理者
+            isOneselfBrand:true || false // 用户是否是当前品牌管理者
+
           })
           if (page == 0) {
             _this.setData({
@@ -762,8 +766,13 @@ Page({
       type = 9003;
     }else if(istype == 3){ // 动态
       type = 9036;
+    }else if(type == 9028){
+      id = 'id='+id;
     }
     app.comjumpwxnav(type,id,'','')
+    this.setData({
+      isAddNewEventMask:false
+    })
   } 
 
 })

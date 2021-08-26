@@ -28,7 +28,7 @@
 
     <view class="boxAtlas" style="width:500rpx;margin:20rpx;font-size:24rpx;" wx:if='{{illustratedInfo}}'  catchtap="jumpoffering" data-id="{{illustratedInfo.id}}" data-type='9035'>
         <view class="boxAtlasLeft">图鉴</view>
-        <view class="boxAtlasName specialellipsis">{{illustratedInfo.title}}</view>
+        <view class="boxAtlasName specialellipsis" style="width:288rpx;">{{illustratedInfo.title}}</view>
         <view class="boxAtlasRight">点击查看</view>
     </view>
     <view class="emlhead" style="overflow: hidden;">

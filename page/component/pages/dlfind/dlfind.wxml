@@ -27,14 +27,12 @@
             <block wx:if='{{recommendIps && recommendIps.length != 0}}'>
                 <view class='dlfindToptitle'>推荐IP</view>
                 <view style="width:100%;min-height:80rpx;background:#fff;margin-bottom:15rpx;">
-                    <view style="position:relative;height:150rpx;">
-                        <view style="width:100rpx;height:140rpx;margin: 0 10rpx;float:left;">
-                            <view class="ocamensweve" catchtap="brandWholeFun">
-                                <image class="ocamensweveimg" src="https://cdn.51chaidan.com/images/toyCabinet/allLog.jpg"></image>
-                                <view class="ocamenswevename specialellipsis">全部</view>
-                            </view>                 
+                    <view style="position:relative;height:150rpx;width:710rpx;margin:auto;">
+                        <view class="ocamensweve" catchtap="brandWholeFun" style="float:left;">
+                            <image class="ocamensweveimg" src="https://cdn.51chaidan.com/images/toyCabinet/allLog.jpg"></image>
+                            <view class="ocamenswevename specialellipsis">全部</view>
                         </view>
-                        <scroll-view scroll-x="true" style="width:630rpx;white-space: nowrap;height:150rpx;float:left;">
+                        <scroll-view scroll-x="true" style="width:590rpx;white-space: nowrap;height:150rpx;float:left;">
                               <block wx:for='{{recommendIps}}' wx:key='key'>
                                   <view class="ocamensweve" catchtap="jumpsouchtem" data-id='{{item.brandId}}'>
                                       <image class="ocamensweveimg" mode='aspectFit' style="{{item.brandId==brand_id?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{item.brandLogo}}"></image>
@@ -93,8 +91,8 @@
                     <image class='dlfchrtopimgipList' wx:if='{{item.brandInfo.isAuth}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/approveIcon.png'></image>
 
                     <view class="emlhltxt">
-                          <view class="emlhlttop specialellipsis">{{item.brandInfo.brand_name}}</view>
-                          <view class="emlhltbottom specialellipsis">{{item.add_time}}
+                          <view class="emlhlttop specialellipsis" style="font-size:26rpx;">{{item.brandInfo.brand_name}}</view>
+                          <view class="emlhltbottom specialellipsis" style="font-size:24rpx;">{{item.add_time}}
                             <text class="stateBg" style="background:#ABC7F7;" wx:if='{{item.type==3}}'>动态</text>
                             <text class="stateBg" style="background:#F5B1AE;" wx:elif='{{item.type==1}}'>秒杀</text>
                             <text class="stateBg" style="background:#A9E6BA;" wx:elif='{{item.type==4}}'>签到</text>
@@ -138,28 +136,28 @@
             
             <view class="multilineellipsisFive" style="margin:20rpx;font-size:26rpx;" wx:if='{{item.title && (item.type==1 || item.type==2)}}' catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}'><text>{{item.title}}</text></view>
 
-            <view class="barndStatus" wx:if='{{item.type==1 || item.type==2}}'>
+            <view class="barndStatus" style="font-size:26rpx;" wx:if='{{item.type==1 || item.type==2}}'>
                 <!-- 秒杀 -->
                 <block wx:if='{{item.type==1}}'> 
-                    <view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
-                    <view class='dlfhtitlenew' style="color:#178FF8;font-size:24rpx;" wx:if='{{item.status==1}}'>{{item.start_time}}发售</view>
-                    <view class='dlfhtitlenew' style="color:#999495;font-size:24rpx;" wx:elif='{{item.status==2 && item.sellNumber>0}}'>已售：{{item.sellNumber}}体</view>
-                    <view class='dlfhtitlenew' style="color:#999495;font-size:24rpx;" wx:elif='{{item.status==3}}'>已结束</view>
+                    <view class='dlfhtitlenew' style="color:#FF2742;font-size:26rpx;">￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
+                    <view class='dlfhtitlenew' style="color:#178FF8;font-size:26rpx;" wx:if='{{item.status==1}}'>{{item.start_time}}发售</view>
+                    <view class='dlfhtitlenew' style="color:#999495;font-size:26rpx;" wx:elif='{{item.status==2 && item.sellNumber>0}}'>已售：{{item.sellNumber}}体</view>
+                    <view class='dlfhtitlenew' style="color:#999495;font-size:26rpx;" wx:elif='{{item.status==3}}'>已结束</view>
                 </block>
                 <!-- 抽选 -->
                 <block wx:elif='{{item.type==2}}'>
-                    <view class='dlfhtitlenew' style="color:#FF2742;font-size:24rpx;">￥{{item.price}}<text style="color:#000;">抽选价</text></view>
-                    <view class='dlfhtitlenew' style="color:#178FF8;font-size:24rpx;" wx:if='{{item.status==1}}'>{{item.start_time}}抽选</view>
-                    <view class='dlfhtitlenew' style="color:#4CC148;font-size:24rpx;" wx:elif='{{item.status==2&&item.sellNumber>0}}'>{{item.sellNumber}}人参加</view>
-                    <view class='dlfhtitlenew' style="color:#999495;font-size:24rpx;" wx:elif='{{item.status==3}}'>已结束</view>
+                    <view class='dlfhtitlenew' style="color:#FF2742;font-size:26rpx;">￥{{item.price}}<text style="color:#000;">抽选价</text></view>
+                    <view class='dlfhtitlenew' style="color:#178FF8;font-size:26rpx;" wx:if='{{item.status==1}}'>{{item.start_time}}抽选</view>
+                    <view class='dlfhtitlenew' style="color:#4CC148;font-size:26rpx;" wx:elif='{{item.status==2&&item.sellNumber>0}}'>{{item.sellNumber}}人参加</view>
+                    <view class='dlfhtitlenew' style="color:#999495;font-size:26rpx;" wx:elif='{{item.status==3}}'>已结束</view>
                 </block>
 
                 
             </view>
 
-            <view class="boxAtlas" catchtap="jumpoffering" data-id="{{item.illustratedInfo.id}}" data-type='9035' style="width:500rpx;margin:20rpx;font-size:24rpx;" wx:if='{{item.illustratedInfo}}'>
+            <view class="boxAtlas" catchtap="jumpoffering" data-id="{{item.illustratedInfo.id}}" data-type='9035' style="width:500rpx;margin:20rpx;font-size:26rpx;" wx:if='{{item.illustratedInfo}}'>
                 <view class="boxAtlasLeft">图鉴</view>
-                <view class="boxAtlasName specialellipsis">{{item.illustratedInfo.name}}</view>
+                <view class="boxAtlasName specialellipsis" style="width:288rpx;">{{item.illustratedInfo.title}}</view>
                 <view class="boxAtlasRight">点击查看</view>
             </view>
             <!-- bottom -->
@@ -252,7 +250,7 @@
             <block wx:elif='{{item.type==4}}'></block>
             <view class="boxAtlas" wx:if='{{item.illustratedInfo}}' catchtap="jumpoffering" data-id="{{item.illustratedInfo.id}}" data-type='9035'>
                 <view class="boxAtlasLeft">图鉴</view>
-                <view class="boxAtlasName specialellipsis">{{item.illustratedInfo.name}}</view>
+                <view class="boxAtlasName specialellipsis">{{item.illustratedInfo.title}}</view>
                 <view class="boxAtlasRight">点击查看</view>
             </view>
             <view class='dlfhpbox'>
@@ -329,7 +327,7 @@
             <block wx:elif='{{item.type==4}}'></block>
             <view class="boxAtlas" wx:if='{{item.illustratedInfo}}' catchtap="jumpoffering" data-id="{{item.illustratedInfo.id}}" data-type='9035'>
                 <view class="boxAtlasLeft">图鉴</view>
-                <view class="boxAtlasName specialellipsis">{{item.illustratedInfo.name}}</view>
+                <view class="boxAtlasName specialellipsis">{{item.illustratedInfo.title}}</view>
                 <view class="boxAtlasRight">点击查看</view>
             </view>
             <view class='dlfhpbox'>
@@ -413,7 +411,7 @@
 
 
 
-<view class="brandManageWrapButton" catchtap="toggleAddNewEventMask">发布/发售</view>
+<view class="brandManageWrapButton" wx:if='{{brandSettledLimit}}' catchtap="toggleAddNewEventMask">发布/发售</view>
 <!-- 选择发布/发售类型弹框-->
 <view class="popMask" catchtouchmove="true" catchtap="toggleAddNewEventMask" wx:if="{{isAddNewEventMask}}">
     <view class="addNewEventBox" catchtap="true">

@@ -391,7 +391,8 @@ Page({
           _this.setData({
             visitHistory:res.data.List.visitHistory || [], // 最近访问的品牌信息
             salesCalendar: salesCalendar|| [], // 日历信息
-            recommendIps:res.data.List.recommendIps || [] // 品牌
+            recommendIps:res.data.List.recommendIps || [], // 品牌
+            brandSettledLimit:res.data.Info.brandSettledLimit || false
           });
         };
       }
@@ -1074,7 +1075,10 @@ Page({
     }else if(istype == 3){ // 动态
       type = 9036;
     }
-    app.comjumpwxnav(type,id,'','')
+    app.comjumpwxnav(type,id,'','');
+    this.setData({
+      isAddNewEventMask:false
+    })
   },
   toggleAddNewEventMask(){
     this.setData({

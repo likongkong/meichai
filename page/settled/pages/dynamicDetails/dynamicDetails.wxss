@@ -209,8 +209,8 @@ page{
   position: relative;
 }
 .dyDetheat{
-  height: 60rpx;
-  line-height: 60rpx;
+  height: 80rpx;
+  line-height: 80rpx;
   float: right;
   font-size:24rpx;
   padding-left: 50rpx;
