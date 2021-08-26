@@ -27,7 +27,8 @@ Page({
     value: [0, 0, 0],
     values: [0, 0, 0],
     condition: false,
-    cityback:false,     
+    cityback:false,  
+    is_loading:false   
   },  
 
   /**
@@ -68,7 +69,9 @@ Page({
   getData(){
     var _this = this;
     console.log('=========================')
+    _this.setData({is_loading:false});
     api.oMbrandInfo(_this.data.orderid,{}).then((res) => {
+      _this.setData({is_loading:true});
       console.log('订单详情=======',res)
      if (res.data.status_code == 200) {
          var detailData = res.data.data.Info.order;
