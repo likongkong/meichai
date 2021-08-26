@@ -1,4 +1,5 @@
 var Dec = require('../../common/public.js');//aes加密解密js
+var api = require("../../utils/api.js");
 const app = getApp();
 Page({
   /**
@@ -109,11 +110,11 @@ Page({
     let type = e.currentTarget.dataset.type;
     let num = e.currentTarget.dataset.num;
     let whref = e.currentTarget.dataset.whref;
-    if(num == 1){
-      app.comjumpwxnav('9029',whref)
-    }else{
+    // if(num == 1){
+    //   app.comjumpwxnav('9029',whref)
+    // }else{
       app.comjumpwxnav(type,whref)
-    }
+    // } 
   },
   jumpVipPrivilegePage(){
     wx.navigateTo({  
@@ -328,6 +329,17 @@ Page({
         wx.hideLoading();
         if (res.data.Message != "Empty info") {
           if (res.data.ReturnCode == 200){
+            // 获取钱包余额
+            if(!res.data.Info.brandSettledLimit){
+              api.getLumpsumAndWithdraw({}).then((res) => {
+                console.log('withdrawInfo',res)
+                _this.setData({
+                  withdrawInfo:res.data.data
+                })
+              }).catch((err)=>{
+                console.log(err)
+              })
+            }
             _this.setData({
               dataInfo: res.data.Info,
               brandSettledStatus: res.data.Info.brandSettledInfo.brandSettledStatus,
@@ -415,6 +427,8 @@ Page({
     });  
     wx.hideLoading()    
     _this.setData({ B: true, iftr_wx: true });  
+    _this.listdata()
+    
     if(wx.getStorageSync('access_token')){
       _this.listdata()
     }else{
@@ -477,7 +491,7 @@ Page({
     });
   },
   onShow: function () {   
-    wx.showLoading({ title: '加载中...', mask:true  }) 
+    // wx.showLoading({ title: '加载中...', mask:true  }) 
     // 判断是否授权 
     var _this = this;
     if(app.signindata.sceneValue==1154){
