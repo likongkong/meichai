@@ -373,6 +373,8 @@ Page({
   onPullDownRefresh: function () {
     this.reset();
     this.getListData();
+    this.getAccountNumberList()
+    this.getLumpsumAndWithdraw();
   },
 
   /**

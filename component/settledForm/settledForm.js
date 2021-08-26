@@ -75,6 +75,38 @@ Component({
       this.setData({[value]:sonindex})
       this.triggerEvent("bindchange", {value:sonindex,name:name});
     },
+    showActionSheet(e){
+      let index = e.currentTarget.dataset.index;
+      this.triggerEvent("showActionSheet",{index:index});
+      return false;
+      let groups = e.currentTarget.dataset.groups;
+      console.log(groups)
+      wx.showActionSheet({
+        itemList: groups,
+        success (res) {
+          console.log(res.tapIndex)
+        },
+        fail (res) {
+          console.log(res.errMsg)
+        }
+      })
+    },
+    deleteitemImage(e){
+      let name = e.currentTarget.dataset.name;
+      let ind = e.currentTarget.dataset.ind;
+      let index = e.currentTarget.dataset.index;
+      let imageList = this.data.list[index].imageList;
+      console.log('剪前',imageList)
+      for (var i = imageList.length - 1; i >= 0; i--) {
+        if (i==ind) {
+          imageList.splice(i, 1);
+        }
+      }
+      this.setData({[`list[${index}].imageList`]: imageList})
+      console.log('剪后',imageList)
+      this.triggerEvent("bindchange", {value:imageList,name:name});
+
+    },
     uploadImage(e){
       let form = e.currentTarget.dataset.form;
       let storagelocation = e.currentTarget.dataset.storagelocation;
@@ -127,6 +159,7 @@ Component({
             wx.hideLoading()
             // console.log(res)     
             if(form=='dynamicContent'){
+              this.setData({errorDom:''});
               let imageList=`list[${ind}].imageList`;
               this.setData({[imageList]: [...this.data.list[ind].imageList,...res]})
               this.triggerEvent("bindchange", {value:this.data.list[ind].imageList,name:name});
@@ -175,6 +208,7 @@ Component({
       });
     },
     scrollto(e){
+      console.log(e)
       const query = this.createSelectorQuery();
       query.select(`#${e}`).boundingClientRect();
       query.selectViewport().scrollOffset();
@@ -190,7 +224,12 @@ Component({
           })
         }
       })
-    }
+    },
+    comjumpwxnav(e){
+      let type = e.currentTarget.dataset.itemtype;
+      let whref = e.currentTarget.dataset.whref;
+      app.comjumpwxnav(type,whref)
+    },
   }
    
 })

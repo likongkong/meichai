@@ -1046,6 +1046,10 @@ App({
       wx.navigateTo({
         url: `/page/settled/pages/releaseFieldGuide/releaseFieldGuide`
       });
+    } else if (item_type == 9034) { 
+      wx.navigateTo({
+        url: `/page/settled/pages/fieldGuideList/fieldGuideList?${whref}`
+      });
     }
     
   },

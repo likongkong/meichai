@@ -18,6 +18,9 @@
 .paddingBottom20{
   padding-bottom: 20rpx !important;
 }
+.margintop0{
+  margin-top: 0 !important;
+}
 /* 行样式 */
 .rowWrap{    
   width: 100%;
@@ -37,7 +40,7 @@
   width: 60%;
   height: 100rpx;
   line-height: 100rpx;
-  font-size: 24rpx;
+  font-size: 26rpx;
   color: #777777;
   padding-left: 12rpx;
   box-sizing: border-box;
@@ -88,9 +91,24 @@
 .activityimageWrap .itemImage{
   float: left;
   margin: 18rpx 12.6rpx 18rpx 0;
+  position: relative;
 }
 .activityimageWrap .itemImage:nth-child(4n){
   margin-right: 0;
+}
+.activityimageWrap .itemImage .delete{
+  position: absolute;
+  top: -12rpx;
+  right: -12rpx;
+  /* width: 40rpx; */
+  /* height: auto; */
+  background: #fff;
+  border-radius: 100%;
+}
+.activityimageWrap .itemImage .delete image{
+  width: 40rpx;
+  height: auto;
+  display: block;
 }
 
 .uploadWrap{

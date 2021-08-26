@@ -1,5 +1,33 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 <view class="wrap">
-
+  <settledForm 
+  id="settledForm"
+  form="dynamicContent"
+  statusBarHeightMc="{{statusBarHeightMc}}"
+  list="{{ipData}}"
+  bind:bindchange="bindchange"
+  bind:showActionSheet="showActionSheet">
+  </settledForm>
+  <view class="card">
+    <settledForm 
+    id="settledForm1"
+    form="dynamicContent"
+    statusBarHeightMc="{{statusBarHeightMc}}"
+    list="{{fieldGuideData}}"
+    bind:bindchange="bindchange">
+    </settledForm>
+  </view>
+  <view class="card">
+    <settledForm 
+    id="settledForm2"
+    statusBarHeightMc="{{statusBarHeightMc}}"
+    list="{{fieldGuideData1}}"
+    bind:bindchange="bindchange">
+    </settledForm>
+  </view>
+  <view class="footerWrap">
+      <view data-num="1" catchtap="navigateBack">返回</view>
+      <view catchtap="submitAudit">确认发布</view>
+  </view>
 </view>
