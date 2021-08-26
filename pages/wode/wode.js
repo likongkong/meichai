@@ -415,8 +415,11 @@ Page({
     });  
     wx.hideLoading()    
     _this.setData({ B: true, iftr_wx: true });  
-    _this.listdata()
-
+    if(wx.getStorageSync('access_token')){
+      _this.listdata()
+    }else{
+      app.getAccessToken(_this.listdata)
+    };
     if(this.data.defaultinformation){}else{
       app.defaultinfofun(this);
     };

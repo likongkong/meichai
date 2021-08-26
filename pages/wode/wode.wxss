@@ -511,9 +511,6 @@ page{
   margin-right: 10rpx;
 }
 
-.settled{
-  
-}
 .settledImgWrap{
   width: 96%;
   margin: 0 auto;
