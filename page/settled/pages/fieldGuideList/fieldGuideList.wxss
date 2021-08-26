@@ -52,7 +52,7 @@ page{
 }
 .fieldGuidePicWrap image{
   width: 180rpx;
-  height: auto;
+  height: 180rpx;
   margin-right: 20rpx;
   /* display: block; */
 }

@@ -106,7 +106,7 @@ Page({
     this.data.loginid = app.signindata.loginid;
     console.log(options)
     this.setData({
-      num:options.num,
+      // num:options.num,
       id:options.id || 0
     })
     this.getBrandInfo()

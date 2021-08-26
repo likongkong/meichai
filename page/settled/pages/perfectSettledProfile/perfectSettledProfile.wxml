@@ -2,9 +2,9 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 <view class="applyForOccupancy">
-  <view class="size26"> 完善信息之后，您的IP信息将展示在发现广场 </view>
-  <view class="size26"> <text style="text-decoration:underline;color:#8BCFFD;" catchtap="toggleSampleGraphMask">点击示例</text>，查看IP浏览样式</view>
-  <view style="border-top: 2rpx solid #EEEDED;margin-top:30rpx;">
+  <!-- <view class="size26"> 完善信息之后，您的IP信息将展示在发现广场 </view>
+  <view class="size26"> <text style="text-decoration:underline;color:#8BCFFD;" catchtap="toggleSampleGraphMask">点击示例</text>，查看IP浏览样式</view> -->
+  <view style="margin-top:30rpx;">
     <settledForm
       id="settledForm"
       statusBarHeightMc="{{statusBarHeightMc}}"
@@ -16,10 +16,13 @@
     </settledForm>
   </view>
   <block>
-      <view class="footerFailWrap">
-          <!-- <view data-num="1" catchtap="navigateBack">返回</view> -->
+      <!-- <view class="footerFailWrap">
           <view catchtap="submitAudit">提交</view>
           <text data-num="1" catchtap="navigateBack">暂不填写</text>
+      </view>  -->
+      <view class="footerWrap">
+          <view data-num="1" catchtap="navigateBack">返回</view>
+          <view catchtap="submitAudit">确认发布</view>
       </view>
   </block>
 </view>
