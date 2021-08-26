@@ -88,6 +88,9 @@ Page({
   onLoad: function (options) {
     // 判断是否授权
     this.activsign();
+    this.setData({
+      id:options.id||0
+    })
   },
   onLoadfun:function(){
     this.setData({
@@ -193,9 +196,61 @@ Page({
           let groups = `ipData[0].groups`;
           this.setData({
             [groups]:res.data.List.brandInfoList,
-            [`ipData[0].value`]:res.data.List.brandInfoList[0].name
           })
-          this.data.obj.associationIp = res.data.List.brandInfoList[0].brand_id;
+          if(this.data.id!=0){
+            this.getData();
+          }else{
+            wx.hideLoading()
+            wx.stopPullDownRefresh();
+            this.setData({
+              [`ipData[0].value`]:res.data.List.brandInfoList[0].name
+            })
+            this.data.obj.associationIp = res.data.List.brandInfoList[0].brand_id;
+          }
+        }else{
+          wx.hideLoading()
+          wx.stopPullDownRefresh();
+          app.showToastC(res.data.Msg,2000);
+        }
+      },
+      fail: function () {},
+      complete:function(){
+        
+      }
+    });
+  },
+  getData(){
+    let data = `mod=community&operation=showIllustratedInfo&uid=${this.data.uid}&loginid=${this.data.loginid}&illustrated_id=${this.data.id}`
+    var q = Dec.Aese(data);
+    console.log(`${app.signindata.comurl}?${data}`)
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: (res) => { 
+        wx.hideLoading()
+        wx.stopPullDownRefresh();
+        console.log(res);
+        if(res.data.ReturnCode == 200){
+          let info = res.data.Info;
+          let obj = this.data.obj;
+          this.setData({
+            [`ipData[0].value`]:info.brandName,
+            [`fieldGuideData[0].value`]:info.title,
+            [`fieldGuideData[1].imageList`]:info.imgArr,
+            [`fieldGuideData1[0].value`]:info.price,
+            [`fieldGuideData1[1].value`]:info.number,
+            [`fieldGuideData1[2].value`]:info.sell_way,
+            [`fieldGuideData1[3].value`]:info.description,
+            
+          })
+          obj.associationIp = info.brand_id;
+          obj.fieldGuideTitle = info.title;
+          obj.fieldGuidePic = info.imgArr;
+          obj.goodsPrice = info.price;
+          obj.goodsNum = info.number;
+          obj.sellingway = info.sell_way;
+          obj.fieldGuideDescription = info.description;
         }else{
           app.showToastC(res.data.Msg,2000);
         }
@@ -237,7 +292,7 @@ Page({
       title: '加载中',
     })
     console.log(obj)
-    let data = `mod=community&operation=establishImages&uid=${this.data.uid}&loginid=${this.data.loginid}&brand_id=${obj.associationIp}&title=${obj.fieldGuideTitle}&price=${obj.goodsPrice}&number=${obj.goodsNum}&sell_way=${obj.sellingway?obj.sellingway:''}&description=${obj.fieldGuideDescription?obj.fieldGuideDescription:''}&imgArr=${obj.fieldGuidePic}`
+    let data = `mod=community&operation=establishImages&uid=${this.data.uid}&loginid=${this.data.loginid}&brand_id=${obj.associationIp}&title=${obj.fieldGuideTitle}&price=${obj.goodsPrice}&number=${obj.goodsNum}&sell_way=${obj.sellingway?obj.sellingway:''}&description=${obj.fieldGuideDescription?obj.fieldGuideDescription:''}&imgArr=${obj.fieldGuidePic}&id=${this.data.id}`
     var q = Dec.Aese(data);
     console.log(`${app.signindata.comurl}?${data}`)
     wx.request({
