@@ -148,15 +148,15 @@
                         <view>
                             <view class="assetL">
                                 <view>
-                                    <text>￥3.2w</text>
+                                    <text>￥{{dataInfo.brandSettledInfo.remaining}}</text>
                                     <text>余额</text>
                                 </view>
                                 <view>
-                                    <text>1165</text>
+                                    <text>{{dataInfo.brandSettledInfo.gold}}</text>
                                     <text>金币</text>
                                 </view>
                                 <view>
-                                    <text>1165</text>
+                                    <text>{{dataInfo.brandSettledInfo.silver}}</text>
                                     <text>银币</text>
                                 </view>
                             </view>

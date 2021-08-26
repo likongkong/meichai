@@ -197,7 +197,7 @@ Page({
           }
         })
       }else{
-        app.showToastC(res.data.data,1500);
+        app.showToastC('提现申请已提交，审核通过之后三个工作日之内到账',1500);
         setTimeout(()=>{
           this.reset();
           this.getLumpsumAndWithdraw();

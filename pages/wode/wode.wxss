@@ -690,7 +690,7 @@ page{
 }
 .createItem{
   width: 90%;
-  height: 110rpx;
+  height: 72rpx;
   border-radius: 20rpx;
   display: flex;
   align-items: center;
@@ -701,21 +701,21 @@ page{
   margin-bottom: 0;
 }
 .createItem view{
-  font-size: 32rpx;
+  font-size: 28rpx;
   color: #fff;
 }
 .createItem view:first-child{
   width: 120rpx;
-  height: 56rpx;
+  height: 30rpx;
   text-align: center;
-  line-height: 56rpx;
+  line-height: 30rpx;
   position: relative;
   margin-right: 28rpx;
 }
 .createItem view:first-child::after{
   content:'';
   width: 4rpx;
-  height: 56rpx;
+  height: 30rpx;
   position: absolute;
   top: 0;
   right: 0;

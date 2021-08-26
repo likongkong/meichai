@@ -2,20 +2,25 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 <view class="wrap">
-  <block wx:for="{{dataList}}" wx:key='key'>
-    <view class="fieldGuideWrap" data-brandname="{{item.brandName}}" data-id="{{item.id}}" catchtap="chooseFieldGuide">
-      <text class="title">{{item.brandName}}</text>
-      <view class="box">
-        <text class="typeName">图鉴</text>
-        <view class="fieldGuidePicWrap">
-          <scroll-view scroll-x>  
-            <block wx:for="{{item.imgArr}}" wx:key='key' wx:for-item="sonItem">
-              <image src="{{sonItem}}" mode="widthFix"></image>
-            </block>
-          </scroll-view>
+  <block wx:if="{{dataList.length!=0}}">
+    <block wx:for="{{dataList}}" wx:key='key'>
+      <view class="fieldGuideWrap" data-brandname="{{item.brandName}}" data-id="{{item.id}}" catchtap="chooseFieldGuide">
+        <text class="title">{{item.brandName}}</text>
+        <view class="box">
+          <text class="typeName">图鉴</text>
+          <view class="fieldGuidePicWrap">
+            <scroll-view scroll-x>  
+              <block wx:for="{{item.imgArr}}" wx:key='key' wx:for-item="sonItem">
+                <image src="{{sonItem}}" mode="widthFix"></image>
+              </block>
+            </scroll-view>
+          </view>
+          <text class="brandName">{{item.title}}</text>
         </view>
-        <text class="brandName">{{item.title}}</text>
       </view>
-    </view>
+    </block>
+  </block>
+  <block wx:else>
+    <image class="nodatatu" src="../../../../pages/images/recaddnodata.png" mode="widthFix"></image>
   </block>
 </view> 

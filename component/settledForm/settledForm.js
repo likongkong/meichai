@@ -112,6 +112,13 @@ Component({
       let storagelocation = e.currentTarget.dataset.storagelocation;
       let name = e.currentTarget.dataset.name;
       let ind = e.currentTarget.dataset.index;
+
+      // console.log(this.data.list[ind].imageList.length)
+      // if(this.data.list[ind].imageList.length ?= 9){
+      //   app.showToastC('最多可上传9张图',1500);
+      //   return false;
+      // }
+
       var cos = new COS({
         SecretId: 'AKIDmY0RxErYIm2TfkckG8mEYbcNA4wYsPbe',
         SecretKey: '4WkpgJ5bJlU4B6wNuCG4EDyVnGWUFhw1',
@@ -119,30 +126,38 @@ Component({
       
       // 先选择文件，得到临时路径
       wx.chooseImage({
-        count: form=='dynamicContent'?9:1, // 默认9
+        count: form=='dynamicContent'?(10 - this.data.list[ind].imageList.length):1, // 默认9
         sizeType: ['compressed'], // 可以指定是原图original还是压缩图compressed，默认用原图
         sourceType: ['camera','album'], // 'album'相册  camera 相机
         success: (res) => {
+          if ((this.data.list[ind].imageList.length + res.tempFilePaths.length) > 9) {
+            wx.showToast({
+                title: "最多只能上传9张",
+                icon: 'none'
+             })
+            return;
+          }
+          
           wx.showLoading({
             title: '上传中...',
           })
           console.log(res)
           let imageList = res.tempFiles;
           let promiseList=[];
-          imageList.forEach(item => {
+          imageList.forEach((item, idx) => {
             // console.log(item.path)
             var filePath = item.path;
             //获取最后一个.的位置
             var index= filePath.lastIndexOf(".");
             //获取后缀
             var ext = filePath.substr(index+1);
-            var filename = filePath.substr(filePath.lastIndexOf('/') + 1);
+            // var filename = filePath.substr(filePath.lastIndexOf('/') + 1);
             promiseList.push( 
               new Promise((resolve, reject)=>{
                 cos.postObject({
                   Bucket: 'brand-settled-info-1300990269',
                   Region: 'ap-beijing',
-                  Key: `${storagelocation}/${new Date().getTime()}_${app.signindata.uid}.${ext}`,
+                  Key: `${storagelocation}/${new Date().getTime()}${idx}_${app.signindata.uid}.${ext}`,
                   FilePath: filePath,
                   onProgress: function (info) {  //上传进度
                       // console.log(JSON.stringify(info));
@@ -165,7 +180,7 @@ Component({
               this.triggerEvent("bindchange", {value:this.data.list[ind].imageList,name:name});
             }else{
               let src = `list[${ind}].src`;
-              this.setData({[src]: `https://${res[0]}`})
+              this.setData({[src]: `${res[0]}`})
               this.triggerEvent("bindchange", {value:res[0],name:name});
             }
           }).catch((error) => {

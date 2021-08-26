@@ -18,6 +18,7 @@ Page({
     pid:0,
     dataList:[],
     listIndex:0,
+    noData:false,
     loadprompt:false
   },
   /**
@@ -170,8 +171,8 @@ Page({
     prevPage.setData({
       [`dynamicData[${this.data.listIndex}].value`]:brandname
     })
-    prevPage.data.dynamicData[this.data.listIndex].value=brandname;
-    prevPage.data.obj.fieldGuideName=brandname;
+    prevPage.data.dynamicData[this.data.listIndex].value=title;
+    prevPage.data.obj.fieldGuideName=title;
     prevPage.data.obj.fieldGuideId=id;
     console.log(prevPage.data.obj)
     wx.navigateBack({

@@ -30,7 +30,7 @@ Page({
         isRequired:true,
         type:'text',
         subtitle:'联系方式',
-        placeholder:'请输入联系方式',
+        placeholder:'请输入手机号',
         value:'',
         name:'enterprisePhone'
       },{
@@ -248,11 +248,11 @@ Page({
     }
     if(!obj.enterprisePhone || obj.enterprisePhone == ''){
       this.selectComponent('#settledForm').scrollto('enterprisePhone');
-      app.showToastC('请输入联系方式',1500);
+      app.showToastC('请输入手机号',1500);
       return false;
     }else if(!phoneNum.test(obj.enterprisePhone)){
       this.selectComponent('#settledForm').scrollto('enterprisePhone');
-      app.showToastC('联系方式有误请重新填写',2000);
+      app.showToastC('手机号有误请重新填写',2000);
       return false;
     }
     if(!obj.wechatID || obj.wechatID == ''){
