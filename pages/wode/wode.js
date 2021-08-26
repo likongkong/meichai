@@ -114,7 +114,7 @@ Page({
     //   app.comjumpwxnav('9029',whref)
     // }else{
       app.comjumpwxnav(type,whref)
-    // }
+    // } 
   },
   jumpVipPrivilegePage(){
     wx.navigateTo({  
