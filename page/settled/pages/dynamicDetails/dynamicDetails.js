@@ -23,12 +23,10 @@ Page({
     var type = w.currentTarget.dataset.type || w.target.dataset.type || '';
     if(type == 1){
       var item_type = 1;
-      var whref = id;
     }else if(type == 2){
       var item_type = 9003;
-      var whref = id;
     }
-    app.comjumpwxnav(item_type, whref, wname, imgurl)
+    app.comjumpwxnav(item_type, id, '', '')
 
   },
 

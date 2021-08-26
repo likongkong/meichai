@@ -15,7 +15,7 @@
             <image class='dlfchrtopimgipList' wx:if='{{dataInfo.isAuth}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/approveIcon.png'></image>
             <view class="emlhltxt">
                     <view class="emlhlttop specialellipsis">{{dataInfo.brandName}}</view>
-                    <view class="emlhltbottom specialellipsis">123456<text style="margin-left:20rpx;">123456</text></view>
+                    <view class="emlhltbottom specialellipsis">{{dataInfo.add_time}}</view>
             </view>
         </view>
         <view class="{{!dataInfo.is_attention?'emlhright':'emlhrightNo'}}" data-id='{{dataInfo.brand_id}}' data-type='0' catchtap='followfun'>

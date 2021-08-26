@@ -22,12 +22,12 @@ Page({
     var type = w.currentTarget.dataset.type || w.target.dataset.type || '';
     if(type == 1){
       var item_type = 1;
-      var whref = id;
     }else if(type == 2){
       var item_type = 9003;
-      var whref = id;
+    }else if(type == 3){
+      var item_type = 9017
     }
-    app.comjumpwxnav(item_type, whref, wname, imgurl)
+    app.comjumpwxnav(item_type, id, '', '')
 
   },
 
@@ -123,11 +123,11 @@ Page({
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
           var sellList = res.data.List.sellList || [];
-          if(sellList.length != 0){
-              sellList.forEach(element => {
-                  element.start_time = _this.toDate(element.start_time)
-              });
-          };
+            if(sellList.length != 0){
+                sellList.forEach(element => {
+                    element.start_time = _this.toDate(element.start_time)
+                });
+            };
            _this.setData({
              dataDetail:res.data.Info,
              sellList:sellList
@@ -148,6 +148,14 @@ Page({
     var _this = this;
     var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
     var type = w.currentTarget.dataset.type || w.target.dataset.type || 0;
+    if(type == 6 && _this.data.dataDetail.is_want){
+       app.showToastC('您已点过我想要');
+       return false;
+    };
+    if(type == 5 && _this.data.dataDetail.is_same){
+      app.showToastC('您已点过我有同款');
+      return false;
+    };
     console.log('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id)
     var qqq = Dec.Aese('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id);
     wx.request({
