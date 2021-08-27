@@ -91,6 +91,9 @@ Page({
     brandSettledStatus:0,
     isAddNewEventMask:false
   },
+  jinqingqidai(){
+    app.showToastC('敬请期待',2000);
+  },
   toggleAddNewEventMask(){
     this.setData({
       isAddNewEventMask: !this.data.isAddNewEventMask
