@@ -60,11 +60,11 @@
             </view>
             <view class="orderAddress">
                 <view class="orderAddressEve">
-                    <view>收货人:{{receipt.consignee}}</view>
-                    <view>收货手机号:{{receipt.mobile}}</view>
+                    <view>收货人:{{receipt.consignee!=0?receipt.consignee:'未填写'}}</view>
+                    <view>收货手机号:{{receipt.mobile!=0?receipt.mobile:'未填写'}}</view>
                 </view>
                 <view class="orderAddressEve">
-                    <view>收货地址:{{receipt.province}}{{receipt.city}}{{receipt.district}}{{receipt.address}}</view>
+                    <view>收货地址:<block wx:if='{{receipt.province!=0}}'>{{receipt.province}}{{receipt.city}}{{receipt.district}}{{receipt.address}}</block><block wx:else>未填写</block></view>
                 </view>    
                 <view class="orderAddressEve" wx:if='{{order.customerMessage}}'>
                     <view>买家留言:{{order.customerMessage}}</view>

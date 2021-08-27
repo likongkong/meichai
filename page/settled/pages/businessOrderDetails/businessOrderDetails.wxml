@@ -23,15 +23,18 @@
     </view>
 
     <view class="centerTxtOrderDeatail comPaddingTop">
-        <view class="orderAddressEve">收货人：{{detailData.receipt.consignee}}</view>
-        <view class="orderAddressEve">收货手机号：{{detailData.receipt.mobile}}</view>  
-        <view class="orderAddressEve">收货地址：{{detailData.receipt.province}}{{detailData.receipt.city}}{{detailData.receipt.district}}{{detailData.receipt.address}}</view>     
-        <view class="orderAddressEve">备注：{{detailData.order.customerMessage}}</view>                   
+        <view class="orderAddressEve">收货人：{{detailData.receipt.consignee!=0?detailData.receipt.consignee:'未填写'}}</view>
+        <view class="orderAddressEve">收货手机号：{{detailData.receipt.mobile!=0?detailData.receipt.mobile:'未填写'}}</view>  
+        <view class="orderAddressEve">收货地址：
+            <block wx:if='{{detailData.receipt.consignee!=0}}'>{{detailData.receipt.province}}{{detailData.receipt.city}}{{detailData.receipt.district}}{{detailData.receipt.address}}</block>
+            <block wx:else>未填写</block>
+        </view>     
+        <view class="orderAddressEve" wx:if='{{detailData.order.customerMessage}}'>备注：{{detailData.order.customerMessage}}</view>                   
     </view>
 
     <view class="centerTxtOrderDeatail comPaddingTop">
         <view class="orderAddressEve">下单时间：{{detailData.order.addTimeTrans}}</view>
-        <view class="orderAddressEve">支付时间：{{detailData.order.payTimeTrans}}</view>                   
+        <view class="orderAddressEve" wx:if='{{detailData.order.payTime}}'>支付时间：{{detailData.order.payTimeTrans}}</view>                   
     </view>
 
     <view class="centerTxtOrderDeatail comPaddingTop">
@@ -41,7 +44,7 @@
 
     </view>
 
-    <view class="centerTxtOrderDeatail comPaddingTop">
+    <view class="centerTxtOrderDeatail comPaddingTop" wx:if='{{detailData.order.shippingCode}}'>
         <view class="orderAddressEve">实际发货日期：{{detailData.order.shippingTimeTrans}}</view>
         <view class="orderAddressEve">快递公司：{{detailData.order.shippingName}}</view> 
         <view class="orderAddressEve">运单号：{{detailData.order.shippingCode}}</view>

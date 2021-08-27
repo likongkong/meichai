@@ -218,10 +218,6 @@ Page({
     //       };
     //   }
     // })
-    
-    wx.removeStorageSync('access_token') // 同步删除缓存
-
-    return false
      wx.navigateTo({  
       // url: "/page/component/pages/doubleElevenexh/doubleElevenexh?specialsource=1"
       // url: "/page/component/pages/crowdfunding/crowdfunding?aid=75127"
