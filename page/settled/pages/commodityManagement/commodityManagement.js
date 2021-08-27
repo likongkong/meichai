@@ -36,7 +36,9 @@ Page({
     condition: false,
     cityback:false, 
     brand:[],
-    order:{},
+    order:[
+      1,2,3,4,5,6,7,8,9
+    ],
     payStatus:[
       {name:'全部',num:'-1'},
       {name:'未开始',num:'0'},
@@ -605,7 +607,7 @@ Page({
   // 获取数据
   getData(num=1){
      var _this = this;
-     return false;
+
     if (num==1){
       _this.setData({countOrder:0,page : 1,nodataiftr:false});
     }else{

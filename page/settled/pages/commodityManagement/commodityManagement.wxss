@@ -1,5 +1,5 @@
 @import "/common/tabbar.wxss";
-@import "/common/citysel.wxss";
+
 page{
   background:#f4f5f9;
 }
@@ -101,7 +101,7 @@ page{
 .orderBox{
   width: 660rpx;
   margin: auto;
-
+  padding-top: 25rpx;
 }
 .orderBoxTop{
   width: 100%;
@@ -190,7 +190,7 @@ page{
   font-size: 24rpx;
   border-radius: 10rpx;
   display: inline-block;
-  margin-left: 20rpx;
+  margin-left: 60rpx;
   vertical-align: top;
 }
 
@@ -206,7 +206,7 @@ page{
 }
 
 .orderBottomNavEve{
-  width: 300rpx;
+  width: 500rpx;
   height: 68rpx;
   line-height: 68rpx;
   text-align: center;
@@ -241,7 +241,7 @@ page{
 .orderMangTipCenterEve{
   width: 100%;
   display: flex;
-  justify-content:space-between;
+  justify-content:center;
   padding-bottom: 30rpx;
   font-size: 24rpx;
 }

@@ -27,62 +27,35 @@
     </view>
 
     <view class="orderBottomNavigation">
-        <view class="orderBottomNavEve" catchtap="commonBulletFrameFun" data-index='4'>批量导出订单</view>
-        <view class="orderBottomNavEve" style="margin-left:50rpx;" catchtap="commonBulletFrameFun" data-index='5'>批量导入运单</view>
+        <view class="orderBottomNavEve" catchtap="commonBulletFrameFun" data-index='4'>添加</view>
     </view>
 </view>
 
 <template name='orderCommon'>
    <view class="orderBox">
        <view catchtap="jumpBusOrderDetails" data-orderid='{{order.orderId}}'>
-            <view class="orderBoxTop">
-                <view>订单编号:{{order.orderSN}}</view>
-                <view style="color:#90D2D6;">{{order.payStatusName}}</view>
-            </view>
-            <view class="orderBoxTop" style="border-bottom: 2rpx solid #ECECEC;margin-bottom:20rpx;padding-bottom:20rpx;">
-                <view class="userImgName">
-                    <image class="userImg" src="{{receipt.userAvatar}}" mode="aspectFit"></image>
-                    <text class="userName specialellipsis">{{receipt.userNick}}</text>
-                </view>
-                <view wx:if='{{order.payTime}}'>{{order.payTimeTrans}}支付</view>
-            </view>
             <view class="orderBoxContent">
                 <image class="orderBoxContentImg" src="{{goods.goodsThumb}}" mode="aspectFit"></image>
                 <view class="orderBoxContentRight">
-                    <view class="obcrTop">
-                        <view style="padding-right:10rpx;">{{goods.goodsName}}</view>
+                    <view class="obcrTop" style="color:#90D2D6;">
+                        <view>直购商品</view>
+                        <view>未开始</view>
+                    </view>
+                    <view class="obcrTop" style="padding-top:20rpx;">
+                        <view>婚礼濑濑</view>
                     </view>
                     <view class="obcrBottom obcrTop">
-                        <view>数量x{{order.goodsNumber}}</view>
-                        <view>订单金额￥{{order.goodsAmount}}</view>
+                        <view>售价：199.00</view>
+                        <view>已售/总库存：55/100</view>
                     </view>
                 </view>
             </view>
-            <view class="orderAddress">
-                <view class="orderAddressEve">
-                    <view>收货人:{{receipt.consignee!=0?receipt.consignee:'未填写'}}</view>
-                    <view>收货手机号:{{receipt.mobile!=0?receipt.mobile:'未填写'}}</view>
-                </view>
-                <view class="orderAddressEve">
-                    <view>收货地址:<block wx:if='{{receipt.province!=0}}'>{{receipt.province}}{{receipt.city}}{{receipt.district}}{{receipt.address}}</block><block wx:else>未填写</block></view>
-                </view>    
-                <view class="orderAddressEve" wx:if='{{order.customerMessage}}'>
-                    <view>买家留言:{{order.customerMessage}}</view>
-                </view>                    
+       </view>
+       <view class="orderBottom"> <!-- 未支付 -->
+            <view class="orderBottomOrderNumber">
+                <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='3'>删除</view>
+                <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='1'>编辑</view>
             </view>
-       </view>
-       <view class="orderBottom" wx:if='{{order.shippingCode}}' style="padding-top:0;">
-            <view class="orderBoxTop">运单号:{{order.shippingCode}}</view>
-       </view>
-       <view class="orderBottom" wx:if='{{order.payStatus != 0 && order.payStatus != 7}}'> <!-- 未支付 -->
-               <view class="orderBottomOrderNumber">
-                   <view class="orderBottomButton" wx:if="{{order.payStatus != 5}}" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='3'>
-                       <block wx:if='{{order.shippingCode}}'>修改物流</block>
-                       <block wx:else>添加物流</block>
-                    </view>
-                   <view class="orderBottomButton" wx:if='{{order.payStatus!=7 && order.payTime>0}}' catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='2'>退款</view>
-                   <view class="orderBottomButton" wx:if='{{order.payStatus !=4 && order.payStatus != 5}}' catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='1'>修改收货地址</view>
-               </view>
        </view>
    </view>
 
@@ -94,7 +67,7 @@
         <view class="orderMangTipTop">
             <block wx:if='{{logisticsRefundModify == 1}}'>修改收货地址</block>
             <block wx:elif='{{logisticsRefundModify == 2}}'>退款</block>
-            <block wx:elif='{{logisticsRefundModify == 3}}'><block wx:if='{{selectData.order.shippingCode}}'>修改</block><block wx:else>添加</block>物流</block>
+            <block wx:elif='{{logisticsRefundModify == 3}}'>删除</block>
             <block wx:elif='{{logisticsRefundModify == 4}}'>批量导出订单</block>
             <block wx:elif='{{logisticsRefundModify == 5}}'>批量导入运单</block>
         </view>
@@ -175,40 +148,7 @@
         </block>
         <!-- 添加物流 -->
         <block wx:elif='{{logisticsRefundModify == 3}}'>
-            <view class="orderMangTipCenter">
-                <view class="orderMangTipCenterEve">
-                    <view>商品名称</view>
-                    <view>{{selectData.goods.goodsName}}</view>
-                </view>
-                <view class="orderMangTipCenterEve">
-                    <view>购买数量</view>
-                    <view>{{selectData.order.goodsNumber}}件</view>
-                </view>
-                <view class="addLogisticsTxt">
-                    <view class="orderMangTipCenterEve">
-                        <view>收货人</view>
-                        <view>{{selectData.receipt.consignee}}</view>
-                    </view>
-                    <view class="orderMangTipCenterEve">
-                        <view>收货人手机号</view>
-                        <view>{{selectData.receipt.mobile}}</view>
-                    </view>
-                    <view class="orderMangTipCenterEve">
-                        <view>收货地址</view>
-                        <view style="width:380rpx;text-align:right;">{{selectData.receipt.address}}</view>
-                    </view>                    
-                </view>
-                <view class="orderMangTipCenterEve" style="padding:30rpx 0;">
-                    <view>请输入快递公司及运单号</view>
-                </view>
-                <view class="orderMangTipCenterEve">
-                    <input class="addWaybillNumber" type="text" value='{{csc}}' bindinput='cscfun' placeholder="快递公司" ></input>
-                </view>
-                <view class="orderMangTipCenterEve">
-                    <input class="addWaybillNumber" type="text" placeholder="快递运单号" bindinput='scancodefun' value="{{scanCodeMsg}}"></input>
-                    <image class="scanCode" bindtap='scanCode' src="https://cdn.51chaidan.com/images/brandSettledIcon/scan.png" mode="aspectFit"></image>
-                </view>       
-            </view>
+            <text class="batchExportOrder" style="text-align:center;">确认删除“婚礼濑濑”该商品吗？删除之后小程序内将无法查看到该商品，请谨慎操作。</text> 
         </block>
         <!-- 批量导出订单 -->
         <block wx:elif='{{logisticsRefundModify == 4}}'>
@@ -228,17 +168,8 @@
         </block>
 
         <view class="orderMangTipCenterEve" style="width:610rpx;margin:auto;">
-            <block wx:if='{{logisticsRefundModify == 4 || logisticsRefundModify == 5}}'>
-                <view class="oAMaBConfirm" catchtap="closeCommonTip">关闭</view>
-                <view class="oAMaBCancel" catchtap="confirmCommonTip"  wx:if='{{logisticsRefundModify == 4}}'>复制下载链接</view> 
-                <view class="oAMaBCancel" catchtap="confirmCommonTip"  wx:elif='{{logisticsRefundModify == 5}}'>选择微信聊天</view>
-            </block>
-            <block wx:else>
-                <view class="oAMaBConfirm" catchtap="closeCommonTip">取消</view>
-                <view class="oAMaBCancel" catchtap="confirmCommonTip" wx:if='{{logisticsRefundModify == 2 && subLedger==1}}'>立即支付￥{{payInfoData.order.profitAmount}}</view> 
-                <view class="oAMaBCancel" catchtap="confirmCommonTip" wx:elif='{{logisticsRefundModify == 2 && subLedger==2}}'>立即退款</view> 
-                <view class="oAMaBCancel" catchtap="confirmCommonTip" wx:else>确定</view>               
-            </block>
+            <!-- <view class="oAMaBConfirm" catchtap="closeCommonTip">取消</view> -->
+            <view class="oAMaBCancel" catchtap="confirmCommonTip">确定</view> 
         </view>
     </view>
 
