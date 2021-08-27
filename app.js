@@ -1911,3 +1911,4 @@ App({
 // orderManagement 订单管理
 // businessOrderDetails  订单详情
 // dynamicDetails 动态详情
+// commodityManagement 商品管理

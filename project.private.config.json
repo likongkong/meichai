@@ -57,8 +57,8 @@
           "scene": null
         },
         {
-          "name": "绑定VIP",
-          "pathName": "page/secondpackge/pages/bindTicket/bindTicket",
+          "name": "商品管理",
+          "pathName": "page/settled/pages/commodityManagement/commodityManagement",
           "query": "",
           "scene": null
         },

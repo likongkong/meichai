@@ -168,6 +168,7 @@
         "pages/releaseDynamic/releaseDynamic",
         "pages/releaseFieldGuide/releaseFieldGuide",
         "pages/offeringCalendar/offeringCalendar",
+        "pages/commodityManagement/commodityManagement",
         "pages/fieldGuideList/fieldGuideList"
       ]
     }
