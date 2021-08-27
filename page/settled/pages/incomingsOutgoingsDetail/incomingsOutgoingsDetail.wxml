@@ -42,8 +42,8 @@
         </view>
         <view class="incomeItem">
           <view>商品售价：￥{{info.shop_price}}</view>
-          <view>平台分成：￥{{info.divided_into}}</view>
-          <view>实际收入：￥{{info.actual_income}}</view>
+          <view>平台退款：￥{{info.divided_into}}</view>
+          <view>商家退款：￥{{info.actual_income}}</view>
           <view>交易时间：{{info.pay_time}}</view>
         </view>
       </view>
