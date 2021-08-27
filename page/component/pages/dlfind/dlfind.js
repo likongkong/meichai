@@ -74,31 +74,13 @@ Page({
     isOpenToyShow:false,
     isPunchTheClock:1596729599<Date.parse(new Date())/1000&&Date.parse(new Date())/1000<1596988799?true:false,
     wOri:1 , // 1 瀑布流 2 信息流
-    testArr:[
-      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
-      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
-      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
-      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
-      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
-      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
-      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
-      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
-      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
-      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
-      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
-      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
-      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
-      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
-      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
-      {n:'测试',i:'https://cdn.51chaidan.com/images/202001/thumb_img/33084_thumb_G_1578905575726.jpg'},
-    ],
     payStatus:[
       {name:'推荐',num:'0'},
       {name:'我的关注',num:'1'},
       {name:'秒杀',num:'2'},
       {name:'抽选',num:'3'},
       {name:'动态',num:'4'},
-      {name:'分享',num:'5'}
+      // {name:'分享',num:'5'}
     ], // 支付状态 
     centerIndex:0,
     brandWhole:false

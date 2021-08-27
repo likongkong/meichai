@@ -4,7 +4,7 @@
 <view class="atlas">
     <swiper class="atlasswiper" indicator-color="#fff" indicator-active-color="#ccc" indicator-dots="{{true}}" circular="true" autoplay="true" interval="4000" duration="450">
         <swiper-item wx:for="{{dataInfo.imgArr}}" wx:key="key">
-                <image class="atlasswiperimage" src='{{item}}' style="height:100%;width:100%;display:block;" data-index='{{index}}' bindtap='previewImg' mode='aspectFit'></image>
+                <image class="atlasswiperimage" src='{{item}}' style="height:100%;width:100%;display:block;" data-index='{{index}}' bindtap='previewImg' mode='aspectFill'></image>
         </swiper-item>
     </swiper> 
 
