@@ -42,7 +42,7 @@
                 <text class="colorFFB730">+{{item.order_amount}}</text>
               </block>
               <block wx:else>
-                <text class="color101010">-{{item.order_amount}}</text>
+                <!-- <text class="color101010">-{{item.order_amount}}</text> -->
               </block>
             </view>
             <view>
