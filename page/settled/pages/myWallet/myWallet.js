@@ -151,16 +151,31 @@ Page({
   },
   // 提现判断
   bideWithdraw(){
+    let _this = this;
     let currentAccount = this.data.currentAccount;
     if(currentAccount){
-      if(currentAccount.account_type == 1){
-        this.setData({
-          merchantNo: util.plusXing(currentAccount.account,2,2)
-        })
-        this.toggleAuthenticationMask();
-      }else if(currentAccount.account_type == 2){
-        this.executionApplicationWithdrawal();
-      }
+      wx.showModal({
+        title: '提示',
+        content: '每天可提现一次，暂只支持全额提现，确认提现请点击下方立即提现',
+        cancelText:'取消',
+        cancelColor:'#90D2D6',
+        confirmText:'立即提现',
+        confirmColor:'#90D2D6',
+        success (res) {
+          if (res.confirm) {
+            if(currentAccount.account_type == 1){
+              _this.setData({
+                merchantNo: util.plusXing(currentAccount.account,2,2)
+              })
+              _this.toggleAuthenticationMask();
+            }else if(currentAccount.account_type == 2){
+              _this.executionApplicationWithdrawal();
+            }
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
     }else{
       this.clickme();
     }
@@ -176,7 +191,7 @@ Page({
           content: '今日已申请过提现，注意每天仅可申请一次提现，请明天再来提现吧',
           showCancel:false,
           confirmText:'关闭',
-          confirmColor:'#02BB00',
+          confirmColor:'#90D2D6',
           success (res) {
             if (res.confirm) {
               
@@ -189,7 +204,7 @@ Page({
           content: '钱包余额不足，最低提现￥1.00',
           showCancel:false,
           confirmText:'关闭',
-          confirmColor:'#02BB00',
+          confirmColor:'#90D2D6',
           success (res) {
             if (res.confirm) {
               

@@ -35,13 +35,13 @@
         </view>
         <view class="{{num>3?'sel':''}}">
             <view class="bdaiBoxImg">4</view>
-            <view class="bdaiBoxTxt">领取补贴</view>
+            <view class="bdaiBoxTxt">入住成功</view>
         </view>
     </block>
     <block wx:else>
         <view class="{{num>0?'sel':''}}">
             <view class="bdaiBoxImg">1<view class="markingLine"><view class="speedOfProgress" style="width:{{num>1?'100%':'50%'}};"></view></view></view>
-            <view class="bdaiBoxTxt">填写资料</view>
+            <view class="bdaiBoxTxt">提交申请</view>
         </view>
         <view class="{{num>1?'sel':''}}">
             <view class="bdaiBoxImg">2<view class="markingLine"><view wx:if="{{num>1}}" class="speedOfProgress" style="width:50%;"></view></view></view>
@@ -53,7 +53,7 @@
         </view>
         <view>
             <view class="bdaiBoxImg">4</view>
-            <view class="bdaiBoxTxt">领取补贴</view>
+            <view class="bdaiBoxTxt">提现到账</view>
         </view>
     </block>
 </view>
