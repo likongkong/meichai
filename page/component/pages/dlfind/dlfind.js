@@ -556,9 +556,10 @@ Page({
         console.log('新品牌信息=====',res)
         if (res.data.ReturnCode == 200) {
           if(type == 0){
+            var istype = w.currentTarget.dataset.istype || w.target.dataset.istype || false;
             communityList.forEach(element => {
                 if(element.brandInfo.brand_id == id){
-                  element.is_attention = true;
+                  element.is_attention = !istype;
                 }
             });
             _this.setData({

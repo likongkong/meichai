@@ -615,7 +615,21 @@ page{background:#f5f6fa;}.dlfbox{width:100%;background:#f5f6fa;}::-webkit-scroll
   right: 0;
   background-color: #fff;
 }
-
+.emlhrightNo{
+  width: 90rpx;
+  height: 36rpx;
+  text-align: center;
+  line-height: 36rpx;
+  color: #34A9ED;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 20rpx;
+  margin: auto;
+  font-size: 24rpx;
+  border-radius: 4rpx;
+  border:2rpx solid #34A9ED;
+}
 
 
 

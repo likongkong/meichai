@@ -55,6 +55,7 @@ Page({
       dateid:dateid
     });
     this.data.isSpecialCurrentMonth = 0;
+    this.data.isReverseSort = 0;
     this.getData();
     let that = this;
     let top = '#top' + dateid;
@@ -166,7 +167,7 @@ Page({
         }else if(res.data.ReturnCode == 201){
           //   201时会返回
           _this.data.isSpecialCurrentMonth = 1;
-          _this.data.isReverseSort = 1;
+          _this.data.isReverseSort = 0;
           if(num == 0){
             var dataList = res.data.List || [];
           }else{

@@ -100,7 +100,10 @@
                           </view>
                     </view>
                 </view>
-                <view class="emlhright" data-type='0' data-id='{{item.brandInfo.brand_id}}' data-ind='{{index}}' catchtap='followfun' wx:if='{{!item.is_attention}}'>关注</view>
+                <view class="{{!item.is_attention?'emlhright':'emlhrightNo'}}" data-type='0' data-id='{{item.brandInfo.brand_id}}' data-istype='{{item.is_attention}}' data-ind='{{index}}' catchtap='followfun'>
+										<block wx:if='{{!item.is_attention}}'>关注</block>
+										<block wx:else>已关注</block>                  
+                </view>
             </view>
 
             <view class="multilineellipsisFive" style="margin:20rpx;font-size:26rpx;" wx:if='{{item.title && item.type!=1 && item.type!=2}}' catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}'><text>{{item.title}}</text></view>
