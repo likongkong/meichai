@@ -197,12 +197,20 @@ Page({
             ipLogo:brandInfo.ip_logo,
             ipImage:brandInfo.ip_img,
             introduce:brandInfo.ip_introduce,
+            WeChatCode:brandInfo.helper_wechat_number,
+            officialAccounts:brandInfo.official_accounts,
+            redBookId:brandInfo.red_book_id,
+            microblog:brandInfo.microblog,
           };
           this.setData({
             [`enterpriseData[0].value`]:brandInfo.ip_name,
             [`enterpriseData[1].src`]:brandInfo.ip_logo,
             [`enterpriseData[2].src`]:brandInfo.ip_img,
             [`enterpriseData[3].value`]:brandInfo.ip_introduce,
+            [`enterpriseData[5].src`]:brandInfo.helper_wechat_number,
+            [`enterpriseData[6].src`]:brandInfo.official_accounts,
+            [`enterpriseData[7].value`]:brandInfo.red_book_id,
+            [`enterpriseData[8].value`]:brandInfo.microblog,
             id:brandInfo.id
           })
 
