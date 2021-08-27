@@ -153,32 +153,33 @@ Page({
   bideWithdraw(){
     let _this = this;
     let currentAccount = this.data.currentAccount;
-    if(currentAccount){
-      wx.showModal({
-        title: '提示',
-        content: '每天可提现一次，暂只支持全额提现，确认提现请点击下方立即提现',
-        cancelText:'取消',
-        cancelColor:'#90D2D6',
-        confirmText:'立即提现',
-        confirmColor:'#90D2D6',
-        success (res) {
-          if (res.confirm) {
-            if(currentAccount.account_type == 1){
-              _this.setData({
-                merchantNo: util.plusXing(currentAccount.account,2,2)
-              })
-              _this.toggleAuthenticationMask();
-            }else if(currentAccount.account_type == 2){
-              _this.executionApplicationWithdrawal();
-            }
-          } else if (res.cancel) {
-            console.log('用户点击取消')
-          }
+    wx.showModal({
+      title: '提示',
+      content: '每天可提现一次，暂只支持全额提现，确认提现请点击下方立即提现',
+      cancelText:'取消',
+      cancelColor:'#90D2D6',
+      confirmText:'立即提现',
+      confirmColor:'#90D2D6',
+      success (res) {
+        if (res.confirm) {
+          // 判断上次中的那个 currentAccount.account_type==1为银行卡  2为微信零钱
+          // if(currentAccount){
+          //   if(currentAccount.account_type == 1){
+          //     _this.setData({
+          //       merchantNo: util.plusXing(currentAccount.account,2,2)
+          //     })
+          //     _this.toggleAuthenticationMask();
+          //   }else if(currentAccount.account_type == 2){
+          //     _this.executionApplicationWithdrawal();
+          //   }
+          // }else{
+            _this.clickme();
+          // }
+        } else if (res.cancel) {
+          console.log('用户点击取消')
         }
-      })
-    }else{
-      this.clickme();
-    }
+      }
+    })
   },
   // 提现
   executionApplicationWithdrawal(){
@@ -233,27 +234,45 @@ Page({
     let account_type = withdrawAccount.account_type;
     let data={
       account:withdrawAccount.account,
+      account_name:withdrawAccount.account_name,
+      bank_name:withdrawAccount.bank_name,
       account_type
     }
     api.setDefaultAccount(id,data).then((res) => {
       console.log(res)
-      app.showToastC(this.data.currentAccount?'修改成功':'设置成功',1500);
-      setTimeout(()=>{
-        this.setData({
-          currentAccount:withdrawAccount,
-        })
-        this.hideModal()
-      },1500)
+      // app.showToastC(this.data.currentAccount?'修改成功':'设置成功',1500);
+      // setTimeout(()=>{
+        // this.setData({
+        //   currentAccount:withdrawAccount,
+        // })
+        this.hideModal();
+        this.executionApplicationWithdrawal();
+      // },1500)
     }).catch((err)=>{
       console.log(err)
     })
   },
   // 商户号输入
   bindKeyInput(e){
-    // console.log(e.detail.value)
-    this.setData({
-      [`withdrawAccount.account`]:e.detail.value
-    })
+    // console.log(e.currentTarget.dataset.type)
+    let type = e.currentTarget.dataset.type;
+    console.log(e.detail.value,type)
+    if(type == 'name'){
+      this.setData({
+        [`withdrawAccount.account_name`]:e.detail.value
+      })
+    }else if(type == 'bankname'){
+      this.setData({
+        [`withdrawAccount.bank_name`]:e.detail.value
+      })
+    }else if(type == 'cardno'){
+      this.setData({
+        [`withdrawAccount.account`]:e.detail.value
+      })
+    }
+    // this.setData({
+    //   [`withdrawAccount.account`]:e.detail.value
+    // })
   },
   // 日期选择
   bindDateChange(e) {

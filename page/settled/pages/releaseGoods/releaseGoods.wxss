@@ -1,1 +1,8 @@
-/* page/settled//pages/releaseGoods/releaseGoods.wxss */
+page{
+  background:#f4f5f9;
+}
+.card{
+  background: #ffffff;
+  border-radius: 20rpx;
+  margin-top: 24rpx;
+}

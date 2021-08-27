@@ -158,6 +158,7 @@
 /*对话框 */
 .commodity_attr_box {
   width: 100%;
+  padding-bottom: 160rpx;
   overflow: hidden;
   position: fixed;
   bottom: 0;
@@ -223,10 +224,19 @@
   top: 16rpx;
 }
 .merchantNoInput{
+  /* display: flex;
+  justify-content: space-between;
+  align-items: center; */
+  margin-top: 18rpx;
+}
+.merchantNoInput view{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 40rpx;
+  margin-bottom: 16rpx;
+}
+.merchantNoInput view:last-child{
+  margin-bottom: 0;
 }
 .merchantNoInput text{
   width: 30%;
@@ -258,8 +268,8 @@
   background-color: #ffffff;
 }
 .footerWrap view{
-  height: 80rpx;
-  line-height: 80rpx;
+  height: 72rpx;
+  line-height: 72rpx;
   text-align: center;
   font-size: 24rpx;
   border-radius: 12rpx;
@@ -271,7 +281,7 @@
 }
 .footerWrap view:last-child{
   width: 76%;
-  height: 84rpx;
+  height: 76rpx;
   background: #90D2D6;
   color: #ffffff;
 }

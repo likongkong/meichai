@@ -3,7 +3,7 @@
 <view class="wrap">
   <view class="headWrap">
     <view class="card">
-      <image catchtap="clickme" src="https://cdn.51chaidan.com/images/brandSettledIcon/set.png" mode="widthFix"></image>
+      <!-- <image catchtap="clickme" src="https://cdn.51chaidan.com/images/brandSettledIcon/set.png" mode="widthFix"></image> -->
       <view>
         <text class="amount">￥{{info.lumpSum}}</text>
         <text class="amountTxt">钱包余额</text>
@@ -97,31 +97,46 @@
 
 <!--设置弹出框  -->
 <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
-<view animation="{{animationData}}" class="commodity_attr_box" style="height:{{popHeight}}rpx" wx:if="{{showModalStatus}}">
-  <text class="popTitle">{{currentAccount?'修改绑定账户':'首次提现请先绑定提现账户类型'}}</text>
+<!-- <view animation="{{animationData}}" class="commodity_attr_box" style="height:{{popHeight}}rpx" wx:if="{{showModalStatus}}"> -->
+<view class="commodity_attr_box" wx:if="{{showModalStatus}}">
+  <!-- <text class="popTitle">{{currentAccount?'修改绑定账户':'首次提现请先绑定提现账户类型'}}</text> -->
+  <text class="popTitle">选择提现账户</text>
   <view class="popContentWrap">
     <block wx:for="{{accountList}}" wx:key="index">
       <view class="popContentItem" data-ind="{{index}}" catchtap="chooseAccount">
-        <view class="accountTitle" data-type="{{item.account_type}}" catchtap="toggleDescriptionMask">
+        <!-- catchtap="toggleDescriptionMask"   点击说明-->
+        <view class="accountTitle" data-type="{{item.account_type}}">
           <text>{{item.title}}</text> 
-          <image src="https://cdn.51chaidan.com/images/brandSettledIcon/wenhao.png" mode="widthFix"></image>
+          <!-- <image src="https://cdn.51chaidan.com/images/brandSettledIcon/wenhao.png" mode="widthFix"></image> -->
         </view>
         <view class="quotaWrap">
           <view>{{item.remark}}</view>
-          <text wx:if="{{currentAccount.account_type == item.account_type}}">当前提现账户</text>
+          <!-- <text wx:if="{{currentAccount.account_type == item.account_type}}">当前提现账户</text> -->
           <image wx:if="{{item.isdefault}}" src="https://cdn.51chaidan.com/images/brandSettledIcon/duihao.png" mode="widthFix"></image>
         </view>
       </view>
     </block>
     <view wx:if="{{withdrawAccount.account_type == 1}}" class="merchantNoInput">
-      <text>请输入商户号</text>
-      <input type="text" bindinput="bindKeyInput" value="{{withdrawAccount.account}}" />
+      <!-- <text>请输入商户号</text>
+      <input type="text" bindinput="bindKeyInput" value="{{withdrawAccount.account}}" /> -->
+      <view>
+        <text>收款人姓名</text>
+        <input type="text" data-type="name" bindinput="bindKeyInput" value="{{withdrawAccount.account_name}}" />
+      </view>
+      <view>
+        <text>收款银行</text>
+        <input type="text" data-type="bankname" bindinput="bindKeyInput" value="{{withdrawAccount.bank_name}}" />
+      </view>
+      <view>
+        <text>银行卡号</text>
+        <input type="text" data-type="cardno" bindinput="bindKeyInput" value="{{withdrawAccount.account}}" />
+      </view>
     </view>
   </view>
   <view class="setfooter">
     <view class="footerWrap">
         <view bindtap="hideModal">关闭</view>
-        <view catchtap="submitAudit">确认</view>
+        <view catchtap="submitAudit">立即提现</view>
     </view>
   </view>
 </view>
