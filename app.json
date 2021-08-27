@@ -167,6 +167,8 @@
         "pages/dynamicDetails/dynamicDetails",
         "pages/releaseDynamic/releaseDynamic",
         "pages/releaseFieldGuide/releaseFieldGuide",
+        "pages/releaseGoods/releaseGoods",
+        "pages/releaseDrawGoods/releaseDrawGoods",
         "pages/offeringCalendar/offeringCalendar",
         "pages/fieldGuideList/fieldGuideList"
       ]
