@@ -14,8 +14,9 @@
         <view class="elserbotom" catchtap="jumpsearch">搜索</view>
 	</view>
 
-    <scroll-view class="marginAuto scrollViewTop" scroll-x="true" scroll-with-animation="true" scroll-left='{{scrollleft}}' style="height:80rpx;">
-         <view wx:for="{{payStatus}}" wx:key='key' id="ele{{item.num}}" class="classifyItem {{centerIndex == item.num?'active':''}}" data-index="{{item.num}}" catchtap="classifyChange">{{item.name}}<text wx:if='{{centerIndex == item.num && nodataiftr}}'>({{countOrder}})</text></view>
+    <scroll-view class="marginAuto scrollViewTop" scroll-x="true" scroll-with-animation="true" scroll-left='{{scrollleft}}' style="height:80rpx;position: relative;">
+         <view wx:for="{{payStatus}}" wx:key='key' id="ele{{item.num}}" class="classifyItem {{centerIndex == item.num?'active':''}}" data-index="{{item.num}}" catchtap="classifyChange">{{item.name}}</view>
+         <view class="cmScreen" catchtap="selectBoxFun">筛选<image src="https://cdn.51chaidan.com/images/brandSettledIcon/filtrate.png" mode="aspectFit"></image></view>
     </scroll-view>
 
     <view class="marginAuto centerTxt" wx:for='{{order}}' wx:key='key'>
@@ -33,20 +34,23 @@
 
 <template name='orderCommon'>
    <view class="orderBox">
-       <view catchtap="jumpBusOrderDetails" data-orderid='{{order.orderId}}'>
+       <view>
             <view class="orderBoxContent">
-                <image class="orderBoxContentImg" src="{{goods.goodsThumb}}" mode="aspectFit"></image>
+                <image class="orderBoxContentImg" src="{{itemImg}}" mode="aspectFit"></image>
                 <view class="orderBoxContentRight">
                     <view class="obcrTop" style="color:#90D2D6;">
-                        <view>直购商品</view>
-                        <view>未开始</view>
+                        <view>{{itemTypeName}}</view>
+                        <view>{{itemStatusName}}</view>
                     </view>
                     <view class="obcrTop" style="padding-top:20rpx;">
-                        <view>婚礼濑濑</view>
+                        <view class="specialellipsis">{{itemName}}</view>
                     </view>
                     <view class="obcrBottom obcrTop">
-                        <view>售价：199.00</view>
-                        <view>已售/总库存：55/100</view>
+                        <view>售价:{{itemPrice}}</view>
+                        <view>
+                            <block wx:if='{{itemType == 4}}'>抽选数量:{{stock}}</block>
+                            <block wx:else>已售/总库存:{{salesNumber}}/{{stock}}</block>
+                        </view>
                     </view>
                 </view>
             </view>
@@ -68,8 +72,6 @@
             <block wx:if='{{logisticsRefundModify == 1}}'>修改收货地址</block>
             <block wx:elif='{{logisticsRefundModify == 2}}'>退款</block>
             <block wx:elif='{{logisticsRefundModify == 3}}'>删除</block>
-            <block wx:elif='{{logisticsRefundModify == 4}}'>批量导出订单</block>
-            <block wx:elif='{{logisticsRefundModify == 5}}'>批量导入运单</block>
         </view>
         <!-- 修改地址 -->
         <block wx:if='{{logisticsRefundModify == 1}}'>
@@ -148,52 +150,23 @@
         </block>
         <!-- 添加物流 -->
         <block wx:elif='{{logisticsRefundModify == 3}}'>
-            <text class="batchExportOrder" style="text-align:center;">确认删除“婚礼濑濑”该商品吗？删除之后小程序内将无法查看到该商品，请谨慎操作。</text> 
+            <text class="batchExportOrder" style="text-align:center;">确认删除“{{selectData.itemName}}”该商品吗？删除之后小程序内将无法查看到该商品，请谨慎操作。</text> 
         </block>
-        <!-- 批量导出订单 -->
-        <block wx:elif='{{logisticsRefundModify == 4}}'>
-            <text class="batchExportOrder">导出订单步骤：
-            第一步：点击“复制下载链接”。
-            第二步：在手机/电脑浏览器输入复制的下载链接，开始下载。
-            第三步：下载完成，打开文件，进行编辑。
-            </text>          
-        </block>
-        <!-- 批量导入订单 -->
-        <block wx:elif='{{logisticsRefundModify == 5}}'>
-            <text class="batchExportOrder">导入运单步骤：
-第一步：点击“选择微信聊天文件”。
-第二步：选择包含导入文件的微信聊天。
-第三步：选择需要导入的文件，文件格式为excel。
-第四步：上传成功。</text>          
-        </block>
+
 
         <view class="orderMangTipCenterEve" style="width:610rpx;margin:auto;">
-            <!-- <view class="oAMaBConfirm" catchtap="closeCommonTip">取消</view> -->
-            <view class="oAMaBCancel" catchtap="confirmCommonTip">确定</view> 
+            <view class="oAMaBConfirm" catchtap="closeCommonTip">取消</view>
+            <view class="oAMaBCancel" catchtap="confirmCommonTip">确定删除</view> 
         </view>
     </view>
-
-
-
-
 </view>
 
-<!--  省市联动  -->
-<view class='citybackg' catchtap="conditionfun" wx:if='{{cityback}}'></view>
-<view wx:if="{{condition}}" class="citypicker">
-  <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange" class="citybody">
-    <view class="cityheader">
-      <view bindtap="open" class="city-cancel">取消</view>
-      <view bindtap="open" class="city-true">确定</view>
+
+<view class="wshNew" catchtouchmove="true" wx:if='{{selectBox}}' catchtap="selectBoxFun">
+    <view class="orderMangAddressBottom" catchtap="true" style="border-radius:30rpx 30rpx 0 0;">
+        <view class="orderMangTipTop" style="border-bottom:2rpx solid #F4F4F4;" wx:for='{{selectData}}' wx:key='key' catchtap="selectCap" data-index='{{item.id}}'>{{item.n}}</view>
+        
+        <view class="orderMangCenterBG"></view>
+        <view class="orderMangTipTop" catchtap="selectBoxFun" style="padding-bottom:30rpx;">取消</view>
     </view>
-    <picker-view-column>
-      <view wx:for="{{provinces}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item}}</view>
-    </picker-view-column>
-    <picker-view-column>
-      <view wx:for="{{citys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item}}</view>
-    </picker-view-column>
-    <picker-view-column>
-      <view wx:for="{{countys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item}}</view>
-    </picker-view-column>
-  </picker-view>
 </view>

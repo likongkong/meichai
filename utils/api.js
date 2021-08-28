@@ -73,10 +73,14 @@ export const oMbrandInfo = (url,query) => {
     return apiResquest.get('brand/info/' + url,query)
 }
 // ---------------------------------------- 商品管理 -----------------------------------------
-export const settledGoodsList = (url,query) => {
-    return apiResquest.get('brand/info/' + url,query)
+// 列表数据
+export const settledGoodsList = (query) => {
+    return apiResquest.get('brand/settled_goods/list',query)
 }
-
+// 删除商品
+export const brandSettledGoodsStopSale = (query) => {
+    return apiResquest.post('brand/settled_goods/stopSale',query)
+}
 
 // login(data).then(res => {
 //   console.log(res)

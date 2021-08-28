@@ -251,3 +251,15 @@ page{
   display: block;
   margin-bottom: 10rpx;
 }
+.boxAtlasLeftNimg{
+  float: left;
+  height: 30rpx;
+  width: 54rpx;
+  color: #fff;
+  border-radius: 6rpx;
+}
+.dlfchrbrightNimg{position:absolute;top:15rpx;left:15rpx;z-index:2;border-radius:6rpx;height: 36rpx;
+  width: 72rpx;}
+
+
+

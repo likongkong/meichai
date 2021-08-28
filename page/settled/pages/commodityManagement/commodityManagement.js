@@ -15,40 +15,48 @@ Page({
     loginid:'',
     brandid:0,
     ordername:'',
-    centerIndex:'-1',
+    centerIndex:'0',
     scrollleft:0,
     scrollleftTop:0,
     logisticsRefundModify:4, // 1 修改 2 退款 3 物流 4批量导出订单
     scanCodeMsg: "",
     csc:'',
     commonBulletFrame:false, // 公共弹框
-    // 省市联动数据
-    provinces: [],
-    province: "",
-    citys: [],
-    city: "",
-    countys: [],
-    county: '',
-    value: [0, 0, 0],
-    values: [0, 0, 0],
     condition: false,
     cityback:false, 
     brand:[],
-    order:[
-      1,2,3,4,5,6,7,8,9
-    ],
+    order:[],
     payStatus:[
-      {name:'全部',num:'-1'},
-      {name:'未开始',num:'0'},
+      {name:'全部',num:'0'},
+      {name:'未开始',num:'1'},
       {name:'进行中',num:'2'},
       {name:'已结束',num:'3'},
       {name:'已删除',num:'4'}
     ], // 支付状态 
     subLedger: 0 , // 1 已分账 2 未分账
     countOrder:0,
-    nodataiftr:false
+    nodataiftr:false,
+    selectid:0,
+    selectBox:false,
+    selectData:[
+      {'n':'全部',id:0},
+      {'n':'秒杀商品',id:'-1'},
+      {'n':'抽选商品',id:5}
+    ]
   },
-
+  selectBoxFun(){
+     this.setData({
+        selectBox:!this.data.selectBox
+     })
+  },
+  selectCap(e){
+    let index = e.currentTarget.dataset.index;
+    this.setData({
+      selectid:index
+    })
+    this.getData();
+    this.selectBoxFun();
+  },
   conditionfun(){
     this.setData({
       condition: false,
@@ -68,32 +76,6 @@ Page({
       commonBulletFrame:false,
     })
   },
-  // 修改地址名字
-  namefun:function(e){
-    this.data.modifyName = e.detail.value;
-  },
-  // 修改地址手机号
-  telfun: function (e) { 
-    this.data.modifyMobile = e.detail.value
-  },
-  // 修改地址 地址详情
-  deladdressfun: function (e) {
-    this.setData({
-      deladdress: e.detail.value
-    })
-  },
-  // 快递公司名称 Courier Services Company
-  cscfun: function (e) {
-    this.setData({
-      csc: e.detail.value
-    })
-  },
-  // 订单号 
-  scancodefun(e){
-    this.setData({
-      scanCodeMsg: e.detail.value
-    })
-  },
   commonBulletFrameFun(e){
     let index = e.currentTarget.dataset.index;
     let num = e.currentTarget.dataset.num || 0; // 订单标识
@@ -101,15 +83,7 @@ Page({
     var order = _this.data.order || [];
     var selectData = order[num] || {};
     if(index == 1){ // 1 修改地址 2 退款 3 物流
-      var receipt = order[num].receipt || {};
-      _this.setData({
-        modifyName:receipt.consignee,
-        modifyMobile:receipt.mobile,
-        deladdress:receipt.address,
-        province:receipt.province,
-        city:receipt.city,
-        county:receipt.district
-      })
+
     } else if(index == 2){      
         api.checkOrderRefund({
             orderId:selectData.order.orderId,	// Number订单id 对内唯一标识
@@ -139,21 +113,18 @@ Page({
           }          
         })
     } else if(index == 3){
-      _this.setData({
-        csc:'',
-        scanCodeMsg:''
-      })
+
     }else if(index == 4){
 
     };
-    if(index != 2){
+    if(index != 1 && index != 4){
       this.setData({
         commonBulletFrame:true,
         logisticsRefundModify:index,
         orderNum:num,
         selectData
       })
-    }
+    };
 
   },
   // 弹框确认按钮    1 修改收货地址 2 退款 3 物流 4批量导出订单
@@ -211,81 +182,21 @@ Page({
           }          
         })
     }else if(logisticsRefundModify == 2){
-        api.brandRefund({
-            orderId:selectData.order.orderId,	// Number订单id 对内唯一标识
-            customerId:selectData.order.userId // 	Number对应订单的用户id
-        }).then(res => {
-          if (res.data.status_code == 200) {
-              app.showToastC('退款成功，退款金额将在72小时之内原路返回到支付账户上。');
-              setTimeout(()=>{
-                _this.getData();
-              },2000);
-          }else if(res.data.status_code == 410004){
-              var infoData = res.data.data.Info || {};
-              var q = Dec.Aese('mod=operate&operation=prepay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1&oid=' + infoData.order.cartId + '&xcx=1' + '&openid=' + app.signindata.openid)
-              console.log('mod=operate&operation=prepay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1&oid=' + infoData.order.cartId + '&xcx=1' + '&openid=' + app.signindata.openid)
-              wx.request({
-                url: app.signindata.comurl + 'order.php'+q,
-                method: 'GET',
-                header: { 'Accept': 'application/json' },
-                success: function (res) {
-                  if (res.data.ReturnCode == 200) {
-                        wx.requestPayment({
-                            'timeStamp': res.data.Info.timeStamp.toString(),
-                            'nonceStr': res.data.Info.nonceStr,
-                            'package': res.data.Info.package,
-                            'signType': 'MD5',
-                            'paySign': res.data.Info.paySign,
-                            'success': function (res) { 
-                                  // 成功之后在调取一下退款接口
-                                  api.brandRefund({
-                                      orderId:selectData.order.orderId,	// Number订单id 对内唯一标识
-                                      customerId:selectData.order.userId // 	Number对应订单的用户id
-                                  }).then(res => {
-                                    if (res.data.status_code == 200) {
-                                        app.showToastC('退款成功，退款金额将在72小时之内原路返回到支付账户上。');
-                                        setTimeout(()=>{
-                                          _this.getData();
-                                        })
-                                    }else{
-                                      if(res.data && res.data.message){
-                                        app.showModalC(res.data.message); 
-                                      };
-                                    }          
-                                  })                              
-                             },
-                            'fail':function(res){},
-                            'complete': function (res) {}
-                          })
-                  };   
-                }
-              })       
-          }else{
-            if(res.data && res.data.message){
-              app.showModalC(res.data.message); 
-            };
-          }          
-        })
+ 
 
     }else if(logisticsRefundModify == 3){
-        if (_this.data.scanCodeMsg == "") {
-          app.showToastC('快递单号不能为空')
-          return false;
-        } else if (_this.data.csc == "") {
-          app.showToastC('快递公司名称不能为空')
-          return false;
-        };
-        api.addLogistics(selectData.order.orderId,{
-            orderId:selectData.order.orderId,	// Number订单id 对内唯一标识
-            customerId:selectData.order.userId, // 	Number对应订单的用户id
-            shippingCode:_this.data.scanCodeMsg	,// 	String快递单号
-            shippingName:_this.data.csc	// 	String快递公司名称
+
+        api.brandSettledGoodsStopSale({
+            goodsId:selectData.goodsId,	// 商品id
+            itemType:selectData.itemType // 	要删除的商品类型
         }).then(res => {
           if (res.data.status_code == 200) {
-              app.showToastC('添加成功');
+              app.showToastC('删除成功');
+              var order = _this.data.order || [];
+              order.splice(_this.data.orderNum, 1)　
               _this.setData({
                 commonBulletFrame:false,
-                ['order[' + orderNum + '].order.shippingCode'] : _this.data.scanCodeMsg
+                order
               });
           }else{
             if(res.data && res.data.message){
@@ -294,107 +205,9 @@ Page({
           }          
         })
     }else if(logisticsRefundModify == 4){
-    //   var access_token = wx.getStorageSync('access_token') || '';
-    //   wx.downloadFile({
-    //     url: `${Dec.comUrlNew()}brand/exportorder`,
-    //     header: {
-    //       'app-version': Dec.versionnumber,
-    //       'Accept': 'application/x.mcts.v1+json',
-    //       'app-source':3,
-    //       'Authorization': 'Bearer ' + access_token          
-    //     },
-    //     success: function(res) {
-    //         var filePath = res.tempFilePath;
-    //         console.log(filePath);
-    //         wx.openDocument({
-    //             filePath: filePath,
-    //             success: function(res) {
-    //                 console.log('打开文档成功')
-    //             },
-    //             fail: function(res) {
-    //                 console.log(res);
-    //             },
-    //             complete: function(res) {
-    //                 console.log(res);
-    //             }
-    //         })
-    //     },
-    //     fail: function(res) {
-    //         console.log('文件下载失败');
-    //     },
-    //     complete: function(res) {},
-    // })
 
-        api.exportOrder({}).then((res)=>{
-          console.log('导出订单=======',res)
-        if (res.data.status_code == 200) {
-            _this.copyTBL(res.data.data.Info.file.path || '')
-        }else{
-          if(res.data && res.data.message){
-            app.showModalC(res.data.message); 
-          };        
-        }
-        });
     }else if(logisticsRefundModify == 5){
-      var cos = new COS({
-        SecretId: 'AKIDmY0RxErYIm2TfkckG8mEYbcNA4wYsPbe',
-        SecretKey: '4WkpgJ5bJlU4B6wNuCG4EDyVnGWUFhw1',
-      });
-
-      wx.chooseMessageFile({
-        count: 1,
-        type: 'file',
-        success (res) {
-          console.log('上传文件',res)
-          // tempFilePath可以作为img标签的src属性显示图片
-          const tempFilePaths = res.tempFiles;
-          if(tempFilePaths && tempFilePaths.length != 0){
-              var iftr = true;
-              tempFilePaths.forEach(element => {
-                  console.log(element)
-                  var filePath = element.path;
-                  //获取最后一个.的位置
-                  var index= filePath.lastIndexOf(".");
-                  //获取后缀
-                  var ext = filePath.substr(index+1);
-                  var fileName =  `${app.signindata.uid}_${new Date().getTime()}.${ext}`;
-                  cos.postObject({
-                        Bucket: 'brand-settled-info-1300990269',
-                        Region: 'ap-beijing',
-                        Key: `excel/${fileName}`,
-                        FilePath: filePath,
-                        onProgress: function (info) {  //上传进度
-                            console.log('进度条',JSON.stringify(info));
-                        }
-                      },(err, data) => {
-                        console.log(err,data)
-                        if(data){
-                          api.brandImport({
-                            fileName:fileName
-                          }).then((res)=>{
-                            if (res.data.status_code == 200) {
-                              app.showToastC('上传成功');
-                              setTimeout(()=>{
-                                _this.getData();
-                              },2000)
-                              
-                            }else{
-                              if(res.data && res.data.message){
-                                app.showModalC(res.data.message); 
-                              };        
-                            };
-                          })
-                        }else if(err){
-                          app.showToastC('上传失败')
-                        };
-
-                      }
-                  );
-              });
-          };
-
-        }
-      })
+      
     }
     _this.setData({
       commonBulletFrame:false
@@ -411,21 +224,7 @@ Page({
       }
     });
   },   
-  scanCode: function() {
-    var that = this;
-    wx.scanCode({ //扫描API
-      success(res) { //扫描成功
-        console.log(res) //输出回调信息
-        that.setData({
-          scanCodeMsg: res.result
-        });
-        wx.showToast({
-          title: '成功',
-          duration: 1000
-        })
-      }
-    })
-  },
+ 
 
   classifyChange(e){
     let that = this;
@@ -527,30 +326,30 @@ Page({
       var pagenum = _this.data.page;
       _this.data.page = ++pagenum;
     };
-     api.oMgetData({
+     api.settledGoodsList({
        'searchValue':_this.data.ordername,
-       'payStatus':_this.data.centerIndex,
+       'goodsStatus':_this.data.centerIndex,
        'brandId':_this.data.brandid || 0,
-       'pageId':_this.data.page
+       'pageId':_this.data.page,
+       'goodsType':_this.data.selectid
      }).then((res) => {
       console.log('列表数据=======',res)
       _this.setData({nodataiftr:true})
       if (res.data.status_code == 200) {
-          var order = res.data.data.List.order || [];
-          if(order && order.length != 0){
-            order.forEach(element => {
-               if(element.order.payTime){
-                  element.order.payTimeTrans = _this.toDate(element.order.payTime);
-               };
-            });
+          var order = res.data.data.List.item || [];
+          // if(order && order.length != 0){
+          //   order.forEach(element => {
+          //      if(element.order.payTime){
+          //         element.order.payTimeTrans = _this.toDate(element.order.payTime);
+          //      };
+          //   });
+          // };
+          if(order && order.length ==0){
+              app.showToastC('暂无更多数据');
           };
-          console.log(order)
-
           if (num==1){
-              var countOrder =  res.data.data.Info.order.count || 0;
               var brand = res.data.data.List.brand || [];
               _this.setData({
-                countOrder,
                 brand,
                 order
               });

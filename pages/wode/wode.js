@@ -754,7 +754,7 @@ Page({
   getUserProfile(){
     var _this = this;
     console.log(wx.canIUse('getUserProfile'),wx.canIUse('getUserProfile'))
-
+    wx.removeStorageSync('access_token') // 同步删除缓存
     wx.getUserProfile({
         lang: 'zh_CN',
         desc:'获取标识信息',

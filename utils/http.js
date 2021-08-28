@@ -3,12 +3,12 @@ var Dec = require('../common/public.js');
 
 const request = (url, options) => {
     var access_token = wx.getStorageSync('access_token') || '';
+    console.log('access_token=====',access_token)
     return new Promise((resolve, reject) => {
         wx.showLoading({
             title: '加载中',
         })
         console.log( `${Dec.comUrlNew()}${url}`)
-        console.log(options.data)
         wx.request({
             url: `${Dec.comUrlNew()}${url}`,
             method: options.method,

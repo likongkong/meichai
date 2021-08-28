@@ -695,6 +695,14 @@ page {
   border-radius: 6rpx;
   font-size: 20rpx;
 }
+.stateBgNewImg{
+  margin-left:20rpx;
+  display: inline-block;
+  height: 32rpx;
+  width: 54rpx;
+  vertical-align: top;
+  border-radius: 6rpx;
+}
 
 .signInNowCl{
   color: #fff;
@@ -759,7 +767,8 @@ page {
 
 .dlfeveleft{width:360rpx;margin:0 0 15rpx 10rpx;background:#fff;min-height:300rpx;border-radius:10rpx;}.dlfeveright{width:360rpx;margin:0 0 15rpx 5rpx;background:#fff;min-height:300rpx;border-radius:10rpx;}.dlfhpbox{width:100%;height:56rpx;background:#fff;border-radius:15rpx;}.dlfhpboximg{width:40rpx;height:40rpx;float:left;margin:8rpx 8rpx 0 8rpx;border-radius:50%;}.dlfhpbtxt{width:185rpx;height:55rpx;line-height:55rpx;font-size:20rpx;color:#000;float:left;}.dlfhpchltxt{width:80rpx;height:40rpx;line-height:40rpx;background:#ff2742;text-align:center;font-size:20rpx;color:#fff;border-radius:10rpx;margin:8rpx 8rpx 0 0;position:relative;float:right;}.dlfcbeveimgnew{display:inline-block;width:40rpx;height:40rpx;position:relative;}.dlfchrtopgifnew{width:40rpx;height:40rpx;display:inline-block;position:relative;}.dlfeveicon{width:60rpx;height:40rpx;line-height:40rpx;display:inline-block;position:relative;vertical-align:top;text-align:center;}.dlfeveinput{padding-left:20rpx;width:150rpx;height:40rpx;line-height:40rpx;background:#efefef;font-size:20rpx;color:#999999;margin-left:8rpx;display:inline-block;vertical-align:top;}.dlfchrbimgsnew{float:left;width:2rpx;height:26rpx;border-right:1rpx solid #bababa;position:relative;top:9rpx;margin:0 10rpx;}.dlfchrbtxtnew{float:left;height:40rpx;line-height:40rpx;max-width:260rpx;color:#a4afba;font-size:26rpx;}.dlfchrtopimgnew{display:inline-block;width:28rpx;height:28rpx;position:relative;top:6rpx;margin-left:8rpx;}
 .dlfchrbright{color:#fff;font-size:24rpx;position:absolute;top:15rpx;left:15rpx;z-index:2;padding:3rpx 13rpx;border-radius:5rpx;background:#ABC7F7;}
-
+.dlfchrbrightNimg{position:absolute;top:15rpx;left:15rpx;z-index:2;border-radius:6rpx;height: 36rpx;
+  width: 72rpx;}
 .dlfhtitlenew{padding:10rpx;font-size:22rpx;}
 
 .statusImgBox{
@@ -814,67 +823,7 @@ page {
   justify-content: center;
   align-items: center;
 }
-.addNewEventBox{
-  width: 90%;
-  border-radius: 10rpx;
-  background: #fff;
-}
-.addNewEventTitle{
-  display: block;
-  text-align: center;
-  font-size: 36rpx;
-  color: #101010;
-  margin-top: 16rpx;
-}
-.addNewEventBox button{
-  width: 160rpx;
-  height: 60rpx;
-  line-height: 60rpx;
-  background-color:#fff;
-  border: 2rpx solid #90D2D6;
-  font-size: 26rpx;
-  color: #90D2D6;
-  margin: 50rpx auto 40rpx; 
-}
-.addNewEventBox button::after{
-  border:none;
-}
-.addNewEventContent{
-  margin-top: 40rpx;
-}
-.createItem{
-  width: 90%;
-  height: 72rpx;
-  border-radius: 20rpx;
-  display: flex;
-  align-items: center;
-  margin: 0 auto;
-  margin-bottom: 32rpx;
-}
-.createItem:last-child{
-  margin-bottom: 0;
-}
-.createItem view{
-  font-size: 28rpx;
-  color: #fff;
-}
-.createItem view:first-child{
-  width: 120rpx;
-  height: 30rpx;
-  text-align: center;
-  line-height: 30rpx;
-  position: relative;
-  margin-right: 28rpx;
-}
-.createItem view:first-child::after{
-  content:'';
-  width: 4rpx;
-  height: 30rpx;
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: #fff;
-}
+
 
 .exhibdeimgBRTopName{
   max-width: 300rpx;
@@ -885,8 +834,73 @@ page {
   vertical-align: top;
 }
 
+.boxAtlasLeftNimg{
+  float: left;
+  height: 30rpx;
+  width: 54rpx;
+  color: #fff;
+  border-radius: 6rpx;
+}
 
 
 
+.addNewEventBox{
+  height: 500rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 90%;
+  border-radius: 10rpx;
+}
+.addNewEventTitle{
+  display: block;
+  text-align: center;
+  font-size: 36rpx;
+  color: #101010;
+  margin-top: 16rpx;
+}
+.popMaskbutton{
+  width: 60rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 26rpx;
+  color: #000;
+  margin: 50rpx auto 40rpx; 
+  text-align: center;
+  border-radius: 50%;
+  display: block;
+}
+.addNewEventContent{
+  width: 100%;
+  display: flex;
+  justify-content:space-between;
+}
+.createItem{
+  width:314rpx;
+  border-radius: 20rpx;
+  background:#fff;
+}
+.lastChild{
+  width: 200rpx;
+  height: 50rpx;
+  text-align: center;
+  line-height: 50rpx;
+  margin: 0 auto 30rpx;
+  border-radius: 50rpx;
+}
+.createItem view{
+  font-size: 28rpx;
+  color: #fff;
+}
+.createItem view:first-child{
+  width: 100%;
+  height: 30rpx;
+  text-align: center;
+  line-height: 30rpx;
+  padding: 50rpx 0 36rpx 0;
+  color:#000;
+}
 
 

@@ -63,8 +63,8 @@
           "scene": null
         },
         {
-          "name": "中奖名单",
-          "pathName": "page/secondpackge/pages/winningResult/winningResult",
+          "name": "发现",
+          "pathName": "page/component/pages/dlfind/dlfind",
           "query": "",
           "scene": null
         },
