@@ -127,6 +127,12 @@
           "pathName": "page/settled/pages/perfectSettledProfile/perfectSettledProfile",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "发布商品",
+          "pathName": "page/settled/pages/releaseGoods/releaseGoods",
+          "query": "",
+          "scene": null
         }
       ]
     }
