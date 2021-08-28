@@ -277,9 +277,8 @@ page {
 }
 .questionMark{
   display:inline-block;
-  width: 30rpx;
-  height: 30rpx;
-  margin:2rpx 0 0 15rpx;
+  height: 36rpx;
+  margin:0 0 0 15rpx;
   vertical-align: top;
 }
 .emlhright{

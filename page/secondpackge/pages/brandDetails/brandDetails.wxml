@@ -12,7 +12,7 @@
 					 <view class="exhibdeimgBRTop">
 								<block wx:if='{{brandinfo.boothNumber}}'><text style="color:#31b3fb;">展位:{{brandinfo.boothNumber}}</text> | </block>
 								<view class="exhibdeimgBRTopName specialellipsis">{{brandinfo.brandName}}</view>
-								<image class="questionMark" wx:if='{{brandinfo.isAuth}}' style="width:100rpx;" src="https://cdn.51chaidan.com/images/brandSettledIcon/AuthenticationOk.png" mode="aspectFit"></image>
+								<image class="questionMark" wx:if='{{brandinfo.isAuth}}' src="https://cdn.51chaidan.com/images/brandSettledIcon/AuthenticationOk.png" mode="heightFix"></image>
 								<view wx:if='{{isOneselfBrand}}' class="emlhright" catchtap="jumpoffering" data-type='9028' data-id='{{brandinfo.id}}' style="background:#91D2D8;">编辑</view>
 								<view wx:else class="{{!brandinfo.isAttention?'emlhright':'emlhrightNo'}}" data-type='0' data-id='{{brandinfo.id}}'  catchtap='followfun'>
 										<block wx:if='{{!brandinfo.isAttention}}'>关注</block>
@@ -25,7 +25,7 @@
 		<view class="briefIntroduction">简介：{{brandinfo.bradDesc}}</view>
 	</view>
 
-	<view class="topShareBox" style="top:750rpx;"><image class="topShareBoxImg" src="https://cdn.51chaidan.com/images/spread/blindBoxShare.png"></image><button style='width:100%;height:100%;position:absolute;top:0;left:0;opacity:0;' open-type='share'></button>分享</view>
+	<view class="topShareBox" style="bottom:155rpx;"><image class="topShareBoxImg" src="https://cdn.51chaidan.com/images/spread/blindBoxShare.png"></image><button style='width:100%;height:100%;position:absolute;top:0;left:0;opacity:0;' open-type='share'></button>分享</view>
 
 	<block wx:if='{{founder && founder.length>0}}'>
 			<view style="width:100%;font-size:30rpx;text-align:center;margin:20rpx 0;font-weight:bold;">团队介绍</view>
