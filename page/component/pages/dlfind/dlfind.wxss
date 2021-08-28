@@ -99,7 +99,7 @@ width: 72rpx;}
   right: 20rpx;
   margin: auto; 
   font-size: 24rpx;
-  border-radius: 4rpx;
+  border-radius: 8rpx;
   background:#34A9ED;
 }
 .emlcontent{
@@ -456,7 +456,7 @@ width: 72rpx;}
   height: 32rpx;
   width: 54rpx;
   vertical-align: top;
-  border-radius: 6rpx;
+  border-radius: 10rpx;
 }
 
 .signInNowCl{
@@ -643,7 +643,7 @@ width: 72rpx;}
   right: 20rpx;
   margin: auto;
   font-size: 24rpx;
-  border-radius: 4rpx;
+  border-radius: 8rpx;
   border:2rpx solid #34A9ED;
 }
 
