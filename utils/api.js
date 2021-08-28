@@ -72,8 +72,10 @@ export const checkOrderRefund = (query) => {
 export const oMbrandInfo = (url,query) => {
     return apiResquest.get('brand/info/' + url,query)
 }
-
-
+// ---------------------------------------- 商品管理 -----------------------------------------
+export const settledGoodsList = (url,query) => {
+    return apiResquest.get('brand/info/' + url,query)
+}
 
 
 // login(data).then(res => {
