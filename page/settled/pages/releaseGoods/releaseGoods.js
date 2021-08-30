@@ -36,19 +36,103 @@ Page({
         subtitle:'商品名称',
         placeholder:'请输入商品名称',
         value:'',
-        name:'goodsName'
+        name:'goodsName',
+        borderbottom1:'show',
+        margintop0:true,
+      },{
+        isRequired:true,
+        type:'uploadImg',
+        subtitle:'商品展示图（建议上传比例1:1）',
+        name:'flatPatternmaking',
+        src:'',
+        mode:'single',
+        storagelocation:'brandinfo/voucher',
+        borderbottom1:'show',
+        margintop0:true,
+      },{
+        isRequired:false,
+        type:'textarea',
+        subtitle:'商品文字描述',
+        placeholder:'请输入商品文字描述',
+        value:'',
+        name:'goodsDescribe',
+        borderbottom1:'show',
+        margintop0:true,
+      },{
+        isRequired:true,
+        type:'text',
+        subtitle:'商品售价',
+        placeholder:'请输入售价金额',
+        value:'',
+        name:'goodsPrice',
+        borderbottom1:'show',
+        margintop0:true,
+      },{
+        isRequired:false,
+        type:'text',
+        subtitle:'商品库存',
+        placeholder:'请输入当前可售库存数',
+        value:'',
+        name:'goodsStock',
+        borderbottom1:'show',
+        margintop0:true,
+      },{
+        isRequired:false,
+        type:'label',
+        subtitle:'商品标签',
+        labelItem:[
+          {id:0,name:'预售'},
+          {id:1,name:'现货'},
+        ],
+        value:'999',
+        name:'goodsLabel',
+        borderbottom1:'show',
+        margintop0:true,
+      },{
+        isRequired:false,
+        type:'radio',
+        subtitle:'是否限购',
+        radioArr:['是','否'],
+        value:0,
+        direction:'X',
+        explain:false,
+        input:true,
+        margintop0:true,
+        borderbottom1:'show',
+        name:'purchaseLimitation',
+      },{
+        isRequired:false,
+        type:'text',
+        subtitle:'消耗积分',
+        placeholder:'无需消耗积分',
+        value:'',
+        name:'integrate',
+        explain:true,
+        borderbottom1:'show',
+        margintop0:true,
+      },{
+        isRequired:false,
+        type:'uploadImg',
+        subtitle:'商品详情图',
+        name:'goodsDetailsPic',
+        imageList:[],
+        margintop0:true,
+        storagelocation:'brandinfo/dynamic'
       },
     ],
     listData2:[
       {
         isRequired:true,
-        type:'uploadImg',
-        subtitle:'企业营业执照或与IP相关凭证',
-        name:'businessLicense',
-        src:'',
-        storagelocation:'brandinfo/voucher'
+        type:'text',
+        subtitle:'物流方式',
+        placeholder:'请选择物流方式',
+        value:'',
+        name:'logistics',
+        borderbottom1:'show',
+        margintop0:true,
       },
-    ]
+    ],
+    obj:{},
   },
   /**
    * 生命周期函数--监听页面加载
@@ -73,6 +157,12 @@ Page({
     }else{
       app.getAccessToken(this.onLoadfun)
     };
+  },
+  // 获取表单数据
+  bindchange(e){
+    let key=e.detail.name;
+    this.data.obj[key]=e.detail.value;
+    console.log(this.data.obj)
   },
   getListData(){
     wx.showLoading({

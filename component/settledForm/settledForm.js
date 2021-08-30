@@ -108,7 +108,7 @@ Component({
 
     },
     uploadImage(e){
-      let form = e.currentTarget.dataset.form;
+      let mode = e.currentTarget.dataset.mode;
       let storagelocation = e.currentTarget.dataset.storagelocation;
       let name = e.currentTarget.dataset.name;
       let ind = e.currentTarget.dataset.index;
@@ -126,11 +126,11 @@ Component({
       
       // 先选择文件，得到临时路径
       wx.chooseImage({
-        count: form=='dynamicContent'?(10 - this.data.list[ind].imageList.length):1, // 默认9
+        count: mode!='single'?(10 - this.data.list[ind].imageList.length):1, // 默认9
         sizeType: ['compressed'], // 可以指定是原图original还是压缩图compressed，默认用原图
         sourceType: ['camera','album'], // 'album'相册  camera 相机
         success: (res) => {
-          if(form=='dynamicContent'){
+          if(mode!='single'){
             if ((this.data.list[ind].imageList.length + res.tempFilePaths.length) > 9) {
               wx.showToast({
                   title: "最多只能上传9张",
@@ -174,7 +174,7 @@ Component({
           Promise.all(promiseList).then(res => {
             wx.hideLoading()
             // console.log(res)     
-            if(form=='dynamicContent'){
+            if(mode!='single'){
               this.setData({errorDom:''});
               let imageList=`list[${ind}].imageList`;
               this.setData({[imageList]: [...this.data.list[ind].imageList,...res]})

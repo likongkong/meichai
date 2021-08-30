@@ -1,8 +1,17 @@
 page{
   background:#f4f5f9;
+  padding-bottom: 100rpx;
 }
 .card{
   background: #ffffff;
   border-radius: 20rpx;
-  margin-top: 24rpx;
+  /* margin-top: 24rpx; */
+}
+.title{
+ color: #101010; 
+ font-size: 28rpx;
+ padding: 0 20rpx;
+ box-sizing: border-box;
+ height: 80rpx;
+ line-height: 80rpx;
 }
