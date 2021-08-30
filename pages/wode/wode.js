@@ -91,8 +91,13 @@ Page({
     brandSettledStatus:0,
     isAddNewEventMask:false
   },
-  jinqingqidai(){
-    app.comjumpwxnav(9017,this.data.brand_id,'','')
+  jinqingqidai(e){
+    let type = e.currentTarget.dataset.type;
+    if(type){
+      app.comjumpwxnav(type,this.data.brand_id,'','')
+    }else{
+      app.showToastC('敬请期待')
+    };
   },
   toggleAddNewEventMask(){
     this.setData({
