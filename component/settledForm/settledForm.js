@@ -60,17 +60,17 @@ Component({
    */
   data: {
     errorDom:'',
-    endedTime: '2019-01-01 12:38',
   },
    /**
    * 组件的方法列表
    */
   methods: {
-    onPickerChange3: function (e) {
-      console.log(e.detail);
-      this.setData({
-        endedTime: e.detail.dateString
-      })
+    onPickerChange3 (e) {
+      let name = e.currentTarget.dataset.name;
+      let index = e.currentTarget.dataset.index;
+      let value = `list[${index}].endedTime`;
+      this.setData({[value]:e.detail.dateString})
+      this.triggerEvent("bindchange", {value:e.detail.dateString,name:name});
     },
     onKeyInput(e){
       let obj = {};
@@ -84,6 +84,14 @@ Component({
       let name = e.currentTarget.dataset.name;
       let sonindex = e.currentTarget.dataset.sonindex;
       let value = `list[${index}].value`;
+      this.setData({[value]:sonindex})
+      this.triggerEvent("bindchange", {value:sonindex,name:name});
+    },
+    bindLimitBuyRadioChange(e){
+      let index = e.currentTarget.dataset.index;
+      let name = e.currentTarget.dataset.name;
+      let sonindex = e.currentTarget.dataset.sonindex;
+      let value = `list[${index}].index`;
       this.setData({[value]:sonindex})
       this.triggerEvent("bindchange", {value:sonindex,name:name});
     },

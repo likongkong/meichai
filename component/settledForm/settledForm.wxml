@@ -91,7 +91,7 @@
                 <view>日期+时间</view>
                 <view class="pickerYMDHM">
                     <view>
-                      <pickerYMDHM bind:onPickerChange="onPickerChange3" date="{{endedTime}}"></pickerYMDHM>
+                      <pickerYMDHM data-index="{{index}}" data-name="{{item.name}}" bind:onPickerChange="onPickerChange3" date="{{item.endedTime}}"></pickerYMDHM>
                     </view>
                   <image class="actionSheetIcon" src="../../pages/images/icon_in.png" mode="widthFix"></image>
                 </view>
@@ -155,15 +155,16 @@
           <view class="{{item.input?'spaceBetween':''}}">
             <view class="radioWrap {{item.direction=='X'?'displayInlineFlex radioWrap1':''}}">
               <block wx:for="{{item.radioArr}}" wx:key='key' wx:for-index="idx" wx:for-item="sonItem">
-                <view data-index="{{index}}" data-sonindex="{{idx}}" data-name="{{item.name}}" catchtap="bindRadioChange">
-                  <text class="{{item.value == idx?'radioChecked':'radioUnchecked'}}"></text>
+                <view data-index="{{index}}" data-sonindex="{{idx}}" data-name="{{item.name}}" 
+                catchtap="{{item.name=='purchaseLimitation'?'bindLimitBuyRadioChange':'bindRadioChange'}}">
+                  <text class="{{item.index == idx?'radioChecked':'radioUnchecked'}}"></text>
                   <text class="itemName">{{sonItem}}</text>
                 </view>
               </block>
             </view>
             <block wx:if="{{item.name == 'purchaseLimitation'}}">
-              <view class="radioRightWrap">
-                <text>每人限购</text><input type="text" value="1"/><text>体</text>
+              <view class="radioRightWrap" wx:if="{{item.index==0}}">
+                <text>每人限购</text><input type="text" data-name="{{item.name}}Num" bindinput="onKeyInput" value="{{item.value}}"/><text>体</text>
               </view>
             </block>
             <block wx:else>

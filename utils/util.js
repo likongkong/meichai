@@ -84,8 +84,8 @@ function plusXing (str,frontLen,endLen) {
   return str.substring(0,frontLen)+xing+str.substring(str.length-endLen);
 }
 
-function format (fmt) {
-  var timestamp = Date.parse(new Date());
+function format (fmt,num=0) {
+  var timestamp = num!=0?Date.parse(new Date())+num:Date.parse(new Date());
   var date = new Date(timestamp);
   var o = {
       "M+": date.getMonth() + 1, //月份 
