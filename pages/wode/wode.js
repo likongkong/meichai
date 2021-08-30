@@ -337,15 +337,19 @@ Page({
           if (res.data.ReturnCode == 200){
             // 获取钱包余额
             if(!res.data.Info.brandSettledLimit){
-              api.getLumpsumAndWithdraw({}).then((res) => {
-                console.log('withdrawInfo',res)
-                _this.setData({
-                  withdrawInfo:res.data.data
+              if(wx.getStorageSync('access_token')){
+                api.getLumpsumAndWithdraw({}).then((res) => {
+                  console.log('withdrawInfo',res)
+                  _this.setData({
+                    withdrawInfo:res.data.data
+                  })
+                }).catch((err)=>{
+                  console.log(err)
                 })
-              }).catch((err)=>{
-                console.log(err)
-              })
-            } 
+              }else{
+                app.getAccessToken(_this.listdata)
+              };
+            }; 
             _this.setData({
               isAddNewEventMask:false,
               dataInfo: res.data.Info,
@@ -435,12 +439,8 @@ Page({
     });  
     wx.hideLoading()    
     _this.setData({ B: true, iftr_wx: true });  
-    
-    if(wx.getStorageSync('access_token')){
-      _this.listdata()
-    }else{
-      app.getAccessToken(_this.listdata)
-    };
+    _this.listdata()
+
     if(this.data.defaultinformation){}else{
       app.defaultinfofun(this);
     };
