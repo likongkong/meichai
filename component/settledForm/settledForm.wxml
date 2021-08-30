@@ -86,40 +86,23 @@
         </view>
         <view wx:if="{{item.type == 'time'}}" id="{{item.name}}" class="columnWrap card paddingBottom12 {{item.margintop0?'margintop0':''}} {{item.borderbottom1?'borderbottom1':''}}">
           <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
-          <!-- <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+          <!-- <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange"> -->
             <view class="timeWrap">
                 <view>日期+时间</view>
-                <view>
+                <view class="pickerYMDHM">
                     <view>
-                      {{item.value}}
+                      <pickerYMDHM bind:onPickerChange="onPickerChange3" date="{{endedTime}}"></pickerYMDHM>
                     </view>
                   <image class="actionSheetIcon" src="../../pages/images/icon_in.png" mode="widthFix"></image>
                 </view>
             </view>
-          </picker> -->
-          <pickerYMDHM bind:onPickerChange="onPickerChange3" date="{{endedTime}}"></pickerYMDHM>
+          <!-- </picker> -->
         </view>
         <view wx:if="{{item.type == 'uploadImg'}}" id="{{item.name}}" class="columnWrap card paddingBottom12 {{item.margintop0?'margintop0':''}} {{item.borderbottom1?'borderbottom1':''}}" data-storagelocation="{{item.storagelocation}}" data-name="{{item.name}}" data-index="{{index}}" data-mode="{{item.mode}}" catchtap="uploadImage">
           <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
           <block>
-            <!-- item.mode == 'single' 为单图模式 -->
-            <block wx:if="{{item.mode == 'single'}}">
-              <view wx:if="{{item.src != ''}}" class="flex marginTB25">
-                <image 
-                  class="tupian" 
-                  src="{{item.src}}?imageMogr2/crop/168x168/gravity/cente" 
-                  mode="widthFix">
-                </image>
-                <text wx:if="{{item.isEdit?false:isEdit}}" class="uploadAgainText">重新上传</text>
-              </view>
-              <view wx:else class="uploadWrap">
-                <view class="placeholderBox">
-                  <image src="../../pages/images/jiahao.png" mode="widthFix"></image>
-                </view>
-              </view>
-            </block>
-            <!-- 多图模式 -->
-            <block wx:else>
+            <!-- item.mode == 'multiple' 为多图模式 -->
+            <block wx:if="{{item.mode == 'multiple'}}">
               <view class="activityimageWrap">
                 <block wx:for="{{item.imageList}}" wx:for-index="idx" wx:for-item="sonitem" wx:key='key'>
                   <view class="itemImage">
@@ -142,6 +125,22 @@
                       <image src="../../pages/images/jiahao.png" mode="widthFix"></image>
                     </view>
                   </view>
+                </view>
+              </view>
+            </block>
+            <!-- 单图模式 -->
+            <block wx:else>
+              <view wx:if="{{item.src != ''}}" class="flex marginTB25">
+                <image 
+                  class="tupian" 
+                  src="{{item.src}}?imageMogr2/crop/168x168/gravity/cente" 
+                  mode="widthFix">
+                </image>
+                <text wx:if="{{item.isEdit?false:isEdit}}" class="uploadAgainText">重新上传</text>
+              </view>
+              <view wx:else class="uploadWrap">
+                <view class="placeholderBox">
+                  <image src="../../pages/images/jiahao.png" mode="widthFix"></image>
                 </view>
               </view>
             </block>

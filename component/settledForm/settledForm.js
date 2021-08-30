@@ -59,12 +59,19 @@ Component({
    * 页面的初始数据
    */
   data: {
-    errorDom:''
+    errorDom:'',
+    endedTime: '2019-01-01 12:38',
   },
    /**
    * 组件的方法列表
    */
   methods: {
+    onPickerChange3: function (e) {
+      console.log(e.detail);
+      this.setData({
+        endedTime: e.detail.dateString
+      })
+    },
     onKeyInput(e){
       let obj = {};
       obj.name = e.currentTarget.dataset.name;
@@ -140,11 +147,11 @@ Component({
       
       // 先选择文件，得到临时路径
       wx.chooseImage({
-        count: mode!='single'?(10 - this.data.list[ind].imageList.length):1, // 默认9
+        count: mode=='multiple'?(10 - this.data.list[ind].imageList.length):1, // 默认9
         sizeType: ['compressed'], // 可以指定是原图original还是压缩图compressed，默认用原图
         sourceType: ['camera','album'], // 'album'相册  camera 相机
         success: (res) => {
-          if(mode!='single'){
+          if(mode=='multiple'){
             if ((this.data.list[ind].imageList.length + res.tempFilePaths.length) > 9) {
               wx.showToast({
                   title: "最多只能上传9张",
@@ -188,7 +195,7 @@ Component({
           Promise.all(promiseList).then(res => {
             wx.hideLoading()
             // console.log(res)     
-            if(mode!='single'){
+            if(mode=='multiple'){
               this.setData({errorDom:''});
               let imageList=`list[${ind}].imageList`;
               this.setData({[imageList]: [...this.data.list[ind].imageList,...res]})
@@ -196,6 +203,8 @@ Component({
             }else{
               let src = `list[${ind}].src`;
               this.setData({[src]: `${res[0]}`})
+              console.log(this.data.list[ind].src,ind)
+
               this.triggerEvent("bindchange", {value:res[0],name:name});
             }
           }).catch((error) => {

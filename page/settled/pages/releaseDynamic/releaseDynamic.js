@@ -36,6 +36,7 @@ Page({
         subtitle:'添加图片（最多上传九张，建议上传比例1:1)',
         name:'dynamicPic',
         imageList:[],
+        mode:'multiple',
         storagelocation:'brandinfo/dynamic'
       },{
         isRequired:false,

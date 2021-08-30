@@ -45,7 +45,6 @@ Page({
         subtitle:'商品展示图（建议上传比例1:1）',
         name:'flatPatternmaking',
         src:'',
-        mode:'single',
         storagelocation:'brandinfo/voucher',
         borderbottom1:'show',
         margintop0:true,
@@ -117,6 +116,7 @@ Page({
         name:'goodsDetailsPic',
         imageList:[],
         margintop0:true,
+        mode:'multiple',
         storagelocation:'brandinfo/dynamic'
       },
     ],
