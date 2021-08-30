@@ -19,13 +19,13 @@
           </view>
         </picker>
       </view>
-      <view class="filterItem"> 
+      <!-- <view class="filterItem"> 
         <picker bindchange="bindPickerChange" value="{{transactionType}}" range="{{transactionTypeArray}}" range-key="name">
           <view class="picker">
             <view><text>{{transactionTypeArray[transactionType].name}}</text><image src="/pages/images/comtriangle.png" mode="widthFix"></image></view>
           </view>
         </picker>
-      </view>
+      </view> -->
     </view>
   </view>
   <view class="content">

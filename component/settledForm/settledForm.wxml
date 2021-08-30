@@ -60,6 +60,17 @@
           <input class="cEveInput" disabled="true" data-name="{{item.name}}" placeholder="{{item.placeholder}}" type="text" value="{{item.value}}" bindinput="onKeyInput"></input>
           <image class="actionSheetIcon" src="../../pages/images/icon_in.png" mode="widthFix"></image>
         </view>
+        <view wx:if="{{item.type == 'picker'}}" id="{{item.name}}" class="rowWrap card {{item.margintop0?'margintop0':''}} {{item.borderbottom1?'borderbottom1':''}}">
+          <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
+          <view class="pickerWrap">
+            <picker mode="multiSelector" data-groups="{{item.groups}}" data-index="{{index}}" bindchange="pickerChange" value="" range="{{item.groups}}">
+              <view class="pickerWrapText">
+                {{item.value?item.value:item.placeholder}}
+              </view>
+            </picker>
+            <image class="actionSheetIcon" src="../../pages/images/icon_in.png" mode="widthFix"></image>
+          </view>
+        </view>
         <view wx:if="{{item.type == 'textarea'}}" id="{{item.name}}" class="columnWrap card paddingBottom12 {{item.margintop0?'margintop0':''}} {{item.borderbottom1?'borderbottom1':''}}">
           <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
           <!-- <input class="cEveInput" data-name="enterpriseName" placeholder="{{item.placeholder}}" value="" type="text"></input> -->
@@ -72,6 +83,21 @@
               <text class="{{item.value == idx?'activelabel':''}}" data-index="{{index}}" data-sonindex="{{idx}}" data-name="{{item.name}}" catchtap="bindRadioChange">{{sonitem.name}}</text>
             </block>
           </view>
+        </view>
+        <view wx:if="{{item.type == 'time'}}" id="{{item.name}}" class="columnWrap card paddingBottom12 {{item.margintop0?'margintop0':''}} {{item.borderbottom1?'borderbottom1':''}}">
+          <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
+          <!-- <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+            <view class="timeWrap">
+                <view>日期+时间</view>
+                <view>
+                    <view>
+                      {{item.value}}
+                    </view>
+                  <image class="actionSheetIcon" src="../../pages/images/icon_in.png" mode="widthFix"></image>
+                </view>
+            </view>
+          </picker> -->
+          <pickerYMDHM bind:onPickerChange="onPickerChange3" date="{{endedTime}}"></pickerYMDHM>
         </view>
         <view wx:if="{{item.type == 'uploadImg'}}" id="{{item.name}}" class="columnWrap card paddingBottom12 {{item.margintop0?'margintop0':''}} {{item.borderbottom1?'borderbottom1':''}}" data-storagelocation="{{item.storagelocation}}" data-name="{{item.name}}" data-index="{{index}}" data-mode="{{item.mode}}" catchtap="uploadImage">
           <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>

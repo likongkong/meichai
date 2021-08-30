@@ -2,6 +2,11 @@
 var COS = require('../../common/cos-wx-sdk-v5.js');
 var Dec = require('../../common/public.js'); //aes加密解密js
 const app = getApp();
+
+
+
+
+
 Component({
   /**
    * 组件的属性列表
@@ -74,6 +79,15 @@ Component({
       let value = `list[${index}].value`;
       this.setData({[value]:sonindex})
       this.triggerEvent("bindchange", {value:sonindex,name:name});
+    },
+    pickerChange(e){
+      let index = e.currentTarget.dataset.index;
+      let groups = e.currentTarget.dataset.groups;
+      let value = e.detail.value;
+      let value1 = `list[${index}].value`;
+      this.setData({[value1]:groups[0][value[0]]+"-"+groups[1][value[1]]})
+      this.triggerEvent("bindchange", {value:groups[0][value[0]],name:'shipping'});
+      this.triggerEvent("bindchange", {value:value[1],name:'shippingPriceStatus'});
     },
     showActionSheet(e){
       let index = e.currentTarget.dataset.index;
