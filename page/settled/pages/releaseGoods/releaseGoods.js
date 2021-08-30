@@ -18,7 +18,7 @@ Page({
         isRequired:false,
         type:'actionSheet',
         groups:[],
-        subtitle:'关联IP',
+        subtitle:'商品关联IP',
         value:'点击关联',
         name:'associationIp'
       },
@@ -80,8 +80,8 @@ Page({
         type:'label',
         subtitle:'商品标签',
         labelItem:[
-          {id:0,name:'预售'},
-          {id:1,name:'现货'},
+          {index:0,name:'预售'},
+          {index:1,name:'现货'},
         ],
         value:'999',
         name:'goodsLabel',
@@ -92,7 +92,8 @@ Page({
         type:'radio',
         subtitle:'是否限购',
         radioArr:['是','否'],
-        value:0,
+        value:1,
+        index:0,
         direction:'X',
         explain:false,
         input:true,
@@ -171,10 +172,27 @@ Page({
         value:0,
         margintop0:true,
         borderbottom1:'show',
-        name:'releaseTime',
+        endedTime: util.format("yyyy-MM-dd HH:mm"),
+        name:'startTime',
+      },{
+        isRequired:true,
+        type:'time',
+        subtitle:'停售时间时间',
+        value:0,
+        margintop0:true,
+        endedTime: util.format("yyyy-MM-dd HH:mm",2592000000),
+        name:'endTime',
       },
     ],
-    obj:{},
+    obj:{
+      goodsDescribe:'', //文字描述
+      goodsStock:'', //库存数
+      goodsLabel:'', //标签
+      purchaseLimitation:0, //是否限购
+      purchaseLimitationNum:1, //限购体数
+      startTime:util.format("yyyy-MM-dd HH:mm"),
+      endTime:util.format("yyyy-MM-dd HH:mm",2592000000),
+    },
   },
   /**
    * 生命周期函数--监听页面加载
@@ -196,6 +214,8 @@ Page({
     this.data.uid = app.signindata.uid;
     if(wx.getStorageSync('access_token')){
       // this.getListData();
+      // this.data.obj.startTime = util.format("yyyy-MM-dd HH:mm");
+      // this.data.obj.endTime = util.format("yyyy-MM-dd HH:mm",2592000000);
     }else{
       app.getAccessToken(this.onLoadfun)
     };
