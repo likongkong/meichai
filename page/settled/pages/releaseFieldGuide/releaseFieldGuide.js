@@ -69,8 +69,8 @@ Page({
       },{
         isRequired:false,
         type:'textarea',
-        subtitle:'图鉴描述',
-        placeholder:'请输入图鉴文字描述',
+        subtitle:'商品简介',
+        placeholder:'请输入商品简介描述',
         value:'',
         name:'fieldGuideDescription',
         paddingBottom12:true,
