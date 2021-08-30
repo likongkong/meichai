@@ -2,6 +2,7 @@
 @import "/common/tabbar.wxss";
 page{
   background:#f4f5f9;
+  padding-bottom: 130rpx;
 }
 .atlas{
   width: 100%;
@@ -17,12 +18,12 @@ page{
 }
 .atlasIwant{
   width: 100%;
-  padding: 20rpx 0 0 0;
-  text-align: center;
+  padding: 20rpx 0 20rpx 0;
+  overflow: hidden;
 }
 .atlasIwantEve{
-  display: inline-block;
   width: 330rpx;
+  float: left;
 }
 .atlasIwantETop{
   width: 100%;
@@ -35,12 +36,12 @@ page{
 }
 .atlasIwantEb{
   width: 240rpx;
-  height: 70rpx;
-  line-height: 70rpx;
+  height: 40rpx;
+  line-height: 40rpx;
   font-size: 24rpx;
   text-align: right;
   position: relative;
-  margin:auto;
+  margin:20rpx auto 0;
 }
 .emlplefimgshare{
   width: 36rpx;
@@ -98,5 +99,21 @@ page{
 
 
 
-
-
+.editButtom{
+  width: 100%;
+  padding: 15rpx 0;
+  position: fixed;
+  left: 0;
+  bottom: 30rpx;
+  z-index: 10;
+  background:#fff;
+  font-size:24rpx;
+  text-align: center;
+}
+.editButtom image{
+  height: 50rpx;
+  width: 50rpx;
+  margin: auto;
+  display: block;
+  margin-bottom: 10rpx;
+}

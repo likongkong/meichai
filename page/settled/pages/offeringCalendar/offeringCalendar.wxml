@@ -14,16 +14,16 @@
             <view class="ocDateEveTop"><text style="font-size:34rpx;">{{item.day}}</text>/{{item.month}}月<text wx:if="{{item.dayName}}">（{{item.dayName}}）</text></view>
             <view class="ocDateEve" wx:for='{{item.listItem}}' wx:key='key' wx:for-item='w'>
                 <view class="ocDateINBox">
-                    <image class="ocDateEImg" src="{{w.itemImg}}" mode="aspectFit"></image>
+                    <image class="ocDateEImg" catchtap="details" data-id='{{w.itemId}}' data-type='{{w.itemType}}' src="{{w.itemImg}}" mode="aspectFit"></image>
                     <view class="ocDateContent">
-                        <view class='disanum_sb_txtone multilineellipsis' style='color:#666;height:70rpx;text-align:left;'>{{w.itemName}}</view>
-                        <view class="ocDateENum">
+                        <view catchtap="details" data-id='{{w.itemId}}' data-type='{{w.itemType}}' class='disanum_sb_txtone multilineellipsis' style='color:#666;height:68rpx;text-align:left;'>{{w.itemName}}</view>
+                        <view class="ocDateENum" catchtap="details" data-id='{{w.itemId}}' data-type='{{w.itemType}}'>
                             <view style="color:#929292;">{{w.subTitle}}{{w.salesName}}</view>
                             <view style="color:#929292;" wx:if='{{w.itemStatus==3}}'>{{w.salesTimeName}}</view>
                             <view style="color:#1296DB;" wx:else>{{w.salesTimeName}}</view>
                         </view>
                         <view class="ocDateENum">
-                            <view style="height:40rpx;line-height:40rpx;">￥<text style="font-size:28rpx;">{{w.shopPrice}}</text></view>
+                            <view style="height:40rpx;line-height:40rpx;" catchtap="details" data-id='{{w.itemId}}' data-type='{{w.itemType}}'>￥<text style="font-size:28rpx;">{{w.shopPrice}}</text></view>
                             <!-- 类型(-1为商品，4为抽选) -->
                             <view class="buttonPay" catchtap="subscrfun" data-id='{{w.itemId}}' wx:if='{{w.itemStatus==1}}' style="color:#FF890B;border:2rpx solid #FF890B;">开售订阅</view>
                             <view class="buttonPay" wx:elif='{{w.itemStatus==2}}' catchtap="details" data-id='{{w.itemId}}' data-type='{{w.itemType}}'>
@@ -34,7 +34,7 @@
                                     参加抽选
                                 </block>                                
                             </view>
-                            <view class="buttonPay" catchtap="jumpAtlas" data-id='{{w.itemId}}' wx:elif='{{w.itemStatus==3}}' style="color:#000000;border:2rpx solid #000000;">查看图鉴</view>
+                            <view class="buttonPay" catchtap="details" data-id='{{w.illustratedId}}' data-type='9035' wx:elif='{{w.itemStatus==3&&item.illustratedId}}' style="color:#000000;border:2rpx solid #000000;">查看图鉴</view>
                             
                         </view>
                     </view>
@@ -42,6 +42,7 @@
                 <view class="userBox" catchtap="jumpexhdetail" data-id='{{w.brand.brandId}}'>
                     <view class="atlasIwantEbImgBox">
                         <image class="atlasIwantEbImg" src='{{w.brand.brandLogo}}' mode='aspectFit'></image>
+                        <image class='dlfchrtopimgipList' wx:if='{{w.brand.isAuth}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/approveIcon.png'></image>
                     </view>
                     <view class="userBoxName specialellipsis">{{w.brand.brandName}}</view>
                     <image class="whwddimgtit" src="../../../../pages/images/icon_in.png"></image>

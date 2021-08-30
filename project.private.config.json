@@ -57,14 +57,14 @@
           "scene": null
         },
         {
-          "name": "绑定VIP",
-          "pathName": "page/secondpackge/pages/bindTicket/bindTicket",
+          "name": "商品管理",
+          "pathName": "page/settled/pages/commodityManagement/commodityManagement",
           "query": "",
           "scene": null
         },
         {
-          "name": "中奖名单",
-          "pathName": "page/secondpackge/pages/winningResult/winningResult",
+          "name": "发现",
+          "pathName": "page/component/pages/dlfind/dlfind",
           "query": "",
           "scene": null
         },

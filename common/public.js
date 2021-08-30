@@ -1,8 +1,8 @@
 var Aes = require('crypto-js.js');  //引用AES源码js
 
-// var env = 'online';   //线上
-var env = 'test';  //测试
-var versionnumber = '12.7.3';
+var env = 'online';   //线上
+// var env = 'test';  //测试
+var versionnumber = '12.7.5';
 
 var key = env=='online'?Aes.enc.Utf8.parse("danzhuan1chaijia"):Aes.enc.Utf8.parse("danzhuanichaijia");
 // 公共地址 接口
@@ -145,7 +145,16 @@ function comiftrsign(_this,res,app) {
     });
   };
 }
-
+function toDate(number,num) {
+  var date = new Date(number * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+  var Y = date.getFullYear();
+  var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
+  var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+  var h = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
+  var m = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+  var s = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
+  return Y + '/' + M + '/' + D +' ' + h + ':' + m + ':' +s;
+}
 
 console.log('envVersion',__wxConfig.envVersion);
 
@@ -163,3 +172,4 @@ module.exports.versionnumber = versionnumber;
 module.exports.clwcomurl = clwcomurl;
 module.exports.shareWechatMoments = shareWechatMoments;
 module.exports.comUrlNew = comUrlNew;
+module.exports.toDate = toDate;

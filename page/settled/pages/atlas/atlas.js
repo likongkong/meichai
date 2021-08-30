@@ -22,12 +22,15 @@ Page({
     var type = w.currentTarget.dataset.type || w.target.dataset.type || '';
     if(type == 1){
       var item_type = 1;
-      var whref = id;
     }else if(type == 2){
       var item_type = 9003;
-      var whref = id;
+    }else if(type == 3){
+      var item_type = 9017
+    }else if(type == 4){
+      var item_type = 9033;
+      id = 'id='+id
     }
-    app.comjumpwxnav(item_type, whref, wname, imgurl)
+    app.comjumpwxnav(item_type, id, '', '')
 
   },
 
@@ -87,7 +90,9 @@ Page({
     _this.data.loginid = app.signindata.loginid;
     _this.data.uid = app.signindata.uid;
     _this.data.orderid = options.orderid,
-    _this.data.illustrated_id = options.iid || 0
+    _this.setData({
+      illustrated_id : options.iid || 0
+    });
     // 判断是否登录
     if (_this.data.loginid != '' && _this.data.uid != '') {
       _this.onLoadfun();
@@ -123,11 +128,11 @@ Page({
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
           var sellList = res.data.List.sellList || [];
-          if(sellList.length != 0){
-              sellList.forEach(element => {
-                  element.start_time = _this.toDate(element.start_time)
-              });
-          };
+            if(sellList.length != 0){
+                sellList.forEach(element => {
+                    element.start_time = _this.toDate(element.start_time)
+                });
+            };
            _this.setData({
              dataDetail:res.data.Info,
              sellList:sellList
@@ -148,6 +153,14 @@ Page({
     var _this = this;
     var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
     var type = w.currentTarget.dataset.type || w.target.dataset.type || 0;
+    if(type == 6 && _this.data.dataDetail.is_want){
+       app.showToastC('您已点过我想要');
+       return false;
+    };
+    if(type == 5 && _this.data.dataDetail.is_same){
+      app.showToastC('您已点过我有同款');
+      return false;
+    };
     console.log('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id)
     var qqq = Dec.Aese('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id);
     wx.request({
@@ -229,7 +242,18 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    
+    var _this = this;
+    var indexShare = app.signindata.indexShare || [];
+    var indexShareNum = Math.floor(Math.random() * indexShare.length) || 0;
+    var indexShareImg = '';
+    if(indexShare.length!=0 && indexShare[indexShareNum]){
+      indexShareImg = indexShare[indexShareNum]+'?time=' + Date.parse(new Date());
+    };
+    return {
+      title:app.signindata.titleShare?app.signindata.titleShare:'你喜欢的潮玩都在这里！',
+      path: 'pages/index/index',
+      imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      success: function (res) {}
+    }    
   },
-
 })

@@ -1,5 +1,6 @@
 var Pub = require('../../common/mPublic.js'); //aes加密解密js
 var Dec = require('../../../../common/public.js'); //aes加密解密js
+var api = require("../../../../utils/api.js");
 const app = getApp();
 Page({
 
@@ -21,7 +22,7 @@ Page({
     topic_id: 0,
     dlfhboteve: [],
     listdata: [],
-    page: 1, 
+    page: 0, 
     // 加载提示
     loadprompt: '加载更多.....',
     // 公共默认信息
@@ -71,8 +72,95 @@ Page({
     id:'',
     subscribedata:[],
     isOpenToyShow:false,
-    isPunchTheClock:1596729599<Date.parse(new Date())/1000&&Date.parse(new Date())/1000<1596988799?true:false
+    isPunchTheClock:1596729599<Date.parse(new Date())/1000&&Date.parse(new Date())/1000<1596988799?true:false,
+    wOri:1 , // 1 瀑布流 2 信息流
+    payStatus:[
+      {name:'推荐',num:'0'},
+      {name:'我的关注',num:'1'},
+      {name:'秒杀',num:'2'},
+      {name:'抽选',num:'3'},
+      {name:'动态',num:'4'},
+      // {name:'分享',num:'5'}
+    ], // 支付状态 
+    centerIndex:0,
+    brandWhole:false
   },
+  // 全部品牌
+  brandWholeFun(){
+    var _this = this;
+    if(!this.data.brandWhole){
+      this.brandWholeSeach()  
+    };
+    this.setData({brandWhole:!this.data.brandWhole});
+     
+  },
+  brandWholeSeach(){
+    var _this = this;
+    console.log('mod=community&operation=allIps&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&searchValue='+_this.data.brand_name||'')
+    var qqq = Dec.Aese('mod=community&operation=allIps&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&searchValue='+_this.data.brand_name||'');
+    wx.showLoading({
+      title: '加载中...',
+      mask:true
+    })
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + qqq,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        wx.hideLoading()
+        console.log('全部品牌信息=====',res)
+        if (res.data.ReturnCode == 200) {
+          _this.setData({
+            brandwhole:res.data.List.brand || [], 
+          });
+        }else if(res.data.ReturnCode == 300){
+          _this.setData({
+            brandwhole: []
+          });    
+          app.showToastC('暂无更多数据')  
+        }else{
+          app.showToastC(res.data.Msg)  
+        };
+      }
+    });
+  },
+  catchTouchMove:function(res){
+    return false
+  },
+  // 瀑布流信息流切换
+  wOriTab(){
+    this.setData({
+      wOri:(this.data.wOri == 1)?2:1
+    })
+
+    if (this.data.wOri==1){
+      this.eldatalistfun(0);
+      this.eldataclassfun();
+    }else{
+      this.listdata(0);
+    }
+
+  },
+
+  classifyChange(e){
+    let that = this;
+    let index = e.currentTarget.dataset.index || 0;
+    let ele = '#ele' + index;
+    that.setData({
+      centerIndex:index,
+    })
+    that.eldatalistfun(0)
+    //创建节点选择器
+    var query = wx.createSelectorQuery();
+    //选择id
+    query.select(ele).boundingClientRect();
+    query.exec(function(res) {
+      that.setData({
+        scrollleft:e.currentTarget.offsetLeft - wx.getSystemInfoSync().windowWidth/2 + (res[0].width/2)
+      })
+    })
+  }, 
+
   jumpVipPage(){
     wx.navigateTo({  
       url: "/page/secondpackge/pages/vipPage/vipPage"
@@ -84,12 +172,7 @@ Page({
       ['mctslist[' + ind + '].finishLoadFlag']: true
     })
   },
-  // 跳转打卡
-  jumpshopqueque:function(){
-    wx.navigateTo({
-      url: "../../../../pages/shopsquare/shopsquare",
-    }); 
-  },
+
   // 跳转商品详情
   jumpshopdetail:function(w){
     var goods_id = w.currentTarget.dataset.goods_id || 0;
@@ -166,15 +249,18 @@ Page({
   jumpexhdetail: function (w) {
     var id = w.currentTarget.dataset.id || w.target.dataset.id || '';
     wx.navigateTo({
-      url: "/page/secondpackge/pages/brandDetails/brandDetails?type=drying&id=" + id+"&settlement=1"
+      url: "/page/secondpackge/pages/brandDetails/brandDetails?type=drying&id=" + id+"&settlement=0"
     });
   },
   jumpsouchtem:function(w){
     var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
-    this.setData({
-      brand_id: id||0,
-    })
-    this.jumpsearch();
+    // this.setData({
+    //   brand_id: id||0,
+    // })
+    // this.jumpsearch();
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + id +"&settlement=1"
+    });
   },
   elsearchfun:function(){
     this.setData({ elsearch: !this.data.elsearch});
@@ -185,7 +271,7 @@ Page({
     });
   },
   jumpsearch:function(){
-    this.eldatalistfun(0);
+    this.brandWholeSeach();
   },
   // input 值改变
   inputChange: function (e) {
@@ -275,28 +361,44 @@ Page({
   // 品牌列表
   eldataclassfun:function(){
     var _this = this;
-    var qqq = Dec.Aese('mod=Obtain&operation=brandList&type=1');
+    var qqq = Dec.Aese('mod=community&operation=topInfo&uid='+_this.data.uid+'&loginid='+_this.data.loginid);
     wx.request({
-      url: app.signindata.comurl + 'brandDrying.php' + qqq,
+      url: app.signindata.comurl + 'toy.php' + qqq,
       method: 'GET',
       header: {'Accept': 'application/json'},
       success: function (res) {
+        console.log('新品牌信息=====',res)
         if (res.data.ReturnCode == 200) {
+          var salesCalendar = res.data.List.salesCalendar || [];
           _this.setData({
-            eldataclass: res.data.List.brandList
+            visitHistory:res.data.List.visitHistory || [], // 最近访问的品牌信息
+            salesCalendar: salesCalendar|| [], // 日历信息
+            recommendIps:res.data.List.recommendIps || [], // 品牌
+            brandSettledLimit:res.data.Info.brandSettledLimit || false
           });
         };
       }
     });
   },
+  toDate(number,num) {
+    var date = new Date(number * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+    var Y = date.getFullYear();
+    var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
+    var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+    var h = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
+    var m = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+    var s = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
+    return Y + '/' + M + '/' + D +' ' + h + ':' + m + ':' +s;
+  },
+
   // 品牌社区列表
   eldatalistfun: function (num) {
     var _this = this;
     if (num == 0) {
-      _this.data.page = 1;
+      _this.data.page = 0;
       _this.setData({
         loadprompt: '加载更多.....',
-        eldatalist: [],
+        communityList: [],
         nodataiftr: false
       });
     } else {
@@ -307,36 +409,45 @@ Page({
         nodataiftr: false,
       });
     };
-    Pub.postRequest(_this, 'dryinglist', {
-      uid: _this.data.uid,
-      loginid: _this.data.loginid,
-      cat_id: _this.data.cat_id,
-      brand_name: _this.data.brand_name||'',
-      brand_id: _this.data.brand_id || 0,
-      page: _this.data.page,
-      vcode:app.signindata.versionnumber
-    }, function (res) {
-      console.log('数据===',res);
-      var listdata = res.data.List|| [];
-      if(listdata.length!=0){
-        if (num == 0) {
-          _this.setData({
-            eldatalist: listdata,
-            nodataiftr: true,
-            jurisdiction:res.data.Info.jurisdiction || false
-          });
-        } else {
-          var ltlist = _this.data.eldatalist.concat(listdata);
-          _this.setData({
-            eldatalist: ltlist,
-            nodataiftr: true,
-            jurisdiction:res.data.Info.jurisdiction || false
-          });
+    wx.showLoading({
+      title: '加载中...',
+      mask:true
+    })
+
+    var qqq = Dec.Aese('mod=community&operation=info&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&showType='+_this.data.centerIndex+'&pid='+ _this.data.page + '&brand_id=0');
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + qqq,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        wx.hideLoading()
+        wx.stopPullDownRefresh();
+        console.log('动态瀑布流数据=====',res)
+        if (res.data.ReturnCode == 200) {
+          var communityList = res.data.List.communityList || [];
+          if(communityList.length != 0){
+             communityList.forEach(element => {
+                element.add_time = _this.toDate(element.add_time || 0);
+                element.start_time = _this.toDate(element.start_time || 0);
+                element.end_time = _this.toDate(element.end_time || 0);
+             });
+          }else{
+            app.showToastC('暂无更多数据')
+          }
+          if (num == 0) {
+            _this.setData({
+              communityList,
+              nodataiftr:true
+            });
+          } else {
+            var ltlist = [..._this.data.communityList,...communityList];
+            _this.setData({
+              communityList: ltlist,
+              nodataiftr:true
+            });
+          };
         };
-      }else{
-        app.showToastC('暂无更多数据');
       }
- 
     });
   }, 
 
@@ -428,31 +539,50 @@ Page({
   },
 
 
-  // 关注函数
+  // 关注 和 点赞 函数
   followfun: function(w) {
-    var drying_id = w.currentTarget.dataset.drying_id || w.target.dataset.drying_id || 0;
-    var is_follow = w.currentTarget.dataset.is_follow || w.target.dataset.is_follow || 0;
-    var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
     var _this = this;
-    Pub.postRequest(_this, 'focuonusers', {
-      uid: _this.data.uid,
-      loginid: _this.data.loginid,
-      drying_uid: drying_id,
-      is_follow: is_follow
-    }, function(res) {
-      app.showToastC('关注成功');
-      if (_this.data.cat_id == 2) {
-        var eldatalist = _this.data.eldatalist;
-        eldatalist[ind].is_follow = 1;
-        _this.setData({
-          eldatalist: eldatalist
-        })
-      } else {
-        var listdata = _this.data.listdata;
-        listdata[ind].is_follow = 1;
-        _this.setData({
-          listdata: listdata
-        });
+    var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
+    var type = w.currentTarget.dataset.type || w.target.dataset.type || 0;
+    var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
+    var communityList = _this.data.communityList || [];
+    console.log('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id)
+    var qqq = Dec.Aese('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id);
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + qqq,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        console.log('新品牌信息=====',res)
+        if (res.data.ReturnCode == 200) {
+          if(type == 0){
+            var istype = w.currentTarget.dataset.istype || w.target.dataset.istype || false;
+            communityList.forEach(element => {
+                if(element.brandInfo.brand_id == id){
+                  element.is_attention = !istype;
+                }
+            });
+            _this.setData({
+              // ['communityList['+ind+'].is_attention']:true
+              communityList:communityList
+            }); 
+          }else{
+            
+            if(communityList[ind].is_like){
+              var like_number = parseInt(communityList[ind].like_number) - 1  
+            }else{
+              var like_number = parseInt(communityList[ind].like_number) + 1 
+            };
+            if(like_number<0){
+              like_number = 0;
+            };
+            _this.setData({
+              ['communityList['+ind+'].like_number']:like_number,
+              ['communityList['+ind+'].is_like']:!communityList[ind].is_like
+            });
+          }
+
+        };
       }
     });
   },
@@ -558,38 +688,38 @@ Page({
       isOpenToyShow:app.signindata.isOpenToyShow
     });
      
-    if(false){
-      _this.setData({c_title:'MCTS打卡',cat_id:3});
-    }else{
-      _this.setData({cat_id:2});
-    };
+    // if(false){
+    //   _this.setData({c_title:'MCTS打卡',cat_id:3});
+    // }else{
+    //   _this.setData({cat_id:2});
+    // };
 
     // 晒单分类
-    Pub.postRequest(_this, 'topicclass', {
-      uid: _this.data.uid,
-      loginid: _this.data.loginid
-    }, function(res) {
-      var dlfhboteve = res.data.List || [];
-      var dlinfo = res.data.Info.Explain || '';
-      var userhead = res.data.Info.UserHead || app.signindata.avatarUrl || 'https://static.51chaidan.com/images/headphoto/' + _this.data.uid + '.jpg';
-      if (res.data.Info) {
-        var currency_sum = res.data.Info.currency_sum || 0;
-        var isExchange = res.data.Info.isExchange;
-        var exchangeTips = res.data.Info.exchangeTips || '';
-        var commentNumber = res.data.Info.commentNumber || 0;
-        _this.setData({
-          currency_sum: currency_sum,
-          isExchange: isExchange,
-          exchangeTips: exchangeTips,
-          commentNumber: commentNumber
-        });
-      };
-      _this.setData({
-        dlfhboteve: dlfhboteve,
-        hinttxt: dlinfo,
-        userhead: userhead
-      })
-    });
+    // Pub.postRequest(_this, 'topicclass', {
+    //   uid: _this.data.uid,
+    //   loginid: _this.data.loginid
+    // }, function(res) {
+    //   var dlfhboteve = res.data.List || [];
+    //   var dlinfo = res.data.Info.Explain || '';
+    //   var userhead = res.data.Info.UserHead || app.signindata.avatarUrl || 'https://static.51chaidan.com/images/headphoto/' + _this.data.uid + '.jpg';
+    //   if (res.data.Info) {
+    //     var currency_sum = res.data.Info.currency_sum || 0;
+    //     var isExchange = res.data.Info.isExchange;
+    //     var exchangeTips = res.data.Info.exchangeTips || '';
+    //     var commentNumber = res.data.Info.commentNumber || 0;
+    //     _this.setData({
+    //       currency_sum: currency_sum,
+    //       isExchange: isExchange,
+    //       exchangeTips: exchangeTips,
+    //       commentNumber: commentNumber
+    //     });
+    //   };
+    //   _this.setData({
+    //     dlfhboteve: dlfhboteve,
+    //     hinttxt: dlinfo,
+    //     userhead: userhead
+    //   })
+    // });
 
     // 官方推荐
     // Pub.postRequest(_this, 'currencyExchange', {
@@ -608,54 +738,28 @@ Page({
     //   })
     // });
 
-    // 晒单列表
-    if (this.data.cat_id == 2) {
-      _this.eldatalistfun(0);
-      _this.eldataclassfun();
-    }else if(this.data.cat_id == 3) {
-      _this.mctslistfun(0);
-    } else {
-      _this.listdata(0);
-    }
-    
-    this.selectComponent("#hide").getappData();
-    _this.otherdata();
 
+
+    _this.eldataclassfun();
+    _this.eldatalistfun(0);
+
+    // 晒单列表
+    // if (this.data.cat_id == 2) {
+      
+
+    // }else if(this.data.cat_id == 3) {
+    //   _this.mctslistfun(0);
+    // } else {
+    //   _this.listdata(0);
+    // }
     
+    // this.selectComponent("#hide").getappData();
+    // _this.otherdata();
+
     setTimeout(function(){
       app.indexShareBanner();
     },1000);
 
-  },
-  otherdata: function() {
-    var _this = this;
-
-    if(this.data.defaultinformation){}else{
-      app.defaultinfofun(this);
-    }
-
-    setTimeout(function() {
-      wx.getUserInfo({
-        success: function(res) {
-          // 下载用户头像
-          wx.downloadFile({
-            url: res.userInfo.avatarUrl,
-            success(res) {
-              const fs = wx.getFileSystemManager();
-              fs.saveFile({
-                tempFilePath: res.tempFilePath,
-                success(res) {
-                  wx.setStorageSync('image_cache', res.savedFilePath)
-                }
-              });
-            },
-            fail: function(err) {
-              wx.setStorageSync('image_cache', '')
-            }
-          });
-        }
-      });
-    }, 1000)
   },
   // 晒单列表
   listdata: function(num) {
@@ -722,63 +826,6 @@ Page({
       }
     });
   },
-  // 删除
-  givenDetail:function(e){
-    var type = e.currentTarget.dataset.type || 0;
-    var drying_id = e.currentTarget.dataset.drying_id;
-    var index = e.currentTarget.dataset.index || 0;
-    var _this = this;
-    if(type == 1){
-      var uid = e.currentTarget.dataset.uid;
-      wx.showModal({
-        content: '您确定要禁止该用户发帖吗？',
-        success: function(res) {
-          if (res.confirm) {
-            Pub.postRequest(_this, 'rootdeldrying', {
-              uid: _this.data.uid,
-              loginid: _this.data.loginid,
-              banUid: uid ||'',
-              type:1,
-              vcode:app.signindata.versionnumber
-            }, function (res) {
-              console.log('禁止数据===',res);
-              var listdata = _this.data.listdata || [];
-              listdata.splice(index, 1);
-              _this.setData({
-                listdata:listdata
-              });
-              app.showToastC('禁止成功');
-         
-            });
-          }
-        }
-      })      
-    }else{
-      wx.showModal({
-        content: '您确定要删除吗？',
-        success: function(res) {
-          if (res.confirm) {
-            Pub.postRequest(_this, 'rootdeldrying', {
-              uid: _this.data.uid,
-              loginid: _this.data.loginid,
-              drying_id: drying_id ||'',
-              vcode:app.signindata.versionnumber
-            }, function (res) {
-              console.log('删除数据===',res);
-              var listdata = _this.data.listdata || [];
-              listdata.splice(index, 1);
-              _this.setData({
-                listdata:listdata
-              });
-              app.showToastC('删除成功');
-         
-            });
-          }
-        }
-      })
-    }
-
-  }, 
   onReady: function() {},
 
   onShow: function() {},
@@ -795,25 +842,14 @@ Page({
 
   onPullDownRefresh: function() {
     app.downRefreshFun(() => {
-      if (this.data.cat_id==2) {
-        this.eldatalistfun(0);
-      } else if(this.data.cat_id == 3){
-        this.mctslistfun(0);
-      } else {
-        this.listdata(0)
-      }
+      this.eldataclassfun()
+      this.eldatalistfun(0);
     })
     
   },
 
   onReachBottom: function() {
-    if (this.data.cat_id == 2){
-      this.eldatalistfun(1);
-    }else if(this.data.cat_id == 3){
-      this.mctslistfun(1);
-    }else{
-      this.listdata(1)
-    };
+    this.eldatalistfun(1);
   },
   onShareTimeline:function(){
     var _this = this;
@@ -928,50 +964,7 @@ Page({
 
 
   },
-  // 点赞
-  ispraisefun: function(w) {
-    var _this = this;
-    var is_praise = w.currentTarget.dataset.is_praise || w.target.dataset.is_praise || 0;
-    var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
-    var lid = w.currentTarget.dataset.lid || w.target.dataset.lid || 0;
-    if (_this.data.iftrputfor) {
-      _this.data.iftrputfor = false;
-      Pub.postRequest(_this, 'praiseDrying', {
-        uid: _this.data.uid,
-        loginid: _this.data.loginid,
-        drying_id: lid,
-        is_praise: is_praise
-      }, function(res) {
-        _this.data.iftrputfor = true;
-        if (_this.data.cat_id==2){
-          var eldatalist = _this.data.eldatalist;
-          if (is_praise == 0) {
-            eldatalist[ind].is_praise = 1;
-            eldatalist[ind].praise_sum = parseInt(eldatalist[ind].praise_sum) + 1;
-          } else {
-            eldatalist[ind].is_praise = 0;
-            eldatalist[ind].praise_sum = parseInt(eldatalist[ind].praise_sum) - 1;
-          };          
-          _this.setData({
-            eldatalist: eldatalist
-          })
-        }else{
-          var listdata = _this.data.listdata;
-          if (is_praise == 0) {
-            listdata[ind].is_praise = 1;
-            listdata[ind].praise_sum = parseInt(listdata[ind].praise_sum) + 1;
-          } else {
-            listdata[ind].is_praise = 0;
-            listdata[ind].praise_sum = parseInt(listdata[ind].praise_sum) - 1;
-          };
-          _this.setData({
-            listdata: listdata
-          });
-        }
 
-      });
-    }
-  },
   jumpdldlvreate: function() {
     wx.navigateTo({
       url: "../dldlcreate/dldlcreate",
@@ -1059,6 +1052,28 @@ Page({
       tgabox: true
     });
   },
-
+  // 跳转日历
+  jumpoffering(w){
+    var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
+    var type = w.currentTarget.dataset.type || w.target.dataset.type || 0;
+    var istype = w.currentTarget.dataset.istype || w.target.dataset.istype || 0;
+    if(istype == 1){ // 秒杀
+      type = 1;
+    }else if(istype == 2){ // 抽选
+      type = 9003;
+    }else if(istype == 3){ // 动态
+      type = 9036;
+    }
+    app.comjumpwxnav(type,id,'','');
+    this.setData({
+      isAddNewEventMask:false
+    })
+  },
+  toggleAddNewEventMask(){
+    this.setData({
+      isAddNewEventMask: !this.data.isAddNewEventMask
+    })
+  },
+  
 
 })

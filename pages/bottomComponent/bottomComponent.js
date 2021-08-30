@@ -88,20 +88,18 @@ Component({
     },
     // 潮玩展
     fashionShow:function(){
-      var _this = this;
-      if (_this.properties.fashionShow) {
-        this.triggerEvent("run");
-        return;
-      }; 
+      var _this = this; 
 
       var timestamp = Date.parse(new Date()) / 1000;
-
+      console.log(333333333)
       if(app.signindata.isOpenToyShow){
         wx.navigateTo({
           url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
         });
+        console.log(111111111)
         // timestamp>=1624896000
-      }else if(timestamp>=1630425600){
+      }else if(true){
+        console.log(22222222)
         wx.navigateTo({
           url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
         });

@@ -91,8 +91,13 @@ Page({
     brandSettledStatus:0,
     isAddNewEventMask:false
   },
-  jinqingqidai(){
-    app.showToastC('敬请期待',2000);
+  jinqingqidai(e){
+    let type = e.currentTarget.dataset.type;
+    if(type){
+      app.comjumpwxnav(type,this.data.brand_id,'','')
+    }else{
+      app.showToastC('敬请期待')
+    };
   },
   toggleAddNewEventMask(){
     this.setData({
@@ -337,19 +342,24 @@ Page({
           if (res.data.ReturnCode == 200){
             // 获取钱包余额
             if(!res.data.Info.brandSettledLimit){
-              api.getLumpsumAndWithdraw({}).then((res) => {
-                console.log('withdrawInfo',res)
-                _this.setData({
-                  withdrawInfo:res.data.data
+              if(wx.getStorageSync('access_token')){
+                api.getLumpsumAndWithdraw({}).then((res) => {
+                  console.log('withdrawInfo',res)
+                  _this.setData({
+                    withdrawInfo:res.data.data
+                  })
+                }).catch((err)=>{
+                  console.log(err)
                 })
-              }).catch((err)=>{
-                console.log(err)
-              })
-            }
+              }else{
+                app.getAccessToken(_this.listdata)
+              };
+            }; 
             _this.setData({
               isAddNewEventMask:false,
               dataInfo: res.data.Info,
               brandSettledStatus: res.data.Info.brandSettledInfo.brandSettledStatus,
+              brand_id:res.data.Info.brandSettledInfo?res.data.Info.brandSettledInfo.brand_id:'',
               vipAdvertising: res.data.Info.vipAdvertising||'',
               // 待付款
               nonpayment: res.data.Info.non_payment||0,
@@ -434,12 +444,8 @@ Page({
     });  
     wx.hideLoading()    
     _this.setData({ B: true, iftr_wx: true });  
-    
-    if(wx.getStorageSync('access_token')){
-      _this.listdata()
-    }else{
-      app.getAccessToken(_this.listdata)
-    };
+    _this.listdata()
+
     if(this.data.defaultinformation){}else{
       app.defaultinfofun(this);
     };
@@ -754,7 +760,7 @@ Page({
   getUserProfile(){
     var _this = this;
     console.log(wx.canIUse('getUserProfile'),wx.canIUse('getUserProfile'))
-
+    wx.removeStorageSync('access_token') // 同步删除缓存
     wx.getUserProfile({
         lang: 'zh_CN',
         desc:'获取标识信息',

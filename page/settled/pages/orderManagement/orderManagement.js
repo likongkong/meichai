@@ -709,7 +709,19 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    
+    var _this = this;
+    var indexShare = app.signindata.indexShare || [];
+    var indexShareNum = Math.floor(Math.random() * indexShare.length) || 0;
+    var indexShareImg = '';
+    if(indexShare.length!=0 && indexShare[indexShareNum]){
+      indexShareImg = indexShare[indexShareNum]+'?time=' + Date.parse(new Date());
+    };
+    return {
+      title:app.signindata.titleShare?app.signindata.titleShare:'你喜欢的潮玩都在这里！',
+      path: 'pages/index/index',
+      imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      success: function (res) {}
+    } 
   },
 
 })

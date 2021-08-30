@@ -3,20 +3,45 @@
 
 <view class="atlas">
     <swiper class="atlasswiper" indicator-color="#fff" indicator-active-color="#ccc" indicator-dots="{{true}}" circular="true" autoplay="true" interval="4000" duration="450">
-        <swiper-item wx:for="{{dataDetail.imgArr}}" wx:key="key">
-                <image class="atlasswiperimage" src='{{item}}' style="height:100%;width:100%;display:block;" data-index='{{index}}' bindtap='previewImg' mode='aspectFit'></image>
+        <swiper-item wx:for="{{dataInfo.imgArr}}" wx:key="key">
+                <image class="atlasswiperimage" src='{{item}}' style="height:100%;width:100%;display:block;" data-index='{{index}}' bindtap='previewImg' mode='aspectFill'></image>
         </swiper-item>
     </swiper> 
 
     <view class="emlhead">
         <view class="emlhleft">
-            <image class='emlhlimg' src="http://wx4.sinaimg.cn/mw690/007VyV1kly1ge2op2sth0j32qu29d4qq.jpg" mode='aspectFit'></image>
+            <image class='emlhlimg' src="{{dataInfo.brandLogo}}" mode='aspectFit'></image>
+
+            <image class='dlfchrtopimgipList' wx:if='{{dataInfo.isAuth}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/approveIcon.png'></image>
             <view class="emlhltxt">
-                    <view class="emlhlttop specialellipsis">MapleLab枫糖工作室</view>
-                    <view class="emlhltbottom specialellipsis">123456<text style="margin-left:20rpx;">123456</text></view>
+                    <view class="emlhlttop specialellipsis">{{dataInfo.brandName}}</view>
+                    <view class="emlhltbottom specialellipsis">{{dataInfo.add_time}}</view>
             </view>
         </view>
-        <view class="emlhright" catchtap='followfun'>关注</view>
-    </view>   
-      
+        <view class="{{!dataInfo.is_attention?'emlhright':'emlhrightNo'}}" data-id='{{dataInfo.brand_id}}' data-type='0' catchtap='followfun'>
+            <block wx:if='{{!dataInfo.is_attention}}'>关注</block>
+            <block wx:else>已关注</block>
+        </view>
+    </view> 
+
+    <view style="padding:20rpx;font-size:26rpx;margin-bottom:2rpx;background:#fff;" wx:if='{{dataInfo.title}}'><text>{{dataInfo.title}}</text></view>  
+
+    <view class="boxAtlas" style="width:500rpx;margin:20rpx;font-size:24rpx;" wx:if='{{illustratedInfo}}'  catchtap="jumpoffering" data-id="{{illustratedInfo.id}}" data-type='9035'>
+        <image class="boxAtlasLeftNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/illustrated.jpg"  mode="aspectFit"></image>
+        <view class="boxAtlasName specialellipsis" style="width:288rpx;">{{illustratedInfo.title}}</view>
+        <view class="boxAtlasRight">点击查看</view>
+    </view>
+    <view class="emlhead" style="overflow: hidden;">
+        <image class='wxIcon' src="https://cdn.51chaidan.com/images/brandSettledIcon/dynamicInfoWXHY.png" mode='aspectFit'><button style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;'  open-type="share"></button></image>
+        <!-- <image class='wxIcon' src="https://cdn.51chaidan.com/images/brandSettledIcon/dynamicInfoPYQ.png" mode='aspectFit'></image>
+        <image class='wxIcon' src="https://cdn.51chaidan.com/images/brandSettledIcon/dynamicInfoImg.png" mode='aspectFit'></image> -->
+        <view class="dyDetheat"><image class="emlplefimgshare" src="{{dataInfo.is_like?'https://www.51chaidan.com/images/brand/red_heart.png':'https://www.51chaidan.com/images/brand/black_heart.png'}}" catchtap='followfun' data-id='{{dataInfo.id}}' data-type='3'></image>{{dataInfo.like_number}}</view>
+    </view>
+
+</view>
+
+<!-- 编辑 -->
+<view class="editButtom" wx:if='{{dataInfo.isOneselfBrand}}' catchtap="jumpdetail" data-type='4' data-id='{{drying_id}}'>
+    <image mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/compile.png'></image>
+    <view>编辑</view>
 </view>

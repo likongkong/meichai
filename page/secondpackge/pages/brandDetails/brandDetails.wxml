@@ -1,11 +1,445 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
-<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+<!-- <view style='width:100%;height:{{statusBarHeightMc}}px;'></view> -->
+
 
 <view style='width:100%;overflow:hidden;'>
+  <image src="{{banner[0].src}}?imageMogr2/crop/750x750/gravity/cente" mode='widthFix' class="brandSwiperImgNew"></image>
+
+	<view style="padding:0 20rpx 0 20rpx;position:relative;">
+		<view class="exhibdeimgBox">
+				<image class="exhibdeimgNewNew" src="{{brandinfo.logo}}" mode="aspectFill"></image>
+				<view class="exhibdeimgBRight">
+					 <view class="exhibdeimgBRTop">
+								<block wx:if='{{brandinfo.boothNumber}}'><text style="color:#31b3fb;">展位:{{brandinfo.boothNumber}}</text> | </block>
+								<view class="exhibdeimgBRTopName specialellipsis">{{brandinfo.brandName}}</view>
+								<image class="questionMark" wx:if='{{brandinfo.isAuth}}' src="https://cdn.51chaidan.com/images/brandSettledIcon/AuthenticationOk.png" mode="heightFix"></image>
+								<view wx:if='{{isOneselfBrand}}' class="emlhright" catchtap="jumpoffering" data-type='9028' data-id='{{brandinfo.id}}' style="background:#91D2D8;">编辑</view>
+								<view wx:else class="{{!brandinfo.isAttention?'emlhright':'emlhrightNo'}}" data-type='0' data-id='{{brandinfo.id}}'  catchtap='followfun'>
+										<block wx:if='{{!brandinfo.isAttention}}'>关注</block>
+										<block wx:else>已关注</block>
+								</view>
+					</view>
+					 <view class="exhibdeimgBRTop" wx:if='{{brandinfo.integral>0}}' style="color:#999495;">我的积分：{{brandinfo.integral}} <image class="questionMark" src="https://cdn.51chaidan.com/images/brandSettledIcon/wenhao.png" mode="aspectFit"></image></view>
+				</view>
+		</view>
+		<view class="briefIntroduction">简介：{{brandinfo.bradDesc}}</view>
+	</view>
+
+	<view class="topShareBox" style="bottom:155rpx;"><image class="topShareBoxImg" src="https://cdn.51chaidan.com/images/spread/blindBoxShare.png"></image><button style='width:100%;height:100%;position:absolute;top:0;left:0;opacity:0;' open-type='share'></button>分享</view>
+
+	<block wx:if='{{founder && founder.length>0}}'>
+			<view style="width:100%;font-size:30rpx;text-align:center;margin:20rpx 0;font-weight:bold;">团队介绍</view>
+			<view style="width:100%;background:white;">
+				<scroll-view scroll-x="true" style="width:100%;">
+					<view style="width:20%;display:inline-block;vertical-align:top;padding-bottom:15rpx;" wx:for='{{founder}}' wx:key='key' catchtap='briefint' data-ind='{{index}}'>
+						<image src='{{item.photo}}' style='height:104rpx;width:104rpx;margin:20rpx auto;border-radius:54rpx;display:block;'></image>
+						<view style="width:80%;margin-left:10%;font-size:20rpx;text-align:center;">{{item.name}}</view>
+						<view style="width:80%;margin-left:10%;font-size:20rpx;text-align:center;">{{item.title}}</view>
+					</view>
+				</scroll-view>
+			</view>
+	</block>
+
+
+
+
+
+  <view class="bDappIcomBox">
+		  <view catchtap="{{brandinfo.picFriend?'addfrindcommonifun':'noClickTip'}}" data-identif='1' data-url="{{brandinfo.picFriend}}">
+					<image class="bdaiBoxImg" src="{{brandinfo.picFriend?'https://cdn.51chaidan.com/images/brandInfoIcon/wxOpen.png':'https://cdn.51chaidan.com/images/brandInfoIcon/wxClose.png'}}"></image>
+					<view class="bdaiBoxTxt">微信</view>
+			</view>
+
+			<view catchtap="{{brandinfo.picPublic?'addfrindcommonifun':'noClickTip'}}" data-identif='2' data-url="{{brandinfo.picPublic}}">
+					<image class="bdaiBoxImg" src="{{brandinfo.picPublic?'https://cdn.51chaidan.com/images/brandInfoIcon/gzhOpen.jpg':'https://cdn.51chaidan.com/images/brandInfoIcon/gzhClose.jpg'}}"></image>
+					<view class="bdaiBoxTxt">公众号</view>
+			</view>
+
+		  <view catchtap="{{brandinfo.microblog?'jumpxcx':'noClickTip'}}" data-identif='3' data-type='1' data-path='{{brandinfo.microblog}}'>
+					<image class="bdaiBoxImg" src="{{brandinfo.microblog?'https://cdn.51chaidan.com/images/brandInfoIcon/wbOpen.png':'https://cdn.51chaidan.com/images/brandInfoIcon/wbClose.png'}}"></image>
+					<view class="bdaiBoxTxt">微博</view>
+			</view>
+		  <view catchtap="{{brandinfo.redBook?'jumpxcx':'noClickTip'}}" data-identif='4' data-type='2' data-path='{{brandinfo.redBook}}'>
+					<image class="bdaiBoxImg" src="{{brandinfo.redBook?'https://cdn.51chaidan.com/images/brandInfoIcon/xhsOpen.jpg':'https://cdn.51chaidan.com/images/brandInfoIcon/xhsClose.jpg'}}"></image>
+					<view class="bdaiBoxTxt">小红书</view>
+			</view>
+
+
+	</view>
+
+
+	<!-- tab标签切换 -->
+	<view class='dlfheadtab' style="margin-bottom:20rpx;">
+
+				<scroll-view class="marginAuto scrollViewTop" scroll-x="true" scroll-with-animation="true" scroll-left='{{scrollleft}}' style="height:70rpx;">
+					<view wx:for="{{payStatus}}" wx:key='key' id="ele{{item.num}}" class="classifyItem {{centerIndex == item.num?'active':''}}" data-index="{{item.num}}" catchtap="classifyChange">{{item.name}}</view>
+				</scroll-view>         
+				<image class="wOriTab" catchtap="wOriTab" mode="aspectFit" src='{{wOri==1?"https://cdn.51chaidan.com/images/brandSettledIcon/class2.png":"https://cdn.51chaidan.com/images/brandSettledIcon/class1.png"}}'></image>
+	</view>
+
+  <!-- 瀑布流和信息流 -->
+    <!-- 信息流 -->
+    <block wx:if='{{wOri==1}}'>
+        <view class="emlist" wx:for='{{communityList}}' wx:key='key'>
+            <view class="emlhead">
+                <view class="emlhleft">
+										<image class='emlhlimg' src="{{item.brandInfo.brand_logo}}" mode='aspectFit'></image>
+
+										<image class='dlfchrtopimgipList' wx:if='{{item.brandInfo.isAuth}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/approveIcon.png'></image>
+
+                    <view class="emlhltxt">
+                          <view class="emlhlttop specialellipsis" style="font-size:26rpx;">{{item.brandInfo.brand_name}}</view>
+                          <view class="emlhltbottom specialellipsis" style="font-size:24rpx;">{{item.add_time}}
+                            <!-- <text class="stateBg" style="background:#ABC7F7;" wx:if='{{item.type==3}}'>动态</text>
+                            <text class="stateBg" style="background:#F5B1AE;" wx:elif='{{item.type==1}}'>秒杀</text>
+                            <text class="stateBg" style="background:#A9E6BA;" wx:elif='{{item.type==4}}'>签到</text>
+														<text class="stateBg" style="background:#9BE2F8;" wx:elif='{{item.type==2}}'>抽选</text> -->
+														
+														<image class="stateBgNewImg" src="https://cdn.51chaidan.com/images/brandSettledIcon/dynamic.jpg" wx:if='{{item.type==3}}' mode="aspectFit"></image>
+                            <image class="stateBgNewImg" src="https://cdn.51chaidan.com/images/brandSettledIcon/seckill.jpg" wx:elif='{{item.type==1}}' mode="aspectFit"></image>
+                            <!-- <image class="stateBgNewImg" src="https://cdn.51chaidan.com/images/brandSettledIcon/" wx:elif='{{item.type==4}}' mode="aspectFill"></image> -->
+                            <image class="stateBgNewImg" src="https://cdn.51chaidan.com/images/brandSettledIcon/selection.jpg" wx:elif='{{item.type==2}}' mode="aspectFit"></image>
+
+                          </view>
+                    </view>
+                </view>
+						</view>
+						
+						<view class="multilineellipsisFive" style="margin:20rpx;font-size:26rpx;" wx:if='{{item.title && item.type!=1 && item.type!=2}}' catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}'><text>{{item.title}}</text></view>
+						
+            <view class="emlcontent" catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}'>
+                <!-- 动态固定大小 -->
+                <block wx:if='{{item.type==3 && item.imgArr.length==1}}'>
+                    <view class="dynamicBox">
+                        <image class="emlcontentimg" style="width:100%;height:100%;" src="{{item.imgArr[0]}}" mode="aspectFill"></image>
+                    </view>
+                </block>
+                <block wx:else> 
+                  <!-- 非动态单个图片 -->
+                   <block wx:if='{{item.imgArr && item.imgArr.length ==1}}'>
+											 <image class="emlcontentimg" style="height:399rpx;" src="{{item.imgArr[0]}}" mode="aspectFill"></image>
+											 <!-- 未开始 -->
+                       <image wx:if='{{item.status==1}}' class="statusImgBox" src="https://cdn.51chaidan.com/images/brandSettledIcon/NotStarted.png" mode="aspectFit"></image>
+                       <!-- 已结束 -->
+                       <image wx:elif='{{item.status==3}}' class="statusImgBox" src="https://cdn.51chaidan.com/images/brandSettledIcon/finished.png" mode="aspectFit"></image>
+                       <!-- 进行中 -->
+                       <image wx:elif='{{item.status==2}}' class="statusImgBox" src="https://cdn.51chaidan.com/images/brandSettledIcon/underway.png" mode="aspectFit"></image>
+
+
+                   </block>
+                   <!-- 非动态多个图片 -->
+                   <block wx:else>
+                        <view  class="dynamicBoxEve" wx:for='{{item.imgArr}}' wx:key='key'  wx:for-item='w' style="{{index%3==2?'margin-right:0;':''}}">
+                            <image class="emlcontentimg" style="width:100%;height:100%;" src="{{w}}" mode="aspectFill"></image>
+                        </view>
+                   </block>
+                </block>
+                
+                <view class="signInNowCl" style="background:#ECCA1E;" wx:if='{{item.type==4}}'>立即签到</view>
+						</view>
+						
+						<view class="multilineellipsisFive" style="margin:20rpx;font-size:26rpx;" wx:if='{{item.title && (item.type==1 || item.type==2)}}' catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}'><text>{{item.title}}</text></view>
+
+            <view class="barndStatus" style="font-size:26rpx;" wx:if='{{item.temporary}}'>
+                  <view class='dlfhtitlenew' style="color:#178FF8;font-size:26rpx;height: 40rpx;line-height: 40rpx;">{{item.temporary}}</view>
+            </view>				
+
+            <view class="barndStatus" style="font-size:26rpx;" wx:elif='{{item.type==1 || item.type==2}}'>
+                <!-- 秒杀 -->
+                <block wx:if='{{item.type==1}}'> 
+                    <view class='dlfhtitlenew' style="color:#FF2742;font-size:26rpx;height: 40rpx;line-height: 40rpx;;">￥<text style="font-size:36rpx;">{{item.price}}</text><text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
+                    <view class='dlfhtitlenew' style="color:#178FF8;font-size:26rpx;" wx:if='{{item.status==1}}'>
+											<block wx:if='{{item.specialWay > 0}}'>直播售卖</block>
+                      <block wx:else>{{item.start_time}}发售</block>
+										</view>
+                    <view class='dlfhtitlenew' style="color:#999495;font-size:26rpx;" wx:elif='{{item.status==2 && item.sellNumber>0}}'>已售：{{item.sellNumber}}体</view>
+                    <view class='dlfhtitlenew' style="color:#999495;font-size:26rpx;" wx:elif='{{item.status==3}}'>已结束</view>
+                </block>
+                <!-- 抽选 -->
+                <block wx:elif='{{item.type==2}}'>
+                    <view class='dlfhtitlenew' style="color:#FF2742;font-size:26rpx;height: 40rpx;line-height: 40rpx;">￥<text style="font-size:36rpx;">{{item.price}}</text><text style="color:#000;">抽选价</text></view>
+                    <view class='dlfhtitlenew' style="color:#178FF8;font-size:26rpx;" wx:if='{{item.status==1}}'>
+											<block wx:if='{{item.specialWay > 0}}'>直播售卖</block>
+                      <block wx:else>{{item.start_time}}抽选</block>
+										</view>
+                    <view class='dlfhtitlenew' style="color:#4CC148;font-size:26rpx;" wx:elif='{{item.status==2&&item.sellNumber>0}}'>{{item.sellNumber}}人参加</view>
+                    <view class='dlfhtitlenew' style="color:#999495;font-size:26rpx;" wx:elif='{{item.status==3}}'>已结束</view>
+                </block>
+                
+            </view>
+
+            <view class="boxAtlas" style="width:500rpx;margin:20rpx;" wx:if='{{item.illustratedInfo}}'  catchtap="jumpoffering" data-id="{{item.illustratedInfo.id}}" data-type='9035'>
+								<!-- <view class="boxAtlasLeft">图鉴</view> -->
+								<image class="boxAtlasLeftNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/illustrated.jpg"  mode="aspectFit"></image>
+                <view class="boxAtlasName specialellipsis" style="width:288rpx;font-size:26rpx;">{{item.illustratedInfo.title}}</view>
+                <view class="boxAtlasRight">点击查看</view>
+            </view>
+            <!-- bottom -->
+            <view style="min-height:40rpx;padding: 20rpx;position: relative;">
+                <view style="width:100%;min-height:40rpx;">
+                      <view class="emlhltbottom" style="font-size:24rpx;height:40rpx;line-height:40rpx;">
+
+
+                        <text style="float:right;margin-right:10rpx;">{{item.like_number>0?item.like_number:''}}</text>
+                        <image style="margin:0 15rpx;" class="emlplefimgshare" src="{{item.is_like?'https://www.51chaidan.com/images/brand/red_heart.png':'https://www.51chaidan.com/images/brand/black_heart.png'}}" data-type='{{item.type}}' data-ind='{{index}}' catchtap='followfun' data-id='{{item.id}}'></image>
+                        
+                        
+                        <!-- <text class="emlplefttxt" data-drying_id='{{item.id}}' wx:if='{{item.comment_count}}' catchtap='jumpdlfdetail'>{{item.commentNumber?item.commentNumber:'0'}}</text>
+                        <image class="emlplefimgshare" src="https://cdn.51chaidan.com/images/brandSettledIcon/comment.png" data-lid='{{item.id}}' data-is_like='{{item.is_like}}' catchtap='ispraisefun' data-ind='{{index}}' ></image> -->
+
+
+                      </view>
+                </view>
+            </view>
+
+
+        </view> 
+        <!--  暂无数据  -->
+        <view class='goodstobereceived' wx:if='{{communityList.length==0&&nodataiftr}}'>
+          <view class='nodata' style='height:450rpx;width:100%;position:relative;'>
+            <image src='../../../../pages/images/nodata.png' class='nodataimg' style='width:280rpx;height:300rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;'></image>
+          </view>
+        </view>        
+
+
+    </block>
+    <!-- 瀑布流 -->
+    <block wx:else>
+
+      <view style='width:100%;overflow:hidden;'>
+        <!-- 左边 -->
+        <view class='dlfevecom' style='float:left;'>
+          <view class='dlfeveleft' wx:for='{{communityList}}' wx:key='key' wx:if='{{index%2==0}}'>
+            <view style='position:relative;margin-bottom:10rpx;'>
+                <view style='width:360rpx;margin:auto;position:relative;max-height:340rpx;overflow: hidden;'  catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}'>
+                  <!-- <view class='dlfchrbright' wx:if='{{item.type==3}}'>动态</view>
+                  <view class='dlfchrbright' wx:elif='{{item.type==1}}' style="background:#F5B1AE;">秒杀</view>
+                  <view class='dlfchrbright' wx:elif='{{item.type==2}}' style="background:#9BE2F8;">抽选</view>
+									<view class='dlfchrbright' wx:elif='{{item.type==4}}' style="background:#A9E6BA;">签到</view> -->
+									
+                  <image class="dlfchrbrightNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/dynamic.jpg" wx:if='{{item.type==3}}' mode="aspectFit"></image>
+                  <image class="dlfchrbrightNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/seckill.jpg" wx:elif='{{item.type==1}}' mode="aspectFit"></image>
+                  <!-- <image class="dlfchrbrightNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/" wx:elif='{{item.type==4}}' mode="aspectFill"></image> -->
+                  <image class="dlfchrbrightNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/selection.jpg" wx:elif='{{item.type==2}}' mode="aspectFit"></image>
+
+                  <image data-ind='{{index}}' style='width:360rpx;margin:auto;display:block;border-radius:10rpx 10rpx 0 0;' mode='widthFix' src='{{item.imgArr[0]}}?imageMogr2/thumbnail/720x'></image>
+                </view>
+            </view>
+            <view class='dlfhtitlenew' wx:if='{{item.type==4}}'>签到赢积分</view>
+						<view class='dlfhtitlenew' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail' wx:elif='{{item.title}}'>{{item.title}}</view>
+						
+						<view class='dlfhtitlenew' wx:if='{{item.temporary}}' style="color:#178FF8;">{{item.temporary}}</view>
+            <!-- 动态 -->
+            <block wx:elif='{{item.type==3}}'></block>
+            <!-- 秒杀 -->
+            <block wx:elif='{{item.type==1}}'>
+                <block wx:if='{{item.status==1}}'>
+                    <view class='dlfhtitlenew' style="color:#178FF8;">
+											<block wx:if='{{item.specialWay > 0}}'>直播售卖</block>
+                      <block wx:else>{{item.start_time}}开始</block>
+										</view>
+                    <view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
+                </block>
+                <block wx:if='{{item.status==2 ||item.status==3}}'>
+                    <view class='dlfhtitlenew' style="overflow:hidden;">
+                        <block wx:if='{{item.status==2}}'>
+                            <view style="float:left;color:#4CC148;">进行中</view>
+                        </block>
+                        <block wx:if='{{item.status==3}}'>
+                            <view style="float:left;color:#999495;">已结束</view>
+                        </block>
+                        <view style="float:right;color:#999495;" wx:if='{{item.sellNumber>0}}'>已售：{{item.sellNumber}}体</view>
+                    </view>
+                </block>
+
+            </block>
+            <!-- 抽选 -->
+            <block wx:elif='{{item.type==2}}'>
+                <block wx:if='{{item.status==1}}'>
+                    <view class='dlfhtitlenew' style="color:#178FF8;">
+											<block wx:if='{{item.specialWay > 0}}'>直播售卖</block>
+                      <block wx:else>{{item.start_time}}开始</block>
+										</view>
+                    <view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
+                </block>
+                <block wx:if='{{item.status==2 ||item.status==3}}'>
+                    <view class='dlfhtitlenew' style="overflow:hidden;">
+                        <block wx:if='{{item.status==2}}'>
+                            <view style="float:left;color:#4CC148;">已发售</view>
+                        </block>
+                        <block wx:if='{{item.status==3}}'>
+                            <view style="float:left;color:#999495;">已结束</view>
+                        </block>
+                        <view style="float:right;color:#999495;" wx:if='{{item.sellNumber>0}}'>已售：{{item.sellNumber}}体</view>
+                    </view>
+                </block>
+            </block>
+            <!-- 签到 -->
+            <block wx:elif='{{item.type==4}}'></block>
+            <view class="boxAtlas" wx:if='{{item.illustratedInfo}}' catchtap="jumpoffering" data-id="{{item.illustratedInfo.id}}" data-type='9035'>
+								<!-- <view class="boxAtlasLeft">图鉴</view> -->
+								<image class="boxAtlasLeftNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/illustrated.jpg"  mode="aspectFit"></image>
+                <view class="boxAtlasName specialellipsis">{{item.illustratedInfo.title}}</view>
+                <view class="boxAtlasRight">点击查看</view>
+            </view>
+            <view class='dlfhpbox'>
+              <view style='width:40rpx;height:40rpx;border-radius:50%;float:left;margin:8rpx 8rpx 0 8rpx;position: relative;' catchtap='jumpdlfchlimgdetail' data-nick='{{item.nick}}' data-uid='{{item.uid}}'>
+                <image src='{{item.brandInfo.brand_logo}}' style="width:100%;height:100%;border-radius:50%;"></image>
+								<view wx:if="{{item.isVip}}" class='vipBG'><image src='https://cdn.51chaidan.com/images/calendar/VipCase.png' style='position: relative;'></image></view>
+
+								<image class='dlfchrtopimgipListp' wx:if='{{item.brandInfo.isAuth}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/approveIcon.png'></image>
+              </view>
+              <view class='dlfhpbtxt specialellipsis' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>{{item.brandInfo.brand_name}}
+                <image wx:if='{{item.is_authentication==1}}' class='dlfchrtopimgnew' src='https://clw.51chaidan.com/images/goods/authentication1.png'></image>
+              </view>
+							<view class="specialellipsis dlevegttu">
+                {{item.like_number>0?item.like_number:''}}
+                <image style="float:right;margin-top:6rpx;" class='dlfcbeveimgnewone'data-type='{{item.type}}' data-ind='{{index}}' catchtap='followfun' data-id='{{item.id}}' src='{{item.is_like?"https://www.51chaidan.com/images/brand/red_heart.png":"https://www.51chaidan.com/images/brand/black_heart.png"}}'></image>
+              </view>
+            </view>
+          </view>
+        </view>
+        <!-- 右边 -->
+        <view class='dlfevecom' style='float:right;'>
+          <view class='dlfeveright' wx:for='{{communityList}}' wx:key='key' wx:if='{{index%2==1}}'>
+            <view style='position:relative;margin-bottom:10rpx;'>
+                <view style='width:360rpx;margin:auto;position:relative;max-height:340rpx;overflow: hidden;'  catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}'>
+                  <!-- <view class='dlfchrbright' wx:if='{{item.type==3}}'>动态</view>
+                  <view class='dlfchrbright' wx:elif='{{item.type==1}}' style="background:#F5B1AE;">秒杀</view>
+                  <view class='dlfchrbright' wx:elif='{{item.type==2}}' style="background:#9BE2F8;">抽选</view>
+									<view class='dlfchrbright' wx:elif='{{item.type==4}}' style="background:#A9E6BA;">签到</view> -->
+
+									<image class="dlfchrbrightNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/dynamic.jpg" wx:if='{{item.type==3}}' mode="aspectFit"></image>
+                  <image class="dlfchrbrightNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/seckill.jpg" wx:elif='{{item.type==1}}' mode="aspectFit"></image>
+                  <!-- <image class="dlfchrbrightNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/" wx:elif='{{item.type==4}}' mode="aspectFill"></image> -->
+									<image class="dlfchrbrightNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/selection.jpg" wx:elif='{{item.type==2}}' mode="aspectFit"></image>
+									
+                  <image data-ind='{{index}}' style='width:360rpx;margin:auto;display:block;border-radius:10rpx 10rpx 0 0;' mode='widthFix' src='{{item.imgArr[0]}}?imageMogr2/thumbnail/720x'></image>
+                </view>
+            </view>
+            <view class='dlfhtitlenew' wx:if='{{item.type==4}}'>签到赢积分</view>
+						<view class='dlfhtitlenew' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail' wx:elif='{{item.title}}'>{{item.title}}</view>
+						
+						<view class='dlfhtitlenew' wx:if='{{item.temporary}}' style="color:#178FF8;">{{item.temporary}}</view>
+            <!-- 动态 -->
+            <block wx:elif='{{item.type==3}}'></block>
+            <!-- 秒杀 -->
+            <block wx:elif='{{item.type==1}}'>
+                <block wx:if='{{item.status==1}}'>
+                    <view class='dlfhtitlenew' style="color:#178FF8;">
+											<block wx:if='{{item.specialWay > 0}}'>直播售卖</block>
+                      <block wx:else>{{item.start_time}}开始</block>
+										</view>
+                    <view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
+                </block>
+                <block wx:if='{{item.status==2 ||item.status==3}}'>
+                    <view class='dlfhtitlenew' style="overflow:hidden;">
+                        <block wx:if='{{item.status==2}}'>
+                            <view style="float:left;color:#4CC148;">进行中</view>
+                        </block>
+                        <block wx:if='{{item.status==3}}'>
+                            <view style="float:left;color:#999495;">已结束</view>
+                        </block>
+                        <view style="float:right;color:#999495;" wx:if='{{item.sellNumber>0}}'>已售：{{item.sellNumber}}体</view>
+                    </view>
+                </block>
+
+            </block>
+            <!-- 抽选 -->
+            <block wx:elif='{{item.type==2}}'>
+                <block wx:if='{{item.status==1}}'>
+                    <view class='dlfhtitlenew' style="color:#178FF8;">
+											<block wx:if='{{item.specialWay > 0}}'>直播售卖</block>
+                      <block wx:else>{{item.start_time}}开始</block>
+										</view>
+                    <view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
+                </block>
+                <block wx:if='{{item.status==2 ||item.status==3}}'>
+                    <view class='dlfhtitlenew' style="overflow:hidden;">
+                        <block wx:if='{{item.status==2}}'>
+                            <view style="float:left;color:#4CC148;">已发售</view>
+                        </block>
+                        <block wx:if='{{item.status==3}}'>
+                            <view style="float:left;color:#999495;">已结束</view>
+                        </block>
+                        <view style="float:right;color:#999495;" wx:if='{{item.sellNumber>0}}'>已售：{{item.sellNumber}}体</view>
+                    </view>
+                </block>
+            </block>
+            <!-- 签到 -->
+            <block wx:elif='{{item.type==4}}'></block>
+            <view class="boxAtlas" wx:if='{{item.illustratedInfo}}' catchtap="jumpoffering" data-id="{{item.illustratedInfo.id}}" data-type='9035'>
+								<!-- <view class="boxAtlasLeft">图鉴</view> -->
+								<image class="boxAtlasLeftNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/illustrated.jpg"  mode="aspectFit"></image>
+                <view class="boxAtlasName specialellipsis">{{item.illustratedInfo.title}}</view>
+                <view class="boxAtlasRight">点击查看</view>
+            </view>
+            <view class='dlfhpbox'>
+              <view style='width:40rpx;height:40rpx;border-radius:50%;float:left;margin:8rpx 8rpx 0 8rpx;position: relative;' catchtap='jumpdlfchlimgdetail' data-nick='{{item.nick}}' data-uid='{{item.uid}}'>
+                <image src='{{item.brandInfo.brand_logo}}' style="width:100%;height:100%;border-radius:50%;"></image>
+								<view wx:if="{{item.isVip}}" class='vipBG'><image src='https://cdn.51chaidan.com/images/calendar/VipCase.png' style='position: relative;'></image></view>
+
+								<image class='dlfchrtopimgipListp' wx:if='{{item.brandInfo.isAuth}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/approveIcon.png'></image>
+              </view>
+              <view class='dlfhpbtxt specialellipsis' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail'>{{item.brandInfo.brand_name}}
+                <image wx:if='{{item.is_authentication==1}}' class='dlfchrtopimgnew' src='https://clw.51chaidan.com/images/goods/authentication1.png'></image>
+              </view>
+							<view class="specialellipsis dlevegttu">
+                {{item.like_number>0?item.like_number:''}}
+                <image style="float:right;margin-top:6rpx;" class='dlfcbeveimgnewone'data-type='{{item.type}}' data-ind='{{index}}' catchtap='followfun' data-id='{{item.id}}' src='{{item.is_like?"https://www.51chaidan.com/images/brand/red_heart.png":"https://www.51chaidan.com/images/brand/black_heart.png"}}'></image>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <!-- <view style='width:100%;text-align:center;line-height:60rpx;color:#666;font-size:30rpx;padding-bottom:{{isIphoneX?"230rpx":"210rpx"}};' wx:if='{{communityList.length>=1}}'>{{loadprompt}}</view> -->
+      <!--  暂无数据  -->
+      <view class='goodstobereceived' wx:if='{{communityList.length==0&&nodataiftr}}'>
+        <view class='nodata' style='height:450rpx;width:100%;position:relative;'>
+          <image src='../../../../pages/images/nodata.png' class='nodataimg' style='width:280rpx;height:300rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;'></image>
+        </view>
+      </view>
+   </block>
+
+
+	<view wx:if='{{brandinfo.offlineGoodsList&&brandinfo.offlineGoodsList.length!=0}}' style="width:100%;font-size:30rpx;text-align:center;margin-top:20rpx;font-weight:bold;">海报展示</view>
+	<view wx:if='{{brandinfo.offlineGoodsList&&brandinfo.offlineGoodsList.length!=0}}' style="margin-top:20rpx;">
+			<view class="gdbpbox">
+					<view class="gdbp" style="margin-right:30rpx;">
+							<image class="gdbpimg" wx:for="{{brandinfo.offlineGoodsList}}" wx:key="key" src="{{item.goods_img}}" mode='widthFix' wx:if='{{index%2==0}}' data-url='{{item.goods_img}}' catchtap="isziaprtpfun"></image>
+					</view>
+					<view class="gdbp">
+							<image class="gdbpimg" wx:for="{{brandinfo.offlineGoodsList}}" wx:key="key" src="{{item.goods_img}}" mode='widthFix' wx:if='{{index%2==1}}' data-url='{{item.goods_img}}' catchtap="isziaprtpfun"></image>
+					</view>
+			</view> 
+	</view>
+
+	<!-- <view style="width:100%;height:210rpx;position:fixed;left:0;bottom:0;" wx:if='{{settlement==1}}'>
+		<swiper current="{{currentIndex}}" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450" style="height:100%;width:100%;height:100%;">
+			<swiper-item wx:for="{{adList}}" wx:key="key">
+				<image src="{{item.src}}" style="width:100%;height:100%;border-radius:20rpx;display:block;" catchtap="exhibitionpubjump" data-id='{{item.activity_id}}' data-type='{{item.href_type}}' mode='aspectFit'></image>
+			</swiper-item>
+		</swiper>
+	</view> -->
+
+</view>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <view style='width:100%;overflow:hidden;'>
 
   <view class="bdsbox">
       
-			<!-- 品牌 ip -->
+
 			<view style="min-height:80rpx;padding-top:30rpx;" wx:if='{{brandArr&&brandArr.length!=0}}'>
 					<view style="position:relative;height:150rpx;width:100%;">
 							<view style="width:110rpx;height:140rpx;float:left;">
@@ -33,7 +467,7 @@
 
 	</view>
   <view style="position:relative;height:380rpx;">
-		  <!-- <view class="brandDSwiperBg"></view> -->
+
 			<swiper class="brandDSwiper" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
 				<swiper-item wx:if='{{isVideo}}'>
 					<view style="width:100%;height:100%;">
@@ -58,10 +492,7 @@
 		<view style="overflow:hidden;">
 				<view class="exhibdetxt">
 					<view class="exhibdxtxttitle specialellipsis" style="padding:10rpx 0 16rpx 0;"><block wx:if='{{brandinfo.boothNumber}}'><text style="color:#31b3fb;">展位:{{brandinfo.boothNumber}}</text> | </block>{{brandinfo.brandName}}</view>
-					<!-- <view style="width:100%;overflow:hidden;margin-top:20rpx;">
-						<view class="exhibdxtxtadd" style="background:#6aca6b;margin-right:15rpx;" catchtap="addfrindcommonifun" data-url="{{brandinfo.picFriend}}" data-name="{{brandinfo.brandName}}">添加好友</view>
-						<view class="exhibdxtxtadd" style="background:#31b3fb;" catchtap="addfrindcommonifun" data-name="{{brandinfo.brandName}}" data-url="{{brandinfo.picPublic}}">关注公众号</view>
-					</view> -->
+
 				</view>		
 		</view>
 
@@ -108,10 +539,7 @@
 					<image class="bdaiBoxImg" src="{{brandinfo.picFriend?'https://cdn.51chaidan.com/images/brandInfoIcon/wxOpen.png':'https://cdn.51chaidan.com/images/brandInfoIcon/wxClose.png'}}"></image>
 					<view class="bdaiBoxTxt">微信</view>
 			</view>
-		  <!-- <view>
-					<image class="bdaiBoxImg" src="{{brandinfo.wxGroup?'https://cdn.51chaidan.com/images/brandInfoIcon/qlOpen.jpg':'https://cdn.51chaidan.com/images/brandInfoIcon/qlClose.jpg'}}"></image>
-					<view class="bdaiBoxTxt">微信群</view>
-			</view> -->
+
 
 			<view catchtap="{{brandinfo.picPublic?'addfrindcommonifun':'noClickTip'}}" data-identif='2' data-url="{{brandinfo.picPublic}}">
 					<image class="bdaiBoxImg" src="{{brandinfo.picPublic?'https://cdn.51chaidan.com/images/brandInfoIcon/gzhOpen.jpg':'https://cdn.51chaidan.com/images/brandInfoIcon/gzhClose.jpg'}}"></image>
@@ -129,6 +557,17 @@
 
 
 	</view>
+
+
+
+	<view class='dlfheadtab' style="margin-bottom:20rpx;">
+
+				<scroll-view class="marginAuto scrollViewTop" scroll-x="true" scroll-with-animation="true" scroll-left='{{scrollleft}}' style="height:70rpx;">
+					<view wx:for="{{payStatus}}" wx:key='key' id="ele{{item.num}}" class="classifyItem {{centerIndex == item.num?'active':''}}" data-index="{{item.num}}" catchtap="classifyChange">{{item.name}}</view>
+				</scroll-view>         
+				<image class="wOriTab" catchtap="wOriTab" mode="aspectFit" src='{{wOri==1?"https://cdn.51chaidan.com/images/brandSettledIcon/class2.png":"https://cdn.51chaidan.com/images/brandSettledIcon/class1.png"}}'></image>
+	</view>
+
 
 	<view style="width:100%;font-size:30rpx;text-align:center;margin-top:20rpx;font-weight:bold;">
 		<block wx:if='{{settlement==1}}'>
@@ -165,7 +604,6 @@
 						</view>
 						<view wx:elif='{{item.type == 11 || item.type == 12}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;">
 						  <view wx:if='{{item.saleButtonDisplay}}' style='color:#6aca6b;'>{{item.saleButtonDisplay}}</view>
-							<!-- <view wx:elif='{{item.status==1}}' style='color:#6aca6b;'>{{item.start_time}}开售</view> -->
 							<view wx:elif='{{item.status==2}}' style='color:#6aca6b;'>{{item.stop_time}}结束</view>
 							<view wx:elif='{{item.status==3}}' style='color:black;'>已结束</view>
 						</view>
@@ -221,7 +659,6 @@
 						</view>
 						<view wx:elif='{{item.type == 11 || item.type == 12}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;">
 						  <view wx:if='{{item.saleButtonDisplay}}' style='color:#6aca6b;'>{{item.saleButtonDisplay}}</view>
-							<!-- <view wx:elif='{{item.status==1}}' style='color:#6aca6b;'>{{item.start_time}}开售</view> -->
 							<view wx:elif='{{item.status==2}}' style='color:#6aca6b;'>{{item.stop_time}}结束</view>
 							<view wx:elif='{{item.status==3}}' style='color:black;'>已结束</view>
 						</view>
@@ -263,13 +700,9 @@
 					<view class="gdbp">
 							<image class="gdbpimg" wx:for="{{brandinfo.offlineGoodsList}}" wx:key="key" src="{{item.goods_img}}" mode='widthFix' wx:if='{{index%2==1}}' data-url='{{item.goods_img}}' catchtap="isziaprtpfun"></image>
 					</view>
-					<!-- <view class="ssubBrandEve" wx:for="{{goods_desc_brand_poster}}" wx:key="key">
-							<image class="ssubBiliimgbr" wx:for="{{goods_desc_brand_poster}}" wx:key="key" src="{{item}}" mode='aspectFit'></image>
-					</view> -->
 			</view> 
 	</view>
 
-	<!-- <view style="width:100%;height:194rpx;"></view> -->
 
 	<view style="width:100%;height:210rpx;position:fixed;left:0;bottom:0;" wx:if='{{settlement==1}}'>
 		<swiper current="{{currentIndex}}" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450" style="height:100%;width:100%;height:100%;">
@@ -279,7 +712,7 @@
 		</swiper>
 	</view>
 
-</view>
+</view> -->
 
 <!--  授权弹框  -->
 <tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
@@ -348,4 +781,22 @@
 			 </scroll-view>
 		</view>	
 	</view>
+</view>
+
+<view class="brandManageWrapButton" wx:if='{{brandSettledLimit}}' catchtap="toggleAddNewEventMask">发布/发售</view>
+<!-- 选择发布/发售类型弹框-->
+<view class="popMask" catchtouchmove="true" catchtap="toggleAddNewEventMask" wx:if="{{isAddNewEventMask}}">
+    <view class="addNewEventBox" catchtap="true">
+        <view class="addNewEventContent">
+            <view class="createItem" data-type="9033" catchtap="jumpoffering">
+                <view>开启图鉴介绍</view>
+                <view class="lastChild" style="background:#68B1ED;">发布图鉴</view>
+            </view>
+            <view class="createItem" data-type="9032" catchtap="jumpoffering">
+                <view>让内容和用户连接</view>
+                <view class="lastChild" style="background:#6FD375;">发布动态</view>
+            </view>
+        </view>
+        <image class="popMaskbutton" catchtap="toggleAddNewEventMask" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="aspectFit"></image>
+    </view>
 </view>

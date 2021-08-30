@@ -27,7 +27,8 @@ Page({
     value: [0, 0, 0],
     values: [0, 0, 0],
     condition: false,
-    cityback:false,     
+    cityback:false,  
+    is_loading:false   
   },  
 
   /**
@@ -68,7 +69,9 @@ Page({
   getData(){
     var _this = this;
     console.log('=========================')
+    _this.setData({is_loading:false});
     api.oMbrandInfo(_this.data.orderid,{}).then((res) => {
+      _this.setData({is_loading:true});
       console.log('订单详情=======',res)
      if (res.data.status_code == 200) {
          var detailData = res.data.data.Info.order;
@@ -471,7 +474,51 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    
+    var _this = this;
+    var indexShare = app.signindata.indexShare || [];
+    var indexShareNum = Math.floor(Math.random() * indexShare.length) || 0;
+    var indexShareImg = '';
+    if(indexShare.length!=0 && indexShare[indexShareNum]){
+      indexShareImg = indexShare[indexShareNum]+'?time=' + Date.parse(new Date());
+    };
+    return {
+      title:app.signindata.titleShare?app.signindata.titleShare:'你喜欢的潮玩都在这里！',
+      path: 'pages/index/index',
+      imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      success: function (res) {}
+    } 
   },
+  jump(){
+    var _this = this;
+    var detailData = _this.data.detailData;
+
+    if(detailData.order.orderType == 1){ // 普通订单
+      app.comjumpwxnav(1,detailData.goods.goodsId,'','')
+    }else if(detailData.order.orderType == 13){ // 限定抽签
+      app.comjumpwxnav(9003,detailData.order.activityId,'','')
+    }else if(detailData.order.orderType == 14){ // 抽盲盒
+      app.comjumpwxnav(9005,detailData.order.activityId,'','')
+    }else if(detailData.order.orderType == 2){ // 免单活动订单
+      app.comjumpwxnav(8,detailData.order.activityId,'','')
+    }else if(detailData.order.orderType == 21){ // 一番赏
+      app.comjumpwxnav(9016,detailData.order.activityId,'','')
+    }else if(detailData.order.orderType == 12){
+      app.comjumpwxnav(9004,detailData.order.activityId,'','')
+    }
+    // else if(detailData.order.orderType == ){
+    //   app.comjumpwxnav('','','','')
+    // }else if(detailData.order.orderType == ){
+    //   app.comjumpwxnav('','','','')
+    // }else if(detailData.order.orderType == ){
+    //   app.comjumpwxnav('','','','')
+    // }else if(detailData.order.orderType == ){
+    //   app.comjumpwxnav('','','','')
+    // }else if(detailData.order.orderType == ){
+    //   app.comjumpwxnav('','','','')
+    // }else if(detailData.order.orderType == ){
+    //   app.comjumpwxnav('','','','')
+    // }
+    
+  }
 
 })

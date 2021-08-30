@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '图鉴',
+    c_title: '发售日历',
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
@@ -55,6 +55,7 @@ Page({
       dateid:dateid
     });
     this.data.isSpecialCurrentMonth = 0;
+    this.data.isReverseSort = 0;
     this.getData();
     let that = this;
     let top = '#top' + dateid;
@@ -92,20 +93,29 @@ Page({
     var _this = this;
     _this.data.loginid = app.signindata.loginid;
     _this.data.uid = app.signindata.uid;
+
+    var date = new Date();
+    var Y = date.getFullYear();
+    var M = (date.getMonth() + 1);
+
     _this.setData({
       uid: app.signindata.uid,
       avatarUrl: app.signindata.avatarUrl,
       isProduce: app.signindata.isProduce,
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
+      dateid:M
     });
 
-
-    // var date = new Date();
-    // var Y = date.getFullYear();
-    // var M = (date.getMonth() + 1);
-    // this.setData({
-    //   dateid:M
-    // })
+    let top = '#top' + M;
+    //创建节点选择器
+    var query = wx.createSelectorQuery();
+    //选择id
+    query.select(top).boundingClientRect();
+    query.exec(function(res) {
+      _this.setData({
+        scrollleftTop:res[0].left - wx.getSystemInfoSync().windowWidth/2 + (res[0].width/2)
+      })
+    })
 
     _this.getData()
   },
@@ -157,7 +167,7 @@ Page({
         }else if(res.data.ReturnCode == 201){
           //   201时会返回
           _this.data.isSpecialCurrentMonth = 1;
-          _this.data.isReverseSort = 1;
+          _this.data.isReverseSort = 0;
           if(num == 0){
             var dataList = res.data.List || [];
           }else{
@@ -300,13 +310,27 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    
+    var _this = this;
+    var indexShare = app.signindata.indexShare || [];
+    var indexShareNum = Math.floor(Math.random() * indexShare.length) || 0;
+    var indexShareImg = '';
+    if(indexShare.length!=0 && indexShare[indexShareNum]){
+      indexShareImg = indexShare[indexShareNum]+'?time=' + Date.parse(new Date());
+    };
+    return {
+      title:app.signindata.titleShare?app.signindata.titleShare:'你喜欢的潮玩都在这里！',
+      path: 'pages/index/index',
+      imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      success: function (res) {}
+    } 
   },
   details(w){
     var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
     var type = w.currentTarget.dataset.type || w.target.dataset.type || 0;
     if(type == 4){
       app.comjumpwxnav(9003,id,'','')
+    }else if(type == 9035){
+      app.comjumpwxnav(9035,id,'','')
     }else{
       app.comjumpwxnav(1,id,'','')
     };
@@ -377,11 +401,5 @@ Page({
       }
     })
   },
-  jumpAtlas(w){
-    var id = w.currentTarget.dataset.id || w.target.dataset.id || '';
-    wx.navigateTo({
-      url: "/page/settled/pages/atlas/atlas?iid=" + id,
-    });
-  }
 
 })

@@ -170,6 +170,7 @@
         "pages/releaseGoods/releaseGoods",
         "pages/releaseDrawGoods/releaseDrawGoods",
         "pages/offeringCalendar/offeringCalendar",
+        "pages/commodityManagement/commodityManagement",
         "pages/fieldGuideList/fieldGuideList"
       ]
     }
