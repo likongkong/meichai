@@ -164,7 +164,7 @@
                             <view class="assetL">
                                 <view>
                                     <text>￥{{withdrawInfo.lumpSum}}</text>
-                                    <text>余额</text>
+                                    <text>累计收入</text>
                                 </view>
                                 <view>
                                     <text>{{withdrawInfo.gold}}</text>

@@ -36,6 +36,7 @@ Page({
         subtitle:'添加图片（最多上传九张，建议上传比例1:1)',
         name:'dynamicPic',
         imageList:[],
+        mode:'multiple',
         storagelocation:'brandinfo/dynamic'
       },{
         isRequired:false,
@@ -44,15 +45,17 @@ Page({
         subtitle:'关联图鉴',
         value:'点击关联',
         name:'associationActivity',
-      },{
-        isRequired:false,
-        type:'radio',
-        subtitle:'允许评论对象',
-        radioArr:['所有人可评论','指定群评论'],
-        value:0,
-        name:'allowComment'
       },
+      // {
+      //   isRequired:false,
+      //   type:'radio',
+      //   subtitle:'允许评论对象',
+      //   radioArr:['所有人可评论','指定群评论'],
+      //   value:0,
+      //   name:'allowComment'
+      // },
     ],
+    
     obj:{},
 
   },
@@ -217,14 +220,14 @@ Page({
             [`dynamicData[1].value`]:info.title,
             [`dynamicData[2].imageList`]:info.imgArr,
             [`dynamicData[3].value`]:List.illustratedInfo.title,
-            [`dynamicData[4].value`]:info.allow_comment_type,
+            // [`dynamicData[4].value`]:info.allow_comment_type,
             
           })
           obj.associationIp = info.brand_id;
           obj.dynamicContent = info.title;
           obj.dynamicPic = info.imgArr;
           obj.fieldGuideId = List.illustratedInfo.id;
-          obj.allowComment = info.allow_comment_type;
+          // obj.allowComment = info.allow_comment_type;
         }else{
           app.showToastC(res.data.Msg,2000);
         }
@@ -250,14 +253,15 @@ Page({
       app.showToastC('请添加图片',1500);
       return false;
     }
-    if(!obj.allowComment){
-      obj.allowComment = 0
-    }
+    // if(!obj.allowComment){
+    //   obj.allowComment = 0
+    // }
     wx.showLoading({
       title: '加载中',
     })
     console.log(obj)
-    let data = `mod=community&operation=establish&uid=${this.data.uid}&loginid=${this.data.loginid}&brand_id=${obj.associationIp}&title=${obj.dynamicContent}&illustrated_id=${obj.fieldGuideId?obj.fieldGuideId:''}&imgArr=${obj.dynamicPic}&allowComment=${obj.allowComment}&id=${this.data.id}`
+    // let data = `mod=community&operation=establish&uid=${this.data.uid}&loginid=${this.data.loginid}&brand_id=${obj.associationIp}&title=${obj.dynamicContent}&illustrated_id=${obj.fieldGuideId?obj.fieldGuideId:''}&imgArr=${obj.dynamicPic}&allowComment=${obj.allowComment}&id=${this.data.id}`
+    let data = `mod=community&operation=establish&uid=${this.data.uid}&loginid=${this.data.loginid}&brand_id=${obj.associationIp}&title=${obj.dynamicContent}&illustrated_id=${obj.fieldGuideId?obj.fieldGuideId:''}&imgArr=${obj.dynamicPic}&allowComment=0&id=${this.data.id}`
     var q = Dec.Aese(data);
     console.log(`${app.signindata.comurl}?${data}`)
     wx.request({

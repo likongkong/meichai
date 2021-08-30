@@ -39,6 +39,7 @@ Page({
         subtitle:'添加图片（最多上传九张，建议上传比例1:1)',
         name:'fieldGuidePic',
         margintop0:true,
+        mode:'multiple',
         imageList:[],
         storagelocation:'brandinfo/dynamic'
       }
