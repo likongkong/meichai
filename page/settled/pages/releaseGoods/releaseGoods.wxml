@@ -17,11 +17,16 @@
     list="{{listData1}}"
     bind:bindchange="bindchange">
     </settledForm>
+  </view>
+  <view class="title">
+    发售设置
+  </view>
+  <view class="card">
     <settledForm 
     id="settledForm"
     statusBarHeightMc="{{statusBarHeightMc}}"
+    form="dynamicContent"
     list="{{listData2}}"
-    isEdit="{{false}}"
     bind:bindchange="bindchange">
     </settledForm>
   </view>

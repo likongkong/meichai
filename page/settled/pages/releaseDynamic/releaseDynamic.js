@@ -49,7 +49,7 @@ Page({
         type:'radio',
         subtitle:'允许评论对象',
         radioArr:['所有人可评论','指定群评论'],
-        value:'0',
+        value:0,
         name:'allowComment'
       },
     ],

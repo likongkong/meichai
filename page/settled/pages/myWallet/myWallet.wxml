@@ -6,9 +6,9 @@
       <!-- <image catchtap="clickme" src="https://cdn.51chaidan.com/images/brandSettledIcon/set.png" mode="widthFix"></image> -->
       <view>
         <text class="amount">￥{{info.lumpSum}}</text>
-        <text class="amountTxt">钱包余额</text>
-        <view class="withdrawBtn" catchtap="bideWithdraw">立即提现</view>
-        <text class="withdrawTxt">每天可提现一次</text>
+        <text class="amountTxt">累计收入</text>
+        <!-- <view class="withdrawBtn" catchtap="bideWithdraw">立即提现</view>
+        <text class="withdrawTxt">每天可提现一次</text> -->
       </view>
     </view>
     <view class="filterWrap">

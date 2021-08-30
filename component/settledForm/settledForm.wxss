@@ -21,6 +21,14 @@
 .margintop0{
   margin-top: 0 !important;
 }
+.displayInlineFlex{
+  display: inline-flex !important;
+}
+.spaceBetween{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 /* 行样式 */
 .rowWrap{    
   width: 100%;
@@ -35,6 +43,14 @@
   height: 100rpx;
   line-height: 100rpx;
   font-size: 28rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.rowWrap .cEveTitle image{
+  width: 28rpx;
+  height: auto;
+  margin-left: 12rpx;
 }
 .rowWrap .cEveInput{
   width: 60%;
@@ -180,6 +196,27 @@
   align-items: center;
   margin-top: 14rpx;
 }
+.radioWrap1 view{
+  margin-right: 76rpx;
+}
+.radioWrap1 view:last-child{
+  margin-right: 0;
+}
+.radioRightWrap{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.radioRightWrap text{
+  font-size: 28rpx;
+  color: #000000;
+}
+.radioRightWrap input{
+  width: 60rpx;
+  border-bottom: 2rpx solid #BBBBBB;
+  text-align: center;
+  font-size: 28rpx;
+}
 .itemName{
   font-size: 28rpx;
   margin-left: 20rpx;
@@ -197,4 +234,25 @@
   display: block;
   border: 2rpx solid #101010;
   border-radius: 100%;
+}
+.labelWrap{
+  padding: 20rpx 0;
+}
+.labelWrap text{
+  height: 60rpx;
+  padding: 0 28rpx;
+  border-radius: 8rpx;
+  color: #000000;
+  border:2rpx solid #000000;
+  display: inline-block;
+  line-height: 60rpx;
+  margin-right: 40rpx;
+  font-size: 28rpx;
+}
+.labelWrap text:last-child{
+  margin-right: 0;
+}
+.activelabel{
+  background: #000000;
+  color: #fff !important;
 }
