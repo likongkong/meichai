@@ -7,7 +7,7 @@
 
 page {
   background: #f5f6fa;
-  padding-bottom: 30rpx;
+  padding-bottom: 230rpx;
 }
 .briefIntroduction{
   width:670rpx;font-size:26rpx;color:#333;margin:15rpx auto 0;

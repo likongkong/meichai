@@ -92,7 +92,7 @@ Page({
     isAddNewEventMask:false
   },
   jinqingqidai(){
-    app.showToastC('敬请期待',2000);
+    app.comjumpwxnav(9017,this.data.brand_id,'','')
   },
   toggleAddNewEventMask(){
     this.setData({
@@ -345,11 +345,12 @@ Page({
               }).catch((err)=>{
                 console.log(err)
               })
-            }
+            } 
             _this.setData({
               isAddNewEventMask:false,
               dataInfo: res.data.Info,
               brandSettledStatus: res.data.Info.brandSettledInfo.brandSettledStatus,
+              brand_id:res.data.Info.brandSettledInfo?res.data.Info.brandSettledInfo.brand_id:'',
               vipAdvertising: res.data.Info.vipAdvertising||'',
               // 待付款
               nonpayment: res.data.Info.non_payment||0,

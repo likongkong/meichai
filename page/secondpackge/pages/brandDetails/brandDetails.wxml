@@ -140,20 +140,28 @@
 						
 						<view class="multilineellipsisFive" style="margin:20rpx;font-size:26rpx;" wx:if='{{item.title && (item.type==1 || item.type==2)}}' catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}'><text>{{item.title}}</text></view>
 
-						
+            <view class="barndStatus" style="font-size:26rpx;" wx:if='{{item.temporary}}'>
+                  <view class='dlfhtitlenew' style="color:#178FF8;font-size:26rpx;height: 40rpx;line-height: 40rpx;">{{item.temporary}}</view>
+            </view>				
 
-            <view class="barndStatus" style="font-size:26rpx;" wx:if='{{item.type==1 || item.type==2}}'>
+            <view class="barndStatus" style="font-size:26rpx;" wx:elif='{{item.type==1 || item.type==2}}'>
                 <!-- 秒杀 -->
                 <block wx:if='{{item.type==1}}'> 
                     <view class='dlfhtitlenew' style="color:#FF2742;font-size:26rpx;height: 40rpx;line-height: 40rpx;;">￥<text style="font-size:36rpx;">{{item.price}}</text><text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
-                    <view class='dlfhtitlenew' style="color:#178FF8;font-size:26rpx;" wx:if='{{item.status==1}}'>{{item.start_time}}发售</view>
+                    <view class='dlfhtitlenew' style="color:#178FF8;font-size:26rpx;" wx:if='{{item.status==1}}'>
+											<block wx:if='{{item.specialWay > 0}}'>直播售卖</block>
+                      <block wx:else>{{item.start_time}}发售</block>
+										</view>
                     <view class='dlfhtitlenew' style="color:#999495;font-size:26rpx;" wx:elif='{{item.status==2 && item.sellNumber>0}}'>已售：{{item.sellNumber}}体</view>
                     <view class='dlfhtitlenew' style="color:#999495;font-size:26rpx;" wx:elif='{{item.status==3}}'>已结束</view>
                 </block>
                 <!-- 抽选 -->
                 <block wx:elif='{{item.type==2}}'>
                     <view class='dlfhtitlenew' style="color:#FF2742;font-size:26rpx;height: 40rpx;line-height: 40rpx;">￥<text style="font-size:36rpx;">{{item.price}}</text><text style="color:#000;">抽选价</text></view>
-                    <view class='dlfhtitlenew' style="color:#178FF8;font-size:26rpx;" wx:if='{{item.status==1}}'>{{item.start_time}}抽选</view>
+                    <view class='dlfhtitlenew' style="color:#178FF8;font-size:26rpx;" wx:if='{{item.status==1}}'>
+											<block wx:if='{{item.specialWay > 0}}'>直播售卖</block>
+                      <block wx:else>{{item.start_time}}抽选</block>
+										</view>
                     <view class='dlfhtitlenew' style="color:#4CC148;font-size:26rpx;" wx:elif='{{item.status==2&&item.sellNumber>0}}'>{{item.sellNumber}}人参加</view>
                     <view class='dlfhtitlenew' style="color:#999495;font-size:26rpx;" wx:elif='{{item.status==3}}'>已结束</view>
                 </block>
@@ -188,7 +196,7 @@
         </view> 
         <!--  暂无数据  -->
         <view class='goodstobereceived' wx:if='{{communityList.length==0&&nodataiftr}}'>
-          <view class='nodata' style='height:900rpx;width:100%;position:relative;'>
+          <view class='nodata' style='height:450rpx;width:100%;position:relative;'>
             <image src='../../../../pages/images/nodata.png' class='nodataimg' style='width:280rpx;height:300rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;'></image>
           </view>
         </view>        
@@ -218,13 +226,18 @@
                 </view>
             </view>
             <view class='dlfhtitlenew' wx:if='{{item.type==4}}'>签到赢积分</view>
-            <view class='dlfhtitlenew' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail' wx:elif='{{item.title}}'>{{item.title}}</view>
+						<view class='dlfhtitlenew' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail' wx:elif='{{item.title}}'>{{item.title}}</view>
+						
+						<view class='dlfhtitlenew' wx:if='{{item.temporary}}' style="color:#178FF8;">{{item.temporary}}</view>
             <!-- 动态 -->
-            <block wx:if='{{item.type==3}}'></block>
+            <block wx:elif='{{item.type==3}}'></block>
             <!-- 秒杀 -->
             <block wx:elif='{{item.type==1}}'>
                 <block wx:if='{{item.status==1}}'>
-                    <view class='dlfhtitlenew' style="color:#178FF8;">{{item.start_time}}开始</view>
+                    <view class='dlfhtitlenew' style="color:#178FF8;">
+											<block wx:if='{{item.specialWay > 0}}'>直播售卖</block>
+                      <block wx:else>{{item.start_time}}开始</block>
+										</view>
                     <view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
                 </block>
                 <block wx:if='{{item.status==2 ||item.status==3}}'>
@@ -243,7 +256,10 @@
             <!-- 抽选 -->
             <block wx:elif='{{item.type==2}}'>
                 <block wx:if='{{item.status==1}}'>
-                    <view class='dlfhtitlenew' style="color:#178FF8;">{{item.start_time}}开始</view>
+                    <view class='dlfhtitlenew' style="color:#178FF8;">
+											<block wx:if='{{item.specialWay > 0}}'>直播售卖</block>
+                      <block wx:else>{{item.start_time}}开始</block>
+										</view>
                     <view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
                 </block>
                 <block wx:if='{{item.status==2 ||item.status==3}}'>
@@ -302,13 +318,18 @@
                 </view>
             </view>
             <view class='dlfhtitlenew' wx:if='{{item.type==4}}'>签到赢积分</view>
-            <view class='dlfhtitlenew' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail' wx:elif='{{item.title}}'>{{item.title}}</view>
+						<view class='dlfhtitlenew' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail' wx:elif='{{item.title}}'>{{item.title}}</view>
+						
+						<view class='dlfhtitlenew' wx:if='{{item.temporary}}' style="color:#178FF8;">{{item.temporary}}</view>
             <!-- 动态 -->
-            <block wx:if='{{item.type==3}}'></block>
+            <block wx:elif='{{item.type==3}}'></block>
             <!-- 秒杀 -->
             <block wx:elif='{{item.type==1}}'>
                 <block wx:if='{{item.status==1}}'>
-                    <view class='dlfhtitlenew' style="color:#178FF8;">{{item.start_time}}开始</view>
+                    <view class='dlfhtitlenew' style="color:#178FF8;">
+											<block wx:if='{{item.specialWay > 0}}'>直播售卖</block>
+                      <block wx:else>{{item.start_time}}开始</block>
+										</view>
                     <view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
                 </block>
                 <block wx:if='{{item.status==2 ||item.status==3}}'>
@@ -327,7 +348,10 @@
             <!-- 抽选 -->
             <block wx:elif='{{item.type==2}}'>
                 <block wx:if='{{item.status==1}}'>
-                    <view class='dlfhtitlenew' style="color:#178FF8;">{{item.start_time}}开始</view>
+                    <view class='dlfhtitlenew' style="color:#178FF8;">
+											<block wx:if='{{item.specialWay > 0}}'>直播售卖</block>
+                      <block wx:else>{{item.start_time}}开始</block>
+										</view>
                     <view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
                 </block>
                 <block wx:if='{{item.status==2 ||item.status==3}}'>
@@ -371,7 +395,7 @@
       <!-- <view style='width:100%;text-align:center;line-height:60rpx;color:#666;font-size:30rpx;padding-bottom:{{isIphoneX?"230rpx":"210rpx"}};' wx:if='{{communityList.length>=1}}'>{{loadprompt}}</view> -->
       <!--  暂无数据  -->
       <view class='goodstobereceived' wx:if='{{communityList.length==0&&nodataiftr}}'>
-        <view class='nodata' style='height:900rpx;width:100%;position:relative;'>
+        <view class='nodata' style='height:450rpx;width:100%;position:relative;'>
           <image src='../../../../pages/images/nodata.png' class='nodataimg' style='width:280rpx;height:300rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;'></image>
         </view>
       </view>

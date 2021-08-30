@@ -447,18 +447,21 @@ Page({
              });
           }else{
             app.showToastC('暂无更多数据')
-          }
+          };
+          _this.setData({
+            nodataiftr:true
+          })
           if (num == 0) {
             _this.setData({
-              communityList,
-              nodataiftr:true
+              communityList
             });
           } else {
-            var ltlist = [..._this.data.communityList,...communityList];
-            _this.setData({
-              communityList: ltlist,
-              nodataiftr:true
-            });
+            if(communityList.length != 0){
+              var ltlist = [..._this.data.communityList,...communityList];
+              _this.setData({
+                communityList: ltlist
+              });
+            };
           };
         };
       }
