@@ -766,12 +766,17 @@ Page({
       type = 1;
     }else if(istype == 2){ // 抽选
       type = 9003;
+      wx.navigateTo({ // 抽签详情页
+        url: "/page/component/pages/limitlottery/limitlottery?id=" + id
+      });  
     }else if(istype == 3){ // 动态
       type = 9036;
     }else if(type == 9028){
       id = 'id='+id;
     }
-    app.comjumpwxnav(type,id,'','')
+    if(istype != 2){
+      app.comjumpwxnav(type,id,'','')
+    };
     this.setData({
       isAddNewEventMask:false
     })
