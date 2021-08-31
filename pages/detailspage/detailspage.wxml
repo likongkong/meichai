@@ -994,7 +994,7 @@
 
 <block wx:elif='{{is_exhibition==1||zunmdata.status==1}}'>
 	<view style='width:100%;height:79rpx;position:fixed;left:0;bottom:{{isIphoneX?"130rpx":"110rpx"}};z-index:5;padding-top:6rpx;'>
-
+ 
     <view class="detailbottomtip" wx:if='{{zunmdata.isSuplusChance}}'>
         <view class="detailbottomtipbg"></view>
         <view class="detailbottomtiptxt">还有机会,有买家拍下还未付款,1分钟内将解除订单</view>
