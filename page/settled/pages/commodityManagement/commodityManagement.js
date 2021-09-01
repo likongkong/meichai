@@ -44,6 +44,12 @@ Page({
       {'n':'抽选商品',id:5}
     ]
   },
+  toggleAddNewEventMask(){
+    this.setData({
+      isAddNewEventMask: !this.data.isAddNewEventMask
+    })
+  },
+
   selectBoxFun(){
      this.setData({
         selectBox:!this.data.selectBox
@@ -83,7 +89,12 @@ Page({
     var order = _this.data.order || [];
     var selectData = order[num] || {};
     if(index == 1){ // 1 修改地址 2 退款 3 物流
-
+      // 9039 发布抽选 9040 发布商品
+      if(selectData.itemType == 4){
+        app.comjumpwxnav(9039,'id='+selectData.itemId,'','')
+      }else{
+        app.comjumpwxnav(9040,'id='+selectData.itemId,'','')
+      };
     } else if(index == 2){      
         api.checkOrderRefund({
             orderId:selectData.order.orderId,	// Number订单id 对内唯一标识
@@ -115,7 +126,7 @@ Page({
     } else if(index == 3){
 
     }else if(index == 4){
-
+      this.toggleAddNewEventMask()
     };
     if(index != 1 && index != 4){
       this.setData({
@@ -127,6 +138,14 @@ Page({
     };
 
   },
+    // 跳转日历
+    jumpoffering(w){
+      var type = w.currentTarget.dataset.type || w.target.dataset.type || 0;
+      app.comjumpwxnav(type,'','','');
+      this.setData({
+        isAddNewEventMask:false
+      })
+    },
   // 弹框确认按钮    1 修改收货地址 2 退款 3 物流 4批量导出订单
   confirmCommonTip(){ 
     var _this = this;

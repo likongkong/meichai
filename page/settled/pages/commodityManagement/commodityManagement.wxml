@@ -170,3 +170,20 @@
         <view class="orderMangTipTop" catchtap="selectBoxFun" style="padding-bottom:30rpx;">取消</view>
     </view>
 </view>
+
+<!-- 选择发布/发售类型弹框-->
+<view class="popMask" catchtouchmove="true" catchtap="toggleAddNewEventMask" wx:if="{{isAddNewEventMask}}">
+    <view class="addNewEventBox" catchtap="true">
+        <view class="addNewEventContent">
+            <view class="createItem" data-type="9039" catchtap="jumpoffering">
+                <view>开启抽选</view>
+                <view class="lastChild" style="background:#68B1ED;">发布抽选</view>
+            </view>
+            <view class="createItem" data-type="9040" catchtap="jumpoffering">
+                <view>开启商品</view>
+                <view class="lastChild" style="background:#6FD375;">发布商品</view>
+            </view>
+        </view>
+        <image class="popMaskbutton" catchtap="toggleAddNewEventMask" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="aspectFit"></image>
+    </view>
+</view>

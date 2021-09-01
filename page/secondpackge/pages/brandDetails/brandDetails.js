@@ -47,8 +47,7 @@ Page({
       {name:'秒杀',num:'2'},
       {name:'抽选',num:'3'},
       {name:'动态',num:'4'},
-      {name:'分享',num:'5'},
-      {name:'动态',num:'6'}
+      {name:'抽盒',num:'7'}
     ], // 支付状态 
     centerIndex:0,
     wOri:1 , // 1 瀑布流 2 信息流

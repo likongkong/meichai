@@ -113,7 +113,7 @@
                 </view>
             </view>
 
-            <view class="multilineellipsisFive" style="margin:20rpx;font-size:26rpx;" wx:if='{{item.title && item.type!=1 && item.type!=2}}' catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}'><text>{{item.title}}</text></view>
+            <view class="multilineellipsisFive" style="margin:20rpx;font-size:26rpx;" wx:if='{{item.title && item.type!=1 && item.type!=2 && item.type!=5}}' catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}'><text>{{item.title}}</text></view>
 
             <view class="emlcontent" catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}'>
                 <!-- 动态固定大小 -->
@@ -144,14 +144,14 @@
                 <view class="signInNowCl" style="background:#ECCA1E;" wx:if='{{item.type==4}}'>立即签到</view>
             </view>
             
-            <view class="multilineellipsisFive" style="margin:20rpx;font-size:26rpx;" wx:if='{{item.title && (item.type==1 || item.type==2)}}' catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}'><text>{{item.title}}</text></view>
+            <view class="multilineellipsisFive" style="margin:20rpx;font-size:26rpx;" wx:if='{{item.title && (item.type==1 || item.type==2 || item.type==5)}}' catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}'><text>{{item.title}}</text></view>
 
 
             <view class="barndStatus" style="font-size:26rpx;" wx:if='{{item.temporary}}'>
                   <view class='dlfhtitlenew' style="color:#178FF8;font-size:26rpx;height: 40rpx;line-height: 40rpx;">{{item.temporary}}</view>
             </view>
 
-            <view class="barndStatus" style="font-size:26rpx;" wx:elif='{{item.type==1 || item.type==2}}'>
+            <view class="barndStatus" style="font-size:26rpx;" wx:elif='{{item.type==1 || item.type==2 || item.type==5}}'>
                 <!-- 秒杀 -->
                 <block wx:if='{{item.type==1}}'> 
                     <view class='dlfhtitlenew' style="color:#FF2742;font-size:26rpx;height: 40rpx;line-height: 40rpx;">￥<text style="font-size:36rpx;">{{item.price}}</text><text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
@@ -172,14 +172,14 @@
                     <view class='dlfhtitlenew' style="color:#4CC148;font-size:26rpx;height: 40rpx;line-height: 40rpx;" wx:elif='{{item.status==2&&item.sellNumber>0}}'>{{item.sellNumber}}人参加</view>
                     <view class='dlfhtitlenew' style="color:#999495;font-size:26rpx;height: 40rpx;line-height: 40rpx;" wx:elif='{{item.status==3}}'>已结束</view>
                 </block>
-                <!-- 抽选 -->
+                <!-- 抽盒 -->
                 <block wx:elif='{{item.type==5}}'>
                     <view class='dlfhtitlenew' style="color:#FF2742;font-size:26rpx;height: 40rpx;line-height: 40rpx;">￥<text style="font-size:36rpx;">{{item.price}}</text></view>
                     <view class='dlfhtitlenew' style="color:#178FF8;font-size:26rpx;height: 40rpx;line-height: 40rpx;" wx:if='{{item.status==1}}'>
                       <block wx:if='{{item.specialWay > 0}}'>直播售卖</block>
                       <block wx:else>{{item.start_time}}开始</block>
                     </view>
-                    <view class='dlfhtitlenew' style="color:#4CC148;font-size:26rpx;height: 40rpx;line-height: 40rpx;" wx:elif='{{item.status==2}}'>在线抽盒</view>
+                    <view class='dlfhtitlenew' style="color:#999495;font-size:26rpx;height: 40rpx;line-height: 40rpx;" wx:elif='{{item.status==2}}'>在线抽盒</view>
                     <view class='dlfhtitlenew' style="color:#999495;font-size:26rpx;height: 40rpx;line-height: 40rpx;" wx:elif='{{item.status==3}}'>已结束</view>
                 </block>
                 
@@ -295,7 +295,7 @@
             <!-- 签到 -->
             <block wx:elif='{{item.type==4}}'></block>
 
-            <!-- 抽选 -->
+            <!-- 抽盒 -->
             <block wx:elif='{{item.type==5}}'>
                 <block wx:if='{{item.status==1}}'>
                     <view class='dlfhtitlenew' style="color:#178FF8;">
@@ -307,7 +307,7 @@
                 <block wx:if='{{item.status==2 ||item.status==3}}'>
                     <view class='dlfhtitlenew' style="overflow:hidden;">
                         <block wx:if='{{item.status==2}}'>
-                            <view style="float:left;color:#4CC148;">在线抽盒</view>
+                            <view style="float:left;color:#999495;">在线抽盒</view>
                         </block>
                         <block wx:if='{{item.status==3}}'>
                             <view style="float:left;color:#999495;">已结束</view>
@@ -409,7 +409,7 @@
             </block>
             <!-- 签到 -->
             <block wx:elif='{{item.type==4}}'></block>
-            <!-- 抽选 -->
+            <!-- 抽盒 -->
             <block wx:elif='{{item.type==5}}'>
                 <block wx:if='{{item.status==1}}'>
                     <view class='dlfhtitlenew' style="color:#178FF8;">
@@ -421,7 +421,7 @@
                 <block wx:if='{{item.status==2 ||item.status==3}}'>
                     <view class='dlfhtitlenew' style="overflow:hidden;">
                         <block wx:if='{{item.status==2}}'>
-                            <view style="float:left;color:#4CC148;">在线抽盒</view>
+                            <view style="float:left;color:#999495;">在线抽盒</view>
                         </block>
                         <block wx:if='{{item.status==3}}'>
                             <view style="float:left;color:#999495;">已结束</view>

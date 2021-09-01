@@ -80,6 +80,7 @@ Page({
       {name:'秒杀',num:'2'},
       {name:'抽选',num:'3'},
       {name:'动态',num:'4'},
+      {name:'抽盒',num:'7'},
       // {name:'分享',num:'5'}
     ], // 支付状态 
     centerIndex:0,
