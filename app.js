@@ -1074,6 +1074,10 @@ App({
       wx.navigateTo({
         url: `/page/settled/pages/releaseGoods/releaseGoods?${whref}`
       });      
+    } else if (item_type == 9041) {   // 商品管理
+      wx.navigateTo({
+        url: `/page/settled/pages/commodityManagement/commodityManagement`
+      });      
     }
     
   },
