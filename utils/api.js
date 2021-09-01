@@ -96,7 +96,7 @@ export const settledGoodsInfoGoods = (url,query) => {
 }
 // 查看抽选商品信息
 export const settledGoodsInfoActivity = (type,id,query) => {
-    return apiResquest.get('brand/settled_goods/infoActivity/' + url + '/' + url,query)
+    return apiResquest.get('brand/settled_goods/infoActivity/' + type + '/' + id,query)
 }
 // 品牌列表
 export const settledGoodsBrandlist = (query) => {

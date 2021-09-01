@@ -69,6 +69,7 @@ Component({
       let name = e.currentTarget.dataset.name;
       let index = e.currentTarget.dataset.index;
       let value = `list[${index}].time`;
+      this.setData({errorDom:''});
       this.setData({[value]:e.detail.dateString})
       this.triggerEvent("bindchange", {value:e.detail.dateString,name:name});
     },
@@ -91,6 +92,7 @@ Component({
       let name = e.currentTarget.dataset.name;
       let sonindex = e.currentTarget.dataset.sonindex;
       let value = `list[${index}].index`;
+      this.setData({errorDom:''});
       this.setData({[value]:sonindex})
       this.triggerEvent("bindchange", {value:sonindex,name:name});
     },
@@ -100,6 +102,7 @@ Component({
       let groups = e.currentTarget.dataset.groups;
       let value = e.detail.value;
       let groupsIndex = `list[${index}].groupsIndex`;
+      this.setData({errorDom:''});
       this.setData({[groupsIndex]:value})
       this.triggerEvent("bindchange", {value:value,name:'logisticsIndex'});
       this.triggerEvent("bindchange", {value:groups[0][value[0]],name:'shipping'});

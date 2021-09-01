@@ -689,7 +689,9 @@ Page({
             brandList: brandList || [],
             currentIndex: 0,
           })
-        } else { };
+        } else {
+          app.showToastC(res.data.Msg,1500);
+        };
       },
       fail: function () { }
     });

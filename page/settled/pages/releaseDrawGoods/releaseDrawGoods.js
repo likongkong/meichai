@@ -79,7 +79,7 @@ Page({
         subtitle:'抽选开奖时间',
         placeholder:'请选择开奖时间',
         value:'',
-        time:util.format("yyyy-MM-dd HH:mm"),
+        time:'',
         name:'stopTime',
         borderbottom1:'show',
         margintop0:true,
@@ -154,7 +154,7 @@ Page({
   onLoad: function (options) {
     wx.hideShareMenu();
     // '已经授权'
-    this.data.id = options.id || '';
+    this.data.id = options.id || 459279;
     this.data.loginid = app.signindata.loginid;
     this.data.uid = app.signindata.uid;
     // 判断是否登录
@@ -237,6 +237,7 @@ Page({
   },
   //查看信息
   getData(){
+    console.log(this.data.type,this.data.id)
     api.settledGoodsInfoActivity(this.data.type,this.data.id).then((res) => {
       wx.hideLoading()
       wx.stopPullDownRefresh();
@@ -350,6 +351,9 @@ Page({
 
 
     let data = {
+      activityId:this.data.id&&this.data.id!=0?this.data.id:'',
+      activityType:4,
+      brandId:obj.associationIp,
       goodsName:obj.goodsName,
       goodsThumb:obj.flatPatternmaking,
       quota:obj.goodsNum,
@@ -366,6 +370,17 @@ Page({
     // return false;
     api.settledGoodsSetActivity(data).then((res) => {
       console.log(res)
+      if(this.data.id && this.data.id!=0){
+        app.showToastC('修改成功',1500);
+      }else{
+        app.showToastC('发布成功',1500);
+      }
+      setTimeout(function(){
+        let pages = getCurrentPages();    //获取当前页面信息栈
+        let prevPage = pages[pages.length-2];
+        prevPage.getData();
+        this.navigateBack();
+      },1500)
     }).catch((err)=>{
       console.log(err)
     })
@@ -422,6 +437,12 @@ Page({
    */
   onShareAppMessage: function () {
     
+  },
+  navigateBack(e){
+    let num = e.currentTarget.dataset.num;
+    wx.navigateBack({
+      delta: num?num:1
+    })  
   },
   comjumpwxnav(e){
     let type = e.currentTarget.dataset.type;
