@@ -993,107 +993,113 @@
 </block>
 
 <block wx:elif='{{is_exhibition==1||zunmdata.status==1}}'>
-	<view style='width:100%;height:79rpx;position:fixed;left:0;bottom:{{isIphoneX?"130rpx":"110rpx"}};z-index:5;padding-top:6rpx;'>
-
-    <view class="detailbottomtip" wx:if='{{zunmdata.isSuplusChance}}'>
-        <view class="detailbottomtipbg"></view>
-        <view class="detailbottomtiptxt">还有机会,有买家拍下还未付款,1分钟内将解除订单</view>
-    </view>
-
-		<view style='height:69rpx;width:152rpx;float:left;position:relative;'>
-      <view style='width:60rpx;height:60rpx;border-radius: 50%;margin:9rpx auto 0;background:#fff;position:relative;box-shadow:2px 2px 5rpx #ccc;'>
-      <image src='https://clw.51chaidan.com//images/goods/share3.png?' style='width:36rpx;height:36rpx;display:block;position:absolute;left:0;right:0;bottom:0;top:0;margin:auto;'></image>
-      <button open-type="share" style='position: absolute;left: 0;top: 0;width: 100%; height: 100%;opacity: 0;padding:0;z-index:1;' type="default" size="mini"></button>
+  <view class="detailfooter" style='{{isIphoneX?"bottom:130rpx;":"bottom:110rpx;"}}'>
+      <view class="detailbottomtip" wx:if='{{zunmdata.isSuplusChance}}'>
+          <view class="detailbottomtipbg"></view>
+          <view class="detailbottomtiptxt">还有机会,有买家拍下还未付款,1分钟内将解除订单</view>
       </view>
-    </view>
 
-    
-    <!-- 右边按钮 -->
-      <!-- 有直播间号有抽选活动：进入抽选 -->
-      <block wx:if='{{is_exhibition==1&&zunmdata.liveShowRoomId&&zunmdata.isLotto}}'>
-        <view class="footer-child large" style='box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:300rpx;float:right;background:#e47677;' data-brandid='{{zunmdata.brandId}}' data-id='{{zunmdata.gid}}' catchtap="jumpecqdetail">
-          <view class="addsopcar" style="height:60rpx;line-height:60rpx;">{{zunmdata.saleButtonDisplay?zunmdata.saleButtonDisplay+'抽选':'进入抽选'}}</view>
-        </view>    
-      </block>
-      <!-- 无直播间号有抽选活动有库存：购买按钮 -->
-      <block wx:elif='{{is_exhibition==1&&!zunmdata.liveShowRoomId&&zunmdata.isLotto&&zunmdata.debuff==0}}'>
-        <view class="footer-child large sale" bindtap='dsbffunblock' style='box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:300rpx;float:right;'>
-          <view style='width:100%;height:100%;text-align:center;line-height:60rpx;font-size:28rpx;color:#fff;'>直接购买</view>
+
+    <view style='width:100%;min-height:69rpx;position:relative;overflow:hidden;padding-bottom:10rpx;'>
+  
+
+
+      <view style='height:69rpx;width:152rpx;float:left;position:relative;'>
+        <view style='width:60rpx;height:60rpx;border-radius: 50%;margin:9rpx auto 0;background:#fff;position:relative;box-shadow:2px 2px 5rpx #ccc;'>
+        <image src='https://clw.51chaidan.com//images/goods/share3.png?' style='width:36rpx;height:36rpx;display:block;position:absolute;left:0;right:0;bottom:0;top:0;margin:auto;'></image>
+        <button open-type="share" style='position: absolute;left: 0;top: 0;width: 100%; height: 100%;opacity: 0;padding:0;z-index:1;' type="default" size="mini"></button>
         </view>
-      </block>
-      <!-- 无直播间号有抽选活动无库存： -->
-      <block wx:elif='{{is_exhibition==1&&!zunmdata.liveShowRoomId&&zunmdata.isLotto&&zunmdata.debuff!=0}}'>
-        
-      </block>
-      <!-- 可订阅时显示：xxxx直播 -->
-      <block wx:else>
+      </view>
 
-        <block wx:if='{{zunmdata.gid == 37092}}'>
-            <view class="footer-child large" style='box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:300rpx;float:right;background:#e47677;' catchtap="addresssmokebox" data-gid='{{zunmdata.gid}}'>
-              <view class="addsopcar" style="height:60rpx;line-height:60rpx;">{{zunmdata.saleButtonDisplay}}抽盒</view>
-            </view>    
-        </block>
-
-        <block wx:elif='{{zunmdata.saleButtonDisplay}}'>
-            <view class="footer-child large" style='box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:300rpx;float:right;background:#999999;'>
-              <view class="addsopcar" style="height:60rpx;line-height:60rpx;">{{zunmdata.saleButtonDisplay}}</view>
-            </view>    
-        </block>
-        <block wx:else>
-
-          <block wx:if="{{zunmdata.isSmokeBox}}">
-            <view class="addsopcar boxShadowEve" wx:if='{{is_exhibition==1 && zunmdata.isBlindBox}}' bindtap='addresssmokebox' data-gid='{{zunmdata.gid}}' style="box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:300rpx;float:right;background:#32ACFB;line-height:60rpx;">在线抽盒机</view> 
-          </block>
-          <block wx:else>
-            <view class="footer-child large" style='box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:250rpx;float:right;{{zunmdata.status==1||zunmdata.status==3||zunmdata.status==0?"background:#999999;":""}}'>
-              <view catchtap='subscrfun' class="addsopcar" style="height:60rpx;line-height:60rpx;" wx:if='{{zunmdata.status==1}}'>
-                <block wx:if='{{newdataexh}}'>暂未开启</block>
-                <block wx:else>{{zunmdata.specialWay == 1?'线上展会售卖':zunmdata.datatimew+'开售'}}</block>
-              </view>
-              <view class="addsopcar" style="height:60rpx;line-height:60rpx;" wx:elif='{{zunmdata.status==3}}'>已结束</view>
-              <view class="addsopcar" style="height:60rpx;line-height:60rpx;" wx:elif='{{zunmdata.status==0}}'>已售罄</view>
-                     
-              <text class="addsopcar money" style="height:60rpx;{{zunmdata.limitBuy>0?'line-height:30rpx;font-size:22rpx;':'line-height:60rpx;font-size:30rpx;'}}{{zunmdata.status==2?'background:#FB595F;':''}}border-radius:60rpx;margin-top:0;display:block;" wx:elif='{{zunmdata.status==2}}' bindtap='dsbffunblock'>
-                  <block wx:if='{{zunmdata.limitBuy>0}}'>立即购买\n(限购{{zunmdata.limitBuy}}体/人)</block>
-                  <block wx:else>立即购买</block>
-              </text>
-            </view>
-
-            <view class="addsopcar boxShadowEve" wx:if='{{zunmdata.status==2 && is_exhibition==1 && zunmdata.isBlindBox}}' bindtap='addresssmokebox' data-gid='{{zunmdata.gid}}' style="box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:250rpx;float:right;background:#32ACFB;line-height:60rpx;">在线抽盒机</view> 
-          </block>
-
-        </block>
-      </block>
-    
-      <!-- 左边按钮 -->
-      <!-- 有直播间号有抽选活动：进入直播间 -->
-      <block wx:if='{{is_exhibition==1&&zunmdata.liveShowRoomId&&zunmdata.isLotto}}'>
-        <view class="footer-child large turn" style='height:60rpx;margin-top:9rpx;padding:0;width:200rpx;margin-right:40rpx;background:#f8b21d;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' catchtap="livebroadcast">返回直播间</view>
-      </block>
-      <!-- 无直播间号有抽选活动有库存：进入抽选 -->
-      <block wx:elif='{{is_exhibition==1&&!zunmdata.liveShowRoomId&&zunmdata.isLotto&&zunmdata.debuff==0}}'>
-        <view class="footer-child large" style='height:60rpx;margin-top:9rpx;padding:0;width:220rpx;margin-right:40rpx;background:#e47677;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' data-brandid='{{zunmdata.brandId}}' data-id='{{zunmdata.gid}}' catchtap="jumpecqdetail">
-          <view class="addsopcar" style="height:60rpx;line-height:60rpx;">{{zunmdata.saleButtonDisplay?zunmdata.saleButtonDisplay+'抽选':'进入抽选'}}</view>
-        </view> 
-      </block>
-      <!-- 无直播间号有抽选活动无库存： 进入抽选-->
-      <block wx:elif='{{is_exhibition==1&&!zunmdata.liveShowRoomId&&zunmdata.isLotto&&zunmdata.debuff!=0}}'>
-        <view class="footer-child large" style='height:60rpx;margin-top:9rpx;padding:0;width:220rpx;margin-right:40rpx;background:#e47677;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' data-brandid='{{zunmdata.brandId}}' data-id='{{zunmdata.gid}}' catchtap="jumpecqdetail">
-          <view class="addsopcar" style="height:60rpx;line-height:60rpx;">{{zunmdata.saleButtonDisplay?zunmdata.saleButtonDisplay+'抽选':'进入抽选'}}</view>
-        </view> 
-      </block>
-      <block wx:else>
-        <!-- 跳转直播间 -->
-        <block wx:if='{{zunmdata.liveShowRoomId&&zunmdata.status!=1}}'>
-          <view class="footer-child large turn" style='height:60rpx;margin-top:9rpx;padding:0;width:200rpx;margin-right:40rpx;background:#f8b21d;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' catchtap="livebroadcast">返回直播间</view>
-        </block>
-        <block  wx:elif='{{zunmdata.gid != 37092}}'>
-          <view class="footer-child large turn" style='height:60rpx;margin-top:9rpx;padding:0;width:200rpx;margin-right:40rpx;background:#f8b21d;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' wx:if='{{zunmdata.status==1&&subscribedata}}' catchtap='subscrfun'>
-            开售提醒<view class="coupposi" wx:if='{{isSubscribeCoupon}}'>订阅送优惠券</view>
+      
+      <!-- 右边按钮 -->
+        <!-- 有直播间号有抽选活动：进入抽选 -->
+        <block wx:if='{{is_exhibition==1&&zunmdata.liveShowRoomId&&zunmdata.isLotto}}'>
+          <view class="footer-child large" style='box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:300rpx;float:right;background:#e47677;' data-brandid='{{zunmdata.brandId}}' data-id='{{zunmdata.gid}}' catchtap="jumpecqdetail">
+            <view class="addsopcar" style="height:60rpx;line-height:60rpx;">{{zunmdata.saleButtonDisplay?zunmdata.saleButtonDisplay+'抽选':'进入抽选'}}</view>
           </view>    
         </block>
-      </block>
-	</view>
+        <!-- 无直播间号有抽选活动有库存：购买按钮 -->
+        <block wx:elif='{{is_exhibition==1&&!zunmdata.liveShowRoomId&&zunmdata.isLotto&&zunmdata.debuff==0}}'>
+          <view class="footer-child large sale" bindtap='dsbffunblock' style='box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:300rpx;float:right;'>
+            <view style='width:100%;height:100%;text-align:center;line-height:60rpx;font-size:28rpx;color:#fff;'>直接购买</view>
+          </view>
+        </block>
+        <!-- 无直播间号有抽选活动无库存： -->
+        <block wx:elif='{{is_exhibition==1&&!zunmdata.liveShowRoomId&&zunmdata.isLotto&&zunmdata.debuff!=0}}'>
+          
+        </block>
+        <!-- 可订阅时显示：xxxx直播 -->
+        <block wx:else>
+
+          <block wx:if='{{zunmdata.gid == 37092}}'>
+              <view class="footer-child large" style='box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:300rpx;float:right;background:#e47677;' catchtap="addresssmokebox" data-gid='{{zunmdata.gid}}'>
+                <view class="addsopcar" style="height:60rpx;line-height:60rpx;">{{zunmdata.saleButtonDisplay}}抽盒</view>
+              </view>    
+          </block>
+
+          <block wx:elif='{{zunmdata.saleButtonDisplay}}'>
+              <view class="footer-child large" style='box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:300rpx;float:right;background:#999999;'>
+                <view class="addsopcar" style="height:60rpx;line-height:60rpx;">{{zunmdata.saleButtonDisplay}}</view>
+              </view>    
+          </block>
+          <block wx:else>
+
+            <block wx:if="{{zunmdata.isSmokeBox}}">
+              <view class="addsopcar boxShadowEve" wx:if='{{is_exhibition==1 && zunmdata.isBlindBox}}' bindtap='addresssmokebox' data-gid='{{zunmdata.gid}}' style="box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:300rpx;float:right;background:#32ACFB;line-height:60rpx;">在线抽盒机</view> 
+            </block>
+            <block wx:else>
+              <view class="footer-child large" style='box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:250rpx;float:right;{{zunmdata.status==1||zunmdata.status==3||zunmdata.status==0?"background:#999999;":""}}'>
+                <view catchtap='subscrfun' class="addsopcar" style="height:60rpx;line-height:60rpx;" wx:if='{{zunmdata.status==1}}'>
+                  <block wx:if='{{newdataexh}}'>暂未开启</block>
+                  <block wx:else>{{zunmdata.specialWay == 1?'线上展会售卖':zunmdata.datatimew+'开售'}}</block>
+                </view>
+                <view class="addsopcar" style="height:60rpx;line-height:60rpx;" wx:elif='{{zunmdata.status==3}}'>已结束</view>
+                <view class="addsopcar" style="height:60rpx;line-height:60rpx;" wx:elif='{{zunmdata.status==0}}'>已售罄</view>
+                      
+                <text class="addsopcar money" style="height:60rpx;{{zunmdata.limitBuy>0?'line-height:30rpx;font-size:22rpx;':'line-height:60rpx;font-size:30rpx;'}}{{zunmdata.status==2?'background:#FB595F;':''}}border-radius:60rpx;margin-top:0;display:block;" wx:elif='{{zunmdata.status==2}}' bindtap='dsbffunblock'>
+                    <block wx:if='{{zunmdata.limitBuy>0}}'>立即购买\n(限购{{zunmdata.limitBuy}}体/人)</block>
+                    <block wx:else>立即购买</block>
+                </text>
+              </view>
+
+              <view class="addsopcar boxShadowEve" wx:if='{{zunmdata.status==2 && is_exhibition==1 && zunmdata.isBlindBox}}' bindtap='addresssmokebox' data-gid='{{zunmdata.gid}}' style="box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:250rpx;float:right;background:#32ACFB;line-height:60rpx;">在线抽盒机</view> 
+            </block>
+
+          </block>
+        </block>
+      
+        <!-- 左边按钮 -->
+        <!-- 有直播间号有抽选活动：进入直播间 -->
+        <block wx:if='{{is_exhibition==1&&zunmdata.liveShowRoomId&&zunmdata.isLotto}}'>
+          <view class="footer-child large turn" style='height:60rpx;margin-top:9rpx;padding:0;width:200rpx;margin-right:40rpx;background:#f8b21d;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' catchtap="livebroadcast">返回直播间</view>
+        </block>
+        <!-- 无直播间号有抽选活动有库存：进入抽选 -->
+        <block wx:elif='{{is_exhibition==1&&!zunmdata.liveShowRoomId&&zunmdata.isLotto&&zunmdata.debuff==0}}'>
+          <view class="footer-child large" style='height:60rpx;margin-top:9rpx;padding:0;width:220rpx;margin-right:40rpx;background:#e47677;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' data-brandid='{{zunmdata.brandId}}' data-id='{{zunmdata.gid}}' catchtap="jumpecqdetail">
+            <view class="addsopcar" style="height:60rpx;line-height:60rpx;">{{zunmdata.saleButtonDisplay?zunmdata.saleButtonDisplay+'抽选':'进入抽选'}}</view>
+          </view> 
+        </block>
+        <!-- 无直播间号有抽选活动无库存： 进入抽选-->
+        <block wx:elif='{{is_exhibition==1&&!zunmdata.liveShowRoomId&&zunmdata.isLotto&&zunmdata.debuff!=0}}'>
+          <view class="footer-child large" style='height:60rpx;margin-top:9rpx;padding:0;width:220rpx;margin-right:40rpx;background:#e47677;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' data-brandid='{{zunmdata.brandId}}' data-id='{{zunmdata.gid}}' catchtap="jumpecqdetail">
+            <view class="addsopcar" style="height:60rpx;line-height:60rpx;">{{zunmdata.saleButtonDisplay?zunmdata.saleButtonDisplay+'抽选':'进入抽选'}}</view>
+          </view> 
+        </block>
+        <block wx:else>
+          <!-- 跳转直播间 -->
+          <block wx:if='{{zunmdata.liveShowRoomId&&zunmdata.status!=1}}'>
+            <view class="footer-child large turn" style='height:60rpx;margin-top:9rpx;padding:0;width:200rpx;margin-right:40rpx;background:#f8b21d;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' catchtap="livebroadcast">返回直播间</view>
+          </block>
+          <block  wx:elif='{{zunmdata.gid != 37092}}'>
+            <view class="footer-child large turn" style='height:60rpx;margin-top:9rpx;padding:0;width:200rpx;margin-right:40rpx;background:#f8b21d;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' wx:if='{{zunmdata.status==1&&subscribedata}}' catchtap='subscrfun'>
+              开售提醒<view class="coupposi" wx:if='{{isSubscribeCoupon}}'>订阅送优惠券</view>
+            </view>    
+          </block>
+        </block>
+    </view>
+  </view>
+
 </block>
 
 

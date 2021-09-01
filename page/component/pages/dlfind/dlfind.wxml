@@ -279,7 +279,7 @@
                         <block wx:if='{{item.status==3}}'>
                             <view style="float:left;color:#999495;">已结束</view>
                         </block>
-                        <view style="float:right;color:#999495;" wx:if='{{item.sellNumber>0}}'>已售：{{item.sellNumber}}体</view>
+                        <view style="float:right;color:#999495;" wx:if='{{item.sellNumber>0}}'>{{item.sellNumber}}人参加</view>
                     </view>
                 </block>
             </block>
@@ -370,7 +370,7 @@
                         <block wx:if='{{item.status==3}}'>
                             <view style="float:left;color:#999495;">已结束</view>
                         </block>
-                        <view style="float:right;color:#999495;" wx:if='{{item.sellNumber}}'>已售：{{item.sellNumber}}体</view>
+                        <view style="float:right;color:#999495;" wx:if='{{item.sellNumber}}'>{{item.sellNumber}}人参加</view>
                     </view>
                 </block>
             </block>

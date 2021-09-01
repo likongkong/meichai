@@ -334,7 +334,8 @@ Page({
     var zunmdata = this.data.zunmdata; 
 
     if(detailSpecColor[index] && detailSpecColor[index].tipStockOnLine){
-      zunmdata.tipStockOnLine = detailSpecColor[index].tipStockOnLine
+      zunmdata.tipStockOnLine = detailSpecColor[index].tipStockOnLine;
+      zunmdata.isSuplusChance = detailSpecColor[index].isSuplusChance || false;
     };
 
     if( listSpec[modelColor] && listSpec[modelColor].stock > 0 ){
@@ -458,10 +459,11 @@ Page({
     //       detailSpecColor[i].select = false;
     //     };
     // }; 
+    var zunmdata = this.data.zunmdata; 
 
     if(ifAdopt){
       console.log(1)
-      var zunmdata = this.data.zunmdata; 
+      
       zunmdata.gsale = selectShell.price || 0;
       zunmdata.gprice = selectShell.price || 0;
       zunmdata.debuff = 0;
@@ -3354,6 +3356,7 @@ Page({
                 var modelColor = detailSpecModel[modelSelInde].name+'-'+detailSpecColor[detailColorIndex].name;
                 if(detailSpecModel[modelSelInde].tipStockOnLine){
                   res.data.Ginfo.tipStockOnLine = detailSpecModel[modelSelInde].tipStockOnLine;
+                  res.data.Ginfo.isSuplusChance = detailSpecModel[modelSelInde].isSuplusChance || false;
                 };
                 if(listSpec[modelColor]){
                     selectShell = listSpec[modelColor];
@@ -3408,6 +3411,7 @@ Page({
                                 detailSpecColor[i].select = true;
                                 if(detailSpecColor[i].tipStockOnLine){
                                   res.data.Ginfo.tipStockOnLine = detailSpecColor[i].tipStockOnLine;
+                                  res.data.Ginfo.isSuplusChance = detailSpecColor[i].isSuplusChance || false;
                                 };
                                 ifAdopt = true;
                                 if(assignment){
@@ -3445,6 +3449,7 @@ Page({
                               detailSpecColor[i].select = true;
                               if(detailSpecColor[i].tipStockOnLine){
                                 res.data.Ginfo.tipStockOnLine = detailSpecColor[i].tipStockOnLine;
+                                res.data.Ginfo.isSuplusChance = detailSpecColor[i].isSuplusChance || false;
                               };
 
                               ifAdopt = true;
@@ -3496,7 +3501,6 @@ Page({
             redauin.gsale = spgsale;
             redauin.gprice = spgsale;
             redauin.goods_thumb = selectShell.roleImg;
-
             // 手机壳 并且 isSpecSoldOut 为 true 全部卖完
             if(res.data.Ginfo.isSpecSoldOut){
               if(selectShell.salesStatus == 1){
@@ -3524,11 +3528,11 @@ Page({
           };
 
 
-          if (_this.data.is_exhibition==1||(_this.data.is_exhibition!=1&&_this.data.brandId>0)){
-            // 展会
-            _this.exhibdatafun(1);
-            app.livebroadcast(_this, res.data.Ginfo.brandId)  // 直播数据
-          }
+          // if (_this.data.is_exhibition==1||(_this.data.is_exhibition!=1&&_this.data.brandId>0)){
+          //   // 展会
+          //   _this.exhibdatafun(1);
+          //   app.livebroadcast(_this, res.data.Ginfo.brandId)  // 直播数据
+          // }
           // 云统计
           var clouddata = { act_id:'g'+_this.data.id, type: res.data.Ginfo.specialWay || 0 };
           app.cloudstatistics('activityStatistics', clouddata);
@@ -3838,7 +3842,12 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {},
+  onReachBottom: function () {
+      if(this.data.userbranddata){}else if (this.data.is_exhibition==1||(this.data.is_exhibition!=1&&this.data.brandId>0)){
+        this.exhibdatafun(1);
+        app.livebroadcast(this, this.data.brandId)  // 直播数据
+      }
+  },
   /**
    * 用户点击右上角分享
    */
@@ -4589,6 +4598,12 @@ Page({
     var query = wx.createSelectorQuery();
     query.select('#exh' + ind).boundingClientRect();
     query.selectViewport().scrollOffset();
+
+    if(this.data.userbranddata || ind==2){}else if (this.data.is_exhibition==1||(this.data.is_exhibition!=1&&this.data.brandId>0)){
+      this.exhibdatafun(1);
+      app.livebroadcast(this, this.data.brandId)  // 直播数据
+    };
+
     query.exec(function(res) {
       if (res && res[0] && res[1]) {
         wx.pageScrollTo({

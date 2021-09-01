@@ -41,7 +41,8 @@ Page({
       {name:'全部',num:'-1'},
       {name:'待支付',num:'0'},
       {name:'待发货',num:'2'},
-      {name:'已发货',num:'4'}
+      {name:'已发货',num:'4'},
+      {name:'已完成',num:'5'}
     ], // 支付状态 
     subLedger: 0 , // 1 已分账 2 未分账
     countOrder:0,

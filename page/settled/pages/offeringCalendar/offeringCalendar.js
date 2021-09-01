@@ -328,7 +328,9 @@ Page({
     var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
     var type = w.currentTarget.dataset.type || w.target.dataset.type || 0;
     if(type == 4){
-      app.comjumpwxnav(9003,id,'','')
+      wx.navigateTo({ // 抽签详情页
+        url: "/page/component/pages/limitlottery/limitlottery?id=" + id
+      }); 
     }else if(type == 9035){
       app.comjumpwxnav(9035,id,'','')
     }else{

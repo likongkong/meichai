@@ -9,6 +9,17 @@ page {
   background: #f5f6fa;
   padding-bottom: 230rpx;
 }
+.dlfcbeveimgnewone{
+  display: inline-block;
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  top: 0;
+  left: 5rpx;
+  bottom: 0;
+  margin: auto;
+  z-index: 1;
+}
 .briefIntroduction{
   width:670rpx;font-size:26rpx;color:#333;margin:15rpx auto 0;
   background:#fff;
@@ -903,3 +914,4 @@ page {
 }
 
 
+.dlfevecom{width:50%;}.dlfeveleft{width:360rpx;margin:0 0 15rpx 10rpx;background:#fff;min-height:300rpx;border-radius:10rpx;}
