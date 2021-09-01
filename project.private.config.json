@@ -133,6 +133,12 @@
           "pathName": "page/settled/pages/releaseGoods/releaseGoods",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "发布抽选",
+          "pathName": "page/settled/pages/releaseDrawGoods/releaseDrawGoods",
+          "query": "",
+          "scene": null
         }
       ]
     }

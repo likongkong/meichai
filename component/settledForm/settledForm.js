@@ -68,7 +68,7 @@ Component({
     onPickerChange3 (e) {
       let name = e.currentTarget.dataset.name;
       let index = e.currentTarget.dataset.index;
-      let value = `list[${index}].endedTime`;
+      let value = `list[${index}].time`;
       this.setData({[value]:e.detail.dateString})
       this.triggerEvent("bindchange", {value:e.detail.dateString,name:name});
     },
@@ -80,14 +80,13 @@ Component({
       this.triggerEvent("bindchange",obj)
     },
     bindRadioChange(e){
-      let index = e.currentTarget.dataset.index;
-      let name = e.currentTarget.dataset.name;
-      let sonindex = e.currentTarget.dataset.sonindex;
-      let value = `list[${index}].value`;
-      this.setData({[value]:sonindex})
-      this.triggerEvent("bindchange", {value:sonindex,name:name});
-    },
-    bindLimitBuyRadioChange(e){
+      // let index = e.currentTarget.dataset.index;
+      // let name = e.currentTarget.dataset.name;
+      // let sonindex = e.currentTarget.dataset.sonindex;
+      // let value = `list[${index}].value`;
+      // this.setData({[value]:sonindex})
+      // this.triggerEvent("bindchange", {value:sonindex,name:name});
+
       let index = e.currentTarget.dataset.index;
       let name = e.currentTarget.dataset.name;
       let sonindex = e.currentTarget.dataset.sonindex;
@@ -96,15 +95,18 @@ Component({
       this.triggerEvent("bindchange", {value:sonindex,name:name});
     },
     pickerChange(e){
+      console.log(e)
       let index = e.currentTarget.dataset.index;
       let groups = e.currentTarget.dataset.groups;
       let value = e.detail.value;
-      let value1 = `list[${index}].value`;
-      this.setData({[value1]:groups[0][value[0]]+"-"+groups[1][value[1]]})
+      let groupsIndex = `list[${index}].groupsIndex`;
+      this.setData({[groupsIndex]:value})
+      this.triggerEvent("bindchange", {value:value,name:'logisticsIndex'});
       this.triggerEvent("bindchange", {value:groups[0][value[0]],name:'shipping'});
       this.triggerEvent("bindchange", {value:value[1],name:'shippingPriceStatus'});
     },
     showActionSheet(e){
+      console.log(e)
       let index = e.currentTarget.dataset.index;
       this.triggerEvent("showActionSheet",{index:index});
       return false;
@@ -203,8 +205,8 @@ Component({
           Promise.all(promiseList).then(res => {
             wx.hideLoading()
             // console.log(res)     
+            this.setData({errorDom:''});
             if(mode=='multiple'){
-              this.setData({errorDom:''});
               let imageList=`list[${ind}].imageList`;
               this.setData({[imageList]: [...this.data.list[ind].imageList,...res]})
               this.triggerEvent("bindchange", {value:this.data.list[ind].imageList,name:name});

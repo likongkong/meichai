@@ -83,7 +83,8 @@ Page({
           {index:0,name:'预售'},
           {index:1,name:'现货'},
         ],
-        value:'999',
+        index:999,
+        value:0,
         name:'goodsLabel',
         borderbottom1:'show',
         margintop0:true,
@@ -100,17 +101,19 @@ Page({
         margintop0:true,
         borderbottom1:'show',
         name:'purchaseLimitation',
-      },{
-        isRequired:false,
-        type:'text',
-        subtitle:'消耗积分',
-        placeholder:'无需消耗积分',
-        value:'',
-        name:'integrate',
-        explain:true,
-        borderbottom1:'show',
-        margintop0:true,
-      },{
+      },
+      // {
+      //   isRequired:false,
+      //   type:'text',
+      //   subtitle:'消耗积分',
+      //   placeholder:'无需消耗积分',
+      //   value:'',
+      //   name:'integrate',
+      //   explain:true,
+      //   borderbottom1:'show',
+      //   margintop0:true,
+      // },
+      {
         isRequired:false,
         type:'uploadImg',
         subtitle:'商品详情图',
@@ -131,7 +134,7 @@ Page({
           ['顺丰', '韵达', '圆通', '申通', '中通', 'EMS', '宅急送', '京东', '天天', '优速', '极兔', '百世', '德邦', '其他'], 
           ['到付', '包邮']
         ],
-        groupsIndex: [0, 0],
+        groupsIndex:'',
         value:'',
         name:'logistics',
         borderbottom1:'show',
@@ -151,6 +154,7 @@ Page({
         subtitle:'是否显示库存数量',
         radioArr:['是','否'],
         value:0,
+        index:0,
         direction:'X',
         margintop0:true,
         borderbottom1:'show',
@@ -161,6 +165,7 @@ Page({
         subtitle:'是否显示已售数量',
         radioArr:['是','否'],
         value:0,
+        index:0,
         direction:'X',
         margintop0:true,
         borderbottom1:'show',
@@ -172,7 +177,7 @@ Page({
         value:0,
         margintop0:true,
         borderbottom1:'show',
-        endedTime: util.format("yyyy-MM-dd HH:mm"),
+        time: util.format("yyyy-MM-dd HH:mm"),
         name:'startTime',
       },{
         isRequired:true,
@@ -180,7 +185,7 @@ Page({
         subtitle:'停售时间时间',
         value:0,
         margintop0:true,
-        endedTime: util.format("yyyy-MM-dd HH:mm",2592000000),
+        time: util.format("yyyy-MM-dd HH:mm",2592000000),
         name:'endTime',
       },
     ],
@@ -190,6 +195,12 @@ Page({
       goodsLabel:'', //标签
       purchaseLimitation:0, //是否限购
       purchaseLimitationNum:1, //限购体数
+      goodsDetailsPic:'', //详情图
+      shipping:'',  //快递公司名称
+      shippingPriceStatus:'', //邮费类型
+      logisticsIndex:'', //物流下标
+      isGoodsStock:'', //是否显示库存数
+      isSoldNum:'', //是否显示已售数量
       startTime:util.format("yyyy-MM-dd HH:mm"),
       endTime:util.format("yyyy-MM-dd HH:mm",2592000000),
     },
@@ -200,6 +211,8 @@ Page({
   onLoad: function (options) {
     wx.hideShareMenu();
     // '已经授权'
+    // this.data.id = options.id;
+    this.data.id = options.id || 38792;
     this.data.loginid = app.signindata.loginid;
     this.data.uid = app.signindata.uid;
     // 判断是否登录
@@ -213,9 +226,7 @@ Page({
     this.data.loginid = app.signindata.loginid;
     this.data.uid = app.signindata.uid;
     if(wx.getStorageSync('access_token')){
-      // this.getListData();
-      // this.data.obj.startTime = util.format("yyyy-MM-dd HH:mm");
-      // this.data.obj.endTime = util.format("yyyy-MM-dd HH:mm",2592000000);
+      this.getIp();
     }else{
       app.getAccessToken(this.onLoadfun)
     };
@@ -226,20 +237,216 @@ Page({
     this.data.obj[key]=e.detail.value;
     console.log(this.data.obj)
   },
-  getListData(){
+  // 获取用户下所有的品牌id
+  getIp(){
     wx.showLoading({
       title: '加载中',
       mask:true
     })
-    api.settledWithCashList(data).then((res) => {
-     
+    api.settledGoodsBrandlist().then((res) => {
+      console.log(res.data)
+      if(res.data.status_code == 200){
+        let groups = `listData[0].groups`;
+        this.setData({
+          [groups]:res.data.data.List.brand,
+        })
+        if(this.data.id&&this.data.id!=0){
+          this.getData();
+        }else{
+          wx.hideLoading()
+          wx.stopPullDownRefresh();
+          console.log(this.data.listData[0])
+          this.setData({
+            [`listData[0].value`]:res.data.data.List.brand[0].brandName
+          })
+          this.data.obj.associationIp = res.data.data.List.brand[0].brandId;
+        }
+      }else{
+        wx.hideLoading()
+        wx.stopPullDownRefresh();
+        app.showToastC(res.data.Msg,2000);
+      }
     }).catch((err)=>{
       console.log(err)
     })
   },
- 
- 
- 
+ // 修改IP数据
+ showActionSheet(e){
+    let that= this;
+    let index = e.detail.index;
+    let groups = this.data.listData[index].groups;
+    let arr = [];
+    for(var i=0;i<groups.length;i++){
+      arr.push(groups[i].brandName);
+    }
+    wx.showActionSheet({
+      itemList: arr,
+      success (res) {
+        that.setData({
+          [`listData[${index}].value`]:groups[res.tapIndex].brandName
+        })
+        that.data.obj.associationIp = groups[res.tapIndex].brandId;
+        console.log(that.data.obj)
+      },
+      fail (res) {
+        console.log(res.errMsg)
+      }
+    })
+  },
+  getData(){
+    api.settledGoodsInfoGoods(this.data.id).then((res) => {
+      wx.hideLoading()
+      wx.stopPullDownRefresh();
+      console.log(res.data.data)
+      if(res.data.status_code == 200){
+        let info = res.data.data.Info.goods;
+        let obj = this.data.obj;
+        this.setData({
+          [`listData[0].value`]:info.brand.brandName,
+          [`listData1[0].value`]:info.goodsName,
+          [`listData1[1].src`]:info.goodsThumb,
+          [`listData1[2].value`]:info.goodsDescStr,
+          [`listData1[3].value`]:info.goodsPrice,
+          [`listData1[4].value`]:info.stock,
+          [`listData1[5].index`]:info.deliverTimeStatus==1?0:1,
+          [`listData1[6].index`]:info.limitBuy==0?1:0,
+          [`listData1[6].value`]:info.limitBuy,
+          [`listData1[7].imageList`]:info.arrGoodsDescImg,
+          [`listData2[0].groupsIndex`]:info.logisticsIndex,
+          [`listData2[1].value`]:info.deliverTime,
+          [`listData2[2].index`]:info.isShowStock==0?1:0,
+          [`listData2[3].index`]:info.isShowSellNumber==0?1:0,
+          [`listData2[4].time`]:util.format1("yyyy-MM-dd HH:mm",info.startTime),
+          [`listData2[5].time`]:util.format1("yyyy-MM-dd HH:mm",info.stopTime),
+        })
+    //  goodsName:'', //商品名称
+    //  flatPatternmaking:'', //商品展示图
+    //  goodsDescribe:'', //文字描述
+    //  goodsPrice:'', //商品售价金额
+    //   goodsStock:'', //库存数
+    //   goodsLabel:'', //标签
+    //   purchaseLimitation:0, //是否限购
+    //   purchaseLimitationNum:1, //限购体数
+    //   goodsDetailsPic:'', //详情图
+    //   shipping:'', //物流方式
+    //   shippingPriceStatus:'', //邮费类型
+    //   dateToPull:'', //预计发货日期
+    //   isGoodsStock:'', //是否显示库存数
+    //   isSoldNum:'', //是否显示已售数量
+    //   startTime:util.format("yyyy-MM-dd HH:mm"),
+    //   endTime:util.format("yyyy-MM-dd HH:mm",2592000000),
+
+        obj.associationIp = info.brand.brandId;
+        obj.goodsName = info.goodsName;
+        obj.flatPatternmaking = info.goodsThumb;
+        obj.goodsDescribe = info.goodsDescStr;
+        obj.goodsPrice = info.goodsPrice;
+        obj.goodsStock = info.stock;
+        obj.goodsLabel = info.deliverTimeStatus==1?0:1;
+        obj.purchaseLimitation = info.limitBuy==0?1:info.limitBuy;
+        obj.purchaseLimitationNum = info.limitBuy;
+        obj.goodsDetailsPic = info.arrGoodsDescImg;
+        obj.logisticsIndex = info.logisticsIndex,
+        obj.shipping = info.shipping;
+        obj.shippingPriceStatus = info.shippingPriceStatus==0?0:1;
+        obj.dateToPull = info.deliverTime;
+        obj.isGoodsStock = info.isShowStock==0?1:0;
+        obj.isSoldNum = info.isShowSellNumber==0?1:0;
+        obj.startTime = util.format1("yyyy-MM-dd HH:mm",info.startTime);
+        obj.endTime = util.format1("yyyy-MM-dd HH:mm",info.stopTime);
+      }else{
+        app.showToastC(res.data.Msg,2000);
+      }
+    }).catch((err)=>{
+      console.log(err)
+    })
+  },
+  // 发布
+  submitAudit(){
+    let obj = this.data.obj;
+    let that = this;
+    if(!obj.goodsName || obj.goodsName == ''){
+      this.selectComponent('#settledForm1').scrollto('goodsName');
+      app.showToastC('请输入商品名称',1500);
+      return false;
+    }
+    if(!obj.flatPatternmaking || obj.flatPatternmaking.length == 0){
+      this.selectComponent('#settledForm1').scrollto('flatPatternmaking');
+      app.showToastC('请添加商品展示图',1500);
+      return false;
+    }
+    if(!obj.goodsPrice || obj.goodsPrice == ''){
+      this.selectComponent('#settledForm1').scrollto('goodsPrice');
+      app.showToastC('请输入商品售价金额',1500);
+      return false;
+    }
+    if(!obj.shipping || obj.shipping == ''){
+      this.selectComponent('#settledForm2').scrollto('shipping');
+      app.showToastC('请选择物流方式',1500);
+      return false;
+    }
+    if(!obj.dateToPull || obj.dateToPull == ''){
+      this.selectComponent('#settledForm2').scrollto('dateToPull');
+      app.showToastC('请输入预计发货日期',1500);
+      return false;
+    }
+    wx.showLoading({
+      title: '加载中',
+    })
+    //  goodsName:'', //商品名称
+    //  flatPatternmaking:'', //商品展示图
+    //  goodsDescribe:'', //文字描述
+    //  goodsPrice:'', //商品售价金额
+    //   goodsStock:'', //库存数
+    //   goodsLabel:'', //标签
+    //   purchaseLimitation:0, //是否限购
+    //   purchaseLimitationNum:1, //限购体数
+    //   goodsDetailsPic:'', //详情图
+    //   shipping:'', //物流方式
+    //   shippingPriceStatus:'', //邮费类型
+    //   dateToPull:'', //预计发货日期
+    //   isGoodsStock:'', //是否显示库存数
+    //   isSoldNum:'', //是否显示已售数量
+    //   startTime:util.format("yyyy-MM-dd HH:mm"),
+    //   endTime:util.format("yyyy-MM-dd HH:mm",2592000000),
+
+
+    let data = {
+      goodsId:this.data.id&&this.data.id!=0?this.data.id:'',
+      brandId:obj.associationIp,
+      goodsName:obj.goodsName,
+      goodsThumb:obj.flatPatternmaking,
+      goodsPrice:obj.goodsPrice,
+      deliverTimeStatus:obj.goodsLabel==0?1:0,
+      deliverTime:obj.dateToPull,
+      startTime:(new Date(obj.startTime).getTime())/1000,
+      stopTime:(new Date(obj.endTime).getTime())/1000,
+      logisticsIndex:obj.logisticsIndex,
+      shipping:obj.shipping,
+      shippingPriceStatus:obj.shippingPriceStatus==0?0:2,
+      limitBuy:obj.purchaseLimitation==0?obj.purchaseLimitationNum:0,
+      goodsDescStr:obj.goodsDescribe,
+      arrGoodsDescImg:obj.goodsDetailsPic,
+      stock:obj.goodsStock,
+      isShowStock:obj.isGoodsStock==0?1:0,
+      isShowSellNumber:obj.isSoldNum==0?1:0,
+    }
+    console.log(data)
+    // return false;
+    api.settledGoodsSetGoods(data).then((res) => {
+      console.log(res)
+      if(this.data.id && this.data.id!=0){
+        app.showToastC('修改成功',1500);
+      }else{
+        app.showToastC('发布成功',1500);
+      }
+      setTimeout(function(){
+        this.navigateBack();
+      },1500)
+    }).catch((err)=>{
+      console.log(err)
+    })
+  },
 
  
  
@@ -291,6 +498,12 @@ Page({
    */
   onShareAppMessage: function () {
     
+  },
+  navigateBack(e){
+    let num = e.currentTarget.dataset.num;
+    wx.navigateBack({
+      delta: num?num:1
+    })  
   },
   comjumpwxnav(e){
     let type = e.currentTarget.dataset.type;
