@@ -914,3 +914,4 @@ page {
 }
 
 
+.dlfevecom{width:50%;}.dlfeveleft{width:360rpx;margin:0 0 15rpx 10rpx;background:#fff;min-height:300rpx;border-radius:10rpx;}
