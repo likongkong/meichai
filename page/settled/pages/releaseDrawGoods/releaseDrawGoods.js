@@ -154,7 +154,7 @@ Page({
   onLoad: function (options) {
     wx.hideShareMenu();
     // '已经授权'
-    this.data.id = options.id || 459279;
+    this.data.id = options.id || '';
     this.data.loginid = app.signindata.loginid;
     this.data.uid = app.signindata.uid;
     // 判断是否登录
@@ -243,7 +243,7 @@ Page({
       wx.stopPullDownRefresh();
       console.log(res.data.data)
       if(res.data.status_code == 200){
-        let info = res.data.data.Info.goods;
+        let info = res.data.data.Info.activity;
         let obj = this.data.obj;
         this.setData({
           [`listData[0].value`]:info.brand.brandName,
@@ -251,9 +251,9 @@ Page({
           [`listData1[1].src`]:info.goodsThumb,
           [`listData1[2].value`]:info.quota,
           [`listData1[3].value`]:info.goodsPrice,
-          [`listData2[0].time`]:info.startTime,
-          [`listData2[1].time`]:info.stopTime,
-          [`listData2[2].time`]:info.finalPayTime,
+          [`listData2[0].time`]:util.format1("yyyy-MM-dd HH:mm",info.startTime),
+          [`listData2[1].time`]:util.format1("yyyy-MM-dd HH:mm",info.stopTime),
+          [`listData2[2].time`]:util.format1("yyyy-MM-dd HH:mm",info.finalPayTime),
           [`listData3[0].value`]:info.rule,
           [`listData3[1].imageList`]:info.arrGoodsDescImg,
           [`listData4[0].index`]:info.isShowSellNumber==0?1:0,
@@ -277,9 +277,9 @@ Page({
         obj.flatPatternmaking = info.goodsThumb;
         obj.goodsNum = info.quota;
         obj.goodsPrice = info.goodsPrice;
-        obj.startTime = info.startTime;
-        obj.stopTime = info.stopTime;
-        obj.finalPayTime = info.finalPayTime;
+        obj.startTime = util.format1("yyyy-MM-dd HH:mm",info.startTime);
+        obj.stopTime = util.format1("yyyy-MM-dd HH:mm",info.stopTime);
+        obj.finalPayTime = util.format1("yyyy-MM-dd HH:mm",info.finalPayTime);
         obj.explain = info.rule;
         obj.goodsDetailsPic = info.arrGoodsDescImg;
         obj.isParticipants = info.isShowSellNumber==0?1:0;
