@@ -63,9 +63,11 @@
         <view wx:if="{{item.type == 'picker'}}" id="{{item.name}}" class="rowWrap card {{item.margintop0?'margintop0':''}} {{item.borderbottom1?'borderbottom1':''}}">
           <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
           <view class="pickerWrap">
-            <picker mode="multiSelector" data-groups="{{item.groups}}" data-index="{{index}}" bindchange="pickerChange" value="" range="{{item.groups}}">
+            <picker mode="multiSelector" data-groups="{{item.groups}}" data-index="{{index}}" bindchange="pickerChange" value="{{item.groupsIndex}}" range="{{item.groups}}">
               <view class="pickerWrapText">
-                {{item.value?item.value:item.placeholder}}
+                <!-- {{item.value?item.value:item.placeholder}} -->
+                <block wx:if="{{item.groupsIndex == ''}}">{{item.placeholder}}</block>
+                <block wx:else>{{item.groups[0][item.groupsIndex[0]]}}-{{item.groups[1][item.groupsIndex[1]]}}</block>
               </view>
             </picker>
             <image class="actionSheetIcon" src="../../pages/images/icon_in.png" mode="widthFix"></image>
@@ -80,23 +82,19 @@
           <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
           <view class="labelWrap">
             <block wx:for="{{item.labelItem}}" wx:for-index="idx" wx:for-item="sonitem" wx:key='key'>
-              <text class="{{item.value == idx?'activelabel':''}}" data-index="{{index}}" data-sonindex="{{idx}}" data-name="{{item.name}}" catchtap="bindRadioChange">{{sonitem.name}}</text>
+              <text class="{{item.index == idx?'activelabel':''}}" data-index="{{index}}" data-sonindex="{{idx}}" data-name="{{item.name}}" catchtap="bindRadioChange">{{sonitem.name}}</text>
             </block>
           </view>
         </view>
-        <view wx:if="{{item.type == 'time'}}" id="{{item.name}}" class="columnWrap card paddingBottom12 {{item.margintop0?'margintop0':''}} {{item.borderbottom1?'borderbottom1':''}}">
-          <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
-          <!-- <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange"> -->
-            <view class="timeWrap">
-                <view>日期+时间</view>
-                <view class="pickerYMDHM">
-                    <view>
-                      <pickerYMDHM data-index="{{index}}" data-name="{{item.name}}" bind:onPickerChange="onPickerChange3" date="{{item.endedTime}}"></pickerYMDHM>
-                    </view>
-                  <image class="actionSheetIcon" src="../../pages/images/icon_in.png" mode="widthFix"></image>
-                </view>
-            </view>
-          <!-- </picker> -->
+        <view wx:if="{{item.type == 'time'}}" id="{{item.name}}" class="rowWrap {{item.borderbottom1?'borderbottom1':''}} {{item.paddingL80?'paddingL80':''}}">
+          <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}">
+            <text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}
+            <image wx:if="{{item.explain}}" src="https://cdn.51chaidan.com/images/brandSettledIcon/wenhao.png" mode="widthFix"></image>
+          </view>
+          <view class="pickerYMDHM">
+            <pickerYMDHM data-index="{{index}}" data-name="{{item.name}}" bind:onPickerChange="onPickerChange3" placeholder="{{item.placeholder}}" date="{{item.time}}"></pickerYMDHM>
+          </view>
+          <image wx:if="{{item.isEdit?false:isEdit}}" class="editIcon" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="widthFix"></image>
         </view>
         <view wx:if="{{item.type == 'uploadImg'}}" id="{{item.name}}" class="columnWrap card paddingBottom12 {{item.margintop0?'margintop0':''}} {{item.borderbottom1?'borderbottom1':''}}" data-storagelocation="{{item.storagelocation}}" data-name="{{item.name}}" data-index="{{index}}" data-mode="{{item.mode}}" catchtap="uploadImage">
           <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
@@ -152,23 +150,26 @@
             {{item.subtitle}}
             <image wx:if="{{item.explain}}" src="https://cdn.51chaidan.com/images/brandSettledIcon/wenhao.png" mode="widthFix"></image>
           </view>
-          <view class="{{item.input?'spaceBetween':''}}">
+          <view class="radioBoxWrap">
             <view class="radioWrap {{item.direction=='X'?'displayInlineFlex radioWrap1':''}}">
               <block wx:for="{{item.radioArr}}" wx:key='key' wx:for-index="idx" wx:for-item="sonItem">
-                <view data-index="{{index}}" data-sonindex="{{idx}}" data-name="{{item.name}}" 
-                catchtap="{{item.name=='purchaseLimitation'?'bindLimitBuyRadioChange':'bindRadioChange'}}">
+                <view data-index="{{index}}" data-sonindex="{{idx}}" data-name="{{item.name}}" catchtap="bindRadioChange">
                   <text class="{{item.index == idx?'radioChecked':'radioUnchecked'}}"></text>
                   <text class="itemName">{{sonItem}}</text>
                 </view>
               </block>
             </view>
-            <block wx:if="{{item.name == 'purchaseLimitation'}}">
-              <view class="radioRightWrap" wx:if="{{item.index==0}}">
-                <text>每人限购</text><input type="text" data-name="{{item.name}}Num" bindinput="onKeyInput" value="{{item.value}}"/><text>体</text>
-              </view>
-            </block>
-            <block wx:else>
-            
+            <block wx:if="{{item.input}}">
+              <block wx:if="{{item.name == 'purchaseLimitation'}}">
+                <view class="radioRightWrap" wx:if="{{item.index==0}}">
+                  <text>每人限购</text><input type="text" data-name="{{item.name}}Num" bindinput="onKeyInput" value="{{item.value}}"/><text>体</text>
+                </view>
+              </block>
+              <block wx:else>
+                <view class="inputRightWrap" wx:if="{{item.index==0}}">
+                  <input type="text" placeholder="请填写保证金金额" data-name="{{item.name}}Num" bindinput="onKeyInput" value="{{item.value}}" />
+                </view>
+              </block>
             </block>
           </view>
         </view>

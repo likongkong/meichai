@@ -81,6 +81,27 @@ export const settledGoodsList = (query) => {
 export const brandSettledGoodsStopSale = (query) => {
     return apiResquest.post('brand/settled_goods/stopSale',query)
 }
+// ---------------------------------------- 发布商品 -----------------------------------------
+// 发布商品
+export const settledGoodsSetGoods = (query) => {
+    return apiResquest.post('brand/settled_goods/setGoods',query)
+}
+// 发布抽选商品
+export const settledGoodsSetActivity = (query) => {
+    return apiResquest.post('brand/settled_goods/setActivity',query)
+}
+// 查看商品信息
+export const settledGoodsInfoGoods = (url,query) => {
+    return apiResquest.get('brand/settled_goods/infoGoods/' + url,query)
+}
+// 查看抽选商品信息
+export const settledGoodsInfoActivity = (type,id,query) => {
+    return apiResquest.get('brand/settled_goods/infoActivity/' + url + '/' + url,query)
+}
+// 品牌列表
+export const settledGoodsBrandlist = (query) => {
+    return apiResquest.get('brand/settled_goods/brandlist',query)
+}
 
 // login(data).then(res => {
 //   console.log(res)

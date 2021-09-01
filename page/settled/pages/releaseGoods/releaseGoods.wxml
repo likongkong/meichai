@@ -7,11 +7,12 @@
   statusBarHeightMc="{{statusBarHeightMc}}"
   form="dynamicContent"
   list="{{listData}}"
-  bind:bindchange="bindchange">
+  bind:bindchange="bindchange"
+  bind:showActionSheet="showActionSheet">
   </settledForm>
   <view class="card">
     <settledForm 
-    id="settledForm"
+    id="settledForm1"
     statusBarHeightMc="{{statusBarHeightMc}}"
     form="dynamicContent"
     list="{{listData1}}"
@@ -23,7 +24,7 @@
   </view>
   <view class="card">
     <settledForm 
-    id="settledForm"
+    id="settledForm2"
     statusBarHeightMc="{{statusBarHeightMc}}"
     form="dynamicContent"
     list="{{listData2}}"

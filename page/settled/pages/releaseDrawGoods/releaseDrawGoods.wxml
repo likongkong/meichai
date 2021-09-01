@@ -2,5 +2,53 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 <view class="wrap">
-
+  <settledForm 
+  id="settledForm"
+  statusBarHeightMc="{{statusBarHeightMc}}"
+  form="dynamicContent"
+  list="{{listData}}"
+  bind:bindchange="bindchange"
+  bind:showActionSheet="showActionSheet">
+  </settledForm>
+  <view class="card">
+    <settledForm 
+    id="settledForm1"
+    statusBarHeightMc="{{statusBarHeightMc}}"
+    form="dynamicContent"
+    list="{{listData1}}"
+    bind:bindchange="bindchange">
+    </settledForm>
+  </view>
+  <view class="card">
+    <settledForm 
+    id="settledForm2"
+    statusBarHeightMc="{{statusBarHeightMc}}"
+    form="dynamicContent"
+    list="{{listData2}}"
+    bind:bindchange="bindchange">
+    </settledForm>
+  </view>
+  <view class="card">
+    <settledForm 
+    id="settledForm3"
+    statusBarHeightMc="{{statusBarHeightMc}}"
+    form="dynamicContent"
+    list="{{listData3}}"
+    bind:bindchange="bindchange">
+    </settledForm>
+  </view>
+  <view class="title">
+    其他设置
+  </view>
+  <settledForm 
+  id="settledForm4"
+  statusBarHeightMc="{{statusBarHeightMc}}"
+  form="dynamicContent"
+  list="{{listData4}}"
+  bind:bindchange="bindchange">
+  </settledForm>
+  <view class="footerWrap">
+      <view data-num="1" catchtap="navigateBack">返回</view>
+      <view catchtap="submitAudit">确认发布</view>
+  </view>
 </view>

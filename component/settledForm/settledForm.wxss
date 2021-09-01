@@ -191,10 +191,16 @@
   padding: 6rpx 10rpx;
   margin-left: 20rpx;
 }
+.radioBoxWrap{
+  height: 60rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
 .radioWrap view{
   display: flex;
   align-items: center;
-  margin-top: 14rpx;
+  /* margin-top: 14rpx; */
 }
 .radioWrap1 view{
   margin-right: 76rpx;
@@ -215,6 +221,10 @@
   width: 60rpx;
   border-bottom: 2rpx solid #BBBBBB;
   text-align: center;
+  font-size: 28rpx;
+}
+.inputRightWrap input{
+  text-align: right;
   font-size: 28rpx;
 }
 .itemName{
@@ -288,6 +298,10 @@
 }
 .pickerYMDHM{
   width: 100%;
+  height: 100rpx;
+}
+/* .pickerYMDHM{
+  width: 100%;
   height: 58rpx;
   display: flex;
   justify-content: end;
@@ -298,16 +312,17 @@
   padding-right: 30rpx;
   box-sizing: border-box;
   z-index: 10;
-}
+} */
 .pickerYMDHM view{
   width: 100%;
-  height: 58rpx;
-  font-size: 24rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 28rpx;
   text-align: right;
   color: #858585;
 }
-.pickerYMDHM image{
+/* .pickerYMDHM image{
   width: 16rpx;
   height: auto;
   display: block;
-}
+} */
