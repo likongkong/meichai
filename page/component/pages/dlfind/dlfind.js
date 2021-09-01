@@ -1066,6 +1066,8 @@ Page({
       });      
     }else if(istype == 3){ // 动态
       type = 9036;
+    }else if(istype == 5){
+      type = 9005;
     }
     if(istype != 2){
       app.comjumpwxnav(type,id,'','');

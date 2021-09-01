@@ -102,7 +102,7 @@
                             <image class="stateBgNewImg" src="https://cdn.51chaidan.com/images/brandSettledIcon/seckill.jpg" wx:elif='{{item.type==1}}' mode="aspectFit"></image>
                             <!-- <image class="stateBgNewImg" src="https://cdn.51chaidan.com/images/brandSettledIcon/" wx:elif='{{item.type==4}}' mode="aspectFill"></image> -->
                             <image class="stateBgNewImg" src="https://cdn.51chaidan.com/images/brandSettledIcon/selection.jpg" wx:elif='{{item.type==2}}' mode="aspectFit"></image>
-
+                            <image class="stateBgNewImg" src="https://cdn.51chaidan.com/images/brandSettledIcon/showBox.jpg" wx:elif='{{item.type==5}}' mode="aspectFit"></image>
 
                           </view>
                     </view>
@@ -172,7 +172,16 @@
                     <view class='dlfhtitlenew' style="color:#4CC148;font-size:26rpx;height: 40rpx;line-height: 40rpx;" wx:elif='{{item.status==2&&item.sellNumber>0}}'>{{item.sellNumber}}人参加</view>
                     <view class='dlfhtitlenew' style="color:#999495;font-size:26rpx;height: 40rpx;line-height: 40rpx;" wx:elif='{{item.status==3}}'>已结束</view>
                 </block>
-
+                <!-- 抽选 -->
+                <block wx:elif='{{item.type==5}}'>
+                    <view class='dlfhtitlenew' style="color:#FF2742;font-size:26rpx;height: 40rpx;line-height: 40rpx;">￥<text style="font-size:36rpx;">{{item.price}}</text></view>
+                    <view class='dlfhtitlenew' style="color:#178FF8;font-size:26rpx;height: 40rpx;line-height: 40rpx;" wx:if='{{item.status==1}}'>
+                      <block wx:if='{{item.specialWay > 0}}'>直播售卖</block>
+                      <block wx:else>{{item.start_time}}开始</block>
+                    </view>
+                    <view class='dlfhtitlenew' style="color:#4CC148;font-size:26rpx;height: 40rpx;line-height: 40rpx;" wx:elif='{{item.status==2}}'>在线抽盒</view>
+                    <view class='dlfhtitlenew' style="color:#999495;font-size:26rpx;height: 40rpx;line-height: 40rpx;" wx:elif='{{item.status==3}}'>已结束</view>
+                </block>
                 
             </view>
 
@@ -183,7 +192,7 @@
                 <view class="boxAtlasRight">点击查看</view>
             </view>
             <!-- bottom -->
-            <view style="min-height:40rpx;padding:0 20rpx 20rpx;position: relative;">
+            <view style="min-height:40rpx;padding:20rpx;position: relative;">
                 <view style="width:100%;min-height:40rpx;">
                       <view class="emlhltbottom" style="font-size:24rpx;height:40rpx;line-height:40rpx;">
 
@@ -229,7 +238,7 @@
                   <image class="dlfchrbrightNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/seckill.jpg" wx:elif='{{item.type==1}}' mode="aspectFit"></image>
                   <!-- <image class="dlfchrbrightNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/" wx:elif='{{item.type==4}}' mode="aspectFill"></image> -->
                   <image class="dlfchrbrightNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/selection.jpg" wx:elif='{{item.type==2}}' mode="aspectFit"></image>
-
+                  <image class="dlfchrbrightNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/showBox.jpg" wx:elif='{{item.type==5}}' mode="aspectFit"></image>
                   
                   <image data-ind='{{index}}' style='width:360rpx;margin:auto;display:block;border-radius:10rpx 10rpx 0 0;' mode='widthFix' src='{{item.imgArr[0]}}?imageMogr2/thumbnail/720x'></image>
                 </view>
@@ -285,6 +294,29 @@
             </block>
             <!-- 签到 -->
             <block wx:elif='{{item.type==4}}'></block>
+
+            <!-- 抽选 -->
+            <block wx:elif='{{item.type==5}}'>
+                <block wx:if='{{item.status==1}}'>
+                    <view class='dlfhtitlenew' style="color:#178FF8;">
+                      <block wx:if='{{item.specialWay > 0}}'>直播售卖</block>
+                      <block wx:else>{{item.start_time}}开始</block>
+                    </view>
+                    <view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}</view>
+                </block>
+                <block wx:if='{{item.status==2 ||item.status==3}}'>
+                    <view class='dlfhtitlenew' style="overflow:hidden;">
+                        <block wx:if='{{item.status==2}}'>
+                            <view style="float:left;color:#4CC148;">在线抽盒</view>
+                        </block>
+                        <block wx:if='{{item.status==3}}'>
+                            <view style="float:left;color:#999495;">已结束</view>
+                        </block>
+                    </view>
+                </block>
+            </block>
+
+
             <view class="boxAtlas" wx:if='{{item.illustratedInfo}}' catchtap="jumpoffering" data-id="{{item.illustratedInfo.id}}" data-type='9035'>
                 <!-- <view class="boxAtlasLeft">图鉴</view> -->
                 <image class="boxAtlasLeftNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/illustrated.jpg"  mode="aspectFit"></image>
@@ -322,6 +354,7 @@
                   <image class="dlfchrbrightNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/seckill.jpg" wx:elif='{{item.type==1}}' mode="aspectFit"></image>
                   <!-- <image class="dlfchrbrightNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/" wx:elif='{{item.type==4}}' mode="aspectFill"></image> -->
                   <image class="dlfchrbrightNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/selection.jpg" wx:elif='{{item.type==2}}' mode="aspectFit"></image>
+                  <image class="dlfchrbrightNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/showBox.jpg" wx:elif='{{item.type==5}}' mode="aspectFit"></image>
 
                   <image data-ind='{{index}}' style='width:360rpx;margin:auto;display:block;border-radius:10rpx 10rpx 0 0;' mode='widthFix' src='{{item.imgArr[0]}}?imageMogr2/thumbnail/720x'></image>
                 </view>
@@ -376,6 +409,28 @@
             </block>
             <!-- 签到 -->
             <block wx:elif='{{item.type==4}}'></block>
+            <!-- 抽选 -->
+            <block wx:elif='{{item.type==5}}'>
+                <block wx:if='{{item.status==1}}'>
+                    <view class='dlfhtitlenew' style="color:#178FF8;">
+                      <block wx:if='{{item.specialWay > 0}}'>直播售卖</block>
+                      <block wx:else>{{item.start_time}}开始</block>
+                    </view>
+                    <view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}</view>
+                </block>
+                <block wx:if='{{item.status==2 ||item.status==3}}'>
+                    <view class='dlfhtitlenew' style="overflow:hidden;">
+                        <block wx:if='{{item.status==2}}'>
+                            <view style="float:left;color:#4CC148;">在线抽盒</view>
+                        </block>
+                        <block wx:if='{{item.status==3}}'>
+                            <view style="float:left;color:#999495;">已结束</view>
+                        </block>
+                    </view>
+                </block>
+            </block>
+
+
             <view class="boxAtlas" wx:if='{{item.illustratedInfo}}' catchtap="jumpoffering" data-id="{{item.illustratedInfo.id}}" data-type='9035'>
                 <!-- <view class="boxAtlasLeft">图鉴</view> -->
                 <image class="boxAtlasLeftNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/illustrated.jpg"  mode="aspectFit"></image>

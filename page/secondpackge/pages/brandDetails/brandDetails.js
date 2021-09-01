@@ -773,6 +773,8 @@ Page({
       type = 9036;
     }else if(type == 9028){
       id = 'id='+id;
+    }else if(istype == 5){ // 动态
+      type = 9005;
     }
     if(istype != 2){
       app.comjumpwxnav(type,id,'','')
