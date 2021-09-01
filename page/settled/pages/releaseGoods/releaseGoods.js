@@ -212,7 +212,7 @@ Page({
     wx.hideShareMenu();
     // '已经授权'
     // this.data.id = options.id;
-    this.data.id = options.id || 38792;
+    this.data.id = options.id || '';
     this.data.loginid = app.signindata.loginid;
     this.data.uid = app.signindata.uid;
     // 判断是否登录
