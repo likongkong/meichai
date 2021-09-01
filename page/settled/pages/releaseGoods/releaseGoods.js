@@ -441,6 +441,9 @@ Page({
         app.showToastC('发布成功',1500);
       }
       setTimeout(function(){
+        let pages = getCurrentPages();    //获取当前页面信息栈
+        let prevPage = pages[pages.length-2];
+        prevPage.getData();
         this.navigateBack();
       },1500)
     }).catch((err)=>{

@@ -1066,6 +1066,14 @@ App({
       wx.navigateTo({
         url: `/page/settled/pages/orderManagement/orderManagement`
       });
+    } else if (item_type == 9039) {  
+      wx.navigateTo({
+        url: `/page/settled/pages/releaseDrawGoods/releaseDrawGoods?${whref}`
+      });      
+    } else if (item_type == 9040) {  
+      wx.navigateTo({
+        url: `/page/settled/pages/releaseGoods/releaseGoods?${whref}`
+      });      
     }
     
   },
