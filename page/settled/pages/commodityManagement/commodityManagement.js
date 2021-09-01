@@ -138,14 +138,14 @@ Page({
     };
 
   },
-    // 跳转日历
-    jumpoffering(w){
-      var type = w.currentTarget.dataset.type || w.target.dataset.type || 0;
-      app.comjumpwxnav(type,'','','');
-      this.setData({
-        isAddNewEventMask:false
-      })
-    },
+  // 开启 秒杀和抽选
+  jumpoffering(w){
+    var type = w.currentTarget.dataset.type || w.target.dataset.type || 0;
+    app.comjumpwxnav(type,'','','');
+    this.setData({
+      isAddNewEventMask:false
+    })
+  },
   // 弹框确认按钮    1 修改收货地址 2 退款 3 物流 4批量导出订单
   confirmCommonTip(){ 
     var _this = this;
