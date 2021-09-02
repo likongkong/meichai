@@ -16,7 +16,7 @@
 
     <scroll-view class="marginAuto scrollViewTop" scroll-x="true" scroll-with-animation="true" scroll-left='{{scrollleft}}' style="height:80rpx;position: relative;">
          <view wx:for="{{payStatus}}" wx:key='key' id="ele{{item.num}}" class="classifyItem {{centerIndex == item.num?'active':''}}" data-index="{{item.num}}" catchtap="classifyChange">{{item.name}}</view>
-         <view class="cmScreen" catchtap="selectBoxFun">筛选<image src="https://cdn.51chaidan.com/images/brandSettledIcon/filtrate.png" mode="aspectFit"></image></view>
+         <view class="cmScreen" catchtap="selectBoxFun">{{screenWords}}<image src="https://cdn.51chaidan.com/images/brandSettledIcon/filtrate.png" mode="aspectFit"></image></view>
     </scroll-view>
 
     <view class="marginAuto centerTxt" wx:for='{{order}}' wx:key='key'>
@@ -35,7 +35,7 @@
 <template name='orderCommon'>
    <view class="orderBox">
        <view>
-            <view class="orderBoxContent">
+            <view class="orderBoxContent" catchtap="publicJump" data-id='{{itemId}}' data-istype='{{itemType}}'>
                 <image class="orderBoxContentImg" src="{{itemImg}}" mode="aspectFit"></image>
                 <view class="orderBoxContentRight">
                     <view class="obcrTop" style="color:#90D2D6;">
@@ -55,7 +55,7 @@
                 </view>
             </view>
        </view>
-       <view class="orderBottom"> <!-- 未支付 -->
+       <view class="orderBottom" wx:if='{{itemStatus != 4}}'>
             <view class="orderBottomOrderNumber">
                 <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='3'>删除</view>
                 <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='1'>编辑</view>
@@ -164,7 +164,7 @@
 
 <view class="wshNew" catchtouchmove="true" wx:if='{{selectBox}}' catchtap="selectBoxFun">
     <view class="orderMangAddressBottom" catchtap="true" style="border-radius:30rpx 30rpx 0 0;">
-        <view class="orderMangTipTop" style="border-bottom:2rpx solid #F4F4F4;" wx:for='{{selectData}}' wx:key='key' catchtap="selectCap" data-index='{{item.id}}'>{{item.n}}</view>
+        <view class="orderMangTipTop" style="border-bottom:2rpx solid #F4F4F4;" wx:for='{{selectWordsData}}' wx:key='key' catchtap="selectCap" data-word='{{item.n}}' data-index='{{item.id}}'>{{item.n}}</view>
         
         <view class="orderMangCenterBG"></view>
         <view class="orderMangTipTop" catchtap="selectBoxFun" style="padding-bottom:30rpx;">取消</view>

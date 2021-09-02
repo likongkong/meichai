@@ -38,11 +38,24 @@ Page({
     nodataiftr:false,
     selectid:0,
     selectBox:false,
-    selectData:[
+    selectWordsData:[
       {'n':'全部',id:0},
       {'n':'秒杀商品',id:'-1'},
       {'n':'抽选商品',id:5}
-    ]
+    ],
+    screenWords:'筛选'
+  },
+  publicJump(w){
+    var id = w.currentTarget.dataset.id || w.target.dataset.id || '';
+    var istype = w.currentTarget.dataset.istype || w.target.dataset.istype || '';
+    var type = ''
+    if(istype == '-1'){
+      type = 1;
+    }else if(istype == 4){
+      type = 9001
+    };
+    app.comjumpwxnav(type, id, '', '')
+    
   },
   toggleAddNewEventMask(){
     this.setData({
@@ -57,8 +70,10 @@ Page({
   },
   selectCap(e){
     let index = e.currentTarget.dataset.index;
+    let screenWords = e.currentTarget.dataset.word;
     this.setData({
-      selectid:index
+      selectid:index,
+      screenWords:screenWords
     })
     this.getData();
     this.selectBoxFun();
