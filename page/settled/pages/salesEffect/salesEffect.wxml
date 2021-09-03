@@ -1,0 +1,71 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class="seBox">
+    <view class="seTop">
+        <view class="seTopName">
+            <view class="seTopNameEve">订单数量</view>
+            <view class="seTopNameEve">订单总金额</view>
+        </view>
+        <view class="seTopName">
+            <view class="seTopNameEve" style="color:#999495;">18</view>
+            <view class="seTopNameEve" style="color:#999495;">1188</view>
+        </view>
+        <view class="seTopName">
+            <view class="seTopNameEve">参与人数</view>
+            <view class="seTopNameEve">活动天数</view>
+        </view>
+        <view class="seTopName">
+            <view class="seTopNameEve" style="color:#999495;">15</view>
+            <view class="seTopNameEve" style="color:#999495;">13</view>
+        </view>
+    </view>
+    <view class="seTop">
+        <view class="seCenterTitle">
+            <view class="seTabData {{umid==1?'seTabDataEve':''}}" catchtap="seTabDataFun" data-type='1'>所有参与用户</view>
+            <view class="seTabData {{umid==2?'seTabDataEve':''}}" style="margin-left:200rpx;" catchtap="seTabDataFun" data-type='2' wx:if='{{seckillOrDraw == 4}}'>中奖名单</view>
+        </view>
+        <view class="elsearch marginAuto">
+            <image class="elserarchimg" catchtap="jumpsearch" src="https://www.51chaidan.com/images/toyCabinet/search.png"></image>
+            <view class="elsearchch">
+                <input class="elinputbut" bindfocus='onFocus' placeholder='用户名或手机号' bindinput="inputChange" bindconfirm="jumpsearch" value="{{ordername}}"></input>
+            </view>
+            <view class="elserbotom" catchtap="jumpsearch">搜索</view>
+        </view>
+        <view class="seUserData">
+            <view class="emlhleft">
+                <image class="emlhlimg" mode="aspectFit" src="https://brand-settled-info-1300990269.cos.ap-beijing.myqcloud.com/brandinfo/logo/16301406891810_39860.jpg"></image>
+                <view class="emlhltxt">
+                    <view class="emlhlttop specialellipsis">林川一目</view>
+                    <view class="emlhltbottom specialellipsis">189****3144</view>
+                </view>
+            </view>
+            <view class="emlhright">查看订单</view>
+            <view class="emlhright" wx:if='{{seckillOrDraw == 4}}' style="right:140rpx;">查看签号</view>
+        </view>
+
+        <view class="seUserData">
+            <view class="emlhleft">
+                <image class="emlhlimg" mode="aspectFit" src="https://brand-settled-info-1300990269.cos.ap-beijing.myqcloud.com/brandinfo/logo/16301406891810_39860.jpg"></image>
+                <view class="emlhltxt">
+                    <view class="emlhlttop specialellipsis">林川一目</view>
+                    <view class="emlhltbottom specialellipsis">189****3144</view>
+                </view>
+            </view>
+            <view class="emlhright">查看订单</view>
+            <view class="emlhright" wx:if='{{seckillOrDraw == 4}}' style="right:140rpx;">查看签号</view>
+        </view>
+
+    </view>
+
+
+
+
+    <!--  暂无数据  -->
+    <view class='nodata' wx:if='{{order.length==0&&nodataiftr}}' style='height: 600rpx;width: 100%;position: relative;'>
+        <image src='../../../../pages/images/nodata.png' class='nodataimg' style='width: 280rpx;height: 300rpx;position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;'></image>
+    </view>
+
+</view>
+
+

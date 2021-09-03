@@ -38,10 +38,9 @@
           "scene": null
         },
         {
-          "id": 4,
-          "name": "商品详情",
-          "pathName": "pages/detailspage/detailspage",
-          "query": "gid=36999",
+          "name": "销售效果",
+          "pathName": "page/settled/pages/salesEffect/salesEffect",
+          "query": "",
           "scene": null
         },
         {

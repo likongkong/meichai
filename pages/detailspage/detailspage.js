@@ -3550,6 +3550,11 @@ Page({
             // Ginfo.infoSpecial.detailSpec        属性明细            
           };
 
+          if (res.data.Ginfo.gdesc == '' ){
+            // 展会
+            _this.exhibdatafun(1);
+            app.livebroadcast(_this, res.data.Ginfo.brandId)  // 直播数据
+          }
 
           // if (_this.data.is_exhibition==1||(_this.data.is_exhibition!=1&&_this.data.brandId>0)){
           //   // 展会
