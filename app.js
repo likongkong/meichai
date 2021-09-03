@@ -1082,6 +1082,10 @@ App({
       wx.navigateTo({
         url: `/page/settled/pages/commodityManagement/commodityManagement`
       });      
+    } else if (item_type == 9042) {   // 专区管理
+      wx.navigateTo({
+        url: `/page/settled/pages/brandManagement/brandManagement`
+      });      
     }
     
   },

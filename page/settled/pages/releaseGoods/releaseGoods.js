@@ -445,7 +445,7 @@ Page({
       goodsName:obj.goodsName,
       goodsThumb:obj.flatPatternmaking,
       goodsPrice:obj.goodsPrice,
-      deliverTimeStatus:obj.goodsLabel==0?1:0,
+      deliverTimeStatus:obj.goodsLabel==''?'':obj.goodsLabel==0?1:0,
       deliverTime:obj.dateToPull,
       startTime:(new Date(obj.startTime).getTime())/1000,
       stopTime:(new Date(obj.endTime).getTime())/1000,

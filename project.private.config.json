@@ -139,6 +139,12 @@
           "pathName": "page/settled/pages/releaseDrawGoods/releaseDrawGoods",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "专区管理",
+          "pathName": "page/settled/pages/brandManagement/brandManagement",
+          "query": "",
+          "scene": null
         }
       ]
     }

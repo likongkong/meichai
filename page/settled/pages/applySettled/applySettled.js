@@ -11,6 +11,8 @@ Page({
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     windowHeight: app.signindata.windowHeight - wx.getStorageSync('statusBarHeightMc')||0,
+    uid:'',
+    loginid:'',
     enterpriseData:[
       {
         type:'h1',

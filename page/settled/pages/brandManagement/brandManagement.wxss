@@ -1,0 +1,136 @@
+page{
+  background:#f4f5f9;
+  padding-bottom: 150rpx;
+}
+.width100{
+  width: 100% !important;
+}
+.title{
+  width: 100%;
+  height: 76rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 18rpx;
+  box-sizing: border-box;
+}
+.title .h1{
+  font-size: 28rpx;
+}
+.title .edit{
+  display: block;
+  width: 102rpx;
+  height: 40rpx;
+  font-size: 28rpx;
+  text-align: center;
+  line-height: 40rpx;
+  color: #fff;
+  background: #90D2D6;
+  border-radius: 8rpx;
+}
+.enterpriseInfoWrap{
+  width: 100%;
+  /* height: 120rpx; */
+  border-radius: 20rpx;
+  box-shadow: 0px 4rpx 12rpx 0px rgba(0, 0, 0, 0.4);
+  padding: 20rpx 18rpx;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  background: #fff;
+  align-items: center;
+}
+.enterpriseInfoWrap>view:first-child{
+  width: 60%;
+}
+.enterpriseInfoWrap>view:last-child{
+  width: 40%;
+}
+.enterpriseInfoWrap .txt{
+  margin-bottom: 20rpx;
+  font-size: 24rpx;
+  color: #101010;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.enterpriseInfoWrap .txt:last-child{
+  margin-bottom: 0;
+}
+.ipItemCard{
+  width: 100%;
+  border-radius: 20rpx;
+  box-shadow: 0px 4rpx 12rpx 0px rgba(0, 0, 0, 0.4);
+  background: #fff;
+  padding: 18rpx 18rpx 38rpx 18rpx;
+  box-sizing: border-box;
+  margin-top: 40rpx;
+}
+.ipItemCard:first-child{
+  margin-top: 0;
+}
+.itemHead{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.itemHeadL{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.IPlogo{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 20rpx;
+}
+.IPinfo{
+  height: 100rpx;
+  display: flex;
+  flex-direction:column;
+  justify-content: space-between;
+  padding-left: 20rpx;
+  box-sizing: border-box;
+}
+.IPinfo text{
+  display: block;
+  font-size: 28rpx;
+  color: #101010;
+}
+.IPinfo1{
+  width: 614rpx;
+  height: 100rpx;
+  display: flex;
+  flex-direction:column;
+  justify-content: space-between;
+  padding-left: 20rpx;
+  box-sizing: border-box;
+}
+.IPinfo1 text{
+  display: block;
+  font-size: 28rpx;
+  color: #101010;
+}
+.inreview{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.inreview text:last-child{
+  color: #5EB052 ;
+}
+.itemHeadR .btn{
+  height: 74rpx;
+  padding: 0 18rpx;
+  line-height: 74rpx;
+  font-size: 28rpx;
+  color: #fff;
+  background: #90D2D6;
+  border-radius: 8rpx;
+}
+.itemContent image{
+  width: 100%;
+  height: auto;
+  border-radius: 20rpx;
+  margin-top: 26rpx;
+}

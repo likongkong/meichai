@@ -171,6 +171,7 @@
         "pages/releaseDrawGoods/releaseDrawGoods",
         "pages/offeringCalendar/offeringCalendar",
         "pages/commodityManagement/commodityManagement",
+        "pages/brandManagement/brandManagement",
         "pages/fieldGuideList/fieldGuideList"
       ]
     }

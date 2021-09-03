@@ -1,0 +1,63 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+
+<view class="wrap">
+  <view>
+    <view class="title">
+      <text class="h1">企业信息</text>
+      <text class="edit">编辑</text>
+    </view>
+    <view class="enterpriseInfoWrap">
+      <view>
+        <view class="txt">企业名称：陈浩网络科技有限公司</view>
+        <view class="txt">联系方式：158****1122</view>
+      </view>
+      <view>
+        <view class="txt">联系人：陈浩</view>
+        <view class="txt">微信号：12457cc</view>
+      </view>
+    </view>
+  </view>
+  <view>
+    <view class="title">
+      <text class="h1">IP信息</text>
+    </view>
+    <view class="content">
+      <view class="ipItemCard"> 
+        <view class="itemHead">
+          <view class="itemHeadL">
+            <image class="IPlogo" src="https://cdn.51chaidan.com//data/afficheimg/1628739279622507208.jpg" mode="aspectFill"></image>
+            <view class="IPinfo">
+              <text>IP名称aaaaa</text>
+              <text>入驻时间：2021-08-01</text>
+            </view>
+          </view>
+          <view class="itemHeadR">
+            <view class="btn">前往IP主页</view>
+          </view>
+        </view>
+        <view class="itemContent"> 
+          <image src="https://cdn.51chaidan.com//data/afficheimg/1628739279622507208.jpg" mode="widthFix"></image>
+        </view>
+      </view>
+      <view class="ipItemCard"> 
+        <view class="itemHead">
+          <view class="itemHeadL width100">
+            <image class="IPlogo" src="https://cdn.51chaidan.com//data/afficheimg/1628739279622507208.jpg" mode="aspectFill"></image>
+            <view class="IPinfo1">
+              <view class="inreview">
+                <text>IP名称aaaaa</text>
+                <text>入驻审核中，查看进度</text>
+              </view>
+              <text>入驻时间：2021-08-01</text>
+            </view>
+          </view>
+        </view>
+        <view class="itemContent"> 
+          <image src="https://cdn.51chaidan.com//data/afficheimg/1628739279622507208.jpg" mode="widthFix"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
