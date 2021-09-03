@@ -337,6 +337,11 @@ Page({
       zunmdata.tipStockOnLine = detailSpecColor[index].tipStockOnLine;
       zunmdata.isSuplusChance = detailSpecColor[index].isSuplusChance || false;
     };
+    // 回答题答案
+    if(zunmdata.additional_type==2){
+      zunmdata.option =  detailSpecColor[index].option || [];
+      zunmdata.anwer =  detailSpecColor[index].anwer || ''
+    }
 
     if( listSpec[modelColor] && listSpec[modelColor].stock > 0 ){
 
@@ -3358,6 +3363,13 @@ Page({
                   res.data.Ginfo.tipStockOnLine = detailSpecModel[modelSelInde].tipStockOnLine;
                   res.data.Ginfo.isSuplusChance = detailSpecModel[modelSelInde].isSuplusChance || false;
                 };
+                // 回答题答案
+                if(res.data.Ginfo.additional_type==2){
+                  res.data.Ginfo.option =  detailSpecModel[modelSelInde].option || [];
+                  res.data.Ginfo.anwer = detailSpecModel[modelSelInde].anwer || ''
+                }
+
+
                 if(listSpec[modelColor]){
                     selectShell = listSpec[modelColor];
                     spgsale = listSpec[modelColor].price; 
@@ -3413,6 +3425,13 @@ Page({
                                   res.data.Ginfo.tipStockOnLine = detailSpecColor[i].tipStockOnLine;
                                   res.data.Ginfo.isSuplusChance = detailSpecColor[i].isSuplusChance || false;
                                 };
+                                // 回答题答案
+                                if(res.data.Ginfo.additional_type==2){
+                                  res.data.Ginfo.option =  detailSpecColor[i].option || [];
+                                  res.data.Ginfo.anwer =  detailSpecColor[i].anwer || ''
+                                };
+
+
                                 ifAdopt = true;
                                 if(assignment){
                                   assignment = false;
@@ -3451,7 +3470,11 @@ Page({
                                 res.data.Ginfo.tipStockOnLine = detailSpecColor[i].tipStockOnLine;
                                 res.data.Ginfo.isSuplusChance = detailSpecColor[i].isSuplusChance || false;
                               };
-
+                              // 回答题答案
+                              if(res.data.Ginfo.additional_type==2){
+                                res.data.Ginfo.option =  detailSpecColor[i].option || [];
+                                res.data.Ginfo.anwer =  detailSpecColor[i].anwer || ''
+                              }
                               ifAdopt = true;
                               if(assignment){
                                 assignment = false;

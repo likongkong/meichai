@@ -416,6 +416,9 @@ Page({
     })
 
     var qqq = Dec.Aese('mod=community&operation=info&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&showType='+_this.data.centerIndex+'&pid='+ _this.data.page + '&brand_id=0');
+
+    console.log('mod=community&operation=info&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&showType='+_this.data.centerIndex+'&pid='+ _this.data.page + '&brand_id=0')
+    
     wx.request({
       url: app.signindata.comurl + 'toy.php' + qqq,
       method: 'GET',

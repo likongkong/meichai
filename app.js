@@ -214,15 +214,15 @@ App({
                         }else if(num>=10){
                           num = '0'+num.toString()
                         };       
-                        // 接口地址  
-                        _this.signindata.comurl = 'https://api-slb.51chaidan.com/'+num+'/';
-                        // 发现地址
-                        _this.signindata.clwcomurl = 'https://clw-slb.51chaidan.com/'+num+'/';
-    
-                        // // 接口地址  208
-                        // _this.signindata.comurl = 'https://api.51chaidan.com/';
+                        // // 接口地址  
+                        // _this.signindata.comurl = 'https://api-slb.51chaidan.com/'+num+'/';
                         // // 发现地址
-                        // _this.signindata.clwcomurl = 'https://clw.51chaidan.com/';
+                        // _this.signindata.clwcomurl = 'https://clw-slb.51chaidan.com/'+num+'/';
+    
+                        // 接口地址  208
+                        _this.signindata.comurl = 'https://api.51chaidan.com/';
+                        // 发现地址
+                        _this.signindata.clwcomurl = 'https://clw.51chaidan.com/';
                       }else{
                         // 接口地址  
                         _this.signindata.comurl = 'http://api-test.51chaidan.com/';
@@ -833,6 +833,10 @@ App({
     } else if (item_type == 1) {
       wx.navigateTo({    // 商品详情页
         url: "/pages/detailspage/detailspage?gid=" + whref
+      });
+    } else if (item_type == 9001) {
+      wx.navigateTo({ // 抽签详情页
+        url: "/page/component/pages/limitlottery/limitlottery?id=" + whref
       });
     } else if (item_type == 9003) {
       wx.navigateTo({    // 抽签详情页
@@ -1573,7 +1577,6 @@ App({
             _this.signindata.indexShare = indexShare || [];
             var indexShareImg = indexShare[indexShareNum]+'?time=' + nowTime;
             _this.signindata.indexShareImg = indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg';
-            console.log('_this.signindata.indexShareImg', _this.signindata.indexShareImg)
           }else{
             _this.signindata.indexShareImg = 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
           };
@@ -1583,8 +1586,6 @@ App({
             _this.signindata.toyShowShare = toyShowShare || [];
             var toyShowShareImg = toyShowShare[toyShowShareNum].img+'?time=' + nowTime;
             _this.signindata.toyShowShareImg = toyShowShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg';
-            console.log('_this.signindata.toyShowShareImg', _this.signindata.toyShowShareImg)
-            console.log('_this.signindata.toyShowTitleShare', _this.signindata.toyShowTitleShare)
           }else{
             _this.signindata.toyShowShareImg = 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
           };
@@ -1594,8 +1595,6 @@ App({
             _this.signindata.communityShare = communityShare || [];
             var communityShareImg = communityShare[communityShareNum].img+'?time=' + nowTime;
             _this.signindata.communityShareImg = communityShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg';
-            console.log('_this.signindata.communityShareImg', _this.signindata.communityShareImg)
-            console.log('_this.signindata.communityTitleShare', _this.signindata.communityTitleShare)
           }else{
             _this.signindata.communityShareImg = 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
           };

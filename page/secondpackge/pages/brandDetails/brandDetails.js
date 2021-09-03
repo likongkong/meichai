@@ -428,6 +428,9 @@ Page({
     })
 
     var qqq = Dec.Aese('mod=community&operation=info&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&showType='+_this.data.centerIndex+'&pid='+ _this.data.page + '&brand_id='+_this.data.brandId);
+
+    console.log('mod=community&operation=info&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&showType='+_this.data.centerIndex+'&pid='+ _this.data.page + '&brand_id='+_this.data.brandId)
+
     wx.request({
       url: app.signindata.comurl + 'toy.php' + qqq,
       method: 'GET',
@@ -666,8 +669,8 @@ Page({
    */
   onReachBottom: function () {
     var _this = this
-    var p = _this.data.page + 1;
-    _this.data.page = p;
+    // var p = _this.data.page + 1;
+    // _this.data.page = p;
     // _this.getbrandDetail(p);
     _this.eldatalistfun(1)
   },
