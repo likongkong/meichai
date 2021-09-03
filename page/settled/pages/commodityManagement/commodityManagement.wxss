@@ -189,8 +189,9 @@ page{
   font-size: 24rpx;
   border-radius: 10rpx;
   display: inline-block;
-  margin-left: 60rpx;
+  margin-left: 38rpx;
   vertical-align: top;
+  position: relative;
 }
 
 .orderBottomNavigation{

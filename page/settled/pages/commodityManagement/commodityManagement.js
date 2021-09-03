@@ -318,7 +318,7 @@ Page({
    */
   onLoad: function (options) {
     var _this = this;
-    wx.hideShareMenu();
+    // wx.hideShareMenu();
 
     // '已经授权'
     _this.data.loginid = app.signindata.loginid;
@@ -355,7 +355,7 @@ Page({
      var _this = this;
 
     if (num==1){
-      _this.setData({countOrder:0,page : 1,nodataiftr:false});
+      _this.setData({countOrder:0,page : 1,nodataiftr:false ,order : []});
     }else{
       var pagenum = _this.data.page;
       _this.data.page = ++pagenum;
@@ -458,20 +458,37 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function (options) {
     var _this = this;
+
     var indexShare = app.signindata.indexShare || [];
     var indexShareNum = Math.floor(Math.random() * indexShare.length) || 0;
     var indexShareImg = '';
     if(indexShare.length!=0 && indexShare[indexShareNum]){
       indexShareImg = indexShare[indexShareNum]+'?time=' + Date.parse(new Date());
     };
+    var title = app.signindata.titleShare?app.signindata.titleShare:'你喜欢的潮玩都在这里！'
+    var onshareUrl = 'pages/index/index';
+    var onshareImg = indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg';
+
+    if (options.from == 'button') {
+      var num = options.target.dataset.num;
+      var selectData = _this.data.order[num];
+      title = selectData.itemName || '你喜欢的潮玩都在这里！';
+      onshareImg = selectData.itemImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg';
+      if (selectData.itemType == '-1'){  // 正常商品
+        onshareUrl = "/page/component/pages/limitlottery/limitlottery?id=" + selectData.itemId;
+      }else if(selectData.itemType == 4){ // 抽选
+        onshareUrl = '/pages/detailspage/detailspage?gid=' + selectData.itemId;
+      };      
+    }
     return {
-      title:app.signindata.titleShare?app.signindata.titleShare:'你喜欢的潮玩都在这里！',
-      path: 'pages/index/index',
-      imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      title: title ,
+      path: onshareUrl,
+      imageUrl:onshareImg,
       success: function (res) {}
-    } 
+    };
+
   },
 
 })

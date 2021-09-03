@@ -523,13 +523,15 @@
 <view class="popMask" catchtouchmove="true" catchtap="toggleAddNewEventMask" wx:if="{{isAddNewEventMask}}">
     <view class="addNewEventBox" catchtap="true">
         <view class="addNewEventContent">
-            <view class="createItem" data-type="9033" catchtap="jumpoffering">
+            <view class="createItem">
                 <view>开启图鉴介绍</view>
-                <view class="lastChild" style="background:#68B1ED;">发布图鉴</view>
+                <view class="lastChild" data-type="9033" catchtap="jumpoffering" style="background:#68B1ED;">发布图鉴</view>
+                <!-- <view class="lastChild" data-type="9039" catchtap="jumpoffering" style="background:#68B1ED;">发布抽选</view> -->
             </view>
-            <view class="createItem" data-type="9032" catchtap="jumpoffering">
+            <view class="createItem">
                 <view>让内容和用户连接</view>
-                <view class="lastChild" style="background:#6FD375;">发布动态</view>
+                <view class="lastChild" data-type="9032" catchtap="jumpoffering" style="background:#6FD375;">发布动态</view>
+                <!-- <view class="lastChild" data-type="9040" catchtap="jumpoffering" style="background:#6FD375;">发布秒杀</view> -->
             </view>
         </view>
         <image class="popMaskbutton" catchtap="toggleAddNewEventMask" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="aspectFit"></image>
