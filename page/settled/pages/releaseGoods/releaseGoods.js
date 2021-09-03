@@ -182,7 +182,7 @@ Page({
       },{
         isRequired:true,
         type:'time',
-        subtitle:'停售时间时间',
+        subtitle:'停售时间',
         value:0,
         margintop0:true,
         time: util.format("yyyy-MM-dd HH:mm",2592000000),

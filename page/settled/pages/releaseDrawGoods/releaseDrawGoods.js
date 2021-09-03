@@ -204,11 +204,11 @@ Page({
           app.showToastC('开始时间不可大于结束时间',1500);
         }
       }else{
-        if(startTime<stopTime){
+        if(startTime>stopTime){
           app.showToastC('开始时间不可大于开奖时间',1500);
           return false;
         } 
-        if(startTime<finalPayTime){
+        if(startTime>finalPayTime){
           app.showToastC('开始时间不可大于结束时间',1500);
           return false;
         }
