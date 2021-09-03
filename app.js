@@ -1927,3 +1927,4 @@ App({
 // businessOrderDetails  订单详情
 // dynamicDetails 动态详情
 // commodityManagement 商品管理
+// salesEffect 销售效果

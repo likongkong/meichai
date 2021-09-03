@@ -172,6 +172,7 @@
         "pages/offeringCalendar/offeringCalendar",
         "pages/commodityManagement/commodityManagement",
         "pages/brandManagement/brandManagement",
+        "pages/salesEffect/salesEffect",
         "pages/fieldGuideList/fieldGuideList"
       ]
     }
