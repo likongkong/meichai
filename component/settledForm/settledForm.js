@@ -70,7 +70,7 @@ Component({
       let index = e.currentTarget.dataset.index;
       let value = `list[${index}].time`;
       this.setData({errorDom:''});
-      this.setData({[value]:e.detail.dateString})
+      // this.setData({[value]:e.detail.dateString})
       this.triggerEvent("bindchange", {value:e.detail.dateString,name:name});
     },
     onKeyInput(e){

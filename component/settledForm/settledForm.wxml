@@ -2,6 +2,9 @@
   <block wx:if="{{form == 'settled'}}">
     <view class="listWrap">
       <block wx:for="{{list}}" wx:key='key'>
+        <view wx:if="{{item.type == 'h1'}}" class="subtitle">
+          <view>{{item.value}}</view>
+        </view>
         <view wx:if="{{item.type == 'text'}}" id="{{item.name}}" class="{{num==1?'columnWrap':'rowWrap'}} {{item.borderbottom1?'':'borderbottom1'}} {{item.paddingL80?'paddingL80':''}}">
           <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
           <input class="cEveInput" disabled="{{num==2?true:flase}}" data-name="{{item.name}}" placeholder="{{item.placeholder}}" type="text" value="{{item.value}}" bindinput="onKeyInput"></input>

@@ -13,6 +13,10 @@ Page({
     windowHeight: app.signindata.windowHeight - wx.getStorageSync('statusBarHeightMc')||0,
     enterpriseData:[
       {
+        type:'h1',
+        value:'企业信息'
+      },
+      {
         isRequired:true,
         type:'text',
         subtitle:'企业名称',
@@ -47,6 +51,9 @@ Page({
         name:'businessLicense',
         src:'',
         storagelocation:'brandinfo/voucher'
+      },{
+        type:'h1',
+        value:'IP信息（只需填写一个IP信息，通过后可继续添加）'
       },{
         isRequired:true,
         type:'text',
@@ -210,15 +217,15 @@ Page({
             introduce:brandInfo.ip_introduce,
           };
           this.setData({
-            [`enterpriseData[0].value`]:brandInfo.firm_name,
-            [`enterpriseData[1].value`]:brandInfo.firm_linkman,
-            [`enterpriseData[2].value`]:brandInfo.firm_tel,
-            [`enterpriseData[3].value`]:brandInfo.wechat_number,
-            [`enterpriseData[4].src`]:brandInfo.certificate_img,
-            [`enterpriseData[5].value`]:brandInfo.ip_name,
-            [`enterpriseData[6].src`]:brandInfo.ip_logo,
-            [`enterpriseData[7].src`]:brandInfo.ip_img,
-            [`enterpriseData[8].value`]:brandInfo.ip_introduce,
+            [`enterpriseData[1].value`]:brandInfo.firm_name,
+            [`enterpriseData[2].value`]:brandInfo.firm_linkman,
+            [`enterpriseData[3].value`]:brandInfo.firm_tel,
+            [`enterpriseData[4].value`]:brandInfo.wechat_number,
+            [`enterpriseData[5].src`]:brandInfo.certificate_img,
+            [`enterpriseData[7].value`]:brandInfo.ip_name,
+            [`enterpriseData[8].src`]:brandInfo.ip_logo,
+            [`enterpriseData[9].src`]:brandInfo.ip_img,
+            [`enterpriseData[10].value`]:brandInfo.ip_introduce,
           })
         }else{
           app.showToastC(res.data.Msg,2000);

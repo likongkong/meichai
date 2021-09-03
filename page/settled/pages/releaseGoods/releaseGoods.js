@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '添加直购商品',
+    c_title: '添加秒杀商品',
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
@@ -234,9 +234,37 @@ Page({
   // 获取表单数据
   bindchange(e){
     let key=e.detail.name;
-    this.data.obj[key]=e.detail.value;
+    if(key == 'startTime'){
+      let startTime = (new Date(e.detail.value).getTime())/1000;
+      let endTime = (new Date(this.data.obj.endTime).getTime())/1000;
+      console.log(startTime,endTime)
+      if(startTime<endTime){
+        this.setData({
+          [`listData2[4].time`]:e.detail.value
+        })
+        this.data.obj[key]=e.detail.value;
+      }else{
+        app.showToastC('发售时间不可大于停售时间',1500);
+      }
+    }else if(key == 'endTime'){
+      let endTime = (new Date(e.detail.value).getTime())/1000;
+      let startTime = (new Date(this.data.obj.startTime).getTime())/1000;
+      console.log(startTime,endTime)
+      if(endTime>startTime){
+        this.setData({
+          [`listData2[5].time`]:e.detail.value
+        })
+        this.data.obj[key]=e.detail.value;
+      }else{
+        app.showToastC('停售时间不可小于发售时间',1500);
+      }
+    }else{
+      this.data.obj[key]=e.detail.value;
+    }
     console.log(this.data.obj)
+
   },
+
   // 获取用户下所有的品牌id
   getIp(){
     wx.showLoading({
@@ -441,10 +469,10 @@ Page({
         app.showToastC('发布成功',1500);
       }
       setTimeout(function(){
+        that.navigateBack();
         let pages = getCurrentPages();    //获取当前页面信息栈
         let prevPage = pages[pages.length-2];
         prevPage.getData();
-        this.navigateBack();
       },1500)
     }).catch((err)=>{
       console.log(err)
@@ -503,7 +531,7 @@ Page({
     
   },
   navigateBack(e){
-    let num = e.currentTarget.dataset.num;
+    let num = e?e.currentTarget.dataset.num:false;
     wx.navigateBack({
       delta: num?num:1
     })  
