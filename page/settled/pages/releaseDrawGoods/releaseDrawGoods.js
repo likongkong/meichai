@@ -176,7 +176,133 @@ Page({
   // 获取表单数据
   bindchange(e){
     let key=e.detail.name;
-    this.data.obj[key]=e.detail.value;
+    if(key == 'startTime'){
+      let startTime = (new Date(e.detail.value).getTime())/1000;
+      let stopTime = (new Date(this.data.obj.stopTime).getTime())/1000;
+      let finalPayTime = (new Date(this.data.obj.finalPayTime).getTime())/1000;
+      if(!stopTime && !finalPayTime){
+        this.setData({
+          [`listData2[0].time`]:e.detail.value
+        })
+        this.data.obj[key]=e.detail.value;
+      }else if(stopTime && !finalPayTime){
+        if(startTime<stopTime){
+          this.setData({
+            [`listData2[0].time`]:e.detail.value
+          })
+          this.data.obj[key]=e.detail.value;
+        }else{
+          app.showToastC('开始时间不可大于开奖时间',1500);
+        }
+      }else if(!stopTime && finalPayTime){
+        if(startTime<finalPayTime){
+          this.setData({
+            [`listData2[0].time`]:e.detail.value
+          })
+          this.data.obj[key]=e.detail.value;
+        }else{
+          app.showToastC('开始时间不可大于结束时间',1500);
+        }
+      }else{
+        if(startTime>stopTime){
+          app.showToastC('开始时间不可大于开奖时间',1500);
+          return false;
+        } 
+        if(startTime>finalPayTime){
+          app.showToastC('开始时间不可大于结束时间',1500);
+          return false;
+        }
+        this.setData({
+          [`listData2[0].time`]:e.detail.value
+        })
+        this.data.obj[key]=e.detail.value;
+      }
+    }else if(key == 'stopTime'){
+      let startTime = (new Date(this.data.obj.startTime).getTime())/1000;
+      let stopTime = (new Date(e.detail.value).getTime())/1000;
+      let finalPayTime = (new Date(this.data.obj.finalPayTime).getTime())/1000;
+      if(!startTime && !finalPayTime){
+        this.setData({
+          [`listData2[1].time`]:e.detail.value
+        })
+        this.data.obj[key]=e.detail.value;
+      }else if(startTime && !finalPayTime){
+        if(stopTime>startTime){
+          this.setData({
+            [`listData2[1].time`]:e.detail.value
+          })
+          this.data.obj[key]=e.detail.value;
+        }else{
+          app.showToastC('开奖时间不可小于开始时间',1500);
+        }
+      }else if(!startTime && finalPayTime){
+        if(stopTime<finalPayTime){
+          this.setData({
+            [`listData2[1].time`]:e.detail.value
+          })
+          this.data.obj[key]=e.detail.value;
+        }else{
+          app.showToastC('开奖时间不可大于结束时间',1500);
+        }
+      }else{
+        if(stopTime<startTime){
+          app.showToastC('开奖时间不可小于开始时间',1500);
+          return false;
+        } 
+        if(stopTime>finalPayTime){
+          app.showToastC('开奖时间不可大于结束时间',1500);
+          return false;
+        }
+        this.setData({
+          [`listData2[1].time`]:e.detail.value
+        })
+        this.data.obj[key]=e.detail.value;
+      }
+    }else if(key == 'finalPayTime'){
+      let startTime = (new Date(this.data.obj.startTime).getTime())/1000;
+      let stopTime = (new Date(this.data.obj.stopTime).getTime())/1000;
+      let finalPayTime = (new Date(e.detail.value).getTime())/1000;
+
+      if(!startTime && !stopTime){
+        this.setData({
+          [`listData2[2].time`]:e.detail.value
+        })
+        this.data.obj[key]=e.detail.value;
+      }else if(startTime && !stopTime){
+        if(finalPayTime>startTime){
+          this.setData({
+            [`listData2[2].time`]:e.detail.value
+          })
+          this.data.obj[key]=e.detail.value;
+        }else{
+          app.showToastC('结束时间不可小于开始时间',1500);
+        }
+      }else if(!startTime && stopTime){
+        if(finalPayTime>stopTime){
+          this.setData({
+            [`listData2[2].time`]:e.detail.value
+          })
+          this.data.obj[key]=e.detail.value;
+        }else{
+          app.showToastC('结束时间不可小于开奖时间',1500);
+        }
+      }else{
+        if(finalPayTime<startTime){
+          app.showToastC('结束时间不可小于开始时间',1500);
+          return false;
+        } 
+        if(finalPayTime<stopTime){
+          app.showToastC('结束时间不可小于开奖时间',1500);
+          return false;
+        }
+        this.setData({
+          [`listData2[2].time`]:e.detail.value
+        })
+        this.data.obj[key]=e.detail.value;
+      }
+    }else{
+      this.data.obj[key]=e.detail.value;
+    }
     console.log(this.data.obj)
   },
   // 获取用户下所有的品牌id
@@ -376,10 +502,10 @@ Page({
         app.showToastC('发布成功',1500);
       }
       setTimeout(function(){
+        that.navigateBack();
         let pages = getCurrentPages();    //获取当前页面信息栈
         let prevPage = pages[pages.length-2];
         prevPage.getData();
-        this.navigateBack();
       },1500)
     }).catch((err)=>{
       console.log(err)
@@ -439,7 +565,7 @@ Page({
     
   },
   navigateBack(e){
-    let num = e.currentTarget.dataset.num;
+    let num = e?e.currentTarget.dataset.num:false;
     wx.navigateBack({
       delta: num?num:1
     })  

@@ -29,6 +29,15 @@
   justify-content: space-between;
   align-items: center;
 }
+.subtitle{
+  padding: 0 22rpx;
+  height: 76rpx;
+  line-height: 76rpx;
+  font-size: 26rpx;
+  color: #9F9FA0;
+  background: #F6F5FA;
+  box-sizing: border-box;
+}
 /* 行样式 */
 .rowWrap{    
   width: 100%;
