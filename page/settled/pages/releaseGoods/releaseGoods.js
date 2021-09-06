@@ -67,7 +67,7 @@ Page({
         borderbottom1:'show',
         margintop0:true,
       },{
-        isRequired:false,
+        isRequired:true,
         type:'text',
         subtitle:'商品库存',
         placeholder:'请输入当前可售库存数',
@@ -336,7 +336,7 @@ Page({
           [`listData1[2].value`]:info.goodsDescStr,
           [`listData1[3].value`]:info.goodsPrice,
           [`listData1[4].value`]:info.stock,
-          [`listData1[5].index`]:info.deliverTimeStatus==1?0:1,
+          [`listData1[5].index`]:info.deliverTimeStatus===''?999:info.deliverTimeStatus==1?0:1,
           [`listData1[6].index`]:info.limitBuy==0?1:0,
           [`listData1[6].value`]:info.limitBuy,
           [`listData1[7].imageList`]:info.arrGoodsDescImg,
@@ -370,7 +370,7 @@ Page({
         obj.goodsDescribe = info.goodsDescStr;
         obj.goodsPrice = info.goodsPrice;
         obj.goodsStock = info.stock;
-        obj.goodsLabel = info.deliverTimeStatus==1?0:1;
+        obj.goodsLabel = info.deliverTimeStatus===''?'':info.deliverTimeStatus==1?0:1;
         obj.purchaseLimitation = info.limitBuy==0?1:info.limitBuy;
         obj.purchaseLimitationNum = info.limitBuy;
         obj.goodsDetailsPic = info.arrGoodsDescImg;
@@ -406,6 +406,11 @@ Page({
     if(!obj.goodsPrice || obj.goodsPrice == ''){
       this.selectComponent('#settledForm1').scrollto('goodsPrice');
       app.showToastC('请输入商品售价金额',1500);
+      return false;
+    }
+    if(!obj.goodsStock || obj.goodsStock == ''){
+      this.selectComponent('#settledForm1').scrollto('goodsStock');
+      app.showToastC('请输入当前可售库存数',1500);
       return false;
     }
     if(!obj.shipping || obj.shipping == ''){
@@ -445,7 +450,7 @@ Page({
       goodsName:obj.goodsName,
       goodsThumb:obj.flatPatternmaking,
       goodsPrice:obj.goodsPrice,
-      deliverTimeStatus:obj.goodsLabel==''?'':obj.goodsLabel==0?1:0,
+      deliverTimeStatus:obj.goodsLabel===''?'':obj.goodsLabel==0?1:0,
       deliverTime:obj.dateToPull,
       startTime:(new Date(obj.startTime).getTime())/1000,
       stopTime:(new Date(obj.endTime).getTime())/1000,
@@ -463,17 +468,25 @@ Page({
     // return false;
     api.settledGoodsSetGoods(data).then((res) => {
       console.log(res)
-      if(this.data.id && this.data.id!=0){
-        app.showToastC('修改成功',1500);
+      if(res.data.status_code == 200){
+        if(this.data.id && this.data.id!=0){
+          app.showToastC('修改成功',1500);
+        }else{
+          app.showToastC('发布成功',1500);
+        }
+        setTimeout(function(){
+          that.navigateBack();
+          let pages = getCurrentPages();    //获取当前页面信息栈
+          let prevPage = pages[pages.length-2];
+          prevPage.getData();
+        },1500)
       }else{
-        app.showToastC('发布成功',1500);
+        if(res.data && res.data.message){
+          app.showModalC(res.data.message); 
+        };        
       }
-      setTimeout(function(){
-        that.navigateBack();
-        let pages = getCurrentPages();    //获取当前页面信息栈
-        let prevPage = pages[pages.length-2];
-        prevPage.getData();
-      },1500)
+
+
     }).catch((err)=>{
       console.log(err)
     })

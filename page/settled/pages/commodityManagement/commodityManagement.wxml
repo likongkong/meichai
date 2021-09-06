@@ -28,7 +28,7 @@
     </view>
 
     <view class="orderBottomNavigation">
-        <view class="orderBottomNavEve" catchtap="commonBulletFrameFun" data-index='4'>添加</view>
+        <view class="orderBottomNavEve" style="background:#68B1ED;" catchtap="commonBulletFrameFun" data-index='4'>添加</view>
     </view>
 </view>
 
@@ -61,10 +61,10 @@
                     <view class="orderBottomButton"><button data-num='{{num}}' style='width:100%;height:100%;position:absolute;top:0;right:0;opacity:0;' open-type='share'></button>分享</view>
                 </block>
                 <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='3'>删除</view>
-                <!-- <block wx:if='{{itemStatus == 1}}'> -->
+                <block wx:if='{{itemStatus == 1}}'>
                     <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='1'>编辑</view>
-                <!-- </block>
-                <block wx:else>
+                </block>
+                <!-- <block wx:else>
                     <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='2'>销售效果</view>
                 </block> -->
                 

@@ -5,7 +5,7 @@
 <view class='box' style="{{tgabox?'position:fixed;top:0;left:0;right:0;bottom:0;':''}}{{isIphoneX?'padding-bottom:138rpx;':''}}">
     <view class='wdhead'> 
         <view style="position: relative;margin-bottom: 20rpx;">
-            <view class='personalhomepage' catchtap='personalhomepage'>个人主页</view>
+            <!-- <view class='personalhomepage' catchtap='personalhomepage'>个人主页</view> -->
             <view class='wdhl'>
                 <!-- bindtap="personaldata" -->
             <view class='wdhlimg'>
@@ -149,7 +149,7 @@
         </view>
     </view>
     <!-- 品牌入驻 -->
-    <block wx:if="{{brandSettledStatus!=0}}">
+    <block wx:if="{{brandSettledStatus!=0 && isProduce}}">
         <view wx:if="{{!dataInfo.brandSettledLimit}}" class="whwdddw settled">
             <block wx:if="{{brandSettledStatus == 5 || brandSettledStatus == 6}}">
                 <block wx:if="{{brandSettledStatus == 6}}">

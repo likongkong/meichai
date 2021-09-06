@@ -487,7 +487,7 @@ Page({
 
     _this.data.pushWay = options.pushWay || 0;
     // 单独商家分享
-    // wx.hideShareMenu();
+    wx.hideShareMenu();
 
     wx.showLoading({
       title: '加载中...'
@@ -812,9 +812,9 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
           if (res.data.Info.infoActivity.joinMothed == "blindBox" && !res.data.Info.infoActivity.isCanOpenLotto) {
             wx.hideShareMenu();
           } else {
-            // wx.showShareMenu({
-            //   withShareTicket:true
-            // });
+            wx.showShareMenu({
+              withShareTicket:true
+            });
             wx.showShareMenu();
           }
 

@@ -41,7 +41,7 @@ Page({
     selectWordsData:[
       {'n':'全部',id:0},
       {'n':'秒杀商品',id:'-1'},
-      {'n':'抽选商品',id:5}
+      {'n':'抽选商品',id:4}
     ],
     screenWords:'筛选'
   },
@@ -477,9 +477,9 @@ Page({
       title = selectData.itemName || '你喜欢的潮玩都在这里！';
       onshareImg = selectData.itemImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg';
       if (selectData.itemType == '-1'){  // 正常商品
-        onshareUrl = "/page/component/pages/limitlottery/limitlottery?id=" + selectData.itemId;
-      }else if(selectData.itemType == 4){ // 抽选
         onshareUrl = '/pages/detailspage/detailspage?gid=' + selectData.itemId;
+      }else if(selectData.itemType == 4){ // 抽选
+        onshareUrl = "/page/component/pages/limitlottery/limitlottery?id=" + selectData.itemId;
       };      
     }
     return {

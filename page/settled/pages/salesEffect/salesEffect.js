@@ -16,6 +16,17 @@ Page({
     ordername:'',
     seckillOrDraw : 4, // -1 正常商品 4 抽选
     umid:1,
+    signaturePopUp:false
+  },
+  // 查看签号
+  signaturePopUpDis(e){
+    var num = e.currentTarget.dataset.type || e.target.dataset.num || 0;
+    this.signaturePopUpFun()
+  },
+  signaturePopUpFun(){
+    this.setData({
+      signaturePopUp:!this.data.signaturePopUp
+    })
   },
   seTabDataFun(e){
     var type = e.currentTarget.dataset.type || e.target.dataset.type || 0;
