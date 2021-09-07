@@ -1,0 +1,426 @@
+
+var Dec = require('../../../../common/public');//aes加密解密js
+var api = require("../../../../utils/api.js");
+const app = getApp();
+Page({
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    c_title: '全部IP',
+    c_arrow: true,
+    c_backcolor: '#ff2742',
+    statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
+    uid:'',
+    loginid:'',
+    ordername:'',
+    seckillOrDraw : 4, // -1 正常商品 4 抽选
+    umid:1,
+    brand_name:'',
+    brandwhole:[],
+    enlargez:-1110,
+    enlargeL:'',
+    
+    lastX: 0,
+    lastY: 0,
+    iftrue:true,
+
+
+
+    alpha: '',
+    windowHeight: '',
+
+
+
+
+  },
+
+
+
+  handlerAlphaTap(e) {
+    console.log(e)
+    let {ap} = e.target.dataset;
+    this.setData({alpha: ap});
+  },
+  touchMove(e) {
+    console.log(e)
+    console.log(this.offsetTop)
+    let {brandwhole} = this.data;
+    console.log(brandwhole)
+    console.log(this.data.alphabet)
+    let moveY = e.touches[0].clientY;
+    let rY = moveY - this.offsetTop;
+    if(rY >= 0) {
+      let index = Math.ceil((rY - this.apHeight)/ this.apHeight);
+      if(0 <= index < brandwhole.length) {
+        let nonwAp = brandwhole[index];
+        nonwAp && this.setData({alpha: nonwAp.alphabet});
+      } 
+    }
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  jumpsouchtem:function(w){
+    var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + id +"&settlement=1"
+    });
+  },
+
+  onFocus: function (w) {
+    this.setData({
+      brand_name:""
+    });
+  },
+  jumpsearch:function(){
+    this.brandWholeSeach();
+  },
+  // input 值改变
+  inputChange: function (e) {
+    this.setData({
+      brand_name: e.detail.value
+    });
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    var _this = this;
+    // wx.hideShareMenu();
+
+    // '已经授权'
+    _this.data.loginid = app.signindata.loginid;
+    _this.data.uid = app.signindata.uid;
+    // 判断是否登录
+    if (_this.data.loginid != '' && _this.data.uid != '') {
+      _this.onLoadfun();
+    } else {
+      app.signin(_this)
+    };
+
+
+    try {
+      var res = wx.getSystemInfoSync()
+      this.windowHeight = res.windowHeight
+      console.log(this.windowHeight)
+      this.apHeight = 16;
+      this.offsetTop = 80;
+      console.log(this.apHeight);
+      console.log(this.offsetTop)
+      this.setData({windowHeight: res.windowHeight + 'px'})
+    } catch (e) {
+      
+    }
+
+
+
+  },
+  onLoadfun(){
+    var _this = this;
+    _this.data.loginid = app.signindata.loginid;
+    _this.data.uid = app.signindata.uid;
+    _this.setData({
+      uid: app.signindata.uid,
+      avatarUrl: app.signindata.avatarUrl,
+      isProduce: app.signindata.isProduce,
+      isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
+    });
+
+    if(wx.getStorageSync('access_token')){
+      this.getData();
+    }else{
+      app.getAccessToken(_this.getData)
+    };
+    
+  },
+  // 获取数据
+  getData(num=1){
+     var _this = this;
+     this.brandWholeSeach()
+  },
+  brandWholeSeach(){
+    var _this = this;
+    console.log('mod=community&operation=allIps&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&searchValue='+_this.data.brand_name||'')
+    var qqq = Dec.Aese('mod=community&operation=allIps&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&searchValue='+_this.data.brand_name||'');
+    wx.showLoading({
+      title: '加载中...',
+      mask:true
+    })
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + qqq,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        wx.hideLoading()
+        console.log('全部品牌信息=====',res)
+        if (res.data.ReturnCode == 200) {
+          _this.setData({
+            brandwhole:res.data.List.brand || [], 
+          });
+        }else if(res.data.ReturnCode == 300){
+          _this.setData({
+            brandwhole: []
+          });    
+          app.showToastC('暂无更多数据')  
+        }else{
+          app.showToastC(res.data.Msg)  
+        };
+      }
+    });
+  },
+
+  // 关注 和 点赞 函数
+  followfun: function(w) {
+    var _this = this;
+    var index = w.currentTarget.dataset.index || w.target.dataset.index || 0;
+    var num = w.currentTarget.dataset.num || w.target.dataset.num || 0;
+    var type = w.currentTarget.dataset.type || w.target.dataset.type || 0;
+    var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
+    console.log('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id)
+    var qqq = Dec.Aese('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id);
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + qqq,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        console.log('关注接口=====',res)
+        if (res.data.ReturnCode == 200) {
+          if(type == 0){
+            var istype = w.currentTarget.dataset.istype || w.target.dataset.istype || false;
+            _this.setData({
+              ['brandwhole['+index+'].listBrand['+ num +'].isFocus']:!istype
+            }); 
+          }
+
+        };
+      }
+    });
+  },
+  jumpLetter(w){
+    console.log('w=========',w)
+    var _this = this;
+    var index = w.currentTarget.dataset.index || w.target.dataset.index || 0;
+    var num = w.currentTarget.dataset.num || w.target.dataset.num || 0;
+    
+    this.setData({
+      enlargez:w.currentTarget.offsetTop - 25 + 9,
+      enlargeL:index,
+      num
+    })
+    var query = wx.createSelectorQuery();
+    query.select('#jump' + index).boundingClientRect();
+    query.selectViewport().scrollOffset();
+    query.exec(function(res) {
+      if (res && res[0] && res[1]) {
+        wx.pageScrollTo({
+           scrollTop:res[0].top+res[1].scrollTop-app.signindata.statusBarHeightMc||99,
+           duration:300,
+        })
+      }
+    });   
+  },
+
+  // touchMove(e) {
+  //   console.log(e)
+  //   console.log(this.offsetTop)
+  //   let {brandwhole} = this.data;
+  //   console.log(brandwhole)
+  //   console.log(this.data.enlargeL)
+  //   let moveY = e.touches[0].clientY;
+  //   let rY = moveY - this.offsetTop;
+  //   if(rY >= 0) {
+  //     let index = Math.ceil((rY - this.apHeight)/ this.apHeight);
+  //     if(0 <= index < brandwhole.length) {
+  //       let nonwAp = brandwhole[index];
+  //       nonwAp && this.setData({alpha: nonwAp.enlargeL});
+  //     } 
+  //   }
+  // },
+
+
+
+  // touchMove(event){
+  //   var _this = this;
+  //   console.log(event)
+  //   // let now = new Date().getTime();
+  //   // if (now - timestamp < 50) {
+  //   //   return;
+  //   // }
+
+  //   if(this.data.iftrue){
+  //     this.data.iftrue = false
+  //      setTimeout(()=>{
+          
+          
+  //         var num = _this.data.num;
+  //         var brandwhole = _this.data.brandwhole;
+  //         var index = _this.data.enlargeL;
+      
+  //         // console.log(event)
+  //         let currentX = event.touches[0].pageX
+  //         let currentY = event.touches[0].pageY
+  //         let tx = currentX - _this.data.lastX
+  //         let ty = currentY - _this.data.lastY
+  //         var text = ''
+  //         //上下方向滑动
+  //         console.log('=============ty',ty)
+  //         if (ty < 0){
+  //           // text = "向上滑动"
+  //           text = true
+  //           if(num >= 0){
+  //             index = brandwhole[num].initial;
+  //             _this.data.num =  num - 1;
+  //             console.log(_this.data.num,'=============')
+  //           }else{
+  //             num = 0;
+  //             index = brandwhole[num].initial;
+  //           };
+  //         } else if (ty > 0){
+  //           // text = "向下滑动"
+  //           text = true
+  //           if(num >= brandwhole.length-1){
+  //             index = brandwhole[num].initial;
+  //             this.data.num =  num + 1
+  //           }else{
+  //             num = brandwhole.length-1;
+  //             index = brandwhole[num].initial;
+  //           };
+  //         }
+  //         console.log(num,index)
+  //         wx.createSelectorQuery().select('#qq'+index).boundingClientRect(function(rect){
+  //             _this.setData({
+  //               enlargez:rect.top - 25 + 9,
+  //               enlargeL:index,
+  //             })
+      
+  //             // rect.id // 节点的ID
+  //             // rect.dataset // 节点的dataset
+  //             // rect.left // 节点的左边界坐标
+  //             // rect.right // 节点的右边界坐标
+  //             // rect.top // 节点的上边界坐标
+  //             // rect.bottom // 节点的下边界坐标
+  //             // rect.width // 节点的宽度
+  //             // rect.height // 节点的高度
+  //         }).exec()
+      
+  //         var query = wx.createSelectorQuery();
+  //         query.select('#jump' + index).boundingClientRect();
+  //         query.selectViewport().scrollOffset();
+  //         query.exec(function(res) {
+  //           if (res && res[0] && res[1]) {
+  //             wx.pageScrollTo({
+  //               scrollTop:res[0].top+res[1].scrollTop-app.signindata.statusBarHeightMc||99,
+  //               duration:300,
+  //             })
+  //             _this.data.iftrue = true
+  //           }
+  //         }); 
+      
+  //         //将当前坐标进行保存以进行下一次计算
+  //         _this.data.lastX = currentX
+  //         _this.data.lastY = currentY
+
+
+
+
+
+
+  //      },200)
+  //   }
+
+
+
+  // },
+  touchendFn(){
+    console.log('结束')
+    this.setData({
+      enlargez:-199999
+    })
+  },
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+    
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+    
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+    
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+    app.downRefreshFun(() => {
+      this.getData()
+    })   
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function (options) {
+    var _this = this;
+
+    var indexShare = app.signindata.indexShare || [];
+    var indexShareNum = Math.floor(Math.random() * indexShare.length) || 0;
+    var indexShareImg = '';
+    if(indexShare.length!=0 && indexShare[indexShareNum]){
+      indexShareImg = indexShare[indexShareNum]+'?time=' + Date.parse(new Date());
+    };
+    var title = app.signindata.titleShare?app.signindata.titleShare:'你喜欢的潮玩都在这里！'
+    var onshareUrl = 'pages/index/index';
+    var onshareImg = indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg';
+
+    return {
+      title: title ,
+      path: onshareUrl,
+      imageUrl:onshareImg,
+      success: function (res) {}
+    };
+
+  },
+
+})

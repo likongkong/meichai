@@ -35,7 +35,7 @@
 <template name='orderCommon'>
    <view class="orderBox">
        <view>
-            <view class="orderBoxContent" catchtap="publicJump" data-id='{{itemId}}' data-istype='{{itemType}}'>
+            <view class="orderBoxContent" catchtap="{{itemStatus!=4?'publicJump':''}}" data-id='{{itemId}}' data-istype='{{itemType}}'>
                 <image class="orderBoxContentImg" src="{{itemImg}}" mode="aspectFit"></image>
                 <view class="orderBoxContentRight">
                     <view class="obcrTop" style="color:#90D2D6;">
@@ -182,9 +182,23 @@
 </view>
 
 <!-- 选择发布/发售类型弹框-->
-<view class="popMask" catchtouchmove="true" catchtap="toggleAddNewEventMask" wx:if="{{isAddNewEventMask}}">
+<view class="popMask" catchtouchmove="true" catchtap="toggleAddNewEventMask" wx:if="{{isAddNewEventMask}}" style="background: rgba(0,0,0,.7);">
     <view class="addNewEventBox" catchtap="true">
-        <view class="addNewEventContent">
+            <view class="releaseSale">
+                <image class="releaseSaleImg" src="https://www.51chaidan.com/images/brandInfoIcon/sellBackground1.png"  mode="widthFix"></image>
+                <view class="releaseSalePostion">
+                    <view  class="releaseSaleHead">选择添加商品类型</view>
+                    <view class="addNewEventContent">
+                        <image class="releaseSaleImg" data-type="9040" catchtap="jumpoffering" style="margin-left:38rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/seckillButton.png"  mode="widthFix"></image>
+                        <image class="releaseSaleImg" data-type="9039" catchtap="jumpoffering" style="margin-right:38rpx;"  src="https://www.51chaidan.com/images/brandInfoIcon/lottoButton.png"  mode="widthFix"></image>
+                        
+                    </view>
+                </view>
+            </view>
+
+
+
+        <!-- <view class="addNewEventContent">
             <view class="createItem" data-type="9039" catchtap="jumpoffering">
                 <view>开启抽选</view>
                 <view class="lastChild" style="background:#68B1ED;">发布抽选</view>
@@ -193,7 +207,7 @@
                 <view>开启秒杀</view>
                 <view class="lastChild" style="background:#6FD375;">发布秒杀</view>
             </view>
-        </view>
+        </view> -->
         <image class="popMaskbutton" catchtap="toggleAddNewEventMask" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="aspectFit"></image>
     </view>
 </view>

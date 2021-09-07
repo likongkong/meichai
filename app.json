@@ -173,6 +173,7 @@
         "pages/commodityManagement/commodityManagement",
         "pages/brandManagement/brandManagement",
         "pages/salesEffect/salesEffect",
+        "pages/allBrandsIp/allBrandsIp",
         "pages/fieldGuideList/fieldGuideList"
       ]
     }

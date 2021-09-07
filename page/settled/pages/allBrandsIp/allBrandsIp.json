@@ -1,0 +1,7 @@
+{
+  "backgroundColor": "#ffffff",
+  "usingComponents": {
+    "t_f": "/pages/topfunction/topfunction",
+    "bnavigation": "/pages/bottomComponent/bottomComponent"
+  }
+}

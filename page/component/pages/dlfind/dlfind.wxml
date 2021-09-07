@@ -474,37 +474,6 @@
 <bnavigation isProduce='{{isProduce}}' dlfind='{{true}}' isIphoneX='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
 
 
-<!-- <image src='https://www.51chaidan.com/images/spread/dial/fork.png' style='display:block;width:50rpx;height:50rpx;margin:49rpx auto 0;position: relative;' catchtap='dlhintfun'></image> -->
-<!-- 领奖提示 -->
-<view style='position:fixed;width:100%;height:100%;top:0;left:0;z-index:9999;' wx:if='{{brandWhole}}'  catchtouchmove="true">
-  <view style='width:100%;height:100%;background:#000;opacity: 0.5;' catchtap='brandWholeFun'></view>
-  <view style='width:100%;height:1260rpx;position:absolute;left:0;bottom:0;z-index:2;border-radius:10rpx;background:#fff;'>
-      <scroll-view scroll-y="true" class="dlfindIpscroll">
-        <view class="elsearch">
-          <view class="elsearchch">
-              <!-- <image class="elserarchimgNew" catchtap="jumpsearch" src="https://www.51chaidan.com/images/toyCabinet/search.png"></image> -->
-              <input class="elinputbutNew" bindfocus='onFocus' placeholder='请输入品牌名称搜索' bindinput="inputChange" bindconfirm="jumpsearch" value="{{brand_name}}"></input>
-              <view class="elserbotom" catchtap="brandWholeSeach" style="background:#fff;color:#101010;">搜索</view>
-          </view>
-        </view>
-        <block wx:for='{{brandwhole}}' wx:key='key' wx:if='{{item.listBrand && item.listBrand.length != 0}}'>
-          <view class="dlfindIpEveLetter">{{item.initial}}</view>
-          <view class="dlfindIpEveBox">
-              <view class="ocamensweve" wx:for='{{item.listBrand}}' wx:key='key' wx:for-item='w' catchtap="jumpsouchtem" data-id='{{w.brandId}}'>
-                  <image class="ocamensweveimg" style="{{w.brandId==brand_id?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{w.brandLogo}}"></image>
-                  <image class='dlfchrtopimgipNew' wx:if='{{w.isNewBrand}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/newIcon.png'></image>
-                  <image class='dlfchrtopimgip' wx:if='{{w.isAuth}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/approveIcon.png'></image>
-                  <view class="ocamenswevename specialellipsis" style="{{w.brandId==brand_id?'color:#f19207;':''}}">{{w.brandName}}</view>
-              </view>  
-          </view>
-        </block>
-
-      </scroll-view>
-    
-    
-  </view>
-</view>
-
 <!-- 输入框 -->
 <view class='inputbox' wx:if='{{inputbox}}'>
   <view class='inputboxbg' catchtap='inputboxbgfun'></view>
@@ -520,20 +489,29 @@
 
 <view class="brandManageWrapButton" wx:if='{{brandSettledLimit}}' catchtap="toggleAddNewEventMask">发布/发售</view>
 <!-- 选择发布/发售类型弹框-->
-<view class="popMask" catchtouchmove="true" catchtap="toggleAddNewEventMask" wx:if="{{isAddNewEventMask}}">
+<view class="popMask" catchtouchmove="true" catchtap="toggleAddNewEventMask" wx:if="{{isAddNewEventMask}}" style="background: rgba(0,0,0,.7);">
     <view class="addNewEventBox" catchtap="true">
-        <view class="addNewEventContent">
-            <view class="createItem">
-                <view>开启图鉴介绍</view>
-                <view class="lastChild" data-type="9033" catchtap="jumpoffering" style="background:#68B1ED;">发布图鉴</view>
-                <!-- <view class="lastChild" data-type="9039" catchtap="jumpoffering" style="background:#68B1ED;">发布抽选</view> -->
-            </view>
-            <view class="createItem">
-                <view>让内容和用户连接</view>
-                <view class="lastChild" data-type="9032" catchtap="jumpoffering" style="background:#6FD375;">发布动态</view>
-                <!-- <view class="lastChild" data-type="9040" catchtap="jumpoffering" style="background:#6FD375;">发布秒杀</view> -->
-            </view>
-        </view>
+          <view class="releaseSale">
+              <image class="releaseSaleImg" src="https://www.51chaidan.com/images/brandInfoIcon/sellBackground.png"  mode="widthFix"></image>
+
+                <view class="releaseSalePostion">
+                    <view  class="releaseSaleHead">选择发布/发售类型</view>
+                    <view class="addNewEventContent">
+                        <image class="releaseSaleImg" data-type="9040" catchtap="jumpoffering" style="margin-left:38rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/seckillButton.png"  mode="widthFix"></image>
+                        <image class="releaseSaleImg" data-type="9039" catchtap="jumpoffering" style="margin-right:38rpx;"  src="https://www.51chaidan.com/images/brandInfoIcon/lottoButton.png"  mode="widthFix"></image>
+                        
+                    </view>
+
+                    <view class="addNewEventContent">
+                        <image class="releaseSaleImg" data-type="9033" catchtap="jumpoffering" style="margin-left:38rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/illustratedButton.png"  mode="widthFix"></image>
+                        <image class="releaseSaleImg" data-type="9032" catchtap="jumpoffering" style="margin-right:38rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/dynamicButton.png"  mode="widthFix"></image>
+                        
+                    </view>
+                </view>
+
+
+
+          </view>
         <image class="popMaskbutton" catchtap="toggleAddNewEventMask" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="aspectFit"></image>
     </view>
 </view>
