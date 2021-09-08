@@ -36,9 +36,9 @@ Page({
   },
   comjump(e){
     var id = e.currentTarget.dataset.id || e.target.dataset.id || 0;
-    wx.navigateTo({    
-      url: "/page/component/pages/orderdetails/orderdetails?oid=" + id
-    })
+    wx.navigateTo({
+      url: "/page/settled/pages/businessOrderDetails/businessOrderDetails?orderid="+id
+    });
   },
   // 查看签号
   signaturePopUpDis(e){

@@ -66,7 +66,7 @@
                         <view class="emlhltbottom specialellipsis">{{item.userMobile}}</view>
                     </view>
                 </view>
-                <view class="emlhright" catchtap="comjump" data-id='{{item.orderId}}'>查看订单</view>
+                <view class="emlhright" catchtap="comjump" wx:if='{{item.orderId}}' data-id='{{item.orderId}}'>查看订单</view>
                 <view class="emlhright" wx:if='{{itemType == 4 && umid==1}}' data-num='{{index}}' catchtap="signaturePopUpDis" style="right:140rpx;">查看签号</view>
             </view>
         </block>
