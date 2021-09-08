@@ -87,6 +87,37 @@ Page({
         borderbottom1:'hide'
       },
     ],
+    IPData:[{
+        isRequired:true,
+        type:'text',
+        subtitle:'IP名称',
+        placeholder:'请输入IP名称',
+        value:'',
+        name:'ipName'
+      },{
+        isRequired:true,
+        type:'uploadImg',
+        subtitle:'IP logo（建议上传比例1:1）',
+        name:'ipLogo',
+        src:'',
+        storagelocation:'brandinfo/logo'
+      },{
+        isRequired:false,
+        type:'uploadImg',
+        subtitle:'IP 形象图（建议上传比例16:9）',
+        name:'ipImage',
+        src:'',
+        storagelocation:'brandinfo/banner'
+      },{
+        isRequired:false,
+        type:'textarea',
+        subtitle:'IP介绍',
+        placeholder:'请输入IP介绍',
+        value:'',
+        name:'introduce',
+        borderbottom1:'hide'
+      },
+    ],
     obj:{},
     num:1,  //进度
     id:0,
@@ -100,18 +131,13 @@ Page({
     var _this = this;
     this.data.uid = app.signindata.uid;
     this.data.loginid = app.signindata.loginid;
+    console.log(options)
     this.setData({
       num:options.num,
+      msg:options.msg,
+      from:options.from || '',
       id:options.id || 0
     })
-    if(options.num==2 || options.num==4){
-      this.getBrandInfo()
-    }
-    if(options.num==4){
-      this.setData({
-        brandSettledReturnMsg:options.msg
-      })
-    }
     // 获取系统信息
     wx.getSystemInfo({
       success: (res) => {
@@ -132,6 +158,14 @@ Page({
     _this.data.loginid = app.signindata.loginid;
     _this.data.uid = app.signindata.uid;
     console.log(_this.data.loginid,_this.data.uid)
+    if(_this.data.num==2 || _this.data.num==4){
+      this.getBrandInfo()
+    }
+    if(_this.data.num==4){
+      this.setData({
+        brandSettledReturnMsg:_this.data.msg
+      })
+    }
   },
 
   /**
@@ -194,7 +228,7 @@ Page({
   comjumpwxnav(e){
     let type = e.currentTarget.dataset.type;
     let num = e.currentTarget.dataset.num;
-    let whref = `id=${this.data.id}&num=${num}`
+    let whref = `id=${this.data.id}&num=${num}&from=${this.data.from}`
     app.comjumpwxnav(type,whref)
   },
   // 获取表单数据
@@ -231,17 +265,26 @@ Page({
             ipImage:brandInfo.ip_img,
             introduce:brandInfo.ip_introduce,
           };
-          this.setData({
-            [`enterpriseData[1].value`]:brandInfo.firm_name,
-            [`enterpriseData[2].value`]:brandInfo.firm_linkman,
-            [`enterpriseData[3].value`]:brandInfo.firm_tel,
-            [`enterpriseData[4].value`]:brandInfo.wechat_number,
-            [`enterpriseData[5].src`]:brandInfo.certificate_img,
-            [`enterpriseData[7].value`]:brandInfo.ip_name,
-            [`enterpriseData[8].src`]:brandInfo.ip_logo,
-            [`enterpriseData[9].src`]:brandInfo.ip_img,
-            [`enterpriseData[10].value`]:brandInfo.ip_introduce,
-          })
+          if(this.data.from=='zhuanqu'){
+            this.setData({
+              [`IPData[0].value`]:brandInfo.ip_name,
+              [`IPData[1].src`]:brandInfo.ip_logo,
+              [`IPData[2].src`]:brandInfo.ip_img,
+              [`IPData[3].value`]:brandInfo.ip_introduce,
+            })
+          }else{
+            this.setData({
+              [`enterpriseData[1].value`]:brandInfo.firm_name,
+              [`enterpriseData[2].value`]:brandInfo.firm_linkman,
+              [`enterpriseData[3].value`]:brandInfo.firm_tel,
+              [`enterpriseData[4].value`]:brandInfo.wechat_number,
+              [`enterpriseData[5].src`]:brandInfo.certificate_img,
+              [`enterpriseData[7].value`]:brandInfo.ip_name,
+              [`enterpriseData[8].src`]:brandInfo.ip_logo,
+              [`enterpriseData[9].src`]:brandInfo.ip_img,
+              [`enterpriseData[10].value`]:brandInfo.ip_introduce,
+            })
+          }
         }else{
           app.showToastC(res.data.Msg,2000);
         }

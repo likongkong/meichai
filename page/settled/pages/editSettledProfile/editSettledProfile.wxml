@@ -6,7 +6,7 @@
         <settledForm 
             id="settledForm"
             statusBarHeightMc="{{statusBarHeightMc}}"
-            list="{{enterpriseData}}"
+            list="{{from=='zhuanqu'?IPData:enterpriseData}}"
             bind:bindchange="bindchange"
             num="{{num}}"
             isEdit="true"

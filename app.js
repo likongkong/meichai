@@ -1086,8 +1086,15 @@ App({
       wx.navigateTo({
         url: `/page/settled/pages/brandManagement/brandManagement`
       });      
+    } else if (item_type == 9043) {   // 编辑企业信息
+      wx.navigateTo({
+        url: `/page/settled/pages/editEnterpriseInfo/editEnterpriseInfo?${whref}`
+      });      
+    } else if (item_type == 9044) {   // 新增ip
+      wx.navigateTo({
+        url: `/page/settled/pages/addIp/addIp`
+      });      
     }
-    
   },
   // 中奖提示倒计时
   winningtheprizetime: function (_this) {

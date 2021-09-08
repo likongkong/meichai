@@ -1,4 +1,3 @@
-
 var Dec = require('../../../../common/public');//aes加密解密js
 const app = getApp();
 Page({
@@ -10,6 +9,8 @@ Page({
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
+    uid:'',
+    loginid:'',
     enterpriseData:[
       {
         type:'h1',
@@ -83,6 +84,37 @@ Page({
         borderbottom1:'hide'
       },
     ],
+    IPData:[{
+        isRequired:true,
+        type:'text',
+        subtitle:'IP名称',
+        placeholder:'请输入IP名称',
+        value:'',
+        name:'ipName'
+      },{
+        isRequired:true,
+        type:'uploadImg',
+        subtitle:'IP logo（建议上传比例1:1）',
+        name:'ipLogo',
+        src:'',
+        storagelocation:'brandinfo/logo'
+      },{
+        isRequired:false,
+        type:'uploadImg',
+        subtitle:'IP 形象图（建议上传比例16:9）',
+        name:'ipImage',
+        src:'',
+        storagelocation:'brandinfo/banner'
+      },{
+        isRequired:false,
+        type:'textarea',
+        subtitle:'IP介绍',
+        placeholder:'请输入IP介绍',
+        value:'',
+        name:'introduce',
+        borderbottom1:'hide'
+      },
+    ],
     obj:{},
     num:1,  //进度
     brandInfo:{}, //品牌信息
@@ -92,15 +124,27 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var _this = this;
     this.data.uid = app.signindata.uid;
     this.data.loginid = app.signindata.loginid;
     this.setData({
       num:options.num,
+      from:options.from || '',
       id:options.id || 0
     })
+    // 判断是否登录
+    if (_this.data.loginid != '' && _this.data.uid != '') {
+      _this.onLoadfun();
+    } else {
+      app.signin(_this)
+    }
+  },
+  onLoadfun(){
+    var _this = this;
+    _this.data.loginid = app.signindata.loginid;
+    _this.data.uid = app.signindata.uid;
     this.getBrandInfo()
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -192,18 +236,26 @@ Page({
             ipImage:brandInfo.ip_img,
             introduce:brandInfo.ip_introduce,
           };
-          this.setData({
-            [`enterpriseData[1].value`]:brandInfo.firm_name,
-            [`enterpriseData[2].value`]:brandInfo.firm_linkman,
-            [`enterpriseData[3].value`]:brandInfo.firm_tel,
-            [`enterpriseData[4].value`]:brandInfo.wechat_number,
-            [`enterpriseData[5].src`]:brandInfo.certificate_img,
-            [`enterpriseData[7].value`]:brandInfo.ip_name,
-            [`enterpriseData[8].src`]:brandInfo.ip_logo,
-            [`enterpriseData[9].src`]:brandInfo.ip_img,
-            [`enterpriseData[10].value`]:brandInfo.ip_introduce,
-          })
-
+          if(this.data.from=='zhuanqu'){
+            this.setData({
+              [`IPData[0].value`]:brandInfo.ip_name,
+              [`IPData[1].src`]:brandInfo.ip_logo,
+              [`IPData[2].src`]:brandInfo.ip_img,
+              [`IPData[3].value`]:brandInfo.ip_introduce,
+            })
+          }else{
+            this.setData({
+              [`enterpriseData[1].value`]:brandInfo.firm_name,
+              [`enterpriseData[2].value`]:brandInfo.firm_linkman,
+              [`enterpriseData[3].value`]:brandInfo.firm_tel,
+              [`enterpriseData[4].value`]:brandInfo.wechat_number,
+              [`enterpriseData[5].src`]:brandInfo.certificate_img,
+              [`enterpriseData[7].value`]:brandInfo.ip_name,
+              [`enterpriseData[8].src`]:brandInfo.ip_logo,
+              [`enterpriseData[9].src`]:brandInfo.ip_img,
+              [`enterpriseData[10].value`]:brandInfo.ip_introduce,
+            })
+          }
         }else{
           app.showToastC(res.data.Msg,2000);
         }
