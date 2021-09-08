@@ -130,7 +130,7 @@ page{
 }
 .itemContent image{
   width: 100%;
-  height: auto;
+  height: 400rpx;
   border-radius: 20rpx;
   margin-top: 26rpx;
 }

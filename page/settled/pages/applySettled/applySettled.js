@@ -298,6 +298,7 @@ Page({
   },
   //提交审核
   submitAudit(){
+    let _this = this;
     let obj = this.data.obj;
     let phoneNum = /^1[3456789]\d{9}$/;
 
@@ -372,6 +373,11 @@ Page({
                     delta: 2
                   })
                 }else{
+                  if(_this.data.from=='zhuanqu'){
+                    let pages = getCurrentPages();
+                    let prevPage = pages[pages.length -2];//上一页
+                    prevPage.getData();
+                  }
                   wx.navigateBack({
                     delta: 1
                   })

@@ -19,7 +19,7 @@
 }
 .card{
   width: 98%;
-  background: #66C797;
+  background-image: linear-gradient(to top right, #65C797, #4EE499);
   margin: 0 auto;
   border-radius: 20rpx;
   /* padding: 54rpx 0 24rpx 0; */

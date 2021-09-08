@@ -41,7 +41,7 @@
               </view>
             </view>
             <view class="itemContent">
-              <image src="{{item.ip_img}}" mode="widthFix"></image>
+              <image src="{{item.ip_img}}" mode="aspectFill"></image>
             </view>
           </view>
         </block>
@@ -53,14 +53,19 @@
                 <view class="IPinfo1">
                   <view class="inreview">
                     <text>{{item.ip_name}}</text>
-                    <text>入驻审核中，查看进度</text>
+                    <block wx:if="{{item.status == 0}}">
+                      <text>入驻审核中，查看进度</text>
+                    </block>
+                    <block wx:else>
+                      <text style="color:#FF4858;">审核未通过，查看原因</text>
+                    </block>
                   </view>
                   <text>{{item.showDate}}</text>
                 </view>
               </view>
             </view>
             <view class="itemContent">
-              <image src="{{item.ip_img}}" mode="widthFix"></image>
+              <image src="{{item.ip_img}}" mode="aspectFill"></image>
             </view>
           </view>
         </block>
