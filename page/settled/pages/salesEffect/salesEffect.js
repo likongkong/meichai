@@ -275,7 +275,7 @@ Page({
    */
   onShow: function () {
 
-    if(this.data.timeaddis){
+    if(this.data.timeaddis && this.data.itemType == -1){
       this.countdowntime(this.data.timeaddis)
     }
     

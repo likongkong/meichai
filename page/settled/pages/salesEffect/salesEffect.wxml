@@ -54,7 +54,7 @@
     <view class="seTop">
         <view class="seCenterTitle">
             <view class="seTabData {{umid==0?'seTabDataEve':''}}" catchtap="seTabDataFun" data-type='0'>所有参与用户</view>
-            <view class="seTabData {{umid==1?'seTabDataEve':''}}" style="margin-left:200rpx;" catchtap="seTabDataFun" data-type='1' wx:if='{{itemType == 4}}'>中奖名单</view>
+            <view class="seTabData {{umid==1?'seTabDataEve':''}}" style="margin-left:200rpx;" catchtap="seTabDataFun" data-type='1' wx:if='{{itemType == 4 && salesEffectInfo.summary.status == 3}}'>中奖名单</view>
         </view>
         <view class="elsearch marginAuto" wx:if='{{false}}'>
             <image class="elserarchimg" catchtap="jumpsearch" src="https://www.51chaidan.com/images/toyCabinet/search.png"></image>
@@ -95,12 +95,15 @@
     <view class="orderMangAddress" catchtap="true">
         <view class="orderMangTipTop">查看签号</view>
         <view class="orderMangTipCenterEve">
-            <view class="orderMangChildElement" style="width:45%;">手机号</view>
-            <view class="orderMangChildElement" style="width:55%;">身份证号</view>
+            <block wx:if='{{selectData.userMobile}}'>
+                <view class="orderMangChildElement" style="width:45%;">手机号</view>
+                <view class="orderMangChildElement" style="width:55%;">身份证号</view>
+            </block>
+
         </view>
         <scroll-view scroll-y="true" style="width:100%;height:300rpx;margin-bottom:20rpx">
                 <view class="orderMangTipCenterEve">
-                    <view class="orderMangChildElement" style="width:45%;">{{selectData.userMobile}}</view>
+                    <view class="orderMangChildElement" wx:if='{{selectData.userMobile}}' style="width:45%;">{{selectData.userMobile}}</view>
                     <view class="orderMangChildElement" style="width:55%;">{{selectData.lotto}}</view>
                 </view>
         </scroll-view>
@@ -114,7 +117,7 @@
 
 </view>
 
-<view class="orderBottomNavigation" wx:if='{{itemType == 4 }}'>
+<view class="orderBottomNavigation" wx:if='{{itemType == 4 && salesEffectInfo.summary.status == 3}}'>
     <view class="orderBottomNavEve bottomButComWidth" catchtap="lotteryNumberFun">开奖签号（{{salesEffectInfo.summary.quota}}）</view>
 </view>
 
