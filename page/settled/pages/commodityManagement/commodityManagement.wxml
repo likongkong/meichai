@@ -64,9 +64,9 @@
                 <block wx:if='{{itemStatus == 1}}'>
                     <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='1'>编辑</view>
                 </block>
-                <!-- <block wx:else>
+                <block wx:else>
                     <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='2'>销售效果</view>
-                </block> -->
+                </block>
                 
                 
             </view>

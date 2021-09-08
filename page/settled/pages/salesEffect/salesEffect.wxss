@@ -91,6 +91,7 @@ page{
   padding: 20rpx;
   height: 90rpx;
   position: relative;
+  border-bottom: 2rpx solid #fff;
 }
 .emlhleft {
   width: 500rpx;
@@ -99,7 +100,7 @@ page{
   position: relative;
 }
 .emlhltxt{
-  width: 395rpx;
+  width: 380rpx;
   height: 90rpx;
   float: left;
   margin-left: 15rpx;
@@ -184,9 +185,52 @@ page{
 
 
 
+.orderBottomNavigation{
+  width: 100%;
+  display: flex;
+  justify-content:center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 12;
+  height: 120rpx;
+}
 
+.orderBottomNavEve{
+  width: 500rpx;
+  height: 68rpx;
+  line-height: 68rpx;
+  text-align: center;
+  color: #fff;
+  background: #90D2D6;
+  font-size: 24rpx;
+  border-radius: 10rpx;
+  display: inline-block;
+  vertical-align: top;
+}
 
-
+.lotteryNumber{
+  width: 100%;
+  background:#fff;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+.lotteryNumberBut{
+  border: 2rpx solid #90D2D6;
+  color: #90D2D6;
+  width: 500rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 26rpx;
+  margin: auto;
+  text-align: center;
+  border-radius: 10rpx;
+}
+.scroll-warp{
+  width: 100%;
+  margin: 0 0 20rpx 0;
+}
 
 
 

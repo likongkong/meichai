@@ -1,6 +1,7 @@
 
 var Dec = require('../../../../common/public');//aes加密解密js
 var api = require("../../../../utils/api.js");
+var utils = require("../../../../utils/util.js");
 const app = getApp();
 Page({
   /**
@@ -14,13 +15,38 @@ Page({
     uid:'',
     loginid:'',
     ordername:'',
-    seckillOrDraw : 4, // -1 正常商品 4 抽选
-    umid:1,
-    signaturePopUp:false
+    itemType : 4, // -1 正常商品 4 抽选
+    umid:0,
+    signaturePopUp:false,
+    nodataiftr:false,
+    salesEffectInfo:'',
+    salesEffectList:[],
+    lotteryNumberList:[],
+    lotteryNumberIs:false
+
+  },
+  lotteryNumberFun(){
+    if(!this.data.lotteryNumberIs && this.data.lotteryNumberList.length==0){
+       this.getInfo();
+    };
+    this.setData({
+      lotteryNumberIs:!this.data.lotteryNumberIs
+    })
+    
+  },
+  comjump(e){
+    var id = e.currentTarget.dataset.id || e.target.dataset.id || 0;
+    wx.navigateTo({    
+      url: "/page/component/pages/orderdetails/orderdetails?oid=" + id
+    })
   },
   // 查看签号
   signaturePopUpDis(e){
-    var num = e.currentTarget.dataset.type || e.target.dataset.num || 0;
+    var num = e.currentTarget.dataset.num || e.target.dataset.num || 0;
+    var salesEffectList = this.data.salesEffectList || [];
+    this.setData({
+      selectData:salesEffectList[num]
+    })
     this.signaturePopUpFun()
   },
   signaturePopUpFun(){
@@ -33,7 +59,54 @@ Page({
     this.setData({
       umid:type
     })
+    this.getData();
   },
+
+  getInfo(){
+    var _this = this;
+    wx.showLoading({ title: '加载中...'})
+    var q = Dec.Aese('mod=lotto&operation=lottoList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid +'&id=' +_this.data.itemId)
+    wx.request({
+      url: app.signindata.comurl + 'spread.php'+q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('详情数据======',res)
+        // 刷新完自带加载样式回去
+        wx.stopPullDownRefresh();
+        wx.hideLoading();
+        if (res.data.ReturnCode == 200) {
+        
+          _this.setData({
+            lotteryNumberList:res.data.List.winnerLotto || false
+          })
+
+          // var ticket = res.data.List.ticket;
+          // for(var i=0;i<ticket.length;i++){
+          //   ticket[i].actualidcard = ticket[i].idcard;
+          //   ticket[i].idcard = _this.plusXing(ticket[i].idcard,4,4);
+          //   ticket[i].consignee = _this.plusXing(ticket[i].consignee,1,0);
+          //   ticket[i].mobile = _this.plusXing(ticket[i].mobile,3,4);
+          // }
+          // _this.setData({
+          //   subscribedata:res.data.Info.subscribe,
+          //   listData:ticket
+          // });  
+          // if(res.data.List.activity.length == 0 && _this.data.page == 0){
+          //   _this.setData({ nodata : true})
+          // }else{
+          //   let alldata = [..._this.data.datalist,...res.data.List.activity];
+          //   // console.log(alldata)
+          //   _this.setData({datalist : alldata,rewardswiperData:res.data.List.topicActivity,consumemessageData:res.data.List.record,classifyArr:res.data.List.classifyList,countWelfare:res.data.Info.countWelfare})
+          //   _this.setData({
+          //     isredpacket:true
+          //   })
+          // }
+        }
+      }
+    }); 
+  },
+
   // input 值改变
   inputChange: function (e) {
     this.setData({
@@ -56,10 +129,16 @@ Page({
   onLoad: function (options) {
     var _this = this;
     // wx.hideShareMenu();
-
+    console.log(options)
     // '已经授权'
     _this.data.loginid = app.signindata.loginid;
     _this.data.uid = app.signindata.uid;
+    _this.setData({
+      itemType : options.itemtype || '',
+      itemId : options.itemid || '',
+      windowHeight: app.signindata.windowHeight - wx.getStorageSync('statusBarHeightMc')||0,
+    })
+
     // 判断是否登录
     if (_this.data.loginid != '' && _this.data.uid != '') {
       _this.onLoadfun();
@@ -91,44 +170,35 @@ Page({
   getData(num=1){
      var _this = this;
 
-    // if (num==1){
-    //   _this.setData({countOrder:0,page : 1,nodataiftr:false ,order : []});
-    // }else{
-    //   var pagenum = _this.data.page;
-    //   _this.data.page = ++pagenum;
-    // };
-    //  api.settledGoodsList({
-    //    'searchValue':_this.data.ordername,
-    //    'goodsStatus':_this.data.centerIndex,
-    //    'brandId':_this.data.brandid || 0,
-    //    'pageId':_this.data.page,
-    //    'goodsType':_this.data.selectid
-    //  }).then((res) => {
-    //   console.log('列表数据=======',res)
-    //   _this.setData({nodataiftr:true})
-    //   if (res.data.status_code == 200) {
-    //       var order = res.data.data.List.item || [];
-    //       if(order && order.length ==0){
-    //           app.showToastC('暂无更多数据');
-    //       };
-    //       if (num==1){
-    //           var brand = res.data.data.List.brand || [];
-    //           _this.setData({
-    //             brand,
-    //             order
-    //           });
-    //       }else{
-    //         var orderData = [..._this.data.order,...order]
-    //         _this.setData({
-    //           order:orderData
-    //         });
-    //       };
-    //   }else{
-    //     if(res.data && res.data.message){
-    //       app.showModalC(res.data.message); 
-    //     };        
-    //   };
-    //  })
+    if (num==1){
+      _this.setData({countOrder:0,page : 1,salesEffectList : []});
+    }else{
+      var pagenum = _this.data.page;
+      _this.data.page = ++pagenum;
+    };
+     api.salesResult(`${_this.data.itemType}/${_this.data.itemId}`,{listType:_this.data.umid}).then((res) => {
+      console.log('列表数据=======',res)
+      _this.setData({nodataiftr:true})
+      if (res.data.status_code == 200) {
+        var salesEffectInfo = res.data.data.Info;
+        var salesEffectList = res.data.data.List;
+
+        for(var i=0;i<salesEffectList.length;i++){
+          salesEffectList[i].lotto = salesEffectList[i].lotto?utils.plusXing(salesEffectList[i].lotto,4,4):'';
+          salesEffectList[i].tel = salesEffectList[i].tel?utils.plusXing(salesEffectList[i].tel,3,4):'';
+          salesEffectList[i].userMobile = salesEffectList[i].userMobile?utils.plusXing(salesEffectList[i].userMobile,3,4):'';
+        };
+
+        _this.setData({
+          salesEffectInfo,
+          salesEffectList
+        });
+      }else{
+        if(res.data && res.data.message){
+          app.showModalC(res.data.message); 
+        };        
+      };
+     })
   },
 
   toDate(number,num) {
@@ -182,7 +252,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this.getData(2)
+    // this.getData(2)
   },
 
   /**
