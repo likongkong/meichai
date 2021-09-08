@@ -22,7 +22,8 @@ Page({
     salesEffectInfo:'',
     salesEffectList:[],
     lotteryNumberList:[],
-    lotteryNumberIs:false
+    lotteryNumberIs:false,
+    timeaddis:''
 
   },
   lotteryNumberFun(){
@@ -189,9 +190,14 @@ Page({
           salesEffectList[i].userMobile = salesEffectList[i].userMobile?utils.plusXing(salesEffectList[i].userMobile,3,4):'';
         };
 
+        if(_this.data.itemType == -1){
+           _this.countdowntime(salesEffectInfo.summary.goodsAddTime)
+        };
+
         _this.setData({
           salesEffectInfo,
-          salesEffectList
+          salesEffectList,
+          timeaddis:salesEffectInfo.summary.goodsAddTime
         });
       }else{
         if(res.data && res.data.message){
@@ -200,7 +206,53 @@ Page({
       };
      })
   },
-
+  // 倒计时
+  countdowntime: function ( cdtime) {
+    var _this = this;;
+    clearInterval(_this.data.countdowntime);
+    var countdowntime = function () {
+      var totalSecond = Date.parse(new Date()) / 1000 - parseInt(cdtime);
+      // 秒数  
+      var second = totalSecond;
+      // 天数位  
+      var day = Math.floor(second / 3600 / 24);
+      var dayStr = day.toString();
+      if (dayStr.length == 1) dayStr = '0' + dayStr;
+      // 小时位  
+      var hr = Math.floor((second - day * 3600 * 24) / 3600);
+      var hrStr = hr.toString();
+      if (hrStr.length == 1) hrStr = '0' + hrStr;
+      // 分钟位  
+      var min = Math.floor((second - day * 3600 * 24 - hr * 3600) / 60);
+      var minStr = min.toString();
+      if (minStr.length == 1) minStr = '0' + minStr;
+      // 秒位  
+      var sec = second - day * 3600 * 24 - hr * 3600 - min * 60;
+      var secStr = sec.toString();
+      if (secStr.length == 1) secStr = '0' + secStr;
+      if (dayStr == '00') {
+        _this.setData({
+          percountdown: { dayStr: dayStr, hrStr: hrStr, minStr: minStr, secStr: secStr }
+        });
+      } else {
+        _this.setData({
+          percountdown: { dayStr: dayStr, hrStr: hrStr, minStr: minStr, secStr: secStr }
+        });
+      }
+      if (totalSecond < 0) {
+        // 从新调取数据
+        clearInterval(_this.data.countdowntime);
+        that.signindata.perspcardata = '';
+        _this.setData({
+          perspcardiftrmin: false
+        });
+        _this.setData({
+          percountdown: '00:00:00',
+        });
+      }
+    };
+    _this.data.countdowntime = setInterval(countdowntime, 1000);
+  },
   toDate(number,num) {
     var date = new Date(number * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
     var Y = date.getFullYear();
@@ -222,6 +274,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+
+    if(this.data.timeaddis){
+      this.countdowntime(this.data.timeaddis)
+    }
     
   },
 
@@ -229,14 +285,14 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    
+    clearInterval(this.data.countdowntime);
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    
+    clearInterval(this.data.countdowntime);
   },
 
   /**
