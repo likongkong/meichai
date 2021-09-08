@@ -24,55 +24,11 @@ Page({
     lastX: 0,
     lastY: 0,
     iftrue:true,
-
-
-
-    alpha: '',
-    windowHeight: '',
-
-
-
+    parentJ:0,
+    timestamp:0,
+    arrTouchBarPosition:[]
 
   },
-
-
-
-  handlerAlphaTap(e) {
-    console.log(e)
-    let {ap} = e.target.dataset;
-    this.setData({alpha: ap});
-  },
-  touchMove(e) {
-    console.log(e)
-    console.log(this.offsetTop)
-    let {brandwhole} = this.data;
-    console.log(brandwhole)
-    console.log(this.data.alphabet)
-    let moveY = e.touches[0].clientY;
-    let rY = moveY - this.offsetTop;
-    if(rY >= 0) {
-      let index = Math.ceil((rY - this.apHeight)/ this.apHeight);
-      if(0 <= index < brandwhole.length) {
-        let nonwAp = brandwhole[index];
-        nonwAp && this.setData({alpha: nonwAp.alphabet});
-      } 
-    }
-  },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -115,22 +71,6 @@ Page({
       app.signin(_this)
     };
 
-
-    try {
-      var res = wx.getSystemInfoSync()
-      this.windowHeight = res.windowHeight
-      console.log(this.windowHeight)
-      this.apHeight = 16;
-      this.offsetTop = 80;
-      console.log(this.apHeight);
-      console.log(this.offsetTop)
-      this.setData({windowHeight: res.windowHeight + 'px'})
-    } catch (e) {
-      
-    }
-
-
-
   },
   onLoadfun(){
     var _this = this;
@@ -141,7 +81,21 @@ Page({
       avatarUrl: app.signindata.avatarUrl,
       isProduce: app.signindata.isProduce,
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
+      windowHeight: app.signindata.windowHeight - wx.getStorageSync('statusBarHeightMc')||0,
     });
+
+    // try {
+    //   var res = wx.getSystemInfoSync()
+    //   this.windowHeight = res.windowHeight
+    //   console.log(this.windowHeight)
+    //   this.apHeight = 16;
+    //   this.offsetTop = 80;
+    //   console.log(this.apHeight);
+    //   console.log(this.offsetTop)
+    //   this.setData({windowHeight: res.windowHeight + 'px'})
+    // } catch (e) {
+      
+    // }
 
     if(wx.getStorageSync('access_token')){
       this.getData();
@@ -173,6 +127,14 @@ Page({
         if (res.data.ReturnCode == 200) {
           _this.setData({
             brandwhole:res.data.List.brand || [], 
+          },()=>{
+            wx.createSelectorQuery()
+              .selectAll('.letterBoxEve')
+              .boundingClientRect()
+              .exec(function(res) {
+                 console.log('arrTouchBarPosition=====',res[0])
+                  _this.data.arrTouchBarPosition = res[0];  // 需要预先定义arrTouchBarPosition
+              });
           });
         }else if(res.data.ReturnCode == 300){
           _this.setData({
@@ -185,7 +147,36 @@ Page({
       }
     });
   },
+  touchmove(e) {
+      var _this = this;
+      // 节流，需要预先定义timestamp
+      let now = new Date().getTime();
+      if (now - _this.data.timestamp < 150) {
+          return;
+      }
+      _this.data.timestamp = now;
 
+      // 无意触发
+      if (e.touches.length > 1) {
+          return;
+      }
+
+      let clientY = e.touches[0].clientY;
+      for (let item of _this.data.arrTouchBarPosition) {
+          // 如果已经在目标位置，则不执行
+          if (clientY >= item.top && clientY <= item.bottom) {
+              if (item.dataset.index == this.data.enlargeL) {
+                  break;
+              }
+
+              this.setData({
+                 enlargeL: item.dataset.index,
+                 enlargez: item.top - _this.data.parentJ - 25 + 10,
+              });
+              break;
+          }
+      }
+  },
   // 关注 和 点赞 函数
   followfun: function(w) {
     var _this = this;
@@ -214,8 +205,17 @@ Page({
     });
   },
   jumpLetter(w){
-    console.log('w=========',w)
+
     var _this = this;
+    wx.createSelectorQuery().select('#boxtext').boundingClientRect(function(rect){
+      _this.setData({
+        parentJ:rect.top,
+      })
+    }).exec()
+
+
+    console.log('w=========',w)
+    
     var index = w.currentTarget.dataset.index || w.target.dataset.index || 0;
     var num = w.currentTarget.dataset.num || w.target.dataset.num || 0;
     
@@ -224,130 +224,110 @@ Page({
       enlargeL:index,
       num
     })
-    var query = wx.createSelectorQuery();
-    query.select('#jump' + index).boundingClientRect();
-    query.selectViewport().scrollOffset();
-    query.exec(function(res) {
-      if (res && res[0] && res[1]) {
-        wx.pageScrollTo({
-           scrollTop:res[0].top+res[1].scrollTop-app.signindata.statusBarHeightMc||99,
-           duration:300,
-        })
-      }
-    });   
+    // var query = wx.createSelectorQuery();
+    // query.select('#jump' + index).boundingClientRect();
+    // query.selectViewport().scrollOffset();
+    // query.exec(function(res) {
+    //   if (res && res[0] && res[1]) {
+    //     wx.pageScrollTo({
+    //        scrollTop:res[0].top+res[1].scrollTop-app.signindata.statusBarHeightMc||99,
+    //        duration:300,
+    //     })
+    //   }
+    // });   
   },
 
-  // touchMove(e) {
-  //   console.log(e)
-  //   console.log(this.offsetTop)
-  //   let {brandwhole} = this.data;
-  //   console.log(brandwhole)
-  //   console.log(this.data.enlargeL)
-  //   let moveY = e.touches[0].clientY;
-  //   let rY = moveY - this.offsetTop;
-  //   if(rY >= 0) {
-  //     let index = Math.ceil((rY - this.apHeight)/ this.apHeight);
-  //     if(0 <= index < brandwhole.length) {
-  //       let nonwAp = brandwhole[index];
-  //       nonwAp && this.setData({alpha: nonwAp.enlargeL});
-  //     } 
-  //   }
-  // },
+
+  touchMove(event){
+    var _this = this;
+    let now = new Date().getTime();
+    if (now - _this.data.timestamp < 150) {
+      return;
+    }
+    _this.data.timestamp = now;
 
 
 
-  // touchMove(event){
-  //   var _this = this;
-  //   console.log(event)
-  //   // let now = new Date().getTime();
-  //   // if (now - timestamp < 50) {
-  //   //   return;
-  //   // }
 
-  //   if(this.data.iftrue){
-  //     this.data.iftrue = false
-  //      setTimeout(()=>{
+
+    // if(this.data.iftrue){
+    //   this.data.iftrue = false
+    //    setTimeout(()=>{
           
           
-  //         var num = _this.data.num;
-  //         var brandwhole = _this.data.brandwhole;
-  //         var index = _this.data.enlargeL;
+          var num = _this.data.num;
+          var brandwhole = _this.data.brandwhole;
+          var index = _this.data.enlargeL;
       
-  //         // console.log(event)
-  //         let currentX = event.touches[0].pageX
-  //         let currentY = event.touches[0].pageY
-  //         let tx = currentX - _this.data.lastX
-  //         let ty = currentY - _this.data.lastY
-  //         var text = ''
-  //         //上下方向滑动
-  //         console.log('=============ty',ty)
-  //         if (ty < 0){
-  //           // text = "向上滑动"
-  //           text = true
-  //           if(num >= 0){
-  //             index = brandwhole[num].initial;
-  //             _this.data.num =  num - 1;
-  //             console.log(_this.data.num,'=============')
-  //           }else{
-  //             num = 0;
-  //             index = brandwhole[num].initial;
-  //           };
-  //         } else if (ty > 0){
-  //           // text = "向下滑动"
-  //           text = true
-  //           if(num >= brandwhole.length-1){
-  //             index = brandwhole[num].initial;
-  //             this.data.num =  num + 1
-  //           }else{
-  //             num = brandwhole.length-1;
-  //             index = brandwhole[num].initial;
-  //           };
-  //         }
-  //         console.log(num,index)
-  //         wx.createSelectorQuery().select('#qq'+index).boundingClientRect(function(rect){
-  //             _this.setData({
-  //               enlargez:rect.top - 25 + 9,
-  //               enlargeL:index,
-  //             })
+          // console.log(event)
+          let currentX = event.touches[0].pageX
+          let currentY = event.touches[0].pageY
+          let tx = currentX - _this.data.lastX
+          let ty = currentY - _this.data.lastY
+          var text = ''
+          //上下方向滑动
+          console.log('=============ty',ty)
+          if (ty < 0){
+            // text = "向上滑动"
+            text = true
+            if(num >= 0){
+              index = brandwhole[num].initial;
+              _this.data.num =  num - 1;
+            }else{
+              num = 0;
+              index = brandwhole[num].initial;
+            };
+          } else if (ty > 0){
+            // text = "向下滑动"
+            text = true
+            console.log('=================')
+            if(num <= brandwhole.length-1){
+              index = brandwhole[num].initial;
+              _this.data.num =  num + 1
+              console.log(_this.data.num,'=============')
+            }else{
+              num = brandwhole.length-1;
+              index = brandwhole[num].initial;
+            };
+          }
+          console.log(num,index)
+          _this.data.iftrue = true
+          
+
+
+          wx.createSelectorQuery().select('#qq'+index).boundingClientRect(function(rect){
+              console.log(rect)
+               console.log(rect.top , _this.data.parentJ)
+              _this.setData({
+                enlargez:rect.top - _this.data.parentJ - 25 + 10,
+                enlargeL:index,
+              })
+          }).exec()
       
-  //             // rect.id // 节点的ID
-  //             // rect.dataset // 节点的dataset
-  //             // rect.left // 节点的左边界坐标
-  //             // rect.right // 节点的右边界坐标
-  //             // rect.top // 节点的上边界坐标
-  //             // rect.bottom // 节点的下边界坐标
-  //             // rect.width // 节点的宽度
-  //             // rect.height // 节点的高度
-  //         }).exec()
+          var query = wx.createSelectorQuery();
+          query.select('#jump' + index).boundingClientRect();
+          query.selectViewport().scrollOffset();
+          query.exec(function(res) {
+            if (res && res[0] && res[1]) {
+              wx.pageScrollTo({
+                scrollTop:res[0].top+res[1].scrollTop-app.signindata.statusBarHeightMc||99,
+                duration:300,
+              })
+            }
+          }); 
       
-  //         var query = wx.createSelectorQuery();
-  //         query.select('#jump' + index).boundingClientRect();
-  //         query.selectViewport().scrollOffset();
-  //         query.exec(function(res) {
-  //           if (res && res[0] && res[1]) {
-  //             wx.pageScrollTo({
-  //               scrollTop:res[0].top+res[1].scrollTop-app.signindata.statusBarHeightMc||99,
-  //               duration:300,
-  //             })
-  //             _this.data.iftrue = true
-  //           }
-  //         }); 
-      
-  //         //将当前坐标进行保存以进行下一次计算
-  //         _this.data.lastX = currentX
-  //         _this.data.lastY = currentY
+          //将当前坐标进行保存以进行下一次计算
+          _this.data.lastX = currentX
+          _this.data.lastY = currentY
 
 
 
+    //    },150)
+    // }
 
 
 
-  //      },200)
-  //   }
-
-
-
-  // },
+  },
   touchendFn(){
     console.log('结束')
     this.setData({

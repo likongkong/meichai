@@ -5,7 +5,7 @@ page{
 }
 .seBox{
   width: 100%;
-  padding: 0 0 20rpx 0;
+  padding: 0;
 }
 .elsearch{
   width: 100%;
@@ -165,14 +165,15 @@ page{
   position: fixed;
   right: 0;
   top: 360rpx;
+  z-index: 3;
 }
 .letterBoxEve{
-  width: 36rpx;
-  height: 36rpx;
+  width: 40rpx;
+  height: 40rpx;
   line-height: 36rpx;
   text-align: center;
   font-size: 24rpx;
-  margin:0 auto 2rpx;
+  margin:0 auto 0;
 }
 .letterBoxEveBG{
   background:#fff;
@@ -195,103 +196,13 @@ page{
 }
 
 
+.scroll-warp{
+  width: 680rpx;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10rpx 20rpx;
-  }
-  .header .h-city {
-  display: flex;
-  align-items: center;
-  font-size: 26rpx;
-  line-height: 1.0;
-  letter-spacing: 0.4px;
-  text-align: center;
-  color: #a8a8a8;
-  }
-  .header .h-city image {
-  width: 22rpx;
-  height: 27rpx;
-  margin-right: 16rpx;
-  }
-  
-  .header .h-close image{
-  width: 40rpx;
-  height: 40rpx;
-  }
-  .now-city {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  background: #f2f4f5;
-  font-size: 22rpx;
-  line-height: 1.0;
-  color: #a8a8a8;
-  padding: 18rpx 20rpx;
-  border-bottom: 1rpx solid #dbdbdb;
-  }
-  .now-city .now-city-name {
-  display: flex;
-  background: white;
-  font-size: 30rpx;
-  line-height: 1.0;
-  letter-spacing: 0.4rpx;
-  color: #333333;
-  padding: 13rpx 33rpx;
-  border: solid 1rpx #dbdbdb;
-  margin-top: 18rpx;
-  }
-  .alphabet-list .section-item .section-item-header {
-  display: flex;
-  align-items: center;
-  font-size: 22rpx;
-  color: #a8a8a8;
-  background-color: #f2f4f5;
-  padding: 4rpx 20rpx;
-  }
-  
-  .alphabet-list .section-item .section-item-cells {
-  padding-left: 20rpx;
-  }
-  .alphabet-list .section-item .section-item-cells .section-item-cell{
-  font-size: 30rpx;
-  line-height: 1.0;
-  color: #333333;
-  padding: 29rpx 0;
-  }
-  .border-bottom {
-  border-bottom: 1rpx solid #dbdbdb;
-  }
-  .alphanet-selector {
-  position: absolute;
-  top: 80px;
-  right: 0;
-  height: 432px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 100;
-  box-sizing: border-box;
-  }
-  .alphanet-selector .selector-one {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 12px;
-  padding: 3px 10px;
-  height: 12px;
-  }
+/* 隐藏滚动条 */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
