@@ -84,47 +84,14 @@ Page({
       // {name:'分享',num:'5'}
     ], // 支付状态 
     centerIndex:0,
-    brandWhole:false
   },
   // 全部品牌
   brandWholeFun(){
-    var _this = this;
-    if(!this.data.brandWhole){
-      this.brandWholeSeach()  
-    };
-    this.setData({brandWhole:!this.data.brandWhole});
-     
-  },
-  brandWholeSeach(){
-    var _this = this;
-    console.log('mod=community&operation=allIps&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&searchValue='+_this.data.brand_name||'')
-    var qqq = Dec.Aese('mod=community&operation=allIps&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&searchValue='+_this.data.brand_name||'');
-    wx.showLoading({
-      title: '加载中...',
-      mask:true
+    wx.navigateTo({  
+      url: "/page/settled/pages/allBrandsIp/allBrandsIp"
     })
-    wx.request({
-      url: app.signindata.comurl + 'toy.php' + qqq,
-      method: 'GET',
-      header: {'Accept': 'application/json'},
-      success: function (res) {
-        wx.hideLoading()
-        console.log('全部品牌信息=====',res)
-        if (res.data.ReturnCode == 200) {
-          _this.setData({
-            brandwhole:res.data.List.brand || [], 
-          });
-        }else if(res.data.ReturnCode == 300){
-          _this.setData({
-            brandwhole: []
-          });    
-          app.showToastC('暂无更多数据')  
-        }else{
-          app.showToastC(res.data.Msg)  
-        };
-      }
-    });
   },
+
   catchTouchMove:function(res){
     return false
   },
@@ -269,15 +236,6 @@ Page({
   onFocus: function (w) {
     this.setData({
       brand_name:""
-    });
-  },
-  jumpsearch:function(){
-    this.brandWholeSeach();
-  },
-  // input 值改变
-  inputChange: function (e) {
-    this.setData({
-      brand_name: e.detail.value
     });
   },
   changeGoodsSwip: function (detail) {

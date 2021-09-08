@@ -1,0 +1,49 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class="seBox">
+
+    <view class="elsearch">
+        <view class="elsearchch">
+            <input class="elinputbutNew" bindfocus='onFocus' placeholder='请输入品牌名称搜索' bindinput="inputChange" bindconfirm="jumpsearch" value="{{brand_name}}"></input>
+            <view class="elserbotom" catchtap="brandWholeSeach" style="background:#fff;color:#101010;">搜索</view>
+        </view>
+    </view>
+
+    <scroll-view style="height:{{windowHeight-70}}px;" scroll-y scroll-into-view="{{enlargeL}}" class="scroll-warp" scroll-with-animation="{{false}}">
+        <block wx:for='{{brandwhole}}' wx:key='key' wx:if='{{item.listBrand && item.listBrand.length != 0}}'>
+            <view class="dlfindIpEveLetter" id='{{item.initial}}'>{{item.initial}}</view>
+            <view class="dlfindIpEveBox">
+                <view class="ocamensweveNew" wx:for='{{item.listBrand}}' wx:key='key' wx:for-item='w' wx:for-index='num' catchtap="jumpsouchtem" data-id='{{w.brandId}}'>
+                    <view class="ocamensweveNewImg">
+                        <image class="ocamensweveimg" mode="aspectFit" src="{{w.brandLogo}}"></image>
+                        <image class='dlfchrtopimgipNew' wx:if='{{w.isNewBrand}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/newIcon.png'></image>
+                        <image class='dlfchrtopimgip' wx:if='{{w.isAuth}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/approveIcon.png'></image>
+                    </view>
+                    <view class="ocamensweveNewTxt">
+                    <view class="ocamenNewname specialellipsis">{{w.brandName}}</view>
+                    <view class="ocamenNewnameBot specialellipsis">{{w.description}}</view>
+                    </view>
+                    <view class="{{!w.isFocus?'emlhright':'emlhrightNo'}}" data-type='0' data-id='{{w.brandId}}' data-istype='{{w.isFocus}}' data-index='{{index}}' data-num='{{num}}' catchtap='followfun'>
+                        <block wx:if='{{!w.isFocus}}'>关注</block>
+                        <block wx:else>已关注</block>                  
+                    </view>
+                </view>  
+            </view>
+        </block>
+
+
+    </scroll-view>
+
+
+
+
+</view>
+
+<view class="letterBox" id='boxtext' catch:touchmove='touchmove'>
+    <block wx:for='{{brandwhole}}' wx:key='key'>
+        <view class="letterBoxEve" data-num='{{index}}' bindtouchstart="jumpLetter" bindtouchend="touchendFn" data-index='{{item.initial}}' id='qq{{item.initial}}'>{{item.initial}}</view>
+    </block>
+    <view class="enlargeBox" style="top:{{enlargez}}px;">{{enlargeL}}</view>
+</view>
+<!-- catchtap="jumpLetter"  bindtouchmove="jumpLetter"   bindtouchmove="touchMove"  -->

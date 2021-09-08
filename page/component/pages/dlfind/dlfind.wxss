@@ -488,20 +488,10 @@ width: 72rpx;}
 }
 
 
-.dlfindIpscroll{
-  width: 100%;
-  height: 100%;
-}
-.dlfindIpEveLetter{
-  height: 60rpx;
-  line-height: 60rpx;
-  padding-left: 20rpx;
-  font-size: 28rpx;
-}
-.dlfindIpEveBox{
-  width: 100%;
-  padding-left: 10rpx;
-}
+
+
+
+
 .elinputbutNew{
   margin: 15rpx 0 0 20rpx;
   height:60rpx;
@@ -573,14 +563,9 @@ width: 72rpx;}
 }
 
 .addNewEventBox{
-  height: 500rpx;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  width: 90%;
+  width: 98%;
   border-radius: 10rpx;
+  position: relative;
 }
 .addNewEventTitle{
   display: block;
@@ -595,15 +580,12 @@ width: 72rpx;}
   line-height: 60rpx;
   font-size: 26rpx;
   color: #000;
-  margin: 50rpx auto 40rpx; 
-  text-align: center;
+  margin:auto; 
   border-radius: 50%;
-  display: block;
-}
-.addNewEventContent{
-  width: 100%;
-  display: flex;
-  justify-content:space-between;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -100rpx;
 }
 .createItem{
   width:314rpx;
@@ -646,6 +628,40 @@ width: 72rpx;}
   border-radius: 8rpx;
   border:2rpx solid #34A9ED;
 }
+
+
+.releaseSale{
+  width: 100%;
+  position: relative;
+}
+.releaseSaleImg{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.releaseSalePostion{
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.releaseSaleHead{
+  height: 140rpx;
+  line-height: 130rpx;
+  text-align: center;
+  font-size: 34rpx;
+}
+.addNewEventContent image{
+  width: 43%;
+  margin-top: 50rpx;
+}
+.addNewEventContent{
+  width: 100%;
+  display: flex;
+  justify-content:space-around;
+}
+
 
 
 

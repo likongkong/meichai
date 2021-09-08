@@ -379,14 +379,9 @@ page{
 }
 
 .addNewEventBox{
-  height: 500rpx;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  width: 90%;
+  width: 98%;
   border-radius: 10rpx;
+  position: relative;
 }
 .addNewEventTitle{
   display: block;
@@ -396,20 +391,12 @@ page{
   margin-top: 16rpx;
 }
 .popMaskbutton{
-  width: 60rpx;
-  height: 60rpx;
-  line-height: 60rpx;
-  font-size: 26rpx;
-  color: #000;
-  margin: 50rpx auto 40rpx; 
-  text-align: center;
-  border-radius: 50%;
-  display: block;
+  width: 60rpx;height: 60rpx;line-height: 60rpx;font-size: 26rpx;color: #000;margin: auto;border-radius: 50%;position: absolute;left: 0;right: 0;bottom: -100rpx;
 }
 .addNewEventContent{
   width: 100%;
   display: flex;
-  justify-content:space-between;
+  justify-content:space-around;
 }
 .createItem{
   width:314rpx;
@@ -435,4 +422,31 @@ page{
   line-height: 30rpx;
   padding: 50rpx 0 36rpx 0;
   color:#000;
+}
+
+.releaseSale{
+  width: 100%;
+  position: relative;
+}
+.releaseSaleImg{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.releaseSalePostion{
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.releaseSaleHead{
+  height: 130rpx;
+  line-height: 130rpx;
+  text-align: center;
+  font-size: 34rpx;
+}
+.addNewEventContent image{
+  width: 43%;
+  margin-top: 45rpx;
 }

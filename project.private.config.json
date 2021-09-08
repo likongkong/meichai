@@ -144,6 +144,12 @@
           "pathName": "page/settled/pages/brandManagement/brandManagement",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "全部ip",
+          "pathName": "page/settled/pages/allBrandsIp/allBrandsIp",
+          "query": "",
+          "scene": null
         }
       ]
     }
