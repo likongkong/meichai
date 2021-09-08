@@ -160,6 +160,7 @@
         "pages/orderManagement/orderManagement",
         "pages/businessOrderDetails/businessOrderDetails",
         "pages/editSettledProfile/editSettledProfile",
+        "pages/editEnterpriseInfo/editEnterpriseInfo",
         "pages/perfectSettledProfile/perfectSettledProfile",
         "pages/myWallet/myWallet",
         "pages/atlas/atlas",
@@ -173,8 +174,9 @@
         "pages/commodityManagement/commodityManagement",
         "pages/brandManagement/brandManagement",
         "pages/salesEffect/salesEffect",
-        "pages/allBrandsIp/allBrandsIp",
-        "pages/fieldGuideList/fieldGuideList"
+        "pages/addIp/addIp",
+        "pages/fieldGuideList/fieldGuideList",
+        "pages/allBrandsIp/allBrandsIp"
       ]
     }
   ],

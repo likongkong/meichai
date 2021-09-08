@@ -1,0 +1,23 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class="applyForOccupancy">
+  <settledProgress num="1" intact="hide"></settledProgress>
+
+  <view class="card" style="margin-top:30rpx;">
+    <settledForm
+      id="settledForm"
+      statusBarHeightMc="{{statusBarHeightMc}}"
+      list="{{enterpriseData}}"
+      bind:bindchange="bindchange"
+      num="{{num}}"
+      brandInfo="{{brandInfo}}">
+    </settledForm>
+  </view>
+
+  <view class="footerWrap">
+      <view data-num="1" catchtap="navigateBack">返回</view>
+      <view catchtap="submitAudit">确认发布</view>
+  </view>
+
+</view>

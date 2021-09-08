@@ -102,6 +102,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var _this = this;
     this.data.uid = app.signindata.uid;
     this.data.loginid = app.signindata.loginid;
     console.log(options)
@@ -109,9 +110,19 @@ Page({
       // num:options.num,
       barnd_id:options.id || 0
     })
+    // 判断是否登录
+    if (_this.data.loginid != '' && _this.data.uid != '') {
+      _this.onLoadfun();
+    } else {
+      app.signin(_this)
+    }
+  },
+  onLoadfun(){
+    var _this = this;
+    _this.data.loginid = app.signindata.loginid;
+    _this.data.uid = app.signindata.uid;
     this.getBrandInfo()
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

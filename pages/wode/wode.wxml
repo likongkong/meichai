@@ -205,7 +205,7 @@
                                 <text>商品管理</text>
                             </view>
                         </view>
-                        <view class="brandManageItem" catchtap="jinqingqidai" data-type='9017'>
+                        <view class="brandManageItem" catchtap="comjumpwxnav" data-type='9042'>
                             <view>
                                 <image src='https://cdn.51chaidan.com/images/brandSettledIcon/orderIcon/brandZone.png' mode="widthFix"></image>
                                 <text>专区管理</text>
