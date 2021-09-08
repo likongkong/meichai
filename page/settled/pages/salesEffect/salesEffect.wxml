@@ -25,7 +25,7 @@
         </view>
         <view class="seTopName">
             <view class="seTopNameEve">
-                <block wx:if='{{itemType==4}}'>报名人数</block>
+                <block wx:if='{{itemType==4}}'>参与人数</block>
                 <block wx:elif='{{itemType==-1}}'>参与人数</block>              
             </view>
             <view class="seTopNameEve">
