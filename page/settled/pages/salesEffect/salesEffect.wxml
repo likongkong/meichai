@@ -2,59 +2,75 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 <view class="seBox">
-    <view class="seTop">
+    <view class="seTop" wx:if='{{nodataiftr}}'>
         <view class="seTopName">
-            <view class="seTopNameEve">订单数量</view>
-            <view class="seTopNameEve">订单总金额</view>
+            <view class="seTopNameEve">
+               <block wx:if='{{itemType==4}}'>定金总额</block>
+               <block wx:elif='{{itemType==-1}}'>订单数量</block>
+            </view>
+            <view class="seTopNameEve">
+                <block wx:if='{{itemType==4}}'>尾款总额</block>
+                <block wx:elif='{{itemType==-1}}'>订单总金额</block>            
+            </view>
         </view>
         <view class="seTopName">
-            <view class="seTopNameEve" style="color:#999495;">18</view>
-            <view class="seTopNameEve" style="color:#999495;">1188</view>
+            <view class="seTopNameEve" style="color:#999495;">
+                <block wx:if='{{itemType==4}}'>{{salesEffectInfo.summary.depositAmount || 0}}</block>  <!-- 抽选 -->
+                <block wx:elif='{{itemType==-1}}'>{{salesEffectInfo.summary.countOrder || 0}}</block>   <!-- 正常商品 -->
+            </view>
+            <view class="seTopNameEve" style="color:#999495;">
+                <block wx:if='{{itemType==4}}'>{{salesEffectInfo.summary.balanceAmount || 0}}</block>  <!-- 抽选 -->
+                <block wx:elif='{{itemType==-1}}'>{{salesEffectInfo.summary.totalAmount || 0}}</block>   <!-- 正常商品 -->
+            </view>
         </view>
         <view class="seTopName">
-            <view class="seTopNameEve">参与人数</view>
-            <view class="seTopNameEve">活动天数</view>
+            <view class="seTopNameEve">
+                <block wx:if='{{itemType==4}}'>报名人数</block>
+                <block wx:elif='{{itemType==-1}}'>参与人数</block>              
+            </view>
+            <view class="seTopNameEve">
+                <block wx:if='{{itemType==4}}'>退款人数</block>
+                <block wx:elif='{{itemType==-1}}'>活动天数</block>             
+            </view>
         </view>
         <view class="seTopName">
-            <view class="seTopNameEve" style="color:#999495;">15</view>
-            <view class="seTopNameEve" style="color:#999495;">13</view>
+            <view class="seTopNameEve" style="color:#999495;">
+                <block wx:if='{{itemType==4}}'>{{salesEffectInfo.summary.countUsers || 0}}</block>  <!-- 抽选 -->
+                <block wx:elif='{{itemType==-1}}'>{{salesEffectInfo.summary.countUsers || 0}}</block>   <!-- 正常商品 -->            
+            </view>
+            <view class="seTopNameEve" style="color:#999495;">
+                <block wx:if='{{itemType==4}}'>{{salesEffectInfo.summary.countRefundUser || 0}}</block>  <!-- 抽选 -->
+                <block wx:elif='{{itemType==-1}}'>{{salesEffectInfo.summary.goodsAddTime || 0}}</block>   <!-- 正常商品 -->                
+
+            </view>
         </view>
     </view>
     <view class="seTop">
         <view class="seCenterTitle">
-            <view class="seTabData {{umid==1?'seTabDataEve':''}}" catchtap="seTabDataFun" data-type='1'>所有参与用户</view>
-            <view class="seTabData {{umid==2?'seTabDataEve':''}}" style="margin-left:200rpx;" catchtap="seTabDataFun" data-type='2' wx:if='{{seckillOrDraw == 4}}'>中奖名单</view>
+            <view class="seTabData {{umid==0?'seTabDataEve':''}}" catchtap="seTabDataFun" data-type='0'>所有参与用户</view>
+            <view class="seTabData {{umid==1?'seTabDataEve':''}}" style="margin-left:200rpx;" catchtap="seTabDataFun" data-type='1' wx:if='{{itemType == 4}}'>中奖名单</view>
         </view>
-        <view class="elsearch marginAuto">
+        <view class="elsearch marginAuto" wx:if='{{false}}'>
             <image class="elserarchimg" catchtap="jumpsearch" src="https://www.51chaidan.com/images/toyCabinet/search.png"></image>
             <view class="elsearchch">
                 <input class="elinputbut" bindfocus='onFocus' placeholder='用户名或手机号' bindinput="inputChange" bindconfirm="jumpsearch" value="{{ordername}}"></input>
             </view>
             <view class="elserbotom" catchtap="jumpsearch">搜索</view>
         </view>
-        <view class="seUserData">
-            <view class="emlhleft">
-                <image class="emlhlimg" mode="aspectFit" src="https://brand-settled-info-1300990269.cos.ap-beijing.myqcloud.com/brandinfo/logo/16301406891810_39860.jpg"></image>
-                <view class="emlhltxt">
-                    <view class="emlhlttop specialellipsis">林川一目</view>
-                    <view class="emlhltbottom specialellipsis">189****3144</view>
+        <block wx:for="{{salesEffectList}}" wx:key='key'>
+            <view class="seUserData">
+                <view class="emlhleft">
+                    <image class="emlhlimg" mode="aspectFit" src="{{item.userAvatar}}"></image>
+                    <view class="emlhltxt">
+                        <view class="emlhlttop specialellipsis">{{item.userNick}}</view>
+                        <view class="emlhltbottom specialellipsis">{{item.userMobile}}</view>
+                    </view>
                 </view>
+                <view class="emlhright" catchtap="comjump" data-id='{{item.orderId}}'>查看订单</view>
+                <view class="emlhright" wx:if='{{itemType == 4 && umid==1}}' data-num='{{index}}' catchtap="signaturePopUpDis" style="right:140rpx;">查看签号</view>
             </view>
-            <view class="emlhright">查看订单</view>
-            <view class="emlhright" wx:if='{{seckillOrDraw == 4}}' catchtap="signaturePopUpDis" style="right:140rpx;">查看签号</view>
-        </view>
+        </block>
 
-        <view class="seUserData">
-            <view class="emlhleft">
-                <image class="emlhlimg" mode="aspectFit" src="https://brand-settled-info-1300990269.cos.ap-beijing.myqcloud.com/brandinfo/logo/16301406891810_39860.jpg"></image>
-                <view class="emlhltxt">
-                    <view class="emlhlttop specialellipsis">林川一目</view>
-                    <view class="emlhltbottom specialellipsis">189****3144</view>
-                </view>
-            </view>
-            <view class="emlhright">查看订单</view>
-            <view class="emlhright" wx:if='{{seckillOrDraw == 4}}' catchtap="signaturePopUpDis" style="right:140rpx;">查看签号</view>
-        </view>
 
     </view>
 
@@ -62,7 +78,7 @@
 
 
     <!--  暂无数据  -->
-    <view class='nodata' wx:if='{{order.length==0&&nodataiftr}}' style='height: 600rpx;width: 100%;position: relative;'>
+    <view class='nodata' wx:if='{{salesEffectList.length==0&&nodataiftr}}' style='height: 600rpx;width: 100%;position: relative;'>
         <image src='../../../../pages/images/nodata.png' class='nodataimg' style='width: 280rpx;height: 300rpx;position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;'></image>
     </view>
 
@@ -77,63 +93,10 @@
             <view class="orderMangChildElement" style="width:55%;">身份证号</view>
         </view>
         <scroll-view scroll-y="true" style="width:100%;height:300rpx;margin-bottom:20rpx">
-            <view class="orderMangTipCenterEve">
-                <view class="orderMangChildElement" style="width:45%;">188****4521</view>
-                <view class="orderMangChildElement" style="width:55%;">1547*********44589</view>
-            </view>
-            <view class="orderMangTipCenterEve">
-                <view class="orderMangChildElement" style="width:45%;">188****4521</view>
-                <view class="orderMangChildElement" style="width:55%;">1547*********44589</view>
-            </view>
-            <view class="orderMangTipCenterEve">
-                <view class="orderMangChildElement" style="width:45%;">188****4521</view>
-                <view class="orderMangChildElement" style="width:55%;">1547*********44589</view>
-            </view>
-            <view class="orderMangTipCenterEve">
-                <view class="orderMangChildElement" style="width:45%;">188****4521</view>
-                <view class="orderMangChildElement" style="width:55%;">1547*********44589</view>
-            </view>
-            <view class="orderMangTipCenterEve">
-                <view class="orderMangChildElement" style="width:45%;">188****4521</view>
-                <view class="orderMangChildElement" style="width:55%;">1547*********44589</view>
-            </view>
-            <view class="orderMangTipCenterEve">
-                <view class="orderMangChildElement" style="width:45%;">188****4521</view>
-                <view class="orderMangChildElement" style="width:55%;">1547*********44589</view>
-            </view>
-            <view class="orderMangTipCenterEve">
-                <view class="orderMangChildElement" style="width:45%;">188****4521</view>
-                <view class="orderMangChildElement" style="width:55%;">1547*********44589</view>
-            </view>
-            <view class="orderMangTipCenterEve">
-                <view class="orderMangChildElement" style="width:45%;">188****4521</view>
-                <view class="orderMangChildElement" style="width:55%;">1547*********44589</view>
-            </view>
-            <view class="orderMangTipCenterEve">
-                <view class="orderMangChildElement" style="width:40%;">188****4521</view>
-                <view class="orderMangChildElement" style="width:60%;">1547*********44589</view>
-            </view>
-            <view class="orderMangTipCenterEve">
-                <view class="orderMangChildElement" style="width:45%;">188****4521</view>
-                <view class="orderMangChildElement" style="width:55%;">1547*********44589</view>
-            </view>
-            <view class="orderMangTipCenterEve">
-                <view class="orderMangChildElement" style="width:45%;">188****4521</view>
-                <view class="orderMangChildElement" style="width:55%;">1547*********44589</view>
-            </view>
-            <view class="orderMangTipCenterEve">
-                <view class="orderMangChildElement" style="width:45%;">188****4521</view>
-                <view class="orderMangChildElement" style="width:55%;">1547*********44589</view>
-            </view>
-            <view class="orderMangTipCenterEve">
-                <view class="orderMangChildElement" style="width:45%;">188****4521</view>
-                <view class="orderMangChildElement" style="width:55%;">1547*********44589</view>
-            </view>
-            <view class="orderMangTipCenterEve">
-                <view class="orderMangChildElement" style="width:45%;">188****4521</view>
-                <view class="orderMangChildElement" style="width:55%;">1547*********44589</view>
-            </view>
-
+                <view class="orderMangTipCenterEve">
+                    <view class="orderMangChildElement" style="width:45%;">{{selectData.userMobile}}</view>
+                    <view class="orderMangChildElement" style="width:55%;">{{selectData.lotto}}</view>
+                </view>
         </scroll-view>
 
         <view class="orderMangTipCenterEve" style="width:560rpx;margin:auto;">
@@ -143,6 +106,32 @@
 
 
 
-
 </view>
+
+<view class="orderBottomNavigation" wx:if='{{itemType == 4 }}'>
+    <view class="orderBottomNavEve bottomButComWidth" catchtap="lotteryNumberFun">开奖签号（{{salesEffectInfo.summary.quota}}）</view>
+</view>
+
+<!-- 开奖签号 -->
+<view class="wshNew" catchtouchmove="true" wx:if='{{lotteryNumberIs}}' catchtap="lotteryNumberFun">
+    <view class="lotteryNumber" style="height:{{windowHeight-100}}px;">
+        <view class="orderMangTipCenterEve" style="padding:20rpx 0;font-size:28rpx;">
+            <view class="orderMangChildElement" style="width:45%;">手机号</view>
+            <view class="orderMangChildElement" style="width:55%;">身份证号</view>
+        </view>
+        <scroll-view scroll-y="true" style="height:{{windowHeight-210}}px;" scroll-y class="scroll-warp" scroll-with-animation="{{true}}">
+            <block wx:for="{{lotteryNumberList}}" wx:key='key'>
+                <view class="orderMangTipCenterEve">
+                    <view class="orderMangChildElement" style="width:45%;">{{item.tel}}</view>
+                    <view class="orderMangChildElement" style="width:55%;">{{item.lotto}}</view>
+                </view>
+            </block>
+
+        </scroll-view>
+
+        
+        <view class="lotteryNumberBut" catchtap="lotteryNumberFun">返回</view>
+    </view>
+</view>
+
 

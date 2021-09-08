@@ -110,40 +110,16 @@ Page({
       }else{
         app.comjumpwxnav(9040,'id='+selectData.itemId,'','')
       };
-    } else if(index == 2){      
-        api.checkOrderRefund({
-            orderId:selectData.order.orderId,	// Number订单id 对内唯一标识
-            customerId:selectData.order.userId // 	Number对应订单的用户id
-        }).then(res => {
-          console.log('查询是否分账',res)
-          if (res.data.status_code == 200) {
-              var payInfoData = res.data.data.Info;
-              var subLedger = 1;
-              if(payInfoData.isProfit){
-                subLedger = 1;
-              }else{
-                subLedger = 2;
-              };
-              _this.setData({
-                subLedger:subLedger,
-                payInfoData:payInfoData,
-                commonBulletFrame:true,
-                logisticsRefundModify:index,
-                orderNum:num,
-                selectData
-              })
-          }else{
-            if(res.data && res.data.message){
-              app.showModalC(res.data.message); 
-            };        
-          }          
-        })
+    } else if(index == 2){
+      wx.navigateTo({ 
+        url: "/page/settled/pages/salesEffect/salesEffect?itemtype="+selectData.itemType+"&itemid="+selectData.itemId,
+      });
     } else if(index == 3){
 
     }else if(index == 4){
       this.toggleAddNewEventMask()
     };
-    if(index != 1 && index != 4){
+    if(index != 1 && index != 4 && index != 2){
       this.setData({
         commonBulletFrame:true,
         logisticsRefundModify:index,

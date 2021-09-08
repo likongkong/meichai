@@ -74,11 +74,11 @@
 
 <!-- 编辑 -->
 <view class="editButtom" wx:if='{{dataDetail.isOneselfBrand}}' catchtap="jumpdetail" data-type='4' data-id='{{illustrated_id}}'>
-    <view style="display:inline-block;margin-left:100rpx;" catchtap="jumpdetail" data-type='4' data-id='{{drying_id}}'>
+    <view style="display:inline-block;margin-left:100rpx;" catchtap="jumpdetail" data-type='4' data-id='{{illustrated_id}}'>
         <image mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/compile.png'></image>
         <view>编辑</view>
     </view>
-    <view style="display:inline-block;margin-left:100rpx;" wx:if='{{false}}' catchtap="jumpdetail" data-type='4' data-id='{{drying_id}}'>
+    <view style="display:inline-block;margin-left:100rpx;" wx:if='{{false}}' catchtap="jumpdetail" data-type='4' data-id='{{illustrated_id}}'>
         <image mode="aspectFit" src='../../../../pages/images/icon_delete.png'></image>
         <view>删除</view>    
     </view>

@@ -103,6 +103,15 @@ export const settledGoodsBrandlist = (query) => {
     return apiResquest.get('brand/settled_goods/brandlist',query)
 }
 
+// ---------------------------------------- 销售效果 -----------------------------------------
+// 销售效果数据
+export const salesResult = (url,query) => {
+    return apiResquest.get('brand/settled_goods/salesResult/' + url,query)
+}
+
+
+
+
 // login(data).then(res => {
 //   console.log(res)
 // }).catch(err => {

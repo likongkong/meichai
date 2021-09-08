@@ -96,12 +96,8 @@ Page({
     // } catch (e) {
       
     // }
+    this.getData();
 
-    if(wx.getStorageSync('access_token')){
-      this.getData();
-    }else{
-      app.getAccessToken(_this.getData)
-    };
     
   },
   // 获取数据
