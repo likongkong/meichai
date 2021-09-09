@@ -225,8 +225,8 @@ Page({
         })
     } else if(index == 3){
       _this.setData({
-        csc:'',
-        scanCodeMsg:''
+        csc:selectData.order.shippingName || '',
+        scanCodeMsg:selectData.order.shippingCode || ''
       })
     }else if(index == 4){
 

@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '销售效果',
+    c_title: '',
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
@@ -134,10 +134,18 @@ Page({
     // '已经授权'
     _this.data.loginid = app.signindata.loginid;
     _this.data.uid = app.signindata.uid;
+    var titleTop = ''
+    if(options.itemtype == -1){
+      titleTop = '秒杀';
+    }else if(options.itemtype == 4){
+      titleTop = '抽选';
+    };
     _this.setData({
       itemType : options.itemtype || '',
       itemId : options.itemid || '',
+
       windowHeight: app.signindata.windowHeight - wx.getStorageSync('statusBarHeightMc')||0,
+      c_title:titleTop+'效果'
     })
 
     // 判断是否登录
@@ -177,28 +185,37 @@ Page({
       var pagenum = _this.data.page;
       _this.data.page = ++pagenum;
     };
-     api.salesResult(`${_this.data.itemType}/${_this.data.itemId}`,{listType:_this.data.umid}).then((res) => {
+     api.salesResult(`${_this.data.itemType}/${_this.data.itemId}`,{listType:_this.data.umid,pageId:_this.data.page}).then((res) => {
       console.log('列表数据=======',res)
       _this.setData({nodataiftr:true})
       if (res.data.status_code == 200) {
-        var salesEffectInfo = res.data.data.Info;
-        var salesEffectList = res.data.data.List;
+        
+        var salesEffectList = res.data.data.List || [];
 
         for(var i=0;i<salesEffectList.length;i++){
           salesEffectList[i].lotto = salesEffectList[i].lotto?utils.plusXing(salesEffectList[i].lotto,4,4):'';
           salesEffectList[i].tel = salesEffectList[i].tel?utils.plusXing(salesEffectList[i].tel,3,4):'';
           salesEffectList[i].userMobile = salesEffectList[i].userMobile?utils.plusXing(salesEffectList[i].userMobile,3,4):'';
         };
+        if(num == 1){
+            var salesEffectInfo = res.data.data.Info;
+            _this.setData({
+              salesEffectInfo,
+              salesEffectList,
+              timeaddis:salesEffectInfo.summary.goodsAddTime
+            },function(){
+              if(salesEffectInfo.summary.goodsAddTime && salesEffectInfo.summary.status !=3){
+                _this.countdowntime(salesEffectInfo.summary.goodsAddTime)
+              };
+            });
 
-        if(_this.data.itemType == -1){
-           _this.countdowntime(salesEffectInfo.summary.goodsAddTime)
-        };
+        }else{
+          salesEffectList = [...salesEffectList,..._this.data.salesEffectList]
+          _this.setData({
+            salesEffectList
+          });
+        }
 
-        _this.setData({
-          salesEffectInfo,
-          salesEffectList,
-          timeaddis:salesEffectInfo.summary.goodsAddTime
-        });
       }else{
         if(res.data && res.data.message){
           app.showModalC(res.data.message); 
@@ -208,10 +225,17 @@ Page({
   },
   // 倒计时
   countdowntime: function ( cdtime) {
-    var _this = this;;
+    var _this = this;
+    var salesEffectInfo = _this.data.salesEffectInfo;
+    console.log('salesEffectInfo=============',salesEffectInfo)
     clearInterval(_this.data.countdowntime);
     var countdowntime = function () {
-      var totalSecond = Date.parse(new Date()) / 1000 - parseInt(cdtime);
+      var nowData = Date.parse(new Date()) / 1000;
+      if(salesEffectInfo.summary.status == 2 && nowData > salesEffectInfo.summary.goodsStopTime){
+        clearInterval(_this.data.countdowntime);
+        _this.getData();
+      };
+      var totalSecond = nowData - parseInt(cdtime);
       // 秒数  
       var second = totalSecond;
       // 天数位  
@@ -275,7 +299,7 @@ Page({
    */
   onShow: function () {
 
-    if(this.data.timeaddis && this.data.itemType == -1){
+    if(this.data.timeaddis && _this.data.salesEffectInfo && _this.data.salesEffectInfo.summary.status !=3){
       this.countdowntime(this.data.timeaddis)
     }
     
@@ -308,7 +332,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    // this.getData(2)
+    this.getData(2)
   },
 
   /**

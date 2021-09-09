@@ -2,25 +2,28 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 <view class="seBox">
-    <view class="seTop" wx:if='{{nodataiftr}}'>
+    <view class="seTop seTopBox" wx:if='{{nodataiftr}}'>
         <view class="seTopName">
             <view class="seTopNameEve">
-               <block wx:if='{{itemType==4}}'>定金总额</block>
-               <block wx:elif='{{itemType==-1}}'>订单数量</block>
+               <block wx:if='{{itemType==4}}'>实际收入</block>
+               <block wx:elif='{{itemType==-1}}'>实际收入</block>
             </view>
             <view class="seTopNameEve">
-                <block wx:if='{{itemType==4}}'>尾款总额</block>
-                <block wx:elif='{{itemType==-1}}'>订单总金额</block>            
+                <block wx:if='{{itemType==4}}'>退款金额</block>
+                <block wx:elif='{{itemType==-1}}'>退款金额</block>            
             </view>
         </view>
         <view class="seTopName">
-            <view class="seTopNameEve" style="color:#999495;">
-                <block wx:if='{{itemType==4}}'>{{salesEffectInfo.summary.depositAmount || 0}}</block>  <!-- 抽选 -->
-                <block wx:elif='{{itemType==-1}}'>{{salesEffectInfo.summary.countOrder || 0}}</block>   <!-- 正常商品 -->
+            <view class="seTopNameEve" style="color:#999495;line-height:40rpx;">
+                <block wx:if='{{itemType==4}}'>{{salesEffectInfo.summary.totalCurrentAmount || 0}}</block>  <!-- 抽选 -->
+                <block wx:elif='{{itemType==-1}}'>{{salesEffectInfo.summary.totalCurrentAmount || 0}}</block>   <!-- 正常商品 -->
             </view>
-            <view class="seTopNameEve" style="color:#999495;">
-                <block wx:if='{{itemType==4}}'>{{salesEffectInfo.summary.balanceAmount || 0}}</block>  <!-- 抽选 -->
-                <block wx:elif='{{itemType==-1}}'>{{salesEffectInfo.summary.totalAmount || 0}}</block>   <!-- 正常商品 -->
+            <view class="seTopNameEve" style="color:#999495;line-height:40rpx;">
+                <block wx:if='{{itemType==4}}'>
+                    <block wx:if='{{salesEffectInfo.summary.status == 1}}'>未到开奖时间</block>
+                    <block wx:else>{{salesEffectInfo.summary.totalRefundAmount || 0}}</block>
+                </block>  <!-- 抽选 -->
+                <block wx:elif='{{itemType==-1}}'>{{salesEffectInfo.summary.totalRefundAmount || 0}}</block>   <!-- 正常商品 -->
             </view>
         </view>
         <view class="seTopName">
@@ -29,18 +32,20 @@
                 <block wx:elif='{{itemType==-1}}'>参与人数</block>              
             </view>
             <view class="seTopNameEve">
-                <block wx:if='{{itemType==4}}'>退款人数</block>
-                <block wx:elif='{{itemType==-1}}'>活动天数</block>             
+                <block wx:if='{{itemType==4}}'>活动时长</block>
+                <block wx:elif='{{itemType==-1}}'>活动时长</block>             
             </view>
         </view>
         <view class="seTopName">
-            <view class="seTopNameEve" style="color:#999495;">
+            <view class="seTopNameEve" style="color:#999495;line-height:40rpx;">
                 <block wx:if='{{itemType==4}}'>{{salesEffectInfo.summary.countUsers || 0}}</block>  <!-- 抽选 -->
                 <block wx:elif='{{itemType==-1}}'>{{salesEffectInfo.summary.countUsers || 0}}</block>   <!-- 正常商品 -->            
             </view>
-            <view class="seTopNameEve" style="color:#999495;">
-                <block wx:if='{{itemType==4}}'>{{salesEffectInfo.summary.countRefundUser || 0}}</block>  <!-- 抽选 -->
-                <block wx:elif='{{itemType==-1}}'>
+            <view class="seTopNameEve" style="color:#999495;line-height:40rpx;">
+                <!-- 抽选 -->
+                <!-- <block wx:if='{{itemType==4}}'>{{salesEffectInfo.summary.countRefundUser || 0}}</block> -->
+                <block wx:if='{{salesEffectInfo.summary.status == 3}}'>已结束</block>
+                <block wx:else>
                     <!-- {{salesEffectInfo.summary.goodsAddTime || 0}} -->
                     <block wx:if='{{percountdown.dayStr != "00"}}'>{{percountdown.dayStr}}天</block>
                     <block wx:if='{{percountdown.hrStr != "00"}}'>{{percountdown.hrStr}}小时</block>
@@ -73,7 +78,8 @@
                     </view>
                 </view>
                 <view class="emlhright" catchtap="comjump" wx:if='{{item.orderId}}' data-id='{{item.orderId}}'>查看订单</view>
-                <view class="emlhright" wx:if='{{itemType == 4 && umid==1}}' data-num='{{index}}' catchtap="signaturePopUpDis" style="right:140rpx;">查看签号</view>
+                <view class="emlhright" wx:if='{{itemType == 4}}' data-num='{{index}}' catchtap="signaturePopUpDis" style="{{item.orderId?'right:140rpx;':''}}">查看签号</view>
+                <!-- umid==1  -->
             </view>
         </block>
 
@@ -95,7 +101,7 @@
     <view class="orderMangAddress" catchtap="true">
         <view class="orderMangTipTop">查看签号</view>
         <view class="orderMangTipCenterEve">
-            <block wx:if='{{selectData.userMobile}}'>
+            <block wx:if='{{selectData.tel}}'>
                 <view class="orderMangChildElement" style="width:45%;">手机号</view>
                 <view class="orderMangChildElement" style="width:55%;">身份证号</view>
             </block>
@@ -103,8 +109,8 @@
         </view>
         <scroll-view scroll-y="true" style="width:100%;height:300rpx;margin-bottom:20rpx">
                 <view class="orderMangTipCenterEve">
-                    <view class="orderMangChildElement" wx:if='{{selectData.userMobile}}' style="width:45%;">{{selectData.userMobile}}</view>
-                    <view class="orderMangChildElement" style="width:55%;">{{selectData.lotto}}</view>
+                    <view class="orderMangChildElement" wx:if='{{selectData.tel}}' style="width:45%;">{{selectData.tel}}</view>
+                    <view class="orderMangChildElement" style="{{!selectData.tel?'width:100%; text-align: center;':'width:55%;'}}">{{selectData.lotto}}</view>
                 </view>
         </scroll-view>
 

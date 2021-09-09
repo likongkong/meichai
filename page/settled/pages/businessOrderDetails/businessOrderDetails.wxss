@@ -5,7 +5,7 @@
   border-radius: 15rpx;
   padding:0 25rpx 10rpx;
   margin: 0 auto 20rpx;
-  font-size: 24rpx;
+  font-size:28rpx;
 }
 .comPaddingTop{
   padding-top: 20rpx;

@@ -42,7 +42,7 @@
                         <view>{{itemTypeName}}</view>
                         <view>{{itemStatusName}}</view>
                     </view>
-                    <view class="obcrTop" style="padding-top:20rpx;">
+                    <view class="obcrTop" style="padding-top:10rpx;">
                         <view class="specialellipsis">{{itemName}}</view>
                     </view>
                     <view class="obcrBottom obcrTop">
@@ -65,7 +65,9 @@
                     <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='1'>编辑</view>
                 </block>
                 <block wx:else>
-                    <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='2'>销售效果</view>
+                    <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='2'>
+                        <block wx:if='{{itemType == -1}}'>秒杀</block><block wx:elif='{{itemType == 4}}'>抽选</block>效果
+                    </view>
                 </block>
                 
                 

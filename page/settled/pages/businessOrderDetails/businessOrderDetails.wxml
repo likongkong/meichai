@@ -1,9 +1,9 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
-<view class="omBox">
+<view class="omBox" style="font-size:28rpx;">
     <view class="centerTxtOrderDeatail">
-            <view class="orderBoxTop">
+            <view class="orderBoxTop" style="font-size:28rpx;">
                 <view>订单编号:{{detailData.order.orderSN}}</view>
                 <view style="color:#90D2D6;">{{detailData.order.payStatusName}}</view>
             </view>
@@ -14,7 +14,7 @@
                         <view style="padding-right:10rpx;">{{detailData.goods.goodsName}}</view>
                         <view></view>
                     </view>
-                    <view class="obcrBottom obcrTop">
+                    <view class="obcrBottom obcrTop" style="font-size:28rpx;">
                         <view>数量x{{detailData.order.goodsNumber}}</view>
                         <view>订单金额￥{{detailData.order.goodsAmount}}</view>
                     </view>
@@ -177,10 +177,10 @@
                     <view>请输入快递公司及运单号</view>
                 </view>
                 <view class="orderMangTipCenterEve">
-                    <input class="addWaybillNumber" type="text" value='{{csc}}' bindinput='cscfun' placeholder="快递公司" ></input>
+                    <input class="addWaybillNumber" style="color:#AAAAAA;" type="text" value='{{csc}}' bindinput='cscfun' placeholder="快递公司" ></input>
                 </view>
                 <view class="orderMangTipCenterEve">
-                    <input class="addWaybillNumber" type="text" placeholder="快递运单号" bindinput='scancodefun' value="{{scanCodeMsg}}"></input>
+                    <input class="addWaybillNumber" style="color:#AAAAAA;" type="text" placeholder="快递运单号" bindinput='scancodefun' value="{{scanCodeMsg}}"></input>
                     <image class="scanCode" bindtap='scanCode' src="https://cdn.51chaidan.com/images/brandSettledIcon/scan.png" mode="aspectFit"></image>
                 </view>       
             </view>
