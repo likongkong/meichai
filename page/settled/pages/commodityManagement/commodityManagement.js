@@ -453,9 +453,9 @@ Page({
       title = selectData.itemName || '你喜欢的潮玩都在这里！';
       onshareImg = selectData.itemImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg';
       if (selectData.itemType == '-1'){  // 正常商品
-        onshareUrl = '/pages/detailspage/detailspage?gid=' + selectData.itemId;
+        onshareUrl = '/pages/detailspage/detailspage?gid=' + selectData.itemId + '&referee=' + app.signindata.uid;
       }else if(selectData.itemType == 4){ // 抽选
-        onshareUrl = "/page/component/pages/limitlottery/limitlottery?id=" + selectData.itemId;
+        onshareUrl = "/page/component/pages/limitlottery/limitlottery?id=" + selectData.itemId + '&referee=' + app.signindata.uid;
       };      
     }
     return {
