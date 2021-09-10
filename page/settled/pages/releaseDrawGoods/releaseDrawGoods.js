@@ -39,7 +39,7 @@ Page({
         subtitle:'商品展示图（建议上传比例1:1）',
         name:'flatPatternmaking',
         src:'',
-        storagelocation:'brandinfo/voucher',
+        storagelocation:'images/goods',
         borderbottom1:'show',
         margintop0:true,
       },{
@@ -113,7 +113,7 @@ Page({
         imageList:[],
         margintop0:true,
         mode:'multiple',
-        storagelocation:'brandinfo/dynamic'
+        storagelocation:'images/goods'
       },
     ],
     listData4:[
@@ -138,18 +138,19 @@ Page({
         explain:false,
         input:true,
         name:'isCashPledge',
-      },{
-        isRequired:false,
-        type:'radio',
-        subtitle:'允许购买对象',
-        radioArr:['所有人可购买','指定群成员购买'],
-        value:0,
-        index:0,
-        direction:'Y',
-        explain:true,
-        explainTxt:'所有人可购买：所有人可分享并且购买。\n指定群成员购买：只有管理员可分享，并且用户只可以通过分享链接购买',
-        name:'isCanShare',
-      }
+      },
+      // {
+      //   isRequired:false,
+      //   type:'radio',
+      //   subtitle:'允许购买对象',
+      //   radioArr:['所有人可购买','指定群成员购买'],
+      //   value:0,
+      //   index:0,
+      //   direction:'Y',
+      //   explain:true,
+      //   explainTxt:'所有人可购买：所有人可分享并且购买。\n指定群成员购买：只有管理员可分享，并且用户只可以通过分享链接购买',
+      //   name:'isCanShare',
+      // }
     ],
     obj:{
       explain:'', //说明
@@ -397,7 +398,7 @@ Page({
           [`listData4[0].index`]:info.isShowSellNumber==0?1:0,
           [`listData4[1].index`]:info.cashPledge==0?1:0,
           [`listData4[1].value`]:info.cashPledge==0?'':info.cashPledge,
-          [`listData4[2].index`]:info.isCanShare==0?1:0,
+          // [`listData4[2].index`]:info.isCanShare==0?1:0,
         })
     //  goodsName:'', //商品名称
     //  flatPatternmaking:'', //商品展示图
@@ -424,7 +425,7 @@ Page({
         obj.isParticipants = info.isShowSellNumber==0?1:0;
         obj.isCashPledge = info.cashPledge==0?1:0;
         obj.isCashPledgeNum = info.cashPledge==0?'':info.cashPledge;
-        obj.isCanShare = info.isCanShare==0?1:0;
+        // obj.isCanShare = info.isCanShare==0?1:0;
       }else{
         app.showToastC(res.data.Msg,2000);
       }
@@ -505,7 +506,7 @@ Page({
       arrGoodsDescImg:obj.goodsDetailsPic,
       isShowSellNumber:obj.isParticipants==0?1:0,
       cashPledge:obj.isCashPledge==0?obj.isCashPledgeNum:0,
-      isCanShare:obj.isCanShare==0?1:0,
+      // isCanShare:obj.isCanShare==0?1:0,
     }
     console.log(data)
     // return false;

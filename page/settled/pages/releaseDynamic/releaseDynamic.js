@@ -37,7 +37,7 @@ Page({
         name:'dynamicPic',
         imageList:[],
         mode:'multiple',
-        storagelocation:'brandinfo/dynamic'
+        storagelocation:'images/dynamic'
       },{
         isRequired:false,
         type:'link',

@@ -24,14 +24,14 @@ Page({
         subtitle:'IP logo（建议上传比例1:1）',
         name:'ipLogo',
         src:'',
-        storagelocation:'brandinfo/logo'
+        storagelocation:'images/brandSettled/logo'
       },{
         isRequired:false,
         type:'uploadImg',
         subtitle:'IP 形象图（建议上传比例16:9）',
         name:'ipImage',
         src:'',
-        storagelocation:'brandinfo/banner'
+        storagelocation:'images/brandSettled/banner'
       },{
         isRequired:false,
         type:'textarea',

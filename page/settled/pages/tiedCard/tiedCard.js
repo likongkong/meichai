@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '企业信息',
+    c_title: '绑定银行卡',
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
@@ -16,38 +16,31 @@ Page({
     enterpriseData:[{
         isRequired:true,
         type:'text',
-        subtitle:'企业名称',
-        placeholder:'请输入企业名称',
+        subtitle:'开户姓名',
+        placeholder:'请输入开户姓名',
         value:'',
-        name:'enterpriseName'
+        name:'name'
       },{
         isRequired:true,
         type:'text',
-        subtitle:'企业联系人',
-        placeholder:'请输入企业联系人',
+        subtitle:'银行卡号',
+        placeholder:'请输入银行卡号',
         value:'',
-        name:'enterpriseContact'
+        name:'cardnumber'
       },{
         isRequired:true,
         type:'text',
-        subtitle:'联系方式',
-        placeholder:'请输入手机号',
+        subtitle:'开户银行',
+        placeholder:'请选择开户银行',
         value:'',
-        name:'enterprisePhone'
+        name:'bankdeposit '
       },{
         isRequired:true,
         type:'text',
-        subtitle:'微信号',
-        placeholder:'请输入微信号',
+        subtitle:'开户支行',
+        placeholder:'请输入开户支行',
         value:'',
-        name:'wechatID'
-      },{
-        isRequired:true,
-        type:'uploadImg',
-        subtitle:'企业营业执照或与IP相关凭证',
-        name:'businessLicense',
-        src:'',
-        storagelocation:'images/brandSettled/certification'
+        name:'bankSubBranch '
       }
     ],
     obj:{},
@@ -61,15 +54,11 @@ Page({
   onLoad: function (options) {
     this.data.uid = app.signindata.uid;
     this.data.loginid = app.signindata.loginid;
-    console.log(JSON.parse(options.info))
-    this.setData({
-      info:JSON.parse(options.info)
-    })
     // 判断是否登录
     if (this.data.loginid != '' && this.data.uid != '') {
       this.onLoadfun();
     } else {
-      app.signin(_this)
+      app.signin(this)
     }
   },
   onLoadfun(){

@@ -50,6 +50,7 @@ Page({
     month:'',   //月
     status_type:'',  //交易类型
     loadprompt:false,
+    showModalStatus:false,
   },
   /**
    * 生命周期函数--监听页面加载

@@ -24,14 +24,14 @@ Page({
         subtitle:'IP logo（建议上传比例1:1）',
         name:'ipLogo',
         src:'',
-        storagelocation:'brandinfo/logo'
+        storagelocation:'images/brandSettled/logo'
       },{
         isRequired:true,
         type:'uploadImg',
         subtitle:'IP 形象图（建议上传比例16:9）',
         name:'ipImage',
         src:'',
-        storagelocation:'brandinfo/banner'
+        storagelocation:'images/brandSettled/banner'
       },{
         isRequired:true,
         type:'textarea',
@@ -50,7 +50,7 @@ Page({
         subtitle:'小助手微信二维码',
         name:'WeChatCode',
         src:'',
-        storagelocation:'brandinfo/WeChat',
+        storagelocation:'images/brandSettled/qr_code',
         borderbottom1:'hide',
         isEdit:'hide',
         paddingL80:'paddingL80'
@@ -60,7 +60,7 @@ Page({
         subtitle:'公众号二维码',
         name:'officialAccounts',
         src:'',
-        storagelocation:'brandinfo/official_accounts',
+        storagelocation:'images/brandSettled/qr_code',
         borderbottom1:'hide',
         isEdit:'hide',
         paddingL80:'paddingL80'
