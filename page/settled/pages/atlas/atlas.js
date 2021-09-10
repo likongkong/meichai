@@ -133,6 +133,14 @@ Page({
                     element.start_time = _this.toDate(element.start_time)
                 });
             };
+            if(res.data.Info && res.data.Info.sameInfo && res.data.Info.sameInfo.sameUserImg){
+                res.data.Info.sameInfo.sameUserImg.reverse()
+            };
+            if(res.data.Info && res.data.Info.wantInfo && res.data.Info.wantInfo.wantUserImg){
+                res.data.Info.wantInfo.wantUserImg.reverse()
+            };
+
+
            _this.setData({
              dataDetail:res.data.Info,
              sellList:sellList
