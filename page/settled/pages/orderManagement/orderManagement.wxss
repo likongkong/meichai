@@ -6,6 +6,7 @@ page{
 .omBox{
   width: 100%;
   padding: 20rpx 0 140rpx 0;
+  font-size:28rpx;
 }
 .marginAuto{
   width: 710rpx;
@@ -19,7 +20,6 @@ page{
   display: inline-block;
   height: 60rpx;
   line-height: 60rpx;
-  font-size: 26rpx;
   color: #000;
   background:#fff;
   border-radius: 15rpx;  
@@ -61,7 +61,6 @@ page{
   line-height: 58rpx;
   text-align: center;
   border-radius: 15rpx;
-  font-size: 24rpx;
   color: #fff;
   background: #90D2D6;
   margin: auto;
@@ -70,14 +69,12 @@ page{
   height: 100%;
   width: 500rpx;
   float: left;
-  font-size: 24rpx;
 }
 
 .classifyItem{
   display: inline-block;
   padding: 0 15rpx;
   line-height: 80rpx;
-  font-size: 26rpx;
   color: #000;
   box-sizing: border-box;
 }
@@ -109,7 +106,6 @@ page{
   line-height: 80rpx;
   display: flex;
   justify-content:space-between;
-  font-size: 24rpx;
 }
 .userImgName{
   height: 80rpx;
@@ -127,13 +123,13 @@ page{
   height: 80rpx;
   line-height: 80rpx;
   vertical-align: top;
-  margin-left: 20rpx;
-  width: 240rpx;
+  margin-left: 10rpx;
+  width: 200rpx;
 }
 .orderBoxContent{
   width: 100%;
   height: 160rpx;
-  border-bottom: 2rpx solid #ECECEC;
+  border-bottom: 2rpx solid #f5f5f5;
 }
 .orderBoxContentImg{
   width: 140rpx;
@@ -150,7 +146,6 @@ page{
 .obcrTop{
   display: flex;
   justify-content:space-between;
-  font-size: 24rpx;
 }
 .obcrBottom{
   width: 100%;
@@ -160,7 +155,6 @@ page{
 }
 .orderAddress{
   width: 100%;
-  font-size: 24rpx;
   padding-top: 20rpx;
   overflow: hidden;
 }
@@ -170,7 +164,7 @@ page{
   justify-content: space-between;
 }
 .orderBottom{
-  border-top: 2rpx solid #ECECEC;
+  border-top: 2rpx solid #f5f5f5;
   width: 100%;
   padding-top: 20rpx;
 }
@@ -187,7 +181,6 @@ page{
   text-align: center;
   color: #fff;
   background: #90D2D6;
-  font-size: 24rpx;
   border-radius: 10rpx;
   display: inline-block;
   margin-left: 20rpx;
@@ -212,7 +205,6 @@ page{
   text-align: center;
   color: #fff;
   background: #90D2D6;
-  font-size: 24rpx;
   border-radius: 10rpx;
   display: inline-block;
   vertical-align: top;
@@ -243,7 +235,7 @@ page{
   display: flex;
   justify-content:space-between;
   padding-bottom: 30rpx;
-  font-size: 24rpx;
+  font-size: 28rpx;
 }
 .addressModifyInput{
   color:#AAAAAA;

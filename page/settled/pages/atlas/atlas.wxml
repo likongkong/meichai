@@ -25,7 +25,7 @@
     </view>
     <view class="atlasCenter">
        <view class="atlasCName">{{dataDetail.title}}</view>
-       <view class="atlasCNChild">发售信息</view>
+       <view class="atlasCNChild" wx:if='{{sellList && sellList.length != 0}}'>发售信息</view>
        <view class="atlasCNChildEve" wx:for='{{sellList}}' wx:key='key' catchtap="jumpdetail" data-id='{{item.id}}' data-type='{{item.type}}'>
            <view class="atlasCNChildETop">
                <view>{{item.start_time}}发售</view>

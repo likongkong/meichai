@@ -39,7 +39,7 @@
                 <view>订单编号:{{order.orderSN}}</view>
                 <view style="color:#90D2D6;">{{order.payStatusName}}</view>
             </view>
-            <view class="orderBoxTop" style="border-bottom: 2rpx solid #ECECEC;margin-bottom:20rpx;padding-bottom:20rpx;">
+            <view class="orderBoxTop" style="border-bottom: 2rpx solid #f5f5f5;margin-bottom:20rpx;padding-bottom:20rpx;">
                 <view class="userImgName">
                     <image class="userImg" src="{{receipt.userAvatar}}" mode="aspectFit"></image>
                     <text class="userName specialellipsis">{{receipt.userNick}}</text>
@@ -138,7 +138,7 @@
             <!--  subLedger 1 已分账 2 未分账-->
             <block wx:if='{{subLedger==1}}'>
                 <view class="orderMangTipCenter">
-                    <view class="orderMangTipCenterEve" style="padding-bottom: 15rpx;margin-bottom:15rpx;border-bottom: 1px solid #ECECEC;">
+                    <view class="orderMangTipCenterEve" style="padding-bottom: 15rpx;margin-bottom:15rpx;border-bottom: 1px solid #f5f5f5;">
                         <view>商品名称：{{selectData.goods.goodsName}}</view>
                     </view>
                     <view class="orderMangTipCenterEve">
@@ -150,7 +150,7 @@
                     <view class="orderMangTipCenterEve">
                         <view>平台抽成：{{payInfoData.order.percentage}}</view>
                     </view>                    
-                    <view class="orderMangTipCenterEve" style="padding-bottom: 15rpx;margin-bottom:15rpx;border-bottom: 1px solid #ECECEC;">
+                    <view class="orderMangTipCenterEve" style="padding-bottom: 15rpx;margin-bottom:15rpx;border-bottom: 1px solid #f5f5f5;">
                         <view>订单收入：{{payInfoData.order.profitAmount}}</view>
                     </view>   
                     <view class="orderMangTipCenterEve">
@@ -202,10 +202,10 @@
                     <view>请输入快递公司及运单号</view>
                 </view>
                 <view class="orderMangTipCenterEve">
-                    <input class="addWaybillNumber" type="text" value='{{csc}}' bindinput='cscfun' placeholder="快递公司" ></input>
+                    <input class="addWaybillNumber" style="color:#AAAAAA;" type="text" value='{{csc}}' bindinput='cscfun' placeholder="快递公司" ></input>
                 </view>
                 <view class="orderMangTipCenterEve">
-                    <input class="addWaybillNumber" type="text" placeholder="快递运单号" bindinput='scancodefun' value="{{scanCodeMsg}}"></input>
+                    <input class="addWaybillNumber" style="color:#AAAAAA;" type="text" placeholder="快递运单号" bindinput='scancodefun' value="{{scanCodeMsg}}"></input>
                     <image class="scanCode" bindtap='scanCode' src="https://cdn.51chaidan.com/images/brandSettledIcon/scan.png" mode="aspectFit"></image>
                 </view>       
             </view>

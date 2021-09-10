@@ -6,6 +6,7 @@ page{
 .omBox{
   width: 100%;
   padding: 20rpx 0 140rpx 0;
+  font-size:28rpx;
 }
 .marginAuto{
   width: 710rpx;
@@ -19,7 +20,6 @@ page{
   display: inline-block;
   height: 60rpx;
   line-height: 60rpx;
-  font-size: 26rpx;
   color: #000;
   background:#fff;
   border-radius: 15rpx;  
@@ -61,7 +61,6 @@ page{
   line-height: 58rpx;
   text-align: center;
   border-radius: 15rpx;
-  font-size: 24rpx;
   color: #fff;
   background: #90D2D6;
   margin: auto;
@@ -70,14 +69,12 @@ page{
   height: 100%;
   width: 500rpx;
   float: left;
-  font-size: 24rpx;
 }
 
 .classifyItem{
   display: inline-block;
   padding: 0 15rpx;
   line-height: 80rpx;
-  font-size: 26rpx;
   color: #000;
   box-sizing: border-box;
 }
@@ -109,7 +106,6 @@ page{
   line-height: 80rpx;
   display: flex;
   justify-content:space-between;
-  font-size: 24rpx;
 }
 .userImgName{
   height: 80rpx;
@@ -149,7 +145,6 @@ page{
 .obcrTop{
   display: flex;
   justify-content:space-between;
-  font-size: 24rpx;
 }
 .obcrBottom{
   width: 100%;
@@ -159,7 +154,6 @@ page{
 }
 .orderAddress{
   width: 100%;
-  font-size: 24rpx;
   padding-top: 20rpx;
   overflow: hidden;
 }
@@ -186,7 +180,6 @@ page{
   text-align: center;
   color: #fff;
   background: #90D2D6;
-  font-size: 24rpx;
   border-radius: 10rpx;
   display: inline-block;
   margin-left: 38rpx;
@@ -212,7 +205,6 @@ page{
   text-align: center;
   color: #fff;
   background: #90D2D6;
-  font-size: 24rpx;
   border-radius: 10rpx;
   display: inline-block;
   vertical-align: top;
@@ -226,7 +218,6 @@ page{
   height: 100rpx;
   line-height: 100rpx;
   text-align: center;
-  font-size: 28rpx;
 }
 .orderMangTipCenter{
   padding: 0 25rpx;
@@ -235,7 +226,6 @@ page{
   width: 600rpx;
   margin: 20rpx auto 60rpx;
   text-align: center;
-  font-size: 28rpx;
   line-height: 60rpx;
 }
 .orderMangTipCenterEve{
@@ -243,7 +233,6 @@ page{
   display: flex;
   justify-content:space-between;
   padding-bottom: 30rpx;
-  font-size: 24rpx;
 }
 .addressModifyInput{
   color:#AAAAAA;
@@ -311,7 +300,6 @@ page{
 .batchExportOrder{
   width: 600rpx;
   margin: 0 auto 60rpx;
-  font-size: 28rpx;
   line-height: 50rpx;
   display: block;
 }
@@ -319,7 +307,6 @@ page{
   height: 80rpx;
   padding-left: 60rpx;
   line-height: 80rpx;
-  font-size: 26rpx;
   color: #90D2D6;
   position: absolute;
   top: 0;
@@ -353,7 +340,6 @@ page{
   width: 400rpx;
   height: 60rpx;
   background: #90D2D6;
-  font-size: 28rpx;
   color: #fff;
   line-height: 60rpx;
   position: fixed;

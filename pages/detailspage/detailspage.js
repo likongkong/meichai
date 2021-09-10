@@ -3157,6 +3157,15 @@ Page({
             specialGoods:dataGinfo.specialGoods // 特殊商品  手机壳
           })
 
+          // if(!dataGinfo.isGoodsCanShare && _this.data.canShare!=1){
+          //   console.log('isGoodsCanShare','true 能 false不能分享')
+          //   wx.hideShareMenu();
+          // }else{
+          //   wx.showShareMenu({
+          //     withShareTicket:true
+          //   });
+          // };
+
 
           if (!reg.test(res.data.Ginfo.goods_thumb)) {
             res.data.Ginfo.goods_thumb = _this.data.zdyurl + res.data.Ginfo.goods_thumb;
@@ -3644,6 +3653,7 @@ Page({
       rec_cart_id: options.rec_cart_id || 0,
       referee: options.referee||0,
       room_id: options.room_id||0,
+      canShare: options.canShare || 0,
       loginid: app.signindata.loginid,
       uid: app.signindata.uid,
       openid: app.signindata.openid,
