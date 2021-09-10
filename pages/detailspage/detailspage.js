@@ -3157,14 +3157,14 @@ Page({
             specialGoods:dataGinfo.specialGoods // 特殊商品  手机壳
           })
 
-          // if(!dataGinfo.isGoodsCanShare && _this.data.canShare!=1){
-          //   console.log('isGoodsCanShare','true 能 false不能分享')
-          //   wx.hideShareMenu();
-          // }else{
-          //   wx.showShareMenu({
-          //     withShareTicket:true
-          //   });
-          // };
+          if(!dataGinfo.isGoodsCanShare && _this.data.canShare!=1){
+            console.log('isGoodsCanShare','true 能 false不能分享')
+            wx.hideShareMenu();
+          }else{
+            wx.showShareMenu({
+              withShareTicket:true
+            });
+          };
 
 
           if (!reg.test(res.data.Ginfo.goods_thumb)) {
