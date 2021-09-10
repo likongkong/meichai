@@ -403,14 +403,11 @@ Component({
                 fail: function (res) {},
               },_this);
             }, 300));
-
           }
         })
-
       }
     })
   },
-
     jumpRedList(w){
       var ind = w.currentTarget.dataset.ind;
       wx.navigateTo({   

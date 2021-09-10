@@ -60,15 +60,6 @@
                     <view class="vipButOpen">查看特权></view>      
                 </view>
             </block>
-            <!-- <text>
-                <block wx:if='{{isVip}}'>开通VIP立即领取价值￥2024好礼</block>
-                <block wx:else>开通VIP赠送价值￥2000+好礼</block>
-            </text>
-            <block wx:if='{{isVip}}'>
-                <view class="vipButOpen" catchtap="receivefun" wx:if='{{isGetVipBlindBoxMoney}}'>领取抽盒金</view>
-                <view class="vipButOpen" wx:else style="background:#ffffff;color:#C38925;">明日可领取</view>       
-            </block> -->
-            
         </view>
     </view>  
     

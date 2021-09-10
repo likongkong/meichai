@@ -1,4 +1,3 @@
-<!--pages/component/pickerYMDHM/pickerYMDHM.wxml-->
 <view class="container">
   <picker mode="multiSelector" bindchange="pickerChange" bindcolumnchange="pickerColumnChange" bindcancel ="pickerCancel" value="{{pickerIndex}}" range="{{pickerArray}}" range-key="{{'name'}}" class="picker">
     <view class='showFont'>

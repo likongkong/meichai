@@ -241,8 +241,8 @@ Page({
             [`fieldGuideData[1].imageList`]:info.imgArr,
             [`fieldGuideData1[0].value`]:info.price,
             [`fieldGuideData1[1].value`]:info.number,
-            [`fieldGuideData1[2].value`]:info.sell_way,
-            [`fieldGuideData1[3].value`]:info.description,
+            [`fieldGuideData1[2].value`]:info.sell_way.split('hc').join('\n'),
+            [`fieldGuideData1[3].value`]:info.description.split('hc').join('\n'),
             
           })
           obj.associationIp = info.brand_id;
@@ -293,7 +293,7 @@ Page({
       title: '加载中',
     })
     console.log(obj)
-    let data = `mod=community&operation=establishImages&uid=${this.data.uid}&loginid=${this.data.loginid}&brand_id=${obj.associationIp}&title=${obj.fieldGuideTitle}&price=${obj.goodsPrice}&number=${obj.goodsNum}&sell_way=${obj.sellingway?obj.sellingway:''}&description=${obj.fieldGuideDescription?obj.fieldGuideDescription:''}&imgArr=${obj.fieldGuidePic}&id=${this.data.id}`
+    let data = `mod=community&operation=establishImages&uid=${this.data.uid}&loginid=${this.data.loginid}&brand_id=${obj.associationIp}&title=${obj.fieldGuideTitle}&price=${obj.goodsPrice}&number=${obj.goodsNum}&sell_way=${obj.sellingway?obj.sellingway.split('\n').join('hc'):''}&description=${obj.fieldGuideDescription?obj.fieldGuideDescription.split('\n').join('hc'):''}&imgArr=${obj.fieldGuidePic}&id=${this.data.id}`
     var q = Dec.Aese(data);
     console.log(`${app.signindata.comurl}?${data}`)
     wx.request({

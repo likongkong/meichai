@@ -25,7 +25,7 @@ page{
   left: 0;
   width: 100%;
   background-color: #f4f5f9;
-  z-index: 100;
+  z-index: 10;
 }
 .footerWrap view{
   height: 80rpx;

@@ -65,8 +65,8 @@
        <view class="atlasCNChild" wx:if='{{dataDetail.brandName}}' data-type='3' catchtap="jumpdetail" data-id='{{dataDetail.brand_id}}'>品      牌：{{dataDetail.brandName}}></view>
        <view class="atlasCNChild" wx:if='{{dataDetail.price}}'>价      格：{{dataDetail.price}}</view>
        <view class="atlasCNChild" wx:if='{{dataDetail.number}}'>数      量：{{dataDetail.number}}</view>
-       <view class="atlasCNChild" wx:if='{{dataDetail.sell_way}}'>发售方式：{{dataDetail.sell_way}}</view>
-       <view class="atlasCNChild" wx:if='{{dataDetail.description}}'>简      介：{{dataDetail.description}}</view>
+       <view class="atlasCNChild" wx:if='{{dataDetail.sell_way}}'><text>发售方式：{{dataDetail.sell_way}}</text></view>
+       <view class="atlasCNChild" wx:if='{{dataDetail.description}}'><text>简      介：{{dataDetail.description}}</text></view>
 
 
     </view>   

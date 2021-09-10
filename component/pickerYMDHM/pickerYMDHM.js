@@ -1,5 +1,3 @@
-// pages/component/pickerYMDHM/pickerYMDHM.js
-
 Component({
   /**
    * 组件的属性列表
@@ -95,10 +93,6 @@ Component({
         chooseArray: pickerArray,
         dateString: mdate.dateString
       })
-      // console.log(date);
-      // this.triggerEvent('onPickerChange', mdate);
-      // console.log(this.data.pickerArray);
-      // console.log(this._getNumOfDays(2018, 10));
     },
     /**
      * 
@@ -112,9 +106,7 @@ Component({
       return new Date(year, month, day).getDate()
     },
     pickerChange: function (e) {
-      // console.log('picker发送选择改变，携带值为', e.detail.value)
       let indexArr = e.detail.value;
-      // console.log(this.data.pickerArray[0][indexArr[0]].id + "\n" + this.data.pickerArray[1][indexArr[1]].id + "\n" + this.data.pickerArray[2][indexArr[2]].id);
       const year = this.data.pickerArray[0][indexArr[0]].id;
       const month = this.data.pickerArray[1][indexArr[1]].id;
       const day = this.data.pickerArray[2][indexArr[2]].id;
@@ -165,11 +157,7 @@ Component({
       })
     },
   },
-  // 以下是旧式的定义方式，可以保持对 <2.2.3 版本基础库的兼容
   attached() {
-    // 在组件实例进入页面节点树时执行
-    // 在组件实例进入页面节点树时执行
-    // this._onInit();
   },
   ready() {
     console.log('进入ready外层节点=', this.data.date);

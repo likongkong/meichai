@@ -133,14 +133,14 @@ Page({
                     element.start_time = _this.toDate(element.start_time)
                 });
             };
+            res.data.Info.description = res.data.Info.description.split('hc').join('\n');
+            res.data.Info.sell_way = res.data.Info.sell_way.split('hc').join('\n');
             if(res.data.Info && res.data.Info.sameInfo && res.data.Info.sameInfo.sameUserImg){
                 res.data.Info.sameInfo.sameUserImg.reverse()
             };
             if(res.data.Info && res.data.Info.wantInfo && res.data.Info.wantInfo.wantUserImg){
                 res.data.Info.wantInfo.wantUserImg.reverse()
             };
-
-
            _this.setData({
              dataDetail:res.data.Info,
              sellList:sellList
