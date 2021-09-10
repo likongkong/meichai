@@ -1580,15 +1580,8 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
     _this.setData({
       shareFriendBox:false
     })
-    
-    if(_this.data.infoActivity.lottoPrice){
-      var shareName = _this.data.infoActivity.lottoPrice +'元购 '+ _this.data.infoActivity.name;
-    }else{
-      var shareName = _this.data.infoGoods.shop_price +'元购 '+ _this.data.infoActivity.name;
-    };
-    
     return {
-      title:shareName ,
+      title:_this.data.infoActivity.name,
       query:'id='+_this.data.infoActivity.id+'&gid='+_this.data.gid+ '&referee=' + _this.data.uid+'&perayu=1&list='+_this.data.isList,
 
       // query:{
@@ -1609,15 +1602,8 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
     }else{
       var urlpath = "/page/component/pages/limitlottery/limitlottery?id=" + _this.data.infoActivity.id + '&referee=' + _this.data.uid + '&gid=' + _this.data.gid + '&list='+_this.data.isList;
     };
-
-    if(_this.data.infoActivity.lottoPrice>=0){
-      var shareName = _this.data.infoActivity.lottoPrice + "元购 " + _this.data.infoActivity.name; 
-    }else{
-      var shareName = _this.data.infoGoods.shop_price + "元购 " + _this.data.infoActivity.name;
-    };
-
     var share = {
-      title:shareName ,
+      title:_this.data.infoActivity.name ,
       imageUrl: _this.data.snapshotlim,
       path:urlpath ,
       success: function (res) {}

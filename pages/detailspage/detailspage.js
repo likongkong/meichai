@@ -104,9 +104,7 @@ Page({
     // 后台传回
     hamount:0,
     // 支付完成赠送卷
-    paycheadwsong: '',     
-    // 是否支付成功
-    payiftr:false,
+    paycheadwsong: '',   
     // 支付成功分享的图片地址
     paycheadwsongimg:'',
     combdataimg:{},
@@ -947,26 +945,17 @@ Page({
       tipback: false,
     })
   },
-  // 支付完成隐藏弹框
-  paymentcompletionwimg:function(){
-     this.setData({
-       tipback:false,
-       payiftr:false,
-     });
-  },
   // 查看订单
   viewtheorder:function(){
     wx.navigateTo({   
       url: "/pages/myorder/myorder?tabnum=0"
-    });
-    this.paymentcompletionwimg();         
+    });        
   }, 
   // 返回首页
   returntothehomepage:function(){
     wx.reLaunch({
       url: "/pages/index/index"
     });
-    this.paymentcompletionwimg();
   },
   passWOnBlur:function(){
     console.log('失去焦点')
@@ -1191,8 +1180,6 @@ Page({
             coudata1mon:'0.00',
             coudata2cid: '',
             coudata2mon:'0.00', 
-            //  分享判断是否支付成功
-            payiftr:true,
             numberofdismantling:1,
             isBlindBoxNum:1,
             //  活动支付完成隐藏弹框
@@ -1293,8 +1280,6 @@ Page({
                         coudata1mon:'0.00',
                         coudata2cid: '',
                         coudata2mon:'0.00', 
-                        //  分享判断是否支付成功
-                        payiftr:true,
                         numberofdismantling:1,
                         isBlindBoxNum:1,
                         //  活动支付完成隐藏弹框
@@ -1365,8 +1350,6 @@ Page({
                         coudata1mon: '0.00',
                         coudata2cid: '',
                         coudata2mon:'0.00',
-                        //  分享判断是否支付成功
-                        payiftr: false,
                         numberofdismantling: 1,
                         isBlindBoxNum:1,
                         //  活动支付完成隐藏弹框
@@ -3907,75 +3890,23 @@ Page({
     if (!reg.test(shareimg)) {
       shareimg = _this.data.zdyurl + shareimg;
     };    
-    if (_this.data.payiftr){
-      _this.paymentcompletionwimg();       
-      var reshare = {
-        title: '￥' + _this.data.zunmdata.gsale + '  ' + _this.data.zunmdata.gname,
-        path: '/pages/detailspage/detailspage?gid=' + _this.data.gid + '&store_id=0&referee='+_this.data.uid,
-        imageUrl: 'https://cdn.51chaidan.com/'+_this.data.zunmdata.goods_share ,
-        success: function (res) {}, 
-      };
-      var q = Dec.Aese('mod=share&operation=order&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&oid=' + _this.data.cart_id)
-      wx.request({
-        url: app.signindata.comurl + 'user.php' + q,
-        method: 'GET',
-        header: { 'Accept': 'application/json' },
-        success: function (res) {
-          if (res.data.ReturnCode == 200) {
-            app.showToastC(res.data.Info.notify);
-          };
-          if (res.data.ReturnCode == 900) {
-            app.showToastC('登陆状态有误');
-          };
-          if (res.data.ReturnCode == 800) {
-            app.showToastC('非该用户订单');
-          };
-          if (res.data.ReturnCode == 701) {
-            app.showToastC('订单状态有误(不是“已完成”状态)');
-          };
-        },
-      })      
-    }else{
-      if (options.from == 'button' ){
-        var iftrnum = options.target.dataset.iftrnum || 0;
-      }else{
-        var iftrnum = 0;
-      };
-      if (options.from == 'button' && iftrnum==1) {
-        var groupprice = options.target.dataset.groupprice;
-        var group_name = options.target.dataset.group_name;
-        var group_thumb = options.target.dataset.group_thumb;
-        var gid = options.target.dataset.gid;
-        if (!app.signindata.reg.test(group_thumb)) {
-          group_thumb = _this.data.zdyurl + group_thumb;
-        };
-        var reshare = {
-          title: '组合价￥' + groupprice + " " + group_name,  // 转发标题（默认：当前小程序名称）
-          path: "/pages/combinationdetail/combinationdetail?href=" + gid,
-          imageUrl: group_thumb,
-          success: function (res) {},
-        };
-      } else{
-        if(_this.data.zunmdata.goods_type==3){
-          var title = '定金￥'+_this.data.zunmdata.promote_price + '  ' + _this.data.zunmdata.gname;
-        } else {
-          var title = '￥'+_this.data.zunmdata.gsale + '  ' + _this.data.zunmdata.gname;
-        } 
-        var reshare = {
-          title:title ,
-          path: '/pages/detailspage/detailspage?gid=' + _this.data.gid + '&store_id=0&referee='+_this.data.uid,
-          imageUrl: 'https://cdn.51chaidan.com/'+_this.data.zunmdata.goods_share ,
-          success: function (res) {},
-        };
-      };
-      var q = Dec.Aese('mod=share&operation=goods&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&gid=' + _this.data.gid)
-      wx.request({
-        url: app.signindata.comurl + 'user.php' + q,
-        method: 'GET',
-        header: { 'Accept': 'application/json' },
-        success: function (res) {},
-      })            
-    }
+    
+    var reshare = {
+      title:_this.data.zunmdata.gname ,
+      path: '/pages/detailspage/detailspage?gid=' + _this.data.gid + '&referee='+_this.data.uid,
+      imageUrl: 'https://cdn.51chaidan.com/'+_this.data.zunmdata.goods_share ,
+      success: function (res) {},
+    };
+
+    var q = Dec.Aese('mod=share&operation=goods&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&gid=' + _this.data.gid)
+    wx.request({
+      url: app.signindata.comurl + 'user.php' + q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {},
+    }) 
+
+
     return reshare  
   },
   activsign: function () {

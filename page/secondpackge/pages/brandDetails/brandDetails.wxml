@@ -869,3 +869,26 @@
         <image class="popMaskbutton" catchtap="toggleAddNewEventMask" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="aspectFit"></image>
     </view>
 </view>
+
+<!-- 签到-->
+<view class="popMask" catchtouchmove="true" wx:if="{{false}}" style="background: rgba(0,0,0,.7);">
+    <view class="addNewEventBox" catchtap="true">
+				<view class="releaseSale">
+						<view class="signInBox">
+							  <image src="http://cdn.51chaidan.com/images/brandInfoIcon/sign_right.png" mode='aspectFit' class="signInBoxImg"></image>
+								<view class="signInBoxTopEve" style="font-size :56rpx;font-weight: bold;">签到成功</view>
+								<view class="signInBoxTopEve" style="font-size :40rpx;color:#2E81FF;">+5积分</view>
+								<view class="signInBoxTopEve">
+									  <view class="signInDisplay" wx:for="{{[1,2,3,4,5,6,7]}}" wx:key='key'>
+												<view class="signInDisplayCir" style="background:#2E81FF;">+5</view>
+												<view class="signInDisplayLine" wx:if='{{index!=[1,2,3,4,5,6,7].length-1}}' style="background:#2E81FF;"></view>
+												<view class="signInDisplayNUm">第{{index}}天</view>
+										</view>
+
+								</view>
+								<view class="signInBoxBottom">每周一零点重置更新进度</view>
+						</view>
+				</view>
+        <image class="popMaskbutton" catchtap="toggleAddNewEventMask" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="aspectFit"></image>
+    </view>
+</view>

@@ -57,7 +57,7 @@
        </view>
        <view class="orderBottom" wx:if='{{itemStatus != 4}}'>
             <view class="orderBottomOrderNumber">
-                <block wx:if='{{itemStatus==1 || itemStatus==2}}'>
+                <block wx:if='{{itemStatus==1 || itemStatus==2 || itemStatus == 3}}'>
                     <view class="orderBottomButton"><button data-num='{{num}}' style='width:100%;height:100%;position:absolute;top:0;right:0;opacity:0;' open-type='share'></button>分享</view>
                 </block>
                 <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='3'>删除</view>

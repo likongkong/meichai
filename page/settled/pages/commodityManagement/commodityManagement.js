@@ -51,8 +51,10 @@ Page({
     var type = ''
     if(istype == '-1'){
       type = 1;
+      id = id+'&canShare=1';
     }else if(istype == 4){
-      type = 9001
+      type = 9001;
+      id = id+'&canShare=1'
     };
     app.comjumpwxnav(type, id, '', '')
     
