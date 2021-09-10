@@ -83,7 +83,6 @@ Component({
       let index = e.currentTarget.dataset.index;
       let value = `list[${index}].time`;
       this.setData({errorDom:''});
-      // this.setData({[value]:e.detail.dateString})
       this.triggerEvent("bindchange", {value:e.detail.dateString,name:name});
     },
     onKeyInput(e){
@@ -94,13 +93,6 @@ Component({
       this.triggerEvent("bindchange",obj)
     },
     bindRadioChange(e){
-      // let index = e.currentTarget.dataset.index;
-      // let name = e.currentTarget.dataset.name;
-      // let sonindex = e.currentTarget.dataset.sonindex;
-      // let value = `list[${index}].value`;
-      // this.setData({[value]:sonindex})
-      // this.triggerEvent("bindchange", {value:sonindex,name:name});
-
       let index = e.currentTarget.dataset.index;
       let name = e.currentTarget.dataset.name;
       let sonindex = e.currentTarget.dataset.sonindex;
@@ -125,18 +117,6 @@ Component({
       console.log(e)
       let index = e.currentTarget.dataset.index;
       this.triggerEvent("showActionSheet",{index:index});
-      return false;
-      let groups = e.currentTarget.dataset.groups;
-      console.log(groups)
-      wx.showActionSheet({
-        itemList: groups,
-        success (res) {
-          console.log(res.tapIndex)
-        },
-        fail (res) {
-          console.log(res.errMsg)
-        }
-      })
     },
     deleteitemImage(e){
       let name = e.currentTarget.dataset.name;
@@ -152,20 +132,12 @@ Component({
       this.setData({[`list[${index}].imageList`]: imageList})
       console.log('剪后',imageList)
       this.triggerEvent("bindchange", {value:imageList,name:name});
-
     },
     uploadImage(e){
       let mode = e.currentTarget.dataset.mode;
       let storagelocation = e.currentTarget.dataset.storagelocation;
       let name = e.currentTarget.dataset.name;
       let ind = e.currentTarget.dataset.index;
-
-      // console.log(this.data.list[ind].imageList.length)
-      // if(this.data.list[ind].imageList.length ?= 9){
-      //   app.showToastC('最多可上传9张图',1500);
-      //   return false;
-      // }
-
       var cos = new COS({
         SecretId: 'AKIDmY0RxErYIm2TfkckG8mEYbcNA4wYsPbe',
         SecretKey: '4WkpgJ5bJlU4B6wNuCG4EDyVnGWUFhw1',
