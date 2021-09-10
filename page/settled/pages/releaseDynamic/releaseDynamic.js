@@ -219,7 +219,7 @@ Page({
           let obj = this.data.obj;
           this.setData({
             [`dynamicData[0].value`]:info.brandName,
-            [`dynamicData[1].value`]:info.title,
+            [`dynamicData[1].value`]:info.title.split('hc').join('\n'),
             [`dynamicData[2].imageList`]:info.imgArr,
             [`dynamicData[3].value`]:List.illustratedInfo.title,
             // [`dynamicData[4].value`]:info.allow_comment_type,
@@ -263,7 +263,7 @@ Page({
     })
     console.log(obj)
     // let data = `mod=community&operation=establish&uid=${this.data.uid}&loginid=${this.data.loginid}&brand_id=${obj.associationIp}&title=${obj.dynamicContent}&illustrated_id=${obj.fieldGuideId?obj.fieldGuideId:''}&imgArr=${obj.dynamicPic}&allowComment=${obj.allowComment}&id=${this.data.id}`
-    let data = `mod=community&operation=establish&uid=${this.data.uid}&loginid=${this.data.loginid}&brand_id=${obj.associationIp}&title=${obj.dynamicContent}&illustrated_id=${obj.fieldGuideId?obj.fieldGuideId:''}&imgArr=${obj.dynamicPic}&allowComment=0&id=${this.data.id}`
+    let data = `mod=community&operation=establish&uid=${this.data.uid}&loginid=${this.data.loginid}&brand_id=${obj.associationIp}&title=${obj.dynamicContent.split('\n').join('hc')}&illustrated_id=${obj.fieldGuideId?obj.fieldGuideId:''}&imgArr=${obj.dynamicPic}&allowComment=0&id=${this.data.id}`
     var q = Dec.Aese(data);
     console.log(`${app.signindata.comurl}?${data}`)
     wx.request({

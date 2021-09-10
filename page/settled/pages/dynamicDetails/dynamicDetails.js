@@ -127,6 +127,7 @@ Page({
         wx.stopPullDownRefresh();
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
+          res.data.Info.title = res.data.Info.title.split('hc').join('\n');
            _this.setData({
              dataInfo:res.data.Info,
              illustratedInfo:res.data.List.illustratedInfo

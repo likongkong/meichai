@@ -133,6 +133,8 @@ Page({
                     element.start_time = _this.toDate(element.start_time)
                 });
             };
+            res.data.Info.description = res.data.Info.description.split('hc').join('\n');
+            res.data.Info.sell_way = res.data.Info.sell_way.split('hc').join('\n');
            _this.setData({
              dataDetail:res.data.Info,
              sellList:sellList

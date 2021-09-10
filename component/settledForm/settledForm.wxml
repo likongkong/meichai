@@ -148,7 +148,7 @@
           </block>
         </view>
         <view wx:if="{{item.type == 'radio'}}" id="{{item.name}}" class="columnWrap card paddingBottom20 {{item.margintop0?'margintop0':''}} {{item.borderbottom1?'borderbottom1':''}}">
-          <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}">
+          <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}" data-explaintxt="{{item.explainTxt}}" catchtap="{{item.explainTxt?'showExplain':''}}">
             <text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>
             {{item.subtitle}}
             <image wx:if="{{item.explain}}" src="https://cdn.51chaidan.com/images/brandSettledIcon/wenhao.png" mode="widthFix"></image>
@@ -181,3 +181,15 @@
   </block>
 </view>
 
+
+
+
+<view class="mask" wx:if="{{isExplain}}" catchtouchmove="true" catchtap="hideExplain">
+  <view class="maskBox" catchtap="true">
+    <text class="maskBoxtitle">提示</text>
+    <text class="maskTxt">
+      {{explaintxt}}
+    </text>
+    <view class="wenhaogb" catchtap="hideExplain">我知道了</view>
+  </view>
+</view>

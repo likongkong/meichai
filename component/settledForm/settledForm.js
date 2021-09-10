@@ -60,11 +60,24 @@ Component({
    */
   data: {
     errorDom:'',
+    isExplain:false,
   },
    /**
    * 组件的方法列表
    */
   methods: {
+    showExplain(e){
+      let explaintxt = e.currentTarget.dataset.explaintxt;
+      this.setData({
+        explaintxt,
+        isExplain:true
+      })
+    },
+    hideExplain(){
+      this.setData({
+        isExplain:false
+      })
+    },
     onPickerChange3 (e) {
       let name = e.currentTarget.dataset.name;
       let index = e.currentTarget.dataset.index;
