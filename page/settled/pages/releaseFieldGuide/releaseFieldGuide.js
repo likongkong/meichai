@@ -41,7 +41,7 @@ Page({
         margintop0:true,
         mode:'multiple',
         imageList:[],
-        storagelocation:'brandinfo/dynamic'
+        storagelocation:'images/illustrated'
       }
     ],
     fieldGuideData1:[

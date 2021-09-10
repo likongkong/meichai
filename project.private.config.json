@@ -150,6 +150,12 @@
           "pathName": "page/settled/pages/allBrandsIp/allBrandsIp",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "绑定银行卡",
+          "pathName": "page/settled/pages/tiedCard/tiedCard",
+          "query": "",
+          "scene": null
         }
       ]
     }

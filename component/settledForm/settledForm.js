@@ -175,7 +175,7 @@ Component({
             promiseList.push( 
               new Promise((resolve, reject)=>{
                 cos.postObject({
-                  Bucket: 'brand-settled-info-1300990269',
+                  Bucket: 'mc-1300990269',
                   Region: 'ap-beijing',
                   Key: `${storagelocation}/${new Date().getTime()}${idx}_${app.signindata.uid}.${ext}`,
                   FilePath: filePath,

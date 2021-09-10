@@ -52,7 +52,7 @@ Page({
         subtitle:'企业营业执照或与IP相关凭证',
         name:'businessLicense',
         src:'',
-        storagelocation:'brandinfo/voucher'
+        storagelocation:'images/brandSettled/certification'
       },{
         type:'h1',
         value:'IP信息（只需填写一个IP信息，通过后可继续添加）'
@@ -69,14 +69,14 @@ Page({
         subtitle:'IP logo（建议上传比例1:1）',
         name:'ipLogo',
         src:'',
-        storagelocation:'brandinfo/logo'
+        storagelocation:'images/brandSettled/logo'
       },{
         isRequired:false,
         type:'uploadImg',
         subtitle:'IP 形象图（建议上传比例16:9）',
         name:'ipImage',
         src:'',
-        storagelocation:'brandinfo/banner'
+        storagelocation:'images/brandSettled/banner'
       },{
         isRequired:false,
         type:'textarea',
@@ -100,14 +100,14 @@ Page({
         subtitle:'IP logo（建议上传比例1:1）',
         name:'ipLogo',
         src:'',
-        storagelocation:'brandinfo/logo'
+        storagelocation:'images/brandSettled/logo'
       },{
         isRequired:false,
         type:'uploadImg',
         subtitle:'IP 形象图（建议上传比例16:9）',
         name:'ipImage',
         src:'',
-        storagelocation:'brandinfo/banner'
+        storagelocation:'images/brandSettled/banner'
       },{
         isRequired:false,
         type:'textarea',
