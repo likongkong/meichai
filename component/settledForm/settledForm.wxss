@@ -201,15 +201,20 @@
   margin-left: 20rpx;
 }
 .radioBoxWrap{
-  height: 60rpx;
+  height: auto;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  margin-top: 20rpx;
 }
 .radioWrap view{
   display: flex;
   align-items: center;
   /* margin-top: 14rpx; */
+  margin-bottom: 10rpx;
+}
+.radioWrap view:last-child{
+  margin-bottom: 0;
 }
 .radioWrap1 view{
   margin-right: 76rpx;

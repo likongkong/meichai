@@ -29,6 +29,7 @@ Page({
    */
   onLoad: function (options) {
     this.data.listIndex = options.index;
+    this.data.brand_id = options.brand_id;
     // 判断是否授权
     this.activsign();
   },
@@ -127,7 +128,7 @@ Page({
       title: '加载中',
     })
     let that = this;
-    let data = `mod=community&operation=showActivityIllustrated&uid=${this.data.uid}&loginid=${this.data.loginid}&showType=2&pid=${this.data.pid}`
+    let data = `mod=community&operation=showActivityIllustrated&uid=${this.data.uid}&loginid=${this.data.loginid}&brand_id=${this.data.brand_id}&showType=2&pid=${this.data.pid}`
     var q = Dec.Aese(data);
     console.log(`${app.signindata.comurl}?${data}`)
     wx.request({

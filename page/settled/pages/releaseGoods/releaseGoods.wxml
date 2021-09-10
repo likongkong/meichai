@@ -31,6 +31,16 @@
     bind:bindchange="bindchange">
     </settledForm>
   </view>
+  <view class="title">
+    其他设置
+  </view>
+  <settledForm 
+    id="settledForm3"
+    statusBarHeightMc="{{statusBarHeightMc}}"
+    form="dynamicContent"
+    list="{{listData3}}"
+    bind:bindchange="bindchange">
+  </settledForm>
 
   <view class="footerWrap">
       <view data-num="1" catchtap="navigateBack">返回</view>
