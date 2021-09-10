@@ -41,6 +41,7 @@ Page({
       },{
         isRequired:false,
         type:'link',
+        brand_id:'',
         item_type:9034,
         subtitle:'关联图鉴',
         value:'点击关联',
@@ -183,7 +184,8 @@ Page({
             wx.hideLoading()
             wx.stopPullDownRefresh();
             this.setData({
-              [`dynamicData[0].value`]:res.data.List.brandInfoList[0].name
+              [`dynamicData[0].value`]:res.data.List.brandInfoList[0].name,
+              [`dynamicData[3].brand_id`]:res.data.List.brandInfoList[0].brand_id,
             })
             this.data.obj.associationIp = res.data.List.brandInfoList[0].brand_id;
           }
@@ -318,10 +320,25 @@ Page({
     wx.showActionSheet({
       itemList: arr,
       success (res) {
+
+        if(that.data.dynamicData[0].value != groups[res.tapIndex].name){
+          if(that.data.dynamicData[3].value != '点击关联'){
+            app.showToastC('由于您更换了关联IP，请重新选择关联图鉴。',2500);
+          }
+          that.setData({
+            [`dynamicData[3].value`]:'点击关联',
+            [`dynamicData[3].brand_id`]:groups[res.tapIndex].brand_id,
+          })
+          that.data.obj.fieldGuideName = '';
+          that.data.obj.fieldGuideId = '';
+        }
+
         that.setData({
-          [`dynamicData[${index}].value`]:groups[res.tapIndex].name
+          [`dynamicData[${index}].value`]:groups[res.tapIndex].name,
         })
         that.data.obj.associationIp = groups[res.tapIndex].brand_id;
+
+        
         console.log(that.data.obj)
       },
       fail (res) {

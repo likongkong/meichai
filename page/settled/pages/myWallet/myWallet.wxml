@@ -1,3 +1,5 @@
+
+
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 <view class="wrap">
@@ -10,9 +12,34 @@
         <!-- <view class="withdrawBtn" catchtap="bideWithdraw">立即提现</view>
         <text class="withdrawTxt">每天可提现一次</text> -->
       <!-- </view> -->
-    
+
+      <view class="cardT">
+        <view class="balanceBox">
+          <text>可提现金额</text>
+          <text>￥0.00</text>
+        </view>
+        <view class="withdrawBtn">立即提现</view>
+      </view> 
+      <view class="cardB">
+        <view>
+          <text>钱包余额</text>
+          <text>￥100.00</text>
+        </view>
+        <view>
+          <text>钻石/水晶</text>
+          <text>0/0</text>
+        </view>
+        <view>
+          <text>银行卡(张)</text>
+          <text>1</text>
+        </view>
+        <view>
+          <text>累计收入</text>
+          <text>￥1.1w</text>
+        </view>
+      </view>
     </view>
-    <view class="filterWrap">
+    <!-- <view class="filterWrap">
       <view class="filterItem"> 
         <picker mode="date" value="{{date}}" fields='month' end="{{endTime}}" bindchange="bindDateChange">
           <view class="picker">
@@ -20,16 +47,46 @@
           </view>
         </picker>
       </view>
-      <!-- <view class="filterItem"> 
+      <view class="filterItem"> 
         <picker bindchange="bindPickerChange" value="{{transactionType}}" range="{{transactionTypeArray}}" range-key="name">
           <view class="picker">
             <view><text>{{transactionTypeArray[transactionType].name}}</text><image src="/pages/images/comtriangle.png" mode="widthFix"></image></view>
           </view>
         </picker>
-      </view> -->
+      </view>
+    </view> -->
+  </view>
+
+  <view class="infoBox">
+    <view class="">
+      <text>余额明细</text>
+      <image src="/pages/images/icon_in.png" mode="widthFix"></image>
+    </view>
+    <view class="">
+      <text>导出账单</text>
+      <image src="/pages/images/icon_in.png" mode="widthFix"></image>
+    </view>
+    <view class="">
+      <text>钻石/水晶明细</text>
+      <image src="/pages/images/icon_in.png" mode="widthFix"></image>
     </view>
   </view>
-  <view class="content">
+
+  <view class="explainWrap">
+    <text>温馨提示：
+    1.可提现余额：当前未提现并且已发货的订单收入总和。
+    2.钱包余额：当前未提现的订单收入总和。
+    3.钻石/水晶的用途：可在任务界面兑换不同价值的礼物。
+    4.如何查看提现进度：申请提现之后，可在余额明细里
+    查看申请进度。
+    5.如何绑定/解绑银行卡：点击银行卡，弹出的页面可进
+    行绑卡和解绑操作。
+    6.提现至零钱：只可以提现到申请入驻时登入的微信零钱
+    余额账户中，不可以提现到他人微信零钱。
+    </text>
+  </view>
+
+  <!-- <view class="content">
     <block wx:for="{{orderData}}" wx:key="{{index}}">
       <block wx:if="{{item.type == 1}}">
         <view class="orderItem" data-type="9031" data-whref="id={{item.id}}&statustype={{item.status_type}}" catchtap="comjumpwxnav">
@@ -43,12 +100,10 @@
                 <text class="colorFFB730">+{{item.order_amount}}</text>
               </block>
               <block wx:else>
-                <!-- <text class="color101010">-{{item.order_amount}}</text> -->
               </block>
             </view>
             <view>
               <text class="colorA2A2A2">{{item.insert_time_date}}</text>
-              <!-- <text class="colorA2A2A2">余额 {{item.overage}}</text> -->
             </view>
           </view>
         </view>
@@ -89,8 +144,42 @@
       <image src="https://cdn.51chaidan.com/images/brandSettledIcon/deal.png" mode="widthFix"></image>
       暂无交易记录
     </view>
+  </view> -->
+</view>
+
+
+<view class="mask" wx:if="{{false}}">
+  <view class="maskBox notSufficientFundsWrap">
+    <text>当前钱包余额不足，最低提现金额￥1.00</text>
+    <view>关闭</view>
   </view>
 </view>
+
+<view class="mask">
+  <view class="maskBox twoConfirmationWrap"> 
+    <view class="twoConfirmationContent">
+      <view>提现金额：￥500.00</view>
+      <view>渠道费用：￥5.00（1%）</view>
+      <view>实际到账：<text>￥495.00</text></view>
+      <view>提现金额审核通过后将在三个工作日内到账.确认提现请点击“立即提现".</view>
+    </view>
+    <view style="padding:0 25rpx; box-sizing: border-box;">
+      <view class="footerWrap">
+        <view bindtap="hideModal">取消</view>
+        <view catchtap="submitAudit">立即提现</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+
+
+
+
+
+
+
 
 
 

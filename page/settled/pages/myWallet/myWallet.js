@@ -415,12 +415,12 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    if(this.data.loadprompt == false){
-      this.setData({limitprame:++this.data.limitprame})
-      this.getListData();
-    }else{
-      app.showToastC('暂无更多数据了',1500);
-    }
+    // if(this.data.loadprompt == false){
+    //   this.setData({limitprame:++this.data.limitprame})
+    //   this.getListData();
+    // }else{
+    //   app.showToastC('暂无更多数据了',1500);
+    // }
   },
 
   /**
