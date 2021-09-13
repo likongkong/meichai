@@ -16,26 +16,26 @@
       <view class="cardT">
         <view class="balanceBox">
           <text>可提现金额</text>
-          <text>￥0.00</text>
+          <text>￥{{info.available_cash_amount}}</text>
         </view>
-        <view class="withdrawBtn">立即提现</view>
+        <view class="withdrawBtn" catchtap="withdraw">立即提现</view>
       </view> 
       <view class="cardB">
         <view>
           <text>钱包余额</text>
-          <text>￥100.00</text>
+          <text>￥{{info.wallet_balance}}</text>
         </view>
         <view>
           <text>钻石/水晶</text>
-          <text>0/0</text>
+          <text>{{info.diamond}}/{{info.crystal}}</text>
         </view>
-        <view>
+        <view catchtap="toogleBankcardlistMask">
           <text>银行卡(张)</text>
-          <text>1</text>
+          <text>{{bankCardList.length}}</text>
         </view>
         <view>
           <text>累计收入</text>
-          <text>￥1.1w</text>
+          <text>￥{{info.accumulated_income}}</text>
         </view>
       </view>
     </view>
@@ -58,15 +58,15 @@
   </view>
 
   <view class="infoBox">
-    <view class="">
+    <view class="" data-type="9046" catchtap="comjumpwxnav">
       <text>余额明细</text>
       <image src="/pages/images/icon_in.png" mode="widthFix"></image>
     </view>
-    <view class="">
+    <view class="" catchtap="toggleExportOrdersMask">
       <text>导出账单</text>
       <image src="/pages/images/icon_in.png" mode="widthFix"></image>
     </view>
-    <view class="">
+    <view class="" catchtap="jinqingqidai"> 
       <text>钻石/水晶明细</text>
       <image src="/pages/images/icon_in.png" mode="widthFix"></image>
     </view>
@@ -148,10 +148,10 @@
 </view>
 
 
-<view class="mask" wx:if="{{false}}">
+<view class="mask" wx:if="{{isNotBalanceMask}}">
   <view class="maskBox notSufficientFundsWrap">
     <text>当前钱包余额不足，最低提现金额￥1.00</text>
-    <view>关闭</view>
+    <view catchtap="hideNotBalanceMask">关闭</view>
   </view>
 </view>
 
@@ -221,20 +221,24 @@
         <view class="accountItme_info_txt">三个工作日内到账</view>
       </view>
     </view>
-    <!-- <view class="accountItme active">
-      <view class="accountItme_img">
-        <image src="https://thirdwx.qlogo.cn/mmopen/vi_32/yxhHqfvvePTB3dv572umABsgnsyPadiagAibreLyrILHtPbRibNBXmCTyw3DrK3zPct58hIicsibNPU8qg1nKCypFsQ/132" mode="widthFix"></image>
+    <block wx:if="{{bankCardList.length!=0}}">
+      <view class="accountItme active" catchtap="toogleBankcardlistMask">
+        <view class="accountItme_img">
+          <image src="https://thirdwx.qlogo.cn/mmopen/vi_32/yxhHqfvvePTB3dv572umABsgnsyPadiagAibreLyrILHtPbRibNBXmCTyw3DrK3zPct58hIicsibNPU8qg1nKCypFsQ/132" mode="widthFix"></image>
+        </view>
+        <view class="accountItme_info">
+          <view class="accountItme_info_title">中国银行（1515）<text>单日提现限额￥50000.00</text> </view>
+          <view class="accountItme_info_txt">三个工作日内到账</view>
+        </view>
+        <image class="jiantou" src="/pages/images/icon_in.png" mode="aspectFill"></image>
       </view>
-      <view class="accountItme_info">
-        <view class="accountItme_info_title">中国银行（1515）<text>单日提现限额￥50000.00</text> </view>
-        <view class="accountItme_info_txt">三个工作日内到账</view>
+    </block>
+    <block wx:else>
+      <view class="tiedCardWrap" data-type="9045" catchtap="comjumpwxnav">
+        <image src="http://cdn.51chaidan.com/images/brandInfoIcon/bank_card.png" mode="widthFix"></image>
+        <text>绑定银行卡</text>
       </view>
-      <image class="jiantou" src="/pages/images/icon_in.png" mode="aspectFill"></image>
-    </view> -->
-    <view class="tiedCardWrap">
-      <image src="http://cdn.51chaidan.com/images/brandInfoIcon/bank_card.png" mode="widthFix"></image>
-      <text>绑定银行卡</text>
-    </view>
+    </block>
     <!-- <block wx:for="{{accountList}}" wx:key="index">
       <view class="popContentItem" data-ind="{{index}}" catchtap="chooseAccount">
         <view class="accountTitle" data-type="{{item.account_type}}">
@@ -271,36 +275,90 @@
 </view>
 
 <!-- 银行卡列表 -->
-<view class="mask1" wx:if="{{false}}" catchtouchmove="true" catchtap="toggleDescriptionMask">
+<view class="mask1" wx:if="{{isBankcardlistMask}}" catchtouchmove="true" catchtap="toogleBankcardlistMask">
   <view class="bankcardlistWrap" catchtap="true">
     <text class="title">银行卡</text>
     <view class="popContentWrap">
-      <view class="accountItme">
-        <view class="accountItme_img">
-          <image src="https://thirdwx.qlogo.cn/mmopen/vi_32/yxhHqfvvePTB3dv572umABsgnsyPadiagAibreLyrILHtPbRibNBXmCTyw3DrK3zPct58hIicsibNPU8qg1nKCypFsQ/132" mode="widthFix"></image>
+      <block wx:for="{{bankCardList}}" wx:key="key">
+        <view class="accountItme">
+          <view class="accountItme_img">
+            <image src="{{item.img}}" mode="widthFix"></image>
+          </view>
+          <view class="accountItme_info">
+            <view class="accountItme_info_title">{{item.bank_name}}（{{item.account_name}}）</view>
+            <view class="accountItme_info_txt">{{item.remark}}</view>
+          </view>
+          <text data-id="{{item.id}}" class="untieBtn" catchtap="unlinkBtn">解绑</text>
         </view>
-        <view class="accountItme_info">
-          <view class="accountItme_info_title">微信零钱</view>
-          <view class="accountItme_info_txt">三个工作日内到账</view>
-        </view>
-        <text class="untieBtn">解绑</text>
-      </view>
-      <view class="accountItme">
-        <view class="accountItme_img">
-          <image src="https://thirdwx.qlogo.cn/mmopen/vi_32/yxhHqfvvePTB3dv572umABsgnsyPadiagAibreLyrILHtPbRibNBXmCTyw3DrK3zPct58hIicsibNPU8qg1nKCypFsQ/132" mode="widthFix"></image>
-        </view>
-        <view class="accountItme_info">
-          <view class="accountItme_info_title">中国银行（1515）</view>
-          <view class="accountItme_info_txt">三个工作日内到账</view>
-        </view>
-        <text class="untieBtn">解绑</text>
-      </view>
-      <view class="tiedCardWrap">
+      </block>
+      <view class="tiedCardWrap" data-type="9045" catchtap="comjumpwxnav">
         <image src="http://cdn.51chaidan.com/images/brandInfoIcon/bank_card.png" mode="widthFix"></image>
         <text>绑定新卡</text>
       </view>
     </view>
-    <button catchtap="toggleDescriptionMask">关闭</button>
+    <button catchtap="toogleBankcardlistMask">关闭</button>
+  </view>
+</view>
+<!-- 解绑银行卡弹框 -->
+<view class="mask" wx:if="{{isUnlinkMask}}" catchtouchmove="true" catchtap="hideunlinkMask">
+  <view class="maskBox unlinkWrap" catchtap="true"> 
+    <text class="title">确认解绑请点击下方“立即解绑”，解绑后无法恢复，请谨慎操作。</text>
+    <view>
+      <view class="footerWrap">
+        <view catchtap="hideunlinkMask">取消</view>
+        <view catchtap="immediatelyUnlink">立即解绑</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<!-- 导出订单 -->
+<view class="mask1" wx:if="{{isExportOrdersMask}}" catchtouchmove="true" catchtap="toggleExportOrdersMask">
+  <view class="exportOrdersWrap" catchtap="true"> 
+    <view class="conditionWrap"> 
+      <text class="choiceDateTxt">选择日期</text>
+      <view class="choiceDate">
+        <block wx:for="{{speedyData}}" wx:key="key">
+          <view class="{{index == currentdate?'active':''}}" data-ind="{{index}}" catchtap="choiceDate">{{item.name}}</view>
+        </block>
+      </view>
+      <text class="customDateTxt">自定义日期：</text>
+      <view class="customDate">
+        <picker mode="date" value="{{startdate}}" end="{{endTime}}" data-type="0" bindchange="bindDateChange">
+          <view class="picker {{startdate!=''?'highlight':''}}">
+            {{startdate!=''?startdate:'开始日期'}}
+          </view>
+        </picker>
+        <view style="color:#BBBBBB;">—</view>
+        <picker mode="date" value="{{enddate}}" end="{{endTime}}" data-type="1" bindchange="bindDateChange">
+          <view class="picker {{enddate!=''?'highlight':''}}">
+            {{enddate!=''?enddate:'结束日期'}}
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="footerWrap">
+      <view catchtap="toggleExportOrdersMask">关闭</view>
+      <view catchtap="submitAudit">确认</view>
+    </view>
+  </view>
+</view>
+
+<!-- 填写邮箱 -->
+<view class="mask" wx:if="{{false}}" catchtouchmove="true" catchtap="">
+  <view class="maskBox mailbox"> 
+    <text class="title">邮箱地址</text>
+    <view class="mailboxInput">
+      <text>请填写邮箱地址，账单会发送到邮箱中</text>
+      <input type="text" placeholder="填写邮箱地址" value="" bindinput="bindEmailKeyInput"/>
+    </view>
+    <view>
+      <view class="footerWrap">
+        <view bindtap="hideModal">取消</view>
+        <view catchtap="submitAudit">立即提现</view>
+      </view>
+    </view>
   </view>
 </view>
 

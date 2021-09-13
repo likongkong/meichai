@@ -10,7 +10,7 @@
 
     <view class="emlhead">
         <view class="emlhleft">
-            <image class='emlhlimg' src="{{dataInfo.brandLogo}}" mode='aspectFit'></image>
+            <image class='emlhlimg' src="{{dataInfo.brandLogo}}" mode='aspectFill'></image>
 
             <image class='dlfchrtopimgipList' wx:if='{{dataInfo.isAuth}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/approveIcon.png'></image>
             <view class="emlhltxt">

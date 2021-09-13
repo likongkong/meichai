@@ -446,6 +446,7 @@ Page({
                 element.add_time = _this.toDate(element.add_time || 0);
                 element.start_time = _this.toDate(element.start_time || 0);
                 element.end_time = _this.toDate(element.end_time || 0);
+                element.title = element.title.split('hc').join('\n');
              });
           }else{
             app.showToastC('暂无更多数据')
@@ -504,6 +505,7 @@ Page({
             brandList[r].start_time = time.toDate(brandList[r].start_time);
             brandList[r].stop_time = time.toDate(brandList[r].stop_time);
           };
+          res.data.Info.brand.bradDesc = res.data.Info.brand.bradDesc.split('hc').join('\n');
           _this.setData({
             brandinfo: res.data.Info.brand,
             banner: res.data.List.banner,

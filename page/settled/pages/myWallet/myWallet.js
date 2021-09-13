@@ -21,7 +21,6 @@ Page({
     accountNum:0,
     isDescriptionMask:false,  //说明弹框
     isAuthenticationMask:false,  //提现认证弹框
-    date:'',
     transactionType:0,
     orderData:[],  //列表数据
     noData:false,
@@ -50,6 +49,21 @@ Page({
     status_type:'',  //交易类型
     loadprompt:false,
     showModalStatus:false,
+    startdate:'',
+    enddate:'',
+    currentdate:0,
+    speedyData:[
+      {name:'近三天'},
+      {name:'本周'},
+      {name:'上月'},
+      {name:'本月'},
+    ],
+    email:'',
+    isBankcardlistMask:false,  //银行卡列表弹出框
+    isUnlinkMask:false,  //解绑银行卡弹框
+    unlinkCardId:'',  //解绑id
+    isExportOrdersMask:false,  //导出账单弹框
+    isNotBalanceMask:false,  //余额不足弹框
   },
   /**
    * 生命周期函数--监听页面加载
@@ -73,19 +87,64 @@ Page({
       this.getListData();
       this.getLumpsumAndWithdraw();
       this.getAccountNumberList();
+      this.getbankCardList();
+      let a = this.keepTwoDecimalFull(19841);
+      console.log(a)
     }else{
       app.getAccessToken(this.onLoadfun)
     };
   },
+
+
+  // js将数字转换成万 并且保留两位小数
+  keepTwoDecimalFull (num) {
+    if (num > 10000) {
+        let result = num / 10000;
+        result = Math.floor(result * 100) / 100;
+        var s_x = result.toString(); //将数字转换为字符串
+        var pos_decimal = s_x.indexOf('.'); //小数点的索引值
+        // 当整数时，pos_decimal=-1 自动补0
+        if (pos_decimal < 0) {
+            pos_decimal = s_x.length;
+            s_x += '.';
+        }
+        // 当数字的长度< 小数点索引+2时，补0
+        while (s_x.length <= pos_decimal + 2) {
+            s_x += '0';
+        }
+        s_x += '万';
+    } else {
+        s_x = num;
+    }
+    return s_x
+  },
+
   reset(){
     this.setData({limitprame:1,orderData:[],loadprompt:false})
   },
+  //获取银行卡列表
+  getbankCardList(){
+    api.bankCardList().then((res) => {
+      console.log('行卡列表',res)
+
+      res.data.data.list.forEach(element => {
+        element.account_name = element.account_name.substr(-4)
+      });
+
+      this.setData({
+        bankCardList:res.data.data.list
+      })
+    }).catch((err)=>{
+      console.log(err)
+    })
+  },
+
   // 获取钱包余额、提现判断
   getLumpsumAndWithdraw(){
     api.getLumpsumAndWithdraw({}).then((res) => {
       console.log('iofo',res)
       this.setData({
-        info:res.data.data
+        info:res.data.data.info
       })
     }).catch((err)=>{
       console.log(err)
@@ -274,17 +333,95 @@ Page({
     //   [`withdrawAccount.account`]:e.detail.value
     // })
   },
+
+
+  withdraw(){
+    if(Number(this.data.info.available_cash_amount)<1){
+      this.setData({
+        isNotBalanceMask:true
+      })
+    }else{
+      this.setData({
+        showModalStatus:true
+      })
+    }
+  },
+  // 隐藏余额不足弹框
+  hideNotBalanceMask(){
+    this.setData({
+      isNotBalanceMask:false
+    })
+  },
+  // 显示二次确认解绑弹框
+  unlinkBtn(e){
+    let id = e.currentTarget.dataset.id;
+    this.setData({
+      unlinkCardId:id,
+      isUnlinkMask:true,
+    })
+  },
+  // 取消解绑
+  hideunlinkMask(){
+    this.setData({
+      isUnlinkMask:false,
+    })
+  },
+  // 立即解绑
+  immediatelyUnlink(){
+    api.bankUntie(this.data.unlinkCardId).then((res) => {
+      app.showToastC('解绑成功',1500);
+      setTimeout(()=>{
+        this.setData({
+          isUnlinkMask:false,
+        })
+        this.getbankCardList();
+      },1500)
+    }).catch((err)=>{
+      console.log(err)
+    })
+  },
+  // 导出订单弹框
+  toggleExportOrdersMask(){
+    this.setData({
+      isExportOrdersMask:!this.data.isExportOrdersMask,
+    })
+  },
+  choiceDate(e){
+    let ind = e.currentTarget.dataset.ind;
+    this.setData({
+      currentdate:ind,
+      startdate:'',
+      enddate:''
+    })
+  },
+  // 银行卡列表显示隐藏
+  toogleBankcardlistMask(){
+    this.setData({
+      isBankcardlistMask:!this.data.isBankcardlistMask
+    })
+  },
+  // 填写邮箱弹框
+  bindEmailKeyInput(e){
+    this.setData({
+      email: e.detail.value
+    })
+  },
   // 日期选择
   bindDateChange(e) {
-    console.log(e.detail.value.split('-'))
-    let value = e.detail.value.split('-');
+    console.log(e.detail.value)
+    let type = e.currentTarget.dataset.type;
+    if(type == 0){
+      this.setData({
+        startdate: e.detail.value
+      })
+    }else{
+      this.setData({
+        enddate: e.detail.value
+      })
+    }
     this.setData({
-      date: e.detail.value,
-      year:value[0],
-      month:value[1],
+      currentdate:999
     })
-    this.reset();
-    this.getListData();
   },
   // 类型选择
   bindPickerChange: function(e) {
@@ -409,6 +546,7 @@ Page({
     this.getListData();
     this.getAccountNumberList()
     this.getLumpsumAndWithdraw();
+    this.getbankCardList();
   },
 
   /**
@@ -428,6 +566,9 @@ Page({
    */
   onShareAppMessage: function () {
     
+  },
+  jinqingqidai(){
+    app.showToastC('敬请期待')
   },
   comjumpwxnav(e){
     let type = e.currentTarget.dataset.type;

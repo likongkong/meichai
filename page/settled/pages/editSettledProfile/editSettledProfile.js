@@ -241,7 +241,7 @@ Page({
               [`IPData[0].value`]:brandInfo.ip_name,
               [`IPData[1].src`]:brandInfo.ip_logo,
               [`IPData[2].src`]:brandInfo.ip_img,
-              [`IPData[3].value`]:brandInfo.ip_introduce,
+              [`IPData[3].value`]:brandInfo.ip_introduce.split('hc').join('\n'),
             })
           }else{
             this.setData({
@@ -253,7 +253,7 @@ Page({
               [`enterpriseData[7].value`]:brandInfo.ip_name,
               [`enterpriseData[8].src`]:brandInfo.ip_logo,
               [`enterpriseData[9].src`]:brandInfo.ip_img,
-              [`enterpriseData[10].value`]:brandInfo.ip_introduce,
+              [`enterpriseData[10].value`]:brandInfo.ip_introduce.split('hc').join('\n'),
             })
           }
         }else{
@@ -317,8 +317,8 @@ Page({
     if(!obj.introduce || obj.introduce == ''){
       obj.introduce = ''
     }
-
-    let data = `mod=brandCertification&operation=initial&uid=${this.data.uid}&loginid=${this.data.loginid}&firm_name=${obj.enterpriseName}&firm_linkman=${obj.enterpriseContact}&firm_tel=${obj.enterprisePhone}&wechat_number=${obj.wechatID}&certificate_img=${obj.businessLicense}&ip_name=${obj.ipName}&ip_logo=${obj.ipLogo}&ip_img=${obj.ipImage}&ip_introduce=${obj.introduce}&id=${this.data.id}`
+    let introduce = encodeURIComponent(obj.introduce.split('\n').join('hc'));
+    let data = `mod=brandCertification&operation=initial&uid=${this.data.uid}&loginid=${this.data.loginid}&firm_name=${obj.enterpriseName}&firm_linkman=${obj.enterpriseContact}&firm_tel=${obj.enterprisePhone}&wechat_number=${obj.wechatID}&certificate_img=${obj.businessLicense}&ip_name=${obj.ipName}&ip_logo=${obj.ipLogo}&ip_img=${obj.ipImage}&ip_introduce=${introduce}&id=${this.data.id}`
     var q = Dec.Aese(data);
     console.log(`${app.signindata.comurl}?${data}`)
     wx.request({

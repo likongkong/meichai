@@ -2,19 +2,18 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 <view class="wrap">
-  <settledProgress wx:if="{{type == 2}}" num="{{num}}" intact="show"></settledProgress>
   <block wx:if="{{type == 1}}">
     <view class="incomeWrap">
       <view class="incomeBox">
         <view class="incomeItem">
           <view>商品名称：{{info.goods_name}}</view>
           <view>关联订单号：{{info.order_sn}}</view>
+          <view>交易时间：{{info.pay_time}}</view>
         </view>
         <view class="incomeItem">
-          <view>商品售价：￥{{info.shop_price}}</view>
-          <view>平台分成：￥{{info.divided_into}}</view>
+          <view>订单金额：￥{{info.order_amount}}</view>
+          <view>平台抽成：￥{{info.rake}}</view>
           <view>实际收入：￥{{info.actual_income}}</view>
-          <view>交易时间：{{info.pay_time}}</view>
         </view>
       </view>
     </view>
@@ -23,12 +22,15 @@
     <view class="incomeWrap">
       <view class="incomeBox">
         <view class="incomeItem">
-          <view>提现金额：{{info.share_amount}}</view>
+          <view>商品名称：{{info.goods_name}}</view>
+          <view>关联订单号：{{info.order_sn}}</view>
+          <view>交易时间：{{info.pay_time}}</view>
         </view>
         <view class="incomeItem">
-          <view>交易时间：{{info.share_time}}</view>
-          <view>提现状态：{{status==1?'提现到账':status==2?'审核失败':'审核中'}}</view>
-          <view>预计到账时间：{{info.expected_account_time}}</view>
+          <view>订单金额：￥{{info.order_amount}}</view>
+          <!-- <view>平台退款：￥{{info.divided_into}}</view>
+          <view>余额退款：￥{{info.actual_income}}</view>
+          <view>支付退款：￥{{info.actual_income}}</view> -->
         </view>
       </view>
     </view>
@@ -37,14 +39,14 @@
     <view class="incomeWrap">
       <view class="incomeBox">
         <view class="incomeItem">
-          <view>商品名称：{{info.goods_name}}</view>
-          <view>关联订单号：{{info.order_sn}}</view>
+          <view>提现金额：{{info.value}}</view>
+          <view>渠道费用：{{info.fee}}</view>
+          <view>实际到账：{{info.actually_arrived}}</view>
         </view>
         <view class="incomeItem">
-          <view>商品售价：￥{{info.shop_price}}</view>
-          <view>平台退款：￥{{info.divided_into}}</view>
-          <view>商家退款：￥{{info.actual_income}}</view>
-          <view>交易时间：{{info.pay_time}}</view>
+          <view>交易时间：{{info.share_time}}</view>
+          <view>提现状态：{{status==1?'审核中':status==2?'提现到账':'审核失败'}}</view>
+          <view wx:if="{{status==3}}">备注：{{info.remark}}</view>
         </view>
       </view>
     </view>

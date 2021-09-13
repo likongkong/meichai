@@ -1094,6 +1094,14 @@ App({
       wx.navigateTo({
         url: `/page/settled/pages/addIp/addIp`
       });      
+    } else if (item_type == 9045) {   // 绑定银行卡
+      wx.navigateTo({
+        url: `/page/settled/pages/tiedCard/tiedCard`
+      });      
+    } else if (item_type == 9046) {   // 余额明细
+      wx.navigateTo({
+        url: `/page/settled/pages/incomeDetail/incomeDetail`
+      });      
     }
   },
   // 中奖提示倒计时

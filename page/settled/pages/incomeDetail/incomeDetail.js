@@ -13,6 +13,7 @@ Page({
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     uid:'',
     loginid:'',
+    orderData:[],
     date:'',
     transactionType:0,
     transactionTypeArray: [
@@ -25,11 +26,11 @@ Page({
         name: '订单收入'
       },
       {
-        id: 3,
+        id: 2,
         name: '订单退款'
       },
       {
-        id: 2,
+        id: 3,
         name: '提现'
       }
     ],
@@ -56,9 +57,12 @@ Page({
   onLoadfun(){
     this.data.loginid = app.signindata.loginid;
     this.data.uid = app.signindata.uid;
-    this.getListData();
+    if(wx.getStorageSync('access_token')){
+      this.getListData();
+    }else{
+      app.getAccessToken(this.onLoadfun)
+    };
   },
-
 
   getListData(){
     wx.showLoading({
@@ -96,7 +100,31 @@ Page({
       console.log(err)
     })
   },
-
+  reset(){
+    this.setData({limitprame:1,orderData:[],loadprompt:false})
+  },
+  // 日期选择
+  bindDateChange(e) {
+    console.log(e.detail.value.split('-'))
+    let value = e.detail.value.split('-');
+    this.setData({
+      date: e.detail.value,
+      year:value[0],
+      month:value[1],
+    })
+    this.reset();
+    this.getListData();
+  },
+  // 类型选择
+  bindPickerChange: function(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value,this.data.transactionTypeArray[e.detail.value].id)
+    this.setData({
+      transactionType: e.detail.value,
+      status_type:this.data.transactionTypeArray[e.detail.value].id
+    })
+    this.reset();
+    this.getListData();
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -152,8 +180,8 @@ Page({
   },
   comjumpwxnav(e){
     let type = e.currentTarget.dataset.type;
-    let num = e.currentTarget.dataset.num;
-    app.comjumpwxnav(type,num)
+    let whref = e.currentTarget.dataset.whref;
+    app.comjumpwxnav(type,whref)
   },
   // 获取表单数据
   bindchange(e){

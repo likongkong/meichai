@@ -392,6 +392,7 @@ Page({
                 element.add_time = _this.toDate(element.add_time || 0);
                 element.start_time = _this.toDate(element.start_time || 0);
                 element.end_time = _this.toDate(element.end_time || 0);
+                element.title = element.title.split('hc').join('\n');
              });
           }else{
             app.showToastC('暂无更多数据')

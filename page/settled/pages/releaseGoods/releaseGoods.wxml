@@ -31,7 +31,7 @@
     bind:bindchange="bindchange">
     </settledForm>
   </view>
-  <view class="title">
+  <!-- <view class="title">
     其他设置
   </view>
   <settledForm 
@@ -40,7 +40,7 @@
     form="dynamicContent"
     list="{{listData3}}"
     bind:bindchange="bindchange">
-  </settledForm>
+  </settledForm> -->
 
   <view class="footerWrap">
       <view data-num="1" catchtap="navigateBack">返回</view>

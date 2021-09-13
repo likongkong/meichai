@@ -217,7 +217,7 @@ Page({
             [`enterpriseData[0].value`]:brandInfo.ip_name,
             [`enterpriseData[1].src`]:brandInfo.ip_logo,
             [`enterpriseData[2].src`]:brandInfo.ip_img,
-            [`enterpriseData[3].value`]:brandInfo.ip_introduce,
+            [`enterpriseData[3].value`]:brandInfo.ip_introduce.split('hc').join('\n'),
             [`enterpriseData[5].src`]:brandInfo.helper_wechat_number,
             [`enterpriseData[6].src`]:brandInfo.official_accounts,
             [`enterpriseData[7].value`]:brandInfo.red_book_id,
@@ -270,7 +270,9 @@ Page({
     if(!obj.microblog || obj.microblog == ''){
       obj.microblog=''
     }
-    let data = `mod=brandCertification&operation=perfect&uid=${this.data.uid}&loginid=${this.data.loginid}&ip_name=${obj.ipName}&ip_logo=${obj.ipLogo}&ip_img=${obj.ipImage}&ip_introduce=${obj.introduce}&helper_wechat_number=${obj.WeChatCode}&official_accounts=${obj.officialAccounts}&red_book_id=${obj.redBookId}&microblog=${obj.microblog}&id=${this.data.id}&brand_id=${this.data.barnd_id}`
+
+    let introduce = encodeURIComponent(obj.introduce.split('\n').join('hc'));
+    let data = `mod=brandCertification&operation=perfect&uid=${this.data.uid}&loginid=${this.data.loginid}&ip_name=${obj.ipName}&ip_logo=${obj.ipLogo}&ip_img=${obj.ipImage}&ip_introduce=${introduce}&helper_wechat_number=${obj.WeChatCode}&official_accounts=${obj.officialAccounts}&red_book_id=${obj.redBookId}&microblog=${obj.microblog}&id=${this.data.id}&brand_id=${this.data.barnd_id}`
     var q = Dec.Aese(data);
     console.log(`${app.signindata.comurl}?${data}`)
     wx.request({

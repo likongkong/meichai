@@ -1,5 +1,5 @@
-
 var Dec = require('../../../../common/public');//aes加密解密js
+var api = require("../../../../utils/api.js");
 const util = require('../../../../utils/util');
 const app = getApp();
 Page({
@@ -33,14 +33,14 @@ Page({
         subtitle:'开户银行',
         placeholder:'请选择开户银行',
         value:'',
-        name:'bankdeposit '
+        name:'bankdeposit'
       },{
         isRequired:true,
         type:'text',
         subtitle:'开户支行',
         placeholder:'请输入开户支行',
         value:'',
-        name:'bankSubBranch '
+        name:'bankSubBranch'
       }
     ],
     obj:{},
@@ -64,7 +64,11 @@ Page({
   onLoadfun(){
     this.data.loginid = app.signindata.loginid;
     this.data.uid = app.signindata.uid;
-    this.getBrandInfo()
+    if(wx.getStorageSync('access_token')){
+     
+    }else{
+      app.getAccessToken(this.onLoadfun)
+    };
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -130,86 +134,50 @@ Page({
     this.data.obj[key]=e.detail.value;
     console.log(this.data.obj)
   },
-  //获取品牌信息
-  getBrandInfo(){
-    this.data.obj = {
-      enterpriseName:this.data.info.firm_name,
-      enterpriseContact:this.data.info.firm_linkman,
-      enterprisePhone:this.data.info.firm_tel,
-      wechatID:this.data.info.wechat_number,
-      businessLicense:this.data.info.certificate_img,
-    };
-    this.setData({
-      [`enterpriseData[0].value`]:this.data.info.firm_name,
-      [`enterpriseData[1].value`]:this.data.info.firm_linkman,
-      [`enterpriseData[2].value`]:util.plusXing(this.data.info.firm_tel,3,4),
-      [`enterpriseData[3].value`]:this.data.info.wechat_number,
-      [`enterpriseData[4].src`]:this.data.info.certificate_img,
-    })
-  },
+  
   //提交审核
   submitAudit(){
     let obj = this.data.obj;
     let phoneNum = /^1[3456789]\d{9}$/;
 
-    if(!obj.enterpriseName || obj.enterpriseName == ''){
-      this.selectComponent('#settledForm').scrollto('enterpriseName');
-      app.showToastC('请输入企业名称',1500);
+    if(!obj.name || obj.name == ''){
+      this.selectComponent('#settledForm').scrollto('name');
+      app.showToastC('请输入开户姓名',1500);
       return false;
     }
-    if(!obj.enterpriseContact || obj.enterpriseContact == ''){
-      this.selectComponent('#settledForm').scrollto('enterpriseContact');
-      app.showToastC('请输入企业联系人',1500);
+    if(!obj.cardnumber || obj.cardnumber == ''){
+      this.selectComponent('#settledForm').scrollto('cardnumber');
+      app.showToastC('请输入银行卡号',1500);
       return false;
     }
-    if(!obj.enterprisePhone || obj.enterprisePhone == ''){
-      this.selectComponent('#settledForm').scrollto('enterprisePhone');
-      app.showToastC('请输入手机号',1500);
-      return false;
-    }else if(!phoneNum.test(obj.enterprisePhone)){
-      this.selectComponent('#settledForm').scrollto('enterprisePhone');
-      app.showToastC('手机号有误请重新填写',2000);
+    if(!obj.bankdeposit || obj.bankdeposit == ''){
+      this.selectComponent('#settledForm').scrollto('bankdeposit');
+      app.showToastC('请输入开户银行',1500);
       return false;
     }
-    if(!obj.wechatID || obj.wechatID == ''){
-      this.selectComponent('#settledForm').scrollto('wechatID');
-      app.showToastC('请输入微信号',1500);
+    if(!obj.bankSubBranch || obj.bankSubBranch == ''){
+      this.selectComponent('#settledForm').scrollto('bankSubBranch');
+      app.showToastC('请输入开户支行',1500);
       return false;
     }
-    if(!obj.businessLicense || obj.businessLicense == ''){
-      this.selectComponent('#settledForm').scrollto('businessLicense');
-      app.showToastC('请上传企业营业执照或与IP相关凭证',1500);
-      return false;
+
+    let data={
+      account:obj.name,
+      account_name:obj.cardnumber,
+      bank_name:obj.bankdeposit,
+      account_branch:obj.bankSubBranch,
     }
-    
-    console.log(obj.businessLicense)
-    let data = `mod=community&operation=certificationSet&uid=${this.data.uid}&loginid=${this.data.loginid}&firm_name=${obj.enterpriseName}&firm_linkman=${obj.enterpriseContact}&firm_tel=${obj.enterprisePhone}&wechat_number=${obj.wechatID}&certificate_img=${obj.businessLicense}`
-    var q = Dec.Aese(data);
-    console.log(`${app.signindata.comurl}?${data}`)
-    wx.request({
-      url: app.signindata.comurl + 'toy.php' + q,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) { 
-        console.log('提交审核====',res)
-        wx.hideLoading()
-        if(res.data.ReturnCode == 200){
-          app.showToastC('修改成功',1500);
-          setTimeout(function(){
-            let pages = getCurrentPages();
-            let prevPage = pages[pages.length -2];//上一页
-            prevPage.getData();
-            wx.navigateBack({
-              delta: 1
-            })
-          },1500)
-        }else{
-          app.showToastC(res.data.Msg,2000);
-        }
-      },
-      fail: function () {},
-      complete:function(){
-      }
-    });
+    api.addAccountNumber(data).then((res) => {
+      console.log(res)
+      app.showToastC('绑定成功',1500);
+      setTimeout(()=>{
+        let pages = getCurrentPages();    //获取当前页面信息栈
+        let prevPage = pages[pages.length-2];
+        prevPage.getbankCardList();
+        app.navigateBack(1)
+      },1500)
+    }).catch((err)=>{
+      console.log(err)
+    })
   }
 })

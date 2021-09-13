@@ -27,8 +27,8 @@ Page({
     console.log(options)
     this.setData({
       id:options.id,
-      type:options.statustype,
-      c_title:options.statustype==1?'收入明细':options.statustype==2?'提现明细':'退款明细'
+      type:options.flag,
+      c_title:options.flag==1?'收入明细':options.flag==2?'退款明细':'提现明细'
     })
     // 判断是否登录
     if (this.data.loginid != '' && this.data.uid != '') {
@@ -49,8 +49,7 @@ Page({
   
   getData(){
     let url={
-      id:this.data.id,
-      type:this.data.type
+      id:this.data.id
     }
     api.settledWithCashDetail(url).then((res) => {
       console.log(res)
