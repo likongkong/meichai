@@ -156,6 +156,18 @@
           "pathName": "page/settled/pages/tiedCard/tiedCard",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "余额明细",
+          "pathName": "page/settled/pages/incomeDetail/incomeDetail",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "page/component/pages/myothertoydg/myothertoydg",
+          "pathName": "page/component/pages/myothertoydg/myothertoydg",
+          "query": "ownerId=231618",
+          "scene": null
         }
       ]
     }

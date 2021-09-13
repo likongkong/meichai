@@ -1,6 +1,5 @@
 
 var Dec = require('../../../../common/public');//aes加密解密js
-var tcity = require("../../../../common/citys.js");
 var api = require("../../../../utils/api.js");
 const util = require('../../../../utils/util');
 const app = getApp();

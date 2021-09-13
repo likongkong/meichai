@@ -1,0 +1,9 @@
+{
+  "backgroundColor": "#ffffff",
+  "usingComponents": {
+    "t_f": "/pages/topfunction/topfunction",
+    "bnavigation": "/pages/bottomComponent/bottomComponent",
+    "settledForm":"/component/settledForm/settledForm",
+    "settledProgress":"/component/settledProgress/settledProgress"
+  }
+}

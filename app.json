@@ -163,6 +163,7 @@
         "pages/editEnterpriseInfo/editEnterpriseInfo",
         "pages/perfectSettledProfile/perfectSettledProfile",
         "pages/myWallet/myWallet",
+        "pages/incomeDetail/incomeDetail",
         "pages/atlas/atlas",
         "pages/incomingsOutgoingsDetail/incomingsOutgoingsDetail",
         "pages/dynamicDetails/dynamicDetails",
