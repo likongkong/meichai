@@ -64,6 +64,8 @@ Page({
     unlinkCardId:'',  //解绑id
     isExportOrdersMask:false,  //导出账单弹框
     isNotBalanceMask:false,  //余额不足弹框
+    twoAffirm:false,   //二次确认提现弹框
+    twoAffirm1:false,   //二次确认提现弹框---超额
   },
   /**
    * 生命周期函数--监听页面加载
@@ -157,16 +159,22 @@ Page({
       let list = res.data.data.list;
       let withdrawAccount;
       for(var i=0;i<res.data.data.list.length;i++){
+        // if(list[i].account_type == 1){
+          // console.log( list[i].account_name)
+          // list[i].account_name1 = list[i].account_name.substr(-4);
+        // }
         if(list[i].isdefault == 1){
           withdrawAccount = list[i];
           break;
         }
       }
+      if(res.data.data.list.length>1){
+        list[1].account_name1 = `(${list[1].account_name.substr(-4)})`;
+      }
       this.setData({
         accountList:list,
-        currentAccount:withdrawAccount,
-        withdrawAccount,
-        explanation:res.data.data.explanation
+        // currentAccount:withdrawAccount,
+        withdrawAccount
       })
     }).catch((err)=>{
       console.log(err)
@@ -211,16 +219,46 @@ Page({
   // 提现判断
   bideWithdraw(){
     let _this = this;
-    let currentAccount = this.data.currentAccount;
-    wx.showModal({
-      title: '提示',
-      content: '每天可提现一次，暂只支持全额提现，确认提现请点击下方立即提现',
-      cancelText:'取消',
-      cancelColor:'#90D2D6',
-      confirmText:'立即提现',
-      confirmColor:'#90D2D6',
-      success (res) {
-        if (res.confirm) {
+    let withdrawAccount = this.data.withdrawAccount;  
+    wx.showLoading({
+      title: '加载中',
+      mask:true
+    })
+    api.setDefaultAccount(withdrawAccount.id).then((res) => {
+      console.log('设置账号',res)
+      api.viewWithdrawalInformation(withdrawAccount.id).then((res) => {
+        console.log('查看提现信息',res)
+        wx.hideLoading();
+        this.setData({
+          viewWithdrawalInfo:res.data.data,
+          twoAffirm1:true,
+        })
+        // if(Number(withdrawAccount.quota_num) > Number(this.data.info.available_cash_amount)){
+        //   this.setData({
+        //     twoAffirm1:true,
+        //   })
+        // }else{
+        //   this.setData({
+        //     twoAffirm:true,
+        //   })
+        // }
+      }).catch((err)=>{
+        console.log(err)
+      })
+    }).catch((err)=>{
+      console.log(err)
+    })
+
+    
+    // wx.showModal({
+    //   title: '提示',
+    //   content: '每天可提现一次，暂只支持全额提现，确认提现请点击下方立即提现',
+    //   cancelText:'取消',
+    //   cancelColor:'#90D2D6',
+    //   confirmText:'立即提现',
+    //   confirmColor:'#90D2D6',
+    //   success (res) {
+    //     if (res.confirm) {
           // 判断上次中的那个 currentAccount.account_type==1为银行卡  2为微信零钱
           // if(currentAccount){
           //   if(currentAccount.account_type == 1){
@@ -232,56 +270,66 @@ Page({
           //     _this.executionApplicationWithdrawal();
           //   }
           // }else{
-            _this.clickme();
+            // _this.clickme();
           // }
-        } else if (res.cancel) {
-          console.log('用户点击取消')
-        }
-      }
-    })
+    //     } else if (res.cancel) {
+    //       console.log('用户点击取消')
+    //     }
+    //   }
+    // })
+    // this.executionApplicationWithdrawal();
   },
   // 提现
   executionApplicationWithdrawal(){
-    api.executionApplicationWithdrawal({}).then((res) => {
+    api.executionApplicationWithdrawal().then((res) => {
       console.log(res)
-      //今日已申请过提现
-      if(res.data.status_code == 200304){
-        wx.showModal({
-          title: '',
-          content: '今日已申请过提现，注意每天仅可申请一次提现，请明天再来提现吧',
-          showCancel:false,
-          confirmText:'关闭',
-          confirmColor:'#90D2D6',
-          success (res) {
-            if (res.confirm) {
+
+      this.getLumpsumAndWithdraw();
+      // //今日已申请过提现
+      // if(res.data.status_code == 200304){
+      //   wx.showModal({
+      //     title: '',
+      //     content: '今日已申请过提现，注意每天仅可申请一次提现，请明天再来提现吧',
+      //     showCancel:false,
+      //     confirmText:'关闭',
+      //     confirmColor:'#90D2D6',
+      //     success (res) {
+      //       if (res.confirm) {
               
-            }
-          }
-        })
-      }else if(res.data.status_code == 200306){
-        wx.showModal({
-          title: '',
-          content: '钱包余额不足，最低提现￥1.00',
-          showCancel:false,
-          confirmText:'关闭',
-          confirmColor:'#90D2D6',
-          success (res) {
-            if (res.confirm) {
+      //       }
+      //     }
+      //   })
+      // }else if(res.data.status_code == 200306){
+      //   wx.showModal({
+      //     title: '',
+      //     content: '钱包余额不足，最低提现￥1.00',
+      //     showCancel:false,
+      //     confirmText:'关闭',
+      //     confirmColor:'#90D2D6',
+      //     success (res) {
+      //       if (res.confirm) {
               
-            }
-          }
-        })
-      }else{
-        app.showToastC('提现申请已提交，审核通过之后三个工作日之内到账',1500);
-        setTimeout(()=>{
-          this.reset();
-          this.getLumpsumAndWithdraw();
-          this.getListData();
-        },1500)
-      }
+      //       }
+      //     }
+      //   })
+      // }else{
+        // app.showToastC('提现申请已提交，审核通过之后三个工作日之内到账',1500);
+        // setTimeout(()=>{
+        //   this.reset();
+        //   this.getLumpsumAndWithdraw();
+        //   this.getListData();
+        // },1500)
+      // }
+      // this.setData({
+      //   isAuthenticationMask:false
+      // })
       this.setData({
-        isAuthenticationMask:false
+        showModalStatus:false,
+        twoAffirm:false,
+        twoAffirm1:false,
       })
+      app.showToastC('提现申请已提交',2000);
+
     }).catch((err)=>{
       console.log(err)
     })
@@ -333,8 +381,28 @@ Page({
     //   [`withdrawAccount.account`]:e.detail.value
     // })
   },
-
-
+  // 隐藏二次确认提现弹框
+  hidetwoAffirm(){
+    this.setData({
+      twoAffirm:false,
+      twoAffirm1:false
+    })
+  },
+  // 切换账号
+  changeAccount(e){
+    let ind = e.currentTarget.dataset.ind;
+    for(var i=0;i<this.data.accountList.length;i++){
+      this.setData({
+        [`accountList[${i}].isdefault`]:0
+      })
+    }
+    this.setData({
+      withdrawAccount: this.data.accountList[ind],
+      [`accountList[${ind}].isdefault`]:1
+    })
+    console.log('选中的账号',this.data.withdrawAccount)
+  },
+  // 立即提现1
   withdraw(){
     if(Number(this.data.info.available_cash_amount)<1){
       this.setData({
@@ -375,6 +443,7 @@ Page({
           isUnlinkMask:false,
         })
         this.getbankCardList();
+        this.getAccountNumberList();
       },1500)
     }).catch((err)=>{
       console.log(err)
@@ -386,18 +455,38 @@ Page({
       isExportOrdersMask:!this.data.isExportOrdersMask,
     })
   },
+  // 选择银行卡
+  choiceBankCard(e){
+    let ind = e.currentTarget.dataset.ind;
+    if(this.data.showModalStatus){
+      for(var i=0;i<this.data.accountList.length;i++){
+        this.setData({
+          [`accountList[${i}].isdefault`]:0
+        })
+      }
+      this.data.bankCardList[ind].isdefault = 1;
+      this.setData({
+        [`accountList[1]`]:this.data.bankCardList[ind],
+        withdrawAccount: this.data.bankCardList[ind],
+        isBankcardlistMask:false
+      })
+      console.log('选中的账号',this.data.withdrawAccount)
+    }
+  },
+  // 银行卡列表显示隐藏
+  toogleBankcardlistMask(){
+    this.getbankCardList();
+    this.setData({
+      isBankcardlistMask:!this.data.isBankcardlistMask
+    })
+  },
+  //导出订单选日期
   choiceDate(e){
     let ind = e.currentTarget.dataset.ind;
     this.setData({
       currentdate:ind,
       startdate:'',
       enddate:''
-    })
-  },
-  // 银行卡列表显示隐藏
-  toogleBankcardlistMask(){
-    this.setData({
-      isBankcardlistMask:!this.data.isBankcardlistMask
     })
   },
   // 填写邮箱弹框

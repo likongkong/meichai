@@ -155,37 +155,38 @@
   </view>
 </view>
 
-<view class="mask" wx:if="{{false}}">
-  <view class="maskBox twoConfirmationWrap"> 
+<view class="mask" wx:if="{{twoAffirm}}" catchtouchmove="true" catchtap="hidetwoAffirm">
+  <view class="maskBox twoConfirmationWrap" catchtap="true"> 
     <view class="twoConfirmationContent">
       <view>提现金额：￥500.00</view>
       <view>渠道费用：￥5.00（1%）</view>
       <view>实际到账：<text>￥495.00</text></view>
+      <view>提现后账号余额：￥0</view>
       <view>提现金额审核通过后将在三个工作日内到账.确认提现请点击“立即提现".</view>
     </view>
     <view style="padding:0 25rpx; box-sizing: border-box;">
       <view class="footerWrap">
-        <view bindtap="hideModal">取消</view>
+        <view bindtap="hidetwoAffirm">取消</view>
         <view catchtap="submitAudit">立即提现</view>
       </view>
     </view>
   </view>
 </view>
 
-<view class="mask" wx:if="{{false}}">
-  <view class="maskBox twoConfirmationWrap" style="padding-top:42rpx;"> 
-    <text class="excessTxt">提现至微信零钱单日限额为￥20000.00，本次自动调整提现金额￥20000.00</text>
-    <view class="twoConfirmationContent" style="padding:0 40rpx;box-sizing: border-box;">
-      <view>提现金额：￥500.00</view>
-      <view>渠道费用：￥5.00（1%）</view>
-      <view>实际到账：<text>￥495.00</text></view>
-      <view>提现后账号余额：￥900000.00</view>
-      <view>提现金额审核通过后将在三个工作日内到账.确认提现请点击“立即提现".</view>
+<view class="mask" wx:if="{{twoAffirm1}}" catchtouchmove="true" catchtap="hidetwoAffirm">
+  <view class="maskBox twoConfirmationWrap" style="padding-top:42rpx;" catchtap="true"> 
+    <text class="excessTxt" wx:if="{{viewWithdrawalInfo.exceeding_remark}}">{{viewWithdrawalInfo.exceeding_remark}}</text>
+    <view class="twoConfirmationContent" style="{{viewWithdrawalInfo.exceeding_remark?'padding:0 40rpx;box-sizing: border-box;':''}}">
+      <view>提现金额：￥{{viewWithdrawalInfo.cashableBalance}}</view>
+      <view>渠道费用：￥{{viewWithdrawalInfo.channel_fees}}（{{viewWithdrawalInfo.channel_fees_scale}}%）</view>
+      <view>实际到账：<text>￥{{viewWithdrawalInfo.actually_arrived}}</text></view>
+      <view wx:if="{{viewWithdrawalInfo.exceeding_remark}}">提现后账号余额：￥{{viewWithdrawalInfo.posts_the_account_balance}}</view>
+      <view>{{viewWithdrawalInfo.remark}}</view>
     </view>
     <view style="padding:0 25rpx; box-sizing: border-box;">
       <view class="footerWrap">
-        <view bindtap="hideModal">取消</view>
-        <view catchtap="submitAudit">立即提现</view>
+        <view bindtap="hidetwoAffirm">取消</view>
+        <view catchtap="executionApplicationWithdrawal">立即提现</view>
       </view>
     </view>
   </view>
@@ -212,29 +213,35 @@
   <!-- <text class="popTitle">{{currentAccount?'修改绑定账户':'首次提现请先绑定提现账户类型'}}</text> -->
   <text class="popTitle">选择提现账户</text>
   <view class="popContentWrap">
-    <view class="accountItme">
-      <view class="accountItme_img">
-        <image src="https://thirdwx.qlogo.cn/mmopen/vi_32/yxhHqfvvePTB3dv572umABsgnsyPadiagAibreLyrILHtPbRibNBXmCTyw3DrK3zPct58hIicsibNPU8qg1nKCypFsQ/132" mode="widthFix"></image>
-      </view>
-      <view class="accountItme_info">
-        <view class="accountItme_info_title">微信零钱<text>单日提现限额￥20000.00</text> </view>
-        <view class="accountItme_info_txt">三个工作日内到账</view>
-      </view>
-    </view>
-    <block wx:if="{{bankCardList.length!=0}}">
-      <view class="accountItme active" catchtap="toogleBankcardlistMask">
+    <block wx:for="{{accountList}}" wx:key="key">
+      <view class="accountItme {{item.isdefault==1?'active':''}}" data-ind="{{index}}" catchtap="changeAccount">
         <view class="accountItme_img">
-          <image src="https://thirdwx.qlogo.cn/mmopen/vi_32/yxhHqfvvePTB3dv572umABsgnsyPadiagAibreLyrILHtPbRibNBXmCTyw3DrK3zPct58hIicsibNPU8qg1nKCypFsQ/132" mode="widthFix"></image>
+          <image src="{{item.img}}" mode="widthFix"></image>
         </view>
         <view class="accountItme_info">
-          <view class="accountItme_info_title">中国银行（1515）<text>单日提现限额￥50000.00</text> </view>
-          <view class="accountItme_info_txt">三个工作日内到账</view>
+          <view class="accountItme_info_title">{{item.bank_name}} {{item.account_type == 1?item.account_name1:''}}<text>{{item.quota}}</text> </view>
+          <view class="accountItme_info_txt">{{item.remark}}</view>
         </view>
-        <image class="jiantou" src="/pages/images/icon_in.png" mode="aspectFill"></image>
+        <view class="jiantou" wx:if="{{item.account_type == 1}}" catchtap="toogleBankcardlistMask">
+          <image src="/pages/images/icon_in.png" mode="aspectFill"></image>
+        </view>
       </view>
+      <!-- <block wx:if="{{bankCardList.length!=0}}">
+        <view class="accountItme active" catchtap="toogleBankcardlistMask">
+          <view class="accountItme_img">
+            <image src="https://thirdwx.qlogo.cn/mmopen/vi_32/yxhHqfvvePTB3dv572umABsgnsyPadiagAibreLyrILHtPbRibNBXmCTyw3DrK3zPct58hIicsibNPU8qg1nKCypFsQ/132" mode="widthFix"></image>
+          </view>
+          <view class="accountItme_info">
+            <view class="accountItme_info_title">中国银行（1515）<text>单日提现限额￥50000.00</text> </view>
+            <view class="accountItme_info_txt">三个工作日内到账</view>
+          </view>
+          <image class="jiantou" src="/pages/images/icon_in.png" mode="aspectFill"></image>
+        </view>
+      </block>
+       -->
     </block>
-    <block wx:else>
-      <view class="tiedCardWrap" data-type="9045" catchtap="comjumpwxnav">
+    <block wx:if="{{accountList.length==1}}">
+      <view class="tiedCardWrap" data-type="9045" data-whref="from=account" catchtap="comjumpwxnav">
         <image src="http://cdn.51chaidan.com/images/brandInfoIcon/bank_card.png" mode="widthFix"></image>
         <text>绑定银行卡</text>
       </view>
@@ -269,7 +276,7 @@
   <view class="setfooter">
     <view class="footerWrap">
         <view bindtap="hideModal">关闭</view>
-        <view catchtap="submitAudit">立即提现</view>
+        <view catchtap="bideWithdraw">立即提现</view>
     </view>
   </view>
 </view>
@@ -280,7 +287,7 @@
     <text class="title">银行卡</text>
     <view class="popContentWrap">
       <block wx:for="{{bankCardList}}" wx:key="key">
-        <view class="accountItme">
+        <view class="accountItme" data-ind="{{index}}" catchtap="choiceBankCard">
           <view class="accountItme_img">
             <image src="{{item.img}}" mode="widthFix"></image>
           </view>
@@ -288,7 +295,9 @@
             <view class="accountItme_info_title">{{item.bank_name}}（{{item.account_name}}）</view>
             <view class="accountItme_info_txt">{{item.remark}}</view>
           </view>
-          <text data-id="{{item.id}}" class="untieBtn" catchtap="unlinkBtn">解绑</text>
+          <block wx:if="{{!showModalStatus}}">
+            <text data-id="{{item.id}}" class="untieBtn" catchtap="unlinkBtn">解绑</text>
+          </block>
         </view>
       </block>
       <view class="tiedCardWrap" data-type="9045" catchtap="comjumpwxnav">
@@ -340,7 +349,7 @@
     </view>
     <view class="footerWrap">
       <view catchtap="toggleExportOrdersMask">关闭</view>
-      <view catchtap="submitAudit">确认</view>
+      <view catchtap="">确认</view>
     </view>
   </view>
 </view>
