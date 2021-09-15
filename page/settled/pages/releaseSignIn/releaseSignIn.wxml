@@ -1,0 +1,40 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+<view class="wrap">
+  <settledForm 
+  id="settledForm"
+  form="dynamicContent"
+  statusBarHeightMc="{{statusBarHeightMc}}"
+  list="{{dynamicData}}"
+  bind:bindchange="bindchange"
+  bind:showActionSheet="showActionSheet">
+  </settledForm>
+
+  <view class="signInIllustrateWrap">
+    <text class="title">累计签到积分说明</text>
+    <view class="signInNumWrap">
+      <view class="line"></view>
+      <block wx:for="{{integralAward}}" wx:key="key">
+        <view class="signInNumItem">
+          <text>{{item.interal}}分</text>
+          <view class="circleBox"></view>
+          <text>第{{item.day}}天</text>
+        </view>
+      </block>
+    </view>
+    <view class="tipWrap">
+      <text class="tip">{{activity.tip}}</text>
+    </view>
+  </view>
+
+
+  <view class="footerWrap">
+      <view data-num="1" catchtap="navigateBack">返回</view>
+      <view catchtap="submitAudit">确认发布</view>
+  </view>
+  <!-- <view class="footerWrap footerWrap1">
+      <view data-num="1" catchtap="navigateBack">返回</view>
+      <view>分享</view>
+      <view catchtap="submitAudit">关闭签到</view>
+  </view> -->
+</view>

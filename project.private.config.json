@@ -168,6 +168,12 @@
           "pathName": "page/component/pages/myothertoydg/myothertoydg",
           "query": "ownerId=231618",
           "scene": null
+        },
+        {
+          "name": "发布签到",
+          "pathName": "page/settled/pages/releaseSignIn/releaseSignIn",
+          "query": "",
+          "scene": null
         }
       ]
     }

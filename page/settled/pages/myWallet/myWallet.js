@@ -130,7 +130,7 @@ Page({
       console.log('行卡列表',res)
 
       res.data.data.list.forEach(element => {
-        element.account_name = element.account_name.substr(-4)
+        element.account_name1 = ` (${element.account_name.substr(-4)})`;
       });
 
       this.setData({
@@ -465,6 +465,7 @@ Page({
         })
       }
       this.data.bankCardList[ind].isdefault = 1;
+      // list[1].account_name1 = `(${list[1].account_name.substr(-4)})`;
       this.setData({
         [`accountList[1]`]:this.data.bankCardList[ind],
         withdrawAccount: this.data.bankCardList[ind],

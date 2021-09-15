@@ -343,10 +343,10 @@ Page({
             // 获取钱包余额
             if(!res.data.Info.brandSettledLimit && res.data.Info.brandSettledInfo.brandSettledStatus == 5){
               if(wx.getStorageSync('access_token')){
-                api.getLumpsumAndWithdraw({}).then((res) => {
+                api.getLumpsumAndWithdraw1({}).then((res) => {
                   console.log('withdrawInfo',res)
                   _this.setData({
-                    withdrawInfo:res.data.data.info
+                    withdrawInfo:res.data.data
                   })
                 }).catch((err)=>{
                   console.log(err)

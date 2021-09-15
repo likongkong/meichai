@@ -175,12 +175,12 @@ Page({
       setTimeout(()=>{
         let pages = getCurrentPages();    //获取当前页面信息栈
         let prevPage = pages[pages.length-2];
-        if(this.data.from == "account"){
+        // if(this.data.from == "account"){
           prevPage.getbankCardList();
           prevPage.getAccountNumberList();
-        }else{
-          prevPage.getbankCardList();
-        }
+        // }else{
+        //   prevPage.getbankCardList();
+        // }
         app.navigateBack(1)
       },1500)
     }).catch((err)=>{

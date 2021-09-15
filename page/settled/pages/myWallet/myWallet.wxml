@@ -292,7 +292,7 @@
             <image src="{{item.img}}" mode="widthFix"></image>
           </view>
           <view class="accountItme_info">
-            <view class="accountItme_info_title">{{item.bank_name}}（{{item.account_name}}）</view>
+            <view class="accountItme_info_title">{{item.bank_name}}{{item.account_name1}}</view>
             <view class="accountItme_info_txt">{{item.remark}}</view>
           </view>
           <block wx:if="{{!showModalStatus}}">

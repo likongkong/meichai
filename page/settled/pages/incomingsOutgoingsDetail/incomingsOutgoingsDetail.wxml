@@ -44,9 +44,9 @@
           <view>实际到账：{{info.actually_arrived}}</view>
         </view>
         <view class="incomeItem">
-          <view>交易时间：{{info.share_time}}</view>
-          <view>提现状态：{{status==1?'审核中':status==2?'提现到账':'审核失败'}}</view>
-          <view wx:if="{{status==3}}">备注：{{info.remark}}</view>
+          <view>交易时间：{{info.pay_time}}</view>
+          <view>提现状态：{{info.status_name}}</view>
+          <view wx:if="{{info.remark && info.remark!=''}}">备注：{{info.remark}}</view>
         </view>
       </view>
     </view>

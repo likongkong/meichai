@@ -178,7 +178,8 @@
         "pages/addIp/addIp",
         "pages/fieldGuideList/fieldGuideList",
         "pages/tiedCard/tiedCard",
-        "pages/allBrandsIp/allBrandsIp"
+        "pages/allBrandsIp/allBrandsIp",
+        "pages/releaseSignIn/releaseSignIn"
       ]
     }
   ],

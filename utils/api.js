@@ -35,6 +35,10 @@ export const executionApplicationWithdrawal = (query) => {
 export const getLumpsumAndWithdraw = (query) => {
     return apiResquest.get('brand/brand_withdraw/brand_withdraw_cash/get_the_amount',query)
 }
+// 钱包余额、提现判断
+export const getLumpsumAndWithdraw1 = (query) => {
+    return apiResquest.get('brand/settled_with/settled_with_cash/get_lumpsum_and_withdraw',query)
+}
 // 订单详情
 export const settledWithCashDetail = (url,query) => {
     return apiResquest.get(`brand/brand_withdraw/brand_withdraw_cash/detail/${url.id}`,query)
