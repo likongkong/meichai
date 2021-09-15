@@ -26,28 +26,144 @@
 
     <view style="padding:20rpx;font-size:26rpx;margin-bottom:2rpx;background:#fff;" wx:if='{{dataInfo.title}}'><text>{{dataInfo.title}}</text></view>  
 
-    <view class="boxAtlas" style="width:500rpx;margin:20rpx;font-size:24rpx;" wx:if='{{illustratedInfo}}'  catchtap="jumpoffering" data-id="{{illustratedInfo.id}}" data-type='9035'>
+    <view style="background:#fff;overflow: hidden;margin-bottom:1rpx;">
+        <view class="boxAtlas" style="width:500rpx;margin:20rpx;font-size:24rpx;" wx:if='{{illustratedInfo}}'  catchtap="jumpoffering" data-id="{{illustratedInfo.id}}" data-type='9035'>
         <image class="boxAtlasLeftNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/illustrated.jpg"  mode="aspectFit"></image>
         <view class="boxAtlasName specialellipsis" style="width:288rpx;">{{illustratedInfo.title}}</view>
         <view class="boxAtlasRight">点击查看</view>
+    </view>
+
     </view>
     <view class="emlhead" style="overflow: hidden;">
         <image class='wxIcon' src="https://cdn.51chaidan.com/images/brandSettledIcon/dynamicInfoWXHY.png" mode='aspectFit'><button style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;'  open-type="share"></button></image>
         <!-- <image class='wxIcon' src="https://cdn.51chaidan.com/images/brandSettledIcon/dynamicInfoPYQ.png" mode='aspectFit'></image>
         <image class='wxIcon' src="https://cdn.51chaidan.com/images/brandSettledIcon/dynamicInfoImg.png" mode='aspectFit'></image> -->
-        <view class="dyDetheat"><image class="emlplefimgshare" src="{{dataInfo.is_like?'https://www.51chaidan.com/images/brand/red_heart.png':'https://www.51chaidan.com/images/brand/black_heart.png'}}" catchtap='followfun' data-id='{{dataInfo.id}}' data-type='3'></image>{{dataInfo.like_number}}</view>
+        <view class="dyDetheat" catchtap='followfun' data-id='{{dataInfo.id}}' data-type='3'><image class="emlplefimgshare" src="{{dataInfo.is_like?'https://www.51chaidan.com/images/brand/red_heart.png':'https://www.51chaidan.com/images/brand/black_heart.png'}}"></image>{{dataInfo.like_number?dataInfo.like_number:''}}</view>
     </view>
 
 </view>
+
+<!-- 评论 -->
+<view>
+
+    <!-- 评论 -->
+    <view class='dlfddrec'>
+        <view class='dlfddrectit'>评论({{commentNumber || 0}})</view>
+        <block wx:if='{{commentlist&&commentlist.length!=0}}'>
+          <view class='dlfddcomment' wx:for='{{commentlist}}' wx:key='key'>
+              <view class='dlfddcleft'>
+                  <image class='dlfddclimg' src='{{item.headphoto}}'></image>
+              </view>
+              <view class='dlfddcright' style="border-bottom: 2rpx solid #F5F5F5;">
+                  <view class='dlfddcrtxt'>
+                    <text class='dlfddcrtna specialellipsis'>{{item.user_name}}</text>
+                    <image class='dlfddcrtnaim' wx:if='{{item.is_author==1}}' src='https://cdn.51chaidan.com/images/brandInfoIcon/comment_author.jpg' mode="aspectFit"></image>
+                  </view>
+                  <view class='dlfddcrint'>{{item.content}}</view>
+                  <view class='dlfddchead' style='height:50rpx;line-height:50rpx;'>
+                        <text class='dlfddchtxt' style='color:#b0b1b1;height:50rpx;line-height:50rpx;'>{{item.add_time}}</text>
+                        <view class='dlfddchfab' catchtap='followfun' data-h='1' data-num='{{index}}' data-id='{{item.comment_id}}' data-type='7'>
+                            <!-- 未点赞 -->
+                            <image class='dlfddchfimg' mode="aspectFit" src='{{item.isPraise?"https://cdn.51chaidan.com/images/brandInfoIcon/redPraise.png":"https://cdn.51chaidan.com/images/brandInfoIcon/greyPraise.png"}}'></image>{{item.praise?item.praise:''}}
+                        </view>
+                        <text class='dlfddchtxt' data-comment_id='{{item.comment_id}}' data-name='{{item.user_name}}' catchtap='inputboxfun' style='color:#000;height:50rpx;line-height:50rpx;margin-left:10rpx;float:right;width:50rpx;'>{{item.secondLevelCommentList.length!=0?item.secondLevelCommentList.length:''}}</text>
+                        <image class='dlfddchimg' data-comment_id='{{item.comment_id}}' data-name='{{item.user_name}}' catchtap='inputboxfun'  mode="aspectFit" src='https://cdn.51chaidan.com/images/brandInfoIcon/commentIcon.png'></image>
+                  </view>
+
+                  <view class='dlfddcrcomb' wx:if='{{item.secondLevelCommentList.length!=0}}'>
+                      <!-- 评论内容 -->
+                        <view class='dlfddconcomcon' wx:for='{{item.secondLevelCommentList}}' wx:for-item='items' wx:for-index='indexs' wx:key='key'>
+                            <view class='dlfddcleft'>
+                                <image style='margin-left:13rpx;' class='dlfddclimg' src='{{items.headphoto}}'></image>
+                            </view>
+                            <view class='dlfddcright' style='width:500rpx;'>
+                                    <view class='dlfddcrtxt'>
+                                        <text class='dlfddcrtna specialellipsis'>{{items.user_name}}</text>
+                                        <image class='dlfddcrtnaim' wx:if='{{items.is_author==1}}' src='https://cdn.51chaidan.com/images/brandInfoIcon/comment_author.jpg' mode="aspectFit"></image>
+                                    </view>
+                                    <view class='dlfddcrint'>{{items.content}}</view>
+                                    <view class='dlfddchead' style='height:50rpx;line-height:50rpx;' data-abc='123'>
+                                        <text class='dlfddchtxt' style='color:#b0b1b1;height:50rpx;line-height:50rpx;'>{{items.add_time}}</text>
+                                        <view class='dlfddchfab' catchtap='followfun' data-h='2' data-num='{{index}}' data-ind='{{indexs}}' data-id='{{items.comment_id}}' data-type='7'>
+                                            <!-- 点赞 -->
+                                            <image mode="aspectFit" class='dlfddchfimg' src='{{items.isPraise?"https://cdn.51chaidan.com/images/brandInfoIcon/redPraise.png":"https://cdn.51chaidan.com/images/brandInfoIcon/greyPraise.png"}}'></image>{{items.praise?items.praise:''}}
+                                        </view>
+                                    </view>
+                                </view>
+                        </view>
+                  </view>
+
+              </view>
+          </view>        
+        </block>
+    </view>
+
+
+
+</view>
+
+<view style="width:100%;height:260rpx;" wx:if='{{dataInfo.isOneselfBrand}}'></view>
+
 
 <!-- 编辑 -->
-<view class="editButtom" wx:if='{{dataInfo.isOneselfBrand}}'>
-    <view style="display:inline-block;" catchtap="jumpdetail" data-type='4' data-id='{{drying_id}}'>
-        <image mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/compile.png'></image>
-        <view>编辑</view>    
+<view class="editButtom">
+
+    <!-- <view catchtap="inputboxfun">
+        <view class='intboxinp'>{{textconcent?textconcent:placeholderTxt}}</view>
+        <view class='intboxinptxt' catchtap='submissionfun'>发送</view>
+    </view> -->
+
+    <view wx:if='{{dataInfo.isOneselfBrand}}'>
+        <view style="display:inline-block;" catchtap="jumpdetail" data-type='4' data-id='{{drying_id}}'>
+            <image mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/compile.png'></image>
+            <view>编辑</view>    
+        </view>
+        <view style="display:inline-block;margin-left:100rpx;" wx:if='{{false}}' catchtap="jumpdetail" data-type='4' data-id='{{drying_id}}'>
+            <image mode="aspectFit" src='../../../../pages/images/icon_delete.png'></image>
+            <view>删除</view>    
+        </view>
     </view>
-    <view style="display:inline-block;margin-left:100rpx;" wx:if='{{false}}' catchtap="jumpdetail" data-type='4' data-id='{{drying_id}}'>
-        <image mode="aspectFit" src='../../../../pages/images/icon_delete.png'></image>
-        <view>删除</view>    
+
+    
+
+    
+
+    <view class="editButComment" catchtap="inputboxfun" style="background:#f4f5f9;height:80rpx;">
+        <view class="editButComLeft">
+            <image class="editButComLeL" style="left: 15rpx;" mode="aspectFit" src='https://cdn.51chaidan.com/images/brandInfoIcon/setCommentIcon.png'></image>
+            {{textconcent?textconcent:placeholderTxt}}
+        </view>
+        <image class="editButComLeL" style="right:40rpx;" mode="aspectFit" src='https://cdn.51chaidan.com/images/brandInfoIcon/commentIcon.png'></image>
+    </view>
+
+</view>
+<!-- <view class="editButtom" wx:else style="background:#f4f5f9;">
+    <view class="editButComment" catchtap="inputboxfun">
+        <view class="editButComLeft">
+            <image class="editButComLeL" style="left: 15rpx;" mode="aspectFit" src='https://cdn.51chaidan.com/images/brandInfoIcon/setCommentIcon.png'></image>
+            评论一下~
+        </view>
+        <image class="editButComLeL" style="right:40rpx;" mode="aspectFit" src='https://cdn.51chaidan.com/images/brandInfoIcon/commentIcon.png'></image>
+    </view>
+</view> -->
+
+
+<!-- 输入框  -->
+<view class='inputbox' wx:if='{{inputbox}}'>
+    <view class='inputboxbg' catchtap='inputboxbgfun'></view>
+    <view class='ibinputcon' style='bottom:{{inputboxheight}}px;'>
+        <textarea class='intboxinp' focus='{{autofocus}}' maxlength='140' placeholder-style="font-size:24rpx;" placeholder='{{placeholderTxt}}' bindfocus="bindfocus" bindblur='bindblur' bindinput="bindinput" bindconfirm="bindconfirm" show-confirm-bar='{{shbar}}' value='{{textconcent}}' adjust-position='{{false}}' />
+        <view class='intboxinptxt' catchtap='submissionfun'>发送</view>
     </view>
 </view>
+
+<!-- <view class='inputbox' wx:if='{{inputbox}}'>
+    <view class='inputboxbg' catchtap='inputboxbgfun'></view>
+    <view  class='ibinputcon' style='bottom:{{inputboxheight}}px;height:80rpx;'>
+        <view class="editButComLeft">
+            <image class="editButComLeL" style="left: 15rpx;" mode="aspectFit" src='https://cdn.51chaidan.com/images/brandInfoIcon/setCommentIcon.png'></image>
+            <input class='intboxinpTip' focus='{{autofocus}}' maxlength='140' placeholder-style="font-size:24rpx;" placeholder='评论一下~' bindfocus="bindfocus" bindblur='bindblur' bindinput="bindinput" bindconfirm="bindconfirm" show-confirm-bar='{{shbar}}' adjust-position='{{false}}' value='{{textconcent}}' ></input>
+        </view>
+        <image class="editButComLeL" catchtap='submissionfun' style="right:40rpx;" mode="aspectFit" src='https://cdn.51chaidan.com/images/brandInfoIcon/commentIcon.png'></image>
+    </view>
+</view> -->

@@ -114,8 +114,7 @@ width: 72rpx;}
   border-radius: 10rpx;
 }
 .emlplefttxt{
-  float: left;
-  color: #50a3fd;
+  float: right;
 }
 .emlplefimgshare{
   width: 40rpx;

@@ -51,8 +51,36 @@ Page({
     ], // 支付状态 
     centerIndex:0,
     wOri:1 , // 1 瀑布流 2 信息流
+    brandSinginBox:false
 
   },
+  brandSinginBoxFun(){
+     this.setData({
+        brandSinginBox:!this.data.brandSinginBox
+     })
+  },
+  brandSingin: function () {
+    var _this = this;
+    var exh = Dec.Aese('mod=community&operation=signIn&brand_id=' + _this.data.brandId + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + exh,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('签到=============',res)
+        if (res.data.ReturnCode == 200) {
+          _this.setData({
+            
+          })
+          _this.brandSinginBoxFun()
+        } else {
+
+        };
+      },
+      fail: function () { }
+    });
+  },
+
   toggleAddNewEventMask(){
     this.setData({
       isAddNewEventMask: !this.data.isAddNewEventMask
@@ -507,6 +535,7 @@ Page({
           };
           res.data.Info.brand.bradDesc = res.data.Info.brand.bradDesc.split('hc').join('\n');
           _this.setData({
+            detailInfo:res.data.Info,
             brandinfo: res.data.Info.brand,
             banner: res.data.List.banner,
             founder: res.data.List.founder,

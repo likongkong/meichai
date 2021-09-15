@@ -944,7 +944,7 @@ page {
 }
 .signInDisplay{
   width: 90rpx;
-  height: 90rpx;
+  height: 120rpx;
   display: inline-block;
   position: relative;
 
@@ -979,6 +979,7 @@ page {
   line-height: 40rpx;
   text-align: center;
   font-size: 26rpx;
+  margin-top: 30rpx;
 }
 .signInBoxBottom{
   width: 100%;
@@ -991,5 +992,23 @@ page {
   bottom: 0;
 }
 
-
-
+.exhibdeimgBRRipos{
+  width: 136rpx;
+  height: 100rpx;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.exhibdeimgBRRipos image{
+  width: 60rpx;
+  height: 60rpx;
+  display: block;
+  margin: auto;
+}
+.exhibdeimgBRRipos view{
+  width: 100%;
+  height: 40rpx;
+  text-align: center;
+  font-size: 24rpx;
+  line-height: 40rpx;
+}
