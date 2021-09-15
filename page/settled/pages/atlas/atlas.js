@@ -17,6 +17,41 @@ Page({
     detailData:{},
     illustrated_id:''
   },  
+  // 失去焦点
+  bindblur:function(){
+    this.setData({
+      inputboxheight: 0,
+      autofocus: false
+    })
+  },
+  inputboxfun:function(w){
+    var comment_id = w.currentTarget.dataset.comment_id || w.target.dataset.comment_id || 0;
+    var _this = this;
+    _this.setData({ inputbox: true, comment_id: comment_id});
+    setTimeout(function(){
+      _this.setData({autofocus: true})
+    },600)
+  }, 
+
+  //监听input获得焦点
+  bindfocus: function (e) {
+    let that = this;
+    that.setData({
+      inputboxheight: e.detail.height||200
+    })
+  },
+  //监听input值改变
+  bindinput: function (e) {
+    this.setData({
+      textconcent: e.detail.value || '',
+    });
+  },
+  inputboxbgfun:function(){
+    this.setData({ inputbox:false})
+  },
+
+
+
   jumpdetail(w){
     var id = w.currentTarget.dataset.id || w.target.dataset.id || '';
     var type = w.currentTarget.dataset.type || w.target.dataset.type || '';
@@ -111,6 +146,7 @@ Page({
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
     });
     this.getData();
+    this.getComments();
   },
   // 获取数据
   getData(){
@@ -178,7 +214,39 @@ Page({
       success: function (res) {
         console.log('同款想要=====',res)
         if (res.data.ReturnCode == 200) {
+
+          if(type == 7){
+            var h = w.currentTarget.dataset.h || w.target.dataset.h || 0;
+            var num = w.currentTarget.dataset.num || w.target.dataset.num || 0;
+            var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
+            if(h == 1){
+              if(!_this.data.commentlist[num].isPraise){
+                var praise = parseInt(_this.data.commentlist[num].praise) + 1;
+              }else{
+                var praise = parseInt(_this.data.commentlist[num].praise) - 1;
+              };
+              _this.setData({
+                ['commentlist[' + num + '].isPraise'] : !_this.data.commentlist[num].isPraise,
+                ['commentlist[' + num + '].praise'] : praise
+              })
+            }else if(h == 2){
+              if(!_this.data.commentlist[num].secondLevelCommentList[ind].isPraise){
+                var praise = parseInt(_this.data.commentlist[num].secondLevelCommentList[ind].praise) + 1;
+              }else{
+                var praise = parseInt(_this.data.commentlist[num].secondLevelCommentList[ind].praise) - 1;
+              };
+              _this.setData({
+                ['commentlist[' + num + '].secondLevelCommentList['+ ind +'].isPraise'] : !_this.data.commentlist[num].secondLevelCommentList[ind].isPraise,
+                ['commentlist[' + num + '].secondLevelCommentList['+ ind +'].praise']:praise
+              })
+            }else{
+              _this.getComments();
+            };
+          }else{
             _this.getData();
+          }
+
+            
         }else{
           if(res.data.Msg){
             wx.showModal({
@@ -191,6 +259,103 @@ Page({
       }
     });
   },
+
+ // 获取评论
+ getComments: function(num=1) {
+  var _this = this;
+
+  if (num==1){
+    _this.setData({pid : 0,commentlist : []});
+  }else{
+    var pagenum = _this.data.pid;
+    _this.data.pid = ++pagenum;
+  };
+
+  console.log('mod=community&operation=showComment&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&pid=' + _this.data.pid + '&id=' + _this.data.illustrated_id + '&type=2');
+
+  var qqq = Dec.Aese('mod=community&operation=showComment&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&pid=' + _this.data.pid + '&id=' + _this.data.illustrated_id + '&type=2');
+
+  wx.request({
+    url: app.signindata.comurl + 'toy.php' + qqq,
+    method: 'GET',
+    header: {'Accept': 'application/json'},
+    success: function (res) {
+      console.log('获取评论=====',res)
+      if (res.data.ReturnCode == 200) {
+          if(num == 1){
+            _this.setData({
+              commentNumber:res.data.Info.commentNumber || 0,
+              commentlist:res.data.List
+            })
+          }else{
+            if(res.data.List && res.data.List.length !=0){
+              var list = [...res.data.List,_this.data.commentlist]
+              _this.setData({
+                commentlist:list
+              })
+            }else{
+              app.showToastC('暂无更多数据');
+            }
+          }
+
+
+      }else{
+        if(res.data.Msg){
+          wx.showModal({
+            content: res.data.Msg || '',
+            showCancel: false,
+            success: function(res) {}
+          });
+        };
+      };
+    }
+  });
+},
+
+// 提交评论
+submissionfun:function(){
+  var _this = this;
+
+  _this.setData({ inputbox: false, autofocus: false });
+  
+  if(_this.data.textconcent == ''){
+     app.showToastC('评论内容不能为空');
+     return false;
+  }
+
+  console.log('mod=community&operation=addcomment&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&pid=' + _this.data.comment_id + '&id=' + _this.data.illustrated_id + '&type=2&comment='+ _this.data.textconcent +'&brand_id='+_this.data.dataDetail.brand_id)
+
+  var qqq = Dec.Aese('mod=community&operation=addcomment&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&pid=' + _this.data.comment_id + '&id=' + _this.data.illustrated_id + '&type=2&comment='+ _this.data.textconcent +'&brand_id='+_this.data.dataDetail.brand_id);
+
+  wx.request({
+    url: app.signindata.comurl + 'toy.php' + qqq,
+    method: 'GET',
+    header: {'Accept': 'application/json'},
+    success: function (res) {
+      console.log('发布评论=====',res)
+      if (res.data.ReturnCode == 200) {
+        _this.setData({
+          textconcent:'',
+          inputboxheight:0,
+          autofocus: false
+        });
+        _this.getComments();
+      }else{
+        if(res.data.Msg){
+          wx.showModal({
+            content: res.data.Msg || '',
+            showCancel: false,
+            success: function(res) {}
+          });
+        };
+      };
+    }
+  });
+
+
+},
+
+
 
   toDate(number,num) {
     var date = new Date(number * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000

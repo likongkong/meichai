@@ -117,3 +117,197 @@ page{
   display: block;
   margin-bottom: 10rpx;
 }
+
+
+/* 评论 */
+.dlfddrec{
+  padding: 15rpx 0;
+  margin-bottom: 15rpx;
+  background: #fff;
+}
+.dlfddrectit{
+  padding-left: 24rpx;
+  height: 60rpx;
+  line-height: 50rpx;
+  color: #000;
+  font-size: 26rpx;
+}
+.dlfddcomment{
+  padding: 0 24rpx 20rpx;
+  overflow: hidden;
+}
+.dlfddcleft{
+  width: 100rpx;
+  float: left;
+}
+.dlfddclimg{
+  display: block;
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+}
+.dlfddcright{
+  width: 600rpx;
+  float: left;
+}
+.dlfddcrtxt{
+  height: 50rpx;
+  width: 100%;
+  line-height: 50rpx;
+}
+.dlfddcrtna{
+  font-size: 26rpx;
+  color: #ffaa3c;
+  float: left;
+  max-width: 400rpx;
+}
+.dlfddcrtnaim{
+  width: 32rpx;
+  height: 32rpx;
+  float: left;
+  margin-left: 13rpx;
+  position: relative;
+  top: 3rpx;
+}
+.dlfddmoright{
+  height: 38rpx;
+  line-height: 38rpx;
+  border: 2rpx solid #f28d03;
+  font-size: 26rpx;
+  padding: 0 9rpx;
+  color: #f28d03;
+  margin-left:10rpx; 
+  float: right;
+  border-radius: 6rpx;
+}
+.dlfddcrint{
+  width: 100%;
+  color: #000;
+  font-size: 26rpx;
+  padding: 12rpx 0;
+}
+.dlfddcrcomb{
+  width: 100%;
+}
+.dlfddchead{
+  width: 100%;
+  height: 60rpx;
+  position: relative;
+}
+.dlfddchtxt{
+  float: left;
+  height: 60rpx;
+  line-height: 60rpx;
+  color: #000;
+  font-size: 26rpx;
+}
+.dlfddconcomcon{
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 15rpx;
+}
+.dlfddcleft{
+  width: 100rpx;
+  float: left;
+}
+.dlfddclimg{
+  display: block;
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+}
+.dlfddcright{
+  width: 600rpx;
+  float: left;
+}
+.dlfddcrtxt{
+  height: 50rpx;
+  width: 100%;
+}
+.dlfddcrtna{
+  font-size: 26rpx;
+  color: #ffaa3c;
+  float: left;
+}
+.dlfddcrtnaim{
+  width: 32rpx;
+  height: 32rpx;
+  float: left;
+  margin-left: 13rpx;
+  position: relative;
+  top: 3rpx;
+}
+.dlfddchfab{
+  float: right;
+  height: 70rpx;
+  color: #000;
+  line-height: 70rpx;
+  padding:0 20rpx 0 50rpx;
+  margin-left: 30rpx;
+  position: relative;
+  font-size: 26rpx;
+}
+.dlfddchfimg{
+  width:40rpx;
+  height: 40rpx;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto 0; 
+}
+.dlfddchimg{
+  float: right;
+  width: 40rpx;
+  height:40rpx;
+  margin-top: 17rpx;
+  position: relative;
+}
+.inputbox{width:100%;height:100%;position:fixed;top:0;left:0;z-index:999;}
+.inputboxbg{width:100%;height:100%;background:#000;opacity:0.4;}
+
+.inputboxbg{width:100%;height:100%;background:#000;opacity:0.4;}
+.ibinputcon{position:absolute;bottom:0;left:0;width:100%;height:210rpx;background:#d9d9d9;}
+.intboxinp{padding:15rpx 15rpx;width:509rpx;height:120rpx;float:left;margin:30rpx 20rpx 0 30rpx;background:#fff;font-size:26rpx;border-radius:6rpx;}
+.intboxinptxt{width:130rpx;height:150rpx;margin:30rpx 0 0 0;background:#fff;float:left;font-size:24rpx;text-align:center;line-height:150rpx;border-radius:6rpx;}
+.dlfddchimgc{width:32rpx;height:32rpx;float:left;margin-left:10rpx;position:relative;top:14rpx;}
+
+.editButComment{
+  width: 100%;
+  height: 80rpx;
+  position: relative;
+}
+.editButComLeft{
+  width: 520rpx;
+  height: 60rpx;
+  background:#fff;
+  border-radius: 20rpx;
+  float: left;
+  margin: 10rpx 20rpx 0 40rpx;
+  padding-left: 70rpx;
+  position: relative;
+  line-height: 60rpx;
+  font-size: 26rpx;
+  text-align: left;
+}
+.editButtom .editButComLeL{
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+.ibinputcon .editButComLeL{
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.intboxinpTip{
+  width:500rpx;height:60rpx;background:#fff;font-size:26rpx;border-radius:6rpx;
+  line-height: 60rpx;
+}

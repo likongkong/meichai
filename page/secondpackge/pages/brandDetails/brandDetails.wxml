@@ -19,7 +19,21 @@
 										<block wx:else>已关注</block>
 								</view>
 					</view>
-					 <view class="exhibdeimgBRTop" wx:if='{{brandinfo.integral>0}}' style="color:#999495;">我的积分：{{brandinfo.integral}} <image class="questionMark" src="https://cdn.51chaidan.com/images/brandSettledIcon/wenhao.png" mode="aspectFit"></image></view>
+					 <view class="exhibdeimgBRTop" wx:if='{{brandinfo.integral>0}}' style="color:#999495;">我的积分：{{brandinfo.integral}}</view>
+					 <!-- <image class="questionMark" src="https://cdn.51chaidan.com/images/brandSettledIcon/wenhao.png" mode="aspectFit"></image> -->
+					 <!--  wx:if='{{brandSettledLimit}}' -->
+					 <view class="exhibdeimgBRRipos" wx:if='{{false}}'>
+							<image src="https://cdn.51chaidan.com/images/brandInfoIcon/brand_sign.png" mode="aspectFit"></image>
+							<view style="color:#34A9ED;" wx:if='{{detailInfo.signActivityStatus==1}}'>发布签到</view>
+							<view style="color:#34A9ED;" wx:elif='{{detailInfo.signActivityStatus==2}}'>签到已开启</view>
+							<view style="color:#34A9ED;" wx:elif='{{detailInfo.signActivityStatus==3}}'>签到已关闭</view>
+					 </view>
+					 <view class="exhibdeimgBRRipos" wx:elif='{{detailInfo.signActivityStatus==2}}'>
+							<image src="https://cdn.51chaidan.com/images/brandInfoIcon/brand_sign.png" mode="aspectFit"></image>
+							<view style="color:#868686;" wx:if='{{detailInfo.isTodaySign}}'>今日已签到</view>
+							<view style="color:#34A9ED;" wx:else>签到</view>
+					 </view>
+
 				</view>
 		</view>
 		<text class="briefIntroduction">简介：{{brandinfo.bradDesc}}</text>
@@ -871,7 +885,7 @@
 </view>
 
 <!-- 签到-->
-<view class="popMask" catchtouchmove="true" wx:if="{{false}}" style="background: rgba(0,0,0,.7);">
+<view class="popMask" catchtouchmove="true" wx:if="{{brandSinginBox}}" style="background: rgba(0,0,0,.7);" catchtap="brandSinginBoxFun">
     <view class="addNewEventBox" catchtap="true">
 				<view class="releaseSale">
 						<view class="signInBox">
@@ -889,6 +903,6 @@
 								<view class="signInBoxBottom">每周一零点重置更新进度</view>
 						</view>
 				</view>
-        <image class="popMaskbutton" catchtap="toggleAddNewEventMask" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="aspectFit"></image>
+        <image class="popMaskbutton" catchtap="brandSinginBoxFun" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="aspectFit"></image>
     </view>
 </view>
