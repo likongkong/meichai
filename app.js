@@ -1096,7 +1096,7 @@ App({
       });      
     } else if (item_type == 9045) {   // 绑定银行卡
       wx.navigateTo({
-        url: `/page/settled/pages/tiedCard/tiedCard`
+        url: `/page/settled/pages/tiedCard/tiedCard?${whref}`
       });      
     } else if (item_type == 9046) {   // 余额明细
       wx.navigateTo({

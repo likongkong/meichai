@@ -346,7 +346,7 @@ Page({
                 api.getLumpsumAndWithdraw({}).then((res) => {
                   console.log('withdrawInfo',res)
                   _this.setData({
-                    withdrawInfo:res.data.data
+                    withdrawInfo:res.data.data.info
                   })
                 }).catch((err)=>{
                   console.log(err)

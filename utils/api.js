@@ -21,15 +21,15 @@ export const settledWithCashList = (query) => {
 }
 // 获取账号列表
 export const getAccountNumberList = (query) => {
-    return apiResquest.get('brand/settled_with/settled_with_cash/get_account_number_list',query)
+    return apiResquest.get('brand/brand_withdraw/brand_withdraw_cash/select_withdrawal_account_list',query)
 }
 // 设置默认账号
-export const setDefaultAccount = (url,query) => {
-    return apiResquest.get(`brand/settled_with/settled_with_cash/set_default_account/${url}`,query)
+export const setDefaultAccount = (id,query) => {
+    return apiResquest.get(`brand/brand_withdraw/brand_withdraw_cash/set_default_account/${id}`,query)
 }
 // 申请提现
 export const executionApplicationWithdrawal = (query) => {
-    return apiResquest.get(`brand/settled_with/settled_with_cash/execution_application_withdrawal`,query)
+    return apiResquest.get(`brand/brand_withdraw/brand_withdraw_cash/execution_application_withdrawal`,query)
 }
 // 钱包余额、提现判断
 export const getLumpsumAndWithdraw = (query) => {
@@ -50,6 +50,10 @@ export const bankCardList = (query) => {
 // 解绑银行卡
 export const bankUntie = (id,query) => {
     return apiResquest.get(`brand/brand_withdraw/brand_withdraw_cash/bank_untie/${id}`,query)
+}
+// 查看提现信息
+export const viewWithdrawalInformation = (id,query) => {
+    return apiResquest.get(`brand/brand_withdraw/brand_withdraw_cash/view_withdrawal_information`,query)
 }
 // ---------------------------------------- 订单管理 -----------------------------------------
 // 获取收据

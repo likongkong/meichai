@@ -335,12 +335,18 @@ page{
   box-sizing: border-box;
 }
 .jiantou{
+  width: 100rpx;
+  height: 100%;
+  position: absolute;
+  top:0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.jiantou image{
   width: 20rpx;
   height: 34rpx;
-  position: absolute;
-  top:50%;
-  right: 34rpx;
-  margin-top: -17rpx;
 }
 .accountItme_img image{
   width: 96rpx;

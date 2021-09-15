@@ -54,6 +54,8 @@ Page({
   onLoad: function (options) {
     this.data.uid = app.signindata.uid;
     this.data.loginid = app.signindata.loginid;
+    console.log(options)
+    this.data.from = options.from;
     // 判断是否登录
     if (this.data.loginid != '' && this.data.uid != '') {
       this.onLoadfun();
@@ -173,7 +175,12 @@ Page({
       setTimeout(()=>{
         let pages = getCurrentPages();    //获取当前页面信息栈
         let prevPage = pages[pages.length-2];
-        prevPage.getbankCardList();
+        if(this.data.from == "account"){
+          prevPage.getbankCardList();
+          prevPage.getAccountNumberList();
+        }else{
+          prevPage.getbankCardList();
+        }
         app.navigateBack(1)
       },1500)
     }).catch((err)=>{
