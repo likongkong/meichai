@@ -22,7 +22,7 @@
 					 <!-- <view class="exhibdeimgBRTop" wx:if='{{brandinfo.integral>0}}' style="color:#999495;">我的积分：{{brandinfo.integral}}</view> -->
 					 <view class="exhibdeimgBRTop" wx:if='{{detailInfo.userInteral>0}}' style="color:#666666;">我的积分：{{detailInfo.userInteral}}</view>
 					 <!-- <image class="questionMark" src="https://cdn.51chaidan.com/images/brandSettledIcon/wenhao.png" mode="aspectFit"></image> -->
-					 <view class="exhibdeimgBRRipos" wx:if='{{brandSettledLimit}}' catchtap="jumpSiginBrand">
+					 <view class="exhibdeimgBRRipos" wx:if='{{isOneselfBrand}}' catchtap="jumpSiginBrand">
 							<image src="https://cdn.51chaidan.com/images/brandInfoIcon/brand_sign.png" mode="aspectFit"></image>
 							<view style="color:#34A9ED;" wx:if='{{detailInfo.signActivityStatus==1}}'>发布签到</view>
 							<view style="color:#34A9ED;" wx:elif='{{detailInfo.signActivityStatus==2}}'>签到已开启</view>
