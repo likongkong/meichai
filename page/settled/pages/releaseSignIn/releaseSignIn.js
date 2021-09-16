@@ -22,6 +22,7 @@ Page({
         groups:[],
         subtitle:'关联IP',
         value:'点击关联',
+        disabled:true,
         name:'associationIp'
       },{
         isRequired:false,
@@ -49,7 +50,10 @@ Page({
   onLoad: function (options) {
     var _this = this;
     this.setData({
-      id:options.id||1102
+      id:options.id||1102,
+      type:options.type||2,
+      name:options.name||'林川',
+      url:decodeURIComponent(options.img),
     })
     // 获取系统信息
     wx.getSystemInfo({
@@ -170,7 +174,7 @@ Page({
   // 发布
   submitAudit(){
     let obj = this.data.obj;
-    let status = 2;
+    let status = this.data.type==1||2?2:3;
     let that = this;
     wx.showLoading({
       title: '加载中',
@@ -290,7 +294,13 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    
+    var share = {
+      title: `【开启签到】${this.data.name}邀请你来签到`,
+      imageUrl: this.data.url,
+      path: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + this.data.id,
+      success: function (res) { }
+    }
+    return share;
   },
   navigateBack(){
     wx.navigateBack({
