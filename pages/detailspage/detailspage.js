@@ -412,7 +412,7 @@ Page({
         };
       };
       if(listSpec[modelColor].realStock<=0 && listSpec[modelColor].stock<=0){
-        zunmdata.debuff = 2; 
+        zunmdata.debuff = 3; 
       }else if(listSpec[modelColor].realStock<=0 && listSpec[modelColor].stock>0){
         zunmdata.debuff = 3; 
       }
