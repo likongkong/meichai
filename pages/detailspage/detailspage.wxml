@@ -164,23 +164,7 @@
   </view>
 
   <block wx:if='{{is_exhibition==1||zunmdata.status==1}}'>
-      <!-- <view style="width:100%;height:60rpx;background:#000;" wx:if='{{zunmdata.status!=0&&zunmdata.status!=3&&!zunmdata.saleButtonDisplay}}'>
-        <view style="height:60rpx;float:left;line-height:60rpx;padding-left:20rpx;font-size:24rpx;color:#fff;">
-          <block wx:if='{{zunmdata.status==2&&winningovertimedetail}}'>距离活动结束<block wx:if='{{winningovertimedetail.dayStr}}'><text style='font-size:30rpx;'>{{winningovertimedetail.dayStr}}</text>天</block><text style='font-size:30rpx;'>{{winningovertimedetail.hrStr}}</text>时<text style='font-size:30rpx;'>{{winningovertimedetail.minStr}}</text>分<text style='font-size:30rpx;'>{{winningovertimedetail.secStr}}</text>秒
-          </block>
-          <block wx:elif='{{zunmdata.status==1}}'>
-             <block wx:if='{{newdataexh}}'>
-                 暂未开启
-             </block>
-             <block wx:else>
-             距离抢购开启<block wx:if='{{winningovertimedetail.dayStr}}'><text style='font-size:30rpx;'>{{winningovertimedetail.dayStr}}</text>天</block><text style='font-size:30rpx;'>{{winningovertimedetail.hrStr}}</text>时<text style='font-size:30rpx;'>{{winningovertimedetail.minStr}}</text>分<text style='font-size:30rpx;'>{{winningovertimedetail.secStr}}</text>秒
-             </block>
-          </block>
-          <block wx:elif='{{zunmdata.status==3}}'>已结束</block>
-          <block wx:elif='{{zunmdata.status==0}}'>已售罄</block>
-        </view>
-        <view style="height:40rpx;width:100rpx;background:#f08080;color:#fff;text-align:center;line-height:40rpx;float:right;margin:10rpx 20rpx 0 0;font-size:22rpx;border-radius: 10rpx;" wx:if='{{zunmdata.goodsLimit}}'>{{zunmdata.goodsLimit}}</view>
-      </view> --> 
+
       <block wx:if='{{is_exhibition==1}}'>
           <view>
             <view style="width:100%;overflow:hidden;background:#fff;">
@@ -226,13 +210,6 @@
                 </block>        
             </view>
 
-            <!-- <view class="mscModel">Compostable Case</view>
-            <view class="mscModelImgBox">
-                <view class="mscModelImgEve">
-                    <image class="mscModelImg" src="https://cdn.51chaidan.com//images/toyShow3/brandGoodsRotation/20210109/7b69de7f20fdd34c68ca139cb15c1454.png" mode='aspectFit'></image>
-                    <view class="mscModelName">$55 USD</view>
-                </view>
-            </view> -->
           </view>
           
           <view class='dPrice'>
@@ -267,13 +244,6 @@
             </block>        
         </view>
 
-        <!-- <view class="mscModel">Compostable Case</view>
-        <view class="mscModelImgBox">
-            <view class="mscModelImgEve">
-                <image class="mscModelImg" src="https://cdn.51chaidan.com//images/toyShow3/brandGoodsRotation/20210109/7b69de7f20fdd34c68ca139cb15c1454.png" mode='aspectFit'></image>
-                <view class="mscModelName">$55 USD</view>
-            </view>
-        </view> -->
       </view>
 
       <view class='dPrice'>
@@ -293,7 +263,6 @@
      <view wx:if='{{specialGoods==1&& is_exhibition != 1}}' style="background:#fff;padding:15rpx 0;">
         <view class="mscModel">选择{{specCate[0]}}:</view>
         <view class="mscModelBox">
-          <!-- {{item.realStock<5?'background:#F0E2BB;':''}}  style="color:#1684FC;" -->
           <view class="mscModelBoxOne {{modelSelInde==index?'addColorClass':''}}" style="{{modelSelInde==index&&item.realStock<5?'color:#1684FC !important;background:#D8EBFF !important;':''}}{{item.salesStatus==1&&item.realStock<=0?'text-decoration:line-through;':''}}" wx:for='{{detailSpecModel}}' catchtap="bindPickerChange" data-ind='{{index}}' wx:key='key' wx:if='{{item.arrCloseSpec[detailSpecColor[detailColorIndex].name]}}'>
               {{item.name}}
               <block wx:if='{{item.realStock <=0 && item.salesStatus==1}}'>(售罄)</block>
@@ -407,12 +376,10 @@
 
 <image wx:if='{{isScrapingCard}}' class="rotate" style="width:100%;height:auto;display:block;margin:0 0 20rpx 0;" catchtap="jumpScrapingCard" mode='widthFix' src="{{goodsInfoAds}}"></image>
 
-<!-- <image wx:if='{{!gotTBBMBS8 || !gotTBBMBS9}}' style="width:720rpx;height:auto; display:block;margin:15rpx auto;" catchtap="officialAccount" mode='widthFix' src="{{!gotTBBMBS8?'http://cdn.51chaidan.com/images/sign/activity/attentionGZH.png':'https://cdn.51chaidan.com/images/sign/activity/bigAttention1.png'}}"></image> -->
 
   <block wx:if='{{is_exhibition==1||(is_exhibition!=1&&brandId>0)}}'>
       <view style="width:100%;height:80rpx;">
         <view style="width:50%;height:100%;{{!exhibdetail?'font-size:26rpx;font-weight: bold;':'font-size:24rpx;'}}text-align:center;line-height:80rpx;float:left;position:relative;" data-ind='2' catchtap="exhibdetailfun">
-        <!-- <view style='width:2rpx;height:50rpx;float:left;background:#BBB9B9;margin-top:15rpx;'></view> -->
         商品详情
         <view wx:if='{{!exhibdetail}}' style='width:100rpx;height:6rpx;background:#000;position:absolute;left:0;right:0;bottom:0;margin:auto;'></view>
         </view>
@@ -563,7 +530,6 @@
                   <view wx:elif='{{item.type == 11 || item.type == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.goodsName}}</view>
                   <view wx:if='{{item.type == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:#666;">{{item.content}}</view>
                   <view style="width:100%;padding:10rpx 0;overflow:hidden;">
-                    <!-- <view wx:if='{{item.shopPrice && item.shopPrice!="" && item.type != 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#ff2742;float:left;">￥{{item.shopPrice}}</view> -->
                     <view wx:if='{{item.shopPrice && item.shopPrice!="" && item.type != 1}}' style="line-height:40rpx;font-size:22rpx;color:#ff2742;float:left;"></view>
                     <view wx:elif='{{item.type == 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#ff2742;float:left;">免单活动</view>
                     <view wx:if='{{item.type == 4 || item.type == 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;">
@@ -615,7 +581,6 @@
                   <view wx:elif='{{item.type == 11 || item.type == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:black;">{{item.goodsName}}</view>
                   <view wx:if='{{item.type == 12}}' class="mdismtbcctxthead multilineellipsis" style="font-size:26rpx;padding:5rpx 0;text-align:left;color:#666;">{{item.content}}</view>
                   <view style="width:100%;padding:10rpx 0;overflow:hidden;">
-                    <!-- <view wx:if='{{item.shopPrice && item.shopPrice!="" && item.type != 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#ff2742;float:left;">￥{{item.shopPrice}}</view> -->
                     <view wx:if='{{item.shopPrice && item.shopPrice!="" && item.type != 1}}' style="line-height:40rpx;font-size:22rpx;color:#ff2742;float:left;"></view>
                     <view wx:elif='{{item.type == 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#ff2742;float:left;">免单活动</view>
                     <view wx:if='{{item.type == 4 || item.type == 1}}' style="height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;">
@@ -672,8 +637,6 @@
       </view>
   </block>
 
-
-  <!-- <view style='width:100%;{{allcomlist.length==0?"height:240rpx;":"height:0;"}}'></view> -->
 
 </view>
 
@@ -811,15 +774,8 @@
         </block>
       </block>
       
-      <!-- <block wx:if="{{zunmdata.sellingWay == 2}}">
-          <view bindtap='jumpMapFun' class="boxShadowEve" style="width:160rpx; height:60rpx;margin-top:9rpx;padding:0;margin-right:20rpx;background:#E94F57;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;font-size: 24rpx;float:right;">专属展会地图</view>
-      </block> -->
     </block>
-    <block wx:else> 
-      <!-- <view class="footer-child large boxShadowEve" bindtap='jumpMapFun' style='box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:400rpx;float:right;background:#E94F57;'>
-        <view style='width:100%;height:100%;text-align:center;line-height:60rpx;font-size:28rpx;color:#fff;'>专属展会地图</view>
-      </view> -->
-    </block>
+
 	</view>
 </block>
 
@@ -912,10 +868,7 @@
                     <view class="money" style='font-size:28rpx;'>￥{{zunmdata.promote_price}}</view>
                   </block>
                 </view> 
-                <!-- <view wx:elif='{{}}' class="footer-child large sale" style='height:80rpx;margin-top:9rpx;border-radius:10rpx;padding:0;width:255rpx;margin-right:20rpx;' bindtap="dsbffunblock">
-                    <view class="money" style='font-size:28rpx;'>支付定金</view>
-                    <view class="money" style='font-size:28rpx;'>￥{{zunmdata.promote_price}}</view>
-                </view> -->
+
                 <block wx:elif='{{zunmdata.debuff == 3}}'>
                     <view class="footer-child large sale" style='height:80rpx;margin-top:9rpx;border-radius:10rpx;padding:0;width:255rpx;margin-right:20rpx;background:#FCA700;' catchtap="subscrfun">
                         <view style='width:100%;height:80rpx;text-align:center;color:#fff;line-height:80rpx;font-size:24rpx;'>补货提醒</view>
@@ -1743,12 +1696,22 @@
    </view>
 </view>
 
-<!-- 手机壳型号选择弹框 -->
-<!-- <view class="wsh" catchtouchmove="true" wx:if='{{mpmBulletFrame}}'>
-   <view class="tgimgboxgb" catchtap="depositboxfun"></view>
-   <view class="mpmbox">
-       <scroll-view scroll-y="true" class="mpmboxScroll">
-           <view wx:for='{{detailSpecModel}}' catchtap="bindPickerChange" data-ind='{{index}}' wx:key='key'>{{item.name}}</view>
-       </scroll-view>
-   </view>
-</view> -->
+<view class="mask" wx:if="{{guidanceMask}}" catchtouchmove="true" catchtap="toogleGuidanceMask">
+  <view class="maskBox" catchtap="true"> 
+		<text class="guidanceWrapTitle">进入品牌微信群即可参与</text>
+		<view class="guidanceWrap">
+			<view class="guidanceBox">
+				<text class="guidanceSubtitle">第一步：加入品牌微信群</text>
+				<view class="qrcode">
+					<image src="{{zunmdata.brand.picFriend}}" mode="widthFix"></image>
+					<text data-img="{{zunmdata.brand.picFriend}}" wx:if='{{zunmdata.brand.picFriend}}' catchtap="SaveCard">保存二维码</text>
+				</view>
+			</view>
+			<view class="guidanceBox">
+				<text class="guidanceSubtitle">第二步：点击微信群内官方发布的链接</text>
+				<image class="img" src="https://cdn.51chaidan.com/images/shareImg/shareImgStyle.png" mode="widthFix"></image>
+			</view>
+		</view>
+		<image class="guanbi" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="widthFix" catchtap="toogleGuidanceMask"></image>
+	</view>
+</view>
