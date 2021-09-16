@@ -62,7 +62,8 @@
       <text>余额明细</text>
       <image src="/pages/images/icon_in.png" mode="widthFix"></image>
     </view>
-    <view class="" catchtap="toggleExportOrdersMask">
+    <!-- <view class="" catchtap="toggleExportOrdersMask"> -->
+    <view class="" catchtap="jinqingqidai">
       <text>导出账单</text>
       <image src="/pages/images/icon_in.png" mode="widthFix"></image>
     </view>
