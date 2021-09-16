@@ -20,7 +20,7 @@
 								</view>
 					</view>
 					 <!-- <view class="exhibdeimgBRTop" wx:if='{{brandinfo.integral>0}}' style="color:#999495;">我的积分：{{brandinfo.integral}}</view> -->
-					 <view class="exhibdeimgBRTop" wx:if='{{detailInfo.userInteral>0}}' style="color:#666666;">我的积分：{{detailInfo.userInteral}}</view>
+					 <view class="exhibdeimgBRTop" wx:if='{{!isOneselfBrand}}' style="color:#666666;">我的积分：{{detailInfo.userInteral || 0}}</view>
 					 <!-- <image class="questionMark" src="https://cdn.51chaidan.com/images/brandSettledIcon/wenhao.png" mode="aspectFit"></image> -->
 					 <view class="exhibdeimgBRRipos" wx:if='{{isOneselfBrand}}' catchtap="jumpSiginBrand">
 							<image src="https://cdn.51chaidan.com/images/brandInfoIcon/brand_sign.png" mode="aspectFit"></image>
