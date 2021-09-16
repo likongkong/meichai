@@ -49,6 +49,7 @@ Page({
    */
   onLoad: function (options) {
     var _this = this;
+    console.log(options)
     this.setData({
       id:options.id||1102,
       type:options.type||2,
