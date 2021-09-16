@@ -34,15 +34,18 @@
     </view>
   </block>
   <block wx:elif="{{type == 2}}">
-    <view class="footerWrap footerWrap1">
+    <view class="footerWrap">
         <view data-num="1" catchtap="navigateBack">返回</view>
-        <view>分享</view>
         <view catchtap="submitAudit">开启签到</view>
     </view>
   </block>
   <block wx:elif="{{type == 3}}">
-    <view class="footerWrap">
+    <view class="footerWrap footerWrap1">
         <view data-num="1" catchtap="navigateBack">返回</view>
+        <view style="position:relative;">
+          <button open-type="share" style='position: absolute;left: 0;top: 0;width: 100%; height: 100%;opacity: 0;padding:0;z-index:1;' type="default" size="mini"></button>
+          分享
+        </view>
         <view catchtap="submitAudit">关闭签到</view>
     </view>
   </block>

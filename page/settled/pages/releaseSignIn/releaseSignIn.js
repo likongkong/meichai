@@ -27,13 +27,13 @@ Page({
       },{
         isRequired:false,
         type:'radio',
-        subtitle:'允许购买对象',
-        radioArr:['所有人可购买','指定群成员购买'],
+        subtitle:'允许签到对象',
+        radioArr:['所有人可签到','指定群成员签到'],
         value:0,
         index:0,
         direction:'Y',
         explain:true,
-        explainTxt:'所有人可购买：所有人可分享并且购买。\n指定群成员购买：只有管理员可分享，并且用户只可以通过分享链接购买',
+        explainTxt:'所有人可签到：所有人可分享并且签到。\n指定群成员签到：只有管理员可分享，并且用户只可以通过分享链接签到。',
         name:'isCanShare',
       }
     ],
@@ -52,7 +52,7 @@ Page({
     console.log(options)
     this.setData({
       id:options.id||1102,
-      type:options.type||2,
+      type:options.type==2?3:options.type==3?2:1,
       name:options.name||'林川',
       url:decodeURIComponent(options.img),
     })
@@ -175,8 +175,10 @@ Page({
   // 发布
   submitAudit(){
     let obj = this.data.obj;
-    let status = this.data.type==1||2?2:3;
+    let status = this.data.type==1||this.data.type==2?2:3;
     let that = this;
+    // console.log(this.data.type)
+    // return false;
     wx.showLoading({
       title: '加载中',
     })
@@ -194,20 +196,19 @@ Page({
         wx.hideLoading()
         wx.stopPullDownRefresh();
         if(res.data.ReturnCode == 200){
-          if(this.data.id!=0){
-            app.showToastC('关闭成功',1500);
-            setTimeout(function(){
-              let pages = getCurrentPages();    //获取当前页面信息栈
-              let prevPage = pages[pages.length-2];
-              prevPage.getData();
-              that.navigateBack();
-            },1000)
-          }else{
+          if(that.data.type==1){
             app.showToastC('发布成功',1500);
-            setTimeout(function(){
-              that.navigateBack();
-            },1000)
+          }else if(that.data.type==2){
+            app.showToastC('开启成功',1500);
+          }else if(that.data.type==3){
+            app.showToastC('关闭成功',1500);
           }
+          setTimeout(function(){
+            let pages = getCurrentPages();    //获取当前页面信息栈
+            let prevPage = pages[pages.length-2];
+            prevPage.onLoadfun();
+            that.navigateBack();
+          },1000)
         }else{
           app.showToastC(res.data.Msg,2000);
         }
