@@ -15,9 +15,18 @@ page{
   color: #FF2742;
 }
 
-
+.announcement{
+  width: 100%;
+  height: 74rpx;
+  font-size: 28rpx;
+  color: #EE9393;
+  line-height: 74rpx;
+  padding-left: 14rpx;
+  box-sizing: border-box;
+  background: #FFFFF4;
+}
 .headWrap{
-  padding-top: 34rpx;
+  padding-top: 10rpx;
   padding-bottom: 20rpx;
 }
 .card{

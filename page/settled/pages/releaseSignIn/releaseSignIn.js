@@ -35,6 +35,13 @@ Page({
         explain:true,
         explainTxt:'所有人可签到：所有人可分享并且签到。\n指定群成员签到：只有管理员可分享，并且用户只可以通过分享链接签到。',
         name:'isCanShare',
+      },{
+        isRequired:false,
+        type:'uploadImg',
+        subtitle:'签到分享图(推荐尺寸5:4)',
+        name:'shareImg',
+        src:'',
+        storagelocation:'images/activity/brandSign',
       }
     ],
     
@@ -54,7 +61,7 @@ Page({
       id:options.id||1102,
       type:options.type==2?3:options.type==3?2:1,
       name:options.name||'林川',
-      url:decodeURIComponent(options.img),
+      // url:decodeURIComponent(options.img),
     })
     // 获取系统信息
     wx.getSystemInfo({
@@ -150,14 +157,16 @@ Page({
             if(this.data.dynamicData[0].groups[i].brand_id == activity.brandId){
               name = this.data.dynamicData[0].groups[i].name;
               break;
-            }
+            } 
           }
           this.setData({
             [`dynamicData[0].value`]:name,
             [`dynamicData[1].index`]:activity.detail,
+            [`dynamicData[2].src`]:activity.cover,
           })
           obj.associationIp = activity.brandId;
           obj.isCanShare = activity.detail;
+          obj.shareImg = activity.cover;
           // obj.dynamicPic = info.imgArr;
           // obj.fieldGuideId = List.illustratedInfo.id;
           // // obj.allowComment = info.allow_comment_type;
@@ -184,7 +193,7 @@ Page({
     })
     console.log(obj)
     // let data = `mod=community&operation=establish&uid=${this.data.uid}&loginid=${this.data.loginid}&brand_id=${obj.associationIp}&title=${obj.dynamicContent}&illustrated_id=${obj.fieldGuideId?obj.fieldGuideId:''}&imgArr=${obj.dynamicPic}&allowComment=${obj.allowComment}&id=${this.data.id}`
-    let data = `mod=community&operation=setSignActivity&uid=${this.data.uid}&loginid=${this.data.loginid}&brand_id=${obj.associationIp}&status=${status}&isCanShare=${obj.isCanShare}`
+    let data = `mod=community&operation=setSignActivity&uid=${this.data.uid}&loginid=${this.data.loginid}&brand_id=${obj.associationIp}&status=${status}&isCanShare=${obj.isCanShare}&cover=${obj.shareImg}`
     var q = Dec.Aese(data);
     console.log(`${app.signindata.comurl}?${data}`)
     wx.request({
@@ -298,7 +307,7 @@ Page({
   onShareAppMessage: function () {
     var share = {
       title: `【开启签到】${this.data.name}邀请你来签到`,
-      imageUrl: this.data.url,
+      imageUrl: this.data.activity.cover?this.data.activity.cover:this.data.activity.banner,
       path: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + this.data.id,
       success: function (res) { }
     }

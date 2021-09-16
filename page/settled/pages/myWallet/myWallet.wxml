@@ -3,6 +3,9 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 <view class="wrap">
+  <view class="announcement">
+    钱包数据每2小时更新一次.请耐心等待
+  </view>
   <view class="headWrap">
     <view class="card">
       <!-- <image catchtap="clickme" src="https://cdn.51chaidan.com/images/brandSettledIcon/set.png" mode="widthFix"></image> -->
