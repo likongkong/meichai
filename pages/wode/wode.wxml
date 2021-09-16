@@ -162,10 +162,10 @@
                         <view>
                             <view class="assetL">
                                 <view>
-                                    <text data-type="9030" catchtap="comjumpwxnav">￥{{withdrawInfo.accumulated_income}}</text>
-                                    <text data-type="9030" catchtap="comjumpwxnav">累计收入</text>
-                                    <!-- <text catchtap="jinqingqidai">￥{{withdrawInfo.lumpSum}}</text>
-                                    <text catchtap="jinqingqidai">累计收入</text> -->
+                                    <!-- <text data-type="9030" catchtap="comjumpwxnav">￥{{withdrawInfo.accumulated_income}}</text>
+                                    <text data-type="9030" catchtap="comjumpwxnav">累计收入</text> -->
+                                    <text catchtap="jinqingqidai">￥{{withdrawInfo.lumpSum}}</text>
+                                    <text catchtap="jinqingqidai">累计收入</text>
                                 </view>
                                 <view>
                                     <text catchtap="jinqingqidai">{{withdrawInfo.silver}}</text>
@@ -176,8 +176,8 @@
                                     <text catchtap="jinqingqidai">水晶</text>
                                 </view>
                             </view>
-                            <view class="assetR" data-type="9030" catchtap="comjumpwxnav">
-                            <!-- <view class="assetR" catchtap="jinqingqidai"> -->
+                            <!-- <view class="assetR" data-type="9030" catchtap="comjumpwxnav"> -->
+                            <view class="assetR" catchtap="jinqingqidai">
                                 <view>
                                     <image src='https://cdn.51chaidan.com/images/brandSettledIcon/orderIcon/wallet.png' mode="widthFix"></image>
                                     <text>钱包</text>
