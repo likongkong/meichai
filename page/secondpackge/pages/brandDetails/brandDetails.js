@@ -54,11 +54,19 @@ Page({
     brandSinginBox:false
 
   },
+  // 跳转编辑签到
+  jumpSiginBrand(){
+    var detailInfo = this.data.detailInfo
+    wx.navigateTo({ // 抽签详情页  
+      url: "/page/settled/pages/releaseSignIn/releaseSignIn?id=" + detailInfo.brand.id + '&name=' + detailInfo.brand.brandName + '&type=' + detailInfo.signActivityStatus + '&img=' + encodeURIComponent(detailInfo.brand.shareImg)
+    });  
+  },
   brandSinginBoxFun(){
      this.setData({
         brandSinginBox:!this.data.brandSinginBox
      })
   },
+  // 签到
   brandSingin: function () {
     var _this = this;
     var exh = Dec.Aese('mod=community&operation=signIn&brand_id=' + _this.data.brandId + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
@@ -70,9 +78,11 @@ Page({
         console.log('签到=============',res)
         if (res.data.ReturnCode == 200) {
           _this.setData({
-            
+            brandSinginData:res.data
           })
-          _this.brandSinginBoxFun()
+          _this.brandSinginBoxFun();
+          _this.data.page = 0;
+          _this.getbrandDetail(_this.data.page);
         } else {
 
         };

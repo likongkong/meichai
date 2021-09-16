@@ -19,16 +19,16 @@
 										<block wx:else>已关注</block>
 								</view>
 					</view>
-					 <view class="exhibdeimgBRTop" wx:if='{{brandinfo.integral>0}}' style="color:#999495;">我的积分：{{brandinfo.integral}}</view>
+					 <!-- <view class="exhibdeimgBRTop" wx:if='{{brandinfo.integral>0}}' style="color:#999495;">我的积分：{{brandinfo.integral}}</view> -->
+					 <view class="exhibdeimgBRTop" wx:if='{{detailInfo.userInteral>0}}' style="color:#666666;">我的积分：{{detailInfo.userInteral}}</view>
 					 <!-- <image class="questionMark" src="https://cdn.51chaidan.com/images/brandSettledIcon/wenhao.png" mode="aspectFit"></image> -->
-					 <!--  wx:if='{{brandSettledLimit}}' -->
-					 <view class="exhibdeimgBRRipos" wx:if='{{false}}'>
+					 <view class="exhibdeimgBRRipos" wx:if='{{brandSettledLimit}}' catchtap="jumpSiginBrand">
 							<image src="https://cdn.51chaidan.com/images/brandInfoIcon/brand_sign.png" mode="aspectFit"></image>
 							<view style="color:#34A9ED;" wx:if='{{detailInfo.signActivityStatus==1}}'>发布签到</view>
 							<view style="color:#34A9ED;" wx:elif='{{detailInfo.signActivityStatus==2}}'>签到已开启</view>
 							<view style="color:#34A9ED;" wx:elif='{{detailInfo.signActivityStatus==3}}'>签到已关闭</view>
 					 </view>
-					 <view class="exhibdeimgBRRipos" wx:elif='{{detailInfo.signActivityStatus==2}}'>
+					 <view class="exhibdeimgBRRipos" wx:elif='{{detailInfo.signActivityStatus==2}}' catchtap="{{detailInfo.isTodaySign?'':'brandSingin'}}">
 							<image src="https://cdn.51chaidan.com/images/brandInfoIcon/brand_sign.png" mode="aspectFit"></image>
 							<view style="color:#868686;" wx:if='{{detailInfo.isTodaySign}}'>今日已签到</view>
 							<view style="color:#34A9ED;" wx:else>签到</view>
@@ -891,12 +891,12 @@
 						<view class="signInBox">
 							  <image src="http://cdn.51chaidan.com/images/brandInfoIcon/sign_right.png" mode='aspectFit' class="signInBoxImg"></image>
 								<view class="signInBoxTopEve" style="font-size :56rpx;font-weight: bold;">签到成功</view>
-								<view class="signInBoxTopEve" style="font-size :40rpx;color:#2E81FF;">+5积分</view>
+								<view class="signInBoxTopEve" style="font-size :40rpx;color:#2E81FF;">+{{brandSinginData.Info.interal}}积分</view>
 								<view class="signInBoxTopEve">
-									  <view class="signInDisplay" wx:for="{{[1,2,3,4,5,6,7]}}" wx:key='key'>
-												<view class="signInDisplayCir" style="background:#2E81FF;">+5</view>
-												<view class="signInDisplayLine" wx:if='{{index!=[1,2,3,4,5,6,7].length-1}}' style="background:#2E81FF;"></view>
-												<view class="signInDisplayNUm">第{{index}}天</view>
+									  <view class="signInDisplay" wx:for="{{brandSinginData.List.sign}}" wx:key='key'>
+												<view class="signInDisplayCir" style="{{item.isSign?'background:#2E81FF;':''}}">+{{item.interal}}</view>
+												<view class="signInDisplayLine" wx:if='{{index!=brandSinginData.List.sign.length-1}}'  style="{{item.isSign?'background:#2E81FF;':''}}"></view>
+												<view class="signInDisplayNUm">第{{item.day}}天</view>
 										</view>
 
 								</view>
