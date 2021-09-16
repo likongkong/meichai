@@ -28,6 +28,7 @@ Page({
     this.setData({
       id:options.id,
       type:options.flag,
+      detail_type:options.detail_type,
       c_title:options.flag==1?'收入明细':options.flag==2?'退款明细':'提现明细'
     })
     // 判断是否登录
@@ -49,7 +50,8 @@ Page({
   
   getData(){
     let url={
-      id:this.data.id
+      id:this.data.id,
+      detail_type:this.data.detail_type
     }
     api.settledWithCashDetail(url).then((res) => {
       console.log(res)

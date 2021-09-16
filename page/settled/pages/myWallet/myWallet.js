@@ -146,7 +146,8 @@ Page({
     api.getLumpsumAndWithdraw({}).then((res) => {
       console.log('iofo',res)
       this.setData({
-        info:res.data.data.info
+        info:res.data.data.info,
+        notify:res.data.data.notify
       })
     }).catch((err)=>{
       console.log(err)

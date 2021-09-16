@@ -41,7 +41,7 @@ export const getLumpsumAndWithdraw1 = (query) => {
 }
 // 订单详情
 export const settledWithCashDetail = (url,query) => {
-    return apiResquest.get(`brand/brand_withdraw/brand_withdraw_cash/detail/${url.id}`,query)
+    return apiResquest.get(`brand/brand_withdraw/brand_withdraw_cash/detail/${url.id}/${url.detail_type}`,query)
 }
 // 绑定银行卡
 export const addAccountNumber = (query) => {
