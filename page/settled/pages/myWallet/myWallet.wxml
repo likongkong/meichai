@@ -4,7 +4,7 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 <view class="wrap">
   <view class="announcement">
-    钱包数据每2小时更新一次.请耐心等待
+    {{notify}}
   </view>
   <view class="headWrap">
     <view class="card">

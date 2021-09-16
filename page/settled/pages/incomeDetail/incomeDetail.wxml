@@ -27,7 +27,7 @@
       <view>
         <block wx:for="{{item.mouthList}}" wx:key="key" wx:for-item="sonitem">
           <block wx:if="{{true}}">
-            <view class="orderItem" data-type="9031" data-whref="id={{sonitem.id}}&flag={{sonitem.flag}}" catchtap="comjumpwxnav">
+            <view class="orderItem" data-type="9031" data-whref="id={{sonitem.id}}&flag={{sonitem.flag}}&detail_type={{sonitem.detail_type}}" catchtap="comjumpwxnav">
               <view class="orderItemL">
                 <block wx:if="{{sonitem.flag==1}}">
                   <image src="{{sonitem.litpic}}" mode="widthFix"></image>

@@ -13,7 +13,7 @@
         <view class="incomeItem">
           <view>订单金额：￥{{info.order_amount}}</view>
           <view>平台抽成：￥{{info.rake}}</view>
-          <view>实际收入：￥{{info.actual_income}}</view>
+          <view>品牌收入：￥{{info.actual_income}}</view>
         </view>
       </view>
     </view>
@@ -28,8 +28,8 @@
         </view>
         <view class="incomeItem">
           <view>订单金额：￥{{info.order_amount}}</view>
-          <view>平台退款：￥{{info.order_amount}}</view>
-          <view>品牌退款：￥{{info.order_amount}}</view>
+          <view>平台退款：￥{{info.platform_refund}}</view>
+          <view>品牌退款：￥{{info.brand_refund}}</view>
           <!-- <view>平台退款：￥{{info.divided_into}}</view>
           <view>余额退款：￥{{info.actual_income}}</view>
           <view>支付退款：￥{{info.actual_income}}</view> -->
