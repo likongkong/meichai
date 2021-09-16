@@ -906,3 +906,28 @@
         <image class="popMaskbutton" catchtap="brandSinginBoxFun" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="aspectFit"></image>
     </view>
 </view>
+
+
+<!-- <view class="guidanceWrapMask">
+
+</view> -->
+
+<view class="mask" wx:if="{{guidanceMask}}" catchtouchmove="true" catchtap="toogleGuidanceMask">
+  <view class="maskBox" catchtap="true"> 
+		<text class="guidanceWrapTitle">进入品牌微信群即可参与</text>
+		<view class="guidanceWrap">
+			<view class="guidanceBox">
+				<text class="guidanceSubtitle">第一步：加入品牌微信群</text>
+				<view class="qrcode">
+					<image src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimages.669pic.com%2Felement_pic%2F60%2F61%2F0%2F12%2Fc249acc7126ab07da8beb60546ba50d4.jpg&refer=http%3A%2F%2Fimages.669pic.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1634374603&t=352956862467657f04299adc96b918e9" mode="widthFix"></image>
+					<text data-img="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimages.669pic.com%2Felement_pic%2F60%2F61%2F0%2F12%2Fc249acc7126ab07da8beb60546ba50d4.jpg&refer=http%3A%2F%2Fimages.669pic.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1634374603&t=352956862467657f04299adc96b918e9" catchtap="SaveCard">保存二维码</text>
+				</view>
+			</view>
+			<view class="guidanceBox">
+				<text class="guidanceSubtitle">第二步：点击微信群内官方发布的链接</text>
+				<image class="img" src="https://cdn.51chaidan.com/data/afficheimg/toyshowBrandBanner.png?09_1?imageMogr2/crop/750x750/gravity/cente" mode="widthFix"></image>
+			</view>
+		</view>
+		<image class="guanbi" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="widthFix" catchtap="toogleGuidanceMask"></image>
+	</view>
+</view>

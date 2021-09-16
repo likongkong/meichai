@@ -51,8 +51,8 @@ Page({
     ], // 支付状态 
     centerIndex:0,
     wOri:1 , // 1 瀑布流 2 信息流
-    brandSinginBox:false
-
+    brandSinginBox:false,
+    guidanceMask:false,
   },
   // 跳转编辑签到
   jumpSiginBrand(){
@@ -825,6 +825,73 @@ Page({
     this.setData({
       isAddNewEventMask:false
     })
-  } 
+  },
+
+  toogleGuidanceMask(){
+    this.setData({
+      guidanceMask:!this.data.guidanceMask
+    }) 
+  },
+  SaveCard: function(e) {
+    let that = this;
+    console.log('保存');
+    var imgSrc = e.currentTarget.dataset.img;
+    //获取相册授权
+    wx.getSetting({
+      success(res) {
+        if (!res.authSetting['scope.writePhotosAlbum']) {
+          wx.authorize({
+            scope: 'scope.writePhotosAlbum',
+            success() {
+              console.log('授权成功');
+              that.img(imgSrc)
+            }
+          })
+        }else{
+          that.img(imgSrc)
+        }
+      }
+    })
+  },
+  img: function (imgSrc){
+    var imgSrc = imgSrc;
+    wx.downloadFile({
+      url: imgSrc,
+      success: function (res) {
+        console.log(res); //图片保存到本地
+        wx.saveImageToPhotosAlbum({
+          filePath: res.tempFilePath,
+          success: function (data) {
+            console.log(data);
+            wx.showToast({
+              title: '保存成功',
+              duration: 2000
+            })
+          },
+          fail: function (err) {
+            console.log(err);
+            if (err.errMsg === "saveImageToPhotosAlbum:fail auth deny") {
+              wx.openSetting({
+                success(settingdata) {
+                  console.log(settingdata)
+                  if (settingdata.authSetting['scope.writePhotosAlbum']) {
+                    wx.showToast({
+                      title: '图片已保存',
+                      icon:'none',
+                      duration:2000
+                    })
+                    console.log('获取权限成功，给出再次点击图片保存到相册的提示。')
+                  } else {
+                    console.log('获取权限失败，给出不给权限就无法正常使用的提示')
+                  }
+                }
+              })
+            }
+          }
+        })
+      }
+    })
+
+  }, 
 
 })
