@@ -69,7 +69,8 @@ Page({
   // 签到
   brandSingin: function () {
     var _this = this;
-    var exh = Dec.Aese('mod=community&operation=signIn&brand_id=' + _this.data.brandId + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
+    console.log('mod=community&operation=signIn&brand_id=' + _this.data.brandId + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&share_uid=' + _this.data.referee)
+    var exh = Dec.Aese('mod=community&operation=signIn&brand_id=' + _this.data.brandId + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&share_uid=' + _this.data.referee);
     wx.request({
       url: app.signindata.comurl + 'toy.php' + exh,
       method: 'GET',
@@ -83,6 +84,10 @@ Page({
           _this.brandSinginBoxFun();
           _this.data.page = 0;
           _this.getbrandDetail(_this.data.page);
+        } else if(res.data.ReturnCode == 303){
+          _this.setData({
+            guidanceMask:true
+          })
         } else {
           app.showToastC(res.data.Msg || res.data.msg);
         };
@@ -326,12 +331,14 @@ Page({
         brandId: _this.getSearchString('id', scene) || 0,
         type:_this.getSearchString('type', scene) || '',
         settlement:_this.getSearchString('sl', scene) || 0,
+        referee:_this.getSearchString('referee', scene) || 0
       })
     }else{
       _this.setData({
         brandId: options.id || 0,
         type: options.type||'',
-        settlement:options.settlement||0
+        settlement:options.settlement||0,
+        referee:options.referee||0
       })
     }
     console.log('品牌值============',_this.data.brandId,_this.data.type)

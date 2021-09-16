@@ -696,3 +696,92 @@
   color: #BD5944 !important;
 }
 
+
+/* 群分享弹框 */
+
+.mask{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,.4);
+  z-index: 92;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.maskBox{
+  width: 680rpx;
+  height: auto;
+  background: #fff;
+  border-radius: 12rpx;
+  position: relative;
+}
+.guidanceWrapTitle{
+  width: 100%;
+  height: 116rpx;
+  font-size: 28rpx;
+  display: block;
+  background: #B2E6D5;
+  line-height: 116rpx;
+  text-align: center;
+  font-weight: bold;
+  border-top-left-radius: 12rpx;
+  border-top-right-radius: 12rpx;
+}
+.guidanceWrap{
+  padding: 44rpx 32rpx;
+  box-sizing: border-box;
+}
+.guidanceBox{
+  border-radius: 20rpx;
+  background: #E5F1FE;
+  padding: 20rpx 32rpx;
+  box-sizing: border-box;
+  margin-bottom: 44rpx;
+}
+.guidanceBox:last-child{
+  margin-bottom: 0;
+}
+.guidanceBox .img{
+  width: 404rpx;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+.qrcode{
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.qrcode image{
+  width: 120rpx;
+  height: auto;
+}
+.qrcode text{
+  font-size: 24rpx;
+  color: #fff;
+  background: #3093F9;
+  height: 50rpx;
+  line-height: 50rpx;
+  padding: 0 20rpx;
+  display: inline-block;
+  border-radius: 8rpx;
+  margin-left: 20rpx;
+}
+.guidanceSubtitle{
+  font-size: 28rpx;
+  margin-bottom: 14rpx;
+  display: block;
+}
+.guanbi{
+  width: 60rpx;
+  height: auto;
+  position: absolute;
+  bottom: -106rpx;
+  left: 50%;
+  margin-left: -40rpx;
+  padding: 20rpx;
+}
+/*  ----------   */

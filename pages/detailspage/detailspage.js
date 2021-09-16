@@ -236,8 +236,6 @@ Page({
     isUseBlindboxMoney:true,
     // 提交订单时是否使用抽盒金抵扣
     isDeductNum:1,
-    gotTBBMBS8:true,
-    gotTBBMBS9:true,
     // 关注公众号标签
     // 手机壳样式
     specialGoods:0,
@@ -248,10 +246,16 @@ Page({
     selectShell:{},
     // 刮刮卡入口
     isScrapingCard:false,
-    mpmBulletFrame:false  
-
+    mpmBulletFrame:false,  
+    guidanceMask:false
 
   },
+  toogleGuidanceMask(){
+    this.setData({
+      guidanceMask:!this.data.guidanceMask
+    }) 
+  },
+
   mpmBullFrame(){
      this.setData({
        mpmBulletFrame:!this.data.mpmBulletFrame
@@ -2982,9 +2986,7 @@ Page({
       isShareFun: app.signindata.isShareFun,
       defaultinformation:app.signindata.defaultinformation,
       signinlayer: true,
-      tgabox: false,
-      gotTBBMBS8:app.signindata.gotTBBMBS8,
-      gotTBBMBS9:app.signindata.gotTBBMBS9
+      tgabox: false
     });
     var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
     // 商品详情
@@ -3144,7 +3146,7 @@ Page({
             console.log('isGoodsCanShare','true 能 false不能分享')
             wx.hideShareMenu();
             if(!_this.data.referee){
-               
+               _this.toogleGuidanceMask();
             };
           }else{
             wx.showShareMenu({
@@ -4616,12 +4618,68 @@ Page({
       url: "/page/secondpackge/pages/canvasRoute/canvasRoute"
     });
   },
-  // 跳转公众号文章
-  officialAccount(){
-    if(!this.data.gotTBBMBS8){
-      app.comjumpwxnav(0,'https://mp.weixin.qq.com/s?__biz=MzUyNzMyNTg4Ng==&mid=100000975&idx=1&sn=ef370685e8a3c081684671ae961d16a7&chksm=7a000b1e4d77820819a1b4a07cc00432f987b0f79b798cef886ecdb4fffbd07ce2054c6689b1#rd','','')
-    }else if(!this.data.gotTBBMBS9){
-      app.comjumpwxnav(0,'https://mp.weixin.qq.com/s?__biz=MzI2Mzg4MDYzNQ==&mid=100013809&idx=1&sn=9c8be56959fe9d2ddb799b216b58d38e&chksm=6ab79c255dc015334675ddb87776de7962ed72ff69b57e0570d09dcfd8226663172d00a040bf#rd','','')
-    };
-  }
+  SaveCard: function(e) {
+    let that = this;
+    console.log('保存');
+    var imgSrc = e.currentTarget.dataset.img;
+    //获取相册授权
+    wx.getSetting({
+      success(res) {
+        if (!res.authSetting['scope.writePhotosAlbum']) {
+          wx.authorize({
+            scope: 'scope.writePhotosAlbum',
+            success() {
+              console.log('授权成功');
+              that.img(imgSrc)
+            }
+          })
+        }else{
+          that.img(imgSrc)
+        }
+      }
+    })
+  },
+  img: function (imgSrc){
+    var imgSrc = imgSrc;
+    wx.downloadFile({
+      url: imgSrc,
+      success: function (res) {
+        console.log(res); //图片保存到本地
+        wx.saveImageToPhotosAlbum({
+          filePath: res.tempFilePath,
+          success: function (data) {
+            console.log(data);
+            wx.showToast({
+              title: '保存成功',
+              duration: 2000
+            })
+          },
+          fail: function (err) {
+            console.log(err);
+            if (err.errMsg === "saveImageToPhotosAlbum:fail auth deny") {
+              wx.openSetting({
+                success(settingdata) {
+                  console.log(settingdata)
+                  if (settingdata.authSetting['scope.writePhotosAlbum']) {
+                    wx.showToast({
+                      title: '图片已保存',
+                      icon:'none',
+                      duration:2000
+                    })
+                    console.log('获取权限成功，给出再次点击图片保存到相册的提示。')
+                  } else {
+                    console.log('获取权限失败，给出不给权限就无法正常使用的提示')
+                  }
+                }
+              })
+            }
+          }
+        })
+      }
+    })
+
+  }, 
+
+
+
 })
