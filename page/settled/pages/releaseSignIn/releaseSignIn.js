@@ -308,7 +308,7 @@ Page({
     var share = {
       title: `【开启签到】${this.data.name}邀请你来签到`,
       imageUrl: this.data.activity.cover?this.data.activity.cover:this.data.activity.banner,
-      path: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + this.data.id,
+      path: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + this.data.id +"&referee="+this.data.uid,
       success: function (res) { }
     }
     return share;
