@@ -3387,8 +3387,10 @@ Page({
                       if(res.data.Ginfo.depositInfo[selectShell.roleId].orderSn){
                         res.data.Ginfo.orderSn = res.data.Ginfo.depositInfo[selectShell.roleId].orderSn;
                         res.data.Ginfo.isDisplayDeposit = true;
+                      }else{
+                        res.data.Ginfo.isDisplayDeposit = false;
                       };
-                      res.data.Ginfo.isDisplayDeposit = false;
+                      
 
                       if(res.data.Ginfo.status == 3){
                         if(res.data.Ginfo.depositInfo[selectShell.roleId].balanceOrderSn){
@@ -3497,8 +3499,10 @@ Page({
                                   if(res.data.Ginfo.depositInfo[selectShell.roleId].orderSn){
                                     res.data.Ginfo.orderSn = res.data.Ginfo.depositInfo[selectShell.roleId].orderSn;
                                     res.data.Ginfo.isDisplayDeposit = true;
+                                  }else{
+                                    res.data.Ginfo.isDisplayDeposit = false;
                                   };
-                                  res.data.Ginfo.isDisplayDeposit = false;
+                                  
                                 }else{
                                   res.data.Ginfo.isDepositSubscribe = false;
                                   res.data.Ginfo.isDisplayDeposit = true;

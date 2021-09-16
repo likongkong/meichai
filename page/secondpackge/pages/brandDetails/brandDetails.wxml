@@ -28,7 +28,7 @@
 							<view style="color:#34A9ED;" wx:elif='{{detailInfo.signActivityStatus==2}}'>签到已开启</view>
 							<view style="color:#34A9ED;" wx:elif='{{detailInfo.signActivityStatus==3}}'>签到已关闭</view>
 					 </view>
-					 <view class="exhibdeimgBRRipos" wx:elif='{{detailInfo.signActivityStatus==2}}' catchtap="{{detailInfo.isTodaySign?'':'brandSingin'}}">
+					 <view class="exhibdeimgBRRipos" wx:elif='{{detailInfo.signActivityStatus==2}}' catchtap="{{detailInfo.isTodaySign?'siginInTip':'brandSingin'}}">
 							<image src="https://cdn.51chaidan.com/images/brandInfoIcon/brand_sign.png" mode="aspectFit"></image>
 							<view style="color:#868686;" wx:if='{{detailInfo.isTodaySign}}'>今日已签到</view>
 							<view style="color:#34A9ED;" wx:else>签到</view>

@@ -54,6 +54,9 @@ Page({
     brandSinginBox:false,
     guidanceMask:false,
   },
+  siginInTip(){
+    app.showToastC('今日已签到');
+  },
   // 跳转编辑签到
   jumpSiginBrand(){
     var detailInfo = this.data.detailInfo
