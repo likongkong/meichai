@@ -894,8 +894,8 @@
 								<view class="signInBoxTopEve" style="font-size :40rpx;color:#2E81FF;">+{{brandSinginData.Info.interal}}积分</view>
 								<view class="signInBoxTopEve">
 									  <view class="signInDisplay" wx:for="{{brandSinginData.List.sign}}" wx:key='key'>
-												<view class="signInDisplayCir" style="{{item.isSign?'background:#2E81FF;':''}}">+{{item.interal}}</view>
-												<view class="signInDisplayLine" wx:if='{{index!=brandSinginData.List.sign.length-1}}'  style="{{item.isSign?'background:#2E81FF;':''}}"></view>
+												<view class="signInDisplayCir" style="{{item.isSign?'background:#2E81FF;':'background:#C6C6C6;'}}">+{{item.interal}}</view>
+												<view class="signInDisplayLine" wx:if='{{index!=brandSinginData.List.sign.length-1}}'  style="{{item.isSign?'background:#2E81FF;':'background:#000000;'}}"></view>
 												<view class="signInDisplayNUm">第{{item.day}}天</view>
 										</view>
 

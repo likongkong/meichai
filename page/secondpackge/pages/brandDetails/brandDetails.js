@@ -84,7 +84,7 @@ Page({
           _this.data.page = 0;
           _this.getbrandDetail(_this.data.page);
         } else {
-
+          app.showToastC(res.data.Msg || res.data.msg);
         };
       },
       fail: function () { }
