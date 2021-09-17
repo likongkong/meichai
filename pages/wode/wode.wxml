@@ -164,15 +164,15 @@
                                 <view>
                                     <!-- <text data-type="9030" catchtap="comjumpwxnav">￥{{withdrawInfo.accumulated_income}}</text>
                                     <text data-type="9030" catchtap="comjumpwxnav">累计收入</text> -->
-                                    <text catchtap="jinqingqidai">￥{{withdrawInfo.lumpSum}}</text>
+                                    <text catchtap="jinqingqidai">￥{{withdrawInfo.accumulated_income}}</text>
                                     <text catchtap="jinqingqidai">累计收入</text>
                                 </view>
                                 <view>
-                                    <text catchtap="jinqingqidai">{{withdrawInfo.silver}}</text>
+                                    <text catchtap="jinqingqidai">{{withdrawInfo.diamond}}</text>
                                     <text catchtap="jinqingqidai">钻石</text>
                                 </view>
                                 <view>
-                                    <text catchtap="jinqingqidai">{{withdrawInfo.gold}}</text>
+                                    <text catchtap="jinqingqidai">{{withdrawInfo.crystal}}</text>
                                     <text catchtap="jinqingqidai">水晶</text>
                                 </view>
                             </view>
