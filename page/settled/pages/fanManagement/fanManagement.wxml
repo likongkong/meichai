@@ -1,0 +1,72 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class="seBox" style="background:#fff;">
+
+    <view class="seTopBox" style="margin: 0 auto 0;color:#B8B8B8;">
+        <view class="seTopName">
+            
+            <view class="seTopNameEve">
+                <picker bindchange="bindPickerChange" value="{{index}}" range="{{groups}}" range-key="name">
+                    <view class="seTopNPicker specialellipsis">
+                        {{groups[index].name}}
+                        <image class="exhshopimg" mode='aspectFit' src="https://cdn.51chaidan.com/images/brandInfoIcon/DOWN-ARROW.png"></image>
+                    </view>
+                </picker>
+            </view>
+            <view class="seTopNameEve">粉丝数：{{countFans}}</view>
+        </view>
+    </view>
+
+
+    <view class="seTop">
+        <view class="elsearch marginAuto">
+            <image class="elserarchimg" catchtap="jumpsearch" src="https://www.51chaidan.com/images/toyCabinet/search.png"></image>
+            <view class="elsearchchNew">
+                <input class="elinputbut" bindfocus='onFocus' placeholder='用户名搜索' bindinput="inputChange" bindconfirm="jumpsearch" value="{{ordername}}"></input>
+            </view>
+            <view class="elserbotomNew" catchtap="jumpsearch">搜索</view>
+        </view>
+        <block wx:for="{{salesEffectList}}" wx:key='key'>
+            <view class="seUserData">
+                <view class="emlhleft" style="width:600rpx;">
+                    <image class="emlhlimg" mode="aspectFit" src="{{item.headphoto}}"></image>
+                    <view class="emlhltxt" style="width:480rpx;">
+                        <view class="emlhlttop specialellipsis" style="color:#101010;">{{item.nick}}<text  style="color:#999495;margin-left:10rpx;" wx:if='{{item.aliasName}}'>({{item.aliasName}})</text></view>
+                        <view class="emlhltbottom specialellipsis" style="color:#999495;">累计积分：{{item.total_interal}}（剩余积分：{{item.interal}}）</view>
+                    </view>
+                </view>
+                <view class="emlhright" catchtap="signaturePopUpFun" data-userid='{{item.userId}}' style="color:#6AB0EC;">备注</view>
+            </view>
+        </block>
+    </view>
+
+
+
+
+    <!--  暂无数据  -->
+    <view class='nodata' wx:if='{{salesEffectList.length==0&&nodataiftr}}' style='height: 600rpx;width: 100%;position: relative;'>
+        <image src='../../../../pages/images/nodata.png' class='nodataimg' style='width: 280rpx;height: 300rpx;position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;'></image>
+    </view>
+
+</view>
+
+<!-- 查看签号 -->
+<view class="wshNew" catchtouchmove="true" wx:if='{{signaturePopUp}}' catchtap="signaturePopUpFun">
+    <view class="orderMangAddress" catchtap="true">
+        <view class="orderMangTipTop">备注</view>
+        <view class="orderMangTipCenterEve">
+            <input class="addressModifyInput" bindinput='namefun' type='text' value='{{modifyName}}' type="text"></input>
+
+        </view>
+        <view class="orderMangTipCenterEve" style="width:560rpx;margin:auto;">
+            <view class="oAMaBConfirmNew" catchtap="signaturePopUpFun">取消</view>
+            <view class="oAMaBConfirmNew" catchtap="remarks">确定</view>
+        </view>
+    </view>
+
+
+
+</view>
+
+

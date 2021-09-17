@@ -179,6 +179,7 @@
         "pages/fieldGuideList/fieldGuideList",
         "pages/tiedCard/tiedCard",
         "pages/allBrandsIp/allBrandsIp",
+        "pages/fanManagement/fanManagement",
         "pages/releaseSignIn/releaseSignIn"
       ]
     }

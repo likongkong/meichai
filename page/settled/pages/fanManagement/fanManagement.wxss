@@ -1,0 +1,64 @@
+@import "/common/tabbar.wxss";
+@import "/page/settled/pages/salesEffect/salesEffect.wxss";
+.seUserData {
+  padding: 20rpx;
+  height: 90rpx;
+  position: relative;
+  border-bottom: 2rpx solid #f4f5f9;
+}
+.elsearchchNew {
+  padding-left: 60rpx;
+  width: 530rpx;
+  height: 54rpx;
+  background: #F5F5F5;
+  border-radius: 12rpx;
+}
+
+.elserbotomNew {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 90rpx;
+  height: 58rpx;
+  line-height: 58rpx;
+  text-align: center;
+  border-radius: 15rpx;
+  font-size: 24rpx;
+  color: #000;
+  margin: auto;
+}
+.addressModifyInput{
+  width: 500rpx;
+  height: 60rpx;
+  margin: auto;
+  display: block;
+  background: #F5F5F5;
+  border-radius:12rpx;
+  text-align: center;
+}
+.oAMaBConfirmNew{
+    width: 260rpx;
+    height: 64rpx;
+    line-height: 64rpx;
+    text-align: center;
+    border-radius: 10rpx;
+    border: 2rpx solid #90D2D6;
+    color: #90D2D6;
+}
+.seTopNPicker{
+  padding: 0 50rpx;
+  height: 100%;
+  position: relative;
+}
+.exhshopimg{
+  width: 20rpx;
+  height: 20rpx;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 20rpx;
+  margin: auto;
+}
+
+

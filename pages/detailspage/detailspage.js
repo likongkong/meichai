@@ -312,7 +312,6 @@ Page({
          }
 
       };
-      console.log()
       _this.setData({
         modelSelInde:indnum,
         detailSpecModel

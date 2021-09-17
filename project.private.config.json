@@ -68,8 +68,8 @@
           "scene": null
         },
         {
-          "name": "展会入场顺序",
-          "pathName": "page/secondpackge/pages/ticketRcSort/ticketRcSort",
+          "name": "粉丝管理",
+          "pathName": "page/settled/pages/fanManagement/fanManagement",
           "query": "",
           "scene": null
         },
