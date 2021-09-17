@@ -55,6 +55,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.hideShareMenu();
     var _this = this;
     console.log(options)
     this.setData({
@@ -307,7 +308,7 @@ Page({
   onShareAppMessage: function () {
     var share = {
       title: `【开启签到】${this.data.name}邀请你来签到`,
-      imageUrl: this.data.activity.cover?this.data.activity.cover:this.data.activity.banner,
+      imageUrl: this.data.activity.cover?this.data.activity.cover:this.data.dynamicData[0].groups[0].shareImg,
       path: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + this.data.id +"&referee="+this.data.uid,
       success: function (res) { }
     }

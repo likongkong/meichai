@@ -476,13 +476,14 @@ Page({
       shipping:obj.shipping,
       shippingPriceStatus:obj.shippingPriceStatus==0?0:2,
       limitBuy:obj.purchaseLimitation==0?obj.purchaseLimitationNum:0,
-      goodsDescStr:obj.goodsDescribe,
+      goodsDescStr: obj.goodsDescribe,
       arrGoodsDescImg:obj.goodsDetailsPic,
       stock:obj.goodsStock,
       isShowStock:obj.isGoodsStock==0?1:0,
       isShowSellNumber:obj.isSoldNum==0?1:0,
       // isCanShare:obj.isCanShare==0?1:0,
     }
+    // obj.goodsDescribe.split('\n').join('</p><p>');
     console.log(data)
     // return false;
     api.settledGoodsSetGoods(data).then((res) => {

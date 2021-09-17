@@ -4455,6 +4455,8 @@ Page({
                 list[r].stop_time = _this.toDate(list[r].stop_time);
               }
             };
+
+            brand.bradDesc = brand.bradDesc.split('hc').join('\n');
             _this.setData({
               exhdata: list,
               userbranddata: brand

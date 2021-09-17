@@ -1032,6 +1032,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
               }
 
             };
+            brand.bradDesc = brand.bradDesc.split('hc').join('\n');
             _this.setData({
               exhdata: list,
               userbranddata: brand
