@@ -924,7 +924,7 @@
 				</view>
 			</view>
 			<view class="guidanceBox">
-				<text class="guidanceSubtitle">第二步：点击微信群内官方发布的链接</text>
+				<text class="guidanceSubtitle">第二步：点击群内官方发布的链接即可参与</text>
 				<image class="img" src="https://cdn.51chaidan.com/images/shareImg/shareImgStyle.png" mode="widthFix"></image>
 			</view>
 		</view>

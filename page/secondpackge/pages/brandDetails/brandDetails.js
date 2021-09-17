@@ -710,7 +710,7 @@ Page({
     app.downRefreshFun(() => {
       var _this = this;
       _this.data.page = 0;
-      // _this.getbrandDetail(_this.data.page);
+      _this.getbrandDetail(_this.data.page);
       _this.eldatalistfun(0)
     })
   },
