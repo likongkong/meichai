@@ -1039,7 +1039,7 @@ page {
   height: 116rpx;
   font-size: 28rpx;
   display: block;
-  background: #B2E6D5;
+  background: #90D2D6;
   line-height: 116rpx;
   text-align: center;
   font-weight: bold;

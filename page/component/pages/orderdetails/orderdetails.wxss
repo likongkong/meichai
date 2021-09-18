@@ -165,7 +165,7 @@ page{
   padding-top: 20rpx;
   font-size: 22rpx;
   color: #333;
-  width: 420rpx;
+  width: 100%;
 }
 .ordchcon{
   font-size: 24rpx;
@@ -403,9 +403,7 @@ page{
 .taxrpice{
  height:40rpx;
  font-size:24rpx;
- position: absolute;
- top:20rpx;
- right: 0;
+ float: left;
 }
 .taxpricleft{
   height:40rpx;
@@ -416,6 +414,9 @@ page{
 .wholeconnumdisilin{
   float: right;
   margin-left: 13rpx;
+  max-width: 300rpx;
+  height: 40rpx;
+  line-height: 40rpx;
 }
 .wholeconnum{
   height: 40rpx;

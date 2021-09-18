@@ -47,7 +47,9 @@ Page({
   },
   // 修改地址名字
   namefun:function(e){
-    this.data.modifyName = e.detail.value;
+    if(e.detail.value && e.detail.value.length <= 10){
+      this.data.modifyName = e.detail.value;
+    };
   },
   signaturePopUpFun(w){
     var userid = w.currentTarget.dataset.userid || w.target.dataset.userid || 0;

@@ -269,7 +269,7 @@
                         <view style="float:right;color:#999495;" wx:if='{{item.sellNumber>0}}'>已售：{{item.sellNumber}}体</view>
                     </view>
                 </block>
-
+                <view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
             </block>
             <!-- 抽选 -->
             <block wx:elif='{{item.type==2}}'>
@@ -278,7 +278,6 @@
                       <block wx:if='{{item.specialWay > 0}}'>直播售卖</block>
                       <block wx:else>{{item.start_time}}开始</block>
                     </view>
-                    <view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
                 </block>
                 <block wx:if='{{item.status==2 ||item.status==3}}'>
                     <view class='dlfhtitlenew' style="overflow:hidden;">
@@ -291,6 +290,7 @@
                         <view style="float:right;color:#999495;" wx:if='{{item.sellNumber>0}}'>{{item.sellNumber}}人参加</view>
                     </view>
                 </block>
+                <view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
             </block>
             <!-- 签到 -->
             <block wx:elif='{{item.type==4}}'></block>
@@ -371,7 +371,6 @@
                       <block wx:if='{{item.specialWay > 0}}'>直播售卖</block>
                       <block wx:else>{{item.start_time}}开始</block>
                     </view>
-                    <view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
                 </block>
                 <block wx:if='{{item.status==2 ||item.status==3}}'>
                     <view class='dlfhtitlenew' style="overflow:hidden;">
@@ -383,8 +382,9 @@
                         </block>
                         <view style="float:right;color:#999495;" wx:if='{{item.sellNumber>0}}'>已售：{{item.sellNumber}}体</view>
                     </view>
+                    
                 </block>
-
+                <view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
             </block>
             <!-- 抽选 -->
             <block wx:elif='{{item.type==2}}'>
@@ -405,6 +405,7 @@
                         </block>
                         <view style="float:right;color:#999495;" wx:if='{{item.sellNumber}}'>{{item.sellNumber}}人参加</view>
                     </view>
+                    <view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
                 </block>
             </block>
             <!-- 签到 -->

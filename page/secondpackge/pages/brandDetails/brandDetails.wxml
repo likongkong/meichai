@@ -212,8 +212,8 @@
                         <image style="margin:0 15rpx;" class="emlplefimgshare" src="{{item.is_like?'https://www.51chaidan.com/images/brand/red_heart.png':'https://www.51chaidan.com/images/brand/black_heart.png'}}" data-type='{{item.type}}' data-ind='{{index}}' catchtap='followfun' data-id='{{item.id}}'></image>
                         
                         
-                        <!-- <text class="emlplefttxt" data-drying_id='{{item.id}}' wx:if='{{item.comment_count}}' catchtap='jumpdlfdetail'>{{item.commentNumber?item.commentNumber:'0'}}</text>
-                        <image class="emlplefimgshare" src="https://cdn.51chaidan.com/images/brandSettledIcon/comment.png" data-lid='{{item.id}}' data-is_like='{{item.is_like}}' catchtap='ispraisefun' data-ind='{{index}}' ></image> -->
+												<text class="emlplefttxt" catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}' style="float:right;" wx:if='{{item.commentNumber}}' >{{item.commentNumber?item.commentNumber:'0'}}</text>
+                        <image class="emlplefimgshare" catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}' src="https://cdn.51chaidan.com/images/brandSettledIcon/comment.png"></image>
 
 
                       </view>
@@ -267,7 +267,6 @@
 											<block wx:if='{{item.specialWay > 0}}'>直播售卖</block>
                       <block wx:else>{{item.start_time}}开始</block>
 										</view>
-                    <view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
                 </block>
                 <block wx:if='{{item.status==2 ||item.status==3}}'>
                     <view class='dlfhtitlenew' style="overflow:hidden;">
@@ -280,7 +279,7 @@
                         <view style="float:right;color:#999495;" wx:if='{{item.sellNumber>0}}'>已售：{{item.sellNumber}}体</view>
                     </view>
                 </block>
-
+								<view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
             </block>
             <!-- 抽选 -->
             <block wx:elif='{{item.type==2}}'>
@@ -382,7 +381,6 @@
 											<block wx:if='{{item.specialWay > 0}}'>直播售卖</block>
                       <block wx:else>{{item.start_time}}开始</block>
 										</view>
-                    <view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
                 </block>
                 <block wx:if='{{item.status==2 ||item.status==3}}'>
                     <view class='dlfhtitlenew' style="overflow:hidden;">
@@ -395,7 +393,7 @@
                         <view style="float:right;color:#999495;" wx:if='{{item.sellNumber>0}}'>已售：{{item.sellNumber}}体</view>
                     </view>
                 </block>
-
+								<view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
             </block>
             <!-- 抽选 -->
             <block wx:elif='{{item.type==2}}'>

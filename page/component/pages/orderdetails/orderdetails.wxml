@@ -49,7 +49,23 @@
                     <view class='wholeconnum specialellipsis' wx:if='{{comdata.prize}}' style='padding-top:10rpx;'>
                         奖品:{{comdata.prize}}</view>
                     <view class='wholeconnum specialellipsis'>
-                        <view class='wholeconnumdisilin'>
+                        <view class='taxrpice'>
+                            <view class='taxpricleft' wx:if='{{!comdata.roleName}}'>
+                                <block wx:if='{{comdata.order_type==1&&comdata.goods_price==0}}'>组合赠品</block>
+                                <block wx:elif='{{comdata.order_type==3}}'>拆币兑换</block>
+                                <block wx:elif='{{comdata.order_type==4}}'>邀请奖励</block>
+                                <block wx:elif='{{comdata.order_type==2||comdata.order_type==9}}'>免费</block>
+                                <block wx:elif='{{comdata.order_type==33&&comdata.amount==0}}'>免费</block>
+                                <block wx:elif='{{comdata.amount==0}}'>免费</block>
+                                <block
+                                    wx:elif='{{comdata.order_type==1&&comdata.suitPrice&&comdata.suitName&&comdata.suitNumber}}'>
+                                    ￥{{comdata.suitPrice}}</block>
+                                <block wx:else>￥{{comdata.goods_price}}</block>
+                                <text style="color:#000;" wx:if='{{comdata.integral}}'>+积分{{comdata.integral}}</text>
+                            </view>
+                        </view>
+
+                        <view class='wholeconnumdisilin specialellipsis'>
                             <block wx:if='{{comdata.order_type==1&&comdata.suitName&&comdata.suitNumber}}'>
                                 {{comdata.suitName}}x{{comdata.suitNumber}}
                             </block>
@@ -59,8 +75,8 @@
                                     style='color:#ff2840;margin-left:15rpx;'>款式:{{comdata.roleName}}</text>
                             </block>
                         </view>
-                        <view class='wholeconnumdisilin' wx:if='{{comdata.size}}'>尺寸:{{comdata.size}}</view>
-                        <view class='wholeconnumdisilin' wx:if='{{comdata.color}}'>颜色:{{comdata.color}}</view>
+                        <view class='wholeconnumdisilin specialellipsis' style="max-width:180rpx;" wx:if='{{comdata.size}}'>尺寸:{{comdata.size}}</view>
+                        <view class='wholeconnumdisilin specialellipsis' style="max-width:180rpx;" wx:if='{{comdata.color}}'>颜色:{{comdata.color}}</view>
                     </view>
                     <view class='wholeconnum specialellipsis'
                         wx:if='{{comdata.customer_note&&(comdata.status==1||comdata.status==2||comdata.status==12||comdata.status==13||comdata.status==3||comdata.status==4)}}'>
@@ -68,20 +84,7 @@
                     <view class='officialreply'
                         wx:if='{{comdata.customer_reply&&(comdata.status==1||comdata.status==2||comdata.status==12||comdata.status==13||comdata.status==4||comdata.status==16)}}'>
                         回复:{{comdata.customer_reply}}</view>
-                    <view class='taxrpice'>
-                        <view class='taxpricleft' wx:if='{{!comdata.roleName}}'>
-                            <block wx:if='{{comdata.order_type==1&&comdata.goods_price==0}}'>组合赠品</block>
-                            <block wx:elif='{{comdata.order_type==3}}'>拆币兑换</block>
-                            <block wx:elif='{{comdata.order_type==4}}'>邀请奖励</block>
-                            <block wx:elif='{{comdata.order_type==2||comdata.order_type==9}}'>免费</block>
-                            <block wx:elif='{{comdata.order_type==33&&comdata.amount==0}}'>免费</block>
-                            <block wx:elif='{{comdata.amount==0}}'>免费</block>
-                            <block
-                                wx:elif='{{comdata.order_type==1&&comdata.suitPrice&&comdata.suitName&&comdata.suitNumber}}'>
-                                ￥{{comdata.suitPrice}}</block>
-                            <block wx:else>￥{{comdata.goods_price}}</block>
-                        </view>
-                    </view>
+
 
                 </view>
 
@@ -691,6 +694,45 @@
                     <view class='wholeconnum specialellipsis' wx:if='{{comdata.prize}}' style='padding-top:10rpx;'>
                         奖品:{{comdata.prize}}</view>
                     <view class='wholeconnum'>
+
+                            <view class='taxrpice'>
+                                <view class='taxpricleft' wx:if='{{!comdata.roleName}}'>
+                                    <block wx:if='{{comdata.order_type==1&&comdata.goods_price==0}}'>组合赠品</block>
+                                    <block wx:elif='{{comdata.order_type==3}}'>拆币兑换</block>
+                                    <block wx:elif='{{comdata.order_type==4}}'>邀请奖励</block>
+                                    <block wx:elif='{{comdata.order_type==2||comdata.order_type==9}}'>免费</block>
+                                    <block wx:elif='{{comdata.order_type==33&&comdata.amount==0}}'>免费</block>
+                                    <block wx:elif='{{comdata.amount==0}}'>免费</block>
+                                    <block
+                                        wx:elif='{{comdata.order_type==1&&comdata.suitPrice&&comdata.suitName&&comdata.suitNumber}}'>
+                                        ￥{{comdata.suitPrice}}</block>
+                                    <block wx:else>￥{{comdata.goods_price}}</block>
+
+                                    <block
+                                        wx:if='{{comdata.order_type==1&&comdata.suitPrice&&comdata.suitName&&comdata.suitNumber}}'>
+                                    </block>
+                                    <block wx:else>
+                                        <block wx:if='{{comdata.gid!=38363}}'>
+                                            <block wx:if='{{comdata.order_type!=13}}'>
+                                                <view wx:if='{{comdata.is_suit==1}}' style='display: inline-block;color:#ff2742;'>
+                                                    {{comdata.gsale_suit}}</view>
+                                            </block>
+                                        </block>
+                                    </block>
+                                    <text style="color:#000;" wx:if='{{comdata.integral}}'>+积分{{comdata.integral}}</text>
+                                </view>
+                                
+                                <block wx:if='{{comdata.order_type!=13}}'>
+                                    <view wx:if='{{comdata.tax!=0.00}}' style='margin-left:10rpx;color:#999;'
+                                        class='taxpricleft'>税费:￥{{comdata.tax}}<view wx:if='{{comdata.is_suit==1}}'
+                                            style='display: inline-block;'>{{comdata.gsale_suit}}</view>
+                                    </view>
+                                </block>
+
+
+                            </view>
+
+
                         <view class='wholeconnumdisilin'>
                             <block wx:if='{{comdata.order_type==1&&comdata.suitName&&comdata.suitNumber}}'>
                                 {{comdata.suitName}}x{{comdata.suitNumber}}
@@ -714,41 +756,6 @@
                     <view class='officialreply'
                         wx:if='{{comdata.customer_reply&&(comdata.status==1||comdata.status==2||comdata.status==12||comdata.status==13||comdata.status==4||comdata.status==16)}}'>
                         回复:{{comdata.customer_reply}}</view>
-                    <view class='taxrpice'>
-                        <view class='taxpricleft' wx:if='{{!comdata.roleName}}'>
-                            <block wx:if='{{comdata.order_type==1&&comdata.goods_price==0}}'>组合赠品</block>
-                            <block wx:elif='{{comdata.order_type==3}}'>拆币兑换</block>
-                            <block wx:elif='{{comdata.order_type==4}}'>邀请奖励</block>
-                            <block wx:elif='{{comdata.order_type==2||comdata.order_type==9}}'>免费</block>
-                            <block wx:elif='{{comdata.order_type==33&&comdata.amount==0}}'>免费</block>
-                            <block wx:elif='{{comdata.amount==0}}'>免费</block>
-                            <block
-                                wx:elif='{{comdata.order_type==1&&comdata.suitPrice&&comdata.suitName&&comdata.suitNumber}}'>
-                                ￥{{comdata.suitPrice}}</block>
-                            <block wx:else>￥{{comdata.goods_price}}</block>
-
-                            <block
-                                wx:if='{{comdata.order_type==1&&comdata.suitPrice&&comdata.suitName&&comdata.suitNumber}}'>
-                            </block>
-                            <block wx:else>
-                                <block wx:if='{{comdata.gid!=38363}}'>
-                                    <block wx:if='{{comdata.order_type!=13}}'>
-                                        <view wx:if='{{comdata.is_suit==1}}' style='display: inline-block;color:#ff2742;'>
-                                            {{comdata.gsale_suit}}</view>
-                                    </block>
-                                </block>
-                            </block>
-                        </view>
-                        <block wx:if='{{comdata.order_type!=13}}'>
-                            <view wx:if='{{comdata.tax!=0.00}}' style='margin-left:10rpx;color:#999;'
-                                class='taxpricleft'>税费:￥{{comdata.tax}}<view wx:if='{{comdata.is_suit==1}}'
-                                    style='display: inline-block;'>{{comdata.gsale_suit}}</view>
-                            </view>
-                        </block>
-
-
-                    </view>
-
                 </view>
 
                 <view class='odchcomright' style='position:relative;' wx:if='{{comdata.order_type==7}}'>

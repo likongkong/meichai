@@ -54,7 +54,7 @@
                     </view>
                     <view class="obcrBottom obcrTop">
                         <view>数量x{{order.goodsNumber}}</view>
-                        <view>订单金额￥{{order.goodsAmount}}</view>
+                        <view>订单金额￥{{order.goodsAmount}}<text style="color:#000;" wx:if='{{order.integral}}'>+积分{{order.integral}}</text></view>
                     </view>
                 </view>
             </view>

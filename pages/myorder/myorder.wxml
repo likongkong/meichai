@@ -379,7 +379,32 @@
 
                       <view class='wholeconnum specialellipsis' wx:if='{{item.prize}}' style='padding-top:10rpx;'>奖品:{{item.prize}}</view>
                       <view class='wholeconnum'>
-                           <view class='wholeconnumdisilin'>
+
+                            <view class='taxrpice'>
+                                <view class='taxpricleft' wx:if='{{!item.roleName}}'>
+                                    <block wx:if='{{item.order_type==1&&item.goods_price==0}}'>组合赠品</block>
+                                    <block wx:elif='{{item.order_type==3}}'>拆币兑换</block>
+                                    <block wx:elif='{{item.order_type==4}}'>邀请奖励</block>
+                                    <block wx:elif='{{item.order_type==6}}'>原价：￥{{item.goods_amount}}</block>
+                                    <block wx:elif='{{item.order_type==2||item.order_type==9}}'>免费</block>
+                                    <block wx:elif='{{item.order_type==33&&item.amount==0}}'>免费</block>
+                                    <block wx:elif='{{item.amount==0}}'>免费</block>
+                                    <block wx:elif='{{item.order_type==1&&item.suitPrice&&item.suitName&&item.suitNumber}}'>￥{{item.suitPrice}}</block>
+                                    <block wx:else>￥{{item.goods_price}}</block>
+                                    <block wx:if='{{item.order_type!=13}}'>
+                                            <block wx:if='{{item.gid!=38363}}'>
+                                                <view wx:if='{{item.is_suit==1}}' style='display: inline-block;color:#ff2742;'>
+                                                    <block wx:if='{{item.order_type==1&&item.suitPrice&&item.suitName&&item.suitNumber}}'></block>
+                                                    <block wx:else>{{item.gsale_suit}}</block>
+                                                </view>
+                                            </block>
+                                    </block>
+                                    <text style="color:#000;" wx:if='{{item.integral}}'>+积分{{item.integral}}</text>
+                                </view>
+                                <view wx:if='{{item.tax!=0.00}}' style='margin-left:10rpx;color:#999;' class='taxpricleft'>税费:￥{{item.tax}}</view>
+                            </view>
+
+                           <view class='wholeconnumdisilin specialellipsis'>
                               <block wx:if='{{item.order_type==1&&item.suitName&&item.suitNumber}}'>
                                  {{item.suitName}}x{{item.suitNumber}}
                               </block>
@@ -402,28 +427,7 @@
                       <view class='officialreply' wx:elif='{{item.customer_reply&&(item.status==1||item.status==12||item.status==13||item.status==2||item.status==3||item.status==4||item.status==16)}}'>
                         <text wx:if="{{item.order_type!=22}}">回复:{{item.customer_reply}}</text>
                       </view>
-                      <view class='taxrpice'>
-                          <view class='taxpricleft' wx:if='{{!item.roleName}}'>
-                              <block wx:if='{{item.order_type==1&&item.goods_price==0}}'>组合赠品</block>
-                              <block wx:elif='{{item.order_type==3}}'>拆币兑换</block>
-                              <block wx:elif='{{item.order_type==4}}'>邀请奖励</block>
-                              <block wx:elif='{{item.order_type==6}}'>原价：￥{{item.goods_amount}}</block>
-                              <block wx:elif='{{item.order_type==2||item.order_type==9}}'>免费</block>
-                              <block wx:elif='{{item.order_type==33&&item.amount==0}}'>免费</block>
-                              <block wx:elif='{{item.amount==0}}'>免费</block>
-                              <block wx:elif='{{item.order_type==1&&item.suitPrice&&item.suitName&&item.suitNumber}}'>￥{{item.suitPrice}}</block>
-                              <block wx:else>￥{{item.goods_price}}</block>
-                              <block wx:if='{{item.order_type!=13}}'>
-                                    <block wx:if='{{item.gid!=38363}}'>
-                                        <view wx:if='{{item.is_suit==1}}' style='display: inline-block;color:#ff2742;'>
-                                            <block wx:if='{{item.order_type==1&&item.suitPrice&&item.suitName&&item.suitNumber}}'></block>
-                                            <block wx:else>{{item.gsale_suit}}</block>
-                                        </view>
-                                    </block>
-                              </block>
-                          </view>
-                          <view wx:if='{{item.tax!=0.00}}' style='margin-left:10rpx;color:#999;' class='taxpricleft'>税费:￥{{item.tax}}</view>
-                    </view>
+                      
                       
                  </view>
 

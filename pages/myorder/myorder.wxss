@@ -150,7 +150,7 @@
   max-height: 66rpx;
   color: #666;
   font-size: 22rpx;
-  width: 400rpx;
+  width: 100%;
 }
 .wholeconnum{
   height: 40rpx;
@@ -267,14 +267,15 @@
 .wholeconnumdisilin{
   float: right;
   margin-left: 13rpx;
+  max-width: 300rpx;
+  height: 40rpx;
+  line-height: 40rpx;
 }
 
 .taxrpice{
  height:40rpx;
  font-size:24rpx;
- position: absolute;
- top:20rpx;
- right: 0;
+ float: left;
 }
 .taxpricleft{
   height:40rpx;

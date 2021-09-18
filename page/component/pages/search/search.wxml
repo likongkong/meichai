@@ -147,7 +147,7 @@
         <view class="cardBbox"> 
             <view class="title multilineellipsis">{{itemTitle}}</view>
             <view class="cardBboxPrice">
-                <view class="price" wx:if='{{itemPrice}}'>￥{{itemPrice}}</view>
+                <view class="price" wx:if='{{itemPrice}}'>￥{{itemPrice}}<text style="color:#000;" wx:if='{{integral}}'>+积分{{integral}}</text></view>
                 <view style="color:#9b9999;">一番赏 ></view>
             </view>
         </view>
@@ -172,7 +172,7 @@
             <view class="title multilineellipsis">{{itemTitle}}</view>
             <view class="cardBboxPrice">
                 <view class="price">
-                <text>￥{{cheaperPrice&&cheaperPrice!=''?cheaperPrice:itemPrice}}</text>
+                <text>￥{{cheaperPrice&&cheaperPrice!=''?cheaperPrice:itemPrice}}</text><text style="color:#000;" wx:if='{{integral}}'>+积分{{integral}}</text>
                 <view wx:if="{{tip!=''}}" class="label">{{tip}}</view>
                 </view>
                 <view style="color:#9b9999;">抽盒机 ></view>
@@ -194,10 +194,10 @@
             <view class="title multilineellipsis">{{itemTitle}}</view>
             <view class="cardBboxPrice" wx:if='{{itemPrice}}'>
                 <block wx:if='{{goods_type==3}}'>
-                    <view class="price">定金￥{{promote_price}}</view>
+                    <view class="price">定金￥{{promote_price}}<text style="color:#000;" wx:if='{{integral}}'>+积分{{integral}}</text></view>
                 </block>
                 <block wx:else>
-                    <view class="price">￥{{itemPrice}}</view>
+                    <view class="price">￥{{itemPrice}}<text style="color:#000;" wx:if='{{integral}}'>+积分{{integral}}</text></view>
                 </block>
             </view>
         </view>

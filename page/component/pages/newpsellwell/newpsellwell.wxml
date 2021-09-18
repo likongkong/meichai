@@ -30,6 +30,7 @@
                         <view class="mpsName" style="color:#FF2742;">
                             <block wx:if='{{item.goods_type==3}}'>￥{{item.promote_price}}</block>
                             <block wx:else>￥{{item.gsale}}</block>
+                            <text style="color:#000;" wx:if='{{item.integral}}'>+积分{{item.integral}}</text>
                         </view>
                     </view>
                 </block>
@@ -64,7 +65,8 @@
                                         <block wx:else>
                                             <text style='font-size:22rpx;' wx:if='{{item.pre_name}}'>{{item.pre_name}}:</text>
                                             <text style='font-weight: bold;'>￥{{item.gsale}}</text>
-                                        </block>    
+                                        </block>  
+                                        <text style="color:#000;" wx:if='{{item.integral}}'>+积分{{item.integral}}</text>  
                                     </view>
                                     <view wx:if='{{item.gsale != item.market_price}}' class='bccompricright'>{{item.gsource}}:￥{{item.market_price}}</view>
                                 </view>   
@@ -92,7 +94,8 @@
                             <view class='dismtbcctxtbott'>
                                 <view class='dismtbcctxtbottleft specialellipsis'>
                                         <block wx:if='{{w.goods_type==3}}'>定金￥{{w.promote_price}}</block>
-                                        <block wx:else>￥{{w.gsale}}</block>									
+                                        <block wx:else>￥{{w.gsale}}</block>		
+                                        <text style="color:#000;" wx:if='{{w.integral}}'>+积分{{w.integral}}</text>
                                 </view>
                                 <block wx:if='{{category_id != "G27"}}'>
                                     <image wx:if='{{w.goods_type!=3}}' src='../../../../pages/images/dismtb.png' class='addshopcar'></image>
