@@ -64,6 +64,11 @@ Page({
       url: "/page/settled/pages/releaseSignIn/releaseSignIn?id=" + detailInfo.brand.id + '&name=' + detailInfo.brand.brandName + '&type=' + detailInfo.signActivityStatus + '&img=' + encodeURIComponent(detailInfo.brand.shareImg)
     });  
   },
+  jumpFanMan(){
+    wx.navigateTo({ // 抽签详情页  
+      url: "/page/settled/pages/fanManagement/fanManagement"
+    }); 
+  },
   brandSinginBoxFun(){
      this.setData({
         brandSinginBox:!this.data.brandSinginBox
@@ -601,27 +606,6 @@ Page({
       })
     }
   },
-
-  // getADList: function () {
-  //   var _this = this;
-  //   var exh = Dec.Aese('mod=info&operation=toyShow&type=2');
-  //   wx.request({
-  //     url: app.signindata.comurl + 'ads.php' + exh,
-  //     method: 'GET',
-  //     header: { 'Accept': 'application/json' },
-  //     success: function (res) {
-  //       console.log('广告=============',res)
-  //       if (res.data.ReturnCode == 200) {
-  //         _this.setData({
-  //           adList: res.data.banner[0],
-  //         })
-  //       } else {
-
-  //       };
-  //     },
-  //     fail: function () { }
-  //   });
-  // },
 
   // 点赞
   ispraisefun: function (w) {
