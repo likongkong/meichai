@@ -46,7 +46,7 @@
                         <view class="specialellipsis">{{itemName}}</view>
                     </view>
                     <view class="obcrBottom obcrTop">
-                        <view>售价:{{itemPrice}}</view>
+                        <view>售价:{{itemPrice}}<text style="color:#000;" wx:if='{{integral}}'>+积分{{integral}}</text></view>
                         <view>
                             <block wx:if='{{itemType == 4}}'>抽选数量:{{stock}}</block>
                             <block wx:else>已售<block wx:if='{{stock}}'>/总库存</block>:{{salesNumber}}<block wx:if='{{stock}}'>/{{stock}}</block></block>
