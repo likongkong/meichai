@@ -86,6 +86,7 @@ Page({
         this.setData({
           noData:true
         })
+        app.showToastC('暂无数据',1500);
       }else if(this.data.limitprame!=1 && list.length == 0){
         this.setData({
           loadprompt:true

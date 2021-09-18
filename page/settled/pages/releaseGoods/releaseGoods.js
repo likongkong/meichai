@@ -102,17 +102,18 @@ Page({
         borderbottom1:'show',
         name:'purchaseLimitation',
       },
-      // {
-      //   isRequired:false,
-      //   type:'text',
-      //   subtitle:'消耗积分',
-      //   placeholder:'无需消耗积分',
-      //   value:'',
-      //   name:'integrate',
-      //   explain:true,
-      //   borderbottom1:'show',
-      //   margintop0:true,
-      // },
+      {
+        isRequired:false,
+        type:'text',
+        subtitle:'消耗积分',
+        placeholder:'无需消耗积分',
+        value:'',
+        name:'integrate',
+        explainTxt:'用户需使用积分获得购买资格请输入售卖积分',
+        explain:true,
+        borderbottom1:'show',
+        margintop0:true,
+      },
       {
         isRequired:false,
         type:'uploadImg',
@@ -210,6 +211,7 @@ Page({
       goodsLabel:'', //标签
       purchaseLimitation:0, //是否限购
       purchaseLimitationNum:1, //限购体数
+      integrate:'',  //积分
       goodsDetailsPic:'', //详情图
       shipping:'',  //快递公司名称
       shippingPriceStatus:'', //邮费类型
@@ -355,7 +357,8 @@ Page({
           [`listData1[5].index`]:info.deliverTimeStatus===''?999:info.deliverTimeStatus==1?0:1,
           [`listData1[6].index`]:info.limitBuy==0?1:0,
           [`listData1[6].value`]:info.limitBuy,
-          [`listData1[7].imageList`]:info.arrGoodsDescImg,
+          [`listData1[7].value`]:info.integral,
+          [`listData1[8].imageList`]:info.arrGoodsDescImg,
           [`listData2[0].groupsIndex`]:info.logisticsIndex,
           [`listData2[1].value`]:info.deliverTime,
           [`listData2[2].index`]:info.isShowStock==0?1:0,
@@ -390,6 +393,7 @@ Page({
         obj.goodsLabel = info.deliverTimeStatus===''?'':info.deliverTimeStatus==1?0:1;
         obj.purchaseLimitation = info.limitBuy==0?1:info.limitBuy;
         obj.purchaseLimitationNum = info.limitBuy;
+        obj.integrate = info.integral;
         obj.goodsDetailsPic = info.arrGoodsDescImg;
         obj.logisticsIndex = info.logisticsIndex,
         obj.shipping = info.shipping;
@@ -411,6 +415,7 @@ Page({
   submitAudit(){
     let obj = this.data.obj;
     let that = this;
+
     if(!obj.goodsName || obj.goodsName == ''){
       this.selectComponent('#settledForm1').scrollto('goodsName');
       app.showToastC('请输入商品名称',1500);
@@ -424,6 +429,10 @@ Page({
     if(!obj.goodsPrice || obj.goodsPrice == ''){
       this.selectComponent('#settledForm1').scrollto('goodsPrice');
       app.showToastC('请输入商品售价金额',1500);
+      return false;
+    }else if(obj.goodsPrice<=0){
+      this.selectComponent('#settledForm1').scrollto('goodsPrice');
+      app.showToastC('商品售价金额必须大于0',1500);
       return false;
     }
     if(!obj.goodsStock || obj.goodsStock == ''){
@@ -477,6 +486,7 @@ Page({
       shippingPriceStatus:obj.shippingPriceStatus==0?0:2,
       limitBuy:obj.purchaseLimitation==0?obj.purchaseLimitationNum:0,
       goodsDescStr: obj.goodsDescribe,
+      integral:obj.integrate,
       arrGoodsDescImg:obj.goodsDetailsPic,
       stock:obj.goodsStock,
       isShowStock:obj.isGoodsStock==0?1:0,
