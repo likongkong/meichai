@@ -43,7 +43,7 @@
     <view class="listWrap">
       <block wx:for="{{list}}" wx:key='key'>
         <view wx:if="{{item.type == 'text'}}" id="{{item.name}}" class="rowWrap {{item.borderbottom1?'borderbottom1':''}} {{item.paddingL80?'paddingL80':''}}">
-          <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}">
+          <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}" data-explaintxt="{{item.explainTxt}}" catchtap="{{item.explainTxt?'showExplain':''}}">
             <text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}
             <image wx:if="{{item.explain}}" src="https://cdn.51chaidan.com/images/brandSettledIcon/wenhao.png" mode="widthFix"></image>
           </view>
