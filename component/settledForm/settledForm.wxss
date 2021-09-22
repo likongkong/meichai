@@ -102,7 +102,7 @@
 /* 发布样式 */
 .card{
   background: #ffffff;
-  border-radius: 20rpx;
+  /* border-radius: 20rpx; */
   margin-top: 24rpx;
 }
 .actionSheetIcon{

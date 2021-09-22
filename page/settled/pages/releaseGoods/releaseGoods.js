@@ -191,19 +191,19 @@ Page({
       },
     ],
     listData3:[
-      // {
-      //   isRequired:false,
-      //   type:'radio',
-      //   subtitle:'允许购买对象',
-      //   radioArr:['所有人可购买','指定群成员购买'],
-      //   value:0,
-      //   index:0,
-      //   direction:'Y',
-      //   margintop0:true,
-      //   explain:true,
-      //   explainTxt:'所有人可购买：所有人可分享并且购买。\n指定群成员购买：只有管理员可分享，并且用户只可以通过分享链接购买',
-      //   name:'isCanShare',
-      // }
+      {
+        isRequired:false,
+        type:'radio',
+        subtitle:'允许购买对象',
+        radioArr:['所有人可购买','指定群成员购买'],
+        value:0,
+        index:0,
+        direction:'Y',
+        margintop0:true,
+        explain:true,
+        explainTxt:'所有人可购买：所有人可分享并且购买。\n指定群成员购买：只有管理员可分享，并且用户只可以通过分享链接购买',
+        name:'isCanShare',
+      }
     ],
     obj:{
       goodsDescribe:'', //文字描述
@@ -365,7 +365,7 @@ Page({
           [`listData2[3].index`]:info.isShowSellNumber==0?1:0,
           [`listData2[4].time`]:util.format1("yyyy-MM-dd HH:mm",info.startTime),
           [`listData2[5].time`]:util.format1("yyyy-MM-dd HH:mm",info.stopTime),
-          // [`listData3[0].index`]:info.isCanShare==0?1:0,
+          [`listData3[0].index`]:info.isCanShare==0?1:0,
         })
     //  goodsName:'', //商品名称
     //  flatPatternmaking:'', //商品展示图
@@ -403,7 +403,7 @@ Page({
         obj.isSoldNum = info.isShowSellNumber==0?1:0;
         obj.startTime = util.format1("yyyy-MM-dd HH:mm",info.startTime);
         obj.endTime = util.format1("yyyy-MM-dd HH:mm",info.stopTime);
-        // obj.isCanShare = info.isCanShare==0?1:0;
+        obj.isCanShare = info.isCanShare==0?1:0;
       }else{
         app.showToastC(res.data.Msg,2000);
       }
@@ -491,7 +491,7 @@ Page({
       stock:obj.goodsStock,
       isShowStock:obj.isGoodsStock==0?1:0,
       isShowSellNumber:obj.isSoldNum==0?1:0,
-      // isCanShare:obj.isCanShare==0?1:0,
+      isCanShare:obj.isCanShare==0?1:0,
     }
     // obj.goodsDescribe.split('\n').join('</p><p>');
     console.log(data)
