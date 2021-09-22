@@ -286,6 +286,23 @@ Page({
       console.log(res)
 
       this.getLumpsumAndWithdraw();
+
+
+      //今日已申请过提现
+      if(res.data.status_code == 200304){
+        wx.showModal({
+          title: '',
+          content: '今日已申请过提现，注意每天仅可申请一次提现，请明天再来提现吧',
+          showCancel:false,
+          confirmText:'关闭',
+          confirmColor:'#90D2D6',
+          success (res) {
+            if (res.confirm) {
+            }
+          }
+        })
+      }
+
       // //今日已申请过提现
       // if(res.data.status_code == 200304){
       //   wx.showModal({

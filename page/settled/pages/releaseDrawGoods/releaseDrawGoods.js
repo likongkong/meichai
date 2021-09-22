@@ -61,6 +61,18 @@ Page({
         borderbottom1:'show',
         margintop0:true,
       },
+      {
+        isRequired:false,
+        type:'text',
+        subtitle:'消耗积分',
+        placeholder:'无需消耗积分',
+        value:'',
+        name:'integrate',
+        explainTxt:'用户需使用积分获得购买资格请输入售卖积分',
+        explain:true,
+        borderbottom1:'show',
+        margintop0:true,
+      },
     ],
     listData2:[
       {
@@ -139,20 +151,21 @@ Page({
         input:true,
         name:'isCashPledge',
       },
-      // {
-      //   isRequired:false,
-      //   type:'radio',
-      //   subtitle:'允许购买对象',
-      //   radioArr:['所有人可购买','指定群成员购买'],
-      //   value:0,
-      //   index:0,
-      //   direction:'Y',
-      //   explain:true,
-      //   explainTxt:'所有人可购买：所有人可分享并且购买。\n指定群成员购买：只有管理员可分享，并且用户只可以通过分享链接购买',
-      //   name:'isCanShare',
-      // }
+      {
+        isRequired:false,
+        type:'radio',
+        subtitle:'允许购买对象',
+        radioArr:['所有人可购买','指定群成员购买'],
+        value:0,
+        index:0,
+        direction:'Y',
+        explain:true,
+        explainTxt:'所有人可购买：所有人可分享并且购买。\n指定群成员购买：只有管理员可分享，并且用户只可以通过分享链接购买',
+        name:'isCanShare',
+      }
     ],
     obj:{
+      integrate:'', //积分
       explain:'', //说明
       goodsDetailsPic:'', //详情图
       isParticipants:0, //是否显示参与人数
@@ -390,6 +403,7 @@ Page({
           [`listData1[1].src`]:info.goodsThumb,
           [`listData1[2].value`]:info.quota,
           [`listData1[3].value`]:info.goodsPrice,
+          [`listData1[4].value`]:info.integral,
           [`listData2[0].time`]:util.format1("yyyy-MM-dd HH:mm",info.startTime),
           [`listData2[1].time`]:util.format1("yyyy-MM-dd HH:mm",info.stopTime),
           [`listData2[2].time`]:util.format1("yyyy-MM-dd HH:mm",info.finalPayTime),
@@ -398,7 +412,7 @@ Page({
           [`listData4[0].index`]:info.isShowSellNumber==0?1:0,
           [`listData4[1].index`]:info.cashPledge==0?1:0,
           [`listData4[1].value`]:info.cashPledge==0?'':info.cashPledge,
-          // [`listData4[2].index`]:info.isCanShare==0?1:0,
+          [`listData4[2].index`]:info.isCanShare==0?1:0,
         })
     //  goodsName:'', //商品名称
     //  flatPatternmaking:'', //商品展示图
@@ -417,6 +431,7 @@ Page({
         obj.flatPatternmaking = info.goodsThumb;
         obj.goodsNum = info.quota;
         obj.goodsPrice = info.goodsPrice;
+        obj.integrate = info.integral;
         obj.startTime = util.format1("yyyy-MM-dd HH:mm",info.startTime);
         obj.stopTime = util.format1("yyyy-MM-dd HH:mm",info.stopTime);
         obj.finalPayTime = util.format1("yyyy-MM-dd HH:mm",info.finalPayTime);
@@ -425,7 +440,7 @@ Page({
         obj.isParticipants = info.isShowSellNumber==0?1:0;
         obj.isCashPledge = info.cashPledge==0?1:0;
         obj.isCashPledgeNum = info.cashPledge==0?'':info.cashPledge;
-        // obj.isCanShare = info.isCanShare==0?1:0;
+        obj.isCanShare = info.isCanShare==0?1:0;
       }else{
         app.showToastC(res.data.Msg,2000);
       }
@@ -499,6 +514,7 @@ Page({
       goodsThumb:obj.flatPatternmaking,
       quota:obj.goodsNum,
       goodsPrice:obj.goodsPrice,
+      integral:obj.integrate,
       startTime:(new Date(obj.startTime).getTime())/1000,
       stopTime:(new Date(obj.stopTime).getTime())/1000,
       finalPayTime:(new Date(obj.finalPayTime).getTime())/1000,
@@ -506,7 +522,7 @@ Page({
       arrGoodsDescImg:obj.goodsDetailsPic,
       isShowSellNumber:obj.isParticipants==0?1:0,
       cashPledge:obj.isCashPledge==0?obj.isCashPledgeNum:0,
-      // isCanShare:obj.isCanShare==0?1:0,
+      isCanShare:obj.isCanShare==0?1:0,
     }
     console.log(data)
     // return false;
