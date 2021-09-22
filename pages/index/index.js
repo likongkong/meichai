@@ -224,13 +224,13 @@ Page({
       // url: "/page/component/pages/drivetohidelist/drivetohidelist"
       // url: "/pages/activitydetailspage/activitydetailspage?id=18376"
       // url: "/pages/activitydetailspage/activitydetailspage?id=18185"
-      // url: "/page/component/pages/limitlottery/limitlottery?id=382533",
+      url: "/page/component/pages/limitlottery/limitlottery?id=461411",
       // url: "/page/component/pages/drivetohidehome/drivetohidehome"
       // url: "/page/component/pages/exhibition/exhibition"
       // url: "/page/component/pages/exhibitiondetail/exhibitiondetail?id=43161"
       // url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
       // url: "/page/secondpackge/pages/brandDetails/brandDetails?id=481&settlement=1"
-      url: "/pages/detailspage/detailspage?gid=38956"
+      // url: "/pages/detailspage/detailspage?gid=38956"
       // url: "/pages/smokebox/smokebox?gid=399289"
       // url: "/page/component/pages/playgrasslist/playgrasslist"
       // url: "/page/secondpackge/pages/detailSimgEffects/detailSimgEffects?gid=32852"
