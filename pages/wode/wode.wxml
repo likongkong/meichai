@@ -160,24 +160,23 @@
                     <text class="brandManageTitle">管理后台</text>
                     <view class="assetWrap">
                         <view>
-                            <view class="assetL">
+                            <!-- <view class="assetL" data-type="9030" catchtap="comjumpwxnav"> -->
+                            <view class="assetL" catchtap="jinqingqidai">
                                 <view>
-                                    <!-- <text data-type="9030" catchtap="comjumpwxnav">￥{{withdrawInfo.accumulated_income}}</text>
-                                    <text data-type="9030" catchtap="comjumpwxnav">累计收入</text> -->
-                                    <text catchtap="jinqingqidai">￥{{withdrawInfo.accumulated_income}}</text>
-                                    <text catchtap="jinqingqidai">累计收入</text>
+                                    <text>￥{{withdrawInfo.available_cash_amount}}</text>
+                                    <text>可提现金额</text>
                                 </view>
                                 <view>
-                                    <text catchtap="jinqingqidai">{{withdrawInfo.diamond}}</text>
-                                    <text catchtap="jinqingqidai">钻石</text>
+                                    <text>{{withdrawInfo.diamond}}</text>
+                                    <text>钻石</text>
                                 </view>
                                 <view>
-                                    <text catchtap="jinqingqidai">{{withdrawInfo.crystal}}</text>
-                                    <text catchtap="jinqingqidai">水晶</text>
+                                    <text>{{withdrawInfo.crystal}}</text>
+                                    <text>水晶</text>
                                 </view>
                             </view>
-                            <view class="assetR" data-type="9030" catchtap="comjumpwxnav">
-                            <!-- <view class="assetR" catchtap="jinqingqidai"> -->
+                            <!-- <view class="assetR" data-type="9030" catchtap="comjumpwxnav"> -->
+                            <view class="assetR" catchtap="jinqingqidai">
                                 <view>
                                     <image src='https://cdn.51chaidan.com/images/brandSettledIcon/orderIcon/wallet.png' mode="widthFix"></image>
                                     <text>钱包</text>

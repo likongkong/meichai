@@ -39,6 +39,7 @@ Page({
     year:'',  //年
     month:'',   //月
     status_type:'',  //交易类型
+    loadprompt:false
   },
 
   /**
@@ -97,6 +98,8 @@ Page({
           noData:false,
           orderData:[...this.data.orderData,...res.data.data.list]
         })
+        // if()
+        
       }
     }).catch((err)=>{
       console.log(err)
@@ -167,7 +170,12 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    
+    if(!this.data.loadprompt){
+      this.data.limitprame = ++this.data.limitprame;
+      this.getListData();
+    }else{
+      app.showToastC('暂无更多数据了',1500);
+    }
   },
 
   /**
