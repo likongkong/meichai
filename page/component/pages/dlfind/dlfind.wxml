@@ -335,7 +335,7 @@
               </view>
               <view class="specialellipsis dlevegttu">
                 {{item.like_number>0?item.like_number:''}}
-                <image style="float:right;margin-top:6rpx;" class='dlfcbeveimgnewone'data-type='{{item.type}}' data-ind='{{index}}' catchtap='followfun' data-id='{{item.id}}' src='{{item.is_like?"https://www.51chaidan.com/images/brand/red_heart.png":"https://www.51chaidan.com/images/brand/black_heart.png"}}'></image>
+                <image style="float:right;margin-top:6rpx;" class='dlfcbeveimgnewone' data-type='{{item.type}}' data-ind='{{index}}' catchtap='followfun' data-id='{{item.id}}' src='{{item.is_like?"https://www.51chaidan.com/images/brand/red_heart.png":"https://www.51chaidan.com/images/brand/black_heart.png"}}'></image>
               </view>
             </view>
           </view>
@@ -493,22 +493,22 @@
 <view class="popMask" catchtouchmove="true" catchtap="toggleAddNewEventMask" wx:if="{{isAddNewEventMask}}" style="background: rgba(0,0,0,.7);">
     <view class="addNewEventBox" catchtap="true">
           <view class="releaseSale">
-              <image class="releaseSaleImg" src="https://www.51chaidan.com/images/brandInfoIcon/sellBackground.png"  mode="widthFix"></image>
+              <image class="releaseSaleImg" src="https://www.51chaidan.com/images/brandInfoIcon/issueClassBackground.png"  mode="widthFix"></image>
 
-                <view class="releaseSalePostion">
-                    <view  class="releaseSaleHead">选择发布/发售类型</view>
-                    <view class="addNewEventContent">
-                        <image class="releaseSaleImg" data-type="9040" catchtap="jumpoffering" style="margin-left:38rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/seckillButton.png"  mode="widthFix"></image>
-                        <image class="releaseSaleImg" data-type="9039" catchtap="jumpoffering" style="margin-right:38rpx;"  src="https://www.51chaidan.com/images/brandInfoIcon/lottoButton.png"  mode="widthFix"></image>
-                        
-                    </view>
+              <view class="releaseSalePostion">
+                  <view  class="releaseSaleHead"></view>
+                  <view class="addNewEventContent">
+                      <image class="releaseSaleImg" data-type="9040" catchtap="jumpoffering" style="margin-left:30rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/seckillButton20210923.png"  mode="widthFix"></image>
+                      <image class="releaseSaleImg" data-type="9039" catchtap="jumpoffering" style="margin-right:30rpx;"  src="https://www.51chaidan.com/images/brandInfoIcon/selectButton20210923.png"  mode="widthFix"></image>
+                      
+                  </view>
 
-                    <view class="addNewEventContent">
-                        <image class="releaseSaleImg" data-type="9033" catchtap="jumpoffering" style="margin-left:38rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/illustratedButton.png"  mode="widthFix"></image>
-                        <image class="releaseSaleImg" data-type="9032" catchtap="jumpoffering" style="margin-right:38rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/dynamicButton.png"  mode="widthFix"></image>
-                        
-                    </view>
-                </view>
+                  <view class="addNewEventContent">
+                      <image class="releaseSaleImg" data-type="9033" catchtap="jumpoffering" style="margin-left:30rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/illustratedButton20210923.png"  mode="widthFix"></image>
+                      <image class="releaseSaleImg" data-type="9032" catchtap="jumpoffering" style="margin-right:30rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/dynamicButton20210923.png"  mode="widthFix"></image>
+                      
+                  </view>
+              </view>
 
 
 

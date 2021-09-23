@@ -180,6 +180,7 @@
         "pages/tiedCard/tiedCard",
         "pages/allBrandsIp/allBrandsIp",
         "pages/fanManagement/fanManagement",
+        "pages/seckill/seckill",
         "pages/releaseSignIn/releaseSignIn"
       ]
     }

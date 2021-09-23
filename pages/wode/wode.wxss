@@ -719,7 +719,7 @@ page{
   background-color: #fff;
 } */
 .addNewEventBox{
-  width: 98%;
+  width: 95%;
   border-radius: 10rpx;
   position: relative;
 }
@@ -783,14 +783,11 @@ page{
   z-index: 1;
 }
 .releaseSaleHead{
-  height: 140rpx;
-  line-height: 130rpx;
-  text-align: center;
-  font-size: 34rpx;
+  height: 121rpx;
 }
 .addNewEventContent image{
   width: 43%;
-  margin-top: 50rpx;
+  margin-top: 21rpx;
 }
 
 
