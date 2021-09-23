@@ -35,7 +35,7 @@ Page({
       }
     ],
     limitprame:1,  //当前页码
-    perPage:20,  //每页多少条
+    perPage:10,  //每页多少条
     year:'',  //年
     month:'',   //月
     status_type:'',  //交易类型
@@ -96,15 +96,54 @@ Page({
       }else{
         this.setData({
           noData:false,
-          orderData:[...this.data.orderData,...res.data.data.list]
         })
-        // if()
-        
+        if(this.data.orderData.length == 0){
+          this.setData({
+            orderData: res.data.data.list 
+          });
+        }else{
+          this.setData({
+            orderData: this.dataprocessing(this.data.orderData,res.data.data.list)
+          });
+        };
       }
     }).catch((err)=>{
       console.log(err)
     })
   },
+
+    // 数据处理
+    dataprocessing: function (arrlist,newArr){
+      var arrlist = arrlist || [];
+      var newArr = newArr || [];
+      for (var q = 0; q < arrlist.length; q++) {
+        for (var w = 0; w < newArr.length; w++) {
+          if (arrlist[q].date == newArr[w].date) {
+            arrlist[q].mouthList = [...arrlist[q].mouthList,...newArr[w].mouthList];
+            newArr[w].mouthList = [...arrlist[q].mouthList,...newArr[w].mouthList]
+          };
+        };
+      };
+      var dataList = [...arrlist,...newArr];
+      // 去重
+      var charr = this.distinct(dataList);
+      return charr;
+    },
+    //  数组去重
+    distinct:function(arr){
+      var arr = arr,i,j,len = arr.length;
+      for(i = 0; i < len; i++){
+          for(j = i + 1; j < len; j++){
+            if (arr[i].date == arr[j].date){
+                arr.splice(j,1);
+                len--;
+                j--;
+            }
+          }
+      }
+      return arr;
+    },
+
   reset(){
     this.setData({limitprame:1,orderData:[],loadprompt:false})
   },

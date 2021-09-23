@@ -284,10 +284,7 @@ Page({
   executionApplicationWithdrawal(){
     api.executionApplicationWithdrawal().then((res) => {
       console.log(res)
-
       this.getLumpsumAndWithdraw();
-
-
       //今日已申请过提现
       if(res.data.status_code == 200304){
         wx.showModal({
@@ -301,6 +298,13 @@ Page({
             }
           }
         })
+      }else{
+        this.setData({
+          showModalStatus:false,
+          twoAffirm:false,
+          twoAffirm1:false,
+        })
+        app.showToastC('提现申请已提交',2000);
       }
 
       // //今日已申请过提现
@@ -341,12 +345,7 @@ Page({
       // this.setData({
       //   isAuthenticationMask:false
       // })
-      this.setData({
-        showModalStatus:false,
-        twoAffirm:false,
-        twoAffirm1:false,
-      })
-      app.showToastC('提现申请已提交',2000);
+      
 
     }).catch((err)=>{
       console.log(err)
