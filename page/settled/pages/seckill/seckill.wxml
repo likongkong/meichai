@@ -1,0 +1,112 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<!--  html页面转换  -->
+<import src="../../../../wxParse/wxParse.wxml" />
+
+<view class="seckill">
+    <view style="background:#fff;">
+        <view class="seckillImgBox">
+            <image mode="widthFix" src="https://cdn.51chaidan.com/images/act/a1618456428.jpg" ></image>
+        </view>
+        <view class="sCountDown">距开始 1天23小时02分36秒</view>
+        <view class="sCountstock">
+            <text>库存:800</text>
+            <text>限购:10</text>
+            <text>发货:付款后两周内</text>
+            <text>包邮</text>
+        </view>
+        <view class="seckillName">{{zunmdata.gname}}</view>
+        <view class="sSaleTime">2021/08/15 20:00发售</view>
+        <view class="sSalePrice"><text style="font-size:22rpx;">￥</text>{{zunmdata.gprice!=0?zunmdata.gprice:''}}<text style="font-size:22rpx;color:#000;">+{{zunmdata.integral}}积分</text></view>
+        <view class="briefIntroduction">
+            <text style="color:#999495;">宝可梦喷火龙手办每人限购10体\n群内成员可以购买\n一经出示不接受任何理由退款，请谨慎购买，请谨慎购买，请谨慎购买</text>
+        </view>
+    </view>
+    
+    <view style="padding:0 20rpx 0 20rpx;position:relative;">
+		<view class="exhibdeimgBox">
+				<image class="exhibdeimgNewNew" src="{{brandinfo.logo}}" mode="aspectFill"></image>
+				<view class="exhibdeimgBRight">
+					 <view class="exhibdeimgBRTop">
+								<block wx:if='{{brandinfo.boothNumber}}'><text style="color:#31b3fb;">展位:{{brandinfo.boothNumber}}</text> | </block>
+								<view class="exhibdeimgBRTopName specialellipsis">{{brandinfo.brandName}}</view>
+								<image class="questionMark" wx:if='{{brandinfo.isAuth}}' src="https://cdn.51chaidan.com/images/brandSettledIcon/AuthenticationOk.png" mode="heightFix"></image>
+								<view wx:if='{{isOneselfBrand}}' class="emlhright" catchtap="jumpoffering" data-type='9028' data-id='{{brandinfo.id}}' style="background:#91D2D8;">编辑</view>
+								<view wx:else class="{{!brandinfo.isAttention?'emlhright':'emlhrightNo'}}" data-type='0' data-id='{{brandinfo.id}}'  catchtap='followfun'>
+										<block wx:if='{{!brandinfo.isAttention}}'>关注</block>
+										<block wx:else>已关注</block>
+								</view>
+					</view>
+
+					 <view class="exhibdeimgBRTop" wx:if='{{isOneselfBrand}}' catchtap="jumpFanMan" style="color:#34A9ED;">粉丝管理</view>
+					 <view class="exhibdeimgBRTop" wx:else style="color:#666666;">我的积分：{{detailInfo.userInteral || 0}}</view>
+					 
+
+				</view>
+		</view>
+	</view>
+
+
+    <view class="bDappIcomBox">
+		  <view catchtap="{{brandinfo.picFriend?'addfrindcommonifun':'noClickTip'}}" data-identif='1' data-url="{{brandinfo.picFriend}}">
+					<image class="bdaiBoxImg" src="{{brandinfo.picFriend?'https://cdn.51chaidan.com/images/brandInfoIcon/wxOpen.png':'https://cdn.51chaidan.com/images/brandInfoIcon/wxClose.png'}}"></image>
+					<view class="bdaiBoxTxt">微信</view>
+			</view>
+
+			<view catchtap="{{brandinfo.picPublic?'addfrindcommonifun':'noClickTip'}}" data-identif='2' data-url="{{brandinfo.picPublic}}">
+					<image class="bdaiBoxImg" src="{{brandinfo.picPublic?'https://cdn.51chaidan.com/images/brandInfoIcon/gzhOpen.jpg':'https://cdn.51chaidan.com/images/brandInfoIcon/gzhClose.jpg'}}"></image>
+					<view class="bdaiBoxTxt">公众号</view>
+			</view>
+
+		  <view catchtap="{{brandinfo.microblog?'jumpxcx':'noClickTip'}}" data-identif='3' data-type='1' data-path='{{brandinfo.microblog}}'>
+					<image class="bdaiBoxImg" src="{{brandinfo.microblog?'https://cdn.51chaidan.com/images/brandInfoIcon/wbOpen.png':'https://cdn.51chaidan.com/images/brandInfoIcon/wbClose.png'}}"></image>
+					<view class="bdaiBoxTxt">微博</view>
+			</view>
+		  <view catchtap="{{brandinfo.redBook?'jumpxcx':'noClickTip'}}" data-identif='4' data-type='2' data-path='{{brandinfo.redBook}}'>
+					<image class="bdaiBoxImg" src="{{brandinfo.redBook?'https://cdn.51chaidan.com/images/brandInfoIcon/xhsOpen.jpg':'https://cdn.51chaidan.com/images/brandInfoIcon/xhsClose.jpg'}}"></image>
+					<view class="bdaiBoxTxt">小红书</view>
+			</view>
+	</view>
+    <!-- 详情 -->
+    <view class="detailimg">
+        <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+    </view>
+
+</view>
+
+
+<!-- 底部 -->
+<view class="seckillBottom">
+    <view class="seckillBottomBox">
+        <view class="sbottomLeft">
+            <image class='emlplefimgshare' data-type='{{item.type}}' data-ind='{{index}}' catchtap='followfun' data-id='{{item.id}}' src='{{item.is_like?"https://www.51chaidan.com/images/brand/red_heart.png":"https://www.51chaidan.com/images/brand/black_heart.png"}}'></image>
+            <view class="sbottomLeftNum">123</view>
+        </view>
+        <view class="sbottomLeft">
+            <image class='emlplefimgshare' catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}' src="https://cdn.51chaidan.com/images/brandSettledIcon/comment.png"></image>
+            <view class="sbottomLeftNum">456</view>
+        </view>
+        <view class="sbottomLeft">
+            <image class='emlplefimgshare' catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}' src="https://cdn.51chaidan.com/images/brandSettledIcon/comment.png"></image>
+            <view class="sbottomLeftNum">789</view>
+        </view>
+        <view class="sbottomRight">
+            <view class="sbottomRightButton" wx:if='{{true}}' style="background:#FF890B;" catchtap="subscrfunstar">还有机会，有订单未支付</view>
+            <view class="sbottomRightButton" wx:elif='{{false}}' style="background:#FF890B;" catchtap="subscrfunstar">开售订阅</view>
+            <view class="sbottomRightButton" wx:elif='{{false}}' style="background:#F77F7F;" catchtap="subscrfunstar">立即购买</view>
+            <view class="sbottomRightButton" wx:elif='{{false}}' style="background:#999495;" catchtap="subscrfunstar">已结束</view>
+        </view>
+    </view>
+</view>
+
+
+<!-- 添加好友 关注公众号 图片弹框 -->
+
+<view class='wshNew' wx:if='{{addfrindcommoni}}' catchtap='closefrindcommoni' catchtouchmove="true">
+	<view class="addfrindcommon" catchtap="true">
+		<image class="addfrindcomimg" src="{{showimg}}" mode='aspectFit'></image>
+		<view class="addfrindcomsave" catchtap="sharesavethepicture">保存图片</view>
+	</view>
+</view>
+

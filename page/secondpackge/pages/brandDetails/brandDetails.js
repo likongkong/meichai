@@ -65,7 +65,7 @@ Page({
     });  
   },
   jumpFanMan(){
-    wx.navigateTo({ // 抽签详情页  
+    wx.navigateTo({ 
       url: "/page/settled/pages/fanManagement/fanManagement"
     }); 
   },
