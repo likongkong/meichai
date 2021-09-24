@@ -624,8 +624,6 @@ Page({
       },
       fail: function (res) {}
     })
-
-
   },
 
   getdefault: function () {
@@ -1084,8 +1082,19 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
     this.setData({listTipImg:!this.data.listTipImg});
   },
   joinlimitlottery: function () {
+    if(app.signindata.isNeedUserInfo){
+      app.getUserProfile((res,userInfo) => {
+        this.data.avatarUrl=userInfo.avatarUrl;
+        this.data.nickName=userInfo.nickName;
+        app.signindata.isNeedUserInfo = false; 
+        this.joinlimitlotteryFun();
+      })
+    }else{
+      this.joinlimitlotteryFun();
+    }
+  },
+  joinlimitlotteryFun(){
     var _this = this;
-
     // is_ordinary_ticket_user存在且为true === 普通票用户
     if(_this.data.is_ordinary_ticket_user != undefined && _this.data.is_ordinary_ticket_user){
       this.ticketList();
