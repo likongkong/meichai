@@ -84,6 +84,11 @@ Page({
       // {name:'分享',num:'5'}
     ], // 支付状态 
     centerIndex:0,
+    // 区域里顶部的距离吧
+    fixTop: 0,
+    // 滚动的距离
+    scrollTop: 0,
+    isFixed: false
   },
   // 全部品牌
   brandWholeFun(){
@@ -335,6 +340,14 @@ Page({
             recommendIps:res.data.List.recommendIps || [], // 品牌
             brandSettledLimit:res.data.Info.brandSettledLimit || false
           });
+          // 获取tab导航距离顶部的位置
+          wx.createSelectorQuery().select('#bars').boundingClientRect(function(rect) {
+            if(rect && rect.top > 0){
+              _this.setData({
+                fixTop: parseInt(rect.top)-_this.data.statusBarHeightMc
+              })
+            }
+          }).exec()
         };
       }
     });
@@ -791,7 +804,9 @@ Page({
   },
   onReady: function() {},
 
-  onShow: function() {},
+  onShow: function() {
+    
+  },
 
   onHide: function() {
     // 调用重置刷新
@@ -873,6 +888,15 @@ Page({
       };
     };
     return reshare
+  },
+  onPageScroll (e) {
+    let isFixed = e.scrollTop >= this.data.fixTop ? true : false;
+    if(this.data.scrollTop === this.data.fixTop){
+      return false
+    }
+    this.setData({
+      isFixed,
+    })
   },
 
   // 导航跳转 

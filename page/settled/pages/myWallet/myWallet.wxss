@@ -62,10 +62,9 @@ page{
   font-size: 28rpx;
   text-align: center;
   line-height: 90rpx;
-  color: #fff;
-  background: #90D2D6 ;
+  color: #4FE39A;
+  background: #ffffff;
   border-radius: 20rpx;
-  border: 4rpx solid rgba(255, 255, 255, 100);
 }
 .cardB{
   display: flex;

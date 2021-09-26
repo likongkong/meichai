@@ -37,10 +37,10 @@
 
 				</view>
 		</view>
-		<text class="briefIntroduction">简介：{{brandinfo.bradDesc}}</text>
+		<text class="briefIntroduction" wx:if="{{brandinfo.bradDesc}}">简介：{{brandinfo.bradDesc}}</text>
 	</view>
 
-	<view class="topShareBox" style="bottom:155rpx;"><image class="topShareBoxImg" src="https://cdn.51chaidan.com/images/spread/blindBoxShare.png"></image><button style='width:100%;height:100%;position:absolute;top:0;left:0;opacity:0;' open-type='share'></button>分享</view>
+	<view class="topShareBox" style="bottom:135rpx;"><image class="topShareBoxImg" src="https://cdn.51chaidan.com/images/spread/blindBoxShare.png"></image><button style='width:100%;height:100%;position:absolute;top:0;left:0;opacity:0;' open-type='share'></button>分享</view>
 
 	<block wx:if='{{founder && founder.length>0}}'>
 			<view style="width:100%;font-size:30rpx;text-align:center;margin:20rpx 0;font-weight:bold;">团队介绍</view>
@@ -854,7 +854,9 @@
 	</view>
 </view>
 
-<view class="brandManageWrapButton" wx:if='{{brandSettledLimit}}' catchtap="toggleAddNewEventMask">发布/发售</view>
+<view class="brandManageWrapButtonWrap" wx:if='{{brandSettledLimit}}'>
+	<view class="brandManageWrapButton" catchtap="toggleAddNewEventMask">发布/发售</view>
+</view>
 <!-- 选择发布/发售类型弹框-->
 <view class="popMask" catchtouchmove="true" catchtap="toggleAddNewEventMask" wx:if="{{isAddNewEventMask}}" style="background: rgba(0,0,0,.7);">
     <view class="addNewEventBox" catchtap="true">
@@ -929,3 +931,6 @@
 		<image class="guanbi" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="widthFix" catchtap="toogleGuidanceMask"></image>
 	</view>
 </view>
+
+
+<bnavigation isProduce='{{isProduce}}' isIphoneX='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>

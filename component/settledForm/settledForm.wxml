@@ -155,11 +155,21 @@
           </view>
           <view class="radioBoxWrap">
             <view class="radioWrap {{item.direction=='X'?'displayInlineFlex radioWrap1':''}}">
-              <block wx:for="{{item.radioArr}}" wx:key='key' wx:for-index="idx" wx:for-item="sonItem">
-                <view data-index="{{index}}" data-sonindex="{{idx}}" data-name="{{item.name}}" catchtap="bindRadioChange">
-                  <text class="{{item.index == idx?'radioChecked':'radioUnchecked'}}"></text>
-                  <text class="itemName">{{sonItem}}</text>
-                </view>
+              <block wx:if="{{item.multiRadio}}">
+                <block wx:for="{{item.radioArr}}" wx:key='key' wx:for-index="idx" wx:for-item="sonItem">
+                  <view data-index="{{index}}" data-sonindex="{{idx}}" data-name="{{item.name}}" catchtap="bindRadioChange">
+                    <text class="{{item.index == idx?'radioChecked':'radioUnchecked'}}"></text>
+                    <text class="itemName">{{sonItem.radioName}}</text>
+                  </view>
+                </block>
+              </block>
+              <block wx:else>
+                <block wx:for="{{item.radioArr}}" wx:key='key' wx:for-index="idx" wx:for-item="sonItem">
+                  <view data-index="{{index}}" data-sonindex="{{idx}}" data-name="{{item.name}}" catchtap="bindRadioChange">
+                    <text class="{{item.index == idx?'radioChecked':'radioUnchecked'}}"></text>
+                    <text class="itemName">{{sonItem}}</text>
+                  </view>
+                </block>
               </block>
             </view>
             <block wx:if="{{item.input}}">
@@ -169,9 +179,21 @@
                 </view>
               </block>
               <block wx:else>
-                <view class="inputRightWrap" wx:if="{{item.index==0}}">
-                  <input type="text" placeholder="请填写保证金金额" data-name="{{item.name}}Num" bindinput="onKeyInput" value="{{item.value}}" />
-                </view>
+                <block wx:if="{{item.multiRadio}}">
+                  <view>
+                    <block wx:for="{{item.radioArr}}" wx:key='key' wx:for-index="idx" wx:for-item="sonItem">
+                      <view class="multiRadioWrap">
+                        <view class="{{item.index == idx?'':'hideradioInput'}}"></view>
+                        <input type="text" disabled="{{!sonItem.placeholder?true:flase}}" placeholder="{{sonItem.placeholder}}" data-name="{{sonItem.name}}" bindinput="onKeyInput" value="{{sonItem.value}}" />
+                      </view>
+                    </block>
+                  </view>
+                </block>
+                <block wx:else>
+                  <view class="inputRightWrap" wx:if="{{item.index==0}}">
+                    <input type="text" placeholder="请填写保证金金额" data-name="{{item.name}}Num" bindinput="onKeyInput" value="{{item.value}}" />
+                  </view>
+                </block>
               </block>
             </block>
           </view>

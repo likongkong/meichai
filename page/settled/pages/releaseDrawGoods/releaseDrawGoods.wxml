@@ -19,6 +19,13 @@
     bind:bindchange="bindchange">
     </settledForm>
   </view>
+  <settledForm 
+    id="settledForm5"
+    statusBarHeightMc="{{statusBarHeightMc}}"
+    form="dynamicContent"
+    list="{{listData5}}"
+    bind:bindchange="bindchange">
+  </settledForm>
   <view class="card">
     <settledForm 
     id="settledForm2"

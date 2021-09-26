@@ -1066,7 +1066,7 @@
       <!-- 3 重抽卡 -->
       <block wx:if='{{cardStyle==3}}'>
 				<view style="color:#FF6968;font-size:30rpx;font-weight:bold;">重抽卡</view>
-				<view class="cardBox_one">抽盒完成后可使用重抽卡进行一次免费重抽（每盒限6张）</view>	
+				<view class="cardBox_one">抽盒完成后可使用重抽卡进行一次免费重抽（每小盒限1张）</view>	
 				<view style="margin-top:30rpx;">获取方式:</view>	
 				<view class="cardBox_one_get">1.每日领取重抽卡 x 1（当日有效）</view>
 				<view class="cardBox_exchange_but" style="{{is_redrawCard?'':'background:#999;'}}" catchtap="{{is_redrawCard?'getRedrawCard':''}}">领取</view>

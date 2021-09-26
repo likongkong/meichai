@@ -61,18 +61,38 @@ Page({
         borderbottom1:'show',
         margintop0:true,
       },
+      // {
+      //   isRequired:false,
+      //   type:'text',
+      //   subtitle:'消耗积分',
+      //   placeholder:'无需消耗积分',
+      //   value:'',
+      //   name:'integrate',
+      //   explainTxt:'用户需使用积分获得购买资格请输入售卖积分',
+      //   explain:true,
+      //   borderbottom1:'show',
+      //   margintop0:true,
+      // },
+    ],
+    listData5:[
       {
         isRequired:false,
-        type:'text',
-        subtitle:'消耗积分',
-        placeholder:'无需消耗积分',
-        value:'',
-        name:'integrate',
-        explainTxt:'用户需使用积分获得购买资格请输入售卖积分',
+        type:'radio',
+        subtitle:'报名条件',
+        radioArr:[
+          {name:'wu',radioName:'无条件报名'},
+          {name:'integrate',radioName:'消耗积分',placeholder:'请填写消耗积分数量',value:''},
+          {name:'cashPledge',radioName:'定金',placeholder:'请填写定金金额',value:''},
+        ],
+        value:0,
+        index:0,
+        direction:'Y',
         explain:true,
-        borderbottom1:'show',
-        margintop0:true,
-      },
+        explainTxt:'消耗积分：用户需使用积分获得抽选资格，勾选后输入消耗积分 \n保证金：用户需支付保证金获取抽选资格，勾选后输入保证金金额，未中奖的用户三个工作日自动退回保证金',
+        input:true,
+        multiRadio:true,
+        name:'applicationCondition',
+      }
     ],
     listData2:[
       {
@@ -139,18 +159,19 @@ Page({
         direction:'X',
         margintop0:true,
         name:'isParticipants',
-      },{
-        isRequired:false,
-        type:'radio',
-        subtitle:'是否需要保证金',
-        radioArr:['是','否'],
-        value:'',
-        index:1,
-        direction:'X',
-        explain:false,
-        input:true,
-        name:'isCashPledge',
       },
+      // {
+      //   isRequired:false,
+      //   type:'radio',
+      //   subtitle:'是否需要保证金',
+      //   radioArr:['是','否'],
+      //   value:'',
+      //   index:1,
+      //   direction:'X',
+      //   explain:false,
+      //   input:true,
+      //   name:'isCashPledge',
+      // },
       {
         isRequired:false,
         type:'radio',
@@ -165,11 +186,12 @@ Page({
       }
     ],
     obj:{
+      applicationCondition:0,
       integrate:'', //积分
+      cashPledge:'', //保证金
       explain:'', //说明
       goodsDetailsPic:'', //详情图
       isParticipants:0, //是否显示参与人数
-      isCashPledge:1, //是否需要保证金
       isCanShare:'',
     },
     type:4,
@@ -403,16 +425,19 @@ Page({
           [`listData1[1].src`]:info.goodsThumb,
           [`listData1[2].value`]:info.quota,
           [`listData1[3].value`]:info.goodsPrice,
-          [`listData1[4].value`]:info.integral,
+          // [`listData1[4].value`]:info.integral,
           [`listData2[0].time`]:util.format1("yyyy-MM-dd HH:mm",info.startTime),
           [`listData2[1].time`]:util.format1("yyyy-MM-dd HH:mm",info.stopTime),
           [`listData2[2].time`]:util.format1("yyyy-MM-dd HH:mm",info.finalPayTime),
           [`listData3[0].value`]:info.rule,
           [`listData3[1].imageList`]:info.arrGoodsDescImg,
           [`listData4[0].index`]:info.isShowSellNumber==0?1:0,
-          [`listData4[1].index`]:info.cashPledge==0?1:0,
-          [`listData4[1].value`]:info.cashPledge==0?'':info.cashPledge,
-          [`listData4[2].index`]:info.isCanShare==0?1:0,
+          // [`listData4[1].index`]:info.cashPledge==0?1:0,
+          // [`listData4[1].value`]:info.cashPledge==0?'':info.cashPledge,
+          [`listData4[1].index`]:info.isCanShare==0?1:0,
+          [`listData5[0].index`]:info.cashPledge==0 && info.integral==0?0:info.integral==0?2:1,
+          [`listData5[0].radioArr[1].value`]:info.integral != 0?info.integral:'',
+          [`listData5[0].radioArr[2].value`]:info.cashPledge != 0?info.cashPledge:'',
         })
     //  goodsName:'', //商品名称
     //  flatPatternmaking:'', //商品展示图
@@ -424,22 +449,20 @@ Page({
     //   explain:'', //说明
     //   goodsDetailsPic:'', //详情图
     //   isParticipants:'', //是否显示参与人数
-    //   isCashPledge:'', //是否需要保证金
 
         obj.associationIp = info.brand.brandId;
         obj.goodsName = info.goodsName;
         obj.flatPatternmaking = info.goodsThumb;
         obj.goodsNum = info.quota;
         obj.goodsPrice = info.goodsPrice;
-        obj.integrate = info.integral;
         obj.startTime = util.format1("yyyy-MM-dd HH:mm",info.startTime);
         obj.stopTime = util.format1("yyyy-MM-dd HH:mm",info.stopTime);
         obj.finalPayTime = util.format1("yyyy-MM-dd HH:mm",info.finalPayTime);
         obj.explain = info.rule;
         obj.goodsDetailsPic = info.arrGoodsDescImg;
         obj.isParticipants = info.isShowSellNumber==0?1:0;
-        obj.isCashPledge = info.cashPledge==0?1:0;
-        obj.isCashPledgeNum = info.cashPledge==0?'':info.cashPledge;
+        obj.integrate = info.integral!=0?info.integral:'';
+        obj.cashPledge = info.cashPledge!=0?info.cashPledge:'';
         obj.isCanShare = info.isCanShare==0?1:0;
       }else{
         app.showToastC(res.data.Msg,2000);
@@ -501,10 +524,8 @@ Page({
     //   explain:'', //说明
     //   goodsDetailsPic:'', //详情图
     //   isParticipants:'', //是否显示参与人数
-    //   isCashPledge:'', //是否需要保证金
-    //   isCashPledgeNum:'', //保证金额
+    //   cashPledge:'', //保证金
   
-
 
     let data = {
       activityId:this.data.id&&this.data.id!=0?this.data.id:'',
@@ -514,14 +535,14 @@ Page({
       goodsThumb:obj.flatPatternmaking,
       quota:obj.goodsNum,
       goodsPrice:obj.goodsPrice,
-      integral:obj.integrate,
+      integral:obj.applicationCondition == 1?obj.integrate:'',
+      cashPledge:obj.applicationCondition == 2?obj.cashPledge:'',
       startTime:(new Date(obj.startTime).getTime())/1000,
       stopTime:(new Date(obj.stopTime).getTime())/1000,
       finalPayTime:(new Date(obj.finalPayTime).getTime())/1000,
       rule:obj.explain,
       arrGoodsDescImg:obj.goodsDetailsPic,
       isShowSellNumber:obj.isParticipants==0?1:0,
-      cashPledge:obj.isCashPledge==0?obj.isCashPledgeNum:0,
       isCanShare:obj.isCanShare==0?1:0,
     }
     console.log(data)

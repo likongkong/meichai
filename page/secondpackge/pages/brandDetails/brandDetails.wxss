@@ -806,6 +806,15 @@ page {
   left: 22rpx;
 }
 /* 发布/发售 */
+.brandManageWrapButtonWrap{
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 110rpx;
+  z-index: 3;
+  background: #fff;
+  padding: 20rpx 0;
+}
 .brandManageWrapButton {
   width: 400rpx;
   height: 60rpx;
@@ -813,11 +822,7 @@ page {
   font-size: 28rpx;
   color: #fff;
   line-height: 60rpx;
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 150rpx;
-  z-index: 3;
+  
   margin: auto;
   text-align: center;
   border-radius: 10rpx;

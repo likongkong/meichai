@@ -70,16 +70,12 @@
     </view>
 
     <!-- tab标签切换 -->
-    <view class='dlfheadtab' style="margin-bottom:20rpx;">
-
-          <scroll-view class="marginAuto scrollViewTop" scroll-x="true" scroll-with-animation="true" scroll-left='{{scrollleft}}' style="height:70rpx;">
-            <view wx:for="{{payStatus}}" wx:key='key' id="ele{{item.num}}" class="classifyItem {{centerIndex == item.num?'active':''}}" data-index="{{item.num}}" catchtap="classifyChange">{{item.name}}</view>
-          </scroll-view>         
-          <image class="wOriTab" catchtap="wOriTab" mode="aspectFit" src='{{wOri==1?"https://cdn.51chaidan.com/images/brandSettledIcon/class2.png":"https://cdn.51chaidan.com/images/brandSettledIcon/class1.png"}}'></image>
+    <view id="bars" class='dlfheadtab {{isFixed?"tab-bar":""}}' style="margin-bottom:20rpx;top:{{isFixed?statusBarHeightMc:0}}px;">
+      <scroll-view class="marginAuto scrollViewTop" scroll-x="true" scroll-with-animation="true" scroll-left='{{scrollleft}}' style="height:70rpx;">
+        <view wx:for="{{payStatus}}" wx:key='key' id="ele{{item.num}}" class="classifyItem {{centerIndex == item.num?'active':''}}" data-index="{{item.num}}" catchtap="classifyChange">{{item.name}}</view>
+      </scroll-view>         
+      <image class="wOriTab" catchtap="wOriTab" mode="aspectFit" src='{{wOri==1?"https://cdn.51chaidan.com/images/brandSettledIcon/class2.png":"https://cdn.51chaidan.com/images/brandSettledIcon/class1.png"}}'></image>
     </view>
-
-  
-
 
     <!-- 信息流 -->
     <block wx:if='{{wOri==1}}'>

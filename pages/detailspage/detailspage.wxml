@@ -405,7 +405,7 @@
         </view>
       </view>
       <!--  商品详情图片 转换HTML标签  -->
-      <view class='detailimg' style='padding:0;{{detaposiiftr&&dryinglist.length!=0?"height:1300rpx;":""}}{{!detaposiiftr&&dryinglist.length!=0?"padding-bottom:100rpx;":""}}'>
+      <view class='detailimg' style='padding:0 20rpx;box-shadow:border-box;{{detaposiiftr&&dryinglist.length!=0?"height:1300rpx;":""}}{{!detaposiiftr&&dryinglist.length!=0?"padding-bottom:100rpx;":""}}'>
         <template is="wxParse" data="{{wxParseData:article.nodes}}" />
         <view class='detaposiclick' wx:if='{{dryinglist.length!=0}}'>
           <image src='https://clw.51chaidan.com//images/goods/GradualChangee.png' class='detaposiclickimg'></image>

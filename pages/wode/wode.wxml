@@ -32,7 +32,8 @@
                                 <view class="awasusawaarrow"></view>
                             </view>
                             <view class="awasustiptxt">
-                                <text style="padding:20rpx;color:#fff;font-size:22rpx;text-align:left;display:block;">幸运值\n1.抽盒机抽盒后赠送获得\n2.送完可获得双倍幸运值\n3.100点幸运值可兑换透视卡x1</text>
+                                <!-- <text style="padding:20rpx;color:#fff;font-size:22rpx;text-align:left;display:block;">幸运值\n1.抽盒机抽盒后赠送获得\n2.送完可获得双倍幸运值\n3.100点幸运值可兑换透视卡x1</text> -->
+                                <text style="padding:20rpx;color:#fff;font-size:22rpx;text-align:left;display:block;">幸运值\n暂时关闭，敬请期待</text>
                             </view>
                         </view>
                     </view>
@@ -161,8 +162,8 @@
                     <text class="brandManageTitle">管理后台</text>
                     <view class="assetWrap">
                         <view>
-                            <!-- <view class="assetL" data-type="9030" catchtap="comjumpwxnav"> -->
-                            <view class="assetL" catchtap="jinqingqidai">
+                            <view class="assetL" data-type="9030" catchtap="comjumpwxnav">
+                            <!-- <view class="assetL" catchtap="jinqingqidai"> -->
                                 <view>
                                     <text>￥{{withdrawInfo.available_cash_amount}}</text>
                                     <text>可提现金额</text>
@@ -176,8 +177,8 @@
                                     <text>水晶</text>
                                 </view>
                             </view>
-                            <!-- <view class="assetR" data-type="9030" catchtap="comjumpwxnav"> -->
-                            <view class="assetR" catchtap="jinqingqidai">
+                            <view class="assetR" data-type="9030" catchtap="comjumpwxnav">
+                            <!-- <view class="assetR" catchtap="jinqingqidai"> -->
                                 <view>
                                     <image src='https://cdn.51chaidan.com/images/brandSettledIcon/orderIcon/wallet.png' mode="widthFix"></image>
                                     <text>钱包</text>
