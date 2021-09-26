@@ -1,5 +1,8 @@
 
 @import "/common/tabbar.wxss";
+@import "/pages/detailspage/detailspage.wxss";
+
+
 page{
   background:#f4f5f9;
   padding-bottom: 140rpx;
@@ -47,12 +50,12 @@ page{
   font-size: 24rpx;
   color:#178FF8;
   text-align:center;
+  padding-bottom: 20rpx;
 }
 .sSalePrice{
   color: #FF2742;
   font-size: 28rpx;
   text-align: center;
-  padding-top: 20rpx;
 }
 .briefIntroduction{
   font-size: 28rpx;
@@ -227,9 +230,10 @@ page{
   width: 100%;
 }
 .sbottomLeft{
-  width: 110rpx;
+  width: 160rpx;
   height: 100rpx;
   float: left;
+  position: relative;
 }
 
 .emlplefimgshare{
@@ -245,6 +249,7 @@ page{
   line-height: 40rpx;
   text-align: center;
   font-size: 24rpx;
+  color: #4E4949;
 }
 
 .sbottomRight{
