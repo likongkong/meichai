@@ -644,18 +644,7 @@ Page({
   },
 
   initview: function () {
-    var _this = this
-    //创建节点选择器
-    var box = wx.createSelectorQuery();
-    //选择id
-    box.select('#boxindex').boundingClientRect();
-    box.exec(function (res) {
-      if (res && res[0]) {
-        _this.setData({
-          boxwidth: (res[0].width - 2) / _this.data.linenum - 2,
-        })
-      };
-    })
+    var _this = this;
 
     if (_this.data.ischangeid) {
       _this.setData({
@@ -669,6 +658,20 @@ Page({
         })
       }, 2000)
     }
+
+    //创建节点选择器
+    var box = wx.createSelectorQuery();
+    //选择id
+    box.select('#boxindex').boundingClientRect();
+    box.exec(function (res) {
+      if (res && res[0]) {
+        _this.setData({
+          boxwidth: (res[0].width - 2) / _this.data.linenum - 2,
+        })
+      };
+    })
+
+
 
     _this.animation = wx.createAnimation({
       // 动画持续时间，单位ms，默认值 400
@@ -863,6 +866,12 @@ Page({
           };
 
           var infoFuntion = infoData.function || {};
+          // 是否是换一盒，如果是换一盒 解决动画切换bug
+          if (_this.data.ischangeid) {
+            _this.setData({
+              ischangebox: true,
+            })
+          };
 
           _this.setData({
             isallready: true,
@@ -1481,6 +1490,7 @@ Page({
       },
 
       success: function (res) {
+        console.log('重抽=========',res)
         wx.hideLoading()
         if (res.data.ReturnCode == 200) {
           _this.setData({
@@ -2294,7 +2304,7 @@ Page({
 
     _this.setData({
       ischangeid: true,
-      id: _this.data.relAidList[index]
+      id: _this.data.relAidList[index],
     })
     _this.getInfo()
 
