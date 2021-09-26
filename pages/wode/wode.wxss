@@ -433,12 +433,20 @@ page{
   width: 100%;
 }
 
-.awasustip{
+/* .awasustip{
   width: 345rpx;
   height:170rpx;
   position: absolute;
   top: -190rpx;
   left: -80rpx; 
+  z-index: 102;
+} */
+.awasustip{
+  width: 258rpx;
+  height: 108rpx;
+  position: absolute;
+  top: -129rpx;
+  left: -80rpx;
   z-index: 102;
 }
 .awasustipbg{

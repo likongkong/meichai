@@ -657,7 +657,14 @@ width: 72rpx;}
   display: flex;
   justify-content:space-around;
 }
-
+.tab-bar{
+  position:-webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 15;
+ }
 
 
 

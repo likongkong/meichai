@@ -32,7 +32,8 @@
                                 <view class="awasusawaarrow"></view>
                             </view>
                             <view class="awasustiptxt">
-                                <text style="padding:20rpx;color:#fff;font-size:22rpx;text-align:left;display:block;">幸运值\n1.抽盒机抽盒后赠送获得\n2.送完可获得双倍幸运值\n3.100点幸运值可兑换透视卡x1</text>
+                                <!-- <text style="padding:20rpx;color:#fff;font-size:22rpx;text-align:left;display:block;">幸运值\n1.抽盒机抽盒后赠送获得\n2.送完可获得双倍幸运值\n3.100点幸运值可兑换透视卡x1</text> -->
+                                <text style="padding:20rpx;color:#fff;font-size:22rpx;text-align:left;display:block;">幸运值\n暂时关闭，敬请期待</text>
                             </view>
                         </view>
                     </view>
