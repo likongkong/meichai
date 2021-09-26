@@ -81,7 +81,6 @@ Page({
         subtitle:'报名条件',
         radioArr:[
           {name:'wu',radioName:'无条件报名'},
-          {name:'integrate',radioName:'消耗积分',placeholder:'请填写消耗积分数量',value:''},
           {name:'cashPledge',radioName:'定金',placeholder:'请填写定金金额',value:''},
         ],
         value:0,
@@ -435,9 +434,8 @@ Page({
           // [`listData4[1].index`]:info.cashPledge==0?1:0,
           // [`listData4[1].value`]:info.cashPledge==0?'':info.cashPledge,
           [`listData4[1].index`]:info.isCanShare==0?1:0,
-          [`listData5[0].index`]:info.cashPledge==0 && info.integral==0?0:info.integral==0?2:1,
-          [`listData5[0].radioArr[1].value`]:info.integral != 0?info.integral:'',
-          [`listData5[0].radioArr[2].value`]:info.cashPledge != 0?info.cashPledge:'',
+          [`listData5[0].index`]:info.cashPledge==0?0:1,
+          [`listData5[0].radioArr[1].value`]:info.cashPledge != 0?info.cashPledge:'',
         })
     //  goodsName:'', //商品名称
     //  flatPatternmaking:'', //商品展示图
@@ -461,7 +459,7 @@ Page({
         obj.explain = info.rule;
         obj.goodsDetailsPic = info.arrGoodsDescImg;
         obj.isParticipants = info.isShowSellNumber==0?1:0;
-        obj.integrate = info.integral!=0?info.integral:'';
+        obj.applicationCondition = info.cashPledge!=0?1:0;
         obj.cashPledge = info.cashPledge!=0?info.cashPledge:'';
         obj.isCanShare = info.isCanShare==0?1:0;
       }else{
@@ -535,8 +533,7 @@ Page({
       goodsThumb:obj.flatPatternmaking,
       quota:obj.goodsNum,
       goodsPrice:obj.goodsPrice,
-      integral:obj.applicationCondition == 1?obj.integrate:'',
-      cashPledge:obj.applicationCondition == 2?obj.cashPledge:'',
+      cashPledge:obj.applicationCondition == 1?obj.cashPledge:'',
       startTime:(new Date(obj.startTime).getTime())/1000,
       stopTime:(new Date(obj.stopTime).getTime())/1000,
       finalPayTime:(new Date(obj.finalPayTime).getTime())/1000,
