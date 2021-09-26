@@ -74,7 +74,7 @@
   </view>
 
   <view class="footerWrap">
-    <view data-type="9044" catchtap="comjumpwxnav">添加I新的IP</view>
+    <view data-type="9044" catchtap="comjumpwxnav">添加新的IP</view>
   </view>
 
 </view>
