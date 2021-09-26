@@ -506,7 +506,9 @@ Page({
                 element.title = element.title.split('hc').join('\n');
              });
           }else{
-            app.showToastC('暂无更多数据')
+            if(num != 0){
+              app.showToastC('暂无更多数据')
+            };
           };
           _this.setData({
             nodataiftr:true
