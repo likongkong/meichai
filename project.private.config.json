@@ -164,9 +164,9 @@
           "scene": null
         },
         {
-          "name": "page/component/pages/myothertoydg/myothertoydg",
-          "pathName": "page/component/pages/myothertoydg/myothertoydg",
-          "query": "ownerId=231618",
+          "name": "一番赏",
+          "pathName": "page/secondpackge/pages/aRewardDetails/aRewardDetails",
+          "query": "id=457121",
           "scene": null
         },
         {

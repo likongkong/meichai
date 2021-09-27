@@ -1102,6 +1102,10 @@ App({
       wx.navigateTo({
         url: `/page/settled/pages/incomeDetail/incomeDetail`
       });      
+    } else if (item_type == 9047) {   // 秒杀
+      wx.navigateTo({
+        url: `/page/settled/pages/seckill/seckill?gid=${whref}`
+      });      
     }
   },
   // 中奖提示倒计时
