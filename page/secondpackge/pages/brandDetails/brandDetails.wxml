@@ -37,7 +37,7 @@
 
 				</view>
 		</view>
-		<text class="briefIntroduction" wx:if="{{brandinfo.bradDesc}}">简介：{{brandinfo.bradDesc}}</text>
+		<text class="briefIntroduction" wx:if="{{brandinfo.bradDesc}}">{{brandinfo.bradDesc}}</text>
 	</view>
 
 	<view class="topShareBox" style="bottom:135rpx;"><image class="topShareBoxImg" src="https://cdn.51chaidan.com/images/spread/blindBoxShare.png"></image><button style='width:100%;height:100%;position:absolute;top:0;left:0;opacity:0;' open-type='share'></button>分享</view>
