@@ -11,9 +11,12 @@
                 <image class="orderBoxContentImg" src="{{detailData.goods.goodsThumb}}" mode="aspectFit"></image>
                 <view class="orderBoxContentRight">
                     <view class="obcrTop">
-                        <view style="padding-right:10rpx;">{{detailData.goods.goodsName}}</view>
-                        <view></view>
+                        <view style="width:100%;" class="{{detailData.order.roleName?'specialellipsis':''}}">{{detailData.goods.goodsName}}</view>
                     </view>
+                    <view class="obcrTop" style="padding-top:14rpx;" wx:if='{{detailData.order.roleName}}'>
+                        <view>款式:{{detailData.order.roleName}}</view>
+                    </view>
+
                     <view class="obcrBottom obcrTop" style="font-size:28rpx;">
                         <view>数量x{{detailData.order.goodsNumber}}</view>
                         <view>订单金额￥{{detailData.order.goodsAmount}}</view>

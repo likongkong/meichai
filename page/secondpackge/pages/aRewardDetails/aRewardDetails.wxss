@@ -359,9 +359,7 @@ page {
   align-items: center;
   justify-content: center;
 }
-.scrPurEve .scrOutBox{
-  /* margin-top: 35rpx; */
-}
+
 .scrPurEve text{
   display: block;
   text-align: center;
@@ -1145,4 +1143,69 @@ page {
 .orderBoxBtn text:last-child{
   color: #61749C;
   border-left: 1rpx solid #EEEEEE;
+}
+.marketValue{
+  padding:0 15rpx;
+  height: 40rpx;
+  font-size: 22rpx;
+  color: #909090;
+  display: flex;
+  justify-content:space-between;
+}
+
+.probabilityTip{
+  padding: 30rpx 30rpx 30rpx;
+  width: 600rpx;
+  height: 380rpx;
+  background:#fff;
+  border-radius: 16rpx;
+}
+.proTipHead{
+  width: 100%;
+  height: 200rpx;
+}
+.proTipHeadImg{
+  width: 200rpx;
+  height: 200rpx;
+  float: left;
+  border-radius: 10rpx;
+}
+.proTipHeadRight{
+  height: 200rpx;
+  width: 380rpx;
+  float: right;
+}
+
+.aproTname {
+  width: 100%;
+  height: 35px;
+  line-height: 36rpx;
+  font-size: 24rpx;
+}
+.proTipEve{
+  display: flex;
+  justify-content: space-between;
+  font-size: 24rpx;
+  margin-top: 32rpx;
+}
+.proTipC{
+  color: #909090;
+  font-size: 26rpx;
+  text-align: center;
+  width: 100%;
+  padding: 20rpx 0 30rpx;
+  margin-top: 20rpx;
+  border-top: 1rpx solid #F5F5F5;
+}
+
+.proTipButton{
+  width: 400rpx;
+  height: 66rpx;
+  line-height: 66rpx;
+  border-radius: 56rpx;
+  background-color: rgba(233, 78, 89, 100);
+  color: rgba(255, 255, 255, 100);
+  font-size: 26rpx;
+  text-align: center;
+  margin: auto;
 }

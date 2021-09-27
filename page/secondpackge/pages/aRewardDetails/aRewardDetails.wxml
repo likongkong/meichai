@@ -77,8 +77,6 @@
       </view>
    </view>
    <view class="adheadutnum" style="text-align:center;">{{activity.shopPrice}}元随机获得一款限定周边(最终赏除外)</view>
-   <!-- <image wx:if='{{!gotTBBMBS8 || !gotTBBMBS9}}' style="width:710rpx;height:auto; display:block;margin:15rpx auto;" catchtap="officialAccount" mode='widthFix' src="{{!gotTBBMBS8?'http://cdn.51chaidan.com/images/sign/activity/attentionGZH.png':'https://cdn.51chaidan.com/images/sign/activity/bigAttention1.png'}}"></image> -->
-
 
    <view class="adcspecial">
       <view class="adcweve" id='evepos0' style="height:520rpx;border-top: 4rpx dashed #000;">
@@ -126,13 +124,21 @@
                 </view>
                 <image catchtap="iftrdetailpagen" data-index='{{index}}' data-num='{{num}}' data-is_buy='{{w.is_buy}}' data-goods_id='{{w.goods_id}}' class="adcweveimg" src="{{w.img}}" mode='widthFix'></image>
                 <view class="adcwevename multilineellipsis">
-                    <text style="color: #ff2742;" wx:if='{{w.isShowPrice}}'>价值:￥{{w.shop_price}}</text>
-                    <block wx:if="{{w.img && activity.isOfficial==2}}">
+                    <!-- <text style="color: #ff2742;" wx:if='{{w.isShowPrice}}'>价值:￥{{w.shop_price}}</text> -->
+                    <!-- <block wx:if="{{w.img && activity.isOfficial==2}}">
                             <view wx:if="{{w.cabinetMaxPrice!=0 || w.cabinetMinPrice!=0}}" class="leaveunused" style="text-align:left;padding:0 0 0 {{w.isShowPrice?'15':'0'}}rpx;box-sizing:border-box;display: inline-block;color: #ff2742;" catchtap="jumpOcamcart" data-name='{{w.title_idle}}' data-minprice='{{w.cabinetMinPrice}}' data-maxprice='{{w.cabinetMaxPrice}}' data-goods_id='{{w.goods_id}}'>
                                 闲置:<text wx:if="{{w.cabinetMinPrice!=0}}">￥{{w.cabinetMinPrice}}</text><text wx:if="{{w.cabinetMaxPrice!=0 && w.cabinetMinPrice!=0}}">-</text><text wx:if="{{w.cabinetMaxPrice!=0}}">￥{{w.cabinetMaxPrice}}</text>
                             </view>
-                    </block>
+                    </block> -->
                     {{w.title}}
+                </view>
+                <view class="marketValue specialellipsis" wx:if='{{goodsExhibition.length != index+1}}'>
+                    <view>市场参考价:￥{{w.shop_price}}</view>
+                    <view catchtap="{{activity.status==1?'':'tipsuplusRatio'}}" data-ind='{{index}}'>
+                        <block wx:if='{{activity.status==1}}'>概率:未公布</block>
+                        <block wx:elif='{{w.suplusRatio==0}}'>已售罄</block>
+                        <block wx:else>概率:{{w.suplusRatio}}%</block>
+                    </view>
                 </view>
                 <!-- <block wx:if="{{w.img}}">
                     <view wx:if="{{activity.isOfficial==2}}" style="height:40rpx">
@@ -338,7 +344,30 @@
 <bnavigation isChar='{{false}}' isProduce='{{isProduce}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
 
 
+<view class="wshNew" catchtouchmove="true" wx:if='{{proTipTrue}}' catchtap="closeCommonTip">
+   <view class="probabilityTip">
+       <view class="proTipHead">
+            <image src="{{selectData.img}}" class="proTipHeadImg" mode='aspectFit'></image>
+            <view class="proTipHeadRight">
+                <view class="aproTname multilineellipsis">{{selectData.gear}}赏 {{selectData.title}}</view>
+                <view class="proTipEve">
+                    <view>剩余数量：</view>
+                    <view style="width:130rpx;">{{selectData.suplus}}个</view>
+                </view>
+                <view class="proTipEve">
+                    <view>当前抽中概率：</view>
+                    <view style="width:130rpx;">
+                        <block wx:if='{{selectData.suplusRatio==0}}'>已售罄</block>
+                        <block wx:else>{{selectData.suplusRatio}}%</block>
+                    </view>
+                </view>
 
+            </view>
+       </view>
+       <view class="proTipC">当前抽中概率为时时概率，抽赏后自动更新</view>
+       <view class="proTipButton" catchtap="closeCommonTip">确认</view>
+   </view>
+</view>
 
 
 

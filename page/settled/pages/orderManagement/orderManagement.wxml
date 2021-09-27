@@ -50,7 +50,10 @@
                 <image class="orderBoxContentImg" src="{{goods.goodsThumb}}" mode="aspectFit"></image>
                 <view class="orderBoxContentRight">
                     <view class="obcrTop">
-                        <view style="padding-right:10rpx;">{{goods.goodsName}}</view>
+                        <view style="width:100%;" class="{{order.roleName?'specialellipsis':''}}">{{goods.goodsName}}</view>
+                    </view>
+                    <view class="obcrTop" style="padding-top:14rpx;" wx:if='{{order.roleName}}'>
+                        <view>款式:{{order.roleName}}</view>
                     </view>
                     <view class="obcrBottom obcrTop">
                         <view>数量x{{order.goodsNumber}}</view>
