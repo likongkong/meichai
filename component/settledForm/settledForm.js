@@ -96,8 +96,13 @@ Component({
       let index = e.currentTarget.dataset.index;
       let name = e.currentTarget.dataset.name;
       let sonindex = e.currentTarget.dataset.sonindex;
+      console.log(index,name,sonindex)
       let value = `list[${index}].index`;
       this.setData({errorDom:''});
+      // let pages =  getCurrentPages()
+      // pages[pages.length -  1].setData({
+      //   ['listData2[1].index']: sonindex
+      // });
       this.setData({[value]:sonindex})
       this.triggerEvent("bindchange", {value:sonindex,name:name});
     },
@@ -107,6 +112,18 @@ Component({
       let groups = e.currentTarget.dataset.groups;
       let value = e.detail.value;
       let groupsIndex = `list[${index}].groupsIndex`;
+      this.setData({errorDom:''});
+      this.setData({[groupsIndex]:value})
+      this.triggerEvent("bindchange", {value:value,name:'logisticsIndex'});
+      this.triggerEvent("bindchange", {value:groups[0][value[0]],name:'shipping'});
+      this.triggerEvent("bindchange", {value:value[1],name:'shippingPriceStatus'});
+    },
+    radioPickerChange(e){
+      let index = e.currentTarget.dataset.index;
+      let sonindex = e.currentTarget.dataset.sonindex;
+      let groups = e.currentTarget.dataset.groups;
+      let value = e.detail.value;
+      let groupsIndex = `list[${index}].radioArr[${sonindex}].groupsIndex`;
       this.setData({errorDom:''});
       this.setData({[groupsIndex]:value})
       this.triggerEvent("bindchange", {value:value,name:'logisticsIndex'});
@@ -260,6 +277,22 @@ Component({
             duration:200
           })
         }
+      })
+    },
+    refreshData(value,index){
+      if(value == 0){
+        this.setData({
+          [`list[${index}].noClick`]:true
+        })
+      }else{
+        this.setData({
+          [`list[${index}].noClick`]:false
+        })
+      }
+    }, 
+    refreshTimeData(value,index){
+      this.setData({
+        [`list[${index}].time`]:value
       })
     },
     comjumpwxnav(e){

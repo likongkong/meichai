@@ -128,18 +128,77 @@ Page({
     listData2:[
       {
         isRequired:true,
-        type:'picker',
-        subtitle:'物流方式',
-        placeholder:'请选择物流方式',
-        groups: [
-          ['顺丰', '韵达', '圆通', '申通', '中通', 'EMS', '宅急送', '京东', '天天', '优速', '极兔', '百世', '德邦', '其他'], 
-          ['到付', '包邮']
+        type:'radio',
+        subtitle:'发货方式',
+        radioArr:[
+          {name:'logistics',radioName:'自行发货',placeholder:'请选择物流方式',value:'',
+          groups: [
+            ['顺丰', '韵达', '圆通', '申通', '中通', 'EMS', '宅急送', '京东', '天天', '优速', '极兔', '百世', '德邦', '其他'], 
+            ['到付', '包邮']
+          ],
+          groupsIndex:'',},
+          {name:'dropshipping',radioName:'美拆代发',placeholder:'请选择物流方式',value:'',groups: [
+            ['顺丰'], 
+            ['到付（3元/单）', '包邮（8元/单）']
+          ],
+          groupsIndex:'',},
         ],
-        groupsIndex:'',
-        value:'',
-        name:'logistics',
-        borderbottom1:'show',
+        value:0,
+        index:0,
+        direction:'Y',
+        explain:true,
+        explainTxt:'自行发货：由商家自己发货，可预设发货物流方式 \n美拆代发：由美拆代理发货，可选择需要的物流形式，目前仅支持顺丰到付和包邮，并收取对应的费用顺丰到付3元/单，顺丰包邮8元/单',
+        picker:true,
+        multiRadio:true,
         margintop0:true,
+        borderbottom1:'show',
+        name:'modeOfDespatch',
+      },
+      // {
+      //   isRequired:true,
+      //   type:'picker',
+      //   subtitle:'物流方式',
+      //   placeholder:'请选择物流方式',
+      //   groups: [
+      //     ['顺丰', '韵达', '圆通', '申通', '中通', 'EMS', '宅急送', '京东', '天天', '优速', '极兔', '百世', '德邦', '其他'], 
+      //     ['到付', '包邮']
+      //   ],
+      //   groupsIndex:'',
+      //   value:'',
+      //   name:'logistics',
+      //   borderbottom1:'show',
+      //   margintop0:true,
+      // }
+      {
+        isRequired:false,
+        type:'radio',
+        subtitle:'售卖方式',
+        radioArr:['正常售卖','限时售卖'],
+        value:0,
+        index:0,
+        direction:'X',
+        margintop0:true,
+        borderbottom1:'show',
+        name:'sellingWay',
+      },{
+        isRequired:true,
+        type:'time',
+        subtitle:'发售时间',
+        value:0,
+        margintop0:true,
+        borderbottom1:'show',
+        time: util.format("yyyy-MM-dd HH:mm"),
+        name:'startTime',
+      },
+      { isRequired:true,
+        type:'time',
+        subtitle:'停售时间',
+        value:0,
+        margintop0:true,
+        time: util.format("yyyy-MM-dd HH:mm",2592000000),
+        borderbottom1:'show',
+        noClick:true,
+        name:'endTime',
       },{
         isRequired:true,
         type:'text',
@@ -169,26 +228,9 @@ Page({
         index:0,
         direction:'X',
         margintop0:true,
-        borderbottom1:'show',
         name:'isSoldNum',
-      },{
-        isRequired:true,
-        type:'time',
-        subtitle:'发售时间',
-        value:0,
-        margintop0:true,
-        borderbottom1:'show',
-        time: util.format("yyyy-MM-dd HH:mm"),
-        name:'startTime',
-      },{
-        isRequired:true,
-        type:'time',
-        subtitle:'停售时间',
-        value:0,
-        margintop0:true,
-        time: util.format("yyyy-MM-dd HH:mm",2592000000),
-        name:'endTime',
-      },
+      }
+      
     ],
     listData3:[
       {
@@ -213,6 +255,8 @@ Page({
       purchaseLimitationNum:1, //限购体数
       integrate:'',  //积分
       goodsDetailsPic:'', //详情图
+      modeOfDespatch:0,  //发货方式
+      sellingWay:0,  //售卖方式
       shipping:'',  //快递公司名称
       shippingPriceStatus:'', //邮费类型
       logisticsIndex:'', //物流下标
@@ -221,6 +265,7 @@ Page({
       startTime:util.format("yyyy-MM-dd HH:mm"),
       endTime:util.format("yyyy-MM-dd HH:mm",2592000000),
       isCanShare:'', //允许购买对象
+      
     },
   },
   /**
@@ -251,36 +296,43 @@ Page({
   },
   // 获取表单数据
   bindchange(e){
+    let value = e.detail.value; 
     let key=e.detail.name;
+    if(key == 'sellingWay'){    //sellingWay==0为正常售卖 sellingWay==1为限时售卖
+      this.selectComponent('#settledForm2').refreshData(value,3);
+      if(value==1){
+        let startTime = (new Date(this.data.obj.startTime).getTime())/1000;
+        let endtime = util.format1("yyyy-MM-dd HH:mm",startTime+2592000);
+        this.selectComponent('#settledForm2').refreshTimeData(endtime,3);
+      }
+    }
     if(key == 'startTime'){
-      let startTime = (new Date(e.detail.value).getTime())/1000;
-      let endTime = (new Date(this.data.obj.endTime).getTime())/1000;
-      console.log(startTime,endTime)
-      if(startTime<endTime){
-        this.setData({
-          [`listData2[4].time`]:e.detail.value
-        })
-        this.data.obj[key]=e.detail.value;
+      if(this.data.obj.sellingWay == 0){
+        this.selectComponent('#settledForm2').refreshTimeData(value,2);
+        this.data.obj[key]=value;
       }else{
-        app.showToastC('发售时间不可大于停售时间',1500);
+        let startTime = (new Date(value).getTime())/1000;
+        let endTime = (new Date(this.data.obj.endTime).getTime())/1000;
+        if(startTime<endTime){
+          this.selectComponent('#settledForm2').refreshTimeData(value,2);
+          this.data.obj[key]=value;
+        }else{
+          app.showToastC('发售时间不可大于停售时间',1500);
+        }
       }
     }else if(key == 'endTime'){
-      let endTime = (new Date(e.detail.value).getTime())/1000;
+      let endTime = (new Date(value).getTime())/1000;
       let startTime = (new Date(this.data.obj.startTime).getTime())/1000;
-      console.log(startTime,endTime)
       if(endTime>startTime){
-        this.setData({
-          [`listData2[5].time`]:e.detail.value
-        })
-        this.data.obj[key]=e.detail.value;
+        this.selectComponent('#settledForm2').refreshTimeData(value,3);
+        this.data.obj[key]=value;
       }else{
         app.showToastC('停售时间不可小于发售时间',1500);
       }
     }else{
-      this.data.obj[key]=e.detail.value;
+      this.data.obj[key]=value;
     }
     console.log(this.data.obj)
-
   },
 
   // 获取用户下所有的品牌id
@@ -359,12 +411,21 @@ Page({
           [`listData1[6].value`]:info.limitBuy,
           [`listData1[7].value`]:info.integral,
           [`listData1[8].imageList`]:info.arrGoodsDescImg,
-          [`listData2[0].groupsIndex`]:info.logisticsIndex,
-          [`listData2[1].value`]:info.deliverTime,
-          [`listData2[2].index`]:info.isShowStock==0?1:0,
-          [`listData2[3].index`]:info.isShowSellNumber==0?1:0,
-          [`listData2[4].time`]:util.format1("yyyy-MM-dd HH:mm",info.startTime),
-          [`listData2[5].time`]:util.format1("yyyy-MM-dd HH:mm",info.stopTime),
+          // [`listData2[0].groupsIndex`]:info.logisticsIndex,
+          [`listData2[0].radioArr[${info.shippingMothed}].groupsIndex`]:info.logisticsIndex,
+          [`listData2[0].index`]:info.shippingMothed,
+          [`listData2[1].index`]:info.salesMothed,
+          [`listData2[2].time`]:util.format1("yyyy-MM-dd HH:mm",info.startTime),
+          [`listData2[3].noClick`]:info.salesMothed==1?false:true,
+          [`listData2[3].time`]:info.salesMothed==0?'':util.format1("yyyy-MM-dd HH:mm",info.stopTime),
+          [`listData2[4].value`]:info.deliverTime,
+          [`listData2[5].index`]:info.isShowStock==0?1:0,
+          [`listData2[6].index`]:info.isShowSellNumber==0?1:0,
+          // [`listData2[1].value`]:info.deliverTime,
+          // [`listData2[2].index`]:info.isShowStock==0?1:0,
+          // [`listData2[3].index`]:info.isShowSellNumber==0?1:0,
+          // [`listData2[4].time`]:util.format1("yyyy-MM-dd HH:mm",info.startTime),
+          // [`listData2[5].time`]:util.format1("yyyy-MM-dd HH:mm",info.stopTime),
           [`listData3[0].index`]:info.isCanShare==0?1:0,
         })
     //  goodsName:'', //商品名称
@@ -396,13 +457,29 @@ Page({
         obj.integrate = info.integral;
         obj.goodsDetailsPic = info.arrGoodsDescImg;
         obj.logisticsIndex = info.logisticsIndex,
+        obj.modeOfDespatch = info.shippingMothed,
         obj.shipping = info.shipping;
         obj.shippingPriceStatus = info.shippingPriceStatus==0?0:1;
+
+        // [`listData2[1].index`]:info.salesMothed,
+        // [`listData2[2].time`]:util.format1("yyyy-MM-dd HH:mm",info.startTime),
+        // [`listData2[3].time`]:info.salesMothed==0?'':util.format1("yyyy-MM-dd HH:mm",info.stopTime),
+        // [`listData2[4].value`]:info.deliverTime,
+        // [`listData2[5].index`]:info.isShowStock==0?1:0,
+        // [`listData2[5].index`]:info.isShowSellNumber==0?1:0,
+        obj.sellingWay = info.salesMothed;
+        obj.startTime = util.format1("yyyy-MM-dd HH:mm",info.startTime);
+        obj.endTime = info.salesMothed==0?'':util.format1("yyyy-MM-dd HH:mm",info.stopTime);
         obj.dateToPull = info.deliverTime;
         obj.isGoodsStock = info.isShowStock==0?1:0;
         obj.isSoldNum = info.isShowSellNumber==0?1:0;
-        obj.startTime = util.format1("yyyy-MM-dd HH:mm",info.startTime);
-        obj.endTime = util.format1("yyyy-MM-dd HH:mm",info.stopTime);
+
+        // obj.dateToPull = info.deliverTime;
+        // obj.isGoodsStock = info.isShowStock==0?1:0;
+        // obj.isSoldNum = info.isShowSellNumber==0?1:0;
+        // obj.startTime = util.format1("yyyy-MM-dd HH:mm",info.startTime);
+        // obj.endTime = util.format1("yyyy-MM-dd HH:mm",info.stopTime);
+
         obj.isCanShare = info.isCanShare==0?1:0;
       }else{
         app.showToastC(res.data.Msg,2000);
@@ -440,9 +517,9 @@ Page({
       app.showToastC('请输入当前可售库存数',1500);
       return false;
     }
-    if(!obj.shipping || obj.shipping == ''){
-      this.selectComponent('#settledForm2').scrollto('shipping');
-      app.showToastC('请选择物流方式',1500);
+    if(!obj.logisticsIndex || obj.logisticsIndex == []){
+      this.selectComponent('#settledForm2').scrollto('modeOfDespatch');
+      app.showToastC('请选择发货方式',1500);
       return false;
     }
     if(!obj.dateToPull || obj.dateToPull == ''){
@@ -470,7 +547,7 @@ Page({
     //   startTime:util.format("yyyy-MM-dd HH:mm"),
     //   endTime:util.format("yyyy-MM-dd HH:mm",2592000000),
 
-
+console.log(obj.modeOfDespatch)
     let data = {
       goodsId:this.data.id&&this.data.id!=0?this.data.id:'',
       brandId:obj.associationIp,
@@ -479,11 +556,16 @@ Page({
       goodsPrice:obj.goodsPrice,
       deliverTimeStatus:obj.goodsLabel===''?'':obj.goodsLabel==0?1:0,
       deliverTime:obj.dateToPull,
+      salesMothed:obj.sellingWay,
       startTime:(new Date(obj.startTime).getTime())/1000,
-      stopTime:(new Date(obj.endTime).getTime())/1000,
+      stopTime:obj.sellingWay==0?0:(new Date(obj.endTime).getTime())/1000,
+      shippingMothed:obj.modeOfDespatch,
       logisticsIndex:obj.logisticsIndex,
-      shipping:obj.shipping,
-      shippingPriceStatus:obj.shippingPriceStatus==0?0:2,
+      shipping: obj.modeOfDespatch==0?obj.shipping:'',  //自行发货
+      shippingPriceStatus:obj.modeOfDespatch==0?obj.shippingPriceStatus==0?0:2:'',  //自行发货
+      mcShippingName:obj.modeOfDespatch==1?obj.shipping:'',  //美拆代发
+      mcShippingType:obj.modeOfDespatch==1?obj.shippingPriceStatus:'',  //美拆代发
+      mcShippingPrice:obj.modeOfDespatch==1?obj.shippingPriceStatus==0?3:8:'',  //美拆代发
       limitBuy:obj.purchaseLimitation==0?obj.purchaseLimitationNum:0,
       goodsDescStr: obj.goodsDescribe,
       integral:obj.integrate,
