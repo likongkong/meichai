@@ -168,6 +168,7 @@
                     </view>
                     <view class="brandManageMenu">
                         <view class="brandManageItem" data-type="9038" catchtap="comjumpwxnav">
+                            <view class="reddot" wx:if="{{dataInfo.countNewOrder}}" style="line-height: {{dataInfo.countNewOrder>=100?'20':'30'}}rpx;">{{dataInfo.countNewOrder>=100?'...':dataInfo.countNewOrder}}</view>
                             <view>
                                 <image src='https://cdn.51chaidan.com/images/brandSettledIcon/orderIcon/order.png' mode="widthFix"></image>
                                 <text>订单管理</text>

@@ -390,7 +390,7 @@
 .maskTxt{
   font-size: 28rpx;
   color: #8A8A8A;
-  padding: 0 60rpx;
+  padding: 0 40rpx;
   box-sizing: border-box;
   display: block;
   margin-bottom: 44rpx;

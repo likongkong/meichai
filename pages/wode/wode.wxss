@@ -608,6 +608,20 @@ page{
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+.brandManageItem .reddot{
+  position: absolute;
+  width: 30rpx;
+  height: 30rpx;
+  background: #ff2742;
+  color: #fff;
+  font-size: 20rpx;
+  text-align: center;
+  padding-top: 0;
+  top: 10rpx;
+  right: 0;
+  border-radius: 30rpx;
 }
 .brandManageItem view{
   padding-top: 30rpx;
