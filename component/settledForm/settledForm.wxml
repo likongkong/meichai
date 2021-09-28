@@ -95,6 +95,7 @@
             <image wx:if="{{item.explain}}" src="https://cdn.51chaidan.com/images/brandSettledIcon/wenhao.png" mode="widthFix"></image>
           </view>
           <view class="pickerYMDHM">
+            <view wx:if="{{item.noClick}}" class="noTimeClick">售完为止</view>
             <pickerYMDHM data-index="{{index}}" data-name="{{item.name}}" bind:onPickerChange="onPickerChange3" placeholder="{{item.placeholder}}" date="{{item.time}}"></pickerYMDHM>
           </view>
           <image wx:if="{{item.isEdit?false:isEdit}}" class="editIcon" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="widthFix"></image>
@@ -154,6 +155,7 @@
             <image wx:if="{{item.explain}}" src="https://cdn.51chaidan.com/images/brandSettledIcon/wenhao.png" mode="widthFix"></image>
           </view>
           <view class="radioBoxWrap">
+            <!-- 左测 -->
             <view class="radioWrap {{item.direction=='X'?'displayInlineFlex radioWrap1':''}}">
               <block wx:if="{{item.multiRadio}}">
                 <block wx:for="{{item.radioArr}}" wx:key='key' wx:for-index="idx" wx:for-item="sonItem">
@@ -172,6 +174,7 @@
                 </block>
               </block>
             </view>
+            <!-- 右侧 input -->
             <block wx:if="{{item.input}}">
               <block wx:if="{{item.name == 'purchaseLimitation'}}">
                 <view class="radioRightWrap" wx:if="{{item.index==0}}">
@@ -183,7 +186,7 @@
                   <view>
                     <block wx:for="{{item.radioArr}}" wx:key='key' wx:for-index="idx" wx:for-item="sonItem">
                       <view class="multiRadioWrap">
-                        <view class="{{item.index == idx?'':'hideradioInput'}}"></view>
+                        <view class="{{item.index == idx?'':'hideradio'}}"></view>
                         <input type="text" disabled="{{!sonItem.placeholder?true:flase}}" placeholder="{{sonItem.placeholder}}" data-name="{{sonItem.name}}" bindinput="onKeyInput" value="{{sonItem.value}}" />
                       </view>
                     </block>
@@ -195,6 +198,24 @@
                   </view>
                 </block>
               </block>
+            </block>
+            <!-- 右侧 picker -->
+            <block wx:if="{{item.picker}}">
+              <view class="radioPickerWrap">
+                <block wx:for="{{item.radioArr}}" wx:key='key' wx:for-index="idx" wx:for-item="sonItem">
+                  <view class="pickerWrap">
+                    <view class="{{item.index == idx?'':'hideradio'}}"></view>
+                    <picker mode="multiSelector" data-groups="{{sonItem.groups}}" data-index="{{index}}" data-sonindex="{{idx}}" bindchange="radioPickerChange" value="{{sonItem.groupsIndex}}" range="{{sonItem.groups}}">
+                      <view class="pickerWrapText">
+                        <!-- {{sonItem.value?sonItem.value:sonItem.placeholder}} -->
+                        <block wx:if="{{sonItem.groupsIndex == ''}}">{{sonItem.placeholder}}</block>
+                        <block wx:else>{{sonItem.groups[0][sonItem.groupsIndex[0]]}}-{{sonItem.groups[1][sonItem.groupsIndex[1]]}}</block>
+                      </view>
+                    </picker>
+                    <image class="actionSheetIcon" src="../../pages/images/icon_in.png" mode="widthFix"></image>
+                  </view>
+                </block>
+              </view>
             </block>
           </view>
         </view>
