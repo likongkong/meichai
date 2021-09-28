@@ -1733,3 +1733,17 @@
 		<image class="guanbi" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="widthFix" catchtap="toogleGuidanceMask"></image>
 	</view>
 </view>
+
+<!-- 交易须知  -->
+<view class="wshNew" catchtouchmove="true" wx:if='{{proTipTrue}}' catchtap="closeCommonTip">
+   <view class="probabilityTip" catchtap="true">
+       <view class="proBaTop">交易须知</view>
+       <view class="proBaTopCenter">
+         <text>{{zunmdata.confirmTip}}</text>
+       </view>
+       <view class="proBaTopCBottom" catchtap="commdargee">
+            <view class="proBaTopCBotImg"><image class='proBalImgRad' src='{{commodityAgreement?"../images/statemyorder1.png":"../images/normal_click.png"}}'></image>同意<text style="color:#5CA7FE;">《交易须知》</text>继续购买</view>
+       </view>
+       <view class="proTipButton" style="{{commodityAgreement?'':'background:#909090;'}}" catchtap="{{commodityAgreement?'continueToBuy':''}}">继续购买</view>
+   </view>
+</view>

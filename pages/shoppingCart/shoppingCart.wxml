@@ -233,7 +233,7 @@
           <image wx:if="{{isUseBlindboxMoney}}" style="width:40rpx;height:auto" src="https://www.51chaidan.com/images/sign/order/xuanzhong.png" mode="widthFix"></image>
           <image wx:else style="width:40rpx;height:auto" src="https://www.51chaidan.com/images/sign/order/weixuanzhong.png" mode="widthFix"></image>
         </block>
-        <!-- <view class='blindboxMoneyright' style="{{!isUseBlindboxMoney?'color: #999; border:1rpx solid #999;':''}}" catchtap="useBlindboxMoneyFun">使用</view> -->
+
     </view>
 
     <view class='bbshccombot'>
@@ -486,7 +486,6 @@
 
 
 <view class='fiaxbottom' style='{{isIphoneX?"bottom:130rpx;":"bottom:110rpx;"}}'>
-  <!-- 购物车提示 catchtap='frontpagebutton' -->
   <view class='shoppingcartprompt' catchtap='iftrBotShopList' wx:if='{{!spreadEntry && shopcptxt!=""&&dsbbmoncom&&shopcptxt!="已满足包邮条件，快去结算吧。"}}' data-href='{{rdjump.href}}' data-item_type='{{rdjump.item_type}}' data-name='{{rdjump.name}}'>{{shopcptxt}}</view>
   <view class='shoppingcartprompt' wx:if='{{!spreadEntry && shopcptxt!=""&&dsbbmoncom&&shopcptxt=="已满足包邮条件，快去结算吧。"}}'>{{shopcptxt}}</view>
 

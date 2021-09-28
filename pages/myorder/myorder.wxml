@@ -483,7 +483,7 @@
                     </view>  
 
                     <view class='daifukuandianji' wx:if='{{item.status==0}}'>
-                        <view class='dfkdjrighg' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;margin-left:20rpx;' bindtap='payment' data-amount='{{item.amount}}' data-oid='{{item.oid}}' data-cart_id='{{item.cart_id}}' data-gcover='{{item.gcover}}' data-gid='{{item.gid}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}'  data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-order_type='{{item.order_type}}'>支付尾款</view>
+                        <view class='dfkdjrighg' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;margin-left:20rpx;' bindtap='payment' data-amount='{{item.amount}}' data-oid='{{item.oid}}' data-cart_id='{{item.cart_id}}' data-gcover='{{item.gcover}}' data-gid='{{item.gid}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}'  data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-order_type='{{item.order_type}}' data-index='{{index}}'>支付尾款</view>
 
                         <view class='dfkdjrleft' style="height:54rpx;line-height:54rpx;float:right;" wx:if='{{item.dateTitle}}'>{{item.dateTitle}}</view>
 
@@ -522,7 +522,7 @@
 
                         <view class='dfkdjrleft'>{{countdown}}</view>
 
-                        <view class='dfkdjrighg' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;' bindtap='payment' data-amount='{{item.amount}}' data-oid='{{item.oid}}' data-cart_id='{{item.cart_id}}' data-gcover='{{item.gcover}}' data-gid='{{item.gid}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}'  data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-order_type='{{item.order_type}}' data-needverifyticket='{{item.needVerifyTicket}}' data-tickettype='{{item.ticketType}}' data-ticketidentify='{{item.ticketIdentify}}' data-isreceive='{{item.isReceive}}' data-keyday='{{item.keyDay}}'>
+                        <view class='dfkdjrighg' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;' bindtap='payment' data-amount='{{item.amount}}' data-oid='{{item.oid}}' data-cart_id='{{item.cart_id}}' data-gcover='{{item.gcover}}' data-gid='{{item.gid}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}'  data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-order_type='{{item.order_type}}' data-needverifyticket='{{item.needVerifyTicket}}' data-tickettype='{{item.ticketType}}' data-ticketidentify='{{item.ticketIdentify}}' data-isreceive='{{item.isReceive}}' data-keyday='{{item.keyDay}}' data-index='{{index}}'>
                             <block wx:if='{{item.needVerifyTicket}}'>
                                 <block wx:if='{{item.isReceive}}'>核销领取</block>
                                 <block wx:else>核验支付</block>
@@ -1214,4 +1214,19 @@
             <view style='width:50%;text-align:center;height:50rpx;float:right;font-size:30rpx;position:relative;' catchtap='vipOrOrdermine1'>核验</view>
         </view>
     </view>
+</view>
+
+
+<!-- 交易须知  -->
+<view class="wshNew" catchtouchmove="true" wx:if='{{proTipTrue}}' catchtap="closeCommonTip">
+   <view class="probabilityTip" catchtap="true">
+       <view class="proBaTop">交易须知</view>
+       <view class="proBaTopCenter">
+         <text>{{is_tip_txt}}</text>
+       </view>
+       <view class="proBaTopCBottom" catchtap="commdargee">
+            <view class="proBaTopCBotImg"><image class='proBalImgRad' src='{{commodityAgreement?"../images/statemyorder1.png":"../images/normal_click.png"}}'></image>同意<text style="color:#5CA7FE;">《交易须知》</text>继续购买</view>
+       </view>
+       <view class="proTipButton" style="{{commodityAgreement?'':'background:#909090;'}}" catchtap="{{commodityAgreement?'continueToBuy':''}}">继续购买</view>
+   </view>
 </view>

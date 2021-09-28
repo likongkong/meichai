@@ -25,29 +25,10 @@ Component({
   },
 
   lifetimes: {
-    // 生命周期函数，可以为函数，或一个在methods段中定义的方法名
+
     attached: function() {
       var _this = this;
       setTimeout(function(){
-          var q1 = Dec.Aese('mod=spread&operation=getActivity&type=1');
-          // wx.request({
-          //   url: app.signindata.comurl + 'model.php' + q1,
-          //   method: 'GET',
-          //   header: {'Accept': 'application/json'},
-          //   success: function(res) {
-          //     if(res.data.ReturnCode == 200){
-          //       console.log('smokeComponent=============',res)
-          //       if(res.data.List){
-          //         if(res.data.List.activity){
-          //           _this.setData({
-          //             dataList: res.data.List.activity.blindbox||[],
-          //           })
-          //         }
-          //     }
-          //     }
-          //   }
-          // });
-
           wx.request({
             url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/recommedBlindbox.json?time='+app.signindata.appNowTime,
             method: 'GET',
@@ -74,11 +55,7 @@ Component({
               }
             }
           });
-
-
-
       },500);
-
     },
     moved: function() {},
     detached: function() {},

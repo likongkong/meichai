@@ -113,7 +113,29 @@ Page({
     subscribedata:'',
     vipOrOrderTip:false,
     myOrderNowTime: Date.parse(new Date()) / 1000,
+    proTipTrue:false,
+    commodityAgreement:false
+
   },
+
+  commdargee(){
+      this.setData({
+          commodityAgreement:!this.data.commodityAgreement
+      })
+  },
+  closeCommonTip(){
+    this.setData({
+      proTipTrue:!this.data.proTipTrue,
+      commodityAgreement:false
+    })
+  },
+  continueToBuy(){
+    var _this = this;
+    if(this.data.commodityAgreement){
+      this.paymentmony();
+    };
+  },
+
   pictboxboxfun: function () {
     this.setData({ pictboxbox: false });
     // 订阅授权
@@ -1159,6 +1181,7 @@ Page({
     var keyDay = event.currentTarget.dataset.keyday || event.target.dataset.keyday || '';
     var isReceive = event.currentTarget.dataset.isreceive || event.target.dataset.isreceive || false;
 
+    var index = event.currentTarget.dataset.index || event.target.dataset.index || 0;
 
     _this.data.shareimg = gcover;
 
@@ -1225,8 +1248,27 @@ Page({
           suboformola: true
         })
         this.data.shareimg = gcover;
+
+        var selectData = this.data.myordata[index]; 
+        var selectDatalist = selectData.list || [];
+        var is_tip = false;
+        var is_tip_txt = '';
+        for(var i=0;i<selectDatalist.length;i++){
+           if(selectDatalist[i].isNeedConfirm){
+             is_tip = true;
+             is_tip_txt = selectDatalist[i].confirmTip || '';
+           };
+        };
         // 直接支付
-        this.paymentmony();
+        if(is_tip){
+          this.setData({
+            is_tip_txt:is_tip_txt
+          })
+          this.closeCommonTip();
+        }else{
+          this.paymentmony();
+        }
+        
       };
 
     };
@@ -1734,16 +1776,7 @@ Page({
     if (generatePicturesimg['myordercanimgser' + cart_idsave]){
     }else{
     }
-    // if (generatePicturesimg['myordercanimgser' + cart_idsave]){
-    //   _this.setData({
-    //     actimgshare: generatePicturesimg['myordercanimgser' + cart_idsave],
-    //     headhidden: true,
-    //   });
-    //   wx.hideLoading()
-    // console.log(121212,generatePicturesimg)
 
-    //   return false;
-    // };
     if (order_type==10){
       _this.generatePicturesbs(cart_idsave);
       return false;
@@ -1755,7 +1788,7 @@ Page({
     if (uidimg) {
       var tdavatar = uidimg;
     } else if (path != null) {
-      if (path) { var tdavatar = path; console.log(55555555555)} else { var tdavatar = _this.data.avatarUrl; console.log(66666666666)};
+      if (path) { var tdavatar = path;} else { var tdavatar = _this.data.avatarUrl; };
     } else {
       var tdavatar = _this.data.avatarUrl;
     };
