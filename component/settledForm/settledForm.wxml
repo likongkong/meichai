@@ -95,7 +95,7 @@
             <image wx:if="{{item.explain}}" src="https://cdn.51chaidan.com/images/brandSettledIcon/wenhao.png" mode="widthFix"></image>
           </view>
           <view class="pickerYMDHM">
-            <view wx:if="{{item.noClick}}" class="noTimeClick">售完为止</view>
+            <view wx:if="{{item.noClick}}" class="noTimeClick" data-explaintxt="{{item.explainTxt}}" catchtap="{{item.explainTxt?'showExplain':''}}">售完为止</view>
             <pickerYMDHM data-index="{{index}}" data-name="{{item.name}}" bind:onPickerChange="onPickerChange3" placeholder="{{item.placeholder}}" date="{{item.time}}"></pickerYMDHM>
           </view>
           <image wx:if="{{item.isEdit?false:isEdit}}" class="editIcon" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="widthFix"></image>

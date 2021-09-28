@@ -198,6 +198,7 @@ Page({
         time: util.format("yyyy-MM-dd HH:mm",2592000000),
         borderbottom1:'show',
         noClick:true,
+        explainTxt:'正常售卖方式不可编辑停售时间，如需编辑停售时间请选择限时发售',
         name:'endTime',
       },{
         isRequired:true,
