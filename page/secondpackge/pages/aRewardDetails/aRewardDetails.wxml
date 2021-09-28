@@ -132,7 +132,7 @@
                     </block> -->
                     {{w.title}}
                 </view>
-                <view class="marketValue specialellipsis" wx:if='{{goodsExhibition.length != index+1}}'>
+                <view class="marketValue specialellipsis" wx:if='{{w.shop_price || w.suplusRatio}}'>
                     <view>市场参考价:￥{{w.shop_price}}</view>
                     <view catchtap="{{activity.status==1?'':'tipsuplusRatio'}}" data-ind='{{index}}'>
                         <block wx:if='{{activity.status==1}}'>概率:未公布</block>

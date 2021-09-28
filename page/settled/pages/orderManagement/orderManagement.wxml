@@ -77,7 +77,10 @@
        <view class="orderBottom" wx:if='{{order.shippingCode}}' style="padding-top:0;">
             <view class="orderBoxTop">运单号:{{order.shippingCode}}</view>
        </view>
-       <view class="orderBottom" wx:if='{{order.payStatus != 0 && order.payStatus != 7 && order.payStatus != 8}}'> <!-- 未支付 -->
+       <view class="orderBottom" wx:if='{{order.isToyCabinet}}' style="padding-top:0;">
+            <view class="orderBoxTopNew">该订单为玩具柜订单，暂时无法发货，请等待用户确认发货</view>
+       </view>
+       <view class="orderBottom" wx:elif='{{order.payStatus != 0 && order.payStatus != 7 && order.payStatus != 8}}'> <!-- 未支付 -->
                <view class="orderBottomOrderNumber">
                    <view class="orderBottomButton" wx:if="{{order.payStatus != 5}}" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='3'>
                        <block wx:if='{{order.shippingCode}}'>修改物流</block>

@@ -14,3 +14,10 @@
   width: 200rpx !important;
   margin: 0 20rpx;
 }
+.orderBoxTopNew{
+  color:#9DD7DB;text-align: center;font-size: 24rpx;
+  width: 100%;
+  height: 40rpx;
+  line-height: 40rpx;
+  margin-bottom: 10rpx;
+}

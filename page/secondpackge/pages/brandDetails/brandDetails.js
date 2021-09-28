@@ -505,10 +505,6 @@ Page({
                 element.end_time = _this.toDate(element.end_time || 0);
                 element.title = element.title.split('hc').join('\n');
              });
-          }else{
-            if(num != 0){
-              app.showToastC('暂无更多数据')
-            };
           };
           _this.setData({
             nodataiftr:true
