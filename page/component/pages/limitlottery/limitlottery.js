@@ -885,11 +885,11 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
 
           if(res.data.Info.is_ordinary_ticket_user!=undefined&&res.data.Info.is_ordinary_ticket_user){
             _this.setData({
-              paypriceCashPledge:parseFloat(res.data.Info.infoGoods.shop_price || 0).toFixed(1)
+              paypriceCashPledge:parseFloat(res.data.Info.infoGoods.shop_price || 0).toFixed(2)
             })
           }else{
             _this.setData({
-              paypriceCashPledge:parseFloat((res.data.Info.infoGoods.shop_price || 0)-(res.data.Info.cashPledge||0)).toFixed(1)
+              paypriceCashPledge:parseFloat((res.data.Info.infoGoods.shop_price || 0)-(res.data.Info.cashPledge||0)).toFixed(2)
             })
           }
 

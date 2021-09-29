@@ -494,6 +494,20 @@ Page({
       this.selectComponent('#settledForm1').scrollto('goodsPrice');
       app.showToastC('请输入抽选价格',1500);
       return false;
+    }else if(obj.goodsPrice < 0.01){
+      this.selectComponent('#settledForm1').scrollto('goodsPrice');
+      app.showToastC('抽选价格不可小于0.01',1500);
+      return false;
+    }
+    console.log(obj.applicationCondition, obj.cashPledge)
+    if(obj.applicationCondition == 1 && obj.cashPledge ==''){
+      this.selectComponent('#settledForm5').scrollto('applicationCondition');
+      app.showToastC('请输入定金金额',1500);
+      return false;
+    }else if(obj.applicationCondition == 1 && obj.cashPledge < 0.01){
+      this.selectComponent('#settledForm5').scrollto('applicationCondition');
+      app.showToastC('定金金额不可小于0.01',1500);
+      return false;
     }
     if(!obj.startTime || obj.startTime == ''){
       this.selectComponent('#settledForm2').scrollto('startTime');

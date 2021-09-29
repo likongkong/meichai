@@ -47,7 +47,7 @@
             <text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}
             <image wx:if="{{item.explain}}" src="https://cdn.51chaidan.com/images/brandSettledIcon/wenhao.png" mode="widthFix"></image>
           </view>
-          <input class="cEveInput" disabled="{{num==2?true:flase}}" data-name="{{item.name}}" placeholder="{{item.placeholder}}" type="text" value="{{item.value}}" bindinput="onKeyInput"></input>
+          <input class="cEveInput" maxlength="{{item.maxlength?item.maxlength:999}}" disabled="{{num==2?true:flase}}" data-name="{{item.name}}" placeholder="{{item.placeholder}}" type="text" value="{{item.value}}" bindinput="onKeyInput"></input>
           <image wx:if="{{item.isEdit?false:isEdit}}" class="editIcon" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="widthFix"></image>
         </view>
         <view wx:if="{{item.type == 'title'}}" class="{{num==1?'columnWrap':'rowWrap'}} {{item.borderbottom1?'borderbottom1':''}}">

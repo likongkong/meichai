@@ -44,7 +44,8 @@ Page({
         type:'uploadImg',
         subtitle:'商品展示图（建议上传比例1:1）',
         name:'flatPatternmaking',
-        src:'',
+        imageList:[],
+        mode:'multiple',
         storagelocation:'images/goods',
         borderbottom1:'show',
         margintop0:true,
@@ -206,6 +207,7 @@ Page({
         subtitle:'预计发货日期',
         placeholder:'请输入预计发货日期',
         value:'',
+        maxlength:10,
         name:'dateToPull',
         borderbottom1:'show',
         margintop0:true,
@@ -403,7 +405,7 @@ Page({
         this.setData({
           [`listData[0].value`]:info.brand.brandName,
           [`listData1[0].value`]:info.goodsName,
-          [`listData1[1].src`]:info.goodsThumb,
+          [`listData1[1].imageList`]:info.arrGoodsThumb,
           [`listData1[2].value`]:info.goodsDescStr,
           [`listData1[3].value`]:info.goodsPrice,
           [`listData1[4].value`]:info.stock,
@@ -508,9 +510,9 @@ Page({
       this.selectComponent('#settledForm1').scrollto('goodsPrice');
       app.showToastC('请输入商品售价金额',1500);
       return false;
-    }else if(obj.goodsPrice<=0){
+    }else if(obj.goodsPrice<0.01){
       this.selectComponent('#settledForm1').scrollto('goodsPrice');
-      app.showToastC('商品售价金额必须大于0',1500);
+      app.showToastC('商品售价金额不可小于0.01',1500);
       return false;
     }
     if(!obj.goodsStock || obj.goodsStock == ''){
