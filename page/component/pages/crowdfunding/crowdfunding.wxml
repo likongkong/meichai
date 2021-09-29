@@ -383,9 +383,11 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
         </view>
       </view>
     </view>
-    <view class='recgadnodata' wx:if='{{addressdata.length==0&&iftrnodata}}'>
-      <image src='../../../../pages/images/default_BG_Image@3x.png' style='width:414rpx;height:255rpx;display:block;margin:0 auto;'></image>
+
+    <view class='noDataCom' wx:if='{{addressdata.length==0&&iftrnodata}}'>
+          <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
     </view>
+
   </view>
   <view class='recgadbot' bindtap='jumpaddress'>
     增加新地址

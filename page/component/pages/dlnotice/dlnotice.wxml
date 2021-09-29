@@ -6,9 +6,10 @@
 
 
   <!--  暂无数据  -->
-  <view style='width:100%;padding-top:200rpx;' wx:if='{{listdata.length==0&&iftrnodata}}'>
-    <image src='../../../../pages/images/default_BG_Image@3x.png' style='width:414rpx;height:255rpx;display:block;margin:0 auto;'></image>
-  </view>
+      <view class='noDataCom' wx:if='{{listdata.length==0&&iftrnodata}}'>
+          <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
+      </view>
+
 
 <view class='dlnobox'>
    <view class='dlnoeve' wx:for='{{listdata}}' wx:key='key' catchtap='jumpdldetail' data-dryingid='{{item.dryingId}}'>

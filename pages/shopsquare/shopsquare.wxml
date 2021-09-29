@@ -3,8 +3,6 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 <view class="punchTheClock">	
 
-
-		<!-- bindtap='jumpbanner' -->
 		<view class="ptcswipter" wx:if='{{movies&&movies.length!=0}}'>
 				<swiper style="width:100%;height:400rpx;" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
 					<swiper-item wx:for="{{movies}}" wx:key="key">

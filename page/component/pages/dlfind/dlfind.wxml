@@ -115,11 +115,11 @@
                 </view>
             </view>
 
-            <view class="multilineellipsisFive" style="margin:20rpx;font-size:26rpx;" wx:if='{{item.title && item.type!=1 && item.type!=2 && item.type!=5}}' catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}'><text>{{item.title}}</text></view>
+            <view class="multilineellipsisFive" style="margin:20rpx;font-size:26rpx;" wx:if='{{item.title && item.type!=1 && item.type!=2 && item.type!=5}}' catchtap="jumpoffering" data-id="{{item.id}}" data-selltype='{{item.sellType}}'  data-istype='{{item.type}}'><text>{{item.title}}</text></view>
 
-            <view class="emlcontent" catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}'>
+            <view class="emlcontent" catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}' data-selltype='{{item.sellType}}'>
                 <!-- 动态固定大小 -->
-                <block wx:if='{{item.type==3 && item.imgArr.length==1}}'>
+                <block wx:if='{{(item.type==3 || item.type==1) && item.imgArr.length==1}}'>
                     <view class="dynamicBox">
                         <image class="emlcontentimg" style="width:100%;height:100%;" src="{{item.imgArr[0]}}" mode="aspectFill"></image>
                     </view>
@@ -146,7 +146,7 @@
                 <view class="signInNowCl" style="background:#ECCA1E;" wx:if='{{item.type==4}}'>立即签到</view>
             </view>
             
-            <view class="multilineellipsisFive" style="margin:20rpx;font-size:26rpx;" wx:if='{{item.title && (item.type==1 || item.type==2 || item.type==5)}}' catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}'><text>{{item.title}}</text></view>
+            <view class="multilineellipsisFive" style="margin:20rpx;font-size:26rpx;" wx:if='{{item.title && (item.type==1 || item.type==2 || item.type==5)}}' catchtap="jumpoffering" data-id="{{item.id}}" data-selltype='{{item.sellType}}' data-istype='{{item.type}}'><text>{{item.title}}</text></view>
 
 
             <view class="barndStatus" style="font-size:26rpx;" wx:if='{{item.temporary}}'>
@@ -203,8 +203,8 @@
                         <image style="margin:0 15rpx;" class="emlplefimgshare" src="{{item.is_like?'https://www.51chaidan.com/images/brand/red_heart.png':'https://www.51chaidan.com/images/brand/black_heart.png'}}"    data-type='{{item.type}}' data-ind='{{index}}' catchtap='followfun' data-id='{{item.id}}'></image>
                         
                         
-                        <text class="emlplefttxt" catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}' style="float:right;" wx:if='{{item.commentNumber}}' >{{item.commentNumber?item.commentNumber:'0'}}</text>
-                        <image class="emlplefimgshare" catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}' src="https://cdn.51chaidan.com/images/brandSettledIcon/comment.png"></image>
+                        <text class="emlplefttxt" catchtap="jumpoffering" data-id="{{item.id}}" data-selltype='{{item.sellType}}' data-istype='{{item.type}}' style="float:right;" wx:if='{{item.commentNumber}}' >{{item.commentNumber?item.commentNumber:'0'}}</text>
+                        <image class="emlplefimgshare" catchtap="jumpoffering" data-selltype='{{item.sellType}}' data-id="{{item.id}}" data-istype='{{item.type}}' src="https://cdn.51chaidan.com/images/brandSettledIcon/comment.png"></image>
 
 
                       </view>
@@ -214,11 +214,10 @@
 
         </view> 
         <!--  暂无数据  -->
-        <view class='goodstobereceived' wx:if='{{communityList.length==0&&nodataiftr}}'>
-          <view class='nodata' style='height:700rpx;width:100%;position:relative;'>
-            <image src='../../../../pages/images/nodata.png' class='nodataimg' style='width:280rpx;height:300rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;'></image>
-          </view>
+        <view class='noDataCom' wx:if='{{communityList.length==0&&nodataiftr}}'>
+            <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
         </view>        
+        
         <view style="width:100%;height:110rpx;"></view>
 
     </block>
@@ -230,7 +229,7 @@
         <view class='dlfevecom' style='float:left;'>
           <view class='dlfeveleft' wx:for='{{communityList}}' wx:key='key' wx:if='{{index%2==0}}'>
             <view style='position:relative;margin-bottom:10rpx;'>
-                <view style='width:360rpx;margin:auto;position:relative;max-height:340rpx;overflow: hidden;'  catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}'>
+                <view style='width:360rpx;margin:auto;position:relative;max-height:340rpx;overflow: hidden;'  catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}' data-selltype='{{item.sellType}}'>
                   <!-- <view class='dlfchrbright' wx:if='{{item.type==3}}'>动态</view>
                   <view class='dlfchrbright' wx:elif='{{item.type==1}}' style="background:#F5B1AE;">秒杀</view>
                   <view class='dlfchrbright' wx:elif='{{item.type==2}}' style="background:#9BE2F8;">抽选</view>
@@ -325,7 +324,7 @@
             </block>
 
 
-            <view class="boxAtlas" wx:if='{{item.illustratedInfo}}' catchtap="jumpoffering" data-id="{{item.illustratedInfo.id}}" data-type='9035'>
+            <view class="boxAtlas" wx:if='{{item.illustratedInfo}}' catchtap="jumpoffering" data-id="{{item.illustratedInfo.id}}" data-type='9035' data-selltype='{{item.sellType}}'>
                 <!-- <view class="boxAtlasLeft">图鉴</view> -->
                 <image class="boxAtlasLeftNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/illustrated.jpg"  mode="aspectFit"></image>
                 <view class="boxAtlasName specialellipsis">{{item.illustratedInfo.title}}</view>
@@ -352,7 +351,7 @@
         <view class='dlfevecom' style='float:right;'>
           <view class='dlfeveright' wx:for='{{communityList}}' wx:key='key' wx:if='{{index%2==1}}'>
             <view style='position:relative;margin-bottom:10rpx;'>
-                <view style='width:360rpx;margin:auto;position:relative;max-height:340rpx;overflow: hidden;'  catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}'>
+                <view style='width:360rpx;margin:auto;position:relative;max-height:340rpx;overflow: hidden;'  catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}' data-selltype='{{item.sellType}}'>
                   <!-- <view class='dlfchrbright' wx:if='{{item.type==3}}'>动态</view>
                   <view class='dlfchrbright' wx:elif='{{item.type==1}}' style="background:#F5B1AE;">秒杀</view>
                   <view class='dlfchrbright' wx:elif='{{item.type==2}}' style="background:#9BE2F8;">抽选</view>
@@ -446,7 +445,7 @@
             </block>
 
 
-            <view class="boxAtlas" wx:if='{{item.illustratedInfo}}' catchtap="jumpoffering" data-id="{{item.illustratedInfo.id}}" data-type='9035'>
+            <view class="boxAtlas" wx:if='{{item.illustratedInfo}}' catchtap="jumpoffering" data-id="{{item.illustratedInfo.id}}" data-type='9035' data-selltype='{{item.sellType}}'>
                 <!-- <view class="boxAtlasLeft">图鉴</view> -->
                 <image class="boxAtlasLeftNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/illustrated.jpg"  mode="aspectFit"></image>
                 <view class="boxAtlasName specialellipsis">{{item.illustratedInfo.title}}</view>
@@ -471,11 +470,11 @@
       </view>
       <view style='width:100%;text-align:center;line-height:60rpx;color:#666;font-size:30rpx;padding-bottom:{{isIphoneX?"230rpx":"210rpx"}};' wx:if='{{communityList.length>=1}}'>{{loadprompt}}</view>
       <!--  暂无数据  -->
-      <view class='goodstobereceived' wx:if='{{communityList.length==0&&nodataiftr}}'>
-        <view class='nodata' style='height:900rpx;width:100%;position:relative;'>
-          <image src='../../../../pages/images/nodata.png' class='nodataimg' style='width:280rpx;height:300rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;'></image>
-        </view>
+      <view class='noDataCom' wx:if='{{communityList.length==0&&nodataiftr}}'>
+          <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
       </view>
+
+
    </block>   
 
 </view>

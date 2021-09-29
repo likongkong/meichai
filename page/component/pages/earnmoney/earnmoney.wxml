@@ -45,11 +45,12 @@
             </view>
         </view>
         <!--  暂无数据  -->
-        <view wx:if='{{listdata.length==0&&nodataiftr}}'>
-          <view style='height:900rpx;width:100%;position:relative;'>
-            <image src='../../../../pages/images/nodata.png' style='width:280rpx;height:300rpx;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;'></image>
-          </view>
+        <view class='noDataCom' wx:if='{{listdata.length==0&&nodataiftr}}'>
+          <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
         </view>
+
+
+
     </view>
 
 </view>

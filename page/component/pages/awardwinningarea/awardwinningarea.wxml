@@ -69,10 +69,12 @@
       </view>
     </view>
   </view>
-  <!--  -->
-  <view class='nodata' wx:if='{{listdata.length==0&&nodataiftr}}' style='height: 600rpx;width: 100%;position: relative;'>
-    <image src='../../../../pages/images/nodata.png' class='nodataimg' style='width: 280rpx;height: 300rpx;position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;'></image>
+
+
+  <view class='noDataCom' wx:if='{{listdata.length==0&&nodataiftr}}'>
+      <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
   </view>
+
   <view style='width:100%;text-align:center;line-height:60rpx;color:#666;font-size:30rpx;' wx:if='{{listdata.length>=10}}'>{{loadprompt}}</view>
 
 </view>
@@ -364,9 +366,12 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
         </view>
       </view>
     </view>
-    <view class='recgadnodata' wx:if='{{addressdata.length==0}}'>
-      <image src='../../../../pages/images/recaddnodata.png' class='recgadnodataimg'></image>
-    </view>
+
+      <view class='noDataCom' wx:if='{{addressdata.length==0}}'>
+          <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
+      </view>
+
+
   </view>
   <view class='recgadbot' bindtap='jumpaddress'>
     增加新地址
@@ -505,10 +510,8 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
         <view class='boxconcon'>{{item.desc}}</view>
       </view>
     </view>
-    <!--  没数据图片  -->
-    <view class='recgadnodata' wx:if='{{coudata.length==0}}'>
-      <image src='../../../../pages/images/nocoupon.png' class='recgadnodataimg'></image>
-    </view>
+
+
   </view>
   <view class='couponprorecgadbot' catchtap='querencouponprojectilefun'>
     确认

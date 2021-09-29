@@ -135,10 +135,6 @@
         </view>
      </block>
     </block>
-    <view class="noData" wx:if="{{noData}}">
-      <image src="https://cdn.51chaidan.com/images/brandSettledIcon/deal.png" mode="widthFix"></image>
-      暂无交易记录
-    </view>
   </view> -->
 </view>
 

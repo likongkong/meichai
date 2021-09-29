@@ -19,8 +19,7 @@
 <view class='box'>
     <!-- 没有找到商品 -->
     <!-- wx:if='{{iftrimg}}' -->
-    <view class='nodata' wx:if='{{iftrimg}}'>
-            <!-- <image src='../../../../pages/images/suosounodata.png' class='suosuoimgno'></image> -->
+    <view class='noDataCom' wx:if='{{iftrimg}}'>
             <text class='nodatasuous'>抱歉，没有找到{{inputdata}}，为您推荐其他热门商品</text>
     </view> 
 

@@ -165,12 +165,9 @@
   </view>
 
   <!--  暂无数据  -->
-  <view class='goodstobereceived' wx:if='{{zunmdata.length==0&&nodataiftr&&raplist.length==0}}'>
-    <view class='nodata'>
-      <image src='../images/nodata.png' class='nodataimg'></image>
-    </view>
+  <view class='noDataCom' wx:if='{{zunmdata.length==0&&nodataiftr&&raplist.length==0}}'>
+      <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
   </view>
-
   <view class='shopRecommend' wx:if='{{recommand.length!=0}}'>为您推荐</view>
   <!--  拆盒装数据  -->
   <view class='dismtbcon' wx:if='{{recommand.length!=0}}'>
@@ -318,9 +315,10 @@
         </view>
       </view>
     </view>
-    <view class='recgadnodata' wx:if='{{addressdata.length==0}}'>
-      <image src='../images/recaddnodata.png' class='recgadnodataimg'></image>
-    </view>
+      <view class='noDataCom' wx:if='{{addressdata.length==0}}'>
+          <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
+      </view>
+
   </view>
   <view class='recgadbot' bindtap='jumpaddress'>
     增加新地址
@@ -458,10 +456,7 @@
         <view class='boxconcon'>{{item.desc}}</view>
       </view>
     </view>
-    <!--  没数据图片  -->
-    <view class='recgadnodata' wx:if='{{coudata.length==0}}'>
-      <image src='../images/nocoupon.png' class='recgadnodataimg'></image>
-    </view>
+
   </view>
   <view class='couponprorecgadbot' catchtap='querencouponprojectilefun'>
     确认

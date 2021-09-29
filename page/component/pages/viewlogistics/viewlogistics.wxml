@@ -2,11 +2,9 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
-    <view class='goodstobereceived' wx:if='{{!gcoveriftr}}'>
-         <view class='nodata'>
-              <image src='../../../../pages/images/nodata.png' class='nodataimg'></image>
-         </view>    
-    </view>
+      <view class='noDataCom' wx:if='{{!gcoveriftr}}'>
+          <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
+      </view>
 
 <view class='headdh' wx:if='{{gcoveriftr}}'>
     <view class='headdhleft'>

@@ -217,22 +217,6 @@
   width: 100%;
   margin-top: 14rpx;
 }
-
-.nodata{
-   height: 900rpx;
-   width: 100%;
-   position: relative;
-}
-.nodataimg{
-  width: 280rpx;
-  height: 300rpx;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto; 
-}
 .daifukuan{
   height: 30rpx;
   width: 94%;

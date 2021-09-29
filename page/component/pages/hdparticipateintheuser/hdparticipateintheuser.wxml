@@ -19,9 +19,11 @@
             <image src='../../../../pages/images/winthecanjp.png' wx:if='{{item.level==99}}' class='exetrophy' data-nick='{{item.nick}}' data-index="{{index}}" catchtap='adsclicksefun'></image>
          </view>
      </view>
-      <view class='nodata' wx:if='{{commoddata.length==0&&iftrnodata}}'>
-          <image src='../../../../pages/images/nodata.png' class='nodataimg'></image>
-      </view> 
+      <view class='noDataCom' wx:if='{{commoddata.length==0&&iftrnodata}}'>
+          <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
+      </view>
+
+
 <loading hidden="{{bothidden}}">
     加载中...
 </loading>     
