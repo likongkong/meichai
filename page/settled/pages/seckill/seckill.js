@@ -249,8 +249,35 @@ Page({
     // 刮刮卡入口
     isScrapingCard:false,
     mpmBulletFrame:false,  
-    guidanceMask:false
+    guidanceMask:false,
 
+    proTipTrue:false,
+    commodityAgreement:false
+
+  },
+  commdargee(){
+      this.setData({
+          commodityAgreement:!this.data.commodityAgreement
+      })
+  },
+  closeCommonTip(){
+    this.setData({
+      proTipTrue:!this.data.proTipTrue,
+      commodityAgreement:false
+    })
+  },
+  continueToBuy(){
+    var _this = this;
+    if(this.data.commodityAgreement){
+      if(this.data.zunmdata.orderSn){
+        this.data.cart_id = this.data.zunmdata.orderSn || '';
+        console.log('支付尾款=====',_this.data.cart_id)
+        this.paymentmony();
+      }else{
+        this.placeorder();
+        this.closeCommonTip();
+      };
+    };
   },
   toogleGuidanceMask(){
     this.setData({
@@ -998,6 +1025,11 @@ Page({
     //   }
 
     // }else 
+
+    if(zunmdata.isNeedConfirm){
+      this.closeCommonTip();
+      return false;
+    };
 
     if(!_this.data.isShareGood && _this.data.desc==''){
       app.showToastC('请填写品牌信息及联系方式');

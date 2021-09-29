@@ -131,12 +131,12 @@
                       </view>
                   </view>
               </view>
-                <!--  暂无数据  -->
-              <view wx:if='{{nodataiftr&&listdata.length==0}}' style='height:300rpx;width: 100%;position: relative;padding-top:150rpx;'>
-                  <image src='../images/default_BG_Image@3x.png' style='width: 280rpx;height: 165rpx;margin:0 auto;display: block;'></image>
-                  <view style='width:100%;height:60rpx;text-align: center;line-height: 60rpx;color: #8c8c8c;font-size: 30rpx;'>这里什么都没有</view>
-                  <view style='width:100%;height:40rpx;text-align: center;line-height: 40rpx;color: #a0a0a0;font-size: 24rpx;'>快去看看别哒</view>
-              </view>                    
+                <!--  暂无数据  --> 
+            <view class='noDataCom' wx:if='{{nodataiftr&&listdata.length==0}}'>
+                <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
+            </view>              
+              
+
          </view>   
     </view>
 

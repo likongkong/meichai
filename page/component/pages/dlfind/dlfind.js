@@ -1045,7 +1045,12 @@ Page({
     var type = w.currentTarget.dataset.type || w.target.dataset.type || 0;
     var istype = w.currentTarget.dataset.istype || w.target.dataset.istype || 0;
     if(istype == 1){ // 秒杀
-      // type = 9047;
+      // var selltype = w.currentTarget.dataset.selltype || w.target.dataset.selltype || 0;
+      // if(selltype == 1){
+      //     type = 9047;
+      // }else{
+      //     type = 1;
+      // };
       type = 1;
     }else if(istype == 2){ // 抽选
       type = 9003;

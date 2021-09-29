@@ -165,12 +165,9 @@
   </view>
 
   <!--  暂无数据  -->
-  <view class='goodstobereceived' wx:if='{{zunmdata.length==0&&nodataiftr&&raplist.length==0}}'>
-    <view class='nodata'>
-      <image src='../images/nodata.png' class='nodataimg'></image>
-    </view>
+  <view class='noDataCom' wx:if='{{zunmdata.length==0&&nodataiftr&&raplist.length==0}}'>
+      <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
   </view>
-
   <view class='shopRecommend' wx:if='{{recommand.length!=0}}'>为您推荐</view>
   <!--  拆盒装数据  -->
   <view class='dismtbcon' wx:if='{{recommand.length!=0}}'>
@@ -233,7 +230,7 @@
           <image wx:if="{{isUseBlindboxMoney}}" style="width:40rpx;height:auto" src="https://www.51chaidan.com/images/sign/order/xuanzhong.png" mode="widthFix"></image>
           <image wx:else style="width:40rpx;height:auto" src="https://www.51chaidan.com/images/sign/order/weixuanzhong.png" mode="widthFix"></image>
         </block>
-        <!-- <view class='blindboxMoneyright' style="{{!isUseBlindboxMoney?'color: #999; border:1rpx solid #999;':''}}" catchtap="useBlindboxMoneyFun">使用</view> -->
+
     </view>
 
     <view class='bbshccombot'>
@@ -318,9 +315,10 @@
         </view>
       </view>
     </view>
-    <view class='recgadnodata' wx:if='{{addressdata.length==0}}'>
-      <image src='../images/recaddnodata.png' class='recgadnodataimg'></image>
-    </view>
+      <view class='noDataCom' wx:if='{{addressdata.length==0}}'>
+          <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
+      </view>
+
   </view>
   <view class='recgadbot' bindtap='jumpaddress'>
     增加新地址
@@ -458,10 +456,7 @@
         <view class='boxconcon'>{{item.desc}}</view>
       </view>
     </view>
-    <!--  没数据图片  -->
-    <view class='recgadnodata' wx:if='{{coudata.length==0}}'>
-      <image src='../images/nocoupon.png' class='recgadnodataimg'></image>
-    </view>
+
   </view>
   <view class='couponprorecgadbot' catchtap='querencouponprojectilefun'>
     确认
@@ -486,7 +481,6 @@
 
 
 <view class='fiaxbottom' style='{{isIphoneX?"bottom:130rpx;":"bottom:110rpx;"}}'>
-  <!-- 购物车提示 catchtap='frontpagebutton' -->
   <view class='shoppingcartprompt' catchtap='iftrBotShopList' wx:if='{{!spreadEntry && shopcptxt!=""&&dsbbmoncom&&shopcptxt!="已满足包邮条件，快去结算吧。"}}' data-href='{{rdjump.href}}' data-item_type='{{rdjump.item_type}}' data-name='{{rdjump.name}}'>{{shopcptxt}}</view>
   <view class='shoppingcartprompt' wx:if='{{!spreadEntry && shopcptxt!=""&&dsbbmoncom&&shopcptxt=="已满足包邮条件，快去结算吧。"}}'>{{shopcptxt}}</view>
 

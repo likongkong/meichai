@@ -1627,9 +1627,11 @@
                 </view>
             </view>
         </view>
-        <view class='recgadnodata' wx:if='{{addressdata.length==0}}'>
-            <image src='../../../../pages/images/recaddnodata.png' class='recgadnodataimg'></image>
-        </view>
+
+      <view class='noDataCom' wx:if='{{addressdata.length==0}}'>
+          <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
+      </view>
+
     </view>
     <view class='recgadbot' bindtap='jumpaddress'>
         增加新地址
@@ -1748,4 +1750,18 @@
             <view style='width:50%;text-align:center;height:50rpx;float:left;font-size:30rpx;position:relative;' catchtap='vipOrOrdercancel'>不核验</view>
         </view>
     </view>
+</view>
+
+<!-- 交易须知  -->
+<view class="wshNew" catchtouchmove="true" wx:if='{{proTipTrue}}' catchtap="closeCommonTip">
+   <view class="probabilityTip" catchtap="true">
+       <view class="proBaTop">交易须知</view>
+       <view class="proBaTopCenter">
+         <text>{{comdata.confirmTip}}</text>
+       </view>
+       <view class="proBaTopCBottom" catchtap="commdargee">
+            <view class="proBaTopCBotImg"><image class='proBalImgRad' src='{{commodityAgreement?"../../../../pages/images/statemyorder1.png":"../../../../pages/images/normal_click.png"}}'></image>同意<text style="color:#5CA7FE;">《交易须知》</text>继续购买</view>
+       </view>
+       <view class="proTipButton" style="{{commodityAgreement?'':'background:#909090;'}}" catchtap="{{commodityAgreement?'continueToBuy':''}}">继续购买</view>
+   </view>
 </view>

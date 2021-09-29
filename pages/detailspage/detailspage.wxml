@@ -486,7 +486,6 @@
           </view>
         </view>
         <view class='morecomments' wx:if='{{allcomlist.length!=0}}' bindtap='jumpallcomments'>查看全部评论</view>
-        <image class='qiangsf' wx:if='{{allcomlist.length==0}}' src='../images/qiangsf.png' bindtap='jumpallcomments'></image>
       </view>
   </block>
   <block wx:if='{{is_exhibition==1||(is_exhibition!=1&&brandId>0)}}'>
@@ -1460,9 +1459,10 @@
         </view>
       </view>
     </view>
-    <view class='recgadnodata' wx:if='{{addressdata.length==0}}'>
-      <image src='../images/recaddnodata.png' class='recgadnodataimg'></image>
-    </view>
+      <view class='noDataCom' wx:if='{{addressdata.length==0}}'>
+          <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
+      </view>
+
   </view>
   <view class='recgadbot' bindtap='jumpaddress'>
     增加新地址
@@ -1732,4 +1732,18 @@
 		</view>
 		<image class="guanbi" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="widthFix" catchtap="toogleGuidanceMask"></image>
 	</view>
+</view>
+
+<!-- 交易须知  -->
+<view class="wshNew" catchtouchmove="true" wx:if='{{proTipTrue}}' catchtap="closeCommonTip">
+   <view class="probabilityTip" catchtap="true">
+       <view class="proBaTop">交易须知</view>
+       <view class="proBaTopCenter">
+         <text>{{zunmdata.confirmTip}}</text>
+       </view>
+       <view class="proBaTopCBottom" catchtap="commdargee">
+            <view class="proBaTopCBotImg"><image class='proBalImgRad' src='{{commodityAgreement?"../images/statemyorder1.png":"../images/normal_click.png"}}'></image>同意<text style="color:#5CA7FE;">《交易须知》</text>继续购买</view>
+       </view>
+       <view class="proTipButton" style="{{commodityAgreement?'':'background:#909090;'}}" catchtap="{{commodityAgreement?'continueToBuy':''}}">继续购买</view>
+   </view>
 </view>

@@ -32,8 +32,6 @@ Page({
     page:0,
     // 购物车显示数据
     shopnum:0,
-    // 授权弹框
-    tgabox:false,
     // 赠送优惠券数据
     newcoupondata: [],
     // 节日主题
@@ -112,12 +110,6 @@ Page({
       url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
     });
   },
-  // 临时展会授权
-  togation:function(e){
-    this.setData({
-      tgabox:true
-    })
-  },  
   doubleEleven: function () {
     wx.navigateTo({
       url: "/page/component/pages/doubleEleven/doubleEleven"
@@ -1009,7 +1001,6 @@ Page({
               uid: app.signindata.uid,
               isProduce: app.signindata.isProduce,
               defaultinformation: app.signindata.defaultinformation||'',
-              tgabox: false
             });
             // 判断是否登录
             if (_this.data.loginid != '' && _this.data.uid != '') {
@@ -1024,10 +1015,6 @@ Page({
       });
     }
 
-  },
-  // 授权点击统计
-  clicktga: function () {
-    app.clicktga(2)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -1157,44 +1144,6 @@ Page({
       url: "/pages/wode/wode",
       complete: function () {_this.setData({ jumpdevanningiftr: false });}
     });
-  },
-  clicktganone:function(){
-     this.setData({tgabox:false})
-  },
-  // 点击登录获取权限
-  userInfoHandler: function (e) {
-    // 判断是否授权 
-    var _this = this;
-    wx.getSetting({
-      success: res => {
-        console.log(res)
-        if (true) {
-          // 确认授权用户统计
-          app.clicktga(4);     
-          // '已经授权'
-          _this.data.loginid = app.signindata.loginid;
-          _this.data.openid = app.signindata.openid;
-          _this.setData({
-            uid: app.signindata.uid,
-            tgabox: false
-          });
-          // 判断是否登录
-          if (_this.data.loginid != '' && _this.data.uid != '') {
-            _this.onLoadfun();
-          } else {
-            app.signin(_this);
-          };          
-        } else {
-          _this.setData({
-            tgabox: true
-          });
-        }
-      }
-    });  
-    if (e.detail.detail.userInfo) {} else {
-      app.clicktga(8)  //用户按了拒绝按钮
-    };
-
   },
   // 图片自适应
   imageLoad: function (e) {

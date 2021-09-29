@@ -79,6 +79,27 @@ Page({
     electronicTicket:true,
     vipOrOrderTip:false,
     myOrderNowTime: Date.parse(new Date()) / 1000,
+    proTipTrue:false,
+    commodityAgreement:false
+
+  },
+  commdargee(){
+      this.setData({
+          commodityAgreement:!this.data.commodityAgreement
+      })
+  },
+  closeCommonTip(){
+    this.setData({
+      proTipTrue:!this.data.proTipTrue,
+      commodityAgreement:false
+    })
+  },
+  continueToBuy(){
+    var _this = this;
+    if(this.data.commodityAgreement){
+        // 直接支付
+        this.paymentmony();
+    };
   },
   // 复制单号
   copyCart(w){
@@ -979,12 +1000,16 @@ vipOrOrdermine1(){
           });
         };        
       }else{
-        // 提交订单蒙层
-        this.setData({
-          suboformola: true
-        });    
-        // 直接支付
-        this.paymentmony();
+        if(comdata.isNeedConfirm){
+          this.closeCommonTip();
+        }else{
+          // 提交订单蒙层
+          this.setData({
+            suboformola: true
+          });    
+          // 直接支付
+          this.paymentmony();
+        };
       };
 
     };

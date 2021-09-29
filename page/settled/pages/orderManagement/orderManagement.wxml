@@ -22,10 +22,9 @@
         <template is="orderCommon" data="{{...item,num:index}}"></template>
     </view>
     <!--  暂无数据  -->
-    <view class='nodata' wx:if='{{order.length==0&&nodataiftr}}' style='height: 600rpx;width: 100%;position: relative;'>
-        <image src='../../../../pages/images/nodata.png' class='nodataimg' style='width: 280rpx;height: 300rpx;position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;'></image>
+    <view class='noDataCom' wx:if='{{order.length==0&&nodataiftr}}'>
+          <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
     </view>
-
     <view class="orderBottomNavigation">
         <view class="orderBottomNavEve" catchtap="commonBulletFrameFun" data-index='4'>批量导出订单</view>
         <view class="orderBottomNavEve" style="margin-left:50rpx;" catchtap="commonBulletFrameFun" data-index='5'>批量导入运单</view>

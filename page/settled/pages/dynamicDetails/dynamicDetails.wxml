@@ -128,8 +128,8 @@
 
     
 
-    <view class="editButComment" catchtap="inputboxfun" style="background:#f4f5f9;height:80rpx;">
-        <view class="editButComLeft">
+    <view class="editButComment" catchtap="inputboxfun" style="background:#fff;height:80rpx;">
+        <view class="editButComLeft" style="background:#f4f5f9;">
             <image class="editButComLeL" style="left: 15rpx;" mode="aspectFit" src='https://cdn.51chaidan.com/images/brandInfoIcon/setCommentIcon.png'></image>
             {{textconcent?textconcent:placeholderTxt}}
         </view>

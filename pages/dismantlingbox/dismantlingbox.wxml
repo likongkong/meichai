@@ -500,8 +500,8 @@
           </view>
           <view class='recgadaddress' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='revisethereceivingaddress'>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
         </view>
-        <view class='recgadnodata' wx:if='{{addressdata.length==0}}'>
-          <image src='../images/recaddnodata.png' class='recgadnodataimg'></image>
+        <view class='noDataCom' wx:if='{{addressdata.length==0}}'>
+            <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
         </view>
         <view class='recgadbotadd' bindtap='jumpaddress'>
           增加新地址

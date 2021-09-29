@@ -332,3 +332,21 @@
   text-align: right;
   display: block;
 }
+.homePopUpIng{
+  width:600rpx;height:720rpx;margin:auto;display:block;position: relative;border-radius:20rpx;
+}
+.homeNotice{
+  height:50rpx;line-height:50rpx;font-size:25rpx;background:#000;opacity:0.9;border-radius:10rpx;position:absolute;left:20rpx;top:30rpx;color:#fff;z-index:1;padding:0 20rpx;
+}
+.homeNoticeImg{
+  width:35rpx;height:35rpx;margin:8rpx 10rpx 8rpx 0;display:inline-block;vertical-align:top;position:relative;
+}
+.homeSwBoxImg{
+  width:100%;height:128rpx;margin:0 auto;display:block;position: relative;
+}
+.disantitletitright.homeSeeMore{
+  font-weight:normal;position:relative;color:#31b3fb;
+}
+.homeSeeMoreV{
+  font-size:25rpx;line-height:30rpx;color:#fff;padding:5rpx 10rpx;border-radius:10rpx;background:#f08080;
+}

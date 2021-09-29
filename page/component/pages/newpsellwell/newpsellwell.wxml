@@ -109,15 +109,10 @@
             </view>        
         </block>
 
-
-
       <view style='height:60rpx;width:100%;text-align:center;line-height:60rpx;color:#666;font-size:30rpx;' wx:if='{{commoddata.length>=15}}'>{{loadprompt}}</view>
 
-    
-
-
-      <view class='nodata' wx:if='{{commoddata.length==0&&nodataiftr&&category_id != "G26"}}' style='height: 600rpx;width: 100%;position: relative;'>
-          <image src='../../../../pages/images/nodata.png' class='nodataimg' style='width: 280rpx;height: 300rpx;position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;'></image>
+      <view class='noDataCom' wx:if='{{commoddata.length==0&&nodataiftr&&category_id != "G26"}}'>
+          <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
       </view>
 
   </view>    

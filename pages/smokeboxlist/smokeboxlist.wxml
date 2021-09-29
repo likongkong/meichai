@@ -111,9 +111,7 @@
 							</scroll-view>
 						</view>
 				</view>
-				<!-- <view style='width:100%;padding-top:200rpx;' wx:if='{{brandlist.length==0&&iftrnodatabr&&brand}}'>
-						<image src='../../../../pages/images/default_BG_Image@3x.png' style='width:414rpx;height:255rpx;display:block;margin:0 auto;'></image>
-				</view> -->
+
 	<view style='width:730rpx;margin:10rpx;overflow:hidden;padding-bottom:70rpx;'>
 		<view wx:if='{{false}}' style='width:44%;margin:10rpx 3%;float:left;' wx:for='{{list}}' wx:key='key'>
 			<view class='vm_list' style='font-size:25rpx;text-align:center;' data-status="{{item.status}}" catchtap='jumpdetail' data-id='{{item.id}}' data-gid="{{item.goods_id}}">
@@ -190,8 +188,9 @@
 
 		</block>
     
-		<image wx:if='{{is_havedata&&list.length==0}}' style="width:400rpx;height:400rpx;margin:20rpx auto;display:block;" mode="aspectFit" src='../images/default_BG_Image@3x.png' ></image>
-
+      <view class='noDataCom' wx:if='{{is_havedata&&list.length==0}}'>
+          <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
+      </view>
 
 	</view>
 	<view style='width:100%;{{isIphoneX?"height:170rpx;":"height:150rpx;"}}'></view>

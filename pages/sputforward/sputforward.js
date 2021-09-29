@@ -190,33 +190,10 @@ Page({
           }
         } else {
 
-          wx.getUserInfo({
-            success: res => {
-              // 判断是否登录
-              if (_this.data.loginid != '' && _this.data.uid != '') {
-                _this.onLoadfun();
-              } else {
-                app.signin(_this);
-              }
-            },
-            fail: res => {
-              wx.navigateTo({
-                url: "/pages/signin/signin"
-              })
-            }
-          });
-
-
-
-
         }
       }
     });
   },
-
-
-
-
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
@@ -418,19 +395,7 @@ Page({
           }
         }
       });
-
-
-
-
-    } else { 
-
-
-
-
-
-
-    };
-
+    } else { };
   },
 
   // tab 切换
@@ -542,8 +507,6 @@ Page({
       is_cbb: false
     });       
   }  
-
-
 
 
 })

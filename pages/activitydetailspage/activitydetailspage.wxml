@@ -937,9 +937,10 @@
         </view>
       </view>
     </view>
-    <view class='recgadnodata' wx:if='{{addressdata.length==0}}'>
-      <image src='../images/recaddnodata.png' class='recgadnodataimg'></image>
-    </view>
+      <view class='noDataCom' wx:if='{{addressdata.length==0}}'>
+          <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
+      </view>
+
   </view>
   <view class='recgadbot' bindtap='jumpaddress'>
     增加新地址
@@ -1054,10 +1055,7 @@
         <view class='boxconcon'>{{item.desc}}</view>
       </view>
     </view>
-    <!--  没数据图片  -->
-    <view class='recgadnodata' wx:if='{{coudata.length==0}}'>
-      <image src='../images/nocoupon.png' class='recgadnodataimg'></image>
-    </view>
+
   </view>
   <view class='couponprorecgadbot' catchtap='querencouponprojectilefun'>
     确认

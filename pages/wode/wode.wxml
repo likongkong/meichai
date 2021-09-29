@@ -143,7 +143,6 @@
                     <view class="assetWrap">
                         <view>
                             <view class="assetL" data-type="9030" catchtap="comjumpwxnav">
-                            <!-- <view class="assetL" catchtap="jinqingqidai"> -->
                                 <view>
                                     <text>￥{{withdrawInfo.available_cash_amount}}</text>
                                     <text>可提现金额</text>
@@ -158,7 +157,6 @@
                                 </view>
                             </view>
                             <view class="assetR" data-type="9030" catchtap="comjumpwxnav">
-                            <!-- <view class="assetR" catchtap="jinqingqidai"> -->
                                 <view>
                                     <image src='https://cdn.51chaidan.com/images/brandSettledIcon/orderIcon/wallet.png' mode="widthFix"></image>
                                     <text>钱包</text>
@@ -174,7 +172,6 @@
                                 <text>订单管理</text>
                             </view>
                         </view>
-                        <!-- <view class="brandManageItem" catchtap="jinqingqidai"> -->
                         <view class="brandManageItem" data-type="9041" catchtap="comjumpwxnav">
                             <view>
                                 <image src='https://cdn.51chaidan.com/images/brandSettledIcon/orderIcon/goods.png' mode="widthFix"></image>
@@ -254,21 +251,8 @@
                     使用
                     <image class='whwddimgtit' src='../images/icon_in.png'></image>
                 </view>  
-                <!-- <view class='apforlleft comapforlr specialellipsis'>{{putforwardmoney}}元</view>
-                <view class='apforlright comapforlr'>提现</view> -->
            </view>
         </view>
-        <!-- <view class='addputforward'>
-           <view class='apforWrap' bindtap='mywallet' style='position:relative;'>
-                 <view class='apforrleft comapforlr specialellipsis' style="width:330rpx;">
-                    <text style="color: #333;"> 拆币 </text><image src='../images/cgoldcoin1.png' class='cgoldcoinonexin'></image>X{{point}}                     
-                 </view>
-                 <view class='whbocndr' style='height:80rpx;line-height:80rpx;color:#ff3c4d;padding:0 30rpx 0 70rpx;font-size:28rpx;'>
-                    签到
-                    <image class='whwddimgtit' src='../images/icon_in.png'></image>
-                </view> 
-           </view>
-        </view> -->
     </view> 
       
     <view class='whwdddw' bindtap='coupon'>
@@ -352,7 +336,6 @@
 <bnavigation bind:runex='togation' wmy='{{true}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' 
 dryinglistnum='{{dryinglistnum}}'></bnavigation>
 
-
 <!-- 微信号复制  -->
 <view class='editorrecom' style='z-index:9999999;' wx:if='{{copyiftr}}'>
     <view class='ngbackground' catchtap='copyfitrfun'></view>
@@ -365,11 +348,3 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
     </view>
 </view>
 
-
-
-<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
-
-
-
-
-<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>

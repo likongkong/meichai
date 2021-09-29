@@ -353,20 +353,6 @@ page{
 .orderItemR view text{
   font-size: 28rpx;
 }
-.noData{
-  font-size: 28rpx;
-  display: block;
-  text-align: center;
-  height: 400rpx;
-  color: #101010;
-  margin-top: 180rpx;
-}
-.noData image{
-  width: 96rpx;
-  height: auto;
-  display: block;
-  margin:0 auto 20rpx;
-}
 
 .popContentItem{
   padding: 26rpx 0 0 0;

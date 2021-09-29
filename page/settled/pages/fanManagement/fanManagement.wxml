@@ -45,9 +45,10 @@
 
 
     <!--  暂无数据  -->
-    <view class='nodata' wx:if='{{salesEffectList.length==0&&nodataiftr}}' style='height: 600rpx;width: 100%;position: relative;'>
-        <image src='../../../../pages/images/recaddnodata.png' class='nodataimg' style='width: 280rpx;height: auto;position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;' mode="widthFix"></image>
+    <view class='noDataCom' wx:if='{{salesEffectList.length==0&&nodataiftr}}'>
+          <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
     </view>
+
 
 </view>
 
