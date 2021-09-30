@@ -3299,19 +3299,12 @@ Page({
             redauin.datatimew = _this.toDatehd(redauin.datatimew);
             _this.winningtheprizetimedetail(redauin.startTime);
           };
-          if (redauin.status == 2) {
+          if (redauin.status == 2 && redauin.endTime) {
             var datatimewell = redauin.endTime;
             redauin.datatimew = datatimewell;
             redauin.datatimew = _this.toDatehd(redauin.datatimew);
-            if ((res.data.Ginfo.specialWay && res.data.Ginfo.specialWay==1)){
-              _this.winningtheprizetimedetail(redauin.endTime);
-            }else if(res.data.Ginfo.depositEndTime && Date.parse(new Date())/1000 < res.data.Ginfo.depositEndTime){
-              clearInterval(_this.data.wintheprtintervaldetail);
-              _this.winningtheprizetimedetail(res.data.Ginfo.depositEndTime);
-            }else if(redauin.finalDepositTime){}else if(redauin.goods_type==3){
-              console.log(111111111,redauin.endTime)
-              _this.winningtheprizetimedetail(redauin.endTime);
-            };
+            console.log(111111111,redauin.endTime)
+            _this.winningtheprizetimedetail(redauin.endTime);
           };
           if(res.data.Ginfo.gid == 36875 || res.data.Ginfo.gid == 36876 || res.data.Ginfo.gid == 36877 ||res.data.Ginfo.gid == 37568 || res.data.Ginfo.gid == 37569 || res.data.Ginfo.gid == 37573 ||res.data.Ginfo.gid == 37700){
             clearInterval(_this.data.wintheprtintervaldetail);

@@ -106,7 +106,7 @@
 
   <block>
         <view style="background:#fff;">
-            <view class="sCountDown" wx:if='{{zunmdata.status == 1}}'>距开始 {{winningovertimedetail.dayStr}}天{{winningovertimedetail.hrStr}}小时{{winningovertimedetail.minStr}}分{{winningovertimedetail.secStr}}秒</view>
+            <view class="sCountDown" wx:if='{{zunmdata.status == 1 || zunmdata.status == 2}}'><block wx:if='{{zunmdata.status == 1}}'>距开始 </block><block wx:else>距结束 </block>{{winningovertimedetail.dayStr}}天{{winningovertimedetail.hrStr}}小时{{winningovertimedetail.minStr}}分{{winningovertimedetail.secStr}}秒</view>
             <view class="sCountstock">
                 <text>{{zunmdata.settledGoodsStockNumber}}</text>
                 <text>{{zunmdata.settledGoodsRestrictionNumber}}</text>

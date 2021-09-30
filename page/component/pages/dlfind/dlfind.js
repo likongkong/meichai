@@ -77,7 +77,8 @@ Page({
     payStatus:[
       {name:'推荐',num:'0'},
       {name:'我的关注',num:'1'},
-      {name:'秒杀',num:'2'},
+      {name:'限时',num:'8'},
+      {name:'限量',num:'2'},
       {name:'抽选',num:'3'},
       {name:'动态',num:'4'},
       {name:'抽盒',num:'7'},
@@ -1045,13 +1046,12 @@ Page({
     var type = w.currentTarget.dataset.type || w.target.dataset.type || 0;
     var istype = w.currentTarget.dataset.istype || w.target.dataset.istype || 0;
     if(istype == 1){ // 秒杀
-      // var selltype = w.currentTarget.dataset.selltype || w.target.dataset.selltype || 0;
-      // if(selltype == 1){
-      //     type = 9047;
-      // }else{
-      //     type = 1;
-      // };
-      type = 1;
+      var selltype = w.currentTarget.dataset.selltype || w.target.dataset.selltype || 0;
+      if(selltype == 1){
+          type = 9047;
+      }else{
+          type = 1;
+      };
     }else if(istype == 2){ // 抽选
       type = 9003;
       wx.navigateTo({ // 抽签详情页
