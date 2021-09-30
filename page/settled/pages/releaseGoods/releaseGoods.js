@@ -174,7 +174,7 @@ Page({
         isRequired:false,
         type:'radio',
         subtitle:'售卖方式',
-        radioArr:['正常售卖','限时售卖'],
+        radioArr:['限量售卖','限时售卖'],
         value:0,
         index:0,
         direction:'X',
