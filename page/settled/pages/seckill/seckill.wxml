@@ -115,9 +115,6 @@
             <view class="seckillName">{{zunmdata.gname}}</view>
             <view class="sSaleTime" wx:if='{{zunmdata.status == 1}}'>{{zunmdata.datatimew}}   发售</view>
             <view class="sSalePrice"><text style="font-size:22rpx;">￥</text>{{zunmdata.gprice!=0?zunmdata.gprice:''}}<text style="font-size:22rpx;color:#000;" wx:if='{{zunmdata.integral>0}}'>+{{zunmdata.integral}}积分</text></view>
-            <!-- <view class="briefIntroduction">
-                <text style="color:#999495;">{{zunmdata.settledGoodsDescStr}}</text>
-            </view> -->
         </view>
 
       <!-- 手机壳样式 -->
@@ -232,13 +229,87 @@
         </view>
         <view class="sbottomRight">
             <view class="sbottomRightButton" wx:if='{{zunmdata.isSuplusChance}}' style="background:#FF890B;">还有机会，有订单未支付</view>
-            <view class="sbottomRightButton" wx:elif='{{zunmdata.status == 1}}' style="background:#FF890B;" catchtap="subscrfun">开售订阅</view>
-            <block wx:elif='{{zunmdata.status == 2}}'>
-                <view class="sbottomRightButton" wx:if='{{zunmdata.debuff==0}}' style="background:#F77F7F;" catchtap="dsbffunblock">立即购买</view>
-                <view class="sbottomRightButton" wx:elif='{{zunmdata.debuff==1}}' style="background:#999495;">商品已过期</view>
-                <view class="sbottomRightButton" wx:elif='{{zunmdata.debuff==2}}' style="background:#999495;">商品已售罄</view>
+            <view class="sbottomRightButton" wx:elif='{{zunmdata.status == 1 || zunmdata.status == 0}}' style="background:#FF890B;" catchtap="subscrfun">
+                <block wx:if='{{zunmdata.status==0}}'>补货提醒</block>
+                <block wx:else>开售订阅</block>
+            </view>
+            <!-- 定金 -->
+            <block wx:if='{{zunmdata.goods_type==3}}'>
+                <block wx:if='{{zunmdata.status==2}}'>
+                    <block wx:if='{{zunmdata.isDisplayDeposit}}'>
+                        <block wx:if='{{zunmdata.debuff == 3}}'>
+                            <view class="sbottomRightButton" style="background:#FF890B;" catchtap="subscrfun">补货提醒</view>             
+                        </block>
+                        <block wx:elif="{{zunmdata.depositEndTime}}">
+                          <block wx:if="{{nowTime < zunmdata.depositEndTime}}">
+                              <view class="sbottomRightButton" wx:if='{{zunmdata.debuff==0}}' style="background:#F77F7F;" catchtap="dsbffunblock">支付定金 ￥{{zunmdata.promote_price}}</view>
+                          </block> 
+                          <block wx:else>
+                              <block wx:if='{{specialGoods == 1}}'>
+                                  <view class="sbottomRightButton" style="background:#FF890B;" data-ind='{{specialGoods==1?"1":""}}' catchtap="subscrfun">补货提醒</view>
+                              </block>
+                              <block wx:else>
+                                  <view class="sbottomRightButton" style="background:#FF890B;">{{zunmdata.tipFinalPayment}}</view>
+                              </block>
+                          </block>
+                        </block>
+                        <block wx:else>
+                            <view class="sbottomRightButton" wx:if='{{zunmdata.debuff==0}}' style="background:#F77F7F;" catchtap="dsbffunblock">支付定金 ￥{{zunmdata.promote_price}}</view>
+                        </block>
+
+                    </block>
+                    <block wx:else>
+                        <block wx:if="{{specialGoods == 1 && zunmdata.depositEndTime}}">
+                              <view class="sbottomRightButton" style="background:#FF890B;">{{zunmdata.tipFinalPayment}}</view>
+                        </block>
+                        <block wx:else>
+                            <view class="sbottomRightButton" wx:if='{{zunmdata.debuff==0}}' style="background:#F77F7F;" catchtap="paythebalance">支付尾款</view>
+                        </block>
+                    </block>
+                </block>
+
+                <block wx:elif='{{zunmdata.status==3&&zunmdata.orderSn}}'>
+                    <view class="sbottomRightButton" wx:if='{{zunmdata.debuff==0}}' style="background:#F77F7F;" catchtap="paythebalance">支付尾款</view>    
+                </block>
+                <block wx:else>
+                  <view class="sbottomRightButton" style="background:#999495;">
+                      <block wx:if='{{zunmdata.status==3}}'>已结束</block>
+                      <block wx:elif='{{zunmdata.status==1}}'>{{zunmdata.datatimew}}开售</block>
+                  </view>        
+                </block>
+                <!-- <block wx:elif='{{zunmdata.status == 2}}'>
+                      <block wx:if='{{zunmdata.isDisplayDeposit}}'>
+                          <view class="sbottomRightButton" wx:if='{{zunmdata.debuff==0}}' style="background:#F77F7F;" catchtap="dsbffunblock">支付定金 ￥{{zunmdata.promote_price}}</view>
+                      </block>
+                      <block>
+
+                      </block>
+                      <view class="sbottomRightButton" wx:if='{{zunmdata.debuff==0}}' style="background:#F77F7F;" catchtap="dsbffunblock">立即购买</view>
+                      <view class="sbottomRightButton" wx:elif='{{zunmdata.debuff==1}}' style="background:#999495;">商品已过期</view>
+                      <view class="sbottomRightButton" wx:elif='{{zunmdata.debuff==2}}' style="background:#999495;">商品已售罄</view>
+                </block>
+                <block wx:elif='{{zunmdata.status == 3}}'>
+                      <block wx:if='{{zunmdata.orderSn}}'>
+                          <view class="sbottomRightButton" wx:if='{{zunmdata.debuff==0}}' style="background:#F77F7F;" catchtap="paythebalance">支付尾款 ￥{{zunmdata.orderAmount}}</view>
+                      </block>
+                      <block wx:else>
+                          <view class="sbottomRightButton" wx:elif='{{zunmdata.status == 3}}' style="background:#999495;">已结束</view>
+                      </block>
+                </block> -->
             </block>
-            <view class="sbottomRightButton" wx:elif='{{zunmdata.status == 3}}' style="background:#999495;">已结束</view>
+            <!-- 平常商品 -->
+            <block wx:else>
+                <block wx:if='{{zunmdata.status == 2}}'>
+                      <view class="sbottomRightButton" wx:if='{{zunmdata.debuff==0}}' style="background:#F77F7F;" catchtap="dsbffunblock">立即购买</view>
+                      <view class="sbottomRightButton" wx:elif='{{zunmdata.debuff==1}}' style="background:#999495;">商品已过期</view>
+                      <view class="sbottomRightButton" wx:elif='{{zunmdata.debuff==2}}' style="background:#999495;">商品已售罄</view>
+                </block>
+                <block wx:elif='{{zunmdata.status == 3}}'>
+                      <view class="sbottomRightButton" wx:elif='{{zunmdata.status == 3}}' style="background:#999495;">已结束</view>
+                </block>
+            </block>
+
+            
         </view>
     </view>
 </view>
