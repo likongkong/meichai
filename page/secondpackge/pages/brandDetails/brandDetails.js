@@ -472,18 +472,18 @@ Page({
         communityList: [],
         nodataiftr: false
       });
+      wx.showLoading({
+        title: '加载中...',
+        mask:true
+      })
+
     } else {
       var pagenum = parseInt(_this.data.page)
       _this.data.page = ++pagenum;
       _this.setData({
         loadprompt: '加载更多.....',
-        nodataiftr: false,
       });
     };
-    wx.showLoading({
-      title: '加载中...',
-      mask:true
-    })
 
     var qqq = Dec.Aese('mod=community&operation=info&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&showType='+_this.data.centerIndex+'&pid='+ _this.data.page + '&brand_id='+_this.data.brandId);
 
