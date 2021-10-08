@@ -66,6 +66,7 @@ Page({
     isNotBalanceMask:false,  //余额不足弹框
     twoAffirm:false,   //二次确认提现弹框
     twoAffirm1:false,   //二次确认提现弹框---超额
+    realname:'', //真实姓名
   },
   /**
    * 生命周期函数--监听页面加载
@@ -282,7 +283,17 @@ Page({
   },
   // 提现
   executionApplicationWithdrawal(){
-    api.executionApplicationWithdrawal().then((res) => {
+    let that = this;
+    if(!that.data.realname || that.data.realname == ''){
+      app.showToastC('请输入绑定微信支付的实名',1500);
+      return false;
+    }
+    let data = {
+      account:that.data.realname
+    }
+    console.log(data)
+
+    api.executionApplicationWithdrawal(data).then((res) => {
       console.log(res)
       this.getLumpsumAndWithdraw();
       //今日已申请过提现
@@ -505,6 +516,12 @@ Page({
       currentdate:ind,
       startdate:'',
       enddate:''
+    })
+  },
+  // 填写真实姓名
+  bindRealnameInput(e){
+    this.setData({
+      realname: e.detail.value
     })
   },
   // 填写邮箱弹框

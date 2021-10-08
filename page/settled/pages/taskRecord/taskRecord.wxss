@@ -1,0 +1,31 @@
+.wrap{
+  padding: 0 28rpx;
+  box-sizing: border-box;
+}
+.item{
+  border-bottom: 2rpx solid #F5F5F5;
+  padding: 24rpx 0;
+  box-sizing: border-box;
+}
+.item:last-child{
+  border-bottom: none;
+}
+.taskInfo{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.taskName{
+  font-size: 28rpx;
+  color: #101010;
+}
+.taskPrice{
+  font-size: 28rpx;
+  color: #EB9204;
+}
+.drawtime{
+  font-size: 28rpx;
+  color: #919191;
+  margin-top: 16rpx;
+  margin-left: 10rpx;
+}

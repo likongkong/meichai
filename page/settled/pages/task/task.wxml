@@ -1,0 +1,78 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class="wrap">
+  <view>
+    <view class="subsidy card">
+      <text>累计获取补贴金额：￥2121212.00</text>
+      <text>获取记录</text>
+    </view>
+    <view class="navmenu"> 
+      <text class="active">新人任务</text>
+      <text>成就任务</text>
+    </view>
+  </view>
+
+  <view class="content">
+    <view class="card">
+      <view class="head">
+        <view>
+          <view class="taskWrap">
+            <text>新人任务</text>
+            <text>剩余时间：1天0时0分0秒</text>
+          </view>
+          <view class="progressWrap">
+            <view class="progress-box">
+              <progress percent="12.5" stroke-width="8" border-radius="8" activeColor="#F8B62D" backgroundColor="#E3E3E3"/>
+            </view>
+            <text class="progress-num">1/8</text>
+          </view>
+        </view>
+        <view>
+          <text class="txt1">完成可领取</text>
+          <image class="icon" src="https://cdn.51chaidan.com/toyshow/upload/15960810298_16220110105292.jpg" mode="widthFix"></image>
+          <!-- <text class="txt2">成就墙</text> -->
+        </view>
+      </view>
+      <view class="taskItemsWrap">
+        <view class="taskItem">
+          <view class="taskItemContent">  
+            <text>累计交易流水达￥1000，仅计算已发货的订单（0/1000）</text>
+            <text>奖励￥1.00</text>
+          </view>
+          <view class="taskItemBtn">
+            <text class="taskItemBtn1">去完成</text>
+            <!-- <text class="taskItemBtn2">领取</text> -->
+            <!-- <text class="taskItemBtn3">已完成</text> -->
+            <!-- <text class="taskItemBtn4">未完成</text> -->
+          </view>
+        </view>
+        <view class="taskItem">
+          <view class="taskItemContent">  
+            <text>报名10月“奇妙万圣夜”线上展</text>
+            <text>奖励￥1.00</text>
+          </view>
+          <view class="taskItemBtn">
+            <text class="taskItemBtn1">去完成</text>
+            <!-- <text class="taskItemBtn2">领取</text> -->
+            <!-- <text class="taskItemBtn3">已完成</text> -->
+            <!-- <text class="taskItemBtn4">未完成</text> -->
+          </view>
+        </view>
+        <view class="taskItem">
+          <view class="taskItemContent">  
+            <text>发售一款商品</text>
+            <text>奖励￥1.00</text>
+          </view>
+          <view class="taskItemBtn">
+            <text class="taskItemBtn1">去完成</text>
+            <!-- <text class="taskItemBtn2">领取</text> -->
+            <!-- <text class="taskItemBtn3">已完成</text> -->
+            <!-- <text class="taskItemBtn4">未完成</text> -->
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+ 
+</view>
