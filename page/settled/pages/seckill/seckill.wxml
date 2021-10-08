@@ -305,22 +305,14 @@
                       <view class="sbottomRightButton" wx:elif='{{zunmdata.debuff==2}}' style="background:#999495;">商品已售罄</view>
                 </block>
                 <block wx:elif='{{zunmdata.status == 3}}'>
-                      <view class="sbottomRightButton" wx:elif='{{zunmdata.status == 3}}' style="background:#999495;">已结束</view>
+                      <view class="sbottomRightButton" style="background:#999495;">已结束</view>
                 </block>
             </block>
-
-            
         </view>
     </view>
 </view>
-
-
-    
 </block>
-
-
 <!-- <bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation> -->
-
 <!--  原产品拆单购买弹框  -->
 <view class='dsbframe' wx:if='{{dsbframeiftr}}'>
   <view class='dsbfhead'>

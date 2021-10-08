@@ -560,8 +560,8 @@ console.log(obj.modeOfDespatch)
       deliverTimeStatus:obj.goodsLabel===''?'':obj.goodsLabel==0?1:0,
       deliverTime:obj.dateToPull,
       salesMothed:obj.sellingWay,
-      startTime:(new Date(obj.startTime).getTime())/1000,
-      stopTime:obj.sellingWay==0?0:(new Date(obj.endTime).getTime())/1000,
+      startTime:(new Date(obj.startTime.replace(/-/g,'/')).getTime())/1000,
+      stopTime:obj.sellingWay==0?0:(new Date(obj.endTime.replace(/-/g,'/')).getTime())/1000,
       shippingMothed:obj.modeOfDespatch,
       logisticsIndex:obj.logisticsIndex,
       shipping: obj.modeOfDespatch==0?obj.shipping:'',  //自行发货
