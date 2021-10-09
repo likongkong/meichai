@@ -43,7 +43,13 @@ Page({
       {'n':'秒杀商品',id:'-1'},
       {'n':'抽选商品',id:4}
     ],
-    screenWords:'筛选'
+    screenWords:'筛选',
+    shareImgTipIs:false
+  },
+  shareImgTipFun(){
+    this.setData({
+      shareImgTipIs:!this.data.shareImgTipIs
+    })
   },
   publicJump(w){
     var id = w.currentTarget.dataset.id || w.target.dataset.id || '';
