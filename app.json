@@ -181,6 +181,8 @@
         "pages/allBrandsIp/allBrandsIp",
         "pages/fanManagement/fanManagement",
         "pages/seckill/seckill",
+        "pages/task/task",
+        "pages/taskRecord/taskRecord",
         "pages/releaseSignIn/releaseSignIn"
       ]
     }

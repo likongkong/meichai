@@ -288,13 +288,34 @@ page{
   margin-bottom: 40rpx;
 }
 .twoConfirmationContent{
-  margin-bottom: 72rpx;
+  margin-bottom: 46rpx;
 }
 .twoConfirmationContent view{
   font-size: 32rpx;
 }
 .twoConfirmationContent view text{
   color: #90D2D6;
+}
+.realname{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+.realname .txt{
+  font-size: 32rpx;
+}
+.realname .txt text{
+  color: #FF0000 ;
+}
+.realname input{
+  width: 400rpx;
+  font-size: 28rpx;
+  height: 60rpx;
+  border: 1px solid #888888;
+  padding-left: 18rpx;
+  box-sizing: border-box;
+  margin-left: 16rpx;
 }
 
 .commodity_screen {

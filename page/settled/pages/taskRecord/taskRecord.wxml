@@ -1,0 +1,41 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class="wrap">
+  <view class="item">
+    <view class="taskInfo">
+      <text class="taskName">【礼包】每日任务完成礼包</text>
+      <text class="taskPrice">+￥1.00</text>
+    </view>
+    <view class="drawtime">
+      领取时间：2021-03-02 12:00:00
+    </view>
+  </view>
+  <view class="item">
+    <view class="taskInfo">
+      <text class="taskName">【每日任务】发布一次动态</text>
+      <text class="taskPrice">+￥1.00</text>
+    </view>
+    <view class="drawtime">
+      领取时间：2021-03-02 12:00:00
+    </view>
+  </view>
+  <view class="item">
+    <view class="taskInfo">
+      <text class="taskName">【每周任务】发布五条动态</text>
+      <text class="taskPrice">+￥1.00</text>
+    </view>
+    <view class="drawtime">
+      领取时间：2021-03-02 12:00:00
+    </view>
+  </view>
+  <view class="item">
+    <view class="taskInfo">
+      <text class="taskName">【成就任务】累计评论达到500</text>
+      <text class="taskPrice">+￥1.00</text>
+    </view>
+    <view class="drawtime">
+      领取时间：2021-03-02 12:00:00
+    </view>
+  </view>
+</view>
