@@ -32,23 +32,24 @@ page{
 }
 
 .ssubOnlinEve{
-  width:212rpx;
+  width:220rpx;
   float: left;
-  border: 4rpx solid #000;
+  /* border: 4rpx solid #000; */
   margin:10rpx 0;
   border-radius: 8rpx;
 }
 .ssubOnliimg{
   width: 100%;
-  height: 212rpx;
+  height: 220rpx;
   display: block;
+  border-radius: 8rpx 8rpx 0 0;
 }
 .SSAname{
   height: 35px;
   width: 200rpx;
   font-size: 22rpx;
   line-height: 34rpx;
-  margin: 0 auto 10rpx;
+  margin: 4rpx auto 6rpx;
 }
 .ssubBotbox{
   width: 200rpx;
@@ -57,17 +58,17 @@ page{
 }
 .ssubBotbLeft{
   max-width: 118rpx;
-  height: 40rpx;
+  height: 36rpx;
   float: left;
-  line-height: 40rpx;
+  line-height: 36rpx;
   font-size: 24rpx;
   color:#ff2742 ;
 }
 .ssubBotRight{
-  height: 40rpx;
+  height: 36rpx;
   width: 80rpx;
   text-align: center;
-  line-height: 40rpx;
+  line-height: 36rpx;
   font-size: 22rpx;
   float: right;
   color: #fff;
@@ -1160,4 +1161,50 @@ page{
   text-align: center;
   line-height: 40rpx;
 }
+
+.brandIntroduction{
+  height: 178rpx;
+  margin-bottom: 20rpx;
+  border-radius: 10rpx;
+}
+.brandIntrodImg{
+  width: 178rpx;
+  height: 178rpx;
+  float: left;
+  border-radius: 10rpx 0 0 10rpx;
+}
+.brandIntrodContent{
+  float: left;
+  height: 178rpx;
+  margin-left: 16rpx;
+  width: 507rpx;
+}
+.brandIntCHead{
+  width: 100%;
+  height: 56rpx;
+  line-height: 56rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  margin-top: 14rpx;
+}
+.SSAnamebi {
+  height: 38px;
+  line-height: 38rpx;
+  width: 100%;
+  font-size: 24rpx;
+  margin: 0 auto 10rpx;
+}
+.brandIntrodMore{
+  width: 100%;
+  height: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+  color: #0077DD;
+  font-size: 28rpx;
+}
+.boxShadowT{
+  box-shadow: 3px 0px 8px #ccc;
+}
+
+
 
