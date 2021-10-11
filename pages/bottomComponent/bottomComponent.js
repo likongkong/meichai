@@ -92,13 +92,14 @@ Component({
 
       var timestamp = Date.parse(new Date()) / 1000;
       console.log(333333333)
-      if(app.signindata.isOpenToyShow){
+      // app.signindata.isOpenToyShow
+      if(false){
         wx.navigateTo({
           url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
         });
         console.log(111111111)
         // timestamp>=1624896000
-      }else if(true){
+      }else if(false){
         console.log(22222222)
         wx.navigateTo({
           url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
