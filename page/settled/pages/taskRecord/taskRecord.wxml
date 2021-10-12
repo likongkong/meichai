@@ -2,40 +2,19 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 <view class="wrap">
-  <view class="item">
-    <view class="taskInfo">
-      <text class="taskName">【礼包】每日任务完成礼包</text>
-      <text class="taskPrice">+￥1.00</text>
+  <block wx:for="{{records}}" wx:key='key'>
+    <view class="item">
+      <view class="taskInfo">
+        <text class="taskName">{{item.missionGroup}}{{item.missionName}}</text>
+        <text class="taskPrice">{{item.scoreAmount}}</text>
+      </view>
+      <view class="drawtime">
+        领取时间：{{item.created_at}}
+      </view>
     </view>
-    <view class="drawtime">
-      领取时间：2021-03-02 12:00:00
-    </view>
-  </view>
-  <view class="item">
-    <view class="taskInfo">
-      <text class="taskName">【每日任务】发布一次动态</text>
-      <text class="taskPrice">+￥1.00</text>
-    </view>
-    <view class="drawtime">
-      领取时间：2021-03-02 12:00:00
-    </view>
-  </view>
-  <view class="item">
-    <view class="taskInfo">
-      <text class="taskName">【每周任务】发布五条动态</text>
-      <text class="taskPrice">+￥1.00</text>
-    </view>
-    <view class="drawtime">
-      领取时间：2021-03-02 12:00:00
-    </view>
-  </view>
-  <view class="item">
-    <view class="taskInfo">
-      <text class="taskName">【成就任务】累计评论达到500</text>
-      <text class="taskPrice">+￥1.00</text>
-    </view>
-    <view class="drawtime">
-      领取时间：2021-03-02 12:00:00
-    </view>
+  </block>
+
+  <view class="noData" wx:if="{{noData}}">
+    <image src="https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png" mode="widthFix"></image>
   </view>
 </view>

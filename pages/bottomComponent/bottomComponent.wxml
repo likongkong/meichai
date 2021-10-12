@@ -5,7 +5,8 @@
 				<image wx:if='{{whomepage}}' class='navigationltopimg' src='../images/pressed_shouye.png'></image>
 				<image wx:else class='navigationltopimg' src='../images/normal_shouye.png'></image>
 			</view>
-			<view wx:if='{{isChar}}' class='navigationlcon' style='{{whomepage?"color:#fd2844":""}};'>首页</view>
+			<!-- <view wx:if='{{isChar}}' class='navigationlcon' style='{{whomepage?"color:#fd2844":""}};'>首页</view> -->
+			<view class='navigationlcon' style='{{whomepage?"color:#fd2844":""}};'>首页</view>
 		</view>
 	</view> 
 
@@ -17,7 +18,7 @@
 						<image class='navigationltopimg' src='https://cdn.51chaidan.com/images/sign/camera.png?'></image>
 						<view class='tabshopimg specialellipsis' wx:if='{{dryinglistnum>0}}' style='left:88rpx;'>{{dryinglistnum}}</view>
 					</view>
-					<view wx:if='{{isChar}}' class='navigationlcon' style='{{dlfind?"color:#fd2844":""}};'>打卡</view>
+					<view class='navigationlcon' style='{{dlfind?"color:#fd2844":""}};'>打卡</view>
 				</view>		
 		</block>
 		<!-- 发现 -->
@@ -28,7 +29,7 @@
 						<image wx:else class='navigationltopimg' src='https://clw.51chaidan.com//images/goods/find1.png'></image>
 						<view class='tabshopimg specialellipsis' wx:if='{{dryinglistnum>0}}' style='left:88rpx;'>{{dryinglistnum}}</view>
 					</view>
-					<view wx:if='{{isChar}}' class='navigationlcon' style='{{dlfind?"color:#fd2844":""}};'>发现</view>
+					<view class='navigationlcon' style='{{dlfind?"color:#fd2844":""}};'>发现</view>
 				</view>		
 		</block>
 
@@ -41,7 +42,7 @@
 			<view class='navigationltop'>
           <image src='https://cdn.51chaidan.com/images/sign/20210901-0901.png' mode="widthFix" style="width:120rpx;height:auto;position:absolute;bottom:14rpx;right:0;left:0;margin:0 auto;"></image>
 			</view>
-			<view wx:if='{{isChar}}' class='navigationlcon' style="font-weight:bold;font-size:30rpx;">
+			<view class='navigationlcon' style="font-weight:bold;font-size:30rpx;">
 				<text style="color:#E5CB3E">秋</text>
 				<text style="color:#89AB4A">日</text>
 				<text style="color:#75542B">童</text>
@@ -55,7 +56,7 @@
 		<view class='navigationltop'>
 			<image src='https://cdn.51chaidan.com//images/sign/yifanshang.png' class='navigationltopimg'></image>
 		</view>
-		<view wx:if='{{isChar}}' class='navigationlcon' style='{{wnews?"color:#fd2844":""}};'>一番赏</view>
+		<view class='navigationlcon' style='{{wnews?"color:#fd2844":""}};'>一番赏</view>
 	</view>
 </view>
 
@@ -67,7 +68,7 @@
 				<image wx:if='{{wnews}}' src='https://www.51chaidan.com/images/toyCabinet/cabinet1.png' class='navigationltopimg'></image>
 				<image wx:else src='https://www.51chaidan.com/images/toyCabinet/cabinet.png' class='navigationltopimg'></image>
 			</view>
-			<view wx:if='{{isChar}}' class='navigationlcon' style='{{wnews?"color:#fd2844":""}};'>闲置</view>
+			<view class='navigationlcon' style='{{wnews?"color:#fd2844":""}};'>闲置</view>
 		</view>
 	</view> -->
 	<view class='comNavigationEve' bindtap='wshoppingCart'>
@@ -77,7 +78,7 @@
 				<image wx:else class='navigationltopimg' src='../images/shoppingCarNotImage@2x.png'></image>
 				<view class='tabshopimg specialellipsis' wx:if='{{shopnum>0}}' style='left:88rpx;'>{{shopnum}}</view>
 			</view>
-			<view wx:if='{{isChar}}' class='navigationlcon' style='{{wCart?"color:#fd2844":""}};'>购物车</view>
+			<view class='navigationlcon' style='{{wCart?"color:#fd2844":""}};'>购物车</view>
 		</view>
 	</view>
 	<view class='comNavigationEve' bindtap='wmy'>
@@ -86,7 +87,7 @@
 				<image wx:if='{{wmy}}' class='navigationltopimg' src='../images/pressed_wode.png'></image>
 				<image wx:else class='navigationltopimg' src='../images/normal_wode.png'></image>
 			</view>
-			<view wx:if='{{isChar}}' class='navigationlcon' style='{{wmy?"color:#fd2844":""}};'>我的</view>
+			<view class='navigationlcon' style='{{wmy?"color:#fd2844":""}};'>我的</view>
 		</view>
 	</view>
 </view>

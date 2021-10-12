@@ -128,6 +128,7 @@ export const settledGoodsBrandlist = (query) => {
 export const salesResult = (url,query) => {
     return apiResquest.get('brand/settled_goods/salesResult/' + url,query)
 }
+// ---------------------------------------- 任务返利 -----------------------------------------
 
 
 
