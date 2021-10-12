@@ -96,7 +96,9 @@ Page({
     defaultimg:'/pages/images/goods_Item_Default_Image.png',
     isPopping:false,
     nowAdmissionTime:Date.parse(new Date()) / 1000,
-    is_formaldress:false
+    is_formaldress:false,
+    moreDataNum:10,
+    informationListData:''
   },
 
   //点击弹出
@@ -268,8 +270,25 @@ Page({
       }
     })
   },
+  informationListJump(e){
+    var index = e.currentTarget.dataset.index || 0;
+    var url = this.data.informationListData[index].url || '';
+    app.comjumpwxnav(0, url);
+  },
+  brandIntrodMore(e){
+    var ind = e.currentTarget.dataset.ind || 0;
+    if(ind == 1){
+      if(this.data.moreDataNum == 9999){
+          var moreDataNum = 10;
+      }else{
+        var moreDataNum = 9999;
+      }
+      this.setData({
+          moreDataNum:moreDataNum
+      })
+    };
 
-  
+  },
   jumpChouxuanHomepage(e){
     var url = e.currentTarget.dataset.url;
     app.comjumpwxnav(0, url);
@@ -659,6 +678,7 @@ Page({
     // // 直播列表
     _this.liveList(1);
 
+
     //展会福利
     // _this.exhibitionBenefits();
 
@@ -968,7 +988,29 @@ Page({
       }
     });
   },
+  // 资讯列表
+  informationList(){
+      var _this = this;
+      
+      var q1 = Dec.Aese('mod=subscription&operation=message&page=0');
+      console.log('mod=subscription&operation=message&page=0')
 
+      wx.request({
+        url: app.signindata.comurl + 'toy.php' + q1,
+        method: 'GET',
+        header: {'Accept': 'application/json'},
+        success: function(res) {
+          console.log('资讯列表=====',res)
+
+          if (res.data.ReturnCode == 200) {
+            _this.setData({
+              informationListData:res.data.List.brandMessageList || ''
+            });
+          };
+        },
+
+      })
+  },
   // 直播信息  
   liveList:function(num){
     var _this = this
@@ -1217,6 +1259,8 @@ brandJson:function(){
                     subGoodsList,
                     offlineGoodsList
                   })
+                  // 资讯列表
+                  _this.informationList();
                 }else{
                   var goodsList = res.data.List.goodsListOne || [];
                   if(goodsList&&goodsList.length!=0){

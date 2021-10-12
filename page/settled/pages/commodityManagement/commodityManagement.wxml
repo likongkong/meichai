@@ -57,7 +57,7 @@
        <view class="orderBottom" wx:if='{{itemStatus != 4}}'>
             <view class="orderBottomOrderNumber">
                 <block wx:if='{{itemStatus==1 || itemStatus==2 || itemStatus == 3}}'>
-                    <view class="orderBottomButton"><button data-num='{{num}}' style='width:100%;height:100%;position:absolute;top:0;right:0;opacity:0;' open-type='share'></button>分享</view>
+                    <view class="orderBottomButton" catchtap="{{!isCanShare?'shareImgTipFun':''}}"><button wx:if='{{isCanShare}}' data-num='{{num}}' style='width:100%;height:100%;position:absolute;top:0;right:0;opacity:0;' open-type='share'></button>分享</view>
                 </block>
                 <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='3'>删除</view>
                 <block wx:if='{{itemStatus == 1}}'>
@@ -170,6 +170,13 @@
     </view>
 </view>
 
+<!-- 分享提示弹框 -->
+<view class="wshNew" catchtouchmove="true" wx:if='{{shareImgTipIs}}' catchtap="shareImgTipFun">
+    <view>
+        <image class="shareImgTip" src="https://cdn.51chaidan.com/images/icon/share_hint.png" mode="widthFix"></image>
+        <image class="indexelafracondisnone" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="aspectFit"></image>
+    </view>
+</view>
 
 <view class="wshNew" catchtouchmove="true" wx:if='{{selectBox}}' catchtap="selectBoxFun">
     <view class="orderMangAddressBottom" catchtap="true" style="border-radius:30rpx 30rpx 0 0;">

@@ -436,3 +436,15 @@ page{
   width: 43%;
   margin-top: 21rpx;
 }
+.shareImgTip{
+  width: 650rpx;
+  display: block;
+}
+.indexelafracondisnone {
+  width: 50rpx;
+  height: 50rpx;
+  margin: 30rpx auto 0;
+  border-radius: 50%;
+  display: block;
+  position: relative;
+}

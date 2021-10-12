@@ -1612,9 +1612,15 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
     }else{
       var urlpath = "/page/component/pages/limitlottery/limitlottery?id=" + _this.data.infoActivity.id + '&referee=' + _this.data.uid + '&gid=' + _this.data.gid + '&list='+_this.data.isList;
     };
+    console.log('分享====',_this.data.infoActivity.brandId , _this.data.is_exhibition,'https://www.51chaidan.com/images/share/activity_'+ _this.data.infoActivity.id +'.jpg')
+    if(_this.data.infoActivity.brandId && _this.data.is_exhibition != 1){
+       var imageUrl = 'https://www.51chaidan.com/images/share/activity_'+ _this.data.infoActivity.id +'.jpg'
+    }else{
+      var imageUrl = _this.data.snapshotlim
+    };
     var share = {
       title:_this.data.infoActivity.name ,
-      imageUrl: _this.data.snapshotlim,
+      imageUrl: imageUrl ,
       path:urlpath ,
       success: function (res) {}
     }
