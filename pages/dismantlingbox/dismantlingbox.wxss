@@ -1163,21 +1163,22 @@ page{
 }
 
 .brandIntroduction{
-  height: 178rpx;
+  height: 200rpx;
   margin-bottom: 20rpx;
   border-radius: 10rpx;
 }
 .brandIntrodImg{
-  width: 178rpx;
-  height: 178rpx;
+  width: 200rpx;
+  height: 200rpx;
   float: left;
   border-radius: 10rpx 0 0 10rpx;
 }
 .brandIntrodContent{
   float: left;
-  height: 178rpx;
+  height: 200rpx;
   margin-left: 16rpx;
-  width: 507rpx;
+  width: 475rpx;
+  padding-right: 10rpx;
 }
 .brandIntCHead{
   width: 100%;
@@ -1185,14 +1186,13 @@ page{
   line-height: 56rpx;
   font-size: 28rpx;
   font-weight: bold;
-  margin-top: 14rpx;
 }
 .SSAnamebi {
   height: 38px;
   line-height: 38rpx;
   width: 100%;
   font-size: 24rpx;
-  margin: 0 auto 10rpx;
+  margin: 0 auto 0;
 }
 .brandIntrodMore{
   width: 100%;
@@ -1205,6 +1205,33 @@ page{
 .boxShadowT{
   box-shadow: 3px 0px 8px #ccc;
 }
-
-
-
+.brandFollowb{
+  height: 41rpx;
+  padding: 15rpx 0 0 0;
+}
+.brandFollowTxt{
+  height: 41rpx;
+  line-height: 41rpx;
+  font-size: 28rpx;
+  color: #2299FF;
+  float: right;
+  margin-right: 30rpx;
+}
+.emlhrightBrand {
+  text-align: center;
+  color: #fff;
+  font-size: 24rpx;
+  border-radius: 8rpx;
+  background: #34A9ED;
+  float: right;
+  width:100rpx;height:41rpx;line-height:41rpx;
+}
+.emlhrightNoBrand{
+  width:96rpx;height:37rpx;line-height:37rpx;
+  text-align: center;
+  color: #34A9ED;
+  font-size: 24rpx;
+  border-radius: 8rpx;
+  border:2rpx solid #34A9ED;
+  float: right;
+}

@@ -288,6 +288,13 @@
                 <view class="brandIntrodContent">
                      <view class="brandIntCHead specialellipsis">{{item.brand_name}}</view>
                      <view class="SSAnamebi multilineellipsis">{{item.title}}</view>
+                     <view class="brandFollowb">
+                          <view class="{{item.isFocus?'emlhrightNoBrand':'emlhrightBrand'}}" data-ind='{{index}}' data-type='0' data-id='{{item.brand_id}}' catchtap='{{item.isFocus?"true":"followfun"}}'>
+                              <block wx:if='{{item.isFocus}}'>已关注</block>
+                              <block wx:else>关注</block>
+                          </view>
+                          <view class="brandFollowTxt" catchtap="jumpbanner" data-item_type='9017'  data-href='{{item.brand_id}}'>进入品牌专区</view>
+                     </view>
                 </view>
             </view>
             <view class="brandIntrodMore" catchtap="brandIntrodMore" data-ind='1' wx:if='{{informationListData.length > 10}}'>

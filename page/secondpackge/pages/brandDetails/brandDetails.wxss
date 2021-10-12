@@ -308,9 +308,9 @@ page {
 }
 .emlhrightNo{
   width:90rpx;
-  height: 36rpx;
+  height: 32rpx;
   text-align: center;
-  line-height: 36rpx;
+  line-height: 32rpx;
   color: #34A9ED;
   display: inline-block;
   font-size: 24rpx;

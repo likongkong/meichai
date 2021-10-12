@@ -398,7 +398,7 @@ Page({
   },
   // banner 跳转
   jumpbanner: function (w) {
-
+    console.log(w)
     var whref = w.currentTarget.dataset.href || w.target.dataset.href;
     var item_type = w.currentTarget.dataset.item_type || w.target.dataset.item_type||0;
     var imgurl = w.currentTarget.dataset.imgurl || w.target.dataset.imgurl || '';
@@ -992,8 +992,8 @@ Page({
   informationList(){
       var _this = this;
       
-      var q1 = Dec.Aese('mod=subscription&operation=message&page=0');
-      console.log('mod=subscription&operation=message&page=0')
+      var q1 = Dec.Aese('mod=subscription&operation=message&page=0&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
+      console.log('mod=subscription&operation=message&page=0&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
 
       wx.request({
         url: app.signindata.comurl + 'toy.php' + q1,
@@ -1612,8 +1612,30 @@ brandJson:function(){
     wx.navigateTo({
       url: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + id + "&settlement=1"
     });
-  }
-
+  },
+  // 关注 和 点赞 函数
+  followfun: function(w) {
+    var _this = this;
+    var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
+    var type = w.currentTarget.dataset.type || w.target.dataset.type || 0;
+    var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
+    var informationListData = _this.data.informationListData || [];
+    console.log('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id)
+    var qqq = Dec.Aese('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id);
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + qqq,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        console.log('关注=====',res)
+        if (res.data.ReturnCode == 200) {
+             _this.setData({
+                 ['informationListData['+ind+'].isFocus'] : !informationListData[ind].isFocus
+             });
+        };
+      }
+    });
+  },
 
 
 })
