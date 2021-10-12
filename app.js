@@ -1042,11 +1042,11 @@ App({
       wx.navigateTo({
         url: `/page/settled/pages/incomingsOutgoingsDetail/incomingsOutgoingsDetail?${whref}`
       });
-    } else if (item_type == 9032) { 
+    } else if (item_type == 9032) { //发布动态
       wx.navigateTo({
         url: `/page/settled/pages/releaseDynamic/releaseDynamic?${whref}`
       });
-    } else if (item_type == 9033) { 
+    } else if (item_type == 9033) { //发布图鉴
       wx.navigateTo({
         url: `/page/settled/pages/releaseFieldGuide/releaseFieldGuide?${whref}`
       });
@@ -1105,6 +1105,14 @@ App({
     } else if (item_type == 9047) {   // 秒杀
       wx.navigateTo({
         url: `/page/settled/pages/seckill/seckill?gid=${whref}`
+      });      
+    } else if (item_type == 9048) {   // 任务返利
+      wx.navigateTo({
+        url: `/page/settled/pages/task/task`
+      });      
+    } else if (item_type == 9049) {   // 任务记录详情
+      wx.navigateTo({
+        url: `/page/settled/pages/taskRecord/taskRecord`
       });      
     }
   },

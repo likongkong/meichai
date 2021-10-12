@@ -2,6 +2,15 @@
   padding: 0 28rpx;
   box-sizing: border-box;
 }
+.noData{
+  width: 100%;
+}
+.noData image{
+  width: 280rpx;
+  height: auto;
+  margin: 300rpx auto 0 auto;
+  display: block;
+}
 .item{
   border-bottom: 2rpx solid #F5F5F5;
   padding: 24rpx 0;
