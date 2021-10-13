@@ -3,6 +3,25 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}' is_share='{{is_share}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
+<!-- 新版 -->
+<block>
+  <view class="newDraw">
+      <view class="newDrawTopImgBox">
+				  <image src="{{infoActivity.cover}}" class="newDrawTopImg" mode="widthFix" />
+			</view>
+			<view class="newDrawNamePrice">
+					<view class="newDrawNPPositon"></view>
+					<view class="newDrawName">TAkii趣多多</view>
+			</view>
+
+	</view>
+
+</block>
+
+
+<view style="width:100%;height:300rpx;"></view>
+
+
 <canvas canvas-id='canimgser' class='canimgsernew'></canvas>
 
 <canvas canvas-id='baskimgser' class='baskclass' style='height:620px'></canvas>

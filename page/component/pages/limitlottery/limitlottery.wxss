@@ -829,3 +829,36 @@ page{
   box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.4);
   margin-top: 30rpx;
 }
+/* 新版 */
+.newDraw{
+  width: 100%;
+}
+.newDrawTopImgBox{
+  width: 100%;
+  max-width: 750rpx;
+  overflow: hidden;
+}
+.newDrawTopImg{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.newDrawNamePrice{
+  width: 710rpx;
+  background: #fff;
+  margin: auto;
+  position: relative;
+}
+.newDrawNPPositon{
+  width: 710rpx;
+  height: 30rpx;
+  border-radius: 15rpx 15rpx 0 0;
+  position: absolute;
+  left: 0;
+  top: -30rpx;
+  background: #fff;
+}
+.newDrawName{
+  padding: 0 40rpx 30rpx;
+  font-size: 32rpx;
+}
