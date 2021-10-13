@@ -6,6 +6,22 @@ page{
   padding: 20rpx 26rpx 0 26rpx;
   box-sizing: border-box;
 }
+.taskexplain{
+  position: fixed;
+  top: 412rpx;
+  right:0;
+  background: #9DD7DB;
+  z-index: 15;
+  border-top-left-radius: 70rpx;
+  border-bottom-left-radius: 70rpx;
+  padding: 4rpx 6rpx 4rpx 24rpx;
+}
+.taskexplain text{
+  display: block;
+  color: #FFFFFF;
+  font-size: 24rpx;
+  text-align: center;
+}
 .header{
   width: 100%;
   position: fixed;

@@ -174,7 +174,7 @@
       <view wx:if="{{viewWithdrawalInfo.exceeding_remark}}">提现后账号余额：￥{{viewWithdrawalInfo.posts_the_account_balance}}</view>
       <view>{{viewWithdrawalInfo.remark}}</view>
     </view>
-    <view class="realname">
+    <view class="realname" wx:if="{{viewWithdrawalInfo.account_type == 2}}">
       <view class="txt"><text>*</text>到账实名认证</view>
       <input type="text" placeholder="请输入绑定微信支付的实名" bindinput="bindRealnameInput" value="{{realname}}" />
     </view>

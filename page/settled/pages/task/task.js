@@ -156,7 +156,7 @@ Page({
           //     [`mission[${index}].isReceive`]:true
           //   })
           // }
-          setTimeout(function(){
+          setTimeout(()=>{
             this.getData();
           },1500)
         }else{

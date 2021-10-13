@@ -77,6 +77,7 @@ Page({
       status_type:this.data.status_type,
       year:this.data.year,
       month:this.data.month,
+      searchType:2,
     }
     api.settledWithCashList(data).then((res) => {
       console.log('订单数据',res)

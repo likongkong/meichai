@@ -198,6 +198,18 @@
           "pathName": "pages/dismantlingbox/dismantlingbox",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "任务说明",
+          "pathName": "page/settled/pages/taskExplain/taskExplain",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "钱包",
+          "pathName": "page/settled/pages/myWallet/myWallet",
+          "query": "",
+          "scene": null
         }
       ]
     }

@@ -1,0 +1,12 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+<view class="wrap">
+  <block wx:for="{{data}}" wx:key='key'>
+    <text class="title margint44 marginb14">{{item.title}}</text>
+    <text class="tip ">{{item.tip}}</text>
+  </block>
+  <view class="tip">
+    ·如有疑义，请<view style="color:#0589FB;position:relative;display:inline-block;"><button open-type='contact' session-from='' style='width:100%;height:100%;position:absolute;top:0;left:0;opacity: 0;z-index:1;'></button>联系客服</view>。
+  </view>
+</view>
+<!-- <button wx:else open-type='contact' session-from='' style='width:100%;height:100%;position:absolute;top:0;left:0;opacity: 0;z-index:1;'></button> -->
