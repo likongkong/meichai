@@ -282,7 +282,7 @@
             当前版本
             <view class='whbocndr'>
                {{versionnumber}}
-               <image class='whwddimgtit' src='../images/icon_in.png'></image>
+               <!-- <image class='whwddimgtit' src='../images/icon_in.png'></image> -->
             </view>
         </view>
     </view>

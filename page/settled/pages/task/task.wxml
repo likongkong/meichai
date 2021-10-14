@@ -14,7 +14,8 @@
     </view>
   </view>
 
-  <scroll-view style="height:{{winHeight-(statusBarHeightMc+115)}}px" scroll-y scroll-into-view="{{toView}}" scroll-with-animation="true"  class="content" bindrefresh="refresh">
+  <scroll-view style="height:{{winHeight-(statusBarHeightMc+115)}}px" scroll-y scroll-into-view="{{toView}}" scroll-with-animation="true"  class="content">
+    <!-- refresher-enabled="{{true}}" refresher-threshold="{{100}}" refresher-default-style="black" refresher-background="white" refresher-triggered="{{triggered}}" bindrefresherrefresh="onScrollRefresh" -->
     <block wx:for="{{mission}}" wx:key='key'>
       <view class="card" id="{{item.missionGroup}}">
         <view class="head">

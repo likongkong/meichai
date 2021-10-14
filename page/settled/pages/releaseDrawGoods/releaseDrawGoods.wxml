@@ -35,6 +35,10 @@
     bind:bindchange="bindchange">
     </settledForm>
   </view>
+  <!-- <view class="title">
+    抽选说明
+  </view> -->
+  <!-- <view class="card" style="margin-top:0;"> -->
   <view class="card">
     <settledForm 
     id="settledForm3"

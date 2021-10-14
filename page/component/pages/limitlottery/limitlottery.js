@@ -1619,7 +1619,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
       var imageUrl = _this.data.snapshotlim
     };
     var share = {
-      title:_this.data.infoActivity.name ,
+      title:'【抽选】'+_this.data.infoActivity.name,
       imageUrl: imageUrl ,
       path:urlpath ,
       success: function (res) {}
