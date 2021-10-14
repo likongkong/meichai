@@ -1,0 +1,31 @@
+page{
+  background:#f4f5f9;
+  /* padding-bottom: 200rpx; */
+}
+.marginb14{
+  margin-bottom: 14rpx;
+}
+.margint44{
+  margin-top: 44rpx;
+}
+.wrap{
+  padding: 36rpx 24rpx;
+  box-sizing: border-box;
+}
+.wrap text:first-child{
+  margin-top: 0;
+  display: inline-block;
+}
+.title{
+  display: block;
+  font-size: 32rpx;
+  color: #101010;
+  font-weight: bold;
+}
+.tip{
+  display: block;
+  font-size: 28rpx;
+  color: #101010;
+  /* word-break: normal;
+  text-align: justify; */
+}

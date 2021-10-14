@@ -234,6 +234,7 @@ Page({
         this.setData({
           viewWithdrawalInfo:res.data.data,
           twoAffirm1:true,
+          realname:res.data.data.account
         })
         // if(Number(withdrawAccount.quota_num) > Number(this.data.info.available_cash_amount)){
         //   this.setData({

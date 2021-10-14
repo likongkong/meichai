@@ -57,7 +57,7 @@ page{
   font-size: 52rpx;
 }
 .withdrawBtn{
-  width: 254rpx;
+  width: 230rpx;
   height: 90rpx;
   font-size: 28rpx;
   text-align: center;

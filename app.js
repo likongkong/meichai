@@ -1114,6 +1114,10 @@ App({
       wx.navigateTo({
         url: `/page/settled/pages/taskRecord/taskRecord`
       });      
+    } else if (item_type == 9050) {   // 任务说明
+      wx.navigateTo({
+        url: `/page/settled/pages/taskExplain/taskExplain`
+      });      
     }
   },
   // 中奖提示倒计时
