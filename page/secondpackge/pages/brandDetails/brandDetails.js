@@ -731,7 +731,13 @@ Page({
     if(indexShare.length!=0 && indexShare[indexShareNum]){
       indexShareImg = indexShare[indexShareNum]+'?time=' + Date.parse(new Date());
     };
-
+    var exh = Dec.Aese('mod=share&operation=brand&brand_id=' + _this.data.brandId + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
+    wx.request({
+      url: app.signindata.comurl + 'user.php' + exh,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {}
+    });
     var share = {
       title: _this.data.brandinfo.shareDesc,
       imageUrl: _this.data.brandinfo.shareImg || indexShareImg,
