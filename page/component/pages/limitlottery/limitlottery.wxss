@@ -848,6 +848,7 @@ page{
   background: #fff;
   margin: auto;
   position: relative;
+  border-radius: 0 0 15rpx 15rpx;
 }
 .newDrawNPPositon{
   width: 710rpx;
@@ -859,6 +860,219 @@ page{
   background: #fff;
 }
 .newDrawName{
-  padding: 0 40rpx 30rpx;
+  padding: 0 40rpx 20rpx;
   font-size: 32rpx;
 }
+.newDrawTopTime{
+  width: 100%;
+  height: 68rpx;
+  line-height: 68rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #fff;
+  background: #000;
+  font-weight: bold;
+}
+.newDrawPrice{
+  padding: 0 40rpx 20rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  color: #FD8888;
+  font-size: 40rpx;
+  font-weight: bold;
+}
+.newDrawPNum{
+  height: 50rpx;
+  line-height: 50rpx;
+  padding: 0 20rpx;
+  border-radius: 15rpx;
+  color: #fff;
+  font-size: 28rpx;
+  background: #000;
+  display: inline-block;
+  margin-left: 20rpx;
+  vertical-align: top;
+}
+.newDrawMony{
+  vertical-align: top;
+  height: 50rpx;
+  line-height: 65rpx;
+  font-size: 22rpx;
+  display: inline-block;
+}
+.intraGroupSelection{
+  padding: 0 40rpx 20rpx;
+  font-size: 24rpx;
+  color: #808080;
+  height: 34rpx;
+  line-height: 34rpx;
+}
+.newDrawActivityProcess{
+  width: 630rpx;
+  padding: 30rpx 40rpx;
+  background: #fff;
+  border-radius: 15rpx;
+  margin: 20rpx auto 0;
+}
+.ndapTitle{
+  width: 100%;
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+.adapCtivityRules{
+  float: right;
+  vertical-align: top;
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 24rpx;
+  color: #ABABAB;
+}
+.SelectionDescription{
+  font-size: 28rpx;
+  color: #101010;
+  padding:15rpx 30rpx 0;
+}
+.apEveBox{
+  padding: 15rpx 0 0 0;
+}
+.apEve{
+  width: 150rpx;
+  height: 166rpx;
+  display: inline-block;
+  vertical-align: top;
+}
+.apEveTopDate{
+  width: 100%;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  font-size: 28rpx;
+}
+.apEveCenter{
+  width: 100%;
+  height: 110rpx;
+  color: #101010;
+  font-size: 24rpx;
+  background: #F5F5F5;
+  border-radius: 15rpx;
+  text-align: center;
+  position: relative;
+}
+.apEveCenterTxt{
+  padding: 15rpx 0 15rpx 0;
+}
+.apEveCenterLine{
+  width: 54rpx;
+  height: 2rpx;
+  background: rgba(219, 219, 219, 100);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+.numberOFParticipants{
+  vertical-align: top;
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 22rpx;
+  float: right;
+  color:#9DD7DB;
+}
+.statusStarEnd{
+  width: 100%;
+  font-size: 40rpx;
+  text-align: center;
+  padding: 0 0 20rpx 0;
+  font-weight: bold;
+}
+.newDrawBSTime{
+  width: 100%;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  font-size: 28rpx;
+}
+.newDrawBSButBox{
+  width: 100%;
+  text-align: center;
+  padding-bottom: 30rpx;
+}
+.nDbsBnotice{
+  width: 550rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  border-radius: 70rpx;
+  text-align: center;
+  display: inline-block;
+  font-size: 28rpx;
+  color: #fff;
+}
+.winningList{
+  width: 300rpx;
+  height: 66rpx;
+  line-height: 66rpx;
+  border: 2rpx solid #DBC69D;
+  color: #DBC69D;
+  text-align:center;
+  font-size: 28rpx;
+  border-radius: 66rpx;
+  display: inline-block;
+}
+.purchaseNoOverdue{
+  width: 300rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #fff;
+  border-radius: 70rpx;
+  display: inline-block;
+}
+.userHelp{
+  width: 560rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  position: relative;
+}
+.userBoxImgTxt{
+  padding: 30rpx;
+  height: 80rpx;
+}
+.userBoxImg{
+  width: 80rpx;
+  height: 80rpx;
+  float: left;
+  border-radius: 50%;
+}
+.userBoxTxt{
+  height: 80rpx;
+  float: left;
+  font-size: 28rpx;
+  width: 400rpx;
+  margin-left: 20rpx;
+}
+.userHelpBut{
+  width: 500rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  border-radius: 70rpx;
+  text-align: center;
+  margin: 0 auto 30rpx;
+  font-size: 28rpx;
+  color: #fff;
+}
+.userHelpFork{
+  z-index: 3;
+  width: 60rpx;
+  height: 60rpx;
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: -120rpx;
+  margin: auto;
+}
+
+
+

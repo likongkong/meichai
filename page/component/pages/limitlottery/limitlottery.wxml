@@ -6,12 +6,82 @@
 <!-- 新版 -->
 <block>
   <view class="newDraw">
+		  <!-- 未开始 -->
+	    <view class="newDrawTopTime">
+					<block>2121-02-02 12:00:00开始</block>
+			</view>
+		  <!-- 进行中 -->
+	    <view class="newDrawTopTime" style="background:#007797;">
+					<block>开奖时间 2021-08-08 12:00:00</block>
+			</view>			
+			<!-- 已结束 -->
+	    <view class="newDrawTopTime" style="background:#fff;color:#000;">
+					<block wx:if='{{false}}'>很遗憾，您未中签</block>
+					<block wx:elif='{{true}}'>付款截止日期 2021-08-08 12:00:00</block>
+					<block wx:elif='{{false}}'>您未参加抽选</block>
+					<block wx:elif='{{false}}'>您已购买</block>
+					<block wx:elif='{{false}}'>超时未支付</block>
+			</view>
       <view class="newDrawTopImgBox">
 				  <image src="{{infoActivity.cover}}" class="newDrawTopImg" mode="widthFix" />
 			</view>
 			<view class="newDrawNamePrice">
 					<view class="newDrawNPPositon"></view>
 					<view class="newDrawName">TAkii趣多多</view>
+					<view class="newDrawPrice">
+						<text class="newDrawMony">￥</text>39.00<text class="newDrawPNum">抽选数量10体</text>
+						<text class="numberOFParticipants">987人已参与</text>
+					</view>
+					<view class="intraGroupSelection">群内抽选 | 消耗100积分</view>
+			</view>
+			<view class="newDrawActivityProcess">
+				  <block>
+							<view class="ndapTitle">我的抽签码（1/6）<text class="adapCtivityRules">身份信息 ></text></view>
+							<view class="apEveBox">
+								
+							</view>
+					</block>
+					<block>
+						  <view class="statusStarEnd">
+									<block><text style="color:#515151;">很遗憾，您未中签</text></block>
+									<block><text style="color:#EEAE19;">恭喜您，中签啦</text></block>
+							</view>
+					</block>
+					<view class="ndapTitle">活动进程<text class="adapCtivityRules">活动规则 ></text></view>
+					<view class="apEveBox">
+							<view class="apEve">
+									<view class="apEveTopDate">5月04日</view>
+									<view class="apEveCenter">
+										  <view class="apEveCenterTxt">10:00:00</view>
+											<view>抽选开始</view>
+									</view>
+							</view> 
+							<view class="apEve" style="margin:0 90rpx">
+								  <view class="apEveTopDate">5月08日</view>
+									<view class="apEveCenter">
+										  <view class="apEveCenterTxt">10:00:00</view>
+											<view>中签购买</view>
+											<view class="apEveCenterLine" style="left:168rpx;"></view>
+											<view class="apEveCenterLine" style="left:-72rpx;"></view>
+									</view>
+							</view> 
+							<view class="apEve">
+								  <view class="apEveTopDate">5月10日</view>
+									<view class="apEveCenter">
+										  <view class="apEveCenterTxt">10:00:00</view>
+											<view>购买结束</view>
+									</view>
+							</view> 
+					</view>
+			</view>
+			<view class="newDrawActivityProcess">
+					<view class="ndapTitle">抽选说明</view>
+					<view class="SelectionDescription"><text>预计发货时间：2021年九月份\n物流方式：顺丰到付\n请遵守活动规则</text></view>
+			</view>
+
+			<!--  商品详情图片 转换HTML标签  -->
+			<view class='detailimg' style="margin-top:20rpx;">
+				  <template is="wxParse" data="{{wxParseData:article.nodes}}" />
 			</view>
 
 	</view>
@@ -19,7 +89,64 @@
 </block>
 
 
+
+<view class="wshNew" catchtouchmove="true" wx:if='{{true}}'>
+	  <!-- 助力 -->
+	  <view class="userHelp" catchtap="true">
+			  <!-- 好友助力 -->
+			  <block>
+						<image src="{{infoActivity.cover}}" style="border-radius:20rpx 20rpx 0 0;" class="newDrawTopImg" mode="widthFix" />
+						<view class="userBoxImgTxt">
+								<image src="https://www.51chaidan.com/images/default/headphoto/34849.jpg" class="userBoxImg" mode="aspectFit" />
+								<view class="userBoxTxt">小叮当正在参加限量抽选活动，你的助力让他获得更多签号</view>
+						</view>
+						<view class="userHelpBut" style="background:#DBC69D;">为好友助力</view>
+
+				</block>
+
+				<image class="userHelpFork" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="aspectFit"></image>
+		</view>
+</view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <view style="width:100%;height:300rpx;"></view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ------------------------ 新版抽签 UP ------------------------------ -->
+
+
 
 
 <canvas canvas-id='canimgser' class='canimgsernew'></canvas>
@@ -871,7 +998,25 @@
 </view>
 
 <view style='width:100%;position:fixed;left:0;bottom:0;border-top:1px solid #e5e5e5;background:#fff;z-index:5;'>
-  <block wx:if='{{scrollTopPage>windowHeight}}'>
+
+    <view class="newDrawBSTime">开始倒计时  12:00:00 </view>
+    <view class="newDrawBSButBox">
+				<view class="nDbsBnotice" style="background:#EEAE19;">活动开始通知我</view>
+				<view class="nDbsBnotice" style="background:#DBC69D;">报名获取签号</view>
+				<block>
+					<view class="winningList" style="margin-right:40rpx;">中签名单</view>
+					<block>
+							<view wx:if='{{true}}' class="purchaseNoOverdue" style="background:#B5B5B5;">超时未付款</view>
+							<view wx:elif='{{true}}' class="purchaseNoOverdue" style="background:#B5B5B5;">已购买</view>
+							<view wx:elif='{{true}}' class="purchaseNoOverdue" style="background:#B5B5B5;">未参加抽选</view>
+							<view wx:elif='{{true}}' class="purchaseNoOverdue" style="background:#B5B5B5;">您未中签</view>
+							<view wx:elif='{{true}}' class="purchaseNoOverdue" style="background:#B5B5B5;">您已购买</view>
+							<view wx:elif='{{true}}' class="purchaseNoOverdue" style="background:#DBC69D;">立即支付</view>
+					</block>
+					
+				</block>
+		</view>
+  <!-- <block wx:if='{{scrollTopPage>windowHeight}}'>
 			<view style='width:100%;height:130rpx;background:#fff;border-bottom:1px solid #f9f7f7;position:relative;' wx:if='{{infoGoods.is_on_sale==1||infoGoods.isShowBox}}' catchtap='jumpdetail' data-is_blind_box='{{infoGoods.is_blind_box}}'>
 				
 				<view class="DirectpurchaseClick" catchtap='jumpdetail' data-ind='1' data-is_blind_box='{{infoGoods.is_blind_box}}'></view>
@@ -909,12 +1054,12 @@
 
 				</view>
 			</view>	
-	</block>
+	</block> -->
 
  
-	<view style='{{isIphoneX?"height:130rpx;":"height:110rpx;"}}width:100%;position:relative;'>
+	<!-- <view style='{{isIphoneX?"height:130rpx;":"height:110rpx;"}}width:100%;position:relative;'>
 		<bnavigation isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
-	</view>
+	</view> -->
 
 
 
