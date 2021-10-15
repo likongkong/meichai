@@ -88,7 +88,7 @@ Page({
         direction:'Y',
         explain:true,
         // explainTxt:'消耗积分：用户需使用积分获得抽选资格，勾选后输入消耗积分 \n保证金：用户需支付保证金获取抽选资格，勾选后输入保证金金额，未中奖的用户三个工作日自动退回保证金',
-        explainTxt:'保证金：用户需支付保证金获取抽选资格，勾选后输入保证金金额，未中奖的用户三个工作日自动退回保证金',
+        explainTxt:'定金：用户需支付保证金获取抽选资格，勾选后输入定金金额，未中奖的用户三个工作日自动退回定金',
         input:true,
         multiRadio:true,
         name:'applicationCondition',
