@@ -186,8 +186,8 @@
    <view class="tgimgboxgb" catchtap="howToPlayFun"></view>
    <view class="howToPlay">
        <view class="howToPlayHead">玩法说明</view>
-       <view class="webview1" catchtap="webview1"></view>
-       <view class="webview2" catchtap="webview2"></view>
+       <!-- <view class="webview1" catchtap="webview1"></view>
+       <view class="webview2" catchtap="webview2"></view> -->
        <scroll-view scroll-y="true" class="howToPlayScroll">
           <text class="howToPlayTxt">{{activity.explain}}</text>
        </scroll-view>
