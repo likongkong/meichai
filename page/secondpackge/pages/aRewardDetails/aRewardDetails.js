@@ -1547,5 +1547,24 @@ Page({
         }
     })
   },
+   //公告跳转
+   webview1: function() {
+    var _this = this
+
+    wx.navigateTo({
+      url: "/page/component/pages/webview/webview?webview=https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzA4MjMxMTEyMA==&scene=124#wechat_redirect",
+    });
+
+  },
+  //公告跳转
+  webview2: function() {
+    var _this = this
+
+    wx.navigateTo({
+      url: "/page/component/pages/webview/webview?webview=https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI2Mzg4MDYzNQ==&scene=124#wechat_redirect",
+    });
+
+  },
+
 
 })

@@ -1,7 +1,6 @@
 {
   "asdfasfdflePullDownRefresh": true,
   "enablePullDownRefresh": true,
-  "navigationBarTitleText": "拆盒装",
   "usingComponents": {
     "t_f": "../topfunction/topfunction",
     "bnavigation": "../bottomComponent/bottomComponent",
