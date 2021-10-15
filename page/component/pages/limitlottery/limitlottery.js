@@ -165,6 +165,12 @@ Page({
     isOtherLimitlotteryPop:false,
     isPopNum:0
   },
+  // 中间名单
+  jumpWinningList(){
+    wx.navigateTo({
+      url: "/page/settled/pages/LimWinningList/LimWinningList"
+    });
+  },
   // 跳转刮刮卡
   jumpScrapingCard(){
     app.comjumpwxnav(9023,'','','')

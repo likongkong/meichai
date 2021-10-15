@@ -986,6 +986,8 @@ page{
   text-align: center;
   padding: 0 0 20rpx 0;
   font-weight: bold;
+  border-bottom: 1rpx solid #F5F5F5;
+  margin-bottom: 15rpx;
 }
 .newDrawBSTime{
   width: 100%;
@@ -1073,6 +1075,60 @@ page{
   bottom: -120rpx;
   margin: auto;
 }
+.registrationSucImg{
+  height: 100rpx;
+  width: 100rpx;
+  display: block;
+  margin: 40rpx auto;
+}
+.registrationSucTip{
+  width: 100%;
+  color: #101010;
+  margin-bottom: 30rpx;
+  font-size: 28rpx;
+  text-align: center;
+}
+.regRuleSucTip{
+  width: 500rpx;
+  text-align: center;
+  font-size: 24rpx;
+  margin:0 auto 30rpx;
+  color:#6F6F6F;
+  line-height: 50rpx;
+}
+.identityName{
+  color: #101010;
+  padding: 40rpx;
+  font-size: 28rpx;
+}
+.FailedToWinTheLot{
+  width: 500rpx;
+  margin: 30rpx auto;
+  font-size: 40rpx;
+  font-weight: bold;
+}
+.FailedToWinTheLotTip{
+  width: 500rpx;
+  margin: 30rpx auto;
+  font-size: 24rpx;
+}
+.NewDrawNum{
+  width: 226rpx;
+  padding-right: 78rpx;
+  height: 67rpx;
+  line-height: 67rpx;
+  display: inline-block;
+  margin: 0 0 15rpx 0;
+  background-image: url("https://cdn.51chaidan.com/images/icon/lottoUnpublished.png"); 
+  background-size:100% 100%;
+  text-align: center;
+  font-size: 22rpx;
+}
+
+
+
+
+
 
 
 

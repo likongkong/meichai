@@ -23,7 +23,7 @@
 					<block wx:elif='{{false}}'>超时未支付</block>
 			</view>
       <view class="newDrawTopImgBox">
-				  <image src="{{infoActivity.cover}}" class="newDrawTopImg" mode="widthFix" />
+				  <image src="{{infoActivity.cover}}" catchtap="jumpWinningList" class="newDrawTopImg" mode="widthFix" />
 			</view>
 			<view class="newDrawNamePrice">
 					<view class="newDrawNPPositon"></view>
@@ -37,8 +37,8 @@
 			<view class="newDrawActivityProcess">
 				  <block>
 							<view class="ndapTitle">我的抽签码（1/6）<text class="adapCtivityRules">身份信息 ></text></view>
-							<view class="apEveBox">
-								
+							<view class="apEveBox" style="overflow:hidden;">
+								  <view class="NewDrawNum" wx:for='{{[1,2,3,4,5,6,7,8,9,10,11,12,13]}}' style="{{index%2==1?'float:right;':'float:left;'}}">ABVN1597811114</view>
 							</view>
 					</block>
 					<block>
@@ -90,19 +90,61 @@
 
 
 
-<view class="wshNew" catchtouchmove="true" wx:if='{{true}}'>
+<view class="wshNew" catchtouchmove="true" wx:if='{{false}}'>
 	  <!-- 助力 -->
 	  <view class="userHelp" catchtap="true">
-			  <!-- 好友助力 -->
-			  <block>
+			  <!-- 为好友助力 -->
+			  <block wx:if="{{false}}">
 						<image src="{{infoActivity.cover}}" style="border-radius:20rpx 20rpx 0 0;" class="newDrawTopImg" mode="widthFix" />
 						<view class="userBoxImgTxt">
 								<image src="https://www.51chaidan.com/images/default/headphoto/34849.jpg" class="userBoxImg" mode="aspectFit" />
 								<view class="userBoxTxt">小叮当正在参加限量抽选活动，你的助力让他获得更多签号</view>
 						</view>
-						<view class="userHelpBut" style="background:#DBC69D;">为好友助力</view>
-
+						<view class="userHelpBut" style="background:#DBC69D;">
+								<block>为好友助力</block>
+								<block>您已成功助力</block>
+								<block>好友助力已达上限</block>
+						</view>
 				</block>
+				<!-- 报名成功 -->
+				<block wx:if='{{false}}'>
+						<image src="https://cdn.51chaidan.com/images/icon/lottoSucceed.png" class="registrationSucImg" mode="aspectFit" />
+						<view class="registrationSucTip">恭喜您，报名成功!</view>
+						<view class="registrationSucTip">获取一组抽签号：ABVN159784</view>
+						<view class="userHelpBut" style="background:#DBC69D;">获取更多抽签码</view>
+						<view class="regRuleSucTip">每邀请一名好友助力可获得一组抽签号每人最多可获取六组签号</view>
+				</block>
+				<!-- 身份信息 -->
+				<block wx:if='{{false}}'>
+						<view class="identityName"><text decode="true">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</text>张*</view>
+						<view class="identityName" style="padding-top:0;">身份证号码：210505*********3346</view>
+				</block> 
+				<!-- 未中签 中签 -->
+				<block>
+						<image src="{{infoActivity.cover}}" style="border-radius:20rpx 20rpx 0 0;" class="newDrawTopImg" mode="widthFix" />
+						<!-- 未中签 -->
+						<block>
+								<view class="FailedToWinTheLot">很遗憾，您未中签</view>
+								<view class="FailedToWinTheLotTip">更多精彩内容进行中</view>
+								<view class="userHelpBut" style="background:#DBC69D;">查看其他活动</view>							
+							
+						</block>
+						<!-- 中签 -->
+						<block>
+							  <view class="FailedToWinTheLot" style="color:#EEAE19;">恭喜您，中签啦</view>
+								<view class="FailedToWinTheLotTip">
+										<block>请在2020-12-12 12:00:00付款</block>
+										<block>您未在规定的时间内付款</block>
+								</view>
+								<view class="userHelpBut" style="background:#DBC69D;">
+										<block>去付款</block>
+										<block>查看其他活动</block>
+								</view>			 
+						</block>
+						
+				</block>
+
+
 
 				<image class="userHelpFork" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="aspectFit"></image>
 		</view>
