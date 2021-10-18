@@ -126,9 +126,9 @@
                 </view>
 						</view>
 						
-						<view class="multilineellipsisFive" style="margin:20rpx;font-size:26rpx;" wx:if='{{item.title && item.type!=1 && item.type!=2 && item.type!=5}}' catchtap="jumpoffering" data-id="{{item.id}}" data-selltype='{{item.sellType}}' data-istype='{{item.type}}'><text>{{item.title}}</text></view>
+						<view class="multilineellipsisFive" style="margin:20rpx;font-size:26rpx;" wx:if='{{item.title && item.type!=1 && item.type!=2 && item.type!=5}}' catchtap="jumpoffering" data-id="{{item.id}}" data-selltype='{{item.specialWay}}' data-istype='{{item.type}}'><text>{{item.title}}</text></view>
 						
-            <view class="emlcontent" catchtap="jumpoffering" data-selltype='{{item.sellType}}' data-id="{{item.id}}" data-istype='{{item.type}}'>
+            <view class="emlcontent" catchtap="jumpoffering" data-selltype='{{item.specialWay}}' data-id="{{item.id}}" data-istype='{{item.type}}'>
                 <!-- 动态固定大小 -->
                 <block wx:if='{{(item.type==3 || item.type==1) && item.imgArr.length==1}}'>
                     <view class="dynamicBox">
@@ -159,7 +159,7 @@
                 <view class="signInNowCl" style="background:#ECCA1E;" wx:if='{{item.type==4}}'>立即签到</view>
 						</view>
 						
-						<view class="multilineellipsisFive" style="margin:20rpx;font-size:26rpx;" wx:if='{{item.title && (item.type==1 || item.type==2 || item.type==5)}}' catchtap="jumpoffering" data-id="{{item.id}}" data-selltype='{{item.sellType}}' data-istype='{{item.type}}'><text>{{item.title}}</text></view>
+						<view class="multilineellipsisFive" style="margin:20rpx;font-size:26rpx;" wx:if='{{item.title && (item.type==1 || item.type==2 || item.type==5)}}' catchtap="jumpoffering" data-id="{{item.id}}" data-selltype='{{item.specialWay}}' data-istype='{{item.type}}'><text>{{item.title}}</text></view>
 
             <view class="barndStatus" style="font-size:26rpx;" wx:if='{{item.temporary}}'>
                   <view class='dlfhtitlenew' style="color:#178FF8;font-size:26rpx;height: 40rpx;line-height: 40rpx;">{{item.temporary}}</view>
@@ -217,8 +217,8 @@
                         <image style="margin:0 15rpx;" class="emlplefimgshare" src="{{item.is_like?'https://www.51chaidan.com/images/brand/red_heart.png':'https://www.51chaidan.com/images/brand/black_heart.png'}}" data-type='{{item.type}}' data-ind='{{index}}' catchtap='followfun' data-id='{{item.id}}'></image>
                         
                         
-												<text class="emlplefttxt" catchtap="jumpoffering" data-selltype='{{item.sellType}}' data-id="{{item.id}}" data-istype='{{item.type}}' style="float:right;" wx:if='{{item.commentNumber}}' >{{item.commentNumber?item.commentNumber:'0'}}</text>
-                        <image class="emlplefimgshare" catchtap="jumpoffering" data-selltype='{{item.sellType}}' data-id="{{item.id}}" data-istype='{{item.type}}' src="https://cdn.51chaidan.com/images/brandSettledIcon/comment.png"></image>
+												<text class="emlplefttxt" catchtap="jumpoffering" data-selltype='{{item.specialWay}}' data-id="{{item.id}}" data-istype='{{item.type}}' style="float:right;" wx:if='{{item.commentNumber}}' >{{item.commentNumber?item.commentNumber:'0'}}</text>
+                        <image class="emlplefimgshare" catchtap="jumpoffering" data-selltype='{{item.specialWay}}' data-id="{{item.id}}" data-istype='{{item.type}}' src="https://cdn.51chaidan.com/images/brandSettledIcon/comment.png"></image>
 
 
                       </view>
@@ -241,7 +241,7 @@
         <view class='dlfevecom' style='float:left;'>
           <view class='dlfeveleft' wx:for='{{communityList}}' wx:key='key' wx:if='{{index%2==0}}'>
             <view style='position:relative;margin-bottom:10rpx;'>
-                <view style='width:360rpx;margin:auto;position:relative;max-height:340rpx;overflow: hidden;'  catchtap="jumpoffering" data-id="{{item.id}}" data-selltype='{{item.sellType}}' data-istype='{{item.type}}'>
+                <view style='width:360rpx;margin:auto;position:relative;max-height:340rpx;overflow: hidden;'  catchtap="jumpoffering" data-id="{{item.id}}" data-selltype='{{item.specialWay}}' data-istype='{{item.type}}'>
                   <!-- <view class='dlfchrbright' wx:if='{{item.type==3}}'>动态</view>
                   <view class='dlfchrbright' wx:elif='{{item.type==1}}' style="background:#F5B1AE;">秒杀</view>
                   <view class='dlfchrbright' wx:elif='{{item.type==2}}' style="background:#9BE2F8;">抽选</view>
@@ -360,7 +360,7 @@
         <view class='dlfevecom' style='float:right;'>
           <view class='dlfeveright' wx:for='{{communityList}}' wx:key='key' wx:if='{{index%2==1}}'>
             <view style='position:relative;margin-bottom:10rpx;'>
-                <view style='width:360rpx;margin:auto;position:relative;max-height:340rpx;overflow: hidden;'  catchtap="jumpoffering" data-id="{{item.id}}" data-selltype='{{item.sellType}}' data-istype='{{item.type}}'>
+                <view style='width:360rpx;margin:auto;position:relative;max-height:340rpx;overflow: hidden;'  catchtap="jumpoffering" data-id="{{item.id}}" data-selltype='{{item.specialWay}}' data-istype='{{item.type}}'>
                   <!-- <view class='dlfchrbright' wx:if='{{item.type==3}}'>动态</view>
                   <view class='dlfchrbright' wx:elif='{{item.type==1}}' style="background:#F5B1AE;">秒杀</view>
                   <view class='dlfchrbright' wx:elif='{{item.type==2}}' style="background:#9BE2F8;">抽选</view>
