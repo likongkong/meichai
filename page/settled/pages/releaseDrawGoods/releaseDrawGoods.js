@@ -237,6 +237,8 @@ Page({
       isCanShare:'',
     },
     type:4,
+    timer:'',
+
   },
   /**
    * 生命周期函数--监听页面加载
@@ -631,24 +633,27 @@ Page({
       isShowSellNumber:obj.isParticipants==0?1:0,
       isCanShare:obj.isCanShare==0?1:0,
     }
-    console.log(data)
     // return false;
-    api.settledGoodsSetActivity(data).then((res) => {
-      console.log(res)
-      if(this.data.id && this.data.id!=0){
-        app.showToastC('修改成功',1500);
-      }else{
-        app.showToastC('发布成功',1500);
-      }
-      setTimeout(function(){
-        that.navigateBack();
-        let pages = getCurrentPages();    //获取当前页面信息栈
-        let prevPage = pages[pages.length-2];
-        prevPage.getData();
-      },1500)
-    }).catch((err)=>{
-      console.log(err)
-    })
+    console.log(data)
+
+    clearTimeout(this.data.timer);
+    this.data.timer=setTimeout(()=>{
+      api.settledGoodsSetActivity(data).then((res) => {
+        if(this.data.id && this.data.id!=0){
+          app.showToastC('修改成功',1500);
+        }else{
+          app.showToastC('发布成功',1500);
+        }
+        setTimeout(function(){
+          that.navigateBack();
+          let pages = getCurrentPages();    //获取当前页面信息栈
+          let prevPage = pages[pages.length-2];
+          prevPage.getData();
+        },1500)
+      }).catch((err)=>{
+        console.log(err)
+      })
+    },500)
   },
 
 

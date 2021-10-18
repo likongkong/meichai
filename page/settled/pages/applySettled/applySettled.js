@@ -389,7 +389,6 @@ Page({
         }else{
           app.showToastC(res.data.Msg,2000);
         }
-       
       },
       fail: function () {},
       complete:function(){

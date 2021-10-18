@@ -268,8 +268,8 @@ Page({
       startTime:util.format("yyyy-MM-dd HH:mm"),
       endTime:util.format("yyyy-MM-dd HH:mm",2592000000),
       isCanShare:'', //允许购买对象
-      
     },
+    timer:'',
   },
   /**
    * 生命周期函数--监听页面加载
@@ -581,30 +581,31 @@ console.log(obj.modeOfDespatch)
     // obj.goodsDescribe.split('\n').join('</p><p>');
     console.log(data)
     // return false;
-    api.settledGoodsSetGoods(data).then((res) => {
-      console.log(res)
-      if(res.data.status_code == 200){
-        if(this.data.id && this.data.id!=0){
-          app.showToastC('修改成功',1500);
+    clearTimeout(this.data.timer);
+      this.data.timer=setTimeout(()=>{
+      api.settledGoodsSetGoods(data).then((res) => {
+        console.log(res)
+        if(res.data.status_code == 200){
+          if(this.data.id && this.data.id!=0){
+            app.showToastC('修改成功',1500);
+          }else{
+            app.showToastC('发布成功',1500);
+          }
+          setTimeout(function(){
+            that.navigateBack();
+            let pages = getCurrentPages();    //获取当前页面信息栈
+            let prevPage = pages[pages.length-2];
+            prevPage.getData();
+          },1500)
         }else{
-          app.showToastC('发布成功',1500);
+          if(res.data && res.data.message){
+            app.showModalC(res.data.message); 
+          };        
         }
-        setTimeout(function(){
-          that.navigateBack();
-          let pages = getCurrentPages();    //获取当前页面信息栈
-          let prevPage = pages[pages.length-2];
-          prevPage.getData();
-        },1500)
-      }else{
-        if(res.data && res.data.message){
-          app.showModalC(res.data.message); 
-        };        
-      }
-
-
-    }).catch((err)=>{
-      console.log(err)
-    })
+      }).catch((err)=>{
+        console.log(err)
+      })
+    },500)
   },
 
  
