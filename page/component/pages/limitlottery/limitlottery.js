@@ -163,12 +163,15 @@ Page({
     twoAffirmBox:false,
     lottoid:0,
     isOtherLimitlotteryPop:false,
-    isPopNum:0
+    isPopNum:0,
+    appNowTime: Date.parse(new Date())/1000,
   },
-  // 中间名单
-  jumpWinningList(){
+  // new中间名单
+  jumpWinningList(w){
+    var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
+    var type = w.currentTarget.dataset.type || w.target.dataset.type || 0;
     wx.navigateTo({
-      url: "/page/settled/pages/LimWinningList/LimWinningList"
+        url: "/page/settled/pages/LimWinningList/LimWinningList?id="+id+'&type='+type
     });
   },
   // 跳转刮刮卡
@@ -503,86 +506,22 @@ Page({
       app.signindata.isProduce = true;  
       _this.onLoadfun();
     }else{
-      wx.getSetting({
-        success: res => {
-          if (true) {
-
-            // '已经授权'
-            _this.data.loginid = app.signindata.loginid;
-            _this.data.openid = app.signindata.openid;
-            _this.data.isNewer = app.signindata.isNewer;
-            _this.setData({
-              signinlayer: true,
-              uid: app.signindata.uid,
-              avatarUrl: app.signindata.avatarUrl,
-              isProduce: app.signindata.isProduce,
-            });
-            // 判断是否登录
-            if (_this.data.loginid != '' && _this.data.uid != '') {
-              _this.onLoadfun();
-            } else {
-              app.signin(_this)
-            }
-          } else {
-            wx.hideLoading()
-            _this.onLoadfun();
-            app.userstatistics(29);
-            this.setData({
-              signinlayer: false,
-            })
-          }
-        }
-      });
-    };
-
-  },
-
-  // 授权点击统计
-  clicktga: function () {
-    app.clicktga(2)
-  },
-  clicktganone: function () {
-    this.setData({
-      tgabox: false
-    })
-  },
-  userInfoHandler: function (e) {
-    // 判断是否授权 
-    var _this = this;
-    wx.getSetting({
-      success: res => {
-        if (true) {
-          // 确认授权用户统计
-          app.clicktga(4);
-          _this.setData({
-            tgabox: false,
-            signinlayer: true,
-          });
-          // '已经授权'
-          _this.data.loginid = app.signindata.loginid,
-            _this.data.openid = app.signindata.openid,
-            _this.data.isNewer = app.signindata.isNewer;
-
-          _this.setData({
-            uid: app.signindata.uid,
-            avatarUrl: app.signindata.avatarUrl,
-            isProduce: app.signindata.isProduce,
-          });
-          // 判断是否登录
-          if (_this.data.loginid != '' && _this.data.uid != '') {
-            _this.onLoadfun();
-          } else {
-            app.signin(_this);
-          };
+        // '已经授权'
+        _this.data.loginid = app.signindata.loginid;
+        _this.data.openid = app.signindata.openid;
+        _this.data.isNewer = app.signindata.isNewer;
+        _this.setData({
+          signinlayer: true,
+          uid: app.signindata.uid,
+          avatarUrl: app.signindata.avatarUrl,
+          isProduce: app.signindata.isProduce,
+        });
+        // 判断是否登录
+        if (_this.data.loginid != '' && _this.data.uid != '') {
+          _this.onLoadfun();
         } else {
-          _this.setData({
-            tgabox: true
-          });
+          app.signin(_this)
         }
-      }
-    });
-    if (e.detail.detail.userInfo) { } else {
-      app.clicktga(8) //用户按了拒绝按钮
     };
 
   },
@@ -649,8 +588,105 @@ Page({
     var _this = this
     wx.showLoading({
       title: '加载中...',
+      mask:true
     })
 
+    var q1 = Dec.Aese('mod=lottoV2&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid=' + _this.data.share_id + '&gid=' + _this.data.gid + '&push_id='+_this.data.push_id);
+
+    console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id +  '&share_uid=' + _this.data.share_id + '&gid=' + _this.data.gid + '&push_id='+_this.data.push_id)
+
+    wx.request({
+      url: app.signindata.comurl + 'spread.php' + q1,
+      method: 'GET',
+      header: {
+        'Accept': 'application/json'
+      },
+      success: function (res) {
+        wx.hideLoading()
+        wx.stopPullDownRefresh();
+        _this.data.push_id =  0;
+        console.log('详情接口===',res)
+        if (res.data.ReturnCode == 200) {
+          
+            if(res.data.Info.goods && res.data.Info.goods.goodsDesc){
+                res.data.Info.goods.goodsDesc = decodeURIComponent(res.data.Info.goods.goodsDesc.replace(/\+/g, ' '));
+                WxParse.wxParse('article', 'html', res.data.Info.goods.goodsDesc, _this, 0);
+            };
+            var infoActivity = res.data.Info.activity;
+            var listData = res.data.List; 
+           
+            if(infoActivity.status == 1){
+              infoActivity.start_time = time.toDate(infoActivity.startTime,2);
+              _this.data.timer = setInterval(function () {
+                //将时间传如 调用 
+                _this.dateformat(infoActivity.startTime);
+              }.bind(_this), 1000);
+            }else if(infoActivity.status == 2){
+              infoActivity.stop_time = time.toDate(infoActivity.stopTime,2);
+              _this.data.timer = setInterval(function () {
+                //将时间传如 调用 
+                _this.dateformat(infoActivity.stopTime);
+              }.bind(_this), 1000);
+            }else if(infoActivity.status == 3){
+              infoActivity.finalPay_time = time.toDate(infoActivity.finalPayTime,2);
+              
+            };
+            
+            _this.setData({
+                infoActivity:infoActivity,
+                listData:listData,
+            })
+
+
+            // _this.setData({
+            //   is_ordinary_ticket_user: res.data.Info.is_ordinary_ticket_user,
+            //   promote_start_date:promote_start_date,
+            //   reLottoList:res.data.List.reLottoList || '',
+            //   // is_brand_display:is_brand_display,
+            //   activityDesc: res.data.Info.activityDesc || "",
+            //   brandRule: res.data.Info.infoActivity.brandRule || "",
+            //   shareStatus: res.data.Info.shareStatus || "",
+            //   activityMD: res.data.Info.activityMD || "",
+            //   infoActivity: res.data.Info.infoActivity,
+            //   is_exhibition: res.data.Info.infoActivity ? res.data.Info.infoActivity.specialWay||'' : '',
+            //   brandId:brandid ,
+            //   infoFragment: res.data.Info.infoFragment,
+            //   chiplist: chiplist,
+            //   shareUserInfo: shareUserInfo,
+            //   chipwidth: 600 / infoFragment.totalFragmentNumber,
+            //   linenum: infoFragment.totalFragmentNumber / 2,
+            //   infoGoods: res.data.Info.infoGoods,
+            //   listLotto: res.data.List.listLotto || "",
+            //   winnerLotto: res.data.List.winnerLotto || "",
+            //   winnerUnclaimedLotto: res.data.List.winnerUnclaimedLotto || "",
+            //   payprice: res.data.Info.infoGoods.shop_price || 0,
+            //   subscribedata: res.data.Info.subscribe || '',
+            //   id:res.data.Info.infoActivity.id||0,
+            //   cashPledge:res.data.Info.cashPledge||0,
+            // })
+
+
+
+        }else{
+          wx.showModal({
+            content: res.data.Msg || '',
+            showCancel: false,
+            success: function (res) {}
+          })
+        };
+
+
+
+      },
+
+      fail: function (res) {
+        wx.stopPullDownRefresh();
+        wx.hideLoading()
+      }
+
+    })
+    
+    return false
     var q1 = Dec.Aese('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&isNewer=' + _this.data.isNewer + '&gid=' + _this.data.gid + '&push_id='+_this.data.push_id);
 console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&isNewer=' + _this.data.isNewer + '&gid=' + _this.data.gid + '&push_id='+_this.data.push_id)
     wx.request({
@@ -661,7 +697,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
       },
       success: function (res) {
         _this.data.push_id =  0;
-        console.log(res)
+        console.log('详情接口===',res)
         wx.stopPullDownRefresh();
         wx.stopPullDownRefresh()
         if (res.data.ReturnCode == 200) {

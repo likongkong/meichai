@@ -904,8 +904,10 @@ page{
   padding: 0 40rpx 20rpx;
   font-size: 24rpx;
   color: #808080;
-  height: 34rpx;
-  line-height: 34rpx;
+}
+.intraGroupSelection text{
+  margin-bottom: 10rpx;
+  display: inline-block;
 }
 .newDrawActivityProcess{
   width: 630rpx;

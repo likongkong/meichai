@@ -1,24 +1,24 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 <!-- 中奖名单 -->
-<view class="winList">
-    <view class="winListEve" wx:for='{{[1,2,3]}}' wx:key='key'>
-        <image src="https://www.51chaidan.com/images/default/headphoto/10179.jpg" class="winListEveImg" mode="aspectFit" />
-        <view class="winListEveName">陈**</view>
-        <view class="winListEveName" style="float: right;">211122********1596</view>
+<view class="winList" wx:if='{{type == 1}}'>
+    <view class="winListEve" wx:for='{{winnerList}}' wx:key='key'>
+        <image src="{{item.headphoto}}" class="winListEveImg" mode="aspectFit" />
+        <view class="winListEveName">{{item.nick}}</view>
+        <view class="winListEveName" style="float: right;">{{item.idcard}}</view>
     </view>
 </view>
 <!-- 助力记录 -->
-<view class="winList">
-    <view class="HelpList">共1位好友为助力</view>
-    <view class="winListEve" wx:for='{{[1,2,3]}}' wx:key='key'>
-        <image src="https://www.51chaidan.com/images/default/headphoto/10179.jpg" class="winListEveImg" mode="aspectFit" />
-        <view class="winListEveName">陈**</view>
-        <view class="winListEveName" style="float: right;">2021-10-13 17:00:00</view>
+<view class="winList" wx:if='{{type == 2}}'>
+    <view class="HelpList">共{{helpTotalNumber}}位好友为助力</view>
+    <view class="winListEve" wx:for='{{helpUserList}}' wx:key='key'>
+        <image src="{{item.headphoto}}" class="winListEveImg" mode="aspectFit" />
+        <view class="winListEveName">{{item.nick}}</view>
+        <view class="winListEveName" style="float: right;">{{item.add_time}}</view>
     </view>
 </view>
 <!-- 参与人数 -->
-<view class="winList">
+<view class="winList" wx:if='{{type == 3}}'>
     <image wx:for='{{[1,2,3,4,5,6,7,8,9,10,11]}}' wx:key='key'  src="https://www.51chaidan.com/images/default/headphoto/10179.jpg" class="winListEveImg" style="{{index%8==7?'margin:0 0 15rpx 0;':'margin:0 10rpx 15rpx 0;'}}" mode="aspectFit" />
 </view>
 

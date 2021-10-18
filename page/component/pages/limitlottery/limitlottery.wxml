@@ -7,76 +7,87 @@
 <block>
   <view class="newDraw">
 		  <!-- 未开始 -->
-	    <view class="newDrawTopTime">
-					<block>2121-02-02 12:00:00开始</block>
+	    <view class="newDrawTopTime" wx:if='{{infoActivity.status == 1}}'>
+					{{infoActivity.start_time}}
 			</view>
 		  <!-- 进行中 -->
-	    <view class="newDrawTopTime" style="background:#007797;">
-					<block>开奖时间 2021-08-08 12:00:00</block>
+	    <view class="newDrawTopTime" style="background:#007797;" wx:if='{{infoActivity.status == 2}}'>
+					{{infoActivity.stop_time}}
 			</view>			
 			<!-- 已结束 -->
-	    <view class="newDrawTopTime" style="background:#fff;color:#000;">
-					<block wx:if='{{false}}'>很遗憾，您未中签</block>
-					<block wx:elif='{{true}}'>付款截止日期 2021-08-08 12:00:00</block>
-					<block wx:elif='{{false}}'>您未参加抽选</block>
-					<block wx:elif='{{false}}'>您已购买</block>
-					<block wx:elif='{{false}}'>超时未支付</block>
+	    <view class="newDrawTopTime" style="background:#fff;color:#000;" wx:if='{{infoActivity.status == 3}}'>
+
+				  <block wx:if='{{infoActivity.isSign}}'>
+						  <block wx:if='{{infoActivity.isWinner}}'>
+								  <block wx:if='{{infoActivity.isReceived}}'>您已购买</block>
+									<block wx:elif='{{!infoActivity.isReceived && appNowTime < infoActivity.finalPayTime}}'>付款截止日期 {{infoActivity.finalPay_time}}</block>
+									<block wx:elif='{{!infoActivity.isReceived && appNowTime > infoActivity.finalPayTime}}'>超时未支付</block>
+							</block>
+							<block wx:else>很遗憾，您未中签</block>
+					</block>
+					<block wx:else>您未参加抽选</block>
+
 			</view>
       <view class="newDrawTopImgBox">
-				  <image src="{{infoActivity.cover}}" catchtap="jumpWinningList" class="newDrawTopImg" mode="widthFix" />
+				  <image src="{{infoActivity.cover}}" class="newDrawTopImg" mode="widthFix" />
 			</view>
 			<view class="newDrawNamePrice">
 					<view class="newDrawNPPositon"></view>
-					<view class="newDrawName">TAkii趣多多</view>
+					<view class="newDrawName">{{infoActivity.name}}</view>
 					<view class="newDrawPrice">
-						<text class="newDrawMony">￥</text>39.00<text class="newDrawPNum">抽选数量10体</text>
-						<text class="numberOFParticipants">987人已参与</text>
+						<text class="newDrawMony">￥</text>{{infoActivity.shop_price}}<text class="newDrawPNum" wx:if='{{infoActivity.quota}}'>抽选数量{{infoActivity.quota}}体</text>
+						<text catchtap="jumpWinningList" data-id='{{infoActivity.id}}' data-type='3' class="numberOFParticipants" wx:if='{{infoActivity.sellNumber}}'>{{infoActivity.sellNumber}}人已参与</text>
 					</view>
-					<view class="intraGroupSelection">群内抽选 | 消耗100积分</view>
+					<view class="intraGroupSelection" wx:if='{{listData.tags && listData.tags.length != 0}}'>
+						  <text wx:for='{{listData.tags}}' wx:key='key'>{{item}}<block wx:if='{{index+1 != listData.tags.length}}'> | </block></text>
+					</view>
 			</view>
 			<view class="newDrawActivityProcess">
-				  <block>
-							<view class="ndapTitle">我的抽签码（1/6）<text class="adapCtivityRules">身份信息 ></text></view>
-							<view class="apEveBox" style="overflow:hidden;">
-								  <view class="NewDrawNum" wx:for='{{[1,2,3,4,5,6,7,8,9,10,11,12,13]}}' style="{{index%2==1?'float:right;':'float:left;'}}">ABVN1597811114</view>
-							</view>
+				  <block wx:if='{{infoActivity.isSign}}'>
+								<block wx:if='{{infoActivity.status == 2 && listData.lotto.length != 0}}'>
+										<view class="ndapTitle">我的抽签码（{{listData.lotto.length}}/6）<text class="adapCtivityRules">身份信息 ></text></view>
+										<view class="apEveBox" style="overflow:hidden;">
+												<view class="NewDrawNum" wx:for='{{listData.lotto}}' wx:key='key' style="{{index%2==1?'float:right;':'float:left;'}}">{{item}}</view>
+										</view>
+								</block>
+								<block wx:elif='{{infoActivity.status == 3}}'>
+										<view class="statusStarEnd">
+											  <block wx:if='{{infoActivity.isWinner}}'><text style="color:#EEAE19;">恭喜您，中签啦</text></block>
+												<block wx:else><text style="color:#515151;">很遗憾，您未中签</text></block>
+										</view>
+								</block>
 					</block>
-					<block>
-						  <view class="statusStarEnd">
-									<block><text style="color:#515151;">很遗憾，您未中签</text></block>
-									<block><text style="color:#EEAE19;">恭喜您，中签啦</text></block>
-							</view>
-					</block>
+
 					<view class="ndapTitle">活动进程<text class="adapCtivityRules">活动规则 ></text></view>
 					<view class="apEveBox">
 							<view class="apEve">
-									<view class="apEveTopDate">5月04日</view>
-									<view class="apEveCenter">
-										  <view class="apEveCenterTxt">10:00:00</view>
-											<view>抽选开始</view>
+									<view class="apEveTopDate">{{infoActivity.schdule[0].date}}</view>
+									<view class="apEveCenter" style="{{infoActivity.status == 1 ? 'font-weight: bold;' : ''}}">
+										  <view class="apEveCenterTxt">{{infoActivity.schdule[0].time}}</view>
+											<view>{{infoActivity.schdule[0].tip}}</view>
 									</view>
 							</view> 
 							<view class="apEve" style="margin:0 90rpx">
-								  <view class="apEveTopDate">5月08日</view>
-									<view class="apEveCenter">
-										  <view class="apEveCenterTxt">10:00:00</view>
-											<view>中签购买</view>
+								  <view class="apEveTopDate">{{infoActivity.schdule[1].date}}</view>
+									<view class="apEveCenter" style="{{infoActivity.status == 2 ? 'font-weight: bold;' : ''}}">
+										  <view class="apEveCenterTxt">{{infoActivity.schdule[1].time}}</view>
+											<view>{{infoActivity.schdule[1].tip}}</view>
 											<view class="apEveCenterLine" style="left:168rpx;"></view>
 											<view class="apEveCenterLine" style="left:-72rpx;"></view>
 									</view>
 							</view> 
 							<view class="apEve">
-								  <view class="apEveTopDate">5月10日</view>
-									<view class="apEveCenter">
-										  <view class="apEveCenterTxt">10:00:00</view>
-											<view>购买结束</view>
+								  <view class="apEveTopDate">{{infoActivity.schdule[2].date}}</view>
+									<view class="apEveCenter" style="{{infoActivity.status == 3 ? 'font-weight: bold;' : ''}}">
+										  <view class="apEveCenterTxt">{{infoActivity.schdule[2].time}}</view>
+											<view>{{infoActivity.schdule[2].tip}}</view>
 									</view>
 							</view> 
 					</view>
 			</view>
-			<view class="newDrawActivityProcess">
+			<view class="newDrawActivityProcess" wx:if='{{listData.introduce}}'>
 					<view class="ndapTitle">抽选说明</view>
-					<view class="SelectionDescription"><text>预计发货时间：2021年九月份\n物流方式：顺丰到付\n请遵守活动规则</text></view>
+					<view class="SelectionDescription"><text>{{listData.introduce}}</text></view>
 			</view>
 
 			<!--  商品详情图片 转换HTML标签  -->
@@ -1041,19 +1052,39 @@
 
 <view style='width:100%;position:fixed;left:0;bottom:0;border-top:1px solid #e5e5e5;background:#fff;z-index:5;'>
 
-    <view class="newDrawBSTime">开始倒计时  12:00:00 </view>
+    <view class="newDrawBSTime" wx:if='{{infoActivity.status==1 || infoActivity.status==2}}'>
+					<block wx:if='{{infoActivity.status==1}}'>开始倒计时   </block>
+					<block wx:elif='{{infoActivity.status==2}}'>开奖倒计时   </block>
+					<block wx:if='{{dayStr!=0}}'>{{dayStr}}天</block>
+					<block>{{hrStr}}时{{minStr}}分{{secStr}}秒</block>
+		</view>
     <view class="newDrawBSButBox">
-				<view class="nDbsBnotice" style="background:#EEAE19;">活动开始通知我</view>
-				<view class="nDbsBnotice" style="background:#DBC69D;">报名获取签号</view>
-				<block>
-					<view class="winningList" style="margin-right:40rpx;">中签名单</view>
+				<view class="nDbsBnotice" wx:if='{{infoActivity.status==1}}' style="background:#EEAE19;">活动开始通知我</view>
+				<!-- catchtap="jumpWinningList" data-id='{{infoActivity.id}}' data-type='1' -->
+				<block wx:if='{{infoActivity.status==2}}'>
+					  <block wx:if='{{infoActivity.isSign}}'>
+								<view class="winningList" style="margin-right:40rpx;" catchtap="jumpWinningList" data-id='{{infoActivity.id}}' data-type='2'>助力记录</view>
+								<view class="purchaseNoOverdue" style="background:#DBC69D;">获取更多与签号</view>
+						</block>
+						<view wx:else class="nDbsBnotice" style="background:#DBC69D;">报名获取签号</view>
+				</block>
+				
+				<block wx:if='{{infoActivity.status==3}}'>
+					<view class="winningList" style="margin-right:40rpx;" catchtap="jumpWinningList" data-id='{{infoActivity.id}}' data-type='1'>中签名单</view>
 					<block>
-							<view wx:if='{{true}}' class="purchaseNoOverdue" style="background:#B5B5B5;">超时未付款</view>
-							<view wx:elif='{{true}}' class="purchaseNoOverdue" style="background:#B5B5B5;">已购买</view>
-							<view wx:elif='{{true}}' class="purchaseNoOverdue" style="background:#B5B5B5;">未参加抽选</view>
-							<view wx:elif='{{true}}' class="purchaseNoOverdue" style="background:#B5B5B5;">您未中签</view>
-							<view wx:elif='{{true}}' class="purchaseNoOverdue" style="background:#B5B5B5;">您已购买</view>
-							<view wx:elif='{{true}}' class="purchaseNoOverdue" style="background:#DBC69D;">立即支付</view>
+							<block wx:if='{{infoActivity.isSign}}'>
+								  <block wx:if='{{infoActivity.isWinner}}'>
+
+									  	<view wx:if='{{infoActivity.isReceived}}' class="purchaseNoOverdue" style="background:#B5B5B5;">已购买</view>
+										  <view wx:elif='{{!infoActivity.isReceived && appNowTime < infoActivity.finalPayTime}}' class="purchaseNoOverdue" style="background:#DBC69D;">立即支付</view>
+											<view wx:elif='{{!infoActivity.isReceived && appNowTime > infoActivity.finalPayTime}}' class="purchaseNoOverdue" style="background:#B5B5B5;">超时未付款</view>
+											
+									</block>
+									<view wx:else class="purchaseNoOverdue" style="background:#B5B5B5;">您未中签</view>
+							</block>
+							<view wx:else class="purchaseNoOverdue" style="background:#B5B5B5;">未参加抽选</view>
+
+
 					</block>
 					
 				</block>
@@ -1106,9 +1137,6 @@
 
 
 </view>
-
-<!--  授权弹框  -->
-<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
 
 <view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight}}px;width: 100%;z-index: 300;' catchtap='pullupsignin'></view>
 
