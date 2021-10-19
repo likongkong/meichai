@@ -210,6 +210,12 @@
           "pathName": "page/settled/pages/myWallet/myWallet",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "抽隐藏",
+          "pathName": "page/secondpackge/pages/drawHideGoods/drawHideGoods",
+          "query": "",
+          "scene": null
         }
       ]
     }

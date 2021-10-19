@@ -32,8 +32,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options,111)
     var _this = this;
     _this.data.share_uid = options.share_uid || 0;
+    _this.data.gid = options.gid || 0;
     app.signindata.suap = 22;
     // 判断是否授权
     this.activsign();
@@ -60,7 +62,6 @@ Page({
     wx.getSetting({
       success: res => {
         if (true) {
-          console.log(1111111111)
           // '已经授权'
           _this.setData({
             loginid: app.signindata.loginid,
@@ -202,8 +203,8 @@ Page({
   getInfo(){
     var _this = this;
     wx.showLoading({ title: '加载中...'})
-    var q = Dec.Aese('mod=LuckyDraw&operation=CurrentPrizesList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
-    console.log('mod=LuckyDraw&operation=CurrentPrizesList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+    var q = Dec.Aese('mod=LuckyDraw&operation=CurrentPrizesList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&goodsId='+_this.data.gid)
+    console.log('mod=LuckyDraw&operation=CurrentPrizesList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&goodsId='+_this.data.gid)
     wx.request({
       url: app.signindata.comurl + 'spread.php'+q,
       method: 'GET',
