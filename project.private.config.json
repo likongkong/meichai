@@ -80,9 +80,9 @@
           "scene": null
         },
         {
-          "name": "普通票",
-          "pathName": "page/secondpackge/pages/ordinaryTicket/ordinaryTicket",
-          "query": "",
+          "name": "抽签",
+          "pathName": "page/component/pages/limitlottery/limitlottery",
+          "query": "list=1&id=484772&referee=39860",
           "scene": null
         },
         {

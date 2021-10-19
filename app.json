@@ -184,6 +184,7 @@
         "pages/task/task",
         "pages/taskRecord/taskRecord",
         "pages/taskExplain/taskExplain",
+        "pages/LimWinningList/LimWinningList",
         "pages/releaseSignIn/releaseSignIn"
       ]
     }

@@ -51,7 +51,9 @@ function toDate(number,num) {
   var h = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
   var m = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
   var s = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
-  if(num==1){
+  if(num==2){
+    return Y + '-' + M + '-' + D+' '+h+':'+m+':'+s;
+  }else if(num==1){
     return M + '-' + D;
   }else if (new Date(number * 1000).toDateString() === new Date().toDateString()) {
     return h + ':' + m;

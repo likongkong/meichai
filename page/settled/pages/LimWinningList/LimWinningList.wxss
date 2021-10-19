@@ -1,0 +1,50 @@
+@import "/common/tabbar.wxss";
+
+page{
+  background:#f4f5f9;
+}
+.winList{
+  padding: 20rpx;
+}
+.winListEve{
+  width: 100%;
+  height: 80rpx;
+  padding: 15rpx 0;
+  border-bottom: 1rpx solid #F5F5F5;
+}
+.winListEveImg{
+  width: 80rpx;
+  height: 80rpx;
+  float: left;
+  border-radius: 50%;
+}
+.winListEveName{
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 28rpx;
+  margin-left: 20rpx;
+  float: left;
+}
+.HelpList{
+  height: 60rpx;
+  color: #999999;
+  font-size: 28rpx;
+  line-height: 60rpx;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
