@@ -165,6 +165,58 @@ Page({
     isOtherLimitlotteryPop:false,
     isPopNum:0,
     appNowTime: Date.parse(new Date())/1000,
+    commonBulletFrame:false,
+    comBulFraNun:0, // 1 为好友助力 2 报名成功  3 身份信息  4 未中签 中签
+    helpTipFitst:true
+  },
+  // 身份信息
+  identityFun(){
+    var idName = {};
+    
+    idName.idcard = time.plusXing(this.data.infoActivity.signIdCard,4,4);
+    idName.name = time.plusXing(this.data.infoActivity.signName,1,0);
+     this.setData({
+      idName:idName
+     })
+     this.commonBulletFrameFun(3)
+  },
+  // 好友助力
+  friendHelp(){
+    var _this = this;
+    wx.showLoading({
+      title: '加载中...',
+      mask:true
+    })
+    var exh = Dec.Aese('mod=lottoV2&operation=friendHelp&gid=' + _this.data.gid+ '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id+ '&share_uid=' + _this.data.share_id);
+    console.log('mod=lottoV2&operation=friendHelp&gid=' + _this.data.gid+ '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id+ '&share_uid=' + _this.data.share_id)
+    wx.request({
+      url: app.signindata.comurl + 'spread.php' + exh,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('助力===========',res)
+        wx.hideLoading()
+        if (res.data.ReturnCode == 200) {
+           _this.setData({
+             ['helpInfo.status']:1
+           })
+        } else {
+          wx.showModal({
+            content: res.data.Msg || res.data.msg || '',
+            showCancel: false,
+            success: function (res) {}
+          })
+          _this.commonBulletFrameFun()
+        };
+      },
+      fail: function () { }
+    });
+  },
+  commonBulletFrameFun(num=0){
+     this.setData({
+        comBulFraNun:num,
+        commonBulletFrame:!this.data.commonBulletFrame
+     })
   },
   // new中间名单
   jumpWinningList(w){
@@ -629,15 +681,54 @@ Page({
               }.bind(_this), 1000);
             }else if(infoActivity.status == 3){
               infoActivity.finalPay_time = time.toDate(infoActivity.finalPayTime,2);
-              
             };
             
+            // 支付定金报名成功添加提示框
+            if(_this.data.infoActivity && !_this.data.infoActivity.isSign && _this.data.is_payment && infoActivity.activitySignMothed == 'payTicket'){
+              _this.setData({
+                  lottoSucc:listData.lotto[0].lotto || ''
+              });
+              _this.data.is_payment = false;
+              _this.commonBulletFrameFun(2)
+            };
+            // 是否中签弹框提示
+            if(infoActivity.status == 3 && infoActivity.isSign){
+              _this.commonBulletFrameFun(4);
+            };
+
+
             _this.setData({
                 infoActivity:infoActivity,
                 listData:listData,
-            })
+                subscribedata: res.data.Info.subscribe.lotto || '',
+                cashPledge:infoActivity.cashPledge||0,
+                cart_id: infoActivity.cartId,
+            });
 
 
+            if(_this.data.tipaid){}else{_this.addressCom();}
+  
+            if(infoActivity.isCanShare == 1 && _this.data.canShare!=1 && _this.data.isList != 1){
+                console.log('detail == 1','不能分享')
+                wx.hideShareMenu();
+                _this.setData({
+                  is_share_but:false
+                })
+                _this.toogleGuidanceMask();
+            }else{
+                wx.showShareMenu({
+                  withShareTicket:true
+                });
+            };
+            // 助力
+            var helpInfo = res.data.Info.helpInfo || ""
+            if(helpInfo && helpInfo.status !=3 && _this.data.helpTipFitst){
+                _this.setData({
+                    helpInfo:helpInfo,
+                    helpTipFitst:false
+                });
+                _this.commonBulletFrameFun(1)
+            }
             // _this.setData({
             //   is_ordinary_ticket_user: res.data.Info.is_ordinary_ticket_user,
             //   promote_start_date:promote_start_date,
@@ -1137,39 +1228,40 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
   },
   joinlimitlotteryFun(){
     var _this = this;
+    _this.newJoinDraw()
     // is_ordinary_ticket_user存在且为true === 普通票用户
-    if(_this.data.is_ordinary_ticket_user != undefined && _this.data.is_ordinary_ticket_user){
-      this.ticketList();
-    }else if(_this.data.is_ordinary_ticket_user != undefined && !_this.data.is_ordinary_ticket_user){
-      // wx.showToast({
-      //   title: '未检测到您的购票信息，请参加其他抽签活动',
-      //   icon: 'none',
-      //   mask:true,
-      //   duration:2000
-      // });  
-      _this.setData({
-        isOtherLimitlotteryPop:true
-      })
-    }else{
-      // if(_this.data.promote_start_date && !_this.data.subscribeOrNot){
-      //   _this.subscrfun(1);
-      // }else
-      if(_this.data.infoActivity.premiseForJoin && _this.data.isList == 1){
-          _this.listTipImg();
-      }else if (_this.data.infoActivity.joinMothed == "blindBox" && !_this.data.infoActivity.isCanOpenLotto) {
-        wx.navigateTo({
-          url: "/pages/smokeboxlist/smokeboxlist",
-        });
-      } else if (_this.data.infoActivity.joinMothed == "zone" && !_this.data.infoActivity.isCanOpenLotto) {
-        wx.navigateTo({
-          url: "/page/component/pages/newsigninarea/newsigninarea?type=3",
-        });
-      }  else if (_this.data.infoActivity.isCommandActivity) {
-          this.redpinputdataiftr();
-      } else {
-        this.joinDraw(0);
-      }
-    }
+    // if(_this.data.is_ordinary_ticket_user != undefined && _this.data.is_ordinary_ticket_user){
+    //   this.ticketList();
+    // }else if(_this.data.is_ordinary_ticket_user != undefined && !_this.data.is_ordinary_ticket_user){
+    //   // wx.showToast({
+    //   //   title: '未检测到您的购票信息，请参加其他抽签活动',
+    //   //   icon: 'none',
+    //   //   mask:true,
+    //   //   duration:2000
+    //   // });  
+    //   _this.setData({
+    //     isOtherLimitlotteryPop:true
+    //   })
+    // }else{
+    //   // if(_this.data.promote_start_date && !_this.data.subscribeOrNot){
+    //   //   _this.subscrfun(1);
+    //   // }else
+    //   if(_this.data.infoActivity.premiseForJoin && _this.data.isList == 1){
+    //       _this.listTipImg();
+    //   }else if (_this.data.infoActivity.joinMothed == "blindBox" && !_this.data.infoActivity.isCanOpenLotto) {
+    //     wx.navigateTo({
+    //       url: "/pages/smokeboxlist/smokeboxlist",
+    //     });
+    //   } else if (_this.data.infoActivity.joinMothed == "zone" && !_this.data.infoActivity.isCanOpenLotto) {
+    //     wx.navigateTo({
+    //       url: "/page/component/pages/newsigninarea/newsigninarea?type=3",
+    //     });
+    //   }  else if (_this.data.infoActivity.isCommandActivity) {
+    //       this.redpinputdataiftr();
+    //   } else {
+    //     this.joinDraw(0);
+    //   }
+    // }
   },
 
 
@@ -1310,6 +1402,97 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
         };
       }
     });
+  },
+  // 新报名
+  newJoinDraw(){
+    var _this = this;
+
+
+  
+
+    if(this.data.isfullPledge){
+      var q1 = Dec.Aese('mod=lottoV2&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id +'&aid='+this.data.tipaid);
+
+      console.log('参与抽签','mod=lottoV2&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id +'&aid='+this.data.tipaid)
+      this.setData({isfullPledge: false})
+    }else{
+      this.setData({
+        receivingaddress:true
+      })
+      return false;
+    }
+
+
+    wx.showLoading({
+      title: '加载中...',
+      mask:true
+    })  
+    wx.request({
+      url: app.signindata.comurl + 'spread.php' + q1,
+      method: 'GET',
+      header: {
+        'Accept': 'application/json'
+      },
+      success: function (res) {
+        console.log('报名抽签==========',res)
+        if (res.data.ReturnCode == 200) {
+          if(res.data.Info && res.data.Info.activity && res.data.Info.activity.lotto[0]){
+            _this.setData({
+                lottoSucc:res.data.Info.activity.lotto[0]
+            });
+          };
+
+          _this.commonBulletFrameFun(2);
+          _this.getinfo();
+
+          var subscribedata = res.data.Info.subscribe || '';
+          _this.data.subscribedata = subscribedata;
+          if (app.signindata.subscribeif && subscribedata && subscribedata.template_id) {
+            if (subscribedata.template_id instanceof Array) {
+              wx.requestSubscribeMessage({
+                tmplIds: subscribedata.template_id || [],
+                success(res) {
+                  for (var i = 0; i < subscribedata.template_id.length; i++) {
+                    if (res[subscribedata.template_id[i]] == "accept") {
+                      app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+                    };
+                  };
+                }
+              })
+            } else {
+              wx.requestSubscribeMessage({
+                tmplIds: [subscribedata.template_id || ''],
+                success(res) {
+                  if (res[subscribedata.template_id] == "accept") {
+                    app.subscribefun(_this, 0, subscribedata.template_id, subscribedata.subscribe_type);
+                  };
+                },
+                complete() { }
+              })
+            };
+          };
+
+        } else if (res.data.ReturnCode == 358){
+          _this.setData({
+            payMask: true,
+            cart_id: res.data.Info.order.cart_id
+          })
+        } else {
+          if(res.data.ReturnCode != 300){
+            if(res.data.Msg){
+              wx.showModal({
+                content: res.data.Msg || '',
+                showCancel: false,
+                success: function (res) {}
+              })              
+            }
+          };
+        }
+      },
+      complete:function(){
+        wx.hideLoading()
+      }
+    })
   },
   joinDraw: function (share_uid) {
     var _this = this;
@@ -2044,12 +2227,10 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
       receivingaddress: false
     });
     //  && this.data.infoActivity.payTicketCate == 'fullPledge'
-    if(this.data.infoActivity.joinMothed == 'payTicket' && this.data.infoActivity.status == 2){
-      this.setData({
-        isfullPledge:true
-      });
-      this.joinDraw(0);
-    }
+    this.setData({
+      isfullPledge:true
+    });
+    this.newJoinDraw(0);
   },
 
   // 买家备注
@@ -2144,30 +2325,30 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
                 buybombsimmediately: false,
                 suboformola: false,
                 desc: '',
-                isfullPledge: true
+                lottoSucc: '',
               });
 
-              var cart_id = _this.data.cart_id || '0';
 
+              _this.data.is_payment = true;
               _this.getinfo()
               
-              if(_this.data.is_ordinary_ticket_user){
-                _this.ticketList();
-              }
+              // if(_this.data.is_ordinary_ticket_user){
+              //   _this.ticketList();
+              // }
 
-              if(e && e != "undefined" && (_this.data.infoActivity.joinMothed != 'payTicket' && _this.data.infoActivity.payTicketCate != 'fullPledge')){
-                _this.joinDraw(0);
-              }
+              // if(e && e != "undefined" && (_this.data.infoActivity.joinMothed != 'payTicket' && _this.data.infoActivity.payTicketCate != 'fullPledge')){
+              //   _this.joinDraw(0);
+              // }
 
-              if (payinfo.isFreeBuyOrder) {
-                wx.navigateTo({
-                  url: "/page/component/pages/hidefun/hidefun?type=1&cart_id=" + _this.data.cart_id
-                });
-              } else {
-                if(!_this.data.is_ordinary_ticket_user){
-                  app.showToastC('购买成功');
-                }
-              }
+              // if (payinfo.isFreeBuyOrder) {
+              //   wx.navigateTo({
+              //     url: "/page/component/pages/hidefun/hidefun?type=1&cart_id=" + _this.data.cart_id
+              //   });
+              // } else {
+              //   if(!_this.data.is_ordinary_ticket_user){
+              //     app.showToastC('购买成功');
+              //   }
+              // }
 
             },
             'fail': function (res) {
@@ -2175,7 +2356,8 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
                 tipbacktwo: false,
                 buybombsimmediately: false,
                 suboformola: false,
-                desc: ''
+                desc: '',
+                payMask:false
               })
             },
             'complete': function (res) {
@@ -2423,5 +2605,13 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
     })
   },
   emptyFun(){},
+  toogleGuidanceMask(){
+    this.setData({
+      guidanceMask:!this.data.guidanceMask
+    }) 
+  },
+
+
+
 
 })
