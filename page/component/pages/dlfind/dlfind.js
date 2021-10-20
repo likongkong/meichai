@@ -1047,7 +1047,7 @@ Page({
     var istype = w.currentTarget.dataset.istype || w.target.dataset.istype || 0;
     if(istype == 1){ // 秒杀
       var selltype = w.currentTarget.dataset.selltype || w.target.dataset.selltype || 0;
-      if(selltype == 1){
+      if(selltype > 0){
         type = 1;
       }else{
         type = 9047;
