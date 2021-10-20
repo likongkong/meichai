@@ -3904,9 +3904,9 @@ Page({
     if (!reg.test(shareimg)) {
       shareimg = _this.data.zdyurl + shareimg;
     };    
-    
+     
     var reshare = {
-      title:_this.data.zunmdata.gname ,
+      title: `${_this.data.zunmdata.endTime && _this.data.zunmdata.endTime!=''?'【限时】':'【限量】'}${_this.data.zunmdata.gname}`,
       path: '/pages/detailspage/detailspage?gid=' + _this.data.gid + '&referee='+_this.data.uid,
       // imageUrl: 'https://cdn.51chaidan.com/'+_this.data.zunmdata.goods_share ,
       imageUrl: _this.data.zunmdata.goods_share ,

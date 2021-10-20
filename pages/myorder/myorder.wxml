@@ -564,7 +564,7 @@
 
                         </view>
 
-                        <view class='wholebottomaddright sharebox redborcol' wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood}}'>
+                        <view class='wholebottomaddright sharebox redborcol' wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood && item.order_type!=13}}'>
                             <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
                             分享好友
                         </view>
@@ -610,7 +610,7 @@
 
                         </view>
 
-                        <view class='wholebottomaddright sharebox redborcol' wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood}}'>
+                        <view class='wholebottomaddright sharebox redborcol' wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood && item.order_type!=13}}'>
                             <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
                             分享好友
                         </view>     
@@ -643,7 +643,7 @@
 
                         </view>
                         
-                        <view class='wholebottomaddright sharebox redborcol' wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood}}'>
+                        <view class='wholebottomaddright sharebox redborcol' wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood && item.order_type!=13}}'>
                             <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
                             分享好友
                         </view> 
@@ -676,7 +676,7 @@
 
                         </view>
 
-                        <view class='wholebottomaddright sharebox redborcol'  wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood}}'>
+                        <view class='wholebottomaddright sharebox redborcol'  wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood && item.order_type!=13}}'>
                             <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
                             分享好友
                         </view> 
@@ -717,7 +717,7 @@
 
                         </view>
                         
-                        <view class='wholebottomaddright sharebox redborcol'  wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood}}'>
+                        <view class='wholebottomaddright sharebox redborcol'  wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood && item.order_type!=13}}'>
                             <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
                             分享好友
                         </view>   
@@ -752,7 +752,7 @@
 
                         <view class='wholebottomaddright' data-oid='{{item.oid}}' bindtap='confirmationofreceipt'>确认收货</view>             
                         <view class='wholebottomaddright' data-oid='{{item.oid}}' data-gcover='{{item.gcover}}' bindtap='lookatthelogistics' style='margin-right:10rpx;position: relative;'>查看物流</view> 
-                        <view class='wholebottomaddright sharebox redborcol' style='margin-right:20rpx;'  wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood}}'>
+                        <view class='wholebottomaddright sharebox redborcol' style='margin-right:20rpx;'  wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood && item.order_type!=13}}'>
                             <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
                             分享好友
                         </view>
@@ -775,7 +775,7 @@
                             <view style='width:100%;height:100%;position: relative;'>晒单领奖<button class='tgaboxtgawchbochlibutboxtwo' type='primary' bindtap="getUserProfile" data-qrcode='{{item.qrcode}}' data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具' data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}'></button></view>
                         </view>
                                 
-                        <view class='wholebottomaddright sharebox redborcol'  wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood}}'>
+                        <view class='wholebottomaddright sharebox redborcol'  wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood && item.order_type!=13}}'>
                             <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
                             分享好友
                         </view> 
@@ -800,7 +800,7 @@
                             <block wx:if='{{item.status_detail == 2}}'>支付时间超过1分钟，支付金额会原路返回到您的支付账号中</block>
                             <block wx:else>{{item.order_type==27&&item.status==7&&item.compareTime?'您未中签，退款金额将在48小时内原路退回':'付款将会原路返回到您的支付账号中'}}</block>
                         </view>
-                        <view class='wholebottomaddright sharebox redborcol' style="{{item.status_detail==2?'margin-top:16rpx;':''}}" wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood}}'>
+                        <view class='wholebottomaddright sharebox redborcol' style="{{item.status_detail==2?'margin-top:16rpx;':''}}" wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood && item.order_type!=13}}'>
                             <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
                             分享好友
                         </view> 
@@ -810,7 +810,7 @@
                     <!--  已取消订单  -->
                     <view wx:if='{{item.status==8 && item.order_type!=7}}' style='min-height:1rpx;width:94%;padding: 0 3% 10rpx;overflow:hidden;'>    
 
-                        <view class='wholebottomaddright sharebox redborcol'  wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood}}'>
+                        <view class='wholebottomaddright sharebox redborcol'  wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood && item.order_type!=13}}'>
                             <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
                             分享好友
                         </view>    
@@ -831,7 +831,7 @@
 
                     <view class='wholebottomadd' wx:if='{{item.status==10||item.status==11}}'>
                         <view class='totaltittrfai' >付款将会原路返回到您的支付账号中</view>  
-                        <view class='wholebottomaddright sharebox redborcol'  wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood}}'>
+                        <view class='wholebottomaddright sharebox redborcol'  wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood && item.order_type!=13}}'>
                             <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
                             分享好友
                         </view>    

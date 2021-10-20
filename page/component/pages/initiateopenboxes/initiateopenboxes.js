@@ -220,9 +220,8 @@ Page({
   },
   showrule: function() {
     var _this = this
-
     wx.navigateTo({
-      url: "/page/component/pages/webview/webview?webview=https://www.51chaidan.com/notice/strategyShowBox.html",
+      url: "/page/secondpackge/pages/gbaPage/gbaPage?webview=https://meichai-1300990269.cos.ap-beijing.myqcloud.com/activity_rules.json&from=showBox",
     });
   },
 

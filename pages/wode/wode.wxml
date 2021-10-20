@@ -280,9 +280,9 @@
     <view class='whwdddw'>
         <view class='whwddd'>
             当前版本
-            <view class='whbocndr'>
+            <view class='whbocndr' style="padding-right:0;">
                {{versionnumber}}
-               <image class='whwddimgtit' src='../images/icon_in.png'></image>
+               <!-- <image class='whwddimgtit' src='../images/icon_in.png'></image> --> 
             </view>
         </view>
     </view>

@@ -167,7 +167,12 @@ Page({
     appNowTime: Date.parse(new Date())/1000,
     commonBulletFrame:false,
     comBulFraNun:0, // 1 为好友助力 2 报名成功  3 身份信息  4 未中签 中签
-    helpTipFitst:true
+    helpTipFitst:true,
+    refreshGetin:true
+  },
+  // 抽签规则
+  drawRuleJump(){
+    app.comjumpwxnav(9050,1,'','')
   },
   // 身份信息
   identityFun(){
@@ -206,7 +211,9 @@ Page({
             showCancel: false,
             success: function (res) {}
           })
-          _this.commonBulletFrameFun()
+          _this.setData({
+            commonBulletFrame:false
+          })
         };
       },
       fail: function () { }
@@ -597,9 +604,9 @@ Page({
 
     _this.getinfo();
 
-    if (_this.data.share_id != 0) {
-      _this.joinDraw(_this.data.share_id);
-    }
+    // if (_this.data.share_id != 0) {
+    //   _this.joinDraw(_this.data.share_id);
+    // }
 
     setTimeout(function () {
       _this.getdefault()
@@ -646,7 +653,7 @@ Page({
     var q1 = Dec.Aese('mod=lottoV2&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid=' + _this.data.share_id + '&gid=' + _this.data.gid + '&push_id='+_this.data.push_id);
 
     console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id +  '&share_uid=' + _this.data.share_id + '&gid=' + _this.data.gid + '&push_id='+_this.data.push_id)
-
+    clearInterval(_this.data.timer);
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q1,
       method: 'GET',
@@ -669,18 +676,19 @@ Page({
            
             if(infoActivity.status == 1){
               infoActivity.start_time = time.toDate(infoActivity.startTime,2);
-              _this.data.timer = setInterval(function () {
                 //将时间传如 调用 
                 _this.dateformat(infoActivity.startTime);
-              }.bind(_this), 1000);
             }else if(infoActivity.status == 2){
               infoActivity.stop_time = time.toDate(infoActivity.stopTime,2);
-              _this.data.timer = setInterval(function () {
                 //将时间传如 调用 
                 _this.dateformat(infoActivity.stopTime);
-              }.bind(_this), 1000);
             }else if(infoActivity.status == 3){
               infoActivity.finalPay_time = time.toDate(infoActivity.finalPayTime,2);
+              // 支付倒计时
+              if(!infoActivity.isReceived && _this.data.appNowTime < infoActivity.finalPayTime){
+                  _this.dateformat(infoActivity.finalPayTime);
+              };
+
             };
             
             // 支付定金报名成功添加提示框
@@ -693,7 +701,14 @@ Page({
             };
             // 是否中签弹框提示
             if(infoActivity.status == 3 && infoActivity.isSign){
-              _this.commonBulletFrameFun(4);
+              if(infoActivity.isWinner){
+                if(!infoActivity.isReceived){
+                    _this.commonBulletFrameFun(4);
+                };
+              }else{
+                _this.commonBulletFrameFun(4);
+              };
+
             };
 
 
@@ -702,19 +717,21 @@ Page({
                 listData:listData,
                 subscribedata: res.data.Info.subscribe.lotto || '',
                 cashPledge:infoActivity.cashPledge||0,
-                cart_id: infoActivity.cartId,
+                cart_id: infoActivity.cartId || '',
             });
 
 
             if(_this.data.tipaid){}else{_this.addressCom();}
   
-            if(infoActivity.isCanShare == 1 && _this.data.canShare!=1 && _this.data.isList != 1){
+            if(infoActivity.isCanShare && _this.data.canShare!=1 && _this.data.isList != 1){
                 console.log('detail == 1','不能分享')
                 wx.hideShareMenu();
                 _this.setData({
                   is_share_but:false
                 })
-                _this.toogleGuidanceMask();
+                if(!_this.data.share_id){
+                    _this.toogleGuidanceMask();
+                };
             }else{
                 wx.showShareMenu({
                   withShareTicket:true
@@ -1407,8 +1424,12 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
   newJoinDraw(){
     var _this = this;
 
+    // 群内分享  在列表进去禁止报名
+    if(_this.data.infoActivity.isCanShare && !_this.data.share_id){
+      _this.toogleGuidanceMask();
+      return false
+    };
 
-  
 
     if(this.data.isfullPledge){
       var q1 = Dec.Aese('mod=lottoV2&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id +'&aid='+this.data.tipaid);
@@ -1438,7 +1459,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
         if (res.data.ReturnCode == 200) {
           if(res.data.Info && res.data.Info.activity && res.data.Info.activity.lotto[0]){
             _this.setData({
-                lottoSucc:res.data.Info.activity.lotto[0]
+                lottoSucc:res.data.Info.activity.lotto
             });
           };
 
@@ -1844,7 +1865,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
       var imageUrl = _this.data.snapshotlim
     };
     var share = {
-      title:_this.data.infoActivity.name ,
+      title:'【抽选】'+_this.data.infoActivity.name,
       imageUrl: imageUrl ,
       path:urlpath ,
       success: function (res) {}
@@ -1916,56 +1937,69 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
 
   // 时间格式化输出，将时间戳转为 倒计时时间
   dateformat: function (micro_second) {
-    var _this = this
-    var timestamp = Date.parse(new Date())
-    //总的秒数 
-    var second = micro_second - (timestamp / 1000);
-    if (second > 0) {
-      // 天位    
-      var day = Math.floor(second / 3600 / 24);
-      var dayStr = day.toString();
-      if (dayStr.length == 1) dayStr = '0' + dayStr;
-
-      // 小时位 
-      var hr = Math.floor(second / 3600 % 24);
-      // var hr = Math.floor(second / 3600); //直接转为小时 没有天 超过1天为24小时以上
-      var hrStr = hr.toString();
-      if (hrStr.length == 1) hrStr = '0' + hrStr;
-
-      // 分钟位  
-      var min = Math.floor(second / 60 % 60);
-      var minStr = min.toString();
-      if (minStr.length == 1) minStr = '0' + minStr;
-
-      // 秒位  
-      var sec = Math.floor(second % 60);
-      var secStr = sec.toString();
-      if (secStr.length == 1) secStr = '0' + secStr;
-      if (day == 0) {
-        //   return hrStr + ":" + minStr + ":" + secStr;
-        _this.setData({
-          dayStr: 0,
-          hrStr: hrStr,
-          minStr: minStr,
-          secStr: secStr,
-        })
+    var _this = this;
+    clearInterval(_this.data.timer);
+    _this.data.timer = setInterval(function () {
+      var timestamp = Date.parse(new Date())
+      //总的秒数 
+      var second = micro_second - (timestamp / 1000);
+  
+  
+  
+      if (second > 0) {
+        // 天位    
+        var day = Math.floor(second / 3600 / 24);
+        var dayStr = day.toString();
+        if (dayStr.length == 1) dayStr = '0' + dayStr;
+  
+        // 小时位 
+        var hr = Math.floor(second / 3600 % 24);
+        // var hr = Math.floor(second / 3600); //直接转为小时 没有天 超过1天为24小时以上
+        var hrStr = hr.toString();
+        if (hrStr.length == 1) hrStr = '0' + hrStr;
+  
+        // 分钟位  
+        var min = Math.floor(second / 60 % 60);
+        var minStr = min.toString();
+        if (minStr.length == 1) minStr = '0' + minStr;
+  
+        // 秒位  
+        var sec = Math.floor(second % 60);
+        var secStr = sec.toString();
+        if (secStr.length == 1) secStr = '0' + secStr;
+        if (day == 0) {
+          //   return hrStr + ":" + minStr + ":" + secStr;
+          _this.setData({
+            dayStr: 0,
+            hrStr: hrStr,
+            minStr: minStr,
+            secStr: secStr,
+          })
+        } else {
+          _this.setData({
+            dayStr: dayStr,
+            hrStr: hrStr,
+            minStr: minStr,
+            secStr: secStr,
+          })
+          //   return dayStr + "天" + hrStr + ":" + minStr + ":" + secStr;
+        }
       } else {
         _this.setData({
-          dayStr: dayStr,
-          hrStr: hrStr,
-          minStr: minStr,
-          secStr: secStr,
+          dayStr: 0,
+          hrStr: "00",
+          minStr: "00",
+          secStr: "00",
         })
-        //   return dayStr + "天" + hrStr + ":" + minStr + ":" + secStr;
+        clearInterval(_this.data.timer);
+        if(_this.data.refreshGetin){
+            _this.data.refreshGetin = false;
+            _this.getinfo();
+        };
       }
-    } else {
-      _this.setData({
-        dayStr: 0,
-        hrStr: "00",
-        minStr: "00",
-        secStr: "00",
-      })
-    }
+    }.bind(_this), 1000);
+
+    
 
   },
 
@@ -1975,20 +2009,56 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
     var infoActivity = _this.data.infoActivity
     console.log(111)
     if (infoActivity.isWinner) {
-      if (infoActivity.isOrdered) { //购买完成
-      } else if (infoActivity.nextPay) { // 直接吊起预支付
-        // 微信支付
-        _this.paymentmony()
-      } else if (infoActivity.nextOrder) { // 中奖了
-        _this.dsbbbutclickt()
-      } else { }
+      _this.getGoodsPay();
+      // if (infoActivity.isOrdered) { //购买完成
+      // } else if (infoActivity.nextPay) { // 直接吊起预支付
+      //   // 微信支付
+      //   _this.paymentmony()
+      // } else if (infoActivity.nextOrder) { // 中奖了
+      //   _this.dsbbbutclickt()
+      // } else { }
     } else { //没有中奖,再接再厉
-      if(_this.data.is_ordinary_ticket_user){
-        _this.dsbbbutclickt()
-      }
+      // if(_this.data.is_ordinary_ticket_user){
+      //   _this.dsbbbutclickt()
+      // }
     }
   },
+  // 领取商品并支付
+  getGoodsPay(){
+    var _this = this;
 
+    if(this.data.isfullPledge){
+      var q = Dec.Aese('mod=lottoV2&operation=getGoods&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&aid='+this.data.tipaid);
+      this.setData({isfullPledge: false,commonBulletFrame:false})
+    }else{
+      this.setData({
+        receivingaddress:true,
+        commonBulletFrame:false
+      })
+      return false;
+    }
+
+
+
+    wx.request({
+      url: app.signindata.comurl + 'spread.php' + q,
+      method: 'GET',
+      header: {
+        'Accept': 'application/json'
+      },
+      success: function (res) {
+        console.log('领取商品===',res)
+        if (res.data.ReturnCode == 200) {
+            _this.data.cart_id = res.data.Info.cart_id || ''
+            // 微信支付
+            _this.paymentmony()
+        }else{
+          app.showToastC(res.data.Msg || res.data.msg || '');
+        };
+
+      }
+    });
+  },
   // 立即购买弹框
   dsbbbutclickt: function () {
     this.setData({
@@ -2230,7 +2300,12 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
     this.setData({
       isfullPledge:true
     });
-    this.newJoinDraw(0);
+    if(this.data.infoActivity.isWinner){
+        this.getGoodsPay();
+    }else{
+        this.newJoinDraw(0);
+    };
+    
   },
 
   // 买家备注
@@ -2370,26 +2445,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
           _this.setData({
             suboformola: false
           });
-          if (res.data.ReturnCode == 800) {
-            app.showToastC('非该用户订单');
-          };
-          if (res.data.ReturnCode == 815) {
-            app.showToastC('订单状态错误');
-          };
-          if (res.data.ReturnCode == 816) {
-            app.showToastC('不支持的支付类型');
-          };
-          if (res.data.ReturnCode == 817) {
-            app.showToastC('付款明细已生成');
-          };
-          if (res.data.ReturnCode == 201) {
-            app.showToastC('微信预支付失败');
-          };
-          if (res.data.ReturnCode == 805) {
-            app.showToastC('剩余库存不足');
-          };
-          // 判断非200和登录
-          Dec.comiftrsign(_this, res, app);
+          app.showToastC(res.Message || '');
         };
       },
       complete() {wx.hideLoading()}

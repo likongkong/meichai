@@ -1116,7 +1116,7 @@ App({
       });      
     } else if (item_type == 9050) {   // 任务说明
       wx.navigateTo({
-        url: `/page/settled/pages/taskExplain/taskExplain`
+        url: `/page/settled/pages/taskExplain/taskExplain?type=${whref}`
       });      
     }
   },

@@ -77,7 +77,7 @@
       </block>
       <view class="page-center" data-gid='{{item.goods_id}}' data-is_store='{{item.is_store}}' data-store_id='{{item.store_id}}' bindtap='addressmanagement'>
         <view class='imgageboxcaret' style='width:{{item.width||116}}rpx;'>
-          <image src="{{item.goods_thumb}}" style='width:{{item.width||116}}rpx;' bindload="imageLoadad" data-indexnum='5' data-ind='{{index}}'></image>
+          <image src="{{item.goods_thumb}}" style='width:{{item.width||116}}rpx;' bindload="imageLoadad" data-indexnum='5' data-ind='{{index}}' mode="aspectFit"></image>
           <view class='imgageboxcaretmast' wx:if='{{item.stock<item.numberofdismantling}}'></view>
         </view>
         <!-- 判断时候售罄 -->

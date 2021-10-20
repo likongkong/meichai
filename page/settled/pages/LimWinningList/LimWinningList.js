@@ -24,8 +24,8 @@ Page({
    */
   onLoad: function (options) {
     var _this = this;
-    // wx.hideShareMenu();
-
+    wx.hideShareMenu();
+    console.log(options)
     // '已经授权'
     _this.data.loginid = app.signindata.loginid;
     _this.data.uid = app.signindata.uid;
@@ -53,12 +53,20 @@ Page({
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
     });
     
-    if(_this.data.type == 2){ // 中奖名单 
-      _this.helpUserList(1)
+    if(_this.data.type == 1){ // 中奖名单 
+      _this.isWinnerList(1)
+      _this.setData({
+        c_title: '中奖名单',
+      })
     }else if(_this.data.type == 2){ // 助力记录 
       _this.helpUserList(1)
+      _this.setData({
+        c_title: '助力记录',
+      })
     }else if(_this.data.type == 3){ // 参与人数
-
+      _this.setData({
+        c_title: '参与人数',
+      })
     }
     
   },
@@ -130,12 +138,11 @@ Page({
         if (res.data.ReturnCode == 200) {
           var helpUserList = res.data.List.helpUserList || [];
           for(var i = 0 ; i < helpUserList.length ; i++){
-            helpUserList[i].add_time = time.toDate(helpUserList[i].add_time,2);
             helpUserList[i].nick = time.plusXing(helpUserList[i].nick,1,0);
           };
           if(num == 1){
             _this.setData({
-              helpTotalNumber:res.data.List.helpTotalNumber || 0,
+              helpTotalNumber:res.data.Info.helpTotalNumber || 0,
               helpUserList:helpUserList
             });  
           }else{
@@ -215,7 +222,12 @@ Page({
    */
   onPullDownRefresh: function () {
     app.downRefreshFun(() => {
-      this.getData()
+      if(_this.data.type == 1){ // 中奖名单 
+        _this.isWinnerList(1)
+      }else if(_this.data.type == 2){ // 助力记录 
+        _this.helpUserList(1)
+      }else if(_this.data.type == 3){ // 参与人数
+      }
     })   
   },
 
@@ -223,7 +235,12 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this.getData(2)
+    if(_this.data.type == 1){ // 中奖名单 
+      _this.isWinnerList(2)
+    }else if(_this.data.type == 2){ // 助力记录 
+      _this.helpUserList(2)
+    }else if(_this.data.type == 3){ // 参与人数
+    }
   },
 
   /**

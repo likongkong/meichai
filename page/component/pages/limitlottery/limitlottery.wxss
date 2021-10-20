@@ -6,7 +6,7 @@
 @import "../../common/exhibition.wxss";
 
 page{
-  padding-bottom: 130rpx;
+  padding-bottom: 160rpx;
 }
 .buttonArter::after{
   border: none;
@@ -835,7 +835,7 @@ page{
 }
 .newDrawTopImgBox{
   width: 100%;
-  max-width: 750rpx;
+  max-height: 750rpx;
   overflow: hidden;
 }
 .newDrawTopImg{
@@ -993,15 +993,14 @@ page{
 }
 .newDrawBSTime{
   width: 100%;
-  height: 60rpx;
-  line-height: 60rpx;
+  padding-top: 15rpx;
   text-align: center;
   font-size: 28rpx;
 }
 .newDrawBSButBox{
   width: 100%;
   text-align: center;
-  padding-bottom: 30rpx;
+  padding:15rpx 0 20rpx 0;
 }
 .nDbsBnotice{
   width: 550rpx;
@@ -1040,6 +1039,11 @@ page{
   background: #fff;
   border-radius: 20rpx;
   position: relative;
+}
+.userHelpImgBox{
+  width: 100%;
+  max-height: 560rpx;
+  overflow: hidden;
 }
 .userBoxImgTxt{
   padding: 30rpx;
@@ -1126,9 +1130,8 @@ page{
   background-image: url("https://cdn.51chaidan.com/images/icon/lottoUnpublished.png"); 
   background-size:100% 100%;
   text-align: center;
-  font-size: 22rpx;
+  font-size: 26rpx;
 }
-
 
 /* 群分享弹框 */
 

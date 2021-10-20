@@ -124,7 +124,7 @@ Page({
    */
   onLoad: function (options) {
     var _this = this;
-    wx.hideShareMenu();
+    // wx.hideShareMenu();
     
     // '已经授权'
     _this.data.loginid = app.signindata.loginid;
@@ -401,9 +401,9 @@ Page({
   onShareAppMessage: function () {
     var _this = this;
     var reshare = {
-      title: _this.data.dataInfo.shareData.name,
+      title: _this.data.dataInfo.title && _this.data.dataInfo.title!=''?_this.data.dataInfo.title:'发布了一条新的动态',
       path: 'page/settled/pages/dynamicDetails/dynamicDetails?did='+_this.data.drying_id,
-      imageUrl: _this.data.dataInfo.shareData.shareImg,
+      imageUrl: _this.data.dataInfo.imgArr[0],
       success: function(res) {},
     };
     return reshare

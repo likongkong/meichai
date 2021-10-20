@@ -212,8 +212,8 @@ Page({
       _this.data.page = ++pagenum;
     };
     var urlname = encodeURIComponent(_this.data.name);
-    console.log('mod=cabinet&operation=detailRole&roleName=' + urlname + '&pid=' + _this.data.page + '&goods_id='+_this.data.goods_id)
-    var qqq = Dec.Aese('mod=cabinet&operation=detailRole&roleName=' + urlname + '&pid=' + _this.data.page + '&goods_id='+_this.data.goods_id);
+    console.log('mod=cabinet&operation=detailRole&roleName=' + urlname + '&pid=' + _this.data.page + '&goods_id='+_this.data.goods_id+'&uid='+this.data.uid)
+    var qqq = Dec.Aese('mod=cabinet&operation=detailRole&roleName=' + urlname + '&pid=' + _this.data.page + '&goods_id='+_this.data.goods_id+'&uid='+this.data.uid);
 
     wx.request({
       url: app.signindata.comurl + 'toy.php' + qqq,

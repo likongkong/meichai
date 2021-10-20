@@ -968,7 +968,7 @@
                         </view>
 
 
-                        <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0&&isShareGood}}'>
+                        <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0&&isShareGood&&comdata.order_type!=13}}'>
                             <button open-type="share" class='butshare'></button>
                             分享好友
                         </view>
@@ -1031,7 +1031,7 @@
                                 data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}'></button></view>
                         </view>
 
-                        <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0&&isShareGood}}'>
+                        <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0&&isShareGood&&comdata.order_type!=13}}'>
                             <button open-type="share" class='butshare'></button>
                             分享好友
                         </view>
@@ -1069,7 +1069,7 @@
                                 data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}'></button></view>
                         </view>
 
-                        <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0&&isShareGood}}'>
+                        <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0&&isShareGood&&comdata.order_type!=13}}'>
                             <button open-type="share" class='butshare'></button>
                             分享好友
                         </view>
@@ -1110,7 +1110,7 @@
                                 data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}'></button></view>
                         </view>
 
-                        <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0&&isShareGood}}'>
+                        <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0&&isShareGood&&comdata.order_type!=13}}'>
                             <button open-type="share" class='butshare'></button>
                             分享好友
                         </view>
@@ -1142,7 +1142,7 @@
                                 data-cart_id='{{comdata.cart_id}}' catchtap='upserimgboxiftr'>上传晒单截图</view>
 
                         </view>
-                        <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0&&isShareGood}}'>
+                        <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0&&isShareGood&&comdata.order_type!=13}}'>
                             <button open-type="share" class='butshare'></button>
                             分享好友
                         </view>
@@ -1190,7 +1190,7 @@
                             bindtap='lookatthelogistics' style='margin-right:10rpx;position: relative;'>查看物流</view>
 
                         <view class='totalmoncright sharebox' style='margin-right:10rpx;'
-                            wx:if='{{comdata.is_invite==0&&isShareGood}}'>
+                            wx:if='{{comdata.is_invite==0&&isShareGood&&comdata.order_type!=13}}'>
                             <button open-type="share" class='butshare'></button>
                             分享好友
                         </view>
@@ -1217,7 +1217,7 @@
                                 data-showorder='{{comdata.showOrder}}' data-cart_id='{{comdata.cart_id}}'></button></view>
                         </view>
 
-                        <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0&&isShareGood}}'>
+                        <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0&&isShareGood&&comdata.order_type!=13}}'>
                             <button open-type="share" class='butshare'></button>
                             分享好友
                         </view>
@@ -1237,7 +1237,7 @@
                     <!--   已取消订单  -->
                     <view style='min-height:1rpx;width:94%;padding: 0 3% 10rpx;overflow:hidden;'
                         wx:if='{{comdata.status==8&&comdata.order_type!=7}}'>
-                        <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0&&isShareGood}}'>
+                        <view class='totalmoncright sharebox' wx:if='{{comdata.is_invite==0&&isShareGood&&comdata.order_type!=13}}'>
                             <button open-type="share" class='butshare'></button>
                             分享好友
                         </view>
@@ -1260,7 +1260,7 @@
                         wx:if='{{(comdata.status==10||comdata.status==11) && comdata.order_type==2}}'>
                         <view class='totaltittrfai'>付款将会原路返回到您的支付账号中</view>
                         <view class='totalmoncright sharebox' style='margin-right:10rpx;'
-                            wx:if='{{comdata.is_invite==0&&isShareGood}}'>
+                            wx:if='{{comdata.is_invite==0&&isShareGood&&comdata.order_type!=13}}'>
                             <button open-type="share" class='butshare'></button>
                             分享好友
                         </view>
@@ -1270,7 +1270,7 @@
                         <view class='totaltittrfai' style="line-height:40rpx;" wx:if='{{comdata.status_detail == 2}}'>支付时间超过1分钟，支付金额会原路返回到您的支付账号中</view>
                         <view class='totaltittrfai' wx:else>付款将会原路返回到您的支付账号中</view>
                         <view class='totalmoncright sharebox' style='margin-right:10rpx;margin-top:9rpx;'
-                            wx:if='{{comdata.is_invite==0&&isShareGood}}'>
+                            wx:if='{{comdata.is_invite==0&&isShareGood&&comdata.order_type!=13}}'>
                             <button open-type="share" class='butshare'></button>
                             分享好友
                         </view>

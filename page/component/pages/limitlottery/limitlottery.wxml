@@ -8,11 +8,11 @@
   <view class="newDraw">
 		  <!-- 未开始 -->
 	    <view class="newDrawTopTime" wx:if='{{infoActivity.status == 1}}'>
-					{{infoActivity.start_time}}
+					{{infoActivity.start_time}}开始
 			</view>
 		  <!-- 进行中 -->
 	    <view class="newDrawTopTime" style="background:#007797;" wx:if='{{infoActivity.status == 2}}'>
-					{{infoActivity.stop_time}}
+					开奖时间 {{infoActivity.stop_time}}
 			</view>			
 			<!-- 已结束 -->
 	    <view class="newDrawTopTime" style="background:#fff;color:#000;" wx:if='{{infoActivity.status == 3}}'>
@@ -40,7 +40,7 @@
 						<!-- catchtap="jumpWinningList" data-id='{{infoActivity.id}}' data-type='3' -->
 					</view>
 					<view class="intraGroupSelection" wx:if='{{listData.tags && listData.tags.length != 0}}'>
-						  <text wx:for='{{listData.tags}}' wx:key='key'>{{item}}<block wx:if='{{index+1 != listData.tags.length}}'> | </block></text>
+							<text wx:for='{{listData.tags}}' wx:key='key' decode="true">{{item}}<block wx:if='{{index+1 != listData.tags.length}}'>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</block></text>
 					</view>
 			</view>
 			<view class="newDrawActivityProcess">
@@ -59,7 +59,7 @@
 								</block>
 					</block>
 
-					<view class="ndapTitle">活动进程<text class="adapCtivityRules">活动规则 ></text></view>
+					<view class="ndapTitle">活动进程<text class="adapCtivityRules" catchtap="drawRuleJump">活动规则 ></text></view>
 					<view class="apEveBox">
 							<view class="apEve">
 									<view class="apEveTopDate">{{infoActivity.schdule[0].date}}</view>
@@ -88,7 +88,7 @@
 			</view>
 			<view class="newDrawActivityProcess" wx:if='{{listData.introduce}}'>
 					<view class="ndapTitle">抽选说明</view>
-					<view class="SelectionDescription"><text>{{listData.introduce}}</text></view>
+					<view class="SelectionDescription"><text>{{infoActivity.introduce}}</text></view>
 			</view>
 
 			<!--  商品详情图片 转换HTML标签  -->
@@ -107,7 +107,10 @@
 	  <view class="userHelp" catchtap="true">
 			  <!-- 为好友助力 -->
 			  <block wx:if="{{comBulFraNun==1}}">
-						<image src="{{infoActivity.cover}}" style="border-radius:20rpx 20rpx 0 0;" class="newDrawTopImg" mode="widthFix" />
+					  <view class="userHelpImgBox">
+							  <image src="{{infoActivity.cover}}" style="border-radius:20rpx 20rpx 0 0;" class="newDrawTopImg" mode="widthFix" />
+						</view>
+						
 						<view class="userBoxImgTxt">
 								<image src="{{helpInfo.headphoto}}" class="userBoxImg" mode="aspectFit" />
 								<view class="userBoxTxt">{{helpInfo.nick}}{{helpInfo.tip}}</view>
@@ -133,7 +136,9 @@
 				</block> 
 				<!-- 未中签 中签 -->
 				<block wx:if='{{comBulFraNun==4}}'>
-						<image src="{{infoActivity.cover}}" style="border-radius:20rpx 20rpx 0 0;" class="newDrawTopImg" mode="widthFix" />
+					  <view class="userHelpImgBox">
+							  <image src="{{infoActivity.cover}}" style="border-radius:20rpx 20rpx 0 0;" class="newDrawTopImg" mode="widthFix" />
+						</view>
 						<!-- 中签 -->
 						<block wx:if='{{infoActivity.isWinner}}'>
 							  <view class="FailedToWinTheLot" style="color:#EEAE19;">恭喜您，中签啦</view>
@@ -141,7 +146,7 @@
 									  <block wx:if='{{!infoActivity.isReceived && appNowTime < infoActivity.finalPayTime}}'>请在{{infoActivity.finalPay_time}}付款</block>
 										<block wx:elif='{{!infoActivity.isReceived && appNowTime > infoActivity.finalPayTime}}'>您未在规定的时间内付款</block>
 								</view>
-								<view class="userHelpBut" style="background:#DBC69D;" catchtap="{{!infoActivity.isReceived && appNowTime < infoActivity.finalPayTime?'paymentmony':'moreaction'}}">
+								<view class="userHelpBut" style="background:#DBC69D;" catchtap="{{!infoActivity.isReceived && appNowTime < infoActivity.finalPayTime?'winnerlogic':'moreaction'}}">
 										<block wx:if='{{!infoActivity.isReceived && appNowTime < infoActivity.finalPayTime}}'>去付款</block>
 										<block wx:elif='{{!infoActivity.isReceived && appNowTime > infoActivity.finalPayTime}}'>查看其他活动</block>
 								</view>			 
@@ -153,39 +158,15 @@
 								<view class="FailedToWinTheLotTip">更多精彩内容进行中</view>
 								<view class="userHelpBut" style="background:#DBC69D;" catchtap="{{moreaction}}">查看其他活动</view>
 						</block>
-
-						
 				</block>
-
+				
+        
 
 
 				<image class="userHelpFork" catchtap="commonBulletFrameFun" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="aspectFit"></image>
 		</view>
 </view>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<view style="width:100%;height:300rpx;"></view>
 
 
 
@@ -213,543 +194,6 @@
 </view>
 
 <view style='position:relative;' wx:if='{{false}}'>
-	<view style='background:#000;height:68rpx;padding:0 20rpx;'>
-	  <view class='countdown' style='font-size:30rpx;{{infoActivity.supportLogo?"float:left;":""}}'>
-			
-		</view>
-		<view wx:if="{{infoActivity.status!=3&&infoActivity}}" class='countdown' style='font-size:40rpx;position:relative;{{infoActivity.supportLogo?"float:left;":""}}'>
-		  <block wx:if='{{infoActivity.is_limit==1}}'>
-			   <text class='timetextstyle'>当前{{infoActivity.truth_users}}人参与,满{{infoActivity.limit_users}}人开奖</text>
-			</block>
-		  <block wx:elif="{{newdataexh}}"><text class='timetextstyle'>暂未开启</text><view style="height:40rpx;width:100rpx;background:#f08080;color:#fff;text-align:center;line-height:40rpx;position:absolute;top:0;bottom:0;right:20rpx; margin:auto 0;font-size:22rpx;border-radius: 10rpx;" wx:if='{{infoActivity.goodsLimit}}'>{{infoActivity.goodsLimit}}</view></block>
-			<block wx:elif='{{infoActivity.isLiveShow && infoActivity.status==1}}'>
-				<block wx:if="{{infoActivity.specialDisplay}}">
-					<text class='timetextstyle'>{{infoActivity.specialDisplay}}</text>
-				</block>
-				<block wx:else>
-					<text class='timetextstyle'>{{infoActivity.isLiveShow_time}} 直播开启</text>
-				</block>
-			</block>
-			<block wx:else>
-					<text wx:if='{{infoActivity.status==2}}' class='timetextstyle' style='margin-right:10rpx;'>抽签倒计时</text>
-					<text wx:if='{{infoActivity.status==1}}' class='timetextstyle'>即将开始</text>
-					<text wx:if='{{dayStr!=0}}' style='diaplay:inline-block;'>{{dayStr}}</text>
-					<text wx:if='{{dayStr!=0}}' class='timetextstyle'>天</text>
-					<text style='diaplay:inline-block;'>{{hrStr}}</text>
-					<text class='timetextstyle'>时</text>
-					<text style='diaplay:inline-block;'>{{minStr}}</text>
-					<text class='timetextstyle'>分</text>
-					<text style='diaplay:inline-block;'>{{secStr}}</text>
-					<text class='timetextstyle'>秒</text>			
-			</block>
-
-		</view>
-		
-		
-		<view wx:if="{{infoActivity.status==3 && !isgetaward}}" class='countdown' style='font-size:30rpx;{{infoActivity.supportLogo?"float:left;":""}}'>
-				<block wx:if='{{infoActivity.isFillChance}}'>
-						还有机会，有人未领取（补抽倒计时
-						<text wx:if='{{dayStr!=0}}' style='diaplay:inline-block;'>{{dayStr}}</text>
-						<text wx:if='{{dayStr!=0}}' class='timetextstyle'>天</text>
-						<text style='diaplay:inline-block;'>{{hrStr}}</text>
-						<text class='timetextstyle'>时</text>
-						<text style='diaplay:inline-block;'>{{minStr}}</text>
-						<text class='timetextstyle'>分</text>
-						<text style='diaplay:inline-block;'>{{secStr}}</text>
-						<text class='timetextstyle'>秒</text>）
-				</block>
-				<block wx:else>
-				    <block wx:if='{{infoActivity.isWinner}}'>
-						    <block wx:if='{{infoActivity.isOrdered}}'>已领取成功</block>
-								<block wx:else>您已中签</block>
-						</block>
-						<block wx:elif='{{infoFragment.activitySignNumber.length > 0}}'>很遗憾，您未中签</block>
-						<block wx:else>活动已结束</block>
-				</block>	
-		</view>
-		<view wx:if="{{infoActivity.status==3 && isgetaward}}" class='countdown' style='font-size:40rpx;{{infoActivity.supportLogo?"float:left;":""}}'>
-			<text class='timetextstyle' style='margin-right:10rpx;'>领奖倒计时</text>
-			<text wx:if='{{dayStr!=0}}' style='diaplay:inline-block;'>{{dayStr}}</text>
-			<text wx:if='{{dayStr!=0}}' class='timetextstyle'>天</text>
-			<text style='diaplay:inline-block;'>{{hrStr}}</text>
-			<text class='timetextstyle'>时</text>
-			<text style='diaplay:inline-block;'>{{minStr}}</text>
-			<text class='timetextstyle'>分</text>
-			<text style='diaplay:inline-block;'>{{secStr}}</text>
-			<text class='timetextstyle'>秒</text>
-		</view>
-		<view style='height:50rpx;float:right;background:#fff;border-radius:5rpx;margin:9rpx 0 0 0;vertical-align: top;line-height:50rpx;font-size:24rpx;padding:0 10rpx 0 5rpx;max-width:230rpx;' class='specialellipsis' wx:if='{{infoActivity.supportLogo}}'>
-			<image src='{{infoActivity.supportLogo}}' class='limstorlogo'></image>{{infoActivity.supportName}}
-		</view>
-	</view>
-
-
-	<view style='width:100%;position:relative;'>
-		<image src="{{infoActivity.cover}}" style="width:710rpx;height:378rpx;margin:20rpx;border-radius:10rpx;" mode="aspectFit" />
-		<block wx:if='{{is_exhibition!=1||brandId==388||(is_exhibition!=1&&brandId>0)}}'>
-				<view id='chipfather' style="width:710rpx;height:378rpx;position:absolute;top:20rpx;left:20rpx;">
-				  <block wx:if='{{chiplist.length==1}}'>
-							<view wx:for='{{chiplist}}' wx:key='key' style="width:710rpx;height:378rpx;float:left;">
-								<image wx:if='{{item == 1}}' src="https://www.51chaidan.com/images/turntable/red_check_mark.png" style="width:43rpx;height:30rpx;"></image>
-								<view style="width:100%;height:100%;background:white;opacity:{{item == 1 ? 0 : 0.5}};"></view>
-							</view>					
-					</block>
-				  <block wx:else>
-							<view wx:for='{{chiplist}}' wx:key='key' style="width:{{boxwidth}}px;height:187rpx;float:left;margin:1px;">
-								<image wx:if='{{item == 1}}' src="https://www.51chaidan.com/images/turntable/red_check_mark.png" style="width:43rpx;height:30rpx;"></image>
-								<view style="width:100%;height:100%;background:white;opacity:{{item == 1 ? 0 : 0.5}};"></view>
-							</view>					
-					</block>
-				</view>		
-		</block>
-
-	</view>
-
-	<block>
-		<view wx:if="{{infoActivity.joinMothed == 'payTicket'}}" style="width:100%;font-size:27rpx;margin-bottom:20rpx;display: flex;justify-content: space-between;align-items: center;overflow: hidden;">
-			<view style="width:65%;padding:0 20rpx;">Vol.{{infoActivity.id}} {{infoActivity.name}}</view>
-			<view style="width:25%;padding:0 20rpx;text-align: right;">
-				<text style="color:#298DF8;display: inline-block;">定金 ￥{{cashPledge}}</text>
-				<text style="color:#BEC2C9;display: inline-block;">抽签价 ￥<block wx:if='{{infoActivity.lottoPrice}}'>{{infoActivity.lottoPrice}}</block><block wx:else>{{infoGoods.shop_price}}</block></text>
-			</view>
-		</view>
-		<view wx:else style="width:100%;font-size:27rpx;margin-bottom:20rpx;overflow: hidden;">
-			<view style="padding:0 20rpx 20rpx;">Vol.{{infoActivity.id}} {{infoActivity.name}}</view>
-			<view style="padding:0 20rpx;color:#FE666B;text-align:right;">￥<block wx:if='{{infoActivity.lottoPrice>=0}}'>{{infoActivity.lottoPrice}}</block><block wx:else>{{infoGoods.shop_price}}</block><text wx:if='{{infoActivity.integral}}' style="color:#000;">+积分{{infoActivity.integral}}</text></view> 
-		</view>
-	
-	</block>
-	
-
-	<view style="width:100%;background:white;overflow:hidden;position:relative;">
-
-		<block wx:if='{{infoActivity.status == 1}}'>
-			<view class='limsharebox' catchtap='limsavefun' wx:if='{{is_share_but&&canShare!=1}}'>
-				<image class='limshareimg' src='https://www.51chaidan.com/images/act/brand/createPoster.png'></image>
-				<view style='color:#53a5fd;font-size:22rpx;padding:3rpx 0 0 0;text-align:center;'>生成海报</view>
-			</view>
-			<view class='limsharebox' catchtap="ishowtipsfun" wx:if='{{false}}' style="left:140rpx;">
-				<image class='limshareimg' src='https://cdn.51chaidan.com/images/icon/iconBankCard.png'></image>
-				<view style='color:#53a5fd;font-size:22rpx;padding:3rpx 0 0 0;text-align:center;'>抽选卡</view>
-				<view class="tabshopimg specialellipsis" style="top:-12rpx;left:70rpx;">{{infoActivity.toyShowChance}}</view>
-			</view>	
-			<view class='takepartin' catchtap='subscrfun' style="{{!is_share_but?'margin:20rpx auto 20rpx auto;':'margin:20rpx 0 20rpx 300rpx;'}}background:#eeae19;box-shadow: 2px 2px 5rpx #ccc;">
-		
-			<block wx:if='{{infoActivity.isLiveShow && infoActivity.status==1}}'>
-				<block wx:if="{{infoActivity.specialDisplay}}">
-					{{infoActivity.specialDisplay}}
-				</block> 
-				<block wx:else>
-					{{infoActivity.isLiveShow_time}} 直播开启
-				</block> 
-				</block> 
-				订阅提醒
-			</view>
-		</block>
-
-
-		<!-- 特殊付费抽签中未付费显示 -->
-		<block wx:if='{{(infoActivity.status==2 && infoFragment.personalFragmentNumber==0 && infoFragment.activitySignNumber.length == 0)}}'>
-			<view class='limsharebox' catchtap='limsavefun' wx:if='{{is_share_but&&canShare!=1}}'>
-				<image class='limshareimg' src='https://www.51chaidan.com/images/act/brand/createPoster.png'></image>
-				<view style='color:#53a5fd;font-size:22rpx;padding:3rpx 0 0 0;text-align:center;'>生成海报</view>
-			</view>
-			<view class='limsharebox' catchtap="ishowtipsfun" style="left:140rpx;" wx:if='{{false}}'>
-				<image class='limshareimg' src='https://cdn.51chaidan.com/images/icon/iconBankCard.png'></image>
-				<view style='color:#53a5fd;font-size:22rpx;padding:3rpx 0 0 0;text-align:center;'>抽选卡</view>
-				<view class="tabshopimg specialellipsis" style="top:-12rpx;left:70rpx;">{{infoActivity.toyShowChance}}</view>
-			</view>
-		</block>		
-		<view wx:if='{{infoActivity.status == 2 && (infoActivity.joinMothed == "blindBox"|| infoActivity.joinMothed == "zone") && !infoActivity.isCanOpenLotto}}'>
-
-			<view wx:if='{{infoFragment.activitySignNumber.length == 0}}' data-i='1' class='takepartin' catchtap="joinlimitlottery">
-				参与抽签
-				<view wx:if='{{infoActivity.joinMothed == "blindBox"}}' class="tagstyle">抽盒机专享</view>
-				<view wx:if='{{infoActivity.joinMothed == "zone"}}' class="tagstyle">抽签专区专享</view>
-			</view>
-
-			<view wx:if='{{infoFragment.activitySignNumber.length > 0}}' style="width:80%;height:80rpx;margin:30rpx 10%;position:relative;">
-
-				<view class='limsharebox' wx:if='{{is_share_but&&canShare!=1}}' catchtap='limsavefun' style='top:5rpx;left:-68rpx;'>
-					<image class='limshareimg' src='https://www.51chaidan.com/images/act/brand/createPoster.png'></image>
-					<view style='color:#53a5fd;font-size:22rpx;padding:3rpx 0 0 0;text-align:center;'>生成海报</view>
-				</view>
-
-				<view style="width:30%;font-size:25rpx;float:left;margin:10rpx 0 10rpx 10%;color:#FE666B;">
-					<view>报名成功</view>
-					<view wx:for='{{infoFragment.activitySignNumber}}' wx:key='key'>签号 {{item.lotto}}</view>
-				</view>
-
-				<view style="width:60%;background:#fb595f;color:white;line-height:80rpx;border-radius:5rpx;float:right;text-align:center;position:relative;font-size:26rpx;" data-i='2' catchtap="joinlimitlottery">
-					参与抽签
-					<view wx:if='{{infoActivity.joinMothed == "blindBox"}}' class="tagstyle">抽盒机专享</view>
-					<view wx:if='{{infoActivity.joinMothed == "zone"}}' class="tagstyle">抽签专区专享</view>
-				</view>
-			</view>
-		</view>
-
-    
-
-		<view wx:elif='{{infoActivity.status == 2 && infoFragment.personalFragmentNumber == 0}}'>
-			<view wx:if='{{is_ordinary_ticket_user && infoFragment.activitySignNumber != 0}}'>
-				<view class='takepartin' catchtap="joinlimitlottery">
-					购票信息
-				</view>
-				<view style="display: flex;justify-content: space-between;padding:30rpx 0;" wx:if="{{infoFragment.activitySignNumber && infoFragment.activitySignNumber.length != 0}}">
-					<view class="mysignInfo">
-						<view class="mysignTopWrap">我的抽签信息</view>
-						<view class="mysignTableWrap">
-							<view class="mysignHTable">
-								<text class="htableBox" style="width:12%;">序号</text>
-								<text class="htableBox" style="width:15%;">日期</text>
-								<text class="htableBox" style="width:23%;">手机号</text>
-								<text class="htableBox" style="width:50%;">身份证号</text>
-							</view>
-							<view class="mysignBTableWrap">
-								<block wx:for="{{infoFragment.activitySignNumber}}" wx:key="key">
-									<view class="mysignBTable">
-										<text class="btableBox colorblue" style="width:12%;">{{item.sort}}</text>
-										<text class="btableBox colorblue" style="width:15%;">{{item.day}}</text>
-										<text class="btableBox colorblue" style="width:23%;">{{item.tel}}</text>
-										<text class="btableBox colorblue" style="width:50%;">{{item.lotto}}</text>
-									</view>
-								</block>
-							</view>
-						</view>
-					</view>
-				</view>
-			</view>
-
-			<block wx:elif="{{infoActivity.status==2 && infoActivity.joinMothed == 'payTicket' && infoFragment.activitySignNumber != 0}}">
-					<view class="mysign">
-						<view class="mysignTopWrap"><text>报名成功</text> 我的抽签信息</view>
-						<view class="mysignTableWrap">
-								<view class="mysignHTable">
-												<text class="htableBox" style="width:40%;">手机号</text>
-												<text class="htableBox" style="width:60%;">身份证号</text>
-								</view>
-								<view class="mysignBTableWrap">
-												<block wx:for="{{infoFragment.activitySignNumber}}" wx:key="key" wx:if="{{item.status != 0}}">
-																<view class="mysignBTable">
-																				<text class="btableBox" style="width:40%;color:#1684FC;">{{item.tel}}</text>
-																				<text class="btableBox" style="width:60%;color:#1684FC;">{{item.lotto}}</text>
-																</view>
-												</block>
-								</view>
-							</view>
-					</view>
-
-			</block>
-
-			<view class='takepartin' catchtap="joinlimitlottery" style="{{!is_share_but?'margin:20rpx auto 20rpx auto;':'margin:20rpx 0 20rpx 300rpx;'}}" wx:else>
-				参与抽签
-					<view wx:if='{{infoActivity.joinMothed == "blindBox"}}' class="tagstyle">抽盒机专享</view>
-					<view wx:if='{{infoActivity.joinMothed == "zone"}}' class="tagstyle">抽签专区专享</view>
-			</view>
-		</view>
-	
-		<block wx:elif='{{infoActivity.status==2 && infoActivity.joinMothed == "payTicket" && infoFragment.activitySignNumber.length > 0}}'>
-					<view class="mysign">
-						<view class="mysignTopWrap"><text>报名成功</text> 我的抽签信息</view>
-						<view class="mysignTableWrap">
-								<view class="mysignHTable">
-												<text class="htableBox" style="width:40%;">手机号</text>
-												<text class="htableBox" style="width:60%;">身份证号</text>
-								</view>
-								<view class="mysignBTableWrap">
-												<block wx:for="{{infoFragment.activitySignNumber}}" wx:key="key" wx:if="{{item.status != 0}}">
-																<view class="mysignBTable">
-																				<text class="btableBox" style="width:40%;color:#1684FC;">{{item.tel}}</text>
-																				<text class="btableBox" style="width:60%;color:#1684FC;">{{item.lotto}}</text>
-																</view>
-												</block>
-								</view>
-							</view>
-					</view>			
-		</block>
-
-		<view wx:elif='{{infoActivity.status == 2 && infoFragment.personalFragmentNumber != 0}}' style="width:100%;margin:20rpx 0;">
-      <block wx:if='{{is_share_but}}'>
-					<block wx:if='{{(is_exhibition!=1||brandId==388||(is_exhibition!=1&&brandId>0)) && infoActivity.detail!=1}}'>
-							<view style="width:100%;font-size:25rpx;line-height:30rpx;text-align:center;margin:5rpx 0;">送你{{infoFragment.totalFragmentNumber}}张万能碎片，跟好友互赠100%获得缺失碎片</view>
-
-							<view id="mchip" style="width:85%;height:{{chipwidth*1.1}}px;margin:10rpx 7.5%;text-align: center;">
-								<block wx:for='{{shareUserInfo}}' wx:key='key'>
-									<view style="width:{{chipwidth*0.6}}px;height:{{chipwidth*0.8}}px;border:{{chipwidth*0.05}}px solid #FF9800;margin:{{chipwidth*0.15}}px;position:relative;border-radius:5rpx;display: inline-block;">
-										<image style="width:{{chipwidth*0.5}}px;height:{{chipwidth*0.5}}px;position:absolute;bottom:0;top:0;left:0;right:0;margin:auto;" src="https://www.51chaidan.com/images/turntable/drawKey.png"></image>
-										<image wx:if='{{item!=1}}' style="width:{{chipwidth*0.5}}px;height:{{chipwidth*0.5}}px;border-radius:{{chipwidth*0.25}}px;position:absolute;bottom:-{{chipwidth*0.25}}px;left:0;right:0;margin:0 auto;" src="{{item.litpic}}"></image>
-									</view>
-								</block>
-							</view>			
-					</block>			
-			</block>
-     <!-- height:80rpx; -->
-			<view style="width:80%;margin:30rpx 10%;position:relative;">
-
-				<view class='limsharebox' wx:if='{{is_share_but&&canShare!=1}}' catchtap='limsavefun' style='top:5rpx;left:-68rpx;'>
-					<image class='limshareimg' src='https://www.51chaidan.com/images/act/brand/createPoster.png'></image>
-					<view style='color:#53a5fd;font-size:22rpx;padding:3rpx 0 0 0;text-align:center;'>生成海报</view>
-				</view>
-   
-				<view style="overflow: hidden;width:100%;">
-
-						<view wx:if='{{infoFragment.activitySignNumber.length == 0}}' style="width:30%;font-size:25rpx;float:left;margin:10rpx 0 0 10%;">
-							<view style="color:#8abe39;">已点亮碎片×{{infoFragment.personalFragmentNumber}}</view>
-							<view style="color:#FE666B;">还需要碎片×{{infoFragment.totalFragmentNumber - infoFragment.personalFragmentNumber}}</view>
-						</view>
-
-						<block wx:if='{{is_share_but}}'>
-								<view wx:if='{{infoFragment.activitySignNumber.length > 0}}' style="{{infoActivity.joinMothed == 'payTicket' && infoActivity.payTicketCate == 'fullPledge'?'width:100%':'width:100%'}};font-size:25rpx;float:left;margin:10rpx 0 10rpx 10%;color:#FE666B;">
-
-										<view style="height:80rpx;float:left;padding:0 40rpx;line-height:80rpx;border-right:2rpx dashed #ccc;">报名成功</view>
-										<view style="float:left;overflow: hidden;">
-										<view style="height:80rpx;padding-left:30rpx;" wx:for='{{infoFragment.activitySignNumber}}' wx:key='key'>
-										<text style="height:80rpx;line-height:80rpx;float:left;">签号</text>
-										<text style="font-size:40rpx;margin-left:30rpx;height:76rpx;line-height:80rpx;float:left;">{{item.lotto}}</text>
-										</view>                                                        
-										</view>
-
-									<!-- <block wx:if="{{infoActivity.joinMothed == 'payTicket' && infoActivity.payTicketCate == 'fullPledge'}}">
-										<view style="height:80rpx;float:left;padding:0 40rpx;line-height:80rpx;border-right:2rpx dashed #ccc;">报名成功</view>
-										<view style="float:left;overflow: hidden;">
-										<view style="height:80rpx;padding-left:30rpx;" wx:for='{{infoFragment.activitySignNumber}}' wx:key='key'>
-										<text style="height:80rpx;line-height:80rpx;float:left;">签号</text>
-										<text style="font-size:40rpx;margin-left:30rpx;height:76rpx;line-height:80rpx;float:left;">{{item.lotto}}</text>
-										</view>                                                        
-										</view>
-									</block>
-									<block wx:else>
-										<view>报名成功</view>
-										<view wx:for='{{infoFragment.activitySignNumber}}' wx:key='key'>签号 {{item.lotto}}</view>
-									</block> -->
-								</view>	
-						</block>
-						<block wx:else>
-								<view wx:if='{{infoFragment.activitySignNumber.length > 0}}' style="width:100%;font-size:26rpx;color:#FE666B;overflow: hidden;">
-									<view style="height:80rpx;float:left;padding:0 40rpx;line-height:80rpx;border-right:2rpx dashed #ccc;">报名成功</view>
-									<view style="float:left;overflow: hidden;">
-											<view style="height:80rpx;padding-left:40rpx;" wx:for='{{infoFragment.activitySignNumber}}' wx:key='key'>
-												<text style="height:80rpx;line-height:80rpx;float:left;">签号</text>
-												<text style="font-size:40rpx;margin-left:40rpx;height:76rpx;line-height:80rpx;float:left;">{{item.lotto}}</text>
-											</view>							
-									</view>
-
-								</view>
-						</block>
-
-
-						<block wx:if='{{is_share_but}}'>
-						  <view wx:if='{{shareStatus&&(is_exhibition!=1||brandId==388||(is_exhibition!=1&&brandId>0))}}' style="width:60%;background:#8abe39;color:white;line-height:80rpx;border-radius:5rpx;float:right;text-align:center;position:relative;font-size:26rpx;">
-									<!-- 判断是ios 还是android  -->
-									<button wx:if='{{iftriosorand}}' style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' data-form='2' open-type="share"></button>
-									<view wx:else style="width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;" catchtap="sharefriend"></view>	
-									<block wx:if='{{infoActivity.detail!=1}}'>好友互赠,全部领取签号+1</block>
-									<block wx:else>分享给好友</block>
-							</view>
-						  <view wx:if='{{!shareStatus}}' style="width:60%;background:gray;color:white;line-height:80rpx;border-radius:5rpx;float:right;text-align:center;position:relative;font-size:26rpx;">今日已赠完,明日再来</view>
-
-						</block>
-				
-				</view>
-
-
-			</view>
-
-		</view>
-
-		<view wx:if='{{infoActivity.status == 3}}' style="width:100%;padding-bottom:10rpx;">
-		  <block wx:if='{{reLottoList&&reLottoList.length!=0}}'>
-					<view style="width:100%;font-size:25rpx;line-height:30rpx;text-align:center;margin:20rpx 0;">补抽名单{{reLottoList.length}}</view>
-					<view style='font-size:30rpx;color:#1989FA;' wx:for='{{winnerLotto}}' wx:key='key'>
-							<view style='overflow:hidden;padding:20rpx 150rpx;text-align:center;'>
-								<view style='float:left;width:60rpx;height:60rpx;border-radius:50%;background:#FF8080;'>
-									<image style='width:60rpx;height:60rpx;border-radius:50%;' src='{{item.headphoto}}'></image>
-								</view>
-								<view wx:for='{{item.lottolist}}' wx:key='key' style='float:right;'>
-									<view style='width:30rpx;height:40rpx;float:left;border:1rpx solid #A3D0FD;margin:9rpx 0 0 15rpx;background:#fff;'>{{item}}</view>
-								</view>
-							</view>
-					</view>	
-					<block wx:if='{{reLottoList&&reLottoList.length!=0}}'>
-							<block wx:for='{{reLottoList}}' wx:key='key'>
-									<view style="width:100%;font-size:25rpx;line-height:30rpx;text-align:center;margin:20rpx 0;">
-									    <block wx:if='{{(index+1)==reLottoList.length}}'>中签名单</block>
-									    <block wx:else>补抽名单{{reLottoList.length-1}}</block>
-									</view>
-									<block wx:for='{{item}}' wx:key='key'>
-											<view style='font-size:30rpx;color:#1989FA;'>
-												<view style='overflow:hidden;padding:20rpx 150rpx;text-align:center;'>
-													<view style='float:left;width:60rpx;height:60rpx;border-radius:50%;background:#FF8080;'>
-														<image style='width:60rpx;height:60rpx;border-radius:50%;' src='{{item.headphoto}}'></image>
-													</view>
-													<view wx:for='{{item.lotto}}' wx:key='key' style='float:right;'>
-														<view style='width:30rpx;height:40rpx;float:left;border:1rpx solid #A3D0FD;margin:9rpx 0 0 15rpx;background:#fff;'>{{item}}</view>
-													</view>
-												</view>
-											</view>						
-									</block>
-							</block>
-					</block>
-			</block>
-			<block wx:else>
-				<block wx:if="{{is_ordinary_ticket_user}}">
-					<view class="mysign" wx:if="{{winnerUnclaimedLotto && winnerUnclaimedLotto.length != 0}}">
-						<view class="mysignTopWrap">我的中签信息</view>
-						<view class="mysignTableWrap">
-							<view class="mysignHTable">
-								<text class="htableBox" style="width:12%;">序号</text>
-								<text class="htableBox" style="width:15%;">日期</text>
-								<text class="htableBox" style="width:23%;">手机号</text>
-								<text class="htableBox" style="width:50%;">身份证号</text>
-							</view>
-							<view class="mysignBTableWrap">
-								<block wx:for="{{winnerUnclaimedLotto}}" wx:key="key" wx:if="{{item.status != 0}}">
-									<view class="mysignBTable" data-oid="{{item.order_id}}" catchtap="{{item.status == 1?'winnerlogic':item.status == 2?'viewtheorder':''}}">
-										<text class="btableBox" style="width:12%;">{{item.sort}}</text>
-										<text class="btableBox" style="width:15%;">{{item.day}}</text>
-										<text class="btableBox" style="width:23%;">{{item.tel}}</text>
-										<view class="btableBox1" style="width:50%;">
-											<text class="mysignBTablecard" style="display:inline-block;color: #F8627B;">{{item.lotto}}</text>
-											<!-- <text class="get" catchtap="winnerlogic">领取</text> -->
-											<block wx:if="{{item.status == 1}}">
-												<text class="get" data-lottoid="{{item.id}}" catchtap="winnerlogic">领取</text>
-											</block>
-											<block wx:elif="{{item.status == 2}}">
-												<text class="yiget" data-oid="{{item.order_id}}" catchtap="viewtheorder">详情</text>
-											</block>
-											<block wx:else>
-												<text class="yipast">已过期</text>
-											</block>
-										</view>
-									</view>
-								</block>
-							</view>
-						</view>
-					</view>
-					<view style="width:100%;text-align:center;color:gray;line-height:50rpx;font-size:26rpx;margin-top:25rpx;" catchtap="jumpballotList">查看所有中签号></view>
-					<view class="mysignInfo" wx:if="{{winnerLotto && winnerLotto.length != 0}}">
-						<view class="mysignTopWrap">我的抽签信息</view>
-						<view class="mysignTableWrap">
-							<view class="mysignHTable">
-								<text class="htableBox" style="width:12%;">序号</text>
-								<text class="htableBox" style="width:15%;">日期</text>
-								<text class="htableBox" style="width:23%;">手机号</text>
-								<text class="htableBox" style="width:50%;">身份证号</text>
-							</view>
-							<view class="mysignBTableWrap">
-								<block wx:for="{{winnerLotto}}" wx:key="key">
-									<view class="mysignBTable">
-										<text class="btableBox colorblue" style="width:12%;">{{item.sort}}</text>
-										<text class="btableBox colorblue" style="width:15%;">{{item.day}}</text>
-										<text class="btableBox colorblue" style="width:23%;">{{item.tel}}</text>
-										<text class="btableBox colorblue" style="width:50%;">{{item.lotto}}</text>
-									</view>
-								</block>
-							</view>
-						</view>
-					</view>
-				</block>
-				<block wx:elif='{{infoActivity.joinMothed == "payTicket"}}'>
-						<block wx:if="{{infoFragment.activitySignNumber && infoFragment.activitySignNumber.length != 0}}">
-
-
-							<view class="mysignInfo">
-									<view class="mysignTopWrap">
-									  	<block wx:if='{{infoActivity.isWinner}}'><text style="color:#F8627B;">恭喜您已中签</text> 我的中签信息</block>
-									    <block wx:else>很遗憾您未中签 我的抽签信息</block>
-									</view>
-									<view class="mysignTableWrap">
-										<view class="mysignHTable">
-														<text class="htableBox" style="width:40%;">手机号</text>
-														<text class="htableBox" style="width:60%;">身份证号</text>
-										</view>
-										<view class="mysignBTableWrap">
-													<block wx:for="{{infoFragment.activitySignNumber}}" wx:key="key" wx:if="{{item.status != 0}}">
-																	<view class="mysignBTable">
-																					<text class="btableBox" style="width:40%;{{infoActivity.isWinner?'':'color:#1684FC;'}}">{{item.tel}}</text>
-																					<text class="btableBox" style="width:60%;{{infoActivity.isWinner?'':'color:#1684FC;'}}">{{item.lotto}}</text>
-																	</view>
-													</block>
-										</view>
-									</view>
-								</view>
-
-								<view style="width:100%;text-align:center;color:gray;line-height:50rpx;font-size:26rpx;" catchtap="jumpballotList">查看所有中签号></view>
-
-						</block>
-
-
-				</block>
-				<block wx:else>
-					<view style="width:100%;font-size:25rpx;line-height:30rpx;text-align:center;margin:20rpx 0;">中签名单</view>
-					<view style='font-size:30rpx;color:#1989FA;' wx:for='{{winnerLotto}}' wx:key='key'>
-						<view style='overflow:hidden;padding:20rpx 150rpx;text-align:center;'>
-							<view style='float:left;width:60rpx;height:60rpx;border-radius:50%;background:#FF8080;'>
-								<image style='width:60rpx;height:60rpx;border-radius:50%;' src='{{item.headphoto}}'></image>
-							</view>
-							<view wx:for='{{item.lottolist}}' wx:key='key' style='float:right;'>
-								<view style='width:30rpx;height:40rpx;float:left;border:1rpx solid #A3D0FD;margin:9rpx 0 0 15rpx;background:#fff;'>{{item}}</view>
-							</view>
-						</view>
-					</view>			
-				</block>
-			</block>
-
-			<view wx:if='{{!infoActivity.isWinner}}' class='takepartin' catchtap="moreaction">更多活动</view>
-
-			<view wx:if='{{infoActivity.isWinner}}' style="width:100%; {{awardstatus == 2?'position: fixed;bottom: 124rpx;left: 0;z-index: 10;':''}}">
-				<block wx:if="{{is_ordinary_ticket_user}}">
-					<!-- <view style="width:100%;text-align:center;color:gray;line-height:50rpx;font-size:26rpx;" catchtap="jumpballotList">查看所有中签号></view> -->
-				</block>
-				<block wx:else>
-					<view wx:if='{{awardstatus == 2}}' class='takepartin' style="background:#FF9800;" catchtap="winnerlogic">领取奖励</view>
-					<view wx:if='{{awardstatus == 1}}' catchtap="{{infoActivity.joinMothed == 'payTicket'?'viewtheorder':''}}" data-oid='{{infoActivity.cart_id}}' style="width:100%;text-align:center;color:#FF9800;line-height:50rpx;">已领取奖励</view>
-					<!-- 开奖24小时未领取，已过期 -->
-					<view wx:if='{{awardstatus == 3}}' style="width:100%;text-align:center;color:gray;line-height:50rpx;">未领取，已过期</view>
-					<view wx:if='{{awardstatus == 4}}' style="width:100%;text-align:center;color:gray;line-height:50rpx;">没有中奖,再接再厉</view>
-				</block>
-			</view>
-
-		</view>
-
-	</view>
-
-    <view style="background:#fff;">
-				<view style='width:710rpx;height:130rpx;background:#fff;border-bottom:1px solid #f9f7f7;margin:20rpx auto 0;position:relative;' wx:if='{{infoGoods.is_on_sale==1||infoGoods.isShowBox}}' catchtap='jumpdetail' data-is_blind_box='{{infoGoods.is_blind_box}}'>
-
-					<view class="DirectpurchaseClick" catchtap='jumpdetail' data-ind='1' data-is_blind_box='{{infoGoods.is_blind_box}}'></view>
-					
-					<image src='{{infoGoods.goods_thumb}}' style='display:block;width:110rpx;height:110rpx;float:left;margin:11rpx;' mode='aspectFit'></image>
-					<view style='width:575rpx;height:110rpx;float:left;position:relative;margin-top:10rpx;'>
-						<view class='multilineellipsis' style='height:58rpx;width:425rpx;font-size:28rpx;color:#666;line-height:30rpx;'>{{infoGoods.goods_name}}</view>
-						<view style='width:100%;height:40rpx;line-height:40rpx;font-size:28rpx;margin-top:10rpx;'>
-							<block wx:if='{{infoGoods.goods_type==3}}'>定金￥{{infoGoods.promote_price}}</block>
-							<block wx:else>￥{{infoGoods.shopPrice}}</block>
-							<text style='font-size:22rpx;color:#fff;margin-left:15rpx;background:#1890ff;border-radius:7rpx;position:relative;top:-2rpx;padding:3rpx 6rpx;' wx:if='{{infoGoods.is_blind_box&&infoGoods.isRecycle&&infoGoods.recycleRatio}}'>{{infoGoods.recycleRatio}}折回收</text>
-						</view>
-
-						<block wx:if='{{promote_start_date}}'>
-								 <view style='width:130rpx;height:46rpx;background:#eeae19;font-size:24rpx;color:#fff;text-align:center;line-height:46rpx;border-radius:10rpx;position:absolute;top:0;bottom:0;right:10rpx;margin:auto 0;z-index:1;'>
-										<block wx:if='{{subscribeOrNot}}'>订阅成功</block>
-										<block wx:elif='{{infoGoods.goods_type==3}}'>定金订阅</block>
-										<block wx:else>订阅提醒</block>
-								 </view>
-						</block>
-						<block wx:else>
-
-								<view style='width:130rpx;height:46rpx;background:#ff2742;font-size:24rpx;color:#fff;text-align:center;line-height:46rpx;border-radius:10rpx;position:absolute;top:0;bottom:0;right:10rpx;margin:auto 0;z-index:1;'>
-									<block wx:if='{{infoGoods.isShowBox}}'>原价拼明盒</block>
-									<block wx:elif='{{infoGoods.is_blind_box}}'>在线抽盒机</block>
-									<block wx:else>直接购买</block>
-								</view>
-
-						</block>
-
-
-					</view>
-				</view>		
-		</view>
-
 
 		<block wx:if="{{brandRule!=''}}">
 			<view style='width:100%;overflow:hidden;'>
@@ -773,53 +217,6 @@
 					</view>
 				</view>
 		</block>
-
-
-
-
-
-
-
-	<block wx:if='{{is_exhibition!=1&&brandId<=0}}'>
-		<view style='width:100%;overflow:hidden;'>
-
-
-
-			<!-- infoActivity.isApply -->
-			<view class='clickrelease' wx:if='{{false}}' catchtap='limitlotterypublish'>
-				<view class='clickrelleft'>潮玩设计师&品牌发布专区</view>
-				<view class='clickrelrigh'>点击发布</view>
-			</view>
-			
-
-			<!-- <view wx:if='{{infoGoods.goods_name}}' style="margin:20rpx;font-size:27rpx;">{{infoGoods.goods_name}}</view> -->
-			
-			<image wx:if='{{isScrapingCard}}' class="rotate" style="width:100%;height:auto;display:block;margin:30rpx 0 20rpx 0;" catchtap="jumpScrapingCard" mode='widthFix' src="{{goodsInfoAds}}"></image>
-
-
-			<somke colortitle='#000'></somke>
-
-			<view class='dltittheme'>
-				<view class='dlttemelef'>商品详情</view>
-			</view>
-			<!--  商品详情图片 转换HTML标签  -->
-			<view class='detailimg' style="padding-bottom:16rpx;">
-				<template is="wxParse" data="{{wxParseData:article.nodes}}" />
-			</view>
-
-		</view>
-
-	</block>
-
-	<!-- <view class='newcoupon' wx:if='{{limsaveiftr}}'>
-		<view class='swfback' catchtouchmove="preventD" catchtap='limsavefun'></view>
-		<view class='limsavebox'>
-			<image class='limsavbimg' mode='aspectFit' src='{{saveimgurlfrpb}}'></image>
-			<view class='limsavebuttom' catchtap='frpcomsavethepicture'>保存图片</view>
-		</view>
-
-	</view> -->
-
 
 	<view class='newcoupon' wx:if='{{addfrindcommoni}}'>
 		<view class='swfback' catchtouchmove="preventD" catchtap='closefrindcommoni'></view>
@@ -1054,9 +451,10 @@
 
 <view style='width:100%;position:fixed;left:0;bottom:0;border-top:1px solid #e5e5e5;background:#fff;z-index:5;'>
 
-    <view class="newDrawBSTime" wx:if='{{infoActivity.status==1 || infoActivity.status==2}}'>
+    <view class="newDrawBSTime" wx:if='{{infoActivity.status==1 || infoActivity.status==2 || (infoActivity.status==3 && !infoActivity.isReceived && appNowTime < infoActivity.finalPayTime)}}'>
 					<block wx:if='{{infoActivity.status==1}}'>开始倒计时   </block>
 					<block wx:elif='{{infoActivity.status==2}}'>开奖倒计时   </block>
+					<block wx:elif='{{infoActivity.status==3 && !infoActivity.isReceived && appNowTime < infoActivity.finalPayTime}}'>付款倒计时   </block>
 					<block wx:if='{{dayStr!=0}}'>{{dayStr}}天</block>
 					<block>{{hrStr}}时{{minStr}}分{{secStr}}秒</block>
 		</view>
@@ -1072,12 +470,12 @@
 				</block>
 				
 				<block wx:if='{{infoActivity.status==3}}'>
-					<view class="winningList" style="margin-right:40rpx;" catchtap="jumpWinningList" data-id='{{infoActivity.id}}' data-type='1'>中签名单</view>
+					<view class="winningList" style="margin-right:40rpx;" catchtap="jumpWinningList" data-id='{{infoActivity.id}}' data-type='1' wx:if='{{infoActivity.isSign}}'>中签名单</view>
 					<block>
 							<block wx:if='{{infoActivity.isSign}}'>
 								  <block wx:if='{{infoActivity.isWinner}}'>
 									  	<view wx:if='{{infoActivity.isReceived}}' class="purchaseNoOverdue" style="background:#B5B5B5;">已购买</view>
-										  <view wx:elif='{{!infoActivity.isReceived && appNowTime < infoActivity.finalPayTime}}' class="purchaseNoOverdue" catchtap="paymentmony" style="background:#DBC69D;">立即支付</view>
+										  <view wx:elif='{{!infoActivity.isReceived && appNowTime < infoActivity.finalPayTime}}' class="purchaseNoOverdue" catchtap="winnerlogic" style="background:#DBC69D;">立即支付</view>
 											<view wx:elif='{{!infoActivity.isReceived && appNowTime > infoActivity.finalPayTime}}' class="purchaseNoOverdue" style="background:#B5B5B5;">超时未付款</view>
 									</block>
 									<view wx:else class="purchaseNoOverdue" style="background:#B5B5B5;">您未中签</view>

@@ -16,7 +16,8 @@ Page({
     loginid:'',
     current:0,
     mission:'',
-    endtimeArr:[] 
+    endtimeArr:[],
+    triggered: false,
   },
 
   /**
@@ -70,6 +71,18 @@ Page({
   onPullDownRefresh: function () {
     this.getData();
   },
+  //用户下拉动作
+  onScrollRefresh: function () {
+    // var that=this;
+    let isRefresh = true;
+    this.getData(isRefresh);
+
+    // setTimeout(function(){
+    //   that.setData({
+    //     triggered: false,
+    //   })
+    // },2000);
+  },
   /**
    * 页面上拉触底事件的处理函数
    */
@@ -91,10 +104,12 @@ Page({
       toView: id
     })
   },
-  getData(){
-    wx.showLoading({
-      title: '加载中',
-    })
+  getData(isRefresh = false){
+    if(!isRefresh){
+      wx.showLoading({
+        title: '加载中',
+      })
+    }
     let data = `mod=mission&operation=info&uid=${this.data.uid}&loginid=${this.data.loginid}`
     var q = Dec.Aese(data);
     console.log(`${app.signindata.comurl}?${data}`)
@@ -115,6 +130,11 @@ Page({
             group:res.data.List.group,
             mission:res.data.List.mission,
           })
+          setTimeout(()=>{
+            this.setData({
+              triggered: false,
+            })
+          },1000)
           console.log(this.data.mission)
         }else{
           app.showToastC(res.data.Msg,2000);

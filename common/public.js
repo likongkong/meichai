@@ -1,18 +1,32 @@
 var Aes = require('crypto-js.js');  //引用AES源码js
 
 // var env = 'online';   //线上 
+// var env = 'qpe';  // 准生产环境
 var env = 'test';  //测试
-var versionnumber = '13.1.3';
+var versionnumber = '13.2.0';
 
 var key = env=='online'?Aes.enc.Utf8.parse("danzhuan1chaijia"):Aes.enc.Utf8.parse("danzhuanichaijia");
 // 公共地址 接口
 function comurl() {
-  return env=='online'?'https://api.51chaidan.com/':'http://api-test.51chaidan.com/';
+  switch(env){
+    case "online":var envUrl = 'https://api.51chaidan.com/';break;
+    case "qpe":var envUrl = 'https://api-t.51chaidan.com/';break;
+    case "test":var envUrl = 'http://api-test.51chaidan.com/';break;
+    default:console.log('错误');
+  };
+  return envUrl;
 }
 // 公共地址 接口
 function comUrlNew() {
-  return env=='online'?'https://api-api.51chaidan.com/':'http://test-api-new.51chaidan.com/'; 
+  switch(env){
+    case "online":var envUrl = 'https://api-api.51chaidan.com/';break;
+    case "qpe":var envUrl = 'api-new-t.51chaidan.com/';break;
+    case "test":var envUrl = 'http://test-api-new.51chaidan.com/';break;
+    default:console.log('错误');
+  };
+  return envUrl; 
 } 
+console.log(comurl(),comUrlNew())
 //拼图 公共地址 接口
 function clwcomurl(){  
   return env=='online'?'https://clw.51chaidan.com/':'http://clw-test.51chaidan.com/';

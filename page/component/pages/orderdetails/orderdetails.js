@@ -445,7 +445,7 @@ Page({
       })
     } else if(order_type == 13){
       wx.navigateTo({    
-        url: "/page/component/pages/limitlottery/limitlottery?id=" + activity_id
+        url: "/page/component/pages/limitlottery/limitlottery?id=" + activity_id+'&list=1'
       });
     } else if(order_type == 21){
       wx.navigateTo({   
@@ -453,7 +453,7 @@ Page({
       });
     } else if(order_type == 27){
       wx.navigateTo({    
-        url: "/page/component/pages/limitlottery/limitlottery?id=" + activity_id
+        url: "/page/component/pages/limitlottery/limitlottery?id=" + activity_id + activity_id+'&list=1'
       });
     } else{
       wx.navigateTo({    

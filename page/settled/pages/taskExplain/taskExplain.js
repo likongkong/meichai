@@ -13,6 +13,7 @@ Page({
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     uid:'',
     loginid:'',
+    type:0, // 1 抽选规则
   },
 
   /**
@@ -22,6 +23,13 @@ Page({
     wx.hideShareMenu();
     // '已经授权'
     // this.data.id = options.id;
+    this.data.type = options.type || 0; 
+    if(this.data.type == 1){
+      this.setData({
+        c_title:'活动规则'
+      }) 
+    };
+
     this.data.loginid = app.signindata.loginid;
     this.data.uid = app.signindata.uid;
     // 判断是否登录
@@ -87,8 +95,13 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
+    if(this.data.type == 1){
+        var getUrl = 'https://cdn.51chaidan.com/produce/tipLotto.json';
+    }else{
+        var getUrl = 'https://cdn.51chaidan.com/produce/tipBrandMission.json';
+    };
     wx.request({
-      url: 'https://cdn.51chaidan.com/produce/tipBrandMission.json',
+      url: getUrl ,
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: (res) => { 
