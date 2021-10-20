@@ -485,9 +485,9 @@ Page({
           // [`listData4[1].index`]:info.cashPledge==0?1:0,
           // [`listData4[1].value`]:info.cashPledge==0?'':info.cashPledge,
           [`listData4[1].index`]:info.isCanShare==0?1:0,
-          [`listData5[0].index`]:info.cashPledge!=0?1:info.integrate!=0?2:0,
+          [`listData5[0].index`]:info.cashPledge!=0?1:info.integral!=0?2:0,
           [`listData5[0].radioArr[1].value`]:info.cashPledge != 0?info.cashPledge:'',
-          [`listData5[0].radioArr[2].value`]:info.integrate != 0?info.integrate:'',
+          [`listData5[0].radioArr[2].value`]:info.integral != 0?info.integral:'',
         })
     //  goodsName:'', //商品名称
     //  flatPatternmaking:'', //商品展示图
@@ -518,9 +518,9 @@ Page({
         obj.explain = info.rule;
         obj.goodsDetailsPic = info.arrGoodsDescImg;
         obj.isParticipants = info.isShowSellNumber==0?1:0;
-        obj.applicationCondition = info.cashPledge!=0?1:info.integrate!=0?2:0;
+        obj.applicationCondition = info.cashPledge!=0?1:info.integral!=0?2:0;
         obj.cashPledge = info.cashPledge!=0?info.cashPledge:'';
-        obj.integrate = info.integrate!=0?info.integrate:'';
+        obj.integrate = info.integral!=0?info.integral:'';
         obj.isCanShare = info.isCanShare==0?1:0;
       }else{
         app.showToastC(res.data.Msg,2000);
