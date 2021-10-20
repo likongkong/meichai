@@ -10,7 +10,7 @@
 </view>
 <!-- 助力记录 -->
 <view class="winList" wx:if='{{type == 2}}'>
-    <view class="HelpList">共{{helpTotalNumber}}位好友为助力</view>
+    <view class="HelpList">共{{helpTotalNumber}}位好友为你助力</view>
     <view class="winListEve" wx:for='{{helpUserList}}' wx:key='key'>
         <image src="{{item.headphoto}}" class="winListEveImg" mode="aspectFit" />
         <view class="winListEveName">{{item.nick}}</view>

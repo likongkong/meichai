@@ -113,12 +113,12 @@
 						
 						<view class="userBoxImgTxt">
 								<image src="{{helpInfo.headphoto}}" class="userBoxImg" mode="aspectFit" />
-								<view class="userBoxTxt">{{helpInfo.nick}}{{helpInfo.tip}}</view>
+								<view class="userBoxTxt multilineellipsis">{{helpInfo.nick}}{{helpInfo.tip}}</view>
 						</view>
 						<view class="userHelpBut" style="{{helpInfo.status == 0?'background:#DBC69D;':'background:#999999;'}}" catchtap="{{helpInfo.status == 0?'friendHelp':'commonBulletFrameFun'}}">
 								<block wx:if='{{helpInfo.status == 0}}'>为好友助力</block>
 								<block wx:elif='{{helpInfo.status == 1}}'>您已成功助力</block>
-								<block wx:elif='{{helpInfo.status == 3}}'>好友助力已达上限</block>
+								<block wx:elif='{{helpInfo.status == 2}}'>好友助力已达上限</block>
 						</view>
 				</block>
 				<!-- 报名成功 -->
@@ -156,7 +156,7 @@
 						<block wx:else>
 								<view class="FailedToWinTheLot">很遗憾，您未中签</view>
 								<view class="FailedToWinTheLotTip">更多精彩内容进行中</view>
-								<view class="userHelpBut" style="background:#DBC69D;" catchtap="{{moreaction}}">查看其他活动</view>
+								<view class="userHelpBut" style="background:#DBC69D;" catchtap="moreaction">查看其他活动</view>
 						</block>
 				</block>
 				
@@ -451,7 +451,7 @@
 
 <view style='width:100%;position:fixed;left:0;bottom:0;border-top:1px solid #e5e5e5;background:#fff;z-index:5;'>
 
-    <view class="newDrawBSTime" wx:if='{{infoActivity.status==1 || infoActivity.status==2 || (infoActivity.status==3 && !infoActivity.isReceived && appNowTime < infoActivity.finalPayTime)}}'>
+    <view class="newDrawBSTime" wx:if='{{infoActivity.status==1 || infoActivity.status==2 || (infoActivity.status==3 && !infoActivity.isReceived && appNowTime < infoActivity.finalPayTime && infoActivity.isWinner)}}'>
 					<block wx:if='{{infoActivity.status==1}}'>开始倒计时   </block>
 					<block wx:elif='{{infoActivity.status==2}}'>开奖倒计时   </block>
 					<block wx:elif='{{infoActivity.status==3 && !infoActivity.isReceived && appNowTime < infoActivity.finalPayTime}}'>付款倒计时   </block>

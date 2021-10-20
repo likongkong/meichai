@@ -685,12 +685,13 @@ Page({
             }else if(infoActivity.status == 3){
               infoActivity.finalPay_time = time.toDate(infoActivity.finalPayTime,2);
               // 支付倒计时
-              if(!infoActivity.isReceived && _this.data.appNowTime < infoActivity.finalPayTime){
+              if(!infoActivity.isReceived && _this.data.appNowTime < infoActivity.finalPayTime && infoActivity.isWinner){
                   _this.dateformat(infoActivity.finalPayTime);
               };
-
             };
             
+            console.log('时间=====',_this.data.appNowTime < infoActivity.finalPayTime,_this.data.appNowTime , infoActivity.finalPayTime)
+
             // 支付定金报名成功添加提示框
             if(_this.data.infoActivity && !_this.data.infoActivity.isSign && _this.data.is_payment && infoActivity.activitySignMothed == 'payTicket'){
               _this.setData({
@@ -700,7 +701,7 @@ Page({
               _this.commonBulletFrameFun(2)
             };
             // 是否中签弹框提示
-            if(infoActivity.status == 3 && infoActivity.isSign){
+            if(infoActivity.status == 3 && infoActivity.isSign &&  _this.data.appNowTime < infoActivity.finalPayTime){
               if(infoActivity.isWinner){
                 if(!infoActivity.isReceived){
                     _this.commonBulletFrameFun(4);
@@ -723,15 +724,15 @@ Page({
 
             if(_this.data.tipaid){}else{_this.addressCom();}
   
-            if(infoActivity.isCanShare && _this.data.canShare!=1 && _this.data.isList != 1){
+            if(!infoActivity.isCanShare && _this.data.canShare!=1 && _this.data.isList != 1){
                 console.log('detail == 1','不能分享')
                 wx.hideShareMenu();
                 _this.setData({
                   is_share_but:false
                 })
-                if(!_this.data.share_id){
-                    _this.toogleGuidanceMask();
-                };
+                // if(!_this.data.share_id){
+                //     _this.toogleGuidanceMask();
+                // };
             }else{
                 wx.showShareMenu({
                   withShareTicket:true
@@ -1425,7 +1426,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
     var _this = this;
 
     // 群内分享  在列表进去禁止报名
-    if(_this.data.infoActivity.isCanShare && !_this.data.share_id){
+    if(!_this.data.infoActivity.isCanShare && !_this.data.share_id){
       _this.toogleGuidanceMask();
       return false
     };
@@ -1994,7 +1995,9 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
         clearInterval(_this.data.timer);
         if(_this.data.refreshGetin){
             _this.data.refreshGetin = false;
-            _this.getinfo();
+            setTimeout(function(){
+              _this.getinfo();
+            },1000)
         };
       }
     }.bind(_this), 1000);
@@ -2009,7 +2012,17 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
     var infoActivity = _this.data.infoActivity
     console.log(111)
     if (infoActivity.isWinner) {
-      _this.getGoodsPay();
+      if(_this.data.infoActivity.cartId){
+        _this.data.cart_id = _this.data.infoActivity.cartId || ''
+        // 微信支付
+        _this.paymentmony();
+        _this.setData({
+          commonBulletFrame:false
+        })
+      }else{
+        _this.getGoodsPay();
+      };
+      
       // if (infoActivity.isOrdered) { //购买完成
       // } else if (infoActivity.nextPay) { // 直接吊起预支付
       //   // 微信支付
@@ -2027,6 +2040,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
   getGoodsPay(){
     var _this = this;
 
+
     if(this.data.isfullPledge){
       var q = Dec.Aese('mod=lottoV2&operation=getGoods&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&aid='+this.data.tipaid);
       this.setData({isfullPledge: false,commonBulletFrame:false})
@@ -2036,9 +2050,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
         commonBulletFrame:false
       })
       return false;
-    }
-
-
+    };
 
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q,

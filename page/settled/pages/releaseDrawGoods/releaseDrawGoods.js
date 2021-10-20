@@ -82,13 +82,14 @@ Page({
         radioArr:[
           {name:'wu',radioName:'无条件报名'},
           {name:'cashPledge',radioName:'定金',placeholder:'请填写定金金额',value:''},
+          // {name:'integrate',radioName:'消耗积分',placeholder:'请填写消耗积分',value:''},
         ],
         value:0,
         index:0,
         direction:'Y',
         explain:true,
-        // explainTxt:'消耗积分：用户需使用积分获得抽选资格，勾选后输入消耗积分 \n保证金：用户需支付保证金获取抽选资格，勾选后输入保证金金额，未中奖的用户三个工作日自动退回保证金',
-        explainTxt:'定金：用户需支付保证金获取抽选资格，勾选后输入定金金额，未中奖的用户三个工作日自动退回定金',
+        explainTxt:'消耗积分：用户需使用积分获得抽选资格，勾选后输入消耗积分 \n定金：用户需支付定金获取抽选资格，勾选后输入定金金额，未中奖的用户三个工作日自动退回定金',
+        explainTxt:'定金：用户需支付定金获取抽选资格，勾选后输入定金金额，未中奖的用户三个工作日自动退回定金',
         input:true,
         multiRadio:true,
         name:'applicationCondition',
@@ -128,44 +129,44 @@ Page({
       },
     ],
     listData3:[
-      {
-        isRequired:true,
-        type:'radio',
-        subtitle:'发货方式',
-        radioArr:[
-          {name:'logistics',radioName:'自行发货',placeholder:'请选择物流方式',value:'',
-          groups: [
-            ['顺丰', '韵达', '圆通', '申通', '中通', 'EMS', '宅急送', '京东', '天天', '优速', '极兔', '百世', '德邦', '其他'], 
-            ['到付', '包邮']
-          ],
-          groupsIndex:'',},
-          {name:'dropshipping',radioName:'美拆代发',placeholder:'请选择物流方式',value:'',groups: [
-            ['顺丰'], 
-            ['到付（3元/单）', '包邮（8元/单）']
-          ],
-          groupsIndex:'',},
-        ],
-        value:0,
-        index:0,
-        direction:'Y',
-        explain:true,
-        explainTxt:'自行发货：由商家自己发货，可预设发货物流方式 \n美拆代发：由美拆代理发货，可选择需要的物流形式，目前仅支持顺丰到付和包邮，并收取对应的费用顺丰到付3元/单，顺丰包邮8元/单',
-        picker:true,
-        multiRadio:true,
-        margintop0:true,
-        borderbottom1:'show',
-        name:'modeOfDespatch',
-      },{
-        isRequired:true,
-        type:'text',
-        subtitle:'预计发货日期',
-        placeholder:'请输入预计发货日期',
-        value:'',
-        maxlength:10,
-        name:'dateToPull',
-        borderbottom1:'show',
-        margintop0:true,
-      },
+      // {
+      //   isRequired:true,
+      //   type:'radio',
+      //   subtitle:'发货方式',
+      //   radioArr:[
+      //     {name:'logistics',radioName:'自行发货',placeholder:'请选择物流方式',value:'',
+      //     groups: [
+      //       ['顺丰', '韵达', '圆通', '申通', '中通', 'EMS', '宅急送', '京东', '天天', '优速', '极兔', '百世', '德邦', '其他'], 
+      //       ['到付', '包邮']
+      //     ],
+      //     groupsIndex:'',},
+      //     {name:'dropshipping',radioName:'美拆代发',placeholder:'请选择物流方式',value:'',groups: [
+      //       ['顺丰'], 
+      //       ['到付（3元/单）', '包邮（8元/单）']
+      //     ],
+      //     groupsIndex:'',},
+      //   ],
+      //   value:0,
+      //   index:0,
+      //   direction:'Y',
+      //   explain:true,
+      //   explainTxt:'自行发货：由商家自己发货，可预设发货物流方式 \n美拆代发：由美拆代理发货，可选择需要的物流形式，目前仅支持顺丰到付和包邮，并收取对应的费用顺丰到付3元/单，顺丰包邮8元/单',
+      //   picker:true,
+      //   multiRadio:true,
+      //   margintop0:true,
+      //   borderbottom1:'show',
+      //   name:'modeOfDespatch',
+      // },{
+      //   isRequired:true,
+      //   type:'text',
+      //   subtitle:'预计发货日期',
+      //   placeholder:'请输入预计发货日期',
+      //   value:'',
+      //   maxlength:10,
+      //   name:'dateToPull',
+      //   borderbottom1:'show',
+      //   margintop0:true,
+      // },
       {
         isRequired:false,
         type:'textarea',
@@ -474,9 +475,9 @@ Page({
           [`listData2[1].time`]:util.format1("yyyy-MM-dd HH:mm",info.stopTime),
           [`listData2[2].time`]:util.format1("yyyy-MM-dd HH:mm",info.finalPayTime),
 
-          [`listData3[0].radioArr[${info.shippingMothed}].groupsIndex`]:info.logisticsIndex,
-          [`listData3[0].index`]:info.shippingMothed,
-          [`listData3[1].value`]:info.deliverTime,
+          // [`listData3[0].radioArr[${info.shippingMothed}].groupsIndex`]:info.logisticsIndex,
+          // [`listData3[0].index`]:info.shippingMothed,
+          // [`listData3[1].value`]:info.deliverTime,
 
           [`listData3[0].value`]:info.rule,
           [`listData3[1].imageList`]:info.arrGoodsDescImg,
@@ -484,8 +485,9 @@ Page({
           // [`listData4[1].index`]:info.cashPledge==0?1:0,
           // [`listData4[1].value`]:info.cashPledge==0?'':info.cashPledge,
           [`listData4[1].index`]:info.isCanShare==0?1:0,
-          [`listData5[0].index`]:info.cashPledge==0?0:1,
+          [`listData5[0].index`]:info.cashPledge!=0?1:info.integral!=0?2:0,
           [`listData5[0].radioArr[1].value`]:info.cashPledge != 0?info.cashPledge:'',
+          [`listData5[0].radioArr[2].value`]:info.integral != 0?info.integral:'',
         })
     //  goodsName:'', //商品名称
     //  flatPatternmaking:'', //商品展示图
@@ -516,8 +518,9 @@ Page({
         obj.explain = info.rule;
         obj.goodsDetailsPic = info.arrGoodsDescImg;
         obj.isParticipants = info.isShowSellNumber==0?1:0;
-        obj.applicationCondition = info.cashPledge!=0?1:0;
+        obj.applicationCondition = info.cashPledge!=0?1:info.integral!=0?2:0;
         obj.cashPledge = info.cashPledge!=0?info.cashPledge:'';
+        obj.integrate = info.integral!=0?info.integral:'';
         obj.isCanShare = info.isCanShare==0?1:0;
       }else{
         app.showToastC(res.data.Msg,2000);
@@ -565,6 +568,15 @@ Page({
       app.showToastC('定金金额不可小于0.01',1500);
       return false;
     }
+    if(obj.applicationCondition == 2 && obj.integrate ==''){
+      this.selectComponent('#settledForm5').scrollto('applicationCondition');
+      app.showToastC('请输入消耗积分',1500);
+      return false;
+    }else if(obj.applicationCondition == 2 && obj.integrate < 1){
+      this.selectComponent('#settledForm5').scrollto('applicationCondition');
+      app.showToastC('消耗积分不可小于1',1500);
+      return false;
+    }
     if(!obj.startTime || obj.startTime == ''){
       this.selectComponent('#settledForm2').scrollto('startTime');
       app.showToastC('请选择抽选开始时间',1500);
@@ -580,16 +592,16 @@ Page({
       app.showToastC('请选择付款结束时间',1500);
       return false;
     }
-    if(!obj.logisticsIndex || obj.logisticsIndex == []){
-      this.selectComponent('#settledForm3').scrollto('modeOfDespatch');
-      app.showToastC('请选择发货方式',1500);
-      return false;
-    }
-    if(!obj.dateToPull || obj.dateToPull == ''){
-      this.selectComponent('#settledForm3').scrollto('dateToPull');
-      app.showToastC('请输入预计发货日期',1500);
-      return false;
-    }
+    // if(!obj.logisticsIndex || obj.logisticsIndex == []){
+    //   this.selectComponent('#settledForm3').scrollto('modeOfDespatch');
+    //   app.showToastC('请选择发货方式',1500);
+    //   return false;
+    // }
+    // if(!obj.dateToPull || obj.dateToPull == ''){
+    //   this.selectComponent('#settledForm3').scrollto('dateToPull');
+    //   app.showToastC('请输入预计发货日期',1500);
+    //   return false;
+    // }
     wx.showLoading({
       title: '加载中',
     })
@@ -604,6 +616,7 @@ Page({
     //   goodsDetailsPic:'', //详情图
     //   isParticipants:'', //是否显示参与人数
     //   cashPledge:'', //保证金
+    //   integrate:'', //积分
   
 
     let data = {
@@ -615,18 +628,19 @@ Page({
       quota:obj.goodsNum,
       goodsPrice:obj.goodsPrice,
       cashPledge:obj.applicationCondition == 1?obj.cashPledge:'',
+      integral:obj.applicationCondition == 2?obj.integrate:'',
       startTime:(new Date(obj.startTime.replace(/-/g,'/')).getTime())/1000,
       stopTime:(new Date(obj.stopTime.replace(/-/g,'/')).getTime())/1000,
       finalPayTime:(new Date(obj.finalPayTime.replace(/-/g,'/')).getTime())/1000,
 
-      shippingMothed:obj.modeOfDespatch,
-      logisticsIndex:obj.logisticsIndex,
-      shipping: obj.modeOfDespatch==0?obj.shipping:'',  //自行发货
-      shippingPriceStatus:obj.modeOfDespatch==0?obj.shippingPriceStatus==0?0:2:'',  //自行发货
-      mcShippingName:obj.modeOfDespatch==1?obj.shipping:'',  //美拆代发
-      mcShippingType:obj.modeOfDespatch==1?obj.shippingPriceStatus:'',  //美拆代发
-      mcShippingPrice:obj.modeOfDespatch==1?obj.shippingPriceStatus==0?3:8:'',  //美拆代发
-      deliverTime:obj.dateToPull,
+      // shippingMothed:obj.modeOfDespatch,
+      // logisticsIndex:obj.logisticsIndex,
+      // shipping: obj.modeOfDespatch==0?obj.shipping:'',  //自行发货
+      // shippingPriceStatus:obj.modeOfDespatch==0?obj.shippingPriceStatus==0?0:2:'',  //自行发货
+      // mcShippingName:obj.modeOfDespatch==1?obj.shipping:'',  //美拆代发
+      // mcShippingType:obj.modeOfDespatch==1?obj.shippingPriceStatus:'',  //美拆代发
+      // mcShippingPrice:obj.modeOfDespatch==1?obj.shippingPriceStatus==0?3:8:'',  //美拆代发
+      // deliverTime:obj.dateToPull,
 
       rule:obj.explain,
       arrGoodsDescImg:obj.goodsDetailsPic,
