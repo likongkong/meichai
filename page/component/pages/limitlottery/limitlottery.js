@@ -3,6 +3,9 @@ var Dec = require('../../../../common/public.js'); //aes加密解密js
 var WxParse = require('../../../../wxParse/wxParse.js');
 var time = require('../../../../utils/util.js');
 var Pub = require('../../common/mPublic.js'); //aes加密解密js
+
+import Poster from '../../../../pages/wxa_plugin_canvas/poster/poster';
+
 const app = getApp();
 
 Page({
@@ -14,8 +17,6 @@ Page({
     newdataexh:Date.parse(new Date())/1000<1588175999?true:false,
     //接口地址
     comurl: app.signindata.comurl,
-    // 图片地址
-    zdyurl: Dec.zdyurl(),
 
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
@@ -25,10 +26,6 @@ Page({
     // 适配苹果X
     isIphoneX: app.signindata.isIphoneX,
     defaultinformation: '',
-    wxnum: "",
-    // 晒单数量
-    dryinglistnum: 0,
-    shopnum: 0,
 
     dayStr: 0,
     hrStr: "00",
@@ -37,12 +34,8 @@ Page({
 
     list: [1, 1, 1, 1, 1, 1],
     id: 0,
-    atimer: '',
-    animation: '',
     infoActivity: "",
     infoGoods: "",
-    sourceLotto: "",
-    listLotto: "",
     winnerLotto: "",
     reLottoList:'', // 补抽列表
     btntext: "",
@@ -162,13 +155,13 @@ Page({
     ordinaryTicketUser:false,
     twoAffirmBox:false,
     lottoid:0,
-    isOtherLimitlotteryPop:false,
     isPopNum:0,
     appNowTime: Date.parse(new Date())/1000,
     commonBulletFrame:false,
     comBulFraNun:0, // 1 为好友助力 2 报名成功  3 身份信息  4 未中签 中签
     helpTipFitst:true,
-    refreshGetin:true
+    refreshGetin:true,
+    showPicturesImg:false
   },
   // 抽签规则
   drawRuleJump(){
@@ -712,6 +705,8 @@ Page({
 
             };
 
+            infoActivity.introduce = decodeURI(infoActivity.introduce)
+
 
             _this.setData({
                 infoActivity:infoActivity,
@@ -719,25 +714,35 @@ Page({
                 subscribedata: res.data.Info.subscribe.lotto || '',
                 cashPledge:infoActivity.cashPledge||0,
                 cart_id: infoActivity.cartId || '',
+                appNowTime: Date.parse(new Date())/1000,
             });
 
-
             if(_this.data.tipaid){}else{_this.addressCom();}
-  
-            if(!infoActivity.isCanShare && _this.data.canShare!=1 && _this.data.isList != 1){
-                console.log('detail == 1','不能分享')
-                wx.hideShareMenu();
-                _this.setData({
-                  is_share_but:false
-                })
-                // if(!_this.data.share_id){
-                //     _this.toogleGuidanceMask();
-                // };
+            // 是否能分享
+            if(infoActivity.isCanShare || infoActivity.isAdmin){
+              wx.showShareMenu({
+                withShareTicket:true
+              });
             }else{
-                wx.showShareMenu({
-                  withShareTicket:true
-                });
-            };
+              console.log(infoActivity.isCanShare,infoActivity.isAdmin,'不能分享')
+              wx.hideShareMenu();
+              _this.setData({
+                  is_share_but:false
+              })
+            }
+            // if(!infoActivity.isCanShare && _this.data.canShare!=1 && _this.data.isList != 1){
+            //   wx.hideShareMenu();
+            //   _this.setData({
+            //     is_share_but:false
+            //   })
+            //     // if(!_this.data.share_id){
+            //     //     _this.toogleGuidanceMask();
+            //     // };
+            // }else{
+            //     wx.showShareMenu({
+            //       withShareTicket:true
+            //     });
+            // };
             // 助力
             var helpInfo = res.data.Info.helpInfo || ""
             if(helpInfo && helpInfo.status !=3 && _this.data.helpTipFitst){
@@ -765,8 +770,6 @@ Page({
             //   chipwidth: 600 / infoFragment.totalFragmentNumber,
             //   linenum: infoFragment.totalFragmentNumber / 2,
             //   infoGoods: res.data.Info.infoGoods,
-            //   listLotto: res.data.List.listLotto || "",
-            //   winnerLotto: res.data.List.winnerLotto || "",
             //   winnerUnclaimedLotto: res.data.List.winnerUnclaimedLotto || "",
             //   payprice: res.data.Info.infoGoods.shop_price || 0,
             //   subscribedata: res.data.Info.subscribe || '',
@@ -925,16 +928,6 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
               }
             }
 
-            var zlist = res.data.List.winnerLotto;
-            for (var i = 0; i < zlist.length; i++) {
-              var a = zlist[i].lotto;
-              var aa = [];
-              for (var j = 0; j < a.length; j++) {
-                aa.push(a[j]);
-              }
-              zlist[i].lottolist = aa
-            }
-            res.data.List.winnerLotto = zlist
           }
 
           var infoFragment = res.data.Info.infoFragment;
@@ -1025,7 +1018,6 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
             chipwidth: 600 / infoFragment.totalFragmentNumber,
             linenum: infoFragment.totalFragmentNumber / 2,
             infoGoods: res.data.Info.infoGoods,
-            listLotto: res.data.List.listLotto || "",
             winnerLotto: res.data.List.winnerLotto || "",
             winnerUnclaimedLotto: res.data.List.winnerUnclaimedLotto || "",
             payprice: res.data.Info.infoGoods.shop_price || 0,
@@ -1045,11 +1037,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
           }
 
           console.log(_this.data.is_ordinary_ticket_user,'是否是普票用户')
-          // if(res.data.Info.is_ordinary_ticket_user != undefined && !res.data.Info.is_ordinary_ticket_user){
-          //   _this.setData({
-          //     isOtherLimitlotteryPop:true
-          //   })
-          // }
+
 
           // 是否调取展会数据
           if (res.data.Info.infoActivity && res.data.Info.infoActivity.specialWay && res.data.Info.infoActivity.specialWay == 1||(res.data.Info.infoActivity.specialWay != 1&&brandid>0)) {
@@ -1098,7 +1086,6 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
               _this.addressCom();
             } 
             
-            _this.getSnapshot()
           }, 1000)
 
         }else{
@@ -1257,9 +1244,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
     //   //   mask:true,
     //   //   duration:2000
     //   // });  
-    //   _this.setData({
-    //     isOtherLimitlotteryPop:true
-    //   })
+
     // }else{
     //   // if(_this.data.promote_start_date && !_this.data.subscribeOrNot){
     //   //   _this.subscrfun(1);
@@ -1351,76 +1336,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
       twoAffirmBox:false
     })
   },
-  // 检验
-  vipOrOrdermine1(){
-    var _this = this;
-    wx.showLoading({ title: '加载中...', mask:true })
-    var q = Dec.Aese('mod=bind&operation=verifyTicket&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&ticketType=normal&ticketIdentify='+ _this.data.ticketorderid)
-    console.log('验票请求==','mod=bind&operation=verifyTicket&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&ticketType=normal&ticketIdentify='+ _this.data.ticketorderid)
-    wx.request({
-      url: app.signindata.comurl + 'toy.php'+q,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        console.log('验票结果===',res)
-        wx.hideLoading()
-        if (res.data.ReturnCode == 200){
-          _this.ticketList();
-          // var ticketobj = "ticketListDate["+_this.data.ticketindex+"]["+_this.data.ticketsonindex+"].status";
-          _this.setData({
-            twoAffirmBox:false,
-            // [ticketobj]:1
-          })
-        }else{
-            wx.showModal({
-              title: '提示',
-              content: res.data.Msg || res.data.msg,
-              showCancel: false,
-              success: function (res) {}
-            })          
-        };
-      }
-    });
-  },
-  exchangesign(e){
-    console.log(e);
-    var aid = e.currentTarget.dataset.infoactivityid;
-    var id = e.currentTarget.dataset.ticketid;
-    var _this = this;
-    wx.showLoading({ title: '加载中...', mask:true })
-    var q = Dec.Aese('mod=lotto&operation=convertOrdinaryLotto&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id='+ id +'&aid='+aid)
-    console.log('兑换签号请求==','mod=bind&operation=verifyTicket&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id='+ id +'&aid='+aid)
-    wx.request({
-      url: app.signindata.comurl + 'spread.php'+q,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        console.log('兑换签号结果===',res)
-        wx.hideLoading()
-        if (res.data.ReturnCode == 200){
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            mask:true,
-            duration:2000
-          });  
-          setTimeout(function(){
-            _this.setData({
-              ordinaryTicketUser:false
-            })
-            _this.getinfo();
-          },2000)
-        }else{
-            wx.showModal({
-              title: '提示',
-              content: res.data.Msg || res.data.msg,
-              showCancel: false,
-              success: function (res) {}
-            })          
-        };
-      }
-    });
-  },
+  
   // 新报名
   newJoinDraw(){
     var _this = this;
@@ -1433,9 +1349,9 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
 
 
     if(this.data.isfullPledge){
-      var q1 = Dec.Aese('mod=lottoV2&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id +'&aid='+this.data.tipaid);
+      var q1 = Dec.Aese('mod=lottoV2&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id +'&aid='+_this.data.tipaid + '&share_uid=' + _this.data.share_id);
 
-      console.log('参与抽签','mod=lottoV2&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id +'&aid='+this.data.tipaid)
+      console.log('参与抽签','mod=lottoV2&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id +'&aid='+_this.data.tipaid + '&share_uid=' + _this.data.share_id)
       this.setData({isfullPledge: false})
     }else{
       this.setData({
@@ -1516,114 +1432,114 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
       }
     })
   },
-  joinDraw: function (share_uid) {
-    var _this = this;
-    // && this.data.infoActivity.payTicketCate == 'fullPledge'
-    if(this.data.infoActivity.joinMothed == 'payTicket'){
-      console.log(1)
-      if(this.data.isfullPledge){
-        var q1 = Dec.Aese('mod=lotto&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid=' + share_uid+'&perayu='+_this.data.perayu+'&aid='+this.data.tipaid);
-        console.log('参与抽签','mod=lotto&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid=' + share_uid+'&perayu='+_this.data.perayu+'&aid='+this.data.tipaid)
-        this.setData({isfullPledge: false})
-      }else{
-        this.setData({
-          receivingaddress:true
-        })
-        return false;
-      }
-    }else{
-      console.log(2)
-      var q1 = Dec.Aese('mod=lotto&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid=' + share_uid+'&perayu='+_this.data.perayu);
-      console.log('参与抽签','mod=lotto&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid=' + share_uid+'&perayu='+_this.data.perayu)
-    }
-    wx.showLoading({
-      title: '加载中...',
-      mask:true
-    })
+  // joinDraw: function (share_uid) {
+  //   var _this = this;
+  //   // && this.data.infoActivity.payTicketCate == 'fullPledge'
+  //   if(this.data.infoActivity.joinMothed == 'payTicket'){
+  //     console.log(1)
+  //     if(this.data.isfullPledge){
+  //       var q1 = Dec.Aese('mod=lotto&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid=' + share_uid+'&perayu='+_this.data.perayu+'&aid='+this.data.tipaid);
+  //       console.log('参与抽签','mod=lotto&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid=' + share_uid+'&perayu='+_this.data.perayu+'&aid='+this.data.tipaid)
+  //       this.setData({isfullPledge: false})
+  //     }else{
+  //       this.setData({
+  //         receivingaddress:true
+  //       })
+  //       return false;
+  //     }
+  //   }else{
+  //     console.log(2)
+  //     var q1 = Dec.Aese('mod=lotto&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid=' + share_uid+'&perayu='+_this.data.perayu);
+  //     console.log('参与抽签','mod=lotto&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid=' + share_uid+'&perayu='+_this.data.perayu)
+  //   }
+  //   wx.showLoading({
+  //     title: '加载中...',
+  //     mask:true
+  //   })
 
-    wx.request({
-      url: app.signindata.comurl + 'spread.php' + q1,
-      method: 'GET',
-      header: {
-        'Accept': 'application/json'
-      },
-      success: function (res) {
-        console.log('参与抽签数据=====================',res)
-        if (res.data.ReturnCode == 200) {
-          _this.getinfo();
-          if (share_uid != 0) {
+  //   wx.request({
+  //     url: app.signindata.comurl + 'spread.php' + q1,
+  //     method: 'GET',
+  //     header: {
+  //       'Accept': 'application/json'
+  //     },
+  //     success: function (res) {
+  //       console.log('参与抽签数据=====================',res)
+  //       if (res.data.ReturnCode == 200) {
+  //         _this.getinfo();
+  //         if (share_uid != 0) {
  
-            _this.setData({
-              // ishowgetchip: !_this.data.ishowgetchip,
-              ranking: res.data.Info.ranking,
-              brightNumber:res.data.Info.brightNumber
-            })
+  //           _this.setData({
+  //             // ishowgetchip: !_this.data.ishowgetchip,
+  //             ranking: res.data.Info.ranking,
+  //             brightNumber:res.data.Info.brightNumber
+  //           })
 
-            setTimeout(function () {
-              //创建节点选择器
-              var box = wx.createSelectorQuery();
-              //选择id
-              box.select('#chipson').boundingClientRect();
-              box.exec(function (res) {
-                if (res && res[0]) {
-                  _this.setData({
-                    chipsonwidth: (res[0].width / _this.data.linenum - 2),
-                  })
-                };
-              })
-            }, 1000)
-          }
+  //           setTimeout(function () {
+  //             //创建节点选择器
+  //             var box = wx.createSelectorQuery();
+  //             //选择id
+  //             box.select('#chipson').boundingClientRect();
+  //             box.exec(function (res) {
+  //               if (res && res[0]) {
+  //                 _this.setData({
+  //                   chipsonwidth: (res[0].width / _this.data.linenum - 2),
+  //                 })
+  //               };
+  //             })
+  //           }, 1000)
+  //         }
 
-          var subscribedata = res.data.Info.subscribe || '';
-          _this.data.subscribedata = subscribedata;
-          if (app.signindata.subscribeif && subscribedata && subscribedata.template_id) {
-            if (subscribedata.template_id instanceof Array) {
-              wx.requestSubscribeMessage({
-                tmplIds: subscribedata.template_id || [],
-                success(res) {
-                  for (var i = 0; i < subscribedata.template_id.length; i++) {
-                    if (res[subscribedata.template_id[i]] == "accept") {
-                      app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
-                    };
-                  };
-                }
-              })
-            } else {
-              wx.requestSubscribeMessage({
-                tmplIds: [subscribedata.template_id || ''],
-                success(res) {
-                  if (res[subscribedata.template_id] == "accept") {
-                    app.subscribefun(_this, 0, subscribedata.template_id, subscribedata.subscribe_type);
-                  };
-                },
-                complete() { }
-              })
-            };
-          };
+  //         var subscribedata = res.data.Info.subscribe || '';
+  //         _this.data.subscribedata = subscribedata;
+  //         if (app.signindata.subscribeif && subscribedata && subscribedata.template_id) {
+  //           if (subscribedata.template_id instanceof Array) {
+  //             wx.requestSubscribeMessage({
+  //               tmplIds: subscribedata.template_id || [],
+  //               success(res) {
+  //                 for (var i = 0; i < subscribedata.template_id.length; i++) {
+  //                   if (res[subscribedata.template_id[i]] == "accept") {
+  //                     app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+  //                   };
+  //                 };
+  //               }
+  //             })
+  //           } else {
+  //             wx.requestSubscribeMessage({
+  //               tmplIds: [subscribedata.template_id || ''],
+  //               success(res) {
+  //                 if (res[subscribedata.template_id] == "accept") {
+  //                   app.subscribefun(_this, 0, subscribedata.template_id, subscribedata.subscribe_type);
+  //                 };
+  //               },
+  //               complete() { }
+  //             })
+  //           };
+  //         };
 
-        } else if (res.data.ReturnCode == 358){
-          _this.setData({
-            payMask: true,
-            cart_id: res.data.Info.cart_id
-          })
-        } else {
-          if(res.data.ReturnCode != 300){
-            if(res.data.Msg){
-              wx.showModal({
-                content: res.data.Msg || '',
-                showCancel: false,
-                success: function (res) {}
-              })              
-            }
-          };
-        }
-      },
-      complete:function(){
-        wx.hideLoading()
-      }
-    })
+  //       } else if (res.data.ReturnCode == 358){
+  //         _this.setData({
+  //           payMask: true,
+  //           cart_id: res.data.Info.cart_id
+  //         })
+  //       } else {
+  //         if(res.data.ReturnCode != 300){
+  //           if(res.data.Msg){
+  //             wx.showModal({
+  //               content: res.data.Msg || '',
+  //               showCancel: false,
+  //               success: function (res) {}
+  //             })              
+  //           }
+  //         };
+  //       }
+  //     },
+  //     complete:function(){
+  //       wx.hideLoading()
+  //     }
+  //   })
 
-  },
+  // },
 
   // 红包口令 input 值改变
   redpinputChange: function (e) {
@@ -1710,80 +1626,8 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
   /**
    * 生成截图
    */
-  getSnapshot: function () {
-    var _this = this;
-    const ctx = wx.createCanvasContext('snapshotlim')
+  sharePictures(){
 
-    ctx.fillStyle = '#fff';
-    ctx.fillRect(0, 0, 300, 240)
-
-    wx.getImageInfo({
-      src: _this.data.infoActivity.cover,
-      success: function (res) {
-        var ratio = res.width / res.height;
-        var mh = ratio * 170;
-        if (mh >= 300) {
-          ctx.drawImage(res.path, 0, 0, 300, 170);
-        } else {
-          ctx.drawImage(res.path, (300 - mh) / 2, 0, mh, 170);
-        }
-        ctx.fillStyle = '#000';
-        ctx.fillRect(0, 170, 300, 40)
-
-        if (_this.data.infoActivity.supportLogo != "") {
-          wx.getImageInfo({
-            src: _this.data.infoActivity.supportLogo,
-            success: function (res) {
-              ctx.drawImage(res.path, 210, 178, 25, 25);
-
-              ctx.fillStyle = '#fff';
-              ctx.setFontSize(14)
-              ctx.fillText(_this.data.infoActivity.supportName, 238, 195)
-              if (_this.data.dayStr != 0) {
-                ctx.fillText("抽签倒计时" + _this.data.dayStr + "天" + _this.data.hrStr + "时" + _this.data.minStr + "分" + _this.data.secStr + "秒", 10, 195)
-              } else {
-                ctx.fillText("抽签倒计时" + _this.data.hrStr + "时" + _this.data.minStr + "分" + _this.data.secStr + "秒", 10, 195)
-              }
-
-              ctx.draw(true, setTimeout(function () {
-                wx.canvasToTempFilePath({
-                  canvasId: 'snapshotlim',
-                  success: function (res) {
-                    _this.setData({
-                      snapshotlim: res.tempFilePath
-                    })
-                  },
-                  fail: function (res) {},
-                });
-              }, 300));
-            }
-          })
-        } else {
-          ctx.fillStyle = '#fff';
-          ctx.setFontSize(14)
-          if (_this.data.dayStr != 0) {
-            ctx.fillText("抽签倒计时" + _this.data.dayStr + "天" + _this.data.hrStr + "时" + _this.data.minStr + "分" + _this.data.secStr + "秒", 60, 195)
-          } else {
-            ctx.fillText("抽签倒计时" + _this.data.hrStr + "时" + _this.data.minStr + "分" + _this.data.secStr + "秒", 60, 195)
-          }
-          ctx.draw(true, setTimeout(function () {
-            wx.canvasToTempFilePath({
-              canvasId: 'snapshotlim',
-              success: function (res) {
-                _this.setData({
-                  snapshotlim: res.tempFilePath
-                })
-              },
-              fail: function (res) {},
-            });
-          }, 300));
-        }
-
-      },
-      fail: function () {
-
-      }
-    })
   },
   onShow: function () {
     if (this.data.isonshow) {
@@ -1835,7 +1679,8 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
   onShareTimeline:function(){
     var _this = this;
     _this.setData({
-      shareFriendBox:false
+      shareFriendBox:false,
+      showPictures:false
     })
     return {
       title:_this.data.infoActivity.name,
@@ -1854,20 +1699,10 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
       shareFriendBox:false
     })
 
-    if(_this.data.infoActivity.isShareBrandId){
-      var urlpath = "/page/component/pages/limitlottery/limitlottery?id=" + _this.data.infoActivity.id + '&referee=' + _this.data.uid + '&gid=' + _this.data.gid+'&brandId='+_this.data.brandId||'' + '&list='+_this.data.isList;
-    }else{
-      var urlpath = "/page/component/pages/limitlottery/limitlottery?id=" + _this.data.infoActivity.id + '&referee=' + _this.data.uid + '&gid=' + _this.data.gid + '&list='+_this.data.isList;
-    };
-    console.log('分享====',_this.data.infoActivity.brandId , _this.data.is_exhibition,'https://www.51chaidan.com/images/share/activity_'+ _this.data.infoActivity.id +'.jpg')
-    if(_this.data.infoActivity.brandId && _this.data.is_exhibition != 1){
-       var imageUrl = 'https://www.51chaidan.com/images/share/activity_'+ _this.data.infoActivity.id +'.jpg'
-    }else{
-      var imageUrl = _this.data.snapshotlim
-    };
+    var urlpath = "/page/component/pages/limitlottery/limitlottery?id=" + _this.data.infoActivity.id + '&referee=' + _this.data.uid + '&gid=' + _this.data.gid + '&list='+_this.data.isList;
     var share = {
       title:'【抽选】'+_this.data.infoActivity.name,
-      imageUrl: imageUrl ,
+      imageUrl: _this.data.infoActivity.cover,
       path:urlpath ,
       success: function (res) {}
     }
@@ -2394,7 +2229,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
         'Accept': 'application/json'
       },
       success: function (res) {
-        wx.hideLoading(); 
+        
         if (res.data.ReturnCode == 200) {
           // 支付完成弹框显示数据
           var payinfo = res.data.Info;
@@ -2406,6 +2241,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
             'signType': 'MD5',
             'paySign': res.data.Info.paySign,
             'success': function (res) {
+              wx.hideLoading(); 
               _this.setData({
                 payMask:false,
                 tipbacktwo: false,
@@ -2446,13 +2282,12 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
                 desc: '',
                 payMask:false
               })
+              wx.hideLoading(); 
             },
-            'complete': function (res) {
-              // 订阅授权
-
-            }
+            'complete': function (res) {}
           })
         } else {
+          wx.hideLoading(); 
           // 提交订单蒙层
           _this.setData({
             suboformola: false
@@ -2660,7 +2495,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
   sponsocopytwo:function(){
     var _this = this;
     wx.setClipboardData({
-      data:_this.data.infoActivity.wx|| _this.data.wxnum,
+      data:_this.data.infoActivity.wx,
       success: function (res) {
         app.showToastC('复制成功');
         _this.setData({copyiftr:false});
@@ -2678,8 +2513,291 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
       guidanceMask:!this.data.guidanceMask
     }) 
   },
+  SaveCard: function(e) {
+    let that = this;
+    console.log('保存');
+    var imgSrc = e.currentTarget.dataset.img;
+    //获取相册授权
+    wx.getSetting({
+      success(res) {
+        if (!res.authSetting['scope.writePhotosAlbum']) {
+          wx.authorize({
+            scope: 'scope.writePhotosAlbum',
+            success() {
+              console.log('授权成功');
+              that.img(imgSrc)
+            }
+          })
+        }else{
+          that.img(imgSrc)
+        }
+      }
+    })
+  },
+  img: function (imgSrc){
+    var imgSrc = imgSrc;
+    wx.downloadFile({
+      url: imgSrc,
+      success: function (res) {
+        console.log(res); //图片保存到本地
+        wx.saveImageToPhotosAlbum({
+          filePath: res.tempFilePath,
+          success: function (data) {
+            console.log(data);
+            wx.showToast({
+              title: '保存成功',
+              duration: 2000
+            })
+          },
+          fail: function (err) {
+            console.log(err);
+            if (err.errMsg === "saveImageToPhotosAlbum:fail auth deny") {
+              wx.openSetting({
+                success(settingdata) {
+                  console.log(settingdata)
+                  if (settingdata.authSetting['scope.writePhotosAlbum']) {
+                    wx.showToast({
+                      title: '图片已保存',
+                      icon:'none',
+                      duration:2000
+                    })
+                    console.log('获取权限成功，给出再次点击图片保存到相册的提示。')
+                  } else {
+                    console.log('获取权限失败，给出不给权限就无法正常使用的提示')
+                  }
+                }
+              })
+            }
+          }
+        })
+      }
+    })
 
+  }, 
+  showPicturesFunShare(){
+      this.setData({
+        showPicturesImg:!this.data.showPicturesImg
+      })
+  },
+  // 邀请朋友 获取更多签号
+  inviteFriendsCanvas(){
+    var _this = this;
+    _this.setData({
+      showPicturesImg:false
+    })
+    var q = Dec.Aese('mod=userinfo&operation=makeQrCode&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&activityId=' + _this.data.id  + '&type=27');
 
+    console.log('mod=userinfo&operation=makeQrCode&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&activityId=' + _this.data.id  + '&type=27')
 
+    wx.request({
+      url: app.signindata.comurl + 'user.php' + q,
+      method: 'GET',
+      header: {
+        'Accept': 'application/json'
+      },
+      success: function (res) {
+        console.log('用户太阳码==',res)
+        if (res.data.ReturnCode == 200) {
+          if(res.data.Info.qrcode){
+            _this.data.qrcodeUser = res.data.Info.qrcode || '';
+            _this.onCreatePoster()
+          }else{
+            app.showToastC(res.data.Msg); 
+          };
+
+        } else {
+          app.showToastC(res.data.Msg);   
+        };
+      }
+    })
+  },
+  //  生成图片
+  onCreatePoster() {
+    var that = this;
+
+    wx.showLoading({
+      title: '生成中...',
+      mask:true
+    })
+    
+    // 黑条
+    var blocks = [{
+      x:150,
+      y:1566,
+      width:950,
+      height:100,
+      backgroundColor:'#000',
+      zIndex:6,
+    }];
+    var texts = [{
+        x:148,
+        y:630 ,
+        baseLine: 'middle',
+        text:that.data.infoActivity.name || '',
+        fontSize: 72,
+        textAlign: 'left',
+        color: '#000',
+        zIndex:5,
+        width:730,
+    },{
+      x:170,
+      y:1626,
+      text: '价格¥'+ that.data.infoActivity.shop_price,
+      fontSize: 60,
+      color: '#fff',
+      opacity: 1,
+      textAlign: 'left',
+      baseLine: 'middle',
+      zIndex:7,
+    }];
+    var selLength = '抽选'+(that.data.infoActivity.quota || '')+'体';
+    var selTxt = {
+      x: (1078-(selLength.length*50)),
+      y:1626,
+      text: selLength,
+      fontSize: 60,
+      color: '#fff',
+      opacity: 1,
+      textAlign: 'left',
+      baseLine: 'middle',
+      zIndex:7,
+    };
+    texts.push(selTxt);
+
+    // 图片
+    var imgArr = [{
+      x:0,
+      y:0,
+      url: 'https://cdn.51chaidan.com/images/brandInfoIcon/shareMap.png', // 背景图
+      width: 1242,
+      height: 2034,
+      zIndex: 1,
+      borderRadius:0,
+    },{
+      x:852,
+      y:1750,
+      url: that.data.qrcodeUser, // 太阳码
+      width: 200,
+      height: 200,
+      zIndex: 2,
+      borderRadius:0
+    },{
+      x:148,
+      y:715,
+      url: that.data.infoActivity.cover, // 商品图片
+      width: 950,
+      height: 950,
+      zIndex: 2,
+      borderRadius:0,
+    },{
+      x:940,
+      y:550 ,
+      url: that.data.infoActivity.brandLogo || '', // 用户头像
+      width: 140,
+      height: 140,
+      zIndex: 2,
+      borderRadius:0,
+      borderRadius:140
+    }];
+    
+    // setData配置数据
+    that.setData({
+      posterConfig: {
+        width: 1242,
+        height: 2034,
+        debug: false,
+        // pixelRatio: 1000,
+        preload: false,
+        hideLoading: false,
+        backgroundColor: '#fff',
+        blocks: blocks,
+        texts:texts,
+        images: imgArr
+      }
+    }, () => {
+      Poster.create();
+    });
+  },
+  onPosterFail(e){
+    wx.hideLoading()
+    console.log('生成失败=====',e)
+  },
+  onPosterSuccess(e) {
+    wx.hideLoading();
+    const {
+      detail
+    } = e;
+    console.log(detail)
+    this.setData({
+      savepic: detail,
+      showPictures:true
+    });
+  },
+  showPicturesFun:function(){
+    this.setData({
+      showPictures:false
+    })
+  },
+  savetoA() {
+    var that = this;
+
+    this.showPicturesFun();
+
+    wx.getSetting({
+      success(res) {
+        wx.hideLoading();
+        if (!res.authSetting['scope.writePhotosAlbum']) {
+          //请求授权
+          wx.authorize({
+            scope: 'scope.writePhotosAlbum',
+            success() {
+              //获得授权，开始下载
+              that.downloadfile()
+            },
+            fail() {
+              wx.showModal({
+                title: '',
+                content: '保存到系统相册需要授权',
+                confirmText: '授权',
+                success(res) {
+                  if (res.confirm) {
+                    wx.openSetting({
+                      success(res) {
+                        if (res.authSetting['scope.writePhotosAlbum'] === true) {
+                          that.downloadfile()
+                        }
+                      }
+                    })
+                  }
+                },
+                fail() {
+                  app.showToastC('打开设置页失败')
+                }
+              })
+            }
+          })
+        } else {
+          //已有授权
+          that.downloadfile()
+        }
+      },
+      fail() {
+        wx.hideLoading();
+        app.showToastC('获取授权失败')
+      }
+    })
+  },
+  downloadfile() {
+    var that = this;
+    wx.saveImageToPhotosAlbum({
+      filePath: that.data.savepic,
+      success(res) {
+        app.showToastC("保存至相册成功");
+      },
+      fail() {
+        app.showToastC("保存至相册失败");
+      }
+    })
+  },
 
 })

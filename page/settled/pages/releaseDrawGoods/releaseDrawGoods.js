@@ -479,8 +479,8 @@ Page({
           [`listData3[0].index`]:info.shippingMothed,
           [`listData3[1].value`]:info.deliverTime,
 
-          [`listData3[0].value`]:info.rule,
-          [`listData3[1].imageList`]:info.arrGoodsDescImg,
+          [`listData3[2].value`]:decodeURI(info.rule),
+          [`listData3[3].imageList`]:info.arrGoodsDescImg,
           [`listData4[0].index`]:info.isShowSellNumber==0?1:0,
           // [`listData4[1].index`]:info.cashPledge==0?1:0,
           // [`listData4[1].value`]:info.cashPledge==0?'':info.cashPledge,
@@ -642,7 +642,7 @@ Page({
       mcShippingPrice:obj.modeOfDespatch==1?obj.shippingPriceStatus==0?3:8:'',  //美拆代发
       deliverTime:obj.dateToPull,
 
-      rule:obj.explain,
+      rule:encodeURI(obj.explain),
       arrGoodsDescImg:obj.goodsDetailsPic,
       isShowSellNumber:obj.isParticipants==0?1:0,
       isCanShare:obj.isCanShare==0?1:0,

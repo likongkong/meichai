@@ -1243,6 +1243,7 @@ Page({
           var timestamp = Date.parse(new Date()) / 1000;
 
           if(is_Box_selection){
+            console.log('最后时间=========queue_over_time',queue_over_time)
             activity.refreshTime = queue_over_time || timestamp;
             console.log('queue_over_time', queue_over_time ,queue_over_time - timestamp )
           }else{
@@ -1267,6 +1268,7 @@ Page({
           if (activity.refreshTime) {
             console.log(_this.data.recordtime , activity.refreshTime >= _this.data.recordtime,activity.refreshTime , _this.data.recordtime)
             if (_this.data.recordtime == 0 || activity.refreshTime >= _this.data.recordtime) {
+              console.log('==========延迟========')
               _this.setData({
                 recordtime: parseInt(activity.refreshTime) + (parseInt(activity.aheadUser) * 2)
               });
@@ -1319,7 +1321,7 @@ Page({
       },
 
       success: function (res) {
-        console.log('排队返回数据',res,type)
+        console.log('排队返回数据',type,res,type)
         if (res.data.ReturnCode == 200) {
           if (type == 1) {
             _this.queueInfo()
@@ -2213,7 +2215,7 @@ Page({
     var timestamp = Date.parse(new Date())
     //总的秒数 
     var second = parseInt(micro_second) - (timestamp / 1000);
-    // console.log('second=====',micro_second,(timestamp / 1000),second)
+    console.log('second=====',micro_second,(timestamp / 1000),second)
     if (second > 0) {
       _this.setData({
         remaintime: second,
@@ -2550,7 +2552,9 @@ Page({
               cueCardBox:false,
               cardImg: res.data.Info.tipImg
             })
+            console.log(111111111)
             if (_this.data.tempChanceOverTime) {
+              console.log(22222222222)
               clearInterval(_this.data.tempChanceOverTimeCountdown);
               _this.setData({
                 tempChanceOverTime: "",
@@ -2570,7 +2574,9 @@ Page({
               cardstr: "是     " + res.data.Info.roleName,
               cardImg: res.data.Info.img
             })
+            console.log(33333)
             if (_this.data.perspcardata) {
+              console.log(44444444)
               clearInterval(_this.data.countdowntime);
               _this.setData({
                 perspcardata: "",

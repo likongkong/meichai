@@ -34,7 +34,7 @@
         <view wx:if="{{item.type == 'textarea'}}" id="{{item.name}}" class="columnWrap {{item.paddingBottom12?'paddingBottom12':''}} {{item.borderbottom1?'':'borderbottom1'}}">
           <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
           <!-- <input class="cEveInput" data-name="enterpriseName" placeholder="{{item.placeholder}}" value="" type="text"></input> -->
-          <textarea class="textarea" disabled="{{num==2?true:flase}}" data-name="{{item.name}}" auto-height placeholder="{{item.placeholder}}" value="{{item.value}}" bindinput="onKeyInput"/>
+          <textarea class="textarea" maxlength = '-1' disabled="{{num==2?true:flase}}" data-name="{{item.name}}" auto-height placeholder="{{item.placeholder}}" value="{{item.value}}" bindinput="onKeyInput"/>
         </view>
       </block>
     </view>
@@ -79,7 +79,7 @@
         <view wx:if="{{item.type == 'textarea'}}" id="{{item.name}}" class="columnWrap card paddingBottom12 {{item.margintop0?'margintop0':''}} {{item.borderbottom1?'borderbottom1':''}}">
           <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
           <!-- <input class="cEveInput" data-name="enterpriseName" placeholder="{{item.placeholder}}" value="" type="text"></input> -->
-          <textarea class="textarea" disabled="{{num==2?true:flase}}" data-name="{{item.name}}" auto-height placeholder="{{item.placeholder}}" value="{{item.value}}" bindinput="onKeyInput"/>
+          <textarea class="textarea" maxlength = '-1'  disabled="{{num==2?true:flase}}" data-name="{{item.name}}" auto-height placeholder="{{item.placeholder}}" value="{{item.value}}" bindinput="onKeyInput"/>
         </view>
         <view wx:if="{{item.type == 'label'}}" id="{{item.name}}" class="columnWrap card paddingBottom12 {{item.margintop0?'margintop0':''}} {{item.borderbottom1?'borderbottom1':''}}">
           <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>

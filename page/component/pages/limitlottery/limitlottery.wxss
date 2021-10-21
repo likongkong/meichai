@@ -286,15 +286,6 @@ page{
   margin-left: 30rpx;
 }
 
-.baskclass {
-  width: 300px;
-  height: 450px;
-  position: fixed;
-  left: 0;
-  top: -9999999rpx;
-  margin: auto;
-  z-index: 9999;
-}
 
 .VolparentStyle {
   width: 90%;
@@ -806,29 +797,7 @@ page{
   justify-content: center;
   align-items: center;
 }
-.otherLimitlotteryPopBox{
-  width: 500rpx;
-  background: #fff;
-  border-radius: 10rpx;
-  padding: 60rpx 50rpx 50rpx 40rpx;
-  box-sizing: border-box;
-}
-.otherLimitlotteryPopBox text{
-  font-size: 28rpx;
-  line-height: 56rpx;
-}
-.otherLimitlotteryPopBox view{
-  width: 100%;
-  height: 70rpx;
-  border-radius: 70rpx;
-  font-size: 26rpx;
-  color: #fff;
-  line-height: 70rpx;
-  text-align: center;
-  background: #F8627B;
-  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.4);
-  margin-top: 30rpx;
-}
+
 /* 新版 */
 .newDraw{
   width: 100%;
@@ -1222,7 +1191,73 @@ page{
 }
 /*  ----------   */
 
-
-
-
-
+/* 分享图 */
+.cvSavePicture{
+  width:660rpx;
+  height: 1000rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin:auto;
+  z-index: 3;
+}
+.saveAAAA{
+  width: 300rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #fff;
+  margin:60rpx auto;
+  background:#DBC69D;
+  border-radius: 40rpx;
+}
+.cvSavePicImg{
+  width: 100%;
+  height:800rpx;
+  display: block;
+}
+.cvSavePicButcomBox{
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: #fff;
+  text-align: center;
+  padding: 20rpx 0 0 0;
+  background:#EDEDED;
+}
+.cvSavePicButcom{
+  width: 300rpx;
+  height: 150rpx;
+  font-size: 24rpx;
+  text-align: center;
+  display: inline-block;
+  position: relative;
+}
+.cvSavePicButImg{
+  width: 70rpx;
+  height: 70rpx;
+  display: block;
+  margin: auto;
+  background:#fff;
+  border-radius: 10rpx;
+  padding: 15rpx;
+}
+.cvSavePicButTxt{
+  width: 100%;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+}
+.celSharePic{
+  width: 100%;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  color: #000;
+  background: #fff;
+  padding-bottom: 20rpx;
+}

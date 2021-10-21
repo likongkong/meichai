@@ -4,7 +4,7 @@
 <view class="winList" wx:if='{{type == 1}}'>
     <view class="winListEve" wx:for='{{winnerList}}' wx:key='key'>
         <image src="{{item.headphoto}}" class="winListEveImg" mode="aspectFit" />
-        <view class="winListEveName">{{item.nick}}</view>
+        <view class="winListEveName">{{item.name}}</view>
         <view class="winListEveName" style="float: right;">{{item.idcard}}</view>
     </view>
 </view>

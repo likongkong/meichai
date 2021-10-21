@@ -126,7 +126,7 @@
 						<image src="https://cdn.51chaidan.com/images/icon/lottoSucceed.png" class="registrationSucImg" mode="aspectFit" />
 						<view class="registrationSucTip">恭喜您，报名成功!</view>
 						<view class="registrationSucTip" wx:if='{{lottoSucc}}'>获取一组抽签号：{{lottoSucc}}</view>
-						<view class="userHelpBut" style="background:#DBC69D;">获取更多抽签码<button style='width:100%;height:100%;position:absolute;top:0;right:0;opacity:0;' open-type='share'></button></view>
+						<view class="userHelpBut" style="background:#DBC69D;" catchtap="showPicturesFunShare">获取更多抽签码</view>
 						<view class="regRuleSucTip">每邀请一名好友助力可获得一组抽签号每人最多可获取六组签号</view>
 				</block>
 				<!-- 身份信息 -->
@@ -171,23 +171,9 @@
 
 
 
-
-
-
-
-
-
-
-
-
 <!-- ------------------------ 新版抽签 UP ------------------------------ -->
 
 
-
-
-<canvas canvas-id='canimgser' class='canimgsernew'></canvas>
-
-<canvas canvas-id='baskimgser' class='baskclass' style='height:620px'></canvas>
 
 <view style='width:0;height:0;overflow:hidden;position:absolute;top:-1000px;'>
 	<canvas canvas-id='snapshotlim' style='width:300px;height:240px;'></canvas>
@@ -195,7 +181,7 @@
 
 <view style='position:relative;' wx:if='{{false}}'>
 
-		<block wx:if="{{brandRule!=''}}">
+		<!-- <block wx:if="{{brandRule!=''}}">
 			<view style='width:100%;overflow:hidden;'>
 							<view style="margin:20rpx 30rpx;">
 											<view style="width:100%;line-height:40rpx;padding:20rpx 0;">
@@ -206,8 +192,8 @@
 											</view>
 							</view>
 			</view>
-		</block>
-    <block wx:elif='{{activityDesc}}'>
+		</block> -->
+    <!-- <block wx:elif='{{activityDesc}}'>
 				<view style="margin:20rpx 30rpx;">
 					<view style="width:100%;line-height:40rpx;padding:20rpx 0;">
 						<view style='width:100%;text-align:center;font-size:30rpx;'>活动规则</view>
@@ -216,7 +202,7 @@
 						</view>
 					</view>
 				</view>
-		</block>
+		</block> -->
 
 	<view class='newcoupon' wx:if='{{addfrindcommoni}}'>
 		<view class='swfback' catchtouchmove="preventD" catchtap='closefrindcommoni'></view>
@@ -226,7 +212,7 @@
 		</view>
 	</view>
 	<block wx:if='{{is_exhibition==1||(is_exhibition!=1&&brandId>0)}}'>
-		<view style="width:100%;height:80rpx;">
+		<!-- <view style="width:100%;height:80rpx;">
 			<view style="width:50%;height:100%;{{exhibdetail?'font-size:26rpx;font-weight: bold;':'font-size:24rpx;'}}text-align:center;line-height:80rpx;float:left;position:relative;" data-ind='1' catchtap="exhibdetailfun">
 				品牌专区
 				<view wx:if='{{exhibdetail}}' style='width:100rpx;height:6rpx;background:#000;position:absolute;left:0;right:0;bottom:0;margin:auto;'></view>
@@ -236,13 +222,13 @@
 				商品详情
 				<view wx:if='{{!exhibdetail}}' style='width:100rpx;height:6rpx;background:#000;position:absolute;left:0;right:0;bottom:0;margin:auto;'></view>
 			</view>
-		</view>
+		</view> -->
 
 		<!-- 品牌专区 -->
 		<view id='exh1'>
 			<!-- 展会 -->
 			<view style='width:100%;overflow:hidden;'>
-				<view style="padding:20rpx;overflow:hidden;">
+				<!-- <view style="padding:20rpx;overflow:hidden;">
 					<image class="exhibdeimg" catchtap='gobrandDetails' data-mid='{{userbranddata.id}}' mode='aspectFit' src="{{userbranddata.logo}}"></image>
 					<view class="exhibdetxt">
 						<view class="exhibdxtxttitle specialellipsis" catchtap='gobrandDetails' data-mid='{{userbranddata.id}}'>{{userbranddata.brandName}}</view>
@@ -250,10 +236,10 @@
 						<view class="exhibdxtxtadd" style="background:#6aca6b;margin-right:15rpx;" catchtap="addfrindcommonifun" data-url='{{userbranddata.picFriend}}' data-name='{{userbranddata.brandName}}'>添加好友</view>
 						<text style="font-size:26rpx;color:#333;padding:40rpx 0 0 0;text-align:left;line-height:30rpx;padding-top:40rpx;display:block;" wx:if='{{userbranddata.bradDesc}}' catchtap='gobrandDetails' data-mid='{{userbranddata.id}}'>简介：{{userbranddata.bradDesc}}</text>
 					</view>
-				</view>
+				</view> -->
 
     <!-- 直播 -->
-  <block wx:if='{{livebroadcast&&livebroadcast.length!=0}}'>
+  <!-- <block wx:if='{{livebroadcast&&livebroadcast.length!=0}}'>
    
 			<swiper style="width:710rpx;margin:auto;height:170rpx;" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
 				<swiper-item  wx:for='{{livebroadcast}}' wx:key='key' wx:for-item='w'>
@@ -271,17 +257,16 @@
 									</view>
 								</view>
 							</view>
-							<!-- <view wx:if='{{w.status==102}}' style="width:240rpx;height:82rpx;position:absolute;right:10rpx;top:0;bottom:0;margin:auto 0;"><subscribe room-id="5"></subscribe></view> -->
 						</view>
 				</swiper-item>
 			</swiper>
 
 
-  </block>
+  </block> -->
 
 				<view class="exhibboxcon">
 
-					<view style="float:left;margin-left:20rpx;">
+					<!-- <view style="float:left;margin-left:20rpx;">
 						<view class="mexhibboxconeve" wx:for='{{exhdata}}' wx:key='key' wx:if='{{index%2==0}}' catchtap="jumpexhdetail" data-id='{{item.id}}' data-brandid='{{item.brandId}}' data-mtype="{{item.type}}" data-gid='{{item.goodsId}}'>
 							<block wx:if='{{item.type == 4 || item.type == 11|| item.type == 12 || item.type == 1 || item.type == 5|| item.type == 8|| item.type == 9|| item.type == 10}}'>
 								<image class="exhibboxeveimg" mode='widthFix' src="{{item.images}}"></image>
@@ -331,9 +316,9 @@
 								</view>
 							</block>
 						</view>
-					</view>
+					</view> -->
 
-					<view style="float:left;margin-left:20rpx;">
+					<!-- <view style="float:left;margin-left:20rpx;">
 						<view class="mexhibboxconeve" wx:for='{{exhdata}}' wx:key='key' wx:if='{{index%2==1}}' catchtap="jumpexhdetail" data-id='{{item.id}}' data-brandid='{{item.brandId}}' data-mtype="{{item.type}}" data-gid='{{item.goodsId}}'>
 							<block wx:if='{{item.type == 4 || item.type == 11|| item.type == 12 || item.type == 1 || item.type == 5|| item.type == 8|| item.type == 9|| item.type == 10}}'>
 								<image class="exhibboxeveimg" mode='widthFix' src="{{item.images}}"></image>
@@ -384,42 +369,39 @@
 							</block>
 
 						</view>
-					</view>
+					</view> -->
 
 				</view>
 
-				<!-- 广告 -->
-				<view class="exhibboxconibox" wx:if='{{addsetData[0].length!=0}}' style="height:200rpx;">
+				<!-- <view class="exhibboxconibox" wx:if='{{addsetData[0].length!=0}}' style="height:200rpx;">
 					<swiper class="swiper" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450" style="height:197rpx;">
 						<swiper-item wx:for="{{addsetData[0]}}" wx:key="key" wx:for-item='w'>
 							<image src="{{w.src}}?imageMogr2/thumbnail/x800" class="exhibboxconiboimg" catchtap="exhibitionpubjump" data-id='{{w.activity_id}}' data-type='{{w.href_type}}' mode='aspectFit'></image>
 						</swiper-item>
 					</swiper>
-				</view>
+				</view> -->
 
 			</view>
 
 
 		</view>
-		<view id='exh2'>
+		<!-- <view id='exh2'>
 			<view class='dltittheme'>
 				<view class='dlttemelef'>商品详情</view>
 			</view>
-
-			<!--  商品详情图片 转换HTML标签  -->
 			<view class='detailimg'>
 				<template is="wxParse" data="{{wxParseData:article.nodes}}" />
 			</view>
-		</view>
+		</view> -->
 
 	</block>
 
-	<view wx:if='{{false}}' style='width:100%;{{isIphoneX?"height:260rpx;":"height:240rpx;"}}'></view>
-	<view wx:elif='{{infoGoods.is_on_sale==1}}' style='width:100%;height:140rpx;'></view>
+	<!-- <view wx:if='{{false}}' style='width:100%;{{isIphoneX?"height:260rpx;":"height:240rpx;"}}'></view>
+	<view wx:elif='{{infoGoods.is_on_sale==1}}' style='width:100%;height:140rpx;'></view> -->
 
 </view>
 <!-- ishowgetchip -->
-<view wx:if='{{false}}' style="width:100%;height:100%;position:fixed;top:0;left:0;z-index:199999;">
+<!-- <view wx:if='{{false}}' style="width:100%;height:100%;position:fixed;top:0;left:0;z-index:199999;">
 	<view class='bgstyle' catchtap='closegetchip' catchtouchmove="myCatchTouch"></view>
 
 	<view style="width:740rpx;position:absolute;left:0;top:{{statusBarHeightMc}}px;z-index:11;">
@@ -435,19 +417,17 @@
 				<image src="{{infoActivity.cover}}" style="width:500rpx;height:267rpx;margin:20rpx 50rpx;border-radius:10rpx;" mode="aspectFit" />
 				<view id='chipson' style="width:500rpx;height:267rpx;position:absolute;top:20rpx;left:50rpx;">
 					<view wx:for='{{chiplist}}' wx:key='key' style="width:{{chipsonwidth || (boxwidth/1.42-2)}}px;height:131rpx;float:left;margin:1px;position:relative;">
-						<!-- index == (ranking-1) --> 
 						<image wx:if='{{ index>(ranking-1-brightNumber)&&index<=(ranking-1)}}' src="https://www.51chaidan.com/images/turntable/red_check_mark.png" style="width:43rpx;height:30rpx;position:absolute:top:0;left:0;"></image>
 						<view style="width:100%;height:100%;background:white;opacity:{{index>(ranking-1-brightNumber)&&index<=(ranking-1) ? 0 : 0.5}};"></view>
 					</view>
 				</view>
 			</view>
 
-			<!-- <text style="width:600rpx;height:140rpx;text-align: center;line-height: 140rpx;display: inline-block;">碎片赠送成功，你也快来参与吧</text> -->
 
 		</view>
 	</view>
 
-</view>
+</view> -->
 
 <view style='width:100%;position:fixed;left:0;bottom:0;border-top:1px solid #e5e5e5;background:#fff;z-index:5;'>
 
@@ -464,9 +444,12 @@
 				<block wx:if='{{infoActivity.status==2}}'>
 					  <block wx:if='{{infoActivity.isSign}}'>
 								<view class="winningList" style="margin-right:40rpx;" catchtap="jumpWinningList" data-id='{{infoActivity.id}}' data-type='2'>助力记录</view>
-								<view class="purchaseNoOverdue" style="background:#DBC69D;">获取更多与签号<button style='width:100%;height:100%;position:absolute;top:0;right:0;opacity:0;' open-type='share'></button></view>
+								<view class="purchaseNoOverdue" style="background:#DBC69D;" catchtap="showPicturesFunShare">获取更多签号</view>
 						</block>
-						<view wx:else class="nDbsBnotice" style="background:#DBC69D;" catchtap="joinlimitlottery">报名获取签号</view>
+						<view wx:else class="nDbsBnotice" style="background:#DBC69D;" catchtap="joinlimitlottery">
+						     <block wx:if='{{infoActivity.integral}}'>消耗{{infoActivity.integral}}报名获取签号</block>
+								 <block wx:else>报名获取签号</block>
+						</view>
 				</block>
 				
 				<block wx:if='{{infoActivity.status==3}}'>
@@ -490,7 +473,7 @@
 
  
 	<!-- <view style='{{isIphoneX?"height:130rpx;":"height:110rpx;"}}width:100%;position:relative;'>
-		<bnavigation isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+		<bnavigation isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}'></bnavigation>
 	</view> -->
 
 
@@ -678,7 +661,7 @@
   <view class='apptipbox'>
     <view class='apptiphead' style='font-size:32rpx;border-bottom:0;font-weight: bold;'>活动专属口令</view>
     <view class='apptipcont' style='padding:10rpx 0 0 0;font-size:26rpx;color:#6aab48;line-height: 36rpx;'>
-      <text>添加微信:{{infoActivity.wx|| wxnum}}\n获得口令，输入后即可报名</text>
+      <text>添加微信:{{infoActivity.wx}}\n获得口令，输入后即可报名</text>
     </view>
     <input class='redinpnum' bindinput="redpinputChange" value='{{redpinputdata}}' placeholder='请输入专属口令'></input>
     <view class='redbutbotpcopy commoncopyimmed' catchtap='sponsocopytwo' style='color:#ff2742;'>复制微信</view>
@@ -686,9 +669,8 @@
   </view>
 </view>
 
-<!-- android和ios区别分享  -->
 
-<view class='newcoupon' wx:if='{{shareFriendBox}}'>
+<!-- <view class='newcoupon' wx:if='{{shareFriendBox}}'>
 	<view class='swfback' catchtouchmove="preventD" catchtap='sharefriend'></view>
 	<view class="shareFbox" wx:if='{{shFrBxBo}}'>
 	    <view class="shareEveBox">
@@ -710,7 +692,7 @@
 				 <view class="shareEveBoxPos">碎片x{{infoActivity.socialGroup}}</view>
 			</view>	
 	</view>
-</view>
+</view> -->
 
 
 
@@ -750,7 +732,7 @@
 							<!-- 状态 -->
 							<view wx:if='{{sonitem.status == 2}}' class="seTopTitleDState" style="color:#299331;">已参加</view>
 							<view wx:elif='{{sonitem.status == 0}}' class="seTopTitleDState" style="background:#F2B40C;" data-orderid="{{sonitem.order_id}}" data-index="{{index}}" data-sonindex="{{sonindex}}" catchtap="twoAffirm">去验票</view>
-							<!-- <view wx:elif='{{sonitem.status == 1}}' data-infoactivityid="{{infoActivity.id}}" data-ticketid="{{sonitem.id}}" class="seTopTitleDState" style="background:#F8627B;" catchtap="exchangesign">参加抽签</view> -->
+						
 							<view wx:elif='{{sonitem.status == 1}}' data-infoactivityid="{{infoActivity.id}}" data-ticketid="{{sonitem.id}}" class="seTopTitleDState" style="background:#F8627B;" data-lottoid="{{sonitem.id}}" catchtap="winnerlogic">参加抽签</view>
 							
 					</view>
@@ -774,12 +756,7 @@
     </view>
 </view>
 
-<view class="otherLimitlotteryPop" catchtouchmove="true" wx:if="{{isOtherLimitlotteryPop}}">
-	<view class="otherLimitlotteryPopBox" catchtap="true">
-		<text>未检测到您的MCTS展会购票信息，无法参加此抽签，去看看其他抽签吧</text>
-		<view catchtap="moreaction">查看其他抽签</view>
-	</view>
-</view>
+
 
 <!-- 群分享 -->
 <view class="mask" wx:if="{{guidanceMask}}" catchtouchmove="true" catchtap="toogleGuidanceMask">
@@ -789,8 +766,8 @@
 			<view class="guidanceBox">
 				<text class="guidanceSubtitle">第一步：加入品牌微信群</text>
 				<view class="qrcode">
-					<image src="{{zunmdata.brand.picFriend}}" mode="widthFix"></image>
-					<text data-img="{{zunmdata.brand.picFriend}}" wx:if='{{zunmdata.brand.picFriend}}' catchtap="SaveCard">保存二维码</text>
+					<image src="{{infoActivity.groupQrCode}}" mode="widthFix"></image>
+					<text data-img="{{infoActivity.groupQrCode}}" wx:if='{{infoActivity.groupQrCode}}' catchtap="SaveCard">保存二维码</text>
 				</view>
 			</view>
 			<view class="guidanceBox">
@@ -800,4 +777,34 @@
 		</view>
 		<image class="guanbi" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="widthFix" catchtap="toogleGuidanceMask"></image>
 	</view>
+</view>
+
+
+<poster id="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail"></poster>
+
+<!-- 保存图片  -->
+<view class="mask" wx:if='{{showPicturesImg}}' catchtouchmove="true" catchtap="showPicturesFunShare">
+
+		<view class="cvSavePicButcomBox" catchtap="true">
+			  <view>
+						<view class="cvSavePicButcom">
+							<button style='width:100%;height:100%;position:absolute;top:0;right:0;opacity:0;' open-type='share'></button>
+							<image class="cvSavePicButImg" src="https://cdn.51chaidan.com/images/icon/iconShareFriends.png" mode="aspectFit"></image>
+							<view class="cvSavePicButTxt">发送给朋友</view>
+						</view>
+						<view class="cvSavePicButcom" catchtap="inviteFriendsCanvas">
+								<image class="cvSavePicButImg" src="https://cdn.51chaidan.com/images/icon/iconSaveLocal.png" mode="aspectFit"></image>
+								<view class="cvSavePicButTxt">保存到相册</view>
+						</view>
+				</view>
+        <view class="celSharePic" catchtap="showPicturesFun">取消</view>
+		</view>
+
+</view>
+
+<view class="mask" wx:if='{{showPictures}}' catchtouchmove="true" catchtap="showPicturesFun">
+	  <view class="cvSavePicture" catchtap="true">
+				<image class="cvSavePicImg" mode='aspectFit' catchtap="previewImg" src="{{savepic}}"></image>
+				<view class="saveAAAA" catchtap="savetoA">保存</view>
+		</view>
 </view>

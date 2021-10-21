@@ -98,6 +98,7 @@ Page({
               winnerList[i].tel = time.plusXing(winnerList[i].tel,3,4);
               winnerList[i].idcard = time.plusXing(winnerList[i].idcard,4,4);
               winnerList[i].nick = time.plusXing(winnerList[i].nick,1,0);
+              winnerList[i].name = time.plusXing(winnerList[i].name,1,0);
           };
           if(num == 1){
             _this.setData({
