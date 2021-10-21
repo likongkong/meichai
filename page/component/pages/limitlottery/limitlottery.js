@@ -434,9 +434,10 @@ Page({
     var _this = this;
     app.signindata.suap = 20;
     console.log('options========',options)
+
     if (options.scene) {
       let scene = decodeURIComponent(options.scene);
-      console.log('options========',scene)
+      console.log('options========',scene,)
       app.signindata.referee = _this.getSearchString('referee', scene) || 0;
       app.signindata.activity_id = _this.getSearchString('id', scene) || 0;
       _this.data.id = _this.getSearchString('id', scene) || 0;
@@ -646,7 +647,7 @@ Page({
     })
 
     var q1 = Dec.Aese('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&isNewer=' + _this.data.isNewer + '&gid=' + _this.data.gid + '&push_id='+_this.data.push_id);
-console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&isNewer=' + _this.data.isNewer + '&gid=' + _this.data.gid + '&push_id='+_this.data.push_id)
+    console.log('抽签详情请求===','mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&isNewer=' + _this.data.isNewer + '&gid=' + _this.data.gid + '&push_id='+_this.data.push_id)
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q1,
       method: 'GET',
@@ -655,7 +656,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
       },
       success: function (res) {
         _this.data.push_id =  0;
-        console.log(res)
+        console.log('抽签详情===',res)
         wx.stopPullDownRefresh();
         wx.stopPullDownRefresh()
         if (res.data.ReturnCode == 200) {
@@ -2174,6 +2175,7 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
 
   //key(需要检错的键） url（传入的需要分割的url地址）
   getSearchString: function (key, Url) {
+
     // 获取URL中?之后的字符
     var str = Url;
     var arr = str.split("&");
@@ -2182,8 +2184,10 @@ console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _th
     // 将每一个数组元素以=分隔并赋给obj对象 
     for (var i = 0; i < arr.length; i++) {
       var tmp_arr = arr[i].split("=");
+
       obj[decodeURIComponent(tmp_arr[0])] = decodeURIComponent(tmp_arr[1]);
     }
+
     return obj[key];
   },
 
