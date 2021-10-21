@@ -1273,7 +1273,7 @@ Page({
                 recordtime: parseInt(activity.refreshTime) + (parseInt(activity.aheadUser) * 2)
               });
             };
-            console.log(activity.refreshTime > timestamp)
+            console.log(activity.refreshTime > timestamp,activity.refreshTime)
             if (activity.refreshTime > timestamp) {
               console.log(activity.refreshTime , timestamp ,activity.refreshTime - timestamp)
               _this.countdown();
@@ -1281,7 +1281,7 @@ Page({
           };
 
           if (activity.aheadUser == 0 && !activity.isInQueue) {
-            _this.reset()
+              _this.reset()
           };
 
           _this.setData({
@@ -1326,9 +1326,10 @@ Page({
           if (type == 1) {
             _this.queueInfo()
           } else {
-            var timestamp = Date.parse(new Date()) / 1000
-            if (res.data.Info.newOverTime > timestamp) {
-              _this.data.recordtime = res.data.Info.newOverTime;
+            var timestamp = Date.parse(new Date()) / 1000;
+            console.log(res.data.Info.selfReFreshTime > timestamp,res.data.Info.selfReFreshTime,timestamp)
+            if (res.data.Info.selfReFreshTime > timestamp) {
+              _this.data.recordtime = res.data.Info.selfReFreshTime;
               _this.countdown();
             }
             wx.hideLoading()
@@ -2225,13 +2226,12 @@ Page({
         _this.instantopen()
       }
     } else if (second <= 0) {
-      // console.log('定时器======1111111111111')
+      console.log('定时器======1111111111111')
       clearInterval(_this.data.timer)
       console.log('延迟1.5秒请求===========')
       setTimeout(()=>{
         _this.queueInfo()
       },1500)
-      
     }
   },
 
