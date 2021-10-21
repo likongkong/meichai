@@ -660,7 +660,10 @@ Page({
         _this.data.push_id =  0;
         console.log('详情接口===',res)
         if (res.data.ReturnCode == 200) {
-          
+            
+            _this.setData({
+              appNowTime: Date.parse(new Date())/1000,
+            })
             if(res.data.Info.goods && res.data.Info.goods.goodsDesc){
                 res.data.Info.goods.goodsDesc = decodeURIComponent(res.data.Info.goods.goodsDesc.replace(/\+/g, ' '));
                 WxParse.wxParse('article', 'html', res.data.Info.goods.goodsDesc, _this, 0);
@@ -695,6 +698,7 @@ Page({
               _this.commonBulletFrameFun(2)
             };
             // 是否中签弹框提示
+            console.log(_this.data.appNowTime , infoActivity.finalPayTime)
             if(infoActivity.status == 3 && infoActivity.isSign &&  _this.data.appNowTime < infoActivity.finalPayTime){
               if(infoActivity.isWinner){
                 if(!infoActivity.isReceived){
@@ -714,8 +718,7 @@ Page({
                 listData:listData,
                 subscribedata: res.data.Info.subscribe.lotto || '',
                 cashPledge:infoActivity.cashPledge||0,
-                cart_id: infoActivity.cartId || '',
-                appNowTime: Date.parse(new Date())/1000,
+                cart_id: infoActivity.cartId || ''
             });
 
             if(_this.data.tipaid){}else{_this.addressCom();}
@@ -2580,7 +2583,8 @@ Page({
   }, 
   showPicturesFunShare(){
       this.setData({
-        showPicturesImg:!this.data.showPicturesImg
+        showPicturesImg:!this.data.showPicturesImg,
+        commonBulletFrame:false,
       })
   },
   // 邀请朋友 获取更多签号

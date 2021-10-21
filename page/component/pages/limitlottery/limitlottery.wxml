@@ -126,8 +126,8 @@
 						<image src="https://cdn.51chaidan.com/images/icon/lottoSucceed.png" class="registrationSucImg" mode="aspectFit" />
 						<view class="registrationSucTip">恭喜您，报名成功!</view>
 						<view class="registrationSucTip" wx:if='{{lottoSucc}}'>获取一组抽签号：{{lottoSucc}}</view>
-						<view class="userHelpBut" style="background:#DBC69D;" catchtap="showPicturesFunShare">获取更多抽签码</view>
-						<view class="regRuleSucTip">每邀请一名好友助力可获得一组抽签号每人最多可获取六组签号</view>
+						<view class="userHelpBut" style="background:#DBC69D;" wx:if='{{infoActivity.isCanShare || infoActivity.isAdmin}}' catchtap="showPicturesFunShare">获取更多抽签码</view>
+						<view class="regRuleSucTip" wx:if='{{infoActivity.isCanShare || infoActivity.isAdmin}}'>每邀请一名好友助力可获得一组抽签号每人最多可获取六组签号</view>
 				</block>
 				<!-- 身份信息 -->
 				<block wx:if='{{comBulFraNun==3}}'>
@@ -443,11 +443,14 @@
 				<!-- catchtap="jumpWinningList" data-id='{{infoActivity.id}}' data-type='1' -->
 				<block wx:if='{{infoActivity.status==2}}'>
 					  <block wx:if='{{infoActivity.isSign}}'>
-								<view class="winningList" style="margin-right:40rpx;" catchtap="jumpWinningList" data-id='{{infoActivity.id}}' data-type='2'>助力记录</view>
-								<view class="purchaseNoOverdue" style="background:#DBC69D;" catchtap="showPicturesFunShare">获取更多签号</view>
+							  <block wx:if='{{infoActivity.isCanShare || infoActivity.isAdmin}}'>
+										<view class="winningList" style="margin-right:40rpx;" catchtap="jumpWinningList" data-id='{{infoActivity.id}}' data-type='2'>助力记录</view>
+										<view class="purchaseNoOverdue" style="background:#DBC69D;" catchtap="showPicturesFunShare">获取更多签号</view>
+								</block>
+
 						</block>
 						<view wx:else class="nDbsBnotice" style="background:#DBC69D;" catchtap="joinlimitlottery">
-						     <block wx:if='{{infoActivity.integral}}'>消耗{{infoActivity.integral}}报名获取签号</block>
+						     <block wx:if='{{infoActivity.integral}}'>消耗{{infoActivity.integral}}积分报名获取签号</block>
 								 <block wx:else>报名获取签号</block>
 						</view>
 				</block>
