@@ -200,7 +200,11 @@ Page({
   jumpxinxi:function(){
     var _this = this;
 
-    
+    wx.navigateTo({
+      url: "plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id=74",
+    });
+
+    return false;
     // _this.data.id = 999999;
     // wx.requestSubscribeMessage({
     //   tmplIds: ['xCf0OLocO-jTPwwwtNrS8O7REn0lEw1yUwim_EFdCaQ'],

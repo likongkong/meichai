@@ -193,7 +193,7 @@ App({
                   var q = Dec.Aese('operation=xcx&mod=login&code=' + code + '&iv=' + resiv + '&encryptedData=' + encryptedData + '&referee=' + _this.signindata.referee + '&activity_id=' + _this.signindata.activity_id + '&channel=' + _this.signindata.channel + '&last_store_id=' + _this.signindata.global_store_id + '&token=' + _this.signindata.token + '&share_source=' + _this.signindata.share_source + '&tid=' + _this.signindata.tid + '&activity_type=' + _this.signindata.activity_type+'&suap='+_this.signindata.suap);
                 }
 
-                console.log('登录========','operation=xcx&mod=login&code=' + code + '&iv=' + resiv + '&encryptedData=' + encryptedData + '&referee=' + _this.signindata.referee + '&activity_id=' + _this.signindata.activity_id + '&channel=' + _this.signindata.channel + '&last_store_id=' + _this.signindata.global_store_id + '&token=' + _this.signindata.token + '&share_source=' + _this.signindata.share_source + '&tid=' + _this.signindata.tid + '&activity_type=' + _this.signindata.activity_type+'&suap='+_this.signindata.suap)
+                console.log('登录==','operation=xcx&mod=login&code=' + code + '&iv=' + resiv + '&encryptedData=' + encryptedData + '&referee=' + _this.signindata.referee + '&activity_id=' + _this.signindata.activity_id + '&channel=' + _this.signindata.channel + '&last_store_id=' + _this.signindata.global_store_id + '&token=' + _this.signindata.token + '&share_source=' + _this.signindata.share_source + '&tid=' + _this.signindata.tid + '&activity_type=' + _this.signindata.activity_type+'&suap='+_this.signindata.suap)
 
                 wx.request({
                   url: Dec.comurl() + 'user.php' + q,
@@ -208,26 +208,31 @@ App({
                       _this.signindata.uid = res.data.Info.uid || '';
 
                       if(Dec.env=='online'){
-                        var num = _this.signindata.randommaximum - res.data.Info.uid%_this.signindata.randommaximum;
-                        if(num<10){
-                            num = '00'+num
-                        }else if(num>=10){
-                          num = '0'+num.toString()
-                        };       
-                        // 接口地址  
-                        _this.signindata.comurl = 'https://api-slb.51chaidan.com/'+num+'/';
-                        // 发现地址
-                        _this.signindata.clwcomurl = 'https://clw-slb.51chaidan.com/'+num+'/';
-    
-                        // // 接口地址  208
-                        // _this.signindata.comurl = 'https://api.51chaidan.com/';
-                        // // 发现地址
-                        // _this.signindata.clwcomurl = 'https://clw.51chaidan.com/';
+                          var num = _this.signindata.randommaximum - res.data.Info.uid%_this.signindata.randommaximum;
+                          if(num<10){
+                              num = '00'+num
+                          }else if(num>=10){
+                            num = '0'+num.toString()
+                          };       
+                          // 接口地址  
+                          _this.signindata.comurl = 'https://api-slb.51chaidan.com/'+num+'/';
+                          // 发现地址
+                          _this.signindata.clwcomurl = 'https://clw-slb.51chaidan.com/'+num+'/';
+      
+                          // // 接口地址  208
+                          // _this.signindata.comurl = 'https://api.51chaidan.com/';
+                          // // 发现地址
+                          // _this.signindata.clwcomurl = 'https://clw.51chaidan.com/';
+                      }else if(Dec.env=='qpe'){
+                          // 接口地址  
+                          _this.signindata.comurl = 'https://api-t.51chaidan.com/';
+                          // 发现地址
+                          _this.signindata.clwcomurl = 'https://api-new-t.51chaidan.com/';
                       }else{
-                        // 接口地址  
-                        _this.signindata.comurl = 'http://api-test.51chaidan.com/';
-                        // 发现地址
-                        _this.signindata.clwcomurl = 'http://clw-test.51chaidan.com/';
+                          // 接口地址  
+                          _this.signindata.comurl = 'http://api-test.51chaidan.com/';
+                          // 发现地址
+                          _this.signindata.clwcomurl = 'http://clw-test.51chaidan.com/';
                       };
 
                       console.log('app===sigin',_this.signindata.comurl,_this.signindata.clwcomurl,Dec.versionnumber)
@@ -623,6 +628,11 @@ App({
             _this.signindata.comurl = 'https://api-slb.51chaidan.com/'+num+'/';
             // 发现地址
             _this.signindata.clwcomurl = 'https://clw-slb.51chaidan.com/'+num+'/';
+          }else if(Dec.env=='qpe'){
+            // 接口地址  
+            _this.signindata.comurl = 'https://api-t.51chaidan.com/';
+            // 发现地址
+            _this.signindata.clwcomurl = 'https://api-new-t.51chaidan.com/';
           }else{
             // 接口地址  
             _this.signindata.comurl = 'http://api-test.51chaidan.com/';

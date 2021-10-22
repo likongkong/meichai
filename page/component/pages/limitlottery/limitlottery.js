@@ -718,7 +718,8 @@ Page({
                 listData:listData,
                 subscribedata: res.data.Info.subscribe.lotto || '',
                 cashPledge:infoActivity.cashPledge||0,
-                cart_id: infoActivity.cartId || ''
+                cart_id: infoActivity.cartId || '',
+                id:infoActivity.id || 0,
             });
 
             if(_this.data.tipaid){}else{_this.addressCom();}
