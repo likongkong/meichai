@@ -222,6 +222,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    var _this = this;
     app.downRefreshFun(() => {
       if(_this.data.type == 1){ // 中奖名单 
         _this.isWinnerList(1)
@@ -236,6 +237,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    var _this = this;
     if(_this.data.type == 1){ // 中奖名单 
       _this.isWinnerList(2)
     }else if(_this.data.type == 2){ // 助力记录 

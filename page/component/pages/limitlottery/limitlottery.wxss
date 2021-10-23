@@ -931,8 +931,20 @@ page{
   text-align: center;
   position: relative;
 }
+.apEveCenterTxtOne{
+  height: 40rpx;
+  line-height: 40rpx;
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
 .apEveCenterTxt{
-  padding: 15rpx 0 15rpx 0;
+  padding: 18rpx 0 4rpx 0;
 }
 .apEveCenterLine{
   width: 54rpx;

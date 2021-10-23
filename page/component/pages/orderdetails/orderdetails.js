@@ -443,17 +443,13 @@ Page({
       wx.navigateTo({
         url: "/page/component/pages/crowdfunding/crowdfunding?aid=" + activity_id
       })
-    } else if(order_type == 13){
+    } else if(order_type == 13 || order_type == 27){
       wx.navigateTo({    
         url: "/page/component/pages/limitlottery/limitlottery?id=" + activity_id+'&list=1'
       });
     } else if(order_type == 21){
       wx.navigateTo({   
         url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + activity_id
-      });
-    } else if(order_type == 27){
-      wx.navigateTo({    
-        url: "/page/component/pages/limitlottery/limitlottery?id=" + activity_id + activity_id+'&list=1'
       });
     } else{
       wx.navigateTo({    

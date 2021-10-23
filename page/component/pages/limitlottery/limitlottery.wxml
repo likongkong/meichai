@@ -8,7 +8,8 @@
   <view class="newDraw">
 		  <!-- 未开始 -->
 	    <view class="newDrawTopTime" wx:if='{{infoActivity.status == 1}}'>
-					{{infoActivity.start_time}}开始
+			    <block wx:if='{{infoActivity.isLiveShow}}'>直播开启</block>
+					<block wx:else>{{infoActivity.start_time}}开始</block>
 			</view>
 		  <!-- 进行中 -->
 	    <view class="newDrawTopTime" style="background:#007797;" wx:if='{{infoActivity.status == 2}}'>
@@ -64,15 +65,25 @@
 							<view class="apEve">
 									<view class="apEveTopDate">{{infoActivity.schdule[0].date}}</view>
 									<view class="apEveCenter" style="{{infoActivity.status == 1 ? 'font-weight: bold;' : ''}}">
-										  <view class="apEveCenterTxt">{{infoActivity.schdule[0].time}}</view>
-											<view>{{infoActivity.schdule[0].tip}}</view>
+										  <block wx:if='{{infoActivity.schdule[0].time}}'>
+													<view class="apEveCenterTxt">{{infoActivity.schdule[0].time}}</view>
+													<view>{{infoActivity.schdule[0].tip}}</view>
+											</block>
+											<block wx:else>
+												  <view class="apEveCenterTxtOne">{{infoActivity.schdule[0].tip}}</view>
+											</block>
 									</view>
 							</view> 
 							<view class="apEve" style="margin:0 90rpx">
 								  <view class="apEveTopDate">{{infoActivity.schdule[1].date}}</view>
 									<view class="apEveCenter" style="{{infoActivity.status == 2 ? 'font-weight: bold;' : ''}}">
-										  <view class="apEveCenterTxt">{{infoActivity.schdule[1].time}}</view>
-											<view>{{infoActivity.schdule[1].tip}}</view>
+										<block wx:if='{{infoActivity.schdule[1].time}}'>
+													<view class="apEveCenterTxt">{{infoActivity.schdule[1].time}}</view>
+													<view>{{infoActivity.schdule[1].tip}}</view>
+											</block>
+											<block wx:else>
+												  <view class="apEveCenterTxtOne">{{infoActivity.schdule[1].tip}}</view>
+											</block>
 											<view class="apEveCenterLine" style="left:168rpx;"></view>
 											<view class="apEveCenterLine" style="left:-72rpx;"></view>
 									</view>
@@ -80,8 +91,13 @@
 							<view class="apEve">
 								  <view class="apEveTopDate">{{infoActivity.schdule[2].date}}</view>
 									<view class="apEveCenter" style="{{infoActivity.status == 3 ? 'font-weight: bold;' : ''}}">
-										  <view class="apEveCenterTxt">{{infoActivity.schdule[2].time}}</view>
-											<view>{{infoActivity.schdule[2].tip}}</view>
+											<block wx:if='{{infoActivity.schdule[2].time}}'>
+														<view class="apEveCenterTxt">{{infoActivity.schdule[2].time}}</view>
+														<view>{{infoActivity.schdule[2].tip}}</view>
+												</block>
+												<block wx:else>
+														<view class="apEveCenterTxtOne">{{infoActivity.schdule[2].tip}}</view>
+												</block>
 									</view>
 							</view> 
 					</view>
@@ -433,11 +449,15 @@
 <view style='width:100%;position:fixed;left:0;bottom:0;border-top:1px solid #e5e5e5;background:#fff;z-index:5;'>
 
     <view class="newDrawBSTime" wx:if='{{infoActivity.status==1 || infoActivity.status==2 || (infoActivity.status==3 && !infoActivity.isReceived && appNowTime < infoActivity.finalPayTime && infoActivity.isWinner)}}'>
-					<block wx:if='{{infoActivity.status==1}}'>开始倒计时   </block>
-					<block wx:elif='{{infoActivity.status==2}}'>开奖倒计时   </block>
-					<block wx:elif='{{infoActivity.status==3 && !infoActivity.isReceived && appNowTime < infoActivity.finalPayTime}}'>付款倒计时   </block>
-					<block wx:if='{{dayStr!=0}}'>{{dayStr}}天</block>
-					<block>{{hrStr}}时{{minStr}}分{{secStr}}秒</block>
+					<block wx:if='{{infoActivity.isLiveShow && infoActivity.status==1}}'>直播开启</block>
+					<block wx:else>
+							<block wx:if='{{infoActivity.status==1}}'>开始倒计时   </block>
+							<block wx:elif='{{infoActivity.status==2}}'>开奖倒计时   </block>
+							<block wx:elif='{{infoActivity.status==3 && !infoActivity.isReceived && appNowTime < infoActivity.finalPayTime}}'>付款倒计时   </block>
+							<block wx:if='{{dayStr!=0}}'>{{dayStr}}天</block>
+							<block>{{hrStr}}时{{minStr}}分{{secStr}}秒</block>
+					</block>
+
 		</view>
     <view class="newDrawBSButBox">
 				<view class="nDbsBnotice" wx:if='{{infoActivity.status==1}}' catchtap='subscrfun' style="background:#EEAE19;">活动开始通知我</view>
