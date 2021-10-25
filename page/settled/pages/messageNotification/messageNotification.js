@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '任务说明',
+    c_title: '消息',
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,

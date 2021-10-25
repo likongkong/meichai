@@ -899,6 +899,7 @@ page{
   line-height: 50rpx;
   font-size: 24rpx;
   color: #ABABAB;
+  padding-right: 6rpx;
 }
 .SelectionDescription{
   font-size: 28rpx;
@@ -1284,9 +1285,6 @@ page{
   font-size: 24rpx;
   color: #fff;
   display: block;
-  position: absolute;
-  top: 0;
-  right: 0;
   text-align: center;
   line-height: 40rpx;
 }
@@ -1298,16 +1296,22 @@ page{
   font-size: 24rpx;
   color: #34A9ED;
   display: block;
-  position: absolute;
-  top: 0;
-  right: 0;
   text-align: center;
   line-height: 36rpx;
   border: 2rpx solid #34A9ED;
 }
 .brandInfo{
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.brandInfo view:first-child{
+  display: flex;
   justify-content: flex-start;
+  align-items: center;
+}
+.brandInfo view:last-child{
+  display: flex;
   align-items: center;
 }
 .brandInfoLogo{

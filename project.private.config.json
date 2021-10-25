@@ -222,6 +222,12 @@
           "pathName": "page/component/pages/limitlottery/limitlottery",
           "query": "list=1&id=502890",
           "scene": null
+        },
+        {
+          "name": "消息",
+          "pathName": "page/settled/pages/messageNotification/messageNotification",
+          "query": "",
+          "scene": null
         }
       ]
     }

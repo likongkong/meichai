@@ -109,14 +109,19 @@
 
 			<view class="newDrawActivityProcess" wx:if="{{brandinfo}}">
 				<view class="brandInfoWrap">
-					<text class="{{!brandinfo.isAttention?'concernBtn':'concernBtnNo'}}" data-type='0' data-id='{{brandinfo.brandId}}' catchtap='followfun'>
-						<block wx:if='{{!brandinfo.isAttention}}'>关注</block>
-						<block wx:else>已关注</block>
-					</text>
+					
 					<view class="brandInfo">
-						<image catchtap="jumpexhbrandDetail" data-id="{{brandinfo.brandId}}" class="brandInfoLogo" src="{{brandinfo.brandLogo}}" mode="aspectFill" ></image>
-						<text catchtap="jumpexhbrandDetail" data-id="{{brandinfo.brandId}}" class="brandInfoName">{{brandinfo.brandName}}</text>
-						<image class="brandAuthenticationIcon" wx:if="{{brandinfo.isAuth}}" src="https://cdn.51chaidan.com/images/brandSettledIcon/AuthenticationOk.png" mode="widthFix"></image>
+						<view>
+							<image catchtap="jumpexhbrandDetail" data-id="{{brandinfo.brandId}}" class="brandInfoLogo" src="{{brandinfo.brandLogo}}" mode="aspectFill" ></image>
+							<text catchtap="jumpexhbrandDetail" data-id="{{brandinfo.brandId}}" class="brandInfoName">{{brandinfo.brandName}}</text>
+							<image class="brandAuthenticationIcon" wx:if="{{brandinfo.isAuth}}" src="https://cdn.51chaidan.com/images/brandSettledIcon/AuthenticationOk.png" mode="widthFix"></image>
+						</view>
+						<view>
+							<text class="{{!brandinfo.isAttention?'concernBtn':'concernBtnNo'}}" data-type='0' data-id='{{brandinfo.brandId}}' catchtap='followfun'>
+								<block wx:if='{{!brandinfo.isAttention}}'>关注</block>
+								<block wx:else>已关注</block>
+							</text>
+						</view>
 					</view>
 					<view class="brandCorrelationPlatform">
 						<view catchtap="{{brandinfo.picFriend?'addfrindcommonifun1':'noClickTip'}}" data-identif='1' data-url="{{brandinfo.picFriend}}">
