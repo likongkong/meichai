@@ -216,6 +216,12 @@
           "pathName": "page/secondpackge/pages/drawHideGoods/drawHideGoods",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "page/component/pages/limitlottery/limitlottery",
+          "pathName": "page/component/pages/limitlottery/limitlottery",
+          "query": "list=1&id=502890",
+          "scene": null
         }
       ]
     }

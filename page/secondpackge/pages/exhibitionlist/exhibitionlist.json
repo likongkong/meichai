@@ -1,7 +1,6 @@
 {
   "asdfasfdflePullDownRefresh": true,
   "enablePullDownRefresh": true,
-  "navigationBarTitleText": "消息中心",
   "usingComponents": {
     "t_f": "../../../../pages/topfunction/topfunction",
     "bnavigation": "/pages/bottomComponent/bottomComponent",

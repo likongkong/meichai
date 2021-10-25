@@ -161,7 +161,8 @@ Page({
     comBulFraNun:0, // 1 为好友助力 2 报名成功  3 身份信息  4 未中签 中签
     helpTipFitst:true,
     refreshGetin:true,
-    showPicturesImg:false
+    showPicturesImg:false,
+    showimg:''
   },
   // 抽签规则
   drawRuleJump(){
@@ -458,6 +459,18 @@ Page({
 
 
   },
+  addfrindcommonifun1: function (w) {
+    var _this = this;
+    var url = w.currentTarget.dataset.url || w.target.dataset.url || 0;
+    if (url && url != "") {
+      this.setData({
+        showimg: url != "" ? url : "https://cdn.51chaidan.com/images/act/1577083808.jpg",
+        addfrindcommoni: !this.data.addfrindcommoni
+      });
+    } else {
+      app.showToastC((_this.data.brandinfo.brandName || '') + '未提供此方式');
+    }
+  },
   addfrindcommonifun: function (w) {
     var url = w.currentTarget.dataset.url || w.target.dataset.url;
     var name = w.currentTarget.dataset.name || w.target.dataset.name || '';
@@ -715,6 +728,7 @@ Page({
 
             _this.setData({
                 infoActivity:infoActivity,
+                brandinfo:res.data.Info.brandInfo,
                 listData:listData,
                 subscribedata: res.data.Info.subscribe.lotto || '',
                 cashPledge:infoActivity.cashPledge||0,
@@ -2363,9 +2377,18 @@ Page({
     var _this = this;
     var ind = event.currentTarget.dataset.ind || event.target.dataset.ind || 0;
     var imgSrc = '';
+    var src = '';
+    if(ind==1){
+      src = _this.data.infoActivity.premiseForJoin;
+    }else if(ind==2){
+      src = _this.data.showimg;
+    }else{
+      src = _this.data.saveimgurl || ''; 
+    }
     wx.getImageInfo({
-      src: ind==1 ? _this.data.infoActivity.premiseForJoin : _this.data.saveimgurl || '',
+      src: src,
       fail: function (res) {
+        console.log(res)
       },
       success: function (res) {
         var imgSrc = res.path;
@@ -2808,5 +2831,62 @@ Page({
       }
     })
   },
-
+  // 关注 和 点赞 函数
+  followfun: function(w) {
+    var _this = this;
+    var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
+    var type = w.currentTarget.dataset.type || w.target.dataset.type || 0;
+    console.log('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id)
+    var qqq = Dec.Aese('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id);
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + qqq,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        console.log('关注=====',res)
+        if (res.data.ReturnCode == 200) {
+          _this.setData({
+            [`brandinfo.isAttention`]: !_this.data.brandinfo.isAttention
+          })
+        };
+      }
+    });
+  },
+  noClickTip(w){
+    var identif = w.currentTarget.dataset.identif || w.target.dataset.identif || 0;
+    switch(parseInt(identif)){
+      case 1: var txt = '微信'; break;
+      case 2: var txt = '公众号'; break;
+      case 3: var txt = '微博'; break;
+      case 4: var txt = '小红书'; break;
+      case 5: var txt = '抖音'; break;
+      default: var txt = '';
+    };
+    app.showToastC('暂未设置'+ txt +'信息');
+  },
+  jumpxcx(w){
+    var type = w.currentTarget.dataset.type || w.target.dataset.type || 0;
+    var path = w.currentTarget.dataset.path || w.target.dataset.path || '';
+    var appId = '';
+    if(type == 1){
+      appId = 'wx9074de28009e1111';
+    }else if(type == 2){
+      appId = 'wxb296433268a1c654';
+    }
+    wx.navigateToMiniProgram({
+         appId: appId,
+         path: path,
+         envVersion: 'release',// 打开正式版
+         success(res) {},
+         fail: function (err) {
+            console.log(err);
+          }
+    })
+  },
+  jumpexhbrandDetail: function (w) {
+    var id = w.currentTarget.dataset.id || w.target.dataset.id || '';
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/brandDetails/brandDetails?type=drying&id=" + id+"&settlement=0"
+    });
+  },
 })
