@@ -13,7 +13,10 @@ Page({
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     uid:'',
     loginid:'',
-    type:0, // 1 抽选规则
+    pid:0,
+    dataList:[],
+    noData:false,
+    isMoreData:false
   },
 
   /**
@@ -21,15 +24,6 @@ Page({
    */
   onLoad: function (options) {
     wx.hideShareMenu();
-    // '已经授权'
-    // this.data.id = options.id;
-    this.data.type = options.type || 0; 
-    if(this.data.type == 1){
-      this.setData({
-        c_title:'活动规则'
-      }) 
-    };
-
     this.data.loginid = app.signindata.loginid;
     this.data.uid = app.signindata.uid;
     // 判断是否登录
@@ -76,13 +70,25 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.setData({
+      pid:0,
+      dataList:[],
+      noData:false,
+      isMoreData:false
+    })
+    this.gitData();
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    if(!this.data.isMoreData){
+      this.data.pid = ++this.data.pid;
+      this.gitData();
+    }else{
+      app.showToastC('暂无更多数据了',1500);
+    }
   },
 
   /**
@@ -95,20 +101,33 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    if(this.data.type == 1){
-        var getUrl = 'https://cdn.51chaidan.com/produce/tipLotto.json';
-    }else{
-        var getUrl = 'https://cdn.51chaidan.com/produce/tipBrandMission.json';
-    };
+    let data = `mod=mcMessage&operation=list&uid=${this.data.uid}&loginid=${this.data.loginid}&pid=${this.data.pid}`
+    var q = Dec.Aese(data);
+    console.log(`${app.signindata.comurl}?${data}`)
     wx.request({
-      url: getUrl ,
+      url: app.signindata.comurl + 'user.php' + q,
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: (res) => { 
-        console.log('说明====',res)
-        this.setData({
-          data:res.data
-        })
+        console.log('消息列表====',res)
+        if(res.data.ReturnCode == 200){
+          if(this.data.pid == 0 && res.data.List.length == 0){
+            this.setData({
+              noData:true
+            })
+          }else if(this.data.pid != 0 && res.data.List.length == 0){
+            this.setData({
+              isMoreData:true
+            })
+            app.showToastC('暂无更多数据了',1500);
+          }else{
+            this.setData({
+              dataList:[...this.data.dataList,...res.data.List]
+            })
+          }
+        }else{
+          app.showToastC(res.data.Msg,2000);
+        }
       },
       fail: function () {},
       complete:function(){
@@ -116,5 +135,10 @@ Page({
         wx.stopPullDownRefresh();
       }
     });
-  }
+  },
+  comjumpwxnav(e){
+    let type = e.currentTarget.dataset.type;
+    let id = e.currentTarget.dataset.id;
+    app.comjumpwxnav(type,id)
+  },
 })

@@ -228,6 +228,12 @@
           "pathName": "page/settled/pages/messageNotification/messageNotification",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "消息详情",
+          "pathName": "page/settled/pages/messageNotificationDetail/messageNotificationDetail",
+          "query": "",
+          "scene": null
         }
       ]
     }

@@ -7,16 +7,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '获取记录',
+    c_title: '消息',
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     uid:'',
     loginid:'',
-    page:0,
-    records:[],
-    noData:false,
-    isMoreData:false,
   },
 
   /**
@@ -25,7 +21,7 @@ Page({
   onLoad: function (options) {
     wx.hideShareMenu();
     // '已经授权'
-    // this.data.id = options.id;
+    this.data.id = options.id;
     this.data.loginid = app.signindata.loginid;
     this.data.uid = app.signindata.uid;
     // 判断是否登录
@@ -72,19 +68,13 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.gitData()
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    if(!this.data.isMoreData){
-      this.data.page = ++this.data.page;
-      this.gitData();
-    }else{
-      app.showToastC('暂无更多数据了',1500);
-    }
   },
 
   /**
@@ -97,33 +87,21 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    let data = `mod=mission&operation=record&uid=${this.data.uid}&loginid=${this.data.loginid}&pageId=${this.data.page}`
+    let data = `mod=mcMessage&operation=info&uid=${this.data.uid}&loginid=${this.data.loginid}&id=${this.data.id}`
     var q = Dec.Aese(data);
     console.log(`${app.signindata.comurl}?${data}`)
     wx.request({
-      url: app.signindata.comurl + 'toy.php' + q,
+      url: app.signindata.comurl + 'user.php' + q,
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: (res) => { 
-        console.log('记录====',res)
+        console.log('消息详情====',res)
         if(res.data.ReturnCode == 200){
-          for(var i=0; i<res.data.List.record.length;i++){
-            console.log(res.data.List.record[i].receiveTime)
-            res.data.List.record[i].created_at = util.format1("yyyy-MM-dd HH:mm:ss",Number(res.data.List.record[i].receiveTime))
-          }
-          if(this.data.page == 1 && res.data.List.record.length == 0){
-            this.setData({
-              noData:true
-            })
-          }else if(this.data.page != 1 && res.data.List.record.length == 0){
-            this.setData({
-              isMoreData:true
-            })
-          }else{
-            this.setData({
-              records:[...this.data.records,...res.data.List.record]
-            })
-          }
+          // .replace(/<p>/ig, '<p style="font-size: 14px;">')
+          res.data.List.image_text = res.data.List.image_text.replace(/<img([\s\w"-=\/\.:;]+)/ig, '<img style="width: 100%;display:block;" $1');
+          this.setData({
+            data:res.data.List
+          })
         }else{
           app.showToastC(res.data.Msg,2000);
         }

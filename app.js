@@ -1128,6 +1128,14 @@ App({
       wx.navigateTo({
         url: `/page/settled/pages/taskExplain/taskExplain?type=${whref}`
       });      
+    } else if (item_type == 9051) {   // 消息
+      wx.navigateTo({
+        url: `/page/settled/pages/messageNotification/messageNotification`
+      });      
+    } else if (item_type == 9052) {   // 消息详情
+      wx.navigateTo({
+        url: `/page/settled/pages/messageNotificationDetail/messageNotificationDetail?id=${whref}`
+      });      
     }
   },
   // 中奖提示倒计时

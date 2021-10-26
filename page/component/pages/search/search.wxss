@@ -401,10 +401,12 @@ page{
 
 /* 商品 */
 .ptGoods .cardTbox{
-  height: 348rpx !important;
+  height: auto;
 }
 .ptGoods .pic{
-  height: 348rpx !important;
+  width: 100%;
+  height: auto;
+  /* height: 348rpx !important; */
   border-bottom-left-radius: 10rpx;
   border-bottom-right-radius: 10rpx;
 }

@@ -186,7 +186,8 @@
         "pages/taskExplain/taskExplain",
         "pages/LimWinningList/LimWinningList",
         "pages/releaseSignIn/releaseSignIn",
-        "pages/messageNotification/messageNotification"
+        "pages/messageNotification/messageNotification",
+        "pages/messageNotificationDetail/messageNotificationDetail"
       ]
     }
   ],

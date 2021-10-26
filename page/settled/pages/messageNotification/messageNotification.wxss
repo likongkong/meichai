@@ -1,1 +1,48 @@
-/* page/settled//pages/messageNotification/messageNotification.wxss */
+page{
+  background:#f4f5f9;
+  padding-bottom: 50rpx;
+}
+.noData{
+  width: 100%;
+}
+.noData image{
+  width: 280rpx;
+  height: auto;
+  margin: 300rpx auto 0 auto;
+  display: block;
+}
+.messageWrap{
+  padding: 0 26rpx;
+  box-sizing: border-box;
+}
+.messageTime{
+  font-size: 28rpx;
+  color: #909090;
+  display: block;
+  text-align: center;
+  margin: 44rpx 0 26rpx 0;
+}
+.cardWrap{
+  background: #ffffff;
+  border-radius: 10rpx;
+  padding: 34rpx 32rpx;
+  box-sizing: border-box;
+}
+.cardWrap text{
+  display: block;
+}
+.h1{
+  font-size: 32rpx;
+  color: #101010;
+}
+.h2{
+  font-size: 28rpx;
+  color: #909090;
+  margin: 20rpx 0 26rpx 0;
+}
+.cardWrap image{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10rpx;
+}

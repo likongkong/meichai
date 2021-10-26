@@ -1,0 +1,38 @@
+page{
+  background:#f4f5f9;
+  padding-bottom: 110rpx;
+}
+.wrap{
+  padding: 42rpx 60rpx 0 60rpx;
+  box-sizing: border-box;
+}
+.h1{
+  font-size: 32rpx;
+  display: block;
+  color: #101010;
+}
+.h2{
+  font-size: 28rpx;
+  color: #909090;
+  display: block;
+  margin: 20rpx 0 26rpx 0;
+}
+.litpic{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10rpx;
+  margin-bottom: 64rpx;
+}
+.image_text{
+  margin-bottom: 92rpx;
+}
+.author{
+  font-size: 28rpx;
+  color: #000;
+}
+.messageTime{
+  font-size: 28rpx;
+  color: #909090;
+  margin-left: 46rpx;
+}

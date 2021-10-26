@@ -183,7 +183,7 @@
 <template name="goods">
     <view class="card specialCard ptGoods" data-itemid="{{itemId}}" data-itemType="{{itemType}}" data-idtype="gid" data-url="/pages/detailspage/detailspage" catchtap="clickJump">
         <view class="cardTbox">
-            <image class="pic" src="{{itemCover}}" mode="aspectFill"></image>
+            <image class="pic" src="{{itemCover}}" mode="widthFix"></image>
             <view class="sellOut" wx:if="{{stock<=0}}">
                 <image src="http://www.51chaidan.com/images/sign/2020wsj/finish.png" mode="widthFix"></image>
             </view>
