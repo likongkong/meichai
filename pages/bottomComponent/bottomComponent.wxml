@@ -37,29 +37,29 @@
 
 	<!-- 潮玩展 -->
 	 <!-- wx:if='{{isProduce}}' -->
-	<view class='comNavigationEve'>
+	<!-- <view class='comNavigationEve'>
 		<view style='width:100%;height:100%;position:relative;' bindtap='fashionShow'>
 			<view class='navigationltop' style="height:100rpx;">
           <image src='https://cdn.51chaidan.com/images/sign/iconMCTS202110.png?1' mode="aspectFit" style="width:100rpx;height:100rpx;position:absolute;right:0;left:0;margin:0 auto;"></image>
 			</view>
-			<!--<view class='navigationlcon' style="font-weight:bold;font-size:30rpx;">
+			<view class='navigationlcon' style="font-weight:bold;font-size:30rpx;">
 				<text style="color:#E5CB3E">秋</text>
 				<text style="color:#89AB4A">日</text>
 				<text style="color:#75542B">童</text>
 				<text style="color:#E85B51">话</text>
-			</view> -->
+			</view>
 		</view>
-	</view>
+	</view> -->
 
 <!-- 一番赏 -->
-<!-- <view wx:if='{{isProduce}}' class='comNavigationEve'>
+<view wx:if='{{isProduce}}' class='comNavigationEve'>
 	<view style='width:100%;height:100%;position:relative;' bindtap='wnews'>
 		<view class='navigationltop'>
 			<image src='https://cdn.51chaidan.com//images/sign/yifanshang.png' class='navigationltopimg'></image>
 		</view>
 		<view class='navigationlcon' style='{{wnews?"color:#fd2844":""}};'>一番赏</view>
 	</view>
-</view> -->
+</view>
 
 
 	<!-- 闲置 -->
