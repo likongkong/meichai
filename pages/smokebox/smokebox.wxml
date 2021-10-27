@@ -197,6 +197,7 @@
 
 			</view>
 			<view style="width:50%;height:80rpx;position:relative;float:right;">
+
 				<view wx:if='{{whole_boxGift}}' class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;"  catchtap="collectchip">端盒送</view>
 
 			
@@ -252,8 +253,9 @@
 
 			</view>
 		</view>
+
 		<view wx:elif='{{activity.status == 3}}' style="width:100%;color:#4c9a23;text-align:center;font-size:30rpx;">
-			<view style="width:50%;height:80rpx;position:relative;margin:0 auto;">
+			<view style="width:70%;height:80rpx;position:relative;margin:0 auto;">
 			  <block wx:if='{{activity.supplyStockTip}}'>
 					  <view class='queuebtnstyle2' catchtap="blindBoxsubscrfun" style="background:#eeae19;color:white;float:left;line-height:80rpx;height:80rpx;">补货提醒</view>				
 				</block>
@@ -261,6 +263,16 @@
 				    <view class='queuebtnstyle2' style="background:#ccc;color:white;float:left;line-height:80rpx;height:80rpx;">已结束</view>	
 				</block>
 			</view>
+		</view>
+
+		<view wx:elif='{{activity.status == 4}}' style="width:100%;color:#4c9a23;text-align:center;font-size:30rpx;">
+			  <view class="soldOutTips">商品已售罄</view>
+				<view style="width:70%;height:80rpx;position:relative;margin:0 auto;">
+						<view class='queuebtnstyle2' catchtap="{{activity.isSubscribe?'':'blindBoxsubscrfun'}}" style="{{activity.isSubscribe?'background:#E6E3E3;color:#484848;':'background:#eeae19;color:white;'}}line-height:80rpx;height:80rpx;width:100%;font-size:28rpx;">
+								<block wx:if='{{activity.isSubscribe}}'>已设置到货提醒</block>
+								<block wx:else>我想要</block>
+						</view>	
+				</view>
 		</view>
 
     <view wx:if='{{toyCabinetList && toyCabinetList.length != 0}}'>

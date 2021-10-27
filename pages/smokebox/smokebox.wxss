@@ -1136,3 +1136,11 @@ margin-top: 20rpx;
   height: 162rpx;
   display: block;
 }
+.soldOutTips{
+  color:#EEAE19;
+  font-size: 28rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  font-weight: bold;
+}
