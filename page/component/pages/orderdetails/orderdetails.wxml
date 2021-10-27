@@ -860,7 +860,7 @@
                     <!--  等待付款  -->
                     <view class='totalmoncon' wx:if='{{comdata.status==0}}'>
                         <view class='totalmoncleft'
-                            style="height:58rpx;line-height:58rpx;width:524rpx;font-size:24rpx;">{{comdata.dateTitle}}
+                            style="height:58rpx;line-height:58rpx;width:540rpx;font-size:24rpx;">{{comdata.dateTitle}}
                         </view>
                         <block wx:if='{{comdata.isBalances==1}}'>
                             <view class='totalmoncright' style='color:#ccc;border:1rpx solid #ccc;position:relative;'>

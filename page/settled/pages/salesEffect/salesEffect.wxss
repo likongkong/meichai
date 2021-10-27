@@ -169,6 +169,12 @@ page{
   text-align: center;
   font-size: 28rpx;
 }
+.removeTitle{
+  padding: 40rpx 52rpx 44rpx 52rpx;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 28rpx;
+}
 .orderMangTipCenterEve{
   width: 100%;
   display: flex;

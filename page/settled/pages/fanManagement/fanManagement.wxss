@@ -60,5 +60,46 @@
   right: 20rpx;
   margin: auto;
 }
-
-
+.emlhright image{
+  width: 50rpx;
+  height: auto;
+}
+.label{
+  width: 100rpx;
+  height: 36rpx;
+  color: #fff;
+  background: #1BA5E8;
+  line-height: 36rpx;
+  display: inline-block;
+  text-align: center;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  margin-left: 20rpx;
+}
+.powerWrap{
+  width: 100%;
+  padding: 0 90rpx;
+  box-sizing: border-box;
+}
+.powerWrap view{
+  height: 60rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  float: left;
+}
+.powerWrap view:nth-child(2n){
+  float: right;
+}
+.powerWrap view image{
+  width: 38rpx;
+  height: auto;
+  margin-right: 20rpx;
+}
+.powerWrap view text{
+  font-size: 28rpx;
+  color: #101010;
+}
+.active text{
+  color: #3894FF !important;
+}
