@@ -234,6 +234,12 @@
           "pathName": "page/settled/pages/messageNotificationDetail/messageNotificationDetail",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "粉丝管理",
+          "pathName": "page/settled/pages/fanManagement/fanManagement",
+          "query": "",
+          "scene": null
         }
       ]
     }

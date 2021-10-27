@@ -98,7 +98,7 @@ Page({
         console.log('消息详情====',res)
         if(res.data.ReturnCode == 200){
           // .replace(/<p>/ig, '<p style="font-size: 14px;">')
-          res.data.List.image_text = res.data.List.image_text.replace(/<img([\s\w"-=\/\.:;]+)/ig, '<img style="width: 100%;display:block;" $1');
+          res.data.List.image_text = res.data.List.image_text.replace(/<img([\s\w"-=\/\.:;]+)/ig, '<img style="width: 100%;display:block;" $1').replace(/<p>/ig, '<p style="font-size: 14px; line-height: 24px;">');
           this.setData({
             data:res.data.List
           })
