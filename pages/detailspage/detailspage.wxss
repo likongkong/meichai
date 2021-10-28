@@ -839,3 +839,15 @@
   padding-left: 60rpx;
   position: relative;
 }
+.fclsCom{
+  color: #fff;
+  height:80rpx;
+  text-align: center;
+  line-height: 80rpx;
+  background:#999999;
+  border-radius:10rpx;
+  width:255rpx;
+  padding:0;
+  float: right;
+  font-size: 28rpx;
+}

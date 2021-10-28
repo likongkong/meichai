@@ -647,8 +647,27 @@
 <view class='tipback' wx:if='{{tipback}}' catchtouchmove="preventD"></view>
 
 
+<!-- 售罄 订阅 -->
+<block wx:if='{{zunmdata.supple}}'>
+    <view class="detailfooter" style='{{isIphoneX?"bottom:130rpx;":"bottom:110rpx;"}}'>
+      <view style='width:100%;min-height:98rpx;overflow:hidden;background:#ffffff;'>
+          <view style='height:98rpx;width:202rpx;float:left;position:relative;' wx:if='{{isCanShare && zunmdata.isGoodsCanShare}}' catchtap='displaysharefriend'>
+              <image src='https://www.51chaidan.com/images/icon/iconShareWX.png' style='width:50rpx;height:50rpx;display:block;margin:10rpx auto 0;'></image>
+              <view style='font-size:22rpx;width:100%;color:#919191;text-align:center;height:40rpx;line-height:40rpx;'>分享好友</view>
+          </view>
+
+          <view class="fclsCom" style='background:{{zunmdata.supple.isSubscribe?"#999999":"#EEAE19"}};margin:9rpx 10rpx 0 0;'  catchtap='{{zunmdata.supple.isSubscribe?"":"subscrfun"}}' data-ind='sup2'>
+              <block wx:if='{{zunmdata.supple.isSubscribe}}'>已设置到货提醒</block>
+              <block wx:else>我想要</block>
+          </view>
+          <view class="fclsCom" style='margin-top:9rpx;margin-right:20rpx;'>商品已售罄</view>
+
+      </view>
+    </view>   
+</block>
+
 <!--  超时 不能购买 -->
-<block wx:if='{{zunmdata.status == 3}}'>
+<block wx:elif='{{zunmdata.status == 3}}'>
     <view class="detailfooter" style='{{isIphoneX?"bottom:130rpx;":"bottom:110rpx;"}}'>
       <view style='width:100%;min-height:98rpx;overflow:hidden;background:#ffffff;'>
           <view style='height:98rpx;width:202rpx;float:left;position:relative;' wx:if='{{isCanShare && zunmdata.isGoodsCanShare}}' catchtap='displaysharefriend'>
