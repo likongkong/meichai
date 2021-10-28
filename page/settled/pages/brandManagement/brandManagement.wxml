@@ -6,7 +6,7 @@
   <view>
     <view class="title">
       <text class="h1">企业信息</text>
-      <text class="edit" data-type="9043" data-whref="info={{enterpriseinfo}}" catchtap="comjumpwxnav">编辑</text>
+      <text class="edit" data-type="9043" data-whref="info={{enterpriseinfo}}" catchtap="comjumpwxnav"  wx:if="{{!isFansAdmin}}">编辑</text>
     </view>
     <view class="enterpriseInfoWrap">
       <view>
@@ -73,7 +73,7 @@
     </view>
   </view>
 
-  <view class="footerWrap">
+  <view class="footerWrap" wx:if="{{!isFansAdmin}}">
     <view data-type="9044" catchtap="comjumpwxnav">添加新的IP</view>
   </view>
 

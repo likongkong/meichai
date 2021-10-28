@@ -165,7 +165,7 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    let data = `mod=community&operation=showIp&uid=${this.data.uid}&loginid=${this.data.loginid}`
+    let data = `mod=community&operation=showIp&uid=${this.data.uid}&loginid=${this.data.loginid}&type=4`
     var q = Dec.Aese(data);
     console.log(`${app.signindata.comurl}?${data}`)
     wx.request({

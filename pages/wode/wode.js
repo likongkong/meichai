@@ -361,6 +361,7 @@ Page({
               brandSettledStatus: res.data.Info.brandSettledInfo.brandSettledStatus,
               brand_id:res.data.Info.brandSettledInfo?res.data.Info.brandSettledInfo.brand_id:'',
               vipAdvertising: res.data.Info.vipAdvertising||'',
+              userJurisdictionList:res.data.Info.userJurisdictionList,
               // 待付款
               nonpayment: res.data.Info.non_payment||0,
               // 待拆单数

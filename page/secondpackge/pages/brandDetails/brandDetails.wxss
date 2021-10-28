@@ -286,6 +286,7 @@ page {
   padding-top: 15rpx;
   font-size: 24rpx;
   vertical-align: top;
+  display: inline-block;
 }
 .questionMark{
   display:inline-block;

@@ -13,17 +13,17 @@
 								<block wx:if='{{brandinfo.boothNumber}}'><text style="color:#31b3fb;">展位:{{brandinfo.boothNumber}}</text> | </block>
 								<view class="exhibdeimgBRTopName specialellipsis">{{brandinfo.brandName}}</view>
 								<image class="questionMark" wx:if='{{brandinfo.isAuth}}' src="https://cdn.51chaidan.com/images/brandSettledIcon/AuthenticationOk.png" mode="heightFix"></image>
-								<view wx:if='{{isOneselfBrand}}' class="emlhright" catchtap="jumpoffering" data-type='9028' data-id='{{brandinfo.id}}' style="background:#91D2D8;">编辑</view>
+								<view wx:if='{{isOneselfBrand || userJurisdictionList.isPrefectureManage}}' class="emlhright" catchtap="jumpoffering" data-type='9028' data-id='{{brandinfo.id}}' style="background:#91D2D8;">编辑</view>
 								<view wx:else class="{{!brandinfo.isAttention?'emlhright':'emlhrightNo'}}" data-type='0' data-id='{{brandinfo.id}}'  catchtap='followfun'>
 										<block wx:if='{{!brandinfo.isAttention}}'>关注</block>
 										<block wx:else>已关注</block>
 								</view>
 					</view>
 					 <!-- <view class="exhibdeimgBRTop" wx:if='{{brandinfo.integral>0}}' style="color:#999495;">我的积分：{{brandinfo.integral}}</view> -->
-					 <view class="exhibdeimgBRTop" wx:if='{{isOneselfBrand}}' catchtap="jumpFanMan" style="color:#34A9ED;">粉丝管理</view>
-					 <view class="exhibdeimgBRTop" wx:else style="color:#666666;">我的积分：{{detailInfo.userInteral || 0}}</view>
+					 <view class="exhibdeimgBRTop" wx:if='{{isOneselfBrand || userJurisdictionList.isFansManage}}' data-isoneselfbrand="{{isOneselfBrand}}" catchtap="jumpFanMan" style="color:#34A9ED;display: inline-block;width:auto;margin-right:20rpx;">粉丝管理</view>
+					 <view class="exhibdeimgBRTop" wx:if='{{!isOneselfBrand}}' style="color:#666666;display: inline-block;width:auto;">我的积分：{{detailInfo.userInteral || 0}}</view>
 					 <!-- <image class="questionMark" src="https://cdn.51chaidan.com/images/brandSettledIcon/wenhao.png" mode="aspectFit"></image> -->
-					 <view class="exhibdeimgBRRipos" wx:if='{{isOneselfBrand}}' catchtap="jumpSiginBrand">
+					 <view class="exhibdeimgBRRipos" wx:if='{{isOneselfBrand || userJurisdictionList.isSignManage}}' catchtap="jumpSiginBrand">
 							<image src="https://cdn.51chaidan.com/images/brandInfoIcon/brand_sign.png" mode="aspectFit"></image>
 							<view style="color:#34A9ED;" wx:if='{{detailInfo.signActivityStatus==1}}'>发布签到</view>
 							<view style="color:#34A9ED;" wx:elif='{{detailInfo.signActivityStatus==2}}'>签到已开启</view>
@@ -874,24 +874,18 @@
 <view class="popMask" catchtouchmove="true" catchtap="toggleAddNewEventMask" wx:if="{{isAddNewEventMask}}" style="background: rgba(0,0,0,.7);">
     <view class="addNewEventBox" catchtap="true">
 				<view class="releaseSale">
-              <image class="releaseSaleImg" src="https://www.51chaidan.com/images/brandInfoIcon/issueClassBackground.png"  mode="widthFix"></image>
-
-              <view class="releaseSalePostion">
-                  <view  class="releaseSaleHead"></view>
-                  <view class="addNewEventContent">
-                      <image class="releaseSaleImg" data-type="9040" catchtap="jumpoffering" style="margin-left:30rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/seckillButton20210923.png"  mode="widthFix"></image>
-                      <image class="releaseSaleImg" data-type="9039" catchtap="jumpoffering" style="margin-right:30rpx;"  src="https://www.51chaidan.com/images/brandInfoIcon/selectButton20210923.png"  mode="widthFix"></image>
-                      
-                  </view>
-
-                  <view class="addNewEventContent">
-                      <image class="releaseSaleImg" data-type="9033" catchtap="jumpoffering" style="margin-left:30rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/illustratedButton20210923.png"  mode="widthFix"></image>
-                      <image class="releaseSaleImg" data-type="9032" catchtap="jumpoffering" style="margin-right:30rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/dynamicButton20210923.png"  mode="widthFix"></image>
-                      
-                  </view>
-              </view>
-
-
+					<image class="releaseSaleImg" src="https://www.51chaidan.com/images/brandInfoIcon/issueClassBackground.png"  mode="widthFix"></image>
+					<view class="releaseSalePostion">
+							<view  class="releaseSaleHead"></view>
+							<view class="addNewEventContent" catchtap='{{!userJurisdictionList.isGoodsManage?"permissionDeniedFun":""}}'>
+									<image class="releaseSaleImg" data-type="9040" catchtap="jumpoffering" style="margin-left:30rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/seckillButton20210923.png"  mode="widthFix"></image>
+									<image class="releaseSaleImg" data-type="9039" catchtap="jumpoffering" style="margin-right:30rpx;"  src="https://www.51chaidan.com/images/brandInfoIcon/selectButton20210923.png"  mode="widthFix"></image>
+							</view>
+							<view class="addNewEventContent" catchtap='{{!userJurisdictionList.isIllustratedManage?"permissionDeniedFun":""}}'>
+									<image class="releaseSaleImg" data-type="9033" catchtap="jumpoffering" style="margin-left:30rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/illustratedButton20210923.png"  mode="widthFix"></image>
+									<image class="releaseSaleImg" data-type="9032" catchtap="jumpoffering" style="margin-right:30rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/dynamicButton20210923.png"  mode="widthFix"></image>
+							</view>
+					</view>
 				</view>
         <image class="popMaskbutton" catchtap="toggleAddNewEventMask" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="aspectFit"></image>
     </view>

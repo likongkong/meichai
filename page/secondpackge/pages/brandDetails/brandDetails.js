@@ -62,6 +62,10 @@ Page({
   siginInTip(){
     app.showToastC('今日已签到');
   },
+  // 没有权限
+  permissionDeniedFun(){
+    app.showToastC('您没有权限',1500);
+  },
   // 跳转编辑签到
   jumpSiginBrand(){
     var detailInfo = this.data.detailInfo
@@ -69,9 +73,10 @@ Page({
       url: "/page/settled/pages/releaseSignIn/releaseSignIn?id=" + detailInfo.brand.id + '&name=' + detailInfo.brand.brandName + '&type=' + detailInfo.signActivityStatus + '&img=' + encodeURIComponent(detailInfo.brand.shareImg)
     });  
   },
-  jumpFanMan(){
+  jumpFanMan(e){
+    let isoneselfbrand = e.currentTarget.dataset.isoneselfbrand?1:2;
     wx.navigateTo({ 
-      url: "/page/settled/pages/fanManagement/fanManagement"
+      url: "/page/settled/pages/fanManagement/fanManagement?isoneselfbrand="+isoneselfbrand
     }); 
   },
   brandSinginBoxFun(){
@@ -571,8 +576,8 @@ Page({
             video: res.data.List.video,
             brandArr,
             brandSettledLimit:res.data.Info.brandSettledLimit || false,
-            isOneselfBrand:res.data.Info.isOneselfBrand || false // 用户是否是当前品牌管理者
-
+            isOneselfBrand:res.data.Info.isOneselfBrand || false, // 用户是否是当前品牌管理者
+            userJurisdictionList:res.data.Info.userJurisdictionList
           })
           if (page == 0) {
             _this.setData({
@@ -799,6 +804,8 @@ Page({
             });
           }
 
+        }else{
+          app.showToastC(res.data.Msg,2000);
         };
       }
     });

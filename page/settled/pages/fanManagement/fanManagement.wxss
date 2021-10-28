@@ -78,10 +78,11 @@
 }
 .powerWrap{
   width: 100%;
-  padding: 0 90rpx;
+  padding: 0 72rpx;
   box-sizing: border-box;
 }
 .powerWrap view{
+  width: 47%;
   height: 60rpx;
   display: flex;
   justify-content: flex-start;
@@ -102,4 +103,54 @@
 }
 .active text{
   color: #3894FF !important;
+}
+.orderMangTipTop{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.orderMangTipTop image{
+  width: 30rpx;
+  height: auto;
+  margin-left: 10rpx;
+}
+.probabilityTip{
+  padding: 30rpx 30rpx 30rpx;
+  width: 610rpx;
+  background:#fff;
+  border-radius: 16rpx;
+}
+.proTipButton{
+  width: 400rpx;
+  height: 66rpx;
+  line-height: 66rpx;
+  border-radius: 56rpx;
+  background-color: rgba(233, 78, 89, 100);
+  color: rgba(255, 255, 255, 100);
+  font-size: 26rpx;
+  text-align: center;
+  margin: auto;
+}
+.proBaTop{
+  width: 100%;
+  height: 60rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+}
+.proBaTopCenter{
+  width: 100%;
+  font-size: 26rpx;
+  line-height: 60rpx;
+  padding-bottom: 30rpx;
+}
+.guanbi{
+  width: 60rpx;
+  height: auto;
+  position: absolute;
+  bottom: -106rpx;
+  left: 50%;
+  margin-left: -40rpx;
+  padding: 20rpx;
 }

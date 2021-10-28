@@ -38,17 +38,25 @@ Page({
     setAdminPopUp:false,  //设置管理员弹框
     removePopUp:false,  //移除管理员弹框
     authorityPopUp:false,  //设置管理员权限弹框
+    isadminNum:1,
+    commodityAgreement:false
   },
-
+  toogleExplain(){
+    this.setData({
+      commodityAgreement:!this.data.commodityAgreement
+    })
+  },
   showActionSheet(e){
     let isadmin = e.currentTarget.dataset.isadmin;
-    let userId = e.currentTarget.dataset.userId;
+    let userId = e.currentTarget.dataset.userid;
+    let nick = e.currentTarget.dataset.nick;
     this.data.userId = userId;
+    this.data.nick = nick;
     let that= this;
     let groups;
-    if(isadmin=1){
+    if(isadmin){
       groups = this.data.adminOperateArr;
-    }else if(isadmin=2){
+    }else{
       groups = this.data.noAdminOperateArr;
     }
     let arr = [];
@@ -61,15 +69,19 @@ Page({
         console.log(res)
         if(res.tapIndex == 0){ //备注
           that.signaturePopUpFun(e);
-        }else if(res.tapIndex == 1 && isadmin==2){ //升为管理员
+        }else if(res.tapIndex == 1 && !isadmin){ //升为管理员
+          
           that.setData({
-            setAdminPopUp:true
+            isadminNum:0,
+            authorityPopUp:true,
+            // authorityList:res.data.List.authorityList
           })
-        }else if(res.tapIndex == 1 && isadmin==1){ //设置权限
+        }else if(res.tapIndex == 1 && isadmin){ //设置权限
           that.setData({
-            authorityPopUp:true
+            isadminNum:1
           })
-        }else if(res.tapIndex == 2 && isadmin==1){ //移除管理员
+          that.getAdminInfo();
+        }else if(res.tapIndex == 2 && isadmin){ //移除管理员
           that.setData({
             removePopUp:true
           })
@@ -80,6 +92,44 @@ Page({
       }
     })
   },
+  // 获取权限信息
+  getAdminInfo(){
+    let fansUId = this.data.userId;
+    var _this = this;
+    wx.showLoading({
+      title: '加载中',
+    })
+    let data = `mod=community&operation=showadmin&uid=${this.data.uid}&loginid=${this.data.loginid}&fansUId=${fansUId}&brand_id=${this.data.brand_id}`
+    console.log( `mod=community&operation=fansname&uid=${this.data.uid}&loginid=${this.data.loginid}&fansUId=${fansUId}&brand_id=${this.data.brand_id}`)
+    var q = Dec.Aese(data);
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: (res) => { 
+        console.log(res);
+        wx.hideLoading()
+        wx.stopPullDownRefresh();
+        if(res.data.ReturnCode == 200){
+          _this.setData({
+            authorityPopUp:true,
+            authorityList:res.data.List.authorityList
+          })
+          for(var i=0;i<_this.data.authorityList.length;i++){
+            if(_this.data.authorityList[i].is_checked){
+              _this.data.fruitIds.push(_this.data.authorityList[i].authority_id);
+            }
+          }
+        }else{
+          app.showToastC(res.data.Msg,2000);
+        }
+        _this.setData({
+          signaturePopUp:false
+        })
+      },
+    });
+  },
+  // 选择权限
   authorityBtn(e){
     let authority_id = e.currentTarget.dataset.authority_id;
     for(var i=0;i<this.data.authorityList.length;i++){
@@ -98,29 +148,21 @@ Page({
       }
     }
   },
-  // 升级管理员权限
+  // 保存管理员权限
   saveAuthority(e){
-    // let uid = e.currentTarget.dataset.uid;
     let fansUId = this.data.userId;
     let ids = this.data.fruitIds.join(",");
     console.log(ids)
-  },
-  // 升级管理员
-  setAdmin(){
-    let fansUId = this.data.userId;
-    console.log('升级管理员')
-  },
-  // 移除管理员
-  removeAdmin(){
-    console.log('移除管理员')
-    return false;
-    let fansUId = this.data.userId;
+    if(!ids){
+      app.showToastC(`请设置权限`,1500);
+      return false;
+    }
     var _this = this;
     wx.showLoading({
       title: '加载中',
     })
-    let data = `mod=community&operation=fansname&uid=${this.data.uid}&loginid=${this.data.loginid}&fansUId=${fansUId}`
-    console.log( `mod=community&operation=fansname&uid=${this.data.uid}&loginid=${this.data.loginid}&fansUId=${fansUId}`)
+    let data = `mod=community&operation=setadmin&uid=${this.data.uid}&loginid=${this.data.loginid}&fansUId=${fansUId}&brand_id=${this.data.brand_id}&authority=${ids}`
+    console.log( `mod=community&operation=setadmin&uid=${this.data.uid}&loginid=${this.data.loginid}&fansUId=${fansUId}&brand_id=${this.data.brand_id}&authority=${ids}`)
     var q = Dec.Aese(data);
     wx.request({
       url: app.signindata.comurl + 'toy.php' + q,
@@ -131,7 +173,64 @@ Page({
         wx.hideLoading()
         wx.stopPullDownRefresh();
         if(res.data.ReturnCode == 200){
-          _this.getInfo();
+          if(_this.data.isadminNum == 0){
+            _this.setData({
+              authorityPopUp:false,
+              // setAdminPopUp:true,
+            })
+            app.showToastC(`已成功设置“${_this.data.nick}”为管理员`,1500);
+            setTimeout(function(){
+              _this.getInfo();
+            },1500)
+          }else{
+            app.showToastC('保存成功',1500);
+            setTimeout(function(){
+              _this.getInfo();
+              _this.setData({
+                authorityPopUp:false
+              })
+            },1500)
+          }
+          _this.setData({
+            fruitIds:[],
+          })
+        }else{
+          app.showToastC(res.data.Msg,2000);
+        }
+      },
+    });
+  },
+  // 升级管理员
+  setAdmin(){
+    let fansUId = this.data.userId;
+    console.log('升级管理员')
+  },
+  // 移除管理员
+  removeAdmin(){
+    let fansUId = this.data.userId;
+    var _this = this;
+    wx.showLoading({
+      title: '加载中',
+    })
+    let data = `mod=community&operation=removeadmin&uid=${this.data.uid}&loginid=${this.data.loginid}&fansUId=${fansUId}&brand_id=${this.data.brand_id}`
+    console.log( `mod=community&operation=removeadmin&uid=${this.data.uid}&loginid=${this.data.loginid}&fansUId=${fansUId}&brand_id=${this.data.brand_id}`)
+    var q = Dec.Aese(data);
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: (res) => { 
+        console.log(res);
+        wx.hideLoading()
+        wx.stopPullDownRefresh();
+        if(res.data.ReturnCode == 200){
+          app.showToastC('移除成功',1500);
+          setTimeout(function(){
+            _this.getInfo();
+            _this.setData({
+              removePopUp:false
+            })
+          },1500)
         }else{
           app.showToastC(res.data.Msg,2000);
         }
@@ -149,7 +248,6 @@ Page({
       brand_id:groups[e.detail.value].brand_id
     })
     this.getInfo();
-
   },
 
   lotteryNumberFun(){
@@ -172,7 +270,8 @@ Page({
     this.setData({
       setAdminPopUp:false,  
       removePopUp:false,  
-      authorityPopUp:false
+      authorityPopUp:false,
+      fruitIds:[],
     })
   },
   signaturePopUpFun(w){
@@ -218,7 +317,7 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    let data = `mod=community&operation=showIp&uid=${this.data.uid}&loginid=${this.data.loginid}`;
+    let data = `mod=community&operation=showIp&uid=${this.data.uid}&loginid=${this.data.loginid}&type=5`;
     var q = Dec.Aese(data);
     console.log(`${app.signindata.comurl}?${data}`)
     wx.request({
@@ -317,22 +416,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var _this = this;
     // wx.hideShareMenu();
     console.log(options)
     // '已经授权'
-    _this.data.loginid = app.signindata.loginid;
-    _this.data.uid = app.signindata.uid;
-    _this.setData({
+    this.data.loginid = app.signindata.loginid;
+    this.data.uid = app.signindata.uid;
+    this.setData({
       itemType : options.itemtype || '',
-      itemId : options.itemid || ''
+      itemId : options.itemId || '',
+      isoneselfbrand: options.isoneselfbrand || false
     })
-
+    console.log(this.data.isoneselfbrand)
     // 判断是否登录
-    if (_this.data.loginid != '' && _this.data.uid != '') {
-      _this.onLoadfun();
+    if (this.data.loginid != '' && this.data.uid != '') {
+      this.onLoadfun();
     } else {
-      app.signin(_this)
+      app.signin(this)
     };
 
 

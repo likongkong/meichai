@@ -63,6 +63,7 @@ Page({
           _this.setData({
             dataList:list,
             info,
+            isFansAdmin:res.data.Info.isFansAdmin,
             enterpriseinfo:JSON.stringify(info),
             tel:util.plusXing(info.firm_tel,3,4)
           })

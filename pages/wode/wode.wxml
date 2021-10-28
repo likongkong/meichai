@@ -140,7 +140,7 @@
                 </block>
                 <view class="brandManageWrap">
                     <text class="brandManageTitle">管理后台</text>
-                    <view class="assetWrap">
+                    <view class="assetWrap" wx:if="{{!userJurisdictionList}}">
                         <view>
                             <view class="assetL" data-type="9030" catchtap="comjumpwxnav">
                                 <view>
@@ -165,33 +165,33 @@
                         </view>
                     </view>
                     <view class="brandManageMenu">
-                        <view class="brandManageItem" data-type="9038" catchtap="comjumpwxnav">
+                        <view class="brandManageItem" data-type="9038" catchtap="comjumpwxnav" wx:if="{{!userJurisdictionList || userJurisdictionList.isOrderManage}}">
                             <view class="reddot" wx:if="{{dataInfo.countNewOrder}}" style="line-height: {{dataInfo.countNewOrder>=100?'20':'30'}}rpx;">{{dataInfo.countNewOrder>=100?'...':dataInfo.countNewOrder}}</view>
                             <view>
                                 <image src='https://cdn.51chaidan.com/images/brandSettledIcon/orderIcon/order.png' mode="widthFix"></image>
                                 <text>订单管理</text>
                             </view>
                         </view>
-                        <view class="brandManageItem" data-type="9041" catchtap="comjumpwxnav">
+                        <view class="brandManageItem" data-type="9041" catchtap="comjumpwxnav" wx:if="{{!userJurisdictionList || userJurisdictionList.isGoodsManage}}">
                             <view>
                                 <image src='https://cdn.51chaidan.com/images/brandSettledIcon/orderIcon/goods.png' mode="widthFix"></image>
                                 <text>商品管理</text>
                             </view>
                         </view>
-                        <view class="brandManageItem" catchtap="comjumpwxnav" data-type='9042'>
+                        <view class="brandManageItem" catchtap="comjumpwxnav" data-type='9042' wx:if="{{!userJurisdictionList || userJurisdictionList.isPrefectureManage}}">
                             <view>
                                 <image src='https://cdn.51chaidan.com/images/brandSettledIcon/orderIcon/brandZone.png' mode="widthFix"></image>
                                 <text>专区管理</text>
                             </view>
                         </view>
                         <!-- <view class="brandManageItem" catchtap="comjumpwxnav" data-type='9048'> -->
-                        <view class="brandManageItem" catchtap="jinqingqidai">
+                        <view class="brandManageItem" catchtap="jinqingqidai" wx:if="{{!userJurisdictionList}}">
                             <view>
                                 <image src='https://cdn.51chaidan.com/images/brandSettledIcon/orderIcon/task.png' mode="widthFix"></image>
                                 <text>任务返利</text>
                             </view>
                         </view>
-                        <view class="brandManageItem" catchtap="comjumpwxnav" data-type='9051'>
+                        <view class="brandManageItem" catchtap="comjumpwxnav" data-type='9051' wx:if="{{!userJurisdictionList}}">
                             <view>
                                 <image src='https://cdn.51chaidan.com/images/brandSettledIcon/orderIcon/service.png' mode="widthFix"></image>
                                 <text>消息通知</text>
