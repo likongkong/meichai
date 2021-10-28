@@ -193,7 +193,7 @@ Page({
     drydisnum:0,
     pagenum:1,
     loadprompttxt:'查看更多',
-    c_title: '秒杀',
+    c_title: '商品详情',
     c_arrow: true,
     c_backcolor:'#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
