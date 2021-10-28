@@ -790,9 +790,12 @@ Page({
     var ind = 0;
     if(w && w.currentTarget && w.currentTarget.dataset && w.currentTarget.dataset.ind){
       ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
-    }
-
-    if(_this.data.specialGoods == 1 && (_this.data.zunmdata.debuff==3 || ind ==1 )){
+    };
+    
+    if(ind == 'sup2' && _this.data.zunmdata.supple){  // 售罄之后 我想要订阅
+      var subscribedata = _this.data.zunmdata.supple.suppleSubscibe || '';
+      _this.data.id =  _this.data.zunmdata.supple.suppleSubscibeId || '';
+    }else if(_this.data.specialGoods == 1 && (_this.data.zunmdata.debuff==3 || ind ==1 )){
       var subscribedata = _this.data.specSubscribe || '';
     }else{
       var subscribedata = _this.data.subscribedata || '';
@@ -815,6 +818,11 @@ Page({
                 if (is_show_modal) {
                   _this.subshowmodalfun();
                   is_show_modal = false;
+                  if(ind == 'sup2' && _this.data.zunmdata.supple){
+                     _this.setData({
+                       ['zunmdata.supple.isSubscribe']:true
+                     })
+                  }
                 };
               };
             };

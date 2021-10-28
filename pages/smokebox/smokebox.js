@@ -266,7 +266,7 @@ Page({
     gotTBBMBS8:true,
     gotTBBMBS9:true,
     // 刮刮卡入口
-    isScrapingCard:false  
+    isScrapingCard:false 
 
   },
   // 跳转刮刮卡
@@ -886,7 +886,7 @@ Page({
             retry: infoData.alert ? infoData.alert.retry : "免费重抽不支持二选一",
             multipleHide: listDataDetail.multipleHide || [],
             id: activityData.id,
-            gid: activityData.goods_id,
+            gid:activityData.status == 4 ? '' : activityData.goods_id,
             rollchance: activityData.suplusChance,
             idlist: listDataDetail.arrActivityId || [],
             relAidList: listDataDetail.relAIdUnpack || [],
@@ -2216,7 +2216,7 @@ Page({
     var timestamp = Date.parse(new Date())
     //总的秒数 
     var second = parseInt(micro_second) - (timestamp / 1000);
-    // console.log('second=====',micro_second,(timestamp / 1000),second)
+    console.log('second=====',micro_second,(timestamp / 1000),second)
     if (second > 0) {
       _this.setData({
         remaintime: second,
@@ -3945,7 +3945,12 @@ Page({
   // 拉起订阅
   blindBoxsubscrfun: function () {
     var _this = this;
-    var subscribedata = _this.data.blindBoxSubscribedata || '';
+    if(_this.data.activity.status == 4){
+      var subscribedata = _this.data.activity.suppleSubscibe || '';
+    }else{
+      var subscribedata = _this.data.blindBoxSubscribedata || '';
+    };
+    
     if (subscribedata && subscribedata.template_id && app.signindata.subscribeif) {
       if (subscribedata.template_id instanceof Array) {
         wx.requestSubscribeMessage({
@@ -3956,6 +3961,11 @@ Page({
               if (res[subscribedata.template_id[i]] == "accept") {
                 app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
                 if (is_show_modal) {
+                  if(_this.data.activity.status == 4){
+                    _this.setData({
+                      ['activity.isSubscribe']:true
+                    });
+                  };
                   _this.subshowmodalfun();
                   is_show_modal = false;
                 };

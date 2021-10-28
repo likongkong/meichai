@@ -200,11 +200,11 @@ Page({
   jumpxinxi:function(){
     var _this = this;
 
-    wx.navigateTo({
-      url: "plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id=74",
-    });
+    // wx.navigateTo({
+    //   url: "plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id=74",
+    // });
 
-    return false;
+    // return false;
     // _this.data.id = 999999;
     // wx.requestSubscribeMessage({
     //   tmplIds: ['xCf0OLocO-jTPwwwtNrS8O7REn0lEw1yUwim_EFdCaQ'],
@@ -220,13 +220,13 @@ Page({
       // url: "/page/component/pages/drivetohidelist/drivetohidelist"
       // url: "/pages/activitydetailspage/activitydetailspage?id=18376"
       // url: "/pages/activitydetailspage/activitydetailspage?id=18185"
-      url: "/page/component/pages/limitlottery/limitlottery?id=461411",
+      // url: "/page/component/pages/limitlottery/limitlottery?id=461411",
       // url: "/page/component/pages/drivetohidehome/drivetohidehome"
       // url: "/page/component/pages/exhibition/exhibition"
       // url: "/page/component/pages/exhibitiondetail/exhibitiondetail?id=43161"
       // url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
       // url: "/page/secondpackge/pages/brandDetails/brandDetails?id=481&settlement=1"
-      // url: "/pages/detailspage/detailspage?gid=38956"
+      url: "/pages/detailspage/detailspage?gid=39272"
       // url: "/pages/smokebox/smokebox?gid=399289"
       // url: "/page/component/pages/playgrasslist/playgrasslist"
       // url: "/page/secondpackge/pages/detailSimgEffects/detailSimgEffects?gid=32852"

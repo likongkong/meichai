@@ -569,7 +569,12 @@ Page({
           url: "/pages/smokebox/smokebox?gid=" + gid
         });
         return false;
-    }
+    }else if(status == 4){
+        wx.navigateTo({
+          url: "/pages/smokebox/smokebox?id=" + id
+        });
+        return false;
+    };
     if (gid && gid != 0 && typeof(gid) != "undefined") {
       if (official){
         _this.setData({
