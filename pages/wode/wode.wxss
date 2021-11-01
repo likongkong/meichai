@@ -599,7 +599,7 @@ page{
 }
 .brandManageMenu{
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   padding: 0 48rpx;
   box-sizing: border-box;
@@ -609,6 +609,11 @@ page{
   justify-content: center;
   align-items: center;
   position: relative;
+  width: 18%;
+  margin-right: 2.5%;
+}
+.brandManageItem:last-child{
+  margin-right: 0;
 }
 .brandManageItem .reddot{
   position: absolute;

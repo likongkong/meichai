@@ -843,7 +843,7 @@ page {
 
 
 .exhibdeimgBRTopName{
-  max-width: 300rpx;
+  max-width: 220rpx;
   display: inline-block;
   font-size: 24rpx;
   height:36rpx ;
