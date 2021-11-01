@@ -341,7 +341,7 @@ Page({
         if (res.data.Message != "Empty info") {
           if (res.data.ReturnCode == 200){
             // 获取钱包余额
-            if(!res.data.Info.brandSettledLimit && res.data.Info.brandSettledInfo.brandSettledStatus == 5){
+            if(!res.data.Info.brandSettledLimit && res.data.Info.brandSettledInfo.brandSettledStatus == 5 && !res.data.Info.userJurisdictionList){
               if(wx.getStorageSync('access_token')){
                 api.getLumpsumAndWithdraw({}).then((res) => {
                   console.log('withdrawInfo',res)
@@ -788,6 +788,9 @@ Page({
           console.log(res)
         }
     })
-  }
+  },
+  permissionDeniedFun(){
+    app.showToastC('您没有权限',1500);
+  },
 
 })

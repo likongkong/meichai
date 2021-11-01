@@ -114,12 +114,14 @@
                 <view class="releaseSalePostion">
                     <view  class="releaseSaleHead"></view>
                     <view class="addNewEventContent">
+                        <view class="addNewEventContentCap" wx:if='{{userJurisdictionList && !userJurisdictionList.isGoodsManage}}' catchtap='{{!userJurisdictionList.isGoodsManage?"permissionDeniedFun":""}}'></view>
                         <image class="releaseSaleImg" data-type="9040" catchtap="comjumpwxnav" style="margin-left:30rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/seckillButton20210923.png"  mode="widthFix"></image>
                         <image class="releaseSaleImg" data-type="9039" catchtap="comjumpwxnav" style="margin-right:30rpx;"  src="https://www.51chaidan.com/images/brandInfoIcon/selectButton20210923.png"  mode="widthFix"></image>
                         
                     </view>
 
                     <view class="addNewEventContent">
+                        <view class="addNewEventContentCap" wx:if='{{userJurisdictionList && !userJurisdictionList.isIllustratedManage}}'  catchtap='{{!userJurisdictionList.isIllustratedManage?"permissionDeniedFun":""}}'></view>
                         <image class="releaseSaleImg" data-type="9033" catchtap="comjumpwxnav" style="margin-left:30rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/illustratedButton20210923.png"  mode="widthFix"></image>
                         <image class="releaseSaleImg" data-type="9032" catchtap="comjumpwxnav" style="margin-right:30rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/dynamicButton20210923.png"  mode="widthFix"></image>
                         

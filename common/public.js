@@ -1,8 +1,8 @@
 var Aes = require('crypto-js.js');  //引用AES源码js
 
-var env = 'online';   //线上 
+// var env = 'online';   //线上 
 // var env = 'qpe';  // 准生产环境
-// var env = 'test';  //测试
+var env = 'test';  //测试
 var versionnumber = '13.3.3';
 
 if(env == "online"){

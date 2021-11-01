@@ -367,9 +367,11 @@ Page({
           };
           if (num==1){
               var brand = res.data.data.List.brand || [];
+              var userJurisdictionList = res.data.data.Info.jurisdiction || ''
               _this.setData({
                 brand,
-                order
+                order,
+                userJurisdictionList
               });
           }else{
             var orderData = [..._this.data.order,...order]
@@ -472,7 +474,8 @@ Page({
       imageUrl:onshareImg,
       success: function (res) {}
     };
-
   },
-
+  permissionDeniedFun(){
+    app.showToastC('您没有权限',1500);
+  },
 })

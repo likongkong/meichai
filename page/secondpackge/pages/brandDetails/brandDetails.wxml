@@ -867,7 +867,7 @@
 	</view>
 </view>
 
-<view class="brandManageWrapButtonWrap" wx:if='{{brandSettledLimit}}'>
+<view class="brandManageWrapButtonWrap" wx:if='{{brandSettledLimit || userJurisdictionList}}'>
 	<view class="brandManageWrapButton" catchtap="toggleAddNewEventMask">发布/发售</view>
 </view>
 <!-- 选择发布/发售类型弹框-->
@@ -877,11 +877,13 @@
 					<image class="releaseSaleImg" src="https://www.51chaidan.com/images/brandInfoIcon/issueClassBackground.png"  mode="widthFix"></image>
 					<view class="releaseSalePostion">
 							<view  class="releaseSaleHead"></view>
-							<view class="addNewEventContent" catchtap='{{!userJurisdictionList.isGoodsManage?"permissionDeniedFun":""}}'>
+							<view class="addNewEventContent">
+							    <view class="addNewEventContentCap" wx:if='{{userJurisdictionList && !userJurisdictionList.isGoodsManage}}' catchtap='{{!userJurisdictionList.isGoodsManage?"permissionDeniedFun":""}}'></view>
 									<image class="releaseSaleImg" data-type="9040" catchtap="jumpoffering" style="margin-left:30rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/seckillButton20210923.png"  mode="widthFix"></image>
 									<image class="releaseSaleImg" data-type="9039" catchtap="jumpoffering" style="margin-right:30rpx;"  src="https://www.51chaidan.com/images/brandInfoIcon/selectButton20210923.png"  mode="widthFix"></image>
 							</view>
-							<view class="addNewEventContent" catchtap='{{!userJurisdictionList.isIllustratedManage?"permissionDeniedFun":""}}'>
+							<view class="addNewEventContent">
+								  <view class="addNewEventContentCap" wx:if='{{userJurisdictionList && !userJurisdictionList.isIllustratedManage}}'  catchtap='{{!userJurisdictionList.isIllustratedManage?"permissionDeniedFun":""}}'></view>
 									<image class="releaseSaleImg" data-type="9033" catchtap="jumpoffering" style="margin-left:30rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/illustratedButton20210923.png"  mode="widthFix"></image>
 									<image class="releaseSaleImg" data-type="9032" catchtap="jumpoffering" style="margin-right:30rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/dynamicButton20210923.png"  mode="widthFix"></image>
 							</view>

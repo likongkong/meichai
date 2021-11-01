@@ -339,7 +339,8 @@ Page({
             visitHistory:res.data.List.visitHistory || [], // 最近访问的品牌信息
             salesCalendar: salesCalendar|| [], // 日历信息
             recommendIps:res.data.List.recommendIps || [], // 品牌
-            brandSettledLimit:res.data.Info.brandSettledLimit || false
+            brandSettledLimit:res.data.Info.brandSettledLimit || false,
+            userJurisdictionList : res.data.Info.userJurisdictionList || ''
           });
           // 获取tab导航距离顶部的位置
           wx.createSelectorQuery().select('#bars').boundingClientRect(function(rect) {
@@ -1077,6 +1078,8 @@ Page({
       isAddNewEventMask: !this.data.isAddNewEventMask
     })
   },
-  
+  permissionDeniedFun(){
+    app.showToastC('您没有权限',1500);
+  },
 
 })
