@@ -21,6 +21,7 @@ Page({
     salesEffectInfo:'',
     salesEffectList:[],
     lotteryNumberList:[],
+    brandid:0,
     lotteryNumberIs:false,
     timeaddis:'',
     index:0,
@@ -195,6 +196,9 @@ Page({
             fruitIds:[],
           })
         }else{
+          _this.setData({
+            fruitIds:[],
+          })
           app.showToastC(res.data.Msg,2000);
         }
       },
@@ -329,6 +333,11 @@ Page({
         wx.hideLoading()
         wx.stopPullDownRefresh();
         if(res.data.ReturnCode == 200){
+          for(var i=0;i<res.data.List.brandInfoList.length;i++){
+            if(res.data.List.brandInfoList[i].brand_id == _this.data.brandid){
+              res.data.List.brandInfoList.unshift(res.data.List.brandInfoList.splice(i , 1)[0])
+            }
+          }
           _this.setData({
             groups:res.data.List.brandInfoList || [],
           });
@@ -346,6 +355,7 @@ Page({
       }
     });
   },
+
   getInfo(num = 1){
     var _this = this;
     wx.showLoading({ title: '加载中...',mask:true,nodataiftr:false});
@@ -375,6 +385,7 @@ Page({
           if(num == 1){
             _this.setData({
               countFans:res.data.Info.countFans || 0,
+              jurisdictionExplain:res.data.Info.jurisdictionExplain,
               salesEffectList:res.data.List.fans || [],
               authorityList:res.data.List.authorityList || [],
               nodataiftr:true
@@ -424,7 +435,8 @@ Page({
     this.setData({
       itemType : options.itemtype || '',
       itemId : options.itemId || '',
-      isoneselfbrand: options.isoneselfbrand || false
+      isoneselfbrand: options.isoneselfbrand || false,
+      brandid: options.brandid
     })
     console.log(this.data.isoneselfbrand)
     // 判断是否登录

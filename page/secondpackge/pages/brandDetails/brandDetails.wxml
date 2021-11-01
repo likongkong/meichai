@@ -20,7 +20,7 @@
 								</view>
 					</view>
 					 <!-- <view class="exhibdeimgBRTop" wx:if='{{brandinfo.integral>0}}' style="color:#999495;">我的积分：{{brandinfo.integral}}</view> -->
-					 <view class="exhibdeimgBRTop" wx:if='{{isOneselfBrand || userJurisdictionList.isFansManage}}' data-isoneselfbrand="{{isOneselfBrand}}" catchtap="jumpFanMan" style="color:#34A9ED;display: inline-block;width:auto;margin-right:20rpx;">粉丝管理</view>
+					 <view class="exhibdeimgBRTop" wx:if='{{isOneselfBrand || userJurisdictionList.isFansManage}}' data-isoneselfbrand="{{isOneselfBrand}}" data-brandid="{{brandinfo.id}}" catchtap="jumpFanMan" style="color:#34A9ED;display: inline-block;width:auto;margin-right:20rpx;">粉丝管理</view>
 					 <view class="exhibdeimgBRTop" wx:if='{{!isOneselfBrand}}' style="color:#666666;display: inline-block;width:auto;">我的积分：{{detailInfo.userInteral || 0}}</view>
 					 <!-- <image class="questionMark" src="https://cdn.51chaidan.com/images/brandSettledIcon/wenhao.png" mode="aspectFit"></image> -->
 					 <view class="exhibdeimgBRRipos" wx:if='{{isOneselfBrand || userJurisdictionList.isSignManage}}' catchtap="jumpSiginBrand">

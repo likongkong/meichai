@@ -136,7 +136,7 @@ Page({
     _this.data.uid = app.signindata.uid;
     var titleTop = ''
     if(options.itemtype == -1){
-      titleTop = '秒杀';
+      titleTop = '发售';
     }else if(options.itemtype == 4){
       titleTop = '抽选';
     };

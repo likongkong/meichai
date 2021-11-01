@@ -75,8 +75,9 @@ Page({
   },
   jumpFanMan(e){
     let isoneselfbrand = e.currentTarget.dataset.isoneselfbrand?1:2;
+    let brandid = e.currentTarget.dataset.brandid;
     wx.navigateTo({ 
-      url: "/page/settled/pages/fanManagement/fanManagement?isoneselfbrand="+isoneselfbrand
+      url: "/page/settled/pages/fanManagement/fanManagement?isoneselfbrand="+isoneselfbrand+"&brandid="+brandid
     }); 
   },
   brandSinginBoxFun(){

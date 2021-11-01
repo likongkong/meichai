@@ -240,6 +240,12 @@
           "pathName": "page/settled/pages/fanManagement/fanManagement",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "page/secondpackge/pages/brandDetails/brandDetails",
+          "pathName": "page/secondpackge/pages/brandDetails/brandDetails",
+          "query": "id=1115&settlement=1",
+          "scene": null
         }
       ]
     }

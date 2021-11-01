@@ -116,7 +116,7 @@
    <view class="probabilityTip" catchtap="true" style="position: relative;">
        <view class="proBaTop">权限说明</view>
        <view class="proBaTopCenter">
-         <text>{{zunmdata.confirmTip}}</text>
+         <text>{{jurisdictionExplain}}</text>
        </view>
         <image class="guanbi" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="widthFix" catchtap="toogleExplain"></image>
    </view>

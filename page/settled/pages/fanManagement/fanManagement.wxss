@@ -1,5 +1,8 @@
 @import "/common/tabbar.wxss";
 @import "/page/settled/pages/salesEffect/salesEffect.wxss";
+page{
+  background:#fff !important;
+}
 .seUserData {
   padding: 20rpx;
   height: 90rpx;
