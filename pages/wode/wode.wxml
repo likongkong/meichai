@@ -244,11 +244,16 @@
         <view class='addputforward'>
            <view class='apforWrap' catchtap='wodesblist' style='position:relative;'>
                 <view class='apforlleft comapforlr specialellipsis'>
-                    抽盒金<text style="color:#ff3c4d;padding-left:8rpx;">{{blindbox_money}}</text> 
-                    <block wx:if="{{tempBlindboxMoney!=0}}">
-                        <text style="color:#ff3c4d;font-size:24rpx">（ 限时抽盒金: </text> 
-                        <text style="color:#ff3c4d;font-size:24rpx">{{tempBlindboxMoney}} ）</text>
-                    </block>
+                    <view style="position: relative;padding-right:60rpx;float:left;">
+                        抽盒金<text style="color:#ff3c4d;padding-left:8rpx;">{{blindbox_money}}</text> 
+                                <block wx:if="{{tempBlindboxMoney!=0}}">
+                                    <text style="color:#ff3c4d;font-size:24rpx;vertical-align: middle;">（ 限时抽盒金: </text> 
+                                    <text style="color:#ff3c4d;font-size:24rpx;vertical-align: middle;">{{tempBlindboxMoney}} ）</text>
+                                </block>
+                                <image class='explainQuestionMark' catchtap="closeCommonTip" mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/wenhao.png'></image>        
+                    </view>
+
+                    
                 </view>
                 <view class='whbocndr' style='height:80rpx;line-height:80rpx;color:#ff3c4d;padding:0 30rpx 0 70rpx;font-size:28rpx;'>
                     使用
@@ -351,3 +356,13 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
     </view>
 </view>
 
+<view class="wshNew" catchtouchmove="true" wx:if='{{commonBulletFrame}}' catchtap="closeCommonTip">
+    <view class="howToPlay" catchtap="true">
+       <view class="howToPlayHead">抽盒金说明</view>
+       <scroll-view scroll-y="true" class="howToPlayScroll">
+          <text class="howToPlayTxt">{{dataInfo.tempBlindboxMoneyExplain}}</text>
+       </scroll-view>
+       <image class='indexelafracondisnoneS' catchtap='closeCommonTip' src='https://www.51chaidan.com/images/spread/dial/fork.png'>
+		</image>
+   </view>
+</view>

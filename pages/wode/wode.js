@@ -354,7 +354,8 @@ Page({
               }else{
                 app.getAccessToken(_this.listdata)
               };
-            }; 
+            };
+            
             _this.setData({
               isAddNewEventMask:false,
               dataInfo: res.data.Info,
@@ -791,6 +792,11 @@ Page({
   },
   permissionDeniedFun(){
     app.showToastC('您没有权限',1500);
+  },
+  closeCommonTip(){
+    this.setData({
+      commonBulletFrame:!this.data.commonBulletFrame,
+    })
   },
 
 })
