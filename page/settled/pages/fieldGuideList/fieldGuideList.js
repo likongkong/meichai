@@ -32,7 +32,7 @@ Page({
     this.data.listIndex = options.index || 0;
     this.data.brand_id = options.brand_id;
     this.data.pagetype = options.pagetype || 0
-    var showType = options.type || '1';
+    var showType = options.type || '';
 
     if(showType == 1){
       var c_title = '关联活动';
@@ -195,27 +195,35 @@ Page({
   selectData(e){
     var id = e.currentTarget.dataset.id;
     var dataList = this.data.dataList || [];
-    for(var i = 0 ; i < dataList.length ; i++){
-       if(dataList[i].id == id){
-          if(dataList[i].is_select){
+    var index = e.currentTarget.dataset.index || 0;
+    if(this.data.showType == 1 || this.data.showType == 3){ // 活动/动态  多选
+      this.setData({
+        ['dataList['+index+'].is_select']:!this.data.dataList[index].is_select
+      })
+    }else{  // 图鉴单选
+      for(var i = 0 ; i < dataList.length ; i++){
+        if(dataList[i].id == id){
+            if(dataList[i].is_select){
+              dataList[i].is_select = false;
+              this.data.selectTitle = '';
+              this.data.selectId = '';
+              this.data.relationType = '';
+            }else{
+              dataList[i].is_select = true;
+              this.data.selectTitle = e.currentTarget.dataset.title;
+              this.data.selectId = e.currentTarget.dataset.id;
+              this.data.relationType = dataList[i].type || '';
+            };
+        }else{
             dataList[i].is_select = false;
-            this.data.selectTitle = '';
-            this.data.selectId = '';
-            this.data.relationType = '';
-          }else{
-            dataList[i].is_select = true;
-            this.data.selectTitle = e.currentTarget.dataset.title;
-            this.data.selectId = e.currentTarget.dataset.id;
-            this.data.relationType = dataList[i].type || '';
-          };
-       }else{
-         dataList[i].is_select = false;
-       };
+        };
+      };
+      this.setData({
+        dataList
+      });
     };
-    this.setData({
-      dataList
-    })
-    console.log(id,dataList)
+
+
 
   },
   chooseFieldGuide(e){
@@ -227,7 +235,7 @@ Page({
     console.log(prevPage.data.obj);
     console.log(prevPage.data.dynamicData);
     // return false;
-    if(this.data.pagetype == 1){  // 动态
+    if(this.data.pagetype == 1){  // 动态页面  关联图鉴
       prevPage.setData({
         [`dynamicData[1].value`]:prevPage.data.obj.dynamicContent,
         [`dynamicData[2].imageList`]:prevPage.data.obj.dynamicPic,
@@ -238,11 +246,31 @@ Page({
       prevPage.data.obj.fieldGuideName=title;
       prevPage.data.obj.fieldGuideId=id;
     }else{
-      prevPage.setData({
-        [`fieldGuideData2[0].value`]:this.data.selectTitle,
-      })
-      prevPage.data.obj.associationActivity=this.data.selectId;
-      prevPage.data.obj.relationType = this.data.relationType;
+      if(this.data.showType == 1 || this.data.showType == 3){  // 关联活动/动态
+          var selectArr = [];
+          this.data.dataList.forEach(element => {
+            if(element.is_select){
+              selectArr.push({
+                 relevance_id:element.id,
+                 name:element.title,
+                 relation_type:element.type
+              })
+            }
+          });
+          // prevPage.setData({
+          //   [`fieldGuideData2[0].value`]:this.data.selectTitle,
+          // })
+          console.log(selectArr)
+          prevPage.data.obj.associationActivity=selectArr;
+          // prevPage.data.obj.relationType = this.data.relationType;
+      }else{
+        prevPage.setData({
+          [`fieldGuideData2[0].value`]:this.data.selectTitle,
+        })
+        prevPage.data.obj.associationActivity=this.data.selectId;
+        prevPage.data.obj.relationType = this.data.relationType;
+      }
+
     }
     console.log(prevPage.data.obj)
     wx.navigateBack({
