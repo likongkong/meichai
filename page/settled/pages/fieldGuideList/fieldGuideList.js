@@ -31,8 +31,8 @@ Page({
   onLoad: function (options) {
     this.data.listIndex = options.index || 0;
     this.data.brand_id = options.brand_id;
-
-    var showType = options.type || 1;
+    this.data.pagetype = options.pagetype || 0
+    var showType = options.type || '1';
 
     if(showType == 1){
       var c_title = '关联活动';
@@ -227,7 +227,7 @@ Page({
     console.log(prevPage.data.obj);
     console.log(prevPage.data.dynamicData);
     // return false;
-    if(this.data.showType == 2){  // 图鉴
+    if(this.data.pagetype == 1){  // 动态
       prevPage.setData({
         [`dynamicData[1].value`]:prevPage.data.obj.dynamicContent,
         [`dynamicData[2].imageList`]:prevPage.data.obj.dynamicPic,
