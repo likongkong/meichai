@@ -201,6 +201,7 @@ Page({
             dataList[i].is_select = false;
             this.data.selectTitle = '';
             this.data.selectId = '';
+            this.data.relationType = '';
           }else{
             dataList[i].is_select = true;
             this.data.selectTitle = e.currentTarget.dataset.title;
