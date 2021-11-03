@@ -201,10 +201,12 @@ Page({
             dataList[i].is_select = false;
             this.data.selectTitle = '';
             this.data.selectId = '';
+            this.data.relationType = '';
           }else{
             dataList[i].is_select = true;
             this.data.selectTitle = e.currentTarget.dataset.title;
             this.data.selectId = e.currentTarget.dataset.id;
+            this.data.relationType = dataList[i].type || '';
           };
        }else{
          dataList[i].is_select = false;
@@ -240,6 +242,7 @@ Page({
         [`fieldGuideData2[0].value`]:this.data.selectTitle,
       })
       prevPage.data.obj.associationActivity=this.data.selectId;
+      prevPage.data.obj.relationType = this.data.relationType;
     }
     console.log(prevPage.data.obj)
     wx.navigateBack({
