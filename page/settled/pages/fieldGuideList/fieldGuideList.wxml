@@ -20,7 +20,7 @@
       </view> -->
       <!-- 图鉴 -->
       <block wx:if='{{showType == 2 || showType == 3}}'>
-          <view class="fieldGuideWrap" data-title="{{item.title}}" data-id="{{item.id}}" catchtap="selectData">
+          <view class="fieldGuideWrap" data-title="{{item.title}}" data-id="{{item.id}}" data-index='{{index}}' catchtap="selectData">
             <view class="box" style="background:#fff;{{item.is_select?'border: 4rpx solid #5461F5;':''}}">
               <!-- 动态 -->
               <image class="typeNameImg" wx:if='{{showType == 3}}' src="https://cdn.51chaidan.com/images/brandSettledIcon/dynamic.jpg"  mode="widthFix"></image>
@@ -40,7 +40,7 @@
 
       <!-- 活动 -->
       <block wx:elif='{{showType == 1}}'>
-          <view class="fieldGuideWrap" data-title="{{item.title}}" data-id="{{item.id}}" catchtap="selectData">
+          <view class="fieldGuideWrap" data-title="{{item.title}}" data-id="{{item.id}}" data-index='{{index}}' catchtap="selectData">
               <view class="boxActivity" style="{{item.is_select?'border: 4rpx solid #5461F5;':''}}">
                   <!-- 限时 -->
                   <image wx:if='{{item.type == 1 && item.sellType == 1}}' class="typeNameTipActivity" src="https://cdn.51chaidan.com/images/brandSettledIcon/limitSeckill.jpg" mode="widthFix"></image>
