@@ -133,7 +133,8 @@ Component({
     showActionSheet(e){
       console.log(e)
       let index = e.currentTarget.dataset.index;
-      this.triggerEvent("showActionSheet",{index:index});
+      let name = e.currentTarget.dataset.name;
+      this.triggerEvent("showActionSheet",{index:index,name:name});
     },
     deleteitemImage(e){
       let name = e.currentTarget.dataset.name;
