@@ -376,15 +376,12 @@ Page({
     wx.showActionSheet({
       itemList: arr,
       success (res) {
-        let value;
         if(name == 'associationIp'){
-          value = `ipData[${index}].value`;
-        }else{
-          value = `fieldGuideData2[${index}].value`;
+          that.setData({
+            [`ipData[${index}].value`]:groups[res.tapIndex].name
+          })
         }
-        that.setData({
-          [value]:groups[res.tapIndex].name
-        })
+        
         if(name == 'associationIp'){
           that.data.obj.associationIp = groups[res.tapIndex].brand_id;
         }else{
