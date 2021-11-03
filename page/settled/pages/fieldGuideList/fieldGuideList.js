@@ -32,6 +32,7 @@ Page({
     this.data.listIndex = options.index || 0;
     this.data.brand_id = options.brand_id;
     this.data.pagetype = options.pagetype || 0
+    this.data.illustrated_id = options.illustrated_id || 0
     var showType = options.type || '';
 
     if(showType == 1){
@@ -144,7 +145,7 @@ Page({
       title: '加载中',
     })
     let that = this;
-    let data = `mod=community&operation=showActivityIllustrated&uid=${this.data.uid}&loginid=${this.data.loginid}&brand_id=${this.data.brand_id}&showType=${this.data.showType}&pid=${this.data.pid}`
+    let data = `mod=community&operation=showActivityIllustrated&uid=${this.data.uid}&loginid=${this.data.loginid}&brand_id=${this.data.brand_id}&showType=${this.data.showType}&pid=${this.data.pid}&illustrated_id=${this.data.illustrated_id}`
     var q = Dec.Aese(data);
     console.log(`${app.signindata.comurl}?${data}`)
     wx.request({
@@ -262,6 +263,7 @@ Page({
           // })
           console.log(selectArr)
           prevPage.data.obj.associationActivity=selectArr;
+          prevPage.relevanceData(selectArr);
           // prevPage.data.obj.relationType = this.data.relationType;
       }else{
         prevPage.setData({
