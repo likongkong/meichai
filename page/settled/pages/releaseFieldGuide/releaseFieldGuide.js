@@ -78,6 +78,17 @@ Page({
         borderbottom1:'hide'
       },
     ],
+    fieldGuideData2:[
+      {
+        isRequired:false,
+        type:'actionSheet',
+        item_type:9034,
+        groups:[{name:'关联活动',id:1},{name:'关联动态',id:3}],
+        subtitle:'关联动态/活动',
+        value:'点击关联',
+        name:'associationActivity'
+      }
+    ],
     obj:{},
   },
   /**
@@ -200,6 +211,7 @@ Page({
           this.setData({
             [groups]:res.data.List.brandInfoList,
           })
+          console.log(this.data.fieldGuideData2)
           if(this.data.id!=0){
             this.getData();
           }else{
@@ -346,20 +358,39 @@ Page({
   },
   // 获取IP数据
   showActionSheet(e){
+    console.log(e)
     let that= this;
     let index = e.detail.index;
-    let groups = this.data.ipData[index].groups;
+    let name = e.detail.name;
+    let groups;
+    if(name == 'associationIp'){
+      groups = this.data.ipData[index].groups;
+    }else{
+      groups = this.data.fieldGuideData2[index].groups;
+    }
     let arr = [];
     for(var i=0;i<groups.length;i++){
       arr.push(groups[i].name);
     }
+    console.log(groups)
     wx.showActionSheet({
       itemList: arr,
       success (res) {
+        let value;
+        if(name == 'associationIp'){
+          value = `ipData[${index}].value`;
+        }else{
+          value = `fieldGuideData2[${index}].value`;
+        }
         that.setData({
-          [`ipData[${index}].value`]:groups[res.tapIndex].name
+          [value]:groups[res.tapIndex].name
         })
-        that.data.obj.associationIp = groups[res.tapIndex].brand_id;
+        if(name == 'associationIp'){
+          that.data.obj.associationIp = groups[res.tapIndex].brand_id;
+        }else{
+          that.data.obj.associationActivity = groups[res.tapIndex].id;
+          that.comjumpwxnav1(that.data.fieldGuideData2[index].item_type,`type=${groups[res.tapIndex].id}&brand_id=${that.data.obj.associationIp}`);
+        }
         console.log(that.data.obj)
       },
       fail (res) {
@@ -423,6 +454,9 @@ Page({
   comjumpwxnav(e){
     let type = e.currentTarget.dataset.type;
     let whref = e.currentTarget.dataset.whref;
+    app.comjumpwxnav(type,whref)
+  },
+  comjumpwxnav1(type,whref){
     app.comjumpwxnav(type,whref)
   },
 })
