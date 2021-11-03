@@ -19,7 +19,8 @@ Page({
     dataList:[],
     listIndex:0,
     noData:false,
-    loadprompt:false
+    loadprompt:false,
+    showType:1 // 2 图鉴 3 动态 1 活动
   },
   /**
    * 生命周期函数--监听页面加载
@@ -28,8 +29,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.data.listIndex = options.index;
+    this.data.listIndex = options.index || 0;
     this.data.brand_id = options.brand_id;
+
+    var showType = options.type || 1;
+
+    if(showType == 1){
+      var c_title = '关联活动';
+    }else if(showType == 2){
+      var c_title = '关联图鉴';
+    }else if(showType == 3){
+      var c_title = '关联动态';
+    };
+    
+    this.setData({
+      c_title: c_title,
+      showType:showType
+    })
     // 判断是否授权
     this.activsign();
   },
@@ -128,7 +144,7 @@ Page({
       title: '加载中',
     })
     let that = this;
-    let data = `mod=community&operation=showActivityIllustrated&uid=${this.data.uid}&loginid=${this.data.loginid}&brand_id=${this.data.brand_id}&showType=2&pid=${this.data.pid}`
+    let data = `mod=community&operation=showActivityIllustrated&uid=${this.data.uid}&loginid=${this.data.loginid}&brand_id=${this.data.brand_id}&showType=${this.data.showType}&pid=${this.data.pid}`
     var q = Dec.Aese(data);
     console.log(`${app.signindata.comurl}?${data}`)
     wx.request({
@@ -149,6 +165,11 @@ Page({
             })
             app.showToastC('暂无更多数据了',1500);
           }else{
+            if(that.data.showType == 1){
+               for(var i=0; i<List.length; i++){
+                  List[i].end_time = util.toDate(List[i].end_time,2);
+               };
+            };
             that.setData({
               dataList:[...that.data.dataList,...List]
             })
@@ -204,15 +225,22 @@ Page({
     console.log(prevPage.data.obj);
     console.log(prevPage.data.dynamicData);
     // return false;
-    prevPage.setData({
-      [`dynamicData[1].value`]:prevPage.data.obj.dynamicContent,
-      [`dynamicData[2].imageList`]:prevPage.data.obj.dynamicPic,
-      [`dynamicData[${this.data.listIndex}].value`]:title,
-      [`dynamicData[4].value`]:prevPage.data.obj.allowComment,
-    })
-    prevPage.data.dynamicData[this.data.listIndex].value=title;
-    prevPage.data.obj.fieldGuideName=title;
-    prevPage.data.obj.fieldGuideId=id;
+    if(this.data.showType == 2){  // 图鉴
+      prevPage.setData({
+        [`dynamicData[1].value`]:prevPage.data.obj.dynamicContent,
+        [`dynamicData[2].imageList`]:prevPage.data.obj.dynamicPic,
+        [`dynamicData[${this.data.listIndex}].value`]:title,
+        [`dynamicData[4].value`]:prevPage.data.obj.allowComment,
+      })
+      prevPage.data.dynamicData[this.data.listIndex].value=title;
+      prevPage.data.obj.fieldGuideName=title;
+      prevPage.data.obj.fieldGuideId=id;
+    }else{
+      prevPage.setData({
+        [`fieldGuideData2[0].value`]:this.data.selectTitle,
+      })
+      prevPage.data.obj.associationActivity=this.data.selectId;
+    }
     console.log(prevPage.data.obj)
     wx.navigateBack({
       delta: 1
