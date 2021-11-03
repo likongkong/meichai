@@ -19,13 +19,13 @@
         </view>
       </view> -->
       <!-- 图鉴 -->
-      <block wx:if='{{true}}'>
+      <block wx:if='{{showType == 2 || showType == 3}}'>
           <view class="fieldGuideWrap" data-title="{{item.title}}" data-id="{{item.id}}" catchtap="selectData">
             <view class="box" style="background:#fff;{{item.is_select?'border: 4rpx solid #5461F5;':''}}">
               <!-- 动态 -->
-              <!-- <image class="typeNameImg" src="https://cdn.51chaidan.com/images/brandSettledIcon/dynamic.jpg"  mode="widthFix"></image> -->
+              <image class="typeNameImg" wx:if='{{showType == 3}}' src="https://cdn.51chaidan.com/images/brandSettledIcon/dynamic.jpg"  mode="widthFix"></image>
               <!-- 图鉴 -->
-              <image class="typeNameImg" src="https://cdn.51chaidan.com/images/brandSettledIcon/illustrated.jpg"  mode="widthFix"></image>
+              <image class="typeNameImg" wx:if='{{showType == 2}}' src="https://cdn.51chaidan.com/images/brandSettledIcon/illustrated.jpg"  mode="widthFix"></image>
               <view class="fieldGuidePicWrap">
                 <scroll-view scroll-x>  
                   <block wx:for="{{item.imgArr}}" wx:key='key' wx:for-item="sonItem">
@@ -39,17 +39,25 @@
       </block>
 
       <!-- 活动 -->
-      <!-- <view class="fieldGuideWrap">
-          <view class="boxActivity" style="{{index%2==1?'border: 4rpx solid #5461F5;':''}}">
-              <image class="typeNameTipActivity" src="https://cdn.51chaidan.com/images/brandSettledIcon/selection.jpg"  mode="widthFix"></image>
-              <image class="typeNameImgActivity" src="{{item.imgArr[0]}}"  mode="widthFix"></image>
-              <view class="activityTitle">{{item.title}}</view>
-              <view class="activityPriceTime">
-                  <view>￥99.00</view>
-                  <view>02/15 12:00:00结束</view>
+      <block wx:elif='{{showType == 1}}'>
+          <view class="fieldGuideWrap" data-title="{{item.title}}" data-id="{{item.id}}" catchtap="selectData">
+              <view class="boxActivity" style="{{item.is_select?'border: 4rpx solid #5461F5;':''}}">
+                  <!-- 限时 -->
+                  <image wx:if='{{item.type == 1 && item.sellType == 1}}' class="typeNameTipActivity" src="https://cdn.51chaidan.com/images/brandSettledIcon/limitSeckill.jpg" mode="widthFix"></image>
+                  <!-- 限量 -->
+                  <image wx:elif='{{item.type == 1 && item.sellType == 0}}' class="typeNameTipActivity" src="https://cdn.51chaidan.com/images/brandSettledIcon/normalSeckill.jpg" mode="widthFix"></image>
+                  <!-- 抽选 -->
+                  <image class="typeNameTipActivity" wx:if='{{item.type == 2}}' src="https://cdn.51chaidan.com/images/brandSettledIcon/selection.jpg"  mode="widthFix"></image>
+                  <image class="typeNameImgActivity" src="{{item.imgArr[0]}}"  mode="widthFix"></image>
+                  <view class="activityTitle">{{item.title}}</view>
+                  <view class="activityPriceTime">
+                      <view>￥{{item.price}}</view>
+                      <view>{{item.end_time}}结束</view>
+                  </view>
               </view>
           </view>
-      </view> -->
+      </block>
+
 
 
     </block>
