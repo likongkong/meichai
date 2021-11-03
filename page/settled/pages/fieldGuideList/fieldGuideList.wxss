@@ -1,5 +1,6 @@
 page{
   padding-bottom: 150rpx;
+  background: #f4f5f9;
 }
 .nodatatu{
   width: 50%;
@@ -30,6 +31,7 @@ page{
   background-image: linear-gradient(to top right, #FDA486, #7F2B52);
   padding:15rpx 24rpx;
   box-sizing: border-box;
+  border: 4rpx solid #fff;
 }
 .typeName{
   display: block;
@@ -54,8 +56,89 @@ page{
   width: 180rpx;
   height: 180rpx;
   margin-right: 20rpx;
+  border-radius: 6rpx;
   /* display: block; */
 }
 .fieldGuidePicWrap image:last-child{
   margin-right: 0;
 }
+
+/*       --------------------         */
+.typeNameImg{
+  width: 72rpx;
+  display: block;
+  border-radius: 6rpx;
+}
+.boxActivity{
+  border: 4rpx solid #fff;
+  background: #fff;
+  border-radius: 10rpx;
+  position: relative;
+}
+.typeNameImgActivity{
+  width: 100%;
+  display: block;
+  border-radius: 10rpx 10rpx 0 0;
+}
+.activityTitle{
+  padding: 10rpx 20rpx;
+  font-size: 28rpx;
+}
+.activityPriceTime{
+  display: flex;
+  justify-content:space-between;
+  font-size: 28rpx;
+  padding: 0 20rpx 20rpx 20rpx;
+}
+.typeNameTipActivity{
+  width: 82rpx;
+  border-radius: 6rpx;
+  position: absolute;
+  top: 15rpx;
+  left: 15rpx;
+  z-index: 3;
+}
+.footerWrap{
+  padding: 20rpx 35rpx 40rpx 35rpx;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  position:fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f4f5f9;
+  z-index: 10;
+}
+.footerWrap view{
+  height: 76rpx;
+  line-height: 76rpx;
+  text-align: center;
+  font-size: 24rpx;
+  border-radius: 10rpx;
+}
+.footerWrap view:first-child{
+  width: 26%;
+  border: 2rpx solid #90D2D6;
+  color: #90D2D6;
+  background: #ffffff;
+}
+.footerWrap view:last-child{
+  width: 70%;
+  height: 80rpx;
+  background: #90D2D6;
+  color: #ffffff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

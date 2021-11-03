@@ -4,7 +4,7 @@
 <view class="wrap">
   <block wx:if="{{dataList.length!=0}}">
     <block wx:for="{{dataList}}" wx:key='key'>
-      <view class="fieldGuideWrap" data-title="{{item.title}}" data-id="{{item.id}}" catchtap="chooseFieldGuide">
+      <!-- <view class="fieldGuideWrap" data-title="{{item.title}}" data-id="{{item.id}}" catchtap="chooseFieldGuide">
         <text class="title">{{item.brandName}}</text>
         <view class="box">
           <text class="typeName">图鉴</text>
@@ -17,7 +17,41 @@
           </view>
           <text class="brandName">{{item.title}}</text>
         </view>
-      </view>
+      </view> -->
+      <!-- 图鉴 -->
+      <block wx:if='{{true}}'>
+          <view class="fieldGuideWrap" data-title="{{item.title}}" data-id="{{item.id}}" catchtap="selectData">
+            <view class="box" style="background:#fff;{{item.is_select?'border: 4rpx solid #5461F5;':''}}">
+              <!-- 动态 -->
+              <!-- <image class="typeNameImg" src="https://cdn.51chaidan.com/images/brandSettledIcon/dynamic.jpg"  mode="widthFix"></image> -->
+              <!-- 图鉴 -->
+              <image class="typeNameImg" src="https://cdn.51chaidan.com/images/brandSettledIcon/illustrated.jpg"  mode="widthFix"></image>
+              <view class="fieldGuidePicWrap">
+                <scroll-view scroll-x>  
+                  <block wx:for="{{item.imgArr}}" wx:key='key' wx:for-item="sonItem">
+                    <image src="{{sonItem}}" mode="aspectFill"></image>
+                  </block>
+                </scroll-view>
+              </view>
+              <text class="brandName" style="color:#000;">{{item.title}}</text>
+            </view>
+          </view>
+      </block>
+
+      <!-- 活动 -->
+      <!-- <view class="fieldGuideWrap">
+          <view class="boxActivity" style="{{index%2==1?'border: 4rpx solid #5461F5;':''}}">
+              <image class="typeNameTipActivity" src="https://cdn.51chaidan.com/images/brandSettledIcon/selection.jpg"  mode="widthFix"></image>
+              <image class="typeNameImgActivity" src="{{item.imgArr[0]}}"  mode="widthFix"></image>
+              <view class="activityTitle">{{item.title}}</view>
+              <view class="activityPriceTime">
+                  <view>￥99.00</view>
+                  <view>02/15 12:00:00结束</view>
+              </view>
+          </view>
+      </view> -->
+
+
     </block>
   </block>
   <view class='noDataCom' wx:if="{{noData}}">
@@ -25,3 +59,9 @@
   </view>
 
 </view> 
+
+
+<view class="footerWrap">
+    <view data-num="1" catchtap="navigateBack">返回</view>
+    <view catchtap="chooseFieldGuide">确认</view>
+</view>

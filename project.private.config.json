@@ -188,9 +188,9 @@
           "scene": null
         },
         {
-          "name": "page/settled/pages/myWallet/myWallet",
-          "pathName": "page/settled/pages/myWallet/myWallet",
-          "query": "",
+          "name": "关联图鉴",
+          "pathName": "page/settled/pages/fieldGuideList/fieldGuideList",
+          "query": "index=3&brand_id=1112",
           "scene": null
         },
         {

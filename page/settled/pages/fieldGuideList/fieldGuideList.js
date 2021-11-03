@@ -164,9 +164,40 @@ Page({
       }
     });
   },
+  navigateBack(){
+    wx.navigateBack({
+      delta: 1
+    })  
+  },
+
+  // 选中数据
+  selectData(e){
+    var id = e.currentTarget.dataset.id;
+    var dataList = this.data.dataList || [];
+    for(var i = 0 ; i < dataList.length ; i++){
+       if(dataList[i].id == id){
+          if(dataList[i].is_select){
+            dataList[i].is_select = false;
+            this.data.selectTitle = '';
+            this.data.selectId = '';
+          }else{
+            dataList[i].is_select = true;
+            this.data.selectTitle = e.currentTarget.dataset.title;
+            this.data.selectId = e.currentTarget.dataset.id;
+          };
+       }else{
+         dataList[i].is_select = false;
+       };
+    };
+    this.setData({
+      dataList
+    })
+    console.log(id,dataList)
+
+  },
   chooseFieldGuide(e){
-    let title = e.currentTarget.dataset.title;
-    let id = e.currentTarget.dataset.id;
+    let title = this.data.selectTitle;
+    let id = this.data.selectId;
     let pages = getCurrentPages();    //获取当前页面信息栈
     let prevPage = pages[pages.length-2];
 
