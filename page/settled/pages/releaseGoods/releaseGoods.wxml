@@ -19,6 +19,18 @@
     bind:bindchange="bindchange">
     </settledForm>
   </view>
+
+  <view class="card">
+    <settledForm 
+    id="settledForm4"
+    form="dynamicContent"
+    statusBarHeightMc="{{statusBarHeightMc}}"
+    list="{{fieldGuideData2}}"
+    bind:bindchange="bindchange"
+    bind:showActionSheet="showActionSheet">
+    </settledForm>
+  </view>
+
   <view class="title">
     发售设置
   </view>

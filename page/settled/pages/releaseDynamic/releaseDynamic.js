@@ -42,6 +42,8 @@ Page({
         isRequired:false,
         type:'link',
         brand_id:'',
+        jumpType:2,
+        pagetype:1,
         item_type:9034,
         subtitle:'关联图鉴',
         value:'点击关联',
