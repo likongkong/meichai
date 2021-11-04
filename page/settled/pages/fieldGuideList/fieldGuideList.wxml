@@ -48,7 +48,7 @@
                   <image wx:elif='{{item.type == 1 && item.sellType == 0}}' class="typeNameTipActivity" src="https://cdn.51chaidan.com/images/brandSettledIcon/normalSeckill.jpg" mode="widthFix"></image>
                   <!-- 抽选 -->
                   <image class="typeNameTipActivity" wx:if='{{item.type == 2}}' src="https://cdn.51chaidan.com/images/brandSettledIcon/selection.jpg"  mode="widthFix"></image>
-                  <image class="typeNameImgActivity" src="{{item.imgArr[0]}}"  mode="widthFix"></image>
+                  <image class="typeNameImgActivity" src="{{item.imgArr[0]}}"  mode="aspectFill" style="height:354rpx;width:100%;"></image>
                   <view class="activityTitle">{{item.title}}</view>
                   <view class="activityPriceTime">
                       <view>￥{{item.price}}</view>

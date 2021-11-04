@@ -83,6 +83,7 @@ Page({
         isRequired:false,
         type:'actionSheet',
         item_type:9034,
+        selectArr:[],
         groups:[{name:'关联活动',id:1},{name:'关联动态',id:3}],
         subtitle:'关联动态/活动',
         value:'点击关联',
@@ -90,6 +91,8 @@ Page({
       }
     ],
     obj:{},
+    dynamicArr:[],
+    activityArr:[]
   },
   /**
    * 生命周期函数--监听页面加载
@@ -248,6 +251,7 @@ Page({
         console.log(res);
         if(res.data.ReturnCode == 200){
           let info = res.data.Info;
+          let list = res.data.List;
           let obj = this.data.obj;
           this.setData({
             [`ipData[0].value`]:info.brandName,
@@ -258,6 +262,15 @@ Page({
             [`fieldGuideData1[2].value`]:info.sell_way.split('hc').join('\n'),
             [`fieldGuideData1[3].value`]:info.description.split('hc').join('\n'),
           })
+
+          for(var i=0; i<list.relevanceInfo.length; i++){
+            if(list.relevanceInfo[i].relation_type == 3){
+              this.data.dynamicArr.push(list.relevanceInfo[i])
+            }else{
+              this.data.activityArr.push(list.relevanceInfo[i])
+            }
+          }
+          this.relevanceData(list.relevanceInfo)
           obj.associationIp = info.brand_id;
           obj.fieldGuideTitle = info.title;
           obj.fieldGuidePic = info.imgArr;
@@ -265,6 +278,7 @@ Page({
           obj.goodsNum = info.number;
           obj.sellingway = info.sell_way;
           obj.fieldGuideDescription = info.description;
+          obj.associationActivity = list.relevanceInfo;
         }else{
           app.showToastC(res.data.Msg,2000);
         }
@@ -309,7 +323,7 @@ Page({
 
     let sellingway = obj.sellingway?encodeURIComponent(obj.sellingway.split('\n').join('hc')):'';
     let fieldGuideDescription = obj.fieldGuideDescription?encodeURIComponent(obj.fieldGuideDescription.split('\n').join('hc')):'';
-    let data = `mod=community&operation=establishImages&uid=${this.data.uid}&loginid=${this.data.loginid}&brand_id=${obj.associationIp}&title=${obj.fieldGuideTitle}&price=${obj.goodsPrice}&number=${obj.goodsNum}&sell_way=${sellingway}&description=${fieldGuideDescription}&imgArr=${obj.fieldGuidePic}&id=${this.data.id}&relevance_id=${obj.associationActivity}&relevance_type=${obj.relationType}`
+    let data = `mod=community&operation=establishImages&uid=${this.data.uid}&loginid=${this.data.loginid}&brand_id=${obj.associationIp}&title=${obj.fieldGuideTitle}&price=${obj.goodsPrice}&number=${obj.goodsNum}&sell_way=${sellingway}&description=${fieldGuideDescription}&imgArr=${obj.fieldGuidePic}&id=${this.data.id}&relevanceInfo=${obj.associationActivity?JSON.stringify(obj.associationActivity):''}`
     var q = Dec.Aese(data);
     console.log(`${app.signindata.comurl}?${data}`)
     wx.request({
@@ -385,8 +399,9 @@ Page({
         if(name == 'associationIp'){
           that.data.obj.associationIp = groups[res.tapIndex].brand_id;
         }else{
-          that.data.obj.associationActivity = groups[res.tapIndex].id;
-          that.comjumpwxnav1(that.data.fieldGuideData2[index].item_type,`type=${groups[res.tapIndex].id}&brand_id=${that.data.obj.associationIp}&illustrated_id=${this.data.id}`);
+          // that.data.obj.associationActivity = groups[res.tapIndex].id;
+          // console.log(that.data.obj.associationActivity);
+          that.comjumpwxnav1(that.data.fieldGuideData2[index].item_type,`type=${groups[res.tapIndex].id}&brand_id=${that.data.obj.associationIp}&illustrated_id=${that.data.id}&selectedArr=${JSON.stringify(that.data.obj.associationActivity)}`);
         }
         console.log(that.data.obj)
       },
@@ -395,7 +410,24 @@ Page({
       }
     })
   },
-
+  relevanceData(arr,showType = 0){
+    if(showType == 1){
+      this.data.activityArr = arr;
+    }else if(showType == 3){
+      this.data.dynamicArr = arr;
+    }
+    let all = showType==0?arr:[...this.data.activityArr,...this.data.dynamicArr];
+    this.data.obj.associationActivity = all;
+    if(all.length==1){
+      this.setData({
+        [`fieldGuideData2[0].value`]:all[0].name
+      })
+    }else if(all.length>1){
+      this.setData({
+        [`fieldGuideData2[0].value`]:`已关联${all.length}条`
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

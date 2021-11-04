@@ -131,6 +131,7 @@ Page({
         isRequired:false,
         type:'link',
         brand_id:'',
+        selectedArr:[],
         jumpType:2,
         pagetype:0,
         item_type:9034,
@@ -427,6 +428,8 @@ Page({
           [`listData1[6].value`]:info.limitBuy,
           [`listData1[7].value`]:info.integral,
           [`listData1[8].imageList`]:info.arrGoodsDescImg,
+          [`fieldGuideData2[0].value`]:info.illustratedInfo[0].title,
+          [`fieldGuideData2[0].selectedArr`]:JSON.stringify(info.illustratedInfo),
           // [`listData2[0].groupsIndex`]:info.logisticsIndex,
           [`listData2[0].radioArr[${info.shippingMothed}].groupsIndex`]:info.logisticsIndex,
           [`listData2[0].index`]:info.shippingMothed,
@@ -472,6 +475,7 @@ Page({
         obj.purchaseLimitationNum = info.limitBuy;
         obj.integrate = info.integral;
         obj.goodsDetailsPic = info.arrGoodsDescImg;
+        obj.fieldGuideId = info.illustratedInfo[0].id;
         obj.logisticsIndex = info.logisticsIndex,
         obj.modeOfDespatch = info.shippingMothed,
         obj.shipping = info.shipping;
@@ -533,6 +537,11 @@ Page({
       app.showToastC('请输入当前可售库存数',1500);
       return false;
     }
+    // if(!obj.goodsDetailsPic || obj.goodsDetailsPic.length == 0){
+    //   this.selectComponent('#settledForm1').scrollto('goodsDetailsPic');
+    //   app.showToastC('请添加商品详情图',1500);
+    //   return false;
+    // }
     if(!obj.logisticsIndex || obj.logisticsIndex == []){
       this.selectComponent('#settledForm2').scrollto('modeOfDespatch');
       app.showToastC('请选择发货方式',1500);
@@ -586,6 +595,7 @@ console.log(obj.modeOfDespatch)
       goodsDescStr: obj.goodsDescribe,
       integral:obj.integrate,
       arrGoodsDescImg:obj.goodsDetailsPic,
+      illustrated_id:obj.fieldGuideId || '',
       stock:obj.goodsStock,
       isShowStock:obj.isGoodsStock==0?1:0,
       isShowSellNumber:obj.isSoldNum==0?1:0,

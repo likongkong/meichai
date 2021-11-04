@@ -42,6 +42,7 @@ Page({
         isRequired:false,
         type:'link',
         brand_id:'',
+        selectedArr:[],
         jumpType:2,
         pagetype:1,
         item_type:9034,
@@ -224,14 +225,15 @@ Page({
             [`dynamicData[0].value`]:info.brandName,
             [`dynamicData[1].value`]:info.title.split('hc').join('\n'),
             [`dynamicData[2].imageList`]:info.imgArr,
-            [`dynamicData[3].value`]:List.illustratedInfo.title,
-            // [`dynamicData[4].value`]:info.allow_comment_type,
+            [`dynamicData[3].value`]:List.illustratedInfo[0].title,
+            [`dynamicData[3].selectedArr`]:JSON.stringify(List.illustratedInfo),
+          // [`dynamicData[4].value`]:info.allow_comment_type,
             
           })
           obj.associationIp = info.brand_id;
           obj.dynamicContent = info.title;
           obj.dynamicPic = info.imgArr;
-          obj.fieldGuideId = List.illustratedInfo.id;
+          obj.fieldGuideId = List.illustratedInfo[0].id;
           // obj.allowComment = info.allow_comment_type;
         }else{
           app.showToastC(res.data.Msg,2000);

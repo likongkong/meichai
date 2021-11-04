@@ -29,10 +29,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     this.data.listIndex = options.index || 0;
     this.data.brand_id = options.brand_id;
-    this.data.pagetype = options.pagetype || 0
-    this.data.illustrated_id = options.illustrated_id || 0
+    this.data.pagetype = options.pagetype || 0;
+    this.data.illustrated_id = options.illustrated_id || 0;
+    this.data.selectedArr = options.selectedArr && options.selectedArr!='undefined'?JSON.parse(options.selectedArr):[];
     var showType = options.type || '';
 
     if(showType == 1){
@@ -153,7 +155,7 @@ Page({
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: (res) => { 
-        console.log(res);
+        // console.log(res);
         if(res.data.ReturnCode == 200){
           let List =res.data.List;
           if(that.data.pid==0 && List.length == 0){
@@ -166,6 +168,31 @@ Page({
             })
             app.showToastC('暂无更多数据了',1500);
           }else{
+            if(that.data.showType == 1 || that.data.showType == 3){ //关联动态/活动
+              for(var i=0; i<List.length; i++){
+                for(var j=0; j<that.data.selectedArr.length; j++){
+                  if(that.data.showType == 1){
+                    if(List[i].id == that.data.selectedArr[j].relevance_id && List[i].type == that.data.selectedArr[j].relation_type){
+                      List[i].is_select = true
+                    }
+                  }else{
+                    if(List[i].id == that.data.selectedArr[j].relevance_id){
+                      List[i].is_select = true
+                    }
+                  }
+                }
+              }
+            }else{ //关联图鉴
+              for(var i=0; i<List.length; i++){
+                for(var j=0; j<that.data.selectedArr.length; j++){
+                  if(List[i].id == that.data.selectedArr[j].id){
+                    List[i].is_select = true
+                  }
+                }
+              }
+            }
+            
+
             if(that.data.showType == 1){
                for(var i=0; i<List.length; i++){
                   List[i].end_time = util.toDate(List[i].end_time,2);
@@ -174,6 +201,7 @@ Page({
             that.setData({
               dataList:[...that.data.dataList,...List]
             })
+            console.log(that.data.dataList)
           }
         }else{
           app.showToastC(res.data.Msg,2000);
@@ -258,19 +286,29 @@ Page({
               })
             }
           });
-          // prevPage.setData({
-          //   [`fieldGuideData2[0].value`]:this.data.selectTitle,
-          // })
           console.log(selectArr)
           prevPage.data.obj.associationActivity=selectArr;
-          prevPage.relevanceData(selectArr);
-          // prevPage.data.obj.relationType = this.data.relationType;
+          prevPage.relevanceData(selectArr,this.data.showType);
       }else{
+        var selectArr = [];
+        this.data.dataList.forEach(element => {
+          if(element.is_select){
+            selectArr.push({
+               id:element.id,
+               title:element.title
+            })
+          }
+        });
+        // prevPage.setData({
+        //   [`fieldGuideData2[0].value`]:this.data.selectTitle,
+        // })
+        console.log(selectArr)
         prevPage.setData({
           [`fieldGuideData2[0].value`]:this.data.selectTitle,
+          [`fieldGuideData2[0].selectedArr`]:JSON.stringify(selectArr),
         })
-        prevPage.data.obj.associationActivity=this.data.selectId;
-        prevPage.data.obj.relationType = this.data.relationType;
+        prevPage.data.obj.fieldGuideId=this.data.selectId;
+        // prevPage.data.obj.relationType = this.data.relationType;
       }
 
     }

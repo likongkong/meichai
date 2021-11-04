@@ -56,7 +56,7 @@ Page({
     var id = w.currentTarget.dataset.id || w.target.dataset.id || '';
     var type = w.currentTarget.dataset.type || w.target.dataset.type || '';
     if(type == 1){
-      var item_type = 1;
+      var item_type = 9047;
     }else if(type == 2){
       var item_type = 9003;
     }else if(type == 3){
