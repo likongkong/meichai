@@ -1,0 +1,5 @@
+@import "/common/tabbar.wxss";
+@import "/common/citysel.wxss";
+page{
+  background:#f4f5f9;
+}
