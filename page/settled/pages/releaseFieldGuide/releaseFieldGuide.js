@@ -309,7 +309,7 @@ Page({
 
     let sellingway = obj.sellingway?encodeURIComponent(obj.sellingway.split('\n').join('hc')):'';
     let fieldGuideDescription = obj.fieldGuideDescription?encodeURIComponent(obj.fieldGuideDescription.split('\n').join('hc')):'';
-    let data = `mod=community&operation=establishImages&uid=${this.data.uid}&loginid=${this.data.loginid}&brand_id=${obj.associationIp}&title=${obj.fieldGuideTitle}&price=${obj.goodsPrice}&number=${obj.goodsNum}&sell_way=${sellingway}&description=${fieldGuideDescription}&imgArr=${obj.fieldGuidePic}&id=${this.data.id}`
+    let data = `mod=community&operation=establishImages&uid=${this.data.uid}&loginid=${this.data.loginid}&brand_id=${obj.associationIp}&title=${obj.fieldGuideTitle}&price=${obj.goodsPrice}&number=${obj.goodsNum}&sell_way=${sellingway}&description=${fieldGuideDescription}&imgArr=${obj.fieldGuidePic}&id=${this.data.id}&relevance_id=${obj.associationActivity}&relevance_type=${obj.relationType}`
     var q = Dec.Aese(data);
     console.log(`${app.signindata.comurl}?${data}`)
     wx.request({
@@ -386,7 +386,7 @@ Page({
           that.data.obj.associationIp = groups[res.tapIndex].brand_id;
         }else{
           that.data.obj.associationActivity = groups[res.tapIndex].id;
-          that.comjumpwxnav1(that.data.fieldGuideData2[index].item_type,`type=${groups[res.tapIndex].id}&brand_id=${that.data.obj.associationIp}`);
+          that.comjumpwxnav1(that.data.fieldGuideData2[index].item_type,`type=${groups[res.tapIndex].id}&brand_id=${that.data.obj.associationIp}&illustrated_id=${this.data.id}`);
         }
         console.log(that.data.obj)
       },

@@ -126,6 +126,19 @@ Page({
         storagelocation:'images/goods'
       },
     ],
+    fieldGuideData2:[
+      {
+        isRequired:false,
+        type:'link',
+        brand_id:'',
+        jumpType:2,
+        pagetype:0,
+        item_type:9034,
+        subtitle:'关联图鉴',
+        value:'点击关联',
+        name:'associationActivity',
+      }
+    ],
     listData2:[
       {
         isRequired:true,

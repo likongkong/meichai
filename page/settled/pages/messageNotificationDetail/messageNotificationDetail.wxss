@@ -29,10 +29,12 @@ page{
 }
 .author{
   font-size: 28rpx;
-  color: #000;
+  color: #909090;
+  margin: 20rpx 0;
+  display: inline-block;
 }
 .messageTime{
   font-size: 28rpx;
   color: #909090;
-  margin-left: 46rpx;
+  margin-left: 12rpx;
 }
