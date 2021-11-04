@@ -194,8 +194,8 @@
           "scene": null
         },
         {
-          "name": "pages/dismantlingbox/dismantlingbox",
-          "pathName": "pages/dismantlingbox/dismantlingbox",
+          "name": "TIM及时通讯",
+          "pathName": "page/settled/pages/timHomePage/timHomePage",
           "query": "",
           "scene": null
         },
