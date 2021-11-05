@@ -258,6 +258,12 @@
           "pathName": "page/settled/pages/dynamicDetails/dynamicDetails",
           "query": "did=8118",
           "scene": null
+        },
+        {
+          "name": "抽盒机列表",
+          "pathName": "pages/smokeboxlist/smokeboxlist",
+          "query": "",
+          "scene": null
         }
       ]
     }

@@ -20,6 +20,7 @@ Page({
         isRequired:false,
         type:'actionSheet',
         groups:[],
+        disabled:false,
         subtitle:'关联IP',
         value:'点击关联',
         name:'associationIp'
@@ -214,9 +215,11 @@ Page({
           this.setData({
             [groups]:res.data.List.brandInfoList,
           })
-          console.log(this.data.fieldGuideData2)
           if(this.data.id!=0){
             this.getData();
+            this.setData({
+              [`ipData[0].disabled`]:true
+            })
           }else{
             wx.hideLoading()
             wx.stopPullDownRefresh();
@@ -372,7 +375,6 @@ Page({
   },
   // 获取IP数据
   showActionSheet(e){
-    console.log(e)
     let that= this;
     let index = e.detail.index;
     let name = e.detail.name;
@@ -392,10 +394,16 @@ Page({
       success (res) {
         if(name == 'associationIp'){
           that.setData({
+            activityArr:[],
+            dynamicArr:[],
+            [`fieldGuideData2[0].value`]:`点击关联`,
+          })
+          that.data.obj.associationActivity = '';
+
+          that.setData({
             [`ipData[${index}].value`]:groups[res.tapIndex].name
           })
         }
-        
         if(name == 'associationIp'){
           that.data.obj.associationIp = groups[res.tapIndex].brand_id;
         }else{
@@ -409,6 +417,7 @@ Page({
         console.log(res.errMsg)
       }
     })
+    console.log(this.data.obj)
   },
   relevanceData(arr,showType = 0){
     if(showType == 1){
@@ -425,6 +434,10 @@ Page({
     }else if(all.length>1){
       this.setData({
         [`fieldGuideData2[0].value`]:`已关联${all.length}条`
+      })
+    }else if(all.length==0){
+      this.setData({
+        [`fieldGuideData2[0].value`]:`点击关联`
       })
     }
   },

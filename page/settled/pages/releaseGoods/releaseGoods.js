@@ -18,6 +18,7 @@ Page({
         isRequired:false,
         type:'actionSheet',
         groups:[],
+        disabled:false,
         subtitle:'商品关联IP',
         value:'点击关联',
         name:'associationIp'
@@ -367,12 +368,16 @@ Page({
         })
         if(this.data.id&&this.data.id!=0){
           this.getData();
+          this.setData({
+            [`listData[0].disabled`]:true
+          })
         }else{
           wx.hideLoading()
           wx.stopPullDownRefresh();
           console.log(this.data.listData[0])
           this.setData({
-            [`listData[0].value`]:res.data.data.List.brand[0].brandName
+            [`listData[0].value`]:res.data.data.List.brand[0].brandName,
+            [`fieldGuideData2[0].brand_id`]:res.data.data.List.brand[0].brandId,
           })
           this.data.obj.associationIp = res.data.data.List.brand[0].brandId;
         }
@@ -397,9 +402,15 @@ Page({
     wx.showActionSheet({
       itemList: arr,
       success (res) {
+        
+        // that.data.obj.associationActivity = '';
         that.setData({
-          [`listData[${index}].value`]:groups[res.tapIndex].brandName
+          [`fieldGuideData2[0].value`]:`点击关联`,
+          [`fieldGuideData2[0].selectedArr`]:[],
+          [`listData[${index}].value`]:groups[res.tapIndex].brandName,
+          [`fieldGuideData2[0].brand_id`]:groups[res.tapIndex].brandId
         })
+        that.data.obj.fieldGuideId = '';
         that.data.obj.associationIp = groups[res.tapIndex].brandId;
         console.log(that.data.obj)
       },
@@ -428,8 +439,9 @@ Page({
           [`listData1[6].value`]:info.limitBuy,
           [`listData1[7].value`]:info.integral,
           [`listData1[8].imageList`]:info.arrGoodsDescImg,
-          [`fieldGuideData2[0].value`]:info.illustratedInfo[0].title,
-          [`fieldGuideData2[0].selectedArr`]:JSON.stringify(info.illustratedInfo),
+          [`fieldGuideData2[0].value`]:info.illustratedInfo && info.illustratedInfo.length>0?info.illustratedInfo[0].title:'',
+          [`fieldGuideData2[0].selectedArr`]:info.illustratedInfo && info.illustratedInfo.length>0?JSON.stringify(info.illustratedInfo):'',
+          [`fieldGuideData2[0].brand_id`]:info.brand.brandId,
           // [`listData2[0].groupsIndex`]:info.logisticsIndex,
           [`listData2[0].radioArr[${info.shippingMothed}].groupsIndex`]:info.logisticsIndex,
           [`listData2[0].index`]:info.shippingMothed,
@@ -475,7 +487,7 @@ Page({
         obj.purchaseLimitationNum = info.limitBuy;
         obj.integrate = info.integral;
         obj.goodsDetailsPic = info.arrGoodsDescImg;
-        obj.fieldGuideId = info.illustratedInfo[0].id;
+        obj.fieldGuideId = info.illustratedInfo && info.illustratedInfo.length>0?info.illustratedInfo[0].id:'';
         obj.logisticsIndex = info.logisticsIndex,
         obj.modeOfDespatch = info.shippingMothed,
         obj.shipping = info.shipping;

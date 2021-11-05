@@ -21,7 +21,11 @@
       <!-- 图鉴 -->
       <block wx:if='{{showType == 2 || showType == 3}}'>
           <view class="fieldGuideWrap" data-title="{{item.title}}" data-id="{{item.id}}" data-index='{{index}}' catchtap="selectData">
-            <view class="box" style="background:#fff;{{item.is_select?'border: 4rpx solid #5461F5;':''}}">
+            <view class="box" style="background:#fff;{{item.is_select?'border: 4rpx solid #5461F5;':''}};position:relative;">
+              <!-- 选中蒙层 -->
+              <view wx:if="{{item.is_select}}" class="selectedIcon"> 
+                <image src="https://cdn.51chaidan.com/images/brandSettledIcon/greenSelected.png" mode="widthFix"></image>
+              </view>
               <!-- 动态 -->
               <image class="typeNameImg" wx:if='{{showType == 3}}' src="https://cdn.51chaidan.com/images/brandSettledIcon/dynamic.jpg"  mode="widthFix"></image>
               <!-- 图鉴 -->
@@ -41,7 +45,11 @@
       <!-- 活动 -->
       <block wx:elif='{{showType == 1}}'>
           <view class="fieldGuideWrap" data-title="{{item.title}}" data-id="{{item.id}}" data-index='{{index}}' catchtap="selectData">
-              <view class="boxActivity" style="{{item.is_select?'border: 4rpx solid #5461F5;':''}}">
+              <view class="boxActivity" style="{{item.is_select?'border: 4rpx solid #5461F5;':''}};position:relative;">
+                  <!-- 选中蒙层 -->
+                  <view wx:if="{{item.is_select}}" class="selectedIcon"> 
+                    <image src="https://cdn.51chaidan.com/images/brandSettledIcon/greenSelected.png" mode="widthFix"></image>
+                  </view>
                   <!-- 限时 -->
                   <image wx:if='{{item.type == 1 && item.sellType == 1}}' class="typeNameTipActivity" src="https://cdn.51chaidan.com/images/brandSettledIcon/limitSeckill.jpg" mode="widthFix"></image>
                   <!-- 限量 -->

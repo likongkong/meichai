@@ -18,6 +18,7 @@ Page({
         isRequired:false,
         type:'actionSheet',
         groups:[],
+        disabled:false,
         subtitle:'商品关联IP',
         value:'点击关联',
         name:'associationIp'
@@ -427,12 +428,16 @@ Page({
         })
         if(this.data.id&&this.data.id!=0){
           this.getData();
+          this.setData({
+            [`listData[0].disabled`]:true
+          })
         }else{
           wx.hideLoading()
           wx.stopPullDownRefresh();
           console.log(this.data.listData[0])
           this.setData({
-            [`listData[0].value`]:res.data.data.List.brand[0].brandName
+            [`listData[0].value`]:res.data.data.List.brand[0].brandName,
+            [`fieldGuideData2[0].brand_id`]:res.data.data.List.brand[0].brandId
           })
           this.data.obj.associationIp = res.data.data.List.brand[0].brandId;
         }
@@ -458,8 +463,12 @@ Page({
       itemList: arr,
       success (res) {
         that.setData({
-          [`listData[${index}].value`]:groups[res.tapIndex].brandName
+          [`fieldGuideData2[0].value`]:`点击关联`,
+          [`fieldGuideData2[0].selectedArr`]:[],
+          [`listData[${index}].value`]:groups[res.tapIndex].brandName,
+          [`fieldGuideData2[0].brand_id`]:groups[res.tapIndex].brandId
         })
+        that.data.obj.fieldGuideId = '';
         that.data.obj.associationIp = groups[res.tapIndex].brandId;
         console.log(that.data.obj)
       },
@@ -493,8 +502,9 @@ Page({
           [`listData3[1].value`]:info.deliverTime,
           [`listData3[2].value`]:decodeURI(info.rule),
           [`listData3[3].imageList`]:info.arrGoodsDescImg,
-          [`fieldGuideData2[0].value`]:info.illustratedInfo[0].title,
-          [`fieldGuideData2[0].selectedArr`]:JSON.stringify(info.illustratedInfo),
+          [`fieldGuideData2[0].value`]:info.illustratedInfo && info.illustratedInfo.length>0?info.illustratedInfo[0].title:'',
+          [`fieldGuideData2[0].selectedArr`]:info.illustratedInfo && info.illustratedInfo.length>0?JSON.stringify(info.illustratedInfo):'',
+          [`fieldGuideData2[0].brand_id`]:info.brand.brandId,
           [`listData4[0].index`]:info.isShowSellNumber==0?1:0,
           // [`listData4[1].index`]:info.cashPledge==0?1:0,
           // [`listData4[1].value`]:info.cashPledge==0?'':info.cashPledge,
@@ -529,7 +539,7 @@ Page({
         obj.dateToPull = info.deliverTime;
         obj.explain = info.rule;
         obj.goodsDetailsPic = info.arrGoodsDescImg;
-        obj.fieldGuideId = info.illustratedInfo[0].id;
+        obj.fieldGuideId = info.illustratedInfo && info.illustratedInfo.length>0?info.illustratedInfo[0].id:'';
         obj.isParticipants = info.isShowSellNumber==0?1:0;
         obj.applicationCondition = info.cashPledge!=0?1:info.integral!=0?2:0;
         obj.cashPledge = info.cashPledge!=0?info.cashPledge:'';

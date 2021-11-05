@@ -20,6 +20,7 @@ Page({
         isRequired:false,
         type:'actionSheet',
         groups:[],
+        disabled:false,
         subtitle:'关联IP',
         value:'点击关联',
         name:'associationIp'
@@ -184,6 +185,9 @@ Page({
           })
           if(this.data.id!=0){
             this.getData();
+            this.setData({
+              [`dynamicData[0].disabled`]:true
+            })
           }else{
             wx.hideLoading()
             wx.stopPullDownRefresh();
@@ -225,15 +229,16 @@ Page({
             [`dynamicData[0].value`]:info.brandName,
             [`dynamicData[1].value`]:info.title.split('hc').join('\n'),
             [`dynamicData[2].imageList`]:info.imgArr,
-            [`dynamicData[3].value`]:List.illustratedInfo[0].title,
-            [`dynamicData[3].selectedArr`]:JSON.stringify(List.illustratedInfo),
+            [`dynamicData[3].value`]:List.illustratedInfo?List.illustratedInfo[0].title:'',
+            [`dynamicData[3].selectedArr`]:List.illustratedInfo?JSON.stringify(List.illustratedInfo):'',
+            [`dynamicData[3].brand_id`]:info.brand_id,
           // [`dynamicData[4].value`]:info.allow_comment_type,
             
           })
           obj.associationIp = info.brand_id;
           obj.dynamicContent = info.title;
           obj.dynamicPic = info.imgArr;
-          obj.fieldGuideId = List.illustratedInfo[0].id;
+          obj.fieldGuideId = List.illustratedInfo?List.illustratedInfo[0].id:'';
           // obj.allowComment = info.allow_comment_type;
         }else{
           app.showToastC(res.data.Msg,2000);
@@ -329,11 +334,12 @@ Page({
       success (res) {
 
         if(that.data.dynamicData[0].value != groups[res.tapIndex].name){
-          if(that.data.dynamicData[3].value != '点击关联'){
-            app.showToastC('由于您更换了关联IP，请重新选择关联图鉴。',2500);
-          }
+          // if(that.data.dynamicData[3].value != '点击关联'){
+          //   app.showToastC('由于您更换了关联IP，请重新选择关联图鉴。',2500);
+          // }
           that.setData({
             [`dynamicData[3].value`]:'点击关联',
+            [`dynamicData[3].selectedArr`]:[],
             [`dynamicData[3].brand_id`]:groups[res.tapIndex].brand_id,
           })
           that.data.obj.fieldGuideName = '';
