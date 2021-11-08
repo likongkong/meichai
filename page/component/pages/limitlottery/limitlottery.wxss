@@ -1418,9 +1418,9 @@ page{
   margin-right: 10rpx;
 }
 .recommendGoodsLable{
-  height: 45rpx;
-  padding:0 40rpx;
-  line-height: 45rpx;
+  height: 40rpx;
+  padding:0 28rpx;
+  line-height: 40rpx;
   display: inline-block;
   font-size: 24rpx;
   text-align: center;

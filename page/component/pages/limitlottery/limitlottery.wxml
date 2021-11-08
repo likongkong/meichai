@@ -56,7 +56,7 @@
 					<text class="recommendGoodsName">{{dataInfo.goodsName}}</text>
 					<view style="display: flex;justify-content: space-between;align-items: center;">
 						<view style=" display: flex;justify-content: center;align-items: center;">
-							<text class="recommendGoodsPrice">{{dataInfo.goodsPrice}}</text>
+							<text class="recommendGoodsPrice">￥{{dataInfo.goodsPrice}}</text>
 							<text class="recommendGoodsLable" wx:if="{{dataInfo.isDeposit}}">定金</text>
 						</view>
 						<text class="recommendGoodsBtn" wx:if="{{dataInfo.outrightPurchaseShowBox}}">去抽盒</text>
