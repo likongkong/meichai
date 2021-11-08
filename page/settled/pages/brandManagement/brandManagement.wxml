@@ -32,7 +32,7 @@
               <view class="itemHeadL">
                 <image class="IPlogo" src="{{item.ip_logo}}" mode="aspectFill"></image>
                 <view class="IPinfo">
-                  <text>{{item.ip_name}}</text>
+                  <text class="IPname">{{item.ip_name}}</text>
                   <text>{{item.showDate}}</text>
                 </view>
               </view>
@@ -52,7 +52,7 @@
                 <image class="IPlogo" src="{{item.ip_logo}}" mode="aspectFill"></image>
                 <view class="IPinfo1">
                   <view class="inreview">
-                    <text>{{item.ip_name}}</text>
+                    <text class="IPname">{{item.ip_name}}</text>
                     <block wx:if="{{item.status == 0}}">
                       <text>入驻审核中，查看进度</text>
                     </block>

@@ -111,6 +111,12 @@ page{
   font-size: 28rpx;
   color: #101010;
 }
+.IPname{
+  max-width: 290rpx;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
 .inreview{
   display: flex;
   justify-content: space-between;
