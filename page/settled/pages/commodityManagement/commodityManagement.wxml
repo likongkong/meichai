@@ -27,7 +27,7 @@
           <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
       </view>
     <view class="orderBottomNavigation">
-        <view class="orderBottomNavEve" style="background:#68B1ED;" catchtap="commonBulletFrameFun" data-index='4'>添加</view>
+        <view class="orderBottomNavEve" style="background:#90D2D6;" catchtap="commonBulletFrameFun" data-index='4'>发布/发售</view>
     </view>
 </view>
 
