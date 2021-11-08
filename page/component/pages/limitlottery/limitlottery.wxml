@@ -44,6 +44,27 @@
 							<text wx:for='{{listData.tags}}' wx:key='key' decode="true">{{item}}<block wx:if='{{index+1 != listData.tags.length}}'>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;</block></text>
 					</view>
 			</view>
+
+			<!-- 商品/抽盒机推荐 -->
+			<view class="recommendGoods" wx:if="{{dataInfo.outrightPurchaseGoods || dataInfo.outrightPurchaseShowBox}}"
+				catchtap="{{dataInfo.outrightPurchaseShowBox?'addresssmokebox':'addressmanagement'}}"
+				data-gid='{{infoActivity.goodsId}}'> 
+				<view class="recommendGoodsImage">
+					<image src="https://img.alicdn.com/imgextra/i1/2211825174108/O1CN01LIfEjx1gDVkjscTtG_!!2211825174108.jpg" mode="aspectFill"></image>
+				</view>
+				<view class="recommendGoodsInfo">
+					<text class="recommendGoodsName">{{dataInfo.goodsName}}</text>
+					<view style="display: flex;justify-content: space-between;align-items: center;">
+						<view style=" display: flex;justify-content: center;align-items: center;">
+							<text class="recommendGoodsPrice">{{dataInfo.goodsPrice}}</text>
+							<text class="recommendGoodsLable" wx:if="{{dataInfo.isDeposit}}">定金</text>
+						</view>
+						<text class="recommendGoodsBtn" wx:if="{{dataInfo.outrightPurchaseShowBox}}">去抽盒</text>
+						<text class="recommendGoodsBtn" wx:else>直接购买</text>
+					</view>
+				</view>
+			</view>
+
 			<view class="newDrawActivityProcess">
 				  <block wx:if='{{infoActivity.isSign}}'>
 								<block wx:if='{{infoActivity.status == 2 && listData.lotto.length != 0}}'>
@@ -156,12 +177,17 @@
 			</view>
 
 			<!--  商品详情图片 转换HTML标签  -->
-			<view class='detailimg' style="margin-top:20rpx;">
+			<view class='detailimg'>
 				  <template is="wxParse" data="{{wxParseData:article.nodes}}" />
 			</view>
 
-	</view>
+			<!-- 免责声明 -->
+			<view class="disclaimerWrap" wx:if="{{dataInfo.statement}}">
+					<text class="disclaimerTitle">-免责说明-</text>
+					<text class="disclaimerTxt">{{dataInfo.statement}}</text>
+			</view>
 
+	</view>
 </block>
 
 

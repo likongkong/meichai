@@ -683,6 +683,7 @@ Page({
             };
             var infoActivity = res.data.Info.activity;
             var listData = res.data.List; 
+            var dataInfo = res.data.Info; 
            
             if(infoActivity.status == 1){
               infoActivity.start_time = time.toDate(infoActivity.startTime,2);
@@ -727,6 +728,7 @@ Page({
 
 
             _this.setData({
+                dataInfo,
                 infoActivity:infoActivity,
                 brandinfo:res.data.Info.brandInfo,
                 listData:listData,
@@ -2889,4 +2891,18 @@ Page({
       url: "/page/secondpackge/pages/brandDetails/brandDetails?type=drying&id=" + id+"&settlement=0"
     });
   },
+  // 跳转详情页 
+  addressmanagement: function (event) {
+    var gid = event.currentTarget.dataset.gid || event.target.dataset.gid;
+    wx.navigateTo({
+      url: "/pages/detailspage/detailspage?gid=" + gid
+    });
+  },  
+  // 抽盒机详情页 
+  addresssmokebox: function (event) {
+    var gid = event.currentTarget.dataset.gid || event.target.dataset.gid;
+    wx.navigateTo({
+      url: "/pages/smokebox/smokebox?gid=" + gid
+    });
+  },
 })

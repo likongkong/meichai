@@ -1320,11 +1320,15 @@ page{
   border-radius: 70rpx;
 }
 .brandInfoName{
+  max-width: 280rpx;
   height: 70rpx;
   line-height: 70rpx;
   font-size: 28rpx;
   color: #101010;
   margin-left: 20rpx;
+  overflow: hidden;    
+  text-overflow:ellipsis; 
+  white-space: nowrap;
 }
 .brandAuthenticationIcon{
   width: 110rpx;
@@ -1345,4 +1349,93 @@ page{
 .bdaiBoxTxt{
   font-size: 24rpx;
   text-align: center;
+}
+.disclaimerWrap{
+  width: 710rpx;
+  padding: 20rpx 25rpx;
+  background: #fff;
+  border-radius: 15rpx;
+  margin: 20rpx auto 20rpx;
+  box-sizing: border-box;
+}
+.disclaimerTitle{
+  width: 100%;
+  display: block;
+  text-align: center;
+  font-size: 24rpx;
+  color: #959595;
+  margin-bottom: 10rpx;
+}
+.disclaimerTxt{
+  font-size: 24rpx;
+  color: #959595;
+}
+.recommendGoods{
+  width: 710rpx;
+  padding: 20rpx 25rpx;
+  background: #fff;
+  border-radius: 15rpx;
+  margin: 20rpx auto 0;
+  box-sizing: border-box;
+  display: flex;
+  /* justify-content: space-between;
+  align-items: center; */
+}
+.recommendGoodsImage{
+  width: 120rpx;
+}
+.recommendGoodsImage image{
+  width:120rpx;
+  height: 120rpx;
+  border-radius: 10rpx;
+  display: block;
+}
+.recommendGoodsInfo{
+  width: 540rpx;
+  height: 120rpx;
+  padding-left: 16rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.recommendGoodsName{
+  display: block;
+  font-size: 26rpx;
+  line-height: 34rpx;
+  color: #101010;
+  overflow: hidden; /*文本超出隐藏*/
+	display:-webkit-box; /*盒子模型微弹性伸缩模型*/
+	-webkit-box-orient: vertical;/*伸缩盒子的子元素垂直排列*/
+  -webkit-line-clamp: 2; /*文本显示3行*/
+  margin-bottom: 10rpx;
+}
+
+.recommendGoodsPrice{
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #FD8888;
+  margin-right: 10rpx;
+}
+.recommendGoodsLable{
+  height: 45rpx;
+  padding:0 40rpx;
+  line-height: 45rpx;
+  display: inline-block;
+  font-size: 24rpx;
+  text-align: center;
+  color: #fff;
+  border-radius: 10rpx;
+  background: #34A9ED;
+}
+.recommendGoodsBtn{
+  height: 45rpx;
+  padding:0 25rpx;
+  line-height: 45rpx;
+  display: inline-block;
+  font-size: 24rpx;
+  text-align: center;
+  color: #FA555B;
+  border: 2rpx solid #FA555B;
+  border-radius: 10rpx;
 }
