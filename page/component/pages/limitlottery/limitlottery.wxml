@@ -50,7 +50,7 @@
 				catchtap="{{dataInfo.outrightPurchaseShowBox?'addresssmokebox':'addressmanagement'}}"
 				data-gid='{{infoActivity.goodsId}}'> 
 				<view class="recommendGoodsImage">
-					<image src="https://img.alicdn.com/imgextra/i1/2211825174108/O1CN01LIfEjx1gDVkjscTtG_!!2211825174108.jpg" mode="aspectFill"></image>
+					<image src="{{dataInfo.goodsImg}}" mode="aspectFill"></image>
 				</view>
 				<view class="recommendGoodsInfo">
 					<text class="recommendGoodsName">{{dataInfo.goodsName}}</text>
