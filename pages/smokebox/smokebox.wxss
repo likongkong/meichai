@@ -1144,3 +1144,303 @@ margin-top: 20rpx;
   text-align: center;
   font-weight: bold;
 }
+.smokeboxBox{
+  width:100%;min-height:100%;
+  position:relative;
+}
+.isallreadyCss{
+  width:100%;height:100%;position:absolute;top:0;left:0;z-index:10;
+}
+.topScrollBox{
+  width:60rpx;height:60rpx;border-radius:50%;float:left;margin:15rpx;position: relative;
+}
+.topScrollBoxImg{
+  width:60rpx;height:60rpx;border-radius:50%;
+}
+.topScrollBoxEl{
+  width:100%;white-space:nowrap;height:90rpx;
+}
+.smokeBoxSelection{
+  font-size:25rpx;line-height:25rpx;margin-left:10rpx;
+}
+.smokeBoxHideBox{
+  width:95rpx;float:right;position:relative;margin:10rpx 10rpx 0 0;text-align: center;
+}
+.smokeBoxHideSView{
+  height:65rpx;border:5rpx solid #e94f57;margin:0 auto;display: inline-block;max-width:85rpx;overflow: hidden;
+}
+.smokeBoxHideOne{
+  width:95rpx;height:60rpx;background:#000;opacity:0.2;border-radius:5rpx;
+}
+.smokeBoxHideTwo{
+  width:95rpx;height:60rpx;position:absolute;bottom:0;left:0;color:#e94f57;text-align:center;font-size:20rpx;line-height:30rpx;font-weight:bold;
+}
+.smokeBoxCenterBox{
+  width:95rpx;position:relative;margin:10rpx 10rpx 0 0;
+}
+.smokeBoxCenterNoClass{
+  width:95rpx;height:30rpx;background:#000;opacity:0.2;border-radius:5rpx;
+}
+.smokeBoxCenterBotClass{
+  width:95rpx;height:30rpx;position:absolute;bottom:0;left:0;color:#e94f57;text-align:center;font-size:20rpx;line-height:30rpx;font-weight:bold;
+}
+.whole_boxGiftImg{
+  width:75rpx;width:75rpx;margin-left:10rpx;display: block;border-radius:6rpx;
+}
+.whole_boxGiftButVie{
+  color:#FF9800;text-align:center;font-size:20rpx;font-weight:bold;
+}
+.welfareNumBox{
+  color:red;text-align:center;font-size:20rpx;font-weight:bold;
+}
+.brandInformation{
+  padding:20rpx 20rpx 0 20rpx;position:relative;text-align:center;
+}
+.brandInformationImg{
+  display:inline-block;width:50rpx;height:50rpx;border-radius:50%;vertical-align:top;
+}
+.brandInformationTxt{
+  max-width:500rpx;display:inline-block;height:50rpx;line-height:50rpx;font-size:24rpx;color:#000;margin-left:10rpx;vertical-align:top;
+}
+.brandInformationName{
+  width:500rpx;text-align:center;padding:20rpx 125rpx;line-height:35rpx;font-size:30rpx;
+}
+.vipSpecialOffer{
+  background-image: linear-gradient(to bottom right, #FFFFDE , #FFBE3E);border-radius:3px;height:40rpx;line-height:40rpx;left:10px;font-size: 24rpx;color:#CC911C;margin: 0 10rpx;display: inline-block;text-align: center;padding: 0 10rpx;
+}
+.vipSpecialOfferRecy{
+  min-width:108rpx;background:#1890ff;border-radius:3px;width:60px;height:40rpx;line-height:40rpx;left:10px;font-size: 24rpx;color:#ffffff;margin: 0 10rpx;display: inline-block;text-align: center;
+}
+.smokeBoxisInQueue{
+  width:100%;height:100%;position:absolute;top:0;left:0;z-index:1;
+}
+.smokeBoxisInQuOut{
+  border:2rpx solid #000;float:left;background:#E6E3E3;position:relative;
+}
+.smokeBoxisInQuOutImg{
+  width:60%;position:absolute;left:20%;top:0;bottom:0;margin:auto 0;
+}
+.smokeBoxishowhalf{
+  width:100%;font-size:30rpx;text-align:center;padding-top:20rpx;position:relative;overflow:hidden;
+}
+.smokeBoxishowhalfOne{
+  width:100%;height:80rpx;overflow:hidden;display: flex;justify-content: center;align-items: center;
+}
+.smokeBoxishowhalfThree{
+  height:80rpx;line-height:80rpx;font-size:25rpx;z-index:2;display: inline-block;
+}
+.smokeBoxishowhalfImg{
+  width:40rpx;height:40rpx;margin-top:20rpx;display:inline-block;vertical-align:top;
+}
+.smokeBoxishowhalfTxt{
+  display:inline-block;vertical-align:top;
+}
+.smokeBoxishowhalfRule{
+  width:108rpx; height:80rpx;line-height:80rpx;display: inline-block;color:#8E8C8D;font-size: 24rpx;margin:0 60rpx;
+}
+.liveBroadcastStatus{
+  width:100%;color:#4c9a23;text-align:center;font-size:30rpx;
+}
+.liveBroadcastStatusOne{
+  width:50%;height:80rpx;position:relative;margin:0 auto;
+}
+.liveBroadcastStatusThree{
+  background:#eeae19;color:white;float:left;line-height:42rpx;height:80rpx;
+}
+.liveBroadcastStatusTwo{
+  height:40rpx;line-height:50rpx;text-align:center;position:relative;
+}
+.changeABox{
+  width:100%;height:80rpx;position:relative;margin-top:30rpx;
+}
+.changeABoxOne{
+  width:50%;height:80rpx;position:relative;float:left;
+}
+.changeABoxTwo{
+  width:50%;height:80rpx;position:relative;float:right;
+}
+.changeABoxTwoOne{
+  background:#e94f57;color:white;float:left;
+}
+.isAboveQuotaImmediately{
+  height:40rpx;line-height:50rpx;text-align:center;position:relative;
+}
+.isAboveQuotaImmediatelyNum{
+  height:40rpx;text-align:center;line-height:32rpx;
+}
+.blindBoxDescription{
+  width:100%;height:100rpx;font-size:25rpx;text-align:center;color:gray;margin-top: 64rpx;
+}
+.ishowawardBox{
+  width:100%;height:100%;position:fixed;top:0px;left:0;z-index:13;
+}
+.ishowawardBoxOne{
+  width: 100%;height: 102rpx;position: fixed;left: 0;background:transparent;opacity:1;z-index:2;
+}
+.ishowawardBoxOneChild{
+  font-size:25rpx;color:#1989fa;margin:35rpx 35rpx;
+}
+.closeawardBox{
+  width:100%;line-height:30rpx;margin-top:40rpx;color:#ff9800;
+}
+.closeawardBoxChild{
+  width:100%;line-height:30rpx;color:#4c9a23;margin-top:20rpx;
+}
+.closeawardBoxNext{
+  width:100%;line-height:30rpx;color:#000;font-size: 24rpx;text-align: center;margin-top: 10rpx;
+}
+.closeawardBoxFree{
+  width:100%;height:80rpx;position:relative;margin-top:30rpx;display: flex;justify-content: center;
+}
+.smokeBoxCTopCover{
+  display:block;margin:0 auto;height: auto;
+}
+.queueListScroll{
+  width:100%;white-space:nowrap;height:90rpx;
+}
+.multipleHideParent{
+  position:absolute;top:0;right:0rpx;
+}
+.smokeBoxHideBoxSwiper{
+  width:95rpx;height:75rpx;margin:0 auto;
+}
+.smokeBoxHideBoxImg{
+  display:block;height:65rpx;
+}
+.smokeBoxCenterBoxParent{
+  position:absolute;top:0;right:0rpx;
+}
+.smokeBoxCenterBoxChilbox{
+  border:5rpx solid #e94f57;margin:0 auto;
+}
+.smokeBoxWelfareBox{
+  width:95rpx;position:absolute;right:5rpx;z-index:9;
+}
+.wholeBoxGiftBox{
+  width:95rpx;position:absolute;right:10rpx;z-index:1;
+}
+.welfareImgDoub{
+  width:75rpx;height:75rpx;display:block; margin-left:10rpx;
+}
+.roleListBoxIsSoldOut{
+  border:2rpx solid #000;float:left;position:relative;
+}
+.roleListBoxIsImg{
+  position:absolute;left:0;top:0;bottom:0;right:0;margin:auto;border-radius:50%;
+}
+.exhibitionBox{
+  background:#f5f6fa;margin-top:30rpx;
+}
+.exhibitionBoxOne{
+  width:100%;height:80rpx;
+}
+.exhibitionBoxThree{
+  width:50%;height:100%;text-align:center;line-height:80rpx;float:left;position:relative;
+}
+.exhibitionBoxFive{
+  width:100rpx;height:4rpx;background:#000;position:absolute;left:0;right:0;bottom:0;margin:auto;
+}
+.exhibitionBoxDetail{
+  width:2rpx;height:50rpx;float:left;background:#BBB9B9;margin-top:15rpx;
+}
+.BrandZoneBox{
+  width:100%;overflow:hidden;
+}
+.BrandZoneBoxOne{
+  padding:20rpx;overflow:hidden;
+}
+.livebroadcastBox{
+  width:710rpx;margin:auto;height:170rpx;
+}
+.livebroadcastBoxOne{
+  height:139rpx;background:#fff;position:relative;margin:15rpx 0;border-radius: 10rpx;
+}
+.livebroadcastBoxThree{
+  position: absolute;height:100%;width:100%;left:0rpx;top:0;z-index:3;
+}
+.livebroadcastBoxThImg{
+  height:139rpx;width:174rpx;float:left;border-radius:10rpx;
+}
+.livebroadcastBoxFive{
+  width:460rpx;height:119rpx;position:relative;float:left;margin:10rpx;
+}
+.livebroadcastBoxFiveTxt{
+  font-size:30rpx;text-align: left;
+}
+.livebroadcastBoxSix{
+  width:100%;position:absolute;bottom:0rpx;left:0;
+}
+.livebroadcastBoxSixB{
+  font-size:25rpx;line-height:30rpx;color:#fff;float:left;padding:5rpx 10rpx;border-radius:10rpx;background:#32ACFB;
+}
+.livebroadcastBoxSixS{
+  font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;
+}
+.exhshopimgBox{
+  width:160rpx;height:46rpx;line-height:46rpx;font-size:26rpx;float:left;margin-left:3rpx;
+}
+.exhshopimgBoxNext{
+  float:right;width:88rpx;height:46rpx;
+}
+.exhshopimgChild{
+  max-width:46rpx;height:46rpx;line-height:46rpx;font-size:26rpx;vertical-align:top;float:right;
+}
+.exhshopimgChildImg{
+  width:30rpx;height:30rpx;margin:8rpx 0;vertical-align:top;float:right;
+}
+.suboformolaBox{
+  width:100%;height:100%;background:#000;opacity:0;z-index:100;position:fixed;top:0;left:0;
+}
+.ishowboxBox{
+  width:100%;height:100%;position:fixed;top:0px;left:0;z-index:13;
+}
+.ishowboxBoxChild{
+  background:#E8E8E9;opacity:1;position: absolute;left: 0;
+}
+.ishowboxBoxChildTxt{
+  font-size:25rpx;color:#1989fa;margin:35rpx 35rpx;
+}
+.ishowxrayBox{
+  width:500rpx;height:500rpx;background:white;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;font-size:25rpx;padding:20rpx;border-radius:10rpx;
+}
+.positionFixedCom{
+  width:100%;height:100%;position:fixed;top:0;left:0;
+}
+.tipCheapForWholeBoxClass{
+  width:130rpx;line-height:30rpx;position:absolute;top:-15rpx;right:-30rpx;background:#FE666B;color:white;font-size:20rpx;border-radius:10rpx;text-align:center;
+}
+.activityStatusThree{
+  width:100%;color:#4c9a23;text-align:center;font-size:30rpx;
+}
+.disanum_simgBoxNew{
+  color:#fff;font-size:20rpx;line-height:30rpx;background:rgba(233,79,87, 0.7);border-radius:7rpx 7rpx 0 0;position:absolute;top:-20rpx;left:0;z-index:1;width:100%;text-align:center;
+}
+.addUserBrandDesc{
+  font-size:26rpx;color:#333;padding:40rpx 0 0 0;text-align:left;line-height:30rpx;padding-top:40rpx;
+}
+.onLineBoxExtractor{
+  color:#000;font-size:25rpx;line-height:40rpx;padding-left:10rpx;text-align:left;margin-top:5rpx;
+}
+.onLineBoxExtractorView{
+  height:177rpx;width:250rpx;position:relative;margin-top:20rpx;
+}
+.onLineBoxExtractorOne{
+  font-size:24rpx;padding-top:4rpx;width:100%;height:32rpx;text-align:center;color:#333;
+}
+.onLineBoxExtractorPrice{
+  float:left;font-size:20rpx;margin:10rpx 0 0 10rpx;line-height:30rpx;
+}
+.smokeBoxFreeActivity{
+  height:40rpx;line-height:40rpx;font-size:22rpx;color:#ff2742;float:left;
+}
+.smokeBoxFreeActNext{
+  height:40rpx;line-height:40rpx;font-size:22rpx;color:#333;float:right;
+}
+.brandNameBoxCenter{
+  width:150rpx;height:46rpx;line-height:46rpx;font-size:22rpx;float:left;margin-left:3rpx;
+}
+.smokeBoxTiemName{
+  width:160rpx;height:46rpx;line-height:46rpx;font-size:26rpx;float:left;margin-left:3rpx;
+}
+
+
