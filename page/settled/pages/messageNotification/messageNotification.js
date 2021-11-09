@@ -87,7 +87,7 @@ Page({
       this.data.pid = ++this.data.pid;
       this.gitData();
     }else{
-      app.showToastC('暂无更多数据了',1500);
+      // app.showToastC('暂无更多数据了',1500);
     }
   },
 
@@ -119,7 +119,7 @@ Page({
             this.setData({
               isMoreData:true
             })
-            app.showToastC('暂无更多数据了',1500);
+            // app.showToastC('暂无更多数据了',1500);
           }else{
             this.setData({
               dataList:[...this.data.dataList,...res.data.List]

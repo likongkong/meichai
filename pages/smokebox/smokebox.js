@@ -2794,6 +2794,7 @@ Page({
 
   getHideBox: function () {
     var _this = this
+    return false;
     var q = Dec.Aese('mod=blindBox&operation=listHide');
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q,

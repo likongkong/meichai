@@ -27,9 +27,9 @@
     <view style="padding:20rpx;font-size:26rpx;margin-bottom:2rpx;background:#fff;" wx:if='{{dataInfo.title}}'><text>{{dataInfo.title}}</text></view>  
 
     <view style="background:#fff;overflow: hidden;margin-bottom:1rpx;">
-        <view class="boxAtlas" style="width:500rpx;margin:20rpx;font-size:24rpx;" wx:if='{{illustratedInfo}}'  catchtap="jumpoffering" data-id="{{illustratedInfo.id}}" data-type='9035'>
+        <view class="boxAtlas" style="width:500rpx;margin:20rpx;font-size:24rpx;" wx:if='{{illustratedInfo}}' catchtap="jumpoffering" data-id="{{illustratedInfo[0].id}}" data-type='9035'>
         <image class="boxAtlasLeftNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/illustrated.jpg"  mode="aspectFit"></image>
-        <view class="boxAtlasName specialellipsis" style="width:288rpx;">{{illustratedInfo.title}}</view>
+        <view class="boxAtlasName specialellipsis" style="width:288rpx;">{{illustratedInfo[0].title}}</view>
         <view class="boxAtlasRight">点击查看</view>
     </view>
 

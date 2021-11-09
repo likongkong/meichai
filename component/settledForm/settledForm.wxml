@@ -56,9 +56,9 @@
         <view wx:if="{{item.type == 'actionSheet'}}" id="{{item.name}}" class="rowWrap card {{item.borderbottom1?'borderbottom1':''}}" data-groups="{{item.groups}}" data-name="{{item.name}}" data-index="{{index}}" catchtap="{{item.disabled?'':'showActionSheet'}}">
           <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
           <input class="cEveInput" disabled="true" data-name="{{item.name}}" placeholder="{{item.placeholder}}" type="text" value="{{item.value}}" bindinput="onKeyInput"></input>
-          <image class="actionSheetIcon" src="../../pages/images/icon_in.png" mode="widthFix"></image>
+          <image class="actionSheetIcon" wx:if="{{!item.disabled}}" src="../../pages/images/icon_in.png" mode="widthFix"></image>
         </view>
-        <view wx:if="{{item.type == 'link'}}" id="{{item.name}}" class="rowWrap card {{item.borderbottom1?'borderbottom1':''}}" data-groups="{{item.groups}}" data-index="{{index}}" data-itemtype="{{item.item_type}}" data-whref="index={{index}}&brand_id={{item.brand_id}}&type={{item.jumpType}}&pagetype={{item.pagetype}}" catchtap="comjumpwxnav">
+        <view wx:if="{{item.type == 'link'}}" id="{{item.name}}" class="rowWrap card {{item.borderbottom1?'borderbottom1':''}}" data-groups="{{item.groups}}" data-index="{{index}}" data-itemtype="{{item.item_type}}" data-whref="index={{index}}&brand_id={{item.brand_id}}&type={{item.jumpType}}&pagetype={{item.pagetype}}&selectedArr={{item.selectedArr}}" catchtap="comjumpwxnav">
           <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
           <input class="cEveInput" disabled="true" data-name="{{item.name}}" placeholder="{{item.placeholder}}" type="text" value="{{item.value}}" bindinput="onKeyInput"></input>
           <image class="actionSheetIcon" src="../../pages/images/icon_in.png" mode="widthFix"></image>

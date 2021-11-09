@@ -7,7 +7,13 @@
       <view class="cardWrap"> 
         <text class="h1">{{item.title}}</text>
         <text class="h2">{{item.subtitle}}</text>
-        <image src="{{item.litpic}}" mode="widthFix"></image>
+        <image wx:if="{{item.litpic}}" src="{{item.litpic}}" mode="widthFix"></image>
+        <view wx:else class="box" style="background:#{{item.backgroundColor}}">
+          <view>
+            <text>{{item.title}}</text>
+            <text>{{item.subtitle}}</text>
+          </view>
+        </view>
       </view>
     </view>
   </block>

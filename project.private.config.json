@@ -246,6 +246,24 @@
           "pathName": "page/secondpackge/pages/brandDetails/brandDetails",
           "query": "id=1115&settlement=1",
           "scene": null
+        },
+        {
+          "name": "图鉴详情",
+          "pathName": "page/settled/pages/atlas/atlas",
+          "query": "iid=99",
+          "scene": null
+        },
+        {
+          "name": "动态详情",
+          "pathName": "page/settled/pages/dynamicDetails/dynamicDetails",
+          "query": "did=8118",
+          "scene": null
+        },
+        {
+          "name": "抽盒机列表",
+          "pathName": "pages/smokeboxlist/smokeboxlist",
+          "query": "",
+          "scene": null
         }
       ]
     }

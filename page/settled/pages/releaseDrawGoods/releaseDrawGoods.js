@@ -18,6 +18,7 @@ Page({
         isRequired:false,
         type:'actionSheet',
         groups:[],
+        disabled:false,
         subtitle:'商品关联IP',
         value:'点击关联',
         name:'associationIp'
@@ -192,6 +193,7 @@ Page({
         isRequired:false,
         type:'link',
         brand_id:'',
+        selectedArr:[],
         jumpType:2,
         pagetype:0,
         item_type:9034,
@@ -426,12 +428,16 @@ Page({
         })
         if(this.data.id&&this.data.id!=0){
           this.getData();
+          this.setData({
+            [`listData[0].disabled`]:true
+          })
         }else{
           wx.hideLoading()
           wx.stopPullDownRefresh();
           console.log(this.data.listData[0])
           this.setData({
-            [`listData[0].value`]:res.data.data.List.brand[0].brandName
+            [`listData[0].value`]:res.data.data.List.brand[0].brandName,
+            [`fieldGuideData2[0].brand_id`]:res.data.data.List.brand[0].brandId
           })
           this.data.obj.associationIp = res.data.data.List.brand[0].brandId;
         }
@@ -457,8 +463,12 @@ Page({
       itemList: arr,
       success (res) {
         that.setData({
-          [`listData[${index}].value`]:groups[res.tapIndex].brandName
+          [`fieldGuideData2[0].value`]:`点击关联`,
+          [`fieldGuideData2[0].selectedArr`]:[],
+          [`listData[${index}].value`]:groups[res.tapIndex].brandName,
+          [`fieldGuideData2[0].brand_id`]:groups[res.tapIndex].brandId
         })
+        that.data.obj.fieldGuideId = '';
         that.data.obj.associationIp = groups[res.tapIndex].brandId;
         console.log(that.data.obj)
       },
@@ -487,13 +497,14 @@ Page({
           [`listData2[0].time`]:util.format1("yyyy-MM-dd HH:mm",info.startTime),
           [`listData2[1].time`]:util.format1("yyyy-MM-dd HH:mm",info.stopTime),
           [`listData2[2].time`]:util.format1("yyyy-MM-dd HH:mm",info.finalPayTime),
-
           [`listData3[0].radioArr[${info.shippingMothed}].groupsIndex`]:info.logisticsIndex,
           [`listData3[0].index`]:info.shippingMothed,
           [`listData3[1].value`]:info.deliverTime,
-
           [`listData3[2].value`]:decodeURI(info.rule),
           [`listData3[3].imageList`]:info.arrGoodsDescImg,
+          [`fieldGuideData2[0].value`]:info.illustratedInfo && info.illustratedInfo.length>0?info.illustratedInfo[0].title:'',
+          [`fieldGuideData2[0].selectedArr`]:info.illustratedInfo && info.illustratedInfo.length>0?JSON.stringify(info.illustratedInfo):'',
+          [`fieldGuideData2[0].brand_id`]:info.brand.brandId,
           [`listData4[0].index`]:info.isShowSellNumber==0?1:0,
           // [`listData4[1].index`]:info.cashPledge==0?1:0,
           // [`listData4[1].value`]:info.cashPledge==0?'':info.cashPledge,
@@ -521,15 +532,14 @@ Page({
         obj.startTime = util.format1("yyyy-MM-dd HH:mm",info.startTime);
         obj.stopTime = util.format1("yyyy-MM-dd HH:mm",info.stopTime);
         obj.finalPayTime = util.format1("yyyy-MM-dd HH:mm",info.finalPayTime);
-
         obj.logisticsIndex = info.logisticsIndex,
         obj.modeOfDespatch = info.shippingMothed,
         obj.shipping = info.shipping;
         obj.shippingPriceStatus = info.shippingPriceStatus==0?0:1;
         obj.dateToPull = info.deliverTime;
-
         obj.explain = info.rule;
         obj.goodsDetailsPic = info.arrGoodsDescImg;
+        obj.fieldGuideId = info.illustratedInfo && info.illustratedInfo.length>0?info.illustratedInfo[0].id:'';
         obj.isParticipants = info.isShowSellNumber==0?1:0;
         obj.applicationCondition = info.cashPledge!=0?1:info.integral!=0?2:0;
         obj.cashPledge = info.cashPledge!=0?info.cashPledge:'';
@@ -657,6 +667,7 @@ Page({
 
       rule:encodeURI(obj.explain),
       arrGoodsDescImg:obj.goodsDetailsPic,
+      illustrated_id:obj.fieldGuideId || '',
       isShowSellNumber:obj.isParticipants==0?1:0,
       isCanShare:obj.isCanShare==0?1:0,
     }
