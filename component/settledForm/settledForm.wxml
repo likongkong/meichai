@@ -50,6 +50,17 @@
           <input class="cEveInput" maxlength="{{item.maxlength?item.maxlength:999}}" disabled="{{num==2?true:flase}}" data-name="{{item.name}}" placeholder="{{item.placeholder}}" type="text" value="{{item.value}}" bindinput="onKeyInput"></input>
           <image wx:if="{{item.isEdit?false:isEdit}}" class="editIcon" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="widthFix"></image>
         </view>
+        <view wx:if="{{item.type == 'phoneCode'}}" id="{{item.name}}" class="rowWrap {{item.borderbottom1?'borderbottom1':''}} {{item.paddingL80?'paddingL80':''}}">
+          <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}" data-explaintxt="{{item.explainTxt}}" catchtap="{{item.explainTxt?'showExplain':''}}">
+            <text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}
+            <image wx:if="{{item.explain}}" src="https://cdn.51chaidan.com/images/brandSettledIcon/wenhao.png" mode="widthFix"></image>
+          </view>
+          <view style="display: flex;align-items: center;justify-content: flex-end;">
+            <input class="cEveInput" maxlength="{{item.maxlength?item.maxlength:999}}" disabled="{{num==2?true:flase}}" data-name="{{item.name}}" placeholder="{{item.placeholder}}" type="text" value="{{item.value}}" bindinput="onKeyInput"></input>
+            <text class="phoneCodeBtn" catchtap="getPhoneCode">获取验证码</text>
+          </view>
+          <image wx:if="{{item.isEdit?false:isEdit}}" class="editIcon" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="widthFix"></image>
+        </view>
         <view wx:if="{{item.type == 'title'}}" class="{{num==1?'columnWrap':'rowWrap'}} {{item.borderbottom1?'borderbottom1':''}}">
           <view class="cEveTitle" style="height:70rpx"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
         </view>
@@ -58,7 +69,7 @@
           <input class="cEveInput" disabled="true" data-name="{{item.name}}" placeholder="{{item.placeholder}}" type="text" value="{{item.value}}" bindinput="onKeyInput"></input>
           <image class="actionSheetIcon" wx:if="{{!item.disabled}}" src="../../pages/images/icon_in.png" mode="widthFix"></image>
         </view>
-        <view wx:if="{{item.type == 'link'}}" id="{{item.name}}" class="rowWrap card {{item.borderbottom1?'borderbottom1':''}}" data-groups="{{item.groups}}" data-index="{{index}}" data-itemtype="{{item.item_type}}" data-whref="index={{index}}&brand_id={{item.brand_id}}&type={{item.jumpType}}&pagetype={{item.pagetype}}&selectedArr={{item.selectedArr}}" catchtap="comjumpwxnav">
+        <view wx:if="{{item.type == 'link'}}" id="{{item.name}}" class="rowWrap card {{item.margintop0?'margintop0':''}} {{item.borderbottom1?'borderbottom1':''}}" data-groups="{{item.groups}}" data-index="{{index}}" data-itemtype="{{item.item_type}}" data-whref="index={{index}}&brand_id={{item.brand_id}}&type={{item.jumpType}}&pagetype={{item.pagetype}}&selectedArr={{item.selectedArr}}" catchtap="comjumpwxnav">
           <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
           <input class="cEveInput" disabled="true" data-name="{{item.name}}" placeholder="{{item.placeholder}}" type="text" value="{{item.value}}" bindinput="onKeyInput"></input>
           <image class="actionSheetIcon" src="../../pages/images/icon_in.png" mode="widthFix"></image>
@@ -66,11 +77,22 @@
         <view wx:if="{{item.type == 'picker'}}" id="{{item.name}}" class="rowWrap card {{item.margintop0?'margintop0':''}} {{item.borderbottom1?'borderbottom1':''}}">
           <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
           <view class="pickerWrap">
-            <picker mode="multiSelector" data-groups="{{item.groups}}" data-index="{{index}}" bindchange="pickerChange" value="{{item.groupsIndex}}" range="{{item.groups}}">
+            <picker mode="multiSelector" data-groups="{{item.groups}}"  data-index="{{index}}" bindchange="pickerChange" value="{{item.groupsIndex}}" range="{{item.groups}}">
               <view class="pickerWrapText">
-                <!-- {{item.value?item.value:item.placeholder}} -->
                 <block wx:if="{{item.groupsIndex == ''}}">{{item.placeholder}}</block>
-                <block wx:else>{{item.groups[0][item.groupsIndex[0]]}}-{{item.groups[1][item.groupsIndex[1]]}}</block>
+                <block wx:else>{{item.groups[0][item.groupsIndex[0]].name}}-{{item.groups[1][item.groupsIndex[1]].name}}</block>
+              </view>
+            </picker>
+            <image class="actionSheetIcon" src="../../pages/images/icon_in.png" mode="widthFix"></image>
+          </view>
+        </view>
+        <view wx:if="{{item.type == 'multiseriatePicker'}}" id="{{item.name}}" class="rowWrap card {{item.margintop0?'margintop0':''}} {{item.borderbottom1?'borderbottom1':''}}">
+          <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
+          <view class="pickerWrap">
+            <picker mode="multiSelector" data-groups="{{item.groups}}" range-key="name" data-index="{{index}}" bindchange="multiseriatePicker" value="{{item.groupsIndex}}" range="{{item.groups}}" bindcolumnchange="bindcolumnchange">
+              <view class="pickerWrapText">
+                <block wx:if="{{item.groupsIndex == ''}}">{{item.placeholder}}</block>
+                <block wx:else>{{item.groups[0][item.groupsIndex[0]].name}}-{{item.groups[1][item.groupsIndex[1]].name}}</block>
               </view>
             </picker>
             <image class="actionSheetIcon" src="../../pages/images/icon_in.png" mode="widthFix"></image>

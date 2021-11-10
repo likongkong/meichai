@@ -1,0 +1,37 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class="seBox">
+
+    <view class="elsearch">
+        <view class="elsearchch">
+            <input class="elinputbutNew" bindfocus='onFocus' placeholder='开户银行' bindinput="inputChange" bindconfirm="jumpsearch" value="{{bankname}}"></input>
+            <view class="elserbotom" catchtap="getData" style="background:#fff;color:#101010;">搜索</view>
+        </view>
+    </view>
+
+    <scroll-view style="height:{{windowHeight-70}}px;" scroll-y scroll-into-view="{{enlargeL}}" class="scroll-warp" scroll-with-animation="{{false}}">
+        <block wx:for='{{listBank}}' wx:key='key' wx:if='{{item.listBank && item.listBank.length != 0}}'>
+            <view class="dlfindIpEveLetter" id='{{item.initial!="#"?item.initial:"a1"}}'>{{item.initial}}</view>
+            <view class="dlfindIpEveBox">
+                <view class="ocamensweveNew" wx:for='{{item.listBank}}' wx:key='key' wx:for-item='w' wx:for-index='num' catchtap="jumpsouchtem" data-bankcode='{{w.bankCode}}' data-bankname='{{w.bankName}}'>
+                    {{w.bankName}}
+                </view>  
+            </view>
+        </block>
+
+
+    </scroll-view>
+
+
+
+
+</view>
+
+<view class="letterBox" id='boxtext' catch:touchmove='touchmove'>
+    <block wx:for='{{listBank}}' wx:key='key'>
+        <view class="letterBoxEve" data-num='{{index}}' bindtouchstart="jumpLetter" bindtouchend="touchendFn" data-index='{{item.initial!="#"?item.initial:"a1"}}' id='qq{{item.initial}}'>{{item.initial}}</view>
+    </block>
+    <view class="enlargeBox" style="top:{{enlargez}}px;">{{enlargeL!='a1'?enlargeL:'#'}}</view>
+</view>
+<!-- catchtap="jumpLetter"  bindtouchmove="jumpLetter"   bindtouchmove="touchMove"  -->

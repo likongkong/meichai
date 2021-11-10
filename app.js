@@ -1136,6 +1136,10 @@ App({
       wx.navigateTo({
         url: `/page/settled/pages/messageNotificationDetail/messageNotificationDetail?id=${whref}`
       });      
+    } else if (item_type == 9053) {   // 银行列表
+      wx.navigateTo({
+        url: `/page/settled/pages/bankList/bankList`
+      });      
     }
   },
   // 中奖提示倒计时

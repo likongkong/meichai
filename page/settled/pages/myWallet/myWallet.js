@@ -433,15 +433,15 @@ Page({
   },
   // 立即提现1
   withdraw(){
-    if(Number(this.data.info.available_cash_amount)<1){
-      this.setData({
-        isNotBalanceMask:true
-      })
-    }else{
+    // if(Number(this.data.info.available_cash_amount)<1){
+    //   this.setData({
+    //     isNotBalanceMask:true
+    //   })
+    // }else{
       this.setData({
         showModalStatus:true
       })
-    }
+    // }
   },
   // 隐藏余额不足弹框
   hideNotBalanceMask(){

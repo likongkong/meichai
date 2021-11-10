@@ -188,7 +188,8 @@
         "pages/releaseSignIn/releaseSignIn",
         "pages/messageNotification/messageNotification",
         "pages/timHomePage/timHomePage",
-        "pages/messageNotificationDetail/messageNotificationDetail"
+        "pages/messageNotificationDetail/messageNotificationDetail",
+        "pages/bankList/bankList"
       ]
     }
   ],

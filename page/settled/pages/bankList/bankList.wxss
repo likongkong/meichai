@@ -1,0 +1,176 @@
+@import "/common/tabbar.wxss";
+
+page{
+  background:#f4f5f9;
+}
+.seBox{
+  width: 100%;
+  padding: 0;
+}
+.elsearch{
+  width: 100%;
+  height:90rpx;
+  background: #fff;
+  padding:15rpx 0;
+}
+.elsearchch{
+  width: 100%;
+  height:100%;
+  background: #fff;
+  border-radius: 200rpx;
+  position: relative;
+}
+.elserarchimg{
+  width: 50rpx;
+  height: 50rpx;
+  float: left;
+  margin: 20rpx;
+}
+.elserbotom{
+  width: 90rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  border-radius: 40rpx;
+  font-size: 24rpx;
+  color: #fff;
+  background: #50a3fd;
+  float: right;
+  margin: 20rpx;
+}
+.elinputbut{
+  height: 100%;
+  width: 500rpx;
+  float: left;
+  font-size: 24rpx;
+}
+
+.elinputbutNew{
+  margin: 15rpx 0 0 20rpx;
+  height:60rpx;
+  width: 580rpx;
+  float: left;
+  font-size: 24rpx;
+  background:#F5F5F5;
+  border-radius: 10rpx;
+  padding-left: 20rpx;
+}
+
+.dlfchrtopimgipNew{
+  width: 50rpx;
+  height: 28rpx;
+  position: absolute;
+  top: 0rpx;
+  right: -17rpx;
+}
+.dlfchrtopimgip{
+  width: 28rpx;
+  height: 28rpx;
+  position: absolute;
+  top: 63rpx;
+  right: -2rpx;
+}
+
+.dlfindIpscroll{
+  width: 100%;
+  background:#f4f5f9;
+}
+.dlfindIpEveLetter{
+  /* width: 680rpx; */
+  height: 60rpx;
+  line-height: 60rpx;
+  padding-left: 20rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+}
+.ocamensweveNew{
+  height: 90rpx;
+  line-height: 90rpx;
+  background: #fff;
+  font-size: 32rpx;
+  border-bottom: 2rpx solid #f4f5f9;  
+  padding-left: 20rpx;
+  box-sizing: border-box;
+}
+.dlfindIpEveBox{
+  width: 100%;
+  /* padding-left: 20rpx; */
+}
+.emlhrightNo{
+  width: 90rpx;
+  height: 42rpx;
+  text-align: center;
+  line-height: 42rpx;
+  color: #34A9ED;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 20rpx;
+  margin: auto;
+  font-size: 24rpx;
+  border-radius: 30rpx;
+  border:2rpx solid #34A9ED;
+}
+.emlhright{
+  width:90rpx;
+  height: 46rpx;
+  text-align: center;
+  line-height: 46rpx;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 20rpx;
+  margin: auto; 
+  font-size: 24rpx;
+  border-radius: 30rpx;
+  /* background:#34A9ED; */
+  background: linear-gradient(to left,#9FEAF8,#6AB0EC);
+}
+
+.letterBox{
+  width: 80rpx;
+  position: fixed;
+  right: 0;
+  top: 360rpx;
+  z-index: 3;
+}
+.letterBoxEve{
+  width: 40rpx;
+  height: 40rpx;
+  line-height: 36rpx;
+  text-align: center;
+  font-size: 24rpx;
+  margin:0 auto 0;
+}
+.letterBoxEveBG{
+  background:#fff;
+  border-radius: 6rpx;
+}
+.enlargeBox{
+  width: 90rpx;
+  padding-right: 10rpx;
+  text-align: center;
+  height: 100rpx;
+  line-height: 100rpx;
+  position: absolute;
+  top: -1110rpx;
+  right: 90rpx;
+  background:url('https://www.51chaidan.com/images/brandInfoIcon/locatingBar.png') no-repeat no-repeat;
+  background-size: 100% 100%;
+  z-index: 3;
+  font-size: 26rpx;
+  color: #fff;
+}
+
+
+.scroll-warp{
+  /* width: 680rpx; */
+}
+
+/* 隐藏滚动条 */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}

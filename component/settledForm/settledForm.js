@@ -1,12 +1,6 @@
-
 var COS = require('../../common/cos-wx-sdk-v5.js');
 var Dec = require('../../common/public.js'); //aes加密解密js
 const app = getApp();
-
-
-
-
-
 Component({
   /**
    * 组件的属性列表
@@ -78,9 +72,13 @@ Component({
         isExplain:false
       })
     },
+    getPhoneCode(){
+      this.triggerEvent("getPhoneCode");
+    },
     onPickerChange3 (e) {
       let name = e.currentTarget.dataset.name;
       let index = e.currentTarget.dataset.index;
+      console.log(e)
       let value = `list[${index}].time`;
       this.setData({errorDom:''});
       this.triggerEvent("bindchange", {value:e.detail.dateString,name:name});
@@ -117,6 +115,17 @@ Component({
       this.triggerEvent("bindchange", {value:value,name:'logisticsIndex'});
       this.triggerEvent("bindchange", {value:groups[0][value[0]],name:'shipping'});
       this.triggerEvent("bindchange", {value:value[1],name:'shippingPriceStatus'});
+    },
+    multiseriatePicker(e){
+      let index = e.currentTarget.dataset.index;
+      let value = e.detail.value;
+      let groupsIndex = `list[${index}].groupsIndex`;
+      this.setData({errorDom:''});
+      this.setData({[groupsIndex]:value})
+      this.triggerEvent("pickerchange", {value:value,name:'groupsIndex',index:index});
+    },
+    bindcolumnchange(e){
+      this.triggerEvent("columnchange", {column:e.detail.column,value:e.detail.value});
     },
     radioPickerChange(e){
       let index = e.currentTarget.dataset.index;

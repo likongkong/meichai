@@ -306,7 +306,7 @@
 }
 .pickerWrapText{
   font-size: 28rpx;
-  color: #999495;
+  color: #777777;
 }
 .radioPickerWrap>.pickerWrap{
   margin-bottom:10rpx;
@@ -405,4 +405,16 @@
   font-size: 28rpx;
   background-color: #90D2D6;
   margin: 0 auto;
+}
+.phoneCodeBtn{
+  height: 52rpx;
+  display: inline-block;
+  border-radius: 8rpx;
+  line-height: 52rpx;
+  font-size: 24rpx;
+  padding: 0 8rpx;
+  box-sizing: border-box;
+  color: #fff;
+  background: #90D2D6;
+  margin-left: 20rpx;
 }
