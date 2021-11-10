@@ -19,7 +19,6 @@ Page({
         subtitle:'开户姓名',
         placeholder:'请输入开户姓名',
         value:'',
-        borderbottom1:'show',
         name:'name'
       },{
         isRequired:true,
@@ -27,56 +26,21 @@ Page({
         subtitle:'银行卡号',
         placeholder:'请输入银行卡号',
         value:'',
-        borderbottom1:'show',
         name:'cardnumber'
-      },{
-        isRequired:true,
-        type:'link',
-        subtitle:'开户银行',
-        placeholder:'请选择开户银行',
-        item_type:9053,
-        value:'',
-        margintop0:true,
-        borderbottom1:'show',
-        name:'bankdeposit'
-      },{
-        isRequired:true,
-        type:'multiseriatePicker',
-        subtitle:'开户银行所在地',
-        placeholder:'请选择开户银行所在地',
-        groups: [[], []],
-        groupsIndex:'',
-        value:'',
-        margintop0:true,
-        borderbottom1:'show',
-        name:'cardnumber'
-      },{
-        isRequired:true,
-        type:'link',
-        subtitle:'开户支行',
-        placeholder:'请选择开户支行',
-        value:'',
-        margintop0:true,
-        borderbottom1:'show',
-        name:'bankSubBranch'
       },{
         isRequired:true,
         type:'text',
-        subtitle:'手机号',
-        placeholder:'请输入银行预留手机号',
+        subtitle:'开户银行',
+        placeholder:'请选择开户银行',
         value:'',
-        margintop0:true,
-        borderbottom1:'show',
-        name:'phoneNum'
+        name:'bankdeposit'
       },{
         isRequired:true,
-        type:'phoneCode',
-        subtitle:'验证码',
-        placeholder:'请输入验证码',
+        type:'text',
+        subtitle:'开户支行',
+        placeholder:'请输入开户支行',
         value:'',
-        margintop0:true,
-        borderbottom1:'show',
-        name:'phoneCode'
+        name:'bankSubBranch'
       }
     ],
     obj:{},
@@ -102,7 +66,11 @@ Page({
   onLoadfun(){
     this.data.loginid = app.signindata.loginid;
     this.data.uid = app.signindata.uid;
-    this.getProvince();
+    if(wx.getStorageSync('access_token')){
+     
+    }else{
+      app.getAccessToken(this.onLoadfun)
+    };
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -168,91 +136,7 @@ Page({
     this.data.obj[key]=e.detail.value;
     console.log(this.data.obj)
   },
-  pickerchange(e){
-    let index = e.detail.index;
-    let provinceCodeIndex = e.detail.value[0];
-    let cityCodeIndex = e.detail.value[1];
-    this.data.obj.provinceCode = this.data.enterpriseData[index].groups[0][provinceCodeIndex].provinceCode;
-    this.data.obj.cityCode = this.data.enterpriseData[index].groups[1][cityCodeIndex].cityCode;
-    console.log(this.data.obj)
-  },
-  columnchange(e){
-    console.log(e.detail.column)
-    console.log(e.detail.value)
-    this.data.obj.provinceCode = this.data.enterpriseData[3].groups[0][e.detail.value].provinceCode;
-    console.log(this.data.obj.provinceCode)
-    if(e.detail.column == 0){
-      this.getCity();
-    }
-  },
-  // 获取验证码
-  getPhoneCode(){
-    console.log(11)
-  },
-  //获取省份列表
-  getProvince(){
-    var _this = this;
-     console.log('mod=account&operation=listProvince')
-     var qqq = Dec.Aese('mod=account&operation=listProvince');
-     wx.showLoading({
-       title: '加载中...',
-       mask:true
-     })
-     wx.request({
-       url: app.signindata.comurl + 'pingan.php' + qqq,
-       method: 'GET',
-       header: {'Accept': 'application/json'},
-       success: function (res) {
-         wx.hideLoading()
-         console.log('省份列表=====',res)
-         if (res.data.ReturnCode == 200) {
-          for(var i=0;i<res.data.List.province.length;i++){
-            res.data.List.province[i].name = res.data.List.province[i].provinceName;
-          }
-          _this.setData({
-            [`enterpriseData[3].groups[0]`]:res.data.List.province
-          });
-          // _this.getCity();
-          console.log(_this.data.enterpriseData[3].groups[0])
-         }else{
-           app.showToastC(res.data.Msg)  
-         };
-       }
-     });
-  },
-  //获取市列表
-  getCity(){
-    var _this = this;
-    console.log('mod=account&operation=listCity?bankCode='+_this.data.obj.bankdeposit+'&provinceCode='+_this.data.loginid);
-    var qqq = Dec.Aese('mod=account&operation=listCity&bankCode=102&provinceCode='+_this.data.obj.provinceCode);
-    wx.showLoading({
-      title: '加载中...',
-      mask:true
-    })
-    wx.request({
-      url: app.signindata.comurl + 'pingan.php' + qqq,
-      method: 'GET',
-      header: {'Accept': 'application/json'},
-      success: function (res) {
-        wx.hideLoading()
-        console.log('市列表=====',res)
-        if (res.data.ReturnCode == 200) {
-          for(var i=0;i<res.data.List.city.length;i++){
-            res.data.List.city[i].name = res.data.List.city[i].cityName;
-          }
-          var ind = 1;
-          var enterpriseData = _this.data.enterpriseData
-          enterpriseData[3].groups[1] = res.data.List.city
-          _this.setData({
-            enterpriseData
-          });
-          // console.log(_this.data.enterpriseData[3].groups[1])
-        }else{
-          app.showToastC(res.data.Msg)
-        };
-      }
-    });
-  },
+  
   //提交审核
   submitAudit(){
     let obj = this.data.obj;

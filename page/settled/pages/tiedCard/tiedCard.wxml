@@ -6,18 +6,14 @@
     <settledForm 
         id="settledForm"
         statusBarHeightMc="{{statusBarHeightMc}}"
-        form="dynamicContent"
         list="{{enterpriseData}}"
         bind:bindchange="bindchange"
-        bind:getPhoneCode="getPhoneCode"
-        bind:pickerchange="pickerchange"
-        bind:columnchange="columnchange"
-        brandInfo="{{brandInfo}}"bindcolumnchange
+        brandInfo="{{brandInfo}}"
         >
     </settledForm>
   </view>
   <view class="footerWrap">
       <view data-num="1" catchtap="navigateBack">返回</view>
-      <view catchtap="submitAudit">确认绑定</view>
+      <view catchtap="submitAudit">提交</view>
   </view>
 </view>
