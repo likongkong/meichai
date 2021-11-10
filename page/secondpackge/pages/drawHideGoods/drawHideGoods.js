@@ -36,10 +36,15 @@ Page({
     var _this = this;
     _this.data.share_uid = options.share_uid || 0;
     _this.data.gid = options.gid || 0;
-    app.signindata.suap = 22;
+    if(options.gid && options.gid == 39328){
+      app.signindata.suap = 23;
+    }else{
+      app.signindata.suap = 22;
+    };
+    
     // 判断是否授权
     this.activsign();
-  },
+  }, 
   onLoadfun:function(){
     var _this = this;
     _this.setData({
@@ -59,38 +64,23 @@ Page({
       _this.onLoadfun();
       return false;
     };    
-    wx.getSetting({
-      success: res => {
-        if (true) {
-          // '已经授权'
-          _this.setData({
-            loginid: app.signindata.loginid,
-            uid: app.signindata.uid,
-            openid: app.signindata.openid,
-            avatarUrl: app.signindata.avatarUrl,
-            isShareFun: app.signindata.isShareFun,
-            isProduce: app.signindata.isProduce,
-            signinlayer: true,
-            tgabox: false
-          });
-          // 判断是否登录
-          if (_this.data.loginid != '' && _this.data.uid != '') {
-            _this.onLoadfun();
-          } else {
-            app.signin(_this);
-          }
-        } else {
-          _this.setData({
-            tgabox: false,
-            signinlayer: false
-          })
-          console.log()
-          // '没有授权 统计'
-          app.userstatistics(48);
-          _this.onLoadfun();
-        }
-      }
-    });      
+    // '已经授权'
+    _this.setData({
+      loginid: app.signindata.loginid,
+      uid: app.signindata.uid,
+      openid: app.signindata.openid,
+      avatarUrl: app.signindata.avatarUrl,
+      isShareFun: app.signindata.isShareFun,
+      isProduce: app.signindata.isProduce,
+      signinlayer: true,
+      tgabox: false
+    });
+    // 判断是否登录
+    if (_this.data.loginid != '' && _this.data.uid != '') {
+      _this.onLoadfun();
+    } else {
+      app.signin(_this);
+    }      
   },
   // 授权点击统计
   clicktga: function () {
@@ -234,8 +224,8 @@ Page({
     var _this = this;
     var pid = _this.data.pid;
     wx.showLoading({ title: '加载中...'})
-    var q = Dec.Aese('mod=LuckyDraw&operation=LotteryRecordList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&pid=' + pid)
-    console.log('mod=LuckyDraw&operation=LotteryRecordList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&pid=' + pid)
+    var q = Dec.Aese('mod=LuckyDraw&operation=LotteryRecordList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&pid=' + pid+'&goodsId='+_this.data.gid)
+    console.log('mod=LuckyDraw&operation=LotteryRecordList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&pid=' + pid+'&goodsId='+_this.data.gid)
     wx.request({
       url: app.signindata.comurl + 'spread.php'+q,
       method: 'GET',
@@ -272,8 +262,8 @@ Page({
     }
     var _this = this;
     wx.showLoading({ title: '加载中...'})
-    var q = Dec.Aese('mod=LuckyDraw&operation=ForTickets&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&cdkey='+cdkey)
-    console.log('mod=LuckyDraw&operation=ForTickets&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&cdkey='+cdkey)
+    var q = Dec.Aese('mod=LuckyDraw&operation=ForTickets&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&cdkey='+cdkey+'&goodsId='+_this.data.gid)
+    console.log('mod=LuckyDraw&operation=ForTickets&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&cdkey='+cdkey+'&goodsId='+_this.data.gid)
     wx.request({
       url: app.signindata.comurl + 'spread.php'+q,
       method: 'GET',
@@ -350,8 +340,8 @@ Page({
   acceptPrize(){
     var _this = this;
     wx.showLoading({ title: '加载中...'})
-    var q = Dec.Aese('mod=LuckyDraw&operation=award&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&aid=' + _this.data.tipaid)
-    console.log('mod=LuckyDraw&operation=award&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&aid=' + _this.data.tipaid)
+    var q = Dec.Aese('mod=LuckyDraw&operation=award&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&aid=' + _this.data.tipaid+'&goodsId='+_this.data.gid)
+    console.log('mod=LuckyDraw&operation=award&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&aid=' + _this.data.tipaid+'&goodsId='+_this.data.gid)
     wx.request({
       url: app.signindata.comurl + 'spread.php'+q,
       method: 'GET',
@@ -613,8 +603,8 @@ Page({
     wx.showLoading({
       title: '加载中...',
     });
-    console.log('mod=subscription&operation=authMobile&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&iv=' + iv + '&encryptedData=' + encryptedData + '&code=' + code)
-    var q1 = Dec.Aese('mod=subscription&operation=authMobile&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&iv=' + iv + '&encryptedData=' + encryptedData + '&code=' + code);
+    console.log('mod=subscription&operation=authMobile&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&iv=' + iv + '&encryptedData=' + encryptedData + '&code=' + code+'&goodsId='+_this.data.gid)
+    var q1 = Dec.Aese('mod=subscription&operation=authMobile&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&iv=' + iv + '&encryptedData=' + encryptedData + '&code=' + code+'&goodsId='+_this.data.gid);
     wx.request({
       url: app.signindata.comurl + 'toy.php' + q1,
       method: 'GET',
