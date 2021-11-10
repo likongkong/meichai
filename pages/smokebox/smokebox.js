@@ -21,9 +21,6 @@ Page({
     isProduce: app.signindata.isProduce,
     defaultinformation: '',
 
-    // 授权弹框
-    tgabox: false,
-
     c_title: '在线抽盒机',
     c_arrow: true,
     c_backcolor: '#ff2742',
@@ -127,7 +124,6 @@ Page({
     iftrdetailpageone: false,
     iftrdetailpagetwo: false,
     windowHeight: app.signindata.windowHeight - 65 - wx.getStorageSync('statusBarHeightMc') || 0,
-    signinlayer: true,
 
     festivalId: false,
 
@@ -142,14 +138,7 @@ Page({
 
     tricklinelist: [1, 2, 3, 4, 5, 6, 7],
     scrollleft: 0,
-    chiplist: ["https://www.51chaidan.com/images/spread/blindBox/32771_51_1566440065.png",
-      "https://www.51chaidan.com/images/spread/blindBox/32771_51_1566440065.png",
-      "https://www.51chaidan.com/images/spread/blindBox/32771_51_1566440065.png",
-      "https://www.51chaidan.com/images/spread/blindBox/32771_51_1566440065.png",
-      "https://www.51chaidan.com/images/spread/blindBox/32771_51_1566440065.png",
-      "https://www.51chaidan.com/images/spread/blindBox/32771_51_1566440065.png",
-      "https://www.51chaidan.com/images/spread/blindBox/32771_51_1566440065.png"
-    ],
+    chiplist: [],
     ishowcollectchip: false,
     iselected: 0,
     ishowcollectrule: false,
@@ -254,33 +243,17 @@ Page({
     },
     labelContentVie:'',
     cardStyle:1, // 1  提示卡  2 透视卡  3 重抽卡 
-
-    //显示状态 1为未开通 2为待领取 3为明日领取
-    showVipStatus:1,
     // 提示卡片弹框
     cueCardBox:false,
 
     // 抽盒金红包
     isBlindboxPacketOne:false,
     isBlindboxPacketTwo:false,
-    gotTBBMBS8:true,
-    gotTBBMBS9:true,
     // 刮刮卡入口
     isScrapingCard:false 
 
   },
-  // 跳转刮刮卡
-  jumpScrapingCard(){
-    app.comjumpwxnav(9023,'','','')
-  },
-  // 跳转公众号文章
-  officialAccount(){
-    if(!this.data.gotTBBMBS8){
-      app.comjumpwxnav(0,'https://mp.weixin.qq.com/s?__biz=MzUyNzMyNTg4Ng==&mid=100000975&idx=1&sn=ef370685e8a3c081684671ae961d16a7&chksm=7a000b1e4d77820819a1b4a07cc00432f987b0f79b798cef886ecdb4fffbd07ce2054c6689b1#rd','','')
-    }else if(!this.data.gotTBBMBS9){
-      app.comjumpwxnav(0,'https://mp.weixin.qq.com/s?__biz=MzI2Mzg4MDYzNQ==&mid=100013809&idx=1&sn=9c8be56959fe9d2ddb799b216b58d38e&chksm=6ab79c255dc015334675ddb87776de7962ed72ff69b57e0570d09dcfd8226663172d00a040bf#rd','','')
-    };
-  }, 
+
   boxBenefitsFun(event){
     if(this.data.boxBenefitsSM){
       this.setData({
@@ -340,7 +313,6 @@ Page({
   // 在线抽盒机
   bbevebox: function(event) {
     var id = event.currentTarget.dataset.gid || event.target.dataset.gid;
-    var _this = this;
     wx.redirectTo({
       url: "/pages/smokebox/smokebox?gid=" + id
     });
@@ -384,18 +356,7 @@ Page({
     clearInterval(this.data.intervaltimer);
   },
 
-  doubleEleven: function () {
-    var _this = this;
-    wx.navigateTo({
-      url: "/page/component/pages/doubleEleven/doubleEleven"
-    });
-  },
   showrule: function () {
-    var _this = this
-
-    // wx.navigateTo({
-    //   url: "/page/component/pages/webview/webview?webview=https://www.51chaidan.com/notice/20210722_strategyBlindBox.html",
-    // });
     wx.navigateTo({
       url: "/page/secondpackge/pages/gbaPage/gbaPage?webview=https://meichai-1300990269.cos.ap-beijing.myqcloud.com/activity_rules.json&from=blindBox",
     });
@@ -466,94 +427,22 @@ Page({
     wx.showLoading({
       title: '加载中...',
     })
-    _this.getHideBox()
+    // _this.getHideBox()
     if(app.signindata.sceneValue==1154){
       app.signindata.isProduce = true;  
       _this.onLoadfun();
     }else{
-      wx.getSetting({
-        success: res => {
-          if (true) {
-            // '已经授权'
-            _this.data.loginid = app.signindata.loginid;
-            _this.data.openid = app.signindata.openid;
-            _this.setData({
-              uid: app.signindata.uid,
-              isProduce: app.signindata.isProduce,
-              signinlayer: true,
-              isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
-            });
-            // 判断是否登录
-            if (_this.data.loginid != '' && _this.data.uid != '') {
-              _this.onLoadfun();
-            } else {
-              app.signin(_this)
-            }
-          } else {
-            wx.hideLoading()
-            if (_this.data.isredpag==1){
-              app.userstatistics(41);
-            }else{
-              app.userstatistics(30);
-            }
-            _this.onLoadfun();
-            this.setData({
-              signinlayer: false,
-            })
-          }
-        }
-      });
-    };
-
-  },
-
-  // 授权点击统计
-  clicktga: function () {
-    app.clicktga(2)
-  },
-  clicktganone: function () {
-    this.setData({
-      tgabox: false
-    })
-  },
-  userInfoHandler: function (e) {
-    // 判断是否授权 
-    var _this = this;
-    wx.getSetting({
-      success: res => {
-        if (true) {
-          // 确认授权用户统计
-          app.clicktga(4);
-          _this.setData({
-            tgabox: false,
-            signinlayer: true,
-          });
-          // '已经授权'
-            _this.data.loginid = app.signindata.loginid,
-            _this.data.openid = app.signindata.openid,
-            _this.setData({
-              uid: app.signindata.uid,
-              isProduce: app.signindata.isProduce,
-              isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
-            });
-          // 判断是否登录
-          if (_this.data.loginid != '' && _this.data.uid != '') {
-            _this.onLoadfun();
-          } else {
-            app.signin(_this);
-          };
-        } else {
-          _this.setData({
-            tgabox: true
-          });
-        }
+      // 判断是否登录
+      if (_this.data.loginid != '' && _this.data.uid != '') {
+        _this.onLoadfun();
+      } else {
+        app.signin(_this)
       }
-    });
-    if (e.detail.detail.userInfo) { } else {
-      app.clicktga(8) //用户按了拒绝按钮
     };
 
   },
+
+  
 
   onLoadfun: function () {
 
@@ -569,13 +458,13 @@ Page({
       automat: app.signindata.automat || {isOpen: false, times: 0 },
       automatTimes: app.signindata.automat.times,
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
-      defaultinformation:app.signindata.defaultinformation,
-      gotTBBMBS8:app.signindata.gotTBBMBS8,
-      gotTBBMBS9:app.signindata.gotTBBMBS9
+      defaultinformation:app.signindata.defaultinformation
     });
     if (_this.data.isredpag == 1) {
       this.shareopen(_this.data.welfareid)
-    }
+    };
+
+    this.getInfo()
 
     if(app.signindata.receivingAddress && app.signindata.receivingAddress.length != 0){
         var rdl = app.signindata.receivingAddress;
@@ -601,8 +490,6 @@ Page({
         console.log('地址=======onloadfun====',_this.data.addressdata)
     };
 
-    this.getInfo()
-
     setTimeout(function () {
       _this.getdefault();
     }, 1000)
@@ -619,8 +506,15 @@ Page({
         ishowdealoradd: true,
         ishowcover: true,
       })
-    }
+    };
 
+  },
+
+  getdefault: function () {
+    var _this = this;
+    if(_this.data.defaultinformation){}else{
+      app.defaultinfofun(_this);
+    };
     // 刮刮卡入口
     wx.request({
       url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/cardOpenStatus.txt?time='+Date.parse(new Date()),
@@ -633,14 +527,6 @@ Page({
       fail: function (res) {}
     })  
 
-
-  },
-
-  getdefault: function () {
-    var _this = this;
-    if(_this.data.defaultinformation){}else{
-      app.defaultinfofun(_this);
-    }
   },
 
   initview: function () {
@@ -682,22 +568,9 @@ Page({
       transformOrigin: 'center center 0',
       success: function (res) {}
     })
-    // _this.mAnimation() //开启动画
+
   },
-  imageLoadhead: function (e) {
-    // var _this = this;
-    // var $width = e.detail.width;
-    // var $height = e.detail.height;
-    // var ratio = $width / $height;
-    // var viewWidth = 454,
-    //   viewHeight = viewWidth / ratio;
-    // if (viewHeight>400){
-    //    this.setData({
-    //      imgwidth:300
-    //    })
-    // }
-    // this.initview()
-  },
+
 
   // 随机数
   ranomNumber(arrLength,ranomValue,sposition){
@@ -732,17 +605,6 @@ Page({
 
   },
 
-  mAnimation: function () {
-    var _this = this
-    clearInterval(this.data.atimer)
-    this.data.atimer = setInterval(function () {
-      this.animation.translate(0, -13).step().translate(0, 0).step().translate(0, -5).step().translate(0, 0).step()
-      this.setData({
-        //输出动画
-        animation: this.animation.export(),
-      })
-    }.bind(this), 1350)
-  },
 
   getInfo: function (recycle = true) {
     var _this = this
@@ -751,6 +613,7 @@ Page({
     })
 
     var q1 = Dec.Aese('mod=blindBox&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&gid=' + _this.data.gid+ '&push_id='+_this.data.push_id);
+
     console.log('mod=blindBox&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&gid=' + _this.data.gid+ '&push_id='+_this.data.push_id)
 
     wx.request({
@@ -774,13 +637,12 @@ Page({
           var l = (listDataDetail.employ || []).concat(listDataDetail.queue || []);
           var is_queue = false;
           if(l&&l.length!=0){
-            l = _this.distinct(l)
-            l.forEach((item,index) => {
-              if(item.userId == _this.data.uid){
-                is_queue = true;
-              };
-           });
-
+              l = _this.distinct(l)
+              l.forEach((item,index) => {
+                  if(item.userId == _this.data.uid){
+                    is_queue = true;
+                  };
+              });
           };
           
 
@@ -798,12 +660,10 @@ Page({
             });
           };
 
-
           activityData.canOperate = is_Box_selection;
 
           activityData.aheadUser = (listDataDetail.queue || []).length > 0 ? (listDataDetail.queue || []).length - 1 : 0;
           console.log(activityData.aheadUser,activityData.isInQueue,activityData.canOperate,'=========')
-
 
           // 是否有便宜价格
           if(activityData.cheaperPrice){
@@ -817,11 +677,6 @@ Page({
               activityData.start_time = time.toDate(activityData.start_time);
             }
           }
-
-          // for(var i =0;i<listDataDetail.role.length;i++){
-          //   listDataDetail.role[i].img =  
-          // }
-          // 
 
 
           // countPayBox 已卖出
@@ -840,8 +695,6 @@ Page({
             });
           }
 
-
-          console.log('是否重选',is_user , infoData.isNeedEmploy)
 
           if(is_user && infoData.isNeedEmploy){
              _this.changeone(1);
@@ -1003,8 +856,7 @@ Page({
             _this.data.firstshowredpag = false
           }
 
-          // countPayBox 已卖出
-          // limit_users 总数
+          // limit_users 总数  countPayBox 已卖出
           if (listDataDetail.role.length == 8 || listDataDetail.role.length == 12 || listDataDetail.role.length == 7 || listDataDetail.role.length == 11 || listDataDetail.role.length == 24 || listDataDetail.role.length == 18) {
             _this.setData({
               linenum: 4,
@@ -1142,16 +994,6 @@ Page({
       ishowxray: false,
     })
     _this.stopDraw();
-  },
-
-  goDetail: function () {
-    var _this = this
-    _this.queueup(2, 1)
-    setTimeout(function () {
-      wx.navigateTo({
-        url: "../../../../pages/detailspage/detailspage?gid=" + _this.data.activity.infoGift.goods_id,
-      })
-    }, 100)
   },
 
   countdown: function () {
@@ -1372,30 +1214,20 @@ Page({
   },
 
   closeselect: function () {
-    var _this = this
-    _this.setData({
+    this.setData({
       ishowbox: false,
-      ishowhalf: true,
-    })
-  },
-
-  closeguess: function () {
-    var _this = this
-    _this.setData({
-      ishowguess: false,
       ishowhalf: true,
     })
   },
 
   ubpackbox: function () {
-    var _this = this
     console.log('ishowaward================ishowaward支付完成显示重抽')
-    _this.setData({
+    this.setData({
       ishowaward: true,
       ishowguess: false,
       ishowbox: false,
     })
-    _this.startDraw();
+    this.startDraw();
   },
 
   closeaward: function (w) {
@@ -1432,22 +1264,19 @@ Page({
   },
 
   closexit: function () {
-    var _this = this
-    _this.setData({
+    this.setData({
       ishowexit: false,
     })
   },
 
   closeagain: function () {
-    var _this = this
-    _this.setData({
+    this.setData({
       ishowagain: false,
     })
   },
 
   affirmexit: function () {
-    var _this = this
-    _this.setData({
+    this.setData({
       ishowexit: false,
       ishowagain: false,
       ishowaward: false,
@@ -1455,25 +1284,23 @@ Page({
       ishowhalf: true,
       isTry: false,
     })
-    _this.stopDraw();
+    this.stopDraw();
   },
 
   judgeAgainRoll: function () {
-    var _this = this
-    if (_this.data.rollchance > 0) {
-      _this.setData({
+    if (this.data.rollchance > 0) {
+      this.setData({
         isagainroll: true,
       })
     } else {
-      _this.againroll()
+      this.againroll()
     }
-    _this.setData({
+    this.setData({
       isRecycleMask: false,
     })
   },
   closeJudgeAgainRoll: function () {
-    var _this = this
-    _this.setData({
+    this.setData({
       isagainroll: false,
     })
   },
@@ -1539,39 +1366,36 @@ Page({
   },
 
   onShow: function () {
-    var _this = this;
     console.log('onShow===============')
-    if (_this.data.loginid != '' && _this.data.uid != '' && _this.data.isloadfun) {
+    if (this.data.loginid != '' && this.data.uid != '' && this.data.isloadfun) {
       console.log('onshow=================111111')
-      _this.getInfo();
+      this.getInfo();
     };
   },
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    var _this = this
-    clearInterval(_this.data.timer)
-    clearInterval(_this.data.atimer)
+    clearInterval(this.data.timer)
+    clearInterval(this.data.atimer)
     clearInterval(this.data.countdowntime);
-    clearInterval(_this.data.tempChanceCountdowntime);
-     // 调用重置刷新
-     app.resetdownRefresh();
-     app.currentPageFun();
+    clearInterval(this.data.tempChanceCountdowntime);
+    // 调用重置刷新
+    app.resetdownRefresh();
+    app.currentPageFun();
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    var _this = this
-    clearInterval(_this.data.timer)
-    clearInterval(_this.data.atimer)
+    clearInterval(this.data.timer)
+    clearInterval(this.data.atimer)
     clearInterval(this.data.countdowntime);
-    clearInterval(_this.data.tempChanceCountdowntime);
-     // 调用重置刷新
-     app.resetdownRefresh();
-     app.currentPageFun();
+    clearInterval(this.data.tempChanceCountdowntime);
+    // 调用重置刷新
+    app.resetdownRefresh();
+    app.currentPageFun();
   },
 
   /**
@@ -1687,42 +1511,6 @@ Page({
   },
 
 
-  // 导航跳转
-  whomepage: function () {
-    setTimeout(function () {
-      wx.reLaunch({
-        url: "/pages/index/index?judgeprof=2"
-      });
-    }, 100);
-  },
-
-  dlfindfun: function () {
-    setTimeout(function () {
-      wx.reLaunch({
-        url: "/page/component/pages/dlfind/dlfind",
-      })
-    }, 100);
-  },
-
-  // 导航跳转 
-  wnews: function () {
-    var _this = this;
-    app.limitlottery(_this);
-  },
-
-  wshoppingCart: function () {
-    wx.redirectTo({
-      url: "/pages/shoppingCart/shoppingCart"
-    });
-  },
-
-  wmy: function () {
-    app.signindata.iftr_mc = true;
-    wx.redirectTo({
-      url: "/pages/wode/wode"
-    });
-  },
-
   // 立即购买弹框
   dsbbbutclickt: function () {
     this.setData({
@@ -1773,9 +1561,8 @@ Page({
 
   // 跳转增加新地址
   jumpaddress: function () {
-    var _this = this;
     for (var i = 0; i < 3; i++) {
-      _this.queueup(2, 5)
+      this.queueup(2, 5)
     }
     wx.navigateTo({
       url: "/pages/newreceivingaddress/newreceivingaddress"
@@ -2216,7 +2003,7 @@ Page({
     var timestamp = Date.parse(new Date())
     //总的秒数 
     var second = parseInt(micro_second) - (timestamp / 1000);
-    console.log('second=====',micro_second,(timestamp / 1000),second)
+    // console.log('second=====',micro_second,(timestamp / 1000),second)
     if (second > 0) {
       _this.setData({
         remaintime: second,
@@ -2314,7 +2101,6 @@ Page({
 
   // 计算图片大小
   imageLoadad: function (e) {
-    var _this = this;
     var $width = e.detail.width,
       $height = e.detail.height,
       ratio = $width / $height;
@@ -2324,7 +2110,7 @@ Page({
       viewWidth = 500 * ratio;
       viewHeight = 500;
     };
-    _this.setData({
+    this.setData({
       iefheight: viewHeight,
       iewidth: viewWidth,
     });
@@ -2332,13 +2118,11 @@ Page({
 
   // 计算图片大小
   imageLoadhide: function (e) {
-    var _this = this;
-    var $width = e.detail.width,
-      $height = e.detail.height,
-      ratio = $width / $height;
-    var viewHeight = 65,
-      viewWidth = 65 * ratio;
-    _this.setData({
+    var $width = e.detail.width;
+    var $height = e.detail.height;
+    var ratio = $width / $height;
+    var viewWidth = 65 * ratio;
+    this.setData({
       hideheight: 65,
       hidewidth: viewWidth,
     });
@@ -2499,8 +2283,7 @@ Page({
   },
 
   closehint: function () {
-    var _this = this
-    _this.setData({
+    this.setData({
       ishowhint: false,
     })
   },
@@ -2599,8 +2382,7 @@ Page({
   },
 
   closecard: function () {
-    var _this = this
-    _this.setData({
+    this.setData({
       ishowcard: false,
       istipsure: false,
       israysure: false,
@@ -2623,13 +2405,12 @@ Page({
   },
 
   cardImgLoad: function (e) {
-    var _this = this;
     var $width = e.detail.width,
       $height = e.detail.height,
       ratio = $width / $height;
     var viewWidth = 150,
       viewHeight = 150 / ratio;
-    _this.setData({
+    this.setData({
       cardimgheight: viewHeight
     });
   },
@@ -2645,7 +2426,7 @@ Page({
       iswholePay: true,
       isRepeatOpen: 0,
     })
-    _this.dsbbbutclickt();
+    this.dsbbbutclickt();
   },
 
   closewhole: function () {
@@ -2744,15 +2525,14 @@ Page({
   },
 
   circulationshow: function (u) {
-    var _this = this
-    var list = _this.data.wholeBoxList;
+    var list = this.data.wholeBoxList;
     setTimeout(function () {
       if (u < list.length) {
-        _this.rrrr(u)
+        this.rrrr(u)
         u++;
-        _this.circulationshow(u);
+        this.circulationshow(u);
       } else {
-        _this.setData({
+        this.setData({
           isAllshow: false,
         })
         return;
@@ -2761,21 +2541,19 @@ Page({
   },
 
   rrrr: function (i) {
-    var _this = this
-    var list = _this.data.wholeBoxList;
+    var list = this.data.wholeBoxList;
     list[i].ishow = true;
-    _this.setData({
+    this.setData({
       wholeBoxList: list,
     })
   },
 
   allShow: function () {
-    var _this = this
-    var list = _this.data.wholeBoxList;
+    var list = this.data.wholeBoxList;
     for (var i = 0; i < list.length; i++) {
       list[i].ishow = true;
     }
-    _this.setData({
+    this.setData({
       wholeBoxList: list,
       isAllshow: false,
     })
@@ -2997,7 +2775,6 @@ Page({
   },
   // 赠送实物详情
   wholeBGIDetailfun:function(){
-    var _this = this;
     var wholeBoxGiftInfo = this.data.wholeBoxGiftInfo || [];
     if(wholeBoxGiftInfo&&wholeBoxGiftInfo.goods_desc){
         // WxParse.wxParse('detail', 'html', wholeBoxGiftInfo.goods_desc, _this, 0);
@@ -3014,35 +2791,6 @@ Page({
     }
 
   },
-  blindBoxdetailpagen: function (w) {
-    var ind = w.currentTarget.dataset.ind;
-    if (this.data.blindBoxdetailpageone) {
-      this.setData({
-        iftrdetailpagetwo: true,
-        blindBoxdetailpagetwo: true
-      })
-    } else {
-      this.showsivertips(ind);
-    };
-  },
-  hideBoxdetailpagen: function (w) {
-    var ind = w.currentTarget.dataset.ind;
-    if (this.data.hideBoxdetailpageone) {
-      this.setData({
-        iftrdetailpagetwo: true,
-        hideBoxdetailpagetwo: true
-      })
-    } else {
-      this.showgoldtips(ind);
-    };
-  },
-
-  pullupsignin: function () {
-    // // '没有授权'
-    this.setData({
-      tgabox: true
-    });
-  },
 
   getHideBox: function () {
     var _this = this
@@ -3055,10 +2803,6 @@ Page({
         'Accept': 'application/json'
       },
       success: function (res) {
-        // _this.setData({
-        //   hideboxList: res.data.List,
-        // })
-        // var hideboxList = _this.data.hideboxList;
         var hideboxList = res.data.List;
         var swiperhide = [];
         var ishowarrow = false;
@@ -3084,24 +2828,6 @@ Page({
 
       }
     })
-  },
-
-  // 计算图片大小
-  imageloadhidebox: function (e) {
-    var _this = this;
-    var ind = parseInt(e.currentTarget.dataset.ind || e.target.dataset.ind || 0);
-    var $width = e.detail.width,
-      $height = e.detail.height,
-      ratio = $width / $height;
-    var viewWidth = 110 * ratio;
-    var hideboxList = this.data.hideboxList;
-
-    if (hideboxList[ind]) {
-      hideboxList[ind].width = viewWidth;
-      _this.setData({
-        hideboxList: hideboxList
-      })
-    };
   },
 
   // 计算图片大小
@@ -3162,9 +2888,8 @@ Page({
   },
 
   closecollectchip: function () {
-    var _this = this
     this.setData({
-      ishowcollectchip: !_this.data.ishowcollectchip,
+      ishowcollectchip: !this.data.ishowcollectchip,
       goldtip: -1,
       sivertip: -1,
     })
@@ -3258,22 +2983,7 @@ Page({
     })
 
   },
-  tabClick: function (w) {
-    var _this = this
-    var id = w.currentTarget.dataset.id;
-    //创建节点选择器
-    var query = wx.createSelectorQuery();
-    //选择id
-    query.select('#q' + id).boundingClientRect();
-    query.exec(function (res) {
-      if (res && res[0] && res[0].width) {
-        _this.setData({
-          scrollleft: w.currentTarget.offsetLeft - (wx.getSystemInfoSync().windowWidth) / 2 + (res[0].width / 2)
-        });
-      };
-    });
-    _this.selectData(id);
-  },
+
 
   selectData: function (id) {
     var _this = this;
@@ -3345,119 +3055,27 @@ Page({
 
   },
 
-  // 计算图片大小
-  imageLoadchip: function (e) {
-    var _this = this;
-    var $width = e.detail.width,
-      $height = e.detail.height,
-      ratio = $width / $height;
-    var viewWidth = _this.data.chipItemWidth,
-      viewHeight = viewWidth / ratio;
-
-    _this.setData({
-      chipItemHeight: viewHeight,
-      nogetimagewidth: viewWidth > viewHeight ? viewHeight : viewWidth,
-    });
-  },
 
   showchiprule: function () {
-    var _this = this
-    _this.setData({
-      ishowcollectrule: !_this.data.ishowcollectrule,
+    this.setData({
+      ishowcollectrule: !this.data.ishowcollectrule,
     })
   },
 
-  showgoldtips: function (ind) {
-    var _this = this;
-
-    if (ind == _this.data.goldtip) {
-      this.setData({
-        goldtip: -1,
-      })
-    } else {
-      this.setData({
-        goldtip: ind,
-      })
-    }
-  },
-
-  showsivertips: function (ind) {
-    var _this = this;
-    if (ind == _this.data.sivertip) {
-      this.setData({
-        sivertip: -1,
-      })
-    } else {
-      this.setData({
-        sivertip: ind,
-      })
-    }
-  },
 
   showdealoradd: function () {
-    var _this = this;
-    _this.setData({
-      ishowdealoradd: !_this.data.ishowdealoradd,
+    this.setData({
+      ishowdealoradd: !this.data.ishowdealoradd,
     })
   },
 
   // 跳转增加新地址
   jumpaddress: function () {
-    var _this = this;
     wx.navigateTo({
       url: "/pages/newreceivingaddress/newreceivingaddress"
     })
   },
 
-  selectdefult: function (w) {
-    var _this = this;
-    var ind = w.currentTarget.dataset.ind;
-    var addressdata = _this.data.addressdata;
-    for (var i = 0; i < addressdata.length; i++) {
-      if (i != ind) {
-        addressdata[i].checked = false;
-      }
-    }
-    if (!addressdata[ind].checked) {
-      addressdata[ind].checked = !addressdata[ind].checked;
-      _this.setData({
-        addressdata: addressdata,
-        maddid: addressdata[ind].aid,
-      })
-    } else {
-      addressdata[ind].checked = !addressdata[ind].checked;
-      _this.setData({
-        addressdata: addressdata,
-        maddid: '',
-      })
-    }
-
-  },
-
-  setdefultadd: function () {
-    var _this = this;
-    //  调取收货地址
-    var q = Dec.Aese('mod=address&operation=setBlindBoxDefaultAddress&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&aid=' + _this.data.maddid)
-
-    wx.request({
-      url: app.signindata.comurl + 'user.php' + q,
-      method: 'GET',
-      header: {
-        'Accept': 'application/json'
-      },
-      success: function (res) {
-        if (res.data.ReturnCode == 200) {
-          _this.setData({
-            ishowdealoradd: false,
-            isBlindBoxDefaultAddress: true,
-            ishowcover: false,
-          })
-          app.signindata.isBlindBoxDefaultAddress = true;
-          _this.nextpagediao();
-        }
-      }
-    });
-  },
 
   jumpRedList(w){
       var ind = w.currentTarget.dataset.ind;
@@ -3469,27 +3087,25 @@ Page({
 
   // 幸运值红包
   hidepackage: function () {
-    var _this = this;
-    if (!_this.data.ishowredpackage) {
-      _this.setData({
-        redpagList: _this.data.welfare,
+    if (!this.data.ishowredpackage) {
+      this.setData({
+        redpagList: this.data.welfare,
       })
     }
-    _this.setData({
-      ishowredpackage: !_this.data.ishowredpackage,
+    this.setData({
+      ishowredpackage: !this.data.ishowredpackage,
       isharepag: false,
     })
   },
   // 抽盒金红包
   toggleBlindboxPacket(){
-    var _this = this;
-    if (!_this.data.isBlindboxPacketOne) {
-      _this.setData({
-        redpagList: _this.data.welfare,
+    if (!this.data.isBlindboxPacketOne) {
+      this.setData({
+        redpagList: this.data.welfare,
       })
     }
-    _this.setData({
-      isBlindboxPacketOne: !_this.data.isBlindboxPacketOne,
+    this.setData({
+      isBlindboxPacketOne: !this.data.isBlindboxPacketOne,
       isharepag: false,
     })
   },
@@ -3606,15 +3222,13 @@ Page({
   },
 
   blindboxClosepagInfo: function () {
-    var _this = this
-    _this.setData({
+    this.setData({
       isBlindboxPacketTwo: false,
     })
     this.getInfo();
   },
   closepagInfo: function () {
-    var _this = this
-    _this.setData({
+    this.setData({
       ishowpagInfo: false,
     })
   },
@@ -3652,9 +3266,8 @@ Page({
   },
 
   showsurebuy: function () {
-    var _this = this
-    _this.setData({
-      ishowsurebuy: !_this.data.ishowsurebuy,
+    this.setData({
+      ishowsurebuy: !this.data.ishowsurebuy,
     })
   },
 
@@ -3833,7 +3446,6 @@ Page({
   },
 
   addfrindcommonifun: function (w) {
-    var _this = this;
     var url = w.currentTarget.dataset.url || w.target.dataset.url || 0;
     var name = w.currentTarget.dataset.name || w.target.dataset.name || 0;
     if (url && url != "") {
@@ -3859,7 +3471,7 @@ Page({
       src: _this.data.showimg || '',
       fail: function (res) {},
       success: function (res) {
-        var imgSrc = res.path;
+        imgSrc = res.path;
         wx.getSetting({
           success(res) {
             // 如果没有则获取授权
@@ -3918,21 +3530,20 @@ Page({
   },
 
   exhsavehandleSetting: function (e) {
-    var _this = this;
     if (!e.detail.authSetting['scope.writePhotosAlbum']) {
       wx.showModal({
         title: '警告',
         content: '若不打开授权，则无法将图片保存在相册中！',
         showCancel: false
       });
-      _this.setData({
+      this.setData({
         exhpicsave: false
       });
     } else {
-      _this.setData({
+      this.setData({
         exhpicsave: false,
       });
-      _this.sharesavethepicture();
+      this.sharesavethepicture();
     }
   },
 
@@ -4034,7 +3645,6 @@ Page({
   },
   //展会推荐列表跳转
   jumpexhdetail: function (w) { 
-    var _this = this;
     var mtype = w.currentTarget.dataset.mtype || w.target.dataset.mtype || 0;
     var brandid = w.currentTarget.dataset.brandid || w.target.dataset.brandid || "";
     var id;
