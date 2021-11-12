@@ -46,7 +46,31 @@ Page({
     ], // 支付状态 
     subLedger: 0 , // 1 已分账 2 未分账
     countOrder:0,
-    nodataiftr:false
+    nodataiftr:false,
+    selectBox:false,
+    selectWordsData:[
+      {'n':'全部',id:0},
+      {'n':'普通订单',id:'2'},
+      {'n':'展会订单',id:'1'}
+    ],
+    screenWords:'筛选',
+    orderType:0
+  },
+
+  selectCap(e){
+    let index = e.currentTarget.dataset.index;
+    let screenWords = e.currentTarget.dataset.word;
+    this.setData({
+      orderType:index,
+      screenWords:screenWords
+    })
+    this.getData();
+    this.selectBoxFun();
+  },
+  selectBoxFun(){
+     this.setData({
+        selectBox:!this.data.selectBox
+     })
   },
   open: function (options) {
     // 省市联动
@@ -615,7 +639,8 @@ Page({
        'searchValue':_this.data.ordername,
        'payStatus':_this.data.centerIndex,
        'brandId':_this.data.brandid || 0,
-       'pageId':_this.data.page
+       'pageId':_this.data.page,
+       'orderType':_this.data.orderType
      }).then((res) => {
       console.log('列表数据=======',res)
       _this.setData({nodataiftr:true})

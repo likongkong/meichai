@@ -14,8 +14,10 @@
         <view class="elserbotom" catchtap="jumpsearch">搜索</view>
 	</view>
 
-    <scroll-view class="marginAuto scrollViewTop" scroll-x="true" scroll-with-animation="true" scroll-left='{{scrollleft}}' style="height:80rpx;">
+    <scroll-view class="marginAuto scrollViewTop" scroll-x="true" scroll-with-animation="true" scroll-left='{{scrollleft}}' style="height:80rpx;position: relative;">
          <view wx:for="{{payStatus}}" wx:key='key' id="ele{{item.num}}" class="classifyItem {{centerIndex == item.num?'active':''}}" data-index="{{item.num}}" catchtap="classifyChange">{{item.name}}<text wx:if='{{centerIndex == item.num && nodataiftr}}'>({{countOrder}})</text></view>
+
+         <view class="cmScreen" catchtap="selectBoxFun">{{screenWords}}<image src="https://cdn.51chaidan.com/images/brandSettledIcon/filtrate.png" mode="aspectFit"></image></view>
     </scroll-view>
 
     <view class="marginAuto centerTxt" wx:for='{{order}}' wx:key='key'>
@@ -270,4 +272,13 @@
       <view wx:for="{{countys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item}}</view>
     </picker-view-column>
   </picker-view>
+</view>
+
+<view class="wshNew" catchtouchmove="true" wx:if='{{selectBox}}' catchtap="selectBoxFun">
+    <view class="orderMangAddressBottom" catchtap="true" style="border-radius:30rpx 30rpx 0 0;">
+        <view class="orderMangTipTop" style="border-bottom:2rpx solid #F4F4F4;" wx:for='{{selectWordsData}}' wx:key='key' catchtap="selectCap" data-word='{{item.n}}' data-index='{{item.id}}'>{{item.n}}</view>
+        
+        <view class="orderMangCenterBG"></view>
+        <view class="orderMangTipTop" catchtap="selectBoxFun" style="padding-bottom:30rpx;">取消</view>
+    </view>
 </view>
