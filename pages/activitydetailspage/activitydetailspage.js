@@ -1013,16 +1013,16 @@ closefrindcommoni:function(){
     let pages = getCurrentPages();
     let prevpage = pages[pages.length - 2];
     if (prevpage) {
-      if (prevpage.route == 'pages/activitysharinglist/activitysharinglist') {
+      if (prevpage.route == '/page/component/pages/activitysharinglist/activitysharinglist') {
         wx.navigateBack();
       } else {
         wx.redirectTo({
-          url: "/pages/activitysharinglist/activitysharinglist"
+          url: "/page/component/pages/activitysharinglist/activitysharinglist"
         });
       };
     } else {
       wx.redirectTo({
-        url: "/pages/activitysharinglist/activitysharinglist"
+        url: "/page/component/pages/activitysharinglist/activitysharinglist"
       });
     };
     this.setData({
@@ -3148,7 +3148,7 @@ closefrindcommoni:function(){
           } else {
             //  跳转至活动列表 
             wx.redirectTo({
-              url: "/pages/activitysharinglist/activitysharinglist"
+              url: "/page/component/pages/activitysharinglist/activitysharinglist"
             });
           };
 
@@ -3628,7 +3628,7 @@ closefrindcommoni:function(){
       });
     } else if (item_type == 6 || item_type == 7) {
       wx.navigateTo({    // 活动列表
-        url: "/pages/activitysharinglist/activitysharinglist"
+        url: "/page/component/pages/activitysharinglist/activitysharinglist"
       });
     } else if (item_type == 8) {
       wx.navigateTo({    // 活动详情页

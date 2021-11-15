@@ -1,4 +1,4 @@
-@import "../../../../pages/activitysharinglist/activitysharinglist.wxss";
+@import "../activitysharinglist/activitysharinglist.wxss";
 @import "../../../../common/tabbar.wxss";
 page {
   background: #e4e4e4;

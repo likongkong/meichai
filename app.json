@@ -6,7 +6,6 @@
     "pages/shoppingCart/shoppingCart",
     "pages/detailspage/detailspage",
     "pages/activitydetailspage/activitydetailspage",
-    "pages/activitysharinglist/activitysharinglist",
     "pages/storehomepage/storehomepage",
     "pages/sputforward/sputforward",
     "pages/signinpage/signinpage",
@@ -37,6 +36,7 @@
     "pages/collectGiftBag/collectGiftBag",
     "pages/smokeComponent/smokeComponent",
     "component/settledForm/settledForm",
+    "pages/activitysharinglist/activitysharinglist",
     "component/settledProgress/settledProgress"
   ],
   "subPackages": [
@@ -101,6 +101,7 @@
         "pages/doubleElevenexh/doubleElevenexh",
         "pages/electronicTicket/electronicTicket",
         "pages/ocamcart/ocamcart",
+        "pages/activitysharinglist/activitysharinglist",
         "pages/ocamhot/ocamhot"
       ]
     },

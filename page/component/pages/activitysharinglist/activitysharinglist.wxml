@@ -1,5 +1,8 @@
-<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+ 
+
 
 <view class="drawOrFreeOrderBox">
    <view class="drawOrFreeOrderEve {{drawOrFreeOrder == 1?'dfoSelect':''}}" catchtap="drawOrFreeOrderFun" data-ind='1'>限定抽签</view>
@@ -128,6 +131,8 @@
     <view class='noDataCom' wx:if='{{listdata.length==0&&nodataiftr&&signlist.length==0&&finishedlist.length==0}}'>
         <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
     </view>
+
+    <view style='width:100%;{{isIphoneX?"height:140rpx;":"height:120rpx;"}}'></view>
 
 </block>
 <!-- 免单 -->
@@ -325,6 +330,8 @@
             
         </view>
 
+        <official-account wx:if='{{canIUse}}' style='width:100%;background:#fff;'></official-account>
+
       </view>
 
     </view>
@@ -336,12 +343,54 @@
 
 </block>
 
-<view style='width:100%;{{isIphoneX?"height:140rpx;":"height:120rpx;"}}'></view>
-
-<view style='width:100%; position:fixed; left:0; bottom:0; border-top:1px solid #e5e5e5;background: #fff;z-index: 5;'>
-
-<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' 
+dryinglistnum='{{dryinglistnum}}'></bnavigation>
 
 
 
+
+
+
+<!--  优惠券 新人红包  -->
+<view class='newcoupon' wx:if='{{newcoupon}}'>
+  <view class='swfback' catchtouchmove="preventD" catchtap='newhbfun'></view>
+  <view class='newcoucon'>
+    <view class='newcouchead'>
+      <view class='newcouhhead centertxt'>{{newcoutitle}}</view>
+      <view class='newcouhocon'>
+        <view class='newcoucx' wx:for='{{newcoupondata}}' wx:key='key'>
+          <image class='newcoucximg' src='../images/botchofcou.png'></image>
+          <view class='newcoucxcon'>
+            <view class='newcoucxconleft'>
+              <view class='newcoucxconlefttop centertxt'>
+                <view style=' font-size:24rpx;display:inline-block;position: relative;top: 8rpx;'>{{item.unit}}</view>{{item.value}}</view>
+              <view class='newcoucxconleftbott specialellipsis'>{{item.desc}}</view>
+            </view>
+            <view class='newcoucxconright'>
+              <view class='newcoucxconrighttop'>
+                <view class='specialellipsis' style=' font-size:30rpx;padding-top:10rpx;height:36rpx;'>{{item.name}}</view>
+                <view style=' font-size:24rpx;'>{{item.overtime}}过期</view>
+              </view>
+              <view class='newcoucxconrightbott specialellipsis'>{{item.detail}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='newcouhbott'>
+        <view class='newcouhbotmimg centertxt' catchtap='swfcanimgcou'>一 键 领 取</view>
+        <image src='../images/cancelthefork.png' class='swfcanimgnewcou' catchtap='swfcanimgcou'></image>
+      </view>
+    </view>
+
+  </view>
+</view>
+
+
+<!-- 透视卡 小悬浮 -->
+<view wx:if='{{perspcardiftrmin}}' catchtap='bblistfun' style='width:110rpx;height:170rpx;position:fixed;right:20rpx;bottom:260rpx;z-index:9;'>
+   <image src='http://www.51chaidan.com/images/icon/iconTempXRay.jpg' style='width:110rpx;height:110rpx;display:block;border-radius:50%;'></image>
+   <view style="width:110rpx;height:54rpx;font-size:22rpx;color:#ffffff;position:relative;">
+      <view style="width:110rpx;height:54rpx;background:#cb6a15;opacity:0.8;border-radius:10rpx;"></view>
+      <text style='display:block;text-align:center;width:110rpx;height:54rpx;line-height:27rpx;position:absolute;left:0;top:0rpx;'>点击使用\n{{percountdown}}</text>
+   </view>
 </view>

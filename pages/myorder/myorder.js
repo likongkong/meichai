@@ -1483,7 +1483,7 @@ Page({
       });
     } else if (item_type == 6 || item_type == 7) {
       wx.navigateTo({    // 活动列表
-        url: "/pages/activitysharinglist/activitysharinglist"
+        url: "/page/component/pages/activitysharinglist/activitysharinglist"
       });
     } else if (item_type == 8) {
       wx.navigateTo({    // 活动详情页
@@ -1585,7 +1585,7 @@ Page({
 
   acetlistfun: function () {
     wx.redirectTo({
-      url: "/pages/activitysharinglist/activitysharinglist"
+      url: "/page/component/pages/activitysharinglist/activitysharinglist"
     });
     this.setData({
       wsh: false,

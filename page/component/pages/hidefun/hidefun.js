@@ -1083,16 +1083,16 @@ Page({
     let pages = getCurrentPages();
     let prevpage = pages[pages.length - 2];
     if (prevpage) {
-      if (prevpage.route == 'pages/activitysharinglist/activitysharinglist') {
+      if (prevpage.route == '/page/component/pages/activitysharinglist/activitysharinglist') {
         wx.navigateBack();
       } else {
         wx.navigateTo({
-          url: "/pages/activitysharinglist/activitysharinglist"
+          url: "/page/component/pages/activitysharinglist/activitysharinglist"
         });
       };
     } else {
       wx.navigateTo({
-        url: "/pages/activitysharinglist/activitysharinglist"
+        url: "/page/component/pages/activitysharinglist/activitysharinglist"
       });
     };
 

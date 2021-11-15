@@ -1,4 +1,4 @@
-var Dec = require('../../common/public.js');//aes加密解密js
+var Dec = require('../../../../common/public.js');//aes加密解密js
 const app = getApp();
 Page({
 
@@ -56,8 +56,6 @@ Page({
     signlist: [],
     // 是否授权
     windowHeight: app.signindata.windowHeight - 65 - wx.getStorageSync('statusBarHeightMc') || 0,
-    tgabox: false,
-    signinlayer:false,
 
     // 倒计时时间戳
     perspcardata: '',
@@ -65,15 +63,126 @@ Page({
     percountdown: '',
     // 倒计时
     countdowntime: '',
-    perspcardiftrmin:false
+    perspcardiftrmin:false,
+    drawOrFreeOrder:2
   },
-  jumpWebview(e){
-    let url = e.currentTarget.dataset.url;
-    app.comjumpwxnav(0,url,'','');
-    this.setData({
-      isFocusPublic:true
+  drawOrFreeOrderFun(w){
+    var drawOrFreeOrder = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
+    this.setData({drawOrFreeOrder});
+    if(drawOrFreeOrder==1){
+      if(!this.data.listdata){
+        this.listdataFO(1);
+      };
+    };
+  },
+
+  listdataFO: function(num) { // 1 下拉 2 上拉
+    var _this = this;
+    wx.showLoading({
+      title: '加载中...',
     })
-    app.signindata.isFocusPublic = true;
+    if (num == 1) {
+      _this.setData({
+        pid: 0,
+        nodataiftr: false,
+        listdata: [],
+        signlist: [],
+        finishedlist: [],
+      });
+    } else {
+      var pagenum = _this.data.pid;
+      _this.setData({
+        pid: ++pagenum,
+        nodataiftr: false
+      });
+    };
+    var q = Dec.Aese('mod=lotto&operation=list&uid='  + _this.data.uid + '&loginid=' + _this.data.loginid + '&pid=' + _this.data.pid);
+    wx.request({
+      url: app.signindata.comurl + 'spread.php' + q,
+      method: 'GET',
+      header: {
+        'Accept': 'application/json'
+      },
+      success: function(res) {
+        console.log('listdata===',res)
+        // 刷新完自带加载样式回去
+        wx.hideLoading()
+        wx.stopPullDownRefresh();
+        _this.setData({
+          nodataiftr: true
+        });
+        if (res.data.ReturnCode == 200) {
+          var arrlist = res.data.List.inProgree || [];
+          var signarray = res.data.List.sign || [];
+          var finishedarray = res.data.List.finished || [];
+          if (arrlist && arrlist.length != 0) {
+            for (var i = 0; i < arrlist.length; i++) {
+              if (arrlist[i].status == 1) {
+                if(arrlist[i].isLiveShow){
+                  arrlist[i].start_time = _this.toDate(arrlist[i].start_time,1);
+                }else{
+                  arrlist[i].start_time = _this.toDate(arrlist[i].start_time);
+                };
+              } else if (arrlist[i].status == 2) {
+                arrlist[i].stop_time = _this.toDate(arrlist[i].stop_time);
+              };
+            };
+            if (num == 1) {
+              var comdataarr = arrlist || [];
+            } else {
+              var comdataarr = _this.data.listdata.concat(arrlist);
+            };
+            _this.setData({
+              listdata: comdataarr,
+            });
+          } else {
+            app.showToastC('暂无更多数据');
+          };
+
+          if (signarray && signarray.length != 0) {
+            if (num == 1) {
+              var signarray = signarray || [];
+            } else {
+              var signarray = _this.data.signlist.concat(signarray);
+            };
+            _this.setData({
+              signlist: signarray
+            });
+          }
+
+          if (finishedarray && finishedarray.length != 0) {
+            for (var i = 0; i < finishedarray.length; i++) {
+              finishedarray[i].cover = finishedarray[i].cover+"?random="+Math.ceil(Math.random()*10000)
+            };
+            if (num == 1) {
+              var finishedarray = finishedarray || [];
+            } else {
+              var finishedarray = _this.data.finishedlist.concat(finishedarray);
+            };
+            _this.setData({
+              finishedlist: finishedarray,
+            });
+          }
+
+        };
+        if (res.data.ReturnCode == 300) {
+          app.showToastC('暂无更多数据');
+          if (num == 1) {
+            _this.setData({
+              listdata: []
+            });
+          }
+        };
+        if (res.data.ReturnCode == 900) {
+          app.showToastC('登陆状态有误');
+        };
+        _this.setData({
+          nodataiftr: true
+        })
+
+      }
+
+    });
   },
 
   onHide: function () {
@@ -89,12 +198,7 @@ Page({
     // 调用重置刷新
     app.resetdownRefresh();
   },
-  pullupsignin: function () {
-    // // '没有授权'
-    this.setData({
-      tgabox: true
-    });
-  },
+
   // 阻止蒙层冒泡
   preventD() { },
   newhbfun: function () {
@@ -146,10 +250,7 @@ Page({
       spreadEntry: app.signindata.spreadEntry,
       // 适配苹果X 
       isIphoneX: app.signindata.isIphoneX,
-      signinlayer: true,
       defaultinformation:app.signindata.defaultinformation,
-      isFocusPublic: app.signindata.isFocusPublic,
-      tgabox: false
     });
 
     _this.data.perspcardata = app.signindata.perspcardata || '';
@@ -354,59 +455,25 @@ Page({
       _this.setData({isProduce:true}); 
       _this.listdata(1);
     }else{
-      wx.getSetting({
-        success: res => {
-          if (true) {
-            // '已经授权'
-            _this.setData({
-              loginid: app.signindata.loginid,
-              uid: app.signindata.uid,
-              openid: app.signindata.openid,
-              isProduce: app.signindata.isProduce,
-              spreadEntry: app.signindata.spreadEntry,
-              // 适配苹果X 
-              isIphoneX: app.signindata.isIphoneX,
-              signinlayer: true,
-              tgabox: false
-            });
-            // 判断是否登录
-            if (_this.data.loginid != '' && _this.data.uid != '') {
-              _this.onLoadfun();
-            } else {
-              app.signin(_this)
-            }
-          } else {
-            _this.setData({
-              tgabox: false,
-              signinlayer: false
-            })
-            _this.listdata(1);
-          }
-        }
-      }); 
+      // '已经授权'
+      _this.setData({
+        loginid: app.signindata.loginid,
+        uid: app.signindata.uid,
+        openid: app.signindata.openid,
+        isProduce: app.signindata.isProduce,
+        spreadEntry: app.signindata.spreadEntry,
+        // 适配苹果X 
+        isIphoneX: app.signindata.isIphoneX
+      });
+      // 判断是否登录
+      if (_this.data.loginid != '' && _this.data.uid != '') {
+        _this.onLoadfun();
+      } else {
+        app.signin(_this)
+      } 
     };   
   },
-  clicktganone: function () {
-    this.setData({ tgabox: false })
-  },
-  // 点击登录获取权限
-  userInfoHandler: function (e) {
-    var _this = this;
-    wx.getSetting({
-      success: res => {
-        if (true) {
-          _this.setData({
-            tgabox: false,
-            signinlayer: true
-          });
-          _this.onLoad();
-        }
-      }
-    });
-    if (e.detail.detail.userInfo) { } else {
-      app.clicktga(8)  //用户按了拒绝按钮
-    };
-  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -434,35 +501,23 @@ Page({
    */
   onPullDownRefresh: function () {
     app.downRefreshFun(() => {
-      var _this = this;
-      wx.showLoading({ title: '加载中...', })
-      var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
-      // 商品列表
-      _this.listdata(1);
-      // 获取剩余次数 
-      var qc = Dec.Aese('mod=activity&operation=chance&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1');
-      wx.request({
-        url: app.signindata.comurl + 'spread.php' + qc,
-        method: 'GET',
-        header: { 'Accept': 'application/json' },
-        success: function (res) {
-          wx.hideLoading()
-          if (res.data.ReturnCode == 200) {
-            var countdown = res.data.Info.chance||0;
-            _this.setData({countdown: countdown})
-          };
-          if (res.data.ReturnCode == 900) {
-            app.showToastC('登陆状态有误');
-          };
-        }
-      });   
+      if(this.data.drawOrFreeOrder==1){
+        this.listdataFO(1);
+      }else{
+        this.listdata(1);
+      }; 
     })
   },
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this.listdata(2);
+    
+    if(this.data.drawOrFreeOrder==1){
+      this.listdataFO(2);
+    }else{
+      this.listdata(2);
+    };
   },
   /**
    * 用户点击右上角分享
@@ -583,5 +638,18 @@ Page({
       url: path
     });
   },
-
+  // 跳转抽签详情
+  limitlotteryd: function(w) {
+    var id = w.currentTarget.dataset.gid || w.target.dataset.gid;
+    if(id=='374855' || id=='374856' || id=='374857'){
+      wx.navigateTo({
+        url: "/page/secondpackge/pages/luckyDraw/luckyDraw?id=" + id
+      });
+    }else{
+      wx.navigateTo({
+        url: "/page/component/pages/limitlottery/limitlottery?list=1&id=" + id
+      });
+    }
+  },
+  
 })

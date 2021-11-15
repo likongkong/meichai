@@ -1,5 +1,5 @@
-@import "../../../../pages/index/index.wxss";
-
+@import "../../../../common/tabbar.wxss";
+@import "../../../../common/newcoupon.wxss";
 page{
   background:#f5f6fa;
 }
@@ -339,142 +339,87 @@ page{
   position: relative;
 }
 
-
-page {
-  background: #f5f6fa;
+.drawOrFreeOrderBox{
+  width: 100%;
+  height: 80rpx;
+  background: #fff;
 }
-
-.cardstyle {
-  width: 185rpx;
+.drawOrFreeOrderEve{
+  padding: 0 20rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 28rpx;
   display: inline-block;
-  position: relative;
-  box-shadow: 2px 2px 5rpx #ccc;
-  margin: 0 20rpx 10rpx 0;
-  border-radius: 10rpx;
   vertical-align: top;
 }
-
-.mswiper {
-  width: 730rpx;
-  height: 194rpx;
-  margin: 10rpx;
+.drawOrFreeOrderEve.dfoSelect{
+  font-size: 36rpx;
+  position: relative;
+}
+.dfoSelect::after{
+  content: '';
+  width: 60%;
+  height: 8rpx;
+  position: absolute;
+  bottom: 5rpx;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background:#E84D59;
 }
 
-.exhibbox {
+.limlistbox{
   width: 100%;
 }
-
-.exhibboxtop {
+.limitlbut{
   width: 100%;
-  height: 90rpx;
-  background: #fff;
-}
-
-.exhibboxcon {
-  margin: 20rpx;
   overflow: hidden;
+  padding-bottom: 16rpx;
+  
 }
-
-.exhibboxconeve {
-  width: 305rpx;
-  height: 480rpx;
-  background: #fff;
+.limieve{
+  width: 344rpx;
   float: left;
+  margin-right: 20rpx;
+  background: #fff;
   border-radius: 10rpx;
   margin-bottom: 20rpx;
-  padding: 20rpx;
+  position: relative;
 }
-
-.exhibboxeveimg {
-  width: 305rpx;
-  height: 305rpx;
-  display: block;
-  border-radius: 10rpx;
-}
-
-.exhibboxconibox {
-  width: 710rpx;
-  height: 240rpx;
-  float: left;
-}
-
-.exhibboxconiboimg {
+.limieveimg{
   width: 100%;
+  height:auto;
   display: block;
-  height: 100%;
+  border-radius: 10rpx 10rpx 0 0;
 }
-
-.exhshopimg {
-  width: 46rpx;
-  height: 46rpx;
-  border-radius: 50%;
-  float: left;
+.limievetxtname{
+  color:#000;height:68rpx;width:93%;margin:0 auto;font-size: 24rpx;font-weight: bold;
 }
-
-.exhshoptiright {
-  background: #f93f45;
-  font-size: 20rpx;
-  height: 40rpx;
-  line-height: 40rpx;
-  text-align: center;
-  padding: 0 2rpx;
-  float: right;
-  border-radius: 5rpx;
-  color: #fff;
-  margin-top: 3rpx;
-  max-width: 90rpx;
-}
-
-.exibactna {
-  width: 100%;
-  height: 40rpx;
-  line-height: 40rpx;
-  text-align: center;
+.limievetxttime{
+  width: 93%;
+  height: 50rpx;
   font-size: 22rpx;
+  color: #ccc;
+  margin:0 auto;
 }
 
-.mexhibboxconeve {
-  width: 305rpx;
-  background: #fff;
-  border-radius: 10rpx;
-  margin-bottom: 20rpx;
-  padding: 20rpx;
-  box-shadow: 2px 2px 5rpx #ccc;
-}
-
-.mdismtbcctxthead {
-  width: 94%;
-  padding: 0 3%;
-  font-size: 14px;
-  color: #666;
-  line-height: 16px;
-  text-align: center;
-  max-height: 30px;
-}
-
-.smoketag {
-  background: #f93f45;
-  font-size: 20rpx;
-  height: 32rpx;
-  line-height: 32rpx;
-  text-align: center;
-  padding: 0 15rpx;
-  border-radius: 5rpx;
+.labelstyle {
+  width: 155rpx;
+  line-height: 30rpx;
+  opacity: 0.9;
+  position: absolute;
+  top: 10rpx;
+  right: 10rpx;
   color: #fff;
+  border-radius: 7rpx;
+  font-size:25rpx;
+  text-align:center;
 }
-
-.exhListwIcon{
-  width:120rpx;
-  height: 120rpx;
-  position: fixed;
-  right: 20rpx;
-  bottom: 260rpx;
-  z-index: 20;
-}
-.chbleft{
-  width:140rpx;
-  height: 78rpx;
-  margin:3rpx 5rpx 0 5rpx;
-  border-radius: 5rpx;
-  float: left;
+.limstorlogo{
+  width: 30rpx;
+  height: 30rpx;
+  display: inline-block;
+  border-radius: 50%;
+  margin: 7rpx 5rpx 0 5rpx;
+  vertical-align: top;
 }
