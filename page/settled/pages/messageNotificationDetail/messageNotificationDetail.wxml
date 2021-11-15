@@ -8,6 +8,10 @@
   <view class="image_text">
     <rich-text nodes="{{data.image_text}}"></rich-text>
   </view>
+  <view catchtap="jumpPage">
+      <image class="litpic" wx:if='{{data.skipInfo.skipImg}}' src="{{data.skipInfo.skipImg}}" mode="widthFix"></image>
+      <view class="jumpPageClass">{{data.skipInfo.skipName}}</view>
+  </view>
   
 </view>
 <!-- <button wx:else open-type='contact' session-from='' style='width:100%;height:100%;position:absolute;top:0;left:0;opacity: 0;z-index:1;'></button> -->

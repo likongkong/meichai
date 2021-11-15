@@ -38,3 +38,8 @@ page{
   color: #909090;
   margin-left: 12rpx;
 }
+.jumpPageClass{
+  padding: 20rpx 0;
+  font-size: 28rpx;
+  color: blue;
+}

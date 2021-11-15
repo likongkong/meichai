@@ -112,5 +112,8 @@ Page({
         wx.stopPullDownRefresh();
       }
     });
+  },
+  jumpPage(){
+    app.comjumpwxnav(0,this.data.data.skipInfo.skipPath)
   }
 })
