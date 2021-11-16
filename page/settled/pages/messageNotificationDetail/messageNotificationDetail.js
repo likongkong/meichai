@@ -35,6 +35,7 @@ Page({
     this.data.loginid = app.signindata.loginid;
     this.data.uid = app.signindata.uid;
     this.gitData();
+    this.recommend();
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -82,6 +83,20 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  recommend: function () {
+    var _this = this
+    // 统计新用户
+    var qqqqq = Dec.Aese('mod=share&operation=dotactivity' + '&referee=' + _this.data.uid + '&activity_id=' + _this.data.id + '&type=6');
+    wx.request({
+      url: app.signindata.comurl + 'statistics.php' + qqqqq,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        
+      },
+      fail: function () { }
+    });
   },
   gitData(){
     wx.showLoading({
