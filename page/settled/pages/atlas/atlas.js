@@ -16,7 +16,49 @@ Page({
     loginid:'',
     detailData:{},
     illustrated_id:''
-  },  
+  },
+  // 删除图鉴 
+  del_illustrated(){
+    var _this = this;
+
+    var qqq = Dec.Aese('mod=community&operation=del_illustrated&uid='+_this.data.uid+'&loginid='+_this.data.loginid + '&id=' + _this.data.illustrated_id + '&type=1');
+    console.log('mod=community&operation=del_illustrated&uid='+_this.data.uid+'&loginid='+_this.data.loginid + '&id=' + _this.data.illustrated_id + '&type=1')
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + qqq,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        console.log('删除图鉴=====',res)
+        if (res.data.ReturnCode == 200) {
+          wx.showModal({
+            content: '删除成功',
+            showCancel: false,
+            success: function(res) {
+              let pages = getCurrentPages();
+              let prevpage = pages[pages.length - 2];
+              if (prevpage) {
+                wx.navigateBack();
+                prevpage.onLoadfun()
+              } else {
+                wx.redirectTo({
+                  url: "/pages/index/index"
+                });
+              };
+            }
+          });
+  
+        }else{
+          if(res.data.Msg){
+            wx.showModal({
+              content: res.data.Msg || '',
+              showCancel: false,
+              success: function(res) {}
+            });
+          };
+        };
+      }
+    });
+  },
   // 失去焦点
   bindblur:function(){
     this.setData({
@@ -425,7 +467,7 @@ submissionfun:function(){
     return {
       title:app.signindata.titleShare?app.signindata.titleShare:'你喜欢的潮玩都在这里！',
       path: 'pages/index/index',
-      imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      imageUrl:indexShareImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
       success: function (res) {}
     }    
   },

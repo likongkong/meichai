@@ -349,4 +349,18 @@ page{
   background:#f4f5f9;
 }
 
+.WaybillNoDeletedBox{
+  padding-right: 60rpx;
+  position: relative;
+}
+.WaybillNoDeleted{
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
 

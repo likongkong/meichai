@@ -1479,7 +1479,7 @@ vipOrOrdermine1(){
 
                       // 渲染广告图片
                       wx.getImageInfo({
-                        src: app.signindata.mergePicImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+                        src: app.signindata.mergePicImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
                         success: function (res) {
                           var ratio = res.width / res.height;   
                           var viewHeight = (319/ratio)<=175?(319/ratio):175;    
@@ -1662,7 +1662,7 @@ vipOrOrdermine1(){
     
                           // 渲染广告图片
                           wx.getImageInfo({
-                            src: app.signindata.mergePicImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+                            src: app.signindata.mergePicImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
                             success: function (res) {
                               var ratio = res.width / res.height;   
                               var viewHeight = (319/ratio)<=175?(319/ratio):175;    
@@ -1875,7 +1875,7 @@ vipOrOrdermine1(){
 
                       // 渲染广告图片
                       wx.getImageInfo({
-                        src: app.signindata.mergePicImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+                        src: app.signindata.mergePicImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
                         success: function (res) {
 
                           var ratio = res.width / res.height;   

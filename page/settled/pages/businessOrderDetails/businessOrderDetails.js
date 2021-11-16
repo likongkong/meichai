@@ -213,6 +213,7 @@ Page({
     let index = e.currentTarget.dataset.index;
     var _this = this;
     var detailData = _this.data.detailData || {};
+    var selectData = _this.data.detailData;
     if(index == 1){ // 1 修改地址 2 退款 3 物流
       var receipt = detailData.receipt || {};
       _this.setData({
@@ -221,7 +222,8 @@ Page({
         deladdress:receipt.address,
         province:receipt.province,
         city:receipt.city,
-        county:receipt.district
+        county:receipt.district,
+        selectData
       })
     } else if(index == 2){
         api.checkOrderRefund({
@@ -252,7 +254,8 @@ Page({
     } else if(index == 3){
       _this.setData({
         csc:detailData.order.shippingName || '',
-        scanCodeMsg:detailData.order.shippingCode || ''
+        scanCodeMsg:detailData.order.shippingCode || '',
+        selectData
       })
 
     };
@@ -261,6 +264,7 @@ Page({
       this.setData({
         commonBulletFrame:true,
         logisticsRefundModify:index,
+        selectData
       })
     }
 
@@ -390,7 +394,20 @@ Page({
             };        
           }          
         })
-    }
+    }else if(logisticsRefundModify == 6){
+        api.emptyLogistics(selectData.order.orderId,{}).then(res => {
+            if (res.data.status_code == 200) {
+                app.showToastC('删除成功');
+                setTimeout(()=>{
+                  _this.getData();
+                },2000);
+            }else{
+              if(res.data && res.data.message){
+                app.showModalC(res.data.message); 
+              };
+            }          
+        })
+    };
     _this.setData({
       commonBulletFrame:false
     })
@@ -484,7 +501,7 @@ Page({
     return {
       title:app.signindata.titleShare?app.signindata.titleShare:'你喜欢的潮玩都在这里！',
       path: 'pages/index/index',
-      imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      imageUrl:indexShareImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
       success: function (res) {}
     } 
   },

@@ -367,36 +367,22 @@ Page({
       app.signindata.isProduce = true;  
       _this.onLoadfun();
     }else{
-      wx.getSetting({
-        success: res => {
-          if (true) {
-            // '已经授权'
-            _this.data.loginid = app.signindata.loginid;
-            _this.data.openid = app.signindata.openid;
-            _this.setData({
-              uid: app.signindata.uid,
-              avatarUrl: app.signindata.avatarUrl,
-              isProduce: app.signindata.isProduce,
-              signinlayer: true,
-              isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
-            });
-            // 判断是否登录
-            if (_this.data.loginid != '' && _this.data.uid != '') {
-              _this.onLoadfun();
-            } else {
-              app.signin(_this)
-            }
-            _this.setData({})
-          } else {
-            wx.hideLoading()
-            app.userstatistics(39);
-            _this.onLoadfun();
-            this.setData({
-              signinlayer: false,
-            })
-          }
-        }
+      // '已经授权'
+      _this.data.loginid = app.signindata.loginid;
+      _this.data.openid = app.signindata.openid;
+      _this.setData({
+        uid: app.signindata.uid,
+        avatarUrl: app.signindata.avatarUrl,
+        isProduce: app.signindata.isProduce,
+        signinlayer: true,
+        isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
       });
+      // 判断是否登录
+      if (_this.data.loginid != '' && _this.data.uid != '') {
+        _this.onLoadfun();
+      } else {
+        app.signin(_this)
+      }
     };
 
   },
@@ -568,6 +554,10 @@ Page({
             brandList[r].stop_time = time.toDate(brandList[r].stop_time);
           };
           res.data.Info.brand.bradDesc = res.data.Info.brand.bradDesc.split('hc').join('\n');
+          var payStatus = _this.data.payStatus || [];
+          if(res.data.Info.isExistFinishedGoods){
+            payStatus.push({name:'已结束',num:'9'})
+          };
           _this.setData({
             detailInfo:res.data.Info,
             brandinfo: res.data.Info.brand,
@@ -578,7 +568,8 @@ Page({
             brandArr,
             brandSettledLimit:res.data.Info.brandSettledLimit || false,
             isOneselfBrand:res.data.Info.isOneselfBrand || false, // 用户是否是当前品牌管理者
-            userJurisdictionList:res.data.Info.userJurisdictionList
+            userJurisdictionList:res.data.Info.userJurisdictionList,
+            payStatus
           })
           if (page == 0) {
             _this.setData({

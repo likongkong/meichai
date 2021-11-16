@@ -76,12 +76,14 @@
             </view>
        </view>
        <view class="orderBottom" wx:if='{{order.shippingCode}}' style="padding-top:0;">
-            <view class="orderBoxTop">运单号:{{order.shippingCode}}</view>
+            <view class="orderBoxTop">
+                <view class="WaybillNoDeletedBox">运单号:{{order.shippingName}}--{{order.shippingCode}}<image class="WaybillNoDeleted" src="https://cdn.51chaidan.com/images/brandSettledIcon/shanchu.png" mode="aspectFit" wx:if='{{order.payStatus == 4}}' catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='6'></image></view>
+            </view>
        </view>
        <view class="orderBottom" wx:if='{{order.isToyCabinet}}' style="padding-top:0;">
             <view class="orderBoxTopNew">该订单为玩具柜订单，暂时无法发货，请等待用户确认发货</view>
        </view>
-       <view class="orderBottom" wx:elif='{{order.payStatus != 0 && order.payStatus != 7 && order.payStatus != 8}}'> <!-- 未支付 -->
+       <view class="orderBottom" wx:elif='{{order.payStatus != 0 && order.payStatus != 7 && order.payStatus != 8 &&order.payStatus != 5}}'> <!-- 未支付 -->
                <view class="orderBottomOrderNumber">
                    <view class="orderBottomButton" wx:if="{{order.payStatus != 5}}" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='3'>
                        <block wx:if='{{order.shippingCode}}'>修改物流</block>
@@ -95,7 +97,7 @@
 
 </template>
 
-<!-- 弹框  1 修改 2 退款 3 物流 4 批量导出订单-->
+<!-- 弹框  1 修改 2 退款 3 物流 4 批量导出订单 6 删除运单号-->
 <view class="wshNew" catchtouchmove="true" wx:if='{{commonBulletFrame}}' catchtap="closeCommonTip">
     <view class="orderMangAddress" catchtap="true">
         <view class="orderMangTipTop">
@@ -233,6 +235,10 @@
 第三步：选择需要导入的文件，文件格式为excel。
 第四步：上传成功。</text>          
         </block>
+        <!-- 删除订单 -->
+        <block wx:elif='{{logisticsRefundModify == 6}}'>
+            <text class="batchExportOrder" style="text-align:center;">删除运单号之后无法恢复，请谨慎操作</text>          
+        </block>
 
         <view class="orderMangTipCenterEve" style="width:610rpx;margin:auto;">
             <block wx:if='{{logisticsRefundModify == 4 || logisticsRefundModify == 5}}'>
@@ -244,6 +250,7 @@
                 <view class="oAMaBConfirm" catchtap="closeCommonTip">取消</view>
                 <view class="oAMaBCancel" catchtap="confirmCommonTip" wx:if='{{logisticsRefundModify == 2 && subLedger==1}}'>立即支付￥{{payInfoData.order.profitAmount}}</view> 
                 <view class="oAMaBCancel" catchtap="confirmCommonTip" wx:elif='{{logisticsRefundModify == 2 && subLedger==2}}'>立即退款</view> 
+                <view class="oAMaBCancel" catchtap="confirmCommonTip" wx:elif='{{logisticsRefundModify == 6}}'>确定删除</view> 
                 <view class="oAMaBCancel" catchtap="confirmCommonTip" wx:else>确定</view>               
             </block>
         </view>

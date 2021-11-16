@@ -265,7 +265,7 @@ Page({
     }
 
   },
-  // 弹框确认按钮    1 修改收货地址 2 退款 3 物流 4批量导出订单
+  // 弹框确认按钮    1 修改收货地址 2 退款 3 物流 4批量导出订单 6 删除订单
   confirmCommonTip(){ 
     var _this = this;
     var logisticsRefundModify = _this.data.logisticsRefundModify;
@@ -394,8 +394,12 @@ Page({
               app.showToastC('添加成功');
               _this.setData({
                 commonBulletFrame:false,
-                ['order[' + orderNum + '].order.shippingCode'] : _this.data.scanCodeMsg
+                ['order[' + orderNum + '].order.shippingCode'] : _this.data.scanCodeMsg,
+                ['order[' + orderNum + '].order.shippingName'] :_this.data.csc,
+                ['order[' + orderNum + '].order.payStatus'] :4,
+                ['order[' + orderNum + '].order.payStatusName'] :'已发货'
               });
+              console.log('===========',_this.data.order)
           }else{
             if(res.data && res.data.message){
               app.showModalC(res.data.message); 
@@ -504,7 +508,20 @@ Page({
 
         }
       })
-    }
+    }else if(logisticsRefundModify == 6){
+        api.emptyLogistics(selectData.order.orderId,{}).then(res => {
+            if (res.data.status_code == 200) {
+                app.showToastC('删除成功');
+                setTimeout(()=>{
+                  _this.getData();
+                },2000);
+            }else{
+              if(res.data && res.data.message){
+                app.showModalC(res.data.message); 
+              };
+            }          
+        })
+    };
     _this.setData({
       commonBulletFrame:false
     });
@@ -745,7 +762,7 @@ Page({
     return {
       title:app.signindata.titleShare?app.signindata.titleShare:'你喜欢的潮玩都在这里！',
       path: 'pages/index/index',
-      imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      imageUrl:indexShareImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
       success: function (res) {}
     } 
   },

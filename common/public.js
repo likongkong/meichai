@@ -3,7 +3,7 @@ var Aes = require('crypto-js.js');  //引用AES源码js
 var env = 'online';   //线上 
 // var env = 'qpe';  // 准生产环境
 // var env = 'test';  //测试
-var versionnumber = '13.4.4';
+var versionnumber = '13.4.5';
 
 if(env == "online"){
   var key = Aes.enc.Utf8.parse("danzhuan1chaijia");
@@ -79,7 +79,7 @@ function sharemc(){
   return {
     title: '潮玩社交平台',
     path: 'pages/index/index',
-    imageUrl: 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+    imageUrl: 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
     success: function (res) {}
   }  
 }
@@ -87,7 +87,7 @@ function sharemc(){
 function shareWechatMoments(){
   return {
     title:'美拆',
-    imageUrl:'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
+    imageUrl:'https://cdn.51chaidan.com/images/default/shareImg.jpg'
   }
 }
 // 购物车显示数据

@@ -288,7 +288,7 @@ Page({
     return {
       title:'我正在美拆参加展会优先入场资格抽选活动，快来一起观展吧',
       path: "/page/secondpackge/pages/chouxuanHomepage/chouxuanHomepage?share_uid=" + _this.data.uid,
-      imageUrl:app.signindata.indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      imageUrl:app.signindata.indexShareImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
     }   
   },
   onShareTimeline:function(){
@@ -304,7 +304,7 @@ Page({
     return {
       title:'我正在美拆参加展会优先入场资格抽选活动，快来一起观展吧',
       query:'share_uid='+_this.data.uid,
-      imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      imageUrl:indexShareImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
     }
   },  
 

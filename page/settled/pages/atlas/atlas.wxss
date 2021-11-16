@@ -104,7 +104,7 @@ page{
   padding: 15rpx 0;
   position: fixed;
   left: 0;
-  bottom: 30rpx;
+  bottom: 0;
   z-index: 10;
   background:#fff;
   font-size:24rpx;

@@ -457,13 +457,13 @@ Page({
       return {
         title:this.data.dataInfo.shareTitle,
         path: "/page/secondpackge/pages/luckyDraw/luckyDraw?id="+_this.data.id+'&referee=' + _this.data.uid,
-        imageUrl:this.data.dataInfo.shareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+        imageUrl:this.data.dataInfo.shareImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
       }   
     }else{
       return {
         title:this.data.dataInfo.shareTitle,
         path: "/page/secondpackge/pages/luckyDraw/luckyDraw?share_uid=" + _this.data.uid + "&share_time=" + _this.data.signTime +'&id='+_this.data.id +'&referee=' + _this.data.uid,
-        imageUrl:this.data.dataInfo.shareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+        imageUrl:this.data.dataInfo.shareImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
       }  
     }
      
@@ -483,13 +483,13 @@ Page({
       return {
         title:this.data.dataInfo.shareTitle,
         query:'perayu=1&id='+_this.data.id,
-        imageUrl:this.data.dataInfo.shareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+        imageUrl:this.data.dataInfo.shareImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
       } 
     }else{
       return {
         title:this.data.dataInfo.shareTitle,
         query:'share_uid='+_this.data.uid+'&share_time=' + _this.data.signTime+'&perayu=1&id='+_this.data.id,
-        imageUrl:this.data.dataInfo.shareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+        imageUrl:this.data.dataInfo.shareImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
       }
     }
   

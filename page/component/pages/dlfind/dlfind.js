@@ -366,7 +366,7 @@ Page({
   },
 
   // 品牌社区列表
-  eldatalistfun: function (num) {
+  eldatalistfun: function (num=0) {
     var _this = this;
     if (num == 0) {
       _this.data.page = 0;
@@ -584,30 +584,19 @@ Page({
         app.signindata.isProduce = true;  
         _this.onLoadfun();
     }else{
-      wx.getSetting({
-        success: res => {
-          if (true) {
-            _this.setData({
-              signinlayer: true,
-              loginid: app.signindata.loginid,
-              uid: app.signindata.uid,
-              openid: app.signindata.openid,
-              isShareFun: app.signindata.isShareFun
-            });
-            // 判断是否登录
-            if (_this.data.loginid != '' && _this.data.uid != '') {
-              _this.onLoadfun();
-            } else {
-              app.signin(_this)
-            }
-          } else {
-            this.setData({
-              signinlayer: false,
-            })
-            _this.onLoadfun();
-          }
-        }
+      _this.setData({
+        signinlayer: true,
+        loginid: app.signindata.loginid,
+        uid: app.signindata.uid,
+        openid: app.signindata.openid,
+        isShareFun: app.signindata.isShareFun
       });
+      // 判断是否登录
+      if (_this.data.loginid != '' && _this.data.uid != '') {
+        _this.onLoadfun();
+      } else {
+        app.signin(_this)
+      }
     };
   },
 
