@@ -205,7 +205,9 @@
             </block>
             <block wx:else>
                 <block wx:if="{{isSettledImg}}">
-                    <view class="settledImgWrap" data-type="{{brandSettledStatus!=3?'9027':'9028'}}" data-num="{{brandSettledStatus}}" data-whref="id={{dataInfo.brandSettledInfo.brandSettledId}}&num={{brandSettledStatus}}&msg={{dataInfo.brandSettledInfo.brandSettledReturnMsg}}" catchtap="comjumpwxnav">
+                    <!-- catchtap="comjumpwxnav" -->
+                    <view class="settledImgWrap">
+                        <button class='butUserImg' type='primary' bindtap="getUserProfileSettled"  data-type="{{brandSettledStatus!=3?'9027':'9028'}}" data-num="{{brandSettledStatus}}" data-whref="id={{dataInfo.brandSettledInfo.brandSettledId}}&num={{brandSettledStatus}}&msg={{dataInfo.brandSettledInfo.brandSettledReturnMsg}}"></button>
                         <image class="settledImg" src="https://cdn.51chaidan.com/images/brandSettledIcon/audit{{brandSettledStatus==1?'0':brandSettledStatus==2?'1':brandSettledStatus==3?'3':'2'}}.png" mode="widthFix"></image>
                         <image class="closeImg" src="https://cdn.51chaidan.com/images/brandSettledIcon/closeImg.png" mode="widthFix" catchtap="closeSettledImg"></image>
                     </view>
