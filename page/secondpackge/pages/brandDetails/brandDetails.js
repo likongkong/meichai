@@ -58,6 +58,7 @@ Page({
     wOri:1 , // 1 瀑布流 2 信息流
     brandSinginBox:false,
     guidanceMask:false,
+    finished_pid:0
   },
   siginInTip(){
     app.showToastC('今日已签到');
@@ -134,6 +135,7 @@ Page({
     that.setData({
       centerIndex:index,
     })
+    that.data.finished_pid = 0;
     that.eldatalistfun(0)
     //创建节点选择器
     var query = wx.createSelectorQuery();
@@ -477,9 +479,9 @@ Page({
       });
     };
 
-    var qqq = Dec.Aese('mod=community&operation=info&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&showType='+_this.data.centerIndex+'&pid='+ _this.data.page + '&brand_id='+_this.data.brandId);
+    var qqq = Dec.Aese('mod=community&operation=info&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&showType='+_this.data.centerIndex+'&pid='+ _this.data.page + '&brand_id='+_this.data.brandId + '&finished_pid=' + _this.data.finished_pid);
 
-    console.log('mod=community&operation=info&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&showType='+_this.data.centerIndex+'&pid='+ _this.data.page + '&brand_id='+_this.data.brandId)
+    console.log('mod=community&operation=info&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&showType='+_this.data.centerIndex+'&pid='+ _this.data.page + '&brand_id='+_this.data.brandId + '&finished_pid=' + _this.data.finished_pid)
 
     wx.request({
       url: app.signindata.comurl + 'toy.php' + qqq,
@@ -502,6 +504,10 @@ Page({
           _this.setData({
             nodataiftr:true
           })
+          if(communityList.length == 0 && _this.data.finished_pid == 0){
+            _this.data.finished_pid = _this.data.page>0?_this.data.page:1;
+            _this.eldatalistfun();
+          };
           if (num == 0) {
             _this.setData({
               communityList
@@ -695,6 +701,7 @@ Page({
       var _this = this;
       _this.data.page = 0;
       _this.getbrandDetail(_this.data.page);
+      _this.data.finished_pid = 0;
       _this.eldatalistfun(0)
     })
   },
