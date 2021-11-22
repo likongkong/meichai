@@ -113,7 +113,7 @@ Page({
     return {
       title:app.signindata.titleShare?app.signindata.titleShare:'你喜欢的潮玩都在这里！',
       path: 'pages/index/index',
-      imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      imageUrl:indexShareImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
       success: function (res) {}
     } 
   },

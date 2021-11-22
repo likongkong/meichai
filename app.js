@@ -100,9 +100,9 @@ App({
     communityTitleShare:'',
     // 活动分享朋友圈底部是否显示广告
     is_eveShareAdver:false,
-    indexShareImg:'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
-    toyShowShareImg:'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
-    communityShareImg:'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+    indexShareImg:'https://cdn.51chaidan.com/images/default/shareImg.jpg',
+    toyShowShareImg:'https://cdn.51chaidan.com/images/default/shareImg.jpg',
+    communityShareImg:'https://cdn.51chaidan.com/images/default/shareImg.jpg',
     mergePicImg:'',
     // 抽盒金
     blindboxMoney:0,
@@ -870,7 +870,7 @@ App({
       });     
     } else if (item_type == 6 || item_type == 7) {
       wx.navigateTo({    // 活动列表
-        url: "/pages/activitysharinglist/activitysharinglist"
+        url: "/page/component/pages/activitysharinglist/activitysharinglist"
       });
     } else if (item_type == 8) {
       wx.navigateTo({    // 活动详情页
@@ -895,7 +895,7 @@ App({
       }); 
     } else if (item_type == 9004) {
       wx.navigateTo({
-        url: "/pages/activitysharinglist/activitysharinglist"
+        url: "/page/component/pages/activitysharinglist/activitysharinglist"
       }); 
     } else if (item_type == 9005) {
       wx.navigateTo({
@@ -1409,7 +1409,7 @@ App({
       });
     } else if (item_type == 6 || item_type == 7) {
       wx.navigateTo({ // 活动列表
-        url: "/pages/activitysharinglist/activitysharinglist"
+        url: "/page/component/pages/activitysharinglist/activitysharinglist"
       });
     } else if (item_type == 8) {
       wx.navigateTo({ // 活动详情页
@@ -1633,27 +1633,27 @@ App({
           if(indexShare.length!=0 && indexShare[indexShareNum]){
             _this.signindata.indexShare = indexShare || [];
             var indexShareImg = indexShare[indexShareNum]+'?time=' + nowTime;
-            _this.signindata.indexShareImg = indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg';
+            _this.signindata.indexShareImg = indexShareImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg';
           }else{
-            _this.signindata.indexShareImg = 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
+            _this.signindata.indexShareImg = 'https://cdn.51chaidan.com/images/default/shareImg.jpg'
           };
 
           // 展会分享
           if(toyShowShare.length!=0 && toyShowShare[toyShowShareNum]){
             _this.signindata.toyShowShare = toyShowShare || [];
             var toyShowShareImg = toyShowShare[toyShowShareNum].img+'?time=' + nowTime;
-            _this.signindata.toyShowShareImg = toyShowShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg';
+            _this.signindata.toyShowShareImg = toyShowShareImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg';
           }else{
-            _this.signindata.toyShowShareImg = 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
+            _this.signindata.toyShowShareImg = 'https://cdn.51chaidan.com/images/default/shareImg.jpg'
           };
 
           // 发现分享
           if(communityShare.length!=0 && communityShare[communityShareNum]){
             _this.signindata.communityShare = communityShare || [];
             var communityShareImg = communityShare[communityShareNum].img+'?time=' + nowTime;
-            _this.signindata.communityShareImg = communityShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg';
+            _this.signindata.communityShareImg = communityShareImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg';
           }else{
-            _this.signindata.communityShareImg = 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
+            _this.signindata.communityShareImg = 'https://cdn.51chaidan.com/images/default/shareImg.jpg'
           };
 
           // 合成图片的banner图

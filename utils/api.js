@@ -88,6 +88,10 @@ export const brandRefund = (query) => {
 export const checkOrderRefund = (query) => {
     return apiResquest.post('brand/checkOrderRefund',query)
 }
+// 删除订单
+export const emptyLogistics = (url,query) => {
+    return apiResquest.get('brand/emptyLogistics/' + url,query)
+}
 // ---------------------------------------- 订单详情 -----------------------------------------
 export const oMbrandInfo = (url,query) => {
     return apiResquest.get('brand/info/' + url,query)

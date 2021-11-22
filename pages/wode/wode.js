@@ -114,6 +114,21 @@ Page({
       isSettledImg: false
     })
   },
+
+  // 更新用户信息
+  getUserProfileSettled(w){
+    app.getUserProfile((res,userInfo) => {
+        this.setData({
+          avatarUrl: userInfo.avatarUrl,
+          nickName: userInfo.nickName,
+          gender: userInfo.gender,
+          istitnex: false,
+          istit: true,
+        });
+        this.comjumpwxnav(w)
+    })
+  },
+
   comjumpwxnav(e){
     let type = e.currentTarget.dataset.type;
     let num = e.currentTarget.dataset.num;
@@ -494,34 +509,20 @@ Page({
       app.signindata.isProduce = true;  
       _this.onLoadfun();
     }else{
-      wx.getSetting({
-        success: res => {
-          if (true) {
-            // '已经授权'
-            _this.data.loginid = app.signindata.loginid;
-            _this.setData({
-              uid: app.signindata.uid,
-              isProduce: app.signindata.isProduce,
-              signinlayer: true,
-              tgabox: false
-            });
-            // 判断是否登录
-            if (_this.data.loginid != '' && _this.data.uid != '') {
-              _this.onLoadfun();
-            } else {
-              app.signin(_this)
-            }
-          } else {
-            wx.hideLoading();
-            _this.setData({
-              signinlayer:false
-            }); 
-            // '没有授权 统计'
-            app.userstatistics(4);
-
-          }
-        }
+      // '已经授权'
+      _this.data.loginid = app.signindata.loginid;
+      _this.setData({
+        uid: app.signindata.uid,
+        isProduce: app.signindata.isProduce,
+        signinlayer: true,
+        tgabox: false
       });
+      // 判断是否登录
+      if (_this.data.loginid != '' && _this.data.uid != '') {
+        _this.onLoadfun();
+      } else {
+        app.signin(_this)
+      }
     };
   },
   // 授权点击统计

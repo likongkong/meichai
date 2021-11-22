@@ -531,9 +531,9 @@ Page({
   onShareAppMessage: function () {
       var _this = this;
       var movies = _this.data.movies;
-      var img = 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
+      var img = 'https://cdn.51chaidan.com/images/default/shareImg.jpg'
       if(movies&&movies[0]){
-        img = movies[0].image || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
+        img = movies[0].image || 'https://cdn.51chaidan.com/images/default/shareImg.jpg'
       }
       return {
         title: '',
@@ -543,9 +543,9 @@ Page({
   onShareTimeline:function(){
     var _this = this;
     var movies = _this.data.movies;
-    var img = 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
+    var img = 'https://cdn.51chaidan.com/images/default/shareImg.jpg'
     if(movies&&movies[0]){
-      img = movies[0].image || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg'
+      img = movies[0].image || 'https://cdn.51chaidan.com/images/default/shareImg.jpg'
     }
     return {
       title:'Bilibiliworld x MCTS 8.7~8.9 不见不散，打卡送超多奖励',

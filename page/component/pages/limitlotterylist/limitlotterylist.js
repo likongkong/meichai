@@ -27,10 +27,18 @@ Page({
     shopnum: 0,
     nodataiftr: false,
     windowHeight: app.signindata.windowHeight - 65 - wx.getStorageSync('statusBarHeightMc') || 0,
-    signinlayer: false,
-    iscashpledge:false
+    iscashpledge:false,
+    drawOrFreeOrder:1, // 1 抽签 2 免单
   },
-
+  drawOrFreeOrderFun(w){
+    var drawOrFreeOrder = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
+    this.setData({drawOrFreeOrder});
+    if(drawOrFreeOrder==2){
+      if(!this.data.commoddata){
+        this.listdataDraw(1)
+      };
+    };
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -50,36 +58,22 @@ Page({
       app.signindata.isProduce = true;  
       _this.onLoadfun();
       }else{
-        wx.getSetting({
-          success: res => {
-            if (true) {
-              // '已经授权'
-              _this.setData({
-                loginid: app.signindata.loginid,
-                uid: app.signindata.uid,
-                openid: app.signindata.openid,
-                isProduce: app.signindata.isProduce,
-                // 适配苹果X 
-                isIphoneX: app.signindata.isIphoneX
-              });
-              // 判断是否登录
-              if (_this.data.loginid != '' && _this.data.uid != '') {
-                _this.onLoadfun();
-              } else {
-                app.signin(_this)
-              }
-              _this.setData({
-                signinlayer: true,
-              })
-            } else {
-              wx.hideLoading()
-              _this.onLoadfun();
-              this.setData({
-                signinlayer: false,
-              })
-            }
-          }
+        // '已经授权'
+        _this.setData({
+          loginid: app.signindata.loginid,
+          uid: app.signindata.uid,
+          openid: app.signindata.openid,
+          isProduce: app.signindata.isProduce,
+          // 适配苹果X 
+          isIphoneX: app.signindata.isIphoneX,
+          spreadEntry: app.signindata.spreadEntry,
         });
+        // 判断是否登录
+        if (_this.data.loginid != '' && _this.data.uid != '') {
+          _this.onLoadfun();
+        } else {
+          app.signin(_this)
+        }
       };
   },
   onLoadfun: function() {
@@ -108,51 +102,84 @@ Page({
     };
 
   },
-
-  // 授权点击统计
-  clicktga: function () {
-    app.clicktga(2)
-  },
-  clicktganone: function () {
-    this.setData({ tgabox: false })
-  },
-  userInfoHandler: function (e) {
-    // 判断是否授权 
+  listdataDraw:function(num){  // 1 下拉 2 上拉
     var _this = this;
-    wx.getSetting({
-      success: res => {
-        if (true) {
-          // 确认授权用户统计
-          app.clicktga(4);
-          _this.setData({
-            tgabox: false,
-            signinlayer: true,
-          });
-          // '已经授权'
-          _this.data.loginid = app.signindata.loginid,
-            _this.data.openid = app.signindata.openid,
-            _this.setData({
-              uid: app.signindata.uid,
-              avatarUrl: app.signindata.avatarUrl,
-              isProduce: app.signindata.isProduce,
-            });
-          // 判断是否登录
-          if (_this.data.loginid != '' && _this.data.uid != '') {
-            _this.onLoadfun();
-          } else {
-            app.signin(_this);
-          };
-        } else {
-          _this.setData({
-            tgabox: true
-          });
-        }
-      }
-    });
-    if (e.detail.detail.userInfo) { } else {
-      app.clicktga(8) //用户按了拒绝按钮
+    wx.showLoading({ title: '加载中...', })
+    if (num==1){
+      _this.setData({ pid: 0, nodataiftr: false});
+    }else{
+      var pagenum = _this.data.pid;
+      _this.setData({ pid: ++pagenum, nodataiftr: false});
     };
-
+    var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
+    // 商品列表
+    var newDate = new Date();
+    var m = newDate.getMinutes();
+    var s = newDate.getSeconds();
+    var q = Dec.Aese('mod=activity&operation=list&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1&category_id=' + _this.data.category_id+'&pid='+_this.data.pid);
+    wx.request({
+      url: app.signindata.comurl + 'spread.php' + q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('listdata=====',res)
+        // 刷新完自带加载样式回去
+        wx.hideLoading()
+        wx.stopPullDownRefresh(); 
+        if (res.data.ReturnCode == 200) {
+          var arrlist = res.data.List.list || [];
+          if (arrlist.length != 0) {
+            for (var i = 0; i < arrlist.length; i++) {
+              if (!reg.test(arrlist[i].goods_cover)) {
+                arrlist[i].goods_cover = _this.data.zdyurl + arrlist[i].goods_cover;
+              };
+              if (!reg.test(arrlist[i].cover)) {
+                arrlist[i].cover = _this.data.zdyurl + arrlist[i].cover;
+              };
+              arrlist[i].start_time = _this.toDate(arrlist[i].start_time);
+              arrlist[i].stop_time = _this.toDate(arrlist[i].stop_time);
+              if(arrlist[i].brand &&  arrlist[i].brand.name && arrlist[i].brand.name.indexOf("旗舰店") != -1){
+                arrlist[i].isBrandNaq = 1;
+              }else{
+                arrlist[i].isBrandNaq = 0;
+              };
+            };
+          };
+          if (num == 1) {
+            var comdataarr = arrlist || [];
+            var finished = res.data.List.finished || [];
+            var sign = res.data.List.sign || [];
+            _this.setData({
+              finishedlist: finished||[],
+              signlist: sign||[]
+            })
+          } else {
+            var comdataarr = _this.data.commoddata.concat(arrlist);
+          };
+          _this.setData({
+            commoddata: comdataarr
+          });          
+        };
+        if (res.data.ReturnCode == 300) {
+          app.showToastC('暂无更多数据');
+          if(num==1){
+            _this.setData({
+              commoddata: []
+            });
+          }
+        };
+        if (res.data.ReturnCode == 900) {
+          app.showToastC('登陆状态有误');
+        };
+        _this.setData({
+          nodataiftr: true
+        })
+        var newDate = new Date();
+        var m = newDate.getMinutes();
+        var s = newDate.getSeconds();
+      }
+      
+    });
   },
 
   jumporder: function() {
@@ -295,14 +322,23 @@ Page({
    */
   onPullDownRefresh: function() {
     app.downRefreshFun(() => {
-      this.listdata(1)
+      if(this.data.drawOrFreeOrder==2){
+        this.listdataDraw(1);
+      }else{
+        this.listdata(1);
+      };
+      
     })
   },
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-    this.listdata(2)
+    if(this.data.drawOrFreeOrder==2){
+      this.listdataDraw(2);
+    }else{
+      this.listdata(2);
+    };
   },
 
   /**
@@ -412,12 +448,6 @@ Page({
   //   };
   // },
 
-  pullupsignin: function () {
-    // // '没有授权'
-    this.setData({
-      tgabox: true
-    });
-  },
   // 计算图片大小
   imageLoadad: function (e) {
     var _this = this;
@@ -453,6 +483,13 @@ Page({
         })
       };
     };
+  },
+  // 跳转活动详情页
+  activitydetailspage: function (event) {
+    var id = event.currentTarget.dataset.id || event.target.dataset.id;
+    wx.navigateTo({ 
+      url: "/pages/activitydetailspage/activitydetailspage?id=" + id
+    });
   },
 
 })

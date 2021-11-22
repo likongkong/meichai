@@ -1549,14 +1549,14 @@ brandJson:function(){
       return {
         title: '我正在领展会限定福利，数量有限，先到先得' ,
         path: "/pages/dismantlingbox/dismantlingbox?shareId=" + _this.data.giftInfo.shareId + '&referee=' + _this.data.uid,
-        imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+        imageUrl:indexShareImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
       }
     }else{
 
       return {
         title:app.signindata.titleShare ,
         path: "/pages/dismantlingbox/dismantlingbox?shareId=" + _this.data.giftInfo.shareId + '&referee=' + _this.data.uid,
-        imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+        imageUrl:indexShareImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
       } 
     };
 
@@ -1577,7 +1577,7 @@ brandJson:function(){
 
     return {
       title:app.signindata.titleShare ,
-      imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      imageUrl:indexShareImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
     }
   },  
   // 跳转一番赏列表

@@ -516,7 +516,7 @@ Page({
     };
     var title = app.signindata.titleShare?app.signindata.titleShare:'你喜欢的潮玩都在这里！'
     var onshareUrl = 'pages/index/index';
-    var onshareImg = indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg';
+    var onshareImg = indexShareImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg';
 
     return {
       title: title ,

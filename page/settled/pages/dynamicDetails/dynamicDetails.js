@@ -19,7 +19,48 @@ Page({
     textconcent:'',
     placeholderTxt:'评论一下~'
   },
+  // 删除图鉴 
+  del_illustrated(){
+    var _this = this;
 
+    var qqq = Dec.Aese('mod=community&operation=del_illustrated&uid='+_this.data.uid+'&loginid='+_this.data.loginid + '&id=' + _this.data.drying_id + '&type=2');
+    console.log('mod=community&operation=del_illustrated&uid='+_this.data.uid+'&loginid='+_this.data.loginid + '&id=' + _this.data.drying_id + '&type=2')
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + qqq,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        console.log('删除动态=====',res)
+        if (res.data.ReturnCode == 200) {
+          wx.showModal({
+            content: '删除成功',
+            showCancel: false,
+            success: function(res) {
+              let pages = getCurrentPages();
+              let prevpage = pages[pages.length - 2];
+              if (prevpage) {
+                wx.navigateBack();
+                prevpage.onLoadfun()
+              } else {
+                wx.redirectTo({
+                  url: "/pages/index/index"
+                });
+              };
+            }
+          });
+  
+        }else{
+          if(res.data.Msg){
+            wx.showModal({
+              content: res.data.Msg || '',
+              showCancel: false,
+              success: function(res) {}
+            });
+          };
+        };
+      }
+    });
+  },
   inputboxfun:function(w){
     var comment_id = w.currentTarget.dataset.comment_id || w.target.dataset.comment_id || 0;
     var _this = this;

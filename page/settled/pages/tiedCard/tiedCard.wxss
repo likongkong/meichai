@@ -5,8 +5,9 @@ page{
   padding-bottom: 200rpx; 
 }
 .card{
-  width: 100%;
+  width: 730rpx;
   background: #ffffff;
+  border-radius: 20rpx;
   margin: 20rpx auto 0 auto;
 }
 .footerWrap{
@@ -22,21 +23,20 @@ page{
   z-index: 100;
 }
 .footerWrap view{
-  height: 70rpx;
-  line-height: 70rpx;
+  height: 80rpx;
+  line-height: 80rpx;
   text-align: center;
   font-size: 24rpx;
-  border-radius: 10rpx;
+  border-radius: 16rpx;
 }
 .footerWrap view:first-child{
-  width: 25%;
+  width: 20%;
   border: 2rpx solid #90D2D6;
-  background: #fff;
   color: #90D2D6;
 }
 .footerWrap view:last-child{
-  width: 71%;
-  height: 74rpx;
+  width: 76%;
+  height: 84rpx;
   background: #90D2D6;
   color: #ffffff;
 }

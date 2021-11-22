@@ -1483,7 +1483,7 @@ Page({
       });
     } else if (item_type == 6 || item_type == 7) {
       wx.navigateTo({    // 活动列表
-        url: "/pages/activitysharinglist/activitysharinglist"
+        url: "/page/component/pages/activitysharinglist/activitysharinglist"
       });
     } else if (item_type == 8) {
       wx.navigateTo({    // 活动详情页
@@ -1585,7 +1585,7 @@ Page({
 
   acetlistfun: function () {
     wx.redirectTo({
-      url: "/pages/activitysharinglist/activitysharinglist"
+      url: "/page/component/pages/activitysharinglist/activitysharinglist"
     });
     this.setData({
       wsh: false,
@@ -1838,7 +1838,7 @@ Page({
 
                             // 渲染广告图片
                             wx.getImageInfo({
-                              src: app.signindata.mergePicImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+                              src: app.signindata.mergePicImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
                               success: function (res) {
                                 var ratio = res.width / res.height;   
                                 var viewHeight = (319/ratio)<=175?(319/ratio):175;    
@@ -2012,7 +2012,7 @@ Page({
     
                                 // 渲染广告图片
                                 wx.getImageInfo({
-                                  src: app.signindata.mergePicImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+                                  src: app.signindata.mergePicImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
                                   success: function (res) {
                                     var ratio = res.width / res.height;   
                                     var viewHeight = (319/ratio)<=175?(319/ratio):175;    
@@ -2212,7 +2212,7 @@ Page({
 
                           // 渲染广告图片
                           wx.getImageInfo({
-                            src: app.signindata.mergePicImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+                            src: app.signindata.mergePicImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
                             success: function (res) {
                               var ratio = res.width / res.height;   
                               var viewHeight = (319/ratio)<=175?(319/ratio):175;    

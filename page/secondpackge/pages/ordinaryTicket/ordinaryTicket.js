@@ -372,7 +372,7 @@ Page({
     return {
       title:'我正在美拆抽取展会优先入场资格，快来一起参与吧',
       path: "/page/secondpackge/pages/luckyDraw/luckyDraw?id="+_this.data.id,
-      imageUrl:app.signindata.indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      imageUrl:app.signindata.indexShareImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
     } 
   },
   // /**
@@ -389,7 +389,7 @@ Page({
     return {
       title:'我正在美拆抽取展会优先入场资格，快来一起参与吧',
       query:'perayu=1&id='+_this.data.id,
-      imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      imageUrl:indexShareImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
     } 
   },  
 

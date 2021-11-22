@@ -214,7 +214,7 @@
         {
           "name": "抽隐藏",
           "pathName": "page/secondpackge/pages/drawHideGoods/drawHideGoods",
-          "query": "",
+          "query": "gid=39328",
           "scene": null
         },
         {

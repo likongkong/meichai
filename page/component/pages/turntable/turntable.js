@@ -466,7 +466,7 @@ Page({
   },
   acetlistfun: function () {
     wx.redirectTo({
-      url: "/pages/activitysharinglist/activitysharinglist"
+      url: "/page/component/pages/activitysharinglist/activitysharinglist"
     });
     this.setData({
       awardrresentiftr: false,

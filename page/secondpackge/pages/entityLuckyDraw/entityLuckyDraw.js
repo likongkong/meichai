@@ -703,7 +703,7 @@ Page({
     return {
       title:_this.data.shareTitle,
       path: "/page/secondpackge/pages/entityLuckyDraw/entityLuckyDraw?share_uid=" + _this.data.uid,
-      imageUrl:_this.data.shareImg  || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      imageUrl:_this.data.shareImg  || 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
     }   
   },
   onShareTimeline:function(){
@@ -719,7 +719,7 @@ Page({
     return {
       title:_this.data.shareTitle,
       query:'share_uid='+_this.data.uid,
-      imageUrl:_this.data.shareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      imageUrl:_this.data.shareImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
     }
   },  
 

@@ -1,5 +1,5 @@
 /* page/component/pages/playgrasslist/playgrasslist.wxss */
-@import "../../../../pages/activitysharinglist/activitysharinglist.wxss";
+@import "../activitysharinglist/activitysharinglist.wxss";
 @import "../../../../common/tabbar.wxss";
 
 page {

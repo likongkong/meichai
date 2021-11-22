@@ -490,7 +490,7 @@ Page({
     return {
       title:app.signindata.titleShare ,
       path: "/pages/dismantlingbox/dismantlingbox",
-      imageUrl:indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg',
+      imageUrl:indexShareImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
     } 
   },
 
