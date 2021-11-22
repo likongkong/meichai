@@ -3,3 +3,515 @@
 page{
   background:#f4f5f9;
 }
+.containerTIM {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+.message-list {
+  flex: 1;
+  width: 100vw;
+  overflow-y: scroll;
+}
+.message-input {
+  flex-shrink: 0;
+  width: 100%;
+}
+
+
+
+
+
+
+/* 底部input */
+
+.TUI-message-input-container {
+  background-color: #F1F1F1;
+  padding:20rpx 0 80rpx 0;
+}
+
+.TUI-message-input {
+  display: flex;
+  padding-bottom: 16rpx;
+  background-color: #F1F1F1;
+  width: 100vw;
+}
+
+
+.TUI-message-input-functions {
+  display: flex;
+}
+.TUI-message-input-main {
+  background-color: #fff;
+  flex: 1;
+  height: 66rpx;
+  margin:0 10rpx 0 26rpx;
+  padding: 0 5rpx;
+  border-radius: 5rpx;
+  display: flex;
+  align-items: center;
+}
+.TUI-message-input-area {
+  width: 100%;
+  height: 100%;
+}
+.TUI-icon {
+  width: 56rpx;
+  height: 56rpx;
+  margin: 0 16rpx;
+}
+.TUI-Extensions {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100vw;
+  height: 160rpx;
+  margin-left: 14rpx;
+  margin-right: 14rpx;
+}
+
+.TUI-Extension-slot {
+  width: 128rpx;
+  height: 170rpx;
+  margin-left: 26rpx;
+  margin-right: 26rpx;
+  margin-top: 24rpx;
+}
+
+.TUI-Extension-icon {
+  width: 128rpx;
+  height: 128rpx;
+}
+
+.TUI-sendMessage-btn {
+  display: flex;
+  align-items: center;
+  margin: 0 10rpx;
+}
+
+.TUI-Emoji-area {
+  width: 100vw;
+  height: 450rpx;
+}
+
+.TUI-Extension-slot-name {
+  line-height: 34rpx;
+  font-size: 24rpx;
+  color: #333333;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.record-modal {
+  height: 300rpx;
+  width: 60vw;
+  background-color: #000;
+  opacity: 0.8;
+  position: fixed;
+  top: 670rpx;
+  z-index: 9999;
+  left: 20vw;
+  border-radius: 24rpx;
+  display: flex;
+  flex-direction: column;
+}
+.record-modal .wrapper {
+  display: flex;
+  height: 200rpx;
+  box-sizing: border-box;
+  padding: 10vw;
+}
+.record-modal .wrapper .modal-loading {
+  opacity: 1;
+  width: 40rpx;
+  height: 16rpx;
+  border-radius: 4rpx;
+  background-color: #006fff;
+  animation: loading 2s 
+          cubic-bezier(0.17, 0.37, 0.43, 0.67) infinite;
+}
+.modal-title {
+  text-align: center;
+  color: #fff;
+}
+@keyframes loading{
+  0% {
+      transform: translate(0,0)
+  }
+50%
+{
+  transform :translate(30vw,0);
+  background-color: #f5634a;
+  width :40px;
+  }
+100%
+  {transform: translate(0,0);
+  }
+}
+
+
+/* 底部input 结束 */
+
+/* 表情 */
+.TUI-Emoji {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  margin-left: 4vw;
+}
+
+.TUI-emoji-image {
+  width: 9vw;
+  height: 9vw;
+  margin: 2vw;
+}
+
+.TUI-emoji-image > image {
+  width: 100%;
+  height: 100%;
+}
+/*     */
+/*  订单  */
+
+.tui-cards-container {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  top: 0;
+  background: rgba(0,0,0,0.5);
+}
+
+.tui-cards-box {
+  position: absolute;
+  width: 100%;
+  height: 60%;
+  bottom: 0;
+  background: #F4F5F9;
+  padding-bottom: 68rpx;
+  z-index: 200;
+}
+
+.tui-cards-title {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+  padding-top: 48rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 36rpx;
+  color: #000000;
+  letter-spacing: 0;
+  line-height: 50rpx;
+}
+
+.tui-search-bar {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  margin: 32rpx 40rpx;
+  width: 670rpx;
+  height: 80rpx;
+  background: #FFFFFF;
+  border-radius: 40rpx;
+  border-radius: 40rpx;
+  background-color: #F8F8F8;
+}
+
+.tui-searchcion {
+  display: inline-block;
+  margin-left: 24rpx;
+  width: 48rpx;
+  height: 48rpx;
+}
+
+.tui-search-bar-input {
+  margin-left: 16rpx;
+  line-height: 40rpx;
+  font-size: 28rpx;
+  width: 100%;
+  display: inline-block;
+}
+
+.tui-order-list {
+  position: absolute;
+  top: 112rpx;
+  bottom: 68rpx;
+  width: 750rpx;
+}
+
+.tui-order-item {
+  width: 670rpx;
+  margin: 32rpx 40rpx;
+  height: 388rpx;
+  background-color: #FFFFFF;
+  border-radius: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.order-title {
+  width: 670rpx;
+  height: 102rpx;
+  padding: 32rpx 40rpx;
+  padding-bottom: 0;
+  border-bottom: 2rpx solid #EEF0F3;
+}
+
+.order-title > .order-number {
+  font-family: PingFangSC-Medium;
+  font-size: 32rpx;
+  line-height: 44rpx;
+  color: #000000;
+  letter-spacing: 0;
+  margin-bottom: 8rpx;
+}
+
+.order-title > .order-time {
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  line-height: 34rpx;
+  color: #999999;
+  letter-spacing: 0;
+}
+
+.order-info {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 670rpx;
+  height: 236rpx;
+  padding: 32rpx 40rpx;
+}
+
+.order-content {
+  width: 450rpx;
+  margin-left: 32rpx;
+}
+
+.order-content-title {
+  font-family: PingFangSC-Medium;
+  width: 378rpx;
+  line-height: 34rpx;
+  font-size: 24rpx;
+  color: #000000;
+  letter-spacing: 0;
+  margin-bottom: 12rpx;
+}
+
+.order-content-description {
+  display: flex;
+  flex-wrap: nowrap;
+  font-family: PingFangSC-Regular;
+  max-width: 410rpx;
+  line-height: 34rpx;
+  font-size: 24rpx;
+  color: #999999;
+  letter-spacing: 0;
+  margin-bottom: 12rpx;
+}
+
+.order-content-price {
+  font-family: PingFangSC-Medium;
+  font-size: 36rpx;
+  line-height: 50rpx;
+  color: #FF7201;
+  letter-spacing: 0;
+}
+
+.order-image {
+  width: 156rpx;
+  height: 156rpx;
+}
+
+.btn-send-order {
+  width: 176rpx;
+  height: 58rpx;
+  background-color: #006EFF;
+  border-radius: 14.5px;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #FFFFFF;
+  line-height: 28px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 40rpx;
+}
+.btn-send-text{
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #FFFFFF;
+    line-height: 14px;
+}
+
+/* 信息 */
+.message-list-container {
+  width: 100%;
+  height: 100%;
+}
+.t-message-item {
+  /*max-width: 60vw;*/
+  padding: 16rpx 0;
+}
+.t-recieve-message {
+  display: flex;
+  flex-direction: row;
+  justify-items: flex-start;
+  /* align-items: center; */
+  width: 100vw;
+}
+.t-message-avatar {
+  margin-left: 20rpx;
+  margin-right: 12rpx;
+  border-radius: 10rpx;
+  width: 80rpx;
+  height: 80rpx;
+}
+.t-self-message {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  /*align-items: center;*/
+  width: 100vw;
+}
+.t-self-message-body {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  outline: none;
+}
+.t-recieve-message-body {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  outline: none;
+  background: #fff;
+  border-radius: 10px 10px 10px 10px;
+  margin-left: 8rpx;
+  
+}
+
+.read-receipts {
+  font-size: 12px;
+  color: #B8B8B8;
+  margin-right: 112rpx;
+  text-align: right;
+  padding-top: 15rpx;
+}
+.no-message {
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  font-size: 12px;
+  color: #a5b5c1;
+  height: 40px;
+  top: -40px;
+  right: 0;
+}
+
+.text-message {
+  display: inline-flex;
+  max-width: 60vw;
+  line-height: 52rpx;
+  padding: 12rpx 24rpx;
+  background: #fff;
+  border-radius: 10px 10px 10px 10px;
+}
+.my-text {
+  border-radius: 10px 10px 10px 10px;
+  background: #FDE512;
+}
+.message-body-span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  outline: none;
+  font-size: 28rpx;
+  color: #333333;
+  position: relative;
+  max-width: 60vw;
+}
+.message-body-span-text {
+  width: 100%;
+  display:inline-block;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+.message-body-span-image {
+  display: inline-block;
+  width: 32rpx;
+  height: 32rpx;
+  margin: 0 4rpx;
+}
+/* 消息图片 */
+.TUI-ImageMessage {
+  width: 150px;
+}
+.image-message {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px 10px 10px 10px;
+}
+.my-image {
+  border-radius: 10px 10px 10px 10px;
+}
+
+/* 订单 */
+.my-custom {
+  border-radius: 10px 10px 10px 10px;
+  background: #FDE512;
+}
+.custom-message {
+  display: flex;
+  padding: 10rpx 24rpx;
+  background-color: #fff;
+  border-radius: 10px 10px 10px 10px;
+}
+.custom-image {
+  width: 135rpx;
+  height: 135rpx;
+  border-radius: 6rpx;
+  margin-right: 10rpx;
+  margin-top: 4rpx;
+}
+.custom-content-title {
+  font-family: PingFangSC-Medium;
+  width: 278rpx;
+  line-height: 34rpx;
+  font-size: 24rpx;
+  color: #000000;
+  letter-spacing: 0;
+  margin-bottom: 12rpx;
+}
+
+.custom-content-description {
+  font-family: PingFangSC-Regular;
+  width: 278rpx;
+  line-height: 34rpx;
+  font-size: 28rpx;
+  color: #FC2642;
+  letter-spacing: 0;
+  margin-bottom: 12rpx;
+}
+
+.custom-content-price {
+  font-family: PingFangSC-Medium;
+  line-height: 50rpx;
+  color: #FC2642;
+  letter-spacing: 0;
+}
+
+
+
+
+
+
+
+
+

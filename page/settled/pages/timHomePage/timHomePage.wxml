@@ -1,3 +1,169 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
+
+<view class="containerTIM" style="height:{{windowHeight}}px;">
+  <!-- 内容列表 -->
+  <view class="message-list" bindtap="handleClose">
+      <scroll-view class="message-list-container" scroll-y="true" scroll-into-view="{{scrollView}}" refresher-enabled="{{true}}" bindrefresherrefresh="refresh" refresher-triggered="{{triggered}}">
+          <view class="no-message" wx:if="{{isCompleted}}">没有更多啦</view>
+          <view class="t-message" wx:for="{{messageList}}" wx:key="index" id="{{item.ID}}">
+              <view class="t-message-item">
+                  <view class="{{item.isSelf ? 't-self-message':'t-recieve-message'}}">
+                      <!-- 别人 -->
+                      <image class="t-message-avatar" wx:if="{{!item.isSelf}}" src="{{item.avatar || 'https://thirdwx.qlogo.cn/mmopen/vi_32/RxZc4ZGUwpVwxkxoC3M8wdgodEBNhibxrcXRBibaJktn1PERGPrjibanUNZvaWFKMejqpjvYZtm5PKCY25hrKg7cQ/132'}}" />
+                      <view class="" class="{{item.isSelf ? 't-self-message-body':'t-recieve-message-body'}}">
+                          <!-- 文字 -->
+                          <block wx:if="{{item.type === 'TIMTextElem'}}">
+                              <template is='TextMessage' data='{{...item}}'></template>
+                          </block>
+                          <!-- 图片 -->
+                          <block wx:if="{{item.type === 'TIMImageElem'}}">
+                              <template is='ImageMessage' data='{{...item}}'></template>
+                          </block>
+                          <!-- 订单 -->
+                          <block wx:if="{{item.type === 'TIMOrderElem'}}">
+                               <template is='OrderElem' data='{{...item}}'></template>
+                          </block>
+
+                          <!-- <TUI-CustomMessage wx:if="{{item.type === 'TIMCustomElem'}}" message="{{item}}" isMine="{{item.isSelf}}"/> -->
+                     
+                      </view>
+                      <image class="t-message-avatar" wx:if="{{item.isSelf}}"  src="{{item.avatar || 'https://sdk-web-1252463788.cos.ap-hongkong.myqcloud.com/component/TUIKit/assets/avatar_21.png'}}" />
+                  </view>
+                  <view class="read-receipts" wx:if="{{item.isSelf}}">
+                      <view wx:if="{{item.isPeerRead}}" >已读</view>
+                      <view wx:else>未读</view>
+                  </view>
+              </view>
+          </view>
+      </scroll-view>    
+  </view>
+  <!-- 底部 input 输入 -->
+  <view class="message-input">
+      <view class="TUI-message-input-container">
+          <view class="TUI-commom-function">
+              <view class="TUI-commom-function-item" wx:for="{{commonFunction}}" wx:key="index" data-function="{{item}}" bindtap="handleCommonFunctions">{{item.name}}</view>
+          </view>
+          <view class="TUI-message-input">
+              <!-- <image class="TUI-icon" bindtap="switchAudio" src="https://sdk-web-1252463788.cos.ap-hongkong.myqcloud.com/component/TUIKit/assets/avatar_21.png" /> -->
+              <view wx:if="{{!isAudio}}" class="TUI-message-input-main">
+                  <input class="TUI-message-input-area" adjust-position="{{true}}" cursor-spacing="20"
+                      value="{{message}}" bindinput="onInputValueChange" maxlength="140" type="text"
+                      placeholder="" placeholder-class="input-placeholder"
+                      bindfocus="inputBindFocus"
+                      bindblur="inputBindBlur" />
+              </view>
+              <view wx:else class="TUI-message-input-main"
+                  bind:longpress="handleLongPress"
+                  bind:touchmove="handleTouchMove"
+                  bind:touchend="handleTouchEnd"
+                  style="display: flex; justify-content: center; font-size: 32rpx; font-family: PingFangSC-Regular;">
+                  <text >{{text}}</text>
+              </view>
+              <view class="TUI-message-input-functions" hover-class="none">
+                  <image class="TUI-icon" bindtap="handleEmoji" src="https://sdk-web-1252463788.cos.ap-hongkong.myqcloud.com/component/TUIKit/assets/avatar_21.png" />
+                  <view wx:if="{{!sendMessageBtn}}" bindtap="handleExtensions">
+                      <image class="TUI-icon" src="https://sdk-web-1252463788.cos.ap-hongkong.myqcloud.com/component/TUIKit/assets/avatar_21.png" />
+                  </view>
+                  <view wx:else class="TUI-sendMessage-btn" bindtap="sendTextMessage">
+                      发送
+                  </view>
+              </view>
+          </view>
+          <view wx:if="{{displayFlag === 'emoji'}}" class="TUI-Emoji-area">
+              <!-- <TUI-Emoji bind:enterEmoji="appendMessage" /> -->
+              <template is='TUI-Emoji' data='{{emojiList}}'></template>
+          </view>
+          <view wx:if="{{displayFlag === 'extension'}}" class="TUI-Extensions">
+              <view class="TUI-Extension-slot" bindtap="handleSendPicture">
+                  <image class="TUI-Extension-icon" src="https://sdk-web-1252463788.cos.ap-hongkong.myqcloud.com/component/TUIKit/assets/avatar_21.png" />
+                  <view class="TUI-Extension-slot-name">拍摄照片</view>
+              </view>
+              <view class="TUI-Extension-slot" bindtap="handleSendImage">
+                  <image class="TUI-Extension-icon" src="https://sdk-web-1252463788.cos.ap-hongkong.myqcloud.com/component/TUIKit/assets/avatar_21.png" />
+                  <view class="TUI-Extension-slot-name">发送图片</view>
+              </view>
+              <view class="TUI-Extension-slot" bindtap="handleSendOrder">
+                  <image class="TUI-Extension-icon" src="https://sdk-web-1252463788.cos.ap-hongkong.myqcloud.com/component/TUIKit/assets/avatar_21.png" />
+                  <view class="TUI-Extension-slot-name">发送订单</view>
+              </view>
+          </view>
+
+          <!-- 订单列表 -->
+          <!-- <block>
+              <template is='TUI-Order-List' data='{{}}'></template>
+          </block> -->
+          <!-- <TUI-Order-List class="tui-cards" display="{{displayOrderList}}" bind:sendCustomMessage="$handleSendCustomMessage" bind:close="$handleCloseCards"/> -->
+          
+      </view>
+  </view>
+
+</view>
+
+
+<!-- 表情 -->
+<template name="TUI-Emoji">
+  <scroll-view scroll-y="true" enable-flex="true" class="TUI-Emoji">
+    <view class="TUI-emoji-image" wx:for="{{emojiList}}" wx:key="index" >
+      <image data-name="{{item.emojiName}}" src="{{item.url}}" bindtap="appendMessage" />
+    </view>
+  </scroll-view>  
+</template>
+<!-- 订单列表 -->
+<view wx:if="{{displayTag}}" class="tui-cards-container">
+  <view class="tui-cards-box">
+    <view class="tui-cards-title">
+      <view>请选择你要发送的订单</view>
+      <view style="color: #006EFF; font-family: PingFangSC-Regular;" class="tui-cards-close" bindtap="handleSendOrder">关闭</view>
+    </view>
+    <scroll-view class="tui-order-list" scroll-y="true" enable-flex="true">
+      <view class="tui-order-item" wx:key="index" wx:for="{{orderList}}"  >
+        <view class="order-title">
+          <view class="order-number">订单编号: {{item.orderNum}}</view>
+          <view class="order-time">{{item.time}}</view>
+        </view>
+        <view class="order-info">
+          <image class="order-image" src="{{item.imageUrl}}" />
+          <view class="order-content">
+            <view class="order-content-title">{{item.title}}</view>
+            <view class="order-content-description">{{item.description}}</view>
+            <view style="display: flex; flex-wrap: no-wrap; justify-content: space-between;">
+              <view class="order-content-price">{{item.price}}</view>
+              <view class="btn-send-order" data-order="{{item}}" catch:tap="sendMessage">
+              <text class="btn-send-text">发送此订单</text></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+<!-- 消息 -->
+<template name="TextMessage">
+    <view class="text-message {{isSelf?'my-text':''}}" >
+        <view class="message-body-span">
+            <text class="message-body-span-text">{{text}}</text>
+        </view>
+    </view>
+</template>
+<!-- 图片 -->
+<template name="ImageMessage">
+    <view class="TUI-ImageMessage" bindtap="previewImage">
+        <image class="image-message {{isSelf?'my-image':''}}" mode="widthFix" src="{{imageUrl}}" />
+    </view>
+</template>
+<!-- 订单 -->
+<template name="OrderElem">
+    <view class="custom-message {{isSelf?'my-custom':''}}">
+        <image class="custom-image" src="{{imageUrl}}" />
+        <view class="custom-content">
+          <view class="custom-content-title">{{title}}</view>
+          <view class="custom-content-description">{{description}}</view>
+          <view class="custom-content-price">{{price}}</view>
+        </view>
+    </view>
+</template>
+
+
+

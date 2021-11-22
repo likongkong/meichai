@@ -189,6 +189,7 @@
         "pages/releaseSignIn/releaseSignIn",
         "pages/messageNotification/messageNotification",
         "pages/timHomePage/timHomePage",
+        "pages/timHomePageList/timHomePageList",
         "pages/messageNotificationDetail/messageNotificationDetail",
         "pages/bankList/bankList"
       ]
