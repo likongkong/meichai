@@ -65,12 +65,28 @@ page{
   color: #4FE39A;
   background: #ffffff;
   border-radius: 20rpx;
+  position: relative;
+}
+.butUserImg{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  opacity: 0;
 }
 .cardB{
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   padding-top: 50rpx;
+}
+.cardB view{
+  margin-right: 140rpx;
+}
+.cardB view:last-child{
+  margin-right: 0;
 }
 .cardB text:last-child{
   margin-top: 10rpx;
@@ -210,11 +226,46 @@ page{
   color: #101010;
   font-size: 28rpx;
   display: block;
-  margin-bottom: 72rpx;
+  margin-bottom: 56rpx;
 }
 
-
-
+.verificationBox{
+  padding: 32rpx 38rpx;
+  box-sizing: border-box;
+}
+.subTitle{
+  display: block;
+  font-size: 28rpx;
+  color: #101010;
+}
+.verificationBox input{
+  width: 88%;
+  height: 60rpx;
+  line-height: 60rpx;
+  border: 2rpx solid #bbbbbb;
+  padding-left: 20rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+  color: #888888;
+  margin: 22rpx 0 28rpx 0;
+}
+.verificationExplain{
+  margin-bottom: 22rpx;
+}
+.verificationExplain text{
+  font-size: 28rpx;
+  color: #989898;
+}
+.verificationExplain view{
+  font-size: 28rpx;
+  color: #989898;
+  display: block;
+  margin-top: 10rpx;
+}
+.verificationExplain view text{
+  font-size: 28rpx;
+  color: #E38E8E;
+}
 
 .infoBox{
   width: 98%;
@@ -448,12 +499,12 @@ page{
   border-radius: 12rpx;
 }
 .footerWrap view:first-child{
-  width: 20%;
+  width: 30%;
   border: 2rpx solid #90D2D6;
   color: #90D2D6;
 }
 .footerWrap view:last-child{
-  width: 76%;
+  width: 63%;
   height: 76rpx;
   background: #90D2D6;
   color: #ffffff;
@@ -685,7 +736,7 @@ page{
   top: 0;
   left: 0;
   background: rgba(0,0,0,.4);
-  z-index: 92;
+  z-index: 93;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -695,6 +746,15 @@ page{
   height: auto;
   background: #fff;
   border-radius: 8rpx;
+}
+.maskBoxSmall{
+  width: 540rpx;
+  height: auto;
+  background: #fff;
+  border-radius: 8rpx;
+}
+.maskBoxSmall .title{
+  text-align: center;
 }
 .descriptionWrap,.authenticationWrap{
   width: 88%;
@@ -752,4 +812,31 @@ page{
 }
 .authenticationInfo text:last-child{
   margin-bottom: 0;
+}
+
+.tiedCardListWrap{
+  width: 100%;
+  background: #fff;
+}
+.labelWrap {
+  width: 100%;
+  display: flex;
+  padding: 20rpx 10rpx 10rpx 10rpx;
+  box-sizing: border-box;
+}
+.labelWrap text{
+  width: 180rpx;
+  height: 72rpx;
+  display: block;
+  line-height: 72rpx;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 20rpx;
+  font-size: 28rpx;
+  color: #000;
+  margin-right: 20rpx;
+}
+.labelWrap .active{
+  background: #EFA25A;
+  color: #fff;
 }

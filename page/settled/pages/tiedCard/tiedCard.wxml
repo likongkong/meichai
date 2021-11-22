@@ -2,22 +2,159 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 <view class="applyForOccupancy">
-  <view class="card">
-    <settledForm 
-        id="settledForm"
+  <!-- 个人绑商户 -->
+  <block wx:if="{{type == 1}}">
+    <view class="card">
+      <settledForm 
+          id="enterpriseData"
+          statusBarHeightMc="{{statusBarHeightMc}}"
+          form="dynamicContent"
+          list="{{enterpriseData}}"
+          bind:bindchange="bindchange"
+          bind:getPhoneCode="getPhoneCode"
+          bind:pickerchange="pickerchange"
+          bind:columnchange="columnchange"
+          brandInfo="{{brandInfo}}"
+          >
+      </settledForm>
+      <settledForm 
+          id="enterpriseData1"
+          statusBarHeightMc="{{statusBarHeightMc}}"
+          form="dynamicContent"
+          list="{{enterpriseData1}}"
+          bind:bindchange="bindchange"
+          bind:getPhoneCode="getPhoneCode"
+          bind:pickerchange="pickerchange"
+          bind:columnchange="columnchange"
+          brandInfo="{{brandInfo}}"
+          >
+      </settledForm>
+      <settledForm 
+          id="enterpriseData2"
+          statusBarHeightMc="{{statusBarHeightMc}}"
+          form="dynamicContent"
+          list="{{enterpriseData2}}"
+					bind:smsSend="smsSend"
+          bind:bindchange="bindchange"
+          bind:getPhoneCode="getPhoneCode"
+          bind:pickerchange="pickerchange"
+          bind:columnchange="columnchange"
+          brandInfo="{{brandInfo}}"
+          >
+      </settledForm>
+    </view>
+  </block>
+  <!-- 个体工商户 -->
+  <block wx:elif="{{type == 2}}">
+    <view class="card">
+      <settledForm 
+        id="individualBusiness"
         statusBarHeightMc="{{statusBarHeightMc}}"
         form="dynamicContent"
-        list="{{enterpriseData}}"
+        list="{{individualBusiness}}"
         bind:bindchange="bindchange"
         bind:getPhoneCode="getPhoneCode"
         bind:pickerchange="pickerchange"
         bind:columnchange="columnchange"
-        brandInfo="{{brandInfo}}"bindcolumnchange
+        brandInfo="{{brandInfo}}"
         >
-    </settledForm>
-  </view>
+        </settledForm>
+        <settledForm 
+          id="enterpriseData"
+          statusBarHeightMc="{{statusBarHeightMc}}"
+          form="dynamicContent"
+          list="{{enterpriseData}}"
+          bind:bindchange="bindchange"
+          bind:getPhoneCode="getPhoneCode"
+          bind:pickerchange="pickerchange"
+          bind:columnchange="columnchange"
+          brandInfo="{{brandInfo}}"
+          >
+      </settledForm>
+      <settledForm 
+          id="enterpriseData1"
+          statusBarHeightMc="{{statusBarHeightMc}}"
+          form="dynamicContent"
+          list="{{enterpriseData1}}"
+          bind:bindchange="bindchange"
+          bind:getPhoneCode="getPhoneCode"
+          bind:pickerchange="pickerchange"
+          bind:columnchange="columnchange"
+          brandInfo="{{brandInfo}}"
+          >
+      </settledForm>
+      <settledForm 
+          id="enterpriseData2"
+          statusBarHeightMc="{{statusBarHeightMc}}"
+          form="dynamicContent"
+          list="{{enterpriseData2}}"
+					bind:smsSend="smsSend"
+          bind:bindchange="bindchange"
+          bind:getPhoneCode="getPhoneCode"
+          bind:pickerchange="pickerchange"
+          bind:columnchange="columnchange"
+          brandInfo="{{brandInfo}}"
+          >
+      </settledForm>
+    </view>
+  </block>
+  <!-- 企业商户 -->
+  <block wx:elif="{{type == 3}}">
+    <view class="card">
+      <settledForm 
+        id="enterpriseBusiness"
+        statusBarHeightMc="{{statusBarHeightMc}}"
+        form="dynamicContent"
+        list="{{enterpriseBusiness}}"
+        bind:bindchange="bindchange"
+        bind:getPhoneCode="getPhoneCode"
+        bind:pickerchange="pickerchange"
+        bind:columnchange="columnchange"
+        brandInfo="{{brandInfo}}"
+        >
+      </settledForm>
+      <settledForm 
+        id="enterpriseData1"
+        statusBarHeightMc="{{statusBarHeightMc}}"
+        form="dynamicContent"
+        list="{{enterpriseData1}}"
+        bind:bindchange="bindchange"
+        bind:getPhoneCode="getPhoneCode"
+        bind:pickerchange="pickerchange"
+        bind:columnchange="columnchange"
+        brandInfo="{{brandInfo}}"
+        >
+      </settledForm>
+    </view>
+    <view class="illustrate">
+      <text class="title">验证说明</text>
+      <text class="txt">1.提交企业信息后，我们将发送短信通知您已发起打款申请，并在30分钟~3工作日内向您的帐号提交的银行账户打一笔小于1元的款项。
+      2.您收到发起打款申请的通知后，请关注银行到账进展。打款到账后，请登录小程序进入“钱包-银行卡”输入打款金额(如:收到金额为0.02元，则输入0.02)，提交认证。
+      3.您有2次机会申请银行打款认证，每次认证有2次机会验证打款金额。如果您申请的2次银行打款认证都未能通过，只能选择人工审核认证方式进行认证。</text>
+    </view>
+  </block>
+
+  <block wx:if="{{fromVerify}}">
+    <view class="resetWrap">
+      如遇到绑卡问题，可尝试 <view catchtap="toggleImmediatelyUnlink">重置信息</view> 或 <view style="position: relative;"><button open-type='contact' session-from='' style='width:100%;height:100%;position:absolute;top:0;left:0;opacity: 0;z-index:1;'></button>联系客服</view>
+    </view>
+  </block>  
+
   <view class="footerWrap">
       <view data-num="1" catchtap="navigateBack">返回</view>
-      <view catchtap="submitAudit">确认绑定</view>
+      <view catchtap="{{type == 3?'bindBankCard':'submitAudit'}}">{{type == 3?'提交绑定':'确认绑定'}}</view>
+  </view>
+</view>
+
+<!-- 重新绑卡 -->
+<view class="mask" wx:if="{{isUnbindAndBindMask}}" catchtouchmove="true" catchtap="toggleImmediatelyUnlink">
+  <view class="maskBox unlinkWrap" catchtap="true"> 
+    <text class="title" style="text-align: center;">重置信息之后将清空您所填的所有信息</text>
+    <view>
+      <view class="footerWrap1">
+        <view catchtap="toggleImmediatelyUnlink">取消</view>
+        <view catchtap="immediatelyUnlink">确认</view>
+      </view>
+    </view>
   </view>
 </view>

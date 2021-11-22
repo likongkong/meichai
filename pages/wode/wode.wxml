@@ -146,7 +146,7 @@
                         <view>
                             <view class="assetL" data-type="9030" catchtap="comjumpwxnav">
                                 <view>
-                                    <text>￥{{withdrawInfo.available_cash_amount}}</text>
+                                    <text>￥{{withdrawInfo.can_income}}</text>
                                     <text>可提现金额</text>
                                 </view>
                                 <view>

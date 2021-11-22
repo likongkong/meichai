@@ -279,21 +279,13 @@ page{
   color: #90D2D6;
 }
 
-
-
-
-
-
-
-
-
 .filterWrap{
   padding: 0 36rpx;
   box-sizing: border-box;
 }
 .filterItem{
   display: inline-block;
-  margin-right: 70rpx;
+  margin-right: 50rpx;
 }
 .filterItem:last-child{
   margin-right: 0;

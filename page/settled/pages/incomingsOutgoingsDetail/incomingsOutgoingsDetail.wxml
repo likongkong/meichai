@@ -13,6 +13,7 @@
         <view class="incomeItem">
           <view>订单金额：￥{{info.order_amount}}</view>
           <view>平台抽成：￥{{info.rake}}</view>
+          <view wx:if="{{freight!=0}}">平台代发费用：￥{{freight}}</view>
           <view>品牌收入：￥{{info.actual_income}}</view>
         </view>
       </view>

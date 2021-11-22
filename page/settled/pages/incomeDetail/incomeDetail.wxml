@@ -17,6 +17,13 @@
         </view>
       </picker>
     </view>
+    <view class="filterItem"> 
+      <picker bindchange="bindOrderPickerChange" value="{{orderType}}" range="{{orderTypeArray}}" range-key="name">
+        <view class="picker">
+          <view><text>{{orderTypeArray[orderType].name}}</text><image src="/pages/images/comtriangle.png" mode="widthFix"></image></view>
+        </view>
+      </picker>
+    </view>
   </view>
 
   <block wx:for="{{orderData}}" wx:key="key">
@@ -51,6 +58,9 @@
                 </view>
                 <view>
                   <text class="colorA2A2A2">{{sonitem.pay_time}}</text>
+                  <block wx:if="{{sonitem.flag==1}}">
+                    <text class="colorA2A2A2">{{sonitem.new_status_name}}</text>
+                  </block>
                   <block wx:if="{{sonitem.flag==3}}">
                     <text class="colorA2A2A2">{{sonitem.status_name}}</text>
                   </block>

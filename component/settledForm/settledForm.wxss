@@ -71,6 +71,17 @@
   box-sizing: border-box;
   text-align: right;
 }
+.rowWrap .cEveBox{
+  width: 60%;
+  height: 100rpx;
+  font-size: 26rpx;
+  color: #777777;
+  padding-left: 12rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
 .editIcon{
   width: 40rpx;
   height: auto;
@@ -303,6 +314,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.pickerWrap1{
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pickerWrap1 picker{
+  width: 100%;
+  text-align: right;
+  height: 100rpx;
+  line-height: 100rpx;
 }
 .pickerWrapText{
   font-size: 28rpx;

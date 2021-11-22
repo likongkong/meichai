@@ -1138,7 +1138,7 @@ App({
       });      
     } else if (item_type == 9053) {   // 银行列表
       wx.navigateTo({
-        url: `/page/settled/pages/bankList/bankList`
+        url: `/page/settled/pages/bankList/bankList?${whref}`
       });      
     }
   },

@@ -34,11 +34,27 @@ Page({
         name: '提现'
       }
     ],
+    orderType:0,
+    orderTypeArray: [
+      {
+        id: 0,
+        name: '全部订单类型'
+      },
+      {
+        id: 1,
+        name: '入驻订单'
+      },
+      {
+        id: 2,
+        name: '展会订单'
+      }
+    ],
     limitprame:1,  //当前页码
     perPage:10,  //每页多少条
     year:'',  //年
     month:'',   //月
     status_type:'',  //交易类型
+    order_type:0,  //订单类型
     loadprompt:false
   },
 
@@ -78,6 +94,7 @@ Page({
       year:this.data.year,
       month:this.data.month,
       searchType:2,
+      walletType:this.data.order_type
     }
     api.settledWithCashList(data).then((res) => {
       console.log('订单数据',res)
@@ -166,6 +183,16 @@ Page({
     this.setData({
       transactionType: e.detail.value,
       status_type:this.data.transactionTypeArray[e.detail.value].id
+    })
+    this.reset();
+    this.getListData();
+  },
+  // 订单类型选择
+  bindOrderPickerChange: function(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value,this.data.orderTypeArray[e.detail.value].id)
+    this.setData({
+      orderType: e.detail.value,
+      order_type:this.data.orderTypeArray[e.detail.value].id
     })
     this.reset();
     this.getListData();

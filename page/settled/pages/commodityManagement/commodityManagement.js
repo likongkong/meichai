@@ -40,7 +40,8 @@ Page({
     selectBox:false,
     selectWordsData:[
       {'n':'全部',id:0},
-      {'n':'秒杀商品',id:'-1'},
+      {'n':'限时商品',id:'1'},
+      {'n':'限量商品',id:'2'},
       {'n':'抽选商品',id:4}
     ],
     screenWords:'筛选',

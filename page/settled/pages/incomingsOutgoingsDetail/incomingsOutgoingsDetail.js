@@ -14,7 +14,8 @@ Page({
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     uid:'',
     loginid:'',
-    num:1
+    num:1,
+    freight:0
   },
   /**
    * 生命周期函数--监听页面加载
@@ -57,6 +58,11 @@ Page({
       console.log(res)
       let info = res.data.data.info;
       let num;
+      if(this.data.type == 1){
+        this.setData({
+          freight:info.freight,
+        })
+      }
       if(this.data.type == 2){
         if(info.status == 3) num=2
         else if(info.status == 1) num=4
