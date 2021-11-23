@@ -7,7 +7,7 @@
   <view class="message-list" bindtap="handleClose">
       <scroll-view class="message-list-container" scroll-y="true" scroll-into-view="{{scrollView}}" refresher-enabled="{{true}}" bindrefresherrefresh="refresh" refresher-triggered="{{triggered}}">
           <view class="no-message" wx:if="{{isCompleted}}">没有更多啦</view>
-          <view class="t-message" wx:for="{{messageList}}" wx:key="index" id="{{item.ID}}">
+          <view class="t-message" wx:for="{{messageList}}" wx:key="index" id="item{{index+1}}">
               <view class="t-message-item">
                   <view class="{{item.isSelf ? 't-self-message':'t-recieve-message'}}">
                       <!-- 别人 -->

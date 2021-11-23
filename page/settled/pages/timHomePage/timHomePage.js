@@ -341,56 +341,9 @@ Page({
       },
     ],
     // 消息列表
-    messageList:[
-        {
-          isSelf:true,
-          type:'TIMTextElem',
-          text:'测试测试测试测试测试测试测试测试测试测试测试测试测试测试',
-          isPeerRead:true
-        },
-        {
-          isSelf:true,
-          type:'TIMTextElem',
-          text:'测试测试测试测试测试测试测试测试测试测试测试测试测试测试',
-          isPeerRead:true
-        },
-        {
-          isSelf:false,
-          type:'TIMTextElem',
-          text:'测试测试测试测试测试测试测试测试测试测试测试测试测试测试',
-          isPeerRead:true
-        },
-        {
-          isSelf:true,
-          type:'TIMImageElem',
-          imageUrl: 'https://sdk-web-1252463788.cos.ap-hongkong.myqcloud.com/component/TUIKit/assets/miles.jpeg',
-          isPeerRead:true
-        },
-        {
-          isSelf:false,
-          type:'TIMImageElem',
-          imageUrl: 'https://sdk-web-1252463788.cos.ap-hongkong.myqcloud.com/component/TUIKit/assets/miles.jpeg',
-          isPeerRead:true
-        },
-        {
-          isSelf:true,
-          type:'TIMOrderElem',
-          imageUrl: 'https://sdk-web-1252463788.cos.ap-hongkong.myqcloud.com/component/TUIKit/assets/miles.jpeg',
-          title:'商品名称商品名称商品名称商品名称商品名称',
-          description:'介绍介绍介绍介',
-          price:'￥80',
-          isPeerRead:false
-        },
-        {
-          isSelf:false,
-          type:'TIMOrderElem',
-          imageUrl: 'https://sdk-web-1252463788.cos.ap-hongkong.myqcloud.com/component/TUIKit/assets/miles.jpeg',
-          title:'商品名称',
-          description:'说明说明说明',
-          price:'￥180',
-          isPeerRead:true
-        },
-    ] 
+    messageList:[],
+    // scroll 跳转到最底部
+    scrollView:''
   },
   onInputValueChange(event) {
     if (event.detail.value) {
@@ -466,6 +419,124 @@ Page({
     this.setData({
       emojiList: this.data.emojiList,
     })
+
+
+
+    var arr = [{
+      isSelf:true,
+      type:'TIMTextElem',
+      text:'测试测试测试测试测试测试测试测试测试测试测试测试测试测试',
+      isPeerRead:true
+    },
+    {
+      isSelf:true,
+      type:'TIMTextElem',
+      text:'测试测试测试测试测试测试测试测试测试测试测试测试测试测试',
+      isPeerRead:true
+    },
+    {
+      isSelf:false,
+      type:'TIMTextElem',
+      text:'测试测试测试测试测试测试测试测试测试测试测试测试测试测试',
+      isPeerRead:true
+    },
+    {
+      isSelf:true,
+      type:'TIMImageElem',
+      imageUrl: 'https://sdk-web-1252463788.cos.ap-hongkong.myqcloud.com/component/TUIKit/assets/miles.jpeg',
+      isPeerRead:true
+    },
+    {
+      isSelf:false,
+      type:'TIMImageElem',
+      imageUrl: 'https://sdk-web-1252463788.cos.ap-hongkong.myqcloud.com/component/TUIKit/assets/miles.jpeg',
+      isPeerRead:true
+    },
+    {
+      isSelf:true,
+      type:'TIMOrderElem',
+      imageUrl: 'https://sdk-web-1252463788.cos.ap-hongkong.myqcloud.com/component/TUIKit/assets/miles.jpeg',
+      title:'商品名称商品名称商品名称商品名称商品名称',
+      description:'介绍介绍介绍介',
+      price:'￥80',
+      isPeerRead:false
+    },
+    {
+      isSelf:false,
+      type:'TIMOrderElem',
+      imageUrl: 'https://sdk-web-1252463788.cos.ap-hongkong.myqcloud.com/component/TUIKit/assets/miles.jpeg',
+      title:'商品名称',
+      description:'说明说明说明',
+      price:'￥180',
+      isPeerRead:true
+    },{
+      isSelf:true,
+      type:'TIMTextElem',
+      text:'测试测试测试测试测试测试测试测试测试测试测试测试测试测试',
+      isPeerRead:true
+    },
+    {
+      isSelf:true,
+      type:'TIMTextElem',
+      text:'测试测试测试测试测试测试测试测试测试测试测试测试测试测试',
+      isPeerRead:true
+    },
+    {
+      isSelf:false,
+      type:'TIMTextElem',
+      text:'测试测试测试测试测试测试测试测试测试测试测试测试测试测试',
+      isPeerRead:true
+    },
+    {
+      isSelf:true,
+      type:'TIMImageElem',
+      imageUrl: 'https://sdk-web-1252463788.cos.ap-hongkong.myqcloud.com/component/TUIKit/assets/miles.jpeg',
+      isPeerRead:true
+    },
+    {
+      isSelf:false,
+      type:'TIMImageElem',
+      imageUrl: 'https://sdk-web-1252463788.cos.ap-hongkong.myqcloud.com/component/TUIKit/assets/miles.jpeg',
+      isPeerRead:true
+    },
+    {
+      isSelf:true,
+      type:'TIMOrderElem',
+      imageUrl: 'https://sdk-web-1252463788.cos.ap-hongkong.myqcloud.com/component/TUIKit/assets/miles.jpeg',
+      title:'商品名称商品名称商品名称商品名称商品名称',
+      description:'介绍介绍介绍介',
+      price:'￥80',
+      isPeerRead:false
+    },
+    {
+      isSelf:false,
+      type:'TIMOrderElem',
+      imageUrl: 'https://sdk-web-1252463788.cos.ap-hongkong.myqcloud.com/component/TUIKit/assets/miles.jpeg',
+      title:'商品名称',
+      description:'说明说明说明',
+      price:'￥180',
+      isPeerRead:true
+    },]
+
+    this.setData({
+        messageList:arr,
+    },() => {
+      // scorll 跳转到最后
+      setTimeout(() => {
+        this.setData({
+          // scrollView:`item${_this.data.messageList.length}`
+          scrollView:`item${arr.length}`
+        }) 
+      }, 50);
+
+    })
+
+
+    
+
+
+
+
   },
   // 获取数据
   getData(num=1){
