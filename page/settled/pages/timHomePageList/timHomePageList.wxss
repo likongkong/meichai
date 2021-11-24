@@ -71,7 +71,7 @@ page{
 
 .tui-conversation-item-name {
   height: 50rpx;
-  width: 380rpx;
+  width: 300rpx;
   line-height: 50rpx;
   font-size: 36rpx;
   font-family: 'PingFangSC-Regular';
@@ -85,12 +85,13 @@ page{
   color: #535252;
 }
 .unread {
-  top: -10rpx;
-  right: 11rpx;
+  top: 2rpx;
+  right: 19rpx;
   position: absolute;
-  padding: 0 10rpx;
-  height: 15px;
-  border-radius: 16rpx;
+  /* padding: 0 10rpx; */
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
   color: #ffffff;
   background-color: red;
 }

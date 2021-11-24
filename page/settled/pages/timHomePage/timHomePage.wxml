@@ -11,28 +11,28 @@
               <view class="t-message-item">
                   <view class="{{item.isSelf ? 't-self-message':'t-recieve-message'}}">
                       <!-- 别人 -->
-                      <image class="t-message-avatar" wx:if="{{!item.isSelf}}" src="{{item.avatar || 'https://thirdwx.qlogo.cn/mmopen/vi_32/RxZc4ZGUwpVwxkxoC3M8wdgodEBNhibxrcXRBibaJktn1PERGPrjibanUNZvaWFKMejqpjvYZtm5PKCY25hrKg7cQ/132'}}" />
+                      <image class="t-message-avatar" wx:if="{{!item.isSelf}}" src="{{item.avatar}}" />
                       <view class="" class="{{item.isSelf ? 't-self-message-body':'t-recieve-message-body'}}">
                           <!-- 文字 -->
-                          <block wx:if="{{item.type === 'TIMTextElem'}}">
+                          <block wx:if="{{item.type == 1}}">
                               <template is='TextMessage' data='{{...item}}'></template>
                           </block>
                           <!-- 图片 -->
-                          <block wx:if="{{item.type === 'TIMImageElem'}}">
+                          <block wx:if="{{item.type == 2}}">
                               <template is='ImageMessage' data='{{...item}}'></template>
                           </block>
                           <!-- 订单 -->
-                          <block wx:if="{{item.type === 'TIMOrderElem'}}">
+                          <block wx:if="{{item.type == 3}}">
                                <template is='OrderElem' data='{{...item}}'></template>
                           </block>
 
                           <!-- <TUI-CustomMessage wx:if="{{item.type === 'TIMCustomElem'}}" message="{{item}}" isMine="{{item.isSelf}}"/> -->
                      
                       </view>
-                      <image class="t-message-avatar" wx:if="{{item.isSelf}}"  src="{{item.avatar || 'https://sdk-web-1252463788.cos.ap-hongkong.myqcloud.com/component/TUIKit/assets/avatar_21.png'}}" />
+                      <image class="t-message-avatar" wx:if="{{item.isSelf}}"  src="{{item.avatar}}" />
                   </view>
                   <view class="read-receipts" wx:if="{{item.isSelf}}">
-                      <view wx:if="{{item.isPeerRead}}" >已读</view>
+                      <view wx:if="{{item.is_read}}" >已读</view>
                       <view wx:else>未读</view>
                   </view>
               </view>
@@ -62,9 +62,9 @@
                   <text >{{text}}</text>
               </view>
               <view class="TUI-message-input-functions" hover-class="none">
-                  <image class="TUI-icon" bindtap="handleEmoji" src="https://sdk-web-1252463788.cos.ap-hongkong.myqcloud.com/component/TUIKit/assets/avatar_21.png" />
+                  <image class="TUI-icon" bindtap="handleEmoji" src="https://cdn.51chaidan.com/images/brandSettledIcon/chat_smiling_face.png" />
                   <view wx:if="{{!sendMessageBtn}}" bindtap="handleExtensions">
-                      <image class="TUI-icon" src="https://sdk-web-1252463788.cos.ap-hongkong.myqcloud.com/component/TUIKit/assets/avatar_21.png" />
+                      <image class="TUI-icon" src="https://cdn.51chaidan.com/images/brandSettledIcon/chat_plus_sign.png" />
                   </view>
                   <view wx:else class="TUI-sendMessage-btn" bindtap="sendTextMessage">
                       发送
@@ -84,10 +84,10 @@
                   <image class="TUI-Extension-icon" src="https://sdk-web-1252463788.cos.ap-hongkong.myqcloud.com/component/TUIKit/assets/avatar_21.png" />
                   <view class="TUI-Extension-slot-name">发送图片</view>
               </view>
-              <view class="TUI-Extension-slot" bindtap="handleSendOrder">
+              <!-- <view class="TUI-Extension-slot" bindtap="handleSendOrder">
                   <image class="TUI-Extension-icon" src="https://sdk-web-1252463788.cos.ap-hongkong.myqcloud.com/component/TUIKit/assets/avatar_21.png" />
                   <view class="TUI-Extension-slot-name">发送订单</view>
-              </view>
+              </view> -->
           </view>
 
           <!-- 订单列表 -->
@@ -143,14 +143,14 @@
 <template name="TextMessage">
     <view class="text-message {{isSelf?'my-text':''}}" >
         <view class="message-body-span">
-            <text class="message-body-span-text">{{text}}</text>
+            <text class="message-body-span-text">{{msg}}</text>
         </view>
     </view>
 </template>
 <!-- 图片 -->
 <template name="ImageMessage">
     <view class="TUI-ImageMessage" bindtap="previewImage">
-        <image class="image-message {{isSelf?'my-image':''}}" mode="widthFix" src="{{imageUrl}}" />
+        <image class="image-message {{isSelf?'my-image':''}}" mode="widthFix" src="{{url}}" />
     </view>
 </template>
 <!-- 订单 -->

@@ -15,29 +15,19 @@ Page({
     loginid:'',
     xScale: 0,
     windowHeight: app.signindata.windowHeight - 15 - wx.getStorageSync('statusBarHeightMc') || 0,
-    conversationList:[
-      {
-        avatar:'https://web.sdk.qcloud.com/component/TUIKit/assets/avatar_15.png',
-        unreadCount:5,
-        conversationName:'用户昵称昵称昵称昵称昵称',
-        timeago:'12-12 15:23',
-        messageForShow:'测试测试测试测试测试测试测试测试测试测试',
-      },
-      {
-        avatar:'https://web.sdk.qcloud.com/component/TUIKit/assets/avatar_15.png',
-        unreadCount:115,
-        conversationName:'名称',
-        timeago:'12-12 15:23',
-        messageForShow:'测试测试测试测试测试测试测试测试',
-      },
-      {
-        avatar:'https://web.sdk.qcloud.com/component/TUIKit/assets/avatar_15.png',
-        unreadCount:0,
-        conversationName:'名称',
-        timeago:'12-12 15:23',
-        messageForShow:'测试测试测试测试测',
-      },
-    ]
+    nodataiftr:false,
+    conversationList:[]
+  },
+  // 跳转详情
+  jumpTimDetail(e){
+    if(e.currentTarget.dataset.fid == app.signindata.uid){
+      var id = e.currentTarget.dataset.tid;
+    }else{
+      var id = e.currentTarget.dataset.fid;
+    };
+    wx.navigateTo({ 
+      url: `/page/settled/pages/timHomePage/timHomePage?id=${id}`
+    });
   },
   deleteConversation() {
     wx.showModal({
@@ -110,7 +100,59 @@ Page({
   // 获取数据
   getData(num=1){
     var _this = this;
-    
+
+    if (num==1){
+      _this.setData({countOrder:0,conversationList : [],page : 1,nodataiftr:false});
+    }else{
+      var pagenum = _this.data.page;
+      _this.data.page = ++pagenum;
+    };
+
+    var q1 = Dec.Aese('mod=userSig&operation=newsList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&page='+_this.data.page);
+
+    console.log('mod=userSig&operation=newsList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&page='+_this.data.page)
+
+    wx.showLoading({title: '加载中...',mask:true})
+    wx.request({
+      url: app.signindata.comurl + 'im.php' + q1,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function(res) {
+        console.log('消息列表=====',res)
+        wx.stopPullDownRefresh();
+        wx.hideLoading();
+        if (res.data.ReturnCode == 200) {
+            var conversationList = res.data.List.info || [];
+            if (num==1){
+                var is_read = res.data.List.is_read;
+                var no_read = res.data.List.no_read;
+                console.log(1111111111)
+                _this.setData({
+                  is_read,
+                  no_read,
+                  conversationList,
+                  nodataiftr:true
+                });
+            }else{
+              console.log(22222222)
+              if(conversationList && conversationList.length !=0){
+                _this.setData({
+                  conversationList:[..._this.data.conversationList,...conversationList]
+                });
+              }else{
+                app.showToastC('暂无更多数据');
+              };
+            };
+        }else{
+          wx.showModal({
+            content: res.data.Msg || res.data.msg,
+            showCancel:false,
+            success: function (res) {}
+          });          
+        };
+      },
+
+    })
   },
 
   /**
@@ -124,7 +166,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+     if(this.data.uid && this.data.loginid){
+       console.log(33333333)
+       this.getData();
+     }
   },
 
   /**

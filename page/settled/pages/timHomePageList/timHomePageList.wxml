@@ -2,36 +2,44 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 <view class="timHpListBox">
-    <scroll-view class="scoll-view" style="height:{{windowHeight}}px;" scroll-y="true">
+    <!-- <scroll-view class="scoll-view" style="height:{{windowHeight}}px;" scroll-y="true"> -->
       <view class="replyBox">
-         <view class="replyBoxEve">待回复：568</view><view class="replyBoxEve" st>已回复：5688</view>
+         <view class="replyBoxEve">待回复：{{no_read || 0}}</view><view class="replyBoxEve" st>已回复：{{is_read || 0}}</view>
       </view>
       <block wx:for="{{conversationList}}" wx:key="index" id="{{item.conversationID}}" data-type="{{item.type}}" conversation="{{item}}" bindtap="handleRoute">
           <template is="listEve" data="{{...item,num:index}}"></template>
       </block>
-    </scroll-view>
+
+      <!--  暂无数据  -->
+      <view class='noDataCom' wx:if='{{conversationList.length==0&&nodataiftr}}'>
+          <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
+      </view>
+
+    <!-- </scroll-view> -->
 </view>
+
+
 
 <template name="listEve">
   <!-- wx:if="{{conversation.conversationID}}" -->
     <movable-area class="t-conversation-item-container" >
       <movable-view class="t-conversation-item" direction="horizontal" bindchange="handleTouchMove" damping="100" x="{{xScale}}" >
-          <view class="movviebox">
+          <view class="movviebox" catchtap="jumpTimDetail" data-fid='{{from_uid}}' data-tid='{{to_uid}}'>
               <view class="avatar-box">
                   <image class="t-conversation-item-avatar"  src="{{avatar}}" binderror="handleimageerro">
                   </image>
-                <view class="unread" wx:if="{{unreadCount !== 0}}">
-                  <view class="read-text" wx:if="{{unreadCount > 99}}">99+</view>
-                  <view class="read-text" wx:else>{{unreadCount}}</view>
+                <view class="unread" wx:if="{{is_read == 0}}">
+                  <!-- <view class="read-text" wx:if="{{unreadCount > 99}}">99+</view>
+                  <view class="read-text" wx:else>{{unreadCount}}</view> -->
                 </view>
               </view>
               <view class="t-conversation-item-content">
-                <view class="tui-conversation-item-name specialellipsis">{{conversationName}}</view>
+                <view class="tui-conversation-item-name specialellipsis">{{nick}}</view>
                 <view class="tui-conversation-lastMessage specialellipsis">
                   <!-- <text>{{messageForShow}}</text> -->
-                  {{messageForShow}}
+                  {{msg}}
                 </view>
-                <view class="t-conversation-item-info">{{timeago}}</view>
+                <view class="t-conversation-item-info">{{send_time}}</view>
               </view>
               <view class="t-conversation-delete" catchtap="deleteConversation">删除</view>
           </view>
