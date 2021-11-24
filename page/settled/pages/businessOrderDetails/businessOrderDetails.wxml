@@ -150,7 +150,7 @@
                         <view>平台实际退款金额：{{payInfoData.order.percentage}}</view>
                     </view>
                     <view class="orderMangTipCenterEve">
-                        <view>该订单已分账，需要您支付分账金额￥{{payInfoData.order.profitAmount}}。支付完成之后代表同意退款。</view>
+                        <view>该订单已进行分账处理，需要您支付分账金额￥{{payInfoData.order.profitAmount}}。支付完成之后代表同意退款。</view>
                     </view>
 
                 </view>                
