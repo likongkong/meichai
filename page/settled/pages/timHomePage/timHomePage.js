@@ -279,6 +279,26 @@ Page({
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
             var messageList = res.data.List || [];
+            var a = {
+              avatar: "https://cdn.51chaidan.com/images/default/headphoto/headphoto.jpg",
+              from_uid: "853",
+              isSelf: false,
+              is_read: "1",
+              msg: "哈哈哈京津冀[折磨][糗大了][抠鼻][鼓掌][左哼哼]哈京津",
+              nick: "白晓糖",
+              send_time: "2021-11-24 15:16:38",
+              to_uid: "744",
+              type: "1",
+              url: "",
+            }
+            messageList.push(a)
+            if(messageList.length != 0){
+                for(var i=0 ; i<messageList.length ; i++){
+                    if(messageList[i].type == 1){
+                      messageList[i].renderDom = _this.parseText(messageList[i])
+                    };
+                };
+            };
             if (num==1){
                 console.log(1111111111)
                 _this.setData({
@@ -451,13 +471,64 @@ Page({
       },
     })
   },
-// 表情
-appendMessage(e) {
-  console.log(e.currentTarget.dataset.name)
-  this.setData({
-    message: this.data.message + e.currentTarget.dataset.name,
-    sendMessageBtn: true,
-  })
-},
-
+  // 表情
+  appendMessage(e) {
+    console.log(e.currentTarget.dataset.name)
+    this.setData({
+      message: this.data.message + e.currentTarget.dataset.name,
+      sendMessageBtn: true,
+    })
+  },
+  // 解析小程序text, 表情信息也是[嘻嘻]文本
+  parseText:function (message) {
+    const renderDom = []
+    let temp = message.msg;
+    let left = -1
+    let right = -1
+    while (temp !== '') {
+      left = temp.indexOf('[')
+      right = temp.indexOf(']')
+      switch (left) {
+        case 0:
+          if (right === -1) {
+            renderDom.push({
+              name: 'span',
+              text: temp,
+            })
+            temp = ''
+          } else {
+            const _emoji = temp.slice(0, right + 1)
+            if (emojiMap[_emoji]) {
+              renderDom.push({
+                name: 'img',
+                src: emojiUrl + emojiMap[_emoji],
+              })
+              temp = temp.substring(right + 1)
+            } else {
+              renderDom.push({
+                name: 'span',
+                text: '[',
+              })
+              temp = temp.slice(1)
+            }
+          }
+          break
+        case -1:
+          renderDom.push({
+            name: 'span',
+            text: temp,
+          })
+          temp = ''
+          break
+        default:
+          renderDom.push({
+            name: 'span',
+            text: temp.slice(0, left),
+          })
+          temp = temp.substring(left)
+          break
+      }
+    }
+    return renderDom
+  },
 })

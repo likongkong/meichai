@@ -428,7 +428,7 @@ page{
 }
 .message-body-span {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   flex-wrap: wrap;
   outline: none;
@@ -436,6 +436,10 @@ page{
   color: #333333;
   position: relative;
   max-width: 60vw;
+}
+.emoji-icon {
+  width: 20px;
+  height: 20px;
 }
 .message-body-span-text {
   width: 100%;

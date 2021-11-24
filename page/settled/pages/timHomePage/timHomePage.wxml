@@ -143,7 +143,11 @@
 <template name="TextMessage">
     <view class="text-message {{isSelf?'my-text':''}}" >
         <view class="message-body-span">
-            <text class="message-body-span-text">{{msg}}</text>
+            <!-- <text class="message-body-span-text">{{msg}}</text> -->
+            <view class="message-body-span" wx:for="{{renderDom}}" wx:key="index">
+                <span class="message-body-span-text" wx:if="{{item.name === 'span'}}">{{item.text}}</span>
+                <image wx:if="{{item.name === 'img'}}" class="emoji-icon" src="{{item.src}}" />
+            </view>            
         </view>
     </view>
 </template>
