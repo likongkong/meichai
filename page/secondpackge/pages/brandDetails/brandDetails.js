@@ -46,14 +46,7 @@ Page({
     morebrankip:false,
     brandArr:[],
 
-    payStatus:[
-      {name:'全部',num:'0'},
-      {name:'限时',num:'8'},
-      {name:'限量',num:'2'},
-      {name:'抽选',num:'3'},
-      {name:'动态',num:'4'},
-      {name:'抽盒',num:'7'}
-    ], // 支付状态 
+    payStatus:[], // 支付状态 
     centerIndex:0,
     wOri:1 , // 1 瀑布流 2 信息流
     brandSinginBox:false,
@@ -560,9 +553,16 @@ Page({
             brandList[r].stop_time = time.toDate(brandList[r].stop_time);
           };
           res.data.Info.brand.bradDesc = res.data.Info.brand.bradDesc.split('hc').join('\n');
-          var payStatus = _this.data.payStatus || [];
+          var payStatus = [
+            {name:'全部',num:'0'},
+            {name:'限时',num:'8'},
+            {name:'限量',num:'2'},
+            {name:'抽选',num:'3'},
+            {name:'动态',num:'4'},
+            {name:'抽盒',num:'7'}
+          ];
           if(res.data.Info.isExistFinishedGoods){
-            payStatus.push({name:'已结束',num:'9'})
+              payStatus.push({name:'已结束',num:'9'})
           };
           _this.setData({
             detailInfo:res.data.Info,
