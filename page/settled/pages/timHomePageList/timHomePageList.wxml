@@ -41,7 +41,7 @@
                 </view>
                 <view class="t-conversation-item-info">{{send_time}}</view>
               </view>
-              <view class="t-conversation-delete" catchtap="deleteConversation">删除</view>
+              <view class="t-conversation-delete" data-num='{{num}}' data-id='{{id}}' data catchtap="deleteConversation">删除</view>
           </view>
 
       </movable-view>

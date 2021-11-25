@@ -29,17 +29,42 @@ Page({
       url: `/page/settled/pages/timHomePage/timHomePage?id=${id}`
     });
   },
-  deleteConversation() {
+  deleteConversation(e) {
+    var _this = this;
+    var id = e.currentTarget.dataset.id || 0;
+    var num = e.currentTarget.dataset.num || 0;
+    console.log(id,num)
     wx.showModal({
       content: '确认删除会话？',
       success: (res) => {
         if (res.confirm) {
-          wx.$TUIKit.deleteConversation(this.data.conversation.conversationID)
-          this.setData({
-            conversation: {},
-            xScale: 0,
-          })
-        }
+            var q1 = Dec.Aese('mod=userSig&operation=newsList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&page='+_this.data.page);
+            wx.showLoading({title: '加载中...',mask:true})
+            wx.request({
+              url: app.signindata.comurl + 'im.php' + q1,
+              method: 'GET',
+              header: {'Accept': 'application/json'},
+              success: function(res) {
+                console.log('删除会话=====',res)
+                wx.hideLoading();
+                if (res.data.ReturnCode == 200) {
+                    var conversationList = _this.data.conversationList || [];
+                    conversationList.splice(num,1);
+                    _this.setData({
+                      conversationList
+                    });
+                    app.showToastC('删除成功')
+                }else{
+                  wx.showModal({
+                    content: res.data.Msg || res.data.msg,
+                    showCancel:false,
+                    success: function (res) {}
+                  });          
+                };
+              },
+
+            })
+        };
       },
     })
   },
