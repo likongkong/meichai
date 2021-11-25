@@ -5,7 +5,8 @@
 <view class="containerTIM" style="height:{{windowHeight}}px;">
   <!-- 内容列表 -->
   <view class="message-list" bindtap="handleClose">
-      <scroll-view class="message-list-container" scroll-y="true" scroll-into-view="{{scrollView}}" refresher-enabled="{{true}}" bindrefresherrefresh="refresh" refresher-triggered="{{triggered}}">
+    <!-- refresher-enabled="{{true}}" bindrefresherrefresh="refresh" refresher-triggered="{{triggered}}" -->
+      <scroll-view class="message-list-container" scroll-y="true" scroll-into-view="{{scrollView}}" >
           <view class="no-message" wx:if="{{isCompleted}}">没有更多啦</view>
           <view class="t-message" wx:for="{{messageList}}" wx:key="index" id="item{{index+1}}">
               <view class="t-message-item">
@@ -32,11 +33,12 @@
                       <image class="t-message-avatar" wx:if="{{item.isSelf}}"  src="{{item.avatar}}" />
                   </view>
                   <view class="read-receipts" wx:if="{{item.isSelf}}">
-                      <view wx:if="{{item.is_read}}" >已读</view>
+                      <view wx:if="{{item.is_read == 1}}" >已读</view>
                       <view wx:else>未读</view>
                   </view>
               </view>
           </view>
+          <view class="positionLast" id='lastView'></view>
       </scroll-view>    
   </view>
   <!-- 底部 input 输入 -->
@@ -66,7 +68,7 @@
                   <view wx:if="{{!sendMessageBtn}}" bindtap="handleExtensions">
                       <image class="TUI-icon" src="https://cdn.51chaidan.com/images/brandSettledIcon/chat_plus_sign.png" />
                   </view>
-                  <view wx:else class="TUI-sendMessage-btn" bindtap="sendTextMessage">
+                  <view wx:else class="TUI-sendMessage-btn" bindtap="sendTextMessageOne">
                       发送
                   </view>
               </view>
@@ -154,7 +156,7 @@
 <!-- 图片 -->
 <template name="ImageMessage">
     <view class="TUI-ImageMessage" bindtap="previewImage">
-        <image class="image-message {{isSelf?'my-image':''}}" mode="widthFix" src="{{url}}" />
+        <image bindload="imageLoad" class="image-message {{isSelf?'my-image':''}}" mode="widthFix" src="{{url}}" />
     </view>
 </template>
 <!-- 订单 -->
