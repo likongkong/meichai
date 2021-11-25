@@ -31,14 +31,19 @@ Page({
   },
   deleteConversation(e) {
     var _this = this;
-    var id = e.currentTarget.dataset.id || 0;
-    var num = e.currentTarget.dataset.num || 0;
-    console.log(id,num)
+    // var id = e.currentTarget.dataset.id || 0;
+    // var num = e.currentTarget.dataset.num || 0;
+    // console.log(id,num)
     wx.showModal({
       content: '确认删除会话？',
       success: (res) => {
         if (res.confirm) {
-            var q1 = Dec.Aese('mod=userSig&operation=newsList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&page='+_this.data.page);
+            if(e.currentTarget.dataset.fid == app.signindata.uid){
+              var id = e.currentTarget.dataset.tid;
+            }else{
+              var id = e.currentTarget.dataset.fid;
+            };
+            var q1 = Dec.Aese('mod=userSig&operation=del&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&from_userid='+id);
             wx.showLoading({title: '加载中...',mask:true})
             wx.request({
               url: app.signindata.comurl + 'im.php' + q1,
@@ -48,12 +53,12 @@ Page({
                 console.log('删除会话=====',res)
                 wx.hideLoading();
                 if (res.data.ReturnCode == 200) {
-                    var conversationList = _this.data.conversationList || [];
-                    conversationList.splice(num,1);
-                    _this.setData({
-                      conversationList
-                    });
-                    app.showToastC('删除成功')
+                    // var conversationList = _this.data.conversationList || [];
+                    // conversationList.splice(num,1);
+                    // _this.setData({
+                    //   conversationList
+                    // });
+                    _this.getData();
                 }else{
                   wx.showModal({
                     content: res.data.Msg || res.data.msg,

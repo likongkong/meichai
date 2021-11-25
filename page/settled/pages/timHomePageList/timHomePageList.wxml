@@ -19,6 +19,16 @@
 </view>
 
 
+<!-- 测试 -->
+<view style="width:100%;height:100rpx;text-align:center;line-height:100rpx;">测试</view>
+
+<view style="width:100%;height:100rpx;text-align:center;line-height:100rpx;" catchtap="jumpTimDetail" data-fid='39860' data-tid='39860'>贾超</view>
+
+<view style="width:100%;height:100rpx;text-align:center;line-height:100rpx;" catchtap="jumpTimDetail" data-fid='300113' data-tid='300113'>子超</view>
+
+<view style="width:100%;height:100rpx;text-align:center;line-height:100rpx;" catchtap="jumpTimDetail" data-fid='11982' data-tid='11982'>子琪</view>
+
+<view style="width:100%;height:100rpx;text-align:center;line-height:100rpx;" catchtap="jumpTimDetail" data-fid='231645' data-tid='231645'>陈浩</view>
 
 <template name="listEve">
   <!-- wx:if="{{conversation.conversationID}}" -->
@@ -41,7 +51,7 @@
                 </view>
                 <view class="t-conversation-item-info">{{send_time}}</view>
               </view>
-              <view class="t-conversation-delete" data-num='{{num}}' data-id='{{id}}' data catchtap="deleteConversation">删除</view>
+              <view class="t-conversation-delete" data-tid='{{to_uid}}' data-fid='{{from_uid}}' data-num='{{num}}' data-id='{{id}}' data catchtap="deleteConversation">删除</view>
           </view>
 
       </movable-view>
