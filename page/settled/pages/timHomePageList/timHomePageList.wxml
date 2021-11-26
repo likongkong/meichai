@@ -18,18 +18,6 @@
     <!-- </scroll-view> -->
 </view>
 
-
-<!-- 测试 -->
-<view style="width:100%;height:100rpx;text-align:center;line-height:100rpx;">测试</view>
-
-<view style="width:100%;height:100rpx;text-align:center;line-height:100rpx;" catchtap="jumpTimDetail" data-fid='39860' data-tid='39860'>贾超</view>
-
-<view style="width:100%;height:100rpx;text-align:center;line-height:100rpx;" catchtap="jumpTimDetail" data-fid='300113' data-tid='300113'>子超</view>
-
-<view style="width:100%;height:100rpx;text-align:center;line-height:100rpx;" catchtap="jumpTimDetail" data-fid='11982' data-tid='11982'>子琪</view>
-
-<view style="width:100%;height:100rpx;text-align:center;line-height:100rpx;" catchtap="jumpTimDetail" data-fid='231645' data-tid='231645'>陈浩</view>
-
 <template name="listEve">
   <!-- wx:if="{{conversation.conversationID}}" -->
     <movable-area class="t-conversation-item-container" >

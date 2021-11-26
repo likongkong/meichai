@@ -1819,15 +1819,15 @@ App({
                 _this.signindata.avatarUrl = userInfo.avatarUrl;
                 _this.signindata.nickName = userInfo.nickName;
                 _this.signindata.userInfo = userInfo || {};
-                wx.showToast({
-                  title: '设置成功',
-                  icon: 'none',
-                  mask:true,
-                  duration:1500
-                });   
+                // wx.showToast({
+                //   title: '设置成功',
+                //   icon: 'none',
+                //   mask:true,
+                //   duration:1500
+                // });   
                 setTimeout(function(){
                   successCallback(res,userInfo);
-                },1500)
+                },100)
               };
             },
             fail(res){

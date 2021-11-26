@@ -79,12 +79,12 @@
           </view>
           <view wx:if="{{displayFlag === 'extension'}}" class="TUI-Extensions">
               <view class="TUI-Extension-slot" bindtap="handleSendPicture">
-                  <image class="TUI-Extension-icon" src="https://sdk-web-1252463788.cos.ap-hongkong.myqcloud.com/component/TUIKit/assets/avatar_21.png" />
-                  <view class="TUI-Extension-slot-name">拍摄照片</view>
+                  <image class="TUI-Extension-icon" src="https://cdn.51chaidan.com/images/brandSettledIcon/after_sale_shoot.jpg" />
+                  <view class="TUI-Extension-slot-name">拍摄</view>
               </view>
               <view class="TUI-Extension-slot" bindtap="handleSendImage">
-                  <image class="TUI-Extension-icon" src="https://sdk-web-1252463788.cos.ap-hongkong.myqcloud.com/component/TUIKit/assets/avatar_21.png" />
-                  <view class="TUI-Extension-slot-name">发送图片</view>
+                  <image class="TUI-Extension-icon" src="https://cdn.51chaidan.com/images/brandSettledIcon/after_sale_photo.jpg" />
+                  <view class="TUI-Extension-slot-name">相册</view>
               </view>
               <!-- <view class="TUI-Extension-slot" bindtap="handleSendOrder">
                   <image class="TUI-Extension-icon" src="https://sdk-web-1252463788.cos.ap-hongkong.myqcloud.com/component/TUIKit/assets/avatar_21.png" />
@@ -162,11 +162,11 @@
 <!-- 订单 -->
 <template name="OrderElem">
     <view class="custom-message {{isSelf?'my-custom':''}}">
-        <image class="custom-image" src="{{imageUrl}}" />
+        <image class="custom-image" src="{{photo_url}}" />
         <view class="custom-content">
-          <view class="custom-content-title">{{title}}</view>
-          <view class="custom-content-description">{{description}}</view>
-          <view class="custom-content-price">{{price}}</view>
+          <view class="custom-content-title">{{order_name}}</view>
+          <view class="custom-content-description">{{style}}</view>
+          <view class="custom-content-price">￥{{price}}</view>
         </view>
     </view>
 </template>

@@ -64,6 +64,12 @@ Page({
     scrollView:'',
     imageUrl:'',
     messageType:1, // 1 文本 2 图片 3 订单
+    order:''
+  },
+  // 发送图片
+  sendTextMessageThree(){
+    this.data.messageType = 3;
+    this.sendTextMessage();
   },
   // 发送图片
   sendTextMessageTwo(imageUrl){
@@ -84,9 +90,17 @@ Page({
   sendTextMessage(){
     var _this = this;
 
-    var q1 = Dec.Aese('mod=userSig&operation=pushInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&to_userid='+_this.data.from_userid+'&msg=' + _this.data.message + '&type=' + _this.data.messageType + '&url='+_this.data.imageUrl);
+    if(_this.data.order && _this.data.messageType == 3){
+      var q1 = Dec.Aese('mod=userSig&operation=pushInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&to_userid='+_this.data.from_userid + '&type=' + _this.data.messageType + '&order_id='+_this.data.order.order_id+'&order_name=' + _this.data.order.order_name+'&photo_url=' + _this.data.order.photo_url +'&price=' + _this.data.order.price+'&style=' + _this.data.order.style);
 
-    console.log('mod=userSig&operation=pushInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&to_userid='+_this.data.from_userid+'&msg=' + _this.data.message + '&type=' + _this.data.messageType + '&url='+_this.data.imageUrl)
+      console.log('mod=userSig&operation=pushInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&to_userid='+_this.data.from_userid + '&type=' + _this.data.messageType + '&order_id='+_this.data.order.order_id+'&order_name=' + _this.data.order.order_name+'&photo_url=' + _this.data.order.photo_url +'&price=' + _this.data.order.price+'&style=' + _this.data.order.style)
+    }else{
+      var q1 = Dec.Aese('mod=userSig&operation=pushInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&to_userid='+_this.data.from_userid+'&msg=' + _this.data.message + '&type=' + _this.data.messageType + '&url='+_this.data.imageUrl);
+
+      console.log('mod=userSig&operation=pushInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&to_userid='+_this.data.from_userid+'&msg=' + _this.data.message + '&type=' + _this.data.messageType + '&url='+_this.data.imageUrl)
+    };
+
+    
 
     wx.showLoading({title: '加载中...',mask:true})
     wx.request({
@@ -101,6 +115,7 @@ Page({
             _this.setData({
                message:'',
                imageUrl:'',
+               order:''
             })
             _this.getData();
         }else{
@@ -150,11 +165,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log('options',options)
     var _this = this;
     wx.hideShareMenu();
 
     this.setData({
-      from_userid:options.id
+      from_userid:options.id,
+      order:options.order?JSON.parse(options.order):''
     });
     // '已经授权'
     _this.data.loginid = app.signindata.loginid;
@@ -179,7 +196,12 @@ Page({
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
     });
 
-    this.getData();
+    if(_this.data.order){
+      this.sendTextMessageThree();
+    }else{
+      this.getData();
+    };
+
     // 每隔段时间请求数据
     this.data.timer = setInterval(() => {
         this.getData();

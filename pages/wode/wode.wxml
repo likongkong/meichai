@@ -104,10 +104,11 @@
                    </image>
                    <view class='wdmbchtit'>待收货</view>
                </view>
-               <view class='wdmbch' bindtap='myorderfun' data-tabnum='5' style='position:relative;'>
+               <view class='wdmbch' style='position:relative;'>
                    <image class='wdmbchimg' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/relation_after_sale.png'>
                        <view class='wdmbchinfnum specialellipsis' wx:if='{{no_read!=0}}'>{{no_read}}</view>
                    </image>
+                   <button class='shareButton' type='primary' bindtap="jumpTimDetail"></button>
                    <view class='wdmbchtit'>售后服务</view>
                </view>
            </view>

@@ -287,15 +287,17 @@ Page({
   // 我的订单
   myorderfun:function(e){
     var num = e.currentTarget.dataset.tabnum;
-    if(num == 5){
-      wx.navigateTo({  
-        url: "/page/settled/pages/timHomePageList/timHomePageList"
-      });
-    }else{
-      wx.navigateTo({  
-        url: "/pages/myorder/myorder?tabnum=" + num
-      });
-    };
+    wx.navigateTo({  
+      url: "/pages/myorder/myorder?tabnum=" + num
+    });
+  },
+  // 跳转客服聊天
+  jumpTimDetail(e){
+    app.getUserProfile((res,userInfo) => {
+        wx.navigateTo({  
+          url: "/page/settled/pages/timHomePageList/timHomePageList"
+        });
+    })
   },
   // 地址管理
   addressmanagement:function(){

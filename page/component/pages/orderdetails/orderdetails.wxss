@@ -5,6 +5,19 @@
 page{
   background: #f4f5f9;
 }
+.customerServiceImg{
+  width: 80rpx;
+  height: 80rpx;
+  position: fixed;
+  bottom: 290rpx;
+  right: 20rpx;
+  z-index: 5;
+}
+.customerServiceImg image{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 .multilineellipsis4{
   max-height:130rpx;
   display: -webkit-box;

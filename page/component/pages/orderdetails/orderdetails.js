@@ -2878,7 +2878,23 @@ vipOrOrdermine1(){
       };
     };
   },
-
+  // 跳转客服聊天
+  jumpTimDetail(e){
+    app.getUserProfile((res,userInfo) => {
+        var comdata = this.data.comdata;
+        var id = comdata.brand_uid;
+        var order = {
+          order_id: comdata.oid || '',
+          order_name: comdata.gname || '',
+          photo_url: comdata.gcover || '',
+          price: comdata.goods_price || '',
+          style: comdata.roleName || '',
+        }
+        wx.navigateTo({ 
+          url: `/page/settled/pages/timHomePage/timHomePage?id=${id}&order=${JSON.stringify(order)}`
+        });
+    })
+  },
 
 
 
