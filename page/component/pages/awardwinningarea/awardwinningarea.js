@@ -1922,9 +1922,20 @@ Page({
       ap = 0;
     };
 
+    // 判断是否有选中的普通商品
+    var iftrshop = false;
+    for (var i = 0; i < comzund.length; i++) {
+      if (comzund[i].iftrcheck) {
+        iftrshop = true;
+      };
+    };
+    if(iftrshop){
+      var useblindAmountpayable = this.data.blindboxMoney>(ap.toFixed(2)*this.data.deductRatio)?ap.toFixed(2)*this.data.deductRatio:this.data.blindboxMoney;
 
-    let useblindAmountpayable = this.data.blindboxMoney>(ap.toFixed(2)*this.data.deductRatio)?ap.toFixed(2)*this.data.deductRatio:this.data.blindboxMoney;
-    let amountpayable = this.data.blindboxMoney!=0? this.data.isDeduct? this.data.isUseBlindboxMoney? (ap.toFixed(2)-useblindAmountpayable).toFixed(2) :ap.toFixed(2) :ap.toFixed(2) :ap.toFixed(2)
+      var amountpayable = this.data.blindboxMoney!=0? this.data.isDeduct? this.data.isUseBlindboxMoney? (ap.toFixed(2)-useblindAmountpayable).toFixed(2) :ap.toFixed(2) :ap.toFixed(2) :ap.toFixed(2)
+    }else{
+      var amountpayable = ap.toFixed(2); 
+    }
    
     this.setData({
       // 应付金额
