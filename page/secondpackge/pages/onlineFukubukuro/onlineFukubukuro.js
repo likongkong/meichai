@@ -33,7 +33,7 @@ Page({
     // 收货地址显示 请选择收货地址
     tipaddress:'请选择收货地址',
     tipaid:'',
-    current:0,
+    current:1,
     //我的抽盒金
     blindboxMoney:'',
     // 使用抽盒金比率
@@ -50,7 +50,31 @@ Page({
     order:'',
     // 福袋内容
     orderRoleList:[],
-    isredpacket:false
+    isredpacket:false,
+    detailList:[],
+    is_detail:false,
+  },
+  isDetailF(e){
+    let ia = e.currentTarget.dataset.ia || false;
+    var goodsDesc1 = [];
+    var goodsDesc2 = [];
+    
+    if(ia){
+      goodsDesc1 = this.data.infoData.goodsDesc1;
+      goodsDesc2 = this.data.infoData.goodsDesc2;
+    }else{
+      goodsDesc1 = this.data.infoData.goodsDesc1
+    };
+    this.setData({
+      is_detail:!this.data.is_detail,
+      goodsDesc1,
+      goodsDesc2
+    });
+    console.log(ia,goodsDesc1,goodsDesc2)
+  },
+  nineSpotNine(e){
+    let rule = e.currentTarget.dataset.rule;
+    app.showModalC(rule); 
   },
   /**
    * 生命周期函数--监听页面加载
@@ -185,6 +209,7 @@ Page({
 
   gitList(){
     var _this = this;
+    clearInterval(_this.data.timer);
     wx.showLoading({title: '加载中...',})
     var exh = Dec.Aese('mod=luckbag&operation=goodsList&uid='+app.signindata.uid+'&loginid='+app.signindata.loginid)
     console.log("福袋详情 ===== "+app.signindata.comurl + 'mod=luckbag&operation=goodsList&uid='+app.signindata.uid+'&loginid='+app.signindata.loginid)
@@ -199,17 +224,32 @@ Page({
         if (res.data.ReturnCode == 200) {
           
           WxParse.wxParse('article', 'html', res.data.Info.goods_desc, _this, 0);
+          var goodsList = res.data.List.goodsList
           _this.setData({
             bannerImg:res.data.List.bannerImg,
             recordList:res.data.List.recordList,
-            goodsList:res.data.List.goodsList,
+            goodsList:goodsList,
             deductRatio:res.data.Info.normalDeductRatio,
             isDeduct:res.data.Info.isDeduct,
             isUseBlindboxMoney:res.data.Info.isDeduct?true:false,
             isDeductNum:res.data.Info.isDeduct&&_this.data.blindboxMoney!=0?1:0,
             countWelfare:res.data.Info.countWelfare,
-            explain:res.data.Info.rule
+            explain:res.data.Info.rule,
+            infoData:res.data.Info
+          },()=>{
+              var is_newOpenTime = false;
+              for(var i=0 ;i<goodsList.length;i++){
+                if(goodsList[i].newOpenTime && goodsList[i].stockNumber == 0){
+                    is_newOpenTime = true;
+                };
+              };
+              if(is_newOpenTime){
+                _this.countdownbfun();
+              };
           })
+
+
+          
 
           _this.setData({
             isredpacket:true
@@ -222,6 +262,69 @@ Page({
       fail: function () { }
     });
   },
+
+
+  // 倒计时
+  countdownbfun: function () {
+    var _this = this;
+    clearInterval(_this.data.timer);
+    var raplist = _this.data.goodsList||[];
+    var len = raplist.length;
+    function nowTime() {
+      var iftrins = true;
+      // 获取现在的时间
+      var nowTime = new Date().getTime();
+      for (var i = 0; i < len; i++) {
+          var lastTime = raplist[i].newOpenTime * 1000;
+          var differ_time = lastTime - nowTime;
+          if (differ_time >= 0) {
+            var differ_day = Math.floor(differ_time / (3600 * 24 * 1e3));
+            var differ_hour = Math.floor(differ_time % (3600 * 1e3 * 24) / (1e3 * 60 * 60));
+            var differ_minute = Math.floor(differ_time % (3600 * 1e3) / (1000 * 60));
+            var s = Math.floor(differ_time % (3600 * 1e3) % (1000 * 60) / 1000);
+            if (differ_day.toString().length < 2) { differ_day = "0" + differ_day; };
+            if (differ_hour.toString().length < 2) { differ_hour = "0" + differ_hour; };
+            if (differ_minute.toString().length < 2) { differ_minute = "0" + differ_minute; };
+            if (s.toString().length < 2) { s = "0" + s; };
+            if (differ_day>0){
+              var str = differ_day + '天' + ' ' + differ_hour + ':' + differ_minute + ':' + s;
+            }else{
+              var str = differ_hour + ':' + differ_minute + ':' + s;
+            };
+            raplist[i].timestr = str;
+            raplist[i].day = differ_day;
+            raplist[i].hour = differ_hour;
+            raplist[i].minute = differ_minute;
+            raplist[i].second = s;
+          } else {
+            raplist[i].timestr = '00:00:00:0';
+            raplist[i].day = '00';
+            raplist[i].hour = '00';
+            raplist[i].minute = '00';
+            raplist[i].second = '00';
+          };
+          if (raplist[i].day != '00' || raplist[i].hour != '00' || raplist[i].minute != '00' || raplist[i].second != '00') {
+            iftrins = false;
+          };
+      };
+      _this.setData({
+        goodsList: raplist
+      });
+      if (iftrins) {
+        clearInterval(_this.data.timer);
+        setTimeout(()=>{
+          _this.gitList();
+        },1000);
+      };
+    }
+    if (_this.data.goodsList.length != 0) {
+      nowTime();
+      clearInterval(_this.data.timer);
+      _this.data.timer= setInterval(nowTime, 1000);
+    };
+  },
+
+
   useBlindboxMoneyFun(){
     this.setData({
       isUseBlindboxMoney:!this.data.isUseBlindboxMoney,
@@ -402,9 +505,13 @@ Page({
             buybombsimmediately: false,
             orderRoleList:res.data.List.orderRoleList,
           })
-          
         } else {
-          app.showToastC(res.data.msg);
+          _this.gitList();
+          _this.setData({
+            buybombsimmediately:false,
+            tipbacktwo: false,
+          })
+          app.showModalC(res.data.Msg || res.data.msg);
         }
       },
       fail: function () { }

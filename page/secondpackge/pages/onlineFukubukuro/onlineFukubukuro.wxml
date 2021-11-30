@@ -25,7 +25,19 @@
   </view>
   <view class="content">
     <block wx:for="{{goodsList}}" wx:key='key'>
-      <view class="card" data-type="{{item.type}}" data-price="{{item.price}}" catchtap="showbuybombsimmediately"> 
+      <view class="cardEve">
+          <image class="cardEveLeftImg" catchtap="isDetailF" data-ia='{{item.all_goods_desc}}' src="{{item.goods_img}}" mode="aspectFit"></image>
+          <view class="cardEveRight">
+              <view class="cardEveRPrcice">{{item.price}}元超值福袋</view>
+              <view class="cardEveRPrciceCom" wx:if='{{item.isShowStock}}'>剩余：{{item.stockNumber}}/{{item.totalNumber}}<image catchtap="nineSpotNine" data-rule='{{item.rule}}' class="cardEveLeftMark" src="https://cdn.51chaidan.com/images/brandSettledIcon/wenhao.png" mode="aspectFit"></image></view>
+              <view class="cardEveRPrciceCom" wx:if='{{item.explain1}}'>{{item.explain1}}</view>
+              <view class="cardEveRPrciceCom" wx:if='{{item.explain2}}'>{{item.explain2}}</view>
+
+              <view class="cardEveRButton" wx:if='{{item.newOpenTime && item.stockNumber == 0}}' style="background:#FD982D;">{{item.minute}}分{{item.second}}秒后补充库存</view>
+              <view class="cardEveRButton" wx:else data-type="{{item.type}}" data-price="{{item.price}}" catchtap="showbuybombsimmediately">立即开福袋</view>
+          </view>
+      </view>
+      <!-- <view class="card" data-type="{{item.type}}" data-price="{{item.price}}" catchtap="showbuybombsimmediately"> 
         <view class="cardBox">
           <view class="fukubukuroPic">
             <image src="{{item.goods_img}}" mode="widthFix"></image>
@@ -39,13 +51,13 @@
             </view>
           </view>
         </view>
-      </view>
+      </view> -->
     </block>
   </view>
   <view class="tabWrap">
     <view class="tabBtnWrap">
-      <view class="{{current == 0?'active':''}}" data-ind="0" catchtap="tabChangeFun">商品预览</view>
-      <view class="{{current == 1?'active':''}}" data-ind="1" catchtap="tabChangeFun">活动规则</view>
+      <!-- <view class="{{current == 0?'active':''}}" data-ind="0" catchtap="tabChangeFun">商品预览</view> -->
+      <view class="{{current == 2?'active':''}}" data-ind="1" catchtap="tabChangeFun">活动规则</view>
     </view>
     <view>
       <block wx:if="{{current==0}}">
@@ -175,4 +187,29 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
   <view class='recgadbot' bindtap='jumpaddress'>
     增加新地址
   </view>
+</view>
+
+<!-- 详情 -->
+<view class="wshNew" wx:if='{{is_detail}}' catchtap="isDetailF" catchtouchmove="true">
+    <view class="onlineDetailTip" catchtap="true">
+        <view class="ODTHead">福袋详情<image src='../../../../pages/images/forknumber.png' catchtap="isDetailF" class='ODTHeadImg'></image></view>
+        <view class="ODTHeadTwo">福袋中包含但不限于以下商品</view>
+        <scroll-view scroll-y="true" class="ODTScrollView" >
+          <block wx:if='{{goodsDesc2.length != 0}}'>
+              <view class="ODTHeadTwo" wx:if='{{goodsDesc2.length != 0 && goodsDesc1.length != 0}}'>稀有款</view>
+              <view class="ODTEVE" wx:for='{{goodsDesc2}}' wx:key='key' style="{{index%3==1?'margin:0 30rpx 25rpx 30rpx;':''}}">
+                  <image src='{{item.goods_thumb}}' class='ODTEVEImg'></image>
+                  <view class="ODTEVETxt multilineellipsis">{{item.goods_name}}</view>
+              </view>
+          </block>
+          <block wx:if='{{goodsDesc1.length != 0}}'>
+              <view class="ODTHeadTwo" wx:if='{{goodsDesc2.length != 0 && goodsDesc1.length != 0}}'>普通款</view>
+              <view class="ODTEVE" wx:for='{{goodsDesc1}}' wx:key='key' style="{{index%3==1?'margin:0 30rpx 25rpx 30rpx;':''}}">
+                  <image src='{{item.goods_thumb}}' class='ODTEVEImg'></image>
+                  <view class="ODTEVETxt multilineellipsis">{{item.goods_name}}</view>
+              </view>
+          </block>
+
+        </scroll-view>
+    </view>
 </view>

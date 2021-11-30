@@ -218,8 +218,8 @@
           "scene": null
         },
         {
-          "name": "page/component/pages/limitlottery/limitlottery",
-          "pathName": "page/component/pages/limitlottery/limitlottery",
+          "name": "在线福袋",
+          "pathName": "page/secondpackge/pages/onlineFukubukuro/onlineFukubukuro",
           "query": "list=1&id=502890",
           "scene": null
         },
