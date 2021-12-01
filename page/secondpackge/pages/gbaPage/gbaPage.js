@@ -35,6 +35,8 @@ Page({
           WxParse.wxParse('article', 'html', res.data.blindBox, that,5);
         }else if(options.from == "showBox"){  //原价抽明盒
           WxParse.wxParse('article', 'html', res.data.showBox, that,5);
+        }else if(options.from == "blindBoxList"){  //原价抽明盒
+          WxParse.wxParse('article', 'html', res.data.wholeBoxHideRole, that,5);
         }
       },
       fail: function (res) {}
