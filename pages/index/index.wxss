@@ -350,3 +350,14 @@
 .homeSeeMoreV{
   font-size:25rpx;line-height:30rpx;color:#fff;padding:5rpx 10rpx;border-radius:10rpx;background:#f08080;
 }
+
+.progress-boxSup{
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding-left:15rpx;
+  font-size:20rpx;
+  color: #fff;
+  height: 100%;
+  line-height: 24rpx;
+}
