@@ -81,7 +81,12 @@ Page({
     push_id:0,
     isBuyingTickets:false,
     isGiveticket:false,
-    PromptSwitchBack:false
+    PromptSwitchBack:false,
+  },
+  toggleExplain(){
+    this.setData({
+      concealNum:this.data.concealNum==0?1:0
+    })
   },
   showrule: function() {
     wx.navigateTo({
@@ -190,11 +195,13 @@ Page({
     _this.data.push_id = options.push_id || 0;
     app.signindata.suap = 5;
     _this.setData({
+      concealNum:app.signindata.concealNum || 0,
       uid: app.signindata.uid,
       isProduce: app.signindata.isProduce,
       avatarUrl: app.signindata.avatarUrl,
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
     });
+    app.signindata.concealNum = 1; 
     wx.showLoading({
       title: '加载中...',
     })
@@ -493,6 +500,7 @@ Page({
 
             _this.setData({
               // list: mlist,
+              infoData,
               list: listdata,
               alert: listData.alert,
               listbutnum: listbutnum,

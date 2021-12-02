@@ -42,7 +42,7 @@
 
 			<view style='width:100%;height:100%;position:absolute;top:0;left:0;z-index:2;'>
 					<!-- <image src='https://www.51chaidan.com/images/toyCabinet/search.png' class='dlfheadrhimg' catchtap='elsearchfun'></image> -->
-					<text wx:if="{{true}}" catchtap="showrule" style="display:block;width:100%;height:80rpx;line-height:80rpx;text-align:right;font-size:24rpx;color:#1890ff;">送隐藏说明</text>
+					<text wx:if="{{true}}" catchtap="toggleExplain" style="display:block;width:100%;height:80rpx;line-height:80rpx;text-align:right;font-size:24rpx;color:#1890ff;">送隐藏说明</text>
 					<text wx:if="{{isRedPackage}}" catchtap="jumpsouchtemip" data-id='-1' style="display:block;width:100%;height:80rpx;line-height:80rpx;text-align:right;font-size:24rpx;color:#1890FF;">抽盒金红包</text>
 					<text wx:elif="{{isBuyingTickets}}" catchtap="giveticketFun" style="display:block;width:100%;height:80rpx;line-height:80rpx;text-align:right;font-size:24rpx;color:#1890ff;">送刮刮卡</text>
 					
@@ -350,3 +350,11 @@
 	</view>
 </view>
 
+<!-- 送隐藏说明弹框 -->
+<view class="mask" wx:if="{{concealNum == 0 && infoData.sendToHideRule}}" catchtouchmove="true" catchtap="toggleExplain">
+  <view class="maskBox" catchtap="true">
+    <text class="maskBoxtitle">端盒送隐藏或异色活动说明</text>
+    <text class="maskTxt">{{infoData.sendToHideRule}}</text>
+    <view class="wenhaogb" catchtap="toggleExplain">我知道了</view>
+  </view>
+</view>

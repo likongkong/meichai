@@ -226,6 +226,8 @@ Page({
           WxParse.wxParse('article', 'html', res.data.Info.goods_desc, _this, 0);
           var goodsList = res.data.List.goodsList
           _this.setData({
+            subscribedata:res.data.Info.subscribe,
+            shareInfo:res.data.Info.shareInfo,
             bannerImg:res.data.List.bannerImg,
             recordList:res.data.List.recordList,
             goodsList:goodsList,
@@ -425,7 +427,7 @@ Page({
         if (res.data.ReturnCode == 200) {
               wx.hideLoading();
               var payinfo = res.data.Info;
-              _this.data.subscribedata = res.data.Info.subscribe || ''  // 订阅信息
+              // _this.data.subscribedata = res.data.Info.subscribe || ''  // 订阅信息
               wx.requestPayment({
                   'timeStamp': res.data.Info.timeStamp.toString(),
                   'nonceStr': res.data.Info.nonceStr,
@@ -721,43 +723,20 @@ Page({
   onShareAppMessage: function(options ) {
     var _this = this
     var share = {
-      imageUrl:  "https://cdn.51chaidan.com/images/sign/yifanshangLisSharet.jpg"
+      title: this.data.shareInfo.title,
+      imageUrl: this.data.shareInfo.img,
+      path: "/page/secondpackge/pages/onlineFukubukuro/onlineFukubukuro",
+      // path: "/page/secondpackge/pages/onlineFukubukuro/onlineFukubukuro?referee=" + _this.data.uid + '&welfareid=' + _this.data.scene.welfareid + '&isredpag=1',
+      success: function (res) {}
     }
-    if( options.from == 'button' ){
-      var info = _this.data.welfare
-      var xilie = _this.data.welfare.roleName != "" ? "-" : ""
-      var title = ""
-      if(info.welfareType == 1){
-        title = "我抽到了"+ xilie + info.roleName + "，隐藏红包送给你们。"
-      } else if(info.welfareType == 2){
-        if (info.userId && info.userId != _this.data.uid) {
-          title = info.nick + "抽到了"+ xilie + info.roleName + "，幸运值红包送给你们。"
-        } else {
-          title = "我抽到了"+ xilie + info.roleName + "，幸运值红包送给你们。"
-        }
-      }else if(info.welfareType == 3){
-        if (info.userId && info.userId != _this.data.uid) {
-          title = info.nick + "抽到了"+ xilie + info.roleName + "，抽盒金红包送给你们。"
-        } else {
-          title = "我抽到了"+ xilie + info.roleName + "，抽盒金红包送给你们。"
-        }
-      }
-      var share = {
-        title: title,
-        imageUrl: _this.data.redpagshareimg,
-        path: "/page/secondpackge/pages/onlineFukubukuro/onlineFukubukuro?referee=" + _this.data.uid + '&welfareid=' + _this.data.scene.welfareid + '&isredpag=1',
-        success: function (res) {}
-      }
-    }
-
     return share;
   },
   onShareTimeline:function(){
     var _this = this;
     return {
-      title:'来美拆一番赏，一发入魂，抢战最终手办大赏',
+      title:this.data.shareInfo.title,
       query:{},
-      imageUrl: 'https://cdn.51chaidan.com/images/sign/yifanshangShareImg.jpg'
+      imageUrl: this.data.shareInfo.img
     }
   },
   jumpowntoy: function() {
@@ -779,12 +758,60 @@ Page({
       this.setData({
         subscribedata:subscribe_data
       });
-      _this.subscrfun(1);
+      // _this.subscrfun(1);
       return false;
     }
 
     // 公共跳转
     app.comjumpwxnav(item_type, whref, wname, imgurl);
 
+  },
+  // 拉起订阅
+  subscrfunstar: function () {
+    var _this = this;
+    var subscribedata = _this.data.subscribedata || '';
+    if (subscribedata && subscribedata.template_id && app.signindata.subscribeif) {
+      if (subscribedata.template_id instanceof Array) {
+        wx.requestSubscribeMessage({
+          tmplIds: subscribedata.template_id || [],
+          success(res) {
+            var is_show_modal = true;
+            for (var i = 0; i < subscribedata.template_id.length; i++) {
+              if (res[subscribedata.template_id[i]] == "accept") {
+                app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+                if (is_show_modal) {
+                  _this.subshowmodalfun();
+                  is_show_modal = false;
+                };
+              };
+            };
+          },
+        })
+      } else {
+        wx.requestSubscribeMessage({
+          tmplIds: [subscribedata.template_id || ''],
+          success(res) {
+            if (res[subscribedata.template_id] == "accept") {
+              app.subscribefun(_this, 0, subscribedata.template_id, subscribedata.subscribe_type);
+              _this.subshowmodalfun();
+            };
+          }
+        })
+      };
+    };
+  },
+  subshowmodalfun: function () {
+    var _this = this;
+    wx.showModal({
+      title: '提示',
+      content: _this.data.subscribeCouponTip || '订阅成功,开售前通过微信发送提醒',
+      showCancel: false,
+      success: function (res) {
+        _this.setData({
+          subscribeCouponTip:'',
+          isSubscribeCoupon:false
+        })
+        }
+    })
   },
 })

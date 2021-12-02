@@ -282,6 +282,12 @@
           "pathName": "page/settled/pages/allBrandsIp/allBrandsIp",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "page/secondpackge/pages/onlineFukubukuro/onlineFukubukuro",
+          "pathName": "page/secondpackge/pages/onlineFukubukuro/onlineFukubukuro",
+          "query": "list=1&id=502890",
+          "scene": null
         }
       ]
     }

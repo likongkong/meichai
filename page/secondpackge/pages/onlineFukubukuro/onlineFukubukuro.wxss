@@ -95,9 +95,10 @@
   font-size:36rpx;
 }
 .cardEveRPrciceCom{
+  width: 74%;
   color: #fff;
   font-size: 22rpx;
-  margin-top: 28rpx;
+  margin-top: 15rpx;
 }
 .cardEveRButton{
   width: 320rpx;
