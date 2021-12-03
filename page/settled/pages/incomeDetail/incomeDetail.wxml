@@ -45,11 +45,14 @@
                 <block wx:elif="{{sonitem.flag==3}}">
                   <image src="https://cdn.51chaidan.com/images/brandSettledIcon/orderIcon/withdraw.png" mode="widthFix"></image>
                 </block>
+                <block wx:elif="{{sonitem.flag==4}}">
+                  <image src="https://cdn.51chaidan.com/images/brandSettledIcon/chat_pay_the_fees.png" mode="widthFix"></image>
+                </block>
               </view>
               <view class="orderItemR">
                 <view>
-                  <text class="color101010"><block wx:if="{{sonitem.flag==3}}">{{sonitem.flag_name}}</block><block wx:else>{{sonitem.flag_name}}--{{sonitem.goods_name}}</block></text>
-                  <block wx:if="{{sonitem.flag == 1}}">
+                  <text class="color101010"><block wx:if="{{sonitem.flag==3 || sonitem.flag == 4}}">{{sonitem.flag_name}}</block><block wx:else>{{sonitem.flag_name}}--{{sonitem.goods_name}}</block></text>
+                  <block wx:if="{{sonitem.flag == 1 || sonitem.flag == 4}}">
                     <text class="colorFFB730">{{sonitem.show_price}}</text>
                   </block>
                   <block wx:else>

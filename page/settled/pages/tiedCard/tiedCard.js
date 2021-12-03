@@ -185,14 +185,16 @@ Page({
     num:1,  //进度
     brandInfo:{}, //品牌信息
     type:'',
-    isUnbindAndBindMask:false
+    isUnbindAndBindMask:false,
+    isRecord:false,
+    checked: false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('options==',options)
+    console.log('options==',options,)
     this.data.uid = app.signindata.uid;
     this.data.loginid = app.signindata.loginid;
     this.data.from = options.from;
@@ -200,6 +202,7 @@ Page({
       type: options.type || 1,
       accountId: options.accountId || '',
       fromVerify: options.fromVerify || false,
+      isRecord:app.signindata.isRecord
     })
     // 判断是否登录
     if (this.data.loginid != '' && this.data.uid != '') {
@@ -273,6 +276,11 @@ Page({
     let type = e.currentTarget.dataset.type;
     let num = e.currentTarget.dataset.num;
     app.comjumpwxnav(type,num)
+  },
+  radioChecked: function(e) {
+    this.setData({
+      checked: !this.data.checked
+    });
   },
   // 获取表单数据
   bindchange(e){
@@ -460,6 +468,12 @@ Page({
       //   return false;
       // }
     }
+    if(this.data.type == 3 && !this.data.isRecord){ 
+      if(!this.data.checked){
+        app.showToastC('请先阅读并同意挂网协议',1500);
+        return false;
+      }
+    }
     if(this.data.type != 3){ 
       this.selectComponent('#enterpriseData2').countDown();
     }
@@ -488,6 +502,7 @@ Page({
         if (res.data.ReturnCode == 200) {
           _this.data.accountId = res.data.Info.account.accountId;
           if(_this.data.type == 3){
+            _this.recordRegister();
             app.showToastC('绑定成功',1500);
             setTimeout(function(){
               wx.navigateBack({
@@ -578,6 +593,12 @@ Page({
       app.showToastC('请输入验证码',1500);
       return false;
     }
+    if(!this.data.isRecord){
+      if(!this.data.checked){
+        app.showToastC('请先阅读并同意挂网协议',1500);
+        return false;
+      }
+    }
     console.log('银行卡验证请求'+'mod=account&operation=verifyCard&uid='+this.data.uid+'&loginid='+this.data.loginid+'&verifyCode='+this.data.obj.phoneCode+'&accountId='+this.data.accountId);
     var qqq = Dec.Aese('mod=account&operation=verifyCard&uid='+this.data.uid+'&loginid='+this.data.loginid+'&verifyCode='+this.data.obj.phoneCode+'&accountId='+this.data.accountId);
     wx.showLoading({
@@ -593,6 +614,7 @@ Page({
         console.log('银行卡验证=====',res)
         if (res.data.ReturnCode == 200) {
           app.showToastC('绑定成功',1500);
+          _this.recordRegister();
           setTimeout(function(){
             wx.navigateBack({
               delta: 1
@@ -609,7 +631,29 @@ Page({
         };
       }
     });
-
+  },
+  recordRegister(){
+    var _this = this;
+    console.log('确认勾选协议请求'+'mod=account&operation=recordRegister&uid='+this.data.uid+'&loginid='+this.data.loginid+'&mac=""');
+    var qqq = Dec.Aese('mod=account&operation=recordRegister&uid='+this.data.uid+'&loginid='+this.data.loginid+'&mac=""');
+    wx.showLoading({
+      title: '加载中...',
+      mask:true
+    })
+    wx.request({
+      url: app.signindata.comurl + 'pingan.php' + qqq,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        wx.hideLoading()
+        console.log('确认勾选协议=====',res)
+        if (res.data.ReturnCode == 200) {
+          
+        }else{
+          app.showToastC(res.data.Msg)  
+        };
+      }
+    });
   },
   toggleImmediatelyUnlink(){
     this.setData({
@@ -671,6 +715,17 @@ Page({
           app.showToastC(res.data.Msg)  
         };
       }
+    });
+  },
+  comjumpwxnav(e){
+    let type = e.currentTarget.dataset.type;
+    let whref = e.currentTarget.dataset.whref;
+    app.comjumpwxnav(type,whref)
+  },
+  jumpWebview(e){
+    // console.log(e.currentTarget.dataset.url)
+    wx.navigateTo({ 
+      url: "/page/component/pages/webview/webview?webview=" + e.currentTarget.dataset.url
     });
   },
 })

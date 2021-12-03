@@ -763,9 +763,9 @@
                             等待开奖<block wx:if='{{item.isFullTicket}}'>支付尾款</block>，未中奖原路退回
                         </view>
                         
-                <view class='wholebottomaddright' wx:if='{{item.order_type==1}}' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;margin-right:10rpx;' data-ind='{{index}}' bindtap='personalhomepage'>
+                <!-- <view class='wholebottomaddright' wx:if='{{item.order_type==1}}' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;margin-right:10rpx;' data-ind='{{index}}' bindtap='personalhomepage'>
                         发帖推荐
-                        </view>
+                        </view> -->
 
                     </view> 
                     <!--  已完成  -->
@@ -774,6 +774,20 @@
                     <view wx:if='{{item.status==5&&item.order_type==10&&(item.showOrder==0||item.showOrder==3||item.showOrder==4)}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
                             <view style='width:100%;height:100%;position: relative;'>晒单领奖<button class='tgaboxtgawchbochlibutboxtwo' type='primary' bindtap="getUserProfile" data-qrcode='{{item.qrcode}}' data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具' data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}'></button></view>
                         </view>
+
+                        <!-- 寄回物流信息 -->
+                        <block wx:if="{{item.isSendBack}}">
+                            <block wx:if="{{item.sendBackStatus == 1}}">
+                                <view class='wholebottomaddright redborcol' style='margin-right:20rpx;position: relative;' data-href="{{item.sendBackAuditStatus==0 || item.sendBackAuditStatus==5 || item.sendBackAuditStatus==6?'status=0':'status=1&sendBackId='+item.sendBackId}}"  data-item_type='9054' bindtap='comindellistjump'>商品寄回</view> 
+                            </block>
+                            <block wx:else>
+                                <view class='wholebottomaddright redborcol' style='margin-right:20rpx;position: relative;' data-id='{{item.sendBackId}}' data-gcover='{{item.gcover}}' bindtap='sendBackLogistics'>查看物流</view> 
+                            </block>
+                        </block>
+                        <!-- 发货的查看物流 -->
+                        <block wx:else>
+                            <view class='wholebottomaddright' style='margin-right:20rpx;position: relative;' data-oid='{{item.oid}}' data-gcover='{{item.gcover}}' bindtap='lookatthelogistics'>查看物流</view> 
+                        </block>
                                 
                         <view class='wholebottomaddright sharebox redborcol'  wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood && item.order_type!=13}}'>
                             <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
@@ -783,12 +797,10 @@
                         <view wx:if='{{item.order_type==27 && item.status !=8}}'>
                             等待开奖<block wx:if='{{item.isFullTicket}}'>支付尾款</block>，未中奖原路退回
                         </view>
-                    
-                        <view class='wholebottomaddright' style='margin-right:20rpx;position: relative;' data-oid='{{item.oid}}' data-gcover='{{item.gcover}}' bindtap='lookatthelogistics'>查看物流</view> 
-
-                        <view class='wholebottomaddright' wx:if='{{item.order_type==1}}' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;margin-right:10rpx;' data-ind='{{index}}' bindtap='personalhomepage'>
+                        
+                        <!-- <view class='wholebottomaddright' wx:if='{{item.order_type==1}}' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;margin-right:10rpx;' data-ind='{{index}}' bindtap='personalhomepage'>
                         发帖推荐
-                        </view>
+                        </view> -->
 
 
                     </view>

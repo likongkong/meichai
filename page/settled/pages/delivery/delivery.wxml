@@ -1,0 +1,205 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class="wrap">
+  <view class="card">
+    <view class="title">
+      寄件人信息
+      <image src="https://cdn.51chaidan.com/images/brandSettledIcon/shippingIcon_right.png" mode="widthFix"></image>
+    </view>
+    <view class="senderInformationWrap" data-type="1" catchtap="seladdressfun">
+      <view class="senderInformationL">
+        <view class="senderInformationName">
+          {{tipname}} {{phone}}
+          <image wx:if="{{isPhone}}" data-type="1" catchtap="hidePhone" src="https://cdn.51chaidan.com/images/brandSettledIcon/shippingIcon_show.png" mode="widthFix"></image>
+          <image wx:else data-type="1" catchtap="showPhone" src="https://cdn.51chaidan.com/images/brandSettledIcon/shippingIcon_hide.png" mode="widthFix"></image>
+        </view>
+        <view class="senderInformationAddress">
+          {{tipaddress}}
+        </view>
+      </view>
+      <!-- <view class="senderInformationR">
+        <image src="https://cdn.51chaidan.com/images/brandSettledIcon/shippingIcon_wx.png" mode="widthFix"></image>
+      </view> -->
+    </view>
+  </view>
+
+  <view class="card" catchtap="toggleVisitTtime">
+    <view class="spaceBetween">
+      <text class="font28_101010">上门取件</text>
+      <image src="https://cdn.51chaidan.com/images/brandSettledIcon/shippingIcon_right.png" mode="widthFix"></image>
+    </view>
+    <view class="spaceBetween" style="margin-top:20rpx;">
+      <text class="font28_101010">期望上门取件时间</text>
+      <text class="font28_909090">{{timeList[timeIndex].name}}{{start_time}}-{{end_time}}</text>
+    </view>
+  </view>
+
+  <view class="card" data-type="9055" data-whref="kgNumber={{goodsInfo.kgNumber}}&selectedGoodsArrIndex={{goodsInfo.selectedGoodsArrIndex}}&textareaInput={{goodsInfo.textareaInput}}" catchtap="comjumpwxnav">
+    <view class="spaceBetween">
+      <text class="font28_101010">物品信息</text>
+      <image src="https://cdn.51chaidan.com/images/brandSettledIcon/shippingIcon_right.png" mode="widthFix"></image>
+    </view>
+    <view class="spaceBetween" style="margin-top:20rpx;">
+      <text class="font28_101010">预估重量</text>
+      <text class="font28_909090">{{goodsInfo.kgNumber}}KG</text>
+    </view>
+    <view class="spaceBetween" style="margin-top:20rpx;">
+      <text class="font28_101010">物品类型</text>
+      <text class="font28_909090">{{goodsInfo.selectedGoodsArrIndex!=''||goodsInfo.selectedGoodsArrIndex==0?goodsInfo.goodsArr[goodsInfo.selectedGoodsArrIndex].name:'请选择'}}</text>
+    </view>
+    <view class="spaceBetween" style="margin-top:20rpx;">
+      <text class="font28_101010" decode="true">备注说明</text>
+      <text class="font28_909090" style="width:65%;text-align:right;">{{goodsInfo.textareaInput!=''?goodsInfo.textareaInput:'请输入'}}</text>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="title">
+      其他信息
+    </view>
+    <view class="spaceBetween" style="margin-top:20rpx;">
+      <text class="font28_101010">付款方式</text>
+      <text class="font28_909090">收件方支付</text>
+    </view>
+    <view class="spaceBetween" style="margin-top:20rpx;">
+      <text class="font28_101010">保费（收件方支付）</text>
+      <text class="font28_909090">无</text>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{deliveryType == 1}}">
+    <view class="title" catchtap="toggleExplain">
+      <view>
+        换货商品收件地址（商品无需再寄回请忽略）<image src="https://cdn.51chaidan.com/images/brandSettledIcon/wenhao.png" mode="widthFix"></image>
+      </view> 
+      <image src="https://cdn.51chaidan.com/images/brandSettledIcon/shippingIcon_right.png" mode="widthFix"></image>
+    </view>
+    <view class="senderInformationWrap" data-type="2" catchtap="seladdressfun">
+      <view class="senderInformationL">
+        <view class="senderInformationName">
+          {{tipname1}} {{phone1}}
+          <image wx:if="{{isPhone1}}" data-type="2" catchtap="hidePhone" src="https://cdn.51chaidan.com/images/brandSettledIcon/shippingIcon_show.png" mode="widthFix"></image>
+          <image wx:else data-type="2" catchtap="showPhone" src="https://cdn.51chaidan.com/images/brandSettledIcon/shippingIcon_hide.png" mode="widthFix"></image>
+        </view>
+        <view class="senderInformationAddress">
+          {{tipaddress1}}
+        </view>
+      </view>
+      <!-- <view class="senderInformationR">
+        <image src="https://cdn.51chaidan.com/images/brandSettledIcon/shippingIcon_wx.png" mode="widthFix"></image>
+      </view> -->
+    </view>
+  </view>
+
+  <block wx:if="{{status == 1}}">
+    <view class="footer1">
+      <view class="goback" catchtap="goback">
+        返回
+      </view>
+      <view class="cancel {{audit_status==1?'':'unclickable'}}" catchtap="{{audit_status==1?'cancel':''}}">
+        取消取件
+      </view>
+      <view class="submitBtn1" catchtap="submitBtn">
+        提交
+      </view>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="footer">
+      <view class="submitBtn" catchtap="submitBtn">
+        提交
+      </view>
+    </view>
+  </block>
+</view>
+
+
+
+
+
+
+<view class="mask" wx:if="{{isVisitTtime}}" catchtouchmove="true" catchtap="toggleVisitTtime">
+  <view class="visitTtimeWrap" catchtap="true">
+    <view class="visitTtimeTitle">
+      选择上门时间 
+      <image catchtap="toggleVisitTtime" class="shippingIcon_close" src="https://cdn.51chaidan.com/images/brandSettledIcon/shippingIcon_close.png" mode="widthFix"></image>
+    </view>
+    <view class="visitTtimeContent">
+      <view class="visitTtimeContentL">
+        <block wx:for="{{timeList}}" wx:key="key">
+          <text class="{{selectedName == item.name?'active':''}}" data-name="{{item.name}}" data-index="{{index}}" catchtap="timeChange">{{item.name}}</text>
+        </block>
+      </view>
+      <view class="visitTtimeContentR">
+        <block wx:for="{{selectedTimeList}}" wx:key="key">
+          <view 
+            class="{{item.selectedTime?'selectedTime':''}}" 
+            data-startime="{{item.StartTime}}" 
+            data-endtime="{{item.EndTime}}" 
+            data-start_time="{{item.start_time}}" 
+            data-end_time="{{item.end_time}}" 
+            data-isfinish="{{item.is_finish}}"
+            data-index="{{index}}" 
+            catchtap="selectedTimeBtn"
+          >
+            <text>{{item.start_time}} ~ {{item.end_time}}</text>
+            <text>{{item.is_finish?'已过期':''}}</text>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="mask" wx:if="{{isExplain}}" catchtouchmove="true" catchtap="toggleExplain">
+  <view class="maskBox" catchtap="true">
+    <text class="maskBoxtitle">提示</text>
+    <text class="maskTxt">
+      如售后商品需要更换寄回，请输入更换后的商品需要寄回的收货信息
+    </text>
+    <view class="wenhaogb" catchtap="toggleExplain">我知道了</view>
+  </view>
+</view>
+
+<!--  二级背景  -->
+<view class='tipbacktwo' wx:if='{{tipbacktwo}}' catchtouchmove="true" bindtap='receivingaddressfun'></view>
+<!--  收货地址  -->
+<view class='receivingaddress' wx:if='{{receivingaddress}}'>
+  <view class='recgadhead'>
+    收货地址
+    <image src='/pages/images/forknumber.png' class='recgadheadimg' bindtap='receivingaddressfun'></image>
+  </view>
+  <view class='recgadcon'>
+    <view class='recgaddata' wx:for='{{addressdata}}' wx:key='key'>
+      <view class='recgaddname' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='revisethereceivingaddress'>
+        <view class='recgaddnameleft'>{{item.consignee}}</view>
+        <view class='recgaddnameleft'>{{item.phone}}</view>
+      </view>
+      <view class='recgadaddress' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='revisethereceivingaddress'>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
+      <view class='recgadbottom'>
+        <view class='recgadbotleft'>
+          <image class='recgadbotleftimg' hidden='{{!item.checked}}' src='/pages/images/pressed_click.png'></image>
+          <image class='recgadbotleftimg' hidden='{{item.checked}}' src='/pages/images/normal_click.png'></image>
+          默认地址
+        </view>
+        <view class='recgadbotright' bindtap='deladdress' data-ind="{{item.aid}}">
+          <image src='/pages/images/icon_delete.png' class='recgadbotleftimg'></image>
+          删除
+        </view>
+        <view class='recgadbotright' style='margin-right:50rpx;' bindtap='jumpeditaddress' data-address='{{item.address}}' data-aid='{{item.aid}}' data-city='{{item.city}}' data-consignee='{{item.consignee}}' data-district='{{item.district}}' data-phone='{{item.phone}}'
+          data-province='{{item.province}}' data-idcard='{{item.idcard}}'>
+          <image src='/pages/images/icon_edit.png' class='recgadbotleftimg'></image>
+          编辑
+        </view>
+      </view>
+    </view>
+      <view class='noDataCom' wx:if='{{addressdata.length==0}}'>
+          <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
+      </view>
+
+  </view>
+  <view class='recgadbot' bindtap='jumpaddress'>
+    增加新地址
+  </view>
+</view>

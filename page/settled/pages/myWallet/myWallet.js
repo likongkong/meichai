@@ -96,6 +96,7 @@ Page({
     this.data.uid = app.signindata.uid;
     if(wx.getStorageSync('access_token')){
       this.getListData();
+      // this.getbankCardList();
       this.getLumpsumAndWithdraw();
       this.getAccountNumberList();
       let a = this.keepTwoDecimalFull(19841);
@@ -205,6 +206,7 @@ Page({
         info:res.data.data.info,
         notify:res.data.data.notify
       })
+      app.signindata.isRecord = res.data.data.info.isRecord; //是否勾选同意挂网协议
     }).catch((err)=>{
       console.log(err)
     })
@@ -601,7 +603,7 @@ Page({
                 isBankcardlistMask:false
               })
               _this.onLoadfun();
-              // _this.getbankCardList();
+              _this.getbankCardList();
               // this.getAccountNumberList();
             },1500)
           }else{

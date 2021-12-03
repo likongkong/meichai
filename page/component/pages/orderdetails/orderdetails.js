@@ -805,6 +805,14 @@ Page({
       url: "../../../../pages/lookatthelogistics/lookatthelogistics?oid="+oid+'&gcover='+gcover
     })
   },  
+  // 寄回物流
+  sendBackLogistics:function(w){
+    var id = w.target.dataset.id || w.currentTarget.dataset.id;
+    var gcover = w.target.dataset.gcover || w.currentTarget.dataset.gcover;
+    wx.navigateTo({  
+      url:'/page/settled/pages/sendBackLogistics/sendBackLogistics?id='+id+'&gcover='+gcover
+    })
+  },
   // 取消订单
   cancellationoforder: function (w) {
     var oid = w.currentTarget.dataset.oid || w.target.dataset.oid;
@@ -1228,6 +1236,10 @@ vipOrOrdermine1(){
         awatip: true,
         awardrresentiftr:false
       })
+    } else if (item_type == 9054) {   // 取件信息
+      wx.navigateTo({
+        url: `/page/settled/pages/delivery/delivery?${whref}`
+      });      
     };
   },  
   // 跳转邀请页面

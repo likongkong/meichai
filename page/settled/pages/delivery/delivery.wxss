@@ -1,0 +1,255 @@
+@import "../../../../pages/detailspage/detailspage.wxss";
+
+page{
+  background:#f4f5f9;
+}
+.font28_101010{
+  font-size: 28rpx;
+  color: #101010;
+}
+.font28_909090{
+  font-size: 28rpx;
+  color: #909090;
+}
+.spaceBetween{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.spaceBetween image{
+  width: 50rpx;
+  height: auto;
+}
+.card{
+  width: 730rpx;
+  background: #ffffff;
+  border-radius: 14rpx;
+  margin: 20rpx auto 0 auto;
+  padding: 18rpx 18rpx 30rpx 18rpx;
+  box-sizing: border-box;
+}
+.title{
+  height: 40rpx;
+  line-height: 40rpx;
+  font-size: 28rpx;
+  color: #101010;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.title>image{
+  width: 50rpx;
+  height: auto;
+}
+.title view{
+  display: flex;
+  align-items: center;
+}
+.title view>image{
+  width: 40rpx;
+  height: auto;
+}
+.senderInformationWrap{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 14rpx;
+}
+.senderInformationL{
+  width: 100%;
+  box-sizing: border-box;
+}
+.senderInformationName{
+  font-size: 28rpx;
+  color: #101010;
+  margin-bottom: 6rpx;
+  display: flex;
+  align-items: center;
+}
+.senderInformationName image{
+  width: 48rpx;
+  height: auto;
+  margin-left: 30rpx;
+}
+.senderInformationAddress{
+  font-size: 28rpx;
+  color: #909090;
+}
+.senderInformationR{
+  width: 20%;
+  border-left: 2rpx solid #F5F5F5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.senderInformationR image{
+  width: 48rpx;
+  height: auto;
+}
+.footer{
+  width: 100%;
+  height: 176rpx;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  padding: 30rpx 0 0 0;
+  box-sizing: border-box;
+}
+.submitBtn{
+  width: 90%;
+  height: 76rpx;
+  background: #5CA7FE;
+  font-size: 30rpx;
+  color: #fff;
+  text-align: center;
+  line-height: 76rpx;
+  border-radius: 76rpx;
+}
+.footer1{
+  width: 100%;
+  height: 176rpx;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+  padding: 30rpx 40rpx 0 40rpx;
+  box-sizing: border-box;
+  background: #fff;
+}
+.submitBtn1{
+  width: 212rpx;
+  height: 76rpx;
+  background: #5CA7FE;
+  font-size: 30rpx;
+  color: #fff;
+  text-align: center;
+  line-height: 76rpx;
+  border-radius: 76rpx;
+}
+.goback,.cancel{
+  width: 208rpx;
+  height: 72rpx;
+  border: 2rpx solid #5CA7FE;
+  color: #5CA7FE;
+  font-size: 30rpx;
+  text-align: center;
+  line-height: 72rpx;
+  border-radius: 72rpx;
+}
+.unclickable{
+  background: #999;
+  border: 2rpx solid #999;
+  color: #666;
+}
+
+.mask{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,.4);
+  z-index: 98;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.maskBox{
+  width: 488rpx;
+  height: auto;
+  background: #fff;
+  border-radius: 8rpx;
+  padding: 40rpx 0;
+  box-sizing: border-box;
+}
+.maskBoxtitle{
+  font-size: 28rpx;
+  display: block;  
+  color: #8A8A8A;
+  text-align: center;
+}
+.maskTxt{
+  font-size: 28rpx;
+  color: #8A8A8A;
+  padding: 0 40rpx;
+  box-sizing: border-box;
+  display: block;
+  margin-bottom: 44rpx;
+}
+.wenhaogb{
+  width: 442rpx;
+  color: #fff;
+  height: 72rpx;
+  text-align: center;
+  line-height: 72rpx;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  background-color:#5CA7FE;
+  margin: 0 auto;
+}
+
+.visitTtimeWrap{
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #fff;
+}
+.visitTtimeTitle{
+  width: 90%;
+  height: 94rpx;
+  text-align: center;
+  line-height: 94rpx;
+  margin: auto;
+  border-bottom: 2rpx solid #F5F5F5;
+  position: relative;
+}
+.shippingIcon_close{
+  width:34rpx;
+  height: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 30rpx 0;
+}
+.visitTtimeContent{
+  display: flex;
+}
+.visitTtimeContent view{
+  height: 428rpx;
+}
+.visitTtimeContentL{
+  width: 29%;
+  background: #F5F5F5;
+}
+.visitTtimeContentL text{
+  display: block;
+  width: 100%;
+  height: 140rpx;
+  font-size: 36rpx;
+  color: #101010;
+  line-height: 140rpx;
+  text-align: center;
+}
+.visitTtimeContentL .active{
+  background-color: #fff;
+  color: #5CA7FE;
+}
+.visitTtimeContentR{
+  width: 71%;
+  padding: 0 30rpx 0 20rpx;
+  box-sizing: border-box;
+}
+.visitTtimeContentR view{
+  width: 100%;
+  height: 84rpx;
+  border-bottom: 2rpx solid #F5F5F5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #909090;
+  font-size: 28rpx;
+}
+.selectedTime text{
+  color: #5CA7FE;
+}

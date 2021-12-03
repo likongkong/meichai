@@ -1,0 +1,8 @@
+{
+  "backgroundColor": "#ffffff",
+  "disableScroll": true,
+  "usingComponents": {
+    "t_f": "/pages/topfunction/topfunction",
+    "bnavigation": "/pages/bottomComponent/bottomComponent"
+  }
+}

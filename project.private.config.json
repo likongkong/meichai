@@ -282,6 +282,36 @@
           "pathName": "page/settled/pages/allBrandsIp/allBrandsIp",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "取件信息",
+          "pathName": "page/settled/pages/delivery/delivery",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/activitydetailspage/activitydetailspage",
+          "pathName": "pages/activitydetailspage/activitydetailspage",
+          "query": "id=506436",
+          "scene": null
+        },
+        {
+          "name": "物品信息",
+          "pathName": "page/settled/pages/goodsInformation/goodsInformation",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "我的订单",
+          "pathName": "pages/myorder/myorder",
+          "query": "tabnum=0",
+          "scene": null
+        },
+        {
+          "name": "page/component/pages/webview/webview",
+          "pathName": "page/component/pages/webview/webview",
+          "query": "",
+          "scene": null
         }
       ]
     }

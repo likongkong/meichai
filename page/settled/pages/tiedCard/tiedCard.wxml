@@ -140,8 +140,14 @@
     </view>
   </block>  
 
+  <block wx:if="{{!isRecord}}">
+    <view class="agreementWrap">
+      <radio class="agreementRadio" checked="{{checked}}" bindtap="radioChecked" color="#90D2D6" value="r1"/> 我已阅读并同意<text catchtap="jumpWebview" data-url="https://meichai-1300990269.cos.ap-beijing.myqcloud.com/jzbxy.html">《见证宝协议》</text>,<text catchtap="jumpWebview" data-url="https://meichai-1300990269.cos.ap-beijing.myqcloud.com/cDealOne.html">《数字用户协议》</text>
+    </view>
+  </block>  
+
   <view class="footerWrap">
-      <view data-num="1" catchtap="navigateBack">返回</view>
+      <!-- <view data-num="1" catchtap="navigateBack">返回</view> -->
       <view catchtap="{{type == 3?'bindBankCard':'submitAudit'}}">{{type == 3?'提交绑定':'确认绑定'}}</view>
   </view>
 </view>

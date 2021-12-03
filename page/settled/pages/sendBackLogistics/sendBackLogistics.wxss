@@ -1,0 +1,85 @@
+page{
+  width:100%;
+  background:#f4f5f9;
+  font-size:28rpx;
+}
+.reviewProgress{
+  width:100%;
+  background:#fff;
+  margin-top:14rpx;
+  padding-bottom:50rpx;  
+}
+.reviewProBox{
+  width:94%;
+  margin:0 auto;
+  padding:16rpx 0; 
+  /* background:pink; */
+}
+.reviewProLeft{
+  float:left;
+  height:240rpx;
+  width:40rpx;
+  /* background:green; */
+  /* margin-top:24rpx; */
+   position:relative;
+   top:24rpx; 
+  border-right:1px solid #e5e5e5;
+}
+.reviewProLeft image{
+  position:absolute;
+  right:-16rpx;
+  top:-10rpx;
+  width:32rpx;
+  height:32rpx;
+}
+.reviewProRight{
+  margin-top:10rpx;
+  height:200rpx;
+  /* background:orange; */
+  margin-left:80rpx;
+  line-height:50rpx;
+  border-bottom:1px solid #e5e5e5;
+}
+.reviewProBox:after{
+  clear:both;
+}
+.reviewProLeft.img1.last{
+   border-right:none;
+}
+.reviewProRight.last{
+   border-bottom:none;
+}
+.headdh{
+  height:200rpx;
+  width: 100%;
+  background: #fff; 
+}
+.headdhleft{
+  float: left;
+  height:200rpx;
+  width: 160rpx;
+  position: relative;   
+}
+.lookimg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  width: 120rpx;
+  height: 120rpx;
+}
+.headdhright{
+  height:200rpx; 
+  display: flex;
+  flex-direction:column;
+  justify-content: space-between;
+  padding: 30rpx 0;
+  box-sizing: border-box;
+}
+.headtxt{
+  height: 40rpx;
+  font-size: 28rpx;
+  color: #666;
+}
