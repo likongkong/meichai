@@ -19,7 +19,7 @@
       <view class="cardT">
         <view class="balanceBox">
           <text>可提现金额</text>
-          <text>￥{{info.available_cash_amount}}</text>
+          <text>￥{{info.can_income}}</text>
         </view>
         <view class="withdrawBtn" catchtap="withdraw">立即提现</view>
       </view> 
