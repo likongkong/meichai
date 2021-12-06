@@ -9,10 +9,10 @@
     </view>
     <view catchtap="makePhoneCall"> 
       <text class="takeTitle">快递员信息</text>
-      <view class="takeInfo"> <text>张涛 </text> <text> {{takePhone}}</text></view>
+      <view class="takeInfo"> <text>张涛 </text> <text> {{takePhone}}</text> <image src="https://cdn.51chaidan.com/images/icon/kdn_phone.png" mode="widthFix"></image></view>
     </view>
   </view>
-
+  
   <view class="card">
     <view class="title">
       寄件人信息

@@ -49,6 +49,15 @@ page{
 .takeInfo{
   margin-top: 32rpx;
   font-size: 28rpx;
+  display: flex;
+  align-items: center;
+}
+.takeInfo text{
+  margin-right: 60rpx;
+}
+.takeInfo image{
+  width: 36rpx;
+  height: auto;
 }
 .title{
   height: 40rpx;
