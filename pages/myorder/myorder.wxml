@@ -55,7 +55,7 @@
                                     <block wx:if='{{item.isAuditPic==1}}'>
                                         <block wx:if='{{item.auditPic==0}}'>报名未完成,等待上传截图</block>
                                         <block wx:if='{{item.auditPic==1}}'>上传完成,等待审核</block>
-                                        <block wx:if='{{item.auditPic==2}}'><text style='color:#42bd56;'>审核成功,等待开奖</text></block>
+                                        <block wx:if='{{item.auditPic==2}}'><text style='color:#42bd56;'>等待开奖</text></block>
                                         <block wx:if='{{item.auditPic==3}}'>审核失败,重新上传</block>
                                     </block>
                                     <block wx:else>报名成功  等待开奖</block>
