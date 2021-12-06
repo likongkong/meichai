@@ -242,8 +242,8 @@
           "scene": null
         },
         {
-          "name": "page/secondpackge/pages/brandDetails/brandDetails",
-          "pathName": "page/secondpackge/pages/brandDetails/brandDetails",
+          "name": "9.9排行榜",
+          "pathName": "page/settled/pages/nPnfankingList/nPnfankingList",
           "query": "id=1115&settlement=1",
           "scene": null
         },
@@ -272,21 +272,27 @@
           "scene": null
         },
         {
-          "name": "page/settled/pages/bankList/bankList",
-          "pathName": "page/settled/pages/bankList/bankList",
+          "name": "征集图鉴详情",
+          "pathName": "page/settled/pages/solicitPictures/solicitPictures",
           "query": "",
           "scene": null
         },
         {
-          "name": "page/settled/pages/allBrandsIp/allBrandsIp",
-          "pathName": "page/settled/pages/allBrandsIp/allBrandsIp",
+          "name": "征集审核列表",
+          "pathName": "page/settled/pages/solicitReviewList/solicitReviewList",
           "query": "",
           "scene": null
         },
         {
-          "name": "page/secondpackge/pages/onlineFukubukuro/onlineFukubukuro",
-          "pathName": "page/secondpackge/pages/onlineFukubukuro/onlineFukubukuro",
+          "name": "征集审核详情",
+          "pathName": "page/settled/pages/solicitReviewDetails/solicitReviewDetails",
           "query": "list=1&id=502890",
+          "scene": null
+        },
+        {
+          "name": "创建征集图片",
+          "pathName": "page/settled/pages/collectPictures/collectPictures",
+          "query": "",
           "scene": null
         }
       ]

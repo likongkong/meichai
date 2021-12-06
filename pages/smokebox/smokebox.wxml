@@ -183,8 +183,8 @@
 
 		<block wx:if='{{activity.status == 1}}'>
 				<view class="liveBroadcastStatus">
-					<view class="liveBroadcastStatusOne">
-						<view class='queuebtnstyle2' catchtap="blindBoxsubscrfun" class="liveBroadcastStatusThree">
+					<view class="liveBroadcastStatusOne" style="border-radius: 80rpx;overflow: hidden;"> 
+						<view class='queuebtnstyle2' style="width:100%;" catchtap="blindBoxsubscrfun" class="liveBroadcastStatusThree">
 							<view class="liveBroadcastStatusTwo">{{activity.isLiveShow?'直播开售':'开售提醒'}}<view class="coupposi" wx:if='{{isSubscribeCoupon}}'>订阅送优惠券</view></view>
 							<view style="text-align:center;">
 								<block wx:if='{{newdataexh}}'>暂未开售</block>

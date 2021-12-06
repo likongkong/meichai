@@ -1,0 +1,103 @@
+@import "/common/tabbar.wxss";
+@import "/common/citysel.wxss";
+page{
+  background:#f4f5f9;
+}
+.elsearch{
+  height:90rpx;
+  margin:25rpx;
+}
+.elsearchch{
+  width: 100%;
+  height:100%;
+  background: #fff;
+  border-radius: 16rpx;
+}
+.elserarchimg{
+  width: 50rpx;
+  height: 50rpx;
+  float: left;
+  margin: 20rpx;
+}
+.elinputbut{
+  height: 100%;
+  width: 500rpx;
+  float: left;
+  font-size: 24rpx;
+}
+
+.srlBox{
+  padding: 0 25rpx 25rpx;
+}
+.srlBoxEve{
+  padding: 25rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 25rpx;
+}
+.srlBoxEveName{
+  width: 100%;
+  font-size: 28rpx;
+  margin-bottom: 25rpx;
+}
+.srlBoxEveTime{
+  color: #909090;
+  font-size: 24rpx;
+  margin-bottom: 25rpx;
+}
+.spdetailImg{
+  display: block;
+  height: auto;
+  width: 100%;
+  border-radius: 16rpx;
+}
+.srlBoxEveBottom{
+  width: 100%;
+  height: 50rpx;
+  display: flex;
+  margin-top: 25rpx;
+}
+.srlBoxEveBottomEve{
+  flex-grow:1;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  font-size: 28rpx;
+}
+
+.srlBoxEveBottomEveCenter{
+  color: #7CAA7E;
+  flex-grow:1;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  position: relative;
+  font-size: 28rpx;
+}
+.srlBoxEveBottomEveCenter::after{
+  content:' ';
+  width: 4rpx;
+  height: 40rpx;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: #ccc;
+}
+.srlBoxEveBottomEveCenter::before{
+  content:' ';
+  width: 4rpx;
+  height: 40rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: #ccc;
+}
+
+
+
+
+

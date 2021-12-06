@@ -5,6 +5,18 @@
   background-color: #FDD7D6 !important;
 } */
 
+.suspensionRankingList{
+  width: 60rpx;
+  height: 60rpx;
+  position: absolute;
+  right: 10rpx;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  z-index: 3;
+  border-radius: 50%;
+}
+
 .wrap {
   padding-bottom: 200rpx;
 }
@@ -26,6 +38,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .consumemessage swiper {
