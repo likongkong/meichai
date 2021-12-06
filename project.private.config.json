@@ -288,6 +288,12 @@
           "pathName": "page/secondpackge/pages/onlineFukubukuro/onlineFukubukuro",
           "query": "list=1&id=502890",
           "scene": null
+        },
+        {
+          "name": "创建征集图片",
+          "pathName": "page/settled/pages/collectPictures/collectPictures",
+          "query": "",
+          "scene": null
         }
       ]
     }
