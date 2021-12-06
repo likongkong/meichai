@@ -349,7 +349,7 @@
 		</view>	
 	</view>
 </view>
-
+ 
 <!-- 送隐藏说明弹框 -->
 <view class="mask" wx:if="{{concealNum == 0 && infoData.sendToHideRule}}" catchtouchmove="true" catchtap="toggleExplain">
   <view class="maskBox" catchtap="true">
