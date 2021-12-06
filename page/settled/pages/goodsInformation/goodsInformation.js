@@ -14,7 +14,8 @@ Page({
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     uid:'',
     loginid:'',
-    kgNumber:'',  //重量信息
+    kgNumber:1,  //重量信息
+    pieceNumber:1,  //件
     goodsArr:[{name:'玩具',id:0},{name:'日用品',id:1},{name:'服饰',id:2}],
     selectedGoodsArrIndex:'', //选中的物品类型
     textareaInput:'',  //备注
@@ -118,13 +119,29 @@ Page({
       kgNumber:type == 0?++kgNumber:--kgNumber
     })
   },
+  // 件数加减
+  pieceAddSubtract(e){
+    let type = e.currentTarget.dataset.type;
+    let pieceNumber = Number(this.data.pieceNumber);
+    if(pieceNumber<=1 && type == 1){
+      app.showToastC('最小了，别点了',1500);
+      return false;
+    }
+    this.setData({
+      pieceNumber:type == 0?++pieceNumber:--pieceNumber
+    })
+  },
   // 重量输入
   bindKeyInput(e){
-    if(e.detail.value == 0){
-      this.setData({
-        kgNumber:''
-      })
-    }
+    // if(e.detail.value.length>0){
+      let type = e.target.dataset.type;  //type=0 重量 type=1 件数
+      let data = type==0?`kgNumber`:`pieceNumber`;
+      if(e.detail.value == 0){
+        this.setData({
+          [data]:''
+        })
+      }
+    // }
   },
   // 物品类型选择
   stdmode(e){
@@ -161,7 +178,8 @@ Page({
     let pages = getCurrentPages();    //获取当前页面信息栈
     let prevPage = pages[pages.length-2];
     prevPage.setData({
-      [`goodsInfo.kgNumber`]: this.data.kgNumber, //重量信息
+      [`goodsInfo.kgNumber`]: this.data.kgNumber==''?1:this.data.kgNumber, //重量信息
+      [`goodsInfo.pieceNumber`]: this.data.pieceNumber==''?1:this.data.pieceNumber, //件数信息
       [`goodsInfo.selectedGoodsArrIndex`]: this.data.selectedGoodsArrIndex, //选中的物品类型
       [`goodsInfo.textareaInput`]: this.data.textareaInput, //备注
     })

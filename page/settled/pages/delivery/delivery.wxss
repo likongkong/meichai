@@ -28,6 +28,28 @@ page{
   padding: 18rpx 18rpx 30rpx 18rpx;
   box-sizing: border-box;
 }
+.takeBoxT{
+  border-bottom: 2rpx solid #F5F5F5;
+  margin-bottom: 20rpx;
+}
+.takeTitle{
+  font-size: 28rpx;
+  color: #101010;
+}
+.takeNum{
+  font-size: 40rpx;
+  color: #2A8806;
+  display: block;
+  text-align: center;
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  padding-bottom: 20rpx;
+}
+.takeInfo{
+  margin-top: 32rpx;
+  font-size: 28rpx;
+}
 .title{
   height: 40rpx;
   line-height: 40rpx;

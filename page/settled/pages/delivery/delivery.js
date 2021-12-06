@@ -20,6 +20,7 @@ Page({
     isVisitTtime:false,
     goodsInfo:{
       kgNumber:1,  //重量信息
+      pieceNumber:1,  //件数
       goodsArr:[{name:'玩具',id:0},{name:'日用品',id:1},{name:'服饰',id:2}],
       selectedGoodsArrIndex:0, //选中的物品类型
       textareaInput:'',  //备注
@@ -32,7 +33,8 @@ Page({
     phone1:'',  //收件
     tipphone1:'',//收件
     tipaid1:'',//收件
-    isModification:false
+    isModification:false,
+    takePhone:util.plusXing('13055554444',3,4),
   },
 
   /**
@@ -120,6 +122,11 @@ Page({
    */
   onShareAppMessage: function (options) {
 
+  },
+  makePhoneCall(){
+    wx.makePhoneCall({
+      phoneNumber: '13055554444'
+    })
   },
    // 查看详情
    getShowSendBack(){

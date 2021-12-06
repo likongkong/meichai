@@ -3,6 +3,17 @@
 
 <view class="wrap">
   <view class="card">
+    <view class="takeBoxT">
+      <text class="takeTitle">取件码</text>
+      <text class="takeNum">5684</text>
+    </view>
+    <view catchtap="makePhoneCall"> 
+      <text class="takeTitle">快递员信息</text>
+      <view class="takeInfo"> <text>张涛 </text> <text> {{takePhone}}</text></view>
+    </view>
+  </view>
+
+  <view class="card">
     <view class="title">
       寄件人信息
       <image src="https://cdn.51chaidan.com/images/brandSettledIcon/shippingIcon_right.png" mode="widthFix"></image>
@@ -35,7 +46,7 @@
     </view>
   </view>
 
-  <view class="card" data-type="9055" data-whref="kgNumber={{goodsInfo.kgNumber}}&selectedGoodsArrIndex={{goodsInfo.selectedGoodsArrIndex}}&textareaInput={{goodsInfo.textareaInput}}" catchtap="comjumpwxnav">
+  <view class="card" data-type="9055" data-whref="kgNumber={{goodsInfo.kgNumber}}&pieceNumber={{goodsInfo.pieceNumber}}&selectedGoodsArrIndex={{goodsInfo.selectedGoodsArrIndex}}&textareaInput={{goodsInfo.textareaInput}}" catchtap="comjumpwxnav">
     <view class="spaceBetween">
       <text class="font28_101010">物品信息</text>
       <image src="https://cdn.51chaidan.com/images/brandSettledIcon/shippingIcon_right.png" mode="widthFix"></image>
@@ -43,6 +54,10 @@
     <view class="spaceBetween" style="margin-top:20rpx;">
       <text class="font28_101010">预估重量</text>
       <text class="font28_909090">{{goodsInfo.kgNumber}}KG</text>
+    </view>
+    <view class="spaceBetween" style="margin-top:20rpx;">
+      <text class="font28_101010">物品件数</text>
+      <text class="font28_909090">{{goodsInfo.pieceNumber}}件</text>
     </view>
     <view class="spaceBetween" style="margin-top:20rpx;">
       <text class="font28_101010">物品类型</text>

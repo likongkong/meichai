@@ -1138,19 +1138,7 @@ App({
       });      
     } else if (item_type == 9053) {   // 银行列表
       wx.navigateTo({
-        url: `/page/settled/pages/bankList/bankList?${whref}`
-      });      
-    } else if (item_type == 9054) {   // 取件信息
-      wx.navigateTo({
-        url: `/page/settled/pages/delivery/delivery`
-      });      
-    }else if (item_type == 9055) {   // 物品信息
-      wx.navigateTo({
-        url: `/page/settled/pages/goodsInformation/goodsInformation?${whref}`
-      });      
-    }else if (item_type == 9056) {   // 挂网协议
-      wx.navigateTo({
-        url: `/page/settled/pages/gwAgreement/gwAgreement`
+        url: `/page/settled/pages/bankList/bankList`
       });      
     }
   },

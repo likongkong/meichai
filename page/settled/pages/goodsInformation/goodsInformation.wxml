@@ -12,10 +12,27 @@
     <view class="weightInputWrap">
       <view data-type="1" catchtap="addSubtract">-</view>
       <view>
-        <input type="number" maxlength="5" placeholder="" bindinput="bindKeyInput" value="{{kgNumber}}"/>
+        <input type="number" maxlength="5" data-type="0" placeholder="" bindinput="bindKeyInput" value="{{kgNumber}}"/>
         <text>KG</text>
       </view>
       <view data-type="0" catchtap="addSubtract">+</view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="title">
+      物品件数
+    </view>
+    <view class="subtitle">
+      实际件数以快递员最后核实为准
+    </view>
+    <view class="weightInputWrap">
+      <view data-type="1" catchtap="pieceAddSubtract">-</view>
+      <view>
+        <input type="number" maxlength="5" placeholder="" data-type="1" bindinput="bindKeyInput" value="{{pieceNumber}}"/>
+        <text>件</text>
+      </view>
+      <view data-type="0" catchtap="pieceAddSubtract">+</view>
     </view>
   </view>
 
