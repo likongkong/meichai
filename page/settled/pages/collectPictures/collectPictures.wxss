@@ -1,0 +1,42 @@
+page{
+  background:#f4f5f9;
+  padding-bottom: 200rpx;
+}
+.card{
+  background: #ffffff;
+  /* border-radius: 20rpx; */
+  /* margin-top: 24rpx; */
+}
+.title{
+ color: #101010; 
+ font-size: 28rpx;
+ padding: 0 20rpx;
+ box-sizing: border-box;
+ height: 80rpx;
+ line-height: 80rpx;
+}
+.footerWrap{
+  padding: 20rpx 35rpx 40rpx 35rpx;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  position:fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f4f5f9;
+  z-index: 30;
+}
+.footerWrap view{
+  height: 76rpx;
+  line-height: 76rpx;
+  text-align: center;
+  font-size: 24rpx;
+  border-radius: 10rpx;
+}
+.footerWrap view{
+  width: 70%;
+  height: 80rpx;
+  background: #34A9ED;
+  color: #ffffff;
+}

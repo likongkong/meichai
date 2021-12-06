@@ -46,6 +46,28 @@ Page({
     })
     this.getData();
   },
+  // 获取昨日数据
+  getdataLast(){
+    var date = new Date();//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+    var Y = date.getFullYear();
+    var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
+    var D = (parseInt(date.getDate()) - 1 ) < 10 ? '0' + (parseInt(date.getDate()) - 1 ) : (parseInt(date.getDate()) - 1 );
+    this.setData({
+      selectDate:Y + '-' + M +'-' + D
+    })
+    this.getData();
+  },
+  // 查看今日
+  getdataLastToday(){
+    var date = new Date();//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+    var Y = date.getFullYear();
+    var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
+    var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+    this.setData({
+      selectDate:Y + '-' + M +'-' + D
+    })
+    this.getData();
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -179,7 +201,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this.getData(2)
+    // this.getData(2)
   },
 
   /**

@@ -170,4 +170,16 @@ page{
   color: #5CA7FE;
 }
 
-
+.npnRuleBottom{
+  padding:0 30rpx 30rpx;
+  display: block;
+  font-size: 28rpx;
+  color: #909090;
+}
+.npnRuleBottomHead{
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 28rpx;
+  padding: 0 0 20rpx 0;
+}
