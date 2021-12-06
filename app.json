@@ -190,7 +190,11 @@
         "pages/messageNotification/messageNotification",
         "pages/timHomePage/timHomePage",
         "pages/messageNotificationDetail/messageNotificationDetail",
-        "pages/bankList/bankList"
+        "pages/bankList/bankList",
+        "pages/nPnfankingList/nPnfankingList",
+        "pages/solicitReviewList/solicitReviewList",
+        "pages/solicitReviewDetails/solicitReviewDetails",
+        "pages/solicitPictures/solicitPictures"
       ]
     }
   ],

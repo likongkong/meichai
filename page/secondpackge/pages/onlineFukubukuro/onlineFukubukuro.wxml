@@ -215,3 +215,5 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
         </scroll-view>
     </view>
 </view>
+
+<image wx:if='{{newdataexh}}' class="suspensionRankingList" catchtap="jumpRankingList" src="https://cdn.51chaidan.com/images/icon/luck_bag_ranking.jpg" mode="aspectFit"></image>

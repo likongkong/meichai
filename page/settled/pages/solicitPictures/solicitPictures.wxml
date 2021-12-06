@@ -1,0 +1,27 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class="spdetail">
+    <view class="spdetName">征集标题征集标题征集标题征集标题征集标题</view>
+    <image class="spdetailImg" src="https://cdn.51chaidan.com/images/act/a1618456428.jpg" mode="widthFix"></image>
+</view>
+
+<view class="spdetail">
+    <view class="spdetName">活动奖励</view>
+    <view class="spdetailCenter">
+        <image class="spdetailCenterImg" src="https://cdn.51chaidan.com/images/toyShow3/brandGoodsRotation/20211020/49e92d077601580312c2b7908240c27b.png" mode="aspectFit"></image>
+        <view class="spdetailCenterRight specialellipsis">猫老师毛绒玩偶随机发货</view>
+    </view>
+</view>
+
+<view class="spdetail">
+    <view class="spdetName">活动说明</view>
+    <text class="spdetailExplain">活动开始时间：2021-11-1 20:20:00\n活动结束时间：2021-11-1 22:20:00\n征集说明购买过xx商品返图通过后即可获得猫老师毛绒玩偶一个，快来返图吧。征集说明购买过xx商品返图通过后即可获得猫老师毛绒玩偶一个，快来返图吧</text>
+</view>
+
+<view class="spdetail" style="border-bottom: 2rpx solid #fff;">
+    <view class="spdetName">商品详情</view>
+    <rich-text style="font-size:0;" nodes="{{goodsDescDetails}}"></rich-text>
+</view>
+
+<view class="dldlConfirmPublication">上传征集图片</view>

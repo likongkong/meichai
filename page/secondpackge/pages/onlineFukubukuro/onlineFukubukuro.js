@@ -53,6 +53,8 @@ Page({
     isredpacket:false,
     detailList:[],
     is_detail:false,
+    // 7号之后显示排行榜
+    newdataexh:Date.parse(new Date())/1000 > 1638806400?true:false,
   },
   isDetailF(e){
     let ia = e.currentTarget.dataset.ia || false;
@@ -71,6 +73,11 @@ Page({
       goodsDesc2
     });
     console.log(ia,goodsDesc1,goodsDesc2)
+  },
+  jumpRankingList(){
+    wx.navigateTo({
+      url: "/page/settled/pages/nPnfankingList/nPnfankingList",
+    });
   },
   nineSpotNine(e){
     let rule = e.currentTarget.dataset.rule;

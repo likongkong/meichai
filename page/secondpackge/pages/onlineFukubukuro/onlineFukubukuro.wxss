@@ -5,6 +5,16 @@
   background-color: #FDD7D6 !important;
 } */
 
+.suspensionRankingList{
+  width: 100rpx;
+  height: 100rpx;
+  position: fixed;
+  right: 20rpx;
+  bottom: 200rpx;
+  z-index: 3;
+  border-radius: 50%;
+}
+
 .wrap {
   padding-bottom: 200rpx;
 }
