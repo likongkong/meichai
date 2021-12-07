@@ -2,16 +2,23 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 <view class="wrap">
-  <view class="card">
-    <view class="takeBoxT">
+  <block wx:if="{{status == 1 && courierData.length!=0}}">
+    <view class="card takeWrap">
       <text class="takeTitle">取件码</text>
-      <text class="takeNum">5684</text>
+      <view class="takeBoxT">
+        <text class="takeNum">{{courierData.PickupCode}}</text>
+      </view>
+      <view catchtap="makePhoneCall"> 
+        <text class="takeTitle">快递员信息</text>
+        <view class="takeInfo"> <text>{{courierData.PersonName}} </text> <text> {{takePhone}}</text> <image src="https://cdn.51chaidan.com/images/icon/kdn_phone.png" mode="widthFix"></image></view>
+      </view>
     </view>
-    <view catchtap="makePhoneCall"> 
-      <text class="takeTitle">快递员信息</text>
-      <view class="takeInfo"> <text>张涛 </text> <text> {{takePhone}}</text> <image src="https://cdn.51chaidan.com/images/icon/kdn_phone.png" mode="widthFix"></image></view>
+  </block>
+  <block wx:else>
+    <view class="card">
+      <text class="takeNumGenerated">取件码生成中</text>
     </view>
-  </view>
+  </block>
   
   <view class="card">
     <view class="title">

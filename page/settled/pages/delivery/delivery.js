@@ -34,7 +34,7 @@ Page({
     tipphone1:'',//收件
     tipaid1:'',//收件
     isModification:false,
-    takePhone:util.plusXing('13055554444',3,4),
+    takePhone:'',
   },
 
   /**
@@ -125,18 +125,20 @@ Page({
   },
   makePhoneCall(){
     wx.makePhoneCall({
-      phoneNumber: '13055554444'
+      phoneNumber: this.data.courierData.PersonTel
     })
   },
    // 查看详情
-   getShowSendBack(){
+   getShowSendBack(type=0){
     var _this = this;
     console.log('mod=send_back&operation=show_send_back&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&id='+this.data.sendBackId)
     var qqq = Dec.Aese('mod=send_back&operation=show_send_back&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&id='+this.data.sendBackId);
-    wx.showLoading({
-      title: '加载中...',
-      mask:true
-    })
+    if(type==0){
+      wx.showLoading({
+        title: '加载中...',
+        mask:true
+      })
+    }
     wx.request({
       url: app.signindata.comurl + 'order.php' + qqq,
       method: 'GET',
@@ -147,6 +149,11 @@ Page({
         // if (res.data.ReturnCode == 200) {
           _this.data.order_id = res.data.List.order_id;
           if(_this.data.status == 1){
+            if(res.data.List.courierData.length == 0){
+              setTimeout(()=>{
+                _this.getShowSendBack(1);
+              },10000)
+            }
             if(!_this.data.isModification){
               _this.data.savedStart_time = res.data.List.StartTime;
               _this.data.savedEnd_date = res.data.List.EndTime;
@@ -169,7 +176,9 @@ Page({
                 phone:util.plusXing(res.data.List.senderInfo.mobile,3,4),
                 tipaddress:res.data.List.senderInfo.address,
                 deliveryType:res.data.List.type,
-                audit_status:res.data.List.audit_status
+                audit_status:res.data.List.audit_status,
+                courierData:res.data.List.courierData,
+                takePhone:util.plusXing(res.data.List.courierData.PersonTel,3,4),
               })
               _this.data.tipaid = res.data.List.senderInfo.address_id;
               if(res.data.List.exchangeGoodsInfo){
