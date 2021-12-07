@@ -7,7 +7,14 @@
 
 <view class="wrap">
   <view class="banner">
-      <image src="{{bannerImg[0].img}}" mode="widthFix" data-item_type='{{bannerImg[0].item_type}}' data-href='{{bannerImg[0].href}}' data-title='{{bannerImg[0].title}}' bindtap='jumpbanner' data-imgurl='{{bannerImg[0].img}}'></image>
+    <swiper class="banner" indicator-color="#fff" indicator-active-color="#ff2742" indicator-dots="{{false}}" circular="true" autoplay="true" interval="10000" duration="450">
+      <swiper-item wx:for='{{bannerImg}}' wx:key='key'>
+        <image class="bannerImg" src="{{item.img}}" mode="aspectFit" data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}' bindtap='jumpbanner' data-imgurl='{{item.img}}'></image>
+      </swiper-item>
+    </swiper>      
+
+    <!-- <image class="bannerImg" src="{{bannerImg[0].img}}" mode="widthFix" data-item_type='{{bannerImg[0].item_type}}' data-href='{{bannerImg[0].href}}' data-title='{{bannerImg[0].title}}' bindtap='jumpbanner' data-imgurl='{{bannerImg[0].img}}'></image> -->
+      
   </view>
   <view class="consumemessageWrap" wx:if="{{recordList.length != 0}}">
     <view class="consumemessage">
