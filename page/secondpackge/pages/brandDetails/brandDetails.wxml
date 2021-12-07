@@ -132,13 +132,13 @@
                 <!-- 动态固定大小 -->
                 <block wx:if='{{(item.type==3 || item.type==1) && item.imgArr.length==1}}'>
                     <view class="dynamicBox">
-                        <image class="emlcontentimg" style="width:100%;height:100%;" src="{{item.imgArr[0]}}" mode="aspectFill"></image>
+                        <image class="emlcontentimg" style="width:100%;height:100%;" src="{{item.imgArr[0]}}" mode="aspectFit"></image>
                     </view>
                 </block>
                 <block wx:else> 
                   <!-- 非动态单个图片 -->
                    <block wx:if='{{item.imgArr && item.imgArr.length ==1}}'>
-											 <image class="emlcontentimg" style="height:399rpx;" src="{{item.imgArr[0]}}" mode="aspectFill"></image>
+											 <image class="emlcontentimg" style="height:399rpx;" src="{{item.imgArr[0]}}" mode="aspectFit"></image>
 											 <!-- 未开始 -->
                        <image wx:if='{{item.status==1}}' class="statusImgBox" src="https://cdn.51chaidan.com/images/brandSettledIcon/NotStarted.png" mode="aspectFit"></image>
                        <!-- 已结束 -->
@@ -151,7 +151,7 @@
                    <!-- 非动态多个图片 -->
                    <block wx:else>
                         <view  class="dynamicBoxEve" wx:for='{{item.imgArr}}' wx:key='key'  wx:for-item='w' style="{{index%3==2?'margin-right:0;':''}}">
-                            <image class="emlcontentimg" style="width:100%;height:100%;" src="{{w}}" mode="aspectFill"></image>
+                            <image class="emlcontentimg" style="width:100%;height:100%;" src="{{w}}" mode="aspectFit"></image>
                         </view>
                    </block>
                 </block>

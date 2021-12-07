@@ -64,7 +64,6 @@ scroll-view ::-webkit-scrollbar {
   height: 80rpx;
   line-height: 80rpx;
   font-size: 24rpx;
-  /* color: #000; */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -130,7 +129,7 @@ scroll-view ::-webkit-scrollbar {
   box-sizing: border-box;
   background: rgba(0,0,0,.5);
 }
-.cardTbox .reward-num text{
+.cardTbox .reward-num view{
   height: 40rpx;
   color: #fff;
   font-size: 24rpx;
@@ -138,10 +137,7 @@ scroll-view ::-webkit-scrollbar {
   display: block;
   opacity: .8;
 }
-.specialCard .reward-num{
-
-}
-.specialCard .reward-num text{
+.specialCard .reward-num view{
   height: 22rpx;
   font-size: 16rpx;
   line-height: 22rpx;
@@ -151,7 +147,7 @@ scroll-view ::-webkit-scrollbar {
   /* border-radius: 0 0 10rpx 10rpx; */
   overflow: hidden;
 }
-.progress-box text{
+.progress-box view{
   display: inline-block;
   height: 24rpx;
   line-height: 24rpx;
@@ -177,9 +173,6 @@ scroll-view ::-webkit-scrollbar {
   display: block;
   padding: 10rpx 10rpx 16rpx 10rpx;
   box-sizing: border-box;
-}
-.specialCard .cardBbox view{
-  /* height: 40rpx; */
 }
 .specialCard .cardBbox .price{
   color: #d64650;
