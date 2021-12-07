@@ -55,7 +55,8 @@
         <view style="width:20%;" class="specialellipsis">{{infoData.user.nick}}</view>
         <view style="width:35%;" class="specialellipsis">{{infoData.user.count}}</view>
         <view style="width:15%;"> 
-            <!-- <view class="nPnfankBottomClick">去领奖</view> -->
+            <!-- <view catchtap="getdataLast" class="nPnfankBottomClick" wx:if='{{infoData.user.is_receive == 0 && endTime == selectDate}}'>去领奖</view>
+            <view catchtap="receivePrize" class="nPnfankBottomClick" wx:elif='{{infoData.user.is_receive == 0 }}'>领奖</view> -->
         </view>
   </view>
 </view>

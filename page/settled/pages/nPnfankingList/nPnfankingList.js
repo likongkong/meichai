@@ -121,6 +121,32 @@ Page({
       fail: function () { }
     });
   },
+  // 领取奖励
+  receivePrize(){
+    var _this = this;
+
+    wx.showLoading({title: '加载中...'})
+
+    var exh = Dec.Aese('mod=luckbag&operation=rankReward&uid='+app.signindata.uid+'&loginid='+app.signindata.loginid+'&date='+_this.data.selectDate);
+
+    console.log('mod=luckbag&operation=rankReward&uid='+app.signindata.uid+'&loginid='+app.signindata.loginid+'&date='+_this.data.selectDate)
+    wx.request({
+      url: app.signindata.comurl + 'goods.php' + exh,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        wx.hideLoading();
+        console.log('领取奖励 =========== ',res)
+        if (res.data.ReturnCode == 200) {
+          app.showModalC(res.data.msg || res.data.Msg);
+          _this.getData();
+        } else {
+          app.showModalC(res.data.msg || res.data.Msg)
+        }
+      },
+      fail: function () { }
+    });
+  },
   // 获取数据
   getData(num=1){
     var _this = this;
