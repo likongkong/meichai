@@ -142,7 +142,7 @@
 									  <image style="width:{{boxwidth * activity.radioImgBox * 0.5}}px;height:{{boxwidth * activity.radioImgBox * 0.5}}px;" src="{{item.headphoto}}" class="roleListBoxIsImg"></image>
 								</block>
 								<block wx:if='{{!activity.isInQueue}}'>
-									  <view class="smokeBoxisInQueue" catchtap='lineup'></view>
+									  <view class="smokeBoxisInQueue" catchtap="{{activity.status == 1?'blindBoxsubscrfun':'lineup'}}"></view>
 								</block>
 							</view>
 					</block>
@@ -185,10 +185,11 @@
 				<view class="liveBroadcastStatus">
 					<view class="liveBroadcastStatusOne" style="border-radius: 80rpx;overflow: hidden;"> 
 						<view class='queuebtnstyle2' style="width:100%;" catchtap="blindBoxsubscrfun" class="liveBroadcastStatusThree">
-							<view class="liveBroadcastStatusTwo">{{activity.isLiveShow?'直播开售':'开售提醒'}}<view class="coupposi" wx:if='{{isSubscribeCoupon}}'>订阅送优惠券</view></view>
-							<view style="text-align:center;">
-								<block wx:if='{{newdataexh}}'>暂未开售</block>
-								<block wx:else>{{activity.start_time}}</block>
+							<view class="liveBroadcastStatusTwo">{{activity.isLiveShow?activity.start_time+'直播开售':'开售提醒'}}<view class="coupposi" wx:if='{{isSubscribeCoupon}}'>订阅送优惠券</view></view>
+							<view style="text-align:center;font-size:28rpx">
+								<!-- <block wx:if='{{newdataexh}}'>暂未开售</block>
+								<block wx:else>{{activity.start_time}}</block> -->
+								点击订阅
 							</view>
 						</view>
 					</view>
