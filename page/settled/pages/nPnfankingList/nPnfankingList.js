@@ -19,6 +19,8 @@ Page({
     endTime:'',
     is_prize:false,
     selectDate:'',
+    // 8号之后显示排行榜 积分
+    newdataexh:Date.parse(new Date())/1000 > 1638892800?true:false,
   },
 
   shopImgTip(e){
@@ -110,12 +112,17 @@ Page({
     this.getData();
 
     wx.request({
-      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/luckBag_rules.json',
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/luckBag_rules.json?',
       method: 'GET',
       header: {'Accept': 'application/json'},
       success: function (res) {
+        if(Date.parse(new Date())/1000 > 1638892800){
+          var ruleData = res.data.rule1 || '';
+        }else{
+          var ruleData = res.data.rule || '';
+        };
         _this.setData({
-          ruleData:res.data.rule || ''
+          ruleData:ruleData
         })
       },
       fail: function () { }
