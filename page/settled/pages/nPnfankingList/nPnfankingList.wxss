@@ -2,11 +2,11 @@
 @import "/common/citysel.wxss";
 page{
   background:#f4f5f9;
+  padding-bottom: 130rpx;
 }
 .nPnFLbox{
   width: 100%;
   background: #fff;
-  margin-bottom: 130rpx;
 }
 .nPnFLboxEveBox{
   width: 100%;
@@ -152,7 +152,7 @@ page{
   position: absolute;
   top: 0;
   bottom: 0;
-  right: 30rpx;
+  right: 20rpx;
   margin: auto;
   text-align: center;
   background: #FE5D57;
