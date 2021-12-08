@@ -168,7 +168,7 @@
             <view class="barndStatus" style="font-size:26rpx;" wx:elif='{{item.type==1 || item.type==2 || item.type==5}}'>
                 <!-- 秒杀 -->
                 <block wx:if='{{item.type==1}}'> 
-                    <view class='dlfhtitlenew' style="color:#FF2742;font-size:26rpx;height: 40rpx;line-height: 40rpx;;">￥<text style="font-size:36rpx;">{{item.price}}</text><text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
+                    <view class='dlfhtitlenew' style="color:#FF2742;font-size:26rpx;height: 40rpx;line-height: 40rpx;;"><text wx:if="{{item.goods_type==3}}" style="font-size:34rpx">定金: </text>￥<text style="font-size:36rpx;">{{item.price}}</text><text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
                     <view class='dlfhtitlenew' style="color:#178FF8;font-size:26rpx;" wx:if='{{item.status==1}}'>
 											<block wx:if='{{item.specialWay > 0}}'>直播售卖</block>
                       <block wx:else>{{item.start_time}}发售</block>
@@ -286,7 +286,7 @@
                         <view style="float:right;color:#999495;" wx:if='{{item.sellNumber>0}}'>已售：{{item.sellNumber}}体</view>
                     </view>
                 </block>
-								<view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
+								<view class='dlfhtitlenew' style="color:#FF2742;"><text wx:if="{{item.goods_type==3}}">定金:</text>￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
             </block>
             <!-- 抽选 -->
             <block wx:elif='{{item.type==2}}'>
@@ -405,7 +405,7 @@
                         <view style="float:right;color:#999495;" wx:if='{{item.sellNumber>0}}'>已售：{{item.sellNumber}}体</view>
                     </view>
                 </block>
-								<view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
+								<view class='dlfhtitlenew' style="color:#FF2742;"><text wx:if="{{item.goods_type==3}}">定金:</text>￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
             </block>
             <!-- 抽选 -->
             <block wx:elif='{{item.type==2}}'>
