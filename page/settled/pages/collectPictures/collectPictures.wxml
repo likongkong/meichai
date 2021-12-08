@@ -5,6 +5,6 @@
  
  
   <view class="footerWrap">
-      <view catchtap="submitAudit">确认发布</view>
+      <view catchtap="submitAudit">发布征集</view>
   </view>
 </view>
