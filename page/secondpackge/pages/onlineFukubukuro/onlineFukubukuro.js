@@ -53,8 +53,7 @@ Page({
     isredpacket:false,
     detailList:[],
     is_detail:false,
-    // 7号之后显示排行榜
-    newdataexh:Date.parse(new Date())/1000 > 1638806400?true:false,
+
   },
   isDetailF(e){
     let ia = e.currentTarget.dataset.ia || false;

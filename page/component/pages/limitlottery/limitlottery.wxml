@@ -50,7 +50,7 @@
 				catchtap="{{dataInfo.outrightPurchaseShowBox?'addresssmokebox':'addressmanagement'}}"
 				data-gid='{{infoActivity.goodsId}}'> 
 				<view class="recommendGoodsImage">
-					<image src="{{dataInfo.goodsImg}}" mode="aspectFill"></image>
+					<image src="{{dataInfo.goodsImg}}" mode="aspectFit"></image>
 				</view>
 				<view class="recommendGoodsInfo">
 					<text class="recommendGoodsName">{{dataInfo.goodsName}}</text>

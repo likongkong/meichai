@@ -18,7 +18,7 @@
   </view>
   <view class="consumemessageWrap" wx:if="{{recordList.length != 0}}">
     <view class="consumemessage">
-      <image wx:if='{{newdataexh}}' class="suspensionRankingList" catchtap="jumpRankingList" src="https://cdn.51chaidan.com/images/icon/luck_bag_ranking.jpg" mode="aspectFit"></image>
+      <image class="suspensionRankingList" catchtap="jumpRankingList" src="https://cdn.51chaidan.com/images/icon/luck_bag_ranking.jpg" mode="aspectFit"></image>
       <swiper vertical="true" autoplay="true" circular="true" interval="2500">
         <block wx:for="{{recordList}}" wx:key='key'>
           <!-- <swiper-item class="swiper-item" data-id="{{item.activity_id}}" bindtap="toaRewarddeyails"> -->
@@ -37,7 +37,7 @@
           <image class="cardEveLeftImg" catchtap="isDetailF" data-ia='{{item.all_goods_desc}}' src="{{item.goods_img}}" mode="aspectFit"></image>
           <view class="cardEveRight">
               <view class="cardEveRPrcice">{{item.price}}元超值福袋</view>
-              <view class="cardEveRPrciceCom" wx:if='{{item.isShowStock}}'>剩余：{{item.stockNumber}}/{{item.totalNumber}}<image catchtap="nineSpotNine" data-rule='{{item.rule}}' class="cardEveLeftMark" src="https://cdn.51chaidan.com/images/luckBag/luckyBagIcon/wenhao.png" mode="aspectFit"></image></view>
+              <view class="cardEveRPrciceCom" catchtap="nineSpotNine" data-rule='{{item.rule}}' wx:if='{{item.isShowStock}}'>剩余：{{item.stockNumber}}/{{item.totalNumber}}<image class="cardEveLeftMark" src="https://cdn.51chaidan.com/images/luckBag/luckyBagIcon/wenhao.png" mode="aspectFit"></image></view>
               <view class="cardEveRPrciceCom" wx:if='{{item.explain1}}'>{{item.explain1}}</view>
               <view class="cardEveRPrciceCom" wx:if='{{item.explain2}}'>{{item.explain2}}</view>
 
