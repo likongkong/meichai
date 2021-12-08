@@ -106,7 +106,7 @@ Page({
     this.setData({
       wOri:(this.data.wOri == 1)?2:1
     })
-
+    this.setShowTheStyle();
     if (this.data.wOri==1){
       this.eldatalistfun(0);
       this.eldataclassfun();
@@ -114,6 +114,22 @@ Page({
       this.listdata(0);
     }
 
+  },
+  // 记录数据流切换
+  setShowTheStyle(){
+    var _this = this;
+    var qqq = Dec.Aese('mod=community&operation=set_show_the_style&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&showType=1&style='+this.data.wOri);
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + qqq,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        console.log('记录数据流切换',res)
+        if (res.data.ReturnCode == 200) {
+          
+        };
+      }
+    });
   },
 
   classifyChange(e){
@@ -336,6 +352,7 @@ Page({
         if (res.data.ReturnCode == 200) {
           var salesCalendar = res.data.List.salesCalendar || [];
           _this.setData({
+            wOri:res.data.Info.the_style,
             visitHistory:res.data.List.visitHistory || [], // 最近访问的品牌信息
             salesCalendar: salesCalendar|| [], // 日历信息
             recommendIps:res.data.List.recommendIps || [], // 品牌
