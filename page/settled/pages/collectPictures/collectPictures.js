@@ -22,6 +22,20 @@ Page({
         subtitle:'发布IP',
         value:'点击关联',
         name:'associationIp'
+      },{
+        isRequired:false,
+        type:'subtitle',
+        subtitle:'用户上传图片后需要人工审核哦',
+        backgroundColor:'#F5F5F5'
+      },{
+        isRequired:true,
+        type:'text',
+        subtitle:'标题',
+        placeholder:'请输入征集图片标题',
+        value:'',
+        name:'pictureCaptions',
+        borderbottom1:'show',
+        margintop0:true,
       },
     ],
     
