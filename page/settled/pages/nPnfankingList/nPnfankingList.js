@@ -22,7 +22,12 @@ Page({
     // 8号之后显示排行榜 积分
     newdataexh:Date.parse(new Date())/1000 > 1638892800?true:false,
   },
-
+  // 更新用户信息
+  getUserProfileSettled(w){
+    app.getUserProfile((res,userInfo) => {
+        this.receivePrize()
+    })
+  },
   shopImgTip(e){
     var ind = e.currentTarget.dataset.ind || 0;
     var selectData = this.data.listData[ind];

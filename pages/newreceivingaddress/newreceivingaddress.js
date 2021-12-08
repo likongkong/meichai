@@ -214,7 +214,8 @@ Page({
   onLoadfun: function () {
     this.setData({
       loginid: app.signindata.loginid,
-      uid: app.signindata.uid
+      uid: app.signindata.uid,
+      isProduce: app.signindata.isProduce,
     });
 
     var _this = this;

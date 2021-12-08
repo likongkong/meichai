@@ -7,17 +7,42 @@
 
 <view class="wrap">
   <view class="banner">
-    <swiper class="banner" indicator-color="#fff" indicator-active-color="#ff2742" indicator-dots="{{false}}" circular="true" autoplay="true" interval="10000" duration="450">
+    <swiper class="banner" indicator-color="#fff" indicator-active-color="#ff2742" indicator-dots="{{false}}" circular="true" autoplay="true" interval="5000" duration="450">
       <swiper-item wx:for='{{bannerImg}}' wx:key='key'>
-        <image class="bannerImg" src="{{item.img}}" mode="aspectFit" data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}' bindtap='jumpbanner' data-imgurl='{{item.img}}'></image>
+          <image class="bannerImg" src="{{item.img}}" mode="aspectFit" data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}' bindtap='jumpbanner' data-imgurl='{{item.img}}'></image>
       </swiper-item>
-    </swiper>      
-
-    <!-- <image class="bannerImg" src="{{bannerImg[0].img}}" mode="widthFix" data-item_type='{{bannerImg[0].item_type}}' data-href='{{bannerImg[0].href}}' data-title='{{bannerImg[0].title}}' bindtap='jumpbanner' data-imgurl='{{bannerImg[0].img}}'></image> -->
-      
+    </swiper>   
   </view>
+  <!-- 文章 -->
+  <view class="offeringCalendar" wx:if='{{salesCalendar && salesCalendar.length != 0}}'>
+      <swiper class="offeringCswiper" vertical="true" autoplay="true" circular="true" interval="2500">
+        <block wx:for="{{salesCalendar}}" wx:key='key'>
+          <swiper-item class="swiper-item">
+            <view class="dateOffering" catchtap="jumpoffering" data-id="{{item.url}}">
+                <view class="ocswiper">
+                    <image class="ocswiperImg" src='{{item.img}}'></image>
+                </view>
+                <view class="occoneter">
+                    <view class="ocNameTop specialellipsis">{{item.title}}</view>
+                    <view class="ocNameBottom specialellipsis">
+                      <image class="small_bell" src='https://cdn.51chaidan.com/images/brandSettledIcon/small_bell.png' mode="aspectFit"></image>
+                      {{artTicTip}}
+                      <image class="small_bell" src='https://cdn.51chaidan.com/images/luckBag/luckyBagIcon/christmas_trees.png' mode="aspectFit"></image>
+                    </view>
+                </view>   
+                <view class="occoneterText">
+                    <image src='https://cdn.51chaidan.com/images/brandSettledIcon/subscriptionIcon.png' mode="aspectFit"></image>
+                </view>
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+  </view>
+
+
   <view class="consumemessageWrap" wx:if="{{recordList.length != 0}}">
     <view class="consumemessage">
+      <view class="MaskView"></view>
       <image class="suspensionRankingList" catchtap="jumpRankingList" src="https://cdn.51chaidan.com/images/icon/luck_bag_ranking.jpg" mode="aspectFit"></image>
       <swiper vertical="true" autoplay="true" circular="true" interval="2500">
         <block wx:for="{{recordList}}" wx:key='key'>

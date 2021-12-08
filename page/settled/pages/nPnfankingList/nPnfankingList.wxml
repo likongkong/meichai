@@ -59,7 +59,7 @@
         <view style="width:35%;" class="specialellipsis">{{infoData.user.count}}</view>
         <view style="width:15%;"> 
             <view catchtap="getdataLast" class="nPnfankBottomClick" wx:if='{{infoData.user.is_receive == 0 && endTime == selectDate}}'>去领奖</view>
-            <view catchtap="receivePrize" class="nPnfankBottomClick" wx:elif='{{infoData.user.is_receive == 0 }}'>领奖</view>
+            <view class="nPnfankBottomClick" wx:elif='{{infoData.user.is_receive == 0}}'><button class='shareButton' type='primary' bindtap="getUserProfileSettled"></button>领奖</view>
             <view class="nPnfankBottomClick" wx:elif='{{infoData.user.is_receive == 2 }}' style="background:#fff;color:#909090;">已领奖</view>
         </view>
   </view>

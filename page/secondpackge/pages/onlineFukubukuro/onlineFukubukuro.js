@@ -53,8 +53,13 @@ Page({
     isredpacket:false,
     detailList:[],
     is_detail:false,
-
+    salesCalendar:[]
   },
+  // 跳转日历
+  jumpoffering(w){
+      var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
+      app.comjumpwxnav(0,id,'','')
+  }, 
   isDetailF(e){
     let ia = e.currentTarget.dataset.ia || false;
     var goodsDesc1 = [];
@@ -96,6 +101,7 @@ Page({
     this.activsign();
   },
   onLoadfun:function(){
+    var _this = this;
     this.setData({
       loginid: app.signindata.loginid,
       uid: app.signindata.uid,
@@ -106,6 +112,26 @@ Page({
     });
     console.log(app.signindata.blindboxMoney)
     this.gitList();
+
+    // 文章
+    var exh = Dec.Aese('mod=subscription&operation=listArticle');
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + exh,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        console.log('文章=======',res)
+        if (res.data.ReturnCode == 200) {
+          _this.setData({
+            artTicTip:res.data.Info.tip || '',
+            salesCalendar:res.data.List.article || []
+          });
+        }
+      },
+      fail: function () { }
+    });
+
+
   },
   activsign: function () {
     // 判断是否授权 
@@ -120,37 +146,23 @@ Page({
       app.signindata.isProduce = true;  
       _this.onLoadfun();
     }else{
-      wx.getSetting({
-        success: res => {
-          if (true) {
-            // '已经授权'
-            _this.setData({
-              loginid: app.signindata.loginid,
-              uid: app.signindata.uid,
-              openid: app.signindata.openid,
-              avatarUrl: app.signindata.avatarUrl,
-              isShareFun: app.signindata.isShareFun,
-              isProduce: app.signindata.isProduce,
-              signinlayer: true,
-              tgabox: false
-            });
-            // 判断是否登录
-            if (_this.data.loginid != '' && _this.data.uid != '') {
-              _this.onLoadfun();
-            } else {
-              app.signin(_this);
-            }
-          } else {
-            _this.setData({
-              tgabox: false,
-              signinlayer: false
-            })
-            // '没有授权 统计'
-            app.userstatistics(43);
-            _this.onLoadfun();
-          }
-        }
-      });  
+        // '已经授权'
+        _this.setData({
+          loginid: app.signindata.loginid,
+          uid: app.signindata.uid,
+          openid: app.signindata.openid,
+          avatarUrl: app.signindata.avatarUrl,
+          isShareFun: app.signindata.isShareFun,
+          isProduce: app.signindata.isProduce,
+          signinlayer: true,
+          tgabox: false
+        });
+        // 判断是否登录
+        if (_this.data.loginid != '' && _this.data.uid != '') {
+          _this.onLoadfun();
+        } else {
+          app.signin(_this);
+        };  
     };    
   },
   // 授权点击统计

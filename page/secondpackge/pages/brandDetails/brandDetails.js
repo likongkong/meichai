@@ -119,7 +119,23 @@ Page({
     this.setData({
       wOri:(this.data.wOri == 1)?2:1
     });
-
+    this.setShowTheStyle();
+  },
+   // 记录数据流切换
+   setShowTheStyle(){
+    var _this = this;
+    var qqq = Dec.Aese('mod=community&operation=set_show_the_style&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&showType=2&style='+this.data.wOri);
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + qqq,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        console.log('记录数据流切换',res)
+        if (res.data.ReturnCode == 200) {
+          
+        };
+      }
+    });
   },
   classifyChange(e){
     let that = this;
@@ -566,6 +582,7 @@ Page({
           };
           _this.setData({
             detailInfo:res.data.Info,
+            wOri:res.data.Info.the_style,
             brandinfo: res.data.Info.brand,
             banner: res.data.List.banner,
             founder: res.data.List.founder,
