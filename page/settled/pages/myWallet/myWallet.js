@@ -168,7 +168,7 @@ Page({
       mask:true
     })
     wx.request({
-      url: app.signindata.comurl + 'pingan.php' + qqq,
+      url: Dec.comurl() + 'pingan.php' + qqq,
       method: 'GET',
       header: {'Accept': 'application/json'},
       success: function (res) {
@@ -587,7 +587,7 @@ Page({
       mask:true
     })
     wx.request({
-      url: app.signindata.comurl + 'pingan.php' + qqq,
+      url: Dec.comurl() + 'pingan.php' + qqq,
       method: 'GET',
       header: {'Accept': 'application/json'},
       success: function (res) {
@@ -837,7 +837,7 @@ Page({
       mask:true
     })
     wx.request({
-      url: app.signindata.comurl + 'pingan.php' + qqq,
+      url: Dec.comurl() + 'pingan.php' + qqq,
       method: 'GET',
       header: {'Accept': 'application/json'},
       success: function (res) {
