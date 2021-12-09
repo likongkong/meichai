@@ -216,6 +216,7 @@ Page({
       province:options.province,
       loginid: app.signindata.loginid,
       uid: app.signindata.uid,
+      isProduce: app.signindata.isProduce,
       lim: options.lim || 0      
     });
 
