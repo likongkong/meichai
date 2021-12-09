@@ -470,7 +470,7 @@ Page({
     }
     if(this.data.type == 3 && !this.data.isRecord){ 
       if(!this.data.checked){
-        app.showToastC('请先阅读并同意挂网协议',1500);
+        app.showToastC('请先阅读并同意《见证宝协议》和《数字用户协议》',1500);
         return false;
       }
     }
@@ -480,13 +480,13 @@ Page({
     if(this.data.type == 1){
       let val = this.data.obj.cardnumber;
       let cardnumber = val.replace(/\s/g, "");
-      console.log('1绑定银行卡请求'+'mod=account&operation=bindCard&uid='+this.data.uid+'&loginid='+this.data.loginid+'&type='+this.data.type+'&userName='+this.data.obj.name+'&userIdcard='+this.data.obj.idCard+'&userMobile='+this.data.obj.phoneNum+'&bankNumber='+cardnumber+'&bankCode='+this.data.obj.bankdeposit+'&bankName='+this.data.obj.bankName+'&province='+this.data.obj.provincename+'&city='+this.data.obj.cityename+'&bankLId='+this.data.obj.bankSubBranch+'&bankLName='+this.data.obj.bankLName)
-      qqq = Dec.Aese('mod=account&operation=bindCard&uid='+this.data.uid+'&loginid='+this.data.loginid+'&type='+this.data.type+'&userName='+this.data.obj.name+'&userIdcard='+this.data.obj.idCard+'&userMobile='+this.data.obj.phoneNum+'&bankNumber='+cardnumber+'&bankCode='+this.data.obj.bankdeposit+'&bankName='+this.data.obj.bankName+'&province='+this.data.obj.provincename+'&city='+this.data.obj.cityename+'&bankLId='+this.data.obj.bankSubBranch+'&bankLName='+this.data.obj.bankLName);
+      console.log('1绑定银行卡请求'+'mod=account&operation=bindCard&uid='+this.data.uid+'&loginid='+this.data.loginid+'&type='+this.data.type+'&userName='+this.data.obj.name+'&userIdcard='+this.data.obj.idCard+'&userMobile='+this.data.obj.phoneNum+'&bankNumber='+cardnumber+'&bankCode='+this.data.obj.bankdeposit+'&bankName='+this.data.obj.bankName+'&province='+this.data.obj.provincename+'&city='+this.data.obj.cityename+'&bankLId='+this.data.obj.bankSubBranch+'&bankLName='+this.data.obj.bankLName+'&accountId='+this.data.accountId)
+      qqq = Dec.Aese('mod=account&operation=bindCard&uid='+this.data.uid+'&loginid='+this.data.loginid+'&type='+this.data.type+'&userName='+this.data.obj.name+'&userIdcard='+this.data.obj.idCard+'&userMobile='+this.data.obj.phoneNum+'&bankNumber='+cardnumber+'&bankCode='+this.data.obj.bankdeposit+'&bankName='+this.data.obj.bankName+'&province='+this.data.obj.provincename+'&city='+this.data.obj.cityename+'&bankLId='+this.data.obj.bankSubBranch+'&bankLName='+this.data.obj.bankLName+'&accountId='+this.data.accountId);
     } else if(this.data.type == 2){
       let val = this.data.obj.cardnumber;
       let cardnumber = val.replace(/\s/g, "");
-      console.log('2绑定银行卡请求'+'mod=account&operation=bindCard&uid='+this.data.uid+'&loginid='+this.data.loginid+'&type='+this.data.type+'&companyName='+this.data.obj.companyName+'&companyGlobalId='+this.data.obj.companyIdCard+'&userName='+this.data.obj.name+'&userIdcard='+this.data.obj.idCard+'&userMobile='+this.data.obj.phoneNum+'&bankNumber='+cardnumber+'&bankCode='+this.data.obj.bankdeposit+'&bankName='+this.data.obj.bankName+'&province='+this.data.obj.provincename+'&city='+this.data.obj.cityename+'&bankLId='+this.data.obj.bankSubBranch+'&bankLName='+this.data.obj.bankLName)
-      qqq = Dec.Aese('mod=account&operation=bindCard&uid='+this.data.uid+'&loginid='+this.data.loginid+'&type='+this.data.type+'&companyName='+this.data.obj.companyName+'&companyGlobalId='+this.data.obj.companyIdCard+'&userName='+this.data.obj.name+'&userIdcard='+this.data.obj.idCard+'&userMobile='+this.data.obj.phoneNum+'&bankNumber='+cardnumber+'&bankCode='+this.data.obj.bankdeposit+'&bankName='+this.data.obj.bankName+'&province='+this.data.obj.provincename+'&city='+this.data.obj.cityename+'&bankLId='+this.data.obj.bankSubBranch+'&bankLName='+this.data.obj.bankLName);
+      console.log('2绑定银行卡请求'+'mod=account&operation=bindCard&uid='+this.data.uid+'&loginid='+this.data.loginid+'&type='+this.data.type+'&companyName='+this.data.obj.companyName+'&companyGlobalId='+this.data.obj.companyIdCard+'&userName='+this.data.obj.name+'&userIdcard='+this.data.obj.idCard+'&userMobile='+this.data.obj.phoneNum+'&bankNumber='+cardnumber+'&bankCode='+this.data.obj.bankdeposit+'&bankName='+this.data.obj.bankName+'&province='+this.data.obj.provincename+'&city='+this.data.obj.cityename+'&bankLId='+this.data.obj.bankSubBranch+'&bankLName='+this.data.obj.bankLName+'&accountId='+this.data.accountId)
+      qqq = Dec.Aese('mod=account&operation=bindCard&uid='+this.data.uid+'&loginid='+this.data.loginid+'&type='+this.data.type+'&companyName='+this.data.obj.companyName+'&companyGlobalId='+this.data.obj.companyIdCard+'&userName='+this.data.obj.name+'&userIdcard='+this.data.obj.idCard+'&userMobile='+this.data.obj.phoneNum+'&bankNumber='+cardnumber+'&bankCode='+this.data.obj.bankdeposit+'&bankName='+this.data.obj.bankName+'&province='+this.data.obj.provincename+'&city='+this.data.obj.cityename+'&bankLId='+this.data.obj.bankSubBranch+'&bankLName='+this.data.obj.bankLName+'&accountId='+this.data.accountId);
     } else if(this.data.type == 3){
       let val = this.data.obj.corporateAccount;
       let corporateAccount = val.replace(/\s/g, "");
@@ -601,7 +601,7 @@ Page({
     }
     if(!this.data.isRecord){
       if(!this.data.checked){
-        app.showToastC('请先阅读并同意挂网协议',1500);
+        app.showToastC('请先阅读并同意《见证宝协议》和《数字用户协议》',1500);
         return false;
       }
     }
@@ -682,7 +682,11 @@ Page({
         wx.hideLoading()
         console.log('销户成功',res)
         if (res.data.ReturnCode == 200) {
-
+          let pages = getCurrentPages();    //获取当前页面信息栈
+          let prevPage = pages[pages.length-2];
+          prevPage.setData({
+            isBankcardlistMask:false
+          })
           _this.setData({
             obj:{},
             isUnbindAndBindMask:!_this.data.isUnbindAndBindMask,
