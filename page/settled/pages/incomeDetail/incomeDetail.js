@@ -322,9 +322,9 @@ Page({
     console.log(obj.businessLicense)
     let data = `mod=community&operation=certificationSet&uid=${this.data.uid}&loginid=${this.data.loginid}&firm_name=${obj.enterpriseName}&firm_linkman=${obj.enterpriseContact}&firm_tel=${obj.enterprisePhone}&wechat_number=${obj.wechatID}&certificate_img=${obj.businessLicense}`
     var q = Dec.Aese(data);
-    console.log(`${app.signindata.comurl}?${data}`)
+    console.log(`${Dec.comurl()}?${data}`)
     wx.request({
-      url: app.signindata.comurl + 'toy.php' + q,
+      url: Dec.comurl() + 'toy.php' + q,
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) { 

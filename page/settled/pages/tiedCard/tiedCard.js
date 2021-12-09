@@ -350,7 +350,7 @@ Page({
       mask:true
     })
     wx.request({
-      url: app.signindata.comurl + 'pingan.php' + qqq,
+      url: Dec.comurl() + 'pingan.php' + qqq,
       method: 'GET',
       header: {'Accept': 'application/json'},
       success: function (res) {
@@ -464,14 +464,20 @@ Page({
       this.selectComponent('#enterpriseData2').countDown();
     }
     if(this.data.type == 1){
-      console.log('1绑定银行卡请求'+'mod=account&operation=bindCard&uid='+this.data.uid+'&loginid='+this.data.loginid+'&type='+this.data.type+'&userName='+this.data.obj.name+'&userIdcard='+this.data.obj.idCard+'&userMobile='+this.data.obj.phoneNum+'&bankNumber='+this.data.obj.cardnumber+'&bankCode='+this.data.obj.bankdeposit+'&bankName='+this.data.obj.bankName+'&province='+this.data.obj.provincename+'&city='+this.data.obj.cityename+'&bankLId='+this.data.obj.bankSubBranch+'&bankLName='+this.data.obj.bankLName)
-      qqq = Dec.Aese('mod=account&operation=bindCard&uid='+this.data.uid+'&loginid='+this.data.loginid+'&type='+this.data.type+'&userName='+this.data.obj.name+'&userIdcard='+this.data.obj.idCard+'&userMobile='+this.data.obj.phoneNum+'&bankNumber='+this.data.obj.cardnumber+'&bankCode='+this.data.obj.bankdeposit+'&bankName='+this.data.obj.bankName+'&province='+this.data.obj.provincename+'&city='+this.data.obj.cityename+'&bankLId='+this.data.obj.bankSubBranch+'&bankLName='+this.data.obj.bankLName);
+      let val = this.data.obj.cardnumber;
+      let cardnumber = val.replace(/\s/g, "");
+      console.log('1绑定银行卡请求'+'mod=account&operation=bindCard&uid='+this.data.uid+'&loginid='+this.data.loginid+'&type='+this.data.type+'&userName='+this.data.obj.name+'&userIdcard='+this.data.obj.idCard+'&userMobile='+this.data.obj.phoneNum+'&bankNumber='+cardnumber+'&bankCode='+this.data.obj.bankdeposit+'&bankName='+this.data.obj.bankName+'&province='+this.data.obj.provincename+'&city='+this.data.obj.cityename+'&bankLId='+this.data.obj.bankSubBranch+'&bankLName='+this.data.obj.bankLName)
+      qqq = Dec.Aese('mod=account&operation=bindCard&uid='+this.data.uid+'&loginid='+this.data.loginid+'&type='+this.data.type+'&userName='+this.data.obj.name+'&userIdcard='+this.data.obj.idCard+'&userMobile='+this.data.obj.phoneNum+'&bankNumber='+cardnumber+'&bankCode='+this.data.obj.bankdeposit+'&bankName='+this.data.obj.bankName+'&province='+this.data.obj.provincename+'&city='+this.data.obj.cityename+'&bankLId='+this.data.obj.bankSubBranch+'&bankLName='+this.data.obj.bankLName);
     } else if(this.data.type == 2){
-      console.log('2绑定银行卡请求'+'mod=account&operation=bindCard&uid='+this.data.uid+'&loginid='+this.data.loginid+'&type='+this.data.type+'&companyName='+this.data.obj.companyName+'&companyGlobalId='+this.data.obj.companyIdCard+'&userName='+this.data.obj.name+'&userIdcard='+this.data.obj.idCard+'&userMobile='+this.data.obj.phoneNum+'&bankNumber='+this.data.obj.cardnumber+'&bankCode='+this.data.obj.bankdeposit+'&bankName='+this.data.obj.bankName+'&province='+this.data.obj.provincename+'&city='+this.data.obj.cityename+'&bankLId='+this.data.obj.bankSubBranch+'&bankLName='+this.data.obj.bankLName)
-      qqq = Dec.Aese('mod=account&operation=bindCard&uid='+this.data.uid+'&loginid='+this.data.loginid+'&type='+this.data.type+'&companyName='+this.data.obj.companyName+'&companyGlobalId='+this.data.obj.companyIdCard+'&userName='+this.data.obj.name+'&userIdcard='+this.data.obj.idCard+'&userMobile='+this.data.obj.phoneNum+'&bankNumber='+this.data.obj.cardnumber+'&bankCode='+this.data.obj.bankdeposit+'&bankName='+this.data.obj.bankName+'&province='+this.data.obj.provincename+'&city='+this.data.obj.cityename+'&bankLId='+this.data.obj.bankSubBranch+'&bankLName='+this.data.obj.bankLName);
+      let val = this.data.obj.cardnumber;
+      let cardnumber = val.replace(/\s/g, "");
+      console.log('2绑定银行卡请求'+'mod=account&operation=bindCard&uid='+this.data.uid+'&loginid='+this.data.loginid+'&type='+this.data.type+'&companyName='+this.data.obj.companyName+'&companyGlobalId='+this.data.obj.companyIdCard+'&userName='+this.data.obj.name+'&userIdcard='+this.data.obj.idCard+'&userMobile='+this.data.obj.phoneNum+'&bankNumber='+cardnumber+'&bankCode='+this.data.obj.bankdeposit+'&bankName='+this.data.obj.bankName+'&province='+this.data.obj.provincename+'&city='+this.data.obj.cityename+'&bankLId='+this.data.obj.bankSubBranch+'&bankLName='+this.data.obj.bankLName)
+      qqq = Dec.Aese('mod=account&operation=bindCard&uid='+this.data.uid+'&loginid='+this.data.loginid+'&type='+this.data.type+'&companyName='+this.data.obj.companyName+'&companyGlobalId='+this.data.obj.companyIdCard+'&userName='+this.data.obj.name+'&userIdcard='+this.data.obj.idCard+'&userMobile='+this.data.obj.phoneNum+'&bankNumber='+cardnumber+'&bankCode='+this.data.obj.bankdeposit+'&bankName='+this.data.obj.bankName+'&province='+this.data.obj.provincename+'&city='+this.data.obj.cityename+'&bankLId='+this.data.obj.bankSubBranch+'&bankLName='+this.data.obj.bankLName);
     } else if(this.data.type == 3){
-      console.log('3绑定银行卡请求'+'mod=account&operation=bindCard&uid='+this.data.uid+'&loginid='+this.data.loginid+'&type='+this.data.type+'&companyName='+this.data.obj.companyName+'&companyGlobalId='+this.data.obj.companyIdCard+'&userName='+this.data.obj.legalPersonName+'&userIdcard='+this.data.obj.legalPersonIdCard+'&userMobile='+this.data.obj.companyPhone+'&bankNumber='+this.data.obj.corporateAccount+'&bankCode='+this.data.obj.bankdeposit+'&bankName='+this.data.obj.bankName+'&province='+this.data.obj.provincename+'&city='+this.data.obj.cityename+'&bankLId='+this.data.obj.bankSubBranch+'&bankLName='+this.data.obj.bankLName)
-      qqq = Dec.Aese('mod=account&operation=bindCard&uid='+this.data.uid+'&loginid='+this.data.loginid+'&type='+this.data.type+'&companyName='+this.data.obj.companyName+'&companyGlobalId='+this.data.obj.companyIdCard+'&userName='+this.data.obj.legalPersonName+'&userIdcard='+this.data.obj.legalPersonIdCard+'&userMobile='+this.data.obj.companyPhone+'&bankNumber='+this.data.obj.corporateAccount+'&bankCode='+this.data.obj.bankdeposit+'&bankName='+this.data.obj.bankName+'&province='+this.data.obj.provincename+'&city='+this.data.obj.cityename+'&bankLId='+this.data.obj.bankSubBranch+'&bankLName='+this.data.obj.bankLName);
+      let val = this.data.obj.corporateAccount;
+      let corporateAccount = val.replace(/\s/g, "");
+      console.log('3绑定银行卡请求'+'mod=account&operation=bindCard&uid='+this.data.uid+'&loginid='+this.data.loginid+'&type='+this.data.type+'&companyName='+this.data.obj.companyName+'&companyGlobalId='+this.data.obj.companyIdCard+'&userName='+this.data.obj.legalPersonName+'&userIdcard='+this.data.obj.legalPersonIdCard+'&userMobile='+this.data.obj.companyPhone+'&bankNumber='+corporateAccount+'&bankCode='+this.data.obj.bankdeposit+'&bankName='+this.data.obj.bankName+'&province='+this.data.obj.provincename+'&city='+this.data.obj.cityename+'&bankLId='+this.data.obj.bankSubBranch+'&bankLName='+this.data.obj.bankLName)
+      qqq = Dec.Aese('mod=account&operation=bindCard&uid='+this.data.uid+'&loginid='+this.data.loginid+'&type='+this.data.type+'&companyName='+this.data.obj.companyName+'&companyGlobalId='+this.data.obj.companyIdCard+'&userName='+this.data.obj.legalPersonName+'&userIdcard='+this.data.obj.legalPersonIdCard+'&userMobile='+this.data.obj.companyPhone+'&bankNumber='+corporateAccount+'&bankCode='+this.data.obj.bankdeposit+'&bankName='+this.data.obj.bankName+'&province='+this.data.obj.provincename+'&city='+this.data.obj.cityename+'&bankLId='+this.data.obj.bankSubBranch+'&bankLName='+this.data.obj.bankLName);
     }  
      
     wx.showLoading({
@@ -479,7 +485,7 @@ Page({
       mask:true
     })
     wx.request({
-      url: app.signindata.comurl + 'pingan.php' + qqq,
+      url: Dec.comurl() + 'pingan.php' + qqq,
       method: 'GET',
       header: {'Accept': 'application/json'},
       success: function (res) {
@@ -514,7 +520,7 @@ Page({
        mask:true
      })
      wx.request({
-       url: app.signindata.comurl + 'pingan.php' + qqq,
+       url: Dec.comurl() + 'pingan.php' + qqq,
        method: 'GET',
        header: {'Accept': 'application/json'},
        success: function (res) {
@@ -547,7 +553,7 @@ Page({
       mask:true
     })
     wx.request({
-      url: app.signindata.comurl + 'pingan.php' + qqq,
+      url: Dec.comurl() + 'pingan.php' + qqq,
       method: 'GET',
       header: {'Accept': 'application/json'},
       success: function (res) {
@@ -585,7 +591,7 @@ Page({
       mask:true
     })
     wx.request({
-      url: app.signindata.comurl + 'pingan.php' + qqq,
+      url: Dec.comurl() + 'pingan.php' + qqq,
       method: 'GET',
       header: {'Accept': 'application/json'},
       success: function (res) {
@@ -625,7 +631,7 @@ Page({
       mask:true
     })
     wx.request({
-      url: app.signindata.comurl + 'pingan.php' + qqq,
+      url: Dec.comurl() + 'pingan.php' + qqq,
       method: 'GET',
       header: {'Accept': 'application/json'},
       success: function (res) {
