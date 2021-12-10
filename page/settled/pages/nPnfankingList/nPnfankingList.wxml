@@ -35,12 +35,14 @@
         <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
     </view>
 
-    <view class="ViewHistory" catchtap="getdataLast" wx:if='{{endTime == selectDate}}'>
-      <!-- <picker mode="date" value="{{selectDate}}" start="{{start}}" end="{{endTime}}" bindchange="bindDateChange"> 查看历史排行</picker> -->
-        昨日排行
-    </view>
-    <view class="ViewHistory" catchtap="getdataLastToday" wx:else>
-        查看今日
+    <view wx:if="{{!isFinish}}">
+      <view class="ViewHistory" catchtap="getdataLast" wx:if='{{endTime == selectDate}}'>
+        <!-- <picker mode="date" value="{{selectDate}}" start="{{start}}" end="{{endTime}}" bindchange="bindDateChange"> 查看历史排行</picker> -->
+          昨日排行
+      </view>
+      <view class="ViewHistory" catchtap="getdataLastToday" wx:else>
+          查看今日
+      </view>
     </view>
 
 

@@ -21,6 +21,7 @@ Page({
     selectDate:'',
     // 8号之后显示排行榜 积分
     newdataexh:Date.parse(new Date())/1000 > 1638892800?true:false,
+    isFinish:false
   },
   // 更新用户信息
   getUserProfileSettled(w){
@@ -81,16 +82,26 @@ Page({
   onLoad: function (options) {
     var _this = this;
     wx.hideShareMenu();
-
+    var timestamp = Date.parse(new Date())/1000;
     var date = new Date();//时间戳为10位需*1000，时间戳为13位的话不需乘1000
     var Y = date.getFullYear();
     var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
     var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
-    this.setData({
-      endTime:Y + '-' + M +'-' + D,
-      selectDate:Y + '-' + M +'-' + D
-    })
+    // 1639324800
+    if(timestamp >= 1639324800){
+      this.setData({
+        endTime:Y + '-' + M +'-' + D,
+        selectDate:'2021-12-12',
+        isFinish:true
+      })
+    }else{
+      this.setData({
+        endTime:Y + '-' + M +'-' + D,
+        selectDate:Y + '-' + M +'-' + D
+      })
+    }
     console.log(this.data.endTime)
+    console.log()
     // '已经授权'
     _this.data.loginid = app.signindata.loginid;
     _this.data.uid = app.signindata.uid;
