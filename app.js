@@ -1820,6 +1820,7 @@ App({
                   _this.signindata.avatarUrl = userInfo.avatarUrl;
                   _this.signindata.nickName = userInfo.nickName;
                   _this.signindata.userInfo = userInfo || {};
+                  _this.signindata.isNeedUserInfo = false; 
                   // wx.showToast({
                   //   title: '设置成功',
                   //   icon: 'none',

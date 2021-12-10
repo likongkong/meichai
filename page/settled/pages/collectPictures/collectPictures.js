@@ -36,9 +36,160 @@ Page({
         name:'pictureCaptions',
         borderbottom1:'show',
         margintop0:true,
+      },{
+        isRequired:true,
+        type:'time',
+        subtitle:'活动开始时间',
+        placeholder:'请选择活动开始时间',
+        value:0,
+        margintop0:true,
+        borderbottom1:'show',
+        time: '',
+        name:'startTime',
+      },{ isRequired:true,
+        type:'time',
+        subtitle:'活动结束时间',
+        placeholder:'请选择活动结束时间',
+        value:0,
+        margintop0:true,
+        time: '',
+        borderbottom1:'show',
+        name:'endTime',
+      },{
+        isRequired:false,
+        type:'label',
+        subtitle:'活动奖励',
+        labelItem:[
+          {index:0,name:'积分'},
+          {index:1,name:'实物'},
+        ],
+        index:999,
+        value:0,
+        name:'goodsLabel',
+        borderbottom1:'show',
+        margintop0:true,
       },
     ],
-    
+    listData1:[
+      {
+        isRequired:false,
+        type:'text',
+        subtitle:'积分',
+        placeholder:'请输入奖励积分',
+        value:'',
+        name:'integral',
+        borderbottom1:'show',
+        margintop0:true,
+      }
+    ],
+    listData2:[
+      {
+        isRequired:false,
+        type:'text',
+        subtitle:'奖励名称',
+        placeholder:'请输入奖励名称',
+        value:'',
+        name:'entityAward',
+        borderbottom1:'show',
+        margintop0:true,
+      },{
+        isRequired:false,
+        type:'uploadImg',
+        subtitle:'奖励图片',
+        name:'entityAwardPic',
+        imageList:[],
+        margintop0:true,
+        mode:'multiple',
+        storagelocation:'images/goods'
+      },
+    ],
+    listData3:[
+      {
+        isRequired:false,
+        type:'textarea',
+        subtitle:'征集说明',
+        placeholder:'非必填，可输入征集规则和奖励说明',
+        value:'',
+        name:'awardsShow',
+        borderbottom1:'show',
+        margintop0:true,
+      },{
+        isRequired:false,
+        type:'uploadImg',
+        subtitle:'详情图片',
+        name:'detailsFigure',
+        imageList:[],
+        margintop0:true,
+        mode:'multiple',
+        storagelocation:'images/goods'
+      },{
+        isRequired:false,
+        type:'uploadImg',
+        subtitle:'活动封面图（推荐尺寸16:9）',
+        name:'surfacePlot',
+        src:'',
+        storagelocation:'images/goods',
+        borderbottom1:'show',
+        margintop0:true,
+      },{
+        isRequired:false,
+        type:'uploadImg',
+        subtitle:'活动分享图（推荐尺寸4:3）',
+        name:'shareFigure',
+        src:'',
+        storagelocation:'images/goods',
+        borderbottom1:'show',
+        margintop0:true,
+      },{
+        isRequired:false,
+        type:'radio',
+        subtitle:'活动参与人',
+        radioArr:[
+          {name:'wu',radioName:'所有人可参与'},
+          {name:'qiongchengyuan',radioName:'指定群成员参与'},
+          {name:'qianzhihuodong',radioName:'完成前置活动',placeholder:'请选择活前置活动',value:''},
+        ],
+        value:0,
+        index:0,
+        direction:'Y',
+        explain:true,
+        explainTxt:'消耗积分：用户需使用积分获得抽选资格，勾选后输入消耗积分 \n定金：用户需支付定金获取抽选资格，勾选后输入定金金额，未中奖的用户三个工作日自动退回定金',
+        input:true,
+        multiRadio:true,
+        name:'participateType',
+      },{
+        isRequired:false,
+        type:'radio',
+        subtitle:'允许多次参与',
+        radioArr:['是','否'],
+        value:0,
+        index:0,
+        direction:'X',
+        margintop0:true,
+        borderbottom1:'show',
+        explain:true,
+        explainTxt:'11111111',
+        name:'repeatedlyJoin',
+      },{
+        isRequired:false,
+        type:'radio',
+        subtitle:'展示到玩家返图',
+        radioArr:['是','否'],
+        value:0,
+        index:0,
+        direction:'X',
+        margintop0:true,
+        borderbottom1:'show',
+        name:'zhanshifantu',
+        explain:true,
+        explainTxt:'11111111',
+      },
+    ],
+    obj:{
+      startTime:'',
+      endTime:'',
+    },
+    activityReward:2,
   },
   /**
    * 生命周期函数--监听页面加载
@@ -70,37 +221,28 @@ Page({
   bindchange(e){
     let value = e.detail.value; 
     let key=e.detail.name;
-    if(key == 'sellingWay'){    //sellingWay==0为正常售卖 sellingWay==1为限时售卖
-      this.selectComponent('#settledForm2').refreshData(value,3);
-      if(value==1){
-        let startTime = (new Date(this.data.obj.startTime).getTime())/1000;
-        let endtime = util.format1("yyyy-MM-dd HH:mm",startTime+2592000);
-        this.selectComponent('#settledForm2').refreshTimeData(endtime,3);
-      }
-    }
     if(key == 'startTime'){
-      if(this.data.obj.sellingWay == 0){
-        this.selectComponent('#settledForm2').refreshTimeData(value,2);
+      let startTime = (new Date(value).getTime())/1000;
+      let endTime = (new Date(this.data.obj.endTime).getTime())/1000;
+      if((startTime&&!endTime)||(startTime<endTime)){
+        this.selectComponent('#settledForm').refreshTimeData(value,3);
         this.data.obj[key]=value;
       }else{
-        let startTime = (new Date(value).getTime())/1000;
-        let endTime = (new Date(this.data.obj.endTime).getTime())/1000;
-        if(startTime<endTime){
-          this.selectComponent('#settledForm2').refreshTimeData(value,2);
-          this.data.obj[key]=value;
-        }else{
-          app.showToastC('发售时间不可大于停售时间',1500);
-        }
+        app.showToastC('开始时间不可大于结束时间',1500);
       }
     }else if(key == 'endTime'){
       let endTime = (new Date(value).getTime())/1000;
       let startTime = (new Date(this.data.obj.startTime).getTime())/1000;
-      if(endTime>startTime){
-        this.selectComponent('#settledForm2').refreshTimeData(value,3);
+      if((!startTime&&endTime)||(endTime>startTime)){
+        this.selectComponent('#settledForm').refreshTimeData(value,4);
         this.data.obj[key]=value;
       }else{
-        app.showToastC('停售时间不可小于发售时间',1500);
+        app.showToastC('结束时间不可小于开始时间',1500);
       }
+    }else if(key == 'goodsLabel'){
+      this.setData({
+        activityReward:value,
+      })
     }else{
       this.data.obj[key]=value;
     }
