@@ -57,7 +57,10 @@ Page({
         name:'endTime',
       },
     ],
-    
+    obj:{
+      startTime:'',
+      endTime:'',
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -89,36 +92,23 @@ Page({
   bindchange(e){
     let value = e.detail.value; 
     let key=e.detail.name;
-    if(key == 'sellingWay'){    //sellingWay==0为正常售卖 sellingWay==1为限时售卖
-      this.selectComponent('#settledForm2').refreshData(value,3);
-      if(value==1){
-        let startTime = (new Date(this.data.obj.startTime).getTime())/1000;
-        let endtime = util.format1("yyyy-MM-dd HH:mm",startTime+2592000);
-        this.selectComponent('#settledForm2').refreshTimeData(endtime,3);
-      }
-    }
     if(key == 'startTime'){
-      if(this.data.obj.sellingWay == 0){
-        this.selectComponent('#settledForm2').refreshTimeData(value,2);
+      let startTime = (new Date(value).getTime())/1000;
+      let endTime = (new Date(this.data.obj.endTime).getTime())/1000;
+      if((startTime&&!endTime)||(startTime<endTime)){
+        this.selectComponent('#settledForm').refreshTimeData(value,3);
         this.data.obj[key]=value;
       }else{
-        let startTime = (new Date(value).getTime())/1000;
-        let endTime = (new Date(this.data.obj.endTime).getTime())/1000;
-        if(startTime<endTime){
-          this.selectComponent('#settledForm2').refreshTimeData(value,2);
-          this.data.obj[key]=value;
-        }else{
-          app.showToastC('发售时间不可大于停售时间',1500);
-        }
+        app.showToastC('开始时间不可大于结束时间',1500);
       }
     }else if(key == 'endTime'){
       let endTime = (new Date(value).getTime())/1000;
       let startTime = (new Date(this.data.obj.startTime).getTime())/1000;
-      if(endTime>startTime){
-        this.selectComponent('#settledForm2').refreshTimeData(value,3);
+      if((!startTime&&endTime)||(endTime>startTime)){
+        this.selectComponent('#settledForm').refreshTimeData(value,4);
         this.data.obj[key]=value;
       }else{
-        app.showToastC('停售时间不可小于发售时间',1500);
+        app.showToastC('结束时间不可小于开始时间',1500);
       }
     }else{
       this.data.obj[key]=value;
