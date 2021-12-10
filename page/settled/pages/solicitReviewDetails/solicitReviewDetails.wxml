@@ -6,9 +6,9 @@
         <view class="srlBoxEveName">征集名称征集名称征集名称（<text style="color:red;">进行中</text>）</view>
         <view class="srlBoxEveTime">发布时间：2021-10-25</view>
         <view class="srlBoxEveBottom">
-            <view class="srlBoxEveBottomEve">待审核：568</view>
-            <view class="srlBoxEveBottomEve srlBoxEveBottomEveCenter">已通过：568</view>
-            <view class="srlBoxEveBottomEve">未通过：568</view>
+            <view class="srlBoxEveBottomEve {{toExamineNum==1?'srlBoxEveBottomEveCenter':''}}" catchtap="toExamineTab" data-ind='1'>待审核：568</view>
+            <view class="srlBoxEveBottomEve {{toExamineNum==2?'srlBoxEveBottomEveCenter':''}}" catchtap="toExamineTab" data-ind='2'>已通过：568</view>
+            <view class="srlBoxEveBottomEve {{toExamineNum==3?'srlBoxEveBottomEveCenter':''}}" catchtap="toExamineTab" data-ind='3'>未通过：568</view>
         </view>
     </view>
 </view>
@@ -18,8 +18,14 @@
         <view class="solrevdetTop">
             <image class="solrevdetTopImg" mode="aspectFit" src="https://cdn2.51chaidan.com/images/goods/16388704986290_992639.jpg"></image>
             <view class="solrevdetTopRight">
-                <view class="solrevdetTopName specialellipsis">征集名称征集名称征集名称</view>
-                <view class="solrevdetTopName specialellipsis">积分：568（<text style="color:red;">累计积分：5841</text>）</view>
+                <view class="solrevdetTopName">
+                   <view class="solrevdetTopNameLeft specialellipsis">征集名称征集名称征集名称</view>
+                   <view class="solrevdetTopNameRight">
+                        <text wx:if='{{toExamineNum == 2}}' style="color:#7CAA7E;">已通过</text>
+                        <text wx:if='{{toExamineNum == 3}}' style="color:#000;">未通过</text>
+                   </view>
+                </view>
+                <view class="solrevdetTopName specialellipsis">积分：568（<text style="color:#ccc;">累计积分：5841</text>）</view>
                 <view class="solrevdetTopName specialellipsis" style="margin-bottom:0;">2021-10-25 11：36 提交</view>
             </view>
         </view>

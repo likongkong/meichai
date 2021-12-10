@@ -13,9 +13,15 @@ Page({
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     uid:'',
     loginid:'',
-    
+    toExamineNum:1
   },
-
+  // tab 切换
+  toExamineTab(e){
+    var ind = e.currentTarget.dataset.ind || 0;
+    this.setData({
+      toExamineNum:ind
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
