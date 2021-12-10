@@ -3,3 +3,127 @@
 page{
   background:#f4f5f9;
 }
+
+
+.srlBox{
+  padding: 0 25rpx 25rpx;
+}
+.srlBoxEve{
+  padding: 25rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 25rpx;
+}
+.srlBoxEveName{
+  width: 100%;
+  font-size: 28rpx;
+  margin-bottom: 25rpx;
+}
+.srlBoxEveTime{
+  color: #909090;
+  font-size: 24rpx;
+  margin-bottom: 25rpx;
+}
+.srlBoxEveBottom{
+  width: 100%;
+  height: 50rpx;
+  display: flex;
+  margin: 25rpx 0 20rpx 0;
+
+}
+.srlBoxEveBottomEve{
+  flex-grow:1;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color:#999;
+  position: relative;
+}
+
+.srlBoxEveBottomEve.srlBoxEveBottomEveCenter{
+  color: #000;
+}
+.srlBoxEveBottomEveCenter::after{
+  content:' ';
+  width: 122rpx;
+  height: 6rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -22rpx;
+  margin: auto;
+  background-color: #000;
+}
+/* .srlBoxEveBottomEveCenter::before{
+  content:' ';
+  width: 4rpx;
+  height: 40rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: #ccc;
+} */
+
+.solrevdetTop{
+  width: 100%;
+  height: 130rpx;
+  margin-bottom: 25rpx;
+}
+.solrevdetTopImg{
+  width: 130rpx;
+  height: 130rpx;
+  float: left;
+  border-radius: 16rpx;
+}
+
+.solrevdetTopRight{
+  width: 480rpx;
+  height: 130rpx;
+  float: left;
+  margin-left: 30rpx;
+}
+.solrevdetTopName{
+  width: 100%;
+  font-size: 28rpx;
+  margin-bottom: 10rpx;
+}
+.solicitPicturesBox{
+  width: 100%;
+  margin-bottom: 15rpx;
+  overflow: hidden;
+}
+.solicitPicturesImg{
+  width: 207rpx;
+  height: 207rpx;
+  float: left;
+  border-radius: 12rpx;
+  margin-right: 14rpx;
+  margin-bottom: 14rpx;
+}
+.adoptOrNoadop{
+  width: 100%;
+  height: 76rpx;
+}
+.adoptOrNoadopCss{
+  width: 310rpx;
+  font-size: 28rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  text-align: center;
+  border-radius: 10rpx;
+}
+.adoptOrNoadopL{
+  color: #000;
+  border: 2rpx solid #000;
+  float: left;
+}
+.adoptOrNoadopR{
+  color: #5CA7FE;
+  border: 2rpx solid #5CA7FE;
+  float: right;
+}
+
+

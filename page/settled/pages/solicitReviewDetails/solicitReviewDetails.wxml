@@ -1,3 +1,40 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
+<view class="srlBox" style="margin-top:25rpx;">
+    <view class="srlBoxEve" style="margin-bottom:0;">
+        <view class="srlBoxEveName">征集名称征集名称征集名称（<text style="color:red;">进行中</text>）</view>
+        <view class="srlBoxEveTime">发布时间：2021-10-25</view>
+        <view class="srlBoxEveBottom">
+            <view class="srlBoxEveBottomEve">待审核：568</view>
+            <view class="srlBoxEveBottomEve srlBoxEveBottomEveCenter">已通过：568</view>
+            <view class="srlBoxEveBottomEve">未通过：568</view>
+        </view>
+    </view>
+</view>
+
+<view class="srlBox">
+    <view class="srlBoxEve" wx:for='{{[1,2,3,4,5,6,7,8,9]}}' wx:key='key'>
+        <view class="solrevdetTop">
+            <image class="solrevdetTopImg" mode="aspectFit" src="https://cdn2.51chaidan.com/images/goods/16388704986290_992639.jpg"></image>
+            <view class="solrevdetTopRight">
+                <view class="solrevdetTopName specialellipsis">征集名称征集名称征集名称</view>
+                <view class="solrevdetTopName specialellipsis">积分：568（<text style="color:red;">累计积分：5841</text>）</view>
+                <view class="solrevdetTopName specialellipsis" style="margin-bottom:0;">2021-10-25 11：36 提交</view>
+            </view>
+        </view>
+        <view class="srlBoxEveName">征集图片</view>
+        <view class="solicitPicturesBox">
+            <block wx:for='{{[1,2,3,4,5,6,6,6,6,6,6]}}' wx:key='key'>
+                <image class="solicitPicturesImg" style="{{index%3==2?'margin-right:0;':''}}" mode="aspectFit" src="https://cdn2.51chaidan.com/images/goods/16388704986290_992639.jpg"></image>
+            </block>
+        </view>
+        <view class="adoptOrNoadop">
+            <view class="adoptOrNoadopCss adoptOrNoadopL">不通过</view>
+            <view class="adoptOrNoadopCss adoptOrNoadopR">通过</view>
+        </view>
+    </view>
+
+
+
+</view>
