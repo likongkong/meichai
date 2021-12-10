@@ -89,6 +89,19 @@ page{
   width: 100%;
   font-size: 28rpx;
   margin-bottom: 10rpx;
+  position: relative;
+}
+.solrevdetTopNameLeft{
+  width: 380rpx;
+  font-size: 28rpx;
+}
+.solrevdetTopNameRight{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  font-size: 28rpx;
 }
 .solicitPicturesBox{
   width: 100%;

@@ -53,7 +53,9 @@ Page({
     isredpacket:false,
     detailList:[],
     is_detail:false,
-    salesCalendar:[]
+    salesCalendar:[],
+    // 14号之后显示排行榜 积分
+    newdataexh:Date.parse(new Date())/1000 < 1639411200?true:false,
   },
   // 跳转日历
   jumpoffering(w){

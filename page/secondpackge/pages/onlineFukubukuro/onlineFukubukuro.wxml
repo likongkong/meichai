@@ -43,7 +43,7 @@
   <view class="consumemessageWrap" wx:if="{{recordList.length != 0}}">
     <view class="consumemessage">
       <view class="MaskView"></view>
-      <image class="suspensionRankingList" catchtap="jumpRankingList" src="https://cdn.51chaidan.com/images/icon/luck_bag_ranking.jpg" mode="aspectFit"></image>
+      <image wx:if='{{newdataexh}}' class="suspensionRankingList" catchtap="jumpRankingList" src="https://cdn.51chaidan.com/images/icon/luck_bag_ranking.jpg" mode="aspectFit"></image>
       <swiper vertical="true" autoplay="true" circular="true" interval="2500">
         <block wx:for="{{recordList}}" wx:key='key'>
           <!-- <swiper-item class="swiper-item" data-id="{{item.activity_id}}" bindtap="toaRewarddeyails"> -->
