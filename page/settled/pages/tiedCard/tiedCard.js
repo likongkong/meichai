@@ -162,8 +162,8 @@ Page({
       },{
         isRequired:true,
         type:'text',
-        subtitle:'企业联系电话',
-        placeholder:'请输入企业联系电话',
+        subtitle:'法人联系电话',
+        placeholder:'请输入法人联系电话',
         value:'',
         borderbottom1:'show',
         name:'companyPhone'
@@ -448,7 +448,7 @@ Page({
         {placeholder:'请输入社会统一信用代码',domId:'enterpriseBusiness',name:"companyIdCard",value:obj.companyIdCard},
         {placeholder:'请输入法人姓名',domId:'enterpriseBusiness',name:"legalPersonName",value:obj.legalPersonName},
         {placeholder:'请输入法人身份证号码',domId:'enterpriseBusiness',name:"legalPersonIdCard",value:obj.legalPersonIdCard},
-        {placeholder:'请输入企业联系电话',domId:'enterpriseBusiness',name:"companyPhone",value:obj.companyPhone},
+        {placeholder:'请输入法人联系电话',domId:'enterpriseBusiness',name:"companyPhone",value:obj.companyPhone},
         {placeholder:'请输入对公账号',domId:'enterpriseBusiness',name:"corporateAccount",value:obj.corporateAccount},
         {placeholder:'请选择开户银行',domId:'enterpriseData1',name:"bankdeposit",value:obj.bankdeposit},
         {placeholder:'请选择开户银行所在地',domId:'enterpriseData1',name:"bankdepositLocation",value:obj.cityCode},
