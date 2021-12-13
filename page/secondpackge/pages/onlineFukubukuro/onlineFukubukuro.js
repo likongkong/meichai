@@ -329,6 +329,7 @@ Page({
           if (raplist[i].day != '00' || raplist[i].hour != '00' || raplist[i].minute != '00' || raplist[i].second != '00') {
             iftrins = false;
           };
+          console.log(raplist)
       };
       _this.setData({
         goodsList: raplist
