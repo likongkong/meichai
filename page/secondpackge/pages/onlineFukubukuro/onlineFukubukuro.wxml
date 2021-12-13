@@ -62,13 +62,13 @@
           <image class="cardEveLeftImg" catchtap="isDetailF" data-ia='{{item.all_goods_desc}}' src="{{item.goods_img}}" mode="aspectFit"></image>
           <view class="cardEveRight">
               <view class="cardEveRPrcice">{{item.price}}元超值福袋</view>
-              <view class="cardEveRPrciceCom" catchtap="nineSpotNine" data-rule='{{item.rule}}' wx:if='{{item.isShowStock}}'>剩余：{{item.stockNumber}}/{{item.totalNumber}}<image class="cardEveLeftMark" src="https://cdn.51chaidan.com/images/luckBag/luckyBagIcon/wenhao.png" mode="aspectFit"></image></view>
+              <view class="cardEveRPrciceCom" catchtap="{{item.rule?'nineSpotNine':''}}" data-rule='{{item.rule}}' wx:if='{{item.isShowStock}}'>剩余：{{item.stockNumber}}/{{item.totalNumber}}<image wx:if='{{item.rule}}' class="cardEveLeftMark" src="https://cdn.51chaidan.com/images/luckBag/luckyBagIcon/wenhao.png" mode="aspectFit"></image></view>
               <view class="cardEveRPrciceCom" wx:if='{{item.explain1}}'>{{item.explain1}}</view>
               <view class="cardEveRPrciceCom" wx:if='{{item.explain2}}'>{{item.explain2}}</view>
 
               <view class="cardEveRPrciceCom" wx:if='{{item.newOpenTime && item.stockNumber == 0}}'>{{item.minute}}分{{item.second}}秒后补充库存</view>
 
-              <view class="cardEveRButton" wx:if='{{item.newOpenTime && item.stockNumber == 0}}' style="background:#5CA7FE;" catchtap="subscrfunstar">补货提醒</view>
+              <view class="cardEveRButton" wx:if='{{item.stockNumber == 0}}' style="background:#5CA7FE;" catchtap="subscrfunstar">补货提醒</view>
               <view class="cardEveRButton" wx:else data-type="{{item.type}}" data-price="{{item.price}}" catchtap="showbuybombsimmediately">立即开福袋</view>
           </view>
       </view>
