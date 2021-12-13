@@ -314,7 +314,7 @@
   width: 200rpx;
   margin-bottom: 60rpx;
   display: inline-block;
-  margin-right: 42rpx;
+  margin-right: 40rpx;
   position: relative;
 }
 
