@@ -87,8 +87,8 @@ Page({
     var Y = date.getFullYear();
     var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
     var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
-    // 1639324800
-    if(timestamp >= 1639324800){
+    // 1639324800  timestamp >= 1639324800
+    if(false){
       this.setData({
         endTime:Y + '-' + M +'-' + D,
         selectDate:'2021-12-12',
@@ -101,7 +101,6 @@ Page({
       })
     }
     console.log(this.data.endTime)
-    console.log()
     // '已经授权'
     _this.data.loginid = app.signindata.loginid;
     _this.data.uid = app.signindata.uid;
@@ -128,7 +127,7 @@ Page({
     this.getData();
 
     wx.request({
-      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/luckBag_rules.json?',
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/luckBag_rules.json',
       method: 'GET',
       header: {'Accept': 'application/json'},
       success: function (res) {
