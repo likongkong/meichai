@@ -680,13 +680,13 @@ Page({
       header: {'Accept': 'application/json'},
       success: function (res) {
         wx.hideLoading()
-        console.log('销户成功',res)
+        let pages = getCurrentPages();    //获取当前页面信息栈
+        let prevPage = pages[pages.length-2];
+        prevPage.setData({
+          isBankcardlistMask:false
+        })
         if (res.data.ReturnCode == 200) {
-          let pages = getCurrentPages();    //获取当前页面信息栈
-          let prevPage = pages[pages.length-2];
-          prevPage.setData({
-            isBankcardlistMask:false
-          })
+          console.log('销户成功',res)
           _this.setData({
             obj:{},
             isUnbindAndBindMask:!_this.data.isUnbindAndBindMask,
