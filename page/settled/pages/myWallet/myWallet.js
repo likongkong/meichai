@@ -74,7 +74,8 @@ Page({
     isVerification:false,  //验证弹框
     obj:{},
     current:1,
-    walletType:1,
+    walletType:0,
+    isOtherAmount:false
   },
   /**
    * 生命周期函数--监听页面加载
@@ -118,7 +119,11 @@ Page({
       app.getAccessToken(this.onLoadfun)
     };
   },
-
+  toggleOtherAmount(){
+    this.setData({
+      isOtherAmount:!this.data.isOtherAmount
+    })
+  },
   // js将数字转换成万 并且保留两位小数
   keepTwoDecimalFull (num) {
     if (num > 10000) {
@@ -199,8 +204,8 @@ Page({
   },
 
   // 获取钱包余额、提现判断
-  getLumpsumAndWithdraw(walletType=1){
-    api.getLumpsumAndWithdraw({walletType:walletType}).then((res) => {
+  getLumpsumAndWithdraw(){
+    api.getLumpsumAndWithdraw({walletType:this.data.walletType}).then((res) => {
       console.log('iofo',res)
       this.setData({
         info:res.data.data.info,

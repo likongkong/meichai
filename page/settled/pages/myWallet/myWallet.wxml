@@ -4,10 +4,10 @@
   <view class="announcement">
     {{notify}}
   </view>
-  <view class="labelWrap">
+  <!-- <view class="labelWrap">
     <text class="{{current==1?'active':''}}" data-index="1" catchtap="labelChange">入驻钱包</text>
     <text class="{{current==2?'active':''}}" data-index="2" catchtap="labelChange">展会钱包</text>
-  </view>
+  </view> -->
   <view class="headWrap">
     <view class="card">
       <!-- <image catchtap="clickme" src="https://cdn.51chaidan.com/images/brandSettledIcon/set.png" mode="widthFix"></image> -->
@@ -19,20 +19,20 @@
       <!-- </view> -->
 
       <view class="cardT">
-        <view class="balanceBox">
-          <text>可提现金额</text>
+        <view class="balanceBox" catchtap="toggleOtherAmount">
+          <view class="moneyBox">可提现金额 <image class="right_arrows" src="{{isOtherAmount?'https://cdn.51chaidan.com/images/icon/below_arrows.png':'https://cdn.51chaidan.com/images/icon/right_arrows.png'}}" mode="widthFix"></image></view>
           <text>￥{{info.can_income}}</text>
         </view>
         <view class="withdrawBtn"><button class='butUserImg' type='primary' catchtap="{{info.is_canWithdraw?'withdraw':'showLoading'}}"></button>立即提现</view>
       </view> 
       <view class="cardB">
-        <view>
-          <text>总资产</text>
-          <text>{{info.total_assets}}</text>
+        <view catchtap="toggleOtherAmount">
+          <view class="moneyBox">钱包余额<image class="right_arrows" src="{{isOtherAmount?'https://cdn.51chaidan.com/images/icon/below_arrows.png':'https://cdn.51chaidan.com/images/icon/right_arrows.png'}}" mode="widthFix"></image></view>
+          <text>￥{{info.total_assets}}</text>
         </view>
-        <view>
-          <text>累计提现</text>
-          <text>{{info.cumulative_withdrawals}}</text>
+        <view catchtap="toggleOtherAmount">
+          <view class="moneyBox">待结算金额<image class="right_arrows" src="{{isOtherAmount?'https://cdn.51chaidan.com/images/icon/below_arrows.png':'https://cdn.51chaidan.com/images/icon/right_arrows.png'}}" mode="widthFix"></image></view>
+          <text>￥{{info.to_be_settled}}</text>
         </view>
         <!-- <view>
           <text>钱包余额</text>
@@ -51,6 +51,39 @@
           <text>￥{{info.accumulated_income}}</text>
         </view> -->
       </view>
+      <view class="cardQWrap" wx:if="{{isOtherAmount}}">
+        <view class="cardQ">
+          <view>
+            <text>入驻可提现金额</text>
+            <text>￥{{info.can_income_pt}}</text>
+          </view>
+          <view>
+            <text>展会可提现金额</text>
+            <text>￥{{info.can_income_show}}</text>
+          </view>
+        </view>
+        <view class="cardQ">
+          <view>
+            <text>入驻钱包余额</text>
+            <text>￥{{info.total_assets_toy_pt}}</text>
+          </view>
+          <view>
+            <text>展会钱包余额</text>
+            <text>￥{{info.total_assets_toy_show}}</text>
+          </view>
+        </view>
+        <view class="cardQ">
+          <view>
+            <text>入驻待结算金额</text>
+            <text>￥{{info.to_be_settled_pt}}</text>
+          </view>
+          <view>
+            <text>展会待结算金额</text>
+            <text>￥{{info.to_be_settled_show}}</text>
+          </view>
+        </view>
+      </view>
+      
     </view>
     <!-- <view class="filterWrap">
       <view class="filterItem"> 
@@ -76,7 +109,7 @@
       <image src="/pages/images/icon_in.png" mode="widthFix"></image>
     </view>
     <view class="" data-type="9046" catchtap="comjumpwxnav">
-      <text>订单收入明细</text>
+      <text>钱包变动明细</text>
       <image src="/pages/images/icon_in.png" mode="widthFix"></image>
     </view>
     <!-- <view class="" catchtap="toggleExportOrdersMask"> -->

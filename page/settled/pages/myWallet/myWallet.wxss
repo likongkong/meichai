@@ -29,6 +29,15 @@ page{
   padding-top: 10rpx;
   padding-bottom: 20rpx;
 }
+.moneyBox{
+  display: flex;
+  align-items: center;
+}
+.right_arrows{
+  width: 32rpx;
+  height: auto;
+  margin-left: 12rpx;
+}
 .card{
   width: 98%;
   background-image: linear-gradient(to top right, #65C797, #4EE499);
@@ -46,15 +55,14 @@ page{
   align-items: center;
   padding-bottom: 44rpx;
 }
-.balanceBox text{
+.balanceBox view{
   color: #fff;
-  display: block;
-}
-.balanceBox text:first-child{
   font-size: 30rpx;
 }
-.balanceBox text:last-child{
+.balanceBox text{
   font-size: 52rpx;
+  color: #fff;
+  display: block;
 }
 .withdrawBtn{
   width: 230rpx;
@@ -82,14 +90,18 @@ page{
   align-items: center;
   padding-top: 50rpx;
 }
-.cardB view{
+.cardB>view{
   margin-right: 140rpx;
 }
-.cardB view:last-child{
+.cardB>view:last-child{
   margin-right: 0;
 }
 .cardB text:last-child{
   margin-top: 10rpx;
+}
+.cardB>view view{
+  color: #fff;
+  font-size: 28rpx;
 }
 .cardB text{
   display: block;
@@ -129,6 +141,33 @@ page{
   border: 4rpx solid rgba(255, 255, 255, 100);
   margin-top: 48rpx;
 } */
+
+.cardQ{
+  border-bottom: 2rpx solid #fff;
+  padding: 20rpx 0;
+  box-sizing: border-box;
+}
+.cardQ:first-child{
+  border-top: 2rpx solid #fff;
+  margin-top:34rpx;
+}
+.cardQ:last-child{
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.cardQ view{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cardQ view:first-child{
+  margin-bottom: 12rpx;
+}
+.cardQ view text{
+  font-size: 24rpx;
+  color:#ffffff;
+}
 
 
 .exportOrdersWrap{
