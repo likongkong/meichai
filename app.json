@@ -194,7 +194,12 @@
         "pages/delivery/delivery",
         "pages/goodsInformation/goodsInformation",
         "pages/sendBackLogistics/sendBackLogistics",
-        "pages/gwAgreement/gwAgreement"
+        "pages/gwAgreement/gwAgreement",
+        "pages/nPnfankingList/nPnfankingList",
+        "pages/solicitReviewList/solicitReviewList",
+        "pages/solicitReviewDetails/solicitReviewDetails",
+        "pages/solicitPictures/solicitPictures",
+        "pages/collectPictures/collectPictures"
       ]
     }
   ],

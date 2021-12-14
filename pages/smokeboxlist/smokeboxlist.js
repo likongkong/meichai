@@ -80,9 +80,20 @@ Page({
     jumpBulletBox:true,
     push_id:0,
     isBuyingTickets:false,
-    isGiveticket:false
+    isGiveticket:false,
+    PromptSwitchBack:false,
+    concealNum:1
   },
-
+  toggleExplain(){
+    this.setData({
+      concealNum:this.data.concealNum==0?1:0
+    })
+  },
+  showrule: function() {
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/gbaPage/gbaPage?webview=https://meichai-1300990269.cos.ap-beijing.myqcloud.com/activity_rules.json&from=blindBoxList",
+    });
+  },
   // tab切换
   tabbotdata: function (w) {
     var _this = this;
@@ -488,6 +499,7 @@ Page({
 
             _this.setData({
               // list: mlist,
+              infoData,
               list: listdata,
               alert: listData.alert,
               listbutnum: listbutnum,

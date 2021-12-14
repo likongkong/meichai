@@ -132,13 +132,13 @@
                 <!-- 动态固定大小 -->
                 <block wx:if='{{(item.type==3 || item.type==1) && item.imgArr.length==1}}'>
                     <view class="dynamicBox">
-                        <image class="emlcontentimg" style="width:100%;height:100%;" src="{{item.imgArr[0]}}" mode="aspectFill"></image>
+                        <image class="emlcontentimg" style="width:100%;height:100%;" src="{{item.imgArr[0]}}" mode="aspectFit"></image>
                     </view>
                 </block>
                 <block wx:else> 
                   <!-- 非动态单个图片 -->
                    <block wx:if='{{item.imgArr && item.imgArr.length ==1}}'>
-											 <image class="emlcontentimg" style="height:399rpx;" src="{{item.imgArr[0]}}" mode="aspectFill"></image>
+											 <image class="emlcontentimg" style="height:399rpx;" src="{{item.imgArr[0]}}" mode="aspectFit"></image>
 											 <!-- 未开始 -->
                        <image wx:if='{{item.status==1}}' class="statusImgBox" src="https://cdn.51chaidan.com/images/brandSettledIcon/NotStarted.png" mode="aspectFit"></image>
                        <!-- 已结束 -->
@@ -151,7 +151,7 @@
                    <!-- 非动态多个图片 -->
                    <block wx:else>
                         <view  class="dynamicBoxEve" wx:for='{{item.imgArr}}' wx:key='key'  wx:for-item='w' style="{{index%3==2?'margin-right:0;':''}}">
-                            <image class="emlcontentimg" style="width:100%;height:100%;" src="{{w}}" mode="aspectFill"></image>
+                            <image class="emlcontentimg" style="width:100%;height:100%;" src="{{w}}" mode="aspectFit"></image>
                         </view>
                    </block>
                 </block>
@@ -168,7 +168,7 @@
             <view class="barndStatus" style="font-size:26rpx;" wx:elif='{{item.type==1 || item.type==2 || item.type==5}}'>
                 <!-- 秒杀 -->
                 <block wx:if='{{item.type==1}}'> 
-                    <view class='dlfhtitlenew' style="color:#FF2742;font-size:26rpx;height: 40rpx;line-height: 40rpx;;">￥<text style="font-size:36rpx;">{{item.price}}</text><text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
+                    <view class='dlfhtitlenew' style="color:#FF2742;font-size:26rpx;height: 40rpx;line-height: 40rpx;;"><text wx:if="{{item.goods_type==3}}" style="font-size:34rpx">定金: </text>￥<text style="font-size:36rpx;">{{item.price}}</text><text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
                     <view class='dlfhtitlenew' style="color:#178FF8;font-size:26rpx;" wx:if='{{item.status==1}}'>
 											<block wx:if='{{item.specialWay > 0}}'>直播售卖</block>
                       <block wx:else>{{item.start_time}}发售</block>
@@ -241,7 +241,7 @@
         <view class='dlfevecom' style='float:left;'>
           <view class='dlfeveleft' wx:for='{{communityList}}' wx:key='key' wx:if='{{index%2==0}}'>
             <view style='position:relative;margin-bottom:10rpx;'>
-                <view style='width:360rpx;margin:auto;position:relative;max-height:340rpx;overflow: hidden;'  catchtap="jumpoffering" data-id="{{item.id}}" data-selltype='{{item.specialWay}}' data-istype='{{item.type}}'>
+                <view style='width:360rpx;margin:auto;position:relative;height:340rpx;overflow: hidden;'  catchtap="jumpoffering" data-id="{{item.id}}" data-selltype='{{item.specialWay}}' data-istype='{{item.type}}'>
                   <!-- <view class='dlfchrbright' wx:if='{{item.type==3}}'>动态</view>
                   <view class='dlfchrbright' wx:elif='{{item.type==1}}' style="background:#F5B1AE;">秒杀</view>
                   <view class='dlfchrbright' wx:elif='{{item.type==2}}' style="background:#9BE2F8;">抽选</view>
@@ -258,7 +258,7 @@
 									<image class="dlfchrbrightNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/selection.jpg" wx:elif='{{item.type==2}}' mode="aspectFit"></image>
 									<image class="dlfchrbrightNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/showBox.jpg" wx:elif='{{item.type==5}}' mode="aspectFit"></image>
 
-                  <image data-ind='{{index}}' style='width:360rpx;margin:auto;display:block;border-radius:10rpx 10rpx 0 0;' mode='widthFix' src='{{item.imgArr[0]}}?imageMogr2/thumbnail/720x'></image>
+                  <image data-ind='{{index}}' style='width:360rpx;height:340rpx;margin:auto;display:block;border-radius:10rpx 10rpx 0 0;' mode='aspectFit' src='{{item.imgArr[0]}}?imageMogr2/thumbnail/720x'></image>
                 </view>
             </view>
             <view class='dlfhtitlenew' wx:if='{{item.type==4}}'>签到赢积分</view>
@@ -286,7 +286,7 @@
                         <view style="float:right;color:#999495;" wx:if='{{item.sellNumber>0}}'>已售：{{item.sellNumber}}体</view>
                     </view>
                 </block>
-								<view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
+								<view class='dlfhtitlenew' style="color:#FF2742;"><text wx:if="{{item.goods_type==3}}">定金:</text>￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
             </block>
             <!-- 抽选 -->
             <block wx:elif='{{item.type==2}}'>
@@ -360,7 +360,7 @@
         <view class='dlfevecom' style='float:right;'>
           <view class='dlfeveright' wx:for='{{communityList}}' wx:key='key' wx:if='{{index%2==1}}'>
             <view style='position:relative;margin-bottom:10rpx;'>
-                <view style='width:360rpx;margin:auto;position:relative;max-height:340rpx;overflow: hidden;'  catchtap="jumpoffering" data-id="{{item.id}}" data-selltype='{{item.specialWay}}' data-istype='{{item.type}}'>
+                <view style='width:360rpx;margin:auto;position:relative;height:340rpx;overflow: hidden;'  catchtap="jumpoffering" data-id="{{item.id}}" data-selltype='{{item.specialWay}}' data-istype='{{item.type}}'>
                   <!-- <view class='dlfchrbright' wx:if='{{item.type==3}}'>动态</view>
                   <view class='dlfchrbright' wx:elif='{{item.type==1}}' style="background:#F5B1AE;">秒杀</view>
                   <view class='dlfchrbright' wx:elif='{{item.type==2}}' style="background:#9BE2F8;">抽选</view>
@@ -377,7 +377,7 @@
 									<image class="dlfchrbrightNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/selection.jpg" wx:elif='{{item.type==2}}' mode="aspectFit"></image>
 									<image class="dlfchrbrightNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/showBox.jpg" wx:elif='{{item.type==5}}' mode="aspectFit"></image>
 
-                  <image data-ind='{{index}}' style='width:360rpx;margin:auto;display:block;border-radius:10rpx 10rpx 0 0;' mode='widthFix' src='{{item.imgArr[0]}}?imageMogr2/thumbnail/720x'></image>
+                  <image data-ind='{{index}}' style='width:360rpx;height:340rpx;margin:auto;display:block;border-radius:10rpx 10rpx 0 0;' mode='aspectFit' src='{{item.imgArr[0]}}?imageMogr2/thumbnail/720x'></image>
                 </view>
             </view>
             <view class='dlfhtitlenew' wx:if='{{item.type==4}}'>签到赢积分</view>
@@ -405,7 +405,7 @@
                         <view style="float:right;color:#999495;" wx:if='{{item.sellNumber>0}}'>已售：{{item.sellNumber}}体</view>
                     </view>
                 </block>
-								<view class='dlfhtitlenew' style="color:#FF2742;">￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
+								<view class='dlfhtitlenew' style="color:#FF2742;"><text wx:if="{{item.goods_type==3}}">定金:</text>￥{{item.price}}<text style="color:#000;" wx:if='{{item.integralNumber}}'> +积分{{item.integralNumber}}</text></view>
             </block>
             <!-- 抽选 -->
             <block wx:elif='{{item.type==2}}'>

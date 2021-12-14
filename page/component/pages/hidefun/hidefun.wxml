@@ -41,7 +41,7 @@
 
 <view wx:if='{{isuccess}}' style='position:relative;padding-bottom:260rpx;'>
 
-  <view bindtap='openExplain' style='width:40rpx;height:40rpx;position:absolute;right:10rpx;top:10rpx;'>
+  <view bindtap='showrule' style='width:40rpx;height:40rpx;position:absolute;right:10rpx;top:10rpx;'>
     <image style='width:40rpx;height:40rpx;display:block;' src='../../../../pages/images/explain.png'></image>
   </view>
 
@@ -91,22 +91,20 @@
 
     <swiper wx:if='{{!funlist.listGoodsBanner}}' autoplay="{{false}}" indicator-color="#a39f99" indicator-active-color="#f49641" indicator-dots="{{false}}" duration="1000" previous-margin="205rpx" next-margin="205rpx" circular bindchange="bindchange" style='height:400rpx;'
       current='{{currentTab}}'>
-      <swiper-item wx:for="{{imgUrls}}" wx:key="{{index}}" style='position:relative;'>
-
+      <swiper-item wx:for="{{imgUrls}}" wx:key="index" style='position:relative;'>
         <view class="slide-image {{swiperIndex == index ? 'active' : 'quiet'}}" mode='aspectFill' style='width:340rpx;height:340rpx;position:relative;' data-id='{{item.goods_id}}' catchtap='imageclick'>
             <image wx:if='{{funlist.listGoodsBanner}}' src="{{item.image}}" style='width:340rpx;height:340rpx;display:block;'>
             </image>
             <image wx:if='{{!funlist.listGoodsBanner}}' src="{{item.goods_thumb}}" style='width:340rpx;height:340rpx;display:block;'>
             </image>
             <view wx:if='{{swiperIndex!=index}}' class='alignclass' style='width:350rpx;height:30rpx;color:#6FB7FD;font-size:24rpx;position:absolute;bottom:-30rpx;'>{{item.countNewHelper}}/{{item.freeBuyOrderGearLimit}}人</view>
- 
         </view>
       </swiper-item>
     </swiper>
 
     <swiper wx:if='{{funlist.listGoodsBanner}}' autoplay="{{true}}" indicator-color="#a39f99" indicator-active-color="#f49641" indicator-dots="{{false}}" duration="1000" circular bindchange="bindchange" style='width:350rpx;height:350rpx;margin-left:200rpx;'
       current='{{currentTab}}'>
-      <swiper-item wx:for="{{imgUrls}}" wx:key="{{index}}" style='position:relative;'>
+      <swiper-item wx:for="{{imgUrls}}" wx:key="index" style='position:relative;'>
 
         <view class="slide-image" mode='aspectFill' style='width:350rpx;height:350rpx;position:relative;' data-id='{{item.goods_id}}' catchtap='imageclick'>
             <image src="{{item.image}}" style='width:350rpx;height:350rpx;display:block;'></image>
@@ -120,7 +118,7 @@
       <view style='text-align:center;margin-top:20rpx;'>
         邀请
         <text style='font-size:32rpx;'>{{orderinfo.freeBuyOrderGearLimit}}</text> 名新朋友助力，
-        <text style='color:#F74646;' bindtap='openExplain'>免费</text> 赠送1{{orderinfo.freeBuyOrderSuit}}
+        <text style='color:#F74646;' bindtap='showrule'>免费</text> 赠送1{{orderinfo.freeBuyOrderSuit}}
       </view>
 
     </view>

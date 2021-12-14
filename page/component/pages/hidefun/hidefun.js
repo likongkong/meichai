@@ -1201,5 +1201,9 @@ Page({
     });
   },
 
-
+  showrule: function () {
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/gbaPage/gbaPage?webview=https://meichai-1300990269.cos.ap-beijing.myqcloud.com/activity_rules.json&from=hidefun",
+    });
+  },
 })

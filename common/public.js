@@ -1,9 +1,9 @@
 var Aes = require('crypto-js.js');  //引用AES源码js
 
-// var env = 'online';   //线上 
+// var env = 'online';   // 线上 
 // var env = 'qpe';  // 准生产环境
-var env = 'test';  //测试
-var versionnumber = '13.4.6';
+var env = 'test';  // 测试
+var versionnumber = '13.6.5';
 
 if(env == "online"){
   var key = Aes.enc.Utf8.parse("danzhuan1chaijia");
@@ -12,6 +12,7 @@ if(env == "online"){
 }else if(env == "test"){
   var key = Aes.enc.Utf8.parse("danzhuanichaijia");
 };
+
 
 // 公共地址 接口
 function comurl() {

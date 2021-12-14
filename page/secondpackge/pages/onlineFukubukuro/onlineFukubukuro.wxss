@@ -1,17 +1,33 @@
 @import "/pages/detailspage/detailspage.wxss";
 
 
-page {
+/* page {
   background-color: #FDD7D6 !important;
+} */
+
+.suspensionRankingList{
+  width: 60rpx;
+  height: 60rpx;
+  position: absolute;
+  right: 10rpx;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  z-index: 3;
+  border-radius: 50%;
 }
 
 .wrap {
   padding-bottom: 200rpx;
 }
 
-.banner image {
+.banner{
   width: 100%;
-  height: auto;
+  height: 320rpx;
+}
+.bannerImg{
+  width: 100%;
+  height: 100%;
   display: block;
 }
 
@@ -26,13 +42,21 @@ page {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .consumemessage swiper {
   width: 80%;
   height: 80rpx;
 }
-
+.consumemessage .MaskView{
+  width: 80%;
+  height: 80rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
 .consumemessage .swiper-item>view {
   height: 80rpx;
   line-height: 80rpx;
@@ -68,6 +92,120 @@ page {
   /* display: flex; */
   /* justify-content: space-between; */
 }
+.cardEve{
+   width: 700rpx;
+   height: 314rpx;
+   margin:0 auto 30rpx;
+   border-radius: 16rpx;
+}
+.cardEveLeftImg{
+  width: 314rpx;
+  height: 314rpx;
+  float: left;
+  border-radius: 16rpx 0 0 16rpx;
+}
+.cardEveRight{
+  float: right;
+  width: 326rpx;
+  padding:0 30rpx;
+  height: 314rpx;
+  border-radius: 0 16rpx 16rpx 0;
+  background: linear-gradient(to right, #74B3E0 , #A0F8FA);
+  position: relative;
+}
+.cardEveRPrcice{
+  padding-top: 30rpx;
+  color: #fff;
+  font-size:36rpx;
+}
+.cardEveRPrciceCom{
+  width: 90%;
+  color: #fff;
+  font-size: 22rpx;
+  margin-top: 15rpx;
+}
+.cardEveRButton{
+  width: 320rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 60rpx;
+  text-align: center;
+  color: #fff;
+  font-size: 28rpx;
+  background: #FE5D57;
+  position: absolute;
+  left: 30rpx;
+  bottom: 30rpx;
+}
+.cardEveLeftMark{
+  display: inline-block;
+  width: 25rpx;
+  height: 25rpx;
+  margin-left: 20rpx;
+  vertical-align: middle;
+}
+.onlineDetailTip{
+  width: 650rpx;
+  padding: 0 50rpx;
+  height: 1000rpx;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: #fff;
+  border-radius: 16rpx 16rpx 0 0;
+}
+.ODTHead{
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  position: relative;
+  font-size: 28rpx;
+}
+.ODTHeadTwo{
+  width: 100%;
+  font-size: 24rpx;
+  height: 30rpx;
+  margin-bottom: 30rpx;
+}
+.ODTHeadImg{
+  height: 30rpx;
+  width: 30rpx;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+.ODTScrollView{
+  width: 100%;
+  height: 830rpx;
+}
+.ODTEVE{
+  width: 192rpx;
+  display: inline-block;
+  height: 270rpx;
+  border: 2rpx solid #BBBBBB;
+  margin-bottom: 20rpx;
+  vertical-align: top;
+  border-radius: 10rpx;
+}
+.ODTEVEImg{
+  display: block;
+  height: 180rpx;
+  width: 180rpx;
+  margin:6rpx auto;
+  border-radius: 10rpx;
+}
+.ODTEVETxt{
+  width: 180rpx;
+  text-align: center;
+  line-height: 36rpx;
+  color: #101010;
+  font-size: 24rpx;
+  height: 70rpx;
+}
+
+
 
 .fukubukuroPic {
   width: 50%;
@@ -176,7 +314,7 @@ page {
   width: 200rpx;
   margin-bottom: 60rpx;
   display: inline-block;
-  margin-right: 42rpx;
+  margin-right: 40rpx;
   position: relative;
 }
 
@@ -256,6 +394,79 @@ page {
   display: block;
 }
 
+.offeringCalendar{
+  width: 700rpx;
+  background:#fff;
+  padding: 20rpx 25rpx;
+  height: 140rpx;
+  position: relative;
+  border-bottom: 2rpx solid #f5f5f5;
+}
+.ocswiper{
+  width: 140rpx;
+  height: 140rpx;
+  float: left;
+}
+.dateOffering{
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+.offeringCswiper{
+  width: 100%;
+  height: 100%;
+}
+.ocswiperImg{
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 15rpx;
+}
+.occoneter{
+  height: 140rpx;
+  float: left;
+  width:372rpx;
+  margin-left:30rpx;
+  position: relative;
+}
+.ocNameTop{
+  width: 100%;
+  padding-top: 17rpx;
+  font-size:34rpx;
+  max-height: 70rpx;
+}
+.ocNameBottom{
+  width: 100%;
+  height: 50rpx;
+  font-size: 24rpx;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  color: #999495;
+}
+.small_bell{
+  width: 28rpx;
+  height: 28rpx;
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  top: 3rpx;
+}
+.occoneterText{
+  width: 120rpx;
+  height: 120rpx;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 20rpx;
+  margin: auto;
+}
+.occoneterText image{
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 50%;
+}
 
 
 

@@ -1,0 +1,88 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class="nPnFLbox">
+    <view class="nPnFLboxTopRule">
+        <block wx:if='{{endTime == selectDate}}'>排行榜数据每5分钟更新，每日24点结束</block>
+        <block wx:else>{{selectDate}}  排行榜已结束</block>
+        <!-- <view class="nPnFLboxTopRuleTip" catchtap="toggleExplain">规则</view> -->
+    </view>
+    <view class="nPnFLboxEveBox">
+        <view style="width:15%;">排名</view>
+        <view style="width:15%;">头像</view>
+        <view style="width:20%;">昵称</view>
+        <view style="width:35%;">
+            <block wx:if='{{newdataexh}}'>福袋积分</block>
+            <block wx:else>购买福袋数</block>
+        </view>
+        <view style="width:15%;">奖励</view>
+    </view>
+
+    <view class="nPnFLbEBox" wx:for="{{listData}}" wx:key='key'>
+        <view style="width:15%;">{{item.rank}}</view>
+        <view style="width:15%;">
+            <image class="nPnspdetailImg" src="{{item.avatar}}"></image>
+        </view>
+        <view style="width:20%;" class="specialellipsis">{{item.nick}}</view>
+        <view style="width:35%;" class="specialellipsis">{{item.count}}</view>
+        <view style="width:15%;">
+            <image class="nPnspdetailImgShop" catchtap="shopImgTip" data-ind='{{index}}' src="{{item.img}}" mode="aspectFit"></image>
+        </view>
+    </view>
+
+    <!--  暂无数据  -->
+    <view class='noDataCom' wx:if='{{listData.length==0&&nodataiftr}}'>
+        <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
+    </view>
+
+    <view wx:if="{{!isFinish}}">
+      <view class="ViewHistory" catchtap="getdataLast" wx:if='{{endTime == selectDate}}'>
+        <!-- <picker mode="date" value="{{selectDate}}" start="{{start}}" end="{{endTime}}" bindchange="bindDateChange"> 查看历史排行</picker> -->
+          昨日排行
+      </view>
+      <view class="ViewHistory" catchtap="getdataLastToday" wx:else>
+          查看今日
+      </view>
+    </view>
+
+
+    <text class="npnRuleBottomHead">排行榜规则</text>
+    <text class="npnRuleBottom">{{ruleData}}</text>
+
+</view>
+
+<view class="nPnfankBottom" wx:if='{{infoData.user}}'>
+  <view class="nPnFLbEBox" style="border-bottom: 0;">
+        <view style="width:15%;">{{infoData.user.rank}}</view>
+        <view style="width:15%;">
+            <image class="nPnspdetailImg" src="{{infoData.user.avatar}}"></image>
+        </view>
+        <view style="width:20%;" class="specialellipsis">{{infoData.user.nick}}</view>
+        <view style="width:35%;" class="specialellipsis">{{infoData.user.count}}</view>
+        <view style="width:15%;"> 
+            <view catchtap="getdataLast" class="nPnfankBottomClick" wx:if='{{infoData.user.is_receive == 0 && endTime == selectDate}}'>去领奖</view>
+            <view class="nPnfankBottomClick" wx:elif='{{infoData.user.is_receive == 0}}'><button class='shareButton' type='primary' bindtap="getUserProfileSettled"></button>领奖</view>
+            <view class="nPnfankBottomClick" wx:elif='{{infoData.user.is_receive == 2 }}' style="background:#fff;color:#909090;">已领奖</view>
+        </view>
+  </view>
+</view>
+
+
+<!-- 规则 -->
+<view class="mask" wx:if="{{is_toggleExplain}}" catchtouchmove="true" catchtap="toggleExplain">
+  <view class="maskBox" catchtap="true">
+    <image mode="aspectFit" catchtap="toggleExplain" class="prizeClose" src="../../../../pages/images/forknumber.png"></image>
+    <text class="maskBoxtitle">排行榜规则</text>
+    <text class="maskTxt">{{ruleData}}</text>
+  </view>
+</view>
+
+<!-- 奖品 -->
+<view class="mask" wx:if="{{is_prize}}" catchtouchmove="true" catchtap="is_prizefun">
+  <view class="maskBox" catchtap="true" style="width:500rpx;">
+    <image mode="aspectFit" class="prizeClose" catchtap="is_prizefun" src="../../../../pages/images/forknumber.png"></image>
+    <text class="maskBoxtitle">第 {{selectData.rank}} 名奖品</text>
+    <image mode="widthFix" class="nPnprizeImg" src="{{selectData.img}}"></image>
+    <view class="nPnprizeName">{{selectData.name}}<text wx:if='{{selectData.num>1}}'>x{{selectData.num}}</text></view>
+  </view>
+</view>

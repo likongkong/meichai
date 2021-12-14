@@ -70,7 +70,7 @@
             <block wx:if='{{detailData.order.shippingCode}}'>修改物流</block>
             <block wx:else>添加物流</block>
         </view>
-        <!-- <view class="orderBottomNavEve bottomButComWidth" catchtap="commonBulletFrameFun" data-index='2' wx:if='{{detailData.order.payStatus!=7 && detailData.order.payTime>0}}'>退款</view> -->
+        <view class="orderBottomNavEve bottomButComWidth" catchtap="commonBulletFrameFun" data-index='2' wx:if='{{detailData.order.isBrandCanRefund}}'>退款</view>
         <view class="orderBottomNavEve bottomButComWidth" wx:if='{{detailData.order.payStatus !=4 && detailData.order.payStatus != 5}}' catchtap="commonBulletFrameFun" data-index='1'>修改收货地址</view>
     </view>
 
@@ -131,18 +131,18 @@
                     <view class="orderMangTipCenterEve">
                         <view>商品名称：{{selectData.goods.goodsName}}</view>
                     </view>
-                    <view class="orderMangTipCenterEve">
+                    <!-- <view class="orderMangTipCenterEve">
                         <view>退款明细</view>
-                    </view>
+                    </view> -->
                     <view class="orderMangTipCenterEve">
                         <view>商品售价：{{selectData.order.orderAmount}}</view>
                     </view>
-                    <view class="orderMangTipCenterEve">
+                    <!-- <view class="orderMangTipCenterEve">
                         <view>平台抽成：{{payInfoData.order.percentage}}</view>
-                    </view>                    
-                    <view class="orderMangTipCenterEve">
+                    </view>                     -->
+                    <!-- <view class="orderMangTipCenterEve">
                         <view>订单收入：{{payInfoData.order.profitAmount}}</view>
-                    </view>                    
+                    </view>                     -->
                     <view class="orderMangTipCenterEve">
                         <view>商家实际退款金额：{{payInfoData.order.profitAmount}}</view>
                     </view>
@@ -150,13 +150,41 @@
                         <view>平台实际退款金额：{{payInfoData.order.percentage}}</view>
                     </view>
                     <view class="orderMangTipCenterEve">
-                        <view>该订单已分账，需要您支付分账金额￥{{payInfoData.order.profitAmount}}。支付完成之后代表同意退款。</view>
+                        <view>该订单已进行分账处理，需要您支付分账金额￥{{payInfoData.order.profitAmount}}。支付完成之后代表同意退款。</view>
                     </view>
 
                 </view>                
             </block>
             <block wx:elif='{{subLedger==2}}'>
-                <view class="refundTxt">退款之后不可撤销，确认退款请点击立即退款。</view>    
+
+                <view class="orderMangTipCenter">
+                    <view class="orderMangTipCenterEve">
+                        <view>商品名称：{{selectData.goods.goodsName}}</view>
+                    </view>
+                    <!-- <view class="orderMangTipCenterEve">
+                        <view>退款明细</view>
+                    </view> -->
+                    <view class="orderMangTipCenterEve">
+                        <view>商品售价：{{selectData.order.orderAmount}}</view>
+                    </view>
+                    <!-- <view class="orderMangTipCenterEve">
+                        <view>平台抽成：{{payInfoData.order.percentage}}</view>
+                    </view>                     -->
+                    <!-- <view class="orderMangTipCenterEve">
+                        <view>订单收入：{{payInfoData.order.profitAmount}}</view>
+                    </view>                     -->
+                    <view class="orderMangTipCenterEve">
+                        <view>商家实际退款金额：{{payInfoData.order.profitAmount}}</view>
+                    </view>
+                    <view class="orderMangTipCenterEve">
+                        <view>平台实际退款金额：{{payInfoData.order.percentage}}</view>
+                    </view>
+                    <view class="orderMangTipCenterEve">
+                        <view>退款之后不可撤销，确认退款请点击立即退款。</view>
+                    </view>
+                </view>
+
+                <!-- <view class="refundTxt"></view>     -->
             </block>
                   
         </block>

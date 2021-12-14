@@ -244,6 +244,7 @@ Page({
                 payInfoData:payInfoData,
                 commonBulletFrame:true,
                 logisticsRefundModify:index,
+                selectData
               })
           }else{
             if(res.data && res.data.message){
@@ -409,7 +410,8 @@ Page({
         })
     };
     _this.setData({
-      commonBulletFrame:false
+      commonBulletFrame:false,
+      selectData
     })
   },
   conditionfun(){

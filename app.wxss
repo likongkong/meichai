@@ -138,3 +138,12 @@
 .shareButton{
   width:100%;height:100%;position:absolute;top:0;left:0;opacity:0;z-index: 1;
 }
+/*  双行  */
+.multilineellipsis{
+  display: -webkit-box;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:2;   
+}

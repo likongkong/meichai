@@ -1,0 +1,34 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class="elsearch">
+    <view class="elsearchch">
+        <image class="elserarchimg" catchtap="jumpsearch" src="https://www.51chaidan.com/images/toyCabinet/search.png"></image>
+        <input class="elinputbut" bindfocus='onFocus' placeholder='搜索' bindinput="inputChange" bindconfirm="jumpsearch" value="{{brand_name}}"></input>
+    </view>
+</view>
+<view class="srlBox">
+    <view class="srlBoxEve">
+        <view class="srlBoxEveName">征集名称征集名称征集名称（<text style="color:red;">进行中</text>）</view>
+        <view class="srlBoxEveTime">发布时间：2021-10-25</view>
+        <image class="spdetailImg" src="https://cdn.51chaidan.com/images/act/a1618456428.jpg" mode="widthFix"></image>
+        <view class="srlBoxEveBottom">
+            <view class="srlBoxEveBottomEve" style="color:#FA585E;">待审核：568</view>
+            <view class="srlBoxEveBottomEveCenter">已通过：568</view>
+            <view class="srlBoxEveBottomEve">未通过：568</view>
+        </view>
+    </view>
+
+    <view class="srlBoxEve">
+        <view class="srlBoxEveName">征集名称征集名称征集名称（<text style="color:#000;">已结束</text>）</view>
+        <view class="srlBoxEveTime">发布时间：2021-10-25</view>
+        <image class="spdetailImg" src="https://cdn.51chaidan.com/images/act/a1618456428.jpg" mode="widthFix"></image>
+        <view class="srlBoxEveBottom">
+            <view class="srlBoxEveBottomEve" style="color:#FA585E;">待审核：568</view>
+            <view class="srlBoxEveBottomEveCenter">已通过：568</view>
+            <view class="srlBoxEveBottomEve">未通过：568</view>
+        </view>
+    </view>
+
+
+</view>
