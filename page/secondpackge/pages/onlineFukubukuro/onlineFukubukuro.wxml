@@ -59,7 +59,7 @@
   <view class="content">
     <block wx:for="{{goodsList}}" wx:key='key'>
       <view class="cardEve">
-          <image class="cardEveLeftImg" catchtap="isDetailF" data-ia='{{item.all_goods_desc}}' src="{{item.goods_img}}" mode="aspectFit"></image>
+          <image class="cardEveLeftImg" catchtap="isDetailF" data-type='{{item.type}}' data-ia='{{item.all_goods_desc}}' src="{{item.goods_img}}" mode="aspectFit"></image>
           <view class="cardEveRight">
               <view class="cardEveRPrcice">{{item.price}}元超值福袋</view>
               <view class="cardEveRPrciceCom" catchtap="{{item.rule?'nineSpotNine':''}}" data-rule='{{item.rule}}' wx:if='{{item.isShowStock}}'>剩余：{{item.stockNumber}}/{{item.totalNumber}}<image wx:if='{{item.rule}}' class="cardEveLeftMark" src="https://cdn.51chaidan.com/images/luckBag/luckyBagIcon/wenhao.png" mode="aspectFit"></image></view>
@@ -233,14 +233,14 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
           <block wx:if='{{goodsDesc2.length != 0}}'>
               <view class="ODTHeadTwo" wx:if='{{goodsDesc2.length != 0 && goodsDesc1.length != 0}}'>稀有款</view>
               <view class="ODTEVE" wx:for='{{goodsDesc2}}' wx:key='key' style="{{index%3==1?'margin:0 30rpx 25rpx 30rpx;':''}}">
-                  <image src='{{item.goods_thumb}}' class='ODTEVEImg'></image>
+                  <image src='{{item.goods_thumb}}' mode="aspectFit" class='ODTEVEImg'></image>
                   <view class="ODTEVETxt multilineellipsis">{{item.goods_name}}</view>
               </view>
           </block>
           <block wx:if='{{goodsDesc1.length != 0}}'>
               <view class="ODTHeadTwo" wx:if='{{goodsDesc2.length != 0 && goodsDesc1.length != 0}}'>普通款</view>
               <view class="ODTEVE" wx:for='{{goodsDesc1}}' wx:key='key' style="{{index%3==1?'margin:0 30rpx 25rpx 30rpx;':''}}">
-                  <image src='{{item.goods_thumb}}' class='ODTEVEImg'></image>
+                  <image src='{{item.goods_thumb}}' mode="aspectFit" class='ODTEVEImg'></image>
                   <view class="ODTEVETxt multilineellipsis">{{item.goods_name}}</view>
               </view>
           </block>

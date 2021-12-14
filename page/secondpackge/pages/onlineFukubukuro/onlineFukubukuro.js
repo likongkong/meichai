@@ -70,7 +70,12 @@ Page({
     
     if(ia){
       goodsDesc1 = this.data.infoData.goodsDesc1;
-      goodsDesc2 = this.data.infoData.goodsDesc2;
+      let type = e.currentTarget.dataset.type || 0;
+      if(type == 5){
+        goodsDesc2 = this.data.infoData.goodsDesc3;
+      }else{
+        goodsDesc2 = this.data.infoData.goodsDesc2;
+      };
     }else{
       goodsDesc1 = this.data.infoData.goodsDesc1
     };
@@ -329,7 +334,6 @@ Page({
           if (raplist[i].day != '00' || raplist[i].hour != '00' || raplist[i].minute != '00' || raplist[i].second != '00') {
             iftrins = false;
           };
-          console.log(raplist)
       };
       _this.setData({
         goodsList: raplist
