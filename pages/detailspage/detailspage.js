@@ -3601,21 +3601,9 @@ Page({
           };
 
 
+        }else{
+          app.showToastC(res.data.Msg || res.data.msg);
         };
-        if (res.data.ReturnCode == 100) {
-          app.showToastC('该商品已下架');
-          wx.reLaunch({
-            url: "/pages/index/index?judgeprof=2"
-          });
-        };
-        if (res.data.ReturnCode == '000') {
-          app.showToastC('商品暂时找不到了');
-          wx.reLaunch({
-            url: "/pages/index/index?judgeprof=2"
-          });
-        };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
       }
     })    
   },
