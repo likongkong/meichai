@@ -51,6 +51,13 @@ Page({
     })
   },
 
+  // 更新用户信息
+  getUserProfileCom(w){
+    console.log(1111111)
+    app.getUserProfile((res,userInfo) => {
+      this.openingVip();
+    });
+  },
  // 开通VIP
  openingVip:function(){
 

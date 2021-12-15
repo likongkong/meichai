@@ -766,5 +766,17 @@ Page({
       success: function (res) {}
     } 
   },
-
+  businesscooperationfunfz(e){
+    let receipt = e.currentTarget.dataset.receipt;
+    let content = 
+    `收货人：${receipt.consignee}
+手机号码：${receipt.mobile}
+所在地区：${receipt.province}${receipt.city}${receipt.district}${receipt.address}`;
+    wx.setClipboardData({
+      data: content ||'',
+      success: function (res) {
+        app.showToastC('复制成功');
+      }
+    });
+  }
 })

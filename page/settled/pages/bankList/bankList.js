@@ -118,7 +118,7 @@ Page({
        mask:true
      })
      wx.request({
-       url: app.signindata.comurl + 'pingan.php' + qqq,
+       url: Dec.comurl() + 'pingan.php' + qqq,
        method: 'GET',
        header: {'Accept': 'application/json'},
        success: function (res) {
@@ -193,7 +193,7 @@ Page({
     console.log('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id)
     var qqq = Dec.Aese('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id);
     wx.request({
-      url: app.signindata.comurl + 'toy.php' + qqq,
+      url: Dec.comurl() + 'toy.php' + qqq,
       method: 'GET',
       header: {'Accept': 'application/json'},
       success: function (res) {

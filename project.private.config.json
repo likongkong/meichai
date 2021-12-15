@@ -324,6 +324,12 @@
           "pathName": "page/component/pages/webview/webview",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "page/settled/pages/orderManagement/orderManagement",
+          "pathName": "page/settled/pages/orderManagement/orderManagement",
+          "query": "",
+          "scene": null
         }
       ]
     }

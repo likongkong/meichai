@@ -168,6 +168,7 @@ Page({
   getbankCardList(){
     let _this = this;
     let qqq = Dec.Aese('mod=account&operation=getListForCard&uid='+this.data.uid+'&loginid='+this.data.loginid);
+    console.log('行卡列表请求==',Dec.comurl()+'mod=account&operation=getListForCard&uid='+this.data.uid+'&loginid='+this.data.loginid)
     wx.showLoading({
       title: '加载中...',
       mask:true
