@@ -237,8 +237,9 @@
 									  <block wx:if='{{!infoActivity.isReceived && appNowTime < infoActivity.finalPayTime}}'>请在{{infoActivity.finalPay_time}}付款</block>
 										<block wx:elif='{{!infoActivity.isReceived && appNowTime > infoActivity.finalPayTime}}'>您未在规定的时间内付款</block>
 								</view>
-								<view class="userHelpBut" style="background:#DBC69D;" catchtap="{{!infoActivity.isReceived && appNowTime < infoActivity.finalPayTime?'winnerlogic':'moreaction'}}">
-										<block wx:if='{{!infoActivity.isReceived && appNowTime < infoActivity.finalPayTime}}'>去付款</block>
+								<view class="userHelpBut" style="background:#DBC69D;" catchtap="{{!infoActivity.isReceived && appNowTime < infoActivity.finalPayTime?'':'moreaction'}}">
+									<!-- winnerlogic -->
+										<block wx:if='{{!infoActivity.isReceived && appNowTime < infoActivity.finalPayTime}}'><button class='shareButton' type='primary' bindtap="getUserProfileCom"></button>去付款</block>
 										<block wx:elif='{{!infoActivity.isReceived && appNowTime > infoActivity.finalPayTime}}'>查看其他活动</block>
 								</view>			 
 						</block>
@@ -556,8 +557,9 @@
 					<block>
 							<block wx:if='{{infoActivity.isSign}}'>
 								  <block wx:if='{{infoActivity.isWinner}}'>
-									  	<view wx:if='{{infoActivity.isReceived}}' class="purchaseNoOverdue" style="background:#B5B5B5;">已购买</view>
-										  <view wx:elif='{{!infoActivity.isReceived && appNowTime < infoActivity.finalPayTime}}' class="purchaseNoOverdue" catchtap="winnerlogic" style="background:#DBC69D;">立即支付</view>
+											<view wx:if='{{infoActivity.isReceived}}' class="purchaseNoOverdue" style="background:#B5B5B5;">已购买</view>
+											<!-- catchtap="winnerlogic" -->
+										  <view wx:elif='{{!infoActivity.isReceived && appNowTime < infoActivity.finalPayTime}}' class="purchaseNoOverdue" style="background:#DBC69D;"><button class='shareButton' type='primary' bindtap="getUserProfileCom"></button>立即支付</view>
 											<view wx:elif='{{!infoActivity.isReceived && appNowTime > infoActivity.finalPayTime}}' class="purchaseNoOverdue" style="background:#B5B5B5;">超时未付款</view>
 									</block>
 									<view wx:else class="purchaseNoOverdue" style="background:#B5B5B5;">您未中签</view>

@@ -1861,6 +1861,14 @@ Page({
     
 
   },
+  // 更新用户信息
+  getUserProfileCom(w){
+    var _this = this;
+    console.log(1111111)
+    app.getUserProfile((res,userInfo) => {
+        _this.winnerlogic(w)
+    },'',1);
+  },
 
   winnerlogic: function (e) {
     var _this = this;
