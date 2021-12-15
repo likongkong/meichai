@@ -115,6 +115,7 @@ Page({
             _this.setData({
                message:'',
                imageUrl:'',
+               sendMessageBtn: false,
                order:''
             })
             _this.getData();

@@ -82,7 +82,8 @@ page{
   line-height: 40rpx;
   font-size: 28rpx;
   font-family: 'PingFangSC-Regular';
-  color: #535252;
+  color: #909090;
+  padding-top: 10rpx;
 }
 .unread {
   top: 2rpx;

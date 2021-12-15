@@ -65,7 +65,7 @@
               </view>
               <view class="TUI-message-input-functions" hover-class="none">
                   <image class="TUI-icon" bindtap="handleEmoji" src="https://cdn.51chaidan.com/images/brandSettledIcon/chat_smiling_face.png" />
-                  <view wx:if="{{!sendMessageBtn}}" bindtap="handleExtensions">
+                  <view wx:if="{{!sendMessageBtn}}" bindtap="handleExtensions" style="display:flex;align-items:center;">
                       <image class="TUI-icon" src="https://cdn.51chaidan.com/images/brandSettledIcon/chat_plus_sign.png" />
                   </view>
                   <view wx:else class="TUI-sendMessage-btn" bindtap="sendTextMessageOne">
@@ -162,7 +162,7 @@
 <!-- 订单 -->
 <template name="OrderElem">
     <view class="custom-message {{isSelf?'my-custom':''}}">
-        <image class="custom-image" src="{{photo_url}}" />
+        <image class="custom-image" src="{{photo_url}}" mode="aspectFit" />
         <view class="custom-content">
           <view class="custom-content-title">{{order_name}}</view>
           <view class="custom-content-description">{{style}}</view>
