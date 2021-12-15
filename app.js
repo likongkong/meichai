@@ -1805,7 +1805,7 @@ App({
     });
   },
   // 获取用户头像名称授权
-  getUserProfile(successCallback, errorCallback){
+  getUserProfile(successCallback, errorCallback,type=0){  //type==1为强制授权
     var _this = this;
     console.log(wx.canIUse('getUserProfile'),wx.canIUse('getUserProfile'))
     // 请选择与登录信息相同账号，头像昵称不同会导致审核不通过
@@ -1847,7 +1847,9 @@ App({
             }) 
           },
           fail(res){
-            successCallback(res,'');
+            if(type!=1){
+              successCallback(res,'');
+            }
           },
         })
     }else{
