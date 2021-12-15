@@ -601,6 +601,15 @@ Page({
     })
     this.queuefun(2,2)
   },
+
+  // 更新用户信息
+  getUserProfileCom(w){
+    var _this = this;
+    console.log(1111111)
+    app.getUserProfile((res,userInfo) => {
+        _this.scrapingPurfun(w)
+    });
+  },
   // 刮奖购买
   scrapingPurfun:function(e){
     if(e.currentTarget.dataset.purchase){

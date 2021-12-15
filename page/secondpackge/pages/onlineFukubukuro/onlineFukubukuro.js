@@ -362,6 +362,14 @@ Page({
       isDeductNum:this.data.isUseBlindboxMoney?1:0
     })
   },
+
+  // 更新用户信息
+  getUserProfileCom(w){
+    var _this = this;
+    app.getUserProfile((res,userInfo) => {
+        _this.showbuybombsimmediately(w) 
+    });
+  },
   showbuybombsimmediately(e){
     let price =  e.currentTarget.dataset.price;
     this.setData({

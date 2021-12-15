@@ -59,6 +59,7 @@
   border-radius: 5rpx;
   text-align: center;
   margin: 40rpx 175rpx;
+  position: relative;
 }
 
 .cartimg {

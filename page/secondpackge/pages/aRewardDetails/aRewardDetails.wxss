@@ -257,6 +257,7 @@ page {
   border-radius: 60rpx;
   font-size: 28rpx;
   text-align: center;
+  position: relative;
 }
 
 .ardbmeleft{
