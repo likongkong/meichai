@@ -129,8 +129,9 @@
     
 
     
-
-    <view class="editButComment" catchtap="inputboxfun" style="background:#fff;height:80rpx;">
+    <!-- catchtap="inputboxfun" -->
+    <view class="editButComment" style="background:#fff;height:80rpx;position: relative;">
+        <button class='shareButton' type='primary' bindtap="getUserProfileCom"></button>
         <view class="editButComLeft" style="background:#f4f5f9;">
             <image class="editButComLeL" style="left: 15rpx;" mode="aspectFit" src='https://cdn.51chaidan.com/images/brandInfoIcon/setCommentIcon.png'></image>
             {{textconcent?textconcent:placeholderTxt}}

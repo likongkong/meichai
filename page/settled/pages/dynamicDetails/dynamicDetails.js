@@ -61,7 +61,15 @@ Page({
       }
     });
   },
+  // 更新用户信息
+  getUserProfileCom(w){
+    console.log(1111111)
+    app.getUserProfile((res,userInfo) => {
+      this.inputboxfun(w);
+    },'',1)
+  },
   inputboxfun:function(w){
+    console.log(w)
     var comment_id = w.currentTarget.dataset.comment_id || w.target.dataset.comment_id || 0;
     var _this = this;
     var name = w.currentTarget.dataset.name || w.target.dataset.name || 0;

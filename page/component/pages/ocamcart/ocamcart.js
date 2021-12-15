@@ -688,7 +688,13 @@ Page({
 
 
 
-
+  // 更新用户信息
+  getUserProfileCom(w){
+    console.log(1111111)
+    app.getUserProfile((res,userInfo) => {
+        this.dsbbbutclickt()
+    });
+  },
   // 立即购买弹框
   dsbbbutclickt: function () {
     var _this = this;
