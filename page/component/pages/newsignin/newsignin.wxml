@@ -73,8 +73,8 @@
           <image style="width:60rpx;border-radius:10rpx;" mode="widthFix" src="{{drawBoxGoodsInfo.img}}"> </image>
           <view class="sharenum" style="width:26rpx;line-height:26rpx;color:#d64650;font-size:20rpx;text-align:center;border:3rpx solid #d64650;">领</view>
         </view>
-
-        <view wx:if='{{signinfo.orderStatus == 6 && !signinfo.todayReceive}}' class="signinbtnstyle" catchtap="signin">签到</view>
+        <!-- catchtap="signin" -->
+        <view wx:if='{{signinfo.orderStatus == 6 && !signinfo.todayReceive}}' class="signinbtnstyle"><button class='shareButton' type='primary' bindtap="getUserProfileCom"></button>签到</view>
 
         <view wx:if='{{signinfo.orderStatus == 6 && signinfo.todayReceive}}' style="text-align:center;color:#8abe39;font-size:25rpx;line-height:40rpx;margin-top:40rpx;">签到成功，额外送你3张随机卡片(当日有效)</view>
         <view wx:if='{{signinfo.orderStatus == 6 && signinfo.todayReceive}}' class="signinbtnstyle" style="position:relative;background:#8abe39;margin:10rpx 175rpx 40rpx 175rpx;">好友互赠
