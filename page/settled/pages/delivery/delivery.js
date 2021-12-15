@@ -42,10 +42,11 @@ Page({
    */
   onLoad: function (options) {
     wx.hideShareMenu();
+    console.log(options)
     // '已经授权'
     this.data.loginid = app.signindata.loginid;
     this.data.uid = app.signindata.uid;
-    this.data.status  = options.status;
+    this.data.status  = Number(options.status);
     this.data.sendBackId  = options.sendBackId || 0;
     // 判断是否登录
     if (this.data.loginid != '' && this.data.uid != '') {
@@ -106,7 +107,7 @@ Page({
    */
   onPullDownRefresh: function () {
     app.downRefreshFun(() => {
-      this.getData()
+      this.getShowSendBack();
     })   
   },
 
@@ -145,15 +146,16 @@ Page({
       header: {'Accept': 'application/json'},
       success: function (res) {
         wx.hideLoading()
+        wx.stopPullDownRefresh();
         console.log('查看详情===',res)
         // if (res.data.ReturnCode == 200) {
           _this.data.order_id = res.data.List.order_id;
           if(_this.data.status == 1){
-            if(res.data.List.courierData.length == 0){
-              setTimeout(()=>{
-                _this.getShowSendBack(1);
-              },10000)
-            }
+            // if(res.data.List.courierData.length == 0){
+            //   setTimeout(()=>{
+            //     _this.getShowSendBack(1);
+            //   },10000)
+            // }
             if(!_this.data.isModification){
               _this.data.savedStart_time = res.data.List.StartTime;
               _this.data.savedEnd_date = res.data.List.EndTime;
@@ -169,7 +171,7 @@ Page({
               }
               _this.setData({
                 [`goodsInfo.kgNumber`]:res.data.List.GoodsWeight,
-                [`goodsInfo.kgNumber`]:res.data.List.GoodsWeight,
+                [`goodsInfo.pieceNumber`]:res.data.List.sendBackNumber,
                 [`goodsInfo.textareaInput`]:res.data.List.Remark,
                 tipname:res.data.List.senderInfo.consignee,
                 tipphone:res.data.List.senderInfo.mobile,
@@ -178,7 +180,8 @@ Page({
                 deliveryType:res.data.List.type,
                 audit_status:res.data.List.audit_status,
                 courierData:res.data.List.courierData,
-                takePhone:util.plusXing(res.data.List.courierData.PersonTel,3,4),
+                support_value:res.data.List.support_value,
+                takePhone:res.data.List.courierData.length!=0?util.plusXing(res.data.List.courierData.PersonTel,3,4):'',
               })
               _this.data.tipaid = res.data.List.senderInfo.address_id;
               if(res.data.List.exchangeGoodsInfo){
@@ -202,7 +205,9 @@ Page({
             }
           }else{
             _this.setData({
-              deliveryType:res.data.List.type
+              [`goodsInfo.pieceNumber`]:res.data.List.sendBackNumber,
+              deliveryType:res.data.List.type,
+              support_value:res.data.List.support_value,
             })
           }
           _this.nextpagediao();

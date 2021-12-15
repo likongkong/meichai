@@ -435,7 +435,7 @@ page{
 .popTitle{
   display: block;
   text-align: center;
-  font-size: 28rpx;
+  font-size: 30rpx;
   color: #101010;
   margin-bottom: 24rpx;
 }
@@ -452,6 +452,7 @@ page{
   position: relative;
   padding: 24rpx 34rpx;
   box-sizing: border-box;
+  background: #F2F2F2;
 }
 .jiantou{
   width: 100rpx;

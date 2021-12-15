@@ -40,13 +40,13 @@
                   <image src="{{sonitem.litpic}}" mode="widthFix"></image>
                 </block>
                 <block wx:elif="{{sonitem.flag==2}}">
-                  <image src="https://cdn.51chaidan.com/images/brandSettledIcon/orderIcon/refund.png" mode="widthFix"></image>
+                  <image style="border-radius:  0;" src="https://cdn.51chaidan.com/images/brandSettledIcon/orderIcon/refund.png" mode="widthFix"></image>
                 </block>
                 <block wx:elif="{{sonitem.flag==3}}">
-                  <image src="https://cdn.51chaidan.com/images/brandSettledIcon/orderIcon/withdraw.png" mode="widthFix"></image>
+                  <image style="border-radius:  0;" src="https://cdn.51chaidan.com/images/brandSettledIcon/orderIcon/withdraw.png" mode="widthFix"></image>
                 </block>
                 <block wx:elif="{{sonitem.flag==4}}">
-                  <image src="https://cdn.51chaidan.com/images/brandSettledIcon/chat_pay_the_fees.png" mode="widthFix"></image>
+                  <image style="border-radius:  0;" src="https://cdn.51chaidan.com/images/brandSettledIcon/chat_pay_the_fees.png" mode="widthFix"></image>
                 </block>
               </view>
               <view class="orderItemR">
@@ -74,7 +74,7 @@
         <block wx:else>
           <view class="orderItem" data-type="9031" data-whref="id={{sonitem.id}}&statustype={{sonitem.status_type}}" catchtap="comjumpwxnav">
               <view class="orderItemL">
-                <image src="https://cdn.51chaidan.com/images/brandSettledIcon/orderIcon/withdraw.png" mode="widthFix"></image>
+                <image style="border-radius:  0;" src="https://cdn.51chaidan.com/images/brandSettledIcon/orderIcon/withdraw.png" mode="widthFix"></image>
               </view>
               <view class="orderItemR" style="{{sonitem.status == 3?'display: flex;align-items: center;':''}}">
                 <view>

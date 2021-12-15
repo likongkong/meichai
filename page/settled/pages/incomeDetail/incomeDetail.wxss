@@ -318,12 +318,12 @@ page{
   border: none;
 }
 .orderItemL{
-  width: 88rpx;
+  width: 80rpx;
 }
 .orderItemL image{
-  width: 88rpx;
+  width: 80rpx;
   height: auto;
-  border-radius: 88rpx;
+  border-radius: 80rpx;
 }
 .orderItemR{
   width: 100%;

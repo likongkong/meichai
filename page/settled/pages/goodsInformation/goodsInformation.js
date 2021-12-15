@@ -33,6 +33,7 @@ Page({
     this.data.selectedGoodsArrIndex = options.selectedGoodsArrIndex;
     this.setData({
       kgNumber:options.kgNumber,
+      pieceNumber:options.pieceNumber,
       [`goodsArr[${options.selectedGoodsArrIndex}].active`]:true,
       textareaInput:options.textareaInput
     })

@@ -14,7 +14,7 @@
       </view>
     </view>
   </block>
-  <block wx:else>
+  <block wx:elif="{{status != 0}}">
     <view class="card">
       <text class="takeNumGenerated">取件码生成中</text>
     </view>
@@ -86,7 +86,7 @@
     </view>
     <view class="spaceBetween" style="margin-top:20rpx;">
       <text class="font28_101010">保费（收件方支付）</text>
-      <text class="font28_909090">无</text>
+      <text class="font28_909090">{{support_value}}</text>
     </view>
   </view>
 
@@ -122,7 +122,7 @@
       <view class="cancel {{audit_status==1?'':'unclickable'}}" catchtap="{{audit_status==1?'cancel':''}}">
         取消取件
       </view>
-      <view class="submitBtn1" catchtap="submitBtn">
+      <view class="submitBtn1 {{audit_status==1?'':'unclickable'}}" catchtap="{{audit_status==1?'submitBtn':''}}">
         提交
       </view>
     </view>

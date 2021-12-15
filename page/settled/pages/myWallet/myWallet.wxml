@@ -27,7 +27,7 @@
       </view> 
       <view class="cardB">
         <view catchtap="toggleOtherAmount">
-          <view class="moneyBox">钱包余额<image class="right_arrows" src="{{isOtherAmount?'https://cdn.51chaidan.com/images/icon/below_arrows.png':'https://cdn.51chaidan.com/images/icon/right_arrows.png'}}" mode="widthFix"></image></view>
+          <view class="moneyBox">总资产<image class="right_arrows" src="{{isOtherAmount?'https://cdn.51chaidan.com/images/icon/below_arrows.png':'https://cdn.51chaidan.com/images/icon/right_arrows.png'}}" mode="widthFix"></image></view>
           <text>￥{{info.total_assets}}</text>
         </view>
         <view catchtap="toggleOtherAmount">
@@ -54,22 +54,22 @@
       <view class="cardQWrap" wx:if="{{isOtherAmount}}">
         <view class="cardQ">
           <view>
+            <text>可提现金额</text>
+            <text>￥{{info.can_income}}</text>
+          </view>
+          <view>
+            <text>待结算金额</text>
+            <text>￥{{info.to_be_settled}}</text>
+          </view>
+        </view>
+        <view class="cardQ">
+          <view>
             <text>入驻可提现金额</text>
             <text>￥{{info.can_income_pt}}</text>
           </view>
           <view>
             <text>展会可提现金额</text>
             <text>￥{{info.can_income_show}}</text>
-          </view>
-        </view>
-        <view class="cardQ">
-          <view>
-            <text>入驻钱包余额</text>
-            <text>￥{{info.total_assets_toy_pt}}</text>
-          </view>
-          <view>
-            <text>展会钱包余额</text>
-            <text>￥{{info.total_assets_toy_show}}</text>
           </view>
         </view>
         <view class="cardQ">
@@ -267,7 +267,8 @@
   <text class="popTitle">选择提现银行卡</text>
   <view class="popContentWrap">
     <block wx:for="{{verifyCard}}" wx:key="key">
-      <view class="accountItme" data-id="{{item.id}}" catchtap="bideWithdraw">
+      <!-- catchtap="bideWithdraw" -->
+      <view class="accountItme" data-id="{{item.id}}">
         <view class="accountItme_img">
           <image src="{{item.bankImg}}" mode="widthFix"></image>
         </view>
@@ -325,7 +326,7 @@
   <view class="hintTxt" catchtap="toogleBankcardlistMask">每名用户只能绑定一张银行卡，可<text style="color:#6EB4BF;">前往银行卡页面</text>更换</view>
   <view class="setfooter">
     <view class="footerWrap">
-        <view style="width:100%;" bindtap="hideModal">关闭</view>
+        <view style="width:100%;" bindtap="bideWithdraw">确定</view>
     </view>
   </view>
 </view>
