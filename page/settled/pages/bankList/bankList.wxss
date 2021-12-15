@@ -84,8 +84,7 @@ page{
   font-size: 28rpx;
 }
 .ocamensweveNew{
-  height: 90rpx;
-  line-height: 90rpx;
+  padding: 25rpx 0;
   background: #fff;
   font-size: 32rpx;
   border-bottom: 2rpx solid #f4f5f9;  

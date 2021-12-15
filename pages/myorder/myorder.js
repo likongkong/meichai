@@ -204,11 +204,21 @@ Page({
   // 查看物流
   lookatthelogistics:function(w){
     var oid = w.target.dataset.oid || w.currentTarget.dataset.oid;
+    var id = w.target.dataset.id || w.currentTarget.dataset.id;
     var gcover = w.target.dataset.gcover || w.currentTarget.dataset.gcover;
     wx.navigateTo({  
-      url: "/pages/lookatthelogistics/lookatthelogistics?oid="+oid+'&gcover='+gcover
+      url: "/pages/lookatthelogistics/lookatthelogistics?oid="+oid+'&gcover='+gcover+'&id='+id
     })
   },
+  // 寄回物流
+  sendBackLogistics:function(w){
+    var id = w.target.dataset.id || w.currentTarget.dataset.id;
+    var gcover = w.target.dataset.gcover || w.currentTarget.dataset.gcover;
+    wx.navigateTo({  
+      url:'/page/settled/pages/sendBackLogistics/sendBackLogistics?id='+id+'&gcover='+gcover
+    })
+  },
+
   // tab切换
   myorhfun:function(e){
     this.setData({
@@ -614,6 +624,10 @@ Page({
         ticketIdentify:arr[j][0].ticketIdentify || '',
         keyDay:arr[j][0].keyDay || '0',
         isReceive:arr[j][0].isReceive || false,
+        isSendBack:arr[j][0].isSendBack || false,
+        sendBackStatus:arr[j][0].sendBackStatus || false,
+        sendBackAuditStatus:arr[j][0].sendBackAuditStatus || false,
+        sendBackId:arr[j][0].sendBackId || 0,
       })
     };   
     if (arrchil && arrchil.length != 0){
@@ -1502,6 +1516,10 @@ Page({
         awatip: true,
         awardrresentiftr:false
       })
+    } else if (item_type == 9054) {   // 取件信息
+      wx.navigateTo({
+        url: `/page/settled/pages/delivery/delivery?${whref}`
+      });      
     };
   }, 
 

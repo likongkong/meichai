@@ -42,8 +42,7 @@ Page({
       {'n':'全部',id:0},
       {'n':'限时商品',id:'1'},
       {'n':'限量商品',id:'2'},
-      {'n':'抽选商品',id:4},
-      {'n':'展会商品',id:'3'}
+      {'n':'抽选商品',id:4}
     ],
     screenWords:'筛选',
     shareImgTipIs:false
@@ -457,13 +456,13 @@ Page({
     };
     var title = app.signindata.titleShare?app.signindata.titleShare:'你喜欢的潮玩都在这里！'
     var onshareUrl = 'pages/index/index';
-    var onshareImg = indexShareImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg';
+    var onshareImg = indexShareImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg';
 
     if (options.from == 'button') {
       var num = options.target.dataset.num;
       var selectData = _this.data.order[num];
       title = selectData.itemName || '你喜欢的潮玩都在这里！';
-      onshareImg = selectData.itemImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg';
+      onshareImg = selectData.itemImg || 'https://www.51chaidan.com/images/background/zhongqiu/midautumn_share.jpg';
       if (selectData.itemType == '-1'){  // 正常商品
         onshareUrl = '/pages/detailspage/detailspage?gid=' + selectData.itemId + '&referee=' + app.signindata.uid;
       }else if(selectData.itemType == 4){ // 抽选

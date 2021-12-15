@@ -1,0 +1,74 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class="wrap">
+  <view class="card">
+    <view class="title">
+      预估重量
+    </view>
+    <view class="subtitle">
+      实际重量以快递员最后核实为准
+    </view>
+    <view class="weightInputWrap">
+      <view data-type="1" catchtap="addSubtract">-</view>
+      <view>
+        <input type="number" maxlength="5" data-type="0" placeholder="" bindinput="bindKeyInput" value="{{kgNumber}}"/>
+        <text>KG</text>
+      </view>
+      <view data-type="0" catchtap="addSubtract">+</view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="title">
+      物品件数
+    </view>
+    <view class="subtitle">
+      实际件数以快递员最后核实为准
+    </view>
+    <view class="weightInputWrap">
+      <view data-type="1" catchtap="pieceAddSubtract">-</view>
+      <view>
+        <input type="number" maxlength="5" placeholder="" data-type="1" bindinput="bindKeyInput" value="{{pieceNumber}}"/>
+        <text>件</text>
+      </view>
+      <view data-type="0" catchtap="pieceAddSubtract">+</view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="title">
+      物品类型
+    </view>
+    <view class="labelWrap">
+      <block wx:for="{{goodsArr}}" wx:key="key">
+        <text class="{{item.active?'active':''}}" data-id="{{item.id}}" catchtap="stdmode">{{item.name}}</text>
+      </block>
+      <!-- <text catchtap="stdmode">日用品</text>
+      <text catchtap="stdmode">服饰</text> -->
+    </view>
+    <!-- <view class="customWrap">
+      <text>自定义（更多物品类型，请使用自定义）</text>
+      <input type="text" placeholder="请输入自定义类型名称（限10字）" maxlength="10"/>
+    </view> -->
+  </view>
+
+  <view class="card">
+    <view class="title">
+      备注
+    </view>
+    <view class="labelWrap">
+      <text data-txt="请带面单" catchtap="fastRemarks">请带面单</text>
+      <text data-txt="缺文件袋" catchtap="fastRemarks">缺文件袋</text>
+      <text data-txt="请带胶带" catchtap="fastRemarks">请带胶带</text>
+    </view>
+    <textarea class="textarea" bindinput="bindTextAreaInput" placeholder="其他需要注意事项" value="{{textareaInput}}" />
+  </view>
+
+  <view class="footer">
+    <view class="submitBtn" catchtap="submitBtn">
+      确认
+    </view>
+  </view>
+</view>
+

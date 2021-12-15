@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '全部IP',
+    c_title: '添加银行开户行',
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
@@ -32,12 +32,27 @@ Page({
     var bankName = w.currentTarget.dataset.bankname || w.target.dataset.bankname || 0;
     let pages = getCurrentPages();    //获取当前页面信息栈
     let prevPage = pages[pages.length-2];
-    prevPage.setData({
-      [`enterpriseData[2].value`]:bankName
-    })
-    prevPage.data.obj.bankdeposit = bankcode;
-
-    prevPage.getProvince()
+    if(this.data.cityCode){
+      prevPage.setData({
+        [`enterpriseData1[2].value`]:bankName,
+      })
+      prevPage.data.obj.bankSubBranch = bankcode;
+      prevPage.data.obj.bankLName = bankName;
+    }else{
+      prevPage.setData({
+        [`enterpriseData1[0].value`]:bankName,
+        [`enterpriseData1[1].value`]:'',
+        [`enterpriseData1[2].value`]:'',
+        [`enterpriseData1[1].isClick`]:false,
+        [`enterpriseData1[2].isClick`]:true,
+      })
+      prevPage.data.obj.bankdeposit = bankcode;
+      prevPage.data.obj.bankName = bankName;
+      prevPage.data.obj.provinceCode = '';
+      prevPage.data.obj.cityCode = '';
+      prevPage.data.obj.bankSubBranch = '';
+      prevPage.getProvince()
+    }
     wx.navigateBack({
       delta: 1
     })
@@ -62,17 +77,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var _this = this;
     wx.hideShareMenu();
-
+    this.setData({
+      bankCode: options.bankCode||0,
+      cityCode: options.cityCode||0,
+    });
     // '已经授权'
-    _this.data.loginid = app.signindata.loginid;
-    _this.data.uid = app.signindata.uid;
+    this.data.loginid = app.signindata.loginid;
+    this.data.uid = app.signindata.uid;
     // 判断是否登录
-    if (_this.data.loginid != '' && _this.data.uid != '') {
-      _this.onLoadfun();
+    if (this.data.loginid != '' && this.data.uid != '') {
+      this.onLoadfun();
     } else {
-      app.signin(_this)
+      app.signin(this)
     };
 
   },
@@ -89,8 +106,13 @@ Page({
   },
   getData(){
      var _this = this;
-     console.log('mod=account&operation=listBank&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&bankName='+_this.data.bankname||'')
-     var qqq = Dec.Aese('mod=account&operation=listBank&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&bankName='+_this.data.bankname||'');
+     if(this.data.cityCode){
+        console.log('mod=account&operation=searchBank&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&bankCode='+_this.data.bankCode+'&cityCode='+_this.data.cityCode+'&bankName='+_this.data.bankname||'')
+        var qqq = Dec.Aese('mod=account&operation=searchBank&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&bankCode='+_this.data.bankCode+'&cityCode='+_this.data.cityCode+'&bankName='+_this.data.bankname||'');
+     }else{
+        console.log('mod=account&operation=listBank&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&bankName='+_this.data.bankname||'')
+        var qqq = Dec.Aese('mod=account&operation=listBank&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&bankName='+_this.data.bankname||'');
+     }
      wx.showLoading({
        title: '加载中...',
        mask:true
@@ -103,17 +125,28 @@ Page({
          wx.hideLoading()
          console.log('银行列表=====',res)
          if (res.data.ReturnCode == 200) {
-          _this.setData({
-            listBank:res.data.List.bank
-          },()=>{
-            wx.createSelectorQuery()
-              .selectAll('.letterBoxEve')
-              .boundingClientRect()
-              .exec(function(res) {
-                 console.log('arrTouchBarPosition=====',res[0])
-                  _this.data.arrTouchBarPosition = res[0];  // 需要预先定义arrTouchBarPosition
-              });
-          });
+          if(res.data.List.bank.length == 0 && _this.data.bankname=='' && _this.data.cityCode){
+            app.showToastC('此地区没有支行信息',1500)
+            setTimeout(function(){
+              wx.navigateBack({
+                delta: 1
+              })
+            },1500)
+          }else if(res.data.List.bank.length == 0 && _this.data.bankname!=''){
+            app.showToastC('没有该数据')  
+          }else{
+            _this.setData({
+              listBank:res.data.List.bank
+            },()=>{
+              wx.createSelectorQuery()
+                .selectAll('.letterBoxEve')
+                .boundingClientRect()
+                .exec(function(res) {
+                   console.log('arrTouchBarPosition=====',res[0])
+                    _this.data.arrTouchBarPosition = res[0];  // 需要预先定义arrTouchBarPosition
+                });
+            });
+          }
          }else{
            app.showToastC(res.data.Msg)  
          };

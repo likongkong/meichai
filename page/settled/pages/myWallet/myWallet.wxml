@@ -1,11 +1,13 @@
-
-
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 <view class="wrap">
   <view class="announcement">
     {{notify}}
   </view>
+  <!-- <view class="labelWrap">
+    <text class="{{current==1?'active':''}}" data-index="1" catchtap="labelChange">入驻钱包</text>
+    <text class="{{current==2?'active':''}}" data-index="2" catchtap="labelChange">展会钱包</text>
+  </view> -->
   <view class="headWrap">
     <view class="card">
       <!-- <image catchtap="clickme" src="https://cdn.51chaidan.com/images/brandSettledIcon/set.png" mode="widthFix"></image> -->
@@ -17,14 +19,22 @@
       <!-- </view> -->
 
       <view class="cardT">
-        <view class="balanceBox">
-          <text>可提现金额</text>
+        <view class="balanceBox" catchtap="toggleOtherAmount">
+          <view class="moneyBox">可提现金额 <image class="right_arrows" src="{{isOtherAmount?'https://cdn.51chaidan.com/images/icon/below_arrows.png':'https://cdn.51chaidan.com/images/icon/right_arrows.png'}}" mode="widthFix"></image></view>
           <text>￥{{info.can_income}}</text>
         </view>
-        <view class="withdrawBtn" catchtap="withdraw">立即提现</view>
+        <view class="withdrawBtn"><button class='butUserImg' type='primary' catchtap="{{info.is_canWithdraw?'withdraw':'showLoading'}}"></button>立即提现</view>
       </view> 
       <view class="cardB">
-        <view>
+        <view catchtap="toggleOtherAmount">
+          <view class="moneyBox">总资产<image class="right_arrows" src="{{isOtherAmount?'https://cdn.51chaidan.com/images/icon/below_arrows.png':'https://cdn.51chaidan.com/images/icon/right_arrows.png'}}" mode="widthFix"></image></view>
+          <text>￥{{info.total_assets}}</text>
+        </view>
+        <view catchtap="toggleOtherAmount">
+          <view class="moneyBox">待结算金额<image class="right_arrows" src="{{isOtherAmount?'https://cdn.51chaidan.com/images/icon/below_arrows.png':'https://cdn.51chaidan.com/images/icon/right_arrows.png'}}" mode="widthFix"></image></view>
+          <text>￥{{info.to_be_settled}}</text>
+        </view>
+        <!-- <view>
           <text>钱包余额</text>
           <text>￥{{info.wallet_balance}}</text>
         </view>
@@ -39,8 +49,41 @@
         <view>
           <text>累计收入</text>
           <text>￥{{info.accumulated_income}}</text>
+        </view> -->
+      </view>
+      <view class="cardQWrap" wx:if="{{isOtherAmount}}">
+        <view class="cardQ">
+          <view>
+            <text>可提现金额</text>
+            <text>￥{{info.can_income}}</text>
+          </view>
+          <view>
+            <text>待结算金额</text>
+            <text>￥{{info.to_be_settled}}</text>
+          </view>
+        </view>
+        <view class="cardQ">
+          <view>
+            <text>入驻可提现金额</text>
+            <text>￥{{info.can_income_pt}}</text>
+          </view>
+          <view>
+            <text>展会可提现金额</text>
+            <text>￥{{info.can_income_show}}</text>
+          </view>
+        </view>
+        <view class="cardQ">
+          <view>
+            <text>入驻待结算金额</text>
+            <text>￥{{info.to_be_settled_pt}}</text>
+          </view>
+          <view>
+            <text>展会待结算金额</text>
+            <text>￥{{info.to_be_settled_show}}</text>
+          </view>
         </view>
       </view>
+      
     </view>
     <!-- <view class="filterWrap">
       <view class="filterItem"> 
@@ -61,8 +104,12 @@
   </view>
 
   <view class="infoBox">
+    <view class="" catchtap="toogleBankcardlistMask">
+      <text>银行卡</text>
+      <image src="/pages/images/icon_in.png" mode="widthFix"></image>
+    </view>
     <view class="" data-type="9046" catchtap="comjumpwxnav">
-      <text>余额明细</text>
+      <text>钱包变动明细</text>
       <image src="/pages/images/icon_in.png" mode="widthFix"></image>
     </view>
     <!-- <view class="" catchtap="toggleExportOrdersMask"> -->
@@ -70,10 +117,10 @@
       <text>导出账单</text>
       <image src="/pages/images/icon_in.png" mode="widthFix"></image>
     </view>
-    <view class="" catchtap="jinqingqidai"> 
+    <!-- <view class="" catchtap="jinqingqidai"> 
       <text>钻石/水晶明细</text>
       <image src="/pages/images/icon_in.png" mode="widthFix"></image>
-    </view>
+    </view> -->
   </view>
 
   <view class="explainWrap">
@@ -169,15 +216,16 @@
     <text class="excessTxt" wx:if="{{viewWithdrawalInfo.exceeding_remark}}">{{viewWithdrawalInfo.exceeding_remark}}</text>
     <view class="twoConfirmationContent" style="{{viewWithdrawalInfo.exceeding_remark?'padding:0 40rpx;box-sizing: border-box;':''}}">
       <view>提现金额：￥{{viewWithdrawalInfo.cashableBalance}}</view>
-      <view>渠道费用：￥{{viewWithdrawalInfo.channel_fees}}（{{viewWithdrawalInfo.channel_fees_scale}}%）</view>
+      <!-- （{{viewWithdrawalInfo.channel_fees_scale}}%） -->
+      <view>渠道费用：{{viewWithdrawalInfo.channel_fees}}</view>
       <view>实际到账：<text>￥{{viewWithdrawalInfo.actually_arrived}}</text></view>
       <view wx:if="{{viewWithdrawalInfo.exceeding_remark}}">提现后账号余额：￥{{viewWithdrawalInfo.posts_the_account_balance}}</view>
       <view>{{viewWithdrawalInfo.remark}}</view>
     </view>
-    <view class="realname" wx:if="{{viewWithdrawalInfo.account_type == 2}}">
+    <!-- <view class="realname" wx:if="{{viewWithdrawalInfo.account_type == 2}}">
       <view class="txt"><text>*</text>到账实名认证</view>
       <input type="text" placeholder="请输入绑定微信支付的实名" bindinput="bindRealnameInput" value="{{realname}}" />
-    </view>
+    </view> -->
     <view style="padding:0 25rpx; box-sizing: border-box;">
       <view class="footerWrap">
         <view bindtap="hidetwoAffirm">取消</view>
@@ -187,38 +235,46 @@
   </view>
 </view>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!-- 验证弹框 -->
+<view class="mask" wx:if="{{isVerification}}" catchtouchmove="true" catchtap="toogleVerificationMask">
+  <view class="maskBox verificationBox" catchtap="true"> 
+    <view>
+      <text class="subTitle">打款金额：</text>
+      <input type="text" placeholder="请输入对公账户的打款金额" data-name="verificationMoney" bindinput="onKeyInput"/>
+      <text class="subTitle">验证码：</text>
+      <input type="text" placeholder="请输入认证绑卡的验证码" data-name="verificationCode" bindinput="onKeyInput"/>
+      <view class="verificationExplain">
+        <text>验证说明</text>
+        <view>1.提交企业信息后，我们将发送短信通知您已发起打款申请，并在30分钟~3工作日内向您的帐号提交的银行账户打一笔小于1元的款项。</view>
+        <view>2.您收到发起打款申请的通知后，请关注银行到账进展。打款到账后，请登录小程序进入“钱包-银行卡”输入打款金额<text>(如:收到金额为0.02元，则输入0.02)</text>，提交认证。</view>
+        <view>3.您有2次机会申请银行打款认证，每次认证有2次机会验证打款金额。如果您申请的2次银行打款认证都未能通过，只能选择人工审核认证方式进行认证。</view>
+      </view>
+    </view>
+    <view>
+      <view class="footerWrap">
+        <view catchtap="toogleVerificationMask">取消</view>
+        <view catchtap="merchantVerification">提交验证</view>
+      </view>
+    </view>
+  </view>
+</view>
 
 <!--设置弹出框  -->
 <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
 <!-- <view animation="{{animationData}}" class="commodity_attr_box" style="height:{{popHeight}}rpx" wx:if="{{showModalStatus}}"> -->
 <view class="commodity_attr_box" wx:if="{{showModalStatus}}">
   <!-- <text class="popTitle">{{currentAccount?'修改绑定账户':'首次提现请先绑定提现账户类型'}}</text> -->
-  <text class="popTitle">选择提现账户</text>
+  <text class="popTitle">选择提现银行卡</text>
   <view class="popContentWrap">
-    <block wx:for="{{accountList}}" wx:key="key">
-      <view class="accountItme {{item.isdefault==1?'active':''}}" data-ind="{{index}}" catchtap="changeAccount">
+    <block wx:for="{{verifyCard}}" wx:key="key">
+      <!-- catchtap="bideWithdraw" -->
+      <view class="accountItme" data-id="{{item.id}}">
         <view class="accountItme_img">
-          <image src="{{item.img}}" mode="widthFix"></image>
+          <image src="{{item.bankImg}}" mode="widthFix"></image>
         </view>
         <view class="accountItme_info">
-          <view class="accountItme_info_title">{{item.bank_name}} {{item.account_type == 1?item.account_name1:''}}<text>{{item.quota}}</text> </view>
-          <view class="accountItme_info_txt">{{item.remark}}</view>
-        </view>
-        <view class="jiantou" wx:if="{{item.account_type == 1}}" catchtap="toogleBankcardlistMask">
-          <image src="/pages/images/icon_in.png" mode="aspectFill"></image>
+          <view class="accountItme_info_title">{{item.bankName}} ({{item.tailNumber}})</view>
+          <view class="accountItme_info_txt">三个工作日内到账</view>
         </view>
       </view>
       <!-- <block wx:if="{{bankCardList.length!=0}}">
@@ -235,12 +291,12 @@
       </block>
        -->
     </block>
-    <block wx:if="{{accountList.length==1}}">
+    <!-- <block wx:if="{{accountList.length==1}}">
       <view class="tiedCardWrap" data-type="9045" data-whref="from=account" catchtap="comjumpwxnav">
         <image src="http://cdn.51chaidan.com/images/brandInfoIcon/bank_card.png" mode="widthFix"></image>
         <text>绑定银行卡</text>
       </view>
-    </block>
+    </block> -->
     <!-- <block wx:for="{{accountList}}" wx:key="index">
       <view class="popContentItem" data-ind="{{index}}" catchtap="chooseAccount">
         <view class="accountTitle" data-type="{{item.account_type}}">
@@ -267,11 +323,10 @@
       </view>
     </view> -->
   </view>
-  <text class="hintTxt">每天可提现一次，暂只支持全额提现</text>
+  <view class="hintTxt" catchtap="toogleBankcardlistMask">每名用户只能绑定一张银行卡，可<text style="color:#6EB4BF;">前往银行卡页面</text>更换</view>
   <view class="setfooter">
     <view class="footerWrap">
-        <view bindtap="hideModal">关闭</view>
-        <view catchtap="bideWithdraw">立即提现</view>
+        <view style="width:100%;" bindtap="bideWithdraw">确定</view>
     </view>
   </view>
 </view>
@@ -284,25 +339,57 @@
       <block wx:for="{{bankCardList}}" wx:key="key">
         <view class="accountItme" data-ind="{{index}}" catchtap="choiceBankCard">
           <view class="accountItme_img">
-            <image src="{{item.img}}" mode="widthFix"></image>
+            <image src="{{item.bankImg}}" mode="widthFix"></image>
           </view>
           <view class="accountItme_info">
-            <view class="accountItme_info_title">{{item.bank_name}}{{item.account_name1}}</view>
-            <view class="accountItme_info_txt">{{item.remark}}</view>
+            <view class="accountItme_info_title">{{item.bankName}}({{item.tailNumber}})</view>
+            <view class="accountItme_info_txt">三个工作日内到账</view>
           </view>
-          <block wx:if="{{!showModalStatus}}">
+          <block wx:if="{{!item.isVerify}}">
+            <text data-id="{{item.id}}" class="untieBtn" catchtap="toogleVerificationMask" wx:if="{{item.bindType==3}}">验证</text>
+            <text data-id="{{item.id}}" class="untieBtn" data-type="9045" data-whref="type={{item.bindType}}&accountId={{item.id}}&fromVerify=true" catchtap="comjumpwxnav" wx:else>验证</text>
+          </block>
+          <block wx:else>
             <text data-id="{{item.id}}" class="untieBtn" catchtap="unlinkBtn">解绑</text>
           </block>
         </view>
       </block>
-      <view class="tiedCardWrap" data-type="9045" catchtap="comjumpwxnav">
+      <view class="tiedCardWrap" data-id="{{bankCardList[0].id}}" data-isverify="{{bankCardList[0].isVerify}}" catchtap="alterationBankcard">
         <image src="http://cdn.51chaidan.com/images/brandInfoIcon/bank_card.png" mode="widthFix"></image>
-        <text>绑定新卡</text>
+        <text>更换银行卡</text>
       </view>
     </view>
+    <text class="hintTxt">每名用户只能绑定一张银行卡</text>
     <button catchtap="toogleBankcardlistMask">关闭</button>
   </view>
 </view>
+
+<!-- 解绑并绑定新卡 -->
+<view class="mask" wx:if="{{isUnbindAndBindMask}}" catchtouchmove="true" catchtap="hideunlinkMask">
+  <view class="maskBox unlinkWrap" catchtap="true"> 
+    <text class="title">更换银行卡需要先解绑之前的银行卡，确认更换银行卡请点击下方“解绑并绑定新卡”</text>
+    <view>
+      <view class="footerWrap">
+        <view catchtap="hideunlinkMask">取消</view>
+        <view catchtap="UnbindAndBindBankCard">解绑并绑定新卡</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 重新绑卡 -->
+<view class="mask" wx:if="{{isUnbindAndBindMask1}}" catchtouchmove="true" catchtap="hideunlinkMask">
+  <view class="maskBox unlinkWrap" catchtap="true"> 
+    <text class="title" style="text-align: center;">您有银行卡待验证，是否取消验证并重新绑卡</text>
+    <view>
+      <view class="footerWrap">
+        <view catchtap="hideunlinkMask">取消</view>
+        <view catchtap="UnbindAndBindBankCard">重新绑卡</view>
+      </view>
+    </view>
+  </view>
+</view>
+
 <!-- 解绑银行卡弹框 -->
 <view class="mask" wx:if="{{isUnlinkMask}}" catchtouchmove="true" catchtap="hideunlinkMask">
   <view class="maskBox unlinkWrap" catchtap="true"> 
@@ -316,6 +403,18 @@
   </view>
 </view>
 
+<!-- 添加银行卡提示 -->
+<view class="mask" wx:if="{{istiedCardlist}}" catchtouchmove="true" catchtap="hidetiedCardlistMisk">
+  <view class="maskBoxSmall unlinkWrap" catchtap="true"> 
+    <text class="title">使用提现功能需添加一张支持提现的银行卡</text>
+    <view>
+      <view class="footerWrap">
+        <view catchtap="hidetiedCardlistMisk">取消</view>
+        <view catchtap="tiedCardlist">添加银行卡</view>
+      </view>
+    </view>
+  </view>
+</view>
 
 <!-- 导出订单 -->
 <view class="mask1" wx:if="{{isExportOrdersMask}}" catchtouchmove="true" catchtap="toggleExportOrdersMask">

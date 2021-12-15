@@ -29,6 +29,15 @@ page{
   padding-top: 10rpx;
   padding-bottom: 20rpx;
 }
+.moneyBox{
+  display: flex;
+  align-items: center;
+}
+.right_arrows{
+  width: 32rpx;
+  height: auto;
+  margin-left: 12rpx;
+}
 .card{
   width: 98%;
   background-image: linear-gradient(to top right, #65C797, #4EE499);
@@ -46,15 +55,14 @@ page{
   align-items: center;
   padding-bottom: 44rpx;
 }
-.balanceBox text{
+.balanceBox view{
   color: #fff;
-  display: block;
-}
-.balanceBox text:first-child{
   font-size: 30rpx;
 }
-.balanceBox text:last-child{
+.balanceBox text{
   font-size: 52rpx;
+  color: #fff;
+  display: block;
 }
 .withdrawBtn{
   width: 230rpx;
@@ -65,15 +73,35 @@ page{
   color: #4FE39A;
   background: #ffffff;
   border-radius: 20rpx;
+  position: relative;
+}
+.butUserImg{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  opacity: 0;
 }
 .cardB{
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   padding-top: 50rpx;
 }
+.cardB>view{
+  margin-right: 140rpx;
+}
+.cardB>view:last-child{
+  margin-right: 0;
+}
 .cardB text:last-child{
   margin-top: 10rpx;
+}
+.cardB>view view{
+  color: #fff;
+  font-size: 28rpx;
 }
 .cardB text{
   display: block;
@@ -113,6 +141,33 @@ page{
   border: 4rpx solid rgba(255, 255, 255, 100);
   margin-top: 48rpx;
 } */
+
+.cardQ{
+  border-bottom: 2rpx solid #fff;
+  padding: 20rpx 0;
+  box-sizing: border-box;
+}
+.cardQ:first-child{
+  border-top: 2rpx solid #fff;
+  margin-top:34rpx;
+}
+.cardQ:last-child{
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.cardQ view{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cardQ view:first-child{
+  margin-bottom: 12rpx;
+}
+.cardQ view text{
+  font-size: 24rpx;
+  color:#ffffff;
+}
 
 
 .exportOrdersWrap{
@@ -210,11 +265,46 @@ page{
   color: #101010;
   font-size: 28rpx;
   display: block;
-  margin-bottom: 72rpx;
+  margin-bottom: 56rpx;
 }
 
-
-
+.verificationBox{
+  padding: 32rpx 38rpx;
+  box-sizing: border-box;
+}
+.subTitle{
+  display: block;
+  font-size: 28rpx;
+  color: #101010;
+}
+.verificationBox input{
+  width: 88%;
+  height: 60rpx;
+  line-height: 60rpx;
+  border: 2rpx solid #bbbbbb;
+  padding-left: 20rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+  color: #888888;
+  margin: 22rpx 0 28rpx 0;
+}
+.verificationExplain{
+  margin-bottom: 22rpx;
+}
+.verificationExplain text{
+  font-size: 28rpx;
+  color: #989898;
+}
+.verificationExplain view{
+  font-size: 28rpx;
+  color: #989898;
+  display: block;
+  margin-top: 10rpx;
+}
+.verificationExplain view text{
+  font-size: 28rpx;
+  color: #E38E8E;
+}
 
 .infoBox{
   width: 98%;
@@ -345,7 +435,7 @@ page{
 .popTitle{
   display: block;
   text-align: center;
-  font-size: 28rpx;
+  font-size: 30rpx;
   color: #101010;
   margin-bottom: 24rpx;
 }
@@ -362,6 +452,7 @@ page{
   position: relative;
   padding: 24rpx 34rpx;
   box-sizing: border-box;
+  background: #F2F2F2;
 }
 .jiantou{
   width: 100rpx;
@@ -448,12 +539,12 @@ page{
   border-radius: 12rpx;
 }
 .footerWrap view:first-child{
-  width: 20%;
+  width: 30%;
   border: 2rpx solid #90D2D6;
   color: #90D2D6;
 }
 .footerWrap view:last-child{
-  width: 76%;
+  width: 63%;
   height: 76rpx;
   background: #90D2D6;
   color: #ffffff;
@@ -685,7 +776,7 @@ page{
   top: 0;
   left: 0;
   background: rgba(0,0,0,.4);
-  z-index: 92;
+  z-index: 93;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -695,6 +786,15 @@ page{
   height: auto;
   background: #fff;
   border-radius: 8rpx;
+}
+.maskBoxSmall{
+  width: 540rpx;
+  height: auto;
+  background: #fff;
+  border-radius: 8rpx;
+}
+.maskBoxSmall .title{
+  text-align: center;
 }
 .descriptionWrap,.authenticationWrap{
   width: 88%;
@@ -752,4 +852,31 @@ page{
 }
 .authenticationInfo text:last-child{
   margin-bottom: 0;
+}
+
+.tiedCardListWrap{
+  width: 100%;
+  background: #fff;
+}
+.labelWrap {
+  width: 100%;
+  display: flex;
+  padding: 20rpx 10rpx 10rpx 10rpx;
+  box-sizing: border-box;
+}
+.labelWrap text{
+  width: 180rpx;
+  height: 72rpx;
+  display: block;
+  line-height: 72rpx;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 20rpx;
+  font-size: 28rpx;
+  color: #000;
+  margin-right: 20rpx;
+}
+.labelWrap .active{
+  background: #EFA25A;
+  color: #fff;
 }

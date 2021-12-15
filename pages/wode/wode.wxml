@@ -186,8 +186,8 @@
                         </view>
                         <view class="brandManageItem" catchtap="comjumpwxnav" data-type='9051'>
                             <view>
-                                <image src='https://cdn.51chaidan.com/images/brandSettledIcon/information.png' mode="widthFix"></image>
-                                <text>系统消息</text>
+                                <image src='https://cdn.51chaidan.com/images/brandSettledIcon/orderIcon/service.png' mode="widthFix"></image>
+                                <text>消息通知</text>
                             </view>
                         </view>
                         <!-- <view class="brandManageItem" catchtap="comjumpwxnav" data-type='9048'> -->
@@ -197,7 +197,6 @@
                                 <text>客服消息</text>
                             </view>
                         </view>
-                       
                     </view>
                     <button catchtap="toggleAddNewEventMask">发布/发售</button>
                 </view>

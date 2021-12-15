@@ -1195,11 +1195,11 @@
                             分享好友
                         </view>
 
-                        <view class='totalmoncright' wx:if='{{comdata.order_type==1}}'
+                        <!-- <view class='totalmoncright' wx:if='{{comdata.order_type==1}}'
                             style='color:#ff2840;border:1rpx solid #ff2840;position:relative;margin-right:10rpx;'
                             bindtap='personalhomepage'>
                             发帖推荐
-                        </view>
+                        </view> -->
 
 
                     </view>
@@ -1223,13 +1223,29 @@
                         </view>
 
 
-                        <view class='totalmoncrightcel' data-oid='{{comdata.oid}}'
+                        <!-- <view class='totalmoncrightcel' data-oid='{{comdata.oid}}'
                             style='margin-right:10rpx;position: relative;' data-gcover='{{comdata.gcover}}'
-                            bindtap='lookatthelogistics'>查看物流</view>
+                            bindtap='lookatthelogistics'>查看物流</view> -->
 
-                        <view class='totalmoncright' wx:if='{{comdata.order_type==1}}'
+                        <!-- 寄回物流信息 -->
+                        <block wx:if="{{comdata.isSendBack}}">
+                            <block wx:if="{{comdata.sendBackStatus == 1}}">
+                                <view class='totalmoncright redborcol' style='position: relative;' 
+                                data-href="{{comdata.sendBackAuditStatus==0||comdata.sendBackAuditStatus==5||comdata.sendBackAuditStatus==6?'status=0':'status=1&sendBackId='+comdata.sendBackId}}" 
+                                data-item_type='9054' bindtap='comindellistjump'>商品寄回</view> 
+                            </block>
+                            <block wx:else>
+                                <view class='totalmoncright redborcol' style='position: relative;' data-id='{{comdata.sendBackId}}' data-gcover='{{comdata.gcover}}' bindtap='sendBackLogistics'>查看物流</view> 
+                            </block>
+                        </block>
+                        <!-- 发货的查看物流 -->
+                        <block wx:else>
+                            <view class='totalmoncright' style='position: relative;' data-oid='{{comdata.oid}}' data-gcover='{{comdata.gcover}}' bindtap='lookatthelogistics'>查看物流</view> 
+                        </block>
+
+                        <!-- <view class='totalmoncright' wx:if='{{comdata.order_type==1}}'
                             style='color:#ff2840;border:1rpx solid #ff2840;position:relative;margin-right:10rpx;'
-                            bindtap='personalhomepage'>发帖推荐</view>
+                            bindtap='personalhomepage'>发帖推荐</view> -->
 
 
 
