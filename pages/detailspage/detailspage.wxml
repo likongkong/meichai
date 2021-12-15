@@ -697,8 +697,8 @@
       </view>
     </view>   
 </block>
-<!--  35422,35420,35421 去购票 -->
-<block wx:elif='{{zunmdata.gid == 35422 || zunmdata.gid == 35420 || zunmdata.gid == 35421}}'>
+<!--  35422,35420,35421 去购票 zunmdata.gid == 35422 || zunmdata.gid == 35420 || zunmdata.gid == 35421 -->
+<block wx:elif='{{false}}'>
     <view class="detailfooter" style='{{isIphoneX?"bottom:130rpx;":"bottom:110rpx;"}}'>
       <view style='width:100%;min-height:98rpx;overflow:hidden;background:#ffffff;'>
         <view style='height:98rpx;width:202rpx;float:left;position:relative;' wx:if='{{isCanShare && zunmdata.isGoodsCanShare}}' catchtap='displaysharefriend'>
