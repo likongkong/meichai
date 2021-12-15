@@ -187,7 +187,8 @@
 
     </scroll-view>
 
-    <view wx:if='{{cartData.length!=0}}' style="width:130rpx;height:100%;float:right;background:#E65163;border-radius:0 60rpx 60rpx 0;text-align:center;font-size:30rpx;line-height:120rpx;" catchtap="dsbbbutclickt">
+    <view wx:if='{{cartData.length!=0}}' style="width:130rpx;height:100%;float:right;background:#E65163;border-radius:0 60rpx 60rpx 0;text-align:center;font-size:30rpx;line-height:120rpx;position:relative;">
+      <button class='shareButton' type='primary' bindtap="getUserProfileCom"></button>
       去结算
     </view>
     <view wx:else style="width:130rpx;height:100%;float:right;background:#a8a8a8;border-radius:0 60rpx 60rpx 0;text-align:center;font-size:30rpx;line-height:120rpx;">

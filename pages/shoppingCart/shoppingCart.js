@@ -2266,6 +2266,13 @@ Page({
     };
 
   },
+  // 更新用户信息
+  getUserProfileCom(w){
+    console.log(1111111)
+    app.getUserProfile((res,userInfo) => {
+        this.immediatepurchase()
+    });
+  },
   immediatepurchase:function(){
     var _this = this;
     var raplist = _this.data.raplist||[];
