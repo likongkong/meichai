@@ -882,7 +882,7 @@ Page({
             'complete': function (res) {}
           })
         } else {
-          app.showToastC('剩余库存不足');
+          app.showModalC(res.data.Msg || res.data.msg || '');
         };
       }
     })

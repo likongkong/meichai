@@ -674,12 +674,14 @@
 								<view class="isAboveQuotaImmediately">今日已抽完</view>
 								<view class="isAboveQuotaImmediatelyNum">({{limitBuy}}个/人/天)</view>						
 						</view>
-						<view wx:else class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;" catchtap='{{isusedWelfare ? "showsurebuy" : "updateadd"}}'>
+						<view wx:else class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;" catchtap='{{isusedWelfare ? "showsurebuy" : ""}}'>
+							<!-- updateadd -->
 								<block wx:if='{{limitBuy && limitBuy != 0}}'>
 									<view class="isAboveQuotaImmediately">就买它</view>
 									<view class="isAboveQuotaImmediatelyNum">({{limitBuy}}个/人/天)</view>					
 								</block>
 								<block wx:else>就买它</block>	
+								<button wx:if='{{!isusedWelfare}}' class='shareButton' type='primary' bindtap="getUserProfileCom"></button>
 						</view>
 
 					</view>
@@ -1290,7 +1292,8 @@
 								</view>	
 							</block>
 							<block wx:else>
-							    <view wx:if='{{isOpenWholeBox}}' class="chipcollectstyle" style="background:#FFD944;color:#D48004;position:relative;" catchtap='wholebox'>端整盒</view>							
+								<!-- catchtap='wholebox' -->
+							    <view wx:if='{{isOpenWholeBox}}' class="chipcollectstyle" style="background:#FFD944;color:#D48004;position:relative;"><button class='shareButton' type='primary' bindtap="getUserProfileComWhole"></button>端整盒</view>							
 							</block>
 
 							<view wx:if='{{activity.displayTotal}}' style="width:100%;font-size:22rpx;text-align:center;color:#4c9a23;position:absolute;bottom:30rpx;">抽盒机抽整盒为拆盒确认款,有几率获得隐藏款替换任意一款</view>
@@ -1326,7 +1329,9 @@
 
 						</block>
 						<view style="width:100%;margin:36rpx 0 20rpx 0;position:relative;">
-							<view wx:if='{{isOpenWholeBox}}' class="chipcollectstyle" style="background:#FFD944;color:#D48004;position:relative;" catchtap='wholebox'>
+							<view wx:if='{{isOpenWholeBox}}' class="chipcollectstyle" style="background:#FFD944;color:#D48004;position:relative;">
+								<!-- catchtap='wholebox' -->
+								<button class='shareButton' type='primary' bindtap="getUserProfileComWhole"></button>
 								<view wx:if='{{tipCheapForWholeBox>0}}' class="tipCheapForWholeBoxClass">端盒立减{{tipCheapForWholeBox}}元</view>
 								{{wholeBoxTitle?wholeBoxTitle:'端整盒'}}
 							</view>

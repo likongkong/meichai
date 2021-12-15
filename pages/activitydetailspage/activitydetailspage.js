@@ -4203,7 +4203,7 @@ closefrindcommoni:function(){
         this.data.nickName=userInfo.nickName;
         this.data.gender=userInfo.gender;
       this.upserimgboxiftrWinningtheprize(w)
-    })
+    },'',1)
   },
   //  晒单
   upserimgboxiftrWinningtheprize: function (w) {
