@@ -1809,7 +1809,7 @@ App({
     var _this = this;
     console.log(wx.canIUse('getUserProfile'),wx.canIUse('getUserProfile'))
     // 请选择与登录信息相同账号，头像昵称不同会导致审核不通过
-    if(true){
+    if(_this.signindata.isNeedUserInfo){
         wx.getUserProfile({
           lang: 'zh_CN',
           desc:'获取你的昵称、头像、地区及性别',
