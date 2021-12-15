@@ -724,7 +724,15 @@ Page({
       pricemod: false
     })
   },
+
+  // 更新用户信息
+  getUserProfileSettled(w){
+    app.getUserProfile((res,userInfo) => {
+        this.pricemodblocl(w)
+    })
+  },
   pricemodblocl: function (w) {
+    console.log(w)
     var sid = w.currentTarget.dataset.sid || w.target.dataset.sid || 0;
     var shop_price = w.currentTarget.dataset.shop_price || w.target.dataset.shop_price || '';
     var rolename = w.currentTarget.dataset.rolename || w.target.dataset.rolename || '';
@@ -732,7 +740,7 @@ Page({
     var viewwidthone = w.currentTarget.dataset.viewwidthone || w.target.dataset.viewwidthone || 0;
     var viewwidthtwo = w.currentTarget.dataset.viewwidthtwo || w.target.dataset.viewwidthtwo || 0;
     var goods_name = w.currentTarget.dataset.goods_name || w.target.dataset.goods_name || 0;
-
+ 
 
     // listdata[ind].viewwidthone = viewwidthone;
     // listdata[ind].viewwidthtwo = viewwidthtwo;
