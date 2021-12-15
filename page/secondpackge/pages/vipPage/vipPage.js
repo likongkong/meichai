@@ -51,9 +51,15 @@ Page({
     })
   },
 
+  // 更新用户信息
+  getUserProfileCom(w){
+    console.log(1111111)
+    app.getUserProfile((res,userInfo) => {
+      this.openingVip();
+    },'',1);
+  },
  // 开通VIP
  openingVip:function(){
-
   // app.showToastC('敬请期待');
   // return false;
   wx.showLoading({ title: '加载中...'})

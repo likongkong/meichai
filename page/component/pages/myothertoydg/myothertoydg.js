@@ -729,7 +729,7 @@ Page({
   getUserProfileSettled(w){
     app.getUserProfile((res,userInfo) => {
         this.pricemodblocl(w)
-    })
+    },'',1)
   },
   pricemodblocl: function (w) {
     console.log(w)
