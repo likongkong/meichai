@@ -520,7 +520,7 @@
 
 	<view style='width:100%;height:110rpx;'></view>
 
-	<bnavigation isChar='{{false}}' isProduce='{{isProduce}}'></bnavigation>
+	<bnavigation isChar='{{false}}' isIphoneX='{{isIphoneX}}' isProduce='{{isProduce}}'></bnavigation>
 
 
 	<!--  二级背景  -->

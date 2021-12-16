@@ -692,7 +692,7 @@ App({
       success: res => {
         console.log('手机型号',res)
         let modelmes = res.model;
-        if (modelmes.search('iPhone X') != -1 || modelmes.search('iPhone XR') != -1 || modelmes.search('iPhone 11') != -1 || modelmes.search('iPhone XS') != -1 || modelmes.search('iPhone XS Max') != -1 || modelmes.search('iPhone 12') != -1) {
+        if (modelmes.search('iPhone X') != -1 || modelmes.search('iPhone XR') != -1 || modelmes.search('iPhone 11') != -1 || modelmes.search('iPhone XS') != -1 || modelmes.search('iPhone XS Max') != -1 || modelmes.search('iPhone 12') != -1 || modelmes.search('iPhone 13') != -1) {
           _this.signindata.isIphoneX = true;
         };
         _this.signindata.modelData = res.model;
