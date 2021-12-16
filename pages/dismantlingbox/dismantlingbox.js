@@ -16,7 +16,8 @@ Page({
     tgabox:false,
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
-
+    // 适配苹果X
+    isIphoneX: app.signindata.isIphoneX,
     movies:[],
     // 订阅上传id
     pid:0,

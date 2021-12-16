@@ -250,7 +250,9 @@ Page({
     isBlindboxPacketOne:false,
     isBlindboxPacketTwo:false,
     // 刮刮卡入口
-    isScrapingCard:false 
+    isScrapingCard:false,
+    // 适配苹果X
+    isIphoneX: app.signindata.isIphoneX, 
 
   },
 

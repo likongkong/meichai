@@ -625,7 +625,7 @@
    </view>
 </view> -->
 
-<bnavigation isChar='{{false}}' bind:run='auditversion' fashionShow='{{true}}' isProduce='{{isProduce}}'></bnavigation>
+<bnavigation isChar='{{false}}' isIphoneX='{{isIphoneX}}' bind:run='auditversion' fashionShow='{{true}}' isProduce='{{isProduce}}'></bnavigation>
 
 
 
