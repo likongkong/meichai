@@ -693,7 +693,7 @@ Page({
     console.log(1111111)
     app.getUserProfile((res,userInfo) => {
         this.dsbbbutclickt()
-    });
+    },'',1);
   },
   // 立即购买弹框
   dsbbbutclickt: function () {

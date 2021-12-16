@@ -126,7 +126,7 @@ Page({
           istit: true,
         });
         this.comjumpwxnav(w)
-    })
+    },'',1)
   },
 
   comjumpwxnav(e){
