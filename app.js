@@ -1833,17 +1833,14 @@ App({
                   _this.signindata.nickName = userInfo.nickName;
                   _this.signindata.userInfo = userInfo || {};
                   _this.signindata.isNeedUserInfo = false; 
-                  // wx.showToast({
-                  //   title: '设置成功',
-                  //   icon: 'none',
-                  //   mask:true,
-                  //   duration:1500
-                  // });   
-                  // setTimeout(function(){
-                    successCallback(res,userInfo);
-                  // },1500)
+                  successCallback(res,userInfo);
+                }else{
+                  successCallback(res,'');
                 };
-              }
+              },
+              fail(res){
+                successCallback(res,'');
+              },
             }) 
           },
           fail(res){

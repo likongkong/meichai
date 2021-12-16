@@ -2211,6 +2211,14 @@ Page({
     })
   },
 
+  // 更新用户信息
+  getUserProfileComshowhint(w){
+    var _this = this;
+    console.log(1111111)
+    app.getUserProfile((res,userInfo) => {
+        _this.showhint(w)
+    },'',1);
+  },
   showhint: function (w) { // 3猜盒  2提示卡 1透视卡 
     var _this = this
 
@@ -2560,6 +2568,15 @@ Page({
       cueCardBox:false
     })
   },
+
+  // 更新用户信息
+  getUserProfileComrePumping(w){
+    var _this = this;
+    console.log(1111111)
+    app.getUserProfile((res,userInfo) => {
+        _this.rePumping()
+    },'',1);
+  },
   rePumping(){
     
     wx.showLoading({
@@ -2618,6 +2635,15 @@ Page({
         };
       }
     })
+  },
+
+  // 更新用户信息
+  getUserProfileComshowxray(w){
+    var _this = this;
+    console.log(1111111)
+    app.getUserProfile((res,userInfo) => {
+        _this.showxray(w)
+    },'',1);
   },
   showxray: function (w) {
     var _this = this

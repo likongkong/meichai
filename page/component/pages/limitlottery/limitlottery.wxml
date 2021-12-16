@@ -547,7 +547,7 @@
 
 						</block>
 						<view wx:else class="nDbsBnotice" style="background:#DBC69D;position:relative;">
-							<button class='shareButton' type='primary' bindtap="getUserProfileCom"></button>
+							<button class='shareButton' type='primary' bindtap="getUserProfileComSign"></button>
 							<block wx:if='{{infoActivity.integral}}'>消耗{{infoActivity.integral}}积分报名获取签号</block>
 							<block wx:else>报名获取签号</block>
 						</view>
