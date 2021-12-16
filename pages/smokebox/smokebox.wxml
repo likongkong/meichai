@@ -637,28 +637,28 @@
 				
 				<view class="cardTipBox">
 
-						<!-- https://www.51chaidan.com/images/icon/iconCardTip.png  catchtap='showhint' data-type='2'-->
+						<!-- https://www.51chaidan.com/images/icon/iconCardTip.png -->
 						<view class="cardTipBoxImg">
 							<image mode='aspectFit' src='https://cdn.51chaidan.com/images/blindBoxCard2.png'></image>
 							<view wx:if='{{cardTip>0}}' class='tabshopimg specialellipsis {{isusertip?"graynumbg":"#rednumbg"}}'>{{cardTip}}</view>
 							<button class='shareButton' type='primary' data-type='2' catchtap="getUserProfileComshowhint"></button>
 						</view>
-						<view class="cardTipBoxTxt">提示卡<text wx:if='{{isTempTip}}' style="color:#ff6968;font-size:18rpx;font-weight:bold;margin-bottom:10rpx;">\n{{tempChanceOverTimeCountdown}}</text></view>
-						<!-- https://www.51chaidan.com/images/icon/iconCardXRay.png catchtap='showxray' -->
+						<view class="cardTipBoxTxt" catchtap='showhint' data-type='2'>提示卡<text wx:if='{{isTempTip}}' style="color:#ff6968;font-size:18rpx;font-weight:bold;margin-bottom:10rpx;">\n{{tempChanceOverTimeCountdown}}</text></view>
+						<!-- https://www.51chaidan.com/images/icon/iconCardXRay.png -->
 						<view class="cardTipBoxImg">
 							<image mode='aspectFit' src='https://cdn.51chaidan.com/images/blindBoxCard3.png'></image>
 							<view wx:if='{{cardXRay>0}}' class='tabshopimg specialellipsis {{isuserray?"graynumbg":"#rednumbg"}}'>{{cardXRay}}</view>
 							<view wx:elif='{{cardXRay==0}}' class='tabshopimg specialellipsis getnumbg'>领</view>
 							<button class='shareButton' type='primary' data-type='1' catchtap="getUserProfileComshowxray"></button>
 						</view>
-						<view class="cardTipBoxTxt">透视卡<text wx:if='{{perspcardiftrmin}}' style="color:#ff6968;font-size:18rpx;font-weight:bold;">\n{{percountdown}}</text></view>
-
-						<view class="cardTipBoxImg" catchtap="rePumping">
+						<view class="cardTipBoxTxt" catchtap='showxray' data-type='1'>透视卡<text wx:if='{{perspcardiftrmin}}' style="color:#ff6968;font-size:18rpx;font-weight:bold;">\n{{percountdown}}</text></view>
+						<!-- catchtap="rePumping" -->
+						<view class="cardTipBoxImg">
 							<image mode='aspectFit' src='https://cdn.51chaidan.com/images/blindBoxCard1.png'></image>
 							<view wx:if='{{rollchance>0}}' class='tabshopimg specialellipsis rednumbg'>{{rollchance}}</view>
 							<button class='shareButton' type='primary' data-type='1' catchtap="getUserProfileComrePumping"></button>
 						</view>
-						<view class="cardTipBoxTxt" catchtap="rePumping">重抽卡</view>
+						<view class="cardTipBoxTxt" catchtap="rePumping" data-type='1'>重抽卡</view>
 
 
         </view>
