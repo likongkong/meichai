@@ -160,6 +160,12 @@ Page({
   refundtipssurefun:function(){
     this.setData({ refundtipssure: false, refundtips:false })
   },
+  // 更新用户信息
+  getUserProfileRefundtiosun(w){
+    app.getUserProfile((res,userInfo) => {
+        this.refundtiosun();
+    },'',1);
+  },
   refundtiosun:function(){
     this.setData({ refundtipssure:true})
   },
@@ -2823,6 +2829,12 @@ vipOrOrdermine1(){
     wx.reLaunch({
       url: "../../../../pages/wode/wode"
     });
+  },
+  // 更新用户信息
+  getUserProfileRefund(w){
+    app.getUserProfile((res,userInfo) => {
+        this.refund();
+    },'',1);
   },
   refund: function () {
     wx.navigateTo({

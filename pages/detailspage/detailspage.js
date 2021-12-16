@@ -2607,6 +2607,12 @@ Page({
       dsbframeiftr: false,      
     })     
   },
+  // 更新用户信息
+  getUserProfileCom(w){
+    app.getUserProfile((res,userInfo) => {
+        this.dsbffunblock();
+    });
+  },
   // 显示直接购买弹框
   dsbffunblock: function () {
     var _this = this;

@@ -735,8 +735,8 @@
       </block>
       <!-- 无直播间号有抽选活动有库存：购买按钮 -->
       <block wx:elif='{{is_exhibition==1&&!zunmdata.liveShowRoomId&&zunmdata.isLotto&&zunmdata.debuff==0}}'>
-        <view class="footer-child large sale" bindtap='dsbffunblock' style='box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:300rpx;float:right;'>
-          <view style='width:100%;height:100%;text-align:center;line-height:60rpx;font-size:28rpx;color:#fff;'>直接购买</view>
+        <view class="footer-child large sale" style='box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:300rpx;float:right;'>
+          <view style='width:100%;height:100%;text-align:center;line-height:60rpx;font-size:28rpx;color:#fff;position: relative;'><button class='shareButton' type='primary' bindtap="getUserProfileCom"></button>直接购买</view>
         </view>
       </block>
       <!-- 无直播间号有抽选活动无库存： -->
@@ -770,9 +770,10 @@
               </view>
               <view class="addsopcar" style="height:60rpx;line-height:60rpx;" wx:elif='{{zunmdata.status==3}}'>已结束</view>
               <view class="addsopcar" style="height:60rpx;line-height:60rpx;" wx:elif='{{zunmdata.status==0}}'>已售罄</view>
-              <text class="addsopcar money" style="height:60rpx;{{zunmdata.limitBuy>0?'line-height:30rpx;font-size:22rpx;':'line-height:60rpx;font-size:30rpx;'}}{{zunmdata.status==2?'background:#FB595F;':''}}border-radius:60rpx;margin-top:0;display:block;" wx:elif='{{zunmdata.status==2}}' bindtap='dsbffunblock'>
-                  <block wx:if='{{zunmdata.limitBuy>0}}'>立即购买\n(限购{{zunmdata.limitBuy}}体/人)</block>
-                  <block wx:else>立即购买</block>
+              <text class="addsopcar money" style="height:60rpx;{{zunmdata.limitBuy>0?'line-height:30rpx;font-size:22rpx;':'line-height:60rpx;font-size:30rpx;'}}{{zunmdata.status==2?'background:#FB595F;':''}}border-radius:60rpx;margin-top:0;display:block;position: relative;" wx:elif='{{zunmdata.status==2}}'>
+                <button class='shareButton' type='primary' bindtap="getUserProfileCom"></button>
+                <block wx:if='{{zunmdata.limitBuy>0}}'>立即购买\n(限购{{zunmdata.limitBuy}}体/人)</block>
+                <block wx:else>立即购买</block>
               </text>
             </view> 
             <view class="addsopcar boxShadowEve" wx:if='{{zunmdata.status==2 && is_exhibition==1 && zunmdata.isBlindBox}}' bindtap='addresssmokebox' data-gid='{{zunmdata.gid}}' style="box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 20rpx 0 0;padding:0;width:250rpx;float:right;background:#32ACFB;line-height:60rpx;">在线抽盒机</view>             
@@ -913,8 +914,8 @@
                 <view wx:else class="footer-child large sale" style='height:80rpx;margin-top:9rpx;border-radius:10rpx;padding:0;width:255rpx;margin-right:20rpx;{{nowTime < zunmdata.depositEndTime?"":";background:#FCA700;"}}'>
                     <block wx:if="{{zunmdata.depositEndTime}}">
                       <block wx:if="{{nowTime < zunmdata.depositEndTime}}">
-                        <view class="money" bindtap="dsbffunblock" style='font-size:28rpx;'>支付定金</view>
-                        <view class="money" bindtap="dsbffunblock" style='font-size:28rpx;'>￥{{zunmdata.promote_price}}</view>
+                        <view class="money" style='font-size:28rpx;position: relative;'><button class='shareButton' type='primary' bindtap="getUserProfileCom"></button>支付定金</view>
+                        <view class="money" style='font-size:28rpx;position: relative;'><button class='shareButton' type='primary' bindtap="getUserProfileCom"></button>￥{{zunmdata.promote_price}}</view>
                       </block> 
                       <block wx:else>
                           <block wx:if='{{specialGoods == 1}}'>
@@ -927,8 +928,8 @@
                       </block>
                     </block>
                     <block wx:else>
-                      <view class="money" bindtap="dsbffunblock" style='font-size:28rpx;'>支付定金</view>
-                      <view class="money" bindtap="dsbffunblock" style='font-size:28rpx;'>￥{{zunmdata.promote_price}}</view>
+                      <view class="money" style='font-size:28rpx;position: relative;'><button class='shareButton' type='primary' bindtap="getUserProfileCom"></button>支付定金</view>
+                      <view class="money" style='font-size:28rpx;position: relative;'><button class='shareButton' type='primary' bindtap="getUserProfileCom"></button>￥{{zunmdata.promote_price}}</view>
                     </block>
                 </view>
 
@@ -1010,8 +1011,8 @@
         </block>
         <!-- 无直播间号有抽选活动有库存：购买按钮 -->
         <block wx:elif='{{is_exhibition==1&&!zunmdata.liveShowRoomId&&zunmdata.isLotto&&zunmdata.debuff==0}}'>
-          <view class="footer-child large sale" bindtap='dsbffunblock' style='box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:300rpx;float:right;'>
-            <view style='width:100%;height:100%;text-align:center;line-height:60rpx;font-size:28rpx;color:#fff;'>直接购买</view>
+          <view class="footer-child large sale" style='box-shadow:2px 2px 5rpx #ccc;border-radius:60rpx;height:60rpx;margin:9rpx 40rpx 0 0;padding:0;width:300rpx;float:right;position: relative;'>
+            <view style='width:100%;height:100%;text-align:center;line-height:60rpx;font-size:28rpx;color:#fff;position: relative;'><button class='shareButton' type='primary' bindtap="getUserProfileCom"></button>直接购买</view>
           </view>
         </block>
         <!-- 无直播间号有抽选活动无库存： -->
@@ -1046,9 +1047,10 @@
                 <view class="addsopcar" style="height:60rpx;line-height:60rpx;" wx:elif='{{zunmdata.status==3}}'>已结束</view>
                 <view class="addsopcar" style="height:60rpx;line-height:60rpx;" wx:elif='{{zunmdata.status==0}}'>已售罄</view>
                       
-                <text class="addsopcar money" style="height:60rpx;{{zunmdata.limitBuy>0?'line-height:30rpx;font-size:22rpx;':'line-height:60rpx;font-size:30rpx;'}}{{zunmdata.status==2?'background:#FB595F;':''}}border-radius:60rpx;margin-top:0;display:block;" wx:elif='{{zunmdata.status==2}}' bindtap='dsbffunblock'>
-                    <block wx:if='{{zunmdata.limitBuy>0}}'>立即购买\n(限购{{zunmdata.limitBuy}}体/人)</block>
-                    <block wx:else>立即购买</block>
+                <text class="addsopcar money" style="height:60rpx;{{zunmdata.limitBuy>0?'line-height:30rpx;font-size:22rpx;':'line-height:60rpx;font-size:30rpx;'}}{{zunmdata.status==2?'background:#FB595F;':''}}border-radius:60rpx;margin-top:0;display:block;position: relative;" wx:elif='{{zunmdata.status==2}}'>
+                  <button class='shareButton' type='primary' bindtap="getUserProfileCom"></button>
+                  <block wx:if='{{zunmdata.limitBuy>0}}'>立即购买\n(限购{{zunmdata.limitBuy}}体/人)</block>
+                  <block wx:else>立即购买</block>
                 </text>
               </view>
 
@@ -1104,7 +1106,8 @@
             <image src='https://www.51chaidan.com/images/icon/iconShareWX.png' style='width:50rpx;height:50rpx;display:block;margin:10rpx auto 0;'></image>
             <view style='font-size:22rpx;width:100%;color:#919191;text-align:center;height:40rpx;line-height:40rpx;'>分享好友</view>
         </view>
-        <view class="footer-child large sale" bindtap='dsbffunblock' wx:if='{{zunmdata.debuff==0}}' style='position:relative;height:80rpx;margin:9rpx 10rpx 0 0;border-radius:10rpx;padding:0;width:255rpx;'>
+        <view class="footer-child large sale" wx:if='{{zunmdata.debuff==0}}' style='position:relative;height:80rpx;margin:9rpx 10rpx 0 0;border-radius:10rpx;padding:0;width:255rpx;position: relative;'>
+          <button class='shareButton' type='primary' bindtap="getUserProfileCom"></button>
           <block wx:if='{{awa!=1}}'>
               <view style='width:100%;height:100%;text-align:center;line-height:80rpx;font-size:28rpx;color:#fff;'>直接购买</view>
           </block>
@@ -1147,10 +1150,11 @@
             <image src='https://www.51chaidan.com/images/icon/iconShareWX.png' style='width:50rpx;height:50rpx;display:block;margin:10rpx auto 0;'></image>
             <view style='font-size:22rpx;width:100%;color:#919191;text-align:center;height:40rpx;line-height:40rpx;'>分享好友</view>
         </view>
-        <view class="footer-child large sale" bindtap='dsbffunblock' wx:if='{{zunmdata.debuff==0}}' style='position:relative;height:80rpx;margin:9rpx 10rpx 0 0;border-radius:10rpx;padding:0;width:255rpx;'>
+        <view class="footer-child large sale" wx:if='{{zunmdata.debuff==0}}' style='position:relative;height:80rpx;margin:9rpx 10rpx 0 0;border-radius:10rpx;padding:0;width:255rpx;position: relative;'>
+          <button class='shareButton' type='primary' bindtap="getUserProfileCom"></button>
           <block wx:if='{{awa!=1}}'>
-              <view class="money" style='font-size:28rpx;'>{{zunmdata.munit}}{{zunmdata.gsale}}</view>
-              <view class="money" style='font-size:28rpx;height:36rpx;'>{{zunmdata.suitName}}{{zunmdata.unpackUnit}}</view>
+            <view class="money" style='font-size:28rpx;'>{{zunmdata.munit}}{{zunmdata.gsale}}</view>
+            <view class="money" style='font-size:28rpx;height:36rpx;'>{{zunmdata.suitName}}{{zunmdata.unpackUnit}}</view>
           </block>
           <block wx:else>
               <view class="money" style='font-size:28rpx;'>{{limitnum}}件领奖</view>
