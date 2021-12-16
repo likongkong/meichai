@@ -712,9 +712,13 @@ Page({
   // 跳转一番赏列表
   toaRewarddeyails(e){
     let id = e.currentTarget.dataset.id;
-    wx.navigateTo({
-      url: "/page/secondpackge/pages/aRewardList/aRewardList?its=1"
-    })
+    // wx.navigateTo({
+    //   url: "/page/secondpackge/pages/aRewardList/aRewardList?its=1"
+    // })
+     // let id = e.currentTarget.dataset.id;
+    wx.navigateTo({   
+      url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + id
+    });
   },
   catchTouchMove:function(res){
     return false
