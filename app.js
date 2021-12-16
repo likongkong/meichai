@@ -1809,7 +1809,7 @@ App({
     var _this = this;
     console.log(wx.canIUse('getUserProfile'),wx.canIUse('getUserProfile'))
     // 请选择与登录信息相同账号，头像昵称不同会导致审核不通过
-    if(true){
+    if(_this.signindata.isNeedUserInfo){
         wx.getUserProfile({
           lang: 'zh_CN',
           desc:'获取你的昵称、头像、地区及性别',
@@ -1833,17 +1833,14 @@ App({
                   _this.signindata.nickName = userInfo.nickName;
                   _this.signindata.userInfo = userInfo || {};
                   _this.signindata.isNeedUserInfo = false; 
-                  // wx.showToast({
-                  //   title: '设置成功',
-                  //   icon: 'none',
-                  //   mask:true,
-                  //   duration:1500
-                  // });   
-                  // setTimeout(function(){
-                    successCallback(res,userInfo);
-                  // },1500)
+                  successCallback(res,userInfo);
+                }else{
+                  successCallback(res,'');
                 };
-              }
+              },
+              fail(res){
+                successCallback(res,'');
+              },
             }) 
           },
           fail(res){

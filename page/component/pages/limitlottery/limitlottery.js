@@ -1241,7 +1241,7 @@ Page({
     this.setData({listTipImg:!this.data.listTipImg});
   },
   // 更新用户信息
-  getUserProfileCom(w){
+  getUserProfileComSign(w){
     console.log(1111111)
     app.getUserProfile((res,userInfo) => {
         this.joinlimitlottery()
