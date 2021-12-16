@@ -479,7 +479,7 @@ Page({
                    };
                    arrdata.push(obg);
                 };
-                if(listdata&&listdata.length!=0){
+                if(listdata&&listdata.length!=0&&listdata[0].detail.length!=0){
                   var num = '';
                   var iftrnum = false;
                   for(var i=0;i<arrdata.length;i++){
