@@ -20,34 +20,32 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
 	<!-- 展会 -->
 	<view  class='disanumofgoods' wx:for='{{exhibdata}}' wx:key='key' style="padding:0 0 10rpx 0;margin-bottom:10rpx;">
 		<!--  列表标题  -->
-		<view wx:if='{{item.type!=99&&item.title}}' class='disantitle' data-title='手机壳' data-href='category_id=c501' data-item_type="9014" data-type='{{item.type}}' catchtap='{{item.type==98?"imgcomindellistjump":"exhlistjump"}}'>
+		<view wx:if='{{item.type!=99&&item.title}}' class='disantitle' data-title='手机壳' data-href='category_id=c501' data-item_type="9014" data-type='{{item.type}}' catchtap='{{item.type==98?"imgcomindellistjump":item.type!=10?"exhlistjump":""}}'>
 			{{item.title}}
-			<view class='disantitletitright' wx:if='{{item.type && item.type != 15}}' data-type='{{item.type}}' catchtap='{{item.type==98?"imgcomindellistjump":"exhlistjump"}}' data-title='手机壳' data-href='category_id=c501' data-item_type="9014" style='font-weight:normal;position:relative;color:#31b3fb;'>查看更多</view>
+			<view class='disantitletitright' wx:if='{{item.type && item.type != 15 && item.type != 10}}' data-type='{{item.type}}' catchtap='{{item.type==98?"imgcomindellistjump":"exhlistjump"}}' data-title='手机壳' data-href='category_id=c501' data-item_type="9014" style='font-weight:normal;position:relative;color:#31b3fb;'>查看更多</view>
 		</view>
 		<!--  列表  -->
     <!-- 一番赏 -->
     <block wx:if='{{item.type == 10 || item.type == 98}}'>
-		  	<view style='min-height:104rpx;padding:0 20rpx 0;position: relative;' wx:if='{{item.detail.length!=0}}'>
-					<view  wx:if='{{item.type != 98}}' style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;z-index: 10;"></view>
-						<swiper style="width:100%;height:{{item.type==98?'378':'304'}}rpx;margin:0 auto;display:block;" circular="true" autoplay="true" interval="3000" duration="450">
-							<swiper-item wx:for="{{item.detail}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
-								<view style="position: relative;">
-									<image src="{{w.cover}}" data-gid="{{w.gid}}" bindtap="{{item.type==98?'addressmanagement':'toaRewarddeyails'}}" style="width:100%;height:{{item.type==98?'378':'304'}}rpx;display:block;border-radius: 10rpx;">
-									</image>		
-									<view style="padding:12rpx 8rpx;font-size:24rpx;box-sizing: border-box;color:#000;position: absolute;top: 0;left: 0;width: 100%;background: rgba(0,0,0,.6);border-top-left-radius: 10rpx;border-top-right-radius: 10rpx;" >
-										<view style="color: #fff;float: left;" class="specialellipsis">{{w.name}}</view>
-										<view style="color: #fff;float: right;">￥{{w.shopPrice}}</view>
-									</view>
-									<view class="progress-box" wx:if="{{item.type!=98}}">
-										<progress percent="{{(w.suplusGoods/w.limitGoods)*100}}" color="{{(w.suplusGoods/w.limitGoods)*100 === 100?'#6FBE0D':(w.suplusGoods/w.limitGoods)*100 < 100 && (w.suplusGoods/w.limitGoods)*100 > 50?'#FEB51D':'#ff2742'}}" backgroundColor="#cccccc" stroke-width='12' active duration="5" />
-										<text style="padding-left:15rpx;"><block wx:if='{{w.status != 1}}'>剩余：{{w.suplusGoods}}</block><block wx:elif='{{w.nameSuffix}}'>{{w.nameSuffix}}</block></text>
-									</view>								
-								</view>
-							</swiper-item>
-						</swiper>
-					</view>	
-
-
+			<view style='min-height:104rpx;padding:0 20rpx 0;position: relative;' wx:if='{{item.detail.length!=0}}'>
+				<!-- <view  wx:if='{{item.type != 98}}' style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;z-index: 10;"></view> -->
+				<swiper style="width:100%;height:{{item.type==98?'378':'304'}}rpx;margin:0 auto;display:block;" circular="true" autoplay="true" interval="3000" duration="450">
+					<swiper-item wx:for="{{item.detail}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
+						<view style="position: relative;">
+							<image src="{{w.cover}}" data-gid="{{w.gid}}" data-id="{{w.id}}" bindtap="{{item.type==98?'addressmanagement':'toaRewarddeyails'}}" style="width:100%;height:{{item.type==98?'378':'304'}}rpx;display:block;border-radius: 10rpx;">
+							</image>		
+							<view style="padding:12rpx 8rpx;font-size:24rpx;box-sizing: border-box;color:#000;position: absolute;top: 0;left: 0;width: 100%;background: rgba(0,0,0,.6);border-top-left-radius: 10rpx;border-top-right-radius: 10rpx;" >
+								<view style="color: #fff;float: left;" class="specialellipsis">{{w.name}}</view>
+								<view style="color: #fff;float: right;">￥{{w.shopPrice}}</view>
+							</view>
+							<view class="progress-box" wx:if="{{item.type!=98}}">
+								<progress percent="{{(w.suplusGoods/w.limitGoods)*100}}" color="{{(w.suplusGoods/w.limitGoods)*100 === 100?'#6FBE0D':(w.suplusGoods/w.limitGoods)*100 < 100 && (w.suplusGoods/w.limitGoods)*100 > 50?'#FEB51D':'#ff2742'}}" backgroundColor="#cccccc" stroke-width='12' active duration="5" />
+								<text style="padding-left:15rpx;"><block wx:if='{{w.status != 1}}'>剩余：{{w.suplusGoods}}</block><block wx:elif='{{w.nameSuffix}}'>{{w.nameSuffix}}</block></text>
+							</view>								
+						</view>
+					</swiper-item>
+				</swiper>
+			</view>	
 		</block>
 
 		<!-- 限量抽签4  限时抢购11 -->
@@ -233,7 +231,7 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
 										</view>
 									</view>
 									<view style="width:95%;height:10rpx;background:#e6e5e5;margin:auto;">
-										<view style="width:{{item.ratioTarget>100?100:item.ratioTarget}}%;height:10rpx;background:#ff2742; "></view>
+										<view style="width:{{item.ratioTarget>100?100:item.ratioTarget}}%;height:10rpx;background:#ff2742;"></view>
 									</view>
 									<view style="width:100%;height:70rpx;display:flex;line-height:30rpx;text-align:center;font-size:26rpx;padding-top:13rpx; ">
 										<view style="flex:1;height:100%; ">
