@@ -918,6 +918,7 @@ Page({
     var _this = this;
     wx.showLoading({ title: '加载中...',mask:true })
     var qqq = Dec.Aese('mod=info&operation=getcart&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&category_id=' + _this.data.category_id + '&order_id=' + _this.data.order_id + '&isAddToyCabinet=' + _this.data.isAddToyCabinet);
+    console.log('mod=info&operation=getcart&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&category_id=' + _this.data.category_id + '&order_id=' + _this.data.order_id + '&isAddToyCabinet=' + _this.data.isAddToyCabinet)
     wx.request({
       url: app.signindata.comurl + 'zone.php' + qqq,
       method: 'GET',
@@ -926,6 +927,7 @@ Page({
       },
       success: function(res) {
         wx.hideLoading();
+        console.log(res)
         if (res.data.ReturnCode == 200) {
           var rdw = res.data.List.cart || [];
           var rdwGruop = res.data.List.group || '';
@@ -952,8 +954,8 @@ Page({
               for (var i = 0; i < rdw.length; i++) {
                 rdw[i].numberofdismantling = rdw[i].count;
                 rdw[i].gid = rdw[i].goods_id;
+                rdw[i].totalPrice = (parseFloat(rdw[i].gsale)*parseFloat(rdw[i].count)).toFixed(2);
                 rdw[i].gsale = parseFloat(rdw[i].gsale).toFixed(2);
-
                 if (rdw[i].count > rdw[i].stock) {
                   rdw[i].iftrcheck = false;
                 } else {
