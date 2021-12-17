@@ -265,6 +265,26 @@ Page({
         name:'isCanShare',
       }
     ],
+    listData6:[
+      {
+        isRequired:false,
+        type:'radio',
+        subtitle:'上架日期',
+        radioArr:[
+          {name:'immediatelyAdded',radioName:'发布即上架'},
+          {name:'customAdded',radioName:'自定义上架日期',placeholder:'请选择上架日期',value:'',type:'time',time:''},
+          {name:'hideTheSale',radioName:'隐藏发售'},
+        ],
+        value:0,
+        index:0,
+        direction:'Y',
+        explain:true,
+        explainTxt:'发布即上架：发布商品之后，即可在小程序内查看商品的售卖状态 \n自定义上架日期：选择上架日期，在选择的日期之前，商品不会展示在小程序内，到达选择的日期时，发布的商品才可在小程序内展示 \n隐藏发售：创建的商品将不会在小程序内展示，可通过分享的形式进行售卖。',
+        input:true,
+        multiRadio:true,
+        name:'addedData',
+      }
+    ],
     obj:{
       goodsDescribe:'', //文字描述
       goodsStock:'', //库存数
@@ -283,6 +303,7 @@ Page({
       startTime:util.format("yyyy-MM-dd HH:mm"),
       endTime:util.format("yyyy-MM-dd HH:mm",2592000000),
       isCanShare:'', //允许购买对象
+      addedData:0,
     },
     timer:'',
   },
@@ -347,6 +368,12 @@ Page({
       }else{
         app.showToastC('停售时间不可小于发售时间',1500);
       }
+    }else if(key == 'customAdded'){
+      this.setData({
+        [`listData6[0].index`]:1,
+        [`listData6[0].radioArr[1].time`]:e.detail.value,
+      })
+      this.data.obj[key]=e.detail.value;
     }else{
       this.data.obj[key]=value;
     }

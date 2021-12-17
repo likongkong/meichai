@@ -259,7 +259,7 @@
 .radioChecked{
   width: 8rpx;
   height: 8rpx;
-  border: 10rpx solid #101010;
+  border: 11rpx solid #101010;
   border-radius: 100%;
   display: block;
 }
@@ -267,7 +267,7 @@
   width: 24rpx;
   height: 24rpx;
   display: block;
-  border: 2rpx solid #101010;
+  border: 3rpx solid #101010;
   border-radius: 100%;
 }
 .multiRadioWrap{
@@ -440,4 +440,8 @@
   color: #fff;
   background: #90D2D6;
   margin-left: 20rpx;
+}
+.multiRadioTime{
+  color:#999495;
+  text-align: right;
 }
