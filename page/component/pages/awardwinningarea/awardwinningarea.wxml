@@ -226,7 +226,7 @@
             <image style="width:90rpx;height:90rpx;border-radius: 6rpx;" mode='aspectFit' src="{{item.goods_thumb}}"></image>
             <view style="width:30rpx;height:30rpx;position:absolute;right:0;bottom:0;background:#E65163;text-align:center;font-size:20rpx;border-radius:6rpx;">×{{item.count}}</view>
           </view>
-          <view style="width:120rpx;line-height:25rpx;font-size:25rpx;color:#fff;text-align:center;">￥{{item.gsale*item.count}}</view>
+          <view style="width:120rpx;line-height:25rpx;font-size:25rpx;color:#fff;text-align:center;">￥{{item.totalPrice}}</view>
         </view>
       </block>
 

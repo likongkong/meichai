@@ -160,6 +160,12 @@ Page({
   refundtipssurefun:function(){
     this.setData({ refundtipssure: false, refundtips:false })
   },
+  // 更新用户信息
+  getUserProfileRefundtiosun(w){
+    app.getUserProfile((res,userInfo) => {
+        this.refundtiosun();
+    },'',1);
+  },
   refundtiosun:function(){
     this.setData({ refundtipssure:true})
   },
@@ -805,6 +811,14 @@ Page({
       url: "../../../../pages/lookatthelogistics/lookatthelogistics?oid="+oid+'&gcover='+gcover
     })
   },  
+  // 寄回物流
+  sendBackLogistics:function(w){
+    var id = w.target.dataset.id || w.currentTarget.dataset.id;
+    var gcover = w.target.dataset.gcover || w.currentTarget.dataset.gcover;
+    wx.navigateTo({  
+      url:'/page/settled/pages/sendBackLogistics/sendBackLogistics?id='+id+'&gcover='+gcover
+    })
+  },
   // 取消订单
   cancellationoforder: function (w) {
     var oid = w.currentTarget.dataset.oid || w.target.dataset.oid;
@@ -1081,29 +1095,7 @@ vipOrOrdermine1(){
           _this.setData({
             suboformola: false
           }); 
-          if (res.data.ReturnCode == 800) {
-            app.showToastC('非该用户订单');
-          };
-          if (res.data.ReturnCode == 815) {
-            app.showToastC('订单状态错误');
-          };
-          if (res.data.ReturnCode == 816) {
-            app.showToastC('不支持的支付类型');
-          };
-          if (res.data.ReturnCode == 817) {
-            app.showToastC('付款明细已生成');
-          };
-          if (res.data.ReturnCode == 201) {
-            app.showToastC('微信预支付失败');
-          };
-          if (res.data.ReturnCode == 805) {
-            app.showToastC('剩余库存不足');
-          };    
-          if (res.data.ReturnCode == 820) {
-            app.showToastC('支付时间已过');
-          }; 
-          // 判断非200和登录
-          Dec.comiftrsign(_this, res, app);     
+          app.showModalC(res.data.Msg || res.data.msg || '');   
         };     
       }
     })
@@ -1228,6 +1220,10 @@ vipOrOrdermine1(){
         awatip: true,
         awardrresentiftr:false
       })
+    } else if (item_type == 9054) {   // 取件信息
+      wx.navigateTo({
+        url: `/page/settled/pages/delivery/delivery?${whref}`
+      });      
     };
   },  
   // 跳转邀请页面
@@ -2833,6 +2829,12 @@ vipOrOrdermine1(){
     wx.reLaunch({
       url: "../../../../pages/wode/wode"
     });
+  },
+  // 更新用户信息
+  getUserProfileRefund(w){
+    app.getUserProfile((res,userInfo) => {
+        this.refund();
+    },'',1);
   },
   refund: function () {
     wx.navigateTo({

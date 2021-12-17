@@ -511,7 +511,7 @@
       </view>
       <view wx:if='{{taxation>0}}'>商品税费：￥{{taxation}}</view>
     </view>
-    <view class="accounts-font" catchtap='immediatepurchase' wx:if='{{dsbbmoncom}}' style='position:relative;'>结算</view>
+    <view class="accounts-font" wx:if='{{dsbbmoncom}}' style='position:relative;'><button class='shareButton' type='primary' bindtap="getUserProfileCom"></button>结算</view>
     <view class="accounts-font1" wx:if='{{!dsbbmoncom}}'>结算</view>
   </view>
 

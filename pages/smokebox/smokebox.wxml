@@ -520,7 +520,7 @@
 
 	<view style='width:100%;height:110rpx;'></view>
 
-	<bnavigation isChar='{{false}}' isProduce='{{isProduce}}'></bnavigation>
+	<bnavigation isChar='{{false}}' isIphoneX='{{isIphoneX}}' isProduce='{{isProduce}}'></bnavigation>
 
 
 	<!--  二级背景  -->
@@ -638,24 +638,27 @@
 				<view class="cardTipBox">
 
 						<!-- https://www.51chaidan.com/images/icon/iconCardTip.png -->
-						<view class="cardTipBoxImg" catchtap='showhint' data-type='2'>
+						<view class="cardTipBoxImg">
 							<image mode='aspectFit' src='https://cdn.51chaidan.com/images/blindBoxCard2.png'></image>
 							<view wx:if='{{cardTip>0}}' class='tabshopimg specialellipsis {{isusertip?"graynumbg":"#rednumbg"}}'>{{cardTip}}</view>
+							<button class='shareButton' type='primary' data-type='2' catchtap="getUserProfileComshowhint"></button>
 						</view>
-						<view class="cardTipBoxTxt">提示卡<text wx:if='{{isTempTip}}' style="color:#ff6968;font-size:18rpx;font-weight:bold;margin-bottom:10rpx;">\n{{tempChanceOverTimeCountdown}}</text></view>
+						<view class="cardTipBoxTxt" catchtap='showhint' data-type='2'>提示卡<text wx:if='{{isTempTip}}' style="color:#ff6968;font-size:18rpx;font-weight:bold;margin-bottom:10rpx;">\n{{tempChanceOverTimeCountdown}}</text></view>
 						<!-- https://www.51chaidan.com/images/icon/iconCardXRay.png -->
-						<view class="cardTipBoxImg" catchtap='showxray' data-type='1'>
+						<view class="cardTipBoxImg">
 							<image mode='aspectFit' src='https://cdn.51chaidan.com/images/blindBoxCard3.png'></image>
 							<view wx:if='{{cardXRay>0}}' class='tabshopimg specialellipsis {{isuserray?"graynumbg":"#rednumbg"}}'>{{cardXRay}}</view>
 							<view wx:elif='{{cardXRay==0}}' class='tabshopimg specialellipsis getnumbg'>领</view>
+							<button class='shareButton' type='primary' data-type='1' catchtap="getUserProfileComshowxray"></button>
 						</view>
-						<view class="cardTipBoxTxt">透视卡<text wx:if='{{perspcardiftrmin}}' style="color:#ff6968;font-size:18rpx;font-weight:bold;">\n{{percountdown}}</text></view>
-
-						<view class="cardTipBoxImg" catchtap="rePumping">
+						<view class="cardTipBoxTxt" catchtap='showxray' data-type='1'>透视卡<text wx:if='{{perspcardiftrmin}}' style="color:#ff6968;font-size:18rpx;font-weight:bold;">\n{{percountdown}}</text></view>
+						<!-- catchtap="rePumping" -->
+						<view class="cardTipBoxImg">
 							<image mode='aspectFit' src='https://cdn.51chaidan.com/images/blindBoxCard1.png'></image>
 							<view wx:if='{{rollchance>0}}' class='tabshopimg specialellipsis rednumbg'>{{rollchance}}</view>
+							<button class='shareButton' type='primary' data-type='1' catchtap="getUserProfileComrePumping"></button>
 						</view>
-						<view class="cardTipBoxTxt" catchtap="rePumping">重抽卡</view>
+						<view class="cardTipBoxTxt" catchtap="rePumping" data-type='1'>重抽卡</view>
 
 
         </view>
@@ -674,12 +677,14 @@
 								<view class="isAboveQuotaImmediately">今日已抽完</view>
 								<view class="isAboveQuotaImmediatelyNum">({{limitBuy}}个/人/天)</view>						
 						</view>
-						<view wx:else class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;" catchtap='{{isusedWelfare ? "showsurebuy" : "updateadd"}}'>
+						<view wx:else class='queuebtnstyle2' style="background:#e94f57;color:white;float:left;" catchtap='{{isusedWelfare ? "showsurebuy" : ""}}'>
+							<!-- updateadd -->
 								<block wx:if='{{limitBuy && limitBuy != 0}}'>
 									<view class="isAboveQuotaImmediately">就买它</view>
 									<view class="isAboveQuotaImmediatelyNum">({{limitBuy}}个/人/天)</view>					
 								</block>
 								<block wx:else>就买它</block>	
+								<button wx:if='{{!isusedWelfare}}' class='shareButton' type='primary' catchtap="getUserProfileCom"></button>
 						</view>
 
 					</view>
@@ -1290,7 +1295,8 @@
 								</view>	
 							</block>
 							<block wx:else>
-							    <view wx:if='{{isOpenWholeBox}}' class="chipcollectstyle" style="background:#FFD944;color:#D48004;position:relative;" catchtap='wholebox'>端整盒</view>							
+								<!-- catchtap='wholebox' -->
+							    <view wx:if='{{isOpenWholeBox}}' class="chipcollectstyle" style="background:#FFD944;color:#D48004;position:relative;"><button class='shareButton' type='primary' catchtap="getUserProfileComWhole"></button>端整盒</view>							
 							</block>
 
 							<view wx:if='{{activity.displayTotal}}' style="width:100%;font-size:22rpx;text-align:center;color:#4c9a23;position:absolute;bottom:30rpx;">抽盒机抽整盒为拆盒确认款,有几率获得隐藏款替换任意一款</view>
@@ -1326,7 +1332,9 @@
 
 						</block>
 						<view style="width:100%;margin:36rpx 0 20rpx 0;position:relative;">
-							<view wx:if='{{isOpenWholeBox}}' class="chipcollectstyle" style="background:#FFD944;color:#D48004;position:relative;" catchtap='wholebox'>
+							<view wx:if='{{isOpenWholeBox}}' class="chipcollectstyle" style="background:#FFD944;color:#D48004;position:relative;">
+								<!-- catchtap='wholebox' -->
+								<button class='shareButton' type='primary' catchtap="getUserProfileComWhole"></button>
 								<view wx:if='{{tipCheapForWholeBox>0}}' class="tipCheapForWholeBoxClass">端盒立减{{tipCheapForWholeBox}}元</view>
 								{{wholeBoxTitle?wholeBoxTitle:'端整盒'}}
 							</view>

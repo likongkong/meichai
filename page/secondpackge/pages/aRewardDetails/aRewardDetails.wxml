@@ -169,7 +169,8 @@
         <block wx:else>开售提醒</block>
     </view>
     <view wx:elif='{{activity.status==3||activity.suplusNum<=0}}' class="ardbottomeve ardbmerightbottom" catchtap="jumpaRewardList">已结束</view>
-    <view wx:elif='{{activity.isInQueue}}' class="ardbottomeve ardbmerightbottom" catchtap="scrapingPurfun">我要刮卡</view>
+    <view wx:elif='{{activity.isInQueue}}' class="ardbottomeve ardbmerightbottom"><button class='shareButton' type='primary' bindtap="getUserProfileCom"></button>我要刮卡</view>
+    <!-- catchtap="scrapingPurfun" -->
     <!-- <view wx:elif='{{activity.aheadUser&&activity.isInQueue}}' class="ardbottomeve ardbmerightbottom" catchtap="scrapingPurfun">我要刮卡({{remaintime}}s)</view> -->
     <!-- <view style="display: flex;justify-content: center;align-items: center;" wx:elif='{{activity.isInQueue}}'>
         <view wx:if="{{!activity.isAllHidePrice}}" class="ardbottomeve ardbmerightbottom" data-purchase="false" catchtap="scrapingPurfun">排队中( 查看价值 )</view>

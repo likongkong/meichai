@@ -250,7 +250,9 @@ Page({
     isBlindboxPacketOne:false,
     isBlindboxPacketTwo:false,
     // 刮刮卡入口
-    isScrapingCard:false 
+    isScrapingCard:false,
+    // 适配苹果X
+    isIphoneX: app.signindata.isIphoneX, 
 
   },
 
@@ -1810,6 +1812,14 @@ Page({
     })
   },
 
+  // 更新用户信息
+  getUserProfileCom(w){
+    var _this = this;
+    console.log(1111111)
+    app.getUserProfile((res,userInfo) => {
+        _this.updateadd()
+    });
+  },
   updateadd: function () {
     var _this = this;
       if(_this.data.isUseDeduct){  // 当前选中
@@ -1972,26 +1982,7 @@ Page({
           _this.setData({
             suboformola: false
           });
-          if (res.data.ReturnCode == 800) {
-            app.showToastC('非该用户订单');
-          };
-          if (res.data.ReturnCode == 815) {
-            app.showToastC('订单状态错误');
-          };
-          if (res.data.ReturnCode == 816) {
-            app.showToastC('不支持的支付类型');
-          };
-          if (res.data.ReturnCode == 817) {
-            app.showToastC('付款明细已生成');
-          };
-          if (res.data.ReturnCode == 201) {
-            app.showToastC('微信预支付失败');
-          };
-          if (res.data.ReturnCode == 805) {
-            app.showToastC('剩余库存不足');
-          };
-          // 判断非200和登录
-          Dec.comiftrsign(_this, res, app);
+          app.showModalC(res.data.Msg || res.data.msg || '');
         };
       }
     })
@@ -2222,6 +2213,14 @@ Page({
     })
   },
 
+  // 更新用户信息
+  getUserProfileComshowhint(w){
+    var _this = this;
+    console.log(1111111)
+    app.getUserProfile((res,userInfo) => {
+        _this.showhint(w)
+    },'',1);
+  },
   showhint: function (w) { // 3猜盒  2提示卡 1透视卡 
     var _this = this
 
@@ -2434,7 +2433,13 @@ Page({
       ishowwholebox: false,
     })
   },
-
+  getUserProfileComWhole(w){
+    var _this = this;
+    console.log(1111111)
+    app.getUserProfile((res,userInfo) => {
+        _this.wholebox()
+    });
+  },
   wholebox: function () {
     var _this = this;
 
@@ -2565,6 +2570,15 @@ Page({
       cueCardBox:false
     })
   },
+
+  // 更新用户信息
+  getUserProfileComrePumping(w){
+    var _this = this;
+    console.log(1111111)
+    app.getUserProfile((res,userInfo) => {
+        _this.rePumping()
+    },'',1);
+  },
   rePumping(){
     
     wx.showLoading({
@@ -2623,6 +2637,15 @@ Page({
         };
       }
     })
+  },
+
+  // 更新用户信息
+  getUserProfileComshowxray(w){
+    var _this = this;
+    console.log(1111111)
+    app.getUserProfile((res,userInfo) => {
+        _this.showxray(w)
+    },'',1);
   },
   showxray: function (w) {
     var _this = this

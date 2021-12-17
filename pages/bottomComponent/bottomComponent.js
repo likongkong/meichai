@@ -97,8 +97,7 @@ Component({
           url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
         });
         console.log(111111111)
-        // timestamp>=1634918400
-      }else if(false){
+      }else if(timestamp >= 1639756800){
         console.log(22222222)
         wx.navigateTo({
           url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"

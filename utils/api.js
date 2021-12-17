@@ -56,7 +56,7 @@ export const bankUntie = (id,query) => {
     return apiResquest.get(`brand/brand_withdraw/brand_withdraw_cash/bank_untie/${id}`,query)
 }
 // 查看提现信息
-export const viewWithdrawalInformation = (id,query) => {
+export const viewWithdrawalInformation = (query) => {
     return apiResquest.get(`brand/brand_withdraw/brand_withdraw_cash/view_withdrawal_information`,query)
 }
 // ---------------------------------------- 订单管理 -----------------------------------------

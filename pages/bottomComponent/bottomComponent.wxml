@@ -6,7 +6,7 @@
 				<image wx:else class='navigationltopimg' src='../images/normal_shouye.png'></image>
 			</view>
 			<!-- <view wx:if='{{isChar}}' class='navigationlcon' style='{{whomepage?"color:#fd2844":""}};'>首页</view> -->
-			<view class='navigationlcon' style='{{whomepage?"color:#fd2844":""}};'>首页</view>
+			<view class='navigationlcon' style='{{whomepage?"color:#fd2844":""}}'>首页</view>
 		</view>
 	</view> 
 
@@ -18,7 +18,7 @@
 						<image class='navigationltopimg' src='https://cdn.51chaidan.com/images/sign/camera.png?'></image>
 						<view class='tabshopimg specialellipsis' wx:if='{{dryinglistnum>0}}' style='left:88rpx;'>{{dryinglistnum}}</view>
 					</view>
-					<view class='navigationlcon' style='{{dlfind?"color:#fd2844":""}};'>打卡</view>
+					<view class='navigationlcon' style='{{dlfind?"color:#fd2844":""}}'>打卡</view>
 				</view>		
 		</block>
 		<!-- 发现 -->
@@ -29,7 +29,7 @@
 						<image wx:else class='navigationltopimg' src='https://clw.51chaidan.com//images/goods/find1.png'></image>
 						<view class='tabshopimg specialellipsis' wx:if='{{dryinglistnum>0}}' style='left:88rpx;'>{{dryinglistnum}}</view>
 					</view>
-					<view class='navigationlcon' style='{{dlfind?"color:#fd2844":""}};'>发现</view>
+					<view class='navigationlcon' style='{{dlfind?"color:#fd2844":""}}'>发现</view>
 				</view>		
 		</block>
 
@@ -79,7 +79,7 @@
 				<image wx:else class='navigationltopimg' src='../images/shoppingCarNotImage@2x.png'></image>
 				<view class='tabshopimg specialellipsis' wx:if='{{shopnum>0}}' style='left:88rpx;'>{{shopnum}}</view>
 			</view>
-			<view class='navigationlcon' style='{{wCart?"color:#fd2844":""}};'>购物车</view>
+			<view class='navigationlcon' style='{{wCart?"color:#fd2844":""}}'>购物车</view>
 		</view>
 	</view>
 	<view class='comNavigationEve' bindtap='wmy'>
@@ -88,7 +88,7 @@
 				<image wx:if='{{wmy}}' class='navigationltopimg' src='../images/pressed_wode.png'></image>
 				<image wx:else class='navigationltopimg' src='../images/normal_wode.png'></image>
 			</view>
-			<view class='navigationlcon' style='{{wmy?"color:#fd2844":""}};'>我的</view>
+			<view class='navigationlcon' style='{{wmy?"color:#fd2844":""}}'>我的</view>
 		</view>
 	</view>
 </view>

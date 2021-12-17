@@ -438,7 +438,14 @@ Page({
       });      
     }
   },
-
+  // 更新用户信息
+  getUserProfileCom(w){
+    var _this = this;
+    console.log(1111111)
+    app.getUserProfile((res,userInfo) => {
+        _this.signin();
+    },'',1);
+  },
   signin: function () {
     var _this = this;
 

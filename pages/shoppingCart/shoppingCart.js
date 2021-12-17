@@ -1489,24 +1489,9 @@ Page({
             'complete': function (res) {}
           });
           // _this.shoppingcartlist(1);
+        }else{
+          app.showModalC(res.data.Msg || res.data.msg || '');
         };
-        if (res.data.ReturnCode == 800) {
-          app.showToastC('非该用户订单');
-        };
-        if (res.data.ReturnCode == 815) {
-          app.showToastC('订单状态错误');
-        };
-        if (res.data.ReturnCode == 816) {
-          app.showToastC('不支持的支付类型');
-        };
-        if (res.data.ReturnCode == 817) {
-          app.showToastC('付款明细已生成');
-        };
-        if (res.data.ReturnCode == 201) {
-          app.showToastC('微信预支付失败');
-        };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
       }
     })
   },
@@ -2265,6 +2250,13 @@ Page({
       })
     };
 
+  },
+  // 更新用户信息
+  getUserProfileCom(w){
+    console.log(1111111)
+    app.getUserProfile((res,userInfo) => {
+        this.immediatepurchase()
+    });
   },
   immediatepurchase:function(){
     var _this = this;

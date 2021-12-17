@@ -51,9 +51,15 @@ Page({
     })
   },
 
+  // 更新用户信息
+  getUserProfileCom(w){
+    console.log(1111111)
+    app.getUserProfile((res,userInfo) => {
+      this.openingVip();
+    },'',1);
+  },
  // 开通VIP
  openingVip:function(){
-
   // app.showToastC('敬请期待');
   // return false;
   wx.showLoading({ title: '加载中...'})
@@ -106,24 +112,7 @@ paymentmony:function(cart_id){
                 'complete': function (res) {}
               })
       }else{       
-        if (res.data.ReturnCode == 800) {
-          app.showToastC('非该用户订单');
-        };
-        if (res.data.ReturnCode == 815) {
-          app.showToastC('订单状态错误');
-        };
-        if (res.data.ReturnCode == 816) {
-          app.showToastC('不支持的支付类型');
-        };
-        if (res.data.ReturnCode == 817) {
-          app.showToastC('付款明细已生成');
-        };
-        if (res.data.ReturnCode == 201) {
-          app.showToastC('微信预支付失败');
-        }; 
-        if (res.data.ReturnCode == 805) {
-          app.showToastC('剩余库存不足');
-        };   
+        app.showModalC(res.data.Msg || res.data.msg || '');
       };   
     }
   })

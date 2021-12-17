@@ -1,6 +1,9 @@
 var COS = require('../../common/cos-wx-sdk-v5.js');
 var Dec = require('../../common/public.js'); //aes加密解密js
 const app = getApp();
+let timeNum = 120; //60秒倒计时
+let countDownTime = timeNum;
+let timer; //计时器
 Component({
   /**
    * 组件的属性列表
@@ -55,11 +58,17 @@ Component({
   data: {
     errorDom:'',
     isExplain:false,
+    isCountdown:false,
+    phoneCodeValue:'获取验证码',
   },
    /**
    * 组件的方法列表
    */
   methods: {
+    noclickTip(e){
+      let clicktip = e.currentTarget.dataset.clicktip;
+      app.showToastC(clicktip,1500);
+    },
     showExplain(e){
       let explaintxt = e.currentTarget.dataset.explaintxt;
       this.setData({
@@ -117,8 +126,10 @@ Component({
       this.triggerEvent("bindchange", {value:value[1],name:'shippingPriceStatus'});
     },
     multiseriatePicker(e){
+      console.log(e)
       let index = e.currentTarget.dataset.index;
       let value = e.detail.value;
+      value[1]=value[1]?value[1]:0
       let groupsIndex = `list[${index}].groupsIndex`;
       this.setData({errorDom:''});
       this.setData({[groupsIndex]:value})
@@ -305,10 +316,54 @@ Component({
         [`list[${index}].time`]:value
       })
     },
+
+    smsSend(e){
+      this.setData({errorDom:''});
+      this.triggerEvent("smsSend")
+    },
+    countDown(){
+      if (countDownTime == timeNum) {
+        this.countDown1()
+        this.setData({
+          phoneCodeValue: countDownTime + "s后重试",
+          isCountdown:true
+        })
+      } else {
+        this.setData({
+          isCountdown:true
+        })
+      }
+    },
+    countDown1(){
+      const that = this
+      timer = setInterval(function() { // 设置定时器
+        countDownTime--
+        if (countDownTime == 0) {
+          clearInterval(timer)
+          that.setData({
+            phoneCodeValue: "获取验证码",
+            isCountdown:false
+          })
+          countDownTime = timeNum
+        } else {
+          that.setData({
+            phoneCodeValue: countDownTime + "s后重试",
+            isCountdown:true
+          })
+        }
+      }, 1000)
+    },
+
     comjumpwxnav(e){
       let type = e.currentTarget.dataset.itemtype;
       let whref = e.currentTarget.dataset.whref;
-      app.comjumpwxnav(type,whref)
+      let query = e.currentTarget.dataset.query;
+      this.setData({errorDom:''});
+      if(query){
+        app.comjumpwxnav(type,query)
+      }else{
+        app.comjumpwxnav(type,whref)
+      }
     },
   }
    

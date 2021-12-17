@@ -1240,6 +1240,13 @@ Page({
   listTipImg(){
     this.setData({listTipImg:!this.data.listTipImg});
   },
+  // 更新用户信息
+  getUserProfileComSign(w){
+    console.log(1111111)
+    app.getUserProfile((res,userInfo) => {
+        this.joinlimitlottery()
+    });
+  },
   joinlimitlottery: function () {
     if(app.signindata.isNeedUserInfo){
       app.getUserProfile((res,userInfo) => {
@@ -1860,6 +1867,14 @@ Page({
 
     
 
+  },
+  // 更新用户信息
+  getUserProfileCom(w){
+    var _this = this;
+    console.log(1111111)
+    app.getUserProfile((res,userInfo) => {
+        _this.winnerlogic(w)
+    },'',1);
   },
 
   winnerlogic: function (e) {

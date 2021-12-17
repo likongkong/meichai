@@ -59,6 +59,8 @@ Page({
       {name:'本月'},
     ],
     email:'',
+    isUnbindAndBindMask:false,  //解绑并绑定新卡弹框
+    isUnbindAndBindMask1:false,  //重新绑卡
     isBankcardlistMask:false,  //银行卡列表弹出框
     isUnlinkMask:false,  //解绑银行卡弹框
     unlinkCardId:'',  //解绑id
@@ -67,6 +69,13 @@ Page({
     twoAffirm:false,   //二次确认提现弹框
     twoAffirm1:false,   //二次确认提现弹框---超额
     realname:'', //真实姓名
+    tiedCardList:[{name:'个人商户',id:1},{name:'个体工商户',id:2},{name:'企业商户',id:3}],  //绑卡列表
+    istiedCardlist:false, //是否绑卡
+    isVerification:false,  //验证弹框
+    obj:{},
+    current:1,
+    walletType:0,
+    isOtherAmount:false
   },
   /**
    * 生命周期函数--监听页面加载
@@ -88,9 +97,9 @@ Page({
     this.data.uid = app.signindata.uid;
     if(wx.getStorageSync('access_token')){
       this.getListData();
+      // this.getbankCardList();
       this.getLumpsumAndWithdraw();
       this.getAccountNumberList();
-      this.getbankCardList();
       let a = this.keepTwoDecimalFull(19841);
       console.log(a)
     }else{
@@ -98,7 +107,23 @@ Page({
     };
   },
 
-
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    this.data.loginid = app.signindata.loginid;
+    this.data.uid = app.signindata.uid;
+    if(wx.getStorageSync('access_token')){
+      this.getbankCardList();
+    }else{
+      app.getAccessToken(this.onLoadfun)
+    };
+  },
+  toggleOtherAmount(){
+    this.setData({
+      isOtherAmount:!this.data.isOtherAmount
+    })
+  },
   // js将数字转换成万 并且保留两位小数
   keepTwoDecimalFull (num) {
     if (num > 10000) {
@@ -121,35 +146,73 @@ Page({
     }
     return s_x
   },
+  labelChange(e){
+    let index = e.currentTarget.dataset.index;
+    this.setData({
+      current:index,
+      walletType:index
+    })
+    this.getLumpsumAndWithdraw(index);
+  },
+  onKeyInput(e){
+    let name = e.currentTarget.dataset.name;
+    let value = e.detail.value.trim();
+    this.data.obj[name]=value;
+    console.log(this.data.obj)
+  },
 
   reset(){
     this.setData({limitprame:1,orderData:[],loadprompt:false})
   },
   //获取银行卡列表
   getbankCardList(){
-    api.bankCardList().then((res) => {
-      console.log('行卡列表',res)
-
-      res.data.data.list.forEach(element => {
-        element.account_name1 = ` (${element.account_name.substr(-4)})`;
-      });
-
-      this.setData({
-        bankCardList:res.data.data.list
-      })
-    }).catch((err)=>{
-      console.log(err)
+    let _this = this;
+    let qqq = Dec.Aese('mod=account&operation=getListForCard&uid='+this.data.uid+'&loginid='+this.data.loginid);
+    console.log('行卡列表请求==',Dec.comurl()+'mod=account&operation=getListForCard&uid='+this.data.uid+'&loginid='+this.data.loginid)
+    wx.showLoading({
+      title: '加载中...',
+      mask:true
     })
+    wx.request({
+      url: Dec.comurl() + 'pingan.php' + qqq,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        wx.hideLoading()
+        console.log('行卡列表',res)
+        if (res.data.ReturnCode == 200) {
+          _this.setData({
+            bankCardList:res.data.List.card,
+            verifyCard:res.data.List.verifyCard || [],
+          })
+        }else{
+          app.showToastC(res.data.Msg)  
+        };
+      }
+    });
+    // api.bankCardList().then((res) => {
+    //   console.log('行卡列表',res)
+    //   res.data.data.list.forEach(element => {
+    //     element.account_name1 = ` (${element.account_name.substr(-4)})`;
+    //   });
+
+    //   this.setData({
+    //     bankCardList:res.data.data.list
+    //   })
+    // }).catch((err)=>{
+    //   console.log(err)
+    // })
   },
 
   // 获取钱包余额、提现判断
   getLumpsumAndWithdraw(){
-    api.getLumpsumAndWithdraw({}).then((res) => {
+    api.getLumpsumAndWithdraw({walletType:this.data.walletType}).then((res) => {
       console.log('iofo',res)
       this.setData({
         info:res.data.data.info,
         notify:res.data.data.notify
       })
+      app.signindata.isRecord = res.data.data.info.isRecord; //是否勾选同意挂网协议
     }).catch((err)=>{
       console.log(err)
     })
@@ -219,22 +282,23 @@ Page({
     })
   },
   // 提现判断
-  bideWithdraw(){
+  bideWithdraw(e){
     let _this = this;
-    let withdrawAccount = this.data.withdrawAccount;  
+    // let withdrawAccount = this.data.withdrawAccount;  
     wx.showLoading({
       title: '加载中',
       mask:true
     })
-    api.setDefaultAccount(withdrawAccount.id).then((res) => {
-      console.log('设置账号',res)
-      api.viewWithdrawalInformation(withdrawAccount.id).then((res) => {
+    // api.setDefaultAccount(withdrawAccount.id).then((res) => {
+    //   console.log('设置账号',res)
+      api.viewWithdrawalInformation({walletType:this.data.walletType}).then((res) => {
         console.log('查看提现信息',res)
         wx.hideLoading();
         this.setData({
           viewWithdrawalInfo:res.data.data,
           twoAffirm1:true,
-          realname:res.data.data.account
+          // realname:res.data.data.account,
+          accountId:e.currentTarget.dataset.id,
         })
         // if(Number(withdrawAccount.quota_num) > Number(this.data.info.available_cash_amount)){
         //   this.setData({
@@ -248,9 +312,9 @@ Page({
       }).catch((err)=>{
         console.log(err)
       })
-    }).catch((err)=>{
-      console.log(err)
-    })
+    // }).catch((err)=>{
+    //   console.log(err)
+    // })
 
     
     // wx.showModal({
@@ -285,23 +349,24 @@ Page({
   // 提现
   executionApplicationWithdrawal(){
     let that = this;
-    if(!that.data.realname || that.data.realname == ''){
-      app.showToastC('请输入绑定微信支付的实名',1500);
-      return false;
-    }
+    // if(!that.data.realname || that.data.realname == ''){
+    //   app.showToastC('请输入绑定微信支付的实名',1500);
+    //   return false;
+    // }
     let data = {
-      account:that.data.realname
+      // account:that.data.realname
+      walletType:this.data.walletType,
+      accountId:this.data.accountId,
     }
     console.log(data)
 
     api.executionApplicationWithdrawal(data).then((res) => {
       console.log(res)
-      this.getLumpsumAndWithdraw();
       //今日已申请过提现
-      if(res.data.status_code == 200304){
+      if(res.data.status_code != 200){
         wx.showModal({
           title: '',
-          content: '今日已申请过提现，注意每天仅可申请一次提现，请明天再来提现吧',
+          content: res.data.message,
           showCancel:false,
           confirmText:'关闭',
           confirmColor:'#90D2D6',
@@ -311,6 +376,7 @@ Page({
           }
         })
       }else{
+        this.getLumpsumAndWithdraw(this.data.walletType);
         this.setData({
           showModalStatus:false,
           twoAffirm:false,
@@ -431,6 +497,9 @@ Page({
     })
     console.log('选中的账号',this.data.withdrawAccount)
   },
+  showLoading(){
+    app.showToastC(this.data.info.nocan_trip,3000);
+  },
   // 立即提现1
   withdraw(){
     // if(Number(this.data.info.available_cash_amount)<1){
@@ -438,10 +507,29 @@ Page({
     //     isNotBalanceMask:true
     //   })
     // }else{
-      this.setData({
-        showModalStatus:true
-      })
+      // this.setData({
+      //   showModalStatus:true
+      // })
     // }
+    app.getUserProfile((res,userInfo) => {
+      if(this.data.verifyCard.length==0 && this.data.bankCardList.length==0){
+        this.setData({
+          istiedCardlist:true
+        })
+      }else if(this.data.verifyCard.length==0 && this.data.bankCardList.length>0){
+        this.setData({
+          isBankcardlistMask:true
+        })
+      }else{
+        if(Number(this.data.info.can_income)>0){
+          this.setData({
+            showModalStatus:true
+          })
+        }else{
+          app.showToastC('提现金额必须大于0',1500);
+        }
+      }
+    })
   },
   // 隐藏余额不足弹框
   hideNotBalanceMask(){
@@ -461,22 +549,95 @@ Page({
   hideunlinkMask(){
     this.setData({
       isUnlinkMask:false,
+      isUnbindAndBindMask:false,
+      isUnbindAndBindMask1:false,
     })
   },
-  // 立即解绑
-  immediatelyUnlink(){
-    api.bankUntie(this.data.unlinkCardId).then((res) => {
-      app.showToastC('解绑成功',1500);
-      setTimeout(()=>{
-        this.setData({
-          isUnlinkMask:false,
-        })
-        this.getbankCardList();
-        this.getAccountNumberList();
-      },1500)
-    }).catch((err)=>{
-      console.log(err)
+  hidetiedCardlistMisk(){
+    this.setData({
+      istiedCardlist:false,
     })
+  },
+  toogleVerificationMask(e){
+    this.setData({
+      accountId:e.currentTarget.dataset.id,
+      isVerification:!this.data.isVerification,
+    })
+  },
+  // 解绑并绑定新卡弹框显示
+  alterationBankcard(e){
+    let id = e.currentTarget.dataset.id;
+    let isverify= e.currentTarget.dataset.isverify;
+    if(isverify){
+      this.setData({
+        unlinkCardId:id,
+        isUnbindAndBindMask:true
+      })
+    }else{
+      this.setData({
+        unlinkCardId:id,
+        isUnbindAndBindMask1:true
+      })
+    }
+  },
+  // 解绑并绑定新卡按钮
+  UnbindAndBindBankCard(){
+    this.immediatelyUnlink('',2);
+  },
+  // 立即解绑
+  immediatelyUnlink(e,type=1){  //type==2?解绑并绑定新卡:立即解绑
+    let _this = this;
+    let qqq = Dec.Aese('mod=account&operation=unBindCard&uid='+this.data.uid+'&loginid='+this.data.loginid+'&accountId='+this.data.unlinkCardId);
+    wx.showLoading({
+      title: '加载中...',
+      mask:true
+    })
+    wx.request({
+      url: Dec.comurl() + 'pingan.php' + qqq,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        wx.hideLoading()
+        console.log('解绑',res)
+        if (res.data.ReturnCode == 200) {
+          
+          if(type==1){
+            app.showToastC('解绑成功',1500);
+            setTimeout(()=>{
+              _this.setData({
+                isUnlinkMask:false,
+                isBankcardlistMask:false
+              })
+              _this.onLoadfun();
+              _this.getbankCardList();
+              // this.getAccountNumberList();
+            },1500)
+          }else{
+            _this.setData({
+              isBankcardlistMask:false,
+              isUnbindAndBindMask:false,
+              isUnbindAndBindMask1:false,
+            })
+            _this.tiedCardlist();
+            _this.getbankCardList();
+          }
+        }else{
+          app.showToastC(res.data.Msg)  
+        };
+      }
+    });
+    // api.bankUntie(this.data.unlinkCardId).then((res) => {
+    //   app.showToastC('解绑成功',1500);
+    //   setTimeout(()=>{
+    //     this.setData({
+    //       isUnlinkMask:false,
+    //     })
+    //     this.getbankCardList();
+    //     this.getAccountNumberList();
+    //   },1500)
+    // }).catch((err)=>{
+    //   console.log(err)
+    // })
   },
   // 导出订单弹框
   toggleExportOrdersMask(){
@@ -505,9 +666,37 @@ Page({
   },
   // 银行卡列表显示隐藏
   toogleBankcardlistMask(){
-    this.getbankCardList();
+    if(this.data.bankCardList.length == 0){
+      this.tiedCardlist();
+    }else{
+      this.setData({
+        isBankcardlistMask:!this.data.isBankcardlistMask
+      })
+    }
+    // this.getbankCardList();
+    // this.setData({
+    //   isBankcardlistMask:!this.data.isBankcardlistMask
+    // })
+  },
+
+  //绑卡列表
+  tiedCardlist(){
+    let _this = this;
+    let arr = [];
     this.setData({
-      isBankcardlistMask:!this.data.isBankcardlistMask
+      istiedCardlist:false   //隐藏'添加银行卡提示'弹框
+    })
+    for(var i=0;i<this.data.tiedCardList.length;i++){
+      arr.push(this.data.tiedCardList[i].name);
+    }
+    wx.showActionSheet({
+      itemList: arr,
+      success (res){
+        _this.jumpTiedCard(9045,'type='+_this.data.tiedCardList[res.tapIndex].id);
+      },
+      fail (res) {
+        console.log(res.errMsg)
+      }
     })
   },
   //导出订单选日期
@@ -635,6 +824,45 @@ Page({
       })
     }.bind(this), 200)
   },
+
+  // 提交验证
+  merchantVerification(){
+    let _this = this;
+    let obj = this.data.obj;
+    if(!obj.verificationMoney || obj.verificationMoney == ''){
+      app.showToastC('请输入对公账户的打款金额',1500);
+      return false;
+    }
+    if(!obj.verificationCode || obj.verificationCode == ''){
+      app.showToastC('请输入认证绑卡的验证码',1500);
+      return false;
+    }
+    let qqq = Dec.Aese('mod=account&operation=verifyCard&uid='+this.data.uid+'&loginid='+this.data.loginid+'&accountId='+this.data.accountId+'&verifyCode='+obj.verificationCode+'&authAmount='+obj.verificationMoney);
+    wx.showLoading({
+      title: '加载中...',
+      mask:true
+    })
+    wx.request({
+      url: Dec.comurl() + 'pingan.php' + qqq,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        wx.hideLoading()
+        console.log('对公提交验证',res)
+        if (res.data.ReturnCode == 200) {
+          app.showToastC('验证成功',1500);
+          setTimeout(()=>{
+            _this.setData({
+              isVerification:!_this.data.isVerification,
+            })
+            _this.getbankCardList();
+          },1500)
+        }else{
+          app.showToastC(res.data.Msg)  
+        };
+      }
+    });
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -642,12 +870,6 @@ Page({
     
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    
-  },
 
   /**
    * 生命周期函数--监听页面隐藏
@@ -670,7 +892,7 @@ Page({
     this.reset();
     this.getListData();
     this.getAccountNumberList()
-    this.getLumpsumAndWithdraw();
+    this.getLumpsumAndWithdraw(this.data.walletType);
     this.getbankCardList();
   },
 
@@ -698,6 +920,9 @@ Page({
   comjumpwxnav(e){
     let type = e.currentTarget.dataset.type;
     let whref = e.currentTarget.dataset.whref;
+    app.comjumpwxnav(type,whref)
+  },
+  jumpTiedCard(type,whref){
     app.comjumpwxnav(type,whref)
   },
 })

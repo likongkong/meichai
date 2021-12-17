@@ -1195,11 +1195,11 @@
                             分享好友
                         </view>
 
-                        <view class='totalmoncright' wx:if='{{comdata.order_type==1}}'
+                        <!-- <view class='totalmoncright' wx:if='{{comdata.order_type==1}}'
                             style='color:#ff2840;border:1rpx solid #ff2840;position:relative;margin-right:10rpx;'
                             bindtap='personalhomepage'>
                             发帖推荐
-                        </view>
+                        </view> -->
 
 
                     </view>
@@ -1223,13 +1223,29 @@
                         </view>
 
 
-                        <view class='totalmoncrightcel' data-oid='{{comdata.oid}}'
+                        <!-- <view class='totalmoncrightcel' data-oid='{{comdata.oid}}'
                             style='margin-right:10rpx;position: relative;' data-gcover='{{comdata.gcover}}'
-                            bindtap='lookatthelogistics'>查看物流</view>
+                            bindtap='lookatthelogistics'>查看物流</view> -->
 
-                        <view class='totalmoncright' wx:if='{{comdata.order_type==1}}'
+                        <!-- 寄回物流信息 -->
+                        <block wx:if="{{comdata.isSendBack}}">
+                            <block wx:if="{{comdata.sendBackStatus == 1}}">
+                                <view class='totalmoncright redborcol' style='position: relative;' 
+                                data-href="{{comdata.sendBackAuditStatus==0||comdata.sendBackAuditStatus==5||comdata.sendBackAuditStatus==6?'status=0':'status=1&sendBackId='+comdata.sendBackId}}" 
+                                data-item_type='9054' bindtap='comindellistjump'>商品寄回</view> 
+                            </block>
+                            <block wx:else>
+                                <view class='totalmoncright redborcol' style='position: relative;' data-id='{{comdata.sendBackId}}' data-gcover='{{comdata.gcover}}' bindtap='sendBackLogistics'>查看物流</view> 
+                            </block>
+                        </block>
+                        <!-- 发货的查看物流 -->
+                        <block wx:else>
+                            <view class='totalmoncright' style='position: relative;' data-oid='{{comdata.oid}}' data-gcover='{{comdata.gcover}}' bindtap='lookatthelogistics'>查看物流</view> 
+                        </block>
+
+                        <!-- <view class='totalmoncright' wx:if='{{comdata.order_type==1}}'
                             style='color:#ff2840;border:1rpx solid #ff2840;position:relative;margin-right:10rpx;'
-                            bindtap='personalhomepage'>发帖推荐</view>
+                            bindtap='personalhomepage'>发帖推荐</view> -->
 
 
 
@@ -1322,7 +1338,8 @@
 
                 </view>
                 <view style="overflow:hidden;padding:10rpx 0;" wx:if="{{comdata.auditRefund == 1 || comdata.auditRefund == 2 || comdata.auditRefund == 3}}">
-                    <view wx:if="{{comdata.auditRefund == 1}}" class="totalmoncright" style="border: 1rpx solid #8E8C8D;color: #BBBBBB;clear: both;" catchtap="refund">
+                    <view wx:if="{{comdata.auditRefund == 1}}" class="totalmoncright" style="border: 1rpx solid #8E8C8D;color: #BBBBBB;clear: both;position: relative;">
+                        <button class='shareButton' type='primary' bindtap="getUserProfileRefund"></button>
                         申请退款
                     </view>
                     <view wx:elif="{{comdata.auditRefund == 2}}" style="display:block;font-size:28rpx;color:#5F5F5F;text-align:right;color: #ff2840;" catchtap="refund">退款审核中 ></view>
@@ -1681,8 +1698,7 @@
             style='color:#ea565e;height:260rpx;line-height:45rpx;width:90%;margin:0 auto;font-size:26rpx;display:block;margin:0 auto;overflow: scroll;'>1.活动、0元购、转盘、赠品等购买优惠一并取消\n2.优惠券不予返还；支付优惠一并取消\n3.订单一旦取消，无法恢复\n4.返现金额会从小金库扣除\n5.退款金额1-3工作日原路退回</text>
         <view style='width:90%;margin:0 auto;height:108rpx;'>
             <view
-                style='position:relative;width:46%;height:68rpx;line-height:68rpx;float:left;text-align:center;font-size:26rpx;background:#e94f57;color:#fff;'
-                catchtap='refundtiosun'>申请退款</view>
+                style='position:relative;width:46%;height:68rpx;line-height:68rpx;float:left;text-align:center;font-size:26rpx;background:#e94f57;color:#fff;position: relative;'><button class='shareButton' type='primary' bindtap="getUserProfileRefundtiosun"></button>申请退款</view>
             <view
                 style='position:relative;width:46%;height:68rpx;line-height:68rpx;float:right;text-align:center;font-size:26rpx;background:#cccccc;color:#000;'
                 catchtap='refundtipsfun'>取消</view>

@@ -204,11 +204,21 @@ Page({
   // 查看物流
   lookatthelogistics:function(w){
     var oid = w.target.dataset.oid || w.currentTarget.dataset.oid;
+    var id = w.target.dataset.id || w.currentTarget.dataset.id;
     var gcover = w.target.dataset.gcover || w.currentTarget.dataset.gcover;
     wx.navigateTo({  
-      url: "/pages/lookatthelogistics/lookatthelogistics?oid="+oid+'&gcover='+gcover
+      url: "/pages/lookatthelogistics/lookatthelogistics?oid="+oid+'&gcover='+gcover+'&id='+id
     })
   },
+  // 寄回物流
+  sendBackLogistics:function(w){
+    var id = w.target.dataset.id || w.currentTarget.dataset.id;
+    var gcover = w.target.dataset.gcover || w.currentTarget.dataset.gcover;
+    wx.navigateTo({  
+      url:'/page/settled/pages/sendBackLogistics/sendBackLogistics?id='+id+'&gcover='+gcover
+    })
+  },
+
   // tab切换
   myorhfun:function(e){
     this.setData({
@@ -614,6 +624,10 @@ Page({
         ticketIdentify:arr[j][0].ticketIdentify || '',
         keyDay:arr[j][0].keyDay || '0',
         isReceive:arr[j][0].isReceive || false,
+        isSendBack:arr[j][0].isSendBack || false,
+        sendBackStatus:arr[j][0].sendBackStatus || false,
+        sendBackAuditStatus:arr[j][0].sendBackAuditStatus || false,
+        sendBackId:arr[j][0].sendBackId || 0,
       })
     };   
     if (arrchil && arrchil.length != 0){
@@ -1348,29 +1362,7 @@ Page({
           _this.setData({
              suboformola: false
           })
-          if (res.data.ReturnCode == 800) {
-            app.showToastC('非该用户订单');
-          };
-          if (res.data.ReturnCode == 815) {
-            app.showToastC('订单状态错误');
-          };
-          if (res.data.ReturnCode == 816) {
-            app.showToastC('不支持的支付类型');
-          };
-          if (res.data.ReturnCode == 817) {
-            app.showToastC('付款明细已生成');
-          };
-          if (res.data.ReturnCode == 201) {
-            app.showToastC('微信预支付失败');
-          }; 
-          if (res.data.ReturnCode == 805) {
-            app.showToastC('剩余库存不足');
-          };   
-          if (res.data.ReturnCode == 820) {
-            app.showToastC('支付时间已过');
-          };    
-          // 判断非200和登录
-          Dec.comiftrsign(_this, res, app); 
+          app.showModalC(res.data.Msg || res.data.msg || '');
         };               
       }
     })
@@ -1502,6 +1494,10 @@ Page({
         awatip: true,
         awardrresentiftr:false
       })
+    } else if (item_type == 9054) {   // 取件信息
+      wx.navigateTo({
+        url: `/page/settled/pages/delivery/delivery?${whref}`
+      });      
     };
   }, 
 
@@ -1652,23 +1648,7 @@ Page({
                   'complete': function (res) {}
                 })
               } else {
-                if (res.data.ReturnCode == 900) {
-                  app.showToastC('登陆状态有误');
-                } else if (res.data.ReturnCode == 800) {
-                  app.showToastC('非该用户订单');
-                } else if (res.data.ReturnCode == 815) {
-                  app.showToastC('订单状态错误');
-                } else if (res.data.ReturnCode == 816) {
-                  app.showToastC('不支持的支付类型');
-                } else if (res.data.ReturnCode == 817) {
-                  app.showToastC('付款明细已生成');
-                } else if (res.data.ReturnCode == 201) {
-                  app.showToastC('微信预支付失败');
-                } else if (res.data.ReturnCode == 805) {
-                  app.showToastC('剩余库存不足');
-                } else {
-                  app.showToastC(res.data.Msg);
-                };
+                app.showModalC(res.data.Msg || res.data.msg || '');
               };
 
             }
