@@ -770,8 +770,8 @@
               </view>
               <view class="addsopcar" style="height:60rpx;line-height:60rpx;" wx:elif='{{zunmdata.status==3}}'>已结束</view>
               <view class="addsopcar" style="height:60rpx;line-height:60rpx;" wx:elif='{{zunmdata.status==0}}'>已售罄</view>
-              <text class="addsopcar money" style="height:60rpx;{{zunmdata.limitBuy>0?'line-height:30rpx;font-size:22rpx;':'line-height:60rpx;font-size:30rpx;'}}{{zunmdata.status==2?'background:#FB595F;':''}}border-radius:60rpx;margin-top:0;display:block;position: relative;" wx:elif='{{zunmdata.status==2}}'>
-                <button class='shareButton' type='primary' bindtap="getUserProfileCom"></button>
+              <text class="addsopcar money" style="height:60rpx;{{zunmdata.limitBuy>0?'line-height:30rpx;font-size:22rpx;':'line-height:60rpx;font-size:30rpx;'}}{{zunmdata.status==2?'background:#FB595F;':''}}border-radius:60rpx;margin-top:0;display:block;position: relative;" wx:elif='{{zunmdata.status==2}}' catchtap="dsbffunblock">
+                <!-- <button class='shareButton' type='primary' bindtap="getUserProfileCom"></button> -->
                 <block wx:if='{{zunmdata.limitBuy>0}}'>立即购买\n(限购{{zunmdata.limitBuy}}体/人)</block>
                 <block wx:else>立即购买</block>
               </text>
@@ -1047,8 +1047,8 @@
                 <view class="addsopcar" style="height:60rpx;line-height:60rpx;" wx:elif='{{zunmdata.status==3}}'>已结束</view>
                 <view class="addsopcar" style="height:60rpx;line-height:60rpx;" wx:elif='{{zunmdata.status==0}}'>已售罄</view>
                       
-                <text class="addsopcar money" style="height:60rpx;{{zunmdata.limitBuy>0?'line-height:30rpx;font-size:22rpx;':'line-height:60rpx;font-size:30rpx;'}}{{zunmdata.status==2?'background:#FB595F;':''}}border-radius:60rpx;margin-top:0;display:block;position: relative;" wx:elif='{{zunmdata.status==2}}'>
-                  <button class='shareButton' type='primary' bindtap="getUserProfileCom"></button>
+                <text class="addsopcar money" style="height:60rpx;{{zunmdata.limitBuy>0?'line-height:30rpx;font-size:22rpx;':'line-height:60rpx;font-size:30rpx;'}}{{zunmdata.status==2?'background:#FB595F;':''}}border-radius:60rpx;margin-top:0;display:block;position: relative;" wx:elif='{{zunmdata.status==2}}' catchtap="dsbffunblock">
+                  <!-- <button class='shareButton' type='primary' bindtap="getUserProfileCom"></button> -->
                   <block wx:if='{{zunmdata.limitBuy>0}}'>立即购买\n(限购{{zunmdata.limitBuy}}体/人)</block>
                   <block wx:else>立即购买</block>
                 </text>

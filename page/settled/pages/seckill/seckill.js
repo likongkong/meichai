@@ -1770,7 +1770,7 @@ Page({
         // _this.setData({gid: gid});
         // _this.adjdatagid();
         wx.redirectTo({
-          url: "/pages/detailspage/detailspage?gid=" + gid
+          url: "/page/settled/pages/seckill/seckill?gid=" + gid
         });        
       }; 
   },

@@ -268,7 +268,7 @@
                 </view>
             </view>
             <view class='dlfhtitlenew' wx:if='{{item.type==4}}'>签到赢积分</view>
-						<view class='dlfhtitlenew' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail' wx:elif='{{item.title}}'>{{item.title}}</view>
+						<view class='dlfhtitlenew multilineellipsis' style="padding-bottom:5rpx;" data-drying_id='{{item.id}}' catchtap='jumpdlfdetail' wx:elif='{{item.title}}'>{{item.title}}</view>
 						
 						<view class='dlfhtitlenew' wx:if='{{item.temporary}}' style="color:#178FF8;">{{item.temporary}}</view>
             <!-- 动态 -->
@@ -392,7 +392,7 @@
                 </view>
             </view>
             <view class='dlfhtitlenew' wx:if='{{item.type==4}}'>签到赢积分</view>
-						<view class='dlfhtitlenew' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail' wx:elif='{{item.title}}'>{{item.title}}</view>
+						<view class='dlfhtitlenew multilineellipsis' style="padding-bottom:5rpx;" data-drying_id='{{item.id}}' catchtap='jumpdlfdetail' wx:elif='{{item.title}}'>{{item.title}}</view>
 						
 						<view class='dlfhtitlenew' wx:if='{{item.temporary}}' style="color:#178FF8;">{{item.temporary}}</view>
             <!-- 动态 -->
