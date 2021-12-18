@@ -623,4 +623,11 @@
 
 
 
-
+<!-- 送隐藏说明弹框 -->
+<view class="mask" wx:if="{{myothertoydgTip && concealNum && ToyCabinetDescription}}" catchtouchmove="true" catchtap="toggleExplain">
+  <view class="maskBox" catchtap="true">
+    <!-- <text class="maskBoxtitle">端盒送隐藏或异色活动说明</text> -->
+    <text class="maskTxt">{{ToyCabinetDescription}}</text>
+    <view class="wenhaogb" catchtap="toggleExplain">我知道了</view>
+  </view>
+</view>

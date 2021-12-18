@@ -143,7 +143,8 @@ App({
     placeAnOrderOne:'', // 购票页 下单数据
     placeAnOrderTwo:'',
     isNeedUserInfo:false,
-    isFocusPublic:false // 是否关注公众号
+    isFocusPublic:false, // 是否关注公众号
+    myothertoydgTip:true
   },
 
   getAccessToken(callback){

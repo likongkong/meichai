@@ -138,7 +138,10 @@ Page({
     // 是否使用抽盒金抵扣
     isUseBlindboxMoney:true,
     // 提交订单时是否使用抽盒金抵扣
-    isDeductNum:1
+    isDeductNum:1,
+    ToyCabinetDescription:'',
+    myothertoydgTip:false,
+    concealNum:true
   },
   useBlindboxMoneyFun(){
     this.setData({
@@ -953,7 +956,13 @@ Page({
     };
 
   },
-
+  toggleExplain(){
+    this.setData({
+      concealNum:false,
+      myothertoydgTip:false
+    })
+    app.signindata.myothertoydgTip = false;
+  },
   onLoadfun: function () {
     var _this = this
 
@@ -967,7 +976,8 @@ Page({
       avatarUrl: app.signindata.avatarUrl,
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
       defaultinformation:app.signindata.defaultinformation,
-      blindboxMoney:app.signindata.blindboxMoney
+      blindboxMoney:app.signindata.blindboxMoney,
+      myothertoydgTip:app.signindata.myothertoydgTip || false
     });
     if (_this.data.ownerId == _this.data.uid || _this.data.ownerId == 'own') {
       var userInfo = {
@@ -1008,6 +1018,18 @@ Page({
 
       _this.nextpagediao();
     }
+
+    wx.request({
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/toyCabinetExplain.json',
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        console.log('=======',res)
+        _this.setData({
+          ToyCabinetDescription:res.data.springFrame || ''
+        })
+      }
+    });
 
     setTimeout(function () {
       _this.getdefault()
