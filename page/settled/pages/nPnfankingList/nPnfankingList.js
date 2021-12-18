@@ -88,10 +88,10 @@ Page({
     var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
     var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
     // 1639324800  timestamp >= 1639324800
-    if(timestamp >= 1639843200){
+    if(timestamp >= 1640534400){
       this.setData({
         endTime:Y + '-' + M +'-' + D,
-        selectDate:'2021-12-18',
+        selectDate:'2021-12-27',
         isFinish:true
       })
     }else{

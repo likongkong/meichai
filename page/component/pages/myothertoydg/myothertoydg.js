@@ -58,8 +58,8 @@ Page({
     headhidden: false,
     shopnum: 0,
     dryinglistnum: 0,
-    // ,{name: '已回收',ind: 8}
-    headtab: [{name: '全部',ind: 0},{name: '出售中',ind: 1},{name: '已售出',ind: 2},{name: '待发货',ind: 4},{name: '已发货',ind: 3}],
+    // ,{name: '已回收',ind: 8} ,{name: '出售中',ind: 1},{name: '已售出',ind: 2}
+    headtab: [{name: '全部',ind: 0},{name: '待发货',ind: 4},{name: '已发货',ind: 3}],
 
     headtabid: 0,
     c_title: '我的玩具柜',
