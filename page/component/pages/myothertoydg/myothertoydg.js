@@ -616,6 +616,7 @@ Page({
             _this.setData({
               listdataown: listdata,
               tipCharge:res.data.Info.tipCharge,
+              noBuyToyStatus:res.data.Info.noBuyToyStatus,
             });
             _this.getimginfolist();
           } else {
@@ -1067,6 +1068,7 @@ Page({
             _this.setData({
               listdata: listdata,
               userInfo: userInfo,
+              noBuyToyStatus:res.data.Info.noBuyToyStatus,
               tipCharge:res.data.Info.tipCharge,
               deductRatio:res.data.Info.deduct.deductRatio,
               isDeduct:res.data.Info.deduct.isDeduct,
