@@ -73,7 +73,9 @@
           </view>
           <view class="idle_otherRight">
             <image src="{{cheaper.thumb}}" mode="aspectFit"></image>
-            <text>￥{{cheaper.minPrice}}</text>
+            <block wx:if='{{!noBuyToyStatus}}'>
+                <text data-ind='{{!noBuyToyStatus}}'>￥{{cheaper.minPrice}}</text>
+            </block>
           </view>
         </view>
         <view class="idle_hot idle_otherFlex" data-pageid="1" catchtap="jumpzhuanqu">
@@ -85,7 +87,9 @@
           </view>
           <view class="idle_otherRight">
             <image src="{{hot.thumb}}" mode="aspectFit"></image>
-            <text>￥{{hot.minPrice}}</text>
+            <block wx:if='{{!noBuyToyStatus}}'>
+                <text data-ind='{{!noBuyToyStatus}}'>￥{{hot.minPrice}}</text>
+            </block>
           </view>
         </view>
       </view>
@@ -94,14 +98,14 @@
         <view class="idle_listBox">
           <block wx:for="{{dataList}}" wx:key='key' wx:if="{{index%2 == 0}}">
             <view class="idle_listItem" data-id="{{item.seriesId}}" data-minprice="{{item.minPrice}}" catchtap="jumpshopbut">
-              <template is="card" data="{{...item}}"></template>
+              <template is="card" data="{{...item,noBuyToyStatus}}"></template>
             </view>
           </block>        
         </view>
        <view class="idle_listBox">
           <block wx:for="{{dataList}}" wx:key='key' wx:if="{{index%2 != 0}}">
             <view class="idle_listItem" data-id="{{item.seriesId}}" data-minprice="{{item.minPrice}}" catchtap="jumpshopbut">
-              <template is="card" data="{{...item}}"></template>
+              <template is="card" data="{{...item,noBuyToyStatus}}"></template>
             </view>
           </block>
         </view>
@@ -132,17 +136,20 @@
     <text class="idle_listItemName">{{seriesName}}</text>
     <view class="idle_listItemBox">
       <text class="idle_listItemTxt">{{click}}人喜欢</text>
-      <block wx:if="{{minPrice}}">
-        <block wx:if="{{minPrice == maxPrice}}">
-          <text class="idle_listItemPrice">￥{{minPrice}}</text>
-        </block>
-        <block wx:else>
-          <text class="idle_listItemPrice">￥{{minPrice}}~￥{{maxPrice}}</text>
-        </block>
+      <block wx:if='{{!noBuyToyStatus}}'>
+          <block wx:if="{{minPrice}}">
+            <block wx:if="{{minPrice == maxPrice}}">
+              <text class="idle_listItemPrice">￥{{minPrice}}</text>
+            </block>
+            <block wx:else>
+              <text class="idle_listItemPrice">￥{{minPrice}}~￥{{maxPrice}}</text>
+            </block>
+          </block>
+          <block wx:else>
+            <text class="idle_listItemPrice">暂无报价</text>
+          </block>
       </block>
-      <block wx:else>
-        <text class="idle_listItemPrice">暂无报价</text>
-      </block>
+
     </view>
   </view>
 </template>
@@ -163,7 +170,10 @@
 
 <view class='ocambottom' style='{{isIphoneX?"bottom:130rpx;":"bottom:110rpx;"}}'>
     <view class='ocambottomeve' style='border:2rpx solid #85c25d;color:#85c25d;margin-right:15rpx;' catchtap='jumpmyo'>我的玩具柜<text wx:if='{{countcartcounttoy.countToy!=0&&countcartcounttoy.countToy}}'>({{countcartcounttoy.countToy}})</text></view>
-    <view class='ocambottomeve' style='border:2rpx solid #5daefd;color:#5daefd;' catchtap='jumpcartbut'>购物车<text wx:if='{{countcartcounttoy.countCart!=0&&countcartcounttoy.countCart}}'>({{countcartcounttoy.countCart}})</text></view>
+    <block wx:if='{{!noBuyToyStatus}}'>
+        <view class='ocambottomeve' style='border:2rpx solid #5daefd;color:#5daefd;' catchtap='jumpcartbut'>购物车<text wx:if='{{countcartcounttoy.countCart!=0&&countcartcounttoy.countCart}}'>({{countcartcounttoy.countCart}})</text></view>
+    </block>
+    
 </view>
 
 

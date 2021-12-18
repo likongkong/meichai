@@ -302,8 +302,8 @@
           "scene": null
         },
         {
-          "name": "pages/activitydetailspage/activitydetailspage",
-          "pathName": "pages/activitydetailspage/activitydetailspage",
+          "name": "闲置",
+          "pathName": "page/component/pages/ocamendment/ocamendment",
           "query": "id=506436",
           "scene": null
         },
