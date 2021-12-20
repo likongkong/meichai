@@ -353,6 +353,7 @@ Page({
     //   app.showToastC('请输入绑定微信支付的实名',1500);
     //   return false;
     // }
+    console.log('this.data.accountId',this.data.accountId)
     let data = {
       // account:that.data.realname
       walletType:this.data.walletType,
