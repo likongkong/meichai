@@ -1523,7 +1523,7 @@ vipOrOrdermine1(){
                         fail: function () {},
                       });
 
-                  }else{
+                  }else if(_this.data.activityblindbox.length != 0){
 
                     // 第一步 底部背景颜色改变
                     ctxt.fillStyle = '#feffff';
@@ -1641,6 +1641,25 @@ vipOrOrdermine1(){
                           app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:010}');
                         }
                       });
+                    }else{
+                      ctxt.draw(true, setTimeout(function () {
+                        wx.canvasToTempFilePath({
+                          canvasId: 'myordercanimgser',
+                          success: function (res) {
+                            _this.setData({
+                              actimgshare: res.tempFilePath,
+                              headhidden: true
+                            });
+                            wx.hideLoading()
+                          },
+                          fail: function (res) {
+                            wx.hideLoading()
+                            app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:01}');
+                            _this.setData({ upserimgbox: false, headhidden: true });
+
+                          },
+                        });
+                      }, 300));
                     }
 
                   },
@@ -1706,7 +1725,7 @@ vipOrOrdermine1(){
                             fail: function () {},
                           });
     
-                      }else{
+                      }else if(_this.data.activityblindbox.length != 0){
     
                         // 第一步 底部背景颜色改变
                         ctxt.fillStyle = '#feffff';
@@ -1824,6 +1843,26 @@ vipOrOrdermine1(){
                               app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:010}');
                             }
                           });
+                        }else{
+                          ctxt.drawImage(res.path, 17, 180, 285, 151);
+                                        ctxt.draw(true, setTimeout(function () {
+                                          wx.canvasToTempFilePath({
+                                            canvasId: 'myordercanimgser',
+                                            success: function (res) {
+                                              _this.setData({
+                                                actimgshare: res.tempFilePath,
+                                                headhidden: true
+                                              });
+                                              wx.hideLoading()
+                                            },
+                                            fail: function (res) {
+                                              wx.hideLoading()
+                                              app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:01}');
+                                              _this.setData({ upserimgbox: false, headhidden: true });
+    
+                                            },
+                                          });
+                                        }, 300));
                         }
     
                       },
@@ -1921,7 +1960,7 @@ vipOrOrdermine1(){
                         fail: function () {},
                       });
 
-                  }else{
+                  }else if(_this.data.activityblindbox.length != 0){
 
                     // 第一步 底部背景颜色改变
                     ctxt.fillStyle = '#feffff';
@@ -2040,6 +2079,26 @@ vipOrOrdermine1(){
                           app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:010}');
                         }
                       });
+                    }else{
+                      ctxt.drawImage(res.path, 17, 180, 285, 151);
+                                    ctxt.draw(true, setTimeout(function () {
+                                      wx.canvasToTempFilePath({
+                                        canvasId: 'myordercanimgser',
+                                        success: function (res) {
+                                          _this.setData({
+                                            actimgshare: res.tempFilePath,
+                                            headhidden: true
+                                          });
+                                          wx.hideLoading()
+                                        },
+                                        fail: function (res) {
+                                          wx.hideLoading()
+                                          app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:01}');
+                                          _this.setData({ upserimgbox: false, headhidden: true });
+
+                                        },
+                                      });
+                                    }, 300));
                     }
                   },
                   fail: function (res) {

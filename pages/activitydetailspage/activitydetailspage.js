@@ -4336,7 +4336,7 @@ closefrindcommoni:function(){
                             fail: function () {},
                           });
 
-                      }else{
+                      }else if(_this.data.activityblindbox.length != 0){
 
                           // 第一步 底部背景颜色改变
                           ctxt.fillStyle = '#feffff';
@@ -4437,6 +4437,22 @@ closefrindcommoni:function(){
 
                           },
                         });
+                        }else{
+                          ctxt.draw(true, setTimeout(function () {
+                            wx.canvasToTempFilePath({
+                              canvasId: 'myordercanimgser',
+                              success: function (res) {
+                                _this.setData({
+                                  actimgshareWinningtheprize: res.tempFilePath,
+                                  headhidden: true
+                                });
+                              },
+                              fail: function (res) {
+                                app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:05}');
+                                _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
+                              },
+                            });
+                          }, 300));
                         }
                       },
                       fail: function (res) {
@@ -4501,7 +4517,7 @@ closefrindcommoni:function(){
                                 fail: function () {},
                               });
     
-                          }else{
+                          }else if(_this.data.activityblindbox.length != 0){
     
                               // 第一步 底部背景颜色改变
                               ctxt.fillStyle = '#feffff';
@@ -4602,6 +4618,22 @@ closefrindcommoni:function(){
     
                               },
                             });
+                            }else{
+                              ctxt.draw(true, setTimeout(function () {
+                                wx.canvasToTempFilePath({
+                                  canvasId: 'myordercanimgser',
+                                  success: function (res) {
+                                    _this.setData({
+                                      actimgshareWinningtheprize: res.tempFilePath,
+                                      headhidden: true
+                                    });
+                                  },
+                                  fail: function (res) {
+                                    app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:05}');
+                                    _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
+                                  },
+                                });
+                              }, 300));
                             }
                           },
                           fail: function (res) {
@@ -4693,7 +4725,7 @@ closefrindcommoni:function(){
                             fail: function () {},
                           });
 
-                      }else{
+                      }else if(_this.data.activityblindbox.length != 0){
 
                           // 第一步 底部背景颜色改变
                           ctxt.fillStyle = '#feffff';
@@ -4794,6 +4826,22 @@ closefrindcommoni:function(){
 
                           },
                         });
+                        }else{
+                          ctxt.draw(true, setTimeout(function () {
+                            wx.canvasToTempFilePath({
+                              canvasId: 'myordercanimgser',
+                              success: function (res) {
+                                _this.setData({
+                                  actimgshareWinningtheprize: res.tempFilePath,
+                                  headhidden: true
+                                });
+                              },
+                              fail: function (res) {
+                                app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:05}');
+                                _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
+                              },
+                            });
+                          }, 300));
                         }
                       },
                       fail: function (res) {

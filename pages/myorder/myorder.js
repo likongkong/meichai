@@ -1856,114 +1856,134 @@ Page({
                               fail: function () {},
                             });
 
-                        }else{
+                        }else if(_this.data.activityblindbox.length != 0){
 
-                        // 第一步 底部背景颜色改变
-                        // ctxt.fillStyle = '#b3b2b2';
-                        ctxt.fillStyle = '#feffff';
-                        ctxt.fillRect(0, 414, 319, 175);
-                        ctxt.draw(true);
-                        // 第二部 渲染标题
-                        var strnew = '—— 在线抽盒机 ——';
-                        ctxt.setFontSize(13);
-                        ctxt.setFillStyle('#000');
-                        ctxt.fillText(strnew, (319 - ctxt.measureText(strnew).width) / 2, 437);
-                        ctxt.draw(true);
-                        // 第三部 渲染左边图片
-                        wx.getImageInfo({
-                          src: _this.data.activityblindbox[0].cover,
-                          success: function (res) {
-                            // 渲染左边图片
-                            ctxt.fillStyle = '#fff';
-                            ctxt.fillRect(10, 449, 144, 130);
+                            // 第一步 底部背景颜色改变
+                            // ctxt.fillStyle = '#b3b2b2';
+                            ctxt.fillStyle = '#feffff';
+                            ctxt.fillRect(0, 414, 319, 175);
                             ctxt.draw(true);
-                            ctxt.drawImage(res.path, 10, 449, 144, 77)
-                            ctxt.draw(true);
-                            if(_this.data.activityblindbox[0].isNewArrival){
-                              ctxt.drawImage(labelstyleImg, 114, 449, 40, 40)
-                              ctxt.draw(true);
-                            }
-                            ctxt.setFontSize(11);
+                            // 第二部 渲染标题
+                            var strnew = '—— 在线抽盒机 ——';
+                            ctxt.setFontSize(13);
                             ctxt.setFillStyle('#000');
-                            ctxt.fillText(_this.data.activityblindbox[0].name, 13, 544);
+                            ctxt.fillText(strnew, (319 - ctxt.measureText(strnew).width) / 2, 437);
                             ctxt.draw(true);
-                            ctxt.setFontSize(11);
-                            ctxt.setFillStyle('#ff2742');
-                            ctxt.fillText('￥' + _this.data.activityblindbox[0].shop_price, 13, 566);
-                            ctxt.draw(true);
-                            if (_this.data.activityblindbox[0].tip){
-                              ctxt.setFontSize(10);
-                              ctxt.setFillStyle('#ff2742');
-                              ctxt.fillText(_this.data.activityblindbox[0].tip, 83, 566);
-                              ctxt.draw(true);
-                              ctxt.strokeStyle = "#ff2742";
-                              ctxt.lineWidth = 1;
-                              ctxt.strokeRect(80, 554, ctxt.measureText(_this.data.activityblindbox[0].tip).width + 6, 16);
-                              ctxt.draw(true);
-                            }
-
-                            // 第四部 渲染右边图片
+                            // 第三部 渲染左边图片
                             wx.getImageInfo({
-                              src: _this.data.activityblindbox[1].cover,
+                              src: _this.data.activityblindbox[0].cover,
                               success: function (res) {
-                                // 渲染右边图片
+                                // 渲染左边图片
                                 ctxt.fillStyle = '#fff';
-                                ctxt.fillRect(164, 449, 144, 130);
+                                ctxt.fillRect(10, 449, 144, 130);
                                 ctxt.draw(true);
-                                ctxt.drawImage(res.path, 164, 449, 144, 77)
+                                ctxt.drawImage(res.path, 10, 449, 144, 77)
                                 ctxt.draw(true);
-                                if(_this.data.activityblindbox[1].isNewArrival){
-                                  ctxt.drawImage(labelstyleImg, 268, 449, 40, 40)
+                                if(_this.data.activityblindbox[0].isNewArrival){
+                                  ctxt.drawImage(labelstyleImg, 114, 449, 40, 40)
                                   ctxt.draw(true);
                                 }
                                 ctxt.setFontSize(11);
                                 ctxt.setFillStyle('#000');
-                                ctxt.fillText(_this.data.activityblindbox[1].name, 167, 544);
+                                ctxt.fillText(_this.data.activityblindbox[0].name, 13, 544);
                                 ctxt.draw(true);
                                 ctxt.setFontSize(11);
                                 ctxt.setFillStyle('#ff2742');
-                                ctxt.fillText('￥' + _this.data.activityblindbox[1].shop_price, 167, 566);
+                                ctxt.fillText('￥' + _this.data.activityblindbox[0].shop_price, 13, 566);
                                 ctxt.draw(true);
-                                if (_this.data.activityblindbox[1].tip){
+                                if (_this.data.activityblindbox[0].tip){
                                   ctxt.setFontSize(10);
                                   ctxt.setFillStyle('#ff2742');
-                                  ctxt.fillText(_this.data.activityblindbox[1].tip, 237, 566);
+                                  ctxt.fillText(_this.data.activityblindbox[0].tip, 83, 566);
                                   ctxt.draw(true);
                                   ctxt.strokeStyle = "#ff2742";
                                   ctxt.lineWidth = 1;
-                                  ctxt.strokeRect(234, 554, ctxt.measureText(_this.data.activityblindbox[1].tip).width + 6, 16);
+                                  ctxt.strokeRect(80, 554, ctxt.measureText(_this.data.activityblindbox[0].tip).width + 6, 16);
                                   ctxt.draw(true);
                                 }
 
+                                // 第四部 渲染右边图片
+                                wx.getImageInfo({
+                                  src: _this.data.activityblindbox[1].cover,
+                                  success: function (res) {
+                                    // 渲染右边图片
+                                    ctxt.fillStyle = '#fff';
+                                    ctxt.fillRect(164, 449, 144, 130);
+                                    ctxt.draw(true);
+                                    ctxt.drawImage(res.path, 164, 449, 144, 77)
+                                    ctxt.draw(true);
+                                    if(_this.data.activityblindbox[1].isNewArrival){
+                                      ctxt.drawImage(labelstyleImg, 268, 449, 40, 40)
+                                      ctxt.draw(true);
+                                    }
+                                    ctxt.setFontSize(11);
+                                    ctxt.setFillStyle('#000');
+                                    ctxt.fillText(_this.data.activityblindbox[1].name, 167, 544);
+                                    ctxt.draw(true);
+                                    ctxt.setFontSize(11);
+                                    ctxt.setFillStyle('#ff2742');
+                                    ctxt.fillText('￥' + _this.data.activityblindbox[1].shop_price, 167, 566);
+                                    ctxt.draw(true);
+                                    if (_this.data.activityblindbox[1].tip){
+                                      ctxt.setFontSize(10);
+                                      ctxt.setFillStyle('#ff2742');
+                                      ctxt.fillText(_this.data.activityblindbox[1].tip, 237, 566);
+                                      ctxt.draw(true);
+                                      ctxt.strokeStyle = "#ff2742";
+                                      ctxt.lineWidth = 1;
+                                      ctxt.strokeRect(234, 554, ctxt.measureText(_this.data.activityblindbox[1].tip).width + 6, 16);
+                                      ctxt.draw(true);
+                                    }
 
-                                      ctxt.draw(true, setTimeout(function () {
-                                        wx.canvasToTempFilePath({
-                                          canvasId: 'myordercanimgser' + cart_idsave,
-                                          success: function (res) {
-                                            generatePicturesimg['myordercanimgser' + cart_idsave] = res.tempFilePath
-                                            _this.setData({
-                                              actimgshare: res.tempFilePath,
-                                              headhidden: true,
-                                              generatePicturesimg: generatePicturesimg
+
+                                          ctxt.draw(true, setTimeout(function () {
+                                            wx.canvasToTempFilePath({
+                                              canvasId: 'myordercanimgser' + cart_idsave,
+                                              success: function (res) {
+                                                generatePicturesimg['myordercanimgser' + cart_idsave] = res.tempFilePath
+                                                _this.setData({
+                                                  actimgshare: res.tempFilePath,
+                                                  headhidden: true,
+                                                  generatePicturesimg: generatePicturesimg
+                                                });
+                                                wx.hideLoading()
+                                              },
+                                              fail: function (res) {
+                                                wx.hideLoading()
+                                                app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:01}');
+                                                _this.setData({ upserimgbox: false, headhidden: true });
+
+                                              },
                                             });
-                                            wx.hideLoading()
-                                          },
-                                          fail: function (res) {
-                                            wx.hideLoading()
-                                            app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:01}');
-                                            _this.setData({ upserimgbox: false, headhidden: true });
+                                          }, 300));
 
-                                          },
-                                        });
-                                      }, 300));
-
+                                  },
+                                  fail: function () {},
+                                });
                               },
                               fail: function () {},
-                            });
-                          },
-                          fail: function () {},
-                        });     
-                        }
+                            });     
+                        }else{
+                            ctxt.draw(true, setTimeout(function () {
+                              wx.canvasToTempFilePath({
+                                canvasId: 'myordercanimgser' + cart_idsave,
+                                success: function (res) {
+                                  generatePicturesimg['myordercanimgser' + cart_idsave] = res.tempFilePath
+                                  _this.setData({
+                                    actimgshare: res.tempFilePath,
+                                    headhidden: true,
+                                    generatePicturesimg: generatePicturesimg
+                                  });
+                                  wx.hideLoading()
+                                },
+                                fail: function (res) {
+                                  wx.hideLoading()
+                                  app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:01}');
+                                  _this.setData({ upserimgbox: false, headhidden: true });
+                                },
+                              });
+                            }, 300));                          
+                        };
                       },
                       fail: function (res) {
                         wx.hideLoading()
@@ -2030,7 +2050,7 @@ Page({
                                   fail: function () {},
                                 });
     
-                            }else{
+                            }else if(_this.data.activityblindbox.length != 0){
     
                             // 第一步 底部背景颜色改变
                             // ctxt.fillStyle = '#b3b2b2';
@@ -2137,6 +2157,27 @@ Page({
                               },
                               fail: function () {},
                             });     
+                            }else{
+                              ctxt.draw(true, setTimeout(function () {
+                                wx.canvasToTempFilePath({
+                                  canvasId: 'myordercanimgser' + cart_idsave,
+                                  success: function (res) {
+                                    generatePicturesimg['myordercanimgser' + cart_idsave] = res.tempFilePath
+                                    _this.setData({
+                                      actimgshare: res.tempFilePath,
+                                      headhidden: true,
+                                      generatePicturesimg: generatePicturesimg
+                                    });
+                                    wx.hideLoading()
+                                  },
+                                  fail: function (res) {
+                                    wx.hideLoading()
+                                    app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:01}');
+                                    _this.setData({ upserimgbox: false, headhidden: true });
+
+                                  },
+                                });
+                              }, 300));
                             }
                           },
                           fail: function (res) {
@@ -2230,7 +2271,7 @@ Page({
                             fail: function () {},
                           });
 
-                      }else{
+                      }else if(_this.data.activityblindbox.length != 0){
 
                         // 第一步 底部背景颜色改变
                         // ctxt.fillStyle = '#b3b2b2';
@@ -2337,6 +2378,27 @@ Page({
                           },
                           fail: function () {},
                         });     
+                      }else{
+                        ctxt.draw(true, setTimeout(function () {
+                          wx.canvasToTempFilePath({
+                            canvasId: 'myordercanimgser' + cart_idsave,
+                            success: function (res) {
+                              generatePicturesimg['myordercanimgser' + cart_idsave] = res.tempFilePath
+                              _this.setData({
+                                actimgshare: res.tempFilePath,
+                                headhidden: true,
+                                generatePicturesimg: generatePicturesimg
+                              });
+                              wx.hideLoading()
+                            },
+                            fail: function (res) {
+                              wx.hideLoading()
+                              app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:01}');
+                              _this.setData({ upserimgbox: false, headhidden: true });
+
+                            },
+                          });
+                        }, 300));
                       }
                       },
                       fail: function (res) {
