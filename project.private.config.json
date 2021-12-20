@@ -320,8 +320,8 @@
           "scene": null
         },
         {
-          "name": "page/component/pages/webview/webview",
-          "pathName": "page/component/pages/webview/webview",
+          "name": "售后服务",
+          "pathName": "page/settled/pages/afterSaleService/afterSaleService",
           "query": "",
           "scene": null
         },
