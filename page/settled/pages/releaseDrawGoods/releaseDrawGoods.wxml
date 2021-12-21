@@ -71,13 +71,13 @@
   bind:bindchange="bindchange">
   </settledForm>
 
-  <!-- <settledForm 
+  <settledForm 
   id="settledForm4"
   statusBarHeightMc="{{statusBarHeightMc}}"
   form="dynamicContent"
   list="{{listData6}}"
   bind:bindchange="bindchange">
-  </settledForm> -->
+  </settledForm>
   <view class="footerWrap">
       <view catchtap="navigateBack">返回</view>
       <view catchtap="submitAudit">确认发布</view>

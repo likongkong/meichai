@@ -2862,9 +2862,12 @@ Page({
       success: function (res) {
         console.log('关注=====',res)
         if (res.data.ReturnCode == 200) {
-          _this.setData({
-            [`brandinfo.isAttention`]: !_this.data.brandinfo.isAttention
-          })
+          app.showToastC('关注成功');
+          setTimeout(function(){
+            _this.setData({
+              [`brandinfo.isAttention`]: !_this.data.brandinfo.isAttention
+            })
+          },2000)
         };
       }
     });

@@ -1439,3 +1439,39 @@ page{
   border: 2rpx solid #FA555B;
   border-radius: 10rpx;
 }
+.followWrap{
+  width: 710rpx;
+  height: 82rpx;
+  position: relative;
+  margin: 20rpx auto 0;
+}
+.brand_lotto_attention{
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.brand_lotto_subscription_button{
+  width: 128rpx;
+  height: auto;
+  position: absolute;
+  z-index: 10;
+  top:14rpx;
+  right:40rpx;
+}
+.followTxt{
+  height: 82rpx;
+  position: absolute;
+  top: 0;
+  left: 40rpx;
+  z-index: 10;
+}
+.followTxt text{
+  display: block;
+  color: #fff;
+  font-size: 22rpx;
+}
+.followTxt text:first-child{
+  margin-top: 12rpx;
+}

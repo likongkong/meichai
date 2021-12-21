@@ -539,6 +539,8 @@ Page({
           [`listData5[0].index`]:info.cashPledge!=0?1:info.integral!=0?2:0,
           [`listData5[0].radioArr[1].value`]:info.cashPledge != 0?info.cashPledge:'',
           [`listData5[0].radioArr[2].value`]:info.integral != 0?info.integral:'',
+          [`listData6[0].index`]:info.shelvesType,
+          [`listData6[0].radioArr[1].time`]:info.shelvesType==1?util.format1("yyyy-MM-dd HH:mm",info.shelvesTime):'',
         })
     //  goodsName:'', //商品名称
     //  flatPatternmaking:'', //商品展示图
@@ -572,6 +574,8 @@ Page({
         obj.cashPledge = info.cashPledge!=0?info.cashPledge:'';
         obj.integrate = info.integral!=0?info.integral:'';
         obj.isCanShare = info.isCanShare==0?1:0;
+        obj.addedData = info.shelvesType;
+        obj.customAdded = util.format1("yyyy-MM-dd HH:mm",info.shelvesTime);
       }else{
         app.showToastC(res.data.Msg,2000);
       }
@@ -697,6 +701,8 @@ Page({
       illustrated_id:obj.fieldGuideId || '',
       isShowSellNumber:obj.isParticipants==0?1:0,
       isCanShare:obj.isCanShare==0?1:0,
+      shelvesType:obj.addedData,
+      shelvesTime:obj.addedData==1?(new Date(obj.customAdded.replace(/-/g,'/')).getTime())/1000:''
     }
     // return false;
     console.log(data)
