@@ -35,7 +35,9 @@
    <view class="orderBox">
        <view>
             <view class="obcrTop" style="color:#90D2D6;padding-bottom:16rpx;">
-                <view style="color:#FF2742;">隐藏发售</view>
+                <view>
+                    <text style="color:#FF2742;" wx:if='{{shelvesName}}'>{{shelvesName}}</text>
+                </view>
                 <view>{{itemStatusName}}</view>
             </view>
             <view class="orderBoxContent" catchtap="{{itemStatus!=4?'publicJump':''}}" data-id='{{itemId}}' data-istype='{{itemType}}'>

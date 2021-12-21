@@ -58,7 +58,8 @@ Page({
     headhidden: false,
     shopnum: 0,
     dryinglistnum: 0,
-    headtab: [{name: '全部',ind: 0},{name: '出售中',ind: 1},{name: '已售出',ind: 2},{name: '已回收',ind: 8},{name: '待发货',ind: 4},{name: '已发货',ind: 3}],
+    // ,{name: '已回收',ind: 8} ,{name: '出售中',ind: 1},{name: '已售出',ind: 2}
+    headtab: [{name: '全部',ind: 0},{name: '待发货',ind: 4},{name: '已发货',ind: 3}],
 
     headtabid: 0,
     c_title: '我的玩具柜',
@@ -137,7 +138,10 @@ Page({
     // 是否使用抽盒金抵扣
     isUseBlindboxMoney:true,
     // 提交订单时是否使用抽盒金抵扣
-    isDeductNum:1
+    isDeductNum:1,
+    ToyCabinetDescription:'',
+    myothertoydgTip:false,
+    concealNum:true
   },
   useBlindboxMoneyFun(){
     this.setData({
@@ -615,6 +619,7 @@ Page({
             _this.setData({
               listdataown: listdata,
               tipCharge:res.data.Info.tipCharge,
+              noBuyToyStatus:res.data.Info.noBuyToyStatus,
             });
             _this.getimginfolist();
           } else {
@@ -951,7 +956,13 @@ Page({
     };
 
   },
-
+  toggleExplain(){
+    this.setData({
+      concealNum:false,
+      myothertoydgTip:false
+    })
+    app.signindata.myothertoydgTip = false;
+  },
   onLoadfun: function () {
     var _this = this
 
@@ -965,7 +976,8 @@ Page({
       avatarUrl: app.signindata.avatarUrl,
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
       defaultinformation:app.signindata.defaultinformation,
-      blindboxMoney:app.signindata.blindboxMoney
+      blindboxMoney:app.signindata.blindboxMoney,
+      myothertoydgTip:app.signindata.myothertoydgTip || false
     });
     if (_this.data.ownerId == _this.data.uid || _this.data.ownerId == 'own') {
       var userInfo = {
@@ -1006,6 +1018,18 @@ Page({
 
       _this.nextpagediao();
     }
+
+    wx.request({
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/toyCabinetExplain.json',
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        console.log('=======',res)
+        _this.setData({
+          ToyCabinetDescription:res.data.springFrame || ''
+        })
+      }
+    });
 
     setTimeout(function () {
       _this.getdefault()
@@ -1066,6 +1090,7 @@ Page({
             _this.setData({
               listdata: listdata,
               userInfo: userInfo,
+              noBuyToyStatus:res.data.Info.noBuyToyStatus,
               tipCharge:res.data.Info.tipCharge,
               deductRatio:res.data.Info.deduct.deductRatio,
               isDeduct:res.data.Info.deduct.isDeduct,
@@ -1411,10 +1436,15 @@ Page({
    */
   onShareAppMessage: function () {
     var _this = this
+    if(!_this.data.noBuyToyStatus){
+       var snapshot = '';
+    }else{
+      var snapshot = _this.data.snapshot;
+    };
     var share = {
       title: "快来围观我的玩具柜,直接下单,美拆发货,官方售后",
       path: "/page/component/pages/myothertoydg/myothertoydg?ownerId=" + _this.data.uid,
-      imageUrl: _this.data.snapshot,
+      imageUrl:snapshot ,
       success: function (res) {
       }
     }

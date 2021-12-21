@@ -199,6 +199,7 @@
         "pages/solicitReviewList/solicitReviewList",
         "pages/solicitReviewDetails/solicitReviewDetails",
         "pages/solicitPictures/solicitPictures",
+        "pages/afterSaleService/afterSaleService",
         "pages/collectPictures/collectPictures"
       ]
     }

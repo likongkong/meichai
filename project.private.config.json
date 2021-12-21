@@ -302,8 +302,8 @@
           "scene": null
         },
         {
-          "name": "pages/activitydetailspage/activitydetailspage",
-          "pathName": "pages/activitydetailspage/activitydetailspage",
+          "name": "闲置",
+          "pathName": "page/component/pages/ocamendment/ocamendment",
           "query": "id=506436",
           "scene": null
         },
@@ -320,8 +320,8 @@
           "scene": null
         },
         {
-          "name": "page/component/pages/webview/webview",
-          "pathName": "page/component/pages/webview/webview",
+          "name": "售后服务",
+          "pathName": "page/settled/pages/afterSaleService/afterSaleService",
           "query": "",
           "scene": null
         },

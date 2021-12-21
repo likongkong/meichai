@@ -107,14 +107,14 @@
   <block>
         <view style="background:#fff;">
             <view class="sCountDown" wx:if='{{(zunmdata.status == 1 && zunmdata.startTime) || (zunmdata.status == 2 && zunmdata.endTime)}}'><block wx:if='{{zunmdata.status == 1}}'>距开始 </block><block wx:else>距结束 </block>{{winningovertimedetail.dayStr}}天{{winningovertimedetail.hrStr}}小时{{winningovertimedetail.minStr}}分{{winningovertimedetail.secStr}}秒</view>
-            <view class="sCountstock">
-                <text>{{zunmdata.settledGoodsStockNumber}}</text>
-                <text>{{zunmdata.settledGoodsRestrictionNumber}}</text>
-                <text>{{zunmdata.settledGoodsDeliver}}</text>
-            </view>
             <view class="seckillName">{{zunmdata.gname}}</view>
             <view class="sSaleTime" wx:if='{{zunmdata.status == 1}}'>{{zunmdata.datatimew}}   发售</view>
             <view class="sSalePrice"><text style="font-size:22rpx;">￥</text>{{zunmdata.gprice!=0?zunmdata.gprice:''}}<text style="font-size:22rpx;color:#000;" wx:if='{{zunmdata.integral>0}}'>+{{zunmdata.integral}}积分</text></view>
+            <view class="sCountstock">
+                <text wx:if="{{zunmdata.settledGoodsStockNumber}}">{{zunmdata.settledGoodsStockNumber}}</text>
+                <text wx:if="{{zunmdata.settledGoodsRestrictionNumber}}">{{zunmdata.settledGoodsRestrictionNumber}}</text>
+                <text wx:if="{{zunmdata.settledGoodsDeliver}}">{{zunmdata.settledGoodsDeliver}}</text>
+            </view>
         </view>
 
       <!-- 手机壳样式 -->

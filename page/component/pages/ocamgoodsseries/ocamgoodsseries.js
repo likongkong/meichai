@@ -162,6 +162,7 @@ Page({
           _this.setData({
             dataInfo:res.data.Info,
             dataList:res.data.List.goods,
+            noBuyToyStatus : res.data.Info.noBuyToyStatus || false,
             skiplist:res.data.List.skip
           })
         } else {

@@ -257,7 +257,8 @@ Page({
             _this.setData({
               shopdetail: shopdetail,
               skipNeedId:res.data.Info.skipNeedId || 0,
-              skipType:res.data.Info.skipType || 0
+              skipType:res.data.Info.skipType || 0,
+              noBuyToyStatus : res.data.Info.noBuyToyStatus || false
             });
           };
           

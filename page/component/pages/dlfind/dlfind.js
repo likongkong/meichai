@@ -111,7 +111,7 @@ Page({
       this.eldatalistfun(0);
       this.eldataclassfun();
     }else{
-      this.listdata(0);
+      // this.listdata(0);
     }
 
   },

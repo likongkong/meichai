@@ -44,17 +44,20 @@
       <view class="ogs_listitem" catchtap="{{item.isBlindBox?'resetpage':'jumpshopbut'}}" data-seriesid="{{item.seriesId}}" data-name='{{item.name}}' data-minprice='{{item.minPrice}}' data-maxprice='{{item.maxPrice}}' data-goods_id='{{item.goods_id}}'>
         <image src="{{item.img}}" mode="aspectFit"></image>
         <text class="ogs_listitemName">{{item.name}}</text>
-        <block wx:if="{{item.minPrice}}">
-          <block wx:if="{{item.minPrice == item.maxPrice}}">
-            <text class="ogs_listitemPrice">￥{{item.minPrice}}</text>
+        <block wx:if='{{!noBuyToyStatus}}'>
+          <block wx:if="{{item.minPrice}}">
+            <block wx:if="{{item.minPrice == item.maxPrice}}">
+              <text class="ogs_listitemPrice">￥{{item.minPrice}}</text>
+            </block>
+            <block wx:else>
+              <text class="ogs_listitemPrice">￥{{item.minPrice}}~￥{{item.maxPrice}}</text>
+            </block>
           </block>
           <block wx:else>
-            <text class="ogs_listitemPrice">￥{{item.minPrice}}~￥{{item.maxPrice}}</text>
+            <text class="ogs_listitemPrice">暂无报价</text>
           </block>
         </block>
-        <block wx:else>
-          <text class="ogs_listitemPrice">暂无报价</text>
-        </block>
+        
       </view>
     </block>
   </view>

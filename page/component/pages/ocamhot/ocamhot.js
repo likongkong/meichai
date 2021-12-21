@@ -150,6 +150,9 @@ Page({
         // 刷新完自带加载样式回去
         wx.stopPullDownRefresh();
         wx.hideLoading();
+        _this.setData({
+          noBuyToyStatus:res.data.Info.noBuyToyStatus || false
+        })
         _this.data.allData = res.data.List.role;
         _this.data.processingData = _this.data.allData;
         // 处理数据分页        

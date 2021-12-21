@@ -40,7 +40,8 @@ Page({
     inputValue:'',
     isSearchInput:false,
     searchInputFocus:false,
-    pageid:0
+    pageid:0,
+    noBuyToyStatus:false
   },
 
   /**
@@ -201,6 +202,7 @@ Page({
         console.log('闲置列表数据======',res)
         let ip = res.data.List.ip;
         let blindboxIpData = [],yifanshangIpData = [];
+        var noBuyToyStatus = res.data.Info.noBuyToyStatus || false;
         for (let i=0; i < ip.length; i++) {
           if(ip[i].isBlindBox){
             blindboxIpData.push(ip[i])
@@ -214,6 +216,7 @@ Page({
           yifanshangIpData,
           cheaper:res.data.List.cheaper,
           hot:res.data.List.hot,
+          noBuyToyStatus
         })
         _this.data.allSeriesData = res.data.List.series;
         _this.data.blindboxData = res.data.List.blindbox;

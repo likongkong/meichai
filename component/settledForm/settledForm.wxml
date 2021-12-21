@@ -214,13 +214,22 @@
                 </view>
               </block>
               <block wx:else>
+                <!-- 右侧 multiRadio -->
                 <block wx:if="{{item.multiRadio}}">
                   <view>
                     <block wx:for="{{item.radioArr}}" wx:key='key' wx:for-index="idx" wx:for-item="sonItem">
-                      <view class="multiRadioWrap">
-                        <view class="{{item.index == idx?'':'hideradio'}}"></view>
-                        <input type="text" disabled="{{!sonItem.placeholder?true:flase}}" placeholder="{{sonItem.placeholder}}" data-name="{{sonItem.name}}" bindinput="onKeyInput" value="{{sonItem.value}}" />
-                      </view>
+                      <block wx:if="{{sonItem.type=='time'}}">
+                        <view class="multiRadioWrap">
+                          <view class="{{item.index == idx?'':'hideradio'}}"></view>
+                          <pickerYMDHM class="multiRadioTime" data-index="{{idx}}" data-name="{{sonItem.name}}" bind:onPickerChange="onPickerChange3" placeholder="{{sonItem.placeholder}}" date="{{sonItem.time}}"></pickerYMDHM>
+                        </view>
+                      </block>
+                      <block wx:else>
+                        <view class="multiRadioWrap">
+                          <view class="{{item.index == idx?'':'hideradio'}}"></view>
+                          <input type="text" disabled="{{!sonItem.placeholder?true:flase}}" placeholder="{{sonItem.placeholder}}" data-name="{{sonItem.name}}" bindinput="onKeyInput" value="{{sonItem.value}}" />
+                        </view>
+                      </block>
                     </block>
                   </view>
                 </block>

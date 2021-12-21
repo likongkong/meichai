@@ -326,7 +326,7 @@
   <view class="hintTxt" catchtap="toogleBankcardlistMask">每名用户只能绑定一张银行卡，可<text style="color:#6EB4BF;">前往银行卡页面</text>更换</view>
   <view class="setfooter">
     <view class="footerWrap">
-        <view style="width:100%;" bindtap="bideWithdraw">确定</view>
+        <view style="width:100%;" data-id="{{verifyCard[0].id}}" bindtap="bideWithdraw">确定</view>
     </view>
   </view>
 </view>

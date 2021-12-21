@@ -193,14 +193,13 @@
                         <!-- <view class="brandManageItem" catchtap="comjumpwxnav" data-type='9048'> -->
                         <view class="brandManageItem" catchtap="jinqingqidai" wx:if="{{!userJurisdictionList}}">
                             <view>
-                                <image src='https://cdn.51chaidan.com/images/brandSettledIcon/orderIcon/service.png' mode="widthFix"></image>
+                                <image src='https://cdn.51chaidan.com/images/brandSettledIcon/orderIcon/service_old.png' mode="widthFix"></image>
                                 <text>客服消息</text>
                             </view>
                         </view>
                     </view>
                     <button catchtap="toggleAddNewEventMask">发布/发售</button>
                 </view>
-
             </block>
             <block wx:else>
                 <block wx:if="{{isSettledImg}}">
@@ -367,3 +366,5 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
 		</image>
    </view>
 </view>
+
+

@@ -776,7 +776,7 @@
 					<view wx:if='{{!isTry}}' class='queuebtnstyle1' style="background:#e94f57;color:white;float:left;" data-type='2' catchtap='closeaward'>再买一个</view>
 				</view>
 			</view>
-			<view wx:if='{{isTry}}' class="closeawardBoxChild">欧气测试，仅供参考，付费抽盒后可以在玩具柜自由交易</view>
+			<view wx:if='{{isTry}}' class="closeawardBoxChild">欧气测试，仅供参考</view>
 
 		</view>
 

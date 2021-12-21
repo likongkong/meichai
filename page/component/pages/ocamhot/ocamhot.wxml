@@ -55,7 +55,7 @@
                   </block>
                 </block>
               </view>
-              <view style="width:114rpx;font-size:24rpx;color:#FF2742;text-align: right;">
+              <view wx:if='{{!noBuyToyStatus}}' style="width:114rpx;font-size:24rpx;color:#FF2742;text-align: right;">
                 ￥{{item.minPrice}}起
               </view>
             </view>

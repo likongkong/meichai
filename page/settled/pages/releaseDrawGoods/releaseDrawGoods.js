@@ -239,8 +239,29 @@ Page({
         name:'isCanShare',
       }
     ],
+    listData6:[
+      {
+        isRequired:false,
+        type:'radio',
+        subtitle:'上架日期',
+        radioArr:[
+          {name:'immediatelyAdded',radioName:'发布即上架'},
+          {name:'customAdded',radioName:'自定义上架日期',placeholder:'请选择上架日期',value:'',type:'time',time:''},
+          {name:'hideTheSale',radioName:'隐藏发售'},
+        ],
+        value:0,
+        index:0,
+        direction:'Y',
+        explain:true,
+        explainTxt:'发布即上架：发布商品之后，即可在小程序内查看商品的售卖状态 \n自定义上架日期：选择上架日期，在选择的日期之前，商品不会展示在小程序内，到达选择的日期时，发布的商品才可在小程序内展示 \n隐藏发售：创建的商品将不会在小程序内展示，可通过分享的形式进行售卖。',
+        input:true,
+        multiRadio:true,
+        name:'addedData',
+      }
+    ],
     obj:{
       applicationCondition:0,
+      addedData:0,
       integrate:'', //积分
       cashPledge:'', //保证金
       explain:'', //说明
@@ -408,6 +429,12 @@ Page({
         })
         this.data.obj[key]=e.detail.value;
       }
+    }else if(key == 'customAdded'){
+      this.setData({
+        [`listData6[0].index`]:1,
+        [`listData6[0].radioArr[1].time`]:e.detail.value,
+      })
+      this.data.obj[key]=e.detail.value;
     }else{
       this.data.obj[key]=e.detail.value;
     }

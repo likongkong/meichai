@@ -258,11 +258,17 @@
 									<image class="dlfchrbrightNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/selection.jpg" wx:elif='{{item.type==2}}' mode="aspectFit"></image>
 									<image class="dlfchrbrightNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/showBox.jpg" wx:elif='{{item.type==5}}' mode="aspectFit"></image>
 
-                  <image data-ind='{{index}}' style='width:360rpx;height:340rpx;margin:auto;display:block;border-radius:10rpx 10rpx 0 0;' mode='aspectFit' src='{{item.imgArr[0]}}?imageMogr2/thumbnail/720x'></image>
+									<block wx:if='{{item.type==5}}'>
+                    <image data-ind='{{index}}' style='width:360rpx;height:340rpx;margin:auto;display:block;border-radius:10rpx 10rpx 0 0;' mode='aspectFit' src='{{item.goodsImgArr[0]}}?imageMogr2/thumbnail/720x'></image>
+                  </block>
+                  <block wx:else>
+                    <image data-ind='{{index}}' style='width:360rpx;height:340rpx;margin:auto;display:block;border-radius:10rpx 10rpx 0 0;' mode='aspectFit' src='{{item.imgArr[0]}}?imageMogr2/thumbnail/720x'></image>
+                  </block>
+                  
                 </view>
             </view>
             <view class='dlfhtitlenew' wx:if='{{item.type==4}}'>签到赢积分</view>
-						<view class='dlfhtitlenew' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail' wx:elif='{{item.title}}'>{{item.title}}</view>
+						<view class='dlfhtitlenew multilineellipsis' style="padding-bottom:5rpx;" data-drying_id='{{item.id}}' catchtap='jumpdlfdetail' wx:elif='{{item.title}}'>{{item.title}}</view>
 						
 						<view class='dlfhtitlenew' wx:if='{{item.temporary}}' style="color:#178FF8;">{{item.temporary}}</view>
             <!-- 动态 -->
@@ -377,11 +383,16 @@
 									<image class="dlfchrbrightNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/selection.jpg" wx:elif='{{item.type==2}}' mode="aspectFit"></image>
 									<image class="dlfchrbrightNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/showBox.jpg" wx:elif='{{item.type==5}}' mode="aspectFit"></image>
 
-                  <image data-ind='{{index}}' style='width:360rpx;height:340rpx;margin:auto;display:block;border-radius:10rpx 10rpx 0 0;' mode='aspectFit' src='{{item.imgArr[0]}}?imageMogr2/thumbnail/720x'></image>
+                  <block wx:if='{{item.type==5}}'>
+                    <image data-ind='{{index}}' style='width:360rpx;height:340rpx;margin:auto;display:block;border-radius:10rpx 10rpx 0 0;' mode='aspectFit' src='{{item.goodsImgArr[0]}}?imageMogr2/thumbnail/720x'></image>
+                  </block>
+                  <block wx:else>
+                    <image data-ind='{{index}}' style='width:360rpx;height:340rpx;margin:auto;display:block;border-radius:10rpx 10rpx 0 0;' mode='aspectFit' src='{{item.imgArr[0]}}?imageMogr2/thumbnail/720x'></image>
+                  </block>
                 </view>
             </view>
             <view class='dlfhtitlenew' wx:if='{{item.type==4}}'>签到赢积分</view>
-						<view class='dlfhtitlenew' data-drying_id='{{item.id}}' catchtap='jumpdlfdetail' wx:elif='{{item.title}}'>{{item.title}}</view>
+						<view class='dlfhtitlenew multilineellipsis' style="padding-bottom:5rpx;" data-drying_id='{{item.id}}' catchtap='jumpdlfdetail' wx:elif='{{item.title}}'>{{item.title}}</view>
 						
 						<view class='dlfhtitlenew' wx:if='{{item.temporary}}' style="color:#178FF8;">{{item.temporary}}</view>
             <!-- 动态 -->
