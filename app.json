@@ -201,7 +201,8 @@
         "pages/solicitReviewDetails/solicitReviewDetails",
         "pages/solicitPictures/solicitPictures",
         "pages/afterSaleService/afterSaleService",
-        "pages/collectPictures/collectPictures"
+        "pages/collectPictures/collectPictures",
+        "pages/appliedAftersales/appliedAftersales"
       ]
     }
   ],
