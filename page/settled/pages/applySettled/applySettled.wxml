@@ -1,3 +1,48 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
+<view class="applyForOccupancy" style="padding-bottom: {{num!=1?'150':'210'}}rpx;">
+    <settledProgress num="{{num}}" intact="hide"></settledProgress>
+    <block wx:if="{{num == 1}}">
+        <view class="aFoCenter boxShadowEve">
+        <!-- <scroll-view scroll-y style="height:{{contentHeight-105}}px;"> -->
+            <settledForm 
+            id="settledForm"
+            statusBarHeightMc="{{statusBarHeightMc}}"
+            list="{{enterpriseData}}"
+            bind:bindchange="bindchange"
+            num="{{num}}"
+            isEdit="{{false}}"
+            brandInfo="{{brandInfo}}">
+            </settledForm>
+        <!-- </scroll-view> -->
+        </view>
+        <view class="submitWrap">
+            <button class="submit" catchtap="submitAudit"> 提交审核 </button>
+        </view>
+    </block>
+    <block wx:elif="{{num == 2 || num == 4}}">
+        <view wx:if="{{num == 4}}" class="failCause">
+            {{brandSettledReturnMsg}}
+        </view>
+        <settledForm 
+            id="settledForm"
+            statusBarHeightMc="{{statusBarHeightMc}}"
+            list="{{from=='zhuanqu'?IPData:enterpriseData}}"
+            bind:bindchange="bindchange"
+            num="{{num}}"
+            isEdit="{{num==4?true:false}}"
+            brandInfo="{{brandInfo}}">
+        </settledForm>
+        <block>
+            <view wx:if="{{num == 2}}" class="footerAuditWrap">
+                <view data-num="1" catchtap="navigateBack">返回</view>
+                <view data-type="9026" data-num="4" catchtap="comjumpwxnav">修改资料</view>
+            </view>
+            <view wx:else class="footerFailWrap">
+                <view data-num="1" catchtap="navigateBack">返回</view>
+                <view catchtap="submitAudit">重新提交</view>
+            </view>
+        </block>
+    </block>
+</view>
