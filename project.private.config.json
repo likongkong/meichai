@@ -194,7 +194,7 @@
           "scene": null
         },
         {
-          "name": "TIM及时通讯",
+          "name": "TIM及时通讯详情",
           "pathName": "page/settled/pages/timHomePage/timHomePage",
           "query": "",
           "scene": null
@@ -218,8 +218,8 @@
           "scene": null
         },
         {
-          "name": "在线福袋",
-          "pathName": "page/secondpackge/pages/onlineFukubukuro/onlineFukubukuro",
+          "name": "TIM列表",
+          "pathName": "page/settled/pages/timHomePageList/timHomePageList",
           "query": "list=1&id=502890",
           "scene": null
         },

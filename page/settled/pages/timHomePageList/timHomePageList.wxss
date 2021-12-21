@@ -1,0 +1,122 @@
+@import "/common/tabbar.wxss";
+@import "/common/citysel.wxss";
+page{
+  background:#f4f5f9;
+}
+.timHpListBox{
+  width: 100%;
+}
+.scoll-view{
+  width: 100%;
+}
+
+.t-conversation-item-container {
+  width: 100vw;
+  height: 150rpx;
+  background-color: #FFFFFF;
+  margin-bottom: 15rpx;
+}
+
+.t-conversation-item {
+  width: 120vw;
+  height: 150rpx;
+}
+.avatar-box{
+  position: relative;
+  float: left;
+  margin: 26rpx 20rpx 0 0;
+}
+.t-conversation-item-avatar{
+  position: relative;
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 14rpx;
+  margin: 0 16rpx;
+  overflow: auto;
+  border-radius: 50%;
+}
+.t-conversation-item-content {
+  float: left;
+  margin: 26rpx 0 0 0;
+  width: 580rpx;
+  position: relative;
+}
+.t-conversation-item-info {
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 28rpx;
+  color: #535252;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.t-error {
+  background-color: #fb5250;
+  color: #fff;
+}
+
+.t-conversation-delete {
+  width: 144rpx;
+  height: 100%;
+  line-height: 148rpx;
+  background-color: #E85454;
+  color: #FFFFFF;
+  font-size: 32rpx;
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: center;
+}
+
+.tui-conversation-item-name {
+  height: 50rpx;
+  width: 300rpx;
+  line-height: 50rpx;
+  font-size: 36rpx;
+  font-family: 'PingFangSC-Regular';
+  color: #101010;
+}
+
+.tui-conversation-lastMessage {
+  line-height: 40rpx;
+  font-size: 28rpx;
+  font-family: 'PingFangSC-Regular';
+  color: #909090;
+  padding-top: 10rpx;
+}
+.unread {
+  top: 2rpx;
+  right: 19rpx;
+  position: absolute;
+  /* padding: 0 10rpx; */
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  color: #ffffff;
+  background-color: red;
+}
+.read-text {
+  line-height: 15px;
+  font-size: 10px;
+}
+.movviebox{
+  width: 100%;
+  height: 148rpx;
+  position: relative;
+}
+
+.replyBox{
+  width: 100%;
+  height:100rpx;
+  background: #fff;
+  margin-bottom: 15rpx;
+}
+.replyBoxEve{
+  margin-left: 16rpx;
+  color: #101010;
+  font-size: 28rpx;
+  line-height: 100rpx;
+  width: 40%;
+  float: left;
+}

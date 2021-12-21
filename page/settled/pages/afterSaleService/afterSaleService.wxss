@@ -1,5 +1,461 @@
 @import "/common/tabbar.wxss";
 @import "/common/citysel.wxss";
+
 page{
   background:#f4f5f9;
+}
+.omBox{
+  width: 100%;
+  padding: 20rpx 0 140rpx 0;
+  font-size:28rpx;
+}
+.marginAuto{
+  width: 710rpx;
+  margin:0 auto 20rpx;
+}
+.scrollViewTop{
+  height: 60rpx;
+  white-space: nowrap;
+}
+.scrollViewTopEve{
+  display: inline-block;
+  height: 60rpx;
+  line-height: 60rpx;
+  color: #000;
+  background:#fff;
+  border-radius: 15rpx;  
+  padding:0 25rpx;
+  margin-right: 20rpx;
+}
+.scrollViewTopEve.selectTop{
+  color: #fff;
+  background:#FFB427;
+}
+.elsearch{
+  height:60rpx;
+  position: relative;
+}
+.elsearchch{
+  padding-left: 60rpx;
+  width: 530rpx;
+  height: 54rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  border: 2rpx solid #BBBBBB;
+}
+.elserarchimg{
+  width: 30rpx;
+  height: 30rpx;
+  position: absolute;
+  left: 20rpx;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+.elserbotom{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 90rpx;
+  height: 58rpx;
+  line-height: 58rpx;
+  text-align: center;
+  border-radius: 15rpx;
+  color: #fff;
+  background: #90D2D6;
+  margin: auto;
+}
+.elinputbut{
+  height: 100%;
+  width: 500rpx;
+  float: left;
+}
+
+.classifyItem{
+  display: inline-block;
+  padding: 0 10rpx;
+  line-height: 80rpx;
+  color: #000;
+  box-sizing: border-box;
+}
+.active{
+  position: relative;
+}
+.active::before{
+  content: '';
+  position: absolute;
+  bottom: 10rpx;
+  left: 50%;
+  width: 80%;
+  height: 4rpx;
+  background: #000;
+  transform: translate(-50%, 0);  
+}
+.centerTxt{
+  background: #fff;
+  border-radius: 15rpx;
+}
+.orderBox{
+  width: 660rpx;
+  margin: auto;
+  padding-top: 25rpx;
+}
+.orderBoxTop{
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  display: flex;
+  justify-content:space-between;
+}
+.userImgName{
+  height: 80rpx;
+  line-height: 80rpx;
+}
+.userImg{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 100%;
+  display:inline-block;
+  vertical-align: top;
+}
+.userName{
+  display: inline-block;
+  height: 80rpx;
+  line-height: 80rpx;
+  vertical-align: top;
+  margin-left: 20rpx;
+  width: 240rpx;
+}
+.orderBoxContent{
+  width: 100%;
+  height: 160rpx;
+}
+.orderBoxContentImg{
+  width: 140rpx;
+  height: 140rpx;
+  float: left;
+  border-radius: 15rpx;
+}
+.orderBoxContentRight{
+  width: 500rpx;
+  float: right;
+  height: 140rpx;
+  position: relative;
+}
+.obcrTop{
+  display: flex;
+  justify-content:space-between;
+}
+.obcrBottom{
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+.orderAddress{
+  width: 100%;
+  padding-top: 20rpx;
+  overflow: hidden;
+}
+.orderAddressEve{
+  margin-bottom: 20rpx;
+  display:flex;
+  justify-content: space-between;
+}
+.orderBottom{
+  border-top: 2rpx solid #ECECEC;
+  width: 100%;
+  padding-top: 20rpx;
+}
+.orderBottomOrderNumber{
+  width: 100%;
+  height: 80rpx;
+  text-align: right;
+
+}
+.orderBottomButton{
+  width: 180rpx;
+  height: 58rpx;
+  line-height: 58rpx;
+  text-align: center;
+  color: #fff;
+  background: #90D2D6;
+  border-radius: 10rpx;
+  display: inline-block;
+  margin-left: 38rpx;
+  vertical-align: top;
+  position: relative;
+}
+
+.orderBottomNavigation{
+  width: 100%;
+  display: flex;
+  justify-content:center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 12;
+  height: 140rpx;
+  background: #fff;
+  padding-top: 20rpx;
+  box-sizing: border-box;
+}
+
+.orderBottomNavEve{
+  width: 500rpx;
+  height: 68rpx;
+  line-height: 68rpx;
+  text-align: center;
+  color: #fff;
+  background: #90D2D6;
+  border-radius: 10rpx;
+  display: inline-block;
+  vertical-align: top;
+}
+.orderMangAddress{
+  width: 660rpx;
+  background: #fff;
+  border-radius: 15rpx;
+}
+.orderMangTipTop{
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  font-size: 28rpx;
+}
+.orderMangTipCenter{
+  padding: 0 25rpx;
+}
+.refundTxt{
+  width: 600rpx;
+  margin: 20rpx auto 60rpx;
+  text-align: center;
+  line-height: 60rpx;
+}
+.orderMangTipCenterEve{
+  width: 100%;
+  display: flex;
+  justify-content:space-between;
+  padding-bottom: 30rpx;
+}
+.addressModifyInput{
+  color:#AAAAAA;
+  text-align: right;
+  width: 360rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  display: inline-block;
+  vertical-align: top;
+}
+.leftEveheight{
+  height: 50rpx;
+  line-height: 50rpx;
+}
+.addressMoImg{
+  width: 30rpx;
+  height: 30rpx;
+  display: inline-block;
+  vertical-align: top;
+  margin: 10rpx 0 0 10rpx;
+}
+.addressModifytTa{
+  color:#AAAAAA;
+  text-align: right;
+  width: 360rpx;
+  height: 110rpx;  
+  display: inline-block;
+}
+
+.oAMaBConfirm{
+  width: 200rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  text-align: center;
+  border-radius: 10rpx;
+  border:2rpx solid #90D2D6;
+  color: #90D2D6;
+}
+.oAMaBCancel{
+  width: 380rpx;
+  height: 68rpx;
+  line-height: 68rpx;
+  text-align: center;
+  border-radius: 10rpx;
+  background: #90D2D6;
+  color: #fff;
+}
+.addLogisticsTxt{
+  padding: 20rpx 20rpx 0 20rpx;
+  background: #F4F3F8;
+  border-radius: 10rpx;
+}
+.addWaybillNumber{
+  width: 520rpx;
+  border: 2rpx solid #BBBBBB;
+  height: 50rpx;
+  padding-left: 15rpx;
+}
+.scanCode{
+  width: 50rpx;
+  height: 50rpx;
+  display: inline-block;
+}
+
+.batchExportOrder{
+  width: 600rpx;
+  margin: 0 auto 60rpx;
+  line-height: 50rpx;
+  display: block;
+}
+.cmScreen{
+  height: 80rpx;
+  padding-left: 50rpx;
+  line-height: 80rpx;
+  color: #90D2D6;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.cmScreen image{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  height: 50rpx;
+  width: 50rpx;
+}
+
+.orderMangAddressBottom{
+  width: 100%;
+  background: #fff;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+.orderMangCenterBG{
+  width: 100%;
+  height: 20rpx;
+  background:#f4f5f9;
+}
+
+/* 发布/发售 */
+.brandManageWrapButton {
+  width: 400rpx;
+  height: 60rpx;
+  background: #90D2D6;
+  color: #fff;
+  line-height: 60rpx;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 150rpx;
+  z-index: 3;
+  margin: auto;
+  text-align: center;
+  border-radius: 10rpx;
+}
+.popMask{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,.4);
+  z-index: 90;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.addNewEventBox{
+  width: 95%;
+  border-radius: 10rpx;
+  position: relative;
+}
+.addNewEventTitle{
+  display: block;
+  text-align: center;
+  font-size: 36rpx;
+  color: #101010;
+  margin-top: 16rpx;
+}
+.popMaskbutton{
+  width: 60rpx;height: 60rpx;line-height: 60rpx;font-size: 26rpx;color: #000;margin: auto;border-radius: 50%;position: absolute;left: 0;right: 0;bottom: -100rpx;
+}
+.addNewEventContent{
+  width: 100%;
+  display: flex;
+  justify-content:space-around;
+  position: relative;
+}
+.addNewEventContentCap{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+.createItem{
+  width:314rpx;
+  border-radius: 20rpx;
+  background:#fff;
+}
+.lastChild{
+  width: 200rpx;
+  height: 50rpx;
+  text-align: center;
+  line-height: 50rpx;
+  margin: 0 auto 30rpx;
+  border-radius: 50rpx;
+}
+.createItem view{
+  font-size: 28rpx;
+  color: #fff;
+}
+.createItem view:first-child{
+  width: 100%;
+  height: 30rpx;
+  text-align: center;
+  line-height: 30rpx;
+  padding: 50rpx 0 36rpx 0;
+  color:#000;
+}
+
+.releaseSale{
+  width: 100%;
+  position: relative;
+}
+.releaseSaleImg{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.releaseSalePostion{
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.releaseSaleHead{
+  height: 121rpx;
+}
+.addNewEventContent image{
+  width: 43%;
+  margin-top: 21rpx;
+}
+.shareImgTip{
+  width: 650rpx;
+  display: block;
+}
+.indexelafracondisnone {
+  width: 50rpx;
+  height: 50rpx;
+  margin: 30rpx auto 0;
+  border-radius: 50%;
+  display: block;
+  position: relative;
 }

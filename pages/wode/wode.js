@@ -274,6 +274,14 @@ Page({
       url: "/pages/myorder/myorder?tabnum=" + num
     });
   },
+  // 跳转客服聊天
+  jumpTimDetail(e){
+    app.getUserProfile((res,userInfo) => {
+        wx.navigateTo({  
+          url: "/page/settled/pages/timHomePageList/timHomePageList"
+        });
+    })
+  },
   // 地址管理
   addressmanagement:function(){
     wx.navigateTo({ 
@@ -369,6 +377,8 @@ Page({
               nonsend: res.data.Info.non_send || 0,
               // 待收货数
               nonreceive: res.data.Info.non_receive || 0,
+              // 售后服务
+              no_read: res.data.Info.no_read || 0,
               // 我的钱包数据
               point: res.data.Info.point || 0,
               // 提现金额
