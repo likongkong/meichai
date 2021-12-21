@@ -342,6 +342,12 @@
           "pathName": "page/secondpackge/pages/exhibitionlist/exhibitionlist",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "申请售后",
+          "pathName": "page/settled/pages/appliedAftersales/appliedAftersales",
+          "query": "",
+          "scene": null
         }
       ]
     }
