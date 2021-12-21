@@ -197,8 +197,7 @@
                                 <text>消息通知</text>
                             </view>
                         </view>
-                        <!-- <view class="brandManageItem" catchtap="comjumpwxnav" data-type='9048'> -->
-                        <view class="brandManageItem" catchtap="jinqingqidai" wx:if="{{!userJurisdictionList}}">
+                        <view class="brandManageItem" catchtap="jinqingqidai" data-type='9057'>
                             <view>
                                 <image src='https://cdn.51chaidan.com/images/brandSettledIcon/orderIcon/service_old.png' mode="widthFix"></image>
                                 <text>客服消息</text>

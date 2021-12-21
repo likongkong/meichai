@@ -62,18 +62,30 @@
        </view>
        <view class="orderBottom" wx:if='{{itemStatus != 4}}'>
             <view class="orderBottomOrderNumber">
-                <block wx:if='{{itemStatus==1 || itemStatus==2 || itemStatus == 3}}'>
-                    <view class="orderBottomButton" catchtap="{{!isCanShare?'shareImgTipFun':''}}"><button wx:if='{{isCanShare}}' data-num='{{num}}' style='width:100%;height:100%;position:absolute;top:0;right:0;opacity:0;' open-type='share'></button>分享</view>
-                </block>
-                <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='3'>删除</view>
-                <block wx:if='{{itemStatus == 1}}'>
-                    <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='1'>编辑</view>
-                </block>
-                <block wx:else>
+                 <!-- 展会商品只保留分享和销售效果 -->
+                <block wx:if='{{selectid == 3}}'>
+                    <block wx:if='{{itemStatus==1 || itemStatus==2 || itemStatus == 3}}'>
+                        <view class="orderBottomButton" catchtap="{{!isCanShare?'shareImgTipFun':''}}"><button wx:if='{{isCanShare}}' data-num='{{num}}' style='width:100%;height:100%;position:absolute;top:0;right:0;opacity:0;' open-type='share'></button>分享</view>
+                    </block>
                     <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='2'>
                         <block wx:if='{{itemType == -1}}'>发售</block><block wx:elif='{{itemType == 4}}'>抽选</block>效果
-                    </view>
+                    </view>                    
                 </block>
+                <block wx:else>
+                    <block wx:if='{{itemStatus==1 || itemStatus==2 || itemStatus == 3}}'>
+                        <view class="orderBottomButton" catchtap="{{!isCanShare?'shareImgTipFun':''}}"><button wx:if='{{isCanShare}}' data-num='{{num}}' style='width:100%;height:100%;position:absolute;top:0;right:0;opacity:0;' open-type='share'></button>分享</view>
+                    </block>
+                    <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='3'>删除</view>
+                    <block wx:if='{{itemStatus == 1}}'>
+                        <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='1'>编辑</view>
+                    </block>
+                    <block wx:else>
+                        <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='2'>
+                            <block wx:if='{{itemType == -1}}'>发售</block><block wx:elif='{{itemType == 4}}'>抽选</block>效果
+                        </view>
+                    </block>
+                </block>
+                
             </view>
        </view>
    </view>
@@ -165,7 +177,7 @@
         </block>
         <!-- 添加物流 -->
         <block wx:elif='{{logisticsRefundModify == 3}}'>
-            <text class="batchExportOrder" style="text-align:center;">确认删除“{{selectData.itemName}}”该商品吗？删除之后小程序内将无法查看到该商品，请谨慎操作。</text> 
+            <text class="batchExportOrder" style="text-align:center;">删除之后将无法在小程序内查看到该商品，确认删除“{{selectData.itemName}}”吗？</text> 
         </block>
 
 

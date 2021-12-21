@@ -1,8 +1,10 @@
 @import "/common/tabbar.wxss";
 @import "/common/citysel.wxss";
+@import "../timHomePageList/timHomePageList.wxss";
 
 page{
-  background:#f4f5f9;
+  /* background:#f4f5f9; */
+  background:#fff;
 }
 .omBox{
   width: 100%;
@@ -10,38 +12,34 @@ page{
   font-size:28rpx;
 }
 .marginAuto{
-  width: 710rpx;
-  margin:0 auto 20rpx;
+  width: 610rpx;
+  margin:0 20rpx 10rpx 20rpx;
 }
 .scrollViewTop{
   height: 60rpx;
   white-space: nowrap;
 }
-.scrollViewTopEve{
-  display: inline-block;
-  height: 60rpx;
-  line-height: 60rpx;
-  color: #000;
-  background:#fff;
-  border-radius: 15rpx;  
-  padding:0 25rpx;
-  margin-right: 20rpx;
+.obcrTopTopSnEve{
+  height: 46rpx;
+  line-height: 46rpx;
+  position: relative;
+  padding-right: 70rpx;
 }
-.scrollViewTopEve.selectTop{
-  color: #fff;
-  background:#FFB427;
+.obcrTopTopSn{
+  color:#90D2D6;padding-bottom:16rpx;margin-bottom:16rpx;border-bottom:2rpx solid #f5f5f5;
 }
 .elsearch{
   height:60rpx;
   position: relative;
+  width: 710rpx;
+  margin:20rpx auto 20rpx;
 }
 .elsearchch{
   padding-left: 60rpx;
   width: 530rpx;
   height: 54rpx;
-  background: #fff;
-  border-radius: 20rpx;
-  border: 2rpx solid #BBBBBB;
+  background: #F5F5F5;
+  border-radius: 54rpx;
 }
 .elserarchimg{
   width: 30rpx;
@@ -61,9 +59,7 @@ page{
   height: 58rpx;
   line-height: 58rpx;
   text-align: center;
-  border-radius: 15rpx;
-  color: #fff;
-  background: #90D2D6;
+  color: #5CA7FE;
   margin: auto;
 }
 .elinputbut{
@@ -74,10 +70,11 @@ page{
 
 .classifyItem{
   display: inline-block;
-  padding: 0 10rpx;
+  padding: 0 20rpx;
   line-height: 80rpx;
   color: #000;
   box-sizing: border-box;
+  position: relative;
 }
 .active{
   position: relative;
@@ -95,11 +92,27 @@ page{
 .centerTxt{
   background: #fff;
   border-radius: 15rpx;
+  width: 100%;
 }
 .orderBox{
-  width: 660rpx;
+  padding:25rpx 30rpx 0;
+  width: 690rpx;
+  border-top: 15rpx solid #f5f5f5;
+}
+.copyCart{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
   margin: auto;
-  padding-top: 25rpx;
+  background:#F4F4F4;
+  font-size: 24rpx;
+  color: #000;
+  height: 40rpx;
+  line-height: 40rpx;
+  width: 60rpx;
+  text-align: center;
+  border-radius:6rpx;
 }
 .orderBoxTop{
   width: 100%;
@@ -172,141 +185,39 @@ page{
   width: 100%;
   height: 80rpx;
   text-align: right;
-
-}
-.orderBottomButton{
-  width: 180rpx;
-  height: 58rpx;
-  line-height: 58rpx;
-  text-align: center;
-  color: #fff;
-  background: #90D2D6;
-  border-radius: 10rpx;
-  display: inline-block;
-  margin-left: 38rpx;
-  vertical-align: top;
   position: relative;
 }
-
-.orderBottomNavigation{
-  width: 100%;
-  display: flex;
-  justify-content:center;
-  position: fixed;
-  bottom: 0;
+.orderBottomButtonLeft{
+  height: 58rpx;
+  line-height: 58rpx;
+  position: absolute;
+  top: 0;
   left: 0;
-  z-index: 12;
-  height: 140rpx;
-  background: #fff;
-  padding-top: 20rpx;
-  box-sizing: border-box;
+  font-size: 24rpx;
+  color: #909090;
+  padding-right: 40rpx;
 }
-
-.orderBottomNavEve{
-  width: 500rpx;
-  height: 68rpx;
-  line-height: 68rpx;
-  text-align: center;
-  color: #fff;
-  background: #90D2D6;
-  border-radius: 10rpx;
-  display: inline-block;
-  vertical-align: top;
-}
-.orderMangAddress{
-  width: 660rpx;
-  background: #fff;
-  border-radius: 15rpx;
-}
-.orderMangTipTop{
-  height: 100rpx;
-  line-height: 100rpx;
-  text-align: center;
-  font-size: 28rpx;
-}
-.orderMangTipCenter{
-  padding: 0 25rpx;
-}
-.refundTxt{
-  width: 600rpx;
-  margin: 20rpx auto 60rpx;
-  text-align: center;
-  line-height: 60rpx;
-}
-.orderMangTipCenterEve{
-  width: 100%;
-  display: flex;
-  justify-content:space-between;
-  padding-bottom: 30rpx;
-}
-.addressModifyInput{
-  color:#AAAAAA;
-  text-align: right;
-  width: 360rpx;
-  height: 50rpx;
-  line-height: 50rpx;
-  display: inline-block;
-  vertical-align: top;
-}
-.leftEveheight{
-  height: 50rpx;
-  line-height: 50rpx;
-}
-.addressMoImg{
+.orderBottomImgG{
   width: 30rpx;
   height: 30rpx;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+.orderBottomButton{
+  width: 160rpx;
+  height: 54rpx;
+  line-height: 54rpx;
+  text-align: center;
+  color: #FE5D57;
+  border-radius: 54rpx;
   display: inline-block;
+  margin-left: 25rpx;
   vertical-align: top;
-  margin: 10rpx 0 0 10rpx;
-}
-.addressModifytTa{
-  color:#AAAAAA;
-  text-align: right;
-  width: 360rpx;
-  height: 110rpx;  
-  display: inline-block;
-}
-
-.oAMaBConfirm{
-  width: 200rpx;
-  height: 64rpx;
-  line-height: 64rpx;
-  text-align: center;
-  border-radius: 10rpx;
-  border:2rpx solid #90D2D6;
-  color: #90D2D6;
-}
-.oAMaBCancel{
-  width: 380rpx;
-  height: 68rpx;
-  line-height: 68rpx;
-  text-align: center;
-  border-radius: 10rpx;
-  background: #90D2D6;
-  color: #fff;
-}
-.addLogisticsTxt{
-  padding: 20rpx 20rpx 0 20rpx;
-  background: #F4F3F8;
-  border-radius: 10rpx;
-}
-.addWaybillNumber{
-  width: 520rpx;
-  border: 2rpx solid #BBBBBB;
-  height: 50rpx;
-  padding-left: 15rpx;
-}
-.scanCode{
-  width: 50rpx;
-  height: 50rpx;
-  display: inline-block;
-}
-
-.batchExportOrder{
-  width: 600rpx;
-  margin: 0 auto 60rpx;
-  line-height: 50rpx;
-  display: block;
+  position: relative;
+  border: 2rpx solid #FE5D57;
 }
 .cmScreen{
   height: 80rpx;
@@ -315,7 +226,7 @@ page{
   color: #90D2D6;
   position: absolute;
   top: 0;
-  right: 0;
+  right: 17rpx;
 }
 .cmScreen image{
   position: absolute;
@@ -326,136 +237,25 @@ page{
   height: 50rpx;
   width: 50rpx;
 }
-
-.orderMangAddressBottom{
+.scrollBox{
   width: 100%;
-  background: #fff;
+  position: relative;
+  border-bottom: 2rpx solid #f5f5f5;
+}
+.wdmbchinfnum {
   position: absolute;
-  left: 0;
-  bottom: 0;
-}
-.orderMangCenterBG{
-  width: 100%;
-  height: 20rpx;
-  background:#f4f5f9;
-}
-
-/* 发布/发售 */
-.brandManageWrapButton {
-  width: 400rpx;
-  height: 60rpx;
-  background: #90D2D6;
-  color: #fff;
-  line-height: 60rpx;
-  position: fixed;
-  left: 0;
+  top: 0;
   right: 0;
-  bottom: 150rpx;
-  z-index: 3;
-  margin: auto;
-  text-align: center;
-  border-radius: 10rpx;
-}
-.popMask{
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: rgba(0,0,0,.4);
-  z-index: 90;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.addNewEventBox{
-  width: 95%;
-  border-radius: 10rpx;
-  position: relative;
-}
-.addNewEventTitle{
-  display: block;
-  text-align: center;
-  font-size: 36rpx;
-  color: #101010;
-  margin-top: 16rpx;
-}
-.popMaskbutton{
-  width: 60rpx;height: 60rpx;line-height: 60rpx;font-size: 26rpx;color: #000;margin: auto;border-radius: 50%;position: absolute;left: 0;right: 0;bottom: -100rpx;
-}
-.addNewEventContent{
-  width: 100%;
-  display: flex;
-  justify-content:space-around;
-  position: relative;
-}
-.addNewEventContentCap{
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
-}
-.createItem{
-  width:314rpx;
-  border-radius: 20rpx;
-  background:#fff;
-}
-.lastChild{
-  width: 200rpx;
-  height: 50rpx;
-  text-align: center;
-  line-height: 50rpx;
-  margin: 0 auto 30rpx;
-  border-radius: 50rpx;
-}
-.createItem view{
-  font-size: 28rpx;
-  color: #fff;
-}
-.createItem view:first-child{
-  width: 100%;
   height: 30rpx;
+  width: 30rpx;
+  border: 2rpx solid #ff2742;
+  border-radius: 50%;
+  z-index: 9;
+  font-size: 20rpx;
+  color: #ff2742;
   text-align: center;
   line-height: 30rpx;
-  padding: 50rpx 0 36rpx 0;
-  color:#000;
+  background: #fff;
 }
 
-.releaseSale{
-  width: 100%;
-  position: relative;
-}
-.releaseSaleImg{
-  width: 100%;
-  height: auto;
-  display: block;
-}
-.releaseSalePostion{
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-}
-.releaseSaleHead{
-  height: 121rpx;
-}
-.addNewEventContent image{
-  width: 43%;
-  margin-top: 21rpx;
-}
-.shareImgTip{
-  width: 650rpx;
-  display: block;
-}
-.indexelafracondisnone {
-  width: 50rpx;
-  height: 50rpx;
-  margin: 30rpx auto 0;
-  border-radius: 50%;
-  display: block;
-  position: relative;
-}
+
