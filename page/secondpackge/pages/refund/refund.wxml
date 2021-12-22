@@ -19,9 +19,9 @@
         <image src="https://cdn.51chaidan.com/images/toyShow3/brandGoodsRotation/20211214/8ad466af37badf3495ce9b9ba4e927ca.png" mode="widthFix"></image>
       </view>
       <view class="goodsCardContentInfo" style="width: 470rpx;">
-        <text class="name">{{infoData.gname}}新生千面九尾狐手办</text>
-        <view class="fashion"><text wx:if="{{infoData.roleName}}">款式：{{infoData.roleName}}</text> <text>数量x1</text></view>
-        <view class="orderNumberWrap" data-num="20211018124578" catchtap="copy"><view>订单编号：<text class="orderNumber">20211018124578</text></view><text class="copyBtn">复制</text></view>
+        <text class="name">{{infoData.gname}}</text>
+        <view class="fashion"><text wx:if="{{infoData.roleName}}">款式：{{infoData.roleName}}</text> <text>数量x{{infoData.gnumber}}</text></view>
+        <view class="orderNumberWrap" data-num="{{infoData.order_sn}}" catchtap="copy"><view>订单编号：<text class="orderNumber">{{infoData.order_sn}}</text></view><text class="copyBtn">复制</text></view>
       </view>
     </view>
   </view>
@@ -49,25 +49,25 @@
     <!-- <view class="title">
       退款信息
     </view> -->
-    <view class="refundReason refundflex" catchtap="{{infoData.auditRefund != 2?'reasonFun':''}}">
+    <view class="refundReason refundflex" data-type="0" data-popoutdata="{{infoData.afterSaleType}}" data-title="售后类型" catchtap="{{infoData.auditRefund != 2?'popout':''}}">
       <view style="width:200rpx;">售后类型<text>*</text></view>
       <block wx:if="{{infoData.auditRefund == 2}}">
-        <view style="color:#000;" wx:for="{{refundType}}" wx:key='key' wx:if="{{item.type_id == infoData.refund_cause}}">{{item.type_name}}</view>
+        <view style="color:#000;" wx:for="{{infoData.afterSaleType}}" wx:key='key' wx:if="{{item.type_id == infoData.refund_cause}}">{{item.type_name}}</view>
       </block>
       <block wx:else>
         <view style="{{checkedObj?'color:#000;':''}}"> {{checkedObj?checkedObj.name:'点击选择售后类型  >'}}</view>
       </block>
     </view>
-    <view class="refundReason refundflex" catchtap="{{infoData.auditRefund != 2?'reasonFun':''}}">
+    <view class="refundReason refundflex" data-type="1" data-popoutdata="{{infoData.goodsStatus}}" data-title="商品状态" catchtap="{{infoData.auditRefund != 2?'popout':''}}">
       <view style="width:200rpx;">商品状态<text>*</text></view>
       <block wx:if="{{infoData.auditRefund == 2}}">
-        <view style="color:#000;" wx:for="{{refundType}}" wx:key='key' wx:if="{{item.type_id == infoData.refund_cause}}">{{item.type_name}}</view>
+        <view style="color:#000;" wx:for="{{infoData.goodsStatus}}" wx:key='key' wx:if="{{item.type_id == infoData.refund_cause}}">{{item.type_name}}</view>
       </block>
       <block wx:else>
         <view style="{{checkedObj?'color:#000;':''}}"> {{checkedObj?checkedObj.name:'点击选择商品状态  >'}}</view>
       </block>
     </view>
-    <view class="refundReason refundflex" catchtap="{{infoData.auditRefund != 2?'reasonFun':''}}">
+    <view class="refundReason refundflex" data-type="2" data-popoutdata="{{refundType}}" data-title="申请原因" catchtap="{{infoData.auditRefund != 2?'popout':''}}">
       <view style="width:200rpx;">申请原因<text>*</text></view>
       <block wx:if="{{infoData.auditRefund == 2}}">
         <view style="color:#000;" wx:for="{{refundType}}" wx:key='key' wx:if="{{item.type_id == infoData.refund_cause}}">{{item.type_name}}</view>
@@ -160,20 +160,20 @@
 </view>
 
 
-<view wx:if="{{isReasonBox}}" class="refundReasonMask" catchtouchmove="true" catchtap="reasonFun">
+<view wx:if="{{isReasonBox}}" class="refundReasonMask" catchtouchmove="true" catchtap="popout">
   <view class="refundReasonBox" catchtap="true">
     <view class="refundReasonBoxTitle"> 
-      退款原因  
-      <image catchtap="reasonFun" src="../../../../pages/images/forknumber.png" mode="widthFix"></image>
+      {{popoutTitle}}  
+      <image catchtap="popout" src="../../../../pages/images/forknumber.png" mode="widthFix"></image>
     </view>
     <view class="refundReasonBoxCon">
-      <view wx:for="{{refundType}}" wx:key='key' data-id="{{item.type_id}}" data-index="{{index}}" catchtap="chooseReasonFun">
+      <view wx:for="{{popoutData}}" wx:key='key' data-id="{{item.type_id}}" data-index="{{index}}" catchtap="chooseReasonFun">
         <image src="{{item.checked?'../../../../pages/images/pressed_click.png':'../../../../pages/images/normal_click.png'}}" mode="widthFix"></image>
         <text>{{item.type_name}}</text>
       </view>
     </view>
     <view class="refundReasonBoxClose">
-      <view catchtap="reasonFun">
+      <view catchtap="popout">
         确认
       </view>
     </view>

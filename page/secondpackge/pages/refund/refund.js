@@ -65,8 +65,14 @@ Page({
       checkedObj:{id:refundType[index].type_id,name:refundType[index].type_name}
     })
   },
-  reasonFun(){
+  popout(e){
+    let title = e.currentTarget.dataset.title;
+    let type = e.currentTarget.dataset.type;
+    let popoutdata = e.currentTarget.dataset.popoutdata;
+    console.log(popoutdata)
     this.setData({
+      popoutTitle:title,
+      popoutData:popoutdata,
       isReasonBox:!this.data.isReasonBox
     })
   },
