@@ -29,6 +29,27 @@ Page({
     checkedObj:'',
     refundOrderfocus:false,
     refundOrderInputValue:'',
+    listData:[
+      {
+        isRequired:false,
+        type:'uploadImg',
+        subtitle:'上传凭证',
+        name:'voucherPic',
+        imageList:[],
+        margintop0:true,
+        mode:'multiple',
+        storagelocation:'images/goods'
+      },
+    ],
+  },
+  copy:function(e){
+    let num = e.currentTarget.dataset.num;
+    wx.setClipboardData({
+      data: num,
+      success: function (res) {
+        app.showToastC('复制成功');
+      }
+    });
   },
   chooseReasonFun(e){
     let index = e.currentTarget.dataset.index;
@@ -44,8 +65,14 @@ Page({
       checkedObj:{id:refundType[index].type_id,name:refundType[index].type_name}
     })
   },
-  reasonFun(){
+  popout(e){
+    let title = e.currentTarget.dataset.title;
+    let type = e.currentTarget.dataset.type;
+    let popoutdata = e.currentTarget.dataset.popoutdata;
+    console.log(popoutdata)
     this.setData({
+      popoutTitle:title,
+      popoutData:popoutdata,
       isReasonBox:!this.data.isReasonBox
     })
   },

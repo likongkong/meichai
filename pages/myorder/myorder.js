@@ -1437,9 +1437,7 @@ Page({
           app.showToastC('订单状态有误');
         }else{
           app.showToastC(res.data.Msg);         
-        };      
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);        
+        };     
       }
 
     });    

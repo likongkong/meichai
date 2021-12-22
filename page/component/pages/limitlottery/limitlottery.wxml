@@ -187,7 +187,7 @@
 			</view>
 
 			<!--  商品详情图片 转换HTML标签  -->
-			<view class='detailimg'>
+			<view class='detailimg' style="margin-top:20rpx;">
 				  <template is="wxParse" data="{{wxParseData:article.nodes}}" />
 			</view>
 

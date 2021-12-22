@@ -104,6 +104,13 @@
                    </image>
                    <view class='wdmbchtit'>待收货</view>
                </view>
+               <view class='wdmbch' style='position:relative;'>
+                   <image class='wdmbchimg' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/relation_after_sale1.png'>
+                       <view class='wdmbchinfnum specialellipsis' wx:if='{{no_read!=0}}'>{{no_read}}</view>
+                   </image>
+                   <button class='shareButton' type='primary' bindtap="jumpTimDetail"></button>
+                   <view class='wdmbchtit'>售后服务</view>
+               </view>
            </view>
     </view>
     <view class="popMask" catchtouchmove="true" catchtap="toggleAddNewEventMask" wx:if="{{isAddNewEventMask}}" style="background: rgba(0,0,0,.7);">
@@ -190,10 +197,11 @@
                                 <text>消息通知</text>
                             </view>
                         </view>
-                        <!-- <view class="brandManageItem" catchtap="comjumpwxnav" data-type='9048'> -->
-                        <view class="brandManageItem" catchtap="jinqingqidai" wx:if="{{!userJurisdictionList}}">
+                        <view class="brandManageItem" catchtap="jinqingqidai" data-type='9057'>
                             <view>
-                                <image src='https://cdn.51chaidan.com/images/brandSettledIcon/orderIcon/service_old.png' mode="widthFix"></image>
+                                <image src='https://cdn.51chaidan.com/images/brandSettledIcon/orderIcon/service_old.png' mode="widthFix">
+                                    <view class='wdmbchinfnum specialellipsis' wx:if='{{no_read_no!=0}}' style="padding:0;">{{no_read_no}}</view>
+                                </image>
                                 <text>客服消息</text>
                             </view>
                         </view>

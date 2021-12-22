@@ -1,3 +1,127 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
+<view class="omBox">
+    <view class="scrollBox">
+        <scroll-view class="marginAuto scrollViewTop" scroll-x="true" scroll-with-animation="true" scroll-left='{{scrollleft}}' style="height:80rpx;position: relative;">
+              <view wx:for="{{payStatus}}" wx:key='key' id="ele{{item.num}}" class="classifyItem {{centerIndex == item.num?'active':''}}" data-index="{{item.num}}" catchtap="classifyChange">{{item.name}}
+                 <view wx:if='{{item.num == 4 && no_read != 0 && nodataiftr}}' class="wdmbchinfnum specialellipsis">{{no_read}}</view>
+              </view>
+        </scroll-view>
+        <view class="cmScreen" wx:if='{{centerIndex != 4}}' catchtap="is_searchfun"><image src="https://www.51chaidan.com/images/toyCabinet/search.png" mode="aspectFit"></image></view>
+    </view>
+
+
+    <view class="elsearch" wx:if='{{is_search}}'>
+        <image class="elserarchimg" catchtap="jumpsearch" src="https://www.51chaidan.com/images/toyCabinet/search.png"></image>
+        <view class="elsearchch">
+            <input class="elinputbut" bindfocus='onFocus' placeholder='订单编号或商品名称' bindinput="inputChange" bindconfirm="jumpsearch" value="{{ordername}}"></input>
+        </view>
+        <view class="elserbotom" catchtap="jumpsearch">搜索</view>
+    </view>
+    <!-- 数据 -->
+    <block wx:if='{{centerIndex == 4}}'>
+        <block wx:for="{{conversationList}}" wx:key="index" id="{{item.conversationID}}" data-type="{{item.type}}" conversation="{{item}}" bindtap="handleRoute">
+            <template is="listEve" data="{{...item,num:index}}"></template>
+        </block>
+    </block>
+    <block wx:else>
+        <view class="centerTxt" wx:for='{{order}}' wx:key='key'>
+            <template is="orderCommon" data="{{...item,num:index}}"></template>
+        </view>        
+    </block>
+
+
+
+    <!--  暂无数据  -->
+    <view class='noDataCom' wx:if='{{((centerIndex == 4 && conversationList.length == 0) || (centerIndex != 4 && order.length==0)) && nodataiftr}}'>
+        <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
+    </view>
+
+</view>
+
+
+<!-- 客服 -->
+<template name="listEve">
+  <!-- wx:if="{{conversation.conversationID}}" -->
+    <movable-area class="t-conversation-item-container" >
+      <movable-view class="t-conversation-item" direction="horizontal" bindchange="handleTouchMove" damping="100" x="{{xScale}}" >
+          <view class="movviebox" catchtap="jumpTimDetailList" data-fid='{{from_uid}}' data-tid='{{to_uid}}' data-groupid='{{group_id}}'>
+              <view class="avatar-box">
+                  <image class="t-conversation-item-avatar"  src="{{avatar}}" binderror="handleimageerro">
+                  </image>
+                <view class="unread" wx:if="{{is_read == 0}}">
+                  <!-- <view class="read-text" wx:if="{{unreadCount > 99}}">99+</view>
+                  <view class="read-text" wx:else>{{unreadCount}}</view> -->
+                </view>
+              </view>
+              <view class="t-conversation-item-content">
+                <view class="tui-conversation-item-name specialellipsis">{{nick}}</view>
+                <view class="tui-conversation-lastMessage specialellipsis">
+                  <!-- <text>{{messageForShow}}</text> -->
+                  {{msg}}
+                </view>
+                <view class="t-conversation-item-info">{{send_time}}</view>
+              </view>
+              <view class="t-conversation-delete" data-tid='{{to_uid}}' data-fid='{{from_uid}}' data-num='{{num}}' data-id='{{id}}' data catchtap="deleteConversation">删除</view>
+          </view>
+
+      </movable-view>
+    </movable-area>
+
+</template>
+<!-- 列表 -->
+<template name='orderCommon'>
+   <view class="orderBox">
+       <view>
+            <view class="obcrTop obcrTopTopSn">
+                <view class="obcrTopTopSnEve" style="font-size:24rpx;color:#000;">订单编号:{{order_sn}}<view class="copyCart" catchtap="copyCart" data-cart='{{order_sn}}'>复制</view>
+                </view>
+                <view class="obcrTopTopSnEve" style="color:#FF2742;padding-right:0;">
+                    {{pay_status_name}}
+                    <!-- <image catchtap="delwholeheadrimg" data-oid='{{order_sn}}' class="copyCart" src="../../../../pages/images/icon_delete.png" mode='aspectFit'></image> -->
+                </view>
+            </view>
+            <view class="orderBoxContent" data-id='{{itemId}}' data-istype='{{itemType}}'>
+                <image class="orderBoxContentImg" src="{{goods_img}}" mode="aspectFit"></image>
+                <view class="orderBoxContentRight">
+                    <view class="obcrTop">
+                        <view class="multilineellipsis">{{goods_name}}</view>
+                    </view>
+                    <view class="obcrBottom obcrTop">
+                        <view style="color:#FF2742;">
+                            <block wx:if='{{goods_role_name}}'>款式:{{goods_role_name}}</block>
+                        </view>
+                        <view>
+                            <block wx:if='{{goods_num}}'>数量:{{goods_num}}</block>
+                        </view>
+                    </view>
+                </view>
+            </view>
+       </view>
+       <view class="orderBottom">
+            <view class="orderBottomOrderNumber">
+                <view class="orderBottomButtonLeft" wx:if="{{status == 2 || status == 3}}">
+                    <block wx:if='{{status == 2}}'>该商品不支持退换货</block>
+                    <block wx:elif='{{status == 3}}'>该商品已超过售后期</block>
+                    <image class="orderBottomImgG" src="../../../../pages/images/explain.png" mode='aspectFit'></image>
+                </view>
+
+                <block>
+                    <!-- <view wx:if='{{status == 1}}' class="orderBottomButton">商品寄回</view> -->
+                    <!-- <view class="orderBottomButton" wx:if='{{status == 1}}' catchtap="refund" data-oid='{{oid}}'>申请售后</view> -->
+                    <view class="orderBottomButton" catchtap="{{is_self?'':'jumpTimDetail'}}" data-fid='{{brandId_user}}' data-tid='{{brandId_user}}' data-num='{{num}}'>
+                        <button wx:if='{{is_self}}' open-type='contact' style='width:100%;height:100%;position:absolute;top:0;left:0;opacity: 0;z-index:1;'></button>
+                        联系客服
+                    </view>
+                </block>
+                
+            </view>
+       </view>
+   </view>
+
+</template>
+
+
+
+

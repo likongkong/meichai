@@ -1781,3 +1781,10 @@
        <view class="proTipButton" style="{{commodityAgreement?'':'background:#909090;'}}" catchtap="{{commodityAgreement?'continueToBuy':''}}">继续购买</view>
    </view>
 </view>
+
+<!-- 客服 -->
+<view class='customerServiceImg' wx:if='{{comdata.brand_uid}}'>
+    <image catchtap="jumpTimDetail" mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/relation_after_sale.png?'></image>
+    <button class='shareButton' type='primary' bindtap="jumpTimDetail"></button>
+</view>
+

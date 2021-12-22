@@ -648,6 +648,8 @@ page{
   height: auto;
   display: block;
   margin: 0 auto;
+  position: relative;
+  overflow: visible;
 }
 .brandManageItem text{
   font-size: 24rpx;

@@ -323,7 +323,7 @@ page{
   color: #90D2D6;
   position: absolute;
   top: 0;
-  right: 0;
+  right: 20rpx;
   z-index: 2;
 }
 .cmScreen image{

@@ -189,6 +189,7 @@
         "pages/releaseSignIn/releaseSignIn",
         "pages/messageNotification/messageNotification",
         "pages/timHomePage/timHomePage",
+        "pages/timHomePageList/timHomePageList",
         "pages/messageNotificationDetail/messageNotificationDetail",
         "pages/bankList/bankList",
         "pages/delivery/delivery",
@@ -200,7 +201,8 @@
         "pages/solicitReviewDetails/solicitReviewDetails",
         "pages/solicitPictures/solicitPictures",
         "pages/afterSaleService/afterSaleService",
-        "pages/collectPictures/collectPictures"
+        "pages/collectPictures/collectPictures",
+        "pages/appliedAftersales/appliedAftersales"
       ]
     }
   ],
