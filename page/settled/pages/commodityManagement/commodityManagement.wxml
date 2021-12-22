@@ -13,11 +13,13 @@
         </view>
         <view class="elserbotom" catchtap="jumpsearch">搜索</view>
 	</view>
+    <view style="width:100%;position: relative;">
+        <scroll-view class="scrollViewTop" scroll-x="true" scroll-with-animation="true" scroll-left='{{scrollleft}}' style="height:80rpx;position: relative;width:540rpx;margin: 0 20rpx 10rpx 20rpx;">
+            <view wx:for="{{payStatus}}" wx:key='key' id="ele{{item.num}}" class="classifyItem {{centerIndex == item.num?'active':''}}" data-index="{{item.num}}" catchtap="classifyChange">{{item.name}}</view>
+        </scroll-view>
+        <view class="cmScreen" catchtap="selectBoxFun">{{screenWords}}<image src="https://cdn.51chaidan.com/images/brandSettledIcon/filtrate.png" mode="aspectFit"></image></view>
+    </view>
 
-    <scroll-view class="marginAuto scrollViewTop" scroll-x="true" scroll-with-animation="true" scroll-left='{{scrollleft}}' style="height:80rpx;position: relative;">
-         <view wx:for="{{payStatus}}" wx:key='key' id="ele{{item.num}}" class="classifyItem {{centerIndex == item.num?'active':''}}" data-index="{{item.num}}" catchtap="classifyChange">{{item.name}}</view>
-         <view class="cmScreen" catchtap="selectBoxFun">{{screenWords}}<image src="https://cdn.51chaidan.com/images/brandSettledIcon/filtrate.png" mode="aspectFit"></image></view>
-    </scroll-view>
 
     <view class="marginAuto centerTxt" wx:for='{{order}}' wx:key='key'>
         <template is="orderCommon" data="{{...item,num:index}}"></template>
