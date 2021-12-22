@@ -46,7 +46,7 @@
   <!-- wx:if="{{conversation.conversationID}}" -->
     <movable-area class="t-conversation-item-container" >
       <movable-view class="t-conversation-item" direction="horizontal" bindchange="handleTouchMove" damping="100" x="{{xScale}}" >
-          <view class="movviebox" catchtap="jumpTimDetailList" data-fid='{{from_uid}}' data-tid='{{to_uid}}'>
+          <view class="movviebox" catchtap="jumpTimDetailList" data-fid='{{from_uid}}' data-tid='{{to_uid}}' data-groupid='{{group_id}}'>
               <view class="avatar-box">
                   <image class="t-conversation-item-avatar"  src="{{avatar}}" binderror="handleimageerro">
                   </image>

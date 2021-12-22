@@ -344,8 +344,9 @@ Page({
     }else{
       var id = e.currentTarget.dataset.fid;
     };
+    var groupid = e.currentTarget.dataset.groupid || 0;
     wx.navigateTo({ 
-      url: `/page/settled/pages/timHomePage/timHomePage?id=${id}`
+      url: `/page/settled/pages/timHomePage/timHomePage?id=${id}&groupid=${groupid}`
     });
   },
 

@@ -40,24 +40,7 @@ Page({
     emojiList:[],
     // 订单列表
     displayTag:false,
-    orderList: [
-      {
-        orderNum: 1,
-        time: '2021-7-20 20:45',
-        title: '[天博检验]新冠核酸检测/预约',
-        description: '专业医学检测，电子报告',
-        imageUrl: 'https://sdk-web-1252463788.cos.ap-hongkong.myqcloud.com/component/TUIKit/assets/miles.jpeg',
-        price: '80元',
-      },
-      {
-        orderNum: 2,
-        time: '2021-7-20 22:45',
-        title: '[路边]新冠核酸检测/预约',
-        description: '专业医学检测，电子报告',
-        imageUrl: 'https://sdk-web-1252463788.cos.ap-hongkong.myqcloud.com/component/TUIKit/assets/miles.jpeg',
-        price: '7000元',
-      },
-    ],
+    orderList: [],
     // 消息列表
     messageList:[],
     // scroll 跳转到最底部
@@ -91,13 +74,13 @@ Page({
     var _this = this;
 
     if(_this.data.order && _this.data.messageType == 3){
-      var q1 = Dec.Aese('mod=userSig&operation=pushInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&to_userid='+_this.data.from_userid + '&type=' + _this.data.messageType + '&order_id='+_this.data.order.order_id+'&order_name=' + _this.data.order.order_name+'&photo_url=' + _this.data.order.photo_url +'&price=' + _this.data.order.price+'&style=' + _this.data.order.style);
+      var q1 = Dec.Aese('mod=userSig&operation=pushInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&to_userid='+_this.data.from_userid + '&type=' + _this.data.messageType + '&order_id='+_this.data.order.order_id+'&order_name=' + _this.data.order.order_name+'&photo_url=' + _this.data.order.photo_url +'&price=' + _this.data.order.price+'&style=' + _this.data.order.style+'&group_id='+_this.data.group_id);
 
-      console.log('mod=userSig&operation=pushInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&to_userid='+_this.data.from_userid + '&type=' + _this.data.messageType + '&order_id='+_this.data.order.order_id+'&order_name=' + _this.data.order.order_name+'&photo_url=' + _this.data.order.photo_url +'&price=' + _this.data.order.price+'&style=' + _this.data.order.style)
+      console.log('mod=userSig&operation=pushInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&to_userid='+_this.data.from_userid + '&type=' + _this.data.messageType + '&order_id='+_this.data.order.order_id+'&order_name=' + _this.data.order.order_name+'&photo_url=' + _this.data.order.photo_url +'&price=' + _this.data.order.price+'&style=' + _this.data.order.style+'&group_id='+_this.data.group_id)
     }else{
-      var q1 = Dec.Aese('mod=userSig&operation=pushInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&to_userid='+_this.data.from_userid+'&msg=' + _this.data.message + '&type=' + _this.data.messageType + '&url='+_this.data.imageUrl);
+      var q1 = Dec.Aese('mod=userSig&operation=pushInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&to_userid='+_this.data.from_userid+'&msg=' + _this.data.message + '&type=' + _this.data.messageType + '&url='+_this.data.imageUrl+'&group_id='+_this.data.group_id);
 
-      console.log('mod=userSig&operation=pushInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&to_userid='+_this.data.from_userid+'&msg=' + _this.data.message + '&type=' + _this.data.messageType + '&url='+_this.data.imageUrl)
+      console.log('mod=userSig&operation=pushInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&to_userid='+_this.data.from_userid+'&msg=' + _this.data.message + '&type=' + _this.data.messageType + '&url='+_this.data.imageUrl+'&group_id='+_this.data.group_id)
     };
 
     
@@ -172,7 +155,8 @@ Page({
 
     this.setData({
       from_userid:options.id,
-      order:options.order?JSON.parse(options.order):''
+      order:options.order?JSON.parse(options.order):'',
+      group_id:options.groupid || 0
     });
     // '已经授权'
     _this.data.loginid = app.signindata.loginid;
