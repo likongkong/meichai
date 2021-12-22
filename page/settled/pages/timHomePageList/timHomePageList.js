@@ -138,9 +138,9 @@ Page({
       _this.data.page = ++pagenum;
     };
 
-    var q1 = Dec.Aese('mod=userSig&operation=newsList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&page='+_this.data.page);
+    var q1 = Dec.Aese('mod=userSig&operation=newsList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&page='+_this.data.page+'&type=1');
 
-    console.log('mod=userSig&operation=newsList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&page='+_this.data.page)
+    console.log('mod=userSig&operation=newsList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&page='+_this.data.page+'&type=1')
 
     wx.showLoading({title: '加载中...',mask:true})
     wx.request({

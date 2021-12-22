@@ -16,15 +16,16 @@ Page({
     ordername:'',
     payStatus:[
       {name:'售后申请',num:'1'},
-      {name:'处理中',num:'2'},
-      {name:'申请记录',num:'3'},
+      // {name:'处理中',num:'2'},
+      // {name:'申请记录',num:'3'},
       {name:'客服消息',num:'4'}
     ], 
     centerIndex:'1',
 
     order:[],
     nodataiftr:false,
-    is_search:false
+    is_search:false,
+    conversationList:[]
 
   },
   classifyChange(e){
@@ -167,9 +168,9 @@ Page({
       _this.data.page = ++pagenum;
     };
 
-    var q1 = Dec.Aese('mod=userSig&operation=newsList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&page='+_this.data.page);
+    var q1 = Dec.Aese('mod=userSig&operation=newsList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&page='+_this.data.page+'&type=2');
 
-    console.log('mod=userSig&operation=newsList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&page='+_this.data.page)
+    console.log('mod=userSig&operation=newsList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&page='+_this.data.page+'&type=2')
 
     wx.showLoading({title: '加载中...',mask:true})
     wx.request({
@@ -323,10 +324,31 @@ Page({
     }else{
       var id = e.currentTarget.dataset.fid;
     };
+    var num = e.currentTarget.dataset.num || 0;
+    var comdata = this.data.order[num];
+    var order = {
+      order_id: comdata.oid || '',
+      order_name: comdata.goods_name || '',
+      photo_url: comdata.goods_img || '',
+      price: comdata.order_amount || '',
+      style: comdata.goods_role_name || '',
+    }
+    wx.navigateTo({ 
+      url: `/page/settled/pages/timHomePage/timHomePage?id=${id}&order=${JSON.stringify(order)}`
+    });
+  },
+  // 跳转详情
+  jumpTimDetailList(e){
+    if(e.currentTarget.dataset.fid == app.signindata.uid){
+      var id = e.currentTarget.dataset.tid;
+    }else{
+      var id = e.currentTarget.dataset.fid;
+    };
     wx.navigateTo({ 
       url: `/page/settled/pages/timHomePage/timHomePage?id=${id}`
     });
   },
+
   deleteConversation(e) {
     var _this = this;
     // var id = e.currentTarget.dataset.id || 0;
@@ -366,7 +388,12 @@ Page({
       },
     })
   },
-
+  refund: function (e) {
+    var oid = e.currentTarget.dataset.oid || 0;
+    wx.navigateTo({
+      url: "../../../secondpackge/pages/refund/refund?oid="+oid
+    });
+  },
 
 
 
