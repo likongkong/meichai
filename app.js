@@ -1153,6 +1153,10 @@ App({
       wx.navigateTo({
         url: `/page/settled/pages/gwAgreement/gwAgreement`
       });
+    }else if(item_type == 9057){  // 客服消息
+      wx.navigateTo({  
+        url: "/page/settled/pages/timHomePageList/timHomePageList"
+      });      
     }
   },
   // 中奖提示倒计时

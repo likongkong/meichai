@@ -485,6 +485,8 @@ Page({
           // [`listData2[4].time`]:util.format1("yyyy-MM-dd HH:mm",info.startTime),
           // [`listData2[5].time`]:util.format1("yyyy-MM-dd HH:mm",info.stopTime),
           [`listData3[0].index`]:info.isCanShare==0?1:0,
+          [`listData6[0].index`]:info.shelvesType,
+          [`listData6[0].radioArr[1].time`]:info.shelvesType==1?util.format1("yyyy-MM-dd HH:mm",info.shelvesTime):'',
         })
     //  goodsName:'', //商品名称
     //  flatPatternmaking:'', //商品展示图
@@ -532,14 +534,14 @@ Page({
         obj.dateToPull = info.deliverTime;
         obj.isGoodsStock = info.isShowStock==0?1:0;
         obj.isSoldNum = info.isShowSellNumber==0?1:0;
-
         // obj.dateToPull = info.deliverTime;
         // obj.isGoodsStock = info.isShowStock==0?1:0;
         // obj.isSoldNum = info.isShowSellNumber==0?1:0;
         // obj.startTime = util.format1("yyyy-MM-dd HH:mm",info.startTime);
         // obj.endTime = util.format1("yyyy-MM-dd HH:mm",info.stopTime);
-
         obj.isCanShare = info.isCanShare==0?1:0;
+        obj.addedData = info.shelvesType;
+        obj.customAdded = util.format1("yyyy-MM-dd HH:mm",info.shelvesTime);
       }else{
         app.showToastC(res.data.Msg,2000);
       }
@@ -639,6 +641,8 @@ console.log(obj.modeOfDespatch)
       isShowStock:obj.isGoodsStock==0?1:0,
       isShowSellNumber:obj.isSoldNum==0?1:0,
       isCanShare:obj.isCanShare==0?1:0,
+      shelvesType:obj.addedData,
+      shelvesTime:obj.addedData==1?(new Date(obj.customAdded.replace(/-/g,'/')).getTime())/1000:''
     }
     // obj.goodsDescribe.split('\n').join('</p><p>');
     console.log(data)

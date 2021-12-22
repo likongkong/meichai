@@ -278,8 +278,8 @@ Page({
   jumpTimDetail(e){
     app.getUserProfile((res,userInfo) => {
         wx.navigateTo({  
-          url: "/page/settled/pages/timHomePageList/timHomePageList"
-        });
+          url: "/page/settled/pages/afterSaleService/afterSaleService"
+        });      
     })
   },
   // 地址管理

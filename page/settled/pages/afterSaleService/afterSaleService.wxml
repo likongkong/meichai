@@ -2,235 +2,126 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 <view class="omBox">
-    <scroll-view class="marginAuto scrollViewTop" scroll-x="true" scroll-with-animation="true" scroll-left='{{scrollleftTop}}' wx:if='{{brand.length>1}}'>
-        <view class="scrollViewTopEve {{brandid == 0?'selectTop':''}}" data-brandid="0" id="top0" catchtap="scrollViewTop">全部IP</view>
-        <view wx:for="{{brand}}" wx:key='key' class="scrollViewTopEve {{brandid == item.brandId?'selectTop':''}}" data-brandid="{{item.brandId}}" id="top{{item.brandId}}" catchtap="scrollViewTop">{{item.brandName}}</view>
-    </scroll-view>
-	<view class="elsearch marginAuto">
+    <view class="scrollBox">
+        <scroll-view class="marginAuto scrollViewTop" scroll-x="true" scroll-with-animation="true" scroll-left='{{scrollleft}}' style="height:80rpx;position: relative;">
+              <view wx:for="{{payStatus}}" wx:key='key' id="ele{{item.num}}" class="classifyItem {{centerIndex == item.num?'active':''}}" data-index="{{item.num}}" catchtap="classifyChange">{{item.name}}
+                 <view wx:if='{{item.num == 4 && no_read != 0 && nodataiftr}}' class="wdmbchinfnum specialellipsis">{{no_read}}</view>
+              </view>
+        </scroll-view>
+        <view class="cmScreen" catchtap="is_searchfun"><image src="https://www.51chaidan.com/images/toyCabinet/search.png" mode="aspectFit"></image></view>
+    </view>
+
+
+    <view class="elsearch" wx:if='{{is_search}}'>
         <image class="elserarchimg" catchtap="jumpsearch" src="https://www.51chaidan.com/images/toyCabinet/search.png"></image>
         <view class="elsearchch">
-            <input class="elinputbut" bindfocus='onFocus' placeholder='商品名称' bindinput="inputChange" bindconfirm="jumpsearch" value="{{ordername}}"></input>
+            <input class="elinputbut" bindfocus='onFocus' placeholder='订单编号或商品名称' bindinput="inputChange" bindconfirm="jumpsearch" value="{{ordername}}"></input>
         </view>
         <view class="elserbotom" catchtap="jumpsearch">搜索</view>
-	</view>
-
-    <scroll-view class="marginAuto scrollViewTop" scroll-x="true" scroll-with-animation="true" scroll-left='{{scrollleft}}' style="height:80rpx;position: relative;">
-         <view wx:for="{{payStatus}}" wx:key='key' id="ele{{item.num}}" class="classifyItem {{centerIndex == item.num?'active':''}}" data-index="{{item.num}}" catchtap="classifyChange">{{item.name}}</view>
-         <view class="cmScreen" catchtap="selectBoxFun">{{screenWords}}<image src="https://cdn.51chaidan.com/images/brandSettledIcon/filtrate.png" mode="aspectFit"></image></view>
-    </scroll-view>
-
-    <view class="marginAuto centerTxt" wx:for='{{order}}' wx:key='key'>
-        <template is="orderCommon" data="{{...item,num:index}}"></template>
     </view>
+    <!-- 数据 -->
+    <block wx:if='{{centerIndex == 4}}'>
+        <block wx:for="{{conversationList}}" wx:key="index" id="{{item.conversationID}}" data-type="{{item.type}}" conversation="{{item}}" bindtap="handleRoute">
+            <template is="listEve" data="{{...item,num:index}}"></template>
+        </block>
+    </block>
+    <block wx:else>
+        <view class="centerTxt" wx:for='{{order}}' wx:key='key'>
+            <template is="orderCommon" data="{{...item,num:index}}"></template>
+        </view>        
+    </block>
+
+
+
     <!--  暂无数据  -->
-      <view class='noDataCom' wx:if='{{order.length==0&&nodataiftr}}'>
-          <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
-      </view>
-    <view class="orderBottomNavigation">
-        <view class="orderBottomNavEve" style="background:#90D2D6;" catchtap="commonBulletFrameFun" data-index='4'>发布/发售</view>
+    <view class='noDataCom' wx:if='{{order.length==0&&nodataiftr}}'>
+        <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
     </view>
+
 </view>
 
+
+<!-- 客服 -->
+<template name="listEve">
+  <!-- wx:if="{{conversation.conversationID}}" -->
+    <movable-area class="t-conversation-item-container" >
+      <movable-view class="t-conversation-item" direction="horizontal" bindchange="handleTouchMove" damping="100" x="{{xScale}}" >
+          <view class="movviebox" catchtap="jumpTimDetail" data-fid='{{from_uid}}' data-tid='{{to_uid}}'>
+              <view class="avatar-box">
+                  <image class="t-conversation-item-avatar"  src="{{avatar}}" binderror="handleimageerro">
+                  </image>
+                <view class="unread" wx:if="{{is_read == 0}}">
+                  <!-- <view class="read-text" wx:if="{{unreadCount > 99}}">99+</view>
+                  <view class="read-text" wx:else>{{unreadCount}}</view> -->
+                </view>
+              </view>
+              <view class="t-conversation-item-content">
+                <view class="tui-conversation-item-name specialellipsis">{{nick}}</view>
+                <view class="tui-conversation-lastMessage specialellipsis">
+                  <!-- <text>{{messageForShow}}</text> -->
+                  {{msg}}
+                </view>
+                <view class="t-conversation-item-info">{{send_time}}</view>
+              </view>
+              <view class="t-conversation-delete" data-tid='{{to_uid}}' data-fid='{{from_uid}}' data-num='{{num}}' data-id='{{id}}' data catchtap="deleteConversation">删除</view>
+          </view>
+
+      </movable-view>
+    </movable-area>
+
+</template>
+<!-- 列表 -->
 <template name='orderCommon'>
    <view class="orderBox">
        <view>
-            <view class="obcrTop" style="color:#90D2D6;padding-bottom:16rpx;">
-                <view>
-                    <text style="color:#FF2742;" wx:if='{{shelvesName}}'>{{shelvesName}}</text>
+            <view class="obcrTop obcrTopTopSn">
+                <view class="obcrTopTopSnEve" style="font-size:24rpx;color:#000;">订单编号:{{order_sn}}<view class="copyCart" catchtap="copyCart" data-cart='123'>复制</view>
                 </view>
-                <view>{{itemStatusName}}</view>
+                <view class="obcrTopTopSnEve" style="color:#FF2742;padding-right:0;">
+                    {{pay_status_name}}
+                    <!-- <image catchtap="delwholeheadrimg" data-oid='{{order_sn}}' class="copyCart" src="../../../../pages/images/icon_delete.png" mode='aspectFit'></image> -->
+                </view>
             </view>
-            <view class="orderBoxContent" catchtap="{{itemStatus!=4?'publicJump':''}}" data-id='{{itemId}}' data-istype='{{itemType}}'>
-                <image class="orderBoxContentImg" src="{{itemImg}}" mode="aspectFit"></image>
+            <view class="orderBoxContent" data-id='{{itemId}}' data-istype='{{itemType}}'>
+                <image class="orderBoxContentImg" src="{{goods_img}}" mode="aspectFit"></image>
                 <view class="orderBoxContentRight">
-                    <view class="obcrTop" style="color:#90D2D6;">
-                        <view>{{itemTypeName}}</view>
-                        <!-- <view>{{itemStatusName}}</view> -->
-                    </view>
-                    <view class="obcrTop" style="padding-top:10rpx;">
-                        <view class="specialellipsis">{{itemName}}</view>
+                    <view class="obcrTop">
+                        <view class="multilineellipsis">{{goods_name}}</view>
                     </view>
                     <view class="obcrBottom obcrTop">
-                        <view>售价:{{itemPrice}}<text style="color:#000;" wx:if='{{integral}}'>+积分{{integral}}</text></view>
+                        <view style="color:#FF2742;">
+                            <block wx:if='{{goods_role_name}}'>款式:{{goods_role_name}}</block>
+                        </view>
                         <view>
-                            <block wx:if='{{itemType == 4}}'>抽选数量:{{stock}}</block>
-                            <block wx:else>已售<block wx:if='{{stock}}'>/总库存</block>:{{salesNumber}}<block wx:if='{{stock}}'>/{{stock}}</block></block>
+                            <block wx:if='{{goods_num}}'>数量:{{goods_num}}</block>
                         </view>
                     </view>
                 </view>
             </view>
        </view>
-       <view class="orderBottom" wx:if='{{itemStatus != 4}}'>
+       <view class="orderBottom">
             <view class="orderBottomOrderNumber">
-                <block wx:if='{{itemStatus==1 || itemStatus==2 || itemStatus == 3}}'>
-                    <view class="orderBottomButton" catchtap="{{!isCanShare?'shareImgTipFun':''}}"><button wx:if='{{isCanShare}}' data-num='{{num}}' style='width:100%;height:100%;position:absolute;top:0;right:0;opacity:0;' open-type='share'></button>分享</view>
-                </block>
-                <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='3'>删除</view>
-                <block wx:if='{{itemStatus == 1}}'>
-                    <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='1'>编辑</view>
-                </block>
-                <block wx:else>
-                    <view class="orderBottomButton" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='2'>
-                        <block wx:if='{{itemType == -1}}'>发售</block><block wx:elif='{{itemType == 4}}'>抽选</block>效果
+                <view class="orderBottomButtonLeft">
+                    <block wx:if='{{status == 2}}'>该商品不支持退换货</block>
+                    <block wx:elif='{{status == 3}}'>该商品已超过售后期</block>
+                    <image class="orderBottomImgG" src="../../../../pages/images/explain.png" mode='aspectFit'></image>
+                </view>
+
+                <block>
+                    <view wx:if='{{status == 1}}' class="orderBottomButton">商品寄回</view>
+                    <view wx:if='{{status == 1}}' class="orderBottomButton">申请退款</view>
+                    <view class="orderBottomButton" catchtap="{{is_self?'':'jumpTimDetail'}}" data-fid='{{brandId_user}}' data-tid='{{brandId_user}}'>
+                        <button wx:if='{{is_self}}' open-type='contact' style='width:100%;height:100%;position:absolute;top:0;left:0;opacity: 0;z-index:1;'></button>
+                        联系客服
                     </view>
                 </block>
+                
             </view>
        </view>
    </view>
 
 </template>
 
-<!-- 弹框  1 修改 2 退款 3 物流 4 批量导出订单-->
-<view class="wshNew" catchtouchmove="true" wx:if='{{commonBulletFrame}}' catchtap="closeCommonTip">
-    <view class="orderMangAddress" catchtap="true">
-        <view class="orderMangTipTop">
-            <block wx:if='{{logisticsRefundModify == 1}}'>修改收货地址</block>
-            <block wx:elif='{{logisticsRefundModify == 2}}'>退款</block>
-            <block wx:elif='{{logisticsRefundModify == 3}}'>删除</block>
-        </view>
-        <!-- 修改地址 -->
-        <block wx:if='{{logisticsRefundModify == 1}}'>
-            <view class="orderMangTipCenter">
-                <view class="orderMangTipCenterEve">
-                    <view class="leftEveheight">收货人</view>
-                    <view>
-                        <input class="addressModifyInput" bindinput='namefun' type='text' value='{{modifyName}}' type="text"></input>
-                        <image class="addressMoImg" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="aspectFit"></image>
-                    </view>
-                </view>
-                <view class="orderMangTipCenterEve">
-                    <view class="leftEveheight">收货手机号</view>
-                    <view>
-                        <input class="addressModifyInput" type="text" value='{{modifyMobile}}' bindinput='telfun'></input>
-                        <image class="addressMoImg" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="aspectFit"></image>
-                    </view>
-                </view>
-                <view class="orderMangTipCenterEve">
-                    <view class="leftEveheight">所在地区</view>
-                    <view>
-                        <view catchtap='open' class="addressModifyInput">{{province}}-{{city}}-{{county}}</view>
-                        <image class="addressMoImg" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="aspectFit"></image>
-                    </view>
-                </view>
-
-                <view class="orderMangTipCenterEve" style="height:110rpx;">
-                    <view class="leftEveheight">收货地址</view>
-                    <view>
-                        <textarea class="addressModifytTa" value='{{deladdress}}' bindinput='deladdressfun' name='address'></textarea>
-                        <image class="addressMoImg" style="margin:0 0 0 10rpx;" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="aspectFit"></image>
-                    </view>
-
-                </view>
-            </view>            
-        </block>
-        <!-- 退款 -->
-        <block wx:elif='{{logisticsRefundModify == 2}}'>
-            <!--  subLedger 1 已分账 2 未分账-->
-            <block wx:if='{{subLedger==1}}'>
-                <view class="orderMangTipCenter">
-                    <view class="orderMangTipCenterEve" style="padding-bottom: 15rpx;margin-bottom:15rpx;border-bottom: 1px solid #ECECEC;">
-                        <view>商品名称：{{selectData.goods.goodsName}}</view>
-                    </view>
-                    <view class="orderMangTipCenterEve">
-                        <view>退款明细</view>
-                    </view>
-                    <view class="orderMangTipCenterEve">
-                        <view>商品售价：{{selectData.order.goodsAmount}}</view>
-                    </view>
-                    <view class="orderMangTipCenterEve">
-                        <view>平台抽成：{{payInfoData.order.percentage}}</view>
-                    </view>                    
-                    <view class="orderMangTipCenterEve" style="padding-bottom: 15rpx;margin-bottom:15rpx;border-bottom: 1px solid #ECECEC;">
-                        <view>订单收入：{{payInfoData.order.profitAmount}}</view>
-                    </view>   
-                    <view class="orderMangTipCenterEve">
-                        <view>退款金额</view>
-                    </view>                 
-                    <view class="orderMangTipCenterEve">
-                        <view>商家实际退款金额：{{payInfoData.order.profitAmount}}</view>
-                    </view>
-                    <view class="orderMangTipCenterEve">
-                        <view>平台实际退款金额：{{payInfoData.order.percentage}}</view>
-                    </view>
-                    <view class="orderMangTipCenterEve">
-                        <view>该订单已分账，需要您支付分账金额￥{{payInfoData.order.profitAmount}}。支付完成之后代表同意退款。</view>
-                    </view>
-
-                </view>                
-            </block>
-            <block wx:elif='{{subLedger==2}}'>
-                <view class="refundTxt">退款之后不可撤销，确认退款请点击立即退款。</view>    
-            </block>
-                  
-        </block>
-        <!-- 添加物流 -->
-        <block wx:elif='{{logisticsRefundModify == 3}}'>
-            <text class="batchExportOrder" style="text-align:center;">确认删除“{{selectData.itemName}}”该商品吗？删除之后小程序内将无法查看到该商品，请谨慎操作。</text> 
-        </block>
-
-
-        <view class="orderMangTipCenterEve" style="width:610rpx;margin:auto;">
-            <view class="oAMaBConfirm" catchtap="closeCommonTip">取消</view>
-            <view class="oAMaBCancel" catchtap="confirmCommonTip">确定删除</view> 
-        </view>
-    </view>
-</view>
-
-<!-- 分享提示弹框 -->
-<view class="wshNew" catchtouchmove="true" wx:if='{{shareImgTipIs}}' catchtap="shareImgTipFun">
-    <view>
-        <image class="shareImgTip" src="https://cdn.51chaidan.com/images/icon/share_hint.png" mode="widthFix"></image>
-        <image class="indexelafracondisnone" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="aspectFit"></image>
-    </view>
-</view>
-
-<view class="wshNew" catchtouchmove="true" wx:if='{{selectBox}}' catchtap="selectBoxFun">
-    <view class="orderMangAddressBottom" catchtap="true" style="border-radius:30rpx 30rpx 0 0;">
-        <view class="orderMangTipTop" style="border-bottom:2rpx solid #F4F4F4;" wx:for='{{selectWordsData}}' wx:key='key' catchtap="selectCap" data-word='{{item.n}}' data-index='{{item.id}}'>{{item.n}}</view>
-        
-        <view class="orderMangCenterBG"></view>
-        <view class="orderMangTipTop" catchtap="selectBoxFun" style="padding-bottom:30rpx;">取消</view>
-    </view>
-</view>
-
-<!-- 选择发布/发售类型弹框-->
-<view class="popMask" catchtouchmove="true" catchtap="toggleAddNewEventMask" wx:if="{{isAddNewEventMask}}" style="background: rgba(0,0,0,.7);">
-    <view class="addNewEventBox" catchtap="true">
-            <view class="releaseSale">
-                <image class="releaseSaleImg" src="https://www.51chaidan.com/images/brandInfoIcon/issueClassBackground.png"  mode="widthFix"></image>
-
-                <view class="releaseSalePostion">
-                    <view  class="releaseSaleHead"></view>
-                    <view class="addNewEventContent">
-                        <view class="addNewEventContentCap" wx:if='{{userJurisdictionList && !userJurisdictionList.isGoodsManage}}' catchtap='{{!userJurisdictionList.isGoodsManage?"permissionDeniedFun":""}}'></view>
-                        <image class="releaseSaleImg" data-type="9040" catchtap="jumpoffering" style="margin-left:30rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/seckillButton20210923.png"  mode="widthFix"></image>
-                        <image class="releaseSaleImg" data-type="9039" catchtap="jumpoffering" style="margin-right:30rpx;"  src="https://www.51chaidan.com/images/brandInfoIcon/selectButton20210923.png"  mode="widthFix"></image>
-                        
-                    </view>
-
-                    <view class="addNewEventContent">
-                        <view class="addNewEventContentCap" wx:if='{{userJurisdictionList && !userJurisdictionList.isIllustratedManage}}'  catchtap='{{!userJurisdictionList.isIllustratedManage?"permissionDeniedFun":""}}'></view>
-                        <image class="releaseSaleImg" data-type="9033" catchtap="jumpoffering" style="margin-left:30rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/illustratedButton20210923.png"  mode="widthFix"></image>
-                        <image class="releaseSaleImg" data-type="9032" catchtap="jumpoffering" style="margin-right:30rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/dynamicButton20210923.png"  mode="widthFix"></image>
-                        
-                    </view>
-                </view>
-
-
-            </view>
 
 
 
-        <!-- <view class="addNewEventContent">
-            <view class="createItem" data-type="9039" catchtap="jumpoffering">
-                <view>开启抽选</view>
-                <view class="lastChild" style="background:#68B1ED;">发布抽选</view>
-            </view>
-            <view class="createItem" data-type="9040" catchtap="jumpoffering">
-                <view>开启秒杀</view>
-                <view class="lastChild" style="background:#6FD375;">发布秒杀</view>
-            </view>
-        </view> -->
-        <image class="popMaskbutton" catchtap="toggleAddNewEventMask" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="aspectFit"></image>
-    </view>
-</view>

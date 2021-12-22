@@ -65,6 +65,16 @@
 				</view>
 			</view>
 
+		
+			<view class="followWrap" wx:if="{{brandinfo && !brandinfo.isAttention}}" data-type='0' data-id='{{brandinfo.brandId}}' catchtap='followfun'>
+				<view class="followTxt">
+						<text>点击订阅 {{brandinfo.brandName}}</text>
+						<text>下次发售 先人一步早知道</text>
+				</view>
+				<image class="brand_lotto_attention" src="https://cdn.51chaidan.com/images/brandSettledIcon/brand_lotto_attention.png" mode="widthFix"></image>
+				<image class="brand_lotto_subscription_button" src="https://cdn.51chaidan.com/images/brandSettledIcon/brand_lotto_subscription_button.png" mode="widthFix"></image>
+			</view>
+
 			<view class="newDrawActivityProcess">
 				  <block wx:if='{{infoActivity.isSign}}'>
 								<block wx:if='{{infoActivity.status == 2 && listData.lotto.length != 0}}'>
@@ -138,10 +148,10 @@
 							<image class="brandAuthenticationIcon" wx:if="{{brandinfo.isAuth}}" src="https://cdn.51chaidan.com/images/brandSettledIcon/AuthenticationOk.png" mode="widthFix"></image>
 						</view>
 						<view>
-							<text class="{{!brandinfo.isAttention?'concernBtn':'concernBtnNo'}}" data-type='0' data-id='{{brandinfo.brandId}}' catchtap='followfun'>
+							<!-- <text class="{{!brandinfo.isAttention?'concernBtn':'concernBtnNo'}}" data-type='0' data-id='{{brandinfo.brandId}}' catchtap='followfun'>
 								<block wx:if='{{!brandinfo.isAttention}}'>关注</block>
 								<block wx:else>已关注</block>
-							</text>
+							</text> -->
 						</view>
 					</view>
 					<view class="brandCorrelationPlatform">
@@ -177,7 +187,7 @@
 			</view>
 
 			<!--  商品详情图片 转换HTML标签  -->
-			<view class='detailimg'>
+			<view class='detailimg' style="margin-top:20rpx;">
 				  <template is="wxParse" data="{{wxParseData:article.nodes}}" />
 			</view>
 
