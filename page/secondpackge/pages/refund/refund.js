@@ -42,6 +42,15 @@ Page({
       },
     ],
   },
+  copy:function(e){
+    let num = e.currentTarget.dataset.num;
+    wx.setClipboardData({
+      data: num,
+      success: function (res) {
+        app.showToastC('复制成功');
+      }
+    });
+  },
   chooseReasonFun(e){
     let index = e.currentTarget.dataset.index;
     let refundType = this.data.refundType;

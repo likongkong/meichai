@@ -21,7 +21,7 @@
       <view class="goodsCardContentInfo" style="width: 470rpx;">
         <text class="name">{{infoData.gname}}新生千面九尾狐手办</text>
         <view class="fashion"><text wx:if="{{infoData.roleName}}">款式：{{infoData.roleName}}</text> <text>数量x1</text></view>
-        <view class="orderNumberWrap"><view>订单编号：<text class="orderNumber">20211018124578</text></view><text class="copyBtn">复制</text></view>
+        <view class="orderNumberWrap" data-num="20211018124578" catchtap="copy"><view>订单编号：<text class="orderNumber">20211018124578</text></view><text class="copyBtn">复制</text></view>
       </view>
     </view>
   </view>
