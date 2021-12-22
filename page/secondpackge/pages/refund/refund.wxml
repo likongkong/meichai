@@ -3,17 +3,25 @@
 
 
 <view class="wrap">
+
+  <view class="contactUsWrap">
+    <text class="contactUsTxt">提交申请前，请先和客服协商售后事宜</text>
+    <text class="contactUsBtn">联系客服</text>
+  </view>
+  
   <view class="goodsCardWrap">
     <view class="title">
-      退款商品
+      售后商品
     </view>
     <view class="goodsCardContent">
       <view style="width: 160rpx;">
-        <image src="{{infoData.gcover}}" mode="widthFix"></image>
+        <!-- <image src="{{infoData.gcover}}" mode="widthFix"></image> -->
+        <image src="https://cdn.51chaidan.com/images/toyShow3/brandGoodsRotation/20211214/8ad466af37badf3495ce9b9ba4e927ca.png" mode="widthFix"></image>
       </view>
       <view class="goodsCardContentInfo" style="width: 470rpx;">
-        <text class="name">{{infoData.gname}}</text>
-        <view class="fashion"><text wx:if="{{infoData.roleName}}">款式：{{infoData.roleName}}</text></view>
+        <text class="name">{{infoData.gname}}新生千面九尾狐手办</text>
+        <view class="fashion"><text wx:if="{{infoData.roleName}}">款式：{{infoData.roleName}}</text> <text>数量x1</text></view>
+        <view class="orderNumberWrap" data-num="20211018124578" catchtap="copy"><view>订单编号：<text class="orderNumber">20211018124578</text></view><text class="copyBtn">复制</text></view>
       </view>
     </view>
   </view>
@@ -38,26 +46,44 @@
   
 
   <view class="refundInfoWrap">
-    <view class="title">
+    <!-- <view class="title">
       退款信息
-    </view>
+    </view> -->
     <view class="refundReason refundflex" catchtap="{{infoData.auditRefund != 2?'reasonFun':''}}">
-      <view style="width:200rpx;">退款原因<text>*</text></view>
+      <view style="width:200rpx;">售后类型<text>*</text></view>
       <block wx:if="{{infoData.auditRefund == 2}}">
         <view style="color:#000;" wx:for="{{refundType}}" wx:key='key' wx:if="{{item.type_id == infoData.refund_cause}}">{{item.type_name}}</view>
       </block>
       <block wx:else>
-        <view style="{{checkedObj?'color:#000;':''}}"> {{checkedObj?checkedObj.name:'请选择  >'}}</view>
+        <view style="{{checkedObj?'color:#000;':''}}"> {{checkedObj?checkedObj.name:'点击选择售后类型  >'}}</view>
       </block>
     </view>
-    <view class="refundAmount refundflex">
+    <view class="refundReason refundflex" catchtap="{{infoData.auditRefund != 2?'reasonFun':''}}">
+      <view style="width:200rpx;">商品状态<text>*</text></view>
+      <block wx:if="{{infoData.auditRefund == 2}}">
+        <view style="color:#000;" wx:for="{{refundType}}" wx:key='key' wx:if="{{item.type_id == infoData.refund_cause}}">{{item.type_name}}</view>
+      </block>
+      <block wx:else>
+        <view style="{{checkedObj?'color:#000;':''}}"> {{checkedObj?checkedObj.name:'点击选择商品状态  >'}}</view>
+      </block>
+    </view>
+    <view class="refundReason refundflex" catchtap="{{infoData.auditRefund != 2?'reasonFun':''}}">
+      <view style="width:200rpx;">申请原因<text>*</text></view>
+      <block wx:if="{{infoData.auditRefund == 2}}">
+        <view style="color:#000;" wx:for="{{refundType}}" wx:key='key' wx:if="{{item.type_id == infoData.refund_cause}}">{{item.type_name}}</view>
+      </block>
+      <block wx:else>
+        <view style="{{checkedObj?'color:#000;':''}}"> {{checkedObj?checkedObj.name:'点击选择申请原因  >'}}</view>
+      </block>
+    </view>
+    <!-- <view class="refundAmount refundflex">
       <view style="width:200rpx;">退款金额<text>*</text></view>
       <view> 
         <block wx:if="{{infoData.refundPrice >= 0 }}"> <text>{{infoData.refundPrice}}元(赠品寄回退款{{infoData.amount}}元)</text> </block> <block wx:else><text>{{infoData.amount}}元</text></block>
       </view>
-    </view>
+    </view> -->
 
-    <block wx:if="{{infoData.auditRefund == 1}}"> 
+    <!-- <block wx:if="{{infoData.auditRefund == 1}}"> 
       <view class="refundOrderNumber refundflex" wx:if="{{infoData.refundPrice != -1}}">
         <view style="width:200rpx;">寄回快递单号</view>
         <view> 
@@ -72,7 +98,14 @@
             <input type="text" placeholder="{{infoData.giftShipping?infoData.giftShipping:'未填写'}}" placeholder-style="color: #000;" disabled="true"/> 
         </view>
       </view>
-    </block>
+    </block> -->
+  </view>
+
+  <view class="cardWrap">
+    <view class="refundAmountWrap">
+      <text>退款金额</text>
+      <text>￥199.00</text>
+    </view>
   </view>
 
   <block wx:if="{{infoData.auditRefund == 1}}">
@@ -98,12 +131,21 @@
       </view>
     </view>
   </block>
-
 </view>
 
+<view class="cardWrap" style="padding:0 10rpx;">
+  <settledForm 
+    id="settledForm1"
+    statusBarHeightMc="{{statusBarHeightMc}}"
+    form="dynamicContent"
+    list="{{listData}}"
+    bind:bindchange="bindchange">
+  </settledForm>
+</view>
 
+<view class="auditTip">提交申请审核时间最多48小时，售后申请进度可在售后页面查看</view>
 <view class="submit" catchtap="submit" wx:if="{{infoData.auditRefund != 2}}">
-  提交
+  提交申请
 </view>
 
 <view  wx:if="{{isTwoConfirmBox}}" class="twoConfirmMask" catchtouchmove="true" catchtap="twoConfirmBoxFun"> 
