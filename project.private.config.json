@@ -348,6 +348,18 @@
           "pathName": "page/settled/pages/appliedAftersales/appliedAftersales",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "订单详情",
+          "pathName": "page/component/pages/orderdetails/orderdetails",
+          "query": "oid=862",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "page/secondpackge/pages/refund/refund",
+          "query": "oid=862",
+          "scene": null
         }
       ]
     }

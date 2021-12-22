@@ -29,6 +29,18 @@ Page({
     checkedObj:'',
     refundOrderfocus:false,
     refundOrderInputValue:'',
+    listData:[
+      {
+        isRequired:false,
+        type:'uploadImg',
+        subtitle:'上传凭证',
+        name:'voucherPic',
+        imageList:[],
+        margintop0:true,
+        mode:'multiple',
+        storagelocation:'images/goods'
+      },
+    ],
   },
   chooseReasonFun(e){
     let index = e.currentTarget.dataset.index;
