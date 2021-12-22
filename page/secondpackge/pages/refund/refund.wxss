@@ -71,7 +71,7 @@ page{
 }
 .goodsCardContentInfo{
   position: relative;
-  padding-left: 35rpx;
+  padding-left: 15rpx;
   box-sizing: border-box;
   display: flex;
   flex-direction:column;
