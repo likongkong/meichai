@@ -216,7 +216,7 @@
               <block wx:else>
                 <!-- 右侧 multiRadio -->
                 <block wx:if="{{item.multiRadio}}">
-                  <view>
+                  <view style="width: 306rpx;">
                     <block wx:for="{{item.radioArr}}" wx:key='key' wx:for-index="idx" wx:for-item="sonItem">
                       <block wx:if="{{sonItem.type=='time'}}">
                         <view class="multiRadioWrap">

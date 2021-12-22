@@ -23,7 +23,7 @@
   <view class="card">
     <view class="title">
       寄件人信息
-      <image src="https://cdn.51chaidan.com/images/brandSettledIcon/shippingIcon_right.png" mode="widthFix"></image>
+      <image data-type="1" catchtap="seladdressfun" src="https://cdn.51chaidan.com/images/brandSettledIcon/shippingIcon_right.png" mode="widthFix"></image>
     </view>
     <view class="senderInformationWrap" data-type="1" catchtap="seladdressfun">
       <view class="senderInformationL">
