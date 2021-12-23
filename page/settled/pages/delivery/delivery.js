@@ -35,6 +35,7 @@ Page({
     tipaid1:'',//收件
     isModification:false,
     takePhone:'',
+    pageType:1
   },
 
   /**
@@ -67,6 +68,7 @@ Page({
     // if(this.data.status==1){
       this.setData({
         status: this.data.status,
+        pageType:this.data.status==0?2:1
       });
       this.getShowSendBack();
     // }
@@ -348,7 +350,7 @@ Page({
         if (res.data.ReturnCode == 200) {
           // if(_this.data.status!=1){
             wx.hideLoading()
-            app.showToastC(res.data.Msg,2000);
+            app.showToastC(res.data.Msg,3000);
             setTimeout(()=>{
               let pages = getCurrentPages();    //获取当前页面信息栈
               let prevPage = pages[pages.length-2];
@@ -356,7 +358,7 @@ Page({
               wx.navigateBack({
                 delta: 1
               })  
-            },2000)
+            },3000)
           // }else{
           //   _this.data.isModification = true;
           //   setTimeout(()=>{
@@ -368,6 +370,12 @@ Page({
         };
       }
     });
+  },
+  // 修改信息
+  changeInfo(){
+    this.setData({
+      pageType:2
+    })
   },
   modification(){
     this.data.isModification = true;

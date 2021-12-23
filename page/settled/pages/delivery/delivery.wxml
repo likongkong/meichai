@@ -20,12 +20,12 @@
     </view>
   </block>
   
-  <view class="card">
+  <view class="card" data-type="1" catchtap="{{pageType != 1?'seladdressfun':''}}">
     <view class="title">
       寄件人信息
-      <image data-type="1" catchtap="seladdressfun" src="https://cdn.51chaidan.com/images/brandSettledIcon/shippingIcon_right.png" mode="widthFix"></image>
+      <image wx:if="{{pageType != 1}}" src="https://cdn.51chaidan.com/images/brandSettledIcon/shippingIcon_right.png" mode="widthFix"></image>
     </view>
-    <view class="senderInformationWrap" data-type="1" catchtap="seladdressfun">
+    <view class="senderInformationWrap">
       <view class="senderInformationL">
         <view class="senderInformationName">
           {{tipname}} {{phone}}
@@ -42,10 +42,10 @@
     </view>
   </view>
 
-  <view class="card" catchtap="toggleVisitTtime">
+  <view class="card" catchtap="{{pageType != 1?'toggleVisitTtime':''}}">
     <view class="spaceBetween">
       <text class="font28_101010">上门取件</text>
-      <image src="https://cdn.51chaidan.com/images/brandSettledIcon/shippingIcon_right.png" mode="widthFix"></image>
+      <image wx:if="{{pageType != 1}}" src="https://cdn.51chaidan.com/images/brandSettledIcon/shippingIcon_right.png" mode="widthFix"></image>
     </view>
     <view class="spaceBetween" style="margin-top:20rpx;">
       <text class="font28_101010">期望上门取件时间</text>
@@ -53,10 +53,10 @@
     </view>
   </view>
 
-  <view class="card" data-type="9055" data-whref="kgNumber={{goodsInfo.kgNumber}}&pieceNumber={{goodsInfo.pieceNumber}}&selectedGoodsArrIndex={{goodsInfo.selectedGoodsArrIndex}}&textareaInput={{goodsInfo.textareaInput}}" catchtap="comjumpwxnav">
+  <view class="card" data-type="9055" data-whref="kgNumber={{goodsInfo.kgNumber}}&pieceNumber={{goodsInfo.pieceNumber}}&selectedGoodsArrIndex={{goodsInfo.selectedGoodsArrIndex}}&textareaInput={{goodsInfo.textareaInput}}" catchtap="{{pageType != 1?'comjumpwxnav':''}}">
     <view class="spaceBetween">
       <text class="font28_101010">物品信息</text>
-      <image src="https://cdn.51chaidan.com/images/brandSettledIcon/shippingIcon_right.png" mode="widthFix"></image>
+      <image wx:if="{{pageType != 1}}" src="https://cdn.51chaidan.com/images/brandSettledIcon/shippingIcon_right.png" mode="widthFix"></image>
     </view>
     <view class="spaceBetween" style="margin-top:20rpx;">
       <text class="font28_101010">预估重量</text>
@@ -122,9 +122,16 @@
       <view class="cancel {{audit_status==1?'':'unclickable'}}" catchtap="{{audit_status==1?'cancel':''}}">
         取消取件
       </view>
-      <view class="submitBtn1 {{audit_status==1?'':'unclickable'}}" catchtap="{{audit_status==1?'submitBtn':''}}">
-        提交
-      </view>
+      <block wx:if="{{pageType == 1}}">
+        <view class="submitBtn1 {{audit_status==1?'':'unclickable'}}" catchtap="{{audit_status==1?'changeInfo':''}}">
+          修改信息
+        </view>
+      </block>
+      <block wx:else>
+        <view class="submitBtn1 {{audit_status==1?'':'unclickable'}}" catchtap="{{audit_status==1?'submitBtn':''}}">
+          提交
+        </view>
+      </block>
     </view>
   </block>
   <block wx:else>
