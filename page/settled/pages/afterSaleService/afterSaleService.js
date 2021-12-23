@@ -17,10 +17,10 @@ Page({
     payStatus:[
       {name:'售后申请',num:'1'},
       // {name:'处理中',num:'2'},
-      // {name:'申请记录',num:'3'},
+      {name:'申请记录',num:'3'},
       {name:'客服消息',num:'4'}
     ], 
-    centerIndex:'1',
+    centerIndex:'3',
 
     order:[],
     nodataiftr:false,

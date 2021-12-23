@@ -25,12 +25,17 @@
             <template is="listEve" data="{{...item,num:index}}"></template>
         </block>
     </block>
+    <block wx:elif='{{centerIndex == 3}}'>
+        <view class="centerTxt" wx:for='{{order}}' wx:key='key'>
+            <template is="orderCommonApply" data="{{...item,num:index}}"></template>
+        </view>        
+    </block>    
     <block wx:else>
         <view class="centerTxt" wx:for='{{order}}' wx:key='key'>
             <template is="orderCommon" data="{{...item,num:index}}"></template>
         </view>        
     </block>
-
+    
 
 
     <!--  暂无数据  -->
@@ -43,7 +48,6 @@
 
 <!-- 客服 -->
 <template name="listEve">
-  <!-- wx:if="{{conversation.conversationID}}" -->
     <movable-area class="t-conversation-item-container" >
       <movable-view class="t-conversation-item" direction="horizontal" bindchange="handleTouchMove" damping="100" x="{{xScale}}" >
           <view class="movviebox" catchtap="jumpTimDetailList" data-fid='{{from_uid}}' data-tid='{{to_uid}}' data-groupid='{{group_id}}'>
@@ -51,26 +55,21 @@
                   <image class="t-conversation-item-avatar"  src="{{avatar}}" binderror="handleimageerro">
                   </image>
                 <view class="unread" wx:if="{{is_read == 0}}">
-                  <!-- <view class="read-text" wx:if="{{unreadCount > 99}}">99+</view>
-                  <view class="read-text" wx:else>{{unreadCount}}</view> -->
                 </view>
               </view>
               <view class="t-conversation-item-content">
                 <view class="tui-conversation-item-name specialellipsis">{{nick}}</view>
                 <view class="tui-conversation-lastMessage specialellipsis">
-                  <!-- <text>{{messageForShow}}</text> -->
                   {{msg}}
                 </view>
                 <view class="t-conversation-item-info">{{send_time}}</view>
               </view>
               <view class="t-conversation-delete" data-tid='{{to_uid}}' data-fid='{{from_uid}}' data-num='{{num}}' data-id='{{id}}' data catchtap="deleteConversation">删除</view>
           </view>
-
       </movable-view>
     </movable-area>
-
 </template>
-<!-- 列表 -->
+<!-- 售后申请 列表 -->
 <template name='orderCommon'>
    <view class="orderBox">
        <view>
@@ -79,7 +78,6 @@
                 </view>
                 <view class="obcrTopTopSnEve" style="color:#FF2742;padding-right:0;">
                     {{pay_status_name}}
-                    <!-- <image catchtap="delwholeheadrimg" data-oid='{{order_sn}}' class="copyCart" src="../../../../pages/images/icon_delete.png" mode='aspectFit'></image> -->
                 </view>
             </view>
             <view class="orderBoxContent" data-id='{{itemId}}' data-istype='{{itemType}}'>
@@ -99,6 +97,7 @@
                 </view>
             </view>
        </view>
+       
        <view class="orderBottom">
             <view class="orderBottomOrderNumber">
                 <view class="orderBottomButtonLeft" wx:if="{{status == 2 || status == 3}}">
@@ -106,7 +105,6 @@
                     <block wx:elif='{{status == 3}}'>该商品已超过售后期</block>
                     <image class="orderBottomImgG" src="../../../../pages/images/explain.png" mode='aspectFit'></image>
                 </view>
-
                 <block>
                     <!-- <view wx:if='{{status == 1}}' class="orderBottomButton">商品寄回</view> -->
                     <view class="orderBottomButton" wx:if='{{status == 1}}' catchtap="refund" data-oid='{{oid}}'>申请售后</view>
@@ -121,7 +119,71 @@
    </view>
 
 </template>
+<!-- 申请记录 列表 -->
+<template name='orderCommonApply'>
+   <view class="orderBox">
+       <view>
+            <view class="obcrTop obcrTopTopSn">
+                <view class="obcrTopTopSnEve" style="font-size:24rpx;color:#000;">订单编号:{{order_sn}}<view class="copyCart" catchtap="copyCart" data-cart='{{order_sn}}'>复制</view>
+                </view>
+                <view class="obcrTopTopSnEve" style="color:#FF2742;padding-right:0;">{{pay_status_name}}</view>
+            </view>
+            <view class="orderBoxContent" data-id='{{itemId}}' data-istype='{{itemType}}'>
+                <image class="orderBoxContentImg" src="{{goods_img}}" mode="aspectFit"></image>
+                <view class="orderBoxContentRight">
+                    <view class="obcrTop">
+                        <view class="multilineellipsis">{{goods_name}}</view>
+                    </view>
+                    <view class="obcrBottom obcrTop">
+                        <view style="color:#FF2742;">
+                            <block wx:if='{{goods_role_name}}'>款式:{{goods_role_name}}</block>
+                        </view>
+                        <view>
+                            <block wx:if='{{goods_num}}'>数量:{{goods_num}}</block>
+                        </view>
+                    </view>
+                </view>
+            </view>
+       </view>
+       <view class="underReview">
+           <view class="underReviewChid">
+               <view class="underReviewChidLeft">
+                   <view class="UndereviewTxt">审核中</view>
+               </view>
+               <view class="underReviewChidRight">
+                   <text class="Undereviewreason">您的售后申请已提交，正在审核中，可稍后查看审核进度。</text>
+                   <text class="UnderevirRemarks">备注:商家填写商家填写商家填写商家填写商家填写商家填写商家填写商家填写商家填写商家填写商家填写商家填写商家填写商家填</text>
+               </view>
+           </view>
+           <view class="underReviewChid" style="margin-top:20rpx">
+               <view class="underReviewChidLeft">
+                   <view class="UndereviewTxt">寄回地址</view>
+                   <view class="copyAddressUnder">复制地址</view>
+               </view>
+               <view class="underReviewChidRight">
+                   <text class="Undereviewreason">陈先生   13718986655</text>
+                   <text class="UnderevirRemarks">北京市北京市昌平区东小口天通苑中路88号楼9单元901</text>
+               </view>
+           </view>
+       </view>
+       <view class="orderBottom">
+            <view class="orderBottomOrderNumber">
+                <block>
+                    <view class="orderBottomButton">重新提交</view>
+                    <!-- <view class="orderBottomButton">取消申请</view> -->
+                    <!-- <view class="orderBottomButton">修改申请</view> -->
+                    <view class="orderBottomButton" style="width:255rpx;">填写寄回快递单号</view>
+                    <view class="orderBottomButton" catchtap="{{is_self?'':'jumpTimDetail'}}" data-fid='{{brandId_user}}' data-tid='{{brandId_user}}' data-num='{{num}}'>
+                        <button wx:if='{{is_self}}' open-type='contact' style='width:100%;height:100%;position:absolute;top:0;left:0;opacity: 0;z-index:1;'></button>
+                        联系客服
+                    </view>
+                </block>
+                
+            </view>
+       </view>
+   </view>
 
+</template>
 
 
 
