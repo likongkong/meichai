@@ -1,0 +1,22 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+
+<view class="wrap">
+  <view class="card">
+    <settledForm 
+      id="settledForm"
+      statusBarHeightMc="{{statusBarHeightMc}}"
+      form="dynamicContent"
+      list="{{listData}}"
+      bind:bindchange="bindchange">
+    </settledForm>
+  </view>
+  <view class="submit" catchtap="submit">
+    提交
+  </view>
+</view>
+
+
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>
