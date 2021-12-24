@@ -48,6 +48,11 @@ Page({
         storagelocation:'images/goods'
       },
     ],
+    obj:{
+      orderNum:'',
+      describe:'',
+      pic:''
+    },
   },
   // 获取表单数据
   bindchange(e){
@@ -86,34 +91,23 @@ Page({
     }) 
   },
   submit(){
-    console.log(this.data.checkedObj,this.data.currentWord)
-    if(!this.data.checkedObj.afterSaleType){
-      wx.showToast({
-        title: '请选择售后类型',
-        icon: 'none',
-        duration: 1500
-      })
-      return false;
-    }else if(!this.data.checkedObj.goodsStatus){
-      wx.showToast({
-        title: '请选择商品状态',
-        icon: 'none',
-        duration: 1500
-      })
-      return false;
-    }else if(!this.data.checkedObj.refundType){
-      wx.showToast({
-        title: '请选择退款原因',
-        icon: 'none',
-        duration: 1500
-      })
-      return false;
-    }else if(!this.data.isTwoConfirmBox && this.data.infoData.refundPrice >=0 && this.data.refundOrderInputValue == ''){
-      this.setData({
-        isTwoConfirmBox: true,
-      });
+    
+    if(!obj.orderNum || obj.orderNum == ''){
+      this.selectComponent('#settledForm').scrollto('orderNum');
+      app.showToastC('请输入寄回快递单号',1500);
       return false;
     }
+    if(!obj.describe || obj.describe == ''){
+      this.selectComponent('#settledForm').scrollto('describe');
+      app.showToastC('请输入寄回留言',1500);
+      return false;
+    }
+    if(!obj.pic || obj.pic == ''){
+      this.selectComponent('#settledForm').scrollto('pic');
+      app.showToastC('请上传照片',1500);
+      return false;
+    }
+    
     wx.showLoading({ title: '加载中...'})
     var _this = this;
     var q = Dec.Aese('mod=operate&operation=submitApplyRefund&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type='+this.data.checkedObj.id+'&oid='+_this.data.oid+'&describe='+this.data.currentWord+'&giftShipping='+this.data.refundOrderInputValue);
