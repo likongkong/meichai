@@ -53,7 +53,8 @@ Page({
       describe:'',
       pic:''
     },
-    oid:''
+    oid:'',
+    type:0,
   },
   // 获取表单数据
   bindchange(e){
@@ -77,18 +78,19 @@ Page({
         wx.stopPullDownRefresh();
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
-
-          let info = res.data.data.Info;
+          let info = res.data.Info;
           let obj = _this.data.obj;
           _this.setData({
             [`listData[0].value`]:info.shipping_number,
             [`listData[1].value`]:info.message,
             [`listData[2].imageList`]:info.describe_img,
           })
-          
-          obj.associationIp = info.brand.brandId;
 
-          
+          obj.orderNum = info.shipping_number;
+          obj.describe = info.message;
+          obj.pic = info.describe_img;
+
+
         }else{
           app.showToastC(res.data.Msg)
         }
@@ -115,8 +117,8 @@ Page({
     
     wx.showLoading({ title: '加载中...'})
     var _this = this;
-    var q = Dec.Aese('mod=operate&operation=addSalesReturnInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&shipping_number='+obj.orderNum+'&message='+obj.describe+'&describe_img='+obj.pic+'&oid='+this.data.oid);
-    console.log(app.signindata.comurl + 'order.php?' +'mod=operate&operation=addSalesReturnInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&shipping_number='+obj.orderNum+'&message='+obj.describe+'&describe_img='+obj.pic+'&oid='+this.data.oid)
+    var q = Dec.Aese('mod=operate&operation=addSalesReturnInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=set&shipping_number='+obj.orderNum+'&message='+obj.describe+'&describe_img='+obj.pic+'&oid='+this.data.oid);
+    console.log(app.signindata.comurl + 'order.php?' +'mod=operate&operation=addSalesReturnInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=set&shipping_number='+obj.orderNum+'&message='+obj.describe+'&describe_img='+obj.pic+'&oid='+this.data.oid)
     wx.request({
       url: app.signindata.comurl + 'order.php' + q,
       method: 'GET',
@@ -149,8 +151,11 @@ Page({
       loginid:app.signindata.loginid,
       isProduce: app.signindata.isProduce,
       oid: options.oid,
+      type: options.type || 0,
     });  
-    this.getInfo();
+    if(options.type == 1){
+      this.getInfo();
+    }
     // 判断是否授权
     this.activsign();
   },
@@ -270,7 +275,6 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.getInfo();
   },
 
   /**
