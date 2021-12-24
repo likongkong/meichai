@@ -1,57 +1,305 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
-<view class="asDBox">
-    <view class="asDBoxTipTxt">
-        <block>您的售后申请已提交，正在审核中，可稍后查看审核进度。</block>
-        <block>您的售后申请审核已通过，退款金额预计三个工作日内原路返回。</block>
-        <block>您的售后申请审核已通过请尽快填写寄回的运单号</block>
-        <block>您的售后申请已取消</block>
-        <block>您的售后申请已被驳回</block>
-    </view>
-
-    <view class="asDBoxTipDetail">
-        <view class="asDBoxTipDelTop">售后商品</view>   
-        <view class="orderBoxContent">
-            <image class="orderBoxContentImg" src="https://cdn2.51chaidan.com/images/goods/16400686485760_744.jpg" mode="aspectFit"></image>
-            <view class="orderBoxContentRight">
-                <view class="obcrTop">
-                    <view class="specialellipsis">新生千面九尾狐手办</view>
-                    <!-- <view>{{itemStatusName}}</view> -->
-                </view>
-                <view class="obcrTop" style="padding-top:10rpx;">
-                    <view class="specialellipsis">数量x1</view>
-                </view>
-                <view class="obcrBottom obcrTop">
-                    <view style="color:#AAAAAA;position: relative;padding-right: 70rpx;">订单编号：20211018124578<view class="copyCart" catchtap="copyCart" data-cart='{{order_sn}}'>复制</view></view>
-                    <view></view>
+<!-- 商家 1 -->
+<block wx:if='{{businessOrUser == 1}}'>
+    <view class="asDBox">
+        <view class="asDBoxTipDetail">
+            <view class="asDBoxTipDelTop">售后商品</view>   
+            <view class="orderBoxContent">
+                <image class="orderBoxContentImg" src="https://cdn2.51chaidan.com/images/goods/16400686485760_744.jpg" mode="aspectFit"></image>
+                <view class="orderBoxContentRight">
+                    <view class="obcrTop">
+                        <view class="specialellipsis">新生千面九尾狐手办</view>
+                        <!-- <view>{{itemStatusName}}</view> -->
+                    </view>
+                    <view class="obcrTop" style="padding-top:10rpx;">
+                        <view class="specialellipsis">数量x1</view>
+                    </view>
+                    <view class="obcrBottom obcrTop">
+                        <view style="color:#AAAAAA;position: relative;padding-right: 70rpx;">订单编号：20211018124578<view class="copyCart" catchtap="copyCart" data-cart='{{order_sn}}'>复制</view></view>
+                        <view></view>
+                    </view>
                 </view>
             </view>
         </view>
-    </view>
-    <view class="asDBoxTipDetail" style="margin-top:25rpx;padding:0 25rpx;">
-        <view class="asDBoxTipDeEve">申请日期：2021-12-12  10:00:00</view>
-        <view class="asDBoxTipDeEve">售后类型：仅退款</view>
-        <view class="asDBoxTipDeEve">商品状态：未收到商品/已拒收</view>
-        <view class="asDBoxTipDeEve">申请原因：其他问题</view>
-
-        <view class="asDBoxTipDeEve">申请说明：这是申请说明这是申请说明这是申请说明这
-是申请说明这是申请说明这是申请说明这是申请说明</view>
-        <view class="asDBoxTipDeEve">售后凭证</view>
-        <view class="asDBoxTipDeEve" style="border:0;">
-            <image class="asDBoxTipDeEveImg" catchtap="preview" src="https://cdn2.51chaidan.com/images/goods/16400686485760_744.jpg" mode="widthFix"></image>
+        <view class="asDBoxTipDetail" style="margin-top:25rpx;padding:0 25rpx;">
+            <view class="asDBoxTipDeEve">售后类型：仅退款</view>
+            <view class="asDBoxTipDeEve">商品状态：未收到商品/已拒收</view>
+            <view class="asDBoxTipDeEve">申请原因：其他问题</view>
+            <view class="asDBoxTipDeEve">申请说明：这是申请说明这是申请说明这是申请说明这
+    是申请说明这是申请说明这是申请说明这是申请说明</view>
+            <view class="asDBoxTipDeEve">售后凭证</view>
+            <view class="asDBoxTipDeEve" style="border:0;">
+                <image class="asDBoxTipDeEveImg" catchtap="preview" src="https://cdn2.51chaidan.com/images/goods/16400686485760_744.jpg" mode="widthFix"></image>
+            </view>
+            
         </view>
-        
+
+        <view class="asDBoxTipDetail" style="margin-top:25rpx;font-size:28rpx;">
+        退款金额：￥10000.00
+        </view>
+
+        <view class="asDBoxTipDetail" style="margin-top:25rpx;padding:0 25rpx;">
+            <view class="asDBoxTipDeEve">申请日期：2021-12-12  10:00:00</view>
+            <view class="asDBoxTipDeEve">售后状态：已退款</view>
+            <view class="asDBoxTipDeEve">订单状态：已发货</view>
+            <view class="asDBoxTipDeEve">发货单号：SF1234567</view>
+            <view class="asDBoxTipDeEve">寄回单号：YD1123444</view>
+            <view class="asDBoxTipDeEve">寄回留言：用户未填写</view>
+            <view class="asDBoxTipDeEve" style="border:0;">
+                <image class="asDBoxTipDeEveImg" catchtap="preview" src="https://cdn2.51chaidan.com/images/goods/16400686485760_744.jpg" mode="widthFix"></image>
+            </view>
+        </view>
+
+        <view class="asDBoxTipDetail" style="margin-top:25rpx;padding:0 25rpx;">
+            <view class="asDBoxTipDeEve">
+                <view class="orderMangTipCenterEve" style="padding-bottom:0;">
+                    <view class="leftEveheight">寄回联系人</view>
+                    <view>
+                        <input class="addressModifyInput" placeholder="请输入寄回联系人" bindinput='namefun' type='text' value='{{modifyName}}' type="text"></input>
+                        <image class="addressMoImg" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="aspectFit"></image>
+                    </view>
+                </view>                
+            </view>
+            <view class="asDBoxTipDeEve">
+                <view class="orderMangTipCenterEve" style="padding-bottom:0;">
+                    <view class="leftEveheight">手机号码</view>
+                    <view>
+                        <input class="addressModifyInput" placeholder="请输入手机号码" type="text" value='{{modifyMobile}}' bindinput='telfun'></input>
+                        <image class="addressMoImg" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="aspectFit"></image>
+                    </view>
+                </view>                
+            </view>
+            <view class="asDBoxTipDeEve">
+                <view class="orderMangTipCenterEve" style="padding-bottom:0;">
+                    <view class="leftEveheight">选择地区</view>
+                    <view>
+                        <view catchtap='open' class="addressModifyInput">
+                            <block wx:if='{{province || city || county}}'>{{province}}-{{city}}-{{county}}</block>
+                            <block wx:else>请选择地区</block>
+                        </view>
+                        <image class="addressMoImg" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="aspectFit"></image>
+                    </view>
+                </view>
+            </view>
+            <view class="asDBoxTipDeEve">
+                <view class="orderMangTipCenterEve" style="padding-bottom:0;">
+                    <view class="leftEveheight">详细地址</view>
+                    <view>
+                        <textarea class="addressModifytTa" placeholder="请输入详细地址" value='{{deladdress}}' bindinput='deladdressfun' name='address'></textarea>
+                        <image class="addressMoImg" style="margin:0 0 0 10rpx;" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="aspectFit"></image>
+                    </view>
+
+                </view>                
+            </view>
+        </view>
+
+
+
     </view>
 
-    <view class="asDBoxTipDetail" style="margin-top:25rpx;font-size:28rpx;">
-      退款金额：￥10000.00
+    <!-- 底部按钮 -->
+    <view class="orderBottomNavigation" style="font-size:28rpx;">
+        <view class="orderBottomNavEve bottomButComWidth" wx:if="{{detailData.order.payStatus != 5}}" catchtap="commonBulletFrameFun" data-index='3'>
+            <block wx:if='{{detailData.order.shippingCode}}'>修改物流</block>
+            <block wx:else>添加物流</block>
+        </view>
+        <view class="orderBottomNavEve bottomButComWidth" catchtap="commonBulletFrameFun" data-index='2'>退款</view>
+        <view class="orderBottomNavEve bottomButComWidth" catchtap="commonBulletFrameFun" data-index='1'>修改收货地址</view>
     </view>
-</view>
 
-<!-- 底部按钮 -->
-<view class="AfterSDbottom">
-    <view class="AfterSDbottomEve" style="background:#FE2844;color:#fff;border: 2rpx solid #FE2844;"><button open-type='contact' style='width:100%;height:100%;position:absolute;top:0;left:0;opacity: 0;z-index:1;'></button>联系客服</view>
-    <view class="AfterSDbottomEve" style="margin:0 20rpx;">填写寄回快递单号</view>
-    <view class="AfterSDbottomEve">取消申请</view>
-</view>
+    <!--  省市联动  -->
+    <view class='citybackg' catchtap="conditionfun" wx:if='{{cityback}}'></view>
+    <view wx:if="{{condition}}" class="citypicker">
+    <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange" class="citybody">
+        <view class="cityheader">
+        <view bindtap="open" class="city-cancel">取消</view>
+        <view bindtap="open" class="city-true">确定</view>
+        </view>
+        <picker-view-column>
+        <view wx:for="{{provinces}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item}}</view>
+        </picker-view-column>
+        <picker-view-column>
+        <view wx:for="{{citys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item}}</view>
+        </picker-view-column>
+        <picker-view-column>
+        <view wx:for="{{countys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item}}</view>
+        </picker-view-column>
+    </picker-view>
+    </view>
+
+    <!-- 弹框  1 修改 2 退款 3 物流 4 驳回售后申请 6 删除运单号-->
+    <view class="wshNew" catchtouchmove="true" wx:if='{{commonBulletFrame}}' catchtap="closeCommonTip">
+        <view class="orderMangAddress" catchtap="true">
+            <view class="orderMangTipTop">
+                <block wx:if='{{logisticsRefundModify == 1}}'>修改收货地址</block>
+                <block wx:elif='{{logisticsRefundModify == 2}}'>退款</block>
+                <block wx:elif='{{logisticsRefundModify == 3}}'><block wx:if='{{selectData.order.shippingCode}}'>修改</block><block wx:else>添加</block>物流</block>
+                <block wx:elif='{{logisticsRefundModify == 4}}'>驳回售后申请</block>
+                <block wx:elif='{{logisticsRefundModify == 5}}'>批量导入运单</block>
+            </view>
+            
+            <!-- 退款 -->
+            <block wx:if='{{logisticsRefundModify == 2}}'>
+                <!--  subLedger 1 已分账 2 未分账-->
+                <block wx:if='{{subLedger==1}}'>
+                    <view class="orderMangTipCenter">
+                        <view class="orderMangTipCenterEve">
+                            <view>商品名称：{{selectData.goods.goodsName}}</view>
+                        </view>
+                        <!-- <view class="orderMangTipCenterEve">
+                            <view>退款明细</view>
+                        </view> -->
+                        <view class="orderMangTipCenterEve">
+                            <view>商品售价：{{selectData.order.orderAmount}}</view>
+                        </view>
+                        <!-- <view class="orderMangTipCenterEve">
+                            <view>平台抽成：{{payInfoData.order.percentage}}</view>
+                        </view>                     -->
+                        <!-- <view class="orderMangTipCenterEve">
+                            <view>订单收入：{{payInfoData.order.profitAmount}}</view>
+                        </view>                     -->
+                        <view class="orderMangTipCenterEve">
+                            <view>商家实际退款金额：{{payInfoData.order.profitAmount}}</view>
+                        </view>
+                        <view class="orderMangTipCenterEve">
+                            <view>平台实际退款金额：{{payInfoData.order.percentage}}</view>
+                        </view>
+                        <view class="orderMangTipCenterEve">
+                            <view>该订单已进行分账处理，需要您支付分账金额￥{{payInfoData.order.profitAmount}}。支付完成之后代表同意退款。</view>
+                        </view>
+
+                    </view>                
+                </block>
+                <block wx:elif='{{subLedger==2}}'>
+
+                    <view class="orderMangTipCenter">
+                        <view class="orderMangTipCenterEve">
+                            <view>商品名称：{{selectData.goods.goodsName}}</view>
+                        </view>
+                        <!-- <view class="orderMangTipCenterEve">
+                            <view>退款明细</view>
+                        </view> -->
+                        <view class="orderMangTipCenterEve">
+                            <view>商品售价：{{selectData.order.orderAmount}}</view>
+                        </view>
+                        <!-- <view class="orderMangTipCenterEve">
+                            <view>平台抽成：{{payInfoData.order.percentage}}</view>
+                        </view>                     -->
+                        <!-- <view class="orderMangTipCenterEve">
+                            <view>订单收入：{{payInfoData.order.profitAmount}}</view>
+                        </view>                     -->
+                        <view class="orderMangTipCenterEve">
+                            <view>商家实际退款金额：{{payInfoData.order.profitAmount}}</view>
+                        </view>
+                        <view class="orderMangTipCenterEve">
+                            <view>平台实际退款金额：{{payInfoData.order.percentage}}</view>
+                        </view>
+                        <view class="orderMangTipCenterEve">
+                            <view>退款之后不可撤销，确认退款请点击立即退款。</view>
+                        </view>
+                    </view>
+
+                    <!-- <view class="refundTxt"></view>     -->
+                </block>
+                    
+            </block>
+            
+            <!-- 批量导出订单 -->
+            <block wx:elif='{{logisticsRefundModify == 4}}'>
+                <view class="orderMangTipCenterEve">
+                    <view style="color:#888888;width:100%;text-align:center;">你确定要驳回售后申请吗？</view>
+                </view>
+                <textarea class="addressModifReject" placeholder="驳回备注" value='{{rejectTxt}}' bindinput='rejectTxtfun' name='reject'></textarea>
+            </block>
+            <!-- 批量导入订单 -->
+            <block wx:elif='{{logisticsRefundModify == 5}}'>
+         
+            </block>
+            <!-- 删除订单 -->
+            <block wx:elif='{{logisticsRefundModify == 6}}'>
+                <text class="batchExportOrder" style="text-align:center;">删除运单号之后无法恢复，请谨慎操作</text>          
+            </block>
+
+            <view class="orderMangTipCenterEve" style="width:610rpx;margin:auto;">
+                <block wx:if='{{logisticsRefundModify == 4 || logisticsRefundModify == 5}}'>
+                    <view class="oAMaBConfirm" catchtap="closeCommonTip">取消</view>
+                    <view class="oAMaBCancel" catchtap="confirmCommonTip"  wx:if='{{logisticsRefundModify == 4}}'>确定</view> 
+                    <view class="oAMaBCancel" catchtap="confirmCommonTip"  wx:elif='{{logisticsRefundModify == 5}}'>选择微信聊天</view>
+                </block>
+                <block wx:else>
+                    <view class="oAMaBConfirm" catchtap="closeCommonTip">取消</view>
+                    <view class="oAMaBCancel" catchtap="confirmCommonTip" wx:if='{{logisticsRefundModify == 2 && subLedger==1}}'>立即支付￥{{payInfoData.order.profitAmount}}</view> 
+                    <view class="oAMaBCancel" catchtap="confirmCommonTip" wx:elif='{{logisticsRefundModify == 2 && subLedger==2}}'>立即退款</view> 
+                    <view class="oAMaBCancel" catchtap="confirmCommonTip" wx:elif='{{logisticsRefundModify == 6}}'>确定删除</view> 
+                    <view class="oAMaBCancel" catchtap="confirmCommonTip" wx:else>确定</view>               
+                </block>
+            </view>
+        </view>
+
+
+
+
+    </view>
+
+
+</block>
+<!--                                          结束                                                 -->
+<!-- 用户 -->
+<block wx:elif='{{businessOrUser == 2}}'>
+    <view class="asDBox">
+        <view class="asDBoxTipTxt">
+            <block>您的售后申请已提交，正在审核中，可稍后查看审核进度。</block>
+            <block>您的售后申请审核已通过，退款金额预计三个工作日内原路返回。</block>
+            <block>您的售后申请审核已通过请尽快填写寄回的运单号</block>
+            <block>您的售后申请已取消</block>
+            <block>您的售后申请已被驳回</block>
+        </view>
+
+        <view class="asDBoxTipDetail">
+            <view class="asDBoxTipDelTop">售后商品</view>   
+            <view class="orderBoxContent">
+                <image class="orderBoxContentImg" src="https://cdn2.51chaidan.com/images/goods/16400686485760_744.jpg" mode="aspectFit"></image>
+                <view class="orderBoxContentRight">
+                    <view class="obcrTop">
+                        <view class="specialellipsis">新生千面九尾狐手办</view>
+                        <!-- <view>{{itemStatusName}}</view> -->
+                    </view>
+                    <view class="obcrTop" style="padding-top:10rpx;">
+                        <view class="specialellipsis">数量x1</view>
+                    </view>
+                    <view class="obcrBottom obcrTop">
+                        <view style="color:#AAAAAA;position: relative;padding-right: 70rpx;">订单编号：20211018124578<view class="copyCart" catchtap="copyCart" data-cart='{{order_sn}}'>复制</view></view>
+                        <view></view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="asDBoxTipDetail" style="margin-top:25rpx;padding:0 25rpx;">
+            <view class="asDBoxTipDeEve">申请日期：2021-12-12  10:00:00</view>
+            <view class="asDBoxTipDeEve">售后类型：仅退款</view>
+            <view class="asDBoxTipDeEve">商品状态：未收到商品/已拒收</view>
+            <view class="asDBoxTipDeEve">申请原因：其他问题</view>
+
+            <view class="asDBoxTipDeEve">申请说明：这是申请说明这是申请说明这是申请说明这
+    是申请说明这是申请说明这是申请说明这是申请说明</view>
+            <view class="asDBoxTipDeEve">售后凭证</view>
+            <view class="asDBoxTipDeEve" style="border:0;">
+                <image class="asDBoxTipDeEveImg" catchtap="preview" src="https://cdn2.51chaidan.com/images/goods/16400686485760_744.jpg" mode="widthFix"></image>
+            </view>
+            
+        </view>
+
+        <view class="asDBoxTipDetail" style="margin-top:25rpx;font-size:28rpx;">
+        退款金额：￥10000.00
+        </view>
+    </view>
+
+    <!-- 底部按钮 -->
+    <view class="AfterSDbottom">
+        <view class="AfterSDbottomEve" style="background:#FE2844;color:#fff;border: 2rpx solid #FE2844;"><button open-type='contact' style='width:100%;height:100%;position:absolute;top:0;left:0;opacity: 0;z-index:1;'></button>联系客服</view>
+        <view class="AfterSDbottomEve" style="margin:0 20rpx;">填写寄回快递单号</view>
+        <view class="AfterSDbottomEve">取消申请</view>
+    </view>
+</block>

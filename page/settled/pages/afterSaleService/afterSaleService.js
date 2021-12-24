@@ -28,6 +28,14 @@ Page({
     conversationList:[]
 
   },
+
+  // 售后详情
+  afterSalesDetails(w){
+    let orderid = w.currentTarget.dataset.orderid;
+    wx.navigateTo({
+      url: "/page/settled/pages/AfterSalesDetails/AfterSalesDetails?orderid="+orderid+'&bou=2'
+    });
+  },  
   classifyChange(e){
     let that = this;
     let index = e.currentTarget.dataset.index || 0;

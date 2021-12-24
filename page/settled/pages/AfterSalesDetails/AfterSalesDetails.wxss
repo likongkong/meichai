@@ -1,5 +1,8 @@
 @import "/common/tabbar.wxss";
 @import "/common/citysel.wxss";
+@import "../orderManagement/orderManagement.wxss";
+@import "../businessOrderDetails/businessOrderDetails.wxss";
+
 page{
   background:#f4f5f9;
   padding-bottom: 150rpx;
@@ -99,4 +102,14 @@ page{
   border-radius:6rpx;
 }
 
+.addressModifReject{
+  width: 500rpx;
+  height: 120rpx;
+  display: block;
+  margin:0 auto 30rpx;
+  border: 2rpx solid #BBBBBB;
+  border-radius: 10rpx;
+  padding: 15rpx;
+  font-size: 28rpx;
+}
 
