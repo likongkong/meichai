@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '申请退款', 
+    c_title: '回寄信息', 
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
@@ -18,42 +18,36 @@ Page({
     tgabox:false,
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
-    texts: "至少需要15个字",
-    min: 15,//最少字数
-    max: 50, //最多字数 (根据自己需求改变) 
-    currentWordNumber:0,
-    currentWord:'',
-    isReasonBox:false, 
-    isTwoConfirmBox:false,
-    refundType:[],
-    checkedObj:{},
-    refundOrderfocus:false,
-    refundOrderInputValue:'',
     listData:[
       {
         isRequired:false,
+        type:'text',
+        subtitle:'寄回快递单号',
+        placeholder:'请输入寄回快递单号',
+        value:'',
+        name:'orderNum',
+        borderbottom1:'show',
+        margintop0:true,
+      },{
+        isRequired:false,
+        type:'textarea',
+        subtitle:'寄回留言',
+        placeholder:'请输入寄回留言',
+        value:'',
+        name:'describe',
+        borderbottom1:'show',
+        margintop0:true,
+      },{
+        isRequired:false,
         type:'uploadImg',
-        subtitle:'上传凭证',
-        name:'voucherPic',
+        subtitle:'照片',
+        name:'pic',
         imageList:[],
         margintop0:true,
         mode:'multiple',
-        imgWidth:'148',
-        storagelocation:'images/goods/aftersales'
+        storagelocation:'images/goods'
       },
     ],
-    obj:{
-      voucherPic:''
-    },
-  },
-  copy:function(e){
-    let num = e.currentTarget.dataset.num;
-    wx.setClipboardData({
-      data: num,
-      success: function (res) {
-        app.showToastC('复制成功');
-      }
-    });
   },
   // 获取表单数据
   bindchange(e){
@@ -61,81 +55,6 @@ Page({
     let key=e.detail.name;
     this.data.obj[key]=value;
     console.log(this.data.obj)
-  },
-  chooseReasonFun(e){
-    let index = e.currentTarget.dataset.index;
-    let popoutData = this.data.popoutData;
-    for(var i=0;i<popoutData.length;i++){
-      // if(popoutData[i].checked){
-        popoutData[i].checked = false;
-      // }
-    }
-    popoutData[index].checked = true;
-    console.log(popoutData)
-    let obj = {id:popoutData[index].type_id,name:popoutData[index].type_name};
-    let name = this.data.popoutType==0?'afterSaleType':this.data.popoutType==1?'goodsStatus':'refundType';
-    this.setData({
-      popoutData,
-      [`infoData.${name}`]:popoutData,
-      [`checkedObj.${name}`]:obj
-    })
-    console.log(this.data.checkedObj)
-  },
-  popout(e){
-    let title = e.currentTarget.dataset.title;
-    let type = e.currentTarget.dataset.type;
-    let popoutdata = e.currentTarget.dataset.popoutdata;
-    console.log(popoutdata)
-    this.setData({
-      popoutTitle:title,
-      popoutType:type,
-      popoutData:popoutdata,
-      isReasonBox:!this.data.isReasonBox
-    })
-  },
-  twoConfirmBoxFun(){
-    this.setData({
-      isTwoConfirmBox:false
-    })
-  },
-  bindKeyInput: function (e) {
-    this.setData({
-      refundOrderInputValue: e.detail.value
-    })
-  },
-  refundOrderfocusFun(){
-    this.setData({
-      refundOrderfocus:true,
-      isTwoConfirmBox:false
-    })
-  },
-  //字数限制  
-  inputs: function (e) {
-    // 获取输入框的内容
-    var value = e.detail.value;
-    // 获取输入框内容的长度
-    var len = parseInt(value.length);
-    //最少字数限制
-    // if (len <= this.data.min)
-    //   this.setData({
-    //     texts: "至少还需要",
-    //     textss: "字",
-    //     num:this.data.min-len
-    //   })
-    // else if (len > this.data.min)
-    //   this.setData({
-    //     texts: " ",
-    //     textss: " ",
-    //     num:''
-    //   })
-
-    this.setData({
-      currentWordNumber: len, //当前字数
-      currentWord:value
-    });
-    //最多字数限制
-    if (len > this.data.max) return;
-    // 当输入框内容的长度大于最大长度限制（max)时，终止setData()的执行
   },
   getInfo(){
     wx.showLoading({ title: '加载中...'})
@@ -153,15 +72,13 @@ Page({
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
           let infoData = res.data.Info;
-          let obj = _this.data.obj;
-          // for(var i=0;i<infoData.refundType.length;i++){
-          //     infoData.refundType[i].checked = false;
-          // }
+          for(var i=0;i<infoData.refundType.length;i++){
+              infoData.refundType[i].checked = false;
+          }
           _this.setData({
             infoData,
-            [`listData[0].imageList`]:infoData.describe_img,
+            refundType:infoData.refundType
           })
-          obj.voucherPic = infoData.describe_img;
         }else{
           app.showToastC(res.data.Msg)
         }
@@ -199,8 +116,8 @@ Page({
     }
     wx.showLoading({ title: '加载中...'})
     var _this = this;
-    var q = Dec.Aese('mod=operate&operation=submitApplyRefund&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&after_sale_type='+this.data.checkedObj.afterSaleType.id + '&goods_status='+this.data.checkedObj.goodsStatus.id+ '&type='+this.data.checkedObj.refundType.id+'&oid='+_this.data.oid+'&describe='+this.data.currentWord+'&giftShipping='+this.data.refundOrderInputValue+'&describe_img='+this.data.obj.voucherPic);
-    console.log(app.signindata.comurl + 'order.php?' +'mod=operate&operation=submitApplyRefund&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&after_sale_type='+this.data.checkedObj.afterSaleType.id + '&goods_status='+this.data.checkedObj.goodsStatus.id+ '&type='+this.data.checkedObj.refundType.id+'&oid='+_this.data.oid+'&describe='+this.data.currentWord+'&giftShipping='+this.data.refundOrderInputValue+'&describe_img='+this.data.obj.voucherPic)
+    var q = Dec.Aese('mod=operate&operation=submitApplyRefund&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type='+this.data.checkedObj.id+'&oid='+_this.data.oid+'&describe='+this.data.currentWord+'&giftShipping='+this.data.refundOrderInputValue);
+    console.log(app.signindata.comurl + 'order.php?' +'mod=operate&operation=submitApplyRefund&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type='+this.data.checkedObj.id+'&oid='+_this.data.oid+'&describe='+this.data.currentWord+'&giftShipping='+this.data.refundOrderInputValue)
     wx.request({
       url: app.signindata.comurl + 'order.php' + q,
       method: 'GET',

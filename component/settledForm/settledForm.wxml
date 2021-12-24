@@ -142,6 +142,7 @@
                   <view class="itemImage">
                     <image 
                       class="tupian" 
+                      style="{{item.imgWidth?'width:'+item.imgWidth+'rpx':''}}"
                       src="{{sonitem}}?imageMogr2/crop/168x168/gravity/cente" 
                       mode="widthFix">
                     </image>
@@ -154,7 +155,7 @@
                   </view>
                 </block>
                 <view class="itemImage">
-                  <view class="uploadBox">
+                  <view class="uploadBox" style="{{item.imgWidth?'width:'+item.imgWidth+'rpx;height:'+item.imgWidth+'rpx':''}}">
                     <view class="placeholderBox">
                       <image src="../../pages/images/jiahao.png" mode="widthFix"></image>
                     </view>
@@ -167,12 +168,13 @@
               <view wx:if="{{item.src != ''}}" class="flex marginTB25">
                 <image 
                   class="tupian" 
+                  style="{{item.imgWidth?'width:'+item.imgWidth+'rpx;height:'+item.imgWidth+'rpx':''}}"
                   src="{{item.src}}?imageMogr2/crop/168x168/gravity/cente" 
                   mode="widthFix">
                 </image>
                 <text wx:if="{{item.isEdit?false:isEdit}}" class="uploadAgainText">重新上传</text>
               </view>
-              <view wx:else class="uploadWrap">
+              <view wx:else class="uploadWrap" style="{{item.imgWidth?'width:'+item.imgWidth+'rpx':''}}">
                 <view class="placeholderBox">
                   <image src="../../pages/images/jiahao.png" mode="widthFix"></image>
                 </view>

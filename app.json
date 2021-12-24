@@ -137,6 +137,7 @@
         "pages/blankPage/blankPage",
         "pages/draw/draw",
         "pages/refund/refund",
+        "pages/fillInOrderNum/fillInOrderNum",
         "pages/redEnvelopeList/redEnvelopeList",
         "pages/mobileShellList/mobileShellList",
         "pages/isItaVIPTicket/isItaVIPTicket",

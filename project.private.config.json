@@ -360,6 +360,18 @@
           "pathName": "page/secondpackge/pages/refund/refund",
           "query": "oid=862",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "page/component/pages/orderdetails/orderdetails",
+          "query": "oid=865",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "page/secondpackge/pages/fillInOrderNum/fillInOrderNum",
+          "query": "",
+          "scene": null
         }
       ]
     }
