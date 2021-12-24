@@ -20,7 +20,7 @@ Page({
     uid: app.signindata.uid,
     listData:[
       {
-        isRequired:false,
+        isRequired:true,
         type:'text',
         subtitle:'寄回快递单号',
         placeholder:'请输入寄回快递单号',
@@ -40,7 +40,7 @@ Page({
       },{
         isRequired:false,
         type:'uploadImg',
-        subtitle:'照片',
+        subtitle:'寄回凭证',
         name:'pic',
         imageList:[],
         margintop0:true,
@@ -53,6 +53,7 @@ Page({
       describe:'',
       pic:''
     },
+    oid:''
   },
   // 获取表单数据
   bindchange(e){
@@ -65,8 +66,8 @@ Page({
     wx.showLoading({ title: '加载中...'})
     var _this = this;
     let oid = _this.data.oid;
-    var q = Dec.Aese('mod=operate&operation=applyRefundInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&oid='+oid);
-    console.log(app.signindata.comurl + 'order.php?' +'mod=operate&operation=applyRefundInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&oid='+oid)
+    var q = Dec.Aese('mod=operate&operation=addSalesReturnInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=show&oid='+oid);
+    console.log(app.signindata.comurl + 'order.php?' +'mod=operate&operation=addSalesReturnInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=show&oid='+oid)
     wx.request({
       url: app.signindata.comurl + 'order.php' + q,
       method: 'GET',
@@ -76,14 +77,18 @@ Page({
         wx.stopPullDownRefresh();
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
-          let infoData = res.data.Info;
-          for(var i=0;i<infoData.refundType.length;i++){
-              infoData.refundType[i].checked = false;
-          }
+
+          let info = res.data.data.Info;
+          let obj = _this.data.obj;
           _this.setData({
-            infoData,
-            refundType:infoData.refundType
+            [`listData[0].value`]:info.shipping_number,
+            [`listData[1].value`]:info.message,
+            [`listData[2].imageList`]:info.describe_img,
           })
+          
+          obj.associationIp = info.brand.brandId;
+
+          
         }else{
           app.showToastC(res.data.Msg)
         }
@@ -91,27 +96,27 @@ Page({
     }) 
   },
   submit(){
-    
+    let obj = this.data.obj;
     if(!obj.orderNum || obj.orderNum == ''){
       this.selectComponent('#settledForm').scrollto('orderNum');
       app.showToastC('请输入寄回快递单号',1500);
       return false;
     }
-    if(!obj.describe || obj.describe == ''){
-      this.selectComponent('#settledForm').scrollto('describe');
-      app.showToastC('请输入寄回留言',1500);
-      return false;
-    }
-    if(!obj.pic || obj.pic == ''){
-      this.selectComponent('#settledForm').scrollto('pic');
-      app.showToastC('请上传照片',1500);
-      return false;
-    }
+    // if(!obj.describe || obj.describe == ''){
+    //   this.selectComponent('#settledForm').scrollto('describe');
+    //   app.showToastC('请输入寄回留言',1500);
+    //   return false;
+    // }
+    // if(!obj.pic || obj.pic == ''){
+    //   this.selectComponent('#settledForm').scrollto('pic');
+    //   app.showToastC('请上传照片',1500);
+    //   return false;
+    // }
     
     wx.showLoading({ title: '加载中...'})
     var _this = this;
-    var q = Dec.Aese('mod=operate&operation=submitApplyRefund&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type='+this.data.checkedObj.id+'&oid='+_this.data.oid+'&describe='+this.data.currentWord+'&giftShipping='+this.data.refundOrderInputValue);
-    console.log(app.signindata.comurl + 'order.php?' +'mod=operate&operation=submitApplyRefund&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type='+this.data.checkedObj.id+'&oid='+_this.data.oid+'&describe='+this.data.currentWord+'&giftShipping='+this.data.refundOrderInputValue)
+    var q = Dec.Aese('mod=operate&operation=addSalesReturnInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&shipping_number='+obj.orderNum+'&message='+obj.describe+'&describe_img='+obj.pic+'&oid='+this.data.oid);
+    console.log(app.signindata.comurl + 'order.php?' +'mod=operate&operation=addSalesReturnInfo&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&shipping_number='+obj.orderNum+'&message='+obj.describe+'&describe_img='+obj.pic+'&oid='+this.data.oid)
     wx.request({
       url: app.signindata.comurl + 'order.php' + q,
       method: 'GET',
@@ -120,10 +125,7 @@ Page({
         console.log('提交====',res)
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
-          _this.setData({
-            isTwoConfirmBox: false,
-          });
-          app.showToastC(res.data.Msg)
+          app.showToastC('提交成功')
           var pages = getCurrentPages();
           var prevPage = pages[pages.length - 2]; //上一个页面
           prevPage.onLoadfun();

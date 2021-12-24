@@ -200,11 +200,11 @@ Page({
   jumpxinxi:function(){
     var _this = this;
 
-    wx.navigateTo({
-      url: "plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id=76",
-    });
+    // wx.navigateTo({
+    //   url: "plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id=76",
+    // });
 
-    return false;
+    // return false;
 
     // _this.data.id = 999999;
     // wx.requestSubscribeMessage({
@@ -227,7 +227,7 @@ Page({
       // url: "/page/component/pages/exhibitiondetail/exhibitiondetail?id=43161"
       // url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
       // url: "/page/secondpackge/pages/brandDetails/brandDetails?id=481&settlement=1"
-      url: "/pages/detailspage/detailspage?gid=39272"
+      // url: "/pages/detailspage/detailspage?gid=39272"
       // url: "/pages/smokebox/smokebox?gid=399289"
       // url: "/page/component/pages/playgrasslist/playgrasslist"
       // url: "/page/secondpackge/pages/detailSimgEffects/detailSimgEffects?gid=32852"
@@ -299,6 +299,7 @@ Page({
       // url: "/pages/detailspage/detailspage?gid=38364"
 
       // url: "/pages/modifythenickname/modifythenickname?brand_id=210"
+      url: "/page/secondpackge/pages/fillInOrderNum/fillInOrderNum?oid=23"
       
     });
   },
