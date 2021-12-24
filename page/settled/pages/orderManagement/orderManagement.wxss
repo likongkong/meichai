@@ -78,6 +78,17 @@ page{
   color: #000;
   box-sizing: border-box;
 }
+.classifyItemAfter{
+  display: inline-block;
+  padding: 0 10rpx;
+  line-height: 80rpx;
+  color: #A2A2A2;
+  box-sizing: border-box;
+}
+.activeAfter{
+  position: relative;
+  color: #000 !important;
+}
 .active{
   position: relative;
 }

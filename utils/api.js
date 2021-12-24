@@ -64,6 +64,10 @@ export const viewWithdrawalInformation = (query) => {
 export const oMgetData = (query) => {
     return apiResquest.get('brand/orderlist',query)
 }
+// 售后获取收据
+export const refundOrderList = (query) => {
+    return apiResquest.get('brand/refundOrderList',query)
+}
 // 修改地址
 export const modifyAddress = (url,query) => {
     return apiResquest.post('brand/changeAddress/' + url,query)

@@ -128,7 +128,7 @@
                 </view>
                 <view class="obcrTopTopSnEve" style="color:#FF2742;padding-right:0;">{{pay_status_name}}</view>
             </view>
-            <view class="orderBoxContent" data-id='{{itemId}}' data-istype='{{itemType}}'>
+            <view class="orderBoxContent" catchtap="afterSalesDetails" data-id='{{itemId}}' data-istype='{{itemType}}'>
                 <image class="orderBoxContentImg" src="{{goods_img}}" mode="aspectFit"></image>
                 <view class="orderBoxContentRight">
                     <view class="obcrTop">
