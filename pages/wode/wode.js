@@ -379,6 +379,8 @@ Page({
               nonreceive: res.data.Info.non_receive || 0,
               // 售后服务
               no_read: res.data.Info.no_read || 0,
+              // 商家售后服务
+              no_read_no: res.data.Info.no_read_no || 0,
               // 我的钱包数据
               point: res.data.Info.point || 0,
               // 提现金额

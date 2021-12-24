@@ -258,4 +258,52 @@ page{
   background: #fff;
 }
 
+.underReview{
+  border-top: 2rpx solid #f5f5f5;
+  padding: 20rpx 0;
+}
 
+.underReviewChid{
+  width: 100%;
+  background: #F6F6F6;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.underReviewChidLeft{
+  width: 140rpx;
+  float: left;
+}
+
+.underReviewChidRight{
+  width: 500rpx;
+  float: right;
+  overflow: hidden;
+  padding-bottom: 20rpx;
+}
+
+.UndereviewTxt{
+  font-size: 28rpx;
+  text-align: center;
+  padding-top: 20rpx;
+}
+.Undereviewreason{
+  font-size: 24rpx;
+  padding-top: 20rpx;
+  display: block;
+}
+.UnderevirRemarks{
+  display: block;
+  padding-top: 10rpx;
+}
+.copyAddressUnder{
+  font-size: 24rpx;
+  color: #fff;
+  width: 116rpx;
+  height: 54rpx;
+  line-height: 54rpx;
+  text-align: center;
+  background:#90D2D6;
+  margin: 10rpx auto 0;
+  border-radius: 10rpx;
+}

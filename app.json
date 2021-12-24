@@ -203,6 +203,7 @@
         "pages/solicitPictures/solicitPictures",
         "pages/afterSaleService/afterSaleService",
         "pages/collectPictures/collectPictures",
+        "pages/AfterSalesDetails/AfterSalesDetails",
         "pages/appliedAftersales/appliedAftersales"
       ]
     }

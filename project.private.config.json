@@ -326,8 +326,8 @@
           "scene": null
         },
         {
-          "name": "page/settled/pages/orderManagement/orderManagement",
-          "pathName": "page/settled/pages/orderManagement/orderManagement",
+          "name": "售后详情",
+          "pathName": "page/settled/pages/AfterSalesDetails/AfterSalesDetails",
           "query": "",
           "scene": null
         },
