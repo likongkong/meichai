@@ -299,7 +299,7 @@ Page({
       // url: "/pages/detailspage/detailspage?gid=38364"
 
       // url: "/pages/modifythenickname/modifythenickname?brand_id=210"
-      url: "/page/secondpackge/pages/fillInOrderNum/fillInOrderNum?oid=23"
+      url: "/page/secondpackge/pages/fillInOrderNum/fillInOrderNum?oid=23&type=1"
       
     });
   },
