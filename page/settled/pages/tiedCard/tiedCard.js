@@ -441,6 +441,7 @@ Page({
     let _this = this;
     let qqq;
     let reg = /^1[3456789]\d{9}$/;
+    let pattern = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
     var obj = this.data.obj;
     if(this.data.type == 3){ //企业商户
       this.data.arr = [ 
@@ -460,6 +461,10 @@ Page({
       if(!arr[i].value || arr[i].value == undefined){
         this.selectComponent('#'+arr[i].domId).scrollto(arr[i].name);
         app.showToastC(arr[i].placeholder,1500);
+        return false;
+      }else if((arr[i].name=='legalPersonIdCard' || arr[i].name=='idCard') && !pattern.test(arr[i].value)){
+        this.selectComponent('#'+arr[i].domId).scrollto(arr[i].name);
+        app.showToastC('请输入正确的身份证号码',1500);
         return false;
       }
       // if(arr[i].name == 'phoneNum' && !reg.test(obj.phoneNum)){
