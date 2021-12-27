@@ -136,10 +136,15 @@ Page({
   bindKeyInput(e){
     // if(e.detail.value.length>0){
       let type = e.target.dataset.type;  //type=0 重量 type=1 件数
+      console.log(type)
       let data = type==0?`kgNumber`:`pieceNumber`;
       if(e.detail.value == 0){
         this.setData({
           [data]:''
+        })
+      }else{
+        this.setData({
+          [data]:e.detail.value
         })
       }
     // }

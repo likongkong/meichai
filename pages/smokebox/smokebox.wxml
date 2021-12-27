@@ -187,9 +187,9 @@
 						<view class='queuebtnstyle2' style="width:100%;" catchtap="blindBoxsubscrfun" class="liveBroadcastStatusThree">
 							<view class="liveBroadcastStatusTwo">{{activity.isLiveShow?activity.start_time+'直播开售':'开售提醒'}}<view class="coupposi" wx:if='{{isSubscribeCoupon}}'>订阅送优惠券</view></view>
 							<view style="text-align:center;font-size:28rpx">
-								<!-- <block wx:if='{{newdataexh}}'>暂未开售</block>
-								<block wx:else>{{activity.start_time}}</block> -->
-								点击订阅
+								<block wx:if='{{newdataexh}}'>暂未开售</block>
+								<block wx:else>{{activity.start_time}}</block>
+								<!-- 点击订阅 -->
 							</view>
 						</view>
 					</view>

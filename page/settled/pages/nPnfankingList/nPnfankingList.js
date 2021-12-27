@@ -91,7 +91,7 @@ Page({
     if(timestamp >= 1640534400){
       this.setData({
         endTime:Y + '-' + M +'-' + D,
-        selectDate:'2021-12-27',
+        selectDate:'2021-12-26',
         isFinish:true
       })
     }else{
