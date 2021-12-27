@@ -138,6 +138,15 @@ export const salesResult = (url,query) => {
 }
 // ---------------------------------------- 任务返利 -----------------------------------------
 
+// ---------------------------------------- 售后详情 -----------------------------------------
+// 商家接口
+export const refundInfo = (url,query) => {
+    return apiResquest.get('brand/refundInfo/' + url,query)
+}
+// 通过或者驳回
+export const refundOperation = (url,query) => {
+    return apiResquest.get('brand/refundOperation/' + url,query)
+}
 
 
 

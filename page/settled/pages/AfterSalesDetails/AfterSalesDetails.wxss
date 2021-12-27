@@ -60,9 +60,10 @@ page{
 }
 .asDBoxTipDeEveImg{
   width: 126rpx;
-  height: auto;
+  height: 126rpx;
   border-radius: 10rpx;
-  display: block;
+  display: inline-block;
+  margin:0 15rpx 15rpx 0;
 }
 
 .AfterSDbottom{

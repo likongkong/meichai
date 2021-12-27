@@ -26,8 +26,9 @@ Page({
     values: [0, 0, 0],
 
     logisticsRefundModify:4,
-    commonBulletFrame:false
-
+    commonBulletFrame:false,
+    afterSaleData:{},
+    rejectOrAdopt:1
   },
   // 省市联动
   bindChange: function (e) {
@@ -102,7 +103,7 @@ Page({
   // 驳回备注
   rejectTxtfun: function (e) {
     this.setData({
-      deladdress: e.detail.value
+      rejectTxt: e.detail.value
     })
   },  
   open: function (options) {
@@ -148,10 +149,11 @@ Page({
     });
   },
   preview(event) {
-    let currentUrl = event.currentTarget.dataset.src
+    let ind = event.currentTarget.dataset.ind || 0;
+    var DescribeImg = _this.data.afterSaleData.order.DescribeImg || [];
     wx.previewImage({
-      current: 'https://cdn2.51chaidan.com/images/goods/16400686485760_744.jpg', // 当前显示图片的http链接
-      urls: ['https://cdn2.51chaidan.com/images/goods/16400686485760_744.jpg'] // 需要预览的图片http链接列表
+      current: DescribeImg[ind], // 当前显示图片的http链接
+      urls: DescribeImg // 需要预览的图片http链接列表
     })
   },
   /**
@@ -163,16 +165,13 @@ Page({
 
     _this.setData({
       businessOrUser:options.bou || 2,
+      orderId:options.oid || ''
     })
     // '已经授权'
     _this.data.loginid = app.signindata.loginid;
     _this.data.uid = app.signindata.uid;
     // 判断是否登录
-    if (_this.data.loginid != '' && _this.data.uid != '') {
-      _this.onLoadfun();
-    } else {
-      app.signin(_this)
-    };
+    _this.onLoadfun();
 
 
   },
@@ -187,15 +186,79 @@ Page({
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
     });
 
-    this.getData();
-    
+    if(wx.getStorageSync('access_token')){
+      if(this.data.businessOrUser == 1){ // 商家
+          this.getDataBus();
+      }else{
+          this.getDataUser();
+      };
+    }else{
+      if(this.data.businessOrUser == 1){ // 商家
+          app.getAccessToken(_this.getDataBus)
+      }else{  // 用户
+          app.getAccessToken(_this.getDataUser)
+      };
+    };
   },
-  // 获取数据
-  getData(num=1){
+  // 商家 获取数据
+  getDataBus(num=1){
     var _this = this;
-    
+    api.refundInfo(_this.data.orderId,{}).then((res) => {
+     console.log('商家数据=======',res)
+     if (res.data.status_code == 200) {
+        _this.setData({
+          afterSaleData: res.data.data.Info.order || {}
+        })
+     }else{
+       if(res.data && res.data.message){
+         app.showModalC(res.data.message); 
+       };        
+     };
+    })
   },
-
+  // 用户 获取数据
+  getDataUser(num=1){
+    var _this = this;
+    api.refundInfo(_this.data.orderId,{}).then((res) => {
+     console.log('商家数据=======',res)
+     if (res.data.status_code == 200) {
+        _this.setData({
+          afterSaleData:{}
+        })
+     }else{
+       if(res.data && res.data.message){
+         app.showModalC(res.data.message); 
+       };        
+     };
+    })
+  },
+  // 驳回或者通过
+  refundOperation(e){
+    var _this = this;
+    api.refundOperation(_this.data.orderId,{
+      type: _this.data.rejectOrAdopt , // 1 通过 2是驳回
+      send_back_man:_this.data.modifyName || '' , //    寄回联系人
+      send_back_tel:_this.data.modifyMobile || '' , //   寄回联系人电话
+      send_back_province:_this.data.province || '' , //   寄回省
+      send_back_city:_this.data.city || '' , //   寄回市
+      send_back_area:_this.data.county || '' , //   寄回区
+      send_back_address:_this.data.deladdress || '' , //   寄回地址
+      rebut_text:_this.data.rejectTxt || '' , //  驳回理由
+    }).then((res) => {
+     console.log('驳回或者通过=======',res)
+     if (res.data.status_code == 200) {
+        app.showModalC(res.data.message); 
+     }else{
+       if(res.data && res.data.message){
+         app.showModalC(res.data.message); 
+       };        
+     };
+    })
+  },
+  adoptButton(){
+      this.data.rejectOrAdopt = 1;
+      this.refundOperation();
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -229,17 +292,13 @@ Page({
    */
   onPullDownRefresh: function () {
     app.downRefreshFun(() => {
-      this.getData()
+      if(this.data.businessOrUser == 1){ // 商家
+          this.getDataBus();
+      }else{
+          this.getDataUser();
+      };
     })   
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-    this.getData(2)
-  },
-
   /**
    * 用户点击右上角分享
    */
@@ -259,4 +318,152 @@ Page({
     } 
   },
 
+
+  commonBulletFrameFun(e){
+    let index = e.currentTarget.dataset.index;
+    let num = e.currentTarget.dataset.num || 0; // 订单标识
+    var _this = this;
+    var selectData = _this.data.afterSaleData || {};
+    if(index == 1){ // 1 修改地址 2 退款 3 物流
+
+    } else if(index == 2){      
+        api.checkOrderRefund({
+            orderId:selectData.order.orderId,	// Number订单id 对内唯一标识
+            customerId:selectData.order.userId // 	Number对应订单的用户id
+        }).then(res => {
+          console.log('查询是否分账',res)
+          if (res.data.status_code == 200) {
+              var payInfoData = res.data.data.Info;
+              var subLedger = 1;
+              if(payInfoData.isProfit){
+                subLedger = 1;
+              }else{
+                subLedger = 2;
+              };
+              _this.setData({
+                subLedger:subLedger,
+                payInfoData:payInfoData,
+                commonBulletFrame:true,
+                logisticsRefundModify:index,
+                orderNum:num,
+                selectData
+              })
+          }else{
+            if(res.data && res.data.message){
+              app.showModalC(res.data.message); 
+            };        
+          }          
+        })
+    } else if(index == 3){
+
+    }else if(index == 4){
+    };
+    if(index != 2){
+      this.setData({
+        commonBulletFrame:true,
+        logisticsRefundModify:index,
+        orderNum:num,
+        selectData,
+        rejectTxt:''
+      })
+    }
+
+  },
+  // 弹框确认按钮    1 修改收货地址 2 退款 3 物流 4批量导出订单 6 删除订单
+  confirmCommonTip(){ 
+    var _this = this;
+    var logisticsRefundModify = _this.data.logisticsRefundModify;
+    var selectData = _this.data.selectData || {};
+    var orderNum = _this.data.orderNum || 0;
+    console.log(logisticsRefundModify)
+    if(logisticsRefundModify == 1){
+
+    }else if(logisticsRefundModify == 2){
+        api.brandRefund({
+            orderId:selectData.order.orderId,	// Number订单id 对内唯一标识
+            customerId:selectData.order.userId // 	Number对应订单的用户id
+        }).then(res => {
+          if (res.data.status_code == 200) {
+              app.showToastC('退款成功，退款金额将在72小时之内原路返回到支付账户上。');
+              setTimeout(()=>{
+                _this.getData();
+              },2000);
+          }else if(res.data.status_code == 410004){
+              var infoData = res.data.data.Info || {};
+              var q = Dec.Aese('mod=operate&operation=prepay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1&oid=' + infoData.order.cartId + '&xcx=1' + '&openid=' + app.signindata.openid)
+              console.log('mod=operate&operation=prepay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1&oid=' + infoData.order.cartId + '&xcx=1' + '&openid=' + app.signindata.openid)
+              wx.request({
+                url: app.signindata.comurl + 'order.php'+q,
+                method: 'GET',
+                header: { 'Accept': 'application/json' },
+                success: function (res) {
+                  if (res.data.ReturnCode == 200) {
+                        wx.requestPayment({
+                            'timeStamp': res.data.Info.timeStamp.toString(),
+                            'nonceStr': res.data.Info.nonceStr,
+                            'package': res.data.Info.package,
+                            'signType': 'MD5',
+                            'paySign': res.data.Info.paySign,
+                            'success': function (res) { 
+                                  // 成功之后在调取一下退款接口
+                                  api.brandRefund({
+                                      orderId:selectData.order.orderId,	// Number订单id 对内唯一标识
+                                      customerId:selectData.order.userId // 	Number对应订单的用户id
+                                  }).then(res => {
+                                    if (res.data.status_code == 200) {
+                                        app.showToastC('退款成功，退款金额将在72小时之内原路返回到支付账户上。');
+                                        setTimeout(()=>{
+                                          _this.getData();
+                                        })
+                                    }else{
+                                      if(res.data && res.data.message){
+                                        app.showModalC(res.data.message); 
+                                      };
+                                    }          
+                                  })                              
+                             },
+                            'fail':function(res){},
+                            'complete': function (res) {}
+                          })
+                  };   
+                }
+              })       
+          }else{
+            if(res.data && res.data.message){
+              app.showModalC(res.data.message); 
+            };
+          }          
+        })
+
+    }else if(logisticsRefundModify == 3){
+        
+    }else if(logisticsRefundModify == 4){
+        this.data.rejectOrAdopt = 2;
+        this.refundOperation();
+    }else if(logisticsRefundModify == 5){
+      
+    }else if(logisticsRefundModify == 6){
+        api.emptyLogistics(selectData.order.orderId,{}).then(res => {
+            if (res.data.status_code == 200) {
+                app.showToastC('删除成功');
+                setTimeout(()=>{
+                  _this.getData();
+                },2000);
+            }else{
+              if(res.data && res.data.message){
+                app.showModalC(res.data.message); 
+              };
+            }          
+        })
+    };
+    _this.setData({
+      commonBulletFrame:false
+    });
+
+  },
+  navigateBackLast(){
+    wx.navigateBack({//返回
+      delta: 1
+    })
+  }
 })

@@ -221,6 +221,7 @@ page{
   border-radius: 10rpx;
   display: inline-block;
   vertical-align: top;
+  position: relative;
 }
 .orderMangAddress{
   width: 660rpx;

@@ -21,7 +21,7 @@
         {
           "name": "订单管理",
           "pathName": "page/settled/pages/orderManagement/orderManagement",
-          "query": "",
+          "query": "oid=20&bou=1",
           "scene": null
         },
         {
@@ -328,7 +328,7 @@
         {
           "name": "售后详情",
           "pathName": "page/settled/pages/AfterSalesDetails/AfterSalesDetails",
-          "query": "",
+          "query": "oid=20&bou=1",
           "scene": null
         },
         {

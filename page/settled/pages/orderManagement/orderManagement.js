@@ -43,7 +43,7 @@ Page({
       {name:'待发货',num:'2'},
       {name:'已发货',num:'4'},
       {name:'已完成',num:'5'},
-      // {name:'售后',num:'6'}
+      {name:'售后',num:'6'}
     ], // 支付状态 
     afterSale:[
       {name:'全部',num:'-1'},
@@ -67,9 +67,9 @@ Page({
   },
   // 售后详情
   afterSalesDetails(w){
-    let orderid = w.currentTarget.dataset.orderid;
+    let oid = w.currentTarget.dataset.oid || '';
     wx.navigateTo({
-      url: "/page/settled/pages/AfterSalesDetails/AfterSalesDetails?orderid="+orderid+'&bou=1'
+      url: "/page/settled/pages/AfterSalesDetails/AfterSalesDetails?oid="+oid+'&bou=1'
     });
   },
   selectCap(e){

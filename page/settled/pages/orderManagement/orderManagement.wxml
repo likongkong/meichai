@@ -26,7 +26,7 @@
     </scroll-view>
 
     <view class="marginAuto centerTxt" wx:for='{{order}}' wx:key='key'>
-        <template is="orderCommon" data="{{...item,num:index}}"></template>
+        <template is="orderCommon" data="{{...item,num:index,centerIndex,afterSaleInd}}"></template>
     </view>
     <!--  暂无数据  -->
     <view class='noDataCom' wx:if='{{order.length==0&&nodataiftr}}'>
@@ -85,24 +85,30 @@
                 </view>                    
             </view>
             <!-- 售后 -->
-            <!-- <view class="orderAddress">
+            <view class="orderAddress" wx:if='{{centerIndex == 6}}'>
                 <view class="orderAddressEveWrap"
                 data-receipt="{{receipt}}"
                 catchtap='businesscooperationfunfz'> 
-                    <view class="orderAddressEve">
-                        <view>申请日期：2021-12-12  10:00:00</view>
+                    <view class="orderAddressEve" wx:if='{{order.applyTime}}'>
+                        <view>申请日期：{{order.applyTime}}</view>
                     </view>
-                    <view class="orderAddressEve">
-                        <view>售后状态：待审核</view>
+                    <view class="orderAddressEve" wx:if='{{order.refundStatusText}}'>
+                        <view>售后状态：{{order.refundStatusText}}</view>
                     </view>  
-                    <view class="orderAddressEve">
-                        <view>订单状态：已发货</view>
+                    <view class="orderAddressEve" wx:if='{{order.payStatusName}}'>
+                        <view>订单状态：{{order.payStatusName}}</view>
                     </view>
-                    <view class="orderAddressEve">
-                        <view>发货单号：SF123456</view>
+                    <view class="orderAddressEve" wx:if='{{order.shippingCode}}'>
+                        <view>发货单号：{{order.shippingCode}}</view>
+                    </view>
+                    <view class="orderAddressEve" wx:if='{{order.waybillNumber}}'>
+                        <view>寄回单号：{{order.waybillNumber}}</view>
+                    </view>
+                    <view class="orderAddressEve" wx:if='{{order.setLogExtend}}'>
+                        <view>寄回留言：{{order.setLogExtend}}</view>
                     </view>
                 </view>                   
-            </view> -->
+            </view>
 
 
        </view>
@@ -116,13 +122,17 @@
        </view>
        <view class="orderBottom" wx:elif='{{order.payStatus != 0 && order.payStatus != 7 && order.payStatus != 8 &&order.payStatus != 5}}'> <!-- 未支付 -->
                <view class="orderBottomOrderNumber">
-                   <view class="orderBottomButton" wx:if="{{order.payStatus != 5}}" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='3'>
-                       <block wx:if='{{order.shippingCode}}'>修改物流</block>
-                       <block wx:else>添加物流</block>
-                    </view>
-                   <!-- <view class="orderBottomButton" wx:if='{{order.isBrandCanRefund}}' catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='2'>退款</view> -->
-                   <view class="orderBottomButton" wx:if='{{order.payStatus !=4 && order.payStatus != 5}}' catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='1'>修改收货地址</view>
-                   <!-- <view class="orderBottomButton" catchtap="afterSalesDetails" data-index='1'>查看详情</view> -->
+                   <block wx:if='{{centerIndex == 6}}'>
+                        <view class="orderBottomButton" catchtap="afterSalesDetails" data-oid='{{order.orderId}}' data-index='1'>查看详情</view>
+                   </block>
+                   <block wx:else>
+                        <view class="orderBottomButton" wx:if="{{order.payStatus != 5}}" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='3'>
+                        <block wx:if='{{order.shippingCode}}'>修改物流</block>
+                        <block wx:else>添加物流</block>
+                        </view>
+                        <!-- <view class="orderBottomButton" wx:if='{{order.isBrandCanRefund}}' catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='2'>退款</view> -->
+                        <view class="orderBottomButton" wx:if='{{order.payStatus !=4 && order.payStatus != 5}}' catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='1'>修改收货地址</view>
+                   </block>
                </view>
        </view>
    </view>
