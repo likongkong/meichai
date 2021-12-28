@@ -207,8 +207,17 @@ Page({
      console.log('商家数据=======',res)
      if (res.data.status_code == 200) {
         _this.setData({
-          afterSaleData: res.data.data.Info.order || {}
-        })
+          afterSaleData: res.data.data.Info.order || {},
+
+
+          modifyName: res.data.data.Info.order.order.sendBackMan || '' , //    寄回联系人
+          modifyMobile: res.data.data.Info.order.order.sendBackTel || '' , //   寄回联系人电话
+          province: res.data.data.Info.order.order.sendBackProvince || '' , //   寄回省
+          city: res.data.data.Info.order.order.sendBackCity || '' , //   寄回市
+          county: res.data.data.Info.order.order.sendBackArea || '' , //   寄回区
+          deladdress: res.data.data.Info.order.order.sendBackAddress || '' , //   寄回地址
+
+        });
      }else{
        if(res.data && res.data.message){
          app.showModalC(res.data.message); 
@@ -219,18 +228,44 @@ Page({
   // 用户 获取数据
   getDataUser(num=1){
     var _this = this;
-    api.refundInfo(_this.data.orderId,{}).then((res) => {
-     console.log('商家数据=======',res)
-     if (res.data.status_code == 200) {
-        _this.setData({
-          afterSaleData:{}
-        })
-     }else{
-       if(res.data && res.data.message){
-         app.showModalC(res.data.message); 
-       };        
-     };
+    var q1 = Dec.Aese('mod=saleAfterList&operation=orderDetail&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id='+_this.data.orderId);
+    console.log('mod=saleAfterList&operation=orderDetail&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id='+_this.data.orderId)
+    wx.showLoading({title: '加载中...',mask:true})
+    wx.request({
+      url: app.signindata.comurl + 'order.php' + q1,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function(res) {
+        console.log('用户 获取数据=====',res)
+        wx.hideLoading();
+        if (res.data.ReturnCode == 200) {
+            _this.setData({
+               afterSaleData: res.data.List || {},
+            })
+        }else{
+          wx.showModal({
+            content: res.data.Msg || res.data.msg,
+            showCancel:false,
+            success: function (res) {}
+          });          
+        };
+      },
+
     })
+
+
+    // api.refundInfo(_this.data.orderId,{}).then((res) => {
+    //  console.log('商家数据=======',res)
+    //  if (res.data.status_code == 200) {
+    //     _this.setData({
+    //       afterSaleData:{}
+    //     })
+    //  }else{
+    //    if(res.data && res.data.message){
+    //      app.showModalC(res.data.message); 
+    //    };        
+    //  };
+    // })
   },
   // 驳回或者通过
   refundOperation(e){
@@ -465,5 +500,65 @@ Page({
     wx.navigateBack({//返回
       delta: 1
     })
-  }
+  },
+
+
+  // 跳转详情
+  jumpTimDetail(e){
+    if(e.currentTarget.dataset.fid == app.signindata.uid){
+      var id = e.currentTarget.dataset.tid;
+    }else{
+      var id = e.currentTarget.dataset.fid;
+    };
+    var comdata = this.data.afterSaleData;
+    var order = {
+      order_id: comdata.oid || '',
+      order_name: comdata.goods_name || '',
+      photo_url: comdata.goods_img || '',
+      price: comdata.order_amount || '',
+      style: comdata.goods_role_name || '',
+    }
+    wx.navigateTo({ 
+      url: `/page/settled/pages/timHomePage/timHomePage?id=${id}&order=${JSON.stringify(order)}`
+    });
+  },
+  // 取消申请
+  withdraw(e){
+    var groupid = e.currentTarget.dataset.groupid || 0;
+    wx.showModal({
+      title:'取消申请',
+      content: '你确定要取消售后申请吗？',
+      confirmColor:'#02BB00',
+      success: (res) => {
+        if (res.confirm) {
+            if(e.currentTarget.dataset.fid == app.signindata.uid){
+              var id = e.currentTarget.dataset.tid;
+            }else{
+              var id = e.currentTarget.dataset.fid;
+            };
+            var q1 = Dec.Aese('mod=userSig&operation=del&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&from_userid='+id);
+            wx.showLoading({title: '加载中...',mask:true})
+            wx.request({
+              url: app.signindata.comurl + 'im.php' + q1,
+              method: 'GET',
+              header: {'Accept': 'application/json'},
+              success: function(res) {
+                console.log('删除会话=====',res)
+                wx.hideLoading();
+                if (res.data.ReturnCode == 200) {
+    
+                }else{
+                  wx.showModal({
+                    content: res.data.Msg || res.data.msg,
+                    showCancel:false,
+                    success: function (res) {}
+                  });          
+                };
+              },
+
+            })
+        };
+      },
+    })
+  },
 })

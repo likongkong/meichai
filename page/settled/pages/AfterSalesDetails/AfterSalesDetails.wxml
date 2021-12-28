@@ -116,10 +116,14 @@
 
 
     </view>
-
+    
     <!-- 底部按钮 -->
     <block wx:if='{{afterSaleData.order}}'>
         <view class="orderBottomNavigation" style="font-size:28rpx;" wx:if='{{afterSaleData.order.refundStatus != 2 && afterSaleData.order.refundStatus != 1}}'>
+            <view class="bottomTip" wx:if='{{afterSaleData.order.refundStatus == 0}}'>
+                <block wx:if='{{afterSaleData.order.afterSaleType == 1}}'>该售后订单申请类型为仅退款，无需寄回商品，可直接退款</block>
+                <block wx:else>该售后订单申请类型为退货退退款，待商品寄回之后可进行退款处理</block>
+            </view>
             <view class="orderBottomNavEve bottomButComWidth" catchtap="navigateBackLast" style="background:#fff;color:#90D2D6;border:2rpx solid #90D2D6;height:64rpx;">返回</view>
             <view class="orderBottomNavEve bottomButComWidth" wx:if='{{afterSaleData.order.refundStatus == 0}}' catchtap="commonBulletFrameFun" data-index='4'>驳回</view>
             <view class="orderBottomNavEve bottomButComWidth">
@@ -280,57 +284,76 @@
 <!-- 用户 -->
 <block wx:elif='{{businessOrUser == 2}}'>
     <view class="asDBox">
-        <view class="asDBoxTipTxt">
-            <block>您的售后申请已提交，正在审核中，可稍后查看审核进度。</block>
-            <block>您的售后申请审核已通过，退款金额预计三个工作日内原路返回。</block>
-            <block>您的售后申请审核已通过请尽快填写寄回的运单号</block>
-            <block>您的售后申请已取消</block>
-            <block>您的售后申请已被驳回</block>
-        </view>
+        <view class="asDBoxTipTxt">{{afterSaleData.statusText}}</view>
 
         <view class="asDBoxTipDetail">
             <view class="asDBoxTipDelTop">售后商品</view>   
             <view class="orderBoxContent">
-                <image class="orderBoxContentImg" src="https://cdn2.51chaidan.com/images/goods/16400686485760_744.jpg" mode="aspectFit"></image>
+                <image class="orderBoxContentImg" src="{{afterSaleData.goods_img}}" mode="aspectFit"></image>
                 <view class="orderBoxContentRight">
                     <view class="obcrTop">
-                        <view class="specialellipsis">新生千面九尾狐手办</view>
+                        <view class="specialellipsis">{{afterSaleData.goods_name}}</view>
                         <!-- <view>{{itemStatusName}}</view> -->
                     </view>
                     <view class="obcrTop" style="padding-top:10rpx;">
-                        <view class="specialellipsis">数量x1</view>
+                        <view class="specialellipsis">数量x{{afterSaleData.goods_num}}</view>
                     </view>
                     <view class="obcrBottom obcrTop">
-                        <view style="color:#AAAAAA;position: relative;padding-right: 70rpx;">订单编号：20211018124578<view class="copyCart" catchtap="copyCart" data-cart='{{order_sn}}'>复制</view></view>
+                        <view style="color:#AAAAAA;position: relative;padding-right: 70rpx;">订单编号：{{afterSaleData.order_sn}}<view class="copyCart" catchtap="copyCart" data-cart='{{afterSaleData.order_sn}}'>复制</view></view>
                         <view></view>
                     </view>
                 </view>
             </view>
         </view>
         <view class="asDBoxTipDetail" style="margin-top:25rpx;padding:0 25rpx;">
-            <view class="asDBoxTipDeEve">申请日期：2021-12-12  10:00:00</view>
-            <view class="asDBoxTipDeEve">售后类型：仅退款</view>
-            <view class="asDBoxTipDeEve">商品状态：未收到商品/已拒收</view>
-            <view class="asDBoxTipDeEve">申请原因：其他问题</view>
+            <view class="asDBoxTipDeEve" wx:if="{{afterSaleData.afterSaleTypeText}}">售后类型：{{afterSaleData.afterSaleTypeText}}</view>
+            <view class="asDBoxTipDeEve" wx:if="{{afterSaleData.goodsStatusText}}">商品状态：{{afterSaleData.goodsStatusText}}</view>
+            <view class="asDBoxTipDeEve" wx:if="{{afterSaleData.refundCauseText}}">申请原因：{{afterSaleData.refundCauseText}}</view>
+            <view class="asDBoxTipDeEve" wx:if="{{afterSaleData.refundDescribe}}">申请说明：{{afterSaleData.refundDescribe}}</view>
+            <block wx:if='{{afterSaleData.DescribeImg && afterSaleData.DescribeImg.length != 0}}'>
+                <view class="asDBoxTipDeEve">售后凭证</view>
+                <view class="asDBoxTipDeEve" style="border:0;padding: 25rpx 0 10rpx;">
+                    <block wx:for='{{afterSaleData.DescribeImg}}' wx:key='key'>
+                        <image class="asDBoxTipDeEveImg" catchtap="preview" data-ind='{{index}}' src="{{item}}"  mode="aspectFit"></image>
+                    </block>
+                </view>
+            </block>
 
-            <view class="asDBoxTipDeEve">申请说明：这是申请说明这是申请说明这是申请说明这
-    是申请说明这是申请说明这是申请说明这是申请说明</view>
-            <view class="asDBoxTipDeEve">售后凭证</view>
-            <view class="asDBoxTipDeEve" style="border:0;">
-                <image class="asDBoxTipDeEveImg" catchtap="preview" src="https://cdn2.51chaidan.com/images/goods/16400686485760_744.jpg" mode="widthFix"></image>
-            </view>
             
         </view>
 
         <view class="asDBoxTipDetail" style="margin-top:25rpx;font-size:28rpx;">
-        退款金额：￥10000.00
+        退款金额：￥{{afterSaleData.refundPrice}}
         </view>
+
+        <view class="asDBoxTipDetail" style="margin-top:25rpx;padding:0 25rpx;">
+            <view class="asDBoxTipDeEve" wx:if='{{afterSaleData.waybillNumber}}'>
+                寄回单号：{{afterSaleData.waybillNumber}}
+            </view>
+            <view class="asDBoxTipDeEve" wx:if='{{afterSaleData.setLogExtend}}'>
+                寄回留言：{{afterSaleData.setLogExtend}}
+            </view>
+            <block wx:if='{{afterSaleData.exchangeGoodsExtend && afterSaleData.exchangeGoodsExtend.length != 0}}'>
+                <view class="asDBoxTipDeEve">寄回凭证</view>
+                <view class="asDBoxTipDeEve" style="border:0;padding: 25rpx 0 10rpx;">
+                    <block wx:for='{{afterSaleData.exchangeGoodsExtend}}' wx:key='key'>
+                        <image class="asDBoxTipDeEveImg" catchtap="preview" data-ind='{{index}}' src="{{item}}"  mode="aspectFit"></image>
+                    </block>
+                </view>
+            </block>
+
+        </view>
+
+
     </view>
 
     <!-- 底部按钮 -->
     <view class="AfterSDbottom">
-        <view class="AfterSDbottomEve" style="background:#FE2844;color:#fff;border: 2rpx solid #FE2844;"><button open-type='contact' style='width:100%;height:100%;position:absolute;top:0;left:0;opacity: 0;z-index:1;'></button>联系客服</view>
-        <view class="AfterSDbottomEve" style="margin:0 20rpx;">填写寄回快递单号</view>
-        <view class="AfterSDbottomEve">取消申请</view>
+        <view class="AfterSDbottomEve" catchtap="{{afterSaleData.is_self?'':'jumpTimDetail'}}" data-fid='{{afterSaleData.brandId_user}}' data-tid='{{afterSaleData.brandId_user}}' style="background:#FE2844;color:#fff;border: 2rpx solid #FE2844;"><button wx:if='{{afterSaleData.is_self}}' open-type='contact' style='width:100%;height:100%;position:absolute;top:0;left:0;opacity: 0;z-index:1;'></button>联系客服</view>
+        <view class="AfterSDbottomEve" style="margin:0 20rpx;" wx:if='{{afterSaleData.status == 2}}'>填写寄回快递单号</view>
+        <view class="AfterSDbottomEve" style="margin:0 20rpx;" wx:if='{{afterSaleData.status == 6}}'>修改寄回快递单号</view>
+        <view class="AfterSDbottomEve" catchtap="withdraw" wx:if='{{afterSaleData.status == 2 || afterSaleData.status == 1}}' >取消申请</view>
+        <view class="AfterSDbottomEve" catchtap="withdraw" wx:if='{{afterSaleData.status == 3 || afterSaleData.status == 5}}' >重新申请</view>
+        <view class="AfterSDbottomEve" catchtap="withdraw" wx:if='{{afterSaleData.status == 1}}' >修改申请</view>
     </view>
 </block>
