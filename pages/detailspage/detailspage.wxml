@@ -1745,7 +1745,7 @@
    </view>
 </view>
 
-<view class="mask" wx:if="{{guidanceMask}}" catchtouchmove="true" catchtap="toogleGuidanceMask">
+<view class="mask" wx:if="{{guidanceMask}}" catchtouchmove="true" catchtap="toogleGuidanceMaskcloss">
   <view class="maskBox" catchtap="true"> 
 		<text class="guidanceWrapTitle">进入品牌微信群即可参与</text>
 		<view class="guidanceWrap">
@@ -1761,7 +1761,7 @@
 				<image class="img" src="https://cdn.51chaidan.com/images/shareImg/shareImgStyle.png" mode="widthFix"></image>
 			</view>
 		</view>
-		<image class="guanbi" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="widthFix" catchtap="toogleGuidanceMask"></image>
+		<image class="guanbi" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="widthFix" catchtap="toogleGuidanceMaskcloss"></image>
 	</view>
 </view>
 

@@ -2605,6 +2605,16 @@ Page({
   dsbffunblock: function () {
     var _this = this;
     var res = this.data.zunmdata;
+
+    if(!res.isGoodsCanShare && _this.data.canShare!=1){
+      console.log('isGoodsCanShare','true 能 false不能分享')
+      if(!_this.data.referee){
+          _this.toogleGuidanceMask();
+          return false;
+      };
+    };
+
+
     var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
     var iftrnum = true;
     // if(_this.data.specialGoods == 1){
