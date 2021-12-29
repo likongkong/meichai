@@ -43,7 +43,13 @@
        <view catchtap="jumpBusOrderDetails" data-orderid='{{order.orderId}}'>
             <view class="orderBoxTop">
                 <view>订单编号:{{order.orderSN}}</view>
-                <view style="color:#90D2D6;">{{order.payStatusName}}</view>
+                <block wx:if='{{centerIndex == 6}}'>
+                    <view style="color:#90D2D6;">{{order.afterSaleTypeText}}</view>
+                </block>
+                <block wx:else>
+                    <view style="color:#90D2D6;">{{order.payStatusName}}</view>
+                </block>
+                
             </view>
             <view class="orderBoxTop" style="border-bottom: 2rpx solid #f5f5f5;margin-bottom:20rpx;padding-bottom:20rpx;">
                 <view class="userImgName">
@@ -93,7 +99,7 @@
                     <view class="orderAddressEve" wx:if='{{order.refundStatusText}}'>
                         <view>售后状态：{{order.refundStatusText}}</view>
                     </view>  
-                    <view class="orderAddressEve" wx:if='{{order.payStatusName}}'>
+                    <view class="orderAddressEve" wx:if='{{order.payStatusName && order.refundStatus == 0}}'>
                         <view>订单状态：{{order.payStatusName}}</view>
                     </view>
                     <view class="orderAddressEve" wx:if='{{order.shippingCode}}'>
