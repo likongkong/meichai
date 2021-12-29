@@ -127,7 +127,7 @@
        <view class="orderBottom" wx:elif='{{centerIndex == 6 || (order.payStatus != 0 && order.payStatus != 7 && order.payStatus != 8 &&order.payStatus != 5)}}'> <!-- 未支付 -->
                <view class="orderBottomOrderNumber">
                    <block wx:if='{{centerIndex == 6}}'>
-                        <view class="orderBottomButton" catchtap="afterSalesDetails" data-oid='{{order.orderId}}' data-index='1'>查看详情</view>
+                        <view class="orderBottomButton" catchtap="afterSalesDetails" data-oid='{{order.refId}}' data-index='1'>售后审核</view>
                    </block>
                    <block wx:else>
                         <view class="orderBottomButton" wx:if="{{order.payStatus != 5}}" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='3'>

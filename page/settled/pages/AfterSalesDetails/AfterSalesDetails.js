@@ -127,14 +127,14 @@ Page({
       'provinces': provinces,
       'citys': citys,
       'countys': countys,
-      'province': _this.data.province,
-      'city': _this.data.city,
-      'county': _this.data.county
+      'province': _this.data.province || '北京市',
+      'city': _this.data.city || '北京市',
+      'county': _this.data.county || '东城区'
     })
     this.setData({
       condition: !this.data.condition,
       cityback: !this.data.cityback
-    }) 
+    })
 
   },   
   // 复制单号

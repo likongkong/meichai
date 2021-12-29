@@ -126,12 +126,12 @@
             </view>
             <view class="orderBottomNavEve bottomButComWidth" catchtap="navigateBackLast" style="background:#fff;color:#90D2D6;border:2rpx solid #90D2D6;height:64rpx;">返回</view>
             <view class="orderBottomNavEve bottomButComWidth" wx:if='{{afterSaleData.order.refundStatus == 0}}' catchtap="commonBulletFrameFun" data-index='4'>驳回</view>
-            <view class="orderBottomNavEve bottomButComWidth">
+            <view class="orderBottomNavEve bottomButComWidth" wx:if='{{afterSaleData.order.afterSaleType == 2 || afterSaleData.order.afterSaleType == 1}}'>
                 <block wx:if='{{afterSaleData.order.afterSaleType == 2 && afterSaleData.order.refundStatus == 0}}'>
                     通过
                     <view class="shareButton" catchtap="adoptButton" data-index='1'></view>
                 </block>
-                <block wx:if='{{afterSaleData.order.afterSaleType == 2 && afterSaleData.order.refundStatus == 7}}'>
+                <block wx:if='{{afterSaleData.order.afterSaleType == 2 && (afterSaleData.order.refundStatus == 7 || afterSaleData.order.refundStatus == 6)}}'>
                     退款
                     <view class="shareButton" catchtap="commonBulletFrameFun" data-index='2'></view>
                 </block>
