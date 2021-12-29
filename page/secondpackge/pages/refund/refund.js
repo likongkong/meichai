@@ -237,7 +237,7 @@ Page({
       loginid:app.signindata.loginid,
       isProduce: app.signindata.isProduce,
       oid: options.oid,
-      type: options.type || 1,
+      type: options.type || 0,
     });  
     this.getInfo();
     // 判断是否授权
