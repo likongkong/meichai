@@ -1143,7 +1143,7 @@ App({
       });
     } else if (item_type == 9054) {   // 取件信息
       wx.navigateTo({
-        url: `/page/settled/pages/delivery/delivery`
+        url: `/page/settled/pages/delivery/delivery?${whref}`
       });
     }else if (item_type == 9055) {   // 物品信息
       wx.navigateTo({

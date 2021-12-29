@@ -524,7 +524,19 @@ Page({
     wx.navigateTo({
       url: "/page/secondpackge/pages/fillInOrderNum/fillInOrderNum?oid="+oid+'&type='+ind
     });
-  }
-
-
+  },
+  // 寄回物流
+  sendBackLogistics:function(w){
+    var id = w.target.dataset.id || w.currentTarget.dataset.id;
+    var gcover = w.target.dataset.gcover || w.currentTarget.dataset.gcover;
+    wx.navigateTo({  
+      url:'/page/settled/pages/sendBackLogistics/sendBackLogistics?id='+id+'&gcover='+gcover
+    })
+  },
+  jump: function (w) {
+    var whref = w.currentTarget.dataset.href || w.target.dataset.href;
+    var item_type = w.currentTarget.dataset.item_type || w.target.dataset.item_type || 0;
+    var wname = w.currentTarget.dataset.name || w.target.dataset.name || '美拆';
+    app.comjumpwxnav(item_type,whref,wname)
+  },
 })

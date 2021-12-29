@@ -128,10 +128,10 @@ Page({
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
           app.showToastC('提交成功')
-          var pages = getCurrentPages();
-          var prevPage = pages[pages.length - 2]; //上一个页面
-          prevPage.onLoadfun();
           setTimeout(function(){
+            var pages = getCurrentPages();
+            var prevPage = pages[pages.length - 2]; //上一个页面
+            prevPage.onLoadfun();
             wx.navigateBack()
           },1500)
         }else{
