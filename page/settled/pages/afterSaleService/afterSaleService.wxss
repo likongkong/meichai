@@ -295,6 +295,7 @@ page{
 .UnderevirRemarks{
   display: block;
   padding-top: 10rpx;
+  font-size: 24rpx;
 }
 .copyAddressUnder{
   font-size: 24rpx;
