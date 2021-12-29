@@ -169,7 +169,7 @@
        <view class="orderBottom">
             <view class="orderBottomOrderNumber">
                 <block>
-                    <view class="orderBottomButton" wx:if='{{status == 3 || status == 5}}' catchtap="refund" data-oid='{{oid}}' data-ind='1'>重新提交</view>
+                    <view class="orderBottomButton" wx:if='{{status == 3 || status == 5}}' catchtap="refund" data-oid='{{oid}}' data-ind='0'>重新提交</view>
                     <view class="orderBottomButton" wx:if='{{status == 2 || status == 1}}' catchtap="withdraw" data-iid='{{id}}' data-ind='1'>取消申请</view>
                     <view class="orderBottomButton" wx:if='{{status == 1}}' catchtap="refund" data-oid='{{oid}}'  data-ind='1'>修改申请</view>
                     <view class="orderBottomButton" wx:if='{{status == 2}}' style="width:255rpx;" catchtap="returnMessage" data-oid='{{oid}}' data-ind='0'>填写寄回快递单号</view>
