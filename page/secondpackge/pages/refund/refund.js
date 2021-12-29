@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '申请退款', 
+    c_title: '申请售后', 
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
@@ -221,8 +221,8 @@ Page({
     }
     wx.showLoading({ title: '加载中...'})
     var _this = this;
-    var q = Dec.Aese('mod=operate&operation=submitApplyRefund&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&after_sale_type='+this.data.checkedObj.afterSaleType.id + '&goods_status='+this.data.checkedObj.goodsStatus.id+ '&type='+this.data.checkedObj.refundType.id+'&oid='+_this.data.oid+'&describe='+this.data.currentWord+'&giftShipping='+this.data.refundOrderInputValue+'&describe_img='+this.data.obj.voucherPic);
-    console.log(app.signindata.comurl + 'order.php?' +'mod=operate&operation=submitApplyRefund&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&after_sale_type='+this.data.checkedObj.afterSaleType.id + '&goods_status='+this.data.checkedObj.goodsStatus.id+ '&type='+this.data.checkedObj.refundType.id+'&oid='+_this.data.oid+'&describe='+this.data.currentWord+'&giftShipping='+this.data.refundOrderInputValue+'&describe_img='+this.data.obj.voucherPic)
+    var q = Dec.Aese('mod=operate&operation=submitApplyRefund&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&after_sale_type='+this.data.checkedObj.afterSaleType.id + '&goods_status='+this.data.checkedObj.goodsStatus.id+ '&type='+this.data.checkedObj.refundType.id+'&oid='+_this.data.oid+'&describe='+this.data.currentWord+'&giftShipping='+this.data.refundOrderInputValue+'&describe_img='+this.data.obj.voucherPic+'&id='+this.data.infoData.id||0);
+    console.log(app.signindata.comurl + 'order.php?' +'mod=operate&operation=submitApplyRefund&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&after_sale_type='+this.data.checkedObj.afterSaleType.id + '&goods_status='+this.data.checkedObj.goodsStatus.id+ '&type='+this.data.checkedObj.refundType.id+'&oid='+_this.data.oid+'&describe='+this.data.currentWord+'&giftShipping='+this.data.refundOrderInputValue+'&describe_img='+this.data.obj.voucherPic+'&id='+this.data.infoData.id||0)
     wx.request({
       url: app.signindata.comurl + 'order.php' + q,
       method: 'GET',
@@ -260,9 +260,9 @@ Page({
       oid: options.oid,
       type: options.type || 0,
     });  
-    if(options.type == 1){
+    // if(options.type == 1){
       this.getInfo();
-    }
+    // }
     // 判断是否授权
     this.activsign();
   },
