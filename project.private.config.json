@@ -360,6 +360,12 @@
           "pathName": "page/secondpackge/pages/refund/refund",
           "query": "oid=862",
           "scene": null
+        },
+        {
+          "name": "征集图片上传",
+          "pathName": "page/settled/pages/collectPicUpload/collectPicUpload",
+          "query": "",
+          "scene": null
         }
       ]
     }
