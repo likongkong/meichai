@@ -116,7 +116,7 @@
 
 
        </view>
-       <view class="orderBottom" wx:if='{{order.shippingCode}}' style="padding-top:0;">
+       <view class="orderBottom" wx:if='{{order.shippingCode && centerIndex != 6}}' style="padding-top:0;">
             <view class="orderBoxTop">
                 <view class="WaybillNoDeletedBox">运单号:{{order.shippingName}}--{{order.shippingCode}}<image class="WaybillNoDeleted" src="https://cdn.51chaidan.com/images/brandSettledIcon/shanchu.png" mode="aspectFit" wx:if='{{order.payStatus == 4}}' catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='6'></image></view>
             </view>
