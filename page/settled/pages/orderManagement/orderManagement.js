@@ -824,7 +824,11 @@ Page({
    */
   onPullDownRefresh: function () {
     app.downRefreshFun(() => {
-      this.getData()
+      if(this.data.centerIndex == 6){
+        this.refundOrderList();
+      }else{
+        this.getData();
+      };
     })   
   },
 
@@ -832,7 +836,11 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this.getData(2)
+    if(this.data.centerIndex == 6){
+      this.refundOrderList(2);
+    }else{
+      this.getData(2);
+    };
   },
 
   /**
