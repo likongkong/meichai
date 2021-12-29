@@ -776,7 +776,7 @@
                         </view>
 
                         <!-- 寄回物流信息 -->
-                        <block wx:if="{{item.isSendBack}}">
+                        <!-- <block wx:if="{{item.isSendBack}}">
                             <block wx:if="{{item.sendBackStatus == 1}}">
                                 <block wx:if="{{item.sendBackAuditStatus==0 || item.sendBackAuditStatus==5 || item.sendBackAuditStatus==6}}">
                                     <view class='wholebottomaddright redborcol' style='margin-right:20rpx;position: relative;' data-href="status=0&sendBackId={{item.sendBackId}}"  data-item_type='9054' bindtap='comindellistjump'>商品寄回</view> 
@@ -788,11 +788,11 @@
                             <block wx:else>
                                 <view class='wholebottomaddright redborcol' style='margin-right:20rpx;position: relative;' data-id='{{item.sendBackId}}' data-gcover='{{item.gcover}}' bindtap='sendBackLogistics'>查看物流</view> 
                             </block>
-                        </block>
+                        </block> -->
                         <!-- 发货的查看物流 -->
-                        <block wx:else>
+                        <!-- <block wx:else> -->
                             <view class='wholebottomaddright' style='margin-right:20rpx;position: relative;' data-oid='{{item.oid}}' data-gcover='{{item.gcover}}' bindtap='lookatthelogistics'>查看物流</view> 
-                        </block>
+                        <!-- </block> -->
                                 
                         <view class='wholebottomaddright sharebox redborcol'  wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood && item.order_type!=13}}'>
                             <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>

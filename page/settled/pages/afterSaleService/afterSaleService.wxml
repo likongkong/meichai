@@ -106,18 +106,29 @@
                     <image class="orderBottomImgG" src="../../../../pages/images/explain.png" mode='aspectFit'></image>
                 </view>
                 <block>
-                    <!-- <view wx:if='{{status == 1}}' class="orderBottomButton">商品寄回</view> -->
+                    <!-- 寄回物流信息 -->
+                    <block wx:if="{{isSendBack}}">
+                        <block wx:if="{{sendBackStatus == 1}}">
+                            <block wx:if="{{sendBackAuditStatus==0 || sendBackAuditStatus==5 || sendBackAuditStatus==6}}">
+                                <view class='orderBottomButton' data-href="status=0&sendBackId={{sendBackId}}"  data-item_type='9054' bindtap='jump'>商品寄回</view> 
+                            </block>
+                            <block wx:else>
+                                <view class='orderBottomButton' data-href="status=1&sendBackId={{sendBackId}}"  data-item_type='9054' bindtap='jump'>取件信息</view> 
+                            </block>
+                        </block>
+                        <block wx:else>
+                            <view class='orderBottomButton' data-id='{{sendBackId}}' data-gcover='{{gcover}}' bindtap='sendBackLogistics'>查看物流</view> 
+                        </block>
+                    </block>
                     <view class="orderBottomButton" wx:if='{{status == 1}}' catchtap="refund" data-oid='{{oid}}'  data-ind='{{send_status?"1":"0"}}'>申请售后</view>
                     <view class="orderBottomButton" catchtap="{{is_self?'':'jumpTimDetail'}}" data-fid='{{brandId_user}}' data-tid='{{brandId_user}}' data-num='{{num}}'>
                         <button wx:if='{{is_self}}' open-type='contact' style='width:100%;height:100%;position:absolute;top:0;left:0;opacity: 0;z-index:1;'></button>
                         联系客服
                     </view>
                 </block>
-                
             </view>
        </view>
    </view>
-
 </template>
 <!-- 申请记录 列表 -->
 <template name='orderCommonApply'>
