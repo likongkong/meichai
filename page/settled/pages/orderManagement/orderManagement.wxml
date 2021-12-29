@@ -67,7 +67,7 @@
                     </view>
                 </view>
             </view>
-            <view class="orderAddress">
+            <view class="orderAddress" wx:if='{{centerIndex != 6}}'>
                 <view class="orderAddressEveWrap"
                 data-receipt="{{receipt}}"
                 catchtap='businesscooperationfunfz'> 
