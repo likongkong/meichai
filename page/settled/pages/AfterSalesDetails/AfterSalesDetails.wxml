@@ -350,10 +350,10 @@
     <!-- 底部按钮 -->
     <view class="AfterSDbottom">
         <view class="AfterSDbottomEve" catchtap="{{afterSaleData.is_self?'':'jumpTimDetail'}}" data-fid='{{afterSaleData.brandId_user}}' data-tid='{{afterSaleData.brandId_user}}' style="background:#FE2844;color:#fff;border: 2rpx solid #FE2844;"><button wx:if='{{afterSaleData.is_self}}' open-type='contact' style='width:100%;height:100%;position:absolute;top:0;left:0;opacity: 0;z-index:1;'></button>联系客服</view>
-        <view class="AfterSDbottomEve" style="margin:0 20rpx;" wx:if='{{afterSaleData.status == 2}}'>填写寄回快递单号</view>
-        <view class="AfterSDbottomEve" style="margin:0 20rpx;" wx:if='{{afterSaleData.status == 6}}'>修改寄回快递单号</view>
-        <view class="AfterSDbottomEve" catchtap="withdraw" wx:if='{{afterSaleData.status == 2 || afterSaleData.status == 1}}' >取消申请</view>
-        <view class="AfterSDbottomEve" catchtap="withdraw" wx:if='{{afterSaleData.status == 3 || afterSaleData.status == 5}}' >重新申请</view>
-        <view class="AfterSDbottomEve" catchtap="withdraw" wx:if='{{afterSaleData.status == 1}}' >修改申请</view>
+        <view class="AfterSDbottomEve" style="margin:0 20rpx;" wx:if='{{afterSaleData.status == 2}}' catchtap="returnMessage" data-oid='{{afterSaleData.oid}}' data-ind='0'>填写寄回快递单号</view>
+        <view class="AfterSDbottomEve" style="margin:0 20rpx;" wx:if='{{afterSaleData.status == 6}}' catchtap="returnMessage" data-oid='{{afterSaleData.oid}}' data-ind='1'>修改寄回快递单号</view>
+        <view class="AfterSDbottomEve"  catchtap="withdraw" data-iid='{{afterSaleData.id}}' data-ind='1'  wx:if='{{afterSaleData.status == 2 || afterSaleData.status == 1}}'>取消申请</view>
+        <view class="AfterSDbottomEve" catchtap="refund" data-oid='{{afterSaleData.oid}}' data-ind='1' wx:if='{{afterSaleData.status == 3 || afterSaleData.status == 5}}' >重新申请</view>
+        <view class="AfterSDbottomEve" catchtap="refund" data-ind='1' data-oid='{{afterSaleData.oid}}' wx:if='{{afterSaleData.status == 1}}' >修改申请</view>
     </view>
 </block>

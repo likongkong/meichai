@@ -524,41 +524,60 @@ Page({
   },
   // 取消申请
   withdraw(e){
-    var groupid = e.currentTarget.dataset.groupid || 0;
+    var iid = e.currentTarget.dataset.iid || 0;
+    var ind = e.currentTarget.dataset.ind || 0;
     wx.showModal({
       title:'取消申请',
       content: '你确定要取消售后申请吗？',
       confirmColor:'#02BB00',
       success: (res) => {
         if (res.confirm) {
-            if(e.currentTarget.dataset.fid == app.signindata.uid){
-              var id = e.currentTarget.dataset.tid;
-            }else{
-              var id = e.currentTarget.dataset.fid;
-            };
-            var q1 = Dec.Aese('mod=userSig&operation=del&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&from_userid='+id);
-            wx.showLoading({title: '加载中...',mask:true})
-            wx.request({
-              url: app.signindata.comurl + 'im.php' + q1,
-              method: 'GET',
-              header: {'Accept': 'application/json'},
-              success: function(res) {
-                console.log('删除会话=====',res)
-                wx.hideLoading();
-                if (res.data.ReturnCode == 200) {
-    
-                }else{
+          var q1 = Dec.Aese('mod=saleAfterList&operation=refundOperation&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id='+iid+'&type='+ind);
+          console.log('mod=saleAfterList&operation=refundOperation&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id='+iid+'&type='+ind)
+          wx.showLoading({title: '加载中...',mask:true})
+          wx.request({
+            url: app.signindata.comurl + 'order.php' + q1,
+            method: 'GET',
+            header: {'Accept': 'application/json'},
+            success: function(res) {
+              console.log('取消申请=====',res)
+              wx.hideLoading();
+              if (res.data.ReturnCode == 200) {
                   wx.showModal({
                     content: res.data.Msg || res.data.msg,
                     showCancel:false,
                     success: function (res) {}
-                  });          
-                };
-              },
-
-            })
+                  }); 
+                  _this.getDataUser();
+              }else{
+                wx.showModal({
+                  content: res.data.Msg || res.data.msg,
+                  showCancel:false,
+                  success: function (res) {}
+                });          
+              };
+            },
+      
+          })
         };
       },
     })
   },
+  // 申请售后
+  refund: function (e) {
+    var oid = e.currentTarget.dataset.oid || 0;
+    var ind = e.currentTarget.dataset.ind || 0; // 0 创建 1 修改
+    wx.navigateTo({
+      url: "../../../secondpackge/pages/refund/refund?oid="+oid+'&type='+ind
+    });
+  },
+  // 寄回信息填写
+  returnMessage(e){
+    var oid = e.currentTarget.dataset.oid || 0;
+    var ind = e.currentTarget.dataset.ind || 0; // 0 创建 1 修改
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/fillInOrderNum/fillInOrderNum?oid="+oid+'&type='+ind
+    });
+  }
+
 })
