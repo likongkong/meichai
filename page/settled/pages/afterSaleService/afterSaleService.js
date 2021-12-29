@@ -113,8 +113,14 @@ Page({
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
     });
 
-    this.getData();
-    this.getDataTim();
+    if(this.data.centerIndex == 4){
+      this.getDataTim();
+    }else if(this.data.centerIndex == 3){
+      this.getDataRecord()
+    }else{
+      this.getData();
+      this.getDataTim();
+    };
     
   },
   // 售后申请 获取数据
