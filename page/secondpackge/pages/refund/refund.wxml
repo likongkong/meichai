@@ -51,29 +51,29 @@
     </view> -->
     <view class="refundReason refundflex" data-type="0" data-popoutdata="{{infoData.afterSaleType}}" data-title="售后类型" catchtap="popout">
       <view style="width:200rpx;">售后类型<text>*</text></view>
-      <!-- <block wx:if="{{infoData.auditRefund == 2}}">
+      <!-- <block wx:if="{{type == 1}}">
         <view style="color:#000;" wx:for="{{infoData.afterSaleType}}" wx:key='key' wx:if="{{item.type_id == infoData.after_sale_type}}">{{item.type_name}}</view>
       </block>
       <block wx:else> -->
-        <view style="{{checkedObj.afterSaleType?'color:#000;':''}}"> {{checkedObj.afterSaleType?checkedObj.afterSaleType.name:'点击选择售后类型  >'}}</view>
+        <view style="{{checkedObj.afterSaleType?'color:#000;':''}}"> {{checkedObj.afterSaleType?checkedObj.afterSaleType.name+"  >":'点击选择售后类型  >'}}</view>
       <!-- </block> -->
     </view>
     <view class="refundReason refundflex" data-type="1" data-popoutdata="{{infoData.goodsStatus}}" data-title="商品状态" catchtap="popout">
       <view style="width:200rpx;">商品状态<text>*</text></view>
-      <!-- <block wx:if="{{infoData.auditRefund == 2}}">
+      <!-- <block wx:if="{{type == 1}}">
         <view style="color:#000;" wx:for="{{infoData.goodsStatus}}" wx:key='key' wx:if="{{item.type_id == infoData.goods_status}}">{{item.type_name}}</view>
       </block>
       <block wx:else> -->
-        <view style="{{checkedObj.goodsStatus?'color:#000;':''}}"> {{checkedObj.goodsStatus?checkedObj.goodsStatus.name:'点击选择商品状态  >'}}</view>
+        <view style="{{checkedObj.goodsStatus?'color:#000;':''}}"> {{checkedObj.goodsStatus?checkedObj.goodsStatus.name+"  >":'点击选择商品状态  >'}}</view>
       <!-- </block> -->
     </view>
     <view class="refundReason refundflex" data-type="2" data-popoutdata="{{infoData.refundType}}" data-title="申请原因" catchtap="popout">
       <view style="width:200rpx;">申请原因<text>*</text></view>
-      <!-- <block wx:if="{{infoData.auditRefund == 2}}">
+      <!-- <block wx:if="{{type == 1}}">
         <view style="color:#000;" wx:for="{{infoData.refundType}}" wx:key='key' wx:if="{{item.type_id == infoData.refund_cause}}">{{item.type_name}}</view>
       </block>
       <block wx:else> -->
-        <view style="{{checkedObj.refundType?'color:#000;':''}}"> {{checkedObj.refundType?checkedObj.refundType.name:'点击选择申请原因  >'}}</view>
+        <view style="{{checkedObj.refundType?'color:#000;':''}}"> {{checkedObj.refundType?checkedObj.refundType.name+"  >":'点击选择申请原因  >'}}</view>
       <!-- </block> -->
     </view>
     <!-- <view class="refundAmount refundflex">
