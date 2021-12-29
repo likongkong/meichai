@@ -512,8 +512,9 @@ Page({
   // 申请售后
   refund: function (e) {
     var oid = e.currentTarget.dataset.oid || 0;
+    var ind = e.currentTarget.dataset.ind || 0; // 0 创建 1 修改
     wx.navigateTo({
-      url: "../../../secondpackge/pages/refund/refund?oid="+oid
+      url: "../../../secondpackge/pages/refund/refund?oid="+oid+'&type='+ind
     });
   },
   // 寄回信息填写

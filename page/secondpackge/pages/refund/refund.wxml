@@ -4,7 +4,7 @@
 
 <view class="wrap">
 
-  <view class="contactUsWrap" wx:if="{{infoData.auditRefund != 2}}">
+  <view class="contactUsWrap" wx:if="{{type == 0}}">
     <text class="contactUsTxt">提交申请前，请先和客服协商售后事宜</text>
     <view class="contactUsBtn" style="position:relative;"><button open-type='contact' session-from='' style='width:100%;height:100%;position:absolute;top:0;left:0;opacity: 0;z-index:1;'></button>联系客服</view>
   </view>
@@ -49,32 +49,32 @@
     <!-- <view class="title">
       退款信息
     </view> -->
-    <view class="refundReason refundflex" data-type="0" data-popoutdata="{{infoData.afterSaleType}}" data-title="售后类型" catchtap="{{infoData.auditRefund != 2?'popout':''}}">
+    <view class="refundReason refundflex" data-type="0" data-popoutdata="{{infoData.afterSaleType}}" data-title="售后类型" catchtap="popout">
       <view style="width:200rpx;">售后类型<text>*</text></view>
-      <block wx:if="{{infoData.auditRefund == 2}}">
+      <!-- <block wx:if="{{infoData.auditRefund == 2}}">
         <view style="color:#000;" wx:for="{{infoData.afterSaleType}}" wx:key='key' wx:if="{{item.type_id == infoData.after_sale_type}}">{{item.type_name}}</view>
       </block>
-      <block wx:else>
+      <block wx:else> -->
         <view style="{{checkedObj.afterSaleType?'color:#000;':''}}"> {{checkedObj.afterSaleType?checkedObj.afterSaleType.name:'点击选择售后类型  >'}}</view>
-      </block>
+      <!-- </block> -->
     </view>
-    <view class="refundReason refundflex" data-type="1" data-popoutdata="{{infoData.goodsStatus}}" data-title="商品状态" catchtap="{{infoData.auditRefund != 2?'popout':''}}">
+    <view class="refundReason refundflex" data-type="1" data-popoutdata="{{infoData.goodsStatus}}" data-title="商品状态" catchtap="popout">
       <view style="width:200rpx;">商品状态<text>*</text></view>
-      <block wx:if="{{infoData.auditRefund == 2}}">
+      <!-- <block wx:if="{{infoData.auditRefund == 2}}">
         <view style="color:#000;" wx:for="{{infoData.goodsStatus}}" wx:key='key' wx:if="{{item.type_id == infoData.goods_status}}">{{item.type_name}}</view>
       </block>
-      <block wx:else>
+      <block wx:else> -->
         <view style="{{checkedObj.goodsStatus?'color:#000;':''}}"> {{checkedObj.goodsStatus?checkedObj.goodsStatus.name:'点击选择商品状态  >'}}</view>
-      </block>
+      <!-- </block> -->
     </view>
-    <view class="refundReason refundflex" data-type="2" data-popoutdata="{{infoData.refundType}}" data-title="申请原因" catchtap="{{infoData.auditRefund != 2?'popout':''}}">
+    <view class="refundReason refundflex" data-type="2" data-popoutdata="{{infoData.refundType}}" data-title="申请原因" catchtap="popout">
       <view style="width:200rpx;">申请原因<text>*</text></view>
-      <block wx:if="{{infoData.auditRefund == 2}}">
+      <!-- <block wx:if="{{infoData.auditRefund == 2}}">
         <view style="color:#000;" wx:for="{{infoData.refundType}}" wx:key='key' wx:if="{{item.type_id == infoData.refund_cause}}">{{item.type_name}}</view>
       </block>
-      <block wx:else>
+      <block wx:else> -->
         <view style="{{checkedObj.refundType?'color:#000;':''}}"> {{checkedObj.refundType?checkedObj.refundType.name:'点击选择申请原因  >'}}</view>
-      </block>
+      <!-- </block> -->
     </view>
     <!-- <view class="refundAmount refundflex">
       <view style="width:200rpx;">退款金额<text>*</text></view>
@@ -108,29 +108,29 @@
     </view>
   </view>
 
-  <block wx:if="{{infoData.auditRefund == 1}}">
+  <!-- <block wx:if="{{type == 0}}"> -->
     <view class="describeWrap">
       <view class="title">
-        补充描述
+        申请说明
       </view>
       <view class="describeBox">
-        <textarea class="areas" placeholder='补充描述，有助于更好的处理您的售后问题' maxlength="{{max}}" bindinput="inputs" > 
+        <textarea class="areas" placeholder='请您详细填写申请说明，上传凭证可提高通过率' maxlength="{{max}}" bindinput="inputs" value="{{infoData.refund_describe}}"> 
           <!-- <text class="hint">{{texts}}{{num}}{{textss}}</text> -->
         </textarea>
-        <text class="currentWordNumber">{{currentWordNumber}}/{{max}}</text>
+        <!-- <text class="currentWordNumber">{{currentWordNumber}}/{{max}}</text> -->
       </view>
     </view>
-  </block>
+  <!-- </block>
   <block wx:else> 
     <view class="describeWrap" wx:if="{{infoData.auditRefund == 2 && infoData.refund_describe}}">
       <view class="title">
-        补充描述
+        申请说明
       </view>
       <view class="describeBox">
         <view style="padding: 18rpx;box-sizing: border-box;height:212rpx;font-size: 28rpx;color: gray;">{{infoData.refund_describe}}</view>
       </view>
     </view>
-  </block>
+  </block> -->
 </view>
 
 <view class="cardWrap" style="padding:0 10rpx;">
@@ -143,9 +143,10 @@
   </settledForm>
 </view>
 
-<view class="auditTip" wx:if="{{infoData.auditRefund != 2}}">提交申请审核时间最多48小时，售后申请进度可在售后页面查看</view>
-<view class="submit" catchtap="submit" wx:if="{{infoData.auditRefund != 2}}">
-  提交申请
+<view class="auditTip" wx:if="{{type == 0}}">提交申请审核时间最多48小时，售后申请进度可在售后页面查看</view>
+<view class="submit" catchtap="submit">
+  <block wx:if="{{type == 0}}">提交申请</block>
+  <block wx:else>提交</block>
 </view>
 
 <view  wx:if="{{isTwoConfirmBox}}" class="twoConfirmMask" catchtouchmove="true" catchtap="twoConfirmBoxFun"> 
