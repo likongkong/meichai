@@ -107,7 +107,7 @@
                 </view>
                 <block>
                     <!-- <view wx:if='{{status == 1}}' class="orderBottomButton">商品寄回</view> -->
-                    <view class="orderBottomButton" wx:if='{{status == 1}}' catchtap="refund" data-oid='{{oid}}'  data-ind='0'>申请售后</view>
+                    <view class="orderBottomButton" wx:if='{{status == 1}}' catchtap="refund" data-oid='{{oid}}'  data-ind='{{send_status?"1":"0"}}'>申请售后</view>
                     <view class="orderBottomButton" catchtap="{{is_self?'':'jumpTimDetail'}}" data-fid='{{brandId_user}}' data-tid='{{brandId_user}}' data-num='{{num}}'>
                         <button wx:if='{{is_self}}' open-type='contact' style='width:100%;height:100%;position:absolute;top:0;left:0;opacity: 0;z-index:1;'></button>
                         联系客服
