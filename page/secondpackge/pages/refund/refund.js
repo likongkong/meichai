@@ -180,9 +180,13 @@ Page({
               })
             }
           }
+          if(_this.data.type == 0){
+            _this.setData({ id:0 })
+          }else{
+            _this.setData({id:infoData.id})
+          }
           _this.setData({
             infoData,
-            id:infoData.id || 0,
             [`listData[0].imageList`]:infoData.describe_img || '',
           })
           obj.voucherPic = infoData.describe_img || '';
