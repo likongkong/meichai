@@ -1,0 +1,17 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class="wrap">
+  <view class="card">
+    <settledForm 
+      id="settledForm"
+      statusBarHeightMc="{{statusBarHeightMc}}"
+      form="dynamicContent"
+      list="{{listData}}"
+      bind:bindchange="bindchange">
+    </settledForm>
+  </view>
+  <view class="footerWrap">
+      <view catchtap="submitAudit">确认上传</view>
+  </view>
+</view>

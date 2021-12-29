@@ -202,7 +202,8 @@
         "pages/solicitPictures/solicitPictures",
         "pages/afterSaleService/afterSaleService",
         "pages/collectPictures/collectPictures",
-        "pages/appliedAftersales/appliedAftersales"
+        "pages/appliedAftersales/appliedAftersales",
+        "pages/collectPicUpload/collectPicUpload"
       ]
     }
   ],

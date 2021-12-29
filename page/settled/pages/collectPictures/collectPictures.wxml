@@ -16,7 +16,7 @@
       form="dynamicContent"
       list="{{listData1}}"
       bind:bindchange="bindchange"
-      wx:if="{{activityReward==0}}">
+      wx:if="{{activityReward==1}}">
     </settledForm>
     <settledForm 
       id="settledForm2"
@@ -24,7 +24,7 @@
       form="dynamicContent"
       list="{{listData2}}"
       bind:bindchange="bindchange"
-      wx:if="{{activityReward==1}}">
+      wx:if="{{activityReward==2}}">
     </settledForm>
     <settledForm 
       id="settledForm3"
