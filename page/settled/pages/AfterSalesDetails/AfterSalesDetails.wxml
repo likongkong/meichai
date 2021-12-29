@@ -70,12 +70,12 @@
             </view>
         </view>
 
-        <view class="asDBoxTipDetail" style="margin-top:25rpx;padding:0 25rpx;">
+        <view class="asDBoxTipDetail" style="margin-top:25rpx;padding:0 25rpx;" wx:if='{{afterSaleData.order.afterSaleType != 1}}'>
             <view class="asDBoxTipDeEve">
                 <view class="orderMangTipCenterEve" style="padding-bottom:0;">
                     <view class="leftEveheight">寄回联系人</view>
                     <view>
-                        <input class="addressModifyInput" placeholder="请输入寄回联系人" bindinput='namefun' type='text' value='{{modifyName}}' type="text"></input>
+                        <input class="addressModifyInput" placeholder="请输入寄回联系人" bindinput='namefun' type='text' value='{{modifyName}}' type="text" placeholder-style="color:#AAAAAA;"></input>
                         <image class="addressMoImg" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="aspectFit"></image>
                     </view>
                 </view>                
@@ -84,7 +84,7 @@
                 <view class="orderMangTipCenterEve" style="padding-bottom:0;">
                     <view class="leftEveheight">手机号码</view>
                     <view>
-                        <input class="addressModifyInput" placeholder="请输入手机号码" type="text" value='{{modifyMobile}}' bindinput='telfun'></input>
+                        <input class="addressModifyInput" placeholder="请输入手机号码" type="text" value='{{modifyMobile}}' bindinput='telfun' placeholder-style="color:#AAAAAA;"></input>
                         <image class="addressMoImg" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="aspectFit"></image>
                     </view>
                 </view>                
@@ -105,7 +105,7 @@
                 <view class="orderMangTipCenterEve" style="padding-bottom:0;">
                     <view class="leftEveheight">详细地址</view>
                     <view>
-                        <textarea class="addressModifytTa" placeholder="请输入详细地址" value='{{deladdress}}' bindinput='deladdressfun' name='address'></textarea>
+                        <textarea class="addressModifytTa" placeholder="请输入详细地址" value='{{deladdress}}' bindinput='deladdressfun' name='address' placeholder-style="color:#AAAAAA;"></textarea>
                         <image class="addressMoImg" style="margin:0 0 0 10rpx;" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="aspectFit"></image>
                     </view>
 
