@@ -121,8 +121,8 @@
     <block wx:if='{{afterSaleData.order}}'>
         <view class="orderBottomNavigation" style="font-size:28rpx;" wx:if='{{afterSaleData.order.refundStatus != 2 && afterSaleData.order.refundStatus != 1}}'>
             <view class="bottomTip" wx:if='{{afterSaleData.order.refundStatus == 0}}'>
-                <block wx:if='{{afterSaleData.order.afterSaleType == 1}}'>该售后订单申请类型为仅退款，无需寄回商品，可直接退款</block>
-                <block wx:else>该售后订单申请类型为退货退退款，待商品寄回之后可进行退款处理</block>
+                <block wx:if='{{afterSaleData.order.afterSaleType == 1}}'>该订单可直接退款至用户账户</block>
+                <block wx:else>点击通过代表同意用户寄回商品，通过后可进行退款操作</block>
             </view>
             <view class="orderBottomNavEve bottomButComWidth" catchtap="navigateBackLast" style="background:#fff;color:#90D2D6;border:2rpx solid #90D2D6;height:64rpx;">返回</view>
             <view class="orderBottomNavEve bottomButComWidth" wx:if='{{afterSaleData.order.refundStatus == 0}}' catchtap="commonBulletFrameFun" data-index='4'>驳回</view>

@@ -165,7 +165,7 @@ page{
 }
 .orderAddress{
   width: 100%;
-  padding-top: 20rpx;
+  padding-bottom: 20rpx;
   overflow: hidden;
 }
 .orderAddressEve{

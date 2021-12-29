@@ -117,7 +117,7 @@ page{
 .bottomTip{
   width: 100%;
   padding: 20rpx 0;
-  font-size: 20rpx;
+  font-size: 24rpx;
   text-align: center;
   color: #FF0000;
   background: #fff;
