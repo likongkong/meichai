@@ -363,7 +363,7 @@ Page({
 
     } else if(index == 2){      
         api.checkOrderRefund({
-            orderId:selectData.order.orderId,	// Number订单id 对内唯一标识
+            orderId:selectData.order.oId,	// Number订单id 对内唯一标识
             customerId:selectData.order.userId // 	Number对应订单的用户id
         }).then(res => {
           console.log('查询是否分账',res)
@@ -415,13 +415,13 @@ Page({
 
     }else if(logisticsRefundModify == 2){
         api.brandRefund({
-            orderId:selectData.order.orderId,	// Number订单id 对内唯一标识
+            orderId:selectData.order.oId,	// Number订单id 对内唯一标识
             customerId:selectData.order.userId // 	Number对应订单的用户id
         }).then(res => {
           if (res.data.status_code == 200) {
               app.showToastC('退款成功，退款金额将在72小时之内原路返回到支付账户上。');
               setTimeout(()=>{
-                _this.getData();
+                _this.getDataBus();
               },2000);
           }else if(res.data.status_code == 410004){
               var infoData = res.data.data.Info || {};
@@ -442,13 +442,13 @@ Page({
                             'success': function (res) { 
                                   // 成功之后在调取一下退款接口
                                   api.brandRefund({
-                                      orderId:selectData.order.orderId,	// Number订单id 对内唯一标识
+                                      orderId:selectData.order.oId,	// Number订单id 对内唯一标识
                                       customerId:selectData.order.userId // 	Number对应订单的用户id
                                   }).then(res => {
                                     if (res.data.status_code == 200) {
                                         app.showToastC('退款成功，退款金额将在72小时之内原路返回到支付账户上。');
                                         setTimeout(()=>{
-                                          _this.getData();
+                                          _this.getDataBus();
                                         })
                                     }else{
                                       if(res.data && res.data.message){
@@ -482,7 +482,7 @@ Page({
             if (res.data.status_code == 200) {
                 app.showToastC('删除成功');
                 setTimeout(()=>{
-                  _this.getData();
+                  // _this.getData();
                 },2000);
             }else{
               if(res.data && res.data.message){
@@ -578,6 +578,11 @@ Page({
     wx.navigateTo({
       url: "/page/secondpackge/pages/fillInOrderNum/fillInOrderNum?oid="+oid+'&type='+ind
     });
-  }
+  },
+  closeCommonTip(){
+    this.setData({
+      commonBulletFrame:false,
+    })
+  },
 
 })

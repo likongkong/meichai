@@ -86,9 +86,7 @@
             </view>
             <!-- 售后 -->
             <view class="orderAddress" wx:if='{{centerIndex == 6}}'>
-                <view class="orderAddressEveWrap"
-                data-receipt="{{receipt}}"
-                catchtap='businesscooperationfunfz'> 
+                <view class="orderAddressEveWrap"> 
                     <view class="orderAddressEve" wx:if='{{order.applyTime}}'>
                         <view>申请日期：{{order.applyTime}}</view>
                     </view>
