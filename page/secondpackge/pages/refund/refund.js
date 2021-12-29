@@ -45,6 +45,7 @@ Page({
     obj:{
       voucherPic:''
     },
+    type:0,
   },
   copy:function(e){
     let num = e.currentTarget.dataset.num;
@@ -236,6 +237,7 @@ Page({
       loginid:app.signindata.loginid,
       isProduce: app.signindata.isProduce,
       oid: options.oid,
+      type: options.type || 1,
     });  
     this.getInfo();
     // 判断是否授权

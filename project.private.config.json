@@ -345,7 +345,7 @@
         },
         {
           "name": "申请售后",
-          "pathName": "page/settled/pages/appliedAftersales/appliedAftersales",
+          "pathName": "page/secondpackge/pages/refund/refund",
           "query": "",
           "scene": null
         },
