@@ -46,6 +46,7 @@ Page({
       voucherPic:''
     },
     type:0,
+    id:0
   },
   copy:function(e){
     let num = e.currentTarget.dataset.num;
@@ -181,9 +182,10 @@ Page({
           }
           _this.setData({
             infoData,
-            [`listData[0].imageList`]:infoData.describe_img,
+            id:infoData.id || 0,
+            [`listData[0].imageList`]:infoData.describe_img || '',
           })
-          obj.voucherPic = infoData.describe_img;
+          obj.voucherPic = infoData.describe_img || '';
         }else{
           app.showToastC(res.data.Msg)
         }
@@ -221,8 +223,8 @@ Page({
     }
     wx.showLoading({ title: '加载中...'})
     var _this = this;
-    var q = Dec.Aese('mod=operate&operation=submitApplyRefund&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&after_sale_type='+this.data.checkedObj.afterSaleType.id + '&goods_status='+this.data.checkedObj.goodsStatus.id+ '&type='+this.data.checkedObj.refundType.id+'&oid='+_this.data.oid+'&describe='+this.data.currentWord+'&giftShipping='+this.data.refundOrderInputValue+'&describe_img='+this.data.obj.voucherPic+'&id='+this.data.infoData.id||0);
-    console.log(app.signindata.comurl + 'order.php?' +'mod=operate&operation=submitApplyRefund&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&after_sale_type='+this.data.checkedObj.afterSaleType.id + '&goods_status='+this.data.checkedObj.goodsStatus.id+ '&type='+this.data.checkedObj.refundType.id+'&oid='+_this.data.oid+'&describe='+this.data.currentWord+'&giftShipping='+this.data.refundOrderInputValue+'&describe_img='+this.data.obj.voucherPic+'&id='+this.data.infoData.id||0)
+    var q = Dec.Aese('mod=operate&operation=submitApplyRefund&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&after_sale_type='+this.data.checkedObj.afterSaleType.id + '&goods_status='+this.data.checkedObj.goodsStatus.id+ '&type='+this.data.checkedObj.refundType.id+'&oid='+_this.data.oid+'&describe='+this.data.currentWord+'&giftShipping='+this.data.refundOrderInputValue+'&describe_img='+this.data.obj.voucherPic+'&id='+this.data.id);
+    console.log(app.signindata.comurl + 'order.php?' +'mod=operate&operation=submitApplyRefund&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&after_sale_type='+this.data.checkedObj.afterSaleType.id + '&goods_status='+this.data.checkedObj.goodsStatus.id+ '&type='+this.data.checkedObj.refundType.id+'&oid='+_this.data.oid+'&describe='+this.data.currentWord+'&giftShipping='+this.data.refundOrderInputValue+'&describe_img='+this.data.obj.voucherPic+'&id='+this.data.id)
     wx.request({
       url: app.signindata.comurl + 'order.php' + q,
       method: 'GET',
