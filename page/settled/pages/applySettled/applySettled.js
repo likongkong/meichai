@@ -39,14 +39,16 @@ Page({
         placeholder:'请输入手机号',
         value:'',
         name:'enterprisePhone'
-      },{
-        isRequired:true,
-        type:'text',
-        subtitle:'微信号',
-        placeholder:'请输入微信号',
-        value:'',
-        name:'wechatID'
-      },{
+      }
+      // ,{
+      //   isRequired:true,
+      //   type:'text',
+      //   subtitle:'微信号',
+      //   placeholder:'请输入微信号',
+      //   value:'',
+      //   name:'wechatID'
+      // }
+      ,{
         isRequired:true,
         type:'uploadImg',
         subtitle:'企业营业执照或与IP相关凭证',
@@ -258,7 +260,7 @@ Page({
             enterpriseName:brandInfo.firm_name,
             enterpriseContact:brandInfo.firm_linkman,
             enterprisePhone:brandInfo.firm_tel,
-            wechatID:brandInfo.wechat_number,
+            wechatID:brandInfo.wechat_number || '',
             businessLicense:brandInfo.certificate_img,
             ipName:brandInfo.ip_name,
             ipLogo:brandInfo.ip_logo,
@@ -321,11 +323,11 @@ Page({
       app.showToastC('手机号有误请重新填写',2000);
       return false;
     }
-    if(!obj.wechatID || obj.wechatID == ''){
-      this.selectComponent('#settledForm').scrollto('wechatID');
-      app.showToastC('请输入微信号',1500);
-      return false;
-    }
+    // if(!obj.wechatID || obj.wechatID == ''){
+    //   this.selectComponent('#settledForm').scrollto('wechatID');
+    //   app.showToastC('请输入微信号',1500);
+    //   return false;
+    // }
     if(!obj.businessLicense || obj.businessLicense == ''){
       this.selectComponent('#settledForm').scrollto('businessLicense');
       app.showToastC('请上传企业营业执照或与IP相关凭证',1500);

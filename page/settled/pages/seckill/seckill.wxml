@@ -511,14 +511,21 @@
       </view>
       <view class='pricedetailo'>
         <view class='pricedetailoleft'>运费
-            <text style='padding-left:8rpx;color:#47981e;' wx:if='{{freightiftr>0&&is_exhibition!=1}}'>(满￥{{defaultinformation.carriage.free}}包邮)</text>
+            <block wx:if='{{!zunmdata.isPayShippingFee}}'>
+               <text style='padding-left:8rpx;color:#47981e;' wx:if='{{freightiftr>0&&is_exhibition!=1}}'>(满￥{{defaultinformation.carriage.free}}包邮)</text>
+            </block>
         </view>
         <view class='pricedetailoright' style="{{zunmdata.goods_type==3?'color:#999':''}}">
-          <block wx:if='{{is_exhibition==1}}'>
-             <block wx:if='{{freightiftr>0}}'>{{freight}}</block>
-             <block wx:else>{{zunmdata.deliver}}</block>
-          </block>
-          <block wx:else>{{freight}}</block>        
+            <block wx:if='{{zunmdata.isPayShippingFee}}'>
+                {{zunmdata.shippingName}}到付
+            </block>
+            <block wx:else>
+                <block wx:if='{{is_exhibition==1}}'>
+                  <block wx:if='{{freightiftr>0}}'>{{freight}}</block>
+                  <block wx:else>{{zunmdata.deliver}}</block>
+                </block>
+                <block wx:else>{{freight}}</block> 
+            </block>      
         </view>
         
       </view>

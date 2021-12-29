@@ -3183,8 +3183,11 @@ Page({
                _this.toogleGuidanceMask();
             };
           }else{
-            wx.showShareMenu();
-            // {withShareTicket:true}
+            if(dataGinfo.isGoodsCanShare){
+              wx.showShareMenu();
+            }else{
+              wx.showShareMenu({withShareTicket:true});
+            }; 
           };
 
 
