@@ -155,9 +155,30 @@ Page({
         if (res.data.ReturnCode == 200) {
           let infoData = res.data.Info;
           let obj = _this.data.obj;
-          // for(var i=0;i<infoData.refundType.length;i++){
-          //     infoData.refundType[i].checked = false;
-          // }
+          for(var i=0;i<infoData.afterSaleType.length;i++){
+            if(infoData.afterSaleType[i].type_id == infoData.after_sale_type){
+              infoData.afterSaleType[i].checked = true;
+              _this.setData({
+                [`checkedObj.afterSaleType`]:{id:infoData.afterSaleType[i].type_id,name:infoData.afterSaleType[i].type_name}
+              })
+            }
+          }
+          for(var i=0;i<infoData.goodsStatus.length;i++){
+            if(infoData.goodsStatus[i].type_id == infoData.goods_status){
+              infoData.goodsStatus[i].checked = true;
+              _this.setData({
+                [`checkedObj.goodsStatus`]:{id:infoData.goodsStatus[i].type_id,name:infoData.goodsStatus[i].type_name}
+              })
+            }
+          }
+          for(var i=0;i<infoData.refundType.length;i++){
+            if(infoData.refundType[i].type_id == infoData.refund_cause){
+              infoData.refundType[i].checked = true;
+              _this.setData({
+                [`checkedObj.refundType`]:{id:infoData.refundType[i].type_id,name:infoData.refundType[i].type_name}
+              })
+            }
+          }
           _this.setData({
             infoData,
             [`listData[0].imageList`]:infoData.describe_img,
@@ -213,11 +234,11 @@ Page({
           _this.setData({
             isTwoConfirmBox: false,
           });
-          app.showToastC(res.data.Msg)
-          var pages = getCurrentPages();
-          var prevPage = pages[pages.length - 2]; //上一个页面
-          prevPage.onLoadfun();
+          app.showToastC(res.data.Msg,1500)
           setTimeout(function(){
+            var pages = getCurrentPages();
+            var prevPage = pages[pages.length - 2]; //上一个页面
+            prevPage.onLoadfun();
             wx.navigateBack()
           },1500)
         }else{
@@ -239,7 +260,9 @@ Page({
       oid: options.oid,
       type: options.type || 0,
     });  
-    this.getInfo();
+    if(options.type == 1){
+      this.getInfo();
+    }
     // 判断是否授权
     this.activsign();
   },

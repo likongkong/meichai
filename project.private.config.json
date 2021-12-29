@@ -372,6 +372,12 @@
           "pathName": "page/secondpackge/pages/fillInOrderNum/fillInOrderNum",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "page/settled/pages/task/task",
+          "query": "",
+          "scene": null
         }
       ]
     }
