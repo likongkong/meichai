@@ -433,6 +433,7 @@ Page({
   withdraw(e){
     var iid = e.currentTarget.dataset.iid || 0;
     var ind = e.currentTarget.dataset.ind || 0;
+    var _this = this;
     wx.showModal({
       title:'取消申请',
       content: '你确定要取消售后申请吗？',
