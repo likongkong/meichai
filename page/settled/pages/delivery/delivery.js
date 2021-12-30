@@ -303,6 +303,9 @@ Page({
                   timeList[i].time[j].selectedTime=true;
                   _this.setData({
                     timeIndex:i,
+                    parentindex:i,
+                    // selectedName:timeList[0].name,
+                    selectedTimeList:timeList[i].time,
                     endtime:timeList[i].time[j].EndTime,
                     startime:timeList[i].time[j].StartTime,
                     end_time:timeList[i].time[j].end_time,
@@ -315,8 +318,6 @@ Page({
             }
             _this.setData({
               timeList:timeList,
-              selectedName:timeList[0].name,
-              selectedTimeList:timeList[0].time,
             })
           }
         }else{
@@ -388,6 +389,14 @@ Page({
     this.setData({
       isVisitTtime:!this.data.isVisitTtime
     })
+    // console.log(this.data.selectedTimeList)
+    if(!this.data.isVisitTtime){
+      this.setData({
+        timeIndex:this.data.parentindex,
+        [`selectedTimeList[${index}].selectedTime`]:true,
+        
+      })
+    }
   },
   // 天改变
   timeChange(e){
