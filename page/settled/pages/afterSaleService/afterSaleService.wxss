@@ -305,6 +305,6 @@ page{
   line-height: 54rpx;
   text-align: center;
   background:#90D2D6;
-  margin: 10rpx auto 0;
+  margin: 10rpx auto 10rpx;
   border-radius: 10rpx;
 }

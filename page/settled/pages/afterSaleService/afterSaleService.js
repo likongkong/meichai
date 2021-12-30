@@ -75,7 +75,14 @@ Page({
   },
   jumpsearch:function(){
     // this.eldatalistfun(0);
-    this.getData();
+    if(this.data.centerIndex == 4){
+      this.getDataTim();
+    }else if(this.data.centerIndex == 3){
+      this.getDataRecord()
+    }else{
+      this.getData();
+    };
+
   },
   onFocus: function (w) {
     this.setData({
