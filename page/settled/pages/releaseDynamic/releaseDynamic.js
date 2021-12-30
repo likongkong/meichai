@@ -40,6 +40,13 @@ Page({
         mode:'multiple',
         storagelocation:'images/dynamic'
       },{
+        isRequired:true,
+        type:'uploadVideo',
+        subtitle:'添加视频',
+        name:'dynamicVideo',
+        src:'',
+        storagelocation:'images/video'
+      },{
         isRequired:false,
         type:'link',
         brand_id:'',
