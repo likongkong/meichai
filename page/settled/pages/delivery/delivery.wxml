@@ -170,6 +170,7 @@
             data-end_time="{{item.end_time}}" 
             data-isfinish="{{item.is_finish}}"
             data-index="{{index}}" 
+            data-parentindex="{{item.parentindex}}"
             catchtap="selectedTimeBtn"
           >
             <text>{{item.start_time}} ~ {{item.end_time}}</text>
