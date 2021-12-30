@@ -32,7 +32,7 @@
                 <view class="asDBoxTipDeEve">售后凭证</view>
                 <view class="asDBoxTipDeEve" style="border:0;padding: 25rpx 0 10rpx;">
                     <block wx:for='{{afterSaleData.order.DescribeImg}}' wx:key='key'>
-                        <image class="asDBoxTipDeEveImg" catchtap="preview" data-ind='{{index}}' src="{{item}}"  mode="aspectFit"></image>
+                        <image class="asDBoxTipDeEveImg" catchtap="preview" data-type='1' data-ind='{{index}}' src="{{item}}"  mode="aspectFit"></image>
                     </block>
                 </view>
             </block>
@@ -41,7 +41,7 @@
         </view>
 
         <view class="asDBoxTipDetail" style="margin-top:25rpx;font-size:28rpx;">
-        退款金额：￥{{afterSaleData.order.refundPrice}}
+        商品售价：￥{{afterSaleData.order.refundPrice}}
         </view>
 
         <view class="asDBoxTipDetail" style="margin-top:25rpx;padding:0 25rpx;">
@@ -65,7 +65,7 @@
             </view>
             <view class="asDBoxTipDeEve" style="border:0;padding: 25rpx 0 10rpx;" wx:if='{{afterSaleData.order.exchangeGoodsExtend && afterSaleData.order.exchangeGoodsExtend.length != 0}}'>
                 <block wx:for='{{afterSaleData.order.exchangeGoodsExtend}}' wx:key='key'>
-                    <image class="asDBoxTipDeEveImg" catchtap="preview" data-ind='{{index}}' src="{{item}}"  mode="aspectFit"></image>
+                    <image class="asDBoxTipDeEveImg" catchtap="preview" data-type='2' data-ind='{{index}}' src="{{item}}"  mode="aspectFit"></image>
                 </block>
             </view>
         </view>
@@ -118,28 +118,33 @@
     </view>
     
     <!-- 底部按钮 -->
-    <block wx:if='{{afterSaleData.order}}'>
+    <block wx:if='{{afterSaleData.order && afterSaleData.order.refundStatus != 8}}'>
         <view class="orderBottomNavigation" style="font-size:28rpx;" wx:if='{{afterSaleData.order.refundStatus != 2 && afterSaleData.order.refundStatus != 1}}'>
             <view class="bottomTip" wx:if='{{afterSaleData.order.refundStatus == 0}}'>
                 <block wx:if='{{afterSaleData.order.afterSaleType == 1}}'>该订单可直接退款至用户账户</block>
                 <block wx:else>点击通过代表同意用户寄回商品，通过后可进行退款操作</block>
             </view>
+
             <view class="orderBottomNavEve bottomButComWidth" catchtap="navigateBackLast" style="background:#fff;color:#90D2D6;border:2rpx solid #90D2D6;height:64rpx;">返回</view>
+
             <view class="orderBottomNavEve bottomButComWidth" wx:if='{{afterSaleData.order.refundStatus == 0}}' catchtap="commonBulletFrameFun" data-index='4'>驳回</view>
-            <view class="orderBottomNavEve bottomButComWidth" wx:if='{{afterSaleData.order.afterSaleType == 2 || afterSaleData.order.afterSaleType == 1}}'>
-                <block wx:if='{{afterSaleData.order.afterSaleType == 2 && afterSaleData.order.refundStatus == 0}}'>
+
+            <block wx:if='{{afterSaleData.order.afterSaleType == 2 && afterSaleData.order.refundStatus == 0}}'>
+                <view class="orderBottomNavEve bottomButComWidth" catchtap="adoptButton" data-index='1'>
                     通过
-                    <view class="shareButton" catchtap="adoptButton" data-index='1'></view>
-                </block>
-                <block wx:if='{{afterSaleData.order.afterSaleType == 2 && (afterSaleData.order.refundStatus == 7 || afterSaleData.order.refundStatus == 6)}}'>
+                </view>
+            </block>
+            <block wx:if='{{afterSaleData.order.afterSaleType == 2 && (afterSaleData.order.refundStatus == 7 || afterSaleData.order.refundStatus == 6)}}'>
+                <view class="orderBottomNavEve bottomButComWidth" catchtap="commonBulletFrameFun" data-index='2'>
                     退款
-                    <view class="shareButton" catchtap="commonBulletFrameFun" data-index='2'></view>
-                </block>
-                <block wx:elif='{{afterSaleData.order.afterSaleType == 1 && afterSaleData.order.refundStatus == 0}}'>
+                </view>
+            </block>
+            <block wx:if='{{afterSaleData.order.afterSaleType == 1 && afterSaleData.order.refundStatus == 0}}'>
+                <view class="orderBottomNavEve bottomButComWidth" catchtap="commonBulletFrameFun" data-index='2'>
                     通过并退款
-                    <view class="shareButton" catchtap="commonBulletFrameFun" data-index='2'></view>
-                </block>
-            </view>
+                </view>
+            </block>
+
         </view>
     </block>
     
@@ -314,7 +319,7 @@
                 <view class="asDBoxTipDeEve">售后凭证</view>
                 <view class="asDBoxTipDeEve" style="border:0;padding: 25rpx 0 10rpx;">
                     <block wx:for='{{afterSaleData.DescribeImg}}' wx:key='key'>
-                        <image class="asDBoxTipDeEveImg" catchtap="preview" data-ind='{{index}}' src="{{item}}"  mode="aspectFit"></image>
+                        <image class="asDBoxTipDeEveImg" catchtap="preview" data-type='1' data-ind='{{index}}' src="{{item}}"  mode="aspectFit"></image>
                     </block>
                 </view>
             </block>
@@ -337,7 +342,7 @@
                 <view class="asDBoxTipDeEve">寄回凭证</view>
                 <view class="asDBoxTipDeEve" style="border:0;padding: 25rpx 0 10rpx;">
                     <block wx:for='{{afterSaleData.exchangeGoodsExtend}}' wx:key='key'>
-                        <image class="asDBoxTipDeEveImg" catchtap="preview" data-ind='{{index}}' src="{{item}}"  mode="aspectFit"></image>
+                        <image class="asDBoxTipDeEveImg" catchtap="preview" data-type='2' data-ind='{{index}}' src="{{item}}"  mode="aspectFit"></image>
                     </block>
                 </view>
             </block>
@@ -349,10 +354,10 @@
 
     <!-- 底部按钮 -->
     <view class="AfterSDbottom">
-        <view class="AfterSDbottomEve" catchtap="{{afterSaleData.is_self?'':'jumpTimDetail'}}" data-fid='{{afterSaleData.brandId_user}}' data-tid='{{afterSaleData.brandId_user}}' style="background:#FE2844;color:#fff;border: 2rpx solid #FE2844;"><button wx:if='{{afterSaleData.is_self}}' open-type='contact' style='width:100%;height:100%;position:absolute;top:0;left:0;opacity: 0;z-index:1;'></button>联系客服</view>
-        <view class="AfterSDbottomEve" style="margin:0 20rpx;" wx:if='{{afterSaleData.status == 2}}' catchtap="returnMessage" data-oid='{{afterSaleData.oid}}' data-ind='0'>填写寄回快递单号</view>
-        <view class="AfterSDbottomEve" style="margin:0 20rpx;" wx:if='{{afterSaleData.status == 6}}' catchtap="returnMessage" data-oid='{{afterSaleData.oid}}' data-ind='1'>修改寄回快递单号</view>
-        <view class="AfterSDbottomEve"  catchtap="withdraw" data-iid='{{afterSaleData.id}}' data-ind='1'  wx:if='{{afterSaleData.status == 2 || afterSaleData.status == 1}}'>取消申请</view>
+        <view class="AfterSDbottomEve" catchtap="{{afterSaleData.is_self?'':'jumpTimDetail'}}" data-fid='{{afterSaleData.brandId_user}}' data-tid='{{afterSaleData.brandId_user}}' style="background:#FE2844;color:#fff;border: 2rpx solid #FE2844;{{afterSaleData.status==4?'':'margin-right:20rpx;'}}"><button wx:if='{{afterSaleData.is_self}}' open-type='contact' style='width:100%;height:100%;position:absolute;top:0;left:0;opacity: 0;z-index:1;'></button>联系客服</view>
+        <view class="AfterSDbottomEve" style="margin:0 20rpx 0 0;" wx:if='{{afterSaleData.status == 2}}' catchtap="returnMessage" data-oid='{{afterSaleData.oid}}' data-ind='0'>填写寄回快递单号</view>
+        <view class="AfterSDbottomEve" style="margin:0 20rpx 0 0;" wx:if='{{afterSaleData.status == 6}}' catchtap="returnMessage" data-oid='{{afterSaleData.oid}}' data-ind='1'>修改寄回快递单号</view>
+        <view class="AfterSDbottomEve" style="margin:0 20rpx 0 0;" catchtap="withdraw" data-iid='{{afterSaleData.id}}' data-ind='1'  wx:if='{{afterSaleData.status == 2 || afterSaleData.status == 1}}'>取消申请</view>
         <view class="AfterSDbottomEve" catchtap="refund" data-oid='{{afterSaleData.oid}}' data-ind='1' wx:if='{{afterSaleData.status == 3 || afterSaleData.status == 5}}' >重新申请</view>
         <view class="AfterSDbottomEve" catchtap="refund" data-ind='1' data-oid='{{afterSaleData.oid}}' wx:if='{{afterSaleData.status == 1}}' >修改申请</view>
     </view>

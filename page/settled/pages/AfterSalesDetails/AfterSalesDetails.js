@@ -150,7 +150,20 @@ Page({
   },
   preview(event) {
     let ind = event.currentTarget.dataset.ind || 0;
-    var DescribeImg = _this.data.afterSaleData.order.DescribeImg || [];
+    if(event.currentTarget.dataset.type == 1){  // 售后凭证
+        if(this.data.businessOrUser == 2){
+          var DescribeImg = this.data.afterSaleData.DescribeImg || [];
+        }else{
+          var DescribeImg = this.data.afterSaleData.order.DescribeImg || [];
+        };
+    }else{
+      if(this.data.businessOrUser == 2){ // 寄回凭证
+        var DescribeImg = this.data.afterSaleData.exchangeGoodsExtend || [];
+      }else{
+        var DescribeImg = this.data.afterSaleData.order.exchangeGoodsExtend || [];
+      }
+    };
+  
     wx.previewImage({
       current: DescribeImg[ind], // 当前显示图片的http链接
       urls: DescribeImg // 需要预览的图片http链接列表
@@ -283,6 +296,7 @@ Page({
      console.log('驳回或者通过=======',res)
      if (res.data.status_code == 200) {
         app.showModalC(res.data.message); 
+        _this.getDataBus();
      }else{
        if(res.data && res.data.message){
          app.showModalC(res.data.message); 

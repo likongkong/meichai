@@ -137,7 +137,7 @@
             <view class="obcrTop obcrTopTopSn">
                 <view class="obcrTopTopSnEve" style="font-size:24rpx;color:#000;">订单编号:{{order_sn}}<view class="copyCart" catchtap="copyCart" data-cart='{{order_sn}}'>复制</view>
                 </view>
-                <view class="obcrTopTopSnEve" style="color:#FF2742;padding-right:0;">{{pay_status_name}}</view>
+                <view class="obcrTopTopSnEve" style="color:#FF2742;padding-right:0;">{{afterSaleTypeText}}</view>
             </view>
             <view class="orderBoxContent" catchtap="afterSalesDetails" data-iid='{{id}}' data-istype='{{itemType}}'>
                 <image class="orderBoxContentImg" src="{{goods_img}}" mode="aspectFit"></image>
@@ -166,7 +166,7 @@
                    <text class="UnderevirRemarks" wx:if='{{rebut_text}}'>备注:{{rebut_text}}</text>
                </view>
            </view>
-           <view class="underReviewChid" style="margin-top:20rpx" wx:if='{{send_tel}}'>
+           <view class="underReviewChid" style="margin-top:20rpx" wx:if='{{send_tel && status != 4}}'>
                <view class="underReviewChidLeft">
                    <view class="UndereviewTxt">寄回地址</view>
                    <view class="copyAddressUnder" catchtap="copyCartAddess" data-add='{{send_man}}{{send_tel}}{{send_address}}'>复制地址</view>
