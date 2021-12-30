@@ -157,7 +157,7 @@
     <view class="visitTtimeContent">
       <view class="visitTtimeContentL">
         <block wx:for="{{timeList}}" wx:key="key">
-          <text class="{{selectedName == item.name?'active':''}}" data-name="{{item.name}}" data-index="{{index}}" catchtap="timeChange">{{item.name}}</text>
+          <text class="{{timeIndex == index?'active':''}}" data-name="{{item.name}}" data-index="{{index}}" catchtap="timeChange">{{item.name}}</text>
         </block>
       </view>
       <view class="visitTtimeContentR">
@@ -170,6 +170,7 @@
             data-end_time="{{item.end_time}}" 
             data-isfinish="{{item.is_finish}}"
             data-index="{{index}}" 
+            data-parentindex="{{item.parentindex}}"
             catchtap="selectedTimeBtn"
           >
             <text>{{item.start_time}} ~ {{item.end_time}}</text>

@@ -272,14 +272,27 @@ Page({
         if (res.data.ReturnCode == 200) {
           let timeList = res.data.List.timeList;
           let flag = false;
+
+          for(var i=0;i<timeList.length;i++){
+            for(var j=0;j<timeList[i].time.length;j++){
+              timeList[i].time[j].parentindex = i;
+            }
+          }
+
           if(_this.data.status == 1){
             for(var i=0;i<timeList[_this.data.skyName].time.length;i++){
               console.log(_this.data.savedStart_time,timeList[_this.data.skyName].time[i].StartTime)
               console.log(_this.data.savedEnd_date,timeList[_this.data.skyName].time[i].EndTime)
               if(timeList[_this.data.skyName].time[i].StartTime == _this.data.savedStart_time && timeList[_this.data.skyName].time[i].EndTime == _this.data.savedEnd_date){
                 timeList[_this.data.skyName].time[i].selectedTime=true;
+                console.log(i)
                 _this.setData({
-                  timeIndex:i,
+                  timeList:timeList,
+                  timeIndex:_this.data.skyName,
+                  parentindex:_this.data.skyName,
+                  sonindex:i,
+                  selectedName:timeList[_this.data.skyName].name,
+                  selectedTimeList:timeList[_this.data.skyName].time,
                   endtime:timeList[_this.data.skyName].time[i].EndTime,
                   startime:timeList[_this.data.skyName].time[i].StartTime,
                   end_time:timeList[_this.data.skyName].time[i].end_time,
@@ -287,12 +300,13 @@ Page({
                 })
               }
             }
-            _this.setData({
-              timeIndex:_this.data.skyName,
-              timeList:timeList,
-              selectedName:timeList[_this.data.skyName].name,
-              selectedTimeList:timeList[_this.data.skyName].time,
-            })
+            // _this.setData({
+              // timeIndex:_this.data.skyName,
+              // timeList:timeList,
+              // parentindex:i,
+              // sonindex:j,
+              
+            // })
           }else{
             for(var i=0;i<timeList.length;i++){
               if(flag){
@@ -303,6 +317,10 @@ Page({
                   timeList[i].time[j].selectedTime=true;
                   _this.setData({
                     timeIndex:i,
+                    parentindex:i,
+                    sonindex:j,
+                    // selectedName:timeList[0].name,
+                    selectedTimeList:timeList[i].time,
                     endtime:timeList[i].time[j].EndTime,
                     startime:timeList[i].time[j].StartTime,
                     end_time:timeList[i].time[j].end_time,
@@ -315,8 +333,6 @@ Page({
             }
             _this.setData({
               timeList:timeList,
-              selectedName:timeList[0].name,
-              selectedTimeList:timeList[0].time,
             })
           }
         }else{
@@ -388,6 +404,26 @@ Page({
     this.setData({
       isVisitTtime:!this.data.isVisitTtime
     })
+    if(!this.data.isVisitTtime){
+      for(var i=0;i<this.data.selectedTimeList.length;i++){
+        this.setData({
+          [`selectedTimeList[${i}].selectedTime`]:false,
+        })
+      }
+      for(var i=0;i<this.data.timeList.length;i++){
+        for(var j=0;j<this.data.timeList[i].time.length;j++){
+          this.setData({
+            [`timeList[${i}].time[${j}].selectedTime`]:false,
+          })
+        }
+      }
+      this.setData({
+        timeIndex:this.data.parentindex,
+        selectedTimeList:this.data.timeList[this.data.parentindex].time,
+        [`selectedTimeList[${this.data.sonindex}].selectedTime`]:true,
+      })
+      console.log(this.data.selectedTimeList)
+    }
   },
   // 天改变
   timeChange(e){
@@ -407,6 +443,7 @@ Page({
   // 时间选择
   selectedTimeBtn(e){
     let index = e.currentTarget.dataset.index;
+    let parentindex = e.currentTarget.dataset.parentindex;
     let endtime = e.currentTarget.dataset.endtime;
     let startime = e.currentTarget.dataset.startime;
     let end_time = e.currentTarget.dataset.end_time;
@@ -427,6 +464,8 @@ Page({
       }
       this.setData({
         sonTimeIndex:index,
+        parentindex:parentindex,
+        sonindex:index,
         endtime,
         startime,
         end_time,
