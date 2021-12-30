@@ -45,8 +45,10 @@ Page({
       iftrdetailpagetwo: false
     });
   },
-  iftrdetailpagen: function () {
+  iftrdetailpagen: function (e) {
+    var goodsDescDetails  = e.currentTarget.dataset.desc.replace(/<img/gi, '<img style="width:100%;height:auto;display:block;"');
     this.setData({
+      goodsDescDetails,
       iftrdetailpagetwo: true
     })
   },
@@ -152,9 +154,7 @@ paymentmony:function(cart_id){
         wx.stopPullDownRefresh();
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
-          var goodsDescDetails  = res.data.List.prerogativeList[0].desc.replace(/<img/gi, '<img style="width:100%;height:auto;display:block;"');
           _this.setData({
-            goodsDescDetails,
             infoData:res.data.Info,
             listData:res.data.List,
             memberExpireTime:_this.formatTime(res.data.Info.memberExpireTime,'Y年M月D日'),
