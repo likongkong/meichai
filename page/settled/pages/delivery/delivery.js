@@ -629,6 +629,8 @@ Page({
     this.setData({
       receivingaddress: false,
       tipbacktwo: false,
+      isPhone:true,
+      isPhone1:true,
     });
     this.getShowShipmentsTime();
   },

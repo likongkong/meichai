@@ -253,6 +253,21 @@ Page({
       }
     }) 
   },
+  // 跳转详情
+  jumpTimDetail(e){
+    var id = e.currentTarget.dataset.fid;
+    var comdata = this.data.infoData;
+    var order = {
+      order_id: comdata.oid || '',
+      order_name: comdata.gname || '',
+      photo_url: comdata.gcover || '',
+      price: comdata.amount || '',
+      style: comdata.roleName || '',
+    }
+    wx.navigateTo({ 
+      url: `/page/settled/pages/timHomePage/timHomePage?id=${id}&order=${JSON.stringify(order)}`
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
