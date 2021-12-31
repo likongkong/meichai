@@ -384,6 +384,12 @@
           "pathName": "page/settled/pages/delivery/delivery",
           "query": "status=0&sendBackId=28",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "page/settled/pages/dynamicDetails/dynamicDetails",
+          "query": "did=8114",
+          "scene": null
         }
       ]
     }

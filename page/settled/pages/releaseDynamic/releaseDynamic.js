@@ -32,21 +32,23 @@ Page({
         value:'',
         name:'dynamicContent'
       },{
-        isRequired:true,
+        isRequired:false,
         type:'uploadImg',
         subtitle:'添加图片（最多上传九张，建议上传比例1:1)',
         name:'dynamicPic',
         imageList:[],
         mode:'multiple',
         storagelocation:'images/dynamic'
-      },{
-        isRequired:true,
-        type:'uploadVideo',
-        subtitle:'添加视频',
-        name:'dynamicVideo',
-        src:'',
-        storagelocation:'images/video'
-      },{
+      },
+      // {
+      //   isRequired:false,
+      //   type:'uploadVideo',
+      //   subtitle:'添加视频',
+      //   name:'dynamicVideo',
+      //   src:'',
+      //   storagelocation:'images/video'
+      // },
+      {
         isRequired:false,
         type:'link',
         brand_id:'',
@@ -267,11 +269,11 @@ Page({
       app.showToastC('请输入动态内容',1500);
       return false;
     }
-    if(!obj.dynamicPic || obj.dynamicPic.length == 0){
-      this.selectComponent('#settledForm').scrollto('dynamicPic');
-      app.showToastC('请添加图片',1500);
-      return false;
-    }
+    // if(!obj.dynamicPic || obj.dynamicPic.length == 0){
+    //   this.selectComponent('#settledForm').scrollto('dynamicPic');
+    //   app.showToastC('请添加图片',1500);
+    //   return false;
+    // }
     // if(!obj.allowComment){
     //   obj.allowComment = 0
     // }
