@@ -306,7 +306,23 @@ Page({
   },
   adoptButton(){
       this.data.rejectOrAdopt = 1;
-      this.refundOperation();
+      if(!this.data.modifyName){
+        app.showModalC('寄回联系人不能为空')
+        return false;
+      };
+      if(!this.data.modifyMobile){
+        app.showModalC('手机号不能为空')
+        return false;
+      };
+      if(!this.data.province || !this.data.city || !this.data.county){
+        app.showModalC('地区不能为空')
+        return false;
+     };
+     if(!this.data.deladdress){
+        app.showModalC('详细地址不能为空')
+        return false;
+     };
+     this.refundOperation();
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
