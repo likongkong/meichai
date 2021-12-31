@@ -630,6 +630,7 @@ Page({
       receivingaddress: false,
       tipbacktwo: false,
     });
+    this.getShowShipmentsTime();
   },
   // 删除地址
   deladdress: function (event){
