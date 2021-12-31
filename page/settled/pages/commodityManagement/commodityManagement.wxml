@@ -65,7 +65,7 @@
        <view class="orderBottom" wx:if='{{itemStatus != 4}}'>
             <view class="orderBottomOrderNumber">
                  <!-- 展会商品只保留分享和销售效果 -->
-                <block wx:if='{{selectid == 3}}'>
+                <block wx:if='{{itemTypeName == "展会商品"}}'>
                     <block wx:if='{{itemStatus==1 || itemStatus==2 || itemStatus == 3}}'>
                         <view class="orderBottomButton" catchtap="{{!isCanShare?'shareImgTipFun':''}}"><button wx:if='{{isCanShare}}' data-num='{{num}}' style='width:100%;height:100%;position:absolute;top:0;right:0;opacity:0;' open-type='share'></button>分享</view>
                     </block>
