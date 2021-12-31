@@ -479,7 +479,7 @@ Page({
                                         app.showToastC('退款成功，退款金额将在72小时之内原路返回到支付账户上。');
                                         setTimeout(()=>{
                                           _this.getDataBus();
-                                        })
+                                        },2000)
                                     }else{
                                       if(res.data && res.data.message){
                                         app.showModalC(res.data.message); 
