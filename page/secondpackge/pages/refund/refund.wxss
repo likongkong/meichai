@@ -98,7 +98,7 @@ page{
   align-items: center;
 }
 .orderNumberWrap view{
-  font-size: 28rpx;
+  font-size: 24rpx;
   display: flex;
   align-items: center;
   color:#AAAAAA;
