@@ -62,6 +62,7 @@ Page({
       },{
         isRequired:true,
         type:'text',
+        inputType:'digit',
         subtitle:'商品售价',
         placeholder:'请输入售价金额',
         value:'',
@@ -71,6 +72,7 @@ Page({
       },{
         isRequired:true,
         type:'text',
+        inputType:'number',
         subtitle:'商品库存',
         placeholder:'请输入当前可售库存数',
         value:'',
@@ -107,6 +109,7 @@ Page({
       {
         isRequired:false,
         type:'text',
+        inputType:'number',
         subtitle:'消耗积分',
         placeholder:'无需消耗积分',
         value:'',
