@@ -20,10 +20,13 @@
         </scroll-view>
         <view class="cmScreen" catchtap="selectBoxFun">{{screenWords}}<image src="https://cdn.51chaidan.com/images/brandSettledIcon/filtrate.png" mode="aspectFit"></image></view>
     </view>
-
+    <!-- 售后 -->
+    <scroll-view class="marginAuto scrollViewTop" scroll-x="true" scroll-with-animation="true" style="height:80rpx;position: relative;background:#fff;" wx:if='{{centerIndex == 6}}'>
+        <view wx:for="{{afterSale}}" wx:key='key' id="ela{{item.num}}" class="classifyItemAfter {{afterSaleInd == item.num?'activeAfter':''}}" data-index="{{item.num}}" catchtap="classifyChangeAfter">{{item.name}}</view>
+    </scroll-view>
 
     <view class="marginAuto centerTxt" wx:for='{{order}}' wx:key='key'>
-        <template is="orderCommon" data="{{...item,num:index}}"></template>
+        <template is="orderCommon" data="{{...item,num:index,centerIndex,afterSaleInd}}"></template>
     </view>
     <!--  暂无数据  -->
     <view class='noDataCom' wx:if='{{order.length==0&&nodataiftr}}'>
@@ -40,7 +43,13 @@
        <view catchtap="jumpBusOrderDetails" data-orderid='{{order.orderId}}'>
             <view class="orderBoxTop">
                 <view>订单编号:{{order.orderSN}}</view>
-                <view style="color:#90D2D6;">{{order.payStatusName}}</view>
+                <block wx:if='{{centerIndex == 6}}'>
+                    <view style="color:#90D2D6;">{{order.afterSaleTypeText}}</view>
+                </block>
+                <block wx:else>
+                    <view style="color:#90D2D6;">{{order.payStatusName}}</view>
+                </block>
+                
             </view>
             <view class="orderBoxTop" style="border-bottom: 2rpx solid #f5f5f5;margin-bottom:20rpx;padding-bottom:20rpx;">
                 <view class="userImgName">
@@ -64,7 +73,7 @@
                     </view>
                 </view>
             </view>
-            <view class="orderAddress">
+            <view class="orderAddress" wx:if='{{centerIndex != 6}}'>
                 <view class="orderAddressEveWrap"
                 data-receipt="{{receipt}}"
                 catchtap='businesscooperationfunfz'> 
@@ -81,8 +90,33 @@
                     <view>买家留言:{{order.customerMessage}}</view>
                 </view>                    
             </view>
+            <!-- 售后 -->
+            <view class="orderAddress" wx:if='{{centerIndex == 6}}'>
+                <view class="orderAddressEveWrap"> 
+                    <view class="orderAddressEve" wx:if='{{order.applyTime}}'>
+                        <view>申请日期：{{order.applyTime}}</view>
+                    </view>
+                    <view class="orderAddressEve" wx:if='{{order.refundStatusText}}'>
+                        <view>售后状态：{{order.refundStatusText}}</view>
+                    </view>  
+                    <view class="orderAddressEve" wx:if='{{order.payStatusName && order.refundStatus == 0}}'>
+                        <view>订单状态：{{order.payStatusName}}</view>
+                    </view>
+                    <view class="orderAddressEve" wx:if='{{order.shippingCode}}'>
+                        <view>发货单号：{{order.shippingCode}}</view>
+                    </view>
+                    <view class="orderAddressEve" wx:if='{{order.waybillNumber}}'>
+                        <view>寄回单号：{{order.waybillNumber}}</view>
+                    </view>
+                    <view class="orderAddressEve" wx:if='{{order.setLogExtend}}'>
+                        <view>寄回留言：{{order.setLogExtend}}</view>
+                    </view>
+                </view>                   
+            </view>
+
+
        </view>
-       <view class="orderBottom" wx:if='{{order.shippingCode}}' style="padding-top:0;">
+       <view class="orderBottom" wx:if='{{order.shippingCode && centerIndex != 6}}' style="padding-top:0;">
             <view class="orderBoxTop">
                 <view class="WaybillNoDeletedBox">运单号:{{order.shippingName}}--{{order.shippingCode}}<image class="WaybillNoDeleted" src="https://cdn.51chaidan.com/images/brandSettledIcon/shanchu.png" mode="aspectFit" wx:if='{{order.payStatus == 4}}' catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='6'></image></view>
             </view>
@@ -90,14 +124,19 @@
        <view class="orderBottom" wx:if='{{order.isToyCabinet}}' style="padding-top:0;">
             <view class="orderBoxTopNew">该订单为玩具柜订单，暂时无法发货，请等待用户确认发货</view>
        </view>
-       <view class="orderBottom" wx:elif='{{order.payStatus != 0 && order.payStatus != 7 && order.payStatus != 8 &&order.payStatus != 5}}'> <!-- 未支付 -->
+       <view class="orderBottom" wx:elif='{{centerIndex == 6 || (order.payStatus != 0 && order.payStatus != 7 && order.payStatus != 8 &&order.payStatus != 5)}}'> <!-- 未支付 -->
                <view class="orderBottomOrderNumber">
-                   <view class="orderBottomButton" wx:if="{{order.payStatus != 5}}" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='3'>
-                       <block wx:if='{{order.shippingCode}}'>修改物流</block>
-                       <block wx:else>添加物流</block>
-                    </view>
-                   <!-- <view class="orderBottomButton" wx:if='{{order.isBrandCanRefund}}' catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='2'>退款</view> -->
-                   <view class="orderBottomButton" wx:if='{{order.payStatus !=4 && order.payStatus != 5}}' catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='1'>修改收货地址</view>
+                   <block wx:if='{{centerIndex == 6}}'>
+                        <view class="orderBottomButton" catchtap="afterSalesDetails" data-oid='{{order.refId}}' data-index='1'>售后审核</view>
+                   </block>
+                   <block wx:else>
+                        <view class="orderBottomButton" wx:if="{{order.payStatus != 5}}" catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='3'>
+                        <block wx:if='{{order.shippingCode}}'>修改物流</block>
+                        <block wx:else>添加物流</block>
+                        </view>
+                        <!-- <view class="orderBottomButton" wx:if='{{order.isBrandCanRefund}}' catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='2'>退款</view> -->
+                        <view class="orderBottomButton" wx:if='{{order.payStatus !=4 && order.payStatus != 5}}' catchtap="commonBulletFrameFun" data-num='{{num}}' data-index='1'>修改收货地址</view>
+                   </block>
                </view>
        </view>
    </view>

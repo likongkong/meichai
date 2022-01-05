@@ -42,8 +42,17 @@ Page({
       {name:'待支付',num:'0'},
       {name:'待发货',num:'2'},
       {name:'已发货',num:'4'},
-      {name:'已完成',num:'5'}
+      {name:'已完成',num:'5'},
+      {name:'售后',num:'6'}
     ], // 支付状态 
+    afterSale:[
+      {name:'全部',num:'-1'},
+      {name:'待审核',num:'0'},
+      {name:'待退款',num:'1'},
+      {name:'已驳回',num:'2'},
+      {name:'已退款',num:'3'},
+    ],
+    afterSaleInd:'-1',
     subLedger: 0 , // 1 已分账 2 未分账
     countOrder:0,
     nodataiftr:false,
@@ -56,7 +65,13 @@ Page({
     screenWords:'筛选',
     orderType:0
   },
-
+  // 售后详情
+  afterSalesDetails(w){
+    let oid = w.currentTarget.dataset.oid || '';
+    wx.navigateTo({
+      url: "/page/settled/pages/AfterSalesDetails/AfterSalesDetails?oid="+oid+'&bou=1'
+    });
+  },
   selectCap(e){
     let index = e.currentTarget.dataset.index;
     let screenWords = e.currentTarget.dataset.word;
@@ -559,8 +574,12 @@ Page({
     let ele = '#ele' + index;
     that.setData({
       centerIndex:index,
-    })
-    this.getData();
+    });
+    if(index == 6){
+      this.refundOrderList();
+    }else{
+      this.getData();
+    };
     //创建节点选择器
     var query = wx.createSelectorQuery();
     //选择id
@@ -571,6 +590,24 @@ Page({
       })
     })
   },  
+  classifyChangeAfter(e){
+    let that = this;
+    let index = e.currentTarget.dataset.index || 0;
+    let ela = '#ela' + index;
+    that.setData({
+      afterSaleInd:index,
+    })
+    this.refundOrderList();
+    //创建节点选择器
+    var query = wx.createSelectorQuery();
+    //选择id
+    query.select(ela).boundingClientRect();
+    query.exec(function(res) {
+      that.setData({
+        scrollleft:e.currentTarget.offsetLeft - wx.getSystemInfoSync().windowWidth/2 + (res[0].width/2)
+      })
+    })
+  }, 
   // input 值改变
   inputChange: function (e) {
     this.setData({
@@ -643,9 +680,59 @@ Page({
     };
     
   },
+  // 获取售后数据
+  refundOrderList(num=1){
+    var _this = this;
+    if (num==1){
+      _this.setData({countOrder:0,page : 1,nodataiftr:false});
+    }else{
+      var pagenum = _this.data.page;
+      _this.data.page = ++pagenum;
+    };
+     api.refundOrderList({
+       'searchValue':_this.data.ordername,
+       'payStatus':_this.data.afterSaleInd,
+       'brandId':_this.data.brandid || 0,
+       'pageId':_this.data.page,
+       'orderType':_this.data.orderType
+     }).then((res) => {
+      console.log('售后列表数据=======',res)
+      _this.setData({nodataiftr:true})
+      if (res.data.status_code == 200) {
+          var order = res.data.data.List.order || [];
+          if(order && order.length != 0){
+            order.forEach(element => {
+               if(element.order.payTime){
+                  element.order.payTimeTrans = _this.toDate(element.order.payTime);
+               };
+            });
+          };
+          console.log(order)
+
+          if (num==1){
+              var countOrder =  res.data.data.Info.order.count || 0;
+              var brand = res.data.data.List.brand || [];
+              _this.setData({
+                countOrder,
+                brand,
+                order
+              });
+          }else{
+            var orderData = [..._this.data.order,...order]
+            _this.setData({
+              order:orderData
+            });
+          };
+      }else{
+        if(res.data && res.data.message){
+          app.showModalC(res.data.message); 
+        };        
+      };
+     })
+  },
   // 获取数据
   getData(num=1){
-     var _this = this;
+    var _this = this;
     if (num==1){
       _this.setData({countOrder:0,page : 1,nodataiftr:false});
     }else{
@@ -737,7 +824,11 @@ Page({
    */
   onPullDownRefresh: function () {
     app.downRefreshFun(() => {
-      this.getData()
+      if(this.data.centerIndex == 6){
+        this.refundOrderList();
+      }else{
+        this.getData();
+      };
     })   
   },
 
@@ -745,7 +836,11 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this.getData(2)
+    if(this.data.centerIndex == 6){
+      this.refundOrderList(2);
+    }else{
+      this.getData(2);
+    };
   },
 
   /**

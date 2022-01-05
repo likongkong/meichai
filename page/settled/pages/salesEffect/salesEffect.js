@@ -299,7 +299,7 @@ Page({
    */
   onShow: function () {
 
-    if(this.data.timeaddis && _this.data.salesEffectInfo && _this.data.salesEffectInfo.summary.status !=3){
+    if(this.data.timeaddis && this.data.salesEffectInfo && this.data.salesEffectInfo.summary.status !=3){
       this.countdowntime(this.data.timeaddis)
     }
     

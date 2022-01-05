@@ -32,14 +32,23 @@ Page({
         value:'',
         name:'dynamicContent'
       },{
-        isRequired:true,
+        isRequired:false,
         type:'uploadImg',
         subtitle:'添加图片（最多上传九张，建议上传比例1:1)',
         name:'dynamicPic',
         imageList:[],
         mode:'multiple',
         storagelocation:'images/dynamic'
-      },{
+      },
+      {
+        isRequired:false,
+        type:'uploadVideo',
+        subtitle:'添加视频',
+        name:'dynamicVideo',
+        src:'',
+        storagelocation:'images/video'
+      },
+      {
         isRequired:false,
         type:'link',
         brand_id:'',
@@ -61,8 +70,10 @@ Page({
       // },
     ],
     
-    obj:{},
-
+    obj:{
+      dynamicPic:'',
+      dynamicVideo:''
+    },
   },
   /**
    * 生命周期函数--监听页面加载
@@ -260,11 +271,11 @@ Page({
       app.showToastC('请输入动态内容',1500);
       return false;
     }
-    if(!obj.dynamicPic || obj.dynamicPic.length == 0){
-      this.selectComponent('#settledForm').scrollto('dynamicPic');
-      app.showToastC('请添加图片',1500);
-      return false;
-    }
+    // if(!obj.dynamicPic || obj.dynamicPic.length == 0){
+    //   this.selectComponent('#settledForm').scrollto('dynamicPic');
+    //   app.showToastC('请添加图片',1500);
+    //   return false;
+    // }
     // if(!obj.allowComment){
     //   obj.allowComment = 0
     // }
@@ -275,7 +286,7 @@ Page({
     // let data = `mod=community&operation=establish&uid=${this.data.uid}&loginid=${this.data.loginid}&brand_id=${obj.associationIp}&title=${obj.dynamicContent}&illustrated_id=${obj.fieldGuideId?obj.fieldGuideId:''}&imgArr=${obj.dynamicPic}&allowComment=${obj.allowComment}&id=${this.data.id}`
 
     let title = encodeURIComponent(obj.dynamicContent.split('\n').join('hc'));
-    let data = `mod=community&operation=establish&uid=${this.data.uid}&loginid=${this.data.loginid}&brand_id=${obj.associationIp}&title=${title}&illustrated_id=${obj.fieldGuideId?obj.fieldGuideId:''}&imgArr=${obj.dynamicPic}&allowComment=0&id=${this.data.id}`
+    let data = `mod=community&operation=establish&uid=${this.data.uid}&loginid=${this.data.loginid}&brand_id=${obj.associationIp}&title=${title}&illustrated_id=${obj.fieldGuideId?obj.fieldGuideId:''}&imgArr=${obj.dynamicPic}&videoArr=${obj.dynamicVideo}&allowComment=0&id=${this.data.id}`
     var q = Dec.Aese(data);
     console.log(`${app.signindata.comurl}?${data}`)
     wx.request({

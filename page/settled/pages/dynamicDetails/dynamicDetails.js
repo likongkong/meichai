@@ -83,7 +83,14 @@ Page({
       _this.setData({autofocus: true})
     },600)
   }, 
-
+  swiperChange(e){
+    console.log(e.detail.current)
+    if(e.detail.current == 0){
+      // this.data.videoCtx.play();
+    }else{
+      this.data.videoCtx.pause();
+    }
+  },
   //监听input获得焦点
   bindfocus: function (e) {
     let that = this;
@@ -198,6 +205,7 @@ Page({
       avatarUrl: app.signindata.avatarUrl,
       isProduce: app.signindata.isProduce,
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
+      videoCtx:wx.createVideoContext('myVideo', this)
     });
     this.getData();
     this.getComments();

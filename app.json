@@ -137,6 +137,7 @@
         "pages/blankPage/blankPage",
         "pages/draw/draw",
         "pages/refund/refund",
+        "pages/fillInOrderNum/fillInOrderNum",
         "pages/redEnvelopeList/redEnvelopeList",
         "pages/mobileShellList/mobileShellList",
         "pages/isItaVIPTicket/isItaVIPTicket",
@@ -202,8 +203,9 @@
         "pages/solicitPictures/solicitPictures",
         "pages/afterSaleService/afterSaleService",
         "pages/collectPictures/collectPictures",
-        "pages/appliedAftersales/appliedAftersales",
-        "pages/collectPicUpload/collectPicUpload"
+        "pages/collectPicUpload/collectPicUpload",
+        "pages/AfterSalesDetails/AfterSalesDetails",
+        "pages/appliedAftersales/appliedAftersales"
       ]
     }
   ],

@@ -1228,7 +1228,7 @@
                             bindtap='lookatthelogistics'>查看物流</view> -->
 
                         <!-- 寄回物流信息 -->
-                        <block wx:if="{{comdata.isSendBack}}">
+                        <!-- <block wx:if="{{comdata.isSendBack}}">
                             <block wx:if="{{comdata.sendBackStatus == 1}}">
                                 <block wx:if="{{item.sendBackAuditStatus==0 || item.sendBackAuditStatus==5 || item.sendBackAuditStatus==6}}">
                                     <view class='totalmoncright redborcol' style='position: relative;' data-href="status=0&sendBackId={{item.sendBackId}}"  data-item_type='9054' bindtap='comindellistjump'>商品寄回</view> 
@@ -1240,11 +1240,11 @@
                             <block wx:else>
                                 <view class='totalmoncright redborcol' style='position: relative;' data-id='{{comdata.sendBackId}}' data-gcover='{{comdata.gcover}}' bindtap='sendBackLogistics'>查看物流</view> 
                             </block>
-                        </block>
+                        </block> -->
                         <!-- 发货的查看物流 -->
-                        <block wx:else>
+                        <!-- <block wx:else> -->
                             <view class='totalmoncright' style='position: relative;' data-oid='{{comdata.oid}}' data-gcover='{{comdata.gcover}}' bindtap='lookatthelogistics'>查看物流</view> 
-                        </block>
+                        <!-- </block> -->
 
                         <!-- <view class='totalmoncright' wx:if='{{comdata.order_type==1}}'
                             style='color:#ff2840;border:1rpx solid #ff2840;position:relative;margin-right:10rpx;'

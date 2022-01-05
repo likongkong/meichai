@@ -17,7 +17,7 @@ Page({
     payStatus:[
       {name:'售后申请',num:'1'},
       // {name:'处理中',num:'2'},
-      // {name:'申请记录',num:'3'},
+      {name:'申请记录',num:'3'},
       {name:'客服消息',num:'4'}
     ], 
     centerIndex:'1',
@@ -28,6 +28,19 @@ Page({
     conversationList:[]
 
   },
+  // 申请售后
+  jumpTimDetailRefund(e){
+    app.getUserProfile((res,userInfo) => {
+        this.refund(e)     
+    },'',1)
+  },
+  // 售后详情
+  afterSalesDetails(w){
+    let iid = w.currentTarget.dataset.iid || '';
+    wx.navigateTo({
+      url: "/page/settled/pages/AfterSalesDetails/AfterSalesDetails?oid="+iid+'&bou=2'
+    });
+  },  
   classifyChange(e){
     let that = this;
     let index = e.currentTarget.dataset.index || 0;
@@ -38,6 +51,8 @@ Page({
 
     if(this.data.centerIndex == 4){
       this.getDataTim();
+    }else if(this.data.centerIndex == 3){
+      this.getDataRecord()
     }else{
       this.getData();
     };
@@ -65,7 +80,14 @@ Page({
   },
   jumpsearch:function(){
     // this.eldatalistfun(0);
-    this.getData();
+    if(this.data.centerIndex == 4){
+      this.getDataTim();
+    }else if(this.data.centerIndex == 3){
+      this.getDataRecord()
+    }else{
+      this.getData();
+    };
+
   },
   onFocus: function (w) {
     this.setData({
@@ -103,11 +125,17 @@ Page({
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
     });
 
-    this.getData();
-    this.getDataTim();
+    if(this.data.centerIndex == 4){
+      this.getDataTim();
+    }else if(this.data.centerIndex == 3){
+      this.getDataRecord()
+    }else{
+      this.getData();
+      this.getDataTim();
+    };
     
   },
-  // 获取数据
+  // 售后申请 获取数据
   getData(num=1){
     var _this = this;
     if (num==1){
@@ -157,6 +185,57 @@ Page({
 
     })
   },
+  // 申请记录 获取数据
+  getDataRecord(num=1){
+    var _this = this;
+    if (num==1){
+      _this.setData({order : [],page : 1,nodataiftr:false});
+    }else{
+      var pagenum = _this.data.page;
+      _this.data.page = ++pagenum;
+    };
+
+    var q1 = Dec.Aese('mod=saleAfterList&operation=applyList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&page='+_this.data.page+'&search='+_this.data.ordername);
+
+    console.log('mod=saleAfterList&operation=applyList&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&page='+_this.data.page+'&search='+_this.data.ordername)
+
+    wx.showLoading({title: '加载中...',mask:true})
+    wx.request({
+      url: app.signindata.comurl + 'order.php' + q1,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function(res) {
+        console.log('申请记录=列表=====',res)
+        wx.stopPullDownRefresh();
+        wx.hideLoading();
+        if (res.data.ReturnCode == 200) {
+            var order = res.data.List || [];
+            if (num==1){
+                _this.setData({
+                  order,
+                  nodataiftr:true
+                });
+            }else{
+              if(order && order.length !=0){
+                _this.setData({
+                  order:[..._this.data.order,...order]
+                });
+              }else{
+                app.showToastC('暂无更多数据');
+              };
+            };
+        }else{
+          wx.showModal({
+            content: res.data.Msg || res.data.msg,
+            showCancel:false,
+            success: function (res) {}
+          });          
+        };
+      },
+
+    })
+  },
+
   // 获取数据
   getDataTim(num=1){
     var _this = this;
@@ -249,6 +328,8 @@ Page({
     app.downRefreshFun(() => {
       if(this.data.centerIndex == 4){
           this.getDataTim(1);
+      }else if(this.data.centerIndex == 3){
+          this.getDataRecord(1);
       }else{
           this.getData(1);
       };
@@ -261,6 +342,8 @@ Page({
   onReachBottom: function () {
     if(this.data.centerIndex == 4){
         this.getDataTim(2);
+    }else if(this.data.centerIndex == 3){
+        this.getDataRecord(2);
     }else{
         this.getData(2);
     };
@@ -287,9 +370,18 @@ Page({
   // 复制单号
   copyCart(w){
     var cart = w.currentTarget.dataset.cart || w.target.dataset.cart || '';
-    var _this = this;
     wx.setClipboardData({
       data: cart || '',
+      success: function (res) {
+        app.showToastC('复制成功');
+      }
+    });
+  },
+  // 复制单号
+  copyCartAddess(w){
+    var add = w.currentTarget.dataset.add || w.target.dataset.add || '';
+    wx.setClipboardData({
+      data: add || '',
       success: function (res) {
         app.showToastC('复制成功');
       }
@@ -349,7 +441,48 @@ Page({
       url: `/page/settled/pages/timHomePage/timHomePage?id=${id}&groupid=${groupid}`
     });
   },
-
+  // 取消申请
+  withdraw(e){
+    var iid = e.currentTarget.dataset.iid || 0;
+    var ind = e.currentTarget.dataset.ind || 0;
+    var _this = this;
+    wx.showModal({
+      title:'取消申请',
+      content: '你确定要取消售后申请吗？',
+      confirmColor:'#02BB00',
+      success: (res) => {
+        if (res.confirm) {
+          var q1 = Dec.Aese('mod=saleAfterList&operation=refundOperation&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id='+iid+'&type='+ind);
+          console.log('mod=saleAfterList&operation=refundOperation&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id='+iid+'&type='+ind)
+          wx.showLoading({title: '加载中...',mask:true})
+          wx.request({
+            url: app.signindata.comurl + 'order.php' + q1,
+            method: 'GET',
+            header: {'Accept': 'application/json'},
+            success: function(res) {
+              console.log('取消申请=====',res)
+              wx.hideLoading();
+              if (res.data.ReturnCode == 200) {
+                  wx.showModal({
+                    content: res.data.Msg || res.data.msg,
+                    showCancel:false,
+                    success: function (res) {}
+                  }); 
+                  _this.getDataRecord();
+              }else{
+                wx.showModal({
+                  content: res.data.Msg || res.data.msg,
+                  showCancel:false,
+                  success: function (res) {}
+                });          
+              };
+            },
+      
+          })
+        };
+      },
+    })
+  },
   deleteConversation(e) {
     var _this = this;
     // var id = e.currentTarget.dataset.id || 0;
@@ -389,14 +522,34 @@ Page({
       },
     })
   },
+  // 申请售后
   refund: function (e) {
     var oid = e.currentTarget.dataset.oid || 0;
+    var ind = e.currentTarget.dataset.ind || 0; // 0 创建 1 修改
     wx.navigateTo({
-      url: "../../../secondpackge/pages/refund/refund?oid="+oid
+      url: "../../../secondpackge/pages/refund/refund?oid="+oid+'&type='+ind
     });
   },
-
-
-
-
+  // 寄回信息填写
+  returnMessage(e){
+    var oid = e.currentTarget.dataset.oid || 0;
+    var ind = e.currentTarget.dataset.ind || 0; // 0 创建 1 修改
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/fillInOrderNum/fillInOrderNum?oid="+oid+'&type='+ind
+    });
+  },
+  // 寄回物流
+  sendBackLogistics:function(w){
+    var id = w.target.dataset.id || w.currentTarget.dataset.id;
+    var gcover = w.target.dataset.gcover || w.currentTarget.dataset.gcover;
+    wx.navigateTo({  
+      url:'/page/settled/pages/sendBackLogistics/sendBackLogistics?id='+id+'&gcover='+gcover
+    })
+  },
+  jump: function (w) {
+    var whref = w.currentTarget.dataset.href || w.target.dataset.href;
+    var item_type = w.currentTarget.dataset.item_type || w.target.dataset.item_type || 0;
+    var wname = w.currentTarget.dataset.name || w.target.dataset.name || '美拆';
+    app.comjumpwxnav(item_type,whref,wname)
+  },
 })

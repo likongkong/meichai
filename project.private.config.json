@@ -21,7 +21,7 @@
         {
           "name": "订单管理",
           "pathName": "page/settled/pages/orderManagement/orderManagement",
-          "query": "",
+          "query": "oid=20&bou=1",
           "scene": null
         },
         {
@@ -326,9 +326,9 @@
           "scene": null
         },
         {
-          "name": "page/settled/pages/orderManagement/orderManagement",
-          "pathName": "page/settled/pages/orderManagement/orderManagement",
-          "query": "",
+          "name": "售后详情",
+          "pathName": "page/settled/pages/AfterSalesDetails/AfterSalesDetails",
+          "query": "oid=20&bou=1",
           "scene": null
         },
         {
@@ -345,7 +345,7 @@
         },
         {
           "name": "申请售后",
-          "pathName": "page/settled/pages/appliedAftersales/appliedAftersales",
+          "pathName": "page/secondpackge/pages/refund/refund",
           "query": "",
           "scene": null
         },
@@ -366,6 +366,31 @@
           "pathName": "page/settled/pages/collectPicUpload/collectPicUpload",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "page/secondpackge/pages/fillInOrderNum/fillInOrderNum",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "page/settled/pages/task/task",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "page/settled/pages/delivery/delivery",
+          "query": "status=0&sendBackId=28",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "page/settled/pages/dynamicDetails/dynamicDetails",
+          "query": "did=8114",
+          "scene": null
+>>>>>>> dev
         }
       ]
     }

@@ -142,6 +142,7 @@
                   <view class="itemImage">
                     <image 
                       class="tupian" 
+                      style="{{item.imgWidth?'width:'+item.imgWidth+'rpx':''}}"
                       src="{{sonitem}}?imageMogr2/crop/168x168/gravity/cente" 
                       mode="widthFix">
                     </image>
@@ -154,7 +155,7 @@
                   </view>
                 </block>
                 <view class="itemImage">
-                  <view class="uploadBox">
+                  <view class="uploadBox" style="{{item.imgWidth?'width:'+item.imgWidth+'rpx;height:'+item.imgWidth+'rpx':''}}">
                     <view class="placeholderBox">
                       <image src="../../pages/images/jiahao.png" mode="widthFix"></image>
                     </view>
@@ -167,18 +168,44 @@
               <view wx:if="{{item.src != ''}}" class="flex marginTB25">
                 <image 
                   class="tupian" 
+                  style="{{item.imgWidth?'width:'+item.imgWidth+'rpx;height:'+item.imgWidth+'rpx':''}}"
                   src="{{item.src}}?imageMogr2/crop/168x168/gravity/cente" 
                   mode="widthFix">
                 </image>
                 <text wx:if="{{item.isEdit?false:isEdit}}" class="uploadAgainText">重新上传</text>
               </view>
-              <view wx:else class="uploadWrap">
+              <view wx:else class="uploadWrap" style="{{item.imgWidth?'width:'+item.imgWidth+'rpx':''}}">
                 <view class="placeholderBox">
                   <image src="../../pages/images/jiahao.png" mode="widthFix"></image>
                 </view>
               </view>
             </block>
           </block>
+        </view>
+        <view wx:if="{{item.type == 'uploadVideo'}}" id="{{item.name}}" class="columnWrap card paddingBottom12 {{item.margintop0?'margintop0':''}} {{item.borderbottom1?'borderbottom1':''}}" data-storagelocation="{{item.storagelocation}}" data-name="{{item.name}}" data-index="{{index}}" data-mode="{{item.mode}}" catchtap="{{item.src==''?'uploadVideo':''}}">
+          <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
+          <view class="activityimageWrap">
+            <view class="itemImage" wx:if="{{item.src!=''}}">
+              <video 
+                id="myVideo"
+                style="width: 480rpx;height: 220rpx;"
+                src="{{item.src}}" 
+              ></video>
+              <view class="delete" data-ind="{{idx}}" data-index="{{index}}" data-name="{{item.name}}" catchtap="deleteitemVideo">
+                <image  
+                  src="https://cdn.51chaidan.com/images/brandSettledIcon/delete.png" 
+                  mode="widthFix">
+                </image>
+              </view>
+            </view>
+            <view wx:else class="itemImage">
+              <view class="uploadBox" style="{{item.imgWidth?'width:'+item.imgWidth+'rpx;height:'+item.imgWidth+'rpx':''}}">
+                <view class="placeholderBox">
+                  <image src="../../pages/images/jiahao.png" mode="widthFix"></image>
+                </view>
+              </view>
+            </view>
+          </view>
         </view>
         <view wx:if="{{item.type == 'radio'}}" id="{{item.name}}" class="columnWrap card paddingBottom20 {{item.margintop0?'margintop0':''}} {{item.borderbottom1?'borderbottom1':''}}">
           <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}" data-explaintxt="{{item.explainTxt}}" catchtap="{{item.explainTxt?'showExplain':''}}">

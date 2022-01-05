@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '申请退款', 
+    c_title: '申请售后', 
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
@@ -26,26 +26,72 @@ Page({
     isReasonBox:false, 
     isTwoConfirmBox:false,
     refundType:[],
-    checkedObj:'',
+    checkedObj:{},
     refundOrderfocus:false,
     refundOrderInputValue:'',
+    listData:[
+      {
+        isRequired:false,
+        type:'uploadImg',
+        subtitle:'上传凭证',
+        name:'voucherPic',
+        imageList:[],
+        margintop0:true,
+        mode:'multiple',
+        imgWidth:'148',
+        storagelocation:'images/goods/aftersales'
+      },
+    ],
+    obj:{
+      voucherPic:''
+    },
+    type:0,
+    id:0
+  },
+  copy:function(e){
+    let num = e.currentTarget.dataset.num;
+    wx.setClipboardData({
+      data: num,
+      success: function (res) {
+        app.showToastC('复制成功');
+      }
+    });
+  },
+  // 获取表单数据
+  bindchange(e){
+    let value = e.detail.value; 
+    let key=e.detail.name;
+    this.data.obj[key]=value;
+    console.log(this.data.obj)
   },
   chooseReasonFun(e){
     let index = e.currentTarget.dataset.index;
-    let refundType = this.data.refundType;
-    for(var i=0;i<refundType.length;i++){
-      if(refundType[i].checked){
-        refundType[i].checked = false;
-      }
+    let popoutData = this.data.popoutData;
+    for(var i=0;i<popoutData.length;i++){
+      // if(popoutData[i].checked){
+        popoutData[i].checked = false;
+      // }
     }
-    refundType[index].checked = true;
+    popoutData[index].checked = true;
+    console.log(popoutData)
+    let obj = {id:popoutData[index].type_id,name:popoutData[index].type_name};
+    let name = this.data.popoutType==0?'afterSaleType':this.data.popoutType==1?'goodsStatus':'refundType';
     this.setData({
-      refundType,
-      checkedObj:{id:refundType[index].type_id,name:refundType[index].type_name}
+      popoutData,
+      [`infoData.${name}`]:popoutData,
+      [`checkedObj.${name}`]:obj
     })
+    console.log(this.data.checkedObj)
   },
-  reasonFun(){
+  popout(e){
+    let title = e.currentTarget.dataset.title;
+    let type = e.currentTarget.dataset.type;
+    let popoutdata = e.currentTarget.dataset.popoutdata;
+    console.log(popoutdata)
     this.setData({
+      popoutTitle:title,
+      popoutType:type,
+      popoutData:popoutdata,
       isReasonBox:!this.data.isReasonBox
     })
   },
@@ -109,13 +155,41 @@ Page({
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
           let infoData = res.data.Info;
+          let obj = _this.data.obj;
+          for(var i=0;i<infoData.afterSaleType.length;i++){
+            if(infoData.afterSaleType[i].type_id == infoData.after_sale_type){
+              infoData.afterSaleType[i].checked = true;
+              _this.setData({
+                [`checkedObj.afterSaleType`]:{id:infoData.afterSaleType[i].type_id,name:infoData.afterSaleType[i].type_name}
+              })
+            }
+          }
+          for(var i=0;i<infoData.goodsStatus.length;i++){
+            if(infoData.goodsStatus[i].type_id == infoData.goods_status){
+              infoData.goodsStatus[i].checked = true;
+              _this.setData({
+                [`checkedObj.goodsStatus`]:{id:infoData.goodsStatus[i].type_id,name:infoData.goodsStatus[i].type_name}
+              })
+            }
+          }
           for(var i=0;i<infoData.refundType.length;i++){
-              infoData.refundType[i].checked = false;
+            if(infoData.refundType[i].type_id == infoData.refund_cause){
+              infoData.refundType[i].checked = true;
+              _this.setData({
+                [`checkedObj.refundType`]:{id:infoData.refundType[i].type_id,name:infoData.refundType[i].type_name}
+              })
+            }
+          }
+          if(_this.data.type == 0){
+            _this.setData({ id:0 })
+          }else{
+            _this.setData({id:infoData.id})
           }
           _this.setData({
             infoData,
-            refundType:infoData.refundType
+            [`listData[0].imageList`]:infoData.describe_img || '',
           })
+          obj.voucherPic = infoData.describe_img || '';
         }else{
           app.showToastC(res.data.Msg)
         }
@@ -124,11 +198,25 @@ Page({
   },
   submit(){
     console.log(this.data.checkedObj,this.data.currentWord)
-    if(!this.data.checkedObj){
+    if(!this.data.checkedObj.afterSaleType){
+      wx.showToast({
+        title: '请选择售后类型',
+        icon: 'none',
+        duration: 1500
+      })
+      return false;
+    }else if(!this.data.checkedObj.goodsStatus){
+      wx.showToast({
+        title: '请选择商品状态',
+        icon: 'none',
+        duration: 1500
+      })
+      return false;
+    }else if(!this.data.checkedObj.refundType){
       wx.showToast({
         title: '请选择退款原因',
         icon: 'none',
-        duration: 1000
+        duration: 1500
       })
       return false;
     }else if(!this.data.isTwoConfirmBox && this.data.infoData.refundPrice >=0 && this.data.refundOrderInputValue == ''){
@@ -139,8 +227,8 @@ Page({
     }
     wx.showLoading({ title: '加载中...'})
     var _this = this;
-    var q = Dec.Aese('mod=operate&operation=submitApplyRefund&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type='+this.data.checkedObj.id+'&oid='+_this.data.oid+'&describe='+this.data.currentWord+'&giftShipping='+this.data.refundOrderInputValue);
-    console.log(app.signindata.comurl + 'order.php?' +'mod=operate&operation=submitApplyRefund&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type='+this.data.checkedObj.id+'&oid='+_this.data.oid+'&describe='+this.data.currentWord+'&giftShipping='+this.data.refundOrderInputValue)
+    var q = Dec.Aese('mod=operate&operation=submitApplyRefund&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&after_sale_type='+this.data.checkedObj.afterSaleType.id + '&goods_status='+this.data.checkedObj.goodsStatus.id+ '&type='+this.data.checkedObj.refundType.id+'&oid='+_this.data.oid+'&describe='+this.data.currentWord+'&giftShipping='+this.data.refundOrderInputValue+'&describe_img='+this.data.obj.voucherPic+'&id='+this.data.id);
+    console.log(app.signindata.comurl + 'order.php?' +'mod=operate&operation=submitApplyRefund&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&after_sale_type='+this.data.checkedObj.afterSaleType.id + '&goods_status='+this.data.checkedObj.goodsStatus.id+ '&type='+this.data.checkedObj.refundType.id+'&oid='+_this.data.oid+'&describe='+this.data.currentWord+'&giftShipping='+this.data.refundOrderInputValue+'&describe_img='+this.data.obj.voucherPic+'&id='+this.data.id)
     wx.request({
       url: app.signindata.comurl + 'order.php' + q,
       method: 'GET',
@@ -152,11 +240,11 @@ Page({
           _this.setData({
             isTwoConfirmBox: false,
           });
-          app.showToastC(res.data.Msg)
-          var pages = getCurrentPages();
-          var prevPage = pages[pages.length - 2]; //上一个页面
-          prevPage.onLoadfun();
+          app.showToastC(res.data.Msg,1500)
           setTimeout(function(){
+            var pages = getCurrentPages();
+            var prevPage = pages[pages.length - 2]; //上一个页面
+            prevPage.onLoadfun();
             wx.navigateBack()
           },1500)
         }else{
@@ -164,6 +252,21 @@ Page({
         }
       }
     }) 
+  },
+  // 跳转详情
+  jumpTimDetail(e){
+    var id = e.currentTarget.dataset.fid;
+    var comdata = this.data.infoData;
+    var order = {
+      order_id: comdata.oid || '',
+      order_name: comdata.gname || '',
+      photo_url: comdata.gcover || '',
+      price: comdata.amount || '',
+      style: comdata.roleName || '',
+    }
+    wx.navigateTo({ 
+      url: `/page/settled/pages/timHomePage/timHomePage?id=${id}&order=${JSON.stringify(order)}`
+    });
   },
   /**
    * 生命周期函数--监听页面加载
@@ -176,8 +279,11 @@ Page({
       loginid:app.signindata.loginid,
       isProduce: app.signindata.isProduce,
       oid: options.oid,
+      type: options.type || 0,
     });  
-    this.getInfo();
+    // if(options.type == 1){
+      this.getInfo();
+    // }
     // 判断是否授权
     this.activsign();
   },

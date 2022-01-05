@@ -35,6 +35,8 @@ Page({
     finished: 0,
     // 售后数
     after_sale: 0,
+    no_read: 0,
+    no_read_no: 0,
     // 提现金额
     putforwardmoney:0,
     // 最佳合伙人
