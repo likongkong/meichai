@@ -28,7 +28,12 @@ Page({
     conversationList:[]
 
   },
-
+  // 申请售后
+  jumpTimDetailRefund(e){
+    app.getUserProfile((res,userInfo) => {
+        this.refund(e)     
+    },'',1)
+  },
   // 售后详情
   afterSalesDetails(w){
     let iid = w.currentTarget.dataset.iid || '';
