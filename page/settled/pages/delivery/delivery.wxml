@@ -119,7 +119,7 @@
       <view class="goback" catchtap="goback">
         返回
       </view>
-      <view class="cancel {{audit_status==1?'':'unclickable'}}" catchtap="{{audit_status==1?'cancel':''}}">
+      <view class="cancel {{audit_status==1?'':'toggleCancellationReasonsMask'}}" catchtap="{{audit_status==1?'cancel':''}}">
         取消取件
       </view>
       <block wx:if="{{pageType == 1}}">
@@ -145,8 +145,11 @@
 
 
 
-
-
+<view class="mask" wx:if="{{isCancellationReasonsMask}}" catchtouchmove="true" catchtap="toggleCancellationReasonsMask">
+  <view class="cancellationReasonsWrap" catchtap="true">
+    <view class="title">取消原因</view>
+  </view>
+</view>
 
 <view class="mask" wx:if="{{isVisitTtime}}" catchtouchmove="true" catchtap="toggleVisitTtime">
   <view class="visitTtimeWrap" catchtap="true">

@@ -302,3 +302,15 @@ page{
 .selectedTime text{
   color: #5CA7FE;
 }
+.cancellationReasonsWrap{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  background: #fff;
+  border-radius: 14rpx;
+  padding: 20rpx 30rpx;
+  box-sizing: border-box;
+}
+.cancellationReasonsWrap .title{
+
+}

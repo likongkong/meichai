@@ -35,7 +35,17 @@ Page({
     tipaid1:'',//收件
     isModification:false,
     takePhone:'',
-    pageType:1
+    pageType:1,
+    cancellationReasons:[
+      {name:"预约信息有误",id:1},
+      {name:"快递员无法取件",id:2},
+      {name:"上门太慢",id:3},
+      {name:"运费太贵",id:4},
+      {name:"联系不上快递员",id:7},
+      {name:"快递员要求取消",id:8},
+      {name:"其他",id:11},
+    ],
+    isCancellationReasonsMask:true
   },
 
   /**
