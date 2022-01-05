@@ -117,7 +117,7 @@
                             </block>
                         </block>
                         <block wx:else>
-                            <view class='orderBottomButton' data-id='{{sendBackId}}' data-gcover='{{gcover}}' bindtap='sendBackLogistics'>查看物流</view> 
+                            <view class='orderBottomButton' data-id='{{sendBackId}}' data-gcover='{{goods_img}}' bindtap='sendBackLogistics'>查看物流</view> 
                         </block>
                     </block>
                     <view class="orderBottomButton" wx:if='{{status == 1}}' catchtap="refund" data-oid='{{oid}}'  data-ind='{{send_status?"1":"0"}}'>申请售后</view>
