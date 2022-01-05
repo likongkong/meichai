@@ -46,6 +46,7 @@ Page({
       },{
         isRequired:true,
         type:'text',
+        inputType:'number',
         subtitle:'抽选数量',
         placeholder:'请输入数量',
         value:'',
@@ -55,6 +56,7 @@ Page({
       },{
         isRequired:true,
         type:'text',
+        inputType:'digit',
         subtitle:'抽选价格',
         placeholder:'请输入价格',
         value:'',
@@ -82,8 +84,8 @@ Page({
         subtitle:'报名条件',
         radioArr:[
           {name:'wu',radioName:'无条件报名'},
-          {name:'cashPledge',radioName:'定金',placeholder:'请填写定金金额',value:''},
-          {name:'integrate',radioName:'消耗积分',placeholder:'请填写消耗积分',value:''},
+          {name:'cashPledge',radioName:'定金',placeholder:'请填写定金金额',value:'',inputType:'digit'},
+          {name:'integrate',radioName:'消耗积分',placeholder:'请填写消耗积分',value:'',inputType:'number'},
         ],
         value:0,
         index:0,
