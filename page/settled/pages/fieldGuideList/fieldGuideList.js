@@ -274,9 +274,9 @@ Page({
       prevPage.setData({
         [`dynamicData[1].value`]:prevPage.data.obj.dynamicContent,
         [`dynamicData[2].imageList`]:prevPage.data.obj.dynamicPic,
-        // [`dynamicData[3].src`]:prevPage.data.obj.dynamicVideo,
+        [`dynamicData[3].src`]:prevPage.data.obj.dynamicVideo,
         [`dynamicData[${this.data.listIndex}].value`]:title?title:'点击关联',
-        [`dynamicData[3].selectedArr`]:JSON.stringify(selectArr),
+        [`dynamicData[4].selectedArr`]:JSON.stringify(selectArr),
         [`dynamicData[5].value`]:prevPage.data.obj.allowComment,
       })
       prevPage.data.dynamicData[this.data.listIndex].value=title?title:'点击关联';

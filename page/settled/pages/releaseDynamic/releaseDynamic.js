@@ -40,14 +40,14 @@ Page({
         mode:'multiple',
         storagelocation:'images/dynamic'
       },
-      // {
-      //   isRequired:false,
-      //   type:'uploadVideo',
-      //   subtitle:'添加视频',
-      //   name:'dynamicVideo',
-      //   src:'',
-      //   storagelocation:'images/video'
-      // },
+      {
+        isRequired:false,
+        type:'uploadVideo',
+        subtitle:'添加视频',
+        name:'dynamicVideo',
+        src:'',
+        storagelocation:'images/video'
+      },
       {
         isRequired:false,
         type:'link',
@@ -204,7 +204,7 @@ Page({
             wx.stopPullDownRefresh();
             this.setData({
               [`dynamicData[0].value`]:res.data.List.brandInfoList[0].name,
-              [`dynamicData[3].brand_id`]:res.data.List.brandInfoList[0].brand_id,
+              [`dynamicData[4].brand_id`]:res.data.List.brandInfoList[0].brand_id,
             })
             this.data.obj.associationIp = res.data.List.brandInfoList[0].brand_id;
           }
@@ -240,11 +240,11 @@ Page({
             [`dynamicData[0].value`]:info.brandName,
             [`dynamicData[1].value`]:info.title.split('hc').join('\n'),
             [`dynamicData[2].imageList`]:info.imgArr,
-            // [`dynamicData[3].src`]:info.videoArr.length!=0?info.videoArr[0].video_path:'',
-            [`dynamicData[3].value`]:List.illustratedInfo?List.illustratedInfo[0].title:'',
-            [`dynamicData[3].selectedArr`]:List.illustratedInfo?JSON.stringify(List.illustratedInfo):'',
-            [`dynamicData[3].brand_id`]:info.brand_id,
-          // [`dynamicData[3].value`]:info.allow_comment_type,
+            [`dynamicData[3].src`]:info.videoArr.length!=0?info.videoArr[0].video_path:'',
+            [`dynamicData[4].value`]:List.illustratedInfo?List.illustratedInfo[0].title:'',
+            [`dynamicData[4].selectedArr`]:List.illustratedInfo?JSON.stringify(List.illustratedInfo):'',
+            [`dynamicData[4].brand_id`]:info.brand_id,
+          // [`dynamicData[4].value`]:info.allow_comment_type,
             
           })
           obj.associationIp = info.brand_id;
@@ -350,9 +350,9 @@ Page({
           //   app.showToastC('由于您更换了关联IP，请重新选择关联图鉴。',2500);
           // }
           that.setData({
-            [`dynamicData[3].value`]:'点击关联',
-            [`dynamicData[3].selectedArr`]:[],
-            [`dynamicData[3].brand_id`]:groups[res.tapIndex].brand_id,
+            [`dynamicData[4].value`]:'点击关联',
+            [`dynamicData[4].selectedArr`]:[],
+            [`dynamicData[4].brand_id`]:groups[res.tapIndex].brand_id,
           })
           that.data.obj.fieldGuideName = '';
           that.data.obj.fieldGuideId = '';
