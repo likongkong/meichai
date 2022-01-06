@@ -303,14 +303,63 @@ page{
   color: #5CA7FE;
 }
 .cancellationReasonsWrap{
+  width: 100%;
   position: fixed;
   left: 0;
   bottom: 0;
   background: #fff;
   border-radius: 14rpx;
-  padding: 20rpx 30rpx;
+  padding: 20rpx 30rpx 100rpx 30rpx;
   box-sizing: border-box;
 }
 .cancellationReasonsWrap .title{
-
+  font-size: 28rpx;
+}
+.cancellationReasonsBoxCon{
+  padding: 20rpx 0;
+  box-sizing: border-box;
+}
+.cancellationReasonsBoxCon view{
+  display: flex;
+  align-items: center;
+  height: 60rpx;
+  margin-bottom: 20rpx;
+}
+.cancellationReasonsBoxCon view:last-child{
+  margin-bottom: 0;
+}
+.cancellationReasonsBoxCon view image{
+  width: 36rpx;
+  height: auto;
+  display: block;
+  margin-right: 25rpx;
+}
+.cancellationReasonsBoxCon view text{
+  font-size: 28rpx;
+}
+.cancellationReasonsFoter{
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+}
+.cancellationReasonsFoter view{
+  width: 45%;
+  height: 64rpx;
+  border:2rpx solid #5CA7FE;
+  border-radius: 64rpx;
+  text-align: center;
+  line-height: 64rpx;
+  color: #5CA7FE;
+  font-size: 28rpx;
+}
+.textarea{
+  width: 100%;
+  height:200rpx;
+  border: 2rpx solid #BBBBBB;
+  border-radius: 14rpx;
+  font-size: 28rpx;
+  color: #BBBBBB;
+  padding: 20rpx 24rpx;
+  box-sizing: border-box;
+  margin-bottom: 24rpx;
 }

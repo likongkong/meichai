@@ -176,7 +176,7 @@ Component({
       let index = e.currentTarget.dataset.index;
       let src = this.data.list[index].src;
       this.setData({[`list[${index}].src`]: ''})
-      this.triggerEvent("bindchange", {value:src,name:name});
+      this.triggerEvent("bindchange", {value:'',name:name});
     },
     uploadVideo(e){
       let mode = e.currentTarget.dataset.mode;
@@ -192,7 +192,7 @@ Component({
       wx.chooseMedia({
         count: 1, // 默认9
         mediaType:['video'],
-        sourceType: ['camera'], // 'album'相册  camera 相机
+        sourceType: ['album','camera'], // 'album'相册  camera 相机
         success: (res) => {
           wx.showLoading({
             title: '上传中...',

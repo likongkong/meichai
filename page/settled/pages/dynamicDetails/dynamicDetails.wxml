@@ -4,7 +4,7 @@
 <view class="atlas">
     <!-- autoplay="true" -->
     <swiper class="atlasswiper" indicator-color="#fff" indicator-active-color="#ccc" indicator-dots="{{true}}" circular="true" interval="4000" duration="450" bindchange="swiperChange">
-        <swiper-item>
+        <swiper-item wx:if="{{dataInfo.videoArr.length != 0}}">
             <video 
                 id="myVideo"
                 style="width: 100%;height: 100%;"
