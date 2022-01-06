@@ -381,7 +381,7 @@ page {
 }
 .emlplefttxt{
   float: left;
-  color: #50a3fd;
+  /* color: #50a3fd; */
 }
 .emlplefimgshare{
   width: 40rpx;
@@ -742,6 +742,9 @@ page {
   overflow: hidden;
   border-radius: 14rpx;
   display: inline-block;
+}
+.dynamicBoxEve:nth-child(3n){
+  margin-right: 0;
 }
 
 

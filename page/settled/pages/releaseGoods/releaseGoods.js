@@ -258,7 +258,7 @@ Page({
         isRequired:false,
         type:'radio',
         subtitle:'允许购买对象',
-        radioArr:['所有人可购买','指定群成员购买'],
+        radioArr:['所有人可购买','指定群成员购买','隐藏发售'],
         value:0,
         index:0,
         direction:'Y',
@@ -276,7 +276,7 @@ Page({
         radioArr:[
           {name:'immediatelyAdded',radioName:'发布即上架'},
           {name:'customAdded',radioName:'自定义上架日期',placeholder:'请选择上架日期',value:'',type:'time',time:''},
-          {name:'hideTheSale',radioName:'隐藏发售'},
+          // {name:'hideTheSale',radioName:'隐藏发售'},
         ],
         value:0,
         index:0,
@@ -487,7 +487,7 @@ Page({
           // [`listData2[3].index`]:info.isShowSellNumber==0?1:0,
           // [`listData2[4].time`]:util.format1("yyyy-MM-dd HH:mm",info.startTime),
           // [`listData2[5].time`]:util.format1("yyyy-MM-dd HH:mm",info.stopTime),
-          [`listData3[0].index`]:info.isCanShare==0?1:0,
+          [`listData3[0].index`]:info.isCanShare==0?1:info.isCanShare==1?0:2,
           [`listData6[0].index`]:info.shelvesType,
           [`listData6[0].radioArr[1].time`]:info.shelvesType==1?util.format1("yyyy-MM-dd HH:mm",info.shelvesTime):'',
         })
@@ -542,7 +542,7 @@ Page({
         // obj.isSoldNum = info.isShowSellNumber==0?1:0;
         // obj.startTime = util.format1("yyyy-MM-dd HH:mm",info.startTime);
         // obj.endTime = util.format1("yyyy-MM-dd HH:mm",info.stopTime);
-        obj.isCanShare = info.isCanShare==0?1:0;
+        obj.isCanShare = info.isCanShare==0?1:info.isCanShare==1?0:2;
         obj.addedData = info.shelvesType;
         obj.customAdded = util.format1("yyyy-MM-dd HH:mm",info.shelvesTime);
       }else{
@@ -643,7 +643,7 @@ console.log(obj.modeOfDespatch)
       stock:obj.goodsStock,
       isShowStock:obj.isGoodsStock==0?1:0,
       isShowSellNumber:obj.isSoldNum==0?1:0,
-      isCanShare:obj.isCanShare==0?1:0,
+      isCanShare:obj.isCanShare==0?1:obj.isCanShare==1?0:2,
       shelvesType:obj.addedData,
       shelvesTime:obj.addedData==1?(new Date(obj.customAdded.replace(/-/g,'/')).getTime())/1000:''
     }
