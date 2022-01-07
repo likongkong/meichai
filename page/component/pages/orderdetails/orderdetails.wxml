@@ -1341,14 +1341,14 @@
 
                 </view>
                 <view style="overflow:hidden;padding:10rpx 0;" wx:if="{{comdata.auditRefund == 1 || comdata.auditRefund == 2 || comdata.auditRefund == 3}}">
-                    <view wx:if="{{comdata.auditRefund == 1}}" class="totalmoncright" style="border: 1rpx solid #8E8C8D;color: #BBBBBB;clear: both;position: relative;">
+                    <!-- <view wx:if="{{comdata.auditRefund == 1}}" class="totalmoncright" style="border: 1rpx solid #8E8C8D;color: #BBBBBB;clear: both;position: relative;">
                         <button class='shareButton' type='primary' bindtap="getUserProfileRefund"></button>
                         申请退款
                     </view>
                     <view wx:elif="{{comdata.auditRefund == 2}}" style="display:block;font-size:28rpx;color:#5F5F5F;text-align:right;color: #ff2840;" catchtap="refund">退款审核中 ></view>
                     <view wx:elif="{{comdata.auditRefund == 3}}" style="display:block;font-size:25rpx;color:#5F5F5F;text-align:right;position: relative;">退款申请未通过，如有问题请联系微信客服  >
                         <button open-type='contact' session-from='' style='width:100%;height:100%;position:absolute;top:0;left:0;opacity: 0;z-index:1;'></button>
-                    </view>
+                    </view> -->
                 </view>
             </view>
         </view>
@@ -1368,8 +1368,8 @@
             支付方式:{{comdata.payment}}支付</view>
         <!-- &&comdata.status!=16&&comdata.status!=1&&comdata.status!=8&&comdata.status!=11 -->
         <view class='orderbottcon' wx:if='{{comdata.order_type!=2}}'>下单时间:{{comdata.ordertime}}</view>
-        <view class='orderbottcon' wx:if='{{comdata.auditRefund == 2}}'>申请退款:{{comdata.apply_time}}</view>
-        <view class='orderbottcon' wx:if='{{ comdata.auditRefund == 3 }}'>申请未通过:{{comdata.audit_time}}</view>
+        <!-- <view class='orderbottcon' wx:if='{{comdata.auditRefund == 2}}'>申请退款:{{comdata.apply_time}}</view> -->
+        <!-- <view class='orderbottcon' wx:if='{{ comdata.auditRefund == 3 }}'>申请未通过:{{comdata.audit_time}}</view> -->
         <view class='orderbottcon' wx:if='{{ comdata.payTime && comdata.payTime!=0 }}'>支付时间:{{comdata.payTime}}</view>
 
     </view>
@@ -1701,7 +1701,7 @@
             style='color:#ea565e;height:260rpx;line-height:45rpx;width:90%;margin:0 auto;font-size:26rpx;display:block;margin:0 auto;overflow: scroll;'>1.活动、0元购、转盘、赠品等购买优惠一并取消\n2.优惠券不予返还；支付优惠一并取消\n3.订单一旦取消，无法恢复\n4.返现金额会从小金库扣除\n5.退款金额1-3工作日原路退回</text>
         <view style='width:90%;margin:0 auto;height:108rpx;'>
             <view
-                style='position:relative;width:46%;height:68rpx;line-height:68rpx;float:left;text-align:center;font-size:26rpx;background:#e94f57;color:#fff;position: relative;'><button class='shareButton' type='primary' bindtap="getUserProfileRefundtiosun"></button>申请退款</view>
+                style='position:relative;width:46%;height:68rpx;line-height:68rpx;float:left;text-align:center;font-size:26rpx;background:#e94f57;color:#fff;position: relative;'><button class='shareButton' ty0pe='primary' bindtap="getUserProfileRefundtiosun"></button>申请退款</view>
             <view
                 style='position:relative;width:46%;height:68rpx;line-height:68rpx;float:right;text-align:center;font-size:26rpx;background:#cccccc;color:#000;'
                 catchtap='refundtipsfun'>取消</view>
