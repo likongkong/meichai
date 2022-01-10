@@ -903,7 +903,10 @@ page{
 }
 
 
-
+.settledTypeBox{
+  width: 630rpx;
+  height: auto;
+}
 
 
 
