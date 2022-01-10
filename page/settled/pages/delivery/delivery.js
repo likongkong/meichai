@@ -228,6 +228,12 @@ Page({
         // }else{
         if(res.data.ReturnCode != 200){
           app.showToastC(res.data.Msg,3000)  
+          setTimeout(()=>{
+            var pages = getCurrentPages();
+            var beforePage = pages[pages.length - 2];
+            beforePage.getData();
+            _this.goback();
+          },3000)
         };
       }
     });
