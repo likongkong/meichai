@@ -61,7 +61,7 @@
          <view class="vipPrivilegeAward" wx:if="{{tabNum == index+1}}">
             <text class="title" style="{{item.subTitle?'margin-bottom:30rpx':''}}">{{item.subTitle?item.subTitle:item.headline}}</text>
             <block wx:if="{{!item.subTitle}}">
-               <image catchtap="iftrdetailpagen" wx:if="{{!item.awardInfo}}" class="vipPrivilegeAwardImg" src="{{item.img}}" mode="widthFix"></image>
+               <image catchtap="iftrdetailpagen" data-desc="{{item.desc}}" wx:if="{{!item.awardInfo}}" class="vipPrivilegeAwardImg" src="{{item.img}}" mode="widthFix"></image>
                <view wx:else class="vipPrivilegeAwardGroup">
                   <block wx:for="{{item.awardInfo}}" wx:key='key' data-index="{{index}}" wx:for-item="sonItem"> 
                      <view>

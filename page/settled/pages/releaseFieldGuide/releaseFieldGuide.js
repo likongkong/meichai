@@ -49,6 +49,7 @@ Page({
       {
         isRequired:false,
         type:'text',
+        inputType:'digit',
         subtitle:'价格',
         placeholder:'请输入商品价格',
         value:'',
@@ -56,6 +57,7 @@ Page({
       },{
         isRequired:false,
         type:'text',
+        inputType:'number',
         subtitle:'数量',
         placeholder:'请输入商品数量',
         value:'',

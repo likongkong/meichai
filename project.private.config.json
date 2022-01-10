@@ -362,9 +362,9 @@
           "scene": null
         },
         {
-          "name": "",
-          "pathName": "page/component/pages/orderdetails/orderdetails",
-          "query": "oid=865",
+          "name": "征集图片上传",
+          "pathName": "page/settled/pages/collectPicUpload/collectPicUpload",
+          "query": "",
           "scene": null
         },
         {

@@ -32,14 +32,16 @@ Page({
         placeholder:'请输入联系方式',
         value:'',
         name:'enterprisePhone'
-      },{
-        isRequired:true,
-        type:'text',
-        subtitle:'微信号',
-        placeholder:'请输入微信号',
-        value:'',
-        name:'wechatID'
-      },{
+      }
+      // ,{
+      //   isRequired:true,
+      //   type:'text',
+      //   subtitle:'微信号',
+      //   placeholder:'请输入微信号',
+      //   value:'',
+      //   name:'wechatID'
+      // }
+      ,{
         isRequired:true,
         type:'uploadImg',
         subtitle:'企业营业执照或与IP相关凭证',
@@ -205,10 +207,10 @@ Page({
       app.showToastC('手机号有误请重新填写',2000);
       return false;
     }
-    if(!obj.wechatID || obj.wechatID == ''){
-      app.showToastC('请输入微信号',1500);
-      return false;
-    }
+    // if(!obj.wechatID || obj.wechatID == ''){
+    //   app.showToastC('请输入微信号',1500);
+    //   return false;
+    // }
     if(!obj.businessLicense || obj.businessLicense == ''){
       app.showToastC('请上传企业营业执照或与IP相关凭证',1500);
       return false;

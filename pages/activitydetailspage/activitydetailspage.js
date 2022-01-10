@@ -2,6 +2,9 @@ var Dec = require('../../common/public.js');//aes加密解密js
 var WxParse = require('../../wxParse/wxParse.js');
 var time = require('../../utils/util.js');
 const app = getApp();
+
+var COS = require('../../common/cos-wx-sdk-v5.js');
+
 Page({
 
   /**
@@ -4219,7 +4222,10 @@ closefrindcommoni:function(){
     };
     this.setData({ upserimgboxWinningtheprize: true, cart_idsave: cart_idsave, uploadscreenshots: uploadscreenshots });
     this.generatePicturesWinningtheprize(qrcode, awardinfo, cover);
-  },             
+  },  
+  obtainpicturewh(e){
+
+  },        
   // 上传图片
   upImgSernum: function (w) {
     var _this = this;
@@ -4230,8 +4236,124 @@ closefrindcommoni:function(){
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'], 
       success: function (res) {
-        var tempFilePaths = res.tempFilePaths[0];
-        _this.uploadFile(_this, tempFilePaths, 'litpic', 2);
+
+        wx.getImageInfo({
+          src: res.tempFiles[0].path,
+          success: (ddd) => {
+            
+            var dddwidth = ddd.width;
+            var dddheight = ddd.height;
+            console.log('下载图片=========',ddd,dddwidth,dddheight)
+
+            if((dddheight/1.594444).toFixed() == dddwidth || (dddheight/1.8426).toFixed() == dddwidth || (dddheight/1.8464).toFixed() == dddwidth || (dddheight/1.596).toFixed() == dddwidth  || (dddheight/1.592).toFixed() == dddwidth){
+              app.showModalC('请将晒单图片保存后分享朋友截图上传')
+              return false;
+            }
+
+            var tempFilePaths = res.tempFilePaths[0];
+            // _this.uploadFile(_this, tempFilePaths, 'litpic', 2);
+            var cos = new COS({
+              SecretId: 'AKIDmY0RxErYIm2TfkckG8mEYbcNA4wYsPbe',
+              SecretKey: '4WkpgJ5bJlU4B6wNuCG4EDyVnGWUFhw1',
+            });
+    
+            wx.showLoading({
+              title: '加载中...',
+            })
+            console.log(res)
+            var filePath = res.tempFiles[0].path;
+    
+            //获取最后一个.的位置
+            var index= filePath.lastIndexOf(".");
+            //获取后缀
+            var ext = filePath.substr(index+1);
+    
+            var timestamp = Date.parse(new Date());
+            var date = new Date(timestamp);
+            var Y = date.getFullYear();
+            var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
+    
+            cos.postObject(
+                {
+                  Bucket: 'mc-1300990269',
+                  Region: 'ap-beijing',
+                  Key: 'images/freeOrder/'+Y+M+'/'+ new Date().getTime() +'_'+ app.signindata.uid+ '.'+ext,
+                  FilePath: filePath,
+                  onProgress: function (info) {
+                      console.log(JSON.stringify(info));
+                  }
+                },
+                function (err, data) {
+                    console.log(data);
+                    if(data){
+                        wx.request({
+                          url:  Dec.comurl() + 'order.php',
+                          header: { "Content-Type": "application/x-www-form-urlencoded" },
+                          name: 'litpic',
+                          method: "POST",
+                          data: {
+                            'mod':'info',
+                            'operation':'upload',
+                            'uid': _this.data.uid, 
+                            'loginid':_this.data.loginid ,
+                            'cart_id':_this.data.cart_id ,
+                            'picture_type':2,
+                            'type':2,
+                            'remotePic':data.Location
+                          },
+                          success: function (res) {
+                            _this.setData({ headhidden: true });
+                            wx.hideLoading();
+                            if (res.data){
+                              if (res.data == 200) {
+                                _this.setData({ pictboxbox: true })
+                                if (anum==2){
+                                  _this.setData({ upserimgboxWinningtheprize: false, screenshottipsiftr: false });
+                                  _this.onLoadfun();
+                                }else{
+                                  _this.detailfun();
+                                };
+                                _this.setData({
+                                  upserimgbox:false,
+                                  upserimgboxWinningtheprize:false,
+                                  screenshottipsiftr:false
+                                })
+                              } else {
+                                _this.setData({
+                                  subscrpro: res.data,
+                                  subscrproiftr: true
+                                });
+                              }
+                            };
+                          },
+                          fail(){
+                            _this.setData({ headhidden: true });
+                            wx.hideToast();
+                            app.showToastC('上传失败');
+                          }
+                        })
+                    }else{
+                      wx.hideLoading()
+                      _this.setData({ headhidden: true });
+                      wx.hideToast();
+                      app.showToastC('上传失败');
+                    };
+                    console.log('err============',err)
+                    if(err){
+                      wx.hideLoading()
+                      _this.setData({ headhidden: true });
+                      wx.hideToast();
+                      app.showToastC('上传失败');
+                    }
+                }
+            );
+
+
+
+          }
+        })
+
+        
       }
     })
   },

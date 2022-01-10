@@ -485,7 +485,9 @@ width: 72rpx;}
   border-radius: 14rpx;
   display: inline-block;
 }
-
+.dynamicBoxEve:nth-child(3n){
+  margin-right: 0;
+}
 
 
 

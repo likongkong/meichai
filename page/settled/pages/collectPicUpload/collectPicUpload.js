@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '添加秒杀商品',
+    c_title: '征集图片',
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
@@ -16,299 +16,29 @@ Page({
     listData:[
       {
         isRequired:false,
-        type:'actionSheet',
-        groups:[],
-        disabled:false,
-        subtitle:'商品关联IP',
-        value:'点击关联',
-        name:'associationIp'
-      },
-      {
-        isRequired:false,
-        type:'title',
-        subtitle:'商品信息',
-        borderbottom1:'hide'
-      },
-    ],
-    listData1:[
-      {
-        isRequired:true,
-        type:'text',
-        subtitle:'商品名称',
-        placeholder:'请输入商品名称',
-        value:'',
-        name:'goodsName',
-        borderbottom1:'show',
-        margintop0:true,
-      },{
-        isRequired:true,
         type:'uploadImg',
-        subtitle:'商品展示图（建议上传比例1:1）',
-        name:'flatPatternmaking',
-        imageList:[],
-        mode:'multiple',
-        storagelocation:'images/goods',
-        borderbottom1:'show',
-        margintop0:true,
-      },{
-        isRequired:false,
-        type:'textarea',
-        subtitle:'商品文字描述',
-        placeholder:'请输入商品文字描述',
-        value:'',
-        name:'goodsDescribe',
-        borderbottom1:'show',
-        margintop0:true,
-      },{
-        isRequired:true,
-        type:'text',
-        inputType:'digit',
-        subtitle:'商品售价',
-        placeholder:'请输入售价金额',
-        value:'',
-        name:'goodsPrice',
-        borderbottom1:'show',
-        margintop0:true,
-      },{
-        isRequired:true,
-        type:'text',
-        inputType:'number',
-        subtitle:'商品库存',
-        placeholder:'请输入当前可售库存数',
-        value:'',
-        name:'goodsStock',
-        borderbottom1:'show',
-        margintop0:true,
-      },{
-        isRequired:false,
-        type:'label',
-        subtitle:'商品标签',
-        labelItem:[
-          {index:0,name:'预售'},
-          {index:1,name:'现货'},
-        ],
-        index:999,
-        value:0,
-        name:'goodsLabel',
-        borderbottom1:'show',
-        margintop0:true,
-      },{
-        isRequired:false,
-        type:'radio',
-        subtitle:'是否限购',
-        radioArr:['是','否'],
-        value:1,
-        index:0,
-        direction:'X',
-        explain:false,
-        input:true,
-        margintop0:true,
-        borderbottom1:'show',
-        name:'purchaseLimitation',
-      },
-      {
-        isRequired:false,
-        type:'text',
-        inputType:'number',
-        subtitle:'消耗积分',
-        placeholder:'无需消耗积分',
-        value:'',
-        name:'integrate',
-        explainTxt:'用户需使用积分获得购买资格请输入售卖积分',
-        explain:true,
-        borderbottom1:'show',
-        margintop0:true,
-      },
-      {
-        isRequired:false,
-        type:'uploadImg',
-        subtitle:'商品详情图',
-        name:'goodsDetailsPic',
+        subtitle:'上传图片',
+        name:'detailsFigure',
         imageList:[],
         margintop0:true,
         mode:'multiple',
         storagelocation:'images/goods'
-      },
-    ],
-    fieldGuideData2:[
-      {
-        isRequired:false,
-        type:'link',
-        brand_id:'',
-        selectedArr:[],
-        jumpType:2,
-        pagetype:0,
-        item_type:9034,
-        subtitle:'关联图鉴',
-        value:'点击关联',
-        name:'associationActivity',
-      }
-    ],
-    listData2:[
-      {
-        isRequired:true,
-        type:'radio',
-        subtitle:'发货方式',
-        radioArr:[
-          {name:'logistics',radioName:'自行发货',placeholder:'请选择物流方式',value:'',
-          groups: [
-            ['顺丰', '韵达', '圆通', '申通', '中通', 'EMS', '宅急送', '京东', '天天', '优速', '极兔', '百世', '德邦', '其他'], 
-            ['到付', '包邮']
-          ],
-          groupsIndex:'',},
-          {name:'dropshipping',radioName:'美拆代发',placeholder:'请选择物流方式',value:'',groups: [
-            ['顺丰'], 
-            ['到付（3元/单）', '包邮（8元/单）']
-          ],
-          groupsIndex:'',},
-        ],
-        value:0,
-        index:0,
-        direction:'Y',
-        explain:true,
-        explainTxt:'自行发货：由商家自己发货，可预设发货物流方式 \n美拆代发：由美拆代理发货，可选择需要的物流形式，目前仅支持顺丰到付和包邮，并收取对应的费用顺丰到付3元/单，顺丰包邮8元/单',
-        picker:true,
-        multiRadio:true,
-        margintop0:true,
-        borderbottom1:'show',
-        name:'modeOfDespatch',
-      },
-      // {
-      //   isRequired:true,
-      //   type:'picker',
-      //   subtitle:'物流方式',
-      //   placeholder:'请选择物流方式',
-      //   groups: [
-      //     ['顺丰', '韵达', '圆通', '申通', '中通', 'EMS', '宅急送', '京东', '天天', '优速', '极兔', '百世', '德邦', '其他'], 
-      //     ['到付', '包邮']
-      //   ],
-      //   groupsIndex:'',
-      //   value:'',
-      //   name:'logistics',
-      //   borderbottom1:'show',
-      //   margintop0:true,
-      // }
-      {
-        isRequired:false,
-        type:'radio',
-        subtitle:'售卖方式',
-        radioArr:['限量售卖','限时售卖'],
-        value:0,
-        index:0,
-        direction:'X',
-        margintop0:true,
-        borderbottom1:'show',
-        name:'sellingWay',
       },{
-        isRequired:true,
-        type:'time',
-        subtitle:'发售时间',
-        value:0,
-        margintop0:true,
-        borderbottom1:'show',
-        time: util.format("yyyy-MM-dd HH:mm"),
-        name:'startTime',
-      },
-      { isRequired:true,
-        type:'time',
-        subtitle:'停售时间',
-        value:0,
-        margintop0:true,
-        time: util.format("yyyy-MM-dd HH:mm",2592000000),
-        borderbottom1:'show',
-        noClick:true,
-        explainTxt:'正常售卖方式不可编辑停售时间，如需编辑停售时间请选择限时发售',
-        name:'endTime',
-      },{
-        isRequired:true,
-        type:'text',
-        subtitle:'预计发货日期',
-        placeholder:'请输入预计发货日期',
+        isRequired:false,
+        type:'textarea',
+        subtitle:'图片配文',
+        placeholder:'非必填，可输入图片配文',
         value:'',
-        maxlength:10,
-        name:'dateToPull',
+        name:'awardsShow',
         borderbottom1:'show',
         margintop0:true,
-      },{
-        isRequired:false,
-        type:'radio',
-        subtitle:'是否显示库存数量',
-        radioArr:['是','否'],
-        value:0,
-        index:0,
-        direction:'X',
-        margintop0:true,
-        borderbottom1:'show',
-        name:'isGoodsStock',
-      },{
-        isRequired:false,
-        type:'radio',
-        subtitle:'是否显示已售数量',
-        radioArr:['是','否'],
-        value:0,
-        index:0,
-        direction:'X',
-        margintop0:true,
-        name:'isSoldNum',
-      }
-      
-    ],
-    listData3:[
-      {
-        isRequired:false,
-        type:'radio',
-        subtitle:'允许购买对象',
-        radioArr:['所有人可购买','指定群成员购买','隐藏发售'],
-        value:0,
-        index:0,
-        direction:'Y',
-        margintop0:true,
-        explain:true,
-        explainTxt:'所有人可购买：所有人可分享并且购买。\n指定群成员购买：只有管理员可分享，并且用户只可以通过分享链接购买',
-        name:'isCanShare',
-      }
-    ],
-    listData6:[
-      {
-        isRequired:false,
-        type:'radio',
-        subtitle:'上架日期',
-        radioArr:[
-          {name:'immediatelyAdded',radioName:'发布即上架'},
-          {name:'customAdded',radioName:'自定义上架日期',placeholder:'请选择上架日期',value:'',type:'time',time:''},
-          // {name:'hideTheSale',radioName:'隐藏发售'},
-        ],
-        value:0,
-        index:0,
-        direction:'Y',
-        explain:true,
-        explainTxt:'发布即上架：发布商品之后，即可在小程序内查看商品的售卖状态 \n自定义上架日期：选择上架日期，在选择的日期之前，商品不会展示在小程序内，到达选择的日期时，发布的商品才可在小程序内展示 \n隐藏发售：创建的商品将不会在小程序内展示，可通过分享的形式进行售卖。',
-        input:true,
-        multiRadio:true,
-        name:'addedData',
       }
     ],
     obj:{
-      goodsDescribe:'', //文字描述
-      goodsStock:'', //库存数
-      goodsLabel:'', //标签
-      purchaseLimitation:0, //是否限购
-      purchaseLimitationNum:1, //限购体数
-      integrate:'',  //积分
-      goodsDetailsPic:'', //详情图
-      modeOfDespatch:0,  //发货方式
-      sellingWay:0,  //售卖方式
-      shipping:'',  //快递公司名称
-      shippingPriceStatus:'', //邮费类型
-      logisticsIndex:'', //物流下标
-      isGoodsStock:'', //是否显示库存数
-      isSoldNum:'', //是否显示已售数量
-      startTime:util.format("yyyy-MM-dd HH:mm"),
-      endTime:util.format("yyyy-MM-dd HH:mm",2592000000),
-      isCanShare:'', //允许购买对象
-      addedData:0,
+      startTime:'',
+      endTime:'',
     },
-    timer:'',
+    activityReward:2,
   },
   /**
    * 生命周期函数--监听页面加载
@@ -340,43 +70,28 @@ Page({
   bindchange(e){
     let value = e.detail.value; 
     let key=e.detail.name;
-    if(key == 'sellingWay'){    //sellingWay==0为正常售卖 sellingWay==1为限时售卖
-      this.selectComponent('#settledForm2').refreshData(value,3);
-      if(value==1){
-        let startTime = (new Date(this.data.obj.startTime).getTime())/1000;
-        let endtime = util.format1("yyyy-MM-dd HH:mm",startTime+2592000);
-        this.selectComponent('#settledForm2').refreshTimeData(endtime,3);
-      }
-    }
     if(key == 'startTime'){
-      if(this.data.obj.sellingWay == 0){
-        this.selectComponent('#settledForm2').refreshTimeData(value,2);
+      let startTime = (new Date(value).getTime())/1000;
+      let endTime = (new Date(this.data.obj.endTime).getTime())/1000;
+      if((startTime&&!endTime)||(startTime<endTime)){
+        this.selectComponent('#settledForm').refreshTimeData(value,3);
         this.data.obj[key]=value;
       }else{
-        let startTime = (new Date(value).getTime())/1000;
-        let endTime = (new Date(this.data.obj.endTime).getTime())/1000;
-        if(startTime<endTime){
-          this.selectComponent('#settledForm2').refreshTimeData(value,2);
-          this.data.obj[key]=value;
-        }else{
-          app.showToastC('发售时间不可大于停售时间',1500);
-        }
+        app.showToastC('开始时间不可大于结束时间',1500);
       }
     }else if(key == 'endTime'){
       let endTime = (new Date(value).getTime())/1000;
       let startTime = (new Date(this.data.obj.startTime).getTime())/1000;
-      if(endTime>startTime){
-        this.selectComponent('#settledForm2').refreshTimeData(value,3);
+      if((!startTime&&endTime)||(endTime>startTime)){
+        this.selectComponent('#settledForm').refreshTimeData(value,4);
         this.data.obj[key]=value;
       }else{
-        app.showToastC('停售时间不可小于发售时间',1500);
+        app.showToastC('结束时间不可小于开始时间',1500);
       }
-    }else if(key == 'customAdded'){
+    }else if(key == 'goodsLabel'){
       this.setData({
-        [`listData6[0].index`]:1,
-        [`listData6[0].radioArr[1].time`]:e.detail.value,
+        activityReward:value,
       })
-      this.data.obj[key]=e.detail.value;
     }else{
       this.data.obj[key]=value;
     }
@@ -487,9 +202,7 @@ Page({
           // [`listData2[3].index`]:info.isShowSellNumber==0?1:0,
           // [`listData2[4].time`]:util.format1("yyyy-MM-dd HH:mm",info.startTime),
           // [`listData2[5].time`]:util.format1("yyyy-MM-dd HH:mm",info.stopTime),
-          [`listData3[0].index`]:info.isCanShare==0?1:info.isCanShare==1?0:2,
-          [`listData6[0].index`]:info.shelvesType,
-          [`listData6[0].radioArr[1].time`]:info.shelvesType==1?util.format1("yyyy-MM-dd HH:mm",info.shelvesTime):'',
+          [`listData3[0].index`]:info.isCanShare==0?1:0,
         })
     //  goodsName:'', //商品名称
     //  flatPatternmaking:'', //商品展示图
@@ -537,14 +250,14 @@ Page({
         obj.dateToPull = info.deliverTime;
         obj.isGoodsStock = info.isShowStock==0?1:0;
         obj.isSoldNum = info.isShowSellNumber==0?1:0;
+
         // obj.dateToPull = info.deliverTime;
         // obj.isGoodsStock = info.isShowStock==0?1:0;
         // obj.isSoldNum = info.isShowSellNumber==0?1:0;
         // obj.startTime = util.format1("yyyy-MM-dd HH:mm",info.startTime);
         // obj.endTime = util.format1("yyyy-MM-dd HH:mm",info.stopTime);
-        obj.isCanShare = info.isCanShare==0?1:info.isCanShare==1?0:2;
-        obj.addedData = info.shelvesType;
-        obj.customAdded = util.format1("yyyy-MM-dd HH:mm",info.shelvesTime);
+
+        obj.isCanShare = info.isCanShare==0?1:0;
       }else{
         app.showToastC(res.data.Msg,2000);
       }
@@ -643,9 +356,7 @@ console.log(obj.modeOfDespatch)
       stock:obj.goodsStock,
       isShowStock:obj.isGoodsStock==0?1:0,
       isShowSellNumber:obj.isSoldNum==0?1:0,
-      isCanShare:obj.isCanShare==0?1:obj.isCanShare==1?0:2,
-      shelvesType:obj.addedData,
-      shelvesTime:obj.addedData==1?(new Date(obj.customAdded.replace(/-/g,'/')).getTime())/1000:''
+      isCanShare:obj.isCanShare==0?1:0,
     }
     // obj.goodsDescribe.split('\n').join('</p><p>');
     console.log(data)

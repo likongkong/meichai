@@ -88,6 +88,7 @@ Page({
     if(e.detail.current == 0){
       // this.data.videoCtx.play();
     }else{
+      this.data.videoCtx.seek(0)
       this.data.videoCtx.pause();
     }
   },

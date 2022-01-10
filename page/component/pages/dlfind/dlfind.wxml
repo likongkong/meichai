@@ -118,15 +118,24 @@
             <view class="multilineellipsisFive" style="margin:20rpx;font-size:26rpx;" wx:if='{{item.title && item.type!=1 && item.type!=2 && item.type!=5}}' catchtap="jumpoffering" data-id="{{item.id}}" data-selltype='{{item.specialWay}}'  data-istype='{{item.type}}'><text>{{item.title}}</text></view>
 
             <view class="emlcontent" catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}' data-selltype='{{item.specialWay}}'>
+                <view style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;opacity: 0;z-index: 2;"></view>
+                <!-- 有视频没图片只展示视频 -->
+                <block wx:if="{{(item.type==3 || item.type==1) && (item.videoArr&&item.videoArr.length!=0) && (!item.imgArr || item.imgArr.length ==0)}}">
+                  <video 
+                      id="myVideo"
+                      style="width:500rpx;height: 500rpx;"
+                      src="{{item.videoArr[0].video_path}}"
+                  ></video>
+                </block>
                 <!-- 动态固定大小 -->
-                <block wx:if='{{(item.type==3 || item.type==1) && item.imgArr.length==1}}'>
+                <block wx:elif='{{(item.type==3 || item.type==1) && item.imgArr.length==1 && (!item.videoArr || item.videoArr.length ==0)}}'>
                     <view class="dynamicBox">
-                        <image class="emlcontentimg" style="width:100%;height:100%;" src="{{item.imgArr[0]}}" mode="aspectFill"></image>
+                        <image class="emlcontentimg" style="width:100%;height:100%;" src="{{item.imgArr[0]}}" mode="aspectFit"></image>
                     </view>
                 </block>
                 <block wx:else> 
                   <!-- 非动态单个图片 -->
-                   <block wx:if='{{item.imgArr && item.imgArr.length ==1}}'>
+                   <block wx:if='{{item.imgArr && item.imgArr.length ==1 && (!item.videoArr || item.videoArr.length ==0)}}'>
                        <image class="emlcontentimg" style="height:399rpx;" src="{{item.imgArr[0]}}" mode="aspectFill"></image>
                        <!-- 未开始 -->
                        <image wx:if='{{item.status==1}}' class="statusImgBox" src="https://cdn.51chaidan.com/images/brandSettledIcon/NotStarted.png" mode="aspectFit"></image>
@@ -137,7 +146,14 @@
                    </block>
                    <!-- 非动态多个图片 -->
                    <block wx:else>
-                        <view  class="dynamicBoxEve" wx:for='{{item.imgArr}}' wx:key='key'  wx:for-item='w' style="{{index%3==2?'margin-right:0;':''}}">
+                        <view class="dynamicBoxEve" wx:if="{{item.videoArr && item.videoArr.length!=0}}">
+                          <video 
+                              id="myVideo"
+                              style="width: 100%;height: 100%;"
+                              src="{{item.videoArr[0].video_path}}"
+                          ></video>
+                        </view>
+                        <view class="dynamicBoxEve" wx:for='{{item.imgArr}}' wx:key='key'  wx:for-item='w'>
                             <image class="emlcontentimg" style="width:100%;height:100%;" src="{{w}}" mode="aspectFill"></image>
                         </view>
                    </block>
@@ -230,6 +246,7 @@
           <view class='dlfeveleft' wx:for='{{communityList}}' wx:key='key' wx:if='{{index%2==0}}'>
             <view style='position:relative;margin-bottom:10rpx;'>
                 <view style='width:360rpx;margin:auto;position:relative;height:340rpx;overflow: hidden;'  catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}' data-selltype='{{item.specialWay}}'>
+                  <view style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;opacity: 0;z-index: 2;"></view>
                   <!-- <view class='dlfchrbright' wx:if='{{item.type==3}}'>动态</view>
                   <view class='dlfchrbright' wx:elif='{{item.type==1}}' style="background:#F5B1AE;">秒杀</view>
                   <view class='dlfchrbright' wx:elif='{{item.type==2}}' style="background:#9BE2F8;">抽选</view>
@@ -251,7 +268,13 @@
                     <image data-ind='{{index}}' style='width:360rpx;height:340rpx;margin:auto;display:block;border-radius:10rpx 10rpx 0 0;' mode='aspectFit' src='{{item.goodsImgArr[0]}}?imageMogr2/thumbnail/720x'></image>
                   </block>
                   <block wx:else>
-                    <image data-ind='{{index}}' style='width:360rpx;height:340rpx;margin:auto;display:block;border-radius:10rpx 10rpx 0 0;' mode='aspectFit' src='{{item.imgArr[0]}}?imageMogr2/thumbnail/720x'></image>
+                    <image wx:if="{{!item.videoArr || item.videoArr.length==0}}" data-ind='{{index}}' style='width:360rpx;height:340rpx;margin:auto;display:block;border-radius:10rpx 10rpx 0 0;' mode='aspectFit' src='{{item.imgArr[0]}}?imageMogr2/thumbnail/720x'></image>
+                    <video 
+                      wx:else
+                      id="myVideo"
+                      style="width: 100%;height: 100%;"
+                      src="{{item.videoArr[0].video_path}}"
+                    ></video>
                   </block>
                 </view>
             </view>
@@ -356,6 +379,7 @@
           <view class='dlfeveright' wx:for='{{communityList}}' wx:key='key' wx:if='{{index%2==1}}'>
             <view style='position:relative;margin-bottom:10rpx;'>
                 <view style='width:360rpx;margin:auto;position:relative;height:340rpx;overflow: hidden;'  catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}' data-selltype='{{item.specialWay}}'>
+                  <view style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;opacity: 0;z-index: 2;"></view>
                   <!-- <view class='dlfchrbright' wx:if='{{item.type==3}}'>动态</view>
                   <view class='dlfchrbright' wx:elif='{{item.type==1}}' style="background:#F5B1AE;">秒杀</view>
                   <view class='dlfchrbright' wx:elif='{{item.type==2}}' style="background:#9BE2F8;">抽选</view>
@@ -377,7 +401,13 @@
                     <image data-ind='{{index}}' style='width:360rpx;height:340rpx;margin:auto;display:block;border-radius:10rpx 10rpx 0 0;' mode='aspectFit' src='{{item.goodsImgArr[0]}}?imageMogr2/thumbnail/720x'></image>
                   </block>
                   <block wx:else>
-                    <image data-ind='{{index}}' style='width:360rpx;height:340rpx;margin:auto;display:block;border-radius:10rpx 10rpx 0 0;' mode='aspectFit' src='{{item.imgArr[0]}}?imageMogr2/thumbnail/720x'></image>
+                    <image wx:if="{{!item.videoArr || item.videoArr.length==0}}" data-ind='{{index}}' style='width:360rpx;height:340rpx;margin:auto;display:block;border-radius:10rpx 10rpx 0 0;' mode='aspectFit' src='{{item.imgArr[0]}}?imageMogr2/thumbnail/720x'></image>
+                    <video 
+                      wx:else
+                      id="myVideo"
+                      style="width: 100%;height: 100%;"
+                      src="{{item.videoArr[0].video_path}}"
+                    ></video>
                   </block>
                 </view>
             </view>

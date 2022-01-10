@@ -265,13 +265,21 @@ Page({
     console.log(prevPage.data.dynamicData);
     // return false;
     if(this.data.pagetype == 1){  // 动态页面  关联图鉴
+      console.log(title)
+      var selectArr = [];
+      selectArr.push({
+        id:id,
+        title:title,
+     })
       prevPage.setData({
         [`dynamicData[1].value`]:prevPage.data.obj.dynamicContent,
         [`dynamicData[2].imageList`]:prevPage.data.obj.dynamicPic,
-        [`dynamicData[${this.data.listIndex}].value`]:title,
-        [`dynamicData[4].value`]:prevPage.data.obj.allowComment,
+        [`dynamicData[3].src`]:prevPage.data.obj.dynamicVideo,
+        [`dynamicData[${this.data.listIndex}].value`]:title?title:'点击关联',
+        [`dynamicData[4].selectedArr`]:JSON.stringify(selectArr),
+        [`dynamicData[5].value`]:prevPage.data.obj.allowComment,
       })
-      prevPage.data.dynamicData[this.data.listIndex].value=title;
+      prevPage.data.dynamicData[this.data.listIndex].value=title?title:'点击关联';
       prevPage.data.obj.fieldGuideName=title;
       prevPage.data.obj.fieldGuideId=id;
     }else{

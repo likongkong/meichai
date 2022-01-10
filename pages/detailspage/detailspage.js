@@ -1568,7 +1568,11 @@ Page({
     //   // 商品个数
     //   var mcnum = parseInt(this.data.numberofdismantling);
     // }
-    if ((this.data.defaultinformation.carriage.free||"99")!='-1'){
+    if(zunmdata.isPayShippingFee){
+      acc = 0;
+      freightiftr = 0;
+      xianshi = '商品包邮'; 
+    }else if ((this.data.defaultinformation.carriage.free||"99")!='-1'){
       var tddefcarfr = parseFloat(this.data.defaultinformation.carriage.free||"99");
       if (mcnum >= parseFloat(this.data.defaultinformation.carriage.freeMCPieces)) {
         if (this.data.defaultinformation.carriage.freeMCPieces==1){
@@ -2617,6 +2621,15 @@ Page({
   dsbffunblock: function () {
     var _this = this;
     var res = this.data.zunmdata;
+
+    if(!res.isGoodsCanShare && _this.data.canShare!=1){
+      console.log('isGoodsCanShare','true 能 false不能分享')
+      if(!_this.data.referee){
+          _this.toogleGuidanceMask();
+          return false;
+      };
+    };
+
     var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
     var iftrnum = true;
     // if(_this.data.specialGoods == 1){
@@ -3179,9 +3192,11 @@ Page({
                _this.toogleGuidanceMask();
             };
           }else{
-            wx.showShareMenu({
-              withShareTicket:true
-            });
+            if(dataGinfo.isGoodsCanShare){
+              wx.showShareMenu();
+            }else{
+              wx.showShareMenu({withShareTicket:true});
+            }; 
           };
 
 

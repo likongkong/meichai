@@ -9,6 +9,7 @@
       <scroll-view class="message-list-container" scroll-y="true" scroll-into-view="{{scrollView}}" >
           <view class="no-message" wx:if="{{isCompleted}}">没有更多啦</view>
           <view class="t-message" wx:for="{{messageList}}" wx:key="index" id="item{{index+1}}">
+              <view class="t-message-time" wx:if="{{item.send_time}}">{{item.send_time}}</view>
               <view class="t-message-item">
                   <view class="{{item.isSelf ? 't-self-message':'t-recieve-message'}}">
                       <!-- 别人 -->
@@ -147,7 +148,7 @@
         <view class="message-body-span">
             <!-- <text class="message-body-span-text">{{msg}}</text> -->
             <view class="message-body-span" wx:for="{{renderDom}}" wx:key="index">
-                <span class="message-body-span-text" wx:if="{{item.name === 'span'}}">{{item.text}}</span>
+                <text class="message-body-span-text" selectable='true' user-select='true' wx:if="{{item.name === 'span'}}">{{item.text}}</text>
                 <image wx:if="{{item.name === 'img'}}" class="emoji-icon" src="{{item.src}}" />
             </view>            
         </view>
@@ -164,9 +165,9 @@
     <view class="custom-message {{isSelf?'my-custom':''}}">
         <image class="custom-image" src="{{photo_url}}" mode="aspectFit" />
         <view class="custom-content">
-          <view class="custom-content-title">{{order_name}}</view>
-          <view class="custom-content-description">{{style}}</view>
-          <view class="custom-content-price">￥{{price}}</view>
+          <view class="custom-content-title"><text selectable='true' user-select='true'>{{order_name}}</text></view>
+          <view class="custom-content-description"><text selectable='true' user-select='true'>{{style}}</text></view>
+          <view class="custom-content-price"><text selectable='true' user-select='true'>￥{{price}}</text></view>
         </view>
     </view>
 </template>

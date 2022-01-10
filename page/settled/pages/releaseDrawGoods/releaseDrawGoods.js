@@ -46,6 +46,7 @@ Page({
       },{
         isRequired:true,
         type:'text',
+        inputType:'number',
         subtitle:'抽选数量',
         placeholder:'请输入数量',
         value:'',
@@ -55,6 +56,7 @@ Page({
       },{
         isRequired:true,
         type:'text',
+        inputType:'digit',
         subtitle:'抽选价格',
         placeholder:'请输入价格',
         value:'',
@@ -82,8 +84,8 @@ Page({
         subtitle:'报名条件',
         radioArr:[
           {name:'wu',radioName:'无条件报名'},
-          {name:'cashPledge',radioName:'定金',placeholder:'请填写定金金额',value:''},
-          {name:'integrate',radioName:'消耗积分',placeholder:'请填写消耗积分',value:''},
+          {name:'cashPledge',radioName:'定金',placeholder:'请填写定金金额',value:'',inputType:'digit'},
+          {name:'integrate',radioName:'消耗积分',placeholder:'请填写消耗积分',value:'',inputType:'number'},
         ],
         value:0,
         index:0,
@@ -230,7 +232,7 @@ Page({
         isRequired:false,
         type:'radio',
         subtitle:'允许购买对象',
-        radioArr:['所有人可购买','指定群成员购买'],
+        radioArr:['所有人可购买','指定群成员购买','隐藏发售'],
         value:0,
         index:0,
         direction:'Y',
@@ -247,7 +249,7 @@ Page({
         radioArr:[
           {name:'immediatelyAdded',radioName:'发布即上架'},
           {name:'customAdded',radioName:'自定义上架日期',placeholder:'请选择上架日期',value:'',type:'time',time:''},
-          {name:'hideTheSale',radioName:'隐藏发售'},
+          // {name:'hideTheSale',radioName:'隐藏发售'},
         ],
         value:0,
         index:0,
@@ -535,7 +537,7 @@ Page({
           [`listData4[0].index`]:info.isShowSellNumber==0?1:0,
           // [`listData4[1].index`]:info.cashPledge==0?1:0,
           // [`listData4[1].value`]:info.cashPledge==0?'':info.cashPledge,
-          [`listData4[1].index`]:info.isCanShare==0?1:0,
+          [`listData4[1].index`]:info.isCanShare==0?1:info.isCanShare==1?0:2,
           [`listData5[0].index`]:info.cashPledge!=0?1:info.integral!=0?2:0,
           [`listData5[0].radioArr[1].value`]:info.cashPledge != 0?info.cashPledge:'',
           [`listData5[0].radioArr[2].value`]:info.integral != 0?info.integral:'',
@@ -573,7 +575,7 @@ Page({
         obj.applicationCondition = info.cashPledge!=0?1:info.integral!=0?2:0;
         obj.cashPledge = info.cashPledge!=0?info.cashPledge:'';
         obj.integrate = info.integral!=0?info.integral:'';
-        obj.isCanShare = info.isCanShare==0?1:0;
+        obj.isCanShare = info.isCanShare==0?1:info.isCanShare==1?0:2;
         obj.addedData = info.shelvesType;
         obj.customAdded = util.format1("yyyy-MM-dd HH:mm",info.shelvesTime);
       }else{
@@ -700,12 +702,12 @@ Page({
       arrGoodsDescImg:obj.goodsDetailsPic,
       illustrated_id:obj.fieldGuideId || '',
       isShowSellNumber:obj.isParticipants==0?1:0,
-      isCanShare:obj.isCanShare==0?1:0,
+      isCanShare:obj.isCanShare==0?1:obj.isCanShare==1?0:2,
       shelvesType:obj.addedData,
       shelvesTime:obj.addedData==1?(new Date(obj.customAdded.replace(/-/g,'/')).getTime())/1000:''
     }
-    // return false;
     console.log(data)
+    // return false;
 
     clearTimeout(this.data.timer);
     this.data.timer=setTimeout(()=>{

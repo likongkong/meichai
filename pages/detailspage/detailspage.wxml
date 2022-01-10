@@ -1407,14 +1407,22 @@
       </view>
       <view class='pricedetailo'>
         <view class='pricedetailoleft'>运费
-            <text style='padding-left:8rpx;color:#47981e;' wx:if='{{freightiftr>0&&is_exhibition!=1}}'>(满￥{{defaultinformation.carriage.free}}包邮)</text>
+            <block wx:if='{{!zunmdata.isPayShippingFee}}'>
+               <text style='padding-left:8rpx;color:#47981e;' wx:if='{{freightiftr>0&&is_exhibition!=1}}'>(满￥{{defaultinformation.carriage.free}}包邮)</text>
+            </block>
         </view>
         <view class='pricedetailoright' style="{{zunmdata.goods_type==3?'color:#999':''}}">
-          <block wx:if='{{is_exhibition==1}}'>
-             <block wx:if='{{freightiftr>0}}'>{{freight}}</block>
-             <block wx:else>{{zunmdata.deliver}}</block>
+          <block wx:if='{{zunmdata.isPayShippingFee}}'>
+               {{zunmdata.shippingName}}到付
           </block>
-          <block wx:else>{{freight}}</block>        
+          <block wx:else>
+              <block wx:if='{{is_exhibition==1}}'>
+                <block wx:if='{{freightiftr>0}}'>{{freight}}</block>
+                <block wx:else>{{zunmdata.deliver}}</block>
+              </block>
+              <block wx:else>{{freight}}</block> 
+          </block>
+       
         </view>
         
       </view>
@@ -1737,7 +1745,7 @@
    </view>
 </view>
 
-<view class="mask" wx:if="{{guidanceMask}}" catchtouchmove="true" catchtap="toogleGuidanceMask">
+<view class="mask" wx:if="{{guidanceMask}}" catchtouchmove="true" catchtap="toogleGuidanceMaskcloss">
   <view class="maskBox" catchtap="true"> 
 		<text class="guidanceWrapTitle">进入品牌微信群即可参与</text>
 		<view class="guidanceWrap">
@@ -1753,7 +1761,7 @@
 				<image class="img" src="https://cdn.51chaidan.com/images/shareImg/shareImgStyle.png" mode="widthFix"></image>
 			</view>
 		</view>
-		<image class="guanbi" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="widthFix" catchtap="toogleGuidanceMask"></image>
+		<image class="guanbi" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="widthFix" catchtap="toogleGuidanceMaskcloss"></image>
 	</view>
 </view>
 

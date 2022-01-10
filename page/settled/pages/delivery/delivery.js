@@ -35,7 +35,19 @@ Page({
     tipaid1:'',//收件
     isModification:false,
     takePhone:'',
-    pageType:1
+    pageType:1,
+    cancellationReasons:[
+      {name:"预约信息有误",id:1},
+      {name:"快递员无法取件",id:2},
+      {name:"上门太慢",id:3},
+      {name:"运费太贵",id:4},
+      {name:"联系不上快递员",id:7},
+      {name:"快递员要求取消",id:8},
+      {name:"其他",id:11},
+    ],
+    isCancellationReasonsMask:false,
+    cancellationReasonsId:'',
+    textareaBindinput:'',
   },
 
   /**
@@ -216,6 +228,12 @@ Page({
         // }else{
         if(res.data.ReturnCode != 200){
           app.showToastC(res.data.Msg,3000)  
+          setTimeout(()=>{
+            var pages = getCurrentPages();
+            var beforePage = pages[pages.length - 2];
+            beforePage.getData();
+            _this.goback();
+          },3000)
         };
       }
     });
@@ -228,9 +246,11 @@ Page({
   },
   // 取消上门取件
   cancel(){
+    console.log(this.data.cancellationReasonsId,this.data.textareaBindinput)
+    // return false;
     var _this = this;
-    console.log('mod=send_back&operation=cancel&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&id='+this.data.sendBackId)
-    var qqq = Dec.Aese('mod=send_back&operation=cancel&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&id='+this.data.sendBackId);
+    console.log('mod=send_back&operation=cancel&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&id='+this.data.sendBackId+'&cancel_type='+this.data.cancellationReasonsId+'&cancel_describe='+this.data.textareaBindinput)
+    var qqq = Dec.Aese('mod=send_back&operation=cancel&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&id='+this.data.sendBackId+'&cancel_type='+this.data.cancellationReasonsId+'&cancel_describe='+this.data.textareaBindinput);
     wx.showLoading({
       title: '加载中...',
       mask:true
@@ -474,6 +494,30 @@ Page({
       })
       console.log(this.data.startime,this.data.endtime,this.data.timeIndex)
     }
+  },
+  toggleCancellationReasonsMask(){
+    this.setData({
+      isCancellationReasonsMask:!this.data.isCancellationReasonsMask
+    })
+  },
+  chooseReasonFun(e){
+    let index = e.currentTarget.dataset.index;
+    let popoutData = this.data.cancellationReasons;
+    for(var i=0;i<popoutData.length;i++){
+      // if(popoutData[i].checked){
+        popoutData[i].checked = false;
+      // }
+    }
+    popoutData[index].checked = true;
+    let obj = {id:popoutData[index].id,name:popoutData[index].name};
+    this.setData({
+      cancellationReasons:popoutData,
+      cancellationReasonsId:popoutData[index].id,
+    })
+    console.log(obj)
+  },
+  textareaBindinput(e){
+    this.data.textareaBindinput = e.detail.value;
   },
   toggleExplain(){
     // let explaintxt = e.currentTarget.dataset.explaintxt;

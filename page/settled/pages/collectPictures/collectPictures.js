@@ -60,8 +60,9 @@ Page({
         type:'label',
         subtitle:'活动奖励',
         labelItem:[
-          {index:0,name:'积分'},
-          {index:1,name:'实物'},
+          {index:0,name:'无奖励'},
+          {index:1,name:'积分'},
+          {index:2,name:'实物'},
         ],
         index:999,
         value:0,
@@ -147,7 +148,7 @@ Page({
         radioArr:[
           {name:'wu',radioName:'所有人可参与'},
           {name:'qiongchengyuan',radioName:'指定群成员参与'},
-          {name:'qianzhihuodong',radioName:'完成前置活动',placeholder:'请选择活前置活动',value:''},
+          // {name:'qianzhihuodong',radioName:'完成前置活动',placeholder:'请选择活前置活动',value:''},
         ],
         value:0,
         index:0,

@@ -91,7 +91,8 @@ Page({
     isSettledImg:true,
     // 审核状态
     brandSettledStatus:0,
-    isAddNewEventMask:false
+    isAddNewEventMask:false,
+    isSettledTypeMask:false
   },
   jinqingqidai(e){
     let type = e.currentTarget.dataset.type;
@@ -119,6 +120,7 @@ Page({
 
   // 更新用户信息
   getUserProfileSettled(w){
+    let progressNum = w.currentTarget.dataset.num;
     app.getUserProfile((res,userInfo) => {
         this.setData({
           avatarUrl: userInfo.avatarUrl,
@@ -127,7 +129,11 @@ Page({
           istitnex: false,
           istit: true,
         });
-        this.comjumpwxnav(w)
+        // if(progressNum == 1){
+
+        // }else{
+          this.comjumpwxnav(w)
+        // }
     },'',1)
   },
 
