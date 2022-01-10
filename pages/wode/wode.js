@@ -117,7 +117,12 @@ Page({
       isSettledImg: false
     })
   },
-
+  // 入驻类型弹框显示隐藏
+  toggleSettledTypeMask(){
+    this.setData({
+      isSettledTypeMask: !this.data.isSettledTypeMask
+    })
+  },
   // 更新用户信息
   getUserProfileSettled(w){
     let progressNum = w.currentTarget.dataset.num;
@@ -129,14 +134,20 @@ Page({
           istitnex: false,
           istit: true,
         });
-        // if(progressNum == 1){
-
-        // }else{
+        if(progressNum == 1){
+          this.setData({
+            isSettledTypeMask: true
+          })
+        }else{
           this.comjumpwxnav(w)
-        // }
+        }
     },'',1)
   },
-
+  jumpSettled(e){
+    let type = e.currentTarget.dataset.type;
+    let whref = e.currentTarget.dataset.whref;
+    app.comjumpwxnav(type,whref)
+  },
   comjumpwxnav(e){
     let type = e.currentTarget.dataset.type;
     let num = e.currentTarget.dataset.num;
@@ -144,11 +155,13 @@ Page({
     this.setData({
       isAddNewEventMask:false
     })
-    // if(num == 1){
-    //   app.comjumpwxnav('9029',whref)
-    // }else{
+    if(num && num == 1){
+      this.setData({
+        isSettledTypeMask: true
+      })
+    }else{
       app.comjumpwxnav(type,whref)
-    // } 
+    } 
   },
   jumpVipPrivilegePage(){
     wx.navigateTo({  

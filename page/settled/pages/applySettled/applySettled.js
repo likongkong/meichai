@@ -135,6 +135,7 @@ Page({
     this.data.loginid = app.signindata.loginid;
     console.log(options)
     this.setData({
+      settledType:options.settledType,
       num:options.num,
       msg:options.msg,
       from:options.from || '',

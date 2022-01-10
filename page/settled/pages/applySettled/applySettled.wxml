@@ -6,7 +6,6 @@
     <block wx:if="{{num == 1}}">
         <view class="aFoCenter boxShadowEve">
             <settledForm 
-            id="settledForm"
             statusBarHeightMc="{{statusBarHeightMc}}"
             list="{{enterpriseData}}"
             bind:bindchange="bindchange"
