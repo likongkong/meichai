@@ -332,8 +332,8 @@
           "scene": null
         },
         {
-          "name": "page/secondpackge/pages/vipPage/vipPage",
-          "pathName": "page/secondpackge/pages/vipPage/vipPage",
+          "name": "提现申请",
+          "pathName": "page/settled/pages/applicationForWithdrawal/applicationForWithdrawal",
           "query": "",
           "scene": null
         },

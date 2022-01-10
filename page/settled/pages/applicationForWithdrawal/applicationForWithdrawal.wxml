@@ -1,0 +1,81 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class="afwbox">
+    <view class="afwboxEve">
+        <view class="afwboxEveChilder" style="border-bottom:2rpx solid #F5F5F5;">
+           <view><text style="color:#FA555B;">*</text>到账账户</view>
+           <view style="color:#8A8A8A;">中国建设银行(4687)</view>
+        </view>
+        <view class="afwboxEveChilder">
+           <view style="color:#8A8A8A;">如需更换银行卡，请到钱包页面进行解绑更换</view>
+           <view></view>
+        </view>
+    </view>
+
+    <view class="afwboxEve" style="margin-top:25rpx;">
+        <view class="afwboxEveChilder">
+           <view><text style="color:#FA555B;">*</text>申请提现金额</view>
+           <view style="color:#8A8A8A;"></view>
+        </view>
+        <view class="inputMoneyBox" style="border-bottom:2rpx solid #F5F5F5;">
+             <view class="inputMoneyBoxLeft">￥</view>
+             <input class='inputMoneyBoxLeft inputMoneyInput' type='text' bindinput="inputChange" value='{{descPrice}}'></input>
+        </view>
+        <view class="afwboxEveChilder">
+           <view style="color:#8A8A8A;">当前最高可申请提现400.00元，<text style="color:#90D2D6;">全部提现</text></view>
+           <view></view>
+        </view>
+    </view>
+    <view class="InvoiceInformation">发票信息</view>
+    <view class="afwboxEve">
+        <view class="afwboxEveChilder">
+           <view><text style="color:#FA555B;">*</text>选择开具发票形式</view>
+           <view style="color:#8A8A8A;"></view>
+        </view>
+
+        <view class="uploadMoneyBoxP">
+           <view class="uploadMoneyBox" wx:for='{{selectData}}' wx:key='key' catchtap="selectFun" data-ind='{{index}}'>
+              <image class="uploadMoneyBoxImg" src="{{item.select?'https://cdn.51chaidan.com/images/firmWithdraw/select.png':'https://cdn.51chaidan.com/images/firmWithdraw/no_select.png'}}" mode="aspectFit"></image>
+              {{item.name}}
+          </view>
+        </view>
+
+        <view class="uploadMoneyBoxP" wx:if='{{selectId == 2}}'>
+           <view class="uploadBottomFil">文件名.pdf</view>
+           <view class="uploadBottom">点击上传发票</view>
+        </view>
+
+        <view class="afwboxEveChilder" style="border-bottom:2rpx solid #F5F5F5;">
+           <view style="color:#AEAEAE;">请根据申请提现金额，上传对应的电子发票</view>
+           <view></view>
+        </view>
+
+        <view class="afwboxEveChilder" style="border-bottom:2rpx solid #F5F5F5;">
+           <view>抬头类型</view>
+           <view style="color:#8A8A8A;">公司抬头</view>
+        </view>
+        <view class="afwboxEveChilder" style="border-bottom:2rpx solid #F5F5F5;">
+           <view>发票抬头</view>
+           <view class="copyInformation">北京赋谷网络科技有限公司<view class="copyCart" catchtap="copyCart" data-cart='{{order_sn}}'>复制</view></view>
+        </view>
+        <view class="afwboxEveChilder" style="border-bottom:2rpx solid #F5F5F5;">
+           <view>发票税号</view>
+           <view class="copyInformation">91110105MA00GH8796<view class="copyCart" catchtap="copyCart" data-cart='{{order_sn}}'>复制</view></view>
+        </view>
+        <view class="afwboxEveChilder">
+           <view>邮寄地址</view>
+           <view class="copyInformation">北京市朝阳区胜古南里甲13号<view class="copyCart" catchtap="copyCart" data-cart='{{order_sn}}'>复制</view></view>
+        </view>
+
+
+    </view>
+
+
+
+</view>
+
+<view class="afwbottomFix">
+   <view class="afwbottomFixTop">提交审核通过后，预计两个工作日内提现到账</view>
+   <view class="afwbottomFixBot">提交</view>
+</view>

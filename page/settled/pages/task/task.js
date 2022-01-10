@@ -18,8 +18,18 @@ Page({
     mission:'',
     endtimeArr:[],
     triggered: false,
+    // 没有绑定银行卡弹框
+    commonBulletFrame:false,
+    
   },
-
+  confirmCommonTip(){
+    app.comjumpwxnav(9030,'','','')
+  },
+  closeCommonTip(){
+    this.setData({
+      commonBulletFrame:false,
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

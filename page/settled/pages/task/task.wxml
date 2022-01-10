@@ -3,10 +3,26 @@
 
 <view class="wrap">
   <view class="header" style="top:{{statusBarHeightMc}}px">
-    <view class="subsidy card">
+
+    <view class="withdrawalAmount">
+        <view class="withdrawalAmountTop">
+            <view class="wAToptxt">待提现金额</view>
+            <view class="wAToptxt" style="font-size:50rpx;">￥0.00</view>
+            <view class="goWA">去提现</view>
+        </view>
+        <view class="withdrawalAmountBottom">
+           <view>已领取补贴金额  1999999.00元</view>
+           <view class="withdrawalABImg">提现记录<image class="WithdrawalRecordI" src="https://cdn.51chaidan.com/images/right_arrow.png" mode="aspectFit"></image></view>
+        </view>
+        <view class="withdrawalAmountBottom">
+           <view>剩余补贴金额  1000000.00元</view>
+           <view class="withdrawalABImg">提现说明<image class="WithdrawalRecordI" src="https://cdn.51chaidan.com/images/right_arrow.png" mode="aspectFit"></image></view>
+        </view>
+    </view>
+    <!-- <view class="subsidy card">
       <text>{{score.scoreName}}：￥{{score.scoreAmount}}</text>
       <text data-type="9049" catchtap="comjumpwxnav">获取记录</text>
-    </view>
+    </view> -->
     <view class="navmenu"> 
       <block wx:for="{{group}}" wx:key='key'>
         <text class="{{index == current?'active':'' }}" id="{{item.missionGroup}}" data-title="{{item.missionGroup}}" data-index="{{index}}" catchtap="tabChange">{{item.groupName}}</text>
@@ -85,4 +101,20 @@
     <text>任务</text>
     <text>说明</text>
   </view>
+</view>
+
+<!-- 弹框-->
+<view class="wshNew" catchtouchmove="true" wx:if='{{commonBulletFrame}}' catchtap="closeCommonTip">
+    <view class="orderMangAddress" catchtap="true">
+        <text class="batchExportOrder" style="text-align:center;">使用提现功能请前往钱包页面添加一张支持提现的银行卡</text> 
+
+        <view class="orderMangTipCenterEve" style="width:610rpx;margin:auto;">
+            <view class="oAMaBConfirm" catchtap="closeCommonTip">取消</view>
+            <view class="oAMaBCancel" catchtap="confirmCommonTip">前往添加银行卡</view> 
+        </view>
+    </view>
+
+
+
+
 </view>
