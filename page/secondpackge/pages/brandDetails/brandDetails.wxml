@@ -130,6 +130,7 @@
 						
             <view class="emlcontent" catchtap="jumpoffering" data-selltype='{{item.specialWay}}' data-id="{{item.id}}" data-istype='{{item.type}}'>
 								<view style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;opacity: 0;z-index: 2;"></view>
+								<view>
 								<!-- 有视频没图片只展示视频 -->
 								<block wx:if="{{(item.type==3 || item.type==1) && (item.videoArr&&item.videoArr.length!=0) && (!item.imgArr || item.imgArr.length ==0)}}">
                   <video 
@@ -169,6 +170,7 @@
 											</view>
                    </block>
                 </block>
+								</view>
                 
                 <view class="signInNowCl" style="background:#ECCA1E;" wx:if='{{item.type==4}}'>立即签到</view>
 						</view>
