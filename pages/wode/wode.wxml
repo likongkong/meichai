@@ -124,14 +124,12 @@
                         <view class="addNewEventContentCap" wx:if='{{userJurisdictionList && !userJurisdictionList.isGoodsManage}}' catchtap='{{!userJurisdictionList.isGoodsManage?"permissionDeniedFun":""}}'></view>
                         <image class="releaseSaleImg" data-type="9040" catchtap="comjumpwxnav" style="margin-left:30rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/seckillButton20210923.png"  mode="widthFix"></image>
                         <image class="releaseSaleImg" data-type="9039" catchtap="comjumpwxnav" style="margin-right:30rpx;"  src="https://www.51chaidan.com/images/brandInfoIcon/selectButton20210923.png"  mode="widthFix"></image>
-                        
                     </view>
 
                     <view class="addNewEventContent">
                         <view class="addNewEventContentCap" wx:if='{{userJurisdictionList && !userJurisdictionList.isIllustratedManage}}'  catchtap='{{!userJurisdictionList.isIllustratedManage?"permissionDeniedFun":""}}'></view>
                         <image class="releaseSaleImg" data-type="9033" catchtap="comjumpwxnav" style="margin-left:30rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/illustratedButton20210923.png"  mode="widthFix"></image>
                         <image class="releaseSaleImg" data-type="9032" catchtap="comjumpwxnav" style="margin-right:30rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/dynamicButton20210923.png"  mode="widthFix"></image>
-                        
                     </view>
                 </view>
             </view>
@@ -214,7 +212,7 @@
                 <block wx:if="{{isSettledImg}}">
                     <!-- catchtap="comjumpwxnav" -->
                     <view class="settledImgWrap">
-                        <button class='butUserImg' type='primary' bindtap="getUserProfileSettled"  data-type="{{brandSettledStatus!=3?'9027':'9028'}}" data-num="{{brandSettledStatus}}" data-whref="id={{dataInfo.brandSettledInfo.brandSettledId}}&num={{brandSettledStatus}}&msg={{dataInfo.brandSettledInfo.brandSettledReturnMsg}}"></button>
+                        <button class='butUserImg' type='primary' bindtap="getUserProfileSettled" data-type="{{brandSettledStatus!=3?'9027':'9028'}}" data-num="{{brandSettledStatus}}" data-whref="id={{dataInfo.brandSettledInfo.brandSettledId}}&num={{brandSettledStatus}}&msg={{dataInfo.brandSettledInfo.brandSettledReturnMsg}}"></button>
                         <image class="settledImg" src="https://cdn.51chaidan.com/images/brandSettledIcon/audit{{brandSettledStatus==1?'0':brandSettledStatus==2?'1':brandSettledStatus==3?'3':'2'}}.png" mode="widthFix"></image>
                         <image class="closeImg" src="https://cdn.51chaidan.com/images/brandSettledIcon/closeImg.png" mode="widthFix" catchtap="closeSettledImg"></image>
                     </view>
@@ -376,4 +374,9 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
    </view>
 </view>
 
-
+<!-- 入驻类型弹框 -->
+<view class="popMask" wx:if="{{isSettledTypeMask}}" catchtouchmove="true" catchtap="toggleSettledTypeMask">
+    <view class="settledTypeBox">
+        
+    </view>
+</view>
