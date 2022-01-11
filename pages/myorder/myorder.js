@@ -628,6 +628,7 @@ Page({
         sendBackStatus:arr[j][0].sendBackStatus || false,
         sendBackAuditStatus:arr[j][0].sendBackAuditStatus || false,
         sendBackId:arr[j][0].sendBackId || 0,
+        redbagCDKEY:arr[j][0].redbagCDKEY || 0,
       })
     };   
     if (arrchil && arrchil.length != 0){
@@ -3555,7 +3556,16 @@ Page({
         app.showToastC('复制成功');
       }
     });
-  }
+  },
+  // 领取红包封面
+  showRedPackage(e){
+    wx.showRedPackage({
+      url:e.currentTarget.dataset.key,
+      success: (res) => {
+        }
+    })
+  },
+  
 })
 
 

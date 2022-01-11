@@ -572,14 +572,12 @@ Page({
               }; 
             };
 
-
             _this.setData({
               isShareGood:isShareGood,
               comdata: res.data.Info,
               id: res.data.Info.gid,
               subscribedata: res.data.Info.subscribe,
             })
-            
           };
         };
         if (res.data.ReturnCode == 800) {
@@ -3078,14 +3076,14 @@ vipOrOrdermine1(){
         });
     })
   },
-
-
-
-
-
-
-
-
-
+  
+  // 领取红包封面
+  showRedPackage(e){
+    wx.showRedPackage({
+      url:e.currentTarget.dataset.key,
+      success: (res) => {
+       }
+    })
+  },
 
 })

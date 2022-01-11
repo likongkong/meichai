@@ -300,6 +300,7 @@ Page({
   },
   //提交审核
   submitAudit(){
+
     let _this = this;
     let obj = this.data.obj;
     let phoneNum = /^1[3456789]\d{9}$/;
