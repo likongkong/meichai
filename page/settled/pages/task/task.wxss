@@ -24,15 +24,15 @@ page{
 }
 .header{
   width: 100%;
-  position: fixed;
-  left: 0;
+  /* position: fixed;
+  left: 0; */
   padding: 20rpx 26rpx 0 26rpx;
   box-sizing: border-box;
   background:#f4f5f9;
-  z-index: 9;
+  /* z-index: 9; */
 }
 .content{
-  margin-top: 210rpx;
+  margin-top: 0;
 }
 .card{
   width: 100%;

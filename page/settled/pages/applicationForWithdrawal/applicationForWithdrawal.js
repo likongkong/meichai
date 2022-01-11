@@ -1,6 +1,7 @@
 
 var Dec = require('../../../../common/public');//aes加密解密js
 var api = require("../../../../utils/api.js");
+var COS = require("../../../../common/cos-wx-sdk-v5.js")
 const app = getApp();
 Page({
   /**
@@ -18,7 +19,11 @@ Page({
     selectData:[{name:'线下邮寄',select:true,id:1},{name:'上传电子发票',select:false,id:2}],
     selectId:1
   },
-
+  fullWithdrawal(){
+    this.setData({
+        descPrice:this.data.dataInfo.can_withdraw
+    })
+  },
   // 选中函数
   selectFun(w){
     var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
@@ -80,15 +85,119 @@ Page({
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
     });
 
-    this.getData();
+    if(wx.getStorageSync('access_token')){
+      this.getData();
+    }else{
+      app.getAccessToken(_this.getData)
+    };
     
   },
   // 获取数据
   getData(num=1){
     var _this = this;
-    
+    api.withdraw_data({}).then((res) => {
+      console.log('提现数据=======',res)
+      if (res.data.status_code == 200) {
+          _this.setData({
+            dataInfo:res.data.data || {}
+          })
+      }else{
+        if(res.data && res.data.message){
+          app.showModalC(res.data.message); 
+        };        
+      }
+    })
   },
+  // 提现
+  withdrawal(){
+    var _this = this;
+    var dataInfo = _this.data.dataInfo || {};
+    if(!this.data.descPrice){
+      app.showModalC('提现金额不能为空')
+      return false;
+    };
 
+    if(parseFloat(this.data.descPrice) > parseFloat(dataInfo.can_withdraw)){
+      app.showModalC('提现金额不能大于最高可申请提现金额')
+      return false;
+    };
+    if(_this.data.selectId == 2){
+       if(!_this.data.withFilePath){
+          app.showModalC('请上传电子发票')
+          return false;
+       };
+    };
+    api.withdrawUp({
+      rise_path:_this.data.withFilePath || '', //电子发票地址
+      rise_type:_this.data.selectId==1?0:1, //发票类型0=线下1=电子发票
+      bank_id:dataInfo.bank_list[0].id, //银行卡id
+      amount:_this.data.descPrice, //提现金额
+      firmId:dataInfo.firmId, //企业ID
+    }).then((res) => {
+      console.log('提交提现=======',res)
+      if (res.data.status_code == 200) {
+        wx.navigateBack();
+      }else{
+        if(res.data && res.data.message){
+          app.showModalC(res.data.message); 
+        };        
+      }
+    })
+  },
+  UploadFile(){
+    var _this = this;
+    var cos = new COS({
+      SecretId: 'AKIDmY0RxErYIm2TfkckG8mEYbcNA4wYsPbe',
+      SecretKey: '4WkpgJ5bJlU4B6wNuCG4EDyVnGWUFhw1',
+    });
+    console.log(1111111111)
+    wx.chooseMessageFile({
+      count: 1,
+      type: 'file',
+      success (res) {
+        console.log('上传文件',res)
+        // tempFilePath可以作为img标签的src属性显示图片
+        const tempFilePaths = res.tempFiles;
+        if(tempFilePaths && tempFilePaths.length != 0){
+            var iftr = true;
+            tempFilePaths.forEach(element => {
+                console.log(element)
+                var filePath = element.path;
+                //获取最后一个.的位置
+                var index= filePath.lastIndexOf(".");
+                //获取后缀
+                var ext = filePath.substr(index+1);
+                _this.setData({
+                  fileName:element.name
+                })
+
+                var fileName =  `${app.signindata.uid}_${new Date().getTime()}.${ext}`;
+                cos.postObject({
+                      Bucket: 'brand-settled-info-1300990269',
+                      Region: 'ap-beijing',
+                      Key: `withdrawal/${fileName}`,
+                      FilePath: filePath,
+                      onProgress: function (info) {  //上传进度
+                          console.log('进度条',JSON.stringify(info));
+                      }
+                    },(err, data) => {
+                      console.log(err,data)
+                      if(data){
+                        _this.setData({
+                          withFilePath:data.Location
+                        })
+                      }else if(err){
+                        app.showToastC('上传失败')
+                      };
+
+                    }
+                );
+            });
+        };
+
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -130,7 +239,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this.getData(2)
+    // this.getData(2)
   },
 
   /**

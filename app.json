@@ -206,6 +206,7 @@
         "pages/collectPicUpload/collectPicUpload",
         "pages/AfterSalesDetails/AfterSalesDetails",
         "pages/applicationForWithdrawal/applicationForWithdrawal",
+        "pages/subsidyRecord/subsidyRecord",
         "pages/appliedAftersales/appliedAftersales"
       ]
     }

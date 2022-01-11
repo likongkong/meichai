@@ -137,6 +137,23 @@ export const salesResult = (url,query) => {
     return apiResquest.get('brand/settled_goods/salesResult/' + url,query)
 }
 // ---------------------------------------- 任务返利 -----------------------------------------
+// 获取金额
+export const get_the_amount = (query) => {
+    return apiResquest.get('brand/firm_withdraw/get_the_amount',query)
+}
+// 提现列表 
+export const firm_withdrawList = (query) => {
+    return apiResquest.get('brand/firm_withdraw/list',query)
+}
+// 提现申请 
+export const withdraw_data = (query) => {
+    return apiResquest.get('brand/firm_withdraw/withdraw_data',query)
+}
+// 提现 /
+export const withdrawUp = (query) => {
+    return apiResquest.post('brand/firm_withdraw/withdraw',query)
+}
+
 
 // ---------------------------------------- 售后详情 -----------------------------------------
 // 商家接口

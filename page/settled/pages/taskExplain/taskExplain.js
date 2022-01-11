@@ -28,6 +28,10 @@ Page({
       this.setData({
         c_title:'活动规则'
       }) 
+    }else if(this.data.type == 2){
+      this.setData({
+        c_title:'提现说明'
+      }) 
     };
 
     this.data.loginid = app.signindata.loginid;
@@ -97,6 +101,8 @@ Page({
     })
     if(this.data.type == 1){
         var getUrl = 'https://cdn.51chaidan.com/produce/tipLotto.json';
+    }else if(this.data.type == 2){
+        var getUrl = 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/firm_rule.json';
     }else{
         var getUrl = 'https://cdn.51chaidan.com/produce/tipBrandMission.json';
     };

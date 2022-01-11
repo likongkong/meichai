@@ -2,7 +2,7 @@
 @import "/common/citysel.wxss";
 page{
   background:#f4f5f9;
-  padding-bottom: 120rpx;
+  padding-bottom: 150rpx;
 }
 .afwbox{
   width: 100%;
@@ -110,7 +110,7 @@ page{
   z-index: 10;
 }
 .afwbottomFixTop{
-  padding-bottom: 20rpx;
+  padding-bottom: 15rpx;
   text-align: center;
   font-size: 24rpx;
   color:#AEAEAE ;

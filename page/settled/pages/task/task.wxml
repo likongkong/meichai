@@ -2,21 +2,22 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 <view class="wrap">
-  <view class="header" style="top:{{statusBarHeightMc}}px">
+  <!-- style="top:{{statusBarHeightMc}}px" -->
+  <view class="header">
 
-    <view class="withdrawalAmount">
+    <view class="withdrawalAmount" wx:if='{{dataInfo.is_show}}'>
         <view class="withdrawalAmountTop">
             <view class="wAToptxt">待提现金额</view>
-            <view class="wAToptxt" style="font-size:50rpx;">￥0.00</view>
-            <view class="goWA">去提现</view>
+            <view class="wAToptxt" style="font-size:50rpx;">￥{{dataInfo.can_withdraw}}</view>
+            <view class="goWA" catchtap="{{dataInfo.can_withdraw!=0.00?'goWAJump':''}}" data-jump='1'>去提现</view>
         </view>
         <view class="withdrawalAmountBottom">
-           <view>已领取补贴金额  1999999.00元</view>
-           <view class="withdrawalABImg">提现记录<image class="WithdrawalRecordI" src="https://cdn.51chaidan.com/images/right_arrow.png" mode="aspectFit"></image></view>
+           <view>已领取补贴金额  {{dataInfo.total_withdraw}}元</view>
+           <view class="withdrawalABImg" catchtap="goWAJump" data-jump='2'>提现记录<image class="WithdrawalRecordI" src="https://cdn.51chaidan.com/images/right_arrow.png" mode="aspectFit"></image></view>
         </view>
         <view class="withdrawalAmountBottom">
-           <view>剩余补贴金额  1000000.00元</view>
-           <view class="withdrawalABImg">提现说明<image class="WithdrawalRecordI" src="https://cdn.51chaidan.com/images/right_arrow.png" mode="aspectFit"></image></view>
+           <view>剩余补贴金额  {{dataInfo.subsidy_mount}}元</view>
+           <view class="withdrawalABImg" catchtap="goWAJump" data-jump='3'>提现说明<image class="WithdrawalRecordI" src="https://cdn.51chaidan.com/images/right_arrow.png" mode="aspectFit"></image></view>
         </view>
     </view>
     <!-- <view class="subsidy card">
@@ -30,10 +31,11 @@
     </view>
   </view>
 
-  <scroll-view style="height:{{winHeight-(statusBarHeightMc+115)}}px" scroll-y scroll-into-view="{{toView}}" scroll-with-animation="true"  class="content">
+  <!-- <scroll-view scroll-y scroll-into-view="{{toView}}" scroll-with-animation="true"  class="content"> -->
+  <!-- <view class="content"> -->
     <!-- refresher-enabled="{{true}}" refresher-threshold="{{100}}" refresher-default-style="black" refresher-background="white" refresher-triggered="{{triggered}}" bindrefresherrefresh="onScrollRefresh" -->
     <block wx:for="{{mission}}" wx:key='key'>
-      <view class="card" id="{{item.missionGroup}}">
+      <view class="card" id="{{item.missionGroup}}1">
         <view class="head">
           <view>
             <view class="taskWrap">
@@ -96,7 +98,8 @@
       </view>
     </block>
     <view style="width:100%;height:30rpx;"></view>
-  </scroll-view>
+  <!-- </scroll-view> -->
+  <!-- </view> -->
   <view class="taskexplain" data-type="9050" catchtap="comjumpwxnav">
     <text>任务</text>
     <text>说明</text>

@@ -1,5 +1,6 @@
 var Dec = require('../../../../common/public');//aes加密解密js
 const util = require('../../../../utils/util');
+var api = require("../../../../utils/api.js");
 const app = getApp();
 Page({
 
@@ -24,6 +25,7 @@ Page({
   },
   confirmCommonTip(){
     app.comjumpwxnav(9030,'','','')
+    this.closeCommonTip();
   },
   closeCommonTip(){
     this.setData({
@@ -52,6 +54,52 @@ Page({
     this.data.loginid = app.signindata.loginid;
     this.data.uid = app.signindata.uid;
     this.getData();
+
+    if(wx.getStorageSync('access_token')){
+      this.get_the_amount();
+    }else{
+      app.getAccessToken(this.get_the_amount)
+    };
+  },
+  // 获取数据
+  get_the_amount(){
+    var _this = this;
+    console.log('=========================')
+    api.get_the_amount({}).then((res) => {
+      console.log('提现金额=======',res)
+     if (res.data.status_code == 200) {
+        _this.setData({
+          dataInfo:res.data.data.info || {}
+        })
+     }else{
+       if(res.data && res.data.message){
+         app.showModalC(res.data.message); 
+       };        
+     }
+    })
+  },  
+  // 跳转
+  goWAJump(e){
+     var jump = e.currentTarget.dataset.jump || e.target.dataset.jump || 0;
+     if(jump == 1){
+        if(this.data.dataInfo.is_have){
+            wx.navigateTo({
+              url: `/page/settled/pages/applicationForWithdrawal/applicationForWithdrawal`
+            });  
+        }else{
+            this.setData({
+              commonBulletFrame:true
+            })
+        };
+     }else if(jump == 2){
+        wx.navigateTo({
+          url: `/page/settled/pages/subsidyRecord/subsidyRecord?firmid=${this.data.dataInfo.firmId}`
+        });
+     }else if(jump == 3){
+        app.comjumpwxnav(9050,2);
+     }
+
+     
   },
 
   /**
@@ -86,7 +134,7 @@ Page({
     // var that=this;
     let isRefresh = true;
     this.getData(isRefresh);
-
+    this.get_the_amount();
     // setTimeout(function(){
     //   that.setData({
     //     triggered: false,
@@ -113,6 +161,19 @@ Page({
       current:e.currentTarget.dataset.index,
       toView: id
     })
+    console.log(id)
+    var query = wx.createSelectorQuery();
+    query.select('#' + id +'1').boundingClientRect();
+    query.selectViewport().scrollOffset();
+    query.exec(function(res) {
+      if (res && res[0] && res[1]) {
+        console.log(res)
+        wx.pageScrollTo({
+          scrollTop:res[0].top+res[1].scrollTop-app.signindata.statusBarHeightMc||99,
+          duration:300
+        })
+      }
+    });
   },
   getData(isRefresh = false){
     if(!isRefresh){
@@ -242,6 +303,6 @@ Page({
   },
   comjumpwxnav(e){
     let type = e.currentTarget.dataset.type;
-    app.comjumpwxnav(type)
+    app.comjumpwxnav(type);
   },
 })

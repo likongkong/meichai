@@ -1,0 +1,20 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class="srBox">
+    <view class="srBoxEve" wx:for="{{dataInfo}}" wx:key='key'>
+        <view class="srBoxEveBox">
+            <view>{{item.missionName}}</view>
+            <view style="{{item.type==2?'color:#FFB730;':''}}">{{item.scoreAmount}}</view>
+        </view>
+        <view class="srBoxEveBox" style="margin-top:16rpx;">
+            <view class="sbebfontcolor">{{item.time}}</view>
+            <view class="sbebfontcolor">{{item.typeText}}</view>
+        </view>
+    </view>
+
+</view>
+
+<view class='noDataCom' wx:if='{{dataInfo.length==0&&nodataiftr}}'>
+      <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
+</view>
