@@ -17,7 +17,7 @@ Component({
     },
     form: {
       type: String,
-      value:'settled',
+      // value:'settled',
       observer(newVal){
         console.log(newVal)
       }

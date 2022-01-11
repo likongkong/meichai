@@ -390,6 +390,12 @@
           "pathName": "page/settled/pages/dynamicDetails/dynamicDetails",
           "query": "did=8114",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "page/settled/pages/applySettled/applySettled",
+          "query": "id=&num=1&msg=&settledType=0",
+          "scene": null
         }
       ]
     }

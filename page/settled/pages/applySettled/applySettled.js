@@ -15,8 +15,10 @@ Page({
     loginid:'',
     enterpriseData:[
       {
-        type:'h1',
-        value:'企业信息'
+        type:'subtitle',
+        subtitle:'企业信息',
+        backgroundColor:'#F5F5F5',
+        color:'#101010'
       },
       {
         isRequired:true,
@@ -24,6 +26,7 @@ Page({
         subtitle:'企业名称',
         placeholder:'请输入企业名称',
         value:'',
+        borderbottom1:'show',
         name:'enterpriseName'
       },{
         isRequired:true,
@@ -31,13 +34,15 @@ Page({
         subtitle:'企业联系人',
         placeholder:'请输入企业联系人',
         value:'',
+        borderbottom1:'show',
         name:'enterpriseContact'
       },{
         isRequired:true,
         type:'text',
-        subtitle:'联系方式',
-        placeholder:'请输入手机号',
+        subtitle:'企业联系人电话',
+        placeholder:'请输入企业联系人电话',
         value:'',
+        borderbottom1:'show',
         name:'enterprisePhone'
       }
       // ,{
@@ -51,43 +56,57 @@ Page({
       ,{
         isRequired:true,
         type:'uploadImg',
-        subtitle:'企业营业执照或与IP相关凭证',
+        subtitle:'企业营业执照复印件',
         name:'businessLicense',
         src:'',
         storagelocation:'images/brandSettled/certification'
       },{
-        type:'h1',
-        value:'IP信息（只需填写一个IP信息，通过后可继续添加）'
+        type:'subtitle',
+        subtitle:'品牌信息',
+        backgroundColor:'#F5F5F5',
+        color:'#101010'
       },{
         isRequired:true,
         type:'text',
-        subtitle:'IP名称',
-        placeholder:'请输入IP名称',
+        subtitle:'品牌名称',
+        placeholder:'请输入品牌名称',
         value:'',
+        borderbottom1:'show',
         name:'ipName'
       },{
         isRequired:true,
         type:'uploadImg',
-        subtitle:'IP logo（建议上传比例1:1）',
+        subtitle:'品牌主图（建议上传比例1:1）',
         name:'ipLogo',
         src:'',
+        borderbottom1:'show',
         storagelocation:'images/brandSettled/logo'
       },{
-        isRequired:false,
-        type:'uploadImg',
-        subtitle:'IP 形象图（建议上传比例16:9）',
-        name:'ipImage',
-        src:'',
-        storagelocation:'images/brandSettled/banner'
+      
       },{
         isRequired:false,
         type:'textarea',
-        subtitle:'IP介绍',
-        placeholder:'请输入IP介绍',
+        subtitle:'品牌简介',
+        placeholder:'请输入品牌简介',
         value:'',
         name:'introduce',
-        borderbottom1:'hide'
       },
+    ],
+    personData:[
+      {
+        type:'subtitle',
+        subtitle:'个人信息',
+        backgroundColor:'#F5F5F5',
+        color:'#101010'
+      },{
+        isRequired:true,
+        type:'text',
+        subtitle:'企业名称',
+        placeholder:'请输入企业名称',
+        value:'',
+        borderbottom1:'show',
+        name:'enterpriseName'
+      }
     ],
     IPData:[{
         isRequired:true,
@@ -223,6 +242,13 @@ Page({
   onShareAppMessage: function () {
     
   },
+  changeSettledType(e){
+    let type = e.currentTarget.dataset.type;
+    console.log(type)
+    this.setData({
+      settledType:type
+    })
+  },
   //返回n页
   navigateBack(e){
     let num = e.currentTarget.dataset.num;
@@ -317,7 +343,7 @@ Page({
     }
     if(!obj.enterprisePhone || obj.enterprisePhone == ''){
       this.selectComponent('#settledForm').scrollto('enterprisePhone');
-      app.showToastC('请输入手机号',1500);
+      app.showToastC('请输入企业联系人电话',1500);
       return false;
     }else if(!phoneNum.test(obj.enterprisePhone)){
       this.selectComponent('#settledForm').scrollto('enterprisePhone');
@@ -331,17 +357,17 @@ Page({
     // }
     if(!obj.businessLicense || obj.businessLicense == ''){
       this.selectComponent('#settledForm').scrollto('businessLicense');
-      app.showToastC('请上传企业营业执照或与IP相关凭证',1500);
+      app.showToastC('请上传企业营业执照复印件',1500);
       return false;
     }
     if(!obj.ipName || obj.ipName == ''){
       this.selectComponent('#settledForm').scrollto('ipName');
-      app.showToastC('请输入IP名称',1500);
+      app.showToastC('请输入品牌名称',1500);
       return false;
     }
     if(!obj.ipLogo || obj.ipLogo == ''){
       this.selectComponent('#settledForm').scrollto('ipLogo');
-      app.showToastC('请上传IP LOGO',1500);
+      app.showToastC('请上传品牌主图',1500);
       return false;
     }
     if(!obj.ipImage || obj.ipImage == ''){

@@ -2,17 +2,37 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 <view class="applyForOccupancy" style="padding-bottom: {{num!=1?'150':'210'}}rpx;">
-    <settledProgress num="{{num}}" intact="hide"></settledProgress>
+    <view class="settledTypeWrap"> 
+        <view data-type="0" catchtap="changeSettledType" class="{{settledType == 0?'active':''}}">企业入驻</view>
+        <view data-type="1" catchtap="changeSettledType" class="{{settledType == 1?'active':''}}">个人入驻</view>
+    </view>
+    <!-- <settledProgress num="{{num}}" intact="hide"></settledProgress> -->
     <block wx:if="{{num == 1}}">
-        <view class="aFoCenter boxShadowEve">
-            <settledForm 
-            statusBarHeightMc="{{statusBarHeightMc}}"
-            list="{{enterpriseData}}"
-            bind:bindchange="bindchange"
-            num="{{num}}"
-            isEdit="{{false}}"
-            brandInfo="{{brandInfo}}">
-            </settledForm>
+        <view class="aFoCenter">
+            <!-- 企业入驻 -->
+            <block wx:if="{{settledType == 0}}">  
+                <settledForm 
+                id="settledForm"
+                statusBarHeightMc="{{statusBarHeightMc}}"
+                list="{{enterpriseData}}"
+                bind:bindchange="bindchange"
+                num="{{num}}"
+                isEdit="{{false}}"
+                brandInfo="{{brandInfo}}">
+                </settledForm>
+            </block>
+            <!-- 个人入驻 -->
+            <block wx:else>
+                <settledForm 
+                id="settledForm"
+                statusBarHeightMc="{{statusBarHeightMc}}"
+                list="{{personData}}"
+                bind:bindchange="bindchange"
+                num="{{num}}"
+                isEdit="{{false}}"
+                brandInfo="{{brandInfo}}">
+                </settledForm>
+            </block>
         </view>
         <view class="submitWrap">
             <button class="submit" catchtap="submitAudit"> 提交审核 </button>
