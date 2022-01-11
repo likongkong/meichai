@@ -14,6 +14,7 @@ Page({
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     uid:'',
     loginid:'',
+    videoArr:[],
     detailData:{},
     illustrated_id:'',
     textconcent:'',
@@ -230,6 +231,7 @@ Page({
           res.data.Info.title = res.data.Info.title.split('hc').join('\n');
            _this.setData({
              dataInfo:res.data.Info,
+             videoArr:res.data.Info.videoArr,
              illustratedInfo:res.data.List.illustratedInfo
            })
         }else{
