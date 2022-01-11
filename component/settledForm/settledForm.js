@@ -57,8 +57,9 @@ Component({
    */
   data: {
     errorDom:'',
-    isExplain:false,
+    isExplain:false,      //说明弹框
     isCountdown:false,
+    isCertificationMask:false,  //实名认证弹框
     phoneCodeValue:'获取验证码',
   },
    /**
@@ -80,6 +81,14 @@ Component({
       this.setData({
         isExplain:false
       })
+    },
+    toggleCertificationMask(){
+      this.setData({
+        isCertificationMask:!this.data.isCertificationMask
+      })
+    },
+    authentication(){
+      this.triggerEvent("authentication");
     },
     getPhoneCode(){
       this.triggerEvent("getPhoneCode");

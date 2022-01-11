@@ -30,7 +30,8 @@
                 bind:bindchange="bindchange"
                 num="{{num}}"
                 isEdit="{{false}}"
-                brandInfo="{{brandInfo}}">
+                brandInfo="{{brandInfo}}"
+                bind:authentication="authentication">
                 </settledForm>
             </block>
         </view>

@@ -287,6 +287,28 @@
             </block>
           </view>
         </view>
+        <!-- 入驻实名认证  start -->
+        <view wx:if="{{item.type == 'settledCertification'}}" id="{{item.name}}" class="{{item.borderbottom1?'borderbottom1':''}} {{item.paddingL80?'paddingL80':''}}">
+          <view class="rowWrap">
+            <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}" data-explaintxt="{{item.explainTxt}}" catchtap="{{item.explainTxt?'showExplain':''}}">
+              <text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}
+              <image wx:if="{{item.explain}}" src="https://cdn.51chaidan.com/images/brandSettledIcon/wenhao.png" mode="widthFix"></image>
+            </view>
+            <input catchtap="toggleCertificationMask" class="cEveInput" disabled="{{true}}" data-name="{{item.name}}" placeholder="{{item.placeholder}}" value="{{item.value}}"></input>
+            <image wx:if="{{item.isEdit?false:isEdit}}" class="editIcon" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="widthFix"></image>
+          </view>
+          <view class="certificationInfo" wx:if="{{item.certificationInfo}}">
+            <view>
+              <text>姓名</text>
+              <text>{{item.certificationInfo.name}}</text>
+            </view>
+            <view>
+              <text>身份证</text>
+              <text>{{item.certificationInfo.idcard}}</text>
+            </view>
+          </view>
+        </view>
+        <!-- 入驻实名认证  end -->
       </block>
     </view>
   </block>
@@ -294,7 +316,7 @@
 
 
 
-
+<!-- 说明框 -->
 <view class="mask" wx:if="{{isExplain}}" catchtouchmove="true" catchtap="hideExplain">
   <view class="maskBox" catchtap="true">
     <text class="maskBoxtitle">提示</text>
@@ -302,5 +324,16 @@
       {{explaintxt}}
     </text>
     <view class="wenhaogb" catchtap="hideExplain">我知道了</view>
+  </view>
+</view>
+<!-- 实名认证弹框 -->
+<view class="mask" wx:if="{{isCertificationMask}}" catchtouchmove="true" catchtap="toggleCertificationMask">
+  <view class="certificationMaskBox" catchtap="true">
+    <image catchtap="toggleCertificationMask" class="certificationMaskBoxClose" src="../../pages/images/forknumber.png" mode="widthFix"></image>
+    <text>姓名</text>
+    <input placeholder="请输入真实姓名" type="text" value="" data-name="realname" bindinput="onKeyInput"></input>
+    <text>身份证</text>
+    <input placeholder="请输入身份证号码" type="idcard" value="" data-name="realidcard" bindinput="onKeyInput"></input>
+    <button catchtap="authentication">认证</button>
   </view>
 </view>

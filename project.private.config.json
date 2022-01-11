@@ -394,7 +394,7 @@
         {
           "name": "",
           "pathName": "page/settled/pages/applySettled/applySettled",
-          "query": "id=&num=1&msg=&settledType=0",
+          "query": "id=&num=1&msg=&settledType=1",
           "scene": null
         }
       ]

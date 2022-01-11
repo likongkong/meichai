@@ -87,7 +87,7 @@ Page({
         isRequired:false,
         type:'textarea',
         subtitle:'品牌简介',
-        placeholder:'请输入品牌简介',
+        placeholder:'选填，入驻成功后可继续编辑',
         value:'',
         name:'introduce',
       },
@@ -100,13 +100,52 @@ Page({
         color:'#101010'
       },{
         isRequired:true,
-        type:'text',
-        subtitle:'企业名称',
-        placeholder:'请输入企业名称',
+        type:'settledCertification',
+        subtitle:'实名认证',
+        placeholder:'点击认证',
         value:'',
         borderbottom1:'show',
-        name:'enterpriseName'
-      }
+        certificationInfo:{},
+        name:'certification'
+      },{
+        isRequired:true,
+        type:'text',
+        subtitle:'联系人电话',
+        placeholder:'请输入联系人电话',
+        value:'',
+        borderbottom1:'show',
+        name:'personPhone'
+      },{
+        type:'subtitle',
+        subtitle:'品牌信息',
+        backgroundColor:'#F5F5F5',
+        color:'#101010'
+      },{
+        isRequired:true,
+        type:'text',
+        subtitle:'品牌名称',
+        placeholder:'请输入品牌名称',
+        value:'',
+        borderbottom1:'show',
+        name:'personIpName'
+      },{
+        isRequired:true,
+        type:'uploadImg',
+        subtitle:'品牌主图（建议上传比例1:1）',
+        name:'personIpLogo',
+        src:'',
+        borderbottom1:'show',
+        storagelocation:'images/brandSettled/logo'
+      },{
+      
+      },{
+        isRequired:false,
+        type:'textarea',
+        subtitle:'品牌简介',
+        placeholder:'选填，入驻成功后可继续编辑',
+        value:'',
+        name:'personIntroduce',
+      },
     ],
     IPData:[{
         isRequired:true,
@@ -266,6 +305,9 @@ Page({
     this.data.obj[key]=e.detail.value;
     console.log(this.data.obj)
   },
+  authentication(){
+    console.log(1111111)
+  },
   //获取品牌信息
   getBrandInfo(){
     wx.showLoading({
@@ -282,6 +324,12 @@ Page({
         console.log('品牌信息====',res)
        
         if(res.data.ReturnCode == 200){
+
+          this.setData({
+            [`personData[1].certificationInfo.name`]:'贾*超',
+            [`personData[1].certificationInfo.idcard`]:'1245*********23658',
+          })
+
           let brandInfo = res.data.Info;
           this.data.obj = {
             enterpriseName:brandInfo.firm_name,
