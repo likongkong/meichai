@@ -3,7 +3,7 @@
 
 
 <view class="wrap">
-  <view wx:if="{{info==0}}">
+  <view wx:if="{{info.type==0}}">
     <view class="title">
       <text class="h1">企业信息</text>
       <text class="edit" data-type="9043" data-whref="info={{enterpriseinfo}}" catchtap="comjumpwxnav"  wx:if="{{!isFansAdmin}}">编辑</text>

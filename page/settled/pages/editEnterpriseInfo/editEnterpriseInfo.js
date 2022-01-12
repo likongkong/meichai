@@ -19,6 +19,7 @@ Page({
         subtitle:'企业名称',
         placeholder:'请输入企业名称',
         value:'',
+        borderbottom1:'show',
         name:'enterpriseName'
       },{
         isRequired:true,
@@ -26,6 +27,7 @@ Page({
         subtitle:'企业联系人',
         placeholder:'请输入企业联系人',
         value:'',
+        borderbottom1:'show',
         name:'enterpriseContact'
       },{
         isRequired:true,
@@ -33,6 +35,7 @@ Page({
         subtitle:'联系方式',
         placeholder:'请输入手机号',
         value:'',
+        borderbottom1:'show',
         name:'enterprisePhone'
       },
       // {
@@ -151,13 +154,14 @@ Page({
       enterprisePhone:this.data.info.firm_tel,
       wechatID:this.data.info.wechat_number,
       businessLicense:this.data.info.certificate_img,
+      setType:this.data.info.type,
     };
     this.setData({
       [`enterpriseData[0].value`]:this.data.info.firm_name,
       [`enterpriseData[1].value`]:this.data.info.firm_linkman,
       [`enterpriseData[2].value`]:util.plusXing(this.data.info.firm_tel,3,4),
-      [`enterpriseData[3].value`]:this.data.info.wechat_number,
-      [`enterpriseData[4].src`]:this.data.info.certificate_img,
+      // [`enterpriseData[3].value`]:this.data.info.wechat_number,
+      [`enterpriseData[3].src`]:this.data.info.certificate_img,
     })
   },
   //提交审核
@@ -184,11 +188,11 @@ Page({
       app.showToastC('手机号有误请重新填写',2000);
       return false;
     }
-    if(!obj.wechatID || obj.wechatID == ''){
-      this.selectComponent('#settledForm').scrollto('wechatID');
-      app.showToastC('请输入微信号',1500);
-      return false;
-    }
+    // if(!obj.wechatID || obj.wechatID == ''){
+    //   this.selectComponent('#settledForm').scrollto('wechatID');
+    //   app.showToastC('请输入微信号',1500);
+    //   return false;
+    // }
     if(!obj.businessLicense || obj.businessLicense == ''){
       this.selectComponent('#settledForm').scrollto('businessLicense');
       app.showToastC('请上传企业营业执照或与IP相关凭证',1500);
@@ -196,7 +200,7 @@ Page({
     }
     
     console.log(obj.businessLicense)
-    let data = `mod=community&operation=certificationSet&uid=${this.data.uid}&loginid=${this.data.loginid}&firm_name=${obj.enterpriseName}&firm_linkman=${obj.enterpriseContact}&firm_tel=${obj.enterprisePhone}&wechat_number=${obj.wechatID}&certificate_img=${obj.businessLicense}`
+    let data = `mod=community&operation=certificationSet&uid=${this.data.uid}&loginid=${this.data.loginid}&firm_name=${obj.enterpriseName}&firm_linkman=${obj.enterpriseContact}&firm_tel=${obj.enterprisePhone}&wechat_number=${obj.wechatID}&certificate_img=${obj.businessLicense}&setType=${obj.setType}`
     var q = Dec.Aese(data);
     console.log(`${app.signindata.comurl}?${data}`)
     wx.request({
