@@ -3188,6 +3188,7 @@ Page({
           if(!dataGinfo.isGoodsCanShare && _this.data.canShare!=1){
             console.log('isGoodsCanShare','true 能 false不能分享')
             wx.hideShareMenu();
+            _this.setData({isShareFun : false});
             if(!_this.data.referee){
                _this.toogleGuidanceMask();
             };

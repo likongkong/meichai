@@ -222,7 +222,7 @@
             <image class='emlplefimgshare' data-type='1' catchtap='followfun' data-id='{{zunmdata.gid}}' src='{{zunmdata.isGoodsPraise?"https://www.51chaidan.com/images/brand/red_heart.png":"https://www.51chaidan.com/images/brand/black_heart.png"}}'></image>
             <view class="sbottomLeftNum">{{zunmdata.gpraise}}</view>
         </view>
-        <view class="sbottomLeft">
+        <view class="sbottomLeft" wx:if='{{isShareFun}}'>
             <image class='emlplefimgshare' catchtap="jumpoffering" data-id="{{item.id}}" data-istype='{{item.type}}' src="https://cdn.51chaidan.com/images/brandInfoIcon/settledGoodsShareIcon.png"></image>
             <view class="sbottomLeftNum">{{zunmdata.settledGoodsShareNumber}}</view>
             <button open-type="share" style='position: absolute;left: 0;top: 0;width: 100%; height: 100%;opacity: 0;padding:0;z-index:1;' type="default" size="mini"></button>
