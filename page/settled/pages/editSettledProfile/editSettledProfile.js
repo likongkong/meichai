@@ -21,6 +21,7 @@ Page({
         subtitle:'企业名称',
         placeholder:'请输入企业名称',
         value:'',
+        borderbottom1:'show',
         name:'enterpriseName'
       },{
         isRequired:true,
@@ -28,6 +29,7 @@ Page({
         subtitle:'企业联系人',
         placeholder:'请输入企业联系人',
         value:'',
+        borderbottom1:'show',
         name:'enterpriseContact'
       },{
         isRequired:true,
@@ -35,30 +37,38 @@ Page({
         subtitle:'联系方式',
         placeholder:'请输入手机号',
         value:'',
+        borderbottom1:'show',
         name:'enterprisePhone'
-      },{
-        isRequired:true,
-        type:'text',
-        subtitle:'微信号',
-        placeholder:'请输入微信号',
-        value:'',
-        name:'wechatID'
-      },{
+      },
+      // {
+      //   isRequired:true,
+      //   type:'text',
+      //   subtitle:'微信号',
+      //   placeholder:'请输入微信号',
+      //   value:'',
+      //   borderbottom1:'show',
+      //   name:'wechatID'
+      // },
+      {
         isRequired:true,
         type:'uploadImg',
         subtitle:'企业营业执照或与IP相关凭证',
         name:'businessLicense',
         src:'',
+        borderbottom1:'show',
         storagelocation:'images/brandSettled/certification'
       },{
-        type:'h1',
-        value:'IP信息（只需填写一个IP信息，通过后可继续添加）'
+        type:'subtitle',
+        subtitle:'品牌信息',
+        backgroundColor:'#F5F5F5',
+        color:'#101010'
       },{
         isRequired:true,
         type:'text',
         subtitle:'IP名称',
         placeholder:'请输入IP名称',
         value:'',
+        borderbottom1:'show',
         name:'ipName'
       },{
         isRequired:true,
@@ -66,22 +76,25 @@ Page({
         subtitle:'IP logo（建议上传比例1:1）',
         name:'ipLogo',
         src:'',
+        borderbottom1:'show',
         storagelocation:'images/brandSettled/logo'
-      },{
-        isRequired:false,
-        type:'uploadImg',
-        subtitle:'IP 形象图（建议上传比例16:9）',
-        name:'ipImage',
-        src:'',
-        storagelocation:'images/brandSettled/banner'
-      },{
+      },
+      // {
+      //   isRequired:false,
+      //   type:'uploadImg',
+      //   subtitle:'IP 形象图（建议上传比例16:9）',
+      //   name:'ipImage',
+      //   src:'',
+      //   borderbottom1:'show',
+      //   storagelocation:'images/brandSettled/banner'
+      // },
+      {
         isRequired:false,
         type:'textarea',
         subtitle:'IP介绍',
         placeholder:'请输入IP介绍',
         value:'',
         name:'introduce',
-        borderbottom1:'hide'
       },
     ],
     IPData:[{
@@ -90,6 +103,7 @@ Page({
         subtitle:'IP名称',
         placeholder:'请输入IP名称',
         value:'',
+        borderbottom1:'show',
         name:'ipName'
       },{
         isRequired:true,
@@ -97,6 +111,7 @@ Page({
         subtitle:'IP logo（建议上传比例1:1）',
         name:'ipLogo',
         src:'',
+        borderbottom1:'show',
         storagelocation:'images/brandSettled/logo'
       },{
         isRequired:false,
@@ -104,6 +119,7 @@ Page({
         subtitle:'IP 形象图（建议上传比例16:9）',
         name:'ipImage',
         src:'',
+        borderbottom1:'show',
         storagelocation:'images/brandSettled/banner'
       },{
         isRequired:false,
@@ -112,7 +128,7 @@ Page({
         placeholder:'请输入IP介绍',
         value:'',
         name:'introduce',
-        borderbottom1:'hide'
+        borderbottom1:'show'
       },
     ],
     obj:{},
@@ -229,11 +245,11 @@ Page({
             enterpriseName:brandInfo.firm_name,
             enterpriseContact:brandInfo.firm_linkman,
             enterprisePhone:brandInfo.firm_tel,
-            wechatID:brandInfo.wechat_number,
+            // wechatID:brandInfo.wechat_number,
             businessLicense:brandInfo.certificate_img,
             ipName:brandInfo.ip_name,
             ipLogo:brandInfo.ip_logo,
-            ipImage:brandInfo.ip_img,
+            // ipImage:brandInfo.ip_img,
             introduce:brandInfo.ip_introduce,
           };
           if(this.data.from=='zhuanqu'){
@@ -248,12 +264,12 @@ Page({
               [`enterpriseData[1].value`]:brandInfo.firm_name,
               [`enterpriseData[2].value`]:brandInfo.firm_linkman,
               [`enterpriseData[3].value`]:brandInfo.firm_tel,
-              [`enterpriseData[4].value`]:brandInfo.wechat_number,
-              [`enterpriseData[5].src`]:brandInfo.certificate_img,
-              [`enterpriseData[7].value`]:brandInfo.ip_name,
-              [`enterpriseData[8].src`]:brandInfo.ip_logo,
-              [`enterpriseData[9].src`]:brandInfo.ip_img,
-              [`enterpriseData[10].value`]:brandInfo.ip_introduce.split('hc').join('\n'),
+              // [`enterpriseData[4].value`]:brandInfo.wechat_number,
+              [`enterpriseData[4].src`]:brandInfo.certificate_img,
+              [`enterpriseData[6].value`]:brandInfo.ip_name,
+              [`enterpriseData[7].src`]:brandInfo.ip_logo,
+              // [`enterpriseData[9].src`]:brandInfo.ip_img,
+              [`enterpriseData[9].value`]:brandInfo.ip_introduce.split('hc').join('\n'),
             })
           }
         }else{
@@ -284,31 +300,31 @@ Page({
     }
     if(!obj.enterprisePhone || obj.enterprisePhone == ''){
       this.selectComponent('#settledForm').scrollto('enterprisePhone');
-      app.showToastC('请输入手机号',1500);
+      app.showToastC('请输入企业联系人电话',1500);
       return false;
     }else if(!phoneNum.test(obj.enterprisePhone)){
       this.selectComponent('#settledForm').scrollto('enterprisePhone');
       app.showToastC('手机号有误请重新填写',2000);
       return false;
     }
-    if(!obj.wechatID || obj.wechatID == ''){
-      this.selectComponent('#settledForm').scrollto('wechatID');
-      app.showToastC('请输入微信号',1500);
-      return false;
-    }
+    // if(!obj.wechatID || obj.wechatID == ''){
+    //   this.selectComponent('#settledForm').scrollto('wechatID');
+    //   app.showToastC('请输入微信号',1500);
+    //   return false;
+    // }
     if(!obj.businessLicense || obj.businessLicense == ''){
       this.selectComponent('#settledForm').scrollto('businessLicense');
-      app.showToastC('请上传企业营业执照或与IP相关凭证',1500);
+      app.showToastC('请上传企业营业执照复印件',1500);
       return false;
     }
     if(!obj.ipName || obj.ipName == ''){
       this.selectComponent('#settledForm').scrollto('ipName');
-      app.showToastC('请输入IP联系人',1500);
+      app.showToastC('请输入品牌名称',1500);
       return false;
     }
     if(!obj.ipLogo || obj.ipLogo == ''){
       this.selectComponent('#settledForm').scrollto('ipLogo');
-      app.showToastC('请上传IP LOGO',1500);
+      app.showToastC('请上传品牌主图',1500);
       return false;
     }
     if(!obj.ipImage || obj.ipImage == ''){
@@ -318,7 +334,8 @@ Page({
       obj.introduce = ''
     }
     let introduce = encodeURIComponent(obj.introduce.split('\n').join('hc'));
-    let data = `mod=brandCertification&operation=initial&uid=${this.data.uid}&loginid=${this.data.loginid}&firm_name=${obj.enterpriseName}&firm_linkman=${obj.enterpriseContact}&firm_tel=${obj.enterprisePhone}&wechat_number=${obj.wechatID}&certificate_img=${obj.businessLicense}&ip_name=${obj.ipName}&ip_logo=${obj.ipLogo}&ip_img=${obj.ipImage}&ip_introduce=${introduce}&id=${this.data.id}`
+    let data = `mod=brandCertification&operation=initial&uid=${this.data.uid}&loginid=${this.data.loginid}&firm_name=${obj.enterpriseName}&firm_linkman=${obj.enterpriseContact}&firm_tel=${obj.enterprisePhone}&wechat_number=${obj.wechatID}&certificate_img=${obj.businessLicense}&ip_name=${obj.ipName}&ip_logo=${obj.ipLogo}&ip_img=${obj.ipImage}&ip_introduce=${introduce}&id=${this.data.id}&type=0`
+
     var q = Dec.Aese(data);
     console.log(`${app.signindata.comurl}?${data}`)
     wx.request({

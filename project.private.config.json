@@ -396,6 +396,12 @@
           "pathName": "page/settled/pages/applySettled/applySettled",
           "query": "id=&num=1&msg=&settledType=1",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "page/settled/pages/editSettledProfile/editSettledProfile",
+          "query": "id=13&num=4&from=",
+          "scene": null
         }
       ]
     }

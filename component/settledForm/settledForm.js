@@ -34,6 +34,7 @@ Component({
         console.log(newVal)
       }
     },
+    isCertificationMask:{ type: Boolean },
     statusBarHeightMc:{type: Number},
     brandInfo: {
       type: Object,

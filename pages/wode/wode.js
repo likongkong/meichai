@@ -146,6 +146,9 @@ Page({
   jumpSettled(e){
     let type = e.currentTarget.dataset.type;
     let whref = e.currentTarget.dataset.whref;
+    this.setData({
+      isSettledTypeMask: false
+    })
     app.comjumpwxnav(type,whref)
   },
   comjumpwxnav(e){

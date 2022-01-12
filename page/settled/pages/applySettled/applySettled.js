@@ -105,7 +105,7 @@ Page({
         placeholder:'点击认证',
         value:'',
         borderbottom1:'show',
-        certificationInfo:{},
+        certificationInfo:'',
         name:'certification'
       },{
         isRequired:true,
@@ -178,10 +178,14 @@ Page({
         borderbottom1:'hide'
       },
     ],
-    obj:{},
+    obj:{
+      realname:'',
+      realidcard:''
+    },
     num:1,  //进度
     id:0,
     brandInfo:{}, //品牌信息
+    isCertification:false,  //是否实名认证
   },
 
   /**
@@ -197,7 +201,8 @@ Page({
       num:options.num,
       msg:options.msg,
       from:options.from || '',
-      id:options.id || 0
+      id:options.id || 0,
+      enterType:options.enterType,
     })
     // 获取系统信息
     wx.getSystemInfo({
@@ -306,7 +311,43 @@ Page({
     console.log(this.data.obj)
   },
   authentication(){
-    console.log(1111111)
+    let _this = this;
+    let obj = this.data.obj;
+    if(!obj.realname || obj.realname == ''){
+      app.showToastC('请输入真实姓名',1500);
+      return false;
+    }
+    if(!obj.realidcard || obj.realidcard == ''){
+      app.showToastC('请输入身份证号码',1500);
+      return false;
+    }
+    let data = `mod=address&operation=verifyIdentityCard&uid=${this.data.uid}&loginid=${this.data.loginid}&idcard=${this.data.obj.realidcard}&username=${this.data.obj.realname}`
+    var q = Dec.Aese(data);
+    console.log(`${app.signindata.comurl}?${data}`)
+    wx.request({
+      url: app.signindata.comurl + 'user.php' + q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: (res) => { 
+        console.log('实名认证====',res)
+        wx.hideLoading()
+        if(res.data.ReturnCode == 200){
+          app.showToastC('认证成功',1500);
+          this.setData({
+            isCertification:true,
+            isCertificationMask:false,
+            [`personData[1].placeholder`]:'已认证',
+            [`personData[1].certificationInfo.name`]:obj.realname,
+            [`personData[1].certificationInfo.idcard`]:obj.realidcard,
+          })
+        }else{
+          app.showToastC(res.data.Message,2000);
+        }
+      },
+      fail: function () {},
+      complete:function(){
+      }
+    });
   },
   //获取品牌信息
   getBrandInfo(){
@@ -325,23 +366,8 @@ Page({
        
         if(res.data.ReturnCode == 200){
 
-          this.setData({
-            [`personData[1].certificationInfo.name`]:'贾*超',
-            [`personData[1].certificationInfo.idcard`]:'1245*********23658',
-          })
-
+        
           let brandInfo = res.data.Info;
-          this.data.obj = {
-            enterpriseName:brandInfo.firm_name,
-            enterpriseContact:brandInfo.firm_linkman,
-            enterprisePhone:brandInfo.firm_tel,
-            wechatID:brandInfo.wechat_number || '',
-            businessLicense:brandInfo.certificate_img,
-            ipName:brandInfo.ip_name,
-            ipLogo:brandInfo.ip_logo,
-            ipImage:brandInfo.ip_img,
-            introduce:brandInfo.ip_introduce,
-          };
           if(this.data.from=='zhuanqu'){
             this.setData({
               [`IPData[0].value`]:brandInfo.ip_name,
@@ -350,18 +376,42 @@ Page({
               [`IPData[3].value`]:brandInfo.ip_introduce.split('hc').join('\n'),
             })
           }else{
-            this.setData({
-              [`enterpriseData[1].value`]:brandInfo.firm_name,
-              [`enterpriseData[2].value`]:brandInfo.firm_linkman,
-              [`enterpriseData[3].value`]:brandInfo.firm_tel,
-              [`enterpriseData[4].value`]:brandInfo.wechat_number,
-              [`enterpriseData[5].src`]:brandInfo.certificate_img,
-              [`enterpriseData[7].value`]:brandInfo.ip_name,
-              [`enterpriseData[8].src`]:brandInfo.ip_logo,
-              [`enterpriseData[9].src`]:brandInfo.ip_img,
-              [`enterpriseData[10].value`]:brandInfo.ip_introduce.split('hc').join('\n'),
-            })
+            if(this.data.settledType == 0){  //企业入驻
+              this.data.obj = {
+                enterpriseName:brandInfo.firm_name,
+                enterpriseContact:brandInfo.firm_linkman,
+                enterprisePhone:brandInfo.firm_tel,
+                wechatID:brandInfo.wechat_number || '',
+                businessLicense:brandInfo.certificate_img,
+                ipName:brandInfo.ip_name,
+                ipLogo:brandInfo.ip_logo,
+                // ipImage:brandInfo.ip_img,
+                introduce:brandInfo.ip_introduce,
+              };
+              this.setData({
+                [`enterpriseData[1].value`]:brandInfo.firm_name,
+                [`enterpriseData[2].value`]:brandInfo.firm_linkman,
+                [`enterpriseData[3].value`]:brandInfo.firm_tel,
+                // [`enterpriseData[4].value`]:brandInfo.wechat_number,
+                [`enterpriseData[4].src`]:brandInfo.certificate_img,
+                [`enterpriseData[6].value`]:brandInfo.ip_name,
+                [`enterpriseData[7].src`]:brandInfo.ip_logo,
+                // [`enterpriseData[7].src`]:brandInfo.ip_img,
+                [`enterpriseData[9].value`]:brandInfo.ip_introduce.split('hc').join('\n'),
+              })
+            }else{
+              this.setData({
+                [`personData[1].certificationInfo.name`]:brandInfo.firm_linkman,
+                [`personData[1].certificationInfo.idcard`]:brandInfo.certificate_img,
+                [`personData[2].value`]:brandInfo.firm_tel,
+                [`enterpriseData[4].src`]:brandInfo.certificate_img,
+                [`enterpriseData[5].value`]:brandInfo.ip_name,
+                [`enterpriseData[7].src`]:brandInfo.ip_logo,
+              })
+            }
           }
+          
+          
         }else{
           app.showToastC(res.data.Msg,2000);
         }
@@ -373,62 +423,99 @@ Page({
       }
     });
   },
+
   //提交审核
   submitAudit(){
     let _this = this;
     let obj = this.data.obj;
     let phoneNum = /^1[3456789]\d{9}$/;
 
-    if(!obj.enterpriseName || obj.enterpriseName == ''){
-      this.selectComponent('#settledForm').scrollto('enterpriseName');
-      app.showToastC('请输入企业名称',1500);
-      return false;
-    }
-    if(!obj.enterpriseContact || obj.enterpriseContact == ''){
-      this.selectComponent('#settledForm').scrollto('enterpriseContact');
-      app.showToastC('请输入企业联系人',1500);
-      return false;
-    }
-    if(!obj.enterprisePhone || obj.enterprisePhone == ''){
-      this.selectComponent('#settledForm').scrollto('enterprisePhone');
-      app.showToastC('请输入企业联系人电话',1500);
-      return false;
-    }else if(!phoneNum.test(obj.enterprisePhone)){
-      this.selectComponent('#settledForm').scrollto('enterprisePhone');
-      app.showToastC('手机号有误请重新填写',2000);
-      return false;
-    }
-    // if(!obj.wechatID || obj.wechatID == ''){
-    //   this.selectComponent('#settledForm').scrollto('wechatID');
-    //   app.showToastC('请输入微信号',1500);
-    //   return false;
-    // }
-    if(!obj.businessLicense || obj.businessLicense == ''){
-      this.selectComponent('#settledForm').scrollto('businessLicense');
-      app.showToastC('请上传企业营业执照复印件',1500);
-      return false;
-    }
-    if(!obj.ipName || obj.ipName == ''){
-      this.selectComponent('#settledForm').scrollto('ipName');
-      app.showToastC('请输入品牌名称',1500);
-      return false;
-    }
-    if(!obj.ipLogo || obj.ipLogo == ''){
-      this.selectComponent('#settledForm').scrollto('ipLogo');
-      app.showToastC('请上传品牌主图',1500);
-      return false;
-    }
-    if(!obj.ipImage || obj.ipImage == ''){
-      obj.ipImage = ''
-    }
-    if(!obj.introduce || obj.introduce == ''){
-      obj.introduce = ''
+    if(this.data.settledType == 0){      //企业验证
+      if(!obj.enterpriseName || obj.enterpriseName == ''){
+        this.selectComponent('#settledForm').scrollto('enterpriseName');
+        app.showToastC('请输入企业名称',1500);
+        return false;
+      }
+      if(!obj.enterpriseContact || obj.enterpriseContact == ''){
+        this.selectComponent('#settledForm').scrollto('enterpriseContact');
+        app.showToastC('请输入企业联系人',1500);
+        return false;
+      }
+      if(!obj.enterprisePhone || obj.enterprisePhone == ''){
+        this.selectComponent('#settledForm').scrollto('enterprisePhone');
+        app.showToastC('请输入企业联系人电话',1500);
+        return false;
+      }else if(!phoneNum.test(obj.enterprisePhone)){
+        this.selectComponent('#settledForm').scrollto('enterprisePhone');
+        app.showToastC('手机号有误请重新填写',2000);
+        return false;
+      }
+      // if(!obj.wechatID || obj.wechatID == ''){
+      //   this.selectComponent('#settledForm').scrollto('wechatID');
+      //   app.showToastC('请输入微信号',1500);
+      //   return false;
+      // }
+      if(!obj.businessLicense || obj.businessLicense == ''){
+        this.selectComponent('#settledForm').scrollto('businessLicense');
+        app.showToastC('请上传企业营业执照复印件',1500);
+        return false;
+      }
+      if(!obj.ipName || obj.ipName == ''){
+        this.selectComponent('#settledForm').scrollto('ipName');
+        app.showToastC('请输入品牌名称',1500);
+        return false;
+      }
+      if(!obj.ipLogo || obj.ipLogo == ''){
+        this.selectComponent('#settledForm').scrollto('ipLogo');
+        app.showToastC('请上传品牌主图',1500);
+        return false;
+      }
+      if(!obj.ipImage || obj.ipImage == ''){
+        obj.ipImage = ''
+      }
+      if(!obj.introduce || obj.introduce == ''){
+        obj.introduce = ''
+      }
+    }else{   //个人验证
+      if(!this.data.isCertification){
+        this.selectComponent('#settledForm1').scrollto('certification');
+        app.showToastC('请先实名认证',1500);
+        return false;
+      }
+      if(!obj.personPhone || obj.personPhone == ''){
+        this.selectComponent('#settledForm1').scrollto('personPhone');
+        app.showToastC('请输入联系人电话',1500);
+        return false;
+      }else if(!phoneNum.test(obj.personPhone)){
+        this.selectComponent('#settledForm1').scrollto('personPhone');
+        app.showToastC('手机号有误请重新填写',2000);
+        return false;
+      }
+      if(!obj.personIpName || obj.personIpName == ''){
+        this.selectComponent('#settledForm1').scrollto('personIpName');
+        app.showToastC('请输入品牌名称',1500);
+        return false;
+      }
+      if(!obj.personIpLogo || obj.personIpLogo == ''){
+        this.selectComponent('#settledForm1').scrollto('personIpLogo');
+        app.showToastC('请上传品牌主图',1500);
+        return false;
+      }
+      if(!obj.personIntroduce || obj.personIntroduce == ''){
+        obj.personIntroduce = ''
+      }
     }
     let id = this.data.id;
-    let introduce = encodeURIComponent(obj.introduce.split('\n').join('hc'));
-    let data = `mod=brandCertification&operation=initial&uid=${this.data.uid}&loginid=${this.data.loginid}&firm_name=${obj.enterpriseName}&firm_linkman=${obj.enterpriseContact}&firm_tel=${obj.enterprisePhone}&wechat_number=${obj.wechatID}&certificate_img=${obj.businessLicense}&ip_name=${obj.ipName}&ip_logo=${obj.ipLogo}&ip_img=${obj.ipImage}&ip_introduce=${introduce}&id=${id}`
+    let data;
+    if(this.data.settledType == 0){      //企业验证
+      let introduce = encodeURIComponent(obj.introduce.split('\n').join('hc'));
+      data = `mod=brandCertification&operation=initial&uid=${this.data.uid}&loginid=${this.data.loginid}&firm_name=${obj.enterpriseName}&firm_linkman=${obj.enterpriseContact}&firm_tel=${obj.enterprisePhone}&wechat_number=${obj.wechatID}&certificate_img=${obj.businessLicense}&ip_name=${obj.ipName}&ip_logo=${obj.ipLogo}&ip_img=${obj.ipImage}&ip_introduce=${introduce}&id=${id}&type=0`
+    }else{
+      let personIntroduce = encodeURIComponent(obj.personIntroduce.split('\n').join('hc'));
+      data = `mod=brandCertification&operation=initial&uid=${this.data.uid}&loginid=${this.data.loginid}&firm_linkman=${obj.realname}&certificate_img=${obj.realidcard}&firm_tel=${obj.personPhone}&ip_name=${obj.personIpName}&ip_logo=${obj.personIpLogo}&ip_introduce=${personIntroduce}&id=${id}&type=1`
+    }
     var q = Dec.Aese(data);
-    console.log(`${app.signindata.comurl}?${data}`)
+    console.log(`${app.signindata.comurl}?${data}`) 
     wx.request({
       url: app.signindata.comurl + 'toy.php' + q,
       method: 'GET',

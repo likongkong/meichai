@@ -2,7 +2,7 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 <view class="applyForOccupancy" style="padding-bottom: {{num!=1?'150':'210'}}rpx;">
-    <view class="settledTypeWrap"> 
+    <view class="settledTypeWrap" wx:if="{{!enterType}}"> 
         <view data-type="0" catchtap="changeSettledType" class="{{settledType == 0?'active':''}}">企业入驻</view>
         <view data-type="1" catchtap="changeSettledType" class="{{settledType == 1?'active':''}}">个人入驻</view>
     </view>
@@ -24,9 +24,10 @@
             <!-- 个人入驻 -->
             <block wx:else>
                 <settledForm 
-                id="settledForm"
+                id="settledForm1"
                 statusBarHeightMc="{{statusBarHeightMc}}"
                 list="{{personData}}"
+                isCertificationMask="{{isCertificationMask}}"
                 bind:bindchange="bindchange"
                 num="{{num}}"
                 isEdit="{{false}}"
@@ -43,21 +44,35 @@
         <view wx:if="{{num == 4}}" class="failCause">
             {{brandSettledReturnMsg}}
         </view>
-        <settledForm 
-            id="settledForm"
-            statusBarHeightMc="{{statusBarHeightMc}}"
-            list="{{from=='zhuanqu'?IPData:enterpriseData}}"
-            bind:bindchange="bindchange"
-            num="{{num}}"
-            isEdit="{{num==4?true:false}}"
-            brandInfo="{{brandInfo}}">
-        </settledForm>
+        <!-- 专区数据 -->
+        <block wx:if="{{from=='zhuanqu'}}">
+            <settledForm 
+                id="settledForm"
+                statusBarHeightMc="{{statusBarHeightMc}}"
+                list="{{IPData}}"
+                bind:bindchange="bindchange"
+                num="{{num}}"
+                isEdit="{{num==4?true:false}}"
+                brandInfo="{{brandInfo}}">
+            </settledForm>
+        </block>
+        <block wx:else>
+            <settledForm 
+                id="settledForm"
+                statusBarHeightMc="{{statusBarHeightMc}}"
+                list="{{settledType==0?enterpriseData:personData}}"
+                bind:bindchange="bindchange"
+                num="{{num}}"
+                isEdit="{{num==4?true:false}}"
+                brandInfo="{{brandInfo}}">
+            </settledForm>
+        </block>
         <block>
             <view wx:if="{{num == 2}}" class="footerAuditWrap">
                 <view data-num="1" catchtap="navigateBack">返回</view>
                 <view data-type="9026" data-num="4" catchtap="comjumpwxnav">修改资料</view>
             </view>
-            <view wx:else class="footerFailWrap">
+            <view wx:else class="footerAuditWrap">
                 <view data-num="1" catchtap="navigateBack">返回</view>
                 <view catchtap="submitAudit">重新提交</view>
             </view>
