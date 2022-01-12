@@ -17,16 +17,20 @@
 			</view>			
 			<!-- 已结束 -->
 	    <view class="newDrawTopTime" style="background:#fff;color:#000;" wx:if='{{infoActivity.status == 3}}'>
-
-				  <block wx:if='{{infoActivity.isSign}}'>
-						  <block wx:if='{{infoActivity.isWinner}}'>
-								  <block wx:if='{{infoActivity.isReceived}}'>您已购买</block>
-									<block wx:elif='{{!infoActivity.isReceived && appNowTime < infoActivity.finalPayTime}}'>付款截止日期 {{infoActivity.finalPay_time}}</block>
-									<block wx:elif='{{!infoActivity.isReceived && appNowTime > infoActivity.finalPayTime}}'>超时未支付</block>
-							</block>
-							<block wx:else>很遗憾，您未中签</block>
+					<block wx:if='{{infoActivity.redBagCDKEY}}'>
+						已开奖
 					</block>
-					<block wx:else>您未参加抽选</block>
+					<block wx:else>
+						<block wx:if='{{infoActivity.isSign}}'>
+								<block wx:if='{{infoActivity.isWinner}}'>
+										<block wx:if='{{infoActivity.isReceived}}'>您已购买</block>
+										<block wx:elif='{{!infoActivity.isReceived && appNowTime < infoActivity.finalPayTime}}'>付款截止日期 {{infoActivity.finalPay_time}}</block>
+										<block wx:elif='{{!infoActivity.isReceived && appNowTime > infoActivity.finalPayTime}}'>超时未支付</block>
+								</block>
+								<block wx:else>很遗憾，您未中签</block>
+						</block>
+						<block wx:else>您未参加抽选</block>
+					</block>
 
 			</view>
       <view class="newDrawTopImgBox">
@@ -36,7 +40,7 @@
 					<view class="newDrawNPPositon"></view>
 					<view class="newDrawName">{{infoActivity.name}}</view>
 					<view class="newDrawPrice">
-						<text class="newDrawMony">￥</text>{{infoActivity.shop_price}}<text class="newDrawPNum" wx:if='{{infoActivity.quota}}'>抽选数量{{infoActivity.quota}}体</text>
+						<block wx:if="{{infoActivity.shop_price == 0}}"><text style="font-size: 32rpx;">免费</text></block><block wx:else><text class="newDrawMony">￥</text>{{infoActivity.shop_price}}</block><text class="newDrawPNum" wx:if='{{infoActivity.quota}}'>抽选数量{{infoActivity.quota}}体</text>
 						<text class="numberOFParticipants" wx:if='{{infoActivity.sellNumber}}'>{{infoActivity.sellNumber}}人已参与</text>
 						<!-- catchtap="jumpWinningList" data-id='{{infoActivity.id}}' data-type='3' -->
 					</view>
@@ -565,7 +569,10 @@
 				
 				<block wx:if='{{infoActivity.status==3}}'>
 					<view class="winningList" style="margin-right:40rpx;" catchtap="jumpWinningList" data-id='{{infoActivity.id}}' data-type='1' wx:if='{{infoActivity.isSign}}'>中签名单</view>
-					<block>
+					<block wx:if="{{infoActivity.redBagCDKEY}}">
+						<view class="purchaseNoOverdue" style="background:#DBC69D;" data-key="{{infoActivity.redBagCDKEY}}" catchtap="showRedPackage">领取</view>
+					</block>
+					<block wx:else>
 							<block wx:if='{{infoActivity.isSign}}'>
 								  <block wx:if='{{infoActivity.isWinner}}'>
 											<view wx:if='{{infoActivity.isReceived}}' class="purchaseNoOverdue" style="background:#B5B5B5;">已购买</view>
@@ -576,10 +583,7 @@
 									<view wx:else class="purchaseNoOverdue" style="background:#B5B5B5;">您未中签</view>
 							</block>
 							<view wx:else class="purchaseNoOverdue" style="background:#B5B5B5;">未参加抽选</view>
-
-
 					</block>
-					
 				</block>
 		</view>
 
@@ -920,3 +924,7 @@
 				<view class="saveAAAA" catchtap="savetoA">保存</view>
 		</view>
 </view>
+
+
+
+

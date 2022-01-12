@@ -9,7 +9,8 @@
         <text class="takeNum">{{courierData.PickupCode}}</text>
       </view>
       <view catchtap="makePhoneCall"> 
-        <text class="takeTitle">快递员信息</text>
+        <text class="takeTitle">快递信息</text>
+        <view class="takeOrderNum">{{shippingInfo.shipping_name}}单号: {{shippingInfo.shipping_number}} <text class="copyCart" catchtap="copyCart" data-cart='{{shippingInfo.shipping_number}}' class="copyCart">复制</text></view>
         <view class="takeInfo"> <text>{{courierData.PersonName}} </text> <text> {{takePhone}}</text> <image src="https://cdn.51chaidan.com/images/icon/kdn_phone.png" mode="widthFix"></image></view>
       </view>
     </view>

@@ -54,6 +54,24 @@ page{
   font-size: 28rpx;
   color: #101010;
 }
+.takeOrderNum{
+  font-size: 28rpx;
+  color: #101010;
+  display: flex;
+  align-items: center;
+  margin-top: 10rpx;
+}
+.copyCart {
+  background: #F4F4F4;
+  font-size: 24rpx;
+  color: #000;
+  height: 40rpx;
+  line-height: 40rpx;
+  width: 60rpx;
+  text-align: center;
+  border-radius: 6rpx;
+  margin-left: 20rpx;
+}
 .takeNum{
   font-size: 40rpx;
   color: #2A8806;

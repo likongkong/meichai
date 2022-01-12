@@ -719,6 +719,7 @@ Page({
                     _this.commonBulletFrameFun(4);
                 };
               }else{
+                console.log(1111111)
                 _this.commonBulletFrameFun(4);
               };
 
@@ -1568,7 +1569,14 @@ Page({
   //   })
 
   // },
-
+  // 领取红包封面
+  showRedPackage(e){
+    wx.showRedPackage({
+      url:e.currentTarget.dataset.key,
+      success: (res) => {
+       }
+    })
+  },
   // 红包口令 input 值改变
   redpinputChange: function (e) {
     this.setData({
