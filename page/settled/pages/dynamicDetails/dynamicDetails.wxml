@@ -9,6 +9,8 @@
                 id="myVideo"
                 style="width: 100%;height: 100%;"
                 src="{{videoArr[0].video_path}}" 
+                muted="true"
+                show-mute-btn="true"
                 autoplay="true"
             ></video>
         </swiper-item>
