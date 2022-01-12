@@ -13,9 +13,9 @@
     "miniprogram": {
       "list": [
         {
-          "name": "图鉴",
-          "pathName": "page/settled/pages/atlas/atlas",
-          "query": "",
+          "name": "动态",
+          "pathName": "page/settled/pages/dynamicDetails/dynamicDetails",
+          "query": "did=8159",
           "scene": null
         },
         {
