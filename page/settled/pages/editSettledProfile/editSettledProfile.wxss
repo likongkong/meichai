@@ -1,8 +1,8 @@
 .applyForOccupancy{
-  padding-bottom: 150rpx; 
+  padding-bottom: 230rpx; 
 }
 .footerWrap{
-  padding: 20rpx 35rpx 40rpx 35rpx;
+  padding: 42rpx 35rpx 52rpx 35rpx;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
@@ -31,4 +31,21 @@
 .footerWrap view:last-child{
   background-image: linear-gradient(to right, #91E8FB , #6AB0EC);
   color: #ffffff;
+}
+
+.agreement{
+  width: 100%;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 28rpx;
+  color: #909090;
+  position: fixed;
+  background: #fff;
+  z-index: 101;
+  bottom: 140rpx;
+  left: 0;
+  text-align: center;
+}
+.agreement text{
+  color: #6AB0EC;
 }

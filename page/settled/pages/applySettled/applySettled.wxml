@@ -36,6 +36,7 @@
                 </settledForm>
             </block>
         </view>
+        <view class="agreement" catchtap='showrule'>提交即代表默认同意<text>《商家入驻协议》</text></view>
         <view class="submitWrap">
             <button class="submit" catchtap="submitAudit"> 提交审核 </button>
         </view>
@@ -47,7 +48,7 @@
         <!-- 专区数据 -->
         <block wx:if="{{from=='zhuanqu'}}">
             <settledForm 
-                id="settledForm"
+                id="{{settledType==0?'settledForm':'settledForm1'}}"
                 statusBarHeightMc="{{statusBarHeightMc}}"
                 list="{{IPData}}"
                 bind:bindchange="bindchange"

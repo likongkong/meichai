@@ -34,14 +34,16 @@ Page({
         placeholder:'请输入手机号',
         value:'',
         name:'enterprisePhone'
-      },{
-        isRequired:true,
-        type:'text',
-        subtitle:'微信号',
-        placeholder:'请输入微信号',
-        value:'',
-        name:'wechatID'
-      },{
+      },
+      // {
+      //   isRequired:true,
+      //   type:'text',
+      //   subtitle:'微信号',
+      //   placeholder:'请输入微信号',
+      //   value:'',
+      //   name:'wechatID'
+      // },
+      {
         isRequired:true,
         type:'uploadImg',
         subtitle:'企业营业执照或与IP相关凭证',

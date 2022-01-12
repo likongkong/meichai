@@ -402,6 +402,18 @@
           "pathName": "page/settled/pages/editSettledProfile/editSettledProfile",
           "query": "id=13&num=4&from=",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "page/settled/pages/editSettledProfile/editSettledProfile",
+          "query": "id=14&num=4&from=&settledType=1",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "page/settled/pages/brandManagement/brandManagement",
+          "query": "",
+          "scene": null
         }
       ]
     }

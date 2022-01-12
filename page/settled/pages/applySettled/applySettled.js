@@ -150,31 +150,36 @@ Page({
     IPData:[{
         isRequired:true,
         type:'text',
-        subtitle:'IP名称',
-        placeholder:'请输入IP名称',
+        subtitle:'品牌名称',
+        placeholder:'请输入品牌名称',
         value:'',
+        borderbottom1:'show',
         name:'ipName'
       },{
         isRequired:true,
         type:'uploadImg',
-        subtitle:'IP logo（建议上传比例1:1）',
+        subtitle:'品牌主图（建议上传比例1:1）',
         name:'ipLogo',
         src:'',
+        borderbottom1:'show',
         storagelocation:'images/brandSettled/logo'
-      },{
-        isRequired:false,
-        type:'uploadImg',
-        subtitle:'IP 形象图（建议上传比例16:9）',
-        name:'ipImage',
-        src:'',
-        storagelocation:'images/brandSettled/banner'
-      },{
+      },
+      // {
+      //   isRequired:false,
+      //   type:'uploadImg',
+      //   subtitle:'IP 形象图（建议上传比例16:9）',
+      //   name:'ipImage',
+      //   src:'',
+      //   storagelocation:'images/brandSettled/banner'
+      // },
+      {
         isRequired:false,
         type:'textarea',
-        subtitle:'IP介绍',
-        placeholder:'请输入IP介绍',
+        subtitle:'品牌介绍',
+        placeholder:'请输入品牌介绍',
         value:'',
         name:'introduce',
+        borderbottom1:'show',
         borderbottom1:'hide'
       },
     ],
@@ -301,7 +306,7 @@ Page({
   comjumpwxnav(e){
     let type = e.currentTarget.dataset.type;
     let num = e.currentTarget.dataset.num;
-    let whref = `id=${this.data.id}&num=${num}&from=${this.data.from}`
+    let whref = `id=${this.data.id}&num=${num}&from=${this.data.from}&settledType=${this.data.settledType}`
     app.comjumpwxnav(type,whref)
   },
   // 获取表单数据
@@ -363,31 +368,49 @@ Page({
       header: { 'Accept': 'application/json' },
       success: (res) => { 
         console.log('品牌信息====',res)
-       
         if(res.data.ReturnCode == 200){
-
-        
           let brandInfo = res.data.Info;
+
+          if(this.data.settledType == 0){  //企业入驻
+            this.data.obj = {
+              enterpriseName:brandInfo.firm_name,
+              enterpriseContact:brandInfo.firm_linkman,
+              enterprisePhone:brandInfo.firm_tel,
+              wechatID:brandInfo.wechat_number || '',
+              businessLicense:brandInfo.certificate_img,
+              ipName:brandInfo.ip_name,
+              ipLogo:brandInfo.ip_logo,
+              // ipImage:brandInfo.ip_img,
+              introduce:brandInfo.ip_introduce,
+            };
+          }else{
+            this.data.obj = {
+              realname:brandInfo.firm_linkman,
+              realidcard:brandInfo.certificate_img,
+              personPhone:brandInfo.firm_tel,
+              personIpName:brandInfo.ip_name,
+              personIpLogo:brandInfo.ip_logo,
+              // ipImage:brandInfo.ip_img,
+              personIntroduce:brandInfo.ip_introduce,
+            };
+          }
           if(this.data.from=='zhuanqu'){
             this.setData({
+              isCertification:true,
               [`IPData[0].value`]:brandInfo.ip_name,
               [`IPData[1].src`]:brandInfo.ip_logo,
               [`IPData[2].src`]:brandInfo.ip_img,
               [`IPData[3].value`]:brandInfo.ip_introduce.split('hc').join('\n'),
             })
+            if(this.data.settledType == 1){
+              this.setData({
+                [`IPData[0].name`]:'personIpName',
+                [`IPData[1].name`]:'personIpLogo',
+                [`IPData[2].name`]:'personIntroduce',
+              })
+            }
           }else{
             if(this.data.settledType == 0){  //企业入驻
-              this.data.obj = {
-                enterpriseName:brandInfo.firm_name,
-                enterpriseContact:brandInfo.firm_linkman,
-                enterprisePhone:brandInfo.firm_tel,
-                wechatID:brandInfo.wechat_number || '',
-                businessLicense:brandInfo.certificate_img,
-                ipName:brandInfo.ip_name,
-                ipLogo:brandInfo.ip_logo,
-                // ipImage:brandInfo.ip_img,
-                introduce:brandInfo.ip_introduce,
-              };
               this.setData({
                 [`enterpriseData[1].value`]:brandInfo.firm_name,
                 [`enterpriseData[2].value`]:brandInfo.firm_linkman,
@@ -401,12 +424,14 @@ Page({
               })
             }else{
               this.setData({
+                isCertification:true,
+                [`personData[1].placeholder`]:this.data.num==4?'':'已认证',
                 [`personData[1].certificationInfo.name`]:brandInfo.firm_linkman,
                 [`personData[1].certificationInfo.idcard`]:brandInfo.certificate_img,
                 [`personData[2].value`]:brandInfo.firm_tel,
-                [`enterpriseData[4].src`]:brandInfo.certificate_img,
-                [`enterpriseData[5].value`]:brandInfo.ip_name,
-                [`enterpriseData[7].src`]:brandInfo.ip_logo,
+                [`personData[4].value`]:brandInfo.ip_name,
+                [`personData[5].src`]:brandInfo.ip_logo,
+                [`personData[7].value`]:brandInfo.ip_introduce,
               })
             }
           }
@@ -558,5 +583,10 @@ Page({
       complete:function(){
       }
     });
-  }
+  },
+  showrule: function () {
+    wx.navigateTo({
+      url: "/page/secondpackge/pages/gbaPage/gbaPage?webview=https://meichai-1300990269.cos.ap-beijing.myqcloud.com/activity_rules.json&from=settledAgreement",
+    });
+  },
 })

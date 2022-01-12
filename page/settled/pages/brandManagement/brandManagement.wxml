@@ -3,7 +3,7 @@
 
 
 <view class="wrap">
-  <view>
+  <view wx:if="{{info==0}}">
     <view class="title">
       <text class="h1">企业信息</text>
       <text class="edit" data-type="9043" data-whref="info={{enterpriseinfo}}" catchtap="comjumpwxnav"  wx:if="{{!isFansAdmin}}">编辑</text>
@@ -15,13 +15,13 @@
       </view>
       <view>
         <view class="txt">联系人：{{info.firm_linkman}}</view>
-        <view class="txt">微信号：{{info.wechat_number}}</view>
+        <view class="txt"></view>
       </view>
     </view>
   </view>
   <view>
     <view class="title">
-      <text class="h1">IP信息</text>
+      <text class="h1">品牌信息</text>
     </view>
     <view class="content">
       <block wx:for="{{dataList}}" wx:key="{{index}}">
@@ -37,7 +37,7 @@
                 </view>
               </view>
               <view class="itemHeadR">
-                <view class="btn">前往IP主页</view>
+                <view class="btn">前往品牌主页</view>
               </view>
             </view>
             <view class="itemContent">
@@ -46,7 +46,7 @@
           </view>
         </block>
         <block wx:if="{{item.status == 0 || item.status == 2}}">
-          <view class="ipItemCard" data-type="9027" data-whref="id={{item.id}}&num={{item.status == 0?'2':'4'}}&from=zhuanqu&msg={{item.return_msg}}" catchtap="comjumpwxnav">
+          <view class="ipItemCard" data-type="9027" data-whref="id={{item.id}}&num={{item.status == 0?'2':'4'}}&from=zhuanqu&msg={{item.return_msg}}&enterType=false&settledType={{info.type}}" catchtap="comjumpwxnav">
             <view class="itemHead">
               <view class="itemHeadL width100">
                 <image class="IPlogo" src="{{item.ip_logo}}" mode="aspectFill"></image>

@@ -40,6 +40,9 @@ page{
   background: #fff;
   align-items: center;
 }
+.enterpriseInfoWrap>view{
+  height: 84rpx;
+}
 .enterpriseInfoWrap>view:first-child{
   width: 60%;
 }

@@ -132,7 +132,7 @@
           </view>
           <image wx:if="{{item.isEdit?false:isEdit}}" class="editIcon" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="widthFix"></image>
         </view>
-        <view wx:if="{{item.type == 'uploadImg'}}" id="{{item.name}}" class="columnWrap card paddingBottom12 {{item.margintop0?'margintop0':''}} {{item.borderbottom1?'borderbottom1':''}}" data-storagelocation="{{item.storagelocation}}" data-name="{{item.name}}" data-index="{{index}}" data-mode="{{item.mode}}" catchtap="uploadImage">
+        <view wx:if="{{item.type == 'uploadImg'}}" id="{{item.name}}" class="columnWrap card paddingBottom12 {{item.margintop0?'margintop0':''}} {{item.borderbottom1?'borderbottom1':''}}" data-storagelocation="{{item.storagelocation}}" data-name="{{item.name}}" data-index="{{index}}" data-mode="{{item.mode}}" catchtap="{{num==2||item.num==2?'':'uploadImage'}}">
           <view class="cEveTitle" style="color:{{errorDom == item.name?'#FF2742':''}}"><text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}</view>
           <block>
             <!-- item.mode == 'multiple' 为多图模式 -->
@@ -294,7 +294,7 @@
               <text style="color:#FF2742;">{{item.isRequired?'*':''}}</text>{{item.subtitle}}
               <image wx:if="{{item.explain}}" src="https://cdn.51chaidan.com/images/brandSettledIcon/wenhao.png" mode="widthFix"></image>
             </view>
-            <input catchtap="toggleCertificationMask"	placeholder-style="{{item.certificationInfo && item.certificationInfo!=''?'color: #5CA7FE;':''}}" class="cEveInput" disabled="{{true}}" data-name="{{item.name}}" placeholder="{{item.placeholder}}" value="{{item.value}}"></input>
+            <input catchtap="{{num==2||item.num==2?'':'toggleCertificationMask'}}"	placeholder-style="{{item.certificationInfo && item.certificationInfo!=''?'color: #5CA7FE;':''}}" class="cEveInput" disabled="{{true}}" data-name="{{item.name}}" placeholder="{{item.placeholder}}"></input>
             <image wx:if="{{item.isEdit?false:isEdit}}" class="editIcon" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="widthFix"></image>
           </view>
           <view class="certificationInfo" wx:if="{{item.certificationInfo && item.certificationInfo!=''}}">
