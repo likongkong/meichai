@@ -189,6 +189,7 @@ Page({
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: (res) => { 
+        wx.hideLoading()
         console.log('====',res)
         if(res.data.ReturnCode == 200){
           this.data.mission = res.data.List.mission;
@@ -213,7 +214,6 @@ Page({
       },
       fail: function () {},
       complete:function(){
-        wx.hideLoading()
         wx.stopPullDownRefresh();
       }
     });
@@ -235,6 +235,7 @@ Page({
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: (res) => { 
+        wx.hideLoading()
         console.log('领取奖励====',res)
         if(res.data.ReturnCode == 200){
           app.showToastC('领取成功',1500);
@@ -256,7 +257,6 @@ Page({
       },
       fail: function () {},
       complete:function(){
-        wx.hideLoading()
         wx.stopPullDownRefresh();
       }
     });

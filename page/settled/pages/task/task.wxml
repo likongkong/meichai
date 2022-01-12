@@ -39,8 +39,8 @@
         <view class="head">
           <view>
             <view class="taskWrap">
-              <text>{{item.title}}</text>
-              <text>剩余时间：{{endtimeArr[index].time.day}}天{{endtimeArr[index].time.hou}}时{{endtimeArr[index].time.min}}分{{endtimeArr[index].time.sec}}秒</text>
+              <text class="tasktitle">{{item.title}}</text>
+              <text class="taskendTime" wx:if="{{item.endTime}}">剩余时间：{{endtimeArr[index].time.day}}天{{endtimeArr[index].time.hou}}时{{endtimeArr[index].time.min}}分{{endtimeArr[index].time.sec}}秒</text>
             </view>
             <view class="progressWrap">
               <view class="progress-box">

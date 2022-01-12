@@ -101,13 +101,13 @@ page{
   display: flex;
   align-items: center;
 }
-.taskWrap text:first-child{
+.taskWrap .tasktitle{
   font-size: 32rpx;
   font-weight: bold;
   color: #000000;
   margin-right: 16rpx;
 }
-.taskWrap text:last-child{
+.taskWrap .taskendTime{
   border-left: 2rpx solid #999999;
   height: 30rpx;
   line-height: 30rpx;
