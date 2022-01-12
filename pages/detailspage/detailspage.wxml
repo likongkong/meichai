@@ -1758,7 +1758,7 @@
 			</view>
 			<view class="guidanceBox">
 				<text class="guidanceSubtitle">第二步：点击群内官方发布的链接即可参与</text>
-				<image class="img" src="https://cdn.51chaidan.com/images/shareImg/shareImgStyle.png" mode="widthFix"></image>
+				<image class="img" src="{{savepic}}" mode="widthFix"></image>
 			</view>
 		</view>
 		<image class="guanbi" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="widthFix" catchtap="toogleGuidanceMask"></image>
@@ -1778,3 +1778,6 @@
        <view class="proTipButton" style="{{commodityAgreement?'':'background:#909090;'}}" catchtap="{{commodityAgreement?'continueToBuy':''}}">继续购买</view>
    </view>
 </view>
+
+
+<poster id="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail"></poster>

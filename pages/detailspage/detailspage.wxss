@@ -745,7 +745,7 @@
   margin-bottom: 0;
 }
 .guidanceBox .img{
-  width: 404rpx;
+  width: 504rpx;
   height: auto;
   display: block;
   margin: 0 auto;

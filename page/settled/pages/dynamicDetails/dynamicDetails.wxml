@@ -45,8 +45,11 @@
     </view>
     <view class="emlhead" style="overflow: hidden;">
         <image class='wxIcon' src="https://cdn.51chaidan.com/images/brandSettledIcon/dynamicInfoWXHY.png" mode='aspectFit'><button style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;'  open-type="share"></button></image>
-        <!-- <image class='wxIcon' src="https://cdn.51chaidan.com/images/brandSettledIcon/dynamicInfoPYQ.png" mode='aspectFit'></image>
-        <image class='wxIcon' src="https://cdn.51chaidan.com/images/brandSettledIcon/dynamicInfoImg.png" mode='aspectFit'></image> -->
+        <block wx:if='{{dataInfo.imgArr.length != 0}}'>
+            <image class='wxIcon' catchtap="creatCanvasImg" src="https://cdn.51chaidan.com/images/brandSettledIcon/dynamicInfoPYQ.png" mode='aspectFit'></image>
+            <image class='wxIcon' catchtap="creatCanvasImg" src="https://cdn.51chaidan.com/images/brandSettledIcon/dynamicInfoImg.png" mode='aspectFit'></image>
+        </block>
+
         <view class="dyDetheat" catchtap='followfun' data-id='{{dataInfo.id}}' data-type='3'><image class="emlplefimgshare" src="{{dataInfo.is_like?'https://www.51chaidan.com/images/brand/red_heart.png':'https://www.51chaidan.com/images/brand/black_heart.png'}}"></image>{{dataInfo.like_number?dataInfo.like_number:''}}</view>
     </view>
 
@@ -179,3 +182,14 @@
         <image class="editButComLeL" catchtap='submissionfun' style="right:40rpx;" mode="aspectFit" src='https://cdn.51chaidan.com/images/brandInfoIcon/commentIcon.png'></image>
     </view>
 </view> -->
+
+<poster id="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail"></poster>
+
+<view class='inputbox' wx:if='{{is_creatCavnvaImg}}' catchtap="creatCavnvaImgFun">
+    <view class='inputboxbg' catchtap="creatCavnvaImgFun"></view>
+    <view class="creatCavnvaImgBox">
+        <image class="creatCavnvaImg" mode="aspectFit" src='{{savepic}}'></image>
+        <view class="creatCavnvaImgBottom" catchtap="savetoA">保存图片</view>
+    </view>
+</view>
+

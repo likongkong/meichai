@@ -1,6 +1,8 @@
 var Dec = require('../../common/public.js');//aes加密解密js
 var WxParse = require('../../wxParse/wxParse.js');
 var time = require('../../utils/util.js');
+import Poster from '../../pages/wxa_plugin_canvas/poster/poster';
+
 const app = getApp();
 Page({
   /**
@@ -249,9 +251,107 @@ Page({
     mpmBulletFrame:false,  
     guidanceMask:false,
     proTipTrue:false,
-    commodityAgreement:false
+    commodityAgreement:false,
 
+
+
+    // 画布
+    userinfo: {},
+    QRcode_img: '',
+    posterConfig: {},
+    savepic: '',
+    tgfrShareIftr:false,
   },
+
+/**
+   * 异步生成海报
+   */
+  onCreatePoster() {
+    var _this = this;
+    var zunmdata = this.data.zunmdata || {};
+    wx.showLoading({
+      title: '生成中...',
+    })
+    // setData配置数据
+    _this.setData({
+      posterConfig: {
+        width: 900,
+        height: 740,
+        debug: false,
+        // pixelRatio: 1000,
+        preload: false,
+        hideLoading: false,
+        backgroundColor: '#ccc',
+        blocks: [{
+          x: 200,
+          y: 30,
+          width: 600,
+          height: 670,
+          backgroundColor:'#fff',
+          zIndex: 1,
+          borderRadius: 20,
+        }],
+        texts: [{
+          x: 228,
+          y: 82,
+          baseLine: 'middle',
+          width:490,
+          lineNum:1,
+          text:zunmdata.gname, // 品牌名
+          fontSize: 36,
+          textAlign: 'left',
+          color: '#000',
+          zIndex: 3,
+        }],
+        images: [
+          {  // 头像
+            x: 80,
+            y: 30,
+            url: zunmdata.brand.brandLogo,
+            width: 90,
+            height:90,
+            zIndex:2,
+            borderRadius:10,
+          },{  // banner
+            x: 228,
+            y: 120,
+            url: zunmdata.goods_thumb,
+            width: 544,
+            height:544,
+            zIndex: 3
+          },{  // 三角
+            x: 178,
+            y: 60,
+            url: 'https://cdn.51chaidan.com/images/brandInfoIcon/goodsLeftArrow.png',
+            width: 30,
+            height:30,
+            zIndex: 3
+          }]
+      }
+    }, () => {
+      Poster.create();
+    });
+  },
+  onPosterFail(e){
+    wx.hideLoading()
+    this.setData({
+      savepic: 'https://cdn.51chaidan.com/images/shareImg/shareImgStyle.png'
+    });
+  },
+  onPosterSuccess(e) {
+    wx.hideLoading()
+    const {
+      detail
+    } = e;
+    console.log(detail)
+    this.setData({
+      savepic: detail
+    });
+  },
+
+  // 画布结束 
+
+
   commdargee(){
       this.setData({
           commodityAgreement:!this.data.commodityAgreement
@@ -3185,21 +3285,6 @@ Page({
             specialGoods:dataGinfo.specialGoods // 特殊商品  手机壳
           })
 
-          if(!dataGinfo.isGoodsCanShare && _this.data.canShare!=1){
-            console.log('isGoodsCanShare','true 能 false不能分享')
-            wx.hideShareMenu();
-            _this.setData({isShareFun : false});
-            if(!_this.data.referee){
-               _this.toogleGuidanceMask();
-            };
-          }else{
-            if(dataGinfo.isGoodsCanShare){
-              wx.showShareMenu();
-            }else{
-              wx.showShareMenu({withShareTicket:true});
-            }; 
-          };
-
 
           if (!reg.test(res.data.Ginfo.goods_thumb)) {
             res.data.Ginfo.goods_thumb = _this.data.zdyurl + res.data.Ginfo.goods_thumb;
@@ -3380,6 +3465,23 @@ Page({
                 _this.previewVideo();
               };
           });
+
+          if(!dataGinfo.isGoodsCanShare && _this.data.canShare!=1){
+            console.log('isGoodsCanShare','true 能 false不能分享')
+            wx.hideShareMenu();
+            _this.setData({isShareFun : false});
+            if(!_this.data.referee){
+               _this.toogleGuidanceMask();
+               // 生成图片
+               _this.onCreatePoster()
+            };
+          }else{
+            if(dataGinfo.isGoodsCanShare){
+              wx.showShareMenu();
+            }else{
+              wx.showShareMenu({withShareTicket:true});
+            }; 
+          };
 
           // 赠品倒计时
           if(redauin.isGiveGoodsStatus == 2){

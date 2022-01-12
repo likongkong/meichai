@@ -13,9 +13,9 @@
     "miniprogram": {
       "list": [
         {
-          "name": "图鉴",
-          "pathName": "page/settled/pages/atlas/atlas",
-          "query": "",
+          "name": "动态详情",
+          "pathName": "page/settled/pages/dynamicDetails/dynamicDetails",
+          "query": "did=9777",
           "scene": null
         },
         {
@@ -332,9 +332,9 @@
           "scene": null
         },
         {
-          "name": "page/secondpackge/pages/vipPage/vipPage",
-          "pathName": "page/secondpackge/pages/vipPage/vipPage",
-          "query": "",
+          "name": "商品详情",
+          "pathName": "pages/detailspage/detailspage",
+          "query": "gid=39153",
           "scene": null
         },
         {

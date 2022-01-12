@@ -3,6 +3,7 @@
   "enablePullDownRefresh": true,
   "usingComponents": {
     "t_f": "/pages/topfunction/topfunction",
+    "poster": "/pages/wxa_plugin_canvas/poster/index",
     "bnavigation": "/pages/bottomComponent/bottomComponent"
   }
 }
