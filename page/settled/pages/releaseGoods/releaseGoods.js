@@ -580,6 +580,10 @@ Page({
       this.selectComponent('#settledForm1').scrollto('goodsStock');
       app.showToastC('请输入当前可售库存数',1500);
       return false;
+    }else if(Number(obj.goodsStock)>999999){
+      this.selectComponent('#settledForm1').scrollto('goodsStock');
+      app.showToastC('库存数不能大于999999',1500);
+      return false;
     }
     // if(!obj.goodsDetailsPic || obj.goodsDetailsPic.length == 0){
     //   this.selectComponent('#settledForm1').scrollto('goodsDetailsPic');
