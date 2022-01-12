@@ -155,7 +155,7 @@
 
 <view style="padding:0 20rpx 0 20rpx;position:relative;" wx:if='{{brandinfo}}'>
         <view class="exhibdeimgBox">
-                <image class="exhibdeimgNewNew" src="{{brandinfo.logo}}" mode="aspectFill"></image>
+                <image class="exhibdeimgNewNew" catchtap="gobrandDetails" data-mid='{{brandinfo.id}}' src="{{brandinfo.logo}}" mode="aspectFill"></image>
                 <view class="exhibdeimgBRight">
                      <view class="exhibdeimgBRTop">
                                 <block wx:if='{{brandinfo.boothNumber}}'><text style="color:#31b3fb;">展位:{{brandinfo.boothNumber}}</text> | </block>

@@ -518,6 +518,7 @@ Page({
     wx.showLoading({
       title: '生成中...',
     })
+
     // setData配置数据
     _this.setData({
       posterConfig: {
@@ -621,7 +622,6 @@ Page({
   },
   onPosterFail(e){
     wx.hideLoading()
-    this.tgfrShareIftrFun();
   },
   onPosterSuccess(e) {
     wx.hideLoading()
