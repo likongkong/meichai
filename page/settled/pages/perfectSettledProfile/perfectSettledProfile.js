@@ -17,6 +17,7 @@ Page({
         subtitle:'品牌名称',
         placeholder:'请输入品牌名称',
         value:'',
+        borderbottom1:'show',
         name:'ipName'
       },{
         isRequired:true,
@@ -24,6 +25,7 @@ Page({
         subtitle:'品牌主图（建议上传比例1:1）',
         name:'ipLogo',
         src:'',
+        borderbottom1:'show',
         storagelocation:'images/brandSettled/logo'
       },{
         isRequired:true,
@@ -31,6 +33,7 @@ Page({
         subtitle:'品牌形象图（建议上传比例16:9）',
         name:'ipImage',
         src:'',
+        borderbottom1:'show',
         storagelocation:'images/brandSettled/banner'
       },{
         isRequired:true,
@@ -38,6 +41,7 @@ Page({
         subtitle:'品牌介绍',
         placeholder:'请输入品牌介绍',
         value:'',
+        borderbottom1:'show',
         name:'introduce',
       },{
         isRequired:false,
@@ -45,6 +49,7 @@ Page({
         subtitle:'品牌分享图（建议尺寸5:4)',
         name:'shareImg',
         src:'',
+        borderbottom1:'show',
         storagelocation:'images/brandSettled/brandShare'
       },{
         isRequired:false,
