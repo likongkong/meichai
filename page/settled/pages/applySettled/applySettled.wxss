@@ -1,8 +1,38 @@
 .applyForOccupancy{
   /* padding-bottom: 210rpx;  */
 }
+.settledTypeWrap{
+  width: 100%;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+.settledTypeWrap view{
+  width: 190rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  background: #F5F5F5;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+  color: #101010;
+  margin-right: 30rpx;
+  text-align: center;
+}
+.settledTypeWrap view:last-child{
+  margin-right: 0;
+}
+.active{
+  width: 186rpx !important;
+  height: 44rpx !important; 
+  line-height: 44rpx !important;
+  background: #F5F5F5 !important;
+  color: #5CA7FE !important;
+  border: 1rpx solid #5CA7FE;
+}
 .aFoCenter{
-  width: 690rpx;
+  /* width: 690rpx; */
   margin: auto;
   background:#fff;
   border-radius: 15rpx;
@@ -32,10 +62,10 @@
 }
 .submit{
   width: 84%;
-  height: 90rpx;
-  line-height: 90rpx;
-  background: #90D2D6;
-  border-radius: 14rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  background-image: linear-gradient(to right, #91E8FB , #6AB0EC);
+  border-radius: 80rpx;
   color: #fff;
   font-size: 26rpx;
 }
@@ -44,7 +74,7 @@
 }
 
 .footerAuditWrap,.footerFailWrap{
-  padding: 20rpx 35rpx 40rpx 35rpx;
+  padding: 42rpx 35rpx 52rpx 35rpx;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
@@ -57,19 +87,19 @@
 }
 .footerAuditWrap view{
   width: 48%;
-  height: 80rpx;
-  line-height: 80rpx;
+  height: 70rpx;
+  line-height: 70rpx;
   text-align: center;
   font-size: 24rpx;
-  border-radius: 16rpx;
+  border-radius: 74rpx;
 }
 .footerAuditWrap view:first-child{
-  border: 2rpx solid #90D2D6;
-  color: #90D2D6;
+  border: 2rpx solid #6AB0EC;
+  color: #6AB0EC;
 }
 .footerAuditWrap view:last-child{
-  height: 84rpx;
-  background: #90D2D6;
+  height: 74rpx;
+  background-image: linear-gradient(to right, #91E8FB , #6AB0EC);
   color: #ffffff;
 }
 .footerFailWrap view{
@@ -89,4 +119,21 @@
   height: 84rpx;
   background: #90D2D6;
   color: #ffffff;
+}
+
+.agreement{
+  width: 100%;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 28rpx;
+  color: #909090;
+  position: fixed;
+  background: #fff;
+  z-index: 101;
+  bottom: 140rpx;
+  left: 0;
+  text-align: center;
+}
+.agreement text{
+  color: #6AB0EC;
 }

@@ -906,8 +906,45 @@ page{
 .settledTypeBox{
   width: 630rpx;
   height: auto;
+  background: #fff;
+  border-radius: 14rpx;
+  position: relative;
+  padding: 52rpx 0;
+  box-sizing: border-box;
 }
-
+.settledTypeBox view{
+  width: 520rpx;
+  height: 100rpx;
+  border-radius: 10rpx;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.settledTypeBox view:first-child{
+  margin-bottom: 30rpx;
+  background-image: linear-gradient(to right, #46F6B8 , #42C2D6);
+}
+.settledTypeBox view:nth-child(2){
+  background-image: linear-gradient(to right, #92E8F9 , #6AB0EC);
+}
+.settledTypeBox view text{
+  font-size: 28rpx;
+  color: #fff;
+}
+.settledTypeBox view image{
+  width: 36rpx;
+  height: auto;
+  margin-right: 36rpx;
+}
+.settledTypeBox .closeSettledTypeMask{
+  width: 52rpx;
+  height: auto;
+  position: absolute;
+  left: 50%;
+  bottom: -100rpx;
+  margin-left: -26rpx;
+}
 
 
 
