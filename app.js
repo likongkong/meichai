@@ -903,7 +903,7 @@ App({
         url: "/pages/activitydetailspage/activitydetailspage?" + whref
       }); 
     } else if (item_type == 998) {
-      wx.reLaunch({    //签到
+      wx.reLaunch({ 
         url: "/pages/index/index?judgeprof=2"
       });
     } else if (item_type == 995) {
@@ -915,8 +915,8 @@ App({
         url: "/page/component/pages/turntable/turntable"
       });
     } else if (item_type == 993) {
-      wx.navigateTo({
-        url: "/page/component/pages/dlfind/dlfind?topic_id=6"
+      wx.redirectTo({
+        url: "/page/component/pages/dlfind/dlfind"
       });
     } else if (item_type == 991) {
       wx.navigateTo({
@@ -1157,6 +1157,14 @@ App({
       wx.navigateTo({  
         url: "/page/settled/pages/timHomePageList/timHomePageList"
       });      
+    }else if(item_type == 9058){  // 购物车
+      wx.redirectTo({
+        url: "/pages/shoppingCart/shoppingCart"
+      });     
+    }else if(item_type == 9059){  // 我的
+      wx.redirectTo({
+        url: "/pages/wode/wode"
+      });     
     }
   },
   // 中奖提示倒计时

@@ -381,17 +381,13 @@ Page({
   // 导航跳转
   whomepage: function() {
     setTimeout(function() {
-      wx.reLaunch({
-        url: "/pages/index/index?judgeprof=2"
-      });
+      app.comjumpwxnav(998,'','');
     }, 100);
   },
 
   dlfindfun: function() {
     setTimeout(function() {
-      wx.reLaunch({
-        url: "/page/component/pages/dlfind/dlfind",
-      })
+      app.comjumpwxnav(993,'','');
     }, 100);
   },
 
@@ -403,18 +399,14 @@ Page({
 
   wshoppingCart: function() {
     setTimeout(function() {
-      wx.redirectTo({
-        url: "/pages/shoppingCart/shoppingCart"
-      });
+      app.comjumpwxnav(9058, '', '');
     }, 100);
   },
 
   wmy: function() {
     app.signindata.iftr_mc = true;
     setTimeout(function() {
-      wx.redirectTo({
-        url: "/pages/wode/wode"
-      });
+      app.comjumpwxnav(9059,'','');
     }, 40);
   },
   // 跳转抽签详情

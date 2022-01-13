@@ -47,7 +47,7 @@
     </view>
     <view class="emlhead" style="overflow: hidden;">
         <image class='wxIcon' src="https://cdn.51chaidan.com/images/brandSettledIcon/dynamicInfoWXHY.png" mode='aspectFit'><button style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;'  open-type="share"></button></image>
-        <block wx:if='{{dataInfo.imgArr.length != 0}}'>
+        <block wx:if='{{(dataInfo.imgArr.length != 0 || dataInfo.videoArr[0].video_screenshot) && dataInfo.isSettledUploading}}'>
             <image class='wxIcon' catchtap="creatCanvasImg" src="https://cdn.51chaidan.com/images/brandSettledIcon/dynamicInfoPYQ.png" mode='aspectFit'></image>
             <image class='wxIcon' catchtap="creatCanvasImg" src="https://cdn.51chaidan.com/images/brandSettledIcon/dynamicInfoImg.png" mode='aspectFit'></image>
         </block>

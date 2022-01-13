@@ -292,9 +292,7 @@ Page({
   },
   // 导航跳转
   whomepage: function () {
-    wx.reLaunch({
-      url: "/pages/index/index?judgeprof=2"
-    });
+    app.comjumpwxnav(998,'','');
   },
   wnews: function () {
     var _this = this;
@@ -302,9 +300,7 @@ Page({
   },
   wshoppingCart: function () {
     var _this = this;
-    wx.redirectTo({
-      url: "/pages/shoppingCart/shoppingCart"
-    });
+    app.comjumpwxnav(9058, '', '');
   },
   wmy: function () { 
     this.onPullDownRefresh(); 

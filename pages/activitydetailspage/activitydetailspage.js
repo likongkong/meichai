@@ -2304,9 +2304,7 @@ closefrindcommoni:function(){
               title: '提示',
               content: '活动id有误',
               success: function (res) {
-                wx.reLaunch({
-                  url: "/pages/index/index?judgeprof=2"
-                });
+                app.comjumpwxnav(998,'','');
               }
             });
         };
@@ -3642,9 +3640,7 @@ closefrindcommoni:function(){
         url: "/page/component/pages/newsignin/newsignin"
       });
     } else if (item_type == 998){
-      wx.reLaunch({    //签到
-        url: "/pages/index/index?judgeprof=2"
-      });
+      app.comjumpwxnav(998,'','');
     } else if (item_type == 996) {
       this.setData({
         awatip:true,
@@ -5062,14 +5058,10 @@ closefrindcommoni:function(){
   },
   wmy: function () {
     app.signindata.iftr_mc = true;
-    wx.redirectTo({
-      url: "/pages/wode/wode"
-    });
+    app.comjumpwxnav(9059,'','');
   },
   wshoppingCart: function () {
-    wx.redirectTo({
-      url: "/pages/shoppingCart/shoppingCart"
-    });
+app.comjumpwxnav(9058, '', '');
   }, 
   // 导航跳转 
   wnews: function () {
@@ -5078,9 +5070,7 @@ closefrindcommoni:function(){
   },
   // 导航跳转
   whomepage: function () {
-    wx.reLaunch({
-      url: "/pages/index/index?judgeprof=2"
-    });
+    app.comjumpwxnav(998,'','');
   },
   tgfrShareIftrFun:function(){
     this.setData({
@@ -5088,9 +5078,7 @@ closefrindcommoni:function(){
     })
   },
   dlfindfun: function () {
-    wx.reLaunch({
-      url: "/page/component/pages/dlfind/dlfind",
-    })
+    app.comjumpwxnav(993,'','');
   },
   awajump:function(){
     var cart_id = this.data.commoddata.cart_id || '';

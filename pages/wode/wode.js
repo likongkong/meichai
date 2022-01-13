@@ -589,9 +589,7 @@ Page({
 
   // 导航跳转
   whomepage: function () {
-    wx.reLaunch({
-      url: "/pages/index/index?judgeprof=2"
-    });
+    app.comjumpwxnav(998,'','');
   },
   wnews: function () {
     var _this = this;
@@ -599,9 +597,7 @@ Page({
   },
   wshoppingCart: function () {
     var _this = this;
-    wx.redirectTo({
-      url: "/pages/shoppingCart/shoppingCart"
-    });
+    app.comjumpwxnav(9058, '', '');
   },
   wmy: function () { 
     this.onPullDownRefresh(); 
@@ -657,9 +653,7 @@ Page({
     }
   }, 
   dlfindfun: function () {
-    wx.reLaunch({
-      url: "/page/component/pages/dlfind/dlfind",
-    })
+    app.comjumpwxnav(993,'','');
   },
   personalhomepage: function () {
     wx.reLaunch({

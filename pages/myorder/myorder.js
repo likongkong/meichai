@@ -1485,9 +1485,7 @@ Page({
         url: "/page/component/pages/newsignin/newsignin"
       });
     } else if (item_type==998){
-      wx.reLaunch({    //签到
-        url: "/pages/index/index?judgeprof=2"
-      });
+      app.comjumpwxnav(998,'','');
     } else if (item_type == 996) {
       this.setData({
         awatip: true,
@@ -1859,9 +1857,7 @@ Page({
   },
   // 跳转首页
   frontpagebutton: function () {
-    wx.reLaunch({
-      url: "/pages/index/index?judgeprof=2"
-    })
+    app.comjumpwxnav(998,'','');
   },
   // 生成图片
   generatePictures: function (qrcode, awardinfo, cover, cart_idsave, order_type){
@@ -3328,9 +3324,7 @@ Page({
   },
 
   wshoppingCart: function () {
-    wx.reLaunch({
-      url: "/pages/shoppingCart/shoppingCart"
-    });
+    app.comjumpwxnav(9058, '', '');
   },
   // 导航跳转 
   wnews: function () {
@@ -3339,21 +3333,15 @@ Page({
   },
   // 导航跳转
   whomepage: function () {
-    wx.reLaunch({
-      url: "/pages/index/index?judgeprof=2"
-    });
+    app.comjumpwxnav(998,'','');
   },
   dlfindfun: function () {
-    wx.reLaunch({
-      url: "/page/component/pages/dlfind/dlfind",
-    })
+    app.comjumpwxnav(993,'','');
   },
 
   wmy: function () {
     app.signindata.iftr_mc = true;
-    wx.reLaunch({
-      url: "/pages/wode/wode"
-    });
+    app.comjumpwxnav(9059,'','');
   },
   jumpowntoy: function () {
     var _this = this;

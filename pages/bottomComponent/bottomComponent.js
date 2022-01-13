@@ -161,9 +161,7 @@ Component({
       if (_this.properties.wmy) {
         return;
       }
-      wx.redirectTo({
-        url: "/pages/wode/wode",
-      });
+      app.comjumpwxnav(9059,'','');
     },
     dlfindfun: function () {
       var _this = this;
@@ -171,9 +169,7 @@ Component({
         this.triggerEvent("run");
         return;
       }
-      wx.reLaunch({
-        url: "/page/component/pages/dlfind/dlfind",
-      })
+      app.comjumpwxnav(993,'','');
     },
     // 新增
     // 订阅

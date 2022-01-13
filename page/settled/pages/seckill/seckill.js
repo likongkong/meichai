@@ -3697,15 +3697,11 @@ Page({
         };
         if (res.data.ReturnCode == 100) {
           app.showToastC('该商品已下架');
-          wx.reLaunch({
-            url: "/pages/index/index?judgeprof=2"
-          });
+          app.comjumpwxnav(998,'','');
         };
         if (res.data.ReturnCode == '000') {
           app.showToastC('商品暂时找不到了');
-          wx.reLaunch({
-            url: "/pages/index/index?judgeprof=2"
-          });
+          app.comjumpwxnav(998,'','');
         };
         // 判断非200和登录
         Dec.comiftrsign(_this, res, app);
@@ -4261,15 +4257,11 @@ Page({
         url: "/page/component/pages/newsignin/newsignin"
       });
     } else if (item_type == 998) {
-      wx.reLaunch({    //签到
-        url: "/pages/index/index?judgeprof=2"
-      });
+      app.comjumpwxnav(998,'','');
     };
   },
   wshoppingCart: function () {
-    wx.redirectTo({
-      url: "/pages/shoppingCart/shoppingCart"
-    });
+    app.comjumpwxnav(9058, '', '');
   },  
   // 导航跳转 
   wnews: function () {
@@ -4278,15 +4270,11 @@ Page({
   }, 
   // 导航跳转
   whomepage: function () {
-    wx.reLaunch({
-      url: "/pages/index/index?judgeprof=2"
-    });
+    app.comjumpwxnav(998,'','');
   },
   wmy: function () {
     app.signindata.iftr_mc = true;
-    wx.redirectTo({
-      url: "/pages/wode/wode"
-    });
+    app.comjumpwxnav(9059,'','');
   },
   swiperchangeindex: function (detail){
     this.setData({
@@ -4385,9 +4373,7 @@ Page({
     });
   },
   dlfindfun: function () {
-    wx.reLaunch({
-      url: "/page/component/pages/dlfind/dlfind",
-    })
+    app.comjumpwxnav(993,'','');
   }, 
   // 晒单加载更多 
   delpostdatamore: function () {
