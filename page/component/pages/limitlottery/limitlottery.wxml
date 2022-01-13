@@ -99,7 +99,7 @@
 					<view class="apEveBox">
 							<view class="apEve">
 									<view class="apEveTopDate">{{infoActivity.schdule[0].date}}</view>
-									<view class="apEveCenter" style="{{infoActivity.status == 1 ? 'font-weight: bold;' : ''}}">
+									<view class="apEveCenter" style="{{infoActivity.schdule[0].isFinished ? 'font-weight: bold;' : ''}}">
 										  <block wx:if='{{infoActivity.schdule[0].time}}'>
 													<view class="apEveCenterTxt">{{infoActivity.schdule[0].time}}</view>
 													<view>{{infoActivity.schdule[0].tip}}</view>
@@ -111,7 +111,7 @@
 							</view> 
 							<view class="apEve" style="margin:0 90rpx">
 								  <view class="apEveTopDate">{{infoActivity.schdule[1].date}}</view>
-									<view class="apEveCenter" style="{{infoActivity.status == 2 ? 'font-weight: bold;' : ''}}">
+									<view class="apEveCenter" style="{{infoActivity.schdule[1].isFinished ? 'font-weight: bold;' : ''}}">
 										<block wx:if='{{infoActivity.schdule[1].time}}'>
 													<view class="apEveCenterTxt">{{infoActivity.schdule[1].time}}</view>
 													<view>{{infoActivity.schdule[1].tip}}</view>
@@ -125,7 +125,7 @@
 							</view> 
 							<view class="apEve">
 								  <view class="apEveTopDate">{{infoActivity.schdule[2].date}}</view>
-									<view class="apEveCenter" style="{{infoActivity.status == 3 ? 'font-weight: bold;' : ''}}">
+									<view class="apEveCenter" style="{{infoActivity.schdule[2].isFinished ? 'font-weight: bold;' : ''}}">
 											<block wx:if='{{infoActivity.schdule[2].time}}'>
 														<view class="apEveCenterTxt">{{infoActivity.schdule[2].time}}</view>
 														<view>{{infoActivity.schdule[2].tip}}</view>
