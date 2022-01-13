@@ -1,5 +1,6 @@
 
 var Dec = require('../../../../common/public');//aes加密解密js
+var utils = require("../../../../utils/util.js");
 const app = getApp();
 Page({
   /**
@@ -342,8 +343,8 @@ Page({
             isCertification:true,
             isCertificationMask:false,
             [`personData[1].placeholder`]:'已认证',
-            [`personData[1].certificationInfo.name`]:obj.realname,
-            [`personData[1].certificationInfo.idcard`]:obj.realidcard,
+            [`personData[1].certificationInfo.name`]:utils.plusXing(obj.realname,1,0),
+            [`personData[1].certificationInfo.idcard`]:utils.plusXing(obj.realidcard,4,5),
           })
         }else{
           app.showToastC(res.data.Message,2000);
@@ -426,8 +427,8 @@ Page({
               this.setData({
                 isCertification:true,
                 [`personData[1].placeholder`]:this.data.num==4?'':'已认证',
-                [`personData[1].certificationInfo.name`]:brandInfo.firm_linkman,
-                [`personData[1].certificationInfo.idcard`]:brandInfo.certificate_img,
+                [`personData[1].certificationInfo.name`]:utils.plusXing(brandInfo.firm_linkman,1,0),
+                [`personData[1].certificationInfo.idcard`]:utils.plusXing(brandInfo.certificate_img,4,5),
                 [`personData[2].value`]:brandInfo.firm_tel,
                 [`personData[4].value`]:brandInfo.ip_name,
                 [`personData[5].src`]:brandInfo.ip_logo,

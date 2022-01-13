@@ -1,4 +1,5 @@
 var Dec = require('../../../../common/public');//aes加密解密js
+var utils = require("../../../../utils/util.js");
 const app = getApp();
 Page({
   /**
@@ -284,6 +285,46 @@ Page({
     this.data.obj[key]=e.detail.value;
     console.log(this.data.obj)
   },
+  // 实名认证
+  authentication(){
+    let _this = this;
+    let obj = this.data.obj;
+    if(!obj.realname || obj.realname == ''){
+      app.showToastC('请输入真实姓名',1500);
+      return false;
+    }
+    if(!obj.realidcard || obj.realidcard == ''){
+      app.showToastC('请输入身份证号码',1500);
+      return false;
+    }
+    let data = `mod=address&operation=verifyIdentityCard&uid=${this.data.uid}&loginid=${this.data.loginid}&idcard=${this.data.obj.realidcard}&username=${this.data.obj.realname}`
+    var q = Dec.Aese(data);
+    console.log(`${app.signindata.comurl}?${data}`)
+    wx.request({
+      url: app.signindata.comurl + 'user.php' + q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: (res) => { 
+        console.log('实名认证====',res)
+        wx.hideLoading()
+        if(res.data.ReturnCode == 200){
+          app.showToastC('认证成功',1500);
+          this.setData({
+            isCertification:true,
+            isCertificationMask:false,
+            [`personData[1].placeholder`]:'',
+            [`personData[1].certificationInfo.name`]:utils.plusXing(obj.realname,1,0),
+            [`personData[1].certificationInfo.idcard`]:utils.plusXing(obj.realidcard,4,5),
+          })
+        }else{
+          app.showToastC(res.data.Message,2000);
+        }
+      },
+      fail: function () {},
+      complete:function(){
+      }
+    });
+  },
   //获取品牌信息
   getBrandInfo(){
     wx.showLoading({
@@ -355,8 +396,8 @@ Page({
               this.setData({
                 isCertification:true,
                 [`personData[1].placeholder`]:this.data.num==4?'':'已认证',
-                [`personData[1].certificationInfo.name`]:brandInfo.firm_linkman,
-                [`personData[1].certificationInfo.idcard`]:brandInfo.certificate_img,
+                [`personData[1].certificationInfo.name`]:utils.plusXing(brandInfo.firm_linkman,1,0),
+                [`personData[1].certificationInfo.idcard`]:utils.plusXing(brandInfo.certificate_img,4,5),
                 [`personData[2].value`]:brandInfo.firm_tel,
                 [`personData[4].value`]:brandInfo.ip_name,
                 [`personData[5].src`]:brandInfo.ip_logo,

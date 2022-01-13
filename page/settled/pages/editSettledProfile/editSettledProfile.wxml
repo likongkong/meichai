@@ -20,10 +20,12 @@
                 id="settledForm"
                 statusBarHeightMc="{{statusBarHeightMc}}"
                 list="{{settledType==0?enterpriseData:personData}}"
+                isCertificationMask="{{isCertificationMask}}"
                 bind:bindchange="bindchange"
                 num="{{num}}"
                 isEdit="true"
-                brandInfo="{{brandInfo}}">
+                brandInfo="{{brandInfo}}"
+                bind:authentication="authentication">
             </settledForm>
         </block>
         <block>
