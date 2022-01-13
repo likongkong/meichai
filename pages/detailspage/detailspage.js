@@ -727,22 +727,16 @@ Page({
   // 抽盒机详情页 
   addresssmokebox: function (event) {
     var gid = event.currentTarget.dataset.gid || event.target.dataset.gid;
-    wx.navigateTo({
-      url: "/pages/smokebox/smokebox?gid=" + gid
-    });
+    app.comjumpwxnav(9005,gid,'');
   },
   // 抽盒机详情页 
   crowdfundingfun: function (event) {
     var gid = event.currentTarget.dataset.gid || event.target.dataset.gid;
-    wx.navigateTo({
-      url:"/page/component/pages/crowdfunding/crowdfunding?aid=" + gid,
-    });
+    app.comjumpwxnav(9013,gid,'');
   },
   // vip 页面
   jumpVipPage: function (event) {
-    wx.navigateTo({  
-      url: "/page/secondpackge/pages/vipPage/vipPage"
-    })
+    app.comjumpwxnav(9021,gid,'');
   },
   //时间戳转换时间  
   toDatehd: function (number) {
@@ -1041,12 +1035,6 @@ Page({
       url: "/pages/myorder/myorder?tabnum=0"
     });        
   }, 
-  // 返回首页
-  returntothehomepage:function(){
-    wx.reLaunch({
-      url: "/pages/index/index"
-    });
-  },
   passWOnBlur:function(){
     console.log('失去焦点')
     var _this = this;
@@ -1808,11 +1796,7 @@ Page({
       var gid = w.currentTarget.dataset.gid || w.target.dataset.gid;
       console.log(gid,_this.data.gid)
       if (gid != '' && gid != 0 && gid != _this.data.gid && gid) {
-        // _this.setData({gid: gid});
-        // _this.adjdatagid();
-        wx.redirectTo({
-          url: "/pages/detailspage/detailspage?gid=" + gid
-        });        
+        app.comjumpwxnav(1,gid,'');        
       }; 
   },
   // 颜色尺寸根据gid不同从新加载数据
@@ -3596,9 +3580,7 @@ Page({
       // 判断是否授权
       this.activsign();
     }else{
-      wx.reLaunch({  
-        url: "/pages/index/index"
-      });      
+      app.comjumpwxnav(998,'','');     
     };
   },
   // 购物券选中
@@ -4445,15 +4427,9 @@ Page({
   },
   // 跳转定位
   jumpposition:function(w){
-    wx.navigateTo({
-      url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
-    });
+    app.comjumpwxnav(9022,'','');
   },
-  jumpMapFun(){
-    wx.navigateTo({ 
-      url: "/page/secondpackge/pages/canvasRoute/canvasRoute"
-    });
-  },
+
   SaveCard: function(e) {
     let that = this;
     console.log('保存');

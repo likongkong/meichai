@@ -1263,37 +1263,7 @@ Page({
   joinlimitlotteryFun(){
     var _this = this;
     _this.newJoinDraw()
-    // is_ordinary_ticket_user存在且为true === 普通票用户
-    // if(_this.data.is_ordinary_ticket_user != undefined && _this.data.is_ordinary_ticket_user){
-    //   this.ticketList();
-    // }else if(_this.data.is_ordinary_ticket_user != undefined && !_this.data.is_ordinary_ticket_user){
-    //   // wx.showToast({
-    //   //   title: '未检测到您的购票信息，请参加其他抽签活动',
-    //   //   icon: 'none',
-    //   //   mask:true,
-    //   //   duration:2000
-    //   // });  
-
-    // }else{
-    //   // if(_this.data.promote_start_date && !_this.data.subscribeOrNot){
-    //   //   _this.subscrfun(1);
-    //   // }else
-    //   if(_this.data.infoActivity.premiseForJoin && _this.data.isList == 1){
-    //       _this.listTipImg();
-    //   }else if (_this.data.infoActivity.joinMothed == "blindBox" && !_this.data.infoActivity.isCanOpenLotto) {
-    //     wx.navigateTo({
-    //       url: "/pages/smokeboxlist/smokeboxlist",
-    //     });
-    //   } else if (_this.data.infoActivity.joinMothed == "zone" && !_this.data.infoActivity.isCanOpenLotto) {
-    //     wx.navigateTo({
-    //       url: "/page/component/pages/newsigninarea/newsigninarea?type=3",
-    //     });
-    //   }  else if (_this.data.infoActivity.isCommandActivity) {
-    //       this.redpinputdataiftr();
-    //   } else {
-    //     this.joinDraw(0);
-    //   }
-    // }
+    
   },
 
 
@@ -1654,9 +1624,7 @@ Page({
   },
 
   moreaction: function () {
-    wx.navigateTo({
-      url: "/page/component/pages/limitlotterylist/limitlotterylist",
-    });
+    app.comjumpwxnav(989,'','');
   },
 
   /**
@@ -2490,9 +2458,7 @@ Page({
     if(_this.data.promote_start_date){
       var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
       if(ind == 1){
-        wx.navigateTo({
-          url: "/pages/detailspage/detailspage?gid=" + _this.data.infoActivity.goods_id||'',
-        });
+        app.comjumpwxnav(1,_this.data.infoActivity.goods_id,'');
       }else{
         _this.subscrfun(1);
       };
@@ -2505,9 +2471,7 @@ Page({
         url: "/pages/smokebox/smokebox?gid=" + + _this.data.infoActivity.goods_id||'',
       });
     }else{
-      wx.navigateTo({
-        url: "/pages/detailspage/detailspage?gid=" + _this.data.infoActivity.goods_id||'',
-      });
+      app.comjumpwxnav(1,_this.data.infoActivity.goods_id,'');
     }
 
   },
@@ -2912,9 +2876,7 @@ Page({
   // 跳转详情页 
   addressmanagement: function (event) {
     var gid = event.currentTarget.dataset.gid || event.target.dataset.gid;
-    wx.navigateTo({
-      url: "/pages/detailspage/detailspage?gid=" + gid
-    });
+    app.comjumpwxnav(1,gid,'');
   },  
   // 抽盒机详情页 
   addresssmokebox: function (event) {

@@ -373,9 +373,7 @@ Page({
     app.limitlottery(_this);
   },
   jumpsmoke: function() {
-    wx.navigateTo({
-      url: "/pages/smokeboxlist/smokeboxlist",
-    });
+    app.comjumpwxnav(988,'','');
   },
   jumpdhl: function() {
     wx.navigateTo({
@@ -389,8 +387,6 @@ Page({
     });
   },
   jumpnewsignin:function(){
-    wx.navigateTo({
-      url: "/page/component/pages/newsignin/newsignin",
-    });
+    app.comjumpwxnav(9,'','');
   }
 })

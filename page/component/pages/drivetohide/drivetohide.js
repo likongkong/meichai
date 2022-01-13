@@ -757,9 +757,7 @@ Page({
   },
 
   jumpsmokeList: function() {
-    wx.navigateTo({
-      url: "/pages/smokeboxlist/smokeboxlist",
-    });
+    app.comjumpwxnav(988,'','');
     this.setData({
       ishownoticket: false,
     })
@@ -837,9 +835,7 @@ Page({
     })
   },
   jumpnewsignin: function () {
-    wx.navigateTo({
-      url: "/page/component/pages/newsignin/newsignin",
-    });
+    app.comjumpwxnav(9,'','');
   },
   //key(需要检错的键） url（传入的需要分割的url地址）
   getSearchString: function (key, Url) {

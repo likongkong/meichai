@@ -529,35 +529,7 @@ Page({
       this.deactivation()
     }
 
-    return false;
-
-    if (order_type == 3) {
-      wx.navigateTo({
-        url: "/page/component/pages/imdetailspage/imdetailspage?goods_id=" + gid
-      });
-    }else if (order_type==2){
-      wx.navigateTo({    
-        url: "../../../../pages/activitydetailspage/activitydetailspage?id=" + activity_id
-      })
-    } else if (order_type == 16){
-      return;
-    } else if (order_type == 17) {
-      wx.navigateTo({
-        url: "/page/component/pages/crowdfunding/crowdfunding?aid=" + activity_id
-      })
-    } else if(order_type == 13){
-      wx.navigateTo({   
-        url: "/page/component/pages/limitlottery/limitlottery?id=" + activity_id
-      });
-    } else if(order_type == 21){
-      wx.navigateTo({   
-        url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + activity_id
-      });
-    } else{
-      wx.navigateTo({    
-        url: "../../../../pages/detailspage/detailspage?gid=" + gid
-      })
-    }     
+    return false;  
 
   },
   // 时间戳转换时间  
@@ -901,9 +873,7 @@ Page({
   },
   // 返回首页
   returntothehomepage: function () {
-    wx.reLaunch({    
-      url: "../../../../pages/index/index"
-    });
+    app.comjumpwxnav(998,'','');
     this.paymentcompletionwimg();
   },
   // 取消付款
@@ -1078,43 +1048,13 @@ Page({
   },
   // 公共跳转
   comjumpwxnav: function (item_type, whref, wname) {
-    if (item_type == 0) {
-      var url = encodeURIComponent(whref)
-      wx.navigateTo({    // 外部链接
-        url: "/page/component/pages/webview/webview?webview=" + url
-      });
-    } else if (item_type == 1) {
-      wx.navigateTo({    // 商品详情页
-        url: "../../../../pages/detailspage/detailspage?gid=" + whref
-      });
-    } else if (item_type == 2 || item_type == 3) {
-      wx.navigateTo({    // 信息流
-        url: "../../../../pages/classificationpage/classificationpage?" + whref + '&wtype=' + item_type + '&wname=' + wname
-      });
-    } else if (item_type == 4 || item_type == 5) {
-
-      wx.navigateTo({    // 瀑布流
-        url: "../../../../pages/classificationpage/classificationpage?" + whref + '&wtype=' + item_type + '&wname=' + wname
-      });
-    } else if (item_type == 6 || item_type == 7) {
-      wx.navigateTo({    // 活动列表
-        url: "/page/component/pages/activitysharinglist/activitysharinglist"
-      });
-    } else if (item_type == 8) {
-      wx.navigateTo({    // 活动详情页
-        url: "../../../../pages/activitydetailspage/activitydetailspage?id=" + whref
-      });
-    } else if (item_type == 9) {
-      wx.navigateTo({    //签到
-        url: "/page/component/pages/newsignin/newsignin"
-      });
-    } else if (item_type == 998) {
-      app.comjumpwxnav(998,'','');
-    } else if (item_type == 996) {
+    if (item_type == 996) {
       this.setData({
         awatip: true,
         awardrresentiftr:false
       })
+    }else{
+      app.comjumpwxnav(item_type, whref, wname)
     };
   },  
   // 跳转邀请页面
@@ -1207,9 +1147,7 @@ Page({
   },
 
   acetlistfun: function () {
-    wx.redirectTo({
-      url: "/page/component/pages/activitysharinglist/activitysharinglist"
-    });
+    app.comjumpwxnav(6,'','');
     this.setData({
       wsh: false,
       awardrresentiftr: false
@@ -2150,11 +2088,8 @@ Page({
   },
 
   goodsetail: function (w) {
-    var _this = this;
     var gid = w.currentTarget.dataset.gid || w.target.dataset.gid || '';
-    wx.navigateTo({
-      url: "../../../../pages/detailspage/detailspage?gid=" + gid
-    })
+    app.comjumpwxnav(1,gid,'');
   },
 
   personalhomepage: function (w) {

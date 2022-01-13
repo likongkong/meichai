@@ -85,9 +85,7 @@ Page({
     app.comjumpwxnav(item_type, whref, wname);
   },
   acetlistfun: function () {
-    wx.redirectTo({
-      url: "/page/component/pages/activitysharinglist/activitysharinglist"
-    });
+    app.comjumpwxnav(6,'','');
     this.setData({
       awardrresentiftr: false,
     });

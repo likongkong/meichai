@@ -71,9 +71,7 @@ Page({
   addressmanagement: function (event) {
     // 统计商品点击量
     var gid = event.currentTarget.dataset.gid || event.target.dataset.gid;   
-    wx.navigateTo({
-      url: "../../../../pages/detailspage/detailspage?gid=" + gid
-    })
+    app.comjumpwxnav(1,gid,'');
   },   
   //时间戳转换时间  
   toDate: function (number) {

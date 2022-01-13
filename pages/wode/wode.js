@@ -172,9 +172,7 @@ Page({
     })
   },
   jumpVipPage(){
-    wx.navigateTo({  
-      url: "/page/secondpackge/pages/vipPage/vipPage"
-    })
+    app.comjumpwxnav(9021,'','');
   },
    // 订阅授权
   subscrfun:function(){
@@ -326,9 +324,7 @@ Page({
   },
   // 我的钱包 
   mywallet: function () { 
-    wx.navigateTo({    //签到
-      url: "/page/component/pages/newsignin/newsignin"
-    });
+    app.comjumpwxnav(9,'','');
   },  
   /**
    * 生命周期函数--监听页面加载
@@ -647,9 +643,7 @@ Page({
         url: "/page/component/pages/webview/webview?webview=" + url
       });
     } else {
-      wx.navigateTo({
-        url: "/pages/detailspage/detailspage?gid=" + _this.data.defaultinformation.notice.url,
-      })
+      app.comjumpwxnav(1,_this.data.defaultinformation.notice.url,'');
     }
   }, 
   dlfindfun: function () {

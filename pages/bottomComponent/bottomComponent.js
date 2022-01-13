@@ -82,9 +82,7 @@ Component({
         this.triggerEvent("run");
         return;
       }
-      wx.reLaunch({
-        url: "/pages/index/index"
-      });
+      app.comjumpwxnav(998,'','');
     },
     // 潮玩展
     fashionShow:function(){
@@ -141,9 +139,7 @@ Component({
         this.triggerEvent("run");
         return;
       }
-      wx.redirectTo({  // 一番赏
-        url: "/page/secondpackge/pages/aRewardList/aRewardList"
-      });    
+      app.comjumpwxnav(9015,'',''); 
       
     },
     wshoppingCart: function () {

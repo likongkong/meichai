@@ -212,9 +212,7 @@ Page({
   },
 
   jumpsmokeboxlistPage(){
-    wx.navigateTo({  
-      url: "/pages/smokeboxlist/smokeboxlist"
-    })
+    app.comjumpwxnav(988,'','');
   },
 
   // 获取手机号

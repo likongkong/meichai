@@ -66,9 +66,7 @@ Page({
         url: "/pages/smokebox/smokebox?gid=" + goods_id,
       });
     }else{
-      wx.navigateTo({
-        url: "../../../../pages/detailspage/detailspage?gid=" + goods_id,
-      });
+      app.comjumpwxnav(1,goods_id,'');
     }  
   },
   // 拉起订阅

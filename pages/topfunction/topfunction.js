@@ -53,14 +53,9 @@ Component({
             url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
           })
         }else{
-          wx.reLaunch({
-            url: "/pages/index/index"
-          }) 
+          app.comjumpwxnav(998,'','');
         };
 
-        // wx.redirectTo({
-        //   url: "/pages/index/index"
-        // });
       };
     },
     jumphomepage:function(){
@@ -71,13 +66,9 @@ Component({
           url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
         })
       }else{
-        wx.reLaunch({
-          url: "/pages/index/index"
-        }) 
+        app.comjumpwxnav(998,'','');
       };      
-      // wx.redirectTo({
-      //   url: "/pages/index/index" 
-      // });
+
     },
   },
 

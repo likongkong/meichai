@@ -216,9 +216,7 @@ Page({
   addressmanagement: function(event) {
     var gid = event.currentTarget.dataset.gid || event.target.dataset.gid;
     setTimeout(function() {
-      wx.navigateTo({
-        url: "/pages/detailspage/detailspage?gid=" + gid
-      })
+      app.comjumpwxnav(1,gid,'');
     }, 100);
   },
   showrule: function() {
@@ -1677,9 +1675,7 @@ Page({
   },
 
   atOnceUse: function() {
-    wx.redirectTo({
-      url: "/pages/smokeboxlist/smokeboxlist",
-    });
+    app.comjumpwxnav(988,'','');
   },
 
   closetempChance: function() {

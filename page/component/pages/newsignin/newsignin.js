@@ -947,9 +947,7 @@ Page({
         url: "/pages/smokebox/smokebox?gid=" + _this.data.signinfo.goodsId
       });
     } else {
-      wx.navigateTo({
-        url: "/pages/detailspage/detailspage?gid=" + _this.data.signinfo.goodsId,
-      });
+      app.comjumpwxnav(1,_this.data.signinfo.goodsId,'');
     }
 
   },

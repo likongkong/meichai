@@ -578,9 +578,7 @@ Page({
     });
   },
   jumpsmokelist: function() {
-    wx.navigateTo({
-      url: "/pages/smokeboxlist/smokeboxlist"
-    });
+    app.comjumpwxnav(988,'','');
   },
   // 导航跳转 
   wnews: function() {

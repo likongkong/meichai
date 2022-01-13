@@ -193,9 +193,7 @@ Page({
           if (prevpage) {
             wx.navigateBack();
           } else {
-            wx.redirectTo({
-              url: "/pages/index/index"
-            });
+            app.comjumpwxnav(998,'','');
           };
           _this.data.jumptime = false;
         }

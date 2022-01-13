@@ -376,9 +376,7 @@ Page({
     app.comjumpwxnav(9059,'','');
   },
   gotosmokebox: function() {
-    wx.navigateTo({
-      url: '/pages/smokeboxlist/smokeboxlist',
-    })
+    app.comjumpwxnav(988,'','');
   },
   // 收货地址弹框
   seladdressfun: function() {

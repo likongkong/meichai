@@ -228,9 +228,7 @@ Page({
   },
 
   jumpsmokeboxlistPage(){
-    wx.navigateTo({  
-      url: "/pages/smokeboxlist/smokeboxlist"
-    })
+    app.comjumpwxnav(988,'','');
   },
 
 })

@@ -809,9 +809,7 @@ Page({
     if (prevpage) {
       wx.navigateBack();
     } else {
-      wx.redirectTo({
-        url: "/pages/smokeboxlist/smokeboxlist",
-      });
+      app.comjumpwxnav(988,'','');
     };
   },
   /**

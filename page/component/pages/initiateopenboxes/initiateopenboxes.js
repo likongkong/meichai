@@ -214,9 +214,7 @@ Page({
   // 跳转详情页 
   addressmanagement: function(event) {
     var gid = event.currentTarget.dataset.gid || event.target.dataset.gid;
-    wx.navigateTo({
-      url: "/pages/detailspage/detailspage?gid=" + gid
-    })
+    app.comjumpwxnav(1,gid,'');
   },
   showrule: function() {
     var _this = this

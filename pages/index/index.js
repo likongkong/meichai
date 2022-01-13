@@ -117,9 +117,7 @@ Page({
   },
   // 跳转抽盒机
   bblistfun: function () {
-    wx.redirectTo({
-      url: "/pages/smokeboxlist/smokeboxlist",
-    });
+    app.comjumpwxnav(988,'','');
   },
   indexelafrafun:function(){
     this.setData({ indexelafra: false, index_ela_fra:false});
@@ -1276,9 +1274,7 @@ Page({
           app.showToastC('已成功加入购物车');
           Dec.shopnum(_this,app.signindata.comurl);
         } else if (res.data.ReturnCode == 802) {
-          wx.navigateTo({   
-            url: "/pages/detailspage/detailspage?gid=" + gid
-          });
+          app.comjumpwxnav(1,gid,'');
         } else if (res.data.ReturnCode == 805) {
           app.showToastC('库存不足');
         } else if (res.data.ReturnCode == 201) {
@@ -1324,9 +1320,7 @@ Page({
         url: "/page/component/pages/webview/webview?webview=" + url,
       });
     } else {
-      wx.navigateTo({
-        url: "/pages/detailspage/detailspage?gid=" + _this.data.notice_url
-      })
+      app.comjumpwxnav(1,_this.data.notice_url,'');
     }
   },
   dateformat: function (micro_second) {

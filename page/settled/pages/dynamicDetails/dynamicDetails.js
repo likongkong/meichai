@@ -66,9 +66,7 @@ Page({
                 wx.navigateBack();
                 prevpage.onLoadfun()
               } else {
-                wx.redirectTo({
-                  url: "/pages/index/index"
-                });
+                app.comjumpwxnav(998,'','');
               };
             }
           });

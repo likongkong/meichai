@@ -1358,25 +1358,7 @@ Page({
   },
   // 跳转列表
   jumpaRewardList:function(){
-      // let pages = getCurrentPages();
-      // let prevpage = pages[pages.length - 2];
-      // if (prevpage) {
-      //   if (prevpage.route == 'page/secondpackge/pages/aRewardList/aRewardList') {
-      //     wx.navigateBack();
-      //   } else {
-      //     wx.redirectTo({
-      //       url: "/page/secondpackge/pages/aRewardList/aRewardList"
-      //     });
-      //   };
-      // } else {
-      //   wx.redirectTo({
-      //     url: "/page/secondpackge/pages/aRewardList/aRewardList"
-      //   });
-      // };
-      wx.redirectTo({
-        url: "/page/secondpackge/pages/aRewardList/aRewardList"
-      });
-
+    app.comjumpwxnav(9015,'','');
   },
   iftrdetailpageb: function () {
     this.setData({

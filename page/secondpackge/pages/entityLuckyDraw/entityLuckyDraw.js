@@ -794,9 +794,7 @@ Page({
     }
   },
   jumpVipPage(){
-    wx.navigateTo({  
-      url: "/page/secondpackge/pages/vipPage/vipPage"
-    })
+    app.comjumpwxnav(9021,'','');
   },
    // 订阅授权
    subscrfun:function(){

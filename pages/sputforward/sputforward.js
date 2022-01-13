@@ -500,9 +500,7 @@ Page({
     });
   },
   jumptask:function(){    
-    wx.navigateTo({    //签到
-      url: "/page/component/pages/newsignin/newsignin"
-    }); 
+    app.comjumpwxnav(9,'','');
     this.setData({
       is_cbb: false
     });       

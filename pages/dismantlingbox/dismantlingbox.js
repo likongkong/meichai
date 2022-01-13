@@ -180,9 +180,7 @@ Page({
     } else if(isblindbox){
       app.comjumpwxnav(9005,gid,'','');
     }else{
-      wx.navigateTo({
-        url: "/pages/detailspage/detailspage?gid=" + gid,
-      })
+      app.comjumpwxnav(1,gid,'');
     }
  
   },

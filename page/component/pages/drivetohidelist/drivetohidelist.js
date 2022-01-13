@@ -199,9 +199,7 @@ Page({
     app.limitlottery(_this);
   },
   jumpsmoke: function() {
-    wx.navigateTo({
-      url: "/pages/smokeboxlist/smokeboxlist",
-    });
+    app.comjumpwxnav(988,'','');
   },
 
 })

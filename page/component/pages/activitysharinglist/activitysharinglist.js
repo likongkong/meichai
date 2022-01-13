@@ -233,9 +233,7 @@ Page({
   },  
   // 跳转抽盒机
   bblistfun: function () {
-    wx.redirectTo({
-      url: "/pages/smokeboxlist/smokeboxlist",
-    });
+    app.comjumpwxnav(988,'','');
   },
   onLoadfun:function(){
     var newDate = new Date();
@@ -552,9 +550,7 @@ Page({
   // 跳转详情页 
   addressmanagement: function (event) {
     var gid = event.currentTarget.dataset.gid || event.target.dataset.gid;
-    wx.navigateTo({
-      url: "/pages/detailspage/detailspage?gid=" + gid
-    })
+    app.comjumpwxnav(1,gid,'');
   },   
   //  支付成功跳转
   comindellistjump: function (w) {
@@ -566,38 +562,7 @@ Page({
   },
   // 公共跳转
   comjumpwxnav: function (item_type, whref, wname) {
-    if (item_type == 0) {
-      var url = encodeURIComponent(whref)
-      wx.navigateTo({    // 外部链接
-        url: "/pages/webview/webview?webview=" + url
-      });
-    } else if (item_type == 1) {
-      wx.navigateTo({    // 商品详情页
-        url: "/pages/detailspage/detailspage?gid=" + whref
-      });
-    } else if (item_type == 2 || item_type == 3) {
-      wx.navigateTo({    // 信息流
-        url: "/pages/classificationpage/classificationpage?" + whref + '&wtype=' + item_type + '&wname=' + wname
-      });
-    } else if (item_type == 4 || item_type == 5) {
-      wx.navigateTo({    // 瀑布流
-        url: "/pages/classificationpage/classificationpage?" + whref + '&wtype=' + item_type + '&wname=' + wname
-      });
-    } else if (item_type == 6 || item_type == 7) {
-      wx.navigateTo({    // 活动列表
-        url: "/page/component/pages/activitysharinglist/activitysharinglist"
-      });
-    } else if (item_type == 8) {
-      wx.navigateTo({    // 活动详情页
-        url: "/pages/activitydetailspage/activitydetailspage?id=" + whref
-      });
-    } else if (item_type == 9) {
-      wx.navigateTo({    //签到
-        url: "/page/component/pages/newsignin/newsignin"
-      });
-    } else if (item_type == 998) {
-      app.comjumpwxnav(998,'','');
-    };
+    app.comjumpwxnav(item_type, whref, wname)
   },
   // 免单活动跳转
   actexempfun: function (event) {

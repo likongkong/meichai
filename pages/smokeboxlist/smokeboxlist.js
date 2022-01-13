@@ -1,4 +1,4 @@
-// /pages/smokeboxlist/smokeboxlist.js
+
 var Dec = require('../../common/public.js'); //aes加密解密js
 const app = getApp();
 

@@ -2022,9 +2022,7 @@ Page({
               app.comsubscribe(_this);
 
               var cart_id = _this.data.cart_id;
-              wx.redirectTo({
-                url: "/page/component/pages/newsignin/newsignin"
-              });
+              app.comjumpwxnav(9,'','');
             },
             'fail': function(res) {
               _this.setData({

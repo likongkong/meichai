@@ -226,8 +226,6 @@ Page({
     app.comsubscribe(_this);
   },
   jumpVipPage(){
-    wx.navigateTo({  
-      url: "/page/secondpackge/pages/vipPage/vipPage"
-    })
+    app.comjumpwxnav(9021,'','');
   },
 })

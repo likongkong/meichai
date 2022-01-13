@@ -667,9 +667,7 @@ Page({
 
   },
   frontpagebutton:function(){
-    wx.reLaunch({     //跳转至指定页面并关闭其他打开的所有页面（这个最好用在返回至首页的的时候）
-      url: '../../../../pages/index/index'
-    })
+    app.comjumpwxnav(998,'','');
    
   },
   

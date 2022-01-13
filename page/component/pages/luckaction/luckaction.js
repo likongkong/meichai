@@ -224,13 +224,7 @@ Page({
   },
 
   addorder: function() {
-    // wx.redirectTo({
-    //   url: "/pages/index/index",
-    // });
-
-    wx.reLaunch({
-      url: "/pages/index/index"
-    });
+    app.comjumpwxnav(998,'','');
   },
 
   baskorder: function() {

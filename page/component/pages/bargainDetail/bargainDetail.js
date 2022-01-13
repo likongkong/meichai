@@ -155,9 +155,7 @@ Page({
 
   gosignin: function() {
     this.dialogClick();
-    wx.navigateTo({ //签到
-      url: "/page/component/pages/newsignin/newsignin"
-    });
+    app.comjumpwxnav(9,'','');
   },
 
   goDetail: function() {
@@ -165,9 +163,7 @@ Page({
     _this.setData({
       newcoupon: false,
     })
-    wx.navigateTo({
-      url: "../../../../pages/detailspage/detailspage?gid=" + _this.data.goods_id,
-    })
+    app.comjumpwxnav(1,_this.data.goods_id,'');
   },
 
   gobarDetail: function(w) {
@@ -195,9 +191,7 @@ Page({
   },
 
   gojigsaw: function() {
-    wx.reLaunch({
-      url: "../../../../pages/index/index",
-    })
+    app.comjumpwxnav(998,'','');
   },
 
   golist: function() {
