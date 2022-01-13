@@ -518,7 +518,54 @@ Page({
     wx.showLoading({
       title: '生成中...',
     })
-
+    var imgData =  [
+      {  // 背景图
+        x: 0,
+        y: 0,
+        url: 'https://cdn.51chaidan.com/images/brandInfoIcon/dynamicBackground.jpg',
+        width: 700,
+        height: 1170,
+        zIndex: 1
+      },{  // 头像
+      x: 57,
+      y: 57,
+      url: dataInfo.brandLogo,
+      width: 66,
+      height:66,
+      zIndex:2,
+      borderRadius:66,
+    }
+    ,{
+      x: 260,
+      y: 900,
+      url:'https://cdn.51chaidan.com/images/qrcode/dynamic/'+_this.data.drying_id+'.png',
+      width: 180,
+      height:180,
+      zIndex: 2,
+      borderRadius:180,
+    }];
+    if(dataInfo.imgArr.length != 0){
+      imgData.push({  // banner
+        x: 60,
+        y: 150,
+        url: dataInfo.imgArr[0],
+        width: 580,
+        height:580,
+        zIndex: 3,
+        borderRadius:20,
+      })
+    }else{
+      imgData.push({  // banner
+        x: 60,
+        y: 150,
+        url: dataInfo.videoArr[0].video_screenshot,
+        width: 580,
+        height:580,
+        zIndex: 3,
+        borderRadius:20,
+      })
+    };
+    console.log(imgData)
     // setData配置数据
     _this.setData({
       posterConfig: {
@@ -580,41 +627,7 @@ Page({
           color: '#000',
           zIndex: 2,
         }],
-        images: [
-          {  // 背景图
-            x: 0,
-            y: 0,
-            url: 'https://cdn.51chaidan.com/images/brandInfoIcon/dynamicBackground.jpg',
-            width: 700,
-            height: 1170,
-            zIndex: 1
-          },{  // 头像
-          x: 57,
-          y: 57,
-          url: dataInfo.brandLogo,
-          width: 66,
-          height:66,
-          zIndex:2,
-          borderRadius:66,
-        }
-        ,{  // banner
-          x: 60,
-          y: 150,
-          url: dataInfo.imgArr[0],
-          width: 580,
-          height:580,
-          zIndex: 3,
-          borderRadius:20,
-        }
-        ,{
-          x: 260,
-          y: 900,
-          url:'https://cdn.51chaidan.com/images/qrcode/dynamic/'+_this.data.drying_id+'.png',
-          width: 180,
-          height:180,
-          zIndex: 2,
-          borderRadius:180,
-        }]
+        images:imgData
       }
     }, () => {
       Poster.create();

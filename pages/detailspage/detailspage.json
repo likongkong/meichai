@@ -7,7 +7,6 @@
     "somke": "/pages/smokeComponent/smokeComponent",
     "t_f": "../topfunction/topfunction",
     "bnavigation": "../bottomComponent/bottomComponent",
-    "poster": "/pages/wxa_plugin_canvas/poster/index",
-    "tga_c": "../tgacomponent/tgacomponent"
+    "poster": "/pages/wxa_plugin_canvas/poster/index"
   }
 }

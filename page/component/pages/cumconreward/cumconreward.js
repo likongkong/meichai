@@ -436,25 +436,17 @@ Page({
     }
   },
   dlfindfun: function () {
-    wx.reLaunch({
-      url: "/page/component/pages/dlfind/dlfind",
-    })
+    app.comjumpwxnav(993,'','');
   },
   // 导航跳转
   whomepage: function () {
-    wx.reLaunch({
-      url: "../../../../pages/index/index?judgeprof=2"
-    })
+    app.comjumpwxnav(9058, '', '');
   },
   wmy: function () {
-    wx.reLaunch({
-      url: "../../../../pages/wode/wode"
-    });
+    app.comjumpwxnav(9059,'','');
   },
   wshoppingCart: function () {
-    wx.reLaunch({
-      url: "../../../../pages/shoppingCart/shoppingCart"
-    });
+    app.comjumpwxnav(9058, '', '');
   },
   // 导航跳转 
   wnews: function () {

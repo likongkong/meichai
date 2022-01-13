@@ -502,9 +502,7 @@ Page({
         url: "/page/component/pages/newsignin/newsignin"
       });
     } else if (item_type == 998) {
-      wx.reLaunch({    //签到
-        url: "/pages/index/index?judgeprof=2"
-      });
+      app.comjumpwxnav(998,'','');
     };
   },   
   //  大图跳转

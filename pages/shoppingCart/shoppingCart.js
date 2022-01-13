@@ -2357,9 +2357,7 @@ Page({
   },
   // 导航跳转
   whomepage: function () {
-    wx.redirectTo({
-      url: "/pages/index/index?judgeprof=2"
-    })
+    app.comjumpwxnav(998,'','');
   },
   wnews: function () {
     var _this = this;
@@ -2376,9 +2374,7 @@ Page({
     };
   },
   wmy: function () {
-    wx.redirectTo({
-      url: "/pages/wode/wode"
-    })
+    app.comjumpwxnav(9059,'','');
   },
   clicktganone: function () {
     this.setData({ tgabox: false })
@@ -2553,9 +2549,7 @@ Page({
         url: "/page/component/pages/newsignin/newsignin"
       });
     } else if (item_type == 998) {
-      wx.reLaunch({    //签到
-        url: "/pages/index/index?judgeprof=2"
-      });
+      app.comjumpwxnav(998,'','');
     };
   },
   //  支付成功跳转
@@ -2760,9 +2754,7 @@ Page({
 
   },
   dlfindfun: function () {
-    wx.reLaunch({
-      url: "/page/component/pages/dlfind/dlfind",
-    })
+    app.comjumpwxnav(993,'','');
   },
 
   jumpgoodsthings: function () {

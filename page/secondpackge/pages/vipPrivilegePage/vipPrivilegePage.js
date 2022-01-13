@@ -54,9 +54,7 @@ Page({
             subscribedata:res.data.Info.subscribe
           })
         }else if(res.data.ReturnCode == 201){
-          wx.navigateTo({ 
-            url: "/pages/wode/wode"
-          }) 
+          app.comjumpwxnav(9059,'','');
         }
       }
     });
@@ -145,9 +143,7 @@ Page({
   },
   clicktganone: function () {
     this.setData({ tgabox: false })
-    wx.navigateTo({ 
-      url: "/pages/wode/wode"
-    }) 
+    app.comjumpwxnav(9059,'','');
   },
   // 点击登录获取权限
   userInfoHandler: function (e) {
