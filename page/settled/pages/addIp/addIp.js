@@ -14,29 +14,33 @@ Page({
       {
         isRequired:true,
         type:'text',
-        subtitle:'IP名称',
-        placeholder:'请输入IP名称',
+        subtitle:'品牌名称',
+        placeholder:'请输入品牌名称',
         value:'',
+        borderbottom1:'show',
         name:'ipName'
       },{
         isRequired:true,
         type:'uploadImg',
-        subtitle:'IP logo（建议上传比例1:1）',
+        subtitle:'品牌主图（建议上传比例1:1）',
         name:'ipLogo',
         src:'',
+        borderbottom1:'show',
         storagelocation:'images/brandSettled/logo'
-      },{
-        isRequired:false,
-        type:'uploadImg',
-        subtitle:'IP 形象图（建议上传比例16:9）',
-        name:'ipImage',
-        src:'',
-        storagelocation:'images/brandSettled/banner'
-      },{
+      },
+      // {
+      //   isRequired:false,
+      //   type:'uploadImg',
+      //   subtitle:'品牌形象图（建议上传比例16:9）',
+      //   name:'ipImage',
+      //   src:'',
+      //   storagelocation:'images/brandSettled/banner'
+      // },
+      {
         isRequired:false,
         type:'textarea',
-        subtitle:'IP介绍',
-        placeholder:'请输入IP介绍',
+        subtitle:'品牌介绍',
+        placeholder:'请输入品牌介绍',
         value:'',
         name:'introduce',
       }
@@ -146,12 +150,12 @@ Page({
     let obj = this.data.obj;
     if(!obj.ipName || obj.ipName == ''){
       this.selectComponent('#settledForm').scrollto('ipName');
-      app.showToastC('请输入IP名称',1500);
+      app.showToastC('请输入品牌名称',1500);
       return false;
     }
     if(!obj.ipLogo || obj.ipLogo == ''){
       this.selectComponent('#settledForm').scrollto('ipLogo');
-      app.showToastC('请上传IP LOGO',1500);
+      app.showToastC('请上传品牌主图',1500);
       return false;
     }
    

@@ -14,30 +14,34 @@ Page({
       {
         isRequired:true,
         type:'text',
-        subtitle:'IP名称',
-        placeholder:'请输入IP联系人',
+        subtitle:'品牌名称',
+        placeholder:'请输入品牌名称',
         value:'',
+        borderbottom1:'show',
         name:'ipName'
       },{
         isRequired:true,
         type:'uploadImg',
-        subtitle:'IP logo（建议上传比例1:1）',
+        subtitle:'品牌主图（建议上传比例1:1）',
         name:'ipLogo',
         src:'',
+        borderbottom1:'show',
         storagelocation:'images/brandSettled/logo'
       },{
         isRequired:true,
         type:'uploadImg',
-        subtitle:'IP 形象图（建议上传比例16:9）',
+        subtitle:'品牌形象图（建议上传比例16:9）',
         name:'ipImage',
         src:'',
+        borderbottom1:'show',
         storagelocation:'images/brandSettled/banner'
       },{
         isRequired:true,
         type:'textarea',
-        subtitle:'IP介绍',
-        placeholder:'请输入IP介绍',
+        subtitle:'品牌介绍',
+        placeholder:'请输入品牌介绍',
         value:'',
+        borderbottom1:'show',
         name:'introduce',
       },{
         isRequired:false,
@@ -45,6 +49,7 @@ Page({
         subtitle:'品牌分享图（建议尺寸5:4)',
         name:'shareImg',
         src:'',
+        borderbottom1:'show',
         storagelocation:'images/brandSettled/brandShare'
       },{
         isRequired:false,
@@ -250,22 +255,22 @@ Page({
     let obj = this.data.obj;
     if(!obj.ipName || obj.ipName == ''){
       this.selectComponent('#settledForm').scrollto('ipName');
-      app.showToastC('请输入IP名称',1500);
+      app.showToastC('请输入品牌名称',1500);
       return false;
     }
     if(!obj.ipLogo || obj.ipLogo == ''){
       this.selectComponent('#settledForm').scrollto('ipLogo');
-      app.showToastC('请上传IP LOGO',1500);
+      app.showToastC('请上传品牌主图',1500);
       return false;
     }
     if(!obj.ipImage || obj.ipImage == ''){
       this.selectComponent('#settledForm').scrollto('ipImage');
-      app.showToastC('请上传IP 形象图',1500);
+      app.showToastC('请上传品牌形象图',1500);
       return false;
     }
     if(!obj.introduce || obj.introduce == ''){
       this.selectComponent('#settledForm').scrollto('introduce');
-      app.showToastC('请输入IP 介绍',1500);
+      app.showToastC('请输入品牌介绍',1500);
       return false;
     }
     if(!obj.shareImg || obj.shareImg == ''){

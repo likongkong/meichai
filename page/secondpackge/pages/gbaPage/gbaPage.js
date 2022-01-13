@@ -39,6 +39,11 @@ Page({
           WxParse.wxParse('article', 'html', res.data.wholeBoxHideRole, that,5);
         }else if(options.from == "hidefun"){  //零元购
           WxParse.wxParse('article', 'html', res.data.freeBuy, that,5);
+        }else if(options.from == "settledAgreement"){  //商家入驻协议
+          that.setData({
+            c_title:'商家入驻协议'
+          })
+          WxParse.wxParse('article', 'html', res.data.enterAgreement, that,5);
         }
       },
       fail: function (res) {}

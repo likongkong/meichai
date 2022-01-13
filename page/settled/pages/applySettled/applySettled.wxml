@@ -2,19 +2,41 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 <view class="applyForOccupancy" style="padding-bottom: {{num!=1?'150':'210'}}rpx;">
-    <settledProgress num="{{num}}" intact="hide"></settledProgress>
+    <view class="settledTypeWrap" wx:if="{{!enterType}}"> 
+        <view data-type="0" catchtap="changeSettledType" class="{{settledType == 0?'active':''}}">企业入驻</view>
+        <view data-type="1" catchtap="changeSettledType" class="{{settledType == 1?'active':''}}">个人入驻</view>
+    </view>
+    <!-- <settledProgress num="{{num}}" intact="hide"></settledProgress> -->
     <block wx:if="{{num == 1}}">
-        <view class="aFoCenter boxShadowEve">
-            <settledForm 
-            id="settledForm"
-            statusBarHeightMc="{{statusBarHeightMc}}"
-            list="{{enterpriseData}}"
-            bind:bindchange="bindchange"
-            num="{{num}}"
-            isEdit="{{false}}"
-            brandInfo="{{brandInfo}}">
-            </settledForm>
+        <view class="aFoCenter">
+            <!-- 企业入驻 -->
+            <block wx:if="{{settledType == 0}}">  
+                <settledForm 
+                id="settledForm"
+                statusBarHeightMc="{{statusBarHeightMc}}"
+                list="{{enterpriseData}}"
+                bind:bindchange="bindchange"
+                num="{{num}}"
+                isEdit="{{false}}"
+                brandInfo="{{brandInfo}}">
+                </settledForm>
+            </block>
+            <!-- 个人入驻 -->
+            <block wx:else>
+                <settledForm 
+                id="settledForm1"
+                statusBarHeightMc="{{statusBarHeightMc}}"
+                list="{{personData}}"
+                isCertificationMask="{{isCertificationMask}}"
+                bind:bindchange="bindchange"
+                num="{{num}}"
+                isEdit="{{false}}"
+                brandInfo="{{brandInfo}}"
+                bind:authentication="authentication">
+                </settledForm>
+            </block>
         </view>
+        <view class="agreement" catchtap='showrule'>提交即代表默认同意<text>《商家入驻协议》</text></view>
         <view class="submitWrap">
             <button class="submit" catchtap="submitAudit"> 提交审核 </button>
         </view>
@@ -23,21 +45,35 @@
         <view wx:if="{{num == 4}}" class="failCause">
             {{brandSettledReturnMsg}}
         </view>
-        <settledForm 
-            id="settledForm"
-            statusBarHeightMc="{{statusBarHeightMc}}"
-            list="{{from=='zhuanqu'?IPData:enterpriseData}}"
-            bind:bindchange="bindchange"
-            num="{{num}}"
-            isEdit="{{num==4?true:false}}"
-            brandInfo="{{brandInfo}}">
-        </settledForm>
+        <!-- 专区数据 -->
+        <block wx:if="{{from=='zhuanqu'}}">
+            <settledForm 
+                id="{{settledType==0?'settledForm':'settledForm1'}}"
+                statusBarHeightMc="{{statusBarHeightMc}}"
+                list="{{IPData}}"
+                bind:bindchange="bindchange"
+                num="{{num}}"
+                isEdit="{{num==4?true:false}}"
+                brandInfo="{{brandInfo}}">
+            </settledForm>
+        </block>
+        <block wx:else>
+            <settledForm 
+                id="settledForm"
+                statusBarHeightMc="{{statusBarHeightMc}}"
+                list="{{settledType==0?enterpriseData:personData}}"
+                bind:bindchange="bindchange"
+                num="{{num}}"
+                isEdit="{{num==4?true:false}}"
+                brandInfo="{{brandInfo}}">
+            </settledForm>
+        </block>
         <block>
             <view wx:if="{{num == 2}}" class="footerAuditWrap">
                 <view data-num="1" catchtap="navigateBack">返回</view>
                 <view data-type="9026" data-num="4" catchtap="comjumpwxnav">修改资料</view>
             </view>
-            <view wx:else class="footerFailWrap">
+            <view wx:else class="footerAuditWrap">
                 <view data-num="1" catchtap="navigateBack">返回</view>
                 <view catchtap="submitAudit">重新提交</view>
             </view>
