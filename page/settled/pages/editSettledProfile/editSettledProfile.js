@@ -79,16 +79,9 @@ Page({
         src:'',
         borderbottom1:'show',
         storagelocation:'images/brandSettled/logo'
+      },{
+        
       },
-      // {
-      //   isRequired:false,
-      //   type:'uploadImg',
-      //   subtitle:'IP 形象图（建议上传比例16:9）',
-      //   name:'ipImage',
-      //   src:'',
-      //   borderbottom1:'show',
-      //   storagelocation:'images/brandSettled/banner'
-      // },
       {
         isRequired:false,
         type:'textarea',
