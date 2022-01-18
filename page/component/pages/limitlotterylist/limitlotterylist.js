@@ -34,9 +34,9 @@ Page({
     var drawOrFreeOrder = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
     this.setData({drawOrFreeOrder});
     if(drawOrFreeOrder==2){
-      if(!this.data.commoddata){
-        this.listdataDraw(1)
-      };
+      this.listdataDraw(1);
+    }else{
+      this.listdata(1)
     };
   },
   /**
