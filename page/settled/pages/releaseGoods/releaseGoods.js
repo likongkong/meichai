@@ -344,8 +344,9 @@ Page({
       this.selectComponent('#settledForm2').refreshData(value,3);
       if(value==1){
         let startTime = (new Date(this.data.obj.startTime).getTime())/1000;
-        let endtime = util.format1("yyyy-MM-dd HH:mm",startTime+2592000);
-        this.selectComponent('#settledForm2').refreshTimeData(endtime,3);
+        let endTime = util.format1("yyyy-MM-dd HH:mm",startTime+2592000);
+        this.selectComponent('#settledForm2').refreshTimeData(endTime,3);
+        this.data.obj['endTime']=endTime;
       }
     }
     if(key == 'startTime'){
