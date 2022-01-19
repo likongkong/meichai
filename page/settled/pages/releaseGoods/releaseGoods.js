@@ -466,7 +466,7 @@ Page({
           [`listData1[3].value`]:info.goodsPrice,
           [`listData1[4].value`]:info.stock,
           [`listData1[5].index`]:info.deliverTimeStatus===''?999:info.deliverTimeStatus==1?0:1,
-          [`listData1[6].index`]:info.limitBuy==0?1:0,
+          [`listData1[6].index`]:info.limitBuy==0 || info.limitBuy==''?1:0,
           [`listData1[6].value`]:info.limitBuy,
           [`listData1[7].value`]:info.integral,
           [`listData1[8].imageList`]:info.arrGoodsDescImg,
@@ -511,12 +511,12 @@ Page({
 
         obj.associationIp = info.brand.brandId;
         obj.goodsName = info.goodsName;
-        obj.flatPatternmaking = info.goodsThumb;
+        obj.flatPatternmaking = info.arrGoodsThumb;
         obj.goodsDescribe = info.goodsDescStr;
         obj.goodsPrice = info.goodsPrice;
         obj.goodsStock = info.stock;
         obj.goodsLabel = info.deliverTimeStatus===''?'':info.deliverTimeStatus==1?0:1;
-        obj.purchaseLimitation = info.limitBuy==0?1:info.limitBuy;
+        obj.purchaseLimitation = info.limitBuy==0 || info.limitBuy==''?1:0;
         obj.purchaseLimitationNum = info.limitBuy;
         obj.integrate = info.integral;
         obj.goodsDetailsPic = info.arrGoodsDescImg;
@@ -621,7 +621,9 @@ Page({
     //   startTime:util.format("yyyy-MM-dd HH:mm"),
     //   endTime:util.format("yyyy-MM-dd HH:mm",2592000000),
 
-console.log(obj.modeOfDespatch)
+    // console.log(obj.modeOfDespatch)
+    // console.log(obj.purchaseLimitation,obj.purchaseLimitationNum,'限购')
+
     let data = {
       goodsId:this.data.id&&this.data.id!=0?this.data.id:'',
       brandId:obj.associationIp,
