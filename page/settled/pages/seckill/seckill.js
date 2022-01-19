@@ -3995,7 +3995,7 @@ Page({
       query:{
         'gid':_this.data.gid
       },
-      imageUrl:'https://cdn.51chaidan.com/'+_this.data.zunmdata.goods_share 
+      imageUrl:_this.data.zunmdata.goods_share 
     }
   },
   onShareAppMessage: function (options) {
@@ -4009,7 +4009,7 @@ Page({
      
     var reshare = {
       title: `${_this.data.zunmdata.endTime && _this.data.zunmdata.endTime!=''?'【限时】':'【限量】'}${_this.data.zunmdata.gname}`,
-      path: '/pages/detailspage/detailspage?gid=' + _this.data.gid + '&referee='+_this.data.uid,
+      path: '/page/settled/pages/seckill/seckill?gid=' + _this.data.gid + '&referee='+_this.data.uid,
       // imageUrl: 'https://cdn.51chaidan.com/'+_this.data.zunmdata.goods_share ,
       imageUrl: _this.data.zunmdata.goods_share ,
       success: function (res) {},
