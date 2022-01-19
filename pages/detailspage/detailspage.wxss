@@ -853,11 +853,3 @@
 }
 
 
-.wxParse-p{
-  color: #000 !important; 
-  padding: 0 !important;
-}
-.WxEmojiView,.wxParse-inline{
-  padding: 20rpx 10rpx 0 10rpx;
-  box-sizing: border-box;
-}
