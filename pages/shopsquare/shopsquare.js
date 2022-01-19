@@ -181,7 +181,7 @@ Page({
     // 先选择文件，得到临时路径
     wx.chooseImage({
       count: 1, // 默认9
-      sizeType: ['compressed'], // 可以指定是原图original还是压缩图compressed，默认用原图
+      sizeType: ['original','compressed'], // 可以指定是原图original还是压缩图compressed，默认用原图
       sourceType: ['camera'], // 'album'相册  camera 相机
       success: function (res) {
   
