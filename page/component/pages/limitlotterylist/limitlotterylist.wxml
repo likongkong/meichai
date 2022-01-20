@@ -81,7 +81,15 @@
               <image class='limieveimg' src='{{item.cover}}' mode='widthFix'></image>
               <block>
                 <view wx:if="{{item.joinMothed == 'payTicket'}}" class='limievetxtname multilineellipsis'><text style='color:#298DF8;'>定金￥{{item.cashPledge}} </text>{{item.name}}</view>
-                <view wx:else class='limievetxtname multilineellipsis'><text style='color:#fd434c;'>抽签价￥{{item.shop_price}} </text>{{item.name}}</view>
+                <view wx:else class='limievetxtname multilineellipsis'>
+                  <block wx:if="{{item.shop_price==0}}">
+                    <text style='color:#fd434c;'>免费 </text>
+                  </block>
+                  <block wx:else>
+                    <text style='color:#fd434c;'>抽签价￥{{item.shop_price}} </text>
+                  </block>
+                  {{item.name}}
+                </view>
               </block>
               <view class='limievetxttime specialellipsis' wx:if='{{item.status==1}}'>
                 <block wx:if='{{item.is_limit==1}}'>满{{item.limit_users}}人开奖</block>
