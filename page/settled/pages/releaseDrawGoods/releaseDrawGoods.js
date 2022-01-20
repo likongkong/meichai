@@ -165,7 +165,7 @@ Page({
         subtitle:'预计发货日期',
         placeholder:'请输入预计发货日期',
         value:'',
-        maxlength:10,
+        maxlength:20,
         name:'dateToPull',
         borderbottom1:'show',
         margintop0:true,
