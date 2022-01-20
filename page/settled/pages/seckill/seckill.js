@@ -261,7 +261,9 @@ Page({
     savepic: '',
     tgfrShareIftr:false,
   },
-
+  noShareShop(){
+     app.showToastC('该商品不可分享')
+  },
 /**
    * 异步生成海报
    */
