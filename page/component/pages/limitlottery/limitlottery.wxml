@@ -82,7 +82,7 @@
 			<view class="newDrawActivityProcess">
 				  <block wx:if='{{infoActivity.isSign}}'>
 								<block wx:if='{{infoActivity.status == 2 && listData.lotto.length != 0}}'>
-										<view class="ndapTitle">我的抽签码（{{listData.lotto.length}}/6）<text catchtap="identityFun" class="adapCtivityRules">身份信息 ></text></view>
+										<view class="ndapTitle">我的抽签码（{{listData.lotto.length}}/6）<text wx:if="{{infoActivity.awardType == 'normal'}}" catchtap="identityFun" class="adapCtivityRules">身份信息 ></text></view>
 										<view class="apEveBox" style="overflow:hidden;">
 												<view class="NewDrawNum" wx:for='{{listData.lotto}}' wx:key='key' style="{{index%2==1?'float:right;':'float:left;'}}">{{item.lotto}}</view>
 										</view>
