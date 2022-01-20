@@ -34,7 +34,7 @@
 
 
 <view class='boxdetail {{tipback?"tripList_root":""}}' style="{{!headhidden||newcoupon?'position:fixed;top:0;left:0;right:0;bottom:0;':''}}">
-  <view class='dlhead' style='height:{{specialGoods==1?"820":"500"}}rpx;position:relative;background:#fff;'>
+  <view class='dlhead' style='height:{{specialGoods==1?"750":"500"}}rpx;position:relative;background:#fff;'>
     <!-- 带视频 -->
     <swiper bindchange='swiperchangeindex' bindanimationfinish="changeGoodsSwip" current="{{goodsIndex}}" wx:if='{{isVideoSwiper}}' class="swiper" indicator-color="#fff" indicator-active-color="#ff2742" indicator-dots="{{false}}" circular="true" autoplay="{{isVideoSwiper?false:true}}"
       interval="15000" duration="450" style='height:{{specialGoods==1?"750":"500"}}rpx;'>
@@ -75,7 +75,9 @@
     <block wx:if='{{specialGoods==1}}'>
       <view class="detailswipernumM">
           <block wx:for='{{movies}}' wx:key='key'>
-            <view class="detailswnuMeve {{detailSwiperindex==index?'borderClass':''}}"></view>
+            <view class="detailswnuMeve">
+                <view class="detailswnuMeveChil {{detailSwiperindex==index?'borderClass':''}}"></view>
+            </view>
           </block>
       </view>
     </block>

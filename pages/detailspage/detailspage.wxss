@@ -457,6 +457,9 @@
 }
 
 .detailswipernumM{
+  position: absolute;
+  left:0;
+  bottom:0;
   width: 100%;
   height: 40rpx;
   overflow: hidden;
@@ -465,18 +468,33 @@
   margin-top:30rpx;
 }
 .detailswnuMeve{
-  width:15rpx ;
-  height: 15rpx;
+  width:19rpx ;
+  height: 19rpx;
   display: inline-block;
-  background-color: #b7b7b7;
-  border: 4rpx solid #fff;
-  border-radius: 50%;
+  /* background-color: #b7b7b7;
+  border: 4rpx solid #b7b7b7; */
+
   font-size: 24rpx;
   margin: 0 10rpx;
   vertical-align: top;
+  position: relative;
 }
-.detailswnuMeve.borderClass{
-  border: 4rpx solid #b7b7b7;
+.detailswnuMeveChil{
+  width: 15rpx;
+  height: 15rpx;
+  border-radius: 50%;
+  background:#b7b7b7 ;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+.detailswnuMeveChil.borderClass{
+  width: 19rpx;
+  height: 19rpx;
+  /* border: 4rpx solid #b7b7b7; */
 }
 .mscColorSel{
   width: 100%;
