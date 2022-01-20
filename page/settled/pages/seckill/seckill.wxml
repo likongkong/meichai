@@ -39,13 +39,13 @@
 
 
 <view class='boxdetail {{tipback?"tripList_root":""}}' style="{{!headhidden||newcoupon?'position:fixed;top:0;left:0;right:0;bottom:0;':''}}">
-  <view class='dlhead' style='height:{{specialGoods==1?"820":"500"}}rpx;position:relative;background:#fff;'>
+  <view class='dlhead' style='height:{{specialGoods==1?"820":"750"}}rpx;position:relative;background:#fff;'>
     <!-- 带视频 -->
     <swiper bindchange='swiperchangeindex' bindanimationfinish="changeGoodsSwip" current="{{goodsIndex}}" wx:if='{{isVideoSwiper}}' class="swiper" indicator-color="#fff" indicator-active-color="#ff2742" indicator-dots="{{false}}" circular="true" autoplay="{{isVideoSwiper?false:true}}"
-      interval="15000" duration="450" style='height:{{specialGoods==1?"750":"500"}}rpx;'>
+      interval="15000" duration="450" style='height:{{specialGoods==1?"750":"750"}}rpx;'>
       <swiper-item wx:if='{{isVideoSwiper}}'>
         <view style="width:100%;height:100%;">
-          <image class="slide-image watermark" src="{{movies[0].url}}" style="width:100%;height:100%;display:block;" mode='aspectFit'></image>
+          <image class="slide-image watermark" src="{{movies[0].url}}" style="width:100%;height:100%;display:block;" mode='aspectFill'></image>
           <image style='width:70rpx;height:70rpx;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;z-index:1;' src='{{isVideoSwiper?"https://www.51chaidan.com/images/icon/iconPlayVideo.png":""}}' wx:if='{{!ishowvideo}}' bindtap='previewVideo'> </image>
           <video wx:if='{{ishowvideo}}' id="myVideo" show-fullscreen-btn="{{true}}" enable-progress-gesture="{{false}}" autoplay='{{false}}' src='{{video}}' style='width:100%;height:100%;position:absolute;left:0;top:0;right:0;bottom:0;margin:auto;'></video>
         </view>
@@ -58,21 +58,21 @@
           <view class="slide-image watermark222" wx:if='{{item.isVedio==1}}' style='position:relative;width:100%;height:100%;'>
             <video show-fullscreen-btn="{{true}}" enable-progress-gesture="{{false}}" autoplay='{{false}}' src='{{item.url}}' style='width:100%;height:100%;position:absolute;left:0;top:0;right:0;bottom:0;margin:auto;'></video>
           </view>
-          <image class="slide-image" wx:else src='{{item.url}}' style="height:100%;width:100%;display:block;" data-index='{{index}}' bindtap='previewImg' mode='aspectFit'></image>
+          <image class="slide-image" wx:else src='{{item.url}}' style="height:100%;width:100%;display:block;" data-index='{{index}}' bindtap='previewImg' mode='aspectFill'></image>
         </swiper-item>
       </block>
     </swiper>
     <!-- 不带视频 -->
-    <swiper bindchange='swiperchangeindex' current="{{goodsIndex}}" bindanimationfinish="changeGoodsSwip" wx:else class="swiper" indicator-color="#fff" indicator-active-color="#ff2742" indicator-dots="{{false}}" circular="true" autoplay="true" interval="4000" duration="450" style='height:{{specialGoods==1?"750":"500"}}rpx;'>
+    <swiper bindchange='swiperchangeindex' current="{{goodsIndex}}" bindanimationfinish="changeGoodsSwip" wx:else class="swiper" indicator-color="#fff" indicator-active-color="#ff2742" indicator-dots="{{false}}" circular="true" autoplay="true" interval="4000" duration="450" style='height:{{specialGoods==1?"750":"750"}}rpx;'>
       <swiper-item wx:if='{{zunmdata.firstCover}}'>
-        <image src="{{zunmdata.firstCover}}" style="width:100%;height:100%;position:absolute;top:0;bottom:0;right:0;left:0;margin:auto;" mode='aspectFit' class="watermark333" data-index='{{index}}' bindtap='previewImg' mode='aspectFit'></image>
+        <image src="{{zunmdata.firstCover}}" style="width:100%;height:100%;position:absolute;top:0;bottom:0;right:0;left:0;margin:auto;" mode='aspectFill' class="watermark333" data-index='{{index}}' bindtap='previewImg' mode='aspectFit'></image>
       </swiper-item>
       <block wx:for="{{movies}}" wx:key="key">
         <swiper-item>
           <view class="slide-image watermark4444" wx:if='{{item.isVedio==1}}' style='position:relative;width:100%;height:100%;'>
             <video muted='{{false}}' show-fullscreen-btn="{{true}}" enable-progress-gesture="{{false}}" autoplay='{{false}}' src='{{item.url}}' style='width:100%;height:100%;position:absolute;left:0;top:0;right:0;bottom:0;margin:auto;'></video>
           </view>
-          <image class="slide-image watermark555" wx:else src='{{item.url}}' style="height:100%;width:100%;display:block;" data-index='{{index}}' bindtap='previewImg' mode='aspectFit'></image>
+          <image class="slide-image watermark555" wx:else src='{{item.url}}' style="height:100%;width:100%;display:block;" data-index='{{index}}' bindtap='previewImg' mode='aspectFill'></image>
         </swiper-item>
       </block>
     </swiper>
@@ -107,13 +107,14 @@
   <block>
         <view style="background:#fff;">
             <view class="sCountDown" wx:if='{{(zunmdata.status == 1 && zunmdata.startTime) || (zunmdata.status == 2 && zunmdata.endTime)}}'><block wx:if='{{zunmdata.status == 1}}'>距开始 </block><block wx:else>距结束 </block>{{winningovertimedetail.dayStr}}天{{winningovertimedetail.hrStr}}小时{{winningovertimedetail.minStr}}分{{winningovertimedetail.secStr}}秒</view>
-            <view class="seckillName">{{zunmdata.gname}}</view>
+            <view class="seckillName">{{zunmdata.shortName}}</view>
             <view class="sSaleTime" wx:if='{{zunmdata.status == 1}}'>{{zunmdata.datatimew}}   发售</view>
             <view class="sSalePrice"><text style="font-size:22rpx;">￥</text>{{zunmdata.gprice!=0?zunmdata.gprice:''}}<text style="font-size:22rpx;color:#000;" wx:if='{{zunmdata.integral>0}}'>+{{zunmdata.integral}}积分</text></view>
             <view class="sCountstock">
-                <text wx:if="{{zunmdata.settledGoodsStockNumber}}">{{zunmdata.settledGoodsStockNumber}}</text>
-                <text wx:if="{{zunmdata.settledGoodsRestrictionNumber}}">{{zunmdata.settledGoodsRestrictionNumber}}</text>
-                <text wx:if="{{zunmdata.settledGoodsDeliver}}">{{zunmdata.settledGoodsDeliver}}</text>
+                <view class="sCountstockView" wx:if="{{zunmdata.settledGoodsStockNumbers}}">商品库存：<text style="color:#999495;">{{zunmdata.settledGoodsStockNumbers}}</text></view>
+                <view class="sCountstockView" wx:if="{{zunmdata.settledGoodsRestrictionNumbers}}">限购数量：<text style="color:#999495;">{{zunmdata.settledGoodsRestrictionNumbers}}</text></view>
+                <view class="sCountstockView" wx:if="{{zunmdata.settledGoodsDeliverInfo}}">发货时间：<text style="color:#999495;">{{zunmdata.settledGoodsDeliverInfo}}</text></view>
+                <view class="sCountstockView" wx:if="{{zunmdata.settledGoodsDeliveryMethod}}">发货方式：<text style="color:#999495;">{{zunmdata.settledGoodsDeliveryMethod}}</text></view>
             </view>
         </view>
 
@@ -223,7 +224,7 @@
             <view class="sbottomLeftNum">{{zunmdata.gpraise}}</view>
         </view>
         <view class="sbottomLeft">
-            <image class='emlplefimgshare' catchtap="{{zunmdata.status==2?'dsbffunblock':''}}" src="https://cdn.51chaidan.com/images/brandInfoIcon/settledGoodsShareIcon.png"></image>
+            <image class='emlplefimgshare' catchtap="noShareShop" src="https://cdn.51chaidan.com/images/brandInfoIcon/settledGoodsShareIcon.png"></image>
             <view class="sbottomLeftNum">{{zunmdata.settledGoodsShareNumber}}</view>
             <button open-type="share" wx:if='{{isShareFun}}' style='position: absolute;left: 0;top: 0;width: 100%; height: 100%;opacity: 0;padding:0;z-index:1;' type="default" size="mini"></button>
         </view>
