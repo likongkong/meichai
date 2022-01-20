@@ -414,6 +414,18 @@
           "pathName": "page/settled/pages/brandManagement/brandManagement",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "刮刮卡",
+          "pathName": "page/secondpackge/pages/entityLuckyDraw/entityLuckyDraw",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "抽隐藏",
+          "pathName": "page/secondpackge/pages/drawHideGoods/drawHideGoods",
+          "query": "",
+          "scene": null
         }
       ]
     }

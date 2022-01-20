@@ -559,8 +559,8 @@
 								<view class='disanum_simgbox' catchtap='jumpdlflottery' data-id='{{w.id}}' style='height:119rpx;width:{{w.width}}rpx;'>
 									<image class='disanum_simg'  bindload="imageLoadad" data-indexnum='989' data-num='{{num}}' data-ind='{{index}}' src='{{w.cover}}' style='height:119rpx;width:{{w.width}}rpx;' mode='aspectFit'></image>
 
-									<view class='videomaskcom specialellipsis' wx:if='{{w.shop_price}}' style='z-index:2;height:40rpx;'>
-										<text style='float:left;padding:0 8rpx 0 4rpx;font-size:24rpx;color:#fff;background: rgba(0,0,0,0.4);height:40rpx;border-radius:10rpx;line-height:42rpx;' wx:if='{{w.shop_price}}'>￥{{w.shop_price}}</text>
+									<view class='videomaskcom specialellipsis' style='z-index:2;height:40rpx;'>
+										<text style='float:left;padding:0 8rpx 0 4rpx;font-size:24rpx;color:#fff;background: rgba(0,0,0,0.4);height:40rpx;border-radius:10rpx;line-height:42rpx;'><block wx:if="{{w.shop_price==0 || w.shop_price==''}}">免费</block><block wx:else>￥{{w.shop_price}}</block></text>
 									</view>
 								</view>
 								<block wx:if='{{w.brand}}'>
