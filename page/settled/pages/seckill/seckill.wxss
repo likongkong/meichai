@@ -102,30 +102,40 @@ page{
   margin:0 0 0 15rpx;
   vertical-align: top;
 }
-.emlhright{
+.emlhrightP{
   width:90rpx;
   height: 36rpx;
   text-align: center;
   line-height: 36rpx;
   color: #fff;
-  display: inline-block;
+  /* display: inline-block; */
   font-size: 24rpx;
   border-radius: 8rpx;
   background:#34A9ED;
   margin-left: 15rpx;
-  vertical-align: top;
+  /* vertical-align: top; */
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
 }
-.emlhrightNo{
+.emlhrightNoP{
   width:90rpx;
   height: 36rpx;
   text-align: center;
   line-height: 36rpx;
   color: #34A9ED;
-  display: inline-block;
+  /* display: inline-block; */
   font-size: 24rpx;
   border-radius: 8rpx;
   border:2rpx solid #34A9ED;
-  margin-left: 15rpx;
+  /* margin-left: 15rpx; */
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
 }
 
 .exhibdeimgBRRipos{

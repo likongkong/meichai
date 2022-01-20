@@ -281,7 +281,10 @@
         </view>
         <view class="scrPurEve" catchtap="{{!is_finish?'placeAnOrder':''}}" data-number='1'><view class="adhcevehbg" wx:if='{{is_finish}}'></view>
             <view class="scrOutBox">
-                <text style="margin-bottom:8rpx;">￥{{activity.shopPrice}}</text>
+                <text style="margin-bottom:8rpx;">
+                    <block wx:if='{{infoSales && infoSales.freeTimes > 0}}'>免费</block>
+                    <block wx:else>￥{{activity.shopPrice}}</block>
+                </text>
                 <text style="margin-bottom:8rpx;">刮1张</text>
                 <text wx:if="{{isUseBlindboxMoney && blindboxMoney!=0}}">抵扣￥{{oneDeductMoney}}</text>
             </view>
@@ -583,3 +586,23 @@
         </view>
     </view>
 </view>
+
+
+<!-- 一番赏新春活动开启啦  -->
+
+<!-- <view class="wshNew" catchtouchmove="true" wx:if='{{commonBulletFrame}}' catchtap="closeCommonTipSFA">
+    <view class="orderMangAddressARL" catchtap="true">
+        <view class="SFAHEad">{{infoSales.title}}</view>
+        <scroll-view scroll-x="true" class="SFAScroll">
+            <text>{{infoSales.rule}}</text>
+        </scroll-view>
+        <view class="SFAHBottom" catchtap="closeCommonTipSFA">去抽赏</view>
+    </view>
+</view>
+
+<view class="SFARBbo" catchtap="closeCommonTipSFA" wx:if='{{infoSales}}'>
+   <view class="SFARBboHead">抽{{infoSales.condition}}赠1</view>
+   <view class="SFARBboHeadCon">再抽{{infoSales.surplusBuy}}次免费</view>
+   <view class="SFARBboHeadCon">免费机会:{{infoSales.freeTimes}}</view>
+   <view class="SFARBboHead" style="padding:0;">活动规则</view>
+</view> -->

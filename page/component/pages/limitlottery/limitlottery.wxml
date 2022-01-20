@@ -205,7 +205,6 @@
 </block>
 
 
-
 <view class="wshNew" catchtouchmove="true" wx:if='{{commonBulletFrame}}' catchtap="commonBulletFrameFun">
 	  <!-- 助力 -->
 	  <view class="userHelp" catchtap="true">
@@ -236,7 +235,7 @@
 				</block>
 				<!-- 身份信息 -->
 				<block wx:if='{{comBulFraNun==3}}'>
-						<view class="identityName"><text decode="true">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</text>{{idName.name}}</view>
+						<view class="identityName"><text decode="true">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</text>{{idName.name}}</view>
 						<view class="identityName" style="padding-top:0;">身份证号码：{{idName.idcard}}</view>
 				</block> 
 				<!-- 未中签 中签 -->

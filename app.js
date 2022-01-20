@@ -144,7 +144,9 @@ App({
     placeAnOrderTwo:'',
     isNeedUserInfo:false,
     isFocusPublic:false, // 是否关注公众号
-    myothertoydgTip:true
+    myothertoydgTip:true,
+    // 春节活动 一番赏列表弹框
+    SFAARL:true
   },
 
   getAccessToken(callback){
