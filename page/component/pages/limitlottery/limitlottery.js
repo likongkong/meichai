@@ -1346,19 +1346,26 @@ Page({
       return false
     };
 
+    console.log(_this.data.infoActivity.awardType)
 
-    if(this.data.isfullPledge){
-      var q1 = Dec.Aese('mod=lottoV2&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id +'&aid='+_this.data.tipaid + '&share_uid=' + _this.data.share_id);
-
-      console.log('参与抽签','mod=lottoV2&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id +'&aid='+_this.data.tipaid + '&share_uid=' + _this.data.share_id)
+    if(_this.data.infoActivity.awardType != 'normal'){
+      let tipaid = 0;
+      var q1 = Dec.Aese('mod=lottoV2&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id +'&aid='+tipaid + '&share_uid=' + _this.data.share_id);
+      console.log('参与抽签','mod=lottoV2&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id +'&aid='+tipaid + '&share_uid=' + _this.data.share_id)
       this.setData({isfullPledge: false})
     }else{
-      this.setData({
-        receivingaddress:true
-      })
-      return false;
+      if(this.data.isfullPledge){
+        let tipaid = _this.data.tipaid;
+        var q1 = Dec.Aese('mod=lottoV2&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id +'&aid='+tipaid + '&share_uid=' + _this.data.share_id);
+        console.log('参与抽签','mod=lottoV2&operation=joinDraw&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id +'&aid='+tipaid + '&share_uid=' + _this.data.share_id)
+        this.setData({isfullPledge: false})
+      }else{
+        this.setData({
+          receivingaddress:true
+        })
+        return false;
+      }
     }
-
 
     wx.showLoading({
       title: '加载中...',
