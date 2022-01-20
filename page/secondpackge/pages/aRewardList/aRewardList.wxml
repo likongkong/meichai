@@ -121,9 +121,24 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
 
 
 
+<!-- 一番赏新春活动开启啦  -->
 
+<!-- <view class="wshNew" catchtouchmove="true" wx:if='{{commonBulletFrame}}' catchtap="closeCommonTip">
+    <view class="orderMangAddressARL" catchtap="true">
+        <view class="SFAHEad">{{infoSales.title}}</view>
+        <scroll-view scroll-x="true" class="SFAScroll">
+            <text>{{infoSales.rule}}</text>
+        </scroll-view>
+        <view class="SFAHBottom" catchtap="closeCommonTip">去抽赏</view>
+    </view>
+</view>
 
-
+<view class="SFARBbo" catchtap="closeCommonTip" wx:if='{{infoSales}}'>
+   <view class="SFARBboHead">抽{{infoSales.condition}}赠1</view>
+   <view class="SFARBboHeadCon">再抽{{infoSales.surplusBuy}}次免费</view>
+   <view class="SFARBboHeadCon">免费机会:{{infoSales.freeTimes}}</view>
+   <view class="SFARBboHead" style="padding:0;">活动规则</view>
+</view> -->
 
 
 

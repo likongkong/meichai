@@ -821,7 +821,7 @@ page{
 }
 .newDrawNPPositon{
   width: 710rpx;
-  height: 30rpx;
+  height: 38rpx;
   border-radius: 15rpx 15rpx 0 0;
   position: absolute;
   left: 0;
@@ -829,7 +829,7 @@ page{
   background: #fff;
 }
 .newDrawName{
-  padding: 0 40rpx 20rpx;
+  padding: 8rpx 40rpx 20rpx;
   font-size: 32rpx;
 }
 .newDrawTopTime{

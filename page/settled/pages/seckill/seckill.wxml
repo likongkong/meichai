@@ -162,16 +162,18 @@
                                 <block wx:if='{{brandinfo.boothNumber}}'><text style="color:#31b3fb;">展位:{{brandinfo.boothNumber}}</text> | </block>
                                 <view class="exhibdeimgBRTopName specialellipsis">{{brandinfo.brandName}}</view>
                                 <image class="questionMark" wx:if='{{brandinfo.isAuth}}' src="https://cdn.51chaidan.com/images/brandSettledIcon/AuthenticationOk.png" mode="heightFix"></image>
-                                <view wx:if='{{isOneselfBrand}}' class="emlhright" catchtap="jumpoffering" data-type='9028' data-id='{{brandinfo.id}}' style="background:#91D2D8;">编辑</view>
-                                <view wx:else class="{{!brandinfo.isAttention?'emlhright':'emlhrightNo'}}" data-type='0' data-id='{{brandinfo.id}}'  catchtap='followfun'>
-                                        <block wx:if='{{!brandinfo.isAttention}}'>关注</block>
-                                        <block wx:else>已关注</block>
-                                </view>
+
                     </view>
 
                      <view class="exhibdeimgBRTop" wx:if='{{isOneselfBrand}}' catchtap="jumpFanMan" style="color:#34A9ED;">粉丝管理</view>
                      <view class="exhibdeimgBRTop" wx:else style="color:#666666;">我的积分：{{detailInfo.userInteral || 0}}</view>
                      
+                      <view wx:if='{{isOneselfBrand}}' class="emlhrightP" catchtap="jumpoffering" data-type='9028' data-id='{{brandinfo.id}}' style="background:#91D2D8;">编辑</view>
+                      <view wx:else class="{{!brandinfo.isAttention?'emlhrightP':'emlhrightNoP'}}" data-type='0' data-id='{{brandinfo.id}}'  catchtap='followfun'>
+                              <block wx:if='{{!brandinfo.isAttention}}'>关注</block>
+                              <block wx:else>已关注</block>
+                      </view>
+
 
                 </view>
         </view>
