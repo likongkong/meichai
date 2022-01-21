@@ -48,6 +48,8 @@ page{
   border-top: 1rpx solid #F5F5F5;
 }
 .sSaleTime{
+  height: 34rpx;
+  line-height: 34rpx;
   font-size: 24rpx;
   color:#178FF8;
   text-align:center;
@@ -343,4 +345,19 @@ page{
   position: relative;
 }
 
-
+.intraGroupSale{
+  display: inline-block;
+  padding:0 8rpx;
+  color: #fff;
+  font-size: 20rpx;
+  background:linear-gradient(to right,#92e8f9,#6ab0ec);
+  border-radius: 6rpx;
+  margin-left: 20rpx;
+  height: 34rpx;
+  line-height: 34rpx;
+}
+.intraGroupSaleTxt{
+  height: 34rpx;
+  line-height: 34rpx;
+  display: inline-block;
+}

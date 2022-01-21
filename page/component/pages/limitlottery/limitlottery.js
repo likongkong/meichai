@@ -2883,7 +2883,12 @@ Page({
   // 跳转详情页 
   addressmanagement: function (event) {
     var gid = event.currentTarget.dataset.gid || event.target.dataset.gid;
-    app.comjumpwxnav(1,gid,'');
+    if(this.data.dataInfo.goodsBrandId){
+      app.comjumpwxnav(9047,gid,'');
+    }else{
+      app.comjumpwxnav(1,gid,'');
+    };
+    
   },  
   // 抽盒机详情页 
   addresssmokebox: function (event) {

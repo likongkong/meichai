@@ -260,6 +260,7 @@ Page({
     posterConfig: {},
     savepic: '',
     tgfrShareIftr:false,
+    ctBuyInTheGroup:false ,  // 群内购买 当前状态 true 不能购买 false 能购买
   },
   noShareShop(){
      app.showToastC('该商品不可分享')
@@ -3407,6 +3408,7 @@ Page({
           // if(res.data.Ginfo&&res.data.Ginfo.brandId>0){
           //   res.data.Ginfo.specialWay = 1;
           // };
+
           _this.setData({
             movies: res.data.Ginfo.gimages,
             zunmdata: redauin,
@@ -3438,6 +3440,10 @@ Page({
             wx.hideShareMenu();
             _this.setData({isShareFun : false});
             if(!_this.data.referee){
+               // 群内 不能购买
+               _this.setData({
+                  ctBuyInTheGroup:true
+               })
                _this.toogleGuidanceMask();
                // 生成图片
                _this.onCreatePoster()
