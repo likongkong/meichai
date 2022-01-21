@@ -1246,7 +1246,7 @@ Page({
     console.log(1111111)
     app.getUserProfile((res,userInfo) => {
         this.joinlimitlottery()
-    });
+    },'',1);
   },
   joinlimitlottery: function () {
     if(app.signindata.isNeedUserInfo){

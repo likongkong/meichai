@@ -279,7 +279,8 @@
                 <text wx:if="{{isUseBlindboxMoney && blindboxMoney!=0}}">抵扣￥{{threeDeductMoney}}</text>
             </view>
         </view>
-        <view class="scrPurEve" catchtap="{{!is_finish?'placeAnOrder':''}}" data-number='1'><view class="adhcevehbg" wx:if='{{is_finish}}'></view>
+        <view class="scrPurEve" catchtap="{{!is_finish?'placeAnOrder':''}}" data-number='1' style="{{(infoSales && infoSales.freeTimes > 0)?'background: linear-gradient(#FFEEDD,#FFCE96);color:#E67307;':''}}">
+            <view class="adhcevehbg" wx:if='{{is_finish}}'></view>
             <view class="scrOutBox">
                 <text style="margin-bottom:8rpx;">
                     <block wx:if='{{infoSales && infoSales.freeTimes > 0}}'>免费</block>
