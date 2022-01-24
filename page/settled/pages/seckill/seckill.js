@@ -1961,8 +1961,16 @@ Page({
     var tipaid = w.currentTarget.dataset.tipaid || w.target.dataset.tipaid;
     var tipadd = w.currentTarget.dataset.tipadd || w.target.dataset.tipadd;
     var ind = w.currentTarget.dataset.ind || w.target.dataset.ind||0;
-    this.data.tipaid = tipaid;
     var data = this.data.addressdata;
+    if(this.data.brandId > 0){}else{
+      if(data[ind].province == "澳门特别行政区" || data[ind].province == "香港特别行政区" || data[ind].province == "台湾省"){
+        app.showToastC('该商品暂不支持港澳台发货')
+        return false;
+      };      
+    };
+
+    this.data.tipaid = tipaid;
+    
     this.setData({
       tipnamephone: data[ind].consignee + " " + data[ind].phone,
       tipaddress: tipadd,
@@ -3167,74 +3175,7 @@ Page({
       app.defaultinfofun(this);
     };
 
-    // 调取晒单数量
-    Dec.dryingSum(_this, app.signindata.clwcomurl);
-    // 购物车数据显示
-    Dec.shopnum(_this,app.signindata.comurl);
-
-    if(app.signindata.receivingAddress && app.signindata.receivingAddress.length != 0){
-      var rdl = app.signindata.receivingAddress;
-      var tptipadi = '';
-      var tptipadd = '';
-      var tipnamephone = '';
-      for (var i = 0; i < rdl.length; i++) {
-        if (rdl[i].isdefault == 1) {
-          rdl[i].checked = false;
-          tptipadi = rdl[i].aid;
-          tptipadd = rdl[i].address;
-          tipnamephone = rdl[i].consignee + " " + rdl[i].phone;
-        } else {
-          rdl[i].checked = false;
-        }
-      };
-      _this.data.tipaid = tptipadi;
-      _this.setData({
-        addressdata: rdl,
-        tipnamephone: tipnamephone,
-        tipaddress: tptipadd
-      })
-      console.log('地址=======onloadfun====',_this.data.addressdata)
-  };
-
-    //  收货地址
-    // _this.nextpagediao();
-
-
-    // 评论数据
-    // var qq = Dec.Aese('mod=comment&operation=getgoodcomment&gid=' + _this.data.gid + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
-    // wx.request({
-    //   url: app.signindata.comurl + 'user.php' + qq,
-    //   method: 'GET',
-    //   header: { 'Accept': 'application/json' },
-    //   success: function (res) {
-    //     if (res.data.ReturnCode == 200) {
-    //       var arrlist = res.data.List || [];
-    //       if (arrlist.length != 0) {
-    //         for (var i = 0; i < arrlist.length; i++) {
-    //           if (!app.signindata.reg.test(arrlist[i].headphoto)) {
-    //             arrlist[i].headphoto = _this.data.zdyurl + arrlist[i].headphoto;
-    //           }
-    //           arrlist[i].time = _this.toDate(arrlist[i].time);
-    //         };
-    //         // 点赞降序排列
-    //         arrlist.sort(_this.compare('praise', false))
-    //         _this.setData({
-    //           allcomlist: arrlist
-    //         })
-    //       }
-    //     } else {
-    //       _this.setData({
-    //         allcomlist: [],
-    //       })
-    //     };
-    //     // 判断非200和登录
-    //     Dec.comiftrsign(_this, res, app);
-    //   }
-    // });
-    // if (_this.data.isProduce){
-    //   // 晒单数据
-    //   _this.delpostdata(0);
-    // };
+    
   },
   detailfunshop:function(){
     var _this = this;
@@ -3696,7 +3637,39 @@ Page({
             wx.hideShareMenu();
             _this.setData({isShareFun : false});
           };
-
+          
+          if(app.signindata.receivingAddress && app.signindata.receivingAddress.length != 0){
+            var rdl = app.signindata.receivingAddress;
+            var tptipadi = '';
+            var tptipadd = '';
+            var tipnamephone = '';
+            for (var i = 0; i < rdl.length; i++) {
+              if (rdl[i].isdefault == 1) {
+                if(_this.data.brandId > 0){
+                    rdl[i].checked = true;
+                    tptipadi = rdl[i].aid;
+                    tptipadd = rdl[i].address;
+                    tipnamephone = rdl[i].consignee + " " + rdl[i].phone;
+                }else{
+                  if(rdl[i].province != "澳门特别行政区" && rdl[i].province != "香港特别行政区" && rdl[i].province != "台湾省"){
+                    rdl[i].checked = true;
+                    tptipadi = rdl[i].aid;
+                    tptipadd = rdl[i].address;
+                    tipnamephone = rdl[i].consignee + " " + rdl[i].phone;
+                  };                  
+                };
+              } else {
+                rdl[i].checked = false;
+              }
+            };
+            _this.data.tipaid = tptipadi;
+            _this.setData({
+              addressdata: rdl,
+              tipnamephone: tipnamephone,
+              tipaddress: tptipadd
+            })
+            console.log('地址=======onloadfun====',_this.data.addressdata)
+          };
 
         };
         if (res.data.ReturnCode == 100) {
@@ -3831,10 +3804,19 @@ Page({
           if (rdl.length != 0) {
             for (var i = 0; i < rdl.length; i++) {
               if (rdl[i].isdefault == 1) {
-                rdl[i].checked = true;
-                tptipadi = rdl[i].aid;
-                tptipadd = rdl[i].address;
-                tipnamephone = rdl[i].consignee + " " + rdl[i].phone;
+                if(_this.data.brandId > 0){
+                    rdl[i].checked = true;
+                    tptipadi = rdl[i].aid;
+                    tptipadd = rdl[i].address;
+                    tipnamephone = rdl[i].consignee + " " + rdl[i].phone;
+                }else{
+                  if(rdl[i].province != "澳门特别行政区" && rdl[i].province != "香港特别行政区" && rdl[i].province != "台湾省"){
+                    rdl[i].checked = true;
+                    tptipadi = rdl[i].aid;
+                    tptipadd = rdl[i].address;
+                    tipnamephone = rdl[i].consignee + " " + rdl[i].phone;
+                  };                  
+                };
               } else {
                 rdl[i].checked = false;
               }

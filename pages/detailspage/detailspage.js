@@ -1880,13 +1880,20 @@ Page({
       }
     })
   },
-  // 修改收货地址
   revisethereceivingaddress:function(w){
     var tipaid = w.currentTarget.dataset.tipaid || w.target.dataset.tipaid;
     var tipadd = w.currentTarget.dataset.tipadd || w.target.dataset.tipadd;
     var ind = w.currentTarget.dataset.ind || w.target.dataset.ind||0;
-    this.data.tipaid = tipaid;
     var data = this.data.addressdata;
+    if(this.data.brandId > 0){}else{
+      if(data[ind].province == "澳门特别行政区" || data[ind].province == "香港特别行政区" || data[ind].province == "台湾省"){
+        app.showToastC('该商品暂不支持港澳台发货')
+        return false;
+      };      
+    };
+
+    this.data.tipaid = tipaid;
+    
     this.setData({
       tipnamephone: data[ind].consignee + " " + data[ind].phone,
       tipaddress: tipadd,
@@ -2133,7 +2140,6 @@ Page({
                 coutypetwo.sort(function (a, b) { var v1 = a['value']; var v2 = b['value']; return v1 - v2; });
               };
               checktwo2 = coutypetwo.concat(coutypeone);
-              // checktwo2.sort(_this.compare('value', false));
               if (checktwo2[0].coupon_type==2){
                 txt2 = checktwo2[0].name + ' ' + checktwo2[0].value+'折';
                 check2cid = checktwo2[0].cid;
@@ -2399,11 +2405,7 @@ Page({
   },
   // 二级背景函数
   tipbacktwo:function(){
-    // if(this.data.specialGoods==1){
-    //   this.setData({
-    //     tipback: false
-    //   })
-    // };
+
     if (this.data.receivingaddress){
       this.setData({
         receivingaddress: false,
@@ -2560,10 +2562,7 @@ Page({
 
     var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
     var iftrnum = true;
-    // if(_this.data.specialGoods == 1){
-    //   _this.dsbbbutclickt()
-    //   return false;
-    // };
+
     if(_this.data.specialGoods == 1){
       var stock = _this.data.selectShell.stock || 0;
       _this.setData({
@@ -2811,11 +2810,9 @@ Page({
         const ctx = wx.createCanvasContext('sharefriend')
         ctx.setFillStyle('#fff')
         ctx.fillRect(0, 0,310, 410)
-        // ctx.fillRect(0, 0, dw, 240)
         ctx.drawImage(res.path,6,6,28,28);
         ctx.setFontSize(12)
         ctx.fillStyle = "#000";
-        // var str = '分享给你一个实用好物，[' + _this.data.zunmdata.goodsDesc + ']更便宜！';
         var str = '';
         ctx.fillText(str,42,26)
         var text = _this.data.zunmdata.gname;//这是要绘制的文本
@@ -2899,8 +2896,6 @@ Page({
               let marginRpx = (310 - scaleO*246) / 2;
               ctx.drawImage(res.path,marginRpx,40,imgWidth,dh);
             };
-
-            // ctx.drawImage(res.path,32,40,246,246);
 
             ctx.draw(true);
             // 二维码
@@ -3016,35 +3011,6 @@ Page({
     if(this.data.defaultinformation){}else{
       app.defaultinfofun(this);
     };
-
-    // 调取晒单数量
-    Dec.dryingSum(_this, app.signindata.clwcomurl);
-    // 购物车数据显示
-    Dec.shopnum(_this,app.signindata.comurl);
-
-    if(app.signindata.receivingAddress && app.signindata.receivingAddress.length != 0){
-      var rdl = app.signindata.receivingAddress;
-      var tptipadi = '';
-      var tptipadd = '';
-      var tipnamephone = '';
-      for (var i = 0; i < rdl.length; i++) {
-        if (rdl[i].isdefault == 1) {
-          rdl[i].checked = false;
-          tptipadi = rdl[i].aid;
-          tptipadd = rdl[i].address;
-          tipnamephone = rdl[i].consignee + " " + rdl[i].phone;
-        } else {
-          rdl[i].checked = false;
-        }
-      };
-      _this.data.tipaid = tptipadi;
-      _this.setData({
-        addressdata: rdl,
-        tipnamephone: tipnamephone,
-        tipaddress: tptipadd
-      })
-      console.log('地址=======onloadfun====',_this.data.addressdata)
-  };
 
   },
   detailfunshop:function(){
@@ -3217,9 +3183,6 @@ Page({
             _this.winningtheprizetimedetail(1621094400);
           };
           
-          // if(res.data.Ginfo&&res.data.Ginfo.brandId>0){
-          //   res.data.Ginfo.specialWay = 1;
-          // };
           _this.setData({
             movies: res.data.Ginfo.gimages,
             zunmdata: redauin,
@@ -3506,6 +3469,39 @@ Page({
           };
 
 
+          if(app.signindata.receivingAddress && app.signindata.receivingAddress.length != 0){
+            var rdl = app.signindata.receivingAddress;
+            var tptipadi = '';
+            var tptipadd = '';
+            var tipnamephone = '';
+            for (var i = 0; i < rdl.length; i++) {
+              if (rdl[i].isdefault == 1) {
+                if(_this.data.brandId > 0){
+                    rdl[i].checked = true;
+                    tptipadi = rdl[i].aid;
+                    tptipadd = rdl[i].address;
+                    tipnamephone = rdl[i].consignee + " " + rdl[i].phone;
+                }else{
+                  if(rdl[i].province != "澳门特别行政区" && rdl[i].province != "香港特别行政区" && rdl[i].province != "台湾省"){
+                    rdl[i].checked = true;
+                    tptipadi = rdl[i].aid;
+                    tptipadd = rdl[i].address;
+                    tipnamephone = rdl[i].consignee + " " + rdl[i].phone;
+                  };                  
+                };
+              } else {
+                rdl[i].checked = false;
+              }
+            };
+            _this.data.tipaid = tptipadi;
+            _this.setData({
+              addressdata: rdl,
+              tipnamephone: tipnamephone,
+              tipaddress: tptipadd
+            })
+            console.log('地址=======onloadfun====',_this.data.addressdata)
+          };
+
         }else{
           app.showToastC(res.data.Msg || res.data.msg);
         };
@@ -3631,10 +3627,19 @@ Page({
           if (rdl.length != 0) {
             for (var i = 0; i < rdl.length; i++) {
               if (rdl[i].isdefault == 1) {
-                rdl[i].checked = true;
-                tptipadi = rdl[i].aid;
-                tptipadd = rdl[i].address;
-                tipnamephone = rdl[i].consignee + " " + rdl[i].phone;
+                if(_this.data.brandId > 0){
+                    rdl[i].checked = true;
+                    tptipadi = rdl[i].aid;
+                    tptipadd = rdl[i].address;
+                    tipnamephone = rdl[i].consignee + " " + rdl[i].phone;
+                }else{
+                  if(rdl[i].province != "澳门特别行政区" && rdl[i].province != "香港特别行政区" && rdl[i].province != "台湾省"){
+                    rdl[i].checked = true;
+                    tptipadi = rdl[i].aid;
+                    tptipadd = rdl[i].address;
+                    tipnamephone = rdl[i].consignee + " " + rdl[i].phone;
+                  };                  
+                };
               } else {
                 rdl[i].checked = false;
               }
@@ -3818,7 +3823,6 @@ Page({
     var reshare = {
       title:_this.data.zunmdata.gname ,
       path: '/pages/detailspage/detailspage?gid=' + _this.data.gid + '&referee='+_this.data.uid,
-      // imageUrl: 'https://cdn.51chaidan.com/'+_this.data.zunmdata.goods_share ,
       imageUrl:_this.data.zunmdata.goods_share ,
       success: function (res) {},
     };
