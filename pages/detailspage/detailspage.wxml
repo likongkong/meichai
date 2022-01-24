@@ -1409,7 +1409,8 @@
         </view>
         <view class='pricedetailoright' style="{{zunmdata.goods_type==3?'color:#999':''}}">
           <block wx:if='{{zunmdata.isPayShippingFee}}'>
-               {{zunmdata.shippingName}}到付
+               <block wx:if='{{zunmdata.settledGoodsDeliveryMethod}}'>{{zunmdata.settledGoodsDeliveryMethod}}</block>
+               <block wx:else>{{zunmdata.shippingName}}到付</block>
           </block>
           <block wx:else>
               <block wx:if='{{is_exhibition==1}}'>
