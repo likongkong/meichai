@@ -1,0 +1,182 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class="wrap">
+
+  <view class="title">美拆新年送好礼</view>
+  <view class="progressWrap">
+    <view class="progressEmpiricalValue">
+      <text>20/</text>100经验值
+    </view>
+    <view class="progressEmpiricalBox">
+      <view class="awardThumb">
+        <image src="https://cdn.51chaidan.com/images/202201/thumb_img/39845_thumb_G_1641355207981.jpg" mode="widthFix"></image>
+        <text>Lv 0</text>
+      </view>
+      <view class="sonPogress"> 
+        <text></text>
+      </view>
+      <view class="awardThumb">
+        <image src="https://cdn.51chaidan.com/images/202201/thumb_img/39845_thumb_G_1641355207981.jpg" mode="widthFix"></image>
+        <text>Lv 0</text>
+      </view>
+      <view class="sonPogress dotted"></view>
+      <view class="awardThumb">
+        <image src="https://cdn.51chaidan.com/images/202201/thumb_img/39845_thumb_G_1641355207981.jpg" mode="widthFix"></image>
+        <text>Lv 0</text>
+      </view>
+    </view>
+  </view>
+  <view class="awardWrap"> 
+    <text class="awardTitle">好礼简介，点击查看详情</text>
+    <view class="awardItems">
+      <view class="item">
+        <image src="https://cdn.51chaidan.com/images/202201/thumb_img/39845_thumb_G_1641355207981.jpg" mode="aspectFill"></image>
+        <view>
+          <text>Lv1好礼 </text>限定周边随机一款
+        </view>
+      </view>
+      <view class="item">
+        <image src="https://cdn.51chaidan.com/images/202201/thumb_img/39845_thumb_G_1641355207981.jpg" mode="aspectFill"></image>
+        <view>
+          <text>Lv2好礼 </text>限定明盒或盲盒随机一款
+        </view>
+      </view>
+      <view class="item">
+        <image src="https://cdn.51chaidan.com/images/202201/thumb_img/39845_thumb_G_1641355207981.jpg" mode="aspectFill"></image>
+        <view>
+          <text>Lv1好礼 </text>限定周边随机一款
+        </view>
+      </view>
+      <view class="item">
+        <image src="https://cdn.51chaidan.com/images/202201/thumb_img/39845_thumb_G_1641355207981.jpg" mode="aspectFill"></image>
+        <view>
+          <text>Lv1好礼 </text>限定周边随机一款
+        </view>
+      </view>
+    </view>
+    <view class="fiveAwardItem">
+      <view class="item">
+        <image src="https://cdn.51chaidan.com/images/202201/thumb_img/39845_thumb_G_1641355207981.jpg" mode="aspectFill"></image>
+        <view>
+          <text>Lv1好礼 </text>限定周边随机一款
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="taskWrap"> 
+    <view class="taskTitle">做任务，解锁/升级当前礼品</view>
+    <view class="taskItems">
+      <view class="taskItem">
+        <view class="taskItemTxt">
+          <text>每日签到</text>
+          <text>每日签到+5经验值</text>
+        </view>
+        <view class="taskBtn done">已完成</view>
+      </view>
+      <view class="taskItem">
+        <view class="taskItemTxt">
+          <text>每日签到</text>
+          <text>每日签到+5经验值</text>
+        </view>
+        <view class="taskBtn invitation">去邀请</view>
+      </view>
+      <view class="taskItem">
+        <view class="taskItemTxt">
+          <text>好友助力</text>
+          <text>1名好友助力=5经验值（每日上限15）</text>
+        </view>
+        <view class="taskBtn blueBtn">领取</view>
+      </view>
+      <view class="taskItem">
+        <view class="taskItemTxt">
+          <text>每日签到</text>
+          <text>每日签到+5经验值</text>
+        </view>
+        <view class="taskBtn done">已完成</view>
+      </view>
+    </view>
+  </view>
+  <view class="footerWrap"> 
+    <view>领取当前礼品</view>
+    <view class="blueBtn">新年任务</view>
+  </view>
+
+
+  <view class="detailsMask" wx:if="{{isDetailsMask}}">
+    <view class="detailsMaskBox">
+      <text class="detailsMaskBoxTitle">Lv 1 礼品详情</text>
+      <text class="detailsTitle">以下商品随机一款</text>
+      <view class="detailsItems">
+        <view class="detailsItem">
+          <image src="https://cdn.51chaidan.com/images/202201/thumb_img/39845_thumb_G_1641355207981.jpg" mode="aspectFill"></image>
+          <text>商品名称商品名称商品名称</text>
+        </view>
+        <view class="detailsItem">
+          <image src="https://cdn.51chaidan.com/images/202201/thumb_img/39845_thumb_G_1641355207981.jpg" mode="aspectFill"></image>
+          <text>商品名称商品名称商品名称</text>
+        </view>
+        <view class="detailsItem">
+          <image src="https://cdn.51chaidan.com/images/202201/thumb_img/39845_thumb_G_1641355207981.jpg" mode="aspectFill"></image>
+          <text>商品名称商品名称商品名称</text>
+        </view>
+        <view class="detailsItem">
+          <image src="https://cdn.51chaidan.com/images/202201/thumb_img/39845_thumb_G_1641355207981.jpg" mode="aspectFill"></image>
+          <text>商品名称商品名称商品名称</text>
+        </view>
+        <view class="detailsItem">
+          <image src="https://cdn.51chaidan.com/images/202201/thumb_img/39845_thumb_G_1641355207981.jpg" mode="aspectFill"></image>
+          <text>商品名称商品名称商品名称</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!--  收货地址  -->
+  <view class='tipback' wx:if='{{tipback}}' catchtouchmove="preventD"></view>
+  <view class='receivingaddress' wx:if='{{receivingaddress}}'>
+    <view class='recgadhead'>
+      收货地址
+      <image src='../../../../pages/images/forknumber.png' class='recgadheadimg' bindtap='receivingaddressfun'></image>
+    </view>
+    <view class='recgadcon'>
+      <view class='recgaddata' wx:for='{{addressdata}}' wx:key='key'>
+        <view class='recgaddname' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='revisethereceivingaddress'>
+          <view class='recgaddnameleft'>{{item.consignee}}</view>
+          <view class='recgaddnameleft'>{{item.phone}}</view>
+          <view class="selectAddressBut">选择该地址</view>
+        </view>
+        <view class='recgadaddress' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='revisethereceivingaddress'>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
+        <view class='recgadbottom'>
+          <view class='recgadbotleft'>
+            <image class='recgadbotleftimg' hidden='{{!item.checked}}' src='../../../../pages/images/pressed_click.png'></image>
+            <image class='recgadbotleftimg' hidden='{{item.checked}}' src='../../../../pages/images/normal_click.png'></image>
+            默认地址
+          </view>
+          <view class='recgadbotright' bindtap='deladdress' data-ind="{{item.aid}}">
+            <image src='../../../../pages/images/icon_delete.png' class='recgadbotleftimg'></image>
+            删除
+          </view>
+          <view class='recgadbotright' style='margin-right:50rpx;' bindtap='jumpeditaddress' data-address='{{item.address}}' data-aid='{{item.aid}}' data-city='{{item.city}}' data-consignee='{{item.consignee}}' data-district='{{item.district}}' data-phone='{{item.phone}}'
+            data-province='{{item.province}}' data-idcard='{{item.idcard}}'>
+            <image src='../../../../pages/images/icon_edit.png' class='recgadbotleftimg'></image>
+            编辑
+          </view>
+        </view>
+      </view>
+      <view class='noDataCom' wx:if='{{addressdata.length==0}}'>
+          <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
+      </view>
+    </view>
+    <view class='recgadbot' bindtap='jumpaddress'>
+      增加新地址
+    </view>
+  </view>
+</view>
+
+
+
+
+<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
+<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>
+

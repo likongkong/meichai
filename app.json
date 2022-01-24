@@ -205,7 +205,8 @@
         "pages/collectPictures/collectPictures",
         "pages/collectPicUpload/collectPicUpload",
         "pages/AfterSalesDetails/AfterSalesDetails",
-        "pages/appliedAftersales/appliedAftersales"
+        "pages/appliedAftersales/appliedAftersales",
+        "pages/newYearRedPacket/newYearRedPacket"
       ]
     }
   ],

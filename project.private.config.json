@@ -426,6 +426,12 @@
           "pathName": "page/secondpackge/pages/drawHideGoods/drawHideGoods",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "新年红包",
+          "pathName": "page/settled/pages/newYearRedPacket/newYearRedPacket",
+          "query": "",
+          "scene": null
         }
       ]
     }

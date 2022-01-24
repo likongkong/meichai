@@ -1,0 +1,245 @@
+page{
+  padding-bottom: 200rpx;
+  background: #F5F5F5;
+}
+.taskBtn{
+  width: 146rpx;
+  height: 52rpx;
+  border-radius: 52rpx;
+  font-size: 28rpx;
+  text-align: center;
+  line-height: 52rpx;
+}
+.done{
+  background: #B3B0B0;
+  color: #000;
+}
+.invitation{
+  background: #91D2D4;
+  color: #fff;
+}
+.blueBtn{
+  background: #5CA7FE !important; 
+  color: #fff !important;
+}
+
+.title{
+  width: 100%;
+  font-size: 60rpx;
+  text-align: center;
+  /* font-weight: bold; */
+  margin: 30rpx 0;
+}
+.progressWrap{
+  padding: 0 90rpx;
+  box-sizing: border-box;
+}
+.progressEmpiricalValue text{
+  font-size: 32rpx;
+  color: #101010;
+}
+.progressEmpiricalValue{
+  font-size: 26rpx;
+  color: #b0b0b0;
+}
+.progressEmpiricalBox{
+  display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+  padding: 22rpx 0 0 0;
+}
+.awardThumb{}
+.awardThumb image{
+  width: 100rpx;
+  height: auto;
+  display: block;
+  border-radius: 100%;
+}
+.awardThumb text{
+  display: block;
+  text-align: center;
+  font-size: 28rpx;
+  color: #101010;
+}
+.sonPogress{
+  width: 146rpx;
+  height: 26rpx;
+  border-top: 2rpx solid #5ca7fe;
+  border-bottom: 2rpx solid #5ca7fe;
+  margin-top: 37rpx;
+}
+.dotted{
+  border-top: 2rpx dashed #BBBBBB;
+  border-bottom: 2rpx dashed #BBBBBB;
+}
+.sonPogress text{
+  display: block;
+  width: 20%;
+  height: 100%;
+  background: #5CA7FE;
+}
+
+.awardWrap{
+  padding: 76rpx 24rpx 0 24rpx;
+  box-sizing: border-box;
+}
+.awardTitle{
+  font-size: 28rpx;
+  color: #101010;
+  padding-left: 20rpx;
+  box-sizing: border-box;
+}
+.awardItems{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap:wrap;
+  margin-top: 16rpx;
+}
+.item{
+  width: 340rpx;
+  margin-bottom: 32rpx;
+}
+.item image{
+  width: 100%;
+  height: 340rpx;
+}
+.item view{
+  color: #101010;
+  font-size: 28rpx;
+}
+.item view text{
+  color: #FE5D57;
+  font-size: 28rpx;
+}
+.fiveAwardItem{
+  width: 550rpx;
+  margin: 0 auto;
+}
+.fiveAwardItem .item{
+  width: 100%;
+}
+.fiveAwardItem .item image{
+  width: 100%;
+  height: 550rpx;
+}
+.fiveAwardItem .item view{
+  text-align: center;
+}
+
+.taskWrap{
+  background: #fff;
+  margin-top: 22rpx;
+}
+.taskTitle{
+  width: 100%;
+  height: 98rpx;
+  border-bottom: 2rpx solid #F5F5F5;
+  padding-left: 70rpx;
+  line-height: 98rpx;
+  color: #E67307;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+.taskItems{
+  width: 656rpx;
+  margin: 0 auto;
+}
+.taskItem{
+  width: 100%;
+  padding: 32rpx 0;
+  border-bottom: 2rpx solid #F5F5F5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.taskItem:last-child{
+  border-bottom: 0;
+}
+.taskItemTxt text{
+  display: block;
+  color: #101010;
+  font-size: 28rpx;
+}
+
+.footerWrap{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #fff;
+  height: 172rpx;
+  display: flex;
+  justify-content: center;
+  padding-top: 26rpx;
+  box-sizing: border-box;
+}
+.footerWrap view{
+  width: 290rpx;
+  height: 60rpx;
+  border-radius: 60rpx;
+  font-size: 28rpx;
+  text-align: center;
+  line-height: 60rpx;
+  background: #B3B0B0;
+  color: #fff;
+  margin: 0 10rpx;
+}
+
+.detailsMask{
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  display: flex;
+  align-items: flex-end;
+}
+.detailsMaskBox{
+  width: 100%;
+  height: auto;
+  border-top-left-radius: 40rpx;
+  border-top-right-radius: 40rpx;
+  background-color: #fff;
+  position: relative;
+  padding-bottom: 50rpx;
+}
+.detailsMaskBoxTitle{
+  font-size: 28rpx;
+  color: #101010;
+  display: block;
+  text-align: center;
+  margin-top: 20rpx;
+  margin-bottom: 32rpx;
+}
+.detailsTitle{
+  display: block;
+  padding-left: 68rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+  color: #101010;
+}
+.detailsItems{
+  display: flex;
+  flex-wrap:wrap;
+  padding: 32rpx 48rpx;
+  box-sizing: border-box;
+}
+.detailsItem{
+  width: 200rpx;
+  margin-right: 27rpx;
+}
+.detailsItem:nth-child(3n){
+  margin-right: 0;
+}
+.detailsItem image{
+  width: 100%;
+  height: 200rpx;
+}
+.detailsItem text{
+  margin-top: 12rpx;
+  display: block;
+  font-size: 28rpx;
+  color: #101010;
+}
