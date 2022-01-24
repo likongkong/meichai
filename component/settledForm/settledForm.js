@@ -17,7 +17,7 @@ Component({
     },
     form: {
       type: String,
-      value:'settled',
+      // value:'settled',
       observer(newVal){
         console.log(newVal)
       }
@@ -34,6 +34,7 @@ Component({
         console.log(newVal)
       }
     },
+    isCertificationMask:{ type: Boolean },
     statusBarHeightMc:{type: Number},
     brandInfo: {
       type: Object,
@@ -57,8 +58,9 @@ Component({
    */
   data: {
     errorDom:'',
-    isExplain:false,
+    isExplain:false,      //说明弹框
     isCountdown:false,
+    isCertificationMask:false,  //实名认证弹框
     phoneCodeValue:'获取验证码',
   },
    /**
@@ -80,6 +82,14 @@ Component({
       this.setData({
         isExplain:false
       })
+    },
+    toggleCertificationMask(){
+      this.setData({
+        isCertificationMask:!this.data.isCertificationMask
+      })
+    },
+    authentication(){
+      this.triggerEvent("authentication");
     },
     getPhoneCode(){
       this.triggerEvent("getPhoneCode");
@@ -267,7 +277,7 @@ Component({
       // 先选择文件，得到临时路径
       wx.chooseImage({
         count: mode=='multiple'?(10 - this.data.list[ind].imageList.length):1, // 默认9
-        sizeType: ['compressed'], // 可以指定是原图original还是压缩图compressed，默认用原图
+        sizeType: ['original'], // 可以指定是原图original还是压缩图compressed，默认用原图
         sourceType: ['camera','album'], // 'album'相册  camera 相机
         success: (res) => {
           if(mode=='multiple'){

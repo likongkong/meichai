@@ -117,7 +117,12 @@ Page({
       isSettledImg: false
     })
   },
-
+  // 入驻类型弹框显示隐藏
+  toggleSettledTypeMask(){
+    this.setData({
+      isSettledTypeMask: !this.data.isSettledTypeMask
+    })
+  },
   // 更新用户信息
   getUserProfileSettled(w){
     let progressNum = w.currentTarget.dataset.num;
@@ -129,14 +134,23 @@ Page({
           istitnex: false,
           istit: true,
         });
-        // if(progressNum == 1){
-
-        // }else{
+        if(progressNum == 1){
+          this.setData({
+            isSettledTypeMask: true
+          })
+        }else{
           this.comjumpwxnav(w)
-        // }
+        }
     },'',1)
   },
-
+  jumpSettled(e){
+    let type = e.currentTarget.dataset.type;
+    let whref = e.currentTarget.dataset.whref;
+    this.setData({
+      isSettledTypeMask: false
+    })
+    app.comjumpwxnav(type,whref)
+  },
   comjumpwxnav(e){
     let type = e.currentTarget.dataset.type;
     let num = e.currentTarget.dataset.num;
@@ -144,11 +158,13 @@ Page({
     this.setData({
       isAddNewEventMask:false
     })
-    // if(num == 1){
-    //   app.comjumpwxnav('9029',whref)
-    // }else{
+    if(num && num == 1){
+      this.setData({
+        isSettledTypeMask: true
+      })
+    }else{
       app.comjumpwxnav(type,whref)
-    // } 
+    } 
   },
   jumpVipPrivilegePage(){
     wx.navigateTo({  
@@ -156,9 +172,7 @@ Page({
     })
   },
   jumpVipPage(){
-    wx.navigateTo({  
-      url: "/page/secondpackge/pages/vipPage/vipPage"
-    })
+    app.comjumpwxnav(9021,'','');
   },
    // 订阅授权
   subscrfun:function(){
@@ -310,9 +324,7 @@ Page({
   },
   // 我的钱包 
   mywallet: function () { 
-    wx.navigateTo({    //签到
-      url: "/page/component/pages/newsignin/newsignin"
-    });
+    app.comjumpwxnav(9,'','');
   },  
   /**
    * 生命周期函数--监听页面加载
@@ -573,9 +585,7 @@ Page({
 
   // 导航跳转
   whomepage: function () {
-    wx.reLaunch({
-      url: "/pages/index/index?judgeprof=2"
-    });
+    app.comjumpwxnav(998,'','');
   },
   wnews: function () {
     var _this = this;
@@ -583,9 +593,7 @@ Page({
   },
   wshoppingCart: function () {
     var _this = this;
-    wx.redirectTo({
-      url: "/pages/shoppingCart/shoppingCart"
-    });
+    app.comjumpwxnav(9058, '', '');
   },
   wmy: function () { 
     this.onPullDownRefresh(); 
@@ -635,15 +643,11 @@ Page({
         url: "/page/component/pages/webview/webview?webview=" + url
       });
     } else {
-      wx.navigateTo({
-        url: "/pages/detailspage/detailspage?gid=" + _this.data.defaultinformation.notice.url,
-      })
+      app.comjumpwxnav(1,_this.data.defaultinformation.notice.url,'');
     }
   }, 
   dlfindfun: function () {
-    wx.reLaunch({
-      url: "/page/component/pages/dlfind/dlfind",
-    })
+    app.comjumpwxnav(993,'','');
   },
   personalhomepage: function () {
     wx.reLaunch({

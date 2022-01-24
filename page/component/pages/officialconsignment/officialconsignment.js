@@ -283,31 +283,23 @@ Page({
   },
   dlfindfun: function () {
     setTimeout(function () {
-      wx.reLaunch({
-        url: "/page/component/pages/dlfind/dlfind",
-      })
+      app.comjumpwxnav(993,'','');
     }, 100);
   },
   // 导航跳转
   whomepage: function () {
     setTimeout(function () {
-      wx.reLaunch({
-        url: "../../../../pages/index/index?judgeprof=2"
-      })
+      app.comjumpwxnav(998,'','');
     }, 40);
   },
   wmy: function () {
     setTimeout(function () {
-      wx.reLaunch({
-        url: "../../../../pages/wode/wode"
-      });
+      app.comjumpwxnav(9059,'','');
     }, 40);
   },
   wshoppingCart: function () {
     setTimeout(function () {
-      wx.reLaunch({
-        url: "../../../../pages/shoppingCart/shoppingCart"
-      });
+      app.comjumpwxnav(9058, '', '');
     }, 100);
   },
 
@@ -342,9 +334,7 @@ Page({
     });
   },
   jumpsmokelist:function(){
-    wx.navigateTo({
-      url: "/pages/smokeboxlist/smokeboxlist"
-    });
+    app.comjumpwxnav(988,'','');
   },
   // 导航跳转 
   wnews: function () {

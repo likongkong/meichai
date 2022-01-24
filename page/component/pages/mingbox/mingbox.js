@@ -216,9 +216,7 @@ Page({
   addressmanagement: function(event) {
     var gid = event.currentTarget.dataset.gid || event.target.dataset.gid;
     setTimeout(function() {
-      wx.navigateTo({
-        url: "/pages/detailspage/detailspage?gid=" + gid
-      })
+      app.comjumpwxnav(1,gid,'');
     }, 100);
   },
   showrule: function() {
@@ -918,17 +916,13 @@ Page({
   // 导航跳转
   whomepage: function() {
     setTimeout(function() {
-      wx.reLaunch({
-        url: "/pages/index/index?judgeprof=2"
-      });
+      app.comjumpwxnav(998,'','');
     }, 100);
   },
 
   dlfindfun: function() {
     setTimeout(function() {
-      wx.reLaunch({
-        url: "/page/component/pages/dlfind/dlfind",
-      })
+      app.comjumpwxnav(993,'','');
     }, 100);
   },
 
@@ -942,18 +936,14 @@ Page({
 
   wshoppingCart: function() {
     setTimeout(function() {
-      wx.redirectTo({
-        url: "/pages/shoppingCart/shoppingCart"
-      });
+      app.comjumpwxnav(9058, '', '');
     }, 100);
   },
 
   wmy: function() {
     app.signindata.iftr_mc = true;
     setTimeout(function() {
-      wx.redirectTo({
-        url: "/pages/wode/wode"
-      });
+      app.comjumpwxnav(9059,'','');
     }, 40);
   },
 
@@ -1685,9 +1675,7 @@ Page({
   },
 
   atOnceUse: function() {
-    wx.redirectTo({
-      url: "/pages/smokeboxlist/smokeboxlist",
-    });
+    app.comjumpwxnav(988,'','');
   },
 
   closetempChance: function() {

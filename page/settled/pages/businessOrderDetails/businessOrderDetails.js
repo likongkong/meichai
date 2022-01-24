@@ -512,7 +512,7 @@ Page({
     var detailData = _this.data.detailData;
 
     if(detailData.order.orderType == 1){ // 普通订单
-      app.comjumpwxnav(1,detailData.goods.goodsId,'','')
+      app.comjumpwxnav(9047,detailData.goods.goodsId,'','')
     }else if(detailData.order.orderType == 13){ // 限定抽签
       app.comjumpwxnav(9003,detailData.order.activityId,'','')
     }else if(detailData.order.orderType == 14){ // 抽盲盒

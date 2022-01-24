@@ -152,9 +152,7 @@ Page({
   }, 
 
   jumpVipPage(){
-    wx.navigateTo({  
-      url: "/page/secondpackge/pages/vipPage/vipPage"
-    })
+    app.comjumpwxnav(9021,'','');
   },
   finishLoad(w){
     var ind = w.currentTarget.dataset.ind || w.target.dataset.ind||0;
@@ -171,9 +169,7 @@ Page({
     var openMember = w.currentTarget.dataset.openmember || false;
     if(is_calendar == 1){
       if(!openMember){
-        wx.navigateTo({  
-          url: "/page/secondpackge/pages/vipPage/vipPage"
-        })
+        app.comjumpwxnav(9021,'','');
       }else{
         // 跳转日历
         wx.navigateTo({
@@ -185,9 +181,7 @@ Page({
         url: "/pages/smokebox/smokebox?gid=" + goods_id,
       });
     }else{
-      wx.navigateTo({
-        url: "../../../../pages/detailspage/detailspage?gid=" + goods_id,
-      });
+      app.comjumpwxnav(1,goods_id,'');
     };
   },
   subscrfundom:function(w){
@@ -917,19 +911,13 @@ Page({
 
   // 导航跳转
   whomepage: function() {
-    wx.reLaunch({
-      url: "../../../../pages/index/index?judgeprof=2"
-    })
+    app.comjumpwxnav(998,'','');
   },
   wmy: function() {
-    wx.reLaunch({
-      url: "../../../../pages/wode/wode"
-    });
+    app.comjumpwxnav(9059,'','');
   },
   wshoppingCart: function() {
-    wx.reLaunch({
-      url: "../../../../pages/shoppingCart/shoppingCart"
-    });
+    app.comjumpwxnav(9058, '', '');
   },
   dlfindfun: function() {
     this.setData({

@@ -13,9 +13,9 @@
     "miniprogram": {
       "list": [
         {
-          "name": "动态",
+          "name": "动态详情",
           "pathName": "page/settled/pages/dynamicDetails/dynamicDetails",
-          "query": "did=8159",
+          "query": "did=9777",
           "scene": null
         },
         {
@@ -88,7 +88,7 @@
         {
           "name": "秒杀",
           "pathName": "page/settled/pages/seckill/seckill",
-          "query": "gid=39140",
+          "query": "gid=39893",
           "scene": null
         },
         {
@@ -332,9 +332,9 @@
           "scene": null
         },
         {
-          "name": "提现申请",
-          "pathName": "page/settled/pages/applicationForWithdrawal/applicationForWithdrawal",
-          "query": "",
+          "name": "商品详情",
+          "pathName": "pages/detailspage/detailspage",
+          "query": "gid=39153",
           "scene": null
         },
         {
@@ -389,6 +389,42 @@
           "name": "",
           "pathName": "page/settled/pages/dynamicDetails/dynamicDetails",
           "query": "did=8114",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "page/settled/pages/applySettled/applySettled",
+          "query": "id=&num=1&msg=&settledType=1",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "page/settled/pages/editSettledProfile/editSettledProfile",
+          "query": "id=13&num=4&from=",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "page/settled/pages/editSettledProfile/editSettledProfile",
+          "query": "id=14&num=4&from=&settledType=1",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "page/settled/pages/brandManagement/brandManagement",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "刮刮卡",
+          "pathName": "page/secondpackge/pages/entityLuckyDraw/entityLuckyDraw",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "抽隐藏",
+          "pathName": "page/secondpackge/pages/drawHideGoods/drawHideGoods",
+          "query": "",
           "scene": null
         }
       ]

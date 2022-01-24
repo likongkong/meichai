@@ -196,6 +196,12 @@ const handle = {
           // 文本宽度 大于 渲染宽度
           let fillText = '';
           let line = 1;
+          
+          var text = text;
+          var reg1 = new RegExp('\n', 'g');//全局替换换行符
+          text = text.replace(reg1, '');
+          text = text.replace(/\s+/g, '');//全局替换空格
+
           for (let i = 0; i <= text.length - 1 ; i++) {  // 将文字转为数组，一行文字一个元素
             fillText = fillText + text[i];
             if (this.toRpx(this.ctx.measureText(fillText).width) >= width) {

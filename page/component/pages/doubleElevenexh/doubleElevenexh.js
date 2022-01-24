@@ -63,7 +63,19 @@ Page({
 
     myComponent:''
   },
-
+  //key(需要检错的键） url（传入的需要分割的url地址）
+  getSearchString: function (key, Url) {
+    // 获取URL中?之后的字符
+    var str = Url;
+    var arr = str.split("&");
+    var obj = new Object();
+    // 将每一个数组元素以=分隔并赋给obj对象 
+    for (var i = 0; i < arr.length; i++) {
+      var tmp_arr = arr[i].split("=");
+      obj[decodeURIComponent(tmp_arr[0])] = decodeURIComponent(tmp_arr[1]);
+    }
+    return obj[key];
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -380,15 +392,11 @@ Page({
 
   // 导航跳转
   whomepage: function() {
-    wx.reLaunch({
-      url: "/pages/index/index?judgeprof=2"
-    });
+    app.comjumpwxnav(998,'','');
   },
 
   dlfindfun: function() {
-    wx.reLaunch({
-      url: "/page/component/pages/dlfind/dlfind",
-    })
+    app.comjumpwxnav(993,'','');
   },
 
   // 导航跳转 
@@ -398,16 +406,12 @@ Page({
   },
 
   wshoppingCart: function() {
-    wx.redirectTo({
-      url: "/pages/shoppingCart/shoppingCart"
-    });
+    app.comjumpwxnav(9058, '', '');
   },
 
   wmy: function() {
     app.signindata.iftr_mc = true;
-    wx.redirectTo({
-      url: "/pages/wode/wode"
-    });
+    app.comjumpwxnav(9059,'','');
   },
 
   gotosmokebox: function() {

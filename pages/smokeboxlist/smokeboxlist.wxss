@@ -1,4 +1,4 @@
-/* /pages/smokeboxlist/smokeboxlist.wxss */
+
 @import "../../pages/signin/signin.wxss";
 @import "../../common/tabbar.wxss";
 

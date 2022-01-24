@@ -204,9 +204,7 @@ Page({
       var t = _this.getSearchString('t', scene) || 0;
       var store_id = _this.getSearchString('store_id', scene) || 0;
       if (goods_id) {
-        wx.reLaunch({
-          url: "/pages/index/index"
-        })
+        app.comjumpwxnav(998,'','');
       } else if (id){
         if (_this.getSearchString('t', scene)){
           if (_this.getSearchString('t', scene) == 2) {
@@ -221,9 +219,7 @@ Page({
         }); 
       } else if (aid||indexid){
         app.signindata.typeNum = 2;
-          wx.reLaunch({
-            url: '/pages/index/index'
-          });
+        app.comjumpwxnav(998,'','');
       } else if (g){
         app.signindata.referee = _this.getSearchString('u', scene) || 0;
         wx.reLaunch({
@@ -239,9 +235,7 @@ Page({
         }else if(t==4) { //抽签列表
           app.signindata.referee = _this.getSearchString('u', scene) || 0;
           app.signindata.activity_id = _this.getSearchString('i', scene) || 0;
-          wx.reLaunch({
-            url: "/page/component/pages/limitlotterylist/limitlotterylist"
-          });
+          app.comjumpwxnav(989,'','');
         }else{
           wx.reLaunch({
             url: "/page/component/pages/hidefun/hidefun?type=" + t + "&order_id=" + _this.getSearchString('o', scene) || 0,
@@ -252,9 +246,7 @@ Page({
           url: "/pages/storehomepage/storehomepage?store_id=" + _this.getSearchString('store_id', scene)
         })
       }else{
-        wx.reLaunch({
-          url: "/pages/index/index"
-        });
+        app.comjumpwxnav(998,'','');
       };
 
     };

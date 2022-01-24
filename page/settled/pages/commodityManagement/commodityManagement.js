@@ -58,12 +58,12 @@ Page({
     var istype = w.currentTarget.dataset.istype || w.target.dataset.istype || '';
     var type = ''
     if(istype == '-1'){
-      type = 1;
+      type = 9047;
       id = id+'&canShare=1';
     }else if(istype == 4){
       type = 9001;
       id = id+'&canShare=1'
-    };
+    }; 
     app.comjumpwxnav(type, id, '', '')
     
   },

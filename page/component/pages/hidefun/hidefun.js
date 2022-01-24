@@ -844,9 +844,7 @@ Page({
     _this.setData({
       newcoupon: false,
     })
-    wx.navigateTo({ //保留当前页面，跳转到应用内的某个页面（最多打开5个页面，之后按钮就没有响应的）
-      url: "../../../../pages/detailspage/detailspage?gid=" + _this.data.detailinfo.goods_id,
-    })
+    app.comjumpwxnav(1,_this.data.detailinfo.goods_id,'');
 
   },
 
@@ -910,9 +908,7 @@ Page({
   imageclick: function(w) {
     var _this = this
     var id = w.currentTarget.dataset.id || w.target.dataset.id || '';
-    wx.navigateTo({ //保留当前页面，跳转到应用内的某个页面（最多打开5个页面，之后按钮就没有响应的）
-      url: "../../../../pages/detailspage/detailspage?gid=" + _this.data.detailinfo.goods_id,
-    })
+    app.comjumpwxnav(1,_this.data.detailinfo.goods_id,'');
   },
 
   backself: function(w) {
@@ -932,9 +928,7 @@ Page({
   },
 
   wshoppingCart: function() {
-    wx.redirectTo({
-      url: "/pages/shoppingCart/shoppingCart"
-    });
+    app.comjumpwxnav(9058, '', '');
   },
   // 导航跳转 
   wnews: function() {
@@ -943,21 +937,15 @@ Page({
   },
   // 导航跳转
   whomepage: function() {
-    wx.reLaunch({
-      url: "/pages/index/index?judgeprof=2"
-    });
+    app.comjumpwxnav(998,'','');
   },
   wmy: function() {
     app.signindata.iftr_mc = true;
-    wx.redirectTo({
-      url: "/pages/wode/wode"
-    });
+    app.comjumpwxnav(9059,'','');
   },
 
   dlfindfun: function() {
-    wx.reLaunch({
-      url: "/page/component/pages/dlfind/dlfind",
-    })
+    app.comjumpwxnav(993,'','');
   },
 
   // 时间格式化输出，将时间戳转为 倒计时时间
@@ -1086,14 +1074,10 @@ Page({
       if (prevpage.route == '/page/component/pages/activitysharinglist/activitysharinglist') {
         wx.navigateBack();
       } else {
-        wx.navigateTo({
-          url: "/page/component/pages/activitysharinglist/activitysharinglist"
-        });
+        app.comjumpwxnav(6,'','');
       };
     } else {
-      wx.navigateTo({
-        url: "/page/component/pages/activitysharinglist/activitysharinglist"
-      });
+      app.comjumpwxnav(6,'','');
     };
 
   },
@@ -1109,9 +1093,7 @@ Page({
   },
 
   limitlottfun: function() {
-    wx.navigateTo({
-      url: "/page/component/pages/limitlotterylist/limitlotterylist",
-    });
+    app.comjumpwxnav(989,'','');
   },
 
   jumpdlflottery: function(event) {
@@ -1126,10 +1108,7 @@ Page({
   },
 
   bblistfun: function() {
-
-    wx.navigateTo({
-      url: "/pages/smokeboxlist/smokeboxlist",
-    });
+    app.comjumpwxnav(988,'','');
   },
 
   // 在线抽盒机

@@ -144,3 +144,33 @@ page{
   background: #90D2D6;
   color: #ffffff;
 }
+
+.footerAuditWrap{
+  padding: 20rpx 35rpx 40rpx 35rpx;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  position:fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  z-index: 100;
+}
+.footerAuditWrap view{
+  width: 48%;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  font-size: 24rpx;
+  border-radius: 74rpx;
+}
+.footerAuditWrap view:first-child{
+  border: 2rpx solid #6AB0EC;
+  color: #6AB0EC;
+}
+.footerAuditWrap view:last-child{
+  height: 74rpx;
+  background-image: linear-gradient(to right, #91E8FB , #6AB0EC);
+  color: #ffffff;
+}

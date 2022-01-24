@@ -391,7 +391,7 @@
   top: 0;
   left: 0;
   background: rgba(0,0,0,.4);
-  z-index: 98;
+  z-index: 110;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -444,4 +444,67 @@
 .multiRadioTime{
   color:#999495;
   text-align: right;
+}
+/* 实名信息 */
+.certificationInfo{
+  border-top: 2rpx solid #F5F5F5;
+  padding: 36rpx 20rpx;
+  box-sizing: border-box;
+}
+.certificationInfo view:first-child{
+  margin-bottom: 30rpx;
+}
+.certificationInfo view text:first-child{
+  width: 220rpx;
+  display: inline-block;
+}
+.certificationInfo text{
+  font-size: 28rpx;
+  color: #BBBBBB;
+}
+/* 实名认证弹框 */
+.certificationMaskBox{
+  width: 92%;
+  background: #fff;
+  border-radius: 14rpx;
+  position: relative;
+  padding: 44rpx 50rpx;
+  box-sizing: border-box;
+}
+.certificationMaskBoxClose{
+  width: 32rpx;
+  height: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 20rpx;
+}
+.certificationMaskBox text{
+  width: 100%;
+  display: block;
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 18rpx;
+}
+.certificationMaskBox input{
+  width: 100%;
+  height: 68rpx;
+  border-radius: 14rpx;
+  border: 2rpx solid #BBBBBB;
+  font-size: 28rpx;
+  color: #101010;
+  margin-bottom: 20rpx;
+  padding: 0 26rpx;
+  box-sizing: border-box;
+}
+.certificationMaskBox button{
+  width: 100%;
+  height: 68rpx;
+  font-size: 28rpx;
+  color: #fff;
+  line-height: 68rpx;
+  background-image: linear-gradient(to right, #91E8FB , #6AB0EC);
+  border: none;
+  border-radius: 68rpx;
+  margin-top: 52rpx;
 }

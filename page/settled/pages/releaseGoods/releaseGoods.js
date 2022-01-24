@@ -225,7 +225,7 @@ Page({
         subtitle:'预计发货日期',
         placeholder:'请输入预计发货日期',
         value:'',
-        maxlength:10,
+        maxlength:20,
         name:'dateToPull',
         borderbottom1:'show',
         margintop0:true,
@@ -344,8 +344,9 @@ Page({
       this.selectComponent('#settledForm2').refreshData(value,3);
       if(value==1){
         let startTime = (new Date(this.data.obj.startTime).getTime())/1000;
-        let endtime = util.format1("yyyy-MM-dd HH:mm",startTime+2592000);
-        this.selectComponent('#settledForm2').refreshTimeData(endtime,3);
+        let endTime = util.format1("yyyy-MM-dd HH:mm",startTime+2592000);
+        this.selectComponent('#settledForm2').refreshTimeData(endTime,3);
+        this.data.obj['endTime']=endTime;
       }
     }
     if(key == 'startTime'){
@@ -465,7 +466,7 @@ Page({
           [`listData1[3].value`]:info.goodsPrice,
           [`listData1[4].value`]:info.stock,
           [`listData1[5].index`]:info.deliverTimeStatus===''?999:info.deliverTimeStatus==1?0:1,
-          [`listData1[6].index`]:info.limitBuy==0?1:0,
+          [`listData1[6].index`]:info.limitBuy==0 || info.limitBuy==''?1:0,
           [`listData1[6].value`]:info.limitBuy,
           [`listData1[7].value`]:info.integral,
           [`listData1[8].imageList`]:info.arrGoodsDescImg,
@@ -510,12 +511,12 @@ Page({
 
         obj.associationIp = info.brand.brandId;
         obj.goodsName = info.goodsName;
-        obj.flatPatternmaking = info.goodsThumb;
+        obj.flatPatternmaking = info.arrGoodsThumb;
         obj.goodsDescribe = info.goodsDescStr;
         obj.goodsPrice = info.goodsPrice;
         obj.goodsStock = info.stock;
         obj.goodsLabel = info.deliverTimeStatus===''?'':info.deliverTimeStatus==1?0:1;
-        obj.purchaseLimitation = info.limitBuy==0?1:info.limitBuy;
+        obj.purchaseLimitation = info.limitBuy==0 || info.limitBuy==''?1:0;
         obj.purchaseLimitationNum = info.limitBuy;
         obj.integrate = info.integral;
         obj.goodsDetailsPic = info.arrGoodsDescImg;
@@ -580,6 +581,10 @@ Page({
       this.selectComponent('#settledForm1').scrollto('goodsStock');
       app.showToastC('请输入当前可售库存数',1500);
       return false;
+    }else if(Number(obj.goodsStock)>999999){
+      this.selectComponent('#settledForm1').scrollto('goodsStock');
+      app.showToastC('库存数不能大于999999',1500);
+      return false;
     }
     // if(!obj.goodsDetailsPic || obj.goodsDetailsPic.length == 0){
     //   this.selectComponent('#settledForm1').scrollto('goodsDetailsPic');
@@ -616,7 +621,9 @@ Page({
     //   startTime:util.format("yyyy-MM-dd HH:mm"),
     //   endTime:util.format("yyyy-MM-dd HH:mm",2592000000),
 
-console.log(obj.modeOfDespatch)
+    // console.log(obj.modeOfDespatch)
+    // console.log(obj.purchaseLimitation,obj.purchaseLimitationNum,'限购')
+
     let data = {
       goodsId:this.data.id&&this.data.id!=0?this.data.id:'',
       brandId:obj.associationIp,

@@ -113,6 +113,7 @@
                </view>
            </view>
     </view>
+    <!-- 发布弹框 -->
     <view class="popMask" catchtouchmove="true" catchtap="toggleAddNewEventMask" wx:if="{{isAddNewEventMask}}" style="background: rgba(0,0,0,.7);">
         <view class="addNewEventBox" catchtap="true">
             <view class="releaseSale">
@@ -212,13 +213,13 @@
                 <block wx:if="{{isSettledImg}}">
                     <!-- catchtap="comjumpwxnav" -->
                     <view class="settledImgWrap">
-                        <button class='butUserImg' type='primary' bindtap="getUserProfileSettled" data-type="{{brandSettledStatus!=3?'9027':'9028'}}" data-num="{{brandSettledStatus}}" data-whref="id={{dataInfo.brandSettledInfo.brandSettledId}}&num={{brandSettledStatus}}&msg={{dataInfo.brandSettledInfo.brandSettledReturnMsg}}"></button>
+                        <button class='butUserImg' type='primary' bindtap="getUserProfileSettled" data-type="{{brandSettledStatus!=3?'9027':'9028'}}" data-num="{{brandSettledStatus}}" data-whref="id={{dataInfo.brandSettledInfo.brandSettledId}}&num={{brandSettledStatus}}&msg={{dataInfo.brandSettledInfo.brandSettledReturnMsg}}&settledType={{dataInfo.brandSettledInfo.enterType}}&enterType=false"></button>
                         <image class="settledImg" src="https://cdn.51chaidan.com/images/brandSettledIcon/audit{{brandSettledStatus==1?'0':brandSettledStatus==2?'1':brandSettledStatus==3?'3':'2'}}.png" mode="widthFix"></image>
                         <image class="closeImg" src="https://cdn.51chaidan.com/images/brandSettledIcon/closeImg.png" mode="widthFix" catchtap="closeSettledImg"></image>
                     </view>
                 </block>
                 <block wx:else>
-                    <view class='whwddd' data-type="{{brandSettledStatus!=3?'9027':'9028'}}" data-num="{{brandSettledStatus}}" data-whref="id={{dataInfo.brandSettledInfo.brandSettledId}}&num={{brandSettledStatus}}&msg={{dataInfo.brandSettledInfo.brandSettledReturnMsg}}" catchtap="comjumpwxnav">
+                    <view class='whwddd' data-type="{{brandSettledStatus!=3?'9027':'9028'}}" data-num="{{brandSettledStatus}}" data-whref="id={{dataInfo.brandSettledInfo.brandSettledId}}&num={{brandSettledStatus}}&msg={{dataInfo.brandSettledInfo.brandSettledReturnMsg}}&settledType={{dataInfo.brandSettledInfo.enterType}}&enterType=false" catchtap="comjumpwxnav">
                         品牌入驻
                         <view class='whbocndr' style="color:{{brandSettledStatus==2?'#5EB052':brandSettledStatus==4?'#FF4858':''}}">
                         {{brandSettledStatus==1?'立即入驻':brandSettledStatus==2?'入驻审核中，查看进度':brandSettledStatus==3?'审核通过，完善信息':'审核未失败，查看原因'}}
@@ -376,7 +377,21 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
 
 <!-- 入驻类型弹框 -->
 <view class="popMask" wx:if="{{isSettledTypeMask}}" catchtouchmove="true" catchtap="toggleSettledTypeMask">
-    <view class="settledTypeBox">
-        
+    <view class="settledTypeBox" catchtap="true">
+        <view 
+        data-type="{{brandSettledStatus!=3?'9027':'9028'}}"
+        data-whref="id={{dataInfo.brandSettledInfo.brandSettledId}}&num={{brandSettledStatus}}&msg={{dataInfo.brandSettledInfo.brandSettledReturnMsg}}&settledType=1&enterType={{dataInfo.brandSettledInfo.enterType}}" 
+        catchtap="jumpSettled">
+            <image src="https://cdn.51chaidan.com/images/people.png" mode="widthFix"></image>
+            <text>个人入驻</text>
+        </view>
+        <view 
+        data-type="{{brandSettledStatus!=3?'9027':'9028'}}"
+        data-whref="id={{dataInfo.brandSettledInfo.brandSettledId}}&num={{brandSettledStatus}}&msg={{dataInfo.brandSettledInfo.brandSettledReturnMsg}}&settledType=0&enterType={{dataInfo.brandSettledInfo.enterType}}"
+        catchtap="jumpSettled">
+            <image src="https://cdn.51chaidan.com/images/mess.png" mode="widthFix"></image>
+            <text>企业入驻</text>
+        </view>
+        <image class="closeSettledTypeMask" catchtap="toggleSettledTypeMask" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="widthFix"></image>
     </view>
 </view>

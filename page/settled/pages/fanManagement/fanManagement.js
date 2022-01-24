@@ -392,7 +392,7 @@ Page({
             })
           }else{
             if(res.data.List && res.data.List.fans.length != 0){
-              var salesEffectList = [...res.data.List.fans,_this.data.salesEffectList]
+              var salesEffectList = [..._this.data.salesEffectList,...res.data.List.fans];
               _this.setData({
                   salesEffectList,
                   nodataiftr:true

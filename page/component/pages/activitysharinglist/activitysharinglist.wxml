@@ -17,8 +17,8 @@
         <view style='width:100%;height:60rpx;line-height:60rpx;font-size:24rpx;'>已报名抽签</view>
         <view style='width:100%;height:140rpx;'>
           <scroll-view scroll-x="true" style='width:100%;white-space:nowrap;height:100%;'>
-            <view wx:for='{{signlist}}' wx:key='key' style='vertical-align: top;position: relative;width:{{item.width}}rpx;height:100%;margin-right:20rpx;display: inline-block;' catchtap='limitlotteryd' data-gid='{{item.id}}'>
-              <image bindload="imageLoadad" data-indexnum='1' data-ind='{{index}}' style='display:block;width:{{item.width}}rpx;height:100%;border-radius:6rpx;' src='{{item.cover}}'></image>
+            <view wx:for='{{signlist}}' wx:key='key' style='vertical-align: top;position: relative;height:100%;margin-right:20rpx;display: inline-block;' catchtap='limitlotteryd' data-gid='{{item.id}}'>
+              <image data-indexnum='1' mode="heightFix"  data-ind='{{index}}' style='display:block;height:100%;border-radius:6rpx;' src='{{item.cover}}'></image>
             </view>
           </scroll-view>
         </view>
@@ -38,7 +38,15 @@
               <image class='limieveimg' src='{{item.cover}}' mode='widthFix'></image>
               <block>
                 <view wx:if="{{item.joinMothed == 'payTicket'}}" class='limievetxtname multilineellipsis'><text style='color:#298DF8;'>定金￥{{item.cashPledge}} </text>{{item.name}}</view>
-                <view wx:else class='limievetxtname multilineellipsis'><text style='color:#fd434c;'>抽签价￥{{item.shop_price}} </text>{{item.name}}</view>
+                <view wx:else class='limievetxtname multilineellipsis'>
+                  <block wx:if="{{item.shop_price==0}}">
+                    <text style='color:#fd434c;'>免费 </text>
+                  </block>
+                  <block wx:else>
+                    <text style='color:#fd434c;'>抽签价￥{{item.shop_price}} </text>
+                  </block>
+                  {{item.name}}
+                </view>
               </block>
               <view class='limievetxttime specialellipsis' wx:if='{{item.status==1}}'>
                 <block wx:if='{{item.is_limit==1}}'>满{{item.limit_users}}人开奖</block>
@@ -76,7 +84,15 @@
               <image class='limieveimg' src='{{item.cover}}' mode='widthFix'></image>
               <block>
                 <view wx:if="{{item.joinMothed == 'payTicket'}}" class='limievetxtname multilineellipsis'><text style='color:#298DF8;'>定金￥{{item.cashPledge}} </text>{{item.name}}</view>
-                <view wx:else class='limievetxtname multilineellipsis'><text style='color:#fd434c;'>抽签价￥{{item.shop_price}} </text>{{item.name}}</view>
+                <view wx:else class='limievetxtname multilineellipsis'>
+                  <block wx:if="{{item.shop_price==0}}">
+                    <text style='color:#fd434c;'>免费 </text>
+                  </block>
+                  <block wx:else>
+                    <text style='color:#fd434c;'>抽签价￥{{item.shop_price}} </text>
+                  </block>
+                  {{item.name}}
+                </view>
               </block>
               <view class='limievetxttime specialellipsis' wx:if='{{item.status==1}}'>
                 <block wx:if='{{item.is_limit==1}}'>满{{item.limit_users}}人开奖</block>
@@ -119,8 +135,8 @@
         <view style='width:100%;height:60rpx;line-height:60rpx;font-size:24rpx;'>已完成抽签</view>
         <view style='width:100%;height:140rpx;'>
           <scroll-view scroll-x="true" style='width:100%;white-space:nowrap;height:100%;'>
-            <view wx:for='{{finishedlist}}' wx:key='key' style='vertical-align: top;position: relative;width:{{item.width}}rpx;height:100%;margin-right:20rpx;display: inline-block;' catchtap='limitlotteryd' data-gid='{{item.id}}'>
-              <image bindload="imageLoadad" data-indexnum='2' data-ind='{{index}}' style='display:block;width:{{item.width}}rpx;height:100%;border-radius:6rpx;' src='{{item.cover}}'></image>
+            <view wx:for='{{finishedlist}}' wx:key='key' style='vertical-align: top;position: relative;height:100%;margin-right:20rpx;display: inline-block;' catchtap='limitlotteryd' data-gid='{{item.id}}'>
+              <image  mode="heightFix" data-indexnum='2' data-ind='{{index}}' style='display:block;height:100%;border-radius:6rpx;' src='{{item.cover}}'></image>
             </view>
           </scroll-view>
         </view>
@@ -138,7 +154,7 @@
 <!-- 免单 -->
 <block wx:if='{{drawOrFreeOrder == 2}}'>
 
-      <view style='width:100%;margin-bottom:10rpx;' wx:if='spreadEntry'>
+      <view style='width:100%;margin-bottom:10rpx;' wx:if='{{spreadEntry}}'>
           <view style='width:100%;height:200rpx;'>
               <swiper style='width:100%;height:100%;margin:0 auto;display:block;' circular="true" autoplay="true" interval="5000" duration="450">    
                   <swiper-item wx:for="{{spreadEntry}}" wx:key="key">

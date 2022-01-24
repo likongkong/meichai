@@ -2,6 +2,7 @@
 var Dec = require('../../../../common/public');//aes加密解密js
 var WxParse = require('../../../../wxParse/wxParse.js');
 var time = require('../../../../utils/util.js');
+import Poster from '../../../../pages/wxa_plugin_canvas/poster/poster';
 const app = getApp();
 
 Page({
@@ -252,8 +253,102 @@ Page({
     guidanceMask:false,
 
     proTipTrue:false,
-    commodityAgreement:false
-
+    commodityAgreement:false,
+    // 画布
+    userinfo: {},
+    QRcode_img: '',
+    posterConfig: {},
+    savepic: '',
+    tgfrShareIftr:false,
+    ctBuyInTheGroup:false ,  // 群内购买 当前状态 true 不能购买 false 能购买
+  },
+  noShareShop(){
+     app.showToastC('该商品不可分享')
+  },
+/**
+   * 异步生成海报
+   */
+  onCreatePoster() {
+    var _this = this;
+    var zunmdata = this.data.zunmdata || {};
+    wx.showLoading({
+      title: '生成中...',
+    })
+    // setData配置数据
+    _this.setData({
+      posterConfig: {
+        width: 900,
+        height: 740,
+        debug: false,
+        // pixelRatio: 1000,
+        preload: false,
+        hideLoading: false,
+        backgroundColor: '#ccc',
+        blocks: [{
+          x: 200,
+          y: 30,
+          width: 600,
+          height: 670,
+          backgroundColor:'#fff',
+          zIndex: 1,
+          borderRadius: 20,
+        }],
+        texts: [{
+          x: 228,
+          y: 82,
+          baseLine: 'middle',
+          width:490,
+          lineNum:1,
+          text:zunmdata.gname, // 品牌名
+          fontSize: 36,
+          textAlign: 'left',
+          color: '#000',
+          zIndex: 3,
+        }],
+        images: [
+          {  // 头像
+            x: 80,
+            y: 30,
+            url: zunmdata.brand.brandLogo,
+            width: 90,
+            height:90,
+            zIndex:2,
+            borderRadius:10,
+          },{  // banner
+            x: 228,
+            y: 120,
+            url: zunmdata.goods_thumb,
+            width: 544,
+            height:544,
+            zIndex: 3
+          },{  // 三角
+            x: 178,
+            y: 60,
+            url: 'https://cdn.51chaidan.com/images/brandInfoIcon/goodsLeftArrow.png',
+            width: 30,
+            height:30,
+            zIndex: 3
+          }]
+      }
+    }, () => {
+      Poster.create();
+    });
+  },
+  onPosterFail(e){
+    wx.hideLoading()
+    this.setData({
+      savepic: 'https://cdn.51chaidan.com/images/shareImg/shareImgStyle.png'
+    });
+  },
+  onPosterSuccess(e) {
+    wx.hideLoading()
+    const {
+      detail
+    } = e;
+    console.log(detail)
+    this.setData({
+      savepic: detail
+    });
   },
   commdargee(){
       this.setData({
@@ -658,9 +753,7 @@ Page({
   },
   // vip 页面
   jumpVipPage: function (event) {
-    wx.navigateTo({  
-      url: "/page/secondpackge/pages/vipPage/vipPage"
-    })
+    app.comjumpwxnav(9021,'','');
   },
   //时间戳转换时间  
   toDatehd: function (number) {
@@ -985,9 +1078,7 @@ Page({
   }, 
   // 返回首页
   returntothehomepage:function(){
-    wx.reLaunch({
-      url: "/pages/index/index"
-    });
+    app.comjumpwxnav(998,'','');
   },
   passWOnBlur:function(){
     console.log('失去焦点')
@@ -3170,19 +3261,6 @@ Page({
             specialGoods:dataGinfo.specialGoods // 特殊商品  手机壳
           })
 
-          if(!dataGinfo.isGoodsCanShare && _this.data.canShare!=1){
-            console.log('isGoodsCanShare','true 能 false不能分享')
-            wx.hideShareMenu();
-            if(!_this.data.referee){
-               _this.toogleGuidanceMask();
-            };
-          }else{
-            if(dataGinfo.isGoodsCanShare){
-              wx.showShareMenu();
-            }else{
-              wx.showShareMenu({withShareTicket:true});
-            };
-          };
 
 
           if (!reg.test(res.data.Ginfo.goods_thumb)) {
@@ -3330,6 +3408,7 @@ Page({
           // if(res.data.Ginfo&&res.data.Ginfo.brandId>0){
           //   res.data.Ginfo.specialWay = 1;
           // };
+
           _this.setData({
             movies: res.data.Ginfo.gimages,
             zunmdata: redauin,
@@ -3355,6 +3434,27 @@ Page({
                   _this.getbrandDetail()
               }
           });
+
+          if(!dataGinfo.isGoodsCanShare && _this.data.canShare!=1){
+            console.log('isGoodsCanShare','true 能 false不能分享')
+            wx.hideShareMenu();
+            _this.setData({isShareFun : false});
+            if(!_this.data.referee){
+               // 群内 不能购买
+               _this.setData({
+                  ctBuyInTheGroup:true
+               })
+               _this.toogleGuidanceMask();
+               // 生成图片
+               _this.onCreatePoster()
+            };
+          }else{
+            if(dataGinfo.isGoodsCanShare){
+              wx.showShareMenu();
+            }else{
+              wx.showShareMenu({withShareTicket:true});
+            };
+          };
 
           // 赠品倒计时
           if(redauin.isGiveGoodsStatus == 2){
@@ -3601,15 +3701,11 @@ Page({
         };
         if (res.data.ReturnCode == 100) {
           app.showToastC('该商品已下架');
-          wx.reLaunch({
-            url: "/pages/index/index?judgeprof=2"
-          });
+          app.comjumpwxnav(998,'','');
         };
         if (res.data.ReturnCode == '000') {
           app.showToastC('商品暂时找不到了');
-          wx.reLaunch({
-            url: "/pages/index/index?judgeprof=2"
-          });
+          app.comjumpwxnav(998,'','');
         };
         // 判断非200和登录
         Dec.comiftrsign(_this, res, app);
@@ -3684,9 +3780,7 @@ Page({
       // 判断是否授权
       this.activsign();
     }else{
-      wx.reLaunch({  
-        url: "/pages/index/index"
-      });      
+      app.comjumpwxnav(998,'','');     
     };
   },
   // 购物券选中
@@ -3909,7 +4003,7 @@ Page({
       query:{
         'gid':_this.data.gid
       },
-      imageUrl:'https://cdn.51chaidan.com/'+_this.data.zunmdata.goods_share 
+      imageUrl:_this.data.zunmdata.goods_share 
     }
   },
   onShareAppMessage: function (options) {
@@ -3923,7 +4017,7 @@ Page({
      
     var reshare = {
       title: `${_this.data.zunmdata.endTime && _this.data.zunmdata.endTime!=''?'【限时】':'【限量】'}${_this.data.zunmdata.gname}`,
-      path: '/pages/detailspage/detailspage?gid=' + _this.data.gid + '&referee='+_this.data.uid,
+      path: '/page/settled/pages/seckill/seckill?gid=' + _this.data.gid + '&referee='+_this.data.uid,
       // imageUrl: 'https://cdn.51chaidan.com/'+_this.data.zunmdata.goods_share ,
       imageUrl: _this.data.zunmdata.goods_share ,
       success: function (res) {},
@@ -4016,17 +4110,13 @@ Page({
   // 跳转详情页 
   addressmanagement: function (event) {
     var gid = event.currentTarget.dataset.gid || event.target.dataset.gid;
-    wx.redirectTo({  
-      url: "/pages/detailspage/detailspage?gid=" + gid
-    });
+    app.comjumpwxnav(1,gid,'');
   },
   // 跳转详情页 不关闭上一页 
   addressmanagementlastno: function (event) {
     this.setData({ tipback: false, dsbframeiftr: false });
     var gid = event.currentTarget.dataset.gid || event.target.dataset.gid;
-    wx.navigateTo({   
-      url: "/pages/detailspage/detailspage?gid=" + gid
-    })
+    app.comjumpwxnav(1,gid,'');
   },   
   jumpecqdetail: function (w) {
       var id = w.currentTarget.dataset.id || w.target.dataset.id || '';
@@ -4135,45 +4225,10 @@ Page({
   },
   // 公共跳转
   comjumpwxnav: function (item_type, whref, wname) {
-    if (item_type == 0) {
-      var url = encodeURIComponent(whref)
-      wx.navigateTo({    // 外部链接
-        url: "/page/component/pages/webview/webview?webview=" + url
-      });
-    } else if (item_type == 1) {
-      wx.navigateTo({    // 商品详情页
-        url: "/pages/detailspage/detailspage?gid=" + whref
-      });
-    } else if (item_type == 2 || item_type == 3) {
-      wx.navigateTo({    // 信息流
-        url: "/pages/classificationpage/classificationpage?" + whref + '&wtype=' + item_type + '&wname=' + wname
-      });
-    } else if (item_type == 4 || item_type == 5) {
-      wx.navigateTo({    // 瀑布流
-        url: "/pages/classificationpage/classificationpage?" + whref + '&wtype=' + item_type + '&wname=' + wname
-      });
-    } else if (item_type == 6 || item_type == 7) {
-      wx.navigateTo({    // 活动列表
-        url: "/page/component/pages/activitysharinglist/activitysharinglist"
-      });
-    } else if (item_type == 8) {
-      wx.navigateTo({    // 活动详情页
-        url: "/pages/activitydetailspage/activitydetailspage?id=" + whref
-      });
-    } else if (item_type == 9) {
-      wx.navigateTo({    //签到
-        url: "/page/component/pages/newsignin/newsignin"
-      });
-    } else if (item_type == 998) {
-      wx.reLaunch({    //签到
-        url: "/pages/index/index?judgeprof=2"
-      });
-    };
+    app.comjumpwxnav(item_type, whref, wname)
   },
   wshoppingCart: function () {
-    wx.redirectTo({
-      url: "/pages/shoppingCart/shoppingCart"
-    });
+    app.comjumpwxnav(9058, '', '');
   },  
   // 导航跳转 
   wnews: function () {
@@ -4182,15 +4237,11 @@ Page({
   }, 
   // 导航跳转
   whomepage: function () {
-    wx.reLaunch({
-      url: "/pages/index/index?judgeprof=2"
-    });
+    app.comjumpwxnav(998,'','');
   },
   wmy: function () {
     app.signindata.iftr_mc = true;
-    wx.redirectTo({
-      url: "/pages/wode/wode"
-    });
+    app.comjumpwxnav(9059,'','');
   },
   swiperchangeindex: function (detail){
     this.setData({
@@ -4289,9 +4340,7 @@ Page({
     });
   },
   dlfindfun: function () {
-    wx.reLaunch({
-      url: "/page/component/pages/dlfind/dlfind",
-    })
+    app.comjumpwxnav(993,'','');
   }, 
   // 晒单加载更多 
   delpostdatamore: function () {

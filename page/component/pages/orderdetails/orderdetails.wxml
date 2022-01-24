@@ -821,29 +821,36 @@
 
                 <!-- 抽签 -->
 
-                <view wx:if='{{comdata.order_type==13&&comdata.status==0&&comdata.depositOrderPayPrice}}'>
-
-                    <view class='daifukuan'>
-                        商品总额:￥{{comdata.goods_amount}}-定金{{comdata.depositOrderPayPrice}}+运费￥{{comdata.carriage}}
-                    </view>
-                    <view class='totalmonnum'>
-                        <block wx:if='{{comdata.order_type==24}}'>尾款:￥{{comdata.amount}}</block>
-                        <block wx:else>合计:￥{{comdata.amount}}</block>
-                    </view>
-
+                <view wx:if='{{(comdata.order_type==13&&comdata.depositOrderPayPrice) || (comdata.order_type==13&&comdata.redbagCDKEY)}}'>
+                    <block wx:if="{{comdata.status==0}}">
+                        <view class='daifukuan'>
+                            商品总额:￥{{comdata.goods_amount}}-定金{{comdata.depositOrderPayPrice}}+运费￥{{comdata.carriage}}
+                        </view>
+                        <view class='totalmonnum'>
+                            <block wx:if='{{comdata.order_type==24}}'>尾款:￥{{comdata.amount}}</block>
+                            <block wx:else>合计:￥{{comdata.amount}}</block>
+                        </view>
+                    </block>
                     <!--  等待付款  -->
                     <view class='totalmoncon' wx:if='{{comdata.status==0}}'>
                         <view class='totalmoncright' bindtap='payment' style='position:relative;margin-left:20rpx;'>支付尾款
                         </view>
-
                         <view class='totalmoncleft' wx:if='{{comdata.dateTitle}}'
                             style="height:58rpx;line-height:58rpx;width:524rpx;font-size:24rpx;float:right;">
-                            {{comdata.dateTitle}}</view>
-
+                            {{comdata.dateTitle}}
+                        </view>
                     </view>
                     <view class='totalmoncon' wx:if='{{comdata.status==4||comdata.status==5}}'>
-                        <view class='totalmoncrightcel' data-oid='{{comdata.oid}}' data-gcover='{{comdata.gcover}}'
-                            bindtap='lookatthelogistics' style='margin-right:10rpx;position: relative;'>查看物流</view>
+                        <block wx:if="{{comdata.redbagCDKEY}}">
+                            <view class='totalmoncright' style='margin-right:10rpx;position: relative;' data-key="{{comdata.redbagCDKEY}}" catchtap="showRedPackage">
+                                领取
+                            </view>
+                        </block>
+                        <block wx:else>
+                            <view class='totalmoncrightcel' data-oid='{{comdata.oid}}' data-gcover='{{comdata.gcover}}' bindtap='lookatthelogistics' style='margin-right:10rpx;position: relative;'>
+                                查看物流
+                            </view>
+                        </block>
                     </view>
                 </view>
 

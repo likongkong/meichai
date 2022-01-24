@@ -628,6 +628,7 @@ Page({
         sendBackStatus:arr[j][0].sendBackStatus || false,
         sendBackAuditStatus:arr[j][0].sendBackAuditStatus || false,
         sendBackId:arr[j][0].sendBackId || 0,
+        redbagCDKEY:arr[j][0].redbagCDKEY || 0,
       })
     };   
     if (arrchil && arrchil.length != 0){
@@ -895,38 +896,7 @@ Page({
     var _this = this;
 　　if (options.from == 'button') {
       if (false){
-        _this.paymentcompletionwimg();
-        var reshare = {
-          // title: _this.data.title,  // 转发标题（默认：当前小程序名称）
-          title: '我刚买了这个商品，一起下单各领立减金',
-          path: '/pages/detailspage/detailspage?gid=' + _this.data.gid + '&store_id=0',
-          imageUrl: _this.data.shareimg,
-          success: function (res) {
-          },
-        };
-        var q = Dec.Aese('mod=share&operation=order&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&oid=' + _this.data.comdata.cart_id)
-        wx.request({
-          url: app.signindata.comurl + 'user.php' + q,
-          method: 'GET',
-          header: { 'Accept': 'application/json' },
-          success: function (res) {
-            if (res.data.ReturnCode == 200) {
-              app.showToastC(res.data.Info.notify);
-              _this.setData({
-                payiftr: false
-              });
-            };
-            if (res.data.ReturnCode == 900) {
-              app.showToastC('登陆状态有误');
-            };
-            if (res.data.ReturnCode == 800) {
-              app.showToastC('非该用户订单');
-            };
-            if (res.data.ReturnCode == 701) {
-              app.showToastC('订单状态有误(不是“已完成”状态)');
-            };
-          },
-        })        
+                
       }else{
          var gid = options.target.dataset.gid;
          var gcover = options.target.dataset.gcover;
@@ -994,89 +964,7 @@ Page({
       }
 　　}else{
       var reshare = app.sharemc()
-      // var shareimg = _this.data.paycheadwsongimg || _this.data.paycheadwsongimgling;
-      // var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
-      // if (!reg.test(shareimg)) {
-      //   shareimg = _this.data.zdyurl + shareimg;
-      // };
-      // _this.setData({
-      //   paymentcompletionwiftr: false,
-      //   tipback: false
-      // });
-      // // _this.data.payiftr
-      // if (false) {
-      //   _this.paymentcompletionwimg();
-      //   if (_this.data.title){
-      //     var titlea = _this.data.title;
-      //     var patha = '/pages/detailspage/detailspage?gid=' + _this.data.gid + '&store_id=0'
-      //   }else{
-      //     var titlea = '美拆';
-      //     var patha = '/pages/index/index'
-      //   }
-      //   var reshare = {
-      //     // title: titlea ,  // 转发标题（默认：当前小程序名称）
-      //     title: '我刚买了这个商品，一起下单各领立减金',
-      //     path: patha,
-      //     imageUrl: _this.data.shareimg,
-      //     success: function (res) {
-      //       var q = Dec.Aese('mod=share&operation=order&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&oid=' + _this.data.comdata.cart_id)
-      //       wx.request({
-      //         url: app.signindata.comurl + 'user.php' + q,
-      //         method: 'GET',
-      //         header: { 'Accept': 'application/json' },
-      //         success: function (res) {
-      //           if (res.data.ReturnCode == 200) {
-      //             app.showToastC(res.data.Info.notify);
-      //             _this.onLoadfun();
-      //             _this.setData({
-      //               payiftr:false
-      //             });
-      //           };
-      //           if (res.data.ReturnCode == 900) {
-      //             app.showToastC('登陆状态有误');
-      //           };
-      //           if (res.data.ReturnCode == 800) {
-      //             app.showToastC('非该用户订单');
-      //           };
-      //           if (res.data.ReturnCode == 701) {
-      //             app.showToastC('订单状态有误(不是“已完成”状态)');
-      //           };
-      //         },
-      //       })
-      //     },
-      //   }
-      // } else {
-      //   if (_this.data.urcShareImg == '' && _this.data.urcTitle == '' && _this.data.urcId == '' && _this.data.urcOrderType){
-          
-      //   }else{
-      //     if (_this.data.urcOrderType==1){
-      //       var reshare = {
-      //         title: _this.data.couponvalue ? '我刚买了这个商品，一起下单各领￥' + _this.data.couponvalue + '立减金' : _this.data.urcTitle,
-      //         path: '/pages/detailspage/detailspage?gid=' + _this.data.urcId + '&store_id=0',
-      //         imageUrl: _this.data.urcShareImg,
-      //         success: function (res) { },
-      //       }
-      //     } else if (_this.data.urcOrderType == 2){
-      //       var reshare = { 
-      //         title: '我刚买了这个商品，一起下单各领立减金',
-      //         path: "/pages/activitydetailspage/activitydetailspage?id=" + _this.data.urcId + '&cs=1',
-      //         imageUrl: _this.data.urcShareImg,
-      //         success: function (res) {
-      //         },
-      //       };
-      //     } else if (_this.data.urcOrderType == 3){
-      //       var reshare = {
-      //         title: '我用拆币兑换了' + _this.data.zunmdata.goods_name + '，一起分享赢拆币！',
-      //         path: '/page/component/pages/imdetailspage/imdetailspage?goods_id=' + _this.data.urcId,
-      //         imageUrl: _this.data.urcShareImg,
-      //         success: function (res) { },
-      //       };
-      //     }else{
-      //       var reshare = app.sharemc()
-      //     }
-
-      //   } 
-      // }
+      
     }      
     return reshare     
   },
@@ -1386,9 +1274,7 @@ Page({
   },
   // 返回首页
   returntothehomepage: function () {
-    wx.reLaunch({    
-      url: "/pages/index/index"
-    });
+    app.comjumpwxnav(998,'','');
     this.paymentcompletionwimg();
   },
   // 确认收货
@@ -1453,49 +1339,13 @@ Page({
   },
   // 公共跳转
   comjumpwxnav: function (item_type, whref, wname) {
-    if (item_type == 0) {
-      var url = encodeURIComponent(whref)
-      wx.navigateTo({    // 外部链接
-        url: "/page/component/pages/webview/webview?webview=" + url
-      });
-    } else if (item_type == 1) {
-      wx.navigateTo({    // 商品详情页
-        url: "/pages/detailspage/detailspage?gid=" + whref
-      });
-    } else if (item_type == 2 || item_type == 3) {
-      wx.navigateTo({    // 信息流
-        url: "/pages/classificationpage/classificationpage?" + whref + '&wtype=' + item_type + '&wname=' + wname
-      });
-    } else if (item_type == 4 || item_type == 5) {
-
-      wx.navigateTo({    // 瀑布流
-        url: "/pages/classificationpage/classificationpage?" + whref + '&wtype=' + item_type + '&wname=' + wname
-      });
-    } else if (item_type == 6 || item_type == 7) {
-      wx.navigateTo({    // 活动列表
-        url: "/page/component/pages/activitysharinglist/activitysharinglist"
-      });
-    } else if (item_type == 8) {
-      wx.navigateTo({    // 活动详情页
-        url: "/pages/activitydetailspage/activitydetailspage?id=" + whref
-      });
-    } else if (item_type == 9) {
-      wx.navigateTo({    //签到
-        url: "/page/component/pages/newsignin/newsignin"
-      });
-    } else if (item_type==998){
-      wx.reLaunch({    //签到
-        url: "/pages/index/index?judgeprof=2"
-      });
-    } else if (item_type == 996) {
+    if (item_type == 996) {
       this.setData({
         awatip: true,
         awardrresentiftr:false
       })
-    } else if (item_type == 9054) {   // 取件信息
-      wx.navigateTo({
-        url: `/page/settled/pages/delivery/delivery?${whref}`
-      });      
+    } else{   // 取件信息
+      app.comjumpwxnav(item_type, whref, wname)      
     };
   }, 
 
@@ -1565,9 +1415,7 @@ Page({
   // 跳转详情页 
   addressmanagement: function (event) {
     var gid = event.currentTarget.dataset.gid || event.target.dataset.gid;
-    wx.navigateTo({  
-      url: "/pages/detailspage/detailspage?gid=" + gid
-    })
+    app.comjumpwxnav(1,gid,'');
   },
   // 免单活动跳转
   actexempfun: function (event) {
@@ -1578,9 +1426,7 @@ Page({
   },
 
   acetlistfun: function () {
-    wx.redirectTo({
-      url: "/page/component/pages/activitysharinglist/activitysharinglist"
-    });
+    app.comjumpwxnav(6,'','');
     this.setData({
       wsh: false,
       awardrresentiftr: false,
@@ -1858,9 +1704,7 @@ Page({
   },
   // 跳转首页
   frontpagebutton: function () {
-    wx.reLaunch({
-      url: "/pages/index/index?judgeprof=2"
-    })
+    app.comjumpwxnav(998,'','');
   },
   // 生成图片
   generatePictures: function (qrcode, awardinfo, cover, cart_idsave, order_type){
@@ -3272,9 +3116,7 @@ Page({
   goodsetail: function (w) {
     var _this = this;
     var gid = w.currentTarget.dataset.gid || w.target.dataset.gid || '';
-    wx.navigateTo({
-      url: "/pages/detailspage/detailspage?gid=" + gid
-    })
+    app.comjumpwxnav(1,gid,'');
   },
 
   personalhomepage: function (w) {
@@ -3327,9 +3169,7 @@ Page({
   },
 
   wshoppingCart: function () {
-    wx.reLaunch({
-      url: "/pages/shoppingCart/shoppingCart"
-    });
+    app.comjumpwxnav(9058, '', '');
   },
   // 导航跳转 
   wnews: function () {
@@ -3338,21 +3178,15 @@ Page({
   },
   // 导航跳转
   whomepage: function () {
-    wx.reLaunch({
-      url: "/pages/index/index?judgeprof=2"
-    });
+    app.comjumpwxnav(998,'','');
   },
   dlfindfun: function () {
-    wx.reLaunch({
-      url: "/page/component/pages/dlfind/dlfind",
-    })
+    app.comjumpwxnav(993,'','');
   },
 
   wmy: function () {
     app.signindata.iftr_mc = true;
-    wx.reLaunch({
-      url: "/pages/wode/wode"
-    });
+    app.comjumpwxnav(9059,'','');
   },
   jumpowntoy: function () {
     var _this = this;
@@ -3555,7 +3389,16 @@ Page({
         app.showToastC('复制成功');
       }
     });
-  }
+  },
+  // 领取红包封面
+  showRedPackage(e){
+    wx.showRedPackage({
+      url:e.currentTarget.dataset.key,
+      success: (res) => {
+        }
+    })
+  },
+  
 })
 
 

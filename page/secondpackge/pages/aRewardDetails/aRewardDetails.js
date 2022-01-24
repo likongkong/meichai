@@ -111,9 +111,16 @@ Page({
      subscribedata:'',
      // 是否显示订单确认弹框
      isOrderMask:false,
-     proTipTrue:false 
+     proTipTrue:false ,
+     commonBulletFrame:false
+
   },
-  
+  closeCommonTipSFA(){
+    this.setData({
+      commonBulletFrame:!this.data.commonBulletFrame,
+    })
+  },
+
   // 跳转公众号文章
   tipsuplusRatio(w){
     var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
@@ -854,7 +861,8 @@ Page({
             isDeduct:res.data.Info.deduct.isDeduct,
             isUseBlindboxMoney:res.data.Info.deduct.isDeduct?true:false,
             isDeductNum:res.data.Info.deduct.isDeduct&&_this.data.blindboxMoney!=0?1:0,
-            subscribedata: res.data.Info.subscribe
+            subscribedata: res.data.Info.subscribe,
+            // infoSales : res.data.Info.sales
           })
           var allDeductMoney = Number(parseFloat((activity.suplusNum*activity.shopPrice)*_this.data.deductRatio).toFixed(3).slice(0,-1));
           var tenDeductMoney = Number(parseFloat((10*activity.shopPrice)*_this.data.deductRatio).toFixed(3).slice(0,-1));
@@ -1005,7 +1013,15 @@ Page({
             var otherActivity = res.data.Info.otherActivity ||{};
             _this.setData({ is_jump: true ,otherActivity:otherActivity,isPurchase:false,scrapingPur:!_this.data.scrapingPur});  
           }
-        } else {
+        } else if(res.data.ReturnCode == 666){
+          _this.data.order = res.data.Info.order;
+          wx.hideLoading()
+          _this.getOrderRecord();
+          _this.queuefun(2,4);
+          _this.setData({
+            isOrderMask:false
+          })
+        }else{
           wx.hideLoading()
           app.showToastC(res.data.Msg);
         }
@@ -1358,25 +1374,7 @@ Page({
   },
   // 跳转列表
   jumpaRewardList:function(){
-      // let pages = getCurrentPages();
-      // let prevpage = pages[pages.length - 2];
-      // if (prevpage) {
-      //   if (prevpage.route == 'page/secondpackge/pages/aRewardList/aRewardList') {
-      //     wx.navigateBack();
-      //   } else {
-      //     wx.redirectTo({
-      //       url: "/page/secondpackge/pages/aRewardList/aRewardList"
-      //     });
-      //   };
-      // } else {
-      //   wx.redirectTo({
-      //     url: "/page/secondpackge/pages/aRewardList/aRewardList"
-      //   });
-      // };
-      wx.redirectTo({
-        url: "/page/secondpackge/pages/aRewardList/aRewardList"
-      });
-
+    app.comjumpwxnav(9015,'','');
   },
   iftrdetailpageb: function () {
     this.setData({

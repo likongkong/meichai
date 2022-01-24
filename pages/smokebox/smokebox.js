@@ -3791,14 +3791,10 @@ Page({
     })
   },
   jumpVipPage(){
-    wx.navigateTo({  
-      url: "/page/secondpackge/pages/vipPage/vipPage"
-    })
+    app.comjumpwxnav(9021,'','');
   },
   goSmokeboxlist(){
-    wx.navigateTo({  
-      url: "/pages/smokeboxlist/smokeboxlist"
-    })
+    app.comjumpwxnav(988,'','');
   },
   jumpshopbut:function(w){
     var name = w.currentTarget.dataset.name || w.target.dataset.name;

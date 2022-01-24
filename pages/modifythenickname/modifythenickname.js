@@ -34,9 +34,7 @@ Page({
   },
 
   jumpVipPage(){
-    wx.navigateTo({  
-      url: "/page/secondpackge/pages/vipPage/vipPage"
-    })
+    app.comjumpwxnav(9021,'','');
   },   
   
   showSearchFun(){
@@ -604,10 +602,7 @@ Page({
   },
 
   jumphomepage:function(){
-    //获取当前时间戳  
-    wx.redirectTo({
-      url: "/pages/index/index" 
-    });     
+    app.comjumpwxnav(998,'','');     
 
   },
   // 返回上一页
@@ -626,9 +621,7 @@ Page({
           wx.navigateBack();
       };
     } else {
-      wx.redirectTo({
-        url: "/pages/index/index"
-      });
+      app.comjumpwxnav(998,'','');
     };
   },
 

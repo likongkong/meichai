@@ -20,9 +20,9 @@
           <view catchtap="submitAudit">提交</view>
           <text data-num="1" catchtap="navigateBack">暂不填写</text>
       </view>  -->
-      <view class="footerWrap">
+      <view class="footerAuditWrap">
           <view data-num="1" catchtap="navigateBack">返回</view>
-          <view catchtap="submitAudit">确认发布</view>
+          <view catchtap="submitAudit">提交</view>
       </view>
   </block>
 </view>

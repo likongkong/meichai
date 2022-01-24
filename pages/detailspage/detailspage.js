@@ -1,6 +1,8 @@
 var Dec = require('../../common/public.js');//aes加密解密js
 var WxParse = require('../../wxParse/wxParse.js');
 var time = require('../../utils/util.js');
+import Poster from '../../pages/wxa_plugin_canvas/poster/poster';
+
 const app = getApp();
 Page({
   /**
@@ -18,21 +20,15 @@ Page({
     appNowTime: app.signindata.appNowTime,
     // 判断是ios或者android
     iftriosorand: app.signindata.iftriosorand, 
-    avatarUrl: app.signindata.avatarUrl,    
-    // 授权弹框
-    tgabox: false,   
+    avatarUrl: app.signindata.avatarUrl,      
     headhidden:true, 
     movies: [],
     // 商品详情数据
     zunmdata:{},
-    // 拆单用户数据
-    uinfodata:{},
     // 倒计时
     countdown:'',
     // 一级弹框背景
     tipback:false,
-    // 点赞变化
-    gttu:false,
     // 拆单数量
     numberofdismantling:1,
     // 拆单弹框显示隐藏
@@ -42,8 +38,6 @@ Page({
     textpbiftrtext:'已成功加入购物车',
     // 价格明细显示隐藏
     pricedetailc:true,
-    // 协议radio
-    radioagreement:true,
     // 选择弹框
     buybombsimmediately:false,
     // 二级背景
@@ -85,8 +79,6 @@ Page({
     defaultinformation:'',
     // 后台返回总价格
     payment:'',
-    // 支付弹框
-    paymentiftr:false,
     // 应付金额
     amountpayable:'0.00',
     // 使用抽盒金后应付金额
@@ -141,8 +133,6 @@ Page({
     // 统计邀请
     rec_goods_id: 0,
     rec_cart_id: 0,
-    // 生成分享图片
-    snapshot: '',
     // group_id 数据 列表id
     href: '',
     isVideoSwiper:false,
@@ -196,10 +186,6 @@ Page({
     c_backcolor:'#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc'),
     othershop:[],
-    // 是否授权
-    windowHeight: app.signindata.windowHeight - 65 - wx.getStorageSync('statusBarHeightMc') || 0,
-    tgabox: false,
-    signinlayer: false,
     is_share: false,
     detailSwiperindex:0,
     // 直播房间id
@@ -249,9 +235,107 @@ Page({
     mpmBulletFrame:false,  
     guidanceMask:false,
     proTipTrue:false,
-    commodityAgreement:false
+    commodityAgreement:false,
 
+
+
+    // 画布
+    userinfo: {},
+    QRcode_img: '',
+    posterConfig: {},
+    savepic: '',
+    tgfrShareIftr:false,
   },
+
+/**
+   * 异步生成海报
+   */
+  onCreatePoster() {
+    var _this = this;
+    var zunmdata = this.data.zunmdata || {};
+    wx.showLoading({
+      title: '生成中...',
+    })
+    // setData配置数据
+    _this.setData({
+      posterConfig: {
+        width: 900,
+        height: 740,
+        debug: false,
+        // pixelRatio: 1000,
+        preload: false,
+        hideLoading: false,
+        backgroundColor: '#ccc',
+        blocks: [{
+          x: 200,
+          y: 30,
+          width: 600,
+          height: 670,
+          backgroundColor:'#fff',
+          zIndex: 1,
+          borderRadius: 20,
+        }],
+        texts: [{
+          x: 228,
+          y: 82,
+          baseLine: 'middle',
+          width:490,
+          lineNum:1,
+          text:zunmdata.gname, // 品牌名
+          fontSize: 36,
+          textAlign: 'left',
+          color: '#000',
+          zIndex: 3,
+        }],
+        images: [
+          {  // 头像
+            x: 80,
+            y: 30,
+            url: zunmdata.brand.brandLogo,
+            width: 90,
+            height:90,
+            zIndex:2,
+            borderRadius:10,
+          },{  // banner
+            x: 228,
+            y: 120,
+            url: zunmdata.goods_thumb,
+            width: 544,
+            height:544,
+            zIndex: 3
+          },{  // 三角
+            x: 178,
+            y: 60,
+            url: 'https://cdn.51chaidan.com/images/brandInfoIcon/goodsLeftArrow.png',
+            width: 30,
+            height:30,
+            zIndex: 3
+          }]
+      }
+    }, () => {
+      Poster.create();
+    });
+  },
+  onPosterFail(e){
+    wx.hideLoading()
+    this.setData({
+      savepic: 'https://cdn.51chaidan.com/images/shareImg/shareImgStyle.png'
+    });
+  },
+  onPosterSuccess(e) {
+    wx.hideLoading()
+    const {
+      detail
+    } = e;
+    console.log(detail)
+    this.setData({
+      savepic: detail
+    });
+  },
+
+  // 画布结束 
+
+
   commdargee(){
       this.setData({
           commodityAgreement:!this.data.commodityAgreement
@@ -643,22 +727,16 @@ Page({
   // 抽盒机详情页 
   addresssmokebox: function (event) {
     var gid = event.currentTarget.dataset.gid || event.target.dataset.gid;
-    wx.navigateTo({
-      url: "/pages/smokebox/smokebox?gid=" + gid
-    });
+    app.comjumpwxnav(9005,gid,'');
   },
   // 抽盒机详情页 
   crowdfundingfun: function (event) {
     var gid = event.currentTarget.dataset.gid || event.target.dataset.gid;
-    wx.navigateTo({
-      url:"/page/component/pages/crowdfunding/crowdfunding?aid=" + gid,
-    });
+    app.comjumpwxnav(9013,gid,'');
   },
   // vip 页面
   jumpVipPage: function (event) {
-    wx.navigateTo({  
-      url: "/page/secondpackge/pages/vipPage/vipPage"
-    })
+    app.comjumpwxnav(9021,gid,'');
   },
   //时间戳转换时间  
   toDatehd: function (number) {
@@ -930,39 +1008,7 @@ Page({
     }
     return lineWidth
   },
-  /**
-   * 生成截图
-   */
-  getSnapshot: function () {
-    var _this = this;
-    wx.getImageInfo({
-      src: _this.data.zdyurl + _this.data.zunmdata.goods_share,
-      success: function (res) {
-        const ctx = wx.createCanvasContext('snapshot')
-        let dw = 300
-        // let dh = 180
-        let dh = 260
-        var width = res.width
-        var height = res.height
-        var scale = height / dh
-        ctx.setFillStyle('#fff')
-        ctx.fillRect(0, 0, dw, 240)
-        ctx.drawImage(res.path, (dw - width / scale) / 2, 0, width / scale, dh);
-        ctx.draw(true, setTimeout(function () {
-          wx.canvasToTempFilePath({
-            canvasId: 'snapshot',
-            success: function (res) {
-              _this.setData({
-                snapshot: res.tempFilePath
-              })
-            },
-            fail: function (res) {
-            },
-          });
-        }, 300));
-      }
-    })
-  },
+
   // 监听scrolltop高度
   articelScroll:function(w){
     this.setData({
@@ -989,12 +1035,6 @@ Page({
       url: "/pages/myorder/myorder?tabnum=0"
     });        
   }, 
-  // 返回首页
-  returntothehomepage:function(){
-    wx.reLaunch({
-      url: "/pages/index/index"
-    });
-  },
   passWOnBlur:function(){
     console.log('失去焦点')
     var _this = this;
@@ -1074,10 +1114,6 @@ Page({
   // 提交订单
   placeorder:function(){
     var _this = this;
-    if (!this.data.radioagreement){
-      app.showToastC('请同意并接受协议');
-      return false;
-    };
     // 验证地址
     if (this.data.tipaid == '') {
       app.showToastC('请选择地址');
@@ -1204,7 +1240,6 @@ Page({
             couponprojectile: false,
             cart_id: res.data.Info.cart_id,
             hamount: res.data.Info.amount,
-            paymentiftr:false,
             payment: res.data.Info.amount,
           });
           // 微信支付
@@ -1215,7 +1250,6 @@ Page({
             buybombsimmediately: false,                        
             tipback: false,
             dsbframeiftr: false,
-            paymentiftr: false, 
             // 优惠券清空
             tipcoupon: '请选择优惠券',
             coudata1cid: '',
@@ -1253,23 +1287,7 @@ Page({
       }
     })
   },
-  // 点击取消支付页
-  paymentboxheadfun:function(){
-    var _this = this;
-    wx.showModal({
-      title: '确定放弃支付吗？',
-      content: '个人中心-我的订单-继续支付\n付款成功后，才可以拆单成功',
-      success: function (res) {
-        if (res.confirm) {
-          _this.setData({
-            tipback: false,
-            dsbframeiftr: false,
-            paymentiftr: false,
-          })
-        }
-      }
-    }) 
-  },
+
   // 支付尾款
   paythebalance:function(){
     var _this = this;
@@ -1320,7 +1338,6 @@ Page({
                         buybombsimmediately: false,                        
                         tipback: false,
                         dsbframeiftr: false,
-                        paymentiftr: false, 
                         // 优惠券清空
                         tipcoupon: '请选择优惠券',
                         coudata1cid: '',
@@ -1341,8 +1358,7 @@ Page({
                     var gsale = zunmdata.gsale || '0';
                     var goods_share = zunmdata.gimages[0] || '0';
                     var pre_name = zunmdata.pre_name || '0';
-                    var ds = zunmdata.ds || '0';                    
-                    var snapshot = _this.data.snapshot || '';
+                    var ds = zunmdata.ds || '0';
                     var sharename = _this.data.zunmdata.goodsDesc ||'';
                     var title = '分享给你一个实用好物，[' + sharename + ']更便宜！';
 
@@ -1390,7 +1406,6 @@ Page({
                         tipbacktwo: false,
                         buybombsimmediately: false,
                         dsbframeiftr: false,
-                        paymentiftr: false,
                         // 优惠券清空
                         tipcoupon: '请选择优惠券',
                         coudata1cid: '',
@@ -1781,11 +1796,7 @@ Page({
       var gid = w.currentTarget.dataset.gid || w.target.dataset.gid;
       console.log(gid,_this.data.gid)
       if (gid != '' && gid != 0 && gid != _this.data.gid && gid) {
-        // _this.setData({gid: gid});
-        // _this.adjdatagid();
-        wx.redirectTo({
-          url: "/pages/detailspage/detailspage?gid=" + gid
-        });        
+        app.comjumpwxnav(1,gid,'');        
       }; 
   },
   // 颜色尺寸根据gid不同从新加载数据
@@ -1827,12 +1838,6 @@ Page({
               quantityofgoods:999
             });            
           };
-          // 是否点赞
-          if (res.data.Ginfo.praise == 1) {
-            _this.data.gttu=true;
-          } else {
-            _this.data.gttu=false;
-          }
           // 是否是多件装
           var issuit = [];
           if (res.data.Ginfo.is_suit == 1) {
@@ -1888,63 +1893,7 @@ Page({
       receivingaddress: false
     });
   },
-  // 点赞变化
-  gttufun: function () {
-    var _this = this;
-     if (this.data.gttu){
-       var q = Dec.Aese('mod=thumbs&operation=down&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&gid=' + _this.data.gid)
-       wx.request({
-         url: app.signindata.comurl + 'goods.php'+q,
-         method: 'GET',
-         header: { 'Accept': 'application/json' },
-         success: function (res) {
-           if (res.data.ReturnCode == 200) {
-             var numzum = _this.data.zunmdata;
-             numzum.gpraise = parseInt(numzum.gpraise) - 1;  
-             _this.data.gttu=!_this.data.gttu;     
-             _this.setData({
-               zunmdata:numzum
-             });             
-             app.showToastC('取消点赞');
-           };
-           if (res.data.ReturnCode == 100) {
-            app.showToastC('该商品已下架');
-           };
-           if (res.data.ReturnCode == 918) {
-            app.showToastC('未关注过该商品');
-           };                      
-           // 判断非200和登录
-           Dec.comiftrsign(_this, res, app);           
-         },
-       });
-     }else{
-       var qq = Dec.Aese('mod=thumbs&operation=up&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&gid=' + _this.data.gid)
-       wx.request({
-         url: app.signindata.comurl + 'goods.php'+qq,
-         method: 'GET',
-         header: { 'Accept': 'application/json' },
-         success: function (res) {
-           if (res.data.ReturnCode == 200) {
-             var numzum = _this.data.zunmdata;
-             numzum.gpraise = parseInt(numzum.gpraise) + 1    
-             _this.data.gttu=!_this.data.gttu;
-             _this.setData({
-               zunmdata: numzum
-             });               
-             app.showToastC('提交成功');
-           };
-           if (res.data.ReturnCode == 100) {
-            app.showToastC('该商品已下架');
-           };
-           if (res.data.ReturnCode == 917) {
-            app.showToastC('已经为这个商品点赞');
-           };              
-           // 判断非200和登录
-           Dec.comiftrsign(_this, res, app);           
-         },
-       });
-     }
-  },
+  
   // 兑换input值
   coupondatafun:function(e){
     this.setData({
@@ -2443,26 +2392,10 @@ Page({
   // 一级背景
   tipbackdis:function(){
     var _this = this;
-    if (this.data.paymentiftr){
-      wx.showModal({
-        title:'确定放弃支付吗？',
-        content: '个人中心-我的订单-继续支付\n付款成功后，才可以拆单成功',
-        success: function (res) {
-          if (res.confirm) {
-            _this.setData({
-              tipback: false,
-              dsbframeiftr: false,
-              paymentiftr:false,
-            })
-          }
-        }
-      })       
-    }else{
-      _this.setData({
-        tipback: false,
-        dsbframeiftr: false,
-      })
-    }
+    _this.setData({
+      tipback: false,
+      dsbframeiftr: false,
+    })
   },
   // 二级背景函数
   tipbacktwo:function(){
@@ -2530,12 +2463,7 @@ Page({
 
 
   },
-  // 协议radio
-  radioagreement:function(){
-    this.setData({
-      radioagreement: !this.data.radioagreement
-    });
-  },
+
   // 编辑地址
   jumpeditaddress: function (event){
     var aid = event.target.dataset.aid || event.currentTarget.dataset.aid;
@@ -3028,8 +2956,6 @@ Page({
       isProduce: app.signindata.isProduce,
       isShareFun: app.signindata.isShareFun,
       defaultinformation:app.signindata.defaultinformation,
-      signinlayer: true,
-      tgabox: false
     });
     var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
     // 商品详情
@@ -3120,45 +3046,6 @@ Page({
       console.log('地址=======onloadfun====',_this.data.addressdata)
   };
 
-    //  收货地址
-    // _this.nextpagediao();
-
-
-    // 评论数据
-    // var qq = Dec.Aese('mod=comment&operation=getgoodcomment&gid=' + _this.data.gid + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
-    // wx.request({
-    //   url: app.signindata.comurl + 'user.php' + qq,
-    //   method: 'GET',
-    //   header: { 'Accept': 'application/json' },
-    //   success: function (res) {
-    //     if (res.data.ReturnCode == 200) {
-    //       var arrlist = res.data.List || [];
-    //       if (arrlist.length != 0) {
-    //         for (var i = 0; i < arrlist.length; i++) {
-    //           if (!app.signindata.reg.test(arrlist[i].headphoto)) {
-    //             arrlist[i].headphoto = _this.data.zdyurl + arrlist[i].headphoto;
-    //           }
-    //           arrlist[i].time = _this.toDate(arrlist[i].time);
-    //         };
-    //         // 点赞降序排列
-    //         arrlist.sort(_this.compare('praise', false))
-    //         _this.setData({
-    //           allcomlist: arrlist
-    //         })
-    //       }
-    //     } else {
-    //       _this.setData({
-    //         allcomlist: [],
-    //       })
-    //     };
-    //     // 判断非200和登录
-    //     Dec.comiftrsign(_this, res, app);
-    //   }
-    // });
-    // if (_this.data.isProduce){
-    //   // 晒单数据
-    //   _this.delpostdata(0);
-    // };
   },
   detailfunshop:function(){
     var _this = this;
@@ -3184,20 +3071,6 @@ Page({
             welvalue:true,
             specialGoods:dataGinfo.specialGoods // 特殊商品  手机壳
           })
-
-          if(!dataGinfo.isGoodsCanShare && _this.data.canShare!=1){
-            console.log('isGoodsCanShare','true 能 false不能分享')
-            wx.hideShareMenu();
-            if(!_this.data.referee){
-               _this.toogleGuidanceMask();
-            };
-          }else{
-            if(dataGinfo.isGoodsCanShare){
-              wx.showShareMenu();
-            }else{
-              wx.showShareMenu({withShareTicket:true});
-            }; 
-          };
 
 
           if (!reg.test(res.data.Ginfo.goods_thumb)) {
@@ -3292,12 +3165,7 @@ Page({
             };
             iftrnum = false;
           };
-          // 是否点赞
-          if (res.data.Ginfo.praise == 1) {
-            _this.data.gttu= true;
-          } else {
-            _this.data.gttu=false;
-          }
+
           // 是否是多件装
           var issuit = [];
           if (res.data.Ginfo.is_suit == 1) {
@@ -3379,6 +3247,23 @@ Page({
                 _this.previewVideo();
               };
           });
+
+          if(!dataGinfo.isGoodsCanShare && _this.data.canShare!=1){
+            console.log('isGoodsCanShare','true 能 false不能分享')
+            wx.hideShareMenu();
+            _this.setData({isShareFun : false});
+            if(!_this.data.referee){
+               _this.toogleGuidanceMask();
+               // 生成图片
+               _this.onCreatePoster()
+            };
+          }else{
+            if(dataGinfo.isGoodsCanShare){
+              wx.showShareMenu();
+            }else{
+              wx.showShareMenu({withShareTicket:true});
+            }; 
+          };
 
           // 赠品倒计时
           if(redauin.isGiveGoodsStatus == 2){
@@ -3610,8 +3495,7 @@ Page({
           // 云统计
           var clouddata = { act_id:'g'+_this.data.id, type: res.data.Ginfo.specialWay || 0 };
           app.cloudstatistics('activityStatistics', clouddata);
-          // 分享生成图片
-          _this.getSnapshot();
+
           // 生成图片
           // _this.sharefrind();
           // 是否能分享
@@ -3696,9 +3580,7 @@ Page({
       // 判断是否授权
       this.activsign();
     }else{
-      wx.reLaunch({  
-        url: "/pages/index/index"
-      });      
+      app.comjumpwxnav(998,'','');     
     };
   },
   // 购物券选中
@@ -3921,7 +3803,7 @@ Page({
       query:{
         'gid':_this.data.gid
       },
-      imageUrl:'https://cdn.51chaidan.com/'+_this.data.zunmdata.goods_share 
+      imageUrl:_this.data.zunmdata.goods_share 
     }
   },
   onShareAppMessage: function (options) {
@@ -3964,81 +3846,34 @@ Page({
       app.signindata.isProduce = true;  
       _this.detailfunshop();
     }else{
-      
-      wx.getSetting({
-        success: res => {
-          if (true) {
-            // '已经授权'
-            _this.setData({
-              loginid: app.signindata.loginid,
-              uid: app.signindata.uid,
-              openid: app.signindata.openid,
-              avatarUrl: app.signindata.avatarUrl,
-              isShareFun: app.signindata.isShareFun,
-              signinlayer: true,
-              tgabox: false
-            });
-            // 判断是否登录
-            if (_this.data.loginid != '' && _this.data.uid != '') {
-              _this.onLoadfun();
-            } else {
-              app.signin(_this);
-            }
-          } else {
-            _this.setData({
-              tgabox: false,
-              signinlayer: false
-            })
-            // '没有授权 统计'
-            app.userstatistics(7);
-            // 商品详情
-            _this.detailfunshop();
-          }
-        }
-      });  
+      // '已经授权'
+      _this.setData({
+        loginid: app.signindata.loginid,
+        uid: app.signindata.uid,
+        openid: app.signindata.openid,
+        avatarUrl: app.signindata.avatarUrl,
+        isShareFun: app.signindata.isShareFun,
+      });
+      // 判断是否登录
+      if (_this.data.loginid != '' && _this.data.uid != '') {
+        _this.onLoadfun();
+      } else {
+        app.signin(_this);
+      }  
     };    
   },  
-  pullupsignin: function () {
-    // // '没有授权'
-    this.setData({tgabox: true});
-  },
-  // 授权点击统计
-  clicktga: function () {app.clicktga(2)},  
-  clicktganone: function () {this.setData({ tgabox: false })},
-  // 点击登录获取权限
-  userInfoHandler: function (e) {
-    var _this = this;
-    wx.getSetting({
-      success: res => {
-        if (true) {
-          _this.setData({
-            signinlayer: true,
-            tgabox: false
-          });
-          _this.activsign();
-          // 确认授权用户统计
-          app.clicktga(4);          
-        }
-      }
-    });
-    if (e.detail.detail.userInfo) { } else {
-      app.clicktga(8)  //用户按了拒绝按钮
-    };
-  },
+
+ 
   // 跳转详情页 
   addressmanagement: function (event) {
     var gid = event.currentTarget.dataset.gid || event.target.dataset.gid;
-    wx.redirectTo({  
-      url: "/pages/detailspage/detailspage?gid=" + gid
-    });
+    app.comjumpwxnav(1,gid,'','');
   },
   // 跳转详情页 不关闭上一页 
   addressmanagementlastno: function (event) {
     this.setData({ tipback: false, dsbframeiftr: false });
     var gid = event.currentTarget.dataset.gid || event.target.dataset.gid;
-    wx.navigateTo({   
-      url: "/pages/detailspage/detailspage?gid=" + gid
-    })
+    app.comjumpwxnav(1,gid,'','')
   },   
   jumpecqdetail: function (w) {
       var id = w.currentTarget.dataset.id || w.target.dataset.id || '';
@@ -4055,19 +3890,6 @@ Page({
   inputChangePW: function (e) {
     this.setData({descpassword: e.detail.value});
   }, 
-
-  // 图片预览
-  previewImg: function (w) {
-    // var index = w.currentTarget.dataset.index || w.target.dataset.index||0;
-    // var imgArr = this.data.imgArr;
-    // wx.previewImage({
-    //   current: imgArr[index],    
-    //   urls: imgArr,               
-    //   success: function (res) { },
-    //   fail: function (res) { },
-    //   complete: function (res) { },
-    // })
-  },
 
   // 身份证号弹框取消事件
   idnumbbcenfun:function(){
@@ -4143,49 +3965,11 @@ Page({
     var item_type = w.currentTarget.dataset.item_type || w.target.dataset.item_type || 0;
     var wname = w.currentTarget.dataset.name || w.target.dataset.name || '美拆';
     // 公共跳转
-    this.comjumpwxnav(item_type, whref, wname);
+    app.comjumpwxnav(item_type, whref, wname);
   },
-  // 公共跳转
-  comjumpwxnav: function (item_type, whref, wname) {
-    if (item_type == 0) {
-      var url = encodeURIComponent(whref)
-      wx.navigateTo({    // 外部链接
-        url: "/page/component/pages/webview/webview?webview=" + url
-      });
-    } else if (item_type == 1) {
-      wx.navigateTo({    // 商品详情页
-        url: "/pages/detailspage/detailspage?gid=" + whref
-      });
-    } else if (item_type == 2 || item_type == 3) {
-      wx.navigateTo({    // 信息流
-        url: "/pages/classificationpage/classificationpage?" + whref + '&wtype=' + item_type + '&wname=' + wname
-      });
-    } else if (item_type == 4 || item_type == 5) {
-      wx.navigateTo({    // 瀑布流
-        url: "/pages/classificationpage/classificationpage?" + whref + '&wtype=' + item_type + '&wname=' + wname
-      });
-    } else if (item_type == 6 || item_type == 7) {
-      wx.navigateTo({    // 活动列表
-        url: "/page/component/pages/activitysharinglist/activitysharinglist"
-      });
-    } else if (item_type == 8) {
-      wx.navigateTo({    // 活动详情页
-        url: "/pages/activitydetailspage/activitydetailspage?id=" + whref
-      });
-    } else if (item_type == 9) {
-      wx.navigateTo({    //签到
-        url: "/page/component/pages/newsignin/newsignin"
-      });
-    } else if (item_type == 998) {
-      wx.reLaunch({    //签到
-        url: "/pages/index/index?judgeprof=2"
-      });
-    };
-  },
+  
   wshoppingCart: function () {
-    wx.redirectTo({
-      url: "/pages/shoppingCart/shoppingCart"
-    });
+    app.comjumpwxnav(9058, '', '');
   },  
   // 导航跳转 
   wnews: function () {
@@ -4194,15 +3978,11 @@ Page({
   }, 
   // 导航跳转
   whomepage: function () {
-    wx.reLaunch({
-      url: "/pages/index/index?judgeprof=2"
-    });
+    app.comjumpwxnav(998,'','');
   },
   wmy: function () {
     app.signindata.iftr_mc = true;
-    wx.redirectTo({
-      url: "/pages/wode/wode"
-    });
+    app.comjumpwxnav(9059,'','');
   },
   swiperchangeindex: function (detail){
     this.setData({
@@ -4301,9 +4081,7 @@ Page({
     });
   },
   dlfindfun: function () {
-    wx.reLaunch({
-      url: "/page/component/pages/dlfind/dlfind",
-    })
+    app.comjumpwxnav(993,'','');
   }, 
   // 晒单加载更多 
   delpostdatamore: function () {
@@ -4649,15 +4427,9 @@ Page({
   },
   // 跳转定位
   jumpposition:function(w){
-    wx.navigateTo({
-      url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
-    });
+    app.comjumpwxnav(9022,'','');
   },
-  jumpMapFun(){
-    wx.navigateTo({ 
-      url: "/page/secondpackge/pages/canvasRoute/canvasRoute"
-    });
-  },
+
   SaveCard: function(e) {
     let that = this;
     console.log('保存');

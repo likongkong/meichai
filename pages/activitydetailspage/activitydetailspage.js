@@ -706,9 +706,7 @@ closefrindcommoni:function(){
   },  
   swfcanimgcouone:function(){
     if (this.data.couponType==2){
-      wx.navigateTo({
-        url: "/pages/smokeboxlist/smokeboxlist",
-      });
+      app.comjumpwxnav(988,'','');
     }else{
       wx.navigateTo({
         url: "/pages/classificationpage/classificationpage?cate=5&cid=57&wtype=3&wname=潮玩",
@@ -1019,14 +1017,10 @@ closefrindcommoni:function(){
       if (prevpage.route == '/page/component/pages/activitysharinglist/activitysharinglist') {
         wx.navigateBack();
       } else {
-        wx.redirectTo({
-          url: "/page/component/pages/activitysharinglist/activitysharinglist"
-        });
+        app.comjumpwxnav(6,'','');
       };
     } else {
-      wx.redirectTo({
-        url: "/page/component/pages/activitysharinglist/activitysharinglist"
-      });
+      app.comjumpwxnav(6,'','');
     };
     this.setData({
       wsh:false,
@@ -2304,9 +2298,7 @@ closefrindcommoni:function(){
               title: '提示',
               content: '活动id有误',
               success: function (res) {
-                wx.reLaunch({
-                  url: "/pages/index/index?judgeprof=2"
-                });
+                app.comjumpwxnav(998,'','');
               }
             });
         };
@@ -2373,9 +2365,7 @@ closefrindcommoni:function(){
         });
         this.activsign();
       } else {
-        wx.reLaunch({
-          url: "/pages/index/index"
-        });
+        app.comjumpwxnav(998,'','');
       };
     }else{
       var newDate = new Date();
@@ -2400,9 +2390,7 @@ closefrindcommoni:function(){
         });
         this.activsign();
       } else {
-        wx.reLaunch({
-          url: "/pages/index/index"
-        });
+        app.comjumpwxnav(998,'','');
       };
     };
   },
@@ -3006,9 +2994,7 @@ closefrindcommoni:function(){
           } else if (res.data.ReturnCode == 321) {
               app.showToastC('拆币不足');
               setTimeout(function(){
-                wx.navigateTo({    //签到
-                  url: "/page/component/pages/newsignin/newsignin"
-                });
+                app.comjumpwxnav(9,'','');
               },1500);
           }else if (res.data.ReturnCode == 302) {
             app.showToastC('今天报名次数已达到上限');
@@ -3150,9 +3136,7 @@ closefrindcommoni:function(){
             _this.onLoadfun();
           } else {
             //  跳转至活动列表 
-            wx.redirectTo({
-              url: "/page/component/pages/activitysharinglist/activitysharinglist"
-            });
+            app.comjumpwxnav(6,'','');
           };
 
           _this.setData({
@@ -3290,9 +3274,7 @@ closefrindcommoni:function(){
   },
   // 返回首页
   returntothehomepage: function () {
-    wx.reLaunch({
-      url: "/pages/index/index"
-    });
+    app.comjumpwxnav(998,'','');
     this.paymentcompletionwimg();
   },
   // 查看订单
@@ -3305,9 +3287,7 @@ closefrindcommoni:function(){
   // 跳转详情页 
   addressmanagement: function (event) {
     var gid = event.currentTarget.dataset.gid || event.target.dataset.gid;
-    wx.navigateTo({
-      url: "/pages/detailspage/detailspage?gid=" + gid
-    });
+    app.comjumpwxnav(1,gid,'');
   },  
   // 抽盒机详情页 
   addresssmokebox: function (event) {
@@ -3612,44 +3592,13 @@ closefrindcommoni:function(){
   },
   // 公共跳转
   comjumpwxnav: function (item_type, whref, wname) {
-    if (item_type == 0) {
-      var url = encodeURIComponent(whref)
-      wx.navigateTo({    // 外部链接
-        url: "/page/component/pages/webview/webview?webview=" + url
-      });
-    } else if (item_type == 1) {
-      wx.navigateTo({    // 商品详情页
-        url: "/pages/detailspage/detailspage?gid=" + whref
-      });
-    } else if (item_type == 2 || item_type == 3) {
-      wx.navigateTo({    // 信息流
-        url: "/pages/classificationpage/classificationpage?" + whref + '&wtype=' + item_type + '&wname=' + wname
-      });
-    } else if (item_type == 4 || item_type == 5) {
-      wx.navigateTo({    // 瀑布流
-        url: "/pages/classificationpage/classificationpage?" + whref + '&wtype=' + item_type + '&wname=' + wname
-      });
-    } else if (item_type == 6 || item_type == 7) {
-      wx.navigateTo({    // 活动列表
-        url: "/page/component/pages/activitysharinglist/activitysharinglist"
-      });
-    } else if (item_type == 8) {
-      wx.navigateTo({    // 活动详情页
-        url: "/pages/activitydetailspage/activitydetailspage?id=" + whref
-      });
-    } else if (item_type == 9) {
-      wx.navigateTo({    //签到
-        url: "/page/component/pages/newsignin/newsignin"
-      });
-    } else if (item_type == 998){
-      wx.reLaunch({    //签到
-        url: "/pages/index/index?judgeprof=2"
-      });
-    } else if (item_type == 996) {
+    if (item_type == 996) {
       this.setData({
         awatip:true,
         awardrresentiftr:false
       })
+    }else{
+      app.comjumpwxnav(item_type, whref, wname)
     };
   },
   // 额外奖励
@@ -3813,9 +3762,7 @@ closefrindcommoni:function(){
     };
   },
   jumpsigntask:function(){
-    wx.navigateTo({    //签到
-      url: "/page/component/pages/newsignin/newsignin"
-    });
+    app.comjumpwxnav(9,'','');
   },
   // 生成分享图片
   generatePictures:function(){
@@ -5062,14 +5009,10 @@ closefrindcommoni:function(){
   },
   wmy: function () {
     app.signindata.iftr_mc = true;
-    wx.redirectTo({
-      url: "/pages/wode/wode"
-    });
+    app.comjumpwxnav(9059,'','');
   },
   wshoppingCart: function () {
-    wx.redirectTo({
-      url: "/pages/shoppingCart/shoppingCart"
-    });
+app.comjumpwxnav(9058, '', '');
   }, 
   // 导航跳转 
   wnews: function () {
@@ -5078,9 +5021,7 @@ closefrindcommoni:function(){
   },
   // 导航跳转
   whomepage: function () {
-    wx.reLaunch({
-      url: "/pages/index/index?judgeprof=2"
-    });
+    app.comjumpwxnav(998,'','');
   },
   tgfrShareIftrFun:function(){
     this.setData({
@@ -5088,9 +5029,7 @@ closefrindcommoni:function(){
     })
   },
   dlfindfun: function () {
-    wx.reLaunch({
-      url: "/page/component/pages/dlfind/dlfind",
-    })
+    app.comjumpwxnav(993,'','');
   },
   awajump:function(){
     var cart_id = this.data.commoddata.cart_id || '';
@@ -5237,14 +5176,10 @@ closefrindcommoni:function(){
     });
   },
   bblistfun:function(){
-    wx.redirectTo({
-      url: "/pages/smokeboxlist/smokeboxlist",
-    });
+    app.comjumpwxnav(988,'','');
   },
   limitlottfun:function(){
-    wx.navigateTo({
-      url: "/page/component/pages/limitlotterylist/limitlotterylist",
-    });
+    app.comjumpwxnav(989,'','');
   },
   jumpdlflottery: function (event) {
     var id = event.currentTarget.dataset.id || event.target.dataset.id;

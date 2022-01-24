@@ -32,14 +32,13 @@ page{
 }
 .sCountstock{
   width: 100%;
-  height: 60rpx;
-  line-height: 60rpx;
-  color:#999495;
-  font-size: 24rpx;
   border-top: 1rpx solid #F5F5F5;
+  padding-bottom: 25rpx;
 }
-.sCountstock text{
+.sCountstockView{
   margin-left: 35rpx;
+  padding-top: 25rpx;
+  font-size: 24rpx;
 }
 .seckillName{
   color: #101010;
@@ -49,6 +48,8 @@ page{
   border-top: 1rpx solid #F5F5F5;
 }
 .sSaleTime{
+  height: 34rpx;
+  line-height: 34rpx;
   font-size: 24rpx;
   color:#178FF8;
   text-align:center;
@@ -103,30 +104,40 @@ page{
   margin:0 0 0 15rpx;
   vertical-align: top;
 }
-.emlhright{
+.emlhrightP{
   width:90rpx;
   height: 36rpx;
   text-align: center;
   line-height: 36rpx;
   color: #fff;
-  display: inline-block;
+  /* display: inline-block; */
   font-size: 24rpx;
   border-radius: 8rpx;
   background:#34A9ED;
   margin-left: 15rpx;
-  vertical-align: top;
+  /* vertical-align: top; */
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
 }
-.emlhrightNo{
+.emlhrightNoP{
   width:90rpx;
   height: 36rpx;
   text-align: center;
   line-height: 36rpx;
   color: #34A9ED;
-  display: inline-block;
+  /* display: inline-block; */
   font-size: 24rpx;
   border-radius: 8rpx;
   border:2rpx solid #34A9ED;
-  margin-left: 15rpx;
+  /* margin-left: 15rpx; */
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
 }
 
 .exhibdeimgBRRipos{
@@ -332,4 +343,21 @@ page{
   display: inline-block;
   padding-left: 60rpx;
   position: relative;
+}
+
+.intraGroupSale{
+  display: inline-block;
+  padding:0 8rpx;
+  color: #fff;
+  font-size: 20rpx;
+  background:linear-gradient(to right,#92e8f9,#6ab0ec);
+  border-radius: 6rpx;
+  margin-left: 20rpx;
+  height: 34rpx;
+  line-height: 34rpx;
+}
+.intraGroupSaleTxt{
+  height: 34rpx;
+  line-height: 34rpx;
+  display: inline-block;
 }

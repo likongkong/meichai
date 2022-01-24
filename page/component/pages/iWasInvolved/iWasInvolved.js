@@ -33,9 +33,7 @@ Page({
     isShowVote:(Date.parse(new Date())/1000)<=1607702399?true:false
   },
   jumpVipPage(){
-    wx.navigateTo({  
-      url: "/page/secondpackge/pages/vipPage/vipPage"
-    })
+    app.comjumpwxnav(9021,'','');
   },
   toggleAwardFun(){
     this.setData({

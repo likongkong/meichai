@@ -187,9 +187,7 @@ Page({
   },
 
   gojigsaw: function() {
-    wx.reLaunch({
-      url: "/pages/index/index",
-    })
+    app.comjumpwxnav(998,'','');
   },
 
   gojigsawDetail: function(w) {
@@ -382,9 +380,7 @@ Page({
 
   gosignin: function() {
     this.dialogClick();
-    wx.navigateTo({ //签到
-      url: "/page/component/pages/newsignin/newsignin"
-    });
+    app.comjumpwxnav(9,'','');
   },
 
   golist: function() {

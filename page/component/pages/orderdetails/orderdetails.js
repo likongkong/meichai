@@ -461,9 +461,7 @@ Page({
         url: "/page/secondpackge/pages/aRewardDetails/aRewardDetails?id=" + activity_id
       });
     } else{
-      wx.navigateTo({    
-        url: "../../../../pages/detailspage/detailspage?gid=" + gid
-      })
+      app.comjumpwxnav(1,gid,'');
     }     
 
   },
@@ -572,14 +570,12 @@ Page({
               }; 
             };
 
-
             _this.setData({
               isShareGood:isShareGood,
               comdata: res.data.Info,
               id: res.data.Info.gid,
               subscribedata: res.data.Info.subscribe,
             })
-            
           };
         };
         if (res.data.ReturnCode == 800) {
@@ -881,9 +877,7 @@ Page({
   },
   // 返回首页
   returntothehomepage: function () {
-    wx.reLaunch({    
-      url: "../../../../pages/index/index"
-    });
+    app.comjumpwxnav(998,'','');
     this.paymentcompletionwimg();
   },
   // 取消付款
@@ -1184,49 +1178,13 @@ vipOrOrdermine1(){
   },
   // 公共跳转
   comjumpwxnav: function (item_type, whref, wname) {
-    if (item_type == 0) {
-      var url = encodeURIComponent(whref)
-      wx.navigateTo({    // 外部链接
-        url: "/page/component/pages/webview/webview?webview=" + url
-      });
-    } else if (item_type == 1) {
-      wx.navigateTo({    // 商品详情页
-        url: "../../../../pages/detailspage/detailspage?gid=" + whref
-      });
-    } else if (item_type == 2 || item_type == 3) {
-      wx.navigateTo({    // 信息流
-        url: "../../../../pages/classificationpage/classificationpage?" + whref + '&wtype=' + item_type + '&wname=' + wname
-      });
-    } else if (item_type == 4 || item_type == 5) {
-
-      wx.navigateTo({    // 瀑布流
-        url: "../../../../pages/classificationpage/classificationpage?" + whref + '&wtype=' + item_type + '&wname=' + wname
-      });
-    } else if (item_type == 6 || item_type == 7) {
-      wx.navigateTo({    // 活动列表
-        url: "/page/component/pages/activitysharinglist/activitysharinglist"
-      });
-    } else if (item_type == 8) {
-      wx.navigateTo({    // 活动详情页
-        url: "../../../../pages/activitydetailspage/activitydetailspage?id=" + whref
-      });
-    } else if (item_type == 9) {
-      wx.navigateTo({    //签到
-        url: "/page/component/pages/newsignin/newsignin"
-      });
-    } else if (item_type == 998) {
-      wx.reLaunch({    //签到
-        url: "../../../../pages/index/index?judgeprof=2"
-      });
-    } else if (item_type == 996) {
+    if (item_type == 996) {
       this.setData({
         awatip: true,
         awardrresentiftr:false
       })
-    } else if (item_type == 9054) {   // 取件信息
-      wx.navigateTo({
-        url: `/page/settled/pages/delivery/delivery?${whref}`
-      });      
+    } else {   // 取件信息
+      app.comjumpwxnav(item_type, whref, wname)     
     };
   },  
   // 跳转邀请页面
@@ -1319,9 +1277,7 @@ vipOrOrdermine1(){
   },
 
   acetlistfun: function () {
-    wx.redirectTo({
-      url: "/page/component/pages/activitysharinglist/activitysharinglist"
-    });
+    app.comjumpwxnav(6,'','');
     this.setData({
       wsh: false,
       awardrresentiftr: false
@@ -1532,9 +1488,7 @@ vipOrOrdermine1(){
   },    
   // 跳转首页
   frontpagebutton: function () {
-    wx.reLaunch({
-      url: "../../../../pages/index/index?judgeprof=2"
-    })
+    app.comjumpwxnav(998,'','');
   },  
   // 生成图片
   generatePictures: function (qrcode, awardinfo, cover) {
@@ -2641,9 +2595,7 @@ vipOrOrdermine1(){
   goodsetail: function (w) {
     var _this = this;
     var gid = w.currentTarget.dataset.gid || w.target.dataset.gid || '';
-    wx.navigateTo({
-      url: "../../../../pages/detailspage/detailspage?gid=" + gid
-    })
+    app.comjumpwxnav(1,gid,'');
   },
 
   personalhomepage: function (w) {
@@ -2996,20 +2948,14 @@ vipOrOrdermine1(){
 
 
   dlfindfun: function () {
-    wx.reLaunch({
-      url: "/page/component/pages/dlfind/dlfind",
-    })
+    app.comjumpwxnav(993,'','');
   },
   // 导航跳转
   whomepage: function () {
-    wx.reLaunch({
-      url: "../../../../pages/index/index?judgeprof=2"
-    })
+    app.comjumpwxnav(998,'','');
   },
   wmy: function () {
-    wx.reLaunch({
-      url: "../../../../pages/wode/wode"
-    });
+    app.comjumpwxnav(9059,'','');
   },
   // 更新用户信息
   getUserProfileRefund(w){
@@ -3078,14 +3024,14 @@ vipOrOrdermine1(){
         });
     })
   },
-
-
-
-
-
-
-
-
-
+  
+  // 领取红包封面
+  showRedPackage(e){
+    wx.showRedPackage({
+      url:e.currentTarget.dataset.key,
+      success: (res) => {
+       }
+    })
+  },
 
 })

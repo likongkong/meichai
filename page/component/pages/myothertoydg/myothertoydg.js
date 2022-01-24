@@ -809,9 +809,7 @@ Page({
     if (prevpage) {
       wx.navigateBack();
     } else {
-      wx.redirectTo({
-        url: "/pages/smokeboxlist/smokeboxlist",
-      });
+      app.comjumpwxnav(988,'','');
     };
   },
   /**
@@ -1492,15 +1490,11 @@ Page({
 
   // 导航跳转
   whomepage: function () {
-    wx.reLaunch({
-      url: "/pages/index/index?judgeprof=2"
-    });
+    app.comjumpwxnav(998,'','');
   },
 
   dlfindfun: function () {
-    wx.reLaunch({
-      url: "/page/component/pages/dlfind/dlfind",
-    })
+    app.comjumpwxnav(993,'','');
   },
 
   // 导航跳转 
@@ -1510,16 +1504,12 @@ Page({
   },
 
   wshoppingCart: function () {
-    wx.redirectTo({
-      url: "/pages/shoppingCart/shoppingCart"
-    });
+    app.comjumpwxnav(9058, '', '');
   },
 
   wmy: function () {
     app.signindata.iftr_mc = true;
-    wx.redirectTo({
-      url: "/pages/wode/wode"
-    });
+    app.comjumpwxnav(9059,'','');
   },
 
   // 立即购买弹框

@@ -143,6 +143,16 @@ Page({
       phoneNumber: this.data.courierData.PersonTel
     })
   },
+  // 复制单号
+  copyCart(w){
+    var cart = w.currentTarget.dataset.cart || w.target.dataset.cart || '';
+    wx.setClipboardData({
+      data: cart || '',
+      success: function (res) {
+        app.showToastC('复制成功');
+      }
+    });
+  },
    // 查看详情
    getShowSendBack(type=0){
     var _this = this;
@@ -194,6 +204,7 @@ Page({
                 deliveryType:res.data.List.type,
                 audit_status:res.data.List.audit_status,
                 courierData:res.data.List.courierData,
+                shippingInfo:res.data.List.shippingInfo,
                 support_value:res.data.List.support_value,
                 takePhone:res.data.List.courierData.length!=0?util.plusXing(res.data.List.courierData.PersonTel,3,4):'',
               })

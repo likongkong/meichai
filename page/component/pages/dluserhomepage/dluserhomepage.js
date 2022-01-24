@@ -66,9 +66,7 @@ Page({
         url: "/pages/smokebox/smokebox?gid=" + goods_id,
       });
     }else{
-      wx.navigateTo({
-        url: "../../../../pages/detailspage/detailspage?gid=" + goods_id,
-      });
+      app.comjumpwxnav(1,goods_id,'');
     }  
   },
   // 拉起订阅
@@ -351,24 +349,16 @@ Page({
   },
   // 导航跳转
   whomepage: function () {
-    wx.reLaunch({
-      url: "../../../../pages/index/index?judgeprof=2"
-    })
+    app.comjumpwxnav(998,'','');
   },
   wmy: function () {
-    wx.reLaunch({
-      url: "../../../../pages/wode/wode"
-    });
+    app.comjumpwxnav(9059,'','');
   },
   wshoppingCart: function () {
-    wx.reLaunch({
-      url: "../../../../pages/shoppingCart/shoppingCart"
-    });
+    app.comjumpwxnav(9058, '', '');
   },
   dlfindfun: function () {
-    wx.reLaunch({
-      url: "/page/component/pages/dlfind/dlfind",
-    })
+    app.comjumpwxnav(993,'','');
   },
   // 计算图片大小
   imageLoad: function (e) {
