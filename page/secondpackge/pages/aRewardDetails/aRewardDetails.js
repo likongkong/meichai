@@ -862,7 +862,7 @@ Page({
             isUseBlindboxMoney:res.data.Info.deduct.isDeduct?true:false,
             isDeductNum:res.data.Info.deduct.isDeduct&&_this.data.blindboxMoney!=0?1:0,
             subscribedata: res.data.Info.subscribe,
-            // infoSales : res.data.Info.sales
+            infoSales : res.data.Info.sales
           })
           var allDeductMoney = Number(parseFloat((activity.suplusNum*activity.shopPrice)*_this.data.deductRatio).toFixed(3).slice(0,-1));
           var tenDeductMoney = Number(parseFloat((10*activity.shopPrice)*_this.data.deductRatio).toFixed(3).slice(0,-1));
@@ -1018,6 +1018,7 @@ Page({
           wx.hideLoading()
           _this.getOrderRecord();
           _this.queuefun(2,4);
+          _this.listdata();
           _this.setData({
             isOrderMask:false
           })

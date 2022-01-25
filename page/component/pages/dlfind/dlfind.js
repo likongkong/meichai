@@ -48,7 +48,7 @@ Page({
     adbanner: [],
     // 隐藏返现数据
     moneyback: [],
-    c_title: '发现',
+    c_title: '品牌',
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,

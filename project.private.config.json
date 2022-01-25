@@ -410,8 +410,8 @@
           "scene": null
         },
         {
-          "name": "",
-          "pathName": "page/settled/pages/brandManagement/brandManagement",
+          "name": "新年活动",
+          "pathName": "page/settled/pages/newYearRedPacket/newYearRedPacket",
           "query": "",
           "scene": null
         },

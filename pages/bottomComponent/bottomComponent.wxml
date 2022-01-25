@@ -29,7 +29,7 @@
 						<image wx:else class='navigationltopimg' src='https://clw.51chaidan.com//images/goods/find1.png'></image>
 						<view class='tabshopimg specialellipsis' wx:if='{{dryinglistnum>0}}' style='left:88rpx;'>{{dryinglistnum}}</view>
 					</view>
-					<view class='navigationlcon' style='{{dlfind?"color:#fd2844":""}}'>发现</view>
+					<view class='navigationlcon' style='{{dlfind?"color:#fd2844":""}}'>品牌</view>
 				</view>		
 		</block>
 
