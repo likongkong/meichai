@@ -36,8 +36,9 @@ page{
   margin: 30rpx 0;
 } */
 .progressWrap{
-  padding: 30rpx 90rpx 0;
+  padding: 30rpx 90rpx 50rpx;
   box-sizing: border-box;
+  background: #fff;
 }
 .progressEmpiricalValue text{
   font-size: 32rpx;
@@ -46,6 +47,7 @@ page{
 .progressEmpiricalValue{
   font-size: 26rpx;
   color: #b0b0b0;
+  height: 50rpx;
 }
 .progressEmpiricalBox{
   display: flex;
@@ -93,7 +95,7 @@ page{
 }
 .sonPogress text{
   display: block;
-  width: 20%;
+  width: 0;
   height: 12rpx;
   background: linear-gradient(to right,#f4b073,#e96360);
   position: absolute;
@@ -105,7 +107,7 @@ page{
 }
 
 .awardWrap{
-  padding: 76rpx 24rpx 0 24rpx;
+  padding: 26rpx 24rpx 0 24rpx;
   box-sizing: border-box;
 }
 .awardTitle{
@@ -123,11 +125,13 @@ page{
 .item{
   width: 340rpx;
   margin-bottom: 32rpx;
+  background: #fff;
+  border-radius: 16rpx;
 }
 .item image{
   width: 100%;
   height: 340rpx;
-  border-radius: 16rpx;
+  border-radius:16rpx 16rpx 0 0;
 }
 .item view{
   color: #101010;
@@ -349,18 +353,16 @@ page{
 }
 
 .activityRulesBox{
-  background: linear-gradient(to right,#92e8f9,#6ab0ec);
+  background:#6ab0ec;
   width: 120rpx;
-  height: 50rpx;
-  line-height: 50rpx;
+  height: 46rpx;
+  line-height: 46rpx;
   text-align: center;
   font-size: 24rpx;
-  position: fixed;
-  top: 220rpx;
-  right: 0;
-  z-index: 6;
-  border-radius: 50rpx 0 0 50rpx;
+  float: right;
+  border-radius: 16rpx;
   color: #fff;
+  position: relative;
 }
 .nyarulebox{
   padding: 0 30rpx;

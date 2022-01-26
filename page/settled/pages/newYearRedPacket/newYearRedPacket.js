@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    newdataexh:Date.parse(new Date())/1000,
     c_title: '新年好礼', 
     c_arrow: true,
     c_backcolor: '#ff2742',
@@ -21,6 +22,12 @@ Page({
     listData:'',
     NewYearSctivitiesTip:false,
     SCBoxTip:false,
+    bottomButton:false
+  },
+  SCBoxTipFunButton(e){
+    app.getUserProfile((res,userInfo) => {
+        this.SCBoxTipFun();      
+    },'',1)
   },
   SCBoxTipFun(){
     this.setData({
@@ -51,14 +58,18 @@ Page({
         wx.stopPullDownRefresh();
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
-          app.showToastC(res.data.Msg || res.data.msg)
+          app.showModalC(res.data.Msg || res.data.msg)
         }else if(res.data.ReturnCode == 800){}else{
-          app.showToastC(res.data.Msg || res.data.msg)
+          app.showModalC(res.data.Msg || res.data.msg)
         }
       }
     }); 
   },
-
+  fiveLevelBulletFrameButton(e){
+    app.getUserProfile((res,userInfo) => {
+        this.fiveLevelBulletFrameData(); 
+    },'',1)
+  },
   // 五级弹框数据
   fiveLevelBulletFrameData(){
     var _this = this;
@@ -140,8 +151,32 @@ Page({
         }
       }
     }); 
-  },
 
+    // 拉起订阅
+    _this.StartReminder();
+
+
+  },
+  StartReminder(){
+      var _this = this;
+      // 拉起订阅
+      var subscribedata = _this.data.subscribedata || '';
+      if (subscribedata && subscribedata.template_id && app.signindata.subscribeif) {
+        if (subscribedata.template_id instanceof Array) {
+          wx.requestSubscribeMessage({
+            tmplIds: subscribedata.template_id || [],
+            success(res) {
+              for (var i = 0; i < subscribedata.template_id.length; i++) {
+                if (res[subscribedata.template_id[i]] == "accept") {
+                  app.subscribefun(_this, 1, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+                };
+              };
+            },
+            complete() { }
+          })
+        };
+      };
+  },
   // 领取 奖品 
   receivePrizes(w){
     var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
@@ -162,11 +197,11 @@ Page({
         wx.stopPullDownRefresh();
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
-          app.showToastC(res.data.Msg || res.data.msg)
+          app.showModalC(res.data.Msg || res.data.msg)
           _this.getInfo();
          
         }else{
-          app.showToastC(res.data.Msg || res.data.msg) 
+          app.showModalC(res.data.Msg || res.data.msg) 
         }
       }
     }); 
@@ -188,7 +223,6 @@ Page({
 
   getInfo(){
     var _this = this;
-
 
     wx.showLoading({ title: '加载中...',mask:true})
 
@@ -219,15 +253,20 @@ Page({
             isDetailsMask:false,
             fiveLevelBulletFrame:false,
             SCBoxTip:false,
-            speedOfProgress
+            bottomButton:true,
+            speedOfProgress,
+            subscribedata:res.data.Info.subscribe || ''
           },()=>{
-             var active = res.data.List.active || [];
-             for(var i=0;i<active.length;i++){
-                 if(active[i].is_rece == 1){
-                    _this.jumpTask();
-                    break;
-                 };
-             };
+            if(res.data.Info.is_display_active){
+              var active = res.data.List.active || [];
+              for(var i=0;i<active.length;i++){
+                  if(active[i].is_rece == 1){
+                     _this.jumpTask();
+                     break;
+                  };
+              };
+            }
+
           })
          
         }else{

@@ -7,6 +7,9 @@
   <view class="progressWrap" wx:if='{{listData}}'>
     <view class="progressEmpiricalValue">
       <text>{{listData.speed.userExper}}/</text>{{listData.speed.upExper}}经验值
+
+      <view class="activityRulesBox" style="margin-left:30rpx;">分享好友<button open-type="share" class='shareButton'></button></view>
+      <view class="activityRulesBox" catchtap="NewYearSctivitiesTipFun">活动规则</view>
     </view>
     <view class="progressEmpiricalBox">
       <view class="awardThumb">
@@ -30,7 +33,7 @@
         <text>Lv {{listData.speed.list[1].grade}}</text>
       </view>
       <block wx:if='{{listData.speed.grade < 3}}'>
-          <view class="sonPogress" style="background: linear-gradient(to right,#fde6ba,#ffffff);"></view>
+          <view class="sonPogress" style="background: linear-gradient(to right,#fde6ba,#F5F5F5);"></view>
       </block>
       <block wx:else>
           <view class="sonPogress">
@@ -46,13 +49,14 @@
       </view>
     </view>
   </view>
+  
   <view class="awardWrap" wx:if='{{listData}}'> 
     <text class="awardTitle">好礼简介，点击查看详情</text>
     <view class="awardItems">
         <block wx:for='{{listData.award}}' wx:key='key' wx:if="{{listData.award.length != (index+1)}}">
             <view class="item" catchtap="displayDetailTip" data-ind='{{index}}'>
                 <image src="{{item.img}}" mode="aspectFit"></image>
-                <view>
+                <view style="padding:10rpx 16rpx 16rpx;">
                   <text>{{item.grade_text}}好礼</text>{{item.title}}
                 </view>
             </view>
@@ -61,55 +65,74 @@
     <view class="fiveAwardItem">
         <view class="item" catchtap="displayDetailTip" data-ind='{{(listData.award.length-1)}}'>
           <image src="{{listData.award[listData.award.length-1].img}}" mode="aspectFit"></image>
-          <view>
+          <view style="padding:10rpx 16rpx 16rpx;">
             <text>{{listData.award[listData.award.length-1].grade_text}} </text>{{listData.award[listData.award.length-1].title}}
           </view>
         </view>
     </view>
   </view>
-  <view class="taskWrap" id='task' wx:if='{{listData}}'> 
-    <view class="taskTitle">做任务，解锁/升级当前礼品</view>
-    <view class="taskItems">
-        <block wx:for='{{listData.active}}' wx:key='key'>
-            <view class="taskItem">
-                <view class="taskItemTxt">
-                  <text>{{item.title}}</text>
-                  <text>{{item.description}}</text>
-                </view>
-                <block wx:if='{{item.is_rece == 0}}'>
+  
+  <block wx:if='{{infoData.is_display_active && infoData.rece_status != 2}}'>
+      <view class="taskWrap" id='task' wx:if='{{listData}}'> 
+        <view class="taskTitle">做任务，解锁/升级当前礼品</view>
+        <view class="taskItems">
+            <block wx:for='{{listData.active}}' wx:key='key'>
+                <view class="taskItem">
+                    <view class="taskItemTxt">
+                      <text>{{item.title}}</text>
+                      <text>{{item.description}}</text>
+                    </view>
+                    <block wx:if='{{item.is_rece == 0}}'>
 
-                    <block wx:if='{{item.type == 98}}'>
-                        <view class="taskBtn invitation" catchtap="receiveTask" data-type='{{item.type}}' data-itemtype='{{item.jump}}'>签到</view>
+                        <block wx:if='{{item.type == 98}}'>
+                            <view class="taskBtn invitation" catchtap="receiveTask" data-type='{{item.type}}' data-itemtype='{{item.jump}}'>签到</view>
+                        </block>
+                        <block wx:elif='{{item.type == 99}}'>
+                            <view class="taskBtn invitation">
+                                <button open-type="share" class='shareButton'></button>去邀请
+                            </view>
+                        </block>
+                        <block wx:elif='{{item.type == 14 || item.type == 21}}'>
+                            <view class="taskBtn invitation" catchtap="jumptaskDeail" data-type='{{item.type}}' data-itemtype='{{item.jump}}'>去购买</view>
+                        </block>
                     </block>
-                    <block wx:elif='{{item.type == 99}}'>
-                        <view class="taskBtn invitation">
-                            <button open-type="share" class='shareButton'></button>去邀请
-                        </view>
+                    <block wx:elif='{{item.is_rece == 1}}'>
+                        <view class="taskBtn blueBtn" catchtap="receiveTask" data-type='{{item.type}}'>领取</view>
                     </block>
-                    <block wx:elif='{{item.type == 14 || item.type == 21}}'>
-                        <view class="taskBtn invitation" catchtap="jumptaskDeail" data-type='{{item.type}}' data-itemtype='{{item.jump}}'>去购买</view>
+                    <block wx:elif='{{item.is_rece == 2}}'>
+                        <view class="taskBtn done">已完成</view>
                     </block>
-                </block>
-                <block wx:elif='{{item.is_rece == 1}}'>
-                    <view class="taskBtn blueBtn" catchtap="receiveTask" data-type='{{item.type}}'>领取</view>
-                </block>
-                <block wx:elif='{{item.is_rece == 2}}'>
-                    <view class="taskBtn done">已完成</view>
-                </block>
-            </view>
-        </block>
-    </view>
-  </view>
-  <view class="footerWrapFix" wx:if='{{infoData}}'> 
+                </view>
+            </block>
+        </view>
+      </view>
+  </block>
+  <view class="footerWrapFix" wx:if='{{bottomButton}}'> 
     <view class="footerWrapFixTxt">该活动只能领取一次礼品，做任务可以升级礼包哦</view>
     <view class="footerWrap">
-        <view class="{{infoData.rece_status==1?'blueBtn':''}}" wx:if="{{infoData}}">
-            <block wx:if='{{infoData.rece_status == 0 || infoData.rece_status == 1}}'>领取Lv{{listData.speed.grade}}礼品</block>
-            <block wx:else>已领取</block>
-            <view wx:if='{{infoData.rece_status==1 && listData.speed.grade == 5}}' class="footerWrapPosition" catchtap="fiveLevelBulletFrameData"></view>
-            <view wx:elif='{{infoData.rece_status==1 && listData.speed.grade != 5}}' class="footerWrapPosition"  catchtap="SCBoxTipFun"></view>
-        </view>
-        <view class="blueBtn" catchtap="jumpTask">新年任务</view>
+        <block wx:if='{{newdataexh < infoData.start_time_active}}'>
+            <view class="blueBtn" catchtap="StartReminder" style="background: #E68327 !important;">活动开始提醒</view>
+        </block>
+        <block wx:else>
+            <view class="{{infoData.rece_status==1?'blueBtn':''}}" wx:if="{{infoData}}">
+                <block wx:if='{{infoData.rece_status == 0 || infoData.rece_status == 1}}'>
+                    <block wx:if='{{listData.speed.grade == 0}}'>领取Lv1礼品</block>
+                    <block wx:else>领取Lv{{listData.speed.grade}}礼品</block>
+                </block>
+                <block wx:else>已领取</block>
+                <view wx:if='{{infoData.rece_status==1 && listData.speed.grade == 5}}' class="footerWrapPosition">
+                  <!-- catchtap="fiveLevelBulletFrameData" -->
+                    <button class='shareButton' type='primary' bindtap="fiveLevelBulletFrameButton"></button>
+                </view>
+                <view wx:elif='{{infoData.rece_status==1 && listData.speed.grade != 5}}' class="footerWrapPosition">
+                  <!-- catchtap="SCBoxTipFun" -->
+                  <button class='shareButton' type='primary' bindtap="SCBoxTipFunButton"></button>
+                </view>
+            </view>
+            <view class="blueBtn" catchtap="jumpTask" wx:if='{{infoData.is_display_active && infoData.rece_status != 2}}'>新年任务</view>
+        </block> 
+
+
     </view>
 
 
@@ -195,10 +218,6 @@
   </view>
 </view>
 
-
-<view class="activityRulesBox" catchtap="NewYearSctivitiesTipFun">活动规则</view>
-
-<view class="activityRulesBox" style="top:300rpx;">分享好友<button open-type="share" class='shareButton'></button></view>
 
 
 <view class="wshNew" catchtouchmove="true" wx:if='{{NewYearSctivitiesTip}}' catchtap="NewYearSctivitiesTipFun">

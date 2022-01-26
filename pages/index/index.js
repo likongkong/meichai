@@ -925,6 +925,7 @@ Page({
               nodataiftr: true,
               movies: banlist||[],
               toyshowTicket:List.toyshowTicket || '',
+              newYearActivities:List.newYearActivities || ''
             });
 
         };    

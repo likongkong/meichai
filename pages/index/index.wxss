@@ -361,3 +361,12 @@
   height: 100%;
   line-height: 24rpx;
 }
+
+.newYearActivities{
+  width: 120rpx;
+  height: 120rpx;
+  position: fixed;
+  right: 18rpx;
+  bottom: 140rpx;
+  z-index: 6;
+}

@@ -90,6 +90,9 @@
 		<image class='winningthepimg' src='http://www.51chaidan.com/images/FreeSheet/WinningThePrize.png'></image>
 	</view>
  
+
+	<image src="{{newYearActivities}}" wx:if='{{newYearActivities}}' data-item_type='9060' data-href='' catchtap='imgcomindellistjump' class="newYearActivities"></image>
+
 	 <!-- 测试  -->
 	<!-- <view style='height:220rpx;width:100%;text-align:center; display: table;position: relative;' class='rotate' catchtap='jumpxinxi'>
 		<text style='display: table-cell;vertical-align:middle;text-align:center;'>测试跳转</text>
