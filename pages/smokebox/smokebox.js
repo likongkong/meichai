@@ -903,7 +903,7 @@ Page({
           if (activityData.refreshTime && activityData.status == 2) {
             if (_this.data.recordtime == 0 || activityData.refreshTime >= _this.data.recordtime) {
               _this.setData({
-                recordtime: activityData.refreshTime + (parseInt(activityData.aheadUser) * 2)
+                recordtime: parseInt(activityData.refreshTime) + (parseInt(activityData.aheadUser) * 2)
               })
             }
             var timestamp = Date.parse(new Date()) / 1000
@@ -1001,6 +1001,8 @@ Page({
   countdown: function () {
     var _this = this;
     clearInterval(_this.data.timer)
+    console.log(_this.data.recordtime,777777)
+
     _this.data.timer = setInterval(function () {
       //将时间传如 调用 
       _this.dateformat(_this.data.recordtime);
@@ -1173,7 +1175,7 @@ Page({
             var timestamp = Date.parse(new Date()) / 1000;
             console.log(res.data.Info.selfReFreshTime > timestamp,res.data.Info.selfReFreshTime,timestamp)
             if (res.data.Info.selfReFreshTime > timestamp) {
-              _this.data.recordtime = res.data.Info.selfReFreshTime;
+              _this.data.recordtime = parseInt(res.data.Info.selfReFreshTime);
               _this.countdown();
             }
             wx.hideLoading()
@@ -1994,6 +1996,10 @@ Page({
     var timestamp = Date.parse(new Date())
     //总的秒数 
     var second = parseInt(micro_second) - (timestamp / 1000);
+    // console.log(parseInt(micro_second),777777)
+    // console.log(timestamp / 1000,8888888)
+    // console.log(parseInt(micro_second) - (timestamp / 1000),999999999)
+
     // console.log('second=====',micro_second,(timestamp / 1000),second)
     if (second > 0) {
       _this.setData({
