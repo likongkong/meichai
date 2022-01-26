@@ -24,7 +24,7 @@ page {
   right: 6rpx;
   top:6rpx;
   border-radius: 8rpx;
-  background: linear-gradient(#92e8f9,#6ab0ec);
+  background: #e94f57;
   font-size: 20rpx;
 }
 .bgstyle {

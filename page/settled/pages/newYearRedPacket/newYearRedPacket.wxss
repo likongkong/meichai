@@ -56,9 +56,9 @@ page{
 
 .awardThumb image{
   width: 100rpx;
-  height: auto;
+  height: 100rpx;
   display: block;
-  border-radius: 100%;
+  border-radius: 16rpx;
   border: 4rpx solid #FFDB8B;
 }
 .awardThumb text{
@@ -66,6 +66,17 @@ page{
   text-align: center;
   font-size: 28rpx;
   color: #101010;
+}
+.sonPogressBox{
+  width: 102%;
+  height: 20rpx;
+  position: absolute;
+  top: 0;
+  left: -1%;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background: #fde6ba;
 }
 .sonPogress{
   width: 146rpx;
@@ -90,7 +101,7 @@ page{
   top: 0;
   bottom: 0;
   margin: auto;
-  border-radius:0 6rpx 6rpx 0;
+  border-radius:0 4rpx 4rpx 0;
 }
 
 .awardWrap{
@@ -116,6 +127,7 @@ page{
 .item image{
   width: 100%;
   height: 340rpx;
+  border-radius: 16rpx;
 }
 .item view{
   color: #101010;
@@ -268,6 +280,7 @@ page{
   width: 100%;
   height: 200rpx;
   display: block;
+  border-radius: 16rpx;
 }
 .detailsItem text{
   margin: 12rpx 0;
@@ -335,8 +348,81 @@ page{
   background: #B3B0B0;
 }
 
+.activityRulesBox{
+  background: linear-gradient(to right,#92e8f9,#6ab0ec);
+  width: 120rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  font-size: 24rpx;
+  position: fixed;
+  top: 220rpx;
+  right: 0;
+  z-index: 6;
+  border-radius: 50rpx 0 0 50rpx;
+  color: #fff;
+}
+.nyarulebox{
+  padding: 0 30rpx;
+  width: 500rpx;
+  height: 700rpx;
+  background:#fff;
+  border-radius: 16rpx;
+}
+.nyaruleboxHead{
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 28rpx;
+}
+.nyaruleboxSv{
+  width: 100%;
+  height: 500rpx;
+  font-size: 24rpx;
+}
+.nyaruleboxBottom{
+  width: 400rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  background: #6ab0ec;
+  text-align: center;
+  font-size: 24rpx;
+  color: #fff;
+  margin: 22rpx auto 0;
+  border-radius: 70rpx;
+}
 
+.SCBox{
+  width: 500rpx;
+  height: 330rpx;
+  background: #fff;
+  border-radius: 16rpx;
+}
+.SCBoxTxt{
+  padding: 40rpx;
+  font-size: 28rpx;
+  line-height: 50rpx;
+}
+.SCBoxBottom{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+}
 
+.SCBoxBottom>view{
+  width: 200rpx;
+  height: 60rpx;
+  border-radius: 60rpx;
+  font-size: 26rpx;
+  text-align: center;
+  line-height: 60rpx;
+  border: 2rpx solid #5CA7FE;
+  color: #5CA7FE;
+  margin: 0 10rpx;
+  position: relative;
+}
 
 
 

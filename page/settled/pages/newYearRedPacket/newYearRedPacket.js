@@ -18,35 +18,46 @@ Page({
     isDetailsMask:false,
     fiveLevelBulletFrame:false,
     infoData:{},
-    listData:''
+    listData:'',
+    NewYearSctivitiesTip:false,
+    SCBoxTip:false,
   },
+  SCBoxTipFun(){
+    this.setData({
+      SCBoxTip:!this.data.SCBoxTip
+    })
+  },
+  NewYearSctivitiesTipFun(){
+    this.setData({
+      NewYearSctivitiesTip:!this.data.NewYearSctivitiesTip
+    })
+  },
+  // 分享助力 
+  shereHelp(){
+    var _this = this;
+    wx.showLoading({ title: '加载中...',mask:true})
 
-// 分享助力 
-shereHelp(){
-  var _this = this;
-  wx.showLoading({ title: '加载中...',mask:true})
+    var q = Dec.Aese('mod=experience&operation=share&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid+'&help_id='+_this.data.helpid);
 
-  var q = Dec.Aese('mod=experience&operation=share&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid+'&help_id='+_this.data.helpid);
+    console.log('mod=experience&operation=share&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid+'&help_id='+_this.data.helpid)
 
-  console.log('mod=experience&operation=share&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid+'&help_id='+_this.data.helpid)
-
-  wx.request({
-    url: app.signindata.comurl + 'yearExper.php'+q,
-    method: 'GET',
-    header: { 'Accept': 'application/json' },
-    success: function (res) {
-      console.log('分享助力======',res)
-      // 刷新完自带加载样式回去
-      wx.stopPullDownRefresh();
-      wx.hideLoading();
-      if (res.data.ReturnCode == 200) {
-        app.showToastC(res.data.Msg || res.data.msg)
-      }else if(res.data.ReturnCode == 800){}else{
-        app.showToastC(res.data.Msg || res.data.msg)
+    wx.request({
+      url: app.signindata.comurl + 'yearExper.php'+q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('分享助力======',res)
+        // 刷新完自带加载样式回去
+        wx.stopPullDownRefresh();
+        wx.hideLoading();
+        if (res.data.ReturnCode == 200) {
+          app.showToastC(res.data.Msg || res.data.msg)
+        }else if(res.data.ReturnCode == 800){}else{
+          app.showToastC(res.data.Msg || res.data.msg)
+        }
       }
-    }
-  }); 
-},
+    }); 
+  },
 
   // 五级弹框数据
   fiveLevelBulletFrameData(){
@@ -181,9 +192,9 @@ shereHelp(){
 
     wx.showLoading({ title: '加载中...',mask:true})
 
-    var q = Dec.Aese('mod=experience&operation=getYearActiveData&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&shareUId=' + _this.data.share_uid);
+    var q = Dec.Aese('mod=experience&operation=getYearActiveData&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&shareUId=' + _this.data.helpid);
 
-    console.log('mod=experience&operation=getYearActiveData&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&shareUId=' + _this.data.share_uid)
+    console.log('mod=experience&operation=getYearActiveData&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&shareUId=' + _this.data.helpid)
 
     wx.request({
       url: app.signindata.comurl + 'yearExper.php'+q,
@@ -196,8 +207,7 @@ shereHelp(){
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
           var speed = res.data.List.speed
-          var speedOfProgress = (speed.userExper / speed.upExper) * 100;
-          var speedOfProgress = 60;
+          var speedOfProgress = (parseInt(speed.userExper) / parseInt(speed.upExper)) * 100;
 
           console.log(speedOfProgress)
           if(speedOfProgress > 100){
@@ -208,6 +218,7 @@ shereHelp(){
             listData:res.data.List || [],
             isDetailsMask:false,
             fiveLevelBulletFrame:false,
+            SCBoxTip:false,
             speedOfProgress
           })
          

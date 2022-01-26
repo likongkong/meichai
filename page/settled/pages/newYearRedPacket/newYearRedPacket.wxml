@@ -10,33 +10,38 @@
     </view>
     <view class="progressEmpiricalBox">
       <view class="awardThumb">
-        <image src="{{listData.speed.list[0].img}}" mode="widthFix"></image>
+        <image src="{{listData.speed.list[0].img}}" mode="aspectFit"></image>
         <text>Lv {{listData.speed.list[0].grade}}</text>
       </view>
       <view class="sonPogress"> 
-        <block wx:if='{{listData.speed.grade < 4}}'>
-            <text style="width:{{speedOfProgress}}%;"></text>
-        </block>
-        <block wx:else>
-            <text style="width:100%;"></text>
-        </block>
+         <view class="sonPogressBox">
+            <block wx:if='{{listData.speed.grade < 4}}'>
+                <text style="width:{{speedOfProgress}}%;"></text>
+            </block>
+            <block wx:else>
+                <text style="width:100%;"></text>
+            </block>         
+         </view>
+
         
       </view>
       <view class="awardThumb">
-        <image src="{{listData.speed.list[1].img}}" mode="widthFix"></image>
+        <image src="{{listData.speed.list[1].img}}" mode="aspectFit"></image>
         <text>Lv {{listData.speed.list[1].grade}}</text>
       </view>
       <block wx:if='{{listData.speed.grade < 3}}'>
-          <view class="sonPogress" style="background: linear-gradient(to right,#f4b073,#ffffff);"></view>
+          <view class="sonPogress" style="background: linear-gradient(to right,#fde6ba,#ffffff);"></view>
       </block>
       <block wx:else>
           <view class="sonPogress">
-            <block wx:if='{{listData.speed.grade >= 4}}'><text style="width:{{speedOfProgress}}%;"></text></block>
+              <view class="sonPogressBox">
+                  <block wx:if='{{listData.speed.grade >= 4}}'><text style="width:{{speedOfProgress}}%;"></text></block>
+              </view>
           </view>
       </block>
 
       <view class="awardThumb">
-        <image src="{{listData.speed.list[2].img}}" mode="widthFix"></image>
+        <image src="{{listData.speed.list[2].img}}" mode="aspectFit"></image>
         <text>Lv {{listData.speed.list[2].grade}}</text>
       </view>
     </view>
@@ -46,7 +51,7 @@
     <view class="awardItems">
         <block wx:for='{{listData.award}}' wx:key='key' wx:if="{{listData.award.length != (index+1)}}">
             <view class="item" catchtap="displayDetailTip" data-ind='{{index}}'>
-                <image src="{{item.img}}" mode="aspectFill"></image>
+                <image src="{{item.img}}" mode="aspectFit"></image>
                 <view>
                   <text>{{item.grade_text}}好礼</text>{{item.title}}
                 </view>
@@ -55,7 +60,7 @@
     </view>
     <view class="fiveAwardItem">
         <view class="item" catchtap="displayDetailTip" data-ind='{{(listData.award.length-1)}}'>
-          <image src="{{listData.award[listData.award.length-1].img}}" mode="aspectFill"></image>
+          <image src="{{listData.award[listData.award.length-1].img}}" mode="aspectFit"></image>
           <view>
             <text>{{listData.award[listData.award.length-1].grade_text}} </text>{{listData.award[listData.award.length-1].title}}
           </view>
@@ -98,11 +103,11 @@
   <view class="footerWrapFix" wx:if='{{infoData}}'> 
     <view class="footerWrapFixTxt">该活动只能领取一次礼品，做任务可以升级礼包哦</view>
     <view class="footerWrap">
-        <view class="{{infoData.rece_status==1?'blueBtn':''}}">
-            <block wx:if='{{infoData.rece_status == 0 || infoData.rece_status == 1}}'>领取当前礼品</block>
+        <view class="{{infoData.rece_status==1?'blueBtn':''}}" wx:if="{{infoData}}">
+            <block wx:if='{{infoData.rece_status == 0 || infoData.rece_status == 1}}'>领取Lv{{listData.speed.grade}}礼品</block>
             <block wx:else>已领取</block>
             <view wx:if='{{infoData.rece_status==1 && listData.speed.grade == 5}}' class="footerWrapPosition" catchtap="fiveLevelBulletFrameData"></view>
-            <view wx:elif='{{infoData.rece_status==1 && listData.speed.grade != 5}}' class="footerWrapPosition" catchtap="receivePrizes" data-ind='0'></view>
+            <view wx:elif='{{infoData.rece_status==1 && listData.speed.grade != 5}}' class="footerWrapPosition"  catchtap="SCBoxTipFun"></view>
         </view>
         <view class="blueBtn" catchtap="jumpTask">新年任务</view>
     </view>
@@ -111,15 +116,15 @@
   </view>
 
 
-  <view class="detailsMask" wx:if="{{fiveLevelBulletFrame}}" catchtap="fiveLevelBulletFrameFun">
+  <view class="detailsMask" catchtouchmove="true" wx:if="{{fiveLevelBulletFrame}}" catchtap="fiveLevelBulletFrameFun">
     <view class="detailsMaskBox" catchtap="true" style="height:1200rpx;">
       <view class="detailsMaskBoxTitle">5级新春好礼<image src='../../../../pages/images/forknumber.png' class='recgadheadimg' bindtap='fiveLevelBulletFrameFun'></image></view>
       <view class="detailsTitleBox">下列商品任选一件</view>
       <scroll-view scroll-y="true" class="NyRscrollView">
           <view class="NyRscrollViewEve" wx:for="{{fiveList}}" wx:key='key'>
-              <image src="{{item.role_img}}" class="NyRscrollViewEveImg" mode="aspectFill"></image>
+              <image src="{{item.role_img}}" class="NyRscrollViewEveImg" mode="aspectFit"></image>
               <view class="NyRscrollViewEveRgiht">
-                  <view class="disanum_sb_txtone multilineellipsis">{{item.goods_name}}</view>
+                  <view class="disanum_sb_txtone multilineellipsis">{{item.role_name ||item.goods_name}}</view>
                   <view class="disanum_sb_txtoneStyle" wx:if='{{item.role_name}}'>款式：{{item.role_name}}</view>
                   <view class="receiveFive {{item.stock > 0?'blueBtn':''}}" catchtap="{{item.stock > 0?'receivePrizes':''}}" data-ind='{{index}}'>领取</view>
               </view>
@@ -130,18 +135,21 @@
     </view>
   </view>
 
-  <view class="detailsMask" wx:if="{{isDetailsMask}}" catchtap="isDetailsMaskFun">
-    <view class="detailsMaskBox" catchtap="true">
+  <view class="detailsMask" catchtouchmove="true" wx:if="{{isDetailsMask}}" catchtap="isDetailsMaskFun">
+    <view class="detailsMaskBox" catchtap="true"  style="height:850rpx;">
       <view class="detailsMaskBoxTitle">{{awardDetail.grade_text}} 礼品详情<image src='../../../../pages/images/forknumber.png' class='recgadheadimg' bindtap='isDetailsMaskFun'></image></view>
-      <text class="detailsTitle">以下商品<block wx:if='{{awardDetail.grade_text=="L5"}}'>任选</block><block wx:else>随机</block>一款</text>
-      <view class="detailsItems">
-          <block wx:for="{{awardDetail.list}}" wx:key='key'>
-              <view class="detailsItem">
-                  <image src="{{item.role_img}}" mode="aspectFill"></image>
-                  <text>{{item.goods_name}}</text>
-              </view>
-          </block>
-      </view>
+      <text class="detailsTitle">以下商品<block wx:if='{{awardDetail.grade_text=="Lv5"}}'>任选</block><block wx:else>随机</block>一款</text>
+      <scroll-view scroll-y="true" style="width:100%;height:740rpx;">
+          <view class="detailsItems">
+              <block wx:for="{{awardDetail.list}}" wx:key='key'>
+                  <view class="detailsItem">
+                      <image src="{{item.role_img}}" mode="aspectFit"></image>
+                      <text>{{item.role_name || item.goods_name}}</text>
+                  </view>
+              </block>
+          </view>
+      </scroll-view>
+
     </view>
   </view>
 
@@ -188,8 +196,27 @@
 </view>
 
 
+<view class="activityRulesBox" catchtap="NewYearSctivitiesTipFun">活动规则</view>
+
+<view class="activityRulesBox" style="top:300rpx;">分享好友<button open-type="share" class='shareButton'></button></view>
 
 
-<tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
-<view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>
+<view class="wshNew" catchtouchmove="true" wx:if='{{NewYearSctivitiesTip}}' catchtap="NewYearSctivitiesTipFun">
+     <view class="nyarulebox" catchtap="true">
+          <view class="nyaruleboxHead">活动规则</view>
+          <scroll-view scroll-y="true" class="nyaruleboxSv">
+              <text>{{infoData.tips}}</text>
+          </scroll-view>
+          <view class="nyaruleboxBottom" catchtap="NewYearSctivitiesTipFun">确定</view>
+     </view>
+</view>
 
+<view class="wshNew" catchtouchmove="true" wx:if='{{SCBoxTip}}' catchtap="SCBoxTipFun">
+     <view class="SCBox" catchtap="true">
+          <view class="SCBoxTxt">该活动只可领取一次礼品哦，领取礼包后活动自动结束是否现在领取？</view>
+          <view class="SCBoxBottom">
+              <view catchtap="receivePrizes" data-ind='0'>现在领取</view>
+              <view class="blueBtn" catchtap="SCBoxTipFun">继续升级礼包</view>
+          </view>
+     </view>
+</view>
