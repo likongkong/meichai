@@ -3,13 +3,17 @@
 
 <view class="wrap">
   <image class="newyrBanner" src="https://cdn.51chaidan.com/images/icon/newYearActivityIcon.jpg" mode="widthFix"></image>
+  
   <!-- <view class="title">美拆新年送好礼</view> -->
   <view class="progressWrap" wx:if='{{listData}}'>
     <view class="progressEmpiricalValue">
       <text>{{listData.speed.userExper}}/</text>{{listData.speed.upExper}}经验值
-
-      <view class="activityRulesBox" style="margin-left:30rpx;">分享好友<button open-type="share" class='shareButton'></button></view>
-      <view class="activityRulesBox" catchtap="NewYearSctivitiesTipFun">活动规则</view>
+      <!-- <view class="activityRulesBox" style="margin-left:30rpx;">分享好友<button open-type="share" class='shareButton'></button></view>
+      <view class="activityRulesBox" catchtap="NewYearSctivitiesTipFun">活动规则</view> -->
+      <view class="fixedWrap">
+        <view class="activityRulesImgBox"><image src="https://cdn.51chaidan.com/images/brandInfoIcon/wxOpen.png" mode="widthFix"></image><button open-type="share" class='shareButton'></button></view>
+        <view class="activityRulesBox" catchtap="NewYearSctivitiesTipFun">活动规则</view>
+      </view>
     </view>
     <view class="progressEmpiricalBox">
       <view class="awardThumb">

@@ -2,6 +2,40 @@ page{
   padding-bottom: 210rpx;
   background: #F5F5F5;
 }
+.fixedWrap{
+  width: 250rpx;
+  height:56rpx;
+  position: absolute;
+  top: 24rpx;
+  right: 0;
+  /* background: #000; */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.activityRulesImgBox{
+  width: 56rpx;
+  height: 56rpx;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-right: 18rpx;
+}
+.fixedWrap image{
+  width: 100%;
+  height: auto;
+}
+.activityRulesBox{
+  width: 130rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  color: #fff;
+  background: #6ab0ec;
+  border-top-left-radius: 56rpx;
+  border-bottom-left-radius: 56rpx;
+  text-align: center;
+  font-size: 24rpx;
+}
 .newyrBanner{
   width: 100%;
   height: auto;
@@ -39,6 +73,7 @@ page{
   padding: 30rpx 90rpx 50rpx;
   box-sizing: border-box;
   background: #fff;
+  position: relative;
 }
 .progressEmpiricalValue text{
   font-size: 32rpx;
@@ -352,7 +387,7 @@ page{
   background: #B3B0B0;
 }
 
-.activityRulesBox{
+/* .activityRulesBox{
   background:#6ab0ec;
   width: 120rpx;
   height: 46rpx;
@@ -363,7 +398,7 @@ page{
   border-radius: 16rpx;
   color: #fff;
   position: relative;
-}
+} */
 .nyarulebox{
   padding: 0 30rpx;
   width: 500rpx;
@@ -425,6 +460,7 @@ page{
   margin: 0 10rpx;
   position: relative;
 }
+
 
 
 
