@@ -220,6 +220,14 @@ Page({
             fiveLevelBulletFrame:false,
             SCBoxTip:false,
             speedOfProgress
+          },()=>{
+             var active = res.data.List.active || [];
+             for(var i=0;i<active.length;i++){
+                 if(active[i].is_rece == 1){
+                    _this.jumpTask();
+                    break;
+                 };
+             };
           })
          
         }else{
@@ -441,7 +449,7 @@ Page({
       loginid: app.signindata.loginid,
     });  
     // 助力
-    if(_this.data.helpid){
+    if(_this.data.helpid && _this.data.helpid != _this.data.uid){
       _this.shereHelp();
     };
     _this.getInfo();
@@ -541,9 +549,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if (this.data.countdown) {
-      this.countdownbfun();
-    };
+      if (this.data.uid && this.data.loginid) {
+          this.getInfo();
+      };
   },
 
   /**
