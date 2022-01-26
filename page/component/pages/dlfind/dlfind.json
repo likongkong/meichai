@@ -1,7 +1,7 @@
 {
   "asdfasfdflePullDownRefresh": true,
   "enablePullDownRefresh": true,
-  "navigationBarTitleText": "发现",
+  "navigationBarTitleText": "品牌",
   "usingComponents": {
     "hidewindow": "../../../../pages/hidewindow/hidewindow",
     "t_f": "../../../../pages/topfunction/topfunction",

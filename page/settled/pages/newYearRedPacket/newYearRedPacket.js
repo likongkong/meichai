@@ -15,33 +15,204 @@ Page({
     tgabox:false,
     loginid: app.signindata.loginid,
     uid: app.signindata.uid,
-    isDetailsMask:true,
+    isDetailsMask:false,
+    fiveLevelBulletFrame:false,
+    infoData:{},
+    listData:''
   },
-  
 
-  getInfo(){
+// 分享助力 
+shereHelp(){
+  var _this = this;
+  wx.showLoading({ title: '加载中...',mask:true})
+
+  var q = Dec.Aese('mod=experience&operation=share&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid+'&help_id='+_this.data.helpid);
+
+  console.log('mod=experience&operation=share&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid+'&help_id='+_this.data.helpid)
+
+  wx.request({
+    url: app.signindata.comurl + 'yearExper.php'+q,
+    method: 'GET',
+    header: { 'Accept': 'application/json' },
+    success: function (res) {
+      console.log('分享助力======',res)
+      // 刷新完自带加载样式回去
+      wx.stopPullDownRefresh();
+      wx.hideLoading();
+      if (res.data.ReturnCode == 200) {
+        app.showToastC(res.data.Msg || res.data.msg)
+      }else if(res.data.ReturnCode == 800){}else{
+        app.showToastC(res.data.Msg || res.data.msg)
+      }
+    }
+  }); 
+},
+
+  // 五级弹框数据
+  fiveLevelBulletFrameData(){
     var _this = this;
-    wx.showLoading({ title: '加载中...'})
-    var q = Dec.Aese('mod=scratchCard&operation=info&id='+ _this.data.id +'&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&shareUId=' + _this.data.share_uid);
-    console.log(app.signindata.comurl + 'spread.php?mod=scratchCard&operation=info&id='+ _this.data.id +'&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&shareUId=' + _this.data.share_uid)
+    wx.showLoading({ title: '加载中...',mask:true})
+
+    var q = Dec.Aese('mod=experience&operation=fiveAward&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
+
+    console.log('mod=experience&operation=fiveAward&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+
     wx.request({
-      url: app.signindata.comurl + 'spread.php'+q,
+      url: app.signindata.comurl + 'yearExper.php'+q,
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
-        console.log('数据======',res)
+        console.log('五级弹框======',res)
         // 刷新完自带加载样式回去
         wx.stopPullDownRefresh();
         wx.hideLoading();
         if (res.data.ReturnCode == 200) {
+          
+          _this.setData({
+              fiveList:res.data.List.award || [],
+              fiveLevelBulletFrame:true,
+          });
          
         }else{
-          wx.showToast({
-            title: res.data.Msg,
-            icon: 'none',
-            mask:true,
-            duration:1000
-          });  
+          app.showToastC(res.data.Msg || res.data.msg) 
+        }
+      }
+    }); 
+  },
+  fiveLevelBulletFrameFun(){
+     this.setData({
+        fiveLevelBulletFrame:!this.data.fiveLevelBulletFrame
+     })
+  },
+  isDetailsMaskFun(){
+     this.setData({
+        isDetailsMask:!this.data.isDetailsMask
+     })
+  },
+  displayDetailTip(w){
+    var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
+    const { award } = this.data.listData;
+    this.setData({
+      awardDetail : award[ind] || []
+    })
+    this.isDetailsMaskFun();
+  },
+  jumptaskDeail(w){
+      var itemtype = w.currentTarget.dataset.itemtype || w.target.dataset.itemtype;
+      app.comjumpwxnav(itemtype,'','');
+  },
+  // 领取任务
+  receiveTask(w){
+    var type = w.currentTarget.dataset.type || w.target.dataset.type;
+    var _this = this;
+    wx.showLoading({ title: '加载中...',mask:true})
+
+    var q = Dec.Aese('mod=experience&operation=receExper&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=' + type);
+
+    console.log('mod=experience&operation=receExper&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=' + type)
+
+    wx.request({
+      url: app.signindata.comurl + 'yearExper.php'+q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('新年活动数据======',res)
+        // 刷新完自带加载样式回去
+        wx.stopPullDownRefresh();
+        wx.hideLoading();
+        if (res.data.ReturnCode == 200) {
+          app.showToastC(res.data.Msg || res.data.msg)
+          _this.getInfo();
+         
+        }else{
+          app.showToastC(res.data.Msg || res.data.msg)
+        }
+      }
+    }); 
+  },
+
+  // 领取 奖品 
+  receivePrizes(w){
+    var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
+    var _this = this;
+    wx.showLoading({ title: '加载中...',mask:true})
+
+    var q = Dec.Aese('mod=experience&operation=receiveReward&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&grade=' + _this.data.listData.speed.grade + '&key=' + ind);
+
+    console.log('mod=experience&operation=receiveReward&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&grade=' + _this.data.listData.speed.grade + '&key=' + ind)
+
+    wx.request({
+      url: app.signindata.comurl + 'yearExper.php'+q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('新年活动数据======',res)
+        // 刷新完自带加载样式回去
+        wx.stopPullDownRefresh();
+        wx.hideLoading();
+        if (res.data.ReturnCode == 200) {
+          app.showToastC(res.data.Msg || res.data.msg)
+          _this.getInfo();
+         
+        }else{
+          app.showToastC(res.data.Msg || res.data.msg) 
+        }
+      }
+    }); 
+  }, 
+
+  jumpTask(){
+    var query = wx.createSelectorQuery();
+    query.select('#task').boundingClientRect();
+    query.selectViewport().scrollOffset();
+    query.exec(function(res) {
+      if (res && res[0] && res[1]) {
+        wx.pageScrollTo({
+           scrollTop:res[0].top+res[1].scrollTop-app.signindata.statusBarHeightMc||99,
+           duration:300
+        })
+      }
+    });
+  },
+
+  getInfo(){
+    var _this = this;
+
+
+    wx.showLoading({ title: '加载中...',mask:true})
+
+    var q = Dec.Aese('mod=experience&operation=getYearActiveData&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&shareUId=' + _this.data.share_uid);
+
+    console.log('mod=experience&operation=getYearActiveData&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&shareUId=' + _this.data.share_uid)
+
+    wx.request({
+      url: app.signindata.comurl + 'yearExper.php'+q,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        console.log('新年活动数据======',res)
+        // 刷新完自带加载样式回去
+        wx.stopPullDownRefresh();
+        wx.hideLoading();
+        if (res.data.ReturnCode == 200) {
+          var speed = res.data.List.speed
+          var speedOfProgress = (speed.userExper / speed.upExper) * 100;
+          var speedOfProgress = 60;
+
+          console.log(speedOfProgress)
+          if(speedOfProgress > 100){
+            speedOfProgress = 100;
+          };
+          _this.setData({
+            infoData:res.data.Info || {},
+            listData:res.data.List || [],
+            isDetailsMask:false,
+            fiveLevelBulletFrame:false,
+            speedOfProgress
+          })
+         
+        }else{
+          app.showToastC(res.data.Msg || res.data.msg)
         }
       }
     }); 
@@ -219,12 +390,37 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  //key(需要检错的键） url（传入的需要分割的url地址）
+  getSearchString: function (key, Url) {
+
+    // 获取URL中?之后的字符
+    var str = Url;
+    var arr = str.split("&");
+    var obj = new Object();
+
+    // 将每一个数组元素以=分隔并赋给obj对象 
+    for (var i = 0; i < arr.length; i++) {
+      var tmp_arr = arr[i].split("=");
+
+      obj[decodeURIComponent(tmp_arr[0])] = decodeURIComponent(tmp_arr[1]);
+    }
+
+    return obj[key];
+  },
+
   onLoad: function (options) {
     // 判断是否授权
     var _this = this;
-    _this.data.share_uid = options.share_uid || 0
+
+    if (options.scene) {
+      let scene = decodeURIComponent(options.scene);
+      console.log('options========',scene,)
+      _this.data.helpid = _this.getSearchString('helpid', scene) || 0;
+    } else {
+      _this.data.helpid = options.helpid || 0;
+    };
     _this.activsign();
-    _this.countdownbfun();        
+       
     // this.onLoadfun(); 
   },
   onLoadfun:function(){
@@ -233,7 +429,12 @@ Page({
       uid: app.signindata.uid,
       loginid: app.signindata.loginid,
     });  
+    // 助力
+    if(_this.data.helpid){
+      _this.shereHelp();
+    };
     _this.getInfo();
+
     if(app.signindata.receivingAddress && app.signindata.receivingAddress.length != 0){
       var rdl = app.signindata.receivingAddress;
       var tptipadi = '';
@@ -256,7 +457,7 @@ Page({
         tipaddress: tptipadd
       })
       console.log('地址=======onloadfun====',_this.data.addressdata)
-  };
+    };
   },
   activsign: function () {
     // 判断是否授权 
@@ -266,38 +467,23 @@ Page({
       _this.onLoadfun();
       return false;
     };    
-    wx.getSetting({
-      success: res => {
-        if (true) {
-          // '已经授权'
-          _this.setData({
-            loginid: app.signindata.loginid,
-            uid: app.signindata.uid,
-            openid: app.signindata.openid,
-            avatarUrl: app.signindata.avatarUrl,
-            isShareFun: app.signindata.isShareFun,
-            isProduce: app.signindata.isProduce,
-            signinlayer: true,
-            tgabox: false
-          });
-          // 判断是否登录
-          if (_this.data.loginid != '' && _this.data.uid != '') {
-            _this.onLoadfun();
-          } else {
-            app.signin(_this);
-          }
-        } else {
-          _this.setData({
-            tgabox: false,
-            signinlayer: false
-          })
-          console.log()
-          // '没有授权 统计'
-          app.userstatistics(49);
-          _this.onLoadfun();
-        }
-      }
-    });      
+    // '已经授权'
+    _this.setData({
+      loginid: app.signindata.loginid,
+      uid: app.signindata.uid,
+      openid: app.signindata.openid,
+      avatarUrl: app.signindata.avatarUrl,
+      isShareFun: app.signindata.isShareFun,
+      isProduce: app.signindata.isProduce,
+      signinlayer: true,
+      tgabox: false
+    });
+    // 判断是否登录
+    if (_this.data.loginid != '' && _this.data.uid != '') {
+      _this.onLoadfun();
+    } else {
+      app.signin(_this);
+    };      
   },
   // 授权点击统计
   clicktga: function () {
@@ -412,25 +598,17 @@ Page({
   onShareAppMessage: function () {
     var _this = this;
     return {
-      title:_this.data.shareTitle,
-      path: "/page/secondpackge/pages/entityLuckyDraw/entityLuckyDraw?share_uid=" + _this.data.uid,
-      imageUrl:_this.data.shareImg  || 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
+      title:_this.data.infoData.share_title || '新年好礼',
+      path: "/page/settled/pages/newYearRedPacket/newYearRedPacket?helpid=" + _this.data.uid,
+      imageUrl:_this.data.infoData.share_img,
     }   
   },
   onShareTimeline:function(){
     var _this = this;
-
-    var indexShare = app.signindata.indexShare || [];
-    var indexShareNum = Math.floor(Math.random() * indexShare.length) || 0;
-    var indexShareImg = '';
-    if(indexShare.length!=0 && indexShare[indexShareNum]){
-      indexShareImg = indexShare[indexShareNum]+'?time=' + Date.parse(new Date());;
-    };
-
     return {
-      title:_this.data.shareTitle,
-      query:'share_uid='+_this.data.uid,
-      imageUrl:_this.data.shareImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
+      title:_this.data.infoData.share_title || '新年好礼',
+      query:'helpid='+_this.data.uid,
+      imageUrl:_this.data.infoData.share_img,
     }
   },  
 

@@ -1167,6 +1167,10 @@ App({
       wx.redirectTo({
         url: "/pages/wode/wode"
       });     
+    }else if(item_type == 9060){  // 新年活动
+      wx.redirectTo({
+        url: "/page/settled/pages/newYearRedPacket/newYearRedPacket"
+      });     
     }
   },
   // 中奖提示倒计时

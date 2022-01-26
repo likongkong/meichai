@@ -181,14 +181,14 @@ Page({
         wx.stopPullDownRefresh();
         console.log('一番赏列表 =========== ',res)
         if (res.data.ReturnCode == 200) {
-          // if(_this.data.page == 0){
-          //   // 春节福利
-          //   _this.setData({ infoSales : res.data.Info.sales || {}});
-          //   if(app.signindata.SFAARL && res.data.Info.sales){
-          //      _this.setData({commonBulletFrame:true})
-          //      app.signindata.SFAARL = false;
-          //   };
-          // };
+          if(_this.data.page == 0){
+            // 春节福利
+            _this.setData({ infoSales : res.data.Info.sales || {}});
+            if(app.signindata.SFAARL && res.data.Info.sales){
+               _this.setData({commonBulletFrame:true})
+               app.signindata.SFAARL = false;
+            };
+          };
           if(res.data.List.activity.length == 0 && _this.data.page == 0){
             _this.setData({ nodata : true})
           }else{

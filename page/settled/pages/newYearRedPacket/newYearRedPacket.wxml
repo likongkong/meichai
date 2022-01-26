@@ -2,132 +2,145 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 <view class="wrap">
-
-  <view class="title">美拆新年送好礼</view>
-  <view class="progressWrap">
+  <image class="newyrBanner" src="https://cdn.51chaidan.com/images/icon/newYearActivityIcon.jpg" mode="widthFix"></image>
+  <!-- <view class="title">美拆新年送好礼</view> -->
+  <view class="progressWrap" wx:if='{{listData}}'>
     <view class="progressEmpiricalValue">
-      <text>20/</text>100经验值
+      <text>{{listData.speed.userExper}}/</text>{{listData.speed.upExper}}经验值
     </view>
     <view class="progressEmpiricalBox">
       <view class="awardThumb">
-        <image src="https://cdn.51chaidan.com/images/202201/thumb_img/39845_thumb_G_1641355207981.jpg" mode="widthFix"></image>
-        <text>Lv 0</text>
+        <image src="{{listData.speed.list[0].img}}" mode="widthFix"></image>
+        <text>Lv {{listData.speed.list[0].grade}}</text>
       </view>
       <view class="sonPogress"> 
-        <text></text>
+        <block wx:if='{{listData.speed.grade < 4}}'>
+            <text style="width:{{speedOfProgress}}%;"></text>
+        </block>
+        <block wx:else>
+            <text style="width:100%;"></text>
+        </block>
+        
       </view>
       <view class="awardThumb">
-        <image src="https://cdn.51chaidan.com/images/202201/thumb_img/39845_thumb_G_1641355207981.jpg" mode="widthFix"></image>
-        <text>Lv 0</text>
+        <image src="{{listData.speed.list[1].img}}" mode="widthFix"></image>
+        <text>Lv {{listData.speed.list[1].grade}}</text>
       </view>
-      <view class="sonPogress dotted"></view>
+      <block wx:if='{{listData.speed.grade < 3}}'>
+          <view class="sonPogress" style="background: linear-gradient(to right,#f4b073,#ffffff);"></view>
+      </block>
+      <block wx:else>
+          <view class="sonPogress">
+            <block wx:if='{{listData.speed.grade >= 4}}'><text style="width:{{speedOfProgress}}%;"></text></block>
+          </view>
+      </block>
+
       <view class="awardThumb">
-        <image src="https://cdn.51chaidan.com/images/202201/thumb_img/39845_thumb_G_1641355207981.jpg" mode="widthFix"></image>
-        <text>Lv 0</text>
+        <image src="{{listData.speed.list[2].img}}" mode="widthFix"></image>
+        <text>Lv {{listData.speed.list[2].grade}}</text>
       </view>
     </view>
   </view>
-  <view class="awardWrap"> 
+  <view class="awardWrap" wx:if='{{listData}}'> 
     <text class="awardTitle">好礼简介，点击查看详情</text>
     <view class="awardItems">
-      <view class="item">
-        <image src="https://cdn.51chaidan.com/images/202201/thumb_img/39845_thumb_G_1641355207981.jpg" mode="aspectFill"></image>
-        <view>
-          <text>Lv1好礼 </text>限定周边随机一款
-        </view>
-      </view>
-      <view class="item">
-        <image src="https://cdn.51chaidan.com/images/202201/thumb_img/39845_thumb_G_1641355207981.jpg" mode="aspectFill"></image>
-        <view>
-          <text>Lv2好礼 </text>限定明盒或盲盒随机一款
-        </view>
-      </view>
-      <view class="item">
-        <image src="https://cdn.51chaidan.com/images/202201/thumb_img/39845_thumb_G_1641355207981.jpg" mode="aspectFill"></image>
-        <view>
-          <text>Lv1好礼 </text>限定周边随机一款
-        </view>
-      </view>
-      <view class="item">
-        <image src="https://cdn.51chaidan.com/images/202201/thumb_img/39845_thumb_G_1641355207981.jpg" mode="aspectFill"></image>
-        <view>
-          <text>Lv1好礼 </text>限定周边随机一款
-        </view>
-      </view>
+        <block wx:for='{{listData.award}}' wx:key='key' wx:if="{{listData.award.length != (index+1)}}">
+            <view class="item" catchtap="displayDetailTip" data-ind='{{index}}'>
+                <image src="{{item.img}}" mode="aspectFill"></image>
+                <view>
+                  <text>{{item.grade_text}}好礼</text>{{item.title}}
+                </view>
+            </view>
+        </block>
     </view>
     <view class="fiveAwardItem">
-      <view class="item">
-        <image src="https://cdn.51chaidan.com/images/202201/thumb_img/39845_thumb_G_1641355207981.jpg" mode="aspectFill"></image>
-        <view>
-          <text>Lv1好礼 </text>限定周边随机一款
+        <view class="item" catchtap="displayDetailTip" data-ind='{{(listData.award.length-1)}}'>
+          <image src="{{listData.award[listData.award.length-1].img}}" mode="aspectFill"></image>
+          <view>
+            <text>{{listData.award[listData.award.length-1].grade_text}} </text>{{listData.award[listData.award.length-1].title}}
+          </view>
         </view>
-      </view>
     </view>
   </view>
-  <view class="taskWrap"> 
+  <view class="taskWrap" id='task' wx:if='{{listData}}'> 
     <view class="taskTitle">做任务，解锁/升级当前礼品</view>
     <view class="taskItems">
-      <view class="taskItem">
-        <view class="taskItemTxt">
-          <text>每日签到</text>
-          <text>每日签到+5经验值</text>
-        </view>
-        <view class="taskBtn done">已完成</view>
-      </view>
-      <view class="taskItem">
-        <view class="taskItemTxt">
-          <text>每日签到</text>
-          <text>每日签到+5经验值</text>
-        </view>
-        <view class="taskBtn invitation">去邀请</view>
-      </view>
-      <view class="taskItem">
-        <view class="taskItemTxt">
-          <text>好友助力</text>
-          <text>1名好友助力=5经验值（每日上限15）</text>
-        </view>
-        <view class="taskBtn blueBtn">领取</view>
-      </view>
-      <view class="taskItem">
-        <view class="taskItemTxt">
-          <text>每日签到</text>
-          <text>每日签到+5经验值</text>
-        </view>
-        <view class="taskBtn done">已完成</view>
-      </view>
+        <block wx:for='{{listData.active}}' wx:key='key'>
+            <view class="taskItem">
+                <view class="taskItemTxt">
+                  <text>{{item.title}}</text>
+                  <text>{{item.description}}</text>
+                </view>
+                <block wx:if='{{item.is_rece == 0}}'>
+
+                    <block wx:if='{{item.type == 98}}'>
+                        <view class="taskBtn invitation" catchtap="receiveTask" data-type='{{item.type}}' data-itemtype='{{item.jump}}'>签到</view>
+                    </block>
+                    <block wx:elif='{{item.type == 99}}'>
+                        <view class="taskBtn invitation">
+                            <button open-type="share" class='shareButton'></button>去邀请
+                        </view>
+                    </block>
+                    <block wx:elif='{{item.type == 14 || item.type == 21}}'>
+                        <view class="taskBtn invitation" catchtap="jumptaskDeail" data-type='{{item.type}}' data-itemtype='{{item.jump}}'>去购买</view>
+                    </block>
+                </block>
+                <block wx:elif='{{item.is_rece == 1}}'>
+                    <view class="taskBtn blueBtn" catchtap="receiveTask" data-type='{{item.type}}'>领取</view>
+                </block>
+                <block wx:elif='{{item.is_rece == 2}}'>
+                    <view class="taskBtn done">已完成</view>
+                </block>
+            </view>
+        </block>
     </view>
   </view>
-  <view class="footerWrap"> 
-    <view>领取当前礼品</view>
-    <view class="blueBtn">新年任务</view>
+  <view class="footerWrapFix" wx:if='{{infoData}}'> 
+    <view class="footerWrapFixTxt">该活动只能领取一次礼品，做任务可以升级礼包哦</view>
+    <view class="footerWrap">
+        <view class="{{infoData.rece_status==1?'blueBtn':''}}">
+            <block wx:if='{{infoData.rece_status == 0 || infoData.rece_status == 1}}'>领取当前礼品</block>
+            <block wx:else>已领取</block>
+            <view wx:if='{{infoData.rece_status==1 && listData.speed.grade == 5}}' class="footerWrapPosition" catchtap="fiveLevelBulletFrameData"></view>
+            <view wx:elif='{{infoData.rece_status==1 && listData.speed.grade != 5}}' class="footerWrapPosition" catchtap="receivePrizes" data-ind='0'></view>
+        </view>
+        <view class="blueBtn" catchtap="jumpTask">新年任务</view>
+    </view>
+
+
   </view>
 
 
-  <view class="detailsMask" wx:if="{{isDetailsMask}}">
-    <view class="detailsMaskBox">
-      <text class="detailsMaskBoxTitle">Lv 1 礼品详情</text>
-      <text class="detailsTitle">以下商品随机一款</text>
+  <view class="detailsMask" wx:if="{{fiveLevelBulletFrame}}" catchtap="fiveLevelBulletFrameFun">
+    <view class="detailsMaskBox" catchtap="true" style="height:1200rpx;">
+      <view class="detailsMaskBoxTitle">5级新春好礼<image src='../../../../pages/images/forknumber.png' class='recgadheadimg' bindtap='fiveLevelBulletFrameFun'></image></view>
+      <view class="detailsTitleBox">下列商品任选一件</view>
+      <scroll-view scroll-y="true" class="NyRscrollView">
+          <view class="NyRscrollViewEve" wx:for="{{fiveList}}" wx:key='key'>
+              <image src="{{item.role_img}}" class="NyRscrollViewEveImg" mode="aspectFill"></image>
+              <view class="NyRscrollViewEveRgiht">
+                  <view class="disanum_sb_txtone multilineellipsis">{{item.goods_name}}</view>
+                  <view class="disanum_sb_txtoneStyle" wx:if='{{item.role_name}}'>款式：{{item.role_name}}</view>
+                  <view class="receiveFive {{item.stock > 0?'blueBtn':''}}" catchtap="{{item.stock > 0?'receivePrizes':''}}" data-ind='{{index}}'>领取</view>
+              </view>
+          </view>
+
+
+      </scroll-view>
+    </view>
+  </view>
+
+  <view class="detailsMask" wx:if="{{isDetailsMask}}" catchtap="isDetailsMaskFun">
+    <view class="detailsMaskBox" catchtap="true">
+      <view class="detailsMaskBoxTitle">{{awardDetail.grade_text}} 礼品详情<image src='../../../../pages/images/forknumber.png' class='recgadheadimg' bindtap='isDetailsMaskFun'></image></view>
+      <text class="detailsTitle">以下商品<block wx:if='{{awardDetail.grade_text=="L5"}}'>任选</block><block wx:else>随机</block>一款</text>
       <view class="detailsItems">
-        <view class="detailsItem">
-          <image src="https://cdn.51chaidan.com/images/202201/thumb_img/39845_thumb_G_1641355207981.jpg" mode="aspectFill"></image>
-          <text>商品名称商品名称商品名称</text>
-        </view>
-        <view class="detailsItem">
-          <image src="https://cdn.51chaidan.com/images/202201/thumb_img/39845_thumb_G_1641355207981.jpg" mode="aspectFill"></image>
-          <text>商品名称商品名称商品名称</text>
-        </view>
-        <view class="detailsItem">
-          <image src="https://cdn.51chaidan.com/images/202201/thumb_img/39845_thumb_G_1641355207981.jpg" mode="aspectFill"></image>
-          <text>商品名称商品名称商品名称</text>
-        </view>
-        <view class="detailsItem">
-          <image src="https://cdn.51chaidan.com/images/202201/thumb_img/39845_thumb_G_1641355207981.jpg" mode="aspectFill"></image>
-          <text>商品名称商品名称商品名称</text>
-        </view>
-        <view class="detailsItem">
-          <image src="https://cdn.51chaidan.com/images/202201/thumb_img/39845_thumb_G_1641355207981.jpg" mode="aspectFill"></image>
-          <text>商品名称商品名称商品名称</text>
-        </view>
+          <block wx:for="{{awardDetail.list}}" wx:key='key'>
+              <view class="detailsItem">
+                  <image src="{{item.role_img}}" mode="aspectFill"></image>
+                  <text>{{item.goods_name}}</text>
+              </view>
+          </block>
       </view>
     </view>
   </view>
