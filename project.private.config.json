@@ -432,6 +432,12 @@
           "pathName": "page/settled/pages/newYearRedPacket/newYearRedPacket",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "红包封面抽选",
+          "pathName": "page/settled/pages/redPacketDrawList/redPacketDrawList",
+          "query": "",
+          "scene": null
         }
       ]
     }

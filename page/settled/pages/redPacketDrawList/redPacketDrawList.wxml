@@ -1,0 +1,22 @@
+<t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
+<view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
+
+<view class="wrap">
+  <view class="title">{{infoData.today}}微信红包封面抽选</view>
+  <view class="items">
+    <block wx:for='{{listData}}' wx:key='key'>
+      <view class="item">
+        <view class="itemTitle">{{item.timeName}}（<text class="{{item.status==2?'green':'black'}}">{{item.status==1?'未开始':item.status==2?'进行中':'已开奖'}}</text>）</view>
+        <scroll-view scroll-x> 
+          <block wx:for='{{item.listActivity}}' wx:key='key' wx:for-item="sonItem">
+            <view class="itemPic" catchtap='limitlotteryd' data-gid='{{sonItem.id}}'>
+              <image src="{{sonItem.cover}}" mode="aspectFill"></image>
+            </view>
+          </block>
+        </scroll-view>
+      </view>
+    </block>
+  </view>
+</view>
+
+
