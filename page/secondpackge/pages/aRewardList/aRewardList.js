@@ -299,7 +299,7 @@ Page({
     var _this = this
     var share = {
       imageUrl:  "https://cdn.51chaidan.com/images/sign/yifanshangLisSharet.jpg",
-      path: "/page/secondpackge/pages/aRewardList/aRewardList?its=" + _this.data.scene.its || 0,
+      path: "/page/secondpackge/pages/aRewardList/aRewardList?its=" + (_this.data.scene.its || 0),
     }
     if( options.from == 'button' ){
       var info = _this.data.welfare
@@ -327,7 +327,7 @@ Page({
         success: function (res) {}
       }
     }
-
+    console.log(share)
     return share;
   },
   onShareTimeline:function(){
