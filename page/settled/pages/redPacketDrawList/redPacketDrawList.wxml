@@ -11,6 +11,7 @@
           <block wx:for='{{item.listActivity}}' wx:key='key' wx:for-item="sonItem">
             <view class="itemPic" catchtap='limitlotteryd' data-gid='{{sonItem.id}}'>
               <image src="{{sonItem.cover}}" mode="aspectFill"></image>
+              <text wx:if="{{sonItem.isSign}}">已报名</text>
             </view>
           </block>
         </scroll-view>
