@@ -187,7 +187,10 @@
                   </view>
 
                   <!-- clickiftr 1 我要免单 -->
-                  <view wx:if='{{item.clickiftr==1&&item.needChance}}' style='width:100%;height:100%;position: absolute;left:0;top:0;z-index:3;' catchtap='sharerequier'></view>
+                  <view wx:if='{{item.clickiftr==1&&item.needChance}}' style='width:100%;height:100%;position: absolute;left:0;top:0;z-index:3;'>
+                      <!-- catchtap='sharerequier' -->
+                      <button class='shareButton' type='primary' catchtap="sharerequierButton"></button>
+                  </view>
                   <!-- clickiftr 2 上传截图 catchtap='upserimgboxiftr' -->
                   <view wx:if='{{item.clickiftr==2}}' style='width:100%;height:100%;position: absolute;left:0;top:0;z-index:3;'>
                       <view style='width:100%;height:100%;'></view>
@@ -218,7 +221,9 @@
                   <image src='http://www.51chaidan.com/images/default/level1.png' class='levelChampionImg' wx:if='{{item.clickiftr==3||item.clickiftr==4||item.clickiftr==8}}'></image>
                   <view style='width:100%;height:200rpx;line-height:200rpx;text-align:center;font-size:36rpx;color:#fff;'>{{item.name}}</view>
                   <!-- clickiftr 1 我要免单 -->
-                  <view wx:if='{{item.clickiftr==1}}' style='width:100%;height:100%;position: absolute;left:0;top:0;z-index:3;' catchtap='sharerequier'>
+                  <view wx:if='{{item.clickiftr==1}}' style='width:100%;height:100%;position: absolute;left:0;top:0;z-index:3;'>
+                      <!-- catchtap='sharerequier' -->
+                      <button class='shareButton' type='primary' catchtap="sharerequierButton"></button>
                       <view style='width:100%;height:100%;'></view>
                   </view>
                   <!-- clickiftr 2 上传截图  catchtap='upserimgboxiftr'-->

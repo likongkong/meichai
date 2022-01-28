@@ -1694,6 +1694,11 @@ closefrindcommoni:function(){
       };
     };
   },
+  sharerequierButton(){
+    app.getUserProfile((res,userInfo) => {
+        this.sharerequier(); 
+    },'',1)
+  },
   // 分享接口
   sharerequier:function(num){
     var _this = this;
