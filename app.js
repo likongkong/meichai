@@ -1171,6 +1171,10 @@ App({
       wx.redirectTo({
         url: "/page/settled/pages/newYearRedPacket/newYearRedPacket"
       });     
+    }else if(item_type == 9061){  // 红包封面抽选列表
+      wx.redirectTo({
+        url: "/page/settled/pages/redPacketDrawList/redPacketDrawList"
+      });     
     }
   },
   // 中奖提示倒计时
