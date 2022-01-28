@@ -50,7 +50,7 @@ Page({
     });
   },
   onLoad: function (options) {
-    wx.hideShareMenu();
+    // wx.hideShareMenu();
     this.activsign();
   },
   onLoadfun:function(){
@@ -127,7 +127,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-   
+  //  if()
+    // console.log(Date.parse(new Date())/1000)
+    let time = Date.parse(new Date())/1000;
+    console.log(time>1643644800,time,1643644800)
+    if(time>1643644800){
+      wx.reLaunch({
+        url: "/pages/index/index",
+        complete:function(){
+        }
+      }) 
+    }
   },
 
   /**
@@ -158,35 +168,14 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  // onShareAppMessage: function () {
-  //   var reshare = app.sharemc();
-  //   return reshare
-  // },
-
-  // onShareTimeline:function(){
-  //   var _this = this;
-  //   return {
-  //     title: '优先入场资格刮刮卡',
-  //     query:'share_uid='+_this.data.uid,
-  //     imageUrl:_this.data.shareImg,
-  //   }
-  // },
-  // /**
-  //  * 用户点击右上角分享
-  //  */
-  // onShareAppMessage: function () {
-  //   var _this = this;
-  //   return {
-  //     title: '优先入场资格刮刮卡',
-  //     path: '/page/secondpackge/pages/luckyDraw/luckyDraw?share_uid='+_this.data.uid,
-  //     imageUrl:_this.data.shareImg,
-  //     success: function (res) {}
-  //   }      
-  // },
-
-
   onShareAppMessage: function () {
+    var _this = this;
+    return {
+      title: '红包封面幸运抽签，年前4天28场，快来参加吧',
+      path: '/page/settled/pages/redPacketDrawList/redPacketDrawList',
+      imageUrl:'https://cdn.51chaidan.com/images/redCoverShareImg.jpg',
+      success: function (res) {}
+    }
   },
-  onShareTimeline:function(){
-  },  
+
 })
