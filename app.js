@@ -1011,7 +1011,7 @@ App({
       wx.navigateTo({
         url: "/page/secondpackge/pages/entityLuckyDraw/entityLuckyDraw"
       });
-    } else if (item_type == 9024) { 
+    } else if (item_type == 9024) {   // 在线福袋
       wx.navigateTo({
         url: "/page/secondpackge/pages/onlineFukubukuro/onlineFukubukuro"
       });
