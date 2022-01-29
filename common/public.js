@@ -11,7 +11,7 @@ if(env == "online"){
   var key = Aes.enc.Utf8.parse("danzhuan1chaijia");
 }else if(env == "test"){
   var key = Aes.enc.Utf8.parse("danzhuanichaijia");
-};
+}; 
 
 // 公共地址 接口
 function comurl() {
