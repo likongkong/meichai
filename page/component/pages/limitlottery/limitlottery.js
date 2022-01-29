@@ -731,7 +731,7 @@ Page({
             _this.setData({
                 dataInfo,
                 infoActivity:infoActivity,
-                brandinfo:res.data.Info.brandInfo,
+                brandinfo:res.data.Info.brandInfo || '',
                 listData:listData,
                 subscribedata: res.data.Info.subscribe.lotto || '',
                 cashPledge:infoActivity.cashPledge||0,
@@ -1244,8 +1244,42 @@ Page({
   // 更新用户信息
   getUserProfileComSign(w){
     console.log(1111111)
+    var _this = this;
     app.getUserProfile((res,userInfo) => {
-        this.joinlimitlottery()
+        if(_this.data.brandinfo && !_this.data.brandinfo.isAttention){
+            wx.showModal({
+              content: '关注品牌可参加活动',
+              cancelText:"返回",
+              confirmText:"关注",
+              success: function(res) {
+                if (res.confirm) {
+                    var id = _this.data.brandinfo.brandId || 0;
+                    var type = 0;
+                    console.log('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id)
+                    var qqq = Dec.Aese('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id);
+                    wx.request({
+                      url: app.signindata.comurl + 'toy.php' + qqq,
+                      method: 'GET',
+                      header: {'Accept': 'application/json'},
+                      success: function (res) {
+                        console.log('关注=====',res)
+                        if (res.data.ReturnCode == 200) {
+                          app.showToastC('关注成功');
+                          setTimeout(function(){
+                            _this.setData({
+                              [`brandinfo.isAttention`]: !_this.data.brandinfo.isAttention
+                            })
+                            _this.joinlimitlottery()
+                          },2000)
+                        };
+                      }
+                    });
+                }
+              }
+            });
+        }else{
+            _this.joinlimitlottery()
+        };
     },'',1);
   },
   joinlimitlottery: function () {

@@ -1111,7 +1111,7 @@
 </view>
 
 <!--  图片授权  -->
-<view class='editorrecom' wx:if='{{picbox}}' style='z-index:9999999;'>
+<!-- <view class='editorrecom' wx:if='{{picbox}}' style='z-index:9999999;'>
   <view class='ngbackground'></view>
   <view class='picbox'>
     <view class='picboxhead'>授权之后才能保存图片</view>
@@ -1123,7 +1123,7 @@
       </view>
     </view>
   </view>
-</view>
+</view> -->
 
 <!--  图片授权  -->
 <view wx:if='{{exhpicsave}}' style='z-index:9999999;width:100%;height:100%;position:fixed;top:0;left:0;'>
