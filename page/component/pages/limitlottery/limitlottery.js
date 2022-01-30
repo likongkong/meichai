@@ -162,7 +162,13 @@ Page({
     helpTipFitst:true,
     refreshGetin:true,
     showPicturesImg:false,
-    showimg:''
+    showimg:'',
+    BrandConcernTip:false
+  },
+  BrandConcernTipFun(){
+    this.setData({
+      BrandConcernTip:false
+    })
   },
   // 抽签规则
   drawRuleJump(){
@@ -1247,40 +1253,40 @@ Page({
     var _this = this;
     app.getUserProfile((res,userInfo) => {
         if(_this.data.brandinfo && !_this.data.brandinfo.isAttention){
-            wx.showModal({
-              content: '关注品牌可参加活动',
-              cancelText:"返回",
-              confirmText:"关注",
-              success: function(res) {
-                if (res.confirm) {
-                    var id = _this.data.brandinfo.brandId || 0;
-                    var type = 0;
-                    console.log('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id)
-                    var qqq = Dec.Aese('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id);
-                    wx.request({
-                      url: app.signindata.comurl + 'toy.php' + qqq,
-                      method: 'GET',
-                      header: {'Accept': 'application/json'},
-                      success: function (res) {
-                        console.log('关注=====',res)
-                        if (res.data.ReturnCode == 200) {
-                          app.showToastC('关注成功');
-                          setTimeout(function(){
-                            _this.setData({
-                              [`brandinfo.isAttention`]: !_this.data.brandinfo.isAttention
-                            })
-                            _this.joinlimitlottery()
-                          },2000)
-                        };
-                      }
-                    });
-                }
-              }
-            });
+
+            _this.setData({
+              BrandConcernTip:true
+            })
+
         }else{
             _this.joinlimitlottery()
         };
     },'',1);
+  },
+  BrandConcernJoin(){
+    var _this = this;
+    var id = _this.data.brandinfo.brandId || 0;
+    var type = 0;
+    console.log('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id)
+    var qqq = Dec.Aese('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id);
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + qqq,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        console.log('关注=====',res)
+        if (res.data.ReturnCode == 200) {
+          app.showToastC('关注成功');
+          setTimeout(function(){
+            _this.setData({
+              [`brandinfo.isAttention`]: !_this.data.brandinfo.isAttention,
+              BrandConcernTip:false
+            })
+            _this.joinlimitlottery()
+          },2000)
+        };
+      }
+    });
   },
   joinlimitlottery: function () {
     if(app.signindata.isNeedUserInfo){
