@@ -295,7 +295,7 @@
               <image wx:if="{{item.explain}}" src="https://cdn.51chaidan.com/images/brandSettledIcon/wenhao.png" mode="widthFix"></image>
             </view>
             <input catchtap="{{num==2||item.num==2?'':'toggleCertificationMask'}}"	placeholder-style="{{item.certificationInfo && item.certificationInfo!=''?'color: #5CA7FE;':''}}" class="cEveInput" disabled="{{true}}" data-name="{{item.name}}" placeholder="{{item.placeholder}}"></input>
-            <image wx:if="{{item.isEdit?false:isEdit}}" class="editIcon" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="widthFix"></image>
+            <!-- <image wx:if="{{item.isEdit?false:isEdit}}" class="editIcon" src="https://cdn.51chaidan.com/images/icon/brandSettledUpdateIcon.png" mode="widthFix"></image> -->
           </view>
           <view class="certificationInfo" wx:if="{{item.certificationInfo && item.certificationInfo!=''}}">
             <view>
