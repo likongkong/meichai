@@ -182,7 +182,18 @@ Page({
     });
 
     if(_this.data.order){
-      this.sendTextMessageThree();
+      wx.showModal({
+        content: '是否发送订单信息',
+        cancelText:"否",
+        confirmText:"是",
+        success: function(res) {
+          if (res.confirm) {
+            _this.sendTextMessageThree();
+          }else{
+            _this.getData();
+          }
+        }
+      });
     }else{
       this.getData();
     };

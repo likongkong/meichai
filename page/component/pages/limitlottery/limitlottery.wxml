@@ -924,6 +924,21 @@
 		</view>
 </view>
 
-
+<view class="wshNew" catchtouchmove="true" wx:if='{{BrandConcernTip}}' catchtap="BrandConcernTipFun">
+    <view class="BrandConcern" catchtap="true">
+				<image src='../../../../pages/images/cancelthefork.png' class='recgadheadimgfork' catchtap='BrandConcernTipFun'></image>
+				<view class="BrandConcernTopBoxImg">
+					<image class="BrandConcernTop" mode='widthFix' src="{{brandinfo.banner[0].src}}"></image>
+				</view>
+				<view class="BrandConcernBox">
+					  <view class="BrandConcernBoxName">
+								{{brandinfo.brandName}}
+								<image class="BrandConcernLog boxShadowEve" mode='aspectFit' src="{{brandinfo.brandLogo}}"></image>
+						</view>
+						<view class="BrandConcernBoxTxt" wx:if='{{brandinfo.description}}'>{{brandinfo.description}}</view>
+					  <view class="BrandCBBottc">关注品牌后才可以参加活动哦<view class="BconcernButton" catchtap="BrandConcernJoin">关注</view></view>
+				</view>
+		</view>
+</view>
 
 

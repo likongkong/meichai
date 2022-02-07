@@ -1522,7 +1522,7 @@
 
 
 <!--  图片授权  -->
-<view class='editorrecom' wx:if='{{picbox}}' style='z-index:9999999;'>
+<!-- <view class='editorrecom' wx:if='{{picbox}}' style='z-index:9999999;'>
     <view class='ngbackground'></view>
     <view class='picbox'>
         <view class='picboxhead'>授权之后才能保存图片</view>
@@ -1534,7 +1534,7 @@
             </view>
         </view>
     </view>
-</view>
+</view> -->
 
 
 
