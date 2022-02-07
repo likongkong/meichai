@@ -11,10 +11,7 @@
         <view style="width:15%;">排名</view>
         <view style="width:15%;">头像</view>
         <view style="width:20%;">昵称</view>
-        <view style="width:35%;">
-            <block wx:if='{{newdataexh}}'>福袋积分</block>
-            <block wx:else>购买福袋数</block>
-        </view>
+        <view style="width:35%;">福袋积分</view>
         <view style="width:15%;">奖励</view>
     </view>
 
