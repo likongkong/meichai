@@ -16,6 +16,7 @@
       <view>
         <view class="txt">联系人：{{info.firm_linkman}}</view>
         <view class="txt"></view>
+        <!-- <view class="txt">社交媒体账号：{{info.wechat_number}}</view> -->
       </view>
     </view>
   </view>
