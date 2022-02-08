@@ -46,7 +46,7 @@
 
 	<view style='width:100%;height:{{statusBarHeightMc+44}}px;background:#fff;'></view>
 
-	<view style='width:100%;position:relative;' class='indexswiper'>
+	<view style='width:100%;position:relative;' class='indexswiper' wx:if='{{movies && movies.length != 0}}'>
 		<view wx:if="{{notice_title!=''}}" class="homeNotice" bindtap='jumpnotice'>
 			<image class="homeNoticeImg" src='https://www.51chaidan.com/images/default/notice.png'></image>
 			{{notice_title}}>
