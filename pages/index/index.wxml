@@ -180,7 +180,6 @@
 					<view class='disantitletitright homeSeeMore' wx:if='{{item.item_type}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump'>查看更多</view>
 				</view>   
 				<view style='min-height:104rpx;padding:0 20rpx 0;position: relative;' wx:if='{{item.List.length!=0}}'>
-					<!-- <view wx:if='{{item.href != "category_id=c501"}}' style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;z-index: 10;" data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump'></view> -->
 					<swiper style="width:100%;height:{{item.item_type==9014?'378':'308'}}rpx;margin:0 auto;display:block;" circular="true" autoplay="true" interval="3000" duration="450">
 						<swiper-item wx:for="{{item.List}}" wx:key="key" wx:for-item='w' wx:for-index='num'>
 						  <view style="position: relative;">
@@ -237,7 +236,6 @@
 											<view style="width:500rpx;margin-left:10rpx;float:left;font-size:26rpx; ">
 												<view style="width:100%;color:#26AFFB " class='specialellipsis'>{{item.title}}</view>
 												<view style="width:100%;margin-top:10rpx;">{{item.name}}</view>
-												<!-- class='specialellipsis' -->
 											</view>
 										</view>
 										<view style="width:95%;height:10rpx;background:#e6e5e5;margin:auto;">
@@ -525,7 +523,6 @@
 							<view class='disanum_scr_box' wx:for='{{item.List}}' wx:key='key' wx:for-item='w' style='height:234rpx;width:auto;' wx:for-index='num'>
 								<view class='disanum_simgbox' catchtap='myordertoyind' data-gid='{{w.owner_id}}' style='height:200rpx;width:auto;'>
 									<image class='disanum_simg' src='{{w.cover}}'  mode='heightFix' style='height:200rpx;width:auto;position: relative;' ></image>
-									<!-- bindload="imageLoadad" data-indexnum='3' data-num='{{num}}' data-ind='{{index}}' {{w.width||200}}rpx -->
 								</view>
 								<view style='height:30rpx;padding-top:4rpx;text-align:center;font-size:24rpx;color:#ff2742;'>￥{{w.shop_price}}</view>
 							</view>

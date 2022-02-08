@@ -33,8 +33,6 @@ Page({
     nonreceive:0,
     // 完成数
     finished: 0,
-    // 售后数
-    after_sale: 0,
     no_read: 0,
     no_read_no: 0,
     // 提现金额
@@ -43,8 +41,6 @@ Page({
     partner:[],
     // 购物车显示数据
     shopnum: 0,
-    // 授权弹框
-    tgabox: false,
     // 微信号码
     wxnum:'',
     // 我的钱包数据
@@ -74,8 +70,6 @@ Page({
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90, 
-    // 是否授权
-    signinlayer:true,
     windowHeight: app.signindata.windowHeight - 65 - wx.getStorageSync('statusBarHeightMc')||0,
     isweekend:false,
     isweekendtip:false,
@@ -92,7 +86,16 @@ Page({
     // 审核状态
     brandSettledStatus:0,
     isAddNewEventMask:false,
-    isSettledTypeMask:false
+    isSettledTypeMask:false,
+    orderList:[]
+  },
+  
+  // 查看订单
+  viewtheorder: function (e) {
+    let oid = e.currentTarget.dataset.oid;
+    wx.navigateTo({    
+      url: "/page/component/pages/orderdetails/orderdetails?oid=" + oid
+    })
   },
   jinqingqidai(e){
     let type = e.currentTarget.dataset.type;
@@ -354,20 +357,24 @@ Page({
   listdata:function(){
     var _this = this;
     wx.showLoading({ title: '加载中...', mask:true })
-    var q = Dec.Aese('mod=getinfo&operation=myorder&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+
+    // var q = Dec.Aese('mod=getinfo&operation=myorder&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
+    var q = Dec.Aese('mod=data&operation=commonData&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
     wx.request({
       url: app.signindata.comurl + 'order.php'+q,
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
-        console.log(res)
+        console.log('我的=====',res)
         // 刷新完自带加载样式回去
         wx.stopPullDownRefresh();
         wx.hideLoading();
         if (res.data.Message != "Empty info") {
           if (res.data.ReturnCode == 200){
             // 获取钱包余额
-            if(!res.data.Info.brandSettledLimit && res.data.Info.brandSettledInfo.brandSettledStatus == 5 && !res.data.Info.userJurisdictionList){
+            var {chat , order, settled ,user} = res.data.Info;
+            var {order:orderList=[]} = res.data.List;
+            if(!settled.brandSettledLimit && settled.detail.brandSettledStatus == 5 && !settled.userJurisdictionList){
               if(wx.getStorageSync('access_token')){
                 api.getLumpsumAndWithdraw({}).then((res) => {
                   console.log('withdrawInfo',res)
@@ -384,51 +391,55 @@ Page({
             
             _this.setData({
               isAddNewEventMask:false,
-              dataInfo: res.data.Info,
-              brandSettledStatus: res.data.Info.brandSettledInfo.brandSettledStatus,
-              brand_id:res.data.Info.brandSettledInfo?res.data.Info.brandSettledInfo.brand_id:'',
-              vipAdvertising: res.data.Info.vipAdvertising||'',
-              userJurisdictionList:res.data.Info.userJurisdictionList || false,
-              // 待付款
-              nonpayment: res.data.Info.non_payment||0,
-              // 待拆单数
-              nonunpack: res.data.Info.non_unpack || 0,
-              // 待发货数
-              nonsend: res.data.Info.non_send || 0,
-              // 待收货数
-              nonreceive: res.data.Info.non_receive || 0,
-              // 售后服务
-              no_read: res.data.Info.no_read || 0,
-              // 商家售后服务
-              no_read_no: res.data.Info.no_read_no || 0,
-              // 我的钱包数据
-              point: res.data.Info.point || 0,
-              // 提现金额
-              putforwardmoney: res.data.Info.money || "0",
-              // 幸运值
-              luckyValue: res.data.Info.blindbox_lucky||0,
-              // 抽盒金
-              blindbox_money:res.data.Info.blindbox_money||0,
-              // 限时抽盒金
-              tempBlindboxMoney:res.data.Info.tempBlindboxMoney||0,
-              //显示状态 1为未开通 2为待领取 3为明日领取
-              showVipStatus:res.data.Info.showVipStatus || 1,
-              //vip到期时间
-              vipExpiryTime:_this.formatTime(res.data.Info.vipExpiryTime,'Y年M月D日'),
-              //vip可领取特权数据
-              vipPrerogativeStyle:res.data.Info.vipPrerogativeStyle || '',
-              // 是否可领取抽盒机金
-              isGetVipBlindBoxMoney:res.data.Info.isGetVipBlindBoxMoney || false,
-              requestCompleted:true,
-              subscribedata:res.data.Info.subscribe,
 
+              dataInfo: settled,
+
+              brandSettledStatus: settled.detail.brandSettledStatus,
+              brand_id:settled.detail?(settled.detail.brand_id || ''):'',
+              vipAdvertising: user.vipAdvertising||'',
+              userJurisdictionList:user.userJurisdictionList || false,
+              // 待付款
+              nonpayment: order.countNoPay||0,
+              // // 待拆单数
+              // nonunpack: res.data.Info.non_unpack || 0,
+              // 待发货数
+              nonsend: order.countNoShipping || 0,
+              // 待收货数
+              nonreceive: order.countShipping || 0,
+              // 售后服务
+              no_read: chat.BTC || 0,
+              // 商家售后服务
+              no_read_no: chat.CTB || 0,
+              // 我的钱包数据
+              point: user.point || 0,
+              // 提现金额
+              putforwardmoney: user.money || "0",
+              // 幸运值
+              luckyValue: user.blindbox_lucky||0,
+              // 抽盒金
+              blindbox_money:user.blindbox_money||0,
+              // 限时抽盒金
+              tempBlindboxMoney:user.tempBlindboxMoney||0,
+              //显示状态 1为未开通 2为待领取 3为明日领取
+              showVipStatus:user.showVipStatus || 1,
+              //vip到期时间
+              vipExpiryTime:_this.formatTime(user.vipExpiryTime,'Y年M月D日'),
+              //vip可领取特权数据
+              vipPrerogativeStyle:user.vipPrerogativeStyle || '',
+              // 是否可领取抽盒机金
+              isGetVipBlindBoxMoney:user.isGetVipBlindBoxMoney || false,
+              requestCompleted:true,
+              subscribedata:user.subscribe,
+              orderList
             });
-            app.signindata.blindboxMoney = res.data.Info.blindbox_money||0,
-            app.signindata.tempBlindboxMoney = res.data.Info.tempBlindboxMoney||0;
-            _this.data.after_sale = res.data.Info.after_sale || 0;// 售后数
-          };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);            
+            app.signindata.blindboxMoney = user.blindbox_money||0,
+            app.signindata.tempBlindboxMoney = user.tempBlindboxMoney||0;
+            if(orderList && orderList.length != 0){
+              _this.countdownbfun()
+            }
+          }else{
+            app.showModalC(res.data.msg || res.data.Msg)
+          };          
         } else {
           _this.setData({
             // 待付款
@@ -441,7 +452,6 @@ Page({
             nonreceive: 0,
             requestCompleted:true
           });
-          _this.data.after_sale = 0;// 售后数
         }
       }
     }); 
@@ -510,12 +520,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  pullupsignin:function(){
-    // // '没有授权'
-    this.setData({
-      tgabox: true
-    });
-  },
+  pullupsignin:function(){},
   onShow: function () {   
     // wx.showLoading({ title: '加载中...', mask:true  }) 
     // 判断是否授权 
@@ -529,8 +534,6 @@ Page({
       _this.setData({
         uid: app.signindata.uid,
         isProduce: app.signindata.isProduce,
-        signinlayer: true,
-        tgabox: false
       });
       // 判断是否登录
       if (_this.data.loginid != '' && _this.data.uid != '') {
@@ -540,15 +543,12 @@ Page({
       }
     };
   },
-  // 授权点击统计
-  clicktga: function () {
-    app.clicktga(2)
-  },
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
     // 调用重置刷新
+    clearInterval(this.data.agentPayment);
     app.resetdownRefresh();
   },
   /**
@@ -556,6 +556,7 @@ Page({
    */
   onUnload: function () {
     // 调用重置刷新
+    clearInterval(this.data.agentPayment);
     app.resetdownRefresh();
   },
   /**
@@ -598,29 +599,7 @@ Page({
   wmy: function () { 
     this.onPullDownRefresh(); 
   },
-  clicktganone: function () {
-    this.setData({ tgabox: false })
-  },
-  // 点击登录获取权限
-  userInfoHandler: function (e) {
-    var _this = this;
-    wx.getSetting({
-      success: res => {
-        if (true) {
-          _this.setData({
-            tgabox: false
-          });
-          _this.onShow();
-          // 确认授权用户统计
-          app.clicktga(4)
-        }
-      }
-    });
-    if (e.detail.detail.userInfo) { } else {
-      app.clicktga(8)  //用户按了拒绝按钮
-    };
 
-  },
   // 提现跳转
   putforward:function(){
     var siddata = this.data.temporary_store_id
@@ -685,12 +664,7 @@ Page({
       }
     });
   },
-  // 临时展会授权
-  togation:function(e){
-    this.setData({
-      tgabox:true
-    })
-  }, 
+
     // 每日领取，vip专属券  3 领取vip专属限时抽盒金
   receivefun:function(getType){
     var _this = this;
@@ -806,5 +780,66 @@ Page({
       commonBulletFrame:!this.data.commonBulletFrame,
     })
   },
+  // 倒计时
+  countdownbfun: function () {
+    var _this = this;
+    clearInterval(_this.data.agentPayment);
+    var raplist = _this.data.orderList || [];
+    var len = raplist.length;
+    function nowTime() {
+      var iftrins = true;
+      // 获取现在的时间
+      var nowTime = new Date().getTime();
+      for (var i = 0; i < len; i++) {
+          var lastTime = raplist[i].finalPayTime * 1000;
+          var differ_time = lastTime - nowTime;
+          if (differ_time >= 0) {
+            var differ_day = Math.floor(differ_time / (3600 * 24 * 1e3));
+            var differ_hour = Math.floor(differ_time % (3600 * 1e3 * 24) / (1e3 * 60 * 60));
+            var differ_minute = Math.floor(differ_time % (3600 * 1e3) / (1000 * 60));
+            var s = Math.floor(differ_time % (3600 * 1e3) % (1000 * 60) / 1000);
+            if (differ_day.toString().length < 2) { differ_day = "0" + differ_day; };
+            if (differ_hour.toString().length < 2) { differ_hour = "0" + differ_hour; };
+            if (differ_minute.toString().length < 2) { differ_minute = "0" + differ_minute; };
+            if (s.toString().length < 2) { s = "0" + s; };
+            if (differ_day>0){
+              var str = differ_day + '天' + ' ' + differ_hour + ':' + differ_minute + ':' + s;
+            }else{
+              var str = differ_hour + ':' + differ_minute + ':' + s;
+            };
+            raplist[i].timestr = str;
+            raplist[i].day = differ_day;
+            raplist[i].hour = differ_hour;
+            raplist[i].minute = differ_minute;
+            raplist[i].second = s;
+          } else {
+            raplist[i].timestr = '00:00:00:0';
+            raplist[i].day = '00';
+            raplist[i].hour = '00';
+            raplist[i].minute = '00';
+            raplist[i].second = '00';
+          };
+          if (raplist[i].day != '00' || raplist[i].hour != '00' || raplist[i].minute != '00' || raplist[i].second != '00') {
+            iftrins = false;
+          };
+      };
+      _this.setData({
+        orderList: raplist
+      });
+      if (iftrins) {
+        clearInterval(_this.data.agentPayment);
+        _this.setData({
+          orderList: [],
+          nonpayment:0
+        })
+      };
+    }
+    if (_this.data.orderList.length != 0) {
+      nowTime();
+      clearInterval(_this.data.agentPayment);
+      _this.data.agentPayment= setInterval(nowTime, 1000);
+    };
+  },
+
 
 })

@@ -104,8 +104,7 @@ Page({
       isNoticeMask:false
     })
   },
-  jumpposition:function(w){
-    // var nowTime = new Date().getTime();
+  jumpposition:function(){
     wx.navigateTo({
       url: "/page/secondpackge/pages/buyingTickets/buyingTickets"
     });
@@ -275,7 +274,7 @@ Page({
 
       // url: "/pages/giftCollection/giftCollection?oid="
 
-      // url: "/page/secondpackge/pages/drawHideGoods/drawHideGoods"
+      url: "/page/secondpackge/pages/drawHideGoods/drawHideGoods?gid=39374"
       // url: "/page/secondpackge/pages/auctionDetails/auctionDetails"
       // url: "/page/secondpackge/pages/auctionList/auctionList" 
       // url: "/page/secondpackge/pages/entityLuckyDraw/entityLuckyDraw"
@@ -297,7 +296,7 @@ Page({
       // url: "/pages/detailspage/detailspage?gid=38364"
 
       // url: "/pages/modifythenickname/modifythenickname?brand_id=210"
-      url: "/page/secondpackge/pages/fillInOrderNum/fillInOrderNum?oid=23&type=1"
+      // url: "/page/secondpackge/pages/fillInOrderNum/fillInOrderNum?oid=23&type=1"
       
     });
   },
@@ -306,9 +305,7 @@ Page({
     var imgurl = imgurl || '';
     var _this = this;
     _this.setData({ jumpdevanningiftr: true });
-
     app.comjumpwxnav(item_type, whref, wname, imgurl)
-
     _this.setData({ jumpdevanningiftr: false, indexelafra: false, index_ela_fra:false });
     app.signindata.index_ela_fra = false;   
   },
@@ -365,7 +362,6 @@ Page({
       url: "/page/component/pages/hotsearchvocabulary/hotsearchvocabulary",
       complete: function () { _this.setData({ jumpdevanningiftr: false }); }
     });
-
   },
   // 跳转详情页 
   addressmanagement: function (event) {
@@ -420,7 +416,6 @@ Page({
                 }
                 _this.setData({islive:true})
               }
-
               if (arrlist[i].show_type == 2) {
                 if (arrlist[i].img != '' && arrlist[i].img){
                   if (!regData.test(arrlist[i].img)) {
@@ -575,54 +570,15 @@ Page({
       _this.setData({ isAwardOrder: app.signindata.isAwardOrder, awardOrder: app.signindata.awardOrder || false });
       app.winningtheprizetime(_this);
     };
-    
-    // this.animation = wx.createAnimation({
-    //   // 动画持续时间，单位ms，默认值 400
-    //   duration: 300,
-    //   timingFunction: 'linear',
-    //   // 延迟多长时间开始
-    //   delay: 0,
-    //   transformOrigin: 'center center 0',
-    //   success: function(res) {}
-    // })
-    // this.mAnimation();
+
 
   },
-
-  // mAnimation: function() {
-  //   clearInterval(this.data.atimer)
-  //   this.data.atimer = setInterval(function() {
-  //     this.animation.translate(0, -13).step().translate(0, 0).step().translate(0, -5).step().translate(0, 0).step()
-  //     this.setData({
-  //       //输出动画
-  //       animation: this.animation.export(),
-  //     })
-  //   }.bind(this), 1350)
-  // },
-
   jumporder: function () {
     var _this = this;
     app.jumporder(_this);
   },
   otherdata:function(){
-    var _this = this;
-    // 抽盒金
-    // if (_this.data.uid) {
-    //   var gbm = Dec.Aese('mod=blindBox&operation=getBlindboxMoney&uid='+_this.data.uid);
-    //   wx.request({
-    //     url: app.signindata.comurl + 'spread.php' + gbm,
-    //     method: 'GET',
-    //     header: { 'Accept': 'application/json' },
-    //     success: function (res) {
-    //       if (res.data.ReturnCode == 200) {
-    //         _this.setData({
-    //           blindboxMoney: res.data.Info.blindbox_money || ""
-    //         });
-    //         app.signindata.blindboxMoney = res.data.Info.blindbox_money || ""
-    //       };
-    //     }
-    //   })
-    // }    
+    var _this = this;  
     if (_this.data.defaultinformation == '') {
       // 获取默认信息
       var qqq = Dec.Aese('operation=info&mod=info');
@@ -651,10 +607,6 @@ Page({
       _this.data.notice_url = _this.data.defaultinformation.notice.url || "";
       _this.data.notice_type = _this.data.defaultinformation.notice.type || "";
     };
-    // 购物车数据显示
-    Dec.shopnum(_this,app.signindata.comurl);
-    // 调取晒单数量
-    Dec.dryingSum(_this, app.signindata.clwcomurl);
     //调取搜索关键词跳转对应列表数据
     wx.request({
       url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/produce/searchNavi.json?20201205',
@@ -675,9 +627,6 @@ Page({
         app.signindata.hotKeyword = res.data;
       }
     })
-
-
-
   },
   //key(需要检错的键） url（传入的需要分割的url地址）
   getSearchString: function (key, Url) {
@@ -695,9 +644,7 @@ Page({
   // 未授权数据调取
   unauthorized:function(){
     var _this = this;
-    _this.setData({newcoupon: false});
-    // 调取数据
-    // _this.obtaintabfun();         
+    _this.setData({newcoupon: false});     
   },
   // 获取首页数据
   obtaintabfun:function(){
@@ -747,7 +694,6 @@ Page({
             var arrlist = List.index||[];
             var zdyurl = _this.data.zdyurl || '';
             var regData = app.signindata.reg || /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/ ;
-
             // 公告通知
             if(!_this.data.isPulldown && List.indexInform && List.indexInform.length!=0){
               _this.setData({
@@ -756,7 +702,6 @@ Page({
               });
                WxParse.wxParse('article', 'html', List.indexInform[0].content, _this,0);
             }
-
             // 分类 首页弹框
             if ( List.indexSpread && List.indexSpread.length != 0 ) {
               var indexnum = Math.floor(Math.random() * List.indexSpread.length) || 0;
@@ -775,7 +720,6 @@ Page({
               _this.setData({ indexelafra: false, index_ela_fra: false });
               app.signindata.index_ela_fra = false;     
             }
-
             if (arrlist.length != 0) {
               for (var i = 0; i < arrlist.length; i++) {
                 if (arrlist[i].item_type == 9014 || arrlist[i].item_type == 989 || arrlist[i].item_type == 9017) {
@@ -803,7 +747,6 @@ Page({
                     for(let j=0; j < arrlist[i].List.length; j++){
                       if(arrlist[i].List[j].isTop){
                         topArrList.push(arrlist[i].List[j]);  
-                        // al.splice(j, 1);
                       }else{
                         otherArrList.push(arrlist[i].List[j]);  
                       }
@@ -823,7 +766,6 @@ Page({
                   }
                   _this.setData({islive:true})
                 }
-
                 if (arrlist[i].show_type == 2) {
                   if (arrlist[i].img != '' && arrlist[i].img){
                     if (!regData.test(arrlist[i].img)) {
@@ -894,7 +836,6 @@ Page({
                 clearInterval(_this.data.timer);
                 var comdataarr = [];
             };
-
 
             var classification = [];
             var banlist = [];
@@ -978,10 +919,8 @@ Page({
     };
     // 判断是否通过扫码进入
     app.signindata.channel = options.channel || '';
-    
     // 调取数据
     _this.obtaintabfun();    
-
     // 判断是否登录
     if (_this.data.loginid != '' && _this.data.uid != '') {
       _this.onLoadfun();
@@ -996,28 +935,20 @@ Page({
       console.log(_this.data.isProduce)  
       _this.unauthorized();
     }else{
-      wx.getSetting({
-        success: res => {
-          if (true) {
-            // '已经授权'
-            _this.data.loginid = app.signindata.loginid;
-            _this.data.openid = app.signindata.openid;
-            _this.setData({
-              uid: app.signindata.uid,
-              isProduce: app.signindata.isProduce,
-              defaultinformation: app.signindata.defaultinformation||'',
-            });
-            // 判断是否登录
-            if (_this.data.loginid != '' && _this.data.uid != '') {
-              _this.onLoadfun();
-            } else {
-              app.signin(_this);
-            }
-          } else {
-            _this.unauthorized();
-          }
-        }
+      // '已经授权'
+      _this.data.loginid = app.signindata.loginid;
+      _this.data.openid = app.signindata.openid;
+      _this.setData({
+        uid: app.signindata.uid,
+        isProduce: app.signindata.isProduce,
+        defaultinformation: app.signindata.defaultinformation||'',
       });
+      // 判断是否登录
+      if (_this.data.loginid != '' && _this.data.uid != '') {
+        _this.onLoadfun();
+      } else {
+        app.signin(_this);
+      }
     }
 
   },
@@ -1401,7 +1332,6 @@ Page({
     var imgurl = '';
     // 公共跳转
     this.comjumpwxnav(item_type, href, title, imgurl);
-
   },
   // 计算图片大小
   imageLoadad: function (e) {
@@ -1426,7 +1356,6 @@ Page({
           });
         };
       };
-
     } else if (indexnum == 3) {
       var ind = e.currentTarget.dataset.ind || e.target.dataset.ind || 0;
       var num = e.currentTarget.dataset.num || e.target.dataset.num || 0;
@@ -1604,7 +1533,6 @@ Page({
   // 在线抽盒机
   bbevebox: function (event) {
     var id = event.currentTarget.dataset.gid || event.target.dataset.gid;
-    var _this = this;
     wx.navigateTo({
       url: "/pages/smokebox/smokebox?gid=" + id
     });
@@ -1612,7 +1540,6 @@ Page({
   // 车队详情
   driveDetail: function (event) {
     var id = event.currentTarget.dataset.id || event.target.dataset.id;
-    var _this = this;
     wx.navigateTo({
       url: "/page/component/pages/drivetohide/drivetohide?id=" + id
     });
@@ -1680,7 +1607,6 @@ Page({
     };
   },
   subshowmodalTip: function () {
-    var _this = this;
     wx.showModal({
       title: '提示',
       content: '订阅成功',
