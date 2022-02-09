@@ -1,7 +1,6 @@
 
     <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
     <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
- 
 
  <!-- position:fixed;top:{{statusBarHeightMc}}px;left:0;z-index:8; -->
 <view style='width:100%;margin-bottom:10rpx;'>
@@ -27,9 +26,7 @@
       <view class="sponsoroneButton">关注</view>
   </view> 
 </view>
-
 <!-- <view style='width:100%;{{isAwardOrder?"height:128rpx;":"height:200rpx;"}}' wx:if='{{spreadEntry}}'></view> -->
-
 <view class='aslbox'>
 
   <view class='boxcontent'>
@@ -231,10 +228,6 @@
 dryinglistnum='{{dryinglistnum}}'></bnavigation>
 
 
-
-
-
-
 <!--  优惠券 新人红包  -->
 <view class='newcoupon' wx:if='{{newcoupon}}'>
   <view class='swfback' catchtouchmove="preventD" catchtap='newhbfun'></view>
@@ -265,10 +258,8 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
         <image src='../images/cancelthefork.png' class='swfcanimgnewcou' catchtap='swfcanimgcou'></image>
       </view>
     </view>
-
   </view>
 </view>
-
 
 <tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
 

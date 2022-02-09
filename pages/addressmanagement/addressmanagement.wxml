@@ -1,7 +1,6 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
-
 <view class='box'>
 	<radio-group class="radio-group">
 		<view class='addmhead' wx:for='{{addmandata}}' wx:key="key">
@@ -31,11 +30,8 @@
 						<image class='addeditimg' src='../images/icon_edit.png'></image>
 						编辑
 					</view>
-
 				</view>
-
 			</view>
-
 		</view>
 	</radio-group>
 </view>

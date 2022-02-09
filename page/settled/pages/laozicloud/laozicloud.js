@@ -1,35 +1,11 @@
-import * as AMRT from 'libs/weapp.js'
+
 let viewer
 Page({
     data: {
 
     },
     onLoad: function () {
-        let that = this;
-        wx.getSystemInfo({
-          success (res) {
-            console.log(res.model)
-            console.log(res.pixelRatio)
-            console.log(res.windowWidth)
-            console.log(res.windowHeight)
-            console.log(res.language)
-            console.log(res.version)
-            console.log(res.platform)
-            that.setData({
-              windowWidth:res.windowWidth,
-              windowHeight:res.windowHeight,
-            })
-          }
-        })
-        wx.createSelectorQuery()
-            .select('#c')
-            .node()
-            .exec((res) => {
-                //注册canvas
-                const canvas = AMRT.global.registerCanvas(res[0].node)
-                //初始化视图
-                this.initViewer(canvas)
-            })
+       
     },
     /**
      * 初始化3D视图

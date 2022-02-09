@@ -1,7 +1,6 @@
 
     <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
     <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
-
 <view class='box'>
      <view class='boxchir'>
           <view class='perdahead'>
@@ -36,15 +35,8 @@
                   <image class='whwddimg' src='../images/icon_in.png'></image> 
               </view>
           </view>
-
-
-
-
-
-
      </view>
 </view>
-
 <!--  弹框背景  -->
 <view class='comback' wx:if='{{comback}}'></view>
 <!--  男女弹框  -->
@@ -53,7 +45,6 @@
    <view class='sexman tesclass' bindtap='selman'>男</view>
    <view class='sexcancel' bindtap='sexcancel'>取消</view>
 </view>
-
 <!--  省市联动  -->
 <view class='citybackg' wx:if='{{cityback}}'></view>
 <view wx:if="{{condition}}" class="citypicker">

@@ -11,12 +11,10 @@
 					</swiper-item>
 				</swiper>
     </view>	
-  
 
     <!-- <view class="zhanhuiMap">
       <canvas canvas-id='myCanvas'></canvas>
     </view> -->
-   
 
     <!-- 票务信息 -->
     <!-- <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e1' wx:if='{{!is_formaldress}}'>————— 票务信息 —————</view> -->
@@ -56,12 +54,6 @@
               <view style="background:#1684FC;" data-eveid='{{drawInfo.activity_id}}' data-type='6' data-id='{{drawInfo.activity_id}}' catchtap="{{drawInfo.status==2?'jumpbindTicket':'evesubscrfun'}}">展会VIP门票激活</view>
             </block>
           </view>
-
-
-
-
-
-
       </view>
 
       <view class="addGoods" wx:if='{{!is_formaldress&&goodsInfo&&goodsInfo.length!=0}}'>
@@ -79,44 +71,6 @@
          <view class="billingSubscr" wx:else data-type='7' catchtap="evesubscrfun">开票订阅</view>
          
       </view>
-
-      <!-- <view wx:if="{{goodsInfo.length!=0}}" class="addGoods" catchtap="jumpposition" style="margin-bottom:20rpx;">
-        <view class="addGoodsT">
-          <image src="https://cdn.51chaidan.com/images/icon/iconYellowStar.png" mode="widthFix"></image>
-          <view>
-            <text>门票玩具</text>
-            <text>购票后线下展会凭本人身份证扫码领取</text>
-          </view>
-        </view>
-        <view class="addGoodsBottom">
-          <block wx:for="{{goodsInfo}}" wx:key="key">
-            <view style="{{goodsInfo.length==1?'width:100%':'width:300rpx'}}">
-              <image src="{{item.goods_img}}" mode="widthFix"></image>
-              <text class="addGoodsBottomName">{{item.goods_name}}</text>
-              <text class="addGoodsBottomDy"> <block wx:if="{{isBuyingTickets}}">前往购票</block> <block wx:else>开票订阅</block></text>
-            </view>
-          </block>
-        </view>
-      </view> 
-
-      <view class="ticketInfo" data-url="{{urlScratch}}" catchtap="jumpChouxuanHomepage">
-        <image src="https://cdn.51chaidan.com/images/calendar/luckyDraw/chouxuan.png?imageMogr2/thumbnail/x800" mode="aspectFit"></image>
-        <view class="ticketInfoWrap">
-          <view>
-            <text class="price">￥150</text>
-            <text class="txt">单日游玩</text>
-          </view>
-          <view>
-            <text class="subscriptionBtn"> <block wx:if="{{isBuyingTickets}}">前往购票</block> <block wx:else>开票订阅</block></text>
-          </view>
-        </view>
-      </view>
-      <view class="drawBtn">
-        <block wx:if="{{isBuyingTickets}}">
-          <view catchtap="jumpChouxuanHomepage" data-url="{{urlScratch}}">优先入场资格抽选</view>
-          <view catchtap="jumpLuckyDraw">{{isShowDrawTxt?'优先入场资格查询':'优先入场资格刮刮卡'}}</view>
-        </block>
-      </view> -->
     </view>    
 
     <block wx:if='{{featuredBrands&&featuredBrands.length!=0}}'>
@@ -134,11 +88,6 @@
       </view>
 
     </block>
-
-
-
-
-
     <!-- 线上潮玩展 -->
 
     <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e2' wx:if='{{liveListData&&liveListData.length!=0}}'>————— 线上展会 —————</view>
@@ -158,20 +107,6 @@
 
         </view>
     </view> 
-
-    <!-- <view class="ssubLiveBroadcast" wx:key="key" id='e1' catchtap="arousesubscribeFun" data-subscribe_data="{{subscribeJson[0].toyshowStart}}">
-        <image class="ssubLiveBImg" src="https://cdn.51chaidan.com/data/afficheimg/1621087021755892088.jpg" mode='aspectFit'></image>
-        <view class="ssubLiveBroadRig">
-           <view class="ssubSSAname multilineellipsis">
-            <text>MCTS 6月睡衣派对</text> 
-            <text>线上潮玩展</text> 
-            </view>
-           <view class="ssubSBotTime">
-               <view class="ssubSBotTimeleft">预约订阅</view>
-           </view>
-        </view>
-    </view> -->
-
 
     <block wx:if='{{rewardList && rewardList.length != 0}}'>
         <!-- 一番赏 -->
@@ -195,11 +130,6 @@
             </swiper>
         </view>	
     </block>
-
-
-
-
-
     <!-- <view class="ssubLiveBroadcast" wx:key="key" id='e1' catchtap="arousesubscribeFun" data-subscribe_data="{{subscribeJson[0].toyshowStart}}">
         <image class="ssubLiveBImg" src="https://www.51chaidan.com/images/sign/activity/banner4.jpg?imageMogr2/thumbnail/x800" mode='aspectFit'></image>
         <view class="ssubLiveBroadRig">
@@ -212,8 +142,6 @@
            </view>
         </view>
     </view> -->
-
-     
 
     <!-- 展会福利 -->
     <!-- <block wx:if='{{giftList&&giftList.length!=0}}'>
@@ -245,7 +173,6 @@
         </view>
     </block>   -->
     
-
     <!-- 热门订阅 -->
     <view class="punchInRewardtxt" style="margin:60rpx 0 20rpx 0;" wx:if='{{subGoodsList&&subGoodsList.goodsList&&subGoodsList.goodsList.length!=0}}' id='e33'>
       <image style="width:200rpx;height:auto" src="https://cdn.51chaidan.com/images/toyShow3/rmdy.png" mode="widthFix"></image>
@@ -260,7 +187,6 @@
            </view>
         </view>
     </view>
-
 
     <!-- 独家首发 -->
     <view class="punchInRewardtxt" style="margin:60rpx 0 20rpx 0;" wx:if='{{goodsListNew&&goodsListNew.goodsList&&goodsListNew.goodsList.length!=0}}' id='e33'>
@@ -507,8 +433,6 @@
     
     <!-- <view class="ssubBotTxt">售卖商品陆续更新,最终以展会开售为准</view> -->
 </view>
-
-
 
 <!--  收货地址 receivingaddress -->
 <view class='wsh' wx:if='{{punchAddres}}' catchtouchmove="true">

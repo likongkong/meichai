@@ -3,18 +3,13 @@
 <loading hidden="{{headhidden}}">
   加载中...
 </loading>
-
-
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}' is_share='{{is_share}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
-
 <view class='headhiddenbox' hidden="{{headhiddengeneratePictures}}"></view>
-
 <canvas canvas-id='myordercanimgser' class='myordercanimgsernew'></canvas>
 <!-- myordercanimgser  -->
 <!-- canvas生成分享图片 -->
 <view class='headhiddenbox' hidden="{{headhidden}}"></view>
-
 <canvas canvas-id='canimgser' class='canimgsernew'></canvas>
 <!-- canimgser  -->
 <!-- closeupserimg -->
