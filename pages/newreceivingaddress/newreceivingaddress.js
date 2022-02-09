@@ -41,7 +41,7 @@ Page({
     inputtxt1:'收货人姓名（请填写真实姓名）',
     inputtxt2: '手机号',
     inputtxt3: '详细地址',
-    inputtxt4: '身份证号码(免单活动可不填写,海外购产品清关需要)',
+    inputtxt4: '身份证号码(选填)',
     // 判断身份选项是否显示
     iftrid:'',
     c_title: '收货地址',
