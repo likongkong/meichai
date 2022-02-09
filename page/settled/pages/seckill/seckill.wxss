@@ -243,6 +243,8 @@ page{
 }
 .seckillBottomBox{
   width: 100%;
+  overflow: hidden;
+  position: relative;
 }
 .sbottomLeft{
   width: 110rpx;
@@ -361,3 +363,91 @@ page{
   line-height: 34rpx;
   display: inline-block;
 }
+
+
+/* 关注 */
+
+.BrandConcern{
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 99;
+}
+.BrandConcernTop{
+  border-radius: 20rpx 20rpx 0 0;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.BrandConcernBox{
+  width: 100%;
+  background: #fff;
+  padding-bottom: 20rpx;
+}
+.BrandCBBottc{
+  padding: 30rpx;
+  border-top: 2rpx solid #f5f6fa;
+  color: #E68327;
+  font-size: 28rpx;
+  position: relative;
+}
+.BconcernButton{
+  width: 130rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 30rpx;
+  z-index: 1;
+  font-size: 28rpx;
+  color: #fff;
+  background: #5CA7FE;
+  border-radius: 50rpx;
+  margin: auto;
+}
+.BrandConcernBoxTxt{
+  padding:25rpx 30rpx 25rpx 30rpx;
+  font-size: 28rpx;
+}
+.BrandConcernBoxName{
+  padding:20rpx 0 4rpx 170rpx;
+  margin:0 auto 0;
+  font-size: 28rpx;
+  position: relative;
+}
+.BrandConcernLog{
+  position: absolute;
+  left: 30rpx;
+  top: -60rpx;
+  height: 120rpx;
+  width: 120rpx;
+  border-radius: 16rpx;
+  z-index: 3;
+  background: #fff;
+}
+.recgadheadimgfork{
+  height: 50rpx;
+  width: 50rpx;
+  position: absolute;
+  right: 30rpx;
+  top: 30rpx;
+}
+.BrandConcernTopBoxImg{
+  width: 100%;
+  max-height: 750rpx;
+  overflow: hidden;
+}
+.seckillBottomBoxFollow{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+}
+/* 关注弹框 结束 */
+
+

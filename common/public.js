@@ -3,11 +3,11 @@ var Aes = require('crypto-js.js');  //引用AES源码js
 var env = 'online';   // 线上 
 // var env = 'qpe';  // 准生产环境
 // var env = 'test';  // 测试
-var versionnumber = '14.2.5';
+var versionnumber = '14.2.7';
 
 if(env == "online"){
   var key = Aes.enc.Utf8.parse("danzhuan1chaijia");
-}else if(env == "qpe"){
+}else if(env == "qpe"){ 
   var key = Aes.enc.Utf8.parse("danzhuan1chaijia");
 }else if(env == "test"){
   var key = Aes.enc.Utf8.parse("danzhuanichaijia");

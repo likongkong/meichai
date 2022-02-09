@@ -221,6 +221,7 @@
 
 <view class="seckillBottom">
     <view class="seckillBottomBox">
+        <view class="seckillBottomBoxFollow" wx:if='{{brandinfo && !brandinfo.isAttention}}' catchtap="seckillBottomBoxFollowTip"></view>
         <view class="sbottomLeft">
             <image class='emlplefimgshare' data-type='1' catchtap='followfun' data-id='{{zunmdata.gid}}' src='{{zunmdata.isGoodsPraise?"https://www.51chaidan.com/images/brand/red_heart.png":"https://www.51chaidan.com/images/brand/black_heart.png"}}'></image>
             <view class="sbottomLeftNum">{{zunmdata.gpraise}}</view>
@@ -904,3 +905,21 @@
 </view>
 
 <poster id="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail"></poster>
+
+
+<view class="wshNew" catchtouchmove="true" wx:if='{{BrandConcernTip}}' catchtap="BrandConcernTipFun">
+    <view class="BrandConcern" catchtap="true">
+				<image src='../../../../pages/images/cancelthefork.png' class='recgadheadimgfork' catchtap='BrandConcernTipFun'></image>
+				<view class="BrandConcernTopBoxImg">
+					<image class="BrandConcernTop" mode='widthFix' src="{{movies[0].url}}"></image>
+				</view>
+				<view class="BrandConcernBox">
+					  <view class="BrandConcernBoxName">
+								{{detailBrand.brandName}}
+								<image class="BrandConcernLog boxShadowEve" mode='aspectFit' src="{{detailBrand.brandLogo}}"></image>
+						</view>
+						<view class="BrandConcernBoxTxt" wx:if='{{detailBrand.description}}'>{{detailBrand.description}}</view>
+					  <view class="BrandCBBottc">关注品牌后才可以购买商品哦<view class="BconcernButton" data-type='0' data-id='{{brandinfo.id}}' catchtap='followfun'>关注</view></view>
+				</view>
+		</view>
+</view>

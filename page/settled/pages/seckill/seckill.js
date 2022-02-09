@@ -261,6 +261,7 @@ Page({
     savepic: '',
     tgfrShareIftr:false,
     ctBuyInTheGroup:false ,  // 群内购买 当前状态 true 不能购买 false 能购买
+    BrandConcernTip:false
   },
   noShareShop(){
      app.showToastC('该商品不可分享')
@@ -3353,6 +3354,7 @@ Page({
           _this.setData({
             movies: res.data.Ginfo.gimages,
             zunmdata: redauin,
+            detailBrand:res.data.Ginfo.brand,
             subscribedata: res.data.toyShowSubscribe || '',
             specSubscribe: res.data.specSubscribe || '',
             taxation: redauin.tax || 0,
@@ -4934,6 +4936,9 @@ Page({
           if(type == 0){
             _this.data.page = 0;
             _this.getbrandDetail(_this.data.page);
+            _this.setData({
+              BrandConcernTip:false
+            })
           }else{
            var zunmdata = _this.data.zunmdata;
            var gpraise = zunmdata.gpraise;
@@ -4954,9 +4959,16 @@ Page({
     });
   },
 
-
-
-
+  BrandConcernTipFun(){
+    this.setData({
+      BrandConcernTip:false
+    })
+  },
+  seckillBottomBoxFollowTip(){
+    this.setData({
+      BrandConcernTip:true
+    })
+  }
 
 
 
