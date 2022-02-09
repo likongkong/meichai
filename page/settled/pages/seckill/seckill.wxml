@@ -156,7 +156,7 @@
 
 <view style="padding:0 20rpx 0 20rpx;position:relative;" wx:if='{{brandinfo}}'>
         <view class="exhibdeimgBox">
-                <image class="exhibdeimgNewNew" catchtap="gobrandDetails" data-mid='{{brandinfo.id}}' src="{{brandinfo.logo}}" mode="aspectFill"></image>
+                <image class="exhibdeimgNewNew" catchtap="gobrandDetails" data-mid='{{brandinfo.id}}' src="{{brandinfo.logo}}" mode="aspectFit"></image>
                 <view class="exhibdeimgBRight">
                      <view class="exhibdeimgBRTop">
                                 <block wx:if='{{brandinfo.boothNumber}}'><text style="color:#31b3fb;">展位:{{brandinfo.boothNumber}}</text> | </block>
@@ -286,25 +286,6 @@
                       <block wx:elif='{{zunmdata.status==1}}'>{{zunmdata.datatimew}}开售</block>
                   </view>        
                 </block>
-                <!-- <block wx:elif='{{zunmdata.status == 2}}'>
-                      <block wx:if='{{zunmdata.isDisplayDeposit}}'>
-                          <view class="sbottomRightButton" wx:if='{{zunmdata.debuff==0}}' style="background:#F77F7F;" catchtap="dsbffunblock">支付定金 ￥{{zunmdata.promote_price}}</view>
-                      </block>
-                      <block>
-
-                      </block>
-                      <view class="sbottomRightButton" wx:if='{{zunmdata.debuff==0}}' style="background:#F77F7F;" catchtap="dsbffunblock">立即购买</view>
-                      <view class="sbottomRightButton" wx:elif='{{zunmdata.debuff==1}}' style="background:#999495;">商品已过期</view>
-                      <view class="sbottomRightButton" wx:elif='{{zunmdata.debuff==2}}' style="background:#999495;">商品已售罄</view>
-                </block>
-                <block wx:elif='{{zunmdata.status == 3}}'>
-                      <block wx:if='{{zunmdata.orderSn}}'>
-                          <view class="sbottomRightButton" wx:if='{{zunmdata.debuff==0}}' style="background:#F77F7F;" catchtap="paythebalance">支付尾款 ￥{{zunmdata.orderAmount}}</view>
-                      </block>
-                      <block wx:else>
-                          <view class="sbottomRightButton" wx:elif='{{zunmdata.status == 3}}' style="background:#999495;">已结束</view>
-                      </block>
-                </block> -->
             </block>
             <!-- 平常商品 -->
             <block wx:else>
@@ -919,7 +900,7 @@
 								<image class="BrandConcernLog boxShadowEve" mode='aspectFit' src="{{detailBrand.brandLogo}}"></image>
 						</view>
 						<view class="BrandConcernBoxTxt" wx:if='{{detailBrand.description}}'>{{detailBrand.description}}</view>
-					  <view class="BrandCBBottc">关注品牌后才可以购买商品哦<view class="BconcernButton" data-type='0' data-id='{{brandinfo.id}}' catchtap='followfun'>关注</view></view>
+					  <view class="BrandCBBottc">关注品牌后才可以购买商品哦<view class="BconcernButton" data-type='0' data-id='{{brandinfo.id}}' catchtap='BrandConcernJoin'>关注</view></view>
 				</view>
 		</view>
 </view>
