@@ -318,7 +318,7 @@
                 <block wx:if='{{item.status==2 ||item.status==3}}'>
                     <view class='dlfhtitlenew' style="overflow:hidden;">
                         <block wx:if='{{item.status==2}}'>
-                            <view style="float:left;color:#4CC148;">已发售</view>
+                            <view style="float:left;color:#4CC148;">进行中</view>
                         </block>
                         <block wx:if='{{item.status==3}}'>
                             <view style="float:left;color:#999495;">已结束</view>
@@ -452,7 +452,7 @@
                 <block wx:if='{{item.status==2 ||item.status==3}}'>
                     <view class='dlfhtitlenew' style="overflow:hidden;">
                         <block wx:if='{{item.status==2}}'>
-                            <view style="float:left;color:#4CC148;">已发售</view>
+                            <view style="float:left;color:#4CC148;">进行中</view>
                         </block>
                         <block wx:if='{{item.status==3}}'>
                             <view style="float:left;color:#999495;">已结束</view>
