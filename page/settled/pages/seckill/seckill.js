@@ -4762,6 +4762,7 @@ Page({
 
 
           _this.setData({
+            BrandInfo:res.data.Info,
             brandinfo: res.data.Info.brand,
             isOneselfBrand:res.data.Info.isOneselfBrand || false // 用户是否是当前品牌管理者
 
