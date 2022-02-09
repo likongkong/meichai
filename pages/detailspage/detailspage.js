@@ -245,6 +245,8 @@ Page({
     posterConfig: {},
     savepic: '',
     tgfrShareIftr:false,
+
+    TimeLimit: 1 // 1 限时 限量， 2 普通商品
   },
 
 /**

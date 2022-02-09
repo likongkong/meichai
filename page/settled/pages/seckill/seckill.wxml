@@ -36,7 +36,7 @@
   </view>
 </view>
 <view wx:if='{{shareFriendMask}}' class='shareFriendMask'></view>
-
+ 
 
 <view class='boxdetail {{tipback?"tripList_root":""}}' style="{{!headhidden||newcoupon?'position:fixed;top:0;left:0;right:0;bottom:0;':''}}">
   <view class='dlhead' style='height:{{specialGoods==1?"820":"750"}}rpx;position:relative;background:#fff;'>
@@ -166,7 +166,7 @@
                     </view>
 
                      <view class="exhibdeimgBRTop" wx:if='{{isOneselfBrand}}' catchtap="jumpFanMan" style="color:#34A9ED;">粉丝管理</view>
-                     <view class="exhibdeimgBRTop" wx:else style="color:#666666;">我的积分：{{detailInfo.userInteral || 0}}</view>
+                     <view class="exhibdeimgBRTop" wx:else style="color:#666666;">我的积分：{{BrandInfo.userInteral || 0}}</view>
                      
                       <view wx:if='{{isOneselfBrand}}' class="emlhrightP" catchtap="jumpoffering" data-type='9028' data-id='{{brandinfo.id}}' style="background:#91D2D8;">编辑</view>
                       <view wx:else class="{{!brandinfo.isAttention?'emlhrightP':'emlhrightNoP'}}" data-type='0' data-id='{{brandinfo.id}}'  catchtap='followfun'>
