@@ -13,10 +13,10 @@
            <image src='../images/myorder_bott.png' wx:if='{{myorhtabtr==1}}' class='myorhtabimg'></image>
            待付款
         </view>
-        <view class='myorhtab {{myorhtabtr==2?"myorhtabcol":""}}' data-indnum='2' bindtap='myorhfun'>
+        <!-- <view class='myorhtab {{myorhtabtr==2?"myorhtabcol":""}}' data-indnum='2' bindtap='myorhfun'>
             <image src='../images/myorder_bott.png' wx:if='{{myorhtabtr==2}}' class='myorhtabimg'></image>
             已付款
-        </view>
+        </view> -->
         <view class='myorhtab {{myorhtabtr==3?"myorhtabcol":""}}' data-indnum='3' bindtap='myorhfun'>
             <image src='../images/myorder_bott.png' wx:if='{{myorhtabtr==3}}' class='myorhtabimg'></image>
             待发货

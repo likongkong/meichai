@@ -19,8 +19,6 @@ Page({
     endTime:'',
     is_prize:false,
     selectDate:'',
-    // 8号之后显示排行榜 积分
-    newdataexh:Date.parse(new Date())/1000 > 1638892800?true:false,
     isFinish:false
   },
   // 更新用户信息
@@ -88,10 +86,16 @@ Page({
     var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
     var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
     // 1639324800  timestamp >= 1639324800
-    if(timestamp >= 1640534400){
+    if(timestamp >= 1644768000){
       this.setData({
         endTime:Y + '-' + M +'-' + D,
-        selectDate:'2021-12-26',
+        selectDate:'2022-02-14',
+      })
+    }else if(timestamp <= 1644336000){
+      this.setData({
+        endTime:Y + '-' + M +'-' + D,
+        // selectDate:'2021-12-26',
+        selectDate:Y + '-' + M +'-' + D,
         isFinish:true
       })
     }else{
@@ -127,14 +131,14 @@ Page({
     this.getData();
 
     wx.request({
-      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/luckBag_rules.json',
+      url: 'https://meichai-1300990269.cos.ap-beijing.myqcloud.com/luckBag_rules.json?',
       method: 'GET',
       header: {'Accept': 'application/json'},
       success: function (res) {
-        if(Date.parse(new Date())/1000 > 1638892800){
-          var ruleData = res.data.rule1 || '';
-        }else{
+        if(Date.parse(new Date())/1000 > 1644163200){
           var ruleData = res.data.rule || '';
+        }else{
+          var ruleData = res.data.rule1 || '';
         };
         _this.setData({
           ruleData:ruleData

@@ -156,7 +156,7 @@
 </template>
 <!-- 图片 -->
 <template name="ImageMessage">
-    <view class="TUI-ImageMessage" bindtap="previewImage">
+    <view class="TUI-ImageMessage" bindtap="previewImage" data-url='{{url}}'>
         <image bindload="imageLoad" class="image-message {{isSelf?'my-image':''}}" mode="widthFix" src="{{url}}" />
     </view>
 </template>
