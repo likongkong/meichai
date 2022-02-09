@@ -749,6 +749,7 @@ Page({
             // 是否能分享
             if(infoActivity.isCanShare || infoActivity.isAdmin){
               wx.showShareMenu({
+                menus:['shareAppMessage','shareTimeline'],
                 withShareTicket:true
               });
             }else{
