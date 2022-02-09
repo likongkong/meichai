@@ -1,0 +1,11 @@
+<view class="wrap">
+    <canvas 
+        type="webgl" 
+        id="c" 
+        bindtouchstart="touchStart" 
+        bindtouchmove="touchMove" 
+        bindtouchend="touchEnd" 
+        style="width: {{windowWidth}}px;height: {{windowHeight}}px;"
+    >
+    </canvas>
+</view>

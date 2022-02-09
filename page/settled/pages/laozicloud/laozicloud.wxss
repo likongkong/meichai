@@ -1,0 +1,6 @@
+/* page/settled/pages/laozicloud/laozicloud.wxss */
+.wrap{
+  width: 100%;
+  height: 100%;
+}
+
