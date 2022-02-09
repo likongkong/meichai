@@ -1,9 +1,7 @@
     <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
     <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
-
     <!--  html页面转换  -->
     <import src="../../wxParse/wxParse.wxml" />
-
     <view class='box'>
     	<swiper class="swiper" indicator-color="#fff" indicator-active-color="#ff2742" indicator-dots="true" circular="true" autoplay="true" interval="3000" duration="450" wx:if='{{movies.length!=0}}'>
     		<block wx:for="{{movies}}" wx:key="key">

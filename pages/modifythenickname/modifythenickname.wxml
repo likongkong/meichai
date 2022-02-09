@@ -9,8 +9,6 @@
         <image src='https://cdn.51chaidan.com/images/homepage.png' class='toprightimg' catchtap='jumphomepage'></image>
     </view>
 </view>
-
-
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
 <view class="vipbox"catchtap="jumpVipPage">
@@ -66,7 +64,6 @@
   </view>
 </block>
 
-
 <!-- 单张详情 -->
 <block wx:if='{{isBrandDetail==1}}'>
    <view class="calendDtailPad">
@@ -78,7 +75,6 @@
                 <view class="headBrandName specialellipsis">{{calendarDetails.name}}</view>             
              </view>
              <view class="brandShareBox"> <image class="brandShareImg" src="https://cdn.51chaidan.com/images/sign/calendar/heat.png" mode="widthFix"></image>{{calendarDetails.heat}}</view> 
-
              <view class="headBrandName specialellipsis" style="max-width:145rpx;margin-right:15rpx;">{{calendarDetails.vote_number}}票</view>
           </view>
       </view>   
@@ -92,9 +88,6 @@
             </view>
         </scroll-view>   
    </block>
-
-
-
    <block wx:if='{{calendarDetailsToUser&&calendarDetailsToUser.length!=0}}'>
         <view class='calendTxtTitle' style="line-height:110rpx;">投票排行</view>
         <view class="calendDtailPad" style="background:#fff;">
@@ -111,14 +104,12 @@
             </view>
         </view>   
    </block>
- 
+
    <view class="leafletBottom">
        <view class="leafletBottomEve boxShadowEve"><button style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;top:0;left:0;' open-type="share"></button>分享日历</view>
        <view class="leafletBottomEve boxShadowEve" wx:if='{{isShowVote}}' catchtap="votingInterface" data-brand_id='{{calendarDetails.brand_id}}' data-calendar_id='{{calendarDetails.id}}' style="margin-left:60rpx;">投票</view>
    </view>
-
 </block>
-
 <!-- 品牌详情 -->
 <block wx:elif='{{isBrandDetail==2}}'>
     <view class="detailBrandHead" catchtap="jumpBrandDeail" data-mid='{{brandDetails.brand_id}}'>
@@ -171,28 +162,17 @@
                 <text class="ticketRightName">限定\n日历</text>
                 <image class="ticketRightImg" catchtap="shopDetailfun" mode='aspectFit' wx:if='{{item.gift_img}}' src="{{item.gift_img}}"></image>            
             </block>
-
           </view>
       </view>
-
    </view> 
-
-
     <view class="iwasButon">
         <view class="iwasButonTxt">我的投票剩余:<text style="color:#E94F57;margin:0 10rpx;">{{voteChance}}</text>(当日有效)<view class="clickButton"  catchtap="jumpiwas">我的投票</view></view>
     </view>
-
     <!-- <view class="leafletBottom">
         <view class="leafletBottomEve boxShadowEve" style="width:400rpx;"></view>
     </view> -->
-
-
 </block>
-
-
-
 <!-- 商品详情 -->
-
 <view wx:if='{{shopDetail}}' class="wsh" catchtouchmove="true">
    <view class="tgimgboxgb" catchtap="shopDetailfun"></view>>
 	<view style='width:100%;height:65%;position:absolute;left:0;bottom:0;background:#ccc;z-index:9;'>
@@ -201,11 +181,8 @@
 		<scroll-view scroll-y="true" style="width:100%;height:100%;background:#f0eff5;" class='detailsmokebox'>
 		    <rich-text style="font-size:0;" nodes="{{goodsDescDetails}}"></rich-text>
 		</scroll-view>
-
 	</view>
-
 </view>
-
 <view class="popupMask" wx:if="{{isShowSearch}}" catchtouchmove="true" catchtap="showSearchFun">
    <view class="explainBox">
       <view class="explainBoxHead">活动规则</view>
@@ -214,48 +191,8 @@
       </scroll-view>
    </view>
 </view>
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- 底部导航 -->
 <bnavigation isProduce='{{isProduce}}' isChar='{{false}}'></bnavigation>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
 <view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight-53}}px;width: 100%;z-index: 30;'  catchtap='pullupsignin'></view>

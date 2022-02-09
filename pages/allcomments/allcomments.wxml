@@ -1,10 +1,7 @@
 
     <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
     <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
-
-
 <view class='box'>
-
     <view class='boxch'>
           <view class='allcom' wx:for='{{allcomlist}}' wx:key='key' data-cid='{{item.cid}}' data-uid='{{item.uid}}'>
                <view class='allcomhead'>
@@ -37,8 +34,4 @@
                </view>
           </view>
     </view>
-
-
-
-
 </view>
