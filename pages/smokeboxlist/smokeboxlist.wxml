@@ -134,7 +134,7 @@
 							</view>
 								
 							<image wx:if='{{item.isNewArrival}}' class="labelstyleImg" src="https://cdn.51chaidan.com/images/icon/newArrival.png"></image>
-							<view class='labelstyle' style="{{item.isNewArrival?'right:48rpx;':'right:20rpx;'}}">
+							<view class='labelstyle' style="{{(item.isNewArrival||item.isSpecialOffer)?'right:65rpx;':'right:20rpx;'}}">
 								<!-- <view  wx:if='{{item.vip_special_offer==1}}' class="vipReappearance">VIP返抽盒金<text style="font-size:22rpx">x</text><text style='font-size:23rpx;'>{{item.vip_discount}}</text></view> -->
 
 							  <view wx:if='{{item.isRecycle}}' style='background:#1890ff;' class="tipComStyle">{{item.recycleRatio}}折回收</view>

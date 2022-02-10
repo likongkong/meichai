@@ -56,7 +56,7 @@
         
     </view>
 
-    <view class="centerTxtOrderDeatail comPaddingTop" wx:if='{{detailData.order.isToyCabinet}}'>
+    <view class="centerTxtOrderDeatail comPaddingTop" wx:if='{{detailData.order.isToyCabinet && detailData.order.payStatus !=7}}'>
         <view class="orderBoxTopNew">该订单为玩具柜订单，暂时无法发货，请等待用户确认发货</view>
     </view>
 
