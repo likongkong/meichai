@@ -13,7 +13,7 @@
                         <scroll-view scroll-x="true" style="width:710rpx;white-space: nowrap;height:150rpx;margin:auto;">
                               <block wx:for='{{visitHistory}}' wx:key='key'>
                                   <view class="ocamensweve" catchtap="jumpsouchtem" data-id='{{item.brandId}}' wx:if='{{item.brandId!=0}}'>
-                                      <image class="ocamensweveimg" mode='aspectFill' style="{{item.brandId==brand_id?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{item.brandLogo}}"></image>
+                                      <image class="ocamensweveimg" mode='aspectFit' style="{{item.brandId==brand_id?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{item.brandLogo}}"></image>
                                       <image class='dlfchrtopimgipNew' wx:if='{{item.isNewBrand}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/newIcon.png'></image>
                                       <image class='dlfchrtopimgip' wx:if='{{item.isAuth}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/approveIcon.png'></image>
                                       <view class="ocamenswevename specialellipsis" style="{{item.brandId==brand_id?'color:#f19207;':''}}">{{item.brandName}}</view>
@@ -29,13 +29,13 @@
                 <view style="width:100%;min-height:80rpx;background:#fff;margin-bottom:15rpx;">
                     <view style="position:relative;height:150rpx;width:710rpx;margin:auto;">
                         <view class="ocamensweve" catchtap="brandWholeFun" style="float:left;">
-                            <image class="ocamensweveimg" src="https://cdn.51chaidan.com/images/toyCabinet/allLog.jpg"></image>
+                            <image class="ocamensweveimg" mode="aspectFit" src="https://cdn.51chaidan.com/images/toyCabinet/allLog.jpg"></image>
                             <view class="ocamenswevename specialellipsis">全部</view>
                         </view>
                         <scroll-view scroll-x="true" style="width:590rpx;white-space: nowrap;height:150rpx;float:left;">
                               <block wx:for='{{recommendIps}}' wx:key='key'>
                                   <view class="ocamensweve" catchtap="jumpsouchtem" data-id='{{item.brandId}}'>
-                                      <image class="ocamensweveimg" mode='aspectFill' style="{{item.brandId==brand_id?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{item.brandLogo}}"></image>
+                                      <image class="ocamensweveimg" mode='aspectFit' style="{{item.brandId==brand_id?'border:2rpx solid #f19207;':'border:2rpx solid #fff;'}}" src="{{item.brandLogo}}"></image>
                                       <!-- wx:if='{{item.is_authentication==1}}' -->
                                       <image class='dlfchrtopimgipNew' wx:if='{{item.isNewBrand}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/newIcon.png'></image>
                                       <image class='dlfchrtopimgip' wx:if='{{item.isAuth}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/approveIcon.png'></image>
@@ -82,7 +82,7 @@
         <view class="emlist" wx:for='{{communityList}}' wx:key='key'>
             <view class="emlhead">
                 <view class="emlhleft" data-id='{{item.brandInfo.brand_id}}' catchtap="jumpexhdetail">
-                    <image class='emlhlimg' src="{{item.brandInfo.brand_logo}}" mode='aspectFill'></image>
+                    <image class='emlhlimg' src="{{item.brandInfo.brand_logo}}" mode="aspectFit"></image>
 
                     <image class='dlfchrtopimgipList' wx:if='{{item.brandInfo.isAuth}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/approveIcon.png'></image>
 
@@ -361,7 +361,7 @@
             </view>
             <view class='dlfhpbox'>
               <view style='width:40rpx;height:40rpx;border-radius:50%;float:left;margin:8rpx 8rpx 0 8rpx;position: relative;'  data-id='{{item.brandInfo.brand_id}}' catchtap="jumpexhdetail">
-                <image src='{{item.brandInfo.brand_logo}}' style="width:100%;height:100%;border-radius:50%;"></image>
+                <image src='{{item.brandInfo.brand_logo}}' mode="aspectFit" style="width:100%;height:100%;border-radius:50%;background: #fff;"></image>
                 <view wx:if="{{item.isVip}}" class='vipBG'><image src='https://cdn.51chaidan.com/images/calendar/VipCase.png' style='position: relative;'></image></view>
 
                 <image class='dlfchrtopimgipListp' wx:if='{{item.brandInfo.isAuth}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/approveIcon.png'></image>
@@ -494,7 +494,7 @@
             </view>
             <view class='dlfhpbox'>
               <view style='width:40rpx;height:40rpx;border-radius:50%;float:left;margin:8rpx 8rpx 0 8rpx;position: relative;'  data-id='{{item.brandInfo.brand_id}}' catchtap="jumpexhdetail">
-                <image src='{{item.brandInfo.brand_logo}}' style="width:100%;height:100%;border-radius:50%;"></image>
+                <image src='{{item.brandInfo.brand_logo}}' mode="aspectFit" style="width:100%;height:100%;border-radius:50%;background: #fff;"></image>
                 <view wx:if="{{item.isVip}}" class='vipBG'><image src='https://cdn.51chaidan.com/images/calendar/VipCase.png' style='position: relative;'></image></view>
                 <image class='dlfchrtopimgipListp' wx:if='{{item.brandInfo.isAuth}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/approveIcon.png'></image>
               </view>

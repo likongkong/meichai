@@ -1317,7 +1317,7 @@ page{
 .brandInfoLogo{
   width: 70rpx;
   height: 70rpx;
-  border-radius: 70rpx;
+  border-radius: 6rpx;
 }
 .brandInfoName{
   max-width: 280rpx;

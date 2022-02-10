@@ -67,7 +67,8 @@ width: 72rpx;}
   width: 70rpx;
   height: 70rpx;
   float: left;
-  border-radius: 50%;
+  border-radius: 6rpx;
+  background: #fff;
 }
 .emlhltxt{
   width: 395rpx;
@@ -212,6 +213,7 @@ width: 72rpx;}
   border-radius: 50%;
   display: block;
   border:2rpx solid #fff;
+  background: #fff;
 }
 .ocamenswevename{
   width: 100%;

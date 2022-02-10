@@ -272,6 +272,7 @@ page {
   float: left;
   border-radius: 6rpx;
   box-shadow: 2px 2px 5rpx #ccc;  
+  background: #fff;
 }
 .exhibdeimgBRight{
   height: 100rpx;
@@ -348,7 +349,8 @@ page {
   width: 70rpx;
   height: 70rpx;
   float: left;
-  border-radius: 50%;
+  border-radius: 6rpx;
+  background: #fff;
 }
 .emlhltxt{
   width: 395rpx;

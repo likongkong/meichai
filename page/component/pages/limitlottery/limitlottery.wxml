@@ -147,7 +147,7 @@
 					
 					<view class="brandInfo">
 						<view>
-							<image catchtap="jumpexhbrandDetail" data-id="{{brandinfo.brandId}}" class="brandInfoLogo" src="{{brandinfo.brandLogo}}" mode="aspectFill" ></image>
+							<image catchtap="jumpexhbrandDetail" data-id="{{brandinfo.brandId}}" class="brandInfoLogo" src="{{brandinfo.brandLogo}}" mode="aspectFit" ></image>
 							<text catchtap="jumpexhbrandDetail" data-id="{{brandinfo.brandId}}" class="brandInfoName">{{brandinfo.brandName}}</text>
 							<image class="brandAuthenticationIcon" wx:if="{{brandinfo.isAuth}}" src="https://cdn.51chaidan.com/images/brandSettledIcon/AuthenticationOk.png" mode="widthFix"></image>
 						</view>

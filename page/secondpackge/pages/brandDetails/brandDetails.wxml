@@ -7,7 +7,7 @@
 
 	<view style="padding:0 20rpx 0 20rpx;position:relative;">
 		<view class="exhibdeimgBox">
-				<image class="exhibdeimgNewNew" src="{{brandinfo.logo}}" mode="aspectFill"></image>
+				<image class="exhibdeimgNewNew" src="{{brandinfo.logo}}" mode="aspectFit"></image>
 				<view class="exhibdeimgBRight">
 					 <view class="exhibdeimgBRTop">
 								<block wx:if='{{brandinfo.boothNumber}}'><text style="color:#31b3fb;">展位:{{brandinfo.boothNumber}}</text> | </block>
@@ -98,7 +98,7 @@
         <view class="emlist" wx:for='{{communityList}}' wx:key='key'>
             <view class="emlhead">
                 <view class="emlhleft">
-										<image class='emlhlimg' src="{{item.brandInfo.brand_logo}}" mode='aspectFill'></image>
+										<image class='emlhlimg' src="{{item.brandInfo.brand_logo}}" mode='aspectFit'></image>
 
 										<image class='dlfchrtopimgipList' wx:if='{{item.brandInfo.isAuth}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/approveIcon.png'></image>
 
@@ -370,7 +370,7 @@
             </view>
             <view class='dlfhpbox'>
               <view style='width:40rpx;height:40rpx;border-radius:50%;float:left;margin:8rpx 8rpx 0 8rpx;position: relative;' catchtap='jumpdlfchlimgdetail' data-nick='{{item.nick}}' data-uid='{{item.uid}}'>
-                <image src='{{item.brandInfo.brand_logo}}' style="width:100%;height:100%;border-radius:50%;"></image>
+                <image src='{{item.brandInfo.brand_logo}}' mode="aspectFit" style="width:100%;height:100%;border-radius:50%;background: #fff;"></image>
 								<view wx:if="{{item.isVip}}" class='vipBG'><image src='https://cdn.51chaidan.com/images/calendar/VipCase.png' style='position: relative;'></image></view>
 
 								<image class='dlfchrtopimgipListp' wx:if='{{item.brandInfo.isAuth}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/approveIcon.png'></image>
@@ -500,7 +500,7 @@
             </view>
             <view class='dlfhpbox'>
               <view style='width:40rpx;height:40rpx;border-radius:50%;float:left;margin:8rpx 8rpx 0 8rpx;position: relative;' catchtap='jumpdlfchlimgdetail' data-nick='{{item.nick}}' data-uid='{{item.uid}}'>
-                <image src='{{item.brandInfo.brand_logo}}' style="width:100%;height:100%;border-radius:50%;"></image>
+                <image src='{{item.brandInfo.brand_logo}}' mode="aspectFit" style="width:100%;height:100%;border-radius:50%;background: #fff;"></image>
 								<view wx:if="{{item.isVip}}" class='vipBG'><image src='https://cdn.51chaidan.com/images/calendar/VipCase.png' style='position: relative;'></image></view>
 
 								<image class='dlfchrtopimgipListp' wx:if='{{item.brandInfo.isAuth}}' mode="aspectFit" src='https://cdn.51chaidan.com/images/brandSettledIcon/approveIcon.png'></image>

@@ -119,7 +119,8 @@ page{
   width: 90rpx;
   height: 90rpx;
   float: left;
-  border-radius: 50%;
+  border-radius:6rpx;
+  background: #fff;
 }
 .emlhltxt{
   width: 395rpx;
