@@ -98,7 +98,7 @@ Page({
     if(type == 1){
       var item_type = 9047;
     }else if(type == 2){
-      var item_type = 9003;
+      var item_type = 9001;
     }else if(type == 3){
       var item_type = 9017
     }else if(type == 4){
@@ -133,10 +133,23 @@ Page({
         wx.requestSubscribeMessage({
           tmplIds: subscribedata.template_id || [],
           success(res) {
+            console.log(res)
+            var is_show_modal = true;
             for (var i = 0; i < subscribedata.template_id.length; i++) {
               if (res[subscribedata.template_id[i]] == "accept") {
                 app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+                if (is_show_modal) {
+                  _this.subshowmodalfun('订阅成功');
+                  is_show_modal = false;
+                };
               };
+              if (res[subscribedata.template_id[i]] == "reject") {
+                if (is_show_modal) {
+                  _this.subshowmodalfun('订阅失败');
+                  is_show_modal = false;
+                };
+              };
+              
             };
           },
         })
@@ -153,7 +166,20 @@ Page({
       };
     };
   },
-
+  subshowmodalfun: function (txt) {
+    var _this = this;
+    wx.showModal({
+      title: '提示',
+      content: txt,
+      showCancel: false,
+      success: function (res) {
+        _this.setData({
+          subscribeCouponTip: '',
+          isSubscribeCoupon: false
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

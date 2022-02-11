@@ -7,8 +7,6 @@
 
 
 
-
-
 <view style='width:0;height:0;overflow:hidden;position:absolute;top:-1000px;'>
   <canvas canvas-id='snapshot' style='width:300px; height:240px;'></canvas>
 </view>
@@ -108,7 +106,11 @@
         <view style="background:#fff;">
             <view class="sCountDown" wx:if='{{(zunmdata.status == 1 && zunmdata.startTime) || (zunmdata.status == 2 && zunmdata.endTime)}}'><block wx:if='{{zunmdata.status == 1}}'>距开始 </block><block wx:else>距结束 </block>{{winningovertimedetail.dayStr}}天{{winningovertimedetail.hrStr}}小时{{winningovertimedetail.minStr}}分{{winningovertimedetail.secStr}}秒</view>
             <view class="seckillName">{{zunmdata.shortName}}</view>
-            <view class="sSaleTime"><view class="intraGroupSaleTxt" wx:if='{{zunmdata.status == 1}}'>{{zunmdata.datatimew}}   发售</view><view class="intraGroupSale"  wx:if='{{!isShareFun && brandinfo.id}}'>群内发售</view></view>
+            <view class="sSaleTime" wx:if='{{(zunmdata.status == 1) || (!isShareFun && brandinfo.id)}}'><view class="intraGroupSaleTxt" wx:if='{{zunmdata.status == 1}}'>{{zunmdata.datatimew}}   发售</view><view class="intraGroupSale"  wx:if='{{!isShareFun && brandinfo.id}}'>
+                <!-- <block wx:if='{{zunmdata.}}'>隐藏发售</block>
+                <block wx:else>群内发售</block> -->
+                群内发售
+            </view></view>
             <view class="sSalePrice"><text style="font-size:22rpx;">￥</text>{{zunmdata.gprice!=0?zunmdata.gprice:''}}<text style="font-size:22rpx;color:#000;" wx:if='{{zunmdata.integral>0}}'>+{{zunmdata.integral}}积分</text></view>
             <view class="sCountstock">
                 <view class="sCountstockView" wx:if="{{zunmdata.settledGoodsStockNumbers}}">商品库存：<text style="color:#999495;">{{zunmdata.settledGoodsStockNumbers}}</text></view>
@@ -230,6 +232,7 @@
             <image class='emlplefimgshare' catchtap="noShareShop" src="https://cdn.51chaidan.com/images/brandInfoIcon/settledGoodsShareIcon.png"></image>
             <view class="sbottomLeftNum">{{zunmdata.settledGoodsShareNumber}}</view>
             <button open-type="share" wx:if='{{isShareFun}}' style='position: absolute;left: 0;top: 0;width: 100%; height: 100%;opacity: 0;padding:0;z-index:1;' type="default" size="mini"></button>
+            <!-- <view wx:if='{{isShareFun}}' catchtap="shareCreatPicFun" style='position: absolute;left: 0;top: 0;width: 100%; height: 100%;opacity: 0;padding:0;z-index:1;'></view> -->
         </view>
         <view class="sbottomRight">
             <view class="sbottomRightButton" wx:if='{{zunmdata.isSuplusChance}}' style="background:#FF890B;">还有机会，有订单未支付</view>
@@ -885,7 +888,34 @@
    </view>
 </view>
 
-<poster id="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail"></poster>
+<block wx:if="{{GroupSharingCanvas == 1}}">
+    <poster id="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail"></poster>
+</block>
+<block wx:if='{{GroupSharingCanvas == 2}}'>
+    <poster id="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail"></poster>
+</block>
+
+
+
+
+<!-- 保存图片  -->
+<view class='tgimgbox' wx:if='{{shareCreatPic}}'>
+  <view class='tgimgboxgb' catchtap='tgfrShareIftrFun'></view>
+  <view class='tgimgbcon' style='width:310px;height:410px;top:-230rpx;'>
+    <image class='tgimcimg' src='{{actimgshare}}' style='width:310px;height:410px;'></image>
+  </view>
+  <view class='tgfrindShare'>
+    <view class='tgfrShareLeft' wx:if='{{isShareFun}}'>
+      <view class='tgftShLText' style='background:#3f9314;color:#e8f7f0;'>
+        <button open-type="share" style='position: absolute;left: 0;top: 0;width: 100%; height: 100%;opacity: 0;padding:0;'  type="default" size="mini"></button>
+        分享好友
+      </view>
+    </view>
+    <view class='tgfrShareright'>
+      <view class='tgftShLText' style='background:#f18f00;color:#fceeef;' catchtap='sharesavethepicture'>保存海报</view>
+    </view>
+  </view>
+</view>
 
 
 <view class="wshNew" catchtouchmove="true" wx:if='{{BrandConcernTip}}' catchtap="BrandConcernTipFun">

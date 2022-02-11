@@ -261,7 +261,16 @@ Page({
     savepic: '',
     tgfrShareIftr:false,
     ctBuyInTheGroup:false ,  // 群内购买 当前状态 true 不能购买 false 能购买
-    BrandConcernTip:false
+    BrandConcernTip:false,
+    GroupSharingCanvas:1, // 1群分享弹框 2朋友圈分享图片
+    shareCreatPic:false
+  },
+  shareCreatPicFun(){
+     this.setData({
+        shareCreatPic:!this.data.shareCreatPic,
+        GroupSharingCanvas:2
+     })
+     this.onCreatePoster();
   },
   noShareShop(){
      app.showToastC('该商品不可分享')
@@ -275,65 +284,174 @@ Page({
     wx.showLoading({
       title: '生成中...',
     })
-    // setData配置数据
-    _this.setData({
-      posterConfig: {
-        width: 900,
-        height: 740,
-        debug: false,
-        // pixelRatio: 1000,
-        preload: false,
-        hideLoading: false,
-        backgroundColor: '#ccc',
-        blocks: [{
-          x: 200,
-          y: 30,
-          width: 600,
-          height: 670,
-          backgroundColor:'#fff',
-          zIndex: 1,
-          borderRadius: 20,
-        }],
-        texts: [{
-          x: 228,
-          y: 82,
-          baseLine: 'middle',
-          width:490,
-          lineNum:1,
-          text:zunmdata.gname, // 品牌名
-          fontSize: 36,
-          textAlign: 'left',
-          color: '#000',
-          zIndex: 3,
-        }],
-        images: [
-          {  // 头像
-            x: 80,
-            y: 30,
-            url: zunmdata.brand.brandLogo,
-            width: 90,
-            height:90,
-            zIndex:2,
-            borderRadius:10,
-          },{  // banner
-            x: 228,
-            y: 120,
-            url: zunmdata.goods_thumb,
-            width: 544,
-            height:544,
-            zIndex: 3
-          },{  // 三角
-            x: 178,
-            y: 60,
-            url: 'https://cdn.51chaidan.com/images/brandInfoIcon/goodsLeftArrow.png',
-            width: 30,
-            height:30,
-            zIndex: 3
-          }]
+    if(_this.data.GroupSharingCanvas == 1){
+        // setData配置数据
+        _this.setData({
+          posterConfig: {
+            width: 900,
+            height: 740,
+            debug: false,
+            // pixelRatio: 1000,
+            preload: false,
+            hideLoading: false,
+            backgroundColor: '#ccc',
+            blocks: [{
+              x: 200,
+              y: 30,
+              width: 600,
+              height: 670,
+              backgroundColor:'#fff',
+              zIndex: 1,
+              borderRadius: 20,
+            }],
+            texts: [{
+              x: 228,
+              y: 82,
+              baseLine: 'middle',
+              width:490,
+              lineNum:1,
+              text:zunmdata.gname, // 品牌名
+              fontSize: 36,
+              textAlign: 'left',
+              color: '#000',
+              zIndex: 3,
+            }],
+            images: [
+              {  // 头像
+                x: 80,
+                y: 30,
+                url: zunmdata.brand.brandLogo,
+                width: 90,
+                height:90,
+                zIndex:2,
+                borderRadius:10,
+              },{  // banner
+                x: 228,
+                y: 120,
+                url: zunmdata.goods_thumb,
+                width: 544,
+                height:544,
+                zIndex: 3
+              },{  // 三角
+                x: 178,
+                y: 60,
+                url: 'https://cdn.51chaidan.com/images/brandInfoIcon/goodsLeftArrow.png',
+                width: 30,
+                height:30,
+                zIndex: 3
+              }]
+          }
+        }, () => {
+          Poster.create();
+        });
+    }else if(_this.data.GroupSharingCanvas == 2){
+      var brandinfo = _this.data.brandinfo;
+      var imgData =  [
+        {  // 背景图
+          x: 0,
+          y: 0,
+          url: 'https://cdn.51chaidan.com/images/brandInfoIcon/dynamicBackground.jpg',
+          width: 700,
+          height: 1170,
+          zIndex: 1
+        },{  // 头像
+        x: 57,
+        y: 57,
+        url: brandinfo.logo,
+        width: 66,
+        height:66,
+        zIndex:2,
+        borderRadius:66,
       }
-    }, () => {
-      Poster.create();
-    });
+      ,{
+        x: 260,
+        y: 900,
+        url:zunmdata.qrcode,
+        width: 180,
+        height:180,
+        zIndex: 2,
+        borderRadius:180,
+      }];
+      if(_this.data.movies.length != 0){
+        imgData.push({  // banner
+          x: 60,
+          y: 150,
+          url: _this.data.movies[0].url,
+          width: 580,
+          height:580,
+          zIndex: 3,
+          borderRadius:20,
+        })
+      };
+      console.log(imgData)
+      // setData配置数据
+      _this.setData({
+        posterConfig: {
+          width: 700,
+          height: 1170,
+          debug: false,
+          // pixelRatio: 1000,
+          preload: false,
+          hideLoading: false,
+          backgroundColor: '#fff',
+          blocks: [{
+            x: 30,
+            y: 30,
+            width: 640,
+            height: 840,
+            backgroundColor:'#fff',
+            zIndex: 1,
+            borderRadius: 20,
+          },{
+            x: 50,
+            y: 50,
+            width: 340,
+            height: 80,
+            backgroundColor:'#ccc',
+            zIndex: 1,
+            borderRadius: 80,
+          }],
+          texts: [{
+            x: 138,
+            y: 92,
+            baseLine: 'middle',
+            width:220,
+            lineNum:1,
+            text:brandinfo.brandName, // 品牌名
+            fontSize: 26,
+            textAlign: 'left',
+            color: '#fff',
+            zIndex: 3,
+          },{
+            x: 60,
+            y: 780,
+            baseLine: 'middle',
+            width:560,
+            lineNum:2,
+            lineHeight:40,
+            text:zunmdata.gname, // 商品名
+            fontSize:30,
+            textAlign: 'left',
+            color: '#000',
+            zIndex: 12,
+            fontWeight:'bold'
+          },{
+            x: 220,
+            y: 1120,
+            baseLine: 'middle',
+            text:'了解更多，扫码查看',
+            fontSize: 30,
+            textAlign: 'left',
+            color: '#000',
+            zIndex: 2,
+          }],
+          images:imgData
+        }
+      }, () => {
+        Poster.create();
+      });
+    }
+
   },
   onPosterFail(e){
     wx.hideLoading()
@@ -909,7 +1027,12 @@ Page({
                 }
                 
                 if (is_show_modal) {
-                  _this.subshowmodalfun();
+                  _this.subshowmodalfun('订阅成功');
+                  is_show_modal = false;
+                };
+              }else{
+                if (is_show_modal) {
+                  _this.subshowmodalfun('订阅失败');
                   is_show_modal = false;
                 };
               };
@@ -940,11 +1063,11 @@ Page({
     }
 
   },
-  subshowmodalfun: function () {
+  subshowmodalfun: function (txt) {
     var _this = this;
     wx.showModal({
       title: '提示',
-      content: '订阅成功',
+      content: txt || '订阅成功',
       showCancel: false,
       success: function (res) {
         _this.setData({

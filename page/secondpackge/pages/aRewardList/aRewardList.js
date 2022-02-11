@@ -20,7 +20,7 @@ Page({
     loadprompt:false,
     nodata:false,
     // 适配苹果X
-    isIphoneX: false,
+    isIphoneX: app.signindata.isIphoneX,
     isProduce: app.signindata.isProduce,
     datalist:[],
     swiperdata:[],

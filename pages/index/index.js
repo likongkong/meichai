@@ -274,7 +274,7 @@ Page({
 
       // url: "/pages/giftCollection/giftCollection?oid="
 
-      url: "/page/secondpackge/pages/drawHideGoods/drawHideGoods?gid=39374"
+      // url: "/page/secondpackge/pages/drawHideGoods/drawHideGoods?gid=39374"
       // url: "/page/secondpackge/pages/auctionDetails/auctionDetails"
       // url: "/page/secondpackge/pages/auctionList/auctionList" 
       // url: "/page/secondpackge/pages/entityLuckyDraw/entityLuckyDraw"
@@ -297,6 +297,8 @@ Page({
 
       // url: "/pages/modifythenickname/modifythenickname?brand_id=210"
       // url: "/page/secondpackge/pages/fillInOrderNum/fillInOrderNum?oid=23&type=1"
+      url: `/page/settled/pages/seckill/seckill?gid=39925`
+      
       
     });
   },

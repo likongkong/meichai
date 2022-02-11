@@ -28,7 +28,10 @@
        <view class="atlasCNChild" wx:if='{{sellList && sellList.length != 0}}'>发售信息</view>
        <view class="atlasCNChildEve" wx:for='{{sellList}}' wx:key='key' catchtap="jumpdetail" data-id='{{item.id}}' data-type='{{item.type}}'>
            <view class="atlasCNChildETop">
-               <view>{{item.start_time}}发售</view>
+               <view>{{item.start_time}}
+                   <block wx:if='{{item.type == 2}}'>抽选</block>
+                   <block wx:else>发售</block>
+               </view>
 
                <block wx:if='{{item.status==1}}'>
                    <view style="color:#1296DB;">未开始</view>
@@ -43,7 +46,7 @@
                
            </view>
            <view class="atlasCNChildETop">
-               <view style="color:#929292;">来自美拆发售</view>
+               <view style="color:#929292;">来自美拆<block wx:if='{{item.type == 2}}'>抽选</block><block wx:else>发售</block></view>
            </view>
            <view class="atlasCNChildETop" style="margin-bottom:0;">
                <view></view>
@@ -52,7 +55,10 @@
                    <view class="startSubscription" style="background:#FF890B;" catchtap="subscrfundom" data-index='{{index}}'>开售订阅</view>
                </block>
                <block wx:if='{{item.status==2}}'>
-                   <view class="startSubscription" style="background:#EC817C;">去购买</view>
+                   <view class="startSubscription" style="background:#EC817C;">
+                         <block wx:if='{{item.type == 2}}'>去报名</block>
+                         <block wx:else>去购买</block>
+                   </view>
                </block>
                <block wx:if='{{item.status==3}}'>
                    <view class="startSubscription" style="background:#1296DB;">查看抽选</view>

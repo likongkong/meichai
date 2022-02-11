@@ -3622,6 +3622,7 @@ closefrindcommoni:function(){
           if (res.data.ReturnCode == 200) {
             app.showToastC('领取成功');
             _this.onLoadfun();
+            app.signindata.isAwardOrder = false;
           } else if (res.data.ReturnCode == 830) {
             var rpiinfo = res.data.Info.tip.replace(/\\n/g, '\n')||'';
             if (res.data.Info.Goods.item_type==996){
