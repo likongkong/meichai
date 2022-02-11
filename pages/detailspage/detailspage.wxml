@@ -1,17 +1,18 @@
+<!-- 预览遮层 start -->
+<view class="preview">
+  <view class="preview_footer">
+    <view>返回编辑</view>
+    <view>确认发布</view>
+  </view>
+</view>
+<!-- 预览遮层 end -->
 <!--  html页面转换  -->
 <import src="../../wxParse/wxParse.wxml" />
-
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}' is_share='{{is_share}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
-
-
-
 <view style='width:310px;height:410px;overflow:hidden;position:absolute;top:-2000px;'>
   <canvas canvas-id='sharefriend' style='width:310px; height:410px;'></canvas>
 </view>
-
-
-
 <!-- 保存图片  -->
 <view class='tgimgbox' wx:if='{{tgfrShareIftr}}'>
   <view class='tgimgboxgb' catchtap='tgfrShareIftrFun'></view>

@@ -1093,7 +1093,7 @@ App({
       });      
     } else if (item_type == 9041) {   // 商品管理
       wx.navigateTo({
-        url: `/page/settled/pages/commodityManagement/commodityManagement`
+        url: `/page/settled/pages/commodityManagement/commodityManagement?${whref}`
       });      
     } else if (item_type == 9042) {   // 专区管理
       wx.navigateTo({

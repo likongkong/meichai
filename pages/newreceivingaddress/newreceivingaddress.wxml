@@ -24,11 +24,8 @@
       <view class='txtcon'>1、海关政策要求，身份信息仅用于海关清关，加密保存；</view>
       <view class='txtcon'>2、收货人真实姓名与身份证信息一致才可通关。</view>
   </view>
-   
-   
    <view class='saveData' bindtap='submissionofdata'>保存</view>
 </view>
-
 <!--  省市联动  -->
 <view class='citybackg' wx:if='{{cityback}}'></view>
 <view wx:if="{{condition}}" class="citypicker">
