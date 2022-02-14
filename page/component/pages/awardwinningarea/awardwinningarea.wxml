@@ -2,8 +2,6 @@
   加载中...
 </loading>
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
-
-
 <view class='awabox {{ishowCart||bottomdetail?"tripList_rootawa":""}}'>
   <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
   <view>
@@ -21,7 +19,6 @@
         <!-- <image class='awamsimg' src='https://www.51chaidan.com/images/toyCabinet/Millisecond.gif?1'></image> -->
       </view>
     </view>
-
     <view class='awabtab' wx:if='{{scrdata.length>1}}'>
       <view id='the_id' class='Locationtab' wx:if='{{scrdata.length>1}}'>
         <scroll-view scroll-x="true" class="today_disanum_tab_comtainer" scroll-with-animation="true" bindscroll='scrollleftf' scroll-left='{{scrollleft}}'>
@@ -70,17 +67,11 @@
     </view>
   </view>
 
-
   <view class='noDataCom' wx:if='{{listdata.length==0&&nodataiftr}}'>
       <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
   </view>
-
   <view style='width:100%;text-align:center;line-height:60rpx;color:#666;font-size:30rpx;' wx:if='{{listdata.length>=10}}'>{{loadprompt}}</view>
-
 </view>
-
-
-
 <view style='width:100%;height:125rpx;'></view>
 
 <!-- 提交蒙层 -->
@@ -102,57 +93,41 @@
         <text style="font-size:32rpx;color:#ff6968;font-weight:bold;">{{mAmount+1}}</text>个：￥{{totalMoney}}
         <text wx:if='{{goodsDiscount!=""&&goodsDiscount>0}}' style='color:#ff6968;font-size:32rpx;font-weight:bold;float:right;'>-￥{{goodsDiscount}}</text>
       </view>
-
     </view>  
   </view>
 
-
   <view wx:if='{{ishowCart}}' style="width:100%;max-height:{{windowHeight-statusBarHeightMc-208}}px;padding-bottom:90rpx;overflow:scroll;">
-
     <view style="width:100%;float:left;position:relative;border-bottom:1rpx solid #e3e3e3;">
-
       <view style="width:100rpx;height:100rpx;float:left;position:relative;margin:30rpx 30rpx;">
         <image class="cartImg" mode='aspectFit' src="{{awardInfo.goods_thumb}}"></image>
         <view class="waitforaward">等待领奖</view>
       </view>
-
       <view style="float:left;font-size:25rpx;width:580rpx;position:relative;">
         <view class="cartGoodsname multilineellipsis">{{awardInfo.goods_name}}</view>
-
         <view>
           <view class="money" style="color:#45961a;">
             <text wx:if='{{awardInfo.market_price!=0}}' style="color:#ee1951;text-decoration:line-through;">￥{{awardInfo.market_price}}</text> 免费赠送1个
           </view>
         </view>
-
       </view>
     </view>
 
     <block wx:for='{{zunmdata}}' wx:key='key'>
-
       <view style="width:100%;float:left;position:relative;border-bottom:1rpx solid #e3e3e3;">
-
         <view style="width:100rpx;height:100rpx;float:left;position:relative;margin:30rpx 30rpx;">
           <image class="cartImg" mode='aspectFit' src="{{item.goods_thumb}}"></image>
         </view>
-
         <view style="float:left;font-size:25rpx;width:580rpx;position:relative;">
           <view class="cartGoodsname multilineellipsis">{{item.goods_name}}</view>
-
           <view style="width:40rpx;line-height:40rpx;position:absolute;top:10rpx;right:0;font-size:25rpx;text-align:right;" data-index='{{index}}' data-cart_id='{{item.cart_id}}' data-store_id='{{item.store_id}}' bindtap="deleteData">×</view>
-
           <view>
             <view class="money ">￥{{item.gsale}}</view>
-
-
             <view class="number-box">
               <view class="number reduce" bindtap="reduceEvent" data-reduce="{{index}}" style="color:{{item.color}}">-</view>
               <view class="number count">{{item.numberofdismantling}}</view>
               <view class="number add" bindtap="addEvent" data-add="{{index}}" style="color:#000;">+</view>
             </view>
-
           </view>
-
           <view wx:if="{{item.relGidTips}}" style='position:absolute;top:47rpx;right:0rpx;overflow:hidden;z-index:100rpx;' bindtap="addEvent" data-add="{{index}}">
             <view style='line-height:40rpx;color:white;font-size:25rpx;text-align:center;border-radius:10rpx;background:#404040;position:relative;padding:0 10rpx;'>
               <view style='text-align:left;'>
@@ -161,12 +136,10 @@
                 <text style='color:#ff6968;font-size:30rpx;font-weight:bold;'>{{item.relGidTips.discountPrice}}元</text>
               </view>
             </view>
-
             <view style='width:100%;height:10rpx;position:relative;'>
               <image style='width:20rpx;height:10rpx;position:absolute;top:0;right:20rpx;' src='https://clw.51chaidan.com/images/goods/black_arrow.png'></image>
             </view>
           </view>
-
         </view>
 
         <view class='addShopComb' wx:if='{{item.displayGroupId&&(item.groupData.goodsList!=0||item.groupData.presentList.length!=0||item.groupData.discount.cheaper!=0)&&(item.groupData.postion==-1||item.groupData.postion==item.position)}}'>
@@ -198,15 +171,11 @@
             <view class='ascrFinsh comPosCen' wx:else>已满足条件</view>
           </view>
         </view>
-
       </view>
-
     </block>
-
   </view>
 
   <view style="width:100%;height:130rpx;background:#5C5B5B;border-radius:60rpx;color:#fff;" catchtap="showCart">
-
     <view style="width:120rpx;height:120rpx;float:left;margin-left:40rpx;">
       <view style="width:90rpx;height:90rpx;margin:6rpx 15rpx;position:relative;">
         <image style="width:90rpx;height:90rpx;border-radius: 6rpx;" mode='aspectFit' src="{{awardInfo.goods_thumb}}"></image>
@@ -215,11 +184,8 @@
       <view wx:if='{{awardInfo.market_price!=0}}' style="width:120rpx;line-height:25rpx;font-size:25rpx;color:#fff;text-align:center;text-decoration:line-through;">￥{{awardInfo.market_price}}</view>
       <view wx:else style="width:120rpx;line-height:25rpx;font-size:25rpx;color:#fff;text-align:center;">￥0</view>
     </view>
-
     <view style="width:1rpx;height:100rpx;margin:10rpx 0;background:#fff;float:left;"></view>
-
     <scroll-view scroll-x="true" style='width:455rpx;float:left;white-space:nowrap;'>
-
       <block wx:for='{{zunmdata}}' wx:key='key'>
         <view style="width:120rpx;height:120rpx;display:inline-block;">
           <view style="width:90rpx;height:90rpx;margin:6rpx 15rpx;position:relative;">
@@ -229,24 +195,17 @@
           <view style="width:120rpx;line-height:25rpx;font-size:25rpx;color:#fff;text-align:center;">￥{{item.totalPrice}}</view>
         </view>
       </block>
-
     </scroll-view>
-
     <view wx:if='{{isFinished}}' style="width:130rpx;height:100%;float:right;background:#E65163;border-radius:0 60rpx 60rpx 0;text-align:center;font-size:30rpx;line-height:120rpx;" catchtap="dsbbbutclickt">
       去结算
     </view>
-
     <view wx:if='{{!isFinished}}' style="width:130rpx;height:100%;float:right;background:#a8a8a8;border-radius:0 60rpx 60rpx 0;text-align:center;font-size:30rpx;line-height:120rpx;" catchtap="">
       去结算
     </view>
-
   </view>
 </view>
 
 <bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}'></bnavigation>
- 
-
-
 
 <!--  引用详情页代码  -->
 

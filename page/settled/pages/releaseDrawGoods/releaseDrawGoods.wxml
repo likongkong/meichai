@@ -80,6 +80,6 @@
   </settledForm>
   <view class="footerWrap">
       <view catchtap="navigateBack">返回</view>
-      <view catchtap="submitAudit">确认发布</view>
+      <view catchtap="submitAudit">{{id!=''?'确认发布':'预览'}}</view>
   </view>
 </view>

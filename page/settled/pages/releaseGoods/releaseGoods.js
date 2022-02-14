@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    c_title: '添加秒杀商品',
+    c_title: '添加商品',
     c_arrow: true,
     c_backcolor: '#ff2742',
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
@@ -309,6 +309,8 @@ Page({
       addedData:0,
     },
     timer:'',
+    callbackPreview:false,
+    previewGoodsKey:''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -317,7 +319,12 @@ Page({
     wx.hideShareMenu();
     // '已经授权'
     // this.data.id = options.id;
-    this.data.id = options.id || '';
+    console.log(options)
+    this.setData({
+      id: options.id || '',
+      previewGoodsKey:`${app.signindata.uid}_${Date.parse(new Date())}`
+    })
+    console.log(this.data.previewGoodsKey)
     this.data.loginid = app.signindata.loginid;
     this.data.uid = app.signindata.uid;
     // 判断是否登录
@@ -623,7 +630,12 @@ Page({
 
     // console.log(obj.modeOfDespatch)
     // console.log(obj.purchaseLimitation,obj.purchaseLimitationNum,'限购')
-
+    let is_preview;
+    if(!this.data.callbackPreview){
+      is_preview = this.data.id&&this.data.id!=0?2:1;   //1为预览
+    }else{
+      is_preview = 1;
+    }
     let data = {
       goodsId:this.data.id&&this.data.id!=0?this.data.id:'',
       brandId:obj.associationIp,
@@ -652,27 +664,32 @@ Page({
       isShowSellNumber:obj.isSoldNum==0?1:0,
       isCanShare:obj.isCanShare==0?1:obj.isCanShare==1?0:2,
       shelvesType:obj.addedData,
-      shelvesTime:obj.addedData==1?(new Date(obj.customAdded.replace(/-/g,'/')).getTime())/1000:''
+      shelvesTime:obj.addedData==1?(new Date(obj.customAdded.replace(/-/g,'/')).getTime())/1000:'',
+      is_preview:is_preview, 
+      previewGoodsKey:this.data.previewGoodsKey,
     }
     // obj.goodsDescribe.split('\n').join('</p><p>');
     console.log(data)
+    console.log('预览',this.data.previewGoodsKey)
+
     // return false;
     clearTimeout(this.data.timer);
       this.data.timer=setTimeout(()=>{
       api.settledGoodsSetGoods(data).then((res) => {
         console.log(res)
         if(res.data.status_code == 200){
-          if(this.data.id && this.data.id!=0){
+          if(this.data.id && this.data.id!=0 && !this.data.callbackPreview){
             app.showToastC('修改成功',1500);
+            setTimeout(function(){
+              that.navigateBack();
+              let pages = getCurrentPages();    //获取当前页面信息栈
+              let prevPage = pages[pages.length-2];
+              prevPage.getData();
+            },1500)
           }else{
-            app.showToastC('发布成功',1500);
+            // app.showToastC('发布成功',1500);
+            app.comjumpwxnav(9047,`${res.data.data.Info.goods.goodsId}&goodsType=0&brandId=${obj.associationIp}&isPreview=1&id=${res.data.data.Info.goods.goodsId}&previewGoodsKey=${this.data.previewGoodsKey}`)
           }
-          setTimeout(function(){
-            that.navigateBack();
-            let pages = getCurrentPages();    //获取当前页面信息栈
-            let prevPage = pages[pages.length-2];
-            prevPage.getData();
-          },1500)
         }else{
           if(res.data && res.data.message){
             app.showModalC(res.data.message); 

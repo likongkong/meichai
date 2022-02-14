@@ -413,22 +413,15 @@
             <view style='width:100rpx;font-size:20rpx;float:left;text-align:right;text-decoration:line-through;'>
               ￥{{goodsInfo.price}}
             </view>
-
             <view wx:if='{{goodsInfo.gear_position==1 && goodsInfo.is_manual == 0}}' style='width:400rpx;font-size:20rpx;float:left;'>
               <view wx:if='{{goodsInfo.arrive_price==goodsInfo.price}}' style='margin-left:5%;'>￥{{goodsInfo.next_price}}</view>
-
               <view wx:if='{{goodsInfo.arrive_price!=goodsInfo.price && goodsInfo.next_price!=goodsInfo.floor_price}}' style='margin-left:{{(goodsInfo.price-goodsInfo.arrive_price)/goodsInfo.price*100-5}}%;float:left;'>￥{{goodsInfo.arrive_price}}</view>
-
               <view wx:if='{{goodsInfo.arrive_price!=goodsInfo.price && goodsInfo.next_price!=goodsInfo.floor_price}}' style='float:left;'>￥{{goodsInfo.next_price}}</view>
-
               <view wx:if='{{goodsInfo.next_price==goodsInfo.floor_price}}' style='margin-left:85%;'>￥{{goodsInfo.arrive_price}}</view>
-
             </view>
-
             <view wx:if='{{goodsInfo.is_manual == 1}}' style='width:400rpx;font-size:20rpx;float:left;'>
               <view style='margin-left:{{(goodsInfo.price-goodsInfo.forty_percent)/goodsInfo.price*100-5}}%;float:left;'>￥{{goodsInfo.forty_percent}}</view>
             </view>
-
             <view wx:if='{{goodsInfo.is_manual == 2}}' style='width:400rpx;font-size:20rpx;float:left;position:relative;'>
               <view wx:if='{{goodsInfo.purchase_list.length>=1}}' style='position:absolute;top:0;left:{{(goodsInfo.price-goodsInfo.purchase_list[0])/goodsInfo.price*100-5}}%;'>￥{{goodsInfo.purchase_list[0]}}</view>
               <view wx:if='{{goodsInfo.purchase_list.length>=2}}' style='position:absolute;top:0;left:{{(goodsInfo.price-goodsInfo.purchase_list[1])/goodsInfo.price*100-5}}%;'>￥{{goodsInfo.purchase_list[1]}}</view>
@@ -855,14 +848,10 @@
     <view class='apptipcont' style='padding:0;font-size:26rpx;color:#6aab48;line-height:36rpx;'>
       <text>报名免单后助力成功</text>
     </view>
-
     <view style="width:340rpx;height:180rpx;margin:10rpx 90rpx;border-radius:10rpx;position:relative;">
       <image style="width:340rpx;height:180rpx;border-radius:10rpx;" src="{{activityMD.cover}}"></image>
     </view>
-
     <view class="actionName multilineellipsis">{{activityMD.name}}</view>
-
     <view class='actionApply' style="background:#FF8080;" catchtap="jumpAction" data-id="{{activityMD.id}}">立即报名</view>
-
   </view>
 </view>

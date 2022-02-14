@@ -18,7 +18,6 @@
       </swiper-item>
     </swiper>
 
-
     <!-- 盲盒 bindanimationfinish="changeGoodsSwip" -->
     <swiper bindchange='bbindchange' current="{{goodsIndex}}" style='width: 100%;height: 252rpx;' indicator-color="#fff" indicator-dots="{{false}}" circular="true" autoplay="true" interval="2200" duration="1000" style='transform:rotateY(180deg);'>
       <swiper-item wx:for="{{bsdata}}" wx:key="key">

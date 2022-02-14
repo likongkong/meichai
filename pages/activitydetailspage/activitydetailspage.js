@@ -2497,26 +2497,6 @@ closefrindcommoni:function(){
   onShow: function () {
      var _this = this;
      var commoddata = _this.data.commoddata;
-    //  if (commoddata.is_limit != 1){
-    //    if (commoddata.is_limit != 1) {
-    //      if (commoddata.status == 1) {
-    //        if (commoddata.start_time==0){
-    //          _this.setData({ iftrTimeCd: false })
-    //        }else{
-    //          _this.setData({ iftrTimeCd: true })
-    //          _this.cdtime(commoddata.start_time);
-    //        };
-    //      } else if (commoddata.status == 2 && commoddata.is_limit != 1 && commoddata.is_join == 1) {
-    //        if (commoddata.stop_time == 0) {
-    //          _this.setData({ iftrTimeCd: false })
-    //        } else {
-    //          _this.setData({ iftrTimeCd: true })
-    //          _this.cdtime(commoddata.stop_time);
-    //        };
-    //      };
-    //    };
-    //  };
-   
   },
   onHide: function () {
     // clearInterval(this.data.interval);
@@ -3161,105 +3141,6 @@ closefrindcommoni:function(){
           });
           _this.onLoadfun();
   },
-  // 微信支付
-  // paymentmony: function () {
-  //   var _this = this;
-  //   if (_this.data.commoddata.is_free == 1){
-  //     _this.setData({
-  //       suboformola:false
-  //     });
-  //     return false;   
-  //   } else {};
-  //   var q = Dec.Aese('mod=operate&operation=prepay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1&oid=' + _this.data.cart_id + '&xcx=1' + '&openid=' + _this.data.openid)
-  //   wx.request({
-  //     url: app.signindata.comurl + 'order.php' + q,
-  //     method: 'GET',
-  //     header: { 'Accept': 'application/json' },
-  //     success: function (res) {
-  //       if (res.data.ReturnCode == 200) {
-  //         // 支付完成弹框显示数据
-  //         var shareinfo = res.data.Shareinfo;
-  //         if (shareinfo) {
-  //           for (var f = 0; f < shareinfo.length; f++) {
-  //             if (!app.signindata.reg.test(shareinfo[f].img)) {
-  //               shareinfo[f].img = _this.data.zdyurl + shareinfo[f].img;
-  //             };
-  //             shareinfo[f].name = shareinfo[f].name.replace(/\\n/g, '\n');
-  //           };
-  //           _this.setData({ shareinfo: shareinfo });
-  //         };           
-  //         wx.requestPayment({
-  //           'timeStamp': res.data.Info.timeStamp.toString(),
-  //           'nonceStr': res.data.Info.nonceStr,
-  //           'package': res.data.Info.package,
-  //           'signType': 'MD5',
-  //           'paySign': res.data.Info.paySign,
-  //           'success': function (res) {
-  //             _this.setData({
-  //               tipbacktwo: false,
-  //               buybombsimmediately: false,
-  //               tipback: false,
-  //               tipbox: false,
-  //               dsbframeiftr: false,
-  //               paymentiftr: false,
-  //               // 优惠券清空
-  //               tipcoupon: '请选择优惠券',
-  //               coudata1cid: '',
-  //               coudata1mon: '0.00',
-  //               coudata2cid: '',
-  //               coudata2mon: '0.00',
-  //               //  分享判断是否支付成功
-  //               payiftr: true,
-  //               numberofdismantling: 1,
-  //               suboformola: false,
-  //               desc: ''
-  //             });              
-  //             if (_this.data.commoddata.is_redpack){
-  //               // 跳转红包页面
-  //               wx.navigateTo({
-  //                 url: "/pages/redenvelopes/redenvelopes?cart_id=" + _this.data.cart_id
-  //               });
-  //             } else if(_this.data.commoddata.is_invite == 1) {
-  //               _this.invitingfriends();  // 跳转邀请页面
-  //             }else{
-  //               _this.setData({
-  //                 successfulregistration:true
-  //               });
-  //             };
-  //           },
-  //           'fail': function (res) {
-  //             _this.setData({
-  //               tipback: false,
-  //               tipbox: false,
-  //               tipbacktwo: false,
-  //               buybombsimmediately: false,
-  //               dsbframeiftr: false,
-  //               paymentiftr: false,
-  //               // 优惠券清空
-  //               tipcoupon: '请选择优惠券',
-  //               coudata1cid: '',
-  //               coudata1mon: '0.00',
-  //               coudata2cid: '',
-  //               coudata2mon: '0.00',
-  //               //  分享判断是否支付成功
-  //               payiftr: true,
-  //               numberofdismantling: 1,
-  //               suboformola: false,
-  //               desc: '' 
-  //             })
-  //           },
-  //           'complete': function (res) {}
-  //         })
-  //       }else{
-  //         // 提交订单蒙层
-  //         _this.setData({
-  //           suboformola: false
-  //         });    
-  //         app.showToastC(res.data.Msg || res.data.msg);           
-  //       };
-  //     }
-  //   })
-  // },  
   // 支付完成隐藏弹框
   paymentcompletionwimg: function () {
     this.onLoadfun();
@@ -4293,13 +4174,8 @@ closefrindcommoni:function(){
                     }
                 }
             );
-
-
-
           }
         })
-
-        
       }
     })
   },
@@ -4361,20 +4237,14 @@ closefrindcommoni:function(){
                       src: cover, // banner 图片
                       success: function (res) {
                         ctxt.drawImage(res.path, 17, 180, 285, 151);
-
-
                         if(app.signindata.is_eveShareAdver && app.signindata.mergePicImg){
-
-
                           // 渲染广告图片
                           wx.getImageInfo({
                             src: app.signindata.mergePicImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
                             success: function (res) {
                               console.log('渲染广告图片',res)
-
                               var ratio = res.width / res.height;   
                               var viewHeight = (319/ratio)<=175?(319/ratio):175;    
-
                               ctxt.drawImage(res.path, 0, 414, 319, viewHeight)
                               ctxt.draw(true);
                               ctxt.draw(true, setTimeout(function () {
@@ -4399,13 +4269,10 @@ closefrindcommoni:function(){
                                   },
                                 });
                               }, 300));
-
                             },
                             fail: function () {},
                           });
-
                       }else if(_this.data.activityblindbox.length != 0){
-
                           // 第一步 底部背景颜色改变
                           ctxt.fillStyle = '#feffff';
                           ctxt.fillRect(0, 414, 319, 175);
@@ -4497,12 +4364,10 @@ closefrindcommoni:function(){
                                   }, 300));
                                 },
                                 fail:function(){
-
                                 },
                               });
                             },    
                           fail: function() {
-
                           },
                         });
                         }else{
@@ -4542,20 +4407,14 @@ closefrindcommoni:function(){
                           src: cover, // banner 图片
                           success: function (res) {
                             ctxt.drawImage(res.path, 17, 180, 285, 151);
-    
-    
                             if(app.signindata.is_eveShareAdver && app.signindata.mergePicImg){
-    
-    
                               // 渲染广告图片
                               wx.getImageInfo({
                                 src: app.signindata.mergePicImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
                                 success: function (res) {
                                   console.log('渲染广告图片',res)
-    
                                   var ratio = res.width / res.height;   
                                   var viewHeight = (319/ratio)<=175?(319/ratio):175;    
-    
                                   ctxt.drawImage(res.path, 0, 414, 319, viewHeight)
                                   ctxt.draw(true);
                                   ctxt.draw(true, setTimeout(function () {
@@ -4580,13 +4439,10 @@ closefrindcommoni:function(){
                                       },
                                     });
                                   }, 300));
-    
                                 },
                                 fail: function () {},
                               });
-    
                           }else if(_this.data.activityblindbox.length != 0){
-    
                               // 第一步 底部背景颜色改变
                               ctxt.fillStyle = '#feffff';
                               ctxt.fillRect(0, 414, 319, 175);
@@ -4678,12 +4534,10 @@ closefrindcommoni:function(){
                                       }, 300));
                                     },
                                     fail:function(){
-    
                                     },
                                   });
                                 },    
                               fail: function() {
-    
                               },
                             });
                             }else{
@@ -4715,11 +4569,6 @@ closefrindcommoni:function(){
                         _this.setData({ upserimgboxWinningtheprize: false, headhidden: true });
                       }
                     });
-
-
-
-
-
                   }
                 });
 
@@ -4742,7 +4591,6 @@ closefrindcommoni:function(){
                 ctxt.setFontSize(13)
                 ctxt.setFillStyle('#000')
                 ctxt.fillText(str, (319 - ctxt.measureText(str).width) / 2, 162)
-
                 wx.getImageInfo({
                   src: qrcode, // 太阳码
                   success: function (res) {
@@ -4752,11 +4600,7 @@ closefrindcommoni:function(){
                       src: cover, // banner 图片
                       success: function (res) {
                         ctxt.drawImage(res.path, 17, 180, 285, 151);
-
-
                         if(app.signindata.is_eveShareAdver && app.signindata.mergePicImg){
-
-
                           // 渲染广告图片
                           wx.getImageInfo({
                             src: app.signindata.mergePicImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
@@ -5206,9 +5050,7 @@ app.comjumpwxnav(9058, '', '');
       perspcardiftrmin:true
     });
   },
-
-  // 晒单点赞
-  // 点赞
+  // 晒单点赞 // 点赞
   ispraisefun: function (w) {
     var _this = this;
     var is_praise = w.currentTarget.dataset.is_praise || w.target.dataset.is_praise || 0;
@@ -5246,7 +5088,6 @@ app.comjumpwxnav(9058, '', '');
         fail: function () {}
       });
     }
-
   }, 
   gobrandDetails: function (w) {
     var mid = w.currentTarget.dataset.mid || w.target.dataset.mid || 0;
@@ -5255,6 +5096,4 @@ app.comjumpwxnav(9058, '', '');
       url: "/page/secondpackge/pages/brandDetails/brandDetails?id=" + mid + "&settlement="+settlement,
     });
   },
-
-
 })

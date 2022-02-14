@@ -78,6 +78,13 @@ Page({
         brandSinginBox:!this.data.brandSinginBox
      })
   },
+  // 更新用户信息
+  getUserProfileComSign(w){
+    var _this = this;
+    app.getUserProfile((res,userInfo) => {
+      _this.brandSingin()
+    },'',1);
+  },
   // 签到
   brandSingin: function () {
     var _this = this;

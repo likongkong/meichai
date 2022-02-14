@@ -5,18 +5,13 @@
   <canvas canvas-id='snapshot{{item.activity_id}}' style='width:300px;height:240px;'></canvas>
 </view>
 
-
 <view style='width:100%;height:100%;  position: fixed;top: 0;left: 0;right: 0;bottom: 0;margin: auto;z-index:29;' wx:if='{{canvasshare}}'>
     <view style='width:100%;height:100%;  background: #000;opacity: 0.5;' catchtap='sharebackgroundfun'></view>
     <view style='width:300px;height:240px;position:absolute;top:0;left:0;right:0;bottom:0;margin:auto;'>
           <image style='width:100%;height:100%;display:block;' src='{{snapshot}}'></image>
           <view style='height:52rpx;line-height:52rpx;background:#3f9313;position:absolute;left:0;right:0;bottom:-100rpx;margin:auto;font-size:26rpx;color:#fff;width:200rpx;border-radius:10rpx;text-align:center;'><button open-type="share"  class='paycheadwconbott'></button>分享娃友群</view>
     </view>
-    
 </view>
-
-
-
 
 <view style='position:fixed;top:{{statusBarHeightMc}}px;left:0;z-index:8;width:100%;'>
    <view style='width:714rpx;height:90rpx;background:#fbea96;margin:20rpx auto 0;border:2rpx dashed #e9565d;border-radius:10rpx;position:relative;'>
@@ -29,7 +24,6 @@
 </view>
 
 <view style='width:100%;height:118rpx;'></view>
-
 <view wx:if='{{listdata.length>0}}' class='limlistbox' style='padding-top:15rpx;'>
   <view class='aslbcbox' wx:for='{{listdata}}' wx:key='key' style='position: relative;border-bottom:none;background:#e4e4e4;margin:0 auto 20rpx;'>
     <view class='aslbcbleft' style='height:{{item.heightc||382}}rpx;' catchtap='limitlotteryd' data-gid='{{item.goods_id}}'  data-activity_id='{{item.activity_id}}' data-id='{{item.id}}' data-open='{{item.open}}'>
@@ -54,8 +48,6 @@
           <block wx:else>
               <view class='aslbcbotright' style='background:#3f9313;position:relative;' data-activity_id='{{item.activity_id}}' data-goods_id='{{item.goods_id}}' data-index='{{index}}' catchtap='shareimgbut'>分享娃友群</view>
           </block>
-          
-          
         </view> 
         <view class='aslbcbotrightboxil' wx:else catchtap='limitlotteryd' data-gid='{{item.goods_id}}'  data-activity_id='{{item.activity_id}}' data-id='{{item.id}}' data-open='{{item.open}}'>
           <view class='aslbcbotright' style='background:#3f85ff;position:relative;'>发起明盒</view>

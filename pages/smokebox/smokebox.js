@@ -613,7 +613,7 @@ Page({
     wx.showLoading({
       title: '加载中...',
     })
-
+    console.log(11111111111)
     var q1 = Dec.Aese('mod=blindBox&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&gid=' + _this.data.gid+ '&push_id='+_this.data.push_id);
 
     console.log('mod=blindBox&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&gid=' + _this.data.gid+ '&push_id='+_this.data.push_id)
@@ -1407,8 +1407,15 @@ Page({
    */
   onPullDownRefresh: function () {
     app.downRefreshFun(() => {
-      // this.getInfo()
-      this.queueInfo();
+      if(this.data.activity.status == 2){
+        this.queueInfo();
+      }else if(this.data.activity.status == 1){
+        this.getInfo()
+      }else{
+        wx.stopPullDownRefresh();
+        wx.hideLoading()
+      }
+
       if (this.data.is_exhibition == 1) {
         this.exhibdatafun(1)
       }

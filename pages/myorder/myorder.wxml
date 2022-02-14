@@ -538,7 +538,6 @@
                             <block wx:elif='{{item.order_type == 23}}'>支付定金</block>
                             <block wx:else>我要付款</block>
                         </view>
-        
                     </view>
 
                     <!-- 0元购 status为1 进行中 -->
@@ -568,7 +567,6 @@
 
                         <view wx:if='{{item.status==16&&item.order_type==10&&(item.showOrder==0||item.showOrder==3||item.showOrder==4)}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
                             <view style='width:100%;height:100%;position: relative;'>晒单领奖<button class='tgaboxtgawchbochlibutboxtwo' type='primary' bindtap="getUserProfile" data-qrcode='{{item.qrcode}}' data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具' data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}'></button></view>
-
                         </view>
 
                         <view class='wholebottomaddright sharebox redborcol' wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood && item.order_type!=13}}'>
@@ -591,8 +589,6 @@
                             <view class='addressmodifyTxt'>注:每个订单只可添加一次收货地址</view>
                             <view class='wholebottomaddright sharebox redborcol' data-cartid="{{item.cart_id}}" style="margin-right:10rpx;" catchtap='modaddfun' >添加地址</view>
                         </block>
-
-        
                     </view>
 
                     <!-- 0元购 status为16 进行中  gofreedetail -->
@@ -621,7 +617,6 @@
                             <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
                             分享好友
                         </view>     
-
                         <view wx:if='{{item.order_type==27 && item.status !=8}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
                             等待开奖<block wx:if='{{item.isFullTicket}}'>支付尾款</block>，未中奖原路退回
                         </view>             
@@ -629,7 +624,6 @@
                         <view class='wholebottomaddright sharebox redborcol' style='background:#42bd56;color:#fff;margin-right:10rpx;border:1rpx solid #fff;' wx:if='{{item.isToyCabinet}}' catchtap='jumpowntoy'>
                             我的玩具柜
                         </view>
-
                         <view class='wholebottomaddright sharebox redborcol' wx:if="{{item.order_type == 14 && !item.isToyCabinet && !isBlindBoxDefaultAddress}}" style='width: 160rpx;color:#42bd56;margin-right:10rpx;border:1rpx solid #42bd56;' catchtap="goAddress">
                             填写收货地址
                         </view>
@@ -637,28 +631,21 @@
                             <view class='addressmodifyTxt'>注:每个订单只可添加一次收货地址</view>
                             <view class='wholebottomaddright sharebox redborcol' data-cartid="{{item.cart_id}}" style="margin-right:10rpx;" catchtap='modaddfun' >添加地址</view>
                         </block>                        
-                                     
-                        
                     </view>
-
                     <!--  商品入库  -->
                     <view class='wholebottomadd' wx:if='{{item.status==13}}'>
                         <view wx:if='{{item.status==13&&item.isShowOrder==1&&item.showOrder!=1&&item.showOrder!=2}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
                             <view style='width:100%;height:100%;position: relative;' wx:if='{{item.showOrder==0}}'>晒单领奖<button class='tgaboxtgawchbochlibutboxtwo' type='primary' bindtap="getUserProfile" data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}'></button></view>
                             <view style='width:100%;height:100%;' wx:if='{{item.showOrder==1}}' data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>等待审核</view>
                             <view style='width:100%;height:100%;' wx:if='{{item.showOrder==3||item.showOrder==4}}'  data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>上传晒单截图</view>
-
                         </view>
-                        
                         <view class='wholebottomaddright sharebox redborcol' wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood && item.order_type!=13}}'>
                             <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
                             分享好友
                         </view> 
-
                         <view wx:if='{{item.order_type==27 && item.status !=8}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
                             等待开奖<block wx:if='{{item.isFullTicket}}'>支付尾款</block>，未中奖原路退回
                         </view> 
-
                         <view class='wholebottomaddright sharebox redborcol' wx:if="{{item.order_type == 14 && !isBlindBoxDefaultAddress}}" style='width: 160rpx;color:#42bd56;margin-right:10rpx;border:1rpx solid #42bd56;' catchtap="goAddress">
                             填写收货地址
                         </view>     
@@ -666,73 +653,53 @@
                             <view class='addressmodifyTxt'>注:每个订单只可添加一次收货地址</view>
                             <view class='wholebottomaddright sharebox redborcol' data-cartid="{{item.cart_id}}" style="margin-right:10rpx;" catchtap='modaddfun' >添加地址</view>
                         </block>                                       
-                        
                     </view>
-
                     <!--  等待拆单  -->
                     <view class='wholebottomadd' wx:if='{{item.status==2 && item.order_type!=7}}'>
                         <view wx:if='{{item.status==2&&item.isShowOrder==1&&item.showOrder!=1&&item.showOrder!=2}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
                             <view style='width:100%;height:100%;position: relative;' wx:if='{{item.showOrder==0}}'>晒单领奖 <button class='tgaboxtgawchbochlibutboxtwo' type='primary' bindtap="getUserProfile" data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}'></button></view>
                             <view style='width:100%;height:100%;' wx:if='{{item.showOrder==1}}' data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>等待审核</view>
                             <view style='width:100%;height:100%;' wx:if='{{item.showOrder==3||item.showOrder==4}}'  data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>上传晒单截图</view>
-
                         </view>
-
                         <view wx:if='{{item.status==2&&item.order_type==10&&(item.showOrder==0||item.showOrder==3||item.showOrder==4)}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
                             <view style='width:100%;height:100%;position: relative;'>晒单领奖<button class='tgaboxtgawchbochlibutboxtwo' type='primary' bindtap="getUserProfile" data-qrcode='{{item.qrcode}}' data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具' data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}'></button></view>
-
                         </view>
-
                         <view class='wholebottomaddright sharebox redborcol'  wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood && item.order_type!=13}}'>
                             <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
                             分享好友
                         </view> 
-
                         <view wx:if='{{item.order_type==27 && item.status !=8}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
                             等待开奖<block wx:if='{{item.isFullTicket}}'>支付尾款</block>，未中奖原路退回
-                        </view>                
-                        
+                        </view>       
                         <view class='wholebottomaddright sharebox redborcol' style='background:#42bd56;color:#fff;margin-right:10rpx;border:1rpx solid #fff;' wx:if='{{item.isToyCabinet}}' catchtap='jumpowntoy'>
                             我的玩具柜
                         </view>
-
                         <view class='wholebottomaddright sharebox redborcol' wx:if="{{item.order_type == 14 && !item.isToyCabinet && !isBlindBoxDefaultAddress}}" style='width: 160rpx;color:#42bd56;margin-right:10rpx;border:1rpx solid #42bd56;' catchtap="goAddress">
                             填写收货地址
                         </view>  
-
                         <block wx:elif='{{item.order_type == 14 && item.canChangedAddress && item.status!=20}}'>
                             <view class='addressmodifyTxt'>注:每个订单只可添加一次收货地址</view>
                             <view class='wholebottomaddright sharebox redborcol' data-cartid="{{item.cart_id}}" style="margin-right:10rpx;" catchtap='modaddfun' >添加地址</view>
                         </block>
-  
-
-
                     </view>
-
                     <!-- 0元购 status为2 进行中 -->
                     <view class='daifukuandianji' wx:if='{{item.status==2 && item.order_type==7}}'>
                         <view class='dfkdjrleft'>{{countdown}}</view>
                         <view class='dfkdjrighg' data-cart_id='{{item.cart_id}}' bindtap='gofreedetail' style='position:relative;background:#3F51B5;color:#fff;border:0rpx;'>0元购助力</view>
                     </view>
-
                     <!--  等待发货  -->
                     <view class='wholebottomadd' wx:if='{{item.status==3}}'>
                         <view wx:if='{{item.stockup==1&&item.status==3}}' style='height:88rpx;line-height:60rpx;font-size:28rpx;color:#666;float:left;'>备货中，预计3-5个工作日送达</view>
-
                         <view wx:if='{{item.status==3&&item.order_type==10&&(item.showOrder==0||item.showOrder==3||item.showOrder==4)}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
                             <view style='width:100%;height:100%;position: relative;'>晒单领奖<button class='tgaboxtgawchbochlibutboxtwo' type='primary' bindtap="getUserProfile" data-qrcode='{{item.qrcode}}' data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具' data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}'></button></view>
-
                         </view>
-                        
                         <view class='wholebottomaddright sharebox redborcol'  wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood && item.order_type!=13}}'>
                             <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
                             分享好友
-                        </view>   
-
+                        </view>  
                         <view wx:if='{{item.order_type==27 && item.status !=8}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
                             等待开奖<block wx:if='{{item.isFullTicket}}'>支付尾款</block>，未中奖原路退回
                         </view>
-                        
                         <view class='wholebottomaddright sharebox redborcol' wx:if="{{item.order_type == 14 && !item.isToyCabinet && !isBlindBoxDefaultAddress}}" style='width: 160rpx;color:#42bd56;margin-right:10rpx;border:1rpx solid #42bd56;' catchtap="goAddress">
                             填写收货地址
                         </view>
@@ -740,40 +707,26 @@
                             <view class='addressmodifyTxt'>注:每个订单只可添加一次收货地址</view>
                             <view class='wholebottomaddright sharebox redborcol' data-cartid="{{item.cart_id}}" style="margin-right:10rpx;" catchtap='modaddfun' >添加地址</view>
                         </block>
-
                     </view>
-
                     <!--  等待收货  --> 
                     <view class='wholebottomadd' wx:if='{{item.status==4}}'> 
                         <view wx:if='{{item.status==4&&item.isShowOrder==1&&item.showOrder!=1&&item.showOrder!=2}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
                             <view style='width:100%;height:100%;position: relative;' wx:if='{{item.showOrder==0}}'>晒单领奖<button class='tgaboxtgawchbochlibutboxtwo' type='primary' bindtap="getUserProfile" data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}'></button></view>
                             <view style='width:100%;height:100%;' wx:if='{{item.showOrder==1}}' data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>等待审核</view>
                             <view style='width:100%;height:100%;' wx:if='{{item.showOrder==3||item.showOrder==4}}'  data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>上传晒单截图</view>
-
                         </view>
-
                         <view wx:if='{{item.status==4&&item.order_type==10&&(item.showOrder==0||item.showOrder==3||item.showOrder==4)}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
                             <view style='width:100%;height:100%;position: relative;'>晒单领奖<button class='tgaboxtgawchbochlibutboxtwo' type='primary' bindtap="getUserProfile" data-qrcode='{{item.qrcode}}' data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具' data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}'></button></view>
-
                         </view>
-
                         <view class='wholebottomaddright' data-oid='{{item.oid}}' bindtap='confirmationofreceipt'>确认收货</view>             
                         <view class='wholebottomaddright' data-oid='{{item.oid}}' data-gcover='{{item.gcover}}' bindtap='lookatthelogistics' style='margin-right:10rpx;position: relative;'>查看物流</view> 
                         <view class='wholebottomaddright sharebox redborcol' style='margin-right:20rpx;'  wx:if='{{item.is_invite==0 && item.order_type!=27 && item.isShareGood && item.order_type!=13}}'>
                             <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
                             分享好友
                         </view>
-                        
-                  
-
                         <view wx:if='{{item.order_type==27 && item.status !=8}}'>
                             等待开奖<block wx:if='{{item.isFullTicket}}'>支付尾款</block>，未中奖原路退回
                         </view>
-                        
-                <!-- <view class='wholebottomaddright' wx:if='{{item.order_type==1}}' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;margin-right:10rpx;' data-ind='{{index}}' bindtap='personalhomepage'>
-                        发帖推荐
-                        </view> -->
-
                     </view> 
                     <!--  已完成  -->
                     <view class='wholebottomadd' wx:if='{{item.status==5}}'>      
@@ -781,21 +734,6 @@
                     <view wx:if='{{item.status==5&&item.order_type==10&&(item.showOrder==0||item.showOrder==3||item.showOrder==4)}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
                             <view style='width:100%;height:100%;position: relative;'>晒单领奖<button class='tgaboxtgawchbochlibutboxtwo' type='primary' bindtap="getUserProfile" data-qrcode='{{item.qrcode}}' data-awardinfo='美拆大咖瓜分1000盲盒得活动，获得盲盒玩具' data-cover='https://www.51chaidan.com/images/background/bgBigShotAward.png' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}'></button></view>
                         </view>
-
-                        <!-- 寄回物流信息 -->
-                        <!-- <block wx:if="{{item.isSendBack}}">
-                            <block wx:if="{{item.sendBackStatus == 1}}">
-                                <block wx:if="{{item.sendBackAuditStatus==0 || item.sendBackAuditStatus==5 || item.sendBackAuditStatus==6}}">
-                                    <view class='wholebottomaddright redborcol' style='margin-right:20rpx;position: relative;' data-href="status=0&sendBackId={{item.sendBackId}}"  data-item_type='9054' bindtap='comindellistjump'>商品寄回</view> 
-                                </block>
-                                <block wx:else>
-                                    <view class='wholebottomaddright redborcol' style='margin-right:20rpx;position: relative;' data-href="status=1&sendBackId={{item.sendBackId}}"  data-item_type='9054' bindtap='comindellistjump'>取件信息</view> 
-                                </block>
-                            </block>
-                            <block wx:else>
-                                <view class='wholebottomaddright redborcol' style='margin-right:20rpx;position: relative;' data-id='{{item.sendBackId}}' data-gcover='{{item.gcover}}' bindtap='sendBackLogistics'>查看物流</view> 
-                            </block>
-                        </block> -->
                         <!-- 发货的查看物流 -->
                         <!-- <block wx:else> -->
                             <view class='wholebottomaddright' style='margin-right:20rpx;position: relative;' data-oid='{{item.oid}}' data-gcover='{{item.gcover}}' bindtap='lookatthelogistics'>查看物流</view> 
@@ -805,19 +743,11 @@
                             <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
                             分享好友
                         </view> 
-
                         <view wx:if='{{item.order_type==27 && item.status !=8}}'>
                             等待开奖<block wx:if='{{item.isFullTicket}}'>支付尾款</block>，未中奖原路退回
                         </view>
-                        
-                        <!-- <view class='wholebottomaddright' wx:if='{{item.order_type==1}}' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;margin-right:10rpx;' data-ind='{{index}}' bindtap='personalhomepage'>
-                        发帖推荐
-                        </view> -->
-
-
                     </view>
               <!--  已完成  -->
-
                     <!--  拆单失败  -->
                     <view class='wholebottomaddFail' wx:if='{{item.status==7}}'>
                         <view class='totaltittrfai' style="{{item.status_detail==2?'line-height: 40rpx;':''}}">
@@ -828,8 +758,6 @@
                             <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
                             分享好友
                         </view> 
-
-                                
                     </view>
                     <!--  已取消订单  -->
                     <view wx:if='{{item.status==8 && item.order_type!=7}}' style='min-height:1rpx;width:94%;padding: 0 3% 10rpx;overflow:hidden;'>    
@@ -838,15 +766,10 @@
                             <button  open-type="share" class='butshare' data-gid='{{item.gid}}' data-gcover='{{item.gcover}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}' data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-couponvalue='{{item.couponvalue}}'></button>
                             分享好友
                         </view>    
-
                         <view wx:if='{{item.order_type==27 && item.status !=8}}' style="font-size:24rpx;">
                             等待开奖<block wx:if='{{item.isFullTicket}}'>支付尾款</block>，未中奖原路退回
                         </view>
-
-                                        
-
                     </view>
-
                     <!-- 0元购 status为8 进行中 -->
                     <view class='daifukuandianji' wx:if='{{item.status==8 && item.order_type==7}}'>
                         <view class='dfkdjrleft'>{{countdown}}</view>
@@ -863,10 +786,8 @@
                         <view wx:if='{{item.order_type==27 && item.status !=8}}' style="font-size: 24rpx;width:100%;text-align: right;padding-top: 16rpx;box-sizing: border-box;">
                             等待开奖<block wx:if='{{item.isFullTicket}}'>支付尾款</block>，未中奖原路退回
                         </view>  
-
                     </view>  
          </view>
-         
         <view wx:if='{{item.order_type==6}}' style='font-size:26rpx;'>
             <view class='wholebottomadd' wx:if='{{item.status == 18}}'>
             <view wx:if='{{item.purchase_price==item.amount}}' style='color:#fff;font-size:26rpx;width:140rpx;height:54rpx;line-height:54rpx;text-align:center;background:#67BCEB;float:right;border-radius:10rpx;margin-left:10rpx;' data-ordersn='{{item.gifts_order}}' catchtap='gobargainDetail'>
@@ -888,23 +809,17 @@
             <view class='wholebottomaddright' style='margin-right:20rpx;position: relative;' data-oid='{{item.oid}}' data-gcover='{{item.gcover}}' bindtap='lookatthelogistics'>查看物流</view>
             </view>
         </view>
-
          </view>
-
          <view  style='line-height:40rpx;color:#666;text-align:center;font-size:25rpx;margin-top:20rpx;' catchtap='jumpgoodsthings'>
             <image style='width:40rpx;height:40rpx;display:inline-block;vertical-align:top;position:relative;top:2rpx;' src='http://clw.51chaidan.com/images/sign/stodownload.png'></image> 已同步至好物圈
          </view>
-
     </view>
       <view class='noDataCom' wx:if='{{myordata.length==0&&ifnodata}}'>
           <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
       </view>
 </view>
-
 <view style='width:100%;{{isAwardOrder?"height:128rpx;":"height:200rpx;"}}' wx:if='{{spreadEntry}}'></view>
-
 <view style='width:100%;background:#fff;position:fixed;left:0;{{isIphoneX?"bottom:130rpx;":"bottom:110rpx;"}}z-index:4;'>
-
     <view class='winningthepbox' wx:if='{{isAwardOrder}}' catchtap='jumporder'>
       <view class='winningthepimgtxt'>
         <image class='winningthepimgshop' src='{{awardOrder.Info.cover}}'></image>
@@ -912,24 +827,18 @@
       </view>
       <image class='winningthepimg' src='http://www.51chaidan.com/images/FreeSheet/WinningThePrize.png'></image>
     </view>
-
     <swiper style='width:100%;height:200rpx;margin:0 auto;display:block;' circular="true" autoplay="true" interval="5000" duration="450" wx:elif='{{spreadEntry}}'>    
         <swiper-item wx:for="{{spreadEntry}}" wx:key="key">
             <image style='width:100%;height:100%;display:block;position: relative;' src='{{item.src}}' catchtap='jumpaction' data-path='{{item.path}}'></image>
         </swiper-item>
     </swiper>
-
 </view>
-
  <!-- 底部导航 -->
 <bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}'></bnavigation>
-
 <!--  背景颜色  -->
 <view class='tipback' wx:if='{{tipback}}' catchtouchmove="preventD"></view>
-
 <!--  提交订单弹框防止多次提交  -->
 <view wx:if='{{suboformola}}' style='width:100%;height:100%;background:#000;opacity: 0.4;z-index: 1999;position: fixed;top: 0;left: 0;'></view>
-
 <!--   领奖提示  -->
 <view class='wsh' wx:if='{{awardrresentiftr}}'>
     <view class='tgimgboxgb' style='background:#ccc;'  catchtap='awardrresentiftr'></view>
@@ -966,9 +875,7 @@
         <view class='adresboxbottonbut' catchtap='acetlistfun'>更多付费专享活动</view>
     </view>
 </view>
-
 <!--  立即购买弹框  支付运费弹框 -->
-
 <view class='buybombsimmediately' wx:if='{{payfreightone}}'>
     <view class='bbsheadcon'>
         <view class='bbshccom' bindtap='seladdressfun'>
@@ -990,7 +897,6 @@
         <view class='bbshbottombut' bindtap='payfreighplaceorder'>提交订单</view>
     </view>
 </view>
-
 <!--  收货地址  -->
 <view class='receivingaddress' wx:if='{{receivingaddress}}'>
      <view class='recgadhead'>
@@ -1006,7 +912,6 @@
              <view class='recgadaddress' data-tipaid='{{item.aid}}' data-tipadd='{{item.address}}' data-ind='{{index}}' catchtap='revisethereceivingaddress'>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</view>
              <view class='recgadbottom'>
                   <view class='recgadbotleft'>
-                     
                      <image class='recgadbotleftimg' hidden='{{!item.checked}}' src='../images/pressed_click.png'></image>
                      <image class='recgadbotleftimg' hidden='{{item.checked}}' src='../images/normal_click.png'></image>                      
                       默认地址
@@ -1024,12 +929,10 @@
         <view class='noDataCom' wx:if='{{addressdata.length==0}}'>
             <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
         </view>
-
      </view>
      <view class='recgadbot' bindtap='jumpaddress'>
           增加新地址
      </view>
-
 </view>
 <!--  收货地址  -->
 <view class='receivingaddress' wx:if='{{receivingaddress1}}'>
@@ -1069,10 +972,7 @@
   <view class='recgadbot' bindtap='jumpaddress'>
     增加新地址
   </view>
-
-
 </view>
-
 <!-- closeupserimg -->
 <view class='tgimgbox' wx:if='{{upserimgbox}}'>
    <view class='tgimgboxgb' style='opacity:0.7;' catchtap='closeupserimg'></view>
@@ -1095,12 +995,10 @@
         </view>
         <view catchtap='sharesavethepicture' data-indnum='1'  style='width:280rpx;height:60rpx;position: absolute;left:0;bottom:0;font-size:26rpx;text-align:center;line-height:60rpx;color:#fff;border-radius: 10rpx;background: #1aad19;'>点击保存专属晒单图片</view>
     </view> 
-
       </view>
        <image src='../images/icon_close3.png' class='usericonclose' catchtap='closeupserimg'></image>
    </view>
 </view>
-
 <!--  图片授权  -->
 <!-- <view class='editorrecom' wx:if='{{picbox}}' style='z-index:9999999;'>
     <view class='ngbackground'></view>
@@ -1115,10 +1013,8 @@
         </view>
     </view>
 </view> -->
-
 <!-- canvas生成分享图片 -->
 <view class='headhiddenbox' hidden="{{headhidden}}"></view>
-
 <!-- closeupserimg  -->
 <view class='tgimgbox' wx:if='{{upserimgboxact}}'>
    <view class='tgimgboxgb' style='opacity:0.7;'></view>
@@ -1133,32 +1029,23 @@
           </view>
           <text style='width:400rpx;height:230rpx;position: absolute;left:200rpx;bottom:60rpx;font-size:26rpx;color:#fff;overflow: scroll;'>{{share_desc}}</text>
       </view>
-
       <view style='width:100%;height:66rpx;position:relative;'>
         <view style='width:280rpx;height:60rpx;position: absolute;right:0;bottom:0;font-size:26rpx;text-align:center;line-height:60rpx;color:#fff;border-radius: 10rpx;background: #087ac5;' catchtap='upImgSer'>
         <view style='width:100%;height:100%;position:absolute;top:0;left:0;z-index:2;'>上传截图</view>
         </view> 
-
         <view  catchtap='sharesavethepicture' data-indnum='2' style='width:280rpx;height:60rpx;position: absolute;left:0;bottom:0;font-size:26rpx;text-align:center;line-height:60rpx;color:#fff;border-radius: 10rpx;background: #1aad19;'>保存图片</view>
       </view>
-
     </view>
-
        <image src='../images/icon_close3.png' class='usericonclose' catchtap='acetlistfunact'></image>
-   
    </view>
 </view>
-
 <view class='tgaboxtwo' wx:if='{{tgabox}}' catchtap='clicktga'>
     <view class='tgaboxtbg'></view>
     <view class='tgaboxclick'>
           <image mode='aspectFit' src='{{tgaimg}}?log={{appNowTime}}' class='tgaboxclickbgImg'></image>
-          
     </view>
     <button class='tgaboxtgawchbochlibutboxtwo' open-type="getUserInfo" type='primary' bindgetuserinfo="userInfoHandler"></button>
-
 </view>
-
 <view class='awatip' wx:if='{{awatip}}'>
     <view class='awabg' catchtap='awatipdisnone'></view>
     <view class='awacontent'>
@@ -1167,7 +1054,6 @@
        <view class='awaconbottom' catchtap='awajump'>确定</view>
     </view>
 </view>
-
 <view class='awatip' wx:if='{{subscrproiftr}}' style='z-index:9999999999;'>
     <view class='awabg'></view>
     <view class='awacontent' style='width:600rpx;height:320rpx;'>
@@ -1176,7 +1062,6 @@
        <view class='awaconbottom' style='background:#f18f00;width:130rpx;position:relative;' catchtap='subscrprofun'>确定</view>
     </view>
 </view>
-
 <!-- 领奖截图提示 --> 
 <view class='awatip' wx:if='{{screenshottipsiftr}}' style='z-index:9999;'>
     <view class='awabg' catchtap='screenshottipsnone'></view>
@@ -1186,7 +1071,6 @@
        <view class='awaconbottom' style='background:#f18f00;width:130rpx;position:relative;' data-anum='2' catchtap='upImgSer'>去领奖</view>
     </view>
 </view>
-
 <!--  上传成功之后来起授权  -->
 <view wx:if='{{pictboxbox}}' style='z-index:9999999;width:100%;height:100%;position:fixed;top:0;left:0;'>
     <view style='width:100%;height:100%;background:#000;opacity:.5;'></view>
@@ -1199,7 +1083,6 @@
         </view>
     </view>
 </view>
-
 <!-- 确认修改地址弹框 -->
 <view class='awatip' wx:if='{{addmodtip}}' style='z-index:999;'>
     <view class='awabg'></view>
@@ -1216,7 +1099,6 @@
         </view>
     </view>
 </view>
-
 <!-- 核销提示框 -->
 <view class='awatip' wx:if='{{vipOrOrderTip}}' style='z-index:999;' catchtouchmove="true">
     <view class='awabg' catchtap="vipOrOrdercancel"></view>
@@ -1229,14 +1111,11 @@
             </text>
         </view>
         <view class='addmodbottom'>
-            
             <view style='width:50%;text-align:center;height:50rpx;float:left;font-size:30rpx;position:relative;' catchtap='vipOrOrdercancel'>不核验</view>
             <view style='width:50%;text-align:center;height:50rpx;float:right;font-size:30rpx;position:relative;' catchtap='vipOrOrdermine1'>核验</view>
         </view>
     </view>
 </view>
-
-
 <!-- 交易须知  -->
 <view class="wshNew" catchtouchmove="true" wx:if='{{proTipTrue}}' catchtap="closeCommonTip">
    <view class="probabilityTip" catchtap="true">

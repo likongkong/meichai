@@ -558,6 +558,7 @@ App({
   //       });
   //   }
   // },
+
   logindata: function (nicname, iconsex, avaurl) {
     var _this = this;
     var qsign = Dec.Aese('mod=info&operation=tpinfo&uid=' + _this.signindata.uid + '&loginid=' + _this.signindata.loginid + '&type=1&nick=' + nicname + '&gender=' + iconsex + '&headphoto=' + avaurl);
@@ -784,7 +785,7 @@ App({
   // 50  priorityVoting  邀请函 
   // 51  draw  春节活动  福袋
 
-
+  // 统计用户从哪个页面进入
   userstatistics: function (num) {
     var _this = this;
     var num = num || 0
@@ -801,7 +802,7 @@ App({
       fail: function () { }
     });
   },
-  // 授权
+  // 授权 统计
   clicktga: function (num) {
     var _this = this;
     var num = num || 1;
@@ -998,8 +999,8 @@ App({
       wx.navigateTo({
         url: "/page/secondpackge/pages/onlineFukubukuro/onlineFukubukuro"
       });
-    } else if (item_type == 9025) { 
-      if(whref.appid){
+    } else if (item_type == 9025) {  
+      if(whref.appid){  //点击某些海报跳转别的小程序
         wx.navigateToMiniProgram({
           appId: whref.appid,
           path: whref.path,
@@ -1076,7 +1077,7 @@ App({
       });      
     } else if (item_type == 9041) {   // 商品管理
       wx.navigateTo({
-        url: `/page/settled/pages/commodityManagement/commodityManagement`
+        url: `/page/settled/pages/commodityManagement/commodityManagement?${whref}`
       });      
     } else if (item_type == 9042) {   // 专区管理
       wx.navigateTo({
@@ -1821,13 +1822,9 @@ App({
           desc:'获取你的昵称、头像、地区及性别',
           success(res){
             console.log(res)
-
             var userInfo = res.userInfo || {};
-
             console.log('mod=userinfo&operation=setinfo&uid=' + _this.signindata.uid + '&loginid=' + _this.signindata.loginid + '&nick=' + userInfo.nickName + '&gender=' + userInfo.gender + '&headphoto=' + userInfo.avatarUrl + '&nick=' + encodeURIComponent(userInfo.nickName))
-
             var qq = Dec.Aese('mod=userinfo&operation=setinfo&uid=' + _this.signindata.uid + '&loginid=' + _this.signindata.loginid + '&nick=' + userInfo.nickName + '&gender=' + userInfo.gender + '&headphoto=' + userInfo.avatarUrl + '&nick=' + encodeURIComponent(userInfo.nickName) );
-
             wx.request({
               url: _this.signindata.comurl + 'user.php' + qq,
               method: 'GET',

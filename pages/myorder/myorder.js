@@ -1153,12 +1153,8 @@ Page({
         }else{
           this.paymentmony();
         }
-        
       };
-
     };
-
-  
   },
   // 微信支付
   paymentmony: function () {
@@ -1199,10 +1195,6 @@ Page({
                 suboformola: false,
                 vipOrOrderTip:false
               });
-              // 跳转红包页面
-              // wx.navigateTo({
-              //   url: "/pages/redenvelopes/redenvelopes?cart_id=" + _this.data.cart_id
-              // }); 
               //跳转0元购
               if (payinfo.isFreeBuyOrder) {
                 wx.navigateTo({
@@ -1753,11 +1745,7 @@ Page({
                       src: cover, // banner 图片
                       success: function (res) {
                         ctxt.drawImage(res.path, 17, 180, 285, 151);
-
-
                         if(app.signindata.is_eveShareAdver && app.signindata.mergePicImg){
-
-
                             // 渲染广告图片
                             wx.getImageInfo({
                               src: app.signindata.mergePicImg || 'https://cdn.51chaidan.com/images/default/shareImg.jpg',
@@ -1797,9 +1785,7 @@ Page({
                               },
                               fail: function () {},
                             });
-
                         }else if(_this.data.activityblindbox.length != 0){
-
                             // 第一步 底部背景颜色改变
                             // ctxt.fillStyle = '#b3b2b2';
                             ctxt.fillStyle = '#feffff';
@@ -1876,8 +1862,6 @@ Page({
                                       ctxt.strokeRect(234, 554, ctxt.measureText(_this.data.activityblindbox[1].tip).width + 6, 16);
                                       ctxt.draw(true);
                                     }
-
-
                                           ctxt.draw(true, setTimeout(function () {
                                             wx.canvasToTempFilePath({
                                               canvasId: 'myordercanimgser' + cart_idsave,
@@ -1894,7 +1878,6 @@ Page({
                                                 wx.hideLoading()
                                                 app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:01}');
                                                 _this.setData({ upserimgbox: false, headhidden: true });
-
                                               },
                                             });
                                           }, 300));

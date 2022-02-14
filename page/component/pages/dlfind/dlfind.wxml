@@ -46,10 +46,7 @@
                     </view>
                 </view>
             </block>
-            
-
     </view>
-
     <view class="offeringCalendar" wx:if='{{salesCalendar && salesCalendar.length != 0}}'>
         <swiper class="offeringCswiper" vertical="true" autoplay="true" circular="true" interval="2500">
           <block wx:for="{{salesCalendar}}" wx:key='key'>
@@ -484,8 +481,6 @@
                     </view>
                 </block>
             </block>
-
-
             <view class="boxAtlas" wx:if='{{item.illustratedInfo}}' catchtap="jumpoffering" data-id="{{item.illustratedInfo.id}}" data-type='9035' data-selltype='{{item.specialWay}}'>
                 <!-- <view class="boxAtlasLeft">图鉴</view> -->
                 <image class="boxAtlasLeftNimg" src="https://cdn.51chaidan.com/images/brandSettledIcon/illustrated.jpg"  mode="aspectFit"></image>
@@ -514,19 +509,16 @@
       <view class='noDataCom' wx:if='{{communityList.length==0&&nodataiftr}}'>
           <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
       </view>
-
-
    </block>   
-
 </view>
 
 </view>
-
 <!-- <view class='dldConpoisthree' wx:if='{{cat_id!=3}}'>
   <view class='dldConpoisthreeeve' style='width:310rpx;top:0;left:0;bottom:0;right:0;margin:auto;' catchtap='jumpdldlvreate'>我要发帖</view>
 </view> -->
 
 <bnavigation isProduce='{{isProduce}}' dlfind='{{true}}' isIphoneX='{{isIphoneX}}'></bnavigation>
+
 
 
 <!-- 输入框 -->
@@ -538,9 +530,6 @@
     <view class='intboxinptxt' catchtap='submissionfun'>发送</view>
   </view>
 </view>
-
-
-
 
 <view class="brandManageWrapButtonWrap">
   <view class="brandManageWrapButton" wx:if='{{brandSettledLimit}}' catchtap="toggleAddNewEventMask">发布/发售</view>
@@ -557,28 +546,17 @@
                       <view class="addNewEventContentCap" wx:if='{{userJurisdictionList && !userJurisdictionList.isGoodsManage}}' catchtap='{{!userJurisdictionList.isGoodsManage?"permissionDeniedFun":""}}'></view>
                       <image class="releaseSaleImg" data-type="9040" catchtap="jumpoffering" style="margin-left:30rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/seckillButton20210923.png"  mode="widthFix"></image>
                       <image class="releaseSaleImg" data-type="9039" catchtap="jumpoffering" style="margin-right:30rpx;"  src="https://www.51chaidan.com/images/brandInfoIcon/selectButton20210923.png"  mode="widthFix"></image>
-                      
                   </view>
-
                   <view class="addNewEventContent">
                       <view class="addNewEventContentCap" wx:if='{{userJurisdictionList && !userJurisdictionList.isIllustratedManage}}'  catchtap='{{!userJurisdictionList.isIllustratedManage?"permissionDeniedFun":""}}'></view>
                       <image class="releaseSaleImg" data-type="9033" catchtap="jumpoffering" style="margin-left:30rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/illustratedButton20210923.png"  mode="widthFix"></image>
                       <image class="releaseSaleImg" data-type="9032" catchtap="jumpoffering" style="margin-right:30rpx;" src="https://www.51chaidan.com/images/brandInfoIcon/dynamicButton20210923.png"  mode="widthFix"></image>
-                      
                   </view>
               </view>
-
-
-
           </view>
         <image class="popMaskbutton" catchtap="toggleAddNewEventMask" src="https://www.51chaidan.com/images/spread/dial/fork.png" mode="aspectFit"></image>
     </view>
 </view>
-
-
-
-
-
 <!-- 授权弹框 -->
 <tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
 

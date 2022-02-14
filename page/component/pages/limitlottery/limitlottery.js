@@ -3,13 +3,10 @@ var Dec = require('../../../../common/public.js'); //aes加密解密js
 var WxParse = require('../../../../wxParse/wxParse.js');
 var time = require('../../../../utils/util.js');
 var Pub = require('../../common/mPublic.js'); //aes加密解密js
-
+var api = require("../../../../utils/api.js");
 import Poster from '../../../../pages/wxa_plugin_canvas/poster/poster';
-
 const app = getApp();
-
 Page({
-
   /**
    * 页面的初始数据 
    */
@@ -163,7 +160,8 @@ Page({
     refreshGetin:true,
     showPicturesImg:false,
     showimg:'',
-    BrandConcernTip:false
+    BrandConcernTip:false,
+    isPreview:'',   //isPreview=1为预览，默认''
   },
   BrandConcernTipFun(){
     this.setData({
@@ -515,6 +513,17 @@ Page({
     app.signindata.suap = 20;
     console.log('options========',options)
 
+    if(options.isPreview == 1){   //预览
+      let previewData = {
+        isPreview:options.isPreview,
+        setGoodsStatusData:options
+      }
+      this.setData({ 
+        isPreview:options.isPreview,
+        setGoodsStatusData:options,
+        previewData
+      });
+    }
     if (options.scene) {
       let scene = decodeURIComponent(options.scene);
       console.log('options========',scene,)
@@ -662,9 +671,9 @@ Page({
       mask:true
     })
 
-    var q1 = Dec.Aese('mod=lottoV2&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid=' + _this.data.share_id + '&gid=' + _this.data.gid + '&push_id='+_this.data.push_id);
+    var q1 = Dec.Aese('mod=lottoV2&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&share_uid=' + _this.data.share_id + '&gid=' + _this.data.gid + '&push_id='+_this.data.push_id+'&isPreview='+this.data.isPreview);
 
-    console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id +  '&share_uid=' + _this.data.share_id + '&gid=' + _this.data.gid + '&push_id='+_this.data.push_id)
+    console.log('mod=lotto&operation=info&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id +  '&share_uid=' + _this.data.share_id + '&gid=' + _this.data.gid + '&push_id='+_this.data.push_id+'&isPreview='+this.data.isPreview)
     clearInterval(_this.data.timer);
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q1,
@@ -1253,11 +1262,9 @@ Page({
     var _this = this;
     app.getUserProfile((res,userInfo) => {
         if(_this.data.brandinfo && !_this.data.brandinfo.isAttention){
-
             _this.setData({
               BrandConcernTip:true
             })
-
         }else{
             _this.joinlimitlottery()
         };
@@ -2933,4 +2940,41 @@ Page({
       url: "/pages/smokebox/smokebox?gid=" + gid
     });
   },
+  navigateBack(e){
+    let pages = getCurrentPages();
+    let prevpage = pages[pages.length - 2];
+    prevpage.data.id = this.data.setGoodsStatusData.id;
+    prevpage.data.callbackPreview = true;
+    wx.navigateBack({
+      delta: 1
+    })   
+  },
+  setGoodsStatusBtn(){
+    wx.showLoading({
+      title: '加载中',
+      mask:true
+    })
+    let data = {
+      goodsType:this.data.setGoodsStatusData.goodsType,
+      id:this.data.setGoodsStatusData.id,
+      brandId:this.data.setGoodsStatusData.brandId,
+    }
+    api.setGoodsStatus(data).then((res) => {
+      console.log(res.data)
+      if(res.data.status_code == 200){
+        app.showToastC('发布成功',1500);
+        setTimeout(function(){
+          wx.navigateTo({  
+            url: "/page/settled/pages/commodityManagement/commodityManagement"
+          });
+        },1500)
+      }else{
+        if(res.data && res.data.message){
+          app.showModalC(res.data.message); 
+        };        
+      }
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
 })

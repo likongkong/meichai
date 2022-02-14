@@ -201,7 +201,18 @@ Page({
         item_type:9034,
         subtitle:'关联图鉴',
         value:'点击关联',
+        borderbottom1:'show',
         name:'associationActivity',
+      },
+      {
+        isRequired:false,
+        type:'link',
+        query:'from=releaseDrawGoods',
+        item_type:9041,
+        subtitle:'关联商品',
+        value:'点击关联',
+        margintop0:true,
+        name:'associationGoods',
       }
     ],
     listData4:[
@@ -274,6 +285,7 @@ Page({
       shippingPriceStatus:'', //邮费类型
       logisticsIndex:'', //物流下标
       isCanShare:'',
+      callbackPreview:false,
     },
     type:4,
     timer:'',
@@ -285,7 +297,11 @@ Page({
   onLoad: function (options) {
     wx.hideShareMenu();
     // '已经授权'
-    this.data.id = options.id || '';
+    this.setData({
+      id: options.id || '',
+      previewActivityKey:`${app.signindata.uid}_${Date.parse(new Date())}`
+    })
+    console.log(this.data.previewActivityKey)
     this.data.loginid = app.signindata.loginid;
     this.data.uid = app.signindata.uid;
     // 判断是否登录
@@ -534,6 +550,7 @@ Page({
           [`fieldGuideData2[0].value`]:info.illustratedInfo && info.illustratedInfo.length>0?info.illustratedInfo[0].title:'',
           [`fieldGuideData2[0].selectedArr`]:info.illustratedInfo && info.illustratedInfo.length>0?JSON.stringify(info.illustratedInfo):'',
           [`fieldGuideData2[0].brand_id`]:info.brand.brandId,
+          [`fieldGuideData2[1].value`]:info.relationGoodsName,
           [`listData4[0].index`]:info.isShowSellNumber==0?1:0,
           // [`listData4[1].index`]:info.cashPledge==0?1:0,
           // [`listData4[1].value`]:info.cashPledge==0?'':info.cashPledge,
@@ -571,6 +588,7 @@ Page({
         obj.explain = info.rule;
         obj.goodsDetailsPic = info.arrGoodsDescImg;
         obj.fieldGuideId = info.illustratedInfo && info.illustratedInfo.length>0?info.illustratedInfo[0].id:'';
+        obj.associationGoodsId = info.relationGoodsId;
         obj.isParticipants = info.isShowSellNumber==0?1:0;
         obj.applicationCondition = info.cashPledge!=0?1:info.integral!=0?2:0;
         obj.cashPledge = info.cashPledge!=0?info.cashPledge:'';
@@ -674,7 +692,12 @@ Page({
     //   cashPledge:'', //保证金
     //   integrate:'', //积分
   
-
+    let is_preview;
+    if(!this.data.callbackPreview){
+      is_preview = this.data.id&&this.data.id!=0?2:1;   //1为预览
+    }else{
+      is_preview = 1;
+    }
     let data = {
       activityId:this.data.id&&this.data.id!=0?this.data.id:'',
       activityType:4,
@@ -701,28 +724,34 @@ Page({
       rule:encodeURI(obj.explain),
       arrGoodsDescImg:obj.goodsDetailsPic,
       illustrated_id:obj.fieldGuideId || '',
+      relationGoodsId:obj.associationGoodsId || '',
       isShowSellNumber:obj.isParticipants==0?1:0,
       isCanShare:obj.isCanShare==0?1:obj.isCanShare==1?0:2,
       shelvesType:obj.addedData,
-      shelvesTime:obj.addedData==1?(new Date(obj.customAdded.replace(/-/g,'/')).getTime())/1000:''
+      shelvesTime:obj.addedData==1?(new Date(obj.customAdded.replace(/-/g,'/')).getTime())/1000:'',
+      is_preview:is_preview,
+      previewActivityKey:this.data.previewActivityKey,
     }
     console.log(data)
+    console.log(1111111,this.data.previewActivityKey)
     // return false;
 
     clearTimeout(this.data.timer);
     this.data.timer=setTimeout(()=>{
       api.settledGoodsSetActivity(data).then((res) => {
-        if(this.data.id && this.data.id!=0){
+        if(this.data.id && this.data.id!=0 && !this.data.callbackPreview){
           app.showToastC('修改成功',1500);
+          setTimeout(function(){
+            that.navigateBack();
+            let pages = getCurrentPages();    //获取当前页面信息栈
+            let prevPage = pages[pages.length-2];
+            prevPage.getData();
+          },1500)
         }else{
-          app.showToastC('发布成功',1500);
+          // app.showToastC('发布成功',1500);
+          app.comjumpwxnav(9001,`${res.data.data.Info.activity.activityId}&goodsType=4&brandId=${obj.associationIp}&isPreview=1&id=${res.data.data.Info.activity.activityId}&previewActivityKey=${this.data.previewActivityKey}`)
         }
-        setTimeout(function(){
-          that.navigateBack();
-          let pages = getCurrentPages();    //获取当前页面信息栈
-          let prevPage = pages[pages.length-2];
-          prevPage.getData();
-        },1500)
+        
       }).catch((err)=>{
         console.log(err)
       })

@@ -10,15 +10,6 @@
 <view style='position:relative;'>
 
   <view wx:if="{{infoActivity.status!=3}}" class='countdown' style='font-size:34rpx;'>
-    <!-- <text class='timetextstyle' style='margin-right:10rpx;'>拆明盒倒计时</text>
-    <text wx:if='{{dayStr!=0}}' style='diaplay:inline-block;'>{{dayStr}}</text>
-    <text wx:if='{{dayStr!=0}}' class='timetextstyle'>天</text>
-    <text style='diaplay:inline-block;'>{{hrStr}}</text>
-    <text class='timetextstyle'>时</text>
-    <text style='diaplay:inline-block;'>{{minStr}}</text>
-    <text class='timetextstyle'>分</text>
-    <text style='diaplay:inline-block;'>{{secStr}}</text>
-    <text class='timetextstyle'>秒</text> -->
     挑选自己的明盒支付后发起
   </view>
   <view wx:if="{{infoActivity.status==3}}" class='countdown' style='font-size:30rpx;'>
@@ -27,18 +18,7 @@
   </view>
 
   <view style='width:100%;height:400rpx;'>
-
     <image src="{{infoActivity.cover}}" class="slide-image" mode="aspectFill" />
-
-    <!-- <swiper current="{{goodsIndex}}" class="swiper" indicator-color="#fff" indicator-active-color="#ff2742" indicator-dots="true" circular="true" autoplay="true" interval="3000" duration="450">
-      <swiper-item wx:for="{{images}}" wx:key="key">
-
-        <image src="{{item}}" class="slide-image" mode="aspectFill" />
-
-      </swiper-item>
-
-    </swiper> -->
-
   </view>
 
   <view class='tag'>
@@ -86,27 +66,18 @@
             <image wx:if='{{item.select==1}}' class='alreadyimg' style='bottom:10%;' src='{{avatarUrl}}'></image>
 
           </view>
-
           <view class='specialellipsis' style='width:{{imgw}}px;text-align:center;font-weight:bold;font-size:25rpx;margin-top:17rpx;line-height:40rpx;'>{{item.name}}</view>
-
         </view>
-
       </view>
-
     </view>
-
     <view style='width:100%;padding:30rpx 0;margin-top:50rpx;overflow:hidden;' wx:if='{{combinatorialLists.length!=0&&isProduce}}'>
           <view style='width:300rpx;margin:auto;'>
              <view style='width:200rpx;margin:0 0 20rpx 90rpx;position:relative;' wx:for='{{combinatorialLists}}' wx:key='key'>
                  <text wx:if='{{index==0}}' style='position:absolute;top:0;bottom:0;left:-80rpx;font-size:24rpx;margin:auto;height:30rpx;line-height:30rpx;font-weight:bold;'>已选择</text>
                  <image mode="widthFix" wx:for='{{item}}' wx:key='key' wx:for-item='w' wx:for-index='num' style='width:80rpx;border:10rpx solid {{w.type==1?"#ed5c63":"#5461f5"}};display:inline-block;border-radius: 10rpx;position: relative;overflow:visible;' src='{{w.img}}'><view class='imgposiadd' wx:if='{{num==0}}'>+</view></image>
-                 <!-- <image mode="widthFix" style='width:80rpx;border:10rpx solid ;float:left;border-radius: 10rpx;' src='https://www.51chaidan.com/images/spread/showBox/31293_2_1558084490.jpg'></image> -->
-                 
              </view>
           </view>
-  
     </view>
-
     <view id='bottombtn' wx:if='{{infoActivity.status!=3}}' style='width:100%;font-size:30rpx;overflow:hidden;padding-top:30rpx;' animation="{{animation}}">
       <view wx:if='{{!isorder}}' style='background:#E6F1FC;border: 1rpx solid #A3D0FD;color:#1989FA;text-align:center;line-height:80rpx;position:relative;' catchtap='rollgoods'>
         {{bottomtext}}</view>
@@ -119,15 +90,11 @@
     <view wx:if='{{!ishowlist}}' style='width:100%;overflow:hidden;'>
       <view wx:if='{{item.type==1}}' wx:for='{{list}}' wx:key='key'>
         <view wx:if='{{item.select == 1}}' id='ming{{index}}' style='width:{{percent}}%;height:{{(imgw*infoActivity.radioHW)+30}}px;float:left;margin:10rpx 0;position:relative;'>
-
           <view style='width:80%;margin-left:{{imgleft}}px;position:relative;'>
-
             <image style='width:100%;border-radius:10rpx;border:10rpx solid #FE666B;' src='{{item.img}}' mode="widthFix"></image>
-
             <view wx:if='{{item.video&&item.video!=""}}' style='width:100%;height:32rpx;position:relative;' catchtap='previewVideo'>
               <image style='width:32rpx;height:32rpx;position:absolute;left:0;right:0;margin:0 auto;' src='https://www.51chaidan.com/images/icon/iconVideoRed.png' data-url='{{item.video}}'></image>
             </view>
-
           </view>
         </view>
       </view>
@@ -136,11 +103,8 @@
     <view wx:if='{{!ishowlist}}' style='width:100%;overflow:hidden;'>
       <view wx:if='{{item.type!=1}}' wx:for='{{list}}' wx:key='key'>
         <view wx:if='{{item.select == 1}}' id='ming{{index}}' style='width:{{percent}}%;float:left;margin:10rpx 0;position:relative;'>
-
           <view style='width:80%;margin-left:{{imgleft}}px;position:relative;'>
-
             <image style='width:100%;border-radius:10rpx;border:10rpx solid #546DF3;' src='{{item.img}}' mode="widthFix"></image>
-
             <view wx:if='{{item.video&&item.video!=""}}' style='width:100%;height:32rpx;position:relative;' catchtap='previewVideo'>
               <image style='width:32rpx;height:32rpx;position:absolute;left:0;right:0;margin:0 auto;' src='https://www.51chaidan.com/images/icon/iconVideoBlue.png' data-url='{{item.video}}'></image>
             </view>
@@ -148,11 +112,9 @@
         </view>
       </view>
     </view>
-
     <view style='width:100%;overflow:hidden;'>
       <view wx:if='{{!ishowlist}}' style='color:#999;float:left;font-size:25rpx;margin:20rpx;position:relative;' catchtap='showlist'>重新选择</view>
     </view>
-
   </view>
 
 
@@ -250,16 +212,7 @@
 
   </view>
 
-  <!-- <view style='width:100%;{{isIphoneX?"height:200rpx;":"height:180rpx;"}}'></view> -->
-
 </view>
-
-<!-- <view style='position:fixed;right:0;bottom:220rpx;color:#FD434C;text-decoration:underline;font-size:30rpx;margin:20rpx;z-index:49;'>
-  <view wx:if='{{infoActivity.unpackRole==0}}' style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;' catchtap='ispaysharedis'></view>
-  <button wx:else style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;' data-form='2' open-type="share"></button>
-  
-  分享给好友
-</view> -->
 
 <view class="topShareBox">
   <view wx:if='{{infoActivity.unpackRole==0}}' style='width:100%;height:100%;opacity:0;position:absolute;z-index:1;' catchtap='ispaysharedis'></view>
@@ -267,9 +220,6 @@
   <button style='width:100%;height:100%;position:absolute;top:0;left:0;opacity:0;' data-form='2' open-type='share'></button>
   分享
 </view>
-
-
-
 
 <view style="width:100%; position:fixed; {{isIphoneX?'bottom:130rpx;':'bottom:110rpx;'}}z-index: 20; border-top:1px solid #e5e5e5;background: #fff;z-index: 11;">
   <view wx:if='{{ishowsusp && infoActivity.status!=3}}' style='width:100%;font-size:30rpx;' animation="{{animation}}">
@@ -367,26 +317,10 @@
         <view class='pricedetailoleft'>抽盒金抵扣</view>
         <view class='pricedetailorightcol' style="color: #f42251;">-￥{{useblindAmountpayable}}</view>
       </view>
-      <!-- <view class='pricedetailo'>
-        <view class='pricedetailoleft'>税费</view>
-        <view class='pricedetailoright'>{{zunmdata.munit}}{{taxation}}</view>
-      </view> -->
       <view class='pricedetailo'>
         <view class='pricedetailoleft'>运费<text style='padding-left:8rpx;color:#47981e;' wx:if='{{freightiftr>0}}'>(满￥{{defaultinformation.carriage.free}}包邮)</text></view>
         <view class='pricedetailoright'>{{freight}}</view>
       </view>
-      <!-- <view class='pricedetailo'>
-        <view class='pricedetailoleft' wx:if='{{coupon_type==2}}'>折扣券</view>
-        <view class='pricedetailoleft' wx:else>代金券</view>
-        <view class='pricedetailorightcol green' wx:if='{{coudata2mon>0&&coupon_type==2}}'>-{{zunmdata.munit}}{{coudata2mondiscount}}</view>
-        <view class='pricedetailorightcol green' wx:elif='{{coudata2mon>0}}'>-{{zunmdata.munit}}{{coudata2mon}}</view>
-        <view class='pricedetailorightcol' wx:elif='{{coudata2mon<=0}}'>{{zunmdata.munit}}{{coudata2mon}}</view>
-      </view> -->
-      <!-- <view class='pricedetailo'>
-        <view class='pricedetailoleft'>运费券</view>
-        <view class='pricedetailorightcol green' wx:if='{{coudata1mon>0}}'>-{{zunmdata.munit}}{{coudata1mon}}</view>
-        <view class='pricedetailorightcol' wx:if='{{coudata1mon<=0}}'>{{zunmdata.munit}}{{coudata1mon}}</view>
-      </view> -->
     </view>
     <view class='bbshccom'>
       <view class='bbshccomleft'>买家留言</view>

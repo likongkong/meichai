@@ -234,8 +234,6 @@ Page({
     proTipTrue:false,
     commodityAgreement:false,
 
-
-
     // 画布
     userinfo: {},
     QRcode_img: '',
@@ -243,7 +241,8 @@ Page({
     savepic: '',
     tgfrShareIftr:false,
 
-    TimeLimit: 1 // 1 限时 限量， 2 普通商品
+    TimeLimit: 1, // 1 限时 限量， 2 普通商品
+    // isPreview:'',   //isPreview=1为预览，默认''
   },
 
 /**
@@ -3015,7 +3014,7 @@ Page({
       method: 'GET',
       header: { 'Accept': 'application/json' },
       success: function (res) {
-        _this.data.push_id =  0;
+        _this.data.push_id =  0;  
         console.log('详情',res)
         _this.setData({ headhidden: true }); 
         wx.hideLoading();

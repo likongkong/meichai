@@ -22,12 +22,19 @@ Component({
     txtcolor:{
       type:String,
       value:'#ffffff'
+    },
+    previewData:{
+      type:Object,
+      observer(newVal){
+        console.log(newVal)
+      }
     }
   },
   data: {
     topheight:130,
   },
   ready:function(){
+    console.log(1111111111,this.data.previewData)
     var _this = this;
     wx.getSystemInfo({
       success: function (res) {
@@ -45,6 +52,11 @@ Component({
       let prevpage = pages[pages.length - 2];
       if (prevpage) {
         wx.navigateBack();
+        console.log(this.data.previewData)
+        if(this.data.previewData){
+          prevpage.data.id = this.data.previewData.setGoodsStatusData.id;
+          prevpage.data.callbackPreview = true;
+        }
       } else {
         //获取当前时间戳  
         var timestamp = Date.parse(new Date()) / 1000; 

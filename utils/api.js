@@ -130,6 +130,10 @@ export const settledGoodsInfoActivity = (type,id,query) => {
 export const settledGoodsBrandlist = (query) => {
     return apiResquest.get('brand/settled_goods/brandlist',query)
 }
+// 新发布接口
+export const setGoodsStatus = (query) => {
+    return apiResquest.get('brand/settled_goods/setGoodsStatus',query)
+}
 
 // ---------------------------------------- 销售效果 -----------------------------------------
 // 销售效果数据
