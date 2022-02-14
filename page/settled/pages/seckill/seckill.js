@@ -2,6 +2,7 @@
 var Dec = require('../../../../common/public');//aes加密解密js
 var WxParse = require('../../../../wxParse/wxParse.js');
 var time = require('../../../../utils/util.js');
+var api = require("../../../../utils/api.js");
 import Poster from '../../../../pages/wxa_plugin_canvas/poster/poster';
 const app = getApp();
 
@@ -263,7 +264,8 @@ Page({
     ctBuyInTheGroup:false ,  // 群内购买 当前状态 true 不能购买 false 能购买
     BrandConcernTip:false,
     GroupSharingCanvas:1, // 1群分享弹框 2朋友圈分享图片
-    shareCreatPic:false
+    shareCreatPic:false,
+    isPreview:'',   //isPreview=1为预览，默认''
   },
   shareCreatPicFun(){
      this.setData({
@@ -3306,7 +3308,8 @@ Page({
     _this.setData({headhidden: false}); 
     wx.showLoading({ title: '加载中...', })
     var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
-    var q = Dec.Aese('mod=getinfo&operation=info&gid=' + _this.data.gid + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid+ '&push_id='+_this.data.push_id)
+    var q = Dec.Aese('mod=getinfo&operation=info&gid=' + _this.data.gid + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid+ '&push_id='+_this.data.push_id+'&isPreview='+this.data.isPreview)
+    console.log('详情请求接口===','mod=getinfo&operation=info&gid=' + _this.data.gid + '&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid+ '&push_id='+_this.data.push_id+'&isPreview='+this.data.isPreview)
     wx.request({
       url: app.signindata.comurl + 'goods.php' + q,
       method: 'GET',
@@ -3839,6 +3842,17 @@ Page({
     this.data.weixinadinfo = options.weixinadinfo||'';
     app.signindata.global_store_id = options.store_id||0;
     app.signindata.referee=options.referee || 0;
+    if(options.isPreview == 1){   //预览
+      let previewData = {
+        isPreview:options.isPreview,
+        setGoodsStatusData:options
+      }
+      this.setData({ 
+        isPreview:options.isPreview,
+        setGoodsStatusData:options,
+        previewData
+      });
+    }
     if (options.awa){
       var othershop = [];
       if (options.othershop){
@@ -5250,10 +5264,42 @@ Page({
     this.setData({
       BrandConcernTip:true
     })
+  },
+  navigateBack(e){
+    let pages = getCurrentPages();
+    let prevpage = pages[pages.length - 2];
+    prevpage.data.id = this.data.setGoodsStatusData.id;
+    prevpage.data.callbackPreview = true;
+    wx.navigateBack({
+      delta: 1
+    })  
+  },
+  setGoodsStatusBtn(){
+    wx.showLoading({
+      title: '加载中',
+      mask:true
+    })
+    let data = {
+      goodsType:this.data.setGoodsStatusData.goodsType,
+      id:this.data.setGoodsStatusData.gid,
+      brandId:this.data.setGoodsStatusData.brandId,
+    }
+    api.setGoodsStatus(data).then((res) => {
+      console.log(res.data)
+      if(res.data.status_code == 200){
+        app.showToastC('发布成功',1500);
+        setTimeout(function(){
+          wx.navigateTo({  
+            url: "/page/settled/pages/commodityManagement/commodityManagement"
+          });
+        },1500)
+      }else{
+        if(res.data && res.data.message){
+          app.showModalC(res.data.message); 
+        };        
+      }
+    }).catch((err)=>{
+      console.log(err)
+    })
   }
-
-
-
-
-
 })

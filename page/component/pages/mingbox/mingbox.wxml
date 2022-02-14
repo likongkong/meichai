@@ -310,17 +310,6 @@
   </block>
 </view>	
 
-
-<!-- <view style='width:100%; position:fixed; left:0; bottom:0; border-top:1px solid #e5e5e5;background: #fff;z-index: 11;'>
-  <view wx:if='{{ishowsusp && infoActivity.status!=3}}' style='width:100%;font-size:30rpx;' animation="{{animation}}">
-    <view wx:if='{{!isorder}}' style='background:#E6F1FC;border: 1rpx solid #A3D0FD;color:#1989FA;text-align:center;line-height:80rpx;position:relative;' catchtap='rollgoods'>{{bottomtext}}</view>
-    <view wx:if='{{isorder}}' style='background:#E6F1FC;background:#FE666B;color:#fff;text-align:center;line-height:80rpx;overflow:hidden;position:relative;' catchtap='dsbbbutclickt'>
-      <view wx:if='{{discountAmount==0}}' style='float:left;margin-left:20rpx;'>￥{{originalAmountpayable}}</view>
-      <view wx:if='{{discountAmount>0}}' style='float:left;margin-left:20rpx;'>￥{{originalAmountpayable}} - ￥{{discountAmount*2}}</view>
-      <view style='float:right;margin-right:20rpx;'>选好了，立即购买</view>
-    </view>
-  </view> -->
-
   <!-- <view id="navbtn" style='{{isIphoneX?"height:130rpx;":"height:110rpx;"}}width:100%;position:relative;'> -->
   <view id="navbtn">
     <bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
@@ -386,26 +375,10 @@
         <view class='pricedetailoleft'>抽盒金抵扣</view>
         <view class='pricedetailorightcol' style="color: #f42251;">-￥{{useblindAmountpayable}}</view>
       </view>
-      <!-- <view class='pricedetailo'>
-        <view class='pricedetailoleft'>税费</view>
-        <view class='pricedetailoright'>{{zunmdata.munit}}{{taxation}}</view>
-      </view> -->
       <view class='pricedetailo'>
         <view class='pricedetailoleft'>运费<text style='padding-left:8rpx;color:#47981e;' wx:if='{{freightiftr>0}}'>(满￥{{defaultinformation.carriage.free}}包邮)</text></view>
         <view class='pricedetailoright'>{{freight}}</view>
       </view>
-      <!-- <view class='pricedetailo'>
-        <view class='pricedetailoleft' wx:if='{{coupon_type==2}}'>折扣券</view>
-        <view class='pricedetailoleft' wx:else>代金券</view>
-        <view class='pricedetailorightcol green' wx:if='{{coudata2mon>0&&coupon_type==2}}'>-{{zunmdata.munit}}{{coudata2mondiscount}}</view>
-        <view class='pricedetailorightcol green' wx:elif='{{coudata2mon>0}}'>-{{zunmdata.munit}}{{coudata2mon}}</view>
-        <view class='pricedetailorightcol' wx:elif='{{coudata2mon<=0}}'>{{zunmdata.munit}}{{coudata2mon}}</view>
-      </view> -->
-      <!-- <view class='pricedetailo'>
-        <view class='pricedetailoleft'>运费券</view>
-        <view class='pricedetailorightcol green' wx:if='{{coudata1mon>0}}'>-{{zunmdata.munit}}{{coudata1mon}}</view>
-        <view class='pricedetailorightcol' wx:if='{{coudata1mon<=0}}'>{{zunmdata.munit}}{{coudata1mon}}</view>
-      </view> -->
     </view>
     <view class='bbshccom'>
       <view class='bbshccomleft'>买家留言</view>
@@ -497,4 +470,3 @@
    </view>
    
 </view>
-

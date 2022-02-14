@@ -31,7 +31,8 @@ Page({
       {name:'未开始',num:'1'},
       {name:'进行中',num:'2'},
       {name:'已结束',num:'3'},
-      {name:'已删除',num:'4'}
+      // {name:'已删除',num:'4'}
+      {name:'未发布',num:'5'}
     ], // 支付状态 
     subLedger: 0 , // 1 已分账 2 未分账
     countOrder:0,
@@ -47,6 +48,19 @@ Page({
     ],
     screenWords:'筛选',
     shareImgTipIs:false
+  },
+  clickSelected(e){
+    let id = e.currentTarget.dataset.id;
+    let name = e.currentTarget.dataset.name;
+    let pages = getCurrentPages();    //获取当前页面信息栈
+    let prevPage = pages[pages.length-2];
+    prevPage.setData({
+      [`fieldGuideData2[1].value`]:name,
+    })
+    prevPage.data.obj.associationGoodsId=id;
+    wx.navigateBack({
+      delta: 1
+    })
   },
   shareImgTipFun(){
     this.setData({
@@ -307,6 +321,17 @@ Page({
     // wx.hideShareMenu();
 
     // '已经授权'
+    console.log(options)
+    this.setData({
+      from:options.from || '',
+      payStatus:options.from=='releaseDrawGoods'?[
+        {name:'全部',num:'0'},
+        {name:'未开始',num:'1'},
+        {name:'进行中',num:'2'},
+        {name:'已结束',num:'3'}
+      ]:this.data.payStatus,
+      c_title:options.from=='releaseDrawGoods'?'关联商品':'商品管理'
+    })
     _this.data.loginid = app.signindata.loginid;
     _this.data.uid = app.signindata.uid;
     // 判断是否登录
@@ -315,8 +340,6 @@ Page({
     } else {
       app.signin(_this)
     };
-
-
   },
   onLoadfun(){
     var _this = this;

@@ -1551,5 +1551,40 @@ page{
 }
 
 
+/* 预览遮层样式 start */
+.preview{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0);
+  z-index: 100;
+}
+.preview_footer{
+  width: 100%;
+  height: 158rpx;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  padding-top: 25rpx;
+  box-sizing: border-box;
+}
+.preview_footer view{
+  width: 45%;
+  height: 75rpx;
+  border-radius: 14rpx;
+  text-align: center;
+  line-height: 75rpx;
+  font-size: 28rpx;
+  color: #fff;
+  margin: 0 10rpx;
+  background: #90D2D6;
+}
+/* 预览遮层样式 end */
 
 

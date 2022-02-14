@@ -10,13 +10,10 @@
     </view>
 </view>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
-
 <view class="vipbox"catchtap="jumpVipPage">
     <text style="margin-left: 34rpx;">开通年VIP赠送展会日历+抽盒金￥1825</text>
     <view class="vipButOpen">查看特权></view>   
 </view>
-
-
 <!-- 倒计时 -->
 <block wx:if='{{false}}'>
   <view class="countdownWrap" catchtouchmove="true">
@@ -168,9 +165,6 @@
     <view class="iwasButon">
         <view class="iwasButonTxt">我的投票剩余:<text style="color:#E94F57;margin:0 10rpx;">{{voteChance}}</text>(当日有效)<view class="clickButton"  catchtap="jumpiwas">我的投票</view></view>
     </view>
-    <!-- <view class="leafletBottom">
-        <view class="leafletBottomEve boxShadowEve" style="width:400rpx;"></view>
-    </view> -->
 </block>
 <!-- 商品详情 -->
 <view wx:if='{{shopDetail}}' class="wsh" catchtouchmove="true">
