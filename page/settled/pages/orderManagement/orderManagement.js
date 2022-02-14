@@ -649,7 +649,6 @@ Page({
   onLoad: function (options) {
     var _this = this;
     wx.hideShareMenu();
-
     // '已经授权'
     _this.data.loginid = app.signindata.loginid;
     _this.data.uid = app.signindata.uid;
@@ -659,8 +658,6 @@ Page({
     } else {
       app.signin(_this)
     };
-
-
   },
   onLoadfun(){
     var _this = this;
@@ -672,13 +669,11 @@ Page({
       isProduce: app.signindata.isProduce,
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
     });
-
     if(wx.getStorageSync('access_token')){
       this.getData();
     }else{
       app.getAccessToken(_this.getData)
     };
-    
   },
   // 获取售后数据
   refundOrderList(num=1){
@@ -708,7 +703,6 @@ Page({
             });
           };
           console.log(order)
-
           if (num==1){
               var countOrder =  res.data.data.Info.order.count || 0;
               var brand = res.data.data.List.brand || [];
@@ -758,7 +752,6 @@ Page({
             });
           };
           console.log(order)
-
           if (num==1){
               var countOrder =  res.data.data.Info.order.count || 0;
               var brand = res.data.data.List.brand || [];
