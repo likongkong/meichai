@@ -1839,13 +1839,9 @@ App({
           desc:'获取你的昵称、头像、地区及性别',
           success(res){
             console.log(res)
-
             var userInfo = res.userInfo || {};
-
             console.log('mod=userinfo&operation=setinfo&uid=' + _this.signindata.uid + '&loginid=' + _this.signindata.loginid + '&nick=' + userInfo.nickName + '&gender=' + userInfo.gender + '&headphoto=' + userInfo.avatarUrl + '&nick=' + encodeURIComponent(userInfo.nickName))
-
             var qq = Dec.Aese('mod=userinfo&operation=setinfo&uid=' + _this.signindata.uid + '&loginid=' + _this.signindata.loginid + '&nick=' + userInfo.nickName + '&gender=' + userInfo.gender + '&headphoto=' + userInfo.avatarUrl + '&nick=' + encodeURIComponent(userInfo.nickName) );
-
             wx.request({
               url: _this.signindata.comurl + 'user.php' + qq,
               method: 'GET',

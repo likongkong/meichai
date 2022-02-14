@@ -2509,10 +2509,8 @@ vipOrOrdermine1(){
                                         },
                                       });
                                     }, 300));
-
                                   }
                                 })
-
                               },
                               fail: function (res) {
                                 app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:16}');
@@ -2529,13 +2527,11 @@ vipOrOrdermine1(){
                     app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:010}');
                   }
                 });
-
               },
               fail: function (res) {
                 wx.hideLoading()
                 app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:03}');
                 _this.setData({ upserimgboxact: false, headhidden: true });
-               
               }
             })
           },
@@ -2543,7 +2539,6 @@ vipOrOrdermine1(){
             wx.hideLoading()
             app.showToastC('网络不佳,图片生成失败,请刷新页面后重试,{ReturnCode:04}');
             _this.setData({ upserimgboxact: false, headhidden: true });
-            
           }
         })
       } else {
@@ -2551,13 +2546,7 @@ vipOrOrdermine1(){
 
       };
     };
-
-
-
-
-
   },
-
   acetlistfunact: function () {
     this.setData({ upserimgboxact: false });
   },
@@ -2583,7 +2572,6 @@ vipOrOrdermine1(){
       complete: function (res) { },
     });
   },
-
   gofreedetail: function (w) {
     var _this = this;
     var cart_id = w.currentTarget.dataset.cart_id || w.target.dataset.cart_id || '';
@@ -2591,13 +2579,11 @@ vipOrOrdermine1(){
       url: "/page/component/pages/hidefun/hidefun?type=0&cart_id=" + cart_id
     });
   },
-
   goodsetail: function (w) {
     var _this = this;
     var gid = w.currentTarget.dataset.gid || w.target.dataset.gid || '';
     app.comjumpwxnav(1,gid,'');
   },
-
   personalhomepage: function (w) {
     var myordata = this.data.comdata || [];
     var mylistarr = [];
@@ -2645,7 +2631,6 @@ vipOrOrdermine1(){
         goodspt = goodspt.replace(/http/, 'https');
       }
     };
-
     var ctxt = wx.createCanvasContext('canimgserceshi')
     wx.getImageInfo({
       src: goodspo,
@@ -2656,7 +2641,6 @@ vipOrOrdermine1(){
             src: "https://www.51chaidan.com/images/cast/ca_1.png",
             success: function (res) {
               ctxt.drawImage(res.path, 0, 0, 375, 603);
-
               // 第一步 底部背景颜色改变
               ctxt.fillStyle = '#feffff';
               ctxt.fillRect(0, 603, 375, 185);
@@ -2695,7 +2679,6 @@ vipOrOrdermine1(){
                     ctxt.strokeRect(105, 750, ctxt.measureText(_this.data.activityblindbox[0].tip).width + 6, 16);
                     ctxt.draw(true);
                   }
-
                   // 第四部 渲染右边图片
                   wx.getImageInfo({
                     src: _this.data.activityblindbox[1].cover,
@@ -2739,11 +2722,9 @@ vipOrOrdermine1(){
                             _this.setData({
                               upserimgbox: false,
                             });
-                            
                           },
                         });
                       }, 300));
-
                     },
                     fail: function () {
 
@@ -2751,10 +2732,8 @@ vipOrOrdermine1(){
                   });
                 },
                 fail: function () {
-
                 },
               });  
-
             },
             fail: function (res) {
               wx.hideLoading()
@@ -2762,7 +2741,6 @@ vipOrOrdermine1(){
               _this.setData({
                 upserimgbox: false,
               });
-              
             }
           });
         } else {
@@ -2775,8 +2753,6 @@ vipOrOrdermine1(){
                 src: "https://www.51chaidan.com/images/cast/ca_2.png",
                 success: function (res) {
                   ctxt.drawImage(res.path, 0, 0, 375, 603);
-
-
                   // 第一步 底部背景颜色改变
                   ctxt.fillStyle = '#feffff';
                   ctxt.fillRect(0, 603, 375, 185);
@@ -2844,8 +2820,6 @@ vipOrOrdermine1(){
                             ctxt.strokeRect(285, 750, ctxt.measureText(_this.data.activityblindbox[1].tip).width + 6, 16);
                             ctxt.draw(true);
                           };
-
-
                           ctxt.draw(true, setTimeout(function () {
                             wx.canvasToTempFilePath({
                               canvasId: 'canimgserceshi',
@@ -2865,18 +2839,14 @@ vipOrOrdermine1(){
                               },
                             });
                           }, 300));
-
                         },
                         fail: function () {
-
                         },
                       });
                     },
                     fail: function () {
-
                     },
                   });
-
                 },
                 fail: function (res) {
                   wx.hideLoading()
@@ -2894,11 +2864,9 @@ vipOrOrdermine1(){
               _this.setData({
                 upserimgbox: false,
               });
-              
             }
           });
         }
-
       },
       fail: function (res) {
         wx.hideLoading()
@@ -2919,7 +2887,6 @@ vipOrOrdermine1(){
   subscrprofun: function () {
     this.setData({ subscrproiftr: false })
   },
-
   // 计算图片大小
   imageLoadad: function (e) {
     var _this = this;
@@ -2939,14 +2906,6 @@ vipOrOrdermine1(){
       });
     };
   },
-
-
-
-
-
-
-
-
   dlfindfun: function () {
     app.comjumpwxnav(993,'','');
   },
@@ -3024,7 +2983,6 @@ vipOrOrdermine1(){
         });
     })
   },
-  
   // 领取红包封面
   showRedPackage(e){
     wx.showRedPackage({

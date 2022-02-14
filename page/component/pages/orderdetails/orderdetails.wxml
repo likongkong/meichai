@@ -4,16 +4,10 @@
 </loading>   -->
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
-
 <canvas canvas-id='canimgserceshi' style='width:375px;height:788px;position:fixed;left:0;top:-999999rpx;'></canvas>
-
-<view class='box'
-    style="{{upserimgbox||upserimgboxact?'position:fixed;top:0;left:0;right:0;bottom:0;':''}}padding-bottom:110rpx;">
-
-
+<view class='box' style="{{upserimgbox||upserimgboxact?'position:fixed;top:0;left:0;right:0;bottom:0;':''}}padding-bottom:110rpx;">
     <!-- 电子 -->
     <block wx:if='{{comdata.isToyshowDrawGoods}}'>
-
         <view class="ordeQRcode" wx:if='{{comdata.status == 2}}'>
             <view class="ordeQRImgBox">
                 <image src="{{comdata.qrcode}}" class="ordeQRImgBoxImg"></image>
@@ -22,7 +16,6 @@
             <view class="ordeQRTitN" style="text-align:center;border-top:0;">需凭本人身份证线下扫码领取<text
                     wx:if='{{comdata.drawDate}}'>{{comdata.drawDate}}</text></view>
         </view>
-
         <view wx:if='{{comdata.status==5}}' class='odchtead'>
             <view style='float:left;font-size:24rpx;'>订单编号:{{comdata.order_sn}}</view>
             <view class='wholeconnumrrbox'>
@@ -31,7 +24,6 @@
                 </view>
             </view>
         </view>
-
         <view class='orderdetcon'>
             <view class='odchteadcom' data-gid='{{comdata.gid}}' data-order_type='{{comdata.order_type}}'
                 data-activity_id='{{comdata.activity_id}}'
@@ -64,7 +56,6 @@
                                 <text style="color:#000;" wx:if='{{comdata.integral}}'>+积分{{comdata.integral}}</text>
                             </view>
                         </view>
-
                         <view class='wholeconnumdisilin specialellipsis'>
                             <block wx:if='{{comdata.order_type==1&&comdata.suitName&&comdata.suitNumber}}'>
                                 {{comdata.suitName}}x{{comdata.suitNumber}}
@@ -84,22 +75,16 @@
                     <view class='officialreply'
                         wx:if='{{comdata.customer_reply&&(comdata.status==1||comdata.status==2||comdata.status==12||comdata.status==13||comdata.status==4||comdata.status==16)}}'>
                         回复:{{comdata.customer_reply}}</view>
-
-
                 </view>
-
             </view>
             <view class='totalmon'>
-
                 <view class='totalmonnum' wx:if='{{comdata.order_type==1}}'>
                     合计:￥{{comdata.amount}}
                 </view>
-
                 <view class='daifukuan' style='text-align:left;'
                     wx:if='{{comdata.order_type==6&&(comdata.status==18||comdata.status==0)}}'>
                     结束时间 : {{comdata.gift_time}}
                 </view>
-
             </view>
 
             <view style="padding:0 0 20rpx 0;background:#fff;">
@@ -118,17 +103,10 @@
                         {{comdata.idcard}}</view>
                 </view>
             </view>
-
-
         </view>
-
-
-
-
     </block>
     <!-- 普通 -->
     <block wx:else>
-
         <view wx:if='{{comdata.order_type!=6}}'>
             <view class='rdheadback' wx:if='{{comdata.status==0&&comdata.order_type!=7}}'>
                 <block wx:if='{{comdata.order_type==24&&(comdata.isBalances==1||comdata.isBalances==2)}}'>已付定金</block>
@@ -346,7 +324,6 @@
                     已回收
                 </view>
             </view>
-
         </view>
 
         <!-- 为了不把原来逻辑弄乱 ，所以砍价单写 -->
@@ -1228,37 +1205,10 @@
                             <button open-type="share" class='butshare'></button>
                             分享好友
                         </view>
-
-
-                        <!-- <view class='totalmoncrightcel' data-oid='{{comdata.oid}}'
-                            style='margin-right:10rpx;position: relative;' data-gcover='{{comdata.gcover}}'
-                            bindtap='lookatthelogistics'>查看物流</view> -->
-
-                        <!-- 寄回物流信息 -->
-                        <!-- <block wx:if="{{comdata.isSendBack}}">
-                            <block wx:if="{{comdata.sendBackStatus == 1}}">
-                                <block wx:if="{{item.sendBackAuditStatus==0 || item.sendBackAuditStatus==5 || item.sendBackAuditStatus==6}}">
-                                    <view class='totalmoncright redborcol' style='position: relative;' data-href="status=0&sendBackId={{item.sendBackId}}"  data-item_type='9054' bindtap='comindellistjump'>商品寄回</view> 
-                                </block>
-                                <block wx:else>
-                                    <view class='totalmoncright redborcol' style='position: relative;' data-href="status=1&sendBackId={{item.sendBackId}}"  data-item_type='9054' bindtap='comindellistjump'>取件信息</view> 
-                                </block>
-                            </block>
-                            <block wx:else>
-                                <view class='totalmoncright redborcol' style='position: relative;' data-id='{{comdata.sendBackId}}' data-gcover='{{comdata.gcover}}' bindtap='sendBackLogistics'>查看物流</view> 
-                            </block>
-                        </block> -->
                         <!-- 发货的查看物流 -->
                         <!-- <block wx:else> -->
                             <view class='totalmoncright' style='position: relative;' data-oid='{{comdata.oid}}' data-gcover='{{comdata.gcover}}' bindtap='lookatthelogistics'>查看物流</view> 
                         <!-- </block> -->
-
-                        <!-- <view class='totalmoncright' wx:if='{{comdata.order_type==1}}'
-                            style='color:#ff2840;border:1rpx solid #ff2840;position:relative;margin-right:10rpx;'
-                            bindtap='personalhomepage'>发帖推荐</view> -->
-
-
-
                     </view>
                     <!--   已取消订单  -->
                     <view style='min-height:1rpx;width:94%;padding: 0 3% 10rpx;overflow:hidden;'
@@ -1466,12 +1416,6 @@
 
 </view>
 
-<!--  首页按钮  -->
-<!-- <view class='frontpagebuttonact' catchtap='frontpagebutton' style='bottom:685rpx;' style='bottom:465rpx;'>
-    <view style='height:40rpx;text-align:center;line-height:50rpx;width:100%;padding-top:4rpx;'>返回</view>
-    <view style='height:40rpx;text-align:center;width:100%;'>首页</view>
-</view> -->
-
 
 <!-- closeupserimg -->
 <view class='tgimgbox' wx:if='{{upserimgbox}}'>
@@ -1520,24 +1464,6 @@
     </view>
 </view>
 
-
-<!--  图片授权  -->
-<!-- <view class='editorrecom' wx:if='{{picbox}}' style='z-index:9999999;'>
-    <view class='ngbackground'></view>
-    <view class='picbox'>
-        <view class='picboxhead'>授权之后才能保存图片</view>
-        <view class='picboxcon'>
-            <view class='picboxconleft' style='color:#333;' catchtap='imgCanelTg'>取消</view>
-            <view class='picboxconleft' style='color:#11fb3d;position:relative;'>
-                <button open-type="openSetting" bindopensetting="handleSetting" class='picbut'></button>
-                确定
-            </view>
-        </view>
-    </view>
-</view> -->
-
-
-
 <!-- canvas生成分享图片 -->
 <view class='headhiddenbox' hidden="{{headhidden}}"></view>
 <canvas canvas-id='canimgser' class='canimgsernew'></canvas>
@@ -1573,21 +1499,15 @@
                             style='width:100%;height:100%;position:absolute;top:0;left:0;z-index:1;opacity: 0.7;background:#009BFF;'>
                         </view>
                     </view>
-
                     <view class='upsertgimcimgbut' catchtap='sharesavethepicture' data-indnum='2'
                         style='width:280rpx;height:60rpx;position: absolute;left:0;bottom:0;font-size:26rpx;text-align:center;line-height:60rpx;color:#fff;border-radius: 10rpx;background: #1aad19;'>
                         保存图片</view>
                 </view>
             </view>
-
         </view>
-
-
         <image src='../../../../pages/images/icon_close3.png' class='usericonclose' catchtap='acetlistfunact'></image>
     </view>
 </view>
-
-
 
 <view class='awatip' wx:if='{{awatip}}'>
     <view class='awabg' catchtap='awatipdisnone'></view>
@@ -1597,8 +1517,6 @@
         <view class='awaconbottom' catchtap='awajump'>确定</view>
     </view>
 </view>
-
-
 
 <view class='awatip' wx:if='{{subscrproiftr}}' style='z-index:9999999999;'>
     <view class='awabg'></view>
@@ -1610,8 +1528,6 @@
         </view>
     </view>
 </view>
-
-
 
 <!--  收货地址  -->
 <view class='receivingaddress' wx:if='{{receivingaddress}}'>
@@ -1658,13 +1574,10 @@
       <view class='noDataCom' wx:if='{{addressdata.length==0}}'>
           <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
       </view>
-
     </view>
     <view class='recgadbot' bindtap='jumpaddress'>
         增加新地址
     </view>
-
-
 </view>
 
 <!-- 确认修改地址弹框 -->
@@ -1687,18 +1600,9 @@
         </view>
     </view>
 </view>
-
-
-
-
-
-
 <!-- 底部导航 -->
 <bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX='{{isIphoneX}}' shopnum='{{shopnum}}'
     dryinglistnum='{{dryinglistnum}}'></bnavigation>
-
-
-
 
 <view class='awatip' wx:if='{{refundtips}}' style='z-index:99;'>
     <view class='awabg' catchtap='refundtipsfun'></view>
@@ -1716,8 +1620,6 @@
     </view>
 </view>
 
-
-
 <view class='awatip' wx:if='{{refundtipssure}}' style='z-index:99999;'>
     <view class='awabg' catchtap='refundtipssurefun'></view>
     <view class='awacontent'>
@@ -1726,9 +1628,6 @@
         <view class='awaconbottom' catchtap='refundtipssuresure'>确定</view>
     </view>
 </view>
-
-
-
 
 <!-- 领奖截图提示 -->
 <view class='awatip' wx:if='{{screenshottipsiftr}}' style='z-index:9999;'>

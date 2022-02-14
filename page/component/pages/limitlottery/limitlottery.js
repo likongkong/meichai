@@ -1263,11 +1263,9 @@ Page({
     var _this = this;
     app.getUserProfile((res,userInfo) => {
         if(_this.data.brandinfo && !_this.data.brandinfo.isAttention){
-
             _this.setData({
               BrandConcernTip:true
             })
-
         }else{
             _this.joinlimitlottery()
         };

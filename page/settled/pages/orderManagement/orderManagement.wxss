@@ -255,7 +255,6 @@ page{
   color:#AAAAAA;
   text-align: right;
   width: 360rpx;
-  height: 50rpx;
   line-height: 50rpx;
   display: inline-block;
   vertical-align: top;

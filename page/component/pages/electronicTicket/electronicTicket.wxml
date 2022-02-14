@@ -8,7 +8,6 @@
 <canvas  canvas-id='canimgserceshi' style='width:375px;height:788px;position:fixed;left:0;top:-999999rpx;'></canvas>
  
 <view class='box' style="{{upserimgbox||upserimgboxact?'position:fixed;top:0;left:0;right:0;bottom:0;':''}}padding-bottom:110rpx;">
- 
     <view class="ordeQRcode" wx:if='{{is_ActivationCode}}'>
         <block wx:if='{{!comdata.isItOverdue}}'>
             <view class="ordeQRImgBox" wx:if='{{comdata.status != 5}}'>
@@ -26,12 +25,8 @@
                 <view wx:if='{{isrefresh}}' style="color:#ff2840;border:1rpx solid #ff2840;" class="totalmoncright" catchtap="refreshQRCode">刷新</view>
             </view>
         </block> 
-
-         
     </view> 
-
     <block wx:else>
-
         <view class='rdhead' wx:if='{{comdata.status==2}}'>
                 支付成功
                 <image class='rdheadimg' src='../../../../pages/images/icon_clock2.png'></image>
@@ -40,9 +35,7 @@
             等待付款
             <image class='rdheadimg' src='../../../../pages/images/icon_wallet2.png'></image>
         </view>
-
     </block>
-
     <view style="padding:0 20rpx 20rpx 20rpx;background:#fff;" wx:if='{{electronicInvoice}}'>
         <view class="ordeQRTitle" style="border-bottom: 2rpx solid #fff;">
             <view class="ordeQRTitN">{{comdata.toyshowName}}</view>
@@ -51,8 +44,6 @@
             <view class="ordeQRTitN" style="color:#E94F57;">入场需携带本人身份证</view>
         </view>
     </view>
-
- 
      <view class='orderdetcon'>         
           <view class='odchteadcom' data-gid='{{comdata.gid}}' data-order_type='{{comdata.order_type}}' data-activity_id='{{comdata.activity_id}}' bindtap='addressmanagement'>
                <view class='odchcomleft'>
@@ -64,15 +55,10 @@
                       <view class='odchrhead multilineellipsis'>{{comdata.gname}}</view>
                       <view class='wholeconnum specialellipsis' style="color:#E94F57;margin-top:56rpx">{{comdata.specialTitle}}<view class='wholeconnumdisilin'>￥{{comdata.goods_price}}</view></view> 
                       <view class='wholeconnum specialellipsis' style="color:#E94F57;"> <view class='wholeconnumdisilin' style="color:#BEBEBE;">数量:x{{comdata.gnumber}}</view></view> 
-                  
                </view>
-
           </view>
           <view class='totalmon'>
-
-
               <view  wx:if='{{true}}'>
-        
                     <view class='totalmonnum'>
                             合计:￥{{comdata.amount}}
                     </view>
@@ -80,11 +66,7 @@
                     <view class='totalmoncon' wx:if='{{comdata.status==0 && comdata.order_type!=7}}' style="display:flex;justify-content:flex-end;">
                         <view class='totalmoncright' bindtap='payment' style='position:relative;margin:0;'>我要付款</view>
                     </view>
-
               </view> 
-
- 
- 
           </view>
      </view>
 
@@ -100,7 +82,6 @@
                 <view class="ordeQRTitN"><text style="color:#666;display:inline-block;vertical-align:top;width:120rpx;"></text>身份证 {{comdata.idcard}}</view>
             </view>
         </view>
-
     </block>
 
     <view wx:else style="padding:0 20rpx 0 20rpx;background:#fff;margin-bottom: 20rpx;">
@@ -111,16 +92,13 @@
                 <view class="ordeQRTitN">
                   <view class="actcodcl">激活码：<block wx:if='{{displayClearText}}'>{{comdata.activationCode}}</block><block wx:else>****************</block><image class="displayClearTextImg" catchtap="is_dct" mode="aspectFit" src="{{displayClearText?'http://cdn.51chaidan.com/images/sign/show.png':'http://cdn.51chaidan.com/images/sign/hide.png'}}"></image></view>
                 </view>
-
                 <view style="background:#fff;width:660rpx;display: flex;justify-content: space-between;align-items: center;margin:30rpx auto 0;">
                     <view class="clickButtonEve" catchtap="copyTBLac" style="background:#FCA700;">复制激活码</view>
                     <view class="clickButtonEve" catchtap="deactivation" style="background:#1684FC;">去激活</view>
                 </view>
             </block>
         </view>
-        
     </view>
-
 
      <view class='orderbott'>
          <view class='orderbottcon'>订单编号:{{comdata.order_sn}}</view>
@@ -142,19 +120,11 @@
     </view>     
 </view>
  
- 
 <!--  背景颜色  -->
 <view class='tipback' wx:if='{{tipback}}' catchtouchmove="preventD"></view>
 
-
- 
- 
 <!--  提交订单弹框防止多次提交  -->
 <view wx:if='{{suboformola}}' style='width:100%;height:100%;background:#000;opacity: 0.4;z-index: 1999;position: fixed;top: 0;left: 0;'></view>
- 
- 
- 
-
  
 <!--  图片授权  -->
 <!-- <view class='editorrecom' wx:if='{{picbox}}' style='z-index:9999999;'>
@@ -170,8 +140,6 @@
         </view>
     </view>
 </view> -->
- 
- 
  
 <!-- canvas生成分享图片 -->
 <view class='headhiddenbox' hidden="{{headhidden}}"></view>
@@ -189,9 +157,7 @@
               <view style='width:100%;height:40rpx;color:#fff;font-size:22rpx;text-align:center;line-height:40rpx;text-decoration:underline;'>查看截图参考</view>
           </view>
           <text style='width:400rpx;height:230rpx;position: absolute;left:200rpx;bottom:60rpx;font-size:26rpx;color:#fff;overflow: scroll;'>{{share_desc}}</text>
-
       </view>
-
 <view style='width:100%;height:66rpx;position:relative;'>
       <view style='width:100%;height:66rpx;position:relative;'>
           <view style='width:280rpx;height:60rpx;position: absolute;right:0;bottom:0;font-size:26rpx;text-align:center;line-height:60rpx;color:#fff;border-radius: 10rpx;background: #087ac5;' catchtap='upImgSer'><view style='width:100%;height:100%;position:absolute;top:0;left:0;z-index:2;'>上传截图</view><view style='width:100%;height:100%;position:absolute;top:0;left:0;z-index:1;opacity: 0.7;background:#009BFF;'></view></view>
@@ -199,15 +165,10 @@
           <view class='upsertgimcimgbut' catchtap='sharesavethepicture' data-indnum='2' style='width:280rpx;height:60rpx;position: absolute;left:0;bottom:0;font-size:26rpx;text-align:center;line-height:60rpx;color:#fff;border-radius: 10rpx;background: #1aad19;'>保存图片</view>
       </view>
 </view>
-
     </view>
-
-
        <image src='../../../../pages/images/icon_close3.png' class='usericonclose' catchtap='acetlistfunact'></image>
    </view>
 </view>
-
-
 
 <view class='awatip' wx:if='{{awatip}}'>
     <view class='awabg' catchtap='awatipdisnone'></view>
@@ -218,8 +179,6 @@
     </view>
 </view>
 
-
-
 <view class='awatip' wx:if='{{subscrproiftr}}' style='z-index:9999999999;'>
     <view class='awabg'></view>
     <view class='awacontent' style='width:600rpx;height:320rpx;'>
@@ -228,8 +187,6 @@
        <view class='awaconbottom' style='background:#f18f00;width:130rpx;position:relative;' catchtap='subscrprofun'>确定</view>
     </view>
 </view>
-
-
 
 <!--  收货地址  -->
 <view class='receivingaddress' wx:if='{{receivingaddress}}'>
@@ -265,14 +222,9 @@
           <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
       </view>
   </view>
-
-
-
   <view class='recgadbot' bindtap='jumpaddress'>
     增加新地址
   </view>
-
-
 </view>
 
 <!-- 确认修改地址弹框 -->
@@ -291,19 +243,9 @@
         </view>
     </view>
 </view>
-
-
-
-
-
-
 <!-- 底部导航 -->
 <bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' 
 dryinglistnum='{{dryinglistnum}}'></bnavigation>
-
-
-
-
 <view class='awatip' wx:if='{{refundtips}}' style='z-index:99;'>
     <view class='awabg' catchtap='refundtipsfun'></view>
     <view class='awacontent' style='width:640rpx;height:470rpx;'>
@@ -315,9 +257,6 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
        </view>
     </view>
 </view>
-
-
-
 <view class='awatip' wx:if='{{refundtipssure}}' style='z-index:99999;'>
     <view class='awabg' catchtap='refundtipssurefun'></view>
     <view class='awacontent'>
@@ -326,10 +265,6 @@ dryinglistnum='{{dryinglistnum}}'></bnavigation>
        <view class='awaconbottom' catchtap='refundtipssuresure'>确定</view>
     </view>
 </view>
-
-
-
-
 <!-- 领奖截图提示 --> 
 <view class='awatip' wx:if='{{screenshottipsiftr}}' style='z-index:9999;'>
     <view class='awabg' catchtap='screenshottipsnone'></view>
