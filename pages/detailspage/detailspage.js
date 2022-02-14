@@ -244,7 +244,8 @@ Page({
     savepic: '',
     tgfrShareIftr:false,
 
-    TimeLimit: 1 // 1 限时 限量， 2 普通商品
+    TimeLimit: 1, // 1 限时 限量， 2 普通商品
+    // isPreview:'',   //isPreview=1为预览，默认''
   },
 
 /**

@@ -1,10 +1,10 @@
 <!-- 预览遮层 start -->
-<view class="preview">
+<!-- <view class="preview" wx:if="{{isPreview && isPreview==1}}">
   <view class="preview_footer">
     <view>返回编辑</view>
     <view>确认发布</view>
   </view>
-</view>
+</view> -->
 <!-- 预览遮层 end -->
 <!--  html页面转换  -->
 <import src="../../wxParse/wxParse.wxml" />
