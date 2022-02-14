@@ -442,11 +442,11 @@ page{
   overflow: hidden;
 }
 .seckillBottomBoxFollow{
-  width: 100%;
+  width: 66%;
   height: 100%;
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   z-index: 3;
 }
 /* 关注弹框 结束 */
