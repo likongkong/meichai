@@ -27,7 +27,6 @@ Page({
     swiperError: 0,
     goodsIndex: 0,
     preIndex: 0, 
-    shopnum:0,
     listdata:{},
     comment_count:0,
     inputbox:false,
@@ -42,8 +41,6 @@ Page({
     ishowvideo:false,
     video:'',
     videoContext: '',
-    // 晒单数量
-    dryinglistnum: 0,
     // 是否开启了分享功能
     isShareFun: true,
     // 拆币规则框

@@ -40,9 +40,7 @@ Page({
     cart_id: 0,
     timer: '',
     commoddata: {},
-    shopnum: 0,
     defaultinformation: app.signindata.defaultinformation,
-    dryinglistnum: 0,
     awatxt: '',
     inputdata: '',
     SHOW_TOP_CLTIP: false,
@@ -672,8 +670,6 @@ Page({
       };
       _this.tablist();
     };      
-    
-    _this.getdefultInfo();
 
     if(app.signindata.receivingAddress && app.signindata.receivingAddress.length != 0){
       var rdl = app.signindata.receivingAddress;
@@ -700,12 +696,6 @@ Page({
     }else{
       _this.nextpagediao();
     };
-  },
-
-  getdefultInfo: function() {
-    var _this = this;
-    // 调取晒单数量
-    Dec.dryingSum(_this, app.signindata.clwcomurl);
   },
 
   onLoad: function(options) {
@@ -1198,8 +1188,6 @@ Page({
             })
           };
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
       }
     });
   },
@@ -1605,8 +1593,6 @@ Page({
           _this.amountcalculation();
 
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
       }
     });
 
@@ -1791,8 +1777,6 @@ Page({
               if (res.data.ReturnCode == 908) {
                 app.showToastC('aid和uid不匹配');
               };
-              // 判断非200和登录
-              Dec.comiftrsign(_this, res, app);
             }
           })
 

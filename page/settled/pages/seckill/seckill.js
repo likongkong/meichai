@@ -149,7 +149,6 @@ Page({
     // group_id 数据 列表id
     href: '',
     isVideoSwiper:false,
-    shopnum:0,
     // 适配苹果X
     isIphoneX: app.signindata.isIphoneX,
     // 防止swiper卡住
@@ -175,8 +174,6 @@ Page({
     unavailablearr:[],
     referee:0,
     welvalue:false,
-    // 晒单数量
-    dryinglistnum: 0,
     isProduce: app.signindata.isProduce,
     product: '',
     // 是否显示购买
@@ -366,12 +363,13 @@ Page({
       ,{
         x: 260,
         y: 900,
-        url:zunmdata.qrcode,
+        url:'https://cdn.51chaidan.com/images/qrcode/goods/settle/'+ zunmdata.gid +'.png',
         width: 180,
         height:180,
         zIndex: 2,
         borderRadius:180,
-      }];
+      }
+      ];
       if(_this.data.movies.length != 0){
         imgData.push({  // banner
           x: 60,
@@ -2075,8 +2073,6 @@ Page({
         if (res.data.ReturnCode == 100) {
           app.showToastC('该商品已下架');
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
       }
     })
   },
@@ -2125,9 +2121,7 @@ Page({
            };
            if (res.data.ReturnCode == 918) {
             app.showToastC('未关注过该商品');
-           };                      
-           // 判断非200和登录
-           Dec.comiftrsign(_this, res, app);           
+           };          
          },
        });
      }else{
@@ -2151,9 +2145,7 @@ Page({
            };
            if (res.data.ReturnCode == 917) {
             app.showToastC('已经为这个商品点赞');
-           };              
-           // 判断非200和登录
-           Dec.comiftrsign(_this, res, app);           
+           };         
          },
        });
      }
@@ -2482,9 +2474,7 @@ Page({
             } else {
               _this.hdramountcalculation();
             };   
-        };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);        
+        };       
       }
     });  
   },
@@ -2645,8 +2635,6 @@ Page({
               if (res.data.ReturnCode == 908) {
                 app.showToastC('aid和uid不匹配');
               };              
-              // 判断非200和登录
-              Dec.comiftrsign(_this, res, app);              
             }
           })
         }
@@ -2832,11 +2820,16 @@ Page({
     if(!res.isGoodsCanShare && _this.data.canShare!=1){
       console.log('isGoodsCanShare','true 能 false不能分享')
       if(!_this.data.referee){
+            // 群内 不能购买
+          _this.setData({
+            GroupSharingCanvas:1
+          })
           _this.toogleGuidanceMask();
+          // 生成图片
+          _this.onCreatePoster();
           return false;
       };
     };
-
 
     var reg = /^((https|http|ftp|rtsp|mms|www)?:\/\/)[^\s]+/;
     var iftrnum = true;
@@ -2995,8 +2988,6 @@ Page({
                 tipback: false,
                 dsbframeiftr: false,
               });
-            // 购物车数据显示
-            Dec.shopnum(_this,app.signindata.comurl);
           } else if (res.data.ReturnCode == 802){
             app.showToastC('规格选择有误');
           } else if (res.data.ReturnCode == 805){
@@ -3508,7 +3499,8 @@ Page({
             if(!_this.data.referee){
                // 群内 不能购买
                _this.setData({
-                  ctBuyInTheGroup:true
+                  ctBuyInTheGroup:true,
+                  GroupSharingCanvas:1
                })
                _this.toogleGuidanceMask();
                // 生成图片
@@ -3805,8 +3797,6 @@ Page({
           app.showToastC('商品暂时找不到了');
           app.comjumpwxnav(998,'','');
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
       }
     })    
   },
@@ -3839,7 +3829,14 @@ Page({
     this.data.weixinadinfo = options.weixinadinfo||'';
     app.signindata.global_store_id = options.store_id||0;
     app.signindata.referee=options.referee || 0;
-    if (options.awa){
+
+    if (options.scene){
+      let scene = decodeURIComponent(options.scene);
+      console.log('scene=====',scene)
+      options.referee = app.getSearchString('referee', scene);
+      options.gid = app.getSearchString('gid', scene) || 0;
+      options.canShare = app.getSearchString('canShare', scene) || 0;
+    }else if (options.awa){
       var othershop = [];
       if (options.othershop){
         othershop = JSON.parse(options.othershop);
@@ -3960,9 +3957,7 @@ Page({
               addressdata: [],
             })
           };
-        };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);         
+        };         
       }
     });
   },
@@ -3991,9 +3986,7 @@ Page({
         };
         if (res.data.ReturnCode == 917) {
           app.showToastC('已经为这个商品点赞'); 
-        };
-        // 判断非200和登录 
-        Dec.comiftrsign(_this, res, app);    
+        };  
       }
     })
   },
@@ -4019,9 +4012,7 @@ Page({
         };
         if (res.data.ReturnCode == 918) {
           app.showToastC('未关注过该商品');
-        };        
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);            
+        };            
       }
     })
   },    
@@ -4399,16 +4390,16 @@ Page({
     this.data.animation=this.animation.export();
   },
   tgfrShareIftrFun: function () {
-    this.setData({tgfrShareIftr: false})
+    this.setData({tgfrShareIftr: false,shareCreatPic:false})
   },
   displaysharefriend:function(){
     this.sharefrind();
     this.setData({tgfrShareIftr:true});
   },
   // 保存图片
-  sharesavethepicture: function () {
+  sharesavethepictureWm: function () {
     var _this = this;
-    var imgSrc = _this.data.actimgshare || '';
+    var imgSrc = _this.data.savepic || '';
     wx.getSetting({
       success(res) {
         if (!res.authSetting['scope.writePhotosAlbum']) {
@@ -4419,11 +4410,11 @@ Page({
                 filePath: imgSrc,
                 success() {
                   app.showToastC('保存成功')
-                  _this.setData({ upserimgbox: false, savepicturesiftr: true, tgfrShareIftr: false });
+                  _this.setData({ upserimgbox: false, savepicturesiftr: true, tgfrShareIftr: false ,shareCreatPic:false});
                 },
                 fail() {
                   app.showToastC('保存失败')
-                  _this.setData({ upserimgbox: false, savepicturesiftr: true, tgfrShareIftr: false });
+                  _this.setData({ upserimgbox: false, savepicturesiftr: true, tgfrShareIftr: false,shareCreatPic:false });
                 }
               })
             },
@@ -4435,11 +4426,11 @@ Page({
             filePath: imgSrc,
             success() {
               app.showToastC('保存成功');
-              _this.setData({ upserimgbox: false, savepicturesiftr: true, tgfrShareIftr: false });
+              _this.setData({ upserimgbox: false, savepicturesiftr: true, tgfrShareIftr: false,shareCreatPic:false });
             },
             fail() {
               app.showToastC('保存失败');
-              _this.setData({ upserimgbox: false, savepicturesiftr: true, tgfrShareIftr: false });
+              _this.setData({ upserimgbox: false, savepicturesiftr: true, tgfrShareIftr: false,shareCreatPic:false });
             }
           })
         }
@@ -4948,7 +4939,6 @@ Page({
   // 保存图片
   sharesavethepicture: function () {
     var _this = this;
-    var imgSrc = '';
     wx.getImageInfo({
       src: _this.data.showimg || '',
       fail: function (res) {

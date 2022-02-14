@@ -259,8 +259,6 @@ Page({
               app.showToastC('没有更多数据了');
             };             
           };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
         _this.setData({
           nodataiftr: true
         });
@@ -333,8 +331,6 @@ Page({
         };
         // 商品列表
         _this.listdata(1);
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
         wx.hideLoading()
         // 刷新完自带加载样式回去
         wx.stopPullDownRefresh();

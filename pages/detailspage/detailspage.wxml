@@ -1214,7 +1214,7 @@
 </block>
 
 
-<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX='{{isIphoneX}}'></bnavigation>
 
 <!--  原产品拆单购买弹框  -->
 <view class='dsbframe' wx:if='{{dsbframeiftr}}'>

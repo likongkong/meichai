@@ -15,24 +15,6 @@
   <canvas canvas-id='sharefriend' style='width:310px; height:410px;'></canvas>
 </view>
 
-<!-- 保存图片  -->
-<view class='tgimgbox' wx:if='{{tgfrShareIftr}}'>
-  <view class='tgimgboxgb' catchtap='tgfrShareIftrFun'></view>
-  <view class='tgimgbcon' style='width:310px;height:410px;top:-230rpx;'>
-    <image class='tgimcimg' src='{{actimgshare}}' style='width:310px;height:410px;'></image>
-  </view>
-  <view class='tgfrindShare'>
-    <view class='tgfrShareLeft' wx:if='{{isShareFun}}'>
-      <view class='tgftShLText' style='background:#3f9314;color:#e8f7f0;'>
-        <button open-type="share" style='position: absolute;left: 0;top: 0;width: 100%; height: 100%;opacity: 0;padding:0;'  type="default" size="mini"></button>
-        分享好友
-      </view>
-    </view>
-    <view class='tgfrShareright'>
-      <view class='tgftShLText' style='background:#f18f00;color:#fceeef;' catchtap='sharesavethepicture'>保存海报</view>
-    </view>
-  </view>
-</view>
 <view wx:if='{{shareFriendMask}}' class='shareFriendMask'></view>
  
 
@@ -231,8 +213,8 @@
         <view class="sbottomLeft">
             <image class='emlplefimgshare' catchtap="noShareShop" src="https://cdn.51chaidan.com/images/brandInfoIcon/settledGoodsShareIcon.png"></image>
             <view class="sbottomLeftNum">{{zunmdata.settledGoodsShareNumber}}</view>
-            <button open-type="share" wx:if='{{isShareFun}}' style='position: absolute;left: 0;top: 0;width: 100%; height: 100%;opacity: 0;padding:0;z-index:1;' type="default" size="mini"></button>
-            <!-- <view wx:if='{{isShareFun}}' catchtap="shareCreatPicFun" style='position: absolute;left: 0;top: 0;width: 100%; height: 100%;opacity: 0;padding:0;z-index:1;'></view> -->
+            <!-- <button open-type="share" wx:if='{{isShareFun}}' style='position: absolute;left: 0;top: 0;width: 100%; height: 100%;opacity: 0;padding:0;z-index:1;' type="default" size="mini"></button> -->
+            <view wx:if='{{isShareFun}}' catchtap="shareCreatPicFun" style='position: absolute;left: 0;top: 0;width: 100%; height: 100%;opacity: 0;padding:0;z-index:1;'></view>
         </view>
         <view class="sbottomRight">
             <view class="sbottomRightButton" wx:if='{{zunmdata.isSuplusChance}}' style="background:#FF890B;">还有机会，有订单未支付</view>
@@ -308,7 +290,7 @@
     </view>
 </view>
 </block>
-<!-- <bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation> -->
+
 <!--  原产品拆单购买弹框  -->
 <view class='dsbframe' wx:if='{{dsbframeiftr}}'>
   <view class='dsbfhead'>
@@ -902,7 +884,7 @@
 <view class='tgimgbox' wx:if='{{shareCreatPic}}'>
   <view class='tgimgboxgb' catchtap='tgfrShareIftrFun'></view>
   <view class='tgimgbcon' style='width:310px;height:410px;top:-230rpx;'>
-    <image class='tgimcimg' src='{{actimgshare}}' style='width:310px;height:410px;'></image>
+    <image class='tgimcimg' src='{{savepic}}' style='width:310px;height:410px;' mode="aspectFit"></image>
   </view>
   <view class='tgfrindShare'>
     <view class='tgfrShareLeft' wx:if='{{isShareFun}}'>
@@ -912,7 +894,7 @@
       </view>
     </view>
     <view class='tgfrShareright'>
-      <view class='tgftShLText' style='background:#f18f00;color:#fceeef;' catchtap='sharesavethepicture'>保存海报</view>
+      <view class='tgftShLText' style='background:#f18f00;color:#fceeef;' catchtap='sharesavethepictureWm'>保存海报</view>
     </view>
   </view>
 </view>

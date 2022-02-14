@@ -16,8 +16,6 @@ Page({
     headhidden: true,
     bothidden: true,
     nid: '',
-    // 购物车显示数据
-    shopnum: 0,
     // 授权弹框
     tgabox: false,
     typea:'',
@@ -155,8 +153,6 @@ Page({
         _this.setData({
           nodataiftr:true
         })
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
       }
     })
   },
@@ -213,8 +209,6 @@ Page({
             });
           }
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
       }
     })    
   },
@@ -257,8 +251,6 @@ Page({
             app.showToastC('没有更多数据了');
           };
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
       }
     })    
   },

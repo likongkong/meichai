@@ -526,7 +526,7 @@
   <view class='dldConpoisthreeeve' style='width:310rpx;top:0;left:0;bottom:0;right:0;margin:auto;' catchtap='jumpdldlvreate'>我要发帖</view>
 </view> -->
 
-<bnavigation isProduce='{{isProduce}}' dlfind='{{true}}' isIphoneX='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+<bnavigation isProduce='{{isProduce}}' dlfind='{{true}}' isIphoneX='{{isIphoneX}}'></bnavigation>
 
 
 <!-- 输入框 -->

@@ -20,9 +20,6 @@ Page({
     // 适配苹果X
     isIphoneX: app.signindata.isIphoneX,
     defaultinformation: '',
-    // 晒单数量
-    dryinglistnum: 0,
-    shopnum: 0,
     c_title: '',
     c_arrow: true,
     c_backcolor: '#ff2742',
@@ -50,9 +47,6 @@ Page({
     bsdata: [],
     oid: 0,
     currenChance: 0,
-    // 晒单数量
-    dryinglistnum: 0,
-    shopnum: 0,
   },
   /**
    * 生命周期函数--监听页面加载
@@ -185,10 +179,6 @@ Page({
     _this.getRecord(_this.data.pid);
     this.mswiperRequest(1);
     this.bswiperRequest(1);
-    // 调取晒单数量
-    Dec.dryingSum(_this, app.signindata.clwcomurl);
-    // 购物车数据显示
-    Dec.shopnum(_this,app.signindata.comurl);
     _this.nextpagediao();
   },
   getInfo: function() {
@@ -282,8 +272,6 @@ Page({
             })
           };
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
       }
     });
   },
@@ -423,8 +411,6 @@ Page({
               if (res.data.ReturnCode == 908) {
                 app.showToastC('aid和uid不匹配');
               };
-              // 判断非200和登录
-              Dec.comiftrsign(_this, res, app);
             }
           })
 

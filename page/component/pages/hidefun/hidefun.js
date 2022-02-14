@@ -50,8 +50,6 @@ Page({
     // 公共默认信息
     defaultinformation: '',
 
-    shopnum: 0,
-
     topheight: 0,
     bottomheight: 0,
     disheight: 0,

@@ -135,8 +135,6 @@ Page({
            });
            app.showToastC('提交成功');
          };
-         // 判断非200和登录
-         Dec.comiftrsign(_this, res, app); 
        },
      })     
   },
@@ -164,8 +162,6 @@ Page({
           });          
           app.showToastC('提交成功');
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app); 
       },
     })
 
@@ -219,9 +215,7 @@ Page({
              city: res.data.Info.city||'',
              county: res.data.Info.district||'',             
            })
-        };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);         
+        };        
       },
       fail: function () {
         // fail
@@ -381,8 +375,6 @@ Page({
         if (res.data.ReturnCode == 200) {
           app.showToastC('提交成功');
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
       },
     })         
   }, 

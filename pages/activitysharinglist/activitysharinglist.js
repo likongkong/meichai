@@ -40,9 +40,6 @@ Page({
     // 赠送优惠券弹框是否显示
     newcoupon: false, 
     isProduce: app.signindata.isProduce,
-    // 晒单数量
-    dryinglistnum: 0,
-    shopnum: 0,
     // 适配苹果X 
     isIphoneX: app.signindata.isIphoneX,
     // 微信号码
@@ -196,10 +193,6 @@ Page({
           });
         };
         _this.textfun();
-        // 购物车数量
-        Dec.shopnum(_this,app.signindata.comurl);
-        // 调取晒单数量
-        Dec.dryingSum(_this, app.signindata.clwcomurl);
       },
       fail: function () { _this.textfun(); }
     });

@@ -875,7 +875,7 @@
 </view>
 
 
-<bnavigation bind:run='obtaintabfun' whomepage='{{true}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+<bnavigation bind:run='obtaintabfun' whomepage='{{true}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}'></bnavigation>
 
 
 <!--  优惠券 新人红包  -->

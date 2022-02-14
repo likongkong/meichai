@@ -16,7 +16,6 @@
 				<view style='width:100%;height:100%;'>
 					<view class='navigationltop'>
 						<image class='navigationltopimg' src='https://cdn.51chaidan.com/images/sign/camera.png?'></image>
-						<view class='tabshopimg specialellipsis' wx:if='{{dryinglistnum>0}}' style='left:88rpx;'>{{dryinglistnum}}</view>
 					</view>
 					<view class='navigationlcon' style='{{dlfind?"color:#fd2844":""}}'>打卡</view>
 				</view>		
@@ -27,7 +26,6 @@
 					<view class='navigationltop'>
 						<image wx:if='{{dlfind}}' class='navigationltopimg' src='https://clw.51chaidan.com//images/goods/findred.png'></image>
 						<image wx:else class='navigationltopimg' src='https://clw.51chaidan.com//images/goods/find1.png'></image>
-						<view class='tabshopimg specialellipsis' wx:if='{{dryinglistnum>0}}' style='left:88rpx;'>{{dryinglistnum}}</view>
 					</view>
 					<view class='navigationlcon' style='{{dlfind?"color:#fd2844":""}}'>品牌</view>
 				</view>		
@@ -78,7 +76,6 @@
 			<view class='navigationltop'>
 				<image wx:if='{{wCart}}' class='navigationltopimg' src='../images/shoppingCarImage@2x.png'></image>
 				<image wx:else class='navigationltopimg' src='../images/shoppingCarNotImage@2x.png'></image>
-				<view class='tabshopimg specialellipsis' wx:if='{{shopnum>0}}' style='left:88rpx;'>{{shopnum}}</view>
 			</view>
 			<view class='navigationlcon' style='{{wCart?"color:#fd2844":""}}'>购物车</view>
 		</view>

@@ -180,12 +180,7 @@ App({
     
         wx.login({
           success: function (res) {
-            console.log('wx.login=====',res)
             var code = res.code;
-            console.log(code)
-            // wx.getUserInfo({
-            //   success: function (res) {
-                // console.log('wx.getUserInfo========',res)
 
                 var resiv ='';
                 var encryptedData = '';
@@ -348,16 +343,6 @@ App({
                     // };
                   }
                 })
-            //   },
-            //   fail: function(res){
-            //     console.log('wx.getUserInfo失败',res)
-            //     _this.signindata.is_sigin = true;
-            //   },
-            //   complete(res){
-            //     console.log('complete====',res)
-
-            //   }
-            // })
           },
           fail: function(){
             _this.signindata.is_sigin = true;
@@ -395,7 +380,6 @@ App({
     
   //       wx.login({
   //         success: function (res) {
-  //           console.log('wx.login=====',res)
   //           var code = res.code;
   //           console.log(code)
 
@@ -693,7 +677,6 @@ App({
     // 适配苹果X
     wx.getSystemInfo({
       success: res => {
-        console.log('手机型号',res)
         let modelmes = res.model;
         if (modelmes.search('iPhone X') != -1 || modelmes.search('iPhone XR') != -1 || modelmes.search('iPhone 11') != -1 || modelmes.search('iPhone XS') != -1 || modelmes.search('iPhone XS Max') != -1 || modelmes.search('iPhone 12') != -1 || modelmes.search('iPhone 13') != -1) {
           _this.signindata.isIphoneX = true;
@@ -1875,7 +1858,18 @@ App({
     }else{
       successCallback('res',_this.signindata.userInfo);
     };
-  }
+  },
+  getSearchString: function (key, Url) {
+    // 获取URL中?之后的字符
+    var str = Url;
+    var arr = str.split("&");
+    var obj = new Object();
+    for (var i = 0; i < arr.length; i++) {
+      var tmp_arr = arr[i].split("=");
+      obj[decodeURIComponent(tmp_arr[0])] = decodeURIComponent(tmp_arr[1]);
+    }
+    return obj[key];
+  },
 
 })
 

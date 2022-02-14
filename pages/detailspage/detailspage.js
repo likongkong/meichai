@@ -136,7 +136,6 @@ Page({
     // group_id 数据 列表id
     href: '',
     isVideoSwiper:false,
-    shopnum:0,
     // 适配苹果X
     isIphoneX: app.signindata.isIphoneX,
     // 防止swiper卡住
@@ -162,8 +161,6 @@ Page({
     unavailablearr:[],
     referee:0,
     welvalue:false,
-    // 晒单数量
-    dryinglistnum: 0,
     isProduce: app.signindata.isProduce,
     product: '',
     // 是否显示购买
@@ -1877,8 +1874,6 @@ Page({
         if (res.data.ReturnCode == 100) {
           app.showToastC('该商品已下架');
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
       }
     })
   },
@@ -2226,9 +2221,7 @@ Page({
             } else {
               _this.hdramountcalculation();
             };   
-        };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);        
+        };     
       }
     });  
   },
@@ -2388,9 +2381,7 @@ Page({
               };
               if (res.data.ReturnCode == 908) {
                 app.showToastC('aid和uid不匹配');
-              };              
-              // 判断非200和登录
-              Dec.comiftrsign(_this, res, app);              
+              };                           
             }
           })
         }
@@ -2716,8 +2707,6 @@ Page({
                 tipback: false,
                 dsbframeiftr: false,
               });
-            // 购物车数据显示
-            Dec.shopnum(_this,app.signindata.comurl);
           } else if (res.data.ReturnCode == 802){
             app.showToastC('规格选择有误');
           } else if (res.data.ReturnCode == 805){
@@ -3660,9 +3649,7 @@ Page({
               addressdata: [],
             })
           };
-        };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);         
+        };       
       }
     });
   },
@@ -3691,9 +3678,7 @@ Page({
         };
         if (res.data.ReturnCode == 917) {
           app.showToastC('已经为这个商品点赞'); 
-        };
-        // 判断非200和登录 
-        Dec.comiftrsign(_this, res, app);    
+        };    
       }
     })
   },
@@ -3719,9 +3704,7 @@ Page({
         };
         if (res.data.ReturnCode == 918) {
           app.showToastC('未关注过该商品');
-        };        
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);            
+        };            
       }
     })
   },    

@@ -89,12 +89,6 @@ Page({
     generatePicturesimg:{},
     blackCity: app.signindata.blackCity,
     spreadEntry: app.signindata.spreadEntry,
-    // 晒单数量
-    dryinglistnum: 0,
-    shopnum: 0,
-    // 晒单数量
-    dryinglistnum: 0,
-    shopnum: 0,
     defaultinformation:'',
     prizeCover:[],
     order_type_show:1,
@@ -488,12 +482,7 @@ Page({
               });            
           }  
         };
-        //  else if (res.data.ReturnCode == 500){
-        //   _this.datatransfer();
-        // };
         _this.setData({ ifnodata: true})
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
       }
     });
   },
@@ -808,8 +797,6 @@ Page({
               wx.hideLoading()
             }
           };
-          // 判断非200和登录
-          Dec.comiftrsign(_this, res, app); 
   
         }
       })     
@@ -882,9 +869,7 @@ Page({
           }else{
             app.showToastC('没有更多数据了'); 
           };
-        };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);                 
+        };               
       }
     })
   },
@@ -988,8 +973,6 @@ Page({
         if (res.data.ReturnCode == 810) {
           app.showToastC('仅可以取消未付款订单');
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);  
 
       }
     })
@@ -1296,9 +1279,7 @@ Page({
         };
         if (res.data.ReturnCode == 824) {
           app.showToastC('订单状态有误');
-        };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);          
+        };        
       }
        
     });
@@ -3345,8 +3326,6 @@ Page({
             success: function (res) {}
           })
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
 
       }
     }); 

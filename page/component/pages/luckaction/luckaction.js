@@ -37,9 +37,6 @@ Page({
 
     qrcode: '',
 
-    shopnum: 0,
-
-    dryinglistnum: 0,
 
     defaultinformation: app.signindata.defaultinformation,
 

@@ -18,8 +18,6 @@ Page({
     // 数据 
     listdata: [],
     headhidden: false,
-    shopnum: 0,
-    dryinglistnum: 0,
 
     c_title: '开车送隐藏',
     c_arrow: true,
@@ -277,10 +275,6 @@ Page({
       isProduce: app.signindata.isProduce,
     });
     _this.listdata(0);
-    // 购物车数量
-    Dec.shopnum(_this,app.signindata.comurl);
-    // 调取晒单数量
-    Dec.dryingSum(_this, app.signindata.clwcomurl);
 
   },
   // 阻止蒙层冒泡

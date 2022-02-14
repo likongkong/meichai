@@ -14,14 +14,6 @@ Component({
       type: Boolean,
       value: false,
     },
-    shopnum:{
-      type: Number,
-      value: 0,
-    },
-    dryinglistnum:{
-      type: Number,
-      value: 0,
-    },
     whomepage: {
       type: Boolean,
       value: false,

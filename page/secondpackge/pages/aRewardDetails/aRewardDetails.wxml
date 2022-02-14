@@ -348,7 +348,7 @@
 </view>
 
 
-<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+<bnavigation isChar='{{false}}' isProduce='{{isProduce}}'></bnavigation>
 
 
 <view class="wshNew" catchtouchmove="true" wx:if='{{proTipTrue}}' catchtap="closeCommonTip">

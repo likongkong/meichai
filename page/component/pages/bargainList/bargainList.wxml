@@ -205,7 +205,7 @@
 	<!-- <view>新人帮砍（新人砍价2-10呗暴击）</view> -->
 
 	<view style='{{isIphoneX?"height:130rpx;":"height:110rpx;"}}width:100%;position:relative;'>
-		<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+		<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX='{{isIphoneX}}'></bnavigation>
 
 	</view>
 

@@ -14,7 +14,6 @@ Page({
     openid: app.signindata.openid,
     // 适配苹果X 
     isIphoneX: app.signindata.isIphoneX,     
-    shopnum: 0,
  
     listdata:[],
     page:1,

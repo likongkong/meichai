@@ -24,8 +24,6 @@ Page({
     isIphoneX: app.signindata.isIphoneX,
     defaultinformation: '',
     wxnum: '',
-    shopnum: 0,
-    dryinglistnum: 0,
  
     // 授权弹框
     tgabox: false,
@@ -53,8 +51,6 @@ Page({
     ownoth: 1,
     // 数据 
     listdataown: [],
-    shopnum: 0,
-    dryinglistnum: 0,
 
     headtabid: 0,
     c_title: '潮玩种草',
@@ -998,8 +994,6 @@ Page({
             })
           };
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
       }
     });
   },
@@ -1035,8 +1029,6 @@ Page({
               if (res.data.ReturnCode == 908) {
                 app.showToastC('aid和uid不匹配');
               };
-              // 判断非200和登录
-              Dec.comiftrsign(_this, res, app);
             }
           })
         }

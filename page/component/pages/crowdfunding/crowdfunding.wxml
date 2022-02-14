@@ -266,8 +266,7 @@
     <view class='crowrighgbottred' catchtap='pulltgat'>立即拔草</view>
 </view>
 
-<bnavigation isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' 
-dryinglistnum='{{dryinglistnum}}'></bnavigation>
+<bnavigation isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}'></bnavigation>
 
 
 <!--  授权弹框  -->

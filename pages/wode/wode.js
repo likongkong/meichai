@@ -39,8 +39,6 @@ Page({
     putforwardmoney:0,
     // 最佳合伙人
     partner:[],
-    // 购物车显示数据
-    shopnum: 0,
     // 微信号码
     wxnum:'',
     // 我的钱包数据
@@ -63,8 +61,6 @@ Page({
     //公告类型
     notice_type: "",
     defaultinformation: "",
-    // 晒单数量
-    dryinglistnum: 0,
     isProduce: app.signindata.isProduce,
     c_title: '',
     c_arrow: true,
@@ -484,12 +480,7 @@ Page({
         istitnex: false,
         istit: true,
       })
-    };
-
-    // 购物车数据显示
-    Dec.shopnum(_this,app.signindata.comurl);  
-    // 调取晒单数量
-    Dec.dryingSum(_this, app.signindata.clwcomurl);   
+    };  
 
     if (app.signindata.isAwardOrder) {
       _this.setData({ isAwardOrder: app.signindata.isAwardOrder, awardOrder: app.signindata.awardOrder || false });

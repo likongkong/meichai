@@ -188,7 +188,7 @@
 
 <view style='width:100%;height:130rpx;' wx:if='{{spreadEntry}}'></view>
 
-<bnavigation isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+<bnavigation isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}'></bnavigation>
 
 
 

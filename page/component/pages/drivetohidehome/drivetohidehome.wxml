@@ -212,7 +212,7 @@
 
 
 
-<bnavigation isProduce='{{isProduce}}' isChar='{{false}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+<bnavigation isProduce='{{isProduce}}' isChar='{{false}}'></bnavigation>
 
 
 

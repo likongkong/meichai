@@ -363,8 +363,7 @@
     </view>
 </view>
 
-<bnavigation bind:runex='togation' wmy='{{true}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' 
-dryinglistnum='{{dryinglistnum}}'></bnavigation>
+<bnavigation bind:runex='togation' wmy='{{true}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}'></bnavigation>
 
 <!-- 微信号复制  -->
 <view class='editorrecom' style='z-index:9999999;' wx:if='{{copyiftr}}'>
