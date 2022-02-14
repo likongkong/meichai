@@ -1106,21 +1106,6 @@
 </view>
 
 <!--  图片授权  -->
-<!-- <view class='editorrecom' wx:if='{{picbox}}' style='z-index:9999999;'>
-  <view class='ngbackground'></view>
-  <view class='picbox'>
-    <view class='picboxhead'>授权之后才能保存图片</view>
-    <view class='picboxcon'>
-      <view class='picboxconleft' style='color:#333;' catchtap='imgCanelTg'>取消</view>
-      <view class='picboxconleft' style='color:#11fb3d;position:relative;'>
-        <button open-type="openSetting" bindopensetting="handleSetting" class='picbut'></button>
-        确定
-      </view>
-    </view>
-  </view>
-</view> -->
-
-<!--  图片授权  -->
 <view wx:if='{{exhpicsave}}' style='z-index:9999999;width:100%;height:100%;position:fixed;top:0;left:0;'>
   <view style='width:100%;height:100%;background:#000;opacity:.5;'></view>
   <view style='width:500rpx;height:240rpx;background:#fff;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;border-radius:16rpx;'>
@@ -1134,7 +1119,6 @@
     </view>
   </view>
 </view>
-
 <!--  赞助商 微信号复制  -->
 <view class='editorrecom' style='z-index:9999999;' wx:if='{{copyiftr}}'>
   <view class='ngbackground' catchtap='copyfitrfun'></view>
