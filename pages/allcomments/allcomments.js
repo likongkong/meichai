@@ -85,9 +85,7 @@ Page({
         };
         if (res.data.ReturnCode == 918) {
           app.showToastC('未关注过该商品');
-        };        
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);      
+        };     
       }
     })
   },  
@@ -135,9 +133,7 @@ Page({
           _this.setData({
             allcomlist: [],
           })
-        };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);        
+        };       
       }
     }) 
   },
@@ -250,11 +246,7 @@ Page({
           }
           // 刷新完自带加载样式回去
           wx.stopPullDownRefresh()
-        }else{
-
-        };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);      
+        };     
       }
     })    
   },

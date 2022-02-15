@@ -26,10 +26,6 @@ Page({
     // 授权弹框
     tgabox: false,
 
-    // 晒单数量
-    dryinglistnum: 0,
-    shopnum: 0,
-
     c_title: '抽盒机列表',
     c_arrow: true,
     c_backcolor: '#ff2742',
@@ -864,8 +860,6 @@ Page({
             })
           };
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
       }
     });
   },

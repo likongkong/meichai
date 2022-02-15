@@ -85,8 +85,6 @@ Page({
                   })
                 }
               };
-              // 判断非200和登录
-              Dec.comiftrsign(_this, res, app);
             },
             fail: function () {
               // fail
@@ -136,8 +134,6 @@ Page({
               }else{
                 _this.getlist();
               };
-              // 判断非200和登录
-              Dec.comiftrsign(_this, res, app);
             },
             fail: function () {}
           })
@@ -168,8 +164,6 @@ Page({
             })
           }
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
       },
       fail: function () {
         // fail

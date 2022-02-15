@@ -19,8 +19,6 @@ Page({
     // 数据 
     listdata:[],
     headhidden:false,
-    shopnum:0,
-    dryinglistnum:0,
 
     c_title: '官方寄售',
     c_arrow: true,

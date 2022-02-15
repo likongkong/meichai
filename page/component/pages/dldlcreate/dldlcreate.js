@@ -17,7 +17,6 @@ Page({
     isIphoneX: app.signindata.isIphoneX,
     // 公共默认信息
     defaultinformation: app.signindata.defaultinformation,
-    shopnum: 0, 
     inputdata:'',
     textconcent:'',
     // 话题选择
@@ -37,8 +36,6 @@ Page({
     relation_order:[],
     mylist:[],
     locationtitle:0,
-    // 晒单数量
-    dryinglistnum: 0,
     widthheight:{width:'',height:''},
     isProduce: app.signindata.isProduce,
     hiddenreturn:false,
@@ -388,12 +385,8 @@ Page({
       uid: app.signindata.uid,
       isProduce: app.signindata.isProduce,
     });
-    // 购物车数量显示
-    Dec.shopnum(_this,app.signindata.comurl);
     // 订单
     _this.orderlist(0);
-    // 调取晒单数量
-    Dec.dryingSum(_this, app.signindata.clwcomurl);
   },
   onLoad: function (options) {
     var mylist = [];

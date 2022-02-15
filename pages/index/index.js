@@ -30,8 +30,6 @@ Page({
     classificationlist:[],
     // 页数
     page:0,
-    // 购物车显示数据
-    shopnum:0,
     // 赠送优惠券数据
     newcoupondata: [],
     // 节日主题
@@ -68,8 +66,6 @@ Page({
     secStr: "",
     defaultinformation: app.signindata.defaultinformation||'',
     jumpdevanningiftr:false,
-    // 晒单数量
-    dryinglistnum:0,
     isProduce: app.signindata.isProduce,
     npswtab:1, // 1 新品 2 热销
     indexelafra:false,
@@ -507,8 +503,6 @@ Page({
             };
           };
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
       },
       complete:function(){
         // 刷新完自带加载样式回去
@@ -598,8 +592,6 @@ Page({
             _this.data.notice_type = res.data.Info.notice.type || "";
             app.signindata.defaultinformation = res.data.Info || '';
           };
-          // 判断非200和登录
-          Dec.comiftrsign(_this, res, app);
         }
       })
     } else {
@@ -962,7 +954,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow:function(){
-    Dec.shopnum(this);
 
     this.setData({
       nowAdmissionTime:Date.parse(new Date()) / 1000
@@ -1206,7 +1197,6 @@ Page({
       success: function (res) {
         if (res.data.ReturnCode == 200) {
           app.showToastC('已成功加入购物车');
-          Dec.shopnum(_this,app.signindata.comurl);
         } else if (res.data.ReturnCode == 802) {
           app.comjumpwxnav(1,gid,'');
         } else if (res.data.ReturnCode == 805) {

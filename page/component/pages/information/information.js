@@ -18,9 +18,7 @@ Page({
     infodata: [],
     headhidden: true,
     bothidden: true, 
-    nid:'',    
-    // 购物车显示数据
-    shopnum: 0,
+    nid:'',   
     // 授权弹框
     tgabox: false,
     // 第一次加载不显示暂无数据
@@ -114,13 +112,9 @@ Page({
           // 多次提交判断
           clicktherequestiftr: true,          
         });
-        wx.stopPullDownRefresh()        
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);    
+        wx.stopPullDownRefresh()           
       }
     });
-    // 购物车数据显示
-    Dec.shopnum(_this,app.signindata.comurl); 
   },
   onLoad: function (options) {},
   /**

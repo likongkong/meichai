@@ -170,8 +170,7 @@
 <view style='width:100%;{{isIphoneX?"height:140rpx;":"height:120rpx;"}}'></view>
 
 
-<bnavigation isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' 
-dryinglistnum='{{dryinglistnum}}'></bnavigation>
+<bnavigation isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}'></bnavigation>
 
 <!-- 输入框 -->
 <view class='inputbox' wx:if='{{inputbox}}'>

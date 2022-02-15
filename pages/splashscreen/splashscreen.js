@@ -137,7 +137,6 @@ Page({
       header: { 'Accept': 'application/json' },
       success: function (res) {
         console.log('开机屏===',res)
-
         if(res.data.Info){
           var isInToToyShow = res.data.Info.isInToToyShow || false;
           _this.setData({

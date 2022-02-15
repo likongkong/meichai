@@ -1,8 +1,7 @@
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
-<bnavigation bind:run='auditversion' isIphoneX ='{{isIphoneX}}' fashionShow='{{true}}' isProduce='{{isProduce}}' shopnum='{{shopnum}}' 
-dryinglistnum='{{dryinglistnum}}'></bnavigation>
+<bnavigation bind:run='auditversion' isIphoneX ='{{isIphoneX}}' fashionShow='{{true}}' isProduce='{{isProduce}}'></bnavigation>
 
 <!-- 展会福利首页悬停icon -->
 <!-- <image wx:if='{{exhitime}}' catchtap="jumpdouble" mode='aspectFit' data-type="9" class="exhListwIcon" src="https://cdn.51chaidan.com/images/icon/toyshowWelfare.png"></image> -->

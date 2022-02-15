@@ -16,8 +16,6 @@ Page({
     isIphoneX: app.signindata.isIphoneX,
     isProduce: app.signindata.isProduce,
     headhidden: false,
-    shopnum: 0,
-    dryinglistnum: 0,
     listdata:[],
     c_title: '闲置潮玩',
     c_arrow: true,
@@ -863,8 +861,6 @@ Page({
             })
           };
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
       }
     });
   },
@@ -902,8 +898,6 @@ Page({
               if (res.data.ReturnCode == 908) {
                 app.showToastC('aid和uid不匹配');
               };
-              // 判断非200和登录
-              Dec.comiftrsign(_this, res, app);
             }
           })
 

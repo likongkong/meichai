@@ -74,7 +74,7 @@
 
 <view style='{{isIphoneX?"height:230rpx;":"height:210rpx;"}}width:100%;'></view>
 
-<bnavigation  isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+<bnavigation  isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}'></bnavigation>
 
 
 

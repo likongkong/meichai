@@ -26,9 +26,6 @@ Page({
     statusBarHeightMc: wx.getStorageSync('statusBarHeightMc')|| 90,
     listdata: [],
     pid: 0,
-    // 晒单数量
-    dryinglistnum: 0,
-    shopnum: 0,
     nodataiftr: false,
     canvasshare:false,
     id: 0,
@@ -226,11 +223,7 @@ Page({
       // 适配苹果X 
       isIphoneX: app.signindata.isIphoneX
     });
-    _this.listdata(1),
-      // 调取晒单数量
-      Dec.dryingSum(_this, app.signindata.clwcomurl);
-    // 购物车数据显示
-    Dec.shopnum(_this,app.signindata.comurl);
+    _this.listdata(1);
 
     if (app.signindata.isAwardOrder) {
       _this.setData({

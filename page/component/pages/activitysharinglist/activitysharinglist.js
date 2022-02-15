@@ -40,9 +40,6 @@ Page({
     // 赠送优惠券弹框是否显示
     newcoupon: false, 
     isProduce: app.signindata.isProduce,
-    // 晒单数量
-    dryinglistnum: 0,
-    shopnum: 0,
     // 适配苹果X 
     isIphoneX: app.signindata.isIphoneX,
     // 微信号码
@@ -299,33 +296,9 @@ Page({
           });
         };
         _this.textfun();
-        // 购物车数量
-        Dec.shopnum(_this,app.signindata.comurl);
-        // 调取晒单数量
-        Dec.dryingSum(_this, app.signindata.clwcomurl);
       },
       fail: function () { _this.textfun(); }
     });
-    // wx.getUserInfo({
-    //   success: function (res) {
-    //     // 下载用户头像
-    //     wx.downloadFile({
-    //       url: res.userInfo.avatarUrl,
-    //       success(res) {
-    //         const fs = wx.getFileSystemManager();
-    //         fs.saveFile({
-    //           tempFilePath: res.tempFilePath,
-    //           success(res) {
-    //             wx.setStorageSync('image_cache', res.savedFilePath)
-    //           }
-    //         });
-    //       },
-    //       fail: function (err) {
-    //         wx.setStorageSync('image_cache', '')
-    //       }
-    //     });
-    //   }
-    // });
 
   },
   textfun:function(){

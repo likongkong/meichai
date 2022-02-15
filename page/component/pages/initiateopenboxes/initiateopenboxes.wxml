@@ -249,7 +249,7 @@
 
 <!-- <view id="navbtn" style='{{isIphoneX?"height:130rpx;":"height:110rpx;"}}width:100%;position:relative;'> -->
 <view id="navbtn">
-  <bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+  <bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}'></bnavigation>
 </view>
 
 

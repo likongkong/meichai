@@ -1669,8 +1669,6 @@ Page({
             })
           };
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
       }
     });
   },
@@ -1708,8 +1706,6 @@ Page({
               if (res.data.ReturnCode == 908) {
                 app.showToastC('aid和uid不匹配');
               };
-              // 判断非200和登录
-              Dec.comiftrsign(_this, res, app);
             }
           })
 

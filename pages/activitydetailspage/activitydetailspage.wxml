@@ -765,7 +765,7 @@
 
 </view>
 
-<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX='{{isIphoneX}}'></bnavigation>
 
 <!--  背景颜色  -->
 <view class='tipback' wx:if='{{tipback}}' catchtouchmove="preventD"></view>

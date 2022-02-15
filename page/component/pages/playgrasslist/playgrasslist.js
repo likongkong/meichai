@@ -24,10 +24,6 @@ Page({
     defaultinformation: '',
     wxnum: "",
 
-    // 晒单数量
-    dryinglistnum: 0,
-    shopnum: 0,
-
     c_title: '潮玩种草',
     c_arrow: true,
     c_backcolor: '#ff2742',

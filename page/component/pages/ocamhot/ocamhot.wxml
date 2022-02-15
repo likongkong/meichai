@@ -69,7 +69,7 @@
 
 
 
-<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}'></bnavigation>
 <!--  授权弹框  -->
 <tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
 <view wx:if='{{!signinlayer}}' style='position: fixed;top:{{statusBarHeightMc}}px;left: 0;height:{{windowHeight}}px;width: 100%;z-index: 300;' catchtap='pullupsignin'></view>

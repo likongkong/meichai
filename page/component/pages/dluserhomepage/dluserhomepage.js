@@ -16,7 +16,6 @@ Page({
     // 适配苹果X 
     isIphoneX: app.signindata.isIphoneX,  
     listdata:[],
-    shopnum: 0,  
     defaultinformation:'',
     userdata:{},
     // 1 晒单 2 关注 3 粉丝
@@ -26,8 +25,6 @@ Page({
     fansfollowlist:[],
     user_id:'',
     page:1,
-    // 晒单数量
-    dryinglistnum: 0,
     isProduce: app.signindata.isProduce,
     // 是否开启了分享功能
     isShareFun: true,

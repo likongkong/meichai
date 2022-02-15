@@ -19,9 +19,6 @@ Page({
     // 适配苹果X
     isIphoneX: app.signindata.isIphoneX,
     defaultinformation: '',
-    // 晒单数量
-    dryinglistnum: 0,
-    shopnum: 0,
     c_title: 'PicoPico X 美拆 五一福利免费抽盲盒！',
     c_arrow: true,
     c_backcolor: '#ff2742',
@@ -53,9 +50,6 @@ Page({
 
     currenChance: 0,
 
-    // 晒单数量
-    dryinglistnum: 0,
-    shopnum: 0,
     luckyvalue:0,
     luckyimg:'',
     luckyValueDesc:'',
@@ -205,10 +199,6 @@ Page({
     _this.getRecord(_this.data.pid);
     this.mswiperRequest(1);
     this.bswiperRequest(1);
-    // 调取晒单数量
-    Dec.dryingSum(_this, app.signindata.clwcomurl);
-    // 购物车数据显示
-    Dec.shopnum(_this,app.signindata.comurl);
     _this.nextpagediao();
 
   },
@@ -320,8 +310,6 @@ Page({
             })
           };
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
       }
     });
   },
@@ -469,8 +457,6 @@ Page({
               if (res.data.ReturnCode == 908) {
                 app.showToastC('aid和uid不匹配');
               };
-              // 判断非200和登录
-              Dec.comiftrsign(_this, res, app);
             }
           })
 

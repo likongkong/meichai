@@ -21,9 +21,6 @@ Page({
     isIphoneX: app.signindata.isIphoneX,
     defaultinformation: '',
 
-    // 晒单数量
-    dryinglistnum: 0,
-    shopnum: 0,
     spreadEntry: app.signindata.spreadEntry,
 
     list: [],

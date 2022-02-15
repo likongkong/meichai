@@ -69,8 +69,6 @@ Page({
     addmodtxt:'',
     conphone:'',
     tipaid:'',
-    shopnum:0,
-    dryinglistnum:0,
     refundtips:false,
     refundtipssure:false,
     
@@ -154,8 +152,6 @@ Page({
             _this.onLoadfun();
           },2000);
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
 
       }
     }); 
@@ -226,8 +222,6 @@ Page({
             success: function (res) {}
           })
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
 
       }
     }); 
@@ -291,8 +285,6 @@ Page({
               if (res.data.ReturnCode == 908) {
                 app.showToastC('aid和uid不匹配');
               };
-              // 判断非200和登录
-              Dec.comiftrsign(_this, res, app);
             }
           })
 
@@ -356,8 +348,6 @@ Page({
             })
           };
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
 
       }
     });
@@ -486,15 +476,6 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  otherfunsettime:function(){
-    var _this = this;
-    setTimeout(function(){
-      // 购物车数量
-      Dec.shopnum(_this,app.signindata.comurl);
-      // 调取晒单数量
-      Dec.dryingSum(_this, app.signindata.clwcomurl);
-    },1500);
-  },
   onLoadfun: function () { 
     var _this = this;
     _this.setData({
@@ -581,8 +562,6 @@ Page({
         if (res.data.ReturnCode == 800) {
           app.showToastC('非该用户订单');
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
         // 刷新完自带加载样式回去
         wx.stopPullDownRefresh();        
       },
@@ -595,7 +574,6 @@ Page({
       app.defaultinfofun(this);
     }
 
-    this.otherfunsettime(); 
 
     
     // 生成图片商品数据
@@ -854,8 +832,6 @@ Page({
         if (res.data.ReturnCode == 810) {
           app.showToastC('仅可以取消未付款订单');
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);  
 
       }
     })
@@ -1153,8 +1129,6 @@ vipOrOrdermine1(){
           app.showToastC('操作成功');
           _this.onLoadfun();
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
       }
     });
   },

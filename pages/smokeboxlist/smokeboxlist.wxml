@@ -179,7 +179,7 @@
 </view>
 
 
-<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX='{{isIphoneX}}' shopnum='{{shopnum}}' dryinglistnum='{{dryinglistnum}}'></bnavigation>
+<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX='{{isIphoneX}}'></bnavigation>
 
 
 

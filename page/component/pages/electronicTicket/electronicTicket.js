@@ -66,8 +66,6 @@ Page({
     addmodtxt:'',
     conphone:'',
     tipaid:'',
-    shopnum:0,
-    dryinglistnum:0,
     refundtips:false,
     refundtipssure:false,
     
@@ -209,8 +207,6 @@ Page({
           });
           _this.countdownbfun();
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
       }
     }); 
   },
@@ -253,8 +249,6 @@ Page({
             _this.onLoadfun();
           },2000);
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
 
       }
     }); 
@@ -319,8 +313,6 @@ Page({
             success: function (res) {}
           })
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
 
       }
     }); 
@@ -383,8 +375,6 @@ Page({
               if (res.data.ReturnCode == 908) {
                 app.showToastC('aid和uid不匹配');
               };
-              // 判断非200和登录
-              Dec.comiftrsign(_this, res, app);
             }
           })
 
@@ -447,8 +437,6 @@ Page({
             })
           };
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
 
       }
     });
@@ -659,8 +647,6 @@ Page({
          if (res.data.ReturnCode == 800) {
            app.showToastC('非该用户订单');
          };
-         // 判断非200和登录
-         Dec.comiftrsign(_this, res, app);
          // 刷新完自带加载样式回去
          wx.stopPullDownRefresh();        
        },
@@ -850,8 +836,6 @@ Page({
         if (res.data.ReturnCode == 810) {
           app.showToastC('仅可以取消未付款订单');
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);  
 
       }
     })
@@ -1023,8 +1007,6 @@ Page({
           app.showToastC('操作成功');
           _this.onLoadfun();
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
       }
     });
   },

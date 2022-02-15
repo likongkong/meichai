@@ -3,7 +3,7 @@ var Aes = require('crypto-js.js');  //引用AES源码js
 var env = 'online';   // 线上 
 // var env = 'qpe';  // 准生产环境
 // var env = 'test';  // 测试
-var versionnumber = '14.3.6';
+var versionnumber = '14.3.5';
 
 if(env == "online"){
   var key = Aes.enc.Utf8.parse("danzhuan1chaijia");
@@ -44,7 +44,6 @@ function zdyurl() {
   // return 'http://test.51chaidan.com/';
   // 线上  
   return 'https://cdn.51chaidan.com/';
-  // return 'https://www.51chaidan.com/';
 }
 //拼图 公共版本号
 function subversionNumber() {
@@ -89,83 +88,7 @@ function shareWechatMoments(){
     imageUrl:'https://cdn.51chaidan.com/images/default/shareImg.jpg'
   }
 }
-// 购物车显示数据
-function shopnum(_this,comurl){
-  var _this = _this;
-  var store_id = _this.data.store_id||0;
-  // 获取购物车显示个数
-  if (_this.data.uid && _this.data.loginid){
-    var qq = Aese('mod=cart&operation=getcartnum&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&store_id=' + store_id);
-    wx.request({
-      url: comurl + 'goods.php' + qq,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        if (res.data.ReturnCode == 200) {
-          _this.setData({
-            shopnum: res.data.count
-          });
-        };
-      }
-    }) 
-  }else{
-    _this.setData({
-      shopnum: 0
-    });
-  };
-}
-// 晒单数量
-function dryingSum(_this,url) {
-  var _this = _this;
-  var data = { vcode: '1.4.2', source: 4, uid: _this.data.uid, loginid: _this.data.loginid };
-  // wx.request({
-  //   url: url+'dryingSum',
-  //   header: { "Content-Type": "application/x-www-form-urlencoded" },
-  //   method: "POST",
-  //   data: data,
-  //   success: function (res) {
-  //     if (res.data.ReturnCode == 200) {
-  //       _this.setData({ 
-  //         dryinglistnum: res.data.List || 0, 
-  //         commentNumber:res.data.Info.commentNumber||0
-  //       });
-  //     } else {
-  //       _this.setData({ 
-  //         dryinglistnum: 0, 
-  //         commentNumber:0 
-  //       });
-  //     }
-  //   },
-  // })
-}
-// 判断是否登录
-function comiftrsign(_this,res,app) {
-  if (res.data.ReturnCode == 900) {
-    wx.showToast({
-      title: '登陆状态有误',
-      icon: 'none',
-      duration: 1500
-    });
-    wx.getSetting({
-      success: res => {
-        if (true) {
-          // '已经授权'
-          app.signin(_this);
-        } else {
-          wx.navigateTo({
-            url: "/pages/signin/signin"
-          })
-        }
-      }
-    });
-  }else if(res.data.ReturnCode == 999){
-    wx.showToast({
-      title: res.data.Message,
-      icon: 'none',
-      duration: 1500
-    });
-  };
-}
+
 function toDate(number,num) {
   var date = new Date(number * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
   var Y = date.getFullYear();
@@ -177,16 +100,12 @@ function toDate(number,num) {
   return Y + '/' + M + '/' + D +' ' + h + ':' + m + ':' +s;
 }
 
-console.log('envVersion',__wxConfig.envVersion);
 
 module.exports.comurl = comurl;
 module.exports.zdyurl = zdyurl;
 module.exports.sharemc = sharemc; 
 module.exports.Aese = Aese; 
 module.exports.Aesd = Aesd; 
-module.exports.comiftrsign = comiftrsign;
-module.exports.shopnum = shopnum;
-module.exports.dryingSum = dryingSum;
 module.exports.subversionNumber = subversionNumber;
 module.exports.env = env;
 module.exports.versionnumber = versionnumber;

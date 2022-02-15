@@ -141,8 +141,6 @@ Page({
     wxnum: 'meichai666666',
     // 支付完成显示分类跳转数据
     shareinfo: '',
-    // 显示购物车数量
-    shopnum: 0,
     //  店铺购物车是否显示导航栏
     navigationiftr: 0,
     temporary_store_id: 0,
@@ -157,8 +155,6 @@ Page({
     upMongolia:false,
     // 不可用优惠券
     unavailablearr: [],
-    // 晒单数量
-    dryinglistnum: 0,
     isProduce: app.signindata.isProduce,
     spreadEntry: app.signindata.spreadEntry,
     // 领奖列表
@@ -499,8 +495,6 @@ Page({
             dsbbmoncom: dsbbmoncom
           });
           _this.shoppingcartlist(1);
-          // 购物车数据显示
-          Dec.shopnum(_this,app.signindata.comurl);
         } else if (res.data.ReturnCode == 825) {
           app.showToastC('用户id和购物车信息id不匹配');
         } else if (res.data.ReturnCode == 826) {
@@ -540,8 +534,6 @@ Page({
         };
       };
     };
-    
-    var shopnum = parseFloat(_this.data.shopnum) + 1;
    
     this.setData({
       zunmdata: this.data.zunmdata,
@@ -550,10 +542,6 @@ Page({
     this.totalMoneyEvent();
     //  每隔一段时间提交数据
     _this.jumpaddupdata(3);
-    _this.setData({
-      // iftrsetint: 1,
-      shopnum: shopnum
-    });
   },
   /**
    * 减少数量触发函数
@@ -570,7 +558,6 @@ Page({
     };
     this.data.zunmdata[index].numberofdismantling = this.data.zunmdata[index].numberofdismantling - 1;
     this.data.zunmdata[index].iftrcheck = true;
-    var shopnum = parseFloat(_this.data.shopnum) - 1;
 
     var groupData = _this.data.zunmdata[index].groupData;
     if (groupData) {
@@ -593,9 +580,6 @@ Page({
     this.totalMoneyEvent();
     //  每隔一段时间提交数据
     _this.jumpaddupdata(3);
-    _this.setData({
-      shopnum: shopnum
-    });
   },
   /**
    * 生命周期函数--监听页面加载
@@ -636,8 +620,6 @@ Page({
         wx.hideLoading()
         _this.data.clicktherequestiftr = true;// 多次提交判断
         wx.stopPullDownRefresh();
-        // 购物车数据显示
-        Dec.shopnum(_this,app.signindata.comurl); 
         var iftrdsbbmoncom = false;
         if (res.data.ReturnCode == 200) {
           var rdw = res.data.list.cart || [];
@@ -958,8 +940,6 @@ Page({
             _this.totalMoneyEvent();
             app.signindata.defaultinformation = res.data.Info || '';
           };
-          // 判断非200和登录
-          Dec.comiftrsign(_this, res, app);
         }
       });
     }else{
@@ -979,8 +959,6 @@ Page({
     var _this = this;
 
     _this.nextpagediao();
-    // 调取晒单数量
-    Dec.dryingSum(_this, app.signindata.clwcomurl);
   },
   onLoad: function (options) {
     this.setData({
@@ -1041,8 +1019,6 @@ Page({
             })
           };
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
       }
     });
   },
@@ -1143,8 +1119,6 @@ Page({
         _this.setData({ upMongolia: false });
         if (num == 1) {
           if (res.data.ReturnCode == 200) {
-            // 购物车数据显示
-            Dec.shopnum(_this,app.signindata.comurl);
           } else if (res.data.ReturnCode == 805) {
             app.showToastC('没有足够库存');
           } else if (res.data.ReturnCode == 825) {
@@ -1983,10 +1957,7 @@ Page({
           });
           // 计算价格
           _this.amountcalculation();
-
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
       }
     });
   },
@@ -2174,8 +2145,6 @@ Page({
               if (res.data.ReturnCode == 908) {
                 app.showToastC('aid和uid不匹配');
               };
-              // 判断非200和登录
-              Dec.comiftrsign(_this, res, app);
             }
           })
 
@@ -2588,7 +2557,6 @@ Page({
           if (res.data.ReturnCode == 200) {
             app.showToastC('已成功加入购物车');
             _this.shoppingcartlist(1);
-            Dec.shopnum(_this,app.signindata.comurl);
           } else if (res.data.ReturnCode == 802) {
             app.comjumpwxnav(1,gid,'');
           } else if (res.data.ReturnCode == 805) {

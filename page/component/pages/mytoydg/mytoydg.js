@@ -17,8 +17,6 @@ Page({
     // 数据 
     listdata:[],
     headhidden:false,
-    shopnum:0,
-    dryinglistnum:0,
 
     c_title: '我的玩具柜',
     c_arrow: true,
@@ -541,8 +539,6 @@ Page({
             })
           };
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
 
       }
     });

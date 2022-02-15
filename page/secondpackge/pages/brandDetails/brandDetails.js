@@ -32,7 +32,6 @@ Page({
     currentIndex: 0,
     // 适配苹果X 
     isIphoneX: app.signindata.isIphoneX,
-    shopnum: 0,
     isProduce: app.signindata.isProduce,
 
     adList: [],

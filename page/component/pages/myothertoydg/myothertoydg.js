@@ -22,8 +22,6 @@ Page({
     // 数据 
     listdata: [],
     headhidden: false,
-    shopnum: 0,
-    dryinglistnum: 0,
     // 授权弹框
     tgabox: false,
     title: '别人的玩具柜',
@@ -56,8 +54,6 @@ Page({
     // 数据 
     listdataown: [],
     headhidden: false,
-    shopnum: 0,
-    dryinglistnum: 0,
     // ,{name: '已回收',ind: 8} ,{name: '出售中',ind: 1},{name: '已售出',ind: 2}
     headtab: [{name: '全部',ind: 0},{name: '待发货',ind: 4},{name: '已发货',ind: 3}],
 
@@ -1713,8 +1709,6 @@ Page({
             })
           };
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
 
       }
     });
@@ -1753,8 +1747,6 @@ Page({
               if (res.data.ReturnCode == 908) {
                 app.showToastC('aid和uid不匹配');
               };
-              // 判断非200和登录
-              Dec.comiftrsign(_this, res, app);
             }
           })
 

@@ -224,7 +224,6 @@ Page({
     swiperIndex:0,
     // tab切换
     tabdopnum:1,
-    shopnum:0,
     // 防止swiper卡住
     swiperError: 0,
     goodsIndex: 0,
@@ -244,8 +243,6 @@ Page({
     // 赠送优惠券弹框是否显示
     newcoupon: false,
     headhiddengeneratePictures:true,
-    // 晒单数量
-    dryinglistnum: 0,
     isProduce: app.signindata.isProduce,
     awatip:false,
     uidid:'',
@@ -1434,8 +1431,6 @@ closefrindcommoni:function(){
             }
         }
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
       }
     });
   },
@@ -1610,8 +1605,6 @@ closefrindcommoni:function(){
               });
               app.signindata.defaultinformation = res.data.Info || '';
             };
-            // 判断非200和登录
-            Dec.comiftrsign(_this, res, app);
           }
         }); 
     }else{

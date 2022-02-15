@@ -32,9 +32,6 @@ Page({
     windowHeight: app.signindata.windowHeight - 65 - wx.getStorageSync('statusBarHeightMc') || 0,
     signinlayer: false,
 
-    shopnum: 0,
-    dryinglistnum: 0,
-
     ishowdetail: false,
 
     itemimageurl: "",
@@ -269,11 +266,6 @@ Page({
         _this.giftrecord();
       };
     }
-
-    // 购物车数量
-    Dec.shopnum(_this,app.signindata.comurl);
-    // 调取晒单数量
-    Dec.dryingSum(_this, app.signindata.clwcomurl);
 
   },
 

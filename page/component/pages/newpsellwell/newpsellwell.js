@@ -45,7 +45,6 @@ Page({
       success: function (res) {
         if (res.data.ReturnCode == 200) {
           app.showToastC('已成功加入购物车');
-          Dec.shopnum(_this,app.signindata.comurl);
         } else if (res.data.ReturnCode == 802) {
           app.comjumpwxnav(1,gid,'');
         } else if (res.data.ReturnCode == 805) {
@@ -175,8 +174,6 @@ Page({
             };
           };
         };
-        // 判断非200和登录
-        Dec.comiftrsign(_this, res, app);
       }
     });
   }, 

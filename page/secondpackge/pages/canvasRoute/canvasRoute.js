@@ -26,8 +26,6 @@ Page({
     isIphoneX: app.signindata.isIphoneX,
     defaultinformation: '',
     wxnum: '',
-    shopnum: 0,
-    dryinglistnum: 0,
  
     // 授权弹框
     tgabox: false,

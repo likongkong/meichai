@@ -15,7 +15,6 @@ Page({
     openid: app.signindata.openid,
     // 适配苹果X 
     isIphoneX: app.signindata.isIphoneX,
-    shopnum: 0,
     // tab  0为热门 1为关注
     cat_id: 3,
     // 话题id

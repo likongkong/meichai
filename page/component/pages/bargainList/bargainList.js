@@ -25,10 +25,6 @@ Page({
     selectid: 1,
 
     refreshid: "-1",
-
-    // 晒单数量
-    dryinglistnum: 0,
-    shopnum: 0,
     defaultinformation: '',
     // 适配苹果X
     isIphoneX: app.signindata.isIphoneX,

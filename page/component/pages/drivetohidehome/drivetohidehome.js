@@ -16,8 +16,6 @@ Page({
     // 适配苹果X 
     isIphoneX: app.signindata.isIphoneX,
     headhidden: false,
-    shopnum: 0,
-    dryinglistnum: 0,
 
     c_title: '开车送隐藏',
     c_arrow: true,

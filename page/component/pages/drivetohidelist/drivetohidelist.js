@@ -15,8 +15,6 @@ Page({
     // 适配苹果X 
     isIphoneX: app.signindata.isIphoneX,
     headhidden: false,
-    shopnum: 0,
-    dryinglistnum: 0,
 
     c_title: '中奖记录',
     c_arrow: true,
