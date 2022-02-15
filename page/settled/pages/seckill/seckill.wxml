@@ -118,6 +118,7 @@
             </view></view>
             <view class="sSalePrice"><text style="font-size:22rpx;">￥</text>{{zunmdata.gprice!=0?zunmdata.gprice:''}}<text style="font-size:22rpx;color:#000;" wx:if='{{zunmdata.integral>0}}'>+{{zunmdata.integral}}积分</text></view>
             <view class="sCountstock">
+                <view class="sCountstockView" wx:if="{{zunmdata.saleQuantity}}">发售数量：<text style="color:#999495;">{{zunmdata.saleQuantity}}</text></view>
                 <view class="sCountstockView" wx:if="{{zunmdata.settledGoodsStockNumbers}}">商品库存：<text style="color:#999495;">{{zunmdata.settledGoodsStockNumbers}}</text></view>
                 <view class="sCountstockView" wx:if="{{zunmdata.settledGoodsRestrictionNumbers}}">限购数量：<text style="color:#999495;">{{zunmdata.settledGoodsRestrictionNumbers}}</text></view>
                 <view class="sCountstockView" wx:if="{{zunmdata.settledGoodsDeliverInfo}}">发货时间：<text style="color:#999495;">{{zunmdata.settledGoodsDeliverInfo}}</text></view>

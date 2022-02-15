@@ -1,14 +1,9 @@
-
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
- 
-
-
 <view class="drawOrFreeOrderBox">
    <view class="drawOrFreeOrderEve {{drawOrFreeOrder == 1?'dfoSelect':''}}" catchtap="drawOrFreeOrderFun" data-ind='1'>限定抽签</view>
    <view class="drawOrFreeOrderEve {{drawOrFreeOrder == 2?'dfoSelect':''}}" catchtap="drawOrFreeOrderFun" data-ind='2'>每日免单</view>
 </view>
-
 <!-- 抽签 -->
 <block wx:if='{{drawOrFreeOrder == 1}}'>
     <!-- 已报名 -->
@@ -24,7 +19,6 @@
         </view>
       </view>
     </view>
-
     <view wx:if='{{listdata.length>0}}' class='limlistbox' style='padding-top:15rpx;'>
       <!-- <view style='padding:0 0 20rpx 20rpx;font-size:24rpx;'>限定抽签</view> -->
       <view style='padding:0 20rpx;overflow: hidden;'>
@@ -74,13 +68,11 @@
         </view>
         <view style="width:344rpx;float:left;">
             <view class='limieve' wx:for='{{listdata}}' wx:key='key' style='margin-right:0;' wx:if='{{index%2==1}}' catchtap='limitlotteryd' data-gid='{{item.id}}'>
-
               <view  wx:if='{{item.brand}}' style="position:absolute;left:15rpx;top:15rpx;height:36rpx;overflow:hidden;z-index:5;padding: 4rpx 8rpx;">
                   <image src='{{item.brand.logo}}' style='float:left;width:36rpx;height:36rpx;border-radius:50%;'></image>
                   <view style='float:left;height:36rpx;line-height:36rpx;font-size:22rpx;color:#fff;margin-left:10rpx;max-width:260rpx;' class='specialellipsis'>{{item.brand.name}}旗舰店</view>
                   <view style="  width: 100%;height: 100%;background: #000;opacity: 0.6;position: absolute;top: 0;left: 0;z-index: -1;border-radius: 10rpx;"></view>
               </view>
-
               <image class='limieveimg' src='{{item.cover}}' mode='widthFix'></image>
               <block>
                 <view wx:if="{{item.joinMothed == 'payTicket'}}" class='limievetxtname multilineellipsis'><text style='color:#298DF8;'>定金￥{{item.cashPledge}} </text>{{item.name}}</view>
@@ -118,17 +110,11 @@
               </view>      
             </view>    
         </view>
-
       </view>
-
     </view>
-
     <view style="width:730rpx;margin:10rpx;">
       <somke colortitle='#000'></somke>
     </view>
-
-
-
     <!-- 已完成 -->
     <view wx:if='{{finishedlist.length>0}}' class='aslbcbox'>
       <view style='padding:5rpx 13rpx 20rpx;'>
@@ -142,18 +128,14 @@
         </view>
       </view>
     </view>
-
     <!--  暂无数据  -->
     <view class='noDataCom' wx:if='{{listdata.length==0&&nodataiftr&&signlist.length==0&&finishedlist.length==0}}'>
         <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
     </view>
-
     <view style='width:100%;{{isIphoneX?"height:140rpx;":"height:120rpx;"}}'></view>
-
 </block>
 <!-- 免单 -->
 <block wx:if='{{drawOrFreeOrder == 2}}'>
-
       <view style='width:100%;margin-bottom:10rpx;' wx:if='{{spreadEntry}}'>
           <view style='width:100%;height:200rpx;'>
               <swiper style='width:100%;height:100%;margin:0 auto;display:block;' circular="true" autoplay="true" interval="5000" duration="450">    
@@ -163,23 +145,18 @@
               </swiper>
           </view>
       </view>
-
-
     <view class='aslbox'>
-
       <view class='boxcontent'>
         <view style="padding:0 20rpx;overflow: hidden;">
             <view style="width:364rpx;float:left;">
                 <!-- 未报名 -->
                 <view class='aslbcbox' wx:for='{{commoddata}}' wx:key='key' wx:if='{{index%2==0}}' style='position: relative;width:344rpx;margin:0 0 10rpx 0;'>
                   <view style="width:100%;position: relative;" catchtap='activitydetailspage' data-id='{{item.id}}' data-type='{{item.type}}'>
-    
                     <view  wx:if='{{item.brand}}' style="position:absolute;left:15rpx;top:15rpx;height:36rpx;overflow:hidden;z-index:5;padding: 4rpx 8rpx;">
                         <image src='{{item.brand.logo}}' style='float:left;width:36rpx;height:36rpx;border-radius:50%;'></image>
                         <view style='max-width:260rpx;float:left;height:36rpx;line-height:36rpx;font-size:22rpx;color:#fff;margin-left:10rpx;' class='specialellipsis'><block wx:if='{{item.isBrandNaq==1}}'>{{item.brand.name}}</block><block wx:else>{{item.brand.name}}旗舰店</block></view>
                         <view style="  width: 100%;height: 100%;background: #000;opacity: 0.6;position: absolute;top: 0;left: 0;z-index: -1;border-radius: 10rpx;"></view>
                     </view>
-
                     <!-- 赞助商 -->
                     <view  wx:elif='{{item.isSupport==1}}' class='sponsorbox'>
                         <image src='{{item.supportLogo}}' style='float:left;width:40rpx;height:40rpx;border-radius:50%;'></image>
@@ -187,7 +164,6 @@
                         <view class='sponsorboxbg'></view>
                     </view>
                     <image src='{{item.cover}}' mode="widthFix" class='bcimgnew'></image>
-
                   </view>
                   <view class='aslbcbrightnew' catchtap='activitydetailspage'  data-id='{{item.id}}' data-type='{{item.type}}'>
                     <view class='acshlbctitle multilineellipsis' style='position:relative;font-size:24rpx;'>
@@ -233,19 +209,15 @@
                         <view class='aslbcbotright' style='background:#db2e34;position:relative;'>
                           查看中奖</view>
                       </view>
-
                     </view>
                     </view>
                   </view>
                 </view> 
-
             </view>
-            
             <view style="width:344rpx;float:left;">
                 <!-- 未报名 -->
                 <view class='aslbcbox' wx:for='{{commoddata}}' wx:key='key'  wx:if='{{index%2==1}}'  style='position: relative;width:344rpx;margin:0 0 10rpx 0;'>
                   <view style="width:100%;position: relative;" catchtap='activitydetailspage' data-id='{{item.id}}' data-type='{{item.type}}'>
-
                     <view  wx:if='{{item.brand}}' style="position:absolute;left:15rpx;top:15rpx;height:36rpx;overflow:hidden;z-index:5;padding: 4rpx 8rpx;">
                         <image src='{{item.brand.logo}}' style='float:left;width:36rpx;height:36rpx;border-radius:50%;'></image>
                         <view style='max-width:260rpx;float:left;height:36rpx;line-height:36rpx;font-size:22rpx;color:#fff;margin-left:10rpx;' class='specialellipsis'><block wx:if='{{item.isBrandNaq==1}}'>{{item.brand.name}}</block><block wx:else>{{item.brand.name}}旗舰店</block></view>
@@ -257,9 +229,7 @@
                         <view style='float:left;height:40rpx;line-height:40rpx;font-size:24rpx;color:#fff;margin-left:10rpx;' class='specialellipsis'>{{item.supportName}}赞助</view>
                         <view class='sponsorboxbg'></view>
                     </view>
-
                     <image src='{{item.cover}}' mode="widthFix" class='bcimgnew'></image>
-
                   </view>
                   <view class='aslbcbrightnew' catchtap='activitydetailspage'  data-id='{{item.id}}' data-type='{{item.type}}'>
                     <view class='acshlbctitle multilineellipsis' style='position:relative;font-size:24rpx;'>
@@ -305,18 +275,12 @@
                         <view class='aslbcbotright' style='background:#db2e34;position:relative;'>
                           查看中奖</view>
                       </view>
-
                     </view>
                     </view>
                   </view>
                 </view>
-
             </view>
-
         </view>
-        
-
-
         <!-- 已报名 -->
         <view class='aslbcbox' wx:if='{{signlist.length!=0}}'>
             <view style='padding:5rpx 13rpx 20rpx;'>
@@ -329,7 +293,6 @@
                   </scroll-view>            
               </view>
             </view>
-            
         </view>
         <!-- 已报名 -->
         <view class='aslbcbox' wx:if='{{finishedlist.length!=0}}'>
@@ -343,29 +306,17 @@
                   </scroll-view>            
               </view>
             </view>
-            
         </view>
-
         <official-account wx:if='{{canIUse}}' style='width:100%;background:#fff;'></official-account>
-
       </view>
-
     </view>
     <!--  暂无数据  -->
     <view class='noDataCom' wx:if='{{commoddata.length==0&&nodataiftr&&signlist.length==0&&finishedlist.length==0}}'>
         <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
     </view>
-
-
 </block>
-
 <bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' 
 dryinglistnum='{{dryinglistnum}}'></bnavigation>
-
-
-
-
-
 
 <!--  优惠券 新人红包  -->
 <view class='newcoupon' wx:if='{{newcoupon}}'>

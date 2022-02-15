@@ -81,6 +81,17 @@ Page({
         margintop0:true,
       },{
         isRequired:false,
+        type:'text',
+        // inputType:'number',
+        subtitle:'发售数量',
+        placeholder:'请输入发售数量',
+        value:'',
+        maxlength:20,
+        name:'saleQuantity',
+        borderbottom1:'show',
+        margintop0:true,
+      },{
+        isRequired:false,
         type:'label',
         subtitle:'商品标签',
         labelItem:[
@@ -294,6 +305,7 @@ Page({
       goodsLabel:'', //标签
       purchaseLimitation:0, //是否限购
       purchaseLimitationNum:1, //限购体数
+      saleQuantity:0, //发售数量
       integrate:'',  //积分
       goodsDetailsPic:'', //详情图
       modeOfDespatch:0,  //发货方式
@@ -472,11 +484,12 @@ Page({
           [`listData1[2].value`]:info.goodsDescStr,
           [`listData1[3].value`]:info.goodsPrice,
           [`listData1[4].value`]:info.stock,
-          [`listData1[5].index`]:info.deliverTimeStatus===''?999:info.deliverTimeStatus==1?0:1,
-          [`listData1[6].index`]:info.limitBuy==0 || info.limitBuy==''?1:0,
-          [`listData1[6].value`]:info.limitBuy,
-          [`listData1[7].value`]:info.integral,
-          [`listData1[8].imageList`]:info.arrGoodsDescImg,
+          [`listData1[5].value`]:info.saleQuantity,
+          [`listData1[6].index`]:info.deliverTimeStatus===''?999:info.deliverTimeStatus==1?0:1,
+          [`listData1[7].index`]:info.limitBuy==0 || info.limitBuy==''?1:0,
+          [`listData1[7].value`]:info.limitBuy,
+          [`listData1[8].value`]:info.integral,
+          [`listData1[9].imageList`]:info.arrGoodsDescImg,
           [`fieldGuideData2[0].value`]:info.illustratedInfo && info.illustratedInfo.length>0?info.illustratedInfo[0].title:'',
           [`fieldGuideData2[0].selectedArr`]:info.illustratedInfo && info.illustratedInfo.length>0?JSON.stringify(info.illustratedInfo):'',
           [`fieldGuideData2[0].brand_id`]:info.brand.brandId,
@@ -522,6 +535,7 @@ Page({
         obj.goodsDescribe = info.goodsDescStr;
         obj.goodsPrice = info.goodsPrice;
         obj.goodsStock = info.stock;
+        obj.saleQuantity = info.saleQuantity;
         obj.goodsLabel = info.deliverTimeStatus===''?'':info.deliverTimeStatus==1?0:1;
         obj.purchaseLimitation = info.limitBuy==0 || info.limitBuy==''?1:0;
         obj.purchaseLimitationNum = info.limitBuy;
@@ -642,6 +656,7 @@ Page({
       goodsName:obj.goodsName,
       goodsThumb:obj.flatPatternmaking,
       goodsPrice:obj.goodsPrice,
+      saleQuantity:obj.saleQuantity,
       deliverTimeStatus:obj.goodsLabel===''?'':obj.goodsLabel==0?1:0,
       deliverTime:obj.dateToPull,
       salesMothed:obj.sellingWay,

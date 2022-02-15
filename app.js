@@ -970,7 +970,7 @@ App({
         url: "/page/component/pages/newpsellwell/newpsellwell?" + whref + '&title=' + wname,
       });
     } else if (item_type == 9015) { 
-      wx.navigateTo({
+      wx.redirectTo({
         url: "/page/secondpackge/pages/aRewardList/aRewardList"
       });
     } else if (item_type == 9016) { 

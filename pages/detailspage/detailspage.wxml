@@ -1225,7 +1225,7 @@
     </view>
     <view class='dsbfhcon'>
       <view class='dsbfhcprice' style="{{zunmdata.goods_type==3?'color:#000;':''}}">
-          <block wx:if='{{zunmdata.wholeBox}}'>{{zunmdata.munit}}{{zunmdata.gsale*isBlindBoxNum}}</block>
+          <block wx:if='{{zunmdata.wholeBox}}'>{{zunmdata.munit}}{{blindBoxTotalAmount}}</block>
           <block wx:else>{{zunmdata.munit}}{{zunmdata.gsale}}<view wx:if='{{zunmdata.is_suit==1}}' style='display: inline-block; '>{{zunmdata.gsale_suit}}</view>          
           </block>
       </view>

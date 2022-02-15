@@ -97,12 +97,11 @@
   
 </view>
 
-<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' 
+<bnavigation isChar='{{false}}' wnews="{{true}}" isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}' shopnum='{{shopnum}}' 
 dryinglistnum='{{dryinglistnum}}'></bnavigation>
 
 
 <!--  暂无数据  -->
-
 <view class='noDataCom' wx:if='{{nodata}}'>
     <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
 </view>
