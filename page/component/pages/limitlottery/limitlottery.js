@@ -162,6 +162,7 @@ Page({
     showimg:'',
     BrandConcernTip:false,
     isPreview:'',   //isPreview=1为预览，默认''
+    SignUpOrSubscribe:1, // 1 订阅 2 报名 
   },
   BrandConcernTipFun(){
     this.setData({
@@ -278,55 +279,61 @@ Page({
       }
     })
   },
-    // 拉起订阅
-    subscrfun: function (num) {
-      var _this = this;
-      var subscribedata = _this.data.subscribedata || '';
-      var infoActivity = _this.data.infoActivity || {};
-      if (subscribedata && subscribedata.template_id && app.signindata.subscribeif) {
-        if (subscribedata.template_id instanceof Array) {
-          wx.requestSubscribeMessage({
-            tmplIds: subscribedata.template_id || [],
-            success(res) {
-              var is_show_modal = true;
-              for (var i = 0; i < subscribedata.template_id.length; i++) {
-                if (res[subscribedata.template_id[i]] == "accept") {
-                  if(num == 1){
-                    _this.data.id = infoActivity.goods_id || '';
-                  }else{
-                    _this.data.id = infoActivity.id || '';
-                  };
-                  app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
-                  if (is_show_modal) {
-                    _this.subshowmodalfun();
-                    is_show_modal = false;
-                    if(_this.data.promote_start_date){
-                      _this.setData({
-                        subscribeOrNot:true
-                      })
-                    };
+  FollowSubscription(){
+    this.setData({
+      BrandConcernTip:true,
+      SignUpOrSubscribe:1
+    })
+  },
+  // 拉起订阅
+  subscrfun: function (num) {
+    var _this = this;
+    var subscribedata = _this.data.subscribedata || '';
+    var infoActivity = _this.data.infoActivity || {};
+    if (subscribedata && subscribedata.template_id && app.signindata.subscribeif) {
+      if (subscribedata.template_id instanceof Array) {
+        wx.requestSubscribeMessage({
+          tmplIds: subscribedata.template_id || [],
+          success(res) {
+            var is_show_modal = true;
+            for (var i = 0; i < subscribedata.template_id.length; i++) {
+              if (res[subscribedata.template_id[i]] == "accept") {
+                if(num == 1){
+                  _this.data.id = infoActivity.goods_id || '';
+                }else{
+                  _this.data.id = infoActivity.id || '';
+                };
+                app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+                if (is_show_modal) {
+                  _this.subshowmodalfun();
+                  is_show_modal = false;
+                  if(_this.data.promote_start_date){
+                    _this.setData({
+                      subscribeOrNot:true
+                    })
                   };
                 };
               };
+            };
 
-              _this.data.id = infoActivity.id || '';
-              
-            },
-            complete() { }
-          })
-        } else {
-          wx.requestSubscribeMessage({
-            tmplIds: [subscribedata.template_id || ''],
-            success(res) {
-              if (res[subscribedata.template_id] == "accept") {
-                app.subscribefun(_this, 0, subscribedata.template_id, subscribedata.subscribe_type);
-                _this.subshowmodalfun();
-              };
-            }
-          })
-        };
+            _this.data.id = infoActivity.id || '';
+            
+          },
+          complete() { }
+        })
+      } else {
+        wx.requestSubscribeMessage({
+          tmplIds: [subscribedata.template_id || ''],
+          success(res) {
+            if (res[subscribedata.template_id] == "accept") {
+              app.subscribefun(_this, 0, subscribedata.template_id, subscribedata.subscribe_type);
+              _this.subshowmodalfun();
+            };
+          }
+        })
       };
-    },
+    };
+  },
   ishowtipsfun:function(){ 
     var _this = this;
     wx.showModal({
@@ -1263,7 +1270,8 @@ Page({
     app.getUserProfile((res,userInfo) => {
         if(_this.data.brandinfo && !_this.data.brandinfo.isAttention){
             _this.setData({
-              BrandConcernTip:true
+              BrandConcernTip:true,
+              SignUpOrSubscribe:2
             })
         }else{
             _this.joinlimitlottery()
@@ -1284,13 +1292,15 @@ Page({
         console.log('关注=====',res)
         if (res.data.ReturnCode == 200) {
           app.showToastC('关注成功');
-          setTimeout(function(){
-            _this.setData({
-              [`brandinfo.isAttention`]: !_this.data.brandinfo.isAttention,
-              BrandConcernTip:false
-            })
+          _this.setData({
+            [`brandinfo.isAttention`]: !_this.data.brandinfo.isAttention,
+            BrandConcernTip:false
+          })
+          if(_this.data.SignUpOrSubscribe == 1){
+            _this.subscrfun(2);            
+          }else{
             _this.joinlimitlottery()
-          },2000)
+          };
         };
       }
     });
@@ -2309,23 +2319,6 @@ Page({
               _this.data.is_payment = true;
               _this.getinfo()
               
-              // if(_this.data.is_ordinary_ticket_user){
-              //   _this.ticketList();
-              // }
-
-              // if(e && e != "undefined" && (_this.data.infoActivity.joinMothed != 'payTicket' && _this.data.infoActivity.payTicketCate != 'fullPledge')){
-              //   _this.joinDraw(0);
-              // }
-
-              // if (payinfo.isFreeBuyOrder) {
-              //   wx.navigateTo({
-              //     url: "/page/component/pages/hidefun/hidefun?type=1&cart_id=" + _this.data.cart_id
-              //   });
-              // } else {
-              //   if(!_this.data.is_ordinary_ticket_user){
-              //     app.showToastC('购买成功');
-              //   }
-              // }
 
             },
             'fail': function (res) {
