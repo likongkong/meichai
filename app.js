@@ -953,7 +953,7 @@ App({
         url: "/page/component/pages/newpsellwell/newpsellwell?" + whref + '&title=' + wname,
       });
     } else if (item_type == 9015) { 
-      wx.navigateTo({
+      wx.redirectTo({
         url: "/page/secondpackge/pages/aRewardList/aRewardList"
       });
     } else if (item_type == 9016) { 
@@ -1734,9 +1734,6 @@ App({
     this.signindata.beforeTime=0;
   },
 
-  
-
-  
   //避免多次下拉刷新
   enterPageNumFun(callback){
     const pages = getCurrentPages();
@@ -1867,7 +1864,6 @@ App({
     }
     return obj[key];
   },
-
 })
 
 

@@ -351,12 +351,8 @@
                                     </view>                
                                 </view>
                             </view>            
-                    </block>             
-             
-             
+                    </block>          
              </block>
-
-
              <view style='border-top: 1rpx solid #e5e5e5;margin:0 3%;width:94%;'></view>
              <view class='wholecon' wx:for='{{item.list}}' wx:for-index='num' wx:key='key' bindtap='dismantling' data-status='{{item.status}}' data-oid='{{item.oid}}' data-order_type='{{item.order_type}}'>
                  <view class='wholeconleft'>
@@ -368,7 +364,6 @@
                      </view>
                  </view>
                  <view class='wholeconright' wx:if='{{item.order_type!=7}}'>
-
                       <view class='wholecontxt multilineellipsis {{item.gid == 38363?"multilineellipsis4":""}}' style='position:relative;'>
                       <block wx:if='{{item.order_type!=13}}'>
                            <view wx:if='{{item.is_suit==1&&item.pre_name}}' style='display: inline-block;color:#ff2742;margin-right:12rpx;'>{{item.pre_name}}</view>
@@ -376,10 +371,8 @@
                       </block>
                       {{item.gname}}
                       </view>
-
                       <view class='wholeconnum specialellipsis' wx:if='{{item.prize}}' style='padding-top:10rpx;'>奖品:{{item.prize}}</view>
                       <view class='wholeconnum'>
-
                             <view class='taxrpice'>
                                 <view class='taxpricleft' wx:if='{{!item.roleName}}'>
                                     <block wx:if='{{item.order_type==1&&item.goods_price==0}}'>组合赠品</block>
@@ -427,10 +420,7 @@
                       <view class='officialreply' wx:elif='{{item.customer_reply&&(item.status==1||item.status==12||item.status==13||item.status==2||item.status==3||item.status==4||item.status==16)}}'>
                         <text wx:if="{{item.order_type!=22}}">回复:{{item.customer_reply}}</text>
                       </view>
-                      
-                      
                  </view>
-
                  <view class='wholeconright' wx:if='{{item.order_type==7}}'>
                       <view class='wholecontxt multilineellipsis' style='position:relative;'>
                       <view wx:if='{{item.is_suit==1}}' style='display: inline-block;color:#ff2742;margin-right:12rpx;'>{{item.pre_name}}</view>
@@ -446,9 +436,7 @@
                       <view wx:if='{{!item.schedule.finished&&!item.schedule.progress}}' class='wholeconnum specialellipsis' data-cart_id='{{item.cart_id}}' >
                       <view class='wholeconnumdisilin' style='color:#7D7D7D;'>未达到档位</view>
                       </view>
-                      
                  </view>
-
              </view>
              
              <view style='height:2;width:94%;margin:0 3% 0;border-top:1rpx solid #e5e5e5;'></view>
@@ -500,7 +488,6 @@
                     </view>
               </block>
 
-
               <block wx:elif='{{item.order_type==24&&item.status!=8}}'>
                     <view class='daifukuan'>
                         商品总额:￥{{item.goods_amount}}-定金￥{{item.depositOrderPayPrice}}+运费￥{{item.carriage}}
@@ -509,7 +496,6 @@
                         <block wx:if='{{item.order_type==24}}'>尾款:￥{{item.amount}}</block>
                         <block wx:else>合计:￥{{item.amount}}</block>                        
                     </view>  
-
                     <view class='daifukuandianji' wx:if='{{item.status==0}}'>
                         <view class='dfkdjrleft' style="height:54rpx;line-height:54rpx;">{{item.dateTitle}}</view>
                         <block wx:if='{{item.isBalances==1}}'>
@@ -526,9 +512,7 @@
               <view  wx:elif='{{item.order_type!=6}}'>
                     <!-- 等待付款  -->
                     <view class='daifukuandianji' wx:if='{{item.status==0 && item.order_type!=7}}'>
-
                         <view class='dfkdjrleft'>{{countdown}}</view>
-
                         <view class='dfkdjrighg' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;' bindtap='payment' data-amount='{{item.amount}}' data-oid='{{item.oid}}' data-cart_id='{{item.cart_id}}' data-gcover='{{item.gcover}}' data-gid='{{item.gid}}' data-goods_price='{{item.goods_price}}' data-gname='{{item.gname}}' data-order_type='{{item.order_type}}'  data-pre_name='{{item.pre_name}}' data-ds='{{item.ds}}' data-order_type='{{item.order_type}}' data-needverifyticket='{{item.needVerifyTicket}}' data-tickettype='{{item.ticketType}}' data-ticketidentify='{{item.ticketIdentify}}' data-isreceive='{{item.isReceive}}' data-keyday='{{item.keyDay}}' data-index='{{index}}'>
                             <block wx:if='{{item.needVerifyTicket}}'>
                                 <block wx:if='{{item.isReceive}}'>核销领取</block>
@@ -539,28 +523,23 @@
                             <block wx:else>我要付款</block>
                         </view>
                     </view>
-
                     <!-- 0元购 status为1 进行中 -->
                     <view class='daifukuandianji' wx:if='{{item.status==0 && item.order_type==7}}'>
                         <view class='dfkdjrleft'>{{countdown}}</view>
                         <view class='dfkdjrighg' data-cart_id='{{item.cart_id}}' bindtap='gofreedetail' style='position:relative;background:#3F51B5;color:#fff;border:0rpx;'>0元购助力</view>
                         <view wx:if='{{item.isGoods}}' class='dfkdjrighg' style='color:#ff2840;border:1rpx solid #ff2840;position:relative;' bindtap='goodsetail' data-gid='{{item.gid}}' >直接购买</view>
                     </view>
-   
                     <!--  已付款  catchtap='upImgSer' --> 
                     <view class='wholebottomadd' wx:if='{{item.status==1||item.status==16  && item.order_type!=7}}'>
                         <view wx:if='{{item.status==1&&item.isAuditPic==1&&item.auditPic!=2}}' style='color:#fff;font-size:26rpx;width:140rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;' data-cart_id='{{item.cart_id}}' data-share_url='{{item.share_url}}' data-qrcode='{{item.qrcode}}' data-auditpictime='{{item.auditPicTime||0}}' catchtap='generatePicturesact'>上传截图</view>
-
                         <view style='position:relative;height:54rpx;width:240rpx;line-height:54rpx;margin-left:20rpx;float:right;'   catchtap='clicktocollect' data-sorder='{{item.showOrder}}' data-order_type='{{item.order_type}}' data-cart_id='{{item.cart_id}}'  wx:if='{{item.is_receive==1&&(item.isShowOrder==0||item.showOrder==2||item.showOrder==1)&&item.order_type!=9&&item.order_type!=10&&item.order_type!=11}}'>
                                 <view class='awardrrbutposi' data-cart_id='{{item.cart_id}}' style='right:0;height:54rpx;width:240rpx;line-height:54rpx;'>中奖了! 点击领奖</view>
                         </view>
- 
                         <view wx:if='{{item.status==16&&item.isShowOrder==1&&item.showOrder!=1&&item.showOrder!=2}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
                             <view style='width:100%;height:100%;position: relative;' wx:if='{{item.showOrder==0}}'>晒单领奖<button class='tgaboxtgawchbochlibutboxtwo' type='primary' bindtap="getUserProfile" data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}'></button></view>
                             <view style='width:100%;height:100%;' wx:if='{{item.showOrder==1}}' data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>等待审核</view>
                             <view style='width:100%;height:100%;position: relative;' wx:if='{{item.showOrder==3||item.showOrder==4}}'  data-qrcode='{{item.qrcode}}' data-awardinfo='{{item.award_info}}' data-cover='{{item.cover}}' data-showorder='{{item.showOrder}}' data-cart_id='{{item.cart_id}}' catchtap='upserimgboxiftr'>上传晒单截图</view>
                         </view>
-
                         <view wx:if='{{item.status==16&&(item.order_type==9||item.order_type==11)}}' class='wholebottomaddright sharebox' style='color:#fff;font-size:26rpx;width:180rpx;height:54rpx;line-height:54rpx;text-align:center;background:#42bd56;float:right;border-radius: 10rpx;margin-left:20rpx;position:relative;border:0;'>
                             <view style='width:100%;height:100%;' catchtap='clicktocollect' data-order_type='{{item.order_type}}' data-cart_id='{{item.cart_id}}'>领取奖励</view>
                         </view>

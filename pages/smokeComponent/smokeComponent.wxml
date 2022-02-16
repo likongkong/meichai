@@ -1,7 +1,5 @@
 <view style="width:100%;">
-
   <view wx:if='{{dataList&&dataList.length!=0}}' style='color:{{colortitle}};font-size:25rpx;line-height:40rpx;padding-left:10rpx;text-align:left;margin-top:5rpx;' catchtap="jumplist">在线抽盒机</view>
-
   <view style="width:100%;margin:5rpx 0 5rpx 0;" wx:if='{{dataList&&dataList.length!=0}}'>
     <scroll-view scroll-x="true" style="white-space:nowrap;">
       <view wx:for='{{dataList}}' wx:key='key' wx:for-item='w' class="itemstyle">
@@ -11,18 +9,14 @@
           <view class='labelstyle' wx:if='{{w.isRecycle}}' style='background:#1890ff;border-radius:7rpx;width:120rpx;left:10rpx;top:-4rpx;'>{{w.recycleRatio}}折回收</view>
         </view>
         <view class='specialellipsis' style='font-size:24rpx;padding-top:4rpx;width:100%;height:32rpx;text-align:center;color:#333;'>{{w.name}}</view>
-
         <view style="width:100%;height:40rpx;color:#d64650;">
           <view style="float:left;font-size:20rpx;margin:10rpx 0 0 10rpx;line-height:30rpx;">
             <block wx:if='{{w.cheaperPrice}}'><text style="font-size:24rpx;">￥{{w.cheaperPrice}}</text><text style="font-size:20rpx;color:#7b7b7b;text-decoration:line-through;margin-left:10rpx;">￥{{w.shop_price}}</text></block>
             <block wx:else><text style="font-size:24rpx;">￥</text>{{w.shop_price}}</block>
-
           </view>
           <view wx:if="{{w.tip!=''}}" style="float:right;font-size:20rpx;line-height:30rpx;border:3rpx solid #d64650;border-radius:7rpx;margin:4rpx 10rpx 0 0;">{{w.tip}}</view>
         </view>
-
       </view>
     </scroll-view>
   </view>
-
 </view>

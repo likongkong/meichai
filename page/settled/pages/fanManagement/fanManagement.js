@@ -71,7 +71,7 @@ Page({
         if(res.tapIndex == 0){ //备注
           that.signaturePopUpFun(e);
         }else if(res.tapIndex == 1 && !isadmin){ //升为管理员
-          
+          console.log(that.data.authorityList)
           that.setData({
             isadminNum:0,
             authorityPopUp:true,
@@ -149,6 +149,21 @@ Page({
       }
     }
   },
+  // 关闭弹出框
+  hidePopUpFun(){
+    for(var i=0;i<this.data.authorityList.length;i++){
+      this.setData({
+        [`authorityList[${i}].is_checked`] : false
+      })
+    }
+    this.setData({
+      setAdminPopUp:false,  
+      removePopUp:false,  
+      authorityPopUp:false,
+      fruitIds:[],
+    })
+    console.log(this.data.fruitIds,'ids====')
+  },
   // 保存管理员权限
   saveAuthority(e){
     let fansUId = this.data.userId;
@@ -196,9 +211,14 @@ Page({
             fruitIds:[],
           })
         }else{
-          _this.setData({
-            fruitIds:[],
-          })
+          // for(var i=0;i<_this.data.authorityList.length;i++){
+          //   _this.setData({
+          //     [`authorityList[${i}].is_checked`] : false
+          //   })
+          // }
+          // _this.setData({
+          //   fruitIds:[],
+          // })
           app.showToastC(res.data.Msg,2000);
         }
       },
@@ -261,22 +281,12 @@ Page({
     this.setData({
       lotteryNumberIs:!this.data.lotteryNumberIs
     })
-    
   },
   // 修改地址名字
   namefun:function(e){
     if(e.detail.value && e.detail.value.length <= 10){
       this.data.modifyName = e.detail.value;
     };
-  },
-  // 关闭弹出框
-  hidePopUpFun(){
-    this.setData({
-      setAdminPopUp:false,  
-      removePopUp:false,  
-      authorityPopUp:false,
-      fruitIds:[],
-    })
   },
   signaturePopUpFun(w){
     var userid = w.currentTarget.dataset.userid || w.target.dataset.userid || 0;
@@ -367,9 +377,7 @@ Page({
       _this.data.pid = ++pagenum;
     };
 
-
     console.log('mod=community&operation=fanslist&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid +'&brand_id='+_this.data.brand_id + '&pageId=' + _this.data.pid + '&searchValue=' + _this.data.ordername || '' )
-
     var q = Dec.Aese('mod=community&operation=fanslist&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid +'&brand_id='+_this.data.brand_id + '&pageId=' + _this.data.pid + '&searchValue=' + _this.data.ordername || '' )
 
     wx.request({
@@ -401,7 +409,6 @@ Page({
               app.showToastC('暂无更多数据');
             }
           }
-          
         }
       }
     }); 
@@ -445,8 +452,6 @@ Page({
     } else {
       app.signin(this)
     };
-
-
   },
   onLoadfun(){
     var _this = this;
@@ -459,9 +464,7 @@ Page({
       isBlindBoxDefaultAddress: app.signindata.isBlindBoxDefaultAddress,
     });
 
-
     this.getIp();
-    
   },
 
   /**
@@ -507,7 +510,6 @@ Page({
    */
   onShareAppMessage: function (options) {
     var _this = this;
-
     var indexShare = app.signindata.indexShare || [];
     var indexShareNum = Math.floor(Math.random() * indexShare.length) || 0;
     var indexShareImg = '';

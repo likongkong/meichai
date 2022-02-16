@@ -97,7 +97,7 @@
   
 </view>
 
-<bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}'></bnavigation>
+<bnavigation isChar='{{false}}' wnews='{{true}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}'></bnavigation>
 
 
 <!--  暂无数据  -->

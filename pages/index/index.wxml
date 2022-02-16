@@ -2,7 +2,6 @@
 <add-tips duration="5" ftop='{{statusBarHeightMc-10}}' />
 <!-- 授权弹框 -->
 <tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
-
 <import src="../../wxParse/wxParse.wxml"/>
 
 <!-- 商品弹框 --> 
@@ -43,22 +42,18 @@
 	</view>
 </view>
 <view class='{{newcoupon||index_ela_fra?"tripList_root":""}}'>
-
 	<view style='width:100%;height:{{statusBarHeightMc+44}}px;background:#fff;'></view>
-
 	<view style='width:100%;position:relative;' class='indexswiper' wx:if='{{movies && movies.length != 0}}'>
 		<view wx:if="{{notice_title!=''}}" class="homeNotice" bindtap='jumpnotice'>
 			<image class="homeNoticeImg" src='https://www.51chaidan.com/images/default/notice.png'></image>
 			{{notice_title}}>
 		</view>
-
 		<swiper bindanimationfinish="changeGoodsSwip" current="{{goodsIndex}}" class="swiper" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450" wx:if='{{!is_formaldress}}' style="height:400rpx;">
 			<swiper-item wx:for="{{movies}}" wx:key="key" class="{{item.item_type == 9015 || item.item_type == 9016 ?'bgImgUrl' : ''}}">
 				<image src="{{item.image}}" class="slide-image" mode="widthFix" data-item_type='{{item.item_type}}' data-href='{{item.href}}' data-title='{{item.title}}' bindtap='jumpbanner' data-imgurl='{{item.image}}' style='position:relative;'>
 				</image>
 			</swiper-item>
 		</swiper>
-
 
 		<!--重置小圆点的样式 -->
 		<view class="dots" wx:if='{{!is_formaldress}}'>
@@ -71,7 +66,6 @@
 	<!--  分类  ||islive-->
 	<view class='recommendind' style='{{isAwardOrder||islive?"margin-bottom:0;":""}}' wx:if='{{!is_formaldress}}'>
 		<view class='erverrecom' wx:for='{{classificationlist}}' wx:key='key' data-href='{{item.href}}' data-item_type='{{item.item_type}}' data-name='{{item.name}}' bindtap='jumprecom' style='position:relative;height:160rpx;'>
-
 			<!-- 跳转其他小程序 -->
 			<navigator wx:if='{{item.item_type==997}}' target="miniProgram" open-type="navigate" app-id="wxfe253b7309e29868" path="{{item.href}}" extra-data="" version="release" style='position: absolute;height:100%;width:100%;{{item.item_type==997}}left:0;top:0;z-index:3;'></navigator>
 			<image class='erverimg' style='margin:17rpx auto 2rpx;' mode='aspectFit' src='{{item.img}}'></image>
@@ -90,7 +84,6 @@
 		<image class='winningthepimg' src='http://www.51chaidan.com/images/FreeSheet/WinningThePrize.png'></image>
 	</view>
  
-
 	<image src="{{newYearActivities}}" wx:if='{{newYearActivities}}' data-item_type='9060' data-href='' catchtap='imgcomindellistjump' class="newYearActivities"></image>
 
 	 <!-- 测试  -->
@@ -111,7 +104,6 @@
 						<image src="{{w.src}}" data-title='{{w.title}}' data-item_type='{{w.item_type}}' data-href='{{w.href}}' catchtap='imgcomindellistjump' class="homeSwBoxImg"></image>
 					</swiper-item>
 				</swiper>
-
 				<!--  列表标题  -->
 				<view class='disantitle' wx:if='{{item.title}}' data-title='{{item.title}}' data-item_type='{{item.item_type}}' data-href='{{item.href}}' catchtap='imgcomindellistjump'>
 					{{item.title}}
@@ -134,7 +126,6 @@
 					</view>
 				</view>
 			</view>
-
 
       <!-- 通知 -->
 			<view class='disanumofgoods' wx:elif='{{item.show_type==119}}' style='{{item.isHideBreakLine?"margin-bottom:0rpx;":""}}'>

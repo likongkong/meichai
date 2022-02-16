@@ -3,10 +3,8 @@
 </loading> -->
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
-
 <!-- 提交蒙层 -->
 <view style='width:100%;height:100%;position:fixed;top:0;left:0;z-index:99999;' wx:if='{{upMongolia}}'></view>
-
 <view class='winningthepbox' wx:if='{{isAwardOrder}}' catchtap='jumporder'>
   <view class='winningthepimgtxt'>
     <image class='winningthepimgshop' src='{{awardOrder.Info.cover}}'></image>
@@ -115,7 +113,6 @@
               <view class="number" style='margin:0 13rpx 0 0;display: inline-block;' wx:if='{{item.color.no!=0}}' data-is_store='{{item.is_store}}' data-gid='{{item.goods_id}}' data-store_id='{{item.store_id}}' bindtap='addressmanagement'>{{item.color.property}}</view>
               <view class="number" style='display: inline-block;' wx:if='{{item.size.no!=0}}' data-is_store='{{item.is_store}}' data-gid='{{item.goods_id}}' data-store_id='{{item.store_id}}' bindtap='addressmanagement'>{{item.size.property}}</view>            
             </block>
-
           </view>
         </view>
         <view class="pageRight bottom" style='position:relative;'>
@@ -151,11 +148,9 @@
           <image src='{{ittwo.goods_thumb}}' class='ascEImg'></image>
           <view class='asccGive' style='color:#000;' wx:if='{{ittwo.num>1}}'>x{{ittwo.num}}</view>
           <view class='asccGive' style='color:#000;' wx:if='{{indnumt+1!=item.groupData.presentList.length}}'>+</view>
-
         </view>
         <view class='asccGive' wx:if='{{item.groupData.discount!=0&&item.groupData.discount.cheaper!=0}}' style='margin-right:13rpx;'>减</view>
         <view class='asccEveOne' wx:if='{{item.groupData.discount!=0&&item.groupData.discount.cheaper!=0}}' style='line-height:90rpx;color:#121212;font-size:26rpx;'>￥{{item.groupData.discount.cheaper}}</view>
-
       </view>
       <view class='addShopCombRight'>
         <view class='ascrAdd comPosCen' wx:if='{{item.groupData.goodsList.length!=0}}' data-addnum='{{index}}' catchtap='mulshopaddcar'>添加</view>
@@ -190,17 +185,13 @@
         </view>
       </view>
     </view>
-
   </view>
 
   <view style='width:100%;height:200rpx;' wx:if='{{raplist.length!=0}}'></view>
   <view style='width:100%;{{isIphoneX?"height:190rpx;":"height:160rpx;"}}'></view>
   <view style='width:100%;{{isIphoneX?"height:130rpx;":"height:100rpx;"}}' wx:if='{{navigationiftr!=1}}'></view>
 </view>
-
-
 <!--  引用详情页代码  -->
-
 <!--  一级级背景  -->
 <view class='tipback' wx:if='{{tipback}}' catchtouchmove="preventD"></view>
 <!--  二级背景  -->
@@ -209,7 +200,6 @@
 
 <view class='buybombsimmediately' wx:if='{{buybombsimmediately}}'>
   <view class='bbsheadcon'>
-
     <view class='bbshccom' bindtap='seladdressfun'>
       <view class='bbshccomleft'>收货地址</view>
       <image class='bbshccomimg' src='../images/icon_in.png'></image>
@@ -223,14 +213,12 @@
       <image class='bbshccomimg' src='../images/icon_in.png'></image>
       <text class='bbshccomright multilineellipsis' style='text-align: right;font-size:28rpx;'>{{tipcoupon}}</text>
     </view>
-
     <view class="blindboxMoneyWrap" wx:if="{{isDeduct && blindboxMoney!=0}}" catchtap="useBlindboxMoneyFun">
         <view class='blindboxMoneyleft'>使用抽盒金抵扣 <text style="color: #f42251;">￥{{useblindAmountpayable}}</text> <text style="font-size:24rpx;"> (剩余抽盒金</text> <text style="font-size:24rpx;color: #f42251;">￥{{blindboxMoney}})</text> </view>
         <block>
           <image wx:if="{{isUseBlindboxMoney}}" style="width:40rpx;height:auto" src="https://www.51chaidan.com/images/sign/order/xuanzhong.png" mode="widthFix"></image>
           <image wx:else style="width:40rpx;height:auto" src="https://www.51chaidan.com/images/sign/order/weixuanzhong.png" mode="widthFix"></image>
         </block>
-
     </view>
 
     <view class='bbshccombot'>
@@ -278,11 +266,9 @@
   </view>
   <view class='bbshbottom'>
     <view class='bbshbottomhead'>
-
     </view>
     <view class='bbshbottombut' bindtap='placeorder'>提交订单</view>
   </view>
-
 </view>
 
 <!--  收货地址  -->
@@ -318,7 +304,6 @@
       <view class='noDataCom' wx:if='{{addressdata.length==0}}'>
           <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
       </view>
-
   </view>
   <view class='recgadbot' bindtap='jumpaddress'>
     增加新地址
@@ -353,14 +338,13 @@
       <view class='boxcon' bindtap=''>
         <view class='boxconhead'>
           <view class='bocohealef'>
-                       <block wx:if='{{item.coupon_id == 1001}}'>
-                           <image mode="aspectFit" src="https://cdn.51chaidan.com/images/sign/mobile_phone_shell_coupon.jpg" class="couimg"></image>
-                       </block>
-                       <block wx:else>
-                          <view class='bchll'>{{item.unit}}</view>
-                          <view class='bchlr'>{{item.value}}</view>
-                       </block>
-
+            <block wx:if='{{item.coupon_id == 1001}}'>
+                <image mode="aspectFit" src="https://cdn.51chaidan.com/images/sign/mobile_phone_shell_coupon.jpg" class="couimg"></image>
+            </block>
+            <block wx:else>
+              <view class='bchll'>{{item.unit}}</view>
+              <view class='bchlr'>{{item.value}}</view>
+            </block>
           </view>
           <view class='bocohearig'>
             <view class='bocohighe specialellipsis'>{{item.name}}</view>
@@ -392,14 +376,14 @@
       <view class='boxcon' bindtap=''>
         <view class='boxconhead'>
           <view class='bocohealef'>
-                       <block wx:if='{{item.coupon_id == 1001}}'>
-                           <image mode="aspectFit" src="https://cdn.51chaidan.com/images/sign/mobile_phone_shell_coupon.jpg" class="couimg"></image>
-                       </block>
-                       <block wx:else>
-                            <view class='bchll' wx:if='{{item.coupon_type!=2}}'>{{item.unit}}</view>
-                            <view class='bchlr' style='{{item.coupon_type==2?"margin-left:6rpx;text-align:right;":""}}'>{{item.value}}</view>
-                            <view class='bchll' wx:if='{{item.coupon_type==2}}' style='font-size:22rpx;width:24rpx;'>折</view>
-                       </block>
+            <block wx:if='{{item.coupon_id == 1001}}'>
+                <image mode="aspectFit" src="https://cdn.51chaidan.com/images/sign/mobile_phone_shell_coupon.jpg" class="couimg"></image>
+            </block>
+            <block wx:else>
+                <view class='bchll' wx:if='{{item.coupon_type!=2}}'>{{item.unit}}</view>
+                <view class='bchlr' style='{{item.coupon_type==2?"margin-left:6rpx;text-align:right;":""}}'>{{item.value}}</view>
+                <view class='bchll' wx:if='{{item.coupon_type==2}}' style='font-size:22rpx;width:24rpx;'>折</view>
+            </block>
           </view>
           <view class='bocohearig'>
             <view class='bocohighe specialellipsis'>{{item.name}}</view>
@@ -456,7 +440,6 @@
         <view class='boxconcon'>{{item.desc}}</view>
       </view>
     </view>
-
   </view>
   <view class='couponprorecgadbot' catchtap='querencouponprojectilefun'>
     确认
@@ -478,7 +461,6 @@
   </view>
   <view class='payment' bindtap='paymentmony'>确认支付</view>
 </view>
-
 
 <view class='fiaxbottom' style='{{isIphoneX?"bottom:130rpx;":"bottom:110rpx;"}}'>
   <view class='shoppingcartprompt' catchtap='iftrBotShopList' wx:if='{{!spreadEntry && shopcptxt!=""&&dsbbmoncom&&shopcptxt!="已满足包邮条件，快去结算吧。"}}' data-href='{{rdjump.href}}' data-item_type='{{rdjump.item_type}}' data-name='{{rdjump.name}}'>{{shopcptxt}}</view>
@@ -514,16 +496,11 @@
     <view class="accounts-font" wx:if='{{dsbbmoncom}}' style='position:relative;'><button class='shareButton' type='primary' bindtap="getUserProfileCom"></button>结算</view>
     <view class="accounts-font1" wx:if='{{!dsbbmoncom}}'>结算</view>
   </view>
-
 </view>
-
 <bnavigation bind:runex='togation' wCart='{{true}}' isProduce='{{isProduce}}' isIphoneX ='{{isIphoneX}}'></bnavigation>
-
 <tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
-
 <!--  提交订单弹框防止多次提交  -->
 <view wx:if='{{suboformola}}' style='width:100%;height:100%;background:#000;opacity: 0.4;z-index: 1999;position: fixed;top: 0;left: 0;'></view>
-
 <!--  填写身份证号  -->
 <view class='idnumberboxw' wx:if='{{idnumberboxiftr}}'>
   <view class='idnumberboxwback'></view>

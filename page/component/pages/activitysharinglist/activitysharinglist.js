@@ -67,9 +67,11 @@ Page({
     var drawOrFreeOrder = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
     this.setData({drawOrFreeOrder});
     if(drawOrFreeOrder==1){
-      if(!this.data.listdata){
+      // if(!this.data.listdata){
         this.listdataFO(1);
-      };
+      // };
+    }else{
+      this.listdata(1)
     };
   },
 

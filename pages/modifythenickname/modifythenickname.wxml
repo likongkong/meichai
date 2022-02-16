@@ -60,7 +60,6 @@
     </view>
   </view>
 </block>
-
 <!-- 单张详情 -->
 <block wx:if='{{isBrandDetail==1}}'>
    <view class="calendDtailPad">
@@ -76,7 +75,6 @@
           </view>
       </view>   
    </view>
-
    <block wx:if='{{otherCalendarByBrand && otherCalendarByBrand.length!=0}}'>
         <view class='calendTxtTitle'>相关日历</view>
         <scroll-view class="iwasscroll" scroll-x="true">

@@ -177,6 +177,7 @@ Page({
         subtitle:'对公账户',
         placeholder:'请输入对公账户',
         value:'',
+        inputType:'number',
         borderbottom1:'show',
         name:'corporateAccount'
       },

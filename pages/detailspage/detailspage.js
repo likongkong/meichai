@@ -1703,6 +1703,7 @@ Page({
     };
     this.setData({
       isBlindBoxNum: index,
+      blindBoxTotalAmount:(zunmdata.gsale*index).toFixed(2),   //商品价格*商品数 商品总价格
       taxation: taxation.toFixed(2)
     });
   },
@@ -2598,6 +2599,7 @@ Page({
       tipback: true,
       dsbframeiftr: true,
       judgmentactivity: 1,
+      blindBoxTotalAmount:(res.gsale*this.data.isBlindBoxNum).toFixed(2),  //商品价格*商品数 商品总价格
     });    
   },  
   pricedetailc: function () {  // 价格明细显示隐藏
@@ -3192,7 +3194,7 @@ Page({
             isDeductNum:res.data.Ginfo.isDeduct&&_this.data.blindboxMoney!=0?1:0,
             isCanShare:res.data.Ginfo.isCanShare,
             nowTime : Date.parse(new Date())/1000,//当前时间戳
-            totalSpecStock:res.data.Ginfo.totalSpecStock || 0
+            totalSpecStock:res.data.Ginfo.totalSpecStock || 0,
           },function(){
               // 是否播放视频
               if(_this.data.isVideoSwiper){

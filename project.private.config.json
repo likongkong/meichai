@@ -444,6 +444,12 @@
           "pathName": "page/laozicloud/pages/laozicloud/laozicloud",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "测试页面",
+          "pathName": "page/laozicloud/pages/testpage/testpage",
+          "query": "",
+          "scene": null
         }
       ]
     }

@@ -1,8 +1,6 @@
-
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'>
 </t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
-
 <view  style='width:100%;'>
 	<view style="width:100%;position:relative;background: white;" wx:if='{{bannerList && bannerList.length != 0}}'>
 		<swiper class="nsswiperdetail" bindchange="swiperChange" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
@@ -18,7 +16,6 @@
 			</block>
 		</view>
 	</view>
-
 	<view class="elsearch" wx:if='{{elsearch}}'>
 			<view class="elsearchch">
 					<image class="elserarchimg" catchtap="jumpsearch" src="https://www.51chaidan.com/images/toyCabinet/search.png"></image>
@@ -36,23 +33,16 @@
 					</swiper-item>
 				</block>
 			</swiper>
-
 			<view style='width:100%;height:100%;position:absolute;top:0;left:0;z-index:2;'>
 					<!-- <image src='https://www.51chaidan.com/images/toyCabinet/search.png' class='dlfheadrhimg' catchtap='elsearchfun'></image> -->
 					<!-- <text wx:if="{{true}}" catchtap="toggleExplain" style="display:block;width:100%;height:80rpx;line-height:80rpx;text-align:right;font-size:24rpx;color:#1890ff;">送隐藏说明</text> -->
 					<text wx:if="{{isRedPackage}}" catchtap="jumpsouchtemip" data-id='-1' style="display:block;width:100%;height:80rpx;line-height:80rpx;text-align:right;font-size:24rpx;color:#1890FF;">抽盒金红包</text>
 					<text wx:elif="{{isBuyingTickets}}" catchtap="giveticketFun" style="display:block;width:100%;height:80rpx;line-height:80rpx;text-align:right;font-size:24rpx;color:#1890ff;">送刮刮卡</text>
-					
 			</view>
 		</view>
 	</view>
-
 </view>
-
 <view class='storbox'>
-	<!-- <view style='width:100%;height:280rpx;'></view> -->
-
-
   <!-- 品牌 ip -->
 	<view style="min-height:80rpx;background:#fff;margin:15rpx 0 15rpx 0;padding-top:15rpx;" wx:if='{{brandArr&&brandArr.length!=0}}'>
 			<view style="position:relative;height:150rpx;">
@@ -76,22 +66,17 @@
 									<image class="sblipseveimg boxShadow" style="background:#fff;" src="http://www.51chaidan.com/images/sign/activity/20201111/more.png"></image>
 									<view class="ocamenswevename specialellipsis">更多品牌</view>
 							</view>
-
 					</scroll-view>
-
-
 			</view>
 	</view>
-
-				<!-- 大家都在买  -->
-				<view style='width:100%;background:#fff;' wx:if='{{ipArr&&ipArr.length!=0}}'>
-						<view style='width:700rpx;height:60rpx;margin:0 auto;'>
-							<scroll-view scroll-x="true" class='ocascroview' scroll-with-animation="true" scroll-left='{{scrollleft}}'>
-									<view class='ocastev' wx:for='{{ipArr}}' wx:key='key' id='q{{item.id}}' data-c_id='{{item.id}}' catchtap='tabbotdata' style='{{ip_id==item.id?"color:#f29a19;text-decoration:underline;":""}}'>{{item.ip_name}}</view>
-							</scroll-view>
-						</view>
-				</view>
-
+	<!-- 大家都在买  -->
+	<view style='width:100%;background:#fff;' wx:if='{{ipArr&&ipArr.length!=0}}'>
+			<view style='width:700rpx;height:60rpx;margin:0 auto;'>
+				<scroll-view scroll-x="true" class='ocascroview' scroll-with-animation="true" scroll-left='{{scrollleft}}'>
+						<view class='ocastev' wx:for='{{ipArr}}' wx:key='key' id='q{{item.id}}' data-c_id='{{item.id}}' catchtap='tabbotdata' style='{{ip_id==item.id?"color:#f29a19;text-decoration:underline;":""}}'>{{item.ip_name}}</view>
+				</scroll-view>
+			</view>
+	</view>
 	<view style='width:730rpx;margin:10rpx;overflow:hidden;padding-bottom:70rpx;'>
 		<view wx:if='{{false}}' style='width:44%;margin:10rpx 3%;float:left;' wx:for='{{list}}' wx:key='key'>
 			<view class='vm_list' style='font-size:25rpx;text-align:center;' data-status="{{item.status}}" catchtap='jumpdetail' data-id='{{item.id}}' data-gid="{{item.goods_id}}">
@@ -108,7 +93,6 @@
 				<view class='specialellipsis' style='width:100%;line-height:35rpx;text-align:center;font-size:25rpx;color:#fff;position:absolute;top:0;left:0;'>{{item.name}}</view>
 			</view>
 		</view>
-
     <block wx:for='{{list}}' wx:key='key'>
 		    <block wx:if='{{item.showtype==2}}'>
 						<view class="smokebLisAdv">
@@ -132,11 +116,9 @@
 											<view style="  width: 100%;height: 100%;background: #000;opacity: 0.6;position: absolute;top: 0;left: 0;z-index: -1;border-radius: 10rpx;"></view>
 									</view>	
 							</view>
-								
 							<image wx:if='{{item.isNewArrival}}' class="labelstyleImg" src="https://cdn.51chaidan.com/images/icon/newArrival.png"></image>
 							<view class='labelstyle' style="{{(item.isNewArrival||item.isSpecialOffer)?'right:65rpx;':'right:20rpx;'}}">
 								<!-- <view  wx:if='{{item.vip_special_offer==1}}' class="vipReappearance">VIP返抽盒金<text style="font-size:22rpx">x</text><text style='font-size:23rpx;'>{{item.vip_discount}}</text></view> -->
-
 							  <view wx:if='{{item.isRecycle}}' style='background:#1890ff;' class="tipComStyle">{{item.recycleRatio}}折回收</view>
 								<view wx:if='{{item.isScratch}}' style='background:#FB595F;' class="tipComStyle">送刮刮卡</view>
 								<view wx:if='{{item.status == 1}}' style='background: #000;' class="tipComStyle">未开放</view>
@@ -146,9 +128,6 @@
 										<view wx:if='{{item.tag=="限量"}}' style='background:#31b3fb;' class="tipComStyle">{{item.tag}}</view>								
 								</block>
 							</view>
-              
-						
-							
 							<view style="width:100%;height:40rpx;color:#d64650;">
 								<view style="float:left;font-size:35rpx;margin-left:10rpx;">
 									<block wx:if='{{item.cheaperPrice}}'><text style="font-size:20rpx;">￥</text>{{item.cheaperPrice}}<text style="font-size:20rpx;color:#7b7b7b;text-decoration:line-through;margin-left:10rpx;">￥{{item.price}}</text></block>
@@ -162,27 +141,17 @@
 							<view class='specialellipsis' style="width:94%;line-height:30rpx;text-align:left;font-size:26rpx;margin:0 3%;">{{item.title}}</view>
 						</view>
 				</block>
-
-
 		</block>
-    
-      <view class='noDataCom' wx:if='{{is_havedata&&list.length==0}}'>
-          <image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
-      </view>
-
+		<view class='noDataCom' wx:if='{{is_havedata&&list.length==0}}'>
+				<image src='https://cdn.51chaidan.com/images/brandInfoIcon/no-data.png' class='noDataImg'></image>
+		</view>
 	</view>
 	<view style='width:100%;{{isIphoneX?"height:170rpx;":"height:150rpx;"}}'></view>
 </view>
-
 <view class='posibuttoy' catchtap='jumpowntoy'>我的玩具柜
 	<text wx:if='{{listbutnum!=0}}'>({{listbutnum}})</text>
 </view>
-
-
 <bnavigation isChar='{{false}}' isProduce='{{isProduce}}' isIphoneX='{{isIphoneX}}'></bnavigation>
-
-
-
 <!--  授权弹框  -->
 <tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
 
@@ -195,7 +164,6 @@
 		<view style="width:95rpx;height:30rpx;position:absolute;top:0;left:0;color:#e94f57;text-align:center;font-weight:bold;">{{automattitle}}</view>
 	</view>
 </view> -->
-
 <!-- 透视卡 小悬浮 -->
 <view wx:elif='{{perspcardiftrmin}}' style='width:110rpx;height:170rpx;position:fixed;right:20rpx;bottom:260rpx;z-index:9;'>
 	<image src='http://www.51chaidan.com/images/icon/iconTempXRay.jpg' style='width:110rpx;height:110rpx;display:block;border-radius:50%;'></image>
@@ -204,49 +172,31 @@
 		<text style='display:block;text-align:center;width:110rpx;height:54rpx;line-height:27rpx;position:absolute;left:0;top:0rpx;'>点击使用\n{{percountdown}}</text>
 	</view>
 </view>
-
 <view wx:if='{{ishowofficial}}' style="width:100%;height:100%;position:fixed;top:0px;left:0;z-index:20;">
-
 	<view class='bgstyle' catchtouchmove="myCatchTouch" catchtap="closeofficial"></view>
-
 	<view style="width:80%;height:340rpx;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;background:white;border-radius:15rpx">
 		<view style="width:100%;color:black;font-size:35rpx;text-align:center;margin-top:20rpx;">{{alert.toB.title}}</view>
-
 		<view style="width:80%;margin:20rpx 10%;font-size:27rpx;color:gray;"><text>{{alert.toB.description}}</text></view>
-
 		<view style="width:100%;color:#4c9a23;font-size:35rpx;text-align:center;" catchtap="surejumpoutside">确定</view>
 	</view>
-
 </view>
- 
-
 <view wx:if='{{brandprompts}}' style="width:100%;height:100%;position:fixed;top:0px;left:0;z-index:20;">
-
 	<view class='bgstyle' catchtouchmove="myCatchTouch" catchtap="closeoffbp"></view>
-
 	<view style="width:80%;height:310rpx;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;background:white;border-radius:15rpx">
 	  <block wx:if='{{isnoautomat}}'>
 			<view style="width:100%;color:black;font-size:35rpx;text-align:center;margin-top:20rpx;">温馨提示</view>
-
 			<view style="width:80%;margin:20rpx 10%;font-size:27rpx;color:gray;height:130rpx;"><text>{{alert.index.noAutomat}}\n</text><text wx:if='{{is_isdirectshipping}}'>{{alert.directShipping.description}}</text></view>		
 		</block>
 		<block wx:else>
 			<view style="width:100%;color:black;font-size:35rpx;text-align:center;margin-top:20rpx;">{{alert.directShipping.title}}</view>
-
 			<view style="width:80%;margin:20rpx 10%;font-size:27rpx;color:gray;"><text>{{alert.directShipping.description}}</text></view>		
 		</block>
-
-
 		<view style="width:100%;color:#4c9a23;font-size:35rpx;text-align:center;" catchtap="brandpromptsjump">确定</view>
 	</view>
-
 </view>
-
 <!-- 一进列表弹框 -->
 <view wx:if='{{specialActivity}}' style="width:100%;height:100%;position:fixed;top:0px;left:0;z-index:20;">
-
 	<view class='bgstyle' catchtouchmove="myCatchTouch" catchtap="sbltipfun"></view>
-
 	<view style="width:80%;height:320rpx;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;background:white;border-radius:15rpx">
 	  <view style="width:100%;color:black;font-size:35rpx;text-align:center;margin-top:20rpx;">温馨提示</view>
 	  <view style="width:80%;margin:20rpx 10%;font-size:27rpx;color:gray;height:140rpx;">
@@ -254,9 +204,7 @@
 		</view>	
 		<view style="width:100%;color:#4c9a23;font-size:35rpx;text-align:center;" catchtap="sbltipfun">确定</view>
 	</view>
-
 </view>
-
 
 <!--ip列表弹框 -->
 <view wx:if='{{morebrankip}}'  catchtouchmove="true" style="width:100%;height:100%;position:fixed;top:0px;left:0;z-index:20;">
