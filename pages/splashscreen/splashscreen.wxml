@@ -1,5 +1,2 @@
-
 <image src="{{imgUrl}}" catchtap="jumpActivity" class="ind" bindload="imageLoad" style='width:{{imagewidth}}px;height:{{imageheight}}px;'></image>
-
-
 <text class='jumpCountdown' catchtap='clickcountdownfun' wx:if='{{imgUrl}}'>{{countdown}}</text>

@@ -31,8 +31,6 @@
    <view class='saveData' bindtap='submissionofdata'>保存</view>
 </view>
 
-
-
 <!--  省市联动  -->
 <view class='citybackg' wx:if='{{cityback}}'></view>
 <view wx:if="{{condition}}" class="citypicker">

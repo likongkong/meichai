@@ -1,8 +1,6 @@
-	
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f>
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 <view class="punchTheClock">	
-
 		<view class="ptcswipter" wx:if='{{movies&&movies.length!=0}}'>
 				<swiper style="width:100%;height:400rpx;" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
 					<swiper-item wx:for="{{movies}}" wx:key="key">
@@ -71,7 +69,6 @@
 				</view>
 		</view>
 
-
 	  <view class="punchBottom">
 		   <view class="punchBottomtxt">已打卡</view>
 			 <view class="punchBotImgBox" style="width:{{50+myClockinList.list.length*15>530?'530':50+myClockinList.list.length*15}}rpx;" wx:if='{{myClockinList.list.length!=0}}'>
@@ -79,20 +76,14 @@
 			 </view>
 			 <view class="punchBottomtxt">x{{myClockinList.myClockinNum}}</view>
 		</view>
-
 </view>
-	
 
 <!-- 弹框   -->
-
 <view class='wsh' wx:if='{{mapImgDisplay}}' style="z-index:199;">
     <view class='tgimgboxgb' catchtap="mapImgDisplayfun"></view>
 		<image class="mapImgbox" catchtap="previewImg" mode='aspectFit' src="{{sormUrl}}"></image>
 </view>	
-
-	
 <!-- 弹框   -->
-
 <view class='wsh' wx:if='{{rewardbox}}'>
     <view class='tgimgboxgb' catchtap="rewardboxhidden"></view>
     <view class="puntipbox">
@@ -114,5 +105,4 @@
         <view wx:if='{{rewardbdata.gift_status==1}}' class="punSrRTxt" catchtap="receiverewards" data-id='{{rewardbdata.id}}' style="width:130rpx;">领取成功</view>
 	  </view>
 </view>
-	
 <bnavigation isChar='{{false}}' isProduce='{{isProduce}}'></bnavigation>
