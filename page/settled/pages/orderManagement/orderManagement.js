@@ -39,7 +39,7 @@ Page({
     order:{},
     payStatus:[
       {name:'全部',num:'-1'},
-      {name:'待支付',num:'0'},
+      // {name:'待支付',num:'0'},
       {name:'待发货',num:'2'},
       {name:'已发货',num:'4'},
       {name:'已完成',num:'5'},
@@ -709,7 +709,8 @@ Page({
               _this.setData({
                 countOrder,
                 brand,
-                order
+                order,
+                infoOrder: res.data.data.Info.order
               });
           }else{
             var orderData = [..._this.data.order,...order]
@@ -758,7 +759,8 @@ Page({
               _this.setData({
                 countOrder,
                 brand,
-                order
+                order,
+                infoOrder: res.data.data.Info.order
               });
           }else{
             var orderData = [..._this.data.order,...order]

@@ -450,6 +450,12 @@
           "pathName": "page/laozicloud/pages/testpage/testpage",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "一番赏列表",
+          "pathName": "page/secondpackge/pages/aRewardList/aRewardList",
+          "query": "",
+          "scene": null
         }
       ]
     }

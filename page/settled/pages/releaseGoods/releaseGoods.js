@@ -334,6 +334,7 @@ Page({
     console.log(options)
     this.setData({
       id: options.id || '',
+      itemstatus: options.itemstatus || '', //itemstatus==3为已结束进入
       previewGoodsKey:`${app.signindata.uid}_${Date.parse(new Date())}`
     })
     console.log(this.data.previewGoodsKey)
@@ -493,7 +494,6 @@ Page({
           [`fieldGuideData2[0].value`]:info.illustratedInfo && info.illustratedInfo.length>0?info.illustratedInfo[0].title:'',
           [`fieldGuideData2[0].selectedArr`]:info.illustratedInfo && info.illustratedInfo.length>0?JSON.stringify(info.illustratedInfo):'',
           [`fieldGuideData2[0].brand_id`]:info.brand.brandId,
-          // [`listData2[0].groupsIndex`]:info.logisticsIndex,
           [`listData2[0].radioArr[${info.shippingMothed}].groupsIndex`]:info.logisticsIndex,
           [`listData2[0].index`]:info.shippingMothed,
           [`listData2[1].index`]:info.salesMothed,
@@ -503,11 +503,6 @@ Page({
           [`listData2[4].value`]:info.deliverTime,
           [`listData2[5].index`]:info.isShowStock==0?1:0,
           [`listData2[6].index`]:info.isShowSellNumber==0?1:0,
-          // [`listData2[1].value`]:info.deliverTime,
-          // [`listData2[2].index`]:info.isShowStock==0?1:0,
-          // [`listData2[3].index`]:info.isShowSellNumber==0?1:0,
-          // [`listData2[4].time`]:util.format1("yyyy-MM-dd HH:mm",info.startTime),
-          // [`listData2[5].time`]:util.format1("yyyy-MM-dd HH:mm",info.stopTime),
           [`listData3[0].index`]:info.isCanShare==0?1:info.isCanShare==1?0:2,
           [`listData6[0].index`]:info.shelvesType,
           [`listData6[0].radioArr[1].time`]:info.shelvesType==1?util.format1("yyyy-MM-dd HH:mm",info.shelvesTime):'',
@@ -546,24 +541,12 @@ Page({
         obj.modeOfDespatch = info.shippingMothed,
         obj.shipping = info.shipping;
         obj.shippingPriceStatus = info.shippingPriceStatus==0?0:1;
-
-        // [`listData2[1].index`]:info.salesMothed,
-        // [`listData2[2].time`]:util.format1("yyyy-MM-dd HH:mm",info.startTime),
-        // [`listData2[3].time`]:info.salesMothed==0?'':util.format1("yyyy-MM-dd HH:mm",info.stopTime),
-        // [`listData2[4].value`]:info.deliverTime,
-        // [`listData2[5].index`]:info.isShowStock==0?1:0,
-        // [`listData2[5].index`]:info.isShowSellNumber==0?1:0,
         obj.sellingWay = info.salesMothed;
         obj.startTime = util.format1("yyyy-MM-dd HH:mm",info.startTime);
         obj.endTime = info.salesMothed==0?'':util.format1("yyyy-MM-dd HH:mm",info.stopTime);
         obj.dateToPull = info.deliverTime;
         obj.isGoodsStock = info.isShowStock==0?1:0;
         obj.isSoldNum = info.isShowSellNumber==0?1:0;
-        // obj.dateToPull = info.deliverTime;
-        // obj.isGoodsStock = info.isShowStock==0?1:0;
-        // obj.isSoldNum = info.isShowSellNumber==0?1:0;
-        // obj.startTime = util.format1("yyyy-MM-dd HH:mm",info.startTime);
-        // obj.endTime = util.format1("yyyy-MM-dd HH:mm",info.stopTime);
         obj.isCanShare = info.isCanShare==0?1:info.isCanShare==1?0:2;
         obj.addedData = info.shelvesType;
         obj.customAdded = util.format1("yyyy-MM-dd HH:mm",info.shelvesTime);
@@ -578,6 +561,17 @@ Page({
   submitAudit(){
     let obj = this.data.obj;
     let that = this;
+
+    if(this.data.itemstatus == 3 && obj.sellingWay == 1){
+      let endTime = (new Date(obj.endTime).getTime())/1000;
+      let startTime = (new Date(obj.startTime).getTime())/1000;
+      let nowTime = Date.parse(new Date())/1000;
+      if(endTime<startTime || endTime<nowTime){
+        this.selectComponent('#settledForm2').scrollto('endTime');
+        app.showToastC('停售时间不可小于当前时间或发售时间',1500);
+        return false;
+      }
+    }
 
     if(!obj.goodsName || obj.goodsName == ''){
       this.selectComponent('#settledForm1').scrollto('goodsName');
