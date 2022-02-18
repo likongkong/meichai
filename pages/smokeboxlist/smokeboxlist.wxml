@@ -133,7 +133,10 @@
 									<block wx:if='{{item.cheaperPrice}}'><text style="font-size:20rpx;">￥</text>{{item.cheaperPrice}}<text style="font-size:20rpx;color:#7b7b7b;text-decoration:line-through;margin-left:10rpx;">￥{{item.price}}</text></block>
 									<block wx:else><text style="font-size:20rpx;">￥</text>{{item.price}}<text style="font-size:20rpx;color:#7b7b7b;text-decoration:line-through;margin-left:10rpx;" wx:if='{{item.isSpecialOffer}}'>￥{{item.originalPrice}}</text></block>
 								</view>
-								<view wx:if='{{item.vip_special_offer==1}}' class="vipReappearance">VIP返抽盒金<text style="font-size:20rpx">x</text>{{item.vip_discount}}</view>
+
+								<view wx:if='{{item.status==7}}' class="vipReappearancesubList">开售订阅</view>
+
+								<view wx:elif='{{item.vip_special_offer==1}}' class="vipReappearance">VIP返抽盒金<text style="font-size:20rpx">x</text>{{item.vip_discount}}</view>
 
 								<view wx:elif="{{item.tip!='' && !item.isBusinessActivity}}" style="float:right;font-size:20rpx;line-height:30rpx;border:3rpx solid #d64650;border-radius:7rpx;margin:8rpx 10rpx 0 0;max-width: 59%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{item.tip}}</view>
 								<view wx:elif="{{item.tip!='' && item.isBusinessActivity}}" style="float:right;font-size:20rpx;line-height:30rpx;border:3rpx solid #4c9a23;border-radius:7rpx;margin:2rpx 10rpx 0 0;color:#4c9a23;max-width: 59%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{item.tip}}</view>

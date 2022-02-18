@@ -440,6 +440,7 @@ Page({
             }
 
             _this.setData({
+              subscribedata:infoData.subscribe,
               // eldataclass:eldataclass,
               isGiveticket:false,
               brandArr:brandArr,
@@ -561,7 +562,65 @@ Page({
       });
     }
   },
+  // 拉起订阅
+  subscrfun: function (w) {
+    var _this = this;
+    var subscribedata = _this.data.subscribedata || '';
+    if (subscribedata && subscribedata.template_id && app.signindata.subscribeif) {
+      if (subscribedata.template_id instanceof Array) {
+        wx.requestSubscribeMessage({
+          tmplIds: subscribedata.template_id || [],
+          success(res) {
+            var is_show_modal = true;
+            for (var i = 0; i < subscribedata.template_id.length; i++) {
+              if (res[subscribedata.template_id[i]] == "accept") {
+                if(_this.data.specialGoods == 1 && _this.data.zunmdata.debuff == 3){  // 手机壳 要传订阅的是哪款
+                  app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i],_this.data.selectShell.roleId ||'');
+                }else{
+                  app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
+                };
+                if (is_show_modal) {
+                  _this.subshowmodalfun('订阅成功');
+                  is_show_modal = false;
+                };
+              }else{
+                if (is_show_modal) {
+                  _this.subshowmodalfun('订阅失败');
+                  is_show_modal = false;
+                };
+              };
+            };
+          },
+          complete() { }
+        })
+      } else {
+        wx.requestSubscribeMessage({
+          tmplIds: [subscribedata.template_id || ''],
+          success(res) {
+            if (res[subscribedata.template_id] == "accept") {
+              app.subscribefun(_this, 0, subscribedata.template_id, subscribedata.subscribe_type);
+              _this.subshowmodalfun();
+            };
+          }
+        })
+      };
+    };
 
+  },
+  subshowmodalfun: function (txt) {
+    var _this = this;
+    wx.showModal({
+      title: '提示',
+      content: txt || '订阅成功',
+      showCancel: false,
+      success: function (res) {
+        _this.setData({
+          subscribeCouponTip: '',
+          isSubscribeCoupon: false
+        })
+      }
+    })
+  },
   jumpdetail: function(w) {
     var _this = this;
     var id = w.currentTarget.dataset.id;
@@ -572,7 +631,11 @@ Page({
     var status = w.currentTarget.dataset.status;
 
     var appid = w.currentTarget.dataset.appid;
-    if(status == 1){
+    if(status == 7){
+        _this.setData({id})
+        _this.subscrfun();
+        return false;
+    }else if(status == 1){
         wx.navigateTo({
           url: "/pages/smokebox/smokebox?gid=" + gid
         });
