@@ -28,11 +28,11 @@ Page({
     order:[],
     payStatus:[
       {name:'全部',num:'0'},
+      {name:'未发布',num:'5'},
       {name:'未开始',num:'1'},
       {name:'进行中',num:'2'},
-      {name:'已结束',num:'3'},
+      {name:'已结束',num:'3'}
       // {name:'已删除',num:'4'}
-      {name:'未发布',num:'5'}
     ], // 支付状态 
     subLedger: 0 , // 1 已分账 2 未分账
     countOrder:0,
@@ -123,16 +123,19 @@ Page({
   },
   commonBulletFrameFun(e){
     let index = e.currentTarget.dataset.index;
+    let itemstatus = e.currentTarget.dataset.itemstatus || '';
     let num = e.currentTarget.dataset.num || 0; // 订单标识
     var _this = this;
     var order = _this.data.order || [];
     var selectData = order[num] || {};
+    console.log(index)
+    // return false;
     if(index == 1){ // 1 修改地址 2 退款 3 物流
       // 9039 发布抽选 9040 发布商品
       if(selectData.itemType == 4){
-        app.comjumpwxnav(9039,'id='+selectData.itemId,'','')
+        app.comjumpwxnav(9039,'id='+selectData.itemId+'&itemstatus='+itemstatus,'','')
       }else{
-        app.comjumpwxnav(9040,'id='+selectData.itemId,'','')
+        app.comjumpwxnav(9040,'id='+selectData.itemId+'&itemstatus='+itemstatus,'','')
       };
     } else if(index == 2){
       wx.navigateTo({ 
@@ -142,6 +145,9 @@ Page({
 
     }else if(index == 4){
       this.toggleAddNewEventMask()
+    }else if(index == 6){
+      this.brandSettledGoodsStopSale('',selectData);
+      return false;
     };
     if(index != 1 && index != 4 && index != 2){
       this.setData({
@@ -169,22 +175,20 @@ Page({
     var orderNum = _this.data.orderNum || 0;
     console.log(logisticsRefundModify)
     if(logisticsRefundModify == 1){
-
-          if (_this.data.modifyName == ''){
-            app.showToastC('姓名不能为空');
-            return false;
-          };
-          if (_this.data.modifyMobile.length == 0) {
-            app.showToastC('输入的手机号为空')
-            return false;
-          } else if (_this.data.modifyMobile.length < 11) {
-            app.showToastC('手机号长度有误！')
-            return false;
-          } else if (_this.data.modifyMobile && _this.data.modifyMobile[0]!=1) {
-            app.showToastC('手机号有误！')
-            return false;
-          };
-
+        if (_this.data.modifyName == ''){
+          app.showToastC('姓名不能为空');
+          return false;
+        };
+        if (_this.data.modifyMobile.length == 0) {
+          app.showToastC('输入的手机号为空')
+          return false;
+        } else if (_this.data.modifyMobile.length < 11) {
+          app.showToastC('手机号长度有误！')
+          return false;
+        } else if (_this.data.modifyMobile && _this.data.modifyMobile[0]!=1) {
+          app.showToastC('手机号有误！')
+          return false;
+        };
         api.modifyAddress(selectData.order.orderId,{
             orderId:selectData.order.orderId,// 订单id 对内唯一标识
             customerId:selectData.order.userId, //	Number对应订单的用户id
@@ -219,25 +223,7 @@ Page({
  
 
     }else if(logisticsRefundModify == 3){
-
-        api.brandSettledGoodsStopSale({
-            goodsId:selectData.goodsId,	// 商品id
-            itemType:selectData.itemType // 	要删除的商品类型
-        }).then(res => {
-          if (res.data.status_code == 200) {
-              app.showToastC('删除成功');
-              var order = _this.data.order || [];
-              order.splice(_this.data.orderNum, 1)　
-              _this.setData({
-                commonBulletFrame:false,
-                order
-              });
-          }else{
-            if(res.data && res.data.message){
-              app.showModalC(res.data.message); 
-            };        
-          }          
-        })
+      this.brandSettledGoodsStopSale(1,selectData);
     }else if(logisticsRefundModify == 4){
 
     }else if(logisticsRefundModify == 5){
@@ -246,7 +232,36 @@ Page({
     _this.setData({
       commonBulletFrame:false
     });
-
+  },
+  //下架 or 删除
+  brandSettledGoodsStopSale(isDelete,selectData){
+    var _this = this;
+    api.brandSettledGoodsStopSale({
+        goodsId:selectData.goodsId,	// 商品id
+        itemType:selectData.itemType, // 要删除的商品类型
+        isDelete:isDelete
+    }).then(res => {
+      if (res.data.status_code == 200) {
+        if(isDelete == 1){
+          app.showToastC('删除成功');
+          var order = _this.data.order || [];
+          order.splice(_this.data.orderNum, 1)　
+          _this.setData({
+            commonBulletFrame:false,
+            order
+          });
+        }else{
+          app.showToastC('下架成功',1500);
+          setTimeout(function(){
+            _this.getData()
+          },1500)
+        }
+      }else{
+        if(res.data && res.data.message){
+          app.showModalC(res.data.message); 
+        };        
+      }          
+    })
   },
 
   //  复制内容到粘贴板

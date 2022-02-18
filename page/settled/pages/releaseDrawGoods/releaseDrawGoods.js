@@ -299,6 +299,7 @@ Page({
     // '已经授权'
     this.setData({
       id: options.id || '',
+      itemstatus: options.itemstatus || '', //itemstatus==3为已结束进入
       previewActivityKey:`${app.signindata.uid}_${Date.parse(new Date())}`
     })
     console.log(this.data.previewActivityKey)
@@ -539,9 +540,9 @@ Page({
           [`listData1[2].value`]:info.quota,
           [`listData1[3].value`]:info.goodsPrice,
           // [`listData1[4].value`]:info.integral,
-          [`listData2[0].time`]:util.format1("yyyy-MM-dd HH:mm",info.startTime),
-          [`listData2[1].time`]:util.format1("yyyy-MM-dd HH:mm",info.stopTime),
-          [`listData2[2].time`]:util.format1("yyyy-MM-dd HH:mm",info.finalPayTime),
+          [`listData2[0].time`]:this.data.itemstatus==''?util.format1("yyyy-MM-dd HH:mm",info.startTime):'请选择开始时间',
+          [`listData2[1].time`]:this.data.itemstatus==''?util.format1("yyyy-MM-dd HH:mm",info.stopTime):'请选择开始时间',
+          [`listData2[2].time`]:this.data.itemstatus==''?util.format1("yyyy-MM-dd HH:mm",info.finalPayTime):'请选择开始时间',
           [`listData3[0].radioArr[${info.shippingMothed}].groupsIndex`]:info.logisticsIndex,
           [`listData3[0].index`]:info.shippingMothed,
           [`listData3[1].value`]:info.deliverTime,
@@ -577,9 +578,9 @@ Page({
         obj.flatPatternmaking = info.goodsThumb;
         obj.goodsNum = info.quota;
         obj.goodsPrice = info.goodsPrice;
-        obj.startTime = util.format1("yyyy-MM-dd HH:mm",info.startTime);
-        obj.stopTime = util.format1("yyyy-MM-dd HH:mm",info.stopTime);
-        obj.finalPayTime = util.format1("yyyy-MM-dd HH:mm",info.finalPayTime);
+        obj.startTime = this.data.itemstatus==''?util.format1("yyyy-MM-dd HH:mm",info.startTime):'';
+        obj.stopTime = this.data.itemstatus==''?util.format1("yyyy-MM-dd HH:mm",info.stopTime):'';
+        obj.finalPayTime = this.data.itemstatus==''?util.format1("yyyy-MM-dd HH:mm",info.finalPayTime):'';
         obj.logisticsIndex = info.logisticsIndex,
         obj.modeOfDespatch = info.shippingMothed,
         obj.shipping = info.shipping;

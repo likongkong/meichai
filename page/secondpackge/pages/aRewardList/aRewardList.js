@@ -339,6 +339,7 @@ Page({
     }
   },
   classifyChange(e){
+    console.log(e)
     let that = this;
     let index = e.currentTarget.dataset.index;
     let name = e.currentTarget.dataset.name;
@@ -354,6 +355,7 @@ Page({
     query.select(ele).boundingClientRect();
     query.exec(function(res) {
       console.log(res[0])
+      console.log(e)
       that.setData({
         scrollleft:e.currentTarget.offsetLeft - wx.getSystemInfoSync().windowWidth/2 + (res[0].width/2)
       })

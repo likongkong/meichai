@@ -3,6 +3,10 @@
 page{
   background:#f4f5f9;
 }
+.flex{
+  display: flex;
+  align-items: center;
+}
 .omBox{
   width: 100%;
   padding: 20rpx 0 140rpx 0;
@@ -140,7 +144,18 @@ page{
   width: 500rpx;
   float: right;
   height: 140rpx;
-  position: relative;
+  /* position: relative; */
+  display: flex;
+  justify-content: space-between;
+  flex-direction:column;
+}
+.itemTag{
+  background: #5CA7FE;
+  color: #fff;
+  font-size: 26rpx;
+  padding: 4rpx 8rpx;
+  border-radius: 6rpx;
+  margin-left: 34rpx;
 }
 .obcrTop{
   display: flex;
