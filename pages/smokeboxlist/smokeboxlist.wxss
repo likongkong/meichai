@@ -490,3 +490,15 @@ page {
   background-color:#5CA7FE;
   margin: 0 auto;
 }
+.vipReappearancesubList{
+  height: 40rpx;
+  line-height: 40rpx;
+  color: #333;
+  font-size: 24rpx;
+  padding: 0 30rpx;
+  border-radius: 40rpx;
+  color: #fff;
+  font-size: 24rpx;
+  background: #eeae19;
+  float: right;
+}
