@@ -741,12 +741,12 @@
 
 			<view style='width:{{iewidth}}rpx;height:{{iefheight}}rpx;margin:0 auto;' class='{{ischangeagain?"changebox":""}} card-module'>
 				<view style="width:{{iewidth}}rpx;height:{{iefheight}}rpx;position:relative;" catchtap="clickCard">
-					<view class="{{showClass ? 'frontm' : 'front'}} card-item">
+					<!-- <view class="{{showClass ? 'frontm' : 'front'}} card-item"> -->
 						<image style='width:{{iewidth}}rpx;' mode="widthFix" src='{{awardfront}}' bindload='imageLoadad'></image>
-					</view>
-					<view class="{{showClass ? 'backm' : 'back'}} card-item">
+					<!-- </view> -->
+					<!-- <view class="{{showClass ? 'backm' : 'back'}} card-item">
 						<image style='width:{{iewidth}}rpx;' mode="widthFix" src='{{awardback}}' bindload='imageLoadad'></image>
-					</view>
+					</view> -->
 				</view>
 			</view>
 			<view class="closeawardBox" data-type='1' catchtap='closeaward'>恭喜您获得{{awardname}}</view>
@@ -1552,7 +1552,7 @@
 		<image src="../images/forknumber.png" mode="widthFix"></image>
 		<view>
 			<text>非常抱歉</text>
-			<text>支付超时，抽盒失败</text>
+			<text>支付超时，所选款式已释放</text>
 			<text>支付金额即将原路退回</text>
 			<view class="hideBtn" catchtap="hidePayFinishMask">知道了</view>
 		</view>
