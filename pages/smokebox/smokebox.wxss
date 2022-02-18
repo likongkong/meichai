@@ -1398,7 +1398,7 @@ margin-top: 20rpx;
   background:#E8E8E9;opacity:1;position: absolute;left: 0;
 }
 .ishowboxBoxChildTxt{
-  font-size:25rpx;color:#1989fa;margin:35rpx 35rpx;
+  font-size:25rpx;color:#1989fa;margin:35rpx 35rpx;z-index: 10;position: absolute;
 }
 .ishowxrayBox{
   width:500rpx;height:500rpx;background:white;position:absolute;top:0;bottom:0;left:0;right:0;margin:auto;font-size:25rpx;padding:20rpx;border-radius:10rpx;
@@ -1442,5 +1442,26 @@ margin-top: 20rpx;
 .smokeBoxTiemName{
   width:160rpx;height:46rpx;line-height:46rpx;font-size:26rpx;float:left;margin-left:3rpx;
 }
-
-
+.smokeboxCountDownWrap{
+  width: 100%;height: auto;display: inline-block; position: fixed;top: 0px;left: 0;z-index: 0;text-align: center;font-size: 24rpx;margin: 35rpx 35rpx;
+}
+.maskWrap{
+  width: 100%;height: 100%;background: rgba(0, 0, 0, 0.4);z-index: 100;position: fixed;top: 0;left: 0;display: flex;justify-content: center;align-items: center;
+}
+.maskBox{
+  position: relative;width: 580rpx;height: auto;background: #fff;border-radius: 16rpx;padding: 100rpx 100rpx 50rpx 100rpx;box-sizing: border-box;
+}
+.maskBox image{
+  width: 35rpx;
+  height: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 25rpx;
+}
+.maskBox text{
+  display: block;font-size: 30rpx;width: 100%;text-align: center;margin-bottom: 20rpx;
+}
+.hideBtn{
+  background: #5CA7FE;font-size: 28rpx;text-align: center;width: 364rpx;height: 90rpx;color: #fff;line-height: 90rpx;border-radius: 16rpx;margin-top: 80rpx;
+}

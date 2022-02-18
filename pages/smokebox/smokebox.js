@@ -253,7 +253,7 @@ Page({
     isScrapingCard:false,
     // 适配苹果X
     isIphoneX: app.signindata.isIphoneX, 
-
+    isPayFinish:false    //超时支付弹框
   },
 
   boxBenefitsFun(event){
@@ -1002,7 +1002,6 @@ Page({
     var _this = this;
     clearInterval(_this.data.timer)
     console.log(_this.data.recordtime,777777)
-
     _this.data.timer = setInterval(function () {
       //将时间传如 调用 
       _this.dateformat(_this.data.recordtime);
@@ -1901,7 +1900,8 @@ Page({
 
 
   // 微信支付
-  paymentmony: function () {
+  paymentmony: function (num=0) {   //num==0为单盒支付  ==1为端盒支付
+    let nowTime = Date.parse(new Date())/1000;
     var _this = this;
     var q = Dec.Aese('mod=operate&operation=prepay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=1&oid=' + _this.data.cart_id + '&xcx=1' + '&openid=' + _this.data.openid)
     wx.request({
@@ -1922,6 +1922,15 @@ Page({
             'signType': 'MD5',
             'paySign': res.data.Info.paySign,
             'success': function (res) {
+              if(num == 0){
+                let payFinishTime = Date.parse(new Date())/1000;  //支付完成时间
+                if((payFinishTime-nowTime)>=30){  //支付完成时间-拉起支付时间>=30秒弹出支付超时弹框
+                  _this.setData({
+                    tipbacktwo: false,buybombsimmediately: false,suboformola: false,ishowsurebuy: false,ishowcard: false,desc: '',isloadfun:false,isPayFinish:true
+                  });
+                  return false;
+                }
+              }
               setTimeout(function () {
                 var cart_id = _this.data.cart_id || '0';
                 _this.setData({
@@ -1942,11 +1951,9 @@ Page({
                 } else {
                   app.showToastC('购买成功');
                 }
-
                 wx.hideLoading();
                 if (_this.data.iswholePay) {
                   _this.getPatchInfo();
-                  
                   var wholeBoxGiftInfo = _this.data.wholeBoxGiftInfo || '';
                   if(wholeBoxGiftInfo&&wholeBoxGiftInfo.goods_thumbHidden){
                     _this.setData({
@@ -1954,21 +1961,13 @@ Page({
                       ['wholeBoxGiftInfo.goods_name']: wholeBoxGiftInfo.goods_nameHidden,
                     })
                   }
-
                 } else {
-
                   // clearInterval(_this.data.timer);
-                  
                   // _this.instantopen()
-                  
-
                   _this.ubpackbox()
                   _this.queueup(2, 6,true)
-
                 }
-
               }, 1000);
-
             },
             'fail': function (res) {
               _this.setData({
@@ -1992,7 +1991,12 @@ Page({
       }
     })
   },
-
+  // 关闭支付超时弹框
+  hidePayFinishMask(){
+    this.setData({
+      isPayFinish: false
+    });
+  },
   // 时间格式化输出，将时间戳转为 倒计时时间
   dateformat: function (micro_second) {
     var _this = this
@@ -2451,29 +2455,23 @@ Page({
   },
   wholebox: function () {
     var _this = this;
-
     if (this.data.isAboveQuota) {
       app.showToastC('已经超出限额了');
       return false;
     };
-
     wx.showLoading({
       title: '加载中',
       mask:true,
     })
-
     var orderid = _this.data.order_id;
     var aid = _this.data.tipaid?_this.data.tipaid:-1;
-
     // 提交订单蒙层
     _this.setData({
       suboformola: true,
       iswholePay: true,
     });
-    
     var q = Dec.Aese('mod=blindBox&operation=openWholeBox&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&aid=' + aid + '&desc=' + _this.data.desc + '&isRepeatOpen=' + _this.data.isRepeatOpen + '&isDeduct='+(_this.data.isUseDeduct?1:0));
     console.log('mod=blindBox&operation=openWholeBox&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&aid=' + aid + '&desc=' + _this.data.desc + '&isRepeatOpen=' + _this.data.isRepeatOpen + '&isDeduct='+(_this.data.isUseDeduct?1:0))
-
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q,
       method: 'GET',
@@ -2502,7 +2500,7 @@ Page({
           };
 
           // 微信支付
-          _this.paymentmony()
+          _this.paymentmony(1)
         } else {
           // 提交订单蒙层
           _this.setData({
