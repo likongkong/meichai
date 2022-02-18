@@ -161,10 +161,10 @@
 							<image class="brandAuthenticationIcon" wx:if="{{brandinfo.isAuth}}" src="https://cdn.51chaidan.com/images/brandSettledIcon/AuthenticationOk.png" mode="widthFix"></image>
 						</view>
 						<view>
-							<!-- <text class="{{!brandinfo.isAttention?'concernBtn':'concernBtnNo'}}" data-type='0' data-id='{{brandinfo.brandId}}' catchtap='followfun'>
+							<text class="{{!brandinfo.isAttention?'concernBtn':'concernBtnNo'}}" data-type='0' data-id='{{brandinfo.brandId}}' catchtap='followfun'>
 								<block wx:if='{{!brandinfo.isAttention}}'>关注</block>
 								<block wx:else>已关注</block>
-							</text> -->
+							</text>
 						</view>
 					</view>
 					<view class="brandCorrelationPlatform">
@@ -334,7 +334,7 @@
 
 		</view>
     <view class="newDrawBSButBox">
-				<view class="nDbsBnotice" wx:if='{{infoActivity.status==1}}' catchtap='subscrfun' style="background:#EEAE19;">活动开始通知我</view>
+				<view class="nDbsBnotice" wx:if='{{infoActivity.status==1}}' catchtap='{{(brandinfo && !brandinfo.isAttention)?"FollowSubscription":"subscrfun"}}' style="background:#EEAE19;">活动开始通知我</view>
 				<!-- catchtap="jumpWinningList" data-id='{{infoActivity.id}}' data-type='1' -->
 				<block wx:if='{{infoActivity.status==2}}'>
 					  <block wx:if='{{infoActivity.isSign}}'>

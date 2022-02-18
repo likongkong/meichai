@@ -5108,43 +5108,7 @@ Page({
               BrandConcernTip:false
             })
             if(_this.data.zunmdata.status == 1 || _this.data.zunmdata.status == 0){
-              console.log(11111111111111,_this.data.subscribedata)
-              var subscribedata = _this.data.subscribedata || '';
-              if (subscribedata && subscribedata.template_id && app.signindata.subscribeif) {
-                if (subscribedata.template_id instanceof Array) {
-                  wx.requestSubscribeMessage({
-                    tmplIds: subscribedata.template_id || [],
-                    success(res) {
-                      var is_show_modal = true;
-                      for (var i = 0; i < subscribedata.template_id.length; i++) {
-                        if (res[subscribedata.template_id[i]] == "accept") {
-                          if(_this.data.specialGoods == 1 && _this.data.zunmdata.debuff == 3){  // 手机壳 要传订阅的是哪款
-                            app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i],_this.data.selectShell.roleId ||'');
-                          }else{
-                            app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
-                          }
-                          
-                          if (is_show_modal) {
-                            _this.subshowmodalfun();
-                            is_show_modal = false;
-                          };
-                        };
-                      };
-                    },
-                    complete() { }
-                  })
-                } else {
-                  wx.requestSubscribeMessage({
-                    tmplIds: [subscribedata.template_id || ''],
-                    success(res) {
-                      if (res[subscribedata.template_id] == "accept") {
-                        app.subscribefun(_this, 0, subscribedata.template_id, subscribedata.subscribe_type);
-                        _this.subshowmodalfun();
-                      };
-                    }
-                  })
-                };
-              };
+              _this.subscrfun();
             }else if(_this.data.zunmdata.goods_type==3){
                 if(_this.data.zunmdata.status==2){
                     if(_this.data.zunmdata.isDisplayDeposit){
@@ -5153,42 +5117,7 @@ Page({
                               _this.dsbffunblock()
                             }else{
                               if(specialGoods == 1){
-                                var subscribedata = _this.data.specSubscribe || '';
-                                if (subscribedata && subscribedata.template_id && app.signindata.subscribeif) {
-                                  if (subscribedata.template_id instanceof Array) {
-                                    wx.requestSubscribeMessage({
-                                      tmplIds: subscribedata.template_id || [],
-                                      success(res) {
-                                        var is_show_modal = true;
-                                        for (var i = 0; i < subscribedata.template_id.length; i++) {
-                                          if (res[subscribedata.template_id[i]] == "accept") {
-                                            if(_this.data.specialGoods == 1 && _this.data.zunmdata.debuff == 3){  // 手机壳 要传订阅的是哪款
-                                              app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i],_this.data.selectShell.roleId ||'');
-                                            }else{
-                                              app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
-                                            }
-                                            
-                                            if (is_show_modal) {
-                                              _this.subshowmodalfun();
-                                              is_show_modal = false;
-                                            };
-                                          };
-                                        };
-                                      },
-                                      complete() { }
-                                    })
-                                  } else {
-                                    wx.requestSubscribeMessage({
-                                      tmplIds: [subscribedata.template_id || ''],
-                                      success(res) {
-                                        if (res[subscribedata.template_id] == "accept") {
-                                          app.subscribefun(_this, 0, subscribedata.template_id, subscribedata.subscribe_type);
-                                          _this.subshowmodalfun();
-                                        };
-                                      }
-                                    })
-                                  };
-                                };
+                                _this.subscrfun();
                               }
                             }
                         }else{
@@ -5196,42 +5125,7 @@ Page({
                         }
 
                     }else{
-                      var subscribedata = _this.data.subscribedata || '';
-                      if (subscribedata && subscribedata.template_id && app.signindata.subscribeif) {
-                        if (subscribedata.template_id instanceof Array) {
-                          wx.requestSubscribeMessage({
-                            tmplIds: subscribedata.template_id || [],
-                            success(res) {
-                              var is_show_modal = true;
-                              for (var i = 0; i < subscribedata.template_id.length; i++) {
-                                if (res[subscribedata.template_id[i]] == "accept") {
-                                  if(_this.data.specialGoods == 1 && _this.data.zunmdata.debuff == 3){  // 手机壳 要传订阅的是哪款
-                                    app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i],_this.data.selectShell.roleId ||'');
-                                  }else{
-                                    app.subscribefun(_this, 0, subscribedata.template_id[i], subscribedata.subscribe_type[i]);
-                                  }
-                                  
-                                  if (is_show_modal) {
-                                    _this.subshowmodalfun();
-                                    is_show_modal = false;
-                                  };
-                                };
-                              };
-                            },
-                            complete() { }
-                          })
-                        } else {
-                          wx.requestSubscribeMessage({
-                            tmplIds: [subscribedata.template_id || ''],
-                            success(res) {
-                              if (res[subscribedata.template_id] == "accept") {
-                                app.subscribefun(_this, 0, subscribedata.template_id, subscribedata.subscribe_type);
-                                _this.subshowmodalfun();
-                              };
-                            }
-                          })
-                        };
-                      };
+                      _this.subscrfun();
                     }
 
                 }else if(_this.data.zunmdata.status==3&&_this.data.zunmdata.orderSn){
