@@ -1155,9 +1155,7 @@ Page({
     wx.showLoading({
       title: '加载中...',
     })
-
     var q1 = Dec.Aese('mod=blindBox&operation=lineUp&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&type=' + type + '&continuType=' + continuType);
-
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q1,
       method: 'GET',
@@ -1914,8 +1912,9 @@ Page({
               if(num == 0){
                 let payFinishTime = Date.parse(new Date())/1000;  //支付完成时间
                 if((payFinishTime-nowTime)>=30){  //支付完成时间-拉起支付时间>=30秒弹出支付超时弹框
+                  _this.getInfo()
                   _this.setData({
-                    tipbacktwo: false,buybombsimmediately: false,suboformola: false,ishowsurebuy: false,ishowcard: false,desc: '',isloadfun:false,isPayFinish:true
+                    tipbacktwo: false,buybombsimmediately: false,suboformola: false,ishowsurebuy: false,ishowcard: false,desc: '',isloadfun:false,isPayFinish:true,ishowbox:false
                   });
                   return false;
                 }
