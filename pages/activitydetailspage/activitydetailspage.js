@@ -722,13 +722,12 @@ closefrindcommoni:function(){
       //当页面卡死的时候，current的值会变成0 
       var detalNum = detail.detail.current;
       var swiperarr = this.data.swiperarr[detalNum]||{};
-   
       if (this.data.swiperarr.length==2){
          this.setData({
            iftrmoneySymbol:false
          })
       };
-      if (detalNum == 1){
+      if (detalNum == 1 || (this.data.commoddata.status == 3 && detalNum == 0)){
          this.setData({
            taskOrUserImg:false
          });
