@@ -556,7 +556,7 @@ Page({
     var that = this;
     wx.scanCode({ //扫描API
       success(res) { //扫描成功
-        console.log(res) //输出回调信息
+        console.log('快递信息==',res) //输出回调信息
         that.setData({
           scanCodeMsg: res.result
         });

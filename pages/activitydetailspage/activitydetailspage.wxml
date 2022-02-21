@@ -234,15 +234,17 @@
     </swiper>
 
     <view class='actDetailCon' wx:if='{{!taskOrUserImg}}'>
-        <view class="actDetailTxt" wx:if='{{countdown>0}}'>限时 <text style="color:#f93f45;">{{countdown}}s</text> 内助力，免单券翻倍</view>
-        <view class="actDetailTxt" wx:else>邀请好友助力提升中奖率</view>
+        <block wx:if="{{commoddata.status != 3}}">
+          <view class="actDetailTxt" wx:if='{{countdown>0}}'>限时 <text style="color:#f93f45;">{{countdown}}s</text> 内助力，免单券翻倍</view>
+          <view class="actDetailTxt" wx:else>邀请好友助力提升中奖率</view>
+        </block>
         <view class="actDetailTxt" style="padding-top:20rpx;height:60rpx;">
              <view class="actDetailEve" catchtap="mySignatureNum">获得免单券<text style="color:#f93f45;"> {{commoddata.countLotto}}</text></view>
              <view class="actDetailEve" catchtap="sigListFun" style="margin-left:20rpx">免单券排行</view>
         </view>
     </view>
 
-    <view class='aDetSigImgBox' wx:if='{{commoddata.actor.length!=0&&taskOrUserImg}}'>
+    <!-- <view class='aDetSigImgBox' wx:if='{{commoddata.actor.length!=0&&taskOrUserImg}}'>
       <view class='aDetSigImg'>
         <view class='aDetSigImgUp' wx:if='{{commoddata.actor.length!=0}}' catchtap='hdparticipateintheuser' data-hdid='{{commoddata.id}}'>
           <view class='aDetSigImgTitle' style='position:relative;'>已有{{commoddata.truth_users}}人参与，
@@ -253,7 +255,7 @@
           </view>
         </view>
       </view>
-    </view>
+    </view> -->
   </view>
   
   <image wx:if='{{isScrapingCard}}' class="rotate" style="width:100%;height:auto;display:block;margin:30rpx 0 20rpx 0;" catchtap="jumpScrapingCard" mode='widthFix' src="{{goodsInfoAds}}"></image>
@@ -1424,7 +1426,7 @@
                 <text wx:elif='{{item.ratioName == "低"}}' style="color:#58995C;">低</text>
             </view>
          </view>
-         <view class="sListBottom">
+         <view class="sListBottom" wx:if="{{rLUserLotto!=''}}">
             <view class="sListHeadEve sListHeadEF">{{rLUserLotto.id}}</view>
             <view class="sListHeadEve specialellipsis" style="flex:2;text-align:left;"><image class="signaturesImg" mode="aspectFit" src="{{rLUserLotto.headphoto}}"></image>{{rLUserLotto.nick}}</view>
             <view class="sListHeadEve sListHeadEF">{{rLUserLotto.count}}张</view>

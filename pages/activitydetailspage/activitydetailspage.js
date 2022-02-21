@@ -432,7 +432,7 @@ Page({
 
             _this.setData({
               sigListdata:sigListdata || [],
-              rLUserLotto:res.data.Info.userLotto || {}
+              rLUserLotto:res.data.Info.userLotto || ''
             })
             _this.setData({signatureList:!_this.data.signatureList})
           } else {
@@ -2134,6 +2134,8 @@ closefrindcommoni:function(){
           //   aeve=true;
           // };
 
+        
+
           if (aeve){
                 if (arrlist.is_receive == 2) {
                   swiperarr.push({ name: '已领取', subname: '', abcircular: '#F9DCB1', witcircular: '#f18f00', stynum: 1, sizeColor: '#FFF1F1', clickiftr: 8 });
@@ -2197,13 +2199,15 @@ closefrindcommoni:function(){
                     taskOrUserImg:false,
                     swiperIndex: 1
                   });
-
                 } else if (arrlist.status == 2 && (arrlist.is_limit == 1 && arrlist.is_full == 1)) {
                   swiperarr.push({ name: '开奖中', abcircular: '#FBD6D8', witcircular: '#F93F45', stynum: 1 });
                 } else if (arrlist.status == 3 && arrlist.is_receive == 3) {
                   swiperarr.push({ name: '已过期', subname: '未中奖', abcircular: '#CECCCC', witcircular: '#2A2A2A', stynum: 2, sizeColor: '#FFF1F1' });
                 } else if (arrlist.status == 3) {
                   swiperarr.push({name:'已开奖',subname:'重在参与',abcircular:'#E6E6E6',witcircular:'#8A8888',stynum:2});
+                  _this.setData({
+                    taskOrUserImg:false
+                  });
                 };
           }
 
