@@ -1155,9 +1155,7 @@ Page({
     wx.showLoading({
       title: '加载中...',
     })
-
     var q1 = Dec.Aese('mod=blindBox&operation=lineUp&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&type=' + type + '&continuType=' + continuType);
-
     wx.request({
       url: app.signindata.comurl + 'spread.php' + q1,
       method: 'GET',
@@ -1737,11 +1735,9 @@ Page({
   // 提交订单
   placeorder: function (callback) {
     var _this = this;
-
     wx.showLoading({
       title: '加载中',
     })
-
     var id = _this.data.activity.id
     var aid = -1;
     // 提交订单蒙层
@@ -1772,34 +1768,28 @@ Page({
             cart_id: res.data.Info.cart_id,
             payment: res.data.Info.amount,
             awardimg: res.data.Info.imgRole,
-            awardname: res.data.Info.roleName,
+            // awardname: res.data.Info.roleName,
             order_id: res.data.Info.order_id,
             cardTip: res.data.Info.cardTip, //提示卡
             cardXRay: res.data.Info.cardXRay, //透视卡
             awardimglist: res.data.Info.descImg != "" ? [res.data.Info.imgRole, res.data.Info.descImg] : [res.data.Info.imgRole],
-            awardfront: res.data.Info.imgRole,
+            // awardfront: res.data.Info.imgRole,
             awardback: res.data.Info.descImg != "" ? res.data.Info.descImg : res.data.Info.imgRole,
             isheavyroll: false,
             rollbefore: res.data.Info.imgRole,
-
             //显示
             ishowbox: true,
             ishowhalf: false,
-
             isusertip: false,
             isuserray: false,
-
             isusedWelfare: res.data.Info.isWelfare,
             welfareAmount: parseFloat(res.data.Info.welfareAmount),
             usedamount: parseFloat(res.data.Info.amount),
           });
-
           _this.queueup(2, 2)
-
           if(typeof callback == "function") {
             callback();
           }
-
         } else if(res.data.ReturnCode == 359){
           app.showToastC(res.data.Msg);
           setTimeout(()=>{
@@ -1847,15 +1837,12 @@ Page({
 
   updateAddress(){
     var _this = this;
-
     // if (this.data.tipaid == '') {
     //   app.showToastC('请选择地址');
     //   return false;
     // };
-  
     var orderid = _this.data.order_id;
     var aid = _this.data.tipaid;
-
     // 提交订单蒙层
     _this.setData({
       suboformola: true
@@ -1925,49 +1912,41 @@ Page({
               if(num == 0){
                 let payFinishTime = Date.parse(new Date())/1000;  //支付完成时间
                 if((payFinishTime-nowTime)>=30){  //支付完成时间-拉起支付时间>=30秒弹出支付超时弹框
+                  _this.getInfo()
                   _this.setData({
-                    tipbacktwo: false,buybombsimmediately: false,suboformola: false,ishowsurebuy: false,ishowcard: false,desc: '',isloadfun:false,isPayFinish:true
+                    tipbacktwo: false,buybombsimmediately: false,suboformola: false,ishowsurebuy: false,ishowcard: false,desc: '',isloadfun:false,isPayFinish:true,ishowbox:false
                   });
                   return false;
                 }
+                var q = Dec.Aese('mod=blindBox&operation=infoRole&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&orderId=' + _this.data.order_id)
+                console.log('查询款式====','mod=blindBox&operation=infoRole&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&orderId=' + _this.data.order_id)
+                wx.request({
+                  url: app.signindata.comurl + 'spread.php' + q,
+                  method: 'GET',
+                  header: {
+                    'Accept': 'application/json'
+                  },
+                  success: function (res) {
+                    console.log(res)
+                    if (res.data.ReturnCode == 200) {
+                      _this.setData({
+                        awardname: res.data.Info.roleName,
+                        awardfront: res.data.Info.imgRole,
+                      });
+                      _this.payFinishCollback(_this,payinfo);
+                    } else {
+                      _this.setData({
+                        tipbacktwo: false,buybombsimmediately: false,suboformola: false,ishowsurebuy: false,ishowcard: false,desc: '',isloadfun:false,
+                      });
+                      app.showToastC(res.data.Msg);
+                    };
+                  },
+                  fail: function (res) {},
+                  complete: function (res) {}
+                })
+              }else{
+                _this.payFinishCollback(_this,payinfo);
               }
-              setTimeout(function () {
-                var cart_id = _this.data.cart_id || '0';
-                _this.setData({
-                  tipbacktwo: false,
-                  buybombsimmediately: false,
-                  suboformola: false,
-                  ishowsurebuy: false,
-                  ishowcard: false,
-                  desc: '',
-                  isloadfun:false,
-                  isDhRecycleBtn:true,
-                  dhRecycleCount:60
-                });
-                if (payinfo.isFreeBuyOrder) {
-                  wx.navigateTo({
-                    url: "/page/component/pages/hidefun/hidefun?type=1&cart_id=" + _this.data.cart_id
-                  });
-                } else {
-                  app.showToastC('购买成功');
-                }
-                wx.hideLoading();
-                if (_this.data.iswholePay) {
-                  _this.getPatchInfo();
-                  var wholeBoxGiftInfo = _this.data.wholeBoxGiftInfo || '';
-                  if(wholeBoxGiftInfo&&wholeBoxGiftInfo.goods_thumbHidden){
-                    _this.setData({
-                      ['wholeBoxGiftInfo.goods_thumb']: wholeBoxGiftInfo.goods_thumbHidden,
-                      ['wholeBoxGiftInfo.goods_name']: wholeBoxGiftInfo.goods_nameHidden,
-                    })
-                  }
-                } else {
-                  // clearInterval(_this.data.timer);
-                  // _this.instantopen()
-                  _this.ubpackbox()
-                  _this.queueup(2, 6,true)
-                }
-              }, 1000);
             },
             'fail': function (res) {
               _this.setData({
@@ -1990,6 +1969,46 @@ Page({
         };
       }
     })
+  },
+  // 支付成功回调
+  payFinishCollback(_this,payinfo){
+    setTimeout(function () {
+      var cart_id = _this.data.cart_id || '0';
+      _this.setData({
+        tipbacktwo: false,
+        buybombsimmediately: false,
+        suboformola: false,
+        ishowsurebuy: false,
+        ishowcard: false,
+        desc: '',
+        isloadfun:false,
+        isDhRecycleBtn:true,
+        dhRecycleCount:60
+      });
+      if (payinfo.isFreeBuyOrder) {
+        wx.navigateTo({
+          url: "/page/component/pages/hidefun/hidefun?type=1&cart_id=" + _this.data.cart_id
+        });
+      } else {
+        app.showToastC('购买成功');
+      }
+      wx.hideLoading();
+      if (_this.data.iswholePay) {
+        _this.getPatchInfo();
+        var wholeBoxGiftInfo = _this.data.wholeBoxGiftInfo || '';
+        if(wholeBoxGiftInfo&&wholeBoxGiftInfo.goods_thumbHidden){
+          _this.setData({
+            ['wholeBoxGiftInfo.goods_thumb']: wholeBoxGiftInfo.goods_thumbHidden,
+            ['wholeBoxGiftInfo.goods_name']: wholeBoxGiftInfo.goods_nameHidden,
+          })
+        }
+      } else {
+        // clearInterval(_this.data.timer);
+        // _this.instantopen()
+        _this.ubpackbox()
+        _this.queueup(2, 6,true)
+      }
+    }, 1000);
   },
   // 关闭支付超时弹框
   hidePayFinishMask(){
@@ -2236,10 +2255,7 @@ Page({
   },
   showhint: function (w) { // 3猜盒  2提示卡 1透视卡 
     var _this = this
-
     var type = w.currentTarget.dataset.type || w.target.dataset.type;
-
-
     if (type == 1) {
       _this.setData({
         hintstr: '透视卡：使用后可直接显示盒内商品（使用后不可发起猜盲盒）\n获取方式：参加免单活动，上传截图有几率获得；分享6名新朋友围观抽盒可获取。',
