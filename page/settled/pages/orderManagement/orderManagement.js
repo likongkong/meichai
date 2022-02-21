@@ -453,7 +453,13 @@ Page({
     //     complete: function(res) {},
     // })
 
-        api.exportOrder({}).then((res)=>{
+        api.exportOrder({
+          brandid:_this.data.brandid, // 品牌筛选
+          generalScreening:_this.data.centerIndex, // 普通筛选
+          exhibitionOrOrdinary:_this.data.orderType, // 普通订单or展会订单
+          afterSalesScreening:_this.data.afterSaleInd, // 售后筛选
+          searchTerm:_this.data.ordername // 搜索名称
+        }).then((res)=>{
           console.log('导出订单=======',res)
         if (res.data.status_code == 200) {
             _this.copyTBL(res.data.data.Info.file.path || '')
