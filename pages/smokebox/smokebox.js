@@ -893,10 +893,14 @@ Page({
           }
 
           if (activityData.aheadUser == 0 && !_this.data.activity.isInQueue && activityData.status == 2 && _this.data.isqueue && !infoData.isAboveQuota) {
+            if(activityData.isVIPExclusive && !infoData.isVip){
+              
+            }else{
               _this.queueup(1, 0) //排队 
               _this.setData({
                 isqueue: false,
               });
+            }
           };
         
 
