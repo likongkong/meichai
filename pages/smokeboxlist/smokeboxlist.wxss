@@ -502,3 +502,13 @@ page {
   background: #eeae19;
   float: right;
 }
+.vipExclusiveLabel{
+  background: #5CA7FE;
+  float:right;
+  font-size:24rpx;
+  line-height:30rpx;
+  border-radius:7rpx;
+  margin:6rpx 10rpx 0 0;
+  color: #fff;
+  padding: 2rpx 8rpx;
+}

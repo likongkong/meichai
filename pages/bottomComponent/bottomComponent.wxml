@@ -38,7 +38,7 @@
 			<view class='comNavigationEve'>
 				<view style='width:100%;height:100%;position:relative;' bindtap='fashionShow'>
 					<view class='navigationltop' style="height:100rpx;">
-							<image src='https://cdn.51chaidan.com/images/sign/iconMCTS202112.png' mode="aspectFit" style="width:100rpx;height:100rpx;position:absolute;right:0;left:0;margin:0 auto;"></image>
+							<image src='https://cdn.51chaidan.com/images/sign/iconMCTS20220222.png' mode="aspectFit" style="width:100rpx;height:100rpx;position:absolute;right:0;left:0;margin:0 auto;"></image>
 					</view>
 					<!-- <view class='navigationlcon' style="font-weight:bold;font-size:30rpx;">
 						<text style="color:#E5CB3E">秋</text>

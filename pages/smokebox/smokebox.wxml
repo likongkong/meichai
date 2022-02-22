@@ -132,8 +132,9 @@
 
 		<view class='{{ischangebox?"changebox":""}}'>
 			<image class="smokeBoxCTopCover" style='width:{{imgwidth+4}}rpx;' catchtap='iftrdetailpagen' mode="widthFix" src='{{activity.cover}}'></image>
-  
 			<view id='boxindex' class='parentBoxStyle' style="position:relative;width:{{imgwidth}}rpx;">
+				<!-- 判断是否是vip 不是：显示蒙层点击跳转开通vip页面 -->
+				<view class="vipMask" wx:if="{{activity.isVIPExclusive && !isVip}}" catchtap="comjumpwxnav" data-type="9021"></view>
 				<view wx:for='{{roleList}}' wx:key="key">
 					<block wx:if='{{!item.isSoldOut}}'>
 							<view data-n='{{activity.radioImgBox}}' style='width:{{boxwidth}}px;height:{{boxwidth * activity.radioImgBox}}px;' catchtap='{{activity.canOperate?"selectbox":""}}' class="roleListBoxIsSoldOut">
@@ -151,22 +152,16 @@
 								<image class="smokeBoxisInQuOutImg" mode="widthFix" src='{{activity.imgSoldOut}}'></image>
 							</view>
 					</block>
-
-
 				</view>
-
 				<view wx:if='{{activity.isOpenNewBox}}' class="againOpenBox" catchtap="againOpenBox">
 					再开一盒
 				</view>
 			</view>
-
 		</view>
-
 	</view>
 
 	<view wx:if='{{isallready && ishowhalf}}' class="smokeBoxishowhalf">
 		<view class="smokeBoxishowhalfOne">
-
 			<view class="smokeBoxishowhalfThree">
 				<view style="width:150rpx;overflow:hidden;" catchtap='iftrdetailpagen'>
 					<image class="smokeBoxishowhalfImg" src="https://www.51chaidan.com/images/turntable/Magnifier.png"></image>
@@ -174,14 +169,16 @@
 				</view>
 			</view>
 			<view wx:if="{{suplusTry>0}}" catchtap='showrule' class="smokeBoxishowhalfRule">抽盒规则</view>
-
 			<view wx:if='{{suplusTry>0}}' class='tryStyle'>
 				<view style="width:150rpx;" data-isretry='0' catchtap='havetry'>试一试({{suplusTry}}次)</view>
 			</view>
-
 		</view>
-
-		<block wx:if='{{activity.status == 1}}'>
+		<!-- 抽盒按钮 -->
+		<view>
+			<block wx:if='{{activity.isVIPExclusive && !isVip}}'>
+				<image catchtap="comjumpwxnav" data-type="9021" class="VIPExclusiveImg" src="https://cdn.51chaidan.com/images/icon/vipExclusive.png" mode="widthFix"></image>
+			</block>
+			<block wx:elif='{{activity.status == 1}}'>
 				<view class="liveBroadcastStatus">
 					<view class="liveBroadcastStatusOne" style="border-radius: 80rpx;overflow: hidden;"> 
 						<view class='queuebtnstyle2' style="width:100%;" catchtap="blindBoxsubscrfun" class="liveBroadcastStatusThree">
@@ -194,122 +191,91 @@
 						</view>
 					</view>
 				</view>
-		</block>
-
-		<block wx:elif='{{activity.status == 2}}'>
-				<view class="changeABox">
-
-					<view class="changeABoxOne">
-						<view wx:if='{{idlist.length>0}}' class='queuebtnstyle2' style="background:white;float:left;" catchtap='chancebox'>换一盒</view>
-						<view wx:else class='queuebtnstyle2' style="background:#B0B0B0;color:white;float:left;">换一盒</view>
-
-					</view>
-					<view class="changeABoxTwo">
-
-						<view wx:if='{{whole_boxGift}}' class='queuebtnstyle2 changeABoxTwoOne' style=""  catchtap="collectchip">端盒送</view>
-
-					
-						<view wx:elif='{{isOpenWholeBox && activity.status == 2}}' class='queuebtnstyle2 changeABoxTwoOne' catchtap="{{(isDirectOpenWholeBox&&!isDeduct) || (isDirectOpenWholeBox&&isDeduct&&activity.userBlindBoxAmount==0) ? 'wholebox' : 'collectchip'}}">
-								<block wx:if='{{activity.wholeBoxTitle}}'>{{activity.wholeBoxTitle}}</block>
-								<block wx:elif='{{tipCheapForWholeBox>0||activity.wholeBoxSpecialTitle}}'>{{activity.wholeBoxSpecialTitle||'端盒立减'}}</block>
-								<block wx:else>抽整盒</block>
+			</block>
+			<block wx:elif='{{activity.status == 2}}'>
+					<view class="changeABox">
+						<view class="changeABoxOne">
+							<view wx:if='{{idlist.length>0}}' class='queuebtnstyle2' style="background:white;float:left;" catchtap='chancebox'>换一盒</view>
+							<view wx:else class='queuebtnstyle2' style="background:#B0B0B0;color:white;float:left;">换一盒</view>
 						</view>
-
-						<view wx:elif='{{activity.status==1}}' class='queuebtnstyle2' style="background:{{isAboveQuota?'#ccc':'#e94f57'}};color:white;float:left;" catchtap='{{isAboveQuota?"":"lineup"}}'>
-
+						<view class="changeABoxTwo">
+							<view wx:if='{{whole_boxGift}}' class='queuebtnstyle2 changeABoxTwoOne' style=""  catchtap="collectchip">端盒送</view>
+							<view wx:elif='{{isOpenWholeBox && activity.status == 2}}' class='queuebtnstyle2 changeABoxTwoOne' catchtap="{{(isDirectOpenWholeBox&&!isDeduct) || (isDirectOpenWholeBox&&isDeduct&&activity.userBlindBoxAmount==0) ? 'wholebox' : 'collectchip'}}">
+									<block wx:if='{{activity.wholeBoxTitle}}'>{{activity.wholeBoxTitle}}</block>
+									<block wx:elif='{{tipCheapForWholeBox>0||activity.wholeBoxSpecialTitle}}'>{{activity.wholeBoxSpecialTitle||'端盒立减'}}</block>
+									<block wx:else>抽整盒</block>
+							</view>
+							<view wx:elif='{{activity.status==1}}' class='queuebtnstyle2' style="background:{{isAboveQuota?'#ccc':'#e94f57'}};color:white;float:left;" catchtap='{{isAboveQuota?"":"lineup"}}'>
+									<block wx:if='{{limitBuy && limitBuy != 0}}'>
+										<view class="isAboveQuotaImmediately">{{isAboveQuota?"今日已抽完":"立即排队"}}</view>
+										<view class="isAboveQuotaImmediatelyNum">({{limitBuy}}个/人/天)</view>						
+									</block>
+									<block wx:else>立即排队</block>							
+							</view>
+							<view wx:elif='{{activity.aheadUser== 0 && activity.isInQueue && activity.canOperate }}' class='queuebtnstyle2' style="background:{{isAboveQuota?'#ccc':'#e94f57'}};color:white;float:left;" catchtap='{{isAboveQuota?"":"selectbox"}}'>
+									<block wx:if='{{limitBuy && limitBuy != 0}}'>
+										<view class="isAboveQuotaImmediately">{{isAboveQuota?"今日已抽完":"直接选盒"}}</view>
+										<view class="isAboveQuotaImmediatelyNum">({{limitBuy}}个/人/天)</view>						
+									</block>
+									<block wx:else>直接选盒</block>						
+							</view>
+							<view wx:elif='{{activity.isInQueue}}' class='queuebtnstyle2' style="background:{{isAboveQuota?'#ccc':'#e94f57'}};color:white;float:left;">
+								<block wx:if='{{limitBuy && limitBuy != 0}}'>
+									<view class="isAboveQuotaImmediately">{{isAboveQuota?"今日已抽完":"排队中"}}</view>
+									<view class="isAboveQuotaImmediatelyNum">({{limitBuy}}个/人/天)</view>						
+								</block>
+								<block wx:else>排队中</block>
+							</view>
+							<view wx:else class='queuebtnstyle2' style="background:{{isAboveQuota?'#ccc':'#e94f57'}};color:white;float:left;" catchtap='{{isAboveQuota?"":"lineup"}}'>
 								<block wx:if='{{limitBuy && limitBuy != 0}}'>
 									<view class="isAboveQuotaImmediately">{{isAboveQuota?"今日已抽完":"立即排队"}}</view>
 									<view class="isAboveQuotaImmediatelyNum">({{limitBuy}}个/人/天)</view>						
 								</block>
-								<block wx:else>立即排队</block>							
-
+								<block wx:else>立即排队</block>
+							</view>
 						</view>
-
-						<view wx:elif='{{activity.aheadUser== 0 && activity.isInQueue && activity.canOperate }}' class='queuebtnstyle2' style="background:{{isAboveQuota?'#ccc':'#e94f57'}};color:white;float:left;" catchtap='{{isAboveQuota?"":"selectbox"}}'>
-
-								<block wx:if='{{limitBuy && limitBuy != 0}}'>
-									<view class="isAboveQuotaImmediately">{{isAboveQuota?"今日已抽完":"直接选盒"}}</view>
-									<view class="isAboveQuotaImmediatelyNum">({{limitBuy}}个/人/天)</view>						
-								</block>
-								<block wx:else>直接选盒</block>						
-
-						</view>
-
-						<view wx:elif='{{activity.isInQueue}}' class='queuebtnstyle2' style="background:{{isAboveQuota?'#ccc':'#e94f57'}};color:white;float:left;">
-
-							<block wx:if='{{limitBuy && limitBuy != 0}}'>
-								<view class="isAboveQuotaImmediately">{{isAboveQuota?"今日已抽完":"排队中"}}</view>
-								<view class="isAboveQuotaImmediatelyNum">({{limitBuy}}个/人/天)</view>						
-							</block>
-							<block wx:else>排队中</block>
-
-
-
-						</view>
-
-						<view wx:else class='queuebtnstyle2' style="background:{{isAboveQuota?'#ccc':'#e94f57'}};color:white;float:left;" catchtap='{{isAboveQuota?"":"lineup"}}'>
-							<block wx:if='{{limitBuy && limitBuy != 0}}'>
-								<view class="isAboveQuotaImmediately">{{isAboveQuota?"今日已抽完":"立即排队"}}</view>
-								<view class="isAboveQuotaImmediatelyNum">({{limitBuy}}个/人/天)</view>						
-							</block>
-							<block wx:else>立即排队</block>
-						</view>
-
 					</view>
-				</view>
-
-		</block>
-
-    <block wx:elif='{{activity.status == 3}}'>
+			</block>
+			<block wx:elif='{{activity.status == 3}}'>
+					<view class="activityStatusThree">
+						<view style="width:70%;height:80rpx;position:relative;margin:0 auto;">
+							<block wx:if='{{activity.supplyStockTip}}'>
+									<view class='queuebtnstyle2' catchtap="blindBoxsubscrfun" style="background:#eeae19;color:white;float:left;line-height:80rpx;height:80rpx;">补货提醒</view>				
+							</block>
+							<block wx:else>
+									<view class='queuebtnstyle2' style="background:#ccc;color:white;float:left;line-height:80rpx;height:80rpx;">已结束</view>	
+							</block>
+						</view>
+					</view>
+			</block>
+			<block wx:elif='{{activity.status == 4}}'>
 				<view class="activityStatusThree">
-					<view style="width:70%;height:80rpx;position:relative;margin:0 auto;">
-						<block wx:if='{{activity.supplyStockTip}}'>
-								<view class='queuebtnstyle2' catchtap="blindBoxsubscrfun" style="background:#eeae19;color:white;float:left;line-height:80rpx;height:80rpx;">补货提醒</view>				
-						</block>
-						<block wx:else>
-								<view class='queuebtnstyle2' style="background:#ccc;color:white;float:left;line-height:80rpx;height:80rpx;">已结束</view>	
-						</block>
-					</view>
+						<view class="soldOutTips">商品已售罄</view>
+						<view style="width:70%;height:80rpx;position:relative;margin:0 auto;">
+								<view class='queuebtnstyle2' catchtap="{{activity.isSubscribe?'':'blindBoxsubscrfun'}}" style="{{activity.isSubscribe?'background:#E6E3E3;color:#484848;':'background:#eeae19;color:white;'}}line-height:80rpx;height:80rpx;width:100%;font-size:28rpx;">
+										<block wx:if='{{activity.isSubscribe}}'>已设置到货提醒</block>
+										<block wx:else>我想要</block>
+								</view>	
+						</view>
 				</view>
-		</block>
-
-    <block wx:elif='{{activity.status == 4}}'>
-			<view class="activityStatusThree">
-					<view class="soldOutTips">商品已售罄</view>
-					<view style="width:70%;height:80rpx;position:relative;margin:0 auto;">
-							<view class='queuebtnstyle2' catchtap="{{activity.isSubscribe?'':'blindBoxsubscrfun'}}" style="{{activity.isSubscribe?'background:#E6E3E3;color:#484848;':'background:#eeae19;color:white;'}}line-height:80rpx;height:80rpx;width:100%;font-size:28rpx;">
-									<block wx:if='{{activity.isSubscribe}}'>已设置到货提醒</block>
-									<block wx:else>我想要</block>
-							</view>	
+			</block>
+			<block wx:if='{{toyCabinetList && toyCabinetList.length != 0}}'>
+					<view>
+							<view class="singleDisplay">单款展示</view>
+							<scroll-view scroll-x="true" class="singleDisplay_scroll">
+									<view class="sD_s_eve" wx:for='{{toyCabinetList}}' wx:key='key' catchtap='jumpshopbut' data-name='{{item.role_name}}' data-minprice='{{item.minPrice}}' data-maxprice='{{item.maxPrice}}' data-goods_id='{{item.goods_id}}'>
+											<image class="sD_s_eve_img" style="height:auto;" mode='widthFix' src="{{item.goodsImg}}"></image>
+											<view class="sD_s_eve_tit specialellipsis" catchtap='jumpshopbut' data-name='{{item.role_name}}' data-minprice='{{item.minPrice}}' data-maxprice='{{item.maxPrice}}' data-goods_id='{{item.goods_id}}'>{{item.role_name}}</view>
+											<view class="sD_s_eve_tit specialellipsis">
+												<block wx:if='{{item.minPrice==0&&item.maxPrice==0}}'></block>
+												<block wx:else>闲置:<block wx:if='{{item.minPrice!=item.maxPrice}}'>{{item.minPrice}}~{{item.maxPrice}}</block><block wx:else>{{item.maxPrice}}</block>元</block>
+											</view>
+									</view>
+							</scroll-view>			 
 					</view>
-			</view>
-		</block>
-
-    <block wx:if='{{toyCabinetList && toyCabinetList.length != 0}}'>
-				<view>
-						<view class="singleDisplay">单款展示</view>
-						<scroll-view scroll-x="true" class="singleDisplay_scroll">
-
-								<view class="sD_s_eve" wx:for='{{toyCabinetList}}' wx:key='key' catchtap='jumpshopbut' data-name='{{item.role_name}}' data-minprice='{{item.minPrice}}' data-maxprice='{{item.maxPrice}}' data-goods_id='{{item.goods_id}}'>
-										<image class="sD_s_eve_img" style="height:auto;" mode='widthFix' src="{{item.goodsImg}}"></image>
-										<view class="sD_s_eve_tit specialellipsis" catchtap='jumpshopbut' data-name='{{item.role_name}}' data-minprice='{{item.minPrice}}' data-maxprice='{{item.maxPrice}}' data-goods_id='{{item.goods_id}}'>{{item.role_name}}</view>
-										<view class="sD_s_eve_tit specialellipsis">
-											<block wx:if='{{item.minPrice==0&&item.maxPrice==0}}'></block>
-											<block wx:else>闲置:<block wx:if='{{item.minPrice!=item.maxPrice}}'>{{item.minPrice}}~{{item.maxPrice}}</block><block wx:else>{{item.maxPrice}}</block>元</block>
-										</view>
-
-								</view>
-
-						</scroll-view>			 
-				
-				</view>
-		</block>
-
-
-
-
+			</block>
+		</view>
 		<somke wx:if='{{is_exhibition == 0&&brandId<=0}}' colortitle='#000'></somke>
-
 		<block wx:elif='{{is_exhibition==1||(is_exhibition!=1&&brandId>0)}}'>
 				<view class="exhibitionBox">
 					<view class="exhibitionBoxOne">

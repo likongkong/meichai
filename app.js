@@ -985,7 +985,7 @@ App({
       });
     } else if (item_type == 9021) { 
       wx.navigateTo({
-        url: "/page/secondpackge/pages/vipPage/vipPage"
+        url: "/page/secondpackge/pages/vipPage/vipPage"  //开通vip
       });
     } else if (item_type == 9022) { 
       wx.navigateTo({

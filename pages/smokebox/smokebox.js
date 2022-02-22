@@ -3833,5 +3833,9 @@ Page({
       url: "/page/component/pages/ocamcart/ocamcart?name=" + urlname+"&but=shop&goods_id="+goods_id
     });
   }, 
-
+  comjumpwxnav(e){
+    let type = e.currentTarget.dataset.type;
+    let whref = e.currentTarget.dataset.whref;
+    app.comjumpwxnav(type,whref)
+  },
 })

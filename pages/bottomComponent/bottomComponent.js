@@ -61,7 +61,8 @@ Component({
     is_show_modal:true,
     isOpenToyShow:1596729599<Date.parse(new Date())/1000&&Date.parse(new Date())/1000<1596988799?true:false,
     // isOpenToyShow:1596104581<Date.parse(new Date())/1000<1596988799?true:false
-    is_exhibition:Date.parse(new Date())/1000 < 1640534400?true:false,
+    // is_exhibition:Date.parse(new Date())/1000 < 1640534400?true:false,
+    is_exhibition:true,
   },
   /**
    * 组件的方法列表
@@ -82,12 +83,14 @@ Component({
 
       var timestamp = Date.parse(new Date()) / 1000;
       console.log(333333333)
-      if(app.signindata.isOpenToyShow){
+      // app.signindata.isOpenToyShow
+      if(false){
         wx.navigateTo({
           url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
         });
         console.log(111111111)
-      }else if(timestamp >= 1639756800){
+        // timestamp >= 1639756800
+      }else if(false){
         console.log(22222222)
         wx.navigateTo({
           url: "/page/secondpackge/pages/exhibitionlist/exhibitionlist"
