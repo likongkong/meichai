@@ -134,7 +134,7 @@
 			<image class="smokeBoxCTopCover" style='width:{{imgwidth+4}}rpx;' catchtap='iftrdetailpagen' mode="widthFix" src='{{activity.cover}}'></image>
 			<view id='boxindex' class='parentBoxStyle' style="position:relative;width:{{imgwidth}}rpx;">
 				<!-- 判断是否是vip 不是：显示蒙层点击跳转开通vip页面 -->
-				<view class="vipMask" wx:if="{{activity.isVIPExclusive && !isVip}}" catchtap="comjumpwxnav" data-type="9021"></view>
+				<view class="vipMask" wx:if="{{activity.isVIPExclusive && !isVip && activity.status!=4}}" catchtap="comjumpwxnav" data-type="9021"></view>
 				<view wx:for='{{roleList}}' wx:key="key">
 					<block wx:if='{{!item.isSoldOut}}'>
 							<view data-n='{{activity.radioImgBox}}' style='width:{{boxwidth}}px;height:{{boxwidth * activity.radioImgBox}}px;' catchtap='{{activity.canOperate?"selectbox":""}}' class="roleListBoxIsSoldOut">
@@ -175,7 +175,7 @@
 		</view>
 		<!-- 抽盒按钮 -->
 		<view>
-			<block wx:if='{{activity.isVIPExclusive && !isVip}}'>
+			<block wx:if='{{activity.isVIPExclusive && !isVip && activity.status!=4}}'>
 				<image catchtap="comjumpwxnav" data-type="9021" class="VIPExclusiveImg" src="https://cdn.51chaidan.com/images/icon/vipExclusive.png" mode="widthFix"></image>
 			</block>
 			<block wx:elif='{{activity.status == 1}}'>

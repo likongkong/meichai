@@ -169,9 +169,6 @@ Page({
   },
   //跳转商品详情
   jumpGoodsDetails(w){
-
-    return false;
-
     var gid = w.currentTarget.dataset.gid || w.target.dataset.gid;
     var islotto = w.currentTarget.dataset.islotto || w.target.dataset.islotto || false;
     var isblindbox = w.currentTarget.dataset.isblindbox || w.target.dataset.isblindbox || false;
