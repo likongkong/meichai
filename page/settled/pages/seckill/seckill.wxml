@@ -84,30 +84,92 @@
           </view>
         </view>    
     </block>
-
-
   </view>
  
+ <!-- 定金 -->
+ <view class="detailDeposit" wx:if='{{zunmdata.goods_type==3&&zunmdata.status!=3}}'>
+      <view class="deDeposleft">
+          <view class="deDeposst">定金 ￥{{zunmdata.promote_price}}</view>
+          <!-- <view class="deDepPresale">预售价 ￥{{zunmdata.gsale}}</view> -->
+          <view class="deDepPresale">尾款 ￥{{zunmdata.end_price}}</view>
+      </view>
+      <view class="deDeposright">
+          <view wx:if='{{zunmdata.finalDepositTime}}' class="specialellipsis" style="width:100%;height:110rpx;text-align:center;line-height:110rpx;font-size:24rpx;color:#EA4F57;">
+              {{zunmdata.finalDepositTime}}         
+          </view>          
+          <block wx:elif='{{zunmdata.status==2}}'>
+
+            <block wx:if="{{zunmdata.gid == 36875 || zunmdata.gid == 36876 || zunmdata.gid == 36877}}">
+              <block wx:if="{{nowTime < 1621094400}}">
+                <view class="deDepossttime" style="padding: 18rpx 0 10rpx 0;">距离预售结束:</view>
+                <view class="deDepossttime"><block wx:if='{{winningovertimedetail.dayStr}}'>{{winningovertimedetail.dayStr}}天</block>  {{winningovertimedetail.hrStr}}:{{winningovertimedetail.minStr}}:{{winningovertimedetail.secStr}}</view>  
+              </block>
+              <block wx:else>
+                <view style="width:300rpx;height:110rpx;line-height:110rpx;margin-left:20rpx" class="deDepossttime">{{zunmdata.tipFinalPayment}}</view>
+              </block>
+            </block>
+            <block wx:elif="{{zunmdata.gid == 37568 || zunmdata.gid == 37569 || zunmdata.gid == 37573}}">
+              <block wx:if="{{nowTime < 1621094400}}">
+                <view class="deDepossttime" style="padding: 18rpx 0 10rpx 0;">距离预售结束:</view>
+                <view class="deDepossttime"><block wx:if='{{winningovertimedetail.dayStr}}'>{{winningovertimedetail.dayStr}}天</block>  {{winningovertimedetail.hrStr}}:{{winningovertimedetail.minStr}}:{{winningovertimedetail.secStr}}</view>  
+              </block>
+              <block wx:else>
+                <view style="width:300rpx;height:110rpx;line-height:110rpx;margin-left:20rpx" class="deDepossttime">{{zunmdata.tipFinalPayment}}</view>
+              </block>
+            </block>
+            <block wx:elif="{{zunmdata.gid == 37700}}">
+              <block wx:if="{{nowTime < 1621094400}}">
+                <view class="deDepossttime" style="padding: 18rpx 0 10rpx 0;">距离预售结束:</view>
+                <view class="deDepossttime"><block wx:if='{{winningovertimedetail.dayStr}}'>{{winningovertimedetail.dayStr}}天</block>  {{winningovertimedetail.hrStr}}:{{winningovertimedetail.minStr}}:{{winningovertimedetail.secStr}}</view>  
+              </block>
+              <block wx:else>
+                <view style="width:300rpx;height:110rpx;line-height:110rpx;margin-left:20rpx" class="deDepossttime">{{zunmdata.tipFinalPayment}}</view>
+              </block>
+            </block>
+            <block wx:else>
+              <block wx:if='{{zunmdata.depositEndTime}}'>
+                  <block wx:if='{{nowTime < zunmdata.depositEndTime}}'>
+                    <view class="deDepossttime" style="padding: 18rpx 0 10rpx 0;">距离预售结束:</view>
+                    <view class="deDepossttime"><block wx:if='{{winningovertimedetail.dayStr}}'>{{winningovertimedetail.dayStr}}天</block>  {{winningovertimedetail.hrStr}}:{{winningovertimedetail.minStr}}:{{winningovertimedetail.secStr}}</view>  
+                  </block>
+                  <block wx:else>
+                    <view style="width:300rpx;height:110rpx;line-height:110rpx;margin-left:20rpx" class="deDepossttime">{{zunmdata.tipFinalPayment}}</view>
+                  </block>
+              </block>
+              <block wx:else>
+                  <view class="deDepossttime" style="padding: 18rpx 0 10rpx 0;">距离预售结束:</view>
+                  <view class="deDepossttime"><block wx:if='{{winningovertimedetail.dayStr}}'>{{winningovertimedetail.dayStr}}天</block>  {{winningovertimedetail.hrStr}}:{{winningovertimedetail.minStr}}:{{winningovertimedetail.secStr}}</view>
+              </block>
+            </block>
+
+          </block>
+          <view wx:else style="width:100%;height:110rpx;text-align:center;line-height:110rpx;font-size:24rpx;color:#EA4F57;">
+              <block wx:if='{{zunmdata.status==3}}'>预售结束</block>
+              <block wx:elif='{{zunmdata.status==1}}'>{{zunmdata.datatimew}}开售</block>  
+              <block wx:elif='{{zunmdata.status==0}}'>已售罄</block>         
+          </view>
+
+      </view>
+  </view>
 
   <block>
-        <view style="background:#fff;">
-            <view class="sCountDown" wx:if='{{(zunmdata.status == 1 && zunmdata.startTime) || (zunmdata.status == 2 && zunmdata.endTime)}}'><block wx:if='{{zunmdata.status == 1}}'>距开始 </block><block wx:else>距结束 </block>{{winningovertimedetail.dayStr}}天{{winningovertimedetail.hrStr}}小时{{winningovertimedetail.minStr}}分{{winningovertimedetail.secStr}}秒</view>
-            <view class="seckillName">{{zunmdata.shortName}}</view>
-            <view class="sSaleTime" wx:if='{{(zunmdata.status == 1) || (!isShareFun && brandinfo.id)}}'><view class="intraGroupSaleTxt" wx:if='{{zunmdata.status == 1}}'>{{zunmdata.datatimew}}   发售</view><view class="intraGroupSale"  wx:if='{{!isShareFun && brandinfo.id}}'>
-                <!-- <block wx:if='{{zunmdata.}}'>隐藏发售</block>
-                <block wx:else>群内发售</block> -->
-                群内发售
-            </view></view>
-            <view class="sSalePrice"><text style="font-size:22rpx;">￥</text>{{zunmdata.gprice!=0?zunmdata.gprice:''}}<text style="font-size:22rpx;color:#000;" wx:if='{{zunmdata.integral>0}}'>+{{zunmdata.integral}}积分</text></view>
-            <view class="sCountstock">
-                <view class="sCountstockView" wx:if="{{zunmdata.saleQuantity}}">发售数量：<text style="color:#999495;">{{zunmdata.saleQuantity}}</text></view>
-                <view class="sCountstockView" wx:if="{{zunmdata.settledGoodsStockNumbers}}">商品库存：<text style="color:#999495;">{{zunmdata.settledGoodsStockNumbers}}</text></view>
-                <view class="sCountstockView" wx:if="{{zunmdata.settledGoodsRestrictionNumbers}}">限购数量：<text style="color:#999495;">{{zunmdata.settledGoodsRestrictionNumbers}}</text></view>
-                <view class="sCountstockView" wx:if="{{zunmdata.settledGoodsDeliverInfo}}">发货时间：<text style="color:#999495;">{{zunmdata.settledGoodsDeliverInfo}}</text></view>
-                <view class="sCountstockView" wx:if="{{zunmdata.settledGoodsDeliveryMethod}}">发货方式：<text style="color:#999495;">{{zunmdata.settledGoodsDeliveryMethod}}</text></view>
-            </view>
+    <view style="background:#fff;">
+        <view class="sCountDown" wx:if='{{(zunmdata.status == 1 && zunmdata.startTime) || (zunmdata.status == 2 && zunmdata.endTime)}}'><block wx:if='{{zunmdata.status == 1}}'>距开始 </block><block wx:else>距结束 </block>{{winningovertimedetail.dayStr}}天{{winningovertimedetail.hrStr}}小时{{winningovertimedetail.minStr}}分{{winningovertimedetail.secStr}}秒</view>
+        <view class="seckillName">{{zunmdata.shortName}}</view>
+        <view class="sSaleTime" wx:if='{{(zunmdata.status == 1) || (!isShareFun && brandinfo.id)}}'><view class="intraGroupSaleTxt" wx:if='{{zunmdata.status == 1}}'>{{zunmdata.datatimew}}   发售</view><view class="intraGroupSale"  wx:if='{{!isShareFun && brandinfo.id}}'>
+            <!-- <block wx:if='{{zunmdata.}}'>隐藏发售</block>
+            <block wx:else>群内发售</block> -->
+            群内发售
+        </view></view>
+        <view class="sSalePrice"><text style="font-size:22rpx;">￥</text>{{zunmdata.gprice!=0?zunmdata.gprice:''}}<text style="font-size:22rpx;color:#000;" wx:if='{{zunmdata.integral>0}}'>+{{zunmdata.integral}}积分</text></view>
+        <view class="sCountstock">
+            <view class="sCountstockView" wx:if="{{zunmdata.saleQuantity}}">发售数量：<text style="color:#999495;">{{zunmdata.saleQuantity}}</text></view>
+            <view class="sCountstockView" wx:if="{{zunmdata.settledGoodsStockNumbers}}">商品库存：<text style="color:#999495;">{{zunmdata.settledGoodsStockNumbers}}</text></view>
+            <view class="sCountstockView" wx:if="{{zunmdata.settledGoodsRestrictionNumbers}}">限购数量：<text style="color:#999495;">{{zunmdata.settledGoodsRestrictionNumbers}}</text></view>
+            <view class="sCountstockView" wx:if="{{zunmdata.settledGoodsDeliverInfo}}">发货时间：<text style="color:#999495;">{{zunmdata.settledGoodsDeliverInfo}}</text></view>
+            <view class="sCountstockView" wx:if="{{zunmdata.settledGoodsDeliveryMethod}}">发货方式：<text style="color:#999495;">{{zunmdata.settledGoodsDeliveryMethod}}</text></view>
         </view>
-
+    </view>
       <!-- 手机壳样式 -->
       <view wx:if='{{specialGoods==1 && detailSpecColor.length > 1}}' style="background:#fff;padding:20rpx 0;">
         <view class="mscColorSel">{{specCate[1]}}<block wx:if='{{specCate[1]}}'>:</block>{{detailSpecColor[detailColorIndex].name}}</view>
@@ -119,12 +181,22 @@
                 </view>
             </block>        
         </view>
-
       </view>
-
-      
-
   </block>
+    <!-- 定金 -->
+    <view class="dDepositconcent" wx:if='{{zunmdata.goods_type==3}}'>
+      <view class="dDepositcontop">
+          <view class="dDepositcl">尾款</view>
+          <view class="dDepositcltxt" style="color:#ff2742;padding:18rpx 0 5rpx 0;">￥{{zunmdata.end_price}}</view>
+          <view class="dDepositcltxt specialellipsis">{{zunmdata.finalPaymentTime}}</view>
+      </view>
+      <view class="dDepositcontop">
+          <view class="dDepositcl">流程</view>
+          <view class="dDeposibottxt">1.付定金-2.付尾款-3.发货<view class="dDepositxtright" catchtap="depositboxfun">预售规则</view></view>
+      </view>
+    </view>
+    <!-- 定金 end -->
+
      <view wx:if='{{specialGoods==1&& is_exhibition != 1}}' style="background:#fff;padding:15rpx 0;">
         <view class="mscModel">选择{{specCate[0]}}:</view>
         <view class="mscModelBox">

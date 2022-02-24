@@ -506,13 +506,13 @@
           </view>
             <!-- 直播 -->
           <block wx:if='{{livebroadcast&&livebroadcast.length!=0}}'>
-              <swiper style="width:710rpx;margin:auto;height:170rpx;" indicator-dots="{{false}}" circular="true" autoplay="true" interval="3000" duration="450">
+              <swiper style="width:710rpx;margin:auto;height:170rpx;" indicator-dots="{{false}}" circular="true" autoplay="{{true}}" interval="3000" duration="450">
                 <swiper-item  wx:for='{{livebroadcast}}' wx:key='key' wx:for-item='w'>
                     <view style="height:139rpx;background:#fff;position:relative;margin:15rpx 0;border-radius: 10rpx;">
                       <navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{w.room_id}}" style='position: absolute;height:100%;width:100%;left:0rpx;top:0;z-index:3;'></navigator>
                       <view style="overflow:hidden;border-radius:10rpx;">
                         <image style="height:139rpx;width:174rpx;float:left;border-radius:10rpx;"  mode='aspectFit' src="{{w.images}}"></image>
-                        <view style="width:460rpx;height:119rpx;position:relative;float:left;margin:10rpx;">
+                        <view style="width:500rpx;height:119rpx;position:relative;float:left;margin:10rpx;">
                           <view style="font-size:30rpx;">{{w.name}}</view>
                           <view style="width:100%;position:absolute;bottom:0rpx;left:0;">
                             <view wx:if='{{w.status==102}}' style="font-size:25rpx;line-height:30rpx;;color:#fff;float:left;padding:5rpx 10rpx;border-radius:10rpx;background:#32ACFB;">{{w.start_time}}开播</view>
