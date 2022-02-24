@@ -69,7 +69,6 @@
          </scroll-view>
          <view class="billingSubscr" wx:if='{{nowAdmissionTime > drawInfo.ticketTime}}' data-type='7' style="background:#F8657C;" catchtap="jumpposition">去购票</view>
          <view class="billingSubscr" wx:else data-type='7' catchtap="evesubscrfun">开票订阅</view>
-         
       </view>
     </view>    
 
@@ -86,10 +85,8 @@
             </view>
         </scroll-view>
       </view>
-
     </block>
     <!-- 线上潮玩展 -->
-
     <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" id='e2' wx:if='{{liveListData&&liveListData.length!=0}}'>————— 线上展会 —————</view>
     <view class="ssubLiveBroadcast" wx:for="{{liveListData}}" wx:key="key" style="position: relative;">
         <navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{item.room_id}}" style='position: absolute;height:100%;width:500rpx;left:0;top:0;z-index:3;'></navigator>
@@ -107,6 +104,33 @@
 
         </view>
     </view> 
+
+    <!-- 品牌介绍 -->
+    <block wx:if='{{informationListData && informationListData.length != 0}}'>
+        <view class="punchInRewardtxt" style="margin:60rpx 0 20rpx 0;">
+            <image style="width:200rpx;height:auto" src="https://cdn.51chaidan.com/images/toyShow3/ppjs.png" mode="widthFix"></image>
+        </view>
+        <view style="padding:10rpx 23rpx 20rpx;">
+            <view class="brandIntroduction boxShadowT" wx:for='{{informationListData}}' wx:key='key' catchtap="informationListJump" data-index='{{index}}' wx:if='{{index < moreDataNum}}'>
+                <image class="brandIntrodImg" src="{{item.img}}" mode="aspectFit"></image>
+                <view class="brandIntrodContent">
+                     <view class="brandIntCHead specialellipsis">{{item.brand_name}}</view>
+                     <view class="SSAnamebi multilineellipsis">{{item.title}}</view>
+                     <view class="brandFollowb">
+                          <view class="{{item.isFocus?'emlhrightNoBrand':'emlhrightBrand'}}" data-ind='{{index}}' data-type='0' data-id='{{item.brand_id}}' catchtap='{{item.isFocus?"true":"followfun"}}'>
+                              <block wx:if='{{item.isFocus}}'>已关注</block>
+                              <block wx:else>关注</block>
+                          </view>
+                          <view class="brandFollowTxt" catchtap="jumpbanner" data-item_type='9017'  data-href='{{item.brand_id}}'>进入品牌专区</view>
+                     </view>
+                </view>
+            </view>
+            <view class="brandIntrodMore" catchtap="brandIntrodMore" data-ind='1' wx:if='{{informationListData.length > 10}}'>
+                <block wx:if='{{moreDataNum != 9999}}'>查看更多</block>
+                <block wx:else>收起</block>
+            </view>
+        </view>
+    </block>
 
     <block wx:if='{{rewardList && rewardList.length != 0}}'>
         <!-- 一番赏 -->
@@ -247,32 +271,7 @@
         </view>
     </view>
 
-     <!-- 品牌介绍 -->
-     <block wx:if='{{informationListData && informationListData.length != 0}}'>
-        <view class="punchInRewardtxt" style="margin:60rpx 0 20rpx 0;">
-            <image style="width:200rpx;height:auto" src="https://cdn.51chaidan.com/images/toyShow3/ppjs.png" mode="widthFix"></image>
-        </view>
-        <view style="padding:10rpx 23rpx 20rpx;">
-            <view class="brandIntroduction boxShadowT" wx:for='{{informationListData}}' wx:key='key' catchtap="informationListJump" data-index='{{index}}' wx:if='{{index < moreDataNum}}'>
-                <image class="brandIntrodImg" src="{{item.img}}" mode="aspectFit"></image>
-                <view class="brandIntrodContent">
-                     <view class="brandIntCHead specialellipsis">{{item.brand_name}}</view>
-                     <view class="SSAnamebi multilineellipsis">{{item.title}}</view>
-                     <view class="brandFollowb">
-                          <view class="{{item.isFocus?'emlhrightNoBrand':'emlhrightBrand'}}" data-ind='{{index}}' data-type='0' data-id='{{item.brand_id}}' catchtap='{{item.isFocus?"true":"followfun"}}'>
-                              <block wx:if='{{item.isFocus}}'>已关注</block>
-                              <block wx:else>关注</block>
-                          </view>
-                          <view class="brandFollowTxt" catchtap="jumpbanner" data-item_type='9017'  data-href='{{item.brand_id}}'>进入品牌专区</view>
-                     </view>
-                </view>
-            </view>
-            <view class="brandIntrodMore" catchtap="brandIntrodMore" data-ind='1' wx:if='{{informationListData.length > 10}}'>
-                <block wx:if='{{moreDataNum != 9999}}'>查看更多</block>
-                <block wx:else>收起</block>
-            </view>
-        </view>
-    </block>
+     
     <!-- 直播商品 -->
 		<!-- <view class="punchInRewardtxt" style="margin:30rpx 0 20rpx 0;" wx:if='{{goodsListThree&&goodsListThree.goodsList&&goodsListThree.goodsList.length!=0}}' id='e4'>—————— 直播 ——————</view>
     <view style="padding:0 23rpx 20rpx;overflow: hidden;" wx:if='{{goodsListThree&&goodsListThree.goodsList&&goodsListThree.goodsList.length!=0}}'>
