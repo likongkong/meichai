@@ -586,7 +586,7 @@ Page({
         obj.shipping = info.shipping;
         obj.shippingPriceStatus = info.shippingPriceStatus==0?0:1;
         obj.dateToPull = info.deliverTime;
-        obj.explain = info.rule;
+        obj.explain = decodeURI(info.rule);
         obj.goodsDetailsPic = info.arrGoodsDescImg;
         obj.fieldGuideId = info.illustratedInfo && info.illustratedInfo.length>0?info.illustratedInfo[0].id:'';
         obj.associationGoodsId = info.relationGoodsId;
