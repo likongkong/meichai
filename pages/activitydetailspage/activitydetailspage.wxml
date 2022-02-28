@@ -7,12 +7,10 @@
 <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 <view class='headhiddenbox' hidden="{{headhiddengeneratePictures}}"></view>
 <canvas canvas-id='myordercanimgser' class='myordercanimgsernew'></canvas>
-<!-- myordercanimgser  -->
-<!-- canvas生成分享图片 -->
+
 <view class='headhiddenbox' hidden="{{headhidden}}"></view>
 <canvas canvas-id='canimgser' class='canimgsernew'></canvas>
-<!-- canimgser  -->
-<!-- closeupserimg -->
+
 <view class='tgimgbox' wx:if='{{upserimgbox}}'>
   <view class='tgimgboxgb' style='opacity:0.7;'></view>
   <view class='upsertgimgbcon' style='{{windowHeight<500?"height:800rpx;":""}}'>
@@ -75,7 +73,6 @@
 </view>
 
 <view style='width:0;height:0;overflow:hidden;position:absolute;top:-1000px;'>
-  <!-- <view style='width:100%;height:240px;background:#888;display:flex; justify-content:center; align-items:center;'> -->
   <canvas canvas-id='snapshot' style='width:300px; height:240px;'></canvas>
 </view>
 
@@ -111,7 +108,6 @@
       </view>
       <view class='mebchright' wx:elif='{{commoddata.status==2}}'>
         <view wx:if='{{commoddata.is_full==1&&commoddata.is_limit==1}}'>开奖中</view>
-        <!-- <view wx:elif='{{commoddata.is_join==1}}'>已报名</view> -->
         <view wx:elif='{{commoddata.is_join==1}}'>{{toDateTime}} 开奖</view>
         <view wx:elif='{{commoddata.is_full==1}}'>距离开奖 {{countdown}}</view>
         <view wx:elif='{{commoddata.is_limit==1}}'>人满开奖 {{commoddata.truth_users}}/{{commoddata.limit_users}}</view>
@@ -152,7 +148,6 @@
 
             <block wx:if='{{swiperarr.length==2}}'>
               <image src='http://www.51chaidan.com//images/default/lefttoright.png' wx:if='{{index==0}}' class='lefttorightimg'></image>
-              <!-- <image wx:if='{{index==0}}' src='https://www.51chaidan.com/images/default/left_slide.png' class='gestureImg'></image> -->
             </block>
             <block wx:elif='{{swiperarr.length==3}}'>
               <image src='http://www.51chaidan.com//images/default/lefttoright.png' wx:if='{{index==1}}' class='lefttorightimg'></image>
@@ -175,7 +170,6 @@
                     <text class='countDownSwiper' style='color:{{item.witcircular}};'>{{countdown.secStr}}</text>
                   </view>
                   <view class='clickRcont' style='{{item.stynum==3?"padding-top:17rpx;":""}}color:{{item.sizeColor}};{{item.needChance==1?"font-size:22rpx;color:#fff;":""}}' wx:elif='{{item.subname!=1}}'>{{item.subname}}</view>
-                  <!-- <view class='moneySymbol' style='background:{{item.witcircular}}' wx:if='{{swiperarr.length==2&&index==1&&iftrmoneySymbol&&!blackCity}}'>￥</view> -->
 
                   <!-- 分享 -->
                   <view wx:if='{{item.ifshare==1}}' style='width:100%;height:100%;position: absolute;left:0;top:0;z-index:3;'>
@@ -244,18 +238,6 @@
         </view>
     </view>
 
-    <!-- <view class='aDetSigImgBox' wx:if='{{commoddata.actor.length!=0&&taskOrUserImg}}'>
-      <view class='aDetSigImg'>
-        <view class='aDetSigImgUp' wx:if='{{commoddata.actor.length!=0}}' catchtap='hdparticipateintheuser' data-hdid='{{commoddata.id}}'>
-          <view class='aDetSigImgTitle' style='position:relative;'>已有{{commoddata.truth_users}}人参与，
-            <text style='color:#5970F2;'>查看全部></text>
-          </view>
-          <view class='wxfImgaDBox'>
-            <image wx:for='{{commoddata.actor}}' wx:key='key' src='{{item.headphoto}}' wx:if='{{item.headphoto!="../images/pic_headc.png"&&index<18}}' class='wxfImgaD'></image>
-          </view>
-        </view>
-      </view>
-    </view> -->
   </view>
   
   <image wx:if='{{isScrapingCard}}' class="rotate" style="width:100%;height:auto;display:block;margin:30rpx 0 20rpx 0;" catchtap="jumpScrapingCard" mode='widthFix' src="{{goodsInfoAds}}"></image>
@@ -1063,8 +1045,6 @@
     确认
   </view>
 </view>
-
-<!--  活动提示 新人专享提示 ifcomtipiftr==1 机会不足提示 ifcomtipiftr==2-->
 <view class='comtip' wx:if='{{comtipiftr}}' style='z-index:2100;'>
   <view class='comtipback' catchtap='hidcomtip'></view>
   <view class='comtipcon'>

@@ -1841,10 +1841,6 @@ Page({
 
   updateAddress(){
     var _this = this;
-    // if (this.data.tipaid == '') {
-    //   app.showToastC('请选择地址');
-    //   return false;
-    // };
     var orderid = _this.data.order_id;
     var aid = _this.data.tipaid;
     // 提交订单蒙层
@@ -2007,8 +2003,6 @@ Page({
           })
         }
       } else {
-        // clearInterval(_this.data.timer);
-        // _this.instantopen()
         _this.ubpackbox()
         _this.queueup(2, 6,true)
       }
@@ -2026,16 +2020,11 @@ Page({
     var timestamp = Date.parse(new Date())
     //总的秒数 
     var second = parseInt(micro_second) - (timestamp / 1000);
-    // console.log(parseInt(micro_second),777777)
-    // console.log(timestamp / 1000,8888888)
-    // console.log(parseInt(micro_second) - (timestamp / 1000),999999999)
 
-    // console.log('second=====',micro_second,(timestamp / 1000),second)
     if (second > 0) {
       _this.setData({
         remaintime: second,
       })
-      // console.log(second)
       if (second == 5 && _this.data.ishowguess) {
         _this.instantopen()
       }
@@ -2509,7 +2498,6 @@ Page({
             cart_id: res.data.Info.cart_id,
             wholeBoxList: res.data.List.role,
             ishowwholebox: false,
-            // ishowWholeBoxList:true,
           });
 
           if(res.data.Info.wholeBoxGiftInfo&&res.data.Info.wholeBoxGiftInfo.goods_thumb){
@@ -2698,7 +2686,6 @@ Page({
             maxXRay: res.data.Info.maxXRay,
             updateOne: res.data.List.shareGroupImg[0] || 0,
             updateTwo: res.data.List.shareGroupImg[1] || 0,
-            // ishowxray: true,
             cueCardBox:true,
             cardStyle:2
 
@@ -2798,7 +2785,6 @@ Page({
             maxXRay: res.data.Info.maxXRay,
             updateOne: res.data.List.shareGroupImg[0] || 0,
             updateTwo: res.data.List.shareGroupImg[1] || 0,
-            // ishowxray: true,
             cueCardBox:true,
             cardStyle:2
           })
@@ -2827,7 +2813,6 @@ Page({
   wholeBGIDetailfun:function(){
     var wholeBoxGiftInfo = this.data.wholeBoxGiftInfo || [];
     if(wholeBoxGiftInfo&&wholeBoxGiftInfo.goods_desc){
-        // WxParse.wxParse('detail', 'html', wholeBoxGiftInfo.goods_desc, _this, 0);
         var detailDetails = wholeBoxGiftInfo.goods_desc.replace(/<img/gi, '<img style="width:100%;height:auto;display:block;"');
 
         this.setData({
@@ -2982,7 +2967,6 @@ Page({
             });
           }else{
             if (infoData.blindBoxImg && infoData.blindBoxDesc) {
-              // WxParse.wxParse('blindBox', 'html', res.data.Info.blindBoxDesc, _this, 0);
               var blindBoxDetails = infoData.blindBoxDesc.replace(/<img/gi, '<img style="width:100%;display:block;" ');
               _this.setData({
                 blindBoxdetailpageone: true,
@@ -2995,7 +2979,6 @@ Page({
             }
   
             if (infoData.hideBoxImg && infoData.hideBoxDesc) {
-              // WxParse.wxParse('hideBox', 'html', res.data.Info.hideBoxDesc, _this, 0);
               var hideBoxDetails = infoData.hideBoxDesc.replace(/<img/gi, '<img style="width:100%;height:auto;display:block;"');
               _this.setData({
                 hideBoxdetailpageone: true,

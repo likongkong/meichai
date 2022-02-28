@@ -13,10 +13,6 @@
            <image src='../images/myorder_bott.png' wx:if='{{myorhtabtr==1}}' class='myorhtabimg'></image>
            待付款
         </view>
-        <!-- <view class='myorhtab {{myorhtabtr==2?"myorhtabcol":""}}' data-indnum='2' bindtap='myorhfun'>
-            <image src='../images/myorder_bott.png' wx:if='{{myorhtabtr==2}}' class='myorhtabimg'></image>
-            已付款
-        </view> -->
         <view class='myorhtab {{myorhtabtr==3?"myorhtabcol":""}}' data-indnum='3' bindtap='myorhfun'>
             <image src='../images/myorder_bott.png' wx:if='{{myorhtabtr==3}}' class='myorhtabimg'></image>
             待发货
@@ -978,20 +974,7 @@
        <image src='../images/icon_close3.png' class='usericonclose' catchtap='closeupserimg'></image>
    </view>
 </view>
-<!--  图片授权  -->
-<!-- <view class='editorrecom' wx:if='{{picbox}}' style='z-index:9999999;'>
-    <view class='ngbackground'></view>
-    <view class='picbox'>
-        <view class='picboxhead'>授权之后才能保存图片</view>
-        <view class='picboxcon'>
-            <view class='picboxconleft' style='color:#333;' catchtap='imgCanelTg'>取消</view>
-            <view class='picboxconleft' style='color:#11fb3d;position:relative;'>
-               <button open-type="openSetting" bindopensetting="handleSetting" class='picbut'></button>
-               确定
-            </view>
-        </view>
-    </view>
-</view> -->
+
 <!-- canvas生成分享图片 -->
 <view class='headhiddenbox' hidden="{{headhidden}}"></view>
 <!-- closeupserimg  -->

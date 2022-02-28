@@ -49,7 +49,7 @@ Page({
     //   {name:'线上商品',tid:2},
     //   {name:'参展品牌',tid:4}
     // ],
-
+    BrandConcernTip:false,
     shunButBarData:[
 
       {name:'票务信息',tid:1},
@@ -430,7 +430,40 @@ Page({
     _this.subscrfun(1);
 
   },
-
+  BrandConcernTipFun(){
+    this.setData({
+      BrandConcernTip:false
+    })
+  },
+  BrandConcernTipBlock(w){
+    console.log(w)
+    this.setData({
+      BrandConcernTip:true,
+      brandinfo:w.currentTarget.dataset.evedata
+    })
+    this.data.subscrEveData = w;
+    
+  },
+  BrandConcernJoin(){
+    var _this = this;
+    var id = _this.data.brandinfo.brandId || 0;
+    var type = 0;
+    console.log('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id)
+    var qqq = Dec.Aese('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id);
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + qqq,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        console.log('关注=====',res)
+        if (res.data.ReturnCode == 200) {
+          app.showToastC('关注成功');
+          _this.BrandConcernTipFun();
+          _this.evesubscrfun(_this.data.subscrEveData);  
+        };
+      }
+    });
+  },  
   // 每一个拉起订阅
   evesubscrfun:function(w){
     var _this = this;
@@ -585,27 +618,32 @@ Page({
     if(typeEve==1){
         var goodsListOne = _this.data.goodsListOne;
         _this.setData({
-            ['goodsListOne.goodsList['+indexEve+'].is_subscribe']: 1
+            ['goodsListOne.goodsList['+indexEve+'].is_subscribe']: 1,
+            ['goodsListOne.goodsList['+indexEve+'].isAttentionBrand']: true
         })
     }else if(typeEve==2){
       var goodsListTwo = _this.data.goodsListTwo;
       _this.setData({
-            ['goodsListTwo.goodsList['+indexEve+'].is_subscribe']: 1
+            ['goodsListTwo.goodsList['+indexEve+'].is_subscribe']: 1,
+            ['goodsListTwo.goodsList['+indexEve+'].isAttentionBrand']: true
       })
     }else if(typeEve==3){
       var goodsListThree = _this.data.goodsListThree;
       _this.setData({
-          ['goodsListThree.goodsList['+indexEve+'].is_subscribe']: 1
+          ['goodsListThree.goodsList['+indexEve+'].is_subscribe']: 1,
+          ['goodsListThree.goodsList['+indexEve+'].isAttentionBrand']: true
       })
     }else if(typeEve==4){
       var subGoodsList = _this.data.subGoodsList;
       _this.setData({
-          ['subGoodsList.goodsList['+indexEve+'].is_subscribe']: 1
+          ['subGoodsList.goodsList['+indexEve+'].is_subscribe']: 1,
+          ['subGoodsList.goodsList['+indexEve+'].isAttentionBrand']: true
       })
     }else if(typeEve==5){
       var goodsListNew = _this.data.goodsListNew;
       _this.setData({
-          ['goodsListNew.goodsList['+indexEve+'].is_subscribe']: 1
+          ['goodsListNew.goodsList['+indexEve+'].is_subscribe']: 1,
+          ['goodsListNew.goodsList['+indexEve+'].isAttentionBrand']: true
       })
     };
   },

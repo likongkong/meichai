@@ -456,6 +456,12 @@
           "pathName": "page/secondpackge/pages/aRewardList/aRewardList",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/detailspage/detailspage",
+          "pathName": "pages/detailspage/detailspage",
+          "query": "gid=40038",
+          "scene": null
         }
       ]
     }

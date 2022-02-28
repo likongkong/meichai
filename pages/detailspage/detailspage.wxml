@@ -1,11 +1,3 @@
-<!-- 预览遮层 start -->
-<!-- <view class="preview" wx:if="{{isPreview && isPreview==1}}">
-  <view class="preview_footer">
-    <view>返回编辑</view>
-    <view>确认发布</view>
-  </view>
-</view> -->
-<!-- 预览遮层 end -->
 <!--  html页面转换  -->
 <import src="../../wxParse/wxParse.wxml" />
 <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}' is_share='{{is_share}}'></t_f>
@@ -35,10 +27,10 @@
 
 
 <view class='boxdetail {{tipback?"tripList_root":""}}' style="{{!headhidden||newcoupon?'position:fixed;top:0;left:0;right:0;bottom:0;':''}}">
-  <view class='dlhead' style='height:{{specialGoods==1?"750":"500"}}rpx;position:relative;background:#fff;'>
+  <view class='dlhead' style='height:{{specialGoods==1||is_exhibition==1?"750":"500"}}rpx;position:relative;background:#fff;'>
     <!-- 带视频 -->
     <swiper bindchange='swiperchangeindex' bindanimationfinish="changeGoodsSwip" current="{{goodsIndex}}" wx:if='{{isVideoSwiper}}' class="swiper" indicator-color="#fff" indicator-active-color="#ff2742" indicator-dots="{{false}}" circular="true" autoplay="{{isVideoSwiper?false:true}}"
-      interval="15000" duration="450" style='height:{{specialGoods==1?"750":"500"}}rpx;'>
+      interval="15000" duration="450" style='height:{{specialGoods==1||is_exhibition==1?"750":"500"}}rpx;'>
       <swiper-item wx:if='{{isVideoSwiper}}'>
         <view style="width:100%;height:100%;">
           <image class="slide-image watermark" src="{{movies[0].url}}" style="width:100%;height:100%;display:block;" mode='aspectFit'></image>
@@ -59,7 +51,7 @@
       </block>
     </swiper>
     <!-- 不带视频 -->
-    <swiper bindchange='swiperchangeindex' current="{{goodsIndex}}" bindanimationfinish="changeGoodsSwip" wx:else class="swiper" indicator-color="#fff" indicator-active-color="#ff2742" indicator-dots="{{false}}" circular="true" autoplay="true" interval="4000" duration="450" style='height:{{specialGoods==1?"750":"500"}}rpx;'>
+    <swiper bindchange='swiperchangeindex' current="{{goodsIndex}}" bindanimationfinish="changeGoodsSwip" wx:else class="swiper" indicator-color="#fff" indicator-active-color="#ff2742" indicator-dots="{{false}}" circular="true" autoplay="true" interval="4000" duration="450" style='height:{{specialGoods==1||is_exhibition==1?"750":"500"}}rpx;'>
       <swiper-item wx:if='{{zunmdata.firstCover}}'>
         <image src="{{zunmdata.firstCover}}" style="width:100%;height:100%;position:absolute;top:0;bottom:0;right:0;left:0;margin:auto;" mode='aspectFit' class="watermark333" mode='aspectFit'></image>
       </swiper-item>
@@ -342,18 +334,102 @@
       </view>
       <view style="display: flex;margin-bottom:10rpx;" wx:if="{{zunmdata.tipStockOnLine || zunmdata.stockOffLine || zunmdata.giftStock}}"> 
         <view style="width:170rpx;font-size:30rpx">发售数量 :</view> 
-        <view style=""> 
+        <view style="color:#999495;"> 
           <text style="display:block;font-size:30rpx" wx:if='{{zunmdata.giftStock}}'>{{zunmdata.giftStock}}</text>
-          <text style="display:block;font-size:30rpx" wx:if="{{zunmdata.tipStockOnLine}}">{{zunmdata.tipStockOnLine}}</text>
+          <text style="display:block;font-size:30rpx" wx:if="{{zunmdata.toyShowSellNumber}}">{{zunmdata.toyShowSellNumber}}</text>
         </view>
       </view> 
+
+      <view style="display: flex;margin-bottom:10rpx;" wx:if="{{zunmdata.deliver}}"> 
+        <view style="width:170rpx;font-size:30rpx">发货时间 :</view> 
+        <view style="color:#999495;"> 
+          <text style="display:block;font-size:30rpx">{{zunmdata.toyShowSellTime}}</text>
+        </view>
+      </view> 
+
       <view style="display: flex;margin-bottom:10rpx;" wx:if="{{zunmdata.deliver}}"> 
         <view style="width:170rpx;font-size:30rpx">发货方式 :</view> 
-        <view style=""> 
+        <view style="color:#999495;"> 
           <text style="display:block;font-size:30rpx">{{zunmdata.deliver}}</text>
         </view>
       </view> 
   </view>
+
+
+<view wx:if='{{is_exhibition==1||(is_exhibition!=1&&brandId>0)}}' style="width:100%;">
+
+    <view style="padding:0 20rpx 0 20rpx;position:relative;" wx:if='{{brandinfo}}'>
+          <view class="exhibdeimgBox">
+                  <image class="exhibdeimgNewNew" catchtap="gobrandDetails" data-mid='{{brandinfo.id}}' src="{{brandinfo.logo}}" mode="aspectFit"></image>
+                  <view class="exhibdeimgBRight">
+                      <view class="exhibdeimgBRTop">
+                                  <block wx:if='{{brandinfo.boothNumber}}'><text style="color:#31b3fb;">展位:{{brandinfo.boothNumber}}</text> | </block>
+                                  <view class="exhibdeimgBRTopName specialellipsis">{{brandinfo.brandName}}</view>
+                                  <image class="questionMark" wx:if='{{brandinfo.isAuth}}' src="https://cdn.51chaidan.com/images/brandSettledIcon/AuthenticationOk.png" mode="heightFix"></image>
+
+                      </view>
+
+                      <view class="exhibdeimgBRTop" wx:if='{{isOneselfBrand}}' catchtap="jumpFanMan" style="color:#34A9ED;">粉丝管理</view>
+                      <view class="exhibdeimgBRTop" wx:else style="color:#666666;">我的积分：{{BrandInfo.userInteral || 0}}</view>
+                      
+                        <view wx:if='{{isOneselfBrand}}' class="emlhrightP" catchtap="jumpoffering" data-type='9028' data-id='{{brandinfo.id}}' style="background:#91D2D8;">编辑</view>
+                        <view wx:else class="{{!brandinfo.isAttention?'emlhrightP':'emlhrightNoP'}}" data-type='0' data-id='{{brandinfo.id}}'  catchtap='followfun'>
+                                <block wx:if='{{!brandinfo.isAttention}}'>关注</block>
+                                <block wx:else>已关注</block>
+                        </view>
+
+
+                  </view>
+          </view>
+      </view>
+
+
+      <view class="bDappIcomBox" wx:if='{{brandinfo}}'>
+            <view catchtap="{{brandinfo.picFriend?'addfrindcommonifunNew':'noClickTip'}}" data-identif='1' data-url="{{brandinfo.picFriend}}">
+                      <image class="bdaiBoxImg" src="{{brandinfo.picFriend?'https://cdn.51chaidan.com/images/brandInfoIcon/wxOpen.png':'https://cdn.51chaidan.com/images/brandInfoIcon/wxClose.png'}}"></image>
+                      <view class="bdaiBoxTxt">微信</view>
+              </view>
+
+              <view catchtap="{{brandinfo.picPublic?'addfrindcommonifunNew':'noClickTip'}}" data-identif='2' data-url="{{brandinfo.picPublic}}">
+                      <image class="bdaiBoxImg" src="{{brandinfo.picPublic?'https://cdn.51chaidan.com/images/brandInfoIcon/gzhOpen.jpg':'https://cdn.51chaidan.com/images/brandInfoIcon/gzhClose.jpg'}}"></image>
+                      <view class="bdaiBoxTxt">公众号</view>
+              </view>
+
+            <view catchtap="{{brandinfo.microblog?'jumpxcx':'noClickTip'}}" data-identif='3' data-type='1' data-path='{{brandinfo.microblog}}'>
+                      <image class="bdaiBoxImg" src="{{brandinfo.microblog?'https://cdn.51chaidan.com/images/brandInfoIcon/wbOpen.png':'https://cdn.51chaidan.com/images/brandInfoIcon/wbClose.png'}}"></image>
+                      <view class="bdaiBoxTxt">微博</view>
+              </view>
+            <view catchtap="{{brandinfo.redBook?'jumpxcx':'noClickTip'}}" data-identif='4' data-type='2' data-path='{{brandinfo.redBook}}'>
+                      <image class="bdaiBoxImg" src="{{brandinfo.redBook?'https://cdn.51chaidan.com/images/brandInfoIcon/xhsOpen.jpg':'https://cdn.51chaidan.com/images/brandInfoIcon/xhsClose.jpg'}}"></image>
+                      <view class="bdaiBoxTxt">小红书</view>
+              </view>
+      </view>
+
+
+
+      <!-- 直播 -->
+    <block wx:if='{{livebroadcast&&livebroadcast.length!=0}}'>
+        <swiper style="width:710rpx;margin:auto;height:170rpx;" indicator-dots="{{false}}" circular="true" autoplay="{{true}}" interval="3000" duration="450">
+          <swiper-item  wx:for='{{livebroadcast}}' wx:key='key' wx:for-item='w'>
+              <view style="height:139rpx;background:#fff;position:relative;margin:15rpx 0;border-radius: 10rpx;">
+                <navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{w.room_id}}" style='position: absolute;height:100%;width:100%;left:0rpx;top:0;z-index:3;'></navigator>
+                <view style="overflow:hidden;border-radius:10rpx;">
+                  <image style="height:139rpx;width:174rpx;float:left;border-radius:10rpx;"  mode='aspectFit' src="{{w.images}}"></image>
+                  <view style="width:500rpx;height:119rpx;position:relative;float:left;margin:10rpx;">
+                    <view style="font-size:30rpx;">{{w.name}}</view>
+                    <view style="width:100%;position:absolute;bottom:0rpx;left:0;">
+                      <view wx:if='{{w.status==102}}' style="font-size:25rpx;line-height:30rpx;;color:#fff;float:left;padding:5rpx 10rpx;border-radius:10rpx;background:#32ACFB;">{{w.start_time}}开播</view>
+                      <view wx:elif='{{w.status==101}}' style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">直播中</view>
+                      <view wx:elif='{{w.status==103}}' style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">已结束</view>
+                      <view wx:else style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">尚未开播</view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+          </swiper-item>
+        </swiper>
+    </block>
+</view>
 
 <!-- 赠送 -->
 <block wx:if='{{zunmdata.isGiveGoodsStatus == 2 || zunmdata.isGiveGoodsStatus == 1}}'>
@@ -390,7 +466,7 @@
         <view wx:if='{{!exhibdetail}}' style='width:100rpx;height:6rpx;background:#000;position:absolute;left:0;right:0;bottom:0;margin:auto;'></view>
         </view>
         <view style="width:50%;height:100%;{{exhibdetail?'font-size:26rpx;font-weight: bold;':'font-size:24rpx;'}}text-align:center;line-height:80rpx;float:left;position:relative;" data-ind='1' catchtap="exhibdetailfun">
-        品牌专区
+        更多商品
         <view wx:if='{{exhibdetail}}' style='width:100rpx;height:6rpx;background:#000;position:absolute;left:0;right:0;bottom:0;margin:auto;'></view>
         </view>
 
@@ -495,37 +571,14 @@
       <view id='exh1'>
         <!-- 展会 -->
         <view style='width:100%;overflow:hidden;'>
-          <view style="padding:20rpx;overflow:hidden;">
-            <image class="exhibdeimg" catchtap='gobrandDetails' data-mid='{{userbranddata.id}}' mode='aspectFit' src="{{userbranddata.logo}}"></image>
-            <view class="exhibdetxt">
-              <view class="exhibdxtxttitle specialellipsis" catchtap='gobrandDetails' data-mid='{{userbranddata.id}}'>{{userbranddata.brandName}}</view>
-              <view class="exhibdxtxtadd" style="background:#31b3fb;" catchtap="addfrindcommonifun" data-url='{{userbranddata.picPublic}}' data-name='{{userbranddata.brandName}}'>关注公众号</view>
-              <view class="exhibdxtxtadd" style="background:#6aca6b;margin-right:15rpx;" catchtap="addfrindcommonifun" data-url='{{userbranddata.picFriend}}' data-name='{{userbranddata.brandName}}'>添加好友</view>
-              <text style="font-size:26rpx;color:#333;padding:40rpx 0 0 0;text-align:left;line-height:30rpx;padding-top:40rpx;display:block;" wx:if='{{userbranddata.bradDesc}}' catchtap='gobrandDetails' data-mid='{{userbranddata.id}}'>简介：{{userbranddata.bradDesc}}</text>
+          <view class='dltittheme'  id='exh2'>
+            <image class='dttemeimg' src='../images/rad_left.png'></image>
+            <view class='dlttemelef'>
+                更多商品
             </view>
           </view>
-            <!-- 直播 -->
-          <block wx:if='{{livebroadcast&&livebroadcast.length!=0}}'>
-              <swiper style="width:710rpx;margin:auto;height:170rpx;" indicator-dots="{{false}}" circular="true" autoplay="{{true}}" interval="3000" duration="450">
-                <swiper-item  wx:for='{{livebroadcast}}' wx:key='key' wx:for-item='w'>
-                    <view style="height:139rpx;background:#fff;position:relative;margin:15rpx 0;border-radius: 10rpx;">
-                      <navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{w.room_id}}" style='position: absolute;height:100%;width:100%;left:0rpx;top:0;z-index:3;'></navigator>
-                      <view style="overflow:hidden;border-radius:10rpx;">
-                        <image style="height:139rpx;width:174rpx;float:left;border-radius:10rpx;"  mode='aspectFit' src="{{w.images}}"></image>
-                        <view style="width:500rpx;height:119rpx;position:relative;float:left;margin:10rpx;">
-                          <view style="font-size:30rpx;">{{w.name}}</view>
-                          <view style="width:100%;position:absolute;bottom:0rpx;left:0;">
-                            <view wx:if='{{w.status==102}}' style="font-size:25rpx;line-height:30rpx;;color:#fff;float:left;padding:5rpx 10rpx;border-radius:10rpx;background:#32ACFB;">{{w.start_time}}开播</view>
-                            <view wx:elif='{{w.status==101}}' style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">直播中</view>
-                            <view wx:elif='{{w.status==103}}' style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">已结束</view>
-                            <view wx:else style="font-size:25rpx;line-height:30rpx;background:#f08080;color:white;float:left;padding:5rpx 10rpx;border-radius:10rpx;">尚未开播</view>
-                          </view>
-                        </view>
-                      </view>
-                    </view>
-                </swiper-item>
-              </swiper>
-          </block>
+
+
           <view class="exhibboxcon">
             <view style="float:left;margin-left:20rpx;">
               <view class="mexhibboxconeve" wx:for='{{exhdata}}' wx:key='key' wx:if='{{index%2==0}}' catchtap="jumpexhdetail" data-id='{{item.id}}' data-brandid='{{item.brandId}}' data-mtype="{{item.type}}" data-gid='{{item.goodsId}}'>
@@ -808,7 +861,7 @@
           <view class="footer-child large turn" style='height:60rpx;margin-top:9rpx;padding:0;width:200rpx;margin-right:40rpx;background:#f8b21d;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' catchtap="livebroadcast">返回直播间</view>
         </block>
         <block wx:elif='{{zunmdata.gid != 37092}}'>
-          <view class="footer-child large turn" style='height:60rpx;margin-top:9rpx;padding:0;width:120rpx;margin-right:20rpx;background:#f8b21d;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;font-size:24rpx;' wx:if='{{zunmdata.status==1&&subscribedata}}' catchtap='subscrfun'>
+          <view class="footer-child large turn" style='height:60rpx;margin-top:9rpx;padding:0;width:120rpx;margin-right:20rpx;background:#f8b21d;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;font-size:24rpx;' wx:if='{{zunmdata.status==1&&subscribedata}}' catchtap='{{brandinfo&&!brandinfo.isAttention?"BrandConcernTipBlock":"subscrfun"}}'>
             开售提醒<view class="coupposi" wx:if='{{isSubscribeCoupon}}'>订阅送优惠券</view>
           </view>    
         </block>
@@ -952,11 +1005,6 @@
                     </view>
                 </block>
 
-                <!-- <view class="footer-child large sale" style='height:80rpx;margin-top:9rpx;border-radius:10rpx;padding:0;width:255rpx;margin-right:20rpx;background:#999999;' catchtap='subscrfun'>
-                    <view style='width:100%;height:80rpx;text-align:center;color:#fff;line-height:80rpx;font-size:28rpx;'>
-                          支付尾款
-                    </view>
-                </view> -->
             </block>
 
         </block>
@@ -1051,7 +1099,6 @@
                 <view class="addsopcar" style="height:60rpx;line-height:60rpx;" wx:elif='{{zunmdata.status==0}}'>已售罄</view>
                       
                 <text class="addsopcar money" style="height:60rpx;{{zunmdata.limitBuy>0?'line-height:30rpx;font-size:22rpx;':'line-height:60rpx;font-size:30rpx;'}}{{zunmdata.status==2?'background:#FB595F;':''}}border-radius:60rpx;margin-top:0;display:block;position: relative;" wx:elif='{{zunmdata.status==2}}' catchtap="dsbffunblock">
-                  <!-- <button class='shareButton' type='primary' bindtap="getUserProfileCom"></button> -->
                   <block wx:if='{{zunmdata.limitBuy>0}}'>立即购买\n(限购{{zunmdata.limitBuy}}体/人)</block>
                   <block wx:else>立即购买</block>
                 </text>
@@ -1086,7 +1133,7 @@
             <view class="footer-child large turn" style='height:60rpx;margin-top:9rpx;padding:0;width:200rpx;margin-right:40rpx;background:#f8b21d;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' catchtap="livebroadcast">返回直播间</view>
           </block>
           <block  wx:elif='{{zunmdata.gid != 37092}}'>
-            <view class="footer-child large turn" style='height:60rpx;margin-top:9rpx;padding:0;width:200rpx;margin-right:40rpx;background:#f8b21d;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' wx:if='{{zunmdata.status==1&&subscribedata}}' catchtap='subscrfun'>
+            <view class="footer-child large turn" style='height:60rpx;margin-top:9rpx;padding:0;width:200rpx;margin-right:40rpx;background:#f8b21d;text-align:center;line-height:60rpx;color:#fff;border-radius:60rpx;float:right;box-shadow:2px 2px 5rpx #ccc;position: relative;' wx:if='{{zunmdata.status==1&&subscribedata}}' catchtap='{{brandinfo&&!brandinfo.isAttention?"BrandConcernTipBlock":"subscrfun"}}'>
               开售提醒<view class="coupposi" wx:if='{{isSubscribeCoupon}}'>订阅送优惠券</view>
             </view>    
           </block>
@@ -1760,3 +1807,20 @@
 
 
 <poster id="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail"></poster>
+
+<view class="wshNew" catchtouchmove="true" wx:if='{{BrandConcernTip}}' catchtap="BrandConcernTipFun">
+    <view class="BrandConcern" catchtap="true">
+				<image src='../../../../pages/images/cancelthefork.png' class='recgadheadimgfork' catchtap='BrandConcernTipFun'></image>
+				<view class="BrandConcernTopBoxImg">
+					<image class="BrandConcernTop" mode='widthFix' src="{{movies[0].url}}"></image>
+				</view>
+				<view class="BrandConcernBox">
+					  <view class="BrandConcernBoxName">
+								{{brandinfo.brandName}}
+								<image class="BrandConcernLog boxShadowEve" mode='aspectFit' src="{{brandinfo.logo}}"></image>
+						</view>
+						<view class="BrandConcernBoxTxt" wx:if='{{brandinfo.description}}'>{{brandinfo.description}}</view>
+					  <view class="BrandCBBottc">关注品牌后才可以购买商品哦<view class="BconcernButton" data-type='0' data-id='{{brandinfo.id}}' catchtap='BrandConcernJoin'>关注</view></view>
+				</view>
+		</view>
+</view>

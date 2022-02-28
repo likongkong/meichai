@@ -183,23 +183,7 @@ Page({
 
     app.showToastC('敬请期待');
     return false;
-    var _this = this;
-    var qqq = Dec.Aese('mod=getinfo&operation=vipPay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid);
-
-    console.log(app.signindata.comurl + 'order.php?' +'mod=getinfo&operation=vipPay&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid)
-
-    wx.request({
-      url: app.signindata.comurl + 'order.php' + qqq,
-      method: 'GET',
-      header: { 'Accept': 'application/json' },
-      success: function (res) {
-        console.log('开通VIP',res)
-        if (res.data.ReturnCode == 200) {
-
-           _this.paymentmony(res.data.Info.cart_id)
-        };
-      }
-    }) 
+ 
   },
   // 微信支付
   paymentmony:function(cart_id){
@@ -513,7 +497,6 @@ Page({
    */
   pullupsignin:function(){},
   onShow: function () {   
-    // wx.showLoading({ title: '加载中...', mask:true  }) 
     // 判断是否授权 
     var _this = this;
     if(app.signindata.sceneValue==1154){

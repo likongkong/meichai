@@ -1035,7 +1035,6 @@ Page({
     var _this = this;
     // 判断是否登录
     if (_this.data.loginid != '' && _this.data.uid != '') {
-      // _this.shoppingcartlist(1);
       _this.onLoadfun();
       return false;
     };
@@ -1043,38 +1042,24 @@ Page({
       app.signindata.isProduce = true;  
       _this.onLoadfun();
     }else{
-      wx.getSetting({
-        success: res => {
-          if (true) {
-            // '已经授权'
-            _this.setData({
-              loginid: app.signindata.loginid,
-              uid: app.signindata.uid,
-              openid: app.signindata.openid,
-              store_id: app.signindata.store_id || 0,
-              isProduce: app.signindata.isProduce,
-              spreadEntry: app.signindata.spreadEntry,
-              signinlayer: true,
-              tgabox: false,
-              raplist:[]
-            }); 
-            // 判断是否登录
-            if (_this.data.loginid != '' && _this.data.uid != '') {
-              _this.onLoadfun();
-            } else {
-              app.signin(_this)
-            }
-          } else {
-            app.userstatistics(3);
-            // '没有授权'
-            _this.setData({
-              tgabox: false,
-              signinlayer: false
-            });
-
-          }
-        }
-      });
+      // '已经授权'
+      _this.setData({
+        loginid: app.signindata.loginid,
+        uid: app.signindata.uid,
+        openid: app.signindata.openid,
+        store_id: app.signindata.store_id || 0,
+        isProduce: app.signindata.isProduce,
+        spreadEntry: app.signindata.spreadEntry,
+        signinlayer: true,
+        tgabox: false,
+        raplist:[]
+      }); 
+      // 判断是否登录
+      if (_this.data.loginid != '' && _this.data.uid != '') {
+        _this.onLoadfun();
+      } else {
+        app.signin(_this)
+      }
     };
   
   },
@@ -1963,8 +1948,6 @@ Page({
   },
   // 截取字符串后几位
   getStr:function(str){
-    //截取后8位
-    //return str.match(/.*(.{8})/)[1] ;
     //截取后2位
     return str.match(/.*(.{2})/)[1] ;
   },
@@ -2358,37 +2341,25 @@ Page({
   // 点击登录获取权限
   userInfoHandler: function (e) {
     var _this = this;
-    wx.getSetting({
-      success: res => {
-        if (true) {
-          _this.setData({
-            tgabox: false,
-            signinlayer: true,
-          });          
-          // '已经授权'
-          _this.setData({
-            loginid: app.signindata.loginid,
-            uid: app.signindata.uid,
-            openid: app.signindata.openid,
-            store_id: app.signindata.store_id || 0
-          });
-          // 判断是否登录
-          if (_this.data.loginid != '' && _this.data.uid != '') {
-            _this.onLoadfun();
-          } else {
-            app.signin(_this)
-          };
-          // 确认授权用户统计
-          app.clicktga(4);
-        } else {
-          // '没有授权'
-          // 跳转获取权限页面
-          _this.setData({
-            tgabox: true
-          });
-        }
-      }
+    _this.setData({
+      tgabox: false,
+      signinlayer: true,
+    });          
+    // '已经授权'
+    _this.setData({
+      loginid: app.signindata.loginid,
+      uid: app.signindata.uid,
+      openid: app.signindata.openid,
+      store_id: app.signindata.store_id || 0
     });
+    // 判断是否登录
+    if (_this.data.loginid != '' && _this.data.uid != '') {
+      _this.onLoadfun();
+    } else {
+      app.signin(_this)
+    };
+    // 确认授权用户统计
+    app.clicktga(4);
     if (e.detail.detail.userInfo) { } else {
       app.clicktga(8)  //用户按了拒绝按钮
     };

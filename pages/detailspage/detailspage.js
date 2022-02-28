@@ -242,7 +242,6 @@ Page({
     tgfrShareIftr:false,
 
     TimeLimit: 1, // 1 限时 限量， 2 普通商品
-    // isPreview:'',   //isPreview=1为预览，默认''
   },
 
 /**
@@ -254,13 +253,11 @@ Page({
     wx.showLoading({
       title: '生成中...',
     })
-    // setData配置数据
     _this.setData({
       posterConfig: {
         width: 900,
         height: 740,
         debug: false,
-        // pixelRatio: 1000,
         preload: false,
         hideLoading: false,
         backgroundColor: '#ccc',
@@ -378,18 +375,7 @@ Page({
   dSCfun(event){
     var _this = this;
     var index = event.currentTarget.dataset.index || event.target.dataset.index || 0;
-    // var name = this.data.detailSpecColor[index].name;
-    // var arr = [];
-    // console.log(this.data.detailSpecModel)
-    // console.log(this.data.detailSpecColor[index].name)
-    // for(var i = 0; i<this.data.detailSpecModel.length;i++){
-    //   if(this.data.detailSpecModel[i].arrCloseSpec.indexOf(name) != -1){
-    //     arr.push(this.data.detailSpecModel[i])
-    //   }
-    // }
-    // this.setData({
-    //   detailSpecModel:arr
-    // })
+
     
     var detailSpecModel = this.data.detailSpecModel || [];
     var detailSpecColor = this.data.detailSpecColor || [];
@@ -399,9 +385,6 @@ Page({
     })
     var listSpec = this.data.listSpec;
 
-
-    //多款式默认选择第一个 start
-    // if(detailSpecColor.length > 1){
       var indnum = 0;
       var realityStock = '';  //真实库存数据
       var istrue = true;
@@ -425,18 +408,7 @@ Page({
         modelSelInde:indnum,
         detailSpecModel
       })
-      // var indnum = 0;
-      // for(var i=0 ; i < detailSpecModel.length ; i++){
-      //    if(detailSpecModel[i].arrCloseSpec[detailSpecColor[index].name]){
-      //       indnum = i;
-      //       break;
-      //    };
-      // };
-      // _this.setData({
-      //   modelSelInde:indnum
-      // })
-    // }
-    //多款式默认选择第一个 end
+
    
     var modelColor = detailSpecModel[this.data.modelSelInde].name+'-'+detailSpecColor[index].name;
     console.log(listSpec[modelColor])
@@ -497,8 +469,7 @@ Page({
       zunmdata.gprice = listSpec[modelColor].price || 0;
 
       if(zunmdata.status == 2){
-        // zunmdata.isDepositSubscribe = false;
-        // zunmdata.isDisplayDeposit = true;
+
         if(zunmdata.status == 2){
           if(zunmdata.depositInfo && zunmdata.depositInfo[listSpec[modelColor].roleId]){
             zunmdata.isDepositSubscribe = zunmdata.depositInfo[listSpec[modelColor].roleId].isDepositSubscribe;
@@ -558,22 +529,7 @@ Page({
       ifAdopt = true; 
     };
 
-    // for( var i = 0 ; i < detailSpecColor.length ; i++ ){
-    //     var modelColor = detailSpecModel[ind].name+'-'+detailSpecColor[i].name;
-        
-    //     if(listSpec[modelColor]){
-    //       console.log(modelColor,listSpec[modelColor])
-    //       detailSpecColor[i].select = true;
-    //       ifAdopt = true;
-    //       if(assignment){
-    //         assignment = false;
-    //         detailColorIndex = i;
-    //         selectShell = listSpec[modelColor];                    
-    //       }
-    //     } else {
-    //       detailSpecColor[i].select = false;
-    //     };
-    // }; 
+
     var zunmdata = this.data.zunmdata; 
 
     if(ifAdopt){
@@ -670,29 +626,6 @@ Page({
     };
 
 
-
-    // var modelColor = detailSpecModel[e.detail.value].name+'-'+detailSpecColor[this.data.detailColorIndex].name;
-    // if( listSpec[modelColor] && listSpec[modelColor].stock > 0 ){
-    //   var zunmdata = this.data.zunmdata; 
-    //   zunmdata.gsale = listSpec[modelColor].price || 0;
-    //   zunmdata.gprice = listSpec[modelColor].price || 0;
-    //   zunmdata.debuff = 0;
-    //   zunmdata.goods_thumb = listSpec[modelColor].roleImg;
-    //   this.setData({
-    //     modelSelInde:e.detail.value,
-    //     selectShell:listSpec[modelColor],
-    //     zunmdata:zunmdata
-    //   })
-    // }else{
-    //   var zunmdata = this.data.zunmdata; 
-    //   zunmdata.debuff = 3;
-    //   this.setData({
-    //     modelSelInde:e.detail.value,
-    //     selectShell:{},
-    //     zunmdata,
-    //   })
-
-    // };
   },
 
   useBlindboxMoneyFun(){
@@ -859,6 +792,40 @@ Page({
       };
     }.bind(_this), 1000);
   },
+
+  BrandConcernTipFun(){
+    this.setData({
+      BrandConcernTip:false
+    })
+  },
+  BrandConcernTipBlock(w){
+    this.setData({
+      BrandConcernTip:true
+    })
+  },
+  BrandConcernJoin(){
+    var _this = this;
+    var id = _this.data.brandinfo.brandId || 0;
+    var type = 0;
+    console.log('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id)
+    var qqq = Dec.Aese('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id);
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + qqq,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        console.log('关注=====',res)
+        if (res.data.ReturnCode == 200) {
+          app.showToastC('关注成功');
+          _this.setData({
+            ['brandinfo.isAttention']:true
+          })
+          _this.BrandConcernTipFun();
+          _this.subscrfun();
+        };
+      }
+    });
+  },    
   // 拉起订阅
   subscrfun: function (w) {
     var _this = this;
@@ -1014,7 +981,7 @@ Page({
     });
   },
   // 点击改变scrolltop高度
-  slider1change: function (e) {                 //获取slider滑动的当前值
+  slider1change: function (e) {     
     var scrollHeight = this.data.scrollHeight;
     scrollHeight+=50;
     this.setData({
@@ -1048,27 +1015,7 @@ Page({
   qandanswerquestions:function(){
     var _this = this;
     var zunmdata = this.data.zunmdata;
-    // if(zunmdata.isCommand){
-    //   if(_this.data.descpassword == ''){
-    //     _this.placeorder();
-    //   }else if (zunmdata.arrCommand.indexOf(_this.data.descpassword) > -1){
-    //     _this.placeorder();
-    //   }else{
-    //     wx.showModal({
-    //       content: '输入口令错误',
-    //       cancelText: '重新输入',
-    //       confirmText: '直接支付',
-    //       confirmColor:'#000',
-    //       cancelColor: '#000',
-    //       success: function (res) {
-    //         if (res.confirm) {
-    //           _this.placeorder();
-    //         }
-    //       }
-    //     }) 
-    //   }
 
-    // }else 
     if(zunmdata.isNeedConfirm){
         this.closeCommonTip();
         return false;
@@ -1483,7 +1430,6 @@ Page({
       };
     };
     var compriciftr = parseFloat(compric).toFixed(2);
-    // compric = compric;
     var compricbj = compric - parseFloat(_this.data.coudata2mon).toFixed(2);
     // 运费
     var max3 = carriagearr.sort().reverse()[0];
@@ -1568,19 +1514,10 @@ Page({
     var freightiftr = '0.00';
 
 
-    // if(_this.data.zunmdata.isBlindBox){
-      // 商品价格
       var compric = parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling)*parseFloat(this.data.isBlindBoxNum);   
       var compricbj = parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling)*parseFloat(this.data.isBlindBoxNum) - parseFloat(this.data.coudata2mon); 
       // 商品个数
       var mcnum = parseInt(this.data.numberofdismantling)*parseFloat(this.data.isBlindBoxNum);
-    // }else{
-    //   // 商品价格
-    //   var compric = parseFloat(console.log()zunmdata.gsale) * parseFloat(this.data.numberofdismantling);   
-    //   var compricbj = parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling) - parseFloat(this.data.coudata2mon); 
-    //   // 商品个数
-    //   var mcnum = parseInt(this.data.numberofdismantling);
-    // }
     if(zunmdata.isPayShippingFee){
       acc = 0;
       freightiftr = 0;
@@ -1624,27 +1561,15 @@ Page({
      // 应付金额
     var _this = this;
     if (this.data.coupon_type==1){
-      // if(_this.data.zunmdata.isBlindBox){
         var ap = parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling)*parseFloat(this.data.isBlindBoxNum) - parseFloat(this.data.coudata2mon) + acc + txton;
-      // }else{
-      //   var ap = parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling) - parseFloat(this.data.coudata2mon) + acc + txton;
-      // }
 
     }else{
       
-      // if(_this.data.zunmdata.isBlindBox){
         var ap = parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling) *parseFloat(this.data.isBlindBoxNum)* (parseFloat(this.data.coudata2mon) / 10) + acc + txton;
         var coudata2mondiscount = (parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling)*parseFloat(this.data.isBlindBoxNum)) - parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling) * (parseFloat(this.data.coudata2mon) / 10)
         this.setData({
           coudata2mondiscount: coudata2mondiscount.toFixed(2)||'0'
         })
-      // }else{
-      //   var ap = parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling) * (parseFloat(this.data.coudata2mon) / 10) + acc + txton;
-      //   var coudata2mondiscount = (parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling)) - parseFloat(zunmdata.gsale) * parseFloat(this.data.numberofdismantling) * (parseFloat(this.data.coudata2mon) / 10)
-      //   this.setData({
-      //     coudata2mondiscount: coudata2mondiscount.toFixed(2)||'0'
-      //   })       
-      // };
     }
     if (ap <=0){
         ap=0;
@@ -3201,6 +3126,10 @@ Page({
                 console.log('是否播放视频')
                 _this.previewVideo();
               };
+              if(_this.data.brandId){
+                _this.getbrandDetail()
+              }
+
           });
 
           if(!dataGinfo.isGoodsCanShare && _this.data.canShare!=1){
@@ -3442,11 +3371,6 @@ Page({
             app.livebroadcast(_this, res.data.Ginfo.brandId)  // 直播数据
           }
 
-          // if (_this.data.is_exhibition==1||(_this.data.is_exhibition!=1&&_this.data.brandId>0)){
-          //   // 展会
-          //   _this.exhibdatafun(1);
-          //   app.livebroadcast(_this, res.data.Ginfo.brandId)  // 直播数据
-          // }
           // 云统计
           var clouddata = { act_id:'g'+_this.data.id, type: res.data.Ginfo.specialWay || 0 };
           app.cloudstatistics('activityStatistics', clouddata);
@@ -4481,6 +4405,192 @@ Page({
     })
 
   }, 
+
+
+  // 关注 和 点赞 函数
+  followfun: function(w) {
+    var _this = this;
+    var id = w.currentTarget.dataset.id || w.target.dataset.id || 0;
+    var type = w.currentTarget.dataset.type || w.target.dataset.type || 0;
+    var ind = w.currentTarget.dataset.ind || w.target.dataset.ind || 0;
+    var communityList = _this.data.communityList || [];
+    console.log('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id)
+    var qqq = Dec.Aese('mod=community&operation=likeAttention&uid='+_this.data.uid+'&loginid='+_this.data.loginid+'&setType=' + type + '&id=' + id);
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + qqq,
+      method: 'GET',
+      header: {'Accept': 'application/json'},
+      success: function (res) {
+        console.log('关注=====',res)
+        if (res.data.ReturnCode == 200) {
+
+          if(type == 0){
+            _this.data.page = 0;
+            _this.getbrandDetail();
+          }else{
+           var zunmdata = _this.data.zunmdata;
+           var gpraise = zunmdata.gpraise;
+           if(zunmdata.isGoodsPraise){
+              gpraise = parseInt(gpraise) - 1;
+           }else{
+              gpraise = parseInt(gpraise) + 1;
+           }
+           zunmdata.gpraise = gpraise;
+           zunmdata.isGoodsPraise = !zunmdata.isGoodsPraise;
+            _this.setData({
+              zunmdata:zunmdata
+            });
+          }
+
+        };
+      }
+    });
+  },
+
+  // 品牌专区
+
+
+  getbrandDetail: function () {
+    var _this = this;
+    wx.showLoading({
+      title: '加载中...',
+    })
+
+    var exh = Dec.Aese('mod=show&operation=brandSummary&brandId=' + _this.data.brandId + '&page=0&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&type=drying&settlement=0');
+
+    wx.request({
+      url: app.signindata.comurl + 'toy.php' + exh,
+      method: 'GET',
+      header: { 'Accept': 'application/json' },
+      success: function (res) {
+        wx.hideLoading()
+        wx.stopPullDownRefresh();
+        console.log(res) 
+        if (res.data.ReturnCode == 200) {
+
+
+          _this.setData({
+            BrandInfo:res.data.Info,
+            brandinfo: res.data.Info.brand,
+            isOneselfBrand:res.data.Info.isOneselfBrand || false // 用户是否是当前品牌管理者
+
+          })
+          
+        } else {
+
+        };
+      },
+      fail: function () { }
+    });
+  },
+
+
+  addfrindcommonifunNew: function (w) {
+    var _this = this;
+    var url = w.currentTarget.dataset.url || w.target.dataset.url || 0;
+    if (url && url != "") {
+      this.setData({
+        saveimgurlfrpb: url != "" ? url : "https://cdn.51chaidan.com/images/act/1577083808.jpg",
+        addfrindcommoni: !this.data.addfrindcommoni
+      });
+    } else {
+      app.showToastC((_this.data.brandinfo.brandName || '') + '未提供此方式');
+    }
+  },
+  noClickTip(w){
+    var identif = w.currentTarget.dataset.identif || w.target.dataset.identif || 0;
+    switch(parseInt(identif)){
+      case 1: var txt = '微信'; break;
+      case 2: var txt = '公众号'; break;
+      case 3: var txt = '微博'; break;
+      case 4: var txt = '小红书'; break;
+      case 5: var txt = '抖音'; break;
+      default: var txt = '';
+    };
+    app.showToastC('暂未设置'+ txt +'信息');
+  },
+  jumpxcx(w){
+    var type = w.currentTarget.dataset.type || w.target.dataset.type || 0;
+    var path = w.currentTarget.dataset.path || w.target.dataset.path || '';
+    var appId = '';
+    if(type == 1){
+      appId = 'wx9074de28009e1111';
+    }else if(type == 2){
+      appId = 'wxb296433268a1c654';
+    }
+    wx.navigateToMiniProgram({
+         appId: appId,
+         path: path,
+         envVersion: 'release',// 打开正式版
+         success(res) {},
+         fail: function (err) {
+            console.log(err);
+          }
+    })
+  },
+  // 保存图片
+  sharesavethepicture: function () {
+    var _this = this;
+    wx.getImageInfo({
+      src: _this.data.showimg || '',
+      fail: function (res) {
+      },
+      success: function (res) {
+        var imgSrc = res.path;
+        wx.getSetting({
+          success(res) {
+            // 如果没有则获取授权
+            if (!res.authSetting['scope.writePhotosAlbum']) {
+              if (res.authSetting['scope.writePhotosAlbum'] === undefined) {
+                wx.authorize({
+                  scope: 'scope.writePhotosAlbum',
+                  success() {
+                    wx.saveImageToPhotosAlbum({
+                      filePath: imgSrc,
+                      success() {
+                        app.showToastC('保存成功');
+                        _this.setData({ addfrindcommoni: false })
+                      },
+                      fail() {
+                        app.showToastC('保存失败');
+                        _this.setData({ addfrindcommoni: false })
+                      }
+                    })
+                  }
+                })
+              } else {
+                _this.setData({
+                  exhpicsave: true,
+                });
+              }
+            } else {
+              // 有则直接保存
+              wx.saveImageToPhotosAlbum({
+                filePath: imgSrc,
+                success(res) {
+                  app.showToastC('保存成功');
+                  _this.setData({
+                    addfrindcommoni: false
+                  });
+                },
+                fail(res) {
+                  app.showToastC('保存失败');
+                  _this.setData({
+                    addfrindcommoni: false
+                  });
+                }
+              })
+            }
+          }
+        });
+      }
+    })
+  },
+  closefrindcommoni:function(){
+    this.setData({
+      addfrindcommoni: !this.data.addfrindcommoni
+    });
+  },
 
 
 

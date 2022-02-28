@@ -3,7 +3,6 @@
 
 
 <view class="is_vip_box">
-    <!-- <view class="is_vip_h" style="height:30rpx;background:#fff;"></view> -->
     <!-- vip 用户 礼包 -->
     <block wx:if='{{is_vip == 1}}'>
         <view class="viptxtshopname">礼包包含商品（共四件）</view>
@@ -34,9 +33,6 @@
     </block>
     
 </view>
-
-
-<!-- <bnavigation isChar='{{false}}' isProduce='{{isProduce}}'></bnavigation> -->
 
 <tga_c wx:if='{{tgabox}}' bind:run='clicktga' bind:tgnone='clicktganone' bind:userinfo='userInfoHandler'></tga_c>
 

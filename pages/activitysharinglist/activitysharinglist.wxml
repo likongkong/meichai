@@ -2,7 +2,6 @@
     <t_f title='{{c_title}}' arrow='{{c_arrow}}' backcolor='{{c_backcolor}}'></t_f> 
     <view style='width:100%;height:{{statusBarHeightMc}}px;'></view>
 
- <!-- position:fixed;top:{{statusBarHeightMc}}px;left:0;z-index:8; -->
 <view style='width:100%;margin-bottom:10rpx;'>
     <view class='winningthepbox' wx:if='{{isAwardOrder}}' catchtap='jumporder' style='background:#eef0f4;'>
       <view class='winningthepimgtxt'>
@@ -26,7 +25,6 @@
       <view class="sponsoroneButton">关注</view>
   </view> 
 </view>
-<!-- <view style='width:100%;{{isAwardOrder?"height:128rpx;":"height:200rpx;"}}' wx:if='{{spreadEntry}}'></view> -->
 <view class='aslbox'>
 
   <view class='boxcontent'>
@@ -49,10 +47,6 @@
                     <view class='sponsorboxbg'></view>
                 </view>
                 <image src='{{item.cover}}' mode="widthFix" class='bcimgnew'></image>
-                <!-- <view class='aslbcbleftposbootag' catchtap='activitydetailspage' data-id='{{item.id}}' data-type='{{item.type}}'>
-                  <view class='actnewlabel_box specialellipsis'>Vol.{{item.id}}</view>
-                  <view class='actnewlabel_box specialellipsis' wx:for='{{item.tag}}' wx:key='key'>{{item}}</view>
-                </view> -->
               </view>
               <view class='aslbcbrightnew' catchtap='activitydetailspage'  data-id='{{item.id}}' data-type='{{item.type}}'>
                 <view class='acshlbctitle multilineellipsis' style='position:relative;font-size:24rpx;'>
@@ -124,10 +118,7 @@
                 </view>
 
                 <image src='{{item.cover}}' mode="widthFix" class='bcimgnew'></image>
-                <!-- <view class='aslbcbleftposbootag' catchtap='activitydetailspage' data-id='{{item.id}}' data-type='{{item.type}}'>
-                  <view class='actnewlabel_box specialellipsis'>Vol.{{item.id}}</view>
-                  <view class='actnewlabel_box specialellipsis' wx:for='{{item.tag}}' wx:key='key'>{{item}}</view>
-                </view> -->
+
               </view>
               <view class='aslbcbrightnew' catchtap='activitydetailspage'  data-id='{{item.id}}' data-type='{{item.type}}'>
                 <view class='acshlbctitle multilineellipsis' style='position:relative;font-size:24rpx;'>

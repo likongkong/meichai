@@ -1717,62 +1717,6 @@ closefrindcommoni:function(){
       }
     }); 
 
-    // if(num==1){
-    //   var qhd = Dec.Aese('mod=activity&operation=drawPatch&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&shareUId=' + _this.data.shareUId);
-    // }else{
-    //   var qhd = Dec.Aese('mod=activity&operation=drawPatch&uid=' + _this.data.uid + '&loginid=' + _this.data.loginid + '&id=' + _this.data.id + '&shareUId=0');
-    // };
-    // wx.showLoading({ title: '加载中...', mask: true })
-    // wx.request({
-    //   url: app.signindata.comurl + 'spread.php' + qhd,
-    //   method: 'GET',
-    //   header: { 'Accept': 'application/json' },
-    //   success: function (res) {
-    //     console.log('报名================',res)
-    //     wx.hideLoading();
-    //     if (num == 1){
-    //       if (res.data.ReturnCode == 200) {
-    //         var totalPatch = _this.data.totalPatch || 0;
-    //         _this.setData({
-    //           ishowgetchip: true,
-    //           totalPatch: totalPatch,
-    //           isshowusertip: res.data.Msg,
-    //           otherimgarr: res.data.List.patchReceive || [],
-    //           fragreturnCode:200
-    //         });
-    //         _this.detailfun();
-    //       } else if (res.data.ReturnCode == 100) {
-    //         _this.setData({ ishowgetchip: true, otherimgarr: res.data.List.patchReceive || [], isshowusertip: res.data.Msg, fragreturnCode: 100 });
-    //       } else if (res.data.ReturnCode == 201) {
-    //         _this.setData({ ishowgetchip: true, otherimgarr: res.data.List.patchReceive || [], isshowusertip: res.data.Msg, fragreturnCode: 201 });
-    //       } else if (res.data.ReturnCode == 202) {
-    //         _this.placeorder();
-    //         _this.data.shareUId = 0;
-    //         setTimeout(function () {
-    //           _this.detailfun();
-    //         }, 500);
-    //       } else if (res.data.ReturnCode == 203) {
-    //         _this.setData({ ishowgetchip: true, otherimgarr: res.data.List.patchReceive || [], isshowusertip: res.data.Msg, fragreturnCode: 203 });
-    //       };
-    //       _this.data.shareUId = 0;
-    //     }else{
-    //       if (res.data.ReturnCode == 200) {
-    //         app.showToastC(res.data.Msg);
-    //         _this.detailfun();
-    //         _this.subscrfunstar();
-    //       } else if (res.data.ReturnCode == 100 || res.data.ReturnCode == 201 || res.data.ReturnCode == 203) {
-    //         app.showToastC(res.data.Msg);
-    //       } else if (res.data.ReturnCode == 202) {
-    //         _this.placeorder();
-    //         _this.data.shareUId = 0;
-    //         setTimeout(function () {
-    //           _this.detailfun();
-    //         }, 500);
-    //       };
-    //       _this.data.shareUId = 0;          
-    //     }
-    //   }
-    // }); 
   },
   jumporder: function () {
     var _this = this;
@@ -1868,7 +1812,6 @@ closefrindcommoni:function(){
       listBlindBox: [],
       listShowBox : []
     });
-    // clearInterval(this.data.interval);
     var newDate = new Date();
     var m = newDate.getMinutes();
     var s = newDate.getSeconds();
@@ -1884,7 +1827,6 @@ closefrindcommoni:function(){
         if (res.data.ReturnCode == 200) {
           console.log(res)
           var infoshow = res.data.Info;
-          //  && infoshow.couponOverTime
           if (infoshow.infoCoupon && infoshow.infoCoupon.length != 0){
             var couponOverTime = infoshow.couponOverTime||'';
             var infoCoupon = infoshow.infoCoupon||[];
@@ -2175,14 +2117,7 @@ closefrindcommoni:function(){
                 } else if (arrlist.is_receive == 1 && arrlist.isShowOrder == 1 && arrlist.showOrder == 2) {
                   swiperarr.push({ name: '领取奖励', subname: '4.晒单成功', abcircular: '#F9DCB1', witcircular: '#f18f00', stynum: 2, sizeColor: '#FFF1F1', clickiftr: 4, jumpclass: 1 });
                 } else if (arrlist.status == 2 && arrlist.is_join == 1 && arrlist.auditPic != 2) {
-                  // swiperarr.push({ name: '上传截图', subname: '', clickiftr: 2, abcircular: '#8BC34A', witcircular: '#259B24', stynum: 1, sizeColor: '#FFF1F1' });
                   swiperarr.push({ name: '待开奖', subname: '已报名', clickiftr: 2, abcircular: '#FBD6D8', witcircular: '#F93F45', stynum: 2, sizeColor: '#F9DCDC' });
-                  // 是否上传过截图
-                  // if (arrlist.auditPic == 0 || arrlist.auditPic == 3) {
-                  //   swiperarr.push({ name: '报名未完成', subname: '1', abcircular: '#FBD6D8', witcircular: '#F09D9F', stynum: 3, clickiftr: 2 });
-                  // } else {
-                  //   swiperarr.push({ name: '等待开奖', subname: '1', abcircular: '#FBD6D8', witcircular: '#F09D9F', stynum: 3, clickiftr: 2 });
-                  // };
                   swiperarr.push({ name: '继续邀请', subname: '好友助力', abcircular: '#FBD6D8', witcircular: '#F93F45', stynum: 3, clickiftr: 5 });
                   _this.setData({
                     goodsIndex: 1,
@@ -2190,7 +2125,6 @@ closefrindcommoni:function(){
                     swiperIndex: 1
                   });
                 } else if (arrlist.status == 2 && arrlist.is_join == 1 && arrlist.auditPic == 2) {
-                  // swiperarr.push({ name: '等待开奖', subname: '1', abcircular: '#f5d1d4', witcircular: '#e39397', stynum: 3 });
                   swiperarr.push({ name: '待开奖', subname: '已报名', clickiftr: 2, abcircular: '#FBD6D8', witcircular: '#F93F45', stynum: 3, sizeColor: '#F9DCDC' });
                   swiperarr.push({ name: '继续邀请', subname: '好友助力', abcircular: '#FBD6D8', witcircular: '#F93F45', stynum: 3, clickiftr: 5 });
                   _this.setData({
@@ -2229,10 +2163,6 @@ closefrindcommoni:function(){
           var listBlindBox = arrlist.listBlindBox||[];
           var listShowBox = arrlist.listShowBox||[];
           var listLotto = arrlist.listLotto||[];
-
-          // if(res.data.Info&&res.data.Info.brandId>0){
-          //   res.data.Info.specialWay = 1;
-          // };
 
           if(arrlist.brand &&  arrlist.brand.name && arrlist.brand.name.indexOf("旗舰店") != -1){
             arrlist.isBrandNaq = 1;
