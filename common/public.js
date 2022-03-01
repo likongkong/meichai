@@ -13,7 +13,7 @@ if(env == "online"){
   var key = Aes.enc.Utf8.parse("danzhuanichaijia");    //Aes解密测式服秘钥
 }; 
 
-// 公共地址 接口
+// 公共地址 接口  
 function comurl() {
   switch(env){
     case "online":var envUrl = 'https://api.51chaidan.com/';break;
